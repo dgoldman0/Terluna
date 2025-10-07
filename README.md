@@ -36,7 +36,7 @@ Input model: ft:gpt-4o-mini-2024-07-18:personal:terluna-0-lengthened:CO1otnQs
 
 Training data: [correction_samples.jsonl](training_data/foundation/correction_mode/correction_samples.jsonl)
 
-Epochs: 3, Batch size: 1, LR multiplier: 1.8, Seed: 
+Epochs: 3, Batch size: 1, LR multiplier: 1.8, Seed: 1767361027
 
 Output model: ft:gpt-4o-mini-2024-07-18:personal:terluna-0-correction-mode-added:CO6Xn6Ii
 
@@ -46,3 +46,8 @@ Analysis: Provides some reasonable feedback and resistence against undesirable i
 
 Adding more detailed history, using a combination back and forth with the round 3 model in regular and corrective mode, then transferring to agent for synthetic data generation.
 
+Input model: ft:gpt-4o-mini-2024-07-18:personal:terluna-0-correction-mode-added:CO6Xn6Ii
+
+Training data: [rough_draft.jsonl](training_data/history/rough_draft.jsonl)
+
+Epochs: 3, Batch size: 1, LR multiplier: 1.8, Seed: 
