@@ -34,6 +34,6 @@ Constructed synthetic data by going back and forth with round 2 model to identif
 
 Input model: ft:gpt-4o-mini-2024-07-18:personal:terluna-0-lengthened:CO1otnQs
 
-Training data: [sample_corrections.jsonl](training_data/foundation/correction_mode/sample_corrections.jsonl)
+Training data: [correction_samples.jsonl](training_data/foundation/correction_mode/correction_samples.jsonl)
 
 Epochs: 3, Batch size: 1, LR multiplier: 1.8, Seed: 
