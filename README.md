@@ -50,4 +50,6 @@ Input model: ft:gpt-4o-mini-2024-07-18:personal:terluna-0-correction-mode-added:
 
 Training data: [rough_draft.jsonl](training_data/history/rough_draft.jsonl)
 
-Epochs: 3, Batch size: 1, LR multiplier: 1.8, Seed: 
+Epochs: 3, Batch size: 1, LR multiplier: 1.8, Seed: 1014069983
+
+Output model: 
