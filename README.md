@@ -6,7 +6,7 @@ Initial training was done on a 150 element sample of synthetic generated convers
 
 Input model: gpt-4o-mini-2024-07-18
 
-Training data: [longer_responses.jsonl](training_data/foundation/longer_responses.jsonl)
+Training data: [terluna_conversations_150_fixed_with_system](training_data/foundation/terluna_conversations_150_fixed_with_system.jsonl)
 
 Epochs: 3, Batch size 1, LR multiplier: 1.8, Seed: 831949690
 
@@ -20,10 +20,20 @@ Constructed synthetic data set for varied length assistant outputs.
 
 Input model: ft:gpt-4o-mini-2024-07-18:personal:terluna-0:CNqdXsDV
 
-Training data: [sample_corrections.jsonl](training_data/foundation/correction_mode/sample_corrections.jsonl)
+Training data: [longer_responses.jsonl](training_data/foundation/longer_responses.jsonl)
 
 Epochs: 3, Batch size: 1, LR multiplier: 1.8, Seed: 1903352333
 
 Output model: ft:gpt-4o-mini-2024-07-18:personal:terluna-0-lengthened:CO1otnQs
 
 Analysis: Far from perfect, but provides much longer responses and doesn't smash unrelated points together into a meaningless paragraph as much.
+
+### Round 3
+
+Constructed synthetic data by going back and forth with round 2 model to identify how it responded to various inqueries, and by providing it with various corrections to align more with the desired world craft. Designed as correction mode.
+
+Input model: ft:gpt-4o-mini-2024-07-18:personal:terluna-0-lengthened:CO1otnQs
+
+Training data: [sample_corrections.jsonl](training_data/foundation/correction_mode/sample_corrections.jsonl)
+
+Epochs: 3, Batch size: 1, LR multiplier: 1.8, Seed: 
