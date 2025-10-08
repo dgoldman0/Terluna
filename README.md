@@ -48,8 +48,18 @@ Adding more detailed history, using a combination back and forth with the round 
 
 Input model: ft:gpt-4o-mini-2024-07-18:personal:terluna-0-correction-mode-added:CO6Xn6Ii
 
-Training data: [rough_draft.jsonl](training_data/history/rough_draft.jsonl)
+Training data: [rough_draft.jsonl](training_data/history/rough_draft.jsonl) (previous version)
 
 Epochs: 3, Batch size: 1, LR multiplier: 1.8, Seed: 1014069983
 
+Output model: ft:gpt-4o-mini-2024-07-18:personal:terluna-0-draft-history:COBLmfBB
+
+Analysis: Training was simply too weak. Did not retain enough details, too many inconsistencies, and condensing of unrelated information, as with round 1.
+
+#### Round 4'
+
+Decided to adjust the system message to include a statement about being in historian mode. Increased epochs to 5.
+
 Output model: 
+
+Analysis: 
