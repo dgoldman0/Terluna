@@ -1,0 +1,16 @@
+[
+  {
+    "name": "NASA_Moon_Fact_Sheet.html",
+    "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html",
+    "local_access": "failed",
+    "error": "HTTPSConnectionPool(host='nssdc.gsfc.nasa.gov', port=443): Max retries exceeded with url: /planetary/factsheet/moonfact.html (Caused by NameResolutionError(\"HTTPSConnection(host='nssdc.gsfc.nasa.gov', port=443): Failed to resolve 'nssdc.gsfc.nasa.gov' ([Errno -3] Temporary failure in name resolution)\"))",
+    "reading": "page text read via web in planning round"
+  },
+  {
+    "name": "USNO_Rise_Set_Twilight_Definitions.html",
+    "url": "https://aa.usno.navy.mil/faq/RST_defs",
+    "local_access": "failed",
+    "error": "HTTPSConnectionPool(host='aa.usno.navy.mil', port=443): Max retries exceeded with url: /faq/RST_defs (Caused by NameResolutionError(\"HTTPSConnection(host='aa.usno.navy.mil', port=443): Failed to resolve 'aa.usno.navy.mil' ([Errno -3] Temporary failure in name resolution)\"))",
+    "reading": "page text read via web in planning round"
+  }
+]

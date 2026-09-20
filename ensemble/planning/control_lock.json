@@ -1,0 +1,44 @@
+{
+  "control_revision": "control-01",
+  "date": "2026-09-20",
+  "status": "requirements adopted; manuscript review deferred",
+  "charter": "Open_Moon_Editorial_Charter_control-01.md",
+  "charter_sha256": "aac4a4f29402189ad9d3dd91e35bf860dabb26125aac94ba21cdf8054f4780b0",
+  "source_controls": [
+    {
+      "name": "Agent_Working_State_Editorial_Gates.md",
+      "file_id": "file_00000000012081f98c057fb5ee12951e",
+      "version_id": "1",
+      "path": "source_controls/Agent_Working_State_Editorial_Gates.md",
+      "sha256": "553e8957640ad194576a8aa403adc4e83dc71a177178fbe4bb4fa3873cd82464",
+      "reading_status": "complete available file read via Files in this planning round",
+      "role": "editorial requirements; not lunar technical evidence"
+    },
+    {
+      "name": "Jewish_Papers_Updated_Style_Notes.md",
+      "file_id": "file_0000000047f481f589c981dbd67aa2b7",
+      "version_id": "1",
+      "path": "source_controls/Jewish_Papers_Updated_Style_Notes.md",
+      "sha256": "18f3d0db8a83a48a55918dd66faec9b1473b5f1887c4ea7bffa0223deccb3eab",
+      "reading_status": "complete available file read via Files in this planning round",
+      "role": "editorial requirements; not lunar technical evidence"
+    },
+    {
+      "name": "STYLE_NOTES.md",
+      "file_id": "file_00000000293481f79ffd5950c3aeb165",
+      "version_id": "1",
+      "path": "source_controls/STYLE_NOTES.md",
+      "sha256": "659627e564bba84d8ebed0ddebd33687705b31e1bf29decb6037e248eb4f5c46",
+      "reading_status": "complete available file read via Files in this planning round",
+      "role": "editorial requirements; not lunar technical evidence"
+    }
+  ],
+  "manuscripts_created": false,
+  "paper_ids": [
+    "cef466e6-d9f8",
+    "7c83e7a3-5955",
+    "74a946e2-8f98",
+    "babdd5f6-4920",
+    "155b039f-a0e8"
+  ]
+}

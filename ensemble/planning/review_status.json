@@ -1,0 +1,28 @@
+{
+  "scope": "planning delivery only",
+  "gate_requirements": "adopted control-01",
+  "source_control_review": "three complete available control records read; originals archived",
+  "technical_source_admission": "deferred for future manuscripts; only the planning geometry diagnostic has been checked here",
+  "model_reruns_this_round": [],
+  "manuscript_gates": {
+    "G1": "DEFERRED \u2014 manuscripts not drafted",
+    "G2": "DEFERRED \u2014 manuscripts not drafted",
+    "G3": "DEFERRED \u2014 manuscripts not drafted",
+    "G4": "DEFERRED \u2014 manuscripts not drafted",
+    "G5": "DEFERRED \u2014 manuscripts not drafted",
+    "G6": "DEFERRED \u2014 manuscripts not drafted",
+    "G7": "DEFERRED \u2014 manuscripts not drafted",
+    "E1": "DEFERRED \u2014 manuscripts not drafted",
+    "E2": "DEFERRED \u2014 manuscripts not drafted",
+    "E3": "DEFERRED \u2014 manuscripts not drafted",
+    "E4": "DEFERRED \u2014 manuscripts not drafted"
+  },
+  "read_aloud": "not performed; remains a later manuscript-review requirement",
+  "external_independent_review": "not performed",
+  "scope_changes": [
+    "biological viability and ecology combined in biosphere companion",
+    "human companion refocused on life, society and space/time use",
+    "root retains dream/vision role"
+  ],
+  "author_approval": "paper count and roles explicit in conversation; titles and section outlines remain proposals"
+}

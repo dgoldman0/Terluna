@@ -1,0 +1,29 @@
+{
+  "setup_version": "setup-01",
+  "date": "2026-09-20",
+  "repository": "dgoldman0/Terluna",
+  "target_branch": "main",
+  "base_commit": "4d595a32c3639dae111641fa313f23a2a28f9588",
+  "base_tree": "639850c89af6ef379e5ef6d81d09ff9e1c9a7cc2",
+  "scope": "Add /ensemble only; preserve all pre-existing repository paths",
+  "source_package": "Open_Moon_Ensemble_Planning_Package_plan-01.zip",
+  "source_package_sha256": "96c609ae047b42f0b5c6c3220e2af9c813369a54017182440ffbae8ace2fc48f",
+  "snapshot_directory": "planning",
+  "snapshot_file_count": 14,
+  "snapshot_policy": "Original package files preserved byte for byte",
+  "manuscripts_created": false,
+  "workspaces": {
+    "cef466e6-d9f8": "papers/cef466e6-d9f8",
+    "7c83e7a3-5955": "papers/7c83e7a3-5955",
+    "74a946e2-8f98": "papers/74a946e2-8f98",
+    "babdd5f6-4920": "papers/babdd5f6-4920",
+    "155b039f-a0e8": "papers/155b039f-a0e8"
+  },
+  "legacy_files_observed": [
+    "README.md",
+    "atmosphere/sim/sim1.py",
+    "atmosphere/sim/report.md",
+    "training_data/"
+  ],
+  "legacy_analysis_status": "Repository locations inspected; no legacy scientific model rerun or newly validated in this setup"
+}

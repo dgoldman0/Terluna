@@ -1,0 +1,56 @@
+{
+  "ensemble_title": "Constructing and Sustaining an Open Moon",
+  "version": "plan-01",
+  "date": "2026-09-20",
+  "paper_count": 5,
+  "id_convention": "UUIDv4 prefix, 12 hexadecimal characters formatted 8-4; full UUID retained; stable across revisions",
+  "collision_check_scope": "five new IDs and the six earlier IDs recovered in this conversation; not a complete global register",
+  "papers": [
+    {
+      "role": "root",
+      "title": "Constructing and Sustaining an Open Moon",
+      "scope": "Scientifically grounded dream and integrating vision",
+      "paper_id": "cef466e6-d9f8",
+      "full_uuid": "cef466e6-d9f8-43ee-b841-79fde794aa5e",
+      "title_status": "working",
+      "role_status": "locked_by_user"
+    },
+    {
+      "role": "physical",
+      "title": "The Physical Environment of an Open Moon",
+      "scope": "Atmosphere, climate, light, water, surface processes, radiation and escape",
+      "paper_id": "7c83e7a3-5955",
+      "full_uuid": "7c83e7a3-5955-4287-871a-6b76bcd13bb0",
+      "title_status": "working",
+      "role_status": "locked_by_user"
+    },
+    {
+      "role": "biosphere",
+      "title": "Establishing and Sustaining a Lunar Biosphere",
+      "scope": "Biological viability, general habitability, ecology and long-term biogeochemical persistence",
+      "paper_id": "74a946e2-8f98",
+      "full_uuid": "74a946e2-8f98-4cb7-89bb-daa0c6b83460",
+      "title_status": "working",
+      "role_status": "locked_by_user"
+    },
+    {
+      "role": "human",
+      "title": "Living on an Open Moon",
+      "scope": "Human life, culture, settlements, aerial space and social possibilities",
+      "paper_id": "babdd5f6-4920",
+      "full_uuid": "babdd5f6-4920-4ed4-8980-0cee39e95fa4",
+      "title_status": "working",
+      "role_status": "locked_by_user"
+    },
+    {
+      "role": "engineering",
+      "title": "Engineering and Industry for Lunar Terraforming",
+      "scope": "Construction, protection, industry, logistics, safety and renewal",
+      "paper_id": "155b039f-a0e8",
+      "full_uuid": "155b039f-a0e8-490b-98e8-cdf0956f16f9",
+      "title_status": "working",
+      "role_status": "locked_by_user"
+    }
+  ],
+  "manuscripts_created": false
+}

@@ -1,0 +1,16 @@
+{
+  "date": "2026-09-20",
+  "checks_performed": [
+    "Five distinct UUIDv4-derived short IDs with complete UUID metadata",
+    "All paper IDs appear in the outline",
+    "Charter hash matches control lock",
+    "Three source-control hashes match preserved originals",
+    "No unresolved template markers",
+    "No manuscript TEX or PDF artifacts",
+    "Twilight arithmetic recalculated under stated simple geometry"
+  ],
+  "results": "passed for planning package structure and arithmetic only",
+  "manuscript_clearance": "deferred",
+  "scientific_validation": "no new physical, biological, social or engineering model validated",
+  "local_primary_web_archive": "failed; two attempts recorded, source admission deferred"
+}
