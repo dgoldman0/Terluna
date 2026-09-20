@@ -6,7 +6,7 @@ Read `planning/Open_Moon_Editorial_Charter_control-01.md` in full, then `plannin
 
 Maintain exactly five papers unless the author explicitly changes the structure. Preserve the UUID-derived paper IDs across titles and revisions. The root is the scientifically grounded dream paper. The biosphere companion owns organism-level viability and ecology together, including relevant human biological constraints. The human companion owns life, culture, settlement, and spatial/temporal design. Engineering remains one companion within the whole-world ensemble.
 
-The current handoff is planning-only. Start manuscript drafting only when a subsequent task authorizes it. Do not fill empty workspaces with invented abstracts, results, citations, or review approvals.
+The author has authorized the root-paper seed and selected revision 04 for repository inclusion. Its exact conversation artifact is preserved at `papers/cef466e6-d9f8/seed-04.md`; read the workspace README and `seed-import-01.json` for current status. The four companion workspaces remain planning-only. Further drafting or expansion follows subsequent author instructions. Do not fill empty workspaces with invented abstracts, results, citations, or review approvals.
 
 ## Provenance and change control
 

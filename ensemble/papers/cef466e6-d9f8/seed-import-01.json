@@ -1,0 +1,24 @@
+{
+  "record_version": "seed-import-01",
+  "date": "2026-09-20",
+  "paper_id": "cef466e6-d9f8",
+  "full_uuid": "cef466e6-d9f8-43ee-b841-79fde794aa5e",
+  "seed_version": "seed-04",
+  "seed_path": "seed-04.md",
+  "source_filename": "Constructing_and_Sustaining_an_Open_Moon_seed-04.md",
+  "source_sha256": "a741d7e51825c5a4101b1140d494f27c1dcd5e291b39c187fafd77ba38abab56",
+  "source_git_blob_sha": "1f09c6c0d863752b15e3179e9269fdf91452909b",
+  "import_policy": "Preserve the complete selected conversation artifact byte for byte, including historical pre-import status and working notes.",
+  "author_authorization": "The author selected the revised seed and explicitly requested updating the repository with it.",
+  "base_repository_commit": "3ff72f53e544fca4bd50fea686d5d079497a5704",
+  "status": "Author-selected seed draft for continued development; final scholarly clearance pending.",
+  "previous_phase": "Planning-only repository workspace.",
+  "scope_change": "Add the authorized root seed; preserve five paper roles, identifiers, and locked plan-01/control-01 snapshots.",
+  "companion_manuscripts_created": false,
+  "scientific_or_final_manuscript_clearance": false,
+  "review_provenance": "Existing passage-check notes are retained as historical records. This import adds no scientific, editorial, audible, or PDF clearance.",
+  "checks": {
+    "byte_identity": "Verified against the conversation artifact.",
+    "git_blob_identity": "Matched the GitHub-created blob to the locally computed Git blob SHA."
+  }
+}
