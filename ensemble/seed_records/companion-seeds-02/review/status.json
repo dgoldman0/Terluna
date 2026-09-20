@@ -1,0 +1,17 @@
+{
+  "revision": "seed-02",
+  "stage": "Author-review conceptual seeds",
+  "root_changed": false,
+  "repository_changed": false,
+  "same_agent_textual_review": "Performed; see seed-review-02.md",
+  "audible_review": "DEFERRED",
+  "G6_full_source_admission": "BLOCKED",
+  "G7_final_PDF_review": "DEFERRED",
+  "final_manuscript_clearance": false,
+  "artifact_hashes": {
+    "7c83e7a3-5955": "ccfaebf38183a865920477a2d3c97eb075ff386c6de6fe03b09bc2f754cf3f3a",
+    "74a946e2-8f98": "e171d3606891ac86bedea946e3ca78e9ca2e80cea29bcf4d945db7dd0060c5f2",
+    "babdd5f6-4920": "72070a9b03ad2b906da909d04a05e77343b021018e7e4260b9ef8c9ae46287e0",
+    "155b039f-a0e8": "9bbc11de56f392161d67c4b28fab2dcbf982633d85d1ab3104d2a84afc9f732e"
+  }
+}

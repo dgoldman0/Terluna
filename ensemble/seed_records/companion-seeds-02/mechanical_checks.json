@@ -1,0 +1,39 @@
+{
+  "result": "PASS",
+  "scope": "Excluded phrases, UUIDs and local footnote linkage only; no manuscript or scientific clearance",
+  "papers": [
+    {
+      "paper_id": "7c83e7a3-5955",
+      "body_words": 767,
+      "paragraphs": 8,
+      "excluded_phrase_matches": [],
+      "footnote_references_resolve": true,
+      "sha256": "ccfaebf38183a865920477a2d3c97eb075ff386c6de6fe03b09bc2f754cf3f3a"
+    },
+    {
+      "paper_id": "74a946e2-8f98",
+      "body_words": 766,
+      "paragraphs": 8,
+      "excluded_phrase_matches": [],
+      "footnote_references_resolve": true,
+      "sha256": "e171d3606891ac86bedea946e3ca78e9ca2e80cea29bcf4d945db7dd0060c5f2"
+    },
+    {
+      "paper_id": "babdd5f6-4920",
+      "body_words": 801,
+      "paragraphs": 8,
+      "excluded_phrase_matches": [],
+      "footnote_references_resolve": true,
+      "sha256": "72070a9b03ad2b906da909d04a05e77343b021018e7e4260b9ef8c9ae46287e0"
+    },
+    {
+      "paper_id": "155b039f-a0e8",
+      "body_words": 834,
+      "paragraphs": 9,
+      "excluded_phrase_matches": [],
+      "footnote_references_resolve": true,
+      "sha256": "9bbc11de56f392161d67c4b28fab2dcbf982633d85d1ab3104d2a84afc9f732e"
+    }
+  ],
+  "combined_footnotes_unique": true
+}

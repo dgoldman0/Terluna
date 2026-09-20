@@ -1,0 +1,56 @@
+{
+  "status": "Provisional factual anchors for a conceptual draft; distinct from full-source clearance",
+  "sources": [
+    {
+      "key": "moon",
+      "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html",
+      "coverage_this_revision": "Complete short fact-sheet text; radius, gravity and synodic period checked",
+      "scope": "Lunar constants; original conditional deductions and inventory arithmetic use the stated inputs",
+      "consulted_date": "2026-09-20",
+      "local_original_path": null,
+      "full_source_admission": "BLOCKED",
+      "reason": "No original source document archived in this revision; complete readings of research papers remain outstanding. No claim of final source admission."
+    },
+    {
+      "key": "escape",
+      "url": "https://arxiv.org/abs/2011.14545",
+      "coverage_this_revision": "Primary abstract",
+      "scope": "Structure-dependent thermal/nonthermal escape in a different historical atmosphere; no numerical lifetime transferred",
+      "consulted_date": "2026-09-20",
+      "local_original_path": null,
+      "full_source_admission": "BLOCKED",
+      "reason": "No original source document archived in this revision; complete readings of research papers remain outstanding. No claim of final source admission."
+    },
+    {
+      "key": "climate",
+      "url": "https://arxiv.org/abs/1904.12077",
+      "coverage_this_revision": "Primary abstract",
+      "scope": "Existing three-dimensional modelling of a different historical lunar atmosphere; no regional climate output transferred",
+      "consulted_date": "2026-09-20",
+      "local_original_path": null,
+      "full_source_admission": "BLOCKED",
+      "reason": "No original source document archived in this revision; complete readings of research papers remain outstanding. No claim of final source admission."
+    },
+    {
+      "key": "regolith",
+      "url": "https://www.nature.com/articles/s42003-022-03334-8",
+      "coverage_this_revision": "Abstract, growth results and relevant growth methods",
+      "scope": "Arabidopsis in returned regolith on Earth under supplied nutrients and irrigation",
+      "consulted_date": "2026-09-20",
+      "local_original_path": null,
+      "full_source_admission": "BLOCKED",
+      "reason": "No original source document archived in this revision; complete readings of research papers remain outstanding. No claim of final source admission."
+    },
+    {
+      "key": "gravity",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/37085700/",
+      "coverage_this_revision": "Primary abstract and experimental context",
+      "scope": "Adult mice under centrifuged partial gravity; soleus muscle outcomes",
+      "consulted_date": "2026-09-20",
+      "local_original_path": null,
+      "full_source_admission": "BLOCKED",
+      "reason": "No original source document archived in this revision; complete readings of research papers remain outstanding. No claim of final source admission."
+    }
+  ],
+  "proposals": "User-provided project outline, seed-01 and current revision request; retained as design provenance, not independent scientific validation"
+}

@@ -1,0 +1,61 @@
+{
+  "import_version": "companion-seeds-import-01",
+  "date": "2026-09-20",
+  "repository": "dgoldman0/Terluna",
+  "target_branch": "main",
+  "base_commit": "c2ee21072b4649d3c37709d1d3cf2ab9d265d886",
+  "author_decision": "Accept the four revision-02 seeds as working drafts, with further revision expected; commit and push.",
+  "source_archive": "Open_Moon_Companion_Seeds_seed-02.zip",
+  "source_archive_sha256": "721e854bea9eab086ba6e3ce22ff1c902c12823218b8d832bed9f436ce3f587f",
+  "source_archive_checksum_entries_verified": 12,
+  "seed_policy": "Four individual seed files and their embedded evidence notes preserved byte for byte; no prose edits during import.",
+  "scope": "Companion seeds, supporting provenance, and current-stage navigation only.",
+  "root_seed_unchanged": true,
+  "planning_snapshot_unchanged": true,
+  "source_archive_layout": "Individual seeds are placed in their permanent paper workspaces. Seven supporting record files are retained here with their original bytes. The combined reading copy and source-package README remain in the conversation archive. checksums.json describes the original archive layout; use this import map for repository paths.",
+  "imports": [
+    {
+      "paper_id": "7c83e7a3-5955",
+      "role": "physical",
+      "source_filename": "The_Physical_Environment_of_an_Open_Moon_seed-02.md",
+      "repository_path": "ensemble/papers/7c83e7a3-5955/seed-02.md",
+      "sha256": "ccfaebf38183a865920477a2d3c97eb075ff386c6de6fe03b09bc2f754cf3f3a",
+      "git_blob_sha": "b16915ce5c6c6774d912b8e9456426c24e67f44c"
+    },
+    {
+      "paper_id": "74a946e2-8f98",
+      "role": "biosphere",
+      "source_filename": "Establishing_and_Sustaining_a_Lunar_Biosphere_seed-02.md",
+      "repository_path": "ensemble/papers/74a946e2-8f98/seed-02.md",
+      "sha256": "e171d3606891ac86bedea946e3ca78e9ca2e80cea29bcf4d945db7dd0060c5f2",
+      "git_blob_sha": "4281c9b26c28cd0d2dfc73db2fafc5aa920cd542"
+    },
+    {
+      "paper_id": "babdd5f6-4920",
+      "role": "human",
+      "source_filename": "Living_on_an_Open_Moon_seed-02.md",
+      "repository_path": "ensemble/papers/babdd5f6-4920/seed-02.md",
+      "sha256": "72070a9b03ad2b906da909d04a05e77343b021018e7e4260b9ef8c9ae46287e0",
+      "git_blob_sha": "4d5945263df7c20d3c15bb4737a8b77b9c7a8510"
+    },
+    {
+      "paper_id": "155b039f-a0e8",
+      "role": "engineering",
+      "source_filename": "Engineering_and_Industry_for_Lunar_Terraforming_seed-02.md",
+      "repository_path": "ensemble/papers/155b039f-a0e8/seed-02.md",
+      "sha256": "9bbc11de56f392161d67c4b28fab2dcbf982633d85d1ab3104d2a84afc9f732e",
+      "git_blob_sha": "82e084c7dc00a5618a8331efb65f43ef47a4d5ab"
+    }
+  ],
+  "supporting_records": {
+    "calculations.json": "1ba1c94e3decf4d4bf0801f64f9901c503fcf934f629aa65e520f305de7786b5",
+    "mechanical_checks.json": "a74debd534d3439769e9ddb58c9ea2fb913574c5a5e19191c769fe1e6683e850",
+    "paper_manifest.json": "ffdcd3ed13bfd859ef01545492d35efa169bf14efbda1e7e727c82f31e9405d2",
+    "source_manifest.json": "c718b032c294c2076120a9bf12aa2f3777f72ab425c8446b49f0a1f8c15849aa",
+    "review/seed-review-02.md": "9c72dc993a98fe8db8156a9d3b9f8650bba846064b7cb9a9592ee3a9db1f6ee6",
+    "review/status.json": "9459f95106ca48cf3ad6b5f9495b2a1f1e307654a9e5fac8e431f1a220b205c3",
+    "checksums.json": "cd67efba101838736a33e9f002e0cfad00932ebdb2d0b1b02422266f39b08767"
+  },
+  "engineering_calculation_copy": "ensemble/papers/155b039f-a0e8/calculations.json",
+  "review_boundary": "Author-approved working seeds. Historical review/source records remain historical. Full source admission, final manuscript clearance, audible review and PDF review remain outstanding."
+}

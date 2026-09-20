@@ -1,0 +1,18 @@
+{
+  "assumptions": {
+    "radius_m": 1737400,
+    "surface_g_m_s2": 1.62,
+    "pressure_Pa": 121590.0,
+    "construction_Julian_years": 500,
+    "Julian_year_s": 31557600
+  },
+  "method": "constant-gravity hydrostatic inventory; spherical temperature-profile corrections excluded",
+  "inventory_kg": 2.847031959014611e+18,
+  "mean_500_year_delivery_kg_s": 180433997.45320374,
+  "constant_flow_diagnostic": {
+    "kg_s": 100,
+    "years": 1000000000.0,
+    "total_kg": 3.15576e+18
+  },
+  "status": "Arithmetic diagnostic, not a complete environmental or transport model"
+}

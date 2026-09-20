@@ -1,0 +1,44 @@
+{
+  "version": "seed-02",
+  "date": "2026-09-20",
+  "root_changed": false,
+  "repository_changed": false,
+  "papers": [
+    {
+      "role": "physical",
+      "id": "7c83e7a3-5955",
+      "uuid": "7c83e7a3-5955-4287-871a-6b76bcd13bb0",
+      "title": "The Physical Environment of an Open Moon",
+      "filename": "The_Physical_Environment_of_an_Open_Moon_seed-02.md",
+      "paragraphs": 8,
+      "words": 767
+    },
+    {
+      "role": "biosphere",
+      "id": "74a946e2-8f98",
+      "uuid": "74a946e2-8f98-4cb7-89bb-daa0c6b83460",
+      "title": "Establishing and Sustaining a Lunar Biosphere",
+      "filename": "Establishing_and_Sustaining_a_Lunar_Biosphere_seed-02.md",
+      "paragraphs": 8,
+      "words": 766
+    },
+    {
+      "role": "human",
+      "id": "babdd5f6-4920",
+      "uuid": "babdd5f6-4920-4ed4-8980-0cee39e95fa4",
+      "title": "Living on an Open Moon",
+      "filename": "Living_on_an_Open_Moon_seed-02.md",
+      "paragraphs": 8,
+      "words": 801
+    },
+    {
+      "role": "engineering",
+      "id": "155b039f-a0e8",
+      "uuid": "155b039f-a0e8-490b-98e8-cdf0956f16f9",
+      "title": "Engineering and Industry for Lunar Terraforming",
+      "filename": "Engineering_and_Industry_for_Lunar_Terraforming_seed-02.md",
+      "paragraphs": 9,
+      "words": 834
+    }
+  ]
+}

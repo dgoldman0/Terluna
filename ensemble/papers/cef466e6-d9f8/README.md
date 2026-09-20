@@ -19,4 +19,4 @@ The author's selection establishes the working seed. Full source admission, fina
 
 The current ordered outline, research question, and planned outputs are in section 2 of the [ensemble plan](../../planning/Open_Moon_Ensemble_Outline_plan-01.md). The [editorial charter](../../planning/Open_Moon_Editorial_Charter_control-01.md) governs all future work.
 
-Keep this paper independently readable and preserve its identity through revisions. The locked planning snapshot remains unchanged. Further expansion or revision follows the author's instructions and retains the selected seed's whole-world, evocative purpose. The four companion workspaces remain in planning.
+Keep this paper independently readable and preserve its identity through revisions. The locked planning snapshot remains unchanged. Further expansion or revision follows the author's instructions and retains the selected seed's whole-world, evocative purpose. The four companion workspaces now contain author-selected seed-02 drafts for continued development.
