@@ -1,0 +1,129 @@
+{
+  "constants": {
+    "atmosphere_kg": 3.14134948e+18,
+    "N2_kg": 2.52867008e+18,
+    "construction_average_500yr_kg_s": 199086716.35358837,
+    "nitrogen_300yr_kg_s": 267095731.82582536,
+    "initial_transport_power_reference_W": [
+      3.3e+16,
+      2.35e+17
+    ]
+  },
+  "optics": {
+    "AR_layers_um": [
+      0.13561889833005744,
+      0.11003654660891468,
+      0.08105724832907353,
+      0.07986614199572437,
+      0.12646415054169358
+    ],
+    "checks": {
+      "energy_balance_min_A": -2.886579864025407e-15,
+      "vacuum_layer_transmission_error": 4.440892098500626e-16
+    },
+    "solar": {
+      "TSIS_T_400_2500nm": 0.963197669248625,
+      "TSIS_T_400_700nm": 0.9782738564422595,
+      "incident_210_2730nm_W_m2": 1326.1304655210897,
+      "transmitted_210_2730nm_W_m2": 1203.7982629067162,
+      "full_1361W_m2_T_lower_bound": 0.8844954172716504,
+      "full_1361W_m2_T_upper_bound": 0.910115942237786,
+      "quadrature_note": "HSRS sampled every 0.1 nm, treated as a broadband approximation; optical fit used Planck weighting."
+    }
+  },
+  "orbits": {
+    "reference": {
+      "distance_km": 78000.0,
+      "area_m2": 97640436976413.77,
+      "mean_a_m_s2": 0.0009464653369791334,
+      "max_a_m_s2": 0.0013558433287534292,
+      "mean_design_a_m_s2": 0.0009664653369791334,
+      "peak_design_a_m_s2": 0.0017198041609417865,
+      "closed": true,
+      "cant_deg": 45.0,
+      "total_mass_kg": 6112313957060.487,
+      "power_mass_fraction": 0.17372645493068253,
+      "fuel_buffer_fraction": 0.027554453884326577,
+      "energy_storage_mass_kg": 0.0,
+      "propellant_kg_s": 278474.6578312647,
+      "mean_power_W": 179019422891527.34,
+      "peak_power_W": 318561190555035.1,
+      "power_system_mass_kg": 1061870635183.4504,
+      "fuel_buffer_mass_kg": 168421473056.3489,
+      "Gyr_propellant_kg": 8.78799186197592e+21
+    },
+    "energy_storage_sensitivity": [
+      {
+        "storage_hours_at_peak_power": 0.0,
+        "storage_J_kg": 1000000.0,
+        "closed": true,
+        "cant_deg": 45.0,
+        "total_mass_kg": 6112313957060.487,
+        "power_mass_fraction": 0.17372645493068253,
+        "fuel_buffer_fraction": 0.027554453884326577,
+        "energy_storage_mass_kg": 0.0,
+        "propellant_kg_s": 278474.6578312647,
+        "mean_power_W": 179019422891527.34,
+        "peak_power_W": 318561190555035.1,
+        "power_system_mass_kg": 1061870635183.4504,
+        "fuel_buffer_mass_kg": 168421473056.3489,
+        "Gyr_propellant_kg": 8.78799186197592e+21
+      },
+      {
+        "storage_hours_at_peak_power": 1.0,
+        "storage_J_kg": 1000000.0,
+        "closed": true,
+        "cant_deg": 45.0,
+        "total_mass_kg": 7988979920717.196,
+        "power_mass_fraction": 0.17372645493068253,
+        "fuel_buffer_fraction": 0.027554453884326577,
+        "energy_storage_mass_kg": 1498928932949.6921,
+        "propellant_kg_s": 363974.83268553735,
+        "mean_power_W": 233983821012131.2,
+        "peak_power_W": 416369148041581.1,
+        "power_system_mass_kg": 1387897160138.6038,
+        "fuel_buffer_mass_kg": 220131978808.213,
+        "Gyr_propellant_kg": 1.1486172179957113e+22
+      },
+      {
+        "storage_hours_at_peak_power": 2.0,
+        "storage_J_kg": 1000000.0,
+        "closed": true,
+        "cant_deg": 45.0,
+        "total_mass_kg": 11528614641282.99,
+        "power_mass_fraction": 0.17372645493068253,
+        "fuel_buffer_fraction": 0.027554453884326577,
+        "energy_storage_mass_kg": 4326102760086.842,
+        "propellant_kg_s": 525239.2203759992,
+        "mean_power_W": 337653784527428.1,
+        "peak_power_W": 600847605567616.9,
+        "power_system_mass_kg": 2002825351892.0562,
+        "fuel_buffer_mass_kg": 317664680483.4043,
+        "Gyr_propellant_kg": 1.6575289220937634e+22
+      },
+      {
+        "storage_hours_at_peak_power": 4.0,
+        "storage_J_kg": 1000000.0,
+        "closed": true,
+        "cant_deg": 45.0,
+        "total_mass_kg": 101243058038476.17,
+        "power_mass_fraction": 0.17372645493068253,
+        "fuel_buffer_fraction": 0.027554453884326577,
+        "energy_storage_mass_kg": 75982741456460.3,
+        "propellant_kg_s": 4612594.5334480675,
+        "mean_power_W": 2965239342930900.5,
+        "peak_power_W": 5276579267809742.0,
+        "power_system_mass_kg": 17588597559365.807,
+        "fuel_buffer_mass_kg": 2789697173829.391,
+        "Gyr_propellant_kg": 1.4556241324874074e+23
+      }
+    ]
+  },
+  "input_hashes": {
+    "TSIS1_HSRS_stride100.csv": "0ae235c6912f26773c0e9b71ea3924aaf8856c74a511dc07e86b60b3c1b88172",
+    "TiO2_Siefke.yml": "9b03947949e54cd98f58a989bd031a5fddb1a36a9d9f7fd64d5ff2bd68c2885c",
+    "o.nff": "adb1540b11008383aaef0b8c4f5fb1a2bc5df14f3717ac4d58fc54fff92ba6cb",
+    "si.nff": "2bbd2aef0292aa392a61942b1c401171b5bc30bb77ab1cab9c08b6264048019a",
+    "ti.nff": "f3e3c7c01ec8dfff224ac0b95b5e4b4997721e7147ec4fe601deaf0cc762fad3"
+  }
+}

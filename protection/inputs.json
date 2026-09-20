@@ -1,0 +1,43 @@
+{
+  "status": "external_inputs_required; exact archive bytes locally available for checks; not committed",
+  "input_directory": "sources",
+  "source_archive": "Lunar_Protection_Model.zip",
+  "files": [
+    {
+      "name": "TSIS1_HSRS_stride100.csv",
+      "sha256": "0ae235c6912f26773c0e9b71ea3924aaf8856c74a511dc07e86b60b3c1b88172",
+      "bytes": 1248662,
+      "url": "https://lasp.colorado.edu/lisird/latis/dap/tsis1_hsrs.csv?stride(100)",
+      "archive_member": "Lunar_Protection_Model/sources/TSIS1_HSRS_stride100.csv"
+    },
+    {
+      "name": "TiO2_Siefke.yml",
+      "sha256": "9b03947949e54cd98f58a989bd031a5fddb1a36a9d9f7fd64d5ff2bd68c2885c",
+      "bytes": 52162,
+      "url": "https://raw.githubusercontent.com/polyanskiy/refractiveindex.info-database/master/database/data/main/TiO2/nk/Siefke.yml",
+      "archive_member": "Lunar_Protection_Model/sources/TiO2_Siefke.yml"
+    },
+    {
+      "name": "o.nff",
+      "sha256": "adb1540b11008383aaef0b8c4f5fb1a2bc5df14f3717ac4d58fc54fff92ba6cb",
+      "bytes": 13625,
+      "url": "https://henke.lbl.gov/optical_constants/sf/o.nff",
+      "archive_member": "Lunar_Protection_Model/sources/o.nff"
+    },
+    {
+      "name": "si.nff",
+      "sha256": "2bbd2aef0292aa392a61942b1c401171b5bc30bb77ab1cab9c08b6264048019a",
+      "bytes": 19539,
+      "url": "https://henke.lbl.gov/optical_constants/sf/si.nff",
+      "archive_member": "Lunar_Protection_Model/sources/si.nff"
+    },
+    {
+      "name": "ti.nff",
+      "sha256": "f3e3c7c01ec8dfff224ac0b95b5e4b4997721e7147ec4fe601deaf0cc762fad3",
+      "bytes": 13636,
+      "url": "https://henke.lbl.gov/optical_constants/sf/ti.nff",
+      "archive_member": "Lunar_Protection_Model/sources/ti.nff"
+    }
+  ],
+  "publication_note": "Data retrieval and checksum verification are separate from full reading of the underlying scientific publications. Upstream redistribution permissions were not newly audited."
+}

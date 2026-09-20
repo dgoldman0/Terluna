@@ -1,0 +1,2 @@
+TSIS_T_400_2500nm,TSIS_T_400_700nm,incident_210_2730nm_W_m2,transmitted_210_2730nm_W_m2,full_1361W_m2_T_lower_bound,full_1361W_m2_T_upper_bound,quadrature_note
+0.963197669248625,0.9782738564422595,1326.1304655210897,1203.7982629067162,0.8844954172716504,0.910115942237786,"HSRS sampled every 0.1 nm, treated as a broadband approximation; optical fit used Planck weighting."

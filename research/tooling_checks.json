@@ -1,0 +1,19 @@
+{
+  "missing_external_inputs": {
+    "expected_exit": 2,
+    "actual_exit": 2,
+    "blocked": "BLOCKED"
+  },
+  "tampered_reference": {
+    "expected_exit": 1,
+    "actual_exit": 1,
+    "error": "CHECK FAILED: Imported bytes differ: climate/reference/thermal_response.csv"
+  },
+  "corrupt_input_archive": {
+    "expected_exit": 1,
+    "actual_exit": 1,
+    "partial_output_written": false,
+    "error": "INPUTS BLOCKED: Input checksum/size mismatch: TiO2_Siefke.yml; upstream or archive data need review."
+  },
+  "scope": "Tooling failure-path tests only; no scientific or manuscript clearance"
+}

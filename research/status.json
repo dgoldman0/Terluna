@@ -1,0 +1,125 @@
+{
+  "updated": "2026-09-20",
+  "base_commit": "0d68bdf544bff2a11b19158a68a2c493a2d443a9",
+  "next_manuscript": "cef466e6-d9f8",
+  "principle": "Each topic spans the open Moon; the root opening scene is one illustration",
+  "check_record": "checks.json",
+  "scientific_validation": "not established by numerical checks",
+  "source_admission": "outstanding for manuscript evidence; inherited leads retain original scope",
+  "topics": [
+    {
+      "topic": "atmosphere",
+      "condition": "conditional_models; September numerical tests rerun; April not rerun",
+      "material": [
+        "../atmosphere/sim/sim1.py",
+        "baselines/feasibility/model.py",
+        "../atmosphere/reference/"
+      ],
+      "unresolved": [
+        "self-consistent spectrum/chemistry/energy/outflow",
+        "composition and exobase differences",
+        "water supply to escape"
+      ],
+      "next_session_task": "Reconcile assumptions and boundary conditions before a coupled reduced column."
+    },
+    {
+      "topic": "climate",
+      "condition": "scalar_analytic_diagnostic",
+      "material": [
+        "../climate/reference/thermal_response.csv",
+        "baselines/feasibility/model.py"
+      ],
+      "unresolved": [
+        "spatial transport",
+        "radiative-convective structure",
+        "clouds and weather"
+      ],
+      "next_session_task": "Extend the thermal diagnostic with explicit land/water geography and time-dependent transport."
+    },
+    {
+      "topic": "geography",
+      "condition": "no_data_or_model_loaded",
+      "material": [
+        "../geography/datasets.json"
+      ],
+      "unresolved": [
+        "exact DEM product and datum",
+        "basin volumes",
+        "rain/runoff/erosion"
+      ],
+      "next_session_task": "Acquire a manageable DEM and check hypsometry plus static basin filling."
+    },
+    {
+      "topic": "illumination",
+      "condition": "angular_diagnostic_only",
+      "material": [
+        "../illumination/geometry.py"
+      ],
+      "unresolved": [
+        "ephemerides and terrain horizon",
+        "spherical scattering/refraction",
+        "brightness and color"
+      ],
+      "next_session_task": "Compute local geometry, then test the radiation model against appropriate low-Sun benchmarks."
+    },
+    {
+      "topic": "biosphere",
+      "condition": "theory_and_source_leads; no executable biological model recovered",
+      "material": [
+        "../biosphere/README.md",
+        "../ensemble/papers/74a946e2-8f98/seed-02.md"
+      ],
+      "unresolved": [
+        "complete life cycles",
+        "trait calibration",
+        "coupled nutrient/energy budgets"
+      ],
+      "next_session_task": "Build long-night reserves and aquatic oxygen models alongside the evidence matrix."
+    },
+    {
+      "topic": "habitation",
+      "condition": "design_concepts; no complete sizing or service model",
+      "material": [
+        "../habitation/README.md",
+        "../ensemble/papers/babdd5f6-4920/seed-02.md"
+      ],
+      "unresolved": [
+        "supported floor area and mass",
+        "wind/services/rescue",
+        "biological constraints and plural social uptake"
+      ],
+      "next_session_task": "Size representative structures/vehicles, then compare networks and daily/monthly uses."
+    },
+    {
+      "topic": "engineering",
+      "condition": "conditional_analytical_accounts",
+      "material": [
+        "../engineering/reference/",
+        "baselines/feasibility/model.py"
+      ],
+      "unresolved": [
+        "complete source-to-use pathways",
+        "manufacturing dependency network",
+        "capture safety and lifetime resources"
+      ],
+      "next_session_task": "Add missing inventories and a small bottleneck/replacement network."
+    },
+    {
+      "topic": "protection",
+      "condition": "component_model; pinned external inputs required for clean checkout",
+      "material": [
+        "../protection/model.py",
+        "../protection/verify.py",
+        "../protection/results/",
+        "../protection/inputs.json"
+      ],
+      "unresolved": [
+        "coupled atmosphere and clean plumes",
+        "full ephemerides and flexible structures",
+        "plasma interaction and dose",
+        "material aging"
+      ],
+      "next_session_task": "Restore inputs, then couple spectrum to atmosphere while retaining component limitations."
+    }
+  ]
+}

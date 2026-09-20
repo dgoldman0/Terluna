@@ -1,0 +1,105 @@
+{
+  "checked_at_utc": "2026-09-20T18:09:38.359343+00:00",
+  "scope": "artifact integrity and numerical implementation only",
+  "scientific_validation": false,
+  "manuscript_clearance": false,
+  "retained_files": 33,
+  "integrity": "PASS",
+  "python": "3.13.5",
+  "dependencies": {
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "matplotlib": "3.10.8"
+  },
+  "runner_sha256": "e7f2c4f0e92f497500f7d99bc80f4cb920e444b640e5953ca62eebb78a76da74",
+  "checks": {
+    "illumination": {
+      "status": "PASS",
+      "scope": "angular arithmetic only",
+      "output": {
+        "period_days": 29.53,
+        "angular_rate_deg_per_hour": 0.5079580088046055,
+        "interval_degrees": 6.0,
+        "angular_interval_hours": 11.812,
+        "solar_diameter_arcmin": 32.0,
+        "solar_disk_crossing_hours": 1.0499555555555555
+      }
+    },
+    "feasibility": {
+      "status": "PASS",
+      "model_sha256": "3a6c76f3437f0dab224472f8d3fd20cd90a7d82dffa8d46ec6a562702eae00c2",
+      "reference_sha256": "5878ad8ff00e42bffef193f1af39a17f0d7cf92f4b95319c486c369e2630c01d",
+      "tables_checked": {
+        "atmosphere_sensitivity.csv": 63,
+        "diffusive_sensitivity.csv": 20,
+        "energy_limited_sensitivity.csv": 12,
+        "thermal_response.csv": 18,
+        "growth.csv": 9,
+        "logistics.csv": 15,
+        "maintenance.csv": 6,
+        "transfer_routes.csv": 5,
+        "legacy_shield_geometry.csv": 18
+      },
+      "numerical_tests": {
+        "mass_grid_relative_difference": 7.283183522943659e-08,
+        "loss_grid_relative_difference": 3.6285393578694425e-08,
+        "independent_mass_integral_relative_difference": 3.717528063162945e-08,
+        "isothermal_analytic_relative_error": 2.6689761511988763e-13,
+        "zero_transfer_dv_check": true,
+        "tests_passed": true
+      },
+      "baseline": {
+        "status": "hydrostatic_proxy",
+        "tc": 180.0,
+        "te": 250.0,
+        "ph": 0.1,
+        "sigma": 5.5e-19,
+        "mass_kg": 3.1413494805269903e+18,
+        "column_kg_m2": 78658.47219584549,
+        "exo_R": 2.8125414066644705,
+        "exo_T": 249.60624715863094,
+        "exo_p_Pa": 1.7798236326780365e-08,
+        "lambda_N2": 13.543210621500839,
+        "loss_N2_kg_s": 0.12331192534276174,
+        "loss_O2_kg_s": 0.004611864727686949,
+        "loss_kg_s": 0.12792379007044868,
+        "lifetime_yr": 778145786164.3573,
+        "atomic_N_loss_fixed_profile": {
+          "1e-06": 4.928983847681393e-05,
+          "0.0001": 0.0049289838476813935,
+          "0.01": 0.4928983847681393,
+          "0.1": 4.928983847681392
+        },
+        "absorption_R": {
+          "1e-22": 1.672161967986732,
+          "1e-21": 1.8707035509455345,
+          "1e-20": 2.1295104398703026
+        }
+      },
+      "generated_plots": "four historical plots generated in a temporary directory; no visual review"
+    },
+    "protection": {
+      "status": "PASS",
+      "verifier_executed": true,
+      "model_sha256": "018cfbf6ac5e8ea6935480e09c4c2b69bf54b08c873d953d4b5e31c952d06647",
+      "verifier_sha256": "6b114a73e6847bc1216934fb26f8a1b3d50a0fd95fe66b9ec7969e33c841b534",
+      "reference_sha256": "121b68a0c309c5a0df926f770bc3112b61f9ec185cf6a24070525ce7e1713631",
+      "output": {
+        "scope": "Numerical and data consistency only; no physical validation of future systems.",
+        "analytic_single_slab_T_max_error": 1.3322676295501878e-15,
+        "holding_peak_relative_grid_error_2048_vs8192": 8.857541651252632e-07,
+        "maximum_component_mass_closure_relative_error": 2.220446049250313e-16,
+        "verified_input_hashes": 5
+      },
+      "full_optical_optimization_rerun": false
+    }
+  },
+  "not_executed": [
+    "April simulator",
+    "regional climate or hydrology",
+    "biological or habitation simulations",
+    "global plasma or dose transport",
+    "full ephemeris optimization"
+  ],
+  "result": "PASS"
+}

@@ -1,3 +1,15 @@
+# Terluna
+
+Research toward an open, living Moon, with a five-paper scholarly ensemble.
+
+**Start with the [research inventory](research/README.md), [condition register](research/status.json), and [core-first work plan](research/plan.md).** The [ensemble workspace](ensemble/) contains the accepted root and companion seeds and their editorial requirements.
+
+Shared subject folders are [atmosphere](atmosphere/), [climate](climate/), [geography](geography/), [illumination](illumination/), [biosphere](biosphere/), [habitation](habitation/), [engineering](engineering/) and [protection](protection/). Each states what is available and what remains to be done. Existing calculations are conditional; numerical checks are distinct from physical validation.
+
+The historical training log below is preserved from the earlier repository. Its synthetic and fictional records remain separate from the research evidence.
+
+---
+
 ## Training
 
 ### Round 1

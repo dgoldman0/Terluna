@@ -1,0 +1,702 @@
+{
+  "base_commit": "0d68bdf544bff2a11b19158a68a2c493a2d443a9",
+  "date": "2026-09-20",
+  "policy": "Curated source and reference-data import; retained files are byte-identical; source archives themselves are not committed",
+  "archives": [
+    {
+      "name": "Lunar_Terraforming_Model.zip",
+      "sha256": "8c87621674742eeaa091e135ef763c6d0ed9404a616fb852c2e43f89c64fd46a",
+      "bytes": 376353,
+      "members": [
+        {
+          "name": "README.md",
+          "bytes": 2578,
+          "sha256": "c70c32b29eb7bd86cdefa463fa45592bc3573566270a711745501cd7174c1ce5",
+          "destination": null,
+          "disposition": "original_package_scaffolding_omitted; current repository documentation and dependencies supplied"
+        },
+        {
+          "name": "requirements.txt",
+          "bytes": 65,
+          "sha256": "6aa6f33741a7a3fe84369093eb389d63623ffaf6bd3d5816c2c5c65f80f49898",
+          "destination": null,
+          "disposition": "original_package_scaffolding_omitted; current repository documentation and dependencies supplied"
+        },
+        {
+          "name": "model.py",
+          "bytes": 14829,
+          "sha256": "3a6c76f3437f0dab224472f8d3fd20cd90a7d82dffa8d46ec6a562702eae00c2",
+          "destination": "research/baselines/feasibility/model.py",
+          "disposition": "retained_verbatim"
+        },
+        {
+          "name": "build_pdf.py",
+          "bytes": 8513,
+          "sha256": "01d874da5e2dc30cb260a4a0b63b6fd89e027f86069d5348f731a92c98ff8f02",
+          "destination": null,
+          "disposition": "original_package_scaffolding_omitted; current repository documentation and dependencies supplied"
+        },
+        {
+          "name": "report.md",
+          "bytes": 75346,
+          "sha256": "37703255c3f6b576a1486a7d77c5c7b8bfe82206df611bb3f6be95b2ff5eef13",
+          "destination": null,
+          "disposition": "full_historical_report_retained_in_original_archive; scope documented in topic READMEs"
+        },
+        {
+          "name": "results/atmosphere_profiles.png",
+          "bytes": 76579,
+          "sha256": "96be1422c79229df3d0a49c354744cf8ce07cf443463d5fd28886769c6813e5c",
+          "destination": null,
+          "disposition": "rendered_artifact_omitted"
+        },
+        {
+          "name": "results/atmosphere_sensitivity.csv",
+          "bytes": 11528,
+          "sha256": "5a48e17c4d5b59feedc707cbef1ffc5212830b39874266b6b8fd14ac85ca25e7",
+          "destination": "atmosphere/reference/atmosphere_sensitivity.csv",
+          "disposition": "retained_verbatim"
+        },
+        {
+          "name": "results/diffusive_sensitivity.csv",
+          "bytes": 3411,
+          "sha256": "7a83ec465574bf1e46c3b8af2a42809977e4e03446b7c9ce21df3beafbdfd066",
+          "destination": "atmosphere/reference/diffusive_sensitivity.csv",
+          "disposition": "retained_verbatim"
+        },
+        {
+          "name": "results/energy_limited_sensitivity.csv",
+          "bytes": 926,
+          "sha256": "38d9fa42c8feecde01cd323e2025fb3102e7ba6accd0ea38f706b7a9e8e67a50",
+          "destination": "atmosphere/reference/energy_limited_sensitivity.csv",
+          "disposition": "retained_verbatim"
+        },
+        {
+          "name": "results/escape_sensitivity.png",
+          "bytes": 104926,
+          "sha256": "2be85e2daf4ca255de34e27b5e1470d684271f1408246946d3fa4c452ddedd2b",
+          "destination": null,
+          "disposition": "rendered_artifact_omitted"
+        },
+        {
+          "name": "results/growth.csv",
+          "bytes": 1095,
+          "sha256": "d371c2b2054986d996af8a4de0ea4baeef347de4e02b16a1c291a60d7fc6de95",
+          "destination": "engineering/reference/growth.csv",
+          "disposition": "retained_verbatim"
+        },
+        {
+          "name": "results/industrial_growth.png",
+          "bytes": 103227,
+          "sha256": "1dc452d4c4d70f4b9994de16f38841e96d5792c0493c9846619e6d9e259b3176",
+          "destination": null,
+          "disposition": "rendered_artifact_omitted"
+        },
+        {
+          "name": "results/logistics.csv",
+          "bytes": 2323,
+          "sha256": "334e27d6b25b97ce02a9b29303c373d52e4b1cfdbca404753e0ea58a11d3a9cc",
+          "destination": "engineering/reference/logistics.csv",
+          "disposition": "retained_verbatim"
+        },
+        {
+          "name": "results/maintenance.csv",
+          "bytes": 340,
+          "sha256": "f4d0064236ca4c5dcd9531a7cfdad07c379cc6991dda6a5f7b0e0da6e2e7f42e",
+          "destination": "engineering/reference/maintenance.csv",
+          "disposition": "retained_verbatim"
+        },
+        {
+          "name": "results/maintenance_ratio.png",
+          "bytes": 73238,
+          "sha256": "dc465b47bab8820141e63ac459bc1eee659ed81741933712bc80f07cc6dc9d91",
+          "destination": null,
+          "disposition": "rendered_artifact_omitted"
+        },
+        {
+          "name": "results/results.json",
+          "bytes": 29074,
+          "sha256": "5ed47da437dd22aa0f92e946a26389b0c2404322ce83c5c59881243b5b8a7788",
+          "destination": "research/baselines/feasibility/reference.json",
+          "disposition": "selected_reference_fields; source hash belongs to complete archived JSON"
+        },
+        {
+          "name": "results/shields.csv",
+          "bytes": 2714,
+          "sha256": "11a3407b957af0363a66a018e5a7f8dafae5ef3b0d4321293d9aaa0e04c2bb79",
+          "destination": "protection/reference/legacy_shield_geometry.csv",
+          "disposition": "retained_verbatim"
+        },
+        {
+          "name": "results/thermal_response.csv",
+          "bytes": 1024,
+          "sha256": "44099868ecd0b6ca4dd181464add25617132d894b85e4b449688048af50dc686",
+          "destination": "climate/reference/thermal_response.csv",
+          "disposition": "retained_verbatim"
+        },
+        {
+          "name": "results/transfer_routes.csv",
+          "bytes": 477,
+          "sha256": "d4750fb437a270184c421372a14e9dd10c96c7bbc65d347e4d075c26eb5ecaee",
+          "destination": "engineering/reference/transfer_routes.csv",
+          "disposition": "retained_verbatim"
+        }
+      ]
+    },
+    {
+      "name": "Lunar_Protection_Model.zip",
+      "sha256": "38947474fefd3acc06bc9acdffe267953b770e04856322770f5233ac5c60994d",
+      "bytes": 1443872,
+      "members": [
+        {
+          "name": "Lunar_Protection_Model/Lunar_Protection_Design.pdf",
+          "bytes": 167088,
+          "sha256": "6a57121d8a1943dd72f7e30bea3f06ad8509b7b6836606c855c66d7fa2cf36e7",
+          "destination": null,
+          "disposition": "rendered_artifact_omitted"
+        },
+        {
+          "name": "Lunar_Protection_Model/README.md",
+          "bytes": 3776,
+          "sha256": "9d8c18514886ed67b1db06d61203d7db16e80298e104ab04d9fafa8161753fb1",
+          "destination": null,
+          "disposition": "original_package_scaffolding_omitted; current repository documentation and dependencies supplied"
+        },
+        {
+          "name": "Lunar_Protection_Model/baseline/Lunar_Terraforming_Feasibility.pdf",
+          "bytes": 538415,
+          "sha256": "96df61f6972b9f516bc44ef2651f6d82e2e60f15d1484ee1c6a23e48ce4da989",
+          "destination": null,
+          "disposition": "duplicate_baseline_or_rendered_report; canonical feasibility copy indexed separately"
+        },
+        {
+          "name": "Lunar_Protection_Model/baseline/atmosphere_model.py",
+          "bytes": 14829,
+          "sha256": "3a6c76f3437f0dab224472f8d3fd20cd90a7d82dffa8d46ec6a562702eae00c2",
+          "destination": null,
+          "disposition": "duplicate_baseline_or_rendered_report; canonical feasibility copy indexed separately"
+        },
+        {
+          "name": "Lunar_Protection_Model/baseline/report.md",
+          "bytes": 75346,
+          "sha256": "37703255c3f6b576a1486a7d77c5c7b8bfe82206df611bb3f6be95b2ff5eef13",
+          "destination": null,
+          "disposition": "duplicate_baseline_or_rendered_report; canonical feasibility copy indexed separately"
+        },
+        {
+          "name": "Lunar_Protection_Model/baseline/results.json",
+          "bytes": 29074,
+          "sha256": "5ed47da437dd22aa0f92e946a26389b0c2404322ce83c5c59881243b5b8a7788",
+          "destination": null,
+          "disposition": "duplicate_baseline_or_rendered_report; canonical feasibility copy indexed separately"
+        },
+        {
+          "name": "Lunar_Protection_Model/build_pdf.py",
+          "bytes": 8900,
+          "sha256": "cf2b1b5f0fbbd77d24a6fc58ed028b18adc924ca43bfc6ffbd7c83f50ca41569",
+          "destination": null,
+          "disposition": "original_package_scaffolding_omitted; current repository documentation and dependencies supplied"
+        },
+        {
+          "name": "Lunar_Protection_Model/model.py",
+          "bytes": 21907,
+          "sha256": "018cfbf6ac5e8ea6935480e09c4c2b69bf54b08c873d953d4b5e31c952d06647",
+          "destination": "protection/model.py",
+          "disposition": "retained_verbatim"
+        },
+        {
+          "name": "Lunar_Protection_Model/report.md",
+          "bytes": 57329,
+          "sha256": "901370c757955b5841185b954af0d0108acf4c759cae6f95023419744c6d2a18",
+          "destination": null,
+          "disposition": "full_historical_report_retained_in_original_archive; scope documented in topic READMEs"
+        },
+        {
+          "name": "Lunar_Protection_Model/requirements.txt",
+          "bytes": 54,
+          "sha256": "1889ca76fea683bf71bec56494f912361cb539af2a66617ee0028ac10e85d539",
+          "destination": null,
+          "disposition": "original_package_scaffolding_omitted; current repository documentation and dependencies supplied"
+        },
+        {
+          "name": "Lunar_Protection_Model/results/anchor_magnets.csv",
+          "bytes": 1138,
+          "sha256": "d0d6fc1244ea41420c2be823bf46f5efee3665ebc3465b69740e698526638da9",
+          "destination": "protection/results/anchor_magnets.csv",
+          "disposition": "retained_verbatim"
+        },
+        {
+          "name": "Lunar_Protection_Model/results/distributed_anchor_field.csv",
+          "bytes": 207,
+          "sha256": "d0a0670b5d3eff1b1e722d7a253d20af96e2fac0749764d82e76709f436453bb",
+          "destination": "protection/results/distributed_anchor_field.csv",
+          "disposition": "retained_verbatim"
+        },
+        {
+          "name": "Lunar_Protection_Model/results/eccentric_distance_sensitivity.csv",
+          "bytes": 194,
+          "sha256": "37f7bc3ecc1d3ff7f5e67377aecb778c5f121215f2e8c7c2d8f2c3af1f3ab015",
+          "destination": "protection/results/eccentric_distance_sensitivity.csv",
+          "disposition": "retained_verbatim"
+        },
+        {
+          "name": "Lunar_Protection_Model/results/energy_storage_sensitivity.csv",
+          "bytes": 1090,
+          "sha256": "401ca0f00a566a28c4fec959d33de3bebf07962a30496a084849265bd08d315f",
+          "destination": "protection/results/energy_storage_sensitivity.csv",
+          "disposition": "retained_verbatim"
+        },
+        {
+          "name": "Lunar_Protection_Model/results/field_volume.csv",
+          "bytes": 1172,
+          "sha256": "44e004b52c0274dd50e51d5f7add73b1a585142671a9452cd87484d3b375d7fd",
+          "destination": "protection/results/field_volume.csv",
+          "disposition": "retained_verbatim"
+        },
+        {
+          "name": "Lunar_Protection_Model/results/fixed_cutoff_scaling.csv",
+          "bytes": 586,
+          "sha256": "f911a645503d1103877d2d6995ce25244ba3302bfcd30bc61f49e8edb5da97f2",
+          "destination": "protection/results/fixed_cutoff_scaling.csv",
+          "disposition": "retained_verbatim"
+        },
+        {
+          "name": "Lunar_Protection_Model/results/leakage_budget.csv",
+          "bytes": 225,
+          "sha256": "dba92b99639e0d008dacd47f7e9e9a75575471af5a4da9534f75b27b1e63a557",
+          "destination": "protection/results/leakage_budget.csv",
+          "disposition": "retained_verbatim"
+        },
+        {
+          "name": "Lunar_Protection_Model/results/magnet_cryogenics.csv",
+          "bytes": 470,
+          "sha256": "a317ea39a5ca26873c8ccc7eeba85888610b4e06edcc96092a078d12de3cff4d",
+          "destination": "protection/results/magnet_cryogenics.csv",
+          "disposition": "retained_verbatim"
+        },
+        {
+          "name": "Lunar_Protection_Model/results/maintenance.csv",
+          "bytes": 2675,
+          "sha256": "1fd67f9b58c5960a8ae2afb36e1e4911c455f17efab30ab1bd9599edac234898",
+          "destination": "protection/results/maintenance.csv",
+          "disposition": "retained_verbatim"
+        },
+        {
+          "name": "Lunar_Protection_Model/results/near_lunar_distance_sweep.csv",
+          "bytes": 24085,
+          "sha256": "a6197972cf8711f519829f3c9b52716f29e432c0a2b700a6858205d8eb7bdcf0",
+          "destination": null,
+          "disposition": "large_regenerable_grid_omitted"
+        },
+        {
+          "name": "Lunar_Protection_Model/results/near_lunar_phase.csv",
+          "bytes": 166740,
+          "sha256": "872674a138dd933f1e0c0820eecb244e87b8f73e06def5f13081d0d83f0bd2e1",
+          "destination": null,
+          "disposition": "large_regenerable_grid_omitted"
+        },
+        {
+          "name": "Lunar_Protection_Model/results/pdf_layout.json",
+          "bytes": 1807,
+          "sha256": "7f2ccb3ca559a7a4036fcf7e0173426c34adf8c92eb8e8de30be7623dbc3e2fa",
+          "destination": null,
+          "disposition": "historical_check_record_omitted; current checks recorded separately"
+        },
+        {
+          "name": "Lunar_Protection_Model/results/plume_energy_allowances.csv",
+          "bytes": 378,
+          "sha256": "2908afca2a74c74e1fc36db48154e969607ceab73abe5216a43a7c917f815895",
+          "destination": "protection/results/plume_energy_allowances.csv",
+          "disposition": "retained_verbatim"
+        },
+        {
+          "name": "Lunar_Protection_Model/results/propulsion_sensitivity.csv",
+          "bytes": 11440,
+          "sha256": "dd7c15c0ace8a9cc4977245e70a10eea3fe67a4a244e0f89c9cf93cf919d987b",
+          "destination": "protection/results/propulsion_sensitivity.csv",
+          "disposition": "retained_verbatim"
+        },
+        {
+          "name": "Lunar_Protection_Model/results/protected_radius_sensitivity.csv",
+          "bytes": 1164,
+          "sha256": "f39a380446b57df82ffb880138e2d0943a3d0cdddb72d96ec46a7f6a6a2f4481",
+          "destination": "protection/results/protected_radius_sensitivity.csv",
+          "disposition": "retained_verbatim"
+        },
+        {
+          "name": "Lunar_Protection_Model/results/results.json",
+          "bytes": 25143,
+          "sha256": "742a9fad6f75fa4759caedd07ffe9403156e728bae1a1b02e3687881e50ab145",
+          "destination": "protection/results/results.json",
+          "disposition": "selected_reference_fields; source hash belongs to complete archived JSON"
+        },
+        {
+          "name": "Lunar_Protection_Model/results/rigidity.csv",
+          "bytes": 488,
+          "sha256": "e5378484f3370cbdde015adc3e324f97fb81e9568e34696ad7c3841cf4fd7078",
+          "destination": "protection/results/rigidity.csv",
+          "disposition": "retained_verbatim"
+        },
+        {
+          "name": "Lunar_Protection_Model/results/screen_thermal_sensitivity.csv",
+          "bytes": 397,
+          "sha256": "0269cd5120daee5ae8904f7a4ac0f5cc01d0741f36c41bbe3bdd3f10be2ee4f4",
+          "destination": "protection/results/screen_thermal_sensitivity.csv",
+          "disposition": "retained_verbatim"
+        },
+        {
+          "name": "Lunar_Protection_Model/results/solar_weighted_summary.csv",
+          "bytes": 376,
+          "sha256": "ba9fc347ba841bc7620733504232760dad664cfb024385bf438e5ee168ae052c",
+          "destination": "protection/results/solar_weighted_summary.csv",
+          "disposition": "retained_verbatim"
+        },
+        {
+          "name": "Lunar_Protection_Model/results/uv_absorption.csv",
+          "bytes": 878,
+          "sha256": "c22e5e25bd3d22a0d67c8c818737d166acf26553d3a4898de7ff867ff0b3e5c8",
+          "destination": "protection/results/uv_absorption.csv",
+          "disposition": "retained_verbatim"
+        },
+        {
+          "name": "Lunar_Protection_Model/results/validation.json",
+          "bytes": 334,
+          "sha256": "1e94c2dda2e09923a60ae1e1bd37e89e64f19804cf64f59785b5e88090985c1a",
+          "destination": null,
+          "disposition": "historical_check_record_omitted; current checks recorded separately"
+        },
+        {
+          "name": "Lunar_Protection_Model/results/visible_stack.csv",
+          "bytes": 525116,
+          "sha256": "6a97dc07a056b84b35a4c38f05329f13e9e6ef67620e3baccd84c1222397def0",
+          "destination": null,
+          "disposition": "large_regenerable_grid_omitted"
+        },
+        {
+          "name": "Lunar_Protection_Model/results/wind_balance.csv",
+          "bytes": 291,
+          "sha256": "c027be6e327c79ebdf53fea98c646bfe9370cf68a26b223b87470007947e47c6",
+          "destination": "protection/results/wind_balance.csv",
+          "disposition": "retained_verbatim"
+        },
+        {
+          "name": "Lunar_Protection_Model/results/xray_absorption.csv",
+          "bytes": 855,
+          "sha256": "b55031f56deca84b016eb31b6a9e64e68173b36dc7973e277993f84df1838ff2",
+          "destination": "protection/results/xray_absorption.csv",
+          "disposition": "retained_verbatim"
+        },
+        {
+          "name": "Lunar_Protection_Model/sources/TSIS1_HSRS_stride100.csv",
+          "bytes": 1248662,
+          "sha256": "0ae235c6912f26773c0e9b71ea3924aaf8856c74a511dc07e86b60b3c1b88172",
+          "destination": null,
+          "disposition": "external_input_pinned; restore_or_fetch_by_hash"
+        },
+        {
+          "name": "Lunar_Protection_Model/sources/TiO2_Siefke.yml",
+          "bytes": 52162,
+          "sha256": "9b03947949e54cd98f58a989bd031a5fddb1a36a9d9f7fd64d5ff2bd68c2885c",
+          "destination": null,
+          "disposition": "external_input_pinned; restore_or_fetch_by_hash"
+        },
+        {
+          "name": "Lunar_Protection_Model/sources/o.nff",
+          "bytes": 13625,
+          "sha256": "adb1540b11008383aaef0b8c4f5fb1a2bc5df14f3717ac4d58fc54fff92ba6cb",
+          "destination": null,
+          "disposition": "external_input_pinned; restore_or_fetch_by_hash"
+        },
+        {
+          "name": "Lunar_Protection_Model/sources/si.nff",
+          "bytes": 19539,
+          "sha256": "2bbd2aef0292aa392a61942b1c401171b5bc30bb77ab1cab9c08b6264048019a",
+          "destination": null,
+          "disposition": "external_input_pinned; restore_or_fetch_by_hash"
+        },
+        {
+          "name": "Lunar_Protection_Model/sources/ti.nff",
+          "bytes": 13636,
+          "sha256": "f3e3c7c01ec8dfff224ac0b95b5e4b4997721e7147ec4fe601deaf0cc762fad3",
+          "destination": null,
+          "disposition": "external_input_pinned; restore_or_fetch_by_hash"
+        },
+        {
+          "name": "Lunar_Protection_Model/verify.py",
+          "bytes": 1573,
+          "sha256": "6b114a73e6847bc1216934fb26f8a1b3d50a0fd95fe66b9ec7969e33c841b534",
+          "destination": "protection/verify.py",
+          "disposition": "retained_verbatim"
+        }
+      ]
+    }
+  ],
+  "retained": [
+    {
+      "archive": "Lunar_Terraforming_Model.zip",
+      "member": "model.py",
+      "path": "research/baselines/feasibility/model.py",
+      "sha256": "3a6c76f3437f0dab224472f8d3fd20cd90a7d82dffa8d46ec6a562702eae00c2",
+      "bytes": 14829,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Lunar_Terraforming_Model.zip",
+      "member": "results/results.json",
+      "path": "research/baselines/feasibility/reference.json",
+      "sha256": "5878ad8ff00e42bffef193f1af39a17f0d7cf92f4b95319c486c369e2630c01d",
+      "bytes": 2262,
+      "preservation": "selected original JSON fields, values unchanged; new reference serialization; duplicated table arrays omitted",
+      "source_sha256": "5ed47da437dd22aa0f92e946a26389b0c2404322ce83c5c59881243b5b8a7788"
+    },
+    {
+      "archive": "Lunar_Protection_Model.zip",
+      "member": "Lunar_Protection_Model/model.py",
+      "path": "protection/model.py",
+      "sha256": "018cfbf6ac5e8ea6935480e09c4c2b69bf54b08c873d953d4b5e31c952d06647",
+      "bytes": 21907,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Lunar_Protection_Model.zip",
+      "member": "Lunar_Protection_Model/verify.py",
+      "path": "protection/verify.py",
+      "sha256": "6b114a73e6847bc1216934fb26f8a1b3d50a0fd95fe66b9ec7969e33c841b534",
+      "bytes": 1573,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Lunar_Protection_Model.zip",
+      "member": "Lunar_Protection_Model/results/results.json",
+      "path": "protection/results/results.json",
+      "sha256": "121b68a0c309c5a0df926f770bc3112b61f9ec185cf6a24070525ce7e1713631",
+      "bytes": 4894,
+      "preservation": "selected original JSON fields, values unchanged; new reference serialization; duplicated table arrays omitted",
+      "source_sha256": "742a9fad6f75fa4759caedd07ffe9403156e728bae1a1b02e3687881e50ab145"
+    },
+    {
+      "archive": "Lunar_Terraforming_Model.zip",
+      "member": "results/atmosphere_sensitivity.csv",
+      "path": "atmosphere/reference/atmosphere_sensitivity.csv",
+      "sha256": "5a48e17c4d5b59feedc707cbef1ffc5212830b39874266b6b8fd14ac85ca25e7",
+      "bytes": 11528,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Lunar_Terraforming_Model.zip",
+      "member": "results/diffusive_sensitivity.csv",
+      "path": "atmosphere/reference/diffusive_sensitivity.csv",
+      "sha256": "7a83ec465574bf1e46c3b8af2a42809977e4e03446b7c9ce21df3beafbdfd066",
+      "bytes": 3411,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Lunar_Terraforming_Model.zip",
+      "member": "results/energy_limited_sensitivity.csv",
+      "path": "atmosphere/reference/energy_limited_sensitivity.csv",
+      "sha256": "38d9fa42c8feecde01cd323e2025fb3102e7ba6accd0ea38f706b7a9e8e67a50",
+      "bytes": 926,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Lunar_Terraforming_Model.zip",
+      "member": "results/thermal_response.csv",
+      "path": "climate/reference/thermal_response.csv",
+      "sha256": "44099868ecd0b6ca4dd181464add25617132d894b85e4b449688048af50dc686",
+      "bytes": 1024,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Lunar_Terraforming_Model.zip",
+      "member": "results/growth.csv",
+      "path": "engineering/reference/growth.csv",
+      "sha256": "d371c2b2054986d996af8a4de0ea4baeef347de4e02b16a1c291a60d7fc6de95",
+      "bytes": 1095,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Lunar_Terraforming_Model.zip",
+      "member": "results/logistics.csv",
+      "path": "engineering/reference/logistics.csv",
+      "sha256": "334e27d6b25b97ce02a9b29303c373d52e4b1cfdbca404753e0ea58a11d3a9cc",
+      "bytes": 2323,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Lunar_Terraforming_Model.zip",
+      "member": "results/maintenance.csv",
+      "path": "engineering/reference/maintenance.csv",
+      "sha256": "f4d0064236ca4c5dcd9531a7cfdad07c379cc6991dda6a5f7b0e0da6e2e7f42e",
+      "bytes": 340,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Lunar_Terraforming_Model.zip",
+      "member": "results/transfer_routes.csv",
+      "path": "engineering/reference/transfer_routes.csv",
+      "sha256": "d4750fb437a270184c421372a14e9dd10c96c7bbc65d347e4d075c26eb5ecaee",
+      "bytes": 477,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Lunar_Terraforming_Model.zip",
+      "member": "results/shields.csv",
+      "path": "protection/reference/legacy_shield_geometry.csv",
+      "sha256": "11a3407b957af0363a66a018e5a7f8dafae5ef3b0d4321293d9aaa0e04c2bb79",
+      "bytes": 2714,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Lunar_Protection_Model.zip",
+      "member": "Lunar_Protection_Model/results/anchor_magnets.csv",
+      "path": "protection/results/anchor_magnets.csv",
+      "sha256": "d0d6fc1244ea41420c2be823bf46f5efee3665ebc3465b69740e698526638da9",
+      "bytes": 1138,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Lunar_Protection_Model.zip",
+      "member": "Lunar_Protection_Model/results/distributed_anchor_field.csv",
+      "path": "protection/results/distributed_anchor_field.csv",
+      "sha256": "d0a0670b5d3eff1b1e722d7a253d20af96e2fac0749764d82e76709f436453bb",
+      "bytes": 207,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Lunar_Protection_Model.zip",
+      "member": "Lunar_Protection_Model/results/eccentric_distance_sensitivity.csv",
+      "path": "protection/results/eccentric_distance_sensitivity.csv",
+      "sha256": "37f7bc3ecc1d3ff7f5e67377aecb778c5f121215f2e8c7c2d8f2c3af1f3ab015",
+      "bytes": 194,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Lunar_Protection_Model.zip",
+      "member": "Lunar_Protection_Model/results/energy_storage_sensitivity.csv",
+      "path": "protection/results/energy_storage_sensitivity.csv",
+      "sha256": "401ca0f00a566a28c4fec959d33de3bebf07962a30496a084849265bd08d315f",
+      "bytes": 1090,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Lunar_Protection_Model.zip",
+      "member": "Lunar_Protection_Model/results/field_volume.csv",
+      "path": "protection/results/field_volume.csv",
+      "sha256": "44e004b52c0274dd50e51d5f7add73b1a585142671a9452cd87484d3b375d7fd",
+      "bytes": 1172,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Lunar_Protection_Model.zip",
+      "member": "Lunar_Protection_Model/results/fixed_cutoff_scaling.csv",
+      "path": "protection/results/fixed_cutoff_scaling.csv",
+      "sha256": "f911a645503d1103877d2d6995ce25244ba3302bfcd30bc61f49e8edb5da97f2",
+      "bytes": 586,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Lunar_Protection_Model.zip",
+      "member": "Lunar_Protection_Model/results/leakage_budget.csv",
+      "path": "protection/results/leakage_budget.csv",
+      "sha256": "dba92b99639e0d008dacd47f7e9e9a75575471af5a4da9534f75b27b1e63a557",
+      "bytes": 225,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Lunar_Protection_Model.zip",
+      "member": "Lunar_Protection_Model/results/magnet_cryogenics.csv",
+      "path": "protection/results/magnet_cryogenics.csv",
+      "sha256": "a317ea39a5ca26873c8ccc7eeba85888610b4e06edcc96092a078d12de3cff4d",
+      "bytes": 470,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Lunar_Protection_Model.zip",
+      "member": "Lunar_Protection_Model/results/maintenance.csv",
+      "path": "protection/results/maintenance.csv",
+      "sha256": "1fd67f9b58c5960a8ae2afb36e1e4911c455f17efab30ab1bd9599edac234898",
+      "bytes": 2675,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Lunar_Protection_Model.zip",
+      "member": "Lunar_Protection_Model/results/plume_energy_allowances.csv",
+      "path": "protection/results/plume_energy_allowances.csv",
+      "sha256": "2908afca2a74c74e1fc36db48154e969607ceab73abe5216a43a7c917f815895",
+      "bytes": 378,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Lunar_Protection_Model.zip",
+      "member": "Lunar_Protection_Model/results/propulsion_sensitivity.csv",
+      "path": "protection/results/propulsion_sensitivity.csv",
+      "sha256": "dd7c15c0ace8a9cc4977245e70a10eea3fe67a4a244e0f89c9cf93cf919d987b",
+      "bytes": 11440,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Lunar_Protection_Model.zip",
+      "member": "Lunar_Protection_Model/results/protected_radius_sensitivity.csv",
+      "path": "protection/results/protected_radius_sensitivity.csv",
+      "sha256": "f39a380446b57df82ffb880138e2d0943a3d0cdddb72d96ec46a7f6a6a2f4481",
+      "bytes": 1164,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Lunar_Protection_Model.zip",
+      "member": "Lunar_Protection_Model/results/rigidity.csv",
+      "path": "protection/results/rigidity.csv",
+      "sha256": "e5378484f3370cbdde015adc3e324f97fb81e9568e34696ad7c3841cf4fd7078",
+      "bytes": 488,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Lunar_Protection_Model.zip",
+      "member": "Lunar_Protection_Model/results/screen_thermal_sensitivity.csv",
+      "path": "protection/results/screen_thermal_sensitivity.csv",
+      "sha256": "0269cd5120daee5ae8904f7a4ac0f5cc01d0741f36c41bbe3bdd3f10be2ee4f4",
+      "bytes": 397,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Lunar_Protection_Model.zip",
+      "member": "Lunar_Protection_Model/results/solar_weighted_summary.csv",
+      "path": "protection/results/solar_weighted_summary.csv",
+      "sha256": "ba9fc347ba841bc7620733504232760dad664cfb024385bf438e5ee168ae052c",
+      "bytes": 376,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Lunar_Protection_Model.zip",
+      "member": "Lunar_Protection_Model/results/uv_absorption.csv",
+      "path": "protection/results/uv_absorption.csv",
+      "sha256": "c22e5e25bd3d22a0d67c8c818737d166acf26553d3a4898de7ff867ff0b3e5c8",
+      "bytes": 878,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Lunar_Protection_Model.zip",
+      "member": "Lunar_Protection_Model/results/wind_balance.csv",
+      "path": "protection/results/wind_balance.csv",
+      "sha256": "c027be6e327c79ebdf53fea98c646bfe9370cf68a26b223b87470007947e47c6",
+      "bytes": 291,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Lunar_Protection_Model.zip",
+      "member": "Lunar_Protection_Model/results/xray_absorption.csv",
+      "path": "protection/results/xray_absorption.csv",
+      "sha256": "b55031f56deca84b016eb31b6a9e64e68173b36dc7973e277993f84df1838ff2",
+      "bytes": 855,
+      "preservation": "verbatim"
+    },
+    {
+      "repository_source": "ensemble/planning/twilight_diagnostic.py",
+      "source_commit": "0d68bdf544bff2a11b19158a68a2c493a2d443a9",
+      "path": "illumination/geometry.py",
+      "sha256": "3005303cb37315cf77bdd64d7f672f6107dfb867dfe6f0d07b8bf6956835415e",
+      "bytes": 862,
+      "preservation": "verbatim; standalone convenience copy checked against immutable planning source"
+    }
+  ]
+}

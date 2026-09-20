@@ -1,0 +1,69 @@
+{
+  "baseline": {
+    "status": "hydrostatic_proxy",
+    "tc": 180.0,
+    "te": 250.0,
+    "ph": 0.1,
+    "sigma": 5.5e-19,
+    "mass_kg": 3.1413494805269903e+18,
+    "column_kg_m2": 78658.47219584549,
+    "exo_R": 2.8125414066644705,
+    "exo_T": 249.60624715863094,
+    "exo_p_Pa": 1.7798236326780365e-08,
+    "lambda_N2": 13.543210621500839,
+    "loss_N2_kg_s": 0.12331192534276174,
+    "loss_O2_kg_s": 0.004611864727686949,
+    "loss_kg_s": 0.12792379007044868,
+    "lifetime_yr": 778145786164.3573,
+    "atomic_N_loss_fixed_profile": {
+      "1e-06": 4.928983847681393e-05,
+      "0.0001": 0.0049289838476813935,
+      "0.01": 0.4928983847681393,
+      "0.1": 4.928983847681392
+    },
+    "absorption_R": {
+      "1e-22": 1.672161967986732,
+      "1e-21": 1.8707035509455345,
+      "1e-20": 2.1295104398703026
+    }
+  },
+  "tidal": {
+    "Hill_radius_m": 61524076.070435725,
+    "barrier_K": 0.8811139959713542,
+    "fixed_profile_N2_Jeans_multiplier": 4.449380216683488,
+    "limitation": "Directional restricted-three-body sensitivity, not global loss correction"
+  },
+  "inventory": {
+    "thin_mass_kg": 2.8396368495419244e+18,
+    "mass_kg": 3.1413494805269903e+18,
+    "N2_kg": 2.528670076846971e+18,
+    "O2_kg": 6.126794036800198e+17,
+    "density_kg_m3": 1.4578573894508424,
+    "scale_height_m": 51349.741592755796,
+    "surface_g": 1.6242188765608128,
+    "mean_molar_mass": 0.028710704999999996,
+    "column_kg_m2": 78658.47219584549,
+    "airship_helium_net_kg_m3": 1.2546154284117126,
+    "flight_speed_ratio": 0.3731523267308209,
+    "water_10m_kg": 3.793232809938046e+17,
+    "water_100m_kg": 3.793232809938046e+18
+  },
+  "verification": {
+    "mass_grid_relative_difference": 7.283183522943659e-08,
+    "loss_grid_relative_difference": 3.6285393578694425e-08,
+    "independent_mass_integral_relative_difference": 3.717528063162945e-08,
+    "isothermal_analytic_relative_error": 2.6689761511988763e-13,
+    "zero_transfer_dv_check": true,
+    "tests_passed": true
+  },
+  "constants": {
+    "R_m": 1737400.0,
+    "GM_m3_s2": 4902800118000.0,
+    "pressure_Pa": 121590.0,
+    "surface_T_K": 288.0,
+    "nitrogen_mole_fraction": 0.825,
+    "oxygen_mole_fraction": 0.175,
+    "collision_cross_section_m2": 5.5e-19,
+    "cp_J_kg_K": 1005.0
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "status": "leads_only; no product downloaded",
+  "leads": [
+    {
+      "name": "NASA/PDS LOLA mission/product archive",
+      "url": "https://pds-geosciences.wustl.edu/missions/lro/lola.htm",
+      "local_file": null,
+      "sha256": null
+    },
+    {
+      "name": "LOLA global cylindrical IMG directory",
+      "url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/",
+      "local_file": null,
+      "sha256": null
+    }
+  ],
+  "admission": "recorded in previous audit; no fresh endpoint or binary-product verification during persistence"
+}
