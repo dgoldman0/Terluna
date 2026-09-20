@@ -11,14 +11,20 @@ jobs:
     env:
       OPENBLAS_NUM_THREADS: '1'
       OMP_NUM_THREADS: '1'
+      GH_TOKEN: ${{ github.token }}
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.13.5'
-      - name: Install numerical dependencies
-        run: python -m pip install numpy==2.3.5 scipy==1.17.0 matplotlib==3.10.8
-      - name: Verify exact patch files, run checks, and create result branch
-        run: python .environment-import/import.py
+      - name: Check out the isolated import commit and verify prepared changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          auth=$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)
+          echo "::add-mask::$auth"
+          git config --global http.https://github.com/.extraheader "AUTHORIZATION: basic $auth"
+          work="$RUNNER_TEMP/terluna-import"
+          git clone --branch "$GITHUB_REF_NAME" "https://github.com/$GITHUB_REPOSITORY.git" "$work"
+          cd "$work"
+          git checkout --detach "$GITHUB_SHA"
+          python3 -m venv "$RUNNER_TEMP/terluna-python"
+          export PATH="$RUNNER_TEMP/terluna-python/bin:$PATH"
+          python -m pip install numpy==2.3.5 scipy==1.17.0 matplotlib==3.10.8
+          python .environment-import/import.py
