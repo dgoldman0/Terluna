@@ -1,0 +1,109 @@
+{
+  "checked_at_utc": "2026-09-20T19:35:52.243041+00:00",
+  "base_commit": "79a60a1a51b4552ac9ae8e8bb295b567d9254995",
+  "scope": "New numerical/analytic tests and direct historical archive reproduction; no scientific/manuscript clearance",
+  "new_tests": {
+    "status": "PASS",
+    "count": 39,
+    "command": "python -m unittest discover -s tests -v",
+    "output": "results/environment_screens/test_output.txt"
+  },
+  "result_summary": {
+    "base_commit": "79a60a1a51b4552ac9ae8e8bb295b567d9254995",
+    "atmosphere_cases": 232,
+    "atmosphere_numerically_converged": 232,
+    "atmosphere_with_kinetic_flags": 73,
+    "carbon_scenarios": 180,
+    "oxygen_scenarios": 20,
+    "climate_scenarios": 54,
+    "climate_carbon_interfaces": 18,
+    "historical_band_response_scenarios": 27,
+    "full_spectrum_chemistry_closure": "BLOCKED_INPUTS_AND_UNIMPLEMENTED_PROCESSES",
+    "biological_viability": "UNESTABLISHED_REQUIREMENTS_ONLY",
+    "climate_calibration": "UNESTABLISHED_PARAMETER_SCREEN",
+    "integrated_habitability": "UNESTABLISHED",
+    "python": "3.13.5",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0"
+  },
+  "spatial_resolution": {
+    "coarse_grid": [
+      6,
+      24
+    ],
+    "fine_grid": [
+      12,
+      48
+    ],
+    "steps": 360,
+    "layout": "concentrated",
+    "fine_aggregated_to_coarse": true,
+    "max_difference_K": 2.036771848976514,
+    "rms_difference_K": 0.7225384480601583,
+    "coarse_grid_time_fraction": 0.7194058641975308,
+    "fine_grid_time_fraction": 0.7274884259259259,
+    "interpretation": "Resolution uncertainty remains; not a spatial convergence clearance"
+  },
+  "legacy_archive_checks": {
+    "status": "PASS",
+    "tables": {
+      "atmosphere_sensitivity.csv": 63,
+      "diffusive_sensitivity.csv": 20,
+      "energy_limited_sensitivity.csv": 12,
+      "growth.csv": 9,
+      "logistics.csv": 15,
+      "maintenance.csv": 6,
+      "shields.csv": 18,
+      "thermal_response.csv": 18,
+      "transfer_routes.csv": 5
+    },
+    "verification": {
+      "mass_grid_relative_difference": 7.283183522943659e-08,
+      "loss_grid_relative_difference": 3.6285393578694425e-08,
+      "independent_mass_integral_relative_difference": 3.717528063162945e-08,
+      "isothermal_analytic_relative_error": 2.6689761511988763e-13,
+      "zero_transfer_dv_check": true,
+      "tests_passed": true
+    },
+    "protection": {
+      "scope": "Numerical and data consistency only; no physical validation of future systems.",
+      "analytic_single_slab_T_max_error": 1.3322676295501878e-15,
+      "holding_peak_relative_grid_error_2048_vs8192": 8.857541651252632e-07,
+      "maximum_component_mass_closure_relative_error": 2.220446049250313e-16,
+      "verified_input_hashes": 5
+    }
+  },
+  "repository_wide_check": {
+    "status": "NOT_RUN_COMPLETE_CHECKOUT_UNAVAILABLE",
+    "command": "python research/check.py",
+    "reason": "Read-only connector; Git CLI failed resolving github.com; archive checks performed separately"
+  },
+  "implementation_sha256": {
+    "atmosphere/spectral_interface.py": "8441620cebf2c88d0d288fc0b89fa13f16853f50122be3345a1245fd02ca7e95",
+    "atmosphere/thermal_column.py": "c693a43e2df787d8b41ae5b382e1aee7bc61af931a26ef27cdac7e18cfdcf029",
+    "biosphere/long_night.py": "1110a68eda5082faf57e3aec1724d6ee6171ff1315dc944aa2c1e2b4a75dff0c",
+    "climate/cycle.py": "6b7c463a6baef33e75977881af210ffe0d183f786cc78756114915840c647ee0",
+    "research/run_environment_screens.py": "3fa19a5b127937dc623656d67c1b2a41a4836c9e4491f8349c7d242cb37a186e",
+    "tests/test_environment_screens.py": "9652d1d381b0e3231fb4452fc87eabd5e3490a05e68db0a7bf5f76c77e597389"
+  },
+  "source_archives": {
+    "Lunar_Terraforming_Model.zip": "8c87621674742eeaa091e135ef763c6d0ed9404a616fb852c2e43f89c64fd46a",
+    "Lunar_Protection_Model.zip": "38947474fefd3acc06bc9acdffe267953b770e04856322770f5233ac5c60994d"
+  },
+  "formal_proofs": [
+    "Periodic finite-capacity reserve criterion under stated assumptions",
+    "Unique periodic orbit of the dissipative linear energy-balance system"
+  ],
+  "physical_validation": false,
+  "biological_validation": false,
+  "source_admission": "OUTSTANDING",
+  "remote_publish": "NOT_PERFORMED_READ_ONLY_TOOLS",
+  "not_run": [
+    "Resolved spectrum/chemistry/radiative-cooling closure",
+    "Atomic/diffusive kinetic transport",
+    "Species-calibrated physiology or reproduction",
+    "Actual-terrain hydrology",
+    "Complete plume/orbital and renewal optimization",
+    "Read-aloud prose or final PDF review"
+  ]
+}

@@ -1,23 +1,29 @@
 # Atmosphere
 
-Two distinct reduced-model lineages are available. Both retain their own assumptions.
+Three reduced-model lineages are available. Historical code and reference tables remain unchanged.
 
 | Material | Condition | Appropriate use |
 |---|---|---|
-| [April simulator](sim/sim1.py) and [report](sim/report.md) | Existing repository history; source inspected in the preceding audit, not rerun in this organization pass | Sensitivity to prescribed cooling floor/law, diffusive structure, parametric photochemistry and adjustable Jeans/Parker interpolation |
-| [September implementation](../research/baselines/feasibility/model.py) | Executable prescribed-temperature hydrostatic/Jeans baseline; imported without code changes | Spherical inventory and structure, molecular losses and imposed atomic-composition stress cases |
-| [Reference tables](reference/) | Original September outputs | Compare identical assumptions; failed static closures remain in the tables |
+| [April simulator](sim/sim1.py) and [report](sim/report.md) | Prescribed cooling floor/law, parameterized photochemistry and adjustable outflow | Historical sensitivity baseline |
+| [September implementation](../research/baselines/feasibility/model.py) and [reference tables](reference/) | Prescribed temperature and atomic fractions | Spherical inventory and conditional escape comparison |
+| [Thermal column](thermal_column.py) | Numerically solved conduction, advected energy, molecular Jeans boundary and exobase | Conditional response to deposited sensible heat and a prescribed lower atmosphere |
+| [Spectral interface](spectral_interface.py) | Explicit band energy ledger with missing-data rejection | Connect supplied irradiance and response parameters to surface-normalized heat; audit input coverage |
 
-The September script also owns the original climate and industrial calculations linked from their topic folders. Its [model notes](../research/baselines/feasibility/README.md) state the limits and rerun command.
+## New calculation and remaining closure
 
-## Interpretation and conflicts
+The thermal column solves its upper temperature without a fixed exobase floor. Its lower temperature/pressure, conductivity proxy, collision cross-section, molecular mixing ratio and heating distribution remain inputs. Atoms, ions, explicit radiative cooling, species chemistry, eddy diffusion, acceleration and tides remain outside this limiting model. Kinetic and tidal approximation warnings accompany outputs. Numerical convergence is not a test of physical stability.
 
-The April solver's default 240 K radiative floor, assumed hot-state calibration, photochemical loss scales and adjustable outflow coupling remain inputs. Its temperature result is conditional on those choices. The September baseline instead prescribes a cold middle/upper profile and uses a different composition and exobase treatment. Recency and a temperature solver alone do not rank the two models by physical validity.
+The original solar table starts at 202 nm. The inherited optical implementation leaves a response interval between its X-ray treatment below about 24.8 nm and titania optical constants starting near 120.18 nm. A historical five-band solar benchmark is now transcribed separately, with all atmospheric/filter responses left unspecified. This recovers a coarse energy reference while preserving the unresolved optical and chemical requirements.
 
-The existing 1.2 atm, 17.5% O2 mixture and literal Earthlike proportions are separate scenarios. A universal 250/260 K retention cliff is superseded by the structure/composition-dependent work. The approximately 250 K target has not been established as the outcome of a realizable filter.
+Read [findings](../research/findings.md) for equations, bounds, source limitations and numerical examples. The new [232-case output](../research/results/environment_screens/molecular_columns.csv) is separate from the byte-pinned historical tables. Molecular losses do not constitute total escape or a billion-year lifetime estimate.
 
-## Next executable work
+## Run and next task
 
-Reconcile pressure, composition, collision partners, homopause and temperature structure. Connect wavelength-dependent protection to heating and chemical source terms; test an energy-balanced reduced column with alternative upper boundaries. Track water supply to escaping regions separately. New results require conservation, convergence and benchmark checks.
+From repository root:
 
-No global climate, self-consistent photochemistry/fluid-kinetic solution or radiation-dose simulation is present in this folder. [Research plan](../research/plan.md) prioritizes the core's whole-world requirements.
+```sh
+python -m unittest discover -s tests -v
+python research/run_environment_screens.py
+```
+
+Next: acquire defensible EUV material response and resolved irradiance; replace assumed absorption/heating fractions with species-resolved absorption, chemistry and cooling; then test atomic transport and kinetic boundaries. Reconcile a calibrated lower-atmospheric profile with this upper model before inferring integrated habitability.

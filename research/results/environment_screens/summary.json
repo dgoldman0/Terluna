@@ -1,0 +1,18 @@
+{
+  "base_commit": "79a60a1a51b4552ac9ae8e8bb295b567d9254995",
+  "atmosphere_cases": 232,
+  "atmosphere_numerically_converged": 232,
+  "atmosphere_with_kinetic_flags": 73,
+  "carbon_scenarios": 180,
+  "oxygen_scenarios": 20,
+  "climate_scenarios": 54,
+  "climate_carbon_interfaces": 18,
+  "historical_band_response_scenarios": 27,
+  "full_spectrum_chemistry_closure": "BLOCKED_INPUTS_AND_UNIMPLEMENTED_PROCESSES",
+  "biological_viability": "UNESTABLISHED_REQUIREMENTS_ONLY",
+  "climate_calibration": "UNESTABLISHED_PARAMETER_SCREEN",
+  "integrated_habitability": "UNESTABLISHED",
+  "python": "3.13.5",
+  "numpy": "2.3.5",
+  "scipy": "1.17.0"
+}

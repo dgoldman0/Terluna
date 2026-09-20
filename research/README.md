@@ -2,20 +2,30 @@
 
 Shared computational and theoretical support for the five-paper [Open Moon ensemble](../ensemble/). **Constructing and Sustaining an Open Moon is the next full manuscript.** Companion analyses develop alongside it; the core's opening landscape does not define the limits of the research.
 
-| Topic | Available material | Current condition |
+Read [the new findings and equations](findings.md) and [numerical results](results/environment_screens/). The current computational pass adds a solved molecular thermal limit, a periodic spatial climate screen, and carbon/oxygen requirements models. It also identifies the unfilled spectrum/material/chemistry interface.
+
+| Topic | New/current calculation | Principal open condition |
 |---|---|---|
-| [Atmosphere](../atmosphere/) | April screening code; September hydrostatic/Jeans code and cases | Conditional models with different assumptions; compatibility with a realizable spectrum remains open |
-| [Climate](../climate/) | 18-case linear thermal-response diagnostic | Executable scalar sensitivity; no spatial weather model |
-| [Geography](../geography/) | Terrain-data leads and basin/hydrology plan | No elevation grid or simulation loaded |
-| [Illumination](../illumination/) | Existing angular-twilight diagnostic | Runnable geometry arithmetic; no sky-brightness or spectral model |
-| [Biosphere](../biosphere/) | Mechanisms, candidate biomes and empirical leads | No executable life-cycle/ecosystem model recovered |
-| [Habitation](../habitation/) | Spatial/time-use concepts and mechanical relationships | No complete settlement, vehicle or services simulation |
-| [Engineering](../engineering/) | Transfer, propulsion, growth and maintenance tables | Conditional accounting; complete fleet/manufacturing network missing |
-| [Protection](../protection/) | Optical, holding-force, magnetic and renewal code/results | Component calculations; five pinned external inputs required to run |
+| [Atmosphere](../atmosphere/) | Solved conduction/advection/Jeans column and band ledger | Actual spectrum-to-chemistry-to-escape closure |
+| [Climate](../climate/) | Conservative periodic latitude–longitude thermal screen | Calibrated radiation, moisture/ice, dynamics and terrain |
+| [Biosphere](../biosphere/) | Carbon reserve theorem/model and bounded oxygen box | Measured traits, complete life cycles and ecological interactions |
+| [Protection](../protection/) | Original component model plus spectral coverage audit | EUV response, clean operation, particle transport and lifetime resources |
+| [Engineering](../engineering/) | Original transport/renewal accounts plus plume-heat sensitivity | Complete industrial network and safe source-to-use routes |
+| [Geography](../geography/), [illumination](../illumination/), [habitation](../habitation/) | Data leads, angular diagnostic and design concepts | Actual terrain, visual appearance and practical inhabited capacity |
+
 
 Read [status.json](status.json) for condition and next-task detail, [plan.md](plan.md) for the core-first work order, and [archive_status.md](archive_status.md) for unresolved recovery. [provenance.json](provenance.json) lists every original archive member and its disposition, including hashes for retained files and omitted material. Model code and CSV tables are verbatim; the two JSON reference files explicitly select original fields with unchanged values.
 
-## Reproduction
+## New models
+
+```sh
+OPENBLAS_NUM_THREADS=1 python -m unittest discover -s tests -v
+OPENBLAS_NUM_THREADS=1 python research/run_environment_screens.py
+```
+
+Supply `--protection-archive /path/to/Lunar_Protection_Model.zip` for direct inspection of the original optical inputs, or restore `protection/sources/` using the existing helper. New runs use their own ordinary result paths. Source-access and scientific-validation status are recorded in [environment_sources.json](environment_sources.json) and [environment_checks.json](environment_checks.json).
+
+## Historical baseline reproduction
 
 ```sh
 python -m pip install -r research/requirements.txt

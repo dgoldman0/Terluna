@@ -1,0 +1,44 @@
+test_carbon_grid_convergence (test_environment_screens.CarbonTests.test_carbon_grid_convergence) ... ok
+test_circular_deficit_matches_bruteforce (test_environment_screens.CarbonTests.test_circular_deficit_matches_bruteforce) ... ok
+test_dim_edges_increase_required_storage (test_environment_screens.CarbonTests.test_dim_edges_increase_required_storage) ... ok
+test_infeasible_initial_store (test_environment_screens.CarbonTests.test_infeasible_initial_store) ... ok
+test_negative_balance_has_no_finite_solution (test_environment_screens.CarbonTests.test_negative_balance_has_no_finite_solution) ... ok
+test_periodic_sufficiency_and_insufficiency (test_environment_screens.CarbonTests.test_periodic_sufficiency_and_insufficiency) ... ok
+test_square_wave_analytic (test_environment_screens.CarbonTests.test_square_wave_analytic) ... ok
+test_uniform_zero_net (test_environment_screens.CarbonTests.test_uniform_zero_net) ... ok
+test_freezing_is_flagged (test_environment_screens.ClimateTests.test_freezing_is_flagged) ... ok
+test_global_mean_from_analytic_energy_balance (test_environment_screens.ClimateTests.test_global_mean_from_analytic_energy_balance) ... ok
+test_olr_is_an_assumption (test_environment_screens.ClimateTests.test_olr_is_an_assumption) ... ok
+test_timestep_convergence (test_environment_screens.ClimateTests.test_timestep_convergence) ... ok
+test_transport_conservative (test_environment_screens.ClimateTests.test_transport_conservative) ... ok
+test_water_damping (test_environment_screens.ClimateTests.test_water_damping) ... ok
+test_boundary_dependence_exposed (test_environment_screens.ColumnTests.test_boundary_dependence_exposed) ... ok
+test_conduction_flux_from_independent_temperature_gradient (test_environment_screens.ColumnTests.test_conduction_flux_from_independent_temperature_gradient) ... ok
+test_energy_boundary (test_environment_screens.ColumnTests.test_energy_boundary) ... ok
+test_grid_convergence (test_environment_screens.ColumnTests.test_grid_convergence) ... ok
+test_high_heating_domain_flag (test_environment_screens.ColumnTests.test_high_heating_domain_flag) ... ok
+test_invalid_heat (test_environment_screens.ColumnTests.test_invalid_heat) ... ok
+test_jeans_energy_matches_maxwell_integral (test_environment_screens.ColumnTests.test_jeans_energy_matches_maxwell_integral) ... ok
+test_knudsen_boundary (test_environment_screens.ColumnTests.test_knudsen_boundary) ... ok
+test_molecular_species_flux (test_environment_screens.ColumnTests.test_molecular_species_flux) ... ok
+test_spherical_hydrostatic_integral (test_environment_screens.ColumnTests.test_spherical_hydrostatic_integral) ... ok
+test_upper_temperature_is_solved (test_environment_screens.ColumnTests.test_upper_temperature_is_solved) ... ok
+test_convergence (test_environment_screens.OxygenTests.test_convergence) ... ok
+test_dark_solution_vs_small_steps (test_environment_screens.OxygenTests.test_dark_solution_vs_small_steps) ... ok
+test_infeasible_demand_is_exposed (test_environment_screens.OxygenTests.test_infeasible_demand_is_exposed) ... ok
+test_no_exchange_analytic (test_environment_screens.OxygenTests.test_no_exchange_analytic) ... ok
+test_oxygen_capacity_is_enforced (test_environment_screens.OxygenTests.test_oxygen_capacity_is_enforced) ... ok
+test_periodic_and_mass_balance (test_environment_screens.OxygenTests.test_periodic_and_mass_balance) ... ok
+test_changed_optical_archive_rejected (test_environment_screens.SpectralTests.test_changed_optical_archive_rejected) ... ok
+test_energy_ledger (test_environment_screens.SpectralTests.test_energy_ledger) ... ok
+test_gap_and_overlap_rejected (test_environment_screens.SpectralTests.test_gap_and_overlap_rejected) ... ok
+test_gap_energy_without_intraband_interpolation (test_environment_screens.SpectralTests.test_gap_energy_without_intraband_interpolation) ... ok
+test_historical_band_total_and_units (test_environment_screens.SpectralTests.test_historical_band_total_and_units) ... ok
+test_historical_bands_do_not_invent_response (test_environment_screens.SpectralTests.test_historical_bands_do_not_invent_response) ... ok
+test_invalid_transmission (test_environment_screens.SpectralTests.test_invalid_transmission) ... ok
+test_missing_input_rejected (test_environment_screens.SpectralTests.test_missing_input_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 39 tests in 0.275s
+
+OK

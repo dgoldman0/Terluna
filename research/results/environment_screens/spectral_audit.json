@@ -1,0 +1,40 @@
+{
+  "status": "BLOCKED_SPECTRUM_CHEMISTRY_CLOSURE",
+  "solar_irradiance_nm": [
+    202.0,
+    2729.9
+  ],
+  "titania_index_nm": [
+    120.18114100000001,
+    125122.7623
+  ],
+  "xray_model_min_energy_ev": 50.0,
+  "xray_longest_evaluated_nm": 24.796839679999998,
+  "uncovered_material_interval_nm": [
+    24.796839679999998,
+    120.18114100000001
+  ],
+  "missing": [
+    "Resolved solar EUV/FUV irradiance below 202 nm; historical integrated bands available separately",
+    "Optical response in the gap, with relevant material state",
+    "Species absorption/photoelectron heating/photochemical rates",
+    "Atomic transport and infrared cooling",
+    "Kinetic/momentum closure when molecular Jeans approximation fails"
+  ],
+  "consequence": "Visible transmission and Lyman-alpha opacity cannot determine total XUV heating or escape.",
+  "actual_inputs_inspected": true,
+  "input_sha256": {
+    "solar": "0ae235c6912f26773c0e9b71ea3924aaf8856c74a511dc07e86b60b3c1b88172",
+    "titania": "9b03947949e54cd98f58a989bd031a5fddb1a36a9d9f7fd64d5ff2bd68c2885c"
+  },
+  "source_archive_sha256": "38947474fefd3acc06bc9acdffe267953b770e04856322770f5233ac5c60994d",
+  "historical_band_gap_bounds": {
+    "total_irradiance_W_m2": 0.00464,
+    "gap_energy_lower_bound_W_m2": 0.00174,
+    "gap_energy_upper_bound_W_m2": 0.00379,
+    "lower_fraction": 0.375,
+    "upper_fraction": 0.8168103448275862,
+    "within_band_distribution_assumed": false
+  },
+  "historical_band_reference": "Ribas et al. Table 4, Sun column; 1993-based composite, not present-day resolved irradiance"
+}

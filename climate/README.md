@@ -1,15 +1,19 @@
 # Climate
 
-**Current material:** an executable scalar thermal-response calculation inside the [September feasibility model](../research/baselines/feasibility/model.py), with its original [18-case table](reference/thermal_response.csv).
+The original [scalar thermal-response table](reference/thermal_response.csv) and [September baseline](../research/baselines/feasibility/model.py) are preserved.
 
-It solves the periodic response of `C dT/dt + B T = F1 cos(omega t)` using imposed participating atmospheric heat capacity, water mixed-layer depth, a linear outgoing-radiation slope and the slow solar cycle. Temperature amplitude is a conditional response, not a geographical climate prediction.
+[cycle.py](cycle.py) adds a finite-volume latitude–longitude energy-balance model. It uses an equal-area spherical grid, moving sunlight, prescribed land/water heat capacities and a conservative diffusive heat-transport operator. An exact linear interval propagator and a periodic-boundary solve remove arbitrary initial-temperature/spin-up choices.
 
-**Missing:** a radiative-convective column, latitude-longitude heat transport, dynamically predicted winds, humidity, clouds, rainfall, persistent fog and storm statistics. None is represented as implemented.
+## Interpretation
 
-## Next work
+This is an uncalibrated thermal screen. Synthetic dry, concentrated-water and distributed-water maps are compared. Albedo, atmospheric participation, transport and a linear outgoing-radiation law are inputs. The global mean follows analytically from those inputs; a temperate mean is not independent evidence that a 1.2-atm lunar atmosphere produces it.
 
-Combine a small set of gas/spectrum/water scenarios with time-dependent land/water energy balances. Check periodic solutions against the current analytic case before adding transport. Compare heat-storage and transport timescales and test sensitivity to cloud/albedo assumptions. Couple to measured terrain and basin alternatives from [geography](../geography/).
+Moisture, clouds, winds, latent heat, freezing feedbacks, actual terrain and photochemistry remain outside the calculation. Outputs reaching freezing or far outside the reference temperature range are flagged. The reported 273–313 K fraction is a chosen grid-time diagnostic, not a habitability or liquid-water certification.
 
-A specialist GCM is a setup-and-benchmark candidate, not an installed or verified capability of this repository. Regional climate descriptions in seeds and historical training data remain proposals.
+The [54-case output](../research/results/environment_screens/climate_budget.csv) closes its discrete global energy balance and periodic condition. Timestep tests pass, while a 6x24 to 12x48 spatial comparison changes some coarse-cell averaged temperatures by about 2 K; spatial resolution uncertainty remains. [Findings](../research/findings.md) explain the exact checks and boundaries.
 
-Run `python research/baselines/feasibility/model.py --out research/runs/feasibility` from the repository root to reproduce the existing diagnostic with the other original cases. See [status](../research/status.json).
+## Next step
+
+Replace the assumed outgoing-radiation law with a calibrated vertical radiative-convective calculation, then add water/ice treatment and measured terrain. The present temperature/irradiance interface can supply biological requirement calculations, with all atmospheric and trait assumptions retained.
+
+Run `python research/run_environment_screens.py` from the repository root. This folder supplies no GCM weather prediction.

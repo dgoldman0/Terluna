@@ -1,0 +1,52 @@
+[
+  {
+    "lower_nm": 0.1,
+    "upper_nm": 2.0,
+    "irradiance_w_m2": 0.00015,
+    "transmission": null,
+    "atmospheric_absorptance": null,
+    "heat_fraction": null,
+    "absorption_radius_R": null,
+    "provenance": "Ribas et al. arXiv:astro-ph/0412253v1, Table 4 Sun column; historical composite"
+  },
+  {
+    "lower_nm": 2.0,
+    "upper_nm": 10.0,
+    "irradiance_w_m2": 0.0007,
+    "transmission": null,
+    "atmospheric_absorptance": null,
+    "heat_fraction": null,
+    "absorption_radius_R": null,
+    "provenance": "Ribas et al. arXiv:astro-ph/0412253v1, Table 4 Sun column; historical composite"
+  },
+  {
+    "lower_nm": 10.0,
+    "upper_nm": 36.0,
+    "irradiance_w_m2": 0.0020499999999999997,
+    "transmission": null,
+    "atmospheric_absorptance": null,
+    "heat_fraction": null,
+    "absorption_radius_R": null,
+    "provenance": "Ribas et al. arXiv:astro-ph/0412253v1, Table 4 Sun column; historical composite"
+  },
+  {
+    "lower_nm": 36.0,
+    "upper_nm": 92.0,
+    "irradiance_w_m2": 0.001,
+    "transmission": null,
+    "atmospheric_absorptance": null,
+    "heat_fraction": null,
+    "absorption_radius_R": null,
+    "provenance": "Ribas et al. arXiv:astro-ph/0412253v1, Table 4 Sun column; historical composite"
+  },
+  {
+    "lower_nm": 92.0,
+    "upper_nm": 118.0,
+    "irradiance_w_m2": 0.00074,
+    "transmission": null,
+    "atmospheric_absorptance": null,
+    "heat_fraction": null,
+    "absorption_radius_R": null,
+    "provenance": "Ribas et al. arXiv:astro-ph/0412253v1, Table 4 Sun column; historical composite"
+  }
+]

@@ -1,0 +1,9 @@
+intercepted_fraction,thermalization_fraction,deposited_heat_W_m2,origin
+1e-08,0.1,3.3036094092552107e-09,Inherited candidate shield exhaust kinetic power; imposed intercepted/thermalized fractions
+1e-08,1.0,3.303609409255211e-08,Inherited candidate shield exhaust kinetic power; imposed intercepted/thermalized fractions
+1e-07,0.1,3.303609409255211e-08,Inherited candidate shield exhaust kinetic power; imposed intercepted/thermalized fractions
+1e-07,1.0,3.3036094092552106e-07,Inherited candidate shield exhaust kinetic power; imposed intercepted/thermalized fractions
+1e-06,0.1,3.3036094092552106e-07,Inherited candidate shield exhaust kinetic power; imposed intercepted/thermalized fractions
+1e-06,1.0,3.3036094092552108e-06,Inherited candidate shield exhaust kinetic power; imposed intercepted/thermalized fractions
+1e-05,0.1,3.3036094092552116e-06,Inherited candidate shield exhaust kinetic power; imposed intercepted/thermalized fractions
+1e-05,1.0,3.3036094092552116e-05,Inherited candidate shield exhaust kinetic power; imposed intercepted/thermalized fractions

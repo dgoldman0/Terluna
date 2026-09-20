@@ -1,77 +1,42 @@
 # Terluna
 
-Research toward an open, living Moon, with a five-paper scholarly ensemble.
+Research toward constructing and sustaining an open, living Moon.
 
-**Start with the [research inventory](research/README.md), [condition register](research/status.json), and [core-first work plan](research/plan.md).** The [ensemble workspace](ensemble/) contains the accepted root and companion seeds and their editorial requirements.
+The project combines shared numerical research with a five-paper ensemble. The next full manuscript is **Constructing and Sustaining an Open Moon**: a grounded vision of a nearby world with diverse environments, living communities and ways of inhabiting space. Four companions develop the physical, biological, human and industrial arguments independently.
 
-Shared subject folders are [atmosphere](atmosphere/), [climate](climate/), [geography](geography/), [illumination](illumination/), [biosphere](biosphere/), [habitation](habitation/), [engineering](engineering/) and [protection](protection/). Each states what is available and what remains to be done. Existing calculations are conditional; numerical checks are distinct from physical validation.
+## Start here
 
-The historical training log below is preserved from the earlier repository. Its synthetic and fictional records remain separate from the research evidence.
+- [Current findings, equations and limits](research/findings.md)
+- [Research inventory](research/README.md) and [condition register](research/status.json)
+- [Five-paper ensemble and accepted seeds](ensemble/README.md)
+- [Core-first research plan](research/plan.md)
 
----
+## Available research
 
-## Training
+| Area | Available work | Evidence boundary |
+|---|---|---|
+| [Atmosphere](atmosphere/) | Historical baselines; a solved molecular thermal column; band-energy interface | Prescribed lower boundary; full spectral chemistry and kinetic escape remain open |
+| [Climate](climate/) | Conservative, periodic latitude–longitude energy-balance screen | Synthetic geography and uncalibrated radiation/transport; no weather or ice model |
+| [Biosphere](biosphere/) | Periodic carbon-storage theorem and model; oxygen budget with explicit shortfalls | Hypothetical functional traits; no life-cycle or ecosystem validation |
+| [Protection](protection/) | Optical, positioning, magnetic and renewal estimates | Component calculations; important EUV response/input gap documented |
+| [Engineering](engineering/) | Resource transport, growth and maintenance accounting | Conditional budgets; complete industrial and safety closure remains open |
+| [Geography](geography/), [illumination](illumination/), [habitation](habitation/) | Data leads, angular geometry and design requirements | Actual-terrain climates, visual appearance and settlement capacity still require work |
 
-### Round 1
+The [results](research/results/environment_screens/) contain numerical cases and approximation flags. Solving the selected equations establishes their conditional consequences. Environmental compatibility, biological persistence and engineering performance require additional evidence.
 
-Initial training was done on a 150 element sample of synthetic generated conversations about the foundations of the world, such as its history and current conditions. 
+## Run
 
-Input model: gpt-4o-mini-2024-07-18
+```sh
+python -m pip install -r research/requirements.txt
+OPENBLAS_NUM_THREADS=1 python -m unittest discover -s tests -v
+OPENBLAS_NUM_THREADS=1 python research/run_environment_screens.py
+python research/check.py
+```
 
-Training data: [terluna_conversations_150_fixed_with_system](training_data/foundation/terluna_conversations_150_fixed_with_system.jsonl)
+The new screens run with NumPy and SciPy. To inspect the original optical input ranges, restore the protection inputs or supply `--protection-archive /path/to/Lunar_Protection_Model.zip` to the screen runner. Without those inputs the audit explicitly records that their ranges were not inspected in that run. The band-heating interface rejects unspecified responses and spectral gaps.
 
-Epochs: 3, Batch size 1, LR multiplier: 1.8, Seed: 831949690
+Use ordinary filenames and Git history for ongoing research. The imported baselines, locked planning snapshot and accepted seeds retain their provenance. See [AGENTS.md](AGENTS.md) before making changes.
 
-Output model: ft:gpt-4o-mini-2024-07-18:personal:terluna-0:CNqdXsDV
+## Historical material
 
-Analysis: Responses were cut very short due to overfitting on the sample and the length of each entry in each sample being short. 
-
-### Round 2
-
-Constructed synthetic data set for varied length assistant outputs.
-
-Input model: ft:gpt-4o-mini-2024-07-18:personal:terluna-0:CNqdXsDV
-
-Training data: [longer_responses.jsonl](training_data/foundation/longer_responses.jsonl)
-
-Epochs: 3, Batch size: 1, LR multiplier: 1.8, Seed: 1903352333
-
-Output model: ft:gpt-4o-mini-2024-07-18:personal:terluna-0-lengthened:CO1otnQs
-
-Analysis: Far from perfect, but provides much longer responses and doesn't smash unrelated points together into a meaningless paragraph as much.
-
-### Round 3
-
-Constructed synthetic data by going back and forth with round 2 model to identify how it responded to various inqueries, and by providing it with various corrections to align more with the desired world craft. Designed as correction mode.
-
-Input model: ft:gpt-4o-mini-2024-07-18:personal:terluna-0-lengthened:CO1otnQs
-
-Training data: [correction_samples.jsonl](training_data/foundation/correction_mode/correction_samples.jsonl)
-
-Epochs: 3, Batch size: 1, LR multiplier: 1.8, Seed: 1767361027
-
-Output model: ft:gpt-4o-mini-2024-07-18:personal:terluna-0-correction-mode-added:CO6Xn6Ii
-
-Analysis: Provides some reasonable feedback and resistence against undesirable inputs. 
-
-### Round 4
-
-Adding more detailed history, using a combination back and forth with the round 3 model in regular and corrective mode, then transferring to agent for synthetic data generation.
-
-Input model: ft:gpt-4o-mini-2024-07-18:personal:terluna-0-correction-mode-added:CO6Xn6Ii
-
-Training data: [rough_draft.jsonl](training_data/history/rough_draft.jsonl) (previous version)
-
-Epochs: 3, Batch size: 1, LR multiplier: 1.8, Seed: 1014069983
-
-Output model: ft:gpt-4o-mini-2024-07-18:personal:terluna-0-draft-history:COBLmfBB
-
-Analysis: Training was simply too weak. Did not retain enough details, too many inconsistencies, and condensing of unrelated information, as with round 1.
-
-#### Round 4'
-
-Decided to adjust the system message to include a statement about being in historian mode. Increased epochs to 5.
-
-Output model: 
-
-Analysis: 
+[Training data](training_data/README.md) are deprecated synthetic worldbuilding records, retained for provenance. They are outside the scientific evidence and model-calibration workflow. Their historical log is preserved separately; no training records have been deleted.

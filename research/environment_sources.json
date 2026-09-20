@@ -1,0 +1,84 @@
+{
+  "status": "WORKING_RESEARCH_SOURCES; full local-document admission remains outstanding",
+  "version_date": "2026-09-20",
+  "external_documents": [
+    {
+      "id": "ribas_solar",
+      "title": "Evolution of the Solar Activity over Time and Effects on Planetary Atmospheres: I. High-Energy Irradiances",
+      "authors": "Ribas, Guinan, Guedel and Audard",
+      "version": "arXiv:astro-ph/0412253v1, 10 December 2004; journal 2005",
+      "url": "https://arxiv.org/pdf/astro-ph/0412253",
+      "inspected": "Sections 3.5 and 4.1 and Table 4 Sun column; table visually checked on PDF page 13",
+      "use": "Five integrated energy bands; explicit unit conversion; gap-energy bounds without within-band interpolation",
+      "boundary": "1993-based composite with complementary/inferred bands; 0.1–118 nm only; not present solar-cycle data or a resolved spectrum",
+      "local_original": null,
+      "full_document_read": false,
+      "admission": "BLOCKED_FULL_DOCUMENT_ARCHIVE_AND_READING"
+    },
+    {
+      "id": "tucker_pluto",
+      "title": "Thermally driven escape from Pluto’s atmosphere: a combined fluid/kinetic model",
+      "version": "arXiv:1111.2808v1; journal 2012",
+      "url": "https://arxiv.org/pdf/1111.2808",
+      "inspected": "Continuity/momentum/energy formulation and nitrogen transport parameters in Table 1; table pages visually inspected",
+      "use": "Energy/transport formulation comparison and nitrogen conductivity proxy",
+      "boundary": "Pluto nitrogen application; coefficient/unit conversion and extension to lunar mixture are explicit modelling assumptions, with sensitivity multipliers",
+      "local_original": null,
+      "full_document_read": false,
+      "admission": "BLOCKED_FULL_DOCUMENT_ARCHIVE_AND_READING"
+    },
+    {
+      "id": "tucker_lunar",
+      "title": "Lifetime of a transient atmosphere produced by Lunar Volcanism",
+      "version": "arXiv:2011.14545v1; journal 2021",
+      "url": "https://arxiv.org/pdf/2011.14545",
+      "inspected": "Thermal escape/exobase formulation, collision proxy and kinetic-regime discussion",
+      "use": "Comparison of hydrostatic/Jeans scope; inherited collision proxy and indicative kinetic review threshold",
+      "boundary": "Historical CO atmosphere; no N2/O2 lifetime or total escape prediction transferred",
+      "local_original": null,
+      "full_document_read": false,
+      "admission": "BLOCKED_FULL_DOCUMENT_ARCHIVE_AND_READING"
+    },
+    {
+      "id": "scialdone_starch",
+      "title": "Arabidopsis plants perform arithmetic division to prevent starvation at night",
+      "version": "arXiv:1306.5148, 2013",
+      "url": "https://arxiv.org/abs/1306.5148",
+      "inspected": "Abstract only; full PDF access attempt failed",
+      "use": "Future source lead on timing and starch reserves; no biological rates extracted or calibrated",
+      "boundary": "Terrestrial Arabidopsis evidence, not lunar long-night survival",
+      "local_original": null,
+      "full_document_read": false,
+      "admission": "DISCOVERY_LEAD_ONLY"
+    }
+  ],
+  "archive_sources": [
+    {
+      "name": "Lunar_Terraforming_Model.zip",
+      "sha256": "8c87621674742eeaa091e135ef763c6d0ed9404a616fb852c2e43f89c64fd46a",
+      "use": "Inherited constants/boundary comparison and direct rerun of nine original tables",
+      "state": "Opened, relevant implementations inspected, reproducibility tested; no new validation of its physical assumptions"
+    },
+    {
+      "name": "Lunar_Protection_Model.zip",
+      "sha256": "38947474fefd3acc06bc9acdffe267953b770e04856322770f5233ac5c60994d",
+      "use": "Exact optical data-range audit, original verifier, inherited shield exhaust-power sensitivity",
+      "state": "Opened; input hashes checked; model application range inspected; no full optimization rerun"
+    }
+  ],
+  "original_work": [
+    "Molecular spherical BVP and boundary-energy implementation",
+    "Periodic storage necessary/sufficient proof and O(N) algorithm",
+    "Finite oxygen-cap and demand-shortfall propagation",
+    "Conservative exact-periodic linear climate implementation",
+    "Synthetic parameter sweeps and finite-band gap-energy bounds"
+  ],
+  "parameter_evidence": {
+    "carbon_traits": "Hypothetical dimensionless functional parameters; no measured species assignment",
+    "oxygen": "Hypothetical saturation/cap/exchange/demand/threshold",
+    "climate": "Synthetic water maps and uncalibrated OLR/transport/participation",
+    "thermal": "Prescribed lower profile and molecular mixture; nitrogen conductivity and collision proxies; net sensible heat imposed",
+    "band_response": "Historical integrated irradiance plus hypothetical response factors; missing chemistry remains blocked"
+  },
+  "network_access": "Web tool supplied text and PDF screenshots; container original-document retrieval and GitHub CLI were blocked by DNS. No complete outside source copies redistributed."
+}

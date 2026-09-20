@@ -1,6 +1,6 @@
 {
   "updated": "2026-09-20",
-  "base_commit": "0d68bdf544bff2a11b19158a68a2c493a2d443a9",
+  "base_commit": "79a60a1a51b4552ac9ae8e8bb295b567d9254995",
   "next_manuscript": "cef466e6-d9f8",
   "principle": "Each topic spans the open Moon; the root opening scene is one illustration",
   "check_record": "checks.json",
@@ -9,32 +9,39 @@
   "topics": [
     {
       "topic": "atmosphere",
-      "condition": "conditional_models; September numerical tests rerun; April not rerun",
+      "condition": "solved_molecular_thermal_limit; full_spectral_chemical_closure_blocked",
       "material": [
         "../atmosphere/sim/sim1.py",
         "baselines/feasibility/model.py",
-        "../atmosphere/reference/"
+        "../atmosphere/reference/",
+        "../atmosphere/thermal_column.py",
+        "../atmosphere/spectral_interface.py",
+        "results/environment_screens/molecular_columns.csv"
       ],
       "unresolved": [
         "self-consistent spectrum/chemistry/energy/outflow",
         "composition and exobase differences",
         "water supply to escape"
       ],
-      "next_session_task": "Reconcile assumptions and boundary conditions before a coupled reduced column."
+      "next_session_task": "Obtain EUV response and resolved flux; implement species heating/chemistry/cooling and atomic/kinetic transport with calibrated lower boundary."
     },
     {
       "topic": "climate",
-      "condition": "scalar_analytic_diagnostic",
+      "condition": "periodic_conservative_spatial_linear_screen; uncalibrated",
       "material": [
         "../climate/reference/thermal_response.csv",
-        "baselines/feasibility/model.py"
+        "baselines/feasibility/model.py",
+        "../climate/cycle.py",
+        "results/environment_screens/climate_budget.csv"
       ],
       "unresolved": [
-        "spatial transport",
-        "radiative-convective structure",
-        "clouds and weather"
+        "radiative-convective calibration",
+        "moisture/ice/clouds",
+        "dynamical heat transport and weather",
+        "actual terrain",
+        "spatial resolution sensitivity"
       ],
-      "next_session_task": "Extend the thermal diagnostic with explicit land/water geography and time-dependent transport."
+      "next_session_task": "Calibrate radiation and lower-atmospheric structure, add freezing/latent heat and measured terrain before climate claims."
     },
     {
       "topic": "geography",
@@ -64,17 +71,20 @@
     },
     {
       "topic": "biosphere",
-      "condition": "theory_and_source_leads; no executable biological model recovered",
+      "condition": "periodic_carbon_and_oxygen_requirement_models; hypothetical_traits",
       "material": [
         "../biosphere/README.md",
-        "../ensemble/papers/74a946e2-8f98/seed-02.md"
+        "../ensemble/papers/74a946e2-8f98/seed-02.md",
+        "../biosphere/long_night.py",
+        "results/environment_screens/carbon_budget.csv",
+        "results/environment_screens/oxygen_budget.csv"
       ],
       "unresolved": [
         "complete life cycles",
         "trait calibration",
         "coupled nutrient/energy budgets"
       ],
-      "next_session_task": "Build long-night reserves and aquatic oxygen models alongside the evidence matrix."
+      "next_session_task": "Calibrate trait and exchange ranges from complete sources; add growth/nutrient/ecological coupling and empirical life-cycle requirements."
     },
     {
       "topic": "habitation",
@@ -106,20 +116,25 @@
     },
     {
       "topic": "protection",
-      "condition": "component_model; pinned external inputs required for clean checkout",
+      "condition": "historical_component_model; spectrum/material_gap_identified",
       "material": [
         "../protection/model.py",
         "../protection/verify.py",
         "../protection/results/",
-        "../protection/inputs.json"
+        "../protection/inputs.json",
+        "results/environment_screens/spectral_audit.json",
+        "results/environment_screens/plume_heat_interface.csv"
       ],
       "unresolved": [
+        "resolved irradiance and material response around 25–120 nm; actual absorption and heat fractions",
         "coupled atmosphere and clean plumes",
         "full ephemerides and flexible structures",
         "plasma interaction and dose",
         "material aging"
       ],
-      "next_session_task": "Restore inputs, then couple spectrum to atmosphere while retaining component limitations."
+      "next_session_task": "Close the EUV material/irradiance gap; constrain absorbed plume fractions and couple actual heating to atmospheric physics."
     }
-  ]
+  ],
+  "new_check_record": "environment_checks.json",
+  "findings": "findings.md"
 }

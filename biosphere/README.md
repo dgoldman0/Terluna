@@ -1,21 +1,20 @@
 # Biosphere
 
-**Current condition:** biological/ecological reasoning, source leads and candidate environments; no recovered executable community, nutrient-cycle or multigenerational model. The [accepted companion seed](../ensemble/papers/74a946e2-8f98/seed-02.md) owns organism-level viability, human biological constraints, ecology and biogeochemical persistence together.
+The [accepted companion seed](../ensemble/papers/74a946e2-8f98/seed-02.md) owns biological viability, human biological requirements, ecology and biogeochemical persistence across the whole Moon.
 
-The current research portfolio includes long-night reserves and dormancy, prepared substrates and soils, aquatic production and oxygen, detrital/subsurface communities, varied plant architecture and aerial exchange. Megaforests are one case within that wider scope; illustrations and proposed dimensions are not biological results.
+## Executable requirements models
 
-## What can be built in sessions
+[long_night.py](long_night.py) now provides two bounded calculations:
 
-1. Producer-reserve/respiration models through repeated light-dark cycles, with reproduction and recovery requirements stated separately.
-2. Aquatic oxygen/productivity and mixing boxes, including supply and consumption through darkness.
-3. Soil, nutrient and detrital compartment models with accessible and inaccessible reservoirs.
-4. Coupled plant hydraulic/structural/light/water budgets for several vegetation architectures.
-5. An empirical evidence matrix distinguishing organism, gravity, exposure duration, complete life cycle and generation count.
+- Periodic carbon reserves: cycle-integrated surplus and the maximum cumulative deficit determine the minimum reservoir capacity for a prescribed production/demand cycle. The necessary-and-sufficient condition is proved under its model assumptions in [findings](../research/findings.md), with an O(N) implementation tested against exhaustive searches.
+- Mixed aquatic oxygen: production, respiration, exchange and a finite concentration ceiling are balanced exactly for each interval. Outgassing and unmet aerobic demand are reported explicitly. A mathematical periodic state can still fail the selected concentration or demand criteria.
 
-Parameters grounded in experiments remain distinct from proposed engineered traits. Such models can identify requirements and failure regimes; they cannot supply observations of lifelong health or reproduction at lunar gravity.
+Trait rates, suppression, Q10, exchange coefficients, dissolved-oxygen ceiling and thresholds are hypothetical inputs. Units and every parameter are recorded. The models identify requirements; their outputs are not survival, health, reproduction, nutrient-cycle or ecosystem evidence. Excess carbon is unallocated surplus, not proven growth. The temperature/irradiance interface demonstrates how a climate trace alters these requirements; tissue injury and photosynthetic saturation remain unmodelled.
 
-## Literature and archives
+[Results](../research/results/environment_screens/) include 180 carbon cases, 20 oxygen cases and 18 climate-to-carbon demonstrations. Species-level calibration and long-night experiments are the next evidence step.
 
-The [existing seed source manifest](../ensemble/seed_records/companion-seeds-02/source_manifest.json) contains provisional source records. Apollo-regolith plant experiments and the partial-gravity mouse study are leads with their original experimental boundaries; full-document manuscript admission remains outstanding.
+## Remaining biological work
 
-Earlier biological drafts, the July knowledge bundle and the September megaforest discussion remain catalogued in [archive status](../research/archive_status.md). The next step is evidence extraction plus small models across several biomes, not another forest-only interpretation of the dream paper.
+The wider portfolio retains soils, aquatic communities, detrital/subsurface habitats, varied plant architectures, aerial exchange and human developmental requirements. Nutrient compartments, ecological interactions, plant hydraulics, structural support and complete life cycles still need separate models and empirical tests. Megaforests remain one candidate within this scope.
+
+Run `python -m unittest discover -s tests -v` and `python research/run_environment_screens.py` from the root. Provisional research sources and their actual access status are in [environment_sources.json](../research/environment_sources.json); older sources and archives remain linked through [archive_status.md](../research/archive_status.md).
