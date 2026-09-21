@@ -1,0 +1,348 @@
+{
+  "atmosphere": {
+    "name": "moon_no_ozone",
+    "radius_m": 1737400.0,
+    "scale_height_m": 48427.90123456789,
+    "density_scale": 1.2,
+    "ozone_du": 0.0,
+    "ground_albedo": 0.1,
+    "top_scale_heights": 10.0,
+    "sun_radius_deg": 0.26666666666666666,
+    "visible_filter": 1.0
+  },
+  "quality": "standard",
+  "history": [
+    {
+      "order": 1,
+      "maximum_increment": 1.0,
+      "ground_max_fraction": 1.0,
+      "seconds": 9.877056360244751
+    },
+    {
+      "order": 2,
+      "maximum_increment": 0.4133437682859877,
+      "ground_max_fraction": 0.7122119738533894,
+      "seconds": 13.83833384513855
+    },
+    {
+      "order": 3,
+      "maximum_increment": 0.23464114809329056,
+      "ground_max_fraction": 0.5170239873610255,
+      "seconds": 17.89713764190674
+    },
+    {
+      "order": 4,
+      "maximum_increment": 0.1543700888476374,
+      "ground_max_fraction": 0.3947341856729144,
+      "seconds": 21.76358461380005
+    },
+    {
+      "order": 5,
+      "maximum_increment": 0.11517753961965319,
+      "ground_max_fraction": 0.31150887557599855,
+      "seconds": 25.555777072906494
+    },
+    {
+      "order": 6,
+      "maximum_increment": 0.09056278144909541,
+      "ground_max_fraction": 0.25109359705889134,
+      "seconds": 29.516713619232178
+    },
+    {
+      "order": 7,
+      "maximum_increment": 0.07294282341349326,
+      "ground_max_fraction": 0.20539642827983454,
+      "seconds": 33.42094540596008
+    },
+    {
+      "order": 8,
+      "maximum_increment": 0.05971528835731968,
+      "ground_max_fraction": 0.16989274908581106,
+      "seconds": 37.40878438949585
+    },
+    {
+      "order": 9,
+      "maximum_increment": 0.049169303047226005,
+      "ground_max_fraction": 0.14178780342153696,
+      "seconds": 41.32397699356079
+    },
+    {
+      "order": 10,
+      "maximum_increment": 0.04079083631180021,
+      "ground_max_fraction": 0.11922584178354176,
+      "seconds": 45.27126383781433
+    },
+    {
+      "order": 11,
+      "maximum_increment": 0.033815401738912995,
+      "ground_max_fraction": 0.10091039390161338,
+      "seconds": 49.178287982940674
+    },
+    {
+      "order": 12,
+      "maximum_increment": 0.02803775415364053,
+      "ground_max_fraction": 0.08590266027312511,
+      "seconds": 53.00866460800171
+    },
+    {
+      "order": 13,
+      "maximum_increment": 0.023347775963193755,
+      "ground_max_fraction": 0.0735050746852113,
+      "seconds": 56.84750461578369
+    },
+    {
+      "order": 14,
+      "maximum_increment": 0.019510373484249256,
+      "ground_max_fraction": 0.06318930772194385,
+      "seconds": 60.73082637786865
+    },
+    {
+      "order": 15,
+      "maximum_increment": 0.016357268621190666,
+      "ground_max_fraction": 0.05454927263514062,
+      "seconds": 64.68897867202759
+    },
+    {
+      "order": 16,
+      "maximum_increment": 0.013748568490342691,
+      "ground_max_fraction": 0.047269130525635965,
+      "seconds": 69.15380454063416
+    },
+    {
+      "order": 17,
+      "maximum_increment": 0.011576242990591875,
+      "ground_max_fraction": 0.041100790991388705,
+      "seconds": 73.44684267044067
+    },
+    {
+      "order": 18,
+      "maximum_increment": 0.009761537771407319,
+      "ground_max_fraction": 0.035847694120350604,
+      "seconds": 77.35355138778687
+    },
+    {
+      "order": 19,
+      "maximum_increment": 0.008241522503955804,
+      "ground_max_fraction": 0.03135289614295417,
+      "seconds": 81.43612480163574
+    },
+    {
+      "order": 20,
+      "maximum_increment": 0.006964934830757588,
+      "ground_max_fraction": 0.027490186182458676,
+      "seconds": 85.9402482509613
+    },
+    {
+      "order": 21,
+      "maximum_increment": 0.006094565171543863,
+      "ground_max_fraction": 0.024157384223898393,
+      "seconds": 90.08276510238647
+    },
+    {
+      "order": 22,
+      "maximum_increment": 0.005348027039459144,
+      "ground_max_fraction": 0.021271235327184765,
+      "seconds": 94.49370074272156
+    },
+    {
+      "order": 23,
+      "maximum_increment": 0.004696320947831939,
+      "ground_max_fraction": 0.018763487647833203,
+      "seconds": 98.51860475540161
+    },
+    {
+      "order": 24,
+      "maximum_increment": 0.004126535001076431,
+      "ground_max_fraction": 0.016577857894055078,
+      "seconds": 102.34626245498657
+    },
+    {
+      "order": 25,
+      "maximum_increment": 0.0036279334836248314,
+      "ground_max_fraction": 0.014667668014941931,
+      "seconds": 106.63611268997192
+    },
+    {
+      "order": 26,
+      "maximum_increment": 0.003191110400311398,
+      "ground_max_fraction": 0.012993993474612954,
+      "seconds": 110.58625745773315
+    },
+    {
+      "order": 27,
+      "maximum_increment": 0.002807836822125575,
+      "ground_max_fraction": 0.0115242040571654,
+      "seconds": 114.77866411209106
+    },
+    {
+      "order": 28,
+      "maximum_increment": 0.002471310880045601,
+      "ground_max_fraction": 0.010230807677160595,
+      "seconds": 118.68744492530823
+    },
+    {
+      "order": 29,
+      "maximum_increment": 0.002175653075206772,
+      "ground_max_fraction": 0.009090529393955302,
+      "seconds": 122.46305203437805
+    },
+    {
+      "order": 30,
+      "maximum_increment": 0.0019157671789486422,
+      "ground_max_fraction": 0.00808357395684877,
+      "seconds": 126.792964220047
+    },
+    {
+      "order": 31,
+      "maximum_increment": 0.0016872253227481226,
+      "ground_max_fraction": 0.007193032276401786,
+      "seconds": 130.65646696090698
+    },
+    {
+      "order": 32,
+      "maximum_increment": 0.0014861723872489636,
+      "ground_max_fraction": 0.006404401308692582,
+      "seconds": 134.50715351104736
+    },
+    {
+      "order": 33,
+      "maximum_increment": 0.0013092459229458169,
+      "ground_max_fraction": 0.005705193729097908,
+      "seconds": 138.35619974136353
+    },
+    {
+      "order": 34,
+      "maximum_increment": 0.0011535086747439017,
+      "ground_max_fraction": 0.005084619021814525,
+      "seconds": 142.1818242073059
+    },
+    {
+      "order": 35,
+      "maximum_increment": 0.0010163914155249362,
+      "ground_max_fraction": 0.004533321631103395,
+      "seconds": 145.976646900177
+    },
+    {
+      "order": 36,
+      "maximum_increment": 0.0008956442747889701,
+      "ground_max_fraction": 0.004043164912516497,
+      "seconds": 149.93396759033203
+    },
+    {
+      "order": 37,
+      "maximum_increment": 0.0007892951167850755,
+      "ground_max_fraction": 0.003607052011531097,
+      "seconds": 153.95187211036682
+    },
+    {
+      "order": 38,
+      "maximum_increment": 0.0006956138068359035,
+      "ground_max_fraction": 0.0032187766506040797,
+      "seconds": 157.77746176719666
+    },
+    {
+      "order": 39,
+      "maximum_increment": 0.000613081425659429,
+      "ground_max_fraction": 0.0028728982494613357,
+      "seconds": 161.7350208759308
+    },
+    {
+      "order": 40,
+      "maximum_increment": 0.0005403636647488721,
+      "ground_max_fraction": 0.0025646369323831233,
+      "seconds": 165.61292815208435
+    },
+    {
+      "order": 41,
+      "maximum_increment": 0.00047628777266648064,
+      "ground_max_fraction": 0.002289784862310225,
+      "seconds": 169.3837170600891
+    },
+    {
+      "order": 42,
+      "maximum_increment": 0.00041982253092556554,
+      "ground_max_fraction": 0.0020446310395870375,
+      "seconds": 173.15713119506836
+    },
+    {
+      "order": 43,
+      "maximum_increment": 0.0003700608253459297,
+      "ground_max_fraction": 0.0018258972549864351,
+      "seconds": 177.08468985557556
+    },
+    {
+      "order": 44,
+      "maximum_increment": 0.00032620444917776917,
+      "ground_max_fraction": 0.0016306833244977633,
+      "seconds": 180.91832423210144
+    },
+    {
+      "order": 45,
+      "maximum_increment": 0.00028755083154709493,
+      "ground_max_fraction": 0.0014564200819902507,
+      "seconds": 184.8439862728119
+    },
+    {
+      "order": 46,
+      "maximum_increment": 0.00025348143166795047,
+      "ground_max_fraction": 0.0013008288844534315,
+      "seconds": 188.73459720611572
+    },
+    {
+      "order": 47,
+      "maximum_increment": 0.00022345157793184404,
+      "ground_max_fraction": 0.0011618866079320038,
+      "seconds": 192.5683388710022
+    },
+    {
+      "order": 48,
+      "maximum_increment": 0.00019698156307500903,
+      "ground_max_fraction": 0.0010377952920867589,
+      "seconds": 196.58808779716492
+    },
+    {
+      "order": 49,
+      "maximum_increment": 0.0001736488334223871,
+      "ground_max_fraction": 0.0009269557365616119,
+      "seconds": 200.60031700134277
+    },
+    {
+      "order": 50,
+      "maximum_increment": 0.00015308113271659914,
+      "ground_max_fraction": 0.0008279444700957495,
+      "seconds": 204.52215766906738
+    },
+    {
+      "order": 51,
+      "maximum_increment": 0.00013495048004936883,
+      "ground_max_fraction": 0.0007394936091483561,
+      "seconds": 208.3306770324707
+    },
+    {
+      "order": 52,
+      "maximum_increment": 0.00011896787754620924,
+      "ground_max_fraction": 0.0006604732010806955,
+      "seconds": 212.21385884284973
+    },
+    {
+      "order": 53,
+      "maximum_increment": 0.00010487865721022391,
+      "ground_max_fraction": 0.0005898757111265519,
+      "seconds": 216.11749029159546
+    },
+    {
+      "order": 54,
+      "maximum_increment": 9.245838810657242e-05,
+      "ground_max_fraction": 0.0005268023652186702,
+      "seconds": 220.16067600250244
+    },
+    {
+      "order": 55,
+      "maximum_increment": 8.150927518787246e-05,
+      "ground_max_fraction": 0.00047045110440412867,
+      "seconds": 224.14874076843262
+    }
+  ],
+  "wave_step": 20.0,
+  "elapsed_seconds": 224.1510090827942
+}

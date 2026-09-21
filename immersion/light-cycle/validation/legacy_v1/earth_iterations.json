@@ -1,0 +1,102 @@
+{
+  "atmosphere": {
+    "name": "earth",
+    "radius_m": 6371000.0,
+    "scale_height_m": 8000.0,
+    "density_scale": 1.0,
+    "ozone_du": 300.0,
+    "ground_albedo": 0.1,
+    "top_scale_heights": 10.0,
+    "sun_radius_deg": 0.26666666666666666,
+    "visible_filter": 1.0
+  },
+  "quality": "standard",
+  "history": [
+    {
+      "order": 1,
+      "maximum_increment": 1.0,
+      "ground_max_fraction": 1.0,
+      "seconds": 15.691084384918213
+    },
+    {
+      "order": 2,
+      "maximum_increment": 0.3037176924760354,
+      "ground_max_fraction": 1.0,
+      "seconds": 19.97829294204712
+    },
+    {
+      "order": 3,
+      "maximum_increment": 0.11567467797187438,
+      "ground_max_fraction": 0.9902186591361755,
+      "seconds": 23.255580186843872
+    },
+    {
+      "order": 4,
+      "maximum_increment": 0.04713884570929476,
+      "ground_max_fraction": 0.4375906007564961,
+      "seconds": 27.576414585113525
+    },
+    {
+      "order": 5,
+      "maximum_increment": 0.019735270558274464,
+      "ground_max_fraction": 0.2039107896319403,
+      "seconds": 31.172516345977783
+    },
+    {
+      "order": 6,
+      "maximum_increment": 0.008384672255108359,
+      "ground_max_fraction": 0.09924793331544672,
+      "seconds": 35.3388032913208
+    },
+    {
+      "order": 7,
+      "maximum_increment": 0.003941036726367249,
+      "ground_max_fraction": 0.04941360896359892,
+      "seconds": 39.14040422439575
+    },
+    {
+      "order": 8,
+      "maximum_increment": 0.001856132407420815,
+      "ground_max_fraction": 0.024903914246107176,
+      "seconds": 43.219346046447754
+    },
+    {
+      "order": 9,
+      "maximum_increment": 0.0008749463621874589,
+      "ground_max_fraction": 0.012632726340291507,
+      "seconds": 47.27346730232239
+    },
+    {
+      "order": 10,
+      "maximum_increment": 0.00041258543893222865,
+      "ground_max_fraction": 0.00642888903214963,
+      "seconds": 51.16136288642883
+    },
+    {
+      "order": 11,
+      "maximum_increment": 0.00019458743699307936,
+      "ground_max_fraction": 0.0032763574535410174,
+      "seconds": 55.324185371398926
+    },
+    {
+      "order": 12,
+      "maximum_increment": 9.177935144512961e-05,
+      "ground_max_fraction": 0.0016704019750824158,
+      "seconds": 58.57130217552185
+    },
+    {
+      "order": 13,
+      "maximum_increment": 4.329001373484052e-05,
+      "ground_max_fraction": 0.0008515007313992314,
+      "seconds": 62.75503087043762
+    },
+    {
+      "order": 14,
+      "maximum_increment": 2.0419065600744237e-05,
+      "ground_max_fraction": 0.00043386793741912827,
+      "seconds": 66.24192500114441
+    }
+  ],
+  "wave_step": 20.0,
+  "elapsed_seconds": 66.24339318275452
+}

@@ -1,0 +1,34 @@
+{
+  "ready": {
+    "software": true,
+    "phase": 0,
+    "angle": 90,
+    "moon": 94158.48781715755,
+    "earth": 123364.69181545767,
+    "draws": 3
+  },
+  "page_errors": [],
+  "external_requests": [],
+  "controls_outside_mobile": [],
+  "earth_clock_playback": {
+    "wall_seconds": 3.8010102620000907,
+    "end_phase": 0.0022452777777777757
+  },
+  "loop_phase": 0.7497999999999871,
+  "checked": [
+    "offline loading",
+    "actual noon at +90 degrees",
+    "all cycle quarters",
+    "east/west reversal",
+    "weather presets",
+    "custom cloud and visibility settings",
+    "Earth/Moon comparison",
+    "ozone setting",
+    "camera exposure",
+    "clock switching",
+    "play/pause",
+    "looping",
+    "mobile layout"
+  ],
+  "browser": "Chromium page.set_content: software fallback; file navigation disabled by environment policy; GPU renders separately in EGL"
+}

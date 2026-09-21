@@ -1,0 +1,118 @@
+{
+  "sky_sun_elevation_deg": [
+    -90,
+    90
+  ],
+  "sun_samples": 174,
+  "directional_samples": [
+    81,
+    65
+  ],
+  "spectral_wavelengths_nm": [
+    380,
+    400,
+    420,
+    440,
+    460,
+    480,
+    500,
+    520,
+    540,
+    560,
+    580,
+    600,
+    620,
+    640,
+    660,
+    680,
+    700,
+    720,
+    740,
+    760,
+    780,
+    800
+  ],
+  "unit_tests": 41,
+  "unit_tests_passed": true,
+  "noon": {
+    "earth": {
+      "total_lux": 123364.69181545767,
+      "direct_lux": 115845.78378726826,
+      "diffuse_lux": 7518.908028189429,
+      "scattering_orders": 14,
+      "last_order_ground_fraction": 0.0004353093187656848
+    },
+    "moon": {
+      "total_lux": 94158.48781715754,
+      "direct_lux": 60481.28695841863,
+      "diffuse_lux": 33677.200858738914,
+      "scattering_orders": 55,
+      "last_order_ground_fraction": 0.0004711556439605627
+    },
+    "moon_no_ozone": {
+      "total_lux": 96954.16496854117,
+      "direct_lux": 62263.40705119941,
+      "diffuse_lux": 34690.75791734176,
+      "scattering_orders": 55,
+      "last_order_ground_fraction": 0.0004711822393920258
+    }
+  },
+  "new_independent_noon_checks": 6,
+  "noon_comparison_max_abs_relative_difference": 0.007847722111451336,
+  "noon_comparison_max_abs_standard_errors": 2.6063290431626016,
+  "legacy_global_lunar_energy_residual_up_to": 0.046,
+  "legacy_global_residual_resolved": false,
+  "weather_validation": "Illustrative reduced optical weather; no empirical or coupled-climate validation",
+  "browser": {
+    "ready": {
+      "software": true,
+      "phase": 0,
+      "angle": 90,
+      "moon": 94158.48781715755,
+      "earth": 123364.69181545767,
+      "draws": 3
+    },
+    "page_errors": [],
+    "external_requests": [],
+    "controls_outside_mobile": [],
+    "earth_clock_playback": {
+      "wall_seconds": 3.8010102620000907,
+      "end_phase": 0.0022452777777777757
+    },
+    "loop_phase": 0.7497999999999871,
+    "checked": [
+      "offline loading",
+      "actual noon at +90 degrees",
+      "all cycle quarters",
+      "east/west reversal",
+      "weather presets",
+      "custom cloud and visibility settings",
+      "Earth/Moon comparison",
+      "ozone setting",
+      "camera exposure",
+      "clock switching",
+      "play/pause",
+      "looping",
+      "mobile layout"
+    ],
+    "browser": "Chromium page.set_content: software fallback; file navigation disabled by environment policy; GPU renders separately in EGL"
+  },
+  "gpu_shader": {
+    "renderer": "llvmpipe (LLVM 19.1.7, 256 bits)",
+    "version": "OpenGL ES 3.2 Mesa 25.0.7-2",
+    "vert": {
+      "compiled": true,
+      "log": ""
+    },
+    "frag": {
+      "compiled": true,
+      "log": ""
+    },
+    "link": {
+      "success": true,
+      "log": ""
+    }
+  },
+  "checked_shader_sha256": "add82b128ad5764d19806da0cbf137c0677140542eb6e4dfe511ebbd646fc609",
+  "numerical_check_log": "full_cycle_unit_tests.txt"
+}

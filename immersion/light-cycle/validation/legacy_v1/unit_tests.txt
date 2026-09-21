@@ -1,0 +1,26 @@
+test_absorbing_segment_account (test_solver.GeometryAndTransport.test_absorbing_segment_account) ... ok
+test_bilinear_interpolation (test_solver.GeometryAndTransport.test_bilinear_interpolation) ... ok
+test_body_shadow (test_solver.GeometryAndTransport.test_body_shadow) ... ok
+test_cie_peak (test_solver.GeometryAndTransport.test_cie_peak) ... ok
+test_column_ratio (test_solver.GeometryAndTransport.test_column_ratio) ... ok
+test_disk_contact_monotone (test_solver.GeometryAndTransport.test_disk_contact_monotone) ... ok
+test_earth_tangent_asymptotic (test_solver.GeometryAndTransport.test_earth_tangent_asymptotic) ... ok
+test_equal_energy_color (test_solver.GeometryAndTransport.test_equal_energy_color) ... ok
+test_lunar_clock (test_solver.GeometryAndTransport.test_lunar_clock) ... ok
+test_ozone_is_bounded (test_solver.GeometryAndTransport.test_ozone_is_bounded) ... ok
+test_quadrature_full_sphere (test_solver.GeometryAndTransport.test_quadrature_full_sphere) ... ok
+test_rayleigh_isotropic_field (test_solver.GeometryAndTransport.test_rayleigh_isotropic_field) ... ok
+test_rayleigh_phase_normalization (test_solver.GeometryAndTransport.test_rayleigh_phase_normalization) ... ok
+test_segment_conservation (test_solver.GeometryAndTransport.test_segment_conservation) ... ok
+test_solar_disk_full_and_hidden (test_solver.GeometryAndTransport.test_solar_disk_full_and_hidden) ... ok
+test_solar_half_disk_in_vacuum (test_solver.GeometryAndTransport.test_solar_half_disk_in_vacuum) ... ok
+test_upper_ray (test_solver.GeometryAndTransport.test_upper_ray) ... ok
+test_vacuum (test_solver.GeometryAndTransport.test_vacuum) ... ok
+test_vertical_boundary (test_solver.GeometryAndTransport.test_vertical_boundary) ... ok
+test_vertical_gas_column (test_solver.GeometryAndTransport.test_vertical_gas_column) ... ok
+test_vertical_ozone_column (test_solver.GeometryAndTransport.test_vertical_ozone_column) ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 2.163s
+
+OK

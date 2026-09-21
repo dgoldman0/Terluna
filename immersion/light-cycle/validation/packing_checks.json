@@ -1,0 +1,17 @@
+[
+  {
+    "world": "earth",
+    "maximum_significant_relative_quantization": 0.00048770211865394264,
+    "atlas_sha256": "e690d755c2b67ad3dac281cc6442eb001337fabb1a80b6e79b517ed8dd9b9bec"
+  },
+  {
+    "world": "moon",
+    "maximum_significant_relative_quantization": 0.0004879441475753204,
+    "atlas_sha256": "bf4678b7e86c28f3869f25f441787ce4ffb20cf338f50ac95b40124a1a15afb3"
+  },
+  {
+    "world": "moon_no_ozone",
+    "maximum_significant_relative_quantization": 0.00048755205065544656,
+    "atlas_sha256": "2c4e3bc47b8411f6e3447c21fef4523c24f7e55995747961b3352538ef00af27"
+  }
+]

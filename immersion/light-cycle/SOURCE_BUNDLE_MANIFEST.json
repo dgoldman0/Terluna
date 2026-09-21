@@ -1,0 +1,231 @@
+{
+  "format": "Open Moon full-cycle source bundle 2",
+  "entrypoint": "Open_Moon_Full_Cycle.html",
+  "scope": "Prescribed molecular atmosphere over a full equatorial solar cycle; illustrative weather and local fixed-viewpoint scenery",
+  "files": {
+    "LICENSES.txt": {
+      "bytes": 2056,
+      "sha256": "3485781b0fbf45812fcc90c7e89e2791c3dddf19098b36d4dc2208be0b874092"
+    },
+    "METHODS.md": {
+      "bytes": 8656,
+      "sha256": "94750dc42e30e89421ab45539d27973e6629fbdc7c41ccd24d333fc4b4d13091"
+    },
+    "Open_Moon_Full_Cycle.html": {
+      "bytes": 15566289,
+      "sha256": "33ee6c9c1127a7e69a3479b457475d71bde218bfe7d2485a772631b63dda5e11"
+    },
+    "README.md": {
+      "bytes": 4658,
+      "sha256": "722622f2027c4cc818da9daccb7569f805b3c501e3ad50db1052eecc27b7882f"
+    },
+    "SOURCES.md": {
+      "bytes": 4694,
+      "sha256": "67e8180751f60bf7b48097cbc4d87845225aa56b8deddcb655e50890405a2ef7"
+    },
+    "browser_cycle_check.py": {
+      "bytes": 5574,
+      "sha256": "88a1ca799465f2214d5633f609acfe9f9c97bf22973f196520e3f28efc6e6acd"
+    },
+    "build_cycle.py": {
+      "bytes": 3909,
+      "sha256": "ea8eb333f5198f5d030bbc65b88f283bdaf4cc6fcc062851ccc0ad2d61af16cf"
+    },
+    "calculate_full_cycle.py": {
+      "bytes": 164,
+      "sha256": "27df90b0f190fa9501723d88be9002f461eba4459b0b3e1513283b36d35cf460"
+    },
+    "check_noon.py": {
+      "bytes": 774,
+      "sha256": "b3d85db5efd300220d5d7d3cdf2c15ed466a4338c90e93be5a26c18c8c48f9d1"
+    },
+    "cycle.js": {
+      "bytes": 30238,
+      "sha256": "0771930cdcaecbe206c77c53dabbb404a9c092815dbac720124ec489f92e0824"
+    },
+    "cycle.template.html": {
+      "bytes": 20841,
+      "sha256": "da30e8b613b97b1ba0938634bc3d7242e0bb3048eae8b5ef288a845c280a7287"
+    },
+    "data/brightness.csv": {
+      "bytes": 11446,
+      "sha256": "f5c8b79aeb65739e2b90cfd52b6dc1ccfea5892f068678c1dbafa1681986a28e"
+    },
+    "data/earth_atlas.npz": {
+      "bytes": 7876933,
+      "sha256": "e690d755c2b67ad3dac281cc6442eb001337fabb1a80b6e79b517ed8dd9b9bec"
+    },
+    "data/full_cycle_brightness.csv": {
+      "bytes": 86846,
+      "sha256": "ef5c2a71f5ca9b4796a3f680eab71ecceb072cf6f5323094a80b5bf291fdefcc"
+    },
+    "data/landscape/albedo.png": {
+      "bytes": 1986043,
+      "sha256": "30ebc46f91e9a0db675dcbaf1a853da6161dcacf108c76b830685bf279d6c809"
+    },
+    "data/landscape/geometry.png": {
+      "bytes": 599827,
+      "sha256": "8164b0bed2457b46c7553d088d3eae8d6bc2aaa3f757bfa61e4bf0539583041d"
+    },
+    "data/landscape/normal.png": {
+      "bytes": 1284282,
+      "sha256": "8525b3c6eddad0fd22fc1aa20e7fb1a79a935df5a3a7169510d1edccfc9e54ef"
+    },
+    "data/landscape/scene.json": {
+      "bytes": 249,
+      "sha256": "228b94be0083a88f334fcbb7c4c7cd7c7797aa8db1648eb4574b0b0b9c0809c6"
+    },
+    "data/landscape/shadow.png": {
+      "bytes": 245182,
+      "sha256": "58ff25ab66a689413a515701794eefee40c61d9d717c9e3c05b2bd852c4b3381"
+    },
+    "data/moon_atlas.npz": {
+      "bytes": 7297979,
+      "sha256": "bf4678b7e86c28f3869f25f441787ce4ffb20cf338f50ac95b40124a1a15afb3"
+    },
+    "data/moon_no_ozone_atlas.npz": {
+      "bytes": 7307087,
+      "sha256": "2c4e3bc47b8411f6e3447c21fef4523c24f7e55995747961b3352538ef00af27"
+    },
+    "data/packing_checks.json": {
+      "bytes": 665,
+      "sha256": "e78e782d704e7ef6b2bd93661d4da7d3ab524bec2d5751f374d3eea44ef27d99"
+    },
+    "egl_scene.py": {
+      "bytes": 2924,
+      "sha256": "92d33dd9704b920f050c0122711bc5e5af7742217a59947ca6a4627159664772"
+    },
+    "global_energy.py": {
+      "bytes": 2632,
+      "sha256": "3e76b9ff76f763380be7bef49a4474b797d9085f4acead6ff29cc0b7681116d9"
+    },
+    "make_landscape.py": {
+      "bytes": 10145,
+      "sha256": "311f4560f4e93f473d43f88488c3d00f7d71799052865b47e60fed93d888cc9b"
+    },
+    "reference_mc.py": {
+      "bytes": 4855,
+      "sha256": "ee347fca43036e47c24054d3560a5ae2e4a76bec6e7bd0ed369f2c460c0de65d"
+    },
+    "render_data.py": {
+      "bytes": 7038,
+      "sha256": "375867c69830c6226247da43c8bfca2159c9420d7aa38e9d4a60c833117fa616"
+    },
+    "render_preview.py": {
+      "bytes": 4569,
+      "sha256": "65186685dd485d969205bb4614ea4fdcf2d4f46d1b6e2732e6c9097fd110224d"
+    },
+    "requirements.txt": {
+      "bytes": 36,
+      "sha256": "d17b09bf6c01bc8923f623c0468f8fe3889c3de2ac872c1b3d1077af4ae94a71"
+    },
+    "scene.frag": {
+      "bytes": 8336,
+      "sha256": "add82b128ad5764d19806da0cbf137c0677140542eb6e4dfe511ebbd646fc609"
+    },
+    "scene.vert": {
+      "bytes": 89,
+      "sha256": "9ea865b08cd5f22b85c46b571dfb77ca3c2e010f8afb3c43a8c8e54056a29c3f"
+    },
+    "solver.py": {
+      "bytes": 14387,
+      "sha256": "a3b6476fbd3203f0500c9a68e650a5f2b3511c9773d58968b3af16320959a3d4"
+    },
+    "test_full_cycle.py": {
+      "bytes": 3797,
+      "sha256": "918ddf0cbedddf7df265232347addf43903b6c1a4575e46deac0eab0ba1d5213"
+    },
+    "test_solver.py": {
+      "bytes": 5313,
+      "sha256": "da8cbdf0a1d809363b7ccf7db5c2d353f7bc5bbe30bc5559e06cfed96f622d13"
+    },
+    "validate_spots.py": {
+      "bytes": 2284,
+      "sha256": "6ed2664bf7302ab1bf1a7b0f50e84d7e29675a25539dc24a64937d0f3b6409ef"
+    },
+    "validation/browser_cycle_checks.json": {
+      "bytes": 868,
+      "sha256": "bf7694137f47fbc40eb60303bd904736ab217da0bb79b307cfaac17e6371c3a2"
+    },
+    "validation/browser_midday.png": {
+      "bytes": 927236,
+      "sha256": "a9aabbc7b8cac93c1f4aa7a4f98a0c883e4026dc6436b76a351204ddfd4c245d"
+    },
+    "validation/browser_mobile.png": {
+      "bytes": 212866,
+      "sha256": "f65871ff67421a097f6c29ce2394739356f96efa70f2f15fdb16103ee51d23d3"
+    },
+    "validation/full_cycle_checks.json": {
+      "bytes": 2892,
+      "sha256": "872f3ec72fe324130364d12c39b995dcba107a85e9ab8d1c6a24acb913cd986c"
+    },
+    "validation/full_cycle_unit_tests.txt": {
+      "bytes": 5205,
+      "sha256": "5710f318b4b694b541a6cc09eaa05f2e31c51ad6cbc4c0f4e885ae23dbc900e7"
+    },
+    "validation/gpu_noon_scattered.png": {
+      "bytes": 964918,
+      "sha256": "292ee9cac79607c052653a9345e86df253ea320f4e11a8ab123a1dee4f7f8a51"
+    },
+    "validation/legacy_v1/METHODS_v1.md": {
+      "bytes": 10407,
+      "sha256": "7c63abb4a2a3050544afce453162aedccc26feab0ca0e1d5b10a0726a9a9c739"
+    },
+    "validation/legacy_v1/browser_checks.json": {
+      "bytes": 972,
+      "sha256": "94f3dfe863aff13c2310bbd8dc52a07cd2f527bfabb5ae616f527beb7784e047"
+    },
+    "validation/legacy_v1/earth_iterations.json": {
+      "bytes": 2667,
+      "sha256": "f3a826cbae6f949039aaf8cdc1be49d77efca27b0f2dd3f3f6763ade19582e70"
+    },
+    "validation/legacy_v1/exploratory_grid_sensitivity.json": {
+      "bytes": 2030,
+      "sha256": "fab5bd5a5c43e38ac241d715c860bdb6fe5cf03c882c5922df1895427fc413d9"
+    },
+    "validation/legacy_v1/global_energy.json": {
+      "bytes": 2166,
+      "sha256": "7d35f9bbaa352f4c58bf327cbdf611e8840019587a4ef5906d7b4a94ceb0c30b"
+    },
+    "validation/legacy_v1/monte_carlo_spots.json": {
+      "bytes": 12764,
+      "sha256": "eed573386c4c54d91d1d2c560d6402a1a111d5527bfe1722a167f265f3bb0c44"
+    },
+    "validation/legacy_v1/moon_iterations.json": {
+      "bytes": 9582,
+      "sha256": "ac3731f2f6ba56becee6c2449d2aea5a76998ff0eef123791e0bda575bd35d0f"
+    },
+    "validation/legacy_v1/moon_no_ozone_iterations.json": {
+      "bytes": 9588,
+      "sha256": "9770e052df448407d26e8568106f52e7a8b0bbd6e157a81a6cb0ef172b5a866d"
+    },
+    "validation/legacy_v1/ray_resolution.json": {
+      "bytes": 2167,
+      "sha256": "1d5164871ad4015d34510fe90284173c166da8166980d7999f0aee02880e1ead"
+    },
+    "validation/legacy_v1/shader_checks.json": {
+      "bytes": 254,
+      "sha256": "6b04c2d0b29959cf5bb01403dbd263167ef9dcc04d330e773fb8024ce47a7a3e"
+    },
+    "validation/legacy_v1/unit_tests.txt": {
+      "bytes": 2003,
+      "sha256": "28dcfe3b20235b81e6ac9b59886fd4281fbec039eb3085d4de2eeba32b730166"
+    },
+    "validation/legacy_v1/validation_v1.json": {
+      "bytes": 7519,
+      "sha256": "d4456ad99fbbcbdc58dca1eb1eba23490ce42d5d2a211dd11dbb161f584b72ec"
+    },
+    "validation/noon_monte_carlo.json": {
+      "bytes": 2903,
+      "sha256": "3d230652dfe95393c238952f4f21244b24272906cabf6fd4b6716f31c80b0c1f"
+    },
+    "validation/packing_checks.json": {
+      "bytes": 581,
+      "sha256": "82b29493380f1a6021f1e4e2c026c5a5ec8cb90d992d9c21bbc87689b392c2ed"
+    },
+    "validation/shader_checks.json": {
+      "bytes": 254,
+      "sha256": "6b04c2d0b29959cf5bb01403dbd263167ef9dcc04d330e773fb8024ce47a7a3e"
+    }
+  }
+}

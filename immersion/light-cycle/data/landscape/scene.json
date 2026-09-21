@@ -1,0 +1,14 @@
+{
+  "width": 3072,
+  "height": 1536,
+  "primitives": 8558,
+  "trees": 56,
+  "camera": [
+    0,
+    1.0942446306653328,
+    0
+  ],
+  "water_level_m": -3,
+  "scene": "Illustrative wooded cove; local tangent geometry",
+  "seconds": 241.62721014022827
+}

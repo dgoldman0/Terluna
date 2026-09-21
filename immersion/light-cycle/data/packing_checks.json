@@ -1,0 +1,20 @@
+[
+  {
+    "world": "earth",
+    "max_relative_significant": 0.0004874996114714823,
+    "max_absolute": 2.9991972656252983,
+    "raw_archive_sha256": "37dcfa48941bef7d102c9a932854080cf199d8f2a62314bb875ea7bbd1db5977"
+  },
+  {
+    "world": "moon",
+    "max_relative_significant": 0.0004876412757195001,
+    "max_absolute": 2.309724609375735,
+    "raw_archive_sha256": "d65f6b780fef3e3bfa3805f8455667b414634174d660cc555093830ad07a673f"
+  },
+  {
+    "world": "moon_no_ozone",
+    "max_relative_significant": 0.0004877835967069896,
+    "max_absolute": 2.5130737304680224,
+    "raw_archive_sha256": "7ffbd78289a8e84f024056f8e891ef998b50c2aafe3508a2e1b962ba86a0e164"
+  }
+]

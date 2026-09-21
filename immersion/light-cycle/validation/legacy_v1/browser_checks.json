@@ -1,0 +1,39 @@
+{
+  "ready": true,
+  "mode": {
+    "software": true,
+    "world": "compare",
+    "earth": 2076.416004765603,
+    "moon": 5867.056059153894
+  },
+  "minus6": {
+    "angle": -6,
+    "earth": 6.795456611122681,
+    "moon": 2483.467508307116,
+    "earthClock": "+24m 00s",
+    "moonClock": "+11h 48m"
+  },
+  "playback_test": {
+    "start_angle": -90,
+    "end_angle": -89.2417,
+    "wall_seconds": 3.4544749649999176,
+    "rate_degrees_per_real_second": 0.25
+  },
+  "page_errors": [],
+  "network_requests": [],
+  "controls_outside_mobile_viewport": [],
+  "tested": [
+    "embedded-data loading",
+    "360-degree comparison",
+    "Moon-only mode",
+    "opposite-sky camera",
+    "ozone selector",
+    "dawn reversal",
+    "full-range slider",
+    "play/pause",
+    "shared auto exposure",
+    "desktop/mobile rendering"
+  ],
+  "browser": "Chromium 144; page.set_content; software fallback",
+  "shader_testing": "Exact GLSL separately compiled and linked in Mesa OpenGL ES 3.2"
+}

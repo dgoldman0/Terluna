@@ -1,0 +1,58 @@
+test_absorbing_segment_account (test_solver.GeometryAndTransport.test_absorbing_segment_account) ... ok
+test_bilinear_interpolation (test_solver.GeometryAndTransport.test_bilinear_interpolation) ... ok
+test_body_shadow (test_solver.GeometryAndTransport.test_body_shadow) ... ok
+test_cie_peak (test_solver.GeometryAndTransport.test_cie_peak) ... ok
+test_column_ratio (test_solver.GeometryAndTransport.test_column_ratio) ... ok
+test_disk_contact_monotone (test_solver.GeometryAndTransport.test_disk_contact_monotone) ... ok
+test_earth_tangent_asymptotic (test_solver.GeometryAndTransport.test_earth_tangent_asymptotic) ... ok
+test_equal_energy_color (test_solver.GeometryAndTransport.test_equal_energy_color) ... ok
+test_lunar_clock (test_solver.GeometryAndTransport.test_lunar_clock) ... ok
+test_ozone_is_bounded (test_solver.GeometryAndTransport.test_ozone_is_bounded) ... ok
+test_quadrature_full_sphere (test_solver.GeometryAndTransport.test_quadrature_full_sphere) ... ok
+test_rayleigh_isotropic_field (test_solver.GeometryAndTransport.test_rayleigh_isotropic_field) ... ok
+test_rayleigh_phase_normalization (test_solver.GeometryAndTransport.test_rayleigh_phase_normalization) ... ok
+test_segment_conservation (test_solver.GeometryAndTransport.test_segment_conservation) ... ok
+test_solar_disk_full_and_hidden (test_solver.GeometryAndTransport.test_solar_disk_full_and_hidden) ... ok
+test_solar_half_disk_in_vacuum (test_solver.GeometryAndTransport.test_solar_half_disk_in_vacuum) ... ok
+test_upper_ray (test_solver.GeometryAndTransport.test_upper_ray) ... ok
+test_vacuum (test_solver.GeometryAndTransport.test_vacuum) ... ok
+test_vertical_boundary (test_solver.GeometryAndTransport.test_vertical_boundary) ... ok
+test_vertical_gas_column (test_solver.GeometryAndTransport.test_vertical_gas_column) ... ok
+test_vertical_ozone_column (test_solver.GeometryAndTransport.test_vertical_ozone_column) ... ok
+test_angle_sort (test_full_cycle.FullCycleTests.test_angle_sort) ... ok
+test_clear_weather_identity (test_full_cycle.FullCycleTests.test_clear_weather_identity) ... ok
+test_clock_ratio (test_full_cycle.FullCycleTests.test_clock_ratio) ... ok
+test_cloud_slab_bounds (test_full_cycle.FullCycleTests.test_cloud_slab_bounds) ... ok
+test_daylight_halves (test_full_cycle.FullCycleTests.test_daylight_halves) ... ok
+test_depth_codec (test_full_cycle.FullCycleTests.test_depth_codec) ... ok
+test_endpoints (test_full_cycle.FullCycleTests.test_endpoints) ... ok
+test_extinction_no_ozone (test_full_cycle.FullCycleTests.test_extinction_no_ozone) ... ok
+test_finite_maps (test_full_cycle.FullCycleTests.test_finite_maps) ... ok
+test_fog_identity_and_bounds (test_full_cycle.FullCycleTests.test_fog_identity_and_bounds) ... ok
+test_kind_palette (test_full_cycle.FullCycleTests.test_kind_palette) ... ok
+test_landscape_assets (test_full_cycle.FullCycleTests.test_landscape_assets) ... /mnt/data/Open_Moon_Cycle_Source/Open_Moon_Cycle/test_full_cycle.py:49: ResourceWarning: unclosed file <_io.BufferedReader name='/mnt/data/Open_Moon_Cycle_Source/Open_Moon_Cycle/data/landscape/albedo.png'>
+  im=Image.open(ROOT/'data'/'landscape'/f'{name}.png');self.assertEqual(im.size,(3072,1536));self.assertEqual(im.mode,'RGB')
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/mnt/data/Open_Moon_Cycle_Source/Open_Moon_Cycle/test_full_cycle.py:49: ResourceWarning: unclosed file <_io.BufferedReader name='/mnt/data/Open_Moon_Cycle_Source/Open_Moon_Cycle/data/landscape/normal.png'>
+  im=Image.open(ROOT/'data'/'landscape'/f'{name}.png');self.assertEqual(im.size,(3072,1536));self.assertEqual(im.mode,'RGB')
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/mnt/data/Open_Moon_Cycle_Source/Open_Moon_Cycle/test_full_cycle.py:49: ResourceWarning: unclosed file <_io.BufferedReader name='/mnt/data/Open_Moon_Cycle_Source/Open_Moon_Cycle/data/landscape/geometry.png'>
+  im=Image.open(ROOT/'data'/'landscape'/f'{name}.png');self.assertEqual(im.size,(3072,1536));self.assertEqual(im.mode,'RGB')
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/lib/python3.13/unittest/case.py:606: ResourceWarning: unclosed file <_io.BufferedReader name='/mnt/data/Open_Moon_Cycle_Source/Open_Moon_Cycle/data/landscape/shadow.png'>
+  if method() is not None:
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_matching_angle_grid (test_full_cycle.FullCycleTests.test_matching_angle_grid) ... ok
+test_night_direct_zero (test_full_cycle.FullCycleTests.test_night_direct_zero) ... ok
+test_noon_azimuth_symmetry (test_full_cycle.FullCycleTests.test_noon_azimuth_symmetry) ... ok
+test_noon_is_bright (test_full_cycle.FullCycleTests.test_noon_is_bright) ... ok
+test_photopic_nonnegative (test_full_cycle.FullCycleTests.test_photopic_nonnegative) ... ok
+test_quarter_cycle_angles (test_full_cycle.FullCycleTests.test_quarter_cycle_angles) ... ok
+test_solar_beam_noon_vertical (test_full_cycle.FullCycleTests.test_solar_beam_noon_vertical) ... ok
+test_wave_dispersion_ratio (test_full_cycle.FullCycleTests.test_wave_dispersion_ratio) ... ok
+
+----------------------------------------------------------------------
+Ran 41 tests in 1.619s
+
+OK

@@ -1,0 +1,95 @@
+[
+  {
+    "world": "earth",
+    "sun_angles": [
+      -12.0,
+      -9.0,
+      -6.0,
+      -3.0,
+      0.0,
+      3.0
+    ],
+    "view_elevations": [
+      1.0,
+      10.0,
+      30.0,
+      90.0
+    ],
+    "azimuths": [
+      0.0,
+      90.0,
+      180.0
+    ],
+    "wavelengths": [
+      440,
+      560,
+      680
+    ],
+    "max_relative_above_1e_6": 0.06968598489571141,
+    "p95_relative_above_1e_6": 0.04652634966385454,
+    "median_relative_above_1e_6": 0.0028647189041321156,
+    "note": "Combined sensitivity: finer spatial/angular grid, earlier 5-strip solar quadrature, and earlier 0.002 increment stopping criterion. It is not a pure grid-convergence test."
+  },
+  {
+    "world": "moon",
+    "sun_angles": [
+      -12.0,
+      -9.0,
+      -6.0,
+      -3.0,
+      0.0,
+      3.0
+    ],
+    "view_elevations": [
+      1.0,
+      10.0,
+      30.0,
+      90.0
+    ],
+    "azimuths": [
+      0.0,
+      90.0,
+      180.0
+    ],
+    "wavelengths": [
+      440,
+      560,
+      680
+    ],
+    "max_relative_above_1e_6": 0.011611941763456427,
+    "p95_relative_above_1e_6": 0.009185277780989497,
+    "median_relative_above_1e_6": 0.001004228573592625,
+    "note": "Combined sensitivity: finer spatial/angular grid, earlier 5-strip solar quadrature, and earlier 0.002 increment stopping criterion. It is not a pure grid-convergence test."
+  },
+  {
+    "world": "moon_no_ozone",
+    "sun_angles": [
+      -12.0,
+      -9.0,
+      -6.0,
+      -3.0,
+      0.0,
+      3.0
+    ],
+    "view_elevations": [
+      1.0,
+      10.0,
+      30.0,
+      90.0
+    ],
+    "azimuths": [
+      0.0,
+      90.0,
+      180.0
+    ],
+    "wavelengths": [
+      440,
+      560,
+      680
+    ],
+    "max_relative_above_1e_6": 0.01160754725332367,
+    "p95_relative_above_1e_6": 0.009180011894533388,
+    "median_relative_above_1e_6": 0.0009831983612006157,
+    "note": "Combined sensitivity: finer spatial/angular grid, earlier 5-strip solar quadrature, and earlier 0.002 increment stopping criterion. It is not a pure grid-convergence test."
+  }
+]

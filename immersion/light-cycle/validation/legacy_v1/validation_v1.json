@@ -1,0 +1,248 @@
+{
+  "created_utc": "2026-09-21",
+  "status": "working numerical and visual prototype; external physical validation outstanding",
+  "unit_tests": {
+    "count": 21,
+    "passed": 21,
+    "record": "validation/unit_tests.txt"
+  },
+  "monte_carlo": {
+    "cases": 24,
+    "photons_per_case": 500000,
+    "wavelength_nm": [
+      440,
+      560,
+      680
+    ],
+    "max_absolute_relative_difference": {
+      "earth": 0.06935986517946822,
+      "moon": 0.006580622399150347
+    },
+    "record": "validation/monte_carlo_spots.json",
+    "qualification": "Selected directions and scalar physics only. Sampling error is recorded individually; some Earth differences exceed Monte Carlo sampling uncertainty. This is not a uniform error bound."
+  },
+  "global_energy": {
+    "max_absolute_residual_fraction": 0.04579200328235425,
+    "record": "validation/global_energy.json",
+    "status": "few-percent lunar closure error remains; not a conservation-certified production model"
+  },
+  "ray_resolution": {
+    "record": "validation/ray_resolution.json",
+    "max_relative_change_above_threshold": 0.006467014467461884
+  },
+  "combined_grid_sensitivity": {
+    "record": "validation/exploratory_grid_sensitivity.json",
+    "qualification": "Earlier exploratory fine run also changed finite-disk sampling and order stopping. Do not interpret as pure grid convergence."
+  },
+  "browser": {
+    "ready": true,
+    "mode": {
+      "software": true,
+      "world": "compare",
+      "earth": 2076.416004765603,
+      "moon": 5867.056059153894
+    },
+    "minus6": {
+      "angle": -6,
+      "earth": 6.795456611122681,
+      "moon": 2483.467508307116,
+      "earthClock": "+24m 00s",
+      "moonClock": "+11h 48m"
+    },
+    "playback_test": {
+      "start_angle": -90,
+      "end_angle": -89.28755,
+      "wall_seconds": 3.2796051910002006,
+      "rate_degrees_per_real_second": 0.25
+    },
+    "page_errors": [],
+    "network_requests": [],
+    "controls_outside_mobile_viewport": [],
+    "tested": [
+      "embedded-data loading",
+      "360-degree comparison",
+      "Moon-only mode",
+      "opposite-sky camera",
+      "ozone selector",
+      "dawn reversal",
+      "full-range slider",
+      "play/pause",
+      "shared auto exposure",
+      "desktop/mobile rendering"
+    ],
+    "browser": "Chromium 144; page.set_content; software fallback",
+    "shader_testing": "Exact GLSL separately compiled and linked in Mesa OpenGL ES 3.2"
+  },
+  "shaders": {
+    "renderer": "llvmpipe (LLVM 19.1.7, 256 bits)",
+    "version": "OpenGL ES 3.2 Mesa 25.0.7-2",
+    "vert": {
+      "compiled": true,
+      "log": ""
+    },
+    "frag": {
+      "compiled": true,
+      "log": ""
+    },
+    "link": {
+      "success": true,
+      "log": ""
+    }
+  },
+  "models": {
+    "earth": {
+      "source_field_sha256": "9aff54a2c4a50abdf2b2eaf117ca59b214d2d85093da97661f83216edba1b739",
+      "atmosphere": {
+        "name": "earth",
+        "radius_m": 6371000.0,
+        "scale_height_m": 8000.0,
+        "density_scale": 1.0,
+        "ozone_du": 300.0,
+        "ground_albedo": 0.1,
+        "top_scale_heights": 10.0,
+        "sun_radius_deg": 0.26666666666666666,
+        "visible_filter": 1.0
+      },
+      "orders": 14,
+      "last_increment_test": {
+        "order": 14,
+        "maximum_increment": 2.0419065600744237e-05,
+        "ground_max_fraction": 0.00043386793741912827,
+        "seconds": 66.24192500114441
+      },
+      "wavelength_nm": [
+        380.0,
+        400.0,
+        420.0,
+        440.0,
+        460.0,
+        480.0,
+        500.0,
+        520.0,
+        540.0,
+        560.0,
+        580.0,
+        600.0,
+        620.0,
+        640.0,
+        660.0,
+        680.0,
+        700.0,
+        720.0,
+        740.0,
+        760.0,
+        780.0,
+        800.0
+      ],
+      "sun_frames": 126,
+      "elevation_samples": 65,
+      "azimuth_samples": 49,
+      "deep_night": {
+        "qualification": "Exploratory extension outside dense validation range; source-grid angle is coarser below -35 degrees; 55-order stopping criterion targeted -24 to +12 degrees."
+      }
+    },
+    "moon": {
+      "source_field_sha256": "86ed4b23eeff66ceb41f564ea50e233c26a8e2e4da222d0541832acae82c5523",
+      "atmosphere": {
+        "name": "moon",
+        "radius_m": 1737400.0,
+        "scale_height_m": 48427.90123456789,
+        "density_scale": 1.2,
+        "ozone_du": 300.0,
+        "ground_albedo": 0.1,
+        "top_scale_heights": 10.0,
+        "sun_radius_deg": 0.26666666666666666,
+        "visible_filter": 1.0
+      },
+      "orders": 55,
+      "last_increment_test": {
+        "order": 55,
+        "maximum_increment": 8.151751428497505e-05,
+        "ground_max_fraction": 0.00047042456915262704,
+        "seconds": 252.35006546974182
+      },
+      "wavelength_nm": [
+        380.0,
+        400.0,
+        420.0,
+        440.0,
+        460.0,
+        480.0,
+        500.0,
+        520.0,
+        540.0,
+        560.0,
+        580.0,
+        600.0,
+        620.0,
+        640.0,
+        660.0,
+        680.0,
+        700.0,
+        720.0,
+        740.0,
+        760.0,
+        780.0,
+        800.0
+      ],
+      "sun_frames": 126,
+      "elevation_samples": 65,
+      "azimuth_samples": 49,
+      "deep_night": {
+        "qualification": "Exploratory extension outside dense validation range; source-grid angle is coarser below -35 degrees; 55-order stopping criterion targeted -24 to +12 degrees."
+      }
+    },
+    "moon_no_ozone": {
+      "source_field_sha256": "d99066252ce3e63a9d809951dc49279133b18503a07665d47a9f9a39e861b233",
+      "atmosphere": {
+        "name": "moon_no_ozone",
+        "radius_m": 1737400.0,
+        "scale_height_m": 48427.90123456789,
+        "density_scale": 1.2,
+        "ozone_du": 0.0,
+        "ground_albedo": 0.1,
+        "top_scale_heights": 10.0,
+        "sun_radius_deg": 0.26666666666666666,
+        "visible_filter": 1.0
+      },
+      "orders": 55,
+      "last_increment_test": {
+        "order": 55,
+        "maximum_increment": 8.150927518787246e-05,
+        "ground_max_fraction": 0.00047045110440412867,
+        "seconds": 224.14874076843262
+      },
+      "wavelength_nm": [
+        380.0,
+        400.0,
+        420.0,
+        440.0,
+        460.0,
+        480.0,
+        500.0,
+        520.0,
+        540.0,
+        560.0,
+        580.0,
+        600.0,
+        620.0,
+        640.0,
+        660.0,
+        680.0,
+        700.0,
+        720.0,
+        740.0,
+        760.0,
+        780.0,
+        800.0
+      ],
+      "sun_frames": 126,
+      "elevation_samples": 65,
+      "azimuth_samples": 49,
+      "deep_night": {
+        "qualification": "Exploratory extension outside dense validation range; source-grid angle is coarser below -35 degrees; 55-order stopping criterion targeted -24 to +12 degrees."
+      }
+    }
+  },
+  "viewer_summary": "21 analytic and numerical unit tests pass. Twenty-four direction/wavelength comparisons used 500,000 Monte Carlo paths each. Lunar spot differences were below 0.7%; Earth differences reached 7%, with sampling errors recorded separately. These are selected tests, not whole-sky error bounds. Whole-sphere energy accounting leaves up to 4.6% residual in the lunar cases. A 64-to-128-shell ray check changes sampled radiances by up to 0.65%. Deeper-night playback is exploratory. Browser controls and offline embedded-data loading were tested through the software fallback; the exact GPU shaders separately compile and link in OpenGL ES. No empirical Earth-sky benchmark or physical lunar-atmosphere validation has been completed."
+}

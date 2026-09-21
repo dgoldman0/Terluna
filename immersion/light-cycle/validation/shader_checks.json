@@ -1,0 +1,16 @@
+{
+  "renderer": "llvmpipe (LLVM 19.1.7, 256 bits)",
+  "version": "OpenGL ES 3.2 Mesa 25.0.7-2",
+  "vert": {
+    "compiled": true,
+    "log": ""
+  },
+  "frag": {
+    "compiled": true,
+    "log": ""
+  },
+  "link": {
+    "success": true,
+    "log": ""
+  }
+}
