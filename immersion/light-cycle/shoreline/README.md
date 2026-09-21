@@ -1,28 +1,29 @@
-# Shoreline immersion prototype — WIP checkpoint
+# Open Moon — Shoreline immersion prototype
 
-This directory preserves the current first-person shoreline prototype before a visual-quality rework.
+This directory contains the **normal editable source tree** for the current shoreline immersion checkpoint. The source is committed as ordinary files; it is not stored behind an archive wrapper.
 
-The prototype adds traversable shoreline geometry, a woodland path, rain shelter and overlook, shared weather state, persistent wetness, spatial audio, water, and Three.js integration around the existing Open Moon light-cycle data.
+## Status
 
-## Current status
+This is a WIP preservation checkpoint, not a visual-quality milestone. The browser render has known serious weaknesses:
 
-This is a preservation checkpoint, **not a visual-quality milestone**. The current rendered scene has serious known weaknesses observed in-browser:
-
-- distant terrain can read as floating or disconnected ribbons instead of coherent shoreline relief;
+- distant terrain can read as floating/disconnected ribbons rather than coherent shoreline relief;
 - water reflections are coarse and visibly aliased;
-- vegetation, rocks, ground materials and their distributions remain placeholder-like;
-- lighting, exposure and atmospheric display can become muddy enough to obscure scene structure;
-- the scene has not yet been calibrated to a lifelike visual standard.
+- vegetation, rocks, ground materials, and placement remain placeholder-like;
+- lighting/exposure can become muddy enough to obscure the structure of the scene;
+- the integrated render is not yet calibrated to a lifelike visual standard.
 
-The next milestone should focus on one convincing shoreline view at noon, then the same view under low Sun and twilight, before adding more environmental complexity.
+The next milestone should make one shoreline view convincing at noon, then verify the same view under low Sun and twilight before expanding environmental complexity.
 
-## Preserved source
+## Layout
 
-`shoreline-code-wip.tgz` contains the editable implementation source, template, scenario, build scripts, and atmosphere repacking tool from this checkpoint. It excludes the large generated standalone HTML and packed runtime atmosphere data.
-
-Reference hashes for the complete generated artifacts produced from this checkpoint:
-
-- `Open_Moon_Shoreline.html` — SHA-256 `8cecea048a67040c532f1660b4b071dd0fe1db1927dfc063aba862e45ca3b218`
-- complete `Open_Moon_Shoreline_Source.zip` — SHA-256 `607d8917aa584b1c49504b7ce466cb4ad66729f3bf89eeaa4fad550470890219`
+- `src/` — editable runtime code
+- `data/atmosphere.json` — packed inherited full-cycle optical data used by this checkpoint
+- `index.template.html` — editable HTML shell
+- `Open_Moon_Shoreline.html` — generated first-open build for this checkpoint
+- `scenario.json` — authored local scene/weather inputs
+- `build.py` / `pack_atmosphere.py` — build/data tools
+- `VALIDATION.json`, `SOURCES.md`, `LICENSES.txt` — evidence boundaries and dependency records
 
 The preceding full-cycle viewer remains unchanged.
+
+The generated build retained here has SHA-256 `8cecea048a67040c532f1660b4b071dd0fe1db1927dfc063aba862e45ca3b218`. It loads pinned Three.js r180 on first opening. The current visual weaknesses above remain part of this checkpoint and should not be interpreted as properties of the proposed Open Moon environment.

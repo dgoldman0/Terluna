@@ -1,0 +1,20 @@
+{
+  "date": "2026-09-21",
+  "release_status": "implementation awaiting integrated Three.js browser verification",
+  "unit_tests": {"command":"node --test tests/core.test.cjs","passed":38,"failed":0,"record":"validation/core-tests.tap","scope":"Pure equations, input/data checks, reproducibility and dependency rejection"},
+  "javascript_syntax": [
+    {"file":"src/app.js","passed":true,"sha256":"726bce8aa7cd67d8cfd327c1a8cf1e548d2fe45809ebe48ca8afc14b0617be04"},
+    {"file":"src/atmosphere.js","passed":true,"sha256":"2b962254df71eeed847bc9de4a65199d5404cb3958458f99bf13cf8badd42b64"},
+    {"file":"src/audio.js","passed":true,"sha256":"23fee2369e179668e9eda580522667085374f348fd36b2c64f6116bfbc1240f6"},
+    {"file":"src/core.js","passed":true,"sha256":"8cc430fc4f86ef74c833be5fd452235494864bdc69918c1cee7ccf30eb2a7696"},
+    {"file":"src/loader.js","passed":true,"sha256":"ec36d3513c3e9bf91b7238059d0f765f6f9c94853d2d30f3e19b4bbb29294a7d"},
+    {"file":"src/scene.js","passed":true,"sha256":"d2bbf25026c662d75928af853377f347d435ce6b9d2efacd0d149fd35c7b3bd3"},
+    {"file":"src/water.js","passed":true,"sha256":"f3fe7c57176a697bdc5022c1376ee519929b01a75791b976b1d8a75608374c79"}
+  ],
+  "shader_programs":{"passed":5,"renderer":"llvmpipe (LLVM 19.1.7, 256 bits)","scope":"Compile our GLSL with GLES 3 through Mesa EGL. Three.js engine includes are replaced by a minimal declared syntax harness; this does not establish full renderer integration.","record":"validation/shader-checks.json"},
+  "loader_ui":{"passed":true,"viewports":[[1440,900],[390,844]],"scope":"Dependency-failure UI only; external dependency request deliberately aborted.","record":"validation/loader-ui-checks.json"},
+  "packed_atmosphere":{"moon":{"angular_shape":[41,33],"sun_angles":174,"quantization_error_relative_to_frame_max":0.00024413917867866744},"earth":{"angular_shape":[41,33],"sun_angles":174,"quantization_error_relative_to_frame_max":0.00024413363173436732},"moon_no_ozone":{"angular_shape":[41,33],"sun_angles":174,"quantization_error_relative_to_frame_max":0.00024413855180009344}},
+  "build":{"deterministic_two_runs":true,"html_sha256":"8cecea048a67040c532f1660b4b071dd0fe1db1927dfc063aba862e45ca3b218","html_bytes":2600556,"dependency_embedded":false},
+  "unperformed":["Integrated Three.js scene initialization, shader expansion and rendered visual inspection","Actual CDN library-byte download and successful verification in a browser","Successful runtime self-contained offline export using actual vendor bytes","GPU-device performance and mobile scene testing","Independent atmospheric solver benchmark and physical weather validation"],
+  "unchanged":{"previous_viewer":true,"scientific_models":true,"remote_repository":true}
+}

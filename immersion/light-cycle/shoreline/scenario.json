@@ -1,0 +1,35 @@
+{
+  "schema": "open-moon-shoreline-scenario/1",
+  "date": "2026-09-21",
+  "purpose": "Authored immersion environment with inherited atmospheric inputs",
+  "location": {
+    "type": "synthetic local scene",
+    "celestial_model": "equatorial zero-declination circular clock",
+    "measured_lunar_coordinates": null
+  },
+  "solar_periods_days": [29.53059,1],
+  "default_world": "moon",
+  "default_camera_height_m": 1.7,
+  "waypoints": [
+    {"id":"shore","name":"Shoreline","x":0,"z":9,"yaw":0,"pitch":-0.04},
+    {"id":"shelter","name":"Rain shelter","x":20,"z":33,"yaw":0.05,"pitch":-0.06},
+    {"id":"path","name":"Woodland path","x":-21,"z":39,"yaw":-0.7,"pitch":-0.06},
+    {"id":"overlook","name":"High overlook","x":-56,"z":47,"yaw":0.04,"pitch":-0.12}
+  ],
+  "shelter":{"x":20,"z":33,"width":11,"depth":8,"roofHeight":4.3},
+  "weather":{"type":"authored four-hour forcing, not a forecast","keyframes":[
+    {"seconds":0,"coverage":0.1,"liquid_water_g_m3":0.015,"cloud_base_m":1100,"cloud_thickness_m":850,"wind_m_s":1.5,"relative_humidity":0.48,"air_K":294,"rain_mm_h":0,"visibility_m":35000},
+    {"seconds":1800,"coverage":0.25,"liquid_water_g_m3":0.04,"cloud_base_m":1100,"cloud_thickness_m":900,"wind_m_s":2.4,"relative_humidity":0.59,"air_K":293,"rain_mm_h":0,"visibility_m":30000},
+    {"seconds":3600,"coverage":0.52,"liquid_water_g_m3":0.08,"cloud_base_m":1050,"cloud_thickness_m":1000,"wind_m_s":3.8,"relative_humidity":0.72,"air_K":292,"rain_mm_h":0,"visibility_m":22000},
+    {"seconds":5100,"coverage":0.88,"liquid_water_g_m3":0.2,"cloud_base_m":900,"cloud_thickness_m":1100,"wind_m_s":5.4,"relative_humidity":0.87,"air_K":290,"rain_mm_h":1.5,"visibility_m":8000},
+    {"seconds":6300,"coverage":0.97,"liquid_water_g_m3":0.29,"cloud_base_m":800,"cloud_thickness_m":1200,"wind_m_s":6.7,"relative_humidity":0.96,"air_K":289,"rain_mm_h":7,"visibility_m":3800},
+    {"seconds":8100,"coverage":0.99,"liquid_water_g_m3":0.34,"cloud_base_m":750,"cloud_thickness_m":1300,"wind_m_s":6.2,"relative_humidity":0.98,"air_K":288.5,"rain_mm_h":10,"visibility_m":2500},
+    {"seconds":9600,"coverage":0.92,"liquid_water_g_m3":0.19,"cloud_base_m":900,"cloud_thickness_m":1150,"wind_m_s":4.6,"relative_humidity":0.94,"air_K":289,"rain_mm_h":3.5,"visibility_m":5000},
+    {"seconds":10800,"coverage":0.7,"liquid_water_g_m3":0.12,"cloud_base_m":1100,"cloud_thickness_m":1000,"wind_m_s":3.2,"relative_humidity":0.87,"air_K":290,"rain_mm_h":0.3,"visibility_m":9500},
+    {"seconds":12600,"coverage":0.37,"liquid_water_g_m3":0.05,"cloud_base_m":1350,"cloud_thickness_m":950,"wind_m_s":2.6,"relative_humidity":0.75,"air_K":292,"rain_mm_h":0,"visibility_m":22000},
+    {"seconds":14400,"coverage":0.12,"liquid_water_g_m3":0.02,"cloud_base_m":1500,"cloud_thickness_m":900,"wind_m_s":1.7,"relative_humidity":0.64,"air_K":293,"rain_mm_h":0,"visibility_m":35000}
+  ],"cloud_effective_radius_um":12,"visible_drop_radius_m":0.0007},
+  "third_party":{"name":"three","version":"0.180.0","source_ref":"r180","upstream_git_blob":"ca4833532c363b72477b2e8a6f47cc0e2fc7b09a","first_open_url":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.cjs","vendor_bytes_in_distribution":false},
+  "physics_scope":"See METHODS.md",
+  "prior_atmosphere_archive_sha256":"e753eaf67d3392fa48617fddad12376c3564ffb7cd10d2bd2705d4640e3a614b"
+}
