@@ -1,0 +1,76 @@
+{
+  "schema": "open-moon-source-recovery/1",
+  "date": "2026-09-22",
+  "base_commit": "4c7affae780d3ff7ef5581e88aac7ae32ada7505",
+  "source_archive": {
+    "name": "Open_Moon_Shoreline_Landscape_Source.zip",
+    "bytes": 13160621,
+    "sha256": "29b467650274da89b3232cf90a7379678f5c3df35a4bf30e6c3eea8d8adc7099",
+    "all_manifest_files_verified": true
+  },
+  "exact_review_files_git_blobs": {
+    "index.landscape.html": "1899065dad1c0127910d775224ad925134ab6f47",
+    "build_landscape.py": "3eb3605684d16d963c400a29fdfaa75920b94ead",
+    "assets/surfaces/manifest.json": "f4e7873ef22717f68c275c42fb66eb074300ef90",
+    "tools/generate_surfaces.py": "42041c7c2d26c15b93bf58cf99615a5ae239dda0",
+    "tests/capture_landscape.py": "847bea05dba8e933f07cabe6aeceab9da5a8fc56",
+    "tests/core.test.cjs": "f48f10a7565f1eee44b4d1700f999ba3c51e6949",
+    "tests/m1.test.cjs": "1355895a52141e816d2c6f97165c5978df28d03b",
+    "tests/landscape.test.cjs": "6b869d0c019da50125fcefd48ab15368570b5c5c",
+    "tests/landscape_probe.js": "16b1e1af742647238ed5f0fc51a33a4c37f79a01",
+    "tests/surface_state_probe.js": "b7ea5fac0634fadf82500102b18b5190e69d8c16",
+    "LANDSCAPE_METHODS.md": "4d2e99504937cc3e67d686fdfa99991dafc930e8",
+    "LANDSCAPE_VALIDATION.json": "7aa9b4a3fdb58e437d5b354599ff30b90e012e21",
+    "src/app.js": "60432cf18d7441a305cfacc4710d5737b163c28c",
+    "src/atmosphere.js": "e9c71f2b160a19e1f96815274335c7106c636686",
+    "src/audio.js": "4692232e6df00bbc3697479c77c5210810fc8dc2",
+    "src/core.js": "ba135271d4105fcaddb5d533d93b7aade42fd791",
+    "src/ecology.js": "f39a9d781e67259053ed00a8eba84a86b7c02ba5",
+    "src/landscape.js": "3962864f738862a1b1678350f27c3eb30440d3e0",
+    "src/loader.js": "657ae9d3d539bdfa65392d313057a084faab8ce7",
+    "src/materials.js": "233f46f050cec33385f9e54b390b79313e768ff1",
+    "src/scene.js": "20e037147c24089f0bc70581713a266bd59890cb",
+    "src/surface-water.js": "18d9b652e0dc678e8e3376687503468ab22b8196",
+    "src/terrain.js": "6ce9758390e8bb7bb9c5301f8954d5ee2f165493",
+    "src/water.js": "93226c74834e98a3b4a4aabd75c214590135bc56"
+  },
+  "fresh_checks": {
+    "review_html_rebuilt_byte_identically": true,
+    "html_bytes": 14218498,
+    "html_sha256": "2bfe13b25a155cf24383c39a2392320bf7dad6d6a697651164515f77943cc3be",
+    "unit_command": "node --test --test-concurrency=1 tests/core.test.cjs tests/m1.test.cjs tests/landscape.test.cjs",
+    "unit_pass": 87,
+    "unit_fail": 0,
+    "unit_skip": 0,
+    "unit_log_sha256": "9839cc9ff74ac9b48bdc814901d9c3298cb6d86cdf99d08fc5782c92a1f41560",
+    "unit_log_location": "Recovery working artifacts: recovery-unit-tests.tap",
+    "generated_surface_pngs_and_manifest_byte_identical": true,
+    "surface_generator_environment": {
+      "numpy": "2.3.5",
+      "scipy": "1.17.0",
+      "Pillow": "12.3.0"
+    },
+    "new_browser_tests_performed": false,
+    "new_hardware_gpu_tests_performed": false
+  },
+  "preservation": {
+    "runtime_changed_during_recovery": false,
+    "original_review_record_changed": false,
+    "builder": "Original M1 build.py plus landscape delegation",
+    "generated_assets": "PNG maps regenerated locally from exact generator and manifest; vendor and generated HTML remain outside Git",
+    "review_evidence": "Original summary plus failed-walk and optical JSON are tracked. Other original raw logs, PNGs and packaging-only utilities remain in the source/review archive.",
+    "unrelated_repository_files": "Retained from the parent tree"
+  },
+  "renderer": {
+    "checkpoint": "Three.js r180 / WebGL",
+    "next_target": "r186; separately test WebGPU/TSL against identical model state",
+    "migration_performed": false,
+    "known_issue": "Sustained SwiftShader traversal context loss; consumer GPU behavior unmeasured"
+  },
+  "r186_input": {
+    "name": "three.js-r186.zip",
+    "sha256": "86d8f1a42a726e791b46b0b4b8851c54498cc717b038b3a65b42c198de3d91a5",
+    "package_version": "0.186.0",
+    "full_archive_added_to_repository": false
+  }
+}

@@ -1,0 +1,218 @@
+{
+  "html_sha256": "2bfe13b25a155cf24383c39a2392320bf7dad6d6a697651164515f77943cc3be",
+  "viewport": [
+    480,
+    300
+  ],
+  "errors": [],
+  "console": [],
+  "external_requests": [],
+  "checks": {
+    "boot": true,
+    "reference_screenshot": true,
+    "foreground_rock_occlusion_confirmed_by_raycast": true,
+    "gpu_gray_card_and_depth": true
+  },
+  "harness": {
+    "in_memory": true,
+    "sha1_bridge": true,
+    "deterministic_animation_callbacks": true,
+    "finish_each_walk_frame": true,
+    "software": true,
+    "software_backend": "swiftshader"
+  },
+  "state": {
+    "schema": "open-moon-shoreline-state/2",
+    "build": "landscape-ecology-02",
+    "world": "moon",
+    "clock": "moon",
+    "phase": 0,
+    "motionTime": 0,
+    "windDisplacement": 0,
+    "weatherKind": "clear",
+    "weatherTime": 0,
+    "ledger": {
+      "exposed": 0,
+      "canopy": 0,
+      "leaf": 0,
+      "sheltered": 0,
+      "totalInput": 0,
+      "evaporated": 0,
+      "drained": 0,
+      "residual": 0
+    },
+    "spatialWater": {
+      "units": "mm-cell; multiply by cell area / 1000 for m3",
+      "cellArea_m2": 16,
+      "initialStorage": 39509.91992049058,
+      "input": 0,
+      "storage": 39509.91992049058,
+      "evaporated": 0,
+      "deepDrainage": 0,
+      "boundaryExport": 0,
+      "roofExport": 0,
+      "residual": 0,
+      "relativeResidual": 0,
+      "steps": 0,
+      "elapsedSeconds": 0,
+      "forcingTimeSeconds": 0
+    },
+    "terrain": {
+      "levels": 11,
+      "nearSpacing_m": 0.25,
+      "outerHalfExtent_m": 16384,
+      "vertices": 183051,
+      "triangles": 275968,
+      "updates": 1,
+      "lastUpdateMs": 1786.5,
+      "maxUpdateMs": 1786.5,
+      "heightEvaluations": 180491,
+      "cachedSamples": 180491
+    },
+    "position": [
+      0,
+      3.045873320927338,
+      9
+    ],
+    "yaw": 0,
+    "pitch": -0.04,
+    "fov": 58,
+    "exposure": "fixed",
+    "exposureBase": 0.236657345,
+    "renderExposure": 0.236657345,
+    "ev": 0,
+    "whiteBalanceStrength": 1,
+    "whiteBalanceGain": [
+      0.8055076246147659,
+      1.0428335463232834,
+      1.43700702659039
+    ],
+    "freeze": true,
+    "quality": "economy",
+    "graphicsBackend": {
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "software": true,
+      "multisampling": 0,
+      "conservativeDefaults": true
+    },
+    "viewport": [
+      480,
+      300
+    ],
+    "pixelRatio": 1
+  },
+  "gpu": {
+    "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "maxTextureSize": 8192
+  },
+  "counts": {
+    "trees": 173,
+    "leaves": 413721,
+    "branchSegments": 57277,
+    "grassClumps": 4601,
+    "understory": 54,
+    "rocks": 232,
+    "pebbles": 2537,
+    "terrainVertices": 183051,
+    "terrainLevels": 11
+  },
+  "initial_environment_updates": 1,
+  "screenshot_sha256": "4424cdf4e39f3674b9882b3b1a0c8c9d0c4c8dc61e2abac164cafa6962ed3911",
+  "probes": {
+    "depth": [
+      {
+        "uv": [
+          0.5,
+          0.43
+        ],
+        "occluder": null,
+        "deviceDepth": 0.9973158836364746,
+        "opaqueViewZ_m": 44.624813079833984,
+        "flatWaterViewZ_m": 25.915593142374476,
+        "geometricDepth_m": 0.9215162097354864,
+        "estimatedOpticalPath_m": 18.765471334017292
+      },
+      {
+        "uv": [
+          0.5,
+          0.45
+        ],
+        "occluder": null,
+        "deviceDepth": 0.9981069564819336,
+        "opaqueViewZ_m": 63.22478103637695,
+        "flatWaterViewZ_m": 31.935460680501073,
+        "geometricDepth_m": 1.3991731152307234,
+        "estimatedOpticalPath_m": 31.337353040074138
+      },
+      {
+        "uv": [
+          0.5,
+          0.48
+        ],
+        "occluder": null,
+        "deviceDepth": 0.9997773766517639,
+        "opaqueViewZ_m": 527.2876586914062,
+        "flatWaterViewZ_m": 49.013183029157375,
+        "geometricDepth_m": 2.300721045558978,
+        "estimatedOpticalPath_m": 478.39202434465716
+      },
+      {
+        "uv": [
+          0.62,
+          0.43
+        ],
+        "occluder": {
+          "name": "substrate-rocks:0:-1",
+          "distance_m": 19.578856112615316,
+          "flatWaterDistance_m": 26.572386077658013
+        },
+        "deviceDepth": 0.9937386512756348,
+        "opaqueViewZ_m": 19.150129318237305,
+        "flatWaterViewZ_m": 25.915593142374483,
+        "geometricDepth_m": 0.6047711333003016,
+        "estimatedOpticalPath_m": 0
+      }
+    ],
+    "grayCard": {
+      "reflectance": 0.18,
+      "rawLinearRGB": [
+        0.8269087672233582,
+        0.6390542984008789,
+        0.4715723693370819
+      ],
+      "displayWhiteBalanceGain": [
+        0.8055076246147659,
+        1.0428335463232834,
+        1.43700702659039
+      ],
+      "referenceExposure": 0.236657345,
+      "referenceDisplayLuminance": 0.18000023046135902,
+      "exposureFor18Percent": 0.23665734469890592,
+      "calibratedDisplayLuminance": 0.18000023046135902
+    },
+    "renderTargets": {
+      "reflection": [
+        256,
+        256
+      ],
+      "samples": 0,
+      "opaque": [
+        480,
+        300
+      ]
+    },
+    "inheritedNoonLux": 94158.48781715755
+  },
+  "final_context_lost": false,
+  "final_environment_updates": 1,
+  "final_render_info": {
+    "frame": 59,
+    "calls": 1,
+    "triangles": 2,
+    "points": 0,
+    "lines": 0
+  },
+  "passed": true,
+  "elapsed_s": 24.20240717700017
+}

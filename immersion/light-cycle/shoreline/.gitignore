@@ -1,5 +1,7 @@
 __pycache__/
 *.pyc
 node_modules/
-# Ready HTML and packed runtime data are intentionally retained.
-# Optional downloaded dependency can also be retained with its license.
+/Open_Moon_Shoreline.html
+/assets/surfaces/*.png
+/vendor/three.cjs
+/validation/recovery-runs/

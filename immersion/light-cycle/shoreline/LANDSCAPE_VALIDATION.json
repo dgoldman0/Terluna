@@ -1,0 +1,451 @@
+{
+  "schema": "open-moon-landscape-validation/1",
+  "created_utc": "2026-09-22T02:40:51.942189+00:00",
+  "base_commit": "4c7affae780d3ff7ef5581e88aac7ae32ada7505",
+  "status": "Integrated progress checkpoint; M1 visual acceptance and continuous software-GPU traversal remain open",
+  "html": {
+    "filename": "Open_Moon_Shoreline_Landscape.html",
+    "sha256": "2bfe13b25a155cf24383c39a2392320bf7dad6d6a697651164515f77943cc3be",
+    "bytes": 14218498,
+    "self_contained": true
+  },
+  "software_tests": {
+    "current_node_tests": 87,
+    "passed": 87,
+    "failed": 0,
+    "skipped": 0,
+    "baseline_before_changes": 54,
+    "geometry_test_change": "Four fixed-radial-mesh assertions replaced by moving-grid checks; 50 inherited checks and 37 new checks in the current suite",
+    "record": "validation/landscape/unit-tests.tap"
+  },
+  "application_guard_tests": {
+    "passed": 8,
+    "fixture": "Synthetic filesystem fixtures; no real checkout was written",
+    "record": "validation/landscape/apply-guard-tests.txt"
+  },
+  "numeric": {
+    "schema": "open-moon-landscape-numeric/1",
+    "baseCommit": "4c7affae780d3ff7ef5581e88aac7ae32ada7505",
+    "checks": {
+      "shorelineMaxElevationResidual_m": 5.407112214569909e-11,
+      "boundaryHeightDifference_m": 9.485323717584038e-06,
+      "drainage": {
+        "cells": 66049,
+        "totalArea_m2": 264196,
+        "outletArea_m2": 264196
+      },
+      "initialTerrain": {
+        "levels": 11,
+        "nearSpacing_m": 0.25,
+        "outerHalfExtent_m": 16384,
+        "vertices": 183051,
+        "triangles": 275968,
+        "updates": 1,
+        "lastUpdateMs": 1731.229628,
+        "maxUpdateMs": 1731.229628,
+        "heightEvaluations": 180491,
+        "cachedSamples": 180491
+      },
+      "initialTopology": {
+        "triangles": 275968,
+        "boundaryEdges": 512,
+        "weldedVertices": 138241,
+        "maxWeldError_m": 0,
+        "minTwiceTriangleArea_m2": 0.0625
+      },
+      "movingTopology": [
+        {
+          "observer": [
+            0.51,
+            9.51
+          ],
+          "triangles": 275968,
+          "boundaryEdges": 512,
+          "weldedVertices": 138241,
+          "maxWeldError_m": 0,
+          "minTwiceTriangleArea_m2": 0.0625
+        },
+        {
+          "observer": [
+            3.51,
+            12.01
+          ],
+          "triangles": 275968,
+          "boundaryEdges": 512,
+          "weldedVertices": 138241,
+          "maxWeldError_m": 0,
+          "minTwiceTriangleArea_m2": 0.0625
+        },
+        {
+          "observer": [
+            -38.1,
+            47.7
+          ],
+          "triangles": 275968,
+          "boundaryEdges": 512,
+          "weldedVertices": 138241,
+          "maxWeldError_m": 0,
+          "minTwiceTriangleArea_m2": 0.0625
+        }
+      ],
+      "nearCollisionMaxError_m": 0.010411110371807197,
+      "traversalCacheSamples": 17188,
+      "ecology": {
+        "trees": 173,
+        "rocks": 232,
+        "gravel": 2537,
+        "tufts": 4601,
+        "understory": 54,
+        "managedTrees": [
+          "managed:east-edge",
+          "managed:west-edge"
+        ]
+      },
+      "treeArchitecture": {
+        "branchSegments": 57277,
+        "leaves": 413721
+      },
+      "episodeWater": {
+        "units": "mm-cell; multiply by cell area / 1000 for m3",
+        "cellArea_m2": 16,
+        "initialStorage": 39509.91992049058,
+        "input": 40137.49999999998,
+        "storage": 65630.49415003358,
+        "evaporated": 483.3572175212325,
+        "deepDrainage": 3717.7934085978886,
+        "boundaryExport": 9758.775144340472,
+        "roofExport": 57.00000000000054,
+        "residual": -2.6193447411060333e-09,
+        "relativeResidual": 3.28867494229046e-14,
+        "steps": 1440,
+        "elapsedSeconds": 14400,
+        "forcingTimeSeconds": 14400
+      },
+      "waterStepStorageDifferenceFraction": 0.0002832986243512613,
+      "cpuTerrainUpdates": {
+        "samples": 30,
+        "median_ms": 28.99106699999902,
+        "p95_ms": 70.12483699999939,
+        "maximum_ms": 77.91455700000006,
+        "context": "Node CPU geometry updates; excludes GPU work and makes no hardware frame-rate claim"
+      }
+    }
+  },
+  "browser": {
+    "successful_separate_runs": 10,
+    "continuous_navigation_passed": false,
+    "runs": [
+      {
+        "name": "reference",
+        "passed": true,
+        "viewport": [
+          1440,
+          900
+        ],
+        "record": "validation/landscape/browser/landscape-final-reference.json",
+        "images": [
+          "validation/landscape/browser/landscape-final-reference.png"
+        ],
+        "checks": {
+          "boot": true,
+          "reference_screenshot": true
+        }
+      },
+      {
+        "name": "woodland",
+        "passed": true,
+        "viewport": [
+          960,
+          600
+        ],
+        "record": "validation/landscape/browser/landscape-final-woodland.json",
+        "images": [
+          "validation/landscape/browser/landscape-final-woodland.png"
+        ],
+        "checks": {
+          "boot": true,
+          "reference_screenshot": true
+        }
+      },
+      {
+        "name": "inland",
+        "passed": true,
+        "viewport": [
+          960,
+          600
+        ],
+        "record": "validation/landscape/browser/landscape-final-inland.json",
+        "images": [
+          "validation/landscape/browser/landscape-final-inland.png",
+          "validation/landscape/browser/landscape-final-inland_inland.png"
+        ],
+        "checks": {
+          "boot": true,
+          "reference_screenshot": true,
+          "plant_identities_preserved": true
+        }
+      },
+      {
+        "name": "wet",
+        "passed": true,
+        "viewport": [
+          480,
+          300
+        ],
+        "record": "validation/landscape/browser/landscape-final-wet.json",
+        "images": [
+          "validation/landscape/browser/landscape-final-wet.png",
+          "validation/landscape/browser/landscape-final-wet_weather.png"
+        ],
+        "checks": {
+          "boot": true,
+          "reference_screenshot": true,
+          "wet_state_reaches_gpu": true
+        }
+      },
+      {
+        "name": "after-rain",
+        "passed": true,
+        "viewport": [
+          480,
+          300
+        ],
+        "record": "validation/landscape/browser/landscape-final-after-rain.json",
+        "images": [
+          "validation/landscape/browser/landscape-final-after-rain.png",
+          "validation/landscape/browser/landscape-final-after-rain_after-rain.png"
+        ],
+        "checks": {
+          "boot": true,
+          "reference_screenshot": true,
+          "wet_state_reaches_gpu": true
+        }
+      },
+      {
+        "name": "reset",
+        "passed": true,
+        "viewport": [
+          480,
+          300
+        ],
+        "record": "validation/landscape/browser/landscape-final-reset.json",
+        "images": [
+          "validation/landscape/browser/landscape-final-reset.png",
+          "validation/landscape/browser/landscape-final-reset_reset.png"
+        ],
+        "checks": {
+          "boot": true,
+          "reference_screenshot": true,
+          "world_weather_camera_reset_pixel_identical": true
+        }
+      },
+      {
+        "name": "mobile",
+        "passed": true,
+        "viewport": [
+          390,
+          844
+        ],
+        "record": "validation/landscape/browser/landscape-final-mobile.json",
+        "images": [
+          "validation/landscape/browser/landscape-final-mobile.png",
+          "validation/landscape/browser/landscape-final-mobile_controls.png"
+        ],
+        "checks": {
+          "boot": true,
+          "reference_screenshot": true,
+          "controls_fit_viewport": true
+        }
+      },
+      {
+        "name": "fields",
+        "passed": true,
+        "viewport": [
+          480,
+          300
+        ],
+        "record": "validation/landscape/browser/landscape-final-fields.json",
+        "images": [
+          "validation/landscape/browser/landscape-final-fields.png",
+          "validation/landscape/browser/landscape-final-fields_fields.png"
+        ],
+        "checks": {
+          "boot": true,
+          "reference_screenshot": true,
+          "diagnostic_control_event": true
+        }
+      },
+      {
+        "name": "low-sun",
+        "passed": true,
+        "viewport": [
+          480,
+          300
+        ],
+        "record": "validation/landscape/browser/landscape-final-low-sun.json",
+        "images": [
+          "validation/landscape/browser/landscape-final-low-sun.png",
+          "validation/landscape/browser/landscape-final-low-sun_low-sun.png"
+        ],
+        "checks": {
+          "boot": true,
+          "reference_screenshot": true,
+          "plant_identities_preserved": true
+        }
+      },
+      {
+        "name": "walk",
+        "passed": false,
+        "viewport": [
+          480,
+          300
+        ],
+        "record": "validation/landscape/browser/landscape-final-walk.json",
+        "images": [],
+        "checks": {
+          "boot": true,
+          "reference_screenshot": true,
+          "actual_walking_crosses_grid_snaps": true
+        }
+      },
+      {
+        "name": "verified-optics",
+        "passed": true,
+        "viewport": [
+          480,
+          300
+        ],
+        "record": "validation/landscape/browser/landscape-verified-optics.json",
+        "checks": {
+          "boot": true,
+          "reference_screenshot": true,
+          "foreground_rock_occlusion_confirmed_by_raycast": true,
+          "gpu_gray_card_and_depth": true
+        }
+      }
+    ],
+    "backend": "Chromium 144 / ANGLE SwiftShader, software rendering, Economy defaults, multisampling off",
+    "harness": "Exact built HTML injected into about:blank; SHA-1 bridge and queued real animation callbacks only in test harness. Walking callbacks synchronize GPU completion. No source replacement in successful review captures.",
+    "external_requests_in_successful_runs": 0,
+    "mobile_scope": "390x844 desktop Chromium viewport and control bounds; no physical mobile-device benchmark",
+    "hardware_gpu_tested": false
+  },
+  "optics": {
+    "depth": [
+      {
+        "uv": [
+          0.5,
+          0.43
+        ],
+        "occluder": null,
+        "deviceDepth": 0.9973158836364746,
+        "opaqueViewZ_m": 44.624813079833984,
+        "flatWaterViewZ_m": 25.915593142374476,
+        "geometricDepth_m": 0.9215162097354864,
+        "estimatedOpticalPath_m": 18.765471334017292
+      },
+      {
+        "uv": [
+          0.5,
+          0.45
+        ],
+        "occluder": null,
+        "deviceDepth": 0.9981069564819336,
+        "opaqueViewZ_m": 63.22478103637695,
+        "flatWaterViewZ_m": 31.935460680501073,
+        "geometricDepth_m": 1.3991731152307234,
+        "estimatedOpticalPath_m": 31.337353040074138
+      },
+      {
+        "uv": [
+          0.5,
+          0.48
+        ],
+        "occluder": null,
+        "deviceDepth": 0.9997773766517639,
+        "opaqueViewZ_m": 527.2876586914062,
+        "flatWaterViewZ_m": 49.013183029157375,
+        "geometricDepth_m": 2.300721045558978,
+        "estimatedOpticalPath_m": 478.39202434465716
+      },
+      {
+        "uv": [
+          0.62,
+          0.43
+        ],
+        "occluder": {
+          "name": "substrate-rocks:0:-1",
+          "distance_m": 19.578856112615316,
+          "flatWaterDistance_m": 26.572386077658013
+        },
+        "deviceDepth": 0.9937386512756348,
+        "opaqueViewZ_m": 19.150129318237305,
+        "flatWaterViewZ_m": 25.915593142374483,
+        "geometricDepth_m": 0.6047711333003016,
+        "estimatedOpticalPath_m": 0
+      }
+    ],
+    "grayCard": {
+      "reflectance": 0.18,
+      "rawLinearRGB": [
+        0.8269087672233582,
+        0.6390542984008789,
+        0.4715723693370819
+      ],
+      "displayWhiteBalanceGain": [
+        0.8055076246147659,
+        1.0428335463232834,
+        1.43700702659039
+      ],
+      "referenceExposure": 0.236657345,
+      "referenceDisplayLuminance": 0.18000023046135902,
+      "exposureFor18Percent": 0.23665734469890592,
+      "calibratedDisplayLuminance": 0.18000023046135902
+    },
+    "renderTargets": {
+      "reflection": [
+        256,
+        256
+      ],
+      "samples": 0,
+      "opaque": [
+        480,
+        300
+      ]
+    },
+    "inheritedNoonLux": 94158.48781715755
+  },
+  "regeneration": {
+    "png_hashes_identical": true,
+    "manifest_identical": true,
+    "files": {
+      "albedo-ao.png": {
+        "sha256": "5c17cfdb2fc0f9d095a726397d66b582c54cb36a941b26a24554be13ff9aec83",
+        "bytes": 2909084
+      },
+      "normal-roughness-height.png": {
+        "sha256": "1b5fdd3d845185f528af966cd0726a3b8363a7453904099ae4cc60afc79d1a72",
+        "bytes": 3753311
+      }
+    }
+  },
+  "failure_interpretation": [
+    "Continuous SwiftShader walking loses the context even at 480x300 Economy; model position and LOD transitions advanced, but that whole browser run failed.",
+    "Earlier sustained 960x600 and 1440x900 runs also failed, with shader status failures or context loss. No root-cause isolation or hardware stability claim is made.",
+    "The inherited optics probe assumed four unobscured water rays. One now hits a foreground rock. The revised probe separately verifies three underwater samples and that rock occlusion by independent CPU raycast; the original failed assertion is retained.",
+    "A Mesa/ANGLE browser attempt could not initialize WebGL2 in this runner."
+  ],
+  "limitations": [
+    "Visuals remain procedural, with sparse foreground vegetation, simplified crowns, and residual distant-water aliasing.",
+    "Material height maps are coordinated shading data; their height channel does not currently displace mesh vertices. Terrain has separate geometric small relief.",
+    "Ponded water has storage and shading; connected free-surface puddle geometry and resolved shoreline run-up remain open.",
+    "Drainage and habitat are coherent authored scenarios; no validated erosion evolution, monthly ecology, plant growth or succession solve.",
+    "Local hydrology uses selected 4m bucket/flow parameters; conservation does not establish empirical accuracy.",
+    "CPU terrain updates can cause hitches; hardware frame time, large-scale vegetation HLOD and continuous traversal still need work."
+  ],
+  "repository": {
+    "remote_changes_performed": false,
+    "application": "Guarded dry-run/apply utility; ordinary source files and PNG assets; original repository builder retained with a delegation"
+  },
+  "evidence_boundary": "Executed software/model and image checks only. No empirical ecological/hydraulic validation or consumer-GPU benchmark."
+}

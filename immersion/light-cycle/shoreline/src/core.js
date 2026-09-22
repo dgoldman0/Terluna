@@ -1,6 +1,8 @@
 /* Pure scenario / geometry / water-accounting functions. Metres, seconds, mm. */
 (function(root){
 'use strict';
+const Landscape=root.OpenMoonLandscape||(typeof require==='function'?require('./landscape.js'):null);
+if(!Landscape)throw Error('Load landscape.js before core.js');
 const TAU=2*Math.PI, DAY=86400, PERIOD=29.53059*DAY;
 const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
 const mix=(a,b,t)=>a+(b-a)*t;
@@ -9,37 +11,20 @@ function rng(seed=18374){let s=seed>>>0;return()=>{s+=0x6D2B79F5;let t=Math.imul
 function hash(x,z){let n=Math.imul(x|0,374761393)+Math.imul(z|0,668265263);n=Math.imul(n^n>>>13,1274126177);return((n^n>>>16)>>>0)/4294967295;}
 function noise(x,z){let i=Math.floor(x),j=Math.floor(z),u=x-i,v=z-j;u=u*u*(3-2*u);v=v*v*(3-2*v);return mix(mix(hash(i,j),hash(i+1,j),u),mix(hash(i,j+1),hash(i+1,j+1),u),v);}
 function fbm(x,z){let a=.55,s=0;for(let i=0;i<5;i++){s+=a*noise(x,z);x=x*2.03+17.4;z=z*2.03+8.1;a*=.48;}return s;}
-function shore(x){return -9+4*Math.sin(x*.035)+2.1*Math.sin(x*.083+.8);}
-/** One authored elevation field, measured above the local sea datum.
- * The same field feeds terrain vertices, underwater depth, placement and walking.
- * Regional hills continue below the water instead of terminating at mesh edges.
- */
-function surfaceHeight(x,z){
- const d=z-shore(x);
- const seabed=-72*(1-Math.exp(Math.min(0,d)/1000));
- const inland=.061*Math.max(0,d)+2.0*(1-Math.exp(-Math.max(0,d)/160));
- const coastal=mix(seabed,inland,smooth(-1,1,d));
- const gauss=(cx,cz,sx,sz)=>Math.exp(-(((x-cx)/sx)**2+((z-cz)/sz)**2));
- const nearHill=14*gauss(-57,50,27,25);
- const regional=44*gauss(-180,-290,135,265)*smooth(20,100,-z)+175*gauss(-940,-1850,610,850)
-   +270*gauss(1280,-2800,850,890)+105*gauss(2420,-2150,900,1000);
- const rockRelief=regional*(.61+.53*fbm(x*.012,z*.012)+.24*noise(x*.040,z*.033));
- const micro=(fbm(x*.083,z*.083)-.47)*.23*smooth(-2,4,d);
- const inlandRelief=(fbm(x*.025,z*.025)-.48)*2.2*smooth(12,55,d);
- return coastal+nearHill+rockRelief+micro+inlandRelief;
-}
+function shore(x){return Landscape.shorelineAtX(x);}
+function surfaceHeight(x,z){return Landscape.height(x,z);}
 function worldRadius(world='moon'){return world==='earth'?6371000:1737400;}
 function curvatureSag(x,z,world='moon'){
  const R=worldRadius(world),r2=x*x+z*z;
  return r2/(R+Math.sqrt(Math.max(0,R*R-r2)));
 }
 function groundHeight(x,z,world='moon'){return surfaceHeight(x,z)-curvatureSag(x,z,world);}
-function surfaceGradient(x,z,h=.2){return {x:(surfaceHeight(x+h,z)-surfaceHeight(x-h,z))/(2*h),z:(surfaceHeight(x,z+h)-surfaceHeight(x,z-h))/(2*h)};}
+function surfaceGradient(x,z,h=.2){return Landscape.gradient(x,z,h);}
 function waterDepth(x,z){return Math.max(0,-surfaceHeight(x,z));}
 const SHELTER={x:20,z:33,width:11,depth:8,roofHeight:4.3};
 function roofMask(x,z,pad=0){return Math.abs(x-SHELTER.x)<SHELTER.width/2+pad&&Math.abs(z-SHELTER.z)<SHELTER.depth/2+pad?1:0;}
 const WAYPOINTS=[{id:'shore',name:'Shoreline',x:0,z:9,yaw:0,pitch:-.04},{id:'shelter',name:'Rain shelter',x:20,z:33,yaw:.05,pitch:-.06},{id:'path',name:'Woodland path',x:-21,z:39,yaw:-.7,pitch:-.06},{id:'overlook',name:'High overlook',x:-56,z:47,yaw:.04,pitch:-.12}];
-function pathDistance(x,z){let best=1e9;const a=[[0,9],[7,20],[20,33],[-6,43],[-30,43],[-56,47]];for(let i=1;i<a.length;i++){const [ax,az]=a[i-1],[bx,bz]=a[i],dx=bx-ax,dz=bz-az,t=clamp(((x-ax)*dx+(z-az)*dz)/(dx*dx+dz*dz));best=Math.min(best,Math.hypot(x-ax-t*dx,z-az-t*dz));}return best;}
+function pathDistance(x,z){let best=1e9;const a=[[0,-18],[0,9],[7,20],[20,33],[-6,43],[-30,43],[-56,47]];for(let i=1;i<a.length;i++){const [ax,az]=a[i-1],[bx,bz]=a[i],dx=bx-ax,dz=bz-az,t=clamp(((x-ax)*dx+(z-az)*dz)/(dx*dx+dz*dz));best=Math.min(best,Math.hypot(x-ax-t*dx,z-az-t*dz));}return best;}
 function sunAt(phase){const h=((phase%1)+1)%1*TAU;return {x:Math.sin(h),y:Math.cos(h),z:0,elevation:Math.asin(Math.cos(h))*180/Math.PI,side:Math.sin(h)>=0?1:-1};}
 function phaseForElevation(deg,rising=false){const h=Math.acos(clamp(Math.sin(deg*Math.PI/180),-1,1));return rising?1-h/TAU:h/TAU;}
 function calibratedFov(screenHeightCm,distanceCm){if(!(screenHeightCm>0&&distanceCm>0))throw Error('Screen height and distance must be positive.');return 2*Math.atan(screenHeightCm/(2*distanceCm))*180/Math.PI;}

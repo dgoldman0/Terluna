@@ -1,31 +1,68 @@
-# Open Moon — Shoreline M1 progress checkpoint
+# Open Moon — shoreline landscape/ecology checkpoint
 
-This directory contains the editable source for the current M1 clear-noon shoreline pass, based on Terluna checkpoint `4877d8e6c020de51e237deb377955442778917da`.
+This checkpoint recovers the reviewed landscape source based on M1 commit
+`4c7affae780d3ff7ef5581e88aac7ae32ada7505`. All twelve runtime modules and the
+landscape page template retain their exact review-package bytes. The renderer
+remains Three.js r180 / WebGL. Visual acceptance and continuous SwiftShader
+traversal remain open.
 
-## Status
+## Build and test
 
-This is a **progress checkpoint**, not M1 visual acceptance. It is substantially improved over the preceding shoreline prototype: one indexed terrain field now continues from foreground land through the seabed and regional relief; water reads rendered seabed depth for optical attenuation; reflections scale with the viewport; foreground rocks, pebbles, sand detail, vegetation geometry, exposure calibration, and daylight white balance have all been reworked.
-
-The scene still reads as visibly procedural. Foliage silhouettes and thin-leaf response, foreground material structure, regional landform/material detail, and shoreline contact remain the main visual weaknesses. M1's convincing/lifelike appearance criterion therefore remains open.
-
-## Build
-
-`src/` contains ordinary editable JavaScript and `index.template.html` is the retained checkpoint page shell; `build.py` applies the M1 shell changes explicitly while assembling the current viewer. `data/atmosphere.json` retains the inherited packed sky data unchanged. Run:
+The repository stores ordinary editable source, the material generator and its
+reference manifest. Generate the two surface PNGs locally before the first build:
 
 ```sh
+python -m pip install -r requirements-surfaces.txt
+python tools/generate_surfaces.py
+git diff --exit-code -- assets/surfaces/manifest.json
 python build.py
 ```
 
-If `vendor/three.cjs` is present and matches the pinned Three.js r180 Git blob `ca4833532c363b72477b2e8a6f47cc0e2fc7b09a`, the build embeds it. Otherwise the generated HTML requests that pinned library on first opening and retains the existing offline-export path. The generated `Open_Moon_Shoreline.html` is intentionally not retained in this progress commit so an older packaged build cannot be mistaken for the current source state.
+The manifest must remain unchanged. A mismatch requires investigation; preserve
+the reference hashes. Both generated PNGs were reproduced byte-for-byte during
+recovery. They are ignored by Git, along with the generated viewer and optional
+vendor bundle. No source ZIP or encoded source archive replaces the editable files.
 
-## Test
-
-For the complete 54-test M1 validation path, first place the verified r180 bundle at `vendor/three.cjs`, run `python build.py`, then run:
+For the exact self-contained review build and the complete unit suite, place the
+reviewed r180 bundle at `vendor/three.cjs`. Its Git blob identity is
+`ca4833532c363b72477b2e8a6f47cc0e2fc7b09a`; the builder checks it. The saved landscape
+source package includes that bundle. Without it, the viewer retains the existing
+pinned, hash-checked first-open dependency loader.
 
 ```sh
-node --test tests/core.test.cjs tests/m1.test.cjs
+python build.py
+node --test --test-concurrency=1 tests/core.test.cjs tests/m1.test.cjs tests/landscape.test.cjs
 ```
 
-The M1 package used for this checkpoint passed 54/54 unit tests and was rendered in Chromium/SwiftShader at 1440×900 and 390×844. `VALIDATION.json` records the executed checks and their evidence boundary. Browser screenshots and the self-contained review HTML were retained as review artifacts outside this source checkpoint; consumer hardware-GPU performance remains untested.
+With the pinned vendor and reference maps, the generated HTML has SHA-256
+`2bfe13b25a155cf24383c39a2392320bf7dad6d6a697651164515f77943cc3be` and 14,218,498 bytes.
+The original repository `build.py` is retained with a small delegation to
+`build_landscape.py`; the M1 template and inherited atmosphere stay unchanged.
 
-See `M1_HANDOFF.md` for the next visual work and `METHODS.md` for physical/model scope.
+## Model and evidence
+
+`landscape.js` owns shared elevation, drainage, substrate and habitat fields.
+`terrain.js` supplies moving, stitched terrain grids. `ecology.js` supplies stable
+plant placement and connected branching. `surface-water.js` supplies spatial
+water stores; `materials.js` consumes the shared fields and coordinated maps.
+`LANDSCAPE_METHODS.md` defines the assumptions and model boundaries.
+
+`LANDSCAPE_VALIDATION.json` is the unchanged original review record. Its
+`remote_changes_performed: false` describes that review's time, before recovery.
+Its individual run and image paths refer to the saved source/review package.
+The failed walking log and verified optical log are also tracked here; other raw
+review logs and screenshots remain in that package. `validation/recovery.json`
+records this recovery's new build, regeneration and 87-test checks separately.
+The browser harness and both GPU probes are ordinary source under `tests/`.
+
+Continuous SwiftShader walking loses its graphics context even in Economy.
+Consumer-GPU performance remains unmeasured. Materials and foliage remain
+procedural, terrain updates can hitch, and visible connected puddles, material
+height displacement and resolved shoreline run-up still need work.
+
+## Next revision
+
+See `RENDERER_ROADMAP.md` and `LANDSCAPE_HANDOFF.md`: first migrate the unchanged
+WebGL scene to r186, then improve model-to-render integration and evaluate a
+separate WebGPU/TSL implementation against the same state. The recovery commit
+performs none of that renderer migration.

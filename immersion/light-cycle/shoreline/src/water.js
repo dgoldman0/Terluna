@@ -5,8 +5,8 @@
  */
 function createWater(T,scene,atm,renderer){
  const reflectionTarget=new T.WebGLRenderTarget(1280,800,{type:T.HalfFloatType,depthBuffer:true,generateMipmaps:true,minFilter:T.LinearMipmapLinearFilter});
- reflectionTarget.samples=4;reflectionTarget.texture.colorSpace=T.LinearSRGBColorSpace;
- const opaqueTarget=new T.WebGLRenderTarget(1280,800,{type:T.HalfFloatType,depthBuffer:true});opaqueTarget.samples=4;
+ reflectionTarget.samples=OM.graphicsBackend?.software?0:4;reflectionTarget.texture.colorSpace=T.LinearSRGBColorSpace;
+ const opaqueTarget=new T.WebGLRenderTarget(1280,800,{type:T.HalfFloatType,depthBuffer:true});opaqueTarget.samples=OM.graphicsBackend?.software?0:4;
  opaqueTarget.texture.colorSpace=T.LinearSRGBColorSpace;opaqueTarget.depthTexture=new T.DepthTexture(1280,800,T.UnsignedIntType);
  const u={...atm.uniforms,uReflection:{value:reflectionTarget.texture},uOpaque:{value:opaqueTarget.texture},uOpaqueDepth:{value:opaqueTarget.depthTexture},
   uMirrorMatrix:{value:new T.Matrix4()},uGravity:{value:1.62},uCamera:{value:new T.Vector3()},uRain:{value:0},uViewport:{value:new T.Vector2(1280,800)},uNear:{value:.08},uFar:{value:30000},uReflectValid:{value:0}};

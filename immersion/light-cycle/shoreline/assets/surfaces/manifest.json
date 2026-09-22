@@ -1,0 +1,127 @@
+{
+  "schema": "open-moon-surfaces/1",
+  "generator": "tools/generate_surfaces.py",
+  "seed": 21891,
+  "provenance": "Original deterministic morphology; no external image assets",
+  "license": "Project author's licensing choice",
+  "tile_pixels": 512,
+  "padding_pixels": 16,
+  "layout": [
+    3,
+    2
+  ],
+  "size_pixels": [
+    1632,
+    1088
+  ],
+  "albedo_encoding": "sRGB RGB, linear AO alpha",
+  "normal_encoding": "tangent XY in RG, linear roughness B, height/range + 0.5 in A",
+  "layers": [
+    {
+      "name": "sand",
+      "layer": 0,
+      "tile_metres": 0.75,
+      "height_range_metres": 0.006,
+      "mean_albedo_linear": [
+        0.3570785711419705,
+        0.3077839691237866,
+        0.22888368281301474
+      ],
+      "mean_roughness": 0.8768065265243059,
+      "height_min_max_metres": [
+        -0.0011391456811723957,
+        0.002463296603481584
+      ]
+    },
+    {
+      "name": "gravel",
+      "layer": 1,
+      "tile_metres": 1.5,
+      "height_range_metres": 0.06,
+      "mean_albedo_linear": [
+        0.18920411702819112,
+        0.17152571888280901,
+        0.13871099137517498
+      ],
+      "mean_roughness": 0.8569591278821796,
+      "height_min_max_metres": [
+        -0.0029067719690645585,
+        0.02067022710007718
+      ]
+    },
+    {
+      "name": "basalt",
+      "layer": 2,
+      "tile_metres": 2.8,
+      "height_range_metres": 0.09,
+      "mean_albedo_linear": [
+        0.10531890773359558,
+        0.10525077500794473,
+        0.09305859646547213
+      ],
+      "mean_roughness": 0.8383014283052372,
+      "height_min_max_metres": [
+        -0.04421974435458089,
+        0.0282505495988318
+      ]
+    },
+    {
+      "name": "soil",
+      "layer": 3,
+      "tile_metres": 1.1,
+      "height_range_metres": 0.024,
+      "mean_albedo_linear": [
+        0.13213042108158735,
+        0.0898684428650215,
+        0.04775974821444248
+      ],
+      "mean_roughness": 0.937454356503361,
+      "height_min_max_metres": [
+        -0.009169758520490375,
+        0.008479984979794993
+      ]
+    },
+    {
+      "name": "litter",
+      "layer": 4,
+      "tile_metres": 1.1,
+      "height_range_metres": 0.045,
+      "mean_albedo_linear": [
+        0.10158958643219361,
+        0.0675136528639495,
+        0.031406121829454146
+      ],
+      "mean_roughness": 0.955193797249169,
+      "height_min_max_metres": [
+        -0.00892269749420427,
+        0.015991753310546253
+      ]
+    },
+    {
+      "name": "bark",
+      "layer": 5,
+      "tile_metres": 1.1,
+      "height_range_metres": 0.024,
+      "mean_albedo_linear": [
+        0.0983078517103048,
+        0.06496866721724608,
+        0.03419403537749772
+      ],
+      "mean_roughness": 0.897253732991356,
+      "height_min_max_metres": [
+        -0.010249098093844302,
+        0.016557916898225243
+      ]
+    }
+  ],
+  "files": {
+    "albedo-ao.png": {
+      "sha256": "5c17cfdb2fc0f9d095a726397d66b582c54cb36a941b26a24554be13ff9aec83",
+      "bytes": 2909084
+    },
+    "normal-roughness-height.png": {
+      "sha256": "1b5fdd3d845185f528af966cd0726a3b8363a7453904099ae4cc60afc79d1a72",
+      "bytes": 3753311
+    }
+  }
+}
