@@ -1,0 +1,15 @@
+{
+  "baseline": "r180",
+  "candidate": "r186",
+  "modelChanged": false,
+  "cameraExposureChanged": false,
+  "pixels": [
+    400,
+    640,
+    3
+  ],
+  "absoluteMean8bit": 1.1371328125,
+  "absoluteP95_8bit": 5.0,
+  "absoluteMax8bit": 33.0,
+  "exactPixelFraction": 0.42433203125
+}

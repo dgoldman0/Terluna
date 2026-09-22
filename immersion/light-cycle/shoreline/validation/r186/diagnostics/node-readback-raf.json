@@ -1,0 +1,7 @@
+{
+  "passed": false,
+  "classification": "test-harness deadlock",
+  "explanation": "TSL WebGL asynchronous readback polls its GL fence using requestAnimationFrame. The still-capture harness queued all RAF callbacks, so this readback could not finish. Lab captures now retain native RAF; main viewer still queues its application animation callback. Renderer source is unchanged.",
+  "test": "final-lab-ponds",
+  "run_terminated": true
+}

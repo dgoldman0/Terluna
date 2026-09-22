@@ -1,0 +1,12 @@
+{
+  "viewport": [
+    640,
+    400
+  ],
+  "scene": "matched clear-noon reference; wind sway and exact leaf-lighting parity remain incomplete",
+  "mean_absolute_8bit_channel_difference": 0.4032395833333333,
+  "p95_absolute_8bit_channel_difference": 1.0,
+  "max_absolute_8bit_channel_difference": 192,
+  "pixel_identical_fraction": 0.40184375,
+  "native_webgpu": false
+}

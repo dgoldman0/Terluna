@@ -1,0 +1,32 @@
+[
+  {
+    "name": "release-lab-ponds",
+    "returncode": 0,
+    "seconds": 84.04754662513733
+  },
+  {
+    "name": "release-lab-reference",
+    "returncode": 0,
+    "seconds": 41.731996059417725
+  },
+  {
+    "name": "benchmark-tsl-webgl",
+    "returncode": 0,
+    "seconds": 87.22165179252625
+  },
+  {
+    "name": "release-reference",
+    "returncode": 0,
+    "seconds": 29.737672328948975
+  },
+  {
+    "name": "release-optics-reset",
+    "returncode": 0,
+    "seconds": 41.911938428878784
+  },
+  {
+    "name": "release-ponds",
+    "returncode": 0,
+    "seconds": 42.39694547653198
+  }
+]

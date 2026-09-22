@@ -1,68 +1,76 @@
-# Open Moon — shoreline landscape/ecology checkpoint
+# Open Moon — shoreline r186 / revision 03
 
-This checkpoint recovers the reviewed landscape source based on M1 commit
-`4c7affae780d3ff7ef5581e88aac7ae32ada7505`. All twelve runtime modules and the
-landscape page template retain their exact review-package bytes. The renderer
-remains Three.js r180 / WebGL. Visual acceptance and continuous SwiftShader
-traversal remain open.
+This revision extends recovered repository commit
+`caa4caa2b2855e9ed8f03597317a05d8224949e6`. It includes the r186 WebGL viewer,
+volume-solved connected ponds and wet banks, bathymetry-limited waves, CPU terrain
+update reductions, and a separate node-renderer experiment. Native WebGPU remains
+an unmeasured experimental path; the lab's actual backend is displayed and exported.
 
-## Build and test
+## Open and build
 
-The repository stores ordinary editable source, the material generator and its
-reference manifest. Generate the two surface PNGs locally before the first build:
+The delivered HTML viewers are self-contained. Open the WebGL viewer directly in
+a current browser. In Conditions, choose **After rain**, then **Inspect ponds**
+to visit the largest water-filled basin. **M1 noon** restores the reference state.
+
+The source package includes the selected r186 modules and reference material PNGs.
+Building needs Python's standard library and performs no network download:
 
 ```sh
+python build_landscape.py
+```
+
+This produces `Open_Moon_Shoreline.html` and `Open_Moon_Renderer_Lab.html`.
+The lab offers Automatic, Native WebGPU and TSL/WebGL2 selection, a repeatable
+route benchmark and a measurement export. To provide a localhost secure context:
+
+```sh
+python -m http.server 8000 --bind 127.0.0.1
+# Open http://127.0.0.1:8000/Open_Moon_Renderer_Lab.html
+```
+
+The native experiment requires a compatible WebGPU adapter with float32-filterable
+textures. A fallback is identified as TSL/WebGL2. Cloud transport, animated rain,
+exact leaf lighting and sway remain parity gaps. Water replay in the lab retains
+clear-sky lighting; it is separate from a cloud/weather rendering comparison.
+
+## Reproduce dependencies and tests
+
+The archive importer selects four original modules and their MIT license, with
+all inputs verified before writing. Examples, unrelated assets and fonts are excluded:
+
+```sh
+python tools/import_three.py /path/to/three.js-r186.zip
+# Regenerate surface images only when needed:
 python -m pip install -r requirements-surfaces.txt
 python tools/generate_surfaces.py
-git diff --exit-code -- assets/surfaces/manifest.json
-python build.py
 ```
 
-The manifest must remain unchanged. A mismatch requires investigation; preserve
-the reference hashes. Both generated PNGs were reproduced byte-for-byte during
-recovery. They are ignored by Git, along with the generated viewer and optional
-vendor bundle. No source ZIP or encoded source archive replaces the editable files.
-
-For the exact self-contained review build and the complete unit suite, place the
-reviewed r180 bundle at `vendor/three.cjs`. Its Git blob identity is
-`ca4833532c363b72477b2e8a6f47cc0e2fc7b09a`; the builder checks it. The saved landscape
-source package includes that bundle. Without it, the viewer retains the existing
-pinned, hash-checked first-open dependency loader.
+Preserve the reference surface manifest; investigate a mismatch rather than
+accepting changed hashes. Node 22.16.0 was used for the unit suite, including its
+ES-module support:
 
 ```sh
-python build.py
-node --test --test-concurrency=1 tests/core.test.cjs tests/m1.test.cjs tests/landscape.test.cjs
+node --test --test-concurrency=1 tests/core.test.cjs tests/m1.test.cjs tests/landscape.test.cjs tests/ponds.test.cjs
 ```
 
-With the pinned vendor and reference maps, the generated HTML has SHA-256
-`2bfe13b25a155cf24383c39a2392320bf7dad6d6a697651164515f77943cc3be` and 14,218,498 bytes.
-The original repository `build.py` is retained with a small delegation to
-`build_landscape.py`; the M1 template and inherited atmosphere stay unchanged.
+`REVISION_03.md` explains the model, calibration change and remaining gates.
+`REVISION_VALIDATION.json` indexes measured results. Earlier LANDSCAPE_* documents
+and records describe the preceding checkpoint. The source package's small
+`build.py` wrapper is a convenience; repository application preserves the existing
+source-first repository builder and its delegation to `build_landscape.py`.
 
-## Model and evidence
+## Apply to the recovered repository
 
-`landscape.js` owns shared elevation, drainage, substrate and habitat fields.
-`terrain.js` supplies moving, stitched terrain grids. `ecology.js` supplies stable
-plant placement and connected branching. `surface-water.js` supplies spatial
-water stores; `materials.js` consumes the shared fields and coordinated maps.
-`LANDSCAPE_METHODS.md` defines the assumptions and model boundaries.
+The source package includes a dry-run-first helper and an ordinary source patch.
+The helper checks the recovered baseline and every payload digest, rejects
+conflicting edits or symlinks and leaves unrelated files alone:
 
-`LANDSCAPE_VALIDATION.json` is the unchanged original review record. Its
-`remote_changes_performed: false` describes that review's time, before recovery.
-Its individual run and image paths refer to the saved source/review package.
-The failed walking log and verified optical log are also tracked here; other raw
-review logs and screenshots remain in that package. `validation/recovery.json`
-records this recovery's new build, regeneration and 87-test checks separately.
-The browser harness and both GPU probes are ordinary source under `tests/`.
+```sh
+python apply_revision.py /path/to/Terluna
+python apply_revision.py /path/to/Terluna --apply --copy-assets
+```
 
-Continuous SwiftShader walking loses its graphics context even in Economy.
-Consumer-GPU performance remains unmeasured. Materials and foliage remain
-procedural, terrain updates can hitch, and visible connected puddles, material
-height displacement and resolved shoreline run-up still need work.
-
-## Next revision
-
-See `RENDERER_ROADMAP.md` and `LANDSCAPE_HANDOFF.md`: first migrate the unchanged
-WebGL scene to r186, then improve model-to-render integration and evaluate a
-separate WebGPU/TSL implementation against the same state. The recovery commit
-performs none of that renderer migration.
+The optional asset copy supplies ignored local dependency modules and material
+images for immediate building. The helper does not commit, push, change branches,
+replace the repository's original builder, or add a source archive to Git.
+Review the resulting ordinary-file diff before committing.

@@ -2,7 +2,7 @@
 const {test,after}=require('node:test');
 const assert=require('node:assert/strict');
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
-const T=require('../vendor/three.cjs');
+const T=require('../vendor/three-r186/three.module.js');
 globalThis.OM={};
 const L=require('../src/landscape.js'),C=require('../src/core.js');
 const {TerrainSystem,triangle}=require('../src/terrain.js');

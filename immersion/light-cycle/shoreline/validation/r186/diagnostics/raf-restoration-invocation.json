@@ -1,0 +1,18 @@
+{
+  "html_sha256": "fe8c13fa611ef6be6c73a35984d0372836081c508dbfa195b1c7e37f8b8ebb19",
+  "lab": true,
+  "case": "benchmark",
+  "viewport": [
+    480,
+    300
+  ],
+  "errors": [
+    "Error: Page.evaluate: TypeError: Failed to execute 'requestAnimationFrame' on 'Window': parameter 1 is not of type 'Function'.\n    at UtilityScript.evaluate (<anonymous>:297:18)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)"
+  ],
+  "console": [],
+  "checks": {},
+  "external_requests": [],
+  "harness": "Headed Chromium / SwiftShader, about:blank in-memory exact source; SHA-256 bridge; queued main-viewer RAF only; normal RAF for node async readback; explicitly forced TSL WebGL2 when --lab",
+  "passed": false,
+  "elapsed_s": 1.037060485999973
+}

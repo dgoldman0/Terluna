@@ -1,0 +1,421 @@
+{
+  "html_sha256": "8a857d491281c53faf3005eeaa77e1aaef01397dcb35a7f9ed8274c1202081b6",
+  "lab": false,
+  "case": "benchmark",
+  "viewport": [
+    480,
+    300
+  ],
+  "errors": [],
+  "console": [],
+  "checks": {
+    "boot": true,
+    "benchmark_completed": true,
+    "capture": true
+  },
+  "external_requests": [],
+  "harness": "Headed Chromium / SwiftShader, about:blank in-memory exact source; SHA-256 bridge; queued main-viewer RAF only; normal RAF for node async readback; explicitly forced TSL WebGL2 when --lab",
+  "state": {
+    "schema": "open-moon-shoreline-state/2",
+    "build": "shoreline-r186-03",
+    "world": "moon",
+    "clock": "moon",
+    "phase": 0,
+    "motionTime": 0,
+    "windDisplacement": 0,
+    "weatherKind": "clear",
+    "weatherTime": 0,
+    "ledger": {
+      "exposed": 0,
+      "canopy": 0,
+      "leaf": 0,
+      "sheltered": 0,
+      "totalInput": 0,
+      "evaporated": 0,
+      "drained": 0,
+      "residual": 0
+    },
+    "spatialWater": {
+      "units": "mm-cell; multiply by cell area / 1000 for m3",
+      "cellArea_m2": 16,
+      "initialStorage": 39509.91992049058,
+      "input": 0,
+      "storage": 39509.91992049058,
+      "evaporated": 0,
+      "deepDrainage": 0,
+      "boundaryExport": 0,
+      "roofExport": 0,
+      "residual": 0,
+      "relativeResidual": 0,
+      "steps": 0,
+      "elapsedSeconds": 0,
+      "forcingTimeSeconds": 0
+    },
+    "terrain": {
+      "levels": 11,
+      "nearSpacing_m": 0.25,
+      "outerHalfExtent_m": 16384,
+      "vertices": 183051,
+      "triangles": 275968,
+      "updates": 1,
+      "lastUpdateMs": 1344.2999999998137,
+      "maxUpdateMs": 1344.2999999998137,
+      "heightEvaluations": 180491,
+      "cachedSamples": 180491
+    },
+    "ponds": {
+      "basins": 21,
+      "spacing_m": 1,
+      "triangles": 877,
+      "activeBasins": 0,
+      "columnPondVolume_m3": 0,
+      "reconstructedVolume_m3": 0,
+      "mobileOutsideBasins_m3": 0,
+      "aboveSpillVolume_m3": 0,
+      "accountingResidual_m3": 0,
+      "maxBasinSolveError_m3": 0,
+      "renderedTriangles": 0
+    },
+    "position": [
+      0,
+      3.045873320927338,
+      9
+    ],
+    "yaw": 0,
+    "pitch": -0.04,
+    "fov": 58,
+    "exposure": "fixed",
+    "exposureBase": 0.244647046,
+    "renderExposure": 0.244647046,
+    "ev": 0,
+    "whiteBalanceStrength": 1,
+    "whiteBalanceGain": [
+      0.8055076246147659,
+      1.0428335463232834,
+      1.43700702659039
+    ],
+    "freeze": true,
+    "quality": "economy",
+    "graphicsBackend": {
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "software": true,
+      "multisampling": 0,
+      "conservativeDefaults": true
+    },
+    "viewport": [
+      480,
+      300
+    ],
+    "pixelRatio": 1
+  },
+  "route": {
+    "frames": 12,
+    "state": {
+      "schema": "open-moon-shoreline-state/2",
+      "build": "shoreline-r186-03",
+      "world": "moon",
+      "clock": "moon",
+      "phase": 0,
+      "motionTime": 0,
+      "windDisplacement": 0,
+      "weatherKind": "clear",
+      "weatherTime": 0,
+      "ledger": {
+        "exposed": 0,
+        "canopy": 0,
+        "leaf": 0,
+        "sheltered": 0,
+        "totalInput": 0,
+        "evaporated": 0,
+        "drained": 0,
+        "residual": 0
+      },
+      "spatialWater": {
+        "units": "mm-cell; multiply by cell area / 1000 for m3",
+        "cellArea_m2": 16,
+        "initialStorage": 39509.91992049058,
+        "input": 0,
+        "storage": 39509.91992049058,
+        "evaporated": 0,
+        "deepDrainage": 0,
+        "boundaryExport": 0,
+        "roofExport": 0,
+        "residual": 0,
+        "relativeResidual": 0,
+        "steps": 0,
+        "elapsedSeconds": 0,
+        "forcingTimeSeconds": 0
+      },
+      "terrain": {
+        "levels": 11,
+        "nearSpacing_m": 0.25,
+        "outerHalfExtent_m": 16384,
+        "vertices": 183051,
+        "triangles": 275968,
+        "updates": 1,
+        "lastUpdateMs": 1344.2999999998137,
+        "maxUpdateMs": 1344.2999999998137,
+        "heightEvaluations": 180491,
+        "cachedSamples": 180491
+      },
+      "ponds": {
+        "basins": 21,
+        "spacing_m": 1,
+        "triangles": 877,
+        "activeBasins": 0,
+        "columnPondVolume_m3": 0,
+        "reconstructedVolume_m3": 0,
+        "mobileOutsideBasins_m3": 0,
+        "aboveSpillVolume_m3": 0,
+        "accountingResidual_m3": 0,
+        "maxBasinSolveError_m3": 0,
+        "renderedTriangles": 0
+      },
+      "position": [
+        0,
+        3.045873320927338,
+        9
+      ],
+      "yaw": 0,
+      "pitch": -0.04,
+      "fov": 58,
+      "exposure": "fixed",
+      "exposureBase": 0.244647046,
+      "renderExposure": 0.244647046,
+      "ev": 0,
+      "whiteBalanceStrength": 1,
+      "whiteBalanceGain": [
+        0.8055076246147659,
+        1.0428335463232834,
+        1.43700702659039
+      ],
+      "freeze": true,
+      "quality": "economy",
+      "graphicsBackend": {
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "software": true,
+        "multisampling": 0,
+        "conservativeDefaults": true
+      },
+      "viewport": [
+        480,
+        300
+      ],
+      "pixelRatio": 1
+    },
+    "median_ms": 3099.3000000002794,
+    "p95_ms": 3556.899999999907,
+    "max_ms": 3556.899999999907,
+    "submissionMedian_ms": 4.900000000372529,
+    "times_ms": [
+      3486.5,
+      3007.6999999997206,
+      3094.9000000003725,
+      3142.5,
+      3099.3000000002794,
+      3015.399999999907,
+      2976.7000000001863,
+      3003.5,
+      3403.8000000002794,
+      3556.899999999907,
+      3009.899999999907,
+      3507.2999999998137
+    ],
+    "draws": [
+      {
+        "frame": 45,
+        "calls": 353,
+        "triangles": 4002260,
+        "points": 0,
+        "lines": 0
+      },
+      {
+        "frame": 48,
+        "calls": 353,
+        "triangles": 4002260,
+        "points": 0,
+        "lines": 0
+      },
+      {
+        "frame": 51,
+        "calls": 353,
+        "triangles": 4002260,
+        "points": 0,
+        "lines": 0
+      },
+      {
+        "frame": 54,
+        "calls": 353,
+        "triangles": 4002260,
+        "points": 0,
+        "lines": 0
+      },
+      {
+        "frame": 57,
+        "calls": 353,
+        "triangles": 4002260,
+        "points": 0,
+        "lines": 0
+      },
+      {
+        "frame": 60,
+        "calls": 355,
+        "triangles": 4062968,
+        "points": 0,
+        "lines": 0
+      },
+      {
+        "frame": 63,
+        "calls": 359,
+        "triangles": 4072640,
+        "points": 0,
+        "lines": 0
+      },
+      {
+        "frame": 66,
+        "calls": 359,
+        "triangles": 4072640,
+        "points": 0,
+        "lines": 0
+      },
+      {
+        "frame": 69,
+        "calls": 365,
+        "triangles": 4207688,
+        "points": 0,
+        "lines": 0
+      },
+      {
+        "frame": 72,
+        "calls": 365,
+        "triangles": 4207688,
+        "points": 0,
+        "lines": 0
+      },
+      {
+        "frame": 75,
+        "calls": 363,
+        "triangles": 4207208,
+        "points": 0,
+        "lines": 0
+      },
+      {
+        "frame": 78,
+        "calls": 363,
+        "triangles": 4207920,
+        "points": 0,
+        "lines": 0
+      }
+    ],
+    "memory": {
+      "geometries": 50,
+      "textures": 18
+    },
+    "completionPixel": [
+      130,
+      121,
+      105,
+      255
+    ],
+    "method": "Synchronous one-pixel readback plus finish; identical prescribed 12-frame route"
+  },
+  "gpu": {
+    "lost": false,
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+  },
+  "finalState": {
+    "schema": "open-moon-shoreline-state/2",
+    "build": "shoreline-r186-03",
+    "world": "moon",
+    "clock": "moon",
+    "phase": 0,
+    "motionTime": 0,
+    "windDisplacement": 0,
+    "weatherKind": "clear",
+    "weatherTime": 0,
+    "ledger": {
+      "exposed": 0,
+      "canopy": 0,
+      "leaf": 0,
+      "sheltered": 0,
+      "totalInput": 0,
+      "evaporated": 0,
+      "drained": 0,
+      "residual": 0
+    },
+    "spatialWater": {
+      "units": "mm-cell; multiply by cell area / 1000 for m3",
+      "cellArea_m2": 16,
+      "initialStorage": 39509.91992049058,
+      "input": 0,
+      "storage": 39509.91992049058,
+      "evaporated": 0,
+      "deepDrainage": 0,
+      "boundaryExport": 0,
+      "roofExport": 0,
+      "residual": 0,
+      "relativeResidual": 0,
+      "steps": 0,
+      "elapsedSeconds": 0,
+      "forcingTimeSeconds": 0
+    },
+    "terrain": {
+      "levels": 11,
+      "nearSpacing_m": 0.25,
+      "outerHalfExtent_m": 16384,
+      "vertices": 183051,
+      "triangles": 275968,
+      "updates": 4,
+      "lastUpdateMs": 8.199999999720603,
+      "maxUpdateMs": 1344.2999999998137,
+      "heightEvaluations": 181515,
+      "cachedSamples": 181515
+    },
+    "ponds": {
+      "basins": 21,
+      "spacing_m": 1,
+      "triangles": 877,
+      "activeBasins": 0,
+      "columnPondVolume_m3": 0,
+      "reconstructedVolume_m3": 0,
+      "mobileOutsideBasins_m3": 0,
+      "aboveSpillVolume_m3": 0,
+      "accountingResidual_m3": 0,
+      "maxBasinSolveError_m3": 0,
+      "renderedTriangles": 0
+    },
+    "position": [
+      1.65,
+      3.09439542365251,
+      9.275
+    ],
+    "yaw": 0,
+    "pitch": -0.04,
+    "fov": 58,
+    "exposure": "fixed",
+    "exposureBase": 0.244647046,
+    "renderExposure": 0.244647046,
+    "ev": 0,
+    "whiteBalanceStrength": 1,
+    "whiteBalanceGain": [
+      0.8055076246147659,
+      1.0428335463232834,
+      1.43700702659039
+    ],
+    "freeze": true,
+    "quality": "economy",
+    "graphicsBackend": {
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "software": true,
+      "multisampling": 0,
+      "conservativeDefaults": true
+    },
+    "viewport": [
+      480,
+      300
+    ],
+    "pixelRatio": 1
+  },
+  "passed": true,
+  "elapsed_s": 77.52893341199979
+}

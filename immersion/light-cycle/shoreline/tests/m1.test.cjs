@@ -5,15 +5,18 @@ const fs=require('node:fs');
 const path=require('node:path');
 const crypto=require('node:crypto');
 const C=require('../src/core.js');
-const T=require('../vendor/three.cjs');
+const T=require('../vendor/three-r186/three.module.js');
 globalThis.OM={}; require('../src/scene.js');
 const root=path.join(__dirname,'..');
 const close=(a,b,tol=1e-7)=>assert.ok(Math.abs(a-b)<=tol, `${a} != ${b}, tolerance ${tol}`);
 
-test('M1: supplied Three.js has exact pinned Git blob identity',()=>{
- const bytes=fs.readFileSync(path.join(root,'vendor/three.cjs'));
- const hash=crypto.createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex');
- assert.equal(hash,'ca4833532c363b72477b2e8a6f47cc0e2fc7b09a');assert.equal(T.REVISION,'180');
+test('r186: supplied ESM dependencies match the pinned release manifest',()=>{
+ const dir=path.join(root,'vendor/three-r186'),m=JSON.parse(fs.readFileSync(path.join(dir,'manifest.json')));
+ for(const [name,spec] of Object.entries(m.files)){
+  const bytes=fs.readFileSync(path.join(dir,name));assert.equal(bytes.length,spec.bytes);
+  assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),spec.sha256);
+ }
+ assert.equal(T.REVISION,'186');
 });
 test('M1: terrain field stays continuous across the coast guide',()=>{
  const e=1e-5;for(let x=-500;x<=500;x+=7){const z=C.shore(x);close(C.surfaceHeight(x,z-e),C.surfaceHeight(x,z+e),1e-4);}
@@ -49,7 +52,7 @@ test('M1: overflowing GLSL hyperbolic tangent is replaced by its bounded equival
 });
 test('M1: HTML embeds verified vendor and all twelve runtime modules',()=>{
  const html=fs.readFileSync(path.join(root,'Open_Moon_Shoreline.html'),'utf8');
- const encoded=html.match(/<script id="three-vendor"[^>]*>([^<]+)<\/script>/)[1];assert.deepEqual(Buffer.from(encoded,'base64'),fs.readFileSync(path.join(root,'vendor/three.cjs')));
+ const pack=JSON.parse(html.match(/<script id="three-vendor"[^>]*>([^<]+)<\/script>/)[1]);for(const [name,encoded]of Object.entries(pack.modules))assert.deepEqual(Buffer.from(encoded,'base64'),fs.readFileSync(path.join(root,'vendor/three-r186',name)));assert.equal(pack.manifest.revision,'186');
  for(const name of['landscape','core','atmosphere','materials','terrain','surface-water','ecology','scene','water','audio','app','loader'])assert.ok(html.includes(fs.readFileSync(path.join(root,`src/${name}.js`),'utf8').trim()));
  assert.ok(!/__SKY_DATA__|__THREE_VENDOR__|__MATERIALS__/.test(html));
 });

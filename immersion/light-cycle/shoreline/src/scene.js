@@ -64,6 +64,7 @@ function createScene(T,scene,atm,world='moon'){
  state.update=(l,time=0,kind='clear')=>{
   const before=state.surfaceWater.version;state.surfaceWater.seek(time,kind);
   if(before!==state.surfaceWater.version||state.waterTextureVersion!==state.surfaceWater.version){state.fieldUniforms.uSurfaceState.value.image.data=state.surfaceWater.textureData();state.fieldUniforms.uSurfaceState.value.needsUpdate=true;state.waterTextureVersion=state.surfaceWater.version;}
+  if(state.ponds)state.ponds.update();
   for(const m of state.materials){const u=m.userData.omUniforms;if(u){u.uWet.value=C.clamp(l.exposed/.9);u.uCanopyWet.value=C.clamp(l.canopy/.7);u.uLeafWet.value=C.clamp(l.leaf/.35);}}
  };
  const decorations=scene.children.filter(o=>!inheritedObjects.has(o)&&!o.userData.landscape);
@@ -84,9 +85,10 @@ function createScene(T,scene,atm,world='moon'){
    state.trees.forEach((t,i)=>t.y=treeY[i]+delta(t.x,t.z));
    deckY=baseDeckY+delta(S.x,S.z);state.pavilionY=deckY;state.world=worldKey;
   }
-  state.terrain.setWorld(worldKey);return state.terrain.update(x,z);
+  state.terrain.setWorld(worldKey);if(state.ponds)state.ponds.update();return state.terrain.update(x,z);
  };
  state.debug=mode=>{state.fieldUniforms.uLandscapeDebug.value=mode;};
+ state.ponds=OM.createPonds(T,scene,atm,state);
  state.counts={...ecologyCounts,terrainVertices:state.terrain.stats.vertices,terrainLevels:state.terrain.stats.levels};
  return state;
 }

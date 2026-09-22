@@ -1,0 +1,699 @@
+{
+  "schema": "open-moon-revision-03/1",
+  "date": "2026-09-22",
+  "base_commit": "caa4caa2b2855e9ed8f03597317a05d8224949e6",
+  "remote_writes_in_this_revision": false,
+  "status": "Local r186 WebGL revision and optional node-renderer experiment. Native WebGPU promotion remains open.",
+  "outputs": {
+    "Open_Moon_Shoreline.html": {
+      "bytes": 14384938,
+      "sha256": "8065d20600ddf17d46747ce1f6adcd10347c9550ac9d9964c6ca6cb5bfcb4cb0"
+    },
+    "Open_Moon_Renderer_Lab.html": {
+      "bytes": 17462223,
+      "sha256": "622ff0bd3370b9e6afedf86c6ce6d5dfeae70f0c003149fc37eb5935fb1a0f31"
+    }
+  },
+  "runtime_sha256": {
+    "src/app.js": "58ad6d216b9e2de5f1f2174c2f416d619642b165cf7ddb65ce26367a351a2d5e",
+    "src/atmosphere.js": "e60844357b189cecff7dcdb0adb45f4c4adc8690ae8f3a4640ae1231edbfed13",
+    "src/audio.js": "23fee2369e179668e9eda580522667085374f348fd36b2c64f6116bfbc1240f6",
+    "src/core.js": "63929c21a1ef626cca92faaa5e08250d26ef81b329ad96f45da1ed23d5b21934",
+    "src/ecology.js": "e29dbb1ed0a032f47eb83b0c85102d9af958e9c17d8b3694662b8c2d0bdef566",
+    "src/landscape.js": "e80aca30de3a4816011caa7b95a9303677de1fd948a27ede728bdb053cfe0686",
+    "src/loader.js": "af83b2446aab99dbe7b8660abb8378e69c7d2a6247d7586de8972893a763deea",
+    "src/materials.js": "ddf9295aefd4988e9f3a570f33ab0c48b1b024180882415aaa219404e53f18ad",
+    "src/node-materials.js": "a2411a9d62ea957312fe639ce0c2f104493669acb53b3baf86c19e719a7b9807",
+    "src/ponds.js": "b707880abf1848f48d9b2f3f5932d5122e8c021fccc9742cbfd9256b84537b10",
+    "src/renderer-lab.js": "0dd9c491c55bfe96e76275f78b245ab0c0ad2b7ce19d09d32b514f47553ec359",
+    "src/scene.js": "aa9d8a59b8944d9d4ce80131a9d00e8542f65e0d6a2ed5910dd759860d609d36",
+    "src/surface-water.js": "f369bc25e11b185cf65cab581c119bb56e05617394c86dedf22ac5fa65c3cea7",
+    "src/terrain.js": "2d1aa27a514b2301de855b57fceed47541a0ff3622da86ecc91964ad3e361abf",
+    "src/water.js": "7f7f40efbc7261bec170f19723350c7e4422a26c0d40dd660ffb58c6231a5b84"
+  },
+  "retained_baseline_inputs": {
+    "data/atmosphere.json": true,
+    "assets/surfaces/albedo-ao.png": true,
+    "assets/surfaces/normal-roughness-height.png": true,
+    "assets/surfaces/manifest.json": true,
+    "src/landscape.js": true,
+    "src/ecology.js": true,
+    "src/surface-water.js": true,
+    "src/audio.js": true
+  },
+  "dependency_manifest": "vendor/three-r186/manifest.json",
+  "controlled_migration": {
+    "scope": "r180 and r186 with unchanged model and original exposure",
+    "baseline": "validation/r186/baseline-noon.json",
+    "candidate": "validation/r186/migration-noon.json",
+    "image_delta": "validation/r186/migration-image-delta.json",
+    "original_gray_failure": "validation/r186/migration-optics.json",
+    "exposure_decision": {
+      "scope": "After controlled unchanged-exposure comparison; model-improvement build",
+      "baselineExposure": 0.236657345,
+      "migrationGrayCardLuminance": 0.17222685977816582,
+      "targetGrayCardLuminance": 0.18,
+      "r186Exposure": 0.244647046,
+      "changePercent": 3.3760629740860137,
+      "basis": "GPU gray-card probe in migration-optics.json; original failed assertion retained",
+      "policy": "No sky/input-light changes. Main and TSL lab use the same revised exposure. Exact unchanged-exposure migration build remains separately captured."
+    },
+    "final_gray_luminance": 0.17999983087182042
+  },
+  "unit_tests": {
+    "command": "node --test --test-concurrency=1 tests/core.test.cjs tests/m1.test.cjs tests/landscape.test.cjs tests/ponds.test.cjs",
+    "tests": 99,
+    "pass": 99,
+    "fail": 0,
+    "skip": 0,
+    "node": "v22.16.0",
+    "record": "validation/r186/release-unit.tap"
+  },
+  "cpu_comparison": {
+    "baseline": {
+      "median_of_run_medians_ms": 22.2096219999994,
+      "run_medians_ms": [
+        22.2096219999994,
+        22.072045999999773,
+        24.019676000000345
+      ],
+      "run_p95_ms": [
+        68.46126600000025,
+        74.42130700000052,
+        81.55823800000007
+      ]
+    },
+    "candidate": {
+      "median_of_run_medians_ms": 16.401000999999724,
+      "run_medians_ms": [
+        16.401000999999724,
+        16.336362999999892,
+        17.567990000000464
+      ],
+      "run_p95_ms": [
+        56.30459400000018,
+        61.470552000000225,
+        54.08584400000018
+      ]
+    },
+    "median_reduction_fraction": 0.2615362386626766,
+    "scope": "CPU geometry only; three alternating pairs; neither native WebGPU nor display FPS"
+  },
+  "cpu_raw": "validation/r186/cpu-terrain-comparison.json",
+  "browser": {
+    "accepted_runs": [
+      {
+        "name": "release-reference",
+        "passed": true,
+        "record": "validation/r186/release-reference.json",
+        "html_sha256": "8a857d491281c53faf3005eeaa77e1aaef01397dcb35a7f9ed8274c1202081b6",
+        "checks": {
+          "boot": true,
+          "capture": true
+        },
+        "errors": []
+      },
+      {
+        "name": "release-optics-reset",
+        "passed": true,
+        "record": "validation/r186/release-optics-reset.json",
+        "html_sha256": "8a857d491281c53faf3005eeaa77e1aaef01397dcb35a7f9ed8274c1202081b6",
+        "checks": {
+          "boot": true,
+          "reference_screenshot": true,
+          "foreground_rock_occlusion_confirmed_by_raycast": true,
+          "gpu_gray_card_and_depth": true,
+          "world_weather_camera_reset_pixel_identical": true
+        },
+        "errors": []
+      },
+      {
+        "name": "release-ponds",
+        "passed": true,
+        "record": "validation/r186/release-ponds.json",
+        "html_sha256": "8a857d491281c53faf3005eeaa77e1aaef01397dcb35a7f9ed8274c1202081b6",
+        "checks": {
+          "boot": true,
+          "pond_geometry_volume": true,
+          "capture": true
+        },
+        "errors": []
+      },
+      {
+        "name": "final-mobile",
+        "passed": true,
+        "record": "validation/r186/final-mobile.json",
+        "html_sha256": "f7e83ed56715a5ae706673dcaa66d267efb1247b1e72518c0b604f28867ffdc8",
+        "checks": {
+          "boot": true,
+          "reference_screenshot": true,
+          "controls_fit_viewport": true
+        },
+        "errors": []
+      },
+      {
+        "name": "final-walk",
+        "passed": true,
+        "record": "validation/r186/final-walk.json",
+        "html_sha256": "f7e83ed56715a5ae706673dcaa66d267efb1247b1e72518c0b604f28867ffdc8",
+        "checks": {
+          "boot": true,
+          "walk_completed": true,
+          "capture": true
+        },
+        "errors": []
+      },
+      {
+        "name": "release-lab-reference",
+        "passed": true,
+        "record": "validation/r186/release-lab-reference.json",
+        "html_sha256": "622ff0bd3370b9e6afedf86c6ce6d5dfeae70f0c003149fc37eb5935fb1a0f31",
+        "checks": {
+          "boot": true,
+          "capture": true
+        },
+        "errors": []
+      },
+      {
+        "name": "release-lab-ponds",
+        "passed": true,
+        "record": "validation/r186/release-lab-ponds.json",
+        "html_sha256": "622ff0bd3370b9e6afedf86c6ce6d5dfeae70f0c003149fc37eb5935fb1a0f31",
+        "checks": {
+          "boot": true,
+          "pond_geometry_volume": true,
+          "node_fields_reach_gpu": true,
+          "capture": true
+        },
+        "errors": []
+      },
+      {
+        "name": "benchmark-webgl",
+        "passed": true,
+        "record": "validation/r186/benchmark-webgl.json",
+        "html_sha256": "8a857d491281c53faf3005eeaa77e1aaef01397dcb35a7f9ed8274c1202081b6",
+        "checks": {
+          "boot": true,
+          "benchmark_completed": true,
+          "capture": true
+        },
+        "errors": []
+      },
+      {
+        "name": "benchmark-tsl-webgl",
+        "passed": true,
+        "record": "validation/r186/benchmark-tsl-webgl.json",
+        "html_sha256": "622ff0bd3370b9e6afedf86c6ce6d5dfeae70f0c003149fc37eb5935fb1a0f31",
+        "checks": {
+          "boot": true,
+          "benchmark_completed": true,
+          "capture": true
+        },
+        "errors": []
+      },
+      {
+        "name": "delivered-optics-reset",
+        "passed": true,
+        "record": "validation/r186/delivered-optics-reset.json",
+        "html_sha256": "8065d20600ddf17d46747ce1f6adcd10347c9550ac9d9964c6ca6cb5bfcb4cb0",
+        "checks": {
+          "boot": true,
+          "reference_screenshot": true,
+          "foreground_rock_occlusion_confirmed_by_raycast": true,
+          "gpu_gray_card_and_depth": true,
+          "world_weather_camera_reset_pixel_identical": true
+        },
+        "errors": []
+      }
+    ],
+    "software_backend": "Chromium 144 / ANGLE SwiftShader",
+    "scope": "in-memory exact built HTML with harness-only digest bridge; mobile is viewport/control testing, not a physical mobile device",
+    "walking_frames": 24,
+    "long_duration_stability_established": false,
+    "native_webgpu_executed": false,
+    "consumer_gpu_benchmarked": false,
+    "native_capability_record": "validation/r186/native-capability.json",
+    "notice_only_rebuilds": "Some captures precede final notice text and revision-number/model-boundary UI text. Their main runtime, dependencies, atmosphere/material inputs and image-forming markup are unchanged. The delivered-optics-reset run uses the exact delivered WebGL HTML; final node reference/pond/benchmark runs use the delivered lab HTML."
+  },
+  "ponds_after_four_hours": {
+    "basins": 21,
+    "spacing_m": 1,
+    "triangles": 877,
+    "activeBasins": 2,
+    "columnPondVolume_m3": 4.565945348017405,
+    "reconstructedVolume_m3": 3.408698731785502,
+    "mobileOutsideBasins_m3": 0.7420426766386509,
+    "aboveSpillVolume_m3": 0.41520393961881147,
+    "accountingResidual_m3": -2.5559276917164198e-11,
+    "maxBasinSolveError_m3": 2.5918378554479204e-11,
+    "renderedTriangles": 196
+  },
+  "node_field_readback": {
+    "records": [
+      {
+        "field": "uSurfaceState",
+        "channel": 0,
+        "cell": 0,
+        "cpu": [
+          0,
+          0.4284813106060028,
+          0,
+          0
+        ],
+        "gpu": [
+          0,
+          0.4284813106060028,
+          0,
+          0
+        ],
+        "maxAbsoluteError": 0
+      },
+      {
+        "field": "uSurfaceState",
+        "channel": 1,
+        "cell": 944,
+        "cpu": [
+          0,
+          0.833026111125946,
+          0,
+          0
+        ],
+        "gpu": [
+          0,
+          0.833026111125946,
+          0,
+          0
+        ],
+        "maxAbsoluteError": 0
+      },
+      {
+        "field": "uSurfaceState",
+        "channel": 2,
+        "cell": 2174,
+        "cpu": [
+          0,
+          0.5973266959190369,
+          46.37766647338867,
+          0
+        ],
+        "gpu": [
+          0,
+          0.5973266959190369,
+          46.37766647338867,
+          0
+        ],
+        "maxAbsoluteError": 0
+      },
+      {
+        "field": "uSurfaceState",
+        "channel": 3,
+        "cell": 0,
+        "cpu": [
+          0,
+          0.4284813106060028,
+          0,
+          0
+        ],
+        "gpu": [
+          0,
+          0.4284813106060028,
+          0,
+          0
+        ],
+        "maxAbsoluteError": 0
+      },
+      {
+        "field": "uPondLevels",
+        "channel": 0,
+        "cell": 39227,
+        "cpu": [
+          7.532682418823242,
+          0,
+          0,
+          1
+        ],
+        "gpu": [
+          7.532682418823242,
+          0,
+          0,
+          1
+        ],
+        "maxAbsoluteError": 0
+      },
+      {
+        "field": "uMaterialFields",
+        "channel": 0,
+        "cell": 110,
+        "cpu": [
+          0.8849557638168335,
+          0.1150442510843277,
+          1.826426227461873e-15,
+          0
+        ],
+        "gpu": [
+          0.8849557638168335,
+          0.1150442510843277,
+          1.826426227461873e-15,
+          0
+        ],
+        "maxAbsoluteError": 0
+      },
+      {
+        "field": "uEnvironmentFields",
+        "channel": 0,
+        "cell": 16060,
+        "cpu": [
+          0.9747743010520935,
+          5.2873645472573116e-05,
+          1,
+          0.35049155354499817
+        ],
+        "gpu": [
+          0.9747743010520935,
+          5.2873645472573116e-05,
+          1,
+          0.35049155354499817
+        ],
+        "maxAbsoluteError": 0
+      },
+      {
+        "field": "uBathymetry",
+        "channel": 0,
+        "cell": 65981,
+        "cpu": [
+          28.26059913635254,
+          0,
+          0,
+          0
+        ],
+        "gpu": [
+          28.26059913635254,
+          0,
+          0,
+          0
+        ],
+        "maxAbsoluteError": 0
+      }
+    ],
+    "maxAbsoluteError": 0,
+    "actualBackend": "webgl2"
+  },
+  "node_image_comparison": {
+    "viewport": [
+      640,
+      400
+    ],
+    "scene": "matched clear-noon reference; wind sway and exact leaf-lighting parity remain incomplete",
+    "mean_absolute_8bit_channel_difference": 0.4032395833333333,
+    "p95_absolute_8bit_channel_difference": 1.0,
+    "max_absolute_8bit_channel_difference": 192,
+    "pixel_identical_fraction": 0.40184375,
+    "native_webgpu": false
+  },
+  "synchronized_renderer_comparison": {
+    "runs": {
+      "benchmark-webgl": {
+        "frames": 12,
+        "median_ms": 3099.3000000002794,
+        "p95_ms": 3556.899999999907,
+        "max_ms": 3556.899999999907,
+        "submissionMedian_ms": 4.900000000372529,
+        "method": "Synchronous one-pixel readback plus finish; identical prescribed 12-frame route",
+        "completionPixel": [
+          130,
+          121,
+          105,
+          255
+        ],
+        "draws": [
+          {
+            "frame": 45,
+            "calls": 353,
+            "triangles": 4002260,
+            "points": 0,
+            "lines": 0
+          },
+          {
+            "frame": 48,
+            "calls": 353,
+            "triangles": 4002260,
+            "points": 0,
+            "lines": 0
+          },
+          {
+            "frame": 51,
+            "calls": 353,
+            "triangles": 4002260,
+            "points": 0,
+            "lines": 0
+          },
+          {
+            "frame": 54,
+            "calls": 353,
+            "triangles": 4002260,
+            "points": 0,
+            "lines": 0
+          },
+          {
+            "frame": 57,
+            "calls": 353,
+            "triangles": 4002260,
+            "points": 0,
+            "lines": 0
+          },
+          {
+            "frame": 60,
+            "calls": 355,
+            "triangles": 4062968,
+            "points": 0,
+            "lines": 0
+          },
+          {
+            "frame": 63,
+            "calls": 359,
+            "triangles": 4072640,
+            "points": 0,
+            "lines": 0
+          },
+          {
+            "frame": 66,
+            "calls": 359,
+            "triangles": 4072640,
+            "points": 0,
+            "lines": 0
+          },
+          {
+            "frame": 69,
+            "calls": 365,
+            "triangles": 4207688,
+            "points": 0,
+            "lines": 0
+          },
+          {
+            "frame": 72,
+            "calls": 365,
+            "triangles": 4207688,
+            "points": 0,
+            "lines": 0
+          },
+          {
+            "frame": 75,
+            "calls": 363,
+            "triangles": 4207208,
+            "points": 0,
+            "lines": 0
+          },
+          {
+            "frame": 78,
+            "calls": 363,
+            "triangles": 4207920,
+            "points": 0,
+            "lines": 0
+          }
+        ],
+        "memory": {
+          "geometries": 50,
+          "textures": 18
+        }
+      },
+      "benchmark-tsl-webgl": {
+        "frames": 12,
+        "median_ms": 3751.6999999997206,
+        "p95_ms": 4776.399999999907,
+        "max_ms": 4776.399999999907,
+        "submissionMedian_ms": 38.3000000002794,
+        "method": "Synchronized frame latency: WebGL2 uses synchronous pixel readback plus finish; WebGPU uses queue.onSubmittedWorkDone. Includes CPU and all scene passes; excludes sleep",
+        "completionPixel": [
+          131,
+          121,
+          105,
+          255
+        ],
+        "draws": [
+          {
+            "calls": 51,
+            "frameCalls": 4,
+            "drawCalls": 131,
+            "triangles": 1688687,
+            "points": 0,
+            "lines": 0,
+            "timestamp": 0
+          },
+          {
+            "calls": 57,
+            "frameCalls": 6,
+            "drawCalls": 577,
+            "triangles": 6323419,
+            "points": 0,
+            "lines": 0,
+            "timestamp": 0
+          },
+          {
+            "calls": 63,
+            "frameCalls": 6,
+            "drawCalls": 577,
+            "triangles": 6323419,
+            "points": 0,
+            "lines": 0,
+            "timestamp": 0
+          },
+          {
+            "calls": 69,
+            "frameCalls": 6,
+            "drawCalls": 577,
+            "triangles": 6323419,
+            "points": 0,
+            "lines": 0,
+            "timestamp": 0
+          },
+          {
+            "calls": 75,
+            "frameCalls": 6,
+            "drawCalls": 577,
+            "triangles": 6323419,
+            "points": 0,
+            "lines": 0,
+            "timestamp": 0
+          },
+          {
+            "calls": 81,
+            "frameCalls": 6,
+            "drawCalls": 579,
+            "triangles": 6384127,
+            "points": 0,
+            "lines": 0,
+            "timestamp": 0
+          },
+          {
+            "calls": 87,
+            "frameCalls": 6,
+            "drawCalls": 583,
+            "triangles": 6393799,
+            "points": 0,
+            "lines": 0,
+            "timestamp": 0
+          },
+          {
+            "calls": 93,
+            "frameCalls": 6,
+            "drawCalls": 583,
+            "triangles": 6393799,
+            "points": 0,
+            "lines": 0,
+            "timestamp": 0
+          },
+          {
+            "calls": 99,
+            "frameCalls": 6,
+            "drawCalls": 589,
+            "triangles": 6528847,
+            "points": 0,
+            "lines": 0,
+            "timestamp": 0
+          },
+          {
+            "calls": 105,
+            "frameCalls": 6,
+            "drawCalls": 589,
+            "triangles": 6528847,
+            "points": 0,
+            "lines": 0,
+            "timestamp": 0
+          },
+          {
+            "calls": 111,
+            "frameCalls": 6,
+            "drawCalls": 587,
+            "triangles": 6528367,
+            "points": 0,
+            "lines": 0,
+            "timestamp": 0
+          },
+          {
+            "calls": 117,
+            "frameCalls": 6,
+            "drawCalls": 588,
+            "triangles": 6530031,
+            "points": 0,
+            "lines": 0,
+            "timestamp": 0
+          }
+        ],
+        "memory": {
+          "attributes": 739,
+          "attributesSize": 41109784,
+          "geometries": 121,
+          "indexAttributes": 109,
+          "indexAttributesSize": 6568416,
+          "indirectStorageAttributes": 0,
+          "indirectStorageAttributesSize": 0,
+          "programs": 244,
+          "programsSize": 867343,
+          "readbackBuffers": 0,
+          "readbackBuffersSize": 0,
+          "renderTargets": 6,
+          "storageAttributes": 0,
+          "storageAttributesSize": 0,
+          "textures": 21,
+          "texturesSize": 49679498,
+          "uniformBuffers": 550,
+          "uniformBuffersSize": 1343392,
+          "total": 99568433
+        }
+      }
+    },
+    "scope": "12 frames after three warm-up frames, 480x300, same prescribed camera route, same source landscape and water state, no multisampling, software adapter. These are synchronized latencies with readback overhead. Pipeline shadow-update schedules and leaf lighting differ; no API-only or native-WebGPU speed conclusion.",
+    "preliminary_finish_only_results_excluded": true,
+    "interpretation": "The TSL WebGL2 fallback was slower in this short software-adapter sample (approximately 3.75 versus 3.10 seconds per synchronized frame). This is not native WebGPU evidence and does not determine consumer-hardware performance."
+  },
+  "limitations": [
+    "Native WebGPU shader execution, hardware speed and stability remain unmeasured.",
+    "Node-path cloud transport, animated rain, exact leaf transmission and sway remain feature gaps.",
+    "Pond meshes reconstruct sub-grid volumes; mobile and above-spill storage remain explicit. This does not solve shallow-water dynamics.",
+    "Wave amplitudes are bathymetry bounded; fixed-depth phases remain. Breaking, shoaling, run-up and sediment evolution remain open.",
+    "Vegetation structure, ecological suitability and regional landforms remain inherited. Material-height vertex displacement and regional vegetation LOD remain open.",
+    "Short-route success does not establish resolution of the earlier sustained SwiftShader context loss."
+  ],
+  "diagnostics": {
+    "directory": "validation/r186/diagnostics",
+    "node_port_intermediates": [
+      "lab-reference.json",
+      "lab-reference2.json"
+    ],
+    "harness_failures": [
+      "capture-invocation-no-extension.json",
+      "node-readback-raf.json",
+      "raf-restoration-invocation.json"
+    ],
+    "note": "Earlier incorrect node mix/reflection work and test-harness invocation/RAF errors are retained; they do not describe accepted final captures."
+  },
+  "official_dependency_verification": "validation/r186/official-module-verification.json",
+  "application_helper": {
+    "pass": 9,
+    "fail": 0,
+    "record": "validation/r186/application-guards.json",
+    "script": "tests/test_apply_revision.py",
+    "scope": "synthetic filesystem fixtures using verified baseline files; real checkout not modified"
+  },
+  "remote_head_last_verified": "caa4caa2b2855e9ed8f03597317a05d8224949e6"
+}

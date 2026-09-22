@@ -1,0 +1,22 @@
+[
+  {
+    "name": "benchmark-webgl",
+    "returncode": 0,
+    "seconds": 78.32483673095703
+  },
+  {
+    "name": "benchmark-tsl-webgl",
+    "returncode": 0,
+    "seconds": 93.25352382659912
+  },
+  {
+    "name": "release-lab-reference",
+    "returncode": 0,
+    "seconds": 41.932278871536255
+  },
+  {
+    "name": "release-lab-ponds",
+    "returncode": 0,
+    "seconds": 84.69354748725891
+  }
+]

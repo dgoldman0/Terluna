@@ -80,11 +80,21 @@ function dropletTerminalSpeed(radius=.0007,gravity=1.62,rhoAir=1.45){const mu=1.
 function waveOmega(k,depth=12,gravity=1.62){return Math.sqrt(gravity*k*Math.tanh(k*depth));}
 function waveAt(x,z,t,wind=2,gravity=1.62){const dirs=[[.94,.342],[.36,.933],[-.45,.89],[.78,-.62]],ks=[.095,.22,.48,1.25],amps=[.15,.085,.04,.012];let y=0,nx=0,nz=0;for(let i=0;i<4;i++){const a=amps[i]*(.4+wind*.15),k=ks[i],q=k*(x*dirs[i][0]+z*dirs[i][1])-waveOmega(k,12,gravity)*t+i*1.5;y+=a*Math.sin(q);nx-=a*k*dirs[i][0]*Math.cos(q);nz-=a*k*dirs[i][1]*Math.cos(q);}return {y,nx,nz};}
 const WATER_BANDS=[.095,.14,.22,.34,.48,.76,1.25,2.,3.5,5.8,9.5,15.];
+// Bounded coastal forcing envelope from the shared bathymetry raster. The
+// prescribed wave phases remain unchanged; this is not a refraction/run-up solve.
+function coastalEnvelope(x,z,wind=1.5){
+ const data=Landscape.initialize(),coverage=Landscape.gridCoverage(x,z);
+ const depth=mix(12,Math.max(0,-Landscape.gridSample(data.elevation,x,z)),coverage);
+ const amplitude=WATER_BANDS.reduce((sum,k)=>sum+.095*Math.pow(.095/k,1.12)*(.4+wind*.18),0);
+ return depth/(depth+amplitude/.45);
+}
 function renderWaveAt(x,z,t,wind=1.5,gravity=1.62){
  let y=0,nx=0,nz=0;
  WATER_BANDS.forEach((k,i)=>{const theta=.95+Math.sin(i*2.399)*.71,dx=Math.cos(theta),dz=Math.sin(theta),a=.095*Math.pow(.095/k,1.12)*(.4+wind*.18),q=k*(x*dx+z*dz)-waveOmega(k,12,gravity)*t+i*2.721;y+=a*Math.sin(q);nx-=a*k*dx*Math.cos(q);nz-=a*k*dz*Math.cos(q);});
- return {y,nx,nz};
+ const envelope=coastalEnvelope(x,z,wind),eps=.001;
+ const dx=(coastalEnvelope(x+eps,z,wind)-coastalEnvelope(x-eps,z,wind))/(2*eps),dz=(coastalEnvelope(x,z+eps,wind)-coastalEnvelope(x,z-eps,wind))/(2*eps);
+ return {y:y*envelope,nx:nx*envelope-y*dx,nz:nz*envelope-y*dz};
 }
-const API={WATER_BANDS,renderWaveAt,TAU,DAY,PERIOD,clamp,mix,smooth,rng,noise,fbm,shore,groundHeight,surfaceHeight,worldRadius,curvatureSag,surfaceGradient,waterDepth,pathDistance,SHELTER,roofMask,WAYPOINTS,sunAt,phaseForElevation,calibratedFov,cloudTau,EPISODE,weatherAt,windDistance,reservoirStep,emptyLedger,stepLedger,ledgerAt,dropletTerminalSpeed,waveOmega,waveAt};
+const API={WATER_BANDS,coastalEnvelope,renderWaveAt,TAU,DAY,PERIOD,clamp,mix,smooth,rng,noise,fbm,shore,groundHeight,surfaceHeight,worldRadius,curvatureSag,surfaceGradient,waterDepth,pathDistance,SHELTER,roofMask,WAYPOINTS,sunAt,phaseForElevation,calibratedFov,cloudTau,EPISODE,weatherAt,windDistance,reservoirStep,emptyLedger,stepLedger,ledgerAt,dropletTerminalSpeed,waveOmega,waveAt};
 root.OpenMoonCore=API;if(typeof module!=='undefined'&&module.exports)module.exports=API;
 })(globalThis);

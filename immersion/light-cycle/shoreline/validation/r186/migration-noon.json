@@ -1,0 +1,131 @@
+{
+  "html_sha256": "c9685f3e5a2067ebc931fb95e80fcec36e07d4f76415941b0322b98b22c75753",
+  "viewport": [
+    640,
+    400
+  ],
+  "errors": [],
+  "console": [],
+  "external_requests": [],
+  "checks": {
+    "boot": true,
+    "reference_screenshot": true
+  },
+  "harness": {
+    "in_memory": true,
+    "sha1_bridge": true,
+    "deterministic_animation_callbacks": true,
+    "finish_each_walk_frame": true,
+    "software": true,
+    "software_backend": "swiftshader"
+  },
+  "state": {
+    "schema": "open-moon-shoreline-state/2",
+    "build": "landscape-ecology-02",
+    "world": "moon",
+    "clock": "moon",
+    "phase": 0,
+    "motionTime": 0,
+    "windDisplacement": 0,
+    "weatherKind": "clear",
+    "weatherTime": 0,
+    "ledger": {
+      "exposed": 0,
+      "canopy": 0,
+      "leaf": 0,
+      "sheltered": 0,
+      "totalInput": 0,
+      "evaporated": 0,
+      "drained": 0,
+      "residual": 0
+    },
+    "spatialWater": {
+      "units": "mm-cell; multiply by cell area / 1000 for m3",
+      "cellArea_m2": 16,
+      "initialStorage": 39509.91992049058,
+      "input": 0,
+      "storage": 39509.91992049058,
+      "evaporated": 0,
+      "deepDrainage": 0,
+      "boundaryExport": 0,
+      "roofExport": 0,
+      "residual": 0,
+      "relativeResidual": 0,
+      "steps": 0,
+      "elapsedSeconds": 0,
+      "forcingTimeSeconds": 0
+    },
+    "terrain": {
+      "levels": 11,
+      "nearSpacing_m": 0.25,
+      "outerHalfExtent_m": 16384,
+      "vertices": 183051,
+      "triangles": 275968,
+      "updates": 1,
+      "lastUpdateMs": 1693.7000000000698,
+      "maxUpdateMs": 1693.7000000000698,
+      "heightEvaluations": 180491,
+      "cachedSamples": 180491
+    },
+    "position": [
+      0,
+      3.045873320927338,
+      9
+    ],
+    "yaw": 0,
+    "pitch": -0.04,
+    "fov": 58,
+    "exposure": "fixed",
+    "exposureBase": 0.236657345,
+    "renderExposure": 0.236657345,
+    "ev": 0,
+    "whiteBalanceStrength": 1,
+    "whiteBalanceGain": [
+      0.8055076246147659,
+      1.0428335463232834,
+      1.43700702659039
+    ],
+    "freeze": true,
+    "quality": "economy",
+    "graphicsBackend": {
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "software": true,
+      "multisampling": 0,
+      "conservativeDefaults": true
+    },
+    "viewport": [
+      640,
+      400
+    ],
+    "pixelRatio": 1
+  },
+  "gpu": {
+    "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "maxTextureSize": 8192
+  },
+  "counts": {
+    "trees": 173,
+    "leaves": 413721,
+    "branchSegments": 57277,
+    "grassClumps": 4601,
+    "understory": 54,
+    "rocks": 232,
+    "pebbles": 2537,
+    "terrainVertices": 183051,
+    "terrainLevels": 11
+  },
+  "initial_environment_updates": 1,
+  "screenshot_sha256": "4fdadd28c3727d572050ad171b85cf49917b1ad9740e98f972470d55a6251627",
+  "final_context_lost": false,
+  "final_environment_updates": 1,
+  "final_render_info": {
+    "frame": 30,
+    "calls": 44,
+    "triangles": 681610,
+    "points": 0,
+    "lines": 0
+  },
+  "passed": true,
+  "elapsed_s": 27.892876212000033
+}

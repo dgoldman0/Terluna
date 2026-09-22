@@ -1,0 +1,37 @@
+[
+  {
+    "name": "final-optics-reset",
+    "returncode": 0,
+    "seconds": 43.02048063278198
+  },
+  {
+    "name": "final-mobile",
+    "returncode": 0,
+    "seconds": 27.793424367904663
+  },
+  {
+    "name": "final-walk",
+    "returncode": 0,
+    "seconds": 46.80077028274536
+  },
+  {
+    "name": "final-lab-reference",
+    "returncode": 0,
+    "seconds": 41.995644330978394
+  },
+  {
+    "name": "final-lab-ponds",
+    "returncode": -15,
+    "seconds": 169.45491361618042
+  },
+  {
+    "name": "benchmark-webgl",
+    "returncode": 0,
+    "seconds": 46.9589524269104
+  },
+  {
+    "name": "benchmark-tsl-webgl",
+    "returncode": 1,
+    "seconds": 2.01137638092041
+  }
+]

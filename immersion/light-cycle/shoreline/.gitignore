@@ -5,3 +5,7 @@ node_modules/
 /assets/surfaces/*.png
 /vendor/three.cjs
 /validation/recovery-runs/
+/Open_Moon_Renderer_Lab.html
+/vendor/three-r186/three.*.js
+/validation/r186/*.png
+/validation/r186/diagnostics/*.png

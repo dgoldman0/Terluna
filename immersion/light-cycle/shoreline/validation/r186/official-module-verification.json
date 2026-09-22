@@ -1,0 +1,12 @@
+{
+  "official_tag": "r186",
+  "repository": "mrdoob/three.js",
+  "source": "GitHub build directory API fetched 2026-09-22",
+  "git_blob_matches": {
+    "three.core.js": "0a1d6cb9ef3cabc97a50bd02394c85e8d1c513c2",
+    "three.module.js": "c52087acfabae80efabb8cc05e3a1d96e35a1426",
+    "three.tsl.js": "b6e5a35f302f1600a0e90dd4f319d897030e088a",
+    "three.webgpu.js": "8cbb77a7bd36c6a89d397f18f8758fc60ff8146e"
+  },
+  "all_match": true
+}

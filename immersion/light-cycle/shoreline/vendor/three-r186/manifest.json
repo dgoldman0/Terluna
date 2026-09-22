@@ -1,0 +1,26 @@
+{
+  "schema": "open-moon-dependency/2",
+  "name": "three",
+  "version": "0.186.0",
+  "revision": "186",
+  "archive_sha256": "86d8f1a42a726e791b46b0b4b8851c54498cc717b038b3a65b42c198de3d91a5",
+  "license": "MIT",
+  "files": {
+    "three.core.js": {
+      "bytes": 1458113,
+      "sha256": "9edde002b066a9a05676a6127f67735b62baf399bdea529f2f7e31657da769e6"
+    },
+    "three.module.js": {
+      "bytes": 662772,
+      "sha256": "9052042d676cb0fdc1ddfefe193053f34b7ac0513a616fdac4535d49987812ea"
+    },
+    "three.tsl.js": {
+      "bytes": 36854,
+      "sha256": "6e6b92d8ce467818944f73815a96abadc6392fb34de577d479a23810b6aeeed0"
+    },
+    "three.webgpu.js": {
+      "bytes": 2284823,
+      "sha256": "a78400fa1d359e81fcc12b84ed0a89a7fbecb4b8373e28ae8f9d2b11f6ea13bc"
+    }
+  }
+}

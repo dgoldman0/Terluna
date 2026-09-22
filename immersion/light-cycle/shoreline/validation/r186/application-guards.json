@@ -1,0 +1,16 @@
+{
+  "scope": "Synthetic checkout with all 22 selected baseline-file Git blobs verified against recovered commit; no user checkout or remote mutated",
+  "passed": 9,
+  "failed": 0,
+  "checks": [
+    "dry run leaves tree unchanged",
+    "conflicting tracked edits rejected before writes",
+    "conflicting new files rejected",
+    "symlink targets rejected",
+    "successful application preserves original builder and unrelated files",
+    "idempotent reapplication",
+    "verified optional local assets supplied",
+    "concurrent-change detection and rollback preserve external edit",
+    "tampered payload rejected before writes"
+  ]
+}

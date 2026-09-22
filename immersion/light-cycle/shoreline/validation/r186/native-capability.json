@@ -1,0 +1,10 @@
+{
+  "browser": "Chromium 144",
+  "flags": [
+    "--enable-unsafe-webgpu",
+    "--use-angle=swiftshader",
+    "--enable-unsafe-swiftshader"
+  ],
+  "error": "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at file:///mnt/data/webgpu-capability.html\nCall log:\n  - navigating to \"file:///mnt/data/webgpu-capability.html\", waiting until \"domcontentloaded\"\n",
+  "seconds": 1.2240371704101562
+}

@@ -23,13 +23,14 @@ OM.loadSurfaceAssets=async function(T){
 OM.createFieldUniforms=function(T,water){
  const grid=L.GRID;
  const texture=(bytes,n)=>{const t=new T.DataTexture(bytes,n,n,T.RGBAFormat,T.FloatType);t.minFilter=t.magFilter=T.LinearFilter;t.generateMipmaps=false;t.needsUpdate=true;return t;};
- const uniforms={uMaterialFields:{value:texture(L.materialFieldRGBA(),grid.n)},uEnvironmentFields:{value:texture(L.environmentFieldRGBA(),grid.n)},uSurfaceState:{value:texture(water.textureData(),water.n)},uFieldBounds:{value:new T.Vector4(grid.minX,grid.minZ,grid.cell,grid.n)},uStateBounds:{value:new T.Vector4(water.minX,water.minZ,water.cell,water.n)},uSurfaceAlbedo:{value:OM.surfaceAssets.albedo},uSurfacePacked:{value:OM.surfaceAssets.packed},uLandscapeDebug:{value:0}};
+ const bathymetry=new Float32Array(grid.n*grid.n*4);for(let i=0;i<grid.n*grid.n;i++)bathymetry[i*4]=L.data.elevation[i];
+ const uniforms={uBathymetry:{value:texture(bathymetry,grid.n)},uMaterialFields:{value:texture(L.materialFieldRGBA(),grid.n)},uEnvironmentFields:{value:texture(L.environmentFieldRGBA(),grid.n)},uSurfaceState:{value:texture(water.textureData(),water.n)},uFieldBounds:{value:new T.Vector4(grid.minX,grid.minZ,grid.cell,grid.n)},uStateBounds:{value:new T.Vector4(water.minX,water.minZ,water.cell,water.n)},uSurfaceAlbedo:{value:OM.surfaceAssets.albedo},uSurfacePacked:{value:OM.surfaceAssets.packed},uPondLevels:{value:texture(new Float32Array(4),1)},uPondBounds:{value:new T.Vector4(0,0,1,1)},uLandscapeDebug:{value:0}};
  return uniforms;
 };
 OM.FIELD_GLSL=`
-uniform sampler2D uMaterialFields,uEnvironmentFields,uSurfaceState;
+uniform sampler2D uMaterialFields,uEnvironmentFields,uSurfaceState,uPondLevels;
 uniform highp sampler2DArray uSurfaceAlbedo,uSurfacePacked;
-uniform vec4 uFieldBounds,uStateBounds;uniform float uLandscapeDebug;
+uniform vec4 uFieldBounds,uStateBounds,uPondBounds;uniform float uLandscapeDebug;
 vec2 omGridUV(vec2 p,vec4 bounds){return ((p-bounds.xy)/bounds.z+.5)/bounds.w;}
 float omGridInside(vec2 p,vec4 b){vec2 q=(p-b.xy)/b.z;vec2 a=smoothstep(vec2(0),vec2(6),q),c=1.-smoothstep(vec2(b.w-7.),vec2(b.w-1.),q);return a.x*a.y*c.x*c.y;}
 vec4 omEnvironment(vec2 p){return texture2D(uEnvironmentFields,omGridUV(p,uFieldBounds));}
@@ -69,7 +70,9 @@ OM.material=function(T,atm,state,kind,options={}){
    float microAO=sand.ao*w.r+gravel.ao*w.g+rock.ao*w.b+soil.ao*w.a;
    float broad=omNoise2(p*.035);albedo*=.90+.20*broad;
    float dampContact=1.-smoothstep(-.03,.24,elevation);
-   float spatialWet=max(max(surfaceState.r,smoothstep(.03,.6,surfaceState.b)),dampContact),soilWet=surfaceState.g;
+   vec4 pondHead=texture2D(uPondLevels,omGridUV(p,uPondBounds));
+   float basinWet=pondHead.a*omGridInside(p,uPondBounds)*(1.-smoothstep(-.001,.025,elevation-pondHead.r));
+   float spatialWet=max(max(surfaceState.r,basinWet),dampContact),soilWet=surfaceState.g;
    albedo*=mix(1.,.66,soilWet*(w.a+w.r*.65));
    diffuseColor.rgb*=albedo;vec3 microGradient=vec3(microSlope.x,0,microSlope.y)*.72*(1.-smoothstep(.035,.25,max(length(dFdx(p)),length(dFdy(p)))));
   `;

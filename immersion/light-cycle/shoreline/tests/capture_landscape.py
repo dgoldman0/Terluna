@@ -77,8 +77,8 @@ def main() -> int:
             page.on('request', lambda r: record['external_requests'].append(r.url) if not r.url.startswith(('http://127.0.0.1:', 'data:', 'blob:')) else None)
             queue = "window.requestAnimationFrame=cb=>{window.__m1NextFrame=cb;return 1;};"
             if args.in_memory:
-                page.expose_function('testSHA1', lambda values: list(hashlib.sha1(bytes(values)).digest()))
-                page.evaluate("""() => { if (!window.crypto?.subtle) Object.defineProperty(window,'crypto',{value:{subtle:{digest:async(name,bytes)=>{if(name!=='SHA-1')throw Error('Only SHA-1 is bridged');return new Uint8Array(await window.testSHA1(Array.from(new Uint8Array(bytes.buffer||bytes,bytes.byteOffset||0,bytes.byteLength)))).buffer;}}}}); }""")
+                page.expose_function('testDigest', lambda name, values: list(hashlib.new({'SHA-1':'sha1','SHA-256':'sha256'}[name],bytes(values)).digest()))
+                page.evaluate("""() => { if (!window.crypto?.subtle) Object.defineProperty(window,'crypto',{value:{subtle:{digest:async(name,bytes)=>{if(!['SHA-1','SHA-256'].includes(name))throw Error('Unsupported test digest');return new Uint8Array(await window.testDigest(name,Array.from(new Uint8Array(bytes.buffer||bytes,bytes.byteOffset||0,bytes.byteLength)))).buffer;}}}}); }""")
                 page.evaluate(queue)
                 print('Injecting viewer',flush=True);page.set_content(html, wait_until='domcontentloaded', timeout=180000);print('Viewer injected',flush=True)
             else:

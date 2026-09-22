@@ -1,0 +1,10 @@
+{
+  "scope": "After controlled unchanged-exposure comparison; model-improvement build",
+  "baselineExposure": 0.236657345,
+  "migrationGrayCardLuminance": 0.17222685977816582,
+  "targetGrayCardLuminance": 0.18,
+  "r186Exposure": 0.244647046,
+  "changePercent": 3.3760629740860137,
+  "basis": "GPU gray-card probe in migration-optics.json; original failed assertion retained",
+  "policy": "No sky/input-light changes. Main and TSL lab use the same revised exposure. Exact unchanged-exposure migration build remains separately captured."
+}
