@@ -1,0 +1,484 @@
+{
+  "schema": "open-moon-cloud-capture/1",
+  "html_sha256": "c7ead1fd83e0d55518d2951e08cd46d31f323280885125382a8013b5d74636d9",
+  "regime": "fog",
+  "world": "moon",
+  "sunElevation_deg": 45.0,
+  "viewport": [
+    390,
+    844
+  ],
+  "errors": [],
+  "warnings": [],
+  "external_requests": [],
+  "checks": {
+    "boot": true,
+    "scenario_render": true,
+    "gpu_column_and_light_fields": true,
+    "column_controls_fit_viewport": true
+  },
+  "harness": "Exact in-memory HTML; SHA-256 bridge; queued application RAF; headed Chromium SwiftShader; synchronous readback. No native WebGPU test.",
+  "state": {
+    "schema": "open-moon-shoreline-state/2",
+    "build": "shoreline-cloud-columns-04",
+    "cloudColumn": {
+      "regime": "fog",
+      "name": "Coastal inversion fog",
+      "surfacePressure_Pa": 121590,
+      "surfaceT_K": 288,
+      "surfaceRH": 1,
+      "surfaceScaleHeight_m": 51300.32460889313,
+      "dryLapse_K_per_km": 1.6135458167330676,
+      "lcl_m": 1.0011824946742903e-11,
+      "lclPressure_Pa": 121589.99999999997,
+      "lclTemperature_K": 287.99999999999994,
+      "cloudBase_m": 0,
+      "cloudTop_m": 123.2618792207563,
+      "lfc_m": null,
+      "equilibriumLevel_m": null,
+      "parcelReachesCloud": false,
+      "positiveBuoyancyIntegral_J_per_kg": 0,
+      "preLFCNegativeWork_J_per_kg": -14081.21000606573,
+      "liquidWaterPath_kg_m2": 0.041812416467274835,
+      "iceWaterPath_kg_m2": 0,
+      "inCloudOpticalDepth": 7.839828087614032,
+      "hydrostaticWeightRelativeError": 6.187755052993444e-08,
+      "pressureFloor_Pa": 13472.556025277945,
+      "assumptions": [
+        "Prescribed pressure-coordinate sounding; no GCM or climate-equilibrium solution",
+        "Undiluted liquid pseudoadiabat for parcel buoyancy; mixed-phase optics is a diagnostic closure",
+        "Condensate retention and horizontal cloud morphology are selected inputs",
+        "Atmospheric study supplies no predicted rain to the surface-water model"
+      ],
+      "optics": {
+        "kind": "inherited exponential molecular profile with altitude-dependent RGB cloud transport",
+        "R": 1737400,
+        "H": 48400,
+        "density": 1.2,
+        "top": 600000,
+        "ozone": 1,
+        "ozoneEnabled": true,
+        "ozoneProfile": "selected 10\u201340 km triangle; effective RGB coefficients",
+        "diffuse": "selected sky/surface two-boundary closure; regional Lambertian albedo 0.18"
+      },
+      "time_s": 0,
+      "renderCache": {
+        "skyPixels": [
+          768,
+          384
+        ],
+        "shadowPixels": [
+          128,
+          128
+        ],
+        "quality": "economy",
+        "bakes": 1,
+        "lastSubmission_ms": 293.40000000037253,
+        "windCadence_s": 2,
+        "positionThreshold_m": 32,
+        "shadowPlaneAltitude_m": 0,
+        "shadowExtent_m": 32768
+      }
+    },
+    "world": "moon",
+    "clock": "moon",
+    "phase": 0.125,
+    "motionTime": 0,
+    "windDisplacement": 0,
+    "weatherKind": "clear",
+    "weatherTime": 0,
+    "ledger": {
+      "exposed": 0,
+      "canopy": 0,
+      "leaf": 0,
+      "sheltered": 0,
+      "totalInput": 0,
+      "evaporated": 0,
+      "drained": 0,
+      "residual": 0
+    },
+    "spatialWater": {
+      "units": "mm-cell; multiply by cell area / 1000 for m3",
+      "cellArea_m2": 16,
+      "initialStorage": 39509.91992049058,
+      "input": 0,
+      "storage": 39509.91992049058,
+      "evaporated": 0,
+      "deepDrainage": 0,
+      "boundaryExport": 0,
+      "roofExport": 0,
+      "residual": 0,
+      "relativeResidual": 0,
+      "steps": 0,
+      "elapsedSeconds": 0,
+      "forcingTimeSeconds": 0
+    },
+    "terrain": {
+      "levels": 11,
+      "nearSpacing_m": 0.25,
+      "outerHalfExtent_m": 16384,
+      "vertices": 183051,
+      "triangles": 275968,
+      "updates": 1,
+      "lastUpdateMs": 1463.3999999999069,
+      "maxUpdateMs": 1463.3999999999069,
+      "heightEvaluations": 180491,
+      "cachedSamples": 180491
+    },
+    "ponds": {
+      "basins": 21,
+      "spacing_m": 1,
+      "triangles": 877,
+      "activeBasins": 0,
+      "columnPondVolume_m3": 0,
+      "reconstructedVolume_m3": 0,
+      "mobileOutsideBasins_m3": 0,
+      "aboveSpillVolume_m3": 0,
+      "accountingResidual_m3": 0,
+      "maxBasinSolveError_m3": 0,
+      "renderedTriangles": 0
+    },
+    "position": [
+      0,
+      3.045873320927338,
+      9
+    ],
+    "yaw": 0,
+    "pitch": 0.46,
+    "fov": 58,
+    "exposure": "fixed",
+    "exposureBase": 0.244647046,
+    "renderExposure": 0.244647046,
+    "ev": 0,
+    "whiteBalanceStrength": 1,
+    "whiteBalanceGain": [
+      0.8055076246147659,
+      1.0428335463232834,
+      1.43700702659039
+    ],
+    "freeze": true,
+    "quality": "economy",
+    "graphicsBackend": {
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "software": true,
+      "multisampling": 0,
+      "conservativeDefaults": true
+    },
+    "viewport": [
+      390,
+      844
+    ],
+    "pixelRatio": 1
+  },
+  "gpu": {
+    "lost": false,
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+  },
+  "image_sha256": "252e9c982b354695059d9ac6e309275023a56a610a8e50ac70ad0b58657ac748",
+  "fieldProbe": {
+    "maxAbsoluteError": 6.942188035541363e-08,
+    "samples": [
+      {
+        "field": "column",
+        "texel": 0,
+        "expected": [
+          0.1273806244134903,
+          0,
+          1.2000000476837158,
+          0.20000000298023224
+        ],
+        "actual": [
+          0.1273806244134903,
+          0,
+          1.2000000476837158,
+          0.20000000298023224
+        ],
+        "error": 0
+      },
+      {
+        "field": "column",
+        "texel": 64,
+        "expected": [
+          0.09543464332818985,
+          0,
+          1.2160764932632446,
+          0.20803827047348022
+        ],
+        "actual": [
+          0.09543464332818985,
+          0,
+          1.2160764932632446,
+          0.20803827047348022
+        ],
+        "error": 0
+      },
+      {
+        "field": "column",
+        "texel": 128,
+        "expected": [
+          0.06340453028678894,
+          0,
+          1.232143759727478,
+          0.21607190370559692
+        ],
+        "actual": [
+          0.06340453028678894,
+          0,
+          1.232143759727478,
+          0.21607190370559692
+        ],
+        "error": 0
+      },
+      {
+        "field": "column",
+        "texel": 192,
+        "expected": [
+          0.03128929063677788,
+          0,
+          1.248201847076416,
+          0.22410093247890472
+        ],
+        "actual": [
+          0.03128929063677788,
+          0,
+          1.248201847076416,
+          0.22410093247890472
+        ],
+        "error": 0
+      },
+      {
+        "field": "column",
+        "texel": 255,
+        "expected": [
+          0,
+          0,
+          1.2640000581741333,
+          0.23199999332427979
+        ],
+        "actual": [
+          0,
+          0,
+          1.2640000581741333,
+          0.23199999332427979
+        ],
+        "error": 0
+      },
+      {
+        "field": "sunlight",
+        "texel": 4160,
+        "expected": [
+          0.07291384041309357,
+          0.002253510057926178,
+          5.408945185081393e-07,
+          1
+        ],
+        "actual": [
+          0.07291384041309357,
+          0.002253510057926178,
+          5.408945185081393e-07,
+          1
+        ],
+        "error": 0
+      },
+      {
+        "field": "sunlight",
+        "texel": 4176,
+        "expected": [
+          0.1392362266778946,
+          0.010157711803913116,
+          2.08097007998731e-05,
+          1
+        ],
+        "actual": [
+          0.1392362266778946,
+          0.010157711803913116,
+          2.08097007998731e-05,
+          1
+        ],
+        "error": 0
+      },
+      {
+        "field": "sunlight",
+        "texel": 8174,
+        "expected": [
+          0.5448669195175171,
+          0.2432907223701477,
+          0.03630547225475311,
+          1
+        ],
+        "actual": [
+          0.5448669195175171,
+          0.2432907223701477,
+          0.03630547225475311,
+          1
+        ],
+        "error": 0
+      }
+    ],
+    "cacheSamples": [
+      {
+        "field": "sky",
+        "uv": [
+          0.12,
+          0.74
+        ],
+        "values": [
+          0.6357421875,
+          0.7529296875,
+          0.8310546875,
+          0.0016945520183071494
+        ]
+      },
+      {
+        "field": "sky",
+        "uv": [
+          0.46,
+          0.81
+        ],
+        "values": [
+          0.63623046875,
+          0.75341796875,
+          0.8317675590515137,
+          0.0018484306056052446
+        ]
+      },
+      {
+        "field": "sky",
+        "uv": [
+          0.75,
+          0.65
+        ],
+        "values": [
+          0.63623046875,
+          0.7529296875,
+          0.83056640625,
+          0.0019375847186893225
+        ]
+      },
+      {
+        "field": "cloudShadow",
+        "uv": [
+          0.12,
+          0.74
+        ],
+        "values": [
+          1.419544241798576e-05,
+          1.419544241798576e-05,
+          1.419544241798576e-05,
+          1
+        ]
+      },
+      {
+        "field": "cloudShadow",
+        "uv": [
+          0.46,
+          0.81
+        ],
+        "values": [
+          1.5236831131915096e-05,
+          1.5236831131915096e-05,
+          1.5236831131915096e-05,
+          1
+        ]
+      },
+      {
+        "field": "cloudShadow",
+        "uv": [
+          0.75,
+          0.65
+        ],
+        "values": [
+          1.6182661056518555e-05,
+          1.6182661056518555e-05,
+          1.6182661056518555e-05,
+          1
+        ]
+      }
+    ],
+    "noiseSamples": [
+      {
+        "xyz": [
+          0,
+          0,
+          0
+        ],
+        "expected": 0.7058823529411765,
+        "actual": 0.7058823704719543,
+        "error": 1.7530777829399824e-08
+      },
+      {
+        "xyz": [
+          17,
+          5,
+          9
+        ],
+        "expected": 0.8352941176470589,
+        "actual": 0.8352941870689392,
+        "error": 6.942188035541363e-08
+      },
+      {
+        "xyz": [
+          39,
+          48,
+          21
+        ],
+        "expected": 0,
+        "actual": 0,
+        "error": 0
+      }
+    ],
+    "backend": "WebGL2 float render-target readback"
+  },
+  "controls": [
+    {
+      "label": "Reference",
+      "left": 31,
+      "right": 100.84375,
+      "top": 211.5,
+      "bottom": 240.5,
+      "visible": true
+    },
+    {
+      "label": "Coastal fog",
+      "left": 105.84375,
+      "right": 181.9375,
+      "top": 211.5,
+      "bottom": 240.5,
+      "visible": true
+    },
+    {
+      "label": "Elevated clouds",
+      "left": 186.9375,
+      "right": 285.046875,
+      "top": 211.5,
+      "bottom": 240.5,
+      "visible": true
+    },
+    {
+      "label": "Deep convection",
+      "left": 31,
+      "right": 135.140625,
+      "top": 245.5,
+      "bottom": 274.5,
+      "visible": true
+    },
+    {
+      "label": "Look into the sky",
+      "left": 31,
+      "right": 166.390625,
+      "top": 282.5,
+      "bottom": 319.5,
+      "visible": true
+    },
+    {
+      "label": "Export column",
+      "left": 173.390625,
+      "right": 293.34375,
+      "top": 282.5,
+      "bottom": 319.5,
+      "visible": true
+    }
+  ],
+  "passed": true,
+  "elapsed_s": 33.52705848400001
+}

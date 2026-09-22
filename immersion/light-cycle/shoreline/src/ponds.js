@@ -119,7 +119,7 @@ function createPonds(T,scene,atm,state){
     vec3 reflected=omClear(reflect(-v,n)),scatter=uDiffuse/OM_PI*vec3(.011,.039,.042);
     vec3 colour=(reflected*F+scatter*(1.-F)*absorption)/max(.0001,alpha);
     vec3 h=normalize(v+uSun);float nh=max(0.,dot(n,h));colour+=uDirect*pow(nh,4000.)*.12;
-    vec3 tr=exp(-uLocalExtinction*length(cameraPosition-vWorld));colour=mix(omClear(normalize(vWorld-cameraPosition)),colour,tr);
+    vec3 tr=exp(-uLocalExtinction*length(cameraPosition-vWorld));colour=mix(omAirColour(normalize(vWorld-cameraPosition)),colour,tr);
     gl_FragColor=vec4(colour,alpha*smoothstep(0.,.0015,vDepth));
     #ifdef TONE_MAPPING
      gl_FragColor.rgb*=uWhiteBalance;

@@ -1,0 +1,832 @@
+TAP version 13
+# Subtest: Cloud bake tiles cover the entire angular cache once
+ok 1 - Cloud bake tiles cover the entire angular cache once
+  ---
+  duration_ms: 63.17379
+  type: 'test'
+  ...
+# Subtest: Stable observer and sub-cadence wind reuse the existing transfer textures
+ok 2 - Stable observer and sub-cadence wind reuse the existing transfer textures
+  ---
+  duration_ms: 41.302579
+  type: 'test'
+  ...
+# Subtest: Wind cadence, observer cell, Sun direction and quality invalidate the cloud bake
+ok 3 - Wind cadence, observer cell, Sun direction and quality invalidate the cloud bake
+  ---
+  duration_ms: 75.603485
+  type: 'test'
+  ...
+# Subtest: Reference selection clears diagnosed cloud rendering and cache flags
+ok 4 - Reference selection clears diagnosed cloud rendering and cache flags
+  ---
+  duration_ms: 45.639113
+  type: 'test'
+  ...
+# Subtest: No-ozone export reports the actual selected transport profile
+ok 5 - No-ozone export reports the actual selected transport profile
+  ---
+  duration_ms: 48.502855
+  type: 'test'
+  ...
+# Subtest: A failed render restores renderer state and leaves the bake invalid
+ok 6 - A failed render restores renderer state and leaves the bake invalid
+  ---
+  duration_ms: 32.83919
+  type: 'test'
+  ...
+# Subtest: Periodic cloud noise lattice is deterministic, bounded and nonconstant
+ok 7 - Periodic cloud noise lattice is deterministic, bounded and nonconstant
+  ---
+  duration_ms: 24.183167
+  type: 'test'
+  ...
+# Subtest: Sun follows a continuous normalized full-cycle path
+ok 8 - Sun follows a continuous normalized full-cycle path
+  ---
+  duration_ms: 3.623108
+  type: 'test'
+  ...
+# Subtest: Noon, sunset, midnight, sunrise have expected positions
+ok 9 - Noon, sunset, midnight, sunrise have expected positions
+  ---
+  duration_ms: 0.174578
+  type: 'test'
+  ...
+# Subtest: Sun phase wraps both directions
+ok 10 - Sun phase wraps both directions
+  ---
+  duration_ms: 0.186176
+  type: 'test'
+  ...
+# Subtest: Solar elevation inverses preserve dawn and dusk branches
+ok 11 - Solar elevation inverses preserve dawn and dusk branches
+  ---
+  duration_ms: 0.358181
+  type: 'test'
+  ...
+# Subtest: The lunar clock has the expected period
+ok 12 - The lunar clock has the expected period
+  ---
+  duration_ms: 0.231984
+  type: 'test'
+  ...
+# Subtest: Calibrated vertical field of view uses actual viewing geometry
+ok 13 - Calibrated vertical field of view uses actual viewing geometry
+  ---
+  duration_ms: 0.159756
+  type: 'test'
+  ...
+# Subtest: Calibration rejects invalid input
+ok 14 - Calibration rejects invalid input
+  ---
+  duration_ms: 0.403537
+  type: 'test'
+  ...
+# Subtest: Cloud optical depth has the correct dimensions and value
+ok 15 - Cloud optical depth has the correct dimensions and value
+  ---
+  duration_ms: 0.14882
+  type: 'test'
+  ...
+# Subtest: Cloud optical depth responds correctly to droplet radius
+ok 16 - Cloud optical depth responds correctly to droplet radius
+  ---
+  duration_ms: 0.380263
+  type: 'test'
+  ...
+# Subtest: Cloud data rejects negative water content
+ok 17 - Cloud data rejects negative water content
+  ---
+  duration_ms: 0.415395
+  type: 'test'
+  ...
+# Subtest: Weather episode is bounded and finite
+ok 18 - Weather episode is bounded and finite
+  ---
+  duration_ms: 5.223208
+  type: 'test'
+  ...
+# Subtest: Episode forcing is continuous at keyframe boundaries
+ok 19 - Episode forcing is continuous at keyframe boundaries
+  ---
+  duration_ms: 0.375196
+  type: 'test'
+  ...
+# Subtest: Clear forcing does not inherit a rain episode
+ok 20 - Clear forcing does not inherit a rain episode
+  ---
+  duration_ms: 0.102652
+  type: 'test'
+  ...
+# Subtest: Fog has prescribed low visibility and no rain
+ok 21 - Fog has prescribed low visibility and no rain
+  ---
+  duration_ms: 0.093759
+  type: 'test'
+  ...
+# Subtest: Reservoir zero-rate branch preserves inflow
+ok 22 - Reservoir zero-rate branch preserves inflow
+  ---
+  duration_ms: 0.253946
+  type: 'test'
+  ...
+# Subtest: Reservoir overflow is explicitly recorded
+ok 23 - Reservoir overflow is explicitly recorded
+  ---
+  duration_ms: 0.124704
+  type: 'test'
+  ...
+# Subtest: Reservoir exponential drying matches its analytic solution
+ok 24 - Reservoir exponential drying matches its analytic solution
+  ---
+  duration_ms: 0.145986
+  type: 'test'
+  ...
+# Subtest: Capped reservoir conserves water across boundary contact
+ok 25 - Capped reservoir conserves water across boundary contact
+  ---
+  duration_ms: 0.134379
+  type: 'test'
+  ...
+# Subtest: Boundary-start reservoir can drain below capacity
+ok 26 - Boundary-start reservoir can drain below capacity
+  ---
+  duration_ms: 0.110013
+  type: 'test'
+  ...
+# Subtest: Invalid water data fails immediately
+ok 27 - Invalid water data fails immediately
+  ---
+  duration_ms: 0.10771
+  type: 'test'
+  ...
+# Subtest: Reservoir subdivision is exact for constant forcing
+ok 28 - Reservoir subdivision is exact for constant forcing
+  ---
+  duration_ms: 0.340144
+  type: 'test'
+  ...
+# Subtest: Water ledger conserves exposure plus canopy column water
+ok 29 - Water ledger conserves exposure plus canopy column water
+  ---
+  duration_ms: 47.141398
+  type: 'test'
+  ...
+# Subtest: Sheltered ground remains dry through the rain
+ok 30 - Sheltered ground remains dry through the rain
+  ---
+  duration_ms: 1.231204
+  type: 'test'
+  ...
+# Subtest: Clearing sky leaves persistent surface water
+ok 31 - Clearing sky leaves persistent surface water
+  ---
+  duration_ms: 1.375337
+  type: 'test'
+  ...
+# Subtest: Replay produces identical weather-water state
+ok 32 - Replay produces identical weather-water state
+  ---
+  duration_ms: 2.30212
+  type: 'test'
+  ...
+# Subtest: Two-second and ten-second water steps are close
+ok 33 - Two-second and ten-second water steps are close
+  ---
+  duration_ms: 4.118441
+  type: 'test'
+  ...
+# Subtest: Spherical-drop drag predicts a lower lunar terminal speed
+ok 34 - Spherical-drop drag predicts a lower lunar terminal speed
+  ---
+  duration_ms: 0.306784
+  type: 'test'
+  ...
+# Subtest: Wave frequency follows square-root gravity scaling
+ok 35 - Wave frequency follows square-root gravity scaling
+  ---
+  duration_ms: 0.147488
+  type: 'test'
+  ...
+# Subtest: Wave gradients agree with centered finite differences
+ok 36 - Wave gradients agree with centered finite differences
+  ---
+  duration_ms: 0.397089
+  type: 'test'
+  ...
+# Subtest: Terrain is finite around every waypoint
+ok 37 - Terrain is finite around every waypoint
+  ---
+  duration_ms: 563.014331
+  type: 'test'
+  ...
+# Subtest: Roof footprint separates dry inside from rain outside
+ok 38 - Roof footprint separates dry inside from rain outside
+  ---
+  duration_ms: 0.163622
+  type: 'test'
+  ...
+# Subtest: Path centerline connects the requested places
+ok 39 - Path centerline connects the requested places
+  ---
+  duration_ms: 0.262889
+  type: 'test'
+  ...
+# Subtest: Procedural seeds are deterministic
+ok 40 - Procedural seeds are deterministic
+  ---
+  duration_ms: 0.312443
+  type: 'test'
+  ...
+# Subtest: The atlas stores all three inherited profiles and the full angular range
+ok 41 - The atlas stores all three inherited profiles and the full angular range
+  ---
+  duration_ms: 6.179915
+  type: 'test'
+  ...
+# Subtest: Dependency manifest pins the r186 ESM graph
+ok 42 - Dependency manifest pins the r186 ESM graph
+  ---
+  duration_ms: 0.763491
+  type: 'test'
+  ...
+# Subtest: Dependency verification rejects altered code before import
+ok 43 - Dependency verification rejects altered code before import
+  ---
+  duration_ms: 17.574827
+  type: 'test'
+  ...
+# Subtest: Cloud displacement integrates a constant wind
+ok 44 - Cloud displacement integrates a constant wind
+  ---
+  duration_ms: 0.212726
+  type: 'test'
+  ...
+# Subtest: Cloud displacement integrates varying wind reproducibly
+ok 45 - Cloud displacement integrates varying wind reproducibly
+  ---
+  duration_ms: 2.834128
+  type: 'test'
+  ...
+# Subtest: Authoritative height initializes once and preserves the exact M1 reference eye height
+ok 46 - Authoritative height initializes once and preserves the exact M1 reference eye height
+  ---
+  duration_ms: 593.247466
+  type: 'test'
+  ...
+# Subtest: Landscape inputs reject nonfinite coordinates
+ok 47 - Landscape inputs reject nonfinite coordinates
+  ---
+  duration_ms: 0.369347
+  type: 'test'
+  ...
+# Subtest: Actual zero-contour roots replace the coastal guide, including extended headlands
+ok 48 - Actual zero-contour roots replace the coastal guide, including extended headlands
+  ---
+  duration_ms: 24.370151
+  type: 'test'
+  ...
+# Subtest: Elevation and its gradient stay continuous across the field-grid perimeter
+ok 49 - Elevation and its gradient stay continuous across the field-grid perimeter
+  ---
+  duration_ms: 0.752695
+  type: 'test'
+  ...
+# Subtest: Material weights are normalized and nonnegative over sea, coast and upland
+ok 50 - Material weights are normalized and nonnegative over sea, coast and upland
+  ---
+  duration_ms: 44.232786
+  type: 'test'
+  ...
+# Subtest: CPU material placement reads the same raster samples uploaded to the GPU
+ok 51 - CPU material placement reads the same raster samples uploaded to the GPU
+  ---
+  duration_ms: 9.116746
+  type: 'test'
+  ...
+# Subtest: Drainage processes every cell and exports exactly its contributing area
+ok 52 - Drainage processes every cell and exports exactly its contributing area
+  ---
+  duration_ms: 0.443397
+  type: 'test'
+  ...
+# Subtest: Receivers descend the filled surface and their graph is acyclic
+ok 53 - Receivers descend the filled surface and their graph is acyclic
+  ---
+  duration_ms: 7.234316
+  type: 'test'
+  ...
+# Subtest: Priority flood fills an isolated bowl to its explicit spill elevation
+ok 54 - Priority flood fills an isolated bowl to its explicit spill elevation
+  ---
+  duration_ms: 0.714398
+  type: 'test'
+  ...
+# Subtest: Drainage rejects malformed grids
+ok 55 - Drainage rejects malformed grids
+  ---
+  duration_ms: 0.470988
+  type: 'test'
+  ...
+# Subtest: Eleven moving grids retain finite vertices and upward unit normals
+ok 56 - Eleven moving grids retain finite vertices and upward unit normals
+  ---
+  duration_ms: 2624.962128
+  type: 'test'
+  ...
+# Subtest: Every initial terrain edge is paired except the true outer perimeter
+ok 57 - Every initial terrain edge is paired except the true outer perimeter
+  ---
+  duration_ms: 734.572254
+  type: 'test'
+  ...
+# Subtest: Moving through three distinct grid-snapping states preserves the closed topology
+ok 58 - Moving through three distinct grid-snapping states preserves the closed topology
+  ---
+  duration_ms: 2797.465323
+  type: 'test'
+  ...
+# Subtest: The fine terrain follows the observer and matches walking height within twelve millimetres
+ok 59 - The fine terrain follows the observer and matches walking height within twelve millimetres
+  ---
+  duration_ms: 1089.635921
+  type: 'test'
+  ...
+# Subtest: Crossing a snap leaves fixed near-observer samples unchanged
+ok 60 - Crossing a snap leaves fixed near-observer samples unchanged
+  ---
+  duration_ms: 161.385809
+  type: 'test'
+  ...
+# Subtest: An unchanged observer issues no geometry update or new height evaluation
+ok 61 - An unchanged observer issues no geometry update or new height evaluation
+  ---
+  duration_ms: 71.232701
+  type: 'test'
+  ...
+# Subtest: Terrain caches and topology templates remain bounded during traversal
+ok 62 - Terrain caches and topology templates remain bounded during traversal
+  ---
+  duration_ms: 503.149159
+  type: 'test'
+  ...
+# Subtest: Moving-grid options reject incompatible topology and nonfinite observers
+ok 63 - Moving-grid options reject incompatible topology and nonfinite observers
+  ---
+  duration_ms: 0.424679
+  type: 'test'
+  ...
+# Subtest: Earth comparison changes only the spherical sag in the terrain geometry
+ok 64 - Earth comparison changes only the spherical sag in the terrain geometry
+  ---
+  duration_ms: 3869.210388
+  type: 'test'
+  ...
+# Subtest: Plant, rock and understory identities are reproducible after canopy accumulation
+ok 65 - Plant, rock and understory identities are reproducible after canopy accumulation
+  ---
+  duration_ms: 1576.078633
+  type: 'test'
+  ...
+# Subtest: Habitat placement excludes water, the shelter and the walking corridor
+ok 66 - Habitat placement excludes water, the shelter and the walking corridor
+  ---
+  duration_ms: 0.851591
+  type: 'test'
+  ...
+# Subtest: The planted canopy changes the shared environmental field and understory light
+ok 67 - The planted canopy changes the shared environmental field and understory light
+  ---
+  duration_ms: 8.058757
+  type: 'test'
+  ...
+# Subtest: Tree families and both age classes are represented
+ok 68 - Tree families and both age classes are represented
+  ---
+  duration_ms: 0.271903
+  type: 'test'
+  ...
+# Subtest: Branch hierarchy is connected at real trunk/limb endpoints and radii taper
+ok 69 - Branch hierarchy is connected at real trunk/limb endpoints and radii taper
+  ---
+  duration_ms: 372.467857
+  type: 'test'
+  ...
+# Subtest: Every leaf has a narrow geometric petiole and valid finite lamina vertices
+ok 70 - Every leaf has a narrow geometric petiole and valid finite lamina vertices
+  ---
+  duration_ms: 1.090696
+  type: 'test'
+  ...
+# Subtest: Surface-water grids reject invalid dimensions and steps
+ok 71 - Surface-water grids reject invalid dimensions and steps
+  ---
+  duration_ms: 1.075253
+  type: 'test'
+  ...
+# Subtest: Clear weather has dry exposed surfaces and conserved antecedent soil water
+ok 72 - Clear weather has dry exposed surfaces and conserved antecedent soil water
+  ---
+  duration_ms: 216.650632
+  type: 'test'
+  ...
+# Subtest: Antecedent soil water is initialized from the shared habitat-moisture field
+ok 73 - Antecedent soil water is initialized from the shared habitat-moisture field
+  ---
+  duration_ms: 8.27709
+  type: 'test'
+  ...
+# Subtest: Rainfall, four stores and explicit exports conserve water across the full episode
+ok 74 - Rainfall, four stores and explicit exports conserve water across the full episode
+  ---
+  duration_ms: 463.98664
+  type: 'test'
+  ...
+# Subtest: Surface-water replay is deterministic after a time reset
+ok 75 - Surface-water replay is deterministic after a time reset
+  ---
+  duration_ms: 112.748884
+  type: 'test'
+  ...
+# Subtest: Forward seeks on the same integration boundaries equal direct replay
+ok 76 - Forward seeks on the same integration boundaries equal direct replay
+  ---
+  duration_ms: 20.948552
+  type: 'test'
+  ...
+# Subtest: Soil and pond stores persist after rain; post-episode drying conserves mass
+ok 77 - Soil and pond stores persist after rain; post-episode drying conserves mass
+  ---
+  duration_ms: 89.787508
+  type: 'test'
+  ...
+# Subtest: Five- and ten-second substeps remain close under the same rain forcing
+ok 78 - Five- and ten-second substeps remain close under the same rain forcing
+  ---
+  duration_ms: 31.040071
+  type: 'test'
+  ...
+# Subtest: Rendered channels reflect distinct stores and reset restores their initial values
+ok 79 - Rendered channels reflect distinct stores and reset restores their initial values
+  ---
+  duration_ms: 44.126938
+  type: 'test'
+  ...
+# Subtest: Material asset hashes, encoding and physical scales match their manifest
+ok 80 - Material asset hashes, encoding and physical scales match their manifest
+  ---
+  duration_ms: 13.185222
+  type: 'test'
+  ...
+# Subtest: Independent array mipmaps and shared surface stores are wired into PBR shading
+ok 81 - Independent array mipmaps and shared surface stores are wired into PBR shading
+  ---
+  duration_ms: 0.496305
+  type: 'test'
+  ...
+# Subtest: Warm walking updates are measured separately from initial construction
+ok 82 - Warm walking updates are measured separately from initial construction
+  ---
+  duration_ms: 815.30136
+  type: 'test'
+  ...
+# Subtest: r186: supplied ESM dependencies match the pinned release manifest
+ok 83 - r186: supplied ESM dependencies match the pinned release manifest
+  ---
+  duration_ms: 6.62186
+  type: 'test'
+  ...
+# Subtest: M1: terrain field stays continuous across the coast guide
+ok 84 - M1: terrain field stays continuous across the coast guide
+  ---
+  duration_ms: 463.253958
+  type: 'test'
+  ...
+# Subtest: M1: land and seabed depths use the same sea datum
+ok 85 - M1: land and seabed depths use the same sea datum
+  ---
+  duration_ms: 14.423847
+  type: 'test'
+  ...
+# Subtest: M1: submerged points have positive depth and regional relief emerges
+ok 86 - M1: submerged points have positive depth and regional relief emerges
+  ---
+  duration_ms: 0.170322
+  type: 'test'
+  ...
+# Subtest: M1: spherical sag is zero at origin, symmetric and radius-dependent
+ok 87 - M1: spherical sag is zero at origin, symmetric and radius-dependent
+  ---
+  duration_ms: 0.125416
+  type: 'test'
+  ...
+# Subtest: M1: clear-noon forcing has zero cloud water, coverage and rainfall
+ok 88 - M1: clear-noon forcing has zero cloud water, coverage and rainfall
+  ---
+  duration_ms: 0.304381
+  type: 'test'
+  ...
+# Subtest: M1: all twelve wave bands remain finite over the scene and month
+ok 89 - M1: all twelve wave bands remain finite over the scene and month
+  ---
+  duration_ms: 0.747407
+  type: 'test'
+  ...
+# Subtest: M1: twelve-band wave normals match height finite differences
+ok 90 - M1: twelve-band wave normals match height finite differences
+  ---
+  duration_ms: 0.288627
+  type: 'test'
+  ...
+# Subtest: M1: wave timing is consistent with square-root gravity scaling
+ok 91 - M1: wave timing is consistent with square-root gravity scaling
+  ---
+  duration_ms: 0.386052
+  type: 'test'
+  ...
+# Subtest: M1: overflowing GLSL hyperbolic tangent is replaced by its bounded equivalent
+ok 92 - M1: overflowing GLSL hyperbolic tangent is replaced by its bounded equivalent
+  ---
+  duration_ms: 0.531006
+  type: 'test'
+  ...
+# Subtest: M1: HTML embeds verified vendor and all twelve runtime modules
+ok 93 - M1: HTML embeds verified vendor and all twelve runtime modules
+  ---
+  duration_ms: 92.05023
+  type: 'test'
+  ...
+# Subtest: M1: clear environment cache ignores observer drift but follows optical state
+ok 94 - M1: clear environment cache ignores observer drift but follows optical state
+  ---
+  duration_ms: 6.155088
+  type: 'test'
+  ...
+# Subtest: Triangle hypsometry is exact for flat, one-wet-corner and fully submerged cases
+ok 95 - Triangle hypsometry is exact for flat, one-wet-corner and fully submerged cases
+  ---
+  duration_ms: 1.66698
+  type: 'test'
+  ...
+# Subtest: Clipped triangle integration equals the analytic partial volume
+ok 96 - Clipped triangle integration equals the analytic partial volume
+  ---
+  duration_ms: 0.331892
+  type: 'test'
+  ...
+# Subtest: A dry state produces no pond geometry or invented water
+ok 97 - A dry state produces no pond geometry or invented water
+  ---
+  duration_ms: 1108.621513
+  type: 'test'
+  ...
+# Subtest: Standing water, mobile storage and above-spill excess close the reconstruction budget
+ok 98 - Standing water, mobile storage and above-spill excess close the reconstruction budget
+  ---
+  duration_ms: 292.492544
+  type: 'test'
+  ...
+# Subtest: Rendered pond triangles integrate to exactly the represented volume
+ok 99 - Rendered pond triangles integrate to exactly the represented volume
+  ---
+  duration_ms: 3.398975
+  type: 'test'
+  ...
+# Subtest: Connected basin surfaces share one elevation and stay below their spill level
+ok 100 - Connected basin surfaces share one elevation and stay below their spill level
+  ---
+  duration_ms: 2.143195
+  type: 'test'
+  ...
+# Subtest: World curvature changes render positions while pond volumes remain identical
+ok 101 - World curvature changes render positions while pond volumes remain identical
+  ---
+  duration_ms: 5.889093
+  type: 'test'
+  ...
+# Subtest: Reset clears pond geometry and restores the untouched antecedent soil budget
+ok 102 - Reset clears pond geometry and restores the untouched antecedent soil budget
+  ---
+  duration_ms: 1.494795
+  type: 'test'
+  ...
+# Subtest: Stationary water state skips pool solving
+ok 103 - Stationary water state skips pool solving
+  ---
+  duration_ms: 0.247116
+  type: 'test'
+  ...
+# Subtest: Coastal forcing has a nonnegative bounded bathymetric envelope
+ok 104 - Coastal forcing has a nonnegative bounded bathymetric envelope
+  ---
+  duration_ms: 6.015711
+  type: 'test'
+  ...
+# Subtest: Land vertices carry zero wave amplitude within the local field
+ok 105 - Land vertices carry zero wave amplitude within the local field
+  ---
+  duration_ms: 0.218824
+  type: 'test'
+  ...
+# Subtest: Envelope bounds the sum of wave amplitudes below 45% of sampled depth
+ok 106 - Envelope bounds the sum of wave amplitudes below 45% of sampled depth
+  ---
+  duration_ms: 0.289639
+  type: 'test'
+  ...
+# Subtest: Water and ice saturation share the thermodynamic triple point
+ok 107 - Water and ice saturation share the thermodynamic triple point
+  ---
+  duration_ms: 1.323631
+  type: 'test'
+  ...
+# Subtest: Saturation matches the independent MetPy/Ambaum example within 0.15% (different e0 and rounded Cp)
+ok 108 - Saturation matches the independent MetPy/Ambaum example within 0.15% (different e0 and rounded Cp)
+  ---
+  duration_ms: 0.417128
+  type: 'test'
+  ...
+# Subtest: Ice saturation lies below liquid saturation at subfreezing temperatures
+ok 109 - Ice saturation lies below liquid saturation at subfreezing temperatures
+  ---
+  duration_ms: 0.16212
+  type: 'test'
+  ...
+# Subtest: Parcel LCL agrees with the independently documented Romps/MetPy case
+ok 110 - Parcel LCL agrees with the independently documented Romps/MetPy case
+  ---
+  duration_ms: 0.369337
+  type: 'test'
+  ...
+# Subtest: Saturated surface air has zero lifting-condensation displacement
+ok 111 - Saturated surface air has zero lifting-condensation displacement
+  ---
+  duration_ms: 0.159276
+  type: 'test'
+  ...
+# Subtest: Saturation pressure rises monotonically through the working interval
+ok 112 - Saturation pressure rises monotonically through the working interval
+  ---
+  duration_ms: 0.400103
+  type: 'test'
+  ...
+# Subtest: Invalid humidity, temperature, pressure, world and step fail early
+ok 113 - Invalid humidity, temperature, pressure, world and step fail early
+  ---
+  duration_ms: 0.605057
+  type: 'test'
+  ...
+# Subtest: Liquid pseudoadiabat matches the independent MetPy pressure-profile example
+ok 114 - Liquid pseudoadiabat matches the independent MetPy pressure-profile example
+  ---
+  duration_ms: 6.909195
+  type: 'test'
+  ...
+# Subtest: Spherical hydrostatics reduce to the thin-shell limit near the ground
+ok 115 - Spherical hydrostatics reduce to the thin-shell limit near the ground
+  ---
+  duration_ms: 0.31702
+  type: 'test'
+  ...
+# Subtest: Spherical gravity inversion matches the exact potential
+ok 116 - Spherical gravity inversion matches the exact potential
+  ---
+  duration_ms: 0.331681
+  type: 'test'
+  ...
+# Subtest: All soundings have ordered pressure/height and positive thermodynamic states
+ok 117 - All soundings have ordered pressure/height and positive thermodynamic states
+  ---
+  duration_ms: 78.775486
+  type: 'test'
+  ...
+# Subtest: Pressure drop equals integrated density times spherical gravity
+ok 118 - Pressure drop equals integrated density times spherical gravity
+  ---
+  duration_ms: 0.231032
+  type: 'test'
+  ...
+# Subtest: Relative humidity uses partial pressure, not the mixing-ratio approximation
+ok 119 - Relative humidity uses partial pressure, not the mixing-ratio approximation
+  ---
+  duration_ms: 0.75602
+  type: 'test'
+  ...
+# Subtest: A low-gravity column has the expected dry lapse rate and large scale height
+ok 120 - A low-gravity column has the expected dry lapse rate and large scale height
+  ---
+  duration_ms: 0.109492
+  type: 'test'
+  ...
+# Subtest: Heating-free reference parcel reproduces the roughly 8.6 km lunar LCL diagnostic
+ok 121 - Heating-free reference parcel reproduces the roughly 8.6 km lunar LCL diagnostic
+  ---
+  duration_ms: 9.013812
+  type: 'test'
+  ...
+# Subtest: Fair-weather cloud is bounded by condensation and the prescribed inversion
+ok 122 - Fair-weather cloud is bounded by condensation and the prescribed inversion
+  ---
+  duration_ms: 3.128875
+  type: 'test'
+  ...
+# Subtest: Deep convection has a high top and both liquid and ice optical regions
+ok 123 - Deep convection has a high top and both liquid and ice optical regions
+  ---
+  duration_ms: 0.100629
+  type: 'test'
+  ...
+# Subtest: Coastal fog remains a low saturated layer beneath an inversion
+ok 124 - Coastal fog remains a low saturated layer beneath an inversion
+  ---
+  duration_ms: 0.071576
+  type: 'test'
+  ...
+# Subtest: A stable column can have an LCL without reachable convective cloud
+ok 125 - A stable column can have an LCL without reachable convective cloud
+  ---
+  duration_ms: 9.043446
+  type: 'test'
+  ...
+# Subtest: Halving vertical grid spacing converges cloud boundaries and optical depth
+ok 126 - Halving vertical grid spacing converges cloud boundaries and optical depth
+  ---
+  duration_ms: 62.185044
+  type: 'test'
+  ...
+# Subtest: Texture channels sample diagnosed extinction, ice fraction and wind shear
+ok 127 - Texture channels sample diagnosed extinction, ice fraction and wind shear
+  ---
+  duration_ms: 2.452403
+  type: 'test'
+  ...
+# Subtest: Scene weather scenarios leave the existing rainfall ledger unchanged
+ok 128 - Scene weather scenarios leave the existing rainfall ledger unchanged
+  ---
+  duration_ms: 13.667615
+  type: 'test'
+  ...
+# Subtest: Diagnostic recreation is deterministic and does not mutate prescribed inputs
+ok 129 - Diagnostic recreation is deterministic and does not mutate prescribed inputs
+  ---
+  duration_ms: 15.372161
+  type: 'test'
+  ...
+# Subtest: Optical vertical molecular column converges to its analytic exponential integral
+ok 130 - Optical vertical molecular column converges to its analytic exponential integral
+  ---
+  duration_ms: 0.966381
+  type: 'test'
+  ...
+# Subtest: No-ozone atmosphere removes the selected ozone attenuation only
+ok 131 - No-ozone atmosphere removes the selected ozone attenuation only
+  ---
+  duration_ms: 0.246184
+  type: 'test'
+  ...
+# Subtest: Sunlight attenuation decreases with height at zenith
+ok 132 - Sunlight attenuation decreases with height at zenith
+  ---
+  duration_ms: 0.193737
+  type: 'test'
+  ...
+# Subtest: Planet occultation distinguishes surface night from an illuminated upper cloud
+ok 133 - Planet occultation distinguishes surface night from an illuminated upper cloud
+  ---
+  duration_ms: 0.163922
+  type: 'test'
+  ...
+# Subtest: RGB ray quadrature converges across zenith and low-Sun cloud cases
+ok 134 - RGB ray quadrature converges across zenith and low-Sun cloud cases
+  ---
+  duration_ms: 0.765925
+  type: 'test'
+  ...
+# Subtest: Light lookup keeps the exact CPU samples and finite nonnegative transmission
+ok 135 - Light lookup keeps the exact CPU samples and finite nonnegative transmission
+  ---
+  duration_ms: 20.349714
+  type: 'test'
+  ...
+# Subtest: Longer eye paths and the lunar column attenuate cloud contrast more strongly
+ok 136 - Longer eye paths and the lunar column attenuate cloud contrast more strongly
+  ---
+  duration_ms: 0.343409
+  type: 'test'
+  ...
+# Subtest: Invalid optical rays are rejected
+ok 137 - Invalid optical rays are rejected
+  ---
+  duration_ms: 0.197403
+  type: 'test'
+  ...
+1..137
+# tests 137
+# suites 0
+# pass 137
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 20317.832889

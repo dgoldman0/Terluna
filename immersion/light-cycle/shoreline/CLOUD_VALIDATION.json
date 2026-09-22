@@ -1,0 +1,213 @@
+{
+  "schema": "open-moon-cloud-revision/1",
+  "date": "2026-09-22",
+  "base_commit": "032765c51b1aeb140c732e8f484e47efda15cf4d",
+  "publication": {
+    "remote_writes": false,
+    "state": "Prepared locally; no commit or push performed for this revision."
+  },
+  "outputs": {
+    "Open_Moon_Shoreline.html": {
+      "bytes": 14422307,
+      "sha256": "c7ead1fd83e0d55518d2951e08cd46d31f323280885125382a8013b5d74636d9"
+    },
+    "Open_Moon_Renderer_Lab.html": {
+      "bytes": 17493695,
+      "sha256": "20ab58a5b7c5ffff7dabe80ff188c5104d230bf4fab745e2a1082854da469584"
+    }
+  },
+  "numerical_tests": {
+    "pass": 137,
+    "fail": 0,
+    "skip": 0,
+    "node": "v22.16.0",
+    "record": "validation/clouds/final-boundary-tests.tap",
+    "independent_checks": [
+      "MetPy saturation example with explicit reference-constant tolerance",
+      "Romps/MetPy LCL example",
+      "MetPy liquid pseudoadiabat example",
+      "hydrostatic weight integral and spherical potential inversion",
+      "vertical-grid and optical-quadrature convergence"
+    ],
+    "cache_tests": "Synthetic renderer orchestration checks; pixel/GPU checks listed separately"
+  },
+  "retained_inputs": {
+    "data/atmosphere.json": {
+      "sha256": "9cdb18f0914ce796baf864f1b81f60c6b99ff888615957316287e4529ff8e4e7",
+      "unchanged": true
+    },
+    "assets/surfaces/albedo-ao.png": {
+      "sha256": "5c17cfdb2fc0f9d095a726397d66b582c54cb36a941b26a24554be13ff9aec83",
+      "unchanged": true
+    },
+    "assets/surfaces/normal-roughness-height.png": {
+      "sha256": "1b5fdd3d845185f528af966cd0726a3b8363a7453904099ae4cc60afc79d1a72",
+      "unchanged": true
+    },
+    "assets/surfaces/manifest.json": {
+      "sha256": "e285595ea76094ff000930b679970b7622dc015e6fd765ac9254382713c86714",
+      "unchanged": true
+    },
+    "src/core.js": {
+      "sha256": "63929c21a1ef626cca92faaa5e08250d26ef81b329ad96f45da1ed23d5b21934",
+      "unchanged": true
+    },
+    "src/landscape.js": {
+      "sha256": "e80aca30de3a4816011caa7b95a9303677de1fd948a27ede728bdb053cfe0686",
+      "unchanged": true
+    },
+    "src/ecology.js": {
+      "sha256": "e29dbb1ed0a032f47eb83b0c85102d9af958e9c17d8b3694662b8c2d0bdef566",
+      "unchanged": true
+    },
+    "src/surface-water.js": {
+      "sha256": "f369bc25e11b185cf65cab581c119bb56e05617394c86dedf22ac5fa65c3cea7",
+      "unchanged": true
+    },
+    "src/terrain.js": {
+      "sha256": "2d1aa27a514b2301de855b57fceed47541a0ff3622da86ecc91964ad3e361abf",
+      "unchanged": true
+    }
+  },
+  "browser": {
+    "backend": "WebGL2 / ANGLE SwiftShader",
+    "native_webgpu_clouds_executed": false,
+    "consumer_gpu_benchmarked": false,
+    "accepted_exact_build": [
+      {
+        "record": "validation/clouds/boundary-convection-moon.json",
+        "html_sha256": "c7ead1fd83e0d55518d2951e08cd46d31f323280885125382a8013b5d74636d9",
+        "regime": "convection",
+        "world": "moon",
+        "viewport": [
+          640,
+          400
+        ],
+        "checks": {
+          "boot": true,
+          "scenario_render": true,
+          "gpu_column_and_light_fields": true,
+          "pixel_identical_reset": true
+        },
+        "maxGPUFieldError": 6.942188035541363e-08,
+        "warnings": []
+      },
+      {
+        "record": "validation/clouds/boundary-fair.json",
+        "html_sha256": "c7ead1fd83e0d55518d2951e08cd46d31f323280885125382a8013b5d74636d9",
+        "regime": "fair",
+        "world": "moon",
+        "viewport": [
+          640,
+          400
+        ],
+        "checks": {
+          "boot": true,
+          "scenario_render": true,
+          "gpu_column_and_light_fields": true
+        },
+        "maxGPUFieldError": 6.942188035541363e-08,
+        "warnings": []
+      },
+      {
+        "record": "validation/clouds/boundary-fog-mobile.json",
+        "html_sha256": "c7ead1fd83e0d55518d2951e08cd46d31f323280885125382a8013b5d74636d9",
+        "regime": "fog",
+        "world": "moon",
+        "viewport": [
+          390,
+          844
+        ],
+        "checks": {
+          "boot": true,
+          "scenario_render": true,
+          "gpu_column_and_light_fields": true,
+          "column_controls_fit_viewport": true
+        },
+        "maxGPUFieldError": 6.942188035541363e-08,
+        "warnings": []
+      },
+      {
+        "record": "validation/clouds/boundary-reference.json",
+        "html_sha256": "c7ead1fd83e0d55518d2951e08cd46d31f323280885125382a8013b5d74636d9",
+        "regime": "reference",
+        "world": "moon",
+        "viewport": [
+          640,
+          400
+        ],
+        "checks": {
+          "boot": true,
+          "scenario_render": true
+        },
+        "maxGPUFieldError": null,
+        "warnings": []
+      },
+      {
+        "record": "validation/clouds/boundary-convection-earth.json",
+        "html_sha256": "c7ead1fd83e0d55518d2951e08cd46d31f323280885125382a8013b5d74636d9",
+        "regime": "convection",
+        "world": "earth",
+        "viewport": [
+          640,
+          400
+        ],
+        "checks": {
+          "boot": true,
+          "wind_advects_without_invented_surface_rain": true,
+          "scenario_render": true,
+          "gpu_column_and_light_fields": true
+        },
+        "maxGPUFieldError": 6.942188035541363e-08,
+        "warnings": []
+      }
+    ],
+    "no_context_loss_in_accepted_runs": true,
+    "long_duration_stability_established": false,
+    "higher_resolution_software_passed": false,
+    "capabilities": "Economy sky cache, actual GPU profile/noise/light readbacks, world comparison, mobile controls, reset and passive wind advection. Checks use in-memory HTML and a harness-only digest bridge."
+  },
+  "reference_comparison": {
+    "schema": "open-moon-reference-comparison/1",
+    "baseline_html_sha256": "8065d20600ddf17d46747ce1f6adcd10347c9550ac9d9964c6ca6cb5bfcb4cb0",
+    "candidate_html_sha256": "c7ead1fd83e0d55518d2951e08cd46d31f323280885125382a8013b5d74636d9",
+    "exactPixels": true,
+    "meanAbsoluteChannelDifference": 0.0,
+    "maximumChannelDifference": 0.0,
+    "scope": "640x400 M1 noon, fixed camera/exposure, same SwiftShader browser, column study disabled"
+  },
+  "scenario_results": "validation/clouds/scenarios.json",
+  "failed_runs": [
+    {
+      "record": "validation/clouds/diagnostics/convection-moon.json",
+      "status": "failed",
+      "classification": "graphics context loss"
+    },
+    {
+      "record": "validation/clouds/diagnostics/review-fair-balanced.json",
+      "status": "failed",
+      "classification": "graphics context loss"
+    },
+    {
+      "record": "validation/clouds/diagnostics/review-fair-sharp.json",
+      "status": "failed",
+      "classification": "graphics context loss"
+    },
+    {
+      "record": "validation/clouds/diagnostics/lattice-fair-balanced.json",
+      "status": "failed",
+      "classification": "graphics context loss"
+    }
+  ],
+  "test_harness_diagnostic": "validation/clouds/diagnostics/cache-fixture-syntax-failure.tap",
+  "limitations": [
+    "Selected pressure-coordinate soundings and undiluted parcel diagnostics; no lunar weather/climate prediction",
+    "Retained optical condensate and horizontal morphology are selected closures; no prognostic cloud-water conservation",
+    "Mixed-phase optics does not feed ice latent heat or condensate loading back into the parcel",
+    "Thermodynamic density has not regenerated the full spectral background; inherited 48.4/8-km exponential optical profiles remain fixed",
+    "RGB cloud transport, two-boundary diffuse closure, regional albedo 0.18 and multiple scattering remain approximate",
+    "Column studies hold rainfall at zero; the separate authored episode retains legacy cloud geometry",
+    "Native WebGPU/TSL column clouds remain unimplemented",
+    "Larger software-renderer cache tests lose their contexts; consumer hardware and sustained traversal remain unmeasured"
+  ]
+}

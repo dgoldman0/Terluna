@@ -1,0 +1,432 @@
+{
+  "schema": "open-moon-cloud-accuracy-audit-summary/1",
+  "date": "2026-09-22",
+  "scope": "Publication summary of the previously recorded revision-04 accuracy audit. Model samples and all comparison metrics retained; per-ray raw readbacks remain in the identified original conversation artifact. No new GPU measurement is claimed.",
+  "audited_html_sha256": "c7ead1fd83e0d55518d2951e08cd46d31f323280885125382a8013b5d74636d9",
+  "audited_source_sha256": {
+    "src/weather-column.js": "7b4e39a6096025205f52ec4fa035d1557e85fc6638d691b8b129959b8e5f35e4",
+    "src/cloud-optics.js": "66bebd721f6b1727f0839558145b851beebef5cf5d3d4ebb4394b04bc239290b",
+    "src/cloud-renderer.js": "78c1f5339fe80940a4362c7edd71310b586ba397c91a85b1ff8b2e3611767bfc",
+    "src/atmosphere.js": "fa7a7e2995aaf9decdbe7ea939950b93e9cd43282663af95927e1b7808e2765d",
+    "data/atmosphere.json": "9cdb18f0914ce796baf864f1b81f60c6b99ff888615957316287e4529ff8e4e7"
+  },
+  "fresh_regression_tests": {
+    "pass": 137,
+    "fail": 0,
+    "skipped": 0,
+    "node": "v22.16.0",
+    "scope": "Existing regression, numerical reference, and cache-orchestration tests; no global physical-accuracy assertion"
+  },
+  "model_results": [
+    {
+      "world": "moon",
+      "regime": "fog",
+      "summary": {
+        "name": "Coastal inversion fog",
+        "surfacePressure_Pa": 121590,
+        "surfaceT_K": 288,
+        "surfaceRH": 1,
+        "surfaceScaleHeight_m": 51300.32460889313,
+        "dryLapse_K_per_km": 1.6135458167330676,
+        "lcl_m": 1.0011824946742903e-11,
+        "lclPressure_Pa": 121589.99999999997,
+        "lclTemperature_K": 287.99999999999994,
+        "cloudBase_m": 0,
+        "cloudTop_m": 123.2618792207563,
+        "lfc_m": null,
+        "equilibriumLevel_m": null,
+        "parcelReachesCloud": false,
+        "positiveBuoyancyIntegral_J_per_kg": 0,
+        "preLFCNegativeWork_J_per_kg": -14081.21000606573,
+        "liquidWaterPath_kg_m2": 0.04181241646727484,
+        "iceWaterPath_kg_m2": 0,
+        "inCloudOpticalDepth": 7.839828087614035,
+        "hydrostaticWeightRelativeError": 6.187755052993444e-08,
+        "pressureFloor_Pa": 13472.556025277945,
+        "assumptions": [
+          "Prescribed pressure-coordinate sounding; no GCM or climate-equilibrium solution",
+          "Undiluted liquid pseudoadiabat for parcel buoyancy; mixed-phase optics is a diagnostic closure",
+          "Condensate retention and horizontal cloud morphology are selected inputs",
+          "Atmospheric study supplies no predicted rain to the surface-water model"
+        ]
+      },
+      "environment_at_diagnosed_cloud_top": {
+        "z": 123.2618792207563,
+        "p": 121298.53389922465,
+        "T": 288.56,
+        "parcelT": 287.89687211445795,
+        "rho": 1.4564228761538964,
+        "g": 1.6197701588625548,
+        "iceFraction": 0,
+        "liquid_g_m3": 0,
+        "ice_g_m3": 0
+      }
+    },
+    {
+      "world": "moon",
+      "regime": "fair",
+      "summary": {
+        "name": "Elevated fair-weather cloud",
+        "surfacePressure_Pa": 121590,
+        "surfaceT_K": 294,
+        "surfaceRH": 0.48,
+        "surfaceScaleHeight_m": 52286.372323785814,
+        "dryLapse_K_per_km": 1.6135458167330676,
+        "lcl_m": 9288.610732243224,
+        "lclPressure_Pa": 101410.63999942236,
+        "lclTemperature_K": 279.9148335720644,
+        "cloudBase_m": 9288.610732243224,
+        "cloudTop_m": 12499.592968044033,
+        "lfc_m": 9288.610732243224,
+        "equilibriumLevel_m": 12499.592968044033,
+        "parcelReachesCloud": true,
+        "positiveBuoyancyIntegral_J_per_kg": 37.11339677754324,
+        "preLFCNegativeWork_J_per_kg": 0,
+        "liquidWaterPath_kg_m2": 0.1895886924254182,
+        "iceWaterPath_kg_m2": 0,
+        "inCloudOpticalDepth": 23.698586553177268,
+        "hydrostaticWeightRelativeError": 6.961464665674144e-08,
+        "pressureFloor_Pa": 13472.556025277945,
+        "assumptions": [
+          "Prescribed pressure-coordinate sounding; no GCM or climate-equilibrium solution",
+          "Undiluted liquid pseudoadiabat for parcel buoyancy; mixed-phase optics is a diagnostic closure",
+          "Condensate retention and horizontal cloud morphology are selected inputs",
+          "Atmospheric study supplies no predicted rain to the surface-water model"
+        ]
+      },
+      "environment_at_diagnosed_cloud_top": {
+        "z": 12499.592968044033,
+        "p": 95073.92332868876,
+        "T": 277.5466666666667,
+        "parcelT": 276.8729405678229,
+        "rho": 1.1918651098546202,
+        "g": 1.5969392257462502,
+        "iceFraction": 0,
+        "liquid_g_m3": 0,
+        "ice_g_m3": 0
+      }
+    },
+    {
+      "world": "moon",
+      "regime": "convection",
+      "summary": {
+        "name": "Deep convective column",
+        "surfacePressure_Pa": 121590,
+        "surfaceT_K": 299,
+        "surfaceRH": 0.78,
+        "surfaceScaleHeight_m": 53411.29410096087,
+        "dryLapse_K_per_km": 1.6135458167330676,
+        "lcl_m": 3981.845196161411,
+        "lclPressure_Pa": 112781.80036698407,
+        "lclTemperature_K": 293.6384499033133,
+        "cloudBase_m": 3981.845196161411,
+        "cloudTop_m": 58696.617819586565,
+        "lfc_m": 3981.845196161411,
+        "equilibriumLevel_m": 58696.617819586565,
+        "parcelReachesCloud": true,
+        "positiveBuoyancyIntegral_J_per_kg": 2735.29027300064,
+        "preLFCNegativeWork_J_per_kg": 0,
+        "liquidWaterPath_kg_m2": 8.347508143308366,
+        "iceWaterPath_kg_m2": 2.2006043617800666,
+        "inCloudOpticalDepth": 974.3687609662483,
+        "hydrostaticWeightRelativeError": 5.932265618854557e-08,
+        "pressureFloor_Pa": 13472.556025277945,
+        "assumptions": [
+          "Prescribed pressure-coordinate sounding; no GCM or climate-equilibrium solution",
+          "Undiluted liquid pseudoadiabat for parcel buoyancy; mixed-phase optics is a diagnostic closure",
+          "Condensate retention and horizontal cloud morphology are selected inputs",
+          "Atmospheric study supplies no predicted rain to the surface-water model"
+        ]
+      },
+      "environment_at_diagnosed_cloud_top": {
+        "z": 58696.617819586565,
+        "p": 36004.888802600464,
+        "T": 238.33999999999952,
+        "parcelT": 238.23807029538074,
+        "rho": 0.5261948033182596,
+        "g": 1.515846616785798,
+        "iceFraction": 0,
+        "liquid_g_m3": 0,
+        "ice_g_m3": 0
+      }
+    },
+    {
+      "world": "earth",
+      "regime": "fog",
+      "summary": {
+        "name": "Coastal inversion fog",
+        "surfacePressure_Pa": 101325,
+        "surfaceT_K": 288,
+        "surfaceRH": 1,
+        "surfaceScaleHeight_m": 8483.458042071294,
+        "dryLapse_K_per_km": 9.7675796812749,
+        "lcl_m": 1.6556389052120634e-12,
+        "lclPressure_Pa": 101324.99999999997,
+        "lclTemperature_K": 287.99999999999994,
+        "cloudBase_m": 0,
+        "cloudTop_m": 20.38267332121804,
+        "lfc_m": null,
+        "equilibriumLevel_m": null,
+        "parcelReachesCloud": false,
+        "positiveBuoyancyIntegral_J_per_kg": 0,
+        "preLFCNegativeWork_J_per_kg": -12449.591174546124,
+        "liquidWaterPath_kg_m2": 0.00693993150780627,
+        "iceWaterPath_kg_m2": 0,
+        "inCloudOpticalDepth": 1.301237157713675,
+        "hydrostaticWeightRelativeError": 5.0558641689889526e-08,
+        "pressureFloor_Pa": 11227.130021064955,
+        "assumptions": [
+          "Prescribed pressure-coordinate sounding; no GCM or climate-equilibrium solution",
+          "Undiluted liquid pseudoadiabat for parcel buoyancy; mixed-phase optics is a diagnostic closure",
+          "Condensate retention and horizontal cloud morphology are selected inputs",
+          "Atmospheric study supplies no predicted rain to the surface-water model"
+        ]
+      },
+      "environment_at_diagnosed_cloud_top": {
+        "z": 20.38267332121804,
+        "p": 101082.11158268721,
+        "T": 288.56,
+        "parcelT": 287.90396269711584,
+        "rho": 1.2123546914911303,
+        "g": 9.80658725167663,
+        "iceFraction": 0,
+        "liquid_g_m3": 0,
+        "ice_g_m3": 0
+      }
+    },
+    {
+      "world": "earth",
+      "regime": "fair",
+      "summary": {
+        "name": "Elevated fair-weather cloud",
+        "surfacePressure_Pa": 101325,
+        "surfaceT_K": 294,
+        "surfaceRH": 0.48,
+        "surfaceScaleHeight_m": 8643.771670800417,
+        "dryLapse_K_per_km": 9.7675796812749,
+        "lcl_m": 1527.9343320022476,
+        "lclPressure_Pa": 84503.54830981154,
+        "lclTemperature_K": 279.9139177343758,
+        "cloudBase_m": 1527.9343320022476,
+        "cloudTop_m": 2059.8467512012135,
+        "lfc_m": 1527.9343320022476,
+        "equilibriumLevel_m": 2059.8467512012135,
+        "parcelReachesCloud": true,
+        "positiveBuoyancyIntegral_J_per_kg": 41.29597049984444,
+        "preLFCNegativeWork_J_per_kg": 0,
+        "liquidWaterPath_kg_m2": 0.029006917141363105,
+        "iceWaterPath_kg_m2": 0,
+        "inCloudOpticalDepth": 3.62586464267039,
+        "hydrostaticWeightRelativeError": 5.837997970415844e-08,
+        "pressureFloor_Pa": 11227.130021064955,
+        "assumptions": [
+          "Prescribed pressure-coordinate sounding; no GCM or climate-equilibrium solution",
+          "Undiluted liquid pseudoadiabat for parcel buoyancy; mixed-phase optics is a diagnostic closure",
+          "Condensate retention and horizontal cloud morphology are selected inputs",
+          "Atmospheric study supplies no predicted rain to the surface-water model"
+        ]
+      },
+      "environment_at_diagnosed_cloud_top": {
+        "z": 2059.8467512012135,
+        "p": 79149.0807720667,
+        "T": 277.6933333333333,
+        "parcelT": 277.02889562142707,
+        "rho": 0.9914494504369736,
+        "g": 9.80031177875003,
+        "iceFraction": 0,
+        "liquid_g_m3": 0,
+        "ice_g_m3": 0
+      }
+    },
+    {
+      "world": "earth",
+      "regime": "convection",
+      "summary": {
+        "name": "Deep convective column",
+        "surfacePressure_Pa": 101325,
+        "surfaceT_K": 299,
+        "surfaceRH": 0.78,
+        "surfaceScaleHeight_m": 8837.608324187922,
+        "dryLapse_K_per_km": 9.7675796812749,
+        "lcl_m": 657.7622535800169,
+        "lclPressure_Pa": 93979.3799594113,
+        "lclTemperature_K": 293.63750830521536,
+        "cloudBase_m": 657.7622535800169,
+        "cloudTop_m": 9831.883614146693,
+        "lfc_m": 657.7622535800169,
+        "equilibriumLevel_m": 9831.883614146693,
+        "parcelReachesCloud": true,
+        "positiveBuoyancyIntegral_J_per_kg": 3579.160929350066,
+        "preLFCNegativeWork_J_per_kg": 0,
+        "liquidWaterPath_kg_m2": 1.3020997489361175,
+        "iceWaterPath_kg_m2": 0.30260043057766595,
+        "inCloudOpticalDepth": 150.51033953351057,
+        "hydrostaticWeightRelativeError": 4.8506143560227956e-08,
+        "pressureFloor_Pa": 11227.130021064955,
+        "assumptions": [
+          "Prescribed pressure-coordinate sounding; no GCM or climate-equilibrium solution",
+          "Undiluted liquid pseudoadiabat for parcel buoyancy; mixed-phase optics is a diagnostic closure",
+          "Condensate retention and horizontal cloud morphology are selected inputs",
+          "Atmospheric study supplies no predicted rain to the surface-water model"
+        ]
+      },
+      "environment_at_diagnosed_cloud_top": {
+        "z": 9831.883614146693,
+        "p": 28200.315688650426,
+        "T": 239.5799999999994,
+        "parcelT": 239.44505041481645,
+        "rho": 0.40998121719568353,
+        "g": 9.776452194871577,
+        "iceFraction": 0,
+        "liquid_g_m3": 0,
+        "ice_g_m3": 0
+      }
+    }
+  ],
+  "temperature_sensitivity": {
+    "scope": "Illustrative input sensitivity, not a confidence interval. Temperature offset ramped from zero at surface to stated offset at log(ps/p)=0.55, constant offset above. Other inputs retained.",
+    "results": [
+      {
+        "delta_K": -6,
+        "cloudTop_m": 60831.94567501838
+      },
+      {
+        "delta_K": -3,
+        "cloudTop_m": 59758.81192971861
+      },
+      {
+        "delta_K": 0,
+        "cloudTop_m": 58696.617819586565
+      },
+      {
+        "delta_K": 3,
+        "cloudTop_m": 57555.82551657224
+      },
+      {
+        "delta_K": 6,
+        "cloudTop_m": 56381.59987103822
+      }
+    ]
+  },
+  "assessment": {
+    "hydrostatic_and_liquid_parcel_equations": "Recognized idealized equations with independent numeric examples and numerical convergence checks.",
+    "cloud_ceiling": "Conditional on prescribed temperature/humidity and undiluted liquid parcel; no entrainment, condensate loading, ice feedback or overshoot solve.",
+    "cloud_geometry": "Procedural lobes and selected horizontal scale/occupancy within diagnosed support.",
+    "condensate": "Selected retained fraction; no prognostic cloud water budget or precipitation coupling.",
+    "atmospheric_coupling": "Thermodynamic density and inherited exponential optical density remain distinct.",
+    "radiance": "Beer attenuation and geometric planetary occlusion combined with empirical diffuse/multiple-scattering and foreground in-scattering approximations.",
+    "global_physical_error_bound": null
+  },
+  "source_artifact": {
+    "filename": "Open_Moon_Clouds_Accuracy_Audit.json",
+    "bytes": 162364,
+    "sha256": "2c5311da2865dc56088bd30009dc6beb238dcc735c3f4dd04bad74ed95a29908",
+    "raw_readbacks_in_this_summary": false,
+    "omitted_field": "GPU_quadrature.raw_readbacks"
+  },
+  "GPU_quadrature": {
+    "scope": "Isolated production cloud-transfer GLSL at 160 fixed perspective rays corresponding to the review camera, without angular-cache interpolation or tone mapping. Only primary/secondary loop budgets are varied. This checks quadrature, not physical scattering closure.",
+    "backend": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "world": "moon",
+    "regime": "convection",
+    "sun_elevation_deg": 45,
+    "camera": {
+      "position": [
+        0,
+        3.045873320927338,
+        9
+      ],
+      "yaw": 0,
+      "pitch": 0.46,
+      "vertical_fov_deg": 58,
+      "aspect": 1.6
+    },
+    "ray_grid": [
+      16,
+      10
+    ],
+    "reference_budget": [
+      4096,
+      512
+    ],
+    "unmodified_production_vs_generalized_shader_at_128_8_max_component_difference": 0.0,
+    "comparisons": [
+      {
+        "primary_samples": 128,
+        "sun_shadow_samples": 8,
+        "sum_absolute_luminance_difference_divided_by_sum_reference_luminance": 0.011171941868627279,
+        "median_per_ray_relative_luminance_difference": 0.0,
+        "p95_per_ray_relative_luminance_difference": 0.06360811715028306,
+        "max_per_ray_relative_luminance_difference": 0.12348917918504489,
+        "max_absolute_cloud_transmittance_difference": 0.12745755910873413
+      },
+      {
+        "primary_samples": 256,
+        "sun_shadow_samples": 8,
+        "sum_absolute_luminance_difference_divided_by_sum_reference_luminance": 0.008142286518848522,
+        "median_per_ray_relative_luminance_difference": 0.0,
+        "p95_per_ray_relative_luminance_difference": 0.04496152535637542,
+        "max_per_ray_relative_luminance_difference": 0.142959836766119,
+        "max_absolute_cloud_transmittance_difference": 0.02731722593307495
+      },
+      {
+        "primary_samples": 512,
+        "sun_shadow_samples": 8,
+        "sum_absolute_luminance_difference_divided_by_sum_reference_luminance": 0.007028682924843202,
+        "median_per_ray_relative_luminance_difference": 0.0,
+        "p95_per_ray_relative_luminance_difference": 0.03694788491904186,
+        "max_per_ray_relative_luminance_difference": 0.11935515378335833,
+        "max_absolute_cloud_transmittance_difference": 0.012717902660369873
+      },
+      {
+        "primary_samples": 512,
+        "sun_shadow_samples": 32,
+        "sum_absolute_luminance_difference_divided_by_sum_reference_luminance": 0.00130671913938546,
+        "median_per_ray_relative_luminance_difference": 0.0,
+        "p95_per_ray_relative_luminance_difference": 0.006900359161986576,
+        "max_per_ray_relative_luminance_difference": 0.025344539667174662,
+        "max_absolute_cloud_transmittance_difference": 0.012717902660369873
+      },
+      {
+        "primary_samples": 512,
+        "sun_shadow_samples": 128,
+        "sum_absolute_luminance_difference_divided_by_sum_reference_luminance": 0.0009166183572329444,
+        "median_per_ray_relative_luminance_difference": 0.0,
+        "p95_per_ray_relative_luminance_difference": 0.004482349350696589,
+        "max_per_ray_relative_luminance_difference": 0.019572280724302102,
+        "max_absolute_cloud_transmittance_difference": 0.012717902660369873
+      },
+      {
+        "primary_samples": 1024,
+        "sun_shadow_samples": 128,
+        "sum_absolute_luminance_difference_divided_by_sum_reference_luminance": 0.00031535382651553346,
+        "median_per_ray_relative_luminance_difference": 0.0,
+        "p95_per_ray_relative_luminance_difference": 0.0014512763526910812,
+        "max_per_ray_relative_luminance_difference": 0.004316882379110648,
+        "max_absolute_cloud_transmittance_difference": 0.0014753341674804688
+      },
+      {
+        "primary_samples": 2048,
+        "sun_shadow_samples": 256,
+        "sum_absolute_luminance_difference_divided_by_sum_reference_luminance": 9.618914494865767e-05,
+        "median_per_ray_relative_luminance_difference": 0.0,
+        "p95_per_ray_relative_luminance_difference": 0.000493339315219526,
+        "max_per_ray_relative_luminance_difference": 0.0013616896438201124,
+        "max_absolute_cloud_transmittance_difference": 0.001393735408782959
+      },
+      {
+        "primary_samples": 4096,
+        "sun_shadow_samples": 512,
+        "sum_absolute_luminance_difference_divided_by_sum_reference_luminance": 0.0,
+        "median_per_ray_relative_luminance_difference": 0.0,
+        "p95_per_ray_relative_luminance_difference": 0.0,
+        "max_per_ray_relative_luminance_difference": 0.0,
+        "max_absolute_cloud_transmittance_difference": 0.0
+      }
+    ],
+    "errors": [],
+    "warnings": [],
+    "context_lost": false,
+    "interpretation": "Budget differences at the same 160 view rays with identical density and lighting closures. These are linear-luminance and cloud-transmittance differences, not percent physical accuracy or whole-image errors. Surface scene, angular-cache interpolation, tone mapping, actual climate, and true multiple scattering are excluded. Highest-budget result is a numerical reference, not exact ground truth."
+  }
+}

@@ -9,3 +9,6 @@ node_modules/
 /vendor/three-r186/three.*.js
 /validation/r186/*.png
 /validation/r186/diagnostics/*.png
+
+/validation/clouds/*.png
+/validation/clouds/diagnostics/*.png

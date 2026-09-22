@@ -1,0 +1,162 @@
+{
+  "schema": "open-moon-cloud-capture/1",
+  "html_sha256": "421fe881ffa21e5775a60ffe7fe7927ca29b5f4ebfe46017f5313348e60aff80",
+  "regime": "convection",
+  "world": "moon",
+  "sunElevation_deg": 45.0,
+  "viewport": [
+    800,
+    500
+  ],
+  "errors": [
+    "WebGL: CONTEXT_LOST_WEBGL: loseContext: context lost",
+    "THREE.WebGLRenderer: Context Lost.",
+    "Error: The graphics context was lost. Reload with a smaller window or enable hardware graphics acceleration. The saved source and scene state remain available.\n    at HTMLCanvasElement.<anonymous> (<anonymous>:54:102)",
+    "AssertionError: "
+  ],
+  "warnings": [],
+  "external_requests": [],
+  "checks": {
+    "boot": true
+  },
+  "harness": "Exact in-memory HTML; SHA-256 bridge; queued application RAF; headed Chromium SwiftShader; synchronous readback. No native WebGPU test.",
+  "state": {
+    "schema": "open-moon-shoreline-state/2",
+    "build": "shoreline-cloud-columns-04",
+    "cloudColumn": {
+      "regime": "convection",
+      "name": "Deep convective column",
+      "surfacePressure_Pa": 121590,
+      "surfaceT_K": 299,
+      "surfaceRH": 0.78,
+      "surfaceScaleHeight_m": 53411.29410096087,
+      "dryLapse_K_per_km": 1.6135458167330676,
+      "lcl_m": 3981.845196161411,
+      "lclPressure_Pa": 112781.80036698407,
+      "lclTemperature_K": 293.6384499033133,
+      "cloudBase_m": 3981.845196161411,
+      "cloudTop_m": 58696.617819586565,
+      "lfc_m": 3981.845196161411,
+      "equilibriumLevel_m": 58696.617819586565,
+      "parcelReachesCloud": true,
+      "positiveBuoyancyIntegral_J_per_kg": 2735.29027300064,
+      "preLFCNegativeWork_J_per_kg": 0,
+      "liquidWaterPath_kg_m2": 8.34750814330837,
+      "iceWaterPath_kg_m2": 2.200604361780067,
+      "inCloudOpticalDepth": 974.3687609662487,
+      "hydrostaticWeightRelativeError": 5.932265618854557e-08,
+      "pressureFloor_Pa": 13472.556025277945,
+      "assumptions": [
+        "Prescribed pressure-coordinate sounding; no GCM or climate-equilibrium solution",
+        "Undiluted liquid pseudoadiabat for parcel buoyancy; mixed-phase optics is a diagnostic closure",
+        "Condensate retention and horizontal cloud morphology are selected inputs",
+        "Atmospheric study supplies no predicted rain to the surface-water model"
+      ],
+      "optics": {
+        "kind": "inherited exponential molecular profile with altitude-dependent RGB cloud transport",
+        "R": 1737400,
+        "H": 48400,
+        "density": 1.2,
+        "top": 600000,
+        "ozone": "selected 10\u201340 km / 300 DU triangular RGB proxy",
+        "diffuse": "approximate inherited ground-field closure"
+      },
+      "time_s": 0
+    },
+    "world": "moon",
+    "clock": "moon",
+    "phase": 0.125,
+    "motionTime": 0,
+    "windDisplacement": 0,
+    "weatherKind": "clear",
+    "weatherTime": 0,
+    "ledger": {
+      "exposed": 0,
+      "canopy": 0,
+      "leaf": 0,
+      "sheltered": 0,
+      "totalInput": 0,
+      "evaporated": 0,
+      "drained": 0,
+      "residual": 0
+    },
+    "spatialWater": {
+      "units": "mm-cell; multiply by cell area / 1000 for m3",
+      "cellArea_m2": 16,
+      "initialStorage": 39509.91992049058,
+      "input": 0,
+      "storage": 39509.91992049058,
+      "evaporated": 0,
+      "deepDrainage": 0,
+      "boundaryExport": 0,
+      "roofExport": 0,
+      "residual": 0,
+      "relativeResidual": 0,
+      "steps": 0,
+      "elapsedSeconds": 0,
+      "forcingTimeSeconds": 0
+    },
+    "terrain": {
+      "levels": 11,
+      "nearSpacing_m": 0.25,
+      "outerHalfExtent_m": 16384,
+      "vertices": 183051,
+      "triangles": 275968,
+      "updates": 1,
+      "lastUpdateMs": 1449.6999999999534,
+      "maxUpdateMs": 1449.6999999999534,
+      "heightEvaluations": 180491,
+      "cachedSamples": 180491
+    },
+    "ponds": {
+      "basins": 21,
+      "spacing_m": 1,
+      "triangles": 877,
+      "activeBasins": 0,
+      "columnPondVolume_m3": 0,
+      "reconstructedVolume_m3": 0,
+      "mobileOutsideBasins_m3": 0,
+      "aboveSpillVolume_m3": 0,
+      "accountingResidual_m3": 0,
+      "maxBasinSolveError_m3": 0,
+      "renderedTriangles": 0
+    },
+    "position": [
+      0,
+      3.045873320927338,
+      9
+    ],
+    "yaw": 0,
+    "pitch": 0.46,
+    "fov": 58,
+    "exposure": "fixed",
+    "exposureBase": 0.244647046,
+    "renderExposure": 0.244647046,
+    "ev": 0,
+    "whiteBalanceStrength": 1,
+    "whiteBalanceGain": [
+      0.8055076246147659,
+      1.0428335463232834,
+      1.43700702659039
+    ],
+    "freeze": true,
+    "quality": "economy",
+    "graphicsBackend": {
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "software": true,
+      "multisampling": 0,
+      "conservativeDefaults": true
+    },
+    "viewport": [
+      800,
+      500
+    ],
+    "pixelRatio": 1
+  },
+  "gpu": {
+    "lost": true,
+    "renderer": null
+  },
+  "passed": false,
+  "elapsed_s": 61.31303978200003
+}

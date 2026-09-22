@@ -1,0 +1,9 @@
+{
+  "schema": "open-moon-reference-comparison/1",
+  "baseline_html_sha256": "8065d20600ddf17d46747ce1f6adcd10347c9550ac9d9964c6ca6cb5bfcb4cb0",
+  "candidate_html_sha256": "c7ead1fd83e0d55518d2951e08cd46d31f323280885125382a8013b5d74636d9",
+  "exactPixels": true,
+  "meanAbsoluteChannelDifference": 0.0,
+  "maximumChannelDifference": 0.0,
+  "scope": "640x400 M1 noon, fixed camera/exposure, same SwiftShader browser, column study disabled"
+}

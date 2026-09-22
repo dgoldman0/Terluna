@@ -1,0 +1,794 @@
+{
+  "schema": "open-moon-cloud-scenarios/1",
+  "baseCommit": "032765c51b1aeb140c732e8f484e47efda15cf4d",
+  "scenarios": [
+    {
+      "world": "moon",
+      "regime": "fog",
+      "inputs": {
+        "label": "Coastal inversion fog",
+        "surfaceT": 288,
+        "rh": 1,
+        "parcelHeating": 0,
+        "launchSpeed": 0,
+        "retention": 0,
+        "temperature": [
+          [
+            0,
+            288
+          ],
+          [
+            0.006,
+            289.4
+          ],
+          [
+            0.02,
+            292
+          ],
+          [
+            0.12,
+            290
+          ],
+          [
+            0.7,
+            265
+          ],
+          [
+            1.5,
+            230
+          ],
+          [
+            2.2,
+            216
+          ],
+          [
+            4,
+            210
+          ]
+        ],
+        "humidity": [
+          [
+            0,
+            1
+          ],
+          [
+            0.006,
+            1
+          ],
+          [
+            0.025,
+            0.8
+          ],
+          [
+            0.2,
+            0.45
+          ],
+          [
+            1,
+            0.35
+          ],
+          [
+            4,
+            0.02
+          ]
+        ],
+        "wind": [
+          [
+            0,
+            1.2,
+            0.2
+          ],
+          [
+            0.03,
+            2,
+            0.6
+          ],
+          [
+            0.2,
+            5,
+            1
+          ],
+          [
+            1,
+            15,
+            7
+          ],
+          [
+            4,
+            20,
+            12
+          ]
+        ],
+        "fogPreCooling_K": 0.8,
+        "morphology": {
+          "type": 0,
+          "aspect": 5,
+          "coverage": 1,
+          "iceRadius_um": 35,
+          "liquidRadius_um": 8
+        }
+      },
+      "summary": {
+        "name": "Coastal inversion fog",
+        "surfacePressure_Pa": 121590,
+        "surfaceT_K": 288,
+        "surfaceRH": 1,
+        "surfaceScaleHeight_m": 51300.32460889313,
+        "dryLapse_K_per_km": 1.6135458167330676,
+        "lcl_m": 1.0011824946742903e-11,
+        "lclPressure_Pa": 121589.99999999997,
+        "lclTemperature_K": 287.99999999999994,
+        "cloudBase_m": 0,
+        "cloudTop_m": 123.2618792207563,
+        "lfc_m": null,
+        "equilibriumLevel_m": null,
+        "parcelReachesCloud": false,
+        "positiveBuoyancyIntegral_J_per_kg": 0,
+        "preLFCNegativeWork_J_per_kg": -14081.21000606573,
+        "liquidWaterPath_kg_m2": 0.04181241646727484,
+        "iceWaterPath_kg_m2": 0,
+        "inCloudOpticalDepth": 7.839828087614035,
+        "hydrostaticWeightRelativeError": 6.187755052993444e-8,
+        "pressureFloor_Pa": 13472.556025277945,
+        "assumptions": [
+          "Prescribed pressure-coordinate sounding; no GCM or climate-equilibrium solution",
+          "Undiluted liquid pseudoadiabat for parcel buoyancy; mixed-phase optics is a diagnostic closure",
+          "Condensate retention and horizontal cloud morphology are selected inputs",
+          "Atmospheric study supplies no predicted rain to the surface-water model"
+        ]
+      }
+    },
+    {
+      "world": "moon",
+      "regime": "fair",
+      "inputs": {
+        "label": "Elevated fair-weather cloud",
+        "surfaceT": 294,
+        "rh": 0.48,
+        "parcelHeating": 0.8,
+        "launchSpeed": 1.5,
+        "retention": 0.12,
+        "temperature": [
+          [
+            0,
+            294
+          ],
+          [
+            0.23,
+            275.2
+          ],
+          [
+            0.29,
+            284
+          ],
+          [
+            0.7,
+            269
+          ],
+          [
+            1.5,
+            230
+          ],
+          [
+            2.2,
+            216
+          ],
+          [
+            4,
+            210
+          ]
+        ],
+        "humidity": [
+          [
+            0,
+            0.48
+          ],
+          [
+            0.2,
+            0.48
+          ],
+          [
+            0.3,
+            0.25
+          ],
+          [
+            0.8,
+            0.35
+          ],
+          [
+            2,
+            0.15
+          ],
+          [
+            4,
+            0.02
+          ]
+        ],
+        "wind": [
+          [
+            0,
+            1.5,
+            0.3
+          ],
+          [
+            0.25,
+            6,
+            1
+          ],
+          [
+            0.7,
+            13,
+            6
+          ],
+          [
+            2,
+            20,
+            12
+          ],
+          [
+            4,
+            20,
+            12
+          ]
+        ],
+        "morphology": {
+          "type": 1,
+          "aspect": 1.8,
+          "coverage": 0.42,
+          "iceRadius_um": 35,
+          "liquidRadius_um": 12
+        }
+      },
+      "summary": {
+        "name": "Elevated fair-weather cloud",
+        "surfacePressure_Pa": 121590,
+        "surfaceT_K": 294,
+        "surfaceRH": 0.48,
+        "surfaceScaleHeight_m": 52286.372323785814,
+        "dryLapse_K_per_km": 1.6135458167330676,
+        "lcl_m": 9288.610732243224,
+        "lclPressure_Pa": 101410.63999942236,
+        "lclTemperature_K": 279.9148335720644,
+        "cloudBase_m": 9288.610732243224,
+        "cloudTop_m": 12499.592968044033,
+        "lfc_m": 9288.610732243224,
+        "equilibriumLevel_m": 12499.592968044033,
+        "parcelReachesCloud": true,
+        "positiveBuoyancyIntegral_J_per_kg": 37.11339677754324,
+        "preLFCNegativeWork_J_per_kg": 0,
+        "liquidWaterPath_kg_m2": 0.1895886924254182,
+        "iceWaterPath_kg_m2": 0,
+        "inCloudOpticalDepth": 23.698586553177268,
+        "hydrostaticWeightRelativeError": 6.961464665674144e-8,
+        "pressureFloor_Pa": 13472.556025277945,
+        "assumptions": [
+          "Prescribed pressure-coordinate sounding; no GCM or climate-equilibrium solution",
+          "Undiluted liquid pseudoadiabat for parcel buoyancy; mixed-phase optics is a diagnostic closure",
+          "Condensate retention and horizontal cloud morphology are selected inputs",
+          "Atmospheric study supplies no predicted rain to the surface-water model"
+        ]
+      }
+    },
+    {
+      "world": "moon",
+      "regime": "convection",
+      "inputs": {
+        "label": "Deep convective column",
+        "surfaceT": 299,
+        "rh": 0.78,
+        "parcelHeating": 1,
+        "launchSpeed": 2,
+        "retention": 0.055,
+        "temperature": [
+          [
+            0,
+            299
+          ],
+          [
+            0.18,
+            285
+          ],
+          [
+            0.55,
+            265
+          ],
+          [
+            1.1,
+            236
+          ],
+          [
+            1.45,
+            243
+          ],
+          [
+            2.2,
+            221
+          ],
+          [
+            4,
+            210
+          ]
+        ],
+        "humidity": [
+          [
+            0,
+            0.78
+          ],
+          [
+            0.18,
+            0.72
+          ],
+          [
+            0.7,
+            0.62
+          ],
+          [
+            1.5,
+            0.3
+          ],
+          [
+            4,
+            0.02
+          ]
+        ],
+        "wind": [
+          [
+            0,
+            3,
+            0.6
+          ],
+          [
+            0.3,
+            7,
+            2
+          ],
+          [
+            0.8,
+            17,
+            6
+          ],
+          [
+            1.5,
+            30,
+            18
+          ],
+          [
+            4,
+            35,
+            20
+          ]
+        ],
+        "morphology": {
+          "type": 2,
+          "aspect": 0.4,
+          "coverage": 0.27,
+          "iceRadius_um": 45,
+          "liquidRadius_um": 14
+        }
+      },
+      "summary": {
+        "name": "Deep convective column",
+        "surfacePressure_Pa": 121590,
+        "surfaceT_K": 299,
+        "surfaceRH": 0.78,
+        "surfaceScaleHeight_m": 53411.29410096087,
+        "dryLapse_K_per_km": 1.6135458167330676,
+        "lcl_m": 3981.845196161411,
+        "lclPressure_Pa": 112781.80036698407,
+        "lclTemperature_K": 293.6384499033133,
+        "cloudBase_m": 3981.845196161411,
+        "cloudTop_m": 58696.617819586565,
+        "lfc_m": 3981.845196161411,
+        "equilibriumLevel_m": 58696.617819586565,
+        "parcelReachesCloud": true,
+        "positiveBuoyancyIntegral_J_per_kg": 2735.29027300064,
+        "preLFCNegativeWork_J_per_kg": 0,
+        "liquidWaterPath_kg_m2": 8.347508143308366,
+        "iceWaterPath_kg_m2": 2.2006043617800666,
+        "inCloudOpticalDepth": 974.3687609662483,
+        "hydrostaticWeightRelativeError": 5.932265618854557e-8,
+        "pressureFloor_Pa": 13472.556025277945,
+        "assumptions": [
+          "Prescribed pressure-coordinate sounding; no GCM or climate-equilibrium solution",
+          "Undiluted liquid pseudoadiabat for parcel buoyancy; mixed-phase optics is a diagnostic closure",
+          "Condensate retention and horizontal cloud morphology are selected inputs",
+          "Atmospheric study supplies no predicted rain to the surface-water model"
+        ]
+      }
+    },
+    {
+      "world": "earth",
+      "regime": "fog",
+      "inputs": {
+        "label": "Coastal inversion fog",
+        "surfaceT": 288,
+        "rh": 1,
+        "parcelHeating": 0,
+        "launchSpeed": 0,
+        "retention": 0,
+        "temperature": [
+          [
+            0,
+            288
+          ],
+          [
+            0.006,
+            289.4
+          ],
+          [
+            0.02,
+            292
+          ],
+          [
+            0.12,
+            290
+          ],
+          [
+            0.7,
+            265
+          ],
+          [
+            1.5,
+            230
+          ],
+          [
+            2.2,
+            216
+          ],
+          [
+            4,
+            210
+          ]
+        ],
+        "humidity": [
+          [
+            0,
+            1
+          ],
+          [
+            0.006,
+            1
+          ],
+          [
+            0.025,
+            0.8
+          ],
+          [
+            0.2,
+            0.45
+          ],
+          [
+            1,
+            0.35
+          ],
+          [
+            4,
+            0.02
+          ]
+        ],
+        "wind": [
+          [
+            0,
+            1.2,
+            0.2
+          ],
+          [
+            0.03,
+            2,
+            0.6
+          ],
+          [
+            0.2,
+            5,
+            1
+          ],
+          [
+            1,
+            15,
+            7
+          ],
+          [
+            4,
+            20,
+            12
+          ]
+        ],
+        "fogPreCooling_K": 0.8,
+        "morphology": {
+          "type": 0,
+          "aspect": 5,
+          "coverage": 1,
+          "iceRadius_um": 35,
+          "liquidRadius_um": 8
+        }
+      },
+      "summary": {
+        "name": "Coastal inversion fog",
+        "surfacePressure_Pa": 101325,
+        "surfaceT_K": 288,
+        "surfaceRH": 1,
+        "surfaceScaleHeight_m": 8483.458042071294,
+        "dryLapse_K_per_km": 9.7675796812749,
+        "lcl_m": 1.6556389052120634e-12,
+        "lclPressure_Pa": 101324.99999999997,
+        "lclTemperature_K": 287.99999999999994,
+        "cloudBase_m": 0,
+        "cloudTop_m": 20.38267332121804,
+        "lfc_m": null,
+        "equilibriumLevel_m": null,
+        "parcelReachesCloud": false,
+        "positiveBuoyancyIntegral_J_per_kg": 0,
+        "preLFCNegativeWork_J_per_kg": -12449.591174546124,
+        "liquidWaterPath_kg_m2": 0.00693993150780627,
+        "iceWaterPath_kg_m2": 0,
+        "inCloudOpticalDepth": 1.301237157713675,
+        "hydrostaticWeightRelativeError": 5.0558641689889526e-8,
+        "pressureFloor_Pa": 11227.130021064955,
+        "assumptions": [
+          "Prescribed pressure-coordinate sounding; no GCM or climate-equilibrium solution",
+          "Undiluted liquid pseudoadiabat for parcel buoyancy; mixed-phase optics is a diagnostic closure",
+          "Condensate retention and horizontal cloud morphology are selected inputs",
+          "Atmospheric study supplies no predicted rain to the surface-water model"
+        ]
+      }
+    },
+    {
+      "world": "earth",
+      "regime": "fair",
+      "inputs": {
+        "label": "Elevated fair-weather cloud",
+        "surfaceT": 294,
+        "rh": 0.48,
+        "parcelHeating": 0.8,
+        "launchSpeed": 1.5,
+        "retention": 0.12,
+        "temperature": [
+          [
+            0,
+            294
+          ],
+          [
+            0.23,
+            275.2
+          ],
+          [
+            0.29,
+            284
+          ],
+          [
+            0.7,
+            269
+          ],
+          [
+            1.5,
+            230
+          ],
+          [
+            2.2,
+            216
+          ],
+          [
+            4,
+            210
+          ]
+        ],
+        "humidity": [
+          [
+            0,
+            0.48
+          ],
+          [
+            0.2,
+            0.48
+          ],
+          [
+            0.3,
+            0.25
+          ],
+          [
+            0.8,
+            0.35
+          ],
+          [
+            2,
+            0.15
+          ],
+          [
+            4,
+            0.02
+          ]
+        ],
+        "wind": [
+          [
+            0,
+            1.5,
+            0.3
+          ],
+          [
+            0.25,
+            6,
+            1
+          ],
+          [
+            0.7,
+            13,
+            6
+          ],
+          [
+            2,
+            20,
+            12
+          ],
+          [
+            4,
+            20,
+            12
+          ]
+        ],
+        "morphology": {
+          "type": 1,
+          "aspect": 1.8,
+          "coverage": 0.42,
+          "iceRadius_um": 35,
+          "liquidRadius_um": 12
+        }
+      },
+      "summary": {
+        "name": "Elevated fair-weather cloud",
+        "surfacePressure_Pa": 101325,
+        "surfaceT_K": 294,
+        "surfaceRH": 0.48,
+        "surfaceScaleHeight_m": 8643.771670800417,
+        "dryLapse_K_per_km": 9.7675796812749,
+        "lcl_m": 1527.9343320022476,
+        "lclPressure_Pa": 84503.54830981154,
+        "lclTemperature_K": 279.9139177343758,
+        "cloudBase_m": 1527.9343320022476,
+        "cloudTop_m": 2059.8467512012135,
+        "lfc_m": 1527.9343320022476,
+        "equilibriumLevel_m": 2059.8467512012135,
+        "parcelReachesCloud": true,
+        "positiveBuoyancyIntegral_J_per_kg": 41.29597049984444,
+        "preLFCNegativeWork_J_per_kg": 0,
+        "liquidWaterPath_kg_m2": 0.029006917141363105,
+        "iceWaterPath_kg_m2": 0,
+        "inCloudOpticalDepth": 3.62586464267039,
+        "hydrostaticWeightRelativeError": 5.837997970415844e-8,
+        "pressureFloor_Pa": 11227.130021064955,
+        "assumptions": [
+          "Prescribed pressure-coordinate sounding; no GCM or climate-equilibrium solution",
+          "Undiluted liquid pseudoadiabat for parcel buoyancy; mixed-phase optics is a diagnostic closure",
+          "Condensate retention and horizontal cloud morphology are selected inputs",
+          "Atmospheric study supplies no predicted rain to the surface-water model"
+        ]
+      }
+    },
+    {
+      "world": "earth",
+      "regime": "convection",
+      "inputs": {
+        "label": "Deep convective column",
+        "surfaceT": 299,
+        "rh": 0.78,
+        "parcelHeating": 1,
+        "launchSpeed": 2,
+        "retention": 0.055,
+        "temperature": [
+          [
+            0,
+            299
+          ],
+          [
+            0.18,
+            285
+          ],
+          [
+            0.55,
+            265
+          ],
+          [
+            1.1,
+            236
+          ],
+          [
+            1.45,
+            243
+          ],
+          [
+            2.2,
+            221
+          ],
+          [
+            4,
+            210
+          ]
+        ],
+        "humidity": [
+          [
+            0,
+            0.78
+          ],
+          [
+            0.18,
+            0.72
+          ],
+          [
+            0.7,
+            0.62
+          ],
+          [
+            1.5,
+            0.3
+          ],
+          [
+            4,
+            0.02
+          ]
+        ],
+        "wind": [
+          [
+            0,
+            3,
+            0.6
+          ],
+          [
+            0.3,
+            7,
+            2
+          ],
+          [
+            0.8,
+            17,
+            6
+          ],
+          [
+            1.5,
+            30,
+            18
+          ],
+          [
+            4,
+            35,
+            20
+          ]
+        ],
+        "morphology": {
+          "type": 2,
+          "aspect": 0.4,
+          "coverage": 0.27,
+          "iceRadius_um": 45,
+          "liquidRadius_um": 14
+        }
+      },
+      "summary": {
+        "name": "Deep convective column",
+        "surfacePressure_Pa": 101325,
+        "surfaceT_K": 299,
+        "surfaceRH": 0.78,
+        "surfaceScaleHeight_m": 8837.608324187922,
+        "dryLapse_K_per_km": 9.7675796812749,
+        "lcl_m": 657.7622535800169,
+        "lclPressure_Pa": 93979.3799594113,
+        "lclTemperature_K": 293.63750830521536,
+        "cloudBase_m": 657.7622535800169,
+        "cloudTop_m": 9831.883614146693,
+        "lfc_m": 657.7622535800169,
+        "equilibriumLevel_m": 9831.883614146693,
+        "parcelReachesCloud": true,
+        "positiveBuoyancyIntegral_J_per_kg": 3579.160929350066,
+        "preLFCNegativeWork_J_per_kg": 0,
+        "liquidWaterPath_kg_m2": 1.3020997489361175,
+        "iceWaterPath_kg_m2": 0.30260043057766595,
+        "inCloudOpticalDepth": 150.51033953351057,
+        "hydrostaticWeightRelativeError": 4.8506143560227956e-8,
+        "pressureFloor_Pa": 11227.130021064955,
+        "assumptions": [
+          "Prescribed pressure-coordinate sounding; no GCM or climate-equilibrium solution",
+          "Undiluted liquid pseudoadiabat for parcel buoyancy; mixed-phase optics is a diagnostic closure",
+          "Condensate retention and horizontal cloud morphology are selected inputs",
+          "Atmospheric study supplies no predicted rain to the surface-water model"
+        ]
+      }
+    }
+  ]
+}

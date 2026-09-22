@@ -34,7 +34,7 @@ def build(template='index.landscape.html',output='Open_Moon_Shoreline.html',webg
             raise ValueError('Surface asset integrity mismatch: '+name)
         images[key]='data:image/png;base64,'+base64.b64encode(data).decode()
     html=html.replace('__SURFACE_ASSETS__',json.dumps(images,separators=(',',':')))
-    for name in ['landscape','core','atmosphere','materials','terrain','surface-water','ponds','ecology','scene','water','audio','app','renderer-lab','node-materials','loader']:
+    for name in ['landscape','core','weather-column','cloud-optics','cloud-renderer','atmosphere','materials','terrain','surface-water','ponds','ecology','scene','water','audio','app','renderer-lab','node-materials','loader']:
         token='__'+name.upper()+'__'
         if token in html:html=html.replace(token,(ROOT/'src'/f'{name}.js').read_text().replace('</script','<\\/script'))
     unexpanded=re.findall(r'__[A-Z][A-Z_-]+__',html)

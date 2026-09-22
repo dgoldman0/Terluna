@@ -87,7 +87,7 @@ function createWater(T,scene,atm,renderer,fields){
   float contact=(1.-smoothstep(.02,.09,path))*smoothstep(.0,.012,path);
   colour=mix(colour,irradiance*.18,contact*.14);
   vec3 fogT=exp(-uLocalExtinction*length(uCamera-vW));
-  colour=mix(omClear(normalize(vW-uCamera)),colour,fogT);
+  colour=mix(omAirColour(normalize(vW-uCamera)),colour,fogT);
   gl_FragColor=vec4(max(colour,vec3(0.)),1.);
   #ifdef TONE_MAPPING\n gl_FragColor.rgb*=uWhiteBalance;\n#endif\n#include <tonemapping_fragment>
   #include <colorspace_fragment>

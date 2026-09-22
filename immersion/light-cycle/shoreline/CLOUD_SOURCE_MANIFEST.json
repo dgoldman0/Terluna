@@ -1,0 +1,190 @@
+{
+  "schema": "open-moon-cloud-source/1",
+  "base_commit": "032765c51b1aeb140c732e8f484e47efda15cf4d",
+  "scope": "immersion/light-cycle/shoreline",
+  "source_archive_sha256": "d77b7210d3046bb944ff459afd7c7153b8510f9096430669ed18eefece0d72ef",
+  "baseline_blobs": {
+    ".gitignore": "c1bd987adb303e814277884fd984e367a92eeb67",
+    "README.md": "91a042b9168e7a5a029ffae2cdad1afcf3c6bd90",
+    "build_landscape.py": "33d060a2613c6fa640ff2e5d7126fe4b43426842",
+    "index.landscape.html": "7622659ac8e2fa7fc6d3f2dd4fda44bed6fbd928",
+    "index.renderer-lab.html": "976b49d0ae4f6838325e405c86a9483691e9a065",
+    "src/app.js": "c5975e5a8d2c5792abf11c087d01740983cf532f",
+    "src/atmosphere.js": "e089d6b0551cea3cd860c3d7bbe8922c5cc31ddb",
+    "src/ponds.js": "fe41a8d8e5563ac567ad08366fcdab27e64d487f",
+    "src/scene.js": "19a404fd5efa3fcaa800d8de717e2b0ebef52c7c",
+    "src/water.js": "881bb35f1490b4cfef80e87ddea8522f47659656"
+  },
+  "payload": {
+    ".gitignore": {
+      "bytes": 307,
+      "sha256": "63ccf0c1167cceb7a680a09fd4c500d7f782be9cd68045e7188470ad1e18927a",
+      "git_blob": "60169b826d85728d4a1b1edcb230ca8578e36d8e"
+    },
+    "README.md": {
+      "bytes": 4935,
+      "sha256": "b3b7da4997fcaf0ca478ff998e0129f91a9e63464d4dd02b2baf7f01e24761ff",
+      "git_blob": "460e662b35df71ec637d589f921f503ff2fab700"
+    },
+    "build_landscape.py": {
+      "bytes": 2734,
+      "sha256": "d1da68e48c5576ee1099ff7af32af22800a5697d2e4bf040b2f22885c323e7a0",
+      "git_blob": "1b3bf52fe75e1d8de95dd7b64f1e227438d6805b"
+    },
+    "index.landscape.html": {
+      "bytes": 28999,
+      "sha256": "cfcd98ce68e3194ba783d3f2242570b739373266b6cc0a29b0c351fbcb5e3bd7",
+      "git_blob": "af2bb6142f615db27021700e9ac7df7644f8dd7d"
+    },
+    "index.renderer-lab.html": {
+      "bytes": 6947,
+      "sha256": "e29dbcd9ecc9e90ca4f94b3a21dafc6b766544c756a15d2c5fe87d01cb31600f",
+      "git_blob": "11da8fdbbeeeeb72bf13fb3a2dabe6e9dd34ff02"
+    },
+    "src/app.js": {
+      "bytes": 25771,
+      "sha256": "dcdd34f641dcba32dd1c4371c4c2d96408017174df4178673f83588c5887bad2",
+      "git_blob": "ab0cf7a412034bd4783d41abb3a234942ff82a1a"
+    },
+    "src/atmosphere.js": {
+      "bytes": 11113,
+      "sha256": "fa7a7e2995aaf9decdbe7ea939950b93e9cd43282663af95927e1b7808e2765d",
+      "git_blob": "6cd2c53e66d22002d6ca0c8edc4c6aa55edd4fc1"
+    },
+    "src/ponds.js": {
+      "bytes": 9910,
+      "sha256": "38d2b817248d382c7f642d5cd5a8d9350228fe7ce1b110e45f33bc05bd8544da",
+      "git_blob": "d84dddc094a307432c4ce256c5ba2754fde9305d"
+    },
+    "src/scene.js": {
+      "bytes": 9393,
+      "sha256": "6b6e055d7573cd29fc68ea22c2b0ae1071a8b53b02d51350a49c4d0aae1dd4c1",
+      "git_blob": "57614fd38d6a45b5f5e8614d63b9f20542e81aa6"
+    },
+    "src/water.js": {
+      "bytes": 10395,
+      "sha256": "122a222797464294d303dda6f4944d00003086fb369bd339227b82e9db1259bf",
+      "git_blob": "30544336880c6f75f354f832106626c5d179111b"
+    },
+    "src/weather-column.js": {
+      "bytes": 10023,
+      "sha256": "7b4e39a6096025205f52ec4fa035d1557e85fc6638d691b8b129959b8e5f35e4",
+      "git_blob": "14e6a3f83d88b4a0927303e4934b74be5e4e5fd4"
+    },
+    "src/cloud-optics.js": {
+      "bytes": 2821,
+      "sha256": "66bebd721f6b1727f0839558145b851beebef5cf5d3d4ebb4394b04bc239290b",
+      "git_blob": "b0eafd87e00deb58c586ee1e82d0fcf06e913b55"
+    },
+    "src/cloud-renderer.js": {
+      "bytes": 17706,
+      "sha256": "78c1f5339fe80940a4362c7edd71310b586ba397c91a85b1ff8b2e3611767bfc",
+      "git_blob": "d080373afc5e13d2e15e6048fc9ce1d0540e100a"
+    },
+    "tests/weather-column.test.cjs": {
+      "bytes": 8060,
+      "sha256": "47959115167f9326a2ed49cf20a5005d14696f60b9cb6b060155691460e27e29",
+      "git_blob": "874a8da2890346c206e49d8716f30737100a3fc8"
+    },
+    "tests/cloud-cache.test.cjs": {
+      "bytes": 3418,
+      "sha256": "97f0e27ce218e88f83053b7743df318d4b79d205ac00653f063f2e4560523e2e",
+      "git_blob": "582b5ec7afecd206459fd4a89a2644420c36d068"
+    },
+    "tests/cloud_field_probe.js": {
+      "bytes": 3392,
+      "sha256": "87b5a1ca4e571f218d39c46ba4563e94f2b6691be6f94b57a9a7fb9cece7a147",
+      "git_blob": "3bb0fd6afe4129d688e36a0440d7b45e37009e29"
+    },
+    "tests/capture_clouds.py": {
+      "bytes": 8333,
+      "sha256": "6cff6b5aff855a1ddc92e1b7ed0a990a3cbb568a6681d4f7c44624f437f8f0f5",
+      "git_blob": "c3f4a87162ad41c01c1832204b3076c27229316e"
+    },
+    "CLOUD_METHODS.md": {
+      "bytes": 14067,
+      "sha256": "cdac5d7128e7c6a021775085206d863b2582f0f694dd1da9f1cdaf14b8275716",
+      "git_blob": "f9828760de2b7a60ebcb2939c2f726c92b1720bf"
+    },
+    "CLOUD_VALIDATION.json": {
+      "bytes": 7840,
+      "sha256": "226e411b444c6443797d6d70240352bf5d42bd4aff352210a7c587029c61d558",
+      "git_blob": "601a6eb2b17682eab438568d28436c7887a41981"
+    },
+    "validation/clouds/boundary-convection-moon.json": {
+      "bytes": 10312,
+      "sha256": "a6688845d01dae3a37f6b008d3bdfddb5fba195d042de23b198752897623c6df",
+      "git_blob": "1a97fd5c66d1da827bdb98b826c0f3007326ee62"
+    },
+    "validation/clouds/boundary-fair.json": {
+      "bytes": 10319,
+      "sha256": "f92b57c64eabf6d49bbe4f7fdc00a235f79e40e226a520cf21afffaa401c316c",
+      "git_blob": "00455ff22429a7581fa272d0e51c8190ad203c04"
+    },
+    "validation/clouds/boundary-fog-mobile.json": {
+      "bytes": 11305,
+      "sha256": "77729cc9194a0f8582825eb132926a030fc96ca94a808de1beaa7aae875f8040",
+      "git_blob": "f35ef010a0f35ff4935c4d220515f86eb9a81363"
+    },
+    "validation/clouds/boundary-reference.json": {
+      "bytes": 3088,
+      "sha256": "e97fe9c7216a6d56d16fac8f3cc37aed9efd2af67da0cfad7614b9cff24e46c7",
+      "git_blob": "5338b5e7c6c163cfcedf990bdea5f8307e25ddb9"
+    },
+    "validation/clouds/boundary-convection-earth.json": {
+      "bytes": 10458,
+      "sha256": "98dff5a49978aeb92c2ed9d5407d52232b47babf7e415682fe1f362ab710916b",
+      "git_blob": "901afaf18359a0141aa9280e62be3626f5254a4c"
+    },
+    "validation/clouds/reference-old.json": {
+      "bytes": 3055,
+      "sha256": "821fb62eb83d93a32ee843145ce769ff8888ab071e3afa7a56abbcc2c170a5af",
+      "git_blob": "12048a71a64867844af6820aa10bd5c11d522af5"
+    },
+    "validation/clouds/reference-comparison.json": {
+      "bytes": 440,
+      "sha256": "c9900c4a0272c2d38cfe575c1cfe13233e42280ab63700f8c6436375f5170260",
+      "git_blob": "38ad44503c3ceb82dd970563c662991cc31194eb"
+    },
+    "validation/clouds/scenarios.json": {
+      "bytes": 18096,
+      "sha256": "625255c2171ec94aad2c8c88b7d69a641a60b3301bc8a1030441c0ff96ecfa41",
+      "git_blob": "078d9027f043da0f86c2759a5bb743b8bc3beb41"
+    },
+    "validation/clouds/final-boundary-tests.tap": {
+      "bytes": 27344,
+      "sha256": "fdf8e4a50e8a390dbb40c224713ce28c9860ec5de8e08488d64e1d19b531fe7e",
+      "git_blob": "8d76319234b9b7679f471863f4aa7f0d6392bf1b"
+    },
+    "validation/clouds/diagnostics/convection-moon.json": {
+      "bytes": 4938,
+      "sha256": "19b3255a3062c1e5ada87ef66635f86867fec17619f82c7d11cab5c1fbd92d2d",
+      "git_blob": "97eaecf94e713d7f94a2913c36f0d2e9cd552609"
+    },
+    "validation/clouds/diagnostics/review-fair-balanced.json": {
+      "bytes": 5367,
+      "sha256": "07a76168b744ede3eca204d97f1d6b3fa009b8cf04ff53385316efe5435944b3",
+      "git_blob": "4191a9b09c55923982ba533c026a26e02ad19bea"
+    },
+    "validation/clouds/diagnostics/review-fair-sharp.json": {
+      "bytes": 5353,
+      "sha256": "bf6d828eec28882e611c8534388aecc382389d8f37998120411341fabac72806",
+      "git_blob": "19f30df80dd72111e59e83129dbcacb32294adec"
+    },
+    "validation/clouds/diagnostics/lattice-fair-balanced.json": {
+      "bytes": 5377,
+      "sha256": "513c1bc7a64b47fb9b4accf639483f2e31b72e2692c1e008b0804355a6a0828b",
+      "git_blob": "791fcbeb1eb0c791c21a15f3237f4a2c070b0402"
+    },
+    "validation/clouds/diagnostics/cache-fixture-syntax-failure.tap": {
+      "bytes": 27176,
+      "sha256": "88b0317b6e1bbde97f1585534b71514bc0f239a88f1329c4ef6e4c1a3ac67189",
+      "git_blob": "d53a4c6acdb70b2d604825048b67f213360eeb98"
+    }
+  },
+  "exclusions": [
+    "This manifest and revision04.patch are excluded from their own hashes",
+    "Generated viewers, PNGs, vendor module bytes and package-only build.py wrapper are excluded from the repository patch"
+  ],
+  "publication": "Local prepared payload only"
+}

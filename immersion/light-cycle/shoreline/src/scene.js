@@ -31,7 +31,7 @@ function prepareMaterial(T,mat,atm,state,{sway=0,sheltered=false,ground=false}={
   shader.fragmentShader=shader.fragmentShader.replace('#include <lights_fragment_end>',`#include <lights_fragment_end>
    reflectedLight.indirectDiffuse*=mix(1.,.24,max(omRoof,uProtected*.35))*${ground?'mix(1.,.58,vOMCanopy)':'1.'};
    reflectedLight.indirectSpecular*=mix(1.,.35,max(omRoof,uProtected*.35));`);
-  shader.fragmentShader=shader.fragmentShader.replace('#include <tonemapping_fragment>',`vec3 omView=vOMWorld-cameraPosition;vec3 omFogTr=exp(-uLocalExtinction*length(omView));gl_FragColor.rgb=mix(omClear(normalize(omView)),gl_FragColor.rgb,omFogTr);\n#ifdef TONE_MAPPING\n gl_FragColor.rgb*=uWhiteBalance;\n#endif\n#include <tonemapping_fragment>`);
+  shader.fragmentShader=shader.fragmentShader.replace('#include <tonemapping_fragment>',`vec3 omView=vOMWorld-cameraPosition;vec3 omFogTr=exp(-uLocalExtinction*length(omView));gl_FragColor.rgb=mix(omAirColour(normalize(omView)),gl_FragColor.rgb,omFogTr);\n#ifdef TONE_MAPPING\n gl_FragColor.rgb*=uWhiteBalance;\n#endif\n#include <tonemapping_fragment>`);
  };
  mat.customProgramCacheKey=()=>`open-moon-material-${sway}-${sheltered}-${ground}`;
  return mat;
