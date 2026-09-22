@@ -48,7 +48,12 @@ uniform DirectionalLight directionalLight;
 DirectLight directLight;ReflectedLight reflectedLight;
 void getDirectionalLightInfo(DirectionalLight a,out DirectLight b){b.color=a.color;}
 '''
-includes={'tonemapping_fragment':'/* identity tone map for syntax check */','colorspace_fragment':'/* identity colour space for syntax check */','begin_vertex':'vec3 transformed=position;','project_vertex':'gl_Position=projectionMatrix*modelViewMatrix*instanceMatrix*vec4(transformed,1.);','roughnessmap_fragment':'float roughnessFactor=.8;','lights_fragment_end':'reflectedLight.indirectDiffuse=vec3(1.);reflectedLight.indirectSpecular=vec3(1.);'}
+includes={'tonemapping_fragment':'/* identity tone map for syntax check */',
+          'colorspace_fragment':'/* identity colour space for syntax check */',
+          'begin_vertex':'vec3 transformed=position;',
+          'project_vertex':'gl_Position=projectionMatrix*modelViewMatrix*instanceMatrix*vec4(transformed,1.);',
+          'roughnessmap_fragment':'float roughnessFactor=.8;',
+          'lights_fragment_end':'reflectedLight.indirectDiffuse=vec3(1.);reflectedLight.indirectSpecular=vec3(1.);'}
 def expand(text):
     def repl(m):
         if m[1] not in includes:raise ValueError('Unhandled engine include '+m[1])

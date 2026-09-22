@@ -1,38 +1,104 @@
 (function(root){'use strict';const OM=root.OM,C=root.OpenMoonCore;
+/* M1 water: a continuous curved surface, resolved planar near-field reflection,
+ * depth-buffer refraction and RGB Beer–Lambert attenuation of the actual seabed.
+ * The selected wave modes are a render model, with lunar gravity in dispersion.
+ */
 function createWater(T,scene,atm,renderer){
- const reflectRT=new T.WebGLRenderTarget(512,512,{type:T.HalfFloatType,depthBuffer:true});reflectRT.texture.colorSpace=T.LinearSRGBColorSpace;
- const u={...atm.uniforms,uReflection:{value:reflectRT.texture},uMirrorMatrix:{value:new T.Matrix4()},uGravity:{value:1.62},uCamera:{value:new T.Vector3()},uRain:{value:0}};
+ const reflectionTarget=new T.WebGLRenderTarget(1280,800,{type:T.HalfFloatType,depthBuffer:true,generateMipmaps:true,minFilter:T.LinearMipmapLinearFilter});
+ reflectionTarget.samples=4;reflectionTarget.texture.colorSpace=T.LinearSRGBColorSpace;
+ const opaqueTarget=new T.WebGLRenderTarget(1280,800,{type:T.HalfFloatType,depthBuffer:true});opaqueTarget.samples=4;
+ opaqueTarget.texture.colorSpace=T.LinearSRGBColorSpace;opaqueTarget.depthTexture=new T.DepthTexture(1280,800,T.UnsignedIntType);
+ const u={...atm.uniforms,uReflection:{value:reflectionTarget.texture},uOpaque:{value:opaqueTarget.texture},uOpaqueDepth:{value:opaqueTarget.depthTexture},
+  uMirrorMatrix:{value:new T.Matrix4()},uGravity:{value:1.62},uCamera:{value:new T.Vector3()},uRain:{value:0},uViewport:{value:new T.Vector2(1280,800)},uNear:{value:.08},uFar:{value:30000},uReflectValid:{value:0}};
  const wave=`
-uniform float uTime,uWind,uGravity,uR;
-float wo(float k){float e=exp(2.*k*12.);return sqrt(uGravity*k*(e-1.)/(e+1.));}
-vec3 waterWave(vec2 p){vec3 v=vec3(0.);vec2 dirs[4];dirs[0]=vec2(.94,.342);dirs[1]=vec2(.36,.933);dirs[2]=vec2(-.45,.89);dirs[3]=vec2(.78,-.62);float ks[4];ks[0]=.095;ks[1]=.22;ks[2]=.48;ks[3]=1.25;float aa[4];aa[0]=.15;aa[1]=.085;aa[2]=.04;aa[3]=.012;for(int i=0;i<4;i++){float a=aa[i]*(.4+uWind*.15),k=ks[i],q=k*dot(p,dirs[i])-wo(k)*uTime+float(i)*1.5;v.x+=a*sin(q);v.yz-=a*k*dirs[i]*cos(q);}return v;}
-`;
- const vs=wave+`uniform mat4 uMirrorMatrix;varying vec3 vW,vN;varying vec4 vMirror;void main(){vec3 p=position;vec3 w=waterWave(p.xz);p.y=w.x-dot(p.xz,p.xz)/(2.*uR);vN=normalize(vec3(w.y+p.x/uR,1.,w.z+p.z/uR));vW=p;vMirror=uMirrorMatrix*vec4(p,1.);gl_Position=projectionMatrix*viewMatrix*vec4(p,1.);}`;
- const fs=OM.SKY_UNIFORMS+OM.GLSL_NOISE+OM.CLOUDS+`uniform sampler2D uReflection;uniform vec3 uCamera;uniform float uRain;varying vec3 vW,vN;varying vec4 vMirror;
-void main(){vec3 n=normalize(vN),v=normalize(uCamera-vW);float detail=omNoise(vec3(vW.xz*.75,uTime*.4));n=normalize(n+vec3((detail-.5)*.02,0.,(omNoise(vec3(vW.zx*.81,uTime*.33))-.5)*.02)*(1.+uRain*.04));float fres=.0204+.9796*pow(1.-max(0.,dot(n,v)),5.);vec2 uv=vMirror.xy/vMirror.w;uv+=n.xz*.008;vec3 reflected=texture2D(uReflection,clamp(uv,.001,.999)).rgb;
- float depth=max(0.,(-9.+4.*sin(vW.x*.035)+2.1*sin(vW.x*.083+.8)-vW.z)*.075);vec3 body=mix(vec3(.105,.16,.135),vec3(.013,.049,.048),1.-exp(-depth*.2))*(uDiffuse+uDirect*max(0.,uSun.y)*omCloudShadow(vW))/OM_PI;
- vec3 colour=mix(body,reflected,fres);vec3 h=normalize(v+uSun);float rough=.04+uWind*.006,a2=pow(rough,4.),nh=max(0.,dot(n,h)),den=nh*nh*(a2-1.)+1.;float D=a2/(OM_PI*den*den);float spec=min(6.,.0204*D/(4.*max(.05,dot(n,v))));colour+=uDirect*max(0.,dot(n,uSun))*spec*omCloudShadow(vW);
- float foam=(1.-smoothstep(.02,.75,depth))*smoothstep(.4,.88,sin(vW.z*2.6-uTime*1.1+sin(vW.x*.5))*.5+.5)*(.3+uWind*.045);colour=mix(colour,(uDiffuse+uDirect*max(uSun.y,0.)*.7)/OM_PI,foam);
- float dist=length(uCamera-vW),fog=1.-exp(-3.912/max(80.,uVisibility)*dist);colour=mix(colour,(uDiffuse+uDirect*max(0.,uSun.y)*.14)/OM_PI,fog);
- gl_FragColor=vec4(max(vec3(0.),colour),1.);\n#include <tonemapping_fragment>\n#include <colorspace_fragment>\n}`;
- // Fine local waves, progressively coarser water beyond the walking area.
- const verts=[],indices=[];
- function grid(x0,x1,z0,z1,nx,nz){const first=verts.length/3;for(let j=0;j<=nz;j++)for(let i=0;i<=nx;i++)verts.push(x0+(x1-x0)*i/nx,0,z0+(z1-z0)*j/nz);for(let j=0;j<nz;j++)for(let i=0;i<nx;i++){const a=first+j*(nx+1)+i,b=a+1,c=a+nx+1,d=c+1;indices.push(a,c,b,b,c,d);}}
- grid(-300,300,-300,300,256,256);
- grid(-13000,13000,-13000,-300,80,50);grid(-13000,13000,300,13000,80,50);
- grid(-13000,-300,-300,300,50,64);grid(300,13000,-300,300,50,64);
- const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(verts,3));geo.setIndex(indices);
- const mat=new T.ShaderMaterial({uniforms:u,vertexShader:vs,fragmentShader:fs,side:T.FrontSide,toneMapped:true});const water=new T.Mesh(geo,mat);water.frustumCulled=false;scene.add(water);
- const mirrorCam=new T.PerspectiveCamera(),bias=new T.Matrix4().set(.5,0,0,.5,0,.5,0,.5,0,0,.5,.5,0,0,0,1),target=new T.Vector3();let last=-Infinity;
- function reflection(camera,now,force=false){u.uCamera.value.copy(camera.position);if(!force&&now-last<.075)return;last=now;mirrorCam.copy(camera);mirrorCam.position.y=-camera.position.y;camera.getWorldDirection(target);target.y=-target.y;mirrorCam.up.set(0,-1,0);mirrorCam.lookAt(mirrorCam.position.clone().add(target));mirrorCam.updateMatrixWorld();u.uMirrorMatrix.value.copy(bias).multiply(mirrorCam.projectionMatrix).multiply(mirrorCam.matrixWorldInverse);
-  const rt=renderer.getRenderTarget(),clip=renderer.clippingPlanes,shadows=renderer.shadowMap.autoUpdate,tm=renderer.toneMapping,exp=renderer.toneMappingExposure;water.visible=false;renderer.shadowMap.autoUpdate=false;renderer.clippingPlanes=[new T.Plane(new T.Vector3(0,1,0),-.07)];renderer.toneMapping=T.NoToneMapping;renderer.toneMappingExposure=1;renderer.setRenderTarget(reflectRT);renderer.render(scene,mirrorCam);renderer.setRenderTarget(rt);renderer.clippingPlanes=clip;renderer.shadowMap.autoUpdate=shadows;renderer.toneMapping=tm;renderer.toneMappingExposure=exp;water.visible=true;
+ uniform float uTime,uWind,uGravity,uR;
+ vec3 omWaves(vec2 p,bool micro){
+  vec3 sum=vec3(0.);float filterWidth=0.;
+  float ks[12];${C.WATER_BANDS.map((k,i)=>`ks[${i}]=${k.toFixed(6)};`).join('')}
+  for(int i=0;i<12;i++){
+   if(!micro&&i>5)break;
+   float k=ks[i],theta=.95+sin(float(i)*2.399)*.71;vec2 dir=vec2(cos(theta),sin(theta));
+   float a=.095*pow(.095/k,1.12)*(.4+uWind*.18);
+   float depth=12.,e=exp(-2.*k*depth),omega=sqrt(uGravity*k*(1.-e)/(1.+e));
+   float phase=k*dot(p,dir)-omega*uTime+float(i)*2.721;
+   sum.x+=a*sin(phase);sum.yz-=a*k*dir*cos(phase);
+  }return sum;
  }
- return {mesh:water,uniforms:u,reflection};
+ `;
+ const vs=wave+`
+ uniform mat4 uMirrorMatrix;varying vec3 vW;varying vec4 vMirror;varying float vViewZ;
+ void main(){vec3 p=position;vec3 w=omWaves(p.xz,false);float r2=dot(p.xz,p.xz);p.y=w.x-r2/(uR+sqrt(max(1.,uR*uR-r2)));
+ vW=p;vMirror=uMirrorMatrix*vec4(p,1.);vec4 view=viewMatrix*vec4(p,1.);vViewZ=-view.z;gl_Position=projectionMatrix*view;}
+ `;
+ const fs=OM.SKY_UNIFORMS+OM.GLSL_NOISE+OM.CLOUDS+OM.CLEAR_LOOKUP+wave.replace('uniform float uTime,uWind,uGravity,uR;','uniform float uGravity;')+`
+ uniform sampler2D uReflection,uOpaque,uOpaqueDepth;uniform vec3 uCamera;uniform vec2 uViewport;uniform float uRain,uNear,uFar,uReflectValid;
+ varying vec3 vW;varying vec4 vMirror;varying float vViewZ;
+ float eyeZ(float d){return 2.*uNear*uFar/(uFar+uNear-(2.*d-1.)*(uFar-uNear));}
+ void main(){
+  vec3 wave=omWaves(vW.xz,true),v=normalize(uCamera-vW);
+  float footprint=max(length(dFdx(vW.xz)),length(dFdy(vW.xz)));
+  float ripple=(1.-smoothstep(.08,.6,footprint));
+  vec2 fine=vec2(sin(vW.x*38.+vW.z*17.+uTime*.7),sin(vW.z*41.-vW.x*13.+uTime*.5))*.015*ripple;
+  vec3 n=normalize(vec3(wave.y+fine.x+vW.x/uR,1.,wave.z+fine.y+vW.z/uR));
+  float nv=max(.001,dot(n,v)),fres=.0204+.9796*pow(1.-nv,5.);
+  vec2 screen=gl_FragCoord.xy/uViewport,uv=screen+n.xz*.010;
+  float opaqueZ=eyeZ(texture2D(uOpaqueDepth,uv).r);
+  if(opaqueZ<vViewZ+.005){uv=screen;opaqueZ=eyeZ(texture2D(uOpaqueDepth,uv).r);}
+  float path=clamp((opaqueZ-vViewZ)*length(uCamera-vW)/max(.05,vViewZ),0.,150.);
+  vec3 extinction=vec3(.29,.071,.036),transmission=exp(-extinction*path);
+  vec3 irradiance=(uDiffuse+uDirect*max(0.,uSun.y)*omCloudShadow(vW))/OM_PI;
+  vec3 waterScatter=irradiance*vec3(.009,.037,.042);
+  vec3 bottom=texture2D(uOpaque,uv).rgb;
+  vec3 body=bottom*transmission+waterScatter*(1.-transmission);
+  vec3 reflectedDir=reflect(-v,n);vec3 reflected=omClear(normalize(reflectedDir));
+  vec2 mirrorUV=vMirror.xy/vMirror.w+n.xz*.006;
+  float margin=min(min(mirrorUV.x,mirrorUV.y),min(1.-mirrorUV.x,1.-mirrorUV.y));
+  float planarWeight=smoothstep(.002,.02,margin)*(1.-smoothstep(550.,1800.,length(uCamera-vW)))*uReflectValid;
+  reflected=mix(reflected,texture2D(uReflection,clamp(mirrorUV,.001,.999),.65).rgb,planarWeight);
+  vec3 colour=mix(body,reflected,fres);
+  vec3 h=normalize(v+uSun);float nl=max(0.,dot(n,uSun)),nh=max(0.,dot(n,h)),vh=max(0.,dot(v,h));
+  float rough=.042+uWind*.006,alpha2=max(pow(rough,4.),.00465421*.00465421);
+  float den=nh*nh*(alpha2-1.)+1.,D=alpha2/(OM_PI*den*den);
+  float k=pow(rough+1.,2.)/8.,G=(nv/(nv*(1.-k)+k))*(nl/(nl*(1.-k)+k));
+  float F=.0204+.9796*pow(1.-vh,5.);colour+=uDirect*D*G*F/(4.*nv+.0001)*omCloudShadow(vW);
+  float contact=(1.-smoothstep(.02,.09,path))*smoothstep(.0,.012,path);
+  colour=mix(colour,irradiance*.18,contact*.14);
+  vec3 fogT=exp(-uLocalExtinction*length(uCamera-vW));
+  colour=mix(omClear(normalize(vW-uCamera)),colour,fogT);
+  gl_FragColor=vec4(max(colour,vec3(0.)),1.);
+  #ifdef TONE_MAPPING\n gl_FragColor.rgb*=uWhiteBalance;\n#endif\n#include <tonemapping_fragment>
+  #include <colorspace_fragment>
+ }
+ `;
+ const verts=[],indices=[],angular=256,radii=[];
+ for(const [a,b,step]of [[.75,96,.75],[98,256,2],[272,1024,16],[1088,4096,64],[4352,16384,256]])for(let r=a;r<=b;r+=step)radii.push(r);
+ verts.push(0,0,0);
+ radii.forEach((r,j)=>{for(let i=0;i<angular;i++){const a=i*C.TAU/angular;verts.push(Math.cos(a)*r,0,Math.sin(a)*r);const b=1+j*angular+i,c=1+j*angular+(i+1)%angular;if(j===0)indices.push(0,c,b);else{const a=b-angular,d=c-angular;indices.push(a,d,b,b,d,c);}}});
+ const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(verts,3));geo.setIndex(indices);
+ const mat=new T.ShaderMaterial({uniforms:u,vertexShader:vs,fragmentShader:fs,toneMapped:true});const water=new T.Mesh(geo,mat);water.frustumCulled=false;water.name='refractive-water';scene.add(water);
+ const mirrorCam=new T.PerspectiveCamera(),bias=new T.Matrix4().set(.5,0,0,.5,0,.5,0,.5,0,0,.5,.5,0,0,0,1),dir=new T.Vector3();
+ let width=0,height=0,quality='balanced',passes=0;
+ function resize(w,h,q=quality){quality=q;if(w===width&&h===height&&reflectionTarget.width===Math.round(w*(q==='economy'?.5:1)))return;width=w;height=h;
+  const scale=q==='economy'?.5:1;reflectionTarget.setSize(Math.max(256,Math.round(w*scale)),Math.max(256,Math.round(h*scale)));opaqueTarget.setSize(w,h);u.uViewport.value.set(w,h);}
+ function reflection(camera,now,force=false){
+  const size=renderer.getDrawingBufferSize(new T.Vector2());resize(size.x,size.y);
+  u.uCamera.value.copy(camera.position);u.uNear.value=camera.near;u.uFar.value=camera.far;
+  mirrorCam.copy(camera);mirrorCam.position.y=-camera.position.y;camera.getWorldDirection(dir);dir.y=-dir.y;mirrorCam.up.set(0,-1,0);mirrorCam.lookAt(mirrorCam.position.clone().add(dir));mirrorCam.updateMatrixWorld();
+  u.uMirrorMatrix.value.copy(bias).multiply(mirrorCam.projectionMatrix).multiply(mirrorCam.matrixWorldInverse);
+  const old={rt:renderer.getRenderTarget(),clip:renderer.clippingPlanes,tm:renderer.toneMapping,exposure:renderer.toneMappingExposure,shadow:renderer.shadowMap.autoUpdate,disk:atm.uniforms.uShowDisk.value};
+  water.visible=false;renderer.toneMapping=T.NoToneMapping;renderer.toneMappingExposure=1;
+  try{
+   renderer.clippingPlanes=[];renderer.setRenderTarget(opaqueTarget);renderer.render(scene,camera);
+   renderer.shadowMap.autoUpdate=false;renderer.clippingPlanes=[new T.Plane(new T.Vector3(0,1,0),-.015)];atm.uniforms.uShowDisk.value=false;
+   renderer.setRenderTarget(reflectionTarget);renderer.render(scene,mirrorCam);u.uReflectValid.value=1;passes++;
+  }finally{renderer.setRenderTarget(old.rt);renderer.clippingPlanes=old.clip;renderer.toneMapping=old.tm;renderer.toneMappingExposure=old.exposure;renderer.shadowMap.autoUpdate=old.shadow;atm.uniforms.uShowDisk.value=old.disk;water.visible=true;}
+ }
+ return {mesh:water,uniforms:u,reflection,resize,reflectionTarget,opaqueTarget,get passes(){return passes;}};
 }
 function createRain(T,scene,atm){const random=C.rng(719),positions=[],seeds=[];for(let i=0;i<5000;i++){const x=random(),y=random(),z=random();for(let j=0;j<2;j++){positions.push(x,y,z);seeds.push(j);}}
  const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(positions,3));g.setAttribute('endPoint',new T.Float32BufferAttribute(seeds,1));const u={...atm.uniforms,uCamera:{value:new T.Vector3()},uFall:{value:1.56},uRain:{value:0},uRoofY:{value:8.24}};
  const vs=`uniform float uTime,uWind,uFall,uRain,uRoofY,uDrift;uniform vec3 uCamera;attribute float endPoint;varying float vAlpha;void main(){vec3 p=position;float x=fract(p.x+uDrift*.018),z=fract(p.z+uDrift*.005);float y=mod(p.y*24.-uTime*uFall,24.);vec3 w=vec3((x-.5)*50.+uCamera.x,y+uCamera.y-10.,(z-.5)*50.+uCamera.z);w-=endPoint*vec3(uWind*.018,-uFall/35.,uWind*.005);float protectedArea=(1.-step(6.,abs(w.x-20.)))*(1.-step(4.6,abs(w.z-33.)))*(1.-step(uRoofY,w.y));vAlpha=step(position.x,clamp(uRain/10.,0.,1.))*(1.-protectedArea)*smoothstep(-1.,1.,w.y)*.30;gl_Position=projectionMatrix*viewMatrix*vec4(w,1.);}`;
- const fs=`uniform vec3 uDiffuse,uDirect;uniform vec3 uSun;varying float vAlpha;void main(){vec3 c=(uDiffuse+uDirect*max(0.,uSun.y)*.1)*.18;gl_FragColor=vec4(c,vAlpha);\n#include <tonemapping_fragment>\n#include <colorspace_fragment>\n}`;
+ const fs=`uniform vec3 uDiffuse,uDirect,uWhiteBalance;uniform vec3 uSun;varying float vAlpha;void main(){vec3 c=(uDiffuse+uDirect*max(0.,uSun.y)*.1)*.18;gl_FragColor=vec4(c,vAlpha);\n#ifdef TONE_MAPPING\n gl_FragColor.rgb*=uWhiteBalance;\n#endif\n#include <tonemapping_fragment>\n#include <colorspace_fragment>\n}`;
  const m=new T.ShaderMaterial({uniforms:u,vertexShader:vs,fragmentShader:fs,transparent:true,depthWrite:false});const rain=new T.LineSegments(g,m);rain.frustumCulled=false;scene.add(rain);return {mesh:rain,uniforms:u};
 }
 OM.createWater=createWater;OM.createRain=createRain;

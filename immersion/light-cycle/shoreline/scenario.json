@@ -1,5 +1,5 @@
 {
-  "schema": "open-moon-shoreline-scenario/1",
+  "schema": "open-moon-shoreline-scenario/2",
   "date": "2026-09-21",
   "purpose": "Authored immersion environment with inherited atmospheric inputs",
   "location": {
@@ -29,7 +29,11 @@
     {"seconds":12600,"coverage":0.37,"liquid_water_g_m3":0.05,"cloud_base_m":1350,"cloud_thickness_m":950,"wind_m_s":2.6,"relative_humidity":0.75,"air_K":292,"rain_mm_h":0,"visibility_m":22000},
     {"seconds":14400,"coverage":0.12,"liquid_water_g_m3":0.02,"cloud_base_m":1500,"cloud_thickness_m":900,"wind_m_s":1.7,"relative_humidity":0.64,"air_K":293,"rain_mm_h":0,"visibility_m":35000}
   ],"cloud_effective_radius_um":12,"visible_drop_radius_m":0.0007},
-  "third_party":{"name":"three","version":"0.180.0","source_ref":"r180","upstream_git_blob":"ca4833532c363b72477b2e8a6f47cc0e2fc7b09a","first_open_url":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.cjs","vendor_bytes_in_distribution":false},
+  "third_party":{"name":"three","version":"0.180.0","source_ref":"r180","upstream_git_blob":"ca4833532c363b72477b2e8a6f47cc0e2fc7b09a","first_open_url":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.cjs","vendor_bytes_in_distribution":false,"byte_count":2006834},
   "physics_scope":"See METHODS.md",
-  "prior_atmosphere_archive_sha256":"e753eaf67d3392fa48617fddad12376c3564ffb7cd10d2bd2705d4640e3a614b"
+  "prior_atmosphere_archive_sha256":"e753eaf67d3392fa48617fddad12376c3564ffb7cd10d2bd2705d4640e3a614b",
+  "base_commit":"4877d8e6c020de51e237deb377955442778917da",
+  "build":"m1-review-01",
+  "reference":{"world":"moon","clock":"moon","phase":0,"weather_kind":"clear","motion_time_s":0,"frozen":true,"camera_xyz_m":[0,3.045873320927338,9],"eye_height_above_terrain_m":1.7,"yaw_rad":0,"pitch_rad":-0.04,"vertical_fov_deg":58,"viewport_px":[1440,900],"pixel_ratio":1,"exposure":0.236657345,"white_balance":"noon_irradiance","quality":"balanced"},
+  "m1":{"terrain_radius_m":16384,"terrain_vertices":196609,"wave_modes":12,"vertex_wave_modes":6,"wave_dispersion_depth_m":12,"gravity_m_s2":1.62,"selected_water_absorption_m_inverse":[0.29,0.071,0.036],"reflection_samples":4,"opaque_samples":4,"environment_face_px":256,"review_status":"visual target open"}
 }

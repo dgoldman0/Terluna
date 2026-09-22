@@ -1,20 +1,54 @@
 {
-  "date": "2026-09-21",
-  "release_status": "implementation awaiting integrated Three.js browser verification",
-  "unit_tests": {"command":"node --test tests/core.test.cjs","passed":38,"failed":0,"record":"validation/core-tests.tap","scope":"Pure equations, input/data checks, reproducibility and dependency rejection"},
-  "javascript_syntax": [
-    {"file":"src/app.js","passed":true,"sha256":"726bce8aa7cd67d8cfd327c1a8cf1e548d2fe45809ebe48ca8afc14b0617be04"},
-    {"file":"src/atmosphere.js","passed":true,"sha256":"2b962254df71eeed847bc9de4a65199d5404cb3958458f99bf13cf8badd42b64"},
-    {"file":"src/audio.js","passed":true,"sha256":"23fee2369e179668e9eda580522667085374f348fd36b2c64f6116bfbc1240f6"},
-    {"file":"src/core.js","passed":true,"sha256":"8cc430fc4f86ef74c833be5fd452235494864bdc69918c1cee7ccf30eb2a7696"},
-    {"file":"src/loader.js","passed":true,"sha256":"ec36d3513c3e9bf91b7238059d0f765f6f9c94853d2d30f3e19b4bbb29294a7d"},
-    {"file":"src/scene.js","passed":true,"sha256":"d2bbf25026c662d75928af853377f347d435ce6b9d2efacd0d149fd35c7b3bd3"},
-    {"file":"src/water.js","passed":true,"sha256":"f3fe7c57176a697bdc5022c1376ee519929b01a75791b976b1d8a75608374c79"}
-  ],
-  "shader_programs":{"passed":5,"renderer":"llvmpipe (LLVM 19.1.7, 256 bits)","scope":"Compile our GLSL with GLES 3 through Mesa EGL. Three.js engine includes are replaced by a minimal declared syntax harness; this does not establish full renderer integration.","record":"validation/shader-checks.json"},
-  "loader_ui":{"passed":true,"viewports":[[1440,900],[390,844]],"scope":"Dependency-failure UI only; external dependency request deliberately aborted.","record":"validation/loader-ui-checks.json"},
-  "packed_atmosphere":{"moon":{"angular_shape":[41,33],"sun_angles":174,"quantization_error_relative_to_frame_max":0.00024413917867866744},"earth":{"angular_shape":[41,33],"sun_angles":174,"quantization_error_relative_to_frame_max":0.00024413363173436732},"moon_no_ozone":{"angular_shape":[41,33],"sun_angles":174,"quantization_error_relative_to_frame_max":0.00024413855180009344}},
-  "build":{"deterministic_two_runs":true,"html_sha256":"8cecea048a67040c532f1660b4b071dd0fe1db1927dfc063aba862e45ca3b218","html_bytes":2600556,"dependency_embedded":false},
-  "unperformed":["Integrated Three.js scene initialization, shader expansion and rendered visual inspection","Actual CDN library-byte download and successful verification in a browser","Successful runtime self-contained offline export using actual vendor bytes","GPU-device performance and mobile scene testing","Independent atmospheric solver benchmark and physical weather validation"],
-  "unchanged":{"previous_viewer":true,"scientific_models":true,"remote_repository":true}
+  "schema": "open-moon-shoreline-validation/2",
+  "build": "m1-review-01",
+  "base_commit": "4877d8e6c020de51e237deb377955442778917da",
+  "status": "progress checkpoint; M1 lifelike-image acceptance remains open",
+  "local_only": false,
+  "repository_written": true,
+  "build_checks": {
+    "unit_tests": 54,
+    "passed": 54,
+    "failed": 0,
+    "syntax_checked_runtime_files": 8,
+    "deterministic_build_runs": 2,
+    "html_bytes": 5291828,
+    "html_sha256": "58d8952e8beb96c0b9ed0fa9f8e8abafccadde26bd42e9442679b7081461f822",
+    "vendor_embedded": true,
+    "atmosphere_unchanged": true
+  },
+  "browser": {
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+    "reference_viewport": [1440,900],
+    "hardware_gpu_tested": false,
+    "full_resolution_checks": {"boot":true,"reference_screenshot":true,"paused_callbacks_skip_render":true,"show_controls":true,"second_view_with_depth_and_reflection":true,"benchmark_reset":true,"multiple_full_render_passes":true},
+    "context_lost_in_final_reference_run": false,
+    "browser_errors": [],
+    "warnings": [],
+    "external_requests": [],
+    "clear_environment_builds_during_reference_and_reset": 1,
+    "reset_png_identical": true,
+    "mobile_viewport": [390,844],
+    "mobile_checks": {"boot":true,"reference_screenshot":true,"controls_fit_viewport":true},
+    "harness": {"in_memory":true,"sha1_bridge":true,"deterministic_animation_callbacks":true,"software":true},
+    "native_file_opening_tested": false,
+    "reference_command": "python tests/capture_m1.py --output validation/noon.png --in-memory --headed --software --display :97 --interactions",
+    "probe_command": "python tests/capture_m1.py --output validation/probes.png --width 960 --height 600 --in-memory --headed --software --display :97 --probe",
+    "mobile_command": "python tests/capture_m1.py --output validation/mobile.png --width 390 --height 844 --in-memory --headed --software --display :97 --ui-only"
+  },
+  "gpu_probes": {
+    "depth": [
+      {"uv":[0.5,0.43],"deviceDepth":0.9966799020767212,"opaqueViewZ_m":36.08987045288086,"flatWaterViewZ_m":25.915593142374476,"geometricDepth_m":0.5407701421648095,"estimatedOpticalPath_m":10.204867431825994},
+      {"uv":[0.5,0.45],"deviceDepth":0.9976276159286499,"opaqueViewZ_m":50.477020263671875,"flatWaterViewZ_m":31.935460680501073,"geometricDepth_m":0.9494037737508348,"estimatedOpticalPath_m":18.570022997072808},
+      {"uv":[0.5,0.48],"deviceDepth":0.9984855651855469,"opaqueViewZ_m":78.97806549072266,"flatWaterViewZ_m":49.013183029157375,"geometricDepth_m":1.716802990798142,"estimatedOpticalPath_m":29.972247128991867},
+      {"uv":[0.62,0.43],"deviceDepth":0.9968565106391907,"opaqueViewZ_m":38.11414337158203,"flatWaterViewZ_m":25.915593142374483,"geometricDepth_m":0.633064796743986,"estimatedOpticalPath_m":12.507704704940712}
+    ],
+    "grayCard": {"reflectance":0.18,"rawLinearRGB":[0.8269087672233582,0.6390542984008789,0.4715723693370819],"displayWhiteBalanceGain":[0.8055076246147659,1.0428335463232834,1.43700702659039],"referenceExposure":0.236657345,"referenceDisplayLuminance":0.18000023046135902,"exposureFor18Percent":0.23665734469890592,"calibratedDisplayLuminance":0.18000023046135902},
+    "renderTargets": {"reflection":[960,600],"samples":4,"opaque":[960,600]},
+    "inheritedNoonLux": 94158.48781715755
+  },
+  "visual_review": {"coherent_terrain":"improved; indexed continuity verified","exposure":"gray-card-calibrated fixed reference","water":"depth/refraction/attenuation measured and screenshots inspected","vegetation_and_material_naturalism":"open; visibly procedural","overall_M1_acceptance":"open"},
+  "diagnostics": {"pre_cache_stress_failure":"validation/diagnostics/pre-cache-stress.json","final_full_resolution_repeat_test":"validation/cached_full_resolution.json","note":"A pre-cache run combining GPU debug readbacks with repeated 1440x900 rendering lost its software graphics context. Final build passed the complete 1440x900 view/reset test and a separate current-build 960x600 GPU readback test. Combined debug-readback plus full-resolution repeat stress was not rerun. No browser/GPU watchdog or managed browser policy was disabled."},
+  "unperformed": ["Hardware-GPU frame-time and memory profiling","Native file:// and localhost browser launch in this restricted runner","Full-cycle/dusk/night and Earth-comparison regression review","Predictive hydrology, shoreline run-up/breaking and weather validation","Lifelike visual acceptance"],
+  "repository_checkpoint": {"source_committed":true,"generated_html_committed":false,"validation_screenshots_committed":false,"vendor_bundle_committed":false,"note":"Generated review HTML/screenshots were inspected locally; the repository checkpoint preserves editable source, tests, and compact validation records. The prior generated HTML is removed to avoid a stale-source mismatch."}
 }

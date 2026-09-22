@@ -1,29 +1,31 @@
-# Open Moon — Shoreline immersion prototype
+# Open Moon — Shoreline M1 progress checkpoint
 
-This directory contains the **normal editable source tree** for the current shoreline immersion checkpoint. The source is committed as ordinary files; it is not stored behind an archive wrapper.
+This directory contains the editable source for the current M1 clear-noon shoreline pass, based on Terluna checkpoint `4877d8e6c020de51e237deb377955442778917da`.
 
 ## Status
 
-This is a WIP preservation checkpoint, not a visual-quality milestone. The browser render has known serious weaknesses:
+This is a **progress checkpoint**, not M1 visual acceptance. It is substantially improved over the preceding shoreline prototype: one indexed terrain field now continues from foreground land through the seabed and regional relief; water reads rendered seabed depth for optical attenuation; reflections scale with the viewport; foreground rocks, pebbles, sand detail, vegetation geometry, exposure calibration, and daylight white balance have all been reworked.
 
-- distant terrain can read as floating/disconnected ribbons rather than coherent shoreline relief;
-- water reflections are coarse and visibly aliased;
-- vegetation, rocks, ground materials, and placement remain placeholder-like;
-- lighting/exposure can become muddy enough to obscure the structure of the scene;
-- the integrated render is not yet calibrated to a lifelike visual standard.
+The scene still reads as visibly procedural. Foliage silhouettes and thin-leaf response, foreground material structure, regional landform/material detail, and shoreline contact remain the main visual weaknesses. M1's convincing/lifelike appearance criterion therefore remains open.
 
-The next milestone should make one shoreline view convincing at noon, then verify the same view under low Sun and twilight before expanding environmental complexity.
+## Build
 
-## Layout
+`src/` contains ordinary editable JavaScript and `index.template.html` is the retained checkpoint page shell; `build.py` applies the M1 shell changes explicitly while assembling the current viewer. `data/atmosphere.json` retains the inherited packed sky data unchanged. Run:
 
-- `src/` — editable runtime code
-- `data/atmosphere.json` — packed inherited full-cycle optical data used by this checkpoint
-- `index.template.html` — editable HTML shell
-- `Open_Moon_Shoreline.html` — generated first-open build for this checkpoint
-- `scenario.json` — authored local scene/weather inputs
-- `build.py` / `pack_atmosphere.py` — build/data tools
-- `VALIDATION.json`, `SOURCES.md`, `LICENSES.txt` — evidence boundaries and dependency records
+```sh
+python build.py
+```
 
-The preceding full-cycle viewer remains unchanged.
+If `vendor/three.cjs` is present and matches the pinned Three.js r180 Git blob `ca4833532c363b72477b2e8a6f47cc0e2fc7b09a`, the build embeds it. Otherwise the generated HTML requests that pinned library on first opening and retains the existing offline-export path. The generated `Open_Moon_Shoreline.html` is intentionally not retained in this progress commit so an older packaged build cannot be mistaken for the current source state.
 
-The generated build retained here has SHA-256 `8cecea048a67040c532f1660b4b071dd0fe1db1927dfc063aba862e45ca3b218`. It loads pinned Three.js r180 on first opening. The current visual weaknesses above remain part of this checkpoint and should not be interpreted as properties of the proposed Open Moon environment.
+## Test
+
+For the complete 54-test M1 validation path, first place the verified r180 bundle at `vendor/three.cjs`, run `python build.py`, then run:
+
+```sh
+node --test tests/core.test.cjs tests/m1.test.cjs
+```
+
+The M1 package used for this checkpoint passed 54/54 unit tests and was rendered in Chromium/SwiftShader at 1440×900 and 390×844. `VALIDATION.json` records the executed checks and their evidence boundary. Browser screenshots and the self-contained review HTML were retained as review artifacts outside this source checkpoint; consumer hardware-GPU performance remains untested.
+
+See `M1_HANDOFF.md` for the next visual work and `METHODS.md` for physical/model scope.

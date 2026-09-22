@@ -10,13 +10,32 @@ function hash(x,z){let n=Math.imul(x|0,374761393)+Math.imul(z|0,668265263);n=Mat
 function noise(x,z){let i=Math.floor(x),j=Math.floor(z),u=x-i,v=z-j;u=u*u*(3-2*u);v=v*v*(3-2*v);return mix(mix(hash(i,j),hash(i+1,j),u),mix(hash(i,j+1),hash(i+1,j+1),u),v);}
 function fbm(x,z){let a=.55,s=0;for(let i=0;i<5;i++){s+=a*noise(x,z);x=x*2.03+17.4;z=z*2.03+8.1;a*=.48;}return s;}
 function shore(x){return -9+4*Math.sin(x*.035)+2.1*Math.sin(x*.083+.8);}
+/** One authored elevation field, measured above the local sea datum.
+ * The same field feeds terrain vertices, underwater depth, placement and walking.
+ * Regional hills continue below the water instead of terminating at mesh edges.
+ */
 function surfaceHeight(x,z){
- const d=z-shore(x);let y=d<0?-.13+d*.075: .25+Math.pow(d,.95)*.095;
- const hill=14*Math.exp(-((x+57)**2/720+(z-50)**2/640));
- const ridges=(fbm(x*.028,z*.028)-.5)*2.6*smooth(-1,18,d);
- return y+hill+ridges;
+ const d=z-shore(x);
+ const seabed=-72*(1-Math.exp(Math.min(0,d)/1000));
+ const inland=.061*Math.max(0,d)+2.0*(1-Math.exp(-Math.max(0,d)/160));
+ const coastal=mix(seabed,inland,smooth(-1,1,d));
+ const gauss=(cx,cz,sx,sz)=>Math.exp(-(((x-cx)/sx)**2+((z-cz)/sz)**2));
+ const nearHill=14*gauss(-57,50,27,25);
+ const regional=44*gauss(-180,-290,135,265)*smooth(20,100,-z)+175*gauss(-940,-1850,610,850)
+   +270*gauss(1280,-2800,850,890)+105*gauss(2420,-2150,900,1000);
+ const rockRelief=regional*(.61+.53*fbm(x*.012,z*.012)+.24*noise(x*.040,z*.033));
+ const micro=(fbm(x*.083,z*.083)-.47)*.23*smooth(-2,4,d);
+ const inlandRelief=(fbm(x*.025,z*.025)-.48)*2.2*smooth(12,55,d);
+ return coastal+nearHill+rockRelief+micro+inlandRelief;
 }
-function groundHeight(x,z,world='moon'){const R=world==='earth'?6371000:1737400;return surfaceHeight(x,z)-(x*x+z*z)/(2*R);}
+function worldRadius(world='moon'){return world==='earth'?6371000:1737400;}
+function curvatureSag(x,z,world='moon'){
+ const R=worldRadius(world),r2=x*x+z*z;
+ return r2/(R+Math.sqrt(Math.max(0,R*R-r2)));
+}
+function groundHeight(x,z,world='moon'){return surfaceHeight(x,z)-curvatureSag(x,z,world);}
+function surfaceGradient(x,z,h=.2){return {x:(surfaceHeight(x+h,z)-surfaceHeight(x-h,z))/(2*h),z:(surfaceHeight(x,z+h)-surfaceHeight(x,z-h))/(2*h)};}
+function waterDepth(x,z){return Math.max(0,-surfaceHeight(x,z));}
 const SHELTER={x:20,z:33,width:11,depth:8,roofHeight:4.3};
 function roofMask(x,z,pad=0){return Math.abs(x-SHELTER.x)<SHELTER.width/2+pad&&Math.abs(z-SHELTER.z)<SHELTER.depth/2+pad?1:0;}
 const WAYPOINTS=[{id:'shore',name:'Shoreline',x:0,z:9,yaw:0,pitch:-.04},{id:'shelter',name:'Rain shelter',x:20,z:33,yaw:.05,pitch:-.06},{id:'path',name:'Woodland path',x:-21,z:39,yaw:-.7,pitch:-.06},{id:'overlook',name:'High overlook',x:-56,z:47,yaw:.04,pitch:-.12}];
@@ -39,7 +58,7 @@ const EPISODE=[
  [14400,.12,.020,1500,900,1.7,.64,293,0,35000]
 ];
 function weatherAt(t,kind='episode'){
- let a,b;if(kind==='clear')a=b=EPISODE[0];else if(kind==='fog')a=b=[0,.62,.08,800,800,1.2,.99,288,0,110];else {t=clamp(t,0,14400);let j=1;while(j<EPISODE.length-1&&EPISODE[j][0]<t)j++;a=EPISODE[j-1];b=EPISODE[j];}
+ let a,b;if(kind==='clear')a=b=[0,0,0,1100,850,1.5,.48,294,0,180000];else if(kind==='fog')a=b=[0,.62,.08,800,800,1.2,.99,288,0,110];else {t=clamp(t,0,14400);let j=1;while(j<EPISODE.length-1&&EPISODE[j][0]<t)j++;a=EPISODE[j-1];b=EPISODE[j];}
  const q=a===b?0:smooth(a[0],b[0],t),v=a.map((x,i)=>mix(x,b[i],q));
  return {coverage:v[1],lwc:v[2],cloudBase:v[3],thickness:v[4],wind:v[5],humidity:v[6],temperature:v[7],rain:v[8],visibility:v[9],radius:12,tau:cloudTau(v[2],v[4],12)};
 }
@@ -75,6 +94,12 @@ function ledgerAt(t,kind='episode',step=10){let l=emptyLedger();for(let s=0;s<t;
 function dropletTerminalSpeed(radius=.0007,gravity=1.62,rhoAir=1.45){const mu=1.8e-5;let lo=0,hi=100;for(let i=0;i<70;i++){const v=(lo+hi)*.5,Re=2*radius*rhoAir*v/mu,Cd=Re<1000?24/Math.max(Re,1e-10)*(1+.15*Math.pow(Re,.687)):.44;const drag=.5*Cd*rhoAir*Math.PI*radius*radius*v*v,weight=(4/3)*Math.PI*radius**3*(1000-rhoAir)*gravity;if(drag<weight)lo=v;else hi=v;}return .5*(lo+hi);}
 function waveOmega(k,depth=12,gravity=1.62){return Math.sqrt(gravity*k*Math.tanh(k*depth));}
 function waveAt(x,z,t,wind=2,gravity=1.62){const dirs=[[.94,.342],[.36,.933],[-.45,.89],[.78,-.62]],ks=[.095,.22,.48,1.25],amps=[.15,.085,.04,.012];let y=0,nx=0,nz=0;for(let i=0;i<4;i++){const a=amps[i]*(.4+wind*.15),k=ks[i],q=k*(x*dirs[i][0]+z*dirs[i][1])-waveOmega(k,12,gravity)*t+i*1.5;y+=a*Math.sin(q);nx-=a*k*dirs[i][0]*Math.cos(q);nz-=a*k*dirs[i][1]*Math.cos(q);}return {y,nx,nz};}
-const API={TAU,DAY,PERIOD,clamp,mix,smooth,rng,noise,fbm,shore,groundHeight,surfaceHeight,pathDistance,SHELTER,roofMask,WAYPOINTS,sunAt,phaseForElevation,calibratedFov,cloudTau,EPISODE,weatherAt,windDistance,reservoirStep,emptyLedger,stepLedger,ledgerAt,dropletTerminalSpeed,waveOmega,waveAt};
+const WATER_BANDS=[.095,.14,.22,.34,.48,.76,1.25,2.,3.5,5.8,9.5,15.];
+function renderWaveAt(x,z,t,wind=1.5,gravity=1.62){
+ let y=0,nx=0,nz=0;
+ WATER_BANDS.forEach((k,i)=>{const theta=.95+Math.sin(i*2.399)*.71,dx=Math.cos(theta),dz=Math.sin(theta),a=.095*Math.pow(.095/k,1.12)*(.4+wind*.18),q=k*(x*dx+z*dz)-waveOmega(k,12,gravity)*t+i*2.721;y+=a*Math.sin(q);nx-=a*k*dx*Math.cos(q);nz-=a*k*dz*Math.cos(q);});
+ return {y,nx,nz};
+}
+const API={WATER_BANDS,renderWaveAt,TAU,DAY,PERIOD,clamp,mix,smooth,rng,noise,fbm,shore,groundHeight,surfaceHeight,worldRadius,curvatureSag,surfaceGradient,waterDepth,pathDistance,SHELTER,roofMask,WAYPOINTS,sunAt,phaseForElevation,calibratedFov,cloudTau,EPISODE,weatherAt,windDistance,reservoirStep,emptyLedger,stepLedger,ledgerAt,dropletTerminalSpeed,waveOmega,waveAt};
 root.OpenMoonCore=API;if(typeof module!=='undefined'&&module.exports)module.exports=API;
 })(globalThis);
