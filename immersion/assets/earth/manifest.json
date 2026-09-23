@@ -1,0 +1,22 @@
+{
+  "schema": "terluna.immersion.asset-manifest/1",
+  "about": "Imagery for drawing Earth in the lunar sky. Rendering assets, not measurements.",
+  "terms": "NASA imagery is not copyrighted; NASA asks that Visible Earth be credited as the source.",
+  "credit": "NASA Visible Earth, Blue Marble: image by Reto Stöckli, enhancements by Robert Simmon, NASA Goddard Space Flight Center; MODIS Land, Atmosphere and Ocean groups.",
+  "files": {
+    "land_shallow_topo_2048.jpg": {
+      "url": "https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57752/land_shallow_topo_2048.jpg",
+      "page": "https://visibleearth.nasa.gov/images/57752",
+      "content": "Cloud-free land surface and shallow water, equirectangular, 2048 x 1024",
+      "sha256": "5b54cc586c6cbf2b28762ef4d4011f6cf4227a8b93a637b818a0c54090ce6c2c",
+      "bytes": 238676
+    },
+    "cloud_combined_2048.jpg": {
+      "url": "https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57747/cloud_combined_2048.jpg",
+      "page": "https://visibleearth.nasa.gov/images/57747",
+      "content": "Global cloud cover, equirectangular, 2048 x 1024 (brightness = cloud)",
+      "sha256": "daddaad84d7a33bbbc86cdda3f591099f57cee8607b7bcf3b67eb7e4f7a1c793",
+      "bytes": 829367
+    }
+  }
+}

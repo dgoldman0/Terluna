@@ -843,7 +843,8 @@
     <section class="status glass interface" aria-label="Current scene conditions">
       <div class="eyebrow" id="world-name">Open Moon</div>
       <h2 id="weather-name">Clear air</h2>
-      <div class="status-line"><span>Clear reference</span><strong id="lux">—</strong></div>
+      <div class="status-line"><span>Clear-sky light</span><strong id="lux">—</strong></div>
+      <div class="status-line"><span>Earth</span><strong id="earth-phase">—</strong></div>
       <div class="status-line">
         <span>Local film / pond</span><strong id="wet-readout">0.00 mm</strong>
       </div>
@@ -1013,7 +1014,7 @@
         <label for="exposure">Exposure</label
         ><select id="exposure">
           <option value="fixed">Fixed daylight</option>
-          <option value="adaptive">Adapted camera</option>
+          <option value="adaptive" selected>Adapted camera</option>
         </select>
       </div>
       <div class="panel-row">
@@ -1117,9 +1118,15 @@
           Human low-gravity gait and plant viability are outside this model.
         </p>
         <p>
-          The solar path is equatorial and zero-declination. Refraction, Earthlight, star fields,
-          realistic orbital ephemerides, and physiological eye adaptation remain future work. The
-          Earth reference reuses the same illustrative local scene.
+          The Sun, Earth and stars follow the illumination domain's mean-orbit model for a
+          development site at 0° N, 65° W: the Sun crosses the zenith, and Earth hangs about 25°
+          up in the east, wobbling with libration and waxing as the lunar night falls. Earthlight
+          is sunlight reflected by a Lambert-phase Earth of geometric albedo 0.367; its glow in the
+          sky reuses the clear-sky atlas at Earth's elevation, treating earthlight as sunlight
+          coloured. The Earth disk is compressed for display and stars are drawn at the eye's
+          resolution; both are perceptual conventions, as is the adapted exposure. Refraction and a
+          date-accurate ephemeris remain future work. The Earth reference reuses the same
+          illustrative local scene and shows no Earth in its sky.
         </p>
       </details>
       <details>
@@ -1134,13 +1141,18 @@
           Shirley’s colour-matching approximations.
         </p>
         <p>
-          All new scenery and sound are generated procedurally. Full attribution is embedded below
-          and included in LICENSES.txt.
+          Earth imagery: NASA Visible Earth, Blue Marble (Reto Stöckli and Robert Simmon, NASA
+          Goddard Space Flight Center). Stars: Yale Bright Star Catalogue, 5th revised edition
+          (Hoffleit &amp; Warren 1991), via CDS VizieR V/50.
+        </p>
+        <p>
+          The scenery and sound are generated procedurally. Full attribution is in
+          THIRD_PARTY_NOTICES.txt.
         </p>
       </details>
       <div class="source-note">
-        Open Moon · Immersion / Light cycle · Shoreline · Atmospheric columns 04 · r186<br />Standalone
-        build · No accounts, telemetry, or remote scene data
+        Open Moon · Immersion · Shoreline development scene · Three.js r186<br />No accounts,
+        telemetry, or remote scene data
       </div>
     </aside>
     <button id="unhide">Show controls</button>

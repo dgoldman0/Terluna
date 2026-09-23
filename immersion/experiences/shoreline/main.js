@@ -20,9 +20,15 @@ import './app.js';
 import CloudRenderer from '../../engine/cloud-renderer.js';
 import surfaceManifest from '../../assets/surfaces/manifest.json';
 import { loadColumns } from '../../engine/columns.js';
+import { SkyBodies } from '../../engine/sky-bodies.js';
+import earthCalibration from '../../assets/earth/calibration.json';
 
 const SKY_ATLAS = new URL('../../assets/sky/atmosphere.json', import.meta.url);
 const COLUMNS = new URL('../../assets/columns/columns.json', import.meta.url);
+const SITE_SKY = new URL('../../assets/sky/site-sky.json', import.meta.url);
+const STARS = new URL('../../assets/sky/stars.json', import.meta.url);
+const EARTH_DAY = new URL('../../assets/earth/land_shallow_topo_2048.jpg', import.meta.url);
+const EARTH_CLOUDS = new URL('../../assets/earth/cloud_combined_2048.jpg', import.meta.url);
 const ALBEDO = new URL('../../assets/surfaces/albedo-ao.png', import.meta.url);
 const PACKED = new URL('../../assets/surfaces/normal-roughness-height.png', import.meta.url);
 
@@ -45,6 +51,20 @@ async function start() {
     const columnResponse = await fetch(COLUMNS);
     if (!columnResponse.ok) throw Error(`Column set unavailable (${columnResponse.status}).`);
     loadColumns(await columnResponse.json());
+    const [siteSky, stars] = await Promise.all(
+      [SITE_SKY, STARS].map(async (url) => {
+        const r = await fetch(url);
+        if (!r.ok) throw Error(`Sky asset unavailable: ${url.pathname} (${r.status}).`);
+        return r.json();
+      }),
+    );
+    OM.skyBodies = new SkyBodies(siteSky);
+    OM.starCatalogue = stars;
+    OM.earthAssets = {
+      day: EARTH_DAY.href,
+      clouds: EARTH_CLOUDS.href,
+      calibration: earthCalibration,
+    };
     OM.surfaceSpec = { manifest: surfaceManifest, albedo: ALBEDO.href, packed: PACKED.href };
     // Measurement probes (illumination/references) read these from the page, as
     // they did when every module was a global script.

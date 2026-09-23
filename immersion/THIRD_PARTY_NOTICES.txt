@@ -64,3 +64,17 @@ The original source notice above is retained for the inherited optical inputs.
 
 This distribution contains no font files. New project source remains subject to
 the project author's licensing choice; third-party terms are preserved above.
+
+Earth imagery
+=============
+NASA Visible Earth, Blue Marble: land surface and shallow water
+(visibleearth.nasa.gov/images/57752) and cloud cover (visibleearth.nasa.gov/images/57747).
+Image by Reto Stöckli, enhancements by Robert Simmon, NASA Goddard Space Flight Center;
+data from the MODIS Land, Atmosphere and Ocean groups. NASA imagery is not copyrighted;
+NASA asks that Visible Earth be credited as the source. Hashes: assets/earth/manifest.json.
+
+Star catalogue
+==============
+Yale Bright Star Catalogue, 5th Revised Ed. (Hoffleit D., Warren Jr W.H., 1991,
+NSSDC/ADC), distributed by CDS as VizieR catalogue V/50. Used through
+illumination/stars/bright_stars.json, which records the source hash.

@@ -11,7 +11,7 @@ research domains own the science, and the experience reads their results.
 | [engine/](engine/) | Runtime systems any experience can use: sky and clouds drawn from baked atlases, clipmap terrain and surface materials, sea, rain and surface water, procedural vegetation geometry, audio |
 | [world/](world/) | World content. At present this is only the authored development landscape. |
 | [experiences/](experiences/) | Entry points: [shoreline](experiences/shoreline/) (the walkable development scene) and [renderer-lab](experiences/renderer-lab/) (the WebGPU/TSL experiment) |
-| [bake/](bake/) | Turns domain products into runtime assets: `sky_atlas.py` packs the [illumination/sky](../illumination/sky/) atlases into `assets/sky/`; `surfaces.py` generates the surface textures |
+| [bake/](bake/) | Turns domain products into runtime assets: `sky_atlas.py` packs the [illumination/sky](../illumination/sky/) atlases into `assets/sky/`; `columns.mjs` packs the atmosphere domain's column set; `sky_bodies.py` bakes the site ephemeris, the bright stars and the Earth-disk calibration; `surfaces.py` generates the surface textures |
 | [assets/](assets/) | Baked runtime assets and their manifests |
 | [tests/unit/](tests/unit/) | Node tests of engine and world modules |
 | [docs/](docs/) | Rendering notes, the renderer roadmap, and the [checkpoint history](docs/history/) |
@@ -22,7 +22,7 @@ research domains own the science, and the experience reads their results.
 cd immersion
 npm install
 python -m pip install -r bake/requirements.txt
-npm run bake                # column set from atmosphere/column, surface textures
+npm run bake                # column set, site sky and stars, surface textures
 npm run dev                 # then open /experiences/shoreline/
 npm test                    # unit tests
 npm run build               # static site in dist/; `npm run preview` serves it
@@ -50,6 +50,26 @@ needs the numba sky solve. After the illumination atlases change, re-bake it wit
   episode were authored for development. They make no claim about what Open Moon
   environments will be. Specific environments should come from the biology,
   ecology, geology and hydrology research as it matures.
+
+## The sky
+
+- **The Sun, Earth and stars** come from the illumination domain's site ephemeris
+  for the placeholder development site (0° N, 65° W). Earth hangs about 25° up in
+  the east, wobbles with libration, and goes through phases opposite to the lunar
+  day: a thin crescent near dawn, nearly full near sunset, 72% lit at midnight.
+  Its disk is drawn from NASA Blue Marble imagery. Seen through the thick Open Moon
+  air, its light is reddened.
+- **Earthlight** lights the land at night: it becomes the shadow-casting key light
+  once the Sun is down, and its scattered glow is added to the sky. The glow
+  reuses the solar clear-sky atlas at Earth's elevation, so it assumes earthlight
+  is sunlight-coloured.
+- **Stars** come from the Yale Bright Star Catalogue, dimmed by the atmosphere's
+  transmission, cloud and fog.
+- **Perceptual conventions:** the adapted exposure follows light as L^−0.85 (eye-like,
+  so earthlit nights are dim but visible), the Earth disk is compressed for display
+  so its surface stays readable, and stars are drawn at the eye's resolution (about
+  one arcminute) rather than the screen's. The fixed exposure and the M1 noon
+  reference are unchanged.
 
 Past checkpoint methods, handoffs and validation records are in
 [docs/history](docs/history/).

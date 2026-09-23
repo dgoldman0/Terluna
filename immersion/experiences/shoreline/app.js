@@ -2,6 +2,7 @@ import { OM } from '../../engine/om.js';
 import C from '../../engine/core.js';
 import L from '../../world/landscape.js';
 import { columns, getColumn } from '../../engine/columns.js';
+import { Stars } from '../../engine/stars.js';
 import {
   LEGACY_MOON_GRAVITY,
   STANDARD_GRAVITY,
@@ -58,6 +59,10 @@ OM.boot = async function (T) {
   $('boot-status').textContent = 'Opening the calculated sky…';
   await atmosphere.init(renderer);
   scene.add(atmosphere.mesh);
+  // Earth and the stars, from the illumination domain's site ephemeris and catalogue.
+  await atmosphere.setSkyBodies(OM.skyBodies, OM.earthAssets);
+  const stars = OM.starCatalogue ? new Stars(T, OM.starCatalogue, atmosphere) : null;
+  if (stars) scene.add(stars.points);
   $('boot-status').textContent = 'Building the landscape and surface materials…';
   L.initialize();
   await OM.loadSurfaceAssets(T);
@@ -101,7 +106,7 @@ OM.boot = async function (T) {
     last: 0,
     frame: 0,
     quality: 'balanced',
-    exposure: 'fixed',
+    exposure: 'adaptive',
     ev: 0,
     autoExposure: 0.244647046,
     freeze: true,
@@ -274,8 +279,22 @@ OM.boot = async function (T) {
       camera.position.y + solar.y * 350,
       camera.position.z,
     );
+    // Once the Sun is down, the Earth is the key light and casts the shadows.
+    const earth = atmosphere.earth;
+    if (solar.y <= -0.0047 && earth && earth.earth[1] > 0) {
+      const e = atmosphere.earthDirectRaw,
+        top = Math.max(...e, 1e-15);
+      sun.color.setRGB(e[0] / top, e[1] / top, e[2] / top);
+      sun.intensity = top / 8500;
+      sun.position.set(
+        camera.position.x + earth.earth[0] * 350,
+        camera.position.y + earth.earth[1] * 350,
+        camera.position.z + earth.earth[2] * 350,
+      );
+    }
     sun.target.position.set(camera.position.x, camera.position.y, camera.position.z);
     sun.target.updateMatrixWorld();
+    if (stars) stars.update(camera, renderer, s.world);
     water.uniforms.uGravity.value = s.world === 'earth' ? STANDARD_GRAVITY : LEGACY_MOON_GRAVITY;
     water.uniforms.uRain.value = s.weather.rain;
     rain.uniforms.uCamera.value.copy(camera.position);
@@ -292,11 +311,14 @@ OM.boot = async function (T) {
     geography.bulb.material.emissiveIntensity = $('lamp').checked ? 1.2 : 0;
     let exposure = 0.244647046 * Math.pow(2, s.ev);
     if (s.exposure === 'adaptive') {
-      const desired = 0.244647046 * Math.sqrt(94200 / Math.max(0.004, atmosphere.clearLux));
+      // Eye-like adaptation: exposure follows light as L^-0.85, so earthlit nights are
+      // dim but visible. A perceptual camera choice, not a model of vision.
+      const desired = 0.244647046 * Math.pow(94200 / Math.max(0.004, atmosphere.clearLux), 0.85);
       s.autoExposure = C.mix(s.autoExposure, Math.min(25000, desired), 0.025);
       exposure = s.autoExposure * Math.pow(2, s.ev);
     }
     renderer.toneMappingExposure = exposure;
+    atmosphere.setEarthDisplay(exposure);
     atmosphere.environment(renderer, scene, sceneStamp, s.dirty);
     renderer.shadowMap.needsUpdate = true;
     s.dirty = false;
@@ -316,10 +338,11 @@ OM.boot = async function (T) {
     $('temp').textContent = (s.weather.temperature - 273.15).toFixed(1) + ' °C';
     $('tau').textContent = s.weather.tau.toFixed(1);
     $('wet-readout').textContent = s.ledger.exposed.toFixed(2) + ' mm';
-    $('lux').textContent =
-      atmosphere.clearLux >= 1000
-        ? (atmosphere.clearLux / 1000).toFixed(1) + ' klx'
-        : atmosphere.clearLux.toPrecision(3) + ' lx';
+    const lux = (v) => (v >= 1000 ? (v / 1000).toFixed(1) + ' klx' : v.toPrecision(3) + ' lx');
+    $('lux').textContent = lux(atmosphere.clearLux);
+    $('earth-phase').textContent = atmosphere.earth
+      ? `${Math.round(atmosphere.earth.earthFraction * 100)}% lit · ${lux(atmosphere.earthLux)}`
+      : 'Not in this sky';
     $('position').textContent =
       `${camera.position.x.toFixed(0)}, ${camera.position.z.toFixed(0)} m`;
     $('height').textContent = camera.position.y.toFixed(1) + ' m';

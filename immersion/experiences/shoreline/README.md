@@ -7,6 +7,10 @@ atlas, and clouds drawn from atmospheric column soundings. It exists to develop
 and test the engine. Its landscape and ecology are placeholders, not proposals
 for an Open Moon shore.
 
+Earth hangs about 25° up in the east (turn left from the opening view). At night
+it lights the land, and stars come out when the sky is dark enough. See the
+immersion README for the sky model and its perceptual conventions.
+
 Run it from `immersion/` with `npm run dev` and open `/experiences/shoreline/`.
 Drag to look, WASD to walk, Space to hop (lunar gravity), H to hide the controls.
 **Show controls** opens viewpoints, the Sun slider, weather, and the column

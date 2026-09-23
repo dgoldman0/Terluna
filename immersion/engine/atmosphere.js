@@ -13,6 +13,8 @@ const SKY_UNIFORMS =
 uniform sampler2D uSkyA,uSkyB;uniform float uBlend,uTime,uCover,uTau,uCloudBase,uCloudDepth,uWind,uVisibility,uR,uSide,uSteps,uEyeHeight,uDrift;
 uniform vec3 uSun,uDirect,uDiffuse,uCloudDirect,uCloudDiffuse,uLocalExtinction,uWhiteBalance;
 uniform vec2 uObserver;uniform bool uShowDisk;
+uniform sampler2D uEarthSkyA,uEarthSkyB,uEarthDay,uEarthClouds;uniform float uEarthBlend,uEarthScale,uEarthShow,uEarthCos,uEarthSin,uEarthGain,uEarthCloudAlbedo,uEarthLod,uEarthDisplay;
+uniform vec2 uEarthSide;uniform vec3 uEarth,uEarthSunlit,uEarthHaze;uniform mat3 uEarthBasis;
 const float OM_PI=3.141592653589793;
 ` + Column.UNIFORMS;
 const CLOUDS = `
@@ -21,7 +23,11 @@ ${Column.SHADOW_GLSL}
 float omDensity(vec3 p){float h=(p.y-uCloudBase)/uCloudDepth;float shape=smoothstep(0.,.16,h)*(1.-smoothstep(.63,1.,h));vec3 q=vec3(p.x+uDrift,p.y*.68,p.z+uDrift*.23)*.0011;float n=omFBM(q);float threshold=mix(.81,.12,uCover);float mass=smoothstep(threshold-.045,threshold+.20,n);float detail=.72+.28*omNoise(q*5.);return max(0.,mass*shape*detail);}
 float omCloudShadow(vec3 w){if(uColumnMode>.5)return omColumnShadow(w);if(uCover<.005||uTau<.001||uSun.y<-.01)return 1.;vec3 ro=vec3(w.x,uR+max(w.y,0.),w.z);float l0=omShell(ro,uSun,uR+uCloudBase),l1=omShell(ro,uSun,uR+uCloudBase+uCloudDepth);float depth=0.;for(int i=0;i<4;i++){float s=mix(l0,l1,(float(i)+.5)/4.);vec3 p=ro+uSun*s;p.y=length(p)-uR;depth+=omDensity(p)*(l1-l0)*.25/uCloudDepth;}return exp(-min(30.,uTau*depth));}
 `;
-const CLEAR_LOOKUP = `vec3 omClear(vec3 d){float e=asin(clamp(d.y,-1.,1.));float v=.5+.5*sign(e)*sqrt(abs(e)/(OM_PI*.5));float az=acos(clamp(d.x*uSide/max(length(d.xz),.000001),-1.,1.))/OM_PI;vec2 uv=vec2((az*32.+.5)/33.,(v*40.+.5)/41.);return mix(texture2D(uSkyA,uv).rgb,texture2D(uSkyB,uv).rgb,uBlend);}
+const CLEAR_LOOKUP = `vec3 omAtlas(vec3 d,sampler2D a,sampler2D b,float blend,vec2 side){float e=asin(clamp(d.y,-1.,1.));float v=.5+.5*sign(e)*sqrt(abs(e)/(OM_PI*.5));float az=acos(clamp(dot(d.xz,side)/max(length(d.xz),.000001),-1.,1.))/OM_PI;vec2 uv=vec2((az*32.+.5)/33.,(v*40.+.5)/41.);return mix(texture2D(a,uv).rgb,texture2D(b,uv).rgb,blend);}
+vec3 omEarthDisk(vec3 d){float c=dot(d,uEarth);if(uEarthShow<.5||c<uEarthCos)return vec3(0.);vec3 perp=d-uEarth*c;float r=length(perp)/uEarthSin;float aa=max(fwidth(r),.0005);float cover=1.-smoothstep(1.-aa,1.+aa,r);float s=min(r,1.);vec3 p=r>1e-6?normalize(perp):vec3(0.);vec3 n=-uEarth*sqrt(max(0.,1.-s*s))+p*s;vec3 q=uEarthBasis*n;vec2 uv=vec2(atan(q.y,q.x)/(2.*OM_PI)+.5,asin(clamp(q.z,-1.,1.))/OM_PI+.5);vec3 ground=textureLod(uEarthDay,uv,uEarthLod).rgb;float cloud=textureLod(uEarthClouds,uv,uEarthLod).r;vec3 albedo=min(vec3(1.),uEarthGain*mix(ground,vec3(uEarthCloudAlbedo),cloud)+uEarthHaze);return albedo/OM_PI*uEarthSunlit*max(0.,dot(n,uSun))*cover*uEarthDisplay;}
+vec3 omEarthLight(vec3 d){return uEarthScale>0.?uEarthScale*omAtlas(d,uEarthSkyA,uEarthSkyB,uEarthBlend,uEarthSide)+omEarthDisk(d):vec3(0.);}
+vec3 omSunSky(vec3 d){float e=asin(clamp(d.y,-1.,1.));float v=.5+.5*sign(e)*sqrt(abs(e)/(OM_PI*.5));float az=acos(clamp(d.x*uSide/max(length(d.xz),.000001),-1.,1.))/OM_PI;vec2 uv=vec2((az*32.+.5)/33.,(v*40.+.5)/41.);return mix(texture2D(uSkyA,uv).rgb,texture2D(uSkyB,uv).rgb,uBlend);}
+vec3 omClear(vec3 d){return omSunSky(d)+omEarthLight(d);}
 vec3 omAirColour(vec3 d){return uColumnMode>.5&&uColumnMode<1.5?uColumnFogColour:omClear(d);}
 `;
 const SKY_FRAGMENT =
@@ -111,13 +117,35 @@ class Atmosphere {
       uShowDisk: { value: true },
       uEyeHeight: { value: 1.7 },
       uDrift: { value: 0 },
+      uEarthSkyA: { value: null },
+      uEarthSkyB: { value: null },
+      uEarthDay: { value: null },
+      uEarthClouds: { value: null },
+      uEarthBlend: { value: 0 },
+      uEarthScale: { value: 0 },
+      uEarthShow: { value: 0 },
+      uEarthCos: { value: 1 },
+      uEarthSin: { value: 0.0166 },
+      uEarthGain: { value: 1 },
+      uEarthCloudAlbedo: { value: 0.75 },
+      uEarthLod: { value: 0 },
+      uEarthDisplay: { value: 1 },
+      uEarthSide: { value: new THREE.Vector2(-1, 0) },
+      uEarth: { value: new THREE.Vector3(-1, 0, 0) },
+      uEarthSunlit: { value: new THREE.Vector3() },
+      uEarthHaze: { value: new THREE.Vector3() },
+      uEarthBasis: { value: new THREE.Matrix3() },
     };
+    this.bodies = null;
+    this.earth = null;
+    this.earthDirectRaw = [0, 0, 0];
+    this.earthLux = 0;
     this.columnClouds = new Column.Controller(THREE, this);
   }
   async init(renderer, dataOnly = false) {
     const T = this.T;
     for (const [key, w] of Object.entries(this.data.worlds)) this.arrays[key] = await unpack(w);
-    for (const k of ['uSkyA', 'uSkyB']) {
+    for (const k of ['uSkyA', 'uSkyB', 'uEarthSkyA', 'uEarthSkyB']) {
       const tex = new T.DataTexture(
         new Float32Array(33 * 41 * 4),
         33,
@@ -172,20 +200,7 @@ class Atmosphere {
     const blend = C.clamp((s.elevation - d.suns[lo]) / (d.suns[hi] - d.suns[lo]));
     const key = world + ':' + lo;
     if (key !== this.cacheKey) {
-      for (const [name, idx] of [
-        ['uSkyA', lo],
-        ['uSkyB', hi],
-      ]) {
-        const dest = this.uniforms[name].value.image.data,
-          offset = idx * 33 * 41 * 3;
-        for (let i = 0; i < 33 * 41; i++) {
-          dest[i * 4] = arr[offset + i * 3];
-          dest[i * 4 + 1] = arr[offset + i * 3 + 1];
-          dest[i * 4 + 2] = arr[offset + i * 3 + 2];
-          dest[i * 4 + 3] = 1;
-        }
-        this.uniforms[name].value.needsUpdate = true;
-      }
+      this.uploadFrames(arr, lo, hi, 'uSkyA', 'uSkyB');
       this.cacheKey = key;
     }
     const interp = (k) => d[k][lo].map((v, i) => C.mix(v, d[k][hi][i], blend));
@@ -237,8 +252,135 @@ class Atmosphere {
     u.uR.value = d.radius;
     u.uObserver.value.set(observer.x, observer.z);
     u.uEyeHeight.value = Math.max(0.1, observer.y);
+    this.updateEarth(world, phase);
     this.columnClouds.update(world);
     return s;
+  }
+  uploadFrames(arr, lo, hi, a, b) {
+    for (const [name, idx] of [
+      [a, lo],
+      [b, hi],
+    ]) {
+      const dest = this.uniforms[name].value.image.data,
+        offset = idx * 33 * 41 * 3;
+      for (let i = 0; i < 33 * 41; i++) {
+        dest[i * 4] = arr[offset + i * 3];
+        dest[i * 4 + 1] = arr[offset + i * 3 + 1];
+        dest[i * 4 + 2] = arr[offset + i * 3 + 2];
+        dest[i * 4 + 3] = 1;
+      }
+      this.uniforms[name].value.needsUpdate = true;
+    }
+  }
+  /** Bracketing atlas frames and blend for a source at the given elevation (degrees). */
+  bracket(d, elevation) {
+    let lo = 0,
+      hi = d.suns.length - 1;
+    while (hi - lo > 1) {
+      const m = (hi + lo) >> 1;
+      if (d.suns[m] <= elevation) lo = m;
+      else hi = m;
+    }
+    return { lo, hi, blend: C.clamp((elevation - d.suns[lo]) / (d.suns[hi] - d.suns[lo])) };
+  }
+  /** Sky bodies (engine/sky-bodies.js) and the Earth imagery with its calibration. */
+  async setSkyBodies(bodies, earth) {
+    const T = this.T,
+      u = this.uniforms;
+    this.bodies = bodies;
+    if (!earth) return;
+    const loader = new T.TextureLoader();
+    const [day, clouds] = await Promise.all([
+      loader.loadAsync(earth.day),
+      loader.loadAsync(earth.clouds),
+    ]);
+    day.colorSpace = T.SRGBColorSpace;
+    clouds.colorSpace = T.NoColorSpace;
+    for (const t of [day, clouds]) {
+      t.wrapS = T.RepeatWrapping;
+      t.minFilter = T.LinearMipmapLinearFilter;
+      t.generateMipmaps = true;
+      t.needsUpdate = true;
+    }
+    u.uEarthDay.value = day;
+    u.uEarthClouds.value = clouds;
+    u.uEarthGain.value = earth.calibration.gain;
+    u.uEarthCloudAlbedo.value = earth.calibration.cloud_albedo;
+    u.uEarthHaze.value.set(...earth.calibration.haze);
+    const radius = bodies.k.earth_angular_radius_rad;
+    u.uEarthSin.value = Math.sin(radius);
+    u.uEarthCos.value = Math.cos(radius * 1.04);
+    this.earthTextureWidth = day.image.width;
+  }
+  /** Earth's direction, phase, glow and light for this phase of the lunar day. */
+  updateEarth(world, phase) {
+    const u = this.uniforms;
+    if (!this.bodies || world === 'earth') {
+      u.uEarthScale.value = 0;
+      u.uEarthShow.value = 0;
+      this.earth = null;
+      this.earthDirectRaw = [0, 0, 0];
+      this.earthLux = 0;
+      return;
+    }
+    const st = this.bodies.scene(phase * this.bodies.period),
+      d = this.data.worlds[world],
+      [x, y, z] = st.earth,
+      elevation = (Math.asin(C.clamp(y, -1, 1)) * 180) / Math.PI,
+      { lo, hi, blend } = this.bracket(d, elevation);
+    const key = world + ':' + lo;
+    if (key !== this.earthCacheKey) {
+      this.uploadFrames(this.arrays[world], lo, hi, 'uEarthSkyA', 'uEarthSkyB');
+      this.earthCacheKey = key;
+    }
+    const interp = (k) => d[k][lo].map((v, i) => C.mix(v, d[k][hi][i], blend));
+    const direct = interp('direct').map((v) => Math.max(0, v)),
+      ratio = st.earthlightRatio;
+    const horizontal = interp('direct_horizontal'),
+      diffuse = interp('diffuse');
+    this.earth = st;
+    this.earthDirectRaw = direct.map((v) => v * ratio);
+    this.earthLux =
+      ratio *
+      horizontal.reduce((sum, v, i) => sum + (v + diffuse[i]) * [0.2126, 0.7152, 0.0722][i], 0);
+    this.clearLux += this.earthLux;
+    u.uEarthScale.value = ratio;
+    u.uEarthShow.value = u.uEarthDay.value ? 1 : 0;
+    u.uEarthBlend.value = blend;
+    u.uEarth.value.set(x, y, z);
+    const h = Math.hypot(x, z) || 1;
+    u.uEarthSide.value.set(x / h, z / h);
+    u.uEarthSunlit.value.set(...direct.map((v) => v / 8500));
+    // Scene frame -> Earth-fixed: undo the celestial rotation, then the Earth's spin.
+    const m = st.celestialToScene,
+      g = st.earthRotation,
+      c = Math.cos(g),
+      sn = Math.sin(g);
+    const col = (j) => [m[0][j], m[1][j], m[2][j]]; // rows of the transpose
+    const [r0, r1, r2] = [col(0), col(1), col(2)];
+    u.uEarthBasis.value.set(
+      c * r0[0] + sn * r1[0],
+      c * r0[1] + sn * r1[1],
+      c * r0[2] + sn * r1[2],
+      -sn * r0[0] + c * r1[0],
+      -sn * r0[1] + c * r1[1],
+      -sn * r0[2] + c * r1[2],
+      r2[0],
+      r2[1],
+      r2[2],
+    );
+  }
+  /** Display-only scaling of the Earth disk so its brightest point sits near display
+   * white at this exposure, as the eye's local adaptation keeps a bright disk readable.
+   * Earthlight on the ground and in the sky glow is not affected. */
+  setEarthDisplay(exposure) {
+    const peak = (Math.max(...this.uniforms.uEarthSunlit.value.toArray()) / Math.PI) * exposure;
+    this.uniforms.uEarthDisplay.value = peak > 0 ? Math.min(1, 2.5 / peak) : 1;
+  }
+  /** Mip level for the Earth disk given its size on screen in pixels. */
+  setEarthPixels(diameterPixels) {
+    const texels = (this.earthTextureWidth || 2048) / 2; // texels across the visible hemisphere
+    this.uniforms.uEarthLod.value = Math.max(0, Math.log2(texels / Math.max(1, diameterPixels)));
   }
   clearEnvironmentKey() {
     const u = this.uniforms;
@@ -254,6 +396,8 @@ class Atmosphere {
       ...u.uSun.value.toArray(),
       ...u.uDirect.value.toArray(),
       ...u.uDiffuse.value.toArray(),
+      u.uEarthScale.value,
+      ...u.uEarth.value.toArray(),
     ].join(':');
   }
   environment(renderer, scene, stamp, force = false) {
