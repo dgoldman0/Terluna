@@ -1,10 +1,27 @@
 # Immersion roadmap
 
-The experience grows in three layers. Work on engine capability that holds for
-any environment comes first. Specific environments wait for the domain research
-to supply them.
+The explorable world is moving to Unreal Engine 5, in its own repository
+([dgoldman0/terluna-game](https://github.com/dgoldman0/terluna-game)). This lane
+keeps the research side: the world definitions and the exports the game reads
+(`bake/game/`). The web engine and the shoreline viewer are frozen: they keep
+working as a preview and get fixes only if they break. Specific environments still
+wait for the domain research to supply them.
 
-## Done
+## Next
+
+1. **Unreal test level** (in the game repository): the exported landscape with a
+   curved horizon; the sky drawn from the atlas, with Unreal's atmosphere set from
+   `engine_atmosphere.json` for haze and cloud light and its mismatch measured; the
+   Sun and Earth from the ephemeris; the stars; one volumetric cloud layer from a
+   column preset; lunar gravity.
+2. **Retire the web engine** once that level shows the sky, Earth and stars,
+   terrain, trees and clouds at least as well: move `engine/`, `experiences/`, the
+   Vite build and their tests to `archive/`, rename this lane (for example to
+   `world/`), and update the lane rules and guidance.
+3. **Keep the exports the only path** from research to game, adding what the game
+   needs as the domains provide it.
+
+## Done (the web engine, now frozen)
 
 - **Foundation:** readable ES modules built with Vite; Three.js from npm; unit
   tests; deterministic render comparisons for refactors.
@@ -22,26 +39,8 @@ to supply them.
   episode and planting rules form one world object (`world/cove.js`) that the
   experience registers; the engine reads it and never imports it.
 
-## Engine capability (any environment)
-
-1. **An explicit renderer interface.** Replace the transitional `OM` registry with
-   direct imports and a material-factory interface that the WebGL path and the
-   WebGPU/TSL lab both implement.
-2. **Scale.** Stream terrain tiles from elevation products (geography has none
-   yet). Add a middle level of 3D trees so that walking out of the detailed
-   planting does not bring impostor cards close; let distant trees darken the
-   ground with their shade; take the aerial-perspective extinction from the
-   illumination domain instead of the engine's band constants.
-3. **Night and time.** Mesopic colour at low light, a continuous multi-month
-   clock (so libration and the stars do not jump at the month boundary), and
-   earthlit sky glow with earthlight's own spectrum once illumination computes it.
-4. **Low gravity.** Motion and physics that feel lunar: long jumps and falls,
-   gliding, slow rain and waves.
-5. **Sound.** Ambience that follows wind, water, rain and distance.
-6. **Performance.** Frame times measured on real GPUs, with budgets per system. On
-   an Intel UHD (TGL GT1) iGPU the shoreline takes roughly 85–150 ms a frame at
-   1280×720 before the far forest (which adds 0–17%); terrain shading is the
-   largest share, then vegetation, then the sky.
+Engine capability (time and night, low-gravity motion, sound, performance) now
+belongs to the game's own roadmap.
 
 ## World system (fed by the domains)
 

@@ -1,5 +1,12 @@
 # Working on the immersion
 
+The explorable world is moving to Unreal Engine 5 in its own repository
+(github.com/dgoldman0/terluna-game). Here, new work goes to the world definitions
+(`world/`) and the exports the game reads (`bake/game/`). The web engine
+(`engine/`) and the shoreline viewer (`experiences/`) are frozen: fix them if they
+break, but add nothing; they will move to `archive/` when the Unreal test level
+covers them (see the roadmap).
+
 The immersion is the explorable world: what an Open Moon could look and feel
 like to be in. It is judged as an experience, by whether it is believable,
 coherent with the research and pleasant to explore. Its images are illustrations.

@@ -11,7 +11,7 @@ Decide the lane before writing anything:
 | A model, simulation or reference calculation | Its domain: `atmosphere/`, `climate/`, `biosphere/`, `geography/`, `illumination/`, `protection/`, `engineering/`, `habitation/` |
 | A study that couples several domains | `research/studies/<study>/`, with its runner, results and write-up together |
 | Rendering that shows what a model computed (plots, labs, reference renderers, viewers) | `visualization/` (see `visualization/AGENTS.md`) |
-| The explorable world: engine, world content, experiences | `immersion/` (see `immersion/AGENTS.md`) |
+| The explorable world: world definitions and the exports the Unreal game reads (the game itself is github.com/dgoldman0/terluna-game; the web engine here is frozen) | `immersion/` (see `immersion/AGENTS.md`) |
 | Constants, scenarios and the data-product convention | `shared/` |
 | Deprecated material | `archive/` |
 

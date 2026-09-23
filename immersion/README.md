@@ -10,11 +10,11 @@ research domains own the science, and the experience reads their results.
 |---|---|
 | [engine/](engine/) | Runtime systems any world can use: sky, Earth, stars and clouds drawn from baked products, clipmap terrain and surface materials, sea, rain and surface water, procedural vegetation geometry, the far forest drawn as impostors, audio. The engine never imports a world; it reads the active one from `OM.world`. |
 | [world/](world/) | World definitions. [cove.js](world/cove.js) is the development cove: its landscape field, viewpoints, rain shelter and path, authored weather episode, and planting rules, all placeholders. `cove-forest.worker.js` places its distant trees off the main thread. |
-| [experiences/](experiences/) | Entry points: [shoreline](experiences/shoreline/) (the walkable development scene) and [renderer-lab](experiences/renderer-lab/) (the WebGPU/TSL experiment) |
+| [experiences/](experiences/) | [shoreline](experiences/shoreline/), the walkable development scene (frozen, see below). The WebGPU/TSL renderer lab is retired to [archive/renderer-lab](../archive/renderer-lab/). |
 | [bake/](bake/) | Turns domain products into runtime assets: `sky_atlas.py` packs the [illumination/sky](../illumination/sky/) atlases into `assets/sky/`; `columns.mjs` packs the atmosphere domain's column set; `sky_bodies.py` bakes the site ephemeris, the bright stars and the Earth-disk calibration; `surfaces.py` generates the surface textures; `game/world.mjs` and `game/sky.py` export the world and sky for the Unreal game |
 | [assets/](assets/) | Baked runtime assets and their manifests |
 | [tests/unit/](tests/unit/) | Node tests of engine and world modules |
-| [docs/](docs/) | The [roadmap](docs/roadmap.md), rendering notes, the renderer roadmap, and the [checkpoint history](docs/history/) |
+| [docs/](docs/) | The [roadmap](docs/roadmap.md), rendering notes and the [checkpoint history](docs/history/) |
 
 ## Run
 
@@ -52,8 +52,14 @@ python bake/game/sky.py --out <game>/Data     # engine-sky parameters, sky atlas
 Each export writes a manifest with its sources' hashes and, for the world, the
 mapping to Unreal's coordinates (X = x, Y = z, Z = y, in centimetres). The sky's
 engine parameters come from `illumination/sky/engine_atmosphere.py`, which also
-states how far a three-wavelength engine sky drifts from the spectral one. The web
-experience below stays as a preview while the port is under way.
+states how far a three-wavelength engine sky drifts from the spectral one.
+
+**The web engine and the shoreline viewer are frozen.** They keep working as a
+preview while the port is under way and get fixes only if they break; new work on
+the explorable world goes to the game. Once the Unreal test level shows the sky,
+Earth and stars, terrain, trees and clouds at least as well, they move to
+`archive/` and this lane is renamed. The world definitions (`world/`) and the
+exports (`bake/game/`) stay: they are the research side of the game.
 
 ## How the experience relates to the research
 

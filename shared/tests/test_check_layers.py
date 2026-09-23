@@ -30,6 +30,8 @@ class LaneRuleTests(unittest.TestCase):
         self.assertFalse(allowed("shared/constants.py", "atmosphere/lower_air.py"))
         self.assertFalse(allowed("research/check.py", "archive/training_data/x.py"))
         self.assertFalse(allowed("immersion/engine/scene.js", "immersion/world/cove.js"))
+        self.assertFalse(allowed("archive/renderer-lab/main.js", "immersion/engine/om.js"))
+        self.assertFalse(allowed("immersion/engine/om.js", "archive/renderer-lab/main.js"))
 
 
 if __name__ == "__main__":

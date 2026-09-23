@@ -22,7 +22,8 @@ Rules (source lane -> lanes it may import):
   immersion-world -> shared, immersion-engine, immersion-world
   immersion -> shared and every immersion part except bake (reads baked assets)
   immersion-bake -> shared, every immersion part, domain
-  ensemble -> ensemble;  archive -> nothing;  nothing imports archive
+  ensemble -> ensemble;  archive -> nothing;  nothing imports archive (archived code does
+  not run and is not scanned; live code is checked for imports into it)
 
 Python `import`/`from` statements naming a repository top-level folder, and
 JavaScript import/require/new URL specifiers with relative paths, are checked.
@@ -54,7 +55,7 @@ ALLOWED = {
     "ensemble": {"ensemble"},
     "archive": set(),
 }
-SKIP_PREFIXES = ("immersion/docs/history/", "immersion/node_modules/", "immersion/dist/")
+SKIP_PREFIXES = ("immersion/docs/history/", "immersion/node_modules/", "immersion/dist/", "archive/")
 JS_SPECIFIER = re.compile(
     r"""(?:\bimport\s+(?:[^'";]*?\bfrom\s*)?|\bimport\s*\(\s*|\brequire\s*\(\s*|\bnew\s+URL\s*\(\s*)(['"])([^'"]+)\1""")
 

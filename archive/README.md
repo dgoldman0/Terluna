@@ -6,6 +6,7 @@ depend on it.
 
 | Folder | What it is |
 |---|---|
+| [renderer-lab](renderer-lab/README.md) | The WebGPU/TSL port of the shoreline viewer, retired when the explorable world moved to Unreal Engine 5. It no longer builds from here. |
 | [training_data](training_data/README.md) | Synthetic worldbuilding conversations and corrections from the earlier model-training experiments. Retained byte-for-byte; superseded by the research domains and the paper ensemble. |
 
 Historical records that still document a live model stay with that model; for

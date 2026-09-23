@@ -1,5 +1,9 @@
 # Shoreline
 
+**Frozen.** The explorable world is moving to Unreal Engine 5
+(github.com/dgoldman0/terluna-game). This viewer keeps working as a preview and
+gets fixes only if it breaks.
+
 The walkable development scene: an authored cove with clipmap terrain out to about
 16 km, 173 procedurally built trees, rocks and ground cover placed by habitat
 rules, the same rule's woodland out to the horizon as impostor cards and shaded

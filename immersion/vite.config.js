@@ -16,7 +16,6 @@ export default defineConfig({
       input: {
         index: resolve(here, 'index.html'),
         shoreline: resolve(here, 'experiences/shoreline/index.html'),
-        'renderer-lab': resolve(here, 'experiences/renderer-lab/index.html'),
       },
     },
   },
