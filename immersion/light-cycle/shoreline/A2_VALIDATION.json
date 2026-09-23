@@ -1,0 +1,329 @@
+{
+  "schema": "open-moon-a2-validation/1",
+  "generated_utc": "2026-09-22T23:50:58.353098+00:00",
+  "status": "reference-checkpoint-passed",
+  "scope": "A2 adds shared-profile molecular multiple scattering, a full standard-grid sky atlas, fine-grid spectral/ray validation, and separated cloud voxel/crop convergence. Production shoreline rendering remains unchanged.",
+  "checks": [
+    {
+      "name": "JavaScript regression suite",
+      "passed": true,
+      "detail": {
+        "tests": 159,
+        "pass": 159,
+        "fail": 0
+      }
+    },
+    {
+      "name": "Fine chunks cover exact 360\u2013830 nm / 10 nm grid",
+      "passed": true,
+      "detail": {
+        "bands": 48
+      }
+    },
+    {
+      "name": "Fine spectral chunks converge by order increment",
+      "passed": true,
+      "detail": {
+        "max_final_increment_fraction": 0.0004947248821034437,
+        "orders": [
+          56,
+          32,
+          20,
+          14,
+          11,
+          9,
+          8,
+          7
+        ]
+      }
+    },
+    {
+      "name": "Standard/fine molecular spectral convergence",
+      "passed": true,
+      "detail": {
+        "standard_file": "moon-fair-molecular-standard-full.json",
+        "standard_sha256": "663253045ec224d09958434884560a2fcf13a7a48d0d1a36afd2afc8fb813e56",
+        "overall_standard_to_fine_spectral_L1": 0.0039340721631108575,
+        "max_ray_standard_to_fine_spectral_L1": 0.005438095288764429,
+        "max_ray_standard_to_fine_luminance_Y_relative": 0.008056161988823394
+      }
+    },
+    {
+      "name": "Full-atlas first-order reproduction",
+      "passed": true,
+      "detail": {
+        "global_spectral_L1": 0.0010415454324405203,
+        "bright_pixel_relative_spectral_L1": {
+          "threshold_fraction_of_max_spectral_sum": 0.01,
+          "pixels": 6494,
+          "median": 0.0007043413056718354,
+          "p95": 0.008003811450300583,
+          "max": 0.3476151205880705
+        }
+      }
+    },
+    {
+      "name": "Higher scattering orders add nonnegative radiance",
+      "passed": true,
+      "detail": {
+        "minimum_multiple_minus_single": 0.0009937780446398036
+      }
+    },
+    {
+      "name": "High-Sun downward energy remains below incident horizontal spectral flux",
+      "passed": true,
+      "detail": [
+        {
+          "sun_deg": 15.0,
+          "min_ratio": 0.1661718844890674,
+          "median_ratio": 0.5055395435046286,
+          "max_ratio": 0.8129152707139942
+        },
+        {
+          "sun_deg": 45.0,
+          "min_ratio": 0.19311419547088013,
+          "median_ratio": 0.6307140169888028,
+          "max_ratio": 0.8853165522008585
+        },
+        {
+          "sun_deg": 90.0,
+          "min_ratio": 0.237556816700458,
+          "median_ratio": 0.7033283874696459,
+          "max_ratio": 0.9138741532933727
+        }
+      ]
+    },
+    {
+      "name": "All cloud capture identities and GPU/CPU sampler checks pass",
+      "passed": true,
+      "detail": {
+        "grid-coarse": {
+          "field_sha256": "f296bb73f7b8ba21482836298467181c580d7322767d9eb291f20e1387a6023f",
+          "sampler_max_abs_m1": 4.624108210297658e-09,
+          "context_lost": false
+        },
+        "grid-a1": {
+          "field_sha256": "d650859065885cd76dd03b95bab393b0d21f18c8e5804fe5e9cf2af74a7509f0",
+          "sampler_max_abs_m1": 5.421332163139253e-09,
+          "context_lost": false
+        },
+        "grid-fine": {
+          "field_sha256": "5dc678a3e5ae68c0722a44320f7c58fc9883c73a0bb93c591685b48d36f8cdcb",
+          "sampler_max_abs_m1": 5.405350235118678e-09,
+          "context_lost": false
+        },
+        "crop-075": {
+          "field_sha256": "d2fcb53dfaff2fabe242381e92b8341cb73bbd26f62ad444283e29fff661c392",
+          "sampler_max_abs_m1": 6.885899698095416e-09,
+          "context_lost": false
+        },
+        "crop-150": {
+          "field_sha256": "b6fb1ac398eacfa157a3b1120bfba2b4df00283c8b25b03271581fb9b71ebfca",
+          "sampler_max_abs_m1": 6.654817177355332e-09,
+          "context_lost": false
+        },
+        "crop-200": {
+          "field_sha256": "d983661682b2ca34065399281cb5cd3bc3568a7a7111e53bdeb14b09d58e7792",
+          "sampler_max_abs_m1": 1.1636215883643192e-08,
+          "context_lost": false
+        }
+      }
+    },
+    {
+      "name": "Cloud voxelization improves monotonically with resolution",
+      "passed": true,
+      "detail": {
+        "grid-coarse": 0.3872052249797565,
+        "grid-a1": 0.1599981798036471,
+        "grid-fine": 0.04534272342237491
+      }
+    },
+    {
+      "name": "A1 cloud grid approaches fine first-order transport",
+      "passed": true,
+      "detail": {
+        "grid-coarse": {
+          "radiance_L1_vs_grid_fine": 0.14002684065195753,
+          "transmittance_L1_vs_grid_fine": 0.015029266843663553
+        },
+        "grid-a1": {
+          "radiance_L1_vs_grid_fine": 0.057654716758958904,
+          "transmittance_L1_vs_grid_fine": 0.0017286043281377933
+        },
+        "grid-fine": {
+          "radiance_L1_vs_grid_fine": 0.0,
+          "transmittance_L1_vs_grid_fine": 0.0
+        }
+      }
+    },
+    {
+      "name": "A1 crop is converged for central first-order transport",
+      "passed": true,
+      "detail": {
+        "crop-075": {
+          "radiance_L1_vs_crop_200": 0.5781705995747666,
+          "transmittance_L1_vs_crop_200": 4.360650151394231e-07
+        },
+        "grid-a1": {
+          "radiance_L1_vs_crop_200": 4.881225510607241e-07,
+          "transmittance_L1_vs_crop_200": 4.3606501488312526e-07
+        },
+        "crop-150": {
+          "radiance_L1_vs_crop_200": 2.595894299554475e-07,
+          "transmittance_L1_vs_crop_200": 1.7434259536924392e-07
+        },
+        "crop-200": {
+          "radiance_L1_vs_crop_200": 0.0,
+          "transmittance_L1_vs_crop_200": 0.0
+        }
+      }
+    },
+    {
+      "name": "Cloud Monte Carlo paths resolve without safety-cap failures",
+      "passed": true,
+      "detail": {
+        "unresolved_total": 0,
+        "samples_per_ray": 32768
+      }
+    }
+  ],
+  "unit_tests": {
+    "tests": 159,
+    "pass": 159,
+    "fail": 0
+  },
+  "molecular": {
+    "profile_sha256": "717deba2cb6f41afc291f1addb13b19c3ebbb6d98cc6dc21354ee02e567d86ca",
+    "standard_sha256": "08d9eb201efd51dedc66f4ba514e0e7f1643a7c011f446a8eb3dd44b43248e3c",
+    "standard_field_sha256": "e4d967440025d6c2eb80989e785b61613a74089a35dd8b47b2319f0f04b6e3e8",
+    "fine_chunked_sha256": "c6926c5bbb602be9c7b7f81265e4a87655db4ae6d99ec6f2deb49f1acdfa6e30",
+    "atlas_sha256": "775ed7fdb46a5d03b039952ad9288678973688ca7427a8b6e7446f897614ec26",
+    "atlas_spectra_sha256": "ab156b5b4f794e2ae65170bc6157b80897d83f2f330dd78623409e13b0e7206d",
+    "global_first_order_L1_vs_A1": 0.0010415454324405203,
+    "bright_pixel_stats": {
+      "threshold_fraction_of_max_spectral_sum": 0.01,
+      "pixels": 6494,
+      "median": 0.0007043413056718354,
+      "p95": 0.008003811450300583,
+      "max": 0.3476151205880705
+    },
+    "fine_convergence": {
+      "standard_file": "moon-fair-molecular-standard-full.json",
+      "standard_sha256": "663253045ec224d09958434884560a2fcf13a7a48d0d1a36afd2afc8fb813e56",
+      "overall_standard_to_fine_spectral_L1": 0.0039340721631108575,
+      "max_ray_standard_to_fine_spectral_L1": 0.005438095288764429,
+      "max_ray_standard_to_fine_luminance_Y_relative": 0.008056161988823394
+    },
+    "fine_chunk_final_increment_max": 0.0004947248821034437,
+    "high_sun_energy": [
+      {
+        "sun_deg": 15.0,
+        "min_ratio": 0.1661718844890674,
+        "median_ratio": 0.5055395435046286,
+        "max_ratio": 0.8129152707139942
+      },
+      {
+        "sun_deg": 45.0,
+        "min_ratio": 0.19311419547088013,
+        "median_ratio": 0.6307140169888028,
+        "max_ratio": 0.8853165522008585
+      },
+      {
+        "sun_deg": 90.0,
+        "min_ratio": 0.237556816700458,
+        "median_ratio": 0.7033283874696459,
+        "max_ratio": 0.9138741532933727
+      }
+    ],
+    "selected_ray_multiple_to_single_luminance": [
+      2.0897113239099965,
+      1.8830173610968741,
+      2.1049624313255673,
+      2.8238503909805703,
+      5.358837351798439,
+      3.978755686114343,
+      2.5389135379227286
+    ]
+  },
+  "cloud": {
+    "capture_sha256": {
+      "grid-coarse": "0c12eb70814834a89e364213267dd64111758edcfdfcaa4e9adf3cfa27117988",
+      "grid-a1": "d74d7cdbc7330cf04cbba5a4f1fbaf4c123abbbfca224eae3a98230c82334d4f",
+      "grid-fine": "bbb0ccce7c06e27943de4b2a1c909a43b8cdfd8fd39dd53a9d89fb063f76d16e",
+      "crop-075": "36b2d10086ff72c54bb25fd02a0e096518015f71ca8d0ed0d59492cc8f75a285",
+      "crop-150": "5e2ad79d5605934aa972ee02ba1c026e3d69cd2705a12612f6da6a5e93410a69",
+      "crop-200": "7b066611c6674839433f71e79afe637ae723a838df97bac9790d4f82298e7049"
+    },
+    "field_voxelization_relative_L1": {
+      "grid-coarse": 0.3872052249797565,
+      "grid-a1": 0.1599981798036471,
+      "grid-fine": 0.04534272342237491
+    },
+    "transport_convergence": {
+      "grid-coarse": {
+        "radiance_L1_vs_grid_fine": 0.14002684065195753,
+        "transmittance_L1_vs_grid_fine": 0.015029266843663553
+      },
+      "grid-a1": {
+        "radiance_L1_vs_grid_fine": 0.057654716758958904,
+        "transmittance_L1_vs_grid_fine": 0.0017286043281377933
+      },
+      "grid-fine": {
+        "radiance_L1_vs_grid_fine": 0.0,
+        "transmittance_L1_vs_grid_fine": 0.0
+      }
+    },
+    "crop_convergence": {
+      "crop-075": {
+        "radiance_L1_vs_crop_200": 0.5781705995747666,
+        "transmittance_L1_vs_crop_200": 4.360650151394231e-07
+      },
+      "grid-a1": {
+        "radiance_L1_vs_crop_200": 4.881225510607241e-07,
+        "transmittance_L1_vs_crop_200": 4.3606501488312526e-07
+      },
+      "crop-150": {
+        "radiance_L1_vs_crop_200": 2.595894299554475e-07,
+        "transmittance_L1_vs_crop_200": 1.7434259536924392e-07
+      },
+      "crop-200": {
+        "radiance_L1_vs_crop_200": 0.0,
+        "transmittance_L1_vs_crop_200": 0.0
+      }
+    },
+    "mc_grid_mean_L1_vs_fine": {
+      "grid-coarse": 0.05326708148257573,
+      "grid-a1": 0.023037645311228774,
+      "grid-fine": 0.0
+    },
+    "mc_crop_mean_L1_vs_crop_200": {
+      "crop-075": 0.03238716632184179,
+      "grid-a1": 0.02011732868788926,
+      "crop-150": 0.020212810032744465,
+      "crop-200": 0.0
+    },
+    "mc_samples_per_ray": 32768
+  },
+  "source_sha256": {
+    "tools/a2/molecular_multiple_scattering.py": "53d4f717e83ba1892859b08a53e5880e8d01006809cdd6b224bcd57903f701e4",
+    "tools/a2/build_multiple_atlas.py": "49ba42dcc74fd56bd2c74a6b5a74f6c844723fcedd96ce9bd2c67a9ac6663547",
+    "tools/a2/merge_molecular_chunks.py": "ab476d8e67fecfe50e1a13b94c0c2462b00e96a0e4a7a7db15994595c9fd4f53",
+    "tools/a2/capture_cloud_convergence.py": "a6417c75b73fba8f3e1ea8005fb371ba8c57a5baaa5bf8a3db994fbadcfe4681",
+    "tools/a2/cloud_convergence.py": "9cd4355b0b46ec041e9c65bd2a4e20c9341d56f7ada317f440bfd8522391a834",
+    "tools/a2/validate_a2.py": "47f05e97ffbe178d2f654c48f4fa1ccc12890fd3b3b7671fa08c550c41d7edbb",
+    "tools/a2/check_lab.py": "23c038beb73f0e0b47ee6ed18ac2f05d986e65795cf330d54e73e81509c0198f",
+    "tests/a2_frozen_probe.js": "86956dcc14dc617882142102f98801808124fb49cb03af6bdd4ff4963271f3a8",
+    "src/a2-accuracy-lab.js": "9e39a6110034dac527f4c941e328f7c681004a639b97efe6675adbd360f58c7b",
+    "index.a2-accuracy-lab.html": "7fea928d5e87dda390b099a4baea327e8a8ae615c20cde54aa9eb4817c3c9ead",
+    "build_a2_accuracy.py": "cb2e3ac208bc15964f0e0b6a5332c079d930d824f3daa306e2e62da08d985d5e",
+    "A2_METHODS.md": "41d59745d98f56f76864b9b7677e6ac29dcba0c6c65aaab57b98b9e9b9c6d528"
+  },
+  "limitations": [
+    "Molecular atlas uses the standard angular/radial grid; fine-grid convergence is sampled on seven rays across the full spectrum.",
+    "The atmospheric profile, ozone and upper extension remain specified inputs rather than climate-equilibrium predictions.",
+    "Cloud-grid comparison remains a frozen fair-weather field; continuous-field error is sampled at deterministic probes rather than bounded everywhere.",
+    "Cloud multiple-scattering crop/grid sensitivity is Monte Carlo and retains sampling uncertainty.",
+    "Production atmospheric/cloud lighting, cache interpolation and display calibration remain unchanged and unvalidated against A2."
+  ],
+  "elapsed_s": 10.462898026000403
+}

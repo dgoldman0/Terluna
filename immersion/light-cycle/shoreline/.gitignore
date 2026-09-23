@@ -17,3 +17,8 @@ node_modules/
 /data/a1/generated/
 /Open_Moon_A1_Accuracy_Lab.html
 /validation/a1/*.png
+
+# Reproducible A2 reference outputs; compact evidence remains versioned.
+/data/a2/generated/
+/Open_Moon_A2_Accuracy_Lab.html
+/validation/a2/*.png
