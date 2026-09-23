@@ -632,7 +632,8 @@
           "views": [
             {
               "filtered": false,
-              "image": {+                "width": 1222,
+              "image": {
+                "width": 1222,
                 "height": 733,
                 "css_width": 1222,
                 "sampled_pixels": 9102,
@@ -1631,7 +1632,8 @@
                 "luminance_range": 140.8334,
                 "standard_deviation": 20.857377483562644,
                 "white_fraction": 0,
-                "pixel_hash": 675025314+              }
+                "pixel_hash": 675025314
+              }
             },
             {
               "filtered": true,
@@ -2630,7 +2632,8 @@
                 "standard_deviation": 38.57366487747131,
                 "white_fraction": 0,
                 "pixel_hash": 2771198647
-              },+              "sky": {
+              },
+              "sky": {
                 "width": 1142,
                 "height": 571,
                 "css_width": 571,
@@ -3629,7 +3632,8 @@
                 "sampled_pixels": 9102,
                 "opaque_fraction": 1,
                 "luminance_min": 41.8276,
-                "luminance_max": 220.74459999999996,+                "luminance_range": 178.91699999999997,
+                "luminance_max": 220.74459999999996,
+                "luminance_range": 178.91699999999997,
                 "standard_deviation": 42.63137623472328,
                 "white_fraction": 0,
                 "pixel_hash": 452675837
@@ -4628,7 +4632,8 @@
                 "standard_deviation": 26.33026360871193,
                 "white_fraction": 0,
                 "pixel_hash": 739259501
-              }+            },
+              }
+            },
             {
               "filtered": true,
               "image": {
@@ -5627,7 +5632,8 @@
                 "sampled_pixels": 8978,
                 "opaque_fraction": 1,
                 "luminance_min": 78.42559999999999,
-                "luminance_max": 248.91579999999996,+                "luminance_range": 170.49019999999996,
+                "luminance_max": 248.91579999999996,
+                "luminance_range": 170.49019999999996,
                 "standard_deviation": 23.94030647595071,
                 "white_fraction": 0,
                 "pixel_hash": 836566447
@@ -6626,7 +6632,8 @@
               "pixel_hash": 2492805831
             },
             {
-              "mode": "diffuse",+              "width": 668,
+              "mode": "diffuse",
+              "width": 668,
               "height": 668,
               "css_width": 334,
               "sampled_pixels": 9216,

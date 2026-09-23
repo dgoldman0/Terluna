@@ -29,7 +29,8 @@ def samples(args,n,seed,boundary=0.):
     np.random.seed(seed);s=s2=0.;f=np.zeros(8,np.int64)
     for j in range(n):
         v,sv,fail=b.path_sample(*args,.95,boundary,4096)
-        s+=v;s2+=v*v;f[fail]+=1+    return s/n,math.sqrt(max(0.,(s2-s*s/n)/max(1,n-1)/n)),f
+        s+=v;s2+=v*v;f[fail]+=1
+    return s/n,math.sqrt(max(0.,(s2-s*s/n)/max(1,n-1)/n)),f
 
 @njit(cache=True)
 def cosine_test(n):

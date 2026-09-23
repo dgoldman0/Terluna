@@ -89,7 +89,8 @@
       "state_checks": 339,
       "layouts": 3,
       "errors": [],
-      "console_errors": [],+      "external_requests": []
+      "console_errors": [],
+      "external_requests": []
     },
     {
       "name": "Production shoreline build preserved",
@@ -1088,7 +1089,8 @@
       "name": "thick_sun+6",
       "scenario": "thick",
       "sun_elevation_deg": 6.0,
-      "size": 28,+      "spectral_histories": 112896,
+      "size": 28,
+      "spectral_histories": 112896,
       "metadata_sha256": "f0bd9b3b4a2f6fbfe0be4d7750cdc19a1447a608125ac1818226b4d56815f92e",
       "irradiance_archive_sha256": "06bf02c40f0309414e7ec6f2cdf55b697c831a753b01d891a8438cf559ead0ed",
       "median_direct_lux": 293.28242643649287,

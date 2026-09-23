@@ -749,7 +749,8 @@ ok 125 - Stationary water state skips pool solving
   duration_ms: 12.043314
   type: 'test'
   ...
-# Subtest: Coastal forcing has a nonnegative bounded bathymetric envelope+ok 126 - Coastal forcing has a nonnegative bounded bathymetric envelope
+# Subtest: Coastal forcing has a nonnegative bounded bathymetric envelope
+ok 126 - Coastal forcing has a nonnegative bounded bathymetric envelope
   ---
   duration_ms: 43.469107
   type: 'test'
