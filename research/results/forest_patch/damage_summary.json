@@ -1,0 +1,43 @@
+{
+  "upstream_speed_m_s": 22.0,
+  "algorithm": "simultaneous failures; geometry and flow re-solved at same wind",
+  "one_wave_control_failed": 12,
+  "wave_failure_counts": {
+    "shelter": [
+      12,
+      12,
+      14,
+      7,
+      4
+    ],
+    "contacts": [
+      12,
+      12,
+      16,
+      5,
+      4
+    ],
+    "contacts_grafts": [
+      12,
+      11,
+      18,
+      8
+    ],
+    "fine_shelter": [
+      7,
+      7,
+      7,
+      10,
+      12,
+      6
+    ]
+  },
+  "final_failed": {
+    "shelter": 49,
+    "contacts": 49,
+    "contacts_grafts": 49,
+    "fine_shelter": 49
+  },
+  "real_duration_assigned": false,
+  "max_domain_utilization": 0.8675291326721648
+}

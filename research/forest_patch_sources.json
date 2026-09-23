@@ -1,0 +1,29 @@
+{
+  "status": "PRIMARY_SOURCES_INSPECTED_WITH_ACCESS_LIMITS; NOT_TRAIT_CALIBRATION",
+  "sources": [
+    {
+      "id": "schelhaas2007",
+      "title": "Introducing tree interactions in wind damage simulation",
+      "doi": "10.1016/j.ecolmodel.2007.04.025",
+      "url": "https://www.researchgate.net/publication/51997058_Introducing_tree_interactions_in_wind_damage_simulation",
+      "access": "author-posted abstract and relevant methods passages inspected; full manuscript admission pending",
+      "use": "shelter, support and progressive-damage comparison framework"
+    },
+    {
+      "id": "dupont_brunet2008",
+      "title": "Impact of forest edge shape on tree stability: a large-eddy simulation study",
+      "doi": "10.1093/forestry/cpn006",
+      "url": "https://academic.oup.com/forestry/article-abstract/81/3/299/655616",
+      "access": "primary abstract only",
+      "use": "edge shapes and downstream gust validation targets; current Oseen solver does not reproduce resolved gust structures"
+    },
+    {
+      "id": "majumdar_drag_length",
+      "title": "The drag length is key to quantifying tree canopy drag",
+      "arxiv": "2411.01570",
+      "url": "https://arxiv.org/abs/2411.01570",
+      "access": "primary abstract inspected; full HTML access failed",
+      "use": "local versus bulk drag conventions and spatial-scale scrutiny"
+    }
+  ]
+}

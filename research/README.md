@@ -63,3 +63,15 @@ OPENBLAS_NUM_THREADS=1 python research/run_megaforest_wind.py
 Full generated results go to ignored `research/runs/megaforest_wind/`. Source
 ownership remains in `atmosphere/`, `climate/` and `biosphere/`; the runner stays
 in `research/`. `immersion/` is unchanged and accepts no output from this runner.
+
+## Interacting forest patches
+
+The [finite-patch study](forest_patch.md) adds three-dimensional conditional mean
+airflow, individual-tree load partitioning, compliant foundations, optional crown
+contacts/root-graft proxies, shared-soil accounting and damage re-solves. Code
+lives in `climate/forest_patch_flow.py` and `biosphere/forest_patch*.py`, with the
+sequence in `biosphere/forest_damage.py`. [Compact results](results/forest_patch/)
+and the reproduction driver `run_forest_patch.py` retain the model boundaries.
+The individual-tree checkpoint remains unchanged. Wind climatology, gusts,
+nonlinear failure and evolutionary morphology remain open. `immersion/` is
+unchanged and receives no outputs from this work.

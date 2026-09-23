@@ -1,0 +1,166 @@
+{
+  "base_commit": "b5b8cc50914633b6e22587b6d3743108b10ad6f4",
+  "stage": "FINITE_PATCH_AERODYNAMIC_AND_ELASTIC_INTERACTION_SCREEN",
+  "intact_geometries": 13,
+  "intact_interaction_cases": 39,
+  "trees_in_reference_patch": 49,
+  "map_records": 1884,
+  "sensitivity_cases": 14,
+  "reference_grid": {
+    "nx": 48,
+    "ny": 32,
+    "nz": 16,
+    "length_x_h": 12.0,
+    "length_y_h": 8.0,
+    "height_h": 3.0,
+    "reference_height_m": 300.0,
+    "eddy_viscosity_over_uh": 0.02,
+    "tolerance": 0.0002,
+    "max_steps": 6000,
+    "cfl": 0.65,
+    "advection_order": 2
+  },
+  "air": {
+    "kind": "prescribed_hydrostatic_lower_air",
+    "pressure_pa": 121590.0,
+    "temperature_k": 288.0,
+    "oxygen_mole_fraction": 0.175,
+    "vapor_kg_per_kg_dry": 0.0,
+    "lapse_k_per_m": 0.0,
+    "radius_m": 1737400.0,
+    "surface_gravity_m_s2": 1.6242188765608128,
+    "top_m": 5000.0
+  },
+  "reference_density_kg_m3": 1.4578573894508424,
+  "worst_mass_divergence": 9.298117831235686e-16,
+  "worst_force_partition_error": 9.845525553111395e-16,
+  "max_intact_structural_residual": 5.1605952154981535e-11,
+  "first_batch_failed": 12,
+  "damage": {
+    "shelter": {
+      "status": "COMPLETED",
+      "failed": 49,
+      "waves": 5,
+      "flow_solves": 5
+    },
+    "contacts": {
+      "status": "COMPLETED",
+      "failed": 49,
+      "waves": 5,
+      "flow_solves": 5
+    },
+    "contacts_grafts": {
+      "status": "COMPLETED",
+      "failed": 49,
+      "waves": 4,
+      "flow_solves": 4
+    }
+  },
+  "fine_damage": {
+    "status": "COMPLETED",
+    "failed": 49,
+    "waves": 6
+  },
+  "max_sensitivity_abs_root_change": 0.04822789981817277,
+  "scientific_status": {
+    "wind_climate": "UNMODELLED",
+    "gusts": "UNMODELLED",
+    "tree_traits": "HYPOTHETICAL",
+    "root_links": "OPTIONAL_HYPOTHETICAL_MECHANICS",
+    "evolutionary_outcome": "UNMODELLED_DESIGN_COMPARISONS_ONLY",
+    "numerical_grid_limit": "SENSITIVITY_TESTS_NOT_CONTINUUM_CERTIFICATION",
+    "whole_forest_viability": "UNESTABLISHED",
+    "immersion": "UNCHANGED"
+  },
+  "runtime": {
+    "python": "3.13.5",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0"
+  },
+  "source_sha256": {
+    "atmosphere/lower_air.py": "6c2437fc72acbf536a45f084a95c7b72c87488bd314ccbae39f379dcc39dab05",
+    "biosphere/megaforest_mechanics.py": "fd9af30029e0ddc83af7713b35bfac6c97d464cea12d777849d2798e6ab9bf7b",
+    "climate/forest_patch_flow.py": "8c223997b037319c79aecf15331ee721d5c6a9f14f61073fb513930404523207",
+    "biosphere/forest_patch.py": "f17e9ef7f02ce28ba3c7bbab6e5e1809885d7c6f2dea1955da00595a06837403",
+    "biosphere/forest_patch_mechanics.py": "5164c08b6064d6a7cf12356039a6f535ffa85af7905a681f8a51e13f2e29553e",
+    "biosphere/forest_damage.py": "f30138621d4c6b09942852c7f8a5a7750ddaf38bdd972012ed2c5d9c67453ec7",
+    "research/run_forest_patch.py": "9e6f58d0801294dcd603299490d70badf9812e9b2c21cc44597a56a088a9af77",
+    "tests/test_forest_patch.py": "62286b0b1834066c146d6ce4f24c0fc85007675e0f0e90f682682b5c1358b811"
+  },
+  "checks": {
+    "focused_tests": {
+      "status": "PASS",
+      "new_tests": 37,
+      "previous_megaforest_tests": 25,
+      "total": 62,
+      "command": "OPENBLAS_NUM_THREADS=1 python -m unittest discover -s tests -v"
+    },
+    "final_source_complete_run": {
+      "status": "PASS",
+      "command": "OPENBLAS_NUM_THREADS=1 python research/run_forest_patch.py --quick",
+      "source_hashes_match": true
+    },
+    "development_to_final_numerical_comparison": {
+      "status": "PASS",
+      "csv_files_byte_identical": [
+        "intact_summary.csv",
+        "tree_maps.csv"
+      ],
+      "configurations_byte_identical": true,
+      "flow_npz_files_array_identical": 5,
+      "qualification": "Final fixes add schema guards/hash metadata and preserve failed root reservations; reference non-overlapping root geometry is numerically unchanged. This is not a claim that all JSON files are byte-identical."
+    },
+    "whole_repository_check": {
+      "status": "NOT_RUN",
+      "reason": "Scoped checkpoint worktree; historical/full repository tree unavailable locally; container GitHub DNS blocked"
+    },
+    "unrelated_environment_regressions": {
+      "status": "NOT_RUN",
+      "reason": "Only earlier megaforest tests and new patch tests are materialized"
+    },
+    "real_A1_export_integration": {
+      "status": "NOT_RUN",
+      "reason": "Standalone LowerAir scenario used"
+    },
+    "empirical_canopy_validation": {
+      "status": "DEFERRED",
+      "reason": "No measured canopy/edge calibration or source-admitted traits"
+    },
+    "immersion": {
+      "status": "NO_WRITES",
+      "base_subtree_sha": "a45de16938b37ac833bb5690884f21ef26726841"
+    }
+  },
+  "damage_wave_tree_counts": {
+    "shelter": [
+      12,
+      12,
+      14,
+      7,
+      4
+    ],
+    "contacts": [
+      12,
+      12,
+      16,
+      5,
+      4
+    ],
+    "contacts_grafts": [
+      12,
+      11,
+      18,
+      8
+    ],
+    "fine_shelter": [
+      7,
+      7,
+      7,
+      10,
+      12,
+      6
+    ]
+  },
+  "full_results_location": "Reproduce into research/runs/forest_patch or inspect the accompanying downloadable numerical study bundle",
+  "max_damage_domain_utilization": 0.8675291326721648
+}
