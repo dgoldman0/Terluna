@@ -1,0 +1,41 @@
+{"done": 96, "total": 3072, "elapsed_s": 12.492182490999994}
+{"done": 192, "total": 3072, "elapsed_s": 52.27405031699993}
+{"done": 288, "total": 3072, "elapsed_s": 82.40497577600001}
+{"done": 384, "total": 3072, "elapsed_s": 115.59324867999987}
+{"done": 480, "total": 3072, "elapsed_s": 119.00562143800005}
+{"done": 576, "total": 3072, "elapsed_s": 141.5470960869999}
+{"done": 672, "total": 3072, "elapsed_s": 157.85608562100003}
+{"done": 768, "total": 3072, "elapsed_s": 175.80632110999989}
+{"done": 864, "total": 3072, "elapsed_s": 179.6855656209999}
+{"done": 960, "total": 3072, "elapsed_s": 188.60404389500002}
+{"done": 1056, "total": 3072, "elapsed_s": 193.30028766499993}
+{"done": 1152, "total": 3072, "elapsed_s": 199.78887919800002}
+{"done": 1248, "total": 3072, "elapsed_s": 203.79019424299997}
+{"done": 1344, "total": 3072, "elapsed_s": 215.322290405}
+{"done": 1440, "total": 3072, "elapsed_s": 221.76287042299998}
+{"done": 1536, "total": 3072, "elapsed_s": 229.991449407}
+{"done": 1632, "total": 3072, "elapsed_s": 233.84063406899998}
+{"done": 1728, "total": 3072, "elapsed_s": 254.17945722000002}
+{"done": 1824, "total": 3072, "elapsed_s": 267.28166189}
+{"done": 1920, "total": 3072, "elapsed_s": 283.281773544}
+{"done": 2016, "total": 3072, "elapsed_s": 287.607360801}
+{"done": 2112, "total": 3072, "elapsed_s": 298.6481163949999}
+{"done": 2208, "total": 3072, "elapsed_s": 304.48321148599996}
+{"done": 2304, "total": 3072, "elapsed_s": 311.5817492069999}
+{"done": 2400, "total": 3072, "elapsed_s": 316.366649252}
+{"done": 2496, "total": 3072, "elapsed_s": 380.154786427}
+{"done": 2592, "total": 3072, "elapsed_s": 427.6207284369999}
+{"done": 2688, "total": 3072, "elapsed_s": 476.87386123299996}
+{"done": 2784, "total": 3072, "elapsed_s": 480.28304562100004}
+{"done": 2880, "total": 3072, "elapsed_s": 494.80535276299986}
+{"done": 2976, "total": 3072, "elapsed_s": 502.53939858}
+{"done": 3072, "total": 3072, "elapsed_s": 512.3201315109999}
+{"completed_case": "dense-sun45", "tau": 5.092633114773093, "coupled_Y": 9951.372594275852, "elapsed_s": 519.7330653079999}
+{"completed_case": "moderate-sun45", "tau": 1.728709337353443, "coupled_Y": 9910.219845042919, "elapsed_s": 523.233089185}
+{"completed_case": "clear-gap-sun45", "tau": 0.0, "coupled_Y": 7449.273266706301, "elapsed_s": 524.16827026}
+{"completed_case": "edge-sun45", "tau": 0.2629670293290218, "coupled_Y": 8002.062916546453, "elapsed_s": 525.363932844}
+{"completed_case": "broken-sun45", "tau": 1.3065256713868219, "coupled_Y": 10183.501142485053, "elapsed_s": 528.00742331}
+{"completed_case": "oblique-sun45", "tau": 0.030648470719201626, "coupled_Y": 9349.098768244125, "elapsed_s": 528.996264039}
+{"completed_case": "dense-sun6", "tau": 5.092633114773093, "coupled_Y": 1660.541961203515, "elapsed_s": 540.293660677}
+{"completed_case": "zenith-sun6", "tau": 0.2400082594288561, "coupled_Y": 2113.7004387617653, "elapsed_s": 542.1940852899999}
+Saved /mnt/data/a3_work/immersion/light-cycle/shoreline/data/a3/generated/benchmark.json elapsed 542.1942127030001

@@ -1,0 +1,757 @@
+{
+  "schema": "open-moon-a3-validation/1",
+  "generated_utc": "2026-09-23T00:44:14.164389+00:00",
+  "status": "coupled-benchmark-implemented; inherited-A2-blue-agreement-failed",
+  "implementation_passed": true,
+  "all_accuracy_gates_passed": false,
+  "production_replacement_qualified": false,
+  "benchmark_sha256": "3ef8f4aabccc9f3876d2ad2bd34a8fd0abf2a7b98f85787bb0bba111a008537a",
+  "source_sha256": {
+    "tools/a3/coupled_transport.py": "412ff865356fc9ba0bda42cbe7ec3ebb4e9552e47bd72bdd1309262640a0dd1c",
+    "tools/a3/deterministic.py": "a7ee5e71bf485ac2844cb5e6c97842893abeff5cb1eb31920cc435aee6873143",
+    "tools/a3/run_benchmark.py": "c7ea19b7d44e6fbb39a7426148eae70a35af9ff28eba53eb877d95b0b3c3eb2a",
+    "tools/a3/test_transport.py": "a07f2c8f8fe59462202db7d2a5dce0bc2f0455f5fa6b6811d36fea0c22177286",
+    "tools/a3/test_extensions.py": "b4cb9b4f25f86f4789544b1c54eca899fe22031c4c5b35f6ca03d50cc9d451fb",
+    "tools/a3/diagnose_clear.py": "fc5004dd5f4c8f96dc6930cfca58f0b837726bdf9fc702e748f01071543ccbd4",
+    "tools/a3/refine_molecular.py": "3eba734dd59b01449c596ab5a2680c436b5a3861b2db63c33422327f3c594efe",
+    "tools/a3/validate_a3.py": "480929b20212a85fae874ebaa2cca18c9376dc8ff4af9aa5e121cae56a027ff4"
+  },
+  "gates": [
+    {
+      "name": "Analytic, phase, geometry, limiting-case and mixed-transmission checks",
+      "state": "PASS",
+      "passed": true,
+      "passed_checks": 30,
+      "total_checks": 30
+    },
+    {
+      "name": "Inherited JavaScript regression suite",
+      "state": "PASS",
+      "passed": true,
+      "pass_count": 159,
+      "fail_count": 0
+    },
+    {
+      "name": "All 48 wavelengths from 360 to 830 nm",
+      "state": "PASS",
+      "passed": true
+    },
+    {
+      "name": "Full benchmark has no unresolved safety-cap or majorant failures",
+      "state": "PASS",
+      "passed": true,
+      "unresolved": 0
+    },
+    {
+      "name": "Profile/cloud/A2 identities remain matched",
+      "state": "PASS",
+      "passed": true
+    },
+    {
+      "name": "Executed transport kernel and spectral source hashes match delivered files",
+      "state": "PASS",
+      "passed": true
+    },
+    {
+      "name": "Independent seed batches are statistically consistent at the declared 6-SE check",
+      "state": "PASS",
+      "passed": true,
+      "maximum_batch_z": 3.1714415303484085,
+      "comparisons": 1536
+    },
+    {
+      "name": "Gas-only, cloud-only and mixed path contributions close to total radiance",
+      "state": "PASS",
+      "passed": true,
+      "largest_relative_residual": 3.675805450057324e-14
+    },
+    {
+      "name": "Independent coupled first-order integration converges under Gauss refinement",
+      "state": "PASS",
+      "passed": true,
+      "maximum_spectral_L1": 0.0026576066836879694
+    },
+    {
+      "name": "Matched production-expression replay converges under Gauss refinement",
+      "state": "PASS",
+      "passed": true,
+      "maximum_spectral_L1": 1.912857163102026e-08
+    },
+    {
+      "name": "Saved A2 multiple-scattering field agrees with independent clear-gas MC",
+      "state": "FAIL \u2014 selected blue wavelengths",
+      "passed": false,
+      "kind": "inherited_reference_qualification",
+      "checks": [
+        {
+          "name": "zero-cloud full MC reproduces A2 at 400 nm",
+          "passed": false,
+          "mean": 0.12972758346481217,
+          "standard_error": 0.0008986756143152814,
+          "A2": 0.12099442859808154,
+          "relative_difference": 0.07217815702688558,
+          "unresolved": 0
+        },
+        {
+          "name": "zero-cloud full MC reproduces A2 at 460 nm",
+          "passed": false,
+          "mean": 0.16166352944682436,
+          "standard_error": 0.0008711820472197979,
+          "A2": 0.15318153695683903,
+          "relative_difference": 0.05537215945532156,
+          "unresolved": 0
+        },
+        {
+          "name": "zero-cloud full MC reproduces A2 at 520 nm",
+          "passed": true,
+          "mean": 0.1212162084723072,
+          "standard_error": 0.0006723509497895474,
+          "A2": 0.11912809185947251,
+          "relative_difference": 0.017528330893588885,
+          "unresolved": 0
+        },
+        {
+          "name": "zero-cloud full MC reproduces A2 at 580 nm",
+          "passed": true,
+          "mean": 0.08810123594453702,
+          "standard_error": 0.0005394094891257411,
+          "A2": 0.08701149411695368,
+          "relative_difference": 0.012524113493771286,
+          "unresolved": 0
+        },
+        {
+          "name": "zero-cloud full MC reproduces A2 at 640 nm",
+          "passed": true,
+          "mean": 0.059597182123613125,
+          "standard_error": 0.000405406758283735,
+          "A2": 0.058898550935176916,
+          "relative_difference": 0.011861602320320493,
+          "unresolved": 0
+        },
+        {
+          "name": "zero-cloud full MC reproduces A2 at 700 nm",
+          "passed": true,
+          "mean": 0.03940032744910036,
+          "standard_error": 0.0003050395290551377,
+          "A2": 0.039215505485626224,
+          "relative_difference": 0.004712981795985744,
+          "unresolved": 0
+        }
+      ]
+    },
+    {
+      "name": "Independent dense molecular refinement",
+      "state": "COMPLETED \u2014 two diagnostic wavelengths",
+      "kind": "reference_diagnostic",
+      "data": [
+        {
+          "wavelength_nm": 400,
+          "saved_a2": 0.12099442859808154,
+          "mc_mean": 0.13068205566923474,
+          "mc_se": 0.00015216321335345762,
+          "mc_samples": 2097152,
+          "refined": 0.12954812902787916,
+          "relative_mc_minus_saved": 0.08006672028952251,
+          "refined_fractional_difference": -0.008676988095639031
+        },
+        {
+          "wavelength_nm": 460,
+          "saved_a2": 0.15318153695683903,
+          "mc_mean": 0.15949133817898636,
+          "mc_se": 0.0001538164216674263,
+          "mc_samples": 2097152,
+          "refined": 0.15875919624607457,
+          "relative_mc_minus_saved": 0.041191656302059454,
+          "refined_fractional_difference": -0.004590480845362032
+        },
+        {
+          "wavelength_nm": 580,
+          "saved_a2": 0.08701149411695368,
+          "mc_mean": 0.08803463138146173,
+          "mc_se": 9.522087057335116e-05,
+          "mc_samples": 2097152,
+          "refined": null,
+          "relative_mc_minus_saved": 0.011758644934114463,
+          "refined_fractional_difference": null
+        }
+      ]
+    },
+    {
+      "name": "Coupled transport convergence beyond the frozen grid and crop",
+      "state": "OPEN",
+      "kind": "future_accuracy_gate"
+    },
+    {
+      "name": "Production GPU closure, cache, reflections and complete image comparison",
+      "state": "OPEN",
+      "kind": "future_accuracy_gate"
+    },
+    {
+      "name": "Reflecting-ground and finite-Sun boundary experiments",
+      "state": "OPEN",
+      "kind": "future_accuracy_gate"
+    }
+  ],
+  "implementation_checks": [
+    {
+      "name": "molecular and ozone majorants bound all profile knots and 10001 uniform probes",
+      "passed": true,
+      "max_air_fraction": 0.9995619908099327
+    },
+    {
+      "name": "Rayleigh phase integrates to unity and has second moment 0.4",
+      "passed": true,
+      "integral": 1.000000000000003,
+      "second_moment": 0.40000000000000707
+    },
+    {
+      "name": "Rayleigh sampler has correct first/second moments and unit directions",
+      "passed": true,
+      "mean": -0.0008024378916393087,
+      "second_moment": 0.4008535808648863,
+      "max_norm_error": 4.440892098500626e-16
+    },
+    {
+      "name": "spherical top and solid-ground intersections",
+      "passed": true,
+      "top_distance": 599998.0,
+      "ground_distance": 2.0
+    },
+    {
+      "name": "vacuum radiance",
+      "passed": true,
+      "mean": 0.0,
+      "standard_error": 0.0,
+      "expected": 0.0,
+      "unresolved": 0
+    },
+    {
+      "name": "vacuum constant boundary",
+      "passed": true,
+      "mean": 1.0,
+      "standard_error": 0.0,
+      "expected": 1.0,
+      "unresolved": 0
+    },
+    {
+      "name": "pure absorption Beer transmission",
+      "passed": true,
+      "mean": 0.486114501953125,
+      "standard_error": 0.0019523865977527646,
+      "expected": 0.4867522559599717,
+      "unresolved": 0
+    },
+    {
+      "name": "mixed homogeneous first-order",
+      "passed": true,
+      "mean": 0.5402190047284963,
+      "standard_error": 0.00395483339514661,
+      "expected": 0.5355987145505496,
+      "unresolved": 0
+    },
+    {
+      "name": "conservative mixed medium with isotropic boundaries",
+      "passed": true,
+      "mean": 1.0000162591691795,
+      "standard_error": 3.0888715513947855e-05,
+      "expected": 1.0,
+      "unresolved": 0
+    },
+    {
+      "name": "cell-exact frozen trilinear cloud line integral",
+      "passed": true,
+      "computed": 8.660254037844386,
+      "expected": 8.660254037844386
+    },
+    {
+      "name": "cloud depth additivity and reversal",
+      "passed": true,
+      "total": 0.3544353395711426,
+      "split": 0.3544353395711426,
+      "reverse": 0.3544353395711425
+    },
+    {
+      "name": "independent single-scattering quadrature refinement",
+      "passed": true,
+      "spectral_L1": 8.685907712482559e-05
+    },
+    {
+      "name": "coupled first-order MC agrees with deterministic transfer at 460 nm",
+      "passed": true,
+      "mean": 0.032217649441881734,
+      "standard_error": 0.00020819723445095341,
+      "deterministic": 0.032477133022046696,
+      "unresolved": 0
+    },
+    {
+      "name": "coupled first-order MC agrees with deterministic transfer at 580 nm",
+      "passed": true,
+      "mean": 0.045814058542346194,
+      "standard_error": 0.00023805316743073584,
+      "deterministic": 0.046196177933218535,
+      "unresolved": 0
+    },
+    {
+      "name": "coupled first-order MC agrees with deterministic transfer at 700 nm",
+      "passed": true,
+      "mean": 0.035143886823541005,
+      "standard_error": 0.0001930621965474336,
+      "deterministic": 0.03461788215598777,
+      "unresolved": 0
+    },
+    {
+      "name": "zero-gas reduction agrees with inherited cloud-only MC",
+      "passed": true,
+      "mean": 0.033302021991684284,
+      "standard_error": 0.0002866080795305148,
+      "inherited_mean": 0.033894654705987855,
+      "inherited_standard_error": 0.0002846151215901067,
+      "unresolved": 0
+    },
+    {
+      "name": "clear-source continuation reduces exactly to full transport with zero cloud",
+      "passed": true
+    },
+    {
+      "name": "clear-source continuation reduces exactly to full transport with zero gas",
+      "passed": true
+    },
+    {
+      "name": "independent-seed batches reproduce exactly across serial and threaded dispatch",
+      "passed": true
+    },
+    {
+      "name": "A2 moment-source adapter preserves isotropic radiance including pole cases",
+      "passed": true,
+      "values": [
+        1.9999999999999998,
+        1.9999999999999998,
+        1.9999999999999998,
+        2.0
+      ],
+      "expected": 2.0
+    },
+    {
+      "name": "A2 source adapter recovers saved clear field at 400 nm",
+      "passed": true,
+      "mean": 0.12096575313584003,
+      "standard_error": 0.00018940106768642977,
+      "A2": 0.12099442859808154
+    },
+    {
+      "name": "A2 source adapter recovers saved clear field at 460 nm",
+      "passed": true,
+      "mean": 0.1535350466269491,
+      "standard_error": 0.0002782993951080552,
+      "A2": 0.15318153695683903
+    },
+    {
+      "name": "A2 source adapter recovers saved clear field at 580 nm",
+      "passed": true,
+      "mean": 0.08692644842907914,
+      "standard_error": 0.0002731990610422044,
+      "A2": 0.08701149411695368
+    },
+    {
+      "name": "A2 source adapter recovers saved clear field at 700 nm",
+      "passed": true,
+      "mean": 0.03931967019650174,
+      "standard_error": 0.0001828352790282499,
+      "A2": 0.039215505485626224
+    },
+    {
+      "name": "combined transmission equals independent gas times cloud attenuation ray 0, 400 nm",
+      "passed": true,
+      "mean": 0.03373157174171005,
+      "standard_error": 0.00028609037681762226,
+      "expected": 0.03398484259873695,
+      "unresolved": 0
+    },
+    {
+      "name": "combined transmission equals independent gas times cloud attenuation ray 0, 580 nm",
+      "passed": true,
+      "mean": 0.371747147911225,
+      "standard_error": 0.000885882465756143,
+      "expected": 0.373001403586888,
+      "unresolved": 0
+    },
+    {
+      "name": "combined transmission equals independent gas times cloud attenuation ray 0, 700 nm",
+      "passed": true,
+      "mean": 0.5585660066939611,
+      "standard_error": 0.0008530781195713108,
+      "expected": 0.5593422041280178,
+      "unresolved": 0
+    },
+    {
+      "name": "combined transmission equals independent gas times cloud attenuation ray 1, 400 nm",
+      "passed": true,
+      "mean": 0.03808277557888485,
+      "standard_error": 0.0003370563468874858,
+      "expected": 0.03817992148199066,
+      "unresolved": 0
+    },
+    {
+      "name": "combined transmission equals independent gas times cloud attenuation ray 1, 580 nm",
+      "passed": true,
+      "mean": 0.4615732559020211,
+      "standard_error": 0.0011027237409551886,
+      "expected": 0.46034667363509535,
+      "unresolved": 0
+    },
+    {
+      "name": "combined transmission equals independent gas times cloud attenuation ray 1, 700 nm",
+      "passed": true,
+      "mean": 0.7003780473607951,
+      "standard_error": 0.0010572631033459478,
+      "expected": 0.701413767706737,
+      "unresolved": 0
+    }
+  ],
+  "case_statistics": [
+    {
+      "case": "dense-sun45",
+      "coupled_Y": 9951.372594275852,
+      "coupled_Y_standard_error": 31.1342174176107,
+      "fixed_clear_source_Y": 9661.192892810077,
+      "feedback_delta_Y": 290.179701465775,
+      "feedback_delta_Y_standard_error": 42.871011590870914,
+      "feedback_fraction_of_fixed": 0.030035597538035766,
+      "feedback_z": 6.768669333838783,
+      "mixed_scattering_fraction": 0.5134144567498233,
+      "matched_production_expression_fractional_difference": -0.3958209282980404,
+      "matched_expression_vs_same_a2_source_fractional_difference": -0.3729024107602724,
+      "a2_fixed_source_fractional_difference": -0.007609083787116666,
+      "a2_clear_fractional_difference": -0.018297698348525238,
+      "cloud_view_optical_depth": 5.092633114773093
+    },
+    {
+      "case": "moderate-sun45",
+      "coupled_Y": 9910.219845042919,
+      "coupled_Y_standard_error": 24.72792726799767,
+      "fixed_clear_source_Y": 9563.578446668105,
+      "feedback_delta_Y": 346.64139837481343,
+      "feedback_delta_Y_standard_error": 33.947364774699935,
+      "feedback_fraction_of_fixed": 0.03624599309849142,
+      "feedback_z": 10.211143064428848,
+      "mixed_scattering_fraction": 0.5221614317154819,
+      "matched_production_expression_fractional_difference": -0.2045187325132649,
+      "matched_expression_vs_same_a2_source_fractional_difference": -0.1634058233848401,
+      "a2_fixed_source_fractional_difference": -0.014678443790758444,
+      "a2_clear_fractional_difference": -0.014149579236350962,
+      "cloud_view_optical_depth": 1.728709337353443
+    },
+    {
+      "case": "clear-gap-sun45",
+      "coupled_Y": 7449.273266706301,
+      "coupled_Y_standard_error": 16.733505200815667,
+      "fixed_clear_source_Y": 7260.747466165321,
+      "feedback_delta_Y": 188.52580054097962,
+      "feedback_delta_Y_standard_error": 23.043987454053713,
+      "feedback_fraction_of_fixed": 0.025965067841775154,
+      "feedback_z": 8.181127546474848,
+      "mixed_scattering_fraction": 0.05639064363492305,
+      "matched_production_expression_fractional_difference": -0.03899726069037168,
+      "matched_expression_vs_same_a2_source_fractional_difference": 0.0009700466714261946,
+      "a2_fixed_source_fractional_difference": -0.015000255091969117,
+      "a2_clear_fractional_difference": -0.016847854902402815,
+      "cloud_view_optical_depth": 0.0
+    },
+    {
+      "case": "edge-sun45",
+      "coupled_Y": 8002.062916546453,
+      "coupled_Y_standard_error": 17.750528646265316,
+      "fixed_clear_source_Y": 7798.992026613096,
+      "feedback_delta_Y": 203.07088993335765,
+      "feedback_delta_Y_standard_error": 24.30758794869317,
+      "feedback_fraction_of_fixed": 0.02603809431275264,
+      "feedback_z": 8.354218047549026,
+      "mixed_scattering_fraction": 0.2303964632537369,
+      "matched_production_expression_fractional_difference": 0.0028163501230800136,
+      "matched_expression_vs_same_a2_source_fractional_difference": 0.04502878108211128,
+      "a2_fixed_source_fractional_difference": -0.01540723523373555,
+      "a2_clear_fractional_difference": -0.014824953542652453,
+      "cloud_view_optical_depth": 0.2629670293290218
+    },
+    {
+      "case": "broken-sun45",
+      "coupled_Y": 10183.501142485053,
+      "coupled_Y_standard_error": 23.090973968384766,
+      "fixed_clear_source_Y": 9956.593469761054,
+      "feedback_delta_Y": 226.90767272399899,
+      "feedback_delta_Y_standard_error": 31.823757317750033,
+      "feedback_fraction_of_fixed": 0.022789689406636435,
+      "feedback_z": 7.130134586510276,
+      "mixed_scattering_fraction": 0.4533536919268955,
+      "matched_production_expression_fractional_difference": -0.14957501321972133,
+      "matched_expression_vs_same_a2_source_fractional_difference": -0.11859798072180472,
+      "a2_fixed_source_fractional_difference": -0.013156438188157926,
+      "a2_clear_fractional_difference": -0.016373808792464528,
+      "cloud_view_optical_depth": 1.3065256713868219
+    },
+    {
+      "case": "oblique-sun45",
+      "coupled_Y": 9349.098768244125,
+      "coupled_Y_standard_error": 19.99658456474847,
+      "fixed_clear_source_Y": 9100.081642670066,
+      "feedback_delta_Y": 249.0171255740588,
+      "feedback_delta_Y_standard_error": 27.006665190698886,
+      "feedback_fraction_of_fixed": 0.027364273789195852,
+      "feedback_z": 9.22058032029147,
+      "mixed_scattering_fraction": 0.0898248188965652,
+      "matched_production_expression_fractional_difference": -0.02930659048656692,
+      "matched_expression_vs_same_a2_source_fractional_difference": 0.008828458060625932,
+      "a2_fixed_source_fractional_difference": -0.011471453081474903,
+      "a2_clear_fractional_difference": -0.013970661458676092,
+      "cloud_view_optical_depth": 0.030648470719201626
+    },
+    {
+      "case": "dense-sun6",
+      "coupled_Y": 1660.541961203515,
+      "coupled_Y_standard_error": 7.528780626524891,
+      "fixed_clear_source_Y": 1707.7317384049234,
+      "feedback_delta_Y": -47.18977720140833,
+      "feedback_delta_Y_standard_error": 10.647020528499967,
+      "feedback_fraction_of_fixed": -0.02763301526824413,
+      "feedback_z": -4.432204960541838,
+      "mixed_scattering_fraction": 0.8716440913202073,
+      "matched_production_expression_fractional_difference": -0.3927579550413439,
+      "matched_expression_vs_same_a2_source_fractional_difference": -0.3865807944009678,
+      "a2_fixed_source_fractional_difference": -0.03742479715453295,
+      "a2_clear_fractional_difference": -0.02130427971897053,
+      "cloud_view_optical_depth": 5.092633114773093
+    },
+    {
+      "case": "zenith-sun6",
+      "coupled_Y": 2113.7004387617653,
+      "coupled_Y_standard_error": 7.130231252710952,
+      "fixed_clear_source_Y": 2110.7562405693784,
+      "feedback_delta_Y": 2.9441981923869207,
+      "feedback_delta_Y_standard_error": 10.063464210896083,
+      "feedback_fraction_of_fixed": 0.0013948546666822696,
+      "feedback_z": 0.29256309067002284,
+      "mixed_scattering_fraction": 0.23271547523672365,
+      "matched_production_expression_fractional_difference": -0.12641408947677335,
+      "matched_expression_vs_same_a2_source_fractional_difference": -0.10138786536962541,
+      "a2_fixed_source_fractional_difference": -0.02649385402846749,
+      "a2_clear_fractional_difference": -0.029666541132819413,
+      "cloud_view_optical_depth": 0.2400082594288561
+    }
+  ],
+  "clear_audit": [
+    {
+      "wavelength_nm": 400,
+      "saved_a2": 0.12099442859808154,
+      "mc_mean": 0.13068205566923474,
+      "mc_se": 0.00015216321335345762,
+      "mc_samples": 2097152,
+      "refined": 0.12954812902787916,
+      "relative_mc_minus_saved": 0.08006672028952251,
+      "refined_fractional_difference": -0.008676988095639031
+    },
+    {
+      "wavelength_nm": 460,
+      "saved_a2": 0.15318153695683903,
+      "mc_mean": 0.15949133817898636,
+      "mc_se": 0.0001538164216674263,
+      "mc_samples": 2097152,
+      "refined": 0.15875919624607457,
+      "relative_mc_minus_saved": 0.041191656302059454,
+      "refined_fractional_difference": -0.004590480845362032
+    },
+    {
+      "wavelength_nm": 580,
+      "saved_a2": 0.08701149411695368,
+      "mc_mean": 0.08803463138146173,
+      "mc_se": 9.522087057335116e-05,
+      "mc_samples": 2097152,
+      "refined": null,
+      "relative_mc_minus_saved": 0.011758644934114463,
+      "refined_fractional_difference": null
+    }
+  ],
+  "medium_refinement": {
+    "quality": "medium",
+    "grid": {
+      "nr": 40,
+      "nmu": 24,
+      "nphi": 24,
+      "nshell": 128,
+      "npath": 384
+    },
+    "lam": [
+      400.0,
+      460.0
+    ],
+    "zenith": [
+      0.12854314186734228,
+      0.15824698936964945
+    ],
+    "orders": 65,
+    "history": [
+      1.0,
+      0.41147836474474914,
+      0.23461215250208506,
+      0.15469069888584067,
+      0.11694724865812932,
+      0.09251679133621565,
+      0.07508412253776726,
+      0.06216280001330411,
+      0.05217139450569681,
+      0.0434280195561067,
+      0.03620896199385463,
+      0.030357975604558798,
+      0.025567227551579464,
+      0.021611808244414717,
+      0.01832365790149834,
+      0.01557473058572772,
+      0.013271754275423861,
+      0.011329540753831874,
+      0.009684482361543222,
+      0.008287712651952949,
+      0.007099286747495777,
+      0.006086327152442747,
+      0.005221610608192343,
+      0.004482477547833376,
+      0.0038499808919090334,
+      0.0033082147510737174,
+      0.002843780002213687,
+      0.0024453551685630296,
+      0.0021033491606068785,
+      0.001809618270016647,
+      0.0015572340499960611,
+      0.0013402918325999486,
+      0.0011537519489363923,
+      0.0009933074551158425,
+      0.0008552734822274519,
+      0.0007364943338326672,
+      0.0006342652292992555,
+      0.0005462661935440125,
+      0.00047050606561348967,
+      0.0004052749710932194,
+      0.0003491038996729478,
+      0.00030073026657039746,
+      0.00025906852793979506,
+      0.00022318507573961273,
+      0.00019227676435803107,
+      0.0001656525254084726,
+      0.0001427176130189967,
+      0.00012296009316761444,
+      0.00010593924992701654,
+      9.12756310658741e-05,
+      7.864249705334661e-05,
+      6.77584725267585e-05,
+      5.838122883704053e-05,
+      5.030205129757112e-05,
+      4.334116597617852e-05,
+      3.73437188998946e-05,
+      3.2176315892792005e-05,
+      2.772404435733828e-05,
+      2.3887909487364208e-05,
+      2.0582626956771334e-05,
+      1.7734722306328708e-05,
+      1.5280894256314082e-05,
+      1.3166605178316675e-05,
+      1.134486711147223e-05,
+      9.775196130714997e-06
+    ],
+    "elapsed_s": 170.404015914
+  },
+  "dense_refinement": {
+    "quality": "dense",
+    "grid": {
+      "nr": 64,
+      "nmu": 32,
+      "nphi": 32,
+      "nshell": 192,
+      "npath": 512
+    },
+    "lam": [
+      400.0,
+      460.0
+    ],
+    "zenith": [
+      0.12954812902787916,
+      0.15875919624607457
+    ],
+    "orders": 66,
+    "history": [
+      1.0,
+      0.41225683556012743,
+      0.23497410326487753,
+      0.155386679125686,
+      0.11734482351285387,
+      0.09289356984216923,
+      0.07560707395558115,
+      0.06261579564204252,
+      0.052503946263852914,
+      0.0437299184222157,
+      0.03650892525537989,
+      0.030647352457348315,
+      0.02584137387651894,
+      0.021886085164983093,
+      0.018591202539074633,
+      0.01582861034846852,
+      0.013502555275974753,
+      0.011537104076625566,
+      0.009871367839036927,
+      0.008454722904843318,
+      0.007247354486869363,
+      0.006218006270245489,
+      0.005338968006065623,
+      0.004587221348327343,
+      0.0039435492478628415,
+      0.003391838061553562,
+      0.0029185250528985184,
+      0.0025121569024798003,
+      0.0021630339265718682,
+      0.0018629211581780644,
+      0.0016048120934034475,
+      0.001382734293049095,
+      0.0011915885246769136,
+      0.001027014988328859,
+      0.0008852815663413216,
+      0.0007631900985945674,
+      0.0006579974974534734,
+      0.0005673491450521165,
+      0.0004892225054492788,
+      0.00042187926917520454,
+      0.0003638246526131667,
+      0.00031377271796179535,
+      0.00027061677503047556,
+      0.0002334040842707831,
+      0.0002013142091840823,
+      0.00017364047165573308,
+      0.00014977405054798277,
+      0.00012919033568901326,
+      0.00011143720908410197,
+      9.612497500041755e-05,
+      8.291770232848066e-05,
+      7.152577772980771e-05,
+      6.169949769086364e-05,
+      5.3223552647523266e-05,
+      4.5912277578340904e-05,
+      3.9605561507845873e-05,
+      3.416532372210322e-05,
+      2.9472477598692923e-05,
+      2.5424314141623595e-05,
+      2.1932246879968535e-05,
+      1.8919867981094405e-05,
+      1.632127245029875e-05,
+      1.407961331106306e-05,
+      1.2145855829956585e-05,
+      1.047770329110868e-05,
+      9.038670642065685e-06
+    ],
+    "elapsed_s": 1024.645393476
+  },
+  "benchmark_samples": 32768,
+  "main_wavelength_histories": 50331648,
+  "browser_validation": "Recorded separately in validation/a3/lab-browser.json after exact-build rendering.",
+  "limitations": [
+    "Monte Carlo standard errors quantify sampling, not physical-model error.",
+    "The finite cloud grid/crop remains a specified benchmark input.",
+    "A2 blue-band all-order disagreement is retained; no gain or color correction is applied.",
+    "Matched production-expression comparison uses spectral shared-profile inputs and black ground. It is not the unchanged production renderer output."
+  ]
+}

@@ -1,0 +1,176 @@
+{
+  "schema": "open-moon-a3-transport-tests/1",
+  "checks": [
+    {
+      "name": "molecular and ozone majorants bound all profile knots and 10001 uniform probes",
+      "passed": true,
+      "max_air_fraction": 0.9995619908099327
+    },
+    {
+      "name": "Rayleigh phase integrates to unity and has second moment 0.4",
+      "passed": true,
+      "integral": 1.000000000000003,
+      "second_moment": 0.40000000000000707
+    },
+    {
+      "name": "Rayleigh sampler has correct first/second moments and unit directions",
+      "passed": true,
+      "mean": -0.0008024378916393087,
+      "second_moment": 0.4008535808648863,
+      "max_norm_error": 4.440892098500626e-16
+    },
+    {
+      "name": "spherical top and solid-ground intersections",
+      "passed": true,
+      "top_distance": 599998.0,
+      "ground_distance": 2.0
+    },
+    {
+      "name": "vacuum radiance",
+      "passed": true,
+      "mean": 0.0,
+      "standard_error": 0.0,
+      "expected": 0.0,
+      "unresolved": 0
+    },
+    {
+      "name": "vacuum constant boundary",
+      "passed": true,
+      "mean": 1.0,
+      "standard_error": 0.0,
+      "expected": 1.0,
+      "unresolved": 0
+    },
+    {
+      "name": "pure absorption Beer transmission",
+      "passed": true,
+      "mean": 0.486114501953125,
+      "standard_error": 0.0019523865977527646,
+      "expected": 0.4867522559599717,
+      "unresolved": 0
+    },
+    {
+      "name": "mixed homogeneous first-order",
+      "passed": true,
+      "mean": 0.5357363019738772,
+      "standard_error": 0.003943050650372679,
+      "expected": 0.5355987145505496,
+      "unresolved": 0
+    },
+    {
+      "name": "conservative mixed medium with isotropic boundaries",
+      "passed": true,
+      "mean": 1.0000162591691795,
+      "standard_error": 3.0888715513947855e-05,
+      "expected": 1.0,
+      "unresolved": 0
+    },
+    {
+      "name": "cell-exact frozen trilinear cloud line integral",
+      "passed": true,
+      "computed": 8.660254037844386,
+      "expected": 8.660254037844386
+    },
+    {
+      "name": "cloud depth additivity and reversal",
+      "passed": true,
+      "total": 0.3544353395711426,
+      "split": 0.3544353395711426,
+      "reverse": 0.3544353395711425
+    },
+    {
+      "name": "zero-cloud full MC reproduces A2 at 400 nm",
+      "passed": false,
+      "mean": 0.12972758346481217,
+      "standard_error": 0.0008986756143152814,
+      "A2": 0.12099442859808154,
+      "relative_difference": 0.07217815702688558,
+      "unresolved": 0
+    },
+    {
+      "name": "zero-cloud full MC reproduces A2 at 460 nm",
+      "passed": false,
+      "mean": 0.16166352944682436,
+      "standard_error": 0.0008711820472197979,
+      "A2": 0.15318153695683903,
+      "relative_difference": 0.05537215945532156,
+      "unresolved": 0
+    },
+    {
+      "name": "zero-cloud full MC reproduces A2 at 520 nm",
+      "passed": true,
+      "mean": 0.1212162084723072,
+      "standard_error": 0.0006723509497895474,
+      "A2": 0.11912809185947251,
+      "relative_difference": 0.017528330893588885,
+      "unresolved": 0
+    },
+    {
+      "name": "zero-cloud full MC reproduces A2 at 580 nm",
+      "passed": true,
+      "mean": 0.08810123594453702,
+      "standard_error": 0.0005394094891257411,
+      "A2": 0.08701149411695368,
+      "relative_difference": 0.012524113493771286,
+      "unresolved": 0
+    },
+    {
+      "name": "zero-cloud full MC reproduces A2 at 640 nm",
+      "passed": true,
+      "mean": 0.059597182123613125,
+      "standard_error": 0.000405406758283735,
+      "A2": 0.058898550935176916,
+      "relative_difference": 0.011861602320320493,
+      "unresolved": 0
+    },
+    {
+      "name": "zero-cloud full MC reproduces A2 at 700 nm",
+      "passed": true,
+      "mean": 0.03940032744910036,
+      "standard_error": 0.0003050395290551377,
+      "A2": 0.039215505485626224,
+      "relative_difference": 0.004712981795985744,
+      "unresolved": 0
+    },
+    {
+      "name": "independent single-scattering quadrature refinement",
+      "passed": true,
+      "spectral_L1": 8.685907712482559e-05
+    },
+    {
+      "name": "coupled first-order MC agrees with deterministic transfer at 460 nm",
+      "passed": true,
+      "mean": 0.032588735785189143,
+      "standard_error": 0.000207466946636851,
+      "deterministic": 0.032477133022046696,
+      "unresolved": 0
+    },
+    {
+      "name": "coupled first-order MC agrees with deterministic transfer at 580 nm",
+      "passed": true,
+      "mean": 0.04606690822412858,
+      "standard_error": 0.0002374047853843133,
+      "deterministic": 0.046196177933218535,
+      "unresolved": 0
+    },
+    {
+      "name": "coupled first-order MC agrees with deterministic transfer at 700 nm",
+      "passed": true,
+      "mean": 0.034813074479045414,
+      "standard_error": 0.0001912824509276048,
+      "deterministic": 0.03461788215598777,
+      "unresolved": 0
+    },
+    {
+      "name": "zero-gas reduction agrees with inherited cloud-only MC",
+      "passed": true,
+      "mean": 0.03358082935976379,
+      "standard_error": 0.0002808077709696051,
+      "inherited_mean": 0.033894654705987855,
+      "inherited_standard_error": 0.0002846151215901067,
+      "unresolved": 0
+    }
+  ],
+  "passed": false,
+  "elapsed_s": 19.521087867999995
+}

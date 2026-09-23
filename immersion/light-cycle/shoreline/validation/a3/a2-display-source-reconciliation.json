@@ -1,0 +1,23 @@
+{
+  "source_before_sha256": "9e39a6110034dac527f4c941e328f7c681004a639b97efe6675adbd360f58c7b",
+  "source_after_sha256": "413663e1006c22eec85b73ee5df6ee0227cec560cde6a2ca141117715c04880a",
+  "delivered_fixed_html_sha256": "c1cd5233e0ca76bb26bf26714df708e7ab6fab5c9732438c4fb995fd7604b0c3",
+  "changes": [
+    "Persist previously delivered display scale 10000 instead of 900 in source.",
+    "Persist pixel backing-size fix for high-DPI sky canvas."
+  ],
+  "source_of_fix": "Exact final script of Open_Moon_A2_Accuracy_Lab_fixed.html supplied in this conversation.",
+  "matching_payload_keys": [
+    "sky",
+    "fine",
+    "cloud",
+    "captures"
+  ],
+  "differing_payload_keys": [
+    "validation",
+    "validationSha"
+  ],
+  "rebuilt_html_sha256": "255e0618e2fb56371df4ca7d22022e3311546b6cd4d91b22dfbf53b728ab640f",
+  "template_after_sha256": "652b55da1e6b0be8d420980bcff916d57593bb54dc0f50b8f89c4f2b0aeeea2d",
+  "note": "The archive's historical validation object and its hash are retained. Numerical sky/fine/cloud/capture payloads and the corrected display script/template match the delivered fixed HTML; whole-document hashes differ because validation metadata differs."
+}

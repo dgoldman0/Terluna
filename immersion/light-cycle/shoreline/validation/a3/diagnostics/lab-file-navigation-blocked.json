@@ -1,0 +1,15 @@
+{
+  "schema": "open-moon-a3-browser/1",
+  "html_sha256": "ca31923bfe0e028bbd9b041d0ceb464adf4154cfe2a4279c9efc9da274f641bd",
+  "a2_html_sha256": "255e0618e2fb56371df4ca7d22022e3311546b6cd4d91b22dfbf53b728ab640f",
+  "errors": [
+    "Error: Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at file:///mnt/data/a3_work/immersion/light-cycle/shoreline/Open_Moon_A3_Accuracy_Lab.html\nCall log:\n  - navigating to \"file:///mnt/data/a3_work/immersion/light-cycle/shoreline/Open_Moon_A3_Accuracy_Lab.html\", waiting until \"load\"\n"
+  ],
+  "console_errors": [],
+  "external_requests": [],
+  "states_checked": 0,
+  "layouts": [],
+  "a2_pixel_checks": [],
+  "passed": false,
+  "elapsed_s": 0.8190198729998883
+}

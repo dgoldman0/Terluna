@@ -1,0 +1,42 @@
+{
+  "schema": "open-moon-a3-browser/1",
+  "html_sha256": "6696947e44f9cb5f37a09ef16d80db6e1a0de45096513d62174d4540f1f7da1a",
+  "a2_html_sha256": "255e0618e2fb56371df4ca7d22022e3311546b6cd4d91b22dfbf53b728ab640f",
+  "errors": [],
+  "console_errors": [],
+  "external_requests": [],
+  "states_checked": 104,
+  "a2_pixel_checks": [
+    {
+      "layout": "desktop",
+      "canvas_id": "sky",
+      "width": 1186,
+      "height": 390,
+      "css_width": 1186,
+      "opaque_pixels": 462540,
+      "luminance_min": 182.91240000000002,
+      "luminance_max": 213.8448,
+      "luminance_range": 30.932399999999973,
+      "white_fraction": 0,
+      "chromatic_pixels": 276098
+    },
+    {
+      "layout": "mobile",
+      "canvas_id": "sky",
+      "width": 664,
+      "height": 540,
+      "css_width": 332,
+      "opaque_pixels": 358560,
+      "luminance_min": 182.91240000000002,
+      "luminance_max": 213.8448,
+      "luminance_range": 30.932399999999973,
+      "white_fraction": 0,
+      "chromatic_pixels": 213949
+    }
+  ],
+  "load_method": "Exact HTML bytes inserted with set_content; file navigation is blocked by browser policy. No policy settings changed.",
+  "passed": true,
+  "exportEvidence_sha256": "3ef8f4aabccc9f3876d2ad2bd34a8fd0abf2a7b98f85787bb0bba111a008537a",
+  "exportValidation_sha256": "8c23fa9a500233bfeb553a1ba78765320f34374f38d6537cd3a0036d1d78ba8c",
+  "elapsed_s": 26.422832366999955
+}

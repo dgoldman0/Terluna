@@ -1,0 +1,113 @@
+{
+  "schema": "open-moon-a3-clear-diagnosis/1",
+  "profile_sha256": "717deba2cb6f41afc291f1addb13b19c3ebbb6d98cc6dc21354ee02e567d86ca",
+  "source_sha256": {
+    "tools/a3/coupled_transport.py": "412ff865356fc9ba0bda42cbe7ec3ebb4e9552e47bd72bdd1309262640a0dd1c",
+    "tools/a1/reference_optics.py": "700b4b7c5029cc68274c3fd5b890ceb8588dd6a0cfe0b22f39804ded96822d4c",
+    "tools/a1/cloud_reference.py": "2370c70d9648a37b13047568290f1a9f820db56fb4de500c161a306155889fd9",
+    "tools/a2/molecular_multiple_scattering.py": "53d4f717e83ba1892859b08a53e5880e8d01006809cdd6b224bcd57903f701e4",
+    "data/a1/spectral-inputs.json": "59f47ce7147e24b3b5c57d3f4799a91dd2000d6d9bae60d6185fc952fbff2530"
+  },
+  "results": [
+    {
+      "wavelength_nm": 400.0,
+      "samples": 1048576,
+      "seed": 11007,
+      "mode": 1,
+      "roulette": 0.95,
+      "mean": 0.1304525239592067,
+      "SE": 0.00022208352980431986,
+      "A2": 0.12099442859808154,
+      "unresolved": 0
+    },
+    {
+      "wavelength_nm": 400.0,
+      "samples": 1048576,
+      "seed": 88331,
+      "mode": 1,
+      "roulette": 0.99,
+      "mean": 0.13091158737926276,
+      "SE": 0.00020807085279263225,
+      "A2": 0.12099442859808154,
+      "unresolved": 0
+    },
+    {
+      "wavelength_nm": 400.0,
+      "samples": 1048576,
+      "seed": 33215,
+      "mode": 2,
+      "roulette": 0.95,
+      "mean": 0.12086922076327213,
+      "SE": 6.670214119779814e-05,
+      "A2": 0.12099442859808154,
+      "unresolved": 0
+    },
+    {
+      "wavelength_nm": 460.0,
+      "samples": 1048576,
+      "seed": 11013,
+      "mode": 1,
+      "roulette": 0.95,
+      "mean": 0.1592524235609626,
+      "SE": 0.0002180724784606305,
+      "A2": 0.15318153695683903,
+      "unresolved": 0
+    },
+    {
+      "wavelength_nm": 460.0,
+      "samples": 1048576,
+      "seed": 88337,
+      "mode": 1,
+      "roulette": 0.99,
+      "mean": 0.1597302527970101,
+      "SE": 0.00021698470092687132,
+      "A2": 0.15318153695683903,
+      "unresolved": 0
+    },
+    {
+      "wavelength_nm": 460.0,
+      "samples": 1048576,
+      "seed": 33221,
+      "mode": 2,
+      "roulette": 0.95,
+      "mean": 0.15307930139686213,
+      "SE": 9.838312444172203e-05,
+      "A2": 0.15318153695683903,
+      "unresolved": 0
+    },
+    {
+      "wavelength_nm": 580.0,
+      "samples": 1048576,
+      "seed": 11025,
+      "mode": 1,
+      "roulette": 0.95,
+      "mean": 0.08794065921485703,
+      "SE": 0.00013451780588954034,
+      "A2": 0.08701149411695368,
+      "unresolved": 0
+    },
+    {
+      "wavelength_nm": 580.0,
+      "samples": 1048576,
+      "seed": 88349,
+      "mode": 1,
+      "roulette": 0.99,
+      "mean": 0.08812860354806644,
+      "SE": 0.00013480733166134368,
+      "A2": 0.08701149411695368,
+      "unresolved": 0
+    },
+    {
+      "wavelength_nm": 580.0,
+      "samples": 1048576,
+      "seed": 33233,
+      "mode": 2,
+      "roulette": 0.95,
+      "mean": 0.08723455312845482,
+      "SE": 9.67879578919454e-05,
+      "A2": 0.08701149411695368,
+      "unresolved": 0
+    }
+  ],
+  "elapsed_s": 19.000498605000075
+}

@@ -1,0 +1,14 @@
+{"name": "clear-source continuation reduces exactly to full transport with zero cloud", "passed": true}
+{"name": "clear-source continuation reduces exactly to full transport with zero gas", "passed": true}
+{"name": "independent-seed batches reproduce exactly across serial and threaded dispatch", "passed": true}
+{"name": "A2 moment-source adapter preserves isotropic radiance including pole cases", "passed": true, "values": [1.9999999999999998, 1.9999999999999998, 1.9999999999999998, 2.0], "expected": 2.0}
+{"name": "A2 source adapter recovers saved clear field at 400 nm", "passed": true, "mean": 0.12096575313584003, "standard_error": 0.00018940106768642977, "A2": 0.12099442859808154}
+{"name": "A2 source adapter recovers saved clear field at 460 nm", "passed": true, "mean": 0.1535350466269491, "standard_error": 0.0002782993951080552, "A2": 0.15318153695683903}
+{"name": "A2 source adapter recovers saved clear field at 580 nm", "passed": true, "mean": 0.08692644842907914, "standard_error": 0.0002731990610422044, "A2": 0.08701149411695368}
+{"name": "A2 source adapter recovers saved clear field at 700 nm", "passed": true, "mean": 0.03931967019650174, "standard_error": 0.0001828352790282499, "A2": 0.039215505485626224}
+{"name": "combined transmission equals independent gas times cloud attenuation ray 0, 400 nm", "passed": true, "mean": 0.03373157174171005, "standard_error": 0.00028609037681762226, "expected": 0.03398484259873695, "unresolved": 0}
+{"name": "combined transmission equals independent gas times cloud attenuation ray 0, 580 nm", "passed": true, "mean": 0.371747147911225, "standard_error": 0.000885882465756143, "expected": 0.373001403586888, "unresolved": 0}
+{"name": "combined transmission equals independent gas times cloud attenuation ray 0, 700 nm", "passed": true, "mean": 0.5585660066939611, "standard_error": 0.0008530781195713108, "expected": 0.5593422041280178, "unresolved": 0}
+{"name": "combined transmission equals independent gas times cloud attenuation ray 1, 400 nm", "passed": true, "mean": 0.03808277557888485, "standard_error": 0.0003370563468874858, "expected": 0.03817992148199066, "unresolved": 0}
+{"name": "combined transmission equals independent gas times cloud attenuation ray 1, 580 nm", "passed": true, "mean": 0.4615732559020211, "standard_error": 0.0011027237409551886, "expected": 0.46034667363509535, "unresolved": 0}
+{"name": "combined transmission equals independent gas times cloud attenuation ray 1, 700 nm", "passed": true, "mean": 0.7003780473607951, "standard_error": 0.0010572631033459478, "expected": 0.701413767706737, "unresolved": 0}

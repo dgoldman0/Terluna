@@ -1,0 +1,1955 @@
+{
+  "schema": "open-moon-a3-browser/1",
+  "html_sha256": "6696947e44f9cb5f37a09ef16d80db6e1a0de45096513d62174d4540f1f7da1a",
+  "a2_html_sha256": "255e0618e2fb56371df4ca7d22022e3311546b6cd4d91b22dfbf53b728ab640f",
+  "errors": [],
+  "console_errors": [],
+  "external_requests": [],
+  "states_checked": 104,
+  "layouts": [
+    {
+      "name": "desktop",
+      "device_pixel_ratio": 1,
+      "pixel_checks": [
+        {
+          "case": 0,
+          "comparison": "coupling",
+          "spectrum": {
+            "width": 1180,
+            "height": 340,
+            "css_width": 1180,
+            "opaque_pixels": 16104,
+            "luminance_min": 64.8952,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 138.07559999999995,
+            "white_fraction": 0,
+            "chromatic_pixels": 15817
+          },
+          "density": {
+            "width": 559,
+            "height": 180,
+            "css_width": 559,
+            "opaque_pixels": 100620,
+            "luminance_min": 0,
+            "luminance_max": 192.04879999999997,
+            "luminance_range": 192.04879999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 2984
+          }
+        },
+        {
+          "case": 0,
+          "comparison": "closure",
+          "spectrum": {
+            "width": 1180,
+            "height": 340,
+            "css_width": 1180,
+            "opaque_pixels": 15839,
+            "luminance_min": 66.17999999999999,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 136.7908,
+            "white_fraction": 0,
+            "chromatic_pixels": 15549
+          },
+          "density": {
+            "width": 559,
+            "height": 180,
+            "css_width": 559,
+            "opaque_pixels": 100620,
+            "luminance_min": 0,
+            "luminance_max": 192.04879999999997,
+            "luminance_range": 192.04879999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 2984
+          }
+        },
+        {
+          "case": 0,
+          "comparison": "orders",
+          "spectrum": {
+            "width": 1180,
+            "height": 340,
+            "css_width": 1180,
+            "opaque_pixels": 13603,
+            "luminance_min": 64.8952,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 138.07559999999995,
+            "white_fraction": 0,
+            "chromatic_pixels": 13600
+          },
+          "density": {
+            "width": 559,
+            "height": 180,
+            "css_width": 559,
+            "opaque_pixels": 100620,
+            "luminance_min": 0,
+            "luminance_max": 192.04879999999997,
+            "luminance_range": 192.04879999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 2984
+          }
+        },
+        {
+          "case": 1,
+          "comparison": "coupling",
+          "spectrum": {
+            "width": 1180,
+            "height": 340,
+            "css_width": 1180,
+            "opaque_pixels": 15634,
+            "luminance_min": 65.4648,
+            "luminance_max": 203.91799999999998,
+            "luminance_range": 138.45319999999998,
+            "white_fraction": 0,
+            "chromatic_pixels": 15353
+          },
+          "density": {
+            "width": 559,
+            "height": 180,
+            "css_width": 559,
+            "opaque_pixels": 100620,
+            "luminance_min": 0,
+            "luminance_max": 192.04879999999997,
+            "luminance_range": 192.04879999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 2984
+          }
+        },
+        {
+          "case": 1,
+          "comparison": "closure",
+          "spectrum": {
+            "width": 1180,
+            "height": 340,
+            "css_width": 1180,
+            "opaque_pixels": 15696,
+            "luminance_min": 66.17999999999999,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 136.7908,
+            "white_fraction": 0,
+            "chromatic_pixels": 15479
+          },
+          "density": {
+            "width": 559,
+            "height": 180,
+            "css_width": 559,
+            "opaque_pixels": 100620,
+            "luminance_min": 0,
+            "luminance_max": 192.04879999999997,
+            "luminance_range": 192.04879999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 2984
+          }
+        },
+        {
+          "case": 1,
+          "comparison": "orders",
+          "spectrum": {
+            "width": 1180,
+            "height": 340,
+            "css_width": 1180,
+            "opaque_pixels": 13757,
+            "luminance_min": 66.17999999999999,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 136.7908,
+            "white_fraction": 0,
+            "chromatic_pixels": 13754
+          },
+          "density": {
+            "width": 559,
+            "height": 180,
+            "css_width": 559,
+            "opaque_pixels": 100620,
+            "luminance_min": 0,
+            "luminance_max": 192.04879999999997,
+            "luminance_range": 192.04879999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 2984
+          }
+        },
+        {
+          "case": 2,
+          "comparison": "coupling",
+          "spectrum": {
+            "width": 1180,
+            "height": 340,
+            "css_width": 1180,
+            "opaque_pixels": 12568,
+            "luminance_min": 66.17999999999999,
+            "luminance_max": 202.11520000000002,
+            "luminance_range": 135.9352,
+            "white_fraction": 0,
+            "chromatic_pixels": 12479
+          },
+          "density": {
+            "width": 559,
+            "height": 180,
+            "css_width": 559,
+            "opaque_pixels": 100620,
+            "luminance_min": 0,
+            "luminance_max": 192.04879999999997,
+            "luminance_range": 192.04879999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 2984
+          }
+        },
+        {
+          "case": 2,
+          "comparison": "closure",
+          "spectrum": {
+            "width": 1180,
+            "height": 340,
+            "css_width": 1180,
+            "opaque_pixels": 12603,
+            "luminance_min": 66.17999999999999,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 136.7908,
+            "white_fraction": 0,
+            "chromatic_pixels": 12385
+          },
+          "density": {
+            "width": 559,
+            "height": 180,
+            "css_width": 559,
+            "opaque_pixels": 100620,
+            "luminance_min": 0,
+            "luminance_max": 192.04879999999997,
+            "luminance_range": 192.04879999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 2984
+          }
+        },
+        {
+          "case": 2,
+          "comparison": "orders",
+          "spectrum": {
+            "width": 1180,
+            "height": 340,
+            "css_width": 1180,
+            "opaque_pixels": 12951,
+            "luminance_min": 66.17999999999999,
+            "luminance_max": 202.11520000000002,
+            "luminance_range": 135.9352,
+            "white_fraction": 0,
+            "chromatic_pixels": 12948
+          },
+          "density": {
+            "width": 559,
+            "height": 180,
+            "css_width": 559,
+            "opaque_pixels": 100620,
+            "luminance_min": 0,
+            "luminance_max": 192.04879999999997,
+            "luminance_range": 192.04879999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 2984
+          }
+        },
+        {
+          "case": 3,
+          "comparison": "coupling",
+          "spectrum": {
+            "width": 1180,
+            "height": 340,
+            "css_width": 1180,
+            "opaque_pixels": 15549,
+            "luminance_min": 66.17999999999999,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 136.7908,
+            "white_fraction": 0,
+            "chromatic_pixels": 15338
+          },
+          "density": {
+            "width": 559,
+            "height": 180,
+            "css_width": 559,
+            "opaque_pixels": 100620,
+            "luminance_min": 0,
+            "luminance_max": 202.83619999999996,
+            "luminance_range": 202.83619999999996,
+            "white_fraction": 0,
+            "chromatic_pixels": 3210
+          }
+        },
+        {
+          "case": 3,
+          "comparison": "closure",
+          "spectrum": {
+            "width": 1180,
+            "height": 340,
+            "css_width": 1180,
+            "opaque_pixels": 14862,
+            "luminance_min": 66.17999999999999,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 136.7908,
+            "white_fraction": 0,
+            "chromatic_pixels": 14639
+          },
+          "density": {
+            "width": 559,
+            "height": 180,
+            "css_width": 559,
+            "opaque_pixels": 100620,
+            "luminance_min": 0,
+            "luminance_max": 202.83619999999996,
+            "luminance_range": 202.83619999999996,
+            "white_fraction": 0,
+            "chromatic_pixels": 3210
+          }
+        },
+        {
+          "case": 3,
+          "comparison": "orders",
+          "spectrum": {
+            "width": 1180,
+            "height": 340,
+            "css_width": 1180,
+            "opaque_pixels": 13432,
+            "luminance_min": 66.17999999999999,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 136.7908,
+            "white_fraction": 0,
+            "chromatic_pixels": 13429
+          },
+          "density": {
+            "width": 559,
+            "height": 180,
+            "css_width": 559,
+            "opaque_pixels": 100620,
+            "luminance_min": 0,
+            "luminance_max": 202.83619999999996,
+            "luminance_range": 202.83619999999996,
+            "white_fraction": 0,
+            "chromatic_pixels": 3210
+          }
+        },
+        {
+          "case": 4,
+          "comparison": "coupling",
+          "spectrum": {
+            "width": 1180,
+            "height": 340,
+            "css_width": 1180,
+            "opaque_pixels": 15536,
+            "luminance_min": 66.17999999999999,
+            "luminance_max": 203.56299999999996,
+            "luminance_range": 137.38299999999998,
+            "white_fraction": 0,
+            "chromatic_pixels": 15209
+          },
+          "density": {
+            "width": 559,
+            "height": 180,
+            "css_width": 559,
+            "opaque_pixels": 100620,
+            "luminance_min": 0,
+            "luminance_max": 202.83619999999996,
+            "luminance_range": 202.83619999999996,
+            "white_fraction": 0,
+            "chromatic_pixels": 3210
+          }
+        },
+        {
+          "case": 4,
+          "comparison": "closure",
+          "spectrum": {
+            "width": 1180,
+            "height": 340,
+            "css_width": 1180,
+            "opaque_pixels": 15418,
+            "luminance_min": 66.17999999999999,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 136.7908,
+            "white_fraction": 0,
+            "chromatic_pixels": 15177
+          },
+          "density": {
+            "width": 559,
+            "height": 180,
+            "css_width": 559,
+            "opaque_pixels": 100620,
+            "luminance_min": 0,
+            "luminance_max": 202.83619999999996,
+            "luminance_range": 202.83619999999996,
+            "white_fraction": 0,
+            "chromatic_pixels": 3210
+          }
+        },
+        {
+          "case": 4,
+          "comparison": "orders",
+          "spectrum": {
+            "width": 1180,
+            "height": 340,
+            "css_width": 1180,
+            "opaque_pixels": 13615,
+            "luminance_min": 66.17999999999999,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 136.7908,
+            "white_fraction": 0,
+            "chromatic_pixels": 13612
+          },
+          "density": {
+            "width": 559,
+            "height": 180,
+            "css_width": 559,
+            "opaque_pixels": 100620,
+            "luminance_min": 0,
+            "luminance_max": 202.83619999999996,
+            "luminance_range": 202.83619999999996,
+            "white_fraction": 0,
+            "chromatic_pixels": 3210
+          }
+        },
+        {
+          "case": 5,
+          "comparison": "coupling",
+          "spectrum": {
+            "width": 1180,
+            "height": 340,
+            "css_width": 1180,
+            "opaque_pixels": 15460,
+            "luminance_min": 66.17999999999999,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 136.7908,
+            "white_fraction": 0,
+            "chromatic_pixels": 15338
+          },
+          "density": {
+            "width": 559,
+            "height": 180,
+            "css_width": 559,
+            "opaque_pixels": 100620,
+            "luminance_min": 0,
+            "luminance_max": 202.83619999999996,
+            "luminance_range": 202.83619999999996,
+            "white_fraction": 0,
+            "chromatic_pixels": 3210
+          }
+        },
+        {
+          "case": 5,
+          "comparison": "closure",
+          "spectrum": {
+            "width": 1180,
+            "height": 340,
+            "css_width": 1180,
+            "opaque_pixels": 13633,
+            "luminance_min": 66.17999999999999,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 136.7908,
+            "white_fraction": 0,
+            "chromatic_pixels": 13447
+          },
+          "density": {
+            "width": 559,
+            "height": 180,
+            "css_width": 559,
+            "opaque_pixels": 100620,
+            "luminance_min": 0,
+            "luminance_max": 202.83619999999996,
+            "luminance_range": 202.83619999999996,
+            "white_fraction": 0,
+            "chromatic_pixels": 3210
+          }
+        },
+        {
+          "case": 5,
+          "comparison": "orders",
+          "spectrum": {
+            "width": 1180,
+            "height": 340,
+            "css_width": 1180,
+            "opaque_pixels": 13318,
+            "luminance_min": 66.17999999999999,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 136.7908,
+            "white_fraction": 0,
+            "chromatic_pixels": 13315
+          },
+          "density": {
+            "width": 559,
+            "height": 180,
+            "css_width": 559,
+            "opaque_pixels": 100620,
+            "luminance_min": 0,
+            "luminance_max": 202.83619999999996,
+            "luminance_range": 202.83619999999996,
+            "white_fraction": 0,
+            "chromatic_pixels": 3210
+          }
+        },
+        {
+          "case": 6,
+          "comparison": "coupling",
+          "spectrum": {
+            "width": 1180,
+            "height": 340,
+            "css_width": 1180,
+            "opaque_pixels": 16409,
+            "luminance_min": 66.17999999999999,
+            "luminance_max": 202.8082,
+            "luminance_range": 136.6282,
+            "white_fraction": 0,
+            "chromatic_pixels": 15839
+          },
+          "density": {
+            "width": 559,
+            "height": 180,
+            "css_width": 559,
+            "opaque_pixels": 100620,
+            "luminance_min": 0,
+            "luminance_max": 192.04879999999997,
+            "luminance_range": 192.04879999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 2984
+          }
+        },
+        {
+          "case": 6,
+          "comparison": "closure",
+          "spectrum": {
+            "width": 1180,
+            "height": 340,
+            "css_width": 1180,
+            "opaque_pixels": 15725,
+            "luminance_min": 66.17999999999999,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 136.7908,
+            "white_fraction": 0,
+            "chromatic_pixels": 15177
+          },
+          "density": {
+            "width": 559,
+            "height": 180,
+            "css_width": 559,
+            "opaque_pixels": 100620,
+            "luminance_min": 0,
+            "luminance_max": 192.04879999999997,
+            "luminance_range": 192.04879999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 2984
+          }
+        },
+        {
+          "case": 6,
+          "comparison": "orders",
+          "spectrum": {
+            "width": 1180,
+            "height": 340,
+            "css_width": 1180,
+            "opaque_pixels": 13448,
+            "luminance_min": 66.17999999999999,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 136.7908,
+            "white_fraction": 0,
+            "chromatic_pixels": 13442
+          },
+          "density": {
+            "width": 559,
+            "height": 180,
+            "css_width": 559,
+            "opaque_pixels": 100620,
+            "luminance_min": 0,
+            "luminance_max": 192.04879999999997,
+            "luminance_range": 192.04879999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 2984
+          }
+        },
+        {
+          "case": 7,
+          "comparison": "coupling",
+          "spectrum": {
+            "width": 1180,
+            "height": 340,
+            "css_width": 1180,
+            "opaque_pixels": 15375,
+            "luminance_min": 66.17999999999999,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 136.7908,
+            "white_fraction": 0,
+            "chromatic_pixels": 15209
+          },
+          "density": {
+            "width": 559,
+            "height": 180,
+            "css_width": 559,
+            "opaque_pixels": 100620,
+            "luminance_min": 0,
+            "luminance_max": 202.83619999999996,
+            "luminance_range": 202.83619999999996,
+            "white_fraction": 0,
+            "chromatic_pixels": 3210
+          }
+        },
+        {
+          "case": 7,
+          "comparison": "closure",
+          "spectrum": {
+            "width": 1180,
+            "height": 340,
+            "css_width": 1180,
+            "opaque_pixels": 15237,
+            "luminance_min": 66.17999999999999,
+            "luminance_max": 202.39999999999998,
+            "luminance_range": 136.21999999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 14904
+          },
+          "density": {
+            "width": 559,
+            "height": 180,
+            "css_width": 559,
+            "opaque_pixels": 100620,
+            "luminance_min": 0,
+            "luminance_max": 202.83619999999996,
+            "luminance_range": 202.83619999999996,
+            "white_fraction": 0,
+            "chromatic_pixels": 3210
+          }
+        },
+        {
+          "case": 7,
+          "comparison": "orders",
+          "spectrum": {
+            "width": 1180,
+            "height": 340,
+            "css_width": 1180,
+            "opaque_pixels": 13619,
+            "luminance_min": 66.17999999999999,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 136.7908,
+            "white_fraction": 0,
+            "chromatic_pixels": 13615
+          },
+          "density": {
+            "width": 559,
+            "height": 180,
+            "css_width": 559,
+            "opaque_pixels": 100620,
+            "luminance_min": 0,
+            "luminance_max": 202.83619999999996,
+            "luminance_range": 202.83619999999996,
+            "white_fraction": 0,
+            "chromatic_pixels": 3210
+          }
+        }
+      ],
+      "zero_EV_coupled_srgb_codes": [
+        184,
+        172,
+        162
+      ],
+      "exposure_changes_data": false,
+      "overflow_px": 0
+    },
+    {
+      "name": "desktop-hidpi",
+      "device_pixel_ratio": 2,
+      "pixel_checks": [
+        {
+          "case": 0,
+          "comparison": "coupling",
+          "spectrum": {
+            "width": 2360,
+            "height": 680,
+            "css_width": 1180,
+            "opaque_pixels": 62771,
+            "luminance_min": 66.17999999999999,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 136.7908,
+            "white_fraction": 0,
+            "chromatic_pixels": 62046
+          },
+          "density": {
+            "width": 1118,
+            "height": 360,
+            "css_width": 559,
+            "opaque_pixels": 402480,
+            "luminance_min": 0,
+            "luminance_max": 192.04879999999997,
+            "luminance_range": 192.04879999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 11832
+          }
+        },
+        {
+          "case": 0,
+          "comparison": "closure",
+          "spectrum": {
+            "width": 2360,
+            "height": 680,
+            "css_width": 1180,
+            "opaque_pixels": 61817,
+            "luminance_min": 66.3926,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 136.57819999999998,
+            "white_fraction": 0,
+            "chromatic_pixels": 61056
+          },
+          "density": {
+            "width": 1118,
+            "height": 360,
+            "css_width": 559,
+            "opaque_pixels": 402480,
+            "luminance_min": 0,
+            "luminance_max": 192.04879999999997,
+            "luminance_range": 192.04879999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 11832
+          }
+        },
+        {
+          "case": 0,
+          "comparison": "orders",
+          "spectrum": {
+            "width": 2360,
+            "height": 680,
+            "css_width": 1180,
+            "opaque_pixels": 53143,
+            "luminance_min": 66.17999999999999,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 136.7908,
+            "white_fraction": 0,
+            "chromatic_pixels": 53134
+          },
+          "density": {
+            "width": 1118,
+            "height": 360,
+            "css_width": 559,
+            "opaque_pixels": 402480,
+            "luminance_min": 0,
+            "luminance_max": 192.04879999999997,
+            "luminance_range": 192.04879999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 11832
+          }
+        },
+        {
+          "case": 1,
+          "comparison": "coupling",
+          "spectrum": {
+            "width": 2360,
+            "height": 680,
+            "css_width": 1180,
+            "opaque_pixels": 60699,
+            "luminance_min": 66.17999999999999,
+            "luminance_max": 203.91799999999998,
+            "luminance_range": 137.738,
+            "white_fraction": 0,
+            "chromatic_pixels": 60019
+          },
+          "density": {
+            "width": 1118,
+            "height": 360,
+            "css_width": 559,
+            "opaque_pixels": 402480,
+            "luminance_min": 0,
+            "luminance_max": 192.04879999999997,
+            "luminance_range": 192.04879999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 11832
+          }
+        },
+        {
+          "case": 1,
+          "comparison": "closure",
+          "spectrum": {
+            "width": 2360,
+            "height": 680,
+            "css_width": 1180,
+            "opaque_pixels": 61214,
+            "luminance_min": 66.4648,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 136.50599999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 60698
+          },
+          "density": {
+            "width": 1118,
+            "height": 360,
+            "css_width": 559,
+            "opaque_pixels": 402480,
+            "luminance_min": 0,
+            "luminance_max": 192.04879999999997,
+            "luminance_range": 192.04879999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 11832
+          }
+        },
+        {
+          "case": 1,
+          "comparison": "orders",
+          "spectrum": {
+            "width": 2360,
+            "height": 680,
+            "css_width": 1180,
+            "opaque_pixels": 53572,
+            "luminance_min": 66.17999999999999,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 136.7908,
+            "white_fraction": 0,
+            "chromatic_pixels": 53563
+          },
+          "density": {
+            "width": 1118,
+            "height": 360,
+            "css_width": 559,
+            "opaque_pixels": 402480,
+            "luminance_min": 0,
+            "luminance_max": 192.04879999999997,
+            "luminance_range": 192.04879999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 11832
+          }
+        },
+        {
+          "case": 2,
+          "comparison": "coupling",
+          "spectrum": {
+            "width": 2360,
+            "height": 680,
+            "css_width": 1180,
+            "opaque_pixels": 49432,
+            "luminance_min": 66.9674,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 136.00339999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 49239
+          },
+          "density": {
+            "width": 1118,
+            "height": 360,
+            "css_width": 559,
+            "opaque_pixels": 402480,
+            "luminance_min": 0,
+            "luminance_max": 192.04879999999997,
+            "luminance_range": 192.04879999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 11832
+          }
+        },
+        {
+          "case": 2,
+          "comparison": "closure",
+          "spectrum": {
+            "width": 2360,
+            "height": 680,
+            "css_width": 1180,
+            "opaque_pixels": 49234,
+            "luminance_min": 66.17999999999999,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 136.7908,
+            "white_fraction": 0,
+            "chromatic_pixels": 48802
+          },
+          "density": {
+            "width": 1118,
+            "height": 360,
+            "css_width": 559,
+            "opaque_pixels": 402480,
+            "luminance_min": 0,
+            "luminance_max": 192.04879999999997,
+            "luminance_range": 192.04879999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 11832
+          }
+        },
+        {
+          "case": 2,
+          "comparison": "orders",
+          "spectrum": {
+            "width": 2360,
+            "height": 680,
+            "css_width": 1180,
+            "opaque_pixels": 51159,
+            "luminance_min": 66.9674,
+            "luminance_max": 202.9748,
+            "luminance_range": 136.0074,
+            "white_fraction": 0,
+            "chromatic_pixels": 51150
+          },
+          "density": {
+            "width": 1118,
+            "height": 360,
+            "css_width": 559,
+            "opaque_pixels": 402480,
+            "luminance_min": 0,
+            "luminance_max": 192.04879999999997,
+            "luminance_range": 192.04879999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 11832
+          }
+        },
+        {
+          "case": 3,
+          "comparison": "coupling",
+          "spectrum": {
+            "width": 2360,
+            "height": 680,
+            "css_width": 1180,
+            "opaque_pixels": 60810,
+            "luminance_min": 66.17999999999999,
+            "luminance_max": 203.0208,
+            "luminance_range": 136.8408,
+            "white_fraction": 0,
+            "chromatic_pixels": 60390
+          },
+          "density": {
+            "width": 1118,
+            "height": 360,
+            "css_width": 559,
+            "opaque_pixels": 402480,
+            "luminance_min": 0,
+            "luminance_max": 202.83619999999996,
+            "luminance_range": 202.83619999999996,
+            "white_fraction": 0,
+            "chromatic_pixels": 12913
+          }
+        },
+        {
+          "case": 3,
+          "comparison": "closure",
+          "spectrum": {
+            "width": 2360,
+            "height": 680,
+            "css_width": 1180,
+            "opaque_pixels": 58179,
+            "luminance_min": 66.17999999999999,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 136.7908,
+            "white_fraction": 0,
+            "chromatic_pixels": 57706
+          },
+          "density": {
+            "width": 1118,
+            "height": 360,
+            "css_width": 559,
+            "opaque_pixels": 402480,
+            "luminance_min": 0,
+            "luminance_max": 202.83619999999996,
+            "luminance_range": 202.83619999999996,
+            "white_fraction": 0,
+            "chromatic_pixels": 12913
+          }
+        },
+        {
+          "case": 3,
+          "comparison": "orders",
+          "spectrum": {
+            "width": 2360,
+            "height": 680,
+            "css_width": 1180,
+            "opaque_pixels": 52794,
+            "luminance_min": 66.17999999999999,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 136.7908,
+            "white_fraction": 0,
+            "chromatic_pixels": 52785
+          },
+          "density": {
+            "width": 1118,
+            "height": 360,
+            "css_width": 559,
+            "opaque_pixels": 402480,
+            "luminance_min": 0,
+            "luminance_max": 202.83619999999996,
+            "luminance_range": 202.83619999999996,
+            "white_fraction": 0,
+            "chromatic_pixels": 12913
+          }
+        },
+        {
+          "case": 4,
+          "comparison": "coupling",
+          "spectrum": {
+            "width": 2360,
+            "height": 680,
+            "css_width": 1180,
+            "opaque_pixels": 60556,
+            "luminance_min": 66.17999999999999,
+            "luminance_max": 204.4928,
+            "luminance_range": 138.31279999999998,
+            "white_fraction": 0,
+            "chromatic_pixels": 59791
+          },
+          "density": {
+            "width": 1118,
+            "height": 360,
+            "css_width": 559,
+            "opaque_pixels": 402480,
+            "luminance_min": 0,
+            "luminance_max": 202.83619999999996,
+            "luminance_range": 202.83619999999996,
+            "white_fraction": 0,
+            "chromatic_pixels": 12913
+          }
+        },
+        {
+          "case": 4,
+          "comparison": "closure",
+          "spectrum": {
+            "width": 2360,
+            "height": 680,
+            "css_width": 1180,
+            "opaque_pixels": 60286,
+            "luminance_min": 66.9674,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 136.00339999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 59726
+          },
+          "density": {
+            "width": 1118,
+            "height": 360,
+            "css_width": 559,
+            "opaque_pixels": 402480,
+            "luminance_min": 0,
+            "luminance_max": 202.83619999999996,
+            "luminance_range": 202.83619999999996,
+            "white_fraction": 0,
+            "chromatic_pixels": 12913
+          }
+        },
+        {
+          "case": 4,
+          "comparison": "orders",
+          "spectrum": {
+            "width": 2360,
+            "height": 680,
+            "css_width": 1180,
+            "opaque_pixels": 53709,
+            "luminance_min": 66.17999999999999,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 136.7908,
+            "white_fraction": 0,
+            "chromatic_pixels": 53700
+          },
+          "density": {
+            "width": 1118,
+            "height": 360,
+            "css_width": 559,
+            "opaque_pixels": 402480,
+            "luminance_min": 0,
+            "luminance_max": 202.83619999999996,
+            "luminance_range": 202.83619999999996,
+            "white_fraction": 0,
+            "chromatic_pixels": 12913
+          }
+        },
+        {
+          "case": 5,
+          "comparison": "coupling",
+          "spectrum": {
+            "width": 2360,
+            "height": 680,
+            "css_width": 1180,
+            "opaque_pixels": 60727,
+            "luminance_min": 66.17999999999999,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 136.7908,
+            "white_fraction": 0,
+            "chromatic_pixels": 60460
+          },
+          "density": {
+            "width": 1118,
+            "height": 360,
+            "css_width": 559,
+            "opaque_pixels": 402480,
+            "luminance_min": 0,
+            "luminance_max": 202.83619999999996,
+            "luminance_range": 202.83619999999996,
+            "white_fraction": 0,
+            "chromatic_pixels": 12913
+          }
+        },
+        {
+          "case": 5,
+          "comparison": "closure",
+          "spectrum": {
+            "width": 2360,
+            "height": 680,
+            "css_width": 1180,
+            "opaque_pixels": 53407,
+            "luminance_min": 66.9674,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 136.00339999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 53003
+          },
+          "density": {
+            "width": 1118,
+            "height": 360,
+            "css_width": 559,
+            "opaque_pixels": 402480,
+            "luminance_min": 0,
+            "luminance_max": 202.83619999999996,
+            "luminance_range": 202.83619999999996,
+            "white_fraction": 0,
+            "chromatic_pixels": 12913
+          }
+        },
+        {
+          "case": 5,
+          "comparison": "orders",
+          "spectrum": {
+            "width": 2360,
+            "height": 680,
+            "css_width": 1180,
+            "opaque_pixels": 52614,
+            "luminance_min": 66.17999999999999,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 136.7908,
+            "white_fraction": 0,
+            "chromatic_pixels": 52605
+          },
+          "density": {
+            "width": 1118,
+            "height": 360,
+            "css_width": 559,
+            "opaque_pixels": 402480,
+            "luminance_min": 0,
+            "luminance_max": 202.83619999999996,
+            "luminance_range": 202.83619999999996,
+            "white_fraction": 0,
+            "chromatic_pixels": 12913
+          }
+        },
+        {
+          "case": 6,
+          "comparison": "coupling",
+          "spectrum": {
+            "width": 2360,
+            "height": 680,
+            "css_width": 1180,
+            "opaque_pixels": 63047,
+            "luminance_min": 66.17999999999999,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 136.7908,
+            "white_fraction": 0,
+            "chromatic_pixels": 61672
+          },
+          "density": {
+            "width": 1118,
+            "height": 360,
+            "css_width": 559,
+            "opaque_pixels": 402480,
+            "luminance_min": 0,
+            "luminance_max": 192.04879999999997,
+            "luminance_range": 192.04879999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 11832
+          }
+        },
+        {
+          "case": 6,
+          "comparison": "closure",
+          "spectrum": {
+            "width": 2360,
+            "height": 680,
+            "css_width": 1180,
+            "opaque_pixels": 61173,
+            "luminance_min": 66.3926,
+            "luminance_max": 202.11520000000002,
+            "luminance_range": 135.7226,
+            "white_fraction": 0,
+            "chromatic_pixels": 59842
+          },
+          "density": {
+            "width": 1118,
+            "height": 360,
+            "css_width": 559,
+            "opaque_pixels": 402480,
+            "luminance_min": 0,
+            "luminance_max": 192.04879999999997,
+            "luminance_range": 192.04879999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 11832
+          }
+        },
+        {
+          "case": 6,
+          "comparison": "orders",
+          "spectrum": {
+            "width": 2360,
+            "height": 680,
+            "css_width": 1180,
+            "opaque_pixels": 52272,
+            "luminance_min": 66.17999999999999,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 136.7908,
+            "white_fraction": 0,
+            "chromatic_pixels": 52263
+          },
+          "density": {
+            "width": 1118,
+            "height": 360,
+            "css_width": 559,
+            "opaque_pixels": 402480,
+            "luminance_min": 0,
+            "luminance_max": 192.04879999999997,
+            "luminance_range": 192.04879999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 11832
+          }
+        },
+        {
+          "case": 7,
+          "comparison": "coupling",
+          "spectrum": {
+            "width": 2360,
+            "height": 680,
+            "css_width": 1180,
+            "opaque_pixels": 59092,
+            "luminance_min": 66.9674,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 136.00339999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 58786
+          },
+          "density": {
+            "width": 1118,
+            "height": 360,
+            "css_width": 559,
+            "opaque_pixels": 402480,
+            "luminance_min": 0,
+            "luminance_max": 202.83619999999996,
+            "luminance_range": 202.83619999999996,
+            "white_fraction": 0,
+            "chromatic_pixels": 12913
+          }
+        },
+        {
+          "case": 7,
+          "comparison": "closure",
+          "spectrum": {
+            "width": 2360,
+            "height": 680,
+            "css_width": 1180,
+            "opaque_pixels": 59437,
+            "luminance_min": 66.17999999999999,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 136.7908,
+            "white_fraction": 0,
+            "chromatic_pixels": 58694
+          },
+          "density": {
+            "width": 1118,
+            "height": 360,
+            "css_width": 559,
+            "opaque_pixels": 402480,
+            "luminance_min": 0,
+            "luminance_max": 202.83619999999996,
+            "luminance_range": 202.83619999999996,
+            "white_fraction": 0,
+            "chromatic_pixels": 12913
+          }
+        },
+        {
+          "case": 7,
+          "comparison": "orders",
+          "spectrum": {
+            "width": 2360,
+            "height": 680,
+            "css_width": 1180,
+            "opaque_pixels": 53121,
+            "luminance_min": 66.9674,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 136.00339999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 53111
+          },
+          "density": {
+            "width": 1118,
+            "height": 360,
+            "css_width": 559,
+            "opaque_pixels": 402480,
+            "luminance_min": 0,
+            "luminance_max": 202.83619999999996,
+            "luminance_range": 202.83619999999996,
+            "white_fraction": 0,
+            "chromatic_pixels": 12913
+          }
+        }
+      ],
+      "zero_EV_coupled_srgb_codes": [
+        184,
+        172,
+        162
+      ],
+      "exposure_changes_data": false,
+      "overflow_px": 0
+    },
+    {
+      "name": "mobile",
+      "device_pixel_ratio": 2,
+      "pixel_checks": [
+        {
+          "case": 0,
+          "comparison": "coupling",
+          "spectrum": {
+            "width": 664,
+            "height": 580,
+            "css_width": 332,
+            "opaque_pixels": 19329,
+            "luminance_min": 66.17999999999999,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 136.7908,
+            "white_fraction": 0,
+            "chromatic_pixels": 19151
+          },
+          "density": {
+            "width": 664,
+            "height": 360,
+            "css_width": 332,
+            "opaque_pixels": 239040,
+            "luminance_min": 0,
+            "luminance_max": 192.04879999999997,
+            "luminance_range": 192.04879999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 7062
+          }
+        },
+        {
+          "case": 0,
+          "comparison": "closure",
+          "spectrum": {
+            "width": 664,
+            "height": 580,
+            "css_width": 332,
+            "opaque_pixels": 18754,
+            "luminance_min": 67.17999999999999,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 135.7908,
+            "white_fraction": 0,
+            "chromatic_pixels": 18523
+          },
+          "density": {
+            "width": 664,
+            "height": 360,
+            "css_width": 332,
+            "opaque_pixels": 239040,
+            "luminance_min": 0,
+            "luminance_max": 192.04879999999997,
+            "luminance_range": 192.04879999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 7062
+          }
+        },
+        {
+          "case": 0,
+          "comparison": "orders",
+          "spectrum": {
+            "width": 664,
+            "height": 580,
+            "css_width": 332,
+            "opaque_pixels": 16771,
+            "luminance_min": 66.9674,
+            "luminance_max": 202.1874,
+            "luminance_range": 135.22,
+            "white_fraction": 0,
+            "chromatic_pixels": 16765
+          },
+          "density": {
+            "width": 664,
+            "height": 360,
+            "css_width": 332,
+            "opaque_pixels": 239040,
+            "luminance_min": 0,
+            "luminance_max": 192.04879999999997,
+            "luminance_range": 192.04879999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 7062
+          }
+        },
+        {
+          "case": 1,
+          "comparison": "coupling",
+          "spectrum": {
+            "width": 664,
+            "height": 580,
+            "css_width": 332,
+            "opaque_pixels": 18764,
+            "luminance_min": 67.17999999999999,
+            "luminance_max": 203.91799999999998,
+            "luminance_range": 136.738,
+            "white_fraction": 0,
+            "chromatic_pixels": 18564
+          },
+          "density": {
+            "width": 664,
+            "height": 360,
+            "css_width": 332,
+            "opaque_pixels": 239040,
+            "luminance_min": 0,
+            "luminance_max": 192.04879999999997,
+            "luminance_range": 192.04879999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 7062
+          }
+        },
+        {
+          "case": 1,
+          "comparison": "closure",
+          "spectrum": {
+            "width": 664,
+            "height": 580,
+            "css_width": 332,
+            "opaque_pixels": 18936,
+            "luminance_min": 67.17999999999999,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 135.7908,
+            "white_fraction": 0,
+            "chromatic_pixels": 18768
+          },
+          "density": {
+            "width": 664,
+            "height": 360,
+            "css_width": 332,
+            "opaque_pixels": 239040,
+            "luminance_min": 0,
+            "luminance_max": 192.04879999999997,
+            "luminance_range": 192.04879999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 7062
+          }
+        },
+        {
+          "case": 1,
+          "comparison": "orders",
+          "spectrum": {
+            "width": 664,
+            "height": 580,
+            "css_width": 332,
+            "opaque_pixels": 16971,
+            "luminance_min": 66.17999999999999,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 136.7908,
+            "white_fraction": 0,
+            "chromatic_pixels": 16965
+          },
+          "density": {
+            "width": 664,
+            "height": 360,
+            "css_width": 332,
+            "opaque_pixels": 239040,
+            "luminance_min": 0,
+            "luminance_max": 192.04879999999997,
+            "luminance_range": 192.04879999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 7062
+          }
+        },
+        {
+          "case": 2,
+          "comparison": "coupling",
+          "spectrum": {
+            "width": 664,
+            "height": 580,
+            "css_width": 332,
+            "opaque_pixels": 14947,
+            "luminance_min": 67.17999999999999,
+            "luminance_max": 202.7582,
+            "luminance_range": 135.57819999999998,
+            "white_fraction": 0,
+            "chromatic_pixels": 14888
+          },
+          "density": {
+            "width": 664,
+            "height": 360,
+            "css_width": 332,
+            "opaque_pixels": 239040,
+            "luminance_min": 0,
+            "luminance_max": 192.04879999999997,
+            "luminance_range": 192.04879999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 7062
+          }
+        },
+        {
+          "case": 2,
+          "comparison": "closure",
+          "spectrum": {
+            "width": 664,
+            "height": 580,
+            "css_width": 332,
+            "opaque_pixels": 15546,
+            "luminance_min": 67.17999999999999,
+            "luminance_max": 202.1874,
+            "luminance_range": 135.00740000000002,
+            "white_fraction": 0,
+            "chromatic_pixels": 15363
+          },
+          "density": {
+            "width": 664,
+            "height": 360,
+            "css_width": 332,
+            "opaque_pixels": 239040,
+            "luminance_min": 0,
+            "luminance_max": 192.04879999999997,
+            "luminance_range": 192.04879999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 7062
+          }
+        },
+        {
+          "case": 2,
+          "comparison": "orders",
+          "spectrum": {
+            "width": 664,
+            "height": 580,
+            "css_width": 332,
+            "opaque_pixels": 15743,
+            "luminance_min": 67.17999999999999,
+            "luminance_max": 202.90259999999998,
+            "luminance_range": 135.7226,
+            "white_fraction": 0,
+            "chromatic_pixels": 15737
+          },
+          "density": {
+            "width": 664,
+            "height": 360,
+            "css_width": 332,
+            "opaque_pixels": 239040,
+            "luminance_min": 0,
+            "luminance_max": 192.04879999999997,
+            "luminance_range": 192.04879999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 7062
+          }
+        },
+        {
+          "case": 3,
+          "comparison": "coupling",
+          "spectrum": {
+            "width": 664,
+            "height": 580,
+            "css_width": 332,
+            "opaque_pixels": 18295,
+            "luminance_min": 67.17999999999999,
+            "luminance_max": 202.3278,
+            "luminance_range": 135.14780000000002,
+            "white_fraction": 0,
+            "chromatic_pixels": 18150
+          },
+          "density": {
+            "width": 664,
+            "height": 360,
+            "css_width": 332,
+            "opaque_pixels": 239040,
+            "luminance_min": 0,
+            "luminance_max": 202.83619999999996,
+            "luminance_range": 202.83619999999996,
+            "white_fraction": 0,
+            "chromatic_pixels": 7735
+          }
+        },
+        {
+          "case": 3,
+          "comparison": "closure",
+          "spectrum": {
+            "width": 664,
+            "height": 580,
+            "css_width": 332,
+            "opaque_pixels": 17973,
+            "luminance_min": 67.17999999999999,
+            "luminance_max": 202.3278,
+            "luminance_range": 135.14780000000002,
+            "white_fraction": 0,
+            "chromatic_pixels": 17783
+          },
+          "density": {
+            "width": 664,
+            "height": 360,
+            "css_width": 332,
+            "opaque_pixels": 239040,
+            "luminance_min": 0,
+            "luminance_max": 202.83619999999996,
+            "luminance_range": 202.83619999999996,
+            "white_fraction": 0,
+            "chromatic_pixels": 7735
+          }
+        },
+        {
+          "case": 3,
+          "comparison": "orders",
+          "spectrum": {
+            "width": 664,
+            "height": 580,
+            "css_width": 332,
+            "opaque_pixels": 16405,
+            "luminance_min": 67.17999999999999,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 135.7908,
+            "white_fraction": 0,
+            "chromatic_pixels": 16399
+          },
+          "density": {
+            "width": 664,
+            "height": 360,
+            "css_width": 332,
+            "opaque_pixels": 239040,
+            "luminance_min": 0,
+            "luminance_max": 202.83619999999996,
+            "luminance_range": 202.83619999999996,
+            "white_fraction": 0,
+            "chromatic_pixels": 7735
+          }
+        },
+        {
+          "case": 4,
+          "comparison": "coupling",
+          "spectrum": {
+            "width": 664,
+            "height": 580,
+            "css_width": 332,
+            "opaque_pixels": 18618,
+            "luminance_min": 66.17999999999999,
+            "luminance_max": 203.6138,
+            "luminance_range": 137.43380000000002,
+            "white_fraction": 0,
+            "chromatic_pixels": 18378
+          },
+          "density": {
+            "width": 664,
+            "height": 360,
+            "css_width": 332,
+            "opaque_pixels": 239040,
+            "luminance_min": 0,
+            "luminance_max": 202.83619999999996,
+            "luminance_range": 202.83619999999996,
+            "white_fraction": 0,
+            "chromatic_pixels": 7735
+          }
+        },
+        {
+          "case": 4,
+          "comparison": "closure",
+          "spectrum": {
+            "width": 664,
+            "height": 580,
+            "css_width": 332,
+            "opaque_pixels": 18497,
+            "luminance_min": 67.17999999999999,
+            "luminance_max": 202.1874,
+            "luminance_range": 135.00740000000002,
+            "white_fraction": 0,
+            "chromatic_pixels": 18317
+          },
+          "density": {
+            "width": 664,
+            "height": 360,
+            "css_width": 332,
+            "opaque_pixels": 239040,
+            "luminance_min": 0,
+            "luminance_max": 202.83619999999996,
+            "luminance_range": 202.83619999999996,
+            "white_fraction": 0,
+            "chromatic_pixels": 7735
+          }
+        },
+        {
+          "case": 4,
+          "comparison": "orders",
+          "spectrum": {
+            "width": 664,
+            "height": 580,
+            "css_width": 332,
+            "opaque_pixels": 17077,
+            "luminance_min": 67.17999999999999,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 135.7908,
+            "white_fraction": 0,
+            "chromatic_pixels": 17071
+          },
+          "density": {
+            "width": 664,
+            "height": 360,
+            "css_width": 332,
+            "opaque_pixels": 239040,
+            "luminance_min": 0,
+            "luminance_max": 202.83619999999996,
+            "luminance_range": 202.83619999999996,
+            "white_fraction": 0,
+            "chromatic_pixels": 7735
+          }
+        },
+        {
+          "case": 5,
+          "comparison": "coupling",
+          "spectrum": {
+            "width": 664,
+            "height": 580,
+            "css_width": 332,
+            "opaque_pixels": 18385,
+            "luminance_min": 66.9674,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 136.00339999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 18270
+          },
+          "density": {
+            "width": 664,
+            "height": 360,
+            "css_width": 332,
+            "opaque_pixels": 239040,
+            "luminance_min": 0,
+            "luminance_max": 202.83619999999996,
+            "luminance_range": 202.83619999999996,
+            "white_fraction": 0,
+            "chromatic_pixels": 7735
+          }
+        },
+        {
+          "case": 5,
+          "comparison": "closure",
+          "spectrum": {
+            "width": 664,
+            "height": 580,
+            "css_width": 332,
+            "opaque_pixels": 16284,
+            "luminance_min": 66.9674,
+            "luminance_max": 203.447,
+            "luminance_range": 136.4796,
+            "white_fraction": 0,
+            "chromatic_pixels": 16128
+          },
+          "density": {
+            "width": 664,
+            "height": 360,
+            "css_width": 332,
+            "opaque_pixels": 239040,
+            "luminance_min": 0,
+            "luminance_max": 202.83619999999996,
+            "luminance_range": 202.83619999999996,
+            "white_fraction": 0,
+            "chromatic_pixels": 7735
+          }
+        },
+        {
+          "case": 5,
+          "comparison": "orders",
+          "spectrum": {
+            "width": 664,
+            "height": 580,
+            "css_width": 332,
+            "opaque_pixels": 16598,
+            "luminance_min": 66.9674,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 136.00339999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 16592
+          },
+          "density": {
+            "width": 664,
+            "height": 360,
+            "css_width": 332,
+            "opaque_pixels": 239040,
+            "luminance_min": 0,
+            "luminance_max": 202.83619999999996,
+            "luminance_range": 202.83619999999996,
+            "white_fraction": 0,
+            "chromatic_pixels": 7735
+          }
+        },
+        {
+          "case": 6,
+          "comparison": "coupling",
+          "spectrum": {
+            "width": 664,
+            "height": 580,
+            "css_width": 332,
+            "opaque_pixels": 20062,
+            "luminance_min": 67.17999999999999,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 135.7908,
+            "white_fraction": 0,
+            "chromatic_pixels": 19701
+          },
+          "density": {
+            "width": 664,
+            "height": 360,
+            "css_width": 332,
+            "opaque_pixels": 239040,
+            "luminance_min": 0,
+            "luminance_max": 192.04879999999997,
+            "luminance_range": 192.04879999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 7062
+          }
+        },
+        {
+          "case": 6,
+          "comparison": "closure",
+          "spectrum": {
+            "width": 664,
+            "height": 580,
+            "css_width": 332,
+            "opaque_pixels": 18832,
+            "luminance_min": 67.17999999999999,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 135.7908,
+            "white_fraction": 0,
+            "chromatic_pixels": 18473
+          },
+          "density": {
+            "width": 664,
+            "height": 360,
+            "css_width": 332,
+            "opaque_pixels": 239040,
+            "luminance_min": 0,
+            "luminance_max": 192.04879999999997,
+            "luminance_range": 192.04879999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 7062
+          }
+        },
+        {
+          "case": 6,
+          "comparison": "orders",
+          "spectrum": {
+            "width": 664,
+            "height": 580,
+            "css_width": 332,
+            "opaque_pixels": 16480,
+            "luminance_min": 67.17999999999999,
+            "luminance_max": 202.97079999999997,
+            "luminance_range": 135.7908,
+            "white_fraction": 0,
+            "chromatic_pixels": 16474
+          },
+          "density": {
+            "width": 664,
+            "height": 360,
+            "css_width": 332,
+            "opaque_pixels": 239040,
+            "luminance_min": 0,
+            "luminance_max": 192.04879999999997,
+            "luminance_range": 192.04879999999997,
+            "white_fraction": 0,
+            "chromatic_pixels": 7062
+          }
+        },
+        {
+          "case": 7,
+          "comparison": "coupling",
+          "spectrum": {
+            "width": 664,
+            "height": 580,
+            "css_width": 332,
+            "opaque_pixels": 17466,
+            "luminance_min": 66.4648,
+            "luminance_max": 202.5956,
+            "luminance_range": 136.1308,
+            "white_fraction": 0,
+            "chromatic_pixels": 17331
+          },
+          "density": {
+            "width": 664,
+            "height": 360,
+            "css_width": 332,
+            "opaque_pixels": 239040,
+            "luminance_min": 0,
+            "luminance_max": 202.83619999999996,
+            "luminance_range": 202.83619999999996,
+            "white_fraction": 0,
+            "chromatic_pixels": 7735
+          }
+        },
+        {
+          "case": 7,
+          "comparison": "closure",
+          "spectrum": {
+            "width": 664,
+            "height": 580,
+            "css_width": 332,
+            "opaque_pixels": 18615,
+            "luminance_min": 67.1078,
+            "luminance_max": 202.54559999999998,
+            "luminance_range": 135.43779999999998,
+            "white_fraction": 0,
+            "chromatic_pixels": 18362
+          },
+          "density": {
+            "width": 664,
+            "height": 360,
+            "css_width": 332,
+            "opaque_pixels": 239040,
+            "luminance_min": 0,
+            "luminance_max": 202.83619999999996,
+            "luminance_range": 202.83619999999996,
+            "white_fraction": 0,
+            "chromatic_pixels": 7735
+          }
+        },
+        {
+          "case": 7,
+          "comparison": "orders",
+          "spectrum": {
+            "width": 664,
+            "height": 580,
+            "css_width": 332,
+            "opaque_pixels": 16440,
+            "luminance_min": 67.17999999999999,
+            "luminance_max": 202.11520000000002,
+            "luminance_range": 134.9352,
+            "white_fraction": 0,
+            "chromatic_pixels": 16433
+          },
+          "density": {
+            "width": 664,
+            "height": 360,
+            "css_width": 332,
+            "opaque_pixels": 239040,
+            "luminance_min": 0,
+            "luminance_max": 202.83619999999996,
+            "luminance_range": 202.83619999999996,
+            "white_fraction": 0,
+            "chromatic_pixels": 7735
+          }
+        }
+      ],
+      "zero_EV_coupled_srgb_codes": [
+        184,
+        172,
+        162
+      ],
+      "exposure_changes_data": false,
+      "overflow_px": 0
+    }
+  ],
+  "a2_pixel_checks": [
+    {
+      "layout": "desktop",
+      "canvas_id": "sky",
+      "width": 1186,
+      "height": 390,
+      "css_width": 1186,
+      "opaque_pixels": 462540,
+      "luminance_min": 182.91240000000002,
+      "luminance_max": 213.8448,
+      "luminance_range": 30.932399999999973,
+      "white_fraction": 0,
+      "chromatic_pixels": 276098
+    },
+    {
+      "layout": "mobile",
+      "canvas_id": "sky",
+      "width": 664,
+      "height": 540,
+      "css_width": 332,
+      "opaque_pixels": 358560,
+      "luminance_min": 182.91240000000002,
+      "luminance_max": 213.8448,
+      "luminance_range": 30.932399999999973,
+      "white_fraction": 0,
+      "chromatic_pixels": 213949
+    }
+  ],
+  "load_method": "Exact HTML bytes inserted with set_content; file navigation is blocked by browser policy. No policy settings changed.",
+  "passed": true,
+  "exportEvidence_sha256": "3ef8f4aabccc9f3876d2ad2bd34a8fd0abf2a7b98f85787bb0bba111a008537a",
+  "exportValidation_sha256": "8c23fa9a500233bfeb553a1ba78765320f34374f38d6537cd3a0036d1d78ba8c",
+  "elapsed_s": 26.422832366999955
+}

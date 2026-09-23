@@ -22,3 +22,8 @@ node_modules/
 /data/a2/generated/
 /Open_Moon_A2_Accuracy_Lab.html
 /validation/a2/*.png
+
+# Reproducible A3 coupled reference outputs and browser captures.
+/data/a3/generated/
+/Open_Moon_A3_Accuracy_Lab.html
+/validation/a3/*.png

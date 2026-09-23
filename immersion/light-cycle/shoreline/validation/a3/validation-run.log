@@ -1,0 +1,195 @@
+{
+  "implementation_passed": true,
+  "gates": [
+    {
+      "name": "Analytic, phase, geometry, limiting-case and mixed-transmission checks",
+      "state": "PASS"
+    },
+    {
+      "name": "Inherited JavaScript regression suite",
+      "state": "PASS"
+    },
+    {
+      "name": "All 48 wavelengths from 360 to 830 nm",
+      "state": "PASS"
+    },
+    {
+      "name": "Full benchmark has no unresolved safety-cap or majorant failures",
+      "state": "PASS"
+    },
+    {
+      "name": "Profile/cloud/A2 identities remain matched",
+      "state": "PASS"
+    },
+    {
+      "name": "Executed transport kernel and spectral source hashes match delivered files",
+      "state": "PASS"
+    },
+    {
+      "name": "Independent seed batches are statistically consistent at the declared 6-SE check",
+      "state": "PASS"
+    },
+    {
+      "name": "Gas-only, cloud-only and mixed path contributions close to total radiance",
+      "state": "PASS"
+    },
+    {
+      "name": "Independent coupled first-order integration converges under Gauss refinement",
+      "state": "PASS"
+    },
+    {
+      "name": "Matched production-expression replay converges under Gauss refinement",
+      "state": "PASS"
+    },
+    {
+      "name": "Saved A2 multiple-scattering field agrees with independent clear-gas MC",
+      "state": "FAIL \u2014 selected blue wavelengths"
+    },
+    {
+      "name": "Independent dense molecular refinement",
+      "state": "COMPLETED \u2014 two diagnostic wavelengths"
+    },
+    {
+      "name": "Coupled transport convergence beyond the frozen grid and crop",
+      "state": "OPEN"
+    },
+    {
+      "name": "Production GPU closure, cache, reflections and complete image comparison",
+      "state": "OPEN"
+    },
+    {
+      "name": "Reflecting-ground and finite-Sun boundary experiments",
+      "state": "OPEN"
+    }
+  ],
+  "case_statistics": [
+    {
+      "case": "dense-sun45",
+      "coupled_Y": 9951.372594275852,
+      "coupled_Y_standard_error": 31.1342174176107,
+      "fixed_clear_source_Y": 9661.192892810077,
+      "feedback_delta_Y": 290.179701465775,
+      "feedback_delta_Y_standard_error": 42.871011590870914,
+      "feedback_fraction_of_fixed": 0.030035597538035766,
+      "feedback_z": 6.768669333838783,
+      "mixed_scattering_fraction": 0.5134144567498233,
+      "matched_production_expression_fractional_difference": -0.3958209282980404,
+      "matched_expression_vs_same_a2_source_fractional_difference": -0.3729024107602724,
+      "a2_fixed_source_fractional_difference": -0.007609083787116666,
+      "a2_clear_fractional_difference": -0.018297698348525238,
+      "cloud_view_optical_depth": 5.092633114773093
+    },
+    {
+      "case": "moderate-sun45",
+      "coupled_Y": 9910.219845042919,
+      "coupled_Y_standard_error": 24.72792726799767,
+      "fixed_clear_source_Y": 9563.578446668105,
+      "feedback_delta_Y": 346.64139837481343,
+      "feedback_delta_Y_standard_error": 33.947364774699935,
+      "feedback_fraction_of_fixed": 0.03624599309849142,
+      "feedback_z": 10.211143064428848,
+      "mixed_scattering_fraction": 0.5221614317154819,
+      "matched_production_expression_fractional_difference": -0.2045187325132649,
+      "matched_expression_vs_same_a2_source_fractional_difference": -0.1634058233848401,
+      "a2_fixed_source_fractional_difference": -0.014678443790758444,
+      "a2_clear_fractional_difference": -0.014149579236350962,
+      "cloud_view_optical_depth": 1.728709337353443
+    },
+    {
+      "case": "clear-gap-sun45",
+      "coupled_Y": 7449.273266706301,
+      "coupled_Y_standard_error": 16.733505200815667,
+      "fixed_clear_source_Y": 7260.747466165321,
+      "feedback_delta_Y": 188.52580054097962,
+      "feedback_delta_Y_standard_error": 23.043987454053713,
+      "feedback_fraction_of_fixed": 0.025965067841775154,
+      "feedback_z": 8.181127546474848,
+      "mixed_scattering_fraction": 0.05639064363492305,
+      "matched_production_expression_fractional_difference": -0.03899726069037168,
+      "matched_expression_vs_same_a2_source_fractional_difference": 0.0009700466714261946,
+      "a2_fixed_source_fractional_difference": -0.015000255091969117,
+      "a2_clear_fractional_difference": -0.016847854902402815,
+      "cloud_view_optical_depth": 0.0
+    },
+    {
+      "case": "edge-sun45",
+      "coupled_Y": 8002.062916546453,
+      "coupled_Y_standard_error": 17.750528646265316,
+      "fixed_clear_source_Y": 7798.992026613096,
+      "feedback_delta_Y": 203.07088993335765,
+      "feedback_delta_Y_standard_error": 24.30758794869317,
+      "feedback_fraction_of_fixed": 0.02603809431275264,
+      "feedback_z": 8.354218047549026,
+      "mixed_scattering_fraction": 0.2303964632537369,
+      "matched_production_expression_fractional_difference": 0.0028163501230800136,
+      "matched_expression_vs_same_a2_source_fractional_difference": 0.04502878108211128,
+      "a2_fixed_source_fractional_difference": -0.01540723523373555,
+      "a2_clear_fractional_difference": -0.014824953542652453,
+      "cloud_view_optical_depth": 0.2629670293290218
+    },
+    {
+      "case": "broken-sun45",
+      "coupled_Y": 10183.501142485053,
+      "coupled_Y_standard_error": 23.090973968384766,
+      "fixed_clear_source_Y": 9956.593469761054,
+      "feedback_delta_Y": 226.90767272399899,
+      "feedback_delta_Y_standard_error": 31.823757317750033,
+      "feedback_fraction_of_fixed": 0.022789689406636435,
+      "feedback_z": 7.130134586510276,
+      "mixed_scattering_fraction": 0.4533536919268955,
+      "matched_production_expression_fractional_difference": -0.14957501321972133,
+      "matched_expression_vs_same_a2_source_fractional_difference": -0.11859798072180472,
+      "a2_fixed_source_fractional_difference": -0.013156438188157926,
+      "a2_clear_fractional_difference": -0.016373808792464528,
+      "cloud_view_optical_depth": 1.3065256713868219
+    },
+    {
+      "case": "oblique-sun45",
+      "coupled_Y": 9349.098768244125,
+      "coupled_Y_standard_error": 19.99658456474847,
+      "fixed_clear_source_Y": 9100.081642670066,
+      "feedback_delta_Y": 249.0171255740588,
+      "feedback_delta_Y_standard_error": 27.006665190698886,
+      "feedback_fraction_of_fixed": 0.027364273789195852,
+      "feedback_z": 9.22058032029147,
+      "mixed_scattering_fraction": 0.0898248188965652,
+      "matched_production_expression_fractional_difference": -0.02930659048656692,
+      "matched_expression_vs_same_a2_source_fractional_difference": 0.008828458060625932,
+      "a2_fixed_source_fractional_difference": -0.011471453081474903,
+      "a2_clear_fractional_difference": -0.013970661458676092,
+      "cloud_view_optical_depth": 0.030648470719201626
+    },
+    {
+      "case": "dense-sun6",
+      "coupled_Y": 1660.541961203515,
+      "coupled_Y_standard_error": 7.528780626524891,
+      "fixed_clear_source_Y": 1707.7317384049234,
+      "feedback_delta_Y": -47.18977720140833,
+      "feedback_delta_Y_standard_error": 10.647020528499967,
+      "feedback_fraction_of_fixed": -0.02763301526824413,
+      "feedback_z": -4.432204960541838,
+      "mixed_scattering_fraction": 0.8716440913202073,
+      "matched_production_expression_fractional_difference": -0.3927579550413439,
+      "matched_expression_vs_same_a2_source_fractional_difference": -0.3865807944009678,
+      "a2_fixed_source_fractional_difference": -0.03742479715453295,
+      "a2_clear_fractional_difference": -0.02130427971897053,
+      "cloud_view_optical_depth": 5.092633114773093
+    },
+    {
+      "case": "zenith-sun6",
+      "coupled_Y": 2113.7004387617653,
+      "coupled_Y_standard_error": 7.130231252710952,
+      "fixed_clear_source_Y": 2110.7562405693784,
+      "feedback_delta_Y": 2.9441981923869207,
+      "feedback_delta_Y_standard_error": 10.063464210896083,
+      "feedback_fraction_of_fixed": 0.0013948546666822696,
+      "feedback_z": 0.29256309067002284,
+      "mixed_scattering_fraction": 0.23271547523672365,
+      "matched_production_expression_fractional_difference": -0.12641408947677335,
+      "matched_expression_vs_same_a2_source_fractional_difference": -0.10138786536962541,
+      "a2_fixed_source_fractional_difference": -0.02649385402846749,
+      "a2_clear_fractional_difference": -0.029666541132819413,
+      "cloud_view_optical_depth": 0.2400082594288561
+    }
+  ]
+}
