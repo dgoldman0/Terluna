@@ -1,0 +1,106 @@
+{
+  "base_commit": "9ad75cfee4fee5497cf6cce08947dca8cc3ef35f",
+  "stage": "M0_M1_AND_CONDITIONAL_MEAN_CANOPY_SCREEN",
+  "envelope_cases": 480,
+  "steady_load_samples": 3360,
+  "canopy_bvp_cases": 10,
+  "refinement_cases": 36,
+  "self_weight_buckling_cases": 6,
+  "zero_wind_damage_cases": 18,
+  "right_censored_cases": 37,
+  "first_threshold_in_domain": 228,
+  "first_threshold_outside_domain": 209,
+  "max_canopy_momentum_relative_residual": 1.4030825601720327e-10,
+  "max_60_vs_240_element_threshold_relative_difference": 0.004735055422576018,
+  "air": {
+    "kind": "prescribed_hydrostatic_lower_air",
+    "pressure_pa": 121590.0,
+    "temperature_k": 288.0,
+    "oxygen_mole_fraction": 0.175,
+    "vapor_kg_per_kg_dry": 0.0,
+    "lapse_k_per_m": 0.0,
+    "radius_m": 1737400.0,
+    "surface_gravity_m_s2": 1.6242188765608128,
+    "top_m": 5000.0
+  },
+  "air_at_0_and_500m": {
+    "z_m": [
+      0.0,
+      500.0
+    ],
+    "pressure_pa": [
+      121590.0,
+      120412.14301259865
+    ],
+    "temperature_k": [
+      288.0,
+      288.0
+    ],
+    "density_kg_m3": [
+      1.4578573894508424,
+      1.4437349491777989
+    ],
+    "gravity_m_s2": [
+      1.6242188765608128,
+      1.6232844239284447
+    ],
+    "vapor_kg_per_kg_dry": [
+      0.0,
+      0.0
+    ]
+  },
+  "scientific_status": {
+    "trait_calibration": "hypothetical",
+    "root_soil_model": "idealized_capacity_screen",
+    "wind_climate": "unmodelled",
+    "gust_dynamics": "unmodelled",
+    "evolution": "unmodelled_trait_comparisons_only",
+    "biological_viability": "unestablished",
+    "immersion": "read_only_optional_input_no_changes"
+  },
+  "runtime": {
+    "python": "3.13.5",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0"
+  },
+  "checks": {
+    "new_unit_suite": {
+      "status": "PASS",
+      "tests": 25,
+      "command": "OPENBLAS_NUM_THREADS=1 python -m unittest discover -s tests -p 'test_megaforest_wind.py' -v"
+    },
+    "full_repository_check": {
+      "status": "NOT_RUN",
+      "reason": "Scoped working copy; shell GitHub network access unavailable; historical baseline/input tree not materialized"
+    },
+    "existing_environment_suite": {
+      "status": "NOT_RUN",
+      "reason": "Scoped working copy; existing modules and baseline tests not locally materialized"
+    },
+    "real_A1_export_integration": {
+      "status": "NOT_RUN",
+      "reason": "Generated reference JSON absent from inspected Git tree; synthetic contract fixtures tested"
+    },
+    "manuscript_admission": {
+      "status": "DEFERRED",
+      "reason": "No full-source numerical trait calibration or biological validation"
+    },
+    "immersion_changes": {
+      "status": "NONE",
+      "source_tree_sha_at_base": "a45de16938b37ac833bb5690884f21ef26726841"
+    },
+    "repeat_reproduction": {
+      "status": "PASS",
+      "generated_files_compared": 9,
+      "comparison": "byte-for-byte across two fresh runs"
+    }
+  },
+  "source_sha256": {
+    "atmosphere/lower_air.py": "6c2437fc72acbf536a45f084a95c7b72c87488bd314ccbae39f379dcc39dab05",
+    "climate/canopy_flow.py": "e094418c824a921e33bf340120d21b91c374ea1d1a22b4550ded6ce05b16fafb",
+    "biosphere/megaforest_mechanics.py": "fd9af30029e0ddc83af7713b35bfac6c97d464cea12d777849d2798e6ab9bf7b",
+    "research/run_megaforest_wind.py": "6d7efc76b1317929b7ed150b30ac8989c5da1849fb4f26f8f303d1978d8c5298",
+    "tests/test_megaforest_wind.py": "73aa0523a1ba416e6de89bfc0222965f58fb3d13fe0b1c2ad9933f0077b7efcc"
+  },
+  "classification_note": "The 18 zero-wind damage cases are included in the 228 in-domain first thresholds."
+}

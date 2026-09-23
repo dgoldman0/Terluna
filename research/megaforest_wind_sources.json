@@ -1,0 +1,51 @@
+{
+  "base_commit": "9ad75cfee4fee5497cf6cce08947dca8cc3ef35f",
+  "source_admission": "No external numerical trait dataset admitted in this checkpoint",
+  "project_sources": [
+    {
+      "path": "atmosphere/thermal_column.py",
+      "blob_sha": "6377ec6a5020517ad3bc3b121675c18c28f793f1",
+      "reuse": "Lunar radius/GM and N2/O2 molecular constants; lower-air module is independently testable"
+    },
+    {
+      "path": "immersion/light-cycle/shoreline/src/atmospheric-profile.js",
+      "blob_sha": "16808ed8f4ba6addcd37f8aff8d1523342f1fdf6",
+      "reuse": "Read-only export schema, log-p and linear-T/r interpolation conventions",
+      "access": "source read; file unchanged"
+    },
+    {
+      "path": "immersion/light-cycle/shoreline/src/weather-column.js",
+      "blob_sha": "14e6a3f83d88b4a0927303e4934b74be5e4e5fd4",
+      "reuse": "Documented Rd/Rv and virtual-temperature closure for A1 compatibility",
+      "access": "source read; file unchanged; selected wind presets are not climate evidence"
+    },
+    {
+      "path": "immersion/light-cycle/shoreline/A1_METHODS.md",
+      "blob_sha": "447eac5ee0fceb17f3eff4d272b19b3f7b305078",
+      "reuse": "Shared-state boundaries and generated-export provenance",
+      "access": "read; no generation or editing in immersion"
+    }
+  ],
+  "external_research_leads": [
+    {
+      "title": "Role of Crown in Tree Resistance Against High Winds",
+      "url": "https://arxiv.org/abs/2101.04202",
+      "access": "abstract surfaced during search",
+      "use": "Lead for primary crown-drag experiments; no measurements or coefficients imported"
+    },
+    {
+      "title": "The drag length is key to quantifying tree canopy drag",
+      "url": "https://arxiv.org/abs/2411.01570",
+      "access": "abstract surfaced during search",
+      "use": "Lead for canopy-drag calibration and parameter transfer; no numerical data imported"
+    }
+  ],
+  "parameter_provenance": {
+    "pressure_and_composition": "Existing project scenario, not atmospheric validation",
+    "height_and_LAI": "Selected tests motivated by the earlier megaforest discussion",
+    "wood_strength_stiffness_density": "Illustrative inputs; species and moisture calibration outstanding",
+    "root_soil_parameters": "Idealized mechanism and selected coefficients; calibration outstanding",
+    "drag_reconfiguration_and_porosity": "Hypothetical trait cases; no fitted species law",
+    "eddy_viscosity_and_canopy_projection": "Imposed reduced-flow closure; no lunar weather inference"
+  }
+}

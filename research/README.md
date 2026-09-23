@@ -44,3 +44,22 @@ The [checked snapshot](checks.json) records an actual run using the original arc
 The September feasibility implementation is a historical multi-domain script. Its single intact copy lives in [baselines/feasibility](baselines/feasibility/); topic folders hold its original compact reference tables. Protection has its own intact implementation. Large generated grids, rendered figures/PDFs, duplicate baseline copies and external spectral bytes are omitted from the curated commit; their source records and reproduction/restoration paths remain explicit.
 
 Ordinary file names and Git history manage ongoing changes. The earlier dated planning snapshot and accepted seeds stay intact. New calculations should state assumptions, track conservation/residuals, test convergence and identify which conclusion their outputs can change.
+
+## Megaforest wind checkpoint
+
+The [wind methods and findings](megaforest_wind.md) add lower-air inputs, a
+read-only A1 profile adapter, conditional canopy momentum flow, and static
+plant/root/branch load envelopes. The [compact check record](results/megaforest_wind/checkpoint.json)
+and [reference cases](results/megaforest_wind/reference_cases.csv) accompany
+480 explicit scenarios. Material and soil traits remain hypothetical; wind
+climate, gust dynamics and evolution are unmodelled. The methods identify
+small-displacement limits and the next nonlinear-mechanics work.
+
+```sh
+OPENBLAS_NUM_THREADS=1 python -m unittest discover -s tests -p 'test_megaforest_wind.py' -v
+OPENBLAS_NUM_THREADS=1 python research/run_megaforest_wind.py
+```
+
+Full generated results go to ignored `research/runs/megaforest_wind/`. Source
+ownership remains in `atmosphere/`, `climate/` and `biosphere/`; the runner stays
+in `research/`. `immersion/` is unchanged and accepts no output from this runner.
