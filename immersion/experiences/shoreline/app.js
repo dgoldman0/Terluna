@@ -2,6 +2,7 @@ import { OM } from '../../engine/om.js';
 import C from '../../engine/core.js';
 import { columns, getColumn } from '../../engine/columns.js';
 import { Stars } from '../../engine/stars.js';
+import { adapt, targetExposure } from '../../engine/exposure.js';
 import {
   LEGACY_MOON_GRAVITY,
   STANDARD_GRAVITY,
@@ -55,6 +56,8 @@ OM.boot = async function (T) {
     camera = new T.PerspectiveCamera(58, innerWidth / innerHeight, 0.12, 24000);
   camera.rotation.order = 'YXZ';
   const atmosphere = new OM.Atmosphere(T, OM.skyData);
+  // Show the calculated colours by default; "Adapted to local daylight" balances them.
+  atmosphere.whiteBalanceStrength = 0;
   $('boot-status').textContent = 'Opening the calculated sky…';
   await atmosphere.init(renderer);
   scene.add(atmosphere.mesh);
@@ -108,6 +111,8 @@ OM.boot = async function (T) {
     exposure: 'adaptive',
     ev: 0,
     autoExposure: 0.244647046,
+    snapExposure: true,
+    frameDt: 0,
     freeze: true,
     needRender: true,
     dirty: true,
@@ -130,6 +135,7 @@ OM.boot = async function (T) {
     s.jumpY = s.jumpV = 0;
     camera.rotation.set(s.pitch, s.yaw, 0);
     s.dirty = true;
+    s.snapExposure = true;
     $('place').textContent = p.name;
     for (const b of document.querySelectorAll('[data-location]'))
       b.classList.toggle('selected', b.dataset.location === id);
@@ -139,6 +145,7 @@ OM.boot = async function (T) {
     s.mode = 'inspect';
     $('mode').value = s.mode;
     s.dirty = true;
+    s.snapExposure = true;
     updateHUD();
   }
   function setWeather(t, kind = 'episode') {
@@ -156,6 +163,7 @@ OM.boot = async function (T) {
     s.ledger = OM.world.weather.ledgerAt(s.weatherTime, kind);
     geography.update(s.ledger, s.weatherTime, kind);
     s.dirty = true;
+    s.snapExposure = true;
     $('weather-slider').value = s.weatherTime;
     for (const b of document.querySelectorAll('[data-weather]'))
       b.classList.toggle('selected', b.dataset.weather === String(t) && kind === 'episode');
@@ -167,6 +175,7 @@ OM.boot = async function (T) {
       C.curvatureSag(camera.position.x, camera.position.z, key);
     geography.updateTerrain(camera.position.x, camera.position.z, key);
     s.world = key;
+    s.snapExposure = true;
     $('world-select').value = key;
     s.dirty = true;
     atmosphere.cacheKey = '';
@@ -308,17 +317,21 @@ OM.boot = async function (T) {
     geography.update(s.ledger, s.weatherTime, s.weatherKind);
     geography.lamp.intensity = $('lamp').checked ? 18 / 8500 : 0;
     geography.bulb.material.emissiveIntensity = $('lamp').checked ? 1.2 : 0;
+    atmosphere.environment(renderer, scene, sceneStamp, s.dirty);
     let exposure = 0.244647046 * Math.pow(2, s.ev);
     if (s.exposure === 'adaptive') {
-      // Eye-like adaptation: exposure follows light as L^-0.85, so earthlit nights are
-      // dim but visible. A perceptual camera choice, not a model of vision.
-      const desired = 0.244647046 * Math.pow(94200 / Math.max(0.004, atmosphere.clearLux), 0.85);
-      s.autoExposure = C.mix(s.autoExposure, Math.min(25000, desired), 0.025);
+      // Adapt to the metered light (the actual sky, clouds and fog included, plus the
+      // direct Sun or Earth): quickly toward brighter scenes, more slowly toward darker,
+      // and at once after a jump in time, weather, world or place (engine/exposure.js).
+      const target = targetExposure(
+        atmosphere.meter(renderer, sceneStamp, s.dirty || s.snapExposure),
+      );
+      s.autoExposure = s.snapExposure ? target : adapt(s.autoExposure, target, s.frameDt || 0);
+      s.snapExposure = false;
       exposure = s.autoExposure * Math.pow(2, s.ev);
     }
     renderer.toneMappingExposure = exposure;
     atmosphere.setEarthDisplay(exposure);
-    atmosphere.environment(renderer, scene, sceneStamp, s.dirty);
     renderer.shadowMap.needsUpdate = true;
     s.dirty = false;
   }
@@ -401,6 +414,7 @@ OM.boot = async function (T) {
     if (!s.started) return;
     const dt = Math.max(0, Math.min((t - s.last) / 1000, 0.06));
     s.last = t;
+    s.frameDt = dt;
     sceneStamp += dt;
     try {
       const oldPose = camera.position.toArray().concat([s.yaw, s.pitch, s.jumpY]);
@@ -744,6 +758,7 @@ OM.boot = async function (T) {
     setWeather(0, 'clear');
     s.cloudRegime = key;
     atmosphere.columnClouds.select(key);
+    s.snapExposure = true;
     s.freeze = true;
     s.mode = 'inspect';
     s.motionTime = 0;
@@ -806,6 +821,59 @@ OM.boot = async function (T) {
       'Open_Moon_Atmospheric_Column.json',
     );
   };
+  // Whether the whole Earth disk is in view from an eye position: the terrain is
+  // marched along the line of sight and the trees, stones and shelter raycast.
+  const sightRay = new T.Raycaster();
+  function earthInSight(eye, dir) {
+    for (let d = 1; d < 4000; d += Math.max(1, d * 0.03))
+      if (eye.y + dir.y * d < geography.height(eye.x + dir.x * d, eye.z + dir.z * d)) return false;
+    const u = new T.Vector3().crossVectors(dir, new T.Vector3(0, 1, 0)).normalize(),
+      v = new T.Vector3().crossVectors(u, dir);
+    sightRay.far = 2000;
+    for (const [a, b] of [
+      [0, 0],
+      [1, 0],
+      [-1, 0],
+      [0, 1],
+      [0, -1],
+    ]) {
+      const ray = dir
+        .clone()
+        .addScaledVector(u, a * 0.012)
+        .addScaledVector(v, b * 0.012)
+        .normalize();
+      sightRay.set(eye, ray);
+      if (sightRay.intersectObjects(geography.occluders, true).some((h) => h.object.isMesh))
+        return false;
+    }
+    return true;
+  }
+  $('find-earth').onclick = () => {
+    const e = atmosphere.earth;
+    if (!e) return toast('Earth is not in this sky.');
+    const dir = new T.Vector3(...e.earth);
+    let note = '';
+    if (dir.y > 0 && !earthInSight(camera.position, dir)) {
+      // Move to the nearest viewpoint with a clear view.
+      const eye = (p) => new T.Vector3(p.x, geography.height(p.x, p.z) + 1.7, p.z),
+        here = camera.position.clone(),
+        clear = OM.world.waypoints
+          .filter((p) => earthInSight(eye(p), dir))
+          .sort((p, q) => eye(p).distanceTo(here) - eye(q).distanceTo(here))[0];
+      if (clear) {
+        setLocation(clear.id);
+        note = ` Hidden from where you stood; moved to ${clear.name}.`;
+      } else note = ' Something hides it from here.';
+    }
+    // Earth sits a little above the centre, with the land below it in view.
+    s.yaw = Math.atan2(-dir.x, -dir.z);
+    s.pitch = Math.asin(dir.y) - 0.1;
+    camera.rotation.set(s.pitch, s.yaw, 0);
+    s.dirty = true;
+    toast(
+      `Earth: ${Math.round(e.earthFraction * 100)}% lit, ${Math.round((Math.asin(dir.y) * 180) / Math.PI)}° up.${note}`,
+    );
+  };
   $('snapshot').onclick = () =>
     OM.downloadBlob(
       new Blob([JSON.stringify(snapshotState(), null, 2)], { type: 'application/json' }),
@@ -862,6 +930,7 @@ OM.boot = async function (T) {
   s.last = performance.now();
   requestAnimationFrame(frame);
   function renderOnce() {
+    s.frameDt = 0;
     move(0);
     lights();
     water.reflection(camera, sceneStamp, true);
@@ -900,9 +969,13 @@ OM.boot = async function (T) {
     updateHUD();
   }
   $('m1-benchmark').onclick = () => {
+    const colour = $('white-balance').value;
     geography.debug(0);
     $('landscape-debug').value = '0';
     benchmark();
+    // Keep the viewer's colour choice; the harness reference uses the local-daylight balance.
+    $('white-balance').value = colour;
+    atmosphere.whiteBalanceStrength = +colour;
   };
   $('white-balance').onchange = (e) => {
     atmosphere.whiteBalanceStrength = +e.target.value;

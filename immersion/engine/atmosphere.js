@@ -58,6 +58,11 @@ void main(){vec3 d=normalize(vDir);gl_FragColor=vec4(omSky(d),1.);\n#ifdef TONE_
 `;
 // Put preprocessor directives at the start of a line.
 const SKY_FS = SKY_FRAGMENT.replace('1.);#include', '1.);\n#include');
+// A light meter: the sky's irradiance on level ground, integrated over the upper
+// hemisphere with the same sky function (clouds, fog and earth-glow included).
+const METER_FS =
+  SKY_FS.split('void main(){')[0].replace('varying vec3 vDir;', '') +
+  `void main(){vec3 e=vec3(0.);for(int i=0;i<12;i++){float mu=(float(i)+.5)/12.,s=sqrt(1.-mu*mu);for(int j=0;j<24;j++){float phi=(float(j)+.5)/24.*6.283185307;e+=omSky(vec3(s*cos(phi),mu,s*sin(phi)))*mu;}}gl_FragColor=vec4(e*6.283185307/288.,1.);}`;
 function half(v) {
   const s = v & 0x8000 ? -1 : 1,
     e = (v >> 10) & 31,
@@ -182,6 +187,25 @@ class Atmosphere {
     });
     this.cubeCamera = new T.CubeCamera(0.1, 10, this.cubeRT);
     this.pmrem = new T.PMREMGenerator(renderer);
+    // Without float render targets the meter is off and exposure uses the clear-sky light.
+    this.meterTarget = renderer.extensions.has('EXT_color_buffer_float')
+      ? new T.WebGLRenderTarget(1, 1, { type: T.FloatType, depthBuffer: false })
+      : null;
+    this.meterMaterial = new T.ShaderMaterial({
+      uniforms: this.uniforms,
+      vertexShader: 'void main(){gl_Position=vec4(position.xy,0.,1.);}',
+      fragmentShader: METER_FS,
+      depthTest: false,
+      depthWrite: false,
+      toneMapped: false,
+    });
+    const meterQuad = new T.Mesh(new T.PlaneGeometry(2, 2), this.meterMaterial);
+    meterQuad.frustumCulled = false;
+    this.meterScene = new T.Scene();
+    this.meterScene.add(meterQuad);
+    this.meterCamera = new T.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+    this.meterPixel = new Float32Array(4);
+    this.meterTime = -1e9;
     this.columnClouds.initRenderer(renderer, SKY_UNIFORMS + GLSL_NOISE + CLOUDS + CLEAR_LOOKUP);
   }
   update(world, phase, w, time, observer, drift = 0) {
@@ -369,6 +393,53 @@ class Atmosphere {
       r2[1],
       r2[2],
     );
+  }
+  /** Light for exposure (lux): metered sky irradiance on level ground, plus the direct
+   * Sun or Earth beam after cloud and fog. Unlike clearLux, it sees the actual sky. */
+  meter(renderer, stamp, force = false) {
+    if (!this.meterTarget) return this.clearLux;
+    if (!force && stamp - this.meterTime < 0.5 && Number.isFinite(this.meterLux))
+      return this.meterLux;
+    this.meterTime = stamp;
+    this.columnClouds.prepare(renderer);
+    const u = this.uniforms,
+      disk = u.uShowDisk.value,
+      tm = renderer.toneMapping,
+      exp = renderer.toneMappingExposure,
+      target = renderer.getRenderTarget();
+    let sky = NaN;
+    u.uShowDisk.value = false;
+    renderer.toneMapping = this.T.NoToneMapping;
+    renderer.toneMappingExposure = 1;
+    try {
+      renderer.setRenderTarget(this.meterTarget);
+      renderer.render(this.meterScene, this.meterCamera);
+      renderer.readRenderTargetPixels(this.meterTarget, 0, 0, 1, 1, this.meterPixel);
+      const p = this.meterPixel;
+      sky = (0.2126 * p[0] + 0.7152 * p[1] + 0.0722 * p[2]) * 8500;
+    } finally {
+      renderer.setRenderTarget(target);
+      renderer.toneMapping = tm;
+      renderer.toneMappingExposure = exp;
+      u.uShowDisk.value = disk;
+    }
+    const lum = (v) =>
+      0.2126 * Math.max(0, v[0]) + 0.7152 * Math.max(0, v[1]) + 0.0722 * Math.max(0, v[2]);
+    const through = (mu) => {
+      const m = Math.max(0.1, mu),
+        v = u.uVisibility.value;
+      let t = 1 - u.uCover.value * (1 - Math.exp(-u.uTau.value / m));
+      if (v < 35000)
+        t *= Math.exp(((-3.912 / Math.max(80, v)) * (v < 500 ? 55 : 350)) / Math.max(0.03, mu));
+      return Math.max(0, t);
+    };
+    const sunUp = u.uSun.value.y,
+      sun = lum(this.directRaw || [0, 0, 0]) * Math.max(0, sunUp) * through(sunUp);
+    const earthUp = this.earth ? this.earth.earth[1] : 0,
+      earth = this.earth ? lum(this.earthDirectRaw) * Math.max(0, earthUp) * through(earthUp) : 0;
+    this.meterSky = sky;
+    this.meterLux = Number.isFinite(sky) && sky >= 0 ? sky + sun + earth : this.clearLux;
+    return this.meterLux;
   }
   /** Display-only scaling of the Earth disk so its brightest point sits near display
    * white at this exposure, as the eye's local adaptation keeps a bright disk readable.

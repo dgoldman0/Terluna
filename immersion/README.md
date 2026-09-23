@@ -54,9 +54,9 @@ needs the numba sky solve. After the illumination atlases change, re-bake it wit
 ## The sky
 
 - **The Sun, Earth and stars** come from the illumination domain's site ephemeris
-  for the placeholder development site (0° N, 65° W). Earth hangs about 25° up in
-  the east, wobbles with libration, and goes through phases opposite to the lunar
-  day: a thin crescent near dawn, nearly full near sunset, 72% lit at midnight.
+  for the placeholder development site (0° N, 65° W). Earth hangs in the east,
+  17–33° up as it wobbles with libration, and goes through phases opposite to the
+  lunar day: a thin crescent near dawn, nearly full near sunset, 72% lit at midnight.
   Its disk is drawn from NASA Blue Marble imagery. Seen through the thick Open Moon
   air, its light is reddened.
 - **Earthlight** lights the land at night: it becomes the shadow-casting key light
@@ -65,11 +65,23 @@ needs the numba sky solve. After the illumination atlases change, re-bake it wit
   is sunlight-coloured.
 - **Stars** come from the Yale Bright Star Catalogue, dimmed by the atmosphere's
   transmission, cloud and fog.
+- **Colour** is shown as calculated: the atlas's spectral radiance converted to
+  sRGB, whose white is average Earth daylight (D65). This is how the place would
+  look to a daylight-balanced camera or to eyes that just arrived from Earth. The
+  sky solver's proxy atmosphere (an exponential profile without haze, not yet the
+  atmosphere domain's solved columns) holds about seven times Earth's column of
+  air. That reddens the noon Sun to about 3,500 K and turns the sky pale and the
+  horizon cream. **Adapted to local daylight** instead scales
+  each channel so local noon light renders neutral, roughly as a resident's eyes
+  would adapt; that makes the sky look more like Earth's than it is.
 - **Perceptual conventions:** the adapted exposure follows light as L^−0.85 (eye-like,
-  so earthlit nights are dim but visible), the Earth disk is compressed for display
-  so its surface stays readable, and stars are drawn at the eye's resolution (about
-  one arcminute) rather than the screen's. The fixed exposure and the M1 noon
-  reference are unchanged.
+  so earthlit nights are dim but visible). It meters the rendered sky itself,
+  cloud included, plus the direct Sun and Earth. It brightens within about a
+  second, darkens over a few seconds, and resets at once when you jump to another
+  place, time or weather. The Earth disk is compressed for display so its surface
+  stays readable, and stars are drawn at the eye's resolution (about one
+  arcminute) rather than the screen's. The fixed exposure and the M1 noon
+  reference (which keeps the local-daylight colour balance) are unchanged.
 
 Past checkpoint methods, handoffs and validation records are in
 [docs/history](docs/history/).

@@ -205,6 +205,8 @@ function createScene(T, scene, atm, world = 'moon') {
   const decorations = scene.children.filter(
     (o) => !inheritedObjects.has(o) && !o.userData.landscape,
   );
+  // What stands on the land (vegetation, stones, the shelter), for line-of-sight tests.
+  state.occluders = decorations;
   const baseY = new Map(),
     treeY = state.trees.map((t) => t.y),
     baseDeckY = deckY;

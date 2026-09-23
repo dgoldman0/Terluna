@@ -819,13 +819,19 @@
       <div class="identity glass">
         <div class="line">
           <span class="brand">OPEN MOON</span><span class="separator">/</span
-          ><span class="eyebrow">ATMOSPHERE 04</span>
+          ><span class="eyebrow">DEVELOPMENT COVE</span>
         </div>
         <div id="place">Shoreline</div>
       </div>
       <div class="actions">
-        <button id="m1-benchmark" title="Restore the repeatable clear-noon camera">M1 noon</button
-        ><button id="shore-edge">Water’s edge</button><button id="m1-motion">Resume motion</button
+        <button
+          id="m1-benchmark"
+          title="Restore the repeatable clear-noon reference camera and lighting"
+        >
+          Reference noon</button
+        ><button id="shore-edge">Water’s edge</button
+        ><button id="find-earth" title="Turn to face Earth">Find Earth</button
+        ><button id="m1-motion">Resume motion</button
         ><button id="sound" title="Enable spatial sound">Sound off</button
         ><button id="snapshot" title="Save the current scenario state">Save state</button
         ><button id="hide" title="Hide controls · H">Hide UI</button
@@ -1085,10 +1091,10 @@
         </select>
       </div>
       <div class="panel-row">
-        <label for="white-balance">Camera colour</label
+        <label for="white-balance">Colour</label
         ><select id="white-balance">
-          <option value="1">Daylight balanced</option>
-          <option value="0">Fixed D65</option>
+          <option value="0" selected>As calculated</option>
+          <option value="1">Adapted to local daylight</option>
         </select>
       </div>
       <div class="panel-row">
@@ -1128,6 +1134,14 @@
           ephemeris remain future work. The Earth reference reuses the same illustrative local scene
           and shows no Earth in its sky.
         </p>
+        <p>
+          Colours are shown as calculated, with Earth daylight (D65) as white. Adapted to local
+          daylight neutralises the local noon light, as a resident's eyes would, and makes the sky
+          look more like Earth's than it is. The adapted exposure meters the rendered sky, cloud
+          included, brightens within about a second, darkens over a few seconds, and resets when you
+          jump to another place, time or weather. The sky's air is an exponential proxy profile
+          without haze, not yet the atmosphere domain's solved columns.
+        </p>
       </details>
       <details>
         <summary>Sources and licensing</summary>
@@ -1162,12 +1176,14 @@
       <h1>Explore the shoreline</h1>
       <p>
         The opening view is a repeatable, paused clear-noon reference. Drag to look, use W A S D to
-        move, and choose M1 noon to restore the reference camera and lighting.
+        move, and choose Reference noon to restore the reference camera and lighting.
       </p>
       <div class="help-grid">
         <div>
           <strong>Look and walk</strong>Drag to look. Use W A S D to walk, Shift to move faster, and
-          Space for a small ballistic hop. On touch screens use the left joystick.
+          Space for a small ballistic hop. On touch screens use the left joystick. Find Earth turns
+          you toward Earth, 17–33° up in the east, and moves you to a clear viewpoint if trees or
+          hills hide it.
         </div>
         <div>
           <strong>Visit four places</strong>Shoreline, shelter, woodland path, and overlook are
@@ -1202,7 +1218,7 @@
     </div>
     <div id="boot">
       <div class="card">
-        <div class="eyebrow">OPEN MOON / IMMERSION M1</div>
+        <div class="eyebrow">OPEN MOON / SHORELINE</div>
         <h1>Shoreline</h1>
         <p>A place inside the long light.</p>
         <div id="loader-bar"></div>
