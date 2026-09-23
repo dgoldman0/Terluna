@@ -11,6 +11,18 @@ The project combines shared numerical research with a five-paper ensemble. The n
 - [Five-paper ensemble and accepted seeds](ensemble/README.md)
 - [Core-first research plan](research/plan.md)
 
+## Layout
+
+| Lane | Folders | Purpose |
+|---|---|---|
+| Domains | `atmosphere/`, `climate/`, `biosphere/`, `geography/`, `illumination/`, `protection/`, `engineering/`, `habitation/` | Models, simulations and reference calculations, each with its tests |
+| Research hub | [research/](research/README.md) | Findings, plan, status register, provenance, and cross-domain studies in `research/studies/` |
+| Visualization | [visualization/](visualization/README.md) | Scientific and engineering rendering of domain results |
+| Immersion | [immersion/](immersion/README.md) | The explorable experience: engine, world content, experiences; reads domain results as baked products |
+| Shared | [shared/](shared/README.md) | Constants, scenarios, the data-product convention and the layer check |
+| Papers | [ensemble/](ensemble/README.md) | The five-paper manuscript ensemble |
+| Archive | [archive/](archive/README.md) | Deprecated material kept for provenance |
+
 ## Available research
 
 | Area | Available work | Evidence boundary |
@@ -20,7 +32,8 @@ The project combines shared numerical research with a five-paper ensemble. The n
 | [Biosphere](biosphere/) | Periodic carbon-storage theorem and model; oxygen budget with explicit shortfalls | Hypothetical functional traits; no life-cycle or ecosystem validation |
 | [Protection](protection/) | Optical, positioning, magnetic and renewal estimates | Component calculations; important EUV response/input gap documented |
 | [Engineering](engineering/) | Resource transport, growth and maintenance accounting | Conditional budgets; complete industrial and safety closure remains open |
-| [Geography](geography/), [illumination](illumination/), [habitation](habitation/) | Data leads, angular geometry and design requirements | Actual-terrain climates, visual appearance and settlement capacity still require work |
+| [Illumination](illumination/) | Spectral clear-sky solver; light-transport references; Sun, Earth and star geometry and earthlight for a site | Prescribed optical profiles; mean-orbit geometry; earthlight spectrum approximated |
+| [Geography](geography/), [habitation](habitation/) | Data leads and design requirements | Actual-terrain climates and settlement capacity still require work |
 
 The [results](research/studies/environment_screens/results/) contain numerical cases and approximation flags. Solving the selected equations establishes their conditional consequences. Environmental compatibility, biological persistence and engineering performance require additional evidence.
 

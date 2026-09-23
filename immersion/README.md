@@ -14,7 +14,7 @@ research domains own the science, and the experience reads their results.
 | [bake/](bake/) | Turns domain products into runtime assets: `sky_atlas.py` packs the [illumination/sky](../illumination/sky/) atlases into `assets/sky/`; `columns.mjs` packs the atmosphere domain's column set; `sky_bodies.py` bakes the site ephemeris, the bright stars and the Earth-disk calibration; `surfaces.py` generates the surface textures |
 | [assets/](assets/) | Baked runtime assets and their manifests |
 | [tests/unit/](tests/unit/) | Node tests of engine and world modules |
-| [docs/](docs/) | Rendering notes, the renderer roadmap, and the [checkpoint history](docs/history/) |
+| [docs/](docs/) | The [roadmap](docs/roadmap.md), rendering notes, the renderer roadmap, and the [checkpoint history](docs/history/) |
 
 ## Run
 

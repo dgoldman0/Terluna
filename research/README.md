@@ -1,29 +1,68 @@
 # Terluna research
 
-Shared computational and theoretical support for the five-paper [Open Moon ensemble](../ensemble/). **Constructing and Sustaining an Open Moon is the next full manuscript.** Companion analyses develop alongside it; the core's opening landscape does not define the limits of the research.
+The hub for the project's shared research: what exists in each domain, the
+cross-domain studies, the findings, the plan, the condition register and the
+provenance of imported material. It supports the five-paper
+[Open Moon ensemble](../ensemble/). **Constructing and Sustaining an Open Moon is
+the next full manuscript**; the core's opening landscape does not define the
+limits of the research.
 
-Read [the new findings and equations](findings.md) and [numerical results](studies/environment_screens/results/). The current computational pass adds a solved molecular thermal limit, a periodic spatial climate screen, and carbon/oxygen requirements models. It also identifies the unfilled spectrum/material/chemistry interface.
+Models live in their domain folders. This folder holds what spans domains:
 
-| Topic | New/current calculation | Principal open condition |
+| File | Holds |
+|---|---|
+| [findings.md](findings.md) | Equations, bounds, source limits and numerical examples from the environment screens |
+| [plan.md](plan.md) | The core-first work order |
+| [status.json](status.json) | Condition, open questions and next task for each topic |
+| [provenance.json](provenance.json), [archive_status.md](archive_status.md) | Every original archive member and its disposition; unresolved recovery |
+| [check.py](check.py), [checks.json](checks.json) | Byte integrity of the pinned imports and reproduction of the historical baseline |
+| [baselines/feasibility](baselines/feasibility/) | The September multi-domain feasibility script, kept intact |
+| [studies/](studies/) | Cross-domain studies, each with its runner, results and write-up |
+
+## Domains
+
+| Topic | Current calculation | Principal open condition |
 |---|---|---|
-| [Atmosphere](../atmosphere/) | Solved conduction/advection/Jeans column and band ledger | Actual spectrum-to-chemistry-to-escape closure |
-| [Climate](../climate/) | Conservative periodic latitude–longitude thermal screen | Calibrated radiation, moisture/ice, dynamics and terrain |
-| [Biosphere](../biosphere/) | Carbon reserve theorem/model and bounded oxygen box | Measured traits, complete life cycles and ecological interactions |
+| [Atmosphere](../atmosphere/) | Solved conduction/advection/Jeans column, band ledger, lower air, column soundings | Actual spectrum-to-chemistry-to-escape closure |
+| [Climate](../climate/) | Conservative periodic latitude–longitude thermal screen; canopy and forest-patch flow | Calibrated radiation, moisture/ice, dynamics and terrain |
+| [Biosphere](../biosphere/) | Carbon reserve theorem/model, bounded oxygen box, tree and forest-patch mechanics | Measured traits, complete life cycles and ecological interactions |
+| [Illumination](../illumination/) | Spectral clear-sky solver, A1–A3 light-transport references, site sky geometry and earthlight, bright stars | Date-accurate ephemeris, earthlight spectrum, profiles tied to the solved column |
 | [Protection](../protection/) | Original component model plus spectral coverage audit | EUV response, clean operation, particle transport and lifetime resources |
 | [Engineering](../engineering/) | Original transport/renewal accounts plus plume-heat sensitivity | Complete industrial network and safe source-to-use routes |
-| [Geography](../geography/), [illumination](../illumination/), [habitation](../habitation/) | Data leads, angular diagnostic and design concepts | Actual terrain, visual appearance and practical inhabited capacity |
+| [Geography](../geography/), [habitation](../habitation/) | Data leads and design concepts | Actual terrain and practical inhabited capacity |
 
+Rendering that displays these results is in [visualization](../visualization/);
+the explorable experience, which reads them as baked products, is in
+[immersion](../immersion/). Constants and scenarios shared by every lane are in
+[shared](../shared/).
 
-Read [status.json](status.json) for condition and next-task detail, [plan.md](plan.md) for the core-first work order, and [archive_status.md](archive_status.md) for unresolved recovery. [provenance.json](provenance.json) lists every original archive member and its disposition, including hashes for retained files and omitted material. Model code and CSV tables are verbatim; the two JSON reference files explicitly select original fields with unchanged values.
+## Studies
 
-## New models
+| Study | What it couples | Boundary |
+|---|---|---|
+| [environment_screens](studies/environment_screens/) | Thermal column, band ledger, climate screen, carbon and oxygen requirements, protection plume heat | Conditional consequences of selected equations; the spectrum/material/chemistry interface is unfilled |
+| [megaforest_wind](studies/megaforest_wind/README.md) | Lower air (atmosphere), canopy flow (climate), tree mechanics (biosphere): 480 static load envelopes | Material and soil traits hypothetical; wind climate, gusts and evolution unmodelled |
+| [forest_patch](studies/forest_patch/README.md) | Three-dimensional patch airflow, tree load sharing, compliant foundations, shared soil and damage | Wind climatology, gusts, nonlinear failure and evolved morphology open |
+
+The forest-patch folder also holds a [reviewed checkpoint](studies/forest_patch/reviewed/README.md)
+from a separate lineage (57 tests, 90-m spacing, 20-m/s reservoir flow), whose
+source is kept at commit `363b161` and on `checkpoint/forest-patch-review-57-tests`.
+The two lineages differ in their assumptions. In both, the dome was an imposed
+candidate: neither simulates an evolved canopy shape or establishes an optimum.
+
+Run everything from the repository root:
 
 ```sh
 OPENBLAS_NUM_THREADS=1 python -m pytest
-OPENBLAS_NUM_THREADS=1 python -m research.studies.environment_screens.run
+OPENBLAS_NUM_THREADS=1 python -m research.studies.environment_screens.run   # results in studies/environment_screens/results
+OPENBLAS_NUM_THREADS=1 python -m research.studies.megaforest_wind.run       # results in research/runs/megaforest_wind
+OPENBLAS_NUM_THREADS=1 python -m research.studies.forest_patch.run --quick  # results in research/runs/forest_patch
 ```
 
-Supply `--protection-archive /path/to/Lunar_Protection_Model.zip` for direct inspection of the original optical inputs, or restore `protection/sources/` using the existing helper. New runs use their own ordinary result paths. Source-access and scientific-validation status are recorded in [environment_sources.json](studies/environment_screens/sources.json) and [environment_checks.json](studies/environment_screens/checks.json).
+For the environment screens, supply `--protection-archive /path/to/Lunar_Protection_Model.zip`
+to inspect the original optical inputs directly. Source-access and validation
+status are in [sources.json](studies/environment_screens/sources.json) and
+[checks.json](studies/environment_screens/checks.json).
 
 ## Historical baseline reproduction
 
@@ -35,59 +74,19 @@ python protection/fetch_inputs.py --archive /path/to/Lunar_Protection_Model.zip
 python research/check.py --require-inputs
 ```
 
-Upstream retrieval is also available through `python protection/fetch_inputs.py --download`; the exact expected hash and size must match. Direct network retrieval was unavailable in the preparation container and was not newly verified. With missing protection data the checker reports `BLOCKED` explicitly; it never substitutes synthetic inputs.
+Upstream retrieval is also available through `python protection/fetch_inputs.py --download`;
+the exact expected hash and size must match. With missing protection data the
+checker reports `BLOCKED` explicitly; it never substitutes synthetic inputs.
 
-The [checked snapshot](checks.json) records an actual run using the original archived inputs. Future checks write to ignored `research/runs/` by default. Numerical reproduction and file integrity do not grant physical validation, full-source admission, or manuscript clearance.
+The [checked snapshot](checks.json) records an actual run using the original
+archived inputs. Future checks write to ignored `research/runs/`. Numerical
+reproduction and file integrity do not grant physical validation, full-source
+admission, or manuscript clearance.
 
-## Organization
-
-The September feasibility implementation is a historical multi-domain script. Its single intact copy lives in [baselines/feasibility](baselines/feasibility/); topic folders hold its original compact reference tables. Protection has its own intact implementation. Large generated grids, rendered figures/PDFs, duplicate baseline copies and external spectral bytes are omitted from the curated commit; their source records and reproduction/restoration paths remain explicit.
-
-Ordinary file names and Git history manage ongoing changes. The earlier dated planning snapshot and accepted seeds stay intact. New calculations should state assumptions, track conservation/residuals, test convergence and identify which conclusion their outputs can change.
-
-## Megaforest wind checkpoint
-
-The [wind methods and findings](studies/megaforest_wind/README.md) add lower-air inputs, a
-read-only A1 profile adapter, conditional canopy momentum flow, and static
-plant/root/branch load envelopes. The [compact check record](studies/megaforest_wind/results/checkpoint.json)
-and [reference cases](studies/megaforest_wind/results/reference_cases.csv) accompany
-480 explicit scenarios. Material and soil traits remain hypothetical; wind
-climate, gust dynamics and evolution are unmodelled. The methods identify
-small-displacement limits and the next nonlinear-mechanics work.
-
-```sh
-OPENBLAS_NUM_THREADS=1 python -m pytest atmosphere/tests/test_lower_air.py climate/tests/test_canopy_flow.py biosphere/tests/test_megaforest_mechanics.py research/studies/megaforest_wind
-OPENBLAS_NUM_THREADS=1 python -m research.studies.megaforest_wind.run
-```
-
-Full generated results go to ignored `research/runs/megaforest_wind/`. Source
-ownership remains in `atmosphere/`, `climate/` and `biosphere/`; the runner lives
-in `research/studies/megaforest_wind/`. `immersion/` is unchanged and accepts no output from this runner.
-
-## Interacting forest patches
-
-The [finite-patch study](studies/forest_patch/README.md) adds three-dimensional conditional mean
-airflow, individual-tree load partitioning, compliant foundations, optional crown
-contacts/root-graft proxies, shared-soil accounting and damage re-solves. Code
-lives in `climate/forest_patch_flow.py` and `biosphere/forest_patch*.py`, with the
-sequence in `biosphere/forest_damage.py`. [Compact results](studies/forest_patch/results/)
-and the reproduction driver `research/studies/forest_patch/run.py` retain the model boundaries.
-The individual-tree checkpoint remains unchanged. Wind climatology, gusts,
-nonlinear failure and evolutionary morphology remain open. `immersion/` is
-unchanged and receives no outputs from this work.
-
-## Reviewed forest-patch checkpoint and canopy-shape clarification
-
-The [reviewed checkpoint record](studies/forest_patch/reviewed/README.md) preserves
-this conversation's separate 57-test, 90-m-spacing, 20-m/s reservoir-flow study.
-Its exact editable source is retained in Git at commit
-`363b161e7c92be54e7f4907b2186bfc1bace10f1` and on
-`checkpoint/forest-patch-review-57-tests`; its methods and compact results are
-also indexed here. The existing 62-test channel-flow implementation above remains
-unchanged. These are distinct experimental lineages with differing assumptions.
-
-The dome was an imposed candidate. Neither checkpoint simulates an evolved
-canopy shape or establishes an optimum. Reinforcing a dome's perimeter roots
-adds belowground investment; equivalent-budget comparisons across shapes remain
-open. See the reviewed record for the corrected interpretation and reproduction
-instructions for its exact source revision.
+The September feasibility implementation is a historical multi-domain script;
+its single intact copy lives in [baselines/feasibility](baselines/feasibility/),
+and topic folders hold its original compact reference tables. Protection has its
+own intact implementation. Model code and CSV tables are verbatim; the two JSON
+reference files select original fields with unchanged values. New calculations
+should state assumptions, track conservation and residuals, test convergence and
+say which conclusion their outputs can change.
