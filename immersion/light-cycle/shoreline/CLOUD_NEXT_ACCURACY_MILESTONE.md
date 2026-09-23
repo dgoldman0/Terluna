@@ -1,5 +1,20 @@
 # Next accuracy milestone — A1
 
+> **Status update — 23 September 2026.** A1 through A3 now implement substantial
+> portions of the reference-accuracy program described below. `A1_METHODS.md`
+> establishes the shared atmospheric state, first-order spectral reference and
+> frozen-cloud benchmark. `A2_METHODS.md` adds full-spectrum molecular multiple
+> scattering plus cloud-grid/crop convergence. `A3_METHODS.md` adds matched
+> gas-plus-cloud transport, records the remaining blue-band molecular convergence
+> limitation, and benchmarks the production-style cloud-lighting approximation.
+> The production shoreline renderer has not yet adopted these reference results.
+> Entraining/mixed-phase parcel physics, conserved condensate/precipitation,
+> full-spectrum molecular convergence, coupled cloud-grid/crop convergence, and
+> production/cache validation remain open. The original pre-implementation plan
+> is retained below as a historical specification; individual claims that every
+> task is merely planned should be read in that original context.
+
+
 ## Objective and completion claim
 
 **A1: a density-consistent atmospheric column and quantitatively benchmarked cloud
