@@ -20,22 +20,22 @@ unchanged.
 From the repository root, using the existing NumPy/SciPy dependencies:
 
 ```sh
-OPENBLAS_NUM_THREADS=1 python -m unittest discover -s tests -p 'test_megaforest_wind.py' -v
-OPENBLAS_NUM_THREADS=1 python research/run_megaforest_wind.py
+OPENBLAS_NUM_THREADS=1 python -m pytest atmosphere/tests/test_lower_air.py climate/tests/test_canopy_flow.py biosphere/tests/test_megaforest_mechanics.py research/studies/megaforest_wind
+OPENBLAS_NUM_THREADS=1 python -m research.studies.megaforest_wind.run
 ```
 
 The default destination is the already ignored `research/runs/megaforest_wind/`.
 It contains all 480 envelope cases, 3,360 imposed steady-load samples, 10 canopy
 boundary-value solutions, 36 beam-refinement cases, full configurations and
 source hashes. Compact reference cases and a check record are retained in
-`research/results/megaforest_wind/`. Each case records the wind reference height.
+`research/studies/megaforest_wind/results/`. Each case records the wind reference height.
 The run is deterministic for a fixed numerical environment. A missing input is an
 error, and output paths inside `immersion/` are rejected.
 
 An existing A1 atmospheric-profile export can supply the thermodynamics:
 
 ```sh
-OPENBLAS_NUM_THREADS=1 python research/run_megaforest_wind.py \
+OPENBLAS_NUM_THREADS=1 python -m research.studies.megaforest_wind.run \
   --a1-profile /path/to/existing-shared-profile.json \
   --out research/runs/megaforest_wind_a1
 ```
@@ -56,7 +56,7 @@ not been added in this checkpoint.
 `climate/canopy_flow.py` provides a selected mean-flow profile and its momentum
 ledger. `biosphere/megaforest_mechanics.py` owns plant geometry, masses, distributed
 wind loading, elastic response, prestress and idealized failure capacities.
-`research/run_megaforest_wind.py` coordinates cases and writes provenance. It
+`research/studies/megaforest_wind/run.py` coordinates cases and writes provenance. It
 contains no independent copy of either physics model. Engineering interventions
 and manuscript changes are deferred until the physical requirements are better
 constrained.

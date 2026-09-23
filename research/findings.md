@@ -162,6 +162,6 @@ Input gaps hold a complete coupled-atmosphere claim open; they do not prevent us
 
 ## Reproduction and provenance
 
-Run `python -m unittest discover -s tests -v`, followed by `python research/run_environment_screens.py`. Supply the original protection ZIP with `--protection-archive` to inspect its data. The run records, source-access status and base revision are in [environment_checks.json](environment_checks.json) and [environment_sources.json](environment_sources.json).
+Run `python -m pytest`, followed by `python -m research.studies.environment_screens.run`. Supply the original protection ZIP with `--protection-archive` to inspect its data. The run records, source-access status and base revision are in [environment_checks.json](studies/environment_screens/checks.json) and [environment_sources.json](studies/environment_screens/sources.json).
 
 The original feasibility script and protection verifier were rerun directly from their mounted archives. The repository-wide `research/check.py` was not executed on a complete checkout in this session: the connector is read-only and container GitHub DNS failed. That limitation is recorded separately from the 39 new tests. No paper, accepted seed, locked planning file, pinned baseline implementation or historical dataset is modified by this patch.

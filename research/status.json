@@ -16,7 +16,7 @@
         "../atmosphere/reference/",
         "../atmosphere/thermal_column.py",
         "../atmosphere/spectral_interface.py",
-        "results/environment_screens/molecular_columns.csv"
+        "studies/environment_screens/results/molecular_columns.csv"
       ],
       "unresolved": [
         "self-consistent spectrum/chemistry/energy/outflow",
@@ -32,7 +32,7 @@
         "../climate/reference/thermal_response.csv",
         "baselines/feasibility/model.py",
         "../climate/cycle.py",
-        "results/environment_screens/climate_budget.csv"
+        "studies/environment_screens/results/climate_budget.csv"
       ],
       "unresolved": [
         "radiative-convective calibration",
@@ -76,8 +76,8 @@
         "../biosphere/README.md",
         "../ensemble/papers/74a946e2-8f98/seed-02.md",
         "../biosphere/long_night.py",
-        "results/environment_screens/carbon_budget.csv",
-        "results/environment_screens/oxygen_budget.csv"
+        "studies/environment_screens/results/carbon_budget.csv",
+        "studies/environment_screens/results/oxygen_budget.csv"
       ],
       "unresolved": [
         "complete life cycles",
@@ -122,8 +122,8 @@
         "../protection/verify.py",
         "../protection/results/",
         "../protection/inputs.json",
-        "results/environment_screens/spectral_audit.json",
-        "results/environment_screens/plume_heat_interface.csv"
+        "studies/environment_screens/results/spectral_audit.json",
+        "studies/environment_screens/results/plume_heat_interface.csv"
       ],
       "unresolved": [
         "resolved irradiance and material response around 25–120 nm; actual absorption and heat fractions",
@@ -135,6 +135,6 @@
       "next_session_task": "Close the EUV material/irradiance gap; constrain absorbed plume fractions and couple actual heating to atmospheric physics."
     }
   ],
-  "new_check_record": "environment_checks.json",
+  "new_check_record": "studies/environment_screens/checks.json",
   "findings": "findings.md"
 }

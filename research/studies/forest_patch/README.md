@@ -28,14 +28,15 @@ or change the other team's renderer or atmospheric-profile generator.
 owns individual-tree geometry, budgets and drag deposition.
 `biosphere/forest_patch_mechanics.py` owns the interacting elastic structure and
 shared soil accounting. `biosphere/forest_damage.py` owns damage state transitions.
-`research/run_forest_patch.py` runs the comparisons and writes the records.
-`tests/test_forest_patch.py` contains analytic, conservation and behavioral tests.
+`research/studies/forest_patch/run.py` runs the comparisons and writes the records.
+Analytic, conservation and behavioral tests live with the code they test:
+`climate/tests/test_forest_patch_flow.py` and `biosphere/tests/test_forest_patch.py`.
 
 From the repository root:
 
 ```sh
-OPENBLAS_NUM_THREADS=1 python -m unittest discover -s tests -v
-OPENBLAS_NUM_THREADS=1 python research/run_forest_patch.py --quick
+OPENBLAS_NUM_THREADS=1 python -m pytest
+OPENBLAS_NUM_THREADS=1 python -m research.studies.forest_patch.run --quick
 ```
 
 The delivered numerical snapshot uses `--quick`, a 48 x 32 x 16 reference grid,

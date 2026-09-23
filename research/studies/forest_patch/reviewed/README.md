@@ -27,7 +27,7 @@ merge and is also retained on `checkpoint/forest-patch-review-57-tests`.
 Read [methods.md](methods.md), [checkpoint.json](checkpoint.json),
 [shape_comparison.csv](shape_comparison.csv) and [sources.json](sources.json) as
 records of the **reviewed** source commit. The other implementation's methods
-remain at [research/forest_patch.md](../../forest_patch.md). Parameters, thresholds,
+remain at [research/forest_patch.md](../README.md). Parameters, thresholds,
 test counts and result tables must stay with their originating source revision.
 The reviewed files' historical `NOT_PUBLISHED` fields describe the earlier
 blocked delivery and are superseded by this publication record.

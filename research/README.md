@@ -2,7 +2,7 @@
 
 Shared computational and theoretical support for the five-paper [Open Moon ensemble](../ensemble/). **Constructing and Sustaining an Open Moon is the next full manuscript.** Companion analyses develop alongside it; the core's opening landscape does not define the limits of the research.
 
-Read [the new findings and equations](findings.md) and [numerical results](results/environment_screens/). The current computational pass adds a solved molecular thermal limit, a periodic spatial climate screen, and carbon/oxygen requirements models. It also identifies the unfilled spectrum/material/chemistry interface.
+Read [the new findings and equations](findings.md) and [numerical results](studies/environment_screens/results/). The current computational pass adds a solved molecular thermal limit, a periodic spatial climate screen, and carbon/oxygen requirements models. It also identifies the unfilled spectrum/material/chemistry interface.
 
 | Topic | New/current calculation | Principal open condition |
 |---|---|---|
@@ -19,11 +19,11 @@ Read [status.json](status.json) for condition and next-task detail, [plan.md](pl
 ## New models
 
 ```sh
-OPENBLAS_NUM_THREADS=1 python -m unittest discover -s tests -v
-OPENBLAS_NUM_THREADS=1 python research/run_environment_screens.py
+OPENBLAS_NUM_THREADS=1 python -m pytest
+OPENBLAS_NUM_THREADS=1 python -m research.studies.environment_screens.run
 ```
 
-Supply `--protection-archive /path/to/Lunar_Protection_Model.zip` for direct inspection of the original optical inputs, or restore `protection/sources/` using the existing helper. New runs use their own ordinary result paths. Source-access and scientific-validation status are recorded in [environment_sources.json](environment_sources.json) and [environment_checks.json](environment_checks.json).
+Supply `--protection-archive /path/to/Lunar_Protection_Model.zip` for direct inspection of the original optical inputs, or restore `protection/sources/` using the existing helper. New runs use their own ordinary result paths. Source-access and scientific-validation status are recorded in [environment_sources.json](studies/environment_screens/sources.json) and [environment_checks.json](studies/environment_screens/checks.json).
 
 ## Historical baseline reproduction
 
@@ -47,38 +47,38 @@ Ordinary file names and Git history manage ongoing changes. The earlier dated pl
 
 ## Megaforest wind checkpoint
 
-The [wind methods and findings](megaforest_wind.md) add lower-air inputs, a
+The [wind methods and findings](studies/megaforest_wind/README.md) add lower-air inputs, a
 read-only A1 profile adapter, conditional canopy momentum flow, and static
-plant/root/branch load envelopes. The [compact check record](results/megaforest_wind/checkpoint.json)
-and [reference cases](results/megaforest_wind/reference_cases.csv) accompany
+plant/root/branch load envelopes. The [compact check record](studies/megaforest_wind/results/checkpoint.json)
+and [reference cases](studies/megaforest_wind/results/reference_cases.csv) accompany
 480 explicit scenarios. Material and soil traits remain hypothetical; wind
 climate, gust dynamics and evolution are unmodelled. The methods identify
 small-displacement limits and the next nonlinear-mechanics work.
 
 ```sh
-OPENBLAS_NUM_THREADS=1 python -m unittest discover -s tests -p 'test_megaforest_wind.py' -v
-OPENBLAS_NUM_THREADS=1 python research/run_megaforest_wind.py
+OPENBLAS_NUM_THREADS=1 python -m pytest atmosphere/tests/test_lower_air.py climate/tests/test_canopy_flow.py biosphere/tests/test_megaforest_mechanics.py research/studies/megaforest_wind
+OPENBLAS_NUM_THREADS=1 python -m research.studies.megaforest_wind.run
 ```
 
 Full generated results go to ignored `research/runs/megaforest_wind/`. Source
-ownership remains in `atmosphere/`, `climate/` and `biosphere/`; the runner stays
-in `research/`. `immersion/` is unchanged and accepts no output from this runner.
+ownership remains in `atmosphere/`, `climate/` and `biosphere/`; the runner lives
+in `research/studies/megaforest_wind/`. `immersion/` is unchanged and accepts no output from this runner.
 
 ## Interacting forest patches
 
-The [finite-patch study](forest_patch.md) adds three-dimensional conditional mean
+The [finite-patch study](studies/forest_patch/README.md) adds three-dimensional conditional mean
 airflow, individual-tree load partitioning, compliant foundations, optional crown
 contacts/root-graft proxies, shared-soil accounting and damage re-solves. Code
 lives in `climate/forest_patch_flow.py` and `biosphere/forest_patch*.py`, with the
-sequence in `biosphere/forest_damage.py`. [Compact results](results/forest_patch/)
-and the reproduction driver `run_forest_patch.py` retain the model boundaries.
+sequence in `biosphere/forest_damage.py`. [Compact results](studies/forest_patch/results/)
+and the reproduction driver `research/studies/forest_patch/run.py` retain the model boundaries.
 The individual-tree checkpoint remains unchanged. Wind climatology, gusts,
 nonlinear failure and evolutionary morphology remain open. `immersion/` is
 unchanged and receives no outputs from this work.
 
 ## Reviewed forest-patch checkpoint and canopy-shape clarification
 
-The [reviewed checkpoint record](results/forest_patch_reviewed/README.md) preserves
+The [reviewed checkpoint record](studies/forest_patch/reviewed/README.md) preserves
 this conversation's separate 57-test, 90-m-spacing, 20-m/s reservoir-flow study.
 Its exact editable source is retained in Git at commit
 `363b161e7c92be54e7f4907b2186bfc1bace10f1` and on

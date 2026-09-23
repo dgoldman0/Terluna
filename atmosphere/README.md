@@ -15,15 +15,15 @@ The thermal column solves its upper temperature without a fixed exobase floor. I
 
 The original solar table starts at 202 nm. The inherited optical implementation leaves a response interval between its X-ray treatment below about 24.8 nm and titania optical constants starting near 120.18 nm. A historical five-band solar benchmark is now transcribed separately, with all atmospheric/filter responses left unspecified. This recovers a coarse energy reference while preserving the unresolved optical and chemical requirements.
 
-Read [findings](../research/findings.md) for equations, bounds, source limitations and numerical examples. The new [232-case output](../research/results/environment_screens/molecular_columns.csv) is separate from the byte-pinned historical tables. Molecular losses do not constitute total escape or a billion-year lifetime estimate.
+Read [findings](../research/findings.md) for equations, bounds, source limitations and numerical examples. The new [232-case output](../research/studies/environment_screens/results/molecular_columns.csv) is separate from the byte-pinned historical tables. Molecular losses do not constitute total escape or a billion-year lifetime estimate.
 
 ## Run and next task
 
 From repository root:
 
 ```sh
-python -m unittest discover -s tests -v
-python research/run_environment_screens.py
+python -m pytest atmosphere
+python -m research.studies.environment_screens.run
 ```
 
 Next: acquire defensible EUV material response and resolved irradiance; replace assumed absorption/heating fractions with species-resolved absorption, chemistry and cooling; then test atomic transport and kinetic boundaries. Reconcile a calibrated lower-atmospheric profile with this upper model before inferring integrated habitability.

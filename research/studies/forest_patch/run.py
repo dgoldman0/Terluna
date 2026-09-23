@@ -5,14 +5,18 @@ Default: five budget-matched shapes, directional cases, optional contacts/grafts
 refinement and domain checks, intact-tree maps, and a damage propagation test.
 All wind speeds are imposed upstream steady values. Runtime and raw grids go in
 research/runs/forest_patch; curated results are a separately identified snapshot.
+
+Run from the repository root:
+    python -m research.studies.forest_patch.run [--out DIR] [--quick] [--a1-profile FILE]
 """
 from __future__ import annotations
 import argparse,csv,hashlib,json,platform,sys
 from dataclasses import asdict,replace
 from pathlib import Path
 import numpy as np
-ROOT=Path(__file__).resolve().parents[1]
-sys.path.insert(0,str(ROOT))
+ROOT=Path(__file__).resolve().parents[3]
+if __package__ in (None,''):  # executed as a file path rather than with -m
+    sys.path.insert(0,str(ROOT))
 from atmosphere.lower_air import LowerAir,A1Profile
 from climate.forest_patch_flow import PatchGrid,FlowConfig
 from biosphere.forest_patch import make_patch,PatchDrag,tree_mass
@@ -21,7 +25,8 @@ from biosphere.forest_damage import damage_sequence
 
 SOURCE_FILES=['atmosphere/lower_air.py','biosphere/megaforest_mechanics.py','climate/forest_patch_flow.py','biosphere/forest_patch.py',
     'biosphere/forest_patch_mechanics.py','biosphere/forest_damage.py',
-    'research/run_forest_patch.py','tests/test_forest_patch.py']
+    'research/studies/forest_patch/run.py','climate/tests/test_forest_patch_flow.py',
+    'biosphere/tests/test_forest_patch.py','research/studies/forest_patch/test_run.py']
 
 
 def plain(x):

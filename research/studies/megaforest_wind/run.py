@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Reproduce the conditional megaforest static-wind screen.
 
-Run at repository root. Default output is research/runs/megaforest_wind.
+Run from the repository root:
+    python -m research.studies.megaforest_wind.run [--out DIR] [--a1-profile FILE]
+Default output is research/runs/megaforest_wind.
 An optional --a1-profile consumes an existing shared-profile export read-only.
 Nothing in this runner writes under immersion/ or changes its source/assets.
 """
@@ -17,8 +19,9 @@ import sys
 import numpy as np
 import scipy
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT))
+ROOT = Path(__file__).resolve().parents[3]
+if __package__ in (None, ''):  # executed as a file path rather than with -m
+    sys.path.insert(0, str(ROOT))
 from atmosphere.lower_air import LowerAir, AirConfig, A1Profile
 from climate.canopy_flow import CanopyFlow, CanopyConfig
 from biosphere.megaforest_mechanics import StaticTree, TreeConfig, RootConfig
@@ -145,7 +148,9 @@ def run(out, a1_profile=None):
     write_json(out/'canopy_checks.json',flow_checks)
     write_json(out/'summary.json',summary)
     files=['atmosphere/lower_air.py','climate/canopy_flow.py','biosphere/megaforest_mechanics.py',
-           'research/run_megaforest_wind.py','tests/test_megaforest_wind.py']
+           'research/studies/megaforest_wind/run.py','atmosphere/tests/test_lower_air.py',
+           'climate/tests/test_canopy_flow.py','biosphere/tests/test_megaforest_mechanics.py',
+           'research/studies/megaforest_wind/test_run.py']
     hashes={p:hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in files}
     write_json(out/'source_hashes.json',hashes)
     print(json.dumps({k:summary[k] for k in ('envelope_cases','steady_load_samples','self_weight_buckling_cases',

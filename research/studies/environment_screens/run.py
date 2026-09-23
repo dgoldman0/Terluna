@@ -1,17 +1,19 @@
 #!/usr/bin/env python3
 """Reproduce this bounded research pass; no automatic whole-world PASS status.
 
-Run from repository root: python research/run_environment_screens.py
+Run from the repository root:
+    python -m research.studies.environment_screens.run [--out DIR]
 Optional original ZIP: --protection-archive /path/to/Lunar_Protection_Model.zip
-Outputs default to research/results/environment_screens (small JSON/CSV tables).
+Outputs default to research/studies/environment_screens/results (small JSON/CSV tables).
 """
 from __future__ import annotations
 import argparse,csv,hashlib,json,math,sys,platform,zipfile
 from dataclasses import asdict,replace
 from pathlib import Path
 import numpy as np
-ROOT=Path(__file__).resolve().parents[1]
-sys.path.insert(0,str(ROOT))
+ROOT=Path(__file__).resolve().parents[3]
+if __package__ in (None,''):  # executed as a file path rather than with -m
+    sys.path.insert(0,str(ROOT))
 from atmosphere.thermal_column import ColumnConfig,solve_column,R,AREA
 from atmosphere.spectral_interface import audit_optical_files,inventory_audit,historical_solar_bands,gap_energy_bounds,deposited_heat
 from biosphere.long_night import carbon_trace,periodic_storage_requirement,simulate_store,oxygen_periodic,PERIOD_DAYS
@@ -159,6 +161,6 @@ def run(out,archive=None):
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--out',type=Path,default=ROOT/'research/results/environment_screens')
+    parser.add_argument('--out',type=Path,default=ROOT/'research/studies/environment_screens/results')
     parser.add_argument('--protection-archive',type=Path)
     args=parser.parse_args();run(args.out,args.protection_archive)

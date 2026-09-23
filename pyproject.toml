@@ -1,0 +1,15 @@
+# Repository-wide Python configuration. The domain folders are imported from the
+# repository root (for example `from atmosphere.lower_air import LowerAir`); they
+# are not installed as a package. Dependencies: research/requirements.txt.
+
+[tool.pytest.ini_options]
+# Each domain owns its tests in <domain>/tests/; cross-domain studies keep their
+# scope tests beside their runners in research/studies/<study>/.
+testpaths = ["atmosphere", "climate", "biosphere", "research/studies"]
+python_files = ["test_*.py"]
+pythonpath = ["."]
+addopts = "--import-mode=importlib"
+# Never collect browser/JS lanes or heavy numba reference programs by default
+# (their test_*.py scripts write validation records); run those explicitly.
+norecursedirs = [".*", "node_modules", "build", "dist", "venv", "work", "runs",
+                 "tools", "immersion", "visualization", "archive", "ensemble"]

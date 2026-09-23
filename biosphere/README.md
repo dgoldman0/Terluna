@@ -11,10 +11,10 @@ The [accepted companion seed](../ensemble/papers/74a946e2-8f98/seed-02.md) owns 
 
 Trait rates, suppression, Q10, exchange coefficients, dissolved-oxygen ceiling and thresholds are hypothetical inputs. Units and every parameter are recorded. The models identify requirements; their outputs are not survival, health, reproduction, nutrient-cycle or ecosystem evidence. Excess carbon is unallocated surplus, not proven growth. The temperature/irradiance interface demonstrates how a climate trace alters these requirements; tissue injury and photosynthetic saturation remain unmodelled.
 
-[Results](../research/results/environment_screens/) include 180 carbon cases, 20 oxygen cases and 18 climate-to-carbon demonstrations. Species-level calibration and long-night experiments are the next evidence step.
+[Results](../research/studies/environment_screens/results/) include 180 carbon cases, 20 oxygen cases and 18 climate-to-carbon demonstrations. Species-level calibration and long-night experiments are the next evidence step.
 
 ## Remaining biological work
 
 The wider portfolio retains soils, aquatic communities, detrital/subsurface habitats, varied plant architectures, aerial exchange and human developmental requirements. Nutrient compartments, ecological interactions, plant hydraulics, structural support and complete life cycles still need separate models and empirical tests. Megaforests remain one candidate within this scope.
 
-Run `python -m unittest discover -s tests -v` and `python research/run_environment_screens.py` from the root. Provisional research sources and their actual access status are in [environment_sources.json](../research/environment_sources.json); older sources and archives remain linked through [archive_status.md](../research/archive_status.md).
+Run `python -m pytest biosphere` and `python -m research.studies.environment_screens.run` from the root. Provisional research sources and their actual access status are in [environment_sources.json](../research/studies/environment_screens/sources.json); older sources and archives remain linked through [archive_status.md](../research/archive_status.md).

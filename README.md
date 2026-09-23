@@ -22,14 +22,14 @@ The project combines shared numerical research with a five-paper ensemble. The n
 | [Engineering](engineering/) | Resource transport, growth and maintenance accounting | Conditional budgets; complete industrial and safety closure remains open |
 | [Geography](geography/), [illumination](illumination/), [habitation](habitation/) | Data leads, angular geometry and design requirements | Actual-terrain climates, visual appearance and settlement capacity still require work |
 
-The [results](research/results/environment_screens/) contain numerical cases and approximation flags. Solving the selected equations establishes their conditional consequences. Environmental compatibility, biological persistence and engineering performance require additional evidence.
+The [results](research/studies/environment_screens/results/) contain numerical cases and approximation flags. Solving the selected equations establishes their conditional consequences. Environmental compatibility, biological persistence and engineering performance require additional evidence.
 
 ## Run
 
 ```sh
 python -m pip install -r research/requirements.txt
-OPENBLAS_NUM_THREADS=1 python -m unittest discover -s tests -v
-OPENBLAS_NUM_THREADS=1 python research/run_environment_screens.py
+OPENBLAS_NUM_THREADS=1 python -m pytest
+OPENBLAS_NUM_THREADS=1 python -m research.studies.environment_screens.run
 python research/check.py
 ```
 
