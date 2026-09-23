@@ -39,8 +39,9 @@ needs the numba sky solve. After the illumination atlases change, re-bake it wit
 
 The explorable world is moving to Unreal Engine 5 as a downloadable game (and
 perhaps a multiplayer server later): a browser renderer built here cannot reach the
-look it needs. The game project lives outside this repository, on the project's
-data drive, and reads the same domain products through exports made here:
+look it needs. The game is a separate, private repository,
+[dgoldman0/terluna-game](https://github.com/dgoldman0/terluna-game), and reads the
+same domain products through exports made here:
 
 ```sh
 node bake/game/world.mjs --out <game>/Data   # heightmap, material layers, trees, stones, sites
