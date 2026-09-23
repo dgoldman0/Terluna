@@ -10,6 +10,7 @@ from dataclasses import dataclass
 import math
 import numpy as np
 from scipy.linalg import eigh
+from shared.constants import SOLAR_CONSTANT, SYNODIC_MONTH_DAYS
 
 DAY=86400.
 
@@ -18,8 +19,8 @@ class ClimateConfig:
     nlat: int = 6
     nlon: int = 24
     steps: int = 720
-    period_days: float = 29.53059
-    solar_w_m2: float = 1361.
+    period_days: float = SYNODIC_MONTH_DAYS
+    solar_w_m2: float = SOLAR_CONSTANT
     transmission: float = .90  # bolometric input; independent of EUV screening
     albedo: float = .30
     olr_at_273_w_m2: float = 200.

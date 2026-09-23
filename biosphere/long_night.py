@@ -11,7 +11,7 @@ from dataclasses import dataclass
 import math
 import numpy as np
 
-PERIOD_DAYS = 29.53059
+from shared.constants import SYNODIC_MONTH_DAYS as PERIOD_DAYS
 
 
 def validate_trace(net,dt):

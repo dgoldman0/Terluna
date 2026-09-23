@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { OM } from './om.js';
+import { MOON_RADIUS } from '../../shared/constants.js';
 import C from './core.js';
 import Column from './cloud-renderer.js';
 const GLSL_NOISE = `
@@ -96,7 +97,7 @@ class Atmosphere {
       uCloudDepth: { value: 1000 },
       uWind: { value: 2 },
       uVisibility: { value: 35000 },
-      uR: { value: 1737400 },
+      uR: { value: MOON_RADIUS },
       uSide: { value: 1 },
       uSteps: { value: 14 },
       uSun: { value: new THREE.Vector3(0, 1, 0) },

@@ -4,6 +4,7 @@
  */
 import { OM } from '../../engine/om.js';
 import C from '../../engine/core.js';
+import { LEGACY_MOON_GRAVITY } from '../../../shared/constants.js';
 const $ = (id) => document.getElementById(id);
 OM.bootLab = async function (modules) {
   const T = { ...modules.webgl, ...modules.webgpu },
@@ -466,7 +467,7 @@ function createNodeWater(T, N, renderer, scene, camera, atm, system, geography) 
           .mul(0.18)
           .add(0.4)
           .mul(0.095 * Math.pow(0.095 / k, 1.12)),
-        omega = float(Math.sqrt(1.62 * k * Math.tanh(k * 12)));
+        omega = float(Math.sqrt(LEGACY_MOON_GRAVITY * k * Math.tanh(k * 12)));
       const q = p
           .dot(dir)
           .mul(k)

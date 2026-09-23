@@ -16,10 +16,8 @@ import numpy as np
 from scipy.integrate import solve_bvp
 from scipy.optimize import brentq
 
-R = 1_737_400.0
-GM = 4.902800118e12
-KB = 1.380649e-23
-NA = 6.02214076e23
+from shared.constants import AVOGADRO as NA, BOLTZMANN as KB, MOON_GM as GM, MOON_RADIUS as R
+
 AREA = 4 * math.pi * R**2
 MOLAR = np.array([0.0280134, 0.031998])
 RS_SPECIES = KB * NA / MOLAR

@@ -6,6 +6,8 @@ const here = import.meta.dirname;
 export default defineConfig({
   // Relative asset URLs, so the built folder can be served from any path.
   base: './',
+  // Shared constants live beside the lanes in ../shared.
+  server: { fs: { allow: [here, resolve(here, '../shared')] } },
   build: {
     outDir: 'dist',
     emptyOutDir: true,

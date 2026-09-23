@@ -2,6 +2,11 @@ import { OM } from '../../engine/om.js';
 import C from '../../engine/core.js';
 import L from '../../world/landscape.js';
 import { columns, getColumn } from '../../engine/columns.js';
+import {
+  LEGACY_MOON_GRAVITY,
+  STANDARD_GRAVITY,
+  SYNODIC_MONTH_DAYS,
+} from '../../../shared/constants.js';
 const $ = (id) => document.getElementById(id);
 OM.boot = async function (T) {
   // Software WebGL backends can stall on multisample resolve. Keep this explicit
@@ -231,7 +236,7 @@ OM.boot = async function (T) {
     }
     if (s.keys.ArrowLeft) s.yaw += dt * 0.65;
     if (s.keys.ArrowRight) s.yaw -= dt * 0.65;
-    const gravity = s.world === 'earth' ? 9.80665 : 1.62;
+    const gravity = s.world === 'earth' ? STANDARD_GRAVITY : LEGACY_MOON_GRAVITY;
     if (s.jumpY > 0 || s.jumpV > 0) {
       s.jumpV -= gravity * dt;
       s.jumpY = Math.max(0, s.jumpY + s.jumpV * dt);
@@ -271,12 +276,12 @@ OM.boot = async function (T) {
     );
     sun.target.position.set(camera.position.x, camera.position.y, camera.position.z);
     sun.target.updateMatrixWorld();
-    water.uniforms.uGravity.value = s.world === 'earth' ? 9.80665 : 1.62;
+    water.uniforms.uGravity.value = s.world === 'earth' ? STANDARD_GRAVITY : LEGACY_MOON_GRAVITY;
     water.uniforms.uRain.value = s.weather.rain;
     rain.uniforms.uCamera.value.copy(camera.position);
     rain.uniforms.uFall.value = C.dropletTerminalSpeed(
       0.0007,
-      s.world === 'earth' ? 9.80665 : 1.62,
+      s.world === 'earth' ? STANDARD_GRAVITY : LEGACY_MOON_GRAVITY,
       s.world === 'earth' ? 1.2 : 1.45,
     );
     rain.uniforms.uRain.value = s.weather.rain;
@@ -298,7 +303,7 @@ OM.boot = async function (T) {
   }
   function updateHUD() {
     const solar = C.sunAt(s.phase),
-      hours = s.phase * (s.clock === 'earth' ? 24 : 29.53059 * 24);
+      hours = s.phase * (s.clock === 'earth' ? 24 : SYNODIC_MONTH_DAYS * 24);
     $('solar-phase').value = Math.round(s.phase * 100000);
     $('altitude').textContent =
       (solar.elevation >= 0 ? '+' : '') + solar.elevation.toFixed(1) + '°';

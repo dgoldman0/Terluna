@@ -1,4 +1,5 @@
 import { OM } from './om.js';
+import { LEGACY_MOON_GRAVITY } from '../../shared/constants.js';
 import C from './core.js';
 /* M1 water: a continuous curved surface, resolved planar near-field reflection,
  * depth-buffer refraction and RGB Beer–Lambert attenuation of the actual seabed.
@@ -60,7 +61,7 @@ function createWater(T, scene, atm, renderer, fields) {
     uOpaque: { value: opaqueTarget.texture },
     uOpaqueDepth: { value: opaqueTarget.depthTexture },
     uMirrorMatrix: { value: new T.Matrix4() },
-    uGravity: { value: 1.62 },
+    uGravity: { value: LEGACY_MOON_GRAVITY },
     uCamera: { value: new T.Vector3() },
     uRain: { value: 0 },
     uViewport: { value: new T.Vector2(1280, 800) },

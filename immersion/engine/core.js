@@ -1,8 +1,14 @@
 /* Pure scenario / geometry / water-accounting functions. Metres, seconds, mm. */
 import Landscape from '../world/landscape.js';
+import {
+  EARTH_RADIUS,
+  LEGACY_MOON_GRAVITY,
+  MOON_RADIUS,
+  SYNODIC_MONTH_DAYS,
+} from '../../shared/constants.js';
 const TAU = 2 * Math.PI,
   DAY = 86400,
-  PERIOD = 29.53059 * DAY;
+  PERIOD = SYNODIC_MONTH_DAYS * DAY;
 const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
 const mix = (a, b, t) => a + (b - a) * t;
 const smooth = (a, b, x) => {
@@ -50,7 +56,7 @@ function surfaceHeight(x, z) {
   return Landscape.height(x, z);
 }
 function worldRadius(world = 'moon') {
-  return world === 'earth' ? 6371000 : 1737400;
+  return world === 'earth' ? EARTH_RADIUS : MOON_RADIUS;
 }
 function curvatureSag(x, z, world = 'moon') {
   const R = worldRadius(world),
@@ -283,7 +289,7 @@ function ledgerAt(t, kind = 'episode', step = 10) {
   }
   return l;
 }
-function dropletTerminalSpeed(radius = 0.0007, gravity = 1.62, rhoAir = 1.45) {
+function dropletTerminalSpeed(radius = 0.0007, gravity = LEGACY_MOON_GRAVITY, rhoAir = 1.45) {
   const mu = 1.8e-5;
   let lo = 0,
     hi = 100;
@@ -298,10 +304,10 @@ function dropletTerminalSpeed(radius = 0.0007, gravity = 1.62, rhoAir = 1.45) {
   }
   return 0.5 * (lo + hi);
 }
-function waveOmega(k, depth = 12, gravity = 1.62) {
+function waveOmega(k, depth = 12, gravity = LEGACY_MOON_GRAVITY) {
   return Math.sqrt(gravity * k * Math.tanh(k * depth));
 }
-function waveAt(x, z, t, wind = 2, gravity = 1.62) {
+function waveAt(x, z, t, wind = 2, gravity = LEGACY_MOON_GRAVITY) {
   const dirs = [
       [0.94, 0.342],
       [0.36, 0.933],
@@ -336,7 +342,7 @@ function coastalEnvelope(x, z, wind = 1.5) {
   );
   return depth / (depth + amplitude / 0.45);
 }
-function renderWaveAt(x, z, t, wind = 1.5, gravity = 1.62) {
+function renderWaveAt(x, z, t, wind = 1.5, gravity = LEGACY_MOON_GRAVITY) {
   let y = 0,
     nx = 0,
     nz = 0;

@@ -3,12 +3,13 @@
  * RGB-band proxy; this does not replace the spectral clear-sky atlas. The optional
  * ozone layer is explicitly selected, with 300 DU and effective RGB absorption.
  */
+import { EARTH_RADIUS, MOON_RADIUS } from '../../shared/constants.js';
 const BETA = Object.freeze([5.8e-6, 13.5e-6, 33.1e-6]);
 function profile(world) {
   if (!['moon', 'earth', 'moon_no_ozone'].includes(world))
     throw new RangeError('Unknown optical world');
   return {
-    R: world === 'earth' ? 6371000 : 1737400,
+    R: world === 'earth' ? EARTH_RADIUS : MOON_RADIUS,
     H: world === 'earth' ? 8000 : 48400,
     density: world === 'earth' ? 1 : 1.2,
     top: world === 'earth' ? 120000 : 600000,

@@ -12,9 +12,7 @@ import json
 import numpy as np
 from numpy.polynomial.legendre import leggauss
 
-R_MOON = 1_737_400.0
-GM_MOON = 4.902800118e12
-R_UNIVERSAL = 1.380649e-23 * 6.02214076e23
+from shared.constants import GAS_CONSTANT as R_UNIVERSAL, MOON_GM as GM_MOON, MOON_RADIUS as R_MOON
 _GL_X, _GL_W = leggauss(16)
 
 

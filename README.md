@@ -27,10 +27,10 @@ The [results](research/studies/environment_screens/results/) contain numerical c
 ## Run
 
 ```sh
-python -m pip install -r research/requirements.txt
-OPENBLAS_NUM_THREADS=1 python -m pytest
+python -m pip install -r research/requirements.txt -r immersion/bake/requirements.txt
+(cd immersion && npm install)
+make check                                   # layer check, Python and JS tests, provenance, ensemble
 OPENBLAS_NUM_THREADS=1 python -m research.studies.environment_screens.run
-python research/check.py
 ```
 
 The new screens run with NumPy and SciPy. To inspect the original optical input ranges, restore the protection inputs or supply `--protection-archive /path/to/Lunar_Protection_Model.zip` to the screen runner. Without those inputs the audit explicitly records that their ranges were not inspected in that run. The band-heating interface rejects unspecified responses and spectral gaps.
