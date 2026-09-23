@@ -1,6 +1,6 @@
 # Atmosphere
 
-Three reduced-model lineages are available. Historical code and reference tables remain unchanged.
+Several reduced models are available. Historical code and reference tables remain unchanged.
 
 | Material | Condition | Appropriate use |
 |---|---|---|
@@ -8,6 +8,8 @@ Three reduced-model lineages are available. Historical code and reference tables
 | [September implementation](../research/baselines/feasibility/model.py) and [reference tables](reference/) | Prescribed temperature and atomic fractions | Spherical inventory and conditional escape comparison |
 | [Thermal column](thermal_column.py) | Numerically solved conduction, advected energy, molecular Jeans boundary and exobase | Conditional response to deposited sensible heat and a prescribed lower atmosphere |
 | [Spectral interface](spectral_interface.py) | Explicit band energy ledger with missing-data rejection | Connect supplied irradiance and response parameters to surface-normalized heat; audit input coverage |
+| [Lower air](lower_air.py) | Hydrostatic N2/O2/water-vapour lower atmosphere with radius-dependent gravity; `A1Profile` reads exported column profiles | Air-state input for canopy flow and tree mechanics |
+| [Column](column/) | Sounding thermodynamics, parcel ascent, diagnosed cloud support and a 600-km hydrostatic continuation (JavaScript) | Selected column experiments; the shared state behind the light-transport references |
 
 ## New calculation and remaining closure
 

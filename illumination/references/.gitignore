@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+*.nbc
+*.nbi
+# Reproducible reference outputs; compact evidence stays versioned in validation/.
+/data/a1/generated/
+/data/a2/generated/
+/data/a3/generated/
+/validation/*/*.png

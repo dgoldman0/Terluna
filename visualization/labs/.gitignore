@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+# Built lab pages and browser captures.
+/Open_Moon_A1_Accuracy_Lab.html
+/Open_Moon_A2_Accuracy_Lab.html
+/Open_Moon_A3_Accuracy_Lab.html
+/validation/*/*.png

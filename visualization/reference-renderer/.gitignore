@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+*.nbc
+*.nbi
+# Light-study images, raw radiance arrays and the built painter page.
+/data/b1/generated/
+/Open_Moon_B1_Scene_Painter.html
+/validation/b1/*.png

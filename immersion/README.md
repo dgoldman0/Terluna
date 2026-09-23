@@ -9,13 +9,16 @@ feasibility research.
 
 ## Experiences
 
-- [Shoreline](light-cycle/shoreline/README.md): a walkable development scene on an
-  authored cove, with the clear-sky atlas, terrain, vegetation and water.
+- [Shoreline](light-cycle/shoreline/README.md): the walkable development scene
+  (terrain, vegetation, water, clear-sky atlas, column clouds).
 
-The fixed-viewpoint "month of light" sky viewer is scientific visualization of
-the illumination domain's clear-sky atlases; it now lives in
-[visualization/month-of-light](../visualization/month-of-light/), and its solver
-in [illumination/sky](../illumination/sky/).
+Science that grew inside the experience now lives in its domain: the clear-sky
+solver in [illumination/sky](../illumination/sky/), the atmospheric column in
+[atmosphere/column](../atmosphere/column/), and the A1–A3 light-transport
+references in [illumination/references](../illumination/references/). Tools that
+render science faithfully (the month-of-light viewer, accuracy labs and the B1
+reference renderer) are in [visualization](../visualization/). Past checkpoint
+records are in [docs/history](docs/history/).
 
 ## Development
 

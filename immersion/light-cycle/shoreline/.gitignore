@@ -2,33 +2,10 @@ __pycache__/
 *.pyc
 node_modules/
 /Open_Moon_Shoreline.html
+/Open_Moon_Renderer_Lab.html
 /assets/surfaces/*.png
 /vendor/three.cjs
-/validation/recovery-runs/
-/Open_Moon_Renderer_Lab.html
 /vendor/three-r186/three.*.js
-/validation/r186/*.png
-/validation/r186/diagnostics/*.png
-
-/validation/clouds/*.png
-/validation/clouds/diagnostics/*.png
-
-# Reproducible A1 reference outputs; compact evidence remains versioned.
-/data/a1/generated/
-/Open_Moon_A1_Accuracy_Lab.html
-/validation/a1/*.png
-
-# Reproducible A2 reference outputs; compact evidence remains versioned.
-/data/a2/generated/
-/Open_Moon_A2_Accuracy_Lab.html
-/validation/a2/*.png
-
-# Reproducible A3 coupled reference outputs and browser captures.
-/data/a3/generated/
-/Open_Moon_A3_Accuracy_Lab.html
-/validation/a3/*.png
-
-# Reproducible B1 light-study images and raw radiance arrays.
-/data/b1/generated/
-/Open_Moon_B1_Scene_Painter.html
-/validation/b1/*.png
+# Local harness outputs (checkpoint evidence lives in immersion/docs/history).
+/validation/
+/test-results/

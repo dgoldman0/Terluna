@@ -36,7 +36,9 @@ def build(template='index.landscape.html',output='Open_Moon_Shoreline.html',webg
     html=html.replace('__SURFACE_ASSETS__',json.dumps(images,separators=(',',':')))
     for name in ['landscape','core','weather-column','cloud-optics','cloud-renderer','atmosphere','materials','terrain','surface-water','ponds','ecology','scene','water','audio','app','renderer-lab','node-materials','loader']:
         token='__'+name.upper()+'__'
-        if token in html:html=html.replace(token,(ROOT/'src'/f'{name}.js').read_text().replace('</script','<\\/script'))
+        # The column thermodynamics are the atmosphere domain's; everything else is the viewer's own.
+        source=ROOT.parents[2]/'atmosphere'/'column'/'weather-column.js' if name=='weather-column' else ROOT/'src'/f'{name}.js'
+        if token in html:html=html.replace(token,source.read_text().replace('</script','<\\/script'))
     unexpanded=re.findall(r'__[A-Z][A-Z_-]+__',html)
     if unexpanded:raise ValueError('Unexpanded tokens: '+str(unexpanded))
     path=ROOT/output;path.write_text(html)

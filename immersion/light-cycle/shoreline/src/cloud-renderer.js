@@ -4,7 +4,7 @@
  */
 (function(root){
 'use strict';
-const W=root.OpenMoonWeatherColumn||(typeof require==='function'?require('./weather-column.js'):null);
+const W=root.OpenMoonWeatherColumn||(typeof require==='function'?require('../../../../atmosphere/column/weather-column.js'):null);
 const O=root.OpenMoonCloudOptics||(typeof require==='function'?require('./cloud-optics.js'):null);
 const UNIFORMS=`
 uniform float uColumnMode,uColumnBase,uColumnTop,uColumnScale,uColumnCoverage,uColumnSteps,uColumnTime,uOpticalH,uOpticalDensity,uLightTop,uColumnCacheReady,uColumnShadowReady,uColumnAverageShadow;
