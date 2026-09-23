@@ -11,7 +11,7 @@ research domains own the science, and the experience reads their results.
 | [engine/](engine/) | Runtime systems any world can use: sky, Earth, stars and clouds drawn from baked products, clipmap terrain and surface materials, sea, rain and surface water, procedural vegetation geometry, the far forest drawn as impostors, audio. The engine never imports a world; it reads the active one from `OM.world`. |
 | [world/](world/) | World definitions. [cove.js](world/cove.js) is the development cove: its landscape field, viewpoints, rain shelter and path, authored weather episode, and planting rules, all placeholders. `cove-forest.worker.js` places its distant trees off the main thread. |
 | [experiences/](experiences/) | Entry points: [shoreline](experiences/shoreline/) (the walkable development scene) and [renderer-lab](experiences/renderer-lab/) (the WebGPU/TSL experiment) |
-| [bake/](bake/) | Turns domain products into runtime assets: `sky_atlas.py` packs the [illumination/sky](../illumination/sky/) atlases into `assets/sky/`; `columns.mjs` packs the atmosphere domain's column set; `sky_bodies.py` bakes the site ephemeris, the bright stars and the Earth-disk calibration; `surfaces.py` generates the surface textures |
+| [bake/](bake/) | Turns domain products into runtime assets: `sky_atlas.py` packs the [illumination/sky](../illumination/sky/) atlases into `assets/sky/`; `columns.mjs` packs the atmosphere domain's column set; `sky_bodies.py` bakes the site ephemeris, the bright stars and the Earth-disk calibration; `surfaces.py` generates the surface textures; `game/world.mjs` and `game/sky.py` export the world and sky for the Unreal game |
 | [assets/](assets/) | Baked runtime assets and their manifests |
 | [tests/unit/](tests/unit/) | Node tests of engine and world modules |
 | [docs/](docs/) | The [roadmap](docs/roadmap.md), rendering notes, the renderer roadmap, and the [checkpoint history](docs/history/) |
@@ -34,6 +34,25 @@ skips work when the textures already match their manifest.
 The baked sky (`assets/sky/atmosphere.json`) is committed, because regenerating it
 needs the numba sky solve. After the illumination atlases change, re-bake it with
 `python bake/sky_atlas.py`. The experiences need a WebGL2 browser.
+
+## Moving to Unreal Engine
+
+The explorable world is moving to Unreal Engine 5 as a downloadable game (and
+perhaps a multiplayer server later): a browser renderer built here cannot reach the
+look it needs. The game project lives outside this repository, on the project's
+data drive, and reads the same domain products through exports made here:
+
+```sh
+node bake/game/world.mjs --out <game>/Data   # heightmap, material layers, trees, stones, sites
+python bake/game/sky.py --out <game>/Data     # engine-sky parameters, sky atlas images,
+                                              # ephemeris, stars, Earth imagery, cloud columns
+```
+
+Each export writes a manifest with its sources' hashes and, for the world, the
+mapping to Unreal's coordinates (X = x, Y = z, Z = y, in centimetres). The sky's
+engine parameters come from `illumination/sky/engine_atmosphere.py`, which also
+states how far a three-wavelength engine sky drifts from the spectral one. The web
+experience below stays as a preview while the port is under way.
 
 ## How the experience relates to the research
 

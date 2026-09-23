@@ -1,0 +1,99 @@
+/* The Unreal game's data exports carry the world and sky unchanged. */
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import zlib from 'node:zlib';
+import { execFileSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
+import { OM } from '../../engine/om.js';
+import cove from '../../world/cove.js';
+import { treeAt } from '../../world/cove-flora.js';
+
+OM.world = cove;
+const immersion = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..'),
+  out = fs.mkdtempSync(path.join(os.tmpdir(), 'game-export-'));
+
+test('the world export keeps heights, the planting rule and the landscape transform', () => {
+  execFileSync(
+    process.execPath,
+    ['bake/game/world.mjs', '--out', out, '--size', '65', '--spacing', '8'],
+    {
+      cwd: immersion,
+      stdio: 'ignore',
+    },
+  );
+  const dir = path.join(out, 'world'),
+    m = JSON.parse(fs.readFileSync(path.join(dir, 'manifest.json'))),
+    L = m.landscape,
+    r16 = fs.readFileSync(path.join(dir, 'height.r16')),
+    [locX, locY, locZ] = L.unreal_transform.location_cm,
+    scaleZ = L.unreal_transform.scale[2];
+  assert.equal(r16.length, 65 * 65 * 2);
+  assert.equal(locX, L.origin_m.x * 100);
+  assert.equal(locY, L.origin_m.z * 100);
+  for (const [i, j] of [
+    [0, 0],
+    [32, 32],
+    [64, 10],
+    [7, 51],
+  ]) {
+    const v = r16.readUInt16LE((j * 65 + i) * 2),
+      metres = (locZ + ((v - 32768) * scaleZ) / 128) / 100,
+      want = cove.landscape.height(L.origin_m.x + i * 8, L.origin_m.z + j * 8);
+    assert.ok(Math.abs(metres - want) <= L.height_quantum_m, `${i},${j}: ${metres} vs ${want}`);
+  }
+  for (const layer of L.layers) assert.equal(fs.statSync(path.join(dir, layer.file)).size, 65 * 65);
+  const rows = fs.readFileSync(path.join(dir, 'trees.csv'), 'utf8').trim().split('\n').slice(1);
+  assert.equal(rows.length, m.vegetation.trees);
+  for (const row of rows.filter((r) => r.endsWith(',0')).slice(0, 50)) {
+    const [id, x, z] = row.split(','),
+      [, i, j] = id.split(':').map(Number),
+      t = treeAt(i, j);
+    assert.ok(t, id);
+    assert.ok(Math.abs(t.x - +x) < 1e-3 && Math.abs(t.z - +z) < 1e-3, id);
+  }
+  assert.ok(
+    rows.some((r) => r.endsWith(',1')),
+    'the detailed plan is included',
+  );
+});
+
+test('the sky export holds the clear-sky atlas frame for frame', () => {
+  execFileSync('python3', ['bake/game/sky.py', '--out', out], { cwd: immersion, stdio: 'ignore' });
+  const dir = path.join(out, 'sky'),
+    layout = JSON.parse(fs.readFileSync(path.join(dir, 'atlas.json'))),
+    source = JSON.parse(fs.readFileSync(path.join(immersion, 'assets/sky/atmosphere.json'))),
+    w = source.worlds.moon,
+    raw = zlib.gunzipSync(Buffer.from(w.data, 'base64')),
+    half = (v) => {
+      const s = v & 0x8000 ? -1 : 1,
+        e = (v >> 10) & 31,
+        f = v & 1023;
+      return s * (e ? 2 ** (e - 15) * (1 + f / 1024) : (2 ** -14 * f) / 1024);
+    };
+  const L = layout.worlds.moon,
+    [width] = L.size_px,
+    [tw, th] = L.tile_px,
+    floats = new Float32Array(
+      new Uint8Array(fs.readFileSync(path.join(dir, 'atlas_moon.f32'))).buffer,
+    );
+  for (const [f, b, a, c] of [
+    [173, 40, 0, 0],
+    [173, 20, 16, 1],
+    [100, 25, 3, 2],
+    [0, 30, 31, 0],
+  ]) {
+    const want = half(raw.readUInt16LE(((f * th + b) * tw + a) * 3 * 2 + c * 2)) * w.scale[f],
+      row = Math.floor(f / 14) * th + (th - 1 - b),
+      col = (f % 14) * tw + a;
+    assert.ok(
+      Math.abs(floats[(row * width + col) * 3 + c] - want) <= 1e-6 * Math.abs(want) + 1e-12,
+    );
+  }
+  const engine = JSON.parse(fs.readFileSync(path.join(dir, 'engine_atmosphere.json')));
+  assert.equal(engine.schema, 'terluna.illumination.engine-atmosphere/1');
+  const manifest = JSON.parse(fs.readFileSync(path.join(dir, 'manifest.json')));
+  assert.ok(manifest.sources.some((s) => s.file === 'immersion/assets/sky/atmosphere.json'));
+});
