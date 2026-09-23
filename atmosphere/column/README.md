@@ -17,15 +17,20 @@ condensate is an optical closure, not a precipitation budget.
   profiles from it (`tools/a1/export_profiles.cjs`).
 - [atmosphere/lower_air.py](../lower_air.py) reads those exports through
   `A1Profile` (for example in the megaforest wind study).
-- The shoreline experience draws its column clouds from it. That runtime use will
-  be replaced by baked column products, so the experience reads results rather
-  than running atmospheric code.
+- The immersion draws its column clouds from the exported column set. Its bake
+  step (`npm run bake:columns` in `immersion/`) runs `export_columns.cjs` and packs
+  the result; the experience never runs this model.
 
 ## Run
 
 ```sh
 node --test tests/weather-column.test.cjs
+node export_columns.cjs        # products/columns.json: every preset for Moon, no-ozone Moon and Earth
 ```
+
+`products/columns.json` (ignored) is this model's published product. It has the
+schema `terluna.atmosphere.column-set/1` and carries the model's hash, the
+evidence statement and the interpolation rule consumers must use.
 
 The model is JavaScript because it was written for the browser. It uses
 g = 1.62 m/s², while the repository's other lunar models use GM/R² = 1.6242 m/s².

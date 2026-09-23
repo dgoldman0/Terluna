@@ -1,5 +1,7 @@
 """Generate coordinated albedo/AO and normal/roughness/height surface atlases.
 
+Run `python bake/surfaces.py` (or with --if-stale to skip matching textures).
+
 All inputs are deterministic authored morphology. Heights and tile extents are
 in metres. Albedo is encoded sRGB; other channels are linear. The source and
 manifest make the maps editable and reproducible without external assets.
@@ -11,6 +13,11 @@ from scipy.ndimage import gaussian_filter
 from PIL import Image
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'assets/surfaces'; OUT.mkdir(parents=True,exist_ok=True)
+if '--if-stale' in __import__('sys').argv:
+    # Skip regeneration when every texture already matches the committed manifest.
+    files=json.loads((OUT/'manifest.json').read_text())['files']
+    if all((OUT/n).is_file() and hashlib.sha256((OUT/n).read_bytes()).hexdigest()==v['sha256'] for n,v in files.items()):
+        print('Surface textures match their manifest.');raise SystemExit(0)
 N=512; PAD=16; TILE=N+2*PAD
 Y,X=np.mgrid[:N,:N].astype(float)
 rng=np.random.default_rng(21891)
@@ -98,7 +105,7 @@ for layer,(name,metres,base,rough,height_range) in enumerate(specs):
     records.append({'name':name,'layer':layer,'tile_metres':metres,'height_range_metres':height_range,'mean_albedo_linear':np.clip(colour,0,1).mean(axis=(0,1)).tolist(),'mean_roughness':float(roughness.mean()),'height_min_max_metres':[float(h.min()),float(h.max())]})
 Image.fromarray(albedo).save(OUT/'albedo-ao.png',optimize=True)
 Image.fromarray(packed).save(OUT/'normal-roughness-height.png',optimize=True)
-manifest={'schema':'open-moon-surfaces/1','generator':'tools/generate_surfaces.py','seed':21891,'provenance':'Original deterministic morphology; no external image assets','license':"Project author's licensing choice",'tile_pixels':N,'padding_pixels':PAD,'layout':[3,2],'size_pixels':[TILE*3,TILE*2],'albedo_encoding':'sRGB RGB, linear AO alpha','normal_encoding':'tangent XY in RG, linear roughness B, height/range + 0.5 in A','layers':records,'files':{}}
+manifest={'schema':'open-moon-surfaces/1','generator':'bake/surfaces.py','seed':21891,'provenance':'Original deterministic morphology; no external image assets','license':"Project author's licensing choice",'tile_pixels':N,'padding_pixels':PAD,'layout':[3,2],'size_pixels':[TILE*3,TILE*2],'albedo_encoding':'sRGB RGB, linear AO alpha','normal_encoding':'tangent XY in RG, linear roughness B, height/range + 0.5 in A','layers':records,'files':{}}
 for name in ['albedo-ao.png','normal-roughness-height.png']:
     b=(OUT/name).read_bytes();manifest['files'][name]={'sha256':hashlib.sha256(b).hexdigest(),'bytes':len(b)}
 (OUT/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')

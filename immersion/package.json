@@ -4,11 +4,17 @@
   "type": "module",
   "description": "Open Moon immersive experiences: engine, world content and experiences.",
   "scripts": {
+    "bake:columns": "node ../atmosphere/column/export_columns.cjs && node bake/columns.mjs",
+    "bake:surfaces": "python3 bake/surfaces.py --if-stale",
+    "bake": "npm run bake:columns && npm run bake:surfaces",
+    "predev": "npm run bake",
     "dev": "vite",
+    "prebuild": "npm run bake",
     "build": "vite build",
     "preview": "vite preview",
+    "pretest": "npm run bake:columns",
     "test": "node --test --test-concurrency=1 tests/unit/",
-    "format": "prettier --write engine world experiences tests/unit"
+    "format": "prettier --write engine world experiences bake tests/unit"
   },
   "dependencies": {
     "three": "0.186.0"

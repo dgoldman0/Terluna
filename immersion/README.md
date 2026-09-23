@@ -22,11 +22,14 @@ research domains own the science, and the experience reads their results.
 cd immersion
 npm install
 python -m pip install -r bake/requirements.txt
-python bake/surfaces.py     # surface textures, checked against assets/surfaces/manifest.json
+npm run bake                # column set from atmosphere/column, surface textures
 npm run dev                 # then open /experiences/shoreline/
 npm test                    # unit tests
 npm run build               # static site in dist/; `npm run preview` serves it
 ```
+
+`dev`, `build` and `test` re-run the fast bake steps first. The surface bake
+skips work when the textures already match their manifest.
 
 The baked sky (`assets/sky/atmosphere.json`) is committed, because regenerating it
 needs the numba sky solve. After the illumination atlases change, re-bake it with
@@ -39,9 +42,10 @@ needs the numba sky solve. After the illumination atlases change, re-bake it wit
   [atmosphere/column](../atmosphere/column/), and the light-transport references
   that measure this renderer in [illumination/references](../illumination/references/).
   Tools that render science faithfully are in [visualization](../visualization/).
-- **The experience reads results.** The sky comes from a baked atlas. One
-  exception remains: the cloud renderer still imports the atmosphere domain's
-  column model directly. Baked column products will replace that import.
+- **The experience reads results.** `bake/` turns domain products into assets:
+  the sky from the illumination atlases, and the clouds' atmospheric columns from
+  the atmosphere domain's column set. At runtime the experience interpolates
+  those data and runs no domain model.
 - **The scene is a placeholder.** The shoreline cove, its trees and its weather
   episode were authored for development. They make no claim about what Open Moon
   environments will be. Specific environments should come from the biology,

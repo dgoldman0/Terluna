@@ -19,8 +19,10 @@ import '../../engine/audio.js';
 import './app.js';
 import CloudRenderer from '../../engine/cloud-renderer.js';
 import surfaceManifest from '../../assets/surfaces/manifest.json';
+import { loadColumns } from '../../engine/columns.js';
 
 const SKY_ATLAS = new URL('../../assets/sky/atmosphere.json', import.meta.url);
+const COLUMNS = new URL('../../assets/columns/columns.json', import.meta.url);
 const ALBEDO = new URL('../../assets/surfaces/albedo-ao.png', import.meta.url);
 const PACKED = new URL('../../assets/surfaces/normal-roughness-height.png', import.meta.url);
 
@@ -40,6 +42,9 @@ async function start() {
     const response = await fetch(SKY_ATLAS);
     if (!response.ok) throw Error(`Sky atlas unavailable (${response.status}).`);
     OM.skyData = await response.json();
+    const columnResponse = await fetch(COLUMNS);
+    if (!columnResponse.ok) throw Error(`Column set unavailable (${columnResponse.status}).`);
+    loadColumns(await columnResponse.json());
     OM.surfaceSpec = { manifest: surfaceManifest, albedo: ALBEDO.href, packed: PACKED.href };
     // Measurement probes (illumination/references) read these from the page, as
     // they did when every module was a global script.

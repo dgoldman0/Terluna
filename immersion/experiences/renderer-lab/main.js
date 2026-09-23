@@ -19,8 +19,10 @@ import '../../engine/water.js';
 import './node-materials.js';
 import './renderer-lab.js';
 import surfaceManifest from '../../assets/surfaces/manifest.json';
+import { loadColumns } from '../../engine/columns.js';
 
 const SKY_ATLAS = new URL('../../assets/sky/atmosphere.json', import.meta.url);
+const COLUMNS = new URL('../../assets/columns/columns.json', import.meta.url);
 const ALBEDO = new URL('../../assets/surfaces/albedo-ao.png', import.meta.url);
 const PACKED = new URL('../../assets/surfaces/normal-roughness-height.png', import.meta.url);
 
@@ -40,6 +42,9 @@ async function start() {
     const response = await fetch(SKY_ATLAS);
     if (!response.ok) throw Error(`Sky atlas unavailable (${response.status}).`);
     OM.skyData = await response.json();
+    const columnResponse = await fetch(COLUMNS);
+    if (!columnResponse.ok) throw Error(`Column set unavailable (${columnResponse.status}).`);
+    loadColumns(await columnResponse.json());
     OM.surfaceSpec = { manifest: surfaceManifest, albedo: ALBEDO.href, packed: PACKED.href };
     const manifest = { name: 'three', version: '0.186.0', revision: webgl.REVISION };
     await OM.bootLab({ webgl, webgpu, tsl, manifest });

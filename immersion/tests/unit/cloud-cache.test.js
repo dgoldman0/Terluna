@@ -5,6 +5,12 @@ import * as T from 'three';
 import { OM } from '../../engine/om.js';
 import '../../engine/atmosphere.js';
 import CloudRenderer from '../../engine/cloud-renderer.js';
+import fs from 'node:fs';
+import { loadColumns } from '../../engine/columns.js';
+// Baked by `npm run bake:columns` (run automatically before `npm test`).
+loadColumns(
+  JSON.parse(fs.readFileSync(new URL('../../assets/columns/columns.json', import.meta.url))),
+);
 function fixture() {
   const a = new OM.Atmosphere(T, {
     worlds: {

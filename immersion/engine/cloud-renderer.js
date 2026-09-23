@@ -2,11 +2,9 @@
  * are sampled at physical radial altitude. Subpixel morphology, multiple cloud
  * scattering and RGB aerial in-scattering are explicit rendering approximations.
  */
-// The column model belongs to the atmosphere domain. It is still a browser script
-// that registers itself globally; baked column products will replace this import.
-import '../../atmosphere/column/weather-column.js';
 import O from './cloud-optics.js';
-const W = globalThis.OpenMoonWeatherColumn;
+// Columns come from the atmosphere domain's baked column set (engine/columns.js).
+import { columns, getColumn } from './columns.js';
 const UNIFORMS = `
 uniform float uColumnMode,uColumnBase,uColumnTop,uColumnScale,uColumnCoverage,uColumnSteps,uColumnTime,uOpticalH,uOpticalDensity,uLightTop,uColumnCacheReady,uColumnShadowReady,uColumnAverageShadow;
 uniform sampler2D uColumnProfile,uColumnSun,uColumnSkyMap,uColumnShadowMap;
@@ -213,7 +211,8 @@ class Controller {
     });
   }
   select(key) {
-    if (key !== 'reference' && !W.PRESETS[key]) throw new RangeError('Unknown atmospheric study');
+    if (key !== 'reference' && !columns.presets?.[key])
+      throw new RangeError('Unknown atmospheric study');
     this.key = key;
     this.world = null;
     this.current = null;
@@ -234,8 +233,8 @@ class Controller {
       const key = world + ':' + this.key;
       let record = this.cache.get(key);
       if (!record) {
-        const model = W.create(this.key, world),
-          profile = W.textureData(model),
+        const model = getColumn(world, this.key),
+          profile = model.texture,
           light = O.buildTable(world, profile.top + 1000);
         record = { model, profile, light };
         this.cache.set(key, record);

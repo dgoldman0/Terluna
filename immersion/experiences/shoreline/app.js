@@ -1,9 +1,7 @@
 import { OM } from '../../engine/om.js';
 import C from '../../engine/core.js';
 import L from '../../world/landscape.js';
-// The column model is the atmosphere domain's browser script (see engine/cloud-renderer.js).
-import '../../../atmosphere/column/weather-column.js';
-const W = globalThis.OpenMoonWeatherColumn;
+import { columns, getColumn } from '../../engine/columns.js';
 const $ = (id) => document.getElementById(id);
 OM.boot = async function (T) {
   // Software WebGL backends can stall on multisample resolve. Keep this explicit
@@ -659,7 +657,7 @@ OM.boot = async function (T) {
     }
     const q = c.summary,
       km = (v) => (v === null ? 'none' : (v / 1000).toFixed(2) + ' km');
-    const other = W.create(c.key, s.world === 'earth' ? 'moon' : 'earth').summary;
+    const other = getColumn(s.world === 'earth' ? 'moon' : 'earth', c.key).summary;
     $('column-summary').textContent =
       `${q.name}. Cloud base ${km(q.cloudBase_m)}, top ${km(q.cloudTop_m)}. Comparison ${s.world === 'earth' ? 'Moon' : 'Earth'}: ${km(other.cloudBase_m)} to ${km(other.cloudTop_m)}.`;
     $('column-physics').textContent =
@@ -730,7 +728,7 @@ OM.boot = async function (T) {
       .querySelectorAll('[data-column]')
       .forEach((b) => b.classList.toggle('selected', b.dataset.column === key));
     if (key !== 'reference') {
-      const spec = W.PRESETS[key];
+      const spec = columns.presets[key];
       s.weather = {
         ...s.weather,
         temperature: spec.surfaceT,
@@ -767,6 +765,10 @@ OM.boot = async function (T) {
               summary: c.summary,
               optics: atmosphere.columnClouds.snapshot().optics,
               rows: c.rows,
+              rows_note:
+                c.key === 'fog'
+                  ? 'Full resolution to 500 m, then every tenth row.'
+                  : 'Every tenth row. Full columns: atmosphere/column (export_columns.cjs).',
             },
             null,
             2,

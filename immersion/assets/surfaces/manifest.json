@@ -1,6 +1,6 @@
 {
   "schema": "open-moon-surfaces/1",
-  "generator": "tools/generate_surfaces.py",
+  "generator": "bake/surfaces.py",
   "seed": 21891,
   "provenance": "Original deterministic morphology; no external image assets",
   "license": "Project author's licensing choice",

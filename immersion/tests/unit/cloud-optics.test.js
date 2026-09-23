@@ -3,18 +3,26 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import O from '../../engine/cloud-optics.js';
 import C from '../../engine/core.js';
-import '../../../atmosphere/column/weather-column.js';
-const W = globalThis.OpenMoonWeatherColumn;
+import fs from 'node:fs';
+import { loadColumns, getColumn } from '../../engine/columns.js';
+// Baked by `npm run bake:columns` (run automatically before `npm test`).
+loadColumns(
+  JSON.parse(fs.readFileSync(new URL('../../assets/columns/columns.json', import.meta.url))),
+);
 const near = (a, b, e = 1e-7) => assert.ok(Math.abs(a - b) < e, `${a} vs ${b} exceeds ${e}`);
-const models = {};
-function get(k = 'fair', w = 'moon') {
-  return (models[k + w] ??= W.create(k, w));
-}
 test('Scene weather scenarios leave the existing rainfall ledger unchanged', () => {
   const before = C.ledgerAt(14400);
-  get('convection');
-  get('fog');
+  getColumn('moon', 'convection');
+  getColumn('moon', 'fog');
   assert.deepEqual(C.ledgerAt(14400), before);
+});
+test('Baked columns interpolate their rows and alias the no-ozone Moon', () => {
+  const fog = getColumn('moon', 'fog'),
+    alias = getColumn('moon_no_ozone', 'fog');
+  assert.equal(alias.summary.cloudTop_m, fog.summary.cloudTop_m);
+  const [a, b] = fog.rows;
+  near(fog.sample((a.z + b.z) / 2).T, (a.T + b.T) / 2, 1e-9);
+  assert.equal(fog.texture.data.length, fog.texture.n * 4);
 });
 test('Optical vertical molecular column converges to its analytic exponential integral', () => {
   for (const w of ['earth', 'moon']) {
