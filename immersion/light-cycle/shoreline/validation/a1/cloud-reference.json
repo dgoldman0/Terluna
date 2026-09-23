@@ -1,0 +1,396 @@
+{
+  "schema": "open-moon-a1-cloud-reference/1",
+  "field_sha256": "83e8e6134faf28c6cb2b816ce0c366a427813953cbc7de77e18a2a9d7452760f",
+  "field_file": "moon-fair.cloud.json",
+  "profile_sha256": "717deba2cb6f41afc291f1addb13b19c3ebbb6d98cc6dc21354ee02e567d86ca",
+  "solver_sha256": "2370c70d9648a37b13047568290f1a9f820db56fb4de500c161a306155889fd9",
+  "samples_per_ray_per_order": 65536,
+  "seed": 73471,
+  "majorant_m1": 0.01185157869525533,
+  "algorithm": "analog delta-tracked free flight; ratio-tracked solar visibility; two-HG phase; next-event estimation; Russian roulette from bounce 8",
+  "model": "Gray cloud-only first order versus multiple scattering; same frozen voxel field; unit collimated solar normal irradiance; black boundaries; no gas, surface, tone mapping or cache",
+  "limitations": [
+    "Finite voxelized crop; sampling errors against continuous production density are separate.",
+    "Gray conservative cloud with selected phase function.",
+    "Unit solar boundary, zero molecular atmosphere, black external boundaries.",
+    "Production empirical radiance closure and whole-image cache remain unbenchmarked."
+  ],
+  "analytic_tests": [
+    {
+      "name": "vacuum",
+      "mean": 1.0,
+      "standard_error": 0.0,
+      "expected": 1.0,
+      "failures": 0,
+      "passed": true
+    },
+    {
+      "name": "pure absorption Beer",
+      "mean": 0.496002197265625,
+      "standard_error": 0.0019530774685032547,
+      "expected": 0.4965853037914095,
+      "failures": 0,
+      "passed": true
+    },
+    {
+      "name": "homogeneous single scattering",
+      "mean": 0.6692198666432659,
+      "standard_error": 0.004315939361882836,
+      "expected": 0.6685363632930966,
+      "failures": 0,
+      "passed": true
+    },
+    {
+      "name": "conservative isotropic boundary",
+      "mean": 1.0006345843079267,
+      "standard_error": 0.0005982262809180749,
+      "expected": 1.0,
+      "failures": 0,
+      "passed": true
+    },
+    {
+      "name": "phase normalization and first moment",
+      "integral": 1.000000000000029,
+      "moment": 0.6425000000000294,
+      "expectedMoment": 0.6425000000000001,
+      "passed": true
+    },
+    {
+      "name": "sampled phase moment and direction normalization",
+      "mean": 0.6406821580462422,
+      "standard_error": 0.0014890354667255786,
+      "expected": 0.6425000000000001,
+      "max_norm_error": 4.440892098500626e-16,
+      "passed": true
+    }
+  ],
+  "rays": [
+    {
+      "ray": {
+        "origin": [
+          -13871.4432586595,
+          9188.610732243224,
+          -12330.171785475111
+        ],
+        "direction": [
+          0,
+          1,
+          0
+        ]
+      },
+      "gpu_single_scatter": 0.0014768196269869804,
+      "gpu_transmittance": 0.006189538165926933,
+      "cpu_transmittance_16384": 0.006189558192572487,
+      "single": {
+        "mean": 0.0014754301337763052,
+        "standard_error": 2.4916523945145296e-05
+      },
+      "multiple": {
+        "mean": 0.10079869007945236,
+        "standard_error": 0.0010687399910839475
+      },
+      "single_order_agrees_with_GPU_within_6SE_plus_1e_minus5": true,
+      "multiple_minus_single": 0.09932325994567605
+    },
+    {
+      "ray": {
+        "origin": [
+          -4623.814419553168,
+          9188.610732243224,
+          -12330.171785475111
+        ],
+        "direction": [
+          0,
+          1,
+          0
+        ]
+      },
+      "gpu_single_scatter": 0.013579575344920158,
+      "gpu_transmittance": 0.17769938707351685,
+      "cpu_transmittance_16384": 0.1777038295137936,
+      "single": {
+        "mean": 0.013658592312032137,
+        "standard_error": 7.316681523612909e-05
+      },
+      "multiple": {
+        "mean": 0.07507779179295905,
+        "standard_error": 0.0007485876255162051
+      },
+      "single_order_agrees_with_GPU_within_6SE_plus_1e_minus5": true,
+      "multiple_minus_single": 0.06141919948092692
+    },
+    {
+      "ray": {
+        "origin": [
+          4623.814419553168,
+          9188.610732243224,
+          -12330.171785475111
+        ],
+        "direction": [
+          0,
+          1,
+          0
+        ]
+      },
+      "gpu_single_scatter": 0.004052268341183662,
+      "gpu_transmittance": 0.033945389091968536,
+      "cpu_transmittance_16384": 0.03394621470872408,
+      "single": {
+        "mean": 0.004063254427486279,
+        "standard_error": 3.243927099887395e-05
+      },
+      "multiple": {
+        "mean": 0.0955257502012486,
+        "standard_error": 0.0009739354125975704
+      },
+      "single_order_agrees_with_GPU_within_6SE_plus_1e_minus5": true,
+      "multiple_minus_single": 0.09146249577376231
+    },
+    {
+      "ray": {
+        "origin": [
+          13871.4432586595,
+          9188.610732243224,
+          -12330.171785475111
+        ],
+        "direction": [
+          0,
+          1,
+          0
+        ]
+      },
+      "gpu_single_scatter": 0,
+      "gpu_transmittance": 1,
+      "cpu_transmittance_16384": 1.0,
+      "single": {
+        "mean": 0.0,
+        "standard_error": 0.0
+      },
+      "multiple": {
+        "mean": 0.0,
+        "standard_error": 0.0
+      },
+      "single_order_agrees_with_GPU_within_6SE_plus_1e_minus5": true,
+      "multiple_minus_single": 0.0
+    },
+    {
+      "ray": {
+        "origin": [
+          -13871.4432586595,
+          9188.610732243224,
+          0
+        ],
+        "direction": [
+          0,
+          1,
+          0
+        ]
+      },
+      "gpu_single_scatter": 0.015308110043406487,
+      "gpu_transmittance": 0.7673027515411377,
+      "cpu_transmittance_16384": 0.7673109127739474,
+      "single": {
+        "mean": 0.015337351549099187,
+        "standard_error": 0.0001107713771969528
+      },
+      "multiple": {
+        "mean": 0.02021476910215651,
+        "standard_error": 0.0002491005626951516
+      },
+      "single_order_agrees_with_GPU_within_6SE_plus_1e_minus5": true,
+      "multiple_minus_single": 0.004877417553057322
+    },
+    {
+      "ray": {
+        "origin": [
+          -4623.814419553168,
+          9188.610732243224,
+          0
+        ],
+        "direction": [
+          0,
+          1,
+          0
+        ]
+      },
+      "gpu_single_scatter": 0.017863480374217033,
+      "gpu_transmittance": 0.0923091396689415,
+      "cpu_transmittance_16384": 0.09231012011818909,
+      "single": {
+        "mean": 0.017760429370150915,
+        "standard_error": 6.422316268208464e-05
+      },
+      "multiple": {
+        "mean": 0.1107637044063824,
+        "standard_error": 0.0008926233208970449
+      },
+      "single_order_agrees_with_GPU_within_6SE_plus_1e_minus5": true,
+      "multiple_minus_single": 0.09300327503623149
+    },
+    {
+      "ray": {
+        "origin": [
+          4623.814419553168,
+          9188.610732243224,
+          0
+        ],
+        "direction": [
+          0,
+          1,
+          0
+        ]
+      },
+      "gpu_single_scatter": 0.02310979925096035,
+      "gpu_transmittance": 0.272135466337204,
+      "cpu_transmittance_16384": 0.27213883069029504,
+      "single": {
+        "mean": 0.023162082148394367,
+        "standard_error": 8.853223245155006e-05
+      },
+      "multiple": {
+        "mean": 0.07578566983614951,
+        "standard_error": 0.0006692489097449154
+      },
+      "single_order_agrees_with_GPU_within_6SE_plus_1e_minus5": true,
+      "multiple_minus_single": 0.052623587687755144
+    },
+    {
+      "ray": {
+        "origin": [
+          13871.4432586595,
+          9188.610732243224,
+          0
+        ],
+        "direction": [
+          0,
+          1,
+          0
+        ]
+      },
+      "gpu_single_scatter": 8.044139576668385e-06,
+      "gpu_transmittance": 2.5105186068685725e-05,
+      "cpu_transmittance_16384": 2.5104958940694384e-05,
+      "single": {
+        "mean": 9.240817132270405e-06,
+        "standard_error": 2.0023906900952505e-06
+      },
+      "multiple": {
+        "mean": 0.07506574011753625,
+        "standard_error": 0.0018406011808325096
+      },
+      "single_order_agrees_with_GPU_within_6SE_plus_1e_minus5": true,
+      "multiple_minus_single": 0.07505649930040398
+    },
+    {
+      "ray": {
+        "origin": [
+          -13871.4432586595,
+          9188.610732243224,
+          12330.171785475111
+        ],
+        "direction": [
+          0,
+          1,
+          0
+        ]
+      },
+      "gpu_single_scatter": 0.015042324550449848,
+      "gpu_transmittance": 0.12524451315402985,
+      "cpu_transmittance_16384": 0.12524584232661934,
+      "single": {
+        "mean": 0.015056824382317908,
+        "standard_error": 7.173277445727093e-05
+      },
+      "multiple": {
+        "mean": 0.09693013382430866,
+        "standard_error": 0.0008631464411215469
+      },
+      "single_order_agrees_with_GPU_within_6SE_plus_1e_minus5": true,
+      "multiple_minus_single": 0.08187330944199075
+    },
+    {
+      "ray": {
+        "origin": [
+          -4623.814419553168,
+          9188.610732243224,
+          12330.171785475111
+        ],
+        "direction": [
+          0,
+          1,
+          0
+        ]
+      },
+      "gpu_single_scatter": 0.027412980794906616,
+      "gpu_transmittance": 0.4120803773403168,
+      "cpu_transmittance_16384": 0.4120852957170765,
+      "single": {
+        "mean": 0.027205603729846053,
+        "standard_error": 0.00010416096015860194
+      },
+      "multiple": {
+        "mean": 0.05809086364957751,
+        "standard_error": 0.0005243858717228813
+      },
+      "single_order_agrees_with_GPU_within_6SE_plus_1e_minus5": true,
+      "multiple_minus_single": 0.030885259919731456
+    },
+    {
+      "ray": {
+        "origin": [
+          4623.814419553168,
+          9188.610732243224,
+          12330.171785475111
+        ],
+        "direction": [
+          0,
+          1,
+          0
+        ]
+      },
+      "gpu_single_scatter": 0.021158872172236443,
+      "gpu_transmittance": 0.5734050273895264,
+      "cpu_transmittance_16384": 0.573412548268761,
+      "single": {
+        "mean": 0.021059718680843564,
+        "standard_error": 0.00010763288919961039
+      },
+      "multiple": {
+        "mean": 0.04442378376592625,
+        "standard_error": 0.0005108942652595069
+      },
+      "single_order_agrees_with_GPU_within_6SE_plus_1e_minus5": true,
+      "multiple_minus_single": 0.023364065085082684
+    },
+    {
+      "ray": {
+        "origin": [
+          13871.4432586595,
+          9188.610732243224,
+          12330.171785475111
+        ],
+        "direction": [
+          0,
+          1,
+          0
+        ]
+      },
+      "gpu_single_scatter": 0,
+      "gpu_transmittance": 1,
+      "cpu_transmittance_16384": 1.0,
+      "single": {
+        "mean": 0.0,
+        "standard_error": 0.0
+      },
+      "multiple": {
+        "mean": 0.0,
+        "standard_error": 0.0
+      },
+      "single_order_agrees_with_GPU_within_6SE_plus_1e_minus5": true,
+      "multiple_minus_single": 0.0
+    }
+  ],
+  "unresolved_paths": 0,
+  "passed": true,
+  "elapsed_s": 20.593794765999974
+}

@@ -1,0 +1,286 @@
+{
+  "schema": "open-moon-a1-validation/1",
+  "generated_utc": "2026-09-22T22:46:32.720789+00:00",
+  "status": "reference-checkpoint-passed",
+  "scope": "Additive A1 reference implementation, offline inspector and cloud-only transport benchmark. Original shoreline rendering remains unchanged.",
+  "publication": {
+    "remote_write_performed": false,
+    "baseline": "Saved revision-04 source built on 032765c51b1aeb140c732e8f484e47efda15cf4d",
+    "patch_application": "Apply only after saved revision 04, after git apply --check; do not replace newer files."
+  },
+  "baseline_html_sha256": "c7ead1fd83e0d55518d2951e08cd46d31f323280885125382a8013b5d74636d9",
+  "source_sha256": {
+    "build_accuracy.py": "c8207066b6ab0e81f7a19309f8507a2d68ced23de65040cd9f12ddeb6c838148",
+    "index.accuracy-lab.html": "60c89d09690cb0465d88e8506815182606901e14ea0ad08ef3ecff6ee291f0b1",
+    "src/accuracy-lab.js": "10b29e3a9dd861193e1502fd8c8b559eba5d63ace5682f2020a583507e36c6ab",
+    "src/atmospheric-profile.js": "fe916ef5b8e295d69198bbcf58c5670bcf053380442243a9af4d75e80fcd2ba7",
+    "src/profile-optics.js": "38017bc8f3562f96b5c9c4633d07574e0002facaef822660528d2bfe66c58d3b",
+    "src/frozen-cloud-field.js": "aa8e61fc12f610a58afe8863f5cfa3fa6c3acc252e09e2af2ecd07e0c2f73d93",
+    "src/weather-column.js": "7b4e39a6096025205f52ec4fa035d1557e85fc6638d691b8b129959b8e5f35e4",
+    "src/cloud-renderer.js": "78c1f5339fe80940a4362c7edd71310b586ba397c91a85b1ff8b2e3611767bfc",
+    "tests/a1_frozen_probe.js": "8cf66d8e98b652987e2f813efab3bbd3df59ddb6bcadd5173ddda3c6a87c64e7",
+    "tests/atmospheric-profile.test.cjs": "0549918deaba27d16b0c6092828224bbb2bc2aa92f27f25c8c2d72ae76dd8962",
+    "tests/frozen-cloud-field.test.cjs": "2cc656915e62e2f1b798ff9bda168f2d52de6381eab84fc02079c2162ca2baab",
+    "data/a1/spectral-inputs.json": "59f47ce7147e24b3b5c57d3f4799a91dd2000d6d9bae60d6185fc952fbff2530",
+    "data/a1/BRUNETON_LICENSE.txt": "530cf0bc2bf96a7e41400683ce6cfb3301ba8cf0166f6528b2f5caf87fa7df38",
+    "A1_METHODS.md": "93f214e4dc63a39087e3f8e5ce39c7b7fc7d8b79dd41460336891c653ba43df8",
+    "A1_THIRD_PARTY_NOTICES.md": "c5c9a3d38ece8772f4f47adedc5ac24c47316eee00c9af4c287f6c3216be16a3",
+    "requirements-a1.txt": "404a1997746579f7134b00e4aa8cc13cce32fed6d0006e66d30d2dd1baef21f1",
+    "tools/a1/capture_field.py": "87c26c34ac5a75ac829f8630d3a14acbdcb45b528b9e1217fb260324079a1aeb",
+    "tools/a1/check_lab.py": "32b14ce3b1b91989d7b5abda8b25ae962de92ebdfece9b98230657408b23d4bd",
+    "tools/a1/cloud_reference.py": "2370c70d9648a37b13047568290f1a9f820db56fb4de500c161a306155889fd9",
+    "tools/a1/reference_optics.py": "700b4b7c5029cc68274c3fd5b890ceb8588dd6a0cfe0b22f39804ded96822d4c",
+    "tools/a1/validate_a1.py": "8bef3033b6912693468d1b72adbdf8c8744977cb27c0e4c38eb4cf9c34944eac",
+    "tools/a1/export_profiles.cjs": "b0cd99c4e58ef0901cf6d9694efae7b9e0a7ab2755226c46ff9d938f345b9710"
+  },
+  "runtime": {
+    "node": "v22.16.0",
+    "python_packages": {
+      "numpy": "2.3.5",
+      "scipy": "1.17.0",
+      "numba": "0.65.1",
+      "playwright": "1.57.0"
+    }
+  },
+  "unit_tests": {
+    "tests": 159,
+    "pass": 159,
+    "fail": 0,
+    "skipped": 0
+  },
+  "clear_sky": {
+    "states": 9,
+    "tested_column_geometries_per_state": 4,
+    "sampled_radiance_convergence_rays_per_state": 6,
+    "checks": [
+      {
+        "id": "moon-fair",
+        "profile_sha256": "717deba2cb6f41afc291f1addb13b19c3ebbb6d98cc6dc21354ee02e567d86ca",
+        "gauss_vs_scipy_max_scaled_relative_column_error": 6.5128024517283294e-09,
+        "js_vs_scipy_max_scaled_relative_column_error": 2.8900486953085267e-08,
+        "six_ray_max_relative_spectral_L1": 0.00024094532998879774,
+        "numerical_gate_passed": true
+      },
+      {
+        "id": "moon-convection",
+        "profile_sha256": "fac9c0c3bbdd54b08a647e6981072fbbfc05df04a1273e8b3c5903386ebdd6e1",
+        "gauss_vs_scipy_max_scaled_relative_column_error": 1.3726794860944673e-08,
+        "js_vs_scipy_max_scaled_relative_column_error": 4.4178933851499415e-08,
+        "six_ray_max_relative_spectral_L1": 0.00020849261536201485,
+        "numerical_gate_passed": true
+      },
+      {
+        "id": "moon-fog",
+        "profile_sha256": "537d6be55d1336c1fc16e0f44983e47f9aa95829c504662231822c3db401a7c6",
+        "gauss_vs_scipy_max_scaled_relative_column_error": 1.4823898250486553e-08,
+        "js_vs_scipy_max_scaled_relative_column_error": 1.467291634523752e-08,
+        "six_ray_max_relative_spectral_L1": 0.00021442621716061212,
+        "numerical_gate_passed": true
+      },
+      {
+        "id": "earth-fair",
+        "profile_sha256": "cb31c399a9a3d02dac2d06f6cada9db2b19fc6e8fe7f39b632b835df4eeb620e",
+        "gauss_vs_scipy_max_scaled_relative_column_error": 1.1043330560050506e-08,
+        "js_vs_scipy_max_scaled_relative_column_error": 1.7372762675919705e-08,
+        "six_ray_max_relative_spectral_L1": 0.0030006234960978664,
+        "numerical_gate_passed": true
+      },
+      {
+        "id": "earth-convection",
+        "profile_sha256": "88e4c6716b13a6ce009ac9f9e80b4bf84c3850f1bd15b1c612c858d4900b87b1",
+        "gauss_vs_scipy_max_scaled_relative_column_error": 5.416789252578952e-09,
+        "js_vs_scipy_max_scaled_relative_column_error": 6.689393938982653e-09,
+        "six_ray_max_relative_spectral_L1": 0.0031280449343881905,
+        "numerical_gate_passed": true
+      },
+      {
+        "id": "earth-fog",
+        "profile_sha256": "4b2dd6d36ae4e3b324a2295212193bbe854bdcb809a49ce537729619076ebac9",
+        "gauss_vs_scipy_max_scaled_relative_column_error": 5.1689179802248455e-09,
+        "js_vs_scipy_max_scaled_relative_column_error": 4.048420680893327e-07,
+        "six_ray_max_relative_spectral_L1": 0.0030597870313571903,
+        "numerical_gate_passed": true
+      },
+      {
+        "id": "moon_no_ozone-fair",
+        "profile_sha256": "3ff2a352b9a38fc2ff9cfa028b19fa5f915ff139120d87ce285cf50d8ec7ebd1",
+        "gauss_vs_scipy_max_scaled_relative_column_error": 6.5128024517283294e-09,
+        "js_vs_scipy_max_scaled_relative_column_error": 2.8900486953085267e-08,
+        "six_ray_max_relative_spectral_L1": 0.00022726325107687442,
+        "numerical_gate_passed": true
+      },
+      {
+        "id": "moon_no_ozone-convection",
+        "profile_sha256": "7f35bfbfc0d9c97926456e6a98fdea17c0677502fb27f17d120e06ae9005fc3a",
+        "gauss_vs_scipy_max_scaled_relative_column_error": 1.3726794860944673e-08,
+        "js_vs_scipy_max_scaled_relative_column_error": 4.4178933851499415e-08,
+        "six_ray_max_relative_spectral_L1": 0.00020953598310021024,
+        "numerical_gate_passed": true
+      },
+      {
+        "id": "moon_no_ozone-fog",
+        "profile_sha256": "ad2aa4d1c506c88e9fdedcb1d60418c8ab42e3f48c5f24566329b9f872dd7c65",
+        "gauss_vs_scipy_max_scaled_relative_column_error": 1.4823898250486553e-08,
+        "js_vs_scipy_max_scaled_relative_column_error": 1.467291634523752e-08,
+        "six_ray_max_relative_spectral_L1": 0.00022049686843824754,
+        "numerical_gate_passed": true
+      }
+    ],
+    "scattering_orders": 1,
+    "maximum_tested_relative_spectral_L1": 0.0031280449343881905,
+    "whole_atlas_error_bound": null,
+    "physical_error_bound": null
+  },
+  "fair_moon_column": {
+    "vertical_reference_density_metres": 64831.03350065928,
+    "legacy_exponential_metres": 58080.0,
+    "relative_change": 0.11623680269730174,
+    "upper_sensitivity": [
+      {
+        "options": {
+          "top_m": 900000
+        },
+        "profile_sha256": "1342753f0ff3ba7ffb3f8b63050d43fc0c69fa8a89649a3baf44647daaad0f60",
+        "verticalAir_m": 64832.456881952035,
+        "relativeVerticalChange": 2.195524605874688e-05
+      },
+      {
+        "options": {
+          "upperTemperature_K": 200
+        },
+        "profile_sha256": "88c7dafc74f1f842bfa5025346c01389437fed0cf6baa617868b80806ebad3b4",
+        "verticalAir_m": 64820.3745692742,
+        "relativeVerticalChange": -0.00016441094348695895
+      },
+      {
+        "options": {
+          "upperTemperature_K": 250
+        },
+        "profile_sha256": "e2fbc7e49ce70dab16d87d052f8f865ed1a42f14e85b7c96bdae34de4648e6f5",
+        "verticalAir_m": 64853.76902496366,
+        "relativeVerticalChange": 0.0003506889074065267
+      },
+      {
+        "options": {
+          "upperTemperature_K": 300
+        },
+        "profile_sha256": "3e04652d3015f452470da06b7fa9257c0f2b2b5403a32489dda95fcfce365c8c",
+        "verticalAir_m": 64885.82599821093,
+        "relativeVerticalChange": 0.0008451584772453113
+      }
+    ]
+  },
+  "frozen_cloud": {
+    "field_sha256": "83e8e6134faf28c6cb2b816ce0c366a427813953cbc7de77e18a2a9d7452760f",
+    "dimensions": [
+      49,
+      33,
+      49
+    ],
+    "gpu_backend": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "gpu_cpu_max_absolute_extinction_error_m1": 5.215008469332261e-09,
+    "voxelization_24_probe_relative_L1": 0.10863794975539309,
+    "voxelization_gate_closed": false,
+    "samples_per_ray_per_order": 65536,
+    "ray_count": 12,
+    "analytic_checks": [
+      {
+        "name": "vacuum",
+        "mean": 1.0,
+        "standard_error": 0.0,
+        "expected": 1.0,
+        "failures": 0,
+        "passed": true
+      },
+      {
+        "name": "pure absorption Beer",
+        "mean": 0.496002197265625,
+        "standard_error": 0.0019530774685032547,
+        "expected": 0.4965853037914095,
+        "failures": 0,
+        "passed": true
+      },
+      {
+        "name": "homogeneous single scattering",
+        "mean": 0.6692198666432659,
+        "standard_error": 0.004315939361882836,
+        "expected": 0.6685363632930966,
+        "failures": 0,
+        "passed": true
+      },
+      {
+        "name": "conservative isotropic boundary",
+        "mean": 1.0006345843079267,
+        "standard_error": 0.0005982262809180749,
+        "expected": 1.0,
+        "failures": 0,
+        "passed": true
+      },
+      {
+        "name": "phase normalization and first moment",
+        "integral": 1.000000000000029,
+        "moment": 0.6425000000000294,
+        "expectedMoment": 0.6425000000000001,
+        "passed": true
+      },
+      {
+        "name": "sampled phase moment and direction normalization",
+        "mean": 0.6406821580462422,
+        "standard_error": 0.0014890354667255786,
+        "expected": 0.6425000000000001,
+        "max_norm_error": 4.440892098500626e-16,
+        "passed": true
+      }
+    ],
+    "unresolved_paths": 0,
+    "first_order_gpu_mc_agreement": true,
+    "physical_comparison_scope": "Gray cloud-only first order versus multiple scattering; same frozen voxel field; unit collimated solar normal irradiance; black boundaries; no gas, surface, tone mapping or cache",
+    "production_radiance_error_bound": null
+  },
+  "lab_browser": {
+    "schema": "open-moon-a1-lab-browser/1",
+    "html_sha256": "302da6ee11fb8f52304d7504b14613c78ba09906f1b306046e6ed964919bc1d0",
+    "errors": [],
+    "external_requests": [],
+    "states_checked": 18,
+    "passed": true,
+    "export_sha256": "717deba2cb6f41afc291f1addb13b19c3ebbb6d98cc6dc21354ee02e567d86ca",
+    "export_expected_sha256": "717deba2cb6f41afc291f1addb13b19c3ebbb6d98cc6dc21354ee02e567d86ca",
+    "desktop_overflow_px": 0,
+    "mobile_overflow_px": 0,
+    "elapsed_s": 12.170897649999915
+  },
+  "open_gates": [
+    "Higher-order molecular scattering and independent full-sky calibration",
+    "Species-resolved optical inputs and spectral-bin convergence",
+    "Cloud voxel and crop convergence",
+    "Full production cloud closure versus coupled gas/cloud reference",
+    "Interactive angular-cache, time and position error",
+    "Production integration of shared atmospheric state",
+    "Entraining, mixed-phase and conserved-condensate cloud model",
+    "Sustained traversal and consumer-hardware measurements"
+  ],
+  "initial_setup_failure": "Before building the required baseline HTML, the initial 137-test run failed only the missing-build fixture; 136 passed. The final 159-test suite passes after the prescribed build.",
+  "generated_artifacts": {
+    "Open_Moon_A1_Accuracy_Lab.html": {
+      "bytes": 13029351,
+      "sha256": "302da6ee11fb8f52304d7504b14613c78ba09906f1b306046e6ed964919bc1d0"
+    },
+    "profiles.json": {
+      "bytes": 39754,
+      "sha256": "2f353a15f9beda91545d69a16e7087d981b8d323166a7c55d3c95c527dd3a519"
+    },
+    "moon-fair.gpu.json": {
+      "bytes": 19280,
+      "sha256": "2f84b3b4a8f6dd7722d68dea727c843b5d3f017186ffaa599560901db3743a9a"
+    },
+    "moon-fair.mc.json": {
+      "bytes": 10900,
+      "sha256": "8afed2dd134da31280d8e47ebfbe9b44d2b5b0c1dea4751b0d30a58e248b8e58"
+    },
+    "moon-fair.cloud.json": {
+      "bytes": 847094,
+      "sha256": "83e8e6134faf28c6cb2b816ce0c366a427813953cbc7de77e18a2a9d7452760f"
+    }
+  }
+}

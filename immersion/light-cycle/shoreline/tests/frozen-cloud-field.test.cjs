@@ -1,0 +1,11 @@
+'use strict';
+const test=require('node:test'),assert=require('node:assert/strict');
+const F=require('../src/frozen-cloud-field.js');
+function encoded(values){const b=Buffer.alloc(values.length*4);values.forEach((v,i)=>b.writeFloatLE(v,i*4));return b.toString('base64');}
+function fixture(){return {schema:'open-moon-frozen-cloud/1',dimensions:[2,2,2],bounds_min_m:[0,0,0],bounds_max_m:[2,4,6],extinction_float32le:encoded([0,1,2,3,4,5,6,7]),ice_fraction_float32le:encoded(Array(8).fill(.5)),single_scattering_albedo:1};}
+test('A1 frozen field: vertex order and linear interpolation are exact',()=>{const f=F.create(fixture());assert.equal(f.sample([0,0,0]).extinction,0);assert.equal(f.sample([2,4,6]).extinction,7);assert.equal(f.sample([1,2,3]).extinction,3.5);assert.equal(f.sample([.5,1,1.5]).extinction,1.75);assert.equal(f.sample([1,2,3]).iceFraction,.5);});
+test('A1 frozen field: outside is vacuum and all faces have the expected vertices',()=>{const f=F.create(fixture());assert.equal(f.sample([-1,2,3]).extinction,0);assert.equal(f.sample([2,0,0]).extinction,1);assert.equal(f.sample([0,4,0]).extinction,2);assert.equal(f.sample([0,0,6]).extinction,4);});
+test('A1 frozen field: trilinear interpolation remains under the conservative majorant',()=>{const f=F.create(fixture());for(let i=0;i<100;i++){const v=f.sample([2*i/99,4*((i*37)%100)/99,6*((i*71)%100)/99]).extinction;assert.ok(v>=0&&v<=f.majorant);}assert.ok(f.majorant>7);});
+test('A1 frozen field: caller mutation cannot change the sampled field',()=>{const s=fixture(),f=F.create(s);s.dimensions[0]=100;s.extinction_float32le=encoded(Array(8).fill(999));const data=f.extinction;data.fill(999);assert.equal(f.sample([1,2,3]).extinction,3.5);assert.ok(Object.isFrozen(f.spec.dimensions));});
+test('A1 frozen field: invalid dimensions, bounds, lengths and values fail',()=>{for(const patch of [{dimensions:[1,2,2]},{bounds_max_m:[0,4,6]},{extinction_float32le:encoded([1])},{extinction_float32le:encoded([0,1,2,3,-1,5,6,7])},{ice_fraction_float32le:encoded(Array(8).fill(2))},{single_scattering_albedo:1.1}])assert.throws(()=>F.create({...fixture(),...patch}));});
+test('A1 frozen field: malformed sampling locations fail',()=>{const f=F.create(fixture());for(const p of [[0,0],[NaN,0,0],[Infinity,0,0],null])assert.throws(()=>f.sample(p));});

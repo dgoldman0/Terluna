@@ -1,0 +1,13 @@
+{
+  "schema": "open-moon-a1-lab-browser/1",
+  "html_sha256": "302da6ee11fb8f52304d7504b14613c78ba09906f1b306046e6ed964919bc1d0",
+  "errors": [],
+  "external_requests": [],
+  "states_checked": 18,
+  "passed": true,
+  "export_sha256": "717deba2cb6f41afc291f1addb13b19c3ebbb6d98cc6dc21354ee02e567d86ca",
+  "export_expected_sha256": "717deba2cb6f41afc291f1addb13b19c3ebbb6d98cc6dc21354ee02e567d86ca",
+  "desktop_overflow_px": 0,
+  "mobile_overflow_px": 0,
+  "elapsed_s": 12.170897649999915
+}

@@ -1,0 +1,6 @@
+# Tested local environment for A1 generation and browser evidence.
+# System dependencies: Node.js, Chromium (/usr/bin/chromium), Xvfb.
+numpy==2.3.5
+scipy==1.17.0
+numba==0.65.1
+playwright==1.57.0

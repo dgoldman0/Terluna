@@ -1,0 +1,1424 @@
+[
+  {
+    "id": "moon-fair",
+    "profile_sha256": "717deba2cb6f41afc291f1addb13b19c3ebbb6d98cc6dc21354ee02e567d86ca",
+    "solver_sha256": "700b4b7c5029cc68274c3fd5b890ceb8588dd6a0cfe0b22f39804ded96822d4c",
+    "spectral_sha256": "59f47ce7147e24b3b5c57d3f4799a91dd2000d6d9bae60d6185fc952fbff2530",
+    "model": {
+      "scatteringOrders": 1,
+      "molecules": "dry-air-equivalent Rayleigh from total molecular number density",
+      "ozone": "selected geometric triangle, 233 K spectrum",
+      "surfaceBoundary": "black",
+      "aerosols": 0,
+      "refraction": false,
+      "solarAngularExtent": "collimated beam for transport; display omits solar disk",
+      "observerHeight_m": 2
+    },
+    "budgets": {
+      "viewSteps": 96,
+      "sunGaussOrder": 12,
+      "comparisonViewSteps": 384,
+      "comparisonSunGaussOrder": 24
+    },
+    "column_validation": [
+      {
+        "h_m": 0,
+        "mu": 1,
+        "blocked": false,
+        "gauss24": [
+          64831.0332791133,
+          299.9999999999999
+        ],
+        "scipy": [
+          64831.03345889829,
+          300.0
+        ],
+        "js": [
+          64831.03350065928,
+          300
+        ],
+        "relative_to_scipy": [
+          2.7731316518237964e-09,
+          3.789561257387201e-16
+        ]
+      },
+      {
+        "h_m": 2,
+        "mu": 0,
+        "blocked": false,
+        "gauss24": [
+          467919.2174207477,
+          1832.179714896987
+        ],
+        "scipy": [
+          467919.21843476687,
+          1832.1797148969874
+        ],
+        "js": [
+          467919.2183738664,
+          1832.1797148986113
+        ],
+        "relative_to_scipy": [
+          2.1670817270499497e-09,
+          2.4820018865454575e-16
+        ]
+      },
+      {
+        "h_m": 10000,
+        "mu": 0.3,
+        "blocked": false,
+        "gauss24": [
+          149179.76608263818,
+          925.3117373443066
+        ],
+        "scipy": [
+          149179.76705421653,
+          925.3117373443063
+        ],
+        "js": [
+          149179.766388089,
+          925.3117373443059
+        ],
+        "relative_to_scipy": [
+          6.5128024517283294e-09,
+          3.685898485884442e-16
+        ]
+      },
+      {
+        "h_m": 60000,
+        "mu": -0.1,
+        "blocked": false,
+        "gauss24": [
+          272887.2133289082,
+          0.0
+        ],
+        "scipy": [
+          272887.21446315915,
+          0.0
+        ],
+        "js": [
+          272887.20657658577,
+          0
+        ],
+        "relative_to_scipy": [
+          4.156482580392174e-09,
+          0.0
+        ]
+      }
+    ],
+    "ray_convergence": [
+      {
+        "sun_deg": 45,
+        "viewElevation_deg": 90,
+        "viewAzimuth_deg": 0,
+        "Y": 3419.8324352562017,
+        "referenceY": 3419.380637748605,
+        "relativeSpectralL1": 0.00024094532998879774
+      },
+      {
+        "sun_deg": 45,
+        "viewElevation_deg": 15,
+        "viewAzimuth_deg": 90,
+        "Y": 3040.965682578835,
+        "referenceY": 3040.4548627588315,
+        "relativeSpectralL1": 0.00013225332944707895
+      },
+      {
+        "sun_deg": 6,
+        "viewElevation_deg": 1,
+        "viewAzimuth_deg": 0,
+        "Y": 836.2853197483391,
+        "referenceY": 835.8988604700511,
+        "relativeSpectralL1": 0.0001553228117055702
+      },
+      {
+        "sun_deg": -2,
+        "viewElevation_deg": 5,
+        "viewAzimuth_deg": 0,
+        "Y": 440.36887395000133,
+        "referenceY": 440.26857506208097,
+        "relativeSpectralL1": 0.00011925985247377619
+      },
+      {
+        "sun_deg": 0,
+        "viewElevation_deg": 0,
+        "viewAzimuth_deg": 90,
+        "Y": 69.7402720027958,
+        "referenceY": 69.70570795310456,
+        "relativeSpectralL1": 0.00012503247287281287
+      },
+      {
+        "sun_deg": 90,
+        "viewElevation_deg": 30,
+        "viewAzimuth_deg": 180,
+        "Y": 4300.46514055252,
+        "referenceY": 4299.943919777683,
+        "relativeSpectralL1": 0.00014806211818202506
+      }
+    ]
+  },
+  {
+    "id": "moon-convection",
+    "profile_sha256": "fac9c0c3bbdd54b08a647e6981072fbbfc05df04a1273e8b3c5903386ebdd6e1",
+    "solver_sha256": "700b4b7c5029cc68274c3fd5b890ceb8588dd6a0cfe0b22f39804ded96822d4c",
+    "spectral_sha256": "59f47ce7147e24b3b5c57d3f4799a91dd2000d6d9bae60d6185fc952fbff2530",
+    "model": {
+      "scatteringOrders": 1,
+      "molecules": "dry-air-equivalent Rayleigh from total molecular number density",
+      "ozone": "selected geometric triangle, 233 K spectrum",
+      "surfaceBoundary": "black",
+      "aerosols": 0,
+      "refraction": false,
+      "solarAngularExtent": "collimated beam for transport; display omits solar disk",
+      "observerHeight_m": 2
+    },
+    "budgets": {
+      "viewSteps": 96,
+      "sunGaussOrder": 12,
+      "comparisonViewSteps": 384,
+      "comparisonSunGaussOrder": 24
+    },
+    "column_validation": [
+      {
+        "h_m": 0,
+        "mu": 1,
+        "blocked": false,
+        "gauss24": [
+          64860.549132467335,
+          300.00000000000006
+        ],
+        "scipy": [
+          64860.5500227948,
+          300.0
+        ],
+        "js": [
+          64860.55288826475,
+          300
+        ],
+        "relative_to_scipy": [
+          1.3726794860944673e-08,
+          1.8947806286936006e-16
+        ]
+      },
+      {
+        "h_m": 2,
+        "mu": 0,
+        "blocked": false,
+        "gauss24": [
+          466620.3864228099,
+          1832.179714896986
+        ],
+        "scipy": [
+          466620.38852519734,
+          1832.1797148969874
+        ],
+        "js": [
+          466620.3868169892,
+          1832.1797149007698
+        ],
+        "relative_to_scipy": [
+          4.50556272389676e-09,
+          7.446005659636372e-16
+        ]
+      },
+      {
+        "h_m": 10000,
+        "mu": 0.3,
+        "blocked": false,
+        "gauss24": [
+          150079.17551264845,
+          925.3117373443063
+        ],
+        "scipy": [
+          150079.17528260598,
+          925.3117373443064
+        ],
+        "js": [
+          150079.17747262845,
+          925.3117373441434
+        ],
+        "relative_to_scipy": [
+          1.5328073808981396e-09,
+          1.2286328286281472e-16
+        ]
+      },
+      {
+        "h_m": 60000,
+        "mu": -0.1,
+        "blocked": false,
+        "gauss24": [
+          272976.4738128584,
+          0.0
+        ],
+        "scipy": [
+          272976.47140576626,
+          0.0
+        ],
+        "js": [
+          272976.46695113974,
+          0
+        ],
+        "relative_to_scipy": [
+          8.817947286825152e-09,
+          0.0
+        ]
+      }
+    ],
+    "ray_convergence": [
+      {
+        "sun_deg": 45,
+        "viewElevation_deg": 90,
+        "viewAzimuth_deg": 0,
+        "Y": 3419.7045986075505,
+        "referenceY": 3419.185899758336,
+        "relativeSpectralL1": 0.00020849261536201485
+      },
+      {
+        "sun_deg": 45,
+        "viewElevation_deg": 15,
+        "viewAzimuth_deg": 90,
+        "Y": 3040.7652586077797,
+        "referenceY": 3040.2856559553743,
+        "relativeSpectralL1": 0.00013190370878880965
+      },
+      {
+        "sun_deg": 6,
+        "viewElevation_deg": 1,
+        "viewAzimuth_deg": 0,
+        "Y": 838.7095359813474,
+        "referenceY": 838.3159207221274,
+        "relativeSpectralL1": 0.0001439833401942771
+      },
+      {
+        "sun_deg": -2,
+        "viewElevation_deg": 5,
+        "viewAzimuth_deg": 0,
+        "Y": 438.478518243029,
+        "referenceY": 438.3678168892492,
+        "relativeSpectralL1": 0.00011796895221379236
+      },
+      {
+        "sun_deg": 0,
+        "viewElevation_deg": 0,
+        "viewAzimuth_deg": 90,
+        "Y": 70.10216491436267,
+        "referenceY": 70.0666355435334,
+        "relativeSpectralL1": 0.00011697466809111132
+      },
+      {
+        "sun_deg": 90,
+        "viewElevation_deg": 30,
+        "viewAzimuth_deg": 180,
+        "Y": 4300.842620365812,
+        "referenceY": 4300.397293486136,
+        "relativeSpectralL1": 0.00016531970331748675
+      }
+    ]
+  },
+  {
+    "id": "moon-fog",
+    "profile_sha256": "537d6be55d1336c1fc16e0f44983e47f9aa95829c504662231822c3db401a7c6",
+    "solver_sha256": "700b4b7c5029cc68274c3fd5b890ceb8588dd6a0cfe0b22f39804ded96822d4c",
+    "spectral_sha256": "59f47ce7147e24b3b5c57d3f4799a91dd2000d6d9bae60d6185fc952fbff2530",
+    "model": {
+      "scatteringOrders": 1,
+      "molecules": "dry-air-equivalent Rayleigh from total molecular number density",
+      "ozone": "selected geometric triangle, 233 K spectrum",
+      "surfaceBoundary": "black",
+      "aerosols": 0,
+      "refraction": false,
+      "solarAngularExtent": "collimated beam for transport; display omits solar disk",
+      "observerHeight_m": 2
+    },
+    "budgets": {
+      "viewSteps": 96,
+      "sunGaussOrder": 12,
+      "comparisonViewSteps": 384,
+      "comparisonSunGaussOrder": 24
+    },
+    "column_validation": [
+      {
+        "h_m": 0,
+        "mu": 1,
+        "blocked": false,
+        "gauss24": [
+          64858.51346653397,
+          300.00000000000006
+        ],
+        "scipy": [
+          64858.51442798999,
+          300.0
+        ],
+        "js": [
+          64858.51376158477,
+          300
+        ],
+        "relative_to_scipy": [
+          1.4823898250486553e-08,
+          1.8947806286936006e-16
+        ]
+      },
+      {
+        "h_m": 2,
+        "mu": 0,
+        "blocked": false,
+        "gauss24": [
+          467983.8626966974,
+          1832.1797148969881
+        ],
+        "scipy": [
+          467983.86498141894,
+          1832.1797148969874
+        ],
+        "js": [
+          467983.8609629819,
+          1832.1797149007386
+        ],
+        "relative_to_scipy": [
+          4.882051926443321e-09,
+          3.723002829818186e-16
+        ]
+      },
+      {
+        "h_m": 10000,
+        "mu": 0.3,
+        "blocked": false,
+        "gauss24": [
+          149690.79924633965,
+          925.311737344306
+        ],
+        "scipy": [
+          149690.79904330347,
+          925.3117373443064
+        ],
+        "js": [
+          149690.80115536536,
+          925.3117373441431
+        ],
+        "relative_to_scipy": [
+          1.356370468980275e-09,
+          3.6858984858844416e-16
+        ]
+      },
+      {
+        "h_m": 60000,
+        "mu": -0.1,
+        "blocked": false,
+        "gauss24": [
+          273527.09291620384,
+          0.0
+        ],
+        "scipy": [
+          273527.08975041274,
+          0.0
+        ],
+        "js": [
+          273527.0857369726,
+          0
+        ],
+        "relative_to_scipy": [
+          1.1573958195906978e-08,
+          0.0
+        ]
+      }
+    ],
+    "ray_convergence": [
+      {
+        "sun_deg": 45,
+        "viewElevation_deg": 90,
+        "viewAzimuth_deg": 0,
+        "Y": 3419.7937514464984,
+        "referenceY": 3419.2583780719924,
+        "relativeSpectralL1": 0.00021442621716061212
+      },
+      {
+        "sun_deg": 45,
+        "viewElevation_deg": 15,
+        "viewAzimuth_deg": 90,
+        "Y": 3039.8529281711467,
+        "referenceY": 3039.3352908239826,
+        "relativeSpectralL1": 0.0001354052165181714
+      },
+      {
+        "sun_deg": 6,
+        "viewElevation_deg": 1,
+        "viewAzimuth_deg": 0,
+        "Y": 836.6713442888854,
+        "referenceY": 836.269749733367,
+        "relativeSpectralL1": 0.00015469275153344418
+      },
+      {
+        "sun_deg": -2,
+        "viewElevation_deg": 5,
+        "viewAzimuth_deg": 0,
+        "Y": 441.9025639926994,
+        "referenceY": 441.7855944224671,
+        "relativeSpectralL1": 0.0001280771651382629
+      },
+      {
+        "sun_deg": 0,
+        "viewElevation_deg": 0,
+        "viewAzimuth_deg": 90,
+        "Y": 69.87227079757676,
+        "referenceY": 69.83661681265714,
+        "relativeSpectralL1": 0.0001294548590806854
+      },
+      {
+        "sun_deg": 90,
+        "viewElevation_deg": 30,
+        "viewAzimuth_deg": 180,
+        "Y": 4300.018953519596,
+        "referenceY": 4299.5339585524725,
+        "relativeSpectralL1": 0.00017116100931064595
+      }
+    ]
+  },
+  {
+    "id": "earth-fair",
+    "profile_sha256": "cb31c399a9a3d02dac2d06f6cada9db2b19fc6e8fe7f39b632b835df4eeb620e",
+    "solver_sha256": "700b4b7c5029cc68274c3fd5b890ceb8588dd6a0cfe0b22f39804ded96822d4c",
+    "spectral_sha256": "59f47ce7147e24b3b5c57d3f4799a91dd2000d6d9bae60d6185fc952fbff2530",
+    "model": {
+      "scatteringOrders": 1,
+      "molecules": "dry-air-equivalent Rayleigh from total molecular number density",
+      "ozone": "selected geometric triangle, 233 K spectrum",
+      "surfaceBoundary": "black",
+      "aerosols": 0,
+      "refraction": false,
+      "solarAngularExtent": "collimated beam for transport; display omits solar disk",
+      "observerHeight_m": 2
+    },
+    "budgets": {
+      "viewSteps": 96,
+      "sunGaussOrder": 12,
+      "comparisonViewSteps": 384,
+      "comparisonSunGaussOrder": 24
+    },
+    "column_validation": [
+      {
+        "h_m": 0,
+        "mu": 1,
+        "blocked": false,
+        "gauss24": [
+          8464.289131188076,
+          299.9999999999922
+        ],
+        "scipy": [
+          8464.289133084085,
+          300.0
+        ],
+        "js": [
+          8464.289123388015,
+          300
+        ],
+        "relative_to_scipy": [
+          2.2400097906154077e-10,
+          2.5958494613102327e-14
+        ]
+      },
+      {
+        "h_m": 2,
+        "mu": 0,
+        "blocked": false,
+        "gauss24": [
+          294043.120392685,
+          3482.2362073933527
+        ],
+        "scipy": [
+          294043.1204398693,
+          3482.236207393351
+        ],
+        "js": [
+          294043.12014773197,
+          3482.2362073933514
+        ],
+        "relative_to_scipy": [
+          1.6046726078505195e-10,
+          5.223624404581882e-16
+        ]
+      },
+      {
+        "h_m": 10000,
+        "mu": 0.3,
+        "blocked": false,
+        "gauss24": [
+          7868.398038636576,
+          977.2616846830447
+        ],
+        "scipy": [
+          7868.398045390765,
+          977.2616846830447
+        ],
+        "js": [
+          7868.3980379950835,
+          977.2616846830447
+        ],
+        "relative_to_scipy": [
+          8.583944990784823e-10,
+          0.0
+        ]
+      },
+      {
+        "h_m": 60000,
+        "mu": -0.1,
+        "blocked": false,
+        "gauss24": [
+          12158.262334052208,
+          8610.19885230571
+        ],
+        "scipy": [
+          12158.26246831992,
+          8610.198852305715
+        ],
+        "js": [
+          12158.262679542528,
+          8610.19885230518
+        ],
+        "relative_to_scipy": [
+          1.1043330560050506e-08,
+          6.337795798033461e-16
+        ]
+      }
+    ],
+    "ray_convergence": [
+      {
+        "sun_deg": 45,
+        "viewElevation_deg": 90,
+        "viewAzimuth_deg": 0,
+        "Y": 1126.3581579894576,
+        "referenceY": 1126.6269016313504,
+        "relativeSpectralL1": 0.0001812965488937416
+      },
+      {
+        "sun_deg": 45,
+        "viewElevation_deg": 15,
+        "viewAzimuth_deg": 90,
+        "Y": 2484.7070001096754,
+        "referenceY": 2485.005682271101,
+        "relativeSpectralL1": 0.00010363486560150647
+      },
+      {
+        "sun_deg": 6,
+        "viewElevation_deg": 1,
+        "viewAzimuth_deg": 0,
+        "Y": 5796.800314941849,
+        "referenceY": 5796.177686750616,
+        "relativeSpectralL1": 9.823098751824922e-05
+      },
+      {
+        "sun_deg": -2,
+        "viewElevation_deg": 5,
+        "viewAzimuth_deg": 0,
+        "Y": 499.8928837483809,
+        "referenceY": 500.0664570445787,
+        "relativeSpectralL1": 0.0030006234960978664
+      },
+      {
+        "sun_deg": 0,
+        "viewElevation_deg": 0,
+        "viewAzimuth_deg": 90,
+        "Y": 272.7322744779253,
+        "referenceY": 272.6903004028679,
+        "relativeSpectralL1": 3.972346331539125e-05
+      },
+      {
+        "sun_deg": 90,
+        "viewElevation_deg": 30,
+        "viewAzimuth_deg": 180,
+        "Y": 1821.498562435608,
+        "referenceY": 1821.9915477683012,
+        "relativeSpectralL1": 0.00020365794172606946
+      }
+    ]
+  },
+  {
+    "id": "earth-convection",
+    "profile_sha256": "88e4c6716b13a6ce009ac9f9e80b4bf84c3850f1bd15b1c612c858d4900b87b1",
+    "solver_sha256": "700b4b7c5029cc68274c3fd5b890ceb8588dd6a0cfe0b22f39804ded96822d4c",
+    "spectral_sha256": "59f47ce7147e24b3b5c57d3f4799a91dd2000d6d9bae60d6185fc952fbff2530",
+    "model": {
+      "scatteringOrders": 1,
+      "molecules": "dry-air-equivalent Rayleigh from total molecular number density",
+      "ozone": "selected geometric triangle, 233 K spectrum",
+      "surfaceBoundary": "black",
+      "aerosols": 0,
+      "refraction": false,
+      "solarAngularExtent": "collimated beam for transport; display omits solar disk",
+      "observerHeight_m": 2
+    },
+    "budgets": {
+      "viewSteps": 96,
+      "sunGaussOrder": 12,
+      "comparisonViewSteps": 384,
+      "comparisonSunGaussOrder": 24
+    },
+    "column_validation": [
+      {
+        "h_m": 0,
+        "mu": 1,
+        "blocked": false,
+        "gauss24": [
+          8471.835554865038,
+          299.99999999999227
+        ],
+        "scipy": [
+          8471.835550905233,
+          300.0
+        ],
+        "js": [
+          8471.835570900088,
+          300
+        ],
+        "relative_to_scipy": [
+          4.674081906465186e-10,
+          2.5769016550232965e-14
+        ]
+      },
+      {
+        "h_m": 2,
+        "mu": 0,
+        "blocked": false,
+        "gauss24": [
+          293250.75557697954,
+          3482.2362073933523
+        ],
+        "scipy": [
+          293250.7554956128,
+          3482.236207393351
+        ],
+        "js": [
+          293250.753533943,
+          3482.236207393354
+        ],
+        "relative_to_scipy": [
+          2.7746473431447297e-10,
+          3.917718303436412e-16
+        ]
+      },
+      {
+        "h_m": 10000,
+        "mu": 0.3,
+        "blocked": false,
+        "gauss24": [
+          7601.547883300974,
+          977.2616846830447
+        ],
+        "scipy": [
+          7601.547885767082,
+          977.2616846830447
+        ],
+        "js": [
+          7601.547877457749,
+          977.2616846830447
+        ],
+        "relative_to_scipy": [
+          3.2442188924380673e-10,
+          0.0
+        ]
+      },
+      {
+        "h_m": 60000,
+        "mu": -0.1,
+        "blocked": false,
+        "gauss24": [
+          12462.312678522772,
+          8610.19885230571
+        ],
+        "scipy": [
+          12462.312746028494,
+          8610.198852305715
+        ],
+        "js": [
+          12462.312786183575,
+          8610.198852305704
+        ],
+        "relative_to_scipy": [
+          5.416789252578952e-09,
+          6.337795798033461e-16
+        ]
+      }
+    ],
+    "ray_convergence": [
+      {
+        "sun_deg": 45,
+        "viewElevation_deg": 90,
+        "viewAzimuth_deg": 0,
+        "Y": 1127.3380241167617,
+        "referenceY": 1127.4939850440164,
+        "relativeSpectralL1": 9.807121917589895e-05
+      },
+      {
+        "sun_deg": 45,
+        "viewElevation_deg": 15,
+        "viewAzimuth_deg": 90,
+        "Y": 2486.414813913056,
+        "referenceY": 2486.713742460851,
+        "relativeSpectralL1": 0.0001056998107024167
+      },
+      {
+        "sun_deg": 6,
+        "viewElevation_deg": 1,
+        "viewAzimuth_deg": 0,
+        "Y": 5798.191843165367,
+        "referenceY": 5797.5501605698755,
+        "relativeSpectralL1": 9.396109249549938e-05
+      },
+      {
+        "sun_deg": -2,
+        "viewElevation_deg": 5,
+        "viewAzimuth_deg": 0,
+        "Y": 495.67520305739265,
+        "referenceY": 495.94419634314966,
+        "relativeSpectralL1": 0.0031280449343881905
+      },
+      {
+        "sun_deg": 0,
+        "viewElevation_deg": 0,
+        "viewAzimuth_deg": 90,
+        "Y": 273.208835828629,
+        "referenceY": 273.1702115182607,
+        "relativeSpectralL1": 3.962627423328573e-05
+      },
+      {
+        "sun_deg": 90,
+        "viewElevation_deg": 30,
+        "viewAzimuth_deg": 180,
+        "Y": 1822.9991945367115,
+        "referenceY": 1823.3231271281982,
+        "relativeSpectralL1": 0.00012936964820314578
+      }
+    ]
+  },
+  {
+    "id": "earth-fog",
+    "profile_sha256": "4b2dd6d36ae4e3b324a2295212193bbe854bdcb809a49ce537729619076ebac9",
+    "solver_sha256": "700b4b7c5029cc68274c3fd5b890ceb8588dd6a0cfe0b22f39804ded96822d4c",
+    "spectral_sha256": "59f47ce7147e24b3b5c57d3f4799a91dd2000d6d9bae60d6185fc952fbff2530",
+    "model": {
+      "scatteringOrders": 1,
+      "molecules": "dry-air-equivalent Rayleigh from total molecular number density",
+      "ozone": "selected geometric triangle, 233 K spectrum",
+      "surfaceBoundary": "black",
+      "aerosols": 0,
+      "refraction": false,
+      "solarAngularExtent": "collimated beam for transport; display omits solar disk",
+      "observerHeight_m": 2
+    },
+    "budgets": {
+      "viewSteps": 96,
+      "sunGaussOrder": 12,
+      "comparisonViewSteps": 384,
+      "comparisonSunGaussOrder": 24
+    },
+    "column_validation": [
+      {
+        "h_m": 0,
+        "mu": 1,
+        "blocked": false,
+        "gauss24": [
+          8468.946114403252,
+          299.99999999999227
+        ],
+        "scipy": [
+          8468.94611776101,
+          300.0
+        ],
+        "js": [
+          8468.946123124904,
+          300
+        ],
+        "relative_to_scipy": [
+          3.9647885177417746e-10,
+          2.5769016550232965e-14
+        ]
+      },
+      {
+        "h_m": 2,
+        "mu": 0,
+        "blocked": false,
+        "gauss24": [
+          294085.7845948905,
+          3482.236207393352
+        ],
+        "scipy": [
+          294085.7846380869,
+          3482.236207393351
+        ],
+        "js": [
+          294085.66557978967,
+          3482.2362073933514
+        ],
+        "relative_to_scipy": [
+          1.468837709581629e-10,
+          2.611812202290941e-16
+        ]
+      },
+      {
+        "h_m": 10000,
+        "mu": 0.3,
+        "blocked": false,
+        "gauss24": [
+          7834.788178294119,
+          977.2616846830447
+        ],
+        "scipy": [
+          7834.788179937544,
+          977.2616846830447
+        ],
+        "js": [
+          7834.788164253275,
+          977.2616846830447
+        ],
+        "relative_to_scipy": [
+          2.0975999044842334e-10,
+          0.0
+        ]
+      },
+      {
+        "h_m": 60000,
+        "mu": -0.1,
+        "blocked": false,
+        "gauss24": [
+          12093.077249884916,
+          8610.19885230571
+        ],
+        "scipy": [
+          12093.077312393041,
+          8610.198852305715
+        ],
+        "js": [
+          12093.077347654704,
+          8610.19885230518
+        ],
+        "relative_to_scipy": [
+          5.1689179802248455e-09,
+          6.337795798033461e-16
+        ]
+      }
+    ],
+    "ray_convergence": [
+      {
+        "sun_deg": 45,
+        "viewElevation_deg": 90,
+        "viewAzimuth_deg": 0,
+        "Y": 1126.8937888378107,
+        "referenceY": 1127.1538014242724,
+        "relativeSpectralL1": 0.00017411667740960146
+      },
+      {
+        "sun_deg": 45,
+        "viewElevation_deg": 15,
+        "viewAzimuth_deg": 90,
+        "Y": 2485.591476237925,
+        "referenceY": 2485.992818888437,
+        "relativeSpectralL1": 0.00013187400790233632
+      },
+      {
+        "sun_deg": 6,
+        "viewElevation_deg": 1,
+        "viewAzimuth_deg": 0,
+        "Y": 5796.431471609192,
+        "referenceY": 5795.77833290852,
+        "relativeSpectralL1": 9.656525166472863e-05
+      },
+      {
+        "sun_deg": -2,
+        "viewElevation_deg": 5,
+        "viewAzimuth_deg": 0,
+        "Y": 497.89748397186844,
+        "referenceY": 498.14273005839266,
+        "relativeSpectralL1": 0.0030597870313571903
+      },
+      {
+        "sun_deg": 0,
+        "viewElevation_deg": 0,
+        "viewAzimuth_deg": 90,
+        "Y": 273.10471117094505,
+        "referenceY": 273.0608015990004,
+        "relativeSpectralL1": 4.1100100231546454e-05
+      },
+      {
+        "sun_deg": 90,
+        "viewElevation_deg": 30,
+        "viewAzimuth_deg": 180,
+        "Y": 1822.411601252083,
+        "referenceY": 1822.794596118111,
+        "relativeSpectralL1": 0.00015435326233908538
+      }
+    ]
+  },
+  {
+    "id": "moon_no_ozone-fair",
+    "profile_sha256": "3ff2a352b9a38fc2ff9cfa028b19fa5f915ff139120d87ce285cf50d8ec7ebd1",
+    "solver_sha256": "700b4b7c5029cc68274c3fd5b890ceb8588dd6a0cfe0b22f39804ded96822d4c",
+    "spectral_sha256": "59f47ce7147e24b3b5c57d3f4799a91dd2000d6d9bae60d6185fc952fbff2530",
+    "model": {
+      "scatteringOrders": 1,
+      "molecules": "dry-air-equivalent Rayleigh from total molecular number density",
+      "ozone": "selected geometric triangle, 233 K spectrum",
+      "surfaceBoundary": "black",
+      "aerosols": 0,
+      "refraction": false,
+      "solarAngularExtent": "collimated beam for transport; display omits solar disk",
+      "observerHeight_m": 2
+    },
+    "budgets": {
+      "viewSteps": 96,
+      "sunGaussOrder": 12,
+      "comparisonViewSteps": 384,
+      "comparisonSunGaussOrder": 24
+    },
+    "column_validation": [
+      {
+        "h_m": 0,
+        "mu": 1,
+        "blocked": false,
+        "gauss24": [
+          64831.0332791133,
+          0.0
+        ],
+        "scipy": [
+          64831.03345889829,
+          0.0
+        ],
+        "js": [
+          64831.03350065928,
+          0
+        ],
+        "relative_to_scipy": [
+          2.7731316518237964e-09,
+          0.0
+        ]
+      },
+      {
+        "h_m": 2,
+        "mu": 0,
+        "blocked": false,
+        "gauss24": [
+          467919.2174207477,
+          0.0
+        ],
+        "scipy": [
+          467919.21843476687,
+          0.0
+        ],
+        "js": [
+          467919.2183738664,
+          0
+        ],
+        "relative_to_scipy": [
+          2.1670817270499497e-09,
+          0.0
+        ]
+      },
+      {
+        "h_m": 10000,
+        "mu": 0.3,
+        "blocked": false,
+        "gauss24": [
+          149179.76608263818,
+          0.0
+        ],
+        "scipy": [
+          149179.76705421653,
+          0.0
+        ],
+        "js": [
+          149179.766388089,
+          0
+        ],
+        "relative_to_scipy": [
+          6.5128024517283294e-09,
+          0.0
+        ]
+      },
+      {
+        "h_m": 60000,
+        "mu": -0.1,
+        "blocked": false,
+        "gauss24": [
+          272887.2133289082,
+          0.0
+        ],
+        "scipy": [
+          272887.21446315915,
+          0.0
+        ],
+        "js": [
+          272887.20657658577,
+          0
+        ],
+        "relative_to_scipy": [
+          4.156482580392174e-09,
+          0.0
+        ]
+      }
+    ],
+    "ray_convergence": [
+      {
+        "sun_deg": 45,
+        "viewElevation_deg": 90,
+        "viewAzimuth_deg": 0,
+        "Y": 3529.0397381882462,
+        "referenceY": 3528.862987362671,
+        "relativeSpectralL1": 0.00022726325107687442
+      },
+      {
+        "sun_deg": 45,
+        "viewElevation_deg": 15,
+        "viewAzimuth_deg": 90,
+        "Y": 3240.011614837906,
+        "referenceY": 3239.4785393355655,
+        "relativeSpectralL1": 0.00013061733355919182
+      },
+      {
+        "sun_deg": 6,
+        "viewElevation_deg": 1,
+        "viewAzimuth_deg": 0,
+        "Y": 976.7572794890001,
+        "referenceY": 976.3356763046048,
+        "relativeSpectralL1": 0.00015412223396820676
+      },
+      {
+        "sun_deg": -2,
+        "viewElevation_deg": 5,
+        "viewAzimuth_deg": 0,
+        "Y": 537.3502119863406,
+        "referenceY": 537.0558915454002,
+        "relativeSpectralL1": 0.00021109316349697446
+      },
+      {
+        "sun_deg": 0,
+        "viewElevation_deg": 0,
+        "viewAzimuth_deg": 90,
+        "Y": 86.56908745455873,
+        "referenceY": 86.54180741764166,
+        "relativeSpectralL1": 9.432517123073787e-05
+      },
+      {
+        "sun_deg": 90,
+        "viewElevation_deg": 30,
+        "viewAzimuth_deg": 180,
+        "Y": 4484.210590174858,
+        "referenceY": 4483.759258430287,
+        "relativeSpectralL1": 0.0001373129504152189
+      }
+    ]
+  },
+  {
+    "id": "moon_no_ozone-convection",
+    "profile_sha256": "7f35bfbfc0d9c97926456e6a98fdea17c0677502fb27f17d120e06ae9005fc3a",
+    "solver_sha256": "700b4b7c5029cc68274c3fd5b890ceb8588dd6a0cfe0b22f39804ded96822d4c",
+    "spectral_sha256": "59f47ce7147e24b3b5c57d3f4799a91dd2000d6d9bae60d6185fc952fbff2530",
+    "model": {
+      "scatteringOrders": 1,
+      "molecules": "dry-air-equivalent Rayleigh from total molecular number density",
+      "ozone": "selected geometric triangle, 233 K spectrum",
+      "surfaceBoundary": "black",
+      "aerosols": 0,
+      "refraction": false,
+      "solarAngularExtent": "collimated beam for transport; display omits solar disk",
+      "observerHeight_m": 2
+    },
+    "budgets": {
+      "viewSteps": 96,
+      "sunGaussOrder": 12,
+      "comparisonViewSteps": 384,
+      "comparisonSunGaussOrder": 24
+    },
+    "column_validation": [
+      {
+        "h_m": 0,
+        "mu": 1,
+        "blocked": false,
+        "gauss24": [
+          64860.549132467335,
+          0.0
+        ],
+        "scipy": [
+          64860.5500227948,
+          0.0
+        ],
+        "js": [
+          64860.55288826475,
+          0
+        ],
+        "relative_to_scipy": [
+          1.3726794860944673e-08,
+          0.0
+        ]
+      },
+      {
+        "h_m": 2,
+        "mu": 0,
+        "blocked": false,
+        "gauss24": [
+          466620.3864228099,
+          0.0
+        ],
+        "scipy": [
+          466620.38852519734,
+          0.0
+        ],
+        "js": [
+          466620.3868169892,
+          0
+        ],
+        "relative_to_scipy": [
+          4.50556272389676e-09,
+          0.0
+        ]
+      },
+      {
+        "h_m": 10000,
+        "mu": 0.3,
+        "blocked": false,
+        "gauss24": [
+          150079.17551264845,
+          0.0
+        ],
+        "scipy": [
+          150079.17528260598,
+          0.0
+        ],
+        "js": [
+          150079.17747262845,
+          0
+        ],
+        "relative_to_scipy": [
+          1.5328073808981396e-09,
+          0.0
+        ]
+      },
+      {
+        "h_m": 60000,
+        "mu": -0.1,
+        "blocked": false,
+        "gauss24": [
+          272976.4738128584,
+          0.0
+        ],
+        "scipy": [
+          272976.47140576626,
+          0.0
+        ],
+        "js": [
+          272976.46695113974,
+          0
+        ],
+        "relative_to_scipy": [
+          8.817947286825152e-09,
+          0.0
+        ]
+      }
+    ],
+    "ray_convergence": [
+      {
+        "sun_deg": 45,
+        "viewElevation_deg": 90,
+        "viewAzimuth_deg": 0,
+        "Y": 3528.9224443650364,
+        "referenceY": 3528.675093737805,
+        "relativeSpectralL1": 0.00018256963874873218
+      },
+      {
+        "sun_deg": 45,
+        "viewElevation_deg": 15,
+        "viewAzimuth_deg": 90,
+        "Y": 3239.9643782571056,
+        "referenceY": 3239.4693354655424,
+        "relativeSpectralL1": 0.00012943349856640477
+      },
+      {
+        "sun_deg": 6,
+        "viewElevation_deg": 1,
+        "viewAzimuth_deg": 0,
+        "Y": 979.6423553057718,
+        "referenceY": 979.214367118793,
+        "relativeSpectralL1": 0.00014264180968615224
+      },
+      {
+        "sun_deg": -2,
+        "viewElevation_deg": 5,
+        "viewAzimuth_deg": 0,
+        "Y": 535.0346883768702,
+        "referenceY": 534.7302078843683,
+        "relativeSpectralL1": 0.00020953598310021024
+      },
+      {
+        "sun_deg": 0,
+        "viewElevation_deg": 0,
+        "viewAzimuth_deg": 90,
+        "Y": 87.01947345903126,
+        "referenceY": 86.99131026401835,
+        "relativeSpectralL1": 8.60415066644824e-05
+      },
+      {
+        "sun_deg": 90,
+        "viewElevation_deg": 30,
+        "viewAzimuth_deg": 180,
+        "Y": 4484.63714966088,
+        "referenceY": 4484.2600630860825,
+        "relativeSpectralL1": 0.00015883738243967322
+      }
+    ]
+  },
+  {
+    "id": "moon_no_ozone-fog",
+    "profile_sha256": "ad2aa4d1c506c88e9fdedcb1d60418c8ab42e3f48c5f24566329b9f872dd7c65",
+    "solver_sha256": "700b4b7c5029cc68274c3fd5b890ceb8588dd6a0cfe0b22f39804ded96822d4c",
+    "spectral_sha256": "59f47ce7147e24b3b5c57d3f4799a91dd2000d6d9bae60d6185fc952fbff2530",
+    "model": {
+      "scatteringOrders": 1,
+      "molecules": "dry-air-equivalent Rayleigh from total molecular number density",
+      "ozone": "selected geometric triangle, 233 K spectrum",
+      "surfaceBoundary": "black",
+      "aerosols": 0,
+      "refraction": false,
+      "solarAngularExtent": "collimated beam for transport; display omits solar disk",
+      "observerHeight_m": 2
+    },
+    "budgets": {
+      "viewSteps": 96,
+      "sunGaussOrder": 12,
+      "comparisonViewSteps": 384,
+      "comparisonSunGaussOrder": 24
+    },
+    "column_validation": [
+      {
+        "h_m": 0,
+        "mu": 1,
+        "blocked": false,
+        "gauss24": [
+          64858.51346653397,
+          0.0
+        ],
+        "scipy": [
+          64858.51442798999,
+          0.0
+        ],
+        "js": [
+          64858.51376158477,
+          0
+        ],
+        "relative_to_scipy": [
+          1.4823898250486553e-08,
+          0.0
+        ]
+      },
+      {
+        "h_m": 2,
+        "mu": 0,
+        "blocked": false,
+        "gauss24": [
+          467983.8626966974,
+          0.0
+        ],
+        "scipy": [
+          467983.86498141894,
+          0.0
+        ],
+        "js": [
+          467983.8600554252,
+          0
+        ],
+        "relative_to_scipy": [
+          4.882051926443321e-09,
+          0.0
+        ]
+      },
+      {
+        "h_m": 10000,
+        "mu": 0.3,
+        "blocked": false,
+        "gauss24": [
+          149690.79924633965,
+          0.0
+        ],
+        "scipy": [
+          149690.79904330347,
+          0.0
+        ],
+        "js": [
+          149690.80115536536,
+          0
+        ],
+        "relative_to_scipy": [
+          1.356370468980275e-09,
+          0.0
+        ]
+      },
+      {
+        "h_m": 60000,
+        "mu": -0.1,
+        "blocked": false,
+        "gauss24": [
+          273527.09291620384,
+          0.0
+        ],
+        "scipy": [
+          273527.08975041274,
+          0.0
+        ],
+        "js": [
+          273527.0857369726,
+          0
+        ],
+        "relative_to_scipy": [
+          1.1573958195906978e-08,
+          0.0
+        ]
+      }
+    ],
+    "ray_convergence": [
+      {
+        "sun_deg": 45,
+        "viewElevation_deg": 90,
+        "viewAzimuth_deg": 0,
+        "Y": 3528.930982479987,
+        "referenceY": 3528.6666601303646,
+        "relativeSpectralL1": 0.00018806987401885926
+      },
+      {
+        "sun_deg": 45,
+        "viewElevation_deg": 15,
+        "viewAzimuth_deg": 90,
+        "Y": 3239.306277594336,
+        "referenceY": 3238.7666438641595,
+        "relativeSpectralL1": 0.00013362505811455625
+      },
+      {
+        "sun_deg": 6,
+        "viewElevation_deg": 1,
+        "viewAzimuth_deg": 0,
+        "Y": 977.3506844914594,
+        "referenceY": 976.9118044244648,
+        "relativeSpectralL1": 0.00015381829382737038
+      },
+      {
+        "sun_deg": -2,
+        "viewElevation_deg": 5,
+        "viewAzimuth_deg": 0,
+        "Y": 539.1586480146237,
+        "referenceY": 538.8441404834276,
+        "relativeSpectralL1": 0.00022049686843824754
+      },
+      {
+        "sun_deg": 0,
+        "viewElevation_deg": 0,
+        "viewAzimuth_deg": 90,
+        "Y": 86.71359420412126,
+        "referenceY": 86.68498451821672,
+        "relativeSpectralL1": 9.886875876847197e-05
+      },
+      {
+        "sun_deg": 90,
+        "viewElevation_deg": 30,
+        "viewAzimuth_deg": 180,
+        "Y": 4484.027423938946,
+        "referenceY": 4483.608534171162,
+        "relativeSpectralL1": 0.00016404338090911108
+      }
+    ]
+  }
+]

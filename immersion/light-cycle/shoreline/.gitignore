@@ -12,3 +12,8 @@ node_modules/
 
 /validation/clouds/*.png
 /validation/clouds/diagnostics/*.png
+
+# Reproducible A1 reference outputs; compact evidence remains versioned.
+/data/a1/generated/
+/Open_Moon_A1_Accuracy_Lab.html
+/validation/a1/*.png

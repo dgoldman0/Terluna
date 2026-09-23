@@ -1,0 +1,1198 @@
+{
+  "schema": "open-moon-a1-profile-manifest/1",
+  "profiles": [
+    {
+      "id": "moon-fair",
+      "file": "moon-fair.profile.json",
+      "profile_sha256": "717deba2cb6f41afc291f1addb13b19c3ebbb6d98cc6dc21354ee02e567d86ca",
+      "world": "moon",
+      "regime": "fair",
+      "summary": {
+        "name": "Elevated fair-weather cloud",
+        "surfacePressure_Pa": 121590,
+        "surfaceT_K": 294,
+        "surfaceRH": 0.48,
+        "surfaceScaleHeight_m": 52286.372323785814,
+        "dryLapse_K_per_km": 1.6135458167330676,
+        "lcl_m": 9288.610732243224,
+        "lclPressure_Pa": 101410.63999942236,
+        "lclTemperature_K": 279.9148335720644,
+        "cloudBase_m": 9288.610732243224,
+        "cloudTop_m": 12499.592968044033,
+        "lfc_m": 9288.610732243224,
+        "equilibriumLevel_m": 12499.592968044033,
+        "parcelReachesCloud": true,
+        "positiveBuoyancyIntegral_J_per_kg": 37.11339677754324,
+        "preLFCNegativeWork_J_per_kg": 0,
+        "liquidWaterPath_kg_m2": 0.1895886924254182,
+        "iceWaterPath_kg_m2": 0,
+        "inCloudOpticalDepth": 23.698586553177268,
+        "hydrostaticWeightRelativeError": 6.961464665674144e-08,
+        "pressureFloor_Pa": 13472.556025277945,
+        "assumptions": [
+          "Prescribed pressure-coordinate sounding; no GCM or climate-equilibrium solution",
+          "Undiluted liquid pseudoadiabat for parcel buoyancy; mixed-phase optics is a diagnostic closure",
+          "Condensate retention and horizontal cloud morphology are selected inputs",
+          "Atmospheric study supplies no predicted rain to the surface-water model"
+        ]
+      },
+      "surface": {
+        "z": 0,
+        "p": 121590.00000000001,
+        "T": 294,
+        "r": 0.006105159099991608,
+        "e": 1181.8625702399918,
+        "Tv": 295.0842123829752,
+        "rho": 1.4354707014433992,
+        "g": 1.62,
+        "numberDry_m3": 2.9663693513436553e+25,
+        "numberWater_m3": 2.911631207571231e+23,
+        "numberTotal_m3": 2.9954856634193674e+25,
+        "airRelative": 1.176122448979592,
+        "ozone_m3": 0
+      },
+      "vertical": {
+        "h_m": 0,
+        "mu": 1,
+        "air_m": 64831.03350065928,
+        "ozone_DU": 300,
+        "blocked": false,
+        "evaluations": 434,
+        "converged": true
+      },
+      "independent_js_paths": [
+        {
+          "h_m": 0,
+          "mu": 1,
+          "air_m": 64831.03350065928,
+          "ozone_DU": 300,
+          "blocked": false,
+          "evaluations": 434,
+          "converged": true
+        },
+        {
+          "h_m": 2,
+          "mu": 0,
+          "air_m": 467919.2183738664,
+          "ozone_DU": 1832.1797148986113,
+          "blocked": false,
+          "evaluations": 406,
+          "converged": true
+        },
+        {
+          "h_m": 10000,
+          "mu": 0.3,
+          "air_m": 149179.766388089,
+          "ozone_DU": 925.3117373443059,
+          "blocked": false,
+          "evaluations": 398,
+          "converged": true
+        },
+        {
+          "h_m": 60000,
+          "mu": -0.1,
+          "air_m": 272887.20657658577,
+          "ozone_DU": 0,
+          "blocked": false,
+          "evaluations": 285,
+          "converged": true
+        }
+      ],
+      "upperSensitivity": [
+        {
+          "options": {
+            "top_m": 900000
+          },
+          "profile_sha256": "1342753f0ff3ba7ffb3f8b63050d43fc0c69fa8a89649a3baf44647daaad0f60",
+          "verticalAir_m": 64832.456881952035,
+          "relativeVerticalChange": 2.195524605874688e-05
+        },
+        {
+          "options": {
+            "upperTemperature_K": 200
+          },
+          "profile_sha256": "88c7dafc74f1f842bfa5025346c01389437fed0cf6baa617868b80806ebad3b4",
+          "verticalAir_m": 64820.3745692742,
+          "relativeVerticalChange": -0.00016441094348695895
+        },
+        {
+          "options": {
+            "upperTemperature_K": 250
+          },
+          "profile_sha256": "e2fbc7e49ce70dab16d87d052f8f865ed1a42f14e85b7c96bdae34de4648e6f5",
+          "verticalAir_m": 64853.76902496366,
+          "relativeVerticalChange": 0.0003506889074065267
+        },
+        {
+          "options": {
+            "upperTemperature_K": 300
+          },
+          "profile_sha256": "3e04652d3015f452470da06b7fa9257c0f2b2b5403a32489dda95fcfce365c8c",
+          "verticalAir_m": 64885.82599821093,
+          "relativeVerticalChange": 0.0008451584772453113
+        }
+      ]
+    },
+    {
+      "id": "moon-convection",
+      "file": "moon-convection.profile.json",
+      "profile_sha256": "fac9c0c3bbdd54b08a647e6981072fbbfc05df04a1273e8b3c5903386ebdd6e1",
+      "world": "moon",
+      "regime": "convection",
+      "summary": {
+        "name": "Deep convective column",
+        "surfacePressure_Pa": 121590,
+        "surfaceT_K": 299,
+        "surfaceRH": 0.78,
+        "surfaceScaleHeight_m": 53411.29410096087,
+        "dryLapse_K_per_km": 1.6135458167330676,
+        "lcl_m": 3981.845196161411,
+        "lclPressure_Pa": 112781.80036698407,
+        "lclTemperature_K": 293.6384499033133,
+        "cloudBase_m": 3981.845196161411,
+        "cloudTop_m": 58696.617819586565,
+        "lfc_m": 3981.845196161411,
+        "equilibriumLevel_m": 58696.617819586565,
+        "parcelReachesCloud": true,
+        "positiveBuoyancyIntegral_J_per_kg": 2735.29027300064,
+        "preLFCNegativeWork_J_per_kg": 0,
+        "liquidWaterPath_kg_m2": 8.347508143308366,
+        "iceWaterPath_kg_m2": 2.2006043617800666,
+        "inCloudOpticalDepth": 974.3687609662483,
+        "hydrostaticWeightRelativeError": 5.932265618854557e-08,
+        "pressureFloor_Pa": 13472.556025277945,
+        "assumptions": [
+          "Prescribed pressure-coordinate sounding; no GCM or climate-equilibrium solution",
+          "Undiluted liquid pseudoadiabat for parcel buoyancy; mixed-phase optics is a diagnostic closure",
+          "Condensate retention and horizontal cloud morphology are selected inputs",
+          "Atmospheric study supplies no predicted rain to the surface-water model"
+        ]
+      },
+      "surface": {
+        "z": 0,
+        "p": 121590.00000000001,
+        "T": 299,
+        "r": 0.01357008435891527,
+        "e": 2596.0999012729244,
+        "Tv": 301.432839029983,
+        "rho": 1.4052375404662834,
+        "g": 1.62,
+        "numberDry_m3": 2.8825060535240133e+25,
+        "numberWater_m3": 6.288787639335766e+23,
+        "numberTotal_m3": 2.945393929917371e+25,
+        "airRelative": 1.156454849498328,
+        "ozone_m3": 0
+      },
+      "vertical": {
+        "h_m": 0,
+        "mu": 1,
+        "air_m": 64860.55288826475,
+        "ozone_DU": 300,
+        "blocked": false,
+        "evaluations": 386,
+        "converged": true
+      },
+      "independent_js_paths": [
+        {
+          "h_m": 0,
+          "mu": 1,
+          "air_m": 64860.55288826475,
+          "ozone_DU": 300,
+          "blocked": false,
+          "evaluations": 386,
+          "converged": true
+        },
+        {
+          "h_m": 2,
+          "mu": 0,
+          "air_m": 466620.3868169892,
+          "ozone_DU": 1832.1797149007698,
+          "blocked": false,
+          "evaluations": 378,
+          "converged": true
+        },
+        {
+          "h_m": 10000,
+          "mu": 0.3,
+          "air_m": 150079.17747262845,
+          "ozone_DU": 925.3117373441434,
+          "blocked": false,
+          "evaluations": 330,
+          "converged": true
+        },
+        {
+          "h_m": 60000,
+          "mu": -0.1,
+          "air_m": 272976.46695113974,
+          "ozone_DU": 0,
+          "blocked": false,
+          "evaluations": 345,
+          "converged": true
+        }
+      ],
+      "upperSensitivity": [
+        {
+          "options": {
+            "top_m": 900000
+          },
+          "profile_sha256": "a63dcc9943910f5b7e95d1b3341eb8e28e3980a7c547a2c66f088a02a50ebfca",
+          "verticalAir_m": 64862.29086395945,
+          "relativeVerticalChange": 2.6795573230709024e-05
+        },
+        {
+          "options": {
+            "upperTemperature_K": 200
+          },
+          "profile_sha256": "09c395688b1bbf235be3910ad8d946b92b91fc763563acabdf98cf650eda05c7",
+          "verticalAir_m": 64846.448550314606,
+          "relativeVerticalChange": -0.00021745633242509221
+        },
+        {
+          "options": {
+            "upperTemperature_K": 250
+          },
+          "profile_sha256": "9dfa44dc8dd581be579d4bbfcda2ac1e81751b1200143817b3d209511b5736ed",
+          "verticalAir_m": 64880.05169764194,
+          "relativeVerticalChange": 0.0003006266291127879
+        },
+        {
+          "options": {
+            "upperTemperature_K": 300
+          },
+          "profile_sha256": "828a207bc20e4dd2fef8167cd58021140cd7a5b8c39eeb489423ca41d5e288a7",
+          "verticalAir_m": 64912.21262538035,
+          "relativeVerticalChange": 0.0007964738938410765
+        }
+      ]
+    },
+    {
+      "id": "moon-fog",
+      "file": "moon-fog.profile.json",
+      "profile_sha256": "537d6be55d1336c1fc16e0f44983e47f9aa95829c504662231822c3db401a7c6",
+      "world": "moon",
+      "regime": "fog",
+      "summary": {
+        "name": "Coastal inversion fog",
+        "surfacePressure_Pa": 121590,
+        "surfaceT_K": 288,
+        "surfaceRH": 1,
+        "surfaceScaleHeight_m": 51300.32460889313,
+        "dryLapse_K_per_km": 1.6135458167330676,
+        "lcl_m": 1.0011824946742903e-11,
+        "lclPressure_Pa": 121589.99999999997,
+        "lclTemperature_K": 287.99999999999994,
+        "cloudBase_m": 0,
+        "cloudTop_m": 123.2618792207563,
+        "lfc_m": null,
+        "equilibriumLevel_m": null,
+        "parcelReachesCloud": false,
+        "positiveBuoyancyIntegral_J_per_kg": 0,
+        "preLFCNegativeWork_J_per_kg": -14081.21000606573,
+        "liquidWaterPath_kg_m2": 0.04181241646727484,
+        "iceWaterPath_kg_m2": 0,
+        "inCloudOpticalDepth": 7.839828087614035,
+        "hydrostaticWeightRelativeError": 6.187755052993444e-08,
+        "pressureFloor_Pa": 13472.556025277945,
+        "assumptions": [
+          "Prescribed pressure-coordinate sounding; no GCM or climate-equilibrium solution",
+          "Undiluted liquid pseudoadiabat for parcel buoyancy; mixed-phase optics is a diagnostic closure",
+          "Condensate retention and horizontal cloud morphology are selected inputs",
+          "Atmospheric study supplies no predicted rain to the surface-water model"
+        ]
+      },
+      "surface": {
+        "z": 0,
+        "p": 121590.00000000001,
+        "T": 288,
+        "r": 0.008756584973712607,
+        "e": 1688.0111366334654,
+        "Tv": 289.5193376290084,
+        "rho": 1.4630620006358472,
+        "g": 1.62,
+        "numberDry_m3": 3.015439479694134e+25,
+        "numberWater_m3": 4.245213504646952e+23,
+        "numberTotal_m3": 3.0578916147406037e+25,
+        "airRelative": 1.200625,
+        "ozone_m3": 0
+      },
+      "vertical": {
+        "h_m": 0,
+        "mu": 1,
+        "air_m": 64858.51376158477,
+        "ozone_DU": 300,
+        "blocked": false,
+        "evaluations": 426,
+        "converged": true
+      },
+      "independent_js_paths": [
+        {
+          "h_m": 0,
+          "mu": 1,
+          "air_m": 64858.51376158477,
+          "ozone_DU": 300,
+          "blocked": false,
+          "evaluations": 426,
+          "converged": true
+        },
+        {
+          "h_m": 2,
+          "mu": 0,
+          "air_m": 467983.8609629819,
+          "ozone_DU": 1832.1797149007386,
+          "blocked": false,
+          "evaluations": 386,
+          "converged": true
+        },
+        {
+          "h_m": 10000,
+          "mu": 0.3,
+          "air_m": 149690.80115536536,
+          "ozone_DU": 925.3117373441431,
+          "blocked": false,
+          "evaluations": 298,
+          "converged": true
+        },
+        {
+          "h_m": 60000,
+          "mu": -0.1,
+          "air_m": 273527.0857369726,
+          "ozone_DU": 0,
+          "blocked": false,
+          "evaluations": 285,
+          "converged": true
+        }
+      ],
+      "upperSensitivity": [
+        {
+          "options": {
+            "top_m": 900000
+          },
+          "profile_sha256": "f8e6eafd3a9adb95631ffd034bfb339ee76b4d82aec7fbe1c29931b436242bcb",
+          "verticalAir_m": 64859.92930619116,
+          "relativeVerticalChange": 2.1825116307772063e-05
+        },
+        {
+          "options": {
+            "upperTemperature_K": 200
+          },
+          "profile_sha256": "cda3387ae3142ae03b431e722ef3b7eb080506953dca29c717ef3c065d63954f",
+          "verticalAir_m": 64847.858240279485,
+          "relativeVerticalChange": -0.00016428870609730417
+        },
+        {
+          "options": {
+            "upperTemperature_K": 250
+          },
+          "profile_sha256": "125f528209d1fd983a2d43e842402abf80a44d81a19a5b2ae9cfc52ed3f76019",
+          "verticalAir_m": 64881.24453742538,
+          "relativeVerticalChange": 0.0003504671094400891
+        },
+        {
+          "options": {
+            "upperTemperature_K": 300
+          },
+          "profile_sha256": "7122b2d4c0ef3cfee30bca3be042614517faf9fde524694e80495c849a58a3e7",
+          "verticalAir_m": 64913.30990856913,
+          "relativeVerticalChange": 0.000844856654991899
+        }
+      ]
+    },
+    {
+      "id": "earth-fair",
+      "file": "earth-fair.profile.json",
+      "profile_sha256": "cb31c399a9a3d02dac2d06f6cada9db2b19fc6e8fe7f39b632b835df4eeb620e",
+      "world": "earth",
+      "regime": "fair",
+      "summary": {
+        "name": "Elevated fair-weather cloud",
+        "surfacePressure_Pa": 101325,
+        "surfaceT_K": 294,
+        "surfaceRH": 0.48,
+        "surfaceScaleHeight_m": 8643.771670800417,
+        "dryLapse_K_per_km": 9.7675796812749,
+        "lcl_m": 1527.9343320022476,
+        "lclPressure_Pa": 84503.54830981154,
+        "lclTemperature_K": 279.9139177343758,
+        "cloudBase_m": 1527.9343320022476,
+        "cloudTop_m": 2059.8467512012135,
+        "lfc_m": 1527.9343320022476,
+        "equilibriumLevel_m": 2059.8467512012135,
+        "parcelReachesCloud": true,
+        "positiveBuoyancyIntegral_J_per_kg": 41.29597049984444,
+        "preLFCNegativeWork_J_per_kg": 0,
+        "liquidWaterPath_kg_m2": 0.029006917141363105,
+        "iceWaterPath_kg_m2": 0,
+        "inCloudOpticalDepth": 3.62586464267039,
+        "hydrostaticWeightRelativeError": 5.837997970415844e-08,
+        "pressureFloor_Pa": 11227.130021064955,
+        "assumptions": [
+          "Prescribed pressure-coordinate sounding; no GCM or climate-equilibrium solution",
+          "Undiluted liquid pseudoadiabat for parcel buoyancy; mixed-phase optics is a diagnostic closure",
+          "Condensate retention and horizontal cloud morphology are selected inputs",
+          "Atmospheric study supplies no predicted rain to the surface-water model"
+        ]
+      },
+      "surface": {
+        "z": 0,
+        "p": 101324.99999999999,
+        "T": 294,
+        "r": 0.007340601211520292,
+        "e": 1181.8625702399918,
+        "Tv": 295.30201517315766,
+        "rho": 1.1953432970588964,
+        "g": 9.80665,
+        "numberDry_m3": 2.46712174077376e+25,
+        "numberWater_m3": 2.911631207571231e+23,
+        "numberTotal_m3": 2.496238052849472e+25,
+        "airRelative": 0.9801020408163265,
+        "ozone_m3": 0
+      },
+      "vertical": {
+        "h_m": 0,
+        "mu": 1,
+        "air_m": 8464.289123388015,
+        "ozone_DU": 300,
+        "blocked": false,
+        "evaluations": 396,
+        "converged": true
+      },
+      "independent_js_paths": [
+        {
+          "h_m": 0,
+          "mu": 1,
+          "air_m": 8464.289123388015,
+          "ozone_DU": 300,
+          "blocked": false,
+          "evaluations": 396,
+          "converged": true
+        },
+        {
+          "h_m": 2,
+          "mu": 0,
+          "air_m": 294043.12014773197,
+          "ozone_DU": 3482.2362073933514,
+          "blocked": false,
+          "evaluations": 436,
+          "converged": true
+        },
+        {
+          "h_m": 10000,
+          "mu": 0.3,
+          "air_m": 7868.3980379950835,
+          "ozone_DU": 977.2616846830447,
+          "blocked": false,
+          "evaluations": 288,
+          "converged": true
+        },
+        {
+          "h_m": 60000,
+          "mu": -0.1,
+          "air_m": 12158.262679542528,
+          "ozone_DU": 8610.19885230518,
+          "blocked": false,
+          "evaluations": 253,
+          "converged": true
+        }
+      ],
+      "upperSensitivity": [
+        {
+          "options": {
+            "top_m": 180000
+          },
+          "profile_sha256": "64b8597b8dbbdfd91086d44354fdc146faec9a4408a119a8bae8ca89b4a69d78",
+          "verticalAir_m": 8464.28922494105,
+          "relativeVerticalChange": 1.1997822291220928e-08
+        },
+        {
+          "options": {
+            "upperTemperature_K": 200
+          },
+          "profile_sha256": "c25721a2e4aa244beeb3ecb2d946d20d9c3351a7e74eaa3412f5f965f8fe1f56",
+          "verticalAir_m": 8464.245771050646,
+          "relativeVerticalChange": -5.12179306932925e-06
+        },
+        {
+          "options": {
+            "upperTemperature_K": 250
+          },
+          "profile_sha256": "250c9e5b242fa78d0d6b303dbb9f7bea34fc32c44d0a1e1e393d9e4c620d8047",
+          "verticalAir_m": 8464.383807187747,
+          "relativeVerticalChange": 1.1186267192986321e-05
+        },
+        {
+          "options": {
+            "upperTemperature_K": 300
+          },
+          "profile_sha256": "109d9222f53cd94152652e92d9062afeadb00df729f89faf2d0404ffbe417359",
+          "verticalAir_m": 8464.526794948408,
+          "relativeVerticalChange": 2.807932915915856e-05
+        }
+      ]
+    },
+    {
+      "id": "earth-convection",
+      "file": "earth-convection.profile.json",
+      "profile_sha256": "88e4c6716b13a6ce009ac9f9e80b4bf84c3850f1bd15b1c612c858d4900b87b1",
+      "world": "earth",
+      "regime": "convection",
+      "summary": {
+        "name": "Deep convective column",
+        "surfacePressure_Pa": 101325,
+        "surfaceT_K": 299,
+        "surfaceRH": 0.78,
+        "surfaceScaleHeight_m": 8837.608324187922,
+        "dryLapse_K_per_km": 9.7675796812749,
+        "lcl_m": 657.7622535800169,
+        "lclPressure_Pa": 93979.3799594113,
+        "lclTemperature_K": 293.63750830521536,
+        "cloudBase_m": 657.7622535800169,
+        "cloudTop_m": 9831.883614146693,
+        "lfc_m": 657.7622535800169,
+        "equilibriumLevel_m": 9831.883614146693,
+        "parcelReachesCloud": true,
+        "positiveBuoyancyIntegral_J_per_kg": 3579.160929350066,
+        "preLFCNegativeWork_J_per_kg": 0,
+        "liquidWaterPath_kg_m2": 1.3020997489361175,
+        "iceWaterPath_kg_m2": 0.30260043057766595,
+        "inCloudOpticalDepth": 150.51033953351057,
+        "hydrostaticWeightRelativeError": 4.8506143560227956e-08,
+        "pressureFloor_Pa": 11227.130021064955,
+        "assumptions": [
+          "Prescribed pressure-coordinate sounding; no GCM or climate-equilibrium solution",
+          "Undiluted liquid pseudoadiabat for parcel buoyancy; mixed-phase optics is a diagnostic closure",
+          "Condensate retention and horizontal cloud morphology are selected inputs",
+          "Atmospheric study supplies no predicted rain to the surface-water model"
+        ]
+      },
+      "surface": {
+        "z": 0,
+        "p": 101324.99999999999,
+        "T": 299,
+        "r": 0.01635546694960984,
+        "e": 2596.0999012729235,
+        "Tv": 301.92416538023855,
+        "rho": 1.1691256445163039,
+        "g": 9.80665,
+        "numberDry_m3": 2.3916070652044507e+25,
+        "numberWater_m3": 6.288787639335763e+23,
+        "numberTotal_m3": 2.4544949415978085e+25,
+        "airRelative": 0.9637123745819396,
+        "ozone_m3": 0
+      },
+      "vertical": {
+        "h_m": 0,
+        "mu": 1,
+        "air_m": 8471.835570900088,
+        "ozone_DU": 300,
+        "blocked": false,
+        "evaluations": 416,
+        "converged": true
+      },
+      "independent_js_paths": [
+        {
+          "h_m": 0,
+          "mu": 1,
+          "air_m": 8471.835570900088,
+          "ozone_DU": 300,
+          "blocked": false,
+          "evaluations": 416,
+          "converged": true
+        },
+        {
+          "h_m": 2,
+          "mu": 0,
+          "air_m": 293250.753533943,
+          "ozone_DU": 3482.236207393354,
+          "blocked": false,
+          "evaluations": 404,
+          "converged": true
+        },
+        {
+          "h_m": 10000,
+          "mu": 0.3,
+          "air_m": 7601.547877457749,
+          "ozone_DU": 977.2616846830447,
+          "blocked": false,
+          "evaluations": 300,
+          "converged": true
+        },
+        {
+          "h_m": 60000,
+          "mu": -0.1,
+          "air_m": 12462.312786183575,
+          "ozone_DU": 8610.198852305704,
+          "blocked": false,
+          "evaluations": 261,
+          "converged": true
+        }
+      ],
+      "upperSensitivity": [
+        {
+          "options": {
+            "top_m": 180000
+          },
+          "profile_sha256": "47f972112e4c2b96a4035653d0cf533ebbed2d11f5dadb51a87288750e554f2f",
+          "verticalAir_m": 8471.835716281097,
+          "relativeVerticalChange": 1.716050879174702e-08
+        },
+        {
+          "options": {
+            "upperTemperature_K": 200
+          },
+          "profile_sha256": "7addb9754cd4aed42c0c6a286e75feef1fa641b7753d4adca14452907ae5a377",
+          "verticalAir_m": 8471.77807060297,
+          "relativeVerticalChange": -6.7872300679727715e-06
+        },
+        {
+          "options": {
+            "upperTemperature_K": 250
+          },
+          "profile_sha256": "2f098a3dc91fda0e22a3eeca5b02fba55dbe99c15bf04d1a367e718d2e7cb99d",
+          "verticalAir_m": 8471.917095531471,
+          "relativeVerticalChange": 9.623018612847645e-06
+        },
+        {
+          "options": {
+            "upperTemperature_K": 300
+          },
+          "profile_sha256": "caad327d0483892d7946b95cd9b01248be0eb8fb4e2e10b62bbbc896a8ecc38c",
+          "verticalAir_m": 8472.060807109894,
+          "relativeVerticalChange": 2.658647089193167e-05
+        }
+      ]
+    },
+    {
+      "id": "earth-fog",
+      "file": "earth-fog.profile.json",
+      "profile_sha256": "4b2dd6d36ae4e3b324a2295212193bbe854bdcb809a49ce537729619076ebac9",
+      "world": "earth",
+      "regime": "fog",
+      "summary": {
+        "name": "Coastal inversion fog",
+        "surfacePressure_Pa": 101325,
+        "surfaceT_K": 288,
+        "surfaceRH": 1,
+        "surfaceScaleHeight_m": 8483.458042071294,
+        "dryLapse_K_per_km": 9.7675796812749,
+        "lcl_m": 1.6556389052120634e-12,
+        "lclPressure_Pa": 101324.99999999997,
+        "lclTemperature_K": 287.99999999999994,
+        "cloudBase_m": 0,
+        "cloudTop_m": 20.38267332121804,
+        "lfc_m": null,
+        "equilibriumLevel_m": null,
+        "parcelReachesCloud": false,
+        "positiveBuoyancyIntegral_J_per_kg": 0,
+        "preLFCNegativeWork_J_per_kg": -12449.591174546124,
+        "liquidWaterPath_kg_m2": 0.00693993150780627,
+        "iceWaterPath_kg_m2": 0,
+        "inCloudOpticalDepth": 1.301237157713675,
+        "hydrostaticWeightRelativeError": 5.0558641689889526e-08,
+        "pressureFloor_Pa": 11227.130021064955,
+        "assumptions": [
+          "Prescribed pressure-coordinate sounding; no GCM or climate-equilibrium solution",
+          "Undiluted liquid pseudoadiabat for parcel buoyancy; mixed-phase optics is a diagnostic closure",
+          "Condensate retention and horizontal cloud morphology are selected inputs",
+          "Atmospheric study supplies no predicted rain to the surface-water model"
+        ]
+      },
+      "surface": {
+        "z": 0,
+        "p": 101324.99999999999,
+        "T": 288,
+        "r": 0.010537572100246794,
+        "e": 1688.0111366334652,
+        "Tv": 289.82513084228685,
+        "rho": 1.2179319419933339,
+        "g": 9.80665,
+        "numberDry_m3": 2.5057908772373663e+25,
+        "numberWater_m3": 4.2452135046469515e+23,
+        "numberTotal_m3": 2.548243012283836e+25,
+        "airRelative": 1.000520833333333,
+        "ozone_m3": 0
+      },
+      "vertical": {
+        "h_m": 0,
+        "mu": 1,
+        "air_m": 8468.946123124904,
+        "ozone_DU": 300,
+        "blocked": false,
+        "evaluations": 416,
+        "converged": true
+      },
+      "independent_js_paths": [
+        {
+          "h_m": 0,
+          "mu": 1,
+          "air_m": 8468.946123124904,
+          "ozone_DU": 300,
+          "blocked": false,
+          "evaluations": 416,
+          "converged": true
+        },
+        {
+          "h_m": 2,
+          "mu": 0,
+          "air_m": 294085.66557978967,
+          "ozone_DU": 3482.2362073933514,
+          "blocked": false,
+          "evaluations": 368,
+          "converged": true
+        },
+        {
+          "h_m": 10000,
+          "mu": 0.3,
+          "air_m": 7834.788164253275,
+          "ozone_DU": 977.2616846830447,
+          "blocked": false,
+          "evaluations": 304,
+          "converged": true
+        },
+        {
+          "h_m": 60000,
+          "mu": -0.1,
+          "air_m": 12093.077347654704,
+          "ozone_DU": 8610.19885230518,
+          "blocked": false,
+          "evaluations": 253,
+          "converged": true
+        }
+      ],
+      "upperSensitivity": [
+        {
+          "options": {
+            "top_m": 180000
+          },
+          "profile_sha256": "021f30c2b1cbb0c2d7d3d073193944960a9f5df9a72f071d5a4febef035de336",
+          "verticalAir_m": 8468.946224133786,
+          "relativeVerticalChange": 1.1926971854592239e-08
+        },
+        {
+          "options": {
+            "upperTemperature_K": 200
+          },
+          "profile_sha256": "c095881ac420486e790c4cdbee1062c0592a59b45a2eca06c3396da0484baa17",
+          "verticalAir_m": 8468.902653714902,
+          "relativeVerticalChange": -5.132800394602732e-06
+        },
+        {
+          "options": {
+            "upperTemperature_K": 250
+          },
+          "profile_sha256": "933765ca4e8368fbfb0d6c908c5edc0b6838657e9afa2d2d3a12a5ef5f02177d",
+          "verticalAir_m": 8469.04096909658,
+          "relativeVerticalChange": 1.1199264973171807e-05
+        },
+        {
+          "options": {
+            "upperTemperature_K": 300
+          },
+          "profile_sha256": "3dbee68ad452f2aec944447f078ad04c083625001aceb3cdd337aa87b4677965",
+          "verticalAir_m": 8469.184060661735,
+          "relativeVerticalChange": 2.8095294664964854e-05
+        }
+      ]
+    },
+    {
+      "id": "moon_no_ozone-fair",
+      "file": "moon_no_ozone-fair.profile.json",
+      "profile_sha256": "3ff2a352b9a38fc2ff9cfa028b19fa5f915ff139120d87ce285cf50d8ec7ebd1",
+      "world": "moon_no_ozone",
+      "regime": "fair",
+      "summary": {
+        "name": "Elevated fair-weather cloud",
+        "surfacePressure_Pa": 121590,
+        "surfaceT_K": 294,
+        "surfaceRH": 0.48,
+        "surfaceScaleHeight_m": 52286.372323785814,
+        "dryLapse_K_per_km": 1.6135458167330676,
+        "lcl_m": 9288.610732243224,
+        "lclPressure_Pa": 101410.63999942236,
+        "lclTemperature_K": 279.9148335720644,
+        "cloudBase_m": 9288.610732243224,
+        "cloudTop_m": 12499.592968044033,
+        "lfc_m": 9288.610732243224,
+        "equilibriumLevel_m": 12499.592968044033,
+        "parcelReachesCloud": true,
+        "positiveBuoyancyIntegral_J_per_kg": 37.11339677754324,
+        "preLFCNegativeWork_J_per_kg": 0,
+        "liquidWaterPath_kg_m2": 0.1895886924254182,
+        "iceWaterPath_kg_m2": 0,
+        "inCloudOpticalDepth": 23.698586553177268,
+        "hydrostaticWeightRelativeError": 6.961464665674144e-08,
+        "pressureFloor_Pa": 13472.556025277945,
+        "assumptions": [
+          "Prescribed pressure-coordinate sounding; no GCM or climate-equilibrium solution",
+          "Undiluted liquid pseudoadiabat for parcel buoyancy; mixed-phase optics is a diagnostic closure",
+          "Condensate retention and horizontal cloud morphology are selected inputs",
+          "Atmospheric study supplies no predicted rain to the surface-water model"
+        ]
+      },
+      "surface": {
+        "z": 0,
+        "p": 121590.00000000001,
+        "T": 294,
+        "r": 0.006105159099991608,
+        "e": 1181.8625702399918,
+        "Tv": 295.0842123829752,
+        "rho": 1.4354707014433992,
+        "g": 1.62,
+        "numberDry_m3": 2.9663693513436553e+25,
+        "numberWater_m3": 2.911631207571231e+23,
+        "numberTotal_m3": 2.9954856634193674e+25,
+        "airRelative": 1.176122448979592,
+        "ozone_m3": 0
+      },
+      "vertical": {
+        "h_m": 0,
+        "mu": 1,
+        "air_m": 64831.03350065928,
+        "ozone_DU": 0,
+        "blocked": false,
+        "evaluations": 434,
+        "converged": true
+      },
+      "independent_js_paths": [
+        {
+          "h_m": 0,
+          "mu": 1,
+          "air_m": 64831.03350065928,
+          "ozone_DU": 0,
+          "blocked": false,
+          "evaluations": 434,
+          "converged": true
+        },
+        {
+          "h_m": 2,
+          "mu": 0,
+          "air_m": 467919.2183738664,
+          "ozone_DU": 0,
+          "blocked": false,
+          "evaluations": 406,
+          "converged": true
+        },
+        {
+          "h_m": 10000,
+          "mu": 0.3,
+          "air_m": 149179.766388089,
+          "ozone_DU": 0,
+          "blocked": false,
+          "evaluations": 398,
+          "converged": true
+        },
+        {
+          "h_m": 60000,
+          "mu": -0.1,
+          "air_m": 272887.20657658577,
+          "ozone_DU": 0,
+          "blocked": false,
+          "evaluations": 285,
+          "converged": true
+        }
+      ],
+      "upperSensitivity": [
+        {
+          "options": {
+            "top_m": 900000
+          },
+          "profile_sha256": "97df9b68189adf276975ebf8ff98c2eb3cdd6e3ea5358d866a05d95ccac3381e",
+          "verticalAir_m": 64832.456881952035,
+          "relativeVerticalChange": 2.195524605874688e-05
+        },
+        {
+          "options": {
+            "upperTemperature_K": 200
+          },
+          "profile_sha256": "b8368c96c9014e4bcc8885e2a36f003f50a60be77eeb8bd2c66f2a7102c421dc",
+          "verticalAir_m": 64820.3745692742,
+          "relativeVerticalChange": -0.00016441094348695895
+        },
+        {
+          "options": {
+            "upperTemperature_K": 250
+          },
+          "profile_sha256": "0d471c51d5f3b7eebdd264c946ea2d952284784ba104c8c5ae776d16e3f90101",
+          "verticalAir_m": 64853.76902496366,
+          "relativeVerticalChange": 0.0003506889074065267
+        },
+        {
+          "options": {
+            "upperTemperature_K": 300
+          },
+          "profile_sha256": "f076e9f101dc83c01f616bd8690b2260c9c69f13fde3c8dbcf4b64d266656aea",
+          "verticalAir_m": 64885.82599821093,
+          "relativeVerticalChange": 0.0008451584772453113
+        }
+      ]
+    },
+    {
+      "id": "moon_no_ozone-convection",
+      "file": "moon_no_ozone-convection.profile.json",
+      "profile_sha256": "7f35bfbfc0d9c97926456e6a98fdea17c0677502fb27f17d120e06ae9005fc3a",
+      "world": "moon_no_ozone",
+      "regime": "convection",
+      "summary": {
+        "name": "Deep convective column",
+        "surfacePressure_Pa": 121590,
+        "surfaceT_K": 299,
+        "surfaceRH": 0.78,
+        "surfaceScaleHeight_m": 53411.29410096087,
+        "dryLapse_K_per_km": 1.6135458167330676,
+        "lcl_m": 3981.845196161411,
+        "lclPressure_Pa": 112781.80036698407,
+        "lclTemperature_K": 293.6384499033133,
+        "cloudBase_m": 3981.845196161411,
+        "cloudTop_m": 58696.617819586565,
+        "lfc_m": 3981.845196161411,
+        "equilibriumLevel_m": 58696.617819586565,
+        "parcelReachesCloud": true,
+        "positiveBuoyancyIntegral_J_per_kg": 2735.29027300064,
+        "preLFCNegativeWork_J_per_kg": 0,
+        "liquidWaterPath_kg_m2": 8.347508143308366,
+        "iceWaterPath_kg_m2": 2.2006043617800666,
+        "inCloudOpticalDepth": 974.3687609662483,
+        "hydrostaticWeightRelativeError": 5.932265618854557e-08,
+        "pressureFloor_Pa": 13472.556025277945,
+        "assumptions": [
+          "Prescribed pressure-coordinate sounding; no GCM or climate-equilibrium solution",
+          "Undiluted liquid pseudoadiabat for parcel buoyancy; mixed-phase optics is a diagnostic closure",
+          "Condensate retention and horizontal cloud morphology are selected inputs",
+          "Atmospheric study supplies no predicted rain to the surface-water model"
+        ]
+      },
+      "surface": {
+        "z": 0,
+        "p": 121590.00000000001,
+        "T": 299,
+        "r": 0.01357008435891527,
+        "e": 2596.0999012729244,
+        "Tv": 301.432839029983,
+        "rho": 1.4052375404662834,
+        "g": 1.62,
+        "numberDry_m3": 2.8825060535240133e+25,
+        "numberWater_m3": 6.288787639335766e+23,
+        "numberTotal_m3": 2.945393929917371e+25,
+        "airRelative": 1.156454849498328,
+        "ozone_m3": 0
+      },
+      "vertical": {
+        "h_m": 0,
+        "mu": 1,
+        "air_m": 64860.55288826475,
+        "ozone_DU": 0,
+        "blocked": false,
+        "evaluations": 386,
+        "converged": true
+      },
+      "independent_js_paths": [
+        {
+          "h_m": 0,
+          "mu": 1,
+          "air_m": 64860.55288826475,
+          "ozone_DU": 0,
+          "blocked": false,
+          "evaluations": 386,
+          "converged": true
+        },
+        {
+          "h_m": 2,
+          "mu": 0,
+          "air_m": 466620.3868169892,
+          "ozone_DU": 0,
+          "blocked": false,
+          "evaluations": 378,
+          "converged": true
+        },
+        {
+          "h_m": 10000,
+          "mu": 0.3,
+          "air_m": 150079.17747262845,
+          "ozone_DU": 0,
+          "blocked": false,
+          "evaluations": 330,
+          "converged": true
+        },
+        {
+          "h_m": 60000,
+          "mu": -0.1,
+          "air_m": 272976.46695113974,
+          "ozone_DU": 0,
+          "blocked": false,
+          "evaluations": 345,
+          "converged": true
+        }
+      ],
+      "upperSensitivity": [
+        {
+          "options": {
+            "top_m": 900000
+          },
+          "profile_sha256": "8dcda73486bdc38f67e532be7db305180fe577c0548ec9c4da3e8fc32abeefac",
+          "verticalAir_m": 64862.29086395945,
+          "relativeVerticalChange": 2.6795573230709024e-05
+        },
+        {
+          "options": {
+            "upperTemperature_K": 200
+          },
+          "profile_sha256": "ad53a3edce68085fff6e6c238839a74f77cf6f30a2f18254383df3cb0cb6c1d1",
+          "verticalAir_m": 64846.448550314606,
+          "relativeVerticalChange": -0.00021745633242509221
+        },
+        {
+          "options": {
+            "upperTemperature_K": 250
+          },
+          "profile_sha256": "bfd90da90958c867880f93158c9f2186a5664dbc599c4ed9deceff025abdf703",
+          "verticalAir_m": 64880.05169764194,
+          "relativeVerticalChange": 0.0003006266291127879
+        },
+        {
+          "options": {
+            "upperTemperature_K": 300
+          },
+          "profile_sha256": "b5d2b5eb37c31bda3d6a5782a146bfebe4326e5a9f55919539ad3b8fcfab3552",
+          "verticalAir_m": 64912.21262538035,
+          "relativeVerticalChange": 0.0007964738938410765
+        }
+      ]
+    },
+    {
+      "id": "moon_no_ozone-fog",
+      "file": "moon_no_ozone-fog.profile.json",
+      "profile_sha256": "ad2aa4d1c506c88e9fdedcb1d60418c8ab42e3f48c5f24566329b9f872dd7c65",
+      "world": "moon_no_ozone",
+      "regime": "fog",
+      "summary": {
+        "name": "Coastal inversion fog",
+        "surfacePressure_Pa": 121590,
+        "surfaceT_K": 288,
+        "surfaceRH": 1,
+        "surfaceScaleHeight_m": 51300.32460889313,
+        "dryLapse_K_per_km": 1.6135458167330676,
+        "lcl_m": 1.0011824946742903e-11,
+        "lclPressure_Pa": 121589.99999999997,
+        "lclTemperature_K": 287.99999999999994,
+        "cloudBase_m": 0,
+        "cloudTop_m": 123.2618792207563,
+        "lfc_m": null,
+        "equilibriumLevel_m": null,
+        "parcelReachesCloud": false,
+        "positiveBuoyancyIntegral_J_per_kg": 0,
+        "preLFCNegativeWork_J_per_kg": -14081.21000606573,
+        "liquidWaterPath_kg_m2": 0.04181241646727484,
+        "iceWaterPath_kg_m2": 0,
+        "inCloudOpticalDepth": 7.839828087614035,
+        "hydrostaticWeightRelativeError": 6.187755052993444e-08,
+        "pressureFloor_Pa": 13472.556025277945,
+        "assumptions": [
+          "Prescribed pressure-coordinate sounding; no GCM or climate-equilibrium solution",
+          "Undiluted liquid pseudoadiabat for parcel buoyancy; mixed-phase optics is a diagnostic closure",
+          "Condensate retention and horizontal cloud morphology are selected inputs",
+          "Atmospheric study supplies no predicted rain to the surface-water model"
+        ]
+      },
+      "surface": {
+        "z": 0,
+        "p": 121590.00000000001,
+        "T": 288,
+        "r": 0.008756584973712607,
+        "e": 1688.0111366334654,
+        "Tv": 289.5193376290084,
+        "rho": 1.4630620006358472,
+        "g": 1.62,
+        "numberDry_m3": 3.015439479694134e+25,
+        "numberWater_m3": 4.245213504646952e+23,
+        "numberTotal_m3": 3.0578916147406037e+25,
+        "airRelative": 1.200625,
+        "ozone_m3": 0
+      },
+      "vertical": {
+        "h_m": 0,
+        "mu": 1,
+        "air_m": 64858.51376158477,
+        "ozone_DU": 0,
+        "blocked": false,
+        "evaluations": 426,
+        "converged": true
+      },
+      "independent_js_paths": [
+        {
+          "h_m": 0,
+          "mu": 1,
+          "air_m": 64858.51376158477,
+          "ozone_DU": 0,
+          "blocked": false,
+          "evaluations": 426,
+          "converged": true
+        },
+        {
+          "h_m": 2,
+          "mu": 0,
+          "air_m": 467983.8600554252,
+          "ozone_DU": 0,
+          "blocked": false,
+          "evaluations": 382,
+          "converged": true
+        },
+        {
+          "h_m": 10000,
+          "mu": 0.3,
+          "air_m": 149690.80115536536,
+          "ozone_DU": 0,
+          "blocked": false,
+          "evaluations": 298,
+          "converged": true
+        },
+        {
+          "h_m": 60000,
+          "mu": -0.1,
+          "air_m": 273527.0857369726,
+          "ozone_DU": 0,
+          "blocked": false,
+          "evaluations": 285,
+          "converged": true
+        }
+      ],
+      "upperSensitivity": [
+        {
+          "options": {
+            "top_m": 900000
+          },
+          "profile_sha256": "b1dc99366a759b7aa5c4b1cf91b0dc03f50f08440a39bc39b01dd92f50cb90a7",
+          "verticalAir_m": 64859.92930619116,
+          "relativeVerticalChange": 2.1825116307772063e-05
+        },
+        {
+          "options": {
+            "upperTemperature_K": 200
+          },
+          "profile_sha256": "4555d9f7f259e7ec1448686e94ba3f43847c872df70ca78f3353f4acd63e59c2",
+          "verticalAir_m": 64847.858240279485,
+          "relativeVerticalChange": -0.00016428870609730417
+        },
+        {
+          "options": {
+            "upperTemperature_K": 250
+          },
+          "profile_sha256": "5ee4711ea773337f0bf45f53c13171632e563040729c3852a784fe0632df1cfa",
+          "verticalAir_m": 64881.24453742538,
+          "relativeVerticalChange": 0.0003504671094400891
+        },
+        {
+          "options": {
+            "upperTemperature_K": 300
+          },
+          "profile_sha256": "4807f88d21b9efb279dbd4cb8235bbf023a42f66f3e30dafaac52f6abe1e43ac",
+          "verticalAir_m": 64913.30990856913,
+          "relativeVerticalChange": 0.000844856654991899
+        }
+      ]
+    }
+  ],
+  "sources": {
+    "src/weather-column.js": "7b4e39a6096025205f52ec4fa035d1557e85fc6638d691b8b129959b8e5f35e4",
+    "src/atmospheric-profile.js": "fe916ef5b8e295d69198bbcf58c5670bcf053380442243a9af4d75e80fcd2ba7",
+    "src/profile-optics.js": "38017bc8f3562f96b5c9c4633d07574e0002facaef822660528d2bfe66c58d3b"
+  }
+}
