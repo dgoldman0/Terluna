@@ -4,187 +4,13 @@
  */
 import { OM } from './om.js';
 import C from './core.js';
-import L from '../world/landscape.js';
+import { noise } from './noise.js';
 const norm = (v) => {
   const n = Math.hypot(...v);
   return v.map((x) => x / n);
 };
 const plus = (a, b) => a.map((x, i) => x + b[i]);
 const mul = (a, t) => a.map((x) => x * t);
-function plan() {
-  L.initialize();
-  L.setCanopies([]);
-  const trees = [],
-    rocks = [],
-    gravel = [],
-    tufts = [],
-    understory = [];
-  for (let j = 0; j < 18; j++)
-    for (let i = -15; i <= 17; i++) {
-      const id = `tree:${i}:${j}`,
-        r = C.rng(Math.floor(L.hash(i, j, 873) * 4294967295)),
-        x = (i + (r() - 0.5) * 0.8) * 8,
-        z = 7 + (j + (r() - 0.5) * 0.8) * 8,
-        f = L.sample(x, z);
-      if (
-        C.pathDistance(x, z) < 3.7 ||
-        C.roofMask(x, z, 4) ||
-        f.elevation < 1.2 ||
-        f.slope > 0.52 ||
-        f.soilDepth < 0.16
-      )
-        continue;
-      const probability = 0.45 * f.community[1] + 0.25 * f.community[2] + 0.025 * f.community[0];
-      if (r() > probability) continue;
-      const family = f.moisture > 0.45 ? 2 : f.exposure > 0.72 && f.elevation < 5 ? 0 : 1;
-      const mature = r() > 0.24,
-        h = mature ? (family === 0 ? 5.5 : 7.7) + r() * 4.5 : 2.1 + r() * 3.1;
-      trees.push({
-        id,
-        x,
-        z,
-        y: C.groundHeight(x, z),
-        height: h,
-        family,
-        ageClass: mature ? 'mature' : 'juvenile',
-        crownRadius: h * (family === 1 ? 0.34 : 0.39),
-        canopyOpacity: family === 2 ? 0.85 : 0.8,
-        seed: Math.floor(r() * 4294967295),
-        habitat: {
-          soilDepth: f.soilDepth,
-          moisture: f.moisture,
-          exposure: f.exposure,
-          suitability: probability,
-        },
-      });
-    }
-  // Two managed edge trees are part of the authored planting scenario. Their
-  // improved rooting zones occur in the shared substrate/material field.
-  for (const [id, x, z, h, seed] of [
-    ['managed:west-edge', -10, -1, 7.2, 381712],
-    ['managed:east-edge', 18, 0, 7.2, 292013],
-  ]) {
-    const f = L.sample(x, z);
-    if (f.elevation > 0.7 && f.soilDepth > 0.3)
-      trees.push({
-        id,
-        x,
-        z,
-        y: C.groundHeight(x, z),
-        height: h,
-        family: 0,
-        ageClass: 'mature',
-        crownRadius: h * 0.39,
-        canopyOpacity: 0.85,
-        seed,
-        managed: true,
-        habitat: {
-          soilDepth: f.soilDepth,
-          moisture: f.moisture,
-          exposure: f.exposure,
-          suitability: f.community[1],
-        },
-      });
-  }
-  // A stable identifier priority plus crown-scale spacing, independent of render LOD.
-  trees.sort((a, b) => a.seed - b.seed);
-  const accepted = [];
-  for (const t of trees)
-    if (
-      !accepted.some(
-        (a) => Math.hypot(a.x - t.x, a.z - t.z) < (a.crownRadius + t.crownRadius) * 0.55,
-      )
-    )
-      accepted.push(t);
-  L.setCanopies(accepted);
-  for (let j = -12; j < 34; j++)
-    for (let i = -33; i < 34; i++) {
-      const r = C.rng(Math.floor(L.hash(i, j, 218) * 4294967295)),
-        x = (i + r()) * 4,
-        z = (j + r()) * 4,
-        f = L.sample(x, z);
-      if (
-        C.pathDistance(x, z) < 1.8 ||
-        C.roofMask(x, z, 1) ||
-        f.elevation < -1.0 ||
-        f.elevation > 24
-      )
-        continue;
-      if (r() < f.weights[2] * 0.55 + f.weights[1] * 0.12) {
-        const s = 0.32 + r() ** 1.3 * (1.4 + f.substrate * 2.4);
-        if (C.pathDistance(x, z) < 2.0 + s * 1.2) continue;
-        rocks.push({
-          id: `rock:${i}:${j}`,
-          x,
-          z,
-          s,
-          angle: r() * C.TAU,
-          family: Math.floor(r() * 6),
-          stretch: 0.9 + r() * 0.7,
-        });
-      }
-    }
-  for (let j = -45; j < 92; j++)
-    for (let i = -130; i < 130; i++) {
-      const r = C.rng(Math.floor(L.hash(i, j, 94) * 4294967295)),
-        x = (i + r()) * 0.5,
-        z = (j + r()) * 0.5,
-        f = L.sample(x, z);
-      if (
-        f.elevation < -0.55 ||
-        f.elevation > 3 ||
-        C.roofMask(x, z) ||
-        r() > f.weights[1] * 0.8 + f.drainage * 0.18
-      )
-        continue;
-      gravel.push({
-        id: `pebble:${i}:${j}`,
-        x,
-        z,
-        s: 0.018 + r() ** 3 * 0.09,
-        angle: r() * C.TAU,
-        tone: r(),
-      });
-    }
-  for (let j = -2; j < 97; j++)
-    for (let i = -83; i < 84; i++) {
-      const r = C.rng(Math.floor(L.hash(i, j, 512) * 4294967295)),
-        x = (i + r()) * 1.5,
-        z = (j + r()) * 1.5;
-      if (C.pathDistance(x, z) < 1.55 || C.roofMask(x, z, 1)) continue;
-      const f = L.sample(x, z);
-      const community = f.community[2] > 0.2 ? 2 : f.canopy > 0.35 ? 1 : 0;
-      const density =
-        (f.community[0] * 0.65 + f.community[2] * 0.6 + f.community[3] * 0.18) *
-        (0.45 + 0.55 * L.noise(x * 0.085, z * 0.085, 91));
-      if (r() < density)
-        tufts.push({
-          id: `tuft:${i}:${j}`,
-          x,
-          z,
-          h: (community === 2 ? 0.38 : 0.19) + r() * 0.3,
-          angle: r() * C.TAU,
-          scale: 0.6 + r() * 0.9,
-          community,
-          tone: r(),
-        });
-      if (
-        f.canopy > 0.28 &&
-        f.soilDepth > 0.2 &&
-        f.elevation > 1.8 &&
-        r() < (0.035 + 0.12 * f.moisture) * f.canopy
-      )
-        understory.push({
-          id: `understory:${i}:${j}`,
-          x,
-          z,
-          h: 0.22 + r() * 0.4,
-          angle: r() * C.TAU,
-          scale: 0.5 + r() * 0.75,
-        });
-    }
-  return { trees: accepted, rocks, gravel, tufts, understory, seed: 873, version: 'community-2' };
-}
 function skeleton(tree) {
   const r = C.rng(tree.seed),
     segments = [],
@@ -506,7 +332,7 @@ function populate(T, scene, atm, state, layout) {
         const dot = x * nx + y * ny + z * nz;
         if (dot > 0) radius = Math.min(radius, d / dot);
       }
-      radius += (L.noise(x * 5 + family, z * 6 + y * 4, 8) - 0.5) * 0.035;
+      radius += (noise(x * 5 + family, z * 6 + y * 4, 8) - 0.5) * 0.035;
       p.setXYZ(i, x * radius, y * radius * 0.72, z * radius);
     }
     geo.computeVertexNormals();
@@ -594,5 +420,5 @@ function populate(T, scene, atm, state, layout) {
     pebbles: layout.gravel.length,
   };
 }
-OM.Ecology = { plan, skeleton, populate, leafGeometry, tuftGeometry };
-export default OM.Ecology;
+OM.Vegetation = { skeleton, populate, leafGeometry, tuftGeometry };
+export default OM.Vegetation;

@@ -5,7 +5,6 @@
  */
 import { OM } from './om.js';
 import C from './core.js';
-import L from '../world/landscape.js';
 function triangle(a, b, c, d, u, v) {
   return u + v <= 1 ? a + (b - a) * u + (c - a) * v : d + (c - d) * (1 - u) + (b - d) * (1 - v);
 }
@@ -87,7 +86,7 @@ class TerrainSystem {
       nx = -g.x + x / R,
       nz = -g.z + z / R,
       norm = Math.hypot(nx, 1, nz);
-    const f = L.classify(
+    const f = OM.world.landscape.classify(
       x,
       z,
       h + C.curvatureSag(x, z, this.world),

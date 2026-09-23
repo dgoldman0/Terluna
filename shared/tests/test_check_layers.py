@@ -7,7 +7,9 @@ from shared.check_layers import allowed, lane
 class LaneRuleTests(unittest.TestCase):
     def test_lanes(self):
         self.assertEqual(lane("atmosphere/lower_air.py"), "domain")
-        self.assertEqual(lane("immersion/engine/core.js"), "immersion")
+        self.assertEqual(lane("immersion/engine/core.js"), "immersion-engine")
+        self.assertEqual(lane("immersion/world/cove.js"), "immersion-world")
+        self.assertEqual(lane("immersion/experiences/shoreline/app.js"), "immersion")
         self.assertEqual(lane("immersion/bake/columns.mjs"), "immersion-bake")
         self.assertEqual(lane("research/studies/forest_patch/run.py"), "research")
 
@@ -18,6 +20,8 @@ class LaneRuleTests(unittest.TestCase):
         self.assertTrue(allowed("immersion/bake/columns.mjs", "atmosphere/column/export_columns.cjs"))
         self.assertTrue(allowed("visualization/labs/build_accuracy.py", "illumination/references/x.py"))
         self.assertTrue(allowed("visualization/labs/x.py", "immersion/engine/cloud-renderer.js"))
+        self.assertTrue(allowed("immersion/world/cove-weather.js", "immersion/engine/core.js"))
+        self.assertTrue(allowed("immersion/experiences/shoreline/main.js", "immersion/world/cove.js"))
 
     def test_rejected_dependencies(self):
         self.assertFalse(allowed("immersion/engine/cloud-renderer.js", "atmosphere/column/weather-column.js"))
@@ -25,6 +29,7 @@ class LaneRuleTests(unittest.TestCase):
         self.assertFalse(allowed("illumination/sky/solver.py", "visualization/month-of-light/cycle.js"))
         self.assertFalse(allowed("shared/constants.py", "atmosphere/lower_air.py"))
         self.assertFalse(allowed("research/check.py", "archive/training_data/x.py"))
+        self.assertFalse(allowed("immersion/engine/scene.js", "immersion/world/cove.js"))
 
 
 if __name__ == "__main__":

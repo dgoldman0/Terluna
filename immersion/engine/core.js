@@ -1,5 +1,14 @@
 /* Pure scenario / geometry / water-accounting functions. Metres, seconds, mm. */
-import Landscape from '../world/landscape.js';
+import { OM } from './om.js';
+// The active world's landscape, registered by the experience (OM.world).
+const Landscape = {
+  shorelineAtX: (x) => OM.world.landscape.shorelineAtX(x),
+  height: (x, z) => OM.world.landscape.height(x, z),
+  gradient: (x, z, h) => OM.world.landscape.gradient(x, z, h),
+  initialize: () => OM.world.landscape.initialize(),
+  gridCoverage: (x, z) => OM.world.landscape.gridCoverage(x, z),
+  gridSample: (grid, x, z) => OM.world.landscape.gridSample(grid, x, z),
+};
 import {
   EARTH_RADIUS,
   LEGACY_MOON_GRAVITY,
@@ -72,40 +81,6 @@ function surfaceGradient(x, z, h = 0.2) {
 function waterDepth(x, z) {
   return Math.max(0, -surfaceHeight(x, z));
 }
-const SHELTER = { x: 20, z: 33, width: 11, depth: 8, roofHeight: 4.3 };
-function roofMask(x, z, pad = 0) {
-  return Math.abs(x - SHELTER.x) < SHELTER.width / 2 + pad &&
-    Math.abs(z - SHELTER.z) < SHELTER.depth / 2 + pad
-    ? 1
-    : 0;
-}
-const WAYPOINTS = [
-  { id: 'shore', name: 'Shoreline', x: 0, z: 9, yaw: 0, pitch: -0.04 },
-  { id: 'shelter', name: 'Rain shelter', x: 20, z: 33, yaw: 0.05, pitch: -0.06 },
-  { id: 'path', name: 'Woodland path', x: -21, z: 39, yaw: -0.7, pitch: -0.06 },
-  { id: 'overlook', name: 'High overlook', x: -56, z: 47, yaw: 0.04, pitch: -0.12 },
-];
-function pathDistance(x, z) {
-  let best = 1e9;
-  const a = [
-    [0, -18],
-    [0, 9],
-    [7, 20],
-    [20, 33],
-    [-6, 43],
-    [-30, 43],
-    [-56, 47],
-  ];
-  for (let i = 1; i < a.length; i++) {
-    const [ax, az] = a[i - 1],
-      [bx, bz] = a[i],
-      dx = bx - ax,
-      dz = bz - az,
-      t = clamp(((x - ax) * dx + (z - az) * dz) / (dx * dx + dz * dz));
-    best = Math.min(best, Math.hypot(x - ax - t * dx, z - az - t * dz));
-  }
-  return best;
-}
 function sunAt(phase) {
   const h = (((phase % 1) + 1) % 1) * TAU;
   return {
@@ -129,54 +104,6 @@ function cloudTau(lwc_g_m3, thickness_m, effectiveRadius_um) {
   if (lwc_g_m3 < 0 || thickness_m <= 0 || effectiveRadius_um <= 0)
     throw Error('Invalid cloud input');
   return (3 * (lwc_g_m3 * 0.001) * thickness_m) / (2 * 1000 * effectiveRadius_um * 1e-6);
-}
-/* Authored four-hour episode. These are forcing inputs, not weather forecasts. */
-const EPISODE = [
-  [0, 0.1, 0.015, 1100, 850, 1.5, 0.48, 294, 0, 35000],
-  [1800, 0.25, 0.04, 1100, 900, 2.4, 0.59, 293, 0, 30000],
-  [3600, 0.52, 0.08, 1050, 1000, 3.8, 0.72, 292, 0, 22000],
-  [5100, 0.88, 0.2, 900, 1100, 5.4, 0.87, 290, 1.5, 8000],
-  [6300, 0.97, 0.29, 800, 1200, 6.7, 0.96, 289, 7, 3800],
-  [8100, 0.99, 0.34, 750, 1300, 6.2, 0.98, 288.5, 10, 2500],
-  [9600, 0.92, 0.19, 900, 1150, 4.6, 0.94, 289, 3.5, 5000],
-  [10800, 0.7, 0.12, 1100, 1000, 3.2, 0.87, 290, 0.3, 9500],
-  [12600, 0.37, 0.05, 1350, 950, 2.6, 0.75, 292, 0, 22000],
-  [14400, 0.12, 0.02, 1500, 900, 1.7, 0.64, 293, 0, 35000],
-];
-function weatherAt(t, kind = 'episode') {
-  let a, b;
-  if (kind === 'clear') a = b = [0, 0, 0, 1100, 850, 1.5, 0.48, 294, 0, 180000];
-  else if (kind === 'fog') a = b = [0, 0.62, 0.08, 800, 800, 1.2, 0.99, 288, 0, 110];
-  else {
-    t = clamp(t, 0, 14400);
-    let j = 1;
-    while (j < EPISODE.length - 1 && EPISODE[j][0] < t) j++;
-    a = EPISODE[j - 1];
-    b = EPISODE[j];
-  }
-  const q = a === b ? 0 : smooth(a[0], b[0], t),
-    v = a.map((x, i) => mix(x, b[i], q));
-  return {
-    coverage: v[1],
-    lwc: v[2],
-    cloudBase: v[3],
-    thickness: v[4],
-    wind: v[5],
-    humidity: v[6],
-    temperature: v[7],
-    rain: v[8],
-    visibility: v[9],
-    radius: 12,
-    tau: cloudTau(v[2], v[4], 12),
-  };
-}
-function windDistance(t, kind = 'episode', step = 10) {
-  let distance = 0;
-  for (let a = 0; a < t; a += step) {
-    const h = Math.min(step, t - a);
-    distance += weatherAt(a + h * 0.5, kind).wind * h;
-  }
-  return distance;
 }
 /* A bounded linear reservoir. Exact solution for constant input and rates.
    dS/dt=I-(ke+kd)S; overflow removes inflow exceeding capacity. */
@@ -281,14 +208,6 @@ function stepLedger(l, w, dt) {
     next.sheltered;
   return next;
 }
-function ledgerAt(t, kind = 'episode', step = 10) {
-  let l = emptyLedger();
-  for (let s = 0; s < t; s += step) {
-    const dt = Math.min(step, t - s);
-    l = stepLedger(l, weatherAt(s + dt * 0.5, kind), dt);
-  }
-  return l;
-}
 function dropletTerminalSpeed(radius = 0.0007, gravity = LEGACY_MOON_GRAVITY, rhoAir = 1.45) {
   const mu = 1.8e-5;
   let lo = 0,
@@ -382,21 +301,13 @@ const API = {
   curvatureSag,
   surfaceGradient,
   waterDepth,
-  pathDistance,
-  SHELTER,
-  roofMask,
-  WAYPOINTS,
   sunAt,
   phaseForElevation,
   calibratedFov,
   cloudTau,
-  EPISODE,
-  weatherAt,
-  windDistance,
   reservoirStep,
   emptyLedger,
   stepLedger,
-  ledgerAt,
   dropletTerminalSpeed,
   waveOmega,
   waveAt,

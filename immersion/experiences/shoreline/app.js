@@ -1,6 +1,5 @@
 import { OM } from '../../engine/om.js';
 import C from '../../engine/core.js';
-import L from '../../world/landscape.js';
 import { columns, getColumn } from '../../engine/columns.js';
 import { Stars } from '../../engine/stars.js';
 import {
@@ -64,7 +63,7 @@ OM.boot = async function (T) {
   const stars = OM.starCatalogue ? new Stars(T, OM.starCatalogue, atmosphere) : null;
   if (stars) scene.add(stars.points);
   $('boot-status').textContent = 'Building the landscape and surface materials…';
-  L.initialize();
+  OM.world.landscape.initialize();
   await OM.loadSurfaceAssets(T);
   const geography = OM.createScene(T, scene, atmosphere, 'moon'),
     water = OM.createWater(T, scene, atmosphere, renderer, geography.fieldUniforms),
@@ -97,7 +96,7 @@ OM.boot = async function (T) {
     weatherTime: 0,
     motionTime: 0,
     drift: 0,
-    weather: C.weatherAt(0, 'clear'),
+    weather: OM.world.weather.at(0, 'clear'),
     ledger: C.emptyLedger(),
     moving: 0,
     keys: {},
@@ -124,7 +123,7 @@ OM.boot = async function (T) {
     prevPosition = new T.Vector3(),
     touch = { x: 0, y: 0 };
   function setLocation(id) {
-    const p = C.WAYPOINTS.find((x) => x.id === id) || C.WAYPOINTS[0];
+    const p = OM.world.waypoints.find((x) => x.id === id) || OM.world.waypoints[0];
     camera.position.set(p.x, geography.height(p.x, p.z) + 1.7, p.z);
     s.yaw = p.yaw;
     s.pitch = p.pitch;
@@ -152,9 +151,9 @@ OM.boot = async function (T) {
     s.weatherKind = kind;
     s.weatherTime = C.clamp(t, 0, 14400);
     s.motionTime = s.weatherTime;
-    s.drift = C.windDistance(s.weatherTime, kind);
-    s.weather = C.weatherAt(s.weatherTime, kind);
-    s.ledger = C.ledgerAt(s.weatherTime, kind);
+    s.drift = OM.world.weather.windDistance(s.weatherTime, kind);
+    s.weather = OM.world.weather.at(s.weatherTime, kind);
+    s.ledger = OM.world.weather.ledgerAt(s.weatherTime, kind);
     geography.update(s.ledger, s.weatherTime, kind);
     s.dirty = true;
     $('weather-slider').value = s.weatherTime;
@@ -195,13 +194,13 @@ OM.boot = async function (T) {
       let t = s.weatherTime;
       while (t < target - 1e-8) {
         const h = Math.min(10, target - t);
-        const forcing = C.weatherAt(t + h * 0.5, s.weatherKind);
+        const forcing = OM.world.weather.at(t + h * 0.5, s.weatherKind);
         s.ledger = C.stepLedger(s.ledger, forcing, h);
         s.drift += forcing.wind * h;
         t += h;
       }
       s.weatherTime = target;
-      s.weather = C.weatherAt(s.weatherTime, s.weatherKind);
+      s.weather = OM.world.weather.at(s.weatherTime, s.weatherKind);
       s.motionTime += dtSim;
       if (target >= 14400) {
         // Continue drying after the authored forcing reaches its last frame.
@@ -367,9 +366,9 @@ OM.boot = async function (T) {
                 : s.weatherTime < 12700
                   ? 'Clearing'
                   : 'After the rain';
-    const sheltered = C.roofMask(camera.position.x, camera.position.z);
+    const sheltered = OM.world.roofMask(camera.position.x, camera.position.z);
     $('exposure-state').textContent = sheltered ? 'Under shelter' : 'Exposed to the weather';
-    const field = L.sample(camera.position.x, camera.position.z),
+    const field = OM.world.landscape.sample(camera.position.x, camera.position.z),
       wet = geography.surfaceWater.sample(camera.position.x, camera.position.z);
     $('wet-readout').textContent = (wet.film * 0.24 + wet.ponded_mm).toFixed(2) + ' mm';
     $('canopy-readout').textContent = (wet.soilSaturation * 100).toFixed(0) + '%';

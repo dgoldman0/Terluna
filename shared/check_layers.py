@@ -7,8 +7,10 @@ Lanes, by top-level folder:
                  geography, habitation, illumination
   research       the hub and its cross-domain studies
   visualization  scientific and engineering rendering of domain results
-  immersion      the experience's runtime (engine, world, experiences, tests)
-  immersion-bake immersion/bake: turns domain products into runtime assets
+  immersion-engine  immersion/engine: rendering and runtime systems for any world
+  immersion-world   immersion/world: world definitions (landscape, sites, weather, flora)
+  immersion         the experiences and tests, which choose a world and run the engine
+  immersion-bake    immersion/bake: turns domain products into runtime assets
   ensemble, archive
 
 Rules (source lane -> lanes it may import):
@@ -16,8 +18,10 @@ Rules (source lane -> lanes it may import):
   domain -> shared, domain
   research -> shared, domain, research
   visualization -> anything except archive (it may measure the experience)
-  immersion -> shared, immersion             (the experience reads baked assets)
-  immersion-bake -> shared, immersion, domain
+  immersion-engine -> shared, immersion-engine   (the engine never imports a world)
+  immersion-world -> shared, immersion-engine, immersion-world
+  immersion -> shared and every immersion part except bake (reads baked assets)
+  immersion-bake -> shared, every immersion part, domain
   ensemble -> ensemble;  archive -> nothing;  nothing imports archive
 
 Python `import`/`from` statements naming a repository top-level folder, and
@@ -41,9 +45,12 @@ ALLOWED = {
     "shared": {"shared"},
     "domain": {"shared", "domain"},
     "research": {"shared", "domain", "research"},
-    "visualization": {"shared", "domain", "research", "visualization", "immersion", "immersion-bake"},
-    "immersion": {"shared", "immersion"},
-    "immersion-bake": {"shared", "immersion", "immersion-bake", "domain"},
+    "visualization": {"shared", "domain", "research", "visualization", "immersion", "immersion-engine",
+                      "immersion-world", "immersion-bake"},
+    "immersion-engine": {"shared", "immersion-engine"},
+    "immersion-world": {"shared", "immersion-engine", "immersion-world"},
+    "immersion": {"shared", "immersion-engine", "immersion-world", "immersion"},
+    "immersion-bake": {"shared", "immersion-engine", "immersion-world", "immersion", "immersion-bake", "domain"},
     "ensemble": {"ensemble"},
     "archive": set(),
 }
@@ -58,7 +65,8 @@ def lane(path: str) -> str | None:
         return None
     top = parts[0]
     if top == "immersion":
-        return "immersion-bake" if len(parts) > 1 and parts[1] == "bake" else "immersion"
+        sub = parts[1] if len(parts) > 1 else ""
+        return {"bake": "immersion-bake", "engine": "immersion-engine", "world": "immersion-world"}.get(sub, "immersion")
     if top in DOMAINS:
         return "domain"
     return top if top in ALLOWED else None

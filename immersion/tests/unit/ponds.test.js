@@ -3,14 +3,18 @@ import assert from 'node:assert/strict';
 global.OM = {};
 import L from '../../world/landscape.js';
 import C from '../../engine/core.js';
-import E from '../../engine/ecology.js';
+import E from '../../engine/vegetation.js';
 import W from '../../engine/surface-water.js';
 import { PondModel, triangleVolume, clipTriangle } from '../../engine/ponds.js';
+import { OM } from '../../engine/om.js';
+import cove from '../../world/cove.js';
+// Engine systems read the active world; these tests run in the development cove.
+OM.world = cove;
 const close = (a, b, e = 1e-8) => assert.ok(Math.abs(a - b) < e, `${a} != ${b}`);
 let w, p;
 function setup() {
   if (!w) {
-    E.plan();
+    cove.flora();
     w = new W();
     p = new PondModel(w);
   }

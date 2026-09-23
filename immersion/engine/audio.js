@@ -69,7 +69,7 @@ class Soundscape {
     if (!this.context) return;
     const ctx = this.context,
       t = ctx.currentTime,
-      roof = C.roofMask(camera.position.x, camera.position.z);
+      roof = OM.world.roofMask(camera.position.x, camera.position.z);
     this.master.gain.setTargetAtTime(this.active && !muted ? 0.55 : 0, t, 0.2);
     const n = this.shore;
     const surge = 0.35 + 0.65 * (0.5 + 0.5 * Math.sin(time * 0.22 + Math.sin(time * 0.041)));

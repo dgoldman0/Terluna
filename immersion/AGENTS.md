@@ -7,8 +7,11 @@ Vividness never upgrades the evidence behind them.
 
 ## What belongs here
 
-- `engine/`: rendering and runtime systems that any environment can use.
-- `world/`: content, meaning landscapes, communities, structures and sites.
+- `engine/`: rendering and runtime systems that any environment can use. The
+  engine never imports a world; it reads the active one from `OM.world`.
+- `world/`: world definitions, meaning landscapes, communities, structures, sites
+  and weather. Each world is one object, like `world/cove.js`, that an experience
+  registers on `OM.world`.
 - `experiences/`: entry points that combine engine and world.
 - `bake/`: turning domain products into runtime assets.
 
@@ -29,8 +32,9 @@ placeholder and label it as one. The shoreline cove is a development scene.
 
 ## Reading the science
 
-- Runtime code imports only `immersion/` and `shared/`; `bake/` may use domain
-  code and products. `shared/check_layers.py` enforces this.
+- Runtime code imports only `immersion/` and `shared/`, and engine code never
+  imports `world/`; `bake/` may use domain code and products.
+  `shared/check_layers.py` enforces both.
 - Read products by their stated rule (interpolation, units) and record which
   product version a baked asset came from.
 - Take constants from `shared/constants.js`.

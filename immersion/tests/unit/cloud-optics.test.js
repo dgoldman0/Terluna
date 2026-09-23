@@ -5,16 +5,20 @@ import O from '../../engine/cloud-optics.js';
 import C from '../../engine/core.js';
 import fs from 'node:fs';
 import { loadColumns, getColumn } from '../../engine/columns.js';
+import { OM } from '../../engine/om.js';
+import cove from '../../world/cove.js';
+// Engine systems read the active world; these tests run in the development cove.
+OM.world = cove;
 // Baked by `npm run bake:columns` (run automatically before `npm test`).
 loadColumns(
   JSON.parse(fs.readFileSync(new URL('../../assets/columns/columns.json', import.meta.url))),
 );
 const near = (a, b, e = 1e-7) => assert.ok(Math.abs(a - b) < e, `${a} vs ${b} exceeds ${e}`);
 test('Scene weather scenarios leave the existing rainfall ledger unchanged', () => {
-  const before = C.ledgerAt(14400);
+  const before = cove.weather.ledgerAt(14400);
   getColumn('moon', 'convection');
   getColumn('moon', 'fog');
-  assert.deepEqual(C.ledgerAt(14400), before);
+  assert.deepEqual(cove.weather.ledgerAt(14400), before);
 });
 test('Baked columns interpolate their rows and alias the no-ozone Moon', () => {
   const fog = getColumn('moon', 'fog'),

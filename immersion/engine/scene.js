@@ -112,14 +112,14 @@ function createScene(T, scene, atm, world = 'moon') {
       world,
     },
     obj = new T.Object3D();
-  const layout = OM.Ecology.plan();
+  const layout = OM.world.flora();
   state.surfaceWater = new OM.SurfaceWater();
   state.fieldUniforms = OM.createFieldUniforms(T, state.surfaceWater);
   const groundMat = OM.material(T, atm, state, 'terrain');
   state.terrain = new OM.TerrainSystem(T, scene, groundMat, world);
   state.groundMeshes = state.terrain.levels.map((l) => l.mesh);
-  const ecologyCounts = OM.Ecology.populate(T, scene, atm, state, layout);
-  const S = C.SHELTER;
+  const ecologyCounts = OM.Vegetation.populate(T, scene, atm, state, layout);
+  const S = OM.world.shelter;
   let deckY = C.groundHeight(S.x, S.z, world) + 0.22;
   state.pavilionY = deckY;
   const deckMat = OM.material(T, atm, state, 'timber'),
@@ -172,7 +172,7 @@ function createScene(T, scene, atm, world = 'moon') {
   rampMesh.userData.surfaceConforming = true;
   state.height = (x, z) => {
     let y = C.groundHeight(x, z, state.world);
-    if (C.roofMask(x, z)) y = Math.max(y, deckY);
+    if (OM.world.roofMask(x, z)) y = Math.max(y, deckY);
     if (Math.abs(x - S.x) < 2 && z > S.z - 11 && z < S.z - 4)
       y = C.mix(y, deckY, C.smooth(0, 1, (z - S.z + 11) / 7));
     return y;

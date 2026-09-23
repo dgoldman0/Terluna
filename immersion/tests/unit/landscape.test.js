@@ -8,8 +8,12 @@ import * as T from 'three';
 import L from '../../world/landscape.js';
 import C from '../../engine/core.js';
 import { TerrainSystem, triangle } from '../../engine/terrain.js';
-import E from '../../engine/ecology.js';
+import E from '../../engine/vegetation.js';
 import SurfaceWater from '../../engine/surface-water.js';
+import { OM } from '../../engine/om.js';
+import cove from '../../world/cove.js';
+// Engine systems read the active world; these tests run in the development cove.
+OM.world = cove;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, '..', '..'),
   report = {
@@ -22,7 +26,7 @@ const scene = new T.Scene(),
   material = new T.MeshBasicMaterial();
 let terrain, layout;
 const terrainSystem = () => (terrain ||= new TerrainSystem(T, scene, material));
-const ecology = () => (layout ||= E.plan());
+const ecology = () => (layout ||= cove.flora());
 const hash = (b) => crypto.createHash('sha256').update(b).digest('hex');
 function renderedHeight(system, x, z) {
   for (const l of system.levels) {
@@ -307,7 +311,7 @@ test('Earth comparison changes only the spherical sag in the terrain geometry', 
 });
 test('Plant, rock and understory identities are reproducible after canopy accumulation', () => {
   const a = ecology(),
-    b = E.plan();
+    b = cove.flora();
   assert.deepEqual(a, b);
   report.checks.ecology = {
     trees: a.trees.length,
@@ -321,11 +325,11 @@ test('Plant, rock and understory identities are reproducible after canopy accumu
 test('Habitat placement excludes water, the shelter and the walking corridor', () => {
   for (const t of ecology().trees) {
     assert.ok(L.height(t.x, t.z) > (t.managed ? 0.7 : 1.2));
-    assert.equal(C.roofMask(t.x, t.z, 4), 0);
-    assert.ok(C.pathDistance(t.x, t.z) > 3.7);
+    assert.equal(cove.roofMask(t.x, t.z, 4), 0);
+    assert.ok(cove.pathDistance(t.x, t.z) > 3.7);
     assert.ok(t.habitat.soilDepth > 0.16);
   }
-  for (const r of ecology().rocks) assert.ok(C.pathDistance(r.x, r.z) >= 2 + r.s * 1.2);
+  for (const r of ecology().rocks) assert.ok(cove.pathDistance(r.x, r.z) >= 2 + r.s * 1.2);
 });
 test('The planted canopy changes the shared environmental field and understory light', () => {
   const trees = ecology().trees;
@@ -374,7 +378,7 @@ test('Surface-water grids reject invalid dimensions and steps', () => {
   assert.throws(() => new SurfaceWater({ n: 2 }));
   assert.throws(() => new SurfaceWater({ cell: 0 }));
   const w = new SurfaceWater({ n: 5 });
-  assert.throws(() => w.advance(-1, C.weatherAt(0)));
+  assert.throws(() => w.advance(-1, cove.weather.at(0)));
 });
 test('Clear weather has dry exposed surfaces and conserved antecedent soil water', () => {
   const w = new SurfaceWater();
@@ -433,7 +437,7 @@ test('Soil and pond stores persist after rain; post-episode drying conserves mas
   w.seek(14400, 'episode');
   const initial = w.ledger.storage;
   assert.ok(w.soil.some((v) => v > 0));
-  w.advance(3600, C.weatherAt(14400));
+  w.advance(3600, cove.weather.at(14400));
   assert.ok(w.ledger.storage < initial);
   assert.ok(w.ledger.relativeResidual < 1e-11);
   assert.equal(w.ledger.elapsedSeconds, 18000);
@@ -441,7 +445,7 @@ test('Soil and pond stores persist after rain; post-episode drying conserves mas
 test('Five- and ten-second substeps remain close under the same rain forcing', () => {
   const a = new SurfaceWater({ n: 17, minX: -40, minZ: -12 }),
     b = new SurfaceWater({ n: 17, minX: -40, minZ: -12 });
-  const w = { ...C.weatherAt(7000), rain: 8 };
+  const w = { ...cove.weather.at(7000), rain: 8 };
   for (let t = 0; t < 1800; t += 10) a.advance(10, w);
   for (let t = 0; t < 1800; t += 5) b.advance(5, w);
   const relative = Math.abs(a.ledger.storage - b.ledger.storage) / Math.max(1, b.ledger.storage);

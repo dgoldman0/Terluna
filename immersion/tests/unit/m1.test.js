@@ -8,6 +8,9 @@ import * as T from 'three';
 import { OM } from '../../engine/om.js';
 import '../../engine/scene.js';
 import '../../engine/atmosphere.js';
+import cove from '../../world/cove.js';
+// Engine systems read the active world; these tests run in the development cove.
+OM.world = cove;
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 
 test('Three.js resolves to the pinned r186 release', () => assert.equal(T.REVISION, '186'));
@@ -44,7 +47,7 @@ test('M1: spherical sag is zero at origin, symmetric and radius-dependent', () =
 // Moving-grid topology and geometry invariants are in landscape.test.cjs.
 test('M1: clear-noon forcing has zero cloud water, coverage and rainfall', () => {
   for (const t of [0, 1800, 8100, 14400]) {
-    const w = C.weatherAt(t, 'clear');
+    const w = cove.weather.at(t, 'clear');
     assert.equal(w.coverage, 0);
     assert.equal(w.lwc, 0);
     assert.equal(w.tau, 0);

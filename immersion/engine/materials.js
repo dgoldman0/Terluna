@@ -1,6 +1,5 @@
 /* Coordinated, world-scaled PBR channels and shared landscape/surface state. */
 import { OM } from './om.js';
-import L from '../world/landscape.js';
 OM.loadSurfaceAssets = async function (T) {
   const spec = OM.surfaceSpec,
     loader = new T.TextureLoader();
@@ -42,7 +41,7 @@ OM.loadSurfaceAssets = async function (T) {
   packed.dispose();
 };
 OM.createFieldUniforms = function (T, water) {
-  const grid = L.GRID;
+  const grid = OM.world.landscape.GRID;
   const texture = (bytes, n) => {
     const t = new T.DataTexture(bytes, n, n, T.RGBAFormat, T.FloatType);
     t.minFilter = t.magFilter = T.LinearFilter;
@@ -51,11 +50,12 @@ OM.createFieldUniforms = function (T, water) {
     return t;
   };
   const bathymetry = new Float32Array(grid.n * grid.n * 4);
-  for (let i = 0; i < grid.n * grid.n; i++) bathymetry[i * 4] = L.data.elevation[i];
+  for (let i = 0; i < grid.n * grid.n; i++)
+    bathymetry[i * 4] = OM.world.landscape.data.elevation[i];
   const uniforms = {
     uBathymetry: { value: texture(bathymetry, grid.n) },
-    uMaterialFields: { value: texture(L.materialFieldRGBA(), grid.n) },
-    uEnvironmentFields: { value: texture(L.environmentFieldRGBA(), grid.n) },
+    uMaterialFields: { value: texture(OM.world.landscape.materialFieldRGBA(), grid.n) },
+    uEnvironmentFields: { value: texture(OM.world.landscape.environmentFieldRGBA(), grid.n) },
     uSurfaceState: { value: texture(water.textureData(), water.n) },
     uFieldBounds: { value: new T.Vector4(grid.minX, grid.minZ, grid.cell, grid.n) },
     uStateBounds: { value: new T.Vector4(water.minX, water.minZ, water.cell, water.n) },

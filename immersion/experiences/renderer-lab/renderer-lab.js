@@ -192,7 +192,7 @@ OM.bootLab = async function (modules) {
   let envRT = null;
   const ocean = createNodeWater(T, N, renderer, scene, camera, atm, node, geography);
   function sync(environment = false) {
-    const w = C.weatherAt(0, 'clear');
+    const w = OM.world.weather.at(0, 'clear');
     geography.updateTerrain(camera.position.x, camera.position.z, s.world);
     const solar = atm.update(s.world, s.phase, w, 0, camera.position, 0);
     node.sync();
@@ -261,7 +261,7 @@ OM.bootLab = async function (modules) {
   }
   async function setWater(t) {
     s.time = t;
-    geography.update(C.ledgerAt(t, 'episode'), t, 'episode');
+    geography.update(OM.world.weather.ledgerAt(t, 'episode'), t, 'episode');
     node.refresh(geography);
     render();
     await complete();
@@ -281,7 +281,7 @@ OM.bootLab = async function (modules) {
     render();
   };
   $('woods').onclick = () => {
-    const p = C.WAYPOINTS.find((p) => p.id === 'path');
+    const p = OM.world.waypoints.find((p) => p.id === 'path');
     camera.position.set(p.x, geography.height(p.x, p.z) + 1.7, p.z);
     s.yaw = p.yaw;
     s.pitch = p.pitch;

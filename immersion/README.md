@@ -8,8 +8,8 @@ research domains own the science, and the experience reads their results.
 
 | Folder | Holds |
 |---|---|
-| [engine/](engine/) | Runtime systems any experience can use: sky and clouds drawn from baked atlases, clipmap terrain and surface materials, sea, rain and surface water, procedural vegetation geometry, audio |
-| [world/](world/) | World content. At present this is only the authored development landscape. |
+| [engine/](engine/) | Runtime systems any world can use: sky, Earth, stars and clouds drawn from baked products, clipmap terrain and surface materials, sea, rain and surface water, procedural vegetation geometry, audio. The engine never imports a world; it reads the active one from `OM.world`. |
+| [world/](world/) | World definitions. [cove.js](world/cove.js) is the development cove: its landscape field, viewpoints, rain shelter and path, authored weather episode, and planting rules, all placeholders. |
 | [experiences/](experiences/) | Entry points: [shoreline](experiences/shoreline/) (the walkable development scene) and [renderer-lab](experiences/renderer-lab/) (the WebGPU/TSL experiment) |
 | [bake/](bake/) | Turns domain products into runtime assets: `sky_atlas.py` packs the [illumination/sky](../illumination/sky/) atlases into `assets/sky/`; `columns.mjs` packs the atmosphere domain's column set; `sky_bodies.py` bakes the site ephemeris, the bright stars and the Earth-disk calibration; `surfaces.py` generates the surface textures |
 | [assets/](assets/) | Baked runtime assets and their manifests |

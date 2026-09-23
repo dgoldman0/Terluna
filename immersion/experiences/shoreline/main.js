@@ -7,12 +7,13 @@
  */
 import * as THREE from 'three';
 import { OM } from '../../engine/om.js';
+import cove from '../../world/cove.js';
 import '../../engine/atmosphere.js';
 import '../../engine/materials.js';
 import '../../engine/terrain.js';
 import '../../engine/surface-water.js';
 import '../../engine/ponds.js';
-import '../../engine/ecology.js';
+import '../../engine/vegetation.js';
 import '../../engine/scene.js';
 import '../../engine/water.js';
 import '../../engine/audio.js';
@@ -22,6 +23,9 @@ import surfaceManifest from '../../assets/surfaces/manifest.json';
 import { loadColumns } from '../../engine/columns.js';
 import { SkyBodies } from '../../engine/sky-bodies.js';
 import earthCalibration from '../../assets/earth/calibration.json';
+
+// This experience runs in the development cove.
+OM.world = cove;
 
 const SKY_ATLAS = new URL('../../assets/sky/atmosphere.json', import.meta.url);
 const COLUMNS = new URL('../../assets/columns/columns.json', import.meta.url);

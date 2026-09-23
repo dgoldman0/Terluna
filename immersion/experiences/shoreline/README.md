@@ -16,7 +16,8 @@ Drag to look, WASD to walk, Space to hop (lunar gravity), H to hide the controls
 **Show controls** opens viewpoints, the Sun slider, weather, and the column
 studies.
 
-`main.js` loads the baked sky atlas and surface textures and boots `app.js`,
+`main.js` registers the development cove as the active world (`OM.world`), loads
+the baked sky atlas, columns, sky bodies and surface textures, and boots `app.js`,
 which holds the render loop, controls and panels. For browser harnesses the page
 exposes `window.openMoonShoreline` (state, `setPhase`, `setLocation`,
 `setWeather`, `setColumn`, `renderOnce`, `snapshotState`, `benchmark`). The

@@ -36,8 +36,10 @@ it is not a proposed Open Moon location.
 | domain | `atmosphere/`, `climate/`, `biosphere/`, `protection/`, `engineering/`, `geography/`, `habitation/`, `illumination/` | shared, other domains |
 | research | `research/` (hub and studies) | shared, domains |
 | visualization | `visualization/` | shared, domains, research, immersion (to measure it) |
-| immersion | `immersion/` runtime | shared, immersion |
-| immersion bake | `immersion/bake/` | shared, immersion, domains |
+| immersion engine | `immersion/engine/` | shared, the engine (never a world) |
+| immersion world | `immersion/world/` | shared, the engine, worlds |
+| immersion | `immersion/experiences/`, tests | shared, engine, worlds |
+| immersion bake | `immersion/bake/` | shared, all of immersion, domains |
 
 Nothing imports `archive/`. [check_layers.py](check_layers.py) enforces the table
 for Python imports and JavaScript import/require/URL specifiers; `make check`

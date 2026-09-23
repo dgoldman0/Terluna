@@ -4,7 +4,6 @@
  * export. Within-cell pond morphology and a connected free surface are unresolved.
  */
 import { OM } from './om.js';
-import L from '../world/landscape.js';
 import C from './core.js';
 class SurfaceWater {
   constructor(options = {}) {
@@ -36,16 +35,16 @@ class SurfaceWater {
         const k = j * this.n + i,
           x = this.minX + i * this.cell,
           z = this.minZ + j * this.cell,
-          f = L.sample(x, z);
+          f = OM.world.landscape.sample(x, z);
         this.elevation[k] = f.elevation;
         this.cover[k] = f.canopy;
         this.capacity[k] = 12 + 75 * f.soilDepth;
         this.permeability[k] = 0.0006 + 0.006 * f.weights[0] + 0.002 * f.weights[3];
-        this.roof[k] = C.roofMask(x, z);
+        this.roof[k] = OM.world.roofMask(x, z);
         this.slope[k] = f.slope;
         this.initialSoil[k] = f.elevation > 0 ? this.capacity[k] * f.moisture * 0.65 : 0;
       }
-    this.flow = L.drainageGrid(this.elevation, this.n, this.cell);
+    this.flow = OM.world.landscape.drainageGrid(this.elevation, this.n, this.cell);
     this.reset();
   }
   reset() {
@@ -161,7 +160,7 @@ class SurfaceWater {
     }
     for (let t = this.time; t < time - 1e-9; t += 10) {
       const dt = Math.min(10, time - t);
-      this.advance(dt, C.weatherAt(t + dt * 0.5, kind));
+      this.advance(dt, OM.world.weather.at(t + dt * 0.5, kind));
     }
     this.time = time;
     return this;

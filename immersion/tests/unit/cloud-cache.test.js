@@ -7,6 +7,9 @@ import '../../engine/atmosphere.js';
 import CloudRenderer from '../../engine/cloud-renderer.js';
 import fs from 'node:fs';
 import { loadColumns } from '../../engine/columns.js';
+import cove from '../../world/cove.js';
+// Engine systems read the active world; these tests run in the development cove.
+OM.world = cove;
 // Baked by `npm run bake:columns` (run automatically before `npm test`).
 loadColumns(
   JSON.parse(fs.readFileSync(new URL('../../assets/columns/columns.json', import.meta.url))),

@@ -8,18 +8,22 @@ import * as webgl from 'three';
 import * as webgpu from 'three/webgpu';
 import * as tsl from 'three/tsl';
 import { OM } from '../../engine/om.js';
+import cove from '../../world/cove.js';
 import '../../engine/atmosphere.js';
 import '../../engine/materials.js';
 import '../../engine/terrain.js';
 import '../../engine/surface-water.js';
 import '../../engine/ponds.js';
-import '../../engine/ecology.js';
+import '../../engine/vegetation.js';
 import '../../engine/scene.js';
 import '../../engine/water.js';
 import './node-materials.js';
 import './renderer-lab.js';
 import surfaceManifest from '../../assets/surfaces/manifest.json';
 import { loadColumns } from '../../engine/columns.js';
+
+// This experience runs in the development cove.
+OM.world = cove;
 
 const SKY_ATLAS = new URL('../../assets/sky/atmosphere.json', import.meta.url);
 const COLUMNS = new URL('../../assets/columns/columns.json', import.meta.url);

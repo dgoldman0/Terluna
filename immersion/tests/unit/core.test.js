@@ -4,6 +4,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import C from '../../engine/core.js';
+import { OM } from '../../engine/om.js';
+import cove from '../../world/cove.js';
+// Engine systems read the active world; these tests run in the development cove.
+OM.world = cove;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const close = (a, b, tol = 1e-9) => assert.ok(Math.abs(a - b) < tol, `${a} != ${b}`);
 test('Sun follows a continuous normalized full-cycle path', () => {
@@ -40,7 +44,7 @@ test('Cloud data rejects negative water content', () =>
   assert.throws(() => C.cloudTau(-1, 1000, 10)));
 test('Weather episode is bounded and finite', () => {
   for (let t = -100; t <= 15000; t += 13) {
-    const w = C.weatherAt(t);
+    const w = cove.weather.at(t);
     assert.ok(w.rain >= 0 && w.rain <= 10);
     assert.ok(w.coverage >= 0 && w.coverage <= 1);
     assert.ok(w.humidity > 0 && w.humidity <= 1);
@@ -48,16 +52,16 @@ test('Weather episode is bounded and finite', () => {
   }
 });
 test('Episode forcing is continuous at keyframe boundaries', () => {
-  for (const a of C.EPISODE.slice(1, -1)) {
-    const x = C.weatherAt(a[0] - 0.001),
-      y = C.weatherAt(a[0] + 0.001);
+  for (const a of cove.weather.EPISODE.slice(1, -1)) {
+    const x = cove.weather.at(a[0] - 0.001),
+      y = cove.weather.at(a[0] + 0.001);
     for (const k of Object.keys(x)) close(x[k], y[k], 1e-4);
   }
 });
 test('Clear forcing does not inherit a rain episode', () =>
-  close(C.weatherAt(8000, 'clear').rain, 0));
+  close(cove.weather.at(8000, 'clear').rain, 0));
 test('Fog has prescribed low visibility and no rain', () => {
-  const w = C.weatherAt(8000, 'fog');
+  const w = cove.weather.at(8000, 'fog');
   close(w.visibility, 110);
   close(w.rain, 0);
 });
@@ -97,24 +101,25 @@ test('Reservoir subdivision is exact for constant forcing', () => {
 });
 test('Water ledger conserves exposure plus canopy column water', () => {
   for (let t = 0; t <= 14400; t += 300) {
-    const l = C.ledgerAt(t);
+    const l = cove.weather.ledgerAt(t);
     assert.ok(Math.abs(l.residual) < 1e-9);
     assert.ok(l.exposed >= 0 && l.exposed <= 2);
     assert.ok(l.canopy >= 0 && l.canopy <= 1.4);
     assert.ok(l.leaf >= 0 && l.leaf <= 0.35);
   }
 });
-test('Sheltered ground remains dry through the rain', () => close(C.ledgerAt(14400).sheltered, 0));
+test('Sheltered ground remains dry through the rain', () =>
+  close(cove.weather.ledgerAt(14400).sheltered, 0));
 test('Clearing sky leaves persistent surface water', () => {
-  const l = C.ledgerAt(14400);
-  assert.equal(C.weatherAt(14400).rain, 0);
+  const l = cove.weather.ledgerAt(14400);
+  assert.equal(cove.weather.at(14400).rain, 0);
   assert.ok(l.exposed > 0.05 && l.canopy > 0.05);
 });
 test('Replay produces identical weather-water state', () =>
-  assert.deepEqual(C.ledgerAt(8210), C.ledgerAt(8210)));
+  assert.deepEqual(cove.weather.ledgerAt(8210), cove.weather.ledgerAt(8210)));
 test('Two-second and ten-second water steps are close', () => {
-  const a = C.ledgerAt(9800, 'episode', 2),
-    b = C.ledgerAt(9800, 'episode', 10);
+  const a = cove.weather.ledgerAt(9800, 'episode', 2),
+    b = cove.weather.ledgerAt(9800, 'episode', 10);
   close(a.exposed, b.exposed, 0.001);
   close(a.canopy, b.canopy, 0.001);
   close(a.leaf, b.leaf, 0.001);
@@ -136,17 +141,17 @@ test('Wave gradients agree with centered finite differences', () => {
   close(w.nz, -(C.waveAt(x, z + e, t).y - C.waveAt(x, z - e, t).y) / (2 * e), 1e-7);
 });
 test('Terrain is finite around every waypoint', () => {
-  for (const p of C.WAYPOINTS) {
+  for (const p of cove.waypoints) {
     const y = C.groundHeight(p.x, p.z);
     assert.ok(Number.isFinite(y) && y > 0);
   }
 });
 test('Roof footprint separates dry inside from rain outside', () => {
-  assert.equal(C.roofMask(20, 33), 1);
-  assert.equal(C.roofMask(20, 20), 0);
+  assert.equal(cove.roofMask(20, 33), 1);
+  assert.equal(cove.roofMask(20, 20), 0);
 });
 test('Path centerline connects the requested places', () => {
-  for (const p of C.WAYPOINTS) assert.ok(C.pathDistance(p.x, p.z) < 5);
+  for (const p of cove.waypoints) assert.ok(cove.pathDistance(p.x, p.z) < 5);
 });
 test('Procedural seeds are deterministic', () => {
   const a = C.rng(123),
@@ -165,9 +170,13 @@ test('The atlas stores all three inherited profiles and the full angular range',
   }
 });
 test('Cloud displacement integrates a constant wind', () =>
-  close(C.windDistance(3600, 'clear'), C.weatherAt(0, 'clear').wind * 3600, 1e-8));
+  close(cove.weather.windDistance(3600, 'clear'), cove.weather.at(0, 'clear').wind * 3600, 1e-8));
 test('Cloud displacement integrates varying wind reproducibly', () => {
-  close(C.windDistance(8100), C.windDistance(8100), 1e-10);
-  close(C.windDistance(8100, 'episode', 10), C.windDistance(8100, 'episode', 2), 0.02);
-  assert.ok(C.windDistance(8200) > C.windDistance(8100));
+  close(cove.weather.windDistance(8100), cove.weather.windDistance(8100), 1e-10);
+  close(
+    cove.weather.windDistance(8100, 'episode', 10),
+    cove.weather.windDistance(8100, 'episode', 2),
+    0.02,
+  );
+  assert.ok(cove.weather.windDistance(8200) > cove.weather.windDistance(8100));
 });

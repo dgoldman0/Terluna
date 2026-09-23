@@ -3,6 +3,10 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { SkyBodies } from '../../engine/sky-bodies.js';
 import C from '../../engine/core.js';
+import { OM } from '../../engine/om.js';
+import cove from '../../world/cove.js';
+// Engine systems read the active world; these tests run in the development cove.
+OM.world = cove;
 
 // Baked by `npm run bake:sky` from illumination/ephemeris.py.
 const product = JSON.parse(

@@ -5,7 +5,6 @@
  */
 import { OM } from './om.js';
 import C from './core.js';
-import L from '../world/landscape.js';
 function triangleVolume(level, sorted, area) {
   const [a, b, c] = sorted;
   if (level <= a) return 0;
@@ -50,10 +49,10 @@ class PondModel {
       heights = new Float64Array(n * n);
     for (let j = 0; j < n; j++)
       for (let i = 0; i < n; i++)
-        heights[j * n + i] = L.height(this.minX + i * step, this.minZ + j * step);
+        heights[j * n + i] = OM.world.landscape.height(this.minX + i * step, this.minZ + j * step);
     // Flood vertex elevations so spill levels and clipped surface triangles use
     // the same terrain. Diagonal routing matches the landscape's D8 convention.
-    const flow = L.drainageGrid(heights, n, step),
+    const flow = OM.world.landscape.drainageGrid(heights, n, step),
       labels = new Int32Array(n * n).fill(-1),
       groups = [],
       queue = [];
