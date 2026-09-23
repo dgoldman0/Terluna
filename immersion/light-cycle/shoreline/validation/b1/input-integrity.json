@@ -1,0 +1,38 @@
+{
+  "schema": "open-moon-b1-input-integrity/1",
+  "archive_sha256": "df2d3168dc23b34a3fe8e8209ee94be8a533ffed9f87c0f225fea12c6872759d",
+  "files": [
+    {
+      "path": "data/a1/generated/moon-fair.profile.json",
+      "bytes": 999138,
+      "sha256": "717deba2cb6f41afc291f1addb13b19c3ebbb6d98cc6dc21354ee02e567d86ca",
+      "matches_original_A3_archive": true
+    },
+    {
+      "path": "data/a2/generated/moon-fair-grid-fine.cloud.json",
+      "bytes": 6525618,
+      "sha256": "5dc678a3e5ae68c0722a44320f7c58fc9883c73a0bb93c591685b48d36f8cdcb",
+      "matches_original_A3_archive": true
+    },
+    {
+      "path": "data/a2/generated/moon-fair-molecular-standard-full.npz",
+      "bytes": 4214393,
+      "sha256": "e4d967440025d6c2eb80989e785b61613a74089a35dd8b47b2319f0f04b6e3e8",
+      "matches_original_A3_archive": true
+    },
+    {
+      "path": "data/a1/spectral-inputs.json",
+      "bytes": 5696,
+      "sha256": "59f47ce7147e24b3b5c57d3f4799a91dd2000d6d9bae60d6185fc952fbff2530",
+      "matches_original_A3_archive": true
+    },
+    {
+      "path": "data/a3/generated/benchmark.json",
+      "bytes": 2283887,
+      "sha256": "3ef8f4aabccc9f3876d2ad2bd34a8fd0abf2a7b98f85787bb0bba111a008537a",
+      "matches_original_A3_archive": true
+    }
+  ],
+  "passed": true,
+  "note": "The saved A2 field supplies spectral grid, solar and ozone arrays and identity checks. Its angular radiance/moment values are not used to illuminate B1."
+}

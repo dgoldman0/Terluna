@@ -1,0 +1,122 @@
+{
+  "schema": "open-moon-b1-source-manifest/1",
+  "publication_parent": "9ad75cfee4fee5497cf6cce08947dca8cc3ef35f",
+  "files": {
+    ".gitignore": {
+      "bytes": 878,
+      "sha256": "0af851d66511b6fb883204f32f7c4c58003a054a9f446f100481aede09c5961f"
+    },
+    "B1_BASELINE_MANIFEST.json": {
+      "bytes": 22999,
+      "sha256": "48d4ec24efa7909efb26277bc07bdaf5ae9278190b24326dc0518d9c2afffcdc"
+    },
+    "B1_METHODS.md": {
+      "bytes": 18163,
+      "sha256": "0b2b0504df276c840d1604f7211b24f240452e1b6f61af28e8df5fed9dc8fef2"
+    },
+    "B1_VALIDATION.json": {
+      "bytes": 47958,
+      "sha256": "d88f10bae54f77697fb03c04ab26c1f3570a57800c3240fe1906c334f99c0faf"
+    },
+    "build_b1_painter.py": {
+      "bytes": 2884,
+      "sha256": "7db94ea0bcf1267bf3f4da1dfe1721609048e869161c92153fcc9d8c9279f1fb"
+    },
+    "index.b1-scene-painter.html": {
+      "bytes": 7365,
+      "sha256": "6b5f3b6c444ee590415947960f064f18ad3d94b2acf3fa9d8ceaf6b8fc1626b1"
+    },
+    "requirements-b1.txt": {
+      "bytes": 154,
+      "sha256": "ecb487a7692bf3f77a39a7d6ae8d992270b1a182e9b26025deea8b7d4654255b"
+    },
+    "src/b1-scene-painter.js": {
+      "bytes": 7397,
+      "sha256": "ee1bc627fa8dec1deaff3aa47d53402da0d426216f8675643fe3acd34f81722b"
+    },
+    "tools/b1/check_browser.py": {
+      "bytes": 7160,
+      "sha256": "dddc0d650f50f9399854d0742ea28a024ad752a798715ff8e294ccd956cde7f2"
+    },
+    "tools/b1/check_spectral.py": {
+      "bytes": 3082,
+      "sha256": "8ae62b53ea77b82a345edbd17658f16276cc528c788029462a5a743cc911ab5d"
+    },
+    "tools/b1/diagnostics.py": {
+      "bytes": 6201,
+      "sha256": "810024c52edd5124e9b95bcdccfe617bf2d7eefcdd0f7fad87d10380b572cb64"
+    },
+    "tools/b1/geometry.py": {
+      "bytes": 5370,
+      "sha256": "2d7e9970c3cdce13e838c4e145dbe417eca27f8be67f4d4090c20c73fb1c66dc"
+    },
+    "tools/b1/primary.py": {
+      "bytes": 3140,
+      "sha256": "7384c38e433554401953b0a389809885478c6bd8d1fac6f5ae538254d8176696"
+    },
+    "tools/b1/render_scene.py": {
+      "bytes": 8949,
+      "sha256": "d79cb9a43d2fe3630bcf0785133d05960b248336482be67b458407be8bc3c63b"
+    },
+    "tools/b1/run_checkpoint.py": {
+      "bytes": 1900,
+      "sha256": "5a82dcca84f4b5d67d0e24b09da63e027a7249502760db5f724739ed920840db"
+    },
+    "tools/b1/scene_transport.py": {
+      "bytes": 7581,
+      "sha256": "4416f498c6741494ba801b6a85ec5982739554c9bc9dbe412869a5dd92ff5829"
+    },
+    "tools/b1/test_b1.py": {
+      "bytes": 8069,
+      "sha256": "6a38aaa89bee8b1dc27982603bc4d8ecf74e5ca3947fb4537614e4bab76541b2"
+    },
+    "tools/b1/validate_b1.py": {
+      "bytes": 10537,
+      "sha256": "6ffa0bd9469374b3a8c41b652fd5f5d303ba28e06e20f378cdca0f5dd0b9c422"
+    },
+    "validation/b1/boundary-tests.json": {
+      "bytes": 4716,
+      "sha256": "bb35eca8ddde08e0270d81de621817b0550a1deee0105be990ec693405374c41"
+    },
+    "validation/b1/browser.json": {
+      "bytes": 235778,
+      "sha256": "bc5e16d9d28b64d51840031ec132afe6cfe1869397686cac1451484510c6a3c4"
+    },
+    "validation/b1/development/README.md": {
+      "bytes": 718,
+      "sha256": "b86748ba3d476d7cf536d03b7c7b7bcb367183224f5c4995a7f0ffdb3d760df4"
+    },
+    "validation/b1/development/closed-boundary-preview.log": {
+      "bytes": 115,
+      "sha256": "08f30531c61b12ea01fbd98aed0300759e46d8a707c5cdfe8e86078f73d1e364"
+    },
+    "validation/b1/development/open-boundary-preview.log": {
+      "bytes": 118,
+      "sha256": "43f1fbb565663841c0e56e95c456081df57dbaae35f5dee0180d3164e0b08d9f"
+    },
+    "validation/b1/environment.json": {
+      "bytes": 218,
+      "sha256": "7c581e52a3303dd8d66cc2968dbbd061db89207671eb51c510e9ae4967b2636c"
+    },
+    "validation/b1/inherited-landscape-rerun.json": {
+      "bytes": 2932,
+      "sha256": "2f7c6f65a1803b497f4fc4a1d8462ed19ab327428cc45b1fe70d621e2bfe1358"
+    },
+    "validation/b1/inherited-tests.tap": {
+      "bytes": 31770,
+      "sha256": "a961c0fa652a221637a683220933a0d4a660efc88d9657eda3d9409aa10afabb"
+    },
+    "validation/b1/input-integrity.json": {
+      "bytes": 1442,
+      "sha256": "9c4e72eefe8752c8cd0f19f19c3cf2606e02ae44c9d11369341e9b71cd08eebd"
+    },
+    "validation/b1/scene-spectral-check.json": {
+      "bytes": 20493,
+      "sha256": "3e1a9490be84de6f289cd2a35332e2a22d98b3384601e05b17a7c9c92ce6b713"
+    }
+  },
+  "excludes": [
+    "This manifest itself",
+    "Generated radiance/irradiance arrays, screenshots and HTML; see B1_VALIDATION and package MANIFEST."
+  ]
+}

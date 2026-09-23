@@ -1,0 +1,108 @@
+{
+  "schema": "open-moon-landscape-numeric/1",
+  "baseCommit": "4c7affae780d3ff7ef5581e88aac7ae32ada7505",
+  "checks": {
+    "shorelineMaxElevationResidual_m": 5.407112214569909e-11,
+    "boundaryHeightDifference_m": 0.000009485323717584038,
+    "drainage": {
+      "cells": 66049,
+      "totalArea_m2": 264196,
+      "outletArea_m2": 264196
+    },
+    "initialTerrain": {
+      "levels": 11,
+      "nearSpacing_m": 0.25,
+      "outerHalfExtent_m": 16384,
+      "vertices": 183051,
+      "triangles": 275968,
+      "updates": 1,
+      "lastUpdateMs": 11174.271969,
+      "maxUpdateMs": 11174.271969,
+      "heightEvaluations": 180491,
+      "cachedSamples": 180491
+    },
+    "initialTopology": {
+      "triangles": 275968,
+      "boundaryEdges": 512,
+      "weldedVertices": 138241,
+      "maxWeldError_m": 0,
+      "minTwiceTriangleArea_m2": 0.0625
+    },
+    "movingTopology": [
+      {
+        "observer": [
+          0.51,
+          9.51
+        ],
+        "triangles": 275968,
+        "boundaryEdges": 512,
+        "weldedVertices": 138241,
+        "maxWeldError_m": 0,
+        "minTwiceTriangleArea_m2": 0.0625
+      },
+      {
+        "observer": [
+          3.51,
+          12.01
+        ],
+        "triangles": 275968,
+        "boundaryEdges": 512,
+        "weldedVertices": 138241,
+        "maxWeldError_m": 0,
+        "minTwiceTriangleArea_m2": 0.0625
+      },
+      {
+        "observer": [
+          -38.1,
+          47.7
+        ],
+        "triangles": 275968,
+        "boundaryEdges": 512,
+        "weldedVertices": 138241,
+        "maxWeldError_m": 0,
+        "minTwiceTriangleArea_m2": 0.0625
+      }
+    ],
+    "nearCollisionMaxError_m": 0.010411110371807197,
+    "traversalCacheSamples": 17188,
+    "ecology": {
+      "trees": 173,
+      "rocks": 232,
+      "gravel": 2537,
+      "tufts": 4601,
+      "understory": 54,
+      "managedTrees": [
+        "managed:east-edge",
+        "managed:west-edge"
+      ]
+    },
+    "treeArchitecture": {
+      "branchSegments": 57277,
+      "leaves": 413721
+    },
+    "episodeWater": {
+      "units": "mm-cell; multiply by cell area / 1000 for m3",
+      "cellArea_m2": 16,
+      "initialStorage": 39509.91992049058,
+      "input": 40137.49999999998,
+      "storage": 65630.49415003358,
+      "evaporated": 483.3572175212325,
+      "deepDrainage": 3717.7934085978886,
+      "boundaryExport": 9758.775144340472,
+      "roofExport": 57.00000000000054,
+      "residual": -2.6193447411060333e-9,
+      "relativeResidual": 3.28867494229046e-14,
+      "steps": 1440,
+      "elapsedSeconds": 14400,
+      "forcingTimeSeconds": 14400
+    },
+    "waterStepStorageDifferenceFraction": 0.0002832986243512613,
+    "cpuTerrainUpdates": {
+      "samples": 30,
+      "median_ms": 43.400399999998626,
+      "p95_ms": 119.51390299999912,
+      "maximum_ms": 244.5234449999989,
+      "context": "Node CPU geometry updates; excludes GPU work and makes no hardware frame-rate claim"
+    }
+  }
+}

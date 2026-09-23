@@ -27,3 +27,8 @@ node_modules/
 /data/a3/generated/
 /Open_Moon_A3_Accuracy_Lab.html
 /validation/a3/*.png
+
+# Reproducible B1 light-study images and raw radiance arrays.
+/data/b1/generated/
+/Open_Moon_B1_Scene_Painter.html
+/validation/b1/*.png

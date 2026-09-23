@@ -1,0 +1,186 @@
+{
+  "schema": "open-moon-b1-tests/1",
+  "tests": [
+    {
+      "name": "DDA versus brute-force triangle intersection",
+      "passed": true,
+      "max_distance_error_m": 0.0,
+      "rays": 150
+    },
+    {
+      "name": "Spherical sea intercept",
+      "passed": true,
+      "distance_m": 2.0
+    },
+    {
+      "name": "No self intersection for outward sea ray",
+      "passed": true
+    },
+    {
+      "name": "Fresnel normal and grazing limits",
+      "passed": true,
+      "normal": 0.020373187841971414,
+      "grazing": 1.0
+    },
+    {
+      "name": "Passive Fresnel partition",
+      "passed": true
+    },
+    {
+      "name": "Cosine hemisphere sampler",
+      "passed": true,
+      "mean_cosine": 0.6666577242605212
+    },
+    {
+      "name": "Passive spectral material 2",
+      "passed": true,
+      "minimum": 0.332,
+      "maximum": 0.426
+    },
+    {
+      "name": "Passive spectral material 3",
+      "passed": true,
+      "minimum": 0.04500072207501276,
+      "maximum": 0.2649262229719078
+    },
+    {
+      "name": "Passive spectral material 4",
+      "passed": true,
+      "minimum": 0.18416666666666667,
+      "maximum": 0.22333333333333336
+    },
+    {
+      "name": "Passive spectral material 5",
+      "passed": true,
+      "minimum": 0.14,
+      "maximum": 0.14
+    },
+    {
+      "name": "Lambertian surface under unit isotropic sky",
+      "passed": true,
+      "mean": 0.14000000000000007,
+      "expected": 0.14
+    },
+    {
+      "name": "Vacuum direct Lambertian 90",
+      "passed": true,
+      "mean": 0.04456338406573069,
+      "expected": 0.0445633840657307
+    },
+    {
+      "name": "Vacuum direct Lambertian 45",
+      "passed": true,
+      "mean": 0.03151107106549869,
+      "expected": 0.03151107106549872
+    },
+    {
+      "name": "Vacuum direct Lambertian 6",
+      "passed": true,
+      "mean": 0.0046581420543970655,
+      "expected": 0.0046581420543970655
+    },
+    {
+      "name": "Deep water under unit isotropic sky",
+      "passed": true,
+      "mean": 0.020373187841971414,
+      "expected": 0.020373187841971414
+    },
+    {
+      "name": "Finite solar disk normal irradiance",
+      "passed": true
+    },
+    {
+      "name": "Unchanged A3 black-boundary path reduction [0, 1, 0]",
+      "passed": true,
+      "maximum_absolute_path_difference": 2.220446049250313e-16
+    },
+    {
+      "name": "Unchanged A3 black-boundary path reduction [0.3, 0.5, 0.8124]",
+      "passed": true,
+      "maximum_absolute_path_difference": 2.220446049250313e-16
+    },
+    {
+      "name": "Mixed medium surface paths complete",
+      "passed": true,
+      "mean": 0.06454302192791654,
+      "standard_error": 0.0006563373620117463,
+      "completion_codes": [
+        20000,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "12-group spectral reduction on saved A3 rays",
+      "passed": true,
+      "comparisons": [
+        {
+          "case": "dense-sun45",
+          "Y_relative": 0.004950627022692528,
+          "XYZ_L1": 0.005212379593891163
+        },
+        {
+          "case": "moderate-sun45",
+          "Y_relative": 0.0020219820113194374,
+          "XYZ_L1": 0.002470618384814583
+        },
+        {
+          "case": "clear-gap-sun45",
+          "Y_relative": -0.0007522233146849668,
+          "XYZ_L1": 0.0019473851831273094
+        },
+        {
+          "case": "edge-sun45",
+          "Y_relative": -0.003651637099898434,
+          "XYZ_L1": 0.0025231626508576284
+        },
+        {
+          "case": "broken-sun45",
+          "Y_relative": -0.0010017718090442214,
+          "XYZ_L1": 0.0014677657105634327
+        },
+        {
+          "case": "oblique-sun45",
+          "Y_relative": -0.0021051580057462075,
+          "XYZ_L1": 0.0032274082439114494
+        },
+        {
+          "case": "dense-sun6",
+          "Y_relative": -0.003936469995853022,
+          "XYZ_L1": 0.005927998858050026
+        },
+        {
+          "case": "zenith-sun6",
+          "Y_relative": 0.0012168418813245506,
+          "XYZ_L1": 0.002247352353206814
+        }
+      ],
+      "scope": "selected A3 rays; Monte Carlo noise and changed B1 surfaces are separate"
+    },
+    {
+      "name": "Closed terrain boundary below sea",
+      "passed": true,
+      "maximum_edge_height_m": -169.99999999999997
+    },
+    {
+      "name": "Primary solar term separated without double counting",
+      "passed": true,
+      "with_disk": 14694.344121635177,
+      "without_disk": 0.0
+    },
+    {
+      "name": "Resolved solar disk vacuum flux",
+      "passed": true,
+      "normal_flux": 1.0089805381371764,
+      "subpixel_grid": 64,
+      "scope": "selected centred disk quadrature"
+    }
+  ],
+  "passed": 23,
+  "failed": 0
+}

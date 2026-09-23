@@ -1,0 +1,615 @@
+{
+  "schema": "open-moon-b1-baseline/1",
+  "publication_parent": "9ad75cfee4fee5497cf6cce08947dca8cc3ef35f",
+  "basis": "Inherited tracked files restored from the delivered cumulative A3 archive. The .gitignore extension is intentional; generated outputs have separate identities. Extra published roadmap files are outside this archive snapshot and outside the B1 patch.",
+  "files": {
+    "A1_METHODS.md": {
+      "bytes": 16219,
+      "sha256": "93f214e4dc63a39087e3f8e5ce39c7b7fc7d8b79dd41460336891c653ba43df8"
+    },
+    "A1_THIRD_PARTY_NOTICES.md": {
+      "bytes": 834,
+      "sha256": "c5c9a3d38ece8772f4f47adedc5ac24c47316eee00c9af4c287f6c3216be16a3"
+    },
+    "A1_VALIDATION.json": {
+      "bytes": 12733,
+      "sha256": "5d6a8b6e3ab481e7a00af3e33eddc40d13f199b85214bb5f1c2dc1805ffc64fb"
+    },
+    "A2_METHODS.md": {
+      "bytes": 16098,
+      "sha256": "41d59745d98f56f76864b9b7677e6ac29dcba0c6c65aaab57b98b9e9b9c6d528"
+    },
+    "A2_VALIDATION.json": {
+      "bytes": 12287,
+      "sha256": "3a6825afb5e69cab73ae0f4836a8af142e5b069d54b623ce5bd9c3bd622cf35b"
+    },
+    "A3_METHODS.md": {
+      "bytes": 22995,
+      "sha256": "9ffd81c5fcc147726381db026ba9190e6f9333245d7d346fc56f88bb7a3e9733"
+    },
+    "A3_SOURCE_MANIFEST.json": {
+      "bytes": 26025,
+      "sha256": "d32eb569ebcf76b9bcd35107730a2cdbb0a608d175eb029261681356772b523a"
+    },
+    "A3_VALIDATION.json": {
+      "bytes": 26016,
+      "sha256": "8c23fa9a500233bfeb553a1ba78765320f34374f38d6537cd3a0036d1d78ba8c"
+    },
+    "CLOUD_METHODS.md": {
+      "bytes": 14067,
+      "sha256": "cdac5d7128e7c6a021775085206d863b2582f0f694dd1da9f1cdaf14b8275716"
+    },
+    "CLOUD_SOURCE_MANIFEST.json": {
+      "bytes": 8263,
+      "sha256": "f2a031afde3ad57988bbee52dbe8d73ef0b85b9ef3f5670e9a21e0fec03d590d"
+    },
+    "CLOUD_VALIDATION.json": {
+      "bytes": 7840,
+      "sha256": "226e411b444c6443797d6d70240352bf5d42bd4aff352210a7c587029c61d558"
+    },
+    "LANDSCAPE_METHODS.md": {
+      "bytes": 9886,
+      "sha256": "f0d61057f90246c248153178f39675d23d5459ada1b0c5850d150400832bae5f"
+    },
+    "METHODS.md": {
+      "bytes": 8856,
+      "sha256": "b2d73906f86c0d474daedec0b94e158a5b8105f79c8aaab5cc9f1a1baac8ec5e"
+    },
+    "PACKAGE_MANIFEST.json": {
+      "bytes": 12460,
+      "sha256": "5482670d5395291b4159c35cfca28521df5dea21c9864326b9b41201cef8efb2"
+    },
+    "README.md": {
+      "bytes": 4935,
+      "sha256": "b3b7da4997fcaf0ca478ff998e0129f91a9e63464d4dd02b2baf7f01e24761ff"
+    },
+    "SOURCES.md": {
+      "bytes": 1835,
+      "sha256": "9eb8e1d47f71d8013e248739be8fe89164954aa29df913b5bbbfcc2f0c9dfd87"
+    },
+    "THIRD_PARTY_NOTICES.txt": {
+      "bytes": 3362,
+      "sha256": "e70c3c3ece456710288056314d1aecb61e59bc5ca68f347af819409836bf062a"
+    },
+    "assets/surfaces/manifest.json": {
+      "bytes": 3115,
+      "sha256": "e285595ea76094ff000930b679970b7622dc015e6fd765ac9254382713c86714"
+    },
+    "build.py": {
+      "bytes": 216,
+      "sha256": "d30da172f9f8628e5f3b36f432fc95146731e4f367c06b6f8427cedfe117be5b"
+    },
+    "build_a2_accuracy.py": {
+      "bytes": 1514,
+      "sha256": "cb2e3ac208bc15964f0e0b6a5332c079d930d824f3daa306e2e62da08d985d5e"
+    },
+    "build_a3_accuracy.py": {
+      "bytes": 1153,
+      "sha256": "d3755f632dd901e965677d88bf225a5dc990935840f6c6c00ce35cee3e720858"
+    },
+    "build_accuracy.py": {
+      "bytes": 2481,
+      "sha256": "c8207066b6ab0e81f7a19309f8507a2d68ced23de65040cd9f12ddeb6c838148"
+    },
+    "build_landscape.py": {
+      "bytes": 2734,
+      "sha256": "d1da68e48c5576ee1099ff7af32af22800a5697d2e4bf040b2f22885c323e7a0"
+    },
+    "data/a1/BRUNETON_LICENSE.txt": {
+      "bytes": 1483,
+      "sha256": "530cf0bc2bf96a7e41400683ce6cfb3301ba8cf0166f6528b2f5caf87fa7df38"
+    },
+    "data/a1/spectral-inputs.json": {
+      "bytes": 5696,
+      "sha256": "59f47ce7147e24b3b5c57d3f4799a91dd2000d6d9bae60d6185fc952fbff2530"
+    },
+    "data/atmosphere.json": {
+      "bytes": 2512898,
+      "sha256": "9cdb18f0914ce796baf864f1b81f60c6b99ff888615957316287e4529ff8e4e7"
+    },
+    "index.a2-accuracy-lab.html": {
+      "bytes": 8930,
+      "sha256": "652b55da1e6b0be8d420980bcff916d57593bb54dc0f50b8f89c4f2b0aeeea2d"
+    },
+    "index.a3-accuracy-lab.html": {
+      "bytes": 9612,
+      "sha256": "a29f6a12a70016649fc7936ff7beb6b89ccab6e289e6a70da125e68342346b79"
+    },
+    "index.accuracy-lab.html": {
+      "bytes": 10394,
+      "sha256": "60c89d09690cb0465d88e8506815182606901e14ea0ad08ef3ecff6ee291f0b1"
+    },
+    "index.landscape.html": {
+      "bytes": 28999,
+      "sha256": "cfcd98ce68e3194ba783d3f2242570b739373266b6cc0a29b0c351fbcb5e3bd7"
+    },
+    "index.renderer-lab.html": {
+      "bytes": 6947,
+      "sha256": "e29dbcd9ecc9e90ca4f94b3a21dafc6b766544c756a15d2c5fe87d01cb31600f"
+    },
+    "requirements-a1.txt": {
+      "bytes": 195,
+      "sha256": "404a1997746579f7134b00e4aa8cc13cce32fed6d0006e66d30d2dd1baef21f1"
+    },
+    "requirements-surfaces.txt": {
+      "bytes": 42,
+      "sha256": "f793676a40e71a12c2d9066d4f2e342bf5d920a971a725519c00ed500c4231ed"
+    },
+    "revision04.patch": {
+      "bytes": 312380,
+      "sha256": "c2f33a197b72ea9deaa24c218c73d5d7fe19d2aafb570e243e29b914869c488a"
+    },
+    "src/a2-accuracy-lab.js": {
+      "bytes": 7187,
+      "sha256": "413663e1006c22eec85b73ee5df6ee0227cec560cde6a2ca141117715c04880a"
+    },
+    "src/a3-accuracy-lab.js": {
+      "bytes": 8385,
+      "sha256": "b1c3c97fdcb95edc2e8676357a81cbca023c83757f0b55df9d7c218e041e9b70"
+    },
+    "src/accuracy-lab.js": {
+      "bytes": 9088,
+      "sha256": "10b29e3a9dd861193e1502fd8c8b559eba5d63ace5682f2020a583507e36c6ab"
+    },
+    "src/app.js": {
+      "bytes": 25771,
+      "sha256": "dcdd34f641dcba32dd1c4371c4c2d96408017174df4178673f83588c5887bad2"
+    },
+    "src/atmosphere.js": {
+      "bytes": 11113,
+      "sha256": "fa7a7e2995aaf9decdbe7ea939950b93e9cd43282663af95927e1b7808e2765d"
+    },
+    "src/atmospheric-profile.js": {
+      "bytes": 6585,
+      "sha256": "fe916ef5b8e295d69198bbcf58c5670bcf053380442243a9af4d75e80fcd2ba7"
+    },
+    "src/audio.js": {
+      "bytes": 3505,
+      "sha256": "23fee2369e179668e9eda580522667085374f348fd36b2c64f6116bfbc1240f6"
+    },
+    "src/cloud-optics.js": {
+      "bytes": 2821,
+      "sha256": "66bebd721f6b1727f0839558145b851beebef5cf5d3d4ebb4394b04bc239290b"
+    },
+    "src/cloud-renderer.js": {
+      "bytes": 17706,
+      "sha256": "78c1f5339fe80940a4362c7edd71310b586ba397c91a85b1ff8b2e3611767bfc"
+    },
+    "src/core.js": {
+      "bytes": 9296,
+      "sha256": "63929c21a1ef626cca92faaa5e08250d26ef81b329ad96f45da1ed23d5b21934"
+    },
+    "src/ecology.js": {
+      "bytes": 13170,
+      "sha256": "e29dbb1ed0a032f47eb83b0c85102d9af958e9c17d8b3694662b8c2d0bdef566"
+    },
+    "src/frozen-cloud-field.js": {
+      "bytes": 3656,
+      "sha256": "aa8e61fc12f610a58afe8863f5cfa3fa6c3acc252e09e2af2ecd07e0c2f73d93"
+    },
+    "src/landscape.js": {
+      "bytes": 13379,
+      "sha256": "e80aca30de3a4816011caa7b95a9303677de1fd948a27ede728bdb053cfe0686"
+    },
+    "src/loader.js": {
+      "bytes": 4220,
+      "sha256": "af83b2446aab99dbe7b8660abb8378e69c7d2a6247d7586de8972893a763deea"
+    },
+    "src/materials.js": {
+      "bytes": 11732,
+      "sha256": "ddf9295aefd4988e9f3a570f33ab0c48b1b024180882415aaa219404e53f18ad"
+    },
+    "src/node-materials.js": {
+      "bytes": 9660,
+      "sha256": "a2411a9d62ea957312fe639ce0c2f104493669acb53b3baf86c19e719a7b9807"
+    },
+    "src/ponds.js": {
+      "bytes": 9910,
+      "sha256": "38d2b817248d382c7f642d5cd5a8d9350228fe7ce1b110e45f33bc05bd8544da"
+    },
+    "src/profile-optics.js": {
+      "bytes": 4367,
+      "sha256": "38017bc8f3562f96b5c9c4633d07574e0002facaef822660528d2bfe66c58d3b"
+    },
+    "src/renderer-lab.js": {
+      "bytes": 17463,
+      "sha256": "0dd9c491c55bfe96e76275f78b245ab0c0ad2b7ce19d09d32b514f47553ec359"
+    },
+    "src/scene.js": {
+      "bytes": 9393,
+      "sha256": "6b6e055d7573cd29fc68ea22c2b0ae1071a8b53b02d51350a49c4d0aae1dd4c1"
+    },
+    "src/surface-water.js": {
+      "bytes": 6381,
+      "sha256": "f369bc25e11b185cf65cab581c119bb56e05617394c86dedf22ac5fa65c3cea7"
+    },
+    "src/terrain.js": {
+      "bytes": 7781,
+      "sha256": "2d1aa27a514b2301de855b57fceed47541a0ff3622da86ecc91964ad3e361abf"
+    },
+    "src/water.js": {
+      "bytes": 10395,
+      "sha256": "122a222797464294d303dda6f4944d00003086fb369bd339227b82e9db1259bf"
+    },
+    "src/weather-column.js": {
+      "bytes": 10023,
+      "sha256": "7b4e39a6096025205f52ec4fa035d1557e85fc6638d691b8b129959b8e5f35e4"
+    },
+    "tests/a1_frozen_probe.js": {
+      "bytes": 8499,
+      "sha256": "8cf66d8e98b652987e2f813efab3bbd3df59ddb6bcadd5173ddda3c6a87c64e7"
+    },
+    "tests/a2_frozen_probe.js": {
+      "bytes": 8825,
+      "sha256": "86956dcc14dc617882142102f98801808124fb49cb03af6bdd4ff4963271f3a8"
+    },
+    "tests/atmospheric-profile.test.cjs": {
+      "bytes": 5357,
+      "sha256": "0549918deaba27d16b0c6092828224bbb2bc2aa92f27f25c8c2d72ae76dd8962"
+    },
+    "tests/capture_clouds.py": {
+      "bytes": 8333,
+      "sha256": "6cff6b5aff855a1ddc92e1b7ed0a990a3cbb568a6681d4f7c44624f437f8f0f5"
+    },
+    "tests/capture_landscape.py": {
+      "bytes": 21638,
+      "sha256": "82b9c1b66503e9f627253da4585ba5a5525b50a896cc496b156e1ee5fb9e1d53"
+    },
+    "tests/capture_revision.py": {
+      "bytes": 8061,
+      "sha256": "85fd660185f16b574dfa07c934b15cd4d97d760e118c6916f1823d65f3fbb400"
+    },
+    "tests/cloud-cache.test.cjs": {
+      "bytes": 3418,
+      "sha256": "97f0e27ce218e88f83053b7743df318d4b79d205ac00653f063f2e4560523e2e"
+    },
+    "tests/cloud_field_probe.js": {
+      "bytes": 3392,
+      "sha256": "87b5a1ca4e571f218d39c46ba4563e94f2b6691be6f94b57a9a7fb9cece7a147"
+    },
+    "tests/core.test.cjs": {
+      "bytes": 6626,
+      "sha256": "ae824f97c5026e8638cbed988f26024c77b2902b27be9f872034b022ee665e7c"
+    },
+    "tests/frozen-cloud-field.test.cjs": {
+      "bytes": 2311,
+      "sha256": "2cc656915e62e2f1b798ff9bda168f2d52de6381eab84fc02079c2162ca2baab"
+    },
+    "tests/landscape.test.cjs": {
+      "bytes": 16178,
+      "sha256": "6c141755d61ed7647bca96ff93f61a553e2743f9462e21f136d8daf28a819d5b"
+    },
+    "tests/landscape_probe.js": {
+      "bytes": 4273,
+      "sha256": "cdc725a88443a8c2ca570ebb93bd1dbfbd9a345d4d6578441ba3361c7ff94a04"
+    },
+    "tests/m1.test.cjs": {
+      "bytes": 4786,
+      "sha256": "3f4e914baafe3bbb0e3578e11dc7236e2fcc77b304bff34bf9d0519de8775fec"
+    },
+    "tests/node_field_probe.js": {
+      "bytes": 1649,
+      "sha256": "7e1c01bc123976ae7c8f8c203f9ac0689c66d1ead8602c31da074ca6608b0564"
+    },
+    "tests/ponds.test.cjs": {
+      "bytes": 3954,
+      "sha256": "99767313fdbed021bbb086053fa7f1153a5f3b08f4af9002fce9597a1e7d7bc1"
+    },
+    "tests/profile_terrain.cjs": {
+      "bytes": 1361,
+      "sha256": "aabe688d175a9a03ff307aa88f230e084d2399162b36b75d0cfe2e684cd1d659"
+    },
+    "tests/requirements.txt": {
+      "bytes": 19,
+      "sha256": "df7696acf1e200684a962c8b7cb25363273b8239093235e68bb3f60231a9799f"
+    },
+    "tests/surface_state_probe.js": {
+      "bytes": 1668,
+      "sha256": "8134762b748deeed25cd0470bb44152e8619509f839b087626c4a050627171f5"
+    },
+    "tests/weather-column.test.cjs": {
+      "bytes": 8060,
+      "sha256": "47959115167f9326a2ed49cf20a5005d14696f60b9cb6b060155691460e27e29"
+    },
+    "tools/a1/capture_field.py": {
+      "bytes": 4600,
+      "sha256": "87c26c34ac5a75ac829f8630d3a14acbdcb45b528b9e1217fb260324079a1aeb"
+    },
+    "tools/a1/check_lab.py": {
+      "bytes": 3428,
+      "sha256": "32b14ce3b1b91989d7b5abda8b25ae962de92ebdfece9b98230657408b23d4bd"
+    },
+    "tools/a1/cloud_reference.py": {
+      "bytes": 11287,
+      "sha256": "2370c70d9648a37b13047568290f1a9f820db56fb4de500c161a306155889fd9"
+    },
+    "tools/a1/export_profiles.cjs": {
+      "bytes": 2074,
+      "sha256": "b0cd99c4e58ef0901cf6d9694efae7b9e0a7ab2755226c46ff9d938f345b9710"
+    },
+    "tools/a1/reference_optics.py": {
+      "bytes": 12151,
+      "sha256": "700b4b7c5029cc68274c3fd5b890ceb8588dd6a0cfe0b22f39804ded96822d4c"
+    },
+    "tools/a1/validate_a1.py": {
+      "bytes": 7461,
+      "sha256": "8bef3033b6912693468d1b72adbdf8c8744977cb27c0e4c38eb4cf9c34944eac"
+    },
+    "tools/a2/build_multiple_atlas.py": {
+      "bytes": 5241,
+      "sha256": "49ba42dcc74fd56bd2c74a6b5a74f6c844723fcedd96ce9bd2c67a9ac6663547"
+    },
+    "tools/a2/capture_cloud_convergence.py": {
+      "bytes": 5310,
+      "sha256": "a6417c75b73fba8f3e1ea8005fb371ba8c57a5baaa5bf8a3db994fbadcfe4681"
+    },
+    "tools/a2/check_lab.py": {
+      "bytes": 5721,
+      "sha256": "23c038beb73f0e0b47ee6ed18ac2f05d986e65795cf330d54e73e81509c0198f"
+    },
+    "tools/a2/cloud_convergence.py": {
+      "bytes": 6108,
+      "sha256": "9cd4355b0b46ec041e9c65bd2a4e20c9341d56f7ada317f440bfd8522391a834"
+    },
+    "tools/a2/merge_molecular_chunks.py": {
+      "bytes": 4930,
+      "sha256": "ab476d8e67fecfe50e1a13b94c0c2462b00e96a0e4a7a7db15994595c9fd4f53"
+    },
+    "tools/a2/molecular_multiple_scattering.py": {
+      "bytes": 16019,
+      "sha256": "53d4f717e83ba1892859b08a53e5880e8d01006809cdd6b224bcd57903f701e4"
+    },
+    "tools/a2/validate_a2.py": {
+      "bytes": 9383,
+      "sha256": "47f05e97ffbe178d2f654c48f4fa1ccc12890fd3b3b7671fa08c550c41d7edbb"
+    },
+    "tools/a3/check_lab.py": {
+      "bytes": 6812,
+      "sha256": "cd357c5e2a3dc966c9dbd165c7e3223381d5a35cae972ec4eb9cd791787a15c8"
+    },
+    "tools/a3/coupled_transport.py": {
+      "bytes": 13954,
+      "sha256": "412ff865356fc9ba0bda42cbe7ec3ebb4e9552e47bd72bdd1309262640a0dd1c"
+    },
+    "tools/a3/deterministic.py": {
+      "bytes": 7270,
+      "sha256": "a7ee5e71bf485ac2844cb5e6c97842893abeff5cb1eb31920cc435aee6873143"
+    },
+    "tools/a3/diagnose_clear.py": {
+      "bytes": 1313,
+      "sha256": "fc5004dd5f4c8f96dc6930cfca58f0b837726bdf9fc702e748f01071543ccbd4"
+    },
+    "tools/a3/refine_molecular.py": {
+      "bytes": 1918,
+      "sha256": "3eba734dd59b01449c596ab5a2680c436b5a3861b2db63c33422327f3c594efe"
+    },
+    "tools/a3/run_benchmark.py": {
+      "bytes": 9657,
+      "sha256": "c7ea19b7d44e6fbb39a7426148eae70a35af9ff28eba53eb877d95b0b3c3eb2a"
+    },
+    "tools/a3/smoke.py": {
+      "bytes": 591,
+      "sha256": "ee03441f4c93fd558862fd96bc76ab9d550fa6e5476b5bc41ec9205796406450"
+    },
+    "tools/a3/test_extensions.py": {
+      "bytes": 3360,
+      "sha256": "b4cb9b4f25f86f4789544b1c54eca899fe22031c4c5b35f6ca03d50cc9d451fb"
+    },
+    "tools/a3/test_transport.py": {
+      "bytes": 6844,
+      "sha256": "a07f2c8f8fe59462202db7d2a5dce0bc2f0455f5fa6b6811d36fea0c22177286"
+    },
+    "tools/a3/validate_a3.py": {
+      "bytes": 9176,
+      "sha256": "480929b20212a85fae874ebaa2cca18c9376dc8ff4af9aa5e121cae56a027ff4"
+    },
+    "tools/generate_surfaces.py": {
+      "bytes": 7144,
+      "sha256": "af986e02ba23bf5a3d11b8040f7fae6796e9b1cef1314f0ebf21b33478e75002"
+    },
+    "tools/import_three.py": {
+      "bytes": 1772,
+      "sha256": "8914536b57d279b39fc4ce54e3189ceb7328c2925febcfd8711ed2c5607bb677"
+    },
+    "validation/a1/clear-sky-numerics.json": {
+      "bytes": 35593,
+      "sha256": "180a79195e46d6dc7e08f9fe832fadf28a1a1cce225fd88651c8d03cb463dde1"
+    },
+    "validation/a1/cloud-reference.json": {
+      "bytes": 10900,
+      "sha256": "8afed2dd134da31280d8e47ebfbe9b44d2b5b0c1dea4751b0d30a58e248b8e58"
+    },
+    "validation/a1/frozen-field-gpu.json": {
+      "bytes": 19280,
+      "sha256": "2f84b3b4a8f6dd7722d68dea727c843b5d3f017186ffaa599560901db3743a9a"
+    },
+    "validation/a1/initial-missing-build-fixture.tap": {
+      "bytes": 28156,
+      "sha256": "47cb0dcc22f68815d3498581979f8bb0801f0ddbefc011c27db1f8421e5509fe"
+    },
+    "validation/a1/lab-browser.json": {
+      "bytes": 488,
+      "sha256": "24d5e0ebef84e832db327d66b0a408c8ed3ba90e90b0cd02123050dc48b4c7e0"
+    },
+    "validation/a1/profile-manifest.json": {
+      "bytes": 39747,
+      "sha256": "9cf87885e38494ebb4955e9d43a4e1f287ce1788f6d39976be36ff8d39767348"
+    },
+    "validation/a1/unit-tests.tap": {
+      "bytes": 31722,
+      "sha256": "bbf63328c86d2e511db0ef358112f6e338ed86cd3c5e5decd37127e1418812f8"
+    },
+    "validation/a2/lab-browser.json": {
+      "bytes": 571,
+      "sha256": "4b635ee88b836fcca5a679c78c34a5fdd5f11859dacfc93e2155c4479b4436b9"
+    },
+    "validation/a3/a2-display-source-reconciliation.json": {
+      "bytes": 1178,
+      "sha256": "1b63f16af06c83df5a0bef6cb3928b71726e1a0a03933bb66719bece057f911a"
+    },
+    "validation/a3/benchmark-run.log": {
+      "bytes": 3038,
+      "sha256": "5f1e05f28fd79e0b20c8a80d01c914bd3dd805ee065ab50e8a652336e6cf60d2"
+    },
+    "validation/a3/browser-run.log": {
+      "bytes": 1403,
+      "sha256": "e92a9b5fe32361f816340d839b3180f8fd8ab9364e748edff930591c0d1d50aa"
+    },
+    "validation/a3/clear-diagnosis.json": {
+      "bytes": 3054,
+      "sha256": "56394136d787c6401a434d33440de088617d4be0716e25524381a56e1c2f54e6"
+    },
+    "validation/a3/clear-diagnosis.log": {
+      "bytes": 1720,
+      "sha256": "c910a2716d836ab90daf01dddf23e530c9fd296e1363cbd0279d73dee23248ed"
+    },
+    "validation/a3/clear-refine-dense.json": {
+      "bytes": 2033,
+      "sha256": "b89981b5826ba94ae84fd9a9f3964221135c75e659f0e734592d77b010fe3ac1"
+    },
+    "validation/a3/clear-refine-dense.log": {
+      "bytes": 2303,
+      "sha256": "1d96abc3d10a59fd0650c2e3a3738752bea793f95d9edc44e8ad8060b506549e"
+    },
+    "validation/a3/clear-refine-medium.json": {
+      "bytes": 2003,
+      "sha256": "42c7261a667f7ede931a9a4db32a8bcd6ffbf0557c6f152ecb161f43835faa5e"
+    },
+    "validation/a3/clear-refine-medium.log": {
+      "bytes": 2298,
+      "sha256": "267bcb146c10c845fabc19c619faccf0b4b264b34853a5fe06f68863950b1205"
+    },
+    "validation/a3/diagnostics/benchmark-initial-partial.log": {
+      "bytes": 184,
+      "sha256": "832c02c681be9ab1759287eb61925db339bec875f11ef109ce5b5b2548fbbe41"
+    },
+    "validation/a3/diagnostics/clear-diagnosis-initial.json": {
+      "bytes": 2362,
+      "sha256": "2fa6af4997cb3489d0462339bdc66a3ceeb9dd8404d19b5bb56105c2ef723673"
+    },
+    "validation/a3/diagnostics/clear-diagnosis-initial.log": {
+      "bytes": 1720,
+      "sha256": "c910a2716d836ab90daf01dddf23e530c9fd296e1363cbd0279d73dee23248ed"
+    },
+    "validation/a3/diagnostics/coupled_transport_initial.py": {
+      "bytes": 12247,
+      "sha256": "5be58572b34cf41f2ab03405cd6d6177b144130c98f49c5c585960bdb096a9cd"
+    },
+    "validation/a3/diagnostics/lab-file-navigation-blocked.json": {
+      "bytes": 700,
+      "sha256": "605d8b191b1a50aab04a66330f222a12bad6befcb1d337a1bd7f887bd9da96c3"
+    },
+    "validation/a3/diagnostics/transport-tests-initial.json": {
+      "bytes": 5241,
+      "sha256": "cc5cdd4bd32e097bb4fcc3761918f1c7a409c9d89353871c18416b5f145c03fc"
+    },
+    "validation/a3/extension-tests.json": {
+      "bytes": 3319,
+      "sha256": "689539b8b69eaa08ad9ceb365bfd18a3fbfb5a83dc232ab53bd19eaccd2d056b"
+    },
+    "validation/a3/extension-tests.log": {
+      "bytes": 2607,
+      "sha256": "b486a6ab9a0171fc616c80139ff2968b3d76e9023d480015ebcf04291186bacd"
+    },
+    "validation/a3/lab-browser.json": {
+      "bytes": 59745,
+      "sha256": "cde0cdd36d72c2cc13a20bb3c88c0d9437e137f676ef17a3aea3ede043f47d46"
+    },
+    "validation/a3/shoreline-build.log": {
+      "bytes": 145,
+      "sha256": "41449498d01eef7321e0278b0e071eadff658e57760dd4e16e41a168340bae20"
+    },
+    "validation/a3/smoke.log": {
+      "bytes": 2290,
+      "sha256": "ea836c4e35106cdd876a38fe42910974cb82555d9722bbadf249404e8a8a6f22"
+    },
+    "validation/a3/transport-tests.json": {
+      "bytes": 5244,
+      "sha256": "ffaa4b9ee5a28b5299a4a0de6027aebb3c3cb43d38fd9ad7273b28ec7fa6de3a"
+    },
+    "validation/a3/transport-tests.log": {
+      "bytes": 4242,
+      "sha256": "0ffb929802b01589420b6e3337f9d22b3ef239604844642d8b0b5257a0c72bff"
+    },
+    "validation/a3/unit-tests.tap": {
+      "bytes": 31748,
+      "sha256": "0bf86983ba840b9b5bc5b240aa31b79ce8fb3cd13a9b2503192923aa8bd3ce31"
+    },
+    "validation/a3/validation-run.log": {
+      "bytes": 8253,
+      "sha256": "be571854a87314652e6f0afb5892d1e2d0d90a3376ebdfbfaaece935fa03ef64"
+    },
+    "validation/clouds/boundary-convection-earth.json": {
+      "bytes": 10458,
+      "sha256": "98dff5a49978aeb92c2ed9d5407d52232b47babf7e415682fe1f362ab710916b"
+    },
+    "validation/clouds/boundary-convection-moon.json": {
+      "bytes": 10312,
+      "sha256": "a6688845d01dae3a37f6b008d3bdfddb5fba195d042de23b198752897623c6df"
+    },
+    "validation/clouds/boundary-fair.json": {
+      "bytes": 10319,
+      "sha256": "f92b57c64eabf6d49bbe4f7fdc00a235f79e40e226a520cf21afffaa401c316c"
+    },
+    "validation/clouds/boundary-fog-mobile.json": {
+      "bytes": 11305,
+      "sha256": "77729cc9194a0f8582825eb132926a030fc96ca94a808de1beaa7aae875f8040"
+    },
+    "validation/clouds/boundary-reference.json": {
+      "bytes": 3088,
+      "sha256": "e97fe9c7216a6d56d16fac8f3cc37aed9efd2af67da0cfad7614b9cff24e46c7"
+    },
+    "validation/clouds/diagnostics/cache-fixture-syntax-failure.tap": {
+      "bytes": 27176,
+      "sha256": "88b0317b6e1bbde97f1585534b71514bc0f239a88f1329c4ef6e4c1a3ac67189"
+    },
+    "validation/clouds/diagnostics/convection-moon.json": {
+      "bytes": 4938,
+      "sha256": "19b3255a3062c1e5ada87ef66635f86867fec17619f82c7d11cab5c1fbd92d2d"
+    },
+    "validation/clouds/diagnostics/lattice-fair-balanced.json": {
+      "bytes": 5377,
+      "sha256": "513c1bc7a64b47fb9b4accf639483f2e31b72e2692c1e008b0804355a6a0828b"
+    },
+    "validation/clouds/diagnostics/review-fair-balanced.json": {
+      "bytes": 5367,
+      "sha256": "07a76168b744ede3eca204d97f1d6b3fa009b8cf04ff53385316efe5435944b3"
+    },
+    "validation/clouds/diagnostics/review-fair-sharp.json": {
+      "bytes": 5353,
+      "sha256": "bf6d828eec28882e611c8534388aecc382389d8f37998120411341fabac72806"
+    },
+    "validation/clouds/final-boundary-tests.tap": {
+      "bytes": 27344,
+      "sha256": "fdf8e4a50e8a390dbb40c224713ce28c9860ec5de8e08488d64e1d19b531fe7e"
+    },
+    "validation/clouds/reference-comparison.json": {
+      "bytes": 440,
+      "sha256": "c9900c4a0272c2d38cfe575c1cfe13233e42280ab63700f8c6436375f5170260"
+    },
+    "validation/clouds/reference-old.json": {
+      "bytes": 3055,
+      "sha256": "821fb62eb83d93a32ee843145ce769ff8888ab071e3afa7a56abbcc2c170a5af"
+    },
+    "validation/clouds/scenarios.json": {
+      "bytes": 18096,
+      "sha256": "625255c2171ec94aad2c8c88b7d69a641a60b3301bc8a1030441c0ff96ecfa41"
+    },
+    "validation/landscape-numeric.json": {
+      "bytes": 2931,
+      "sha256": "39739d2f8ef9fbd580ffda9634abc8e195e7f244306c6638af689e39b069a955"
+    },
+    "vendor/three-r186/LICENSE": {
+      "bytes": 1081,
+      "sha256": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc"
+    },
+    "vendor/three-r186/manifest.json": {
+      "bytes": 778,
+      "sha256": "7de84d565b9c12a64529b815b7d88b47de8674ea0695225a67b16837e271c676"
+    },
+    "vendor/three-r186/package.json": {
+      "bytes": 18,
+      "sha256": "1239d4d885dcad42201a27ed9324f8f0f760b78700d8db9ced39a511cffe7eae"
+    }
+  }
+}
