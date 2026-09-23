@@ -58,20 +58,22 @@
     },
     {
       "topic": "illumination",
-      "condition": "conditional_clear_sky_solver",
+      "condition": "conditional_clear_sky_solver_and_site_geometry",
       "material": [
         "../illumination/geometry.py",
         "../illumination/sky/solver.py",
-        "../illumination/sky/METHODS.md"
+        "../illumination/sky/METHODS.md",
+        "../illumination/ephemeris.py",
+        "../illumination/stars/bright_stars.json"
       ],
       "unresolved": [
-        "ephemerides, libration and terrain horizon",
+        "date-accurate ephemeris, lunar equator tilt and terrain horizon",
         "refraction and polarization",
-        "earthlight, starlight and airglow as light sources",
+        "earthlight spectrum (glow currently uses the solar atlas), airglow",
         "optical profiles tied to the solved atmospheric column",
         "lunar global energy residual up to 4.6%"
       ],
-      "next_session_task": "Add Sun/Earth/star geometry for a site and earthlight as a source, then test low-Sun and night radiance against appropriate benchmarks."
+      "next_session_task": "Compute earthlit sky radiance with Earth's reflectance spectrum as the source, and test low-Sun and night radiance against appropriate benchmarks."
     },
     {
       "topic": "biosphere",

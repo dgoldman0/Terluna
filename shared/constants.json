@@ -3,21 +3,28 @@
   "about": "The one source for physical and astronomical constants. Derived values are computed by constants.py and constants.js, not stored. Scenario choices (surface pressure, composition, sites) belong in scenarios/, not here.",
   "physics": {
     "boltzmann_J_K": 1.380649e-23,
-    "avogadro_per_mol": 6.02214076e23,
-    "stefan_boltzmann_W_m2_K4": 5.670374419e-8,
+    "avogadro_per_mol": 6.02214076e+23,
+    "stefan_boltzmann_W_m2_K4": 5.670374419e-08,
     "standard_gravity_m_s2": 9.80665
   },
   "moon": {
     "radius_m": 1737400.0,
-    "gm_m3_s2": 4.902800118e12,
+    "gm_m3_s2": 4902800118000.0,
     "synodic_month_days": 29.53059,
     "sidereal_month_days": 27.321661,
-    "equator_to_ecliptic_deg": 1.5424
+    "equator_to_ecliptic_deg": 1.5424,
+    "anomalistic_month_days": 27.55455,
+    "draconic_month_days": 27.212221,
+    "optical_libration_longitude_deg": 7.9,
+    "optical_libration_latitude_deg": 6.7
   },
   "earth": {
     "radius_m": 6371000.0,
-    "gm_m3_s2": 3.986004418e14,
-    "moon_mean_distance_m": 384400000.0
+    "gm_m3_s2": 398600441800000.0,
+    "moon_mean_distance_m": 384400000.0,
+    "sidereal_day_s": 86164.0905,
+    "obliquity_deg": 23.4393,
+    "geometric_albedo_visible": 0.367
   },
   "sun": {
     "solar_constant_W_m2": 1361.0,
@@ -34,5 +41,9 @@
       ],
       "note": "A rounded value. atmosphere/lower_air.py and thermal_column.py use GM/R^2 = 1.62422 m/s^2 (0.26% higher). Moving the users above to GM/R^2 changes the sky atlas, the column set and the A1-A3 references, so it is a recorded decision rather than a silent edit."
     }
+  },
+  "notes": {
+    "optical_libration": "Amplitudes of the mean optical librations in longitude and latitude; the ephemeris uses them as sinusoids with the anomalistic and draconic months.",
+    "geometric_albedo_visible": "Earth's visible geometric albedo varies with cloud cover and viewing geometry; 0.367 is a representative value used for earthlight."
   }
 }

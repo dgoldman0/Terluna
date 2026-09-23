@@ -19,6 +19,14 @@ export const EARTH_RADIUS = data.earth.radius_m;
 export const EARTH_GM = data.earth.gm_m3_s2;
 export const EARTH_MOON_DISTANCE = data.earth.moon_mean_distance_m;
 
+export const ANOMALISTIC_MONTH_DAYS = data.moon.anomalistic_month_days;
+export const DRACONIC_MONTH_DAYS = data.moon.draconic_month_days;
+export const LIBRATION_LONGITUDE_DEG = data.moon.optical_libration_longitude_deg;
+export const LIBRATION_LATITUDE_DEG = data.moon.optical_libration_latitude_deg;
+export const EARTH_SIDEREAL_DAY_S = data.earth.sidereal_day_s;
+export const EARTH_OBLIQUITY_DEG = data.earth.obliquity_deg;
+export const EARTH_GEOMETRIC_ALBEDO = data.earth.geometric_albedo_visible;
+
 export const SOLAR_CONSTANT = data.sun.solar_constant_W_m2;
 export const SUN_RADIUS = data.sun.radius_m;
 export const AU = data.sun.au_m;

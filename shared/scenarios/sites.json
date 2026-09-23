@@ -1,0 +1,15 @@
+{
+  "schema": "terluna.shared.sites/1",
+  "about": "Sites where models and experiences evaluate the sky. A site fixes where Earth hangs and how the Sun moves; it does not claim anything about the environment there.",
+  "sites": {
+    "development": {
+      "status": "Placeholder for engine development, chosen so Earth is visible about 25 degrees up in the east and the Sun still crosses the zenith (as in the existing clear-sky atlas). Not a proposed Open Moon location.",
+      "selenographic_latitude_deg": 0.0,
+      "selenographic_longitude_deg": -65.0,
+      "sun_ecliptic_longitude_at_local_noon_deg": 90.0,
+      "earth_rotation_angle_at_local_noon_deg": 0.0,
+      "libration_phase_longitude_deg": 0.0,
+      "libration_phase_latitude_deg": 0.0
+    }
+  }
+}

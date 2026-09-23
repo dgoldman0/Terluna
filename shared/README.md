@@ -21,6 +21,13 @@ Historical, byte-pinned models (the April simulator, the September feasibility
 and protection imports) keep their own literals; [research/check.py](../research/check.py)
 reproduces them as they were.
 
+## Scenarios
+
+[scenarios/sites.json](scenarios/sites.json) holds sites where models and experiences
+evaluate the sky. The `development` site (0° N, 65° W) is a placeholder chosen so
+Earth is visible about 25° up in the east while the Sun still crosses the zenith;
+it is not a proposed Open Moon location.
+
 ## Lanes and the layer check
 
 | Lane | Folders | May import |
