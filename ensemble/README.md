@@ -28,7 +28,7 @@ Read the [editorial charter](planning/Open_Moon_Editorial_Charter_control-01.md)
 
 The archived editorial originals retain examples from their earlier projects for provenance. The Open Moon charter defines their application here. Historical planning and seed-package status files describe their original rounds; current workspace status is recorded in the READMEs and import records.
 
-The existing [atmosphere simulator](../atmosphere/sim/sim1.py), [simulator report](../atmosphere/sim/report.md), and [training data](../training_data/) remain separate, unchanged project history. Their presence does not establish source admission or scientific validation for this ensemble. Inspect and reconcile their assumptions before use.
+The existing [atmosphere simulator](../atmosphere/sim/sim1.py), [simulator report](../atmosphere/sim/report.md), and [training data](../archive/training_data/) remain separate, unchanged project history. Their presence does not establish source admission or scientific validation for this ensemble. Inspect and reconcile their assumptions before use.
 
 ## Check the workspace
 

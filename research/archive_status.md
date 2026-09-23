@@ -10,7 +10,7 @@ This record separates accessible calculations from historical descriptions. Earl
 | September 2025 four component drafts and earlier root | Recovered through prior chat descriptions; complete manuscript files remain unlocated in this pass | Research questions and source leads, with historical scenario assumptions. No complete-source reading is claimed. |
 | July Terluna knowledge bundle | Previously located as a Project ZIP; raw-byte materialization was blocked | Not reopened or represented as read in this pass. Historical 80 kPa reference differs from the current target. |
 | September megaforest/aphotic discussion and images | Earlier archive review recovered concepts and inspected illustrations | Proposed dimensions and ecosystem arrangements, not measurements or executable validation. |
-| Legacy training data | Existing `training_data/` files | Synthetic/fictional and correction records; not empirical or simulation evidence. |
+| Legacy training data | Existing `archive/training_data/` files | Synthetic/fictional and correction records; not empirical or simulation evidence. |
 | Accepted root and companion seeds | Already committed under `ensemble/papers/` | Working paper prose. Their selection does not admit their provisional sources or validate scenarios. |
 
 ## Known conflicts retained for research

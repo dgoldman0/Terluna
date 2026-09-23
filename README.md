@@ -39,4 +39,4 @@ Use ordinary filenames and Git history for ongoing research. The imported baseli
 
 ## Historical material
 
-[Training data](training_data/README.md) are deprecated synthetic worldbuilding records, retained for provenance. They are outside the scientific evidence and model-calibration workflow. Their historical log is preserved separately; no training records have been deleted.
+[Training data](archive/training_data/README.md) are deprecated synthetic worldbuilding records, retained for provenance. They are outside the scientific evidence and model-calibration workflow. Their historical log is preserved separately; no training records have been deleted.
