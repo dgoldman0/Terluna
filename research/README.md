@@ -63,3 +63,15 @@ OPENBLAS_NUM_THREADS=1 python research/run_megaforest_wind.py
 Full generated results go to ignored `research/runs/megaforest_wind/`. Source
 ownership remains in `atmosphere/`, `climate/` and `biosphere/`; the runner stays
 in `research/`. `immersion/` is unchanged and accepts no output from this runner.
+
+## Spatial interacting-forest checkpoint
+
+[Methods and findings](forest_patch.md) extend the earlier tree screen to explicitly
+positioned forest patches, conservative spatial airflow/drag, root and crown
+interactions, and prescribed damage sequences. The [runner](run_forest_patch.py)
+compares edge shapes and matched aboveground-mass cases, with separate domain
+limits. See [compact checkpoint](results/forest_patch/checkpoint.json).
+
+This neutral steady-flow screen has no lunar wind climatology, resolved gusts or
+evolved canopy prediction. Damage fronts occur in selected cases, while final
+loss counts remain unresolved at the small-displacement boundary.

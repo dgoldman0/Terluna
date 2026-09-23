@@ -1,0 +1,42 @@
+{
+  "base_commit": "b5b8cc50914633b6e22587b6d3743108b10ad6f4",
+  "numerical_trait_calibration": "NONE; inherited and newly selected hypothetical parameters",
+  "reused_modules": [
+    {
+      "path": "atmosphere/lower_air.py",
+      "base_git_blob": "76fd915f5866dae804fac23226f22baf630edf55"
+    },
+    {
+      "path": "biosphere/megaforest_mechanics.py",
+      "base_git_blob": "969acf411e9212e1ae17e8a9c28d1ce6af9782f7"
+    }
+  ],
+  "literature": [
+    {
+      "authors": "Schelhaas et al.",
+      "year": 2007,
+      "title": "Introducing tree interactions in wind damage simulation",
+      "journal": "Ecological Modelling",
+      "volume": "207",
+      "pages": "197-209",
+      "doi": "10.1016/j.ecolmodel.2007.04.025",
+      "url": "https://www.sciencedirect.com/science/article/abs/pii/S0304380007002578",
+      "access": "Publisher abstract and available introduction/excerpts inspected; full text not admitted",
+      "use": "Motivation for separating shelter and structural support; no extracted calibration and no copied implementation"
+    },
+    {
+      "authors": "Dupont and Brunet",
+      "year": 2008,
+      "title": "Impact of forest edge shape on tree stability: a large-eddy simulation study",
+      "journal": "Forestry",
+      "volume": "81",
+      "pages": "299-315",
+      "doi": "10.1093/forestry/cpn006",
+      "url": "https://academic.oup.com/forestry/article/81/3/299/655616",
+      "access": "Publisher abstract metadata inspected; direct full-page access failed; full text not admitted",
+      "use": "Motivates future gust/edge benchmarks; no parameter calibration for the present neutral Oseen model"
+    }
+  ],
+  "full_source_manuscript_admission": "PENDING",
+  "new_model_equations": "Original reduced numerical formulation documented in forest_patch.md; hypotheses and approximation domains remain explicit"
+}
