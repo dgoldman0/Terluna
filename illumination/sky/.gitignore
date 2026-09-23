@@ -1,0 +1,7 @@
+__pycache__/
+*.py[cod]
+*.nbc
+*.nbi
+# Generated numerical caches and the clear-sky atlas product.
+work/
+data/

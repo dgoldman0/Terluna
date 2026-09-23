@@ -1,12 +1,14 @@
 # Open Moon — A month of light
 
-> **Repository layout:** this directory tracks the reproducible application source,
-> methods, third-party notices and numerical check records. The generated offline
-> HTML, `.npz` sky atlases, CSV outputs and PNG textures/screenshots are excluded by
-> `.gitignore`. They are included in the complete full-cycle distribution supplied
-> with this project; a clean checkout builds them using the commands below.
-> `SOURCE_BUNDLE_MANIFEST.json` preserves the original distribution's file hashes,
-> including its original README. `repository_import.json` records this import.
+> **Where this lives now:** this viewer is scientific visualization. It displays
+> the clear-sky atlases computed by the illumination domain's solver in
+> [illumination/sky](../../illumination/sky/) and adds illustrative display models
+> (clouds, fog, rain, water, a fixed-viewpoint cove). The generated offline HTML,
+> CSV outputs and PNG textures/screenshots are excluded by `.gitignore`; a clean
+> checkout builds them with the commands below. `SOURCE_BUNDLE_MANIFEST.json`
+> preserves the original distribution's file hashes, including its original
+> README, and `repository_import.json` records the first import (then under
+> `immersion/light-cycle/`).
 
 A self-contained 360° full-solar-cycle comparison viewer, extending the earlier
 *The long light* experiment. Open `Open_Moon_Full_Cycle.html` in a current browser.
@@ -58,7 +60,8 @@ exposure is available; it is not an eye adaptation or night-vision model.
 
 ## Actual checks
 
-- 41 unit tests pass (21 retained numerical tests plus 20 new full-cycle/data tests).
+- 41 unit tests: 21 solver tests and 10 atlas invariants in `illumination/sky/`,
+  plus 10 display-model and landscape checks in `test_viewer_data.py`.
 - Six new noon radiance comparisons use 100,000 independently traced Monte Carlo
   paths each. Selected differences range up to about 0.8%; some exceed two
   Monte Carlo standard errors. These are limited numerical comparisons, not a
@@ -71,22 +74,31 @@ exposure is available; it is not an eye adaptation or night-vision model.
   is needed. No claim of hardware-browser WebGL testing is made.
 
 The preceding study reported a global lunar energy accounting residual up to
-4.6%. This remains unresolved. Its records are retained in `validation/legacy_v1/`.
+4.6%. This remains unresolved. Its records are retained in
+`illumination/sky/validation/legacy_v1/`.
 
 ## Rebuild
 
+The atlases come first, from the illumination domain (numba required):
+
 ```sh
+cd illumination/sky
 python -m pip install -r requirements.txt
 mkdir -p work
 NUMBA_NUM_THREADS=4 OPENBLAS_NUM_THREADS=1 python calculate_full_cycle.py
+python -m unittest test_solver test_atlas -v
+```
+
+Then the viewer, from this folder:
+
+```sh
 NUMBA_NUM_THREADS=4 python make_landscape.py --width 3072
-python -m unittest test_solver test_full_cycle -v
+python -m unittest test_viewer_data -v
 python build_cycle.py
 ```
 
-To check the new noon samples: `python check_noon.py`. To run browser controls:
-`python browser_cycle_check.py` (requires Playwright and Chromium). The optional
-`egl_scene.py` / `render_preview.py` checks require Mesa EGL. The generated maps,
-geometry textures, source, methods, checks and third-party notices are included.
-Large intermediate source-field caches can be regenerated and are omitted from
-the compact source archive. No GitHub Actions workflow is involved.
+The noon Monte Carlo samples are checked in the solver folder with
+`python check_noon.py`. To run browser controls here: `python browser_cycle_check.py`
+(requires Playwright and Chromium). The optional `egl_scene.py` /
+`render_preview.py` checks require Mesa EGL. Large intermediate source-field
+caches can be regenerated and are omitted from the repository.

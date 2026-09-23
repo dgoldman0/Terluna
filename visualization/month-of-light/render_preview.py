@@ -4,7 +4,7 @@ from pathlib import Path
 import numpy as np
 from PIL import Image
 import egl_scene as E
-ROOT=Path(__file__).parent;gl=E.gl;u=C.c_uint;i=C.c_int;f=C.c_float;p=C.c_void_p
+ROOT=Path(__file__).parent;SKY=ROOT.resolve().parents[1]/'illumination'/'sky';gl=E.gl;u=C.c_uint;i=C.c_int;f=C.c_float;p=C.c_void_p
 P=E.program;gl('glUseProgram',None,[u])(P)
 vert=np.array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1],np.float32);buf=u();gl('glGenBuffers',None,[i,C.POINTER(u)])(1,C.byref(buf));gl('glBindBuffer',None,[u,u])(0x8892,buf);gl('glBufferData',None,[u,C.c_ssize_t,p,u])(0x8892,vert.nbytes,vert.ctypes.data,0x88E4);loc=gl('glGetAttribLocation',i,[u,C.c_char_p])(P,b'a');gl('glEnableVertexAttribArray',None,[u])(loc);gl('glVertexAttribPointer',None,[u,i,u,u,i,p])(loc,2,0x1406,0,0,None)
 uniformloc=gl('glGetUniformLocation',i,[u,C.c_char_p]);uf=gl('glUniform1f',None,[i,f]);ui=gl('glUniform1i',None,[i,i])
@@ -19,7 +19,7 @@ def texture(unit,target,arr,internal,format_,type_,linear=True):
  return t
 
 def run(world='moon',angle=90,weather='scattered',yaw=0,pitch=.04,ev=0,out='preview_noon.png',width=1200,height=750):
- d=np.load(ROOT/'data'/f'{world}_atlas.npz');meta=json.loads(str(d['metadata']));atm=meta['atmosphere'];rgb=d['rgb'];layers,nh,nw,_=rgb.shape;scale=np.maximum(np.max(np.abs(rgb),axis=(1,2,3))/1000,1e-20)
+ d=np.load(SKY/'data'/f'{world}_atlas.npz');meta=json.loads(str(d['metadata']));atm=meta['atmosphere'];rgb=d['rgb'];layers,nh,nw,_=rgb.shape;scale=np.maximum(np.max(np.abs(rgb),axis=(1,2,3))/1000,1e-20)
  sky=np.ones((layers,nh,nw,4),np.float16);sky[...,:3]=(rgb/scale[:,None,None,None]).astype(np.float16)
  tx=texture(0,0x8C1A,sky,0x881A,0x1908,0x140B);ui(uniformloc(P,b'sky'),0)
  md=np.zeros((layers,15,4),np.float32);md[:,0,0]=scale

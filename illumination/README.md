@@ -1,17 +1,41 @@
 # Illumination and appearance
 
-[geometry.py](geometry.py) is a verbatim convenience copy of the existing [planning diagnostic](../ensemble/planning/twilight_diagnostic.py). It calculates an angular sweep using a 29.53-day period, an idealized equatorial horizon, a six-degree interval and a nominal solar diameter.
+What light reaches the surface of an Open Moon and what its sky looks like: the
+geometry of the Sun and Earth, spectral sky radiance and surface irradiance, and
+(still to come) earthlight, starlight and airglow.
+
+| Material | What it computes | Condition |
+|---|---|---|
+| [sky/](sky/) | Spherical, spectral, scalar multiple-scattering sky radiance and surface irradiance for Earth and two Open Moon optical profiles, Sun from −90° to +90° | Conditional on prescribed exponential optical profiles. Numerically checked (solver tests, atlas invariants, six noon Monte Carlo spot checks); a lunar global energy residual of up to 4.6% is open |
+| [geometry.py](geometry.py) | Angular sweep with a 29.53-day period, idealized equatorial horizon and a six-degree interval | Simple angular arithmetic |
+
+`geometry.py` is a verbatim copy of the [planning diagnostic](../ensemble/planning/twilight_diagnostic.py);
+`research/check.py` verifies the copy byte-for-byte. Roughly 11.8 hours through
+six degrees is not a brightness curve or a universal sunset duration.
 
 ```sh
 python illumination/geometry.py
 ```
 
-**Condition:** simple angular arithmetic. Approximately 11.8 hours through six degrees is not a brightness curve or a universal sunset duration. A solar disk crossing is a different interval. No lunar twilight spectrum, sky color, multiple scattering, terrain horizon or ephemeris calculation has been implemented here.
+## Products other work consumes
+
+The sky solver's atlases (`sky/data/*_atlas.npz`, generated, not committed) are
+this domain's main product. The [month-of-light viewer](../visualization/month-of-light/)
+displays them, and the immersion bakes them into its sky. Consumers read the
+atlases; they do not import the solver.
 
 ## Next work
 
-Compute location/altitude-dependent Sun-Earth geometry, horizon obstruction and shadows. Then apply a stated atmosphere and spectrum with appropriate spherical transmission/scattering and refraction. Benchmark low-Sun approximations before using them to describe the sky. Atmospheric and cultural interpretations belong to separate tests.
+- Site geometry: positions of the Sun, Earth (with phase and libration) and stars
+  for a given selenographic site; horizon obstruction and shadows.
+- Earthlight as a light source. On the near side a nearly full Earth lights the
+  lunar night; the current solver has the Sun as its only source.
+- Tie the optical profiles to the atmosphere domain's solved column instead of the
+  exponential proxies.
+- Benchmark low-Sun and night radiance. The libRadtran documentation
+  (https://www.libradtran.org/doku.php?id=basic_usage) is a method lead, not an
+  installed dependency.
 
-The libRadtran documentation at https://www.libradtran.org/doku.php?id=basic_usage is a method lead from the prior audit, not an installed dependency. Original NASA/USNO source admission remains as recorded in the immutable [planning reference manifest](../ensemble/planning/planning_references/manifest.json).
-
-The stand-alone copy is checked against the planning original; deliberate later development should replace this duplication with an explicit reviewed implementation. See [status](../research/status.json).
+Original NASA/USNO source admission remains as recorded in the immutable
+[planning reference manifest](../ensemble/planning/planning_references/manifest.json).
+See [status](../research/status.json).

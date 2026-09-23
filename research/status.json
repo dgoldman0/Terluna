@@ -58,16 +58,20 @@
     },
     {
       "topic": "illumination",
-      "condition": "angular_diagnostic_only",
+      "condition": "conditional_clear_sky_solver",
       "material": [
-        "../illumination/geometry.py"
+        "../illumination/geometry.py",
+        "../illumination/sky/solver.py",
+        "../illumination/sky/METHODS.md"
       ],
       "unresolved": [
-        "ephemerides and terrain horizon",
-        "spherical scattering/refraction",
-        "brightness and color"
+        "ephemerides, libration and terrain horizon",
+        "refraction and polarization",
+        "earthlight, starlight and airglow as light sources",
+        "optical profiles tied to the solved atmospheric column",
+        "lunar global energy residual up to 4.6%"
       ],
-      "next_session_task": "Compute local geometry, then test the radiation model against appropriate low-Sun benchmarks."
+      "next_session_task": "Add Sun/Earth/star geometry for a site and earthlight as a source, then test low-Sun and night radiance against appropriate benchmarks."
     },
     {
       "topic": "biosphere",

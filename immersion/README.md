@@ -9,9 +9,13 @@ feasibility research.
 
 ## Experiences
 
-- [A month of light](light-cycle/README.md): a fixed-viewpoint, full-solar-cycle
-  Earth/Open Moon comparison with prescribed weather conditions. Its source
-  generates a self-contained, offline browser viewer.
+- [Shoreline](light-cycle/shoreline/README.md): a walkable development scene on an
+  authored cove, with the clear-sky atlas, terrain, vegetation and water.
+
+The fixed-viewpoint "month of light" sky viewer is scientific visualization of
+the illumination domain's clear-sky atlases; it now lives in
+[visualization/month-of-light](../visualization/month-of-light/), and its solver
+in [illumination/sky](../illumination/sky/).
 
 ## Development
 

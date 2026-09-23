@@ -1,34 +1,11 @@
 # Full-cycle methods and interpretation
 
-## Atmospheric calculation
+## Clear-sky input
 
-The underlying scalar spherical optical solver is the first viewer's solver,
-with its ground scattering-order increment criterion extended from the interval
-−24° to +12° through **+90°**. The original algorithm and full profile definitions
-are documented in `validation/legacy_v1/METHODS_v1.md`. This document records the
-extension and new display components.
-
-Earth radius: 6,371 km; molecular density scale height: 8 km; surface density
-multiplier: 1. Lunar radius: 1,737.4 km; scale height: 48.428 km; density multiplier:
-1.2. The exponential profiles are chosen optical proxies. They are not the
-project's solved variable-gravity thermal/chemical atmospheric columns. The
-neutral ground albedo is 0.1; the source is the unfiltered reference solar
-spectrum. The Moon has either a stretched 300 DU ozone profile or zero ozone.
-
-Fields were recomputed on the standard spatial/angular source grid and 22
-wavelengths, 380–800 nm at 20 nm spacing. Earth stopped after 14 scattering orders;
-both lunar cases after 55. The last-order increment remains a convergence
-indicator, rather than a certified bound on the sum of all omitted orders.
-The calculated panorama grid is now **174 Sun elevations from −90° to +90°**, with
-81 quadratically spaced view elevations and 65 azimuths over the symmetric half
-sky. Above +12°, the output angle spacing is 1° through 30°, then 2° through 90°.
-The underlying diffuse-source grid remains coarser away from twilight, especially
-below −35°. Raw signed linear RGB and its metadata remain in the NPZ archives.
-
-Cloud illumination inputs are sampled from the same optical source field at a
-prescribed altitude of 2.5 km. They provide a colour and intensity reference for
-the visual cloud layer; this does not turn the weather renderer into a coupled
-cloud/molecular transport solution.
+The sky radiance, irradiance and cloud-altitude light come from the illumination
+domain's clear-sky solver. Its method, optical profiles and numerical checks are
+documented in [illumination/sky/METHODS.md](../../illumination/sky/METHODS.md); this
+viewer displays those atlases and adds the display models below.
 
 ## Full-cycle geometry and clocks
 
@@ -139,8 +116,9 @@ exploratory. Neither the viewer's display visibility nor an automatically expose
 night image establishes human visual acuity under those conditions.
 
 The FP16 GPU sky packing retains a per-frame scale and records quantization
-checks. The physical archive is float32 RGB with the original source metadata.
-The previous up-to-4.6% global lunar energy accounting discrepancy remains open.
-41 unit tests, six new independent noon ray checks, browser controls and exact
-Mesa shader renders are documented in `validation/`. These address selected
-numerical and implementation properties, not empirical lunar weather validity.
+checks (`validation/packing_checks.json`). `test_viewer_data.py` checks the
+display-model identities, clocks and landscape assets; browser controls and exact
+Mesa shader renders are recorded in `validation/`. The solver's own tests and
+noon Monte Carlo checks live with it in `illumination/sky/`. These address
+selected numerical and implementation properties, not empirical lunar weather
+validity.

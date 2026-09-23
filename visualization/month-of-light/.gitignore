@@ -1,11 +1,9 @@
-# Generated runtime assets and numerical caches.
+# Generated viewer, landscape textures, tables and screenshots.
 __pycache__/
 *.py[cod]
 *.nbc
 *.nbi
-work/
 Open_Moon_Full_Cycle.html
-data/*_atlas.npz
 data/*.csv
 data/landscape/*.png
 validation/*.png
