@@ -8,7 +8,7 @@
 import landscape from './landscape.js';
 import { SHELTER, WAYPOINTS, pathDistance, roofMask } from './cove-sites.js';
 import { EPISODE, ledgerAt, weatherAt, windDistance } from './cove-weather.js';
-import { plan } from './cove-flora.js';
+import { plan, treeAt, canopyCover, TREE_LATTICE } from './cove-flora.js';
 
 export default {
   id: 'development-cove',
@@ -20,4 +20,6 @@ export default {
   pathDistance,
   weather: { EPISODE, at: weatherAt, windDistance, ledgerAt },
   flora: plan,
+  // The same planting rule, cell by cell, for the far field beyond the detailed plan.
+  vegetation: { lattice: TREE_LATTICE, treeAt, cover: canopyCover },
 };

@@ -4,6 +4,76 @@
 import C from '../engine/core.js';
 import L from './landscape.js';
 import { pathDistance, roofMask } from './cove-sites.js';
+
+/* Trees stand on an 8 m lattice, at most one per cell. The detailed plan below
+ * builds the cells in `detailed` as full tree models; the engine's far field draws
+ * every other cell with the same rule (treeAt), out toward the horizon. */
+export const TREE_LATTICE = {
+  spacing: 8,
+  originX: 0,
+  originZ: 7,
+  detailed: { i0: -15, i1: 17, j0: 0, j1: 17 },
+};
+// Outside the landscape's field grid the habitat rule never gives a tree probability
+// above 0.45 * (1 - 0.42 * 0.8) + 0.025 (woodland under the default exposure, no
+// wet margin), so a cell whose acceptance draw exceeds it is rejected unsampled.
+const OPEN_COUNTRY_MAX_PROBABILITY = 0.45 * (1 - 0.42 * 0.8) + 0.025;
+
+// Mean crown area of the rule's trees (m²): family 1 inland, 76% mature at 7.7-12.2 m
+// and 24% juvenile at 2.1-5.2 m, crown radius 0.34 of height.
+const MEAN_CROWN_AREA = Math.PI * 0.34 ** 2 * (0.76 * 100.7 + 0.24 * 14.1);
+
+/** Expected canopy cover (fraction of ground under crowns) of the tree rule, from a habitat
+ * classification (landscape.classify) at surface height h and slope. */
+export function canopyCover(f, h, slope) {
+  if (h < 1.2 || slope > 0.52 || f.soilDepth < 0.16) return 0;
+  const p = 0.45 * f.community[1] + 0.25 * f.community[2] + 0.025 * f.community[0];
+  return Math.min(1, (p * MEAN_CROWN_AREA) / (TREE_LATTICE.spacing * TREE_LATTICE.spacing));
+}
+
+/** The tree in lattice cell (i, j), or null. Deterministic per cell: the rule reads the
+ * habitat before planting, as the detailed plan does, whatever canopy is set. */
+export function treeAt(i, j) {
+  const r = C.rng(Math.floor(L.hash(i, j, 873) * 4294967295)),
+    x = (i + (r() - 0.5) * 0.8) * 8,
+    z = 7 + (j + (r() - 0.5) * 0.8) * 8,
+    accept = r();
+  if (accept > OPEN_COUNTRY_MAX_PROBABILITY && !L.gridCoverage(x, z)) return null;
+  if (L.height(x, z) < 1.2) return null;
+  const f = L.sample(x, z, { canopy: false });
+  if (
+    pathDistance(x, z) < 3.7 ||
+    roofMask(x, z, 4) ||
+    f.elevation < 1.2 ||
+    f.slope > 0.52 ||
+    f.soilDepth < 0.16
+  )
+    return null;
+  const probability = 0.45 * f.community[1] + 0.25 * f.community[2] + 0.025 * f.community[0];
+  if (accept > probability) return null;
+  const family = f.moisture > 0.45 ? 2 : f.exposure > 0.72 && f.elevation < 5 ? 0 : 1;
+  const mature = r() > 0.24,
+    h = mature ? (family === 0 ? 5.5 : 7.7) + r() * 4.5 : 2.1 + r() * 3.1;
+  return {
+    id: `tree:${i}:${j}`,
+    x,
+    z,
+    y: C.groundHeight(x, z),
+    height: h,
+    family,
+    ageClass: mature ? 'mature' : 'juvenile',
+    crownRadius: h * (family === 1 ? 0.34 : 0.39),
+    canopyOpacity: family === 2 ? 0.85 : 0.8,
+    seed: Math.floor(r() * 4294967295),
+    habitat: {
+      soilDepth: f.soilDepth,
+      moisture: f.moisture,
+      exposure: f.exposure,
+      suitability: probability,
+    },
+  };
+}
+
 export function plan() {
   L.initialize();
   L.setCanopies([]);
@@ -12,44 +82,11 @@ export function plan() {
     gravel = [],
     tufts = [],
     understory = [];
-  for (let j = 0; j < 18; j++)
-    for (let i = -15; i <= 17; i++) {
-      const id = `tree:${i}:${j}`,
-        r = C.rng(Math.floor(L.hash(i, j, 873) * 4294967295)),
-        x = (i + (r() - 0.5) * 0.8) * 8,
-        z = 7 + (j + (r() - 0.5) * 0.8) * 8,
-        f = L.sample(x, z);
-      if (
-        pathDistance(x, z) < 3.7 ||
-        roofMask(x, z, 4) ||
-        f.elevation < 1.2 ||
-        f.slope > 0.52 ||
-        f.soilDepth < 0.16
-      )
-        continue;
-      const probability = 0.45 * f.community[1] + 0.25 * f.community[2] + 0.025 * f.community[0];
-      if (r() > probability) continue;
-      const family = f.moisture > 0.45 ? 2 : f.exposure > 0.72 && f.elevation < 5 ? 0 : 1;
-      const mature = r() > 0.24,
-        h = mature ? (family === 0 ? 5.5 : 7.7) + r() * 4.5 : 2.1 + r() * 3.1;
-      trees.push({
-        id,
-        x,
-        z,
-        y: C.groundHeight(x, z),
-        height: h,
-        family,
-        ageClass: mature ? 'mature' : 'juvenile',
-        crownRadius: h * (family === 1 ? 0.34 : 0.39),
-        canopyOpacity: family === 2 ? 0.85 : 0.8,
-        seed: Math.floor(r() * 4294967295),
-        habitat: {
-          soilDepth: f.soilDepth,
-          moisture: f.moisture,
-          exposure: f.exposure,
-          suitability: probability,
-        },
-      });
+  const { i0, i1, j0, j1 } = TREE_LATTICE.detailed;
+  for (let j = j0; j <= j1; j++)
+    for (let i = i0; i <= i1; i++) {
+      const tree = treeAt(i, j);
+      if (tree) trees.push(tree);
     }
   // Two managed edge trees are part of the authored planting scenario. Their
   // improved rooting zones occur in the shared substrate/material field.

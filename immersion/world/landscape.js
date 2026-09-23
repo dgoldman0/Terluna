@@ -419,7 +419,9 @@ function classify(x, z, h, s, wet, route, cover, ex) {
   const sparse = viable * rock * (1 - 0.65 * cover);
   return { weights, soilDepth, plantedSoil, community: [grass, woodland, margin, sparse] };
 }
-function sample(x, z) {
+/** Habitat at (x, z). With { canopy: false } it ignores the planted canopy (setCanopies),
+ * describing the ground before planting. */
+function sample(x, z, { canopy: withCanopy = true } = {}) {
   initialize();
   const h = height(x, z),
     g = gradient(x, z, 1),
@@ -427,7 +429,7 @@ function sample(x, z) {
     coverage = gridCoverage(x, z);
   const wet = mix(0.24, gridSample(data.moisture, x, z), coverage),
     route = smooth(100, 2200, gridSample(data.hydrology.accumulation, x, z)) * coverage;
-  const canopy = gridSample(data.canopy, x, z) * coverage,
+  const canopy = withCanopy ? gridSample(data.canopy, x, z) * coverage : 0,
     ex = mix(0.8, gridSample(data.exposure, x, z), coverage);
   const f = classify(x, z, h, s, wet, route, canopy, ex);
   f.weights = f.weights.map((v, k) => mix(v, gridChannel(data.material, x, z, k), coverage));
