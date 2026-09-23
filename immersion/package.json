@@ -12,7 +12,7 @@
     "prebuild": "npm run bake",
     "build": "vite build",
     "preview": "vite preview",
-    "pretest": "npm run bake:columns && npm run bake:sky",
+    "pretest": "npm run bake",
     "test": "node --test --test-concurrency=1 tests/unit/",
     "format": "prettier --write engine world experiences bake tests/unit",
     "bake:sky": "python3 bake/sky_bodies.py"
