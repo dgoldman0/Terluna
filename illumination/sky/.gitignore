@@ -5,3 +5,4 @@ __pycache__/
 # Generated numerical caches and the clear-sky atlas product.
 work/
 data/
+products/
