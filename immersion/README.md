@@ -8,8 +8,8 @@ research domains own the science, and the experience reads their results.
 
 | Folder | Holds |
 |---|---|
-| [engine/](engine/) | Runtime systems any world can use: sky, Earth, stars and clouds drawn from baked products, clipmap terrain and surface materials, sea, rain and surface water, procedural vegetation geometry, audio. The engine never imports a world; it reads the active one from `OM.world`. |
-| [world/](world/) | World definitions. [cove.js](world/cove.js) is the development cove: its landscape field, viewpoints, rain shelter and path, authored weather episode, and planting rules, all placeholders. |
+| [engine/](engine/) | Runtime systems any world can use: sky, Earth, stars and clouds drawn from baked products, clipmap terrain and surface materials, sea, rain and surface water, procedural vegetation geometry, the far forest drawn as impostors, audio. The engine never imports a world; it reads the active one from `OM.world`. |
+| [world/](world/) | World definitions. [cove.js](world/cove.js) is the development cove: its landscape field, viewpoints, rain shelter and path, authored weather episode, and planting rules, all placeholders. `cove-forest.worker.js` places its distant trees off the main thread. |
 | [experiences/](experiences/) | Entry points: [shoreline](experiences/shoreline/) (the walkable development scene) and [renderer-lab](experiences/renderer-lab/) (the WebGPU/TSL experiment) |
 | [bake/](bake/) | Turns domain products into runtime assets: `sky_atlas.py` packs the [illumination/sky](../illumination/sky/) atlases into `assets/sky/`; `columns.mjs` packs the atmosphere domain's column set; `sky_bodies.py` bakes the site ephemeris, the bright stars and the Earth-disk calibration; `surfaces.py` generates the surface textures |
 | [assets/](assets/) | Baked runtime assets and their manifests |
@@ -50,6 +50,26 @@ needs the numba sky solve. After the illumination atlases change, re-bake it wit
   episode were authored for development. They make no claim about what Open Moon
   environments will be. Specific environments should come from the biology,
   ecology, geology and hydrology research as it matures.
+
+## The land to the horizon
+
+- **Trees** stand on an 8 m lattice by the world's planting rule (for the cove, its
+  authored habitat rule: artistic placeholder). The cells around the viewpoints are
+  built as full tree models; every other cell within range is drawn by
+  `engine/forest.js` as a camera-facing impostor card. The cards are images of the
+  same tree models from eight directions, with a random yaw per tree, baked on the
+  GPU at start-up (`engine/impostors.js`). A worker places the trees, nearest
+  first, so distant woodland fills in over a few seconds without stalling frames.
+- **Range** follows the quality setting: 1.8 km (economy), 3 km (balanced) or
+  4.5 km (high). Cards thin out toward the limit. Beyond it the terrain shader
+  carries the woodland: the world's expected canopy cover per terrain vertex, seen
+  along the view ray (more ground hidden at grazing angles). Its strength and
+  colour were calibrated against the cards' mean colour at the same distances.
+- **Perceptual conventions:** the cards and the far woodland shading stand in for
+  trees too small to model individually. Crown occlusion and rounded crown normals
+  are baked into the cards; distant trees cast no shadows. On a small world the
+  horizon is close (about 2.4 km for a standing person, 8 km from the overlook),
+  so higher ground beyond it still shows.
 
 ## The sky
 

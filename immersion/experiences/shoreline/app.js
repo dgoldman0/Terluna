@@ -3,6 +3,7 @@ import C from '../../engine/core.js';
 import { columns } from '../../engine/columns.js';
 import { Stars } from '../../engine/stars.js';
 import { adapt, targetExposure } from '../../engine/exposure.js';
+import { Forest } from '../../engine/forest.js';
 import {
   LEGACY_MOON_GRAVITY,
   STANDARD_GRAVITY,
@@ -72,6 +73,16 @@ OM.boot = async function (T) {
     water = OM.createWater(T, scene, atmosphere, renderer, geography.fieldUniforms),
     rain = OM.createRain(T, scene, atmosphere),
     audio = new OM.Soundscape();
+  // Trees beyond the detailed planting, toward the horizon (engine/forest.js).
+  $('boot-status').textContent = 'Drawing the distant trees…';
+  const forest = OM.world.vegetation
+    ? new Forest(T, scene, atmosphere, geography, renderer, {
+        range: 3000,
+        worker: new Worker(new URL('../../world/cove-forest.worker.js', import.meta.url), {
+          type: 'module',
+        }),
+      })
+    : null;
   const sun = new T.DirectionalLight(0xffffff, 1);
   sun.castShadow = true;
   sun.shadow.mapSize.set(2048, 2048);
@@ -418,6 +429,7 @@ OM.boot = async function (T) {
       const oldPose = camera.position.toArray().concat([s.yaw, s.pitch, s.jumpY]);
       tickModel(dt);
       move(dt);
+      if (forest?.update(camera.position, 3)) s.needRender = true;
       const changed = camera.position
         .toArray()
         .concat([s.yaw, s.pitch, s.jumpY])
@@ -475,6 +487,7 @@ OM.boot = async function (T) {
           : Math.min(1.5, devicePixelRatio);
     renderer.setPixelRatio(pix);
     atmosphere.uniforms.uSteps.value = q === 'high' ? 24 : q === 'economy' ? 8 : 14;
+    forest?.setRange(q === 'high' ? 4500 : q === 'economy' ? 1800 : 3000);
     sun.shadow.mapSize.set(
       q === 'high' ? 4096 : q === 'economy' ? 1024 : 2048,
       q === 'high' ? 4096 : q === 'economy' ? 1024 : 2048,
@@ -679,6 +692,7 @@ OM.boot = async function (T) {
       graphicsBackend: { ...OM.graphicsBackend },
       viewport: [innerWidth, innerHeight],
       pixelRatio: renderer.getPixelRatio(),
+      forest: forest?.stats ?? null,
     };
   }
 
@@ -815,6 +829,8 @@ OM.boot = async function (T) {
   setWeather(0, 'clear');
   world('moon');
   quality(softwareRenderer || innerWidth < 700 ? 'economy' : 'balanced');
+  // The nearest distant trees are ready for the first frame; the rest stream in.
+  forest?.update(camera.position, 250);
   $('quality').value = s.quality;
   updateHUD();
   lights();
@@ -830,6 +846,7 @@ OM.boot = async function (T) {
   function renderOnce() {
     s.frameDt = 0;
     move(0);
+    forest?.flush(camera.position);
     lights();
     water.reflection(camera, sceneStamp, true);
     renderer.render(scene, camera);
@@ -905,6 +922,7 @@ OM.boot = async function (T) {
     renderer,
     atmosphere,
     geography,
+    forest,
     water,
     rain,
     audio,

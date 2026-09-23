@@ -14,6 +14,10 @@ to supply them.
 - **The lunar sky:** Sun, Earth and stars from the illumination domain's site
   ephemeris, Earth's phases and libration, earthlight on the land and in the sky,
   and 9,096 catalogue stars. Adapted exposure makes earthlit nights visible.
+- **Vegetation to the horizon:** a world gives its planting rule per lattice cell;
+  the engine draws cells beyond the detailed planting as eight-view impostors
+  (streamed from a worker) and carries woodland on the distant terrain beyond
+  that. The column study moved out to `visualization/atmospheric-columns`.
 - **Engine and world apart:** the cove's landscape, sites, shelter, path, weather
   episode and planting rules form one world object (`world/cove.js`) that the
   experience registers; the engine reads it and never imports it.
@@ -23,16 +27,21 @@ to supply them.
 1. **An explicit renderer interface.** Replace the transitional `OM` registry with
    direct imports and a material-factory interface that the WebGL path and the
    WebGPU/TSL lab both implement.
-2. **Scale.** Stream terrain tiles from elevation products; instance vegetation
-   with levels of detail and impostors, so forests of tall trees reach the
-   horizon; add atmospheric perspective over tens of kilometres.
+2. **Scale.** Stream terrain tiles from elevation products (geography has none
+   yet). Add a middle level of 3D trees so that walking out of the detailed
+   planting does not bring impostor cards close; let distant trees darken the
+   ground with their shade; take the aerial-perspective extinction from the
+   illumination domain instead of the engine's band constants.
 3. **Night and time.** Mesopic colour at low light, a continuous multi-month
    clock (so libration and the stars do not jump at the month boundary), and
    earthlit sky glow with earthlight's own spectrum once illumination computes it.
 4. **Low gravity.** Motion and physics that feel lunar: long jumps and falls,
    gliding, slow rain and waves.
 5. **Sound.** Ambience that follows wind, water, rain and distance.
-6. **Performance.** Frame times measured on real GPUs, with budgets per system.
+6. **Performance.** Frame times measured on real GPUs, with budgets per system. On
+   an Intel UHD (TGL GT1) iGPU the shoreline takes roughly 85–150 ms a frame at
+   1280×720 before the far forest (which adds 0–17%); terrain shading is the
+   largest share, then vegetation, then the sky.
 
 ## World system (fed by the domains)
 

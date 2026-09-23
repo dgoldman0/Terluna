@@ -2,7 +2,8 @@
 
 The walkable development scene: an authored cove with clipmap terrain out to about
 16 km, 173 procedurally built trees, rocks and ground cover placed by habitat
-rules, a sea with lunar-gravity waves, rain and surface water, the clear-sky
+rules, the same rule's woodland out to the horizon as impostor cards and shaded
+terrain, a sea with lunar-gravity waves, rain and surface water, the clear-sky
 atlas, and clouds drawn from atmospheric column soundings. It exists to develop
 and test the engine. Its landscape and ecology are placeholders, not proposals
 for an Open Moon shore.

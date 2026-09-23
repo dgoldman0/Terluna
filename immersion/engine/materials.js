@@ -64,13 +64,15 @@ OM.createFieldUniforms = function (T, water) {
     uPondLevels: { value: texture(new Float32Array(4), 1) },
     uPondBounds: { value: new T.Vector4(0, 0, 1, 1) },
     uLandscapeDebug: { value: 0 },
+    // The far forest's range; beyond it the terrain carries the woodland (0 = none).
+    uForestFar: { value: 0 },
   };
   return uniforms;
 };
 OM.FIELD_GLSL = `
 uniform sampler2D uMaterialFields,uEnvironmentFields,uSurfaceState,uPondLevels;
 uniform highp sampler2DArray uSurfaceAlbedo,uSurfacePacked;
-uniform vec4 uFieldBounds,uStateBounds,uPondBounds;uniform float uLandscapeDebug;
+uniform vec4 uFieldBounds,uStateBounds,uPondBounds;uniform float uLandscapeDebug,uForestFar;
 vec2 omGridUV(vec2 p,vec4 bounds){return ((p-bounds.xy)/bounds.z+.5)/bounds.w;}
 float omGridInside(vec2 p,vec4 b){vec2 q=(p-b.xy)/b.z;vec2 a=smoothstep(vec2(0),vec2(6),q),c=1.-smoothstep(vec2(b.w-7.),vec2(b.w-1.),q);return a.x*a.y*c.x*c.y;}
 vec4 omEnvironment(vec2 p){return texture2D(uEnvironmentFields,omGridUV(p,uFieldBounds));}
@@ -136,6 +138,15 @@ OM.material = function (T, atm, state, kind, options = {}) {
    float basinWet=pondHead.a*omGridInside(p,uPondBounds)*(1.-smoothstep(-.001,.025,elevation-pondHead.r));
    float spatialWet=max(max(surfaceState.r,basinWet),dampContact),soilWet=surfaceState.g;
    albedo*=mix(1.,.66,soilWet*(w.a+w.r*.65));
+   // Beyond the impostor range, woodland as seen along the view ray: crowns (side area
+   // 1.6 x their cover) hide more ground at grazing angles. Calibrated against the
+   // impostor cards' mean colour at the same distances; a display approximation.
+   float farWood=uForestFar>0.?smoothstep(uForestFar*.78,uForestFar*.98,length(p-cameraPosition.xz)):0.;
+   if(farWood>0.&&vOMCanopy>0.){vec3 wv=normalize(vOMWorld-cameraPosition),wn=normalize(cross(dFdx(vOMWorld),dFdy(vOMWorld)));
+    float seen=1.-exp(-1.6*-log(1.-min(.95,vOMCanopy))/max(.02,abs(dot(wv,wn))));
+    float resolved=1.-smoothstep(1.5,6.,max(length(dFdx(p)),length(dFdy(p))));
+    seen*=mix(1.,.55+.9*omNoise2(p*.16),resolved);
+    albedo=mix(albedo,vec3(.051,.070,.012)*(.85+.3*omNoise2(p*.03)),clamp(seen*farWood,0.,1.));}
    diffuseColor.rgb*=albedo;vec3 microGradient=vec3(microSlope.x,0,microSlope.y)*.72*(1.-smoothstep(.035,.25,max(length(dFdx(p)),length(dFdy(p)))));
   `;
     else if (kind === 'rock')

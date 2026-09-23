@@ -96,7 +96,11 @@ class TerrainSystem {
       0,
       0.8,
     );
-    val = { h, nx: nx / norm, ny: 1 / norm, nz: nz / norm, weights: f.weights };
+    // Expected canopy cover of the world's vegetation, for distant woodland shading.
+    const canopy =
+      OM.world.vegetation?.cover?.(f, h + C.curvatureSag(x, z, this.world), Math.hypot(g.x, g.z)) ??
+      0;
+    val = { h, nx: nx / norm, ny: 1 / norm, nz: nz / norm, weights: f.weights, canopy };
     entry.cache.set(key + level / 32, val);
     this.heightEvaluations++;
     return val;
@@ -144,7 +148,8 @@ class TerrainSystem {
       entry.originKey = originKey;
       const p = geo.attributes.position.array,
         normal = geo.attributes.normal.array,
-        weights = geo.attributes.omWeights.array;
+        weights = geo.attributes.omWeights.array,
+        canopy = geo.attributes.omCanopy.array;
       let minY = Infinity,
         maxY = -Infinity;
       if (moved) {
@@ -169,6 +174,7 @@ class TerrainSystem {
             p[k * 3 + 2] = wz;
             minY = Math.min(minY, p[k * 3 + 1]);
             maxY = Math.max(maxY, p[k * 3 + 1]);
+            canopy[k] = a.canopy;
             if (alpha === 0) {
               normal[k * 3] = a.nx;
               normal[k * 3 + 1] = a.ny;
@@ -233,7 +239,7 @@ class TerrainSystem {
       geo.setDrawRange(0, topology.length);
       geo.index.needsUpdate = true;
       if (moved) {
-        for (const name of ['position', 'normal', 'omWeights'])
+        for (const name of ['position', 'normal', 'omWeights', 'omCanopy'])
           geo.attributes[name].needsUpdate = true;
         if (!geo.boundingBox) geo.boundingBox = new this.T.Box3();
         if (!geo.boundingSphere) geo.boundingSphere = new this.T.Sphere();
