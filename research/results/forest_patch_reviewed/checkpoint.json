@@ -1,0 +1,176 @@
+{
+  "base_commit": "b5b8cc50914633b6e22587b6d3743108b10ad6f4",
+  "flow_cases": 13,
+  "structural_cases": 17,
+  "individual_records": 827,
+  "max_flow_momentum_residual": 1.2670030772606769e-05,
+  "max_force_exchange_residual": 1.6035409027008225e-15,
+  "max_structural_force_balance_residual": 8.959219421092854e-12,
+  "cascades": [
+    {
+      "shape": "flat",
+      "support": "none",
+      "status": "DOMAIN_CENSORED",
+      "events": 0,
+      "standing": 49
+    },
+    {
+      "shape": "flat",
+      "support": "contact",
+      "status": "DOMAIN_CENSORED",
+      "events": 0,
+      "standing": 49
+    },
+    {
+      "shape": "dome",
+      "support": "none",
+      "status": "DOMAIN_CENSORED",
+      "events": 1,
+      "standing": 47
+    }
+  ],
+  "scientific_status": "UNCALIBRATED_NEUTRAL_STEADY_SPATIAL_REQUIREMENTS_SCREEN",
+  "evolution": "not_implemented",
+  "gusts": "not_implemented",
+  "immersion": "unchanged",
+  "python": "3.13.5",
+  "stage": "SPATIAL_NEUTRAL_FLOW_COUPLED_FOREST_PATCH_AND_DAMAGE_SCREEN",
+  "air": "Inherited default LowerAir; 121590 Pa, 288 K, 17.5 percent O2 mole fraction, dry prescribed hydrostatics",
+  "main_patch": {
+    "planting_positions": 49,
+    "spacing_m": 90.0,
+    "reference_height_m": 300.0,
+    "planted_width_m": 630.0,
+    "planted_width_in_reference_heights": 2.1,
+    "large_homogeneous_interior": "NOT_ESTABLISHED"
+  },
+  "longer_patch": {
+    "individuals": 125,
+    "positions": "25 by 5",
+    "planted_fetch_m": 2250.0,
+    "lateral_bypass": "allowed"
+  },
+  "edge_root_adaptation": [
+    {
+      "label": "allometric_roots",
+      "max_root_utilization": 0.7263488373519772,
+      "most_loaded_root": "t00-00",
+      "summed_root_plate_volume_m3": 549850.7984319904
+    },
+    {
+      "label": "retained_edge_root_size",
+      "max_root_utilization": 0.5993350794785043,
+      "most_loaded_root": "t01-01",
+      "summed_root_plate_volume_m3": 611512.8296456633
+    }
+  ],
+  "matching_limit": "Equal aboveground specified tissue/substrate mass only; water, root tissue, connections and total resource costs excluded",
+  "damage_step_sensitivity": [
+    {
+      "wind_increment_m_s": 1.0,
+      "damage_rounds": 3,
+      "stopping_status": "DOMAIN_CENSORED",
+      "standing_at_stop": 30,
+      "remaining_tree_interpretation": "UNRESOLVED; not final survivors"
+    },
+    {
+      "wind_increment_m_s": 0.25,
+      "damage_rounds": 10,
+      "stopping_status": "DOMAIN_CENSORED",
+      "standing_at_stop": 9,
+      "remaining_tree_interpretation": "UNRESOLVED; not final survivors"
+    }
+  ],
+  "spatial_sensitivity": [
+    {
+      "label": "coarse",
+      "max_root_utilization": 0.6535562247599499,
+      "reservoir_departure_fraction": 0.1381262415819032
+    },
+    {
+      "label": "base",
+      "max_root_utilization": 0.6421495671881254,
+      "reservoir_departure_fraction": 0.13749705724539057
+    },
+    {
+      "label": "fine",
+      "max_root_utilization": 0.6537980029267372,
+      "reservoir_departure_fraction": 0.1338299246988158
+    },
+    {
+      "label": "wide_box",
+      "max_root_utilization": 0.6674314639299859,
+      "reservoir_departure_fraction": 0.0839108732695161
+    },
+    {
+      "label": "high_lid",
+      "max_root_utilization": 0.6418627024167513,
+      "reservoir_departure_fraction": 0.13738921810114293
+    },
+    {
+      "label": "low_mixing",
+      "max_root_utilization": 0.6323871249814752,
+      "reservoir_departure_fraction": 0.15591565834206772
+    },
+    {
+      "label": "high_mixing",
+      "max_root_utilization": 0.6574659851028256,
+      "reservoir_departure_fraction": 0.11666534162285028
+    }
+  ],
+  "checks": {
+    "focused_tests": {
+      "status": "PASS",
+      "new_tests": 32,
+      "unchanged_earlier_tests": 25,
+      "total": 57,
+      "command": "OPENBLAS_NUM_THREADS=1 python -m unittest discover -s tests -p 'test*forest*.py' -v"
+    },
+    "base_case_reproduction": {
+      "status": "PASS",
+      "repeated_fresh_flow": true,
+      "velocity_max_abs_difference": 0.0,
+      "force_max_abs_difference_n": 0.0,
+      "all_cases_repeated": "NO"
+    },
+    "prior_checkpoint_integrity": {
+      "status": "PASS",
+      "unchanged_existing_files_checked": 9,
+      "exception": "research/README.md has one appended section"
+    },
+    "full_repository_regression": {
+      "status": "NOT_RUN",
+      "reason": "Only the scoped earlier checkpoint is locally available; historical baseline/protection tree and input data absent"
+    },
+    "empirical_validation": {
+      "status": "NOT_ESTABLISHED"
+    },
+    "gust_climatology": {
+      "status": "NOT_IMPLEMENTED"
+    },
+    "growth_evolution": {
+      "status": "NOT_IMPLEMENTED"
+    },
+    "ultimate_damage_count": {
+      "status": "UNRESOLVED",
+      "reason": "Small-displacement censoring and large increment dependence"
+    },
+    "immersion": {
+      "changes": "NONE",
+      "base_subtree_sha": "a45de16938b37ac833bb5690884f21ef26726841",
+      "new_outputs_under_immersion": false
+    }
+  },
+  "publication": {
+    "status": "NOT_PUBLISHED",
+    "reason": "This turn exposes read-only GitHub actions; shell GitHub DNS lookup failed",
+    "delivery": "Ordinary editable files and verified patch"
+  },
+  "source_sha256": {
+    "climate/forest_flow.py": "703023a8776fbbf34f53e3d7f6d4c10514cbe48fce9746195f62340c3131e243",
+    "biosphere/forest_patch.py": "4bc862c5745565b593afe808c0f621f22c12694e3fb7f5c1489289df50526400",
+    "biosphere/forest_mechanics.py": "1db11afac2ec81d5573bc02e9e1365015187a4d1bc3af11eacf4347304b48ec1",
+    "research/run_forest_patch.py": "9896f451b5daf7ce17784fccdfff2211b1e9bd547a13dd10bdcee0ca84b2c048",
+    "tests/test_forest_patch.py": "fdad2e3263a8066e791a00ff06b302a8dda9b52b3868e0a4457cabbf6aa85689"
+  }
+}

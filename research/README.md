@@ -75,3 +75,19 @@ and the reproduction driver `run_forest_patch.py` retain the model boundaries.
 The individual-tree checkpoint remains unchanged. Wind climatology, gusts,
 nonlinear failure and evolutionary morphology remain open. `immersion/` is
 unchanged and receives no outputs from this work.
+
+## Reviewed forest-patch checkpoint and canopy-shape clarification
+
+The [reviewed checkpoint record](results/forest_patch_reviewed/README.md) preserves
+this conversation's separate 57-test, 90-m-spacing, 20-m/s reservoir-flow study.
+Its exact editable source is retained in Git at commit
+`363b161e7c92be54e7f4907b2186bfc1bace10f1` and on
+`checkpoint/forest-patch-review-57-tests`; its methods and compact results are
+also indexed here. The existing 62-test channel-flow implementation above remains
+unchanged. These are distinct experimental lineages with differing assumptions.
+
+The dome was an imposed candidate. Neither checkpoint simulates an evolved
+canopy shape or establishes an optimum. Reinforcing a dome's perimeter roots
+adds belowground investment; equivalent-budget comparisons across shapes remain
+open. See the reviewed record for the corrected interpretation and reproduction
+instructions for its exact source revision.

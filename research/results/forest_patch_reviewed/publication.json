@@ -1,0 +1,40 @@
+{
+  "base_reconstructed_and_matched": true,
+  "expected_tree_sha": "1b9aa73da4950fa23287933231a1578bce7ada7a",
+  "uploaded_tree_sha": "1b9aa73da4950fa23287933231a1578bce7ada7a",
+  "changed_blob_shas": {
+    "biosphere/forest_mechanics.py": "c7bd1ddb846190df9ae1e815a8ca55a7766b4d03",
+    "biosphere/forest_patch.py": "99e98fe3457e77e3030295dd3be8eaef7e46a14e",
+    "climate/forest_flow.py": "0d9cc80b684baddedb86b40e25689291275398d9",
+    "research/README.md": "f60473970663628a4473389b29b829fd2ff2356c",
+    "research/forest_patch.md": "8671d23f342737006539d44bc643d70e70b7ed94",
+    "research/forest_patch_sources.json": "601cc2d9f7566878498018c43a401e74e981f589",
+    "research/results/forest_patch/checkpoint.json": "bb31e1fd5887bc2b58de9ed3b6c6566fe67a4cf3",
+    "research/results/forest_patch/shape_comparison.csv": "dcee405bbbd201a16d30c26b9d8510b2be7c47ee",
+    "research/run_forest_patch.py": "7582310773dffdf17bde197d8752b24b91f8aac4",
+    "tests/test_forest_patch.py": "19ba8bb54de2d0a03c9055891d62a9a36662a57b"
+  },
+  "immersion_tree_sha": "a45de16938b37ac833bb5690884f21ef26726841",
+  "record_type": "reviewed_checkpoint_preservation",
+  "reviewed_source_commit": "363b161e7c92be54e7f4907b2186bfc1bace10f1",
+  "reviewed_source_branch": "checkpoint/forest-patch-review-57-tests",
+  "existing_main_parent": "879bbb98257071fe73db3c9d988b4f3f811a9904",
+  "merge_strategy": "Preserve existing main implementation; include reviewed source as second-parent history with separate reviewed methods and compact results",
+  "archive_sha256": "4dafc40404368bfb3eaaddd1bc18b3231e9f2d9d59f1291ae8f244c7de13a935",
+  "archive_payload_entries_verified": 60,
+  "fresh_focused_test_run": {
+    "status": "PASS",
+    "tests": 57,
+    "command": "OPENBLAS_NUM_THREADS=1 python -m unittest discover -s tests -p 'test*forest*.py' -v",
+    "source": "exact saved reviewed checkpoint",
+    "python": "3.13.5",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "log_sha256": "e75e3d56062c550c30aebd6f50d74096e1b794975d8a5af4db2ab22a69bd46c5"
+  },
+  "full_simulation_rerun": "NOT_RUN_FOR_PUBLICATION; original records preserved",
+  "full_repository_regressions": "NOT_RUN; scoped working copy",
+  "historical_publication_status": "NOT_PUBLISHED fields in exact archived files are superseded by this record",
+  "raw_generated_outputs": "Original checkpoint bundle and reproducible runner; omitted from Git per compact-results practice",
+  "canopy_shape": "Imposed candidates; no evolutionary simulation, general optimum or equal-total-resource comparison established"
+}
