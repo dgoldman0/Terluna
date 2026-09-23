@@ -1,111 +1,922 @@
-(function(root){'use strict';const OM=root.OM,C=root.OpenMoonCore,$=id=>document.getElementById(id);
-OM.boot=async function(T){
- // Software WebGL backends can stall on multisample resolve. Keep this explicit
- // fallback separate from the consumer-GPU path and report it in saved states.
- const probe=document.createElement('canvas'),probeGL=probe.getContext('webgl2',{antialias:false});
- if(!probeGL)throw Error('This experience requires WebGL 2.');
- const debugRenderer=probeGL.getExtension('WEBGL_debug_renderer_info');
- const rendererName=debugRenderer?probeGL.getParameter(debugRenderer.UNMASKED_RENDERER_WEBGL):probeGL.getParameter(probeGL.RENDERER);
- const softwareRenderer=/SwiftShader|llvmpipe|softpipe|software/i.test(rendererName);
- OM.graphicsBackend={renderer:rendererName,software:softwareRenderer,multisampling:softwareRenderer?0:4,conservativeDefaults:softwareRenderer};
- probeGL.getExtension('WEBGL_lose_context')?.loseContext();
- const canvas=$('world'),renderer=new T.WebGLRenderer({canvas,antialias:!softwareRenderer,alpha:false,powerPreference:'high-performance'});if(!renderer.capabilities.isWebGL2)throw Error('This experience requires WebGL 2.');renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.setSize(innerWidth,innerHeight);renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.1;renderer.shadowMap.enabled=true;renderer.shadowMap.autoUpdate=false;renderer.shadowMap.type=T.PCFShadowMap;renderer.localClippingEnabled=true;renderer.debug.onShaderError=(gl,program,vs,fs)=>{throw Error('Shader integration failed: '+[gl.getProgramInfoLog(program),gl.getShaderInfoLog(vs),gl.getShaderInfoLog(fs)].filter(Boolean).join('\n'));};
- const scene=new T.Scene(),camera=new T.PerspectiveCamera(58,innerWidth/innerHeight,.12,24000);camera.rotation.order='YXZ';
- const atmosphere=new OM.Atmosphere(T,JSON.parse($('sky-data').textContent));$('boot-status').textContent='Opening the calculated sky…';await atmosphere.init(renderer);scene.add(atmosphere.mesh);
- $('boot-status').textContent='Building the landscape and surface materials…';OpenMoonLandscape.initialize();await OM.loadSurfaceAssets(T);
- const geography=OM.createScene(T,scene,atmosphere,'moon'),water=OM.createWater(T,scene,atmosphere,renderer,geography.fieldUniforms),rain=OM.createRain(T,scene,atmosphere),audio=new OM.Soundscape();
- const sun=new T.DirectionalLight(0xffffff,1);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);sun.shadow.camera.left=-64;sun.shadow.camera.right=64;sun.shadow.camera.top=64;sun.shadow.camera.bottom=-64;sun.shadow.camera.near=1;sun.shadow.camera.far=900;sun.shadow.bias=-.0001;sun.shadow.normalBias=.007;sun.shadow.radius=2;scene.add(sun);scene.add(sun.target);
- const s={world:'moon',clock:'moon',phase:0,yaw:0,pitch:-.035,mode:'inspect',rate:1,cloudRegime:'reference',weatherKind:'clear',weatherTime:0,motionTime:0,drift:0,weather:C.weatherAt(0,'clear'),ledger:C.emptyLedger(),moving:0,keys:{},started:false,hidden:false,last:0,frame:0,quality:'balanced',exposure:'fixed',ev:0,autoExposure:.244647046,freeze:true,needRender:true,dirty:true,jumpV:0,jumpY:0,demoTour:false,walked:0};
- let columnPanelKey='';let dragging=null,lastHud=0,sceneStamp=0,prevPosition=new T.Vector3(),touch={x:0,y:0};
- function setLocation(id){const p=C.WAYPOINTS.find(x=>x.id===id)||C.WAYPOINTS[0];camera.position.set(p.x,geography.height(p.x,p.z)+1.7,p.z);s.yaw=p.yaw;s.pitch=p.pitch;s.jumpY=s.jumpV=0;camera.rotation.set(s.pitch,s.yaw,0);s.dirty=true;$('place').textContent=p.name;for(const b of document.querySelectorAll('[data-location]'))b.classList.toggle('selected',b.dataset.location===id);}
- function setPhase(p){s.phase=((p%1)+1)%1;s.mode='inspect';$('mode').value=s.mode;s.dirty=true;updateHUD();}
- function setWeather(t,kind='episode'){s.cloudRegime='reference';atmosphere.columnClouds.select('reference');document.querySelectorAll('[data-column]').forEach(b=>b.classList.toggle('selected',b.dataset.column==='reference'));$('mode').disabled=false;s.weatherKind=kind;s.weatherTime=C.clamp(t,0,14400);s.motionTime=s.weatherTime;s.drift=C.windDistance(s.weatherTime,kind);s.weather=C.weatherAt(s.weatherTime,kind);s.ledger=C.ledgerAt(s.weatherTime,kind);geography.update(s.ledger,s.weatherTime,kind);s.dirty=true;$('weather-slider').value=s.weatherTime;for(const b of document.querySelectorAll('[data-weather]'))b.classList.toggle('selected',b.dataset.weather===String(t)&&kind==='episode');updateHUD();}
- function world(key){camera.position.y+=C.curvatureSag(camera.position.x,camera.position.z,s.world)-C.curvatureSag(camera.position.x,camera.position.z,key);geography.updateTerrain(camera.position.x,camera.position.z,key);s.world=key;$('world-select').value=key;s.dirty=true;atmosphere.cacheKey='';for(const b of document.querySelectorAll('[data-world]'))b.classList.toggle('selected',b.dataset.world===key);$('world-name').textContent=key==='earth'?'Earth reference':key==='moon_no_ozone'?'Open Moon · zero ozone':'Open Moon';updateHUD();}
- function tickModel(dt){if(s.freeze)return;if(s.cloudRegime!=='reference'){s.motionTime+=dt;return;}if(s.mode==='live'){const dtSim=dt*s.rate;s.phase=(s.phase+dtSim/(s.clock==='earth'?C.DAY:C.PERIOD))%1;const beforeWeather=s.weatherTime;const target=Math.min(14400,s.weatherTime+dtSim);let t=s.weatherTime;while(t<target-1e-8){const h=Math.min(10,target-t);const forcing=C.weatherAt(t+h*.5,s.weatherKind);s.ledger=C.stepLedger(s.ledger,forcing,h);s.drift+=forcing.wind*h;t+=h;}s.weatherTime=target;s.weather=C.weatherAt(s.weatherTime,s.weatherKind);s.motionTime+=dtSim;if(target>=14400){// Continue drying after the authored forcing reaches its last frame.
- const rest=Math.max(0,dtSim-(target-beforeWeather));if(rest>0){s.ledger=C.stepLedger(s.ledger,s.weather,rest);geography.surfaceWater.seek(target,s.weatherKind);geography.surfaceWater.advance(rest,s.weather);s.drift+=s.weather.wind*rest;}
- }s.previousWeatherTime=s.weatherTime;
- }else {s.motionTime+=dt;s.drift+=s.weather.wind*dt;} }
- function move(dt){let f=(s.keys.KeyW||s.keys.ArrowUp?1:0)-(s.keys.KeyS||s.keys.ArrowDown?1:0)-touch.y,side=(s.keys.KeyD?1:0)-(s.keys.KeyA?1:0)+touch.x;const norm=Math.hypot(f,side);const speed=(s.keys.ShiftLeft?3.1:1.55),dist=speed*dt;prevPosition.copy(camera.position);if(norm>0){f/=Math.max(1,norm);side/=Math.max(1,norm);const dx=(-Math.sin(s.yaw)*f+Math.cos(s.yaw)*side)*dist,dz=(-Math.cos(s.yaw)*f-Math.sin(s.yaw)*side)*dist;
-  const nx=camera.position.x+dx,nz=camera.position.z+dz;if(geography.canMove(nx,camera.position.z))camera.position.x=nx;if(geography.canMove(camera.position.x,nz))camera.position.z=nz;
- }
- if(s.keys.ArrowLeft)s.yaw+=dt*.65;if(s.keys.ArrowRight)s.yaw-=dt*.65;
- const gravity=s.world==='earth'?9.80665:1.62;if(s.jumpY>0||s.jumpV>0){s.jumpV-=gravity*dt;s.jumpY=Math.max(0,s.jumpY+s.jumpV*dt);if(s.jumpY===0)s.jumpV=0;}
- const targetY=geography.height(camera.position.x,camera.position.z)+1.7+s.jumpY;camera.position.y=C.mix(camera.position.y,targetY,1-Math.exp(-dt*18));s.moving=Math.hypot(camera.position.x-prevPosition.x,camera.position.z-prevPosition.z)/Math.max(dt,1e-5);s.walked+=s.moving*dt;camera.rotation.set(s.pitch,s.yaw,0);camera.updateMatrixWorld();
- }
- function lights(){geography.updateTerrain(camera.position.x,camera.position.z,s.world);const solar=atmosphere.update(s.world,s.phase,s.weather,s.motionTime,camera.position,s.drift),u=atmosphere.uniforms;const max=Math.max(...atmosphere.directRaw,1e-15);sun.color.setRGB(Math.max(0,atmosphere.directRaw[0])/max,Math.max(0,atmosphere.directRaw[1])/max,Math.max(0,atmosphere.directRaw[2])/max);sun.intensity=solar.y>-.0047?max/8500:0;sun.position.set(camera.position.x+solar.x*350,camera.position.y+solar.y*350,camera.position.z);sun.target.position.set(camera.position.x,camera.position.y,camera.position.z);sun.target.updateMatrixWorld();
- water.uniforms.uGravity.value=s.world==='earth'?9.80665:1.62;water.uniforms.uRain.value=s.weather.rain;rain.uniforms.uCamera.value.copy(camera.position);rain.uniforms.uFall.value=C.dropletTerminalSpeed(.0007,s.world==='earth'?9.80665:1.62,s.world==='earth'?1.2:1.45);rain.uniforms.uRain.value=s.weather.rain;rain.uniforms.uRoofY.value=geography.pavilionY+4.2;rain.mesh.visible=s.weather.rain>.05;geography.update(s.ledger,s.weatherTime,s.weatherKind);
- geography.lamp.intensity=$('lamp').checked?18/8500:0;geography.bulb.material.emissiveIntensity=$('lamp').checked?1.2:0;
- let exposure=.244647046*Math.pow(2,s.ev);if(s.exposure==='adaptive'){const desired=.244647046*Math.sqrt(94200/Math.max(.004,atmosphere.clearLux));s.autoExposure=C.mix(s.autoExposure,Math.min(25000,desired),.025);exposure=s.autoExposure*Math.pow(2,s.ev);}renderer.toneMappingExposure=exposure;
- atmosphere.environment(renderer,scene,sceneStamp,s.dirty);renderer.shadowMap.needsUpdate=true;s.dirty=false;
- }
- function updateHUD(){const solar=C.sunAt(s.phase),hours=s.phase*(s.clock==='earth'?24:29.53059*24);$('solar-phase').value=Math.round(s.phase*100000);$('altitude').textContent=(solar.elevation>=0?'+':'')+solar.elevation.toFixed(1)+'°';$('elapsed').textContent=(hours/24).toFixed(2)+' Earth days';$('weather-slider').value=s.weatherTime;$('episode-time').textContent=(s.weatherTime/3600).toFixed(2)+' h / 4 h';$('rain-readout').textContent=s.weather.rain.toFixed(1)+' mm/h';$('wind-readout').textContent=s.weather.wind.toFixed(1)+' m/s';$('humidity').textContent=Math.round(s.weather.humidity*100)+'%';$('temp').textContent=(s.weather.temperature-273.15).toFixed(1)+' °C';$('tau').textContent=s.weather.tau.toFixed(1);$('wet-readout').textContent=s.ledger.exposed.toFixed(2)+' mm';$('lux').textContent=atmosphere.clearLux>=1000?(atmosphere.clearLux/1000).toFixed(1)+' klx':atmosphere.clearLux.toPrecision(3)+' lx';$('position').textContent=`${camera.position.x.toFixed(0)}, ${camera.position.z.toFixed(0)} m`;$('height').textContent=camera.position.y.toFixed(1)+' m';$('exposure-label').textContent=s.exposure==='fixed'?'Fixed exposure':'Adapted camera';$('mode-note').textContent=s.mode==='live'?`Live · ${s.rate}× shared clock${s.rate>1?' · sound muted':''}`:(s.freeze?'Optical study · motion paused':'Optical study · Sun and wetness held · short motion animated');$('weather-name').textContent=s.weatherKind==='fog'?'Local fog':s.weatherTime<2300?'Clear air':s.weatherTime<4600?'Clouds gathering':s.weatherTime<6200?'Rain arriving':s.weatherTime<9800?'Passing rain':s.weatherTime<12700?'Clearing':'After the rain';const sheltered=C.roofMask(camera.position.x,camera.position.z);$('exposure-state').textContent=sheltered?'Under shelter':'Exposed to the weather';
- const field=OpenMoonLandscape.sample(camera.position.x,camera.position.z),wet=geography.surfaceWater.sample(camera.position.x,camera.position.z);
- $('wet-readout').textContent=(wet.film*.24+wet.ponded_mm).toFixed(2)+' mm';$('canopy-readout').textContent=(wet.soilSaturation*100).toFixed(0)+'%';$('roof-readout').textContent=(wet.leafWetness*100).toFixed(0)+'%';$('water-residual').textContent=geography.surfaceWater.ledger.relativeResidual.toExponential(1);
- const pools=geography.ponds.model.summary;$('pond-readout').textContent=`${pools.activeBasins} connected basins; ${pools.reconstructedVolume_m3.toFixed(2)} m³ reconstructed standing water. Mobile / above-spill storage: ${(pools.mobileOutsideBasins_m3+pools.aboveSpillVolume_m3).toFixed(2)} m³.`;
- if(s.cloudRegime!=='reference'){const column=atmosphere.columnClouds.current?.model;if(column){$('weather-name').textContent=column.inputs.label;$('temp').textContent=(column.inputs.surfaceT-273.15).toFixed(1)+' °C';$('humidity').textContent=(column.inputs.rh*100).toFixed(0)+'%';$('wind-readout').textContent=Math.hypot(column.rows[0].windX,column.rows[0].windZ).toFixed(1)+' m/s';$('tau').textContent=column.summary.inCloudOpticalDepth.toFixed(1);$('mode-note').textContent='Column study · '+(s.freeze?'frozen state':'wind advection; sounding held')+' · surface rain unforced';}}
- updateColumnPanel();
- $('field-readout').textContent=`At your feet: elevation ${field.elevation.toFixed(2)} m above sea level; slope ${(Math.atan(field.slope)*180/Math.PI).toFixed(1)}°; rooting soil ${(field.soilDepth*100).toFixed(0)} cm; canopy cover ${(field.canopy*100).toFixed(0)}%; soil saturation ${(wet.soilSaturation*100).toFixed(0)}%; ponded store ${wet.ponded_mm.toFixed(2)} mm.`;
- }
- function frame(t){if(!s.started)return;const dt=Math.max(0,Math.min((t-s.last)/1000,.06));s.last=t;sceneStamp+=dt;try{const oldPose=camera.position.toArray().concat([s.yaw,s.pitch,s.jumpY]);tickModel(dt);move(dt);
- const changed=camera.position.toArray().concat([s.yaw,s.pitch,s.jumpY]).some((v,i)=>Math.abs(v-oldPose[i])>1e-8);
- if(!s.freeze||s.needRender||s.dirty||changed||s.exposure==='adaptive'){lights();water.reflection(camera,sceneStamp);renderer.render(scene,camera);s.needRender=false;}if(audio.context){audio.update(camera,s.weather,s.ledger,s.motionTime,s.moving,s.mode==='live'&&s.rate>1);}
- if(t-lastHud>220){updateHUD();lastHud=t;}s.frame++;requestAnimationFrame(frame);}catch(e){s.started=false;showError(e);}}
- function showError(e){console.error(e);$('runtime-error').hidden=false;$('runtime-error-text').textContent=e.message;root.openMoonShorelineError=e.message;}
- canvas.addEventListener('webglcontextlost',event=>{event.preventDefault();s.started=false;showError(new Error('The graphics context was lost. Reload with a smaller window or enable hardware graphics acceleration. The saved source and scene state remain available.'));});
- function quality(q){s.quality=q;atmosphere.columnClouds.setQuality(q);const pix=q==='high'?Math.min(2,Math.max(1,devicePixelRatio)):q==='economy'?Math.min(1,devicePixelRatio):Math.min(1.5,devicePixelRatio);renderer.setPixelRatio(pix);atmosphere.uniforms.uSteps.value=q==='high'?24:q==='economy'?8:14;sun.shadow.mapSize.set(q==='high'?4096:q==='economy'?1024:2048,q==='high'?4096:q==='economy'?1024:2048);const size=renderer.getDrawingBufferSize(new T.Vector2());water.resize(size.x,size.y,q);if(sun.shadow.map){sun.shadow.map.dispose();sun.shadow.map=null;}s.dirty=true;}
- function hide(){s.hidden=!s.hidden;document.body.classList.toggle('minimal',s.hidden);}
- function userKey(e,down){if(e.target.closest('input,select,textarea,button')&&e.code!=='Escape')return;if(['KeyW','KeyA','KeyS','KeyD','ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Space'].includes(e.code))e.preventDefault();s.keys[e.code]=down;if(down&&!e.repeat){if(e.code==='KeyH')hide();if(e.code==='Escape'){s.hidden=false;document.body.classList.remove('minimal');$('panel').classList.remove('open');}if(e.code==='Space'&&s.jumpY===0)s.jumpV=1.2;}}
- addEventListener('keydown',e=>userKey(e,true));addEventListener('keyup',e=>userKey(e,false));addEventListener('blur',()=>{s.keys={};touch={x:0,y:0};});
- canvas.addEventListener('pointerdown',e=>{if(e.button!==0)return;dragging={id:e.pointerId,x:e.clientX,y:e.clientY};canvas.setPointerCapture(e.pointerId);});canvas.addEventListener('pointermove',e=>{if(!dragging||dragging.id!==e.pointerId)return;s.yaw-=(e.clientX-dragging.x)*.003;s.pitch=C.clamp(s.pitch-(e.clientY-dragging.y)*.0028,-1.5,1.5);dragging.x=e.clientX;dragging.y=e.clientY;s.needRender=true;});canvas.addEventListener('pointerup',()=>dragging=null);canvas.addEventListener('pointercancel',()=>dragging=null);canvas.addEventListener('wheel',e=>{e.preventDefault();camera.fov=C.clamp(camera.fov+e.deltaY*.025,18,85);camera.updateProjectionMatrix();s.needRender=true;$('fov').value=camera.fov;$('fov-value').textContent=camera.fov.toFixed(0)+'°';},{passive:false});
- $('panel-toggle').onclick=()=>{$('panel').classList.toggle('open');};$('close-panel').onclick=()=>$('panel').classList.remove('open');$('help-toggle').onclick=()=>$('help').showModal();$('help-close').onclick=()=>$('help').close();$('hide').onclick=hide;$('unhide').onclick=hide;
- $('solar-phase').oninput=e=>setPhase(+e.target.value/100000);document.querySelectorAll('[data-phase]').forEach(b=>b.onclick=()=>setPhase(+b.dataset.phase));document.querySelectorAll('[data-location]').forEach(b=>b.onclick=()=>setLocation(b.dataset.location));document.querySelectorAll('[data-world]').forEach(b=>b.onclick=()=>world(b.dataset.world));
- $('world-select').onchange=e=>world(e.target.value);$('clock').onchange=e=>{s.clock=e.target.value;updateHUD();};$('mode').onchange=e=>{s.mode=e.target.value;s.freeze=s.mode!=='live';s.previousWeatherTime=s.weatherTime;};$('rate').onchange=e=>s.rate=+e.target.value;$('weather-slider').oninput=e=>setWeather(+e.target.value);document.querySelectorAll('[data-weather]').forEach(b=>b.onclick=()=>setWeather(+b.dataset.weather));$('fog').onclick=()=>setWeather(0,'fog');$('play-episode').onclick=()=>{if(s.cloudRegime!=='reference'||s.weatherTime>=14400)setWeather(0);s.mode='live';s.freeze=false;s.rate=30;$('mode').value='live';$('rate').value='30';};
- $('sound').onclick=async()=>{try{const on=await audio.start();$('sound').textContent=on?'Sound on':'Sound off';$('sound').classList.toggle('selected',on);}catch(e){toast(e.message);}};
- $('landscape-debug').onchange=e=>{geography.debug(+e.target.value);s.needRender=true;};
- $('quality').onchange=e=>quality(e.target.value);$('exposure').onchange=e=>{s.exposure=e.target.value;s.dirty=true;};$('ev').oninput=e=>{s.ev=+e.target.value;$('ev-value').textContent=(s.ev>=0?'+':'')+s.ev.toFixed(1)+' EV';};$('fov').oninput=e=>{camera.fov=+e.target.value;camera.updateProjectionMatrix();$('fov-value').textContent=camera.fov.toFixed(0)+'°';};$('calibrate').onclick=()=>{try{const v=C.calibratedFov(+$('screen-height').value,+$('eye-distance').value);camera.fov=C.clamp(v,8,100);camera.updateProjectionMatrix();s.needRender=true;$('fov').value=camera.fov;$('fov-value').textContent=camera.fov.toFixed(1)+'°';toast('Perspective matched to the entered screen height and distance.');}catch(e){toast(e.message);}};
- function inspectPonds(){const g=geography.ponds.model.best();if(!g){toast('Choose Rain or After rain to inspect standing water.');return;}const x=g.x+4,z=g.z+7;camera.position.set(x,geography.height(x,z)+1.7,z);s.yaw=Math.atan2(x-g.x,z-g.z);s.pitch=-.35;s.needRender=true;$('place').textContent='Runoff hollow';} $('pond-view').onclick=inspectPonds;
- function snapshotState(){return {schema:'open-moon-shoreline-state/2',build:'shoreline-cloud-columns-04',cloudColumn:atmosphere.columnClouds.snapshot(),world:s.world,clock:s.clock,phase:s.phase,motionTime:s.motionTime,windDisplacement:s.drift,weatherKind:s.weatherKind,weatherTime:s.weatherTime,ledger:{...s.ledger},spatialWater:geography.surfaceWater.ledger,terrain:geography.terrain.stats,ponds:geography.ponds.model.summary,position:camera.position.toArray(),yaw:s.yaw,pitch:s.pitch,fov:camera.fov,exposure:s.exposure,exposureBase:.244647046,renderExposure:renderer.toneMappingExposure,ev:s.ev,whiteBalanceStrength:atmosphere.whiteBalanceStrength,whiteBalanceGain:atmosphere.uniforms.uWhiteBalance.value.toArray(),freeze:s.freeze,quality:s.quality,graphicsBackend:{...OM.graphicsBackend},viewport:[innerWidth,innerHeight],pixelRatio:renderer.getPixelRatio()};}
+import { OM } from '../../engine/om.js';
+import C from '../../engine/core.js';
+import L from '../../world/landscape.js';
+// The column model is the atmosphere domain's browser script (see engine/cloud-renderer.js).
+import '../../../atmosphere/column/weather-column.js';
+const W = globalThis.OpenMoonWeatherColumn;
+const $ = (id) => document.getElementById(id);
+OM.boot = async function (T) {
+  // Software WebGL backends can stall on multisample resolve. Keep this explicit
+  // fallback separate from the consumer-GPU path and report it in saved states.
+  const probe = document.createElement('canvas'),
+    probeGL = probe.getContext('webgl2', { antialias: false });
+  if (!probeGL) throw Error('This experience requires WebGL 2.');
+  const debugRenderer = probeGL.getExtension('WEBGL_debug_renderer_info');
+  const rendererName = debugRenderer
+    ? probeGL.getParameter(debugRenderer.UNMASKED_RENDERER_WEBGL)
+    : probeGL.getParameter(probeGL.RENDERER);
+  const softwareRenderer = /SwiftShader|llvmpipe|softpipe|software/i.test(rendererName);
+  OM.graphicsBackend = {
+    renderer: rendererName,
+    software: softwareRenderer,
+    multisampling: softwareRenderer ? 0 : 4,
+    conservativeDefaults: softwareRenderer,
+  };
+  probeGL.getExtension('WEBGL_lose_context')?.loseContext();
+  const canvas = $('world'),
+    renderer = new T.WebGLRenderer({
+      canvas,
+      antialias: !softwareRenderer,
+      alpha: false,
+      powerPreference: 'high-performance',
+    });
+  if (!renderer.capabilities.isWebGL2) throw Error('This experience requires WebGL 2.');
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
+  renderer.setSize(innerWidth, innerHeight);
+  renderer.outputColorSpace = T.SRGBColorSpace;
+  renderer.toneMapping = T.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.1;
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.autoUpdate = false;
+  renderer.shadowMap.type = T.PCFShadowMap;
+  renderer.localClippingEnabled = true;
+  renderer.debug.onShaderError = (gl, program, vs, fs) => {
+    throw Error(
+      'Shader integration failed: ' +
+        [gl.getProgramInfoLog(program), gl.getShaderInfoLog(vs), gl.getShaderInfoLog(fs)]
+          .filter(Boolean)
+          .join('\n'),
+    );
+  };
+  const scene = new T.Scene(),
+    camera = new T.PerspectiveCamera(58, innerWidth / innerHeight, 0.12, 24000);
+  camera.rotation.order = 'YXZ';
+  const atmosphere = new OM.Atmosphere(T, OM.skyData);
+  $('boot-status').textContent = 'Opening the calculated sky…';
+  await atmosphere.init(renderer);
+  scene.add(atmosphere.mesh);
+  $('boot-status').textContent = 'Building the landscape and surface materials…';
+  L.initialize();
+  await OM.loadSurfaceAssets(T);
+  const geography = OM.createScene(T, scene, atmosphere, 'moon'),
+    water = OM.createWater(T, scene, atmosphere, renderer, geography.fieldUniforms),
+    rain = OM.createRain(T, scene, atmosphere),
+    audio = new OM.Soundscape();
+  const sun = new T.DirectionalLight(0xffffff, 1);
+  sun.castShadow = true;
+  sun.shadow.mapSize.set(2048, 2048);
+  sun.shadow.camera.left = -64;
+  sun.shadow.camera.right = 64;
+  sun.shadow.camera.top = 64;
+  sun.shadow.camera.bottom = -64;
+  sun.shadow.camera.near = 1;
+  sun.shadow.camera.far = 900;
+  sun.shadow.bias = -0.0001;
+  sun.shadow.normalBias = 0.007;
+  sun.shadow.radius = 2;
+  scene.add(sun);
+  scene.add(sun.target);
+  const s = {
+    world: 'moon',
+    clock: 'moon',
+    phase: 0,
+    yaw: 0,
+    pitch: -0.035,
+    mode: 'inspect',
+    rate: 1,
+    cloudRegime: 'reference',
+    weatherKind: 'clear',
+    weatherTime: 0,
+    motionTime: 0,
+    drift: 0,
+    weather: C.weatherAt(0, 'clear'),
+    ledger: C.emptyLedger(),
+    moving: 0,
+    keys: {},
+    started: false,
+    hidden: false,
+    last: 0,
+    frame: 0,
+    quality: 'balanced',
+    exposure: 'fixed',
+    ev: 0,
+    autoExposure: 0.244647046,
+    freeze: true,
+    needRender: true,
+    dirty: true,
+    jumpV: 0,
+    jumpY: 0,
+    demoTour: false,
+    walked: 0,
+  };
+  let columnPanelKey = '';
+  let dragging = null,
+    lastHud = 0,
+    sceneStamp = 0,
+    prevPosition = new T.Vector3(),
+    touch = { x: 0, y: 0 };
+  function setLocation(id) {
+    const p = C.WAYPOINTS.find((x) => x.id === id) || C.WAYPOINTS[0];
+    camera.position.set(p.x, geography.height(p.x, p.z) + 1.7, p.z);
+    s.yaw = p.yaw;
+    s.pitch = p.pitch;
+    s.jumpY = s.jumpV = 0;
+    camera.rotation.set(s.pitch, s.yaw, 0);
+    s.dirty = true;
+    $('place').textContent = p.name;
+    for (const b of document.querySelectorAll('[data-location]'))
+      b.classList.toggle('selected', b.dataset.location === id);
+  }
+  function setPhase(p) {
+    s.phase = ((p % 1) + 1) % 1;
+    s.mode = 'inspect';
+    $('mode').value = s.mode;
+    s.dirty = true;
+    updateHUD();
+  }
+  function setWeather(t, kind = 'episode') {
+    s.cloudRegime = 'reference';
+    atmosphere.columnClouds.select('reference');
+    document
+      .querySelectorAll('[data-column]')
+      .forEach((b) => b.classList.toggle('selected', b.dataset.column === 'reference'));
+    $('mode').disabled = false;
+    s.weatherKind = kind;
+    s.weatherTime = C.clamp(t, 0, 14400);
+    s.motionTime = s.weatherTime;
+    s.drift = C.windDistance(s.weatherTime, kind);
+    s.weather = C.weatherAt(s.weatherTime, kind);
+    s.ledger = C.ledgerAt(s.weatherTime, kind);
+    geography.update(s.ledger, s.weatherTime, kind);
+    s.dirty = true;
+    $('weather-slider').value = s.weatherTime;
+    for (const b of document.querySelectorAll('[data-weather]'))
+      b.classList.toggle('selected', b.dataset.weather === String(t) && kind === 'episode');
+    updateHUD();
+  }
+  function world(key) {
+    camera.position.y +=
+      C.curvatureSag(camera.position.x, camera.position.z, s.world) -
+      C.curvatureSag(camera.position.x, camera.position.z, key);
+    geography.updateTerrain(camera.position.x, camera.position.z, key);
+    s.world = key;
+    $('world-select').value = key;
+    s.dirty = true;
+    atmosphere.cacheKey = '';
+    for (const b of document.querySelectorAll('[data-world]'))
+      b.classList.toggle('selected', b.dataset.world === key);
+    $('world-name').textContent =
+      key === 'earth'
+        ? 'Earth reference'
+        : key === 'moon_no_ozone'
+          ? 'Open Moon · zero ozone'
+          : 'Open Moon';
+    updateHUD();
+  }
+  function tickModel(dt) {
+    if (s.freeze) return;
+    if (s.cloudRegime !== 'reference') {
+      s.motionTime += dt;
+      return;
+    }
+    if (s.mode === 'live') {
+      const dtSim = dt * s.rate;
+      s.phase = (s.phase + dtSim / (s.clock === 'earth' ? C.DAY : C.PERIOD)) % 1;
+      const beforeWeather = s.weatherTime;
+      const target = Math.min(14400, s.weatherTime + dtSim);
+      let t = s.weatherTime;
+      while (t < target - 1e-8) {
+        const h = Math.min(10, target - t);
+        const forcing = C.weatherAt(t + h * 0.5, s.weatherKind);
+        s.ledger = C.stepLedger(s.ledger, forcing, h);
+        s.drift += forcing.wind * h;
+        t += h;
+      }
+      s.weatherTime = target;
+      s.weather = C.weatherAt(s.weatherTime, s.weatherKind);
+      s.motionTime += dtSim;
+      if (target >= 14400) {
+        // Continue drying after the authored forcing reaches its last frame.
+        const rest = Math.max(0, dtSim - (target - beforeWeather));
+        if (rest > 0) {
+          s.ledger = C.stepLedger(s.ledger, s.weather, rest);
+          geography.surfaceWater.seek(target, s.weatherKind);
+          geography.surfaceWater.advance(rest, s.weather);
+          s.drift += s.weather.wind * rest;
+        }
+      }
+      s.previousWeatherTime = s.weatherTime;
+    } else {
+      s.motionTime += dt;
+      s.drift += s.weather.wind * dt;
+    }
+  }
+  function move(dt) {
+    let f =
+        (s.keys.KeyW || s.keys.ArrowUp ? 1 : 0) -
+        (s.keys.KeyS || s.keys.ArrowDown ? 1 : 0) -
+        touch.y,
+      side = (s.keys.KeyD ? 1 : 0) - (s.keys.KeyA ? 1 : 0) + touch.x;
+    const norm = Math.hypot(f, side);
+    const speed = s.keys.ShiftLeft ? 3.1 : 1.55,
+      dist = speed * dt;
+    prevPosition.copy(camera.position);
+    if (norm > 0) {
+      f /= Math.max(1, norm);
+      side /= Math.max(1, norm);
+      const dx = (-Math.sin(s.yaw) * f + Math.cos(s.yaw) * side) * dist,
+        dz = (-Math.cos(s.yaw) * f - Math.sin(s.yaw) * side) * dist;
+      const nx = camera.position.x + dx,
+        nz = camera.position.z + dz;
+      if (geography.canMove(nx, camera.position.z)) camera.position.x = nx;
+      if (geography.canMove(camera.position.x, nz)) camera.position.z = nz;
+    }
+    if (s.keys.ArrowLeft) s.yaw += dt * 0.65;
+    if (s.keys.ArrowRight) s.yaw -= dt * 0.65;
+    const gravity = s.world === 'earth' ? 9.80665 : 1.62;
+    if (s.jumpY > 0 || s.jumpV > 0) {
+      s.jumpV -= gravity * dt;
+      s.jumpY = Math.max(0, s.jumpY + s.jumpV * dt);
+      if (s.jumpY === 0) s.jumpV = 0;
+    }
+    const targetY = geography.height(camera.position.x, camera.position.z) + 1.7 + s.jumpY;
+    camera.position.y = C.mix(camera.position.y, targetY, 1 - Math.exp(-dt * 18));
+    s.moving =
+      Math.hypot(camera.position.x - prevPosition.x, camera.position.z - prevPosition.z) /
+      Math.max(dt, 1e-5);
+    s.walked += s.moving * dt;
+    camera.rotation.set(s.pitch, s.yaw, 0);
+    camera.updateMatrixWorld();
+  }
+  function lights() {
+    geography.updateTerrain(camera.position.x, camera.position.z, s.world);
+    const solar = atmosphere.update(
+        s.world,
+        s.phase,
+        s.weather,
+        s.motionTime,
+        camera.position,
+        s.drift,
+      ),
+      u = atmosphere.uniforms;
+    const max = Math.max(...atmosphere.directRaw, 1e-15);
+    sun.color.setRGB(
+      Math.max(0, atmosphere.directRaw[0]) / max,
+      Math.max(0, atmosphere.directRaw[1]) / max,
+      Math.max(0, atmosphere.directRaw[2]) / max,
+    );
+    sun.intensity = solar.y > -0.0047 ? max / 8500 : 0;
+    sun.position.set(
+      camera.position.x + solar.x * 350,
+      camera.position.y + solar.y * 350,
+      camera.position.z,
+    );
+    sun.target.position.set(camera.position.x, camera.position.y, camera.position.z);
+    sun.target.updateMatrixWorld();
+    water.uniforms.uGravity.value = s.world === 'earth' ? 9.80665 : 1.62;
+    water.uniforms.uRain.value = s.weather.rain;
+    rain.uniforms.uCamera.value.copy(camera.position);
+    rain.uniforms.uFall.value = C.dropletTerminalSpeed(
+      0.0007,
+      s.world === 'earth' ? 9.80665 : 1.62,
+      s.world === 'earth' ? 1.2 : 1.45,
+    );
+    rain.uniforms.uRain.value = s.weather.rain;
+    rain.uniforms.uRoofY.value = geography.pavilionY + 4.2;
+    rain.mesh.visible = s.weather.rain > 0.05;
+    geography.update(s.ledger, s.weatherTime, s.weatherKind);
+    geography.lamp.intensity = $('lamp').checked ? 18 / 8500 : 0;
+    geography.bulb.material.emissiveIntensity = $('lamp').checked ? 1.2 : 0;
+    let exposure = 0.244647046 * Math.pow(2, s.ev);
+    if (s.exposure === 'adaptive') {
+      const desired = 0.244647046 * Math.sqrt(94200 / Math.max(0.004, atmosphere.clearLux));
+      s.autoExposure = C.mix(s.autoExposure, Math.min(25000, desired), 0.025);
+      exposure = s.autoExposure * Math.pow(2, s.ev);
+    }
+    renderer.toneMappingExposure = exposure;
+    atmosphere.environment(renderer, scene, sceneStamp, s.dirty);
+    renderer.shadowMap.needsUpdate = true;
+    s.dirty = false;
+  }
+  function updateHUD() {
+    const solar = C.sunAt(s.phase),
+      hours = s.phase * (s.clock === 'earth' ? 24 : 29.53059 * 24);
+    $('solar-phase').value = Math.round(s.phase * 100000);
+    $('altitude').textContent =
+      (solar.elevation >= 0 ? '+' : '') + solar.elevation.toFixed(1) + '°';
+    $('elapsed').textContent = (hours / 24).toFixed(2) + ' Earth days';
+    $('weather-slider').value = s.weatherTime;
+    $('episode-time').textContent = (s.weatherTime / 3600).toFixed(2) + ' h / 4 h';
+    $('rain-readout').textContent = s.weather.rain.toFixed(1) + ' mm/h';
+    $('wind-readout').textContent = s.weather.wind.toFixed(1) + ' m/s';
+    $('humidity').textContent = Math.round(s.weather.humidity * 100) + '%';
+    $('temp').textContent = (s.weather.temperature - 273.15).toFixed(1) + ' °C';
+    $('tau').textContent = s.weather.tau.toFixed(1);
+    $('wet-readout').textContent = s.ledger.exposed.toFixed(2) + ' mm';
+    $('lux').textContent =
+      atmosphere.clearLux >= 1000
+        ? (atmosphere.clearLux / 1000).toFixed(1) + ' klx'
+        : atmosphere.clearLux.toPrecision(3) + ' lx';
+    $('position').textContent =
+      `${camera.position.x.toFixed(0)}, ${camera.position.z.toFixed(0)} m`;
+    $('height').textContent = camera.position.y.toFixed(1) + ' m';
+    $('exposure-label').textContent = s.exposure === 'fixed' ? 'Fixed exposure' : 'Adapted camera';
+    $('mode-note').textContent =
+      s.mode === 'live'
+        ? `Live · ${s.rate}× shared clock${s.rate > 1 ? ' · sound muted' : ''}`
+        : s.freeze
+          ? 'Optical study · motion paused'
+          : 'Optical study · Sun and wetness held · short motion animated';
+    $('weather-name').textContent =
+      s.weatherKind === 'fog'
+        ? 'Local fog'
+        : s.weatherTime < 2300
+          ? 'Clear air'
+          : s.weatherTime < 4600
+            ? 'Clouds gathering'
+            : s.weatherTime < 6200
+              ? 'Rain arriving'
+              : s.weatherTime < 9800
+                ? 'Passing rain'
+                : s.weatherTime < 12700
+                  ? 'Clearing'
+                  : 'After the rain';
+    const sheltered = C.roofMask(camera.position.x, camera.position.z);
+    $('exposure-state').textContent = sheltered ? 'Under shelter' : 'Exposed to the weather';
+    const field = L.sample(camera.position.x, camera.position.z),
+      wet = geography.surfaceWater.sample(camera.position.x, camera.position.z);
+    $('wet-readout').textContent = (wet.film * 0.24 + wet.ponded_mm).toFixed(2) + ' mm';
+    $('canopy-readout').textContent = (wet.soilSaturation * 100).toFixed(0) + '%';
+    $('roof-readout').textContent = (wet.leafWetness * 100).toFixed(0) + '%';
+    $('water-residual').textContent =
+      geography.surfaceWater.ledger.relativeResidual.toExponential(1);
+    const pools = geography.ponds.model.summary;
+    $('pond-readout').textContent =
+      `${pools.activeBasins} connected basins; ${pools.reconstructedVolume_m3.toFixed(2)} m³ reconstructed standing water. Mobile / above-spill storage: ${(pools.mobileOutsideBasins_m3 + pools.aboveSpillVolume_m3).toFixed(2)} m³.`;
+    if (s.cloudRegime !== 'reference') {
+      const column = atmosphere.columnClouds.current?.model;
+      if (column) {
+        $('weather-name').textContent = column.inputs.label;
+        $('temp').textContent = (column.inputs.surfaceT - 273.15).toFixed(1) + ' °C';
+        $('humidity').textContent = (column.inputs.rh * 100).toFixed(0) + '%';
+        $('wind-readout').textContent =
+          Math.hypot(column.rows[0].windX, column.rows[0].windZ).toFixed(1) + ' m/s';
+        $('tau').textContent = column.summary.inCloudOpticalDepth.toFixed(1);
+        $('mode-note').textContent =
+          'Column study · ' +
+          (s.freeze ? 'frozen state' : 'wind advection; sounding held') +
+          ' · surface rain unforced';
+      }
+    }
+    updateColumnPanel();
+    $('field-readout').textContent =
+      `At your feet: elevation ${field.elevation.toFixed(2)} m above sea level; slope ${((Math.atan(field.slope) * 180) / Math.PI).toFixed(1)}°; rooting soil ${(field.soilDepth * 100).toFixed(0)} cm; canopy cover ${(field.canopy * 100).toFixed(0)}%; soil saturation ${(wet.soilSaturation * 100).toFixed(0)}%; ponded store ${wet.ponded_mm.toFixed(2)} mm.`;
+  }
+  function frame(t) {
+    if (!s.started) return;
+    const dt = Math.max(0, Math.min((t - s.last) / 1000, 0.06));
+    s.last = t;
+    sceneStamp += dt;
+    try {
+      const oldPose = camera.position.toArray().concat([s.yaw, s.pitch, s.jumpY]);
+      tickModel(dt);
+      move(dt);
+      const changed = camera.position
+        .toArray()
+        .concat([s.yaw, s.pitch, s.jumpY])
+        .some((v, i) => Math.abs(v - oldPose[i]) > 1e-8);
+      if (!s.freeze || s.needRender || s.dirty || changed || s.exposure === 'adaptive') {
+        lights();
+        water.reflection(camera, sceneStamp);
+        renderer.render(scene, camera);
+        s.needRender = false;
+      }
+      if (audio.context) {
+        audio.update(
+          camera,
+          s.weather,
+          s.ledger,
+          s.motionTime,
+          s.moving,
+          s.mode === 'live' && s.rate > 1,
+        );
+      }
+      if (t - lastHud > 220) {
+        updateHUD();
+        lastHud = t;
+      }
+      s.frame++;
+      requestAnimationFrame(frame);
+    } catch (e) {
+      s.started = false;
+      showError(e);
+    }
+  }
+  function showError(e) {
+    console.error(e);
+    $('runtime-error').hidden = false;
+    $('runtime-error-text').textContent = e.message;
+    globalThis.openMoonShorelineError = e.message;
+  }
+  canvas.addEventListener('webglcontextlost', (event) => {
+    event.preventDefault();
+    s.started = false;
+    showError(
+      new Error(
+        'The graphics context was lost. Reload with a smaller window or enable hardware graphics acceleration. The saved source and scene state remain available.',
+      ),
+    );
+  });
+  function quality(q) {
+    s.quality = q;
+    atmosphere.columnClouds.setQuality(q);
+    const pix =
+      q === 'high'
+        ? Math.min(2, Math.max(1, devicePixelRatio))
+        : q === 'economy'
+          ? Math.min(1, devicePixelRatio)
+          : Math.min(1.5, devicePixelRatio);
+    renderer.setPixelRatio(pix);
+    atmosphere.uniforms.uSteps.value = q === 'high' ? 24 : q === 'economy' ? 8 : 14;
+    sun.shadow.mapSize.set(
+      q === 'high' ? 4096 : q === 'economy' ? 1024 : 2048,
+      q === 'high' ? 4096 : q === 'economy' ? 1024 : 2048,
+    );
+    const size = renderer.getDrawingBufferSize(new T.Vector2());
+    water.resize(size.x, size.y, q);
+    if (sun.shadow.map) {
+      sun.shadow.map.dispose();
+      sun.shadow.map = null;
+    }
+    s.dirty = true;
+  }
+  function hide() {
+    s.hidden = !s.hidden;
+    document.body.classList.toggle('minimal', s.hidden);
+  }
+  function userKey(e, down) {
+    if (e.target.closest('input,select,textarea,button') && e.code !== 'Escape') return;
+    if (
+      [
+        'KeyW',
+        'KeyA',
+        'KeyS',
+        'KeyD',
+        'ArrowUp',
+        'ArrowDown',
+        'ArrowLeft',
+        'ArrowRight',
+        'Space',
+      ].includes(e.code)
+    )
+      e.preventDefault();
+    s.keys[e.code] = down;
+    if (down && !e.repeat) {
+      if (e.code === 'KeyH') hide();
+      if (e.code === 'Escape') {
+        s.hidden = false;
+        document.body.classList.remove('minimal');
+        $('panel').classList.remove('open');
+      }
+      if (e.code === 'Space' && s.jumpY === 0) s.jumpV = 1.2;
+    }
+  }
+  addEventListener('keydown', (e) => userKey(e, true));
+  addEventListener('keyup', (e) => userKey(e, false));
+  addEventListener('blur', () => {
+    s.keys = {};
+    touch = { x: 0, y: 0 };
+  });
+  canvas.addEventListener('pointerdown', (e) => {
+    if (e.button !== 0) return;
+    dragging = { id: e.pointerId, x: e.clientX, y: e.clientY };
+    canvas.setPointerCapture(e.pointerId);
+  });
+  canvas.addEventListener('pointermove', (e) => {
+    if (!dragging || dragging.id !== e.pointerId) return;
+    s.yaw -= (e.clientX - dragging.x) * 0.003;
+    s.pitch = C.clamp(s.pitch - (e.clientY - dragging.y) * 0.0028, -1.5, 1.5);
+    dragging.x = e.clientX;
+    dragging.y = e.clientY;
+    s.needRender = true;
+  });
+  canvas.addEventListener('pointerup', () => (dragging = null));
+  canvas.addEventListener('pointercancel', () => (dragging = null));
+  canvas.addEventListener(
+    'wheel',
+    (e) => {
+      e.preventDefault();
+      camera.fov = C.clamp(camera.fov + e.deltaY * 0.025, 18, 85);
+      camera.updateProjectionMatrix();
+      s.needRender = true;
+      $('fov').value = camera.fov;
+      $('fov-value').textContent = camera.fov.toFixed(0) + '°';
+    },
+    { passive: false },
+  );
+  $('panel-toggle').onclick = () => {
+    $('panel').classList.toggle('open');
+  };
+  $('close-panel').onclick = () => $('panel').classList.remove('open');
+  $('help-toggle').onclick = () => $('help').showModal();
+  $('help-close').onclick = () => $('help').close();
+  $('hide').onclick = hide;
+  $('unhide').onclick = hide;
+  $('solar-phase').oninput = (e) => setPhase(+e.target.value / 100000);
+  document
+    .querySelectorAll('[data-phase]')
+    .forEach((b) => (b.onclick = () => setPhase(+b.dataset.phase)));
+  document
+    .querySelectorAll('[data-location]')
+    .forEach((b) => (b.onclick = () => setLocation(b.dataset.location)));
+  document
+    .querySelectorAll('[data-world]')
+    .forEach((b) => (b.onclick = () => world(b.dataset.world)));
+  $('world-select').onchange = (e) => world(e.target.value);
+  $('clock').onchange = (e) => {
+    s.clock = e.target.value;
+    updateHUD();
+  };
+  $('mode').onchange = (e) => {
+    s.mode = e.target.value;
+    s.freeze = s.mode !== 'live';
+    s.previousWeatherTime = s.weatherTime;
+  };
+  $('rate').onchange = (e) => (s.rate = +e.target.value);
+  $('weather-slider').oninput = (e) => setWeather(+e.target.value);
+  document
+    .querySelectorAll('[data-weather]')
+    .forEach((b) => (b.onclick = () => setWeather(+b.dataset.weather)));
+  $('fog').onclick = () => setWeather(0, 'fog');
+  $('play-episode').onclick = () => {
+    if (s.cloudRegime !== 'reference' || s.weatherTime >= 14400) setWeather(0);
+    s.mode = 'live';
+    s.freeze = false;
+    s.rate = 30;
+    $('mode').value = 'live';
+    $('rate').value = '30';
+  };
+  $('sound').onclick = async () => {
+    try {
+      const on = await audio.start();
+      $('sound').textContent = on ? 'Sound on' : 'Sound off';
+      $('sound').classList.toggle('selected', on);
+    } catch (e) {
+      toast(e.message);
+    }
+  };
+  $('landscape-debug').onchange = (e) => {
+    geography.debug(+e.target.value);
+    s.needRender = true;
+  };
+  $('quality').onchange = (e) => quality(e.target.value);
+  $('exposure').onchange = (e) => {
+    s.exposure = e.target.value;
+    s.dirty = true;
+  };
+  $('ev').oninput = (e) => {
+    s.ev = +e.target.value;
+    $('ev-value').textContent = (s.ev >= 0 ? '+' : '') + s.ev.toFixed(1) + ' EV';
+  };
+  $('fov').oninput = (e) => {
+    camera.fov = +e.target.value;
+    camera.updateProjectionMatrix();
+    $('fov-value').textContent = camera.fov.toFixed(0) + '°';
+  };
+  $('calibrate').onclick = () => {
+    try {
+      const v = C.calibratedFov(+$('screen-height').value, +$('eye-distance').value);
+      camera.fov = C.clamp(v, 8, 100);
+      camera.updateProjectionMatrix();
+      s.needRender = true;
+      $('fov').value = camera.fov;
+      $('fov-value').textContent = camera.fov.toFixed(1) + '°';
+      toast('Perspective matched to the entered screen height and distance.');
+    } catch (e) {
+      toast(e.message);
+    }
+  };
+  function inspectPonds() {
+    const g = geography.ponds.model.best();
+    if (!g) {
+      toast('Choose Rain or After rain to inspect standing water.');
+      return;
+    }
+    const x = g.x + 4,
+      z = g.z + 7;
+    camera.position.set(x, geography.height(x, z) + 1.7, z);
+    s.yaw = Math.atan2(x - g.x, z - g.z);
+    s.pitch = -0.35;
+    s.needRender = true;
+    $('place').textContent = 'Runoff hollow';
+  }
+  $('pond-view').onclick = inspectPonds;
+  function snapshotState() {
+    return {
+      schema: 'open-moon-shoreline-state/2',
+      build: 'shoreline-cloud-columns-04',
+      cloudColumn: atmosphere.columnClouds.snapshot(),
+      world: s.world,
+      clock: s.clock,
+      phase: s.phase,
+      motionTime: s.motionTime,
+      windDisplacement: s.drift,
+      weatherKind: s.weatherKind,
+      weatherTime: s.weatherTime,
+      ledger: { ...s.ledger },
+      spatialWater: geography.surfaceWater.ledger,
+      terrain: geography.terrain.stats,
+      ponds: geography.ponds.model.summary,
+      position: camera.position.toArray(),
+      yaw: s.yaw,
+      pitch: s.pitch,
+      fov: camera.fov,
+      exposure: s.exposure,
+      exposureBase: 0.244647046,
+      renderExposure: renderer.toneMappingExposure,
+      ev: s.ev,
+      whiteBalanceStrength: atmosphere.whiteBalanceStrength,
+      whiteBalanceGain: atmosphere.uniforms.uWhiteBalance.value.toArray(),
+      freeze: s.freeze,
+      quality: s.quality,
+      graphicsBackend: { ...OM.graphicsBackend },
+      viewport: [innerWidth, innerHeight],
+      pixelRatio: renderer.getPixelRatio(),
+    };
+  }
 
- function updateColumnPanel(){
-  const c=atmosphere.columnClouds.current?.model,key=s.cloudRegime+':'+s.world;if(c&&c.world!==s.world)return;
-  if(key===columnPanelKey)return;columnPanelKey=key;
-  $('column-details').hidden=!c;
-  if(!c){$('column-summary').textContent='Reference keeps the published clear sky and authored weather episode.';return;}
-  const q=c.summary,km=v=>v===null?'none':(v/1000).toFixed(2)+' km';
-  const other=OpenMoonWeatherColumn.create(c.key,s.world==='earth'?'moon':'earth').summary;
-  $('column-summary').textContent=`${q.name}. Cloud base ${km(q.cloudBase_m)}, top ${km(q.cloudTop_m)}. Comparison ${s.world==='earth'?'Moon':'Earth'}: ${km(other.cloudBase_m)} to ${km(other.cloudTop_m)}.`;
-  $('column-physics').textContent=`Pressure ${(q.surfacePressure_Pa/101325).toFixed(2)} atm · surface scale height ${km(q.surfaceScaleHeight_m)} · dry parcel cooling ${q.dryLapse_K_per_km.toFixed(2)} K/km. Liquid / ice column ${(q.liquidWaterPath_kg_m2*1000).toFixed(1)} / ${(q.iceWaterPath_kg_m2*1000).toFixed(1)} g/m². In-cloud optical depth ${q.inCloudOpticalDepth.toFixed(1)}. Ground rain is held at zero.`;
-  const canvas=$('column-profile'),ctx=canvas.getContext('2d'),w=canvas.width,h=canvas.height,top=Math.max(1000,(q.cloudTop_m||12000)*1.14),rows=c.rows.filter(r=>r.z<=top);
-  const Tmin=Math.min(...rows.map(r=>Math.min(r.T,r.parcelT)))-2,Tmax=Math.max(...rows.map(r=>Math.max(r.T,r.parcelT)))+2;
-  const X=t=>42+(t-Tmin)/(Tmax-Tmin)*(w-62),Y=z=>h-32-z/top*(h-54);ctx.clearRect(0,0,w,h);ctx.fillStyle='#dce5de';ctx.font='11px system-ui';
-  if(q.cloudBase_m!==null){ctx.fillStyle='#a0b6bb33';ctx.fillRect(42,Y(q.cloudTop_m),w-62,Y(q.cloudBase_m)-Y(q.cloudTop_m));}
-  for(let i=0;i<=4;i++){const z=top*i/4;ctx.strokeStyle='#9ab1b044';ctx.beginPath();ctx.moveTo(42,Y(z));ctx.lineTo(w-20,Y(z));ctx.stroke();ctx.fillStyle='#dce5de';ctx.fillText((z/1000).toFixed(top<3000?2:0),4,Y(z)+3);}
-  for(let i=0;i<=3;i++){const t=Tmin+(Tmax-Tmin)*i/3;ctx.fillText((t-273.15).toFixed(0),X(t)-8,h-17);}
-  for(const [field,colour]of [['T','#92d7d0'],['parcelT','#ebc278']]){ctx.strokeStyle=colour;ctx.lineWidth=2;ctx.beginPath();rows.forEach((r,i)=>i?ctx.lineTo(X(r[field]),Y(r.z)):ctx.moveTo(X(r[field]),Y(r.z)));ctx.stroke();}
-  ctx.fillStyle='#dce5de';ctx.fillText('km',4,12);ctx.fillText('Temperature °C',w/2-36,h-2);ctx.fillStyle='#92d7d0';ctx.fillText('Air',65,13);ctx.fillStyle='#ebc278';ctx.fillText('Lifted parcel',111,13);
- }
- function setColumn(key){
-  setWeather(0,'clear');s.cloudRegime=key;atmosphere.columnClouds.select(key);s.freeze=true;s.mode='inspect';s.motionTime=0;s.keys={};$('mode').value='inspect';$('mode').disabled=key!=='reference';
-  $('m1-motion').textContent='Resume motion';
-  document.querySelectorAll('[data-column]').forEach(b=>b.classList.toggle('selected',b.dataset.column===key));
-  if(key!=='reference'){const spec=OpenMoonWeatherColumn.PRESETS[key];s.weather={...s.weather,temperature:spec.surfaceT,humidity:spec.rh,wind:Math.hypot(spec.wind[0][1],spec.wind[0][2])};}
-  columnPanelKey='';s.dirty=true;s.needRender=true;lights();updateHUD();
- }
- document.querySelectorAll('[data-column]').forEach(b=>b.onclick=()=>setColumn(b.dataset.column));
- $('look-sky').onclick=()=>{s.pitch=.46;s.yaw=0;s.needRender=true;};
- $('column-export').onclick=()=>{const c=atmosphere.columnClouds.current?.model;if(!c)return;OM.downloadBlob(new Blob([JSON.stringify({schema:c.schema,world:c.world,planet:c.planet,inputs:c.inputs,summary:c.summary,optics:atmosphere.columnClouds.snapshot().optics,rows:c.rows},null,2)],{type:'application/json'}),'Open_Moon_Atmospheric_Column.json');};
- $('save-offline').onclick=()=>OM.saveOffline();$('snapshot').onclick=()=>OM.downloadBlob(new Blob([JSON.stringify(snapshotState(),null,2)],{type:'application/json'}),'Open_Moon_Shoreline_State.json');
- const joy=$('joystick'),nub=$('joystick-nub');let joyID=null;function jmove(e){if(e.pointerId!==joyID)return;const r=joy.getBoundingClientRect(),dx=(e.clientX-r.left-r.width/2)/(r.width*.32),dy=(e.clientY-r.top-r.height/2)/(r.height*.32),len=Math.max(1,Math.hypot(dx,dy));touch={x:dx/len,y:dy/len};nub.style.transform=`translate(${touch.x*25}px,${touch.y*25}px)`;}joy.onpointerdown=e=>{joyID=e.pointerId;joy.setPointerCapture(e.pointerId);jmove(e);};joy.onpointermove=jmove;joy.onpointerup=joy.onpointercancel=()=>{joyID=null;touch={x:0,y:0};nub.style.transform='';};
- addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);s.needRender=true;});
- function toast(t){$('toast').textContent=t;$('toast').hidden=false;setTimeout(()=>$('toast').hidden=true,4500);}
- setLocation('shore');setWeather(0,'clear');world('moon');quality(softwareRenderer||innerWidth<700?'economy':'balanced');$('quality').value=s.quality;updateHUD();lights();water.reflection(camera,0,true);renderer.render(scene,camera);s.started=true;s.needRender=false;$('boot').hidden=true;s.hidden=true;document.body.classList.add('minimal');s.last=performance.now();requestAnimationFrame(frame);
- function renderOnce(){move(0);lights();water.reflection(camera,sceneStamp,true);renderer.render(scene,camera);s.needRender=false;}
- function benchmark(){geography.debug(0);$('landscape-debug').value='0';world('moon');s.clock='moon';s.freeze=true;s.exposure='fixed';s.autoExposure=.244647046;s.ev=0;s.mode='inspect';s.keys={};s.jumpY=s.jumpV=0;setPhase(0);setWeather(0,'clear');setLocation('shore');s.motionTime=0;atmosphere.whiteBalanceStrength=1;camera.fov=58;camera.updateProjectionMatrix();$('clock').value='moon';$('white-balance').value='1';$('lamp').checked=false;$('m1-motion').textContent='Resume motion';$('exposure').value='fixed';$('ev').value=0;$('ev-value').textContent='0.0 EV';$('fov').value=58;$('fov-value').textContent='58°';renderOnce();updateHUD();}
- $('m1-benchmark').onclick=()=>{geography.debug(0);$('landscape-debug').value='0';benchmark();};
- $('white-balance').onchange=e=>{atmosphere.whiteBalanceStrength=+e.target.value;s.needRender=true;};
- $('shore-edge').onclick=()=>{s.freeze=true;camera.position.set(0,geography.height(0,-1)+1.7,-1);s.yaw=0;s.pitch=-.025;s.needRender=true;};
- document.addEventListener('input',()=>s.needRender=true);document.addEventListener('change',()=>s.needRender=true);
- $('m1-motion').onclick=()=>{s.freeze=!s.freeze;$('m1-motion').textContent=s.freeze?'Resume motion':'Freeze motion';};
- root.openMoonShoreline={setColumn,inspectPonds,renderOnce,benchmark,snapshotState,ready:true,state:s,camera,scene,renderer,atmosphere,geography,water,rain,audio,setPhase,setWeather,setLocation,setWorld:world,updateHUD,quality,tickModel,get frameCount(){return s.frame;}};
+  function updateColumnPanel() {
+    const c = atmosphere.columnClouds.current?.model,
+      key = s.cloudRegime + ':' + s.world;
+    if (c && c.world !== s.world) return;
+    if (key === columnPanelKey) return;
+    columnPanelKey = key;
+    $('column-details').hidden = !c;
+    if (!c) {
+      $('column-summary').textContent =
+        'Reference keeps the published clear sky and authored weather episode.';
+      return;
+    }
+    const q = c.summary,
+      km = (v) => (v === null ? 'none' : (v / 1000).toFixed(2) + ' km');
+    const other = W.create(c.key, s.world === 'earth' ? 'moon' : 'earth').summary;
+    $('column-summary').textContent =
+      `${q.name}. Cloud base ${km(q.cloudBase_m)}, top ${km(q.cloudTop_m)}. Comparison ${s.world === 'earth' ? 'Moon' : 'Earth'}: ${km(other.cloudBase_m)} to ${km(other.cloudTop_m)}.`;
+    $('column-physics').textContent =
+      `Pressure ${(q.surfacePressure_Pa / 101325).toFixed(2)} atm · surface scale height ${km(q.surfaceScaleHeight_m)} · dry parcel cooling ${q.dryLapse_K_per_km.toFixed(2)} K/km. Liquid / ice column ${(q.liquidWaterPath_kg_m2 * 1000).toFixed(1)} / ${(q.iceWaterPath_kg_m2 * 1000).toFixed(1)} g/m². In-cloud optical depth ${q.inCloudOpticalDepth.toFixed(1)}. Ground rain is held at zero.`;
+    const canvas = $('column-profile'),
+      ctx = canvas.getContext('2d'),
+      w = canvas.width,
+      h = canvas.height,
+      top = Math.max(1000, (q.cloudTop_m || 12000) * 1.14),
+      rows = c.rows.filter((r) => r.z <= top);
+    const Tmin = Math.min(...rows.map((r) => Math.min(r.T, r.parcelT))) - 2,
+      Tmax = Math.max(...rows.map((r) => Math.max(r.T, r.parcelT))) + 2;
+    const X = (t) => 42 + ((t - Tmin) / (Tmax - Tmin)) * (w - 62),
+      Y = (z) => h - 32 - (z / top) * (h - 54);
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = '#dce5de';
+    ctx.font = '11px system-ui';
+    if (q.cloudBase_m !== null) {
+      ctx.fillStyle = '#a0b6bb33';
+      ctx.fillRect(42, Y(q.cloudTop_m), w - 62, Y(q.cloudBase_m) - Y(q.cloudTop_m));
+    }
+    for (let i = 0; i <= 4; i++) {
+      const z = (top * i) / 4;
+      ctx.strokeStyle = '#9ab1b044';
+      ctx.beginPath();
+      ctx.moveTo(42, Y(z));
+      ctx.lineTo(w - 20, Y(z));
+      ctx.stroke();
+      ctx.fillStyle = '#dce5de';
+      ctx.fillText((z / 1000).toFixed(top < 3000 ? 2 : 0), 4, Y(z) + 3);
+    }
+    for (let i = 0; i <= 3; i++) {
+      const t = Tmin + ((Tmax - Tmin) * i) / 3;
+      ctx.fillText((t - 273.15).toFixed(0), X(t) - 8, h - 17);
+    }
+    for (const [field, colour] of [
+      ['T', '#92d7d0'],
+      ['parcelT', '#ebc278'],
+    ]) {
+      ctx.strokeStyle = colour;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      rows.forEach((r, i) =>
+        i ? ctx.lineTo(X(r[field]), Y(r.z)) : ctx.moveTo(X(r[field]), Y(r.z)),
+      );
+      ctx.stroke();
+    }
+    ctx.fillStyle = '#dce5de';
+    ctx.fillText('km', 4, 12);
+    ctx.fillText('Temperature °C', w / 2 - 36, h - 2);
+    ctx.fillStyle = '#92d7d0';
+    ctx.fillText('Air', 65, 13);
+    ctx.fillStyle = '#ebc278';
+    ctx.fillText('Lifted parcel', 111, 13);
+  }
+  function setColumn(key) {
+    setWeather(0, 'clear');
+    s.cloudRegime = key;
+    atmosphere.columnClouds.select(key);
+    s.freeze = true;
+    s.mode = 'inspect';
+    s.motionTime = 0;
+    s.keys = {};
+    $('mode').value = 'inspect';
+    $('mode').disabled = key !== 'reference';
+    $('m1-motion').textContent = 'Resume motion';
+    document
+      .querySelectorAll('[data-column]')
+      .forEach((b) => b.classList.toggle('selected', b.dataset.column === key));
+    if (key !== 'reference') {
+      const spec = W.PRESETS[key];
+      s.weather = {
+        ...s.weather,
+        temperature: spec.surfaceT,
+        humidity: spec.rh,
+        wind: Math.hypot(spec.wind[0][1], spec.wind[0][2]),
+      };
+    }
+    columnPanelKey = '';
+    s.dirty = true;
+    s.needRender = true;
+    lights();
+    updateHUD();
+  }
+  document
+    .querySelectorAll('[data-column]')
+    .forEach((b) => (b.onclick = () => setColumn(b.dataset.column)));
+  $('look-sky').onclick = () => {
+    s.pitch = 0.46;
+    s.yaw = 0;
+    s.needRender = true;
+  };
+  $('column-export').onclick = () => {
+    const c = atmosphere.columnClouds.current?.model;
+    if (!c) return;
+    OM.downloadBlob(
+      new Blob(
+        [
+          JSON.stringify(
+            {
+              schema: c.schema,
+              world: c.world,
+              planet: c.planet,
+              inputs: c.inputs,
+              summary: c.summary,
+              optics: atmosphere.columnClouds.snapshot().optics,
+              rows: c.rows,
+            },
+            null,
+            2,
+          ),
+        ],
+        { type: 'application/json' },
+      ),
+      'Open_Moon_Atmospheric_Column.json',
+    );
+  };
+  $('snapshot').onclick = () =>
+    OM.downloadBlob(
+      new Blob([JSON.stringify(snapshotState(), null, 2)], { type: 'application/json' }),
+      'Open_Moon_Shoreline_State.json',
+    );
+  const joy = $('joystick'),
+    nub = $('joystick-nub');
+  let joyID = null;
+  function jmove(e) {
+    if (e.pointerId !== joyID) return;
+    const r = joy.getBoundingClientRect(),
+      dx = (e.clientX - r.left - r.width / 2) / (r.width * 0.32),
+      dy = (e.clientY - r.top - r.height / 2) / (r.height * 0.32),
+      len = Math.max(1, Math.hypot(dx, dy));
+    touch = { x: dx / len, y: dy / len };
+    nub.style.transform = `translate(${touch.x * 25}px,${touch.y * 25}px)`;
+  }
+  joy.onpointerdown = (e) => {
+    joyID = e.pointerId;
+    joy.setPointerCapture(e.pointerId);
+    jmove(e);
+  };
+  joy.onpointermove = jmove;
+  joy.onpointerup = joy.onpointercancel = () => {
+    joyID = null;
+    touch = { x: 0, y: 0 };
+    nub.style.transform = '';
+  };
+  addEventListener('resize', () => {
+    camera.aspect = innerWidth / innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(innerWidth, innerHeight);
+    s.needRender = true;
+  });
+  function toast(t) {
+    $('toast').textContent = t;
+    $('toast').hidden = false;
+    setTimeout(() => ($('toast').hidden = true), 4500);
+  }
+  setLocation('shore');
+  setWeather(0, 'clear');
+  world('moon');
+  quality(softwareRenderer || innerWidth < 700 ? 'economy' : 'balanced');
+  $('quality').value = s.quality;
+  updateHUD();
+  lights();
+  water.reflection(camera, 0, true);
+  renderer.render(scene, camera);
+  s.started = true;
+  s.needRender = false;
+  $('boot').hidden = true;
+  s.hidden = true;
+  document.body.classList.add('minimal');
+  s.last = performance.now();
+  requestAnimationFrame(frame);
+  function renderOnce() {
+    move(0);
+    lights();
+    water.reflection(camera, sceneStamp, true);
+    renderer.render(scene, camera);
+    s.needRender = false;
+  }
+  function benchmark() {
+    geography.debug(0);
+    $('landscape-debug').value = '0';
+    world('moon');
+    s.clock = 'moon';
+    s.freeze = true;
+    s.exposure = 'fixed';
+    s.autoExposure = 0.244647046;
+    s.ev = 0;
+    s.mode = 'inspect';
+    s.keys = {};
+    s.jumpY = s.jumpV = 0;
+    setPhase(0);
+    setWeather(0, 'clear');
+    setLocation('shore');
+    s.motionTime = 0;
+    atmosphere.whiteBalanceStrength = 1;
+    camera.fov = 58;
+    camera.updateProjectionMatrix();
+    $('clock').value = 'moon';
+    $('white-balance').value = '1';
+    $('lamp').checked = false;
+    $('m1-motion').textContent = 'Resume motion';
+    $('exposure').value = 'fixed';
+    $('ev').value = 0;
+    $('ev-value').textContent = '0.0 EV';
+    $('fov').value = 58;
+    $('fov-value').textContent = '58°';
+    renderOnce();
+    updateHUD();
+  }
+  $('m1-benchmark').onclick = () => {
+    geography.debug(0);
+    $('landscape-debug').value = '0';
+    benchmark();
+  };
+  $('white-balance').onchange = (e) => {
+    atmosphere.whiteBalanceStrength = +e.target.value;
+    s.needRender = true;
+  };
+  $('shore-edge').onclick = () => {
+    s.freeze = true;
+    camera.position.set(0, geography.height(0, -1) + 1.7, -1);
+    s.yaw = 0;
+    s.pitch = -0.025;
+    s.needRender = true;
+  };
+  document.addEventListener('input', () => (s.needRender = true));
+  document.addEventListener('change', () => (s.needRender = true));
+  $('m1-motion').onclick = () => {
+    s.freeze = !s.freeze;
+    $('m1-motion').textContent = s.freeze ? 'Resume motion' : 'Freeze motion';
+  };
+  globalThis.openMoonShoreline = {
+    setColumn,
+    inspectPonds,
+    renderOnce,
+    benchmark,
+    snapshotState,
+    ready: true,
+    state: s,
+    camera,
+    scene,
+    renderer,
+    atmosphere,
+    geography,
+    water,
+    rain,
+    audio,
+    setPhase,
+    setWeather,
+    setLocation,
+    setWorld: world,
+    updateHUD,
+    quality,
+    tickModel,
+    get frameCount() {
+      return s.frame;
+    },
+  };
 };
-})(globalThis);

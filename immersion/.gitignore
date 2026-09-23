@@ -1,11 +1,8 @@
+node_modules/
+dist/
 __pycache__/
 *.pyc
-node_modules/
-/Open_Moon_Shoreline.html
-/Open_Moon_Renderer_Lab.html
+# Baked, reproducible surface textures; their manifest is committed.
 /assets/surfaces/*.png
-/vendor/three.cjs
-/vendor/three-r186/three.*.js
-# Local harness outputs (checkpoint evidence lives in immersion/docs/history).
-/validation/
+# Local test and browser-harness outputs.
 /test-results/

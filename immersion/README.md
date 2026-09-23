@@ -1,36 +1,51 @@
 # Immersion
 
-Interactive experiences for exploring how an Open Moon could look and feel.
+Interactive experiences of what an Open Moon could look and feel like. They are
+illustrations built on the project's research, not evidence for it: the
+research domains own the science, and the experience reads their results.
 
-Each experience lives in its own subfolder, with its source, assumptions, methods
-and check records. Perceptual exploration and visual illustration have separate
-evidence status from the repository's theoretical, environmental and engineering
-feasibility research.
+## Layout
 
-## Experiences
+| Folder | Holds |
+|---|---|
+| [engine/](engine/) | Runtime systems any experience can use: sky and clouds drawn from baked atlases, clipmap terrain and surface materials, sea, rain and surface water, procedural vegetation geometry, audio |
+| [world/](world/) | World content. At present this is only the authored development landscape. |
+| [experiences/](experiences/) | Entry points: [shoreline](experiences/shoreline/) (the walkable development scene) and [renderer-lab](experiences/renderer-lab/) (the WebGPU/TSL experiment) |
+| [bake/](bake/) | Turns domain products into runtime assets: `sky_atlas.py` packs the [illumination/sky](../illumination/sky/) atlases into `assets/sky/`; `surfaces.py` generates the surface textures |
+| [assets/](assets/) | Baked runtime assets and their manifests |
+| [tests/unit/](tests/unit/) | Node tests of engine and world modules |
+| [docs/](docs/) | Rendering notes, the renderer roadmap, and the [checkpoint history](docs/history/) |
 
-- [Shoreline](light-cycle/shoreline/README.md): the walkable development scene
-  (terrain, vegetation, water, clear-sky atlas, column clouds).
+## Run
 
-Science that grew inside the experience now lives in its domain: the clear-sky
-solver in [illumination/sky](../illumination/sky/), the atmospheric column in
-[atmosphere/column](../atmosphere/column/), and the A1–A3 light-transport
-references in [illumination/references](../illumination/references/). Tools that
-render science faithfully (the month-of-light viewer, accuracy labs and the B1
-reference renderer) are in [visualization](../visualization/). Past checkpoint
-records are in [docs/history](docs/history/).
+```sh
+cd immersion
+npm install
+python -m pip install -r bake/requirements.txt
+python bake/surfaces.py     # surface textures, checked against assets/surfaces/manifest.json
+npm run dev                 # then open /experiences/shoreline/
+npm test                    # unit tests
+npm run build               # static site in dist/; `npm run preview` serves it
+```
 
-## Development
+The baked sky (`assets/sky/atmosphere.json`) is committed, because regenerating it
+needs the numba sky solve. After the illumination atlases change, re-bake it with
+`python bake/sky_atlas.py`. The experiences need a WebGL2 browser.
 
-Preserve the distinction between calculated clear-sky illumination, reduced
-weather/display approximations, and illustrative scenery. Keep assumptions and
-known numerical limitations close to the controls and results. Simulation clocks,
-weather animation clocks and display exposure represent separate choices.
+## How the experience relates to the research
 
-Shared scientific models remain in their existing subject folders. Immersion
-experiments may reference those models, while claims about feasibility or physical
-validation require the corresponding research evidence.
+- **Science stays in its domain.** The clear-sky solver lives in
+  [illumination/sky](../illumination/sky/), the column model in
+  [atmosphere/column](../atmosphere/column/), and the light-transport references
+  that measure this renderer in [illumination/references](../illumination/references/).
+  Tools that render science faithfully are in [visualization](../visualization/).
+- **The experience reads results.** The sky comes from a baked atlas. One
+  exception remains: the cloud renderer still imports the atmosphere domain's
+  column model directly. Baked column products will replace that import.
+- **The scene is a placeholder.** The shoreline cove, its trees and its weather
+  episode were authored for development. They make no claim about what Open Moon
+  environments will be. Specific environments should come from the biology,
+  ecology, geology and hydrology research as it matures.
 
-Generated distributions, numerical atlases and image assets stay outside Git when
-they can be rebuilt from the tracked source. Each experience documents its build
-and preserves provenance for distributed snapshots.
+Past checkpoint methods, handoffs and validation records are in
+[docs/history](docs/history/).

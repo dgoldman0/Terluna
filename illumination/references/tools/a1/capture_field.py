@@ -8,7 +8,18 @@ import argparse, hashlib, json, os, subprocess, time
 from playwright.sync_api import sync_playwright
 ROOT=Path(__file__).resolve().parents[2]
 # The experience whose real-time cloud rendering these references measure.
-VIEWER=ROOT.parents[1]/'immersion'/'light-cycle'/'shoreline'
+VIEWER=ROOT.parents[1]/'immersion'/'dist'
+ENTRY='experiences/shoreline/index.html'
+
+def serve_viewer():
+    """Serve the built experience (run `npm run build` in immersion/) on localhost."""
+    import functools, threading
+    from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+    class Quiet(SimpleHTTPRequestHandler):
+        def log_message(self, *args): pass
+    server=ThreadingHTTPServer(('127.0.0.1',0),functools.partial(Quiet,directory=str(VIEWER)))
+    threading.Thread(target=server.serve_forever,daemon=True).start()
+    return server,f'http://127.0.0.1:{server.server_port}/'
 
 def main():
     ap=argparse.ArgumentParser(description=__doc__)
@@ -16,7 +27,7 @@ def main():
     ap.add_argument('--world',choices=['moon','earth','moon_no_ozone'],default='moon')
     ap.add_argument('--output',type=Path,default=ROOT/'data/a1/generated')
     a=ap.parse_args();a.output.mkdir(parents=True,exist_ok=True)
-    html=(VIEWER/'Open_Moon_Shoreline.html').read_bytes()
+    html=(VIEWER/ENTRY).read_bytes();server,base=serve_viewer()
     report={'schema':'open-moon-a1-gpu-field-capture/1','html_sha256':hashlib.sha256(html).hexdigest(),'errors':[],'warnings':[],'external_requests':[],'passed':False}
     xvfb=None;start=time.monotonic()
     try:
@@ -30,10 +41,10 @@ def main():
                 if m.type=='error' or any(x in m.text.lower() for x in ['context lost','context_lost','shader error']):report['errors'].append(m.text)
                 elif m.type=='warning':report['warnings'].append(m.text)
             page.on('console',console)
-            page.on('request',lambda r:report['external_requests'].append(r.url) if not r.url.startswith(('blob:','data:')) else None)
+            page.on('request',lambda r:report['external_requests'].append(r.url) if not r.url.startswith(('blob:','data:',base)) else None)
             page.expose_function('a1Digest',lambda name,values:list(hashlib.new({'SHA-256':'sha256','SHA-1':'sha1'}[name],bytes(values)).digest()))
             page.evaluate("""()=>{if(!crypto.subtle)Object.defineProperty(window,'crypto',{value:{subtle:{digest:async(name,b)=>new Uint8Array(await a1Digest(name,Array.from(new Uint8Array(b.buffer||b,b.byteOffset||0,b.byteLength)))).buffer}}});window.requestAnimationFrame=cb=>{window.__a1Frame=cb;return 1;};}""")
-            page.set_content(html.decode(),wait_until='domcontentloaded')
+            page.goto(base+ENTRY,wait_until='domcontentloaded')
             page.wait_for_function('window.openMoonShoreline?.ready || window.openMoonShorelineError',polling=100)
             error=page.evaluate('window.openMoonShorelineError||null')
             if error:raise RuntimeError(error)

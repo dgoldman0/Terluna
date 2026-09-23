@@ -1,4 +1,7 @@
-"""Repack previously generated optical outputs; never recalculates the atmosphere."""
+"""Bake the clear-sky atlases from illumination/sky into the immersion's sky asset.
+
+Repacks previously generated optical outputs; never recalculates the atmosphere.
+"""
 import argparse,base64,gzip,hashlib,json
 from pathlib import Path
 import numpy as np
@@ -23,5 +26,10 @@ def pack(source,dest):
         out['provenance'].append({'file':p.name,'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'shape':list(d['rgb'].shape),'derived_shape':list(rgb.shape),'new_atmospheric_calculation':False})
         print(name,rgb.shape,len(world['data']),maxerr)
     dest.write_text(json.dumps(out,separators=(',',':')))
+REPO=Path(__file__).resolve().parents[2]
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('archive_data',type=Path);p.add_argument('--out',type=Path,default=Path('data/atmosphere.json'));a=p.parse_args();pack(a.archive_data,a.out)
+    # Source: the illumination domain's clear-sky atlases; output: this experience's baked sky.
+    p=argparse.ArgumentParser(description=__doc__)
+    p.add_argument('archive_data',type=Path,nargs='?',default=REPO/'illumination/sky/data')
+    p.add_argument('--out',type=Path,default=REPO/'immersion/assets/sky/atmosphere.json')
+    a=p.parse_args();pack(a.archive_data,a.out)

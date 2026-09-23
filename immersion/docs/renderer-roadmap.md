@@ -1,8 +1,9 @@
 # Renderer and model roadmap
 
-Decision recorded 2026-09-22. The recovered landscape checkpoint remains on
-Three.js r180 / WebGL. The supplied r186 archive is the dependency candidate for
-the next revision. Keep the recovery and dependency migration in separate commits.
+Decision recorded 2026-09-22. **Status, 2026-09-23:** step 1 is done. The shoreline
+runs on Three.js r186 WebGL, now installed from npm (`three@0.186.0`, pinned in
+`package-lock.json`) and built with Vite; the renderer lab (step 3) is
+`experiences/renderer-lab/`. Steps 2 and 3 remain open.
 
 ## 1. Controlled r180 to r186 WebGL migration
 

@@ -54,7 +54,7 @@ def main():
  report['spectral_check_histories']=spectra['total_paths'];report['accepted_image_map_histories']=total
  browser=read(v/'browser.json');gate('Exact-build browser/pixel checks',browser['passed'] and browser['html_sha256']==sha(ROOT/'Open_Moon_B1_Scene_Painter.html'),state_checks=browser['state_checks'],layouts=len(browser['layouts']),errors=browser['errors'],console_errors=browser['console_errors'],external_requests=browser['external_requests'])
  report['browser_navigation']=browser['navigation_attempts'];report['browser_scope']=browser['load_method'];report['html_sha256']=sha(ROOT/'Open_Moon_B1_Scene_Painter.html')
- viewer=ROOT.parents[1]/'immersion'/'light-cycle'/'shoreline'/'Open_Moon_Shoreline.html'  # the experience B1 was built beside
+ viewer=ROOT.parents[1]/'immersion'/'dist'/'experiences'/'shoreline'/'index.html'  # the experience B1 was built beside (pinned build; see README)
  gate('Production shoreline build preserved',viewer.is_file() and sha(viewer)==BASELINE_HTML,sha256=sha(viewer) if viewer.is_file() else None)
  baseline=read(ROOT/'B1_BASELINE_MANIFEST.json');changed=[]
  for name,info in baseline['files'].items():

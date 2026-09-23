@@ -1,0 +1,20 @@
+{
+  "name": "terluna-immersion",
+  "private": true,
+  "type": "module",
+  "description": "Open Moon immersive experiences: engine, world content and experiences.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node --test --test-concurrency=1 tests/unit/",
+    "format": "prettier --write engine world experiences tests/unit"
+  },
+  "dependencies": {
+    "three": "0.186.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2",
+    "vite": "^7.1.7"
+  }
+}

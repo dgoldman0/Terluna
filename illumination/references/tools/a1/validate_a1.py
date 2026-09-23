@@ -12,7 +12,7 @@ GEN=ROOT/'data/a1/generated'
 REPO=ROOT.parents[1]
 LABS=REPO/'visualization'/'labs'
 COLUMN=REPO/'atmosphere'/'column'
-VIEWER=REPO/'immersion'/'light-cycle'/'shoreline'
+VIEWER=REPO/'immersion'/'dist'/'experiences'/'shoreline'
 BASELINE_HTML='c7ead1fd83e0d55518d2951e08cd46d31f323280885125382a8013b5d74636d9'
 def sha(p:Path)->str:return hashlib.sha256(p.read_bytes()).hexdigest()
 def read(p:Path):return json.loads(p.read_text())
@@ -33,9 +33,9 @@ def main():
     assert mc['solver_sha256']==sha(ROOT/'tools/a1/cloud_reference.py');assert field['provenance']['shared_atmospheric_profile_sha256']==manifest['profiles'][0]['profile_sha256']
     assert gpu['html_sha256']==BASELINE_HTML and not gpu['gpu']['context_lost'];assert mc['unresolved_paths']==0
     browser=read(LABS/'validation/a1/lab-browser.json');assert browser['passed'] and not browser['errors'] and not browser['external_requests'];assert browser['html_sha256']==sha(LABS/'Open_Moon_A1_Accuracy_Lab.html')
-    assert sha(VIEWER/'Open_Moon_Shoreline.html')==BASELINE_HTML
+    assert sha(VIEWER/'index.html')==BASELINE_HTML  # pinned publication build; see README
     tap=(ROOT/'validation/a1/unit-tests.tap').read_text();counts={k:int(re.search(r'^# '+k+r' (\d+)$',tap,re.M).group(1)) for k in ('tests','pass','fail','skipped')};assert counts['tests']==counts['pass'] and counts['fail']==counts['skipped']==0
-    paths=[LABS/'build_accuracy.py',LABS/'index.accuracy-lab.html',LABS/'src/accuracy-lab.js',COLUMN/'atmospheric-profile.js',ROOT/'src/profile-optics.js',ROOT/'src/frozen-cloud-field.js',COLUMN/'weather-column.js',VIEWER/'src/cloud-renderer.js',ROOT/'tests/a1_frozen_probe.js',ROOT/'tests/atmospheric-profile.test.cjs',ROOT/'tests/frozen-cloud-field.test.cjs',ROOT/'data/a1/spectral-inputs.json',ROOT/'data/a1/BRUNETON_LICENSE.txt',ROOT/'A1_METHODS.md',ROOT/'A1_THIRD_PARTY_NOTICES.md',ROOT/'requirements.txt',*sorted((ROOT/'tools/a1').glob('*.py')),*sorted((ROOT/'tools/a1').glob('*.cjs'))]
+    paths=[LABS/'build_accuracy.py',LABS/'index.accuracy-lab.html',LABS/'src/accuracy-lab.js',COLUMN/'atmospheric-profile.js',ROOT/'src/profile-optics.js',ROOT/'src/frozen-cloud-field.js',COLUMN/'weather-column.js',REPO/'immersion'/'engine'/'cloud-renderer.js',ROOT/'tests/a1_frozen_probe.js',ROOT/'tests/atmospheric-profile.test.cjs',ROOT/'tests/frozen-cloud-field.test.cjs',ROOT/'data/a1/spectral-inputs.json',ROOT/'data/a1/BRUNETON_LICENSE.txt',ROOT/'A1_METHODS.md',ROOT/'A1_THIRD_PARTY_NOTICES.md',ROOT/'requirements.txt',*sorted((ROOT/'tools/a1').glob('*.py')),*sorted((ROOT/'tools/a1').glob('*.cjs'))]
     evidence=ROOT/'validation/a1'
     for filename,obj in [('frozen-field-gpu.json',gpu),('cloud-reference.json',mc),('profile-manifest.json',manifest),('clear-sky-numerics.json',[{'id':p['id'],**{k:read(GEN/(p['id']+'.sky.json'))[k] for k in ('profile_sha256','solver_sha256','spectral_sha256','model','budgets','column_validation','ray_convergence')}} for p in manifest['profiles']])]:
         (evidence/filename).write_text(json.dumps(obj,indent=2)+'\n')
