@@ -14,10 +14,11 @@ check-layers:
 test-python:
 	$(PYTHON) -m pytest
 
-# The immersion (after its bake), the atmospheric column model and the light-transport references.
+# The immersion (after its bake), the atmospheric column model, the light-transport references
+# and the column viewer.
 test-js:
 	cd immersion && npm test
-	node --test atmosphere/column/tests/ illumination/references/tests/
+	node --test atmosphere/column/tests/ illumination/references/tests/ visualization/atmospheric-columns/tests/
 
 # Byte-pinned historical imports and the reproduced feasibility baseline.
 check-provenance:

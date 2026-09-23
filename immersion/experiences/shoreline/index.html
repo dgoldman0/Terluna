@@ -907,34 +907,18 @@
         <button id="close-panel" aria-label="Close conditions">×</button>
       </div>
       <p>Prescribed atmosphere, authored local weather, and an explorable visual landscape.</p>
-      <h3>Vertical atmosphere study</h3>
-      <div class="chips" aria-label="Atmospheric column scenarios">
-        <button data-column="reference" class="selected">Reference</button
+      <h3>Sky</h3>
+      <div class="chips" aria-label="Skies from the atmospheric column soundings">
+        <button data-column="reference" class="selected">Clear</button
         ><button data-column="fog">Coastal fog</button
         ><button data-column="fair">Elevated clouds</button
         ><button data-column="convection">Deep convection</button>
       </div>
-      <div class="panel-row">
-        <button id="look-sky">Look into the sky</button
-        ><button id="column-export">Export column</button>
-      </div>
-      <p id="column-summary"></p>
-      <div id="column-details" hidden>
-        <canvas
-          id="column-profile"
-          width="290"
-          height="215"
-          style="width: 100%; height: auto"
-          aria-label="Environmental and lifted-parcel temperature versus altitude"
-        ></canvas>
-        <p id="column-physics"></p>
-      </div>
+      <div class="panel-row"><button id="look-sky">Look into the sky</button></div>
       <p class="source-note">
-        Specified pressure, temperature, moisture and wind profiles determine cloud altitude and
-        condensate. Earth comparison recalculates hydrostatic height and parcel diagnostics. Cloud
-        shapes and condensate retention are selected closures. The clear-sky atlas is retained;
-        cloud illumination and intervening molecular extinction vary with altitude. Column scenarios
-        hold surface rain at zero.
+        Cloud altitude and condensate come from the atmosphere domain's column soundings (computed);
+        cloud shapes are a display choice. These skies hold surface rain at zero. The soundings and
+        their diagnostics are in visualization/atmospheric-columns.
       </p>
       <hr class="rule" />
       <h3>Authored weather episode</h3>
@@ -1109,11 +1093,11 @@
           and uncertainty in deep twilight remain unresolved.
         </p>
         <p>
-          The four-hour weather episode is retained as a legacy forcing scenario. The separate
-          atmospheric column studies derive cloud bounds and condensate from specified vertical
-          soundings and hold surface rainfall at zero. Cloud optical depth is derived from selected
-          water content, layer thickness, and droplet radius. Cloud illumination and multiple
-          scattering remain approximate.
+          The four-hour weather episode is retained as a legacy forcing scenario. The column skies
+          take cloud bounds and condensate from the atmosphere domain's soundings and hold surface
+          rainfall at zero. Cloud optical depth is derived from selected water content, layer
+          thickness, and droplet radius. Cloud illumination and multiple scattering remain
+          approximate.
         </p>
         <p>
           Leaf interception, surface films, effective soil storage and ponded water are tracked on a

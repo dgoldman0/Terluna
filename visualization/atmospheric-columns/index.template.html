@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Atmospheric Columns</title>
+    <meta
+      name="description"
+      content="The atmosphere domain's column soundings for the Open Moon and Earth: temperature, humidity, condensate and cloud diagnostics."
+    />
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #f6f7f4;
+        --panel: #ffffff;
+        --ink: #1d2622;
+        --muted: #5b6863;
+        --line: #d5dcd6;
+        --grid: #dde3de;
+        --band: #9fb9c233;
+        --air: #2b7f86;
+        --parcel: #b8741a;
+        --liquid: #3569b8;
+        --ice: #7f58b0;
+        --accent: #2f5d44;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme='light']) {
+          --bg: #10181a;
+          --panel: #172225;
+          --ink: #e3ebe6;
+          --muted: #9fb0aa;
+          --line: #2d3c3f;
+          --grid: #26363a;
+          --band: #a0b6bb2e;
+          --air: #92d7d0;
+          --parcel: #ebc278;
+          --liquid: #8fb4f0;
+          --ice: #c7a6ef;
+          --accent: #c1d4a6;
+        }
+      }
+      :root[data-theme='dark'] {
+        --bg: #10181a;
+        --panel: #172225;
+        --ink: #e3ebe6;
+        --muted: #9fb0aa;
+        --line: #2d3c3f;
+        --grid: #26363a;
+        --band: #a0b6bb2e;
+        --air: #92d7d0;
+        --parcel: #ebc278;
+        --liquid: #8fb4f0;
+        --ice: #c7a6ef;
+        --accent: #c1d4a6;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font: 14px/1.5 system-ui, -apple-system, 'Segoe UI', sans-serif;
+      }
+      header,
+      main,
+      footer {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 0 16px;
+      }
+      header {
+        padding-top: 22px;
+      }
+      h1 {
+        font-size: 22px;
+        margin: 0 0 4px;
+        font-weight: 600;
+      }
+      h2 {
+        font-size: 16px;
+        margin: 0 0 8px;
+        font-weight: 600;
+      }
+      .lede {
+        color: var(--muted);
+        margin: 0 0 14px;
+        max-width: 72ch;
+      }
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 18px;
+        align-items: center;
+        margin-bottom: 14px;
+      }
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      button {
+        font: inherit;
+        color: var(--ink);
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 6px 11px;
+        cursor: pointer;
+      }
+      button.selected {
+        border-color: var(--accent);
+        box-shadow: inset 0 0 0 1px var(--accent);
+      }
+      #worlds {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 16px;
+      }
+      section {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 14px;
+        min-width: 0;
+      }
+      canvas {
+        display: block;
+        width: 100%;
+        height: 230px;
+        margin-bottom: 6px;
+        touch-action: none;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 12.5px;
+        font-variant-numeric: tabular-nums;
+        margin: 8px 0 10px;
+      }
+      caption {
+        text-align: left;
+        color: var(--muted);
+        padding-bottom: 4px;
+      }
+      th,
+      td {
+        text-align: left;
+        padding: 3px 6px 3px 0;
+        border-bottom: 1px solid var(--line);
+        vertical-align: top;
+      }
+      th {
+        font-weight: 500;
+        color: var(--muted);
+      }
+      .note {
+        color: var(--muted);
+        font-size: 12.5px;
+        margin: -4px 0 8px;
+      }
+      .wide {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 14px;
+        margin-top: 16px;
+        overflow-x: auto;
+      }
+      footer {
+        color: var(--muted);
+        font-size: 12.5px;
+        padding-bottom: 28px;
+      }
+      code {
+        font-size: 11.5px;
+        word-break: break-all;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Atmospheric columns</h1>
+      <p class="lede">
+        Preset soundings from the atmosphere domain's column model, Open Moon beside Earth. Each
+        profile is drawn from every row of the published column set; point at a chart to read the
+        column at that altitude. The shaded band is the diagnosed cloud layer.
+      </p>
+      <div class="controls">
+        <div class="chips" id="presets" aria-label="Sounding"></div>
+        <div class="chips" aria-label="Altitude range">
+          <button data-range="cloud">Cloud layer</button
+          ><button data-range="low">Lowest 2 km</button
+          ><button data-range="column">Whole column</button>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div id="worlds"></div>
+      <div class="wide">
+        <h2>Diagnostics</h2>
+        <table id="diagnostics"></table>
+        <p class="note" id="inputs"></p>
+        <h2>Model assumptions</h2>
+        <ul id="assumptions"></ul>
+      </div>
+    </main>
+    <footer>
+      <h2>Evidence and provenance</h2>
+      <div id="provenance"></div>
+      <p>
+        Built by <code>visualization/atmospheric-columns/build.mjs</code>. This page displays the
+        product; the physics lives in <code>atmosphere/column</code>.
+      </p>
+    </footer>
+    <script type="application/json" id="column-data">
+      __COLUMN_DATA__
+    </script>
+    <script type="module">
+      __VIEWER_SCRIPT__
+    </script>
+  </body>
+</html>

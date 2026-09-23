@@ -17,6 +17,8 @@ condensate is an optical closure, not a precipitation budget.
   profiles from it (`tools/a1/export_profiles.cjs`).
 - [atmosphere/lower_air.py](../lower_air.py) reads those exports through
   `A1Profile` (for example in the megaforest wind study).
+- [visualization/atmospheric-columns](../../visualization/atmospheric-columns/)
+  displays the column set: soundings, diagnostics and full-resolution downloads.
 - The immersion draws its column clouds from the exported column set. Its bake
   step (`npm run bake:columns` in `immersion/`) runs `export_columns.cjs` and packs
   the result; the experience never runs this model.

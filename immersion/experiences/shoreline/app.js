@@ -1,6 +1,6 @@
 import { OM } from '../../engine/om.js';
 import C from '../../engine/core.js';
-import { columns, getColumn } from '../../engine/columns.js';
+import { columns } from '../../engine/columns.js';
 import { Stars } from '../../engine/stars.js';
 import { adapt, targetExposure } from '../../engine/exposure.js';
 import {
@@ -121,7 +121,6 @@ OM.boot = async function (T) {
     demoTour: false,
     walked: 0,
   };
-  let columnPanelKey = '';
   let dragging = null,
     lastHud = 0,
     sceneStamp = 0,
@@ -401,12 +400,11 @@ OM.boot = async function (T) {
           Math.hypot(column.rows[0].windX, column.rows[0].windZ).toFixed(1) + ' m/s';
         $('tau').textContent = column.summary.inCloudOpticalDepth.toFixed(1);
         $('mode-note').textContent =
-          'Column study · ' +
+          'Column sky · ' +
           (s.freeze ? 'frozen state' : 'wind advection; sounding held') +
           ' · surface rain unforced';
       }
     }
-    updateColumnPanel();
     $('field-readout').textContent =
       `At your feet: elevation ${field.elevation.toFixed(2)} m above sea level; slope ${((Math.atan(field.slope) * 180) / Math.PI).toFixed(1)}°; rooting soil ${(field.soilDepth * 100).toFixed(0)} cm; canopy cover ${(field.canopy * 100).toFixed(0)}%; soil saturation ${(wet.soilSaturation * 100).toFixed(0)}%; ponded store ${wet.ponded_mm.toFixed(2)} mm.`;
   }
@@ -684,76 +682,6 @@ OM.boot = async function (T) {
     };
   }
 
-  function updateColumnPanel() {
-    const c = atmosphere.columnClouds.current?.model,
-      key = s.cloudRegime + ':' + s.world;
-    if (c && c.world !== s.world) return;
-    if (key === columnPanelKey) return;
-    columnPanelKey = key;
-    $('column-details').hidden = !c;
-    if (!c) {
-      $('column-summary').textContent =
-        'Reference keeps the published clear sky and authored weather episode.';
-      return;
-    }
-    const q = c.summary,
-      km = (v) => (v === null ? 'none' : (v / 1000).toFixed(2) + ' km');
-    const other = getColumn(s.world === 'earth' ? 'moon' : 'earth', c.key).summary;
-    $('column-summary').textContent =
-      `${q.name}. Cloud base ${km(q.cloudBase_m)}, top ${km(q.cloudTop_m)}. Comparison ${s.world === 'earth' ? 'Moon' : 'Earth'}: ${km(other.cloudBase_m)} to ${km(other.cloudTop_m)}.`;
-    $('column-physics').textContent =
-      `Pressure ${(q.surfacePressure_Pa / 101325).toFixed(2)} atm · surface scale height ${km(q.surfaceScaleHeight_m)} · dry parcel cooling ${q.dryLapse_K_per_km.toFixed(2)} K/km. Liquid / ice column ${(q.liquidWaterPath_kg_m2 * 1000).toFixed(1)} / ${(q.iceWaterPath_kg_m2 * 1000).toFixed(1)} g/m². In-cloud optical depth ${q.inCloudOpticalDepth.toFixed(1)}. Ground rain is held at zero.`;
-    const canvas = $('column-profile'),
-      ctx = canvas.getContext('2d'),
-      w = canvas.width,
-      h = canvas.height,
-      top = Math.max(1000, (q.cloudTop_m || 12000) * 1.14),
-      rows = c.rows.filter((r) => r.z <= top);
-    const Tmin = Math.min(...rows.map((r) => Math.min(r.T, r.parcelT))) - 2,
-      Tmax = Math.max(...rows.map((r) => Math.max(r.T, r.parcelT))) + 2;
-    const X = (t) => 42 + ((t - Tmin) / (Tmax - Tmin)) * (w - 62),
-      Y = (z) => h - 32 - (z / top) * (h - 54);
-    ctx.clearRect(0, 0, w, h);
-    ctx.fillStyle = '#dce5de';
-    ctx.font = '11px system-ui';
-    if (q.cloudBase_m !== null) {
-      ctx.fillStyle = '#a0b6bb33';
-      ctx.fillRect(42, Y(q.cloudTop_m), w - 62, Y(q.cloudBase_m) - Y(q.cloudTop_m));
-    }
-    for (let i = 0; i <= 4; i++) {
-      const z = (top * i) / 4;
-      ctx.strokeStyle = '#9ab1b044';
-      ctx.beginPath();
-      ctx.moveTo(42, Y(z));
-      ctx.lineTo(w - 20, Y(z));
-      ctx.stroke();
-      ctx.fillStyle = '#dce5de';
-      ctx.fillText((z / 1000).toFixed(top < 3000 ? 2 : 0), 4, Y(z) + 3);
-    }
-    for (let i = 0; i <= 3; i++) {
-      const t = Tmin + ((Tmax - Tmin) * i) / 3;
-      ctx.fillText((t - 273.15).toFixed(0), X(t) - 8, h - 17);
-    }
-    for (const [field, colour] of [
-      ['T', '#92d7d0'],
-      ['parcelT', '#ebc278'],
-    ]) {
-      ctx.strokeStyle = colour;
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      rows.forEach((r, i) =>
-        i ? ctx.lineTo(X(r[field]), Y(r.z)) : ctx.moveTo(X(r[field]), Y(r.z)),
-      );
-      ctx.stroke();
-    }
-    ctx.fillStyle = '#dce5de';
-    ctx.fillText('km', 4, 12);
-    ctx.fillText('Temperature °C', w / 2 - 36, h - 2);
-    ctx.fillStyle = '#92d7d0';
-    ctx.fillText('Air', 65, 13);
-    ctx.fillStyle = '#ebc278';
-    ctx.fillText('Lifted parcel', 111, 13);
-  }
   function setColumn(key) {
     setWeather(0, 'clear');
     s.cloudRegime = key;
@@ -778,7 +706,6 @@ OM.boot = async function (T) {
         wind: Math.hypot(spec.wind[0][1], spec.wind[0][2]),
       };
     }
-    columnPanelKey = '';
     s.dirty = true;
     s.needRender = true;
     lights();
@@ -791,35 +718,6 @@ OM.boot = async function (T) {
     s.pitch = 0.46;
     s.yaw = 0;
     s.needRender = true;
-  };
-  $('column-export').onclick = () => {
-    const c = atmosphere.columnClouds.current?.model;
-    if (!c) return;
-    OM.downloadBlob(
-      new Blob(
-        [
-          JSON.stringify(
-            {
-              schema: c.schema,
-              world: c.world,
-              planet: c.planet,
-              inputs: c.inputs,
-              summary: c.summary,
-              optics: atmosphere.columnClouds.snapshot().optics,
-              rows: c.rows,
-              rows_note:
-                c.key === 'fog'
-                  ? 'Full resolution to 500 m, then every tenth row.'
-                  : 'Every tenth row. Full columns: atmosphere/column (export_columns.cjs).',
-            },
-            null,
-            2,
-          ),
-        ],
-        { type: 'application/json' },
-      ),
-      'Open_Moon_Atmospheric_Column.json',
-    );
   };
   // Whether the whole Earth disk is in view from an eye position: the terrain is
   // marched along the line of sight and the trees, stones and shelter raycast.

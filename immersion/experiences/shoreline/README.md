@@ -16,8 +16,9 @@ colour and exposure.
 
 Run it from `immersion/` with `npm run dev` and open `/experiences/shoreline/`.
 Drag to look, WASD to walk, Space to hop (lunar gravity), H to hide the controls.
-**Show controls** opens viewpoints, the Sun slider, weather, and the column
-studies.
+**Show controls** opens viewpoints, the Sun slider, weather and the column skies.
+Their soundings and diagnostics are in
+[visualization/atmospheric-columns](../../../visualization/atmospheric-columns/).
 
 `main.js` registers the development cove as the active world (`OM.world`), loads
 the baked sky atlas, columns, sky bodies and surface textures, and boots `app.js`,
