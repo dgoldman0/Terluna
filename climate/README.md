@@ -12,6 +12,13 @@ Moisture, clouds, winds, latent heat, freezing feedbacks, actual terrain and pho
 
 The [54-case output](../research/studies/environment_screens/results/climate_budget.csv) closes its discrete global energy balance and periodic condition. Timestep tests pass, while a 6x24 to 12x48 spatial comparison changes some coarse-cell averaged temperatures by about 2 K; spatial resolution uncertainty remains. [Findings](../research/findings.md) explain the exact checks and boundaries.
 
+## Three-dimensional preparation
+
+[gcm/](gcm/) holds the boundary files (land fraction, elevation and ocean depth
+for 25% and 35% water on common GCM grids), the planet parameters and the
+first-experiment plan for a general circulation model. No GCM has been installed
+or run; which to use is the author's decision.
+
 ## Next step
 
 The atmosphere domain's [radiative–convective column](../atmosphere/radiative_convective/)

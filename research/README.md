@@ -23,8 +23,8 @@ Models live in their domain folders. This folder holds what spans domains:
 
 | Topic | Current calculation | Principal open condition |
 |---|---|---|
-| [Atmosphere](../atmosphere/) | Solved conduction/advection/Jeans column, band ledger, lower air, column soundings, line-by-line radiative–convective column | Actual spectrum-to-chemistry-to-escape closure; stratospheric temperature and ozone |
-| [Climate](../climate/) | Conservative periodic latitude–longitude thermal screen; canopy and forest-patch flow; clear-sky line-by-line budget from the atmosphere domain | Clouds, moisture/ice, dynamics and terrain |
+| [Atmosphere](../atmosphere/) | Solved conduction/advection/Jeans column, band ledger, lower air, column soundings, line-by-line radiative–convective column with shield-filtered sunlight, correlated-k thermal scheme, global-mean radiative–photochemical equilibrium (ozone, stratosphere, surface UV) per shield | Non-LTE upper air, filter EUV leakage heating, 3-D middle-atmosphere transport and its effect on the exobase |
+| [Climate](../climate/) | Conservative periodic latitude–longitude thermal screen; canopy and forest-patch flow; clear-sky line-by-line budget from the atmosphere domain; GCM boundary files and experiment plan (no GCM run) | Clouds, moisture/ice, dynamics and terrain |
 | [Biosphere](../biosphere/) | Carbon reserve theorem/model, bounded oxygen box, tree and forest-patch mechanics | Measured traits, complete life cycles and ecological interactions |
 | [Illumination](../illumination/) | Spectral clear-sky solver, A1–A3 light-transport references, site sky geometry and earthlight, bright stars | Date-accurate ephemeris, earthlight spectrum, profiles tied to the solved column |
 | [Protection](../protection/) | Original component model plus spectral coverage audit | EUV response, clean operation, particle transport and lifetime resources |

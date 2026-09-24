@@ -10,7 +10,8 @@ Several reduced models are available. Historical code and reference tables remai
 | [Spectral interface](spectral_interface.py) | Explicit band energy ledger with missing-data rejection | Connect supplied irradiance and response parameters to surface-normalized heat; audit input coverage |
 | [Lower air](lower_air.py) | Hydrostatic N2/O2/water-vapour lower atmosphere with radius-dependent gravity; `A1Profile` reads exported column profiles | Air-state input for canopy flow and tree mechanics |
 | [Column](column/) | Sounding thermodynamics, parcel ascent, diagnosed cloud support and a 600-km hydrostatic continuation (JavaScript) | Selected column experiments; the shared state behind the light-transport references |
-| [Radiative–convective column](radiative_convective/) | Line-by-line clear-sky outgoing longwave and absorbed sunlight for prescribed moist-adiabatic columns (HITRAN, MT_CKD 4.3, CIA), Moon and Earth control | Greenhouse strength, clear-sky albedo and runaway limit against surface temperature; the radiation behind climate balance questions |
+| [Radiative–convective column](radiative_convective/) | Line-by-line clear-sky outgoing longwave and absorbed sunlight for prescribed moist-adiabatic columns (HITRAN, MT_CKD 4.3, CIA), Moon and Earth control, with each spectral shield's sunlight; a correlated-k thermal scheme built from the same spectroscopy | Greenhouse strength, clear-sky albedo and runaway limit against surface temperature; the radiation behind climate balance questions |
+| [Middle atmosphere](middle_atmosphere/) | Radiative–convective equilibrium at a fixed surface temperature coupled to steady O–H–N photochemistry and ultraviolet transfer, per shield; exobase coupling through the thermal column | Ozone, stratospheric and upper-air temperature, surface UV and the thermal column's base temperature under each shield; global-mean, radiative only |
 
 ## New calculation and remaining closure
 

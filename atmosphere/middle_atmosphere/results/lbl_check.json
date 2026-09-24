@@ -1,0 +1,96 @@
+{
+ "schema": "terluna.atmosphere.middle-atmosphere-lbl-check/1",
+ "evidence": "    python -m atmosphere.middle_atmosphere.lbl_check moon_1.2atm_titania_stack earth_control",
+ "cases": {
+  "moon_1.2atm_edge_200nm": {
+   "pressures_pa": [
+    100.0,
+    30.0,
+    10.0,
+    3.0,
+    1.0,
+    0.3,
+    0.1
+   ],
+   "t_ck_k": [
+    245.31,
+    263.6,
+    252.81,
+    235.19,
+    224.67,
+    200.22,
+    185.83
+   ],
+   "t_lbl_corrected_k": [
+    244.62,
+    264.37,
+    253.39,
+    231.42,
+    213.34,
+    199.13,
+    155.24
+   ],
+   "max_heating_correction_k_day": 14.75998747555242
+  },
+  "moon_1.2atm_titania_stack": {
+   "pressures_pa": [
+    100.0,
+    30.0,
+    10.0,
+    3.0,
+    1.0,
+    0.3,
+    0.1
+   ],
+   "t_ck_k": [
+    152.6,
+    157.2,
+    162.46,
+    170.09,
+    168.97,
+    163.29,
+    168.1
+   ],
+   "t_lbl_corrected_k": [
+    155.88,
+    158.71,
+    162.28,
+    163.19,
+    164.2,
+    163.16,
+    127.41
+   ],
+   "max_heating_correction_k_day": 10.362588580002617
+  },
+  "earth_control": {
+   "pressures_pa": [
+    100.0,
+    30.0,
+    10.0,
+    3.0,
+    1.0,
+    0.3,
+    0.1
+   ],
+   "t_ck_k": [
+    255.75,
+    249.15,
+    233.8,
+    210.24,
+    198.02,
+    192.14,
+    199.47
+   ],
+   "t_lbl_corrected_k": [
+    256.16,
+    248.17,
+    229.08,
+    209.99,
+    199.11,
+    188.63,
+    149.27
+   ],
+   "max_heating_correction_k_day": 83.64185601139576
+  }
+ }
+}

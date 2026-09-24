@@ -237,5 +237,50 @@
   },
   "conclusion": "Spectral step, angles, line-intensity floor, solar zenith nodes and solar levels change the budget by less than 0.03 W/m2. Vertical discretisation of the thermal calculation converges at first order: the standard 70+20 levels read OLR about 0.6 W/m2 low (Richardson estimate from 45+12, 70+20 and 140+40 levels). The pseudo-spherical beam raises ASR by 1.8 W/m2 over plane-parallel."
  },
- "table_interpolation": "CO2 node table against direct calculation: under 1% at any wavenumber, 0.3% in band integrals; OLR of an Earth column changes by 0.01 W/m2."
+ "table_interpolation": "CO2 node table against direct calculation: under 1% at any wavenumber, 0.3% in band integrals; OLR of an Earth column changes by 0.01 W/m2.",
+ "correlated_k": {
+  "description": "ck.py (16 bands x 16 g-points, tables from this model's line-by-line spectra) against line-by-line fluxes and heating. Record: results/ck_validation.json. Columns: moist adiabat with a synthetic warm stratosphere (60 K above the tropopause near 100 Pa) and an ozone layer, to 0.1 Pa.",
+  "fluxes": {
+   "earth_288": {
+    "olr_lbl": 273.99,
+    "olr_ck": 273.98,
+    "dlr_lbl": 299.12,
+    "dlr_ck": 298.35,
+    "max_net_flux_difference": 3.17
+   },
+   "moon12_288": {
+    "olr_lbl": 230.26,
+    "olr_ck": 230.6,
+    "dlr_lbl": 360.29,
+    "dlr_ck": 357.38,
+    "max_net_flux_difference": 4.92
+   },
+   "moon12_330_saturated": {
+    "olr_lbl": 237.29,
+    "olr_ck": 238.72,
+    "dlr_lbl": 671.58,
+    "dlr_ck": 671.54,
+    "max_net_flux_difference": 4.95
+   }
+  },
+  "heating": {
+   "earth_288/co2_15um": {
+    "max_abs_difference_k_day": 73.231,
+    "rms_difference_k_day": 9.37
+   },
+   "earth_288/o3_9.6um": {
+    "max_abs_difference_k_day": 0.08,
+    "rms_difference_k_day": 0.027
+   },
+   "moon12_288/co2_15um": {
+    "max_abs_difference_k_day": 10.227,
+    "rms_difference_k_day": 1.332
+   },
+   "moon12_288/o3_9.6um": {
+    "max_abs_difference_k_day": 0.052,
+    "rms_difference_k_day": 0.014
+   }
+  },
+  "conclusion": "OLR within 0.4 W/m2 of line-by-line for Earth and Moon at 288 K (1.4 W/m2 for a saturated 330 K lunar column); surface downward longwave within 0.8-2.9 W/m2. Ozone 9.6-um heating within 0.08 K/day at all levels. CO2 15-um heating within about 5% down to 30 Pa (Earth column) and 5 Pa (lunar column); above, errors of 20-40% (the 16 g-points do not resolve the line peaks that only the uppermost layers see), and the top layer at 0.1 Pa cools 5x too weakly on the Earth column and 1.6x on the lunar one. Temperatures above those pressures inherit this error on top of the local-thermodynamic-equilibrium limitation."
+ }
 }

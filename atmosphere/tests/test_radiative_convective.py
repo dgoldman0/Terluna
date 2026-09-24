@@ -213,6 +213,19 @@ class SpectroscopyTests(unittest.TestCase):
             rel = np.abs(fast - ref) / np.maximum(ref, 1e-3 * ref.max())
             self.assertLess(rel.max(), 0.01)
 
+    def test_pressure_shift_past_the_selection_margin(self):
+        # A line selected just inside the 25 cm-1 margin whose pressure shift at 3 atm carries its centre
+        # beyond the cutoff contributes nothing, and must not index outside the far-wing mesh.
+        sp = self.sp
+        grid = sp.Grid.span(1000.0, 1010.0, 0.01)
+        fields = [(975.0005, 1005.0), (1e-20, 1e-20), (0.08, 0.08), (0.4, 0.4), (100.0, 100.0), (0.7, 0.7),
+                  (-0.05, -0.05)]
+        two = sp.LineList('H2O', *(np.array(v) for v in fields), np.array([1, 1]), np.array([18.010565] * 2))
+        fast = sp.line_absorption(grid, two, self.sums, 296.0, 3 * 101325.0)
+        ref = self.brute(grid, two, 296.0, 3 * 101325.0, 0.0, False)
+        self.assertTrue(np.all(np.isfinite(fast)))
+        self.assertAlmostEqual(float(fast.sum()) / float(ref.sum()), 1.0, delta=1e-3)
+
     def test_mt_ckd_matches_aer_example(self):
         # AER MT_CKD_H2O 4.3 run_example (p=1013 mb, T=300 K, h2o_frac=0.00990098),
         # self and foreign coefficients at 497, 550 and 603 cm^-1, (c) AER.

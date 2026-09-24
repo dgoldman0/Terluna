@@ -15,6 +15,8 @@ counterpart. Equations, data, tests and limits are in [METHODS.md](METHODS.md).
 | [climate.py](climate.py) | Scenarios and the OLR/ASR budget at a surface temperature |
 | [run.py](run.py) | Named sweeps, written to `results/` as a data product with schema, hashes and evidence statement |
 | [analysis.py](analysis.py) | Balance temperatures for stated cloud effects, runaway limits and sensitivities from the sweep table |
+| [ck.py](ck.py), [validate_ck.py](validate_ck.py) | Correlated-k thermal radiation (16 bands × 16 g-points) built from the same spectroscopy, with ozone; its line-by-line check writes `results/ck_validation.json` |
+| [trace_gases.py](trace_gases.py) | Forcing of inert fluorinated trace gases (SF6, CF4, NF3) on the Earth control and the Moon, with band saturation; writes `results/trace_gases.json` |
 | [validation.json](validation.json) | Cross-code (PyRADS), Monte Carlo and convergence records |
 | [inputs.json](inputs.json), [fetch_inputs.py](fetch_inputs.py) | The external spectroscopic inputs (about 176 MB), with URLs, sizes, hashes and credits |
 
@@ -110,7 +112,59 @@ What these calculations show:
   temperatures by −0.6 to +1.7 K, warmer the stronger the cloud cooling.
 
 None of this is a climate prediction: clouds, the month-long day and night, the
-poles, circulation and ozone are all outside the calculation.
+poles and circulation are all outside the calculation. Ozone and a
+self-consistent stratosphere are added in [../middle_atmosphere](../middle_atmosphere/),
+which moves these balance temperatures: behind the titania stack the
+stratosphere is colder than the 200 K assumed here, and with C = −20 W/m² the
+balance rises to about 284 K.
+
+## Correlated-k scheme (2026-09-24)
+
+[ck.py](ck.py) reproduces the line-by-line thermal fluxes for the calculations
+that need many radiation calls. The numbers are in [validation.json](validation.json)
+and `results/ck_validation.json`:
+
+- OLR is within 0.4 W/m² for Earth and Moon columns at 288–290 K, and 1.4 W/m²
+  for a saturated 330 K lunar column.
+- Surface downward longwave is within 0.8–2.9 W/m².
+- Ozone 9.6-µm heating is within 0.08 K/day at every level.
+- CO2 15-µm heating is within about 5% up to 30 Pa (Earth column) and 5 Pa
+  (lunar column). Above that it is off by 20–40%, and several times in the
+  model's top layer: 16 g-points do not resolve the line peaks that only the
+  uppermost layers see.
+
+## Trace greenhouse gases (2026-09-24)
+
+[trace_gases.py](trace_gases.py) asks how much warming inert, chlorine- and
+bromine-free fluorinated gases could add. Each gas is modelled as a well-mixed
+absorber, grey across its strongest band, and its forcing is computed line by
+line on columns at 288 K. The IPCC AR6 radiative efficiency fixes each band's
+mean cross-section through the Earth control. All-sky values assume the
+all-sky adjusted forcing is 0.6–0.9 of the clear-sky instantaneous forcing.
+Results are in `results/trace_gases.json`.
+
+| Gas (band) | Earth, W/m² per ppb | Moon 1.2 atm, W/m² per ppb (thin limit) | Most one gas can give on the Moon (all-sky) | ppb for 2 W/m² on the Moon |
+|---|---|---|---|---|
+| SF6 (925–955 cm⁻¹) | 0.57 | 3.5 | 3.7–5.6 W/m² | 0.7–1.0 |
+| NF3 (890–920 cm⁻¹) | 0.20 | 1.3 | 4.0–6.1 W/m² | 1.9–2.4 |
+| CF4 (1270–1290 cm⁻¹) | 0.10 | 0.46 | 0.7–1.1 W/m² | not reachable |
+
+- A part per billion does five to seven times more on the Moon than on Earth,
+  because each ppb is a six-to-seven-fold thicker absorber over each square
+  metre.
+- For the same reason each band saturates within a few ppb. One gas cannot
+  supply more than about 4–6 W/m², however much is added. SF6, NF3 and CF4
+  together, in their separate bands, give roughly 8–13 W/m², about 6–10 K at
+  the Moon's sensitivity. The grey-band curve is a lower bound once a band is
+  saturated, because real bands keep absorbing weakly in their wings and hot
+  bands.
+- CF4's band sits where the Moon's deeper water-vapour column already absorbs,
+  so it is nearly useless there.
+- These gases are inert and harmless to breathe at ppb levels, and carry no
+  chlorine or bromine to destroy ozone. On Earth they last centuries to tens of
+  millennia (SF6 3,200 years, NF3 570, CF4 50,000). Behind a shield that blocks
+  the far ultraviolet that breaks them up high in the atmosphere they would
+  last longer still: a lever that is effectively permanent once pulled.
 
 ## What it is and is not
 

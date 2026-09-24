@@ -132,6 +132,38 @@ integrals. For an Earth column, OLR moves by 0.01 W/m².
   (schema `terluna.protection.shield-transmission/1`, hash recorded per row), with
   T at 5000 nm used longward of the grid.
 
+## Correlated-k thermal radiation
+
+[ck.py](ck.py) turns the same spectroscopy into a fast scheme for calculations
+that need many radiation calls, such as the radiative equilibrium of the middle
+atmosphere. It has 16 bands from 1 to 3000 cm⁻¹, each with 16 g-points: 8 Gauss
+points on [0, 0.9] and 8 on [0.9, 1], so the line cores that cool the upper
+atmosphere get half the points.
+
+The k-distributions of H2O (lines plus the MT_CKD continuum), CO2 and O3 are
+the sorted cross-sections of line-by-line spectra at nodes:
+
+- 27 pressures from 0.1 Pa to 3.2×10⁵ Pa (four per decade);
+- 12 temperatures from 100 to 375 K;
+- for water, five vapour fractions (0, 0.01, 0.05, 0.2, 0.5).
+
+Each spectrum is sampled at a quarter of the local Voigt half-width of a CO2
+line at 667 cm⁻¹, between 2×10⁻⁴ and 0.01 cm⁻¹. Quadrupling the resolution or
+the fine window changes k by less than 2% at any g-point. The sorted samples
+estimate the distribution without bias even where lines are narrower than the
+step, because the grid falls at random phases against the lines.
+
+Nodes that only far-from-Earth-like states need are computed the first time a
+column reaches them and are never filled in: water fractions above 0.05 below
+10⁴ Pa, and 150 K or colder above 3×10⁴ Pa. The collision-induced absorption
+enters as a temperature-only pseudo-gas.
+
+At run time, k is interpolated log-linearly in pressure and linearly in
+temperature and vapour fraction. Gases combine by random overlap with resorting
+and rebinning (Amundsen et al. 2017). Fluxes use the same linear-in-τ source
+function and four Gauss angles as the line-by-line model, with band-integrated
+Planck radiances.
+
 ## Validation record
 
 [validation.json](validation.json) holds the numbers.
@@ -171,6 +203,7 @@ integrals. For an Earth column, OLR moves by 0.01 W/m².
 
 ## References
 
+- Amundsen D. S. et al. (2017) Astron. Astrophys. 598, A97 (random overlap with resorting and rebinning).
 - Bodhaine B. A. et al. (1999) J. Atmos. Oceanic Technol. 16, 1854.
 - Coddington O. M. et al. (2021) Geophys. Res. Lett. 48, e2020GL091709 (TSIS-1 HSRS).
 - Ding F. & Pierrehumbert R. T. (2016) Astrophys. J. 822, 24.
@@ -183,6 +216,7 @@ integrals. For an Earth column, OLR moves by 0.01 W/m².
 - Kopparapu R. K. et al. (2013) Astrophys. J. 765, 131.
 - Manabe S. & Wetherald R. T. (1967) J. Atmos. Sci. 24, 241.
 - Mlawer E. J. et al. (2012) Phil. Trans. R. Soc. A 370, 2520 (MT_CKD).
+- Forster P. et al. (2021) IPCC AR6 WG1 Chapter 7 and Supplementary Material, Table 7.SM.7 (radiative efficiencies and lifetimes of SF6, CF4, NF3).
 - Wagner W. & Pruß A. (2002) J. Phys. Chem. Ref. Data 31, 387.
 - Wagner W. et al. (2011) J. Phys. Chem. Ref. Data 40, 043103.
 - Zdunkowski W. G., Welch R. M. & Korb G. (1980) Beitr. Phys. Atmos. 53, 147.

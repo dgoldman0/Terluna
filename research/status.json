@@ -9,7 +9,7 @@
   "topics": [
     {
       "topic": "atmosphere",
-      "condition": "solved_molecular_thermal_limit; full_spectral_chemical_closure_blocked; clear_sky_line_by_line_radiation_for_prescribed_columns",
+      "condition": "solved_molecular_thermal_limit; clear_sky_line_by_line_radiation_for_prescribed_columns; shield_filtered_sunlight; correlated_k_thermal_scheme_validated_to_5_30_pa; global_mean_radiative_photochemical_equilibrium_per_shield; exobase_coupling_conditional",
       "material": [
         "../atmosphere/sim/sim1.py",
         "baselines/feasibility/model.py",
@@ -17,24 +17,29 @@
         "../atmosphere/thermal_column.py",
         "../atmosphere/spectral_interface.py",
         "studies/environment_screens/results/molecular_columns.csv",
-        "../atmosphere/radiative_convective/"
+        "../atmosphere/radiative_convective/",
+        "../atmosphere/middle_atmosphere/",
+        "../atmosphere/radiative_convective/ck.py"
       ],
       "unresolved": [
-        "self-consistent spectrum/chemistry/energy/outflow",
-        "composition and exobase differences",
+        "non-LTE CO2 cooling and upper-air temperature above ~5 Pa",
+        "day-night and 3-D transport of the middle atmosphere and its effect on the exobase",
+        "EUV/FUV leakage heating of each candidate filter",
+        "atomic oxygen and composition in the thermal column",
         "water supply to escape"
       ],
-      "next_session_task": "Obtain EUV response and resolved flux; implement species heating/chemistry/cooling and atomic/kinetic transport with calibrated lower boundary."
+      "next_session_task": "Add non-LTE CO2 cooling above ~5 Pa and atomic oxygen to the thermal column; compute each filter's EUV/FUV leakage heating; then couple to a 3-D circulation chosen by the author."
     },
     {
       "topic": "climate",
-      "condition": "periodic_conservative_spatial_linear_screen; uncalibrated; clear_sky_radiation_computed_for_prescribed_columns",
+      "condition": "periodic_conservative_spatial_linear_screen; uncalibrated; clear_sky_radiation_computed_for_prescribed_columns; gcm_boundary_files_prepared_no_gcm_run",
       "material": [
         "../climate/reference/thermal_response.csv",
         "baselines/feasibility/model.py",
         "../climate/cycle.py",
         "studies/environment_screens/results/climate_budget.csv",
-        "../atmosphere/radiative_convective/results/"
+        "../atmosphere/radiative_convective/results/",
+        "../climate/gcm/"
       ],
       "unresolved": [
         "cloud radiative effect of a slowly rotating Moon",
@@ -43,11 +48,11 @@
         "actual terrain",
         "spatial resolution sensitivity"
       ],
-      "next_session_task": "Model the long night at the surface (ground, boundary layer, fog) driven by the computed downward longwave; bound the cloud effect; then a 3-D slow-rotator circulation."
+      "next_session_task": "Install the GCM the author chooses (ExoPlaSim first is the plan in climate/gcm/README.md) and run experiments A-E; take the cloud effect, day-night range and polar climate from it."
     },
     {
       "topic": "geography",
-      "condition": "lola_topography_above_grail_geoid; hydrostatic_storage_computed; no_drainage_or_climate_coupling",
+      "condition": "lola_topography_above_grail_geoid; hydrostatic_storage_computed; land_sea_masks_25_35pct; no_drainage_or_climate_coupling",
       "material": [
         "../geography/datasets.json",
         "../geography/inputs.json",
@@ -62,7 +67,7 @@
         "crustal loading",
         "rain/runoff/erosion"
       ],
-      "next_session_task": "Build land-sea masks for chosen inventories for a 3-D climate model; add catchment fill-and-spill driven by precipitation minus evaporation."
+      "next_session_task": "Catchment fill-and-spill driven by precipitation minus evaporation from a 3-D climate run; polar cold-trapping."
     },
     {
       "topic": "illumination",

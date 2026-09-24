@@ -1,0 +1,201 @@
+{
+ "schema": "terluna.external-inputs/1",
+ "status": "external inputs; fetched and hash-checked by fetch_inputs.py; ignored by Git",
+ "input_directory": "inputs",
+ "retrieved": "2026-09-24",
+ "publication_note": "Laboratory cross-sections and quantum yields as recommended by the NASA/JPL evaluation, retrieved from the MPI-Mainz UV/VIS Spectral Atlas (Keller-Rudek, Moortgat, Sander and Soerensen 2013, Earth Syst. Sci. Data 5, 365-373), which asks users to cite the atlas and the original measurements. The files are not redistributed by this repository. A hash mismatch means the upstream bytes changed and must be reviewed, never silently accepted.",
+ "files": [
+  {
+   "name": "h2o2_jpl2010_298K_190-350nm.txt",
+   "url": "https://uv-vis-spectral-atlas-mainz.org/uvvis_data/cross_sections/Peroxides/Hydrogen%20peroxide%20H2O2/H2O2_JPL-2010(2011)_298K_190-350nm(rec).txt",
+   "sha256": "be52b8a00e2558e8e66c09af6a1e2e63ee1c46c58503a52c1762bedb6368ff94",
+   "bytes": 462,
+   "credit": "H2O2 absorption cross-sections, 190-350 nm, 298 K: JPL Publication 10-6 (Sander et al. 2011), via the MPI-Mainz UV/VIS Spectral Atlas.",
+   "use": "H2O2 photolysis"
+  },
+  {
+   "name": "hno3_jpl2010_298K_192-350nm.txt",
+   "url": "https://uv-vis-spectral-atlas-mainz.org/uvvis_data/cross_sections/Nitrogen+compounds(N,H,O)/HONO2_JPL-2010(2011)_298K_192-350nm(rec).txt",
+   "sha256": "2ad88cd45bd85e8bd742e489eb43abff739146ad38e048840210d3a7ec35de02",
+   "bytes": 1117,
+   "credit": "HNO3 absorption cross-sections, 192-350 nm, 298 K: JPL Publication 10-6 (Sander et al. 2011), via the MPI-Mainz UV/VIS Spectral Atlas.",
+   "use": "HNO3 photolysis"
+  },
+  {
+   "name": "n2o5_jpl2010_195-300K_200-420nm.txt",
+   "url": "https://uv-vis-spectral-atlas-mainz.org/uvvis_data/cross_sections/Nitrogen%20oxides/N2O5_JPL-2010%282011%29_195-300K_200-420nm%28rec%29.txt",
+   "sha256": "7f4649b068aeef89dde333be0cd2de22d2912c7fbe34d92a4d066fe0e1076e7e",
+   "bytes": 1439,
+   "credit": "N2O5 absorption cross-sections, 200-420 nm, 298 K: JPL Publication 10-6 (Sander et al. 2011), via the MPI-Mainz UV/VIS Spectral Atlas.",
+   "use": "N2O5 photolysis"
+  },
+  {
+   "name": "n2o_jpl2010_298K_160-240nm.txt",
+   "url": "https://uv-vis-spectral-atlas-mainz.org/uvvis_data/cross_sections/Nitrogen%20oxides/N2O_JPL-2010(2011)_298K_160-240nm(rec).txt",
+   "sha256": "1c6c116cef88cab6a18d15818345b68d5ec8928e39f0aabf86a3367e182ecedc",
+   "bytes": 994,
+   "credit": "N2O absorption cross-sections, 160-240 nm, 298 K: JPL Publication 10-6 (Sander et al. 2011), via the MPI-Mainz UV/VIS Spectral Atlas.",
+   "use": "N2O photolysis"
+  },
+  {
+   "name": "no2_jpl2010_220K_240-662.5nm.txt",
+   "url": "https://uv-vis-spectral-atlas-mainz.org/uvvis_data/cross_sections/Nitrogen%20oxides/NO2_JPL-2010(2011)_220K_240-662.5nm(rec).txt",
+   "sha256": "5eeedfe7016bdfda8238ca42d48b5551937d44c144cca837edeab170878a8261",
+   "bytes": 2172,
+   "credit": "NO2 absorption cross-sections, 240-662.5 nm, 220 K: JPL Publication 10-6 (Sander et al. 2011), via the MPI-Mainz UV/VIS Spectral Atlas.",
+   "use": "NO2 photolysis and absorption (cold)"
+  },
+  {
+   "name": "no2_jpl2010_294K_240-662.5nm.txt",
+   "url": "https://uv-vis-spectral-atlas-mainz.org/uvvis_data/cross_sections/Nitrogen%20oxides/NO2_JPL-2010(2011)_294K_240-662.5nm(rec).txt",
+   "sha256": "0f58b0fe324d40d90fb6a68cdaa18b74054c5ad6d4ba7524df98b14319f2b167",
+   "bytes": 2174,
+   "credit": "NO2 absorption cross-sections, 240-662.5 nm, 294 K: JPL Publication 10-6 (Sander et al. 2011), via the MPI-Mainz UV/VIS Spectral Atlas.",
+   "use": "NO2 photolysis and absorption (warm)"
+  },
+  {
+   "name": "no2_yield_troe2000_248K.txt",
+   "url": "https://uv-vis-spectral-atlas-mainz.org/uvvis_data/quantum_yields/Nitrogen%20oxides/NO2%7BNO%2BO%283P%29%7D_Troe%282000%29_248K_300-415nm.txt",
+   "sha256": "7fdc95274ea56c95a7c0fbfbe581f12c803ecba8b58490f219230a4e608234d6",
+   "bytes": 384,
+   "credit": "Quantum yield of NO2 -> NO + O (Troe 2000, Z. Phys. Chem. 214, 573; JPL-recommended), via the MPI-Mainz UV/VIS Spectral Atlas.",
+   "use": "NO2 photolysis yield"
+  },
+  {
+   "name": "no2_yield_troe2000_298K.txt",
+   "url": "https://uv-vis-spectral-atlas-mainz.org/uvvis_data/quantum_yields/Nitrogen%20oxides/NO2%7BNO%2BO%283P%29%7D_Troe%282000%29_298K_300-415nm.txt",
+   "sha256": "ac8c42f258be7ab5c767ddaf3ccf592d625d50d4f287721cb6ca776813df84bd",
+   "bytes": 397,
+   "credit": "Quantum yield of NO2 -> NO + O (Troe 2000, Z. Phys. Chem. 214, 573; JPL-recommended), via the MPI-Mainz UV/VIS Spectral Atlas.",
+   "use": "NO2 photolysis yield"
+  },
+  {
+   "name": "no3_jpl2010_298K_403-691nm.txt",
+   "url": "https://uv-vis-spectral-atlas-mainz.org/uvvis_data/cross_sections/Nitrogen%20oxides/NO3_JPL-2010%282011%29_298K_403-691nm%28rec%29.txt",
+   "sha256": "54032fafe710b86c8fc4d69bd89e7189966d68c3224e0d397504d12589bb9f69",
+   "bytes": 3886,
+   "credit": "NO3 absorption cross-sections, 403-691 nm, 298 K: JPL Publication 10-6 (Sander et al. 2011), via the MPI-Mainz UV/VIS Spectral Atlas.",
+   "use": "NO3 photolysis"
+  },
+  {
+   "name": "no3_no+o2_yield_johnston1996_190K.txt",
+   "url": "https://uv-vis-spectral-atlas-mainz.org/uvvis_data/quantum_yields/Nitrogen%20oxides/NO3%7BNO%2BO2%7D_Johnston%281996%29_190K_586-640nm.txt",
+   "sha256": "346c3f40b03d9e76bad93a0b3a38ce746291cc2becde41bf5b9fafed668b7e87",
+   "bytes": 811,
+   "credit": "Quantum yield of NO3 -> NO + O2 (Johnston et al. 1996, JPC 100, 4713; JPL-recommended), via the MPI-Mainz UV/VIS Spectral Atlas.",
+   "use": "NO3 photolysis branch"
+  },
+  {
+   "name": "no3_no+o2_yield_johnston1996_230K.txt",
+   "url": "https://uv-vis-spectral-atlas-mainz.org/uvvis_data/quantum_yields/Nitrogen%20oxides/NO3%7BNO%2BO2%7D_Johnston%281996%29_230K_586-640nm.txt",
+   "sha256": "4696477355d16d95746755e9b6ce523a7347c79810510d2840027fedde7c0acc",
+   "bytes": 800,
+   "credit": "Quantum yield of NO3 -> NO + O2 (Johnston et al. 1996, JPC 100, 4713; JPL-recommended), via the MPI-Mainz UV/VIS Spectral Atlas.",
+   "use": "NO3 photolysis branch"
+  },
+  {
+   "name": "no3_no+o2_yield_johnston1996_298K.txt",
+   "url": "https://uv-vis-spectral-atlas-mainz.org/uvvis_data/quantum_yields/Nitrogen%20oxides/NO3%7BNO%2BO2%7D_Johnston%281996%29_298K_586-640nm.txt",
+   "sha256": "a5399ef317e177e6d35b1a6740194e527173c1023f1eebd591a3e4091da51658",
+   "bytes": 789,
+   "credit": "Quantum yield of NO3 -> NO + O2 (Johnston et al. 1996, JPC 100, 4713; JPL-recommended), via the MPI-Mainz UV/VIS Spectral Atlas.",
+   "use": "NO3 photolysis branch"
+  },
+  {
+   "name": "no3_no2+o_yield_johnston1996_190K.txt",
+   "url": "https://uv-vis-spectral-atlas-mainz.org/uvvis_data/quantum_yields/Nitrogen%20oxides/NO3%7BNO2%2BO%7D_Johnston%281996%29_190K_585-640nm.txt",
+   "sha256": "c08c9875a61ea1de175433785f7d7d6eac5e88b6baa7ccb0d1bb8c1fa7e863a9",
+   "bytes": 848,
+   "credit": "Quantum yield of NO3 -> NO2 + O (Johnston et al. 1996, JPC 100, 4713; JPL-recommended), via the MPI-Mainz UV/VIS Spectral Atlas.",
+   "use": "NO3 photolysis branch"
+  },
+  {
+   "name": "no3_no2+o_yield_johnston1996_230K.txt",
+   "url": "https://uv-vis-spectral-atlas-mainz.org/uvvis_data/quantum_yields/Nitrogen%20oxides/NO3%7BNO2%2BO%7D_Johnston%281996%29_230K_585-640nm.txt",
+   "sha256": "01f6f9fa53af70f188fa70a6c90c3facf84a9e96e7c2f831c3ebbe0933693085",
+   "bytes": 829,
+   "credit": "Quantum yield of NO3 -> NO2 + O (Johnston et al. 1996, JPC 100, 4713; JPL-recommended), via the MPI-Mainz UV/VIS Spectral Atlas.",
+   "use": "NO3 photolysis branch"
+  },
+  {
+   "name": "no3_no2+o_yield_johnston1996_298K.txt",
+   "url": "https://uv-vis-spectral-atlas-mainz.org/uvvis_data/quantum_yields/Nitrogen%20oxides/NO3%7BNO2%2BO%7D_Johnston%281996%29_298K_585-640nm.txt",
+   "sha256": "df468beb845c75fab60c17c205f02904ab8f1d43edf802f52857a6d29ffa9eb3",
+   "bytes": 813,
+   "credit": "Quantum yield of NO3 -> NO2 + O (Johnston et al. 1996, JPC 100, 4713; JPL-recommended), via the MPI-Mainz UV/VIS Spectral Atlas.",
+   "use": "NO3 photolysis branch"
+  },
+  {
+   "name": "o1d_yield_matsumi2002_203K.txt",
+   "url": "https://uv-vis-spectral-atlas-mainz.org/uvvis_data/quantum_yields/Ozone/O3{O(1D)+O2}_Matsumi(2002)_203K_220-340nm.txt",
+   "sha256": "a39f6f0f6371f68e9e3544728d5b8e933beaa4218a1f7ce6280bb0db2907f0b5",
+   "bytes": 436,
+   "credit": "O(1D) quantum yield of O3 photolysis, 220-340 nm (Matsumi et al. 2002, JGR 107, 4024; the JPL-recommended parameterisation), via the MPI-Mainz UV/VIS Spectral Atlas.",
+   "use": "O(1D) yield of O3 photolysis"
+  },
+  {
+   "name": "o1d_yield_matsumi2002_223K.txt",
+   "url": "https://uv-vis-spectral-atlas-mainz.org/uvvis_data/quantum_yields/Ozone/O3{O(1D)+O2}_Matsumi(2002)_223K_220-340nm.txt",
+   "sha256": "f78d475536461fa21b8dab53b7b32e19ef7ec17752250da6def1de8041e129fe",
+   "bytes": 436,
+   "credit": "O(1D) quantum yield of O3 photolysis, 220-340 nm (Matsumi et al. 2002, JGR 107, 4024; the JPL-recommended parameterisation), via the MPI-Mainz UV/VIS Spectral Atlas.",
+   "use": "O(1D) yield of O3 photolysis"
+  },
+  {
+   "name": "o1d_yield_matsumi2002_253K.txt",
+   "url": "https://uv-vis-spectral-atlas-mainz.org/uvvis_data/quantum_yields/Ozone/O3{O(1D)+O2}_Matsumi(2002)_253K_220-340nm.txt",
+   "sha256": "32ed23e425a48aa2d6d55031416c4a9ff543fc032499ec24b3a831ededfab1ea",
+   "bytes": 436,
+   "credit": "O(1D) quantum yield of O3 photolysis, 220-340 nm (Matsumi et al. 2002, JGR 107, 4024; the JPL-recommended parameterisation), via the MPI-Mainz UV/VIS Spectral Atlas.",
+   "use": "O(1D) yield of O3 photolysis"
+  },
+  {
+   "name": "o1d_yield_matsumi2002_273K.txt",
+   "url": "https://uv-vis-spectral-atlas-mainz.org/uvvis_data/quantum_yields/Ozone/O3{O(1D)+O2}_Matsumi(2002)_273K_220-340nm.txt",
+   "sha256": "7532dcafc93ee2803367c7fc945a58e5408995bb529f94d142ad802c6633f73e",
+   "bytes": 436,
+   "credit": "O(1D) quantum yield of O3 photolysis, 220-340 nm (Matsumi et al. 2002, JGR 107, 4024; the JPL-recommended parameterisation), via the MPI-Mainz UV/VIS Spectral Atlas.",
+   "use": "O(1D) yield of O3 photolysis"
+  },
+  {
+   "name": "o1d_yield_matsumi2002_298K.txt",
+   "url": "https://uv-vis-spectral-atlas-mainz.org/uvvis_data/quantum_yields/Ozone/O3{O(1D)+O2}_Matsumi(2002)_298K_220-340nm.txt",
+   "sha256": "06da701df22643a6b68a46d2f256dc6336fc6233653d7d92ea212404ed450fdc",
+   "bytes": 436,
+   "credit": "O(1D) quantum yield of O3 photolysis, 220-340 nm (Matsumi et al. 2002, JGR 107, 4024; the JPL-recommended parameterisation), via the MPI-Mainz UV/VIS Spectral Atlas.",
+   "use": "O(1D) yield of O3 photolysis"
+  },
+  {
+   "name": "o1d_yield_matsumi2002_321K.txt",
+   "url": "https://uv-vis-spectral-atlas-mainz.org/uvvis_data/quantum_yields/Ozone/O3{O(1D)+O2}_Matsumi(2002)_321K_220-340nm.txt",
+   "sha256": "63ace259727d4b7e1ac5950708abe9dcbb838b45416d1192eeed3f1339daed4c",
+   "bytes": 436,
+   "credit": "O(1D) quantum yield of O3 photolysis, 220-340 nm (Matsumi et al. 2002, JGR 107, 4024; the JPL-recommended parameterisation), via the MPI-Mainz UV/VIS Spectral Atlas.",
+   "use": "O(1D) yield of O3 photolysis"
+  },
+  {
+   "name": "o2_jpl2010_298K_205-245nm.txt",
+   "url": "https://uv-vis-spectral-atlas-mainz.org/uvvis_data/cross_sections/Oxygen/O2_JPL-2010(2011)_298K_205-245nm(rec).txt",
+   "sha256": "2fe70eb04c3e3c27b64594568e7c744f44c77c69ccc493b1a73b51ea06490edd",
+   "bytes": 569,
+   "credit": "O2 Herzberg continuum absorption cross-sections, 205-245 nm, 298 K: JPL Publication 10-6 recommendation (Sander et al. 2011), as served by the MPI-Mainz UV/VIS Spectral Atlas (Keller-Rudek et al. 2013, ESSD 5, 365).",
+   "use": "O2 photolysis and ultraviolet absorption"
+  },
+  {
+   "name": "o3_jpl2010_218K_196-343nm.txt",
+   "url": "https://uv-vis-spectral-atlas-mainz.org/uvvis_data/cross_sections/Ozone/O3_JPL-2010(2011)_218K_196-343nm(rec).txt",
+   "sha256": "b58687618d695be7dfbe5a722f32911c39c5d896602cb962ec77aa339b1d207d",
+   "bytes": 1669,
+   "credit": "O3 absorption cross-sections, 196-343 nm, 218 K: JPL Publication 10-6 recommendation (Sander et al. 2011), via the MPI-Mainz UV/VIS Spectral Atlas (Keller-Rudek et al. 2013).",
+   "use": "O3 cross-section temperature dependence"
+  },
+  {
+   "name": "o3_jpl2010_293-298K_121.6-827.5nm.txt",
+   "url": "https://uv-vis-spectral-atlas-mainz.org/uvvis_data/cross_sections/Ozone/O3_JPL-2010(2011)_293-298K_121.6-827.5nm(rec).txt",
+   "sha256": "d60fb5bf38135e8ba5624f930a8cd03df570407174d982c2912c9eb638b326ce",
+   "bytes": 4201,
+   "credit": "O3 absorption cross-sections, 121.6-827.5 nm, 293-298 K: JPL Publication 10-6 recommendation (Sander et al. 2011), via the MPI-Mainz UV/VIS Spectral Atlas (Keller-Rudek et al. 2013).",
+   "use": "O3 photolysis and solar heating (room temperature)"
+  }
+ ]
+}

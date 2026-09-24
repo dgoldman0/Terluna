@@ -210,9 +210,10 @@ def line_absorption(grid: Grid, lines: LineList, sums: PartitionSums, t: float, 
 
     # Far wings: sticks split linearly between the two nearest coarse nodes.
     kfar = int(math.ceil(cutoff / big))
-    pad = kfar + 2
     pos = (centre - grid.start) / big
     k0 = np.floor(pos).astype(np.int64)
+    # Lines are selected by unshifted centre, so a pressure shift can carry one just past the margin.
+    pad = max(kfar + 2, int(-k0.min()), int(k0.max()) + 2 - ncoarse)
     frac = pos - k0
     nstick = ncoarse + 2 * pad
     sticks = []

@@ -18,6 +18,9 @@ Three shields, each a transmission T(lambda) applied to all sunlight reaching th
   (200-242 nm) reaches the atmosphere, so an ozone layer can form.
 - edge_310nm: the same idealisation with the edge at 310 nm: no light that
   splits O2, part of the UV-B and all UV-A, with no ozone layer to rely on.
+- edge_220nm, edge_230nm, edge_240nm: the same idealisation at intermediate
+  edges, which pass progressively less of the O2-splitting band (200-242 nm),
+  so the atmosphere's ozone can be traced against the edge.
 
 The two edges are scenarios for the atmosphere; whether a coating can realise
 them (hafnia and alumina have band edges near 220 and 150 nm) is open design work.
@@ -63,9 +66,10 @@ def edge(wavelength_nm, stack, edge_nm, blocked=1e-3, width_nm=10.0):
 def compute():
     wavelength = np.round(np.arange(200.0, 5000.0 + 0.25, 0.5), 3)
     stack = titania_stack(wavelength)
-    return wavelength, {'titania_stack': stack,
-                        'edge_200nm': edge(wavelength, stack, 200.0),
-                        'edge_310nm': edge(wavelength, stack, 310.0)}
+    shields = {'titania_stack': stack}
+    for nm in (200, 220, 230, 240, 310):
+        shields[f'edge_{nm}nm'] = edge(wavelength, stack, float(nm))
+    return wavelength, shields
 
 
 def main():
@@ -75,7 +79,7 @@ def main():
         schema=SCHEMA,
         producer=dict(domain='protection', files=code, stored_design='protection/results/results.json optics.AR_layers_um'),
         evidence=('titania_stack is the stored September design evaluated with its own thin-film code (normal incidence, '
-                  'effective-medium mixed layers, no silica absorption, no coating ageing); edge_200nm and edge_310nm '
+                  'effective-medium mixed layers, no silica absorption, no coating ageing); the edge_* shields '
                   'are idealised filters, not designs. Transmission applies to direct sunlight; gaps in the aperture '
                   'and off-normal incidence are not included.'),
         reading_rule='Multiply the top-of-atmosphere solar spectral irradiance by T(lambda); interpolate linearly in wavelength; '
