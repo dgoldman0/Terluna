@@ -44,7 +44,8 @@ look it needs. The game is a separate, private repository,
 same domain products through exports made here:
 
 ```sh
-node bake/game/world.mjs --out <game>/Data   # heightmap, material layers, trees, stones, sites
+node bake/game/world.mjs --out <game>/Data   # heightmap, material layers, far terrain to ~33 km,
+                                              # surface textures, trees, plant models, stones, sites
 python bake/game/sky.py --out <game>/Data     # engine-sky parameters, sky atlas images,
                                               # ephemeris, stars, Earth imagery, cloud columns
 ```

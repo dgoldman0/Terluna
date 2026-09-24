@@ -18,7 +18,8 @@
  * Beyond the landscape, a coarser far grid (--far-size vertices at --far-spacing metres,
  * centred on the origin) carries the same height field, ground layers and the planting
  * rule's expected canopy cover out past the horizon, for distant terrain drawn without
- * individual trees. The surface textures (assets/surfaces) are copied alongside.
+ * individual trees. The surface textures (assets/surfaces) are copied alongside, and the
+ * plant models the game instances are written to plants/ (bake/game/plants.mjs).
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -28,6 +29,7 @@ import { OM } from '../../engine/om.js';
 import C from '../../engine/core.js';
 import cove from '../../world/cove.js';
 import { TREE_LATTICE } from '../../world/cove-flora.js';
+import { writePlants } from './plants.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url)),
   immersion = path.resolve(here, '../..');
@@ -141,6 +143,10 @@ fs.mkdirSync(surfaces, { recursive: true });
 for (const f of ['albedo-ao.png', 'normal-roughness-height.png', 'manifest.json'])
   fs.copyFileSync(path.join(immersion, 'assets/surfaces', f), path.join(surfaces, f));
 
+// The plant models the game instances: the web experience's tree templates and grass tufts.
+const plants = writePlants(dir, immersion);
+log(`${plants.trees.templates.length} tree templates, ${plants.tufts.templates.length} grass tufts`);
+
 // Vegetation: the detailed plan, then the same rule on every other lattice cell in the extent.
 const plan = world.flora(),
   { spacing: s, originX, originZ, detailed } = TREE_LATTICE,
@@ -245,7 +251,12 @@ const manifest = {
       "canopy cover of the planting rule, the web experience's distant woodland shading)",
     evidence: 'The development cove\'s placeholder height field and rules, continued past the landscape.',
   },
-  vegetation: { trees: rows.length - 1, file: 'trees.csv', lattice_spacing_m: s },
+  vegetation: {
+    trees: rows.length - 1,
+    file: 'trees.csv',
+    lattice_spacing_m: s,
+    models: 'plants/manifest.json (templates by family, age class and variant)',
+  },
   sources,
   files,
 };

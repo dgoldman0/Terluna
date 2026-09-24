@@ -75,6 +75,35 @@ test('the world export keeps heights, the planting rule and the landscape transf
   }
   for (const f of ['albedo-ao.png', 'normal-roughness-height.png', 'manifest.json'])
     assert.ok(fs.statSync(path.join(dir, 'surfaces', f)).size > 0, f);
+  // Plant models: every template and tuft file parses, and its counts match its size.
+  const plants = JSON.parse(fs.readFileSync(path.join(dir, 'plants', 'manifest.json')));
+  assert.equal(plants.trees.templates.length, 24);
+  assert.equal(plants.tufts.templates.length, 3);
+  for (const t of [...plants.trees.templates, ...plants.tufts.templates]) {
+    const b = fs.readFileSync(path.join(dir, 'plants', t.file));
+    assert.equal(b.toString('ascii', 0, 4), 'TMSH', t.file);
+    const nv = b.readUInt32LE(8),
+      ni = b.readUInt32LE(12),
+      ns = b.readUInt32LE(16);
+    assert.equal(nv, t.vertices);
+    assert.equal(ni, 3 * t.triangles);
+    assert.equal(b.length, 20 + ns * 8 + nv * (12 + 12 + 8 + 4) + ni * 4, t.file);
+    const indices = new Uint32Array(new Uint8Array(b.subarray(b.length - ni * 4)).buffer);
+    assert.ok(indices.every((i) => i < nv), t.file);
+  }
+  // A mature tree's base is at the origin and its top near the template height.
+  const mature = plants.trees.templates.find((t) => t.age_class === 'mature' && t.family === 1),
+    mb = fs.readFileSync(path.join(dir, 'plants', mature.file)),
+    ns = mb.readUInt32LE(16),
+    pos = new Float32Array(new Uint8Array(mb.subarray(20 + ns * 8, 20 + ns * 8 + mature.vertices * 12)).buffer);
+  let top = -Infinity,
+    bottom = Infinity;
+  for (let i = 2; i < pos.length; i += 3) {
+    top = Math.max(top, pos[i]);
+    bottom = Math.min(bottom, pos[i]);
+  }
+  assert.ok(Math.abs(bottom) < 5, `base ${bottom} cm`);
+  assert.ok(top > 0.8 * mature.height_m * 100 && top < 1.4 * mature.height_m * 100, `top ${top} cm`);
   const rows = fs.readFileSync(path.join(dir, 'trees.csv'), 'utf8').trim().split('\n').slice(1);
   assert.equal(rows.length, m.vegetation.trees);
   for (const row of rows.filter((r) => r.endsWith(',0')).slice(0, 50)) {
