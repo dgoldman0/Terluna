@@ -19,7 +19,10 @@ const immersion = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..
 test('the world export keeps heights, the planting rule and the landscape transform', () => {
   execFileSync(
     process.execPath,
-    ['bake/game/world.mjs', '--out', out, '--size', '65', '--spacing', '8'],
+    [
+      'bake/game/world.mjs',
+      ...['--out', out, '--size', '65', '--spacing', '8', '--far-size', '33', '--far-spacing', '64'],
+    ],
     {
       cwd: immersion,
       stdio: 'ignore',
@@ -46,6 +49,32 @@ test('the world export keeps heights, the planting rule and the landscape transf
     assert.ok(Math.abs(metres - want) <= L.height_quantum_m, `${i},${j}: ${metres} vs ${want}`);
   }
   for (const layer of L.layers) assert.equal(fs.statSync(path.join(dir, layer.file)).size, 65 * 65);
+  const packed = L.layers_packed;
+  assert.equal(packed.vertices, 33);
+  assert.equal(fs.statSync(path.join(dir, packed.file)).size, 33 * 33 * 4);
+  // The packed layers are the full-resolution layers at every LAYER_STEP-th sample.
+  const sand = fs.readFileSync(path.join(dir, 'layer_sand.r8')),
+    rgba = fs.readFileSync(path.join(dir, packed.file));
+  for (const [i, j] of [
+    [0, 0],
+    [16, 16],
+    [32, 5],
+  ])
+    assert.equal(rgba[(j * 33 + i) * 4], sand[j * 2 * 65 + i * 2]);
+  const far = m.far,
+    farHeights = new Float32Array(new Uint8Array(fs.readFileSync(path.join(dir, 'far_height.f32'))).buffer);
+  assert.equal(farHeights.length, 33 * 33);
+  assert.equal(fs.statSync(path.join(dir, 'far_surface.rgba8')).size, 33 * 33 * 4);
+  for (const [i, j] of [
+    [0, 0],
+    [16, 16],
+    [30, 3],
+  ]) {
+    const want = C.groundHeight(far.origin_m.x + i * 64, far.origin_m.z + j * 64, 'moon');
+    assert.ok(Math.abs(farHeights[j * 33 + i] - want) < 1e-3 * Math.max(1, Math.abs(want)), `far ${i},${j}`);
+  }
+  for (const f of ['albedo-ao.png', 'normal-roughness-height.png', 'manifest.json'])
+    assert.ok(fs.statSync(path.join(dir, 'surfaces', f)).size > 0, f);
   const rows = fs.readFileSync(path.join(dir, 'trees.csv'), 'utf8').trim().split('\n').slice(1);
   assert.equal(rows.length, m.vegetation.trees);
   for (const row of rows.filter((r) => r.endsWith(',0')).slice(0, 50)) {
