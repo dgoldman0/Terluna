@@ -1,0 +1,57 @@
+{
+  "schema": "terluna.external-inputs/1",
+  "status": "external inputs; fetched and hash-checked by fetch_inputs.py; ignored by Git",
+  "input_directory": "inputs",
+  "retrieved": "2026-09-24",
+  "files": [
+    {
+      "name": "ldem_4.lbl",
+      "url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_4.lbl",
+      "sha256": "b5a197b4d417e3b5e0e84f8fe15f9a1d2203b8eb5d7213236c0ffbc86e940cc6",
+      "bytes": 5107,
+      "credit": "LRO LOLA Gridded Data Record, PDS data set LRO-L-LOLA-3-RDR-V1 (Smith et al. 2010, Space Sci. Rev. 150, 209; LOLA Science Team, NASA GSFC). NASA data, no redistribution restriction; cite the LOLA team and PDS.",
+      "use": "label: 4 pixel/degree global radius grid"
+    },
+    {
+      "name": "ldem_4.img",
+      "url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_4.img",
+      "sha256": "c04632eba6449af49e3108ed7c25b3b1c450600abd3690df4fc815853a1af476",
+      "bytes": 2073600,
+      "credit": "LRO LOLA Gridded Data Record, PDS data set LRO-L-LOLA-3-RDR-V1 (Smith et al. 2010, Space Sci. Rev. 150, 209; LOLA Science Team, NASA GSFC). NASA data, no redistribution restriction; cite the LOLA team and PDS.",
+      "use": "4 pixel/degree global radius grid, int16 half-metres above 1737.4 km"
+    },
+    {
+      "name": "ldem_16.lbl",
+      "url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.lbl",
+      "sha256": "9aef29463ccc6ed3a3fbe0df3ecd830a99c69e16b564f455507dee2697096579",
+      "bytes": 5121,
+      "credit": "LRO LOLA Gridded Data Record, PDS data set LRO-L-LOLA-3-RDR-V1 (Smith et al. 2010, Space Sci. Rev. 150, 209; LOLA Science Team, NASA GSFC). NASA data, no redistribution restriction; cite the LOLA team and PDS.",
+      "use": "label: 16 pixel/degree global radius grid"
+    },
+    {
+      "name": "ldem_16.img",
+      "url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.img",
+      "sha256": "a511e40d7a3ea3275945b4da2a1df377133264fab0be94b7434b1cf8907254cb",
+      "bytes": 33177600,
+      "credit": "LRO LOLA Gridded Data Record, PDS data set LRO-L-LOLA-3-RDR-V1 (Smith et al. 2010, Space Sci. Rev. 150, 209; LOLA Science Team, NASA GSFC). NASA data, no redistribution restriction; cite the LOLA team and PDS.",
+      "use": "16 pixel/degree global radius grid, int16 half-metres above 1737.4 km"
+    },
+    {
+      "name": "jggrx_0420a_sha.lbl",
+      "url": "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/shadr/jggrx_0420a_sha.lbl",
+      "sha256": "320b77ee552d221905bf0af55c1a554799e596e5d9e5dbf3f580c0ce60e07ea7",
+      "bytes": 10409,
+      "credit": "GRAIL gravity field GL0420A (JGGRX_0420A), PDS data set GRAIL-L-LGRS-5-RDR-V1 (Konopliv et al. 2013, JGR Planets 118, 1415; JPL GRAIL gravity team). NASA data, no redistribution restriction; cite the authors and PDS.",
+      "use": "label: GL0420A spherical-harmonic gravity model"
+    },
+    {
+      "name": "jggrx_0420a_sha.tab",
+      "url": "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/shadr/jggrx_0420a_sha.tab",
+      "sha256": "962355f81ae40dab0ec39753e3820d731d4505633a262fc543afd6f6c7c0e50d",
+      "bytes": 10837504,
+      "credit": "GRAIL gravity field GL0420A (JGGRX_0420A), PDS data set GRAIL-L-LGRS-5-RDR-V1 (Konopliv et al. 2013, JGR Planets 118, 1415; JPL GRAIL gravity team). NASA data, no redistribution restriction; cite the authors and PDS.",
+      "use": "GL0420A fully normalized coefficients to degree 420, reference radius 1738 km"
+    }
+  ],
+  "publication_note": "Retrieval and checksum verification are separate from reading the underlying publications. LOLA heights are in the mean-Earth/polar-axis frame and GL0420A in the DE421 principal-axis frame; the offset (about 0.02 degrees) is below the resolution of the geoid used here."
+}

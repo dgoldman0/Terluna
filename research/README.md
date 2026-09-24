@@ -23,13 +23,14 @@ Models live in their domain folders. This folder holds what spans domains:
 
 | Topic | Current calculation | Principal open condition |
 |---|---|---|
-| [Atmosphere](../atmosphere/) | Solved conduction/advection/Jeans column, band ledger, lower air, column soundings | Actual spectrum-to-chemistry-to-escape closure |
-| [Climate](../climate/) | Conservative periodic latitude–longitude thermal screen; canopy and forest-patch flow | Calibrated radiation, moisture/ice, dynamics and terrain |
+| [Atmosphere](../atmosphere/) | Solved conduction/advection/Jeans column, band ledger, lower air, column soundings, line-by-line radiative–convective column | Actual spectrum-to-chemistry-to-escape closure; stratospheric temperature and ozone |
+| [Climate](../climate/) | Conservative periodic latitude–longitude thermal screen; canopy and forest-patch flow; clear-sky line-by-line budget from the atmosphere domain | Clouds, moisture/ice, dynamics and terrain |
 | [Biosphere](../biosphere/) | Carbon reserve theorem/model, bounded oxygen box, tree and forest-patch mechanics | Measured traits, complete life cycles and ecological interactions |
 | [Illumination](../illumination/) | Spectral clear-sky solver, A1–A3 light-transport references, site sky geometry and earthlight, bright stars | Date-accurate ephemeris, earthlight spectrum, profiles tied to the solved column |
 | [Protection](../protection/) | Original component model plus spectral coverage audit | EUV response, clean operation, particle transport and lifetime resources |
 | [Engineering](../engineering/) | Original transport/renewal accounts plus plume-heat sensitivity | Complete industrial network and safe source-to-use routes |
-| [Geography](../geography/), [habitation](../habitation/) | Data leads and design concepts | Actual terrain and practical inhabited capacity |
+| [Geography](../geography/) | LOLA topography above the GRAIL geoid; hydrostatic water storage (level curves, basin joins) | Where water stands once rain, runoff and evaporation act |
+| [Habitation](../habitation/) | Design concepts | Practical inhabited capacity |
 
 Rendering that displays these results is in [visualization](../visualization/);
 the explorable experience, which reads them as baked products, is in

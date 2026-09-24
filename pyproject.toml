@@ -5,7 +5,7 @@
 [tool.pytest.ini_options]
 # Each domain owns its tests in <domain>/tests/; cross-domain studies keep their
 # scope tests beside their runners in research/studies/<study>/.
-testpaths = ["shared", "atmosphere", "climate", "biosphere", "illumination", "research/studies"]
+testpaths = ["shared", "atmosphere", "climate", "biosphere", "geography", "illumination", "research/studies"]
 python_files = ["test_*.py"]
 pythonpath = ["."]
 addopts = "--import-mode=importlib"

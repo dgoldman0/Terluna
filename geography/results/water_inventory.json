@@ -1,0 +1,1091 @@
+{
+ "schema": "terluna.geography.water-inventory/1",
+ "producer": {
+  "domain": "geography",
+  "files": {
+   "topography.py": "228e08f79efca868",
+   "basins.py": "6982d16bb794c9eb",
+   "water_inventory.py": "4d919ed7a869c6f2"
+  },
+  "inputs_manifest": "7f8f7f7fef64f423"
+ },
+ "evidence": "Hydrostatic filling of LOLA topography above the GRAIL geoid (degree 200, plus static Earth tide and rotation). Level curves assume one common water level; basin capacities are the volumes closed depressions hold when they first spill. No rainfall, runoff, evaporation, groundwater, ice, erosion or crustal loading: these are storage geometries for choosing an inventory, not predicted shorelines.",
+ "units": {
+  "level": "m above the geoid (zero-mean equipotential)",
+  "global_layer": "m of water over the whole Moon",
+  "mass": "kg at 1000 kg/m3"
+ },
+ "reading_rule": "Levels and layers are hydrostatic storage; do not read them as predicted shorelines.",
+ "levels": [
+  {
+   "area_fraction": 0.05,
+   "level_m": -3411.7,
+   "global_layer_m": 45.2,
+   "mass_kg": 1.713711830449604e+18,
+   "mean_depth_m": 903.0,
+   "seas_over_0_1pct": 7,
+   "largest_seas": [
+    0.0244,
+    0.0036,
+    0.0028,
+    0.0016,
+    0.0013
+   ]
+  },
+  {
+   "area_fraction": 0.1,
+   "level_m": -2693.1,
+   "global_layer_m": 95.4,
+   "mass_kg": 3.618834286656614e+18,
+   "mean_depth_m": 954.0,
+   "seas_over_0_1pct": 8,
+   "largest_seas": [
+    0.0408,
+    0.0082,
+    0.0079,
+    0.0049,
+    0.0034
+   ]
+  },
+  {
+   "area_fraction": 0.15,
+   "level_m": -2309.2,
+   "global_layer_m": 142.6,
+   "mass_kg": 5.407794007828682e+18,
+   "mean_depth_m": 950.0,
+   "seas_over_0_1pct": 13,
+   "largest_seas": [
+    0.0471,
+    0.0341,
+    0.0053,
+    0.0046,
+    0.0039
+   ]
+  },
+  {
+   "area_fraction": 0.2,
+   "level_m": -2046.0,
+   "global_layer_m": 188.3,
+   "mass_kg": 7.14333244165621e+18,
+   "mean_depth_m": 941.0,
+   "seas_over_0_1pct": 12,
+   "largest_seas": [
+    0.0647,
+    0.0501,
+    0.0058,
+    0.0055,
+    0.0055
+   ]
+  },
+  {
+   "area_fraction": 0.25,
+   "level_m": -1802.8,
+   "global_layer_m": 243.2,
+   "mass_kg": 9.223340895007048e+18,
+   "mean_depth_m": 973.0,
+   "seas_over_0_1pct": 11,
+   "largest_seas": [
+    0.082,
+    0.0548,
+    0.0238,
+    0.0123,
+    0.0065
+   ]
+  },
+  {
+   "area_fraction": 0.3001,
+   "level_m": -1556.8,
+   "global_layer_m": 310.8,
+   "mass_kg": 1.1788369684010027e+19,
+   "mean_depth_m": 1036.0,
+   "seas_over_0_1pct": 7,
+   "largest_seas": [
+    0.1494,
+    0.0618,
+    0.0076,
+    0.0075,
+    0.0023
+   ]
+  },
+  {
+   "area_fraction": 0.35,
+   "level_m": -1327.9,
+   "global_layer_m": 385.2,
+   "mass_kg": 1.4609754379577786e+19,
+   "mean_depth_m": 1100.0,
+   "seas_over_0_1pct": 7,
+   "largest_seas": [
+    0.178,
+    0.0646,
+    0.0102,
+    0.0096,
+    0.0033
+   ]
+  },
+  {
+   "area_fraction": 0.4,
+   "level_m": -1100.9,
+   "global_layer_m": 470.3,
+   "mass_kg": 1.7839324099415968e+19,
+   "mean_depth_m": 1176.0,
+   "seas_over_0_1pct": 13,
+   "largest_seas": [
+    0.2054,
+    0.0675,
+    0.0117,
+    0.0111,
+    0.0053
+   ]
+  },
+  {
+   "area_fraction": 0.5001,
+   "level_m": -601.0,
+   "global_layer_m": 695.8,
+   "mass_kg": 2.6394571821976072e+19,
+   "mean_depth_m": 1391.0,
+   "seas_over_0_1pct": 13,
+   "largest_seas": [
+    0.3188,
+    0.0729,
+    0.0029,
+    0.0029,
+    0.0022
+   ]
+  },
+  {
+   "area_fraction": 0.6,
+   "level_m": -37.5,
+   "global_layer_m": 1006.2,
+   "mass_kg": 3.816826483874412e+19,
+   "mean_depth_m": 1677.0,
+   "seas_over_0_1pct": 10,
+   "largest_seas": [
+    0.5133,
+    0.004,
+    0.0029,
+    0.0025,
+    0.0016
+   ]
+  },
+  {
+   "area_fraction": 0.71,
+   "level_m": 734.9,
+   "global_layer_m": 1514.4,
+   "mass_kg": 5.744566546398935e+19,
+   "mean_depth_m": 2133.0,
+   "seas_over_0_1pct": 9,
+   "largest_seas": [
+    0.6446,
+    0.0029,
+    0.0024,
+    0.0024,
+    0.0018
+   ]
+  }
+ ],
+ "merges": [
+  {
+   "level_m": -3798.0,
+   "joining": [
+    {
+     "names": [
+      "South Pole-Aitken"
+     ],
+     "floor_lat": -70.375,
+     "floor_lon": 187.625,
+     "area_fraction": 0.0164,
+     "global_layer_m": 15.1
+    },
+    {
+     "names": [
+      "Apollo"
+     ],
+     "floor_lat": -41.625,
+     "floor_lon": 212.875,
+     "area_fraction": 0.0037,
+     "global_layer_m": 3.4
+    }
+   ]
+  },
+  {
+   "level_m": -2739.0,
+   "joining": [
+    {
+     "names": [
+      "South Pole-Aitken",
+      "Apollo"
+     ],
+     "floor_lat": -70.375,
+     "floor_lon": 187.625,
+     "area_fraction": 0.0385,
+     "global_layer_m": 59.3
+    },
+    {
+     "names": [],
+     "floor_lat": -34.625,
+     "floor_lon": 159.875,
+     "area_fraction": 0.0021,
+     "global_layer_m": 1.1
+    }
+   ]
+  },
+  {
+   "level_m": -2457.0,
+   "joining": [
+    {
+     "names": [
+      "Imbrium"
+     ],
+     "floor_lat": 40.375,
+     "floor_lon": 336.875,
+     "area_fraction": 0.0127,
+     "global_layer_m": 3.5
+    },
+    {
+     "names": [
+      "Frigoris"
+     ],
+     "floor_lat": 55.875,
+     "floor_lon": 7.375,
+     "area_fraction": 0.0052,
+     "global_layer_m": 0.6
+    }
+   ]
+  },
+  {
+   "level_m": -2413.0,
+   "joining": [
+    {
+     "names": [
+      "Imbrium",
+      "Frigoris"
+     ],
+     "floor_lat": 55.875,
+     "floor_lon": 7.375,
+     "area_fraction": 0.0197,
+     "global_layer_m": 5.0
+    },
+    {
+     "names": [
+      "Serenitatis"
+     ],
+     "floor_lat": 33.625,
+     "floor_lon": 27.625,
+     "area_fraction": 0.0092,
+     "global_layer_m": 5.1
+    }
+   ]
+  },
+  {
+   "level_m": -2245.0,
+   "joining": [
+    {
+     "names": [
+      "Imbrium",
+      "Serenitatis",
+      "Frigoris"
+     ],
+     "floor_lat": 50.375,
+     "floor_lon": 320.125,
+     "area_fraction": 0.0369,
+     "global_layer_m": 16.0
+    },
+    {
+     "names": [],
+     "floor_lat": 55.625,
+     "floor_lon": 314.875,
+     "area_fraction": 0.0035,
+     "global_layer_m": 0.3
+    }
+   ]
+  },
+  {
+   "level_m": -2063.0,
+   "joining": [
+    {
+     "names": [
+      "Nubium"
+     ],
+     "floor_lat": -20.625,
+     "floor_lon": 337.625,
+     "area_fraction": 0.0055,
+     "global_layer_m": 1.8
+    },
+    {
+     "names": [
+      "Humorum"
+     ],
+     "floor_lat": -21.625,
+     "floor_lon": 322.875,
+     "area_fraction": 0.004,
+     "global_layer_m": 1.4
+    }
+   ]
+  },
+  {
+   "level_m": -2063.0,
+   "joining": [
+    {
+     "names": [
+      "Imbrium",
+      "Serenitatis",
+      "Procellarum",
+      "Frigoris"
+     ],
+     "floor_lat": 30.625,
+     "floor_lon": 1.375,
+     "area_fraction": 0.0575,
+     "global_layer_m": 25.7
+    },
+    {
+     "names": [
+      "Nectaris"
+     ],
+     "floor_lat": -11.125,
+     "floor_lon": 29.875,
+     "area_fraction": 0.0066,
+     "global_layer_m": 3.6
+    }
+   ]
+  },
+  {
+   "level_m": -2032.0,
+   "joining": [
+    {
+     "names": [
+      "Nubium",
+      "Humorum"
+     ],
+     "floor_lat": -20.625,
+     "floor_lon": 337.625,
+     "area_fraction": 0.0104,
+     "global_layer_m": 3.5
+    },
+    {
+     "names": [],
+     "floor_lat": -7.625,
+     "floor_lon": 315.875,
+     "area_fraction": 0.0027,
+     "global_layer_m": 0.2
+    }
+   ]
+  },
+  {
+   "level_m": -1786.0,
+   "joining": [
+    {
+     "names": [
+      "Imbrium",
+      "Serenitatis",
+      "Nectaris",
+      "Procellarum",
+      "Frigoris"
+     ],
+     "floor_lat": 30.625,
+     "floor_lon": 1.375,
+     "area_fraction": 0.0849,
+     "global_layer_m": 50.9
+    },
+    {
+     "names": [
+      "Fecunditatis"
+     ],
+     "floor_lat": -4.625,
+     "floor_lon": 58.125,
+     "area_fraction": 0.0064,
+     "global_layer_m": 2.4
+    }
+   ]
+  },
+  {
+   "level_m": -1776.0,
+   "joining": [
+    {
+     "names": [
+      "Imbrium",
+      "Serenitatis",
+      "Nectaris",
+      "Fecunditatis",
+      "Procellarum",
+      "Frigoris"
+     ],
+     "floor_lat": 30.625,
+     "floor_lon": 1.375,
+     "area_fraction": 0.092,
+     "global_layer_m": 54.3
+    },
+    {
+     "names": [
+      "Nubium",
+      "Humorum"
+     ],
+     "floor_lat": -20.625,
+     "floor_lon": 337.625,
+     "area_fraction": 0.0254,
+     "global_layer_m": 9.0
+    }
+   ]
+  },
+  {
+   "level_m": -1724.0,
+   "joining": [
+    {
+     "names": [
+      "South Pole-Aitken",
+      "Apollo"
+     ],
+     "floor_lat": -70.375,
+     "floor_lon": 187.625,
+     "area_fraction": 0.0572,
+     "global_layer_m": 118.1
+    },
+    {
+     "names": [
+      "Schrodinger"
+     ],
+     "floor_lat": -79.875,
+     "floor_lon": 113.875,
+     "area_fraction": 0.0029,
+     "global_layer_m": 4.2
+    }
+   ]
+  },
+  {
+   "level_m": -1723.0,
+   "joining": [
+    {
+     "names": [
+      "Imbrium",
+      "Serenitatis",
+      "Nectaris",
+      "Fecunditatis",
+      "Nubium",
+      "Humorum",
+      "Procellarum",
+      "Frigoris"
+     ],
+     "floor_lat": -11.125,
+     "floor_lon": 26.875,
+     "area_fraction": 0.1239,
+     "global_layer_m": 70.6
+    },
+    {
+     "names": [
+      "Crisium"
+     ],
+     "floor_lat": 14.625,
+     "floor_lon": 54.625,
+     "area_fraction": 0.0066,
+     "global_layer_m": 10.2
+    }
+   ]
+  },
+  {
+   "level_m": -917.0,
+   "joining": [
+    {
+     "names": [],
+     "floor_lat": -55.625,
+     "floor_lon": 51.125,
+     "area_fraction": 0.0072,
+     "global_layer_m": 4.9
+    },
+    {
+     "names": [],
+     "floor_lat": -31.375,
+     "floor_lon": 86.375,
+     "area_fraction": 0.0066,
+     "global_layer_m": 5.4
+    }
+   ]
+  },
+  {
+   "level_m": -890.0,
+   "joining": [
+    {
+     "names": [
+      "Imbrium",
+      "Serenitatis",
+      "Crisium",
+      "Tranquillitatis",
+      "Nectaris",
+      "Fecunditatis",
+      "Nubium",
+      "Humorum",
+      "Procellarum",
+      "Frigoris"
+     ],
+     "floor_lat": 46.375,
+     "floor_lon": 39.375,
+     "area_fraction": 0.2326,
+     "global_layer_m": 244.2
+    },
+    {
+     "names": [
+      "Smythii",
+      "Marginis"
+     ],
+     "floor_lat": -3.625,
+     "floor_lon": 90.375,
+     "area_fraction": 0.0155,
+     "global_layer_m": 21.0
+    }
+   ]
+  },
+  {
+   "level_m": -749.0,
+   "joining": [
+    {
+     "names": [
+      "Imbrium",
+      "Serenitatis",
+      "Crisium",
+      "Tranquillitatis",
+      "Nectaris",
+      "Fecunditatis",
+      "Nubium",
+      "Humorum",
+      "Procellarum",
+      "Smythii",
+      "Frigoris",
+      "Marginis"
+     ],
+     "floor_lat": 46.375,
+     "floor_lon": 39.375,
+     "area_fraction": 0.2656,
+     "global_layer_m": 306.0
+    },
+    {
+     "names": [
+      "Humboldtianum"
+     ],
+     "floor_lat": 58.875,
+     "floor_lon": 85.625,
+     "area_fraction": 0.0143,
+     "global_layer_m": 21.5
+    }
+   ]
+  },
+  {
+   "level_m": -686.0,
+   "joining": [
+    {
+     "names": [
+      "Imbrium",
+      "Serenitatis",
+      "Crisium",
+      "Tranquillitatis",
+      "Nectaris",
+      "Fecunditatis",
+      "Nubium",
+      "Humorum",
+      "Procellarum",
+      "Smythii",
+      "Frigoris",
+      "Marginis",
+      "Humboldtianum"
+     ],
+     "floor_lat": 58.875,
+     "floor_lon": 85.625,
+     "area_fraction": 0.2867,
+     "global_layer_m": 346.7
+    },
+    {
+     "names": [],
+     "floor_lat": -19.125,
+     "floor_lon": 79.125,
+     "area_fraction": 0.0206,
+     "global_layer_m": 18.7
+    }
+   ]
+  },
+  {
+   "level_m": -628.0,
+   "joining": [
+    {
+     "names": [
+      "Imbrium",
+      "Serenitatis",
+      "Crisium",
+      "Tranquillitatis",
+      "Nectaris",
+      "Fecunditatis",
+      "Nubium",
+      "Humorum",
+      "Procellarum",
+      "Smythii",
+      "Frigoris",
+      "Marginis",
+      "Humboldtianum"
+     ],
+     "floor_lat": 58.875,
+     "floor_lon": 85.625,
+     "area_fraction": 0.3152,
+     "global_layer_m": 385.8
+    },
+    {
+     "names": [],
+     "floor_lat": -48.125,
+     "floor_lon": 13.375,
+     "area_fraction": 0.0049,
+     "global_layer_m": 3.4
+    }
+   ]
+  },
+  {
+   "level_m": -614.0,
+   "joining": [
+    {
+     "names": [
+      "Imbrium",
+      "Serenitatis",
+      "Crisium",
+      "Tranquillitatis",
+      "Nectaris",
+      "Fecunditatis",
+      "Nubium",
+      "Humorum",
+      "Procellarum",
+      "Smythii",
+      "Frigoris",
+      "Marginis",
+      "Humboldtianum"
+     ],
+     "floor_lat": 58.875,
+     "floor_lon": 85.625,
+     "area_fraction": 0.3221,
+     "global_layer_m": 394.5
+    },
+    {
+     "names": [],
+     "floor_lat": 85.375,
+     "floor_lon": 65.625,
+     "area_fraction": 0.0021,
+     "global_layer_m": 0.7
+    }
+   ]
+  },
+  {
+   "level_m": -575.0,
+   "joining": [
+    {
+     "names": [
+      "Imbrium",
+      "Serenitatis",
+      "Crisium",
+      "Tranquillitatis",
+      "Nectaris",
+      "Fecunditatis",
+      "Nubium",
+      "Humorum",
+      "Procellarum",
+      "Smythii",
+      "Frigoris",
+      "Australe",
+      "Marginis",
+      "Humboldtianum"
+     ],
+     "floor_lat": 58.875,
+     "floor_lon": 85.625,
+     "area_fraction": 0.3296,
+     "global_layer_m": 409.5
+    },
+    {
+     "names": [],
+     "floor_lat": -54.375,
+     "floor_lon": 113.875,
+     "area_fraction": 0.0022,
+     "global_layer_m": 2.4
+    }
+   ]
+  },
+  {
+   "level_m": -540.0,
+   "joining": [
+    {
+     "names": [
+      "Imbrium",
+      "Serenitatis",
+      "Crisium",
+      "Tranquillitatis",
+      "Nectaris",
+      "Fecunditatis",
+      "Nubium",
+      "Humorum",
+      "Procellarum",
+      "Smythii",
+      "Frigoris",
+      "Australe",
+      "Marginis",
+      "Humboldtianum"
+     ],
+     "floor_lat": 58.875,
+     "floor_lon": 85.625,
+     "area_fraction": 0.3387,
+     "global_layer_m": 427.4
+    },
+    {
+     "names": [],
+     "floor_lat": -67.375,
+     "floor_lon": 347.875,
+     "area_fraction": 0.0026,
+     "global_layer_m": 2.7
+    }
+   ]
+  },
+  {
+   "level_m": -442.0,
+   "joining": [
+    {
+     "names": [
+      "Imbrium",
+      "Serenitatis",
+      "Crisium",
+      "Tranquillitatis",
+      "Nectaris",
+      "Fecunditatis",
+      "Nubium",
+      "Humorum",
+      "Procellarum",
+      "Smythii",
+      "Frigoris",
+      "Australe",
+      "Marginis",
+      "Humboldtianum"
+     ],
+     "floor_lat": 58.875,
+     "floor_lon": 85.625,
+     "area_fraction": 0.3592,
+     "global_layer_m": 472.6
+    },
+    {
+     "names": [],
+     "floor_lat": -59.625,
+     "floor_lon": 331.875,
+     "area_fraction": 0.0044,
+     "global_layer_m": 3.7
+    }
+   ]
+  },
+  {
+   "level_m": -433.0,
+   "joining": [
+    {
+     "names": [
+      "Imbrium",
+      "Serenitatis",
+      "Crisium",
+      "Tranquillitatis",
+      "Nectaris",
+      "Fecunditatis",
+      "Nubium",
+      "Humorum",
+      "Procellarum",
+      "Smythii",
+      "Frigoris",
+      "Australe",
+      "Marginis",
+      "Humboldtianum"
+     ],
+     "floor_lat": 58.875,
+     "floor_lon": 85.625,
+     "area_fraction": 0.365,
+     "global_layer_m": 480.1
+    },
+    {
+     "names": [],
+     "floor_lat": -62.375,
+     "floor_lon": 88.625,
+     "area_fraction": 0.0023,
+     "global_layer_m": 1.6
+    }
+   ]
+  },
+  {
+   "level_m": -293.0,
+   "joining": [
+    {
+     "names": [
+      "Imbrium",
+      "Serenitatis",
+      "Crisium",
+      "Tranquillitatis",
+      "Nectaris",
+      "Fecunditatis",
+      "Nubium",
+      "Humorum",
+      "Procellarum",
+      "Smythii",
+      "Frigoris",
+      "Australe",
+      "Marginis",
+      "Humboldtianum"
+     ],
+     "floor_lat": 58.875,
+     "floor_lon": 85.625,
+     "area_fraction": 0.3954,
+     "global_layer_m": 547.2
+    },
+    {
+     "names": [
+      "South Pole-Aitken",
+      "Apollo",
+      "Schrodinger"
+     ],
+     "floor_lat": -70.375,
+     "floor_lon": 187.625,
+     "area_fraction": 0.0796,
+     "global_layer_m": 229.8
+    }
+   ]
+  },
+  {
+   "level_m": 11.0,
+   "joining": [
+    {
+     "names": [
+      "South Pole-Aitken",
+      "Imbrium",
+      "Serenitatis",
+      "Crisium",
+      "Tranquillitatis",
+      "Nectaris",
+      "Fecunditatis",
+      "Nubium",
+      "Humorum",
+      "Procellarum",
+      "Smythii",
+      "Frigoris",
+      "Apollo",
+      "Schrodinger",
+      "Australe",
+      "Marginis",
+      "Humboldtianum"
+     ],
+     "floor_lat": -70.375,
+     "floor_lon": 187.625,
+     "area_fraction": 0.5326,
+     "global_layer_m": 957.3
+    },
+    {
+     "names": [],
+     "floor_lat": -46.625,
+     "floor_lon": 303.125,
+     "area_fraction": 0.0035,
+     "global_layer_m": 2.5
+    }
+   ]
+  },
+  {
+   "level_m": 666.0,
+   "joining": [
+    {
+     "names": [
+      "South Pole-Aitken",
+      "Imbrium",
+      "Serenitatis",
+      "Crisium",
+      "Tranquillitatis",
+      "Nectaris",
+      "Fecunditatis",
+      "Nubium",
+      "Humorum",
+      "Procellarum",
+      "Smythii",
+      "Frigoris",
+      "Apollo",
+      "Schrodinger",
+      "Australe",
+      "Marginis",
+      "Humboldtianum"
+     ],
+     "floor_lat": -70.375,
+     "floor_lon": 187.625,
+     "area_fraction": 0.6327,
+     "global_layer_m": 1383.9
+    },
+    {
+     "names": [],
+     "floor_lat": -34.375,
+     "floor_lon": 147.875,
+     "area_fraction": 0.0021,
+     "global_layer_m": 3.2
+    }
+   ]
+  },
+  {
+   "level_m": 674.0,
+   "joining": [
+    {
+     "names": [
+      "South Pole-Aitken",
+      "Imbrium",
+      "Serenitatis",
+      "Crisium",
+      "Tranquillitatis",
+      "Nectaris",
+      "Fecunditatis",
+      "Nubium",
+      "Humorum",
+      "Procellarum",
+      "Smythii",
+      "Frigoris",
+      "Apollo",
+      "Schrodinger",
+      "Australe",
+      "Marginis",
+      "Humboldtianum"
+     ],
+     "floor_lat": -70.375,
+     "floor_lon": 187.625,
+     "area_fraction": 0.6355,
+     "global_layer_m": 1392.2
+    },
+    {
+     "names": [
+      "Orientale"
+     ],
+     "floor_lat": -14.625,
+     "floor_lon": 265.875,
+     "area_fraction": 0.0077,
+     "global_layer_m": 11.6
+    }
+   ]
+  },
+  {
+   "level_m": 1098.0,
+   "joining": [
+    {
+     "names": [
+      "South Pole-Aitken",
+      "Imbrium",
+      "Serenitatis",
+      "Crisium",
+      "Tranquillitatis",
+      "Nectaris",
+      "Fecunditatis",
+      "Nubium",
+      "Humorum",
+      "Procellarum",
+      "Orientale",
+      "Smythii",
+      "Frigoris",
+      "Apollo",
+      "Schrodinger",
+      "Australe",
+      "Marginis",
+      "Humboldtianum"
+     ],
+     "floor_lat": -70.375,
+     "floor_lon": 187.625,
+     "area_fraction": 0.6891,
+     "global_layer_m": 1703.6
+    },
+    {
+     "names": [
+      "Coulomb-Sarton"
+     ],
+     "floor_lat": 49.375,
+     "floor_lon": 238.625,
+     "area_fraction": 0.0022,
+     "global_layer_m": 3.2
+    }
+   ]
+  },
+  {
+   "level_m": 1638.0,
+   "joining": [
+    {
+     "names": [],
+     "floor_lat": 19.625,
+     "floor_lon": 158.625,
+     "area_fraction": 0.0062,
+     "global_layer_m": 7.3
+    },
+    {
+     "names": [
+      "Moscoviense"
+     ],
+     "floor_lat": 28.375,
+     "floor_lon": 150.375,
+     "area_fraction": 0.0038,
+     "global_layer_m": 10.6
+    }
+   ]
+  },
+  {
+   "level_m": 1707.0,
+   "joining": [
+    {
+     "names": [
+      "Moscoviense"
+     ],
+     "floor_lat": 28.375,
+     "floor_lon": 150.375,
+     "area_fraction": 0.0103,
+     "global_layer_m": 18.7
+    },
+    {
+     "names": [
+      "Freundlich-Sharonov"
+     ],
+     "floor_lat": 5.625,
+     "floor_lon": 162.625,
+     "area_fraction": 0.0098,
+     "global_layer_m": 13.3
+    }
+   ]
+  },
+  {
+   "level_m": 1716.0,
+   "joining": [
+    {
+     "names": [
+      "South Pole-Aitken",
+      "Imbrium",
+      "Serenitatis",
+      "Crisium",
+      "Tranquillitatis",
+      "Nectaris",
+      "Fecunditatis",
+      "Nubium",
+      "Humorum",
+      "Procellarum",
+      "Orientale",
+      "Smythii",
+      "Frigoris",
+      "Apollo",
+      "Schrodinger",
+      "Australe",
+      "Marginis",
+      "Humboldtianum",
+      "Coulomb-Sarton"
+     ],
+     "floor_lat": -70.375,
+     "floor_lon": 187.625,
+     "area_fraction": 0.7494,
+     "global_layer_m": 2179.2
+    },
+    {
+     "names": [
+      "Moscoviense",
+      "Freundlich-Sharonov"
+     ],
+     "floor_lat": 28.375,
+     "floor_lon": 150.375,
+     "area_fraction": 0.0201,
+     "global_layer_m": 32.1
+    }
+   ]
+  }
+ ],
+ "stats": {
+  "height_min_m": -8449.507599751585,
+  "height_max_m": 10118.059249052474,
+  "geoid_min_m": -542.114934536645,
+  "geoid_max_m": 577.7616373197036,
+  "fine_pixels_per_degree": 16,
+  "tree_pixels_per_degree": 4,
+  "geoid_degree": 200
+ }
+}

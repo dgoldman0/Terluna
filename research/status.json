@@ -47,16 +47,22 @@
     },
     {
       "topic": "geography",
-      "condition": "no_data_or_model_loaded",
+      "condition": "lola_topography_above_grail_geoid; hydrostatic_storage_computed; no_drainage_or_climate_coupling",
       "material": [
-        "../geography/datasets.json"
+        "../geography/datasets.json",
+        "../geography/inputs.json",
+        "../geography/topography.py",
+        "../geography/basins.py",
+        "../geography/results/"
       ],
       "unresolved": [
-        "exact DEM product and datum",
-        "basin volumes",
+        "where water stands under precipitation minus evaporation",
+        "catchments and fill-and-spill",
+        "polar cold-trapping",
+        "crustal loading",
         "rain/runoff/erosion"
       ],
-      "next_session_task": "Acquire a manageable DEM and check hypsometry plus static basin filling."
+      "next_session_task": "Build land-sea masks for chosen inventories for a 3-D climate model; add catchment fill-and-spill driven by precipitation minus evaporation."
     },
     {
       "topic": "illumination",
