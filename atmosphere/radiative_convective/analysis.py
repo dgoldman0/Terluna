@@ -24,14 +24,14 @@ def load(results: Path):
         rows = list(csv.DictReader(handle))
     for r in rows:
         for k, v in r.items():
-            if k not in ('key', 'sweep', 'scenario', 'planet', 'humidity'):
+            if k not in ('key', 'sweep', 'scenario', 'planet', 'humidity', 'shield', 'shield_product'):
                 r[k] = float(v) if v not in ('', None) else math.nan
     return rows
 
 
-def curve(rows, sweep, scenario, field):
+def curve(rows, sweep, scenario, field, **match):
     pts = sorted((r['ts_k'], r[field]) for r in rows if r['sweep'] == sweep and r['scenario'] == scenario
-                 and not math.isnan(r[field]))
+                 and all(r.get(k) == v for k, v in match.items()) and not math.isnan(r[field]))
     return np.array([p[0] for p in pts]), np.array([p[1] for p in pts])
 
 
@@ -71,6 +71,22 @@ def summarise(rows):
                                   olr_at_hottest=float(olr[-1]))
             _, strat = curve(rows, 'saturated', name, 'stratospheric_h2o')
             s['saturated']['stratospheric_h2o'] = strat.tolist()
+        shields = sorted({r.get('shield') for r in rows if r['sweep'] == 'shields' and r['scenario'] == name})
+        for shield in shields:
+            entry = {}
+            for humidity in ('manabe_wetherald', 'saturated'):
+                ts, olr = curve(rows, 'shields', name, 'olr', shield=shield, humidity=humidity)
+                _, asr = curve(rows, 'shields', name, 'asr', shield=shield, humidity=humidity)
+                _, inc = curve(rows, 'shields', name, 'incident_sw', shield=shield, humidity=humidity)
+                if len(ts) < 2 or len(asr) != len(ts):
+                    continue
+                e = dict(ts_k=ts.tolist(), asr=asr.round(2).tolist(), incident_sw=inc.round(2).tolist())
+                if humidity == 'manabe_wetherald':
+                    e['balance_k'] = {f'{c:g}': balance(ts, asr + c - olr) for c in CLOUD_EFFECTS}
+                else:
+                    e['max_asr_minus_max_olr'] = float(asr.max() - olr.max())
+                entry[humidity] = e
+            s.setdefault('shields', {})[shield] = entry
         co2 = sorted((r['co2_ppm'], r['olr'], r['asr']) for r in rows
                      if r['scenario'] == name and r['humidity'] == 'manabe_wetherald'
                      and r['stratosphere_k'] == 200.0 and r['ts_k'] == 290.0)

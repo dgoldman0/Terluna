@@ -46,6 +46,8 @@ ISOTOPOLOGUES = {
     (2, '4'): (10, 44.994045), (2, '5'): (11, 46.997431), (2, '6'): (12, 45.997400),
     (2, '7'): (13, 47.998320), (2, '8'): (14, 46.998291), (2, '9'): (121, 45.998262),
     (2, '0'): (15, 49.001675), (2, 'A'): (120, 48.001646), (2, 'B'): (122, 47.001618),
+    (3, '1'): (16, 47.984745), (3, '2'): (17, 49.988991), (3, '3'): (18, 49.988991),
+    (3, '4'): (19, 48.988960), (3, '5'): (20, 48.988960),
     (7, '1'): (36, 31.989830), (7, '2'): (37, 33.994076), (7, '3'): (38, 32.994045),
 }
 
@@ -53,6 +55,7 @@ LINE_FILES = {
     'H2O': ('hitran_h2o_0-3500.par', 'hitran_h2o_3500-25000.par'),
     'CO2': ('hitran_co2_0-3500.par', 'hitran_co2_3500-10000.par'),
     'O2': ('hitran_o2_0-20000.par',),
+    'O3': ('hitran_o3_0-3500.par',),
 }
 
 
@@ -132,6 +135,12 @@ def load_lines(molecule: str, s_min: float) -> LineList:
         data = {k: v[order] for k, v in data.items()}
         CACHE.mkdir(exist_ok=True)
         np.savez(cache, **data)
+    # HITRAN gives no air broadening (0.0000) for 271 weak minor-isotopologue O3
+    # lines near 1020 cm-1 (4e-5 of the O3 band strength); they take the
+    # molecule's median value so every line has a finite Lorentz width.
+    missing = data['gamma_air'] <= 0
+    if missing.any():
+        data['gamma_air'] = np.where(missing, np.median(data['gamma_air'][~missing]), data['gamma_air'])
     return LineList(molecule, *(data[f] for f in ('nu', 'strength', 'gamma_air', 'gamma_self', 'elower',
                                                    'n_air', 'delta_air', 'gid', 'mass')))
 

@@ -19,6 +19,17 @@ The verifier imports `model.py`, which immediately loads the TiO2 table; restori
 
 After installing `research/requirements.txt`, run `python protection/model.py` to regenerate the optical optimization and all reference outputs. It writes into `protection/results/`; preserve the selected reference snapshot with Git or run in a copied working directory. The fixed optimization seed aids reproducibility but floating-point/optimizer versions can change results. `python research/check.py` performs the safe checks in a temporary copy.
 
+## Spectral transmission product
+
+[spectra/transmission.py](spectra/transmission.py) writes
+[spectra/shield_transmission.json](spectra/shield_transmission.json) (schema
+`terluna.protection.shield-transmission/1`). It holds T(λ) from 200 nm to 5 µm
+for the stored titania–silica design and for idealised edge filters. The design
+is evaluated with `model.py`'s own thin-film code; the edge filters are
+scenarios, not designs. The atmosphere domain reads this product to filter the
+sunlight in its climate and photochemistry calculations. Regenerate it with
+`python -m protection.spectra.transmission` after restoring the inputs.
+
 ## Condition and remaining questions
 
 - Optical layers use measured constituent constants plus effective-medium and normal-incidence approximations. This is not a measured complete coating, irradiated lifetime test, or gap-free aperture.

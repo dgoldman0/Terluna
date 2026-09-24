@@ -18,13 +18,15 @@ from atmosphere.radiative_convective import fetch_inputs
 from atmosphere.radiative_convective.longwave import planck
 
 
-def solar_spectrum(nu, solar_constant=SOLAR_CONSTANT, tail_temperature=5772.0):
+def solar_spectrum(nu, solar_constant=SOLAR_CONSTANT, tail_temperature=5772.0, shield=None):
     """Top-of-atmosphere spectral irradiance (W m^-2 per cm^-1) and the flux below nu[0].
 
     TSIS-1 HSRS for 202-2729.9 nm; beyond 2729.9 nm a blackbody tail joined to it
     continuously; the whole spectrum is scaled so that its total, including the
     part longward of nu[0], equals the solar constant. Irradiance shortward of
-    202 nm (about 0.1 W/m^2) is omitted.
+    202 nm (about 0.1 W/m^2) is omitted. `shield`, if given, is a transmission
+    function of wavelength in nm applied to the sunlight (its value at 5000 nm
+    is used longward of the grid).
     """
     data = np.genfromtxt(fetch_inputs.path('TSIS1_HSRS_stride100.csv'), delimiter=',', skip_header=1)
     lam_nm, f_lam = data[:, 0], data[:, 1]
@@ -44,6 +46,10 @@ def solar_spectrum(nu, solar_constant=SOLAR_CONSTANT, tail_temperature=5772.0):
     spectrum = np.where(nu < edge, tail_scale * tail(nu), np.interp(nu, wn, f_wn, right=0.0)) * scale
     lo = np.linspace(1e-3, nu[0], 20001)
     longward = scale * np.trapezoid(tail_scale * tail(lo), lo) if nu[0] < edge else None
+    if shield is not None:
+        spectrum = spectrum * shield(1e7 / nu)
+        if longward is not None:
+            longward = longward * float(shield(np.array([5000.0]))[0])
     return spectrum, longward
 
 
@@ -158,6 +164,7 @@ def planetary_mean(nu, spectrum, tau_abs, tau_sca, g_sca, surface_albedo, radius
     net = np.zeros(nlev)
     reflected = 0.0
     spectral_up = np.zeros(nu.size)
+    spectral_surface = np.zeros(nu.size)
     for a in range(0, nu.size, chunk):
         sl = slice(a, a + chunk)
         f = spectrum[sl] * weights[sl]
@@ -169,5 +176,7 @@ def planetary_mean(nu, spectrum, tau_abs, tau_sca, g_sca, surface_albedo, radius
             net += scale * ((direct + diffuse - up) @ f)
             reflected += scale * float(up[0] @ f)
             spectral_up[sl] += scale * up[0] * spectrum[sl]
+            spectral_surface[sl] += scale * (direct[-1] + diffuse[-1] - up[-1]) * spectrum[sl]
     incident = 0.25 * float(spectrum @ weights)
-    return dict(incident=incident, reflected=reflected, net=net, spectral_reflected=spectral_up)
+    return dict(incident=incident, reflected=reflected, net=net, spectral_reflected=spectral_up,
+                spectral_surface=spectral_surface, weights=weights)

@@ -267,6 +267,54 @@
       "bytes": 1248662,
       "credit": "TSIS-1 Hybrid Solar Reference Spectrum (Coddington et al. 2021, GRL 48, e2020GL091709), LASP LISIRD; every 100th sample, as in protection/inputs.json.",
       "use": "solar spectrum 202-2730 nm"
+    },
+    {
+      "name": "hitran_o3_0-3500.par",
+      "url": "https://hitran.org/lbl/api?iso_ids_list=16,17,18,19,20&numin=0&numax=3500",
+      "sha256": "d009495344aa2e097d5a2dec5db7172794619838d61d00b42e9ff2df343dfbce",
+      "bytes": 68750542,
+      "credit": "HITRAN line-by-line database as served by hitran.org on 2026-09-24 (HITRAN2020 or later edition; Gordon et al. 2022, JQSRT 277, 107949). Cite HITRAN for any use.",
+      "use": "O3 lines, five isotopologues, thermal infrared"
+    },
+    {
+      "name": "hitran_q16.txt",
+      "url": "https://hitran.org/data/Q/q16.txt",
+      "sha256": "c30dd2fa2c621e3c907bf67d290f693fa2279d10bb1bcd36db6ec7b22d8a8bb5",
+      "bytes": 35998,
+      "credit": "HITRAN total internal partition sums (TIPS; Gamache et al. 2021, JQSRT 271, 107713) as distributed by hitran.org.",
+      "use": "partition sum for HITRAN global isotopologue 16"
+    },
+    {
+      "name": "hitran_q17.txt",
+      "url": "https://hitran.org/data/Q/q17.txt",
+      "sha256": "9328bfa878b79a907d9e14d04bb39aa8775fe5193ffed20b275c8f017d00d910",
+      "bytes": 35998,
+      "credit": "HITRAN total internal partition sums (TIPS; Gamache et al. 2021, JQSRT 271, 107713) as distributed by hitran.org.",
+      "use": "partition sum for HITRAN global isotopologue 17"
+    },
+    {
+      "name": "hitran_q18.txt",
+      "url": "https://hitran.org/data/Q/q18.txt",
+      "sha256": "f80e926a2ad75c963f048337991ab3f7594923cf65e17468f2b935c5c17ab42f",
+      "bytes": 35998,
+      "credit": "HITRAN total internal partition sums (TIPS; Gamache et al. 2021, JQSRT 271, 107713) as distributed by hitran.org.",
+      "use": "partition sum for HITRAN global isotopologue 18"
+    },
+    {
+      "name": "hitran_q19.txt",
+      "url": "https://hitran.org/data/Q/q19.txt",
+      "sha256": "b1b3cf3bf0563297c172ab6ec9b0c7d2f52f0bf0ab90040fb2a55b1caefd345b",
+      "bytes": 35998,
+      "credit": "HITRAN total internal partition sums (TIPS; Gamache et al. 2021, JQSRT 271, 107713) as distributed by hitran.org.",
+      "use": "partition sum for HITRAN global isotopologue 19"
+    },
+    {
+      "name": "hitran_q20.txt",
+      "url": "https://hitran.org/data/Q/q20.txt",
+      "sha256": "bb61492649b428b0397bbddc21cef29e72fff2757a9807357acde92176f123f6",
+      "bytes": 35998,
+      "credit": "HITRAN total internal partition sums (TIPS; Gamache et al. 2021, JQSRT 271, 107713) as distributed by hitran.org.",
+      "use": "partition sum for HITRAN global isotopologue 20"
     }
   ],
   "publication_note": "Retrieval and checksum verification are separate from reading the underlying publications. HITRAN and AER terms were read on retrieval: both permit research use with credit; neither dataset is redistributed by this repository. A hash mismatch means the upstream bytes changed (for example a new HITRAN edition) and must be reviewed, never silently accepted."

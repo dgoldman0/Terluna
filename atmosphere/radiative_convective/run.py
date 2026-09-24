@@ -57,17 +57,54 @@ def sweeps():
         for strat in (150.0, 250.0):
             rows.append((cl.Scenario(name, co2_ppm=400.0, stratosphere_k=strat, **base), 290.0, False))
     out['stratosphere'] = rows
+    # Sunlight filtered by each spectral shield: the columns of the first two sweeps,
+    # solar part only (outgoing longwave does not depend on the sunlight).
+    out['shields'] = [(sc, ts, True) for sweep in ('earthlike_humidity', 'saturated') for sc, ts, _ in out[sweep]]
     return out
 
 
-def key(sc: cl.Scenario, ts: float) -> str:
+FIELDS = ['key', 'sweep', 'scenario', 'planet', 'dry_pressure_pa', 'co2_ppm', 'humidity', 'stratosphere_k',
+          'surface_albedo', 'shield', 'ts_k', 'surface_pressure_pa', 'olr', 'asr', 'albedo', 'net_toa', 'incident_sw',
+          'surface_down_lw', 'surface_up_lw', 'surface_sw', 'atmosphere_sw', 'sw_longward_of_grid',
+          'water_column_kg_m2', 'air_column_kg_m2', 'tropopause_pa', 'tropopause_height_km', 'stratospheric_h2o',
+          'shield_product', 'seconds']
+
+
+def key(sc: cl.Scenario, ts: float, shield: str = 'none') -> str:
     return (f'{sc.name}|{sc.humidity}|co2={sc.co2_ppm:g}|strat={sc.stratosphere_k:g}|albedo={sc.surface_albedo:g}'
-            f'|ts={ts:g}')
+            f'|ts={ts:g}|shield={shield}')
+
+
+def _read(table):
+    """Rows of the results table, migrating rows written before shields existed."""
+    if not table.is_file():
+        return []
+    with open(table, newline='') as handle:
+        reader = csv.DictReader(handle)
+        rows = list(reader)
+        header = reader.fieldnames or []
+    if 'shield' not in header:
+        for r in rows:
+            r['shield'] = 'none'
+            r['key'] = r['key'] + '|shield=none'
+        _write(table, rows)
+    return rows
+
+
+def _write(table, rows):
+    with open(table, 'w', newline='') as handle:
+        writer = csv.DictWriter(handle, fieldnames=FIELDS, extrasaction='ignore')
+        writer.writeheader()
+        for r in rows:
+            writer.writerow({f: r.get(f, '') for f in FIELDS})
+
+
+RUN_MODULES = ('climate.py', 'thermodynamics.py', 'optics.py', 'longwave.py', 'shortwave.py', 'spectroscopy.py',
+               'fetch_inputs.py', 'run.py')
 
 
 def producer():
-    files = sorted(p.name for p in HERE.glob('*.py'))
-    digest = {name: hashlib.sha256((HERE / name).read_bytes()).hexdigest()[:16] for name in files}
+    digest = {name: hashlib.sha256((HERE / name).read_bytes()).hexdigest()[:16] for name in RUN_MODULES}
     inputs = hashlib.sha256((HERE / 'inputs.json').read_bytes()).hexdigest()[:16]
     return dict(domain='atmosphere', model='atmosphere/radiative_convective', files=digest, inputs_manifest=inputs)
 
@@ -88,42 +125,40 @@ def main(argv=None) -> int:
         return 1
     args.out.mkdir(parents=True, exist_ok=True)
     table = args.out / 'inverse_climate.csv'
-    done = set()
-    if table.is_file():
-        with open(table, newline='') as handle:
-            done = {r['key'] for r in csv.DictReader(handle)}
-    fields = None
-    for sweep, rows in plan.items():
+    rows = _read(table)
+    done = {r['key'] for r in rows}
+    for sweep, plan_rows in plan.items():
         if args.only and sweep not in args.only:
             continue
-        for sc, ts, solar in rows:
-            k = key(sc, ts)
-            if k in done:
+        for sc, ts, solar in plan_rows:
+            shields = cl.SHIELDS[1:] if sweep == 'shields' else ('none',)
+            wanted = [s_ for s_ in shields if key(sc, ts, s_) not in done]
+            if not wanted:
                 continue
             start = time.time()
-            result = cl.evaluate(sc, ts, solar=solar)
-            result.update(key=k, sweep=sweep, seconds=round(time.time() - start, 1))
-            if fields is None:
-                fields = ['key', 'sweep', 'scenario', 'planet', 'dry_pressure_pa', 'co2_ppm', 'humidity',
-                          'stratosphere_k', 'surface_albedo', 'ts_k', 'surface_pressure_pa', 'olr', 'asr', 'albedo',
-                          'net_toa', 'surface_down_lw', 'surface_up_lw', 'surface_sw', 'atmosphere_sw',
-                          'sw_longward_of_grid', 'water_column_kg_m2', 'air_column_kg_m2', 'tropopause_pa',
-                          'tropopause_height_km', 'stratospheric_h2o', 'seconds']
-            new = not table.is_file()
-            with open(table, 'a', newline='') as handle:
-                writer = csv.DictWriter(handle, fieldnames=fields, extrasaction='ignore')
-                if new:
-                    writer.writeheader()
-                writer.writerow({f: result.get(f, '') for f in fields})
-            done.add(k)
-            print(f"{sweep:20s} {sc.name:13s} {sc.humidity:17s} co2={sc.co2_ppm:6g} Ts={ts:5.1f} "
-                  f"OLR={result['olr']:7.2f} ASR={result.get('asr', float('nan')):7.2f} ({result['seconds']} s)",
-                  flush=True)
+            reuse = next((r for r in rows if r['key'] == key(sc, ts, 'none') and r.get('olr')), None)
+            results = cl.evaluate(sc, ts, solar=solar, longwave_too=reuse is None, shields=wanted)
+            for result in results:
+                if reuse is not None:
+                    for f in ('olr', 'surface_down_lw', 'surface_up_lw'):
+                        result[f] = float(reuse[f])
+                    if 'asr' in result:
+                        result['net_toa'] = result['asr'] - result['olr']
+                result.update(key=key(sc, ts, result['shield']), sweep=sweep,
+                              seconds=round((time.time() - start) / len(results), 1))
+                rows.append({f: result.get(f, '') for f in FIELDS})
+                done.add(result['key'])
+                print(f"{sweep:18s} {sc.name:13s} {sc.humidity:17s} co2={sc.co2_ppm:6g} Ts={ts:5.1f} "
+                      f"shield={result['shield']:13s} OLR={float(result['olr']):7.2f} "
+                      f"ASR={float(result.get('asr', float('nan'))):7.2f}", flush=True)
+            _write(table, rows)
     meta = dict(schema=SCHEMA, producer=producer(), evidence=EVIDENCE,
                 units=dict(fluxes='W m-2, global mean', pressure='Pa', temperature='K', columns='kg m-2'),
-                reading_rule=('Compare ASR with OLR at the same scenario and surface temperature. Positive net_toa '
-                              'means the clear column would warm. Interpolate between surface temperatures linearly; '
-                              'do not extrapolate beyond the tabulated range. Keep the evidence statement with any use.'),
+                reading_rule=('Compare ASR with OLR at the same scenario, shield and surface temperature. Positive '
+                              'net_toa means the clear column would warm. shield names a transmission in '
+                              'protection/spectra/shield_transmission.json (none = unfiltered sunlight). Interpolate '
+                              'between surface temperatures linearly; do not extrapolate beyond the tabulated range. '
+                              'Keep the evidence statement with any use.'),
                 table=table.name)
     (args.out / 'inverse_climate.json').write_text(json.dumps(meta, indent=2) + '\n')
     return 0

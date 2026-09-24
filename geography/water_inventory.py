@@ -62,12 +62,65 @@ def compute(fine_ppd=16, tree_ppd=4, geoid_degree=200):
     return dict(levels=rows, merges=merges, stats=stats)
 
 
+def land_sea(fraction, resolution_deg=1.0, fine_ppd=16, geoid_degree=200):
+    """Water fraction, mean ground height and mean water depth on a coarse lat-lon grid for a
+    common water level covering `fraction` of the Moon (area-weighted block averages)."""
+    height, _, grid = tp.height_above_geoid(fine_ppd, geoid_degree)
+    area = grid.cell_area_m2
+    levels = np.linspace(height.min(), height.max(), 40001)
+    frac, vol = bs.level_curve(height, area, levels)
+    level = float(np.interp(fraction, frac, levels))
+    k = int(round(resolution_deg * fine_ppd))
+    if (180 * fine_ppd) % k or k < 1:
+        raise ValueError('Resolution must divide the grid')
+    nlat, nlon = height.shape[0] // k, height.shape[1] // k
+    blocks = lambda a: a.reshape(nlat, k, nlon, k)
+    a = blocks(area)
+    wet = blocks(height < level)
+    depth = blocks(np.maximum(level - height, 0.0))
+    area_sum = a.sum(axis=(1, 3))
+    water_fraction = (a * wet).sum(axis=(1, 3)) / area_sum
+    mean_height = (a * blocks(height)).sum(axis=(1, 3)) / area_sum
+    wet_area = (a * wet).sum(axis=(1, 3))
+    mean_depth = np.where(wet_area > 0, (a * depth).sum(axis=(1, 3)) / np.maximum(wet_area, 1e-30), 0.0)
+    lat = 90.0 - (np.arange(nlat) + 0.5) * resolution_deg
+    lon = (np.arange(nlon) + 0.5) * resolution_deg
+    covered = float((water_fraction * area_sum).sum() / area_sum.sum())
+    return dict(level_m=level, covered_fraction=covered, global_layer_m=float(np.interp(level, levels, vol) / bs.AREA),
+                lat_deg=lat, lon_deg=lon, water_fraction=water_fraction, mean_height_m=mean_height,
+                mean_water_depth_m=mean_depth)
+
+
+def write_masks(fractions, resolution_deg, out: Path):
+    out.mkdir(parents=True, exist_ok=True)
+    for f in fractions:
+        m = land_sea(f, resolution_deg)
+        meta = dict(schema='terluna.geography.land-sea/1', producer=producer(), evidence=EVIDENCE,
+                    reading_rule=('water_fraction is the share of each cell below one common water level above the '
+                                  'geoid; mean_height_m is ground height above the geoid; mean_water_depth_m averages '
+                                  'over the wet part only. Longitudes are east, 0-360; latitudes north first.'),
+                    level_m=m['level_m'], covered_fraction=m['covered_fraction'], global_layer_m=m['global_layer_m'],
+                    resolution_deg=resolution_deg)
+        name = out / f'land_sea_{round(100 * f)}pct_{resolution_deg:g}deg.npz'
+        np.savez_compressed(name, metadata=json.dumps(meta), lat_deg=m['lat_deg'], lon_deg=m['lon_deg'],
+                            water_fraction=m['water_fraction'].astype(np.float32),
+                            mean_height_m=m['mean_height_m'].astype(np.float32),
+                            mean_water_depth_m=m['mean_water_depth_m'].astype(np.float32))
+        print(f"{name.name}: level {m['level_m']/1e3:+.2f} km, covered {m['covered_fraction']:.1%}, "
+              f"layer {m['global_layer_m']:.0f} m")
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument('--out', type=Path, default=HERE / 'results')
+    parser.add_argument('--masks', type=float, nargs='*', help='write land-sea masks for these water fractions')
+    parser.add_argument('--resolution', type=float, default=1.0)
     args = parser.parse_args(argv)
     if fetch_inputs.restore()['status'] != 'PASS':
         raise SystemExit('BLOCKED: topography inputs missing; run python -m geography.fetch_inputs --download')
+    if args.masks:
+        write_masks(args.masks, args.resolution, HERE / 'products')
+        return
     result = compute()
     args.out.mkdir(parents=True, exist_ok=True)
     with open(args.out / 'water_levels.csv', 'w', newline='') as handle:

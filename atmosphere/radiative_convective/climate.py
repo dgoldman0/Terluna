@@ -11,7 +11,10 @@ a separate, explicit assumption.
 """
 from __future__ import annotations
 from dataclasses import dataclass, replace
+import hashlib
+import json
 import math
+from pathlib import Path
 import numpy as np
 
 from shared.constants import SOLAR_CONSTANT
@@ -19,6 +22,27 @@ from atmosphere.radiative_convective import thermodynamics as th, optics, longwa
 from atmosphere.radiative_convective import spectroscopy as sp
 
 UV_GRID = sp.Grid.span(20000.0, 49500.0, 2.0)   # 202-500 nm: Rayleigh and O2-O2 only
+# Spectral-shield transmission, a data product of the protection domain.
+SHIELD_PRODUCT = Path(__file__).resolve().parents[2] / 'protection' / 'spectra' / 'shield_transmission.json'
+SHIELDS = ('none', 'titania_stack', 'edge_200nm', 'edge_310nm')
+
+
+def load_shield(name):
+    """Transmission function of wavelength (nm) for a named shield, or None for unfiltered sunlight."""
+    if name in (None, 'none'):
+        return None
+    raw = SHIELD_PRODUCT.read_bytes()
+    data = json.loads(raw)
+    if data['schema'] != 'terluna.protection.shield-transmission/1':
+        raise ValueError('Unexpected shield product schema')
+    w = np.asarray(data['wavelength_nm'], dtype=float)
+    t = np.asarray(data['transmission'][name], dtype=float)
+
+    def transmission(lam_nm):
+        return np.interp(lam_nm, w, t, left=t[0], right=t[-1])
+    transmission.label = name
+    transmission.product_sha256 = hashlib.sha256(raw).hexdigest()[:16]
+    return transmission
 
 
 @dataclass(frozen=True)
@@ -79,57 +103,77 @@ def _uv_optics(col, nu):
     return np.vstack(rows)
 
 
-def shortwave(col, surface_albedo, cfg=optics.SHORTWAVE, n_mu0=6, spherical=True):
-    """Global-mean clear-sky solar budget of a column (W/m^2)."""
+def shortwave_response(col, surface_albedo, cfg=optics.SHORTWAVE, n_mu0=6, spherical=True):
+    """Global-mean clear-sky reflection and surface absorption per unit solar spectral irradiance.
+
+    Returned per spectral grid, so any sunlight spectrum (for example a shielded
+    one) applies as a dot product without repeating the radiative transfer.
+    """
     radius = (col['planet'].radius_m + col['z_m'])[::-1] if spherical else None
-    parts = []
     nu, tau_abs = optics.optical_depth(col, cfg)
-    parts.append((nu, tau_abs))
-    nu_uv = UV_GRID.nu
-    parts.append((nu_uv, _uv_optics(col, nu_uv)))
-    reflected = 0.0
-    net = 0.0
-    incident = 0.0
+    parts = []
+    for nu_k, tau_k in ((nu, tau_abs), (UV_GRID.nu, _uv_optics(col, UV_GRID.nu))):
+        tau_r = optics.rayleigh_optical_depth(col, nu_k)
+        res = sw.planetary_mean(nu_k, np.ones(nu_k.size), tau_k[::-1], tau_r[::-1], np.zeros_like(tau_r),
+                                surface_albedo, radius, n_mu0=n_mu0)
+        parts.append((nu_k, res['weights'], res['spectral_reflected'], res['spectral_surface']))
+    return parts
+
+
+def apply_sunlight(parts, shield=None):
+    """Global-mean solar budget (W/m^2) of a response for sunlight filtered by `shield`."""
+    reflected = surface = incident = 0.0
     longward = None
-    for nu_k, tau_k in parts:
-        spectrum, lw_part = sw.solar_spectrum(nu_k)
+    for nu, weights, reflect_unit, surface_unit in parts:
+        spectrum, lw_part = sw.solar_spectrum(nu, shield=shield)
         if longward is None:
             longward = lw_part
-        tau_r = optics.rayleigh_optical_depth(col, nu_k)
-        res = sw.planetary_mean(nu_k, spectrum, tau_k[::-1], tau_r[::-1], np.zeros_like(tau_r),
-                                surface_albedo, radius, n_mu0=n_mu0)
-        reflected += res['reflected']
-        net = net + res['net']
-        incident += res['incident']
-    # Sunlight longward of 5 um (below the grid) is taken as absorbed.
+        reflected += float((reflect_unit * spectrum) @ weights)
+        surface += float((surface_unit * spectrum) @ weights)
+        incident += 0.25 * float(spectrum @ weights)
+    # Sunlight longward of 5 um (below the grid) is taken as absorbed in the atmosphere.
     incident_total = incident + 0.25 * longward
-    net_down = net[::-1]          # surface-first
     return dict(incident=incident_total, reflected=reflected, albedo=reflected / incident_total,
-                absorbed=incident_total - reflected, surface_absorbed=float(net_down[0]),
-                atmosphere_absorbed=incident_total - reflected - float(net_down[0]),
+                absorbed=incident_total - reflected, surface_absorbed=surface,
+                atmosphere_absorbed=incident_total - reflected - surface,
                 longward_of_grid=0.25 * longward, grid_incident=incident)
 
 
-def evaluate(scenario: Scenario, ts: float, solar=True):
-    """Clear-sky energy budget of a scenario at surface temperature ts."""
+def shortwave(col, surface_albedo, cfg=optics.SHORTWAVE, n_mu0=6, spherical=True, shield=None):
+    """Global-mean clear-sky solar budget of a column (W/m^2)."""
+    return apply_sunlight(shortwave_response(col, surface_albedo, cfg, n_mu0, spherical), shield)
+
+
+def evaluate(scenario: Scenario, ts: float, solar=True, longwave_too=True, shields=('none',)):
+    """Clear-sky energy budget of a scenario at surface temperature ts, one row per shield."""
     col_lw = scenario.column(ts, scenario.longwave_levels)
-    out = dict(scenario=scenario.name, planet=scenario.planet.name, dry_pressure_pa=scenario.dry_pressure_pa,
-               co2_ppm=scenario.co2_ppm, humidity=scenario.humidity, stratosphere_k=scenario.stratosphere_k,
-               surface_albedo=scenario.surface_albedo, ts_k=ts,
-               surface_pressure_pa=col_lw['surface_pressure_pa'], tropopause_pa=col_lw['tropopause_pa'],
-               tropopause_height_km=float(np.interp(math.log(col_lw['tropopause_pa']), np.log(col_lw['p_pa'][::-1]),
-                                                    col_lw['z_m'][::-1]) / 1e3),
-               stratospheric_h2o=col_lw['tropopause_h2o'],
-               water_column_kg_m2=float(np.sum(col_lw['layer_mass_kg_m2'] * col_lw['layer_x_h2o'] * th.MOLAR_MASS['H2O']
-                                               / (th.MOLAR_MASS['H2O'] * col_lw['layer_x_h2o']
-                                                  + scenario.air().molar_mass * (1 - col_lw['layer_x_h2o'])))),
-               air_column_kg_m2=float(col_lw['layer_mass_kg_m2'].sum()))
-    lwr = longwave(col_lw)
-    out.update(olr=lwr['olr'], surface_down_lw=lwr['surface_down'], surface_up_lw=lwr['surface_up'])
-    if solar:
-        col_sw = scenario.column(ts, scenario.shortwave_levels)
-        swr = shortwave(col_sw, scenario.surface_albedo, n_mu0=scenario.n_mu0)
-        out.update(asr=swr['absorbed'], albedo=swr['albedo'], surface_sw=swr['surface_absorbed'],
-                   atmosphere_sw=swr['atmosphere_absorbed'], sw_longward_of_grid=swr['longward_of_grid'])
-        out['net_toa'] = out['asr'] - out['olr']
-    return out
+    base = dict(scenario=scenario.name, planet=scenario.planet.name, dry_pressure_pa=scenario.dry_pressure_pa,
+                co2_ppm=scenario.co2_ppm, humidity=scenario.humidity, stratosphere_k=scenario.stratosphere_k,
+                surface_albedo=scenario.surface_albedo, ts_k=ts,
+                surface_pressure_pa=col_lw['surface_pressure_pa'], tropopause_pa=col_lw['tropopause_pa'],
+                tropopause_height_km=float(np.interp(math.log(col_lw['tropopause_pa']), np.log(col_lw['p_pa'][::-1]),
+                                                     col_lw['z_m'][::-1]) / 1e3),
+                stratospheric_h2o=col_lw['tropopause_h2o'],
+                water_column_kg_m2=float(np.sum(col_lw['layer_mass_kg_m2'] * col_lw['layer_x_h2o'] * th.MOLAR_MASS['H2O']
+                                                / (th.MOLAR_MASS['H2O'] * col_lw['layer_x_h2o']
+                                                   + scenario.air().molar_mass * (1 - col_lw['layer_x_h2o'])))),
+                air_column_kg_m2=float(col_lw['layer_mass_kg_m2'].sum()))
+    if longwave_too:
+        lwr = longwave(col_lw)
+        base.update(olr=lwr['olr'], surface_down_lw=lwr['surface_down'], surface_up_lw=lwr['surface_up'])
+    rows = []
+    parts = shortwave_response(scenario.column(ts, scenario.shortwave_levels), scenario.surface_albedo,
+                               n_mu0=scenario.n_mu0) if solar else None
+    for name in shields:
+        row = dict(base, shield=name)
+        if solar:
+            shield = load_shield(name)
+            swr = apply_sunlight(parts, shield)
+            row.update(asr=swr['absorbed'], albedo=swr['albedo'], incident_sw=swr['incident'],
+                       surface_sw=swr['surface_absorbed'], atmosphere_sw=swr['atmosphere_absorbed'],
+                       sw_longward_of_grid=swr['longward_of_grid'],
+                       shield_product=getattr(shield, 'product_sha256', ''))
+            if 'olr' in row:
+                row['net_toa'] = row['asr'] - row['olr']
+        rows.append(row)
+    return rows

@@ -125,6 +125,12 @@ integrals. For an Earth column, OLR moves by 0.01 W/m².
 - **Spectrum and grid limits:** the solar spectrum is TSIS-1 HSRS (202–2730 nm)
   joined to a 5772 K blackbody beyond, scaled to 1361 W/m². Sunlight longward
   of 5 μm, about 1.9 W/m² in the global mean, is counted as absorbed.
+- **Spectral shields:** the solar transfer is computed once per column for
+  unit spectral irradiance (reflection and surface absorption per grid point).
+  Each shield then applies as a product with its transmission T(λ), read from
+  the protection domain's product `protection/spectra/shield_transmission.json`
+  (schema `terluna.protection.shield-transmission/1`, hash recorded per row), with
+  T at 5000 nm used longward of the grid.
 
 ## Validation record
 
@@ -154,8 +160,9 @@ integrals. For an Earth column, OLR moves by 0.01 W/m².
 - The temperature structure is prescribed (adiabat plus isothermal
   stratosphere), and the humidity follows an Earth-derived profile. Neither is
   predicted for the Moon.
-- There is no ozone. With the spectral shield blocking O2-photolysing
-  ultraviolet, an ozone layer is itself uncertain.
+- There is no ozone. Behind the titania stack no light that splits O2 arrives
+  and no ozone layer forms; a shield passing 200–242 nm would allow one, whose
+  absorption these budgets leave out.
 - The geometric effect of the Moon's tall atmosphere on how much sunlight it
   intercepts and emits is represented only in the solar beam. Emission from
   large heights (up to (r/R)² ≈ 1.1 more area) is not.

@@ -54,8 +54,11 @@ geoid level the Moon has one world ocean.
 
 - Fill-and-spill driven by rainfall over catchments. Where water actually stands
   depends on precipitation minus evaporation, which needs the climate model.
-- Land–sea masks for chosen inventories, as inputs to a three-dimensional
-  climate model.
+- Land–sea masks for chosen inventories are available:
+  `python -m geography.water_inventory --masks 0.25 0.35 --resolution 1.0` writes
+  `products/land_sea_{25,35}pct_1deg.npz` (schema `terluna.geography.land-sea/1`:
+  water fraction, mean ground height and mean water depth per cell; not
+  committed).
 - Polar cold-trapping of water.
 - Crustal loading.
 

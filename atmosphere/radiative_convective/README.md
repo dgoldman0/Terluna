@@ -35,7 +35,8 @@ appends rows as they finish and resumes after an interruption.
 
 ## First results (2026-09-24)
 
-These come from [results/inverse_climate.csv](results/) (67 columns; the schema,
+These come from [results/inverse_climate.csv](results/) (67 columns, plus 54 of them
+repeated behind each of three shields; the schema,
 producer hashes and evidence statement are in `inverse_climate.json`; derived
 numbers are in `summary.json`). Settings: clear sky, 400 ppm CO2, stratosphere at
 200 K, surface albedo 0.13, Manabe–Wetherald humidity unless marked saturated.
@@ -88,14 +89,25 @@ What these calculations show:
   a model of the ground and the air just above it.
 - **1.0 and 1.2 atm hardly differ in climate.** Balance temperatures agree to
   within 1–2 K across the cloud effects tried, and the runaway limit is the same.
-- **The spectral shield is not yet in the sunlight.** These runs use unfiltered
-  sunlight. The protection model's titania–silica stack passes about 90% of
-  sunlight and none below about 330 nm ([uv_absorption.csv](../../protection/results/uv_absorption.csv),
-  `results.json`). An approximate version of that filter (its stored ultraviolet
-  points and 96.3% above 400 nm) lowers the Moon's clear-sky ASR at 290 K from
-  243.5 to 230.4 W/m². That is about 13 W/m², roughly 9–10 K cooler, and it
-  leaves no ultraviolet to form ozone. The full spectral transmission belongs in
-  the solar calculation before any balance temperature is quoted.
+- **The spectral shield costs 7–10 K.** Sunlight filtered through each shield
+  in the protection domain's product
+  ([shield_transmission.json](../../protection/spectra/shield_transmission.json))
+  loses 9% in the titania–silica stack (309 of 340 W/m² reaches the Moon) and
+  3.5–5% in the idealised edge filters. At 290 K the lunar clear-sky ASR falls
+  from 243.5 to 230.4 W/m² (1.2 atm, titania). The balance temperatures below
+  are for the 1.2 atm Moon. The 200-nm edge's ASR leaves out the ozone that
+  shield lets form.
+
+  | Cloud effect C (W/m²) | Unfiltered | Titania stack | 200-nm edge | 310-nm edge |
+  |---|---|---|---|---|
+  | 0 | 301.1 K | 291.9 K | 294.5 K | 294.1 K |
+  | −20 | 286.7 K | 277.0 K | 279.5 K | 279.0 K |
+  | −40 | 272.1 K | 263.5 K | 265.9 K | 265.4 K |
+
+  The saturated column's excess over the runaway limit shrinks from 21 W/m² to
+  9 W/m² (titania) or 11 W/m² (edges). It is still positive, so clouds and dry
+  regions must still supply the margin. The 1.0-atm Moon differs from these
+  temperatures by −0.6 to +1.7 K, warmer the stronger the cloud cooling.
 
 None of this is a climate prediction: clouds, the month-long day and night, the
 poles, circulation and ozone are all outside the calculation.
