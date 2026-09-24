@@ -8,6 +8,7 @@ import zlib from 'node:zlib';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { OM } from '../../engine/om.js';
+import C from '../../engine/core.js';
 import cove from '../../world/cove.js';
 import { treeAt } from '../../world/cove-flora.js';
 
@@ -41,7 +42,7 @@ test('the world export keeps heights, the planting rule and the landscape transf
   ]) {
     const v = r16.readUInt16LE((j * 65 + i) * 2),
       metres = (locZ + ((v - 32768) * scaleZ) / 128) / 100,
-      want = cove.landscape.height(L.origin_m.x + i * 8, L.origin_m.z + j * 8);
+      want = C.groundHeight(L.origin_m.x + i * 8, L.origin_m.z + j * 8, 'moon');
     assert.ok(Math.abs(metres - want) <= L.height_quantum_m, `${i},${j}: ${metres} vs ${want}`);
   }
   for (const layer of L.layers) assert.equal(fs.statSync(path.join(dir, layer.file)).size, 65 * 65);

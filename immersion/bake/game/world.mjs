@@ -1,21 +1,25 @@
 /* Export a world for the Unreal game: heightmap, material layers, vegetation, stones
  * and sites, from the same world definition the web experience uses.
  *
- * Usage: node bake/game/world.mjs --out <dir> [--size 8129] [--spacing 2]
+ * Usage: node bake/game/world.mjs --out <dir> [--size 8129] [--spacing 2] [--flat]
  *
  * Coordinates. The world is metres, right-handed, y up (three.js). Unreal is
  * centimetres, left-handed, z up. Unreal X = x, Unreal Y = z and Unreal Z = y keeps
  * every shape (swapping two axes also swaps the handedness), so files here stay in
  * world metres and manifest.json records the mapping and the landscape transform.
  *
- * Heights are the uncurved landscape: the Moon's curvature is for the renderer to
- * apply, as the web engine does. Sea level is 0 m.
+ * Heights include the Moon's curvature: the ground of a sphere of the Moon's radius
+ * touching the world origin, which is where Unreal's SkyAtmosphere puts its planet
+ * by default. Terrain, collision and sky then agree, and the horizon is where it
+ * should be. --flat writes the uncurved landscape instead. Sea level is 0 m at the
+ * origin and follows the sphere.
  */
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { OM } from '../../engine/om.js';
+import C from '../../engine/core.js';
 import cove from '../../world/cove.js';
 import { TREE_LATTICE } from '../../world/cove-flora.js';
 
@@ -28,6 +32,8 @@ const arg = (name, fallback) => {
 const out = arg('--out');
 if (!out) throw new Error('Give the output folder: --out <dir>');
 // 8129 vertices = 32 x 32 Unreal landscape components of 254 quads.
+const CURVED = !process.argv.includes('--flat'),
+  ground = (x, z) => (CURVED ? C.groundHeight(x, z, 'moon') : L.height(x, z));
 const SIZE = +arg('--size', 8129),
   SPACING = +arg('--spacing', 2),
   LAYER_STEP = 2; // material layers are computed every LAYER_STEP samples and interpolated
@@ -48,7 +54,7 @@ let hmin = Infinity,
   hmax = -Infinity;
 for (let j = 0; j < SIZE; j++)
   for (let i = 0; i < SIZE; i++) {
-    const h = L.height(x0 + i * SPACING, z0 + j * SPACING);
+    const h = ground(x0 + i * SPACING, z0 + j * SPACING);
     heights[j * SIZE + i] = h;
     if (h < hmin) hmin = h;
     if (h > hmax) hmax = h;
@@ -104,7 +110,7 @@ const tree = (t, isDetailed) =>
       t.id,
       t.x,
       t.z,
-      L.height(t.x, t.z),
+      ground(t.x, t.z),
       t.height,
       t.family,
       t.ageClass,
@@ -127,7 +133,7 @@ fs.writeFileSync(path.join(dir, 'trees.csv'), rows.join('\n') + '\n');
 log(`${rows.length - 1} trees`);
 const stones = ['id,x,z,surface_height_m,size_m,angle_rad,family,stretch'];
 for (const r of plan.rocks)
-  stones.push([r.id, r.x, r.z, L.height(r.x, r.z), r.s, r.angle, r.family, r.stretch].join(','));
+  stones.push([r.id, r.x, r.z, ground(r.x, r.z), r.s, r.angle, r.family, r.stretch].join(','));
 fs.writeFileSync(path.join(dir, 'stones.csv'), stones.join('\n') + '\n');
 fs.writeFileSync(
   path.join(dir, 'sites.json'),
@@ -155,7 +161,12 @@ const manifest = {
     'the engine, not a proposed Open Moon environment.',
   coordinates:
     'Files are in world metres (x east-west, z north-south, y up). Unreal X = x, Y = z, ' +
-    'Z = y, in centimetres. Heights are uncurved; sea level is 0 m.',
+    'Z = y, in centimetres. ' +
+    (CURVED
+      ? `Heights follow a sphere of radius ${C.worldRadius('moon')} m touching the origin ` +
+        '(Unreal SkyAtmosphere planet top at the world origin); sea level is on that sphere.'
+      : 'Heights are uncurved; sea level is 0 m.'),
+  curvature: CURVED ? { radius_m: C.worldRadius('moon'), touching: 'world origin' } : null,
   landscape: {
     vertices: SIZE,
     spacing_m: SPACING,
