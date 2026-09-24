@@ -14,6 +14,11 @@ The [54-case output](../research/studies/environment_screens/results/climate_bud
 
 ## Next step
 
-Replace the assumed outgoing-radiation law with a calibrated vertical radiative-convective calculation, then add water/ice treatment and measured terrain. The present temperature/irradiance interface can supply biological requirement calculations, with all atmospheric and trait assumptions retained.
+The atmosphere domain's [radiative–convective column](../atmosphere/radiative_convective/)
+now computes clear-sky outgoing longwave radiation and absorbed sunlight against
+surface temperature, line by line, for the Moon and an Earth control. Those are
+the quantities this screen prescribes through A, B and the albedo. Using them
+here is the next step, but it needs an explicit cloud assumption, because the
+column is clear-sky. Water/ice treatment and measured terrain follow. The present temperature/irradiance interface can supply biological requirement calculations, with all atmospheric and trait assumptions retained.
 
 Run `python -m pytest climate` and `python -m research.studies.environment_screens.run` from the repository root. This folder supplies no GCM weather prediction.

@@ -14,6 +14,8 @@ BOLTZMANN = DATA["physics"]["boltzmann_J_K"]
 AVOGADRO = DATA["physics"]["avogadro_per_mol"]
 GAS_CONSTANT = BOLTZMANN * AVOGADRO
 STEFAN_BOLTZMANN = DATA["physics"]["stefan_boltzmann_W_m2_K4"]
+PLANCK = DATA["physics"]["planck_J_s"]
+SPEED_OF_LIGHT = DATA["physics"]["speed_of_light_m_s"]
 STANDARD_GRAVITY = DATA["physics"]["standard_gravity_m_s2"]
 
 MOON_RADIUS = DATA["moon"]["radius_m"]

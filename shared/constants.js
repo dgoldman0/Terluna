@@ -7,6 +7,9 @@ import data from './constants.json' with { type: 'json' };
 export const DATA = data;
 export const BOLTZMANN = data.physics.boltzmann_J_K;
 export const AVOGADRO = data.physics.avogadro_per_mol;
+export const STEFAN_BOLTZMANN = data.physics.stefan_boltzmann_W_m2_K4;
+export const PLANCK = data.physics.planck_J_s;
+export const SPEED_OF_LIGHT = data.physics.speed_of_light_m_s;
 export const STANDARD_GRAVITY = data.physics.standard_gravity_m_s2;
 
 export const MOON_RADIUS = data.moon.radius_m;

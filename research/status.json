@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-20",
+  "updated": "2026-09-24",
   "base_commit": "79a60a1a51b4552ac9ae8e8bb295b567d9254995",
   "next_manuscript": "cef466e6-d9f8",
   "principle": "Each topic spans the open Moon; the root opening scene is one illustration",
@@ -9,14 +9,15 @@
   "topics": [
     {
       "topic": "atmosphere",
-      "condition": "solved_molecular_thermal_limit; full_spectral_chemical_closure_blocked",
+      "condition": "solved_molecular_thermal_limit; full_spectral_chemical_closure_blocked; clear_sky_line_by_line_radiation_for_prescribed_columns",
       "material": [
         "../atmosphere/sim/sim1.py",
         "baselines/feasibility/model.py",
         "../atmosphere/reference/",
         "../atmosphere/thermal_column.py",
         "../atmosphere/spectral_interface.py",
-        "studies/environment_screens/results/molecular_columns.csv"
+        "studies/environment_screens/results/molecular_columns.csv",
+        "../atmosphere/radiative_convective/"
       ],
       "unresolved": [
         "self-consistent spectrum/chemistry/energy/outflow",
@@ -27,21 +28,22 @@
     },
     {
       "topic": "climate",
-      "condition": "periodic_conservative_spatial_linear_screen; uncalibrated",
+      "condition": "periodic_conservative_spatial_linear_screen; uncalibrated; clear_sky_radiation_computed_for_prescribed_columns",
       "material": [
         "../climate/reference/thermal_response.csv",
         "baselines/feasibility/model.py",
         "../climate/cycle.py",
-        "studies/environment_screens/results/climate_budget.csv"
+        "studies/environment_screens/results/climate_budget.csv",
+        "../atmosphere/radiative_convective/results/"
       ],
       "unresolved": [
-        "radiative-convective calibration",
+        "cloud radiative effect of a slowly rotating Moon",
         "moisture/ice/clouds",
         "dynamical heat transport and weather",
         "actual terrain",
         "spatial resolution sensitivity"
       ],
-      "next_session_task": "Calibrate radiation and lower-atmospheric structure, add freezing/latent heat and measured terrain before climate claims."
+      "next_session_task": "Model the long night at the surface (ground, boundary layer, fog) driven by the computed downward longwave; bound the cloud effect; then a 3-D slow-rotator circulation."
     },
     {
       "topic": "geography",

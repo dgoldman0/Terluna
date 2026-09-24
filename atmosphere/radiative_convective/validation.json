@@ -1,0 +1,241 @@
+{
+ "schema": "terluna.validation-record/1",
+ "model": "atmosphere/radiative_convective",
+ "recorded": "2026-09-24",
+ "scope": "Numerical and cross-code checks of the radiation calculation. They establish implementation correctness and discretisation accuracy for the stated configurations; they do not validate the prescribed column structure, the absence of clouds or any lunar climate outcome.",
+ "unit_tests": "atmosphere/tests/test_radiative_convective.py (21 tests: thermodynamic limits, analytic radiative transfer, two-stream conservation and doubling, MT_CKD port against AER example output, multi-mesh line kernel against direct Voigt sums, CIA precedence, Rayleigh optical depth, solar spectrum total, CO2 node table against direct calculation)",
+ "monte_carlo_rayleigh": {
+  "description": "Two-stream (PIFM) direct-beam reflectance of a conservative Rayleigh slab over a black surface against a 400,000-photon Monte Carlo with the Rayleigh phase function (scratch reference, statistical 1-sigma about 0.001).",
+  "rows": [
+   {
+    "tau": 0.1,
+    "mu0": 0.25,
+    "mc": 0.166,
+    "two_stream": 0.1656
+   },
+   {
+    "tau": 0.1,
+    "mu0": 0.5,
+    "mc": 0.091,
+    "two_stream": 0.0908
+   },
+   {
+    "tau": 0.1,
+    "mu0": 1.0,
+    "mc": 0.0476,
+    "two_stream": 0.0476
+   },
+   {
+    "tau": 0.35,
+    "mu0": 0.25,
+    "mc": 0.4031,
+    "two_stream": 0.3944
+   },
+   {
+    "tau": 0.35,
+    "mu0": 0.5,
+    "mc": 0.2612,
+    "two_stream": 0.2578
+   },
+   {
+    "tau": 0.35,
+    "mu0": 1.0,
+    "mc": 0.1502,
+    "two_stream": 0.1494
+   },
+   {
+    "tau": 0.7,
+    "mu0": 0.25,
+    "mc": 0.553,
+    "two_stream": 0.5367
+   },
+   {
+    "tau": 0.7,
+    "mu0": 0.5,
+    "mc": 0.4124,
+    "two_stream": 0.406
+   },
+   {
+    "tau": 0.7,
+    "mu0": 1.0,
+    "mc": 0.2634,
+    "two_stream": 0.2617
+   },
+   {
+    "tau": 1.5,
+    "mu0": 0.25,
+    "mc": 0.695,
+    "two_stream": 0.6761
+   },
+   {
+    "tau": 1.5,
+    "mu0": 0.5,
+    "mc": 0.5952,
+    "two_stream": 0.5853
+   },
+   {
+    "tau": 1.5,
+    "mu0": 1.0,
+    "mc": 0.4408,
+    "two_stream": 0.438
+   }
+  ],
+  "conclusion": "Two-stream reflectance is low by 0.1-3%; for the lunar Rayleigh optical depths this is about 0.003 in planetary albedo (about 1 W/m2)."
+ },
+ "pyrads": {
+  "description": "PyRADS (Koll & Cronin 2018; MIT licence; commit of 2024-01-17) run with its own saturated H2O-N2 profiles (60 levels, 0.01 cm-1, T_strat 200 K, dry surface pressure 1e5 Pa, Voigt lines, MT_CKD 3.2, main H2O isotopologue, diffusivity 5/3). This model was run on the same profiles with constant gravity, water lines and continuum only, and the same diffusivity.",
+  "earth_gravity_9_8": [
+   {
+    "ts": 250.0,
+    "pyrads": 195.35,
+    "this_default": 194.83,
+    "this_with_pyrads_data": null
+   },
+   {
+    "ts": 280.0,
+    "pyrads": 264.91,
+    "this_default": 264.0,
+    "this_with_pyrads_data": 264.38
+   },
+   {
+    "ts": 300.0,
+    "pyrads": 290.07,
+    "this_default": 290.93,
+    "this_with_pyrads_data": null
+   },
+   {
+    "ts": 320.0,
+    "pyrads": 295.91,
+    "this_default": 298.81,
+    "this_with_pyrads_data": null
+   },
+   {
+    "ts": 340.0,
+    "pyrads": 294.02,
+    "this_default": 299.28,
+    "this_with_pyrads_data": 294.15
+   },
+   {
+    "ts": 360.0,
+    "pyrads": 290.21,
+    "this_default": 296.63,
+    "this_with_pyrads_data": null
+   }
+  ],
+  "lunar_gravity": [
+   {
+    "ts": 250,
+    "pyrads": 180.63,
+    "this_default": 179.63,
+    "this_with_pyrads_data": 180.2
+   },
+   {
+    "ts": 280,
+    "pyrads": 226.16,
+    "this_default": 224.71,
+    "this_with_pyrads_data": 225.26
+   },
+   {
+    "ts": 300,
+    "pyrads": 235.19,
+    "this_default": 235.11,
+    "this_with_pyrads_data": 234.26
+   },
+   {
+    "ts": 320,
+    "pyrads": 240.94,
+    "this_default": 242.92,
+    "this_with_pyrads_data": 240.57
+   },
+   {
+    "ts": 340,
+    "pyrads": 239.84,
+    "this_default": 244.45,
+    "this_with_pyrads_data": 239.99
+   },
+   {
+    "ts": 360,
+    "pyrads": 236.63,
+    "this_default": 242.35,
+    "this_with_pyrads_data": 236.81
+   }
+  ],
+  "attribution_at_340K_earth_gravity": {
+   "all_isotopes+ckd4.3": 299.28,
+   "main_isotope+ckd4.3": 301.54,
+   "all_isotopes+ckd3.2": 292.08,
+   "main_isotope+ckd3.2": 294.15
+  },
+  "conclusion": "With PyRADS data choices (MT_CKD 3.2, main isotopologue) this code reproduces PyRADS OLR within 0.4% at Earth and lunar gravity from 250 to 360 K. The default configuration (MT_CKD 4.3, all isotopologues) differs from PyRADS by up to +2.2% in hot saturated columns, almost entirely from the continuum version (+7 W/m2 at 340 K, Earth gravity); isotopologues contribute -2 W/m2. That spread is a data uncertainty of the runaway limit."
+ },
+ "convergence": {
+  "case": "Moon, 1.2 atm dry, 400 ppm CO2, Manabe-Wetherald humidity, Ts 288 K, T_strat 200 K (and a saturated 340 K column for the line floor)",
+  "longwave": {
+   "lw_angles_4": {
+    "olr": 224.81,
+    "dlr": 360.291
+   },
+   "lw_angles_8": {
+    "olr": 224.833,
+    "dlr": 360.292
+   },
+   "lw_diffusivity_5/3": {
+    "olr": 224.534,
+    "dlr": 362.684
+   },
+   "lw_levels_140_40": {
+    "olr": 225.143,
+    "dlr": 360.432
+   },
+   "lw_levels_45_12": {
+    "olr": 224.188,
+    "dlr": 360.051
+   },
+   "lw_h2o_smin_1e-29": {
+    "olr": 224.81,
+    "dlr": 360.292
+   },
+   "lw_sat340_h2o_smin_1e-28": {
+    "olr": 236.514,
+    "dlr": 756.666
+   },
+   "lw_sat340_h2o_smin_1e-29": {
+    "olr": 236.513,
+    "dlr": 756.666
+   },
+   "lw_step_0.005": {
+    "olr": 224.811,
+    "dlr": 360.291
+   }
+  },
+  "shortwave": {
+   "sw_mu0_6": {
+    "asr": 243.0463,
+    "albedo": 0.2857,
+    "surface": 150.0898
+   },
+   "sw_mu0_12": {
+    "asr": 243.0463,
+    "albedo": 0.2857,
+    "surface": 150.0896
+   },
+   "sw_plane_parallel": {
+    "asr": 241.2307,
+    "albedo": 0.291,
+    "surface": 148.0959
+   },
+   "sw_levels_80_16": {
+    "asr": 243.0255,
+    "albedo": 0.2858,
+    "surface": 150.1027
+   },
+   "sw_step_0.02": {
+    "asr": 243.0468,
+    "albedo": 0.2857,
+    "surface": 150.0877
+   }
+  },
+  "conclusion": "Spectral step, angles, line-intensity floor, solar zenith nodes and solar levels change the budget by less than 0.03 W/m2. Vertical discretisation of the thermal calculation converges at first order: the standard 70+20 levels read OLR about 0.6 W/m2 low (Richardson estimate from 45+12, 70+20 and 140+40 levels). The pseudo-spherical beam raises ASR by 1.8 W/m2 over plane-parallel."
+ },
+ "table_interpolation": "CO2 node table against direct calculation: under 1% at any wavenumber, 0.3% in band integrals; OLR of an Earth column changes by 0.01 W/m2."
+}

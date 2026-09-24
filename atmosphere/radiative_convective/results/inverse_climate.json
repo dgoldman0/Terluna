@@ -1,0 +1,28 @@
+{
+  "schema": "terluna.atmosphere.inverse-climate/1",
+  "producer": {
+    "domain": "atmosphere",
+    "model": "atmosphere/radiative_convective",
+    "files": {
+      "analysis.py": "a085a31fa5cc0f4c",
+      "climate.py": "55739c771cc97dbd",
+      "fetch_inputs.py": "8e9331c0cf819455",
+      "longwave.py": "87a40a93f2e82dab",
+      "optics.py": "e4167418b3c759ff",
+      "run.py": "9b4a87b8ebd06b74",
+      "shortwave.py": "5fe6972bf97813de",
+      "spectroscopy.py": "043965b76c275ba7",
+      "thermodynamics.py": "0200e9dd64e130cf"
+    },
+    "inputs_manifest": "03165520af266eae"
+  },
+  "evidence": "One-dimensional clear-sky calculations for prescribed columns: a saturated moist adiabat to a fixed stratospheric temperature, a prescribed relative-humidity profile, no clouds, no ozone, CH4 or N2O. Outgoing longwave radiation (OLR) and absorbed solar radiation (ASR) are global means for the stated surface temperature; they are not a solved climate, a cloud prediction or a habitability result. Where ASR equals OLR the column could be in balance; clouds shift that balance by an amount this calculation does not determine.",
+  "units": {
+    "fluxes": "W m-2, global mean",
+    "pressure": "Pa",
+    "temperature": "K",
+    "columns": "kg m-2"
+  },
+  "reading_rule": "Compare ASR with OLR at the same scenario and surface temperature. Positive net_toa means the clear column would warm. Interpolate between surface temperatures linearly; do not extrapolate beyond the tabulated range. Keep the evidence statement with any use.",
+  "table": "inverse_climate.csv"
+}

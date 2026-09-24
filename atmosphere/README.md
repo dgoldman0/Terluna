@@ -10,6 +10,7 @@ Several reduced models are available. Historical code and reference tables remai
 | [Spectral interface](spectral_interface.py) | Explicit band energy ledger with missing-data rejection | Connect supplied irradiance and response parameters to surface-normalized heat; audit input coverage |
 | [Lower air](lower_air.py) | Hydrostatic N2/O2/water-vapour lower atmosphere with radius-dependent gravity; `A1Profile` reads exported column profiles | Air-state input for canopy flow and tree mechanics |
 | [Column](column/) | Sounding thermodynamics, parcel ascent, diagnosed cloud support and a 600-km hydrostatic continuation (JavaScript) | Selected column experiments; the shared state behind the light-transport references |
+| [Radiative–convective column](radiative_convective/) | Line-by-line clear-sky outgoing longwave and absorbed sunlight for prescribed moist-adiabatic columns (HITRAN, MT_CKD 4.3, CIA), Moon and Earth control | Greenhouse strength, clear-sky albedo and runaway limit against surface temperature; the radiation behind climate balance questions |
 
 ## New calculation and remaining closure
 

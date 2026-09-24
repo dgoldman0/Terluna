@@ -1,0 +1,273 @@
+{
+  "schema": "terluna.external-inputs/1",
+  "status": "external inputs; fetched and hash-checked by fetch_inputs.py; ignored by Git",
+  "input_directory": "inputs",
+  "retrieved": "2026-09-24",
+  "files": [
+    {
+      "name": "hitran_h2o_0-3500.par",
+      "url": "https://hitran.org/lbl/api?iso_ids_list=1,2,3,4,5,6,129&numin=0&numax=3500",
+      "sha256": "3242a9e09b6a35c4487347a463cc2fbec138bbffdba0903ab68c30e49b202d84",
+      "bytes": 14308875,
+      "credit": "HITRAN line-by-line database as served by hitran.org on 2026-09-24 (HITRAN2020 or later edition; Gordon et al. 2022, JQSRT 277, 107949). Cite HITRAN for any use.",
+      "use": "H2O lines, all seven isotopologues, thermal infrared"
+    },
+    {
+      "name": "hitran_co2_0-3500.par",
+      "url": "https://hitran.org/lbl/api?iso_ids_list=7,8,9,10,11,12,13,14,121,15,120,122&numin=0&numax=3500",
+      "sha256": "5a6de6295a6b1e206353639234f68ddb6cbc350ce974b147a9cab24a6ed293ee",
+      "bytes": 50301552,
+      "credit": "HITRAN line-by-line database as served by hitran.org on 2026-09-24 (HITRAN2020 or later edition; Gordon et al. 2022, JQSRT 277, 107949). Cite HITRAN for any use.",
+      "use": "CO2 lines, twelve isotopologues, thermal infrared"
+    },
+    {
+      "name": "hitran_h2o_3500-25000.par",
+      "url": "https://hitran.org/lbl/api?iso_ids_list=1,2,3,4,5,6,129&numin=3500&numax=25000",
+      "sha256": "a8e5409faffdc06dbbbeedd556643d17aaa6c44081456c1d310703c04dceb1fd",
+      "bytes": 55825140,
+      "credit": "HITRAN line-by-line database as served by hitran.org on 2026-09-24 (HITRAN2020 or later edition; Gordon et al. 2022, JQSRT 277, 107949). Cite HITRAN for any use.",
+      "use": "H2O lines, solar near infrared and visible"
+    },
+    {
+      "name": "hitran_co2_3500-10000.par",
+      "url": "https://hitran.org/lbl/api?iso_ids_list=7,8,9,10,11,12,13,14,121,15,120,122&numin=3500&numax=10000",
+      "sha256": "2c90730ffa0959ee4166482a3d6aff99fa0edc8102690413361d7bc1e42aa923",
+      "bytes": 36454908,
+      "credit": "HITRAN line-by-line database as served by hitran.org on 2026-09-24 (HITRAN2020 or later edition; Gordon et al. 2022, JQSRT 277, 107949). Cite HITRAN for any use.",
+      "use": "CO2 lines, solar near infrared"
+    },
+    {
+      "name": "hitran_o2_0-20000.par",
+      "url": "https://hitran.org/lbl/api?iso_ids_list=36,37,38&numin=0&numax=20000",
+      "sha256": "299f5e0feb34455436c707ec35e3e48d08e4c8a31739d7c980247a6891333e47",
+      "bytes": 2462656,
+      "credit": "HITRAN line-by-line database as served by hitran.org on 2026-09-24 (HITRAN2020 or later edition; Gordon et al. 2022, JQSRT 277, 107949). Cite HITRAN for any use.",
+      "use": "O2 lines (A, B, gamma and 1.27-um bands)"
+    },
+    {
+      "name": "hitran_q1.txt",
+      "url": "https://hitran.org/data/Q/q1.txt",
+      "sha256": "3d6812b28d411597564006e8c51dd3e3b0bf4f5a47c8c055d1ed25cbff9375a2",
+      "bytes": 179998,
+      "credit": "HITRAN total internal partition sums (TIPS; Gamache et al. 2021, JQSRT 271, 107713) as distributed by hitran.org.",
+      "use": "partition sum for HITRAN global isotopologue 1"
+    },
+    {
+      "name": "hitran_q2.txt",
+      "url": "https://hitran.org/data/Q/q2.txt",
+      "sha256": "08efeff76e4b1d8adab23f1c6a38331aeb3462d6cac806383dbd42979a7383d5",
+      "bytes": 179998,
+      "credit": "HITRAN total internal partition sums (TIPS; Gamache et al. 2021, JQSRT 271, 107713) as distributed by hitran.org.",
+      "use": "partition sum for HITRAN global isotopologue 2"
+    },
+    {
+      "name": "hitran_q3.txt",
+      "url": "https://hitran.org/data/Q/q3.txt",
+      "sha256": "99c9f4d901ca95a5510fd5f21e3b4e294d14aeabe51dcb6c4bd9f4991234c9ad",
+      "bytes": 179998,
+      "credit": "HITRAN total internal partition sums (TIPS; Gamache et al. 2021, JQSRT 271, 107713) as distributed by hitran.org.",
+      "use": "partition sum for HITRAN global isotopologue 3"
+    },
+    {
+      "name": "hitran_q4.txt",
+      "url": "https://hitran.org/data/Q/q4.txt",
+      "sha256": "1de5c3a00b51323f6d101dc70c92543be5e205a2a08991b051c7e8e4225d7a04",
+      "bytes": 179998,
+      "credit": "HITRAN total internal partition sums (TIPS; Gamache et al. 2021, JQSRT 271, 107713) as distributed by hitran.org.",
+      "use": "partition sum for HITRAN global isotopologue 4"
+    },
+    {
+      "name": "hitran_q5.txt",
+      "url": "https://hitran.org/data/Q/q5.txt",
+      "sha256": "14c3947f11224894a1155027555e79a3e491e24e95d3641da25351cee1d0ba7d",
+      "bytes": 179998,
+      "credit": "HITRAN total internal partition sums (TIPS; Gamache et al. 2021, JQSRT 271, 107713) as distributed by hitran.org.",
+      "use": "partition sum for HITRAN global isotopologue 5"
+    },
+    {
+      "name": "hitran_q6.txt",
+      "url": "https://hitran.org/data/Q/q6.txt",
+      "sha256": "6b395529aa081598de1ec582b1f4bfd259aab5d2027e82912ea14c3deae90444",
+      "bytes": 179998,
+      "credit": "HITRAN total internal partition sums (TIPS; Gamache et al. 2021, JQSRT 271, 107713) as distributed by hitran.org.",
+      "use": "partition sum for HITRAN global isotopologue 6"
+    },
+    {
+      "name": "hitran_q129.txt",
+      "url": "https://hitran.org/data/Q/q129.txt",
+      "sha256": "e1a8849f275ee060581749b76abbd84c0b6709fb7e84d9f67f83fc733fc06fb7",
+      "bytes": 215998,
+      "credit": "HITRAN total internal partition sums (TIPS; Gamache et al. 2021, JQSRT 271, 107713) as distributed by hitran.org.",
+      "use": "partition sum for HITRAN global isotopologue 129"
+    },
+    {
+      "name": "hitran_q7.txt",
+      "url": "https://hitran.org/data/Q/q7.txt",
+      "sha256": "ad1c625eea7377331b829fcf51e1aa68dfa4a84f0c7c8f7b324b516535c0d480",
+      "bytes": 179998,
+      "credit": "HITRAN total internal partition sums (TIPS; Gamache et al. 2021, JQSRT 271, 107713) as distributed by hitran.org.",
+      "use": "partition sum for HITRAN global isotopologue 7"
+    },
+    {
+      "name": "hitran_q8.txt",
+      "url": "https://hitran.org/data/Q/q8.txt",
+      "sha256": "eb3ea36542f22e24ce2acc84e7d16f5efb02104d12046f82e49651d529ffed4d",
+      "bytes": 179998,
+      "credit": "HITRAN total internal partition sums (TIPS; Gamache et al. 2021, JQSRT 271, 107713) as distributed by hitran.org.",
+      "use": "partition sum for HITRAN global isotopologue 8"
+    },
+    {
+      "name": "hitran_q9.txt",
+      "url": "https://hitran.org/data/Q/q9.txt",
+      "sha256": "5df8544e44060891173a2869da1ebdd2486201e21491c2a8b67a7f75aae3080b",
+      "bytes": 125998,
+      "credit": "HITRAN total internal partition sums (TIPS; Gamache et al. 2021, JQSRT 271, 107713) as distributed by hitran.org.",
+      "use": "partition sum for HITRAN global isotopologue 9"
+    },
+    {
+      "name": "hitran_q10.txt",
+      "url": "https://hitran.org/data/Q/q10.txt",
+      "sha256": "7f574c6efa3193f542189d3117731c72f5abd82e364e653542d2afac4691e40c",
+      "bytes": 125998,
+      "credit": "HITRAN total internal partition sums (TIPS; Gamache et al. 2021, JQSRT 271, 107713) as distributed by hitran.org.",
+      "use": "partition sum for HITRAN global isotopologue 10"
+    },
+    {
+      "name": "hitran_q11.txt",
+      "url": "https://hitran.org/data/Q/q11.txt",
+      "sha256": "016bb0a3b559a3f58b5332e43d9ffd70d63b42f80e41034ebe83110c8b01d84c",
+      "bytes": 125998,
+      "credit": "HITRAN total internal partition sums (TIPS; Gamache et al. 2021, JQSRT 271, 107713) as distributed by hitran.org.",
+      "use": "partition sum for HITRAN global isotopologue 11"
+    },
+    {
+      "name": "hitran_q12.txt",
+      "url": "https://hitran.org/data/Q/q12.txt",
+      "sha256": "7f4e1feb88d25d26a2bab4919698ab22546bdc700f5cee9367b3679ffe7c2787",
+      "bytes": 125998,
+      "credit": "HITRAN total internal partition sums (TIPS; Gamache et al. 2021, JQSRT 271, 107713) as distributed by hitran.org.",
+      "use": "partition sum for HITRAN global isotopologue 12"
+    },
+    {
+      "name": "hitran_q13.txt",
+      "url": "https://hitran.org/data/Q/q13.txt",
+      "sha256": "3d547c39cf2b6612c3bd53be01df640e0e7b77644b58d8ac41dd042a0fdca1be",
+      "bytes": 179998,
+      "credit": "HITRAN total internal partition sums (TIPS; Gamache et al. 2021, JQSRT 271, 107713) as distributed by hitran.org.",
+      "use": "partition sum for HITRAN global isotopologue 13"
+    },
+    {
+      "name": "hitran_q14.txt",
+      "url": "https://hitran.org/data/Q/q14.txt",
+      "sha256": "5aaf3063bb88043ac456b840892df85da7dfb78771ec393f3d50507d5e626ca9",
+      "bytes": 125998,
+      "credit": "HITRAN total internal partition sums (TIPS; Gamache et al. 2021, JQSRT 271, 107713) as distributed by hitran.org.",
+      "use": "partition sum for HITRAN global isotopologue 14"
+    },
+    {
+      "name": "hitran_q121.txt",
+      "url": "https://hitran.org/data/Q/q121.txt",
+      "sha256": "b8f4bd520416e0e03bf1d7ece87b15a7d89625ec9fed43a61df8c8f9b7a10b63",
+      "bytes": 179998,
+      "credit": "HITRAN total internal partition sums (TIPS; Gamache et al. 2021, JQSRT 271, 107713) as distributed by hitran.org.",
+      "use": "partition sum for HITRAN global isotopologue 121"
+    },
+    {
+      "name": "hitran_q15.txt",
+      "url": "https://hitran.org/data/Q/q15.txt",
+      "sha256": "72a1f6c17aa837f75480e41cdee1fd7903768a3bb4d5b1c8cb808f1f9e7aa3d4",
+      "bytes": 179998,
+      "credit": "HITRAN total internal partition sums (TIPS; Gamache et al. 2021, JQSRT 271, 107713) as distributed by hitran.org.",
+      "use": "partition sum for HITRAN global isotopologue 15"
+    },
+    {
+      "name": "hitran_q120.txt",
+      "url": "https://hitran.org/data/Q/q120.txt",
+      "sha256": "08c824fe37eeff445f06b1d8144e1288104dbcd8b0b1eb960bb04ee9931150ee",
+      "bytes": 125998,
+      "credit": "HITRAN total internal partition sums (TIPS; Gamache et al. 2021, JQSRT 271, 107713) as distributed by hitran.org.",
+      "use": "partition sum for HITRAN global isotopologue 120"
+    },
+    {
+      "name": "hitran_q122.txt",
+      "url": "https://hitran.org/data/Q/q122.txt",
+      "sha256": "d170223c6fad23f9ee2a254cbb420514219b8ec732a7ee5f9d39ab85f9c2c79c",
+      "bytes": 179998,
+      "credit": "HITRAN total internal partition sums (TIPS; Gamache et al. 2021, JQSRT 271, 107713) as distributed by hitran.org.",
+      "use": "partition sum for HITRAN global isotopologue 122"
+    },
+    {
+      "name": "hitran_q36.txt",
+      "url": "https://hitran.org/data/Q/q36.txt",
+      "sha256": "cfee961a1ed969799d451c609993d8266f3362ee45210a1c2627cfc1c6018166",
+      "bytes": 167218,
+      "credit": "HITRAN total internal partition sums (TIPS; Gamache et al. 2021, JQSRT 271, 107713) as distributed by hitran.org.",
+      "use": "partition sum for HITRAN global isotopologue 36"
+    },
+    {
+      "name": "hitran_q37.txt",
+      "url": "https://hitran.org/data/Q/q37.txt",
+      "sha256": "06e902498613e3e01d3c42f4603d03a43b837b4333dd13e00fca036d5d25455c",
+      "bytes": 124666,
+      "credit": "HITRAN total internal partition sums (TIPS; Gamache et al. 2021, JQSRT 271, 107713) as distributed by hitran.org.",
+      "use": "partition sum for HITRAN global isotopologue 37"
+    },
+    {
+      "name": "hitran_q38.txt",
+      "url": "https://hitran.org/data/Q/q38.txt",
+      "sha256": "e4b62e3b8dec5095f226562721c302a18ee297fd180c3b81bfa65c7be15b4476",
+      "bytes": 72538,
+      "credit": "HITRAN total internal partition sums (TIPS; Gamache et al. 2021, JQSRT 271, 107713) as distributed by hitran.org.",
+      "use": "partition sum for HITRAN global isotopologue 38"
+    },
+    {
+      "name": "hitran_cia_N2-N2_2021.cia",
+      "url": "https://hitran.org/data/CIA/main/N2-N2_2021.cia",
+      "sha256": "f0525f75c667802e8dbbfd7054a0a7e07863d8a4ffdb449fe80666bc658c849d",
+      "bytes": 5692968,
+      "credit": "HITRAN collision-induced absorption section (Karman et al. 2019, Icarus 328, 160; updates as listed in each file header).",
+      "use": "rototranslational, fundamental and first-overtone N2-N2 bands"
+    },
+    {
+      "name": "hitran_cia_O2-N2_2024.cia",
+      "url": "https://hitran.org/data/CIA/main/O2-N2_2024.cia",
+      "sha256": "90851fbfae226d7ecda93efc0de16105f72966a532adc7f1bc234cb13833799f",
+      "bytes": 1775796,
+      "credit": "HITRAN collision-induced absorption section (Karman et al. 2019, Icarus 328, 160; updates as listed in each file header).",
+      "use": "O2 fundamental and N2 fundamental with the other as partner; 1.27-um and A-band O2-N2"
+    },
+    {
+      "name": "hitran_cia_O2-O2_2024.cia",
+      "url": "https://hitran.org/data/CIA/main/O2-O2_2024.cia",
+      "sha256": "0146acfe5c1414b8deaa56be9a63159154479d5804d1615855888a2e1efd4961",
+      "bytes": 4203198,
+      "credit": "HITRAN collision-induced absorption section (Karman et al. 2019, Icarus 328, 160; updates as listed in each file header).",
+      "use": "O2-O2 bands from the fundamental to the ultraviolet"
+    },
+    {
+      "name": "hitran_cia_N2-H2O_2018.cia",
+      "url": "https://hitran.org/data/CIA/main/N2-H2O_2018.cia",
+      "sha256": "ded770acfde8b2b144e03979eba442d1b81089018dc2a68dce34f8196bf89903",
+      "bytes": 219153,
+      "credit": "HITRAN collision-induced absorption section (Karman et al. 2019, Icarus 328, 160; updates as listed in each file header).",
+      "use": "N2 fundamental induced by H2O collisions"
+    },
+    {
+      "name": "mt_ckd_4.3_absco-ref_wv-mt-ckd.nc",
+      "url": "https://raw.githubusercontent.com/AER-RC/MT_CKD_H2O/4.3/data/absco-ref_wv-mt-ckd.nc",
+      "sha256": "69944eb8b045c268e2daeb2cddf536b99f9e9efe7e91c425067b46a5b287ddb3",
+      "bytes": 83576,
+      "credit": "MT_CKD 4.3 water-vapour continuum coefficients, Copyright (c) Atmospheric and Environmental Research, Inc., 2022 (Mlawer et al. 2012, doi:10.1098/rsta.2011.0295; Mlawer et al. 2023). Research use; redistribution requires this notice and acknowledgment of AER.",
+      "use": "H2O self and foreign continuum, consistent with lines cut 25 cm-1 from centre with the pedestal removed"
+    },
+    {
+      "name": "TSIS1_HSRS_stride100.csv",
+      "url": "https://lasp.colorado.edu/lisird/latis/dap/tsis1_hsrs.csv?stride(100)",
+      "sha256": "0ae235c6912f26773c0e9b71ea3924aaf8856c74a511dc07e86b60b3c1b88172",
+      "bytes": 1248662,
+      "credit": "TSIS-1 Hybrid Solar Reference Spectrum (Coddington et al. 2021, GRL 48, e2020GL091709), LASP LISIRD; every 100th sample, as in protection/inputs.json.",
+      "use": "solar spectrum 202-2730 nm"
+    }
+  ],
+  "publication_note": "Retrieval and checksum verification are separate from reading the underlying publications. HITRAN and AER terms were read on retrieval: both permit research use with credit; neither dataset is redistributed by this repository. A hash mismatch means the upstream bytes changed (for example a new HITRAN edition) and must be reviewed, never silently accepted."
+}
