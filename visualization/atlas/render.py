@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
 """Map sheets and a 3D globe of the Open Moon atlas: near and far side, a global sheet, the polar regions,
-and an interactive globe page.
+and an interactive globe page with an appearance mode and a map mode.
 
     python visualization/atlas/render.py      # writes visualization/atlas/out/ (kept out of Git)
 
 Reads the geography atlas product (geography/results/atlas.json and its grid in
 geography/products) and the conservation study's register and targets. Water is
-drawn in depth bands of one blue hue, land as neutral shaded relief. The manifest
-records product hashes and a faithfulness check: the water share of the rendered
-near-side disk against the product's Earth-facing disk share.
+drawn in depth bands of one blue hue, land as neutral shaded relief. The globe's
+appearance mode also reads the illumination domain's engine atmosphere and sky atlas
+and the climate domain's GCM climatology (see appearance.py). The manifest records
+product hashes and faithfulness checks: the water share of the rendered near-side
+disk against the product's Earth-facing disk share, and the water share of each
+globe texture against the product's.
 """
 from __future__ import annotations
 import base64
@@ -30,6 +33,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 from geography import atlas as ga
 from shared.constants import MOON_RADIUS
+import appearance
 
 HERE = Path(__file__).resolve().parent
 OUT = HERE / 'out'
@@ -196,8 +200,10 @@ def globe_textures(height, level, lat, ppd):
 def write_globe(atlas, height, lat, ppd, sites, targets, hashes):
     level = atlas['sea_level_m']
     colour, displacement, normal, relief_km, water = globe_textures(height, level, lat, ppd)
+    looks, params, sources = appearance.build(height, level, lat, ppd)
     area = np.cos(np.radians(lat))[:, None] * np.ones_like(water, dtype=float)
     texture_water = float((area * water).sum() / area.sum())
+    appearance_water = float((area * (looks['cloud_noise'][..., 2] > 127)).sum() / area.sum())
     bodies = atlas['bodies']
     comparison = next(r for r in atlas['share_comparison'] if abs(r['share'] - atlas['share']) < 1e-9)
     minus = lambda v: f'{v:,.0f}'.replace('-', '\u2212')
@@ -211,7 +217,10 @@ def write_globe(atlas, height, lat, ppd, sites, targets, hashes):
                  ['Near-side Sea', f"{bodies[0]['share']:.1%} \u00b7 mean {bodies[0]['mean_depth_m']:,} m"],
                  ['South Pole\u2013Aitken Sea', f"{bodies[1]['share']:.1%} \u00b7 mean {bodies[1]['mean_depth_m']:,} m"],
                  ['Deepest water', f"{max(b['max_depth_m'] for b in bodies):,} m"]],
-        textures=dict(colour=png_data_uri(colour), height=png_data_uri(displacement), normal=png_data_uri(normal)),
+        textures=dict(colour=png_data_uri(colour), height=png_data_uri(displacement), normal=png_data_uri(normal),
+                      albedo=png_data_uri(looks['albedo']), cloudNoise=png_data_uri(looks['cloud_noise']),
+                      cloudSun=png_data_uri(looks['cloud_sun']), cloudGeo=png_data_uri(looks['cloud_geo'])),
+        appearance=params,
         labels=dict(
             seas=[[name.replace('\n', ' '), la, lo] for name, la, lo in SEA_LABELS],
             islands=[[name, la, lo, i['summit_m']] for (name, la, lo), i in
@@ -227,14 +236,20 @@ def write_globe(atlas, height, lat, ppd, sites, targets, hashes):
                           zone=t['zone'], record=t['record'][0].upper() + t['record'][1:] + '.', sample=t['sample'])
                      for t in targets]),
         provenance=('Geography atlas product <code>terluna.geography.atlas/1</code> (atlas.json '
-                    f"{hashes['atlas_json'][:12]}, grid {hashes['atlas_grid'][:12]}) and the conservation register "
-                    f"({hashes['register'][:12]}). Textures {colour.shape[1]}\u00d7{colour.shape[0]}, 4 pixels per degree."))
+                    f"{hashes['atlas_json'][:12]}, grid {hashes['atlas_grid'][:12]}); the conservation register "
+                    f"({hashes['register'][:12]}); the illumination domain's engine atmosphere "
+                    f"({digest(sources['engine'])[:12]}) and Open Moon sky atlas ({digest(sources['sky_atlas'])[:12]}); "
+                    f"the climate domain's <code>{params['climatology']['schema']}</code> for run "
+                    f"{params['climatology']['run']} ({digest(sources['climatology'])[:12]}). "
+                    f"Textures {colour.shape[1]}\u00d7{colour.shape[0]}, 4 pixels per degree."))
     template = (HERE / 'globe.template.html').read_text()
     page = template.replace('__ATLAS_DATA__', json.dumps(data, ensure_ascii=False))
     (OUT / 'globe.html').write_text(page)
-    return dict(texture_water_share=round(texture_water, 4), product_water_share=atlas['water_share'],
-                difference=round(texture_water - atlas['water_share'], 4), tolerance=0.002,
-                passed=abs(texture_water - atlas['water_share']) <= 0.002, page_bytes=len(page.encode()))
+    products = {str(Path(v).relative_to(ROOT)): digest(v) for v in sources.values()}
+    passed = all(abs(v - atlas['water_share']) <= 0.002 for v in (texture_water, appearance_water))
+    return dict(texture_water_share=round(texture_water, 4), appearance_water_share=round(appearance_water, 4),
+                product_water_share=atlas['water_share'], tolerance=0.002, passed=passed,
+                page_bytes=len(page.encode()), appearance_products=products)
 
 
 def main():
