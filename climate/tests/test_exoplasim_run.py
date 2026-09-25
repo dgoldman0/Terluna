@@ -1,4 +1,4 @@
-"""ExoPlaSim runner: surface files, the sea mask, pruning and process bookkeeping (no model run)."""
+"""ExoPlaSim runner: surface files, the sea mask, settings, pruning and process bookkeeping (no model run)."""
 import os
 from pathlib import Path
 import tempfile
@@ -30,6 +30,28 @@ class RunnerTests(unittest.TestCase):
         self.assertLess(sea_share - 0.25, float(area.max() / area.sum()))
         # Every sea cell has less land than every land cell.
         self.assertLessEqual(land[mask == 0].max(), land[mask == 1].min())
+
+    def test_cloud_water_settings(self):
+        self.assertEqual(er.cloud_water_namelist('plasim', 1.62), (0.0, 1.0))           # PlaSim unchanged
+        gref, scale = er.cloud_water_namelist('earth_path', 1.62)
+        self.assertEqual(gref, er.STANDARD_GRAVITY)
+        self.assertAlmostEqual(scale, 1.62 / er.STANDARD_GRAVITY)                        # Earth's water path
+        self.assertEqual(er.cloud_water_namelist('full_column', 1.62), (er.STANDARD_GRAVITY, 1.0))
+        with self.assertRaises(ValueError):
+            er.cloud_water_namelist('thick', 1.62)
+
+    def test_clear_sky_output(self):
+        off = er.output_variables({**er.MODEL, 'clear_sky': 0})
+        on = er.output_variables({**er.MODEL, 'clear_sky': 1})
+        self.assertEqual(off, er.OUTPUT)
+        self.assertEqual(on[:len(off)], off)
+        self.assertTrue({'rstcs', 'rltcs'} <= set(on))
+
+    def test_patch_markers_mark_patched_text_only(self):
+        # A marker must appear in what a patch adds and never in what it replaces, or it would apply twice.
+        for marker, edits in er.PATCHES.values():
+            self.assertTrue(any(marker in new for _, new in edits))
+            self.assertFalse(any(marker in old for old, _ in edits))
 
     def test_spectrum_tail_follows_the_sun(self):
         # A blackbody "measurement" that stops at 2.73 um must continue as the same blackbody, not as a

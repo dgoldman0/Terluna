@@ -144,7 +144,10 @@ for 25% and 35% water on common GCM grids), the planet parameters, the
 experiment plan and a restartable runner for ExoPlaSim, whose radiation is
 calibrated against the line-by-line model. In ExoPlaSim the design case settles at
 295.5 K, with the air near the ground within about a kelvin of that from equator
-to pole. PlaSim's clouds, which cool it by only about 4 W/m², are the main caveat.
+to pole. Correcting PlaSim's Earth-fitted cloud water puts it between 292 and
+298 K, near 298 K with Earth's water path, the best single estimate. Cloud
+amount, which PlaSim diagnoses and which a slowly turning Moon may raise with a
+thick deck under the Sun, remains the main caveat.
 
 ## Next step
 

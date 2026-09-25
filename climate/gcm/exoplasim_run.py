@@ -3,6 +3,8 @@
     climate/gcm/.venv/bin/python -m climate.gcm.exoplasim_run A --years 40          # run or resume A
     climate/gcm/.venv/bin/python -m climate.gcm.exoplasim_run A --status            # progress so far
     climate/gcm/.venv/bin/python -m climate.gcm.exoplasim_run A --stop              # stop it cleanly
+    climate/gcm/.venv/bin/python -m climate.gcm.exoplasim_run A --years 20 --folder A_earth_path_clouds \
+        --set cloud_water=earth_path --start-from climate/gcm/runs/A/model/MOST_REST.00039   # a branch
 
 Run from the repository root with the GCM environment (climate/gcm/.venv, which holds ExoPlaSim and
 MPI-built executables). Each experiment lives in climate/gcm/runs/<name>/ (ignored by Git; on the
@@ -51,6 +53,7 @@ import signal
 import sys
 import time
 import numpy as np
+from shared.constants import STANDARD_GRAVITY
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
@@ -79,15 +82,55 @@ MODEL = dict(resolution='T21', layers=10, timestep_min=30.0, land_albedo=0.2, st
              # 310 K (see the README): a multiplier on ExoPlaSim's spectrum-derived Rayleigh coefficient,
              # and PlaSim's water-vapour continuum coefficient. 1.0 and 0.024 reproduce the unmodified
              # model, which absorbed about 14 W/m2 too much sunlight and emitted 12 W/m2 too little when warm.
-             rayleigh_scale=1.8, h2o_continuum=0.004)
-# Kept in each year's 5-day means (ExoPlaSim writes about 100 fields by default, 100 MB a year).
+             rayleigh_scale=1.8, h2o_continuum=0.004,
+             # How the radiation sees cloud water (CLOUD_WATER below); 'plasim' is ExoPlaSim unmodified.
+             cloud_water='plasim',
+             # PlaSim's clear-sky diagnostic (1 on, 0 off): the radiation computed a second time without
+             # clouds, for the clouds' radiative effect. It changes no prognostic field.
+             clear_sky=1)
+# Cloud water. PlaSim uses it only for the clouds' radiation: rain comes from its condensation and
+# convection schemes, which rain out any excess vapour at once. It diagnoses the water with CCM3's
+# formula, 0.21 g/m3 at the ground falling off with geometric height on a scale of
+# 700 ln(1 + precipitable water in kg/m2) m, fitted to Earth. At a sixth of Earth's gravity a pressure
+# level stands six times higher, so on the Moon the formula leaves clouds above about 20 km, most of
+# the model's cloud cover, almost without water. The Terluna patch to rainmod.f90 allows two corrections:
+#   plasim       the formula as PlaSim has it;
+#   earth_path   heights and precipitable water counted as on Earth (the formula in pressure terms):
+#                each cloud holds the water path it would hold at the same pressures on Earth;
+#   full_column  the same mixing ratio kept over the Moon's column, six times heavier than Earth's:
+#                six times Earth's water path, the upper bound.
+CLOUD_WATER = ('plasim', 'earth_path', 'full_column')
+# Kept in each year's 3-day means (ExoPlaSim writes about 100 fields by default, 100 MB a year).
 OUTPUT = ['ta', 'ua', 'va', 'hus', 'cl',
           'ts', 'tas', 'maxt', 'mint', 'ps', 'psl', 'pr', 'prc', 'evap', 'prw', 'clt', 'sic', 'sit', 'snd', 'mrso',
           'rst', 'rsut', 'rlut', 'ntr', 'nbr', 'rss', 'rls', 'hfss', 'hfls', 'alb', 'czen', 'lsm']
+# PlaSim's clear-sky fluxes, written when the diagnostic is on but unknown to ExoPlaSim's postprocessor,
+# which the runner teaches them. Unlike the other fluxes they are snapshots at each output time, not
+# means over it: sound for global and lunar-day averages, not for single times.
+CLEAR_SKY = {101: ('rsscs', 'surface_net_shortwave_flux_clear_sky'),
+             102: ('rlscs', 'surface_net_longwave_flux_clear_sky'),
+             103: ('rstcs', 'toa_net_shortwave_flux_clear_sky'),
+             104: ('rltcs', 'toa_net_longwave_flux_clear_sky')}
 
 
-# The Terluna patch to ExoPlaSim's radiation (plasim/src/radmod.f90): a namelist multiplier, RAYSCALE, on
-# the Rayleigh coefficient the model derives from the stellar spectrum. Applied once, idempotently.
+def output_variables(model: dict) -> list:
+    return OUTPUT + ([name for name, _ in CLEAR_SKY.values()] if model['clear_sky'] else [])
+
+
+def cloud_water_namelist(choice: str, gravity: float) -> tuple:
+    """CWGREF and CWSCALE for the patched cloud scheme: the gravity at which the cloud-water formula
+    counts heights and precipitable water (0: the planet's own), and a multiplier on the water."""
+    if choice == 'plasim':
+        return 0.0, 1.0
+    if choice == 'earth_path':
+        return STANDARD_GRAVITY, gravity / STANDARD_GRAVITY
+    if choice == 'full_column':
+        return STANDARD_GRAVITY, 1.0
+    raise ValueError(f'cloud_water must be one of {CLOUD_WATER}, not {choice!r}')
+
+
+# The Terluna patches to ExoPlaSim's source, applied once, idempotently. Radiation (plasim/src/radmod.f90):
+# a namelist multiplier, RAYSCALE, on the Rayleigh coefficient the model derives from the stellar spectrum.
 RADMOD_EDITS = [
     ("      real :: rcoeff = 1.0       ! Rayleigh scattering coefficient for cross section dependence\n",
      "      real :: rcoeff = 1.0       ! Rayleigh scattering coefficient for cross section dependence\n"
@@ -100,23 +143,47 @@ RADMOD_EDITS = [
     ("      call mpbcr(minwavel)\n",
      "      call mpbcr(minwavel)\n      call mpbcr(rayscale)\n"),
 ]
+# Clouds (plasim/src/rainmod.f90, mkclouds): CWGREF, the gravity at which the cloud-water formula counts
+# heights and precipitable water (0, the default, keeps the planet's own), and CWSCALE, a multiplier on
+# the diagnosed water. The defaults leave the model as it was.
+RAINMOD_EDITS = [
+    ("      real :: clwfac    = 0. ! smothing for cloud suppression\n",
+     "      real :: clwfac    = 0. ! smothing for cloud suppression\n"
+     "      real :: cwgref    = 0. ! Terluna: gravity for the cloud-water heights (0: the planet's)\n"
+     "      real :: cwscale   = 1. ! Terluna: multiplier on the diagnosed cloud water\n"),
+    ("rbeta,rcritmod,rcritslope", "rbeta,rcritmod,rcritslope,cwgref,cwscale"),
+    ("      call mpbcr(gamma)\n", "      call mpbcr(gamma)\n      call mpbcr(cwgref)\n      call mpbcr(cwscale)\n"),
+    ("      real zzf(NHOR,NLEV),zzh(NHOR),zdh(NHOR)\n",
+     "      real zzf(NHOR,NLEV),zzh(NHOR),zdh(NHOR)\n      real zgc ! Terluna: gravity for the heights below\n"),
+    ("      dcc(:,1:NLEV)=0.\n", "      dcc(:,1:NLEV)=0.\n      zgc=ga\n      if(cwgref > 0.) zgc=cwgref\n"),
+    ("gascon/ga*ALOG(sigmah(jlev-1)/sigmah(jlev))", "gascon/zgc*ALOG(sigmah(jlev-1)/sigmah(jlev))"),
+    ("gascon/ga*ALOG(sigma(1)/sigmah(1))*0.5", "gascon/zgc*ALOG(sigma(1)/sigmah(1))*0.5"),
+    ("      zzh(:)=700.*ALOG(1.+dqvi(:))\n", "      zzh(:)=700.*ALOG(1.+dqvi(:)*(ga/zgc))\n"),
+    ("        dql(:,jlev)=MAX(dql(:,jlev),1.E-9)\n", "        dql(:,jlev)=MAX(cwscale*dql(:,jlev),1.E-9)\n"),
+]
+PATCHES = {'radmod.f90': ('Terluna: calibration multiplier', RADMOD_EDITS),
+           'rainmod.f90': ('Terluna: gravity for the heights below', RAINMOD_EDITS)}
 
 
-def ensure_patched() -> str:
-    """Apply the Terluna patch to ExoPlaSim's radiation source if it is missing (removing the compiled
-    executables so ExoPlaSim rebuilds them), and return the source's hash for the run key."""
+def ensure_patched() -> dict:
+    """Apply the Terluna patches to ExoPlaSim's source where missing (removing the compiled executables
+    so ExoPlaSim rebuilds them), and return each patched file's hash for the run key."""
     import exoplasim
-    src = Path(exoplasim.__file__).parent / 'plasim' / 'src' / 'radmod.f90'
-    text = src.read_text()
-    if 'Terluna: calibration multiplier' not in text:
-        for old, new in RADMOD_EDITS:
-            if text.count(old) != 1:
-                raise RuntimeError(f'ExoPlaSim radmod.f90 is not the version the Terluna patch expects near {old.strip()!r}')
-            text = text.replace(old, new)
-        src.write_text(text)
-        for exe in (src.parents[1] / 'run').glob('most_plasim_*.x'):
-            exe.unlink()
-    return hashlib.sha256(src.read_bytes()).hexdigest()[:16]
+    src = Path(exoplasim.__file__).parent / 'plasim' / 'src'
+    hashes = {}
+    for name, (marker, edits) in PATCHES.items():
+        path = src / name
+        text = path.read_text()
+        if marker not in text:
+            for old, new in edits:
+                if text.count(old) != 1:
+                    raise RuntimeError(f'ExoPlaSim {name} is not the version the Terluna patch expects near {old.strip()!r}')
+                text = text.replace(old, new)
+            path.write_text(text)
+            for exe in (src.parent / 'run').glob('most_plasim_*.x'):
+                exe.unlink()
+        hashes[path.stem] = hashlib.sha256(path.read_bytes()).hexdigest()[:16]
+    return hashes
 
 
 def _atomic_write(path: Path, text: str):
@@ -134,8 +201,9 @@ def configuration(name, ncpus, overrides=None):
     co2 = CO2_PPM * 1e-6 * dry_bar
     n2_ar = dry_bar - O2_PA / 1e5 - co2
     model = {**MODEL, **(overrides or {})}
-    return dict(experiment=name, **exp, model=model, output=OUTPUT, ncpus=ncpus, exoplasim=version('exoplasim'),
-                radmod=ensure_patched(),
+    cloud_water_namelist(model['cloud_water'], planet['gravity_m_s2'])        # refuses an unknown choice
+    return dict(experiment=name, **exp, model=model, output=output_variables(model), ncpus=ncpus,
+                exoplasim=version('exoplasim'), source=ensure_patched(),
                 planet=dict(radius=planet['radius_m'] / EARTH_RADIUS_M, gravity=planet['gravity_m_s2'],
                             rotationperiod=planet['rotation_period_days'], year=365.25636,
                             obliquity=planet['obliquity_deg'], eccentricity=0.016715),
@@ -265,7 +333,15 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
     model._edit_namelist('plasim_namelist', 'NSTPW', str(m['steps_per_lunar_day'] // m['writes_per_lunar_day']))
     model._edit_namelist('radmod_namelist', 'RAYSCALE', str(m['rayleigh_scale']))
     model._edit_namelist('radmod_namelist', 'TH2OC', str(m['h2o_continuum']))
-    model.cfgpostprocessor(ftype='regular', extension='.nc', variables=OUTPUT,
+    gref, scale = cloud_water_namelist(m['cloud_water'], p['gravity'])
+    model._edit_namelist('rainmod_namelist', 'CWGREF', str(gref))
+    model._edit_namelist('rainmod_namelist', 'CWSCALE', str(scale))
+    model._edit_namelist('plasim_namelist', 'NDIAGCF', str(m['clear_sky']))
+    from exoplasim import pyburn
+    for code, (name, long_name) in CLEAR_SKY.items():
+        pyburn.ilibrary[str(code)] = [name, long_name, 'W m-2']
+        pyburn.slibrary[name] = [code, long_name, 'W m-2']
+    model.cfgpostprocessor(ftype='regular', extension='.nc', variables=cfg['output'],
                            times=m['writes_per_lunar_day'] * m['lunar_days_per_year'], timeaverage=True,
                            interpolatetimes=False)
     return model
@@ -390,7 +466,9 @@ def summarise_year(path: Path) -> dict:
     """Headline numbers from one year of output (3-day means), for watching the run settle at a glance."""
     import netCDF4
     with netCDF4.Dataset(path) as d:
-        v = {k: np.asarray(d[k][:], dtype=float) for k in ('ts', 'tas', 'ntr', 'clt', 'pr', 'sic', 'lsm')}
+        clear = 'rstcs' in d.variables
+        keys = ('ts', 'tas', 'ntr', 'clt', 'pr', 'sic', 'lsm', 'rst', 'rsut', 'rlut') + (('rstcs', 'rltcs') if clear else ())
+        v = {k: np.asarray(d[k][:], dtype=float) for k in keys}
         lat = np.asarray(d['lat'][:], dtype=float)
         times = d['time'].size
     expected = MODEL['writes_per_lunar_day'] * MODEL['lunar_days_per_year']
@@ -404,9 +482,17 @@ def summarise_year(path: Path) -> dict:
     swing = v['tas'].max(axis=0) - v['tas'].min(axis=0)
     equator = (np.abs(lat) < 12.0)[:, None] & land
     pole = (np.abs(lat) > 70.0)[:, None] * np.ones_like(land)
+    # rsut is the reflected sunlight, negative (upward); rst the net, so the incoming is rst - rsut.
+    albedo = -mean(year('rsut')) / mean(year('rst') - year('rsut'))
+    clouds = {}
+    if clear:                                   # the clouds' effect on the top-of-atmosphere net flux
+        sw, lw = mean(year('rst') - year('rstcs')), mean(year('rlut') - year('rltcs'))
+        clouds = dict(cloud_effect_sw_w_m2=round(sw, 2), cloud_effect_lw_w_m2=round(lw, 2),
+                      cloud_effect_net_w_m2=round(sw + lw, 2))
     return dict(
         surface_k=round(mean(year('ts')), 2), air_2m_k=round(mean(year('tas')), 2),
-        toa_net_w_m2=round(mean(year('ntr')), 2), cloud_cover=round(mean(year('clt')), 3),
+        toa_net_w_m2=round(mean(year('ntr')), 2), planetary_albedo=round(albedo, 4), **clouds,
+        cloud_cover=round(mean(year('clt')), 3),
         precipitation_mm_day=round(mean(year('pr')) * 86400e3, 3),
         sea_ice_share_of_sea=round(mean(year('sic'), ~land), 3),
         warmest_air_k=round(float(v['tas'].max()), 1), coldest_air_k=round(float(v['tas'].min()), 1),
