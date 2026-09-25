@@ -1,0 +1,74 @@
+{
+ "schema": "terluna.geography.groundwater/1",
+ "evidence": "A first estimate from two published constraints on the highland crust's porosity (GRAIL): an exponential profile through them, taken to hold everywhere and to be filled completely below the saturation depth chosen. Not modelled: the maria's basalt fill, which is less porous; pores that are closed or unconnected; water bound into new minerals; the water table's shape on land; crustal loading; and how fast the water gets there, which depends on a permeability unknown within orders of magnitude.",
+ "reading_rule": "Read the groundwater rows as the extra water the crust would hold once saturated to that depth, beneath seas and land alike, and the totals as the inventory to deliver for the standing water to stay at the scenario share. The saturation depth is a question of time and permeability, not settled here.",
+ "porosity_profile": {
+  "phi0": 0.1352,
+  "e_folding_m": 16421,
+  "constraints": {
+   "mean_upper": {
+    "porosity": 0.12,
+    "over_m": 4000.0
+   },
+   "at_depth": {
+    "porosity": 0.04,
+    "depth_m": 20000.0
+   }
+  },
+  "sources": [
+   "Wieczorek et al. 2013, Science 339, 671 (12% to at least a few km; bulk density 2550 kg/m3)",
+   "Wiggins et al. 2022, Nature Communications, doi:10.1038/s41467-022-32445-3 (12% over the upper ~4 km of the highland crust, 4% at 20 km)"
+  ]
+ },
+ "share": 0.28,
+ "standing_water": {
+  "seas_kg": 1.071e+19,
+  "seas_layer_m": 282.3,
+  "rain_fed_lakes_kg": 3.644e+18,
+  "lakes_layer_m": 96.1,
+  "lakes_from": "results/drainage.json (runoff from climate run A)"
+ },
+ "crust": [
+  {
+   "saturation_depth_m": 1000.0,
+   "crust_layer_m": 131.2,
+   "crust_kg": 4.976e+18,
+   "total_kg": 1.933e+19,
+   "total_over_seas": 1.81
+  },
+  {
+   "saturation_depth_m": 2000.0,
+   "crust_layer_m": 254.6,
+   "crust_kg": 9.657e+18,
+   "total_kg": 2.401e+19,
+   "total_over_seas": 2.24
+  },
+  {
+   "saturation_depth_m": 4000.0,
+   "crust_layer_m": 480.0,
+   "crust_kg": 1.821e+19,
+   "total_kg": 3.256e+19,
+   "total_over_seas": 3.04
+  },
+  {
+   "saturation_depth_m": 10000.0,
+   "crust_layer_m": 1012.6,
+   "crust_kg": 3.841e+19,
+   "total_kg": 5.276e+19,
+   "total_over_seas": 4.93
+  },
+  {
+   "saturation_depth_m": 20000.0,
+   "crust_layer_m": 1563.4,
+   "crust_kg": 5.93e+19,
+   "total_kg": 7.366e+19,
+   "total_over_seas": 6.88
+  }
+ ],
+ "producer": {
+  "domain": "geography",
+  "files": {
+   "groundwater.py": "40cc27e73e79b491"
+  }
+ }
+}

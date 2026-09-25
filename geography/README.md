@@ -16,7 +16,8 @@ shorelines are the next layer.
 | [water_inventory.py](water_inventory.py) | Writes [results/](results/): the level table and the major basin joins as water rises, with schema, hashes and evidence statement |
 | [atlas.py](atlas.py) | The atlas at the scenario water share: seas and lakes with depths and IAU water names, islands with summits, mare flooding and a comparison of candidate shares ([results/atlas.json](results/atlas.json); grid product in `products/`) |
 | [nomenclature.py](nomenclature.py) | IAU lunar feature names from the USGS gazetteer archive (read by a small dBase reader built on the standard library) |
-| [drainage.py](drainage.py) | Rivers and rain-fed lakes above sea level: runoff from the climate run routed over the 16 px/deg terrain, with fill-and-spill lakes set by each depression's water balance ([results/drainage.json](results/drainage.json); grid product in `products/`) |
+| [drainage.py](drainage.py) | Rivers and rain-fed lakes above sea level: runoff from the climate run routed over the 16 px/deg terrain, with fill-and-spill lakes set by each depression's water balance ([results/drainage.json](results/drainage.json); grid product in `products/`). `--climatology` takes another run's climate product, `--out` writes elsewhere |
+| [groundwater.py](groundwater.py) | A first estimate of the water the porous crust takes up, from GRAIL's porosity, beside the seas and lakes ([results/groundwater.json](results/groundwater.json)) |
 
 ## What the topography allows
 
@@ -114,6 +115,34 @@ below −1,654 m unless the lakes' water is delivered on top, or groundwater and
 drier. The runoff comes from run A, set up at 25% water. [tests/test_drainage.py](tests/test_drainage.py) checks
 mass conservation, fill-and-spill and the closed-lake balance on synthetic terrain.
 
+## Groundwater: a first estimate
+
+The crust under the seas and land is porous. GRAIL's gravity gives the highland
+crust a bulk density of 2550 kg/m³ and an average porosity of 12% to depths of
+at least a few kilometres (Wieczorek et al. 2013), about 4% at 20 km (as
+summarised by Wiggins et al. 2022). `python -m geography.groundwater` fits an
+exponential profile through both (13.5% at the surface, falling off over
+16.4 km) and counts the pore water once the crust is saturated to a given depth
+([results/groundwater.json](results/groundwater.json)):
+
+| Crust saturated to | Pore water (global layer) | Seas + lakes + crust | Against the seas alone |
+|---|---|---|---|
+| none | 0 | 1.43×10¹⁹ kg (378 m) | 1.34 |
+| 1 km | 131 m | 1.93×10¹⁹ kg | 1.81 |
+| 4 km | 480 m | 3.26×10¹⁹ kg | 3.04 |
+| 10 km | 1,013 m | 5.28×10¹⁹ kg | 4.93 |
+| 20 km | 1,563 m | 7.37×10¹⁹ kg | 6.88 |
+
+The seas are a 282 m global layer and the lakes 96 m. So the crust, not the
+seas, may set how much water has to be delivered for the seas to stay at 28%:
+saturating even its upper kilometre takes half as much again as the seas hold,
+and the whole porous crust five to seven times as much. Seas laid on dry crust
+drain into it until the pores beneath are full; how fast, and how deep the water
+reaches, depend on a permeability unknown within orders of magnitude, so the
+saturation depth is a question of time this estimate does not settle. It leaves
+out the maria's less porous basalt fill, closed pores, water bound into new
+minerals and the water table's shape on land.
+
 ## Limits
 
 - **Datums:** LOLA (mean-Earth frame) and GL0420A (principal-axis frame) differ
@@ -122,8 +151,9 @@ mass conservation, fill-and-spill and the closed-lake balance on synthetic terra
 - **Resolution:** the depression tree uses the 4 pixel/degree grid, where small
   craters are unresolved; level curves use 16 pixels/degree.
 - **Not modelled:** crustal loading by the water (subsidence of order 10–30% of
-  the depth under large seas), groundwater, polar ice and the water held in the
-  air and soil.
+  the depth under large seas), groundwater beyond the first estimate above, polar
+  ice and the water held in the air and soil (the design case's air holds about
+  260 kg/m², 0.1% of the seas).
 
 ## Next work
 

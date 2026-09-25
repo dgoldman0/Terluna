@@ -255,7 +255,7 @@ def digest(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
-def compute():
+def compute(climatology=CLIMATOLOGY):
     from geography import atlas as ga
     from geography import topography as tp
     from shared.constants import MOON_RADIUS
@@ -263,10 +263,10 @@ def compute():
     atlas = json.loads(atlas_path.read_text())
     if atlas.get('schema') != ga.SCHEMA:
         raise SystemExit(f'Expected {ga.SCHEMA} in {atlas_path}; run python -m geography.atlas')
-    clim = dict(np.load(CLIMATOLOGY))
+    clim = dict(np.load(climatology))
     clim_meta = json.loads(str(clim.pop('metadata')))
     if clim_meta.get('schema') != CLIMATOLOGY_SCHEMA:
-        raise SystemExit(f'Expected {CLIMATOLOGY_SCHEMA} in {CLIMATOLOGY}')
+        raise SystemExit(f'Expected {CLIMATOLOGY_SCHEMA} in {climatology}')
     level = float(atlas['sea_level_m'])
     h, _, grid = tp.height_above_geoid(PPD, atlas['grid']['geoid_degree'])
     h = h.astype(np.float32)
@@ -328,22 +328,31 @@ def summarise(atlas, level, h, lat, r, top=12):
 
 
 def main(argv=None) -> int:
-    atlas, atlas_path, clim_meta, level, h, lat, cell_km, runoff, r = compute()
+    import argparse
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument('--climatology', type=Path, default=CLIMATOLOGY,
+                        help='climate product to take runoff and lake evaporation from (default: run A)')
+    parser.add_argument('--out', type=Path, default=HERE, help='folder for results/ and products/ (default: geography)')
+    args = parser.parse_args(argv)
+    climatology = args.climatology.resolve()
+    atlas, atlas_path, clim_meta, level, h, lat, cell_km, runoff, r = compute(climatology)
     summary = summarise(atlas, level, h, lat, r)
     producer = dict(domain='geography', files={f'geography/{p.name}': digest(p)[:16] for p in
                                               (Path(__file__), HERE / 'topography.py', HERE / 'atlas.py')})
-    sources = {str(atlas_path.relative_to(ROOT)): digest(atlas_path), str(CLIMATOLOGY.relative_to(ROOT)): digest(CLIMATOLOGY)}
+    label = str(climatology.relative_to(ROOT)) if climatology.is_relative_to(ROOT) else str(climatology)
+    sources = {str(atlas_path.relative_to(ROOT)): digest(atlas_path), label: digest(climatology)}
     summary.update(producer=producer, sources=sources, climatology=dict(run=clim_meta['run'], years=clim_meta['years']))
     q = r['discharge']
     keep = np.flatnonzero((q >= CHANNEL_M3S) & ~r['outlet'] & ~r['lake']).astype(np.int32)
     lake_cells = np.flatnonzero(r['lake']).astype(np.int32)
-    out = HERE / 'products' / f"drainage_{round(100 * atlas['share'])}pct_{PPD}ppd.npz"
+    out = args.out / 'products' / f"drainage_{round(100 * atlas['share'])}pct_{PPD}ppd.npz"
     out.parent.mkdir(parents=True, exist_ok=True)
     meta = {k: summary[k] for k in ('schema', 'share', 'sea_level_m', 'grid', 'evidence', 'reading_rule', 'producer', 'sources')}
     np.savez_compressed(out, metadata=json.dumps(meta), channel_cell=keep, channel_discharge_m3s=q[keep].astype(np.float32),
                         lake_cell=lake_cells, lake_level_m=r['lake_level'][lake_cells].astype(np.float32),
                         lake_spills=~r['closed'][r['label'][lake_cells]])
-    (HERE / 'results' / 'drainage.json').write_text(json.dumps(summary, indent=2) + '\n')
+    (args.out / 'results').mkdir(parents=True, exist_ok=True)
+    (args.out / 'results' / 'drainage.json').write_text(json.dumps(summary, indent=2) + '\n')
     lk = summary['lakes']
     print(f"{summary['depressions']:,} closed depressions; {lk['bodies']:,} rain-fed lakes ({lk['closed_bodies']:,} without "
           f"an outlet) over {lk['area_share']:.2%} of the surface, {lk['volume_km3']:,} km3; "
