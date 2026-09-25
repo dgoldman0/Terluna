@@ -17,6 +17,8 @@ STEFAN_BOLTZMANN = DATA["physics"]["stefan_boltzmann_W_m2_K4"]
 PLANCK = DATA["physics"]["planck_J_s"]
 SPEED_OF_LIGHT = DATA["physics"]["speed_of_light_m_s"]
 STANDARD_GRAVITY = DATA["physics"]["standard_gravity_m_s2"]
+ELEMENTARY_CHARGE = DATA["physics"]["elementary_charge_C"]
+CLASSICAL_ELECTRON_RADIUS = DATA["physics"]["classical_electron_radius_m"]
 
 MOON_RADIUS = DATA["moon"]["radius_m"]
 MOON_GM = DATA["moon"]["gm_m3_s2"]

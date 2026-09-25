@@ -7,7 +7,9 @@
     "stefan_boltzmann_W_m2_K4": 5.670374419e-08,
     "planck_J_s": 6.62607015e-34,
     "speed_of_light_m_s": 299792458.0,
-    "standard_gravity_m_s2": 9.80665
+    "standard_gravity_m_s2": 9.80665,
+    "elementary_charge_C": 1.602176634e-19,
+    "classical_electron_radius_m": 2.8179403262e-15
   },
   "moon": {
     "radius_m": 1737400.0,

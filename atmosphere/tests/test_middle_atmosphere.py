@@ -258,3 +258,13 @@ class EscapeTests(unittest.TestCase):
         self.assertGreater(q, 5e-7)
         self.assertLess(q, 5e-6)
         self.assertAlmostEqual(es.leakage_heat(transmission=2e-3) / q, 2.0, delta=1e-12)
+
+    @NEEDS_UV
+    def test_titania_film_heat(self):
+        from atmosphere.middle_atmosphere import escape as es
+        quiet = es.film_heat()
+        # The film passes only hard X-rays: far less heat than a 0.1% leak, and all of it below 10 nm.
+        self.assertGreater(quiet, 0.0)
+        self.assertLess(quiet, es.leakage_heat() / 1000.0)
+        self.assertAlmostEqual(es.film_heat(xray_activity=100.0) / quiet, 100.0, delta=1e-6)
+        self.assertAlmostEqual(es.film_heat(activity=100.0) / quiet, 1.0, delta=1e-6)

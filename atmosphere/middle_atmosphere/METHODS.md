@@ -171,6 +171,17 @@ maximum):
 - Lyman-α is absorbed there in the fraction the O2 column allows;
 - a heating efficiency of 0.4 converts absorbed energy to heat.
 
+For the titania stack the film's own transmission comes from the protection
+domain's short-wave product (`protection/spectra/stack_short_wave.json`), the
+stored design evaluated from 0.1 to 210 nm with published optical constants.
+The same spectrum and efficiency apply, and the transmitted light is all
+counted as absorbed above the base. That is an upper bound, because the film
+passes only hard X-rays, and the hardest of them reach below the base. At
+solar maximum the irradiance below 10 nm is scaled by 100 and the rest by 2.5.
+X-rays vary far more over the solar cycle: within WHI 2008 itself, the
+moderately active week is about 80 times the quiet week at 0.25 nm. Flares are
+not included.
+
 Atomic oxygen, which the thermal column does not hold, is carried on each
 solution as a trace gas starting from the chemistry's fraction at the base.
 Above the base its fraction f follows the zero-flux balance of eddy diffusion K

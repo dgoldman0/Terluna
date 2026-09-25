@@ -9,7 +9,7 @@
   "topics": [
     {
       "topic": "atmosphere",
-      "condition": "solved_molecular_thermal_limit; clear_sky_line_by_line_radiation_for_prescribed_columns; shield_filtered_sunlight; correlated_k_thermal_scheme_validated_to_5_30_pa; global_mean_radiative_photochemical_equilibrium_per_shield; balance_temperatures_solved_for_every_case; two_level_non_lte_co2_cooling_with_nir_thermalisation_bounds; idealised_filter_leakage_heating_and_atomic_oxygen_escape_bounds; line_by_line_radiation_benchmarks_for_gcm; exobase_coupling_conditional",
+      "condition": "solved_molecular_thermal_limit; clear_sky_line_by_line_radiation_for_prescribed_columns; shield_filtered_sunlight; correlated_k_thermal_scheme_validated_to_5_30_pa; global_mean_radiative_photochemical_equilibrium_per_shield; balance_temperatures_solved_for_every_case; two_level_non_lte_co2_cooling_with_nir_thermalisation_bounds; idealised_filter_and_titania_film_leakage_heating_and_atomic_oxygen_escape_bounds; line_by_line_radiation_benchmarks_for_gcm; exobase_coupling_conditional",
       "material": [
         "../atmosphere/sim/sim1.py",
         "baselines/feasibility/model.py",
@@ -24,11 +24,12 @@
       "unresolved": [
         "upper-air temperature above ~1 Pa bounded by how near-infrared heating thermalises, not solved; atomic-oxygen 63-um cooling omitted",
         "day-night and 3-D transport of the middle atmosphere and its effect on the exobase",
-        "titania stack's response at 25-120 nm, so its own EUV leakage heating (idealised filters bounded)",
+        "light bypassing the shield film through gaps, pinholes and edges of the aperture (0.1% scenario bounded; the titania film itself passes only hard X-rays)",
+        "correlated-k top layer (0.1 Pa) 30-40 K off and unused (the escape base is 0.3 Pa); fix only if later work needs correlated-k above 0.3 Pa",
         "measured SF6/NF3/CF4 cross-sections (HITRAN access needed; grey-band estimates only)",
         "water supply to escape"
       ],
-      "next_session_task": "Couple the middle atmosphere and exobase to the 3-D circulation the author chooses; add the titania stack's measured EUV response and measured fluorinated-gas cross-sections when available."
+      "next_session_task": "Couple the middle atmosphere and exobase to the 3-D circulation the author chooses; add measured fluorinated-gas cross-sections when available (HITRAN)."
     },
     {
       "topic": "climate",
@@ -137,23 +138,25 @@
     },
     {
       "topic": "protection",
-      "condition": "historical_component_model; spectrum/material_gap_identified",
+      "condition": "historical_component_model; film_short_wave_transmission_computed_0.1_210_nm",
       "material": [
         "../protection/model.py",
         "../protection/verify.py",
         "../protection/results/",
         "../protection/inputs.json",
+        "../protection/spectra/short_wave.py",
+        "../protection/spectra/stack_short_wave.json",
         "studies/environment_screens/results/spectral_audit.json",
         "studies/environment_screens/results/plume_heat_interface.csv"
       ],
       "unresolved": [
-        "resolved irradiance and material response around 25–120 nm; actual absorption and heat fractions",
+        "light bypassing the film through gaps, pinholes and edges of the aperture, and off-normal incidence",
         "coupled atmosphere and clean plumes",
         "full ephemerides and flexible structures",
         "plasma interaction and dose",
         "material aging"
       ],
-      "next_session_task": "Close the EUV material/irradiance gap; constrain absorbed plume fractions and couple actual heating to atmospheric physics."
+      "next_session_task": "Specify the aperture's leak fraction (gaps, pinholes, edges); constrain absorbed plume fractions and couple their heating to atmospheric physics."
     }
   ],
   "new_check_record": "studies/environment_screens/checks.json",

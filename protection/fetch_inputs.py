@@ -27,7 +27,7 @@ def restore(archive: Path | None = None, download: bool = False) -> dict:
             if path.is_file() and hashlib.sha256(path.read_bytes()).hexdigest() == item["sha256"]:
                 checked.append(name)
                 continue
-            if source is not None:
+            if source is not None and "archive_member" in item:
                 info = source.getinfo(item["archive_member"])
                 if info.file_size != item["bytes"]:
                     raise ValueError(f"Archive size differs for {name}")

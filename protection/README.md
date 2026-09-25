@@ -30,13 +30,51 @@ scenarios, not designs. The atmosphere domain reads this product to filter the
 sunlight in its climate and photochemistry calculations. Regenerate it with
 `python -m protection.spectra.transmission` after restoring the inputs.
 
+## Short-wave transmission (2026-09-25)
+
+[spectra/short_wave.py](spectra/short_wave.py) writes
+[spectra/stack_short_wave.json](spectra/stack_short_wave.json) (schema
+`terluna.protection.stack-short-wave/1`): the stored design's T(λ) from 0.1 to
+210 nm, with the design's own layers and thin-film code. The optical constants
+are published:
+- CXRO atomic scattering factors (Henke, Gullikson and Davis 1993) for both
+  oxides below 24.8 nm;
+- fused silica from 24.8 nm (Franta et al. 2016, pinned in
+  [inputs.json](inputs.json));
+- titania from 120 nm (the design's Siefke data).
+
+Between 24.8 and 120 nm no measured titania set was found, so the CXRO
+estimate stands in; the 10 µm of silica alone is opaque there (below 10⁻¹⁴⁶),
+so this does not affect the result. The rebuilt layer sequence reproduces
+`model.optical_stack` to 10⁻¹², and the X-ray absorption reproduces the design's
+[xray_absorption.csv](results/xray_absorption.csv).
+
+The film passes hard X-rays only:
+
+| Wavelength | Transmission |
+|---|---|
+| 0.1 nm | 96% |
+| 0.5 nm | 9% |
+| 1 nm | 0.5% |
+| 1.5 nm | 2×10⁻⁷ |
+| Anything beyond 2.5 nm | 4×10⁻⁸ at most |
+| 5–200 nm | below 10⁻²⁰ |
+
+The atmosphere domain's escape calculation reads this. The film lets at most
+10⁻⁹ W/m² of heat into the upper air for the quiet Sun and 10⁻⁷ W/m² at solar
+maximum, so the exobase stays within 1.5 K of its base. How much extreme
+ultraviolet reaches the Moon is therefore set by light that bypasses the film:
+gaps, pinholes and edges of the aperture, and off-normal incidence. None of
+these is modelled; they are design parameters. Regenerate it with
+`python -m protection.spectra.short_wave` after restoring the inputs.
+
 ## Condition and remaining questions
 
 - Optical layers use measured constituent constants plus effective-medium and normal-incidence approximations. This is not a measured complete coating, irradiated lifetime test, or gap-free aperture.
 - The holding-force calculation is an instantaneous circular-phase sweep, not full ephemeris propagation or a passive lunar orbit.
 - Specific electrical power, material properties, fuel buffer, exhaust cant and storage capability are assumed design parameters. Clean plume operation remains unestablished.
 - Magnetic moment, pressure-balance and rigidity estimates are component diagnostics. Global plasma performance, reconnection, trapped particles and human radiation dose remain unmodelled.
-- Spectrum, thermospheric chemistry, lower climate, water loss and species escape remain to be coupled. The original model does not establish that its filter produces a 250 K exobase.
+- Thermospheric chemistry, lower climate, water loss and species escape remain to be coupled. The original model does not establish that its filter produces a 250 K exobase. The film's own short-wave transmission is now computed (above), and the atmosphere domain finds that it holds the exobase at 142–193 K. Light bypassing the film through the aperture is not yet specified.
 - Hardware replacement may be much smaller than construction throughput while accumulated propellant/resource use remains substantial over geological time.
 
 The preserved results include successful and failed propulsion closures. Large sampled optical/phase grids and rendered report files are omitted from this curated import and recorded in [provenance](../research/provenance.json). Their numerical tables can be regenerated from the original code once inputs are restored. The older [shield geometry table](reference/legacy_shield_geometry.csv) remains explicitly separate from this later design.

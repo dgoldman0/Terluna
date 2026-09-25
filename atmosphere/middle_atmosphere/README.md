@@ -187,18 +187,21 @@ The thermal column (`../thermal_column.py`) takes each case's temperature at
 Heat deposited above the base is swept. For a filter that passes 0.1% of
 sunlight below its edge, the heat is estimated from the WHI 2008 solar spectrum
 below 175 nm: 1.7×10⁻⁶ W/m² for the quiet Sun and 4.2×10⁻⁶ W/m² near solar
-maximum (METHODS.md). The titania stack's own response below 120 nm is
-unknown, so its 0.1% leak rows are only an assumption.
+maximum (METHODS.md). For the titania stack the film's own transmission is
+computed from published optical constants
+([protection/spectra/stack_short_wave.json](../../protection/spectra/stack_short_wave.json)),
+so its 0.1% rows stand for light that bypasses the film through gaps in the
+aperture.
 
-| 1.2 atm, upper air | Base | Exobase at 0 / 10⁻⁶ / 3×10⁻⁶ / 10⁻⁵ W/m² | 0.1% leak: quiet Sun / solar maximum | Loss at solar maximum: N2 and O2 + atomic O |
-|---|---|---|---|---|
-| Titania stack, collisional | 142 K | 142 / 157 / 188 / 299 K | 167 / 206 K | 3×10⁻⁵ kg/s + none |
-| Titania stack, LTE | 163 K | 163 / 179 / 209 / 316 K | 189 / 228 K | 3×10⁻³ kg/s + none |
-| Titania stack, all heats | 192 K | 192 / 207 / 239 / 313 K | 218 / 258 K | 0.5 kg/s + none |
-| 200-nm edge, collisional | 200 K | 200 / 216 / 247 / 308 K | 226 / 266 K | 1.6 + 0.8 kg/s |
-| 200-nm edge, LTE | 200 K | 200 / 216 / 248 / 308 K | 227 / 266 K | 1.7 + 0.8 kg/s |
-| 200-nm edge, all heats | 215 K | 215 / 231 / 261 / 296 K | 242 / 274 K | 9.5 + 2.7 kg/s |
-| Earlier assumption, 180 K at 0.1 Pa | 180 K | 180 / 194 / 224 / 317 K | | |
+| 1.2 atm, upper air | Base | Exobase at 0 / 10⁻⁶ / 3×10⁻⁶ / 10⁻⁵ W/m² | 0.1% leak: quiet Sun / solar maximum | Film alone: quiet Sun / solar maximum | Loss at solar maximum: N2 and O2 + atomic O |
+|---|---|---|---|---|---|
+| Titania stack, collisional | 142 K | 142 / 157 / 188 / 299 K | 167 / 206 K | 142 / 144 K | 3×10⁻⁵ kg/s + none |
+| Titania stack, LTE | 163 K | 163 / 179 / 209 / 316 K | 189 / 228 K | 163 / 165 K | 3×10⁻³ kg/s + none |
+| Titania stack, all heats | 192 K | 192 / 207 / 239 / 313 K | 218 / 258 K | 192 / 193 K | 0.5 kg/s + none |
+| 200-nm edge, collisional | 200 K | 200 / 216 / 247 / 308 K | 226 / 266 K | | 1.6 + 0.8 kg/s |
+| 200-nm edge, LTE | 200 K | 200 / 216 / 248 / 308 K | 227 / 266 K | | 1.7 + 0.8 kg/s |
+| 200-nm edge, all heats | 215 K | 215 / 231 / 261 / 296 K | 242 / 274 K | | 9.5 + 2.7 kg/s |
+| Earlier assumption, 180 K at 0.1 Pa | 180 K | 180 / 194 / 224 / 317 K | | | |
 
 - **Blocking 99.9% below 175 nm keeps the exobase near the 250 K target, but
   not through solar maximum.** Behind the 200-nm edge (collisional bound) the
@@ -206,6 +209,15 @@ unknown, so its 0.1% leak rows are only an assumption.
   Interpolating, blocking 99.95% would hold it near 233 K at solar maximum
   (248 K for the upper bound). Behind the titania stack the same 0.1% leak
   gives 167–206 K.
+- **The titania stack's film lets almost no heat through; only gaps could.**
+  Its 10 µm of silica and 1 µm of titania pass only hard X-rays shorter than
+  about 1.5 nm. From 5 nm to 200 nm they transmit less than 10⁻²⁰. The
+  heat that reaches the upper air is at most 1×10⁻⁹ W/m² for the quiet Sun
+  and 1×10⁻⁷ W/m² at solar maximum, with X-rays counted a hundred times
+  stronger there. That is 1,700 and 40 times less than a 0.1% leak, so the
+  exobase stays within 1.5 K of its base, at 142–193 K. What warms it beyond
+  that is light passing gaps, pinholes and edges of the aperture: a design
+  number, not a material one.
 - **The losses stay small either way.** At 266 K, 2.4 kg/s removes about 0.3% of
   an atmosphere of 2.8×10¹⁸ kg in 100 million years.
 - **Atomic oxygen adds about half again behind the 200-nm edge.** O2 photolysis

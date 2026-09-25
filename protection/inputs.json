@@ -37,6 +37,13 @@
       "bytes": 13636,
       "url": "https://henke.lbl.gov/optical_constants/sf/ti.nff",
       "archive_member": "Lunar_Protection_Model/sources/ti.nff"
+    },
+    {
+      "name": "SiO2_Franta.yml",
+      "sha256": "89e3065c48040e9347fb8707371d5528ab45ff4e05be5fd6644658b588ce458e",
+      "bytes": 170309,
+      "url": "https://raw.githubusercontent.com/polyanskiy/refractiveindex.info-database/master/database/data/main/SiO2/nk/Franta.yml",
+      "credit": "Fused silica optical constants, 24.8 nm-125 um: Franta, Necas, Ohlidal and Giglia (2016), Proc. SPIE 9890, 989014, via the refractiveindex.info database (CC0). Used for silica below 210 nm in the short-wave transmission product; not in the September archive."
     }
   ],
   "publication_note": "Data retrieval and checksum verification are separate from full reading of the underlying scientific publications. Upstream redistribution permissions were not newly audited."
