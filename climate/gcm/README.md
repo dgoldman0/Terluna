@@ -203,10 +203,30 @@ year 27, with the top-of-atmosphere balance within ±0.3 W/m². Years 30–39:
   much a slowly rotating Moon's clouds cool it is the question for a GCM with
   cloud physics.
 
+### Run B, more water
+
+Run B is the same as A but with 35% of the surface under water. Years 30–39
+against run A:
+
+| | A, 25% water | B, 35% water |
+|---|---|---|
+| Surface temperature | 295.5 K | 297.2 K (still rising about 0.05 K a year) |
+| Sea surface | 299.2 K | 300.4 K |
+| Air over land | 295.4 K | 296.6 K |
+| Planetary albedo | 0.286 | 0.281 |
+| Precipitation | 3.30 mm/day | 3.64 mm/day |
+| Water vapour | 198 kg/m² | 220 kg/m² |
+| Equatorial land, 3-day range at a place | 9.9 K | 8.6 K |
+| Extremes of 3-day means | 288–307 K | 290–308 K |
+
+More sea makes the Moon about 2 K warmer and wetter, and it damps the land's
+day–night swing. The sea is darker than the placeholder land albedo of 0.2, and
+it keeps more vapour in the air. Neither run has sea ice.
+
 | Run | State |
 |---|---|
 | A, design case | Done (40 years, above). The uncalibrated run and one with a broken spectrum tail are kept for reference |
-| B, 35% water | Running |
+| B, 35% water | Done (40 years, above) |
 | C, 1.0 atm | Next |
 | D, E | Need ExoPlaSim's ozone profile from the 1-D results, and a way to add the trace gases' forcing |
 
