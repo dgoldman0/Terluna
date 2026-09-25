@@ -29,7 +29,7 @@ Models live in their domain folders. This folder holds what spans domains:
 | [Illumination](../illumination/) | Spectral clear-sky solver, A1–A3 light-transport references, site sky geometry and earthlight, bright stars | Date-accurate ephemeris, earthlight spectrum, profiles tied to the solved column |
 | [Protection](../protection/) | Original component model plus spectral coverage audit; the stored film's transmission from hard X-rays to the far ultraviolet | Aperture leakage (gaps, pinholes, edges), clean operation, particle transport and lifetime resources |
 | [Engineering](../engineering/) | Original transport/renewal accounts plus plume-heat sensitivity | Complete industrial network and safe source-to-use routes |
-| [Geography](../geography/) | LOLA topography above the GRAIL geoid; hydrostatic water storage (level curves, basin joins); the atlas at the selected 28% water share, named from the IAU gazetteer | Where water stands once rain, runoff and evaporation act |
+| [Geography](../geography/) | LOLA topography above the GRAIL geoid; hydrostatic water storage (level curves, basin joins); the atlas at the selected 28% water share, named from the IAU gazetteer; a first estimate of rivers and rain-fed lakes from the climate run's runoff | How the water inventory divides between seas and rain-fed lakes (lakes hold about a third of the seas' volume in the first estimate); groundwater |
 | [Habitation](../habitation/) | Design concepts | Practical inhabited capacity |
 
 Rendering that displays these results is in [visualization](../visualization/);

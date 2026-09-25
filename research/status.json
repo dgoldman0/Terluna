@@ -54,7 +54,7 @@
     },
     {
       "topic": "geography",
-      "condition": "lola_topography_above_grail_geoid; hydrostatic_storage_computed; land_sea_masks_25_35pct; no_drainage_or_climate_coupling; atlas_at_28pct_water_share; iau_nomenclature_input",
+      "condition": "lola_topography_above_grail_geoid; hydrostatic_storage_computed; land_sea_masks_25_35pct; drainage_and_rainfed_lakes_first_estimate_run_A; atlas_at_28pct_water_share; iau_nomenclature_input",
       "material": [
         "../geography/datasets.json",
         "../geography/inputs.json",
@@ -64,18 +64,20 @@
         "../geography/atlas.py",
         "../geography/nomenclature.py",
         "../geography/results/atlas.json",
-        "../shared/scenarios/water.json"
+        "../shared/scenarios/water.json",
+        "../geography/drainage.py",
+        "../geography/results/drainage.json"
       ],
       "unresolved": [
-        "where water stands under precipitation minus evaporation",
-        "catchments and fill-and-spill",
+        "how the water inventory divides between the seas and rain-fed lakes: lakes above sea level hold about a third of the seas' volume in the first estimate",
+        "runoff from a climate run at 28% water (the first estimate uses run A at 25%)",
         "polar cold-trapping",
         "crustal loading",
-        "rain/runoff/erosion",
-        "groundwater storage in the porous crust, which sets the delivered inventory for 28% cover",
+        "erosion and sediment",
+        "groundwater storage in the porous crust, which sets the delivered inventory for 28% cover and how much of the rain lakes keep",
         "polar heights from the LOLA polar stereographic grids"
       ],
-      "next_session_task": "Catchment fill-and-spill driven by precipitation minus evaporation from a 3-D climate run; polar cold-trapping."
+      "next_session_task": "Settle the sea level with rain-fed lakes in the water inventory (with groundwater), from a climate run at 28%; polar cold-trapping."
     },
     {
       "topic": "illumination",

@@ -7,8 +7,9 @@ and an interactive globe page with an appearance mode and a map mode.
 Reads the geography atlas product (geography/results/atlas.json and its grid in
 geography/products) and the conservation study's register and targets. Water is
 drawn in depth bands of one blue hue, land as neutral shaded relief. The globe's
-appearance mode also reads the illumination domain's engine atmosphere and sky atlas
-and the climate domain's GCM climatology (see appearance.py). The manifest records
+appearance mode also reads the illumination domain's engine atmosphere and sky atlas,
+the climate domain's GCM climatology and the geography domain's drainage product
+(see appearance.py). The manifest records
 product hashes and faithfulness checks: the water share of the rendered near-side
 disk against the product's Earth-facing disk share, and the water share of each
 globe texture against the product's.
@@ -69,7 +70,7 @@ POLAR_TARGET_OFFSETS = {'Shackleton': (6, -12), 'de Gerlache': (-100, 4), 'Sverd
                         'Hermite': (-42, 4), 'Whipple': (6, 4), 'Peary': (6, -4), 'Rozhdestvenskiy': (6, 4)}
 DISPLAY = {'Rumker': 'Rümker', 'Karman': 'Kármán', 'Schrodinger': 'Schrödinger'}
 LAND_PLACEHOLDER = '#b9b4aa'   # neutral land until the biosphere and climate supply surface cover
-SURFACE_PPD = 16               # the appearance mode's surface; relief and the water mask at half this
+SURFACE_PPD = 16               # the appearance mode's surface and water mask; relief at half this
 
 
 def hexrgb(h):
@@ -203,13 +204,15 @@ def write_globe(atlas, height, lat, ppd, sites, targets, hashes):
     level = atlas['sea_level_m']
     colour, displacement, relief_km, water = globe_textures(height, level, lat, ppd)
     fine, _, _ = tp.height_above_geoid(SURFACE_PPD, atlas['grid']['geoid_degree'])
-    looks, params, sources, fine_water = appearance.build(fine.astype(np.float32), level, SURFACE_PPD)
+    looks, params, sources, masks = appearance.build(fine.astype(np.float32), level, SURFACE_PPD)
     del fine
     share = lambda mask, ppd_: float((mask * np.cos(np.radians(90 - (np.arange(mask.shape[0]) + 0.5) / ppd_))[:, None]).sum()
                                      / (np.cos(np.radians(90 - (np.arange(mask.shape[0]) + 0.5) / ppd_)).sum() * mask.shape[1]))
     texture_water = share(water, ppd)
-    surface_water = share(fine_water, SURFACE_PPD)
-    mask_water = share(looks['water'] / 255.0, SURFACE_PPD // 2)
+    surface_water = share(masks['sea'], SURFACE_PPD)
+    lake_water = share(masks['water'], SURFACE_PPD) - surface_water
+    mask_water = share(looks['water'] / 255.0, SURFACE_PPD)
+    drained = json.loads((ROOT / 'geography' / 'results' / 'drainage.json').read_text()) if 'drainage' in sources else None
     bodies = atlas['bodies']
     comparison = next(r for r in atlas['share_comparison'] if abs(r['share'] - atlas['share']) < 1e-9)
     minus = lambda v: f'{v:,.0f}'.replace('-', '\u2212')
@@ -222,7 +225,11 @@ def write_globe(atlas, height, lat, ppd, sites, targets, hashes):
                  ['Main land mass', f"{atlas['main_land_share']:.1%}"], ['Islands', f"{atlas['island_share']:.1%}"],
                  ['Near-side Sea', f"{bodies[0]['share']:.1%} \u00b7 mean {bodies[0]['mean_depth_m']:,} m"],
                  ['South Pole\u2013Aitken Sea', f"{bodies[1]['share']:.1%} \u00b7 mean {bodies[1]['mean_depth_m']:,} m"],
-                 ['Deepest water', f"{max(b['max_depth_m'] for b in bodies):,} m"]],
+                 ['Deepest water', f"{max(b['max_depth_m'] for b in bodies):,} m"]]
+                + ([['Rain-fed lakes above sea level', f"{drained['lakes']['area_share']:.1%} \u00b7 "
+                     f"{drained['lakes']['bodies']:,} lakes"],
+                    ['Water in those lakes', f"{drained['lakes']['volume_km3'] / 1e6:.1f} million km\u00b3"],
+                    ['Rivers into the seas', f"{drained['rivers']['discharge_to_sea_m3s']:,} m\u00b3/s"]] if drained else []),
         textures=dict(colour=png_data_uri(colour), height=png_data_uri(displacement),
                       normal=jpeg_data_uri(looks['normal']), albedo=jpeg_data_uri(looks['albedo']),
                       water=png_data_uri(looks['water']), cloudSun=png_data_uri(looks['cloud_sun']),
@@ -247,16 +254,21 @@ def write_globe(atlas, height, lat, ppd, sites, targets, hashes):
                     f"({hashes['register'][:12]}); the illumination domain's engine atmosphere "
                     f"({digest(sources['engine'])[:12]}) and Open Moon sky atlas ({digest(sources['sky_atlas'])[:12]}); "
                     f"the climate domain's <code>{params['climatology']['schema']}</code> for run "
-                    f"{params['climatology']['run']} ({digest(sources['climatology'])[:12]}). "
+                    f"{params['climatology']['run']} ({digest(sources['climatology'])[:12]})"
+                    + (f"; the geography domain's drainage product ({digest(sources['drainage'])[:12]})" if drained else '')
+                    + '. '
                     f"Surface {looks['albedo'].shape[1]}\u00d7{looks['albedo'].shape[0]} ({SURFACE_PPD} pixels per degree), "
-                    f"relief and water at {SURFACE_PPD // 2}, the map at {ppd}."))
+                    f"relief at {SURFACE_PPD // 2}, the map at {ppd}."))
     template = (HERE / 'globe.template.html').read_text()
     page = template.replace('__ATLAS_DATA__', json.dumps(data, ensure_ascii=False))
     (OUT / 'globe.html').write_text(page)
     products = {str(Path(v).relative_to(ROOT)): digest(v) for v in sources.values()}
-    passed = all(abs(v - atlas['water_share']) <= 0.002 for v in (texture_water, surface_water, mask_water))
-    return dict(map_texture_water_share=round(texture_water, 4), surface_water_share=round(surface_water, 4),
-                water_mask_share=round(mask_water, 4), product_water_share=atlas['water_share'], tolerance=0.002,
+    lakes = drained['lakes']['area_share'] if drained else 0.0
+    passed = (all(abs(v - atlas['water_share']) <= 0.002 for v in (texture_water, surface_water))
+              and abs(lake_water - lakes) <= 0.002 and 0.0 <= mask_water - atlas['water_share'] - lakes <= 0.004)
+    return dict(map_texture_water_share=round(texture_water, 4), surface_sea_share=round(surface_water, 4),
+                surface_lake_share=round(lake_water, 4), product_water_share=atlas['water_share'],
+                product_lake_share=lakes, water_mask_share_with_rivers=round(mask_water, 4), tolerance=0.002,
                 passed=passed, page_bytes=len(page.encode()), appearance_products=products)
 
 

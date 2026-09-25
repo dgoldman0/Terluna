@@ -5,8 +5,9 @@ the GRAIL GL0420A gravity field are fetched and hash-checked
 ([inputs.json](inputs.json), [fetch_inputs.py](fetch_inputs.py)). Heights are
 referred to the geoid, and hydrostatic water storage is computed. The IAU lunar
 nomenclature is fetched and hash-checked the same way and names the atlas's seas,
-islands and targets. Drainage, runoff, erosion and climate-coupled shorelines are
-the next layer.
+islands and targets. A first estimate of rivers and rain-fed lakes routes the
+climate run's runoff over the terrain. Erosion, groundwater and climate-coupled
+shorelines are the next layer.
 
 | File | Holds |
 |---|---|
@@ -15,6 +16,7 @@ the next layer.
 | [water_inventory.py](water_inventory.py) | Writes [results/](results/): the level table and the major basin joins as water rises, with schema, hashes and evidence statement |
 | [atlas.py](atlas.py) | The atlas at the scenario water share: seas and lakes with depths and IAU water names, islands with summits, mare flooding and a comparison of candidate shares ([results/atlas.json](results/atlas.json); grid product in `products/`) |
 | [nomenclature.py](nomenclature.py) | IAU lunar feature names from the USGS gazetteer archive (read by a small dBase reader built on the standard library) |
+| [drainage.py](drainage.py) | Rivers and rain-fed lakes above sea level: runoff from the climate run routed over the 16 px/deg terrain, with fill-and-spill lakes set by each depression's water balance ([results/drainage.json](results/drainage.json); grid product in `products/`) |
 
 ## What the topography allows
 
@@ -82,6 +84,36 @@ The atlas uses 4 px/deg for global geometry, and its levels match the 16 px/deg 
 of about 80°, the cylindrical grids disagree by hundreds of metres for small craters, so polar work moves to LOLA's
 polar stereographic grids.
 
+## Rivers and rain-fed lakes: a first estimate
+
+`python -m geography.drainage` routes water over LOLA at 16 px/deg (1.9 km) with the atlas's sea level. It writes
+[results/drainage.json](results/drainage.json) (schema `terluna.geography.drainage/1`) and the grid product
+`products/drainage_28pct_16ppd.npz`, which is kept out of Git and takes about 20 seconds to regenerate.
+
+- **Routing.** Each cell drains to the steepest of its eight neighbours. The floor of each closed depression spills
+  through the lowest pass on its way to the sea. A priority flood over the graph of catchments and their shared
+  passes finds those passes.
+- **Water balance.** Runoff is precipitation less evaporation over land, where positive, from climate run A
+  (model years 30–39, T21). A depression fills and overflows when its inflow and the rain on its lake exceed the
+  lake's open-water evaporation (the run's evaporation over sea at that latitude). Otherwise it keeps the smaller
+  lake whose evaporation balances its inflow.
+
+Results at 28%:
+
+- **Lakes.** 180,000 closed depressions lie above sea level. 39,400 of them hold rain-fed lakes, 11,100 of those
+  without an outlet. Together they cover 12.0% of the Moon on top of the 28% sea and hold 3.6 million km³, about
+  a third of the seas' volume.
+- **Where.** Lakes cover 17–19% of the equatorial belt and 0.1% of the dry polar regions. The largest fill far-side
+  basins: Hertzsprung (200,000 km², up to 4.7 km deep, its surface 5.1 km above sea level) and Korolev (141,000 km²,
+  up to 6.7 km deep, 7.8 km above sea level).
+- **Rivers.** 302,000 m³/s reaches the seas, about 1.4 times Earth's runoff per unit of land. The largest river
+  enters the Orientale sea with 55,600 m³/s from a basin of 833,000 km².
+
+With a fixed water inventory, water held in lakes above sea level comes out of the seas. The sea level then falls
+below −1,654 m unless the lakes' water is delivered on top, or groundwater and infiltration keep the basins
+drier. The runoff comes from run A, set up at 25% water. [tests/test_drainage.py](tests/test_drainage.py) checks
+mass conservation, fill-and-spill and the closed-lake balance on synthetic terrain.
+
 ## Limits
 
 - **Datums:** LOLA (mean-Earth frame) and GL0420A (principal-axis frame) differ
@@ -95,8 +127,8 @@ polar stereographic grids.
 
 ## Next work
 
-- Fill-and-spill driven by rainfall over catchments. Where water actually stands
-  depends on precipitation minus evaporation, which needs the climate model.
+- How the water inventory divides between the seas and the rain-fed lakes, with groundwater, and runoff from a
+  climate run at 28%.
 - Groundwater storage in the porous crust (GRAIL: about 12%) and crustal loading, which set how much water
   to deliver for 28% cover and where the shore falls.
 - LOLA polar stereographic grids for the polar cold traps.

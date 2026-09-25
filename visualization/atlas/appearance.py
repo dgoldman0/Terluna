@@ -5,14 +5,16 @@ Called by render.py. Every input is a domain product, and each piece says what k
 - computed: the atmosphere (Rayleigh coefficients and scale height from the illumination domain's
   engine-atmosphere product), the ground's direct and diffuse light against Sun elevation (the
   Open Moon clear-sky atlas, 55 scattering orders), and land, sea and relief at 16 pixels per degree
-  (LOLA above the GRAIL geoid through the geography domain, at the atlas product's sea level);
+  (LOLA above the GRAIL geoid through the geography domain, at the atlas product's sea level), with
+  the geography domain's rivers and rain-fed lakes above sea level;
 - informed: cloud cover from the climate domain's ExoPlaSim climatology (run A), a low and a high deck
   each moved with the Sun through its hour-angle composite, placed at the deck's cover-weighted
   height and carried east by the deck's cover-weighted mean wind; light scattered more than once, an
   isotropic source scaled from the sky atlas's diffuse light so that the air seen straight down
   matches Eddington's conservative-scattering reflectance;
-- guesstimate: surface cover from rainfall, soil moisture, nearness to water, height, hollows and slope
-  (forest, woodland, grassland, bare highland or basaltic soil, rock), water colour from depth, and the
+- guesstimate: surface cover from rainfall, soil moisture, nearness to water and rivers, height, hollows
+  and slope (forest, woodland, grassland, bare highland or basaltic soil, rock), river width from discharge,
+  water colour from depth, and the
   cloud decks' shapes (noise the page evaluates, thresholded to the run's cover) and opacity. The
   biosphere and climate work replace it.
 """
@@ -25,6 +27,11 @@ ROOT = Path(__file__).resolve().parents[2]
 ENGINE = ROOT / 'illumination' / 'sky' / 'products' / 'engine_atmosphere.json'
 SKY_ATLAS = ROOT / 'illumination' / 'sky' / 'data' / 'moon_atlas.npz'
 CLIMATOLOGY = ROOT / 'climate' / 'gcm' / 'products' / 'climatology_A.npz'
+DRAINAGE = ROOT / 'geography' / 'products' / 'drainage_28pct_16ppd.npz'
+DRAINAGE_SCHEMA = 'terluna.geography.drainage/1'
+# Channel width from discharge: Earth's relation, about 7.2 m per (m3/s)^0.5, widened by 1.6 because flow in
+# lunar gravity is slower (speed with the square root of g) and needs a larger cross-section.
+RIVER_WIDTH = 7.2 * 1.6
 LUMINANCE = np.array([0.2126, 0.7152, 0.0722])
 LUT_ELEVATIONS = np.linspace(-90.0, 90.0, 121)   # twilight light reaches far past the terminator
 MOON_KM = 1737.4
@@ -40,6 +47,7 @@ ROCK = np.array([0.20, 0.19, 0.18])
 DEEP_WATER = np.array([0.008, 0.018, 0.036])
 MID_WATER = np.array([0.012, 0.027, 0.046])
 TURBID_WATER = np.array([0.034, 0.048, 0.042])
+RIVER_WATER = np.array([0.085, 0.078, 0.058])   # sediment-laden, as rivers crossing fresh ground run
 CLOUD_ALBEDO = 0.72                 # of the part of a deck that intercepts light
 LOW_OPACITY, HIGH_OPACITY = 0.9, 0.4  # guesstimates: the low deck holds the model's cloud water, the high deck little
 CLOUD_ROWS = 90                     # 2-degree rows for the cloud maps
@@ -96,6 +104,20 @@ def regrid(field, lat_src, lon_src, lat_dst, lon_dst):
     return a * (1 - ty) + b * ty
 
 
+def wrapped(filter_, a, pad=32):
+    """Apply an image filter as if longitude wrapped around: pad east and west from the far side, then crop."""
+    out = filter_(np.concatenate([a[:, -pad:], a, a[:, :pad]], axis=1))
+    return out[:, pad:pad + a.shape[1]]
+
+
+def gradients(a, dy):
+    """North-south and east-west differences per metre of arc (east-west before the cos(latitude) factor),
+    central and wrapping in longitude."""
+    gy = np.gradient(a, axis=0) / dy
+    gx = (np.roll(a, -1, axis=1) - np.roll(a, 1, axis=1)) / (2.0 * dy)
+    return gy, gx
+
+
 def climate_field(clim, name, shape):
     """A climatology field on the texture grid: regridded at 4 pixels per degree, then enlarged."""
     import cv2
@@ -107,14 +129,43 @@ def climate_field(clim, name, shape):
     return cv2.resize(pad, (pad.shape[1] * s, shape[0]), interpolation=cv2.INTER_LINEAR)[:, s:s + shape[1]]
 
 
-def surface_colour(height, level, clim, ppd):
-    """Guesstimated surface reflectance (linear sRGB, float32) and the water mask, 180 W at the left edge."""
+def drainage_grids(shape, path=DRAINAGE):
+    """Discharge (m3/s) along channels and the level of rain-fed lakes above sea level on the texture grid
+    (180 W at the left edge), from the geography domain's drainage product; None when it is absent."""
+    if not Path(path).is_file():
+        return None
+    z = np.load(path)
+    meta = json.loads(str(z['metadata']))
+    if meta.get('schema') != DRAINAGE_SCHEMA or meta['grid']['rows'] != shape[0]:
+        raise SystemExit(f'Expected {DRAINAGE_SCHEMA} on a {shape[0]}-row grid in {path}')
+    q = np.zeros(shape[0] * shape[1], np.float32)
+    q[z['channel_cell']] = z['channel_discharge_m3s']
+    lake = np.full(shape[0] * shape[1], np.nan, np.float32)
+    lake[z['lake_cell']] = z['lake_level_m']
+    roll = shape[1] // 2
+    return dict(discharge=np.roll(q.reshape(shape), roll, axis=1), lake_level=np.roll(lake.reshape(shape), roll, axis=1),
+                metadata=meta)
+
+
+def surface_colour(height, level, clim, ppd, drainage=None):
+    """Guesstimated surface reflectance (linear sRGB, float32), the water mask (sea and lakes) and the share
+    of each cell that river channels cover, 180 W at the left edge."""
     import cv2
     height = height.astype(np.float32)
     rows, cols = height.shape
     lat = 90.0 - (np.arange(rows) + 0.5) / ppd
-    water = height < level
     km = MOON_KM * np.radians(1.0 / ppd)
+    sea = height < level
+    if drainage is not None:
+        lake = np.isfinite(drainage['lake_level'])
+        discharge = np.where(sea | lake, 0.0, drainage['discharge'])
+        river = np.clip(RIVER_WIDTH * np.sqrt(discharge) / (km * 1000.0), 0.0, 1.0).astype(np.float32)
+        surface_level = np.where(lake, drainage['lake_level'], level).astype(np.float32)
+    else:
+        lake = np.zeros_like(sea)
+        discharge = river = None
+        surface_level = np.float32(level)
+    water = sea | lake
 
     rain = climate_field(clim, 'pr_mm_day', height.shape)
     wet = rain
@@ -126,22 +177,24 @@ def surface_colour(height, level, clim, ppd):
     del tiled, shore_km
     land_height = np.maximum(height, level)
     wet += 0.8 * np.exp(-(land_height - level) / 400.0)
-    curvature = cv2.Laplacian(cv2.GaussianBlur(land_height, (0, 0), 3.0), cv2.CV_32F, ksize=3)
+    curvature = wrapped(lambda a: cv2.Laplacian(cv2.GaussianBlur(a, (0, 0), 3.0), cv2.CV_32F, ksize=3), land_height)
     wet += 0.6 * np.clip(curvature / (curvature[~water].std() + 1e-6), -2.5, 2.5)   # wetter in hollows
     del curvature
     wet += 2.5 * (fbm(height.shape, 11, octaves=9, base=(24, 12)) - 0.5)
+    if discharge is not None:                        # floodplains: wetter ground along larger rivers
+        wet += 0.9 * np.minimum(wrapped(lambda a: cv2.GaussianBlur(a, (0, 0), 2.5), np.log10(1.0 + discharge).astype(np.float32)), 2.0)
     veg = smoothstep(0.4, 3.2, wet)
     dense = smoothstep(3.2, 5.5, wet)
     del wet
     basaltic = smoothstep(level + 900.0, level + 150.0, height) * smoothstep(
         0.35, 0.65, fbm(height.shape, 17, octaves=8, base=(18, 9)))
-    gy, gx = np.gradient(land_height, km * 1000.0)
+    gy, gx = gradients(land_height, km * 1000.0)
     rocky = 0.5 * smoothstep(0.35, 0.7, np.hypot(gx / np.maximum(np.cos(np.radians(lat)), 0.05)[:, None], gy))
     del gy, gx, land_height
     grass = smoothstep(0.0, 0.35, veg)
     wooded = smoothstep(0.35, 1.0, veg)
     del veg
-    depth = level - height
+    depth = np.where(water, surface_level - height, 0.0)
     shallow = smoothstep(250.0, 30.0, depth)
     deep = smoothstep(400.0, 1500.0, depth)
     del depth
@@ -151,18 +204,20 @@ def surface_colour(height, level, clim, ppd):
         land = (bare * (1 - grass) + GRASS[c] * grass) * (1 - wooded) + (SAVANNA[c] * (1 - dense) + FOREST[c] * dense) * wooded
         land = land * (1 - rocky) + ROCK[c] * rocky
         sea = (MID_WATER[c] * (1 - deep) + DEEP_WATER[c] * deep) * (1 - shallow) + TURBID_WATER[c] * shallow
+        if river is not None:
+            land = land * (1 - river) + RIVER_WATER[c] * river
         colour[..., c] = np.where(water, sea, land)
-    return colour, water
+    return colour, water, river, surface_level
 
 
 def relief_normals(height, level, ppd):
-    """Tangent-space normals of the sea-clamped surface, relief baked at NORMAL_STRENGTH."""
+    """Tangent-space normals of the surface with water flat at its level, relief baked at NORMAL_STRENGTH."""
     surf = np.maximum(height, level).astype(np.float32)
     lat = 90.0 - (np.arange(surf.shape[0]) + 0.5) / ppd
     dy = MOON_KM * 1000.0 * np.radians(1.0 / ppd)
-    gy, gx = np.gradient(surf)
-    n = np.stack([-(gx / (dy * np.maximum(np.cos(np.radians(lat)), 1e-3)[:, None])) * NORMAL_STRENGTH,
-                  (gy / dy) * NORMAL_STRENGTH, np.ones_like(surf)], axis=-1)
+    gy, gx = gradients(surf, dy)
+    n = np.stack([-(gx / np.maximum(np.cos(np.radians(lat)), 1e-3)[:, None]) * NORMAL_STRENGTH,
+                  gy * NORMAL_STRENGTH, np.ones_like(surf)], axis=-1)
     n /= np.linalg.norm(n, axis=-1, keepdims=True)
     return np.round((n + 1) / 2 * 255).astype(np.uint8)
 
@@ -310,15 +365,17 @@ def build(height, level, ppd):
     clim_meta = json.loads(str(clim.pop('metadata')))
     clim['deck_sigma'] = clim_meta['deck_sigma']
     h = np.roll(height, height.shape[1] // 2, axis=1)
-    colour, water = surface_colour(h, level, clim, ppd)
+    drainage = drainage_grids(h.shape)
+    colour, water, river, surface_level = surface_colour(h, level, clim, ppd, drainage)
     albedo = np.empty(colour.shape, np.uint8)
     for c in range(3):
         albedo[..., c] = np.round(srgb_encode(colour[..., c]) * 255)
     del colour
-    half = block_mean(h, 2)
+    half = block_mean(np.maximum(h, surface_level), 2)
     normal = relief_normals(half, level, ppd // 2)
-    water_half = np.round(block_mean(water.astype(np.float32), 2) * 255).astype(np.uint8)
-    del half
+    wet_share = water.astype(np.float32) if river is None else np.maximum(water.astype(np.float32), river)
+    water_mask = np.round(wet_share * 255).astype(np.uint8)
+    del half, wet_share
 
     # Cloud: the Sun-relative composites of each deck and its geographic pattern relative to its zonal mean.
     sun = np.dstack([rows_to_uniform(np.clip(clim[k], 0, 1), clim['lat']) for k in ('low_sun', 'high_sun', 'clt_sun')])
@@ -335,7 +392,7 @@ def build(height, level, ppd):
     direct, diffuse = ground_light_lut(sun_rgb_lux)
     source = diffuse_source_factor(moon, diffuse)
     light = np.stack([direct, diffuse, source]).astype(np.float32)          # 3 rows x elevations x RGB
-    textures = dict(albedo=albedo, normal=normal, water=water_half,
+    textures = dict(albedo=albedo, normal=normal, water=water_mask,
                     cloud_sun=np.round(sun * 255).astype(np.uint8), cloud_geo=np.round(geo * 100).astype(np.uint8))
     area = lambda f: float((f * np.cos(np.radians(clim['lat']))[:, None]).sum()
                            / (np.cos(np.radians(clim['lat'])).sum() * f.shape[1]))
@@ -356,7 +413,12 @@ def build(height, level, ppd):
         climatology=dict(run=clim_meta['run'], years=clim_meta['years'], schema=clim_meta['schema']),
         legend=[['Forest', FOREST], ['Woodland, savanna', SAVANNA], ['Grassland, scrub', GRASS],
                 ['Bare highland soil', HIGHLAND_SOIL], ['Bare basaltic soil', BASALT_SOIL], ['Rock', ROCK],
-                ['Shallow, silty water', TURBID_WATER], ['Deep water', DEEP_WATER]])
+                ['River water, sediment-laden', RIVER_WATER], ['Shallow, silty water', TURBID_WATER],
+                ['Deep water', DEEP_WATER]])
     params['legend'] = [[name, '#' + ''.join(f'{int(round(v * 255)):02x}' for v in srgb_encode(np.asarray(rgb)))]
                         for name, rgb in params['legend']]
-    return textures, params, dict(engine=ENGINE, sky_atlas=SKY_ATLAS, climatology=CLIMATOLOGY), water
+    sources = dict(engine=ENGINE, sky_atlas=SKY_ATLAS, climatology=CLIMATOLOGY)
+    if drainage is not None:
+        sources['drainage'] = DRAINAGE
+        params['drainage'] = dict(schema=drainage['metadata']['schema'], riverWidthPerRootDischarge=RIVER_WIDTH)
+    return textures, params, sources, dict(sea=h < level, water=water)

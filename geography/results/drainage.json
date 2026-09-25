@@ -1,0 +1,275 @@
+{
+  "schema": "terluna.geography.drainage/1",
+  "share": 0.28,
+  "sea_level_m": -1654.2,
+  "grid": {
+    "pixels_per_degree": 16,
+    "rows": 2880,
+    "cols": 5760
+  },
+  "depressions": 179990,
+  "lakes": {
+    "bodies": 39381,
+    "closed_bodies": 11135,
+    "area_share": 0.1202,
+    "volume_km3": 3643849,
+    "median_depth_m": 403,
+    "largest": [
+      {
+        "centre": [
+          1.39,
+          -127.74
+        ],
+        "area_km2": 200051,
+        "volume_km3": 259712,
+        "max_depth_m": 4723,
+        "level_above_sea_m": 5052,
+        "spills": true
+      },
+      {
+        "centre": [
+          -4.33,
+          -157.69
+        ],
+        "area_km2": 140652,
+        "volume_km3": 400210,
+        "max_depth_m": 6670,
+        "level_above_sea_m": 7849,
+        "spills": true
+      },
+      {
+        "centre": [
+          24.61,
+          -169.45
+        ],
+        "area_km2": 81796,
+        "volume_km3": 125786,
+        "max_depth_m": 5054,
+        "level_above_sea_m": 5065,
+        "spills": true
+      },
+      {
+        "centre": [
+          45.54,
+          -168.26
+        ],
+        "area_km2": 37038,
+        "volume_km3": 22306,
+        "max_depth_m": 2940,
+        "level_above_sea_m": 4131,
+        "spills": false
+      },
+      {
+        "centre": [
+          14.68,
+          -160.4
+        ],
+        "area_km2": 32179,
+        "volume_km3": 20405,
+        "max_depth_m": 4400,
+        "level_above_sea_m": 5464,
+        "spills": true
+      },
+      {
+        "centre": [
+          18.61,
+          -148.77
+        ],
+        "area_km2": 29584,
+        "volume_km3": 76751,
+        "max_depth_m": 4969,
+        "level_above_sea_m": 7303,
+        "spills": true
+      },
+      {
+        "centre": [
+          -14.5,
+          -152.71
+        ],
+        "area_km2": 29279,
+        "volume_km3": 60820,
+        "max_depth_m": 5348,
+        "level_above_sea_m": 6070,
+        "spills": true
+      },
+      {
+        "centre": [
+          15.05,
+          -142.01
+        ],
+        "area_km2": 26504,
+        "volume_km3": 18079,
+        "max_depth_m": 5307,
+        "level_above_sea_m": 6368,
+        "spills": true
+      },
+      {
+        "centre": [
+          38.84,
+          169.48
+        ],
+        "area_km2": 25403,
+        "volume_km3": 14178,
+        "max_depth_m": 2432,
+        "level_above_sea_m": 3757,
+        "spills": true
+      },
+      {
+        "centre": [
+          37.16,
+          -139.35
+        ],
+        "area_km2": 22629,
+        "volume_km3": 20426,
+        "max_depth_m": 4541,
+        "level_above_sea_m": 5333,
+        "spills": false
+      },
+      {
+        "centre": [
+          13.57,
+          -170.91
+        ],
+        "area_km2": 22554,
+        "volume_km3": 31383,
+        "max_depth_m": 4661,
+        "level_above_sea_m": 5285,
+        "spills": true
+      },
+      {
+        "centre": [
+          31.53,
+          -165.42
+        ],
+        "area_km2": 22046,
+        "volume_km3": 41043,
+        "max_depth_m": 5338,
+        "level_above_sea_m": 5571,
+        "spills": true
+      }
+    ]
+  },
+  "rivers": {
+    "discharge_to_sea_m3s": 302374,
+    "channels_over_100_m3s_km": 8134,
+    "largest": [
+      {
+        "mouth": [
+          -18.34,
+          -100.03
+        ],
+        "discharge_m3s": 55626.8,
+        "basin_km2": 832565
+      },
+      {
+        "mouth": [
+          3.59,
+          171.16
+        ],
+        "discharge_m3s": 45517.8,
+        "basin_km2": 592497
+      },
+      {
+        "mouth": [
+          21.97,
+          -178.34
+        ],
+        "discharge_m3s": 26433.6,
+        "basin_km2": 442033
+      },
+      {
+        "mouth": [
+          -19.66,
+          -157.59
+        ],
+        "discharge_m3s": 23772.0,
+        "basin_km2": 305933
+      },
+      {
+        "mouth": [
+          -35.47,
+          -124.16
+        ],
+        "discharge_m3s": 14307.1,
+        "basin_km2": 407911
+      },
+      {
+        "mouth": [
+          47.16,
+          -175.97
+        ],
+        "discharge_m3s": 9412.1,
+        "basin_km2": 469784
+      },
+      {
+        "mouth": [
+          28.91,
+          157.97
+        ],
+        "discharge_m3s": 7887.3,
+        "basin_km2": 368177
+      },
+      {
+        "mouth": [
+          -25.84,
+          138.66
+        ],
+        "discharge_m3s": 6914.6,
+        "basin_km2": 173138
+      },
+      {
+        "mouth": [
+          17.22,
+          -86.47
+        ],
+        "discharge_m3s": 6560.8,
+        "basin_km2": 416566
+      },
+      {
+        "mouth": [
+          5.09,
+          151.66
+        ],
+        "discharge_m3s": 5772.2,
+        "basin_km2": 105470
+      },
+      {
+        "mouth": [
+          -2.72,
+          167.59
+        ],
+        "discharge_m3s": 4419.0,
+        "basin_km2": 159742
+      },
+      {
+        "mouth": [
+          -3.03,
+          122.59
+        ],
+        "discharge_m3s": 4392.6,
+        "basin_km2": 163259
+      }
+    ]
+  },
+  "evidence": "Steady annual routing of the climate run's runoff (precipitation less evaporation over land, T21) over LOLA 16 pixel/degree heights above the GRAIL geoid, with fill-and-spill lakes decided by each depression's water balance against the run's open-water evaporation. A first estimate of where rivers run and which closed depressions hold lakes; channels are grid-resolved (1.9 km), and groundwater, infiltration and travel time come later.",
+  "reading_rule": "Cells index rows from 90 N and columns from 0 E, 16 per degree, as LOLA: cell = row * 5760 + column. channel_discharge_m3s[k] is the mean discharge through cell channel_cell[k]. lake_cell lists land cells under rain-fed lakes above sea level, with lake_level_m their surface above the geoid and lake_spills whether that lake overflows.",
+  "producer": {
+    "domain": "geography",
+    "files": {
+      "geography/drainage.py": "d3e491dcfe89b58c",
+      "geography/topography.py": "228e08f79efca868",
+      "geography/atlas.py": "e5ce62df01c94097"
+    }
+  },
+  "sources": {
+    "geography/results/atlas.json": "78cfbf2f469eb339b686e34385c3ed72fc83752da59bb24167e2260a765e537e",
+    "climate/gcm/products/climatology_A.npz": "2e3661f40ba30e2a4d8901c1b0f9083d7da67ea6be14e7c601cbc478cf7cec80"
+  },
+  "climatology": {
+    "run": "A",
+    "years": [
+      30,
+      39
+    ]
+  }
+}

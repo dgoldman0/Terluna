@@ -31,8 +31,8 @@ python visualization/atlas/render.py      # out/: three sheets, globe.html and m
 
 [globe.template.html](globe.template.html) holds the viewer. `render.py` fills it with the appearance data from
 [appearance.py](appearance.py) and with map textures built from the atlas grid. The appearance mode's surface is
-16 pixels per degree (1.9 km), with relief and the water mask at 8. The map mode stays at the atlas's 4. JPEG
-keeps the page near 8 MB.
+16 pixels per degree (1.9 km), with relief at 8. The map mode stays at the atlas's 4. JPEG keeps the page
+near 9 MB.
 
 **Appearance mode** estimates how the Open Moon looks from outside its air. One full-screen pass traces each
 pixel's ray through the atmosphere, two cloud decks and the surface:
@@ -40,6 +40,8 @@ pixel's ray through the atmosphere, two cloud decks and the surface:
 - **Computed:**
   - land, sea and relief: LOLA above the GRAIL geoid at 16 pixels per degree through the geography domain,
     filled to the atlas product's sea level;
+  - rivers and rain-fed lakes above sea level, from the geography domain's drainage product (12% of the Moon
+    in lakes); river width follows discharge;
   - the air, from the illumination domain's engine atmosphere: optical depth and scale height;
   - the halo around the limb and the sunlit air beyond the terminator, which come out of the same ray-march
     through the air's full 484 km;
@@ -51,8 +53,9 @@ pixel's ray through the atmosphere, two cloud decks and the surface:
   - light scattered more than once in the air, an isotropic source proportional to the sky atlas's diffuse
     light, scaled so that the air seen straight down matches Eddington's reflectance.
 - **Guesstimate:**
-  - surface cover, from rainfall, soil moisture, nearness to water, height, hollows and slope;
-  - water colour, from depth;
+  - surface cover, from rainfall, soil moisture, nearness to water, floodplains, height, hollows and slope;
+  - water colour, from depth, with sediment-laden rivers;
+  - river width, from Earth's width–discharge relation widened by 1.6 for the slower flow of lunar gravity;
   - cloud shapes and opacity. The shapes are noise that the page evaluates in 3D, so they stay sharp at any
     zoom. `appearance.py` replicates the page's hash and measures the noise's distribution, so that the
     share of sky each deck covers equals the run's cover.
@@ -68,10 +71,10 @@ map of the relief and the sea-clamped surface as displacement.
 
 The page opens in the view named by its link: `#near`, `#far`, `#south`, `#north`, `#earth` or `#map`. It
 can add `e<degrees>` for the Sun's elongation from Earth (`#earth.e60` is a crescent), `x<stops>` for
-exposure, `z<tenths>` for the camera's distance in Moon radii (from Earth, the field of view in tenths of a degree), `red`, `noclouds` or `noair`. The page was also published privately to claude.ai.
+exposure, `z<tenths>` for the camera's distance in Moon radii (from Earth, the field of view in tenths of a degree), `lat<degrees>n|s` and `lon<degrees>e|w` to centre a place, `red`, `noclouds` or `noair`. The page was also published privately to claude.ai.
 
 ## Faithfulness
 
-`manifest.json` records the SHA-256 of every product the sheets read, and a round-trip check. The water share of the rendered near-side disk must match the product's Earth-facing disk share within 0.01; at 28% both are 0.415. The map's colour texture, the 16 pixels-per-degree surface and the 8 pixels-per-degree water mask must each cover the product's water share within 0.002 by area; at 28% all are 0.280.
+`manifest.json` records the SHA-256 of every product the sheets read, and a round-trip check. The water share of the rendered near-side disk must match the product's Earth-facing disk share within 0.01; at 28% both are 0.415. The map's colour texture and the 16 pixels-per-degree surface must each cover the product's sea share within 0.002 by area (at 28% both are 0.280); the surface's rain-fed lakes must cover the drainage product's lake share within 0.002 (0.120), and the water mask, which adds river channels, may exceed sea and lakes by at most 0.004 (0.4005).
 
 The sheets display the product's hydrostatic geometry, so every depression below sea level appears as water. Shorelines and lake levels change once the hydrology is added.

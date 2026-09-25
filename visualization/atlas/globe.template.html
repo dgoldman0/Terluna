@@ -165,9 +165,11 @@
 
   <section class="notes" aria-label="What the globe shows">
     <h2>What the appearance shows</h2>
-    <p><b>Computed.</b> Land, sea and water depth come from the geography atlas: LOLA topography above the GRAIL geoid at
-      4 pixels per degree, filled to one common sea level. The air comes from the illumination domain's Open Moon
-      atmosphere, <span id="air-figures"></span>. The page ray-marches that air through its whole height, so the
+    <p><b>Computed.</b> Land, sea and water depth come from LOLA topography above the GRAIL geoid at 16 pixels per
+      degree (1.9 km), filled to the geography atlas's common sea level. Rivers and the rain-fed lakes above sea level
+      come from the geography domain's drainage estimate, which routes the climate run's runoff over the terrain: the
+      lakes cover a further 12% of the Moon, and holding their water takes about a third as much again as the seas.
+      The air comes from the illumination domain's Open Moon atmosphere, <span id="air-figures"></span>. The page ray-marches that air through its whole height, so the
       halo around the limb and the sunlit air beyond the terminator come from the same calculation as the haze over
       the disk. The ground's direct and diffuse light at each Sun height comes from the Open Moon clear-sky atlas,
       55 orders of scattering.</p>
@@ -176,10 +178,12 @@
       pattern over land and sea. Light scattered more than once in the air is an isotropic source proportional
       to the sky atlas's diffuse light at each point's Sun height, scaled per channel so that the air seen straight
       down matches Eddington's multiple-scattering reflectance of the same column.</p>
-    <p><b>Guesstimate.</b> Surface cover follows rainfall, soil moisture, nearness to water, height and slope: forest,
-      woodland, grassland, bare highland or basaltic soil, and rock on steep ground. Water colour follows depth.
-      Cloud shapes are noise, and the decks' opacity is a guess (the low deck holds the run's cloud water, the high
-      deck little). The biosphere and climate work replace all of this.</p>
+    <p><b>Guesstimate.</b> Surface cover follows rainfall, soil moisture, nearness to water, floodplains, height,
+      hollows and slope: forest, woodland, grassland, bare highland or basaltic soil, and rock on steep ground. Water
+      colour follows depth, and rivers carry sediment. River width follows discharge, by Earth's relation widened for
+      the slower flow of lunar gravity; most channels are narrower than a pixel. Cloud shapes are noise the page
+      draws in 3D, thresholded to the run's cover, and the decks' opacity is a guess (the low deck holds the run's
+      cloud water, the high deck little). The biosphere and climate work replace all of this.</p>
     <p><b>Display.</b> Colours are the computed radiances with Earth daylight (D65) as white and no white balance.
       Exposure scales them like a camera: at 0 a white surface under the unfiltered overhead Sun sits at display
       white, and the page opens one stop brighter, where the brightest cloud reaches white. A soft shoulder above 80%
@@ -189,7 +193,8 @@
       distance, 384,400 km, with a narrow field of view.</p>
     <p><b>Next refinements.</b> Refraction: a ray grazing the surface bends about 0.28°, which carries sunlight
       further past the terminator. Multiple scattering along the limb and in twilight, where the calibration for the
-      disk is weakest. Earthshine on the night side. Clouds with depth, and their shadows in the air.</p>
+      disk is weakest. Earthshine on the night side. Clouds with depth, and their shadows in the air. Finer terrain
+      for close views: at 16 pixels per degree the surface softens below about 1,500 km altitude.</p>
     <h2>What the map shows</h2>
     <p>Water in depth bands and land in a neutral grey, with the light following the viewer so every face reads as a
       map. Relief is exaggerated by the slider, and the seas stay flat at sea level. Heritage sites and sampling
@@ -402,6 +407,11 @@
     vec2 gx = dFdx(uv), gy = dFdy(uv), gx2 = dFdx(uv2), gy2 = dFdy(uv2);
     if (abs(gx2.x) < abs(gx.x)) gx.x = gx2.x;
     if (abs(gy2.x) < abs(gy.x)) gy.x = gy2.x;
+    // The level of detail from those derivatives, set explicitly so that no sampler sees the date line's jump.
+    vec2 texels = vec2(textureSize(tAlbedo, 0));
+    float lod = max(0.0, 0.5 * log2(max(dot(gx * texels, gx * texels), dot(gy * texels, gy * texels))));
+    float lodWater = max(0.0, lod + log2(float(textureSize(tWater, 0).x) / texels.x));
+    float lodNormal = max(0.0, lod + log2(float(textureSize(tNormal, 0).x) / texels.x));
 
     float rt2 = uRt * uRt;
     if (h2 >= rt2 || tca <= 0.0) { gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0); return; }
@@ -455,10 +465,10 @@
     vec3 surface = vec3(0.0);
     if (hit) {
       vec3 n = ns, v = -dir;
-      vec3 albedo = srgbToLinear(textureGrad(tAlbedo, uv, gx, gy).rgb);
+      vec3 albedo = srgbToLinear(textureLod(tAlbedo, uv, lod).rgb);
       vec3 blurred = srgbToLinear(textureLod(tAlbedo, uv, uBlurLod).rgb);
-      float water = textureGrad(tWater, uv, gx, gy).r;
-      vec3 nm = textureGrad(tNormal, uv, gx, gy).xyz * 2.0 - 1.0;
+      float water = textureLod(tWater, uv, lodWater).r;
+      vec3 nm = textureLod(tNormal, uv, lodNormal).xyz * 2.0 - 1.0;
       vec3 east = vec3(n.z, 0.0, -n.x);
       east = dot(east, east) > 1e-10 ? normalize(east) : vec3(1.0, 0.0, 0.0);
       vec3 north = cross(n, east);
@@ -991,6 +1001,7 @@
   // elongation from Earth and x<stops> the exposure.
   const tokens = (location.hash || '').replace('#', '').split(/[.\-]/).filter(Boolean);
   let startMode = canAppear ? 'appearance' : 'map', startView = 'near', startDay = 10, startStops = 1, startZoom = 0;
+  let aimLat = null, aimLon = null;
   for (const t of tokens) {
     if (t === 'map' || t === 'appearance') startMode = t;
     else if (VIEWS[t]) startView = t;
@@ -998,9 +1009,17 @@
     else if (/^x\d+$/.test(t)) startStops = Math.min(14, +t.slice(1));
     else if (/^xm\d+$/.test(t)) startStops = -Math.min(3, +t.slice(2));
     else if (/^z\d+$/.test(t)) startZoom = +t.slice(1) / 10;
+    else if (/^lat\d+[ns]$/.test(t)) aimLat = +t.slice(3, -1) * (t.endsWith('s') ? -1 : 1);
+    else if (/^lon\d+[ew]$/.test(t)) aimLon = +t.slice(3, -1) * (t.endsWith('w') ? -1 : 1);
     else if (t === 'noclouds') document.getElementById('show-clouds').click();
     else if (t === 'noair') document.getElementById('show-air').click();
     else if (t === 'red') document.getElementById('red-only').click();
+  }
+  if (aimLat !== null || aimLon !== null) {
+    const la = (aimLat || 0) * Math.PI / 180, lo = (aimLon || 0) * Math.PI / 180;
+    VIEWS.aim = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), la)
+      .multiply(new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), -Math.PI / 2 - lo));
+    startView = 'aim';
   }
   setMode(startMode);
   phaseInput.value = String(startDay);
