@@ -74,11 +74,49 @@ EXPERIMENTS = {
 # (29.8 Earth days each, 0.9% longer than the real 29.53, with the true 27.32-day rotation), 357.5
 # Earth days in all. Output: 10 means per lunar day (about 3 days each), 120 a year.
 MODEL = dict(resolution='T21', layers=10, timestep_min=30.0, land_albedo=0.2, steps_per_lunar_day=1430,
-             writes_per_lunar_day=10, lunar_days_per_year=12, seed=1)
+             writes_per_lunar_day=10, lunar_days_per_year=12, seed=1,
+             # Radiation calibrated against the line-by-line model on cloud-free lunar columns at 280 and
+             # 310 K (see the README): a multiplier on ExoPlaSim's spectrum-derived Rayleigh coefficient,
+             # and PlaSim's water-vapour continuum coefficient. 1.0 and 0.024 reproduce the unmodified
+             # model, which absorbed about 14 W/m2 too much sunlight and emitted 12 W/m2 too little when warm.
+             rayleigh_scale=1.8, h2o_continuum=0.004)
 # Kept in each year's 5-day means (ExoPlaSim writes about 100 fields by default, 100 MB a year).
 OUTPUT = ['ta', 'ua', 'va', 'hus', 'cl',
           'ts', 'tas', 'maxt', 'mint', 'ps', 'psl', 'pr', 'prc', 'evap', 'prw', 'clt', 'sic', 'sit', 'snd', 'mrso',
           'rst', 'rsut', 'rlut', 'ntr', 'nbr', 'rss', 'rls', 'hfss', 'hfls', 'alb', 'czen', 'lsm']
+
+
+# The Terluna patch to ExoPlaSim's radiation (plasim/src/radmod.f90): a namelist multiplier, RAYSCALE, on
+# the Rayleigh coefficient the model derives from the stellar spectrum. Applied once, idempotently.
+RADMOD_EDITS = [
+    ("      real :: rcoeff = 1.0       ! Rayleigh scattering coefficient for cross section dependence\n",
+     "      real :: rcoeff = 1.0       ! Rayleigh scattering coefficient for cross section dependence\n"
+     "      real :: rayscale = 1.0     ! Terluna: multiplier on rcoeff, calibrated against line-by-line\n"),
+    ("        rcoeff = (zcross1 + zcross2) * zsolar1 / z1 / zchi !Using default zsolar=0.517 here\n",
+     "        rcoeff = (zcross1 + zcross2) * zsolar1 / z1 / zchi !Using default zsolar=0.517 here\n"
+     "        rcoeff = rcoeff * rayscale ! Terluna: calibration multiplier\n"),
+    ("     &               ,nsimplealbedo,nstarfile,starfile,starfilehr,minwavel\n",
+     "     &               ,nsimplealbedo,nstarfile,starfile,starfilehr,minwavel,rayscale\n"),
+    ("      call mpbcr(minwavel)\n",
+     "      call mpbcr(minwavel)\n      call mpbcr(rayscale)\n"),
+]
+
+
+def ensure_patched() -> str:
+    """Apply the Terluna patch to ExoPlaSim's radiation source if it is missing (removing the compiled
+    executables so ExoPlaSim rebuilds them), and return the source's hash for the run key."""
+    import exoplasim
+    src = Path(exoplasim.__file__).parent / 'plasim' / 'src' / 'radmod.f90'
+    text = src.read_text()
+    if 'Terluna: calibration multiplier' not in text:
+        for old, new in RADMOD_EDITS:
+            if text.count(old) != 1:
+                raise RuntimeError(f'ExoPlaSim radmod.f90 is not the version the Terluna patch expects near {old.strip()!r}')
+            text = text.replace(old, new)
+        src.write_text(text)
+        for exe in (src.parents[1] / 'run').glob('most_plasim_*.x'):
+            exe.unlink()
+    return hashlib.sha256(src.read_bytes()).hexdigest()[:16]
 
 
 def _atomic_write(path: Path, text: str):
@@ -87,7 +125,7 @@ def _atomic_write(path: Path, text: str):
     tmp.replace(path)
 
 
-def configuration(name, ncpus):
+def configuration(name, ncpus, overrides=None):
     """Everything that determines the run apart from the input files the runner writes."""
     from importlib.metadata import version
     exp = EXPERIMENTS[name]
@@ -95,7 +133,9 @@ def configuration(name, ncpus):
     dry_bar = exp['pressure_pa'] / 1e5
     co2 = CO2_PPM * 1e-6 * dry_bar
     n2_ar = dry_bar - O2_PA / 1e5 - co2
-    return dict(experiment=name, **exp, model=MODEL, output=OUTPUT, ncpus=ncpus, exoplasim=version('exoplasim'),
+    model = {**MODEL, **(overrides or {})}
+    return dict(experiment=name, **exp, model=model, output=OUTPUT, ncpus=ncpus, exoplasim=version('exoplasim'),
+                radmod=ensure_patched(),
                 planet=dict(radius=planet['radius_m'] / EARTH_RADIUS_M, gravity=planet['gravity_m_s2'],
                             rotationperiod=planet['rotation_period_days'], year=365.25636,
                             obliquity=planet['obliquity_deg'], eccentricity=0.016715),
@@ -202,7 +242,8 @@ def prepare_inputs(cfg, rundir: Path) -> dict:
 def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dict):
     import exoplasim as exo
     landmap, topomap, starspec, flux = inputs['landmap'], inputs['topomap'], inputs['starspec'], inputs['flux_w_m2']
-    model = exo.Model(resolution=MODEL['resolution'], layers=MODEL['layers'], ncpus=ncpus, precision=8,
+    m = cfg['model']
+    model = exo.Model(resolution=m['resolution'], layers=m['layers'], ncpus=ncpus, precision=8,
                       workdir=str(rundir / 'model'), modelname=f"moon_{cfg['experiment']}", outputtype='.nc',
                       crashtolerant=False)
     p = cfg['planet']
@@ -210,7 +251,7 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
                     rotationperiod=p['rotationperiod'], synchronous=False, year=p['year'],
                     eccentricity=p['eccentricity'], obliquity=p['obliquity'], landmap=str(landmap),
                     topomap=str(topomap), mldepth=cfg['mldepth'], seaice=True, ozone=False,
-                    soilalbedo=MODEL['land_albedo'], timestep=MODEL['timestep_min'], snapshots=None,
+                    soilalbedo=m['land_albedo'], timestep=m['timestep_min'], snapshots=None,
                     restartfile=str(restart) if restart else None)
     # The namelist holds file names in 80 characters, too few for an absolute path here: the model
     # reads the spectrum from short names in its own working folder instead.
@@ -220,10 +261,12 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
     model._edit_namelist('radmod_namelist', 'STARFILE', "'sun.dat'")
     model._edit_namelist('radmod_namelist', 'STARFILEHR', "'sun_hr.dat'")
     # A fixed seed makes runs repeatable; the generator's state then travels in every restart file.
-    model._edit_namelist('plasim_namelist', 'SEED', str(MODEL['seed']))
-    model._edit_namelist('plasim_namelist', 'NSTPW', str(MODEL['steps_per_lunar_day'] // MODEL['writes_per_lunar_day']))
+    model._edit_namelist('plasim_namelist', 'SEED', str(m['seed']))
+    model._edit_namelist('plasim_namelist', 'NSTPW', str(m['steps_per_lunar_day'] // m['writes_per_lunar_day']))
+    model._edit_namelist('radmod_namelist', 'RAYSCALE', str(m['rayleigh_scale']))
+    model._edit_namelist('radmod_namelist', 'TH2OC', str(m['h2o_continuum']))
     model.cfgpostprocessor(ftype='regular', extension='.nc', variables=OUTPUT,
-                           times=MODEL['writes_per_lunar_day'] * MODEL['lunar_days_per_year'], timeaverage=True,
+                           times=m['writes_per_lunar_day'] * m['lunar_days_per_year'], timeaverage=True,
                            interpolatetimes=False)
     return model
 
@@ -373,8 +416,9 @@ def summarise_year(path: Path) -> dict:
         output_mb=round(path.stat().st_size / 1e6, 1))
 
 
-def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: bool = False) -> int:
-    cfg = configuration(name, ncpus)
+def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: bool = False,
+        overrides: dict | None = None, start_from: str | None = None) -> int:
+    cfg = configuration(name, ncpus, overrides)
     rundir = RUNS / (folder or name)
     rundir.mkdir(parents=True, exist_ok=True)
     lock = rundir / 'run.lock'
@@ -396,9 +440,16 @@ def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: boo
     progress_path = rundir / 'progress.json'
     try:
         inputs = prepare_inputs(cfg, rundir)
+        stored = json.loads(progress_path.read_text()) if progress_path.exists() else None
+        # A branch starts from another run's restart; its identity is part of the run.
+        if start_from:
+            cfg['initial_state'] = dict(path=str(start_from), sha256=hashlib.sha256(Path(start_from).read_bytes()).hexdigest()[:16])
+        elif stored:
+            cfg['initial_state'] = stored['configuration'].get('initial_state', 'exoplasim default')
+        else:
+            cfg['initial_state'] = 'exoplasim default'
         cfg['key'] = run_key(cfg, inputs)
-        progress = (json.loads(progress_path.read_text()) if progress_path.exists()
-                    else dict(configuration=cfg, inputs=inputs, years=[]))
+        progress = stored or dict(configuration=cfg, inputs=inputs, years=[])
         if progress['configuration']['key'] != cfg['key']:
             print(f'{rundir.name}: the model changed since this run began (key '
                   f"{progress['configuration']['key']} vs {cfg['key']}); start it in a new folder.", file=sys.stderr)
@@ -406,6 +457,8 @@ def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: boo
         done = len(progress['years'])
         workdir = rundir / 'model'
         restart = workdir / f'MOST_REST.{done - 1:05d}' if done else None
+        if not done and isinstance(cfg['initial_state'], dict):
+            restart = Path(cfg['initial_state']['path'])
         if restart is not None and not restart.is_file():
             print(f'{name}: restart for year {done - 1} is missing; cannot resume.', file=sys.stderr)
             return 1
@@ -468,6 +521,9 @@ def main(argv=None) -> int:
     parser.add_argument('--stop', action='store_true')
     parser.add_argument('--folder', help='run folder under climate/gcm/runs (default: the experiment name)')
     parser.add_argument('--prune', action='store_true', help='keep only recent and every tenth year')
+    parser.add_argument('--set', action='append', default=[], metavar='KEY=VALUE',
+                        help='override a model setting, e.g. rayleigh_scale=1.5 (part of the run key)')
+    parser.add_argument('--start-from', help='restart file to branch a new run from')
     args = parser.parse_args(argv)
     if args.status:
         return status(args.folder or args.experiment)
@@ -475,7 +531,13 @@ def main(argv=None) -> int:
         return stop(args.experiment, args.folder)
     for sig in (signal.SIGTERM, signal.SIGINT, signal.SIGHUP):
         signal.signal(sig, _on_signal)
-    return run(args.experiment, args.years, args.ncpus, args.folder, args.prune)
+    overrides = {}
+    for item in args.set:
+        key, value = item.split('=', 1)
+        if key not in MODEL:
+            parser.error(f'unknown model setting {key}')
+        overrides[key] = type(MODEL[key])(value)
+    return run(args.experiment, args.years, args.ncpus, args.folder, args.prune, overrides, args.start_from)
 
 
 if __name__ == '__main__':

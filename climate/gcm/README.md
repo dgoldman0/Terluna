@@ -129,9 +129,48 @@ byte-identical to an uninterrupted run's.
   1,430 half-hour steps. Its solar day is therefore 29.8 days, 0.9% longer than
   the real 29.53, and its model year 357.5 days. The orbit follows the real year.
 
+**Radiation, checked against line-by-line and calibrated.** The line-by-line model
+(`atmosphere/radiative_convective`) was run on the GCM's own cloud-free columns:
+the same temperature and humidity profiles, the same surface albedo, and
+sunlight through the titania stack. The unmodified model was fine when cool and
+dry, with outgoing longwave within +3 ± 4 W/m². When warm and moist (310 K,
+450 kg/m² of water vapour) it went wrong in two ways:
+- it reflected too little sunlight: clear-sky albedo 0.203 against 0.248;
+- it emitted 12 ± 2 W/m² too little longwave.
+
+Together that is about 26 W/m² of spurious heating, which drove the uncalibrated
+design case past 310 K and still warming (`runs/A_uncalibrated`). Two
+adjustments bring it within about ±2 W/m² of line-by-line at both 280 and 310 K:
+- **Rayleigh multiplier (1.8).** ExoPlaSim derives a Rayleigh coefficient from
+  the spectrum, normalised to a 5772 K blackbody's ultraviolet. For the
+  titania-filtered Sun that gives 0.21, too low. A one-line patch to PlaSim's
+  `radmod.f90` (the `RAYSCALE` namelist multiplier) multiplies it by 1.8. The
+  runner applies the patch itself, and it reproduces the unmodified model
+  exactly when set to 1.
+- **Water-vapour continuum (0.004).** PlaSim's water-vapour absorptivity is fitted
+  to Earth's range of water paths. At lunar paths its continuum term over-absorbs,
+  so its coefficient `TH2OC` is lowered from 0.024 to 0.004.
+
+The trials, branched for a year from the uncalibrated run's cold (year 1) and
+warm (year 9) states, are in `runs/calibration/`:
+
+| Rayleigh multiplier, continuum | Albedo, cold: GCM / line-by-line | Albedo, warm | Longwave GCM − line-by-line, cold / warm |
+|---|---|---|---|
+| 1.0, 0.024 (unmodified) | – | 0.203 / 0.248 | +3.4 / −11.8 W/m² |
+| 1.5, 0.012 | 0.250 / 0.275 | 0.235 / 0.247 | −0.5 / −8.7 W/m² |
+| 1.9, 0.004 | 0.276 / 0.276 | 0.261 / 0.247 | +2.1 / −2.1 W/m² |
+| **1.8, 0.004 (used)** | about −0.007 | about +0.007 | about ±2 W/m² |
+
+What the calibration does not reach is the clouds. PlaSim diagnoses them from
+humidity, with Earth-tuned optical properties, and the cloud effect moves the
+balance about 7 K per 10 W/m². ExoPlaSim's global mean temperature therefore
+reads as "given PlaSim's clouds". Runs with its cloud settings at the ends of
+their plausible ranges can bracket it. A GCM with cloud physics (ROCKE-3D)
+remains the way to settle it.
+
 | Run | State |
 |---|---|
-| A, design case | Running (40 years) |
+| A, design case | Running with calibrated radiation (40 years); the uncalibrated run and one with a broken spectrum tail are kept for reference |
 | B, C | Defined in the runner, not yet run |
 | D, E | Need ExoPlaSim's ozone profile from the 1-D results, and a way to add the trace gases' forcing |
 
