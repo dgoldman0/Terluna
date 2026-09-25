@@ -32,7 +32,7 @@
     },
     {
       "topic": "climate",
-      "condition": "periodic_conservative_spatial_linear_screen; uncalibrated; clear_sky_radiation_computed_for_prescribed_columns; single_column_month_long_day_night_with_weak_temperature_gradient_exchange; gcm_boundary_files_prepared; exoplasim_installed_restartable_runner_design_case_running",
+      "condition": "periodic_conservative_spatial_linear_screen; uncalibrated; clear_sky_radiation_computed_for_prescribed_columns; single_column_month_long_day_night_with_weak_temperature_gradient_exchange; gcm_boundary_files_prepared; exoplasim_radiation_calibrated_to_line_by_line; exoplasim_design_case_settled_295k",
       "material": [
         "../climate/reference/thermal_response.csv",
         "baselines/feasibility/model.py",
@@ -50,7 +50,7 @@
         "actual terrain",
         "spatial resolution sensitivity"
       ],
-      "next_session_task": "Install the GCM the author chooses (ExoPlaSim first is the plan in climate/gcm/README.md) and run experiments A-E; take the cloud effect, day-night range and polar climate from it."
+      "next_session_task": "Finish ExoPlaSim runs B and C and bracket PlaSim's cloud effect; run the design case in ROCKE-3D on rented compute for the cloud effect of a slowly rotating Moon."
     },
     {
       "topic": "geography",

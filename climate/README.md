@@ -141,8 +141,10 @@ Climate 13, 4378; Mills and Abbot (2013), Astrophys. J. Lett. 774, L17.
 
 [gcm/](gcm/) holds the boundary files (land fraction, elevation and ocean depth
 for 25% and 35% water on common GCM grids), the planet parameters, the
-experiment plan and a restartable runner for ExoPlaSim. The design case (run A)
-is running there; its results will be reported when it has settled.
+experiment plan and a restartable runner for ExoPlaSim, whose radiation is
+calibrated against the line-by-line model. In ExoPlaSim the design case settles at
+295.5 K, with the air near the ground within about a kelvin of that from equator
+to pole. PlaSim's clouds, which cool it by only about 4 W/m², are the main caveat.
 
 ## Next step
 

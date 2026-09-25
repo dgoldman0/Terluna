@@ -168,10 +168,46 @@ reads as "given PlaSim's clouds". Runs with its cloud settings at the ends of
 their plausible ranges can bracket it. A GCM with cloud physics (ROCKE-3D)
 remains the way to settle it.
 
+### Run A, the design case
+
+Run A is 1.2 atm with 25% water, behind the titania stack, with calibrated
+radiation, for 40 years. It started from ExoPlaSim's cold state: 250 K, with the
+seas 87% frozen. The ice was gone by year 3, and the climate had settled by
+year 27, with the top-of-atmosphere balance within ±0.3 W/m². Years 30–39:
+
+| Global | |
+|---|---|
+| Surface temperature | 295.5 K (22 °C); sea surface 299.2 K |
+| Top-of-atmosphere balance | +0.2 W/m² (220.4 absorbed, 220.2 emitted) |
+| Planetary albedo | 0.286 |
+| Cloud cover | 28% |
+| Precipitation | 3.3 mm/day |
+| Water vapour | 198 kg/m² |
+| Sea ice | none |
+
+- **A warm, even world.** Air near the ground is 295 ± 1 K from the equator to
+  the poles, over land and sea. The poles see only grazing sunlight, yet they are
+  as warm as the equator: a slowly turning Moon's circulation spans the globe, and
+  its heavy air carries heat efficiently. The single column put 80° land at
+  276–283 K. It could exchange heat only through its free atmosphere, not
+  through this deep mixing.
+- **The month-long day is mild on land.** At a given place, 3-day means of the
+  air near the ground swing about 10 K at the equator and 12–13 K at 60°. The
+  extremes anywhere are 288–307 K (15–34 °C). The sea runs a few kelvin warmer
+  than the land.
+- **Rain follows the equator.** It is 5.8 mm/day there and 0.1–0.2 mm/day at
+  the poles; cloud cover falls from 36% to 10%.
+- **Clouds are the weak point.** Against the 1-D balance temperatures, this
+  climate implies that PlaSim's clouds cool the Moon by only about −4 W/m² net.
+  With Earth-like clouds (−20 W/m²) the 1-D balance would put it near 285 K. How
+  much a slowly rotating Moon's clouds cool it is the question for a GCM with
+  cloud physics.
+
 | Run | State |
 |---|---|
-| A, design case | Running with calibrated radiation (40 years); the uncalibrated run and one with a broken spectrum tail are kept for reference |
-| B, C | Defined in the runner, not yet run |
+| A, design case | Done (40 years, above). The uncalibrated run and one with a broken spectrum tail are kept for reference |
+| B, 35% water | Running |
+| C, 1.0 atm | Next |
 | D, E | Need ExoPlaSim's ozone profile from the 1-D results, and a way to add the trace gases' forcing |
 
 ## First experiments
