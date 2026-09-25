@@ -16,7 +16,7 @@ counterpart. Equations, data, tests and limits are in [METHODS.md](METHODS.md).
 | [run.py](run.py) | Named sweeps, written to `results/` as a data product with schema, hashes and evidence statement |
 | [analysis.py](analysis.py) | Balance temperatures for stated cloud effects, runaway limits and sensitivities from the sweep table |
 | [ck.py](ck.py), [validate_ck.py](validate_ck.py) | Correlated-k thermal radiation (16 bands × 16 g-points) built from the same spectroscopy, with ozone; its line-by-line check writes `results/ck_validation.json` |
-| [trace_gases.py](trace_gases.py) | Forcing of inert fluorinated trace gases (SF6, CF4, NF3) on the Earth control and the Moon, with band saturation; writes `results/trace_gases.json` |
+| [trace_gases.py](trace_gases.py) | Forcing of inert fluorinated trace gases (SF6, CF4, NF3) on the Earth control and the Moon from measured cross-sections; writes `results/trace_gases.json` |
 | [validation.json](validation.json) | Cross-code (PyRADS), Monte Carlo and convergence records |
 | [inputs.json](inputs.json), [fetch_inputs.py](fetch_inputs.py) | The external spectroscopic inputs (about 176 MB), with URLs, sizes, hashes and credits |
 
@@ -141,38 +141,59 @@ and `results/ck_validation.json`:
   frequent collisions it returns the equilibrium fluxes (within 10⁻⁴ K/day);
   at 0.3 Pa on the Moon it cuts the cooling about four-fold.
 
-## Trace greenhouse gases (2026-09-24)
+## Trace greenhouse gases (2026-09-25)
 
 [trace_gases.py](trace_gases.py) asks how much warming inert, chlorine- and
-bromine-free fluorinated gases could add. Each gas is modelled as a well-mixed
-absorber, grey across its strongest band, and its forcing is computed line by
-line on columns at 288 K. The IPCC AR6 radiative efficiency fixes each band's
-mean cross-section through the Earth control. All-sky values assume the
-all-sky adjusted forcing is 0.6–0.9 of the clear-sky instantaneous forcing.
-Results are in `results/trace_gases.json`.
+bromine-free fluorinated gases could add. Their forcing is computed line by line
+on columns at 288 K from measured infrared cross-sections:
+- SF6 and NF3 from the PNNL database (Sharpe et al. 2004), at 278–323 K, with
+  every band from 560–600 cm⁻¹ up;
+- CF4's strong band (1255–1290 cm⁻¹) from NCAR (Massie et al. 1991), at
+  203–293 K.
 
-| Gas (band) | Earth, W/m² per ppb | Moon 1.2 atm, W/m² per ppb (thin limit) | Most one gas can give on the Moon (all-sky) | ppb for 2 W/m² on the Moon |
+These are the sets HITRAN serves, taken from AER's public copy for LBLRTM and
+pinned in [inputs.json](inputs.json). Each layer uses the cross-sections at its
+temperature, and the coldest set below that. Every level uses the spectra as
+measured, without adjusting for pressure (760 Torr for SF6 and NF3).
+
+All-sky values scale the clear-sky curves by the factor that brings the Earth
+control onto the IPCC AR6 radiative efficiency: 0.56 for SF6, 0.53 for NF3 and
+0.33 for CF4. The factor absorbs clouds, stratospheric adjustment and the
+overlapping gases these columns lack (N2O, CH4 and O3). CF4's factor is the
+smallest because its band lies under N2O and CH4. Results are in
+`results/trace_gases.json`, beside the earlier grey-band estimates.
+
+| Gas | Earth, W/m² per ppb | Moon 1.2 atm, W/m² per ppb (thin limit) | Moon at 1 / 10 / 100 / 1000 ppb | ppb for 2 / 5 / 10 / 20 W/m² on the Moon |
 |---|---|---|---|---|
-| SF6 (925–955 cm⁻¹) | 0.57 | 3.5 | 3.7–5.6 W/m² | 0.7–1.0 |
-| NF3 (890–920 cm⁻¹) | 0.20 | 1.3 | 4.0–6.1 W/m² | 1.9–2.4 |
-| CF4 (1270–1290 cm⁻¹) | 0.10 | 0.46 | 0.7–1.1 W/m² | not reachable |
+| SF6 | 0.57 | 3.3 | 1.4 / 3.5 / 8.5 / 17.9 W/m² | 2.3 / 24 / 150 / over 1000 |
+| NF3 | 0.20 | 1.3 | 1.1 / 5.1 / 12.7 / 24.1 W/m² | 2.0 / 9.4 / 49 / 450 |
+| CF4 | 0.10 | 0.45 | 0.18 / 0.46 / 0.68 / 0.70 W/m² | not reachable |
 
-- A part per billion does five to seven times more on the Moon than on Earth,
-  because each ppb is a six-to-seven-fold thicker absorber over each square
-  metre.
-- For the same reason each band saturates within a few ppb. One gas cannot
-  supply more than about 4–6 W/m², however much is added. SF6, NF3 and CF4
-  together, in their separate bands, give roughly 8–13 W/m², about 6–10 K at
-  the Moon's sensitivity. The grey-band curve is a lower bound once a band is
-  saturated, because real bands keep absorbing weakly in their wings and hot
-  bands.
-- CF4's band sits where the Moon's deeper water-vapour column already absorbs,
-  so it is nearly useless there.
-- These gases are inert and harmless to breathe at ppb levels, and carry no
-  chlorine or bromine to destroy ozone. On Earth they last centuries to tens of
-  millennia (SF6 3,200 years, NF3 570, CF4 50,000). Behind a shield that blocks
-  the far ultraviolet that breaks them up high in the atmosphere they would
-  last longer still: a lever that is effectively permanent once pulled.
+The Moon's values are all-sky estimates.
+
+- **A part per billion does five to six times more on the Moon than on Earth.**
+  Each ppb is a six-to-seven-fold thicker absorber over each square metre. In
+  the thin limit the ratio is 5.8 for SF6 and 6.4 for NF3. For CF4 it is 4.6,
+  because the Moon's deeper water-vapour column partly covers its band.
+- **The strongest band saturates within a few ppb, but the rest keep adding.**
+  The measured spectra's wings, hot bands and weaker bands go on absorbing. At
+  1 ppm, SF6 gives 17.9 W/m² and NF3 24.1 W/m², and both are still rising. The
+  earlier grey-band model kept only each gas's strongest band, so it capped
+  every gas at 4–6 W/m². That cap was an artefact of the model.
+- **Tens of watts per square metre are within reach.** The balance runs give
+  about 1.6 W/m² per K, so 10 W/m² is roughly 6 K before feedbacks. That takes
+  about 150 ppb of SF6 or 50 ppb of NF3. The two gases' bands overlap near
+  900–950 cm⁻¹, so their forcings would not simply add; they were not computed
+  together.
+- **CF4 remains a weak lever.** Its strong band gives at most about 0.7 W/m² on
+  the Moon. The data cover only that band, so its weaker bands would add a
+  little. With N2O present, as in the photochemistry cases, it would give less.
+- **These gases are inert and long-lived.** They are harmless to breathe at ppb
+  levels and carry no chlorine or bromine to destroy ozone. On Earth they last
+  centuries to tens of millennia (SF6 3,200 years, NF3 570, CF4 50,000). Behind
+  a shield that blocks the far ultraviolet that breaks them up high in the
+  atmosphere they would last longer still: a lever that is effectively
+  permanent once pulled.
 
 ## What it is and is not
 

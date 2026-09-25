@@ -225,8 +225,10 @@ fluxes. With collisions forced to dominate it reproduces `fluxes` to 10⁻³ W/m
 - Koll D. D. B. & Cronin T. W. (2018) PNAS 115, 10293.
 - Kopparapu R. K. et al. (2013) Astrophys. J. 765, 131.
 - Manabe S. & Wetherald R. T. (1967) J. Atmos. Sci. 24, 241.
+- Massie S. T. et al. (1991) NCAR Technical Note NCAR/TN-358+STR (temperature-dependent CFC-14 (CF4) cross-sections).
 - Mlawer E. J. et al. (2012) Phil. Trans. R. Soc. A 370, 2520 (MT_CKD).
 - Forster P. et al. (2021) IPCC AR6 WG1 Chapter 7 and Supplementary Material, Table 7.SM.7 (radiative efficiencies and lifetimes of SF6, CF4, NF3).
+- Sharpe S. W. et al. (2004) Appl. Spectrosc. 58, 1452 (PNNL infrared cross-sections of SF6 and NF3).
 - Wagner W. & Pruß A. (2002) J. Phys. Chem. Ref. Data 31, 387.
 - Wagner W. et al. (2011) J. Phys. Chem. Ref. Data 40, 043103.
 - Zdunkowski W. G., Welch R. M. & Korb G. (1980) Beitr. Phys. Atmos. 53, 147.

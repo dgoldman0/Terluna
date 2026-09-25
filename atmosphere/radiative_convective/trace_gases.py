@@ -19,6 +19,22 @@ growing in proportion to the amount. Real bands have wings and hot bands that
 keep adding weakly past this point, so the grey-band curve is a lower bound for
 large amounts, and the conversion inherits the difference between AR6's all-sky
 adjusted value and this clear-sky instantaneous one (stated as a factor range).
+
+Measured bands replace the grey band where cross-sections are at hand: SF6
+and NF3 from the PNNL infrared database (Sharpe et al. 2004; 278, 298 and 323
+K, 560 or 600 to 3000 cm^-1 on this grid) and CF4's strong band from NCAR
+(Massie et al. 1991; 203-293 K, 1255-1290 cm^-1), as copied into AER's
+cross-section database for LBLRTM (inputs.json). Each layer takes the
+cross-sections interpolated to its temperature, held at the nearest measured
+set outside their range, and the gas is added well mixed at 0.01-1000 ppb.
+The Moon's curves need no conversion from optical depth, and their wings,
+hot bands and weaker bands keep adding past the grey band's saturation.
+All-sky estimates scale them by the factor that brings the Earth control's
+thin-limit clear-sky forcing onto AR6's all-sky adjusted value. That factor
+absorbs clouds, stratospheric adjustment and the overlapping gases these
+columns lack (N2O, CH4 and O3). CF4's band lies under N2O and CH4, so its
+factor is the smallest, and its lunar values hold only where those gases
+are absent.
 """
 from __future__ import annotations
 import argparse
@@ -28,7 +44,7 @@ from pathlib import Path
 import sys
 import numpy as np
 
-from atmosphere.radiative_convective import climate as cl, thermodynamics as th, optics, longwave as lw
+from atmosphere.radiative_convective import climate as cl, thermodynamics as th, optics, longwave as lw, fetch_inputs
 
 HERE = Path(__file__).resolve().parent
 # Strongest band (cm^-1) and AR6 radiative efficiency (W m^-2 ppb^-1). Lifetimes (years) from AR6 Table 7.SM.7.
@@ -39,6 +55,11 @@ GASES = {
 }
 TAUS = (1e-3, 0.01, 0.03, 0.1, 0.3, 1.0, 3.0, 10.0, 30.0, 100.0)
 CLEAR_TO_ALLSKY = (0.6, 0.9)     # plausible all-sky adjusted / clear-sky instantaneous ratio for window absorbers
+# Measured cross-section sets (HITRAN format, from AER's LBLRTM database; see inputs.json).
+MEASURED = {'SF6': ('aer_xs_SF6AT1', 'aer_xs_SF6AT2', 'aer_xs_SF6AT3'),
+            'NF3': ('aer_xs_NF3AT1', 'aer_xs_NF3AT2', 'aer_xs_NF3AT3'),
+            'CF4': tuple(f'aer_xs_F14AT{i}' for i in range(1, 7))}
+PPB = (0.01, 0.1, 0.3, 1.0, 3.0, 10.0, 30.0, 100.0, 300.0, 1000.0)
 
 
 def base_optics(scenario, ts, cfg=optics.LONGWAVE):
@@ -63,6 +84,54 @@ def forcing_curve(col, nu, tau, band):
         extra[:, inside] = t * share[:, None]
         out.append(ref - olr(col, nu, tau + extra))
     return ref, np.array(out)
+
+
+def read_cross_sections(name):
+    """One HITRAN-format set: temperature (K), wavenumbers (cm^-1) and cross-sections (cm^2 per molecule).
+    Values follow the header in fixed ten-character fields, ten to a line; anything after the stated
+    number of points (padding, a DOS end-of-file byte) is ignored."""
+    lines = fetch_inputs.path(name).read_text().splitlines()
+    head = lines[0].split()
+    nu_min, nu_max, npts, t = float(head[1]), float(head[2]), int(head[3]), float(head[4])
+    values = []
+    for line in lines[1:]:
+        values.extend(float(line[i:i + 10]) for i in range(0, len(line), 10) if line[i:i + 10].strip())
+        if len(values) >= npts:
+            break
+    if len(values) < npts:
+        raise ValueError(f'{name}: {len(values)} values for {npts} points')
+    return t, np.linspace(nu_min, nu_max, npts), np.maximum(np.array(values[:npts]), 0.0)
+
+
+def measured_tau_per_ppb(col, nu, gas):
+    """Optical depth (layers x wavenumbers) of 1 ppb of `gas`, well mixed in dry air, with each layer's
+    cross-sections interpolated linearly in temperature between the measured sets."""
+    sets = sorted((read_cross_sections(n) for n in MEASURED[gas]), key=lambda s: s[0])
+    temps = np.array([s[0] for s in sets])
+    on_grid = [np.interp(nu, s[1], s[2], left=0.0, right=0.0) for s in sets]
+    dry = col['layer_column_cm2'] * (1 - col['layer_x_h2o'])
+    tau = np.empty((dry.size, nu.size))
+    for k, t in enumerate(col['layer_t_k']):
+        t = min(max(float(t), temps[0]), temps[-1])
+        j = min(int(np.searchsorted(temps, t)), temps.size - 1)
+        i = max(j - 1, 0)
+        w = 0.0 if i == j else (t - temps[i]) / (temps[j] - temps[i])
+        tau[k] = ((1 - w) * on_grid[i] + w * on_grid[j]) * dry[k] * 1e-9
+    return tau
+
+
+def measured_forcing(col, nu, tau, gas):
+    """Clear-sky OLR drop (W/m^2) at each of PPB for the measured bands of `gas`."""
+    per_ppb = measured_tau_per_ppb(col, nu, gas)
+    ref = olr(col, nu, tau)
+    return ref, np.array([ref - olr(col, nu, tau + x * per_ppb) for x in PPB])
+
+
+def _ppb_at(curve, target):
+    """Mixing ratio (ppb) at which a measured forcing curve reaches `target` W/m^2, or None beyond 1000 ppb."""
+    if curve[-1] < target:
+        return None
+    return float(np.exp(np.interp(target, curve, np.log(PPB))))
 
 
 def main(argv=None) -> int:
@@ -107,6 +176,23 @@ def main(argv=None) -> int:
         result['gases'][gas] = entry
         print(gas, {n: (round(v['thin_limit_allsky_w_m2_per_ppb']['0.9'], 3), round(v['saturated_band_clear_sky_w_m2'], 2),
                         v['ppb_for_allsky_forcing']['0.9']) for n, v in entry['columns'].items()}, flush=True)
+    result['measured'] = dict(mixing_ratios_ppb=list(PPB), gases={})
+    for gas in MEASURED:
+        curves = {name: measured_forcing(col, nu, tau, gas)[1] for name, (col, nu, tau) in columns.items()}
+        # AR6's all-sky adjusted efficiency over this model's clear-sky Earth value converts every curve.
+        ratio = GASES[gas]['re_ar6'] / float(curves['earth_1atm'][0] / PPB[0])
+        entry = dict(sets_k=sorted(read_cross_sections(n)[0] for n in MEASURED[gas]), ar6_over_clear_sky_earth=ratio,
+                     columns={})
+        for name, curve in curves.items():
+            entry['columns'][name] = dict(
+                clear_sky_forcing_w_m2=curve.round(4).tolist(),
+                thin_limit_clear_sky_w_m2_per_ppb=float(curve[0] / PPB[0]),
+                allsky_forcing_w_m2=(ratio * curve).round(4).tolist(),
+                ppb_for_allsky_forcing={f'{f:g}': _ppb_at(ratio * curve, f) for f in (1, 2, 5, 10, 20)})
+        result['measured']['gases'][gas] = entry
+        print(gas, 'measured', {n: (round(v['thin_limit_clear_sky_w_m2_per_ppb'], 3), v['clear_sky_forcing_w_m2'][-1])
+                                for n, v in entry['columns'].items()},
+              'AR6/clear-sky on Earth', round(ratio, 2), flush=True)
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps(result, indent=1) + '\n')
     return 0

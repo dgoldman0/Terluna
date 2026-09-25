@@ -315,7 +315,103 @@
       "bytes": 35998,
       "credit": "HITRAN total internal partition sums (TIPS; Gamache et al. 2021, JQSRT 271, 107713) as distributed by hitran.org.",
       "use": "partition sum for HITRAN global isotopologue 20"
+    },
+    {
+      "name": "aer_xs_SF6AT1",
+      "url": "https://raw.githubusercontent.com/AER-RC/cross-sections/83742aedff2b3c5392fab5e36f291009bb822dd0/xs/SF6AT1",
+      "sha256": "4c0be3570fe47ac75c0d84a0a64a45ebea72dc7f1f9d2fefd1676784ecb58294",
+      "bytes": 995658,
+      "credit": "SF6 infrared absorption cross-sections, 560-6500 cm-1, 323.1 K at 760 Torr (N2): PNNL quantitative infrared database (Sharpe et al. 2004, Appl. Spectrosc. 58, 1452), the sets HITRAN holds, as copied into AER's cross-section database for LBLRTM (github.com/AER-RC/cross-sections, commit 83742ae). Cite Sharpe et al. and HITRAN.",
+      "use": "SF6 absorption cross-sections for trace_gases.py (measured bands)"
+    },
+    {
+      "name": "aer_xs_SF6AT2",
+      "url": "https://raw.githubusercontent.com/AER-RC/cross-sections/83742aedff2b3c5392fab5e36f291009bb822dd0/xs/SF6AT2",
+      "sha256": "d176e051ae98100a9d05355690a4cd7e005bb11c9f69085a196563dec90591e3",
+      "bytes": 995658,
+      "credit": "SF6 infrared absorption cross-sections, 560-6500 cm-1, 298.1 K at 760 Torr (N2): PNNL quantitative infrared database (Sharpe et al. 2004, Appl. Spectrosc. 58, 1452), the sets HITRAN holds, as copied into AER's cross-section database for LBLRTM (github.com/AER-RC/cross-sections, commit 83742ae). Cite Sharpe et al. and HITRAN.",
+      "use": "SF6 absorption cross-sections for trace_gases.py (measured bands)"
+    },
+    {
+      "name": "aer_xs_SF6AT3",
+      "url": "https://raw.githubusercontent.com/AER-RC/cross-sections/83742aedff2b3c5392fab5e36f291009bb822dd0/xs/SF6AT3",
+      "sha256": "82937de574c275be0133f77f59925c3caf0d59343608eaf6302cf8480bc78f1c",
+      "bytes": 995658,
+      "credit": "SF6 infrared absorption cross-sections, 560-6500 cm-1, 278.1 K at 760 Torr (N2): PNNL quantitative infrared database (Sharpe et al. 2004, Appl. Spectrosc. 58, 1452), the sets HITRAN holds, as copied into AER's cross-section database for LBLRTM (github.com/AER-RC/cross-sections, commit 83742ae). Cite Sharpe et al. and HITRAN.",
+      "use": "SF6 absorption cross-sections for trace_gases.py (measured bands)"
+    },
+    {
+      "name": "aer_xs_NF3AT1",
+      "url": "https://raw.githubusercontent.com/AER-RC/cross-sections/83742aedff2b3c5392fab5e36f291009bb822dd0/xs/NF3AT1",
+      "sha256": "a0e9c5a7722407d1269702bc951620bddac4c0b01ab6ffe0f97476494d4fed17",
+      "bytes": 988992,
+      "credit": "NF3 infrared absorption cross-sections, 600-6500 cm-1, 323.1 K at 760 Torr (N2): PNNL quantitative infrared database (Sharpe et al. 2004, Appl. Spectrosc. 58, 1452), the sets HITRAN holds, as copied into AER's cross-section database for LBLRTM (github.com/AER-RC/cross-sections, commit 83742ae). Cite Sharpe et al. and HITRAN.",
+      "use": "NF3 absorption cross-sections for trace_gases.py (measured bands)"
+    },
+    {
+      "name": "aer_xs_NF3AT2",
+      "url": "https://raw.githubusercontent.com/AER-RC/cross-sections/83742aedff2b3c5392fab5e36f291009bb822dd0/xs/NF3AT2",
+      "sha256": "6fc5537fa5608b14080a56c70461684c51a88cb3f2185bee74ff21fd601340be",
+      "bytes": 988992,
+      "credit": "NF3 infrared absorption cross-sections, 600-6500 cm-1, 298.1 K at 760 Torr (N2): PNNL quantitative infrared database (Sharpe et al. 2004, Appl. Spectrosc. 58, 1452), the sets HITRAN holds, as copied into AER's cross-section database for LBLRTM (github.com/AER-RC/cross-sections, commit 83742ae). Cite Sharpe et al. and HITRAN.",
+      "use": "NF3 absorption cross-sections for trace_gases.py (measured bands)"
+    },
+    {
+      "name": "aer_xs_NF3AT3",
+      "url": "https://raw.githubusercontent.com/AER-RC/cross-sections/83742aedff2b3c5392fab5e36f291009bb822dd0/xs/NF3AT3",
+      "sha256": "7e6fb13e7592e572ab7574eb3515bb9670e351e6f5f322ee62062da0d85ba6eb",
+      "bytes": 988992,
+      "credit": "NF3 infrared absorption cross-sections, 600-6500 cm-1, 278.1 K at 760 Torr (N2): PNNL quantitative infrared database (Sharpe et al. 2004, Appl. Spectrosc. 58, 1452), the sets HITRAN holds, as copied into AER's cross-section database for LBLRTM (github.com/AER-RC/cross-sections, commit 83742ae). Cite Sharpe et al. and HITRAN.",
+      "use": "NF3 absorption cross-sections for trace_gases.py (measured bands)"
+    },
+    {
+      "name": "aer_xs_F14AT1",
+      "url": "https://raw.githubusercontent.com/AER-RC/cross-sections/83742aedff2b3c5392fab5e36f291009bb822dd0/xs/F14AT1",
+      "sha256": "9bfdeb6fbe874d87977f397db344818fe4263ab0ddd27b78e4f826729a886d21",
+      "bytes": 23923,
+      "credit": "CF4 (CFC-14) nu3-band absorption cross-sections, 1255-1290 cm-1, 293 K: Massie et al. (1991), NCAR Technical Note NCAR/TN-358+STR, as held in AER's cross-section database for LBLRTM (github.com/AER-RC/cross-sections, commit 83742ae). Cite Massie et al.",
+      "use": "CF4 absorption cross-sections for trace_gases.py (measured bands)"
+    },
+    {
+      "name": "aer_xs_F14AT2",
+      "url": "https://raw.githubusercontent.com/AER-RC/cross-sections/83742aedff2b3c5392fab5e36f291009bb822dd0/xs/F14AT2",
+      "sha256": "9cbc4ce63b628f0e4f8558cc544426804a548ce13eace86a26340bdc9d46f629",
+      "bytes": 23923,
+      "credit": "CF4 (CFC-14) nu3-band absorption cross-sections, 1255-1290 cm-1, 273 K: Massie et al. (1991), NCAR Technical Note NCAR/TN-358+STR, as held in AER's cross-section database for LBLRTM (github.com/AER-RC/cross-sections, commit 83742ae). Cite Massie et al.",
+      "use": "CF4 absorption cross-sections for trace_gases.py (measured bands)"
+    },
+    {
+      "name": "aer_xs_F14AT3",
+      "url": "https://raw.githubusercontent.com/AER-RC/cross-sections/83742aedff2b3c5392fab5e36f291009bb822dd0/xs/F14AT3",
+      "sha256": "72a26f8818824fb46494d1296c0ff586e1e37460349f9bb666d9d94e311d6555",
+      "bytes": 23923,
+      "credit": "CF4 (CFC-14) nu3-band absorption cross-sections, 1255-1290 cm-1, 253 K: Massie et al. (1991), NCAR Technical Note NCAR/TN-358+STR, as held in AER's cross-section database for LBLRTM (github.com/AER-RC/cross-sections, commit 83742ae). Cite Massie et al.",
+      "use": "CF4 absorption cross-sections for trace_gases.py (measured bands)"
+    },
+    {
+      "name": "aer_xs_F14AT4",
+      "url": "https://raw.githubusercontent.com/AER-RC/cross-sections/83742aedff2b3c5392fab5e36f291009bb822dd0/xs/F14AT4",
+      "sha256": "50701646bd74977c029293f66cb8afba00202fab70a5e0166b7424868d845c69",
+      "bytes": 23923,
+      "credit": "CF4 (CFC-14) nu3-band absorption cross-sections, 1255-1290 cm-1, 233 K: Massie et al. (1991), NCAR Technical Note NCAR/TN-358+STR, as held in AER's cross-section database for LBLRTM (github.com/AER-RC/cross-sections, commit 83742ae). Cite Massie et al.",
+      "use": "CF4 absorption cross-sections for trace_gases.py (measured bands)"
+    },
+    {
+      "name": "aer_xs_F14AT5",
+      "url": "https://raw.githubusercontent.com/AER-RC/cross-sections/83742aedff2b3c5392fab5e36f291009bb822dd0/xs/F14AT5",
+      "sha256": "d00ebc2ea60e8f817fbc89e4769603792c360b8032889f7d74a56d8adc53f804",
+      "bytes": 23923,
+      "credit": "CF4 (CFC-14) nu3-band absorption cross-sections, 1255-1290 cm-1, 213 K: Massie et al. (1991), NCAR Technical Note NCAR/TN-358+STR, as held in AER's cross-section database for LBLRTM (github.com/AER-RC/cross-sections, commit 83742ae). Cite Massie et al.",
+      "use": "CF4 absorption cross-sections for trace_gases.py (measured bands)"
+    },
+    {
+      "name": "aer_xs_F14AT6",
+      "url": "https://raw.githubusercontent.com/AER-RC/cross-sections/83742aedff2b3c5392fab5e36f291009bb822dd0/xs/F14AT6",
+      "sha256": "1b0c8ba547b4fdc2509ab13fde88ada7b829c6abdb3b8f9d24da65d2c647c0ae",
+      "bytes": 23926,
+      "credit": "CF4 (CFC-14) nu3-band absorption cross-sections, 1255-1290 cm-1, 203 K: Massie et al. (1991), NCAR Technical Note NCAR/TN-358+STR, as held in AER's cross-section database for LBLRTM (github.com/AER-RC/cross-sections, commit 83742ae). Cite Massie et al.",
+      "use": "CF4 absorption cross-sections for trace_gases.py (measured bands)"
     }
   ],
-  "publication_note": "Retrieval and checksum verification are separate from reading the underlying publications. HITRAN and AER terms were read on retrieval: both permit research use with credit; neither dataset is redistributed by this repository. A hash mismatch means the upstream bytes changed (for example a new HITRAN edition) and must be reviewed, never silently accepted."
+  "publication_note": "Retrieval and checksum verification are separate from reading the underlying publications. HITRAN and AER terms were read on retrieval: both permit research use with credit; neither dataset is redistributed by this repository. A hash mismatch means the upstream bytes changed (for example a new HITRAN edition) and must be reviewed, never silently accepted. AER's cross-section repository states no licence of its own; the HITRAN/PNNL and NCAR data it copies permit research use with credit, and none of it is redistributed here."
 }

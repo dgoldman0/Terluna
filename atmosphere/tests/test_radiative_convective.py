@@ -280,5 +280,34 @@ class NodeTableTests(unittest.TestCase):
             self.assertAlmostEqual(table.sum() / direct.sum(), 1.0, delta=0.005)
 
 
+
+@NEEDS_INPUTS
+class MeasuredCrossSectionTests(unittest.TestCase):
+    def test_sets_read_whole_with_expected_band_strengths(self):
+        from atmosphere.radiative_convective import trace_gases as tg
+        # Integrated absorption (cm/molecule) near the published values, and steady with temperature.
+        expected = {'SF6': (2.0e-16, 2.3e-16), 'NF3': (6.8e-17, 7.6e-17), 'CF4': (1.4e-16, 1.8e-16)}
+        for gas, names in tg.MEASURED.items():
+            for name in names:
+                t, nu, x = tg.read_cross_sections(name)
+                self.assertEqual(nu.size, x.size)
+                self.assertTrue(np.all(x >= 0.0))
+                lo, hi = expected[gas]
+                self.assertTrue(lo < np.trapezoid(x, nu) < hi, (name, t))
+
+    def test_layer_cross_sections_interpolate_in_temperature(self):
+        from atmosphere.radiative_convective import trace_gases as tg
+        sets = sorted((tg.read_cross_sections(n) for n in tg.MEASURED['CF4']), key=lambda s: s[0])
+        (t0, nu0, x0), (t1, _, x1) = sets[2], sets[3]
+        nu = nu0[::7]
+        col = dict(layer_t_k=np.array([t0, 0.5 * (t0 + t1), t1, 100.0]),
+                   layer_column_cm2=np.array([2e24, 2e24, 4e24, 1e24]), layer_x_h2o=np.array([0.0, 0.0, 0.5, 0.0]))
+        tau = tg.measured_tau_per_ppb(col, nu, 'CF4')
+        per = lambda x: np.interp(nu, nu0, x) * 1e-9
+        np.testing.assert_allclose(tau[0], per(x0) * 2e24, rtol=1e-12)
+        np.testing.assert_allclose(tau[1], 0.5 * (per(x0) + per(x1)) * 2e24, rtol=1e-12)
+        np.testing.assert_allclose(tau[2], per(x1) * 2e24, rtol=1e-12)       # half the molecules are water
+        np.testing.assert_allclose(tau[3], per(sets[0][2]) * 1e24, rtol=1e-12)   # colder than any set: the coldest
+
 if __name__ == '__main__':
     unittest.main()
