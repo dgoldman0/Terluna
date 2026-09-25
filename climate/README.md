@@ -142,12 +142,13 @@ Climate 13, 4378; Mills and Abbot (2013), Astrophys. J. Lett. 774, L17.
 [gcm/](gcm/) holds the boundary files (land fraction, elevation and ocean depth
 for 25% and 35% water on common GCM grids), the planet parameters, the
 experiment plan and a restartable runner for ExoPlaSim, whose radiation is
-calibrated against the line-by-line model. In ExoPlaSim the design case settles at
-295.5 K, with the air near the ground within about a kelvin of that from equator
-to pole. Correcting PlaSim's Earth-fitted cloud water puts it between 292 and
-298 K, near 298 K with Earth's water path, the best single estimate. Cloud
-amount, which PlaSim diagnoses and which a slowly turning Moon may raise with a
-thick deck under the Sun, remains the main caveat.
+calibrated against the line-by-line model. With PlaSim's own cloud scheme the
+design case settled at 295.5 K. Correcting two Earth-unit slips in it, the
+clouds' water and the convective cloud cover, puts it near 299.6 K (26.5 °C),
+with the air near the ground within about a kelvin of that from equator to pole
+and no frost anywhere. Published slow-rotator models suggest no thick day-side
+cloud deck at this sunlight, but the absolute cloud amount remains the main
+caveat.
 
 ## Next step
 

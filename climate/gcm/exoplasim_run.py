@@ -3,8 +3,8 @@
     climate/gcm/.venv/bin/python -m climate.gcm.exoplasim_run A --years 40          # run or resume A
     climate/gcm/.venv/bin/python -m climate.gcm.exoplasim_run A --status            # progress so far
     climate/gcm/.venv/bin/python -m climate.gcm.exoplasim_run A --stop              # stop it cleanly
-    climate/gcm/.venv/bin/python -m climate.gcm.exoplasim_run A --years 20 --folder A_earth_path_clouds \
-        --set cloud_water=earth_path --start-from climate/gcm/runs/A/model/MOST_REST.00039   # a branch
+    climate/gcm/.venv/bin/python -m climate.gcm.exoplasim_run A --years 15 --folder A_full_column_clouds \
+        --set cloud_water=full_column --start-from climate/gcm/runs/A/model/MOST_REST.00039   # a branch
 
 Run from the repository root with the GCM environment (climate/gcm/.venv, which holds ExoPlaSim and
 MPI-built executables). Each experiment lives in climate/gcm/runs/<name>/ (ignored by Git; on the
@@ -83,8 +83,15 @@ MODEL = dict(resolution='T21', layers=10, timestep_min=30.0, land_albedo=0.2, st
              # and PlaSim's water-vapour continuum coefficient. 1.0 and 0.024 reproduce the unmodified
              # model, which absorbed about 14 W/m2 too much sunlight and emitted 12 W/m2 too little when warm.
              rayleigh_scale=1.8, h2o_continuum=0.004,
-             # How the radiation sees cloud water (CLOUD_WATER below); 'plasim' is ExoPlaSim unmodified.
-             cloud_water='plasim',
+             # How the radiation sees cloud water (CLOUD_WATER below). Runs A and B used 'plasim', ExoPlaSim
+             # unmodified; 'earth_path' corrects its Earth-fitted formula for the Moon's gravity.
+             cloud_water='earth_path',
+             # Seconds per day in PlaSim's convective cloud cover, 0.245 + 0.125 ln(convective rain in mm per
+             # day), capped at 0.8 (Slingo's fit to Earth). PlaSim divides the rain by its own solar day, 29.8
+             # Earth days on the Moon, so it reads the rain about 30 times too heavy and raises the cover by
+             # 0.42, up to the cap. 86400 counts it per Earth day, as fitted; 0 keeps PlaSim's behaviour (runs
+             # A and B and the cloud-water bracket).
+             convective_day_s=86400.0,
              # PlaSim's clear-sky diagnostic (1 on, 0 off): the radiation computed a second time without
              # clouds, for the clouds' radiative effect. It changes no prognostic field.
              clear_sky=1)
@@ -97,8 +104,8 @@ MODEL = dict(resolution='T21', layers=10, timestep_min=30.0, land_albedo=0.2, st
 #   plasim       the formula as PlaSim has it;
 #   earth_path   heights and precipitable water counted as on Earth (the formula in pressure terms):
 #                each cloud holds the water path it would hold at the same pressures on Earth;
-#   full_column  the same mixing ratio kept over the Moon's column, six times heavier than Earth's:
-#                six times Earth's water path, the upper bound.
+#   full_column  the same mixing ratio kept over the Moon's column, which holds six times Earth's mass
+#                per pascal of pressure: six times Earth's water path, the upper bound.
 CLOUD_WATER = ('plasim', 'earth_path', 'full_column')
 # Kept in each year's 3-day means (ExoPlaSim writes about 100 fields by default, 100 MB a year).
 OUTPUT = ['ta', 'ua', 'va', 'hus', 'cl',
@@ -161,8 +168,22 @@ RAINMOD_EDITS = [
     ("      zzh(:)=700.*ALOG(1.+dqvi(:))\n", "      zzh(:)=700.*ALOG(1.+dqvi(:)*(ga/zgc))\n"),
     ("        dql(:,jlev)=MAX(dql(:,jlev),1.E-9)\n", "        dql(:,jlev)=MAX(cwscale*dql(:,jlev),1.E-9)\n"),
 ]
-PATCHES = {'radmod.f90': ('Terluna: calibration multiplier', RADMOD_EDITS),
-           'rainmod.f90': ('Terluna: gravity for the heights below', RAINMOD_EDITS)}
+# Convective cloud cover (rainmod.f90, mkclouds): CONVDAY, the seconds per day in which the cover formula
+# counts rain (0, the default, keeps the model's solar day).
+CONVECTIVE_EDITS = [
+    ("      real :: cwscale   = 1. ! Terluna: multiplier on the diagnosed cloud water\n",
+     "      real :: cwscale   = 1. ! Terluna: multiplier on the diagnosed cloud water\n"
+     "      real :: convday   = 0. ! Terluna: seconds per day in the convective cloud formula (0: solar day)\n"),
+    ("rbeta,rcritmod,rcritslope,cwgref,cwscale", "rbeta,rcritmod,rcritslope,cwgref,cwscale,convday"),
+    ("      call mpbcr(cwscale)\n", "      call mpbcr(cwscale)\n      call mpbcr(convday)\n"),
+    ("      zrfac = solar_day * 1000.0 ! convert m/s into mm/day\n",
+     "      zrfac = solar_day * 1000.0 ! convert m/s into mm/day\n"
+     "      if(convday > 0.) zrfac = convday * 1000.0 ! Terluna: per convday seconds\n"),
+]
+# (file, marker, edits) in the order applied; a marker appears only in the text its patch adds.
+PATCHES = [('radmod.f90', 'Terluna: calibration multiplier', RADMOD_EDITS),
+           ('rainmod.f90', 'Terluna: gravity for the heights below', RAINMOD_EDITS),
+           ('rainmod.f90', 'Terluna: seconds per day in the convective cloud formula', CONVECTIVE_EDITS)]
 
 
 def ensure_patched() -> dict:
@@ -171,7 +192,7 @@ def ensure_patched() -> dict:
     import exoplasim
     src = Path(exoplasim.__file__).parent / 'plasim' / 'src'
     hashes = {}
-    for name, (marker, edits) in PATCHES.items():
+    for name, marker, edits in PATCHES:
         path = src / name
         text = path.read_text()
         if marker not in text:
@@ -202,6 +223,8 @@ def configuration(name, ncpus, overrides=None):
     n2_ar = dry_bar - O2_PA / 1e5 - co2
     model = {**MODEL, **(overrides or {})}
     cloud_water_namelist(model['cloud_water'], planet['gravity_m_s2'])        # refuses an unknown choice
+    if model['convective_day_s'] < 0:
+        raise ValueError('convective_day_s must be 0 (the solar day) or a positive number of seconds')
     return dict(experiment=name, **exp, model=model, output=output_variables(model), ncpus=ncpus,
                 exoplasim=version('exoplasim'), source=ensure_patched(),
                 planet=dict(radius=planet['radius_m'] / EARTH_RADIUS_M, gravity=planet['gravity_m_s2'],
@@ -337,6 +360,7 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
     model._edit_namelist('rainmod_namelist', 'CWGREF', str(gref))
     model._edit_namelist('rainmod_namelist', 'CWSCALE', str(scale))
     model._edit_namelist('plasim_namelist', 'NDIAGCF', str(m['clear_sky']))
+    model._edit_namelist('rainmod_namelist', 'CONVDAY', str(float(m['convective_day_s'])))
     from exoplasim import pyburn
     for code, (name, long_name) in CLEAR_SKY.items():
         pyburn.ilibrary[str(code)] = [name, long_name, 'W m-2']

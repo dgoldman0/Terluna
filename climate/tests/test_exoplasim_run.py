@@ -40,6 +40,17 @@ class RunnerTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             er.cloud_water_namelist('thick', 1.62)
 
+    def test_patches_apply_in_order_with_distinct_markers(self):
+        markers = [marker for _, marker, _ in er.PATCHES]
+        self.assertEqual(len(markers), len(set(markers)))
+        # The convective patch edits text the cloud-water patch wrote, so it must come after it.
+        order = [marker for name, marker, _ in er.PATCHES if name == 'rainmod.f90']
+        self.assertEqual(order[0], 'Terluna: gravity for the heights below')
+
+    def test_default_settings_are_the_corrected_physics(self):
+        self.assertEqual(er.MODEL['cloud_water'], 'earth_path')
+        self.assertEqual(er.MODEL['convective_day_s'], 86400.0)
+
     def test_clear_sky_output(self):
         off = er.output_variables({**er.MODEL, 'clear_sky': 0})
         on = er.output_variables({**er.MODEL, 'clear_sky': 1})
@@ -49,7 +60,7 @@ class RunnerTests(unittest.TestCase):
 
     def test_patch_markers_mark_patched_text_only(self):
         # A marker must appear in what a patch adds and never in what it replaces, or it would apply twice.
-        for marker, edits in er.PATCHES.values():
+        for _, marker, edits in er.PATCHES:
             self.assertTrue(any(marker in new for _, new in edits))
             self.assertFalse(any(marker in old for old, _ in edits))
 

@@ -30,9 +30,10 @@ remain open, and each needs a circulation:
    shield and near 290 K behind a 200-nm edge that lets ozone form
    (`atmosphere/middle_atmosphere`, with its self-consistent stratosphere). The
    cloud effect of a slowly rotating world with a month-long day may differ
-   strongly from Earth's. Slow-rotator GCM studies find thick dayside clouds.
-2. **The month-long day and night.** The lunar atmosphere holds six times
-   Earth's mass per square metre. Its heat capacity equals an 18 m layer of
+   strongly from Earth's. Slow-rotator GCM studies find thick dayside clouds,
+   but at higher sunlight or with tidal locking (see "Cloud amount" below).
+2. **The month-long day and night.** At 1.2 atm the lunar atmosphere holds 7.3
+   times Earth's mass per square metre (six times per pascal of pressure). Its heat capacity equals an 18 m layer of
    water at 1.2 atm, which buffers the 15-day night. How much land and sea
    temperatures swing, and whether dayside convection and nightside inversions
    dominate, depends on the day–night circulation.
@@ -267,8 +268,8 @@ water paths weighted by cloud cover, from 3-day means):
 
 The upper layers hold most of the model's cloud cover, together about a quarter
 of the sky, and in PlaSim as it is no water: they neither reflect sunlight nor
-trap infrared. The lowest layers, in a column six times heavier than Earth's,
-come out wetter than Earth's clouds.
+trap infrared. The lowest layers, in a column with six times Earth's mass per
+pascal of pressure, come out wetter than Earth's clouds.
 
 A patch to PlaSim's `rainmod.f90`, applied by the runner like the radiation
 patch, adds two settings to the formula: the gravity at which it counts heights
@@ -278,12 +279,13 @@ and precipitable water, and a multiplier on the water. The runner's
 - `earth_path`: heights and precipitable water counted as on Earth, which puts
   the formula in pressure terms, and each cloud holding the water path it would
   hold at the same pressures on Earth;
-- `full_column`: the same mixing ratio over the Moon's column, six times Earth's
-  water path. This is the upper bound: the deeper clouds rain none of it out.
+- `full_column`: the same mixing ratio over the Moon's column, which holds six
+  times Earth's mass per pascal: six times Earth's water path. This is the upper bound: the deeper clouds rain none of it out.
 
-With its defaults the patch changes nothing: year 39 of run A, rerun with the
+With `plasim` the patch changes nothing: year 39 of run A, rerun with the
 patched build and the clear-sky diagnostic, came out byte-identical
-(`runs/A_patch_check`). Runs A and B predate these settings, so the runner now
+(`runs/A_patch_check`). New runs default to `earth_path` and to the
+convective fix below. Runs A and B predate these settings, so the runner now
 refuses to extend them in place; a continuation branches from their last
 restart with `--start-from`.
 
@@ -322,24 +324,92 @@ against run A (A's cloud effect is from its rerun year 39; "settles near" is
   to the poles, sunlit and dark 3-day means over equatorial land differ by about
   3 K, and there is no sea ice. Across the bracket the global temperature moves
   about 0.8 K per W/m² of cloud effect.
-- **Cloud amount is not bracketed, and it is the larger uncertainty.** Cover
-  stays at 22–28%, against Earth's roughly two-thirds. PlaSim diagnoses it from
-  humidity and convective rain with Earth-fitted formulas, and it builds no thick
-  deck under the Sun. Yet comprehensive GCMs give slowly rotating planets such a
-  deck (Yang et al. 2014, CAM; Way et al. 2018, ROCKE-3D), and the Moon's
-  circulation is in that regime. Rotation rate times radius sets how far a
-  circulation spreads heat, and by that measure the Moon matches an Earth-sized
-  planet turning once in about 100 days; run A's weak temperature gradients show
-  it. A deck would cool the Moon further, by an amount this model cannot give.
-  The ways to constrain it, cheapest first: published slow-rotator cloud results
-  imposed on ExoPlaSim's cloud cover; a cloud-resolving model at lunar gravity
-  for the sunlit side's convection; ROCKE-3D on rented compute.
+- **Cloud amount is not bracketed.** Cover stays at 22–28%, against Earth's
+  roughly two-thirds. PlaSim diagnoses it from humidity and convective rain with
+  Earth-fitted formulas, and it builds no thick deck under the Sun. See "Cloud
+  amount" below for what published models imply.
+
+### Convective cloud: a second Earth-unit slip
+
+PlaSim's convective cloud cover is Slingo's fit to Earth, 0.245 + 0.125 ln P
+with P the convective rain in mm per day, capped at 0.8. PlaSim divides the rain
+by its own solar day, which on the Moon is 29.8 Earth days (2,575,191 s), so the
+formula reads the rain about 30 times too heavy and gives 0.42 more cover, up to
+the cap. A second patch to `rainmod.f90` adds `CONVDAY`, the day length in which
+the formula counts rain. The runner's `convective_day_s` sets it: 86400 by
+default (an Earth day, as fitted), 0 for PlaSim's behaviour. With 0 the patched
+build reproduces year 14 of `A_earth_path_clouds` byte for byte, and with 86400
+it reproduces the corrected run's first year (`runs/regression_convday_off` and
+`_on`).
+
+`runs/A_corrected_clouds` branches from `A_earth_path_clouds` at year 14 with
+both corrections and runs 15 years. Years 10–14:
+
+| | Earth's water path | + rain counted per Earth day |
+|---|---|---|
+| Surface temperature | 297.8 K, settling near 298.0 | 299.6 K, settling near 299.6 |
+| Sea surface | 301.0 K | 302.4 K |
+| Air, equator / poleward of 70° | 298.0 / 297.6 K | 299.7 / 299.3 K |
+| Equatorial land air, sunlit / dark 3-day means | 299.2 / 296.2 K | 300.8 / 298.0 K |
+| Planetary albedo | 0.302 | 0.293 |
+| Cloud effect: sunlight, infrared, net | −16.2, +8.4, −7.8 W/m² | −13.4, +7.6, −5.8 W/m² |
+| Cloud cover: global (under a high Sun / at night) | 22% (37% / 15%) | 20% (33% / 14%) |
+| Precipitation | 3.33 mm/day | 3.50 mm/day |
+| Water vapour | 234 kg/m² | 263 kg/m² |
+| Sea ice | none | none |
+
+- **With both slips corrected and PlaSim's cloud amount, the design case is
+  about 299.6 K (26.5 °C).** Fewer convective clouds reflect less sunlight, and
+  the Moon settles 1.6 K warmer than with the cloud-water fix alone.
+- **The Moon is winterless.** Over years 10–14 the air near the ground never
+  falls below 286.5 K (13 °C) in any half-hour: on a 4 km plateau at 75°S, late
+  in the night. The hottest half-hour is 315.9 K (43 °C), over equatorial land
+  near noon. No snow or sea ice forms. Even the full-column clouds' 292 K case
+  bottoms out at 277 K (4 °C). The freezing level stands 32–34 km up (23–25 km
+  in the 292 K case), and the model's highest land is 8.2 km: at a sixth of
+  Earth's gravity the air cools only about 1 K per km, so mountains barely reach
+  cold air. The coldest spot sits 13–15 K below the global mean, so frost on the
+  highest ground would need a Moon about as cool as Earth on average.
+- **An output artefact to screen.** In 0.8% of 3-day windows the output's lowest
+  model level reads up to about 20 K colder than the air near the ground, which
+  no real atmosphere sustains. It most likely comes from converting the model's
+  spectral temperatures to the grid over steep terrain. The surface fields are
+  unaffected; analyses of the lowest level should screen it.
+
+### Cloud amount: what published models say
+
+From a literature search, with Yang et al. (2014) and Way et al. (2018) checked
+against the papers:
+
+- **At this sunlight, slow rotation changes the clouds only a little.** Slowly
+  rotating planets that are not tidally locked, near Earth's sunlight, move
+  their albedo by −0.03 to +0.04 against the same model's 1-day run in ROCKE-3D
+  with Earth's continents (Way et al. 2018; Del Genio et al. 2019) and in ECHAM6
+  (Salameh et al. 2018). CAM3 ocean worlds are the exception, +0.11 and 20 K
+  cooler at 256 days (Yang et al. 2014). The thick day-side deck needs 1.5 times
+  Earth's sunlight or tidal locking.
+- **The Moon should be on the no-deck side.** Way et al. place the switch to a
+  circulation driven by day and night where the solar day exceeds the air's
+  radiative time scale, p c_p T/(g F), 1–2 months for Earth. The Moon's column,
+  7.3 times Earth's, gives it roughly 7–15 months against a 29.5-day day, so the
+  day–night contrast stays weak, as the runs show.
+- **Absolute amounts cannot be borrowed.** Five GCMs give the same Earth-rotation
+  ocean world 43–86% cover (Yang et al. 2019), and a cloud-resolving model gave
+  27–41% where CAM3 and ExoCAM gave 82–97% on tidally locked planets (Yang et al.
+  2023). PlaSim's 20–28% is not by itself a bias.
+- **What transfers is the change with rotation:** a shortwave cloud effect 1.0–1.3
+  times the fast run's, a longwave one 0.6–0.85 times. Testing ExoPlaSim against
+  that needs a 1-day-rotation run of the same Moon. The absolute amount needs a
+  model that makes its own clouds: a cloud-resolving model at lunar gravity, or
+  ROCKE-3D.
 
 | Run | State |
 |---|---|
 | A, design case | Done (40 years, above). The uncalibrated run and one with a broken spectrum tail are kept for reference |
 | B, 35% water | Done (40 years, above) |
 | Cloud-water bracket | Done (15 years each, above): `A_earth_path_clouds`, `A_full_column_clouds`, and `A_patch_check` for the patch's regression test |
+| Corrected clouds | Done (15 years, above): `A_corrected_clouds`, both corrections; the design case with PlaSim's cloud amount |
+| 28% water with lakes | Next: the atlas's 28% seas with the large rain-fed lakes as water cells, for the geography domain's water balance and the design case |
 | C, 1.0 atm | Not run: no current decision needs it. The 1-D balance puts 1.0 atm 0.2–1.3 K cooler than 1.2 atm, depending on the clouds, and 1.2 atm is the design pressure. The runner keeps it defined |
 | D, E | Need ExoPlaSim's ozone profile from the 1-D results, and a way to add the trace gases' forcing |
 
