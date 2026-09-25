@@ -1,0 +1,457 @@
+<meta charset="utf-8">
+<title>Open Moon Globe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,500;0,600;1,500&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;600&display=swap">
+<style>
+  :root {
+    --ground: #f4f6f8;
+    --panel: #ffffff;
+    --ink: #161a20;
+    --muted: #5a6372;
+    --rule: #d7dce3;
+    --space: #0b0e14;
+    --accent: #eb6834;
+    --focus: #2a78d6;
+    --display: "Barlow Semi Condensed", "Arial Narrow", system-ui, sans-serif;
+    --body: "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0e1116; --panel: #151a21; --ink: #e6e9ee; --muted: #98a2b3; --rule: #262c36; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0e1116; --panel: #151a21; --ink: #e6e9ee; --muted: #98a2b3; --rule: #262c36; color-scheme: dark;
+  }
+  body { background: var(--ground); color: var(--ink); font-family: var(--body); font-size: 15px; line-height: 1.5;
+         padding-inline: 16px; padding-block: 20px 36px; }
+  .wrap { max-width: 1240px; margin: 0 auto; display: grid; gap: 16px; }
+  header h1 { font-family: var(--display); font-weight: 600; font-size: clamp(26px, 4vw, 38px); letter-spacing: .01em;
+              margin: 0; text-wrap: balance; }
+  header p { margin: 4px 0 0; color: var(--muted); max-width: 72ch; }
+  .stage { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 16px; align-items: start; }
+  @media (max-width: 860px) { .stage { grid-template-columns: minmax(0, 1fr); } }
+  .viewport { position: relative; background: var(--space); border-radius: 10px; overflow: hidden; width: 100%;
+              max-width: 100%; aspect-ratio: 1 / 1; max-height: 84vh; margin-inline: auto; touch-action: none; cursor: grab; }
+  .viewport.dragging { cursor: grabbing; }
+  .viewport canvas { display: block; width: 100%; height: 100%; }
+  .labels { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+  .lab { position: absolute; transform: translate(-50%, -50%); white-space: nowrap; font-family: var(--display);
+         font-size: 12.5px; line-height: 1.1; text-align: center; }
+  .lab.sea { color: #eef5ff; font-style: italic; letter-spacing: .02em; text-shadow: 0 0 3px #0d2c55, 0 0 6px #0d2c55; }
+  .lab.island { color: #1f1d1a; font-size: 11.5px; text-shadow: 0 0 3px #fbfaf7, 0 0 5px #fbfaf7; }
+  .lab.site { transform: translate(9px, -50%); text-align: left; font-size: 11.5px; color: #fff3ec;
+              text-shadow: 0 0 3px #000, 0 0 5px #000; }
+  .lab.target { transform: translate(8px, -50%); text-align: left; font-size: 11px; font-style: italic; color: #e7ebf2;
+                text-shadow: 0 0 3px #000, 0 0 5px #000; }
+  .hint { position: absolute; left: 12px; bottom: 10px; font-size: 12px; color: #aeb6c4; font-family: var(--body); }
+  .panel { background: var(--panel); border: 1px solid var(--rule); border-radius: 10px; padding: 14px;
+           display: grid; gap: 16px; }
+  .group h2 { font-family: var(--display); font-size: 13px; letter-spacing: .08em; text-transform: uppercase;
+              color: var(--muted); margin: 0 0 6px; font-weight: 600; }
+  .views { display: flex; flex-wrap: wrap; gap: 6px; }
+  button { font: inherit; font-size: 13.5px; border: 1px solid var(--rule); background: transparent; color: var(--ink);
+           border-radius: 6px; padding: 5px 10px; cursor: pointer; }
+  button:hover { border-color: var(--muted); }
+  button[aria-pressed="true"] { background: var(--ink); color: var(--panel); border-color: var(--ink); }
+  button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+  .toggles { display: grid; gap: 4px; }
+  .toggles label { display: flex; gap: 8px; align-items: center; cursor: pointer; }
+  .legend { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3px 10px; font-size: 13px; }
+  .legend span { display: flex; align-items: center; gap: 7px; font-variant-numeric: tabular-nums; }
+  .sw { flex: none; width: 16px; height: 11px; border-radius: 2px; }
+  .sw.ring { background: var(--accent); border-radius: 50%; width: 10px; height: 10px; margin-inline: 3px; }
+  .sw.tri { width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent;
+            border-bottom: 10px solid var(--accent); border-radius: 0; margin-inline: 2px; }
+  .sw.sq { background: #2b2f36; width: 9px; height: 9px; margin-inline: 3px; border: 1px solid #fff; }
+  .figs { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; font-size: 13.5px; margin: 0; }
+  .figs dt { color: var(--muted); }
+  .figs dd { margin: 0; font-family: var(--mono); font-size: 13px; font-variant-numeric: tabular-nums; text-align: right; }
+  .card { border-top: 1px solid var(--rule); padding-top: 12px; font-size: 14px; display: grid; gap: 4px; }
+  .card h3 { font-family: var(--display); font-size: 19px; margin: 0; font-weight: 600; line-height: 1.15; }
+  .card .meta { font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
+  .card p { margin: 0; }
+  .relief-value { font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
+  input[type=range] { width: 100%; accent-color: var(--accent); }
+  .notes { color: var(--muted); font-size: 14px; max-width: 92ch; display: grid; gap: 8px; }
+  .notes h2 { font-family: var(--display); font-size: 15px; letter-spacing: .06em; text-transform: uppercase; margin: 6px 0 0;
+              color: var(--ink); font-weight: 600; }
+  .notes p { margin: 0; }
+  .notes b { color: var(--ink); font-weight: 600; }
+  .notes code { font-family: var(--mono); font-size: 12px; word-break: break-all; }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1 id="headline">The Open Moon at 28% water</h1>
+    <p id="lede">Land and sea from the Terluna geography atlas. Drag to turn the Moon; scroll or pinch to zoom; select a marker for its record.</p>
+  </header>
+
+  <div class="stage">
+    <div class="viewport" id="viewport">
+      <canvas id="globe" aria-label="Interactive 3D globe of the Open Moon, showing land and the new seas"></canvas>
+      <div class="labels" id="labels"></div>
+      <div class="hint" id="hint">Loading the globe…</div>
+    </div>
+
+    <aside class="panel" aria-label="Globe controls">
+      <div class="group">
+        <h2>View</h2>
+        <div class="views">
+          <button type="button" id="view-near" data-view="near" aria-pressed="true">Near side</button>
+          <button type="button" id="view-far" data-view="far" aria-pressed="false">Far side</button>
+          <button type="button" id="view-south" data-view="south" aria-pressed="false">South pole</button>
+          <button type="button" id="view-north" data-view="north" aria-pressed="false">North pole</button>
+          <button type="button" id="turn" aria-pressed="false">Turn slowly</button>
+        </div>
+      </div>
+      <div class="group">
+        <h2>Show</h2>
+        <div class="toggles">
+          <label><input type="checkbox" id="show-seas" checked> Sea names</label>
+          <label><input type="checkbox" id="show-islands" checked> Islands</label>
+          <label><input type="checkbox" id="show-sites" checked> Heritage sites</label>
+          <label><input type="checkbox" id="show-targets"> Sampling targets</label>
+          <label><input type="checkbox" id="show-grid"> 30° grid</label>
+        </div>
+      </div>
+      <div class="group">
+        <h2>Relief</h2>
+        <input type="range" id="relief" min="0" max="40" step="1" value="12" aria-describedby="relief-value">
+        <div class="relief-value" id="relief-value">12× vertical exaggeration</div>
+      </div>
+      <div class="group">
+        <h2>Map symbols</h2>
+        <div class="legend" id="legend"></div>
+      </div>
+      <div class="group">
+        <h2 id="figs-title">At 28%</h2>
+        <dl class="figs" id="figs"></dl>
+      </div>
+      <div class="card" id="card" aria-live="polite"></div>
+    </aside>
+  </div>
+
+  <section class="notes" aria-label="What the globe shows">
+    <h2>What the globe shows</h2>
+    <p><b>Computed.</b> Land and sea, and the depth of every sea and lake, come from the geography atlas product: LOLA
+      topography above the GRAIL geoid at 4 pixels per degree, filled to one common sea level. Heritage sites and sampling
+      targets come from the conservation study's register.</p>
+    <p><b>Display choices.</b> Water is coloured by depth band. Land is a neutral grey placeholder until the biosphere
+      and climate work supply surface cover. The light follows the viewer so every face reads as a map. Relief is
+      exaggerated by the slider, and the seas stay flat at sea level.</p>
+    <p><b>Next refinements.</b> Groundwater in the porous crust and crustal loading move the shoreline. Each catchment's
+      rainfall and evaporation set which closed depressions hold lakes; here every depression below sea level is filled.</p>
+    <p id="provenance"></p>
+  </section>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script id="atlas-data" type="application/json">__ATLAS_DATA__</script>
+<script>
+(() => {
+  const D = JSON.parse(document.getElementById('atlas-data').textContent);
+  const MOON_KM = 1737.4;
+  const viewport = document.getElementById('viewport');
+  const canvas = document.getElementById('globe');
+  const labelsEl = document.getElementById('labels');
+  const hint = document.getElementById('hint');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Header, figures, legend and provenance from the product.
+  const pct = Math.round(D.share * 100) + '%';
+  document.getElementById('headline').textContent = 'The Open Moon at ' + pct + ' water';
+  document.getElementById('figs-title').textContent = 'At ' + pct;
+  document.getElementById('lede').textContent =
+    'Land and sea from the Terluna geography atlas, with sea level ' + D.levelText +
+    ' above the lunar geoid. Drag to turn the Moon; scroll or pinch to zoom; select a marker for its record.';
+  const figs = document.getElementById('figs');
+  for (const [k, v] of D.figures) {
+    const dt = document.createElement('dt'); dt.textContent = k;
+    const dd = document.createElement('dd'); dd.textContent = v;
+    figs.append(dt, dd);
+  }
+  const legend = document.getElementById('legend');
+  for (const [label, colour] of D.bands) {
+    const s = document.createElement('span');
+    s.innerHTML = '<i class="sw" style="background:' + colour + '"></i>' + label;
+    legend.append(s);
+  }
+  for (const [cls, label] of [['sw', 'Land (placeholder)'], ['sw ring', 'Heritage, submerged'],
+                              ['sw tri', 'Heritage, on land'], ['sw sq', 'Sampling target']]) {
+    const s = document.createElement('span');
+    s.innerHTML = '<i class="' + cls + '"' + (cls === 'sw' ? ' style="background:' + D.landColour + '"' : '') + '></i>' + label;
+    legend.append(s);
+  }
+  document.getElementById('provenance').innerHTML = '<b>Provenance.</b> ' + D.provenance;
+
+  if (!window.THREE) {
+    hint.textContent = 'The 3D library could not load; the globe needs a connection to cdnjs.cloudflare.com.';
+    return;
+  }
+
+  // Renderer, camera and a light that travels with the camera.
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.outputEncoding = THREE.sRGBEncoding;
+  renderer.setClearColor(0x0b0e14, 1);
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(28, 1, 0.01, 100);
+  let distance = 4.3;
+  camera.position.set(0, 0, distance);
+  scene.add(camera);
+  scene.add(new THREE.AmbientLight(0xffffff, 0.62));
+  const lamp = new THREE.DirectionalLight(0xffffff, 0.58);
+  lamp.position.set(-2.2, 1.6, 3.0);
+  camera.add(lamp);
+
+  // Textures: colour by depth band, a tangent-space normal map of the relief, and sea-clamped heights.
+  const loader = new THREE.TextureLoader();
+  const colourMap = loader.load(D.textures.colour);
+  colourMap.encoding = THREE.sRGBEncoding;
+  colourMap.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
+  const normalMap = loader.load(D.textures.normal);
+  const heightMap = loader.load(D.textures.height);
+  const segments = window.innerWidth < 700 ? [320, 160] : [512, 256];
+  const material = new THREE.MeshStandardMaterial({
+    map: colourMap, normalMap, displacementMap: heightMap, roughness: 0.92, metalness: 0.0
+  });
+  const globe = new THREE.Mesh(new THREE.SphereGeometry(1, segments[0], segments[1]), material);
+  scene.add(globe);
+
+  // Latitude/longitude on the unit sphere, matching the equirectangular texture (left edge at 180 degrees west).
+  const surface = (lat, lon, r) => {
+    const theta = (90 - lat) * Math.PI / 180, phi = (lon + 180) / 360 * 2 * Math.PI;
+    return new THREE.Vector3(-r * Math.cos(phi) * Math.sin(theta), r * Math.cos(theta), r * Math.sin(phi) * Math.sin(theta));
+  };
+
+  // Graticule every 30 degrees.
+  const gridPts = [];
+  for (let lat = -60; lat <= 60; lat += 30)
+    for (let lon = -180; lon < 180; lon += 3) gridPts.push(surface(lat, lon, 1.0015), surface(lat, lon + 3, 1.0015));
+  for (let lon = -180; lon < 180; lon += 30)
+    for (let lat = -88; lat < 88; lat += 2) gridPts.push(surface(lat, lon, 1.0015), surface(lat + 2, lon, 1.0015));
+  const grid = new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(gridPts),
+    new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.28 }));
+  grid.visible = false;
+  globe.add(grid);
+
+  // Markers and labels.
+  let exaggeration = 12;
+  const lift = (h) => 1 + exaggeration * Math.max(h, 0) / 1000 / MOON_KM;
+  const siteGeo = new THREE.SphereGeometry(0.0085, 12, 8);
+  const siteMat = new THREE.MeshBasicMaterial({ color: 0xeb6834 });
+  const landGeo = new THREE.ConeGeometry(0.009, 0.02, 3);
+  const targetGeo = new THREE.BoxGeometry(0.009, 0.009, 0.009);
+  const targetMat = new THREE.MeshBasicMaterial({ color: 0x2b2f36 });
+  const items = [];
+  const UP = new THREE.Vector3(0, 1, 0);
+  const addLabel = (kind, text, lat, lon, height, extra) => {
+    const el = document.createElement('div');
+    el.className = 'lab ' + kind;
+    el.textContent = text;
+    labelsEl.append(el);
+    const item = { kind, el, lat, lon, height, extra, mesh: null };
+    items.push(item);
+    return item;
+  };
+  for (const [name, lat, lon] of D.labels.seas) addLabel('sea', name, lat, lon, 0);
+  for (const [name, lat, lon, h] of D.labels.islands) addLabel('island', name, lat, lon, h);
+  for (const s of D.labels.sites) {
+    const item = addLabel('site', s.short || '', s.lat, s.lon, s.aboveSea, s);
+    const submerged = s.status === 'submerged';
+    item.mesh = new THREE.Mesh(submerged ? siteGeo : landGeo, siteMat);
+    if (!s.short) item.el.hidden = true;
+    globe.add(item.mesh);
+  }
+  for (const t of D.labels.targets) {
+    const item = addLabel('target', t.name, t.lat, t.lon, t.aboveSea, t);
+    item.mesh = new THREE.Mesh(targetGeo, targetMat);
+    globe.add(item.mesh);
+  }
+  const placeMarkers = () => {
+    for (const it of items) {
+      if (!it.mesh) continue;
+      const p = surface(it.lat, it.lon, lift(it.height) + 0.004);
+      it.mesh.position.copy(p);
+      it.mesh.quaternion.setFromUnitVectors(UP, p.clone().normalize());
+    }
+  };
+  const setRelief = (v) => {
+    exaggeration = v;
+    const relief = D.heightRangeKm * exaggeration / MOON_KM;
+    material.displacementScale = relief;
+    material.displacementBias = 0;
+    material.normalScale.set(Math.min(exaggeration / D.normalStrength, 3), Math.min(exaggeration / D.normalStrength, 3));
+    document.getElementById('relief-value').textContent = v + '× vertical exaggeration' + (v === 0 ? ' (flat)' : '');
+    placeMarkers();
+  };
+  setRelief(12);
+
+  // Orientation: views, dragging, zoom and a slow turn.
+  const qFromEuler = (x, y, z) => new THREE.Quaternion().setFromEuler(new THREE.Euler(x, y, z, 'XYZ'));
+  const near = qFromEuler(0, -Math.PI / 2, 0);
+  const VIEWS = {
+    near,
+    far: qFromEuler(0, Math.PI / 2, 0),
+    south: new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), -Math.PI / 2).multiply(near),
+    north: new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), Math.PI / 2).multiply(near)
+  };
+  globe.quaternion.copy(VIEWS.near);
+  let tween = null, turning = false;
+  const viewButtons = [...document.querySelectorAll('[data-view]')];
+  const setView = (name) => {
+    viewButtons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.view === name)));
+    tween = { from: globe.quaternion.clone(), to: VIEWS[name].clone(), t: reduceMotion ? 1 : 0 };
+  };
+  viewButtons.forEach((b) => b.addEventListener('click', () => setView(b.dataset.view)));
+  const turnBtn = document.getElementById('turn');
+  turnBtn.addEventListener('click', () => {
+    turning = !turning;
+    turnBtn.setAttribute('aria-pressed', String(turning));
+  });
+  const clearViewPressed = () => viewButtons.forEach((b) => b.setAttribute('aria-pressed', 'false'));
+
+  const pointers = new Map();
+  let lastPinch = null, moved = 0;
+  viewport.addEventListener('pointerdown', (e) => {
+    viewport.setPointerCapture(e.pointerId);
+    pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    viewport.classList.add('dragging');
+    moved = 0;
+    tween = null;
+  });
+  viewport.addEventListener('pointermove', (e) => {
+    if (!pointers.has(e.pointerId)) return;
+    const prev = pointers.get(e.pointerId);
+    const dx = e.clientX - prev.x, dy = e.clientY - prev.y;
+    pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (pointers.size === 2) {
+      const [a, b] = [...pointers.values()];
+      const d = Math.hypot(a.x - b.x, a.y - b.y);
+      if (lastPinch) zoom(lastPinch / d);
+      lastPinch = d;
+      return;
+    }
+    moved += Math.abs(dx) + Math.abs(dy);
+    const k = 2.2 / viewport.clientWidth * (distance - 1) / 3.3;
+    const q = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), dx * k)
+      .multiply(new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), dy * k));
+    globe.quaternion.premultiply(q);
+    if (moved > 4) clearViewPressed();
+  });
+  const endPointer = (e) => {
+    pointers.delete(e.pointerId);
+    if (pointers.size < 2) lastPinch = null;
+    if (!pointers.size) viewport.classList.remove('dragging');
+    if (e.type === 'pointerup' && moved < 5) pick(e);
+  };
+  viewport.addEventListener('pointerup', endPointer);
+  viewport.addEventListener('pointercancel', endPointer);
+  const zoom = (factor) => {
+    distance = Math.min(9, Math.max(1.35, distance * factor));
+    camera.position.set(0, 0, distance);
+  };
+  viewport.addEventListener('wheel', (e) => { e.preventDefault(); zoom(Math.exp(e.deltaY * 0.0012)); }, { passive: false });
+
+  // Toggles.
+  const show = { sea: true, island: true, site: true, target: false };
+  const bind = (id, fn) => document.getElementById(id).addEventListener('change', (e) => fn(e.target.checked));
+  bind('show-seas', (v) => { show.sea = v; });
+  bind('show-islands', (v) => { show.island = v; });
+  bind('show-sites', (v) => { show.site = v; });
+  bind('show-targets', (v) => { show.target = v; });
+  bind('show-grid', (v) => { grid.visible = v; });
+  document.getElementById('relief').addEventListener('input', (e) => setRelief(+e.target.value));
+
+  // The record card.
+  const card = document.getElementById('card');
+  const fmt = (n) => Math.round(n).toLocaleString('en-US').replace('-', '−');
+  const showCard = (it) => {
+    const x = it.extra;
+    if (it.kind === 'site') {
+      const where = x.status === 'submerged'
+        ? fmt(x.depth) + ' m under the sea · ' + x.pressure.toFixed(1) + ' atm · land ' + fmt(x.nearestLand) + ' km'
+        : fmt(x.aboveSea) + ' m above the sea · water ' + fmt(x.nearestWater) + ' km';
+      card.innerHTML = '<h3></h3><div class="meta"></div><p class="marks"></p><p class="treat"></p>';
+      card.querySelector('h3').textContent = x.name + ' (' + x.year + ')';
+      card.querySelector('.meta').textContent = where;
+      card.querySelector('.marks').textContent = x.marks;
+      card.querySelector('.treat').textContent = x.treatment + ' — ' + x.evaluation + '.';
+    } else {
+      card.innerHTML = '<h3></h3><div class="meta"></div><p class="marks"></p>';
+      card.querySelector('h3').textContent = x.name;
+      card.querySelector('.meta').textContent = (x.aboveSea >= 0 ? fmt(x.aboveSea) + ' m above' : fmt(-x.aboveSea) + ' m below') +
+        ' sea level · ' + x.zone;
+      card.querySelector('.marks').textContent = x.record + ' Sample ' + x.sample + '.';
+    }
+  };
+  const first = items.find((it) => it.extra && it.extra.id === 'apollo-11');
+  if (first) showCard(first);
+
+  const projected = new THREE.Vector3(), worldPos = new THREE.Vector3(), normal = new THREE.Vector3(), toCam = new THREE.Vector3();
+  const screenOf = (it) => {
+    worldPos.copy(surface(it.lat, it.lon, lift(it.height) + 0.004)).applyMatrix4(globe.matrixWorld);
+    normal.copy(worldPos).normalize();
+    toCam.copy(camera.position).sub(worldPos).normalize();
+    const facing = normal.dot(toCam);
+    projected.copy(worldPos).project(camera);
+    return { x: (projected.x + 1) / 2 * viewport.clientWidth, y: (1 - projected.y) / 2 * viewport.clientHeight, facing };
+  };
+  const pick = (e) => {
+    const box = viewport.getBoundingClientRect();
+    const px = e.clientX - box.left, py = e.clientY - box.top;
+    let best = null, bestD = 16;
+    for (const it of items) {
+      if (!it.extra || (it.kind === 'site' && !show.site) || (it.kind === 'target' && !show.target)) continue;
+      const s = screenOf(it);
+      if (s.facing < 0.05) continue;
+      const d = Math.hypot(s.x - px, s.y - py);
+      if (d < bestD) { best = it; bestD = d; }
+    }
+    if (best) showCard(best);
+  };
+
+  // Render loop: size, orientation, labels.
+  const resize = () => {
+    const w = viewport.clientWidth, h = viewport.clientHeight;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  };
+  new ResizeObserver(resize).observe(viewport);
+  resize();
+  let last = performance.now();
+  const frame = (now) => {
+    const dt = Math.min(0.05, (now - last) / 1000);
+    last = now;
+    if (tween) {
+      tween.t = Math.min(1, tween.t + dt / 0.9);
+      const e = tween.t < 0.5 ? 2 * tween.t * tween.t : 1 - Math.pow(-2 * tween.t + 2, 2) / 2;
+      THREE.Quaternion.slerp(tween.from, tween.to, globe.quaternion, e);
+      if (tween.t >= 1) tween = null;
+    }
+    if (turning && !pointers.size) globe.rotateY(dt * 0.12);
+    globe.updateMatrixWorld();
+    renderer.render(scene, camera);
+    for (const it of items) {
+      const visible = show[it.kind] && !(it.kind === 'site' && !it.extra.short);
+      if (it.mesh) it.mesh.visible = it.kind === 'site' ? show.site : show.target;
+      if (!visible) { it.el.hidden = true; continue; }
+      const s = screenOf(it);
+      const on = s.facing > 0.12;
+      it.el.hidden = !on;
+      if (on) {
+        it.el.style.left = s.x.toFixed(1) + 'px';
+        it.el.style.top = s.y.toFixed(1) + 'px';
+        it.el.style.opacity = String(Math.min(1, (s.facing - 0.12) * 5));
+      }
+    }
+    requestAnimationFrame(frame);
+  };
+  THREE.DefaultLoadingManager.onLoad = () => { hint.textContent = 'Drag to turn · scroll or pinch to zoom'; };
+  requestAnimationFrame(frame);
+})();
+</script>

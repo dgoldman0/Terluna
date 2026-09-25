@@ -37,7 +37,7 @@ python -m geography.fetch_inputs --download        # LOLA, GRAIL and the IAU gaz
 OPENBLAS_NUM_THREADS=1 python -m geography.atlas   # geography/results/atlas.json and the grid product
 OPENBLAS_NUM_THREADS=1 python -m research.studies.conservation.run
 OPENBLAS_NUM_THREADS=1 python -m pytest geography/tests/test_atlas.py research/studies/conservation
-python visualization/atlas/render.py               # map sheets, kept out of Git
+python visualization/atlas/render.py               # map sheets and the 3D globe, kept out of Git
 ```
 
 The runner writes these files to [results/](results/):

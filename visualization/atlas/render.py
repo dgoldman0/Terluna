@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Map sheets of the Open Moon atlas: near and far side, a global sheet and the polar regions.
+"""Map sheets and a 3D globe of the Open Moon atlas: near and far side, a global sheet, the polar regions,
+and an interactive globe page.
 
     python visualization/atlas/render.py      # writes visualization/atlas/out/ (kept out of Git)
 
@@ -10,8 +11,10 @@ records product hashes and a faithfulness check: the water share of the rendered
 near-side disk against the product's Earth-facing disk share.
 """
 from __future__ import annotations
+import base64
 import csv
 import hashlib
+import io
 import json
 import sys
 from pathlib import Path
@@ -26,6 +29,7 @@ from matplotlib.patches import Patch
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 from geography import atlas as ga
+from shared.constants import MOON_RADIUS
 
 HERE = Path(__file__).resolve().parent
 OUT = HERE / 'out'
@@ -59,6 +63,8 @@ POLAR_TARGET_OFFSETS = {'Shackleton': (6, -12), 'de Gerlache': (-100, 4), 'Sverd
                         'Shoemaker': (10, 10), 'Faustini': (8, -13), 'Nobile': (6, -4), 'Cabeus': (-112, -12),
                         'Hermite': (-42, 4), 'Whipple': (6, 4), 'Peary': (6, -4), 'Rozhdestvenskiy': (6, 4)}
 DISPLAY = {'Rumker': 'Rümker', 'Karman': 'Kármán', 'Schrodinger': 'Schrödinger'}
+LAND_PLACEHOLDER = '#b9b4aa'   # neutral land until the biosphere and climate supply surface cover
+NORMAL_STRENGTH = 10.0         # relief is baked into the normal map at this exaggeration; the page rescales it
 
 
 def hexrgb(h):
@@ -153,6 +159,82 @@ def legend(fig, y, science_label='Scientific sampling target'):
 def island_labels(atlas, min_km2=4000.0):
     return [(i['features'][0].replace('Montes ', '') + ' I.', i['summit'][0], i['summit'][1])
             for i in atlas['islands'] if i['area_km2'] >= min_km2 and i['features']]
+
+
+
+def png_data_uri(array):
+    from PIL import Image
+    buffer = io.BytesIO()
+    Image.fromarray(array).save(buffer, format='PNG', optimize=True)
+    return 'data:image/png;base64,' + base64.b64encode(buffer.getvalue()).decode('ascii')
+
+
+def globe_textures(height, level, lat, ppd):
+    """Equirectangular textures, 180 W at the left edge: colour by depth band with neutral land, the
+    sea-clamped surface as 8-bit displacement, and a tangent-space normal map of that surface."""
+    h = np.roll(height, height.shape[1] // 2, axis=1)
+    depth = level - h
+    water = depth > 0
+    colour = np.empty(h.shape + (3,), dtype=np.uint8)
+    colour[:] = np.round(hexrgb(LAND_PLACEHOLDER) * 255).astype(np.uint8)
+    lo = 0.0
+    for hi, col in BANDS:
+        colour[water & (depth >= lo) & (depth < hi)] = np.round(hexrgb(col) * 255).astype(np.uint8)
+        lo = hi
+    surf = np.maximum(h, level)
+    top = float(surf.max())
+    displacement = np.round((surf - level) / (top - level) * 255).astype(np.uint8)
+    dy = MOON_RADIUS * np.radians(1 / ppd)
+    dx = dy * np.maximum(np.cos(np.radians(lat)), 1e-3)[:, None]
+    gy, gx = np.gradient(surf)
+    n = np.stack([-(gx / dx) * NORMAL_STRENGTH, (gy / dy) * NORMAL_STRENGTH, np.ones_like(surf)], axis=-1)
+    n /= np.linalg.norm(n, axis=-1, keepdims=True)
+    normal = np.round((n + 1) / 2 * 255).astype(np.uint8)
+    return colour, displacement, normal, (top - level) / 1000.0, water
+
+
+def write_globe(atlas, height, lat, ppd, sites, targets, hashes):
+    level = atlas['sea_level_m']
+    colour, displacement, normal, relief_km, water = globe_textures(height, level, lat, ppd)
+    area = np.cos(np.radians(lat))[:, None] * np.ones_like(water, dtype=float)
+    texture_water = float((area * water).sum() / area.sum())
+    bodies = atlas['bodies']
+    comparison = next(r for r in atlas['share_comparison'] if abs(r['share'] - atlas['share']) < 1e-9)
+    minus = lambda v: f'{v:,.0f}'.replace('-', '\u2212')
+    data = dict(
+        share=atlas['share'], levelText=minus(level) + ' m', landColour=LAND_PLACEHOLDER,
+        heightRangeKm=relief_km, normalStrength=NORMAL_STRENGTH,
+        bands=[[label, col] for (_, col), label in zip(BANDS, BAND_LABELS)],
+        figures=[['Water', f"{atlas['share']:.0%} of the surface"], ['Sea level (geoid)', minus(level) + ' m'],
+                 ['Near side under water', f"{comparison['near_side_water']:.0%}"],
+                 ['Main land mass', f"{atlas['main_land_share']:.1%}"], ['Islands', f"{atlas['island_share']:.1%}"],
+                 ['Near-side Sea', f"{bodies[0]['share']:.1%} \u00b7 mean {bodies[0]['mean_depth_m']:,} m"],
+                 ['South Pole\u2013Aitken Sea', f"{bodies[1]['share']:.1%} \u00b7 mean {bodies[1]['mean_depth_m']:,} m"],
+                 ['Deepest water', f"{max(b['max_depth_m'] for b in bodies):,} m"]],
+        textures=dict(colour=png_data_uri(colour), height=png_data_uri(displacement), normal=png_data_uri(normal)),
+        labels=dict(
+            seas=[[name.replace('\n', ' '), la, lo] for name, la, lo in SEA_LABELS],
+            islands=[[name, la, lo, i['summit_m']] for (name, la, lo), i in
+                     zip(island_labels(atlas), [i for i in atlas['islands'] if i['area_km2'] >= 4000.0 and i['features']])],
+            sites=[dict(id=s['id'], name=s['name'], year=s['year'], lat=s['lat'], lon=s['lon'], status=s['status'],
+                        short=SITE_LABELS.get(s['id'], ('', None))[0], depth=s.get('depth_m', 0),
+                        pressure=s.get('pressure_atm', 0.0), nearestLand=s.get('nearest_land_km', 0),
+                        nearestWater=s.get('nearest_water_km', 0), aboveSea=max(s.get('above_sea_m', 0), 0),
+                        marks=s['marks'], treatment=s['treatment_type'].capitalize(),
+                        evaluation=s['evaluation_status']) for s in sites],
+            targets=[dict(id=t['name'], name=next((t['name'].replace(k, v) for k, v in DISPLAY.items() if k in t['name']), t['name']),
+                          lat=float(t['lat']), lon=float(t['lon']), aboveSea=int(t['height_relative_to_sea_m']),
+                          zone=t['zone'], record=t['record'][0].upper() + t['record'][1:] + '.', sample=t['sample'])
+                     for t in targets]),
+        provenance=('Geography atlas product <code>terluna.geography.atlas/1</code> (atlas.json '
+                    f"{hashes['atlas_json'][:12]}, grid {hashes['atlas_grid'][:12]}) and the conservation register "
+                    f"({hashes['register'][:12]}). Textures {colour.shape[1]}\u00d7{colour.shape[0]}, 4 pixels per degree."))
+    template = (HERE / 'globe.template.html').read_text()
+    page = template.replace('__ATLAS_DATA__', json.dumps(data, ensure_ascii=False))
+    (OUT / 'globe.html').write_text(page)
+    return dict(texture_water_share=round(texture_water, 4), product_water_share=atlas['water_share'],
+                difference=round(texture_water - atlas['water_share'], 4), tolerance=0.002,
+                passed=abs(texture_water - atlas['water_share']) <= 0.002, page_bytes=len(page.encode()))
 
 
 def main():
@@ -280,14 +362,19 @@ def main():
     plt.close(fig)
 
     product_disk = next(r['earth_facing_disk_water'] for r in atlas['share_comparison'] if abs(r['share'] - atlas['share']) < 1e-9)
-    manifest = dict(products={str(p.relative_to(ROOT)): digest(p) for p in (atlas_path, grid_path, reg_path, tgt_path)},
-                    renderer=digest(Path(__file__)),
+    products = {str(p.relative_to(ROOT)): digest(p) for p in (atlas_path, grid_path, reg_path, tgt_path)}
+    globe = write_globe(atlas, height, lat, ppd, sites, targets,
+                        dict(atlas_json=products[str(atlas_path.relative_to(ROOT))],
+                             atlas_grid=products[str(grid_path.relative_to(ROOT))],
+                             register=products[str(reg_path.relative_to(ROOT))]))
+    manifest = dict(products=products, renderer=digest(Path(__file__)), template=digest(HERE / 'globe.template.html'),
                     faithfulness=dict(rendered_near_side_disk_water=round(disk_water, 4), product_disk_water=product_disk,
                                       difference=round(disk_water - product_disk, 4), tolerance=0.01,
-                                      passed=abs(disk_water - product_disk) <= 0.01))
+                                      passed=abs(disk_water - product_disk) <= 0.01),
+                    globe=globe)
     (OUT / 'manifest.json').write_text(json.dumps(manifest, indent=1) + '\n')
-    print(json.dumps(manifest['faithfulness']))
-    return 0 if manifest['faithfulness']['passed'] else 1
+    print(json.dumps(dict(sheets=manifest['faithfulness'], globe=globe)))
+    return 0 if manifest['faithfulness']['passed'] and globe['passed'] else 1
 
 
 if __name__ == '__main__':
