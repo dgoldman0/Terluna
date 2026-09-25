@@ -1,0 +1,28 @@
+id,name,year,kind,status,depth_m,pressure_atm,above_sea_m,nearest_land_km,nearest_water_km,water_body,treatment_type,evaluation_status
+apollo-11,"Apollo 11, Tranquility Base",1969,crewed landing,submerged,467,8.7,,35,,Oceanus Procellarum,undersea community,decided
+apollo-12,Apollo 12 and Surveyor 3,1969,crewed landing,shore,,,50,,11,,"coastal site, undersea if the shore rises",proposed
+apollo-14,"Apollo 14, Fra Mauro",1971,crewed landing,dry,,,436,,39,,land site,proposed
+apollo-15,"Apollo 15, Hadley-Apennine",1971,crewed landing,submerged,453,8.5,,8,,Oceanus Procellarum,undersea community,proposed
+apollo-16,"Apollo 16, Descartes",1972,crewed landing,dry,,,1416,,117,,land site,proposed
+apollo-17,"Apollo 17, Taurus-Littrow",1972,crewed landing,submerged,1037,17.8,,6,,Oceanus Procellarum,undersea community,proposed
+luna-2,Luna 2 impact,1959,impact,submerged,480,8.9,,43,,Oceanus Procellarum,marker,open
+luna-9,Luna 9,1966,robotic landing,dry,,,394,,7,,land site,proposed
+surveyor-1,Surveyor 1,1966,robotic landing,submerged,378,7.3,,148,,Oceanus Procellarum,undersea community or relic chamber,open
+lunokhod-1,Lunokhod 1 and Luna 17,1970,robotic rover,submerged,865,15.1,,61,,Oceanus Procellarum,undersea community,proposed
+lunokhod-2,Lunokhod 2 and Luna 21,1973,robotic rover,submerged,1141,19.5,,15,,Oceanus Procellarum,undersea community or relic chamber,proposed
+luna-16,Luna 16,1970,robotic sample return,submerged,807,14.1,,99,,Oceanus Procellarum,undersea community or relic chamber,open
+luna-24,Luna 24,1976,robotic sample return,submerged,2149,35.6,,59,,Oceanus Procellarum,undersea community or relic chamber,open
+change-3,Chang'e 3 and Yutu,2013,robotic rover,submerged,1211,20.6,,129,,Oceanus Procellarum,undersea community,proposed
+change-4,Chang'e 4 and Yutu-2,2019,robotic rover,submerged,4027,65.8,,80,,Mare Ingenii,undersea community,open
+change-5,Chang'e 5,2020,robotic sample return,submerged,747,13.2,,121,,Oceanus Procellarum,undersea community,proposed
+change-6,Chang'e 6,2024,robotic sample return,submerged,3312,54.3,,132,,Mare Ingenii,undersea community,open
+chandrayaan-3,"Chandrayaan-3, Shiv Shakti point",2023,robotic rover,dry,,,2333,,60,,land site,proposed
+slim,SLIM,2024,robotic landing,dry,,,416,,10,,land site,proposed
+im-1,IM-1 Odysseus,2024,robotic landing,dry,,,4480,,70,,land site,proposed
+blue-ghost-1,Blue Ghost 1,2025,robotic landing,submerged,2233,37.0,,116,,Oceanus Procellarum,undersea community or relic chamber,open
+beresheet,Beresheet crash site,2019,crash,submerged,1312,22.2,,151,,Oceanus Procellarum,marker,proposed
+lunar-prospector,"Lunar Prospector impact, Shoemaker's ashes",1999,remains,submerged,1767,29.5,,10,,crater lake,marker,proposed
+lcross,"LCROSS impact, Cabeus",2009,impact,submerged,1868,31.1,,10,,crater lake,marker,proposed
+hakuto-r-m1,Hakuto-R Mission 1 crash site,2023,crash,submerged,1105,18.9,,17,,crater lake,marker,proposed
+luna-25,Luna 25 crash site,2023,crash,dry,,,1282,,8,,marker,proposed
+resilience,Resilience crash site,2025,crash,submerged,632,11.3,,42,,Oceanus Procellarum,marker,proposed

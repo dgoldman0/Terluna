@@ -1,0 +1,18 @@
+{
+ "product": {
+  "schema": "terluna.geography.atlas/1",
+  "atlas_json": "78cfbf2f469eb339b686e34385c3ed72fc83752da59bb24167e2260a765e537e",
+  "atlas_grid": "dc283827f349fdc134816e1a55deef3d608047fba9fbb7521a6005c171d81693"
+ },
+ "share": 0.28,
+ "sea_level_m": -1654.2,
+ "surface_pressure_pa": 121590.0,
+ "study_files": {
+  "run.py": "4e7b5cb8872f51a0",
+  "screens.py": "4beafa4da3879287",
+  "sites.json": "cdfa3fcd37a32edc",
+  "targets.json": "0d12f8d6e570df0e"
+ },
+ "gazetteer_sha256": "404a951d514821590f244c1858d9dc15e64f9e93e2cde45e35e9cf413fc60fea",
+ "targets_missing": []
+}

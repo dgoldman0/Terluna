@@ -1,5 +1,5 @@
 {
-  "status": "LOLA LDEM_4 and LDEM_16 and GRAIL GL0420A fetched and hash-checked through inputs.json; see README",
+  "status": "LOLA LDEM_4 and LDEM_16, GRAIL GL0420A and the IAU lunar nomenclature fetched and hash-checked through inputs.json; see README",
   "leads": [
     {
       "name": "NASA/PDS LOLA mission/product archive",
@@ -17,6 +17,12 @@
       "name": "GRAIL gravity field GL0420A (JGGRX_0420A)",
       "url": "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/shadr/",
       "local_file": "inputs/jggrx_0420a_sha.tab (ignored by Git)",
+      "sha256": "recorded in inputs.json"
+    },
+    {
+      "name": "IAU/USGS Gazetteer of Planetary Nomenclature, lunar centre points",
+      "url": "https://planetarynames.wr.usgs.gov/GIS_Downloads",
+      "local_file": "inputs/MOON_nomenclature_center_pts.zip (ignored by Git)",
       "sha256": "recorded in inputs.json"
     }
   ],

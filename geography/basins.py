@@ -53,6 +53,16 @@ def level_curve(height, area, levels):
     return area_below / a.sum(), volume
 
 
+def level_for_area(height, area, fraction):
+    """Common water level whose flooded area is the given fraction of the Moon (the height of
+    the cell at which the cumulative area, in order of height, reaches that fraction)."""
+    h = height.ravel()
+    order = np.argsort(h)
+    cum = np.cumsum(area.ravel()[order])
+    k = int(np.searchsorted(cum, fraction * cum[-1]))
+    return float(h[order][min(k, h.size - 1)])
+
+
 def level_for_volume(height, area, volume):
     """Common water level holding a given volume (m^3), by bisection on the level curve."""
     lo, hi = float(height.min()), float(height.max())

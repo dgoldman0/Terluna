@@ -51,6 +51,16 @@
       "bytes": 10837504,
       "credit": "GRAIL gravity field GL0420A (JGGRX_0420A), PDS data set GRAIL-L-LGRS-5-RDR-V1 (Konopliv et al. 2013, JGR Planets 118, 1415; JPL GRAIL gravity team). NASA data, no redistribution restriction; cite the authors and PDS.",
       "use": "GL0420A fully normalized coefficients to degree 420, reference radius 1738 km"
+    },
+    {
+      "name": "MOON_nomenclature_center_pts.zip",
+      "url": "https://planetarynames.wr.usgs.gov/shapefiles/MOON_nomenclature_center_pts.zip",
+      "sha256": "404a951d514821590f244c1858d9dc15e64f9e93e2cde45e35e9cf413fc60fea",
+      "bytes": 23845070,
+      "retrieved": "2026-09-25",
+      "credit": "Gazetteer of Planetary Nomenclature, IAU Working Group for Planetary System Nomenclature (WGPSN) and USGS Astrogeology Science Center. U.S. Government work in the public domain; cite the Gazetteer (https://planetarynames.wr.usgs.gov).",
+      "use": "centre points, diameters and type codes of IAU-approved lunar feature names; geography/nomenclature.py reads the archive's dBase table to label seas, islands and targets in the atlas",
+      "edition_note": "The USGS regenerates this archive as names are approved. A new edition changes the size and hash and is reviewed before use."
     }
   ],
   "publication_note": "Retrieval and checksum verification are separate from reading the underlying publications. LOLA heights are in the mean-Earth/polar-axis frame and GL0420A in the DE421 principal-axis frame; the offset (about 0.02 degrees) is below the resolution of the geoid used here."

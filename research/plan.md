@@ -33,6 +33,26 @@ Connect actual wavelength-dependent filtering to a reduced heating/chemistry/esc
 
 Reuse the existing industrial accounts, add water/nutrients/sinks and build a small manufacturing dependency network. Compare complete source-to-use paths with capture, heat, momentum, return/reuse and accumulated consumables. Assess the construction-to-renewal relationship under consistent assumptions rather than fixing a civilization energy index first.
 
+## Conservation through the transformation
+
+The [conservation study](studies/conservation/README.md) runs two programmes.
+
+- **Scientific preservation** means sampling, excavation, storage in original condition, and research before and during the transformation.
+- **Heritage preservation** means designated places, kept by engineering and grounded in ethics, with a written evaluation for each site.
+- **Replacements** stand in for the Moon's scientific functions: its role as a calibration standard, far-side radio quiet, laser-ranging targets and low orbit.
+
+Each irreversible step waits for the record it destroys, so the gates in the study enter the construction sequence beside atmosphere, water and biology.
+
+The atlas at the selected 28% water share places everything. Its next refinements are:
+
+- groundwater storage in the porous crust and crustal loading, which fix the delivered inventory and the shoreline;
+- lake levels from each catchment's rainfall and evaporation in a climate run at 28%;
+- LOLA polar stereographic grids for the cold traps.
+
+The heritage register's written evaluation goes to the author for review. The appearance of the Open Moon from Earth, and the effect of its moonlight on Earth's life and astronomy, belong to illumination.
+
+Water, nitrogen and oxygen come from the Solar-System-wide resource operation (study decision D4). The September baseline's local oxygen production is superseded, and the engineering companion's next seed carries the correction.
+
 ## Research threshold for the core
 
 Seek several coherent environmental possibilities, a credible account of light, functional biological requirements for a varied biome portfolio, quantified representative spatial opportunities, and compatible construction/renewal cases. Some features can remain explicit design hypotheses. The root should derive expressive detail from this range while retaining its scientifically grounded dream purpose.

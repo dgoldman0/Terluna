@@ -1,0 +1,144 @@
+{
+ "about": "Screening estimates (screens.py) that date each loss and size the heritage works; domain models supersede them.",
+ "surface_pressure_pa": 121590.0,
+ "air_column_kg_m2": 74861,
+ "water_depth_per_atm_m": 62.4,
+ "dusty_stage": [
+  {
+   "pressure_atm": 0.01,
+   "grain_um": 244.09422447730185,
+   "u_star_m_s": 1.5206030241655093,
+   "wind_10m_m_s": 43.76647319756458,
+   "year_of_linear_build_up": 4
+  },
+  {
+   "pressure_atm": 0.03,
+   "grain_um": 244.09422447730185,
+   "u_star_m_s": 0.8779205653325157,
+   "wind_10m_m_s": 25.268585082094447,
+   "year_of_linear_build_up": 12
+  },
+  {
+   "pressure_atm": 0.1,
+   "grain_um": 244.09422447730185,
+   "u_star_m_s": 0.48085689733030684,
+   "wind_10m_m_s": 13.84017404570166,
+   "year_of_linear_build_up": 42
+  },
+  {
+   "pressure_atm": 0.3,
+   "grain_um": 244.09422447730185,
+   "u_star_m_s": 0.2776228591153409,
+   "wind_10m_m_s": 7.9906282109171265,
+   "year_of_linear_build_up": 125
+  },
+  {
+   "pressure_atm": 0.6,
+   "grain_um": 244.09422447730185,
+   "u_star_m_s": 0.19630900629285505,
+   "wind_10m_m_s": 5.650227393880029,
+   "year_of_linear_build_up": 250
+  },
+  {
+   "pressure_atm": 1.2,
+   "grain_um": 244.09422447730185,
+   "u_star_m_s": 0.13881142955767045,
+   "wind_10m_m_s": 3.9953141054585632,
+   "year_of_linear_build_up": 500
+  }
+ ],
+ "cold_trap_frost_pa": {
+  "N2_37K": 1.1587144923694528,
+  "N2_40K": 6.230763409200095,
+  "O2_40K": 0.21706802489702204
+ },
+ "warming_depth_m": {
+  "1e-07 m2/s": {
+   "10 yr": 6,
+   "100 yr": 18,
+   "1000 yr": 56
+  },
+  "1e-06 m2/s": {
+   "10 yr": 18,
+   "100 yr": 56,
+   "1000 yr": 178
+  }
+ },
+ "grain_rim_years": {
+  "laboratory_60_to_200nm": [
+   1.5,
+   4.9
+  ],
+  "field_slowdown_factor": [
+   100.0,
+   100000.0
+  ]
+ },
+ "runoff_scaling": {
+  "flow_depth": 1.8209249252854303,
+  "bed_shear_stress": 0.30158929261763023,
+  "shields_number": 1.8209249252854303,
+  "stream_power": 0.16562423218538572,
+  "bedload_far_above_threshold": 1.0,
+  "settling_speed": 0.16562423218538572,
+  "suspension_ease": 3.315767583525749,
+  "cohesive_slope_height": 6.0377638392954776
+ },
+ "raindrop_energy_ratio": {
+  "0.5 mm": 0.074,
+  "1 mm": 0.088,
+  "2 mm": 0.096,
+  "4 mm": 0.138
+ },
+ "tranquility_community": {
+  "at_scenario_share": {
+   "depth_m": 467,
+   "net_inward_atm": 7.7,
+   "steel_shell_m_at_100m_radius": 0.4,
+   "lunar_concrete_shell_m_at_100m_radius": 1.95,
+   "floor_uplift_basalt_equivalent_m": 178,
+   "access_tower_earth_equivalent_m": 77
+  },
+  "at_design_depth": {
+   "depth_m": 700,
+   "net_inward_atm": 11.4,
+   "steel_shell_m_at_100m_radius": 0.49,
+   "lunar_concrete_shell_m_at_100m_radius": 2.89,
+   "floor_uplift_basalt_equivalent_m": 264,
+   "access_tower_earth_equivalent_m": 116
+  }
+ },
+ "sealed_reference_area": {
+  "air_load_t_m2": 74.9,
+  "rock_equivalent_m": 28,
+  "steel_shell_m_at_150m_radius": 0.24,
+  "cold_patch_power_mw_per_km2": 42.5,
+  "cold_patch_assumptions": "1 W/m2 heat leak through vacuum insulation; 15% of Carnot at 40 K"
+ },
+ "sediment_return": {
+  "10 m/Myr": {
+   "ideal_power_gw": 0.11,
+   "rock_gt_per_year": 0.71
+  },
+  "50 m/Myr": {
+   "ideal_power_gw": 0.55,
+   "rock_gt_per_year": 3.55
+  },
+  "100 m/Myr": {
+   "ideal_power_gw": 1.1,
+   "rock_gt_per_year": 7.1
+  }
+ },
+ "civilization_power_w": {
+  "K_1_17": 5.011872336272715e+17
+ },
+ "moonlight_on_earth": {
+  "full": 1.960382513661202,
+  "quarter": [
+   3.234631147540983,
+   4.410860655737705
+  ],
+  "bond_albedo": 0.287,
+  "source": "ExoPlaSim design case, run A (climate/gcm/README.md)"
+ }
+}

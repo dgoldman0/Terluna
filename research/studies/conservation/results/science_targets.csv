@@ -1,0 +1,32 @@
+name,code,lat,lon,diameter_km,height_relative_to_sea_m,becomes,zone,sample,record
+Shackleton,AA,-89.67,129.78,20.9,-828,lake,"B, polar cold trap",before the first gas,permanently shadowed crater: volatiles delivered over billions of years
+Haworth,AA,-87.45,-5.17,51.4,-1388,lake,"B, polar cold trap",before the first gas,permanently shadowed crater: volatiles
+Shoemaker,AA,-88.14,45.91,51.8,-1986,lake,"B, polar cold trap",before the first gas,permanently shadowed crater: volatiles; also the Lunar Prospector scattering site
+Faustini,AA,-87.18,84.31,42.5,-766,lake,"B, polar cold trap",before the first gas,permanently shadowed crater: volatiles
+Cabeus,AA,-85.33,-42.13,100.6,-1777,lake,"B, polar cold trap",before the first gas,permanently shadowed crater: LCROSS measured water and other volatiles here
+de Gerlache,AA,-88.48,-88.34,32.7,575,land,"B, polar cold trap",before the first gas,permanently shadowed crater: volatiles
+Sverdrup,AA,-88.32,-153.39,32.8,-922,lake,"B, polar cold trap",before the first gas,permanently shadowed crater: volatiles
+Nobile,AA,-85.28,53.27,79.3,2785,land,"B, polar cold trap",before the first gas,partly shadowed crater near the south pole
+Hermite,AA,86.17,-93.32,108.6,-249,lake,"B, polar cold trap",before the first gas,one of the coldest measured places in the Solar System
+Rozhdestvenskiy,AA,84.99,-157.89,181.2,-514,lake,"B, polar cold trap",before the first gas,"permanently shadowed crater, north pole"
+Whipple,AA,89.14,120.02,14.5,-711,lake,"B, polar cold trap",before the first gas,"permanently shadowed crater, north pole"
+Peary,AA,88.63,24.4,78.7,444,land,"B, polar cold trap",before the first gas,north-polar crater with near-permanent sunlit rims
+Ina,AA,18.66,5.3,3.0,1130,land,"C, land",before the ground is wetted,possibly very young volcanism (irregular mare patch)
+Reiner Gamma,AL,7.39,-58.96,73.4,-158,seafloor or lake floor,"A, future seafloor",before flooding,lunar swirl on a crustal magnetic anomaly
+Aristarchus,AA,23.73,-47.49,40.0,-1623,seafloor or lake floor,"A, future seafloor",before flooding,fresh crater on a plateau of volcanic glass deposits
+Marius,AA,11.9,-50.84,40.1,-787,seafloor or lake floor,"A, future seafloor",before flooding,volcanic domes and a lava-tube skylight nearby
+Sulpicius Gallus,AA,19.63,11.68,11.6,-2663,seafloor or lake floor,"A, future seafloor",before flooding,volcanic glass deposits on the Serenitatis margin
+Mons Rumker,MO,40.76,-58.38,73.2,-154,seafloor or lake floor,"A, future seafloor",before flooding,volcanic complex beside the youngest dated basalts
+Copernicus,AA,9.62,-20.08,96.1,-1966,seafloor or lake floor,"A, future seafloor",before flooding,large young crater exposing deep crust in its peaks
+Tycho,AA,-43.3,-11.22,85.3,-1166,seafloor or lake floor,"A, future seafloor",before flooding,young crater with the Moon's brightest ray system
+Tsiolkovskiy,AA,-20.38,128.97,184.4,-109,seafloor or lake floor,"A, future seafloor",before flooding,far-side crater with a dark basalt floor
+Von Karman,AA,-44.45,176.25,186.3,-3900,seafloor or lake floor,"A, future seafloor",before flooding,"floor of South Pole-Aitken, the Moon's oldest and largest basin"
+Apollo,AA,-35.69,-151.48,524.2,-3617,seafloor or lake floor,"A, future seafloor",before flooding,"basin inside South Pole-Aitken, sampled by Chang'e 6"
+Poincare,AA,-56.86,163.99,346.0,-3073,seafloor or lake floor,"A, future seafloor",before flooding,basin inside South Pole-Aitken
+Schrodinger,AA,-74.73,132.93,316.4,-2515,seafloor or lake floor,"A, future seafloor",before flooding,young basin with volcanic vents near the south pole
+Mare Ingenii,ME,-33.25,164.83,282.2,-1687,seafloor or lake floor,"A, future seafloor",before flooding,far-side mare with swirls
+Mare Moscoviense,ME,27.28,148.12,275.6,-1641,seafloor or lake floor,"A, future seafloor",before flooding,far-side mare
+Mare Orientale,ME,-19.87,-94.67,294.2,-1198,seafloor or lake floor,"A, future seafloor",before flooding,the youngest large ringed basin
+Cone,LF,-3.62,-17.43,0.3,440,land,"C, land",before the ground is wetted,"young crater at Apollo 14, already sampled"
+North Ray,LF,-8.82,15.48,0.9,1437,land,"C, land",before the ground is wetted,"young crater at Apollo 16, already sampled"
+South Ray,LF,-9.15,15.38,0.7,1418,land,"C, land",before the ground is wetted,very young crater at Apollo 16

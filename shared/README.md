@@ -28,6 +28,11 @@ evaluate the sky. The `development` site (0° N, 65° W) is a placeholder chosen
 Earth is visible about 25° up in the east while the Sun still crosses the zenith;
 it is not a proposed Open Moon location.
 
+[scenarios/water.json](scenarios/water.json) holds the Open Moon's standing-water cover: 28% of the
+surface under seas and lakes, selected on 25 September 2026 within the author's 25–35% range. It
+records the basis for the choice. The geography [atlas](../geography/README.md#atlas-at-the-selected-water-share)
+reads the share, and the water to deliver follows from the domains' hydrology.
+
 ## Lanes and the layer check
 
 | Lane | Folders | May import |

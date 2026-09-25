@@ -1,0 +1,392 @@
+{
+ "about": "Candidate settings from geography alone. People choose community sites, with climate, ecology and the wishes of those who would live there.",
+ "submerged_heritage_communities": [
+  {
+   "site": "Apollo 11, Tranquility Base",
+   "depth_m": 467,
+   "nearest_land_km": 35,
+   "treatment": "undersea community",
+   "evaluation": "decided"
+  },
+  {
+   "site": "Apollo 15, Hadley-Apennine",
+   "depth_m": 453,
+   "nearest_land_km": 8,
+   "treatment": "undersea community",
+   "evaluation": "proposed"
+  },
+  {
+   "site": "Apollo 17, Taurus-Littrow",
+   "depth_m": 1037,
+   "nearest_land_km": 6,
+   "treatment": "undersea community",
+   "evaluation": "proposed"
+  },
+  {
+   "site": "Surveyor 1",
+   "depth_m": 378,
+   "nearest_land_km": 148,
+   "treatment": "undersea community or relic chamber",
+   "evaluation": "open"
+  },
+  {
+   "site": "Lunokhod 1 and Luna 17",
+   "depth_m": 865,
+   "nearest_land_km": 61,
+   "treatment": "undersea community",
+   "evaluation": "proposed"
+  },
+  {
+   "site": "Lunokhod 2 and Luna 21",
+   "depth_m": 1141,
+   "nearest_land_km": 15,
+   "treatment": "undersea community or relic chamber",
+   "evaluation": "proposed"
+  },
+  {
+   "site": "Luna 16",
+   "depth_m": 807,
+   "nearest_land_km": 99,
+   "treatment": "undersea community or relic chamber",
+   "evaluation": "open"
+  },
+  {
+   "site": "Luna 24",
+   "depth_m": 2149,
+   "nearest_land_km": 59,
+   "treatment": "undersea community or relic chamber",
+   "evaluation": "open"
+  },
+  {
+   "site": "Chang'e 3 and Yutu",
+   "depth_m": 1211,
+   "nearest_land_km": 129,
+   "treatment": "undersea community",
+   "evaluation": "proposed"
+  },
+  {
+   "site": "Chang'e 4 and Yutu-2",
+   "depth_m": 4027,
+   "nearest_land_km": 80,
+   "treatment": "undersea community",
+   "evaluation": "open"
+  },
+  {
+   "site": "Chang'e 5",
+   "depth_m": 747,
+   "nearest_land_km": 121,
+   "treatment": "undersea community",
+   "evaluation": "proposed"
+  },
+  {
+   "site": "Chang'e 6",
+   "depth_m": 3312,
+   "nearest_land_km": 132,
+   "treatment": "undersea community",
+   "evaluation": "open"
+  },
+  {
+   "site": "Blue Ghost 1",
+   "depth_m": 2233,
+   "nearest_land_km": 116,
+   "treatment": "undersea community or relic chamber",
+   "evaluation": "open"
+  }
+ ],
+ "related_coastal_communities": [
+  {
+   "beside": "Apollo 15, Hadley-Apennine",
+   "coast_km": 8
+  },
+  {
+   "beside": "Apollo 17, Taurus-Littrow",
+   "coast_km": 6
+  },
+  {
+   "beside": "Lunokhod 2 and Luna 21",
+   "coast_km": 15
+  }
+ ],
+ "islands": [
+  {
+   "summit": [
+    39.12,
+    9.38
+   ],
+   "area_km2": 68385,
+   "summit_m": 4217,
+   "near": [
+    "Montes Caucasus",
+    "Calippus",
+    "Lamech"
+   ]
+  },
+  {
+   "summit": [
+    45.62,
+    -39.38
+   ],
+   "area_km2": 58357,
+   "summit_m": 2514,
+   "near": [
+    "Montes Jura",
+    "Sharp",
+    "Louville"
+   ]
+  },
+  {
+   "summit": [
+    -17.38,
+    -41.88
+   ],
+   "area_km2": 26287,
+   "summit_m": 1748,
+   "near": [
+    "Gassendi"
+   ]
+  },
+  {
+   "summit": [
+    53.62,
+    -6.38
+   ],
+   "area_km2": 10963,
+   "summit_m": 1945,
+   "near": []
+  },
+  {
+   "summit": [
+    26.62,
+    -4.62
+   ],
+   "area_km2": 9161,
+   "summit_m": 1651,
+   "near": [
+    "Montes Archimedes"
+   ]
+  },
+  {
+   "summit": [
+    -73.12,
+    -144.88
+   ],
+   "area_km2": 5543,
+   "summit_m": 4375,
+   "near": []
+  },
+  {
+   "summit": [
+    56.12,
+    92.38
+   ],
+   "area_km2": 4628,
+   "summit_m": 1291,
+   "near": []
+  },
+  {
+   "summit": [
+    -7.12,
+    -27.12
+   ],
+   "area_km2": 4561,
+   "summit_m": 1172,
+   "near": [
+    "Montes Riphaeus"
+   ]
+  },
+  {
+   "summit": [
+    -55.38,
+    132.88
+   ],
+   "area_km2": 4380,
+   "summit_m": 1118,
+   "near": []
+  },
+  {
+   "summit": [
+    50.12,
+    1.88
+   ],
+   "area_km2": 3703,
+   "summit_m": 2564,
+   "near": []
+  },
+  {
+   "summit": [
+    -57.62,
+    153.12
+   ],
+   "area_km2": 3622,
+   "summit_m": 1680,
+   "near": []
+  },
+  {
+   "summit": [
+    22.88,
+    65.62
+   ],
+   "area_km2": 3506,
+   "summit_m": 1518,
+   "near": [
+    "Eimmart"
+   ]
+  },
+  {
+   "summit": [
+    45.62,
+    27.88
+   ],
+   "area_km2": 3362,
+   "summit_m": 848,
+   "near": [
+    "Burg"
+   ]
+  },
+  {
+   "summit": [
+    -77.88,
+    -123.88
+   ],
+   "area_km2": 3231,
+   "summit_m": 1372,
+   "near": []
+  },
+  {
+   "summit": [
+    -64.12,
+    -121.88
+   ],
+   "area_km2": 3221,
+   "summit_m": 3574,
+   "near": [
+    "Watson"
+   ]
+  },
+  {
+   "summit": [
+    35.38,
+    8.12
+   ],
+   "area_km2": 2822,
+   "summit_m": 2119,
+   "near": []
+  },
+  {
+   "summit": [
+    -41.62,
+    172.62
+   ],
+   "area_km2": 2543,
+   "summit_m": 1251,
+   "near": []
+  },
+  {
+   "summit": [
+    42.12,
+    34.12
+   ],
+   "area_km2": 2357,
+   "summit_m": 669,
+   "near": []
+  },
+  {
+   "summit": [
+    22.12,
+    -1.62
+   ],
+   "area_km2": 2274,
+   "summit_m": 1133,
+   "near": [
+    "Mons Bradley"
+   ]
+  },
+  {
+   "summit": [
+    28.62,
+    -4.88
+   ],
+   "area_km2": 2160,
+   "summit_m": 897,
+   "near": [
+    "Archimedes",
+    "Bancroft"
+   ]
+  },
+  {
+   "summit": [
+    52.12,
+    81.88
+   ],
+   "area_km2": 2149,
+   "summit_m": 1843,
+   "near": []
+  },
+  {
+   "summit": [
+    -5.38,
+    -58.62
+   ],
+   "area_km2": 2064,
+   "summit_m": 196,
+   "near": []
+  },
+  {
+   "summit": [
+    1.12,
+    60.62
+   ],
+   "area_km2": 2011,
+   "summit_m": 616,
+   "near": [
+    "Condon"
+   ]
+  }
+ ],
+ "far_side_waters": [
+  {
+   "body": "Mare Ingenii",
+   "area_km2": 2322833,
+   "mean_depth_m": 2082
+  },
+  {
+   "body": "Mare Orientale",
+   "area_km2": 88056,
+   "mean_depth_m": 849
+  },
+  {
+   "body": "Mare Moscoviense",
+   "area_km2": 66449,
+   "mean_depth_m": 1070
+  },
+  {
+   "body": "crater lake",
+   "area_km2": 63732,
+   "mean_depth_m": 480
+  },
+  {
+   "body": "crater lake",
+   "area_km2": 28065,
+   "mean_depth_m": 1100
+  },
+  {
+   "body": "crater lake",
+   "area_km2": 21115,
+   "mean_depth_m": 773
+  }
+ ],
+ "dry_polar_highs": [
+  {
+   "name": "de Gerlache",
+   "height_relative_to_sea_m": 575
+  },
+  {
+   "name": "Nobile",
+   "height_relative_to_sea_m": 2785
+  },
+  {
+   "name": "Peary",
+   "height_relative_to_sea_m": 444
+  }
+ ]
+}

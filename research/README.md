@@ -29,7 +29,7 @@ Models live in their domain folders. This folder holds what spans domains:
 | [Illumination](../illumination/) | Spectral clear-sky solver, A1–A3 light-transport references, site sky geometry and earthlight, bright stars | Date-accurate ephemeris, earthlight spectrum, profiles tied to the solved column |
 | [Protection](../protection/) | Original component model plus spectral coverage audit; the stored film's transmission from hard X-rays to the far ultraviolet | Aperture leakage (gaps, pinholes, edges), clean operation, particle transport and lifetime resources |
 | [Engineering](../engineering/) | Original transport/renewal accounts plus plume-heat sensitivity | Complete industrial network and safe source-to-use routes |
-| [Geography](../geography/) | LOLA topography above the GRAIL geoid; hydrostatic water storage (level curves, basin joins) | Where water stands once rain, runoff and evaporation act |
+| [Geography](../geography/) | LOLA topography above the GRAIL geoid; hydrostatic water storage (level curves, basin joins); the atlas at the selected 28% water share, named from the IAU gazetteer | Where water stands once rain, runoff and evaporation act |
 | [Habitation](../habitation/) | Design concepts | Practical inhabited capacity |
 
 Rendering that displays these results is in [visualization](../visualization/);
@@ -43,6 +43,7 @@ the explorable experience, which reads them as baked products, is in
 |---|---|---|
 | [environment_screens](studies/environment_screens/) | Thermal column, band ledger, climate screen, carbon and oxygen requirements, protection plume heat | Conditional consequences of selected equations; the spectrum/material/chemistry interface is unfilled |
 | [megaforest_wind](studies/megaforest_wind/README.md) | Lower air (atmosphere), canopy flow (climate), tree mechanics (biosphere): 480 static load envelopes | Material and soil traits hypothetical; wind climate, gusts and evolution unmodelled |
+| [conservation](studies/conservation/README.md) | Geography (the atlas), atmosphere (design pressure), climate (albedo, polar temperature), engineering (enclosures, sourcing) and a written heritage evaluation: the two preservation programmes, gates, register, scientific zones and community settings | Heritage evaluation is a first pass awaiting the author's review; numbers are hydrostatic geometry and screening estimates |
 | [forest_patch](studies/forest_patch/README.md) | Three-dimensional patch airflow, tree load sharing, compliant foundations, shared soil and damage | Wind climatology, gusts, nonlinear failure and evolved morphology open |
 
 The forest-patch folder also holds a [reviewed checkpoint](studies/forest_patch/reviewed/README.md)

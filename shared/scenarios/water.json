@@ -1,0 +1,15 @@
+{
+  "schema": "terluna.shared.water-scenario/1",
+  "about": "The Open Moon's standing-water cover: the share of the surface under seas and lakes. Domains read the share here; the water to deliver follows from each domain's hydrology.",
+  "surface_water_share": 0.28,
+  "status": "Selected 2026-09-25 within the author's 25-35% range, at the author's request, as the basis of the atlas and the conservation study.",
+  "basis": [
+    "One connected near-side sea: the near-side maria join at about -1.70 km above the geoid, and the 28% level (-1.654 km) sits about 50 m above that sill.",
+    "The face seen from Earth: water covers 37% of the near-side hemisphere, close to the 31% covered by maria today.",
+    "Heritage margins: Apollo 14, Apollo 16, Luna 9 and SLIM stand 390 m or more above the sea; Apollo 12 stands 50 m above it.",
+    "Climate: the ExoPlaSim design cases at 25% and 35% water (climate/gcm) bracket this share.",
+    "Standing water of 1.07e19 kg, between the 0.92e19 kg of 25% and the 1.46e19 kg of 35%."
+  ],
+  "reading_rule": "The share fixes standing-water area at one common level (geography/atlas.py). The delivered inventory adds the water the porous crust absorbs; crustal loading and each catchment's rainfall and evaporation then move the shoreline.",
+  "references": ["geography/results/atlas.json", "research/studies/conservation/README.md"]
+}

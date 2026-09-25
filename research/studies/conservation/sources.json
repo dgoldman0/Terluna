@@ -1,0 +1,61 @@
+{
+  "schema": "terluna.research.sources/1",
+  "retrieved": "2026-09-25",
+  "admission": "Research leads read as abstracts, summaries or primary web pages during the research round of 25 September 2026. Full-text reading and claim locators remain to be recorded before any manuscript citation.",
+  "data": [
+    {"title": "Gazetteer of Planetary Nomenclature, lunar centre points (IAU WGPSN, USGS)", "url": "https://planetarynames.wr.usgs.gov", "use": "feature names and positions; restored and hash-checked by geography/fetch_inputs.py"},
+    {"title": "LRO LOLA gridded topography and GRAIL GL0420A gravity", "url": "https://pds-geosciences.wustl.edu/missions/lro/lola.htm", "use": "heights above the geoid (geography inputs)"}
+  ],
+  "heritage": [
+    {"title": "NASA Recommendations to Space-Faring Entities: How to Protect and Preserve the Historic and Scientific Value of U.S. Government Lunar Artifacts (2011)", "url": "https://www.nasa.gov/wp-content/uploads/2017/10/617743main_nasa-usg_lunar_historic_sites_reva-508.pdf", "use": "existing keep-out practice (75 m and 225 m at Apollo 11 and 17)"},
+    {"title": "For All Moonkind, Moon Registry", "url": "https://moonregistry.forallmoonkind.org/about-us/", "use": "an inventory of more than 100 sites"},
+    {"title": "UNESCO Convention on the Protection of the Underwater Cultural Heritage (2001), Annex Rule 1", "url": "https://www.unesco.org/en/legal-affairs/convention-protection-underwater-cultural-heritage", "use": "in-place preservation as the first option underwater"},
+    {"title": "The Burra Charter (Australia ICOMOS, 2013)", "url": "https://australia.icomos.org/wp-content/uploads/The-Burra-Charter-2013-Adopted-31.10.2013.pdf", "use": "aspects of cultural significance; 'as much as necessary but as little as possible'"},
+    {"title": "The Venice Charter (1964)", "url": "https://www.icomos.org/images/DOCUMENTS/Charters/venice_e.pdf", "use": "moving a monument only when its safeguarding requires it"},
+    {"title": "The Nara Document on Authenticity (1994)", "url": "https://www.iccrom.org/sites/default/files/publications/2020-05/convern8_06_thenaradocu_ing.pdf", "use": "authenticity judged within each culture"},
+    {"title": "International Campaign to Save the Monuments of Nubia", "url": "https://en.wikipedia.org/wiki/International_Campaign_to_Save_the_Monuments_of_Nubia", "use": "relocation ahead of a reservoir (Abu Simbel, 1964-68)"},
+    {"title": "LKAB, the moving of Kiruna Church (2025)", "url": "https://lkab.com/en/events/the-moving-of-kiruna-church/", "use": "moving a building out of transformed ground"},
+    {"title": "Lascaux: history of the cave and its replicas", "url": "https://lascaux.fr/en/history-of-lascaux/", "use": "closing an original and opening full replicas"},
+    {"title": "DeSilvey, Curated Decay: Heritage Beyond Saving (2017)", "url": "https://www.upress.umn.edu/9780816694389/curated-decay/", "use": "letting some heritage change under care"},
+    {"title": "Onkalo spent nuclear fuel repository", "url": "https://en.wikipedia.org/wiki/Onkalo_spent_nuclear_fuel_repository", "use": "passive containment designed for 100,000 years"},
+    {"title": "Ice Memory sanctuary at Concordia (CNRS, January 2026)", "url": "https://www.cnrs.fr/en/press/ice-memory-foundation-opens-first-ever-sanctuary-mountain-ice-cores-antarctica-storing-these", "use": "archiving ice before it is lost, stored passively at about -52 C"},
+    {"title": "Navajo Nation President's statement on human remains and the Moon (27 December 2023)", "url": "https://opvp.navajo-nsn.gov/navajo-president-buu-nygren-asks-nasa-to-delay-january-moon-launch-to-consult-with-nation-respect-traditional-beliefs/", "use": "the Moon as sacred in Dine tradition"}
+  ],
+  "science": [
+    {"title": "Paiva et al. (2025), Can spacecraft-borne contamination compromise our understanding of lunar ice chemistry?, JGR Planets", "url": "https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2025JE009132", "use": "over half of a lander's exhaust methane cold-trapped within seven lunar days"},
+    {"title": "National Academies (2020), planetary protection for the study of lunar volatiles", "url": "https://www.nationalacademies.org/read/26029/chapter/5", "use": "recommendation to obtain the first clean samples from permanently shadowed regions"},
+    {"title": "Colaprete et al. (2010), LCROSS water detection, Science", "url": "https://www.science.org/doi/10.1126/science.1186986", "use": "5.6 wt% water and other volatiles at Cabeus"},
+    {"title": "Crawford et al. (2010), lunar palaeoregolith deposits", "url": "https://arxiv.org/abs/1008.4027", "use": "ancient soils sealed between lava flows as records"},
+    {"title": "Armstrong et al. (2002), Rocks from the Earth on the Moon", "url": "https://arxiv.org/abs/astro-ph/0207316", "use": "terrestrial material in the regolith"},
+    {"title": "Terada et al. (2017), biogenic oxygen from Earth transported to the Moon, Nature Astronomy", "url": "https://www.nature.com/articles/s41550-016-0026", "use": "Earth's atmosphere implanted in lunar soil"},
+    {"title": "Wieczorek et al. (2013), the crust of the Moon as seen by GRAIL, Science", "url": "https://www.science.org/doi/10.1126/science.1231530", "use": "about 12% average crustal porosity to several kilometres"},
+    {"title": "Gislason and Oelkers (2003), basaltic glass dissolution", "url": "https://repository.geologyscience.ru/bitstream/handle/123456789/33920/Gisl_03.pdf", "use": "glass dissolution rates near 25 C"},
+    {"title": "NASA, one of the last sealed Apollo samples opened (ANGSA, 2022)", "url": "https://www.nasa.gov/general/fifty-years-later-curators-unveil-one-of-last-sealed-apollo-samples/", "use": "keeping samples unopened for future methods"},
+    {"title": "UMD, Next Generation Lunar Retroreflector status (March 2025)", "url": "https://www.physics.umd.edu/nglr/status_03122025.html", "use": "the newest laser reflector on Blue Ghost 1"},
+    {"title": "Kieffer (1997), photometric stability of the lunar surface, Icarus", "url": "https://www.sciencedirect.com/science/article/abs/pii/S001910359795822X", "use": "the Moon as a calibration standard"},
+    {"title": "Tittmann et al. (1980), volatiles and seismic Q in lunar rocks, JGR", "url": "https://agupubs.onlinelibrary.wiley.com/doi/10.1029/JB085iB10p05199", "use": "adsorbed water lowers the dry rock's high seismic Q"},
+    {"title": "ITU (August 2026), cosmology from the Moon in a radio-quiet environment", "url": "https://www.itu.int/hub/2026/08/cosmology-from-the-moon-in-a-radio-quiet-environment/", "use": "far-side radio quiet and the absent ionosphere"},
+    {"title": "Janda et al., lahar sediment yields after Pinatubo (USGS)", "url": "https://pubs.usgs.gov/pinatubo/janda/", "use": "fresh unvegetated ash as an analogue for bare regolith under rain"},
+    {"title": "Shao and Lu (2000), a simple expression for wind erosion threshold friction velocity, JGR", "url": "https://doi.org/10.1029/2000JD900304", "use": "saltation threshold in screens.py"},
+    {"title": "Otero et al. (2018), seabird colonies in global nitrogen and phosphorus cycles, Nature Communications", "url": "https://www.nature.com/articles/s41467-017-02446-8", "use": "biological return of phosphorus to land"}
+  ],
+  "ethics": [
+    {"title": "Sparrow (1999), The ethics of terraforming, Environmental Ethics", "url": "https://www.pdcnet.org/enviroethics/content/enviroethics_1999_0021_0003_0227_0245", "use": "virtue-ethics critique"},
+    {"title": "McKay and Marinova (2001), the physics, biology and environmental ethics of making Mars habitable, Astrobiology", "url": "https://ntrs.nasa.gov/citations/20040087967", "use": "the value of a living world"},
+    {"title": "Rolston (1986), the preservation of natural value in the Solar System", "url": "http://hdl.handle.net/10217/37453", "use": "value of lifeless nature; places that deserve proper names"},
+    {"title": "Cockell and Horneck (2006), planetary parks, Space Policy", "url": "https://www.research.ed.ac.uk/en/publications/planetary-parks-formulating-a-wilderness-policy-for-planetary-bod/", "use": "representative protected regions"},
+    {"title": "Elvis and Milligan (2019), how much of the Solar System should we leave as wilderness?, Acta Astronautica", "url": "https://arxiv.org/abs/1905.13681", "use": "the one-eighth principle"},
+    {"title": "Capper, international multiuse lunar reserves, Space Policy", "url": "https://aquila.usm.edu/fac_pubs/19846/", "use": "the Moon's face as a cultural landscape"},
+    {"title": "Declaration of the Rights of the Moon (2021)", "url": "https://www.earthlaws.org.au/moon-declaration/", "use": "the opposite pole of the debate"},
+    {"title": "Iess et al. (2019), Saturn's ring mass, as reported", "url": "https://www.sci.news/space/saturns-ring-system-07295.html", "use": "the rings as a unique body to protect"}
+  ],
+  "earth_and_replacements": [
+    {"title": "Lin et al. (2021), moonlight timing of coral spawning, PNAS", "url": "https://www.pnas.org/doi/10.1073/pnas.2101985118", "use": "a timing cue"},
+    {"title": "Last et al. (2016), moonlight drives Arctic zooplankton migration, Current Biology", "url": "https://pubmed.ncbi.nlm.nih.gov/26774785/", "use": "a brightness cue"},
+    {"title": "Robinson (2026), Earth's geometric albedo and phase curve, Planetary Science Journal", "url": "https://iopscience.iop.org/article/10.3847/PSJ/ae2ec6", "use": "Earth-like phase integral"},
+    {"title": "Mallama et al. (2017), Earth's phase curve", "url": "https://arxiv.org/abs/1609.05048", "use": "quarter-phase share of an Earth-like planet"},
+    {"title": "NIST, the Landolt space mission", "url": "https://www.nist.gov/measuring-cosmos/space/landolt-space-mission", "use": "an artificial star for flux calibration"},
+    {"title": "TRUTHS (Traceable Radiometry Underpinning Terrestrial and Helio Studies)", "url": "https://en.wikipedia.org/wiki/Traceable_Radiometry_Underpinning_Terrestrial_and_Helio_Studies", "use": "a traceable reference satellite, suspended at the end of 2025"},
+    {"title": "Hongmeng (Discovering the Sky at the Longest Wavelengths)", "url": "https://en.wikipedia.org/wiki/Hongmeng_project", "use": "a lunar-orbit radio array"}
+  ]
+}
