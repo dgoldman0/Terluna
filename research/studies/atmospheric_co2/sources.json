@@ -1,0 +1,21 @@
+{
+  "source_admission": "Published values used as constants or quoted ranges; no external dataset files are admitted. 'access' records how far each source was checked: 'formula checked' means the equation was verified in the paper's text by this study; 'reported' means taken from a literature search's reading of the paper (full text or abstract as noted) and not re-read here. Bibliographic details are as reported.",
+  "sources": [
+    {"citation": "Bernacchi et al. 2001, Plant, Cell & Environment 24, 253", "use": "Gamma*, Kc and Ko against temperature for the C3 leaf model", "access": "reported; the model reproduces the 25 C values (42.75 and 404.9 umol/mol, 278.4 mmol/mol), which the tests check"},
+    {"citation": "Medlyn et al. 2002", "use": "mean activation energies of Vcmax and Jmax", "access": "reported"},
+    {"citation": "Dessert et al. 2003, Chemical Geology 202, 257", "use": "basalt weathering law fCO2 = Rf 323.44 exp(0.0642 T) (mol km-2 yr-1, Rf in mm/yr, T in C) and the catchment range 0.30-6.41e6 mol km-2 yr-1", "access": "formula checked in the full text"},
+    {"citation": "Temme et al. 2013, Ecology and Evolution", "doi": "10.1002/ece3.836", "use": "meta-analysis of halved CO2: photosynthesis -38%, biomass -47%", "access": "reported, full text"},
+    {"citation": "Sage 1995, Global Change Biology", "doi": "10.1111/j.1365-2486.1995.tb00009.x", "use": "C3 gains from 20 to 27 Pa", "access": "reported, abstract"},
+    {"citation": "Mayeux et al. 1997, Global Change Biology", "doi": "10.1046/j.1365-2486.1997.00074.x", "use": "wheat yield from about 20 to 35 Pa", "access": "reported"},
+    {"citation": "Cunniff et al. 2016, Annals of Botany (PMC5091726); 2017, Global Change Biology", "doi": "10.1111/gcb.13473", "use": "wild C3 and C4 cereals at glacial against post-glacial CO2", "access": "reported"},
+    {"citation": "Cowling & Sage 1998, Plant, Cell & Environment", "doi": "10.1046/j.1365-3040.1998.00290.x", "use": "low CO2 costs more in heat", "access": "reported"},
+    {"citation": "Baker et al. 1990, Journal of Agricultural Science; Baker & Allen 1993", "doi": "10.1017/s0021859600075729", "use": "rice yield saturates near 50 Pa", "access": "reported, full text"},
+    {"citation": "Polley et al. 2003, New Phytologist", "doi": "10.1046/j.1469-8137.2003.00897.x", "use": "grassland productivity from 20 to 56 Pa", "access": "reported"},
+    {"citation": "Ainsworth & Long 2021, Global Change Biology 27, 27", "use": "FACE crop responses and nutrient dilution", "access": "reported"},
+    {"citation": "Tolbert et al. 1995, PNAS", "doi": "10.1073/pnas.92.24.11230", "use": "compensation points depend on the CO2:O2 ratio", "access": "reported"},
+    {"citation": "Goto et al. 1996, Journal of Agricultural Meteorology 52, 117; Iwabuchi et al. 1996", "use": "plant gas exchange at other total pressures", "access": "reported, full text"},
+    {"citation": "IPCC Third Assessment Report, Working Group I, Table 3.2", "use": "land carbon in plants and the top metre of soil by biome", "access": "reported, full text"},
+    {"citation": "Poorter et al. 2016; Post & Kwon 2000; Lichter 1998", "use": "carbon accumulation rates: regrowing tropical forest, soils, primary succession", "access": "reported"},
+    {"citation": "Heiken, Vaniman & French (eds.) 1991, Lunar Sourcebook, chapters 5 and 7", "use": "regolith depth, grain size, glass content and CaO + MgO", "access": "reported, full text"}
+  ]
+}

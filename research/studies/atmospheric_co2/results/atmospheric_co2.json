@@ -1,0 +1,200 @@
+{
+ "schema": "terluna.research.atmospheric-co2/1",
+ "evidence": "A literature synthesis with small calculations: plant responses and rates come from Earth experiments, catchments and inventories, applied to the Moon's design air (1.2 atm, O2 at Earth's partial pressure). The photosynthesis ratios come from a textbook leaf model at fixed CO2 ratio and light saturation, not from lunar plants. Weathering and biosphere rates are Earth ranges; lunar regolith lacks nitrogen and soils, and the ocean's uptake is not included. None of this is a carbon-cycle model or a measurement.",
+ "reading_rule": "Use the partial pressures (Pa), not ppm, when comparing with plant data: O2 is at Earth's partial pressure, so the CO2 partial pressure is what plants respond to. Treat rates and times as orders of magnitude; gross weathering is the uptake into bicarbonate, net is what stays after carbonate forms in the seas.",
+ "design_air": {
+  "pressure_pa": 121590.0,
+  "co2_ppm": 400.0,
+  "co2_pa": 48.64,
+  "o2_pa": 21227,
+  "ppm_per_pa": 8.224,
+  "kg_co2_per_m2_per_pa": 0.94,
+  "gt_co2_per_pa": 35.6,
+  "inventory_kg_co2": 1734000000000000.0,
+  "land_share": 0.72,
+  "inventory_kg_co2_per_m2_land": 63.5
+ },
+ "photosynthesis": {
+  "25C": {
+   "compensation_gamma_star_pa": 4.29,
+   "relative_to_earth_today": {
+    "18": 0.366,
+    "20": 0.431,
+    "28": 0.669,
+    "35": 0.855,
+    "41": 1.0,
+    "49": 1.175,
+    "60": 1.296,
+    "80": 1.397
+   },
+   "design_pressure_rate_at_41pa": 0.945,
+   "partial_pressure_matching_earth_today_pa": 43.5
+  },
+  "30C": {
+   "compensation_gamma_star_pa": 5.52,
+   "relative_to_earth_today": {
+    "18": 0.289,
+    "20": 0.358,
+    "28": 0.62,
+    "35": 0.831,
+    "41": 1.0,
+    "49": 1.21,
+    "60": 1.474,
+    "80": 1.764
+   },
+   "design_pressure_rate_at_41pa": 0.939,
+   "partial_pressure_matching_earth_today_pa": 43.5
+  },
+  "35C": {
+   "compensation_gamma_star_pa": 7.04,
+   "relative_to_earth_today": {
+    "18": 0.193,
+    "20": 0.268,
+    "28": 0.561,
+    "35": 0.802,
+    "41": 1.0,
+    "49": 1.251,
+    "60": 1.574,
+    "80": 2.106
+   },
+   "design_pressure_rate_at_41pa": 0.932,
+   "partial_pressure_matching_earth_today_pa": 43.5
+  }
+ },
+ "biosphere": {
+  "earth_like_land_carbon_kg_co2": [
+   1501000000000000.0,
+   1601000000000000.0
+  ],
+  "share_of_inventory": [
+   0.87,
+   0.92
+  ],
+  "years_to_accumulate": {
+   "regrowing_tropical_forest": 50,
+   "soil_build_up": 470,
+   "primary_succession": 674
+  }
+ },
+ "weathering": {
+  "runoff_from": "geography/results/drainage.json rivers (302374 m3/s over 0.72 of the surface)",
+  "cases": [
+   {
+    "runoff_mm_yr": 349,
+    "temperature_c": 20.0,
+    "fresh_glass_factor": 1.0,
+    "gross_mol_km2_yr": 408000.0,
+    "gross_gt_yr": 0.49,
+    "net_gt_yr": 0.25,
+    "years_net_49_to_28_pa": 3050.0
+   },
+   {
+    "runoff_mm_yr": 349,
+    "temperature_c": 20.0,
+    "fresh_glass_factor": 10.0,
+    "gross_mol_km2_yr": 4081000.0,
+    "gross_gt_yr": 4.9,
+    "net_gt_yr": 2.45,
+    "years_net_49_to_28_pa": 310.0
+   },
+   {
+    "runoff_mm_yr": 349,
+    "temperature_c": 26.0,
+    "fresh_glass_factor": 1.0,
+    "gross_mol_km2_yr": 600000.0,
+    "gross_gt_yr": 0.72,
+    "net_gt_yr": 0.36,
+    "years_net_49_to_28_pa": 2080.0
+   },
+   {
+    "runoff_mm_yr": 349,
+    "temperature_c": 26.0,
+    "fresh_glass_factor": 10.0,
+    "gross_mol_km2_yr": 5998000.0,
+    "gross_gt_yr": 7.21,
+    "net_gt_yr": 3.6,
+    "years_net_49_to_28_pa": 210.0
+   },
+   {
+    "runoff_mm_yr": 349,
+    "temperature_c": 30.0,
+    "fresh_glass_factor": 1.0,
+    "gross_mol_km2_yr": 775000.0,
+    "gross_gt_yr": 0.93,
+    "net_gt_yr": 0.47,
+    "years_net_49_to_28_pa": 1610.0
+   },
+   {
+    "runoff_mm_yr": 349,
+    "temperature_c": 30.0,
+    "fresh_glass_factor": 10.0,
+    "gross_mol_km2_yr": 7754000.0,
+    "gross_gt_yr": 9.32,
+    "net_gt_yr": 4.66,
+    "years_net_49_to_28_pa": 160.0
+   },
+   {
+    "runoff_mm_yr": 1000,
+    "temperature_c": 20.0,
+    "fresh_glass_factor": 1.0,
+    "gross_mol_km2_yr": 1168000.0,
+    "gross_gt_yr": 1.4,
+    "net_gt_yr": 0.7,
+    "years_net_49_to_28_pa": 1070.0
+   },
+   {
+    "runoff_mm_yr": 1000,
+    "temperature_c": 20.0,
+    "fresh_glass_factor": 10.0,
+    "gross_mol_km2_yr": 11680000.0,
+    "gross_gt_yr": 14.04,
+    "net_gt_yr": 7.02,
+    "years_net_49_to_28_pa": 110.0
+   },
+   {
+    "runoff_mm_yr": 1000,
+    "temperature_c": 26.0,
+    "fresh_glass_factor": 1.0,
+    "gross_mol_km2_yr": 1717000.0,
+    "gross_gt_yr": 2.06,
+    "net_gt_yr": 1.03,
+    "years_net_49_to_28_pa": 730.0
+   },
+   {
+    "runoff_mm_yr": 1000,
+    "temperature_c": 26.0,
+    "fresh_glass_factor": 10.0,
+    "gross_mol_km2_yr": 17168000.0,
+    "gross_gt_yr": 20.64,
+    "net_gt_yr": 10.32,
+    "years_net_49_to_28_pa": 70.0
+   },
+   {
+    "runoff_mm_yr": 1000,
+    "temperature_c": 30.0,
+    "fresh_glass_factor": 1.0,
+    "gross_mol_km2_yr": 2219000.0,
+    "gross_gt_yr": 2.67,
+    "net_gt_yr": 1.33,
+    "years_net_49_to_28_pa": 560.0
+   },
+   {
+    "runoff_mm_yr": 1000,
+    "temperature_c": 30.0,
+    "fresh_glass_factor": 10.0,
+    "gross_mol_km2_yr": 22194000.0,
+    "gross_gt_yr": 26.68,
+    "net_gt_yr": 13.34,
+    "years_net_49_to_28_pa": 60.0
+   }
+  ]
+ },
+ "return_step": {
+  "calcination_kj_per_mol": 178.0,
+  "heat_gw_per_gt_co2_per_year": 128
+ },
+ "producer": {
+  "file": "research/studies/atmospheric_co2/run.py",
+  "sha256": "4ce3bb35ea310e02"
+ }
+}

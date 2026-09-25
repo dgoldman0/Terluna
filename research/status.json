@@ -9,7 +9,7 @@
   "topics": [
     {
       "topic": "atmosphere",
-      "condition": "solved_molecular_thermal_limit; clear_sky_line_by_line_radiation_for_prescribed_columns; shield_filtered_sunlight; correlated_k_thermal_scheme_validated_to_5_30_pa; global_mean_radiative_photochemical_equilibrium_per_shield; balance_temperatures_solved_for_every_case; two_level_non_lte_co2_cooling_with_nir_thermalisation_bounds; idealised_filter_and_titania_film_leakage_heating_and_atomic_oxygen_escape_bounds; line_by_line_radiation_benchmarks_for_gcm; fluorinated_trace_gas_forcing_from_measured_bands; exobase_coupling_conditional",
+      "condition": "solved_molecular_thermal_limit; clear_sky_line_by_line_radiation_for_prescribed_columns; shield_filtered_sunlight; correlated_k_thermal_scheme_validated_to_5_30_pa; global_mean_radiative_photochemical_equilibrium_per_shield; balance_temperatures_solved_for_every_case; two_level_non_lte_co2_cooling_with_nir_thermalisation_bounds; idealised_filter_and_titania_film_leakage_heating_and_atomic_oxygen_escape_bounds; line_by_line_radiation_benchmarks_for_gcm; fluorinated_trace_gas_forcing_from_measured_bands; exobase_coupling_conditional; exobase_co2_sensitivity_150_280ppm",
       "material": [
         "../atmosphere/sim/sim1.py",
         "baselines/feasibility/model.py",
@@ -32,7 +32,7 @@
     },
     {
       "topic": "climate",
-      "condition": "periodic_conservative_spatial_linear_screen; uncalibrated; clear_sky_radiation_computed_for_prescribed_columns; single_column_month_long_day_night_with_weak_temperature_gradient_exchange; gcm_boundary_files_prepared; exoplasim_radiation_calibrated_to_line_by_line; exoplasim_design_case_settled_295k; exoplasim_cloud_water_corrected_and_bracketed_292_298k",
+      "condition": "periodic_conservative_spatial_linear_screen; uncalibrated; clear_sky_radiation_computed_for_prescribed_columns; single_column_month_long_day_night_with_weak_temperature_gradient_exchange; gcm_boundary_files_prepared; exoplasim_radiation_calibrated_to_line_by_line; exoplasim_design_case_settled_295k; exoplasim_cloud_water_corrected_and_bracketed_292_298k; exoplasim_convective_cloud_units_corrected_design_case_299.6k; slow_rotator_cloud_literature_reviewed",
       "material": [
         "../climate/reference/thermal_response.csv",
         "baselines/feasibility/model.py",
@@ -44,13 +44,14 @@
         "../climate/results/lunar_day/"
       ],
       "unresolved": [
-        "cloud amount of a slowly rotating Moon, including a thick deck under the Sun (PlaSim diagnoses cover; the ExoPlaSim bracket spans cloud water only)",
+        "absolute cloud amount: PlaSim diagnoses cover (20-28%); published slow-rotator GCMs suggest no thick day-side deck at this sunlight, but models disagree widely on amounts",
+        "open water at the atlas's 28% seas plus about 12% rain-fed lakes, which the GCM does not yet carry",
         "moisture/ice/clouds",
         "dynamical heat transport and weather, including the day-night and polar circulation the single column replaces with relaxation, and the free-atmosphere temperature it holds at the global mean",
         "actual terrain",
         "spatial resolution sensitivity"
       ],
-      "next_session_task": "Constrain the cloud amount: impose published slow-rotator cloud results on ExoPlaSim's cloud cover, optionally test the sunlit side's convection with a cloud-resolving model at lunar gravity, and run the design case in ROCKE-3D on rented compute. Then set up runs D (UV-passing shield with ozone) and E (trace-gas forcing)."
+      "next_session_task": "Run the design case at the atlas's 28% seas with the large rain-fed lakes as water cells and both cloud corrections, and iterate the lakes with its rainfall (with geography). Then test cloud amount: a 1-day-rotation reference run against the published fast-to-slow changes, or a cloud-resolving model at lunar gravity; ROCKE-3D on rented compute; runs D and E."
     },
     {
       "topic": "geography",
@@ -187,6 +188,22 @@
         "replacement systems for calibration, radio quiet and ranging, and their timing"
       ],
       "next_session_task": "Take the author's review of the register and principles; add groundwater storage to the atlas; compute the Open Moon's appearance from Earth."
+    },
+    {
+      "topic": "atmospheric_co2",
+      "condition": "literature_synthesis_of_plant_co2_needs; c3_leaf_model_ratios; basalt_weathering_law_drawdown; exobase_and_forcing_from_atmosphere_results; no_box_model",
+      "material": [
+        "studies/atmospheric_co2/README.md",
+        "studies/atmospheric_co2/run.py",
+        "studies/atmospheric_co2/results/atmospheric_co2.json",
+        "studies/atmospheric_co2/sources.json"
+      ],
+      "unresolved": [
+        "rates are Earth rates; lunar regolith lacks nitrogen and soil",
+        "ocean carbonate chemistry and uptake",
+        "how weathering slows as soils form, and the size of the managed return"
+      ],
+      "next_session_task": "A box model of air, plants, soils, ocean and carbonate sediments with a managed return, run with the water inventory and the mineral cycle."
     }
   ],
   "new_check_record": "studies/environment_screens/checks.json",
