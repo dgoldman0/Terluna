@@ -72,6 +72,11 @@ EXPERIMENTS = {
     'A': dict(pressure_pa=121590.0, water=25, shield='titania_stack', mldepth=50.0, purpose='design case'),
     'B': dict(pressure_pa=121590.0, water=35, shield='titania_stack', mldepth=50.0, purpose='water sensitivity'),
     'C': dict(pressure_pa=101325.0, water=25, shield='titania_stack', mldepth=50.0, purpose='pressure sensitivity'),
+    # The scenario's 28% seas (shared/scenarios/water.json) with the geography domain's rain-fed lakes as
+    # water cells at their own levels: about 40% of the surface under water. A restart carries PlaSim's
+    # land-sea mask and orography, so a change of coastline needs a cold start.
+    'A28': dict(pressure_pa=121590.0, water=28, lakes=True, shield='titania_stack', mldepth=50.0,
+                purpose='design case with the atlas seas and rain-fed lakes'),
 }
 # PlaSim fits a whole number of solar days into its year: 12 lunar days of 1430 half-hour steps
 # (29.8 Earth days each, 0.9% longer than the real 29.53, with the true 27.32-day rotation), 357.5
@@ -263,14 +268,19 @@ def land_mask(land_fraction, area, water_share):
 
 
 def surface_files(cfg, folder: Path):
-    """Land mask (code 172) and surface geopotential (code 129) at T21 from the geography product."""
+    """Land mask (code 172) and surface geopotential (code 129) at T21 from the geography product. With
+    lakes, the water share is the product's (seas and lakes) and water cells stand at their water surface."""
     import netCDF4
-    with netCDF4.Dataset(PRODUCTS / f"moon_{cfg['water']}pct_water_gaussian_T21.nc") as d:
+    lakes = cfg.get('lakes', False)
+    name = f"moon_{cfg['water']}pct_water_lakes_gaussian_T21.nc" if lakes else f"moon_{cfg['water']}pct_water_gaussian_T21.nc"
+    with netCDF4.Dataset(PRODUCTS / name) as d:
         land = np.asarray(d['land_fraction'][:], dtype=float)
         height = np.asarray(d['land_elevation_m'][:], dtype=float)
         area = np.asarray(d['cell_area_fraction'][:], dtype=float)
-    mask = land_mask(land, area, cfg['water'] / 100.0)
-    geopotential = np.where(mask > 0, np.maximum(height, 0.0) * cfg['planet']['gravity'], 0.0)
+        surface = np.asarray(d['water_surface_m'][:], dtype=float) if lakes else np.zeros_like(land)
+    share = 1.0 - float((land * area).sum() / area.sum()) if lakes else cfg['water'] / 100.0
+    mask = land_mask(land, area, share)
+    geopotential = np.where(mask > 0, np.maximum(height, 0.0), np.maximum(surface, 0.0)) * cfg['planet']['gravity']
     folder.mkdir(parents=True, exist_ok=True)
     _write_sra(folder / 'moon_landmask.sra', 172, mask)
     _write_sra(folder / 'moon_topography.sra', 129, geopotential)
