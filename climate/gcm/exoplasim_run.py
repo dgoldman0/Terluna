@@ -146,6 +146,18 @@ def surface_files(cfg, folder: Path):
     return folder / 'moon_landmask.sra', folder / 'moon_topography.sra', float((mask * area).sum() / area.sum())
 
 
+def filtered_spectrum(grid_um, w_nm, f_nm, shield_nm, shield_t):
+    """Solar F_lambda (W m^-2 um^-1) through the shield on `grid_um`. Past the measured spectrum's end
+    it falls off as the Sun's 5772 K blackbody, matched there: holding the last value instead would
+    invent an infrared tail that ExoPlaSim counts in its near-infrared band."""
+    h, c, k = 6.62607015e-34, 299792458.0, 1.380649e-23
+    planck = lambda um: 1.0 / ((um * 1e-6) ** 5 * np.expm1(h * c / (um * 1e-6 * k * 5772.0)))
+    w_um, f_um = w_nm / 1000.0, f_nm * 1000.0
+    grid = np.asarray(grid_um, dtype=float)
+    sun = np.where(grid <= w_um[-1], np.interp(grid, w_um, f_um), f_um[-1] * planck(grid) / planck(w_um[-1]))
+    return sun * np.interp(grid * 1000.0, shield_nm, shield_t)
+
+
 def sunlight(cfg, folder: Path):
     """Solar spectrum times the shield's transmission, in ExoPlaSim's two spectrum files; returns the flux."""
     from atmosphere.radiative_convective import fetch_inputs
@@ -167,14 +179,13 @@ def sunlight(cfg, folder: Path):
     flux = passed + tail
     import exoplasim
     source = Path(exoplasim.__file__).parent
-    w_um, f_um = w_nm / 1000.0, f * t * 1000.0                        # um, W m^-2 um^-1
     hi = np.concatenate([np.geomspace(0.2, 0.75, 1025)[:-1], np.geomspace(0.75, 100.0, 1024)])
     lo = np.loadtxt(source / 'wvref.txt')
     speed = 299792458.0                                               # ExoPlaSim's own scaling of these files
     folder.mkdir(parents=True, exist_ok=True)
     stem = folder / f"sun_{cfg['shield']}"
     for grid, name in ((hi, stem.name + '_hr'), (lo, stem.name)):
-        values = np.interp(grid, w_um, f_um, right=float(f_um[-1])) / speed
+        values = filtered_spectrum(grid, w_nm, f, product['wavelength_nm'], product['transmission'][cfg['shield']]) / speed
         text = ' Wavelength    Flux  \n' + ''.join(f'{x} {y}\n' for x, y in zip(grid, values))
         (folder / f'{name}.dat').write_text(text)
     return f'{stem}.dat', flux
@@ -238,6 +249,18 @@ def _prune(workdir: Path, year: int):
         y = int(p.name.split('.')[1])
         if y <= year - KEEP_OUTPUT_YEARS and y % 10 != 9:
             p.unlink()
+
+
+def model_reported_sunlight(workdir: Path) -> dict:
+    """The band split and Rayleigh coefficient ExoPlaSim derived from the spectrum (its diagnostic file)."""
+    out = {}
+    for path in sorted(workdir.glob('MOST_DIAG.*'))[:1]:
+        for line in path.read_text(errors='replace').splitlines():
+            for key, label in (('energy_below_0.75um', 'Energy fraction below 0.75 microns:'),
+                               ('rayleigh_coefficient', 'Rayleigh scattering coefficient:')):
+                if label in line:
+                    out[key] = float(line.split(':')[1])
+    return out
 
 
 def _members(pgid: int) -> list:
@@ -405,6 +428,14 @@ def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: boo
                 print(f'{name}: year {year} produced no output or restart; stopping.', file=sys.stderr)
                 return 1
             entry = dict(year=year, seconds=round(time.time() - start, 1), **summarise_year(out))
+            if 'model_sunlight' not in progress:
+                # The Sun's light splits about evenly across 0.75 um; anything far off means a broken spectrum.
+                progress['model_sunlight'] = model_reported_sunlight(workdir)
+                split = progress['model_sunlight'].get('energy_below_0.75um', float('nan'))
+                if not 0.3 < split < 0.7:
+                    print(f'{rundir.name}: the model puts {split} of the sunlight below 0.75 um; the spectrum '
+                          'is wrong. Stopping.', file=sys.stderr)
+                    return 1
             progress['years'].append(entry)
             _atomic_write(progress_path, json.dumps(progress, indent=1) + '\n')
             if prune:

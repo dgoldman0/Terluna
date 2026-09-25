@@ -31,6 +31,20 @@ class RunnerTests(unittest.TestCase):
         # Every sea cell has less land than every land cell.
         self.assertLessEqual(land[mask == 0].max(), land[mask == 1].min())
 
+    def test_spectrum_tail_follows_the_sun(self):
+        # A blackbody "measurement" that stops at 2.73 um must continue as the same blackbody, not as a
+        # constant: a constant tail would move most of the energy into ExoPlaSim's near-infrared band.
+        h, c, k = 6.62607015e-34, 299792458.0, 1.380649e-23
+        planck = lambda um: 1.0 / ((um * 1e-6) ** 5 * np.expm1(h * c / (um * 1e-6 * k * 5772.0)))
+        w_nm = np.linspace(202.0, 2730.0, 3000)
+        grid = np.concatenate([np.geomspace(0.2, 0.75, 1025)[:-1], np.geomspace(0.75, 100.0, 1024)])
+        f = er.filtered_spectrum(grid, w_nm, planck(w_nm / 1000.0) / 1000.0, [0.0, 1e6], [1.0, 1.0])
+        inside = grid >= 0.202
+        np.testing.assert_allclose(f[inside], planck(grid[inside]), rtol=2e-3)
+        energy = lambda sel: float(np.trapezoid(f[sel], grid[sel]))
+        # A 5772 K blackbody puts 54% of its energy below 0.75 um (lambda T = 4330 um K).
+        self.assertAlmostEqual(energy(grid <= 0.75) / energy(grid > 0), 0.54, delta=0.01)
+
     def test_pruning_keeps_recent_and_every_tenth_year(self):
         with tempfile.TemporaryDirectory() as tmp:
             work = Path(tmp)
