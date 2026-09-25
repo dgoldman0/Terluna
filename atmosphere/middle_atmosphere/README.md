@@ -198,6 +198,8 @@ aperture.
 | Titania stack, collisional | 142 K | 142 / 157 / 188 / 299 K | 167 / 206 K | 142 / 144 K | 3×10⁻⁵ kg/s + none |
 | Titania stack, LTE | 163 K | 163 / 179 / 209 / 316 K | 189 / 228 K | 163 / 165 K | 3×10⁻³ kg/s + none |
 | Titania stack, all heats | 192 K | 192 / 207 / 239 / 313 K | 218 / 258 K | 192 / 193 K | 0.5 kg/s + none |
+| Titania stack, all heats, 280 ppm CO2 | 197 K | 197 / 212 / 244 / 310 K | 223 / 263 K | 197 / 198 K | 1.0 kg/s + none |
+| Titania stack, all heats, 150 ppm CO2 | 206 K | 206 / 222 / 253 / 304 K | 233 / 270 K | 206 / 208 K | 3.6 kg/s + none |
 | 200-nm edge, collisional | 200 K | 200 / 216 / 247 / 308 K | 226 / 266 K | | 1.6 + 0.8 kg/s |
 | 200-nm edge, LTE | 200 K | 200 / 216 / 248 / 308 K | 227 / 266 K | | 1.7 + 0.8 kg/s |
 | 200-nm edge, all heats | 215 K | 215 / 231 / 261 / 296 K | 242 / 274 K | | 9.5 + 2.7 kg/s |
@@ -218,6 +220,14 @@ aperture.
   exobase stays within 1.5 K of its base, at 142–193 K. What warms it beyond
   that is light passing gaps, pinholes and edges of the aperture: a design
   number, not a material one.
+- **Less CO2 warms the upper air, within the film's margin.** CO2 is the upper
+  air's main coolant. In the warmest treatment (all absorbed near-infrared
+  heats), cutting it from 400 to 280 ppm raises the base by 5 K and to 150 ppm
+  by 15 K, and the exobase follows one for one: behind the film alone it stays
+  at 197–208 K. Only the 0.1% leak at solar maximum passes 250 K, as it already
+  does at 400 ppm. 150 ppm (18 Pa) lies below the plant-growth floor
+  ([research/studies/atmospheric_co2](../../research/studies/atmospheric_co2/)), so any CO2 level
+  biology accepts is safe here.
 - **The losses stay small either way.** At 266 K, 2.4 kg/s removes about 0.3% of
   an atmosphere of 2.8×10¹⁸ kg in 100 million years.
 - **Atomic oxygen adds about half again behind the 200-nm edge.** O2 photolysis

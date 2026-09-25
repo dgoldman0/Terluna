@@ -70,6 +70,11 @@ def cases():
         out.append(replace(by_name[name], name=f'{name}_nonlte', nonlte=True))
         out.append(replace(by_name[name], name=f'{name}_nonlte_nir_collisional', nonlte=True,
                            nir_thermalisation='collisional'))
+    # CO2 is the upper air's main coolant: the design case with less of it, down to a plant-growth floor
+    # (research/studies/atmospheric_co2), for its effect on the exobase.
+    for co2 in (150.0, 280.0):
+        out.append(replace(by_name['moon_1.2atm_titania_stack'], name=f'moon_1.2atm_titania_stack_nonlte_co2_{co2:g}',
+                           nonlte=True, co2_ppm=co2))
     # The variants only need their balance with Earth-like clouds bracketed.
     variants = ('moon_1.2atm_edge_220nm', 'moon_1.2atm_edge_230nm', 'moon_1.2atm_edge_240nm', 'moon_1.2atm_edge_310nm',
                 'moon_1.2atm_none', 'moon_1.2atm_edge_200nm_no_n2o', 'moon_1.0atm_edge_200nm_no_n2o',
