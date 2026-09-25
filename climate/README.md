@@ -140,9 +140,9 @@ Climate 13, 4378; Mills and Abbot (2013), Astrophys. J. Lett. 774, L17.
 ## Three-dimensional preparation
 
 [gcm/](gcm/) holds the boundary files (land fraction, elevation and ocean depth
-for 25% and 35% water on common GCM grids), the planet parameters and the
-first-experiment plan for a general circulation model. No GCM has been installed
-or run; which to use is the author's decision.
+for 25% and 35% water on common GCM grids), the planet parameters, the
+experiment plan and a restartable runner for ExoPlaSim. The design case (run A)
+is running there; its results will be reported when it has settled.
 
 ## Next step
 

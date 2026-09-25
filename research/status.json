@@ -32,7 +32,7 @@
     },
     {
       "topic": "climate",
-      "condition": "periodic_conservative_spatial_linear_screen; uncalibrated; clear_sky_radiation_computed_for_prescribed_columns; single_column_month_long_day_night_with_weak_temperature_gradient_exchange; gcm_boundary_files_prepared_no_gcm_run",
+      "condition": "periodic_conservative_spatial_linear_screen; uncalibrated; clear_sky_radiation_computed_for_prescribed_columns; single_column_month_long_day_night_with_weak_temperature_gradient_exchange; gcm_boundary_files_prepared; exoplasim_installed_restartable_runner_design_case_running",
       "material": [
         "../climate/reference/thermal_response.csv",
         "baselines/feasibility/model.py",
