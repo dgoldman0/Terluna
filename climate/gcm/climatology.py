@@ -6,7 +6,7 @@ For the chosen model years it averages the 3-day output means of cloud cover, pr
 evaporation, soil moisture, surface temperature, water vapour, sea ice, snow and the land mask, on the
 model grid. It splits cloud into a low deck (model layers with sigma above 0.5, about the lowest 34 km) and a
 high deck (the layers above), each the largest layer cover in its column (maximum overlap), and gives
-the mean cover of every layer.
+the mean cover and eastward wind of every layer.
 It also composites total, low and high cloud against the Sun, in latitude and local hour angle (degrees
 east of the subsolar point), so that a display can move clouds with the Sun as the slowly rotating Moon
 does. Each output interval is a 3-day mean, a tenth of a lunar day, so the hour angle is resolved to
@@ -31,7 +31,8 @@ EVIDENCE = ('Means of ExoPlaSim 3-day output means over the stated model years a
 READING_RULE = ('Latitudes north first as in the model; longitudes east, 0-360. Precipitation and evaporation in mm per '
                 'day of liquid water, evaporation positive upward. clt_sun[lat, k] is mean cloud cover at hour angle '
                 'hour_angle_deg[k] (degrees east of the subsolar point, -180..180); low_sun and high_sun likewise for '
-                'the two decks. cl_layer_mean[k] is the area-weighted mean cover of the layer at sigma[k].')
+                'the two decks. cl_layer_mean[k] and ua_layer_mean[k] are the area-weighted mean cover and eastward '
+                'wind (m/s) of the layer at sigma[k].')
 
 
 def decks(cl, sigma, split=DECK_SIGMA):
@@ -43,7 +44,7 @@ def decks(cl, sigma, split=DECK_SIGMA):
 def read(folder: str, first: int, last: int):
     import netCDF4
     from climate.gcm.exoplasim_run import RUNS
-    fields = {k: [] for k in (*FIELDS, 'low', 'high', 'cl_layer')}
+    fields = {k: [] for k in (*FIELDS, 'low', 'high', 'cl_layer', 'ua_layer')}
     for year in range(first, last + 1):
         with netCDF4.Dataset(RUNS / folder / 'model' / f'MOST.{year:05d}.nc') as d:
             for k in FIELDS:
@@ -54,6 +55,7 @@ def read(folder: str, first: int, last: int):
             fields['low'].append(low)
             fields['high'].append(high)
             fields['cl_layer'].append(cl.mean(axis=(0, 3))[None])
+            fields['ua_layer'].append(np.asarray(d['ua'][:], dtype=float).mean(axis=(0, 3))[None])
             lat = np.asarray(d['lat'][:], dtype=float)
             lon = np.asarray(d['lon'][:], dtype=float)
     fields = {k: np.concatenate(v) for k, v in fields.items()}
@@ -91,12 +93,13 @@ def climatology(folder: str, first: int, last: int) -> dict:
     evap = -evap if evap.mean() < 0 else evap
     weight = np.cos(np.radians(lat))
     layer = (f['cl_layer'].mean(axis=0) * weight[None, :]).sum(axis=1) / weight.sum()
+    wind = (f['ua_layer'].mean(axis=0) * weight[None, :]).sum(axis=1) / weight.sum()
     return dict(lat=lat, lon=lon, clt_mean=f['clt'].mean(axis=0), low_mean=f['low'].mean(axis=0),
                 high_mean=f['high'].mean(axis=0), pr_mm_day=f['pr'].mean(axis=0) * mm_day,
                 evap_mm_day=evap, mrso_m=f['mrso'].mean(axis=0), ts_k=f['ts'].mean(axis=0),
                 prw_kg_m2=f['prw'].mean(axis=0), sic=f['sic'].mean(axis=0), snd_m=f['snd'].mean(axis=0),
                 lsm=f['lsm'].mean(axis=0), clt_sun=clt_sun, low_sun=low_sun, high_sun=high_sun,
-                hour_angle_deg=hour, sigma=f['sigma'], cl_layer_mean=layer)
+                hour_angle_deg=hour, sigma=f['sigma'], cl_layer_mean=layer, ua_layer_mean=wind)
 
 
 def main(argv=None) -> int:

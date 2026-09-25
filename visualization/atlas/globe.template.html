@@ -226,19 +226,24 @@
   uniform float uLowOpacity;
   uniform float uHighOpacity;
   uniform float uCloudAlbedo;
-  uniform float uDrift;
+  uniform vec2 uDrift;          // eastward turn of the low and high deck since new moon, radians
+  uniform float uEvolve;
   uniform float uRelief;
+  uniform float uBlurLod;
   uniform vec2 uLut;
+  uniform vec4 uLowNoise;       // frequency, octaves, warp, unused
+  uniform vec4 uHighNoise;      // frequency, octaves, warp, east-west stretch
+  uniform vec2 uFractal;        // gain, lacunarity
+  uniform float uQuant[66];     // quantiles of each deck's noise over the sphere, low then high
   uniform sampler2D tAlbedo;
   uniform sampler2D tNormal;
-  uniform sampler2D tNoise;
+  uniform sampler2D tWater;
   uniform sampler2D tCloudSun;
   uniform sampler2D tCloudGeo;
   uniform sampler2D tLight;
 
   const float PI = 3.141592653589793;
   const int STEPS = 20;
-  const float BLUR_LOD = 3.7;      // light scattered on its way up blurs the surface over about 100 km
 
   vec3 srgbToLinear(vec3 c) { return mix(c / 12.92, pow((c + 0.055) / 1.055, vec3(2.4)), step(0.04045, c)); }
   vec3 linearToSrgb(vec3 c) {
@@ -281,8 +286,64 @@
     return vec2(fract(atan(n.z, -n.x) / (2.0 * PI) + 1.0), 0.5 + asin(clamp(n.y, -1.0, 1.0)) / PI);
   }
 
+  // Value noise on an integer hash; appearance.py replicates it to measure its distribution.
+  uint hashu(uint x) {
+    x ^= x >> 16u; x *= 0x7feb352du; x ^= x >> 15u; x *= 0x846ca68bu; x ^= x >> 16u;
+    return x;
+  }
+  float lattice(ivec3 c, uint seed) {
+    return float(hashu(uint(c.x) + hashu(uint(c.y) + hashu(uint(c.z) + seed)))) * (1.0 / 4294967295.0);
+  }
+  float vnoise(vec3 x, uint seed) {
+    vec3 i = floor(x), f = x - i;
+    vec3 u = f * f * f * (f * (f * 6.0 - 15.0) + 10.0);
+    ivec3 c = ivec3(i);
+    float x00 = mix(lattice(c, seed), lattice(c + ivec3(1, 0, 0), seed), u.x);
+    float x10 = mix(lattice(c + ivec3(0, 1, 0), seed), lattice(c + ivec3(1, 1, 0), seed), u.x);
+    float x01 = mix(lattice(c + ivec3(0, 0, 1), seed), lattice(c + ivec3(1, 0, 1), seed), u.x);
+    float x11 = mix(lattice(c + ivec3(0, 1, 1), seed), lattice(c + ivec3(1, 1, 1), seed), u.x);
+    return mix(mix(x00, x10, u.y), mix(x01, x11, u.y), u.z);
+  }
+  float fbm(vec3 p, int octaves, uint seed) {
+    float s = 0.0, a = 1.0, n = 0.0;
+    for (int i = 0; i < 10; i++) {
+      if (i >= octaves) break;
+      s += a * vnoise(p, seed + uint(i) * 7919u);
+      n += a;
+      a *= uFractal.x;
+      p *= uFractal.y;
+    }
+    return s / n;
+  }
+  // Each deck's field at the point n, carried east by its wind (uDrift) and changing with time (uEvolve).
+  float cloudField(vec3 n, int layer) {
+    float ang = layer == 0 ? uDrift.x : uDrift.y;
+    float ca = cos(ang), sa = sin(ang);
+    vec3 p = vec3(ca * n.x - sa * n.z, n.y, sa * n.x + ca * n.z);
+    if (layer == 0) {
+      vec3 w = vec3(vnoise(p * 2.0, 11u), vnoise(p * 2.0 + 5.2, 12u), vnoise(p * 2.0 + 9.7, 13u)) - 0.5;
+      return fbm((p + uLowNoise.z * w) * uLowNoise.x + vec3(0.0, 0.0, uEvolve), int(uLowNoise.y), 1u);
+    }
+    vec3 q = p * vec3(1.0, uHighNoise.w, 1.0);
+    vec3 w = vec3(vnoise(q * 1.5, 21u), vnoise(q * 1.5 + 3.1, 22u), vnoise(q * 1.5 + 7.3, 23u)) - 0.5;
+    return fbm((q + uHighNoise.z * w) * uHighNoise.x + vec3(uEvolve, 0.0, 0.0), int(uHighNoise.y), 2u);
+  }
+  // The field's place in its own distribution, 0..1, so that a threshold at 1 - c covers a share c.
+  float toUniform(float v, int layer) {
+    int base = layer * 33;
+    if (v <= uQuant[base]) return 0.0;
+    for (int i = 1; i < 33; i++) {
+      float hi = uQuant[base + i];
+      if (v < hi) {
+        float lo = uQuant[base + i - 1];
+        return (float(i - 1) + (v - lo) / max(hi - lo, 1e-6)) / 32.0;
+      }
+    }
+    return 1.0;
+  }
+
   // Cloud in one deck (0 low, 1 high) above the point n: the run's cover for this latitude and local time,
-  // its pattern over land and sea, and noise thresholded to that cover.
+  // its pattern over land and sea, and the deck's noise thresholded to that cover.
   float cloud(vec3 n, int layer) {
     vec2 uv = sphereUV(n);
     float lon = uv.x * 360.0 - 180.0;
@@ -290,13 +351,12 @@
     vec3 bySun = texture(tCloudSun, vec2(hour, uv.y)).rgb;
     vec3 byPlace = texture(tCloudGeo, uv).rgb * 2.55;
     float c = clamp(layer == 0 ? bySun.r * byPlace.r : bySun.g * byPlace.g, 0.0, 0.97);
-    vec2 at = vec2(uv.x + (layer == 0 ? uDrift : 1.7 * uDrift), uv.y);
-    vec3 noise = textureLod(tNoise, at, 0.5).rgb;
-    vec3 fine = textureLod(tNoise, at * vec2(3.0, 3.0) + vec2(0.0, 0.37), 0.0).rgb;
-    float v = layer == 0 ? noise.r : noise.g;
-    float grain = layer == 0 ? fine.r : fine.g;
-    float body = smoothstep(1.0 - c - 0.1, 1.0 - c + 0.1, v) * smoothstep(0.0, 0.08, c);
-    return body * (0.45 + 0.55 * smoothstep(0.2, 0.8, grain));
+    if (c < 0.002) return 0.0;
+    // Where the field clears the threshold 1 - c there is cloud, thin at its edges and thickest at its cores.
+    float u = toUniform(cloudField(n, layer), layer);
+    float edge = 1.0 - c;
+    float present = smoothstep(edge - 0.025, edge + 0.025, u) * smoothstep(0.0, 0.06, c);
+    return present * (0.3 + 0.7 * smoothstep(edge, min(edge + 0.35, 1.0), u));
   }
 
   void deck(int index, float t, vec3 o, vec3 dir, inout vec3 clouds, inout float cloudT) {
@@ -304,9 +364,17 @@
     float r = length(p);
     vec3 n = p / r;
     int which = (index == 0 || index == 3) ? 1 : 0;
-    float a = cloud(n, which) * (which == 1 ? uHighOpacity : uLowOpacity);
+    float d = cloud(n, which);
+    float a = d * (which == 1 ? uHighOpacity : uLowOpacity);
     if (a < 0.002) return;
     float cs = dot(n, uSun);
+    // A low cloud whose sunward neighbour is thicker stands in that neighbour's shade, most when the Sun is low.
+    float shade = 1.0;
+    if (which == 0 && cs > 0.0) {
+      vec3 toward = normalize(uSun - cs * n);
+      float ahead = cloud(normalize(n + 0.012 * toward), 0);
+      shade = 1.0 - 0.6 * clamp((ahead - d) * 2.5, 0.0, 1.0) * (1.0 - 0.6 * cs);
+    }
     vec3 toSun = exp(-uTau0 * column(r, cs));
     vec3 toEye = exp(-uTau0 * column(r, dot(n, -dir)));
     float elevation = degrees(asin(clamp(cs, -1.0, 1.0)));
@@ -314,7 +382,7 @@
     float muv = max(dot(n, -dir), 0.02);
     vec3 above = uTau0 * exp((1.0 - r) / uH);
     vec3 scatteredUp = muv > 0.02 ? max(1.0 - eddington(above, muv) - toEye, 0.0) : vec3(0.0);
-    clouds += cloudT * (toEye + scatteredUp) * a * uCloudAlbedo * light * uSunColour;
+    clouds += cloudT * (toEye + scatteredUp) * a * uCloudAlbedo * light * shade * uSunColour;
     cloudT *= 1.0 - a;
   }
 
@@ -388,8 +456,8 @@
     if (hit) {
       vec3 n = ns, v = -dir;
       vec3 albedo = srgbToLinear(textureGrad(tAlbedo, uv, gx, gy).rgb);
-      vec3 blurred = srgbToLinear(textureLod(tAlbedo, uv, BLUR_LOD).rgb);
-      float water = textureGrad(tNoise, uv, gx, gy).b;
+      vec3 blurred = srgbToLinear(textureLod(tAlbedo, uv, uBlurLod).rgb);
+      float water = textureGrad(tWater, uv, gx, gy).r;
       vec3 nm = textureGrad(tNormal, uv, gx, gy).xyz * 2.0 - 1.0;
       vec3 east = vec3(n.z, 0.0, -n.x);
       east = dot(east, east) > 1e-10 ? normalize(east) : vec3(1.0, 0.0, 0.0);
@@ -420,7 +488,8 @@
     vec3 c = (haze + clouds + cloudT * surface) * uExposure;
     if (uRedOnly > 0.5) c = vec3(c.r);
     c = mix(c, 0.8 + 0.2 * (1.0 - exp(-(c - 0.8) / 0.2)), step(0.8, c));
-    gl_FragColor = vec4(linearToSrgb(c), 1.0);
+    float dither = float(hashu(uint(gl_FragCoord.x) + hashu(uint(gl_FragCoord.y)))) * (1.0 / 4294967295.0) - 0.5;
+    gl_FragColor = vec4(linearToSrgb(c) + dither / 255.0, 1.0);
   }
 </script>
 <script>
@@ -543,6 +612,7 @@
   lightTex.minFilter = lightTex.magFilter = THREE.NearestFilter;
   lightTex.needsUpdate = true;
   const linear = (t) => { t.wrapS = THREE.RepeatWrapping; t.minFilter = THREE.LinearFilter; t.generateMipmaps = false; };
+  const N = P.clouds.noise;
   const uniforms = {
     uCamPos: { value: new THREE.Vector3() }, uCamBasis: { value: new THREE.Matrix3() }, uTanHalf: { value: new THREE.Vector2() },
     uSun: { value: new THREE.Vector3(1, 0, 0) }, uSubsolar: { value: 0 },
@@ -551,11 +621,16 @@
     uSunColour: { value: new THREE.Vector3(...P.sunColour) }, uExposure: { value: 1 }, uRedOnly: { value: 0 },
     uClouds: { value: 1 }, uLowR: { value: 1 + P.clouds.lowKm / P.radiusKm }, uHighR: { value: 1 + P.clouds.highKm / P.radiusKm },
     uLowOpacity: { value: P.clouds.lowOpacity }, uHighOpacity: { value: P.clouds.highOpacity },
-    uCloudAlbedo: { value: P.clouds.albedo }, uDrift: { value: 0 }, uRelief: { value: 1 / D.normalStrength },
+    uCloudAlbedo: { value: P.clouds.albedo }, uDrift: { value: new THREE.Vector2() }, uEvolve: { value: 0 },
+    uRelief: { value: 1 / D.normalStrength }, uBlurLod: { value: Math.max(0, Math.log2(100 / P.surfaceKmPerTexel)) },
     uLut: { value: new THREE.Vector2(...P.lutElevations) },
+    uLowNoise: { value: new THREE.Vector4(N.lowFrequency, N.lowOctaves, N.lowWarp, 0) },
+    uHighNoise: { value: new THREE.Vector4(N.highFrequency, N.highOctaves, N.highWarp, N.highStretch) },
+    uFractal: { value: new THREE.Vector2(N.gain, N.lacunarity) },
+    uQuant: { value: [...P.clouds.quantiles[0], ...P.clouds.quantiles[1]] },
     tAlbedo: { value: load(D.textures.albedo, (t) => { repeatU(t); t.anisotropy = colourMap.anisotropy; }) },
     tNormal: { value: normalMap },
-    tNoise: { value: load(D.textures.cloudNoise, (t) => { t.wrapS = THREE.RepeatWrapping; t.wrapT = THREE.MirroredRepeatWrapping; }) },
+    tWater: { value: load(D.textures.water, repeatU) },
     tCloudSun: { value: load(D.textures.cloudSun, linear) },
     tCloudGeo: { value: load(D.textures.cloudGeo, linear) },
     tLight: { value: lightTex }
@@ -674,7 +749,9 @@
     const sub = ((180 - elongation) % 360 + 540) % 360 - 180;
     uniforms.uSun.value.copy(surface(0, sub, 1));
     uniforms.uSubsolar.value = sub;
-    uniforms.uDrift.value = -elongation / 360 * 0.35;
+    const seconds = day * 86400;
+    uniforms.uDrift.value.set(P.clouds.lowWindMs * seconds / (P.radiusKm * 1000), P.clouds.highWindMs * seconds / (P.radiusKm * 1000));
+    uniforms.uEvolve.value = elongation / 360 * 6.0;
     const lit = (1 - Math.cos(elongation * Math.PI / 180)) / 2;
     phaseValue.textContent = 'Day ' + day.toFixed(1) + ' · ' + phaseName(elongation) + ' · ' + Math.round(lit * 100) +
       '% lit from Earth · Sun over ' + fmtLon(sub);
@@ -913,13 +990,14 @@
   // Start in the view named by the link, for example #earth, #far or #map; e<degrees> sets the Sun's
   // elongation from Earth and x<stops> the exposure.
   const tokens = (location.hash || '').replace('#', '').split(/[.\-]/).filter(Boolean);
-  let startMode = canAppear ? 'appearance' : 'map', startView = 'near', startDay = 10, startStops = 1;
+  let startMode = canAppear ? 'appearance' : 'map', startView = 'near', startDay = 10, startStops = 1, startZoom = 0;
   for (const t of tokens) {
     if (t === 'map' || t === 'appearance') startMode = t;
     else if (VIEWS[t]) startView = t;
     else if (/^e\d+$/.test(t)) startDay = Math.min(29.5, +t.slice(1) / 360 * SYNODIC);
     else if (/^x\d+$/.test(t)) startStops = Math.min(14, +t.slice(1));
     else if (/^xm\d+$/.test(t)) startStops = -Math.min(3, +t.slice(2));
+    else if (/^z\d+$/.test(t)) startZoom = +t.slice(1) / 10;
     else if (t === 'noclouds') document.getElementById('show-clouds').click();
     else if (t === 'noair') document.getElementById('show-air').click();
     else if (t === 'red') document.getElementById('red-only').click();
@@ -930,6 +1008,7 @@
   exposureInput.value = String(startStops);
   setExposure(startStops);
   setView(startView, true);
+  if (startZoom) { if (startView === 'earth') tween.f1 = Math.min(6, Math.max(0.12, startZoom)); else tween.d1 = Math.min(12, Math.max(1.35, startZoom)); }
   if (!canAppear) hint.textContent = 'This browser lacks WebGL 2, so only the map mode is available.';
   requestAnimationFrame(frame);
 })();

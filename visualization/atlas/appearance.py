@@ -1,17 +1,20 @@
-"""Data for the globe's appearance mode: surface colour, clouds, ground light and haze.
+"""Data for the globe's appearance mode: surface colour, relief, clouds, ground light and haze.
 
 Called by render.py. Every input is a domain product, and each piece says what kind it is:
 
 - computed: the atmosphere (Rayleigh coefficients and scale height from the illumination domain's
-  engine-atmosphere product) and the ground's direct and diffuse light against Sun elevation (the
-  Open Moon clear-sky atlas, 55 scattering orders);
+  engine-atmosphere product), the ground's direct and diffuse light against Sun elevation (the
+  Open Moon clear-sky atlas, 55 scattering orders), and land, sea and relief at 16 pixels per degree
+  (LOLA above the GRAIL geoid through the geography domain, at the atlas product's sea level);
 - informed: cloud cover from the climate domain's ExoPlaSim climatology (run A), a low and a high deck
-  each moved with the Sun through its hour-angle composite and placed at the deck's cover-weighted
-  height; light scattered more than once, an isotropic source scaled from the sky atlas's diffuse light
-  so that the air seen straight down matches Eddington's conservative-scattering reflectance;
-- guesstimate: surface cover from rainfall, soil moisture, nearness to water, height and slope (forest,
-  woodland, grassland, bare highland or basaltic soil, rock), water colour from depth, and the cloud
-  decks' opacity. The biosphere and climate work replace it.
+  each moved with the Sun through its hour-angle composite, placed at the deck's cover-weighted
+  height and carried east by the deck's cover-weighted mean wind; light scattered more than once, an
+  isotropic source scaled from the sky atlas's diffuse light so that the air seen straight down
+  matches Eddington's conservative-scattering reflectance;
+- guesstimate: surface cover from rainfall, soil moisture, nearness to water, height, hollows and slope
+  (forest, woodland, grassland, bare highland or basaltic soil, rock), water colour from depth, and the
+  cloud decks' shapes (noise the page evaluates, thresholded to the run's cover) and opacity. The
+  biosphere and climate work replace it.
 """
 from __future__ import annotations
 import json
@@ -24,6 +27,8 @@ SKY_ATLAS = ROOT / 'illumination' / 'sky' / 'data' / 'moon_atlas.npz'
 CLIMATOLOGY = ROOT / 'climate' / 'gcm' / 'products' / 'climatology_A.npz'
 LUMINANCE = np.array([0.2126, 0.7152, 0.0722])
 LUT_ELEVATIONS = np.linspace(-90.0, 90.0, 121)   # twilight light reaches far past the terminator
+MOON_KM = 1737.4
+NORMAL_STRENGTH = 10.0                           # relief is baked into the normal map at this exaggeration
 
 # Guesstimated reflectances (linear sRGB), after typical Earth surfaces.
 FOREST = np.array([0.030, 0.058, 0.026])
@@ -40,40 +45,39 @@ LOW_OPACITY, HIGH_OPACITY = 0.9, 0.4  # guesstimates: the low deck holds the mod
 CLOUD_ROWS = 90                     # 2-degree rows for the cloud maps
 CALIBRATION_FLOOR_DEG = 10.0        # below this Sun height the scattering calibration holds its 10-degree value
 
+# Cloud noise, evaluated by the page and replicated here to measure its distribution. The low deck is
+# warped fractal noise with features from about 400 km down to a few km; the high deck is drawn out
+# four times longer east-west than north-south.
+CLOUD_NOISE = dict(lowFrequency=4.0, lowOctaves=7, lowWarp=0.35, highFrequency=3.0, highOctaves=6,
+                   highWarp=0.5, highStretch=4.0, gain=0.55, lacunarity=2.03)
+QUANTILES = 33
+
 
 def smoothstep(a, b, x):
-    t = np.clip((x - a) / (b - a), 0.0, 1.0)
+    t = np.clip((x - a) / (b - a), 0.0, 1.0).astype(np.float32)
     return t * t * (3 - 2 * t)
 
 
 def fbm(shape, seed, octaves=7, base=(6, 3), gain=0.55, stretch=1.0):
-    """Fractal value noise, seamless in longitude; stretch > 1 elongates features east-west."""
+    """Fractal value noise in float32, seamless in longitude: each octave is a random lattice enlarged with
+    cubic interpolation. stretch > 1 elongates features east-west."""
+    import cv2
     rng = np.random.default_rng(seed)
     h, w = shape
-    out = np.zeros(shape)
+    out = np.zeros(shape, np.float32)
     amp, total = 1.0, 0.0
     for o in range(octaves):
-        nx, ny = int(base[0] * 2 ** o), max(2, int(base[1] * 2 ** o * stretch))
-        grid = rng.random((ny + 1, nx))
-        y = np.linspace(0, ny, h, endpoint=False)[:, None]
-        x = np.linspace(0, nx, w, endpoint=False)[None, :]
-        y0, x0 = np.floor(y).astype(int), np.floor(x).astype(int)
-        fy, fx = y - y0, x - x0
-        fy, fx = fy * fy * (3 - 2 * fy), fx * fx * (3 - 2 * fx)
-        y1, x1 = np.minimum(y0 + 1, ny), (x0 + 1) % nx
-        x0 = x0 % nx
-        v = (grid[y0, x0] * (1 - fx) + grid[y0, x1] * fx) * (1 - fy) + (grid[y1, x0] * (1 - fx) + grid[y1, x1] * fx) * fy
-        out += amp * v
+        nx, ny = int(base[0] * 2 ** o), max(2, int(round(base[1] * 2 ** o * stretch)))
+        if nx > w // 2 or ny > h // 2:
+            break
+        lattice = rng.random((ny, nx), dtype=np.float32)
+        pad = np.concatenate([lattice[:, -2:], lattice, lattice[:, :2]], axis=1)
+        big = cv2.resize(pad, (int(round(pad.shape[1] * w / nx)), h), interpolation=cv2.INTER_CUBIC)
+        x0 = int(round(2 * w / nx))
+        out += amp * big[:, x0:x0 + w]
         total += amp
         amp *= gain
     return out / total
-
-
-def uniformise(x):
-    """Rank-transform to a uniform 0..1 distribution, so a threshold at 1 - c covers a share c."""
-    r = np.empty(x.size)
-    r[np.argsort(x, axis=None)] = np.linspace(0.0, 1.0, x.size)
-    return r.reshape(x.shape)
 
 
 def regrid(field, lat_src, lon_src, lat_dst, lon_dst):
@@ -92,38 +96,81 @@ def regrid(field, lat_src, lon_src, lat_dst, lon_dst):
     return a * (1 - ty) + b * ty
 
 
-def surface_colour(height, level, lat, lon, clim):
-    """Guesstimated surface reflectance (linear sRGB) and the water mask, 180 W at the left edge."""
-    depth = level - height
-    water = depth > 0
-    from scipy.ndimage import distance_transform_edt
-    rain = regrid(clim['pr_mm_day'], clim['lat'], clim['lon'], lat, lon)
-    soil = regrid(clim['mrso_m'], clim['lat'], clim['lon'], lat, lon)
-    patch = fbm(height.shape, 11, octaves=6, base=(24, 12)) - 0.5
-    km_per_px = 1737.4 * np.radians(180.0 / height.shape[0])
-    tiled = np.concatenate([water, water, water], axis=1)
-    shore_km = distance_transform_edt(~tiled)[:, height.shape[1]:2 * height.shape[1]] * km_per_px
-    coast = np.exp(-shore_km / 120.0)
-    lowland = np.exp(-np.clip(height - level, 0, None) / 400.0)
-    wet = rain + 1.5 * smoothstep(0.02, 0.2, soil) + 1.4 * coast + 0.8 * lowland + 2.5 * patch
+def climate_field(clim, name, shape):
+    """A climatology field on the texture grid: regridded at 4 pixels per degree, then enlarged."""
+    import cv2
+    lat4 = 90.0 - (np.arange(720) + 0.5) / 4.0
+    lon4 = (np.arange(1440) + 0.5) / 4.0 - 180.0
+    f = regrid(clim[name], clim['lat'], clim['lon'], lat4, lon4).astype(np.float32)
+    s = shape[1] // f.shape[1]
+    pad = np.concatenate([f[:, -1:], f, f[:, :1]], axis=1)
+    return cv2.resize(pad, (pad.shape[1] * s, shape[0]), interpolation=cv2.INTER_LINEAR)[:, s:s + shape[1]]
+
+
+def surface_colour(height, level, clim, ppd):
+    """Guesstimated surface reflectance (linear sRGB, float32) and the water mask, 180 W at the left edge."""
+    import cv2
+    height = height.astype(np.float32)
+    rows, cols = height.shape
+    lat = 90.0 - (np.arange(rows) + 0.5) / ppd
+    water = height < level
+    km = MOON_KM * np.radians(1.0 / ppd)
+
+    rain = climate_field(clim, 'pr_mm_day', height.shape)
+    wet = rain
+    wet += 1.5 * smoothstep(0.02, 0.2, climate_field(clim, 'mrso_m', height.shape))
+    pad = cols // 8
+    tiled = np.concatenate([water[:, -pad:], water, water[:, :pad]], axis=1)
+    shore_km = cv2.distanceTransform((~tiled).astype(np.uint8), cv2.DIST_L2, 5)[:, pad:pad + cols] * km
+    wet += 1.4 * np.exp(-shore_km / 120.0)
+    del tiled, shore_km
+    land_height = np.maximum(height, level)
+    wet += 0.8 * np.exp(-(land_height - level) / 400.0)
+    curvature = cv2.Laplacian(cv2.GaussianBlur(land_height, (0, 0), 3.0), cv2.CV_32F, ksize=3)
+    wet += 0.6 * np.clip(curvature / (curvature[~water].std() + 1e-6), -2.5, 2.5)   # wetter in hollows
+    del curvature
+    wet += 2.5 * (fbm(height.shape, 11, octaves=9, base=(24, 12)) - 0.5)
     veg = smoothstep(0.4, 3.2, wet)
     dense = smoothstep(3.2, 5.5, wet)
-    basaltic = smoothstep(level + 900.0, level + 150.0, height) * smoothstep(0.35, 0.65, fbm(height.shape, 17, octaves=5, base=(18, 9)))
-    bare = HIGHLAND_SOIL * (1 - basaltic[..., None]) + BASALT_SOIL * basaltic[..., None]
-    gy, gx = np.gradient(height)
-    dy = 1737.4e3 * np.radians(180.0 / height.shape[0])
-    slope = np.hypot(gx / (dy * np.maximum(np.cos(np.radians(lat))[:, None], 0.05)), gy / dy)
-    rocky = smoothstep(0.16, 0.34, slope)[..., None]
-    grassy = bare * (1 - smoothstep(0.0, 0.35, veg))[..., None] + GRASS * smoothstep(0.0, 0.35, veg)[..., None]
-    wooded = SAVANNA * (1 - dense[..., None]) + FOREST * dense[..., None]
-    land = grassy * (1 - smoothstep(0.35, 1.0, veg))[..., None] + wooded * smoothstep(0.35, 1.0, veg)[..., None]
-    land = land * (1 - 0.5 * rocky) + ROCK * 0.5 * rocky
-    shallow = smoothstep(250.0, 30.0, depth)[..., None]
-    deep = smoothstep(400.0, 1500.0, depth)[..., None]
-    sea = MID_WATER * (1 - deep) + DEEP_WATER * deep
-    sea = sea * (1 - shallow) + TURBID_WATER * shallow
-    colour = np.where(water[..., None], sea, land)
+    del wet
+    basaltic = smoothstep(level + 900.0, level + 150.0, height) * smoothstep(
+        0.35, 0.65, fbm(height.shape, 17, octaves=8, base=(18, 9)))
+    gy, gx = np.gradient(land_height, km * 1000.0)
+    rocky = 0.5 * smoothstep(0.35, 0.7, np.hypot(gx / np.maximum(np.cos(np.radians(lat)), 0.05)[:, None], gy))
+    del gy, gx, land_height
+    grass = smoothstep(0.0, 0.35, veg)
+    wooded = smoothstep(0.35, 1.0, veg)
+    del veg
+    depth = level - height
+    shallow = smoothstep(250.0, 30.0, depth)
+    deep = smoothstep(400.0, 1500.0, depth)
+    del depth
+    colour = np.empty(height.shape + (3,), np.float32)
+    for c in range(3):
+        bare = HIGHLAND_SOIL[c] * (1 - basaltic) + BASALT_SOIL[c] * basaltic
+        land = (bare * (1 - grass) + GRASS[c] * grass) * (1 - wooded) + (SAVANNA[c] * (1 - dense) + FOREST[c] * dense) * wooded
+        land = land * (1 - rocky) + ROCK[c] * rocky
+        sea = (MID_WATER[c] * (1 - deep) + DEEP_WATER[c] * deep) * (1 - shallow) + TURBID_WATER[c] * shallow
+        colour[..., c] = np.where(water, sea, land)
     return colour, water
+
+
+def relief_normals(height, level, ppd):
+    """Tangent-space normals of the sea-clamped surface, relief baked at NORMAL_STRENGTH."""
+    surf = np.maximum(height, level).astype(np.float32)
+    lat = 90.0 - (np.arange(surf.shape[0]) + 0.5) / ppd
+    dy = MOON_KM * 1000.0 * np.radians(1.0 / ppd)
+    gy, gx = np.gradient(surf)
+    n = np.stack([-(gx / (dy * np.maximum(np.cos(np.radians(lat)), 1e-3)[:, None])) * NORMAL_STRENGTH,
+                  (gy / dy) * NORMAL_STRENGTH, np.ones_like(surf)], axis=-1)
+    n /= np.linalg.norm(n, axis=-1, keepdims=True)
+    return np.round((n + 1) / 2 * 255).astype(np.uint8)
+
+
+def block_mean(a, k):
+    """Mean over k x k blocks."""
+    r, c = a.shape[0] // k, a.shape[1] // k
+    return a[:r * k, :c * k].reshape(r, k, c, k).mean(axis=(1, 3))
 
 
 def srgb_encode(x):
@@ -179,30 +226,101 @@ def rows_to_uniform(field, lat_src, rows=CLOUD_ROWS):
 
 def deck_heights_km(clim, h_km):
     """Cover-weighted height of the low and high decks, heights from sigma with the atmosphere's scale height."""
-    sigma, cover = clim['sigma'], clim['cl_layer_mean']
-    z = -h_km * np.log(sigma)
-    low = sigma > clim['deck_sigma']
-    return float((z * cover)[low].sum() / cover[low].sum()), float((z * cover)[~low].sum() / cover[~low].sum())
+    return tuple(deck_mean(clim, -h_km * np.log(clim['sigma'])))
 
 
-def build(height, level, lat, ppd):
-    """Appearance data for the globe page: textures (arrays) and parameters (JSON-ready)."""
+def deck_mean(clim, values):
+    """Cover-weighted mean of a per-layer quantity over the low and the high deck."""
+    cover = clim['cl_layer_mean']
+    low = clim['sigma'] > clim['deck_sigma']
+    return [float((values * cover)[m].sum() / cover[m].sum()) for m in (low, ~low)]
+
+
+# The page's cloud noise, replicated with the same integer hash so that its distribution can be measured.
+def _hash(x):
+    x = x.astype(np.uint32)
+    x ^= x >> np.uint32(16)
+    x *= np.uint32(0x7FEB352D)
+    x ^= x >> np.uint32(15)
+    x *= np.uint32(0x846CA68B)
+    x ^= x >> np.uint32(16)
+    return x
+
+
+def _lattice(c, seed):
+    u = lambda v: v.astype(np.int64).astype(np.uint32)
+    h = _hash(u(c[..., 2]) + np.uint32(seed))
+    h = _hash(u(c[..., 1]) + h)
+    return _hash(u(c[..., 0]) + h).astype(np.float64) / 4294967295.0
+
+
+def value_noise(x, seed):
+    i = np.floor(x)
+    f = x - i
+    u = f * f * f * (f * (f * 6.0 - 15.0) + 10.0)
+    c = i.astype(np.int64)
+    corner = lambda dx, dy, dz: _lattice(c + np.array([dx, dy, dz]), seed)
+    x00 = corner(0, 0, 0) + (corner(1, 0, 0) - corner(0, 0, 0)) * u[..., 0]
+    x10 = corner(0, 1, 0) + (corner(1, 1, 0) - corner(0, 1, 0)) * u[..., 0]
+    x01 = corner(0, 0, 1) + (corner(1, 0, 1) - corner(0, 0, 1)) * u[..., 0]
+    x11 = corner(0, 1, 1) + (corner(1, 1, 1) - corner(0, 1, 1)) * u[..., 0]
+    y0 = x00 + (x10 - x00) * u[..., 1]
+    y1 = x01 + (x11 - x01) * u[..., 1]
+    return y0 + (y1 - y0) * u[..., 2]
+
+
+def cloud_fbm(p, octaves, seed, gain=CLOUD_NOISE['gain'], lacunarity=CLOUD_NOISE['lacunarity']):
+    s, a, n = 0.0, 1.0, 0.0
+    for i in range(octaves):
+        s = s + a * value_noise(p, seed + i * 7919)
+        n += a
+        a *= gain
+        p = p * lacunarity
+    return s / n
+
+
+def cloud_field(n, layer, noise=CLOUD_NOISE):
+    """The page's cloud field for unit vectors n (..., 3) in the Moon's frame, before any drift."""
+    if layer == 0:
+        w = np.stack([value_noise(n * 2.0, 11), value_noise(n * 2.0 + 5.2, 12), value_noise(n * 2.0 + 9.7, 13)], -1) - 0.5
+        return cloud_fbm((n + noise['lowWarp'] * w) * noise['lowFrequency'], noise['lowOctaves'], 1)
+    q = n * np.array([1.0, noise['highStretch'], 1.0])
+    w = np.stack([value_noise(q * 1.5, 21), value_noise(q * 1.5 + 3.1, 22), value_noise(q * 1.5 + 7.3, 23)], -1) - 0.5
+    return cloud_fbm((q + noise['highWarp'] * w) * noise['highFrequency'], noise['highOctaves'], 2)
+
+
+def cloud_quantiles(samples=200_000, seed=3):
+    """Quantiles of each deck's field over the sphere, so the page can turn it into a uniform variable and
+    threshold it at the run's cover."""
+    rng = np.random.default_rng(seed)
+    n = rng.normal(size=(samples, 3))
+    n /= np.linalg.norm(n, axis=1, keepdims=True)
+    q = np.linspace(0.0, 1.0, QUANTILES)
+    return [np.quantile(cloud_field(n, layer), q).round(5).tolist() for layer in (0, 1)]
+
+
+def build(height, level, ppd):
+    """Appearance data for the globe page: textures (arrays, 180 W at the left edge) and parameters.
+
+    height: metres above the geoid at ppd pixels per degree, 0 E at the left edge as LOLA has it."""
     moon, engine = engine_atmosphere()
     colour_rel = np.array(moon['sun_colour_linear_srgb'])
     sun_rgb_lux = moon['sun_illuminance_lux'] * colour_rel / float(LUMINANCE @ colour_rel)
     clim = dict(np.load(CLIMATOLOGY))
     clim_meta = json.loads(str(clim.pop('metadata')))
     clim['deck_sigma'] = clim_meta['deck_sigma']
-    lon = (np.arange(height.shape[1]) + 0.5) / ppd - 180.0
     h = np.roll(height, height.shape[1] // 2, axis=1)
-    colour, water = surface_colour(h, level, lat, lon, clim)
-    albedo = np.round(srgb_encode(colour) * 255).astype(np.uint8)
+    colour, water = surface_colour(h, level, clim, ppd)
+    albedo = np.empty(colour.shape, np.uint8)
+    for c in range(3):
+        albedo[..., c] = np.round(srgb_encode(colour[..., c]) * 255)
+    del colour
+    half = block_mean(h, 2)
+    normal = relief_normals(half, level, ppd // 2)
+    water_half = np.round(block_mean(water.astype(np.float32), 2) * 255).astype(np.uint8)
+    del half
 
-    # Cloud: per-deck noise (low decks lumpy, high decks drawn out east-west), the Sun-relative
-    # composites and the geographic pattern of each deck relative to its zonal mean.
-    low_noise = uniformise(fbm(h.shape, 5, octaves=8, base=(24, 12), gain=0.6))
-    high_noise = uniformise(fbm(h.shape, 7, octaves=7, base=(10, 10), gain=0.62, stretch=2.2))
-    noise = np.dstack([low_noise, high_noise, water.astype(float)])      # blue: the water mask, for sunglint
+    # Cloud: the Sun-relative composites of each deck and its geographic pattern relative to its zonal mean.
     sun = np.dstack([rows_to_uniform(np.clip(clim[k], 0, 1), clim['lat']) for k in ('low_sun', 'high_sun', 'clt_sun')])
     rows = 90.0 - (np.arange(CLOUD_ROWS) + 0.5) * 180.0 / CLOUD_ROWS
     cols = -180.0 + (np.arange(2 * CLOUD_ROWS) + 0.5) * 180.0 / CLOUD_ROWS
@@ -212,11 +330,12 @@ def build(height, level, lat, ppd):
         geo.append(np.clip(regrid(clim[k] / zonal, clim['lat'], clim['lon'], rows, cols), 0.0, 2.55))
     geo = np.dstack([geo[0], geo[1], np.zeros_like(geo[0])])
     low_km, high_km = deck_heights_km(clim, moon['rayleigh_scale_height_km'])
+    low_wind, high_wind = deck_mean(clim, clim['ua_layer_mean'])
 
     direct, diffuse = ground_light_lut(sun_rgb_lux)
     source = diffuse_source_factor(moon, diffuse)
     light = np.stack([direct, diffuse, source]).astype(np.float32)          # 3 rows x elevations x RGB
-    textures = dict(albedo=albedo, cloud_noise=np.round(noise * 255).astype(np.uint8),
+    textures = dict(albedo=albedo, normal=normal, water=water_half,
                     cloud_sun=np.round(sun * 255).astype(np.uint8), cloud_geo=np.round(geo * 100).astype(np.uint8))
     area = lambda f: float((f * np.cos(np.radians(clim['lat']))[:, None]).sum()
                            / (np.cos(np.radians(clim['lat'])).sum() * f.shape[1]))
@@ -227,14 +346,17 @@ def build(height, level, lat, ppd):
         sunLux=moon['sun_illuminance_lux'],
         lutElevations=[float(LUT_ELEVATIONS[0]), float(LUT_ELEVATIONS[-1])],
         light=[[[float(f'{v:.4g}') for v in rgb] for rgb in row] for row in light],
+        surfaceKmPerTexel=round(MOON_KM * np.radians(1.0 / ppd), 3), normalStrength=NORMAL_STRENGTH,
         clouds=dict(lowKm=round(low_km, 1), highKm=round(high_km, 1), lowOpacity=LOW_OPACITY, highOpacity=HIGH_OPACITY,
                     albedo=CLOUD_ALBEDO, geoScale=100.0, lowCover=round(area(clim['low_mean']), 3),
                     highCover=round(area(clim['high_mean']), 3), totalCover=round(area(clim['clt_mean']), 3),
-                    seaIce=round(float(clim['sic'].max()), 4), snowM=round(float(clim['snd_m'].max()), 4)),
+                    seaIce=round(float(clim['sic'].max()), 4), snowM=round(float(clim['snd_m'].max()), 4),
+                    lowWindMs=round(low_wind, 2), highWindMs=round(high_wind, 2), noise=CLOUD_NOISE,
+                    quantiles=cloud_quantiles()),
         climatology=dict(run=clim_meta['run'], years=clim_meta['years'], schema=clim_meta['schema']),
         legend=[['Forest', FOREST], ['Woodland, savanna', SAVANNA], ['Grassland, scrub', GRASS],
                 ['Bare highland soil', HIGHLAND_SOIL], ['Bare basaltic soil', BASALT_SOIL], ['Rock', ROCK],
                 ['Shallow, silty water', TURBID_WATER], ['Deep water', DEEP_WATER]])
     params['legend'] = [[name, '#' + ''.join(f'{int(round(v * 255)):02x}' for v in srgb_encode(np.asarray(rgb)))]
                         for name, rgb in params['legend']]
-    return textures, params, dict(engine=ENGINE, sky_atlas=SKY_ATLAS, climatology=CLIMATOLOGY)
+    return textures, params, dict(engine=ENGINE, sky_atlas=SKY_ATLAS, climatology=CLIMATOLOGY), water

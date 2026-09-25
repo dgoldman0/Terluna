@@ -32,6 +32,7 @@ from matplotlib.patches import Patch
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 from geography import atlas as ga
+from geography import topography as tp
 from shared.constants import MOON_RADIUS
 import appearance
 
@@ -68,7 +69,7 @@ POLAR_TARGET_OFFSETS = {'Shackleton': (6, -12), 'de Gerlache': (-100, 4), 'Sverd
                         'Hermite': (-42, 4), 'Whipple': (6, 4), 'Peary': (6, -4), 'Rozhdestvenskiy': (6, 4)}
 DISPLAY = {'Rumker': 'Rümker', 'Karman': 'Kármán', 'Schrodinger': 'Schrödinger'}
 LAND_PLACEHOLDER = '#b9b4aa'   # neutral land until the biosphere and climate supply surface cover
-NORMAL_STRENGTH = 10.0         # relief is baked into the normal map at this exaggeration; the page rescales it
+SURFACE_PPD = 16               # the appearance mode's surface; relief and the water mask at half this
 
 
 def hexrgb(h):
@@ -173,9 +174,16 @@ def png_data_uri(array):
     return 'data:image/png;base64,' + base64.b64encode(buffer.getvalue()).decode('ascii')
 
 
+def jpeg_data_uri(array, quality=88):
+    from PIL import Image
+    buffer = io.BytesIO()
+    Image.fromarray(array).save(buffer, format='JPEG', quality=quality, subsampling=0, optimize=True)
+    return 'data:image/jpeg;base64,' + base64.b64encode(buffer.getvalue()).decode('ascii')
+
+
 def globe_textures(height, level, lat, ppd):
-    """Equirectangular textures, 180 W at the left edge: colour by depth band with neutral land, the
-    sea-clamped surface as 8-bit displacement, and a tangent-space normal map of that surface."""
+    """Map-mode textures, 180 W at the left edge: colour by depth band with neutral land and the
+    sea-clamped surface as 8-bit displacement."""
     h = np.roll(height, height.shape[1] // 2, axis=1)
     depth = level - h
     water = depth > 0
@@ -188,28 +196,26 @@ def globe_textures(height, level, lat, ppd):
     surf = np.maximum(h, level)
     top = float(surf.max())
     displacement = np.round((surf - level) / (top - level) * 255).astype(np.uint8)
-    dy = MOON_RADIUS * np.radians(1 / ppd)
-    dx = dy * np.maximum(np.cos(np.radians(lat)), 1e-3)[:, None]
-    gy, gx = np.gradient(surf)
-    n = np.stack([-(gx / dx) * NORMAL_STRENGTH, (gy / dy) * NORMAL_STRENGTH, np.ones_like(surf)], axis=-1)
-    n /= np.linalg.norm(n, axis=-1, keepdims=True)
-    normal = np.round((n + 1) / 2 * 255).astype(np.uint8)
-    return colour, displacement, normal, (top - level) / 1000.0, water
+    return colour, displacement, (top - level) / 1000.0, water
 
 
 def write_globe(atlas, height, lat, ppd, sites, targets, hashes):
     level = atlas['sea_level_m']
-    colour, displacement, normal, relief_km, water = globe_textures(height, level, lat, ppd)
-    looks, params, sources = appearance.build(height, level, lat, ppd)
-    area = np.cos(np.radians(lat))[:, None] * np.ones_like(water, dtype=float)
-    texture_water = float((area * water).sum() / area.sum())
-    appearance_water = float((area * (looks['cloud_noise'][..., 2] > 127)).sum() / area.sum())
+    colour, displacement, relief_km, water = globe_textures(height, level, lat, ppd)
+    fine, _, _ = tp.height_above_geoid(SURFACE_PPD, atlas['grid']['geoid_degree'])
+    looks, params, sources, fine_water = appearance.build(fine.astype(np.float32), level, SURFACE_PPD)
+    del fine
+    share = lambda mask, ppd_: float((mask * np.cos(np.radians(90 - (np.arange(mask.shape[0]) + 0.5) / ppd_))[:, None]).sum()
+                                     / (np.cos(np.radians(90 - (np.arange(mask.shape[0]) + 0.5) / ppd_)).sum() * mask.shape[1]))
+    texture_water = share(water, ppd)
+    surface_water = share(fine_water, SURFACE_PPD)
+    mask_water = share(looks['water'] / 255.0, SURFACE_PPD // 2)
     bodies = atlas['bodies']
     comparison = next(r for r in atlas['share_comparison'] if abs(r['share'] - atlas['share']) < 1e-9)
     minus = lambda v: f'{v:,.0f}'.replace('-', '\u2212')
     data = dict(
         share=atlas['share'], levelText=minus(level) + ' m', landColour=LAND_PLACEHOLDER,
-        heightRangeKm=relief_km, normalStrength=NORMAL_STRENGTH,
+        heightRangeKm=relief_km, normalStrength=appearance.NORMAL_STRENGTH,
         bands=[[label, col] for (_, col), label in zip(BANDS, BAND_LABELS)],
         figures=[['Water', f"{atlas['share']:.0%} of the surface"], ['Sea level (geoid)', minus(level) + ' m'],
                  ['Near side under water', f"{comparison['near_side_water']:.0%}"],
@@ -217,9 +223,10 @@ def write_globe(atlas, height, lat, ppd, sites, targets, hashes):
                  ['Near-side Sea', f"{bodies[0]['share']:.1%} \u00b7 mean {bodies[0]['mean_depth_m']:,} m"],
                  ['South Pole\u2013Aitken Sea', f"{bodies[1]['share']:.1%} \u00b7 mean {bodies[1]['mean_depth_m']:,} m"],
                  ['Deepest water', f"{max(b['max_depth_m'] for b in bodies):,} m"]],
-        textures=dict(colour=png_data_uri(colour), height=png_data_uri(displacement), normal=png_data_uri(normal),
-                      albedo=png_data_uri(looks['albedo']), cloudNoise=png_data_uri(looks['cloud_noise']),
-                      cloudSun=png_data_uri(looks['cloud_sun']), cloudGeo=png_data_uri(looks['cloud_geo'])),
+        textures=dict(colour=png_data_uri(colour), height=png_data_uri(displacement),
+                      normal=jpeg_data_uri(looks['normal']), albedo=jpeg_data_uri(looks['albedo']),
+                      water=png_data_uri(looks['water']), cloudSun=png_data_uri(looks['cloud_sun']),
+                      cloudGeo=png_data_uri(looks['cloud_geo'])),
         appearance=params,
         labels=dict(
             seas=[[name.replace('\n', ' '), la, lo] for name, la, lo in SEA_LABELS],
@@ -241,15 +248,16 @@ def write_globe(atlas, height, lat, ppd, sites, targets, hashes):
                     f"({digest(sources['engine'])[:12]}) and Open Moon sky atlas ({digest(sources['sky_atlas'])[:12]}); "
                     f"the climate domain's <code>{params['climatology']['schema']}</code> for run "
                     f"{params['climatology']['run']} ({digest(sources['climatology'])[:12]}). "
-                    f"Textures {colour.shape[1]}\u00d7{colour.shape[0]}, 4 pixels per degree."))
+                    f"Surface {looks['albedo'].shape[1]}\u00d7{looks['albedo'].shape[0]} ({SURFACE_PPD} pixels per degree), "
+                    f"relief and water at {SURFACE_PPD // 2}, the map at {ppd}."))
     template = (HERE / 'globe.template.html').read_text()
     page = template.replace('__ATLAS_DATA__', json.dumps(data, ensure_ascii=False))
     (OUT / 'globe.html').write_text(page)
     products = {str(Path(v).relative_to(ROOT)): digest(v) for v in sources.values()}
-    passed = all(abs(v - atlas['water_share']) <= 0.002 for v in (texture_water, appearance_water))
-    return dict(texture_water_share=round(texture_water, 4), appearance_water_share=round(appearance_water, 4),
-                product_water_share=atlas['water_share'], tolerance=0.002, passed=passed,
-                page_bytes=len(page.encode()), appearance_products=products)
+    passed = all(abs(v - atlas['water_share']) <= 0.002 for v in (texture_water, surface_water, mask_water))
+    return dict(map_texture_water_share=round(texture_water, 4), surface_water_share=round(surface_water, 4),
+                water_mask_share=round(mask_water, 4), product_water_share=atlas['water_share'], tolerance=0.002,
+                passed=passed, page_bytes=len(page.encode()), appearance_products=products)
 
 
 def main():
