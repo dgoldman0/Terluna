@@ -321,7 +321,7 @@ def _on_signal(signum, frame):
     sys.exit(128 + signum)
 
 def summarise_year(path: Path) -> dict:
-    """Headline numbers from one year of 5-day means, for watching the run settle and read at a glance."""
+    """Headline numbers from one year of output (3-day means), for watching the run settle at a glance."""
     import netCDF4
     with netCDF4.Dataset(path) as d:
         v = {k: np.asarray(d[k][:], dtype=float) for k in ('ts', 'tas', 'ntr', 'clt', 'pr', 'sic', 'lsm')}
@@ -343,7 +343,7 @@ def summarise_year(path: Path) -> dict:
         toa_net_w_m2=round(mean(year('ntr')), 2), cloud_cover=round(mean(year('clt')), 3),
         precipitation_mm_day=round(mean(year('pr')) * 86400e3, 3),
         sea_ice_share_of_sea=round(mean(year('sic'), ~land), 3),
-        warmest_5day_air_k=round(float(v['tas'].max()), 1), coldest_5day_air_k=round(float(v['tas'].min()), 1),
+        warmest_air_k=round(float(v['tas'].max()), 1), coldest_air_k=round(float(v['tas'].min()), 1),
         equator_land_day_night_swing_k=round(mean(swing, equator), 1),
         equator_land_air_k=round(mean(year('tas'), equator), 1),
         polar_air_k=round(mean(year('tas'), pole), 1),
