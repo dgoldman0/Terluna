@@ -30,13 +30,16 @@ EVIDENCE = ('One-dimensional, global- and diurnal-mean, clear-sky radiative-conv
             'temperature, coupled to steady-state O-H-N photochemistry with eddy diffusion. Moist-adiabatic troposphere '
             'with Manabe-Wetherald humidity; stratospheric water at the tropopause value unless prescribed. No clouds, '
             'circulation, waves, tides, chlorine, bromine, methane or aerosol chemistry; thermal emission in local '
-            'thermodynamic equilibrium, which fails above about 1-10 Pa; no sunlight below 202 nm. Eddy diffusion is '
+            'thermodynamic equilibrium, which fails above about 1-10 Pa, except in the _nonlte cases (a two-level CO2 '
+            '15-um band above 50 Pa, bounded by how the absorbed near-infrared sunlight becomes heat); no sunlight '
+            'below 202 nm. Eddy diffusion is '
             'Earth-based and scaled for the Moon as stated per case. These are conditional calculations for comparing '
             'shields and compositions, not predictions of a lunar climate.')
 
 MOON_12 = dict(planet=th.MOON, dry_pressure_pa=121590.0)
 MOON_10 = dict(planet=th.MOON, dry_pressure_pa=101325.0)
 MOON_KZZ = 36.0        # Earth eddy diffusion times (g_Earth/g_Moon)^2: the same mixing time per scale height
+BALANCE_TEMPS = (268.0, 278.0, 298.0, 308.0)
 
 
 def cases():
@@ -53,6 +56,31 @@ def cases():
     ]
     out += [eq.Case(f'moon_1.2atm_edge_{nm}nm', shield=f'edge_{nm}nm', kzz_scale=MOON_KZZ, **MOON_12)
             for nm in (220, 230, 240)]
+    out += [
+        eq.Case('moon_1.0atm_edge_200nm_no_n2o', shield='edge_200nm', kzz_scale=MOON_KZZ, n2o_ppb=0.0, **MOON_10),
+        eq.Case('moon_1.0atm_edge_200nm_slow_mixing', shield='edge_200nm', kzz_scale=1.0, **MOON_10),
+    ]
+    # The same columns at other surface temperatures, so balance temperatures are interpolated between
+    # solved states rather than extrapolated from the one at 288 K.
+    by_name = {c.name: c for c in out}
+    # CO2 15-um cooling out of local thermodynamic equilibrium above 50 Pa, with the near-infrared sunlight
+    # absorbed there either all turned to heat or only its collisionally deactivated fraction.
+    for name in ('earth_control', 'moon_1.2atm_titania_stack', 'moon_1.0atm_titania_stack', 'moon_1.2atm_edge_200nm',
+                 'moon_1.0atm_edge_200nm'):
+        out.append(replace(by_name[name], name=f'{name}_nonlte', nonlte=True))
+        out.append(replace(by_name[name], name=f'{name}_nonlte_nir_collisional', nonlte=True,
+                           nir_thermalisation='collisional'))
+    # The variants only need their balance with Earth-like clouds bracketed.
+    variants = ('moon_1.2atm_edge_220nm', 'moon_1.2atm_edge_230nm', 'moon_1.2atm_edge_240nm', 'moon_1.2atm_edge_310nm',
+                'moon_1.2atm_none', 'moon_1.2atm_edge_200nm_no_n2o', 'moon_1.0atm_edge_200nm_no_n2o',
+                'moon_1.2atm_edge_200nm_slow_mixing', 'moon_1.0atm_edge_200nm_slow_mixing',
+                'moon_1.2atm_edge_200nm_wet_stratosphere')
+    for name, temps in (('earth_control', (278.0, 298.0)),
+                        ('moon_1.2atm_titania_stack', BALANCE_TEMPS), ('moon_1.0atm_titania_stack', BALANCE_TEMPS),
+                        ('moon_1.2atm_edge_200nm', BALANCE_TEMPS), ('moon_1.0atm_edge_200nm', BALANCE_TEMPS),
+                        *((v, (278.0, 298.0)) for v in variants)):
+        for ts in temps:
+            out.append(replace(by_name[name], name=f'{name}_ts{ts:g}', surface_temperature_k=ts))
     return {c.name: c for c in out}
 
 
@@ -222,9 +250,11 @@ def main(argv=None) -> int:
                 units=dict(pressure='Pa', temperature='K', ozone='Dobson units (2.6867e16 cm^-2)', fluxes='W m-2 global mean',
                            mixing_ratios='mole fraction', photolysis='s-1 global mean', heating='K/day'),
                 reading_rule=('Compare cases at the same surface temperature; net_toa is the forcing the clear column '
-                              'lacks (positive: it would warm). Temperatures above ~1-10 Pa carry the LTE limitation '
-                              'and the missing non-LTE CO2 cooling and heating from above; use t_top only as the '
-                              'boundary of the thermal column with that caveat. Keep the evidence statement with any use.'),
+                              'lacks (positive: it would warm). Above ~1 Pa the cases without _nonlte overstate CO2 '
+                              'cooling; each _nonlte pair bounds the upper air (all absorbed near-infrared sunlight '
+                              'heats, or only its collisionally deactivated part). Heating from above (extreme '
+                              'ultraviolet, conduction) is not included; use t_top only as the boundary of the '
+                              'thermal column with that caveat. Keep the evidence statement with any use.'),
                 table=table.name, profiles='profiles/<case>.csv')
     (args.out / 'middle_atmosphere.json').write_text(json.dumps(meta, indent=2) + '\n')
     return 0

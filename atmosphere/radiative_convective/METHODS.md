@@ -164,6 +164,15 @@ and rebinning (Amundsen et al. 2017). Fluxes use the same linear-in-τ source
 function and four Gauss angles as the line-by-line model, with band-integrated
 Planck radiances.
 
+`CKLongwave.fluxes_nonlte` adds CO2 15-µm emission out of local thermodynamic
+equilibrium in the 500–820 cm⁻¹ bands above a start pressure (50 Pa by
+default). It uses a two-level source function S = (J + εB)/(1 + ε). J is the
+absorption-weighted mean intensity. ε is collisional deactivation of
+CO2(01101) by N2, O2 and O over the Einstein A, from the rates compiled by
+López-Puertas and Taylor (2001). S comes from one linear solve per band, and
+the difference it makes in isothermal-layer transfer is added to the LTE
+fluxes. With collisions forced to dominate it reproduces `fluxes` to 10⁻³ W/m².
+
 ## Validation record
 
 [validation.json](validation.json) holds the numbers.
@@ -211,6 +220,7 @@ Planck radiances.
 - Goldblatt C. et al. (2013) Nature Geosci. 6, 661.
 - Joseph J. H., Wiscombe W. J. & Weinman J. A. (1976) J. Atmos. Sci. 33, 2452.
 - Karman T. et al. (2019) Icarus 328, 160 (HITRAN CIA).
+- López-Puertas M. & Taylor F. W. (2001) Non-LTE Radiative Transfer in the Atmosphere, World Scientific.
 - Kasting J. F. (1988) Icarus 74, 472.
 - Koll D. D. B. & Cronin T. W. (2018) PNAS 115, 10293.
 - Kopparapu R. K. et al. (2013) Astrophys. J. 765, 131.

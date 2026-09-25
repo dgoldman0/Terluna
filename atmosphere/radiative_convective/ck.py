@@ -13,6 +13,7 @@ Planck radiances. Accuracy against the line-by-line model is recorded in the
 tests and the validation record.
 """
 from __future__ import annotations
+from dataclasses import dataclass
 import hashlib
 import json
 import math
@@ -326,3 +327,113 @@ class CKLongwave:
         net = f['up'] - f['down']
         absorbed = net[:-1] - net[1:]
         return absorbed / (col['layer_mass_kg_m2'] * cp) * 86400.0, f
+
+    def fluxes_nonlte(self, col, t_surface=None, extra=None, o_mixing=None, nonlte=None):
+        """Fluxes as fluxes(), with CO2 15-um emission out of local thermodynamic equilibrium aloft.
+
+        In the bands of `nonlte` (500-820 cm^-1) and the layers above its start pressure, the source
+        function is the two-level one, S = (J + eps B)/(1 + eps): J the absorption-weighted mean
+        intensity of the layer, B the Planck function, eps the ratio of collisional deactivation of
+        CO2(01101) by N2, O2 and O to its spontaneous emission. S follows from one linear solve per
+        band (the band cores stay optically thick up to the model top, where iterating on J would
+        converge very slowly), using isothermal-layer transfer. The difference that non-LTE makes
+        in that transfer is added to the linear-in-optical-depth LTE fluxes, so where eps is large
+        the result is exactly fluxes().
+        """
+        nonlte = nonlte or NonLTE()
+        f = self.fluxes(col, t_surface, extra)
+        tau = self.optical_depth(col, extra)
+        ts = col['t_k'][0] if t_surface is None else t_surface
+        eps = nonlte.epsilon(col, o_mixing)
+        free = np.where(col['layer_p_pa'] < nonlte.start_pa)[0]
+        if free.size == 0:
+            return dict(f, epsilon=eps)
+        b_layer = band_planck(col['layer_t_k'])
+        b_surface = band_planck(np.array([ts]))[0]
+        d_up = np.zeros(col['p_pa'].size); d_down = np.zeros(col['p_pa'].size)
+        source = {}
+        for band in nonlte.bands:
+            tb = tau[:, band, :]
+            lte = b_layer[:, band].copy()
+            known = lte.copy(); known[free] = 0.0
+            j_known, _, _ = _isothermal_transfer(tb, known[None, :], np.array([b_surface[band]]))
+            units = np.zeros((free.size, lte.size)); units[np.arange(free.size), free] = 1.0
+            j_unit, _, _ = _isothermal_transfer(tb, units, np.zeros(free.size))
+            lam = j_unit[:, free].T                              # response of layer i to unit source in j
+            a = np.diag(1.0 + eps[free]) - lam
+            rhs = eps[free] * lte[free] + j_known[0, free]
+            s = lte.copy()
+            s[free] = np.linalg.solve(a, rhs)
+            source[band] = s
+            both = np.vstack([s, lte])
+            _, up, down = _isothermal_transfer(tb, both, np.full(2, b_surface[band]))
+            d_up += up[0] - up[1]
+            d_down += down[0] - down[1]
+        up, down = f['up'] + d_up, f['down'] + d_down
+        return dict(up=up, down=down, olr=float(up[-1]), surface_down=float(down[0]),
+                    olr_bands=f['olr_bands'], epsilon=eps, source=source)
+
+
+@dataclass(frozen=True)
+class NonLTE:
+    """Two-level non-LTE for the CO2 bending mode (15 um).
+
+    Einstein A of the v2 fundamental 1.5 s^-1; V-T deactivation of CO2(01101) by N2 (and O2, taken
+    equal) 7e-17 T^0.5 + 6.7e-10 exp(-83.8 T^-1/3) cm^3 s^-1, and by atomic oxygen 3e-12 (T/300)^0.5
+    cm^3 s^-1, as compiled by Lopez-Puertas and Taylor (2001), Non-LTE Radiative Transfer in the
+    Atmosphere; the oxygen rate is uncertain by about a factor of two, which `o_rate_factor` varies.
+    """
+    bands: tuple = (2, 3, 4)
+    start_pa: float = 50.0
+    einstein_a: float = 1.5
+    o_rate_factor: float = 1.0
+    n2_rate_factor: float = 1.0
+
+    def epsilon(self, col, o_mixing=None):
+        t = col['layer_t_k']
+        n = layer_number_density(col)
+        x = col['layer_x_h2o']
+        dry = col['dry_fractions']
+        k_m = self.n2_rate_factor * (7e-17 * np.sqrt(t) + 6.7e-10 * np.exp(-83.8 * t ** (-1.0 / 3.0)))
+        k_o = self.o_rate_factor * 3e-12 * np.sqrt(t / 300.0)
+        n_m = (dry.get('N2', 0.0) + dry.get('O2', 0.0)) * (1 - x) * n
+        n_o = (np.zeros_like(n) if o_mixing is None else np.asarray(o_mixing) * n)
+        return (k_m * n_m + k_o * n_o) / self.einstein_a
+
+
+def _isothermal_transfer(tau, source, surface, n_angles=4):
+    """Isothermal-layer transfer of one band for a batch of layer sources.
+
+    tau: (layers, g); source: (batch, layers); surface: (batch,) upward radiance at the ground.
+    Returns the absorption-weighted mean intensity of each layer (batch, layers) and the upward and
+    downward fluxes at levels (batch, levels), all band-integrated (W m^-2 sr^-1 and W m^-2).
+    """
+    nb, nl = source.shape
+    mu, wmu = lw.angles(n_angles)
+    jbar = np.zeros((nb, nl, NG))
+    up = np.zeros((nb, nl + 1)); down = np.zeros((nb, nl + 1))
+    for m, wt in zip(mu, wmu):
+        x = tau / m
+        e = np.exp(-x)
+        mean = np.where(x > 1e-6, -np.expm1(-x) / np.maximum(x, 1e-300), 1 - x / 2)
+        i = np.zeros((nb, NG))
+        levels_down = [i]
+        for k in range(nl - 1, -1, -1):
+            s = source[:, k][:, None]
+            jbar[:, k] += 0.5 * wt * (s + (i - s) * mean[k])
+            i = i * e[k] + s * (1 - e[k])
+            levels_down.append(i)
+        levels_down.reverse()
+        i = np.broadcast_to(surface[:, None], (nb, NG)).copy()
+        levels_up = [i]
+        for k in range(nl):
+            s = source[:, k][:, None]
+            jbar[:, k] += 0.5 * wt * (s + (i - s) * mean[k])
+            i = i * e[k] + s * (1 - e[k])
+            levels_up.append(i)
+        weight = 2 * math.pi * wt * m
+        up += weight * (np.stack(levels_up, axis=1) * W).sum(-1)
+        down += weight * (np.stack(levels_down, axis=1) * W).sum(-1)
+    absorb = tau * W
+    j = (jbar * absorb[None]).sum(-1) / np.maximum(absorb.sum(-1), 1e-300)[None]
+    return j, up, down

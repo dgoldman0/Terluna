@@ -112,7 +112,8 @@ What these calculations show:
   temperatures by −0.6 to +1.7 K, warmer the stronger the cloud cooling.
 
 None of this is a climate prediction: clouds, the month-long day and night, the
-poles and circulation are all outside the calculation. Ozone and a
+poles and circulation are all outside the calculation. A single column through
+the month-long day and night is in [climate/lunar_day.py](../../climate/lunar_day.py). Ozone and a
 self-consistent stratosphere are added in [../middle_atmosphere](../middle_atmosphere/),
 which moves these balance temperatures: behind the titania stack the
 stratosphere is colder than the 200 K assumed here, and with C = −20 W/m² the
@@ -132,6 +133,13 @@ and `results/ck_validation.json`:
   (lunar column). Above that it is off by 20–40%, and several times in the
   model's top layer: 16 g-points do not resolve the line peaks that only the
   uppermost layers see.
+- Above a few pascals, collisions no longer keep the CO2 15-µm band in local
+  thermodynamic equilibrium. `CKLongwave.fluxes_nonlte` treats the band
+  (500–820 cm⁻¹) as a two-level system above 50 Pa, quenched by N2, O2 and
+  atomic oxygen (López-Puertas & Taylor 2001), and solves its source function
+  together with the radiation field on the correlated-k optical depths. With
+  frequent collisions it returns the equilibrium fluxes (within 10⁻⁴ K/day);
+  at 0.3 Pa on the Moon it cuts the cooling about four-fold.
 
 ## Trace greenhouse gases (2026-09-24)
 

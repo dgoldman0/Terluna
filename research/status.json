@@ -9,7 +9,7 @@
   "topics": [
     {
       "topic": "atmosphere",
-      "condition": "solved_molecular_thermal_limit; clear_sky_line_by_line_radiation_for_prescribed_columns; shield_filtered_sunlight; correlated_k_thermal_scheme_validated_to_5_30_pa; global_mean_radiative_photochemical_equilibrium_per_shield; exobase_coupling_conditional",
+      "condition": "solved_molecular_thermal_limit; clear_sky_line_by_line_radiation_for_prescribed_columns; shield_filtered_sunlight; correlated_k_thermal_scheme_validated_to_5_30_pa; global_mean_radiative_photochemical_equilibrium_per_shield; balance_temperatures_solved_for_every_case; two_level_non_lte_co2_cooling_with_nir_thermalisation_bounds; idealised_filter_leakage_heating_and_atomic_oxygen_escape_bounds; line_by_line_radiation_benchmarks_for_gcm; exobase_coupling_conditional",
       "material": [
         "../atmosphere/sim/sim1.py",
         "baselines/feasibility/model.py",
@@ -22,29 +22,31 @@
         "../atmosphere/radiative_convective/ck.py"
       ],
       "unresolved": [
-        "non-LTE CO2 cooling and upper-air temperature above ~5 Pa",
+        "upper-air temperature above ~1 Pa bounded by how near-infrared heating thermalises, not solved; atomic-oxygen 63-um cooling omitted",
         "day-night and 3-D transport of the middle atmosphere and its effect on the exobase",
-        "EUV/FUV leakage heating of each candidate filter",
-        "atomic oxygen and composition in the thermal column",
+        "titania stack's response at 25-120 nm, so its own EUV leakage heating (idealised filters bounded)",
+        "measured SF6/NF3/CF4 cross-sections (HITRAN access needed; grey-band estimates only)",
         "water supply to escape"
       ],
-      "next_session_task": "Add non-LTE CO2 cooling above ~5 Pa and atomic oxygen to the thermal column; compute each filter's EUV/FUV leakage heating; then couple to a 3-D circulation chosen by the author."
+      "next_session_task": "Couple the middle atmosphere and exobase to the 3-D circulation the author chooses; add the titania stack's measured EUV response and measured fluorinated-gas cross-sections when available."
     },
     {
       "topic": "climate",
-      "condition": "periodic_conservative_spatial_linear_screen; uncalibrated; clear_sky_radiation_computed_for_prescribed_columns; gcm_boundary_files_prepared_no_gcm_run",
+      "condition": "periodic_conservative_spatial_linear_screen; uncalibrated; clear_sky_radiation_computed_for_prescribed_columns; single_column_month_long_day_night_with_weak_temperature_gradient_exchange; gcm_boundary_files_prepared_no_gcm_run",
       "material": [
         "../climate/reference/thermal_response.csv",
         "baselines/feasibility/model.py",
         "../climate/cycle.py",
         "studies/environment_screens/results/climate_budget.csv",
         "../atmosphere/radiative_convective/results/",
-        "../climate/gcm/"
+        "../climate/gcm/",
+        "../climate/lunar_day.py",
+        "../climate/results/lunar_day/"
       ],
       "unresolved": [
         "cloud radiative effect of a slowly rotating Moon",
         "moisture/ice/clouds",
-        "dynamical heat transport and weather",
+        "dynamical heat transport and weather, including the day-night and polar circulation the single column replaces with relaxation, and the free-atmosphere temperature it holds at the global mean",
         "actual terrain",
         "spatial resolution sensitivity"
       ],

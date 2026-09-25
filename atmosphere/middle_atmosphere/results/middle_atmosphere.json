@@ -4,15 +4,17 @@
     "domain": "atmosphere",
     "model": "atmosphere/middle_atmosphere",
     "files": {
+      "middle_atmosphere/balance.py": "00008ae053567ce3",
+      "middle_atmosphere/benchmarks.py": "d47f71506b648d20",
       "middle_atmosphere/chemistry.py": "c7eb0ece06ef9fc1",
-      "middle_atmosphere/equilibrium.py": "c86dd5ef8493c795",
-      "middle_atmosphere/escape.py": "18af72e16cbd4ea9",
+      "middle_atmosphere/equilibrium.py": "265bc854a481936e",
+      "middle_atmosphere/escape.py": "a9da54893e0f771c",
       "middle_atmosphere/fetch_inputs.py": "ddd37b9945fa41d5",
       "middle_atmosphere/lbl_check.py": "153ff01c4dec4fcd",
       "middle_atmosphere/photolysis.py": "95965ecee7883f48",
-      "middle_atmosphere/run.py": "c996250f73a2ac0a",
+      "middle_atmosphere/run.py": "211b84e5a3340879",
       "radiative_convective/analysis.py": "a82be058bfc0c37a",
-      "radiative_convective/ck.py": "65f26aa00d01f4d6",
+      "radiative_convective/ck.py": "97abc1ae6ba32a06",
       "radiative_convective/climate.py": "a74bf6fada62a9dc",
       "radiative_convective/fetch_inputs.py": "a8c5f9a7e70293aa",
       "radiative_convective/longwave.py": "87a40a93f2e82dab",
@@ -25,12 +27,12 @@
       "radiative_convective/validate_ck.py": "1cffd908f22ee58c"
     },
     "inputs_manifests": {
-      "middle_atmosphere": "a3edb1276acb0cc9",
+      "middle_atmosphere": "30e5b72a2130d70c",
       "radiative_convective": "23b4fadb5b532fb0"
     },
     "shield_product": "0d05194e82f3e99f"
   },
-  "evidence": "One-dimensional, global- and diurnal-mean, clear-sky radiative-convective equilibrium at a fixed surface temperature, coupled to steady-state O-H-N photochemistry with eddy diffusion. Moist-adiabatic troposphere with Manabe-Wetherald humidity; stratospheric water at the tropopause value unless prescribed. No clouds, circulation, waves, tides, chlorine, bromine, methane or aerosol chemistry; thermal emission in local thermodynamic equilibrium, which fails above about 1-10 Pa; no sunlight below 202 nm. Eddy diffusion is Earth-based and scaled for the Moon as stated per case. These are conditional calculations for comparing shields and compositions, not predictions of a lunar climate.",
+  "evidence": "One-dimensional, global- and diurnal-mean, clear-sky radiative-convective equilibrium at a fixed surface temperature, coupled to steady-state O-H-N photochemistry with eddy diffusion. Moist-adiabatic troposphere with Manabe-Wetherald humidity; stratospheric water at the tropopause value unless prescribed. No clouds, circulation, waves, tides, chlorine, bromine, methane or aerosol chemistry; thermal emission in local thermodynamic equilibrium, which fails above about 1-10 Pa, except in the _nonlte cases (a two-level CO2 15-um band above 50 Pa, bounded by how the absorbed near-infrared sunlight becomes heat); no sunlight below 202 nm. Eddy diffusion is Earth-based and scaled for the Moon as stated per case. These are conditional calculations for comparing shields and compositions, not predictions of a lunar climate.",
   "units": {
     "pressure": "Pa",
     "temperature": "K",
@@ -40,7 +42,7 @@
     "photolysis": "s-1 global mean",
     "heating": "K/day"
   },
-  "reading_rule": "Compare cases at the same surface temperature; net_toa is the forcing the clear column lacks (positive: it would warm). Temperatures above ~1-10 Pa carry the LTE limitation and the missing non-LTE CO2 cooling and heating from above; use t_top only as the boundary of the thermal column with that caveat. Keep the evidence statement with any use.",
+  "reading_rule": "Compare cases at the same surface temperature; net_toa is the forcing the clear column lacks (positive: it would warm). Above ~1 Pa the cases without _nonlte overstate CO2 cooling; each _nonlte pair bounds the upper air (all absorbed near-infrared sunlight heats, or only its collisionally deactivated part). Heating from above (extreme ultraviolet, conduction) is not included; use t_top only as the boundary of the thermal column with that caveat. Keep the evidence statement with any use.",
   "table": "middle_atmosphere.csv",
   "profiles": "profiles/<case>.csv"
 }

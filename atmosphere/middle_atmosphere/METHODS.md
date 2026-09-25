@@ -126,17 +126,96 @@ radiation alone would cause if no heat were carried in.
 Surface UV indices use the CIE erythemal action spectrum. They are given for
 the sub-solar point, a 45° solar elevation and the global mean.
 
+Balance temperatures (`balance.py`) come from the same columns solved at
+surface temperatures of 268, 278, 288, 298 and 308 K (278–298 K for the Earth
+control). Each state has its own ozone, tropopause and stratosphere. The
+top-of-atmosphere surplus is interpolated linearly between solved states to
+where it cancels an assumed cloud effect.
+
+## Upper air out of local thermodynamic equilibrium
+
+Above about 5 Pa, collisions no longer keep CO2's bending mode populated at
+the local temperature. The `_nonlte` cases therefore use a two-level source
+function in the 500–820 cm⁻¹ bands above 50 Pa (`ck.CKLongwave.fluxes_nonlte`):
+S = (J + εB)/(1 + ε). Here J is the absorption-weighted mean intensity of the
+layer, and ε is collisional deactivation of CO2(01101) by N2, O2 and O divided
+by the Einstein A of 1.5 s⁻¹. The rates are those compiled by López-Puertas
+and Taylor (2001); the one for atomic oxygen is uncertain by about a factor of
+two.
+
+The band cores stay optically thick up to the model top, so S comes from one
+linear solve per band rather than iteration. The change non-LTE makes in
+isothermal-layer transfer is added to the LTE fluxes, so where ε is large the
+result is exactly LTE. Near-infrared sunlight absorbed above 50 Pa is taken
+two ways:
+- as heat in full;
+- in the collisionally deactivated fraction ε/(1 + ε) only (`_nir_collisional`).
+
+The two bound how much of it heats the air. On the Earth control the
+collisional bound stays within 6 K of the US Standard Atmosphere (1976) from 10
+to 0.3 Pa, while heat in full is 40 K too warm at 0.3 Pa.
+
+## Exobase
+
+`escape.py` gives the thermal column its base temperature at 0.3 Pa, where the
+correlated-k and line-by-line temperatures agree within about 1 K. It also
+repeats the calculation from the top layer (0.1 Pa) and from 10 Pa as
+sensitivities.
+
+Heat deposited above the base is swept. It is also estimated for a filter that
+passes 0.1% of sunlight below its edge, from the WHI 2008 reference spectrum
+(Woods et al. 2009, near solar minimum; about 2.5 times more near solar
+maximum):
+- everything below 121 nm and the Schumann–Runge continuum (122.5–175 nm) is
+  absorbed above the base;
+- Lyman-α is absorbed there in the fraction the O2 column allows;
+- a heating efficiency of 0.4 converts absorbed energy to heat.
+
+Atomic oxygen, which the thermal column does not hold, is carried on each
+solution as a trace gas starting from the chemistry's fraction at the base.
+Above the base its fraction f follows the zero-flux balance of eddy diffusion K
+and its molecular diffusion D through the air:
+
+d ln f/dr = D/(D + K) · (m_air − m_O) g/(kT),
+
+with D = b/n and b = 9.69×10¹⁶ T^0.774 cm⁻¹ s⁻¹ for O through N2 (Banks and
+Kockarts 1973). Three cases are reported:
+- well mixed (K ≫ D to the exobase), the lower bound;
+- separated from the base up (K = 0), the upper bound;
+- K from the chemistry's eddy profile (Massie and Hunten, times the lunar
+  scaling) continued above the model top, so that separation sets in at the
+  homopause, where D = K. This is the central estimate, and it rests on that
+  continuation.
+
+Jeans escape of the oxygen at the column's exobase is reported for each. An
+oxygen-rich upper thermosphere would also cool by 63-µm emission, which the
+column lacks, so the estimates overstate the exobase temperature and the loss
+where oxygen is abundant. Where the separated fraction at the exobase is large
+(tens of percent), oxygen would change the column itself, and the trace-gas
+treatment no longer holds.
+
+## Radiation benchmarks
+
+`benchmarks.py` recomputes, on four final profiles:
+- thermal fluxes, line by line at 0.01 cm⁻¹ (H2O, CO2 and O3 lines, MT_CKD 4.3,
+  collision-induced absorption), beside the correlated-k fluxes;
+- solar direct, diffuse-down and upward fluxes at every level, for zenith
+  cosines 1.0 and 0.5 and the global mean.
+
+A 3-D model's radiation code can be checked against them on identical columns.
+
 ## Limits
 
 - One-dimensional global and diurnal mean. Clouds, circulation, waves and
   tides are absent. The month-long lunar day drives strong day–night
   circulations that this model cannot represent. The linear swing estimate is
   what radiation alone would do.
-- CO2 emits in local thermodynamic equilibrium. That fails above roughly
-  1–10 Pa, so temperatures near the top are the least reliable. The
-  correlated-k CO2 cooling adds its own error there: 20–40% above about 30 Pa
-  (Earth) or 5 Pa (Moon), several times in the top layer. `lbl_check.py`
-  measures the resulting temperature change on finished cases.
+- The standard cases treat CO2 emission in local thermodynamic equilibrium,
+  which fails above roughly 1–10 Pa; the `_nonlte` cases replace it with the
+  two-level approximation above. The correlated-k CO2 cooling adds its own
+  error there: 20–40% above about 30 Pa (Earth) or 5 Pa (Moon), and several
+  times in the top layer. `lbl_check.py` measures the resulting temperature
+  change on finished cases.
 - No chlorine, bromine, methane, CO or hydrocarbon chemistry, HO2NO2, aerosol
   surface chemistry or ions. Tropospheric ozone production is therefore absent.
 - No sunlight below 202 nm, so NO, H2O and Schumann–Runge O2 photolysis are
@@ -145,3 +224,27 @@ the sub-solar point, a 45° solar elevation and the global mean.
   is the main reason the control underestimates Earth's ozone column.
 - The Earth-based eddy diffusion, its lunar scaling, the washout rate and the
   stratospheric humidity rule are assumptions that the sensitivity cases vary.
+
+## References
+
+- Amundsen D. S. et al. (2017) Astron. Astrophys. 598, A97 (random overlap with resorting and rebinning).
+- Banks P. M. & Kockarts G. (1973) Aeronomy, Part B, Academic Press (molecular diffusion coefficients).
+- Bodhaine B. A. et al. (1999) J. Atmos. Oceanic Technol. 16, 1854 (Rayleigh scattering).
+- Burkholder J. B. et al. (2019) Chemical Kinetics and Photochemical Data for Use in Atmospheric Studies, Evaluation No. 19, JPL Publication 19-5.
+- Campbell I. M. & Gray C. N. (1973) Chem. Phys. Lett. 18, 607 (O + O + M).
+- Coddington O. M. et al. (2021) Geophys. Res. Lett. 48, e2020GL091709 (TSIS-1 HSRS).
+- Ding F. & Pierrehumbert R. T. (2016) Astrophys. J. 822, 24 (non-dilute moist adiabat).
+- Johnston H. S. et al. (1996) J. Phys. Chem. 100, 4713 (NO3 photolysis yields).
+- Keller-Rudek H. et al. (2013) Earth Syst. Sci. Data 5, 365 (MPI-Mainz UV/VIS Spectral Atlas).
+- López-Puertas M. & Taylor F. W. (2001) Non-LTE Radiative Transfer in the Atmosphere, World Scientific.
+- Manabe S. & Wetherald R. T. (1967) J. Atmos. Sci. 24, 241.
+- Massie S. T. & Hunten D. M. (1981) J. Geophys. Res. 86, 9859 (eddy diffusion).
+- Matsumi Y. et al. (2002) J. Geophys. Res. 107, 4024 (O(1D) quantum yields).
+- McKinlay A. F. & Diffey B. L. (1987) CIE Journal 6, 17 (erythemal action spectrum).
+- Sander S. P. et al. (2011) JPL Publication 10-6 (recommended cross-sections).
+- Troe J. (2000) Z. Phys. Chem. 214, 573 (NO2 photolysis yields).
+- U.S. Standard Atmosphere, 1976. NOAA, NASA and USAF, Washington, D.C.
+- Woods T. N. et al. (2009) Geophys. Res. Lett. 36, L01101 (WHI 2008 reference solar spectrum).
+
+These references record where equations and data come from. Full-source reading
+for manuscript use remains outstanding under the ensemble charter.

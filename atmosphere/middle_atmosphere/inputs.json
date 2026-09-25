@@ -196,6 +196,14 @@
    "bytes": 4201,
    "credit": "O3 absorption cross-sections, 121.6-827.5 nm, 293-298 K: JPL Publication 10-6 recommendation (Sander et al. 2011), via the MPI-Mainz UV/VIS Spectral Atlas (Keller-Rudek et al. 2013).",
    "use": "O3 photolysis and solar heating (room temperature)"
+  },
+  {
+   "name": "whi2008_ref_solar_irradiance_ver2.dat",
+   "url": "https://lasp.colorado.edu/lisird/resources/whi_ref_spectra/data/ref_solar_irradiance_whi-2008_ver2.dat",
+   "sha256": "270869df7761805c451c0be7927cb9d06f88745fa6beab55b1bf929f6f2110ed",
+   "bytes": 1183716,
+   "credit": "Whole Heliosphere Interval 2008 reference solar spectral irradiance, 0.1-2400 nm, version 2 (Woods et al. 2009, Geophys. Res. Lett. 36, L01101), from TIMED SEE, SORCE and a rocket prototype of SDO EVE, as served by LASP LISIRD. Near solar minimum; cite the data paper for any use.",
+   "use": "Solar irradiance below 202 nm, for the heat that filter leakage deposits above the thermal column"
   }
  ]
 }

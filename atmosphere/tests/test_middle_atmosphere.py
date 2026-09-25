@@ -201,3 +201,60 @@ class CorrelatedKTests(unittest.TestCase):
         total = ck.band_planck(np.array([288.0]))[0].sum() * math.pi
         # The bands stop at 3000 cm^-1, which omits 0.02% of 288-K emission.
         self.assertAlmostEqual(total / (STEFAN_BOLTZMANN * 288.0 ** 4), 1.0, delta=2e-3)
+
+
+@unittest.skipUnless(_tables_built(), 'correlated-k tables not built (ck.build())')
+class NonLTETests(unittest.TestCase):
+    def test_collisional_limit_is_lte_and_thin_limit_cools_less(self):
+        col = _column(th.MOON, levels=61, top=0.1)
+        model = ck.CKLongwave()
+        lte = model.fluxes(col)
+        forced = model.fluxes_nonlte(col, nonlte=ck.NonLTE(n2_rate_factor=1e8))
+        self.assertLess(np.max(np.abs((forced['up'] - forced['down']) - (lte['up'] - lte['down']))), 1e-3)
+        free = model.fluxes_nonlte(col)
+        net_lte, net_free = lte['up'] - lte['down'], free['up'] - free['down']
+        cool_lte = net_lte[1:] - net_lte[:-1]            # energy lost by each layer
+        cool_free = net_free[1:] - net_free[:-1]
+        # Where collisions are rare the layers cool less; just below, they can cool slightly more,
+        # because the layers above them now emit less downward.
+        top = free['epsilon'] < 0.2
+        self.assertTrue(np.all(np.abs(cool_free[top]) < np.abs(cool_lte[top])))
+        self.assertGreater(free['epsilon'][0], 1e3)       # collisions dominate at the ground
+
+
+class EscapeTests(unittest.TestCase):
+    def test_atomic_oxygen_bounds(self):
+        from atmosphere.thermal_column import ColumnConfig, solve_column
+        from atmosphere.middle_atmosphere import escape as es
+        from atmosphere.middle_atmosphere import chemistry as ch
+        from atmosphere.thermal_column import lower_boundary
+        cfg = ColumnConfig(lower_temperature_k=190.0, lower_pressure_pa=0.3)
+        _, profile, _ = solve_column(1e-6, cfg)
+        molar = lower_boundary(cfg)[3]
+        eddy = lambda p: ch.Mixing(scale=36.0).profile(p, 2e4)
+        o = es.atomic_oxygen_loss(profile, 1e-4, molar, eddy)
+        # The lighter gas is enriched with height, the more so the earlier molecular diffusion takes over.
+        self.assertLess(o['loss_mixed_kg_s'], o['loss_eddy_kg_s'])
+        self.assertLess(o['loss_eddy_kg_s'], o['loss_separated_kg_s'])
+        self.assertAlmostEqual(o['fraction_exobase_mixed'], 1e-4)
+        self.assertLess(profile['pressure_Pa'][-1], o['homopause_pa'])
+        self.assertLess(o['homopause_pa'], 0.3)
+        doubled = es.atomic_oxygen_loss(profile, 2e-4, molar, eddy)
+        self.assertAlmostEqual(doubled['loss_separated_kg_s'] / o['loss_separated_kg_s'], 2.0, delta=1e-9)
+        # Without eddy mixing the fraction follows oxygen's own hydrostatic profile in the column.
+        from shared.constants import BOLTZMANN, MOON_GM, MOON_RADIUS
+        r = profile['radius_R'] * MOON_RADIUS
+        t = profile['temperature_K']
+        integrand = es.M_O * MOON_GM / r ** 2 / (BOLTZMANN * t)
+        n_o = 1e-4 * profile['pressure_Pa'][0] / (BOLTZMANN * t[0]) * (t[0] / t[-1]) * np.exp(
+            -np.sum(0.5 * (integrand[1:] + integrand[:-1]) * np.diff(r)))
+        n_total = profile['pressure_Pa'][-1] / (BOLTZMANN * t[-1])
+        self.assertAlmostEqual(o['fraction_exobase_separated'] / (n_o / n_total), 1.0, delta=2e-3)
+
+    @NEEDS_UV
+    def test_leakage_heat_scales(self):
+        from atmosphere.middle_atmosphere import escape as es
+        q = es.leakage_heat()
+        self.assertGreater(q, 5e-7)
+        self.assertLess(q, 5e-6)
+        self.assertAlmostEqual(es.leakage_heat(transmission=2e-3) / q, 2.0, delta=1e-12)

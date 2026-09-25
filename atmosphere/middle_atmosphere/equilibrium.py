@@ -50,6 +50,9 @@ class Case:
     layers: int = 100
     sw_stride: int = 2                         # line-by-line sunlight on every second level
     day_days: float = SYNODIC_MONTH_DAYS       # length of the solar day (1 for the Earth control)
+    nonlte: bool = False                       # CO2 15-um emission out of LTE above 50 Pa (ck.NonLTE)
+    nir_thermalisation: str = 'full'           # near-infrared sunlight absorbed above 50 Pa: 'full' heat,
+                                               # or 'collisional': the fraction eps/(1+eps) of ck.NonLTE
 
     def air(self):
         return th.earthlike_air(self.dry_pressure_pa, self.co2_ppm)
@@ -179,7 +182,10 @@ class Solver:
             print(*a, flush=True)
 
     def longwave_absorption(self, col, o3_layers):
-        f = self.lw.fluxes(col, extra={'O3': o3_layers})
+        if getattr(self, 'nonlte', False):
+            f = self.lw.fluxes_nonlte(col, extra={'O3': o3_layers}, o_mixing=self.o_mixing)
+        else:
+            f = self.lw.fluxes(col, extra={'O3': o3_layers})
         net_up = f['up'] - f['down']
         return net_up[:-1] - net_up[1:], f
 
@@ -284,6 +290,7 @@ class Solver:
     def solve(self, case: Case, max_outer=10, state=None):
         prof = Profile(case)
         t, trop = prof.initial()
+        self.nonlte, self.o_mixing = case.nonlte, None
         shield = cl.load_shield(case.shield)
         sun = ph.Sunlight(shield)
         history = []
@@ -297,7 +304,15 @@ class Solver:
             new_o3 = state.n[ch.INDEX['O3']] / m
             du = ch.column_du(col, state.n)
             o3_layers = new_o3 * col['layer_column_cm2']
+            self.o_mixing = state.n[ch.INDEX['O']] / m
             nir = near_infrared(col, prof.air, o3_layers, shield, case.surface_albedo, stride=case.sw_stride)
+            if case.nir_thermalisation == 'collisional':
+                # Only the collisionally deactivated fraction of absorbed near-infrared sunlight heats the air
+                # above 50 Pa; the rest is re-emitted. A lower bound, since some energy reaches heat by other paths.
+                eps = ck.NonLTE().epsilon(col, self.o_mixing)
+                keep = np.where(col['layer_p_pa'] < ck.NonLTE().start_pa, eps / (1 + eps), 1.0)
+                nir['layers'] = nir['layers'] * keep
+                nir['nodes'] = nir['nodes'] * keep[:, None]
             sw_layers = state.heating + nir['layers']
             local_nodes = state.info['light']['heating_nodes'] + nir['nodes']
             t_old = t.copy()

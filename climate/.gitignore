@@ -1,2 +1,4 @@
 __pycache__/
 *.py[cod]
+# Per-day checkpoints of unfinished lunar_day cases, removed when a case finishes.
+/results/lunar_day/checkpoints/

@@ -59,7 +59,12 @@ A practical sequence:
    temperatures, circulation pattern), at 1.0 and 1.2 atm with 25% and 35%
    water.
 2. Then ROCKE-3D or the LMD model for the cases that matter, with radiation
-   checked against this repository's line-by-line fluxes on the same profiles.
+   checked against this repository's line-by-line fluxes on the same profiles:
+   `atmosphere/middle_atmosphere/results/radiation_benchmarks.json` holds four
+   columns (the Earth control, the Moon behind the titania stack at 1.2 and
+   1.0 atm, and behind a 200-nm edge). For each it gives thermal fluxes line by
+   line and by correlated-k, and solar fluxes at zenith cosines 1.0 and 0.5
+   and as a global mean.
 
 GPUs do not help these codes; all run on CPU cores with MPI. Rough expectations,
 to be checked on this machine: a T21 ExoPlaSim run
