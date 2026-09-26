@@ -46,10 +46,10 @@ step there. The swarm holds 3–4×10⁻⁵ with tight choices, about 2×10⁻�
 standard ones and 2.5×10⁻³ with relaxed ones, most of it from failed cells
 waiting to be covered. At the tight and standard levels the sky's Lyman-alpha
 glow supplies 76–98% of the upper air's heat. Behind the titania stack at the
-standard level the loss is 0.03–3.1 kg/s with the solar-wind range, a cycle time
-of 32 billion years or longer, and the shield must reach 1.9–3.1 lunar radii.
-Behind the 200-nm edge the loss is 0.3–19 kg/s and the radius 3.0–4.1 lunar
-radii. The ions the exosphere makes outside the shield, 2–38 kg/s behind the
+standard level the loss is 0.03–4.6 kg/s with the solar-wind range and Earth's
+tide, a cycle time of 22 billion years or longer, and the shield must reach
+1.9–3.1 lunar radii. Behind the 200-nm edge the loss is 0.8–40 kg/s and the
+radius 3.0–4.1 lunar radii. The ions the exosphere makes outside the shield, 2–38 kg/s behind the
 titania stack, are the largest open term. The requirements hold the details.
 
 ## Working rules
@@ -68,11 +68,13 @@ reasons, stated.
 The loss budget is designed across 1–100 kg/s, atmospheric cycle times of
 about 100 billion to 1 billion years, until the designs show which rate works
 best (the author's decision of 2026-09-26); requirements.md shows what each
-budget asks. The design point puts a swarm with standard choices at the
-bottom of the range or below it for the modelled channels, so the loss now turns
-on what the loss response leaves out: Earth's tidal lowering of the escape barrier, and the
-escape of ions made in the sunlit exosphere, which also decides whether
-charged-particle protection is needed. Next come those two losses in the loss
-response, with a plasma estimate of the ions' escape; the trade of how the
-shield is held, against requirement S6, with the module catalogue and supply
-ledger scoring each option; and the assessment of effects on Earth.
+budget asks. Earth's tide is in the loss response and roughly doubles molecular
+escape. The design point puts a swarm with standard choices at the bottom of the
+range or below it for the modelled channels, so the loss now turns on the escape
+of ions made in the sunlit exosphere, which also decides whether
+charged-particle protection is needed. Next comes an estimate of how many of
+those ions escape, from published results for bodies in flowing plasma and from
+how far out the September design's magnets would hold off the solar wind; then
+the trade of how the shield is held, against requirement S6, with the module
+catalogue and supply ledger scoring each option; and the assessment of effects
+on Earth.

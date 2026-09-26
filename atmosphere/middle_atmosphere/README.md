@@ -229,13 +229,16 @@ aperture.
   with gravity at the base radius, for light from the whole sky): 2.1–2.8×10⁻⁶
   W/m² at quiet Sun. That raises the exobase by 31–42 K at quiet Sun and 47–61 K
   at solar maximum (a solar-cycle factor of 1.5 assumed), for every shield.
-- **Some loss channels are not yet included:** Earth's tide lowering the escape
-  barrier, solar-wind sputtering and ion pickup (screened in the loss response),
-  and hydrogen from water. The September feasibility report
+- **Some loss channels are handled downstream or not yet included.** Earth's
+  tide lowering the escape barrier is in the
+  [loss response](../loss_response/README.md): test molecules in the Earth–Moon
+  three-body problem give 2.6 times the nitrogen Jeans flux at the September
+  feasibility report's reference exobase, where the report's uniform barrier
+  factor gives about 4.5
   ([research/baselines/feasibility/report.md](../../research/baselines/feasibility/report.md),
-  sections 4–5) sizes the first as about 4.5 times the nitrogen Jeans flux at
-  its reference exobase, and the second as 0.4–40 kg/s over a
-  three-lunar-radius cross-section, as a budget translation.
+  sections 4–5). Solar-wind sputtering and ion pickup are screened there too;
+  the report gives 0.4–40 kg/s over a three-lunar-radius cross-section, as a
+  budget translation. Hydrogen from water is not yet included.
 - **Less CO2 warms the upper air, within the film's margin.** CO2 is the upper
   air's main coolant. In the warmest treatment (all absorbed near-infrared
   heats), cutting it from 400 to 280 ppm raises the base by 5 K and to 150 ppm

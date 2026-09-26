@@ -14,7 +14,9 @@ the sky's interplanetary Lyman-alpha glow, which no Sun-facing shield blocks.
 The thermal column (atmosphere/thermal_column.py) turns that heat into an
 exobase and a molecular Jeans loss, with the base temperature the middle
 atmosphere finds behind each shield under each treatment of the upper air
-(collisional, LTE, all near-infrared heats). Where the column leaves its domain
+(collisional, LTE, all near-infrared heats). Earth's tide raises each species'
+escape by the multiplier tides.py finds for its exobase radius and Jeans
+parameter (results/tidal_escape.json); the two-body loss is kept beside it. Where the column leaves its domain
 (no convergence, or a Jeans parameter below 3), escape is bounded above by the
 energy-limited expression of the September feasibility report (section 6),
     Mdot = eta * pi * R_abs**3 * F_xuv / (G M),
@@ -30,14 +32,13 @@ ions that fall back into the air (a fraction of the pickup, times a yield of
 a yield of 0.01-0.1 N2 molecules per proton). All of it scales with the share of
 each orbit the Moon spends in the solar wind rather than in Earth's magnetotail.
 absorption.py counts the ions the sunlit exosphere makes outside the shield's
-shadow; they exceed this cap 40-600 times, so the cap stands only if most of
+shadow; they exceed this cap 36-470 times, so the cap stands only if most of
 them stay with the Moon.
 
 Not included: atomic-oxygen escape (about half again behind the 200-nm edge, per
 the middle-atmosphere results), photochemical escape, hydrogen from water,
-Earth's tidal lowering of the escape barrier (the feasibility baseline's barrier
-factor multiplies the molecular escape at the allowed leaks by 2.5-4.2; the
-column flags exobases beyond 3.5 lunar radii), the day-night circulation of the upper air, and plasma physics
+Earth's tide in the energy-limited bound (it would raise that bound by about
+1/K, 10-20%), the day-night circulation of the upper air, and plasma physics
 beyond the scalings above.
 """
 from __future__ import annotations
@@ -56,11 +57,14 @@ from shared.constants import AVOGADRO, MOON_GM, MOON_RADIUS
 from atmosphere.thermal_column import ColumnConfig, solve_column
 from atmosphere.radiative_convective import thermodynamics as th
 from atmosphere.middle_atmosphere import escape
+from atmosphere.loss_response import tides
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 MIDDLE = ROOT / 'atmosphere' / 'middle_atmosphere' / 'results'
-SCHEMA = 'terluna.atmosphere.loss-response/1'
+SCHEMA = 'terluna.atmosphere.loss-response/2'
+TIDES = HERE / 'results' / 'tidal_escape.json'
+TIDES_SCHEMA = 'terluna.atmosphere.tidal-escape/1'
 
 PLANCK, LIGHT, PROTON_KG = 6.62607015e-34, 299792458.0, 1.67262192e-27
 N2_KG = 0.0280134 / AVOGADRO
@@ -125,6 +129,26 @@ def energy_limited_loss(flux_w_m2, absorption_radius_R, eta):
     return eta * math.pi * r ** 3 * flux_w_m2 / MOON_GM
 
 
+_TIDAL = {}
+
+
+def tidal_table():
+    if 'table' not in _TIDAL:
+        table = json.loads(TIDES.read_text())
+        if table['schema'] != TIDES_SCHEMA:
+            raise ValueError(f"unexpected tidal-escape schema {table['schema']}")
+        _TIDAL['table'] = table
+    return _TIDAL['table']
+
+
+def with_tides(summary):
+    """Molecular loss with Earth's tide: each species' two-body Jeans loss times its tidal multiplier."""
+    table = tidal_table()
+    m_n2 = tides.multiplier(table, summary['exobase_radius_R'], summary['jeans_lambda_N2'])
+    m_o2 = tides.multiplier(table, summary['exobase_radius_R'], summary['jeans_lambda_O2'])
+    return summary['N2_loss_kg_s'] * m_n2 + summary['O2_loss_kg_s'] * m_o2, m_n2
+
+
 def base_conditions(shield, treatment):
     """Base temperature at 0.3 Pa and the column's surface state for one middle-atmosphere case."""
     case = SHIELDS[shield] + TREATMENTS[treatment]
@@ -171,10 +195,12 @@ def euv_sweep(shield, treatment, activity='quiet', glow=True, leaks=LEAKS):
                 if 'HYDROSTATIC_OUTFLOW_LIMIT_EXCEEDED' in flags:
                     in_domain = False
                 else:
+                    tidal_loss, m_n2 = with_tides(summary)
                     row.update(status='thermal_column', exobase_temperature_k=summary['exobase_temperature_k'],
                                exobase_radius_R=summary['exobase_radius_R'],
                                jeans_lambda_N2=summary['jeans_lambda_N2'],
-                               molecular_loss_kg_s=summary['molecular_loss_kg_s'],
+                               molecular_loss_two_body_kg_s=summary['molecular_loss_kg_s'],
+                               tidal_multiplier_N2=m_n2, molecular_loss_kg_s=tidal_loss,
                                tidal_review=summary['exobase_radius_R'] > TIDAL_REVIEW_R)
             except (ValueError, RuntimeError, FloatingPointError):
                 in_domain = False
@@ -282,13 +308,16 @@ def main(argv=None) -> int:
         schema=SCHEMA,
         producer=dict(domain='atmosphere', files={p: _digest(ROOT / p) for p in (
             'atmosphere/loss_response/model.py', 'atmosphere/thermal_column.py',
-            'atmosphere/middle_atmosphere/escape.py')}),
+            'atmosphere/middle_atmosphere/escape.py', 'atmosphere/loss_response/tides.py',
+            'atmosphere/loss_response/results/tidal_escape.json')}),
         evidence=('Screening model. The ultraviolet branch is the molecular thermal column (no infrared cooling, '
-                  'no atomic oxygen, no tides) above middle-atmosphere base temperatures, with energy-limited '
+                  'no atomic oxygen) above middle-atmosphere base temperatures, with its Jeans escape raised by '
+                  'the tidal multiplier of test molecules in the Earth-Moon three-body problem, and energy-limited '
                   'upper bounds beyond its domain; the solar-wind branch is a range from mass-loading and '
                   'sputtering scalings with assumed parameter ranges. Neither is a coupled aeronomy or plasma model.'),
         reading_rule=('Loss rates are global-mean kg/s for the finished 1.2 atm atmosphere. Use the thermal-column '
-                      'loss where status is thermal_column and the energy-limited range beyond it. A budget row\'s '
+                      'loss where status is thermal_column (molecular_loss_kg_s includes Earth\'s tide; '
+                      'molecular_loss_two_body_kg_s leaves it out) and the energy-limited range beyond it. A budget row\'s '
                       'allowed_leak_fraction is the largest fraction of sunlight below 175 nm the optical shield may '
                       'let through while ultraviolet-driven loss plus the stated solar-wind loss stays within the budget.'),
         assumptions=dict(base_pressure_pa=BASE_PA, lyman_glow_rayleigh_quiet=GLOW_RAYLEIGH,

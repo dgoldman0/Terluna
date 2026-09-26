@@ -9,7 +9,7 @@
   "topics": [
     {
       "topic": "atmosphere",
-      "condition": "solved_molecular_thermal_limit; clear_sky_line_by_line_radiation_for_prescribed_columns; shield_filtered_sunlight; correlated_k_thermal_scheme_validated_to_5_30_pa; global_mean_radiative_photochemical_equilibrium_per_shield; balance_temperatures_solved_for_every_case; two_level_non_lte_co2_cooling_with_nir_thermalisation_bounds; idealised_filter_and_titania_film_leakage_heating_and_atomic_oxygen_escape_bounds; line_by_line_radiation_benchmarks_for_gcm; fluorinated_trace_gas_forcing_from_measured_bands; exobase_coupling_conditional; exobase_co2_sensitivity_150_280ppm; loss_response_screening_uv_leak_glow_and_solar_wind; shield_radius_for_thermospheric_heating; exospheric_ion_production_upper_bound",
+      "condition": "solved_molecular_thermal_limit; clear_sky_line_by_line_radiation_for_prescribed_columns; shield_filtered_sunlight; correlated_k_thermal_scheme_validated_to_5_30_pa; global_mean_radiative_photochemical_equilibrium_per_shield; balance_temperatures_solved_for_every_case; two_level_non_lte_co2_cooling_with_nir_thermalisation_bounds; idealised_filter_and_titania_film_leakage_heating_and_atomic_oxygen_escape_bounds; line_by_line_radiation_benchmarks_for_gcm; fluorinated_trace_gas_forcing_from_measured_bands; exobase_coupling_conditional; exobase_co2_sensitivity_150_280ppm; loss_response_screening_uv_leak_glow_and_solar_wind; shield_radius_for_thermospheric_heating; exospheric_ion_production_upper_bound; earth_tide_in_escape_from_three_body_test_molecules",
       "material": [
         "../atmosphere/sim/sim1.py",
         "baselines/feasibility/model.py",
@@ -29,7 +29,7 @@
         "correlated-k top layer (0.1 Pa) 30-40 K off and unused (the escape base is 0.3 Pa); fix only if later work needs correlated-k above 0.3 Pa",
         "water supply to escape",
         "the sky's interplanetary Lyman-alpha glow: in the loss response it raises the exobase 31-42 K (quiet Sun) and 47-61 K (solar maximum); its brightness, solar-cycle factor and absorption height are assumptions to firm up",
-        "loss channels not yet in the loss response: Earth's tidal lowering of the escape barrier (the feasibility baseline's barrier factor gives x2.5-4.2 on molecular escape at the allowed leaks), the escape of ions made in the sunlit exosphere (13-172 kg/s produced outside a heating-sized shadow, an upper bound; the loss response caps pickup at 0.29 kg/s), atomic-oxygen escape, photochemical escape, hydrogen from water",
+        "loss channels not yet in the loss response: the escape of ions made in the sunlit exosphere (10-134 kg/s produced outside a heating-sized shadow at the allowed transmissions, an upper bound; the loss response caps pickup at 0.29 kg/s), atomic-oxygen escape, photochemical escape, hydrogen from water; Earth's tide is included (x1.8-2.6 on molecular escape at the allowed transmissions) but not in the energy-limited bound, and the Moon's orbital eccentricity is left out",
         "escape during the Moon's monthly passage through Earth's magnetotail (July 2026 bundle, archive/july_2026_knowledge_bundle/)"
       ],
       "next_session_task": "Couple the middle atmosphere and exobase to the 3-D circulation the author chooses."
@@ -256,7 +256,7 @@
       ],
       "unresolved": [
         "which loss budget in 1-100 kg/s (atmospheric cycle times of about 100 billion to 1 billion years) works best (designed across the range for now)",
-        "Earth's tidal barrier and exospheric ion escape in the loss response; both can lower the allowed leaks",
+        "exospheric ion escape in the loss response; it can lower the allowed transmissions at every budget",
         "how many of the ions made in the sunlit exosphere escape (plasma model); if most do, charged-particle protection is needed at every budget",
         "the ultraviolet cut-off: titania stack or an ozone-forming edge",
         "how the optical shield is held so that it costs less material than the air it saves (requirement S6)",
@@ -265,7 +265,7 @@
         "effects on Earth (illumination)",
         "the catalogue and supply ledger hold only the September reference design"
       ],
-      "next_session_task": "Bring Earth's tidal barrier and exospheric ion escape into the loss response, then trade how the optical shield is held against requirement S6."
+      "next_session_task": "Estimate how many exospheric ions escape (published results for bodies in flowing plasma; the stand-off of the September magnets), then trade how the optical shield is held against requirement S6."
     }
   ],
   "new_check_record": "studies/environment_screens/checks.json",
