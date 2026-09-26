@@ -9,7 +9,7 @@
   "topics": [
     {
       "topic": "atmosphere",
-      "condition": "solved_molecular_thermal_limit; clear_sky_line_by_line_radiation_for_prescribed_columns; shield_filtered_sunlight; correlated_k_thermal_scheme_validated_to_5_30_pa; global_mean_radiative_photochemical_equilibrium_per_shield; balance_temperatures_solved_for_every_case; two_level_non_lte_co2_cooling_with_nir_thermalisation_bounds; idealised_filter_and_titania_film_leakage_heating_and_atomic_oxygen_escape_bounds; line_by_line_radiation_benchmarks_for_gcm; fluorinated_trace_gas_forcing_from_measured_bands; exobase_coupling_conditional; exobase_co2_sensitivity_150_280ppm",
+      "condition": "solved_molecular_thermal_limit; clear_sky_line_by_line_radiation_for_prescribed_columns; shield_filtered_sunlight; correlated_k_thermal_scheme_validated_to_5_30_pa; global_mean_radiative_photochemical_equilibrium_per_shield; balance_temperatures_solved_for_every_case; two_level_non_lte_co2_cooling_with_nir_thermalisation_bounds; idealised_filter_and_titania_film_leakage_heating_and_atomic_oxygen_escape_bounds; line_by_line_radiation_benchmarks_for_gcm; fluorinated_trace_gas_forcing_from_measured_bands; exobase_coupling_conditional; exobase_co2_sensitivity_150_280ppm; loss_response_screening_uv_leak_glow_and_solar_wind",
       "material": [
         "../atmosphere/sim/sim1.py",
         "baselines/feasibility/model.py",
@@ -19,7 +19,8 @@
         "studies/environment_screens/results/molecular_columns.csv",
         "../atmosphere/radiative_convective/",
         "../atmosphere/middle_atmosphere/",
-        "../atmosphere/radiative_convective/ck.py"
+        "../atmosphere/radiative_convective/ck.py",
+        "../atmosphere/loss_response/"
       ],
       "unresolved": [
         "upper-air temperature above ~1 Pa bounded by how near-infrared heating thermalises, not solved; atomic-oxygen 63-um cooling omitted",
@@ -27,9 +28,10 @@
         "light bypassing the shield film through gaps, pinholes and edges of the aperture (0.1% scenario bounded; the titania film itself passes only hard X-rays)",
         "correlated-k top layer (0.1 Pa) 30-40 K off and unused (the escape base is 0.3 Pa); fix only if later work needs correlated-k above 0.3 Pa",
         "water supply to escape",
-        "the sky's interplanetary Lyman-alpha glow (about 1,000 R), which no Sun-facing shield blocks: a first estimate puts about 2e-6 W/m2 above the 0.3 Pa base, like the 0.1% leak at quiet Sun (about +25 K at the exobase); not yet in the exobase tables",
-        "loss channels not yet included: Earth's tidal lowering of the escape barrier, solar-wind sputtering and ion pickup, hydrogen from water (sized in research/baselines/feasibility/report.md sections 4-5)",
-        "escape during the Moon's monthly passage through Earth's magnetotail (July 2026 bundle, archive/july_2026_knowledge_bundle/)"
+        "the sky's interplanetary Lyman-alpha glow: in the loss response it raises the exobase 31-42 K (quiet Sun) and 47-61 K (solar maximum); its brightness, solar-cycle factor and absorption height are assumptions to firm up",
+        "loss channels not yet included: Earth's tidal lowering of the escape barrier, atomic-oxygen escape in the loss response, photochemical escape, hydrogen from water; solar-wind sputtering and pickup have only a screening range (0.03-2.1 kg/s)",
+        "escape during the Moon's monthly passage through Earth's magnetotail (July 2026 bundle, archive/july_2026_knowledge_bundle/)",
+        "the radius of the ultraviolet absorption layer in the hotter upper-air profiles that the allowed leaks produce (it sizes the optical shield)"
       ],
       "next_session_task": "Couple the middle atmosphere and exobase to the 3-D circulation the author chooses."
     },
@@ -236,6 +238,25 @@
         "how weathering slows as soils form, and the size of the managed return"
       ],
       "next_session_task": "A box model of air, plants, soils, ocean and carbonate sediments with a managed return, run with the water inventory and the mineral cycle."
+    },
+    {
+      "topic": "protection_architecture",
+      "condition": "requirements_with_sources; loss_budget_open; loss_response_screening_sizes_both_functions",
+      "material": [
+        "studies/protection_architecture/README.md",
+        "studies/protection_architecture/requirements.md",
+        "../atmosphere/loss_response/results/loss_response.json"
+      ],
+      "unresolved": [
+        "the total loss budget (the author's choice; requirements.md shows what 1, 10 and 100 kg/s ask)",
+        "the ultraviolet cut-off: titania stack or an ozone-forming edge",
+        "how the optical shield is held so that it costs less material than the air it saves (requirement S6)",
+        "the protected radius at the design heating (requirement O2)",
+        "the dimmer's form and adjustable range, and the use of the ring outside the window",
+        "whether and when charged-particle protection is needed",
+        "the module catalogue, supply ledger and effects on Earth"
+      ],
+      "next_session_task": "Compute the ultraviolet absorption radius for the hotter profiles, then trade how the optical shield is held against requirement S6."
     }
   ],
   "new_check_record": "studies/environment_screens/checks.json",

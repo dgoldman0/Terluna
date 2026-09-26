@@ -220,20 +220,18 @@ aperture.
   film alone holds the exobase within 1.5 K of its base, at 142–193 K. Beyond
   that, light passing gaps, pinholes and edges of the aperture warms it (a
   design number, not a material one), and so does the sky's own Lyman-alpha.
-- **The sky's Lyman-alpha is not yet in these tables.** Interplanetary
-  hydrogen glows at about 1,000 rayleigh at 1 AU (protection/report.md,
-  section 9), about 4×10⁻⁶ W/m² onto a surface facing open sky.
-  This light reaches the upper air from every direction, so no Sun-facing
-  shield blocks it. A first estimate by `leakage_heat`'s method (the O2
-  cross-section of 10⁻²⁰ cm², the 0.3 Pa base near 1.3–1.4 lunar radii, a
-  heating efficiency of 0.4) puts about 2×10⁻⁶ W/m² above the base: about the
-  heat of the 0.1% leak at quiet Sun, which raises the titania-stack exobase
-  by about 25 K in the table above. It scales with the Sun's own Lyman-alpha
-  over the solar cycle. It needs computing properly, with the glow's
-  direction and the absorption height resolved.
+- **The sky's Lyman-alpha is not in these tables; the loss response adds it.**
+  Interplanetary hydrogen glows at about 1,000 rayleigh at 1 AU
+  (protection/report.md, section 9), about 4×10⁻⁶ W/m² onto a surface facing
+  open sky, and reaches the upper air from every direction, so no Sun-facing
+  shield blocks it. [atmosphere/loss_response](../loss_response/README.md)
+  deposits it above the base (O2 absorption over the column above 0.3 Pa, taken
+  with gravity at the base radius, for light from the whole sky): 2.1–2.8×10⁻⁶
+  W/m² at quiet Sun. That raises the exobase by 31–42 K at quiet Sun and 47–61 K
+  at solar maximum (a solar-cycle factor of 1.5 assumed), for every shield.
 - **Some loss channels are not yet included:** Earth's tide lowering the escape
-  barrier, solar-wind sputtering and ion pickup, and hydrogen from water. The
-  September feasibility report
+  barrier, solar-wind sputtering and ion pickup (screened in the loss response),
+  and hydrogen from water. The September feasibility report
   ([research/baselines/feasibility/report.md](../../research/baselines/feasibility/report.md),
   sections 4–5) sizes the first as about 4.5 times the nitrogen Jeans flux at
   its reference exobase, and the second as 0.4–40 kg/s over a
