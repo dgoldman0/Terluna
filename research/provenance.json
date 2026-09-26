@@ -1,7 +1,7 @@
 {
   "base_commit": "0d68bdf544bff2a11b19158a68a2c493a2d443a9",
   "date": "2026-09-20",
-  "policy": "Curated source and reference-data import; retained files are byte-identical; source archives themselves are not committed",
+  "policy": "Curated source and reference-data import; retained files are byte-identical unless their preservation field records a change; source archives themselves are not committed",
   "archives": [
     {
       "name": "Lunar_Terraforming_Model.zip",
@@ -40,15 +40,15 @@
           "name": "report.md",
           "bytes": 75346,
           "sha256": "37703255c3f6b576a1486a7d77c5c7b8bfe82206df611bb3f6be95b2ff5eef13",
-          "destination": null,
-          "disposition": "full_historical_report_retained_in_original_archive; scope documented in topic READMEs"
+          "destination": "research/baselines/feasibility/report.md",
+          "disposition": "full_historical_report_imported_verbatim_2026-09-26"
         },
         {
           "name": "results/atmosphere_profiles.png",
           "bytes": 76579,
           "sha256": "96be1422c79229df3d0a49c354744cf8ce07cf443463d5fd28886769c6813e5c",
-          "destination": null,
-          "disposition": "rendered_artifact_omitted"
+          "destination": "research/baselines/feasibility/results/atmosphere_profiles.png",
+          "disposition": "report_figure_imported_verbatim_2026-09-26"
         },
         {
           "name": "results/atmosphere_sensitivity.csv",
@@ -75,8 +75,8 @@
           "name": "results/escape_sensitivity.png",
           "bytes": 104926,
           "sha256": "2be85e2daf4ca255de34e27b5e1470d684271f1408246946d3fa4c452ddedd2b",
-          "destination": null,
-          "disposition": "rendered_artifact_omitted"
+          "destination": "research/baselines/feasibility/results/escape_sensitivity.png",
+          "disposition": "report_figure_imported_verbatim_2026-09-26"
         },
         {
           "name": "results/growth.csv",
@@ -89,8 +89,8 @@
           "name": "results/industrial_growth.png",
           "bytes": 103227,
           "sha256": "1dc452d4c4d70f4b9994de16f38841e96d5792c0493c9846619e6d9e259b3176",
-          "destination": null,
-          "disposition": "rendered_artifact_omitted"
+          "destination": "research/baselines/feasibility/results/industrial_growth.png",
+          "disposition": "report_figure_imported_verbatim_2026-09-26"
         },
         {
           "name": "results/logistics.csv",
@@ -110,8 +110,8 @@
           "name": "results/maintenance_ratio.png",
           "bytes": 73238,
           "sha256": "dc465b47bab8820141e63ac459bc1eee659ed81741933712bc80f07cc6dc9d91",
-          "destination": null,
-          "disposition": "rendered_artifact_omitted"
+          "destination": "research/baselines/feasibility/results/maintenance_ratio.png",
+          "disposition": "report_figure_imported_verbatim_2026-09-26"
         },
         {
           "name": "results/results.json",
@@ -208,8 +208,8 @@
           "name": "Lunar_Protection_Model/report.md",
           "bytes": 57329,
           "sha256": "901370c757955b5841185b954af0d0108acf4c759cae6f95023419744c6d2a18",
-          "destination": null,
-          "disposition": "full_historical_report_retained_in_original_archive; scope documented in topic READMEs"
+          "destination": "protection/report.md",
+          "disposition": "full_historical_report_imported_2026-09-26; verbatim except source [1], whose two private conversation URLs are replaced by a bracketed note"
         },
         {
           "name": "Lunar_Protection_Model/requirements.txt",
@@ -427,6 +427,966 @@
           "sha256": "6b114a73e6847bc1216934fb26f8a1b3d50a0fd95fe66b9ec7969e33c841b534",
           "destination": "protection/verify.py",
           "disposition": "retained_verbatim"
+        }
+      ]
+    },
+    {
+      "name": "Terluna_solar_shield_full_dump_2026-09-26.zip",
+      "sha256": "e8d5fa05800f6917f27e5813546fe639f5be8562466b84cdc9d659daaba10bea",
+      "bytes": 5513169,
+      "description": "Solar-shield recovery dump prepared on 2026-09-26 in the author's other project space. It holds both September archives (identical to those indexed above), extracted copies, recovery notes and conversation-recovered reconstructions of older concepts.",
+      "members": [
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/MANIFEST.json",
+          "bytes": 27441,
+          "sha256": "6865e02f768140b126213c088051cdd50f3d191f47fa4a6fdc8cf7015100bfe2",
+          "destination": null,
+          "disposition": "dump_index_or_manifest_not_imported"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/MANIFEST.sha256",
+          "bytes": 17237,
+          "sha256": "dfccb9dbd9e9bee8bd37daf10c34b78435b6283a7875ca000d2e038ca20c3e48",
+          "destination": null,
+          "disposition": "dump_index_or_manifest_not_imported"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/README_INDEX.md",
+          "bytes": 2743,
+          "sha256": "5ca6ab74de550263a7ce7ea091035bd16909dec74a5c737f0262d7e601a4034c",
+          "destination": null,
+          "disposition": "dump_index_or_manifest_not_imported"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/current_restructure_snapshot/protection/README.md",
+          "bytes": 6333,
+          "sha256": "d56781107b6b609744f8d7e70712aa0e2120422c4e8fc1f6eb18f4dad9bb3893",
+          "destination": null,
+          "disposition": "copy_of_repository_file_at_dump_time: protection/README.md"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/current_restructure_snapshot/protection/fetch_inputs.py",
+          "bytes": 3218,
+          "sha256": "fd45239833f0fdd267c656328a17c8a5f7be077a064ed72b57574ad1b93d1f9b",
+          "destination": null,
+          "disposition": "earlier_copy_of_repository_file (the repository copy differs): protection/fetch_inputs.py"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/current_restructure_snapshot/protection/inputs.json",
+          "bytes": 1850,
+          "sha256": "5433645845a04bdd3c56cc5a73901efdde60af4a5a7ab4e6ca1d3709de88d0fe",
+          "destination": null,
+          "disposition": "earlier_copy_of_repository_file (the repository copy differs): protection/inputs.json"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/current_restructure_snapshot/protection/model.py",
+          "bytes": 21907,
+          "sha256": "018cfbf6ac5e8ea6935480e09c4c2b69bf54b08c873d953d4b5e31c952d06647",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/model.py"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/current_restructure_snapshot/protection/results/results_full_archived.json",
+          "bytes": 25143,
+          "sha256": "742a9fad6f75fa4759caedd07ffe9403156e728bae1a1b02e3687881e50ab145",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/results/results.json"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/current_restructure_snapshot/protection/sources/TSIS1_HSRS_stride100.csv",
+          "bytes": 1248662,
+          "sha256": "0ae235c6912f26773c0e9b71ea3924aaf8856c74a511dc07e86b60b3c1b88172",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/sources/TSIS1_HSRS_stride100.csv"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/current_restructure_snapshot/protection/sources/TiO2_Siefke.yml",
+          "bytes": 52162,
+          "sha256": "9b03947949e54cd98f58a989bd031a5fddb1a36a9d9f7fd64d5ff2bd68c2885c",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/sources/TiO2_Siefke.yml"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/current_restructure_snapshot/protection/sources/o.nff",
+          "bytes": 13625,
+          "sha256": "adb1540b11008383aaef0b8c4f5fb1a2bc5df14f3717ac4d58fc54fff92ba6cb",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/sources/o.nff"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/current_restructure_snapshot/protection/sources/si.nff",
+          "bytes": 19539,
+          "sha256": "2bbd2aef0292aa392a61942b1c401171b5bc30bb77ab1cab9c08b6264048019a",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/sources/si.nff"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/current_restructure_snapshot/protection/sources/ti.nff",
+          "bytes": 13636,
+          "sha256": "f3e3c7c01ec8dfff224ac0b95b5e4b4997721e7147ec4fe601deaf0cc762fad3",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/sources/ti.nff"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/current_restructure_snapshot/protection/spectra/short_wave.py",
+          "bytes": 7537,
+          "sha256": "e45fcb878c0de07e0f7e449f4ebc731afe3ba5f9b9154f282e667e0af8979616",
+          "destination": null,
+          "disposition": "earlier_copy_of_repository_file (the repository copy differs): protection/spectra/short_wave.py"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/current_restructure_snapshot/protection/spectra/transmission.py",
+          "bytes": 5005,
+          "sha256": "5c3f1fd5cf23461885321d8785096d2c1fffaf7255c2dfc6c9fc67d35913a07f",
+          "destination": null,
+          "disposition": "copy_of_repository_file_at_dump_time: protection/spectra/transmission.py"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/current_restructure_snapshot/protection/tests/test_short_wave.py",
+          "bytes": 2107,
+          "sha256": "5ec729687c4d0c801c6a341dd77617512d914c3c2b547fa2cd01a0514aa92a57",
+          "destination": null,
+          "disposition": "earlier_copy_of_repository_file (the repository copy differs): protection/tests/test_short_wave.py"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/current_restructure_snapshot/protection/verify.py",
+          "bytes": 1573,
+          "sha256": "6b114a73e6847bc1216934fb26f8a1b3d50a0fd95fe66b9ec7969e33c841b534",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/verify.py"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/docs/2026-09-09_Lunar_Protection_full_report.md",
+          "bytes": 57329,
+          "sha256": "901370c757955b5841185b954af0d0108acf4c759cae6f95023419744c6d2a18",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/report.md"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/docs/CODE_AND_DATA_INVENTORY.md",
+          "bytes": 5830,
+          "sha256": "f7d7409f23bec72ee94feed05f4e4fb929cc45a06717d4c7ee89d5062d50bc19",
+          "destination": null,
+          "disposition": "recovery_note_not_imported; contains private project references; its recovery targets are summarized in research/archive_status.md"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/docs/CURRENT_ARCHITECTURE_AND_RESULTS.md",
+          "bytes": 13537,
+          "sha256": "33022e0231058d7ab51f6989f5ee48dbe76454f988571f72aaa0c804b51ce267",
+          "destination": null,
+          "disposition": "recovery_note_not_imported; contains private project references; its recovery targets are summarized in research/archive_status.md"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/docs/GITHUB_HISTORY.md",
+          "bytes": 3017,
+          "sha256": "9964ddc07fbb21ebe2012dc0e76bd34eb4bd3be14852efb32caf9feb1cf24238",
+          "destination": null,
+          "disposition": "recovery_note_not_imported; contains private project references; its recovery targets are summarized in research/archive_status.md"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/docs/HISTORICAL_LINEAGE.md",
+          "bytes": 8786,
+          "sha256": "ffe99c8b2fa0a41fd3abf03f710fb2ff73eea35bffd13e2cf53cbb96edd29fb9",
+          "destination": "protection/reference/historical/HISTORICAL_LINEAGE.md",
+          "disposition": "conversation_recovered_reconstruction_imported_verbatim_2026-09-26; not an original artifact"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/docs/MISSING_AND_UNRECOVERED.md",
+          "bytes": 2988,
+          "sha256": "2db4505697ba9df8842c040ab1c9140273906882be16d82591f074b3f44cdf5c",
+          "destination": null,
+          "disposition": "recovery_note_not_imported; contains private project references; its recovery targets are summarized in research/archive_status.md"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/docs/PROVENANCE_NOTES.md",
+          "bytes": 1478,
+          "sha256": "2b2c6c0555ea0e82c4d9703b7481faf52a2b8e9c1a466c2137951352a2230340",
+          "destination": null,
+          "disposition": "recovery_note_not_imported; contains private project references; its recovery targets are summarized in research/archive_status.md"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Protection_Model/Lunar_Protection_Design.pdf",
+          "bytes": 167088,
+          "sha256": "6a57121d8a1943dd72f7e30bea3f06ad8509b7b6836606c855c66d7fa2cf36e7",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/Lunar_Protection_Design.pdf"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Protection_Model/README.md",
+          "bytes": 3776,
+          "sha256": "9d8c18514886ed67b1db06d61203d7db16e80298e104ab04d9fafa8161753fb1",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/README.md"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Protection_Model/baseline/Lunar_Terraforming_Feasibility.pdf",
+          "bytes": 538415,
+          "sha256": "96df61f6972b9f516bc44ef2651f6d82e2e60f15d1484ee1c6a23e48ce4da989",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/baseline/Lunar_Terraforming_Feasibility.pdf"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Protection_Model/baseline/atmosphere_model.py",
+          "bytes": 14829,
+          "sha256": "3a6c76f3437f0dab224472f8d3fd20cd90a7d82dffa8d46ec6a562702eae00c2",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Terraforming_Model.zip:model.py"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Protection_Model/baseline/report.md",
+          "bytes": 75346,
+          "sha256": "37703255c3f6b576a1486a7d77c5c7b8bfe82206df611bb3f6be95b2ff5eef13",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Terraforming_Model.zip:report.md"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Protection_Model/baseline/results.json",
+          "bytes": 29074,
+          "sha256": "5ed47da437dd22aa0f92e946a26389b0c2404322ce83c5c59881243b5b8a7788",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Terraforming_Model.zip:results/results.json"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Protection_Model/build_pdf.py",
+          "bytes": 8900,
+          "sha256": "cf2b1b5f0fbbd77d24a6fc58ed028b18adc924ca43bfc6ffbd7c83f50ca41569",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/build_pdf.py"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Protection_Model/model.py",
+          "bytes": 21907,
+          "sha256": "018cfbf6ac5e8ea6935480e09c4c2b69bf54b08c873d953d4b5e31c952d06647",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/model.py"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Protection_Model/report.md",
+          "bytes": 57329,
+          "sha256": "901370c757955b5841185b954af0d0108acf4c759cae6f95023419744c6d2a18",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/report.md"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Protection_Model/requirements.txt",
+          "bytes": 54,
+          "sha256": "1889ca76fea683bf71bec56494f912361cb539af2a66617ee0028ac10e85d539",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/requirements.txt"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Protection_Model/results/anchor_magnets.csv",
+          "bytes": 1138,
+          "sha256": "d0d6fc1244ea41420c2be823bf46f5efee3665ebc3465b69740e698526638da9",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/results/anchor_magnets.csv"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Protection_Model/results/distributed_anchor_field.csv",
+          "bytes": 207,
+          "sha256": "d0a0670b5d3eff1b1e722d7a253d20af96e2fac0749764d82e76709f436453bb",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/results/distributed_anchor_field.csv"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Protection_Model/results/eccentric_distance_sensitivity.csv",
+          "bytes": 194,
+          "sha256": "37f7bc3ecc1d3ff7f5e67377aecb778c5f121215f2e8c7c2d8f2c3af1f3ab015",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/results/eccentric_distance_sensitivity.csv"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Protection_Model/results/energy_storage_sensitivity.csv",
+          "bytes": 1090,
+          "sha256": "401ca0f00a566a28c4fec959d33de3bebf07962a30496a084849265bd08d315f",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/results/energy_storage_sensitivity.csv"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Protection_Model/results/field_volume.csv",
+          "bytes": 1172,
+          "sha256": "44e004b52c0274dd50e51d5f7add73b1a585142671a9452cd87484d3b375d7fd",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/results/field_volume.csv"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Protection_Model/results/fixed_cutoff_scaling.csv",
+          "bytes": 586,
+          "sha256": "f911a645503d1103877d2d6995ce25244ba3302bfcd30bc61f49e8edb5da97f2",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/results/fixed_cutoff_scaling.csv"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Protection_Model/results/leakage_budget.csv",
+          "bytes": 225,
+          "sha256": "dba92b99639e0d008dacd47f7e9e9a75575471af5a4da9534f75b27b1e63a557",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/results/leakage_budget.csv"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Protection_Model/results/magnet_cryogenics.csv",
+          "bytes": 470,
+          "sha256": "a317ea39a5ca26873c8ccc7eeba85888610b4e06edcc96092a078d12de3cff4d",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/results/magnet_cryogenics.csv"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Protection_Model/results/maintenance.csv",
+          "bytes": 2675,
+          "sha256": "1fd67f9b58c5960a8ae2afb36e1e4911c455f17efab30ab1bd9599edac234898",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/results/maintenance.csv"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Protection_Model/results/near_lunar_distance_sweep.csv",
+          "bytes": 24085,
+          "sha256": "a6197972cf8711f519829f3c9b52716f29e432c0a2b700a6858205d8eb7bdcf0",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/results/near_lunar_distance_sweep.csv"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Protection_Model/results/near_lunar_phase.csv",
+          "bytes": 166740,
+          "sha256": "872674a138dd933f1e0c0820eecb244e87b8f73e06def5f13081d0d83f0bd2e1",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/results/near_lunar_phase.csv"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Protection_Model/results/pdf_layout.json",
+          "bytes": 1807,
+          "sha256": "7f2ccb3ca559a7a4036fcf7e0173426c34adf8c92eb8e8de30be7623dbc3e2fa",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/results/pdf_layout.json"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Protection_Model/results/plume_energy_allowances.csv",
+          "bytes": 378,
+          "sha256": "2908afca2a74c74e1fc36db48154e969607ceab73abe5216a43a7c917f815895",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/results/plume_energy_allowances.csv"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Protection_Model/results/propulsion_sensitivity.csv",
+          "bytes": 11440,
+          "sha256": "dd7c15c0ace8a9cc4977245e70a10eea3fe67a4a244e0f89c9cf93cf919d987b",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/results/propulsion_sensitivity.csv"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Protection_Model/results/protected_radius_sensitivity.csv",
+          "bytes": 1164,
+          "sha256": "f39a380446b57df82ffb880138e2d0943a3d0cdddb72d96ec46a7f6a6a2f4481",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/results/protected_radius_sensitivity.csv"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Protection_Model/results/results.json",
+          "bytes": 25143,
+          "sha256": "742a9fad6f75fa4759caedd07ffe9403156e728bae1a1b02e3687881e50ab145",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/results/results.json"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Protection_Model/results/rigidity.csv",
+          "bytes": 488,
+          "sha256": "e5378484f3370cbdde015adc3e324f97fb81e9568e34696ad7c3841cf4fd7078",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/results/rigidity.csv"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Protection_Model/results/screen_thermal_sensitivity.csv",
+          "bytes": 397,
+          "sha256": "0269cd5120daee5ae8904f7a4ac0f5cc01d0741f36c41bbe3bdd3f10be2ee4f4",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/results/screen_thermal_sensitivity.csv"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Protection_Model/results/solar_weighted_summary.csv",
+          "bytes": 376,
+          "sha256": "ba9fc347ba841bc7620733504232760dad664cfb024385bf438e5ee168ae052c",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/results/solar_weighted_summary.csv"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Protection_Model/results/uv_absorption.csv",
+          "bytes": 878,
+          "sha256": "c22e5e25bd3d22a0d67c8c818737d166acf26553d3a4898de7ff867ff0b3e5c8",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/results/uv_absorption.csv"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Protection_Model/results/validation.json",
+          "bytes": 334,
+          "sha256": "1e94c2dda2e09923a60ae1e1bd37e89e64f19804cf64f59785b5e88090985c1a",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/results/validation.json"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Protection_Model/results/visible_stack.csv",
+          "bytes": 525116,
+          "sha256": "6a97dc07a056b84b35a4c38f05329f13e9e6ef67620e3baccd84c1222397def0",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/results/visible_stack.csv"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Protection_Model/results/wind_balance.csv",
+          "bytes": 291,
+          "sha256": "c027be6e327c79ebdf53fea98c646bfe9370cf68a26b223b87470007947e47c6",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/results/wind_balance.csv"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Protection_Model/results/xray_absorption.csv",
+          "bytes": 855,
+          "sha256": "b55031f56deca84b016eb31b6a9e64e68173b36dc7973e277993f84df1838ff2",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/results/xray_absorption.csv"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Protection_Model/sources/TSIS1_HSRS_stride100.csv",
+          "bytes": 1248662,
+          "sha256": "0ae235c6912f26773c0e9b71ea3924aaf8856c74a511dc07e86b60b3c1b88172",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/sources/TSIS1_HSRS_stride100.csv"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Protection_Model/sources/TiO2_Siefke.yml",
+          "bytes": 52162,
+          "sha256": "9b03947949e54cd98f58a989bd031a5fddb1a36a9d9f7fd64d5ff2bd68c2885c",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/sources/TiO2_Siefke.yml"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Protection_Model/sources/o.nff",
+          "bytes": 13625,
+          "sha256": "adb1540b11008383aaef0b8c4f5fb1a2bc5df14f3717ac4d58fc54fff92ba6cb",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/sources/o.nff"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Protection_Model/sources/si.nff",
+          "bytes": 19539,
+          "sha256": "2bbd2aef0292aa392a61942b1c401171b5bc30bb77ab1cab9c08b6264048019a",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/sources/si.nff"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Protection_Model/sources/ti.nff",
+          "bytes": 13636,
+          "sha256": "f3e3c7c01ec8dfff224ac0b95b5e4b4997721e7147ec4fe601deaf0cc762fad3",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/sources/ti.nff"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Protection_Model/verify.py",
+          "bytes": 1573,
+          "sha256": "6b114a73e6847bc1216934fb26f8a1b3d50a0fd95fe66b9ec7969e33c841b534",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/verify.py"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Terraforming_Model/README.md",
+          "bytes": 2578,
+          "sha256": "c70c32b29eb7bd86cdefa463fa45592bc3573566270a711745501cd7174c1ce5",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Terraforming_Model.zip:README.md"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Terraforming_Model/build_pdf.py",
+          "bytes": 8513,
+          "sha256": "01d874da5e2dc30cb260a4a0b63b6fd89e027f86069d5348f731a92c98ff8f02",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Terraforming_Model.zip:build_pdf.py"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Terraforming_Model/model.py",
+          "bytes": 14829,
+          "sha256": "3a6c76f3437f0dab224472f8d3fd20cd90a7d82dffa8d46ec6a562702eae00c2",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Terraforming_Model.zip:model.py"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Terraforming_Model/report.md",
+          "bytes": 75346,
+          "sha256": "37703255c3f6b576a1486a7d77c5c7b8bfe82206df611bb3f6be95b2ff5eef13",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Terraforming_Model.zip:report.md"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Terraforming_Model/requirements.txt",
+          "bytes": 65,
+          "sha256": "6aa6f33741a7a3fe84369093eb389d63623ffaf6bd3d5816c2c5c65f80f49898",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Terraforming_Model.zip:requirements.txt"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Terraforming_Model/results/atmosphere_profiles.png",
+          "bytes": 76579,
+          "sha256": "96be1422c79229df3d0a49c354744cf8ce07cf443463d5fd28886769c6813e5c",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Terraforming_Model.zip:results/atmosphere_profiles.png"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Terraforming_Model/results/atmosphere_sensitivity.csv",
+          "bytes": 11528,
+          "sha256": "5a48e17c4d5b59feedc707cbef1ffc5212830b39874266b6b8fd14ac85ca25e7",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Terraforming_Model.zip:results/atmosphere_sensitivity.csv"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Terraforming_Model/results/diffusive_sensitivity.csv",
+          "bytes": 3411,
+          "sha256": "7a83ec465574bf1e46c3b8af2a42809977e4e03446b7c9ce21df3beafbdfd066",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Terraforming_Model.zip:results/diffusive_sensitivity.csv"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Terraforming_Model/results/energy_limited_sensitivity.csv",
+          "bytes": 926,
+          "sha256": "38d9fa42c8feecde01cd323e2025fb3102e7ba6accd0ea38f706b7a9e8e67a50",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Terraforming_Model.zip:results/energy_limited_sensitivity.csv"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Terraforming_Model/results/escape_sensitivity.png",
+          "bytes": 104926,
+          "sha256": "2be85e2daf4ca255de34e27b5e1470d684271f1408246946d3fa4c452ddedd2b",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Terraforming_Model.zip:results/escape_sensitivity.png"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Terraforming_Model/results/growth.csv",
+          "bytes": 1095,
+          "sha256": "d371c2b2054986d996af8a4de0ea4baeef347de4e02b16a1c291a60d7fc6de95",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Terraforming_Model.zip:results/growth.csv"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Terraforming_Model/results/industrial_growth.png",
+          "bytes": 103227,
+          "sha256": "1dc452d4c4d70f4b9994de16f38841e96d5792c0493c9846619e6d9e259b3176",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Terraforming_Model.zip:results/industrial_growth.png"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Terraforming_Model/results/logistics.csv",
+          "bytes": 2323,
+          "sha256": "334e27d6b25b97ce02a9b29303c373d52e4b1cfdbca404753e0ea58a11d3a9cc",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Terraforming_Model.zip:results/logistics.csv"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Terraforming_Model/results/maintenance.csv",
+          "bytes": 340,
+          "sha256": "f4d0064236ca4c5dcd9531a7cfdad07c379cc6991dda6a5f7b0e0da6e2e7f42e",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Terraforming_Model.zip:results/maintenance.csv"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Terraforming_Model/results/maintenance_ratio.png",
+          "bytes": 73238,
+          "sha256": "dc465b47bab8820141e63ac459bc1eee659ed81741933712bc80f07cc6dc9d91",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Terraforming_Model.zip:results/maintenance_ratio.png"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Terraforming_Model/results/results.json",
+          "bytes": 29074,
+          "sha256": "5ed47da437dd22aa0f92e946a26389b0c2404322ce83c5c59881243b5b8a7788",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Terraforming_Model.zip:results/results.json"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Terraforming_Model/results/shields.csv",
+          "bytes": 2714,
+          "sha256": "11a3407b957af0363a66a018e5a7f8dafae5ef3b0d4321293d9aaa0e04c2bb79",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Terraforming_Model.zip:results/shields.csv"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Terraforming_Model/results/thermal_response.csv",
+          "bytes": 1024,
+          "sha256": "44099868ecd0b6ca4dd181464add25617132d894b85e4b449688048af50dc686",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Terraforming_Model.zip:results/thermal_response.csv"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Lunar_Terraforming_Model/results/transfer_routes.csv",
+          "bytes": 477,
+          "sha256": "d4750fb437a270184c421372a14e9dd10c96c7bbc65d347e4d075c26eb5ecaee",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Terraforming_Model.zip:results/transfer_routes.csv"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/README.md",
+          "bytes": 2588,
+          "sha256": "7db92d8dd13ae4b8cb09cd2c5d11ba6defc070d6dd8011a7b2d16496184c22be",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/Terluna_environment_research.patch",
+          "bytes": 453824,
+          "sha256": "596b3529ad9f5cfa0bf9c41174804999d15ed13cb3d580231c3f6a803903d869",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/change_summary.txt",
+          "bytes": 2341,
+          "sha256": "7555d557ebfd429e12b1bf0905af30d63d69430f95cba62d3b7fb5627cc17454",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/files/README.md",
+          "bytes": 3301,
+          "sha256": "58f244004ee6412540655afb0d5c717e45dbd6fb2be9baf8537549f34e8a5af7",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/files/atmosphere/.gitignore",
+          "bytes": 23,
+          "sha256": "6feaded4e28ea86e001a6751b4e3d960e8b7c31b9616ff9936b79297086e809b",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/files/atmosphere/README.md",
+          "bytes": 2756,
+          "sha256": "8bac1ea31f06f625d497a6f96a16ee5d0b0900fbd8557afe5b274d7cf78a800c",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/files/atmosphere/spectral_interface.py",
+          "bytes": 5788,
+          "sha256": "8441620cebf2c88d0d288fc0b89fa13f16853f50122be3345a1245fd02ca7e95",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/files/atmosphere/thermal_column.py",
+          "bytes": 9217,
+          "sha256": "c693a43e2df787d8b41ae5b382e1aee7bc61af931a26ef27cdac7e18cfdcf029",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/files/biosphere/.gitignore",
+          "bytes": 23,
+          "sha256": "6feaded4e28ea86e001a6751b4e3d960e8b7c31b9616ff9936b79297086e809b",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/files/biosphere/README.md",
+          "bytes": 2427,
+          "sha256": "f0964032a4951886c3a719a0ce26f10d0ae61c2f92edc740ff788d84725c6ee8",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/files/biosphere/long_night.py",
+          "bytes": 9129,
+          "sha256": "1110a68eda5082faf57e3aec1724d6ee6171ff1315dc944aa2c1e2b4a75dff0c",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/files/climate/.gitignore",
+          "bytes": 23,
+          "sha256": "6feaded4e28ea86e001a6751b4e3d960e8b7c31b9616ff9936b79297086e809b",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/files/climate/README.md",
+          "bytes": 2056,
+          "sha256": "0fb82040e6b12b368fec7c856ce88400d76eeb4629dba50352023d68d9122898",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/files/climate/cycle.py",
+          "bytes": 5472,
+          "sha256": "6b7c463a6baef33e75977881af210ffe0d183f786cc78756114915840c647ee0",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/files/research/README.md",
+          "bytes": 4420,
+          "sha256": "d4a260f63231cf4d0807cb65e6bca391787fd434eb645fd9e62c6bf047cccf38",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/files/research/environment_checks.json",
+          "bytes": 4494,
+          "sha256": "9a3f9e8d3755deb6d936cdd59b0bc55dc71eec45a575086035aca3f69377eb04",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/files/research/environment_sources.json",
+          "bytes": 4914,
+          "sha256": "0f76fef770bd4021e87de53bcd735593c0f1798bcb0130e8844362bf1182bf3f",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/files/research/findings.md",
+          "bytes": 17598,
+          "sha256": "58e4b0d04bbea713f4a89f77910435b5e5b4fa49d6dbda0d5002130bc5f67961",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/files/research/results/environment_screens/README.md",
+          "bytes": 2082,
+          "sha256": "09348187b1c23f590d8e890821838ae49579c86f9fb470f259f6ff4b5848fe93",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/files/research/results/environment_screens/band_heat_scenarios.csv",
+          "bytes": 1546,
+          "sha256": "2911522319e22697dd6903726411e3f972e903b8acc38f0d61ec1e1bea249de6",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/files/research/results/environment_screens/carbon_budget.csv",
+          "bytes": 39795,
+          "sha256": "27abfa54d7adfcb8f11d7aacb30a33a4d000c4d1216e9e05033975a4f1d2b36e",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/files/research/results/environment_screens/climate_budget.csv",
+          "bytes": 16821,
+          "sha256": "89a5883e3699f005cad37b5dce5bcb3f5db9f7fa64b8322f44f2a7f78e1f6ceb",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/files/research/results/environment_screens/climate_carbon_interface.csv",
+          "bytes": 3899,
+          "sha256": "8fbabf404f48bb54c335dd90209c97e0c5587d14ea3bab2ec86aa0d2dc822d06",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/files/research/results/environment_screens/configurations.json",
+          "bytes": 14541,
+          "sha256": "f70a2bbb83b307606f99cc6f53461fdf06dc9b69ddb8d31585bfbcb587a2ca2d",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/files/research/results/environment_screens/historical_solar_bands.json",
+          "bytes": 1552,
+          "sha256": "38a9f26539e4ac4f86d9ef5be6e6515e97d28364005901887144a9d312d64bbb",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/files/research/results/environment_screens/molecular_columns.csv",
+          "bytes": 127244,
+          "sha256": "6f4e5421a55735411234d3f61a750f57cc2739bf716425019d55bd917799e28f",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/files/research/results/environment_screens/molecular_profiles.json",
+          "bytes": 109346,
+          "sha256": "521f041a009da32887b822e391415dc2c52138e6ce987a7a2e91745e40b3bccb",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/files/research/results/environment_screens/oxygen_budget.csv",
+          "bytes": 2250,
+          "sha256": "c5313101b88290bf1e70af4c175c157c155d560ea65d0dc76306ed10e732f9cf",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/files/research/results/environment_screens/plume_heat_interface.csv",
+          "bytes": 1070,
+          "sha256": "b21ded776c09937b96030c94dda382f8b408ac8052b1c672914f5599f571d5e1",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/files/research/results/environment_screens/spatial_resolution.json",
+          "bytes": 433,
+          "sha256": "5394aade6db91d4ef6ad92227febbef9b57186352585b9991f2c7d7834e55727",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/files/research/results/environment_screens/spectral_audit.json",
+          "bytes": 1564,
+          "sha256": "2bc614508faecbf49be4b587715a02b92f3ad693f9b237e02e3bfc3470fc6bfb",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/files/research/results/environment_screens/summary.json",
+          "bytes": 644,
+          "sha256": "e7cf0de77ac4e5359710d696c6ab9ee3ebeb023a374a4939451aa313fa7ccc07",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/files/research/results/environment_screens/test_output.txt",
+          "bytes": 4393,
+          "sha256": "9a8becb38d7f5c6fe71199d1b0054742cd535e027dd726f5af08c39d12fa282d",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/files/research/run_environment_screens.py",
+          "bytes": 9936,
+          "sha256": "3fa19a5b127937dc623656d67c1b2a41a4836c9e4491f8349c7d242cb37a186e",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/files/research/status.json",
+          "bytes": 5355,
+          "sha256": "67c3975416b2b197e63c44731f5428f78ca5e2f8503a1a50ac9a118e3feccba7",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/files/tests/.gitignore",
+          "bytes": 23,
+          "sha256": "6feaded4e28ea86e001a6751b4e3d960e8b7c31b9616ff9936b79297086e809b",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/files/tests/README.md",
+          "bytes": 591,
+          "sha256": "15eebe92f3e558162da09a8c45a2f4c1dcf4a9ed6d8812216d477fa7c7dd49b8",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/files/tests/test_environment_screens.py",
+          "bytes": 9713,
+          "sha256": "9652d1d381b0e3231fb4452fc87eabd5e3490a05e68db0a7bf5f76c77e597389",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/files/training_data/HISTORICAL_LOG.md",
+          "bytes": 2939,
+          "sha256": "4154935f28994143713d98c4235a36a083e4f14022bafbff44b9da4c9ac7669a",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/files/training_data/README.md",
+          "bytes": 783,
+          "sha256": "61ce4979d0eb7838c920e32c0e90b0472a7f98382189cdcb859569805f8aa112",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/extracted/Terluna_environment_research/manifest.json",
+          "bytes": 5781,
+          "sha256": "61785159eeabf6310bbcc22bfb9632e3451418515c4fcea0d201797aadb7d343",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/raw_sources/Lunar_Protection_Design.pdf",
+          "bytes": 192092,
+          "sha256": "e6c33cbf6cbbe5cc3b9554a4bfcdba4ebd31edc60cd23b08ddb3047aa59eaef2",
+          "destination": null,
+          "disposition": "rendered_report_pdf_not_imported; its text is the imported report"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/raw_sources/Lunar_Protection_Model.zip",
+          "bytes": 1443872,
+          "sha256": "38947474fefd3acc06bc9acdffe267953b770e04856322770f5233ac5c60994d",
+          "destination": null,
+          "disposition": "original_source_archive; identical to the archive indexed above"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/raw_sources/Lunar_Terraforming_Feasibility.pdf",
+          "bytes": 563419,
+          "sha256": "9ab9ef642cb7dbef7ccf86a4b2de697a24189bccbe3ce8c625748ae57769bb0c",
+          "destination": null,
+          "disposition": "rendered_report_pdf_not_imported; its text is the imported report"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/raw_sources/Lunar_Terraforming_Model.zip",
+          "bytes": 376353,
+          "sha256": "8c87621674742eeaa091e135ef763c6d0ed9404a616fb852c2e43f89c64fd46a",
+          "destination": null,
+          "disposition": "original_source_archive; identical to the archive indexed above"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/raw_sources/Open_Moon_Archive_Review_2026-09-20.md",
+          "bytes": 19463,
+          "sha256": "dbd0d069cf0b96604c1ca0886522c20a146ca6bd0ef5f92145f74b14a6ae1774",
+          "destination": null,
+          "disposition": "recovery_note_not_imported; contains private project references; its recovery targets are summarized in research/archive_status.md"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/raw_sources/Terluna_environment_research.patch",
+          "bytes": 453824,
+          "sha256": "596b3529ad9f5cfa0bf9c41174804999d15ed13cb3d580231c3f6a803903d869",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/raw_sources/Terluna_environment_research.zip",
+          "bytes": 259302,
+          "sha256": "9fe9225a6a22ba727486b80e4b84c506beca02c7cfd041a3a186419e33307be0",
+          "destination": null,
+          "disposition": "2026-09-20_environment_research_import; its files are already in repository history"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/recovered_historical_specs/EL1_SH_BOM_recovered.csv",
+          "bytes": 1817,
+          "sha256": "9ca16c58470def80e9032a16a0b461a51435c84496e2c258e10f04fbb195eeab",
+          "destination": "protection/reference/historical/EL1_SH_BOM_recovered.csv",
+          "disposition": "conversation_recovered_reconstruction_imported_verbatim_2026-09-26; not an original artifact"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/recovered_historical_specs/Lunashield_L1_recovered.yaml",
+          "bytes": 1260,
+          "sha256": "c59c7a70512fb9226c67a40f6d0ba6ff92ba2af6b5d572fbf08c856721d1efed",
+          "destination": "protection/reference/historical/Lunashield_L1_recovered.yaml",
+          "disposition": "conversation_recovered_reconstruction_imported_verbatim_2026-09-26; not an original artifact"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/recovered_historical_specs/README.md",
+          "bytes": 400,
+          "sha256": "d2b60357e3937a37bbe44f01317d7d18e9b097b1c8e7ba74decd47e2d850fc9d",
+          "destination": "protection/reference/historical/README.md",
+          "disposition": "conversation_recovered_reconstruction_imported_verbatim_2026-09-26; not an original artifact"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/recovered_historical_specs/plasma_scaling_corridor_vs_region_recovered_notes.csv",
+          "bytes": 387,
+          "sha256": "ceca279a1511f27195368c6f5118cbd43f423790d227b6794a234ec790e7c7aa",
+          "destination": "protection/reference/historical/plasma_scaling_corridor_vs_region_recovered_notes.csv",
+          "disposition": "conversation_recovered_reconstruction_imported_verbatim_2026-09-26; not an original artifact"
+        },
+        {
+          "name": "Terluna_solar_shield_full_dump_2026-09-26/recovered_state.json",
+          "bytes": 1838,
+          "sha256": "1c62b4ef64062478380d9b6c6d2d1127bc694251983eb0cbf581f9d2ab43e128",
+          "destination": null,
+          "disposition": "dump_index_or_manifest_not_imported"
         }
       ]
     }
@@ -697,6 +1657,115 @@
       "sha256": "3005303cb37315cf77bdd64d7f672f6107dfb867dfe6f0d07b8bf6956835415e",
       "bytes": 862,
       "preservation": "verbatim; standalone convenience copy checked against immutable planning source"
+    },
+    {
+      "archive": "Lunar_Terraforming_Model.zip",
+      "member": "report.md",
+      "path": "research/baselines/feasibility/report.md",
+      "sha256": "37703255c3f6b576a1486a7d77c5c7b8bfe82206df611bb3f6be95b2ff5eef13",
+      "bytes": 75346,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Lunar_Protection_Model.zip",
+      "member": "Lunar_Protection_Model/report.md",
+      "path": "protection/report.md",
+      "sha256": "5039b078ad83215eebff3f19dae9036f0e29f8ed7569f13c062958544ec05fd1",
+      "bytes": 57300,
+      "preservation": "verbatim except source [1]: two private conversation URLs replaced by a bracketed note",
+      "archive_member_sha256": "901370c757955b5841185b954af0d0108acf4c759cae6f95023419744c6d2a18",
+      "archive_member_bytes": 57329
+    },
+    {
+      "archive": "Lunar_Terraforming_Model.zip",
+      "member": "results/atmosphere_profiles.png",
+      "path": "research/baselines/feasibility/results/atmosphere_profiles.png",
+      "sha256": "96be1422c79229df3d0a49c354744cf8ce07cf443463d5fd28886769c6813e5c",
+      "bytes": 76579,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Lunar_Terraforming_Model.zip",
+      "member": "results/escape_sensitivity.png",
+      "path": "research/baselines/feasibility/results/escape_sensitivity.png",
+      "sha256": "2be85e2daf4ca255de34e27b5e1470d684271f1408246946d3fa4c452ddedd2b",
+      "bytes": 104926,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Lunar_Terraforming_Model.zip",
+      "member": "results/industrial_growth.png",
+      "path": "research/baselines/feasibility/results/industrial_growth.png",
+      "sha256": "1dc452d4c4d70f4b9994de16f38841e96d5792c0493c9846619e6d9e259b3176",
+      "bytes": 103227,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Lunar_Terraforming_Model.zip",
+      "member": "results/maintenance_ratio.png",
+      "path": "research/baselines/feasibility/results/maintenance_ratio.png",
+      "sha256": "dc465b47bab8820141e63ac459bc1eee659ed81741933712bc80f07cc6dc9d91",
+      "bytes": 73238,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Terluna_solar_shield_full_dump_2026-09-26.zip",
+      "member": "Terluna_solar_shield_full_dump_2026-09-26/recovered_historical_specs/README.md",
+      "path": "protection/reference/historical/README.md",
+      "sha256": "d2b60357e3937a37bbe44f01317d7d18e9b097b1c8e7ba74decd47e2d850fc9d",
+      "bytes": 400,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Terluna_solar_shield_full_dump_2026-09-26.zip",
+      "member": "Terluna_solar_shield_full_dump_2026-09-26/recovered_historical_specs/EL1_SH_BOM_recovered.csv",
+      "path": "protection/reference/historical/EL1_SH_BOM_recovered.csv",
+      "sha256": "9ca16c58470def80e9032a16a0b461a51435c84496e2c258e10f04fbb195eeab",
+      "bytes": 1817,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Terluna_solar_shield_full_dump_2026-09-26.zip",
+      "member": "Terluna_solar_shield_full_dump_2026-09-26/recovered_historical_specs/Lunashield_L1_recovered.yaml",
+      "path": "protection/reference/historical/Lunashield_L1_recovered.yaml",
+      "sha256": "c59c7a70512fb9226c67a40f6d0ba6ff92ba2af6b5d572fbf08c856721d1efed",
+      "bytes": 1260,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Terluna_solar_shield_full_dump_2026-09-26.zip",
+      "member": "Terluna_solar_shield_full_dump_2026-09-26/recovered_historical_specs/plasma_scaling_corridor_vs_region_recovered_notes.csv",
+      "path": "protection/reference/historical/plasma_scaling_corridor_vs_region_recovered_notes.csv",
+      "sha256": "ceca279a1511f27195368c6f5118cbd43f423790d227b6794a234ec790e7c7aa",
+      "bytes": 387,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Terluna_solar_shield_full_dump_2026-09-26.zip",
+      "member": "Terluna_solar_shield_full_dump_2026-09-26/docs/HISTORICAL_LINEAGE.md",
+      "path": "protection/reference/historical/HISTORICAL_LINEAGE.md",
+      "sha256": "ffe99c8b2fa0a41fd3abf03f710fb2ff73eea35bffd13e2cf53cbb96edd29fb9",
+      "bytes": 8786,
+      "preservation": "verbatim"
+    }
+  ],
+  "updates": [
+    {
+      "date": "2026-09-26",
+      "summary": "Imported the September protection and feasibility reports, the feasibility report's four figures, and the conversation-recovered shield lineage from the 2026-09-26 recovery dump. Two private conversation URLs were removed from the protection report.",
+      "retained_added": [
+        "research/baselines/feasibility/report.md",
+        "protection/report.md",
+        "research/baselines/feasibility/results/atmosphere_profiles.png",
+        "research/baselines/feasibility/results/escape_sensitivity.png",
+        "research/baselines/feasibility/results/industrial_growth.png",
+        "research/baselines/feasibility/results/maintenance_ratio.png",
+        "protection/reference/historical/README.md",
+        "protection/reference/historical/EL1_SH_BOM_recovered.csv",
+        "protection/reference/historical/Lunashield_L1_recovered.yaml",
+        "protection/reference/historical/plasma_scaling_corridor_vs_region_recovered_notes.csv",
+        "protection/reference/historical/HISTORICAL_LINEAGE.md"
+      ]
     }
   ]
 }

@@ -1,0 +1,13 @@
+status,item_code,recovered_count,recovered_description
+conversation-recovered; not original artifact,MS-VEIL-1k,"~38,000","~1,000 km^2 logical EUV-veil block; old Mo/Si + Zr/Si + SiNx optical concept; 1-10 km^2 rafts; UHMWPE Hoytether lattice; ALD Al2O3/SiO2 protection; CNT conductor wraps; SRP tabs/electrospray-FEEP; order ~1,000 t per recovered note"
+conversation-recovered; not original artifact,MS-CTRL-50,"~800","control node for roughly 50 veil blocks"
+conversation-recovered; not original artifact,SW-SEED-10GJ,"~40,000-80,000","segmented REBCO HTS seed coil module with cryostat, Whipple shielding, quench dump and cryocoolers; order 10^10 J; local tens-to-hundreds of microtesla"
+conversation-recovered; not original artifact,SW-PLAS-50/200MW,"~5,000-12,000","50-200 MW RF/ECR plasma-drive module with H/Ar injection"
+conversation-recovered; not original artifact,SW-MINI-NODE,"6-12","larger mini-magnetosphere / plasma node"
+conversation-recovered; not original artifact,GC-RING-STN,"200-400","historical GCR-ring station family; old notes used 16-48 seed modules at ~1-2x radius spacing"
+conversation-recovered; not original artifact,GC-LUN-LOBE,"200-600","historical lunar-lobe magnetic station; old notes used 2-6 seed modules each"
+conversation-recovered; not original artifact,PW-MW-5GW,"500-2,000","5 GW-class microwave power/beaming module"
+conversation-recovered; not original artifact,PW-LAS-1GW,"1,000-5,000","1 GW-class laser power/beaming module"
+conversation-recovered; not original artifact,TH-RAD-10M,"1,000-3,000","large thermal-radiator module family"
+conversation-recovered; not original artifact,RB-MICRO,"10^8-10^9","micro-robot / inspection-repair swarm element"
+conversation-recovered; not original artifact,RB-RAFT-TUG,"50,000-150,000","raft tug / deployment and servicing vehicle"

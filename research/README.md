@@ -16,7 +16,7 @@ Models live in their domain folders. This folder holds what spans domains:
 | [status.json](status.json) | Condition, open questions and next task for each topic |
 | [provenance.json](provenance.json), [archive_status.md](archive_status.md) | Every original archive member and its disposition; unresolved recovery |
 | [check.py](check.py), [checks.json](checks.json) | Byte integrity of the pinned imports and reproduction of the historical baseline |
-| [baselines/feasibility](baselines/feasibility/) | The September multi-domain feasibility script, kept intact |
+| [baselines/feasibility](baselines/feasibility/) | The September multi-domain feasibility script and its full report, kept intact |
 | [studies/](studies/) | Cross-domain studies, each with its runner, results and write-up |
 
 ## Domains
@@ -27,7 +27,7 @@ Models live in their domain folders. This folder holds what spans domains:
 | [Climate](../climate/) | Conservative periodic latitude–longitude thermal screen; canopy and forest-patch flow; clear-sky line-by-line budget from the atmosphere domain; single-column month-long day and night over land and sea; GCM boundary files, experiment plan and a restartable ExoPlaSim runner (design case near 299.6 K with PlaSim's cloud scheme corrected for lunar gravity; water and cloud sensitivities) | Cloud amount, the 28% water with lakes, dynamics and terrain |
 | [Biosphere](../biosphere/) | Carbon reserve theorem/model, bounded oxygen box, tree and forest-patch mechanics | Measured traits, complete life cycles and ecological interactions |
 | [Illumination](../illumination/) | Spectral clear-sky solver, A1–A3 light-transport references, site sky geometry and earthlight, bright stars | Date-accurate ephemeris, earthlight spectrum, profiles tied to the solved column |
-| [Protection](../protection/) | Original component model plus spectral coverage audit; the stored film's transmission from hard X-rays to the far ultraviolet | Aperture leakage (gaps, pinholes, edges), clean operation, particle transport and lifetime resources |
+| [Protection](../protection/) | Original component model and its full September design report, plus spectral coverage audit; the stored film's transmission from hard X-rays to the far ultraviolet | Aperture leakage (gaps, pinholes, edges), clean operation, particle transport and lifetime resources |
 | [Engineering](../engineering/) | Original transport/renewal accounts plus plume-heat sensitivity | Complete industrial network and safe source-to-use routes |
 | [Geography](../geography/) | LOLA topography above the GRAIL geoid; hydrostatic water storage (level curves, basin joins); the atlas at the selected 28% water share, named from the IAU gazetteer; a first estimate of rivers and rain-fed lakes from the climate run's runoff | How the water inventory divides between seas and rain-fed lakes (lakes hold about a third of the seas' volume in the first estimate); groundwater |
 | [Habitation](../habitation/) | Design concepts | Practical inhabited capacity |

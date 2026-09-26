@@ -1,0 +1,3 @@
+status,case,geometry,electron_temperature_eV,density_m3,residence_time,notes
+"conversation-recovered; original CSV missing",corridor,"radius ~2,000 km; length ~400,000 km",10,"10^8-10^9","~1 day","historical plasma scaling concept only"
+"conversation-recovered; original CSV missing",regional,"sphere radius ~200,000 km",10,"10^8-10^9","~7 days","historical plasma scaling concept only"

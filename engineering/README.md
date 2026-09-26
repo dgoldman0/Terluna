@@ -1,6 +1,6 @@
 # Engineering and industry
 
-**Current code:** the original cross-domain [feasibility model](../research/baselines/feasibility/model.py). **Reference data:** [logistics](reference/logistics.csv), [routes](reference/transfer_routes.csv), [scalar growth](reference/growth.csv) and [maintenance](reference/maintenance.csv). These are verbatim September outputs, not new calculations or demonstrated hardware.
+**Current code:** the original cross-domain [feasibility model](../research/baselines/feasibility/model.py), with its full [report](../research/baselines/feasibility/report.md). **Reference data:** [logistics](reference/logistics.csv), [routes](reference/transfer_routes.csv), [scalar growth](reference/growth.csv) and [maintenance](reference/maintenance.csv). These are verbatim September outputs, not new calculations or demonstrated hardware.
 
 The route model is Sun-only and circular/coplanar. Electric propulsion includes exhaust and propellant but omits dry mass, return fleets and complete extraction/capture systems. Growth is a required capacity curve with an imposed cap. Maintenance tables impose depletion timescales rather than predict escape. Oxygen process yields and energy benchmarks retain their separate process assumptions.
 

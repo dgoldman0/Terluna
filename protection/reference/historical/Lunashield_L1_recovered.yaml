@@ -1,0 +1,42 @@
+status: "conversation-recovered; historical charged-particle concept; not an original artifact"
+name: "Lunashield-L1"
+date: "2025-09-26"
+role: "plasma-inflated mini-magnetosphere; solar-wind/charged-particle subsystem, not EUV/X-ray photon filter"
+seed_coils:
+  type: "dual REBCO HTS"
+  radius_m: 5
+  stack_length_m: 6
+  field_T: "0.05-0.1"
+  ampere_turns: "0.4-0.8 MA-turns"
+  temperature_K: "30-50"
+  stored_energy: "order 10-50 MJ"
+plasma_sources:
+  type: "helicon/ECR Ar/He"
+  count: "6-12"
+  per_source_kW: "5-50"
+  boost_ion_rate_s: "10^19-10^21"
+rf_current_drive:
+  modes: "whistler / lower-hybrid"
+  typical_MW: "0.2-1"
+  peak_MW: "0.5-2"
+power:
+  type: "fission + Brayton"
+  electric_MWe: "3-5"
+  waste_heat_MWth: "8-12"
+  radiator_area_m2: "1500-2500"
+electric_propulsion_kWe: "300-600"
+mass:
+  dry_t: "23-40"
+  wet_t: "25-46"
+solar_wind_target:
+  boundary_field_nT: "70-150"
+  pressure_nPa: "1-10"
+  standoff: "order 3-5 lunar radii in recovered concept"
+consumables:
+  argon_kg_day: "0.1-2 hold-to-boost historical estimate"
+  late_recovery: ">=30% argon reclaimed/ISRU target in maturity notes"
+  EP_propellant_kg_year: "<=100 historical program estimate"
+century_cost:
+  P50_USD_2025: "$45-75B"
+  P90_USD_2025: "$70-120B"
+  operations: "$15-29B"

@@ -211,15 +211,33 @@ aperture.
   Interpolating, blocking 99.95% would hold it near 233 K at solar maximum
   (248 K for the upper bound). Behind the titania stack the same 0.1% leak
   gives 167–206 K.
-- **The titania stack's film lets almost no heat through; only gaps could.**
+- **The titania stack's film lets almost no heat through.**
   Its 10 µm of silica and 1 µm of titania pass only hard X-rays shorter than
   about 1.5 nm. From 5 nm to 200 nm they transmit less than 10⁻²⁰. The
   heat that reaches the upper air is at most 1×10⁻⁹ W/m² for the quiet Sun
   and 1×10⁻⁷ W/m² at solar maximum, with X-rays counted a hundred times
   stronger there. That is 1,700 and 40 times less than a 0.1% leak, so the
-  exobase stays within 1.5 K of its base, at 142–193 K. What warms it beyond
-  that is light passing gaps, pinholes and edges of the aperture: a design
-  number, not a material one.
+  film alone holds the exobase within 1.5 K of its base, at 142–193 K. Beyond
+  that, light passing gaps, pinholes and edges of the aperture warms it (a
+  design number, not a material one), and so does the sky's own Lyman-alpha.
+- **The sky's Lyman-alpha is not yet in these tables.** Interplanetary
+  hydrogen glows at about 1,000 rayleigh at 1 AU (protection/report.md,
+  section 9), about 4×10⁻⁶ W/m² onto a surface facing open sky.
+  This light reaches the upper air from every direction, so no Sun-facing
+  shield blocks it. A first estimate by `leakage_heat`'s method (the O2
+  cross-section of 10⁻²⁰ cm², the 0.3 Pa base near 1.3–1.4 lunar radii, a
+  heating efficiency of 0.4) puts about 2×10⁻⁶ W/m² above the base: about the
+  heat of the 0.1% leak at quiet Sun, which raises the titania-stack exobase
+  by about 25 K in the table above. It scales with the Sun's own Lyman-alpha
+  over the solar cycle. It needs computing properly, with the glow's
+  direction and the absorption height resolved.
+- **Some loss channels are not yet included:** Earth's tide lowering the escape
+  barrier, solar-wind sputtering and ion pickup, and hydrogen from water. The
+  September feasibility report
+  ([research/baselines/feasibility/report.md](../../research/baselines/feasibility/report.md),
+  sections 4–5) sizes the first as about 4.5 times the nitrogen Jeans flux at
+  its reference exobase, and the second as 0.4–40 kg/s over a
+  three-lunar-radius cross-section, as a budget translation.
 - **Less CO2 warms the upper air, within the film's margin.** CO2 is the upper
   air's main coolant. In the warmest treatment (all absorbed near-infrared
   heats), cutting it from 400 to 280 ppm raises the base by 5 K and to 150 ppm

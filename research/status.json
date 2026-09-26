@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-25",
+  "updated": "2026-09-26",
   "base_commit": "79a60a1a51b4552ac9ae8e8bb295b567d9254995",
   "next_manuscript": "cef466e6-d9f8",
   "principle": "Each topic spans the open Moon; the root opening scene is one illustration",
@@ -26,7 +26,9 @@
         "day-night and 3-D transport of the middle atmosphere and its effect on the exobase",
         "light bypassing the shield film through gaps, pinholes and edges of the aperture (0.1% scenario bounded; the titania film itself passes only hard X-rays)",
         "correlated-k top layer (0.1 Pa) 30-40 K off and unused (the escape base is 0.3 Pa); fix only if later work needs correlated-k above 0.3 Pa",
-        "water supply to escape"
+        "water supply to escape",
+        "the sky's interplanetary Lyman-alpha glow (about 1,000 R), which no Sun-facing shield blocks: a first estimate puts about 2e-6 W/m2 above the 0.3 Pa base, like the 0.1% leak at quiet Sun (about +25 K at the exobase); not yet in the exobase tables",
+        "loss channels not yet included: Earth's tidal lowering of the escape barrier, solar-wind sputtering and ion pickup, hydrogen from water (sized in research/baselines/feasibility/report.md sections 4-5)"
       ],
       "next_session_task": "Couple the middle atmosphere and exobase to the 3-D circulation the author chooses."
     },
@@ -153,7 +155,9 @@
         "../protection/spectra/short_wave.py",
         "../protection/spectra/stack_short_wave.json",
         "studies/environment_screens/results/spectral_audit.json",
-        "studies/environment_screens/results/plume_heat_interface.csv"
+        "studies/environment_screens/results/plume_heat_interface.csv",
+        "../protection/report.md",
+        "../protection/reference/historical/"
       ],
       "unresolved": [
         "light bypassing the film through gaps, pinholes and edges of the aperture, and off-normal incidence",
@@ -161,9 +165,21 @@
         "coupled atmosphere and clean plumes",
         "full ephemerides and flexible structures",
         "plasma interaction and dose",
-        "material aging"
+        "material aging",
+        "holding propellant: the reference screen uses 2.8e5 kg/s, more than the feasibility report's energy-limited loss with no filter (about 5,300-195,000 kg/s at 10% efficiency); it saves mass only if much lighter, with much faster exhaust, or held without propellant",
+        "plume isolation (report.md section 8): under about 94 MW of plume power may reach the upper air for a 10 kg/s allowance; whether the solar wind carries ionized exhaust from the screen into the Moon's upper air",
+        "the hub architecture of report.md section 3 (industrial hub, lunar depots, heavy facilities on economical trajectories, Earth-Sun L1/L2 hubs): no design or budget yet",
+        "solar-wind subsystem: whether sputtering and pickup need a magnetic system at all; the four 100 km regional loops (about 2e14 kg) against the 2025 plasma-inflated Lunashield-L1 concept (23-40 t, unvalidated; reference/historical/)",
+        "effects on Earth (report.md section 6): reflections toward Earth near full moon, and the screen crossing the full Moon and the Sun as seen from Earth"
       ],
-      "next_session_task": "Specify the aperture's leak fraction (gaps, pinholes, edges); constrain absorbed plume fractions and couple their heating to atmospheric physics."
+      "next_session_task": "Specify the aperture's leak fraction (gaps, pinholes, edges); constrain absorbed plume fractions and couple their heating to atmospheric physics.",
+      "requirements_from_september_reports": [
+        "construction within 500 years of 2026; operation for at least 1e9 years",
+        "an open atmosphere with no pressure dome; no superconducting planetary ring",
+        "exobase near 250 K preferred, 260 K a candidate limit",
+        "surface radiation dose at most 0.027 mSv/day",
+        "protection expanding around occupied destinations and Earth-Moon traffic corridors, secondary to protecting the lunar atmosphere and surface"
+      ]
     },
     {
       "topic": "conservation",
