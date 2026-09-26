@@ -50,6 +50,7 @@ class RunnerTests(unittest.TestCase):
     def test_default_settings_are_the_corrected_physics(self):
         self.assertEqual(er.MODEL['cloud_water'], 'earth_path')
         self.assertEqual(er.MODEL['convective_day_s'], 86400.0)
+        self.assertEqual(er.MODEL['sunlight_scale'], 1.0)                 # the shield product as it is
 
     def test_clear_sky_output(self):
         off = er.output_variables({**er.MODEL, 'clear_sky': 0})

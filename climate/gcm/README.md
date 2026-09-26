@@ -415,6 +415,65 @@ overnight after year 7 and resumed. Years 25–29, against the corrected 25% run
   and would flip 84 T21 cells, raising the water from 40.1% to 40.9%, worth
   about 0.1 K. The geography domain now carries that routing.
 
+### A dimmer shield: cooling the 28% Moon
+
+At 303 K the 28% Moon is hot and humid. Over land, 2.8% of 3-day windows reach
+40 °C and the humid heat peaks near 33 °C wet-bulb, close to where healthy people
+fail. The runner's `sunlight_scale` dims the shield evenly at every wavelength;
+branches start from `A28`'s year 29, whose coastline they keep. After 8 years
+each, with the settling fit (`compare --settle`) and heat measures from years
+6–7 (their extremes are still falling):
+
+| | Full shield | 3% dimmer | 5% dimmer | 8% dimmer |
+|---|---|---|---|---|
+| Sunlight at the top of the air | 1,235 W/m² | 1,198 W/m² | 1,173 W/m² | 1,136 W/m² |
+| Settles near | 303 K | 297 K | 294 K | 288 K |
+| Hottest half-hours over land, 90th / 99th percentile | 36 / 42 °C | 32 / 37 °C | 30 / 35 °C | 26 / 31 °C |
+| Wet-bulb at those peaks, 99th percentile | 30 °C | 27 °C | 25 °C | 22 °C |
+| Coldest half-hour anywhere | 18 °C | 13 °C | 8 °C | 3 °C |
+
+The response is linear, about 1.9 K per 1% of sunlight, as the energy balance
+alone predicts. Cloud cover rises as the Moon cools (17% at 303 K, 25% at
+293 K), but the clouds' net effect holds at −6 to −7 W/m²: the extra reflection
+and the extra infrared they trap cancel. Whether the cover itself would rise
+like this is beyond PlaSim's diagnostic clouds; a cloud-resolving model run at
+two temperatures could test it.
+
+`A28_dim5` (5% dimmer) was run on to 25 years and has settled. Years 20–24,
+against the full shield:
+
+| | Full shield (`A28`, years 25–29) | 5% dimmer (`A28_dim5`, years 20–24) |
+|---|---|---|
+| Surface temperature | 302.8 K | 294.2 K, settling near 293.8 |
+| Sea surface | 304.3 K | 297.2 K |
+| Land air, annual means: 5th / 50th / 95th percentile | 300.5 / 302.5 / 304.5 K | 292.0 / 293.5 / 295.4 K |
+| Equatorial land: typical afternoon high / pre-dawn low | 32 / 26 °C | 25 / 17 °C |
+| Land above 5 km: the same | 28 / 23 °C | 21 / 13 °C |
+| Hottest half-hours over land: 90th / 99th percentile / hottest | 36 / 42 / 45 °C | 28 / 32 / 36 °C |
+| Wet-bulb at those peaks: typical / 99th percentile / highest | 24 / 30 / 33 °C | 17 / 23 / 26 °C |
+| Coldest half-hour anywhere | 18 °C | 3 °C, no frost |
+| Cloud cover; cloud effect net | 17%; −6.3 W/m² | 25%; −6.2 W/m² |
+| Precipitation; land under 0.5 mm/day | 3.70 mm/day; 2% | 2.89 mm/day; 9% |
+| Water vapour | 307 kg/m² | 173 kg/m² |
+
+- **The 5% Moon is mild and safe to live in.** Days over equatorial land
+  typically reach 25 °C and nights fall to 17 °C, a wider swing than at 303 K
+  because the air holds half the vapour. One 3-day window in 25 reaches 30 °C,
+  35 °C is rare, and humid heat stays well under the danger range.
+- **A little more variety, mostly in water.** Dry land (under 0.5 mm/day)
+  triples to 9%, while annual means over land still span only about 3 K; the
+  high plateaus run about 4 K cooler than the lowlands by day and night.
+- **Its lakes stay close to the full shield's.** Routed with its own climate
+  (`python -m climate.gcm.climatology A28_dim5:15-24`, then
+  `python -m geography.drainage --climatology climate/gcm/products/climatology_A28_dim5.npz --out <folder>`),
+  the lakes cover 11.6% instead of 12.9% and the rivers carry 25% less; at T21
+  that would flip 105 cells and lower the water from 40.1% to 39.6%, worth
+  about 0.1 K. The geography domain keeps the full shield's routing until a
+  dimming level is chosen.
+- **Humid heat is estimated** from the model's lowest layer (about 0.9 km up)
+  with each window's mean humidity at its hottest half-hour; the air at the
+  ground could be about a degree more humid.
+
 ### Cloud amount: what published models say
 
 From a literature search, with Yang et al. (2014) and Way et al. (2018) checked
@@ -449,6 +508,7 @@ against the papers:
 | Cloud-water bracket | Done (15 years each, above): `A_earth_path_clouds`, `A_full_column_clouds`, and `A_patch_check` for the patch's regression test |
 | Corrected clouds | Done (15 years, above): `A_corrected_clouds`, both corrections; the design case with PlaSim's cloud amount |
 | A28, 28% seas with lakes | Done (30 years from cold, above): the design case with the scenario's water, 303 K |
+| Dimmer shield (`A28_dim3`, `A28_dim5`, `A28_dim8`) | 3% and 8% run 8 years (paused); 5% run 25 years and settled near 294 K (above) |
 | C, 1.0 atm | Not run: no current decision needs it. The 1-D balance puts 1.0 atm 0.2–1.3 K cooler than 1.2 atm, depending on the clouds, and 1.2 atm is the design pressure. The runner keeps it defined |
 | D, E | Need ExoPlaSim's ozone profile from the 1-D results, and a way to add the trace gases' forcing |
 

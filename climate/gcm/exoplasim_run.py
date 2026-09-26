@@ -99,7 +99,10 @@ MODEL = dict(resolution='T21', layers=10, timestep_min=30.0, land_albedo=0.2, st
              convective_day_s=86400.0,
              # PlaSim's clear-sky diagnostic (1 on, 0 off): the radiation computed a second time without
              # clouds, for the clouds' radiative effect. It changes no prognostic field.
-             clear_sky=1)
+             clear_sky=1,
+             # A multiplier on the sunlight the shield passes, the same at every wavelength: 0.92 is a shield
+             # that passes 8% less. 1.0 keeps the shield product's transmission.
+             sunlight_scale=1.0)
 # Cloud water. PlaSim uses it only for the clouds' radiation: rain comes from its condensation and
 # convection schemes, which rain out any excess vapour at once. It diagnoses the water with CCM3's
 # formula, 0.21 g/m3 at the ground falling off with geometric height on a scale of
@@ -230,6 +233,8 @@ def configuration(name, ncpus, overrides=None):
     cloud_water_namelist(model['cloud_water'], planet['gravity_m_s2'])        # refuses an unknown choice
     if model['convective_day_s'] < 0:
         raise ValueError('convective_day_s must be 0 (the solar day) or a positive number of seconds')
+    if not 0.0 < model['sunlight_scale'] <= 1.5:
+        raise ValueError('sunlight_scale must lie between 0 and 1.5')
     return dict(experiment=name, **exp, model=model, output=output_variables(model), ncpus=ncpus,
                 exoplasim=version('exoplasim'), source=ensure_patched(),
                 planet=dict(radius=planet['radius_m'] / EARTH_RADIUS_M, gravity=planet['gravity_m_s2'],
@@ -336,8 +341,8 @@ def prepare_inputs(cfg, rundir: Path) -> dict:
     folder = rundir / 'inputs'
     landmap, topomap, land_share = surface_files(cfg, folder)
     starspec, flux = sunlight(cfg, folder)
-    return dict(landmap=str(landmap), topomap=str(topomap), starspec=starspec, flux_w_m2=flux,
-                land_share=land_share)
+    return dict(landmap=str(landmap), topomap=str(topomap), starspec=starspec,
+                flux_w_m2=flux * cfg['model']['sunlight_scale'], shield_flux_w_m2=flux, land_share=land_share)
 
 
 def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dict):

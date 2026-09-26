@@ -32,7 +32,7 @@
     },
     {
       "topic": "climate",
-      "condition": "periodic_conservative_spatial_linear_screen; uncalibrated; clear_sky_radiation_computed_for_prescribed_columns; single_column_month_long_day_night_with_weak_temperature_gradient_exchange; gcm_boundary_files_prepared; exoplasim_radiation_calibrated_to_line_by_line; exoplasim_design_case_settled_295k; exoplasim_cloud_water_corrected_and_bracketed_292_298k; exoplasim_convective_cloud_units_corrected_design_case_299.6k; slow_rotator_cloud_literature_reviewed; design_case_28pct_seas_with_lakes_settles_303k",
+      "condition": "periodic_conservative_spatial_linear_screen; uncalibrated; clear_sky_radiation_computed_for_prescribed_columns; single_column_month_long_day_night_with_weak_temperature_gradient_exchange; gcm_boundary_files_prepared; exoplasim_radiation_calibrated_to_line_by_line; exoplasim_design_case_settled_295k; exoplasim_cloud_water_corrected_and_bracketed_292_298k; exoplasim_convective_cloud_units_corrected_design_case_299.6k; slow_rotator_cloud_literature_reviewed; design_case_28pct_seas_with_lakes_settles_303k; five_percent_dimmer_shield_settles_294k",
       "material": [
         "../climate/reference/thermal_response.csv",
         "baselines/feasibility/model.py",
@@ -51,7 +51,7 @@
         "actual terrain",
         "spatial resolution sensitivity"
       ],
-      "next_session_task": "Decide with the author how to give the Moon cooler climates alongside warm ones (less sunlight through the shield, shield-driven seasons, surface choices) and test the chosen levers in ExoPlaSim; then cloud amount (a 1-day-rotation reference run or a cloud-resolving model at lunar gravity); ROCKE-3D on rented compute; runs D and E."
+      "next_session_task": "The author chooses the shield's dimming (a 5% dimmer shield settles near 294 K; 3% near 297 K, 8% near 288 K); then route the lakes with the chosen climate. Test cloud amount and its response to cooling with a cloud-resolving model at lunar gravity; ROCKE-3D on rented compute; runs D and E."
     },
     {
       "topic": "geography",
