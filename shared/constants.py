@@ -18,6 +18,7 @@ PLANCK = DATA["physics"]["planck_J_s"]
 SPEED_OF_LIGHT = DATA["physics"]["speed_of_light_m_s"]
 STANDARD_GRAVITY = DATA["physics"]["standard_gravity_m_s2"]
 ELEMENTARY_CHARGE = DATA["physics"]["elementary_charge_C"]
+VACUUM_PERMEABILITY = DATA["physics"]["vacuum_permeability_N_A2"]
 CLASSICAL_ELECTRON_RADIUS = DATA["physics"]["classical_electron_radius_m"]
 
 MOON_RADIUS = DATA["moon"]["radius_m"]

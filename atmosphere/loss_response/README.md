@@ -7,16 +7,20 @@ protection functions against a total loss budget for the protection design study
 ([research/studies/protection_architecture](../../research/studies/protection_architecture/README.md)).
 [tides.py](tides.py) finds how much Earth's tide raises escape.
 [absorption.py](absorption.py) finds how far out the optical shield must reach
-and what the sunlit exosphere beyond it produces. [fate.py](fate.py) follows
-the escaping air into the space around Earth and the Moon. All four are
-screening models; their methods and limits are in their docstrings.
+and what the sunlit exosphere beyond it produces. [exosphere.py](exosphere.py)
+finds what that exosphere loses, as ions and as the fragments of broken
+molecules, with and without a lunar magnetosphere, and the UV transmission each
+budget then allows. [fate.py](fate.py) follows the escaping air into the space
+around Earth and the Moon. All five are screening models; their methods and
+limits are in their docstrings.
 
 ```sh
 OPENBLAS_NUM_THREADS=1 python -m atmosphere.loss_response.tides   # about 4 minutes; resumes if stopped
 python -m atmosphere.loss_response.model        # then the loss response, about 10 s
 python -m atmosphere.loss_response.absorption   # then the protected radius, about 10 s
+OPENBLAS_NUM_THREADS=1 python -m atmosphere.loss_response.exosphere   # then the exosphere's losses, about 3 minutes
 OPENBLAS_NUM_THREADS=1 python -m atmosphere.loss_response.fate    # where the escaping air goes, about 15 s
-python -m pytest atmosphere/tests/test_tides.py atmosphere/tests/test_loss_response.py atmosphere/tests/test_absorption.py atmosphere/tests/test_fate.py
+python -m pytest atmosphere/tests/test_tides.py atmosphere/tests/test_loss_response.py atmosphere/tests/test_absorption.py atmosphere/tests/test_exosphere.py atmosphere/tests/test_fate.py
 ```
 
 It needs the middle atmosphere's stored results and the WHI 2008 spectrum
@@ -24,7 +28,11 @@ It needs the middle atmosphere's stored results and the WHI 2008 spectrum
 is [results/loss_response.json](results/loss_response.json) (schema
 `terluna.atmosphere.loss-response/2`), with the full sweep in
 [results/euv_sweep.csv](results/euv_sweep.csv). Its field
-`allowed_leak_fraction` is the allowed UV transmission. The tidal multipliers are
+`allowed_leak_fraction` is the allowed UV transmission from ultraviolet-driven
+escape and the solar-wind scalings alone. The exosphere's losses, and the allowed
+transmissions with them included, are in
+[results/exosphere_loss.json](results/exosphere_loss.json) (schema
+`terluna.atmosphere.exosphere-loss/1`). The tidal multipliers are
 in [results/tidal_escape.json](results/tidal_escape.json) (schema
 `terluna.atmosphere.tidal-escape/1`), and the protected radius and the
 exosphere's ion production in
@@ -68,6 +76,23 @@ ones, which the Jeans loss already counts. Sunlight ionizes a molecule in about
 19 days at quiet Sun and 8 days at solar maximum, and the step counts the ions
 made from ballistic molecules in sunlight outside the shadow.
 
+The exosphere step takes the same exosphere for N2 and O2 separately, with the
+O2 share at the exobase either well mixed, as the column has it (17.5%), or
+separated by diffusion above a homopause at 0.01 Pa (3–4%). Outside the shadow
+sunlight breaks molecules apart faster than it ionizes them: N2 in 10–26 days
+and O2 in 4–5 days, on the WHI spectrum and within 10% of Heays et al. (2017).
+The atoms fly apart with 0.1–1.7 eV each, above the 0.1–0.2 eV an atom needs
+to leave from two to five lunar radii, and escape unless their path meets the
+exobase. The solar wind's protons also take electrons from exospheric
+molecules and turn them into ions, inside the optical shadow as well. With no
+magnetosphere the wind carries the ions off, and those that curve back into the
+air sputter out more molecules. A lunar dipole holds the wind off at its
+stand-off, 10 lunar radii for the September design's magnets
+(1.5×10²¹ A·m²). Inside it, ions on open field lines leave down the tail, and
+ions on closed field lines drain along the field into the air and stay, or are
+carried to the boundary by the convection the wind drives, or recombine into
+fast atoms that mostly escape, in proportion to the three rates.
+
 ## Results
 
 **Earth's tide roughly doubles escape.** Across the loss response's sweep the
@@ -83,9 +108,10 @@ quiet Sun and up to 0.7 kg/s at solar maximum. Behind the 200-nm edge, whose
 upper air starts warmer, it is 0.5–6 kg/s at quiet Sun and 2.7–21 kg/s at solar
 maximum.
 
-**The shield may pass a few tenths of a percent.** Largest allowed UV
-transmission, across the three upper-air treatments, with the solar-wind loss at
-the low end of its range. Each budget's cycle time is the atmosphere's mass
+**Ultraviolet-driven escape alone lets the shield pass a few tenths of a
+percent.** Largest allowed UV transmission from ultraviolet-driven escape and
+the solar-wind scalings, across the three upper-air treatments, with the
+solar-wind loss at the low end of its range. Each budget's cycle time is the atmosphere's mass
 (3.1×10¹⁸ kg, the feasibility baseline's hydrostatic column) over the loss rate,
 the time the loss and its resupply take to replace the whole atmosphere:
 
@@ -105,10 +131,12 @@ about half again.
 returning pickup ions dominates. With pickup capped at 0.29 kg/s it barely
 changes the allowed transmission for budgets of 10 kg/s and more, and at 1 kg/s
 its high end alone exceeds the budget. The ion production below exceeds that cap
-36–470 times, so these figures hold only if most of those ions stay with the
-Moon.
+36–470 times, and the exosphere step finds that those ions are carried off; its
+losses replace the capped pickup and the ion sputtering, and the table above
+holds for the ultraviolet-driven part alone.
 
-**The shield must reach to just under the exobase.** Ultraviolet grazing the
+**For the thermosphere's heating the shield must reach to just under the
+exobase.** Ultraviolet grazing the
 thermosphere outside the shadow deposits a tenth of the allowed transmission
 when the protected radius is within about 0.1 lunar radii of the exobase:
 2.6–3.1 lunar radii for 1 kg/s, 3.1–3.7 for 10 kg/s and 3.9–4.6 for 100 kg/s. The
@@ -125,9 +153,76 @@ molecules become ions at 10–30 kg/s for the 1 kg/s budget, 22–58 kg/s for 10
 and 47–134 kg/s for 100 kg/s, counted to a third of the Hill radius. Counting to
 the whole Hill radius adds 2–3% at 1 kg/s and about half at 100 kg/s. A shadow
 that held production to a tenth of the budget would need a radius of 9–14 lunar
-radii counted to half the Hill radius, or 17–26 counted to the whole. How much
-of the production escapes depends on how the solar wind meets the ionized
-exosphere, which none of these steps models.
+radii counted to half the Hill radius, or 17–26 counted to the whole. The
+exosphere step follows these ions.
+
+**At those transmissions the sunlit exosphere overruns every budget.** At the
+allowed transmissions of the table above, where ultraviolet-driven escape
+already fills the budget, the sunlit exosphere outside a heating-sized shadow
+makes ions at 11–136 kg/s, sheds fragments that escape at 7–91 kg/s, and meets
+the solar wind, whose charge exchange makes up to 6–27 kg/s more ions. With no
+magnetosphere the central loss it adds is 25–303 kg/s (cycle times of 4 to 0.3
+billion years on its own); with the September magnets it is 11–193 kg/s (9 to
+0.5 billion years). Most of it comes from the first few scale heights above the
+exobase, just outside a shadow that reaches only to the exobase.
+
+**Without a magnetosphere the ions leave.** In the flowing solar wind the
+motional electric field pulls an ion about 40,000 times harder than lunar
+gravity at three lunar radii, and gravity holds an ion only where the flow
+stops, at an obstacle's surface. The exosphere's ions are carried off, as at
+comets, whose ion production likewise far exceeds the wind's mass flux through
+the region that makes it: the loaded wind slows and its interaction region
+grows to tens of lunar radii. A tenth to a half curve back into the air and
+sputter out 1–10 molecules each. The solar wind's charge exchange with the dense
+exosphere near the exobase makes ions that no optical shadow removes; in the
+central estimate it costs 0.7–3 kg/s at the design point's exobases, which alone
+uses a 1 kg/s budget.
+
+**A lunar magnetosphere holds the wind off and keeps part of the ions.** With
+the September magnets, of the ions made outside a heating-sized shadow, 25–75%
+drain along closed field lines into the air and stay, 20–37% leave along the
+open field lines over the poles, and recombination into fast atoms and the
+wind-driven convection take the rest; the warmer the upper air, the farther its
+exosphere reaches and the less the magnetosphere keeps. The magnetosphere also
+keeps the solar wind, and its charge exchange, off the exosphere inside the
+stand-off. For cold upper air a much weaker dipole does that: with a protected
+radius of 4 lunar radii, about 3×10¹⁹ A·m² (a stand-off near 2.7 lunar radii, a
+fiftieth of the September moment) brings the exosphere's loss at the design
+point's cold exobases below 0.3 kg/s. Dipoles that hold the wind off only just
+above the exobase fall in the range where hybrid simulations find a weak field
+can raise ion escape (Egan et al. 2019), which this step leaves out.
+
+**Magnets do not hold the fragments.** Sunlight breaks molecules apart in the
+sunlit exosphere faster than it ionizes them, and the atoms are neutral. The
+escaping fragments are 55–80% as much as the ions made, and with a magnetosphere
+they are most of what the sunlit exosphere loses. Only the shadow removes them.
+
+**With the exosphere counted, the shield has to reach beyond the exobase.**
+Largest allowed UV transmission for the titania stack with the sunlit
+exosphere's central loss added, by protected radius, with no magnetosphere and
+with the September magnets. The ranges span the three treatments of the upper
+air and quiet Sun to solar maximum, and a protected radius counts only where it
+also covers the thermosphere's heating (a tenth of the whole heating, as in the
+design study). Cases that cannot meet the budget at any transmission are
+counted out of six:
+
+| Budget (cycle time) | Magnetosphere | 3 lunar radii | 4 lunar radii | 6 lunar radii | 10 lunar radii |
+|---|---|---|---|---|---|
+| 1 kg/s (100 billion years) | none | 0.025–0.14% (4 cannot) | 0.0008–0.17% (3 cannot) | 0.003–0.17% (3 cannot) | 0.003–0.17% (3 cannot) |
+| | September | 0.016–0.33% (2 cannot) | 0.017–0.39% (1 cannot) | 0.057–0.43% (1 cannot) | 0.002–0.45% |
+| 10 kg/s (10 billion years) | none | 0.006–0.41% (1 cannot) | 0.074–0.49% (1 cannot) | 0.015–0.54% | 0.035–0.57% |
+| | September | 0.055–0.48% (1 cannot) | 0.007–0.55% | 0.031–0.60% | 0.047–0.64% |
+| 100 kg/s (1 billion years) | none | 0.004–0.58% | 0.057–0.82% | 0.10–0.89% | 0.15–0.94% |
+| | September | 0.004–0.58% | 0.077–0.88% | 0.12–0.93% | 0.16–0.96% |
+
+The case that cannot meet 1 kg/s with the September magnets short of 10 lunar
+radii is the warmest upper air at solar maximum, whose exobase sits near three
+lunar radii even with a perfect shield. Without a magnetosphere the solar wind's
+charge exchange keeps three or four of the six cases above 1 kg/s at any radius.
+Behind the 200-nm edge no case meets 1 kg/s without a magnetosphere, and with
+the September magnets only two of six do, from 6 lunar radii; 10 kg/s needs the
+magnets and 6–8 lunar radii for most cases, and 100 kg/s holds from 4–5 lunar
+radii.
 
 **The escaping air makes a short-lived cloud around Earth.** Of the molecules
 with the energy to pass L1, 65% leave the Moon's Hill sphere onto orbits around
@@ -174,4 +269,16 @@ factor (1.5) are assumptions. The solar-wind branch is a set of scalings with
 assumed ranges; for comparison, Venus and Mars lose ions to the solar wind at
 roughly a tenth of a kilogram a second, and scaling Titan's plasma-driven losses
 to the solar wind at 1 AU gives a few kilograms a second (literature magnitudes,
-not yet source-checked). The loss budget itself is the author's to choose.
+not yet source-checked). The exosphere step's ion fates with a magnetosphere are a
+comparison of timescales for draining, convection and recombination, with the
+rates for N2+ applied to both ions; the open-field share, the convection
+efficiency and the draining speed are ranges, and cusp entry and its sputtering,
+the magnetosphere's own plasma pressure, Earth's magnetotail passages and the
+extra escape a weak field can drive are left out. Its charge exchange runs on
+straight paths as an upper bound, with a cross-section not re-read for this
+step, and takes 0.1–1 of it; electron-impact ionization is left out. It counts
+the exosphere to a third of the Hill radius, beyond which the tidal step's
+escape takes over, and leaves out the photochemistry of the collisional air just
+below the exobase in the sunlit ring. The allowed transmissions with the
+exosphere use its central loss. The loss budget itself is the author's to
+choose.

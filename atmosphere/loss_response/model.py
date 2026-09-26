@@ -31,12 +31,15 @@ ions that fall back into the air (a fraction of the pickup, times a yield of
 1-10) and from solar-wind protons that reach it (a precipitating fraction times
 a yield of 0.01-0.1 N2 molecules per proton). All of it scales with the share of
 each orbit the Moon spends in the solar wind rather than in Earth's magnetotail.
-absorption.py counts the ions the sunlit exosphere makes outside the shield's
-shadow; they exceed this cap 36-470 times, so the cap stands only if most of
-them stay with the Moon.
+The exosphere step (exosphere.py) finds that the ions the sunlit exosphere
+makes outside the shield's shadow, 36-470 times this cap, are carried off
+rather than refused, and it replaces this branch's pickup and ion sputtering
+with its own losses of the sunlit exosphere. The allowed transmissions here
+leave those losses out; exosphere.py gives them with the losses included.
 
 Not included: atomic-oxygen escape (about half again behind the 200-nm edge, per
-the middle-atmosphere results), photochemical escape, hydrogen from water,
+the middle-atmosphere results), photochemical escape below the exobase (the
+exosphere step counts it above), hydrogen from water,
 Earth's tide in the energy-limited bound (it would raise that bound by about
 1/K, 10-20%), the day-night circulation of the upper air, and plasma physics
 beyond the scalings above.
@@ -319,7 +322,9 @@ def main(argv=None) -> int:
                       'loss where status is thermal_column (molecular_loss_kg_s includes Earth\'s tide; '
                       'molecular_loss_two_body_kg_s leaves it out) and the energy-limited range beyond it. A budget row\'s '
                       'allowed_leak_fraction is the largest fraction of sunlight below 175 nm the optical shield may '
-                      'let through while ultraviolet-driven loss plus the stated solar-wind loss stays within the budget.'),
+                      'let through while ultraviolet-driven loss plus the stated solar-wind loss stays within the budget. '
+                      'It leaves out the sunlit exosphere\'s loss; exosphere_loss.json (schema '
+                      'terluna.atmosphere.exosphere-loss/1) gives the allowed transmissions with it.'),
         assumptions=dict(base_pressure_pa=BASE_PA, lyman_glow_rayleigh_quiet=GLOW_RAYLEIGH,
                          activity=ACTIVITY, solar_wind=SOLAR_WIND, solar_wind_ranges=SW_RANGES,
                          energy_limited_eta=ETAS, absorption_radii_R=ABSORPTION_RADII,

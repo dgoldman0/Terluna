@@ -123,9 +123,9 @@ def partition(lam, lam_c):
     return ballistic, escaping
 
 
-def exosphere_density(r_R, n_c, t_c, r_c):
+def exosphere_density(r_R, n_c, t_c, r_c, mass_kg=AIR_KG):
     """Ballistic and escaping densities (m^-3) at radius r (lunar radii) above an exobase at r_c."""
-    k = MOON_GM * AIR_KG / (BOLTZMANN * t_c * MOON_RADIUS)
+    k = MOON_GM * mass_kg / (BOLTZMANN * t_c * MOON_RADIUS)
     lam, lam_c = k / np.asarray(r_R, dtype=float), k / r_c
     ballistic, escaping = partition(lam, lam_c)
     scale = n_c * np.exp(lam - lam_c)
@@ -192,8 +192,8 @@ def aperture(radius_R, distance_km=SEPTEMBER['distance_km']):
     return dict(aperture_radius_km=r, area_over_september=(r / september) ** 2)
 
 
-def case(shield, treatment, activity, leak, budget, weights, reference=None):
-    """One column at the given leak. The limb deposit is held to shares of reference (default: the leak)."""
+def column(shield, treatment, activity, leak):
+    """The thermal column at a UV transmission: its summary, its profile and the heat deposited above the base (W/m^2)."""
     base = lr.base_conditions(shield, treatment)
     cfg = ColumnConfig(surface_pressure_pa=base['surface_pressure_pa'],
                        surface_temperature_k=base['surface_temperature_k'],
@@ -204,6 +204,12 @@ def case(shield, treatment, activity, leak, budget, weights, reference=None):
     base_radius = solve_column(0.0, cfg)[0]['lower_radius_R']
     q = leak * escape.leakage_heat(transmission=1.0, activity=act['uv']) + film + lr.lyman_glow_heat(base_radius) * act['glow']
     summary, profile, _ = solve_column(q, cfg)
+    return summary, profile, q
+
+
+def case(shield, treatment, activity, leak, budget, weights, reference=None):
+    """One column at the given leak. The limb deposit is held to shares of reference (default: the leak)."""
+    summary, profile, q = column(shield, treatment, activity, leak)
     b, heat, tau1 = limb_heating_curve(profile, weights)
     heating = {}
     ref = leak if reference is None else reference

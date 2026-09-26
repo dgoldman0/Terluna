@@ -116,6 +116,18 @@ cavities, then more nodes whose cavities grow and merge until they fill a
 protected volume, then redundancy. Paths inside the lineage refer to the
 recovery dump's layout ([research/archive_status.md](../research/archive_status.md)).
 
+The loss response's exosphere step
+([atmosphere/loss_response](../atmosphere/loss_response/README.md)) sizes the
+magnets from the air's side. Without a magnetosphere the solar wind carries off
+the ions the sunlit exosphere makes, and its charge exchange with the dense
+exosphere near the exobase costs about 0.7–3 kg/s that no optical shadow
+removes, so a 1 kg/s budget needs magnetic protection. A lunar dipole of about
+3×10¹⁹ A·m², whose stand-off clears the dense exosphere of cool upper air,
+removes that loss in the screening; the four regional installations give
+1.5×10²¹ A·m² and a stand-off near 10 lunar radii. Neither holds the neutral
+fragments of molecules that sunlight breaks up outside the shadow, which the
+optical shield's reach has to cover.
+
 ## Module catalogue
 
 [modules/catalogue.py](modules/catalogue.py) writes

@@ -3,7 +3,7 @@
   "producer": {
     "domain": "atmosphere",
     "files": {
-      "atmosphere/loss_response/model.py": "ed1f0be89158c3aa",
+      "atmosphere/loss_response/model.py": "92de5c5cb029ac30",
       "atmosphere/thermal_column.py": "ca108980727d63d9",
       "atmosphere/middle_atmosphere/escape.py": "a0e8bf6b30c2cb13",
       "atmosphere/loss_response/tides.py": "c24f3996aa309f3c",
@@ -11,7 +11,7 @@
     }
   },
   "evidence": "Screening model. The ultraviolet branch is the molecular thermal column (no infrared cooling, no atomic oxygen) above middle-atmosphere base temperatures, with its Jeans escape raised by the tidal multiplier of test molecules in the Earth-Moon three-body problem, and energy-limited upper bounds beyond its domain; the solar-wind branch is a range from mass-loading and sputtering scalings with assumed parameter ranges. Neither is a coupled aeronomy or plasma model.",
-  "reading_rule": "Loss rates are global-mean kg/s for the finished 1.2 atm atmosphere. Use the thermal-column loss where status is thermal_column (molecular_loss_kg_s includes Earth's tide; molecular_loss_two_body_kg_s leaves it out) and the energy-limited range beyond it. A budget row's allowed_leak_fraction is the largest fraction of sunlight below 175 nm the optical shield may let through while ultraviolet-driven loss plus the stated solar-wind loss stays within the budget.",
+  "reading_rule": "Loss rates are global-mean kg/s for the finished 1.2 atm atmosphere. Use the thermal-column loss where status is thermal_column (molecular_loss_kg_s includes Earth's tide; molecular_loss_two_body_kg_s leaves it out) and the energy-limited range beyond it. A budget row's allowed_leak_fraction is the largest fraction of sunlight below 175 nm the optical shield may let through while ultraviolet-driven loss plus the stated solar-wind loss stays within the budget. It leaves out the sunlit exosphere's loss; exosphere_loss.json (schema terluna.atmosphere.exosphere-loss/1) gives the allowed transmissions with it.",
   "assumptions": {
     "base_pressure_pa": 0.3,
     "lyman_glow_rayleigh_quiet": 1000.0,

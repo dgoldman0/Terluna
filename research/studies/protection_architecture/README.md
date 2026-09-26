@@ -15,7 +15,7 @@ with sources and status, and what each loss budget asks of it.
 | Lane | Holds for this design |
 |---|---|
 | This folder | Requirements, interfaces, the architecture trade and its record |
-| [atmosphere/loss_response](../../../atmosphere/loss_response/README.md) | Loss of the finished atmosphere against UV transmission and solar-wind exposure: the physics that sizes both functions |
+| [atmosphere/loss_response](../../../atmosphere/loss_response/README.md) | Loss of the finished atmosphere against UV transmission, protected radius and solar-wind exposure, with and without a lunar magnetosphere: the physics that sizes both functions |
 | [atmosphere/middle_atmosphere](../../../atmosphere/middle_atmosphere/README.md) | Upper-air temperature, ozone and surface ultraviolet behind each shield |
 | [climate/gcm](../../../climate/gcm/README.md) | The climate's response to dimming: about 1.9 K per 1% of sunlight, for an even cut |
 | [protection](../../../protection/README.md) | Hardware: the film's optics and spectral products, the UV transmission a swarm of cells can hold, the September reference design and its report, magnets, and the module catalogue |
@@ -30,8 +30,9 @@ with sources and status, and what each loss budget asks of it.
 | Film transmission, 0.1–210 nm | `protection/spectra/stack_short_wave.json` | atmosphere | Exists |
 | Loss response | `atmosphere/loss_response/results/loss_response.json` | this study | Exists, as a screening model |
 | Protected radius and exospheric ion production | `atmosphere/loss_response/results/absorption_radius.json` | this study | Exists, as a screening model |
+| The sunlit exosphere's losses (ions, fragments of broken molecules, the solar wind's charge exchange) with and without a lunar magnetosphere, and the allowed transmissions with them | `atmosphere/loss_response/results/exosphere_loss.json` | this study | Exists, as a screening model |
 | UV transmission a swarm of cells can hold, by design level | `protection/transmission/results/uv_transmission.json` | this study | Exists, from assumed design choices |
-| Design point: loss, cycle time, protected radius and ions at the swarm's transmission | `research/studies/protection_architecture/results/design_point.json` | this study | Exists, as a screening model |
+| Design point: loss with the exosphere, cycle time, protected radius and magnetic moment at the swarm's transmission | `research/studies/protection_architecture/results/design_point.json` | this study | Exists, as a screening model |
 | Climate response to dimming | climate/gcm runs `A28`, `A28_dim3`, `A28_dim5`, `A28_dim8` | this study | Exists for an even cut |
 | Module catalogue: each unit's mass, power, materials, lifetime and failure behaviour | `protection/modules/catalogue.json` | engineering's network model | Exists for the September reference design |
 | Supply ledger: replacement, propellant and fresh material over time | `engineering/network/results/protection_supply_ledger.json` | this study | Exists for the September reference design |
@@ -39,18 +40,25 @@ with sources and status, and what each loss budget asks of it.
 
 ## Design point
 
-`python -m research.studies.protection_architecture.run` (about 40 s, with
+`python -m research.studies.protection_architecture.run` (about 4 minutes, with
 `OPENBLAS_NUM_THREADS=1`) takes the UV transmission a swarm can hold at three
-levels of design choices and evaluates the loss response and its absorption
-step there. The swarm holds 3–4×10⁻⁵ with tight choices, about 2×10⁻⁴ with
-standard ones and 2.5×10⁻³ with relaxed ones, most of it from failed cells
-waiting to be covered. At the tight and standard levels the sky's Lyman-alpha
-glow supplies 76–98% of the upper air's heat. Behind the titania stack at the
-standard level the loss is 0.03–4.6 kg/s with the solar-wind range and Earth's
-tide, a cycle time of 22 billion years or longer, and the shield must reach
-1.9–3.1 lunar radii. Behind the 200-nm edge the loss is 0.8–40 kg/s and the
-radius 3.0–4.1 lunar radii. The ions the exosphere makes outside the shield, 2–38 kg/s behind the
-titania stack, are the largest open term. The requirements hold the details.
+levels of design choices and evaluates the loss response and its absorption and
+exosphere steps there. The swarm holds 3–4×10⁻⁵ with tight choices, about
+2×10⁻⁴ with standard ones and 2.5×10⁻³ with relaxed ones, most of it from failed
+cells waiting to be covered. At the tight and standard levels the sky's
+Lyman-alpha glow supplies 76–98% of the upper air's heat. Behind the titania
+stack at the standard level the ultraviolet-driven loss is 7×10⁻⁷–2.5 kg/s with
+Earth's tide, and the sunlit exosphere just outside a shield sized for heating
+(1.9–3.1 lunar radii) loses more: the central total is 5.7–89 kg/s with no
+magnetosphere and 2.1–47 kg/s with the September magnets, cycle times of 1.1–17
+and 2.1–48 billion years. A shield reaching 4 lunar radii, with the September
+magnets, brings the total to 0.00004–0.2 kg/s in the four cooler upper-air cases
+(500 billion years or longer), about 1 kg/s with all near-infrared heating at
+quiet Sun (100 billion years) and 16–18 kg/s with it at solar maximum (about 6
+billion years). Without magnets the solar wind's charge exchange leaves
+0.7–1.7 kg/s in the cooler cases (60–140 billion years). Behind the 200-nm edge
+the total at 4 lunar radii with the magnets is 3.7–49 kg/s (27 to 2 billion
+years). The requirements hold the details.
 
 ## Working rules
 
@@ -68,13 +76,16 @@ reasons, stated.
 The loss budget is designed across 1–100 kg/s, atmospheric cycle times of
 about 100 billion to 1 billion years, until the designs show which rate works
 best (the author's decision of 2026-09-26); requirements.md shows what each
-budget asks. Earth's tide is in the loss response and roughly doubles molecular
-escape. The design point puts a swarm with standard choices at the bottom of the
-range or below it for the modelled channels, so the loss now turns on the escape
-of ions made in the sunlit exosphere, which also decides whether
-charged-particle protection is needed. Next comes an estimate of how many of
-those ions escape, from published results for bodies in flowing plasma and from
-how far out the September design's magnets would hold off the solar wind; then
-the trade of how the shield is held, against requirement S6, with the module
-catalogue and supply ledger scoring each option; and the assessment of effects
-on Earth.
+budget asks. Earth's tide and the sunlit exosphere's losses are now in the loss
+response. The exosphere step shows that the protected radius has to reach
+beyond the exobase, because the sunlit exosphere just outside it loses ions and
+the fragments of broken molecules, and that a 1 kg/s budget needs
+charged-particle protection against the solar wind's charge exchange; for the
+cooler upper air a dipole far weaker than the September magnets would do. Next
+comes the trade of how the shield is held, against requirement S6, with the
+module catalogue and supply ledger scoring each option, now across protected
+radii of 3–10 lunar radii and with the magnets' mass and power; then a check of
+the ion fates against published plasma simulations of small magnetospheres and
+loaded exospheres, since the design now leans on them; the assessment of
+effects on Earth; and the swarm's own assumptions (formation precision, failure
+and cover times, hole size).

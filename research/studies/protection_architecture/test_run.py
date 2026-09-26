@@ -18,9 +18,18 @@ def test_design_point_holds_together():
     assert p['status'] == 'thermal_column'
     assert 0.0 < p['glow_share_of_heating'] < 1.0
     assert p['heating_as_equivalent_transmission'] > p['transmission']
-    assert p['total_loss_kg_s']['low'] == pytest.approx(p['uv_driven_loss_kg_s'] + wind['low']['total_kg_s'])
-    assert p['cycle_time_years']['high'] < p['cycle_time_years']['low']
+    none, september = p['total_loss_kg_s']['no_magnetosphere'], p['total_loss_kg_s']['september_magnetosphere']
+    assert none['low'] == pytest.approx(p['uv_driven_loss_kg_s'] + wind['low']['proton_sputtering_kg_s']
+                                        + p['exosphere']['loss_kg_s']['no_magnetosphere']['low'])
+    assert september['central'] == pytest.approx(p['uv_driven_loss_kg_s']
+                                                 + p['exosphere']['loss_kg_s']['september_magnetosphere']['central'])
+    assert september['central'] < none['central']
+    for scenario in run.SCENARIOS:
+        assert p['cycle_time_years'][scenario]['high'] < p['cycle_time_years'][scenario]['low']
     assert p['exobase_radius_R'] - 0.2 < p['protected_radius_R'] <= p['exobase_radius_R']
+    # a wider protected radius loses less
+    at = p['total_at_protected_radius_kg_s']
+    assert at['4']['september_magnetosphere'] <= at['3']['september_magnetosphere'] < september['central']
 
 
 def test_results_cover_every_level_and_shield():

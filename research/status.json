@@ -9,7 +9,7 @@
   "topics": [
     {
       "topic": "atmosphere",
-      "condition": "solved_molecular_thermal_limit; clear_sky_line_by_line_radiation_for_prescribed_columns; shield_filtered_sunlight; correlated_k_thermal_scheme_validated_to_5_30_pa; global_mean_radiative_photochemical_equilibrium_per_shield; balance_temperatures_solved_for_every_case; two_level_non_lte_co2_cooling_with_nir_thermalisation_bounds; idealised_filter_and_titania_film_leakage_heating_and_atomic_oxygen_escape_bounds; line_by_line_radiation_benchmarks_for_gcm; fluorinated_trace_gas_forcing_from_measured_bands; exobase_coupling_conditional; exobase_co2_sensitivity_150_280ppm; loss_response_screening_uv_leak_glow_and_solar_wind; shield_radius_for_thermospheric_heating; exospheric_ion_production_upper_bound; earth_tide_in_escape_from_three_body_test_molecules; escaped_air_cloud_in_earth_moon_space",
+      "condition": "solved_molecular_thermal_limit; clear_sky_line_by_line_radiation_for_prescribed_columns; shield_filtered_sunlight; correlated_k_thermal_scheme_validated_to_5_30_pa; global_mean_radiative_photochemical_equilibrium_per_shield; balance_temperatures_solved_for_every_case; two_level_non_lte_co2_cooling_with_nir_thermalisation_bounds; idealised_filter_and_titania_film_leakage_heating_and_atomic_oxygen_escape_bounds; line_by_line_radiation_benchmarks_for_gcm; fluorinated_trace_gas_forcing_from_measured_bands; exobase_coupling_conditional; exobase_co2_sensitivity_150_280ppm; loss_response_screening_uv_leak_glow_and_solar_wind; shield_radius_for_thermospheric_heating; exospheric_ion_production_upper_bound; earth_tide_in_escape_from_three_body_test_molecules; escaped_air_cloud_in_earth_moon_space; exosphere_losses_ions_fragments_charge_exchange_with_and_without_a_lunar_magnetosphere",
       "material": [
         "../atmosphere/sim/sim1.py",
         "baselines/feasibility/model.py",
@@ -29,7 +29,8 @@
         "correlated-k top layer (0.1 Pa) 30-40 K off and unused (the escape base is 0.3 Pa); fix only if later work needs correlated-k above 0.3 Pa",
         "water supply to escape",
         "the sky's interplanetary Lyman-alpha glow: in the loss response it raises the exobase 31-42 K (quiet Sun) and 47-61 K (solar maximum); its brightness, solar-cycle factor and absorption height are assumptions to firm up",
-        "loss channels not yet in the loss response: the escape of ions made in the sunlit exosphere (10-134 kg/s produced outside a heating-sized shadow at the allowed transmissions, an upper bound; the loss response caps pickup at 0.29 kg/s), atomic-oxygen escape, photochemical escape, hydrogen from water; Earth's tide is included (x1.8-2.6 on molecular escape at the allowed transmissions) but not in the energy-limited bound, and the Moon's orbital eccentricity is left out",
+        "loss channels not yet in the loss response: atomic-oxygen escape, photochemistry below the exobase, hydrogen from water; Earth's tide is included (x1.8-2.6 on molecular escape at the allowed transmissions) but not in the energy-limited bound, and the Moon's orbital eccentricity is left out",
+        "the exosphere step's ion fates are bounds and a comparison of timescales: the share of the solar wind's straight-path charge exchange that happens (0.1-1), the open-field share, convection and draining speeds, cusp entry and the extra escape a weak field can drive, to check against plasma simulations; the O2 share at the exobase (well mixed or diffusively separated) and the charge-exchange cross-section, not re-read for the step",
         "escape during the Moon's monthly passage through Earth's magnetotail (July 2026 bundle, archive/july_2026_knowledge_bundle/)"
       ],
       "next_session_task": "Couple the middle atmosphere and exobase to the 3-D circulation the author chooses."
@@ -191,7 +192,7 @@
         "holding propellant: the reference screen uses 2.8e5 kg/s, more than the feasibility report's energy-limited loss with no filter (about 5,300-195,000 kg/s at 10% efficiency); it saves mass only if much lighter, with much faster exhaust, or held without propellant",
         "plume isolation (report.md section 8): under about 94 MW of plume power may reach the upper air for a 10 kg/s allowance; whether the solar wind carries ionized exhaust from the screen into the Moon's upper air",
         "the hub architecture of report.md section 3 (industrial hub, lunar depots, heavy facilities on economical trajectories, Earth-Sun L1/L2 hubs): no design or budget yet",
-        "solar-wind subsystem: whether sputtering and pickup need a magnetic system at all; the four 100 km regional loops (about 2e14 kg) against the 2025 plasma-inflated Lunashield-L1 concept (23-40 t, unvalidated; known from a 2026-09-26 reconstruction in reference/historical/)",
+        "solar-wind subsystem: a 1 kg/s budget needs one against the solar wind's charge exchange (atmosphere/loss_response exosphere step); a dipole of about 3e19 A m^2 suffices for cool upper air, far below the four 100 km regional loops (1.5e21 A m^2, about 2e14 kg); the 2025 plasma-inflated Lunashield-L1 concept (23-40 t, unvalidated; known from a 2026-09-26 reconstruction in reference/historical/) is another candidate",
         "effects on Earth (report.md section 6): reflections toward Earth near full moon, and the screen crossing the full Moon and the Sun as seen from Earth"
       ],
       "next_session_task": "Constrain absorbed plume fractions and couple their heating to atmospheric physics; firm up the swarm's assumptions (formation control, cell failure and cover times, hypervelocity holes in the oxide film).",
@@ -245,27 +246,28 @@
     },
     {
       "topic": "protection_architecture",
-      "condition": "requirements_with_sources; loss_budget_designed_across_1_to_100_kg_s; loss_response_screening_sizes_both_functions; protected_radius_computed_2.7_to_5.2_lunar_radii; design_point_from_swarm_transmission",
+      "condition": "requirements_with_sources; loss_budget_designed_across_1_to_100_kg_s; loss_response_screening_sizes_both_functions; exosphere_losses_set_the_protected_radius_and_the_need_for_a_magnetosphere; design_point_from_swarm_transmission",
       "material": [
         "studies/protection_architecture/README.md",
         "studies/protection_architecture/requirements.md",
         "../atmosphere/loss_response/results/loss_response.json",
         "../atmosphere/loss_response/results/absorption_radius.json",
+        "../atmosphere/loss_response/results/exosphere_loss.json",
         "../protection/transmission/results/uv_transmission.json",
         "studies/protection_architecture/results/design_point.json"
       ],
       "unresolved": [
         "which loss budget in 1-100 kg/s (atmospheric cycle times of about 100 billion to 1 billion years) works best (designed across the range for now)",
-        "exospheric ion escape in the loss response; it can lower the allowed transmissions at every budget",
-        "how many of the ions made in the sunlit exosphere escape (plasma model); if most do, charged-particle protection is needed at every budget",
+        "the protected radius: 3-4 lunar radii hold the sunlit exosphere's loss under 1 kg/s at the design point's cooler upper air with the September magnets, 8.5-8.7 at solar maximum with all near-infrared heating (the author's choice with the budget)",
+        "the ion fates with and without a magnetosphere rest on bounds and timescales; check against published plasma simulations of small magnetospheres and loaded exospheres",
         "the ultraviolet cut-off: titania stack or an ozone-forming edge",
         "how the optical shield is held so that it costs less material than the air it saves (requirement S6)",
         "the dimmer's form and adjustable range, and the use of the ring outside the window",
-        "when charged-particle protection is built, and its form",
+        "when charged-particle protection is built, and its form: a 1 kg/s budget needs it against the solar wind's charge exchange; about 3e19 A m^2 suffices for the cooler upper air, 1.5e21 (September) gives margin",
         "effects on Earth (illumination)",
         "the catalogue and supply ledger hold only the September reference design"
       ],
-      "next_session_task": "Estimate how many exospheric ions escape (published results for bodies in flowing plasma; the stand-off of the September magnets), then trade how the optical shield is held against requirement S6."
+      "next_session_task": "Trade how the optical shield is held against requirement S6 across protected radii of 3-10 lunar radii, with the magnets' mass and power, in the module catalogue and supply ledger."
     }
   ],
   "new_check_record": "studies/environment_screens/checks.json",
