@@ -7,14 +7,16 @@ protection functions against a total loss budget for the protection design study
 ([research/studies/protection_architecture](../../research/studies/protection_architecture/README.md)).
 [tides.py](tides.py) finds how much Earth's tide raises escape.
 [absorption.py](absorption.py) finds how far out the optical shield must reach
-and what the sunlit exosphere beyond it produces. All three are screening
-models; their methods and limits are in their docstrings.
+and what the sunlit exosphere beyond it produces. [fate.py](fate.py) follows
+the escaping air into the space around Earth and the Moon. All four are
+screening models; their methods and limits are in their docstrings.
 
 ```sh
 OPENBLAS_NUM_THREADS=1 python -m atmosphere.loss_response.tides   # about 4 minutes; resumes if stopped
 python -m atmosphere.loss_response.model        # then the loss response, about 10 s
 python -m atmosphere.loss_response.absorption   # then the protected radius, about 10 s
-python -m pytest atmosphere/tests/test_tides.py atmosphere/tests/test_loss_response.py atmosphere/tests/test_absorption.py
+OPENBLAS_NUM_THREADS=1 python -m atmosphere.loss_response.fate    # where the escaping air goes, about 15 s
+python -m pytest atmosphere/tests/test_tides.py atmosphere/tests/test_loss_response.py atmosphere/tests/test_absorption.py atmosphere/tests/test_fate.py
 ```
 
 It needs the middle atmosphere's stored results and the WHI 2008 spectrum
@@ -27,7 +29,9 @@ in [results/tidal_escape.json](results/tidal_escape.json) (schema
 `terluna.atmosphere.tidal-escape/1`), and the protected radius and the
 exosphere's ion production in
 [results/absorption_radius.json](results/absorption_radius.json) (schema
-`terluna.atmosphere.absorption-radius/1`).
+`terluna.atmosphere.absorption-radius/1`). The cloud the escaping air forms is in
+[results/escape_fate.json](results/escape_fate.json) (schema
+`terluna.atmosphere.escape-fate/1`).
 
 ## How it works
 
@@ -125,6 +129,25 @@ radii counted to half the Hill radius, or 17–26 counted to the whole. How much
 of the production escapes depends on how the solar wind meets the ionized
 exosphere, which none of these steps models.
 
+**The escaping air makes a short-lived cloud around Earth.** Of the molecules
+with the energy to pass L1, 65% leave the Moon's Hill sphere onto orbits around
+Earth near the Moon's. Left alone, two-thirds of those would still orbit Earth
+four months later, but sunlight destroys them first: N2 is ionized in 8–19 days
+by this repository's own rate, and O2 is dissociated within days. For intact
+lifetimes of 3 to 20 days, the steady cloud holds 150–1,400 tonnes for each kg/s
+of escape. Of the escaped molecules, 91–99.5% end in space by sunlight, 0.5–4.5%
+fall back on the Moon, up to 4% leave the Earth–Moon region, and almost none
+reach Earth's atmosphere. With N2's lifetime the cloud reaches 140–155° ahead of
+and behind the Moon along its orbit, spans 200,000 to about 1 million km from
+Earth, and lies typically 40,000 km (up to 170,000 km) above or below the orbit's
+plane: a thick, nearly closed ring. Near the Moon's orbit it holds 0.1–0.35
+molecules per cm³ for each kg/s of escape, below the solar wind's 5 protons per
+cm³. Collecting a tenth of the escape from it would take a collector 80,000–
+170,000 km across, so recovering escaped air has to happen before it leaves.
+About 13% of the cloud's destruction happens inside Earth's magnetotail, the
+most that Earth's magnetosphere could hold for a while as ions; the rest ionizes
+in the solar wind, which carries it off.
+
 **Without a shield the air is lost fast.** The energy-limited loss with the full
 ultraviolet reaching the air is 335–80,000 kg/s at quiet Sun (η 0.01–0.3,
 absorption at 1.5–3 lunar radii). Deliveries slower than that would mostly be
@@ -141,8 +164,10 @@ six-radius multiplier, which understates the tide there. The tide is applied to 
 column's escape without feeding back on its structure, and the energy-limited
 bound leaves it out. The exosphere in the absorption step is two-body and
 collisionless, with no satellite particles and no depletion along each flight;
-its ion production is an upper bound on pickup loss. The band cross-sections in
-the limb are averages. Atomic-oxygen escape, photochemical escape and hydrogen
+its ion production is an upper bound on pickup loss. The escaped cloud uses
+assumed intact lifetimes and leaves out photon pressure, the Sun's tide within
+the Earth–Moon region, and plasma. The band cross-sections in the limb are
+averages. Atomic-oxygen escape, photochemical escape and hydrogen
 from water are left out. The base temperatures come from a global-mean,
 radiative-only middle atmosphere. The glow's brightness and its solar-cycle
 factor (1.5) are assumptions. The solar-wind branch is a set of scalings with

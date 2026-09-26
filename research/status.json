@@ -9,7 +9,7 @@
   "topics": [
     {
       "topic": "atmosphere",
-      "condition": "solved_molecular_thermal_limit; clear_sky_line_by_line_radiation_for_prescribed_columns; shield_filtered_sunlight; correlated_k_thermal_scheme_validated_to_5_30_pa; global_mean_radiative_photochemical_equilibrium_per_shield; balance_temperatures_solved_for_every_case; two_level_non_lte_co2_cooling_with_nir_thermalisation_bounds; idealised_filter_and_titania_film_leakage_heating_and_atomic_oxygen_escape_bounds; line_by_line_radiation_benchmarks_for_gcm; fluorinated_trace_gas_forcing_from_measured_bands; exobase_coupling_conditional; exobase_co2_sensitivity_150_280ppm; loss_response_screening_uv_leak_glow_and_solar_wind; shield_radius_for_thermospheric_heating; exospheric_ion_production_upper_bound; earth_tide_in_escape_from_three_body_test_molecules",
+      "condition": "solved_molecular_thermal_limit; clear_sky_line_by_line_radiation_for_prescribed_columns; shield_filtered_sunlight; correlated_k_thermal_scheme_validated_to_5_30_pa; global_mean_radiative_photochemical_equilibrium_per_shield; balance_temperatures_solved_for_every_case; two_level_non_lte_co2_cooling_with_nir_thermalisation_bounds; idealised_filter_and_titania_film_leakage_heating_and_atomic_oxygen_escape_bounds; line_by_line_radiation_benchmarks_for_gcm; fluorinated_trace_gas_forcing_from_measured_bands; exobase_coupling_conditional; exobase_co2_sensitivity_150_280ppm; loss_response_screening_uv_leak_glow_and_solar_wind; shield_radius_for_thermospheric_heating; exospheric_ion_production_upper_bound; earth_tide_in_escape_from_three_body_test_molecules; escaped_air_cloud_in_earth_moon_space",
       "material": [
         "../atmosphere/sim/sim1.py",
         "baselines/feasibility/model.py",

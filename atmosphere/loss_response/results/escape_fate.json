@@ -1,0 +1,105 @@
+{
+ "schema": "terluna.atmosphere.escape-fate/1",
+ "producer": {
+  "domain": "atmosphere",
+  "files": {
+   "atmosphere/loss_response/fate.py": "97fbea999b3f0e06",
+   "atmosphere/loss_response/tides.py": "c24f3996aa309f3c"
+  }
+ },
+ "evidence": "Test molecules in the circular restricted Earth-Moon problem, launched with the outgoing Maxwellian flux above the L1 energy from an exobase of 3 lunar radii at a Jeans parameter of 11, followed for 120 days; the cloud weights them by an assumed intact lifetime. No Sun, photon pressure, plasma, collisions or orbital eccentricity.",
+ "reading_rule": "clouds[i] is the steady cloud of escaped air for intact lifetime lifetimes_days[i]: its mass per kg/s of escape, a number density near the Moon's orbit per kg/s of escape, where it lies (angles ahead of the Moon, distances from Earth, heights), and the share of escaped molecules that end each way. Shares count molecules that left the Moon's Hill sphere.",
+ "exobase_radius_R": 3.0,
+ "jeans_lambda": 11.0,
+ "samples": 6000,
+ "share_leaving_the_hill_sphere": 0.6475,
+ "outcomes_unweighted": {
+  "moon": 601,
+  "earth": 5,
+  "left_region": 762,
+  "still_in_region": 2517
+ },
+ "clouds": [
+  {
+   "lifetime_days": 3.0,
+   "cloud_kg_per_kg_s": 153529.18694728788,
+   "molecules_per_cm3_near_the_moons_orbit_per_kg_s": 0.08717853469638548,
+   "ahead_of_the_moon_share": 0.4922309601601168,
+   "angle_from_the_moon_deg_5_50_95": [
+    -29.702948096661693,
+    -0.2560691164471673,
+    47.87965549844693
+   ],
+   "distance_from_earth_km_5_50_95": [
+    221512.1367452045,
+    394861.8612130575,
+    611029.5150197614
+   ],
+   "height_above_orbit_plane_km_50_95": [
+    39925.93800968661,
+    134794.0663599104
+   ],
+   "fates": {
+    "back_on_the_moon": 0.005077059542417221,
+    "into_earths_atmosphere": 2.0160132843400177e-12,
+    "left_the_earth_moon_region": 0.0002653415543159601,
+    "destroyed_by_sunlight": 0.9946575989012508
+   },
+   "destroyed_inside_magnetotail_share": 0.13755349170721703
+  },
+  {
+   "lifetime_days": 10.0,
+   "cloud_kg_per_kg_s": 669386.0007094312,
+   "molecules_per_cm3_near_the_moons_orbit_per_kg_s": 0.23268921107804086,
+   "ahead_of_the_moon_share": 0.45418429595538684,
+   "angle_from_the_moon_deg_5_50_95": [
+    -135.58928602932266,
+    -2.9433002481447135,
+    143.31221898111139
+   ],
+   "distance_from_earth_km_5_50_95": [
+    201999.015301532,
+    410229.1251912711,
+    915199.3805422869
+   ],
+   "height_above_orbit_plane_km_50_95": [
+    37227.98791113241,
+    165705.78276144387
+   ],
+   "fates": {
+    "back_on_the_moon": 0.026678436554659464,
+    "into_earths_atmosphere": 1.9399371615527765e-06,
+    "left_the_earth_moon_region": 0.013399191354243953,
+    "destroyed_by_sunlight": 0.9599204321539351
+   },
+   "destroyed_inside_magnetotail_share": 0.13246296482330577
+  },
+  {
+   "lifetime_days": 20.0,
+   "cloud_kg_per_kg_s": 1379446.561721128,
+   "molecules_per_cm3_near_the_moons_orbit_per_kg_s": 0.34742719392155663,
+   "ahead_of_the_moon_share": 0.44673182808268225,
+   "angle_from_the_moon_deg_5_50_95": [
+    -154.58089449662594,
+    -5.060496310596726,
+    156.01180376616094
+   ],
+   "distance_from_earth_km_5_50_95": [
+    197904.44503081837,
+    415434.24976518546,
+    1052722.9364927546
+   ],
+   "height_above_orbit_plane_km_50_95": [
+    36003.69418830088,
+    170781.970193252
+   ],
+   "fates": {
+    "back_on_the_moon": 0.04462215776618136,
+    "into_earths_atmosphere": 4.430171511434323e-05,
+    "left_the_earth_moon_region": 0.04090971944399829,
+    "destroyed_by_sunlight": 0.914423821074706
+   },
+   "destroyed_inside_magnetotail_share": 0.1308419811671353
+  }
+ ]
+}
