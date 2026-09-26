@@ -473,6 +473,18 @@ against the full shield:
 - **Humid heat is estimated** from the model's lowest layer (about 0.9 km up)
   with each window's mean humidity at its hottest half-hour; the air at the
   ground could be about a degree more humid.
+- **Winter lives aloft.** The air cools about 0.6 K per km near the ground and
+  0.8 K per km on average, so the 0 °C level stands 25.4 km above sea level
+  (24.5–26.3 km over places and times, the same at the equator and poles, by
+  day and by night), −10 °C at 36 km, −20 °C at 45 km and −40 °C at 61 km. The
+  highest land, 8.4 km, never reaches it. The air thins on the way: at 0 °C it
+  is 0.72 atm with 12.8 kPa of oxygen, what Earth's air gives at about 4,200 m;
+  at −10 °C 0.58 atm and 10.3 kPa (about 6,100 m); at −20 °C 0.48 atm and
+  8.5 kPa (about 7,700 m). Snow forms in the clouds above 25 km and melts on
+  the way down.
+
+The author chose the 5% dimmer shield (2026-09-26); the geography domain's
+lakes now come from its climate.
 
 ### Cloud amount: what published models say
 

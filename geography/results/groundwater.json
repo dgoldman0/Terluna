@@ -24,45 +24,45 @@
  "standing_water": {
   "seas_kg": 1.071e+19,
   "seas_layer_m": 282.3,
-  "rain_fed_lakes_kg": 3.761e+18,
-  "lakes_layer_m": 99.2,
-  "lakes_from": "results/drainage.json (runoff from climate run A28, years [20, 29])"
+  "rain_fed_lakes_kg": 3.508e+18,
+  "lakes_layer_m": 92.5,
+  "lakes_from": "results/drainage.json (runoff from climate run A28_dim5, years [15, 24])"
  },
  "crust": [
   {
    "saturation_depth_m": 1000.0,
    "crust_layer_m": 131.2,
    "crust_kg": 4.976e+18,
-   "total_kg": 1.944e+19,
-   "total_over_seas": 1.82
+   "total_kg": 1.919e+19,
+   "total_over_seas": 1.79
   },
   {
    "saturation_depth_m": 2000.0,
    "crust_layer_m": 254.6,
    "crust_kg": 9.657e+18,
-   "total_kg": 2.413e+19,
-   "total_over_seas": 2.25
+   "total_kg": 2.387e+19,
+   "total_over_seas": 2.23
   },
   {
    "saturation_depth_m": 4000.0,
    "crust_layer_m": 480.0,
    "crust_kg": 1.821e+19,
-   "total_kg": 3.268e+19,
-   "total_over_seas": 3.05
+   "total_kg": 3.242e+19,
+   "total_over_seas": 3.03
   },
   {
    "saturation_depth_m": 10000.0,
    "crust_layer_m": 1012.6,
    "crust_kg": 3.841e+19,
-   "total_kg": 5.288e+19,
-   "total_over_seas": 4.94
+   "total_kg": 5.263e+19,
+   "total_over_seas": 4.92
   },
   {
    "saturation_depth_m": 20000.0,
    "crust_layer_m": 1563.4,
    "crust_kg": 5.93e+19,
-   "total_kg": 7.377e+19,
-   "total_over_seas": 6.89
+   "total_kg": 7.352e+19,
+   "total_over_seas": 6.87
   }
  ],
  "producer": {
