@@ -1,0 +1,208 @@
+{
+  "schema": "terluna.engineering.protection-supply-ledger/1",
+  "producer": {
+    "domain": "engineering",
+    "files": {
+      "engineering/network/ledger.py": "f06f0df62a7943c8",
+      "engineering/network/model.py": "78f7ab129144d567",
+      "protection/modules/catalogue.json": "6f77f73bcb47a2e3",
+      "atmosphere/loss_response/results/loss_response.json": "a92dfc196c543f22"
+    }
+  },
+  "evidence": "Arithmetic on the protection module catalogue: replacement flows for the lifetime scenarios, fresh material after recovery, irreversible propellant and power. Inherits every assumption of the September reference design the catalogue records.",
+  "reading_rule": "Flows are kg/s averaged over the service interval. irreversible_kg_s is fresh material plus propellant, the material the protection consumes for good; compare it with the loss of air it prevents (requirement_S6).",
+  "commodities": {
+    "nitrogen_feedstock": "nitrogen-bearing feedstock and product",
+    "water_oxygen_hydrogen": "water, oxygen and hydrogen",
+    "carbon_nutrients": "carbon and nutrients",
+    "structural_materials": "structural metals, glass, silicates and oxides such as titania",
+    "conductors": "conductor and superconductor material",
+    "reactor_fuels": "reactor fuels and breeding materials",
+    "propellant": "propellant and reaction mass",
+    "precision_components": "precision components, electronics and power hardware",
+    "replacement_hardware": "finished replacement units",
+    "waste_coproducts": "rejected waste and coproducts"
+  },
+  "service_years": 1000000000.0,
+  "rebuild_j_kg": 100000000.0,
+  "scenarios": [
+    {
+      "life_years": 20.0,
+      "recovery": 0.99,
+      "gross_replacement_kg_s": 348983.32039926667,
+      "gross_by_commodity_kg_s": {
+        "structural_materials": 344448.9599992625,
+        "precision_components": 1682.432496741594,
+        "conductors": 2851.9279032626055
+      },
+      "gross_by_module_kg_s": {
+        "optical_cell": 7735.096852771896,
+        "holding_pack": 1682.432496741594,
+        "regional_magnet_installation": 339565.7910497532
+      },
+      "magnet_planning_allowance_gross_kg_s": [
+        475321.31721043424,
+        4753213.172104343
+      ],
+      "fresh_material_kg_s": 3489.83320399267,
+      "propellant_kg_s": 278474.6578312647,
+      "irreversible_kg_s": 281964.4910352574,
+      "rebuild_power_w": 34898332039926.668,
+      "holding_power_mean_w": 179019422891527.34,
+      "over_service_kg": {
+        "fresh_material": 1.1013076031831908e+20,
+        "propellant": 8.787991861975919e+21
+      }
+    },
+    {
+      "life_years": 20.0,
+      "recovery": 0.999,
+      "gross_replacement_kg_s": 348983.32039926667,
+      "gross_by_commodity_kg_s": {
+        "structural_materials": 344448.9599992625,
+        "precision_components": 1682.432496741594,
+        "conductors": 2851.9279032626055
+      },
+      "gross_by_module_kg_s": {
+        "optical_cell": 7735.096852771896,
+        "holding_pack": 1682.432496741594,
+        "regional_magnet_installation": 339565.7910497532
+      },
+      "magnet_planning_allowance_gross_kg_s": [
+        475321.31721043424,
+        4753213.172104343
+      ],
+      "fresh_material_kg_s": 348.983320399267,
+      "propellant_kg_s": 278474.6578312647,
+      "irreversible_kg_s": 278823.64115166396,
+      "rebuild_power_w": 34898332039926.668,
+      "holding_power_mean_w": 179019422891527.34,
+      "over_service_kg": {
+        "fresh_material": 1.1013076031831906e+19,
+        "propellant": 8.787991861975919e+21
+      }
+    },
+    {
+      "life_years": 100.0,
+      "recovery": 0.99,
+      "gross_replacement_kg_s": 69796.66407985333,
+      "gross_by_commodity_kg_s": {
+        "structural_materials": 68889.79199985249,
+        "precision_components": 336.4864993483188,
+        "conductors": 570.3855806525211
+      },
+      "gross_by_module_kg_s": {
+        "optical_cell": 1547.0193705543793,
+        "holding_pack": 336.4864993483188,
+        "regional_magnet_installation": 67913.15820995063
+      },
+      "magnet_planning_allowance_gross_kg_s": [
+        95064.26344208686,
+        950642.6344208685
+      ],
+      "fresh_material_kg_s": 697.966640798534,
+      "propellant_kg_s": 278474.6578312647,
+      "irreversible_kg_s": 279172.62447206327,
+      "rebuild_power_w": 6979666407985.333,
+      "holding_power_mean_w": 179019422891527.34,
+      "over_service_kg": {
+        "fresh_material": 2.2026152063663813e+19,
+        "propellant": 8.787991861975919e+21
+      }
+    },
+    {
+      "life_years": 100.0,
+      "recovery": 0.999,
+      "gross_replacement_kg_s": 69796.66407985333,
+      "gross_by_commodity_kg_s": {
+        "structural_materials": 68889.79199985249,
+        "precision_components": 336.4864993483188,
+        "conductors": 570.3855806525211
+      },
+      "gross_by_module_kg_s": {
+        "optical_cell": 1547.0193705543793,
+        "holding_pack": 336.4864993483188,
+        "regional_magnet_installation": 67913.15820995063
+      },
+      "magnet_planning_allowance_gross_kg_s": [
+        95064.26344208686,
+        950642.6344208685
+      ],
+      "fresh_material_kg_s": 69.7966640798534,
+      "propellant_kg_s": 278474.6578312647,
+      "irreversible_kg_s": 278544.45449534454,
+      "rebuild_power_w": 6979666407985.333,
+      "holding_power_mean_w": 179019422891527.34,
+      "over_service_kg": {
+        "fresh_material": 2.2026152063663816e+18,
+        "propellant": 8.787991861975919e+21
+      }
+    },
+    {
+      "life_years": 1000.0,
+      "recovery": 0.99,
+      "gross_replacement_kg_s": 6979.6664079853335,
+      "gross_by_commodity_kg_s": {
+        "structural_materials": 6888.97919998525,
+        "precision_components": 33.64864993483188,
+        "conductors": 57.03855806525211
+      },
+      "gross_by_module_kg_s": {
+        "optical_cell": 154.70193705543792,
+        "holding_pack": 33.64864993483188,
+        "regional_magnet_installation": 6791.315820995063
+      },
+      "magnet_planning_allowance_gross_kg_s": [
+        9506.426344208685,
+        95064.26344208686
+      ],
+      "fresh_material_kg_s": 69.7966640798534,
+      "propellant_kg_s": 278474.6578312647,
+      "irreversible_kg_s": 278544.45449534454,
+      "rebuild_power_w": 697966640798.5333,
+      "holding_power_mean_w": 179019422891527.34,
+      "over_service_kg": {
+        "fresh_material": 2.2026152063663816e+18,
+        "propellant": 8.787991861975919e+21
+      }
+    },
+    {
+      "life_years": 1000.0,
+      "recovery": 0.999,
+      "gross_replacement_kg_s": 6979.6664079853335,
+      "gross_by_commodity_kg_s": {
+        "structural_materials": 6888.97919998525,
+        "precision_components": 33.64864993483188,
+        "conductors": 57.03855806525211
+      },
+      "gross_by_module_kg_s": {
+        "optical_cell": 154.70193705543792,
+        "holding_pack": 33.64864993483188,
+        "regional_magnet_installation": 6791.315820995063
+      },
+      "magnet_planning_allowance_gross_kg_s": [
+        9506.426344208685,
+        95064.26344208686
+      ],
+      "fresh_material_kg_s": 6.97966640798534,
+      "propellant_kg_s": 278474.6578312647,
+      "irreversible_kg_s": 278481.6374976727,
+      "rebuild_power_w": 697966640798.5333,
+      "holding_power_mean_w": 179019422891527.34,
+      "over_service_kg": {
+        "fresh_material": 2.2026152063663818e+17,
+        "propellant": 8.787991861975919e+21
+      }
+    }
+  ],
+  "propellant_kg_s": 278474.6578312647,
+  "holding_power_mean_w": 179019422891527.34,
+  "requirement_S6": {
+    "unshielded_loss_kg_s": [
+      335.1816488453076,
+      80443.59572287381
+    ],
+    "propellant_over_highest_unshielded_loss": 3.4617380703692433,
+    "verdict": "the holding scheme spends more material than the air it saves"
+  }
+}

@@ -18,8 +18,8 @@ with sources and status, and what each loss budget asks of it.
 | [atmosphere/loss_response](../../../atmosphere/loss_response/README.md) | Loss of the finished atmosphere against ultraviolet leak and solar-wind exposure: the physics that sizes both functions |
 | [atmosphere/middle_atmosphere](../../../atmosphere/middle_atmosphere/README.md) | Upper-air temperature, ozone and surface ultraviolet behind each shield |
 | [climate/gcm](../../../climate/gcm/README.md) | The climate's response to dimming: about 1.9 K per 1% of sunlight, for an even cut |
-| [protection](../../../protection/README.md) | Hardware: the film's optics and spectral products, the September reference design and its report, magnets; the module catalogue, to build |
-| [engineering](../../../engineering/README.md) | Industry: the reconstructed 19 September architecture; the network model and supply ledger, to build |
+| [protection](../../../protection/README.md) | Hardware: the film's optics and spectral products, the September reference design and its report, magnets, and the module catalogue |
+| [engineering](../../../engineering/README.md) | Industry: the reconstructed 19 September architecture, and the network model's vocabulary with a supply ledger for the protection hardware |
 | [illumination](../../../illumination/) | The shield's effects on Earth and on the sky, to build |
 
 ## Interfaces
@@ -30,8 +30,8 @@ with sources and status, and what each loss budget asks of it.
 | Film transmission, 0.1–210 nm | `protection/spectra/stack_short_wave.json` | atmosphere | Exists |
 | Loss response | `atmosphere/loss_response/results/loss_response.json` | this study | Exists, as a screening model |
 | Climate response to dimming | climate/gcm runs `A28`, `A28_dim3`, `A28_dim5`, `A28_dim8` | this study | Exists for an even cut |
-| Module catalogue: each unit's mass, power, materials, lifetime and failure behaviour | protection | engineering's network model | To build |
-| Supply ledger: replacement, propellant and fresh material over time | engineering | this study | To build |
+| Module catalogue: each unit's mass, power, materials, lifetime and failure behaviour | `protection/modules/catalogue.json` | engineering's network model | Exists for the September reference design |
+| Supply ledger: replacement, propellant and fresh material over time | `engineering/network/results/protection_supply_ledger.json` | this study | Exists for the September reference design |
 | Effects on Earth: reflections, crossings of the full Moon and the Sun | illumination | this study | To build |
 
 ## Working rules
@@ -50,5 +50,6 @@ reasons, stated.
 The loss budget is the author's to set, and requirements.md shows what each
 choice asks. The calculations that follow are the radius of the ultraviolet
 absorption layer in the hotter upper-air profiles, which sizes the shield; the
-trade of how the shield is held, against requirement S6; a first module
-catalogue and supply ledger; and the assessment of effects on Earth.
+trade of how the shield is held, against requirement S6, with the module
+catalogue and supply ledger scoring each option; and the assessment of effects
+on Earth.

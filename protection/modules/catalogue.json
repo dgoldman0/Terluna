@@ -1,0 +1,105 @@
+{
+  "schema": "terluna.protection.module-catalogue/1",
+  "producer": {
+    "domain": "protection",
+    "files": {
+      "modules/catalogue.py": "30f3246dde2f54e1",
+      "results/results.json": "121b68a0c309c5a0",
+      "results/maintenance.csv": "1fd67f9b58c5960a",
+      "results/anchor_magnets.csv": "d0d6fc1244ea4142",
+      "results/magnet_cryogenics.csv": "a317ea39a5ca2687"
+    }
+  },
+  "evidence": "Reference values of the September 9 protection design, taken from its stored model outputs. They are component budgets, not a chosen or optimized design; the thrust-held screen fails requirement S6.",
+  "reading_rule": "count x unit_mass_kg is a module family's held mass. Divide by a lifetime scenario for gross replacement; consumables are continuous flows. The magnet mass is the ideal conductor and support floor; the report plans for 3e14-3e15 kg in all.",
+  "reference_design": {
+    "distance_km": 78000.0,
+    "aperture_area_m2": 97640436976413.77,
+    "held_mass_kg": 6112313957060.487,
+    "mean_power_w": 179019422891527.34,
+    "peak_power_w": 318561190555035.1,
+    "propellant_kg_s": 278474.6578312647
+  },
+  "modules": [
+    {
+      "id": "optical_cell",
+      "function": "optical",
+      "count": 976404.3697641377,
+      "description": "A 10 x 10 km cell of the titania-silica film with its anti-reflection layers, framing and metrology",
+      "unit_mass_kg": 5000000.0,
+      "materials_kg": {
+        "titania": 390000.0,
+        "silica": 2200000.0,
+        "framing_coatings_metrology": 2409999.9999999995
+      },
+      "lifetime_years_scenarios": [
+        20.0,
+        100.0,
+        1000.0
+      ],
+      "failure": "Local: a missing cell opens about 1e-6 of the aperture; overlaps and replacement overlays cover it"
+    },
+    {
+      "id": "holding_pack",
+      "function": "holding",
+      "count": 976404.3697641377,
+      "description": "One cell's share of the power, processing, thruster and thermal hardware that holds the screen",
+      "unit_mass_kg": 1087531.6293801083,
+      "materials_kg": {
+        "power_and_propulsion_hardware": 1087531.6293801083
+      },
+      "power_mean_w": 183345577.3398184,
+      "power_peak_w": 326259488.8140325,
+      "consumables_kg_s": {
+        "propellant": 0.28520423141749524
+      },
+      "exhaust_speed_m_s": 30000.0,
+      "jet_efficiency": 0.7,
+      "specific_power_w_kg": 300.0,
+      "lifetime_years_scenarios": [
+        20.0,
+        100.0,
+        1000.0
+      ],
+      "failure": "Local loss of thrust; an unpowered screen falls toward the Moon within days, so packs need redundancy"
+    },
+    {
+      "id": "propellant_buffer",
+      "function": "holding",
+      "count": 976404.3697641377,
+      "description": "One cell's share of the seven-day propellant buffer",
+      "unit_mass_kg": 172491.51916130114,
+      "materials_kg": {
+        "propellant": 172491.51916130114
+      },
+      "lifetime_years_scenarios": [],
+      "failure": "Consumed and refilled continuously"
+    },
+    {
+      "id": "regional_magnet_installation",
+      "function": "charged_particle",
+      "count": 4,
+      "description": "A 100 km radius superconducting loop near a lunar pole, one of four with a combined moment of 1.5e21 A m^2",
+      "unit_mass_kg": 53579407038158.45,
+      "materials_kg": {
+        "superconductor_composite": 450000000000.0,
+        "tensile_support": 53129407038158.45
+      },
+      "stored_energy_j": 4.1938825102009565e+19,
+      "power_mean_w_range": [
+        3947841760.435743,
+        197392088021.78717
+      ],
+      "planning_allowance_kg_total": [
+        300000000000000.0,
+        3000000000000000.0
+      ],
+      "lifetime_years_scenarios": [
+        20.0,
+        100.0,
+        1000.0
+      ],
+      "failure": "Quench: the coupled stored energy must be contained or recovered"
+    }
+  ]
+}

@@ -116,6 +116,20 @@ cavities, then more nodes whose cavities grow and merge until they fill a
 protected volume, then redundancy. Paths inside the lineage refer to the
 recovery dump's layout ([research/archive_status.md](../research/archive_status.md)).
 
+## Module catalogue
+
+[modules/catalogue.py](modules/catalogue.py) writes
+[modules/catalogue.json](modules/catalogue.json) (schema
+`terluna.protection.module-catalogue/1`): each replaceable unit of the September
+reference design with its count, mass, materials, power, consumables and
+lifetime scenarios. There are about 976,000 optical cells of 10 × 10 km at
+5×10⁶ kg each, their share of the holding hardware (1.1×10⁶ kg, 183 MW mean power
+and 0.29 kg/s of propellant per cell) and of the propellant buffer, and the four
+regional magnet installations. The values come only from this model's stored
+outputs; the engineering domain's supply ledger
+([engineering/network](../engineering/network/README.md)) reads the catalogue as
+demand. Regenerate it with `python -m protection.modules.catalogue`.
+
 ## Condition and remaining questions
 
 - Optical layers use measured constituent constants plus effective-medium and normal-incidence approximations. This is not a measured complete coating, irradiated lifetime test, or gap-free aperture.

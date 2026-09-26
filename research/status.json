@@ -143,11 +143,13 @@
     },
     {
       "topic": "engineering",
-      "condition": "conditional_analytical_accounts",
+      "condition": "conditional_analytical_accounts; network_vocabulary_with_passive_failure_check; protection_supply_ledger",
       "material": [
         "../engineering/reference/",
         "baselines/feasibility/model.py",
-        "../engineering/reference/industrial_architecture/"
+        "../engineering/reference/industrial_architecture/",
+        "../engineering/network/",
+        "../engineering/network/results/protection_supply_ledger.json"
       ],
       "unresolved": [
         "complete source-to-use pathways",
@@ -160,11 +162,11 @@
         "the cislunar terminal layer: remote braking, capture, inspection and quarantine, repacking, buffering, metered delivery and kinetic-energy recovery; where its catchers sit so that Earth never lies behind them",
         "three power ledgers kept apart (civilization-wide power, the Open Moon's allocation, and where heat is released), and the power sequence from fission bootstrap through fusion to near-Sun collection with power beaming"
       ],
-      "next_session_task": "Add missing inventories and a small bottleneck/replacement network."
+      "next_session_task": "Add source, transport and capture nodes with capacities and the delivery routes to the network model, then score the protection holding options in the supply ledger."
     },
     {
       "topic": "protection",
-      "condition": "historical_component_model; film_short_wave_transmission_computed_0.1_210_nm",
+      "condition": "historical_component_model; film_short_wave_transmission_computed_0.1_210_nm; module_catalogue_of_the_september_reference",
       "material": [
         "../protection/model.py",
         "../protection/verify.py",
@@ -175,7 +177,8 @@
         "studies/environment_screens/results/spectral_audit.json",
         "studies/environment_screens/results/plume_heat_interface.csv",
         "../protection/report.md",
-        "../protection/reference/historical/"
+        "../protection/reference/historical/",
+        "../protection/modules/catalogue.json"
       ],
       "unresolved": [
         "light bypassing the film through gaps, pinholes and edges of the aperture, and off-normal incidence",
@@ -254,7 +257,8 @@
         "the protected radius at the design heating (requirement O2)",
         "the dimmer's form and adjustable range, and the use of the ring outside the window",
         "whether and when charged-particle protection is needed",
-        "the module catalogue, supply ledger and effects on Earth"
+        "effects on Earth (illumination)",
+        "the catalogue and supply ledger hold only the September reference design"
       ],
       "next_session_task": "Compute the ultraviolet absorption radius for the hotter profiles, then trade how the optical shield is held against requirement S6."
     }
