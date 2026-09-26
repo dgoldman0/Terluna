@@ -1761,6 +1761,266 @@
           "disposition": "historical_bundle_imported_verbatim_2026-09-26; its recovered canon is in research/decisions.md and its reference world is superseded"
         }
       ]
+    },
+    {
+      "name": "Terluna_industry_energy_logistics_recovery_2026-09-26.zip",
+      "sha256": "2d3ae5b2baf417e10ab706e97d13a3c72c7d5b9b0bba10214898e524c0207824",
+      "bytes": 1128791,
+      "description": "Industry, energy and logistics recovery bundle prepared on 2026-09-26 in the author's other project space, recovering the 19 September 2026 industry discussion; it also carries copies of September baseline, planning and seed files.",
+      "members": [
+        {
+          "name": "terluna_industry_bundle/calculations.py",
+          "bytes": 5205,
+          "sha256": "c1b5c26e56446bd122a83f66782f39dbeb99e11a98ca4477826d81ee9ce33d03",
+          "destination": "engineering/reference/industrial_architecture/calculations.py",
+          "disposition": "recovered_design_history_imported_verbatim_2026-09-26"
+        },
+        {
+          "name": "terluna_industry_bundle/REPO_PATH_MAP.md",
+          "bytes": 4716,
+          "sha256": "05581ce4dbd89ab87f095b1bd1fd9feddc60e5e843d7825d5ce8b9d94fca8c29",
+          "destination": null,
+          "disposition": "snapshot map of the repository at fdd173c; not imported"
+        },
+        {
+          "name": "terluna_industry_bundle/archived_baseline/growth.csv",
+          "bytes": 1095,
+          "sha256": "d371c2b2054986d996af8a4de0ea4baeef347de4e02b16a1c291a60d7fc6de95",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Terraforming_Model.zip:results/growth.csv"
+        },
+        {
+          "name": "terluna_industry_bundle/archived_baseline/transfer_routes.csv",
+          "bytes": 477,
+          "sha256": "d4750fb437a270184c421372a14e9dd10c96c7bbc65d347e4d075c26eb5ecaee",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Terraforming_Model.zip:results/transfer_routes.csv"
+        },
+        {
+          "name": "terluna_industry_bundle/archived_baseline/industrial_growth.png",
+          "bytes": 103227,
+          "sha256": "1dc452d4c4d70f4b9994de16f38841e96d5792c0493c9846619e6d9e259b3176",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Terraforming_Model.zip:results/industrial_growth.png"
+        },
+        {
+          "name": "terluna_industry_bundle/archived_baseline/model.py",
+          "bytes": 14829,
+          "sha256": "3a6c76f3437f0dab224472f8d3fd20cd90a7d82dffa8d46ec6a562702eae00c2",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Terraforming_Model.zip:model.py"
+        },
+        {
+          "name": "terluna_industry_bundle/archived_baseline/report.md",
+          "bytes": 75346,
+          "sha256": "37703255c3f6b576a1486a7d77c5c7b8bfe82206df611bb3f6be95b2ff5eef13",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Terraforming_Model.zip:report.md"
+        },
+        {
+          "name": "terluna_industry_bundle/archived_baseline/thermal_response.csv",
+          "bytes": 1024,
+          "sha256": "44099868ecd0b6ca4dd181464add25617132d894b85e4b449688048af50dc686",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Terraforming_Model.zip:results/thermal_response.csv"
+        },
+        {
+          "name": "terluna_industry_bundle/archived_baseline/maintenance_ratio.png",
+          "bytes": 73238,
+          "sha256": "dc465b47bab8820141e63ac459bc1eee659ed81741933712bc80f07cc6dc9d91",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Terraforming_Model.zip:results/maintenance_ratio.png"
+        },
+        {
+          "name": "terluna_industry_bundle/archived_baseline/maintenance.csv",
+          "bytes": 340,
+          "sha256": "f4d0064236ca4c5dcd9531a7cfdad07c379cc6991dda6a5f7b0e0da6e2e7f42e",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Terraforming_Model.zip:results/maintenance.csv"
+        },
+        {
+          "name": "terluna_industry_bundle/archived_baseline/logistics.csv",
+          "bytes": 2323,
+          "sha256": "334e27d6b25b97ce02a9b29303c373d52e4b1cfdbca404753e0ea58a11d3a9cc",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Terraforming_Model.zip:results/logistics.csv"
+        },
+        {
+          "name": "terluna_industry_bundle/archived_baseline/README.md",
+          "bytes": 2578,
+          "sha256": "c70c32b29eb7bd86cdefa463fa45592bc3573566270a711745501cd7174c1ce5",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Terraforming_Model.zip:README.md"
+        },
+        {
+          "name": "terluna_industry_bundle/archived_baseline/results.json",
+          "bytes": 29074,
+          "sha256": "5ed47da437dd22aa0f92e946a26389b0c2404322ce83c5c59881243b5b8a7788",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Lunar_Terraforming_Model.zip:results/results.json"
+        },
+        {
+          "name": "terluna_industry_bundle/ARCHIVED_REPORT_INDUSTRY_SECTIONS.md",
+          "bytes": 17344,
+          "sha256": "1d5cd780341c34a16f2c703ecb959d0e355f361c59805f41b6d277399bd8897c",
+          "destination": null,
+          "disposition": "extract of the feasibility report, imported in full at research/baselines/feasibility/report.md; not imported"
+        },
+        {
+          "name": "terluna_industry_bundle/HISTORY_RECOVERY_NOTES.md",
+          "bytes": 4969,
+          "sha256": "be9cf021ce14530b9a45b59bf361e358c91c3b4ba1654e5b42e01e1c5137b5ef",
+          "destination": "engineering/reference/industrial_architecture/HISTORY_RECOVERY_NOTES.md",
+          "disposition": "recovered_design_history_imported_verbatim_2026-09-26"
+        },
+        {
+          "name": "terluna_industry_bundle/RECOVERED_INDUSTRIAL_ARCHITECTURE.md",
+          "bytes": 17985,
+          "sha256": "1ebc2e831751882746007b79965e928265125ad0e7e130b79c2ecc84eeb46dde",
+          "destination": "engineering/reference/industrial_architecture/RECOVERED_INDUSTRIAL_ARCHITECTURE.md",
+          "disposition": "recovered_design_history_imported_verbatim_2026-09-26"
+        },
+        {
+          "name": "terluna_industry_bundle/SHA256SUMS.txt",
+          "bytes": 3474,
+          "sha256": "424f5dcce5fa0b0d2a49711c2d03fea244bb2287d56089e1b9610de2d3f02529",
+          "destination": null,
+          "disposition": "bundle checksum list; not imported"
+        },
+        {
+          "name": "terluna_industry_bundle/CALCULATION_PROVENANCE.md",
+          "bytes": 4703,
+          "sha256": "5ff11daf7cd73d53a8e939371bb3228c248f58eceeae9229ba7cdbb19c393c70",
+          "destination": "engineering/reference/industrial_architecture/CALCULATION_PROVENANCE.md",
+          "disposition": "recovered_design_history_imported_verbatim_2026-09-26"
+        },
+        {
+          "name": "terluna_industry_bundle/EVIDENCE_LEDGER.csv",
+          "bytes": 3072,
+          "sha256": "5de282b44271cdb887fe3e613695dc2d1c8ee51da951177e1fce00e0ea813be7",
+          "destination": "engineering/reference/industrial_architecture/EVIDENCE_LEDGER.csv",
+          "disposition": "recovered_design_history_imported_verbatim_2026-09-26"
+        },
+        {
+          "name": "terluna_industry_bundle/CURRENT_REPO_AUDIT.json",
+          "bytes": 1712,
+          "sha256": "6984644b05672500f05e366ac45b7e351112b364d5f7855ddab851e9b9c50125",
+          "destination": null,
+          "disposition": "snapshot audit of the repository at fdd173c; not imported"
+        },
+        {
+          "name": "terluna_industry_bundle/results/packet_kinetic_energy.csv",
+          "bytes": 269,
+          "sha256": "e8ade40af690da7c5d04866136635e43621efef2d649cf5e0a1fb9c55fc73c62",
+          "destination": "engineering/reference/industrial_architecture/results/packet_kinetic_energy.csv",
+          "disposition": "recovered_design_history_imported_verbatim_2026-09-26"
+        },
+        {
+          "name": "terluna_industry_bundle/results/arrival_heat.csv",
+          "bytes": 251,
+          "sha256": "c0ec123b59e68b9811fd074987d342ccef6ba44439b230e61a36be71b7050acb",
+          "destination": "engineering/reference/industrial_architecture/results/arrival_heat.csv",
+          "disposition": "recovered_design_history_imported_verbatim_2026-09-26"
+        },
+        {
+          "name": "terluna_industry_bundle/results/derived_industry_calculations.json",
+          "bytes": 4402,
+          "sha256": "2021602a5859f64315ae03146a63d9e5f7e84dccd5b53392d7aba63b11b3e0fa",
+          "destination": "engineering/reference/industrial_architecture/results/derived_industry_calculations.json",
+          "disposition": "recovered_design_history_imported_verbatim_2026-09-26"
+        },
+        {
+          "name": "terluna_industry_bundle/results/radiator_area.csv",
+          "bytes": 118,
+          "sha256": "0f9ee260f8136811dc032c1864e2d0da48a1916be9960d2ec6160eb94adc4693",
+          "destination": "engineering/reference/industrial_architecture/results/radiator_area.csv",
+          "disposition": "recovered_design_history_imported_verbatim_2026-09-26"
+        },
+        {
+          "name": "terluna_industry_bundle/results/calculation_stdout.json",
+          "bytes": 875,
+          "sha256": "e14daf05e547fbf2808cf84c14467338f69ec60b3598c6e5b467ac63b9940374",
+          "destination": "engineering/reference/industrial_architecture/results/calculation_stdout.json",
+          "disposition": "recovered_design_history_imported_verbatim_2026-09-26"
+        },
+        {
+          "name": "terluna_industry_bundle/results/packet_rates.csv",
+          "bytes": 784,
+          "sha256": "b2915e8dea3d79563ac2f3728700e24e37137544361b7f585d1a970c74e10d7a",
+          "destination": "engineering/reference/industrial_architecture/results/packet_rates.csv",
+          "disposition": "recovered_design_history_imported_verbatim_2026-09-26"
+        },
+        {
+          "name": "terluna_industry_bundle/INDUSTRIAL_ARCHITECTURE.json",
+          "bytes": 3035,
+          "sha256": "b6c8f8c845b57348f27d8189853d52b173b0e35c6b4d643bfacebaba0c70d5f3",
+          "destination": "engineering/reference/industrial_architecture/INDUSTRIAL_ARCHITECTURE.json",
+          "disposition": "recovered_design_history_imported_verbatim_2026-09-26"
+        },
+        {
+          "name": "terluna_industry_bundle/source_artifacts/Open_Moon_Ensemble_Outline_plan-01.md",
+          "bytes": 33066,
+          "sha256": "934e71245b6a1a6dd902d7988faa9982c883093edc2f05cd29b5176c42ef321b",
+          "destination": null,
+          "disposition": "copy_of_repository_file: ensemble/planning/Open_Moon_Ensemble_Outline_plan-01.md"
+        },
+        {
+          "name": "terluna_industry_bundle/source_artifacts/Open_Moon_Companion_Seeds_seed-02.zip",
+          "bytes": 35208,
+          "sha256": "721e854bea9eab086ba6e3ce22ff1c902c12823218b8d832bed9f436ce3f587f",
+          "destination": null,
+          "disposition": "companion-seed source archive recorded in ensemble/seed_records/companion-seeds-02/import.json (same SHA-256); not imported"
+        },
+        {
+          "name": "terluna_industry_bundle/source_artifacts/Lunar_Terraforming_Model.zip",
+          "bytes": 376353,
+          "sha256": "8c87621674742eeaa091e135ef763c6d0ed9404a616fb852c2e43f89c64fd46a",
+          "destination": null,
+          "disposition": "original_source_archive; identical to Lunar_Terraforming_Model.zip indexed above"
+        },
+        {
+          "name": "terluna_industry_bundle/source_artifacts/Lunar_Terraforming_Feasibility.pdf",
+          "bytes": 563419,
+          "sha256": "9ab9ef642cb7dbef7ccf86a4b2de697a24189bccbe3ce8c625748ae57769bb0c",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Terluna_solar_shield_full_dump_2026-09-26.zip:Terluna_solar_shield_full_dump_2026-09-26/raw_sources/Lunar_Terraforming_Feasibility.pdf"
+        },
+        {
+          "name": "terluna_industry_bundle/source_artifacts/Open_Moon_Companion_Seeds_seed-02.md",
+          "bytes": 31492,
+          "sha256": "aa0d5b73a1e2b19a12fe45865be581be48f89d3fafc8ea5726c62abf8cce4b8c",
+          "destination": null,
+          "disposition": "combined reading copy of the four companion seeds, which are in ensemble/papers/ byte for byte; not imported"
+        },
+        {
+          "name": "terluna_industry_bundle/source_artifacts/Core_Research_Plan.md",
+          "bytes": 12046,
+          "sha256": "d18fdd4548a0d9631b2a47e4709f9f489ad2ba780b0c6bb340553df5caf1f06e",
+          "destination": null,
+          "disposition": "2026-09-20 research audit and work plan, superseded by research/plan.md and later work; not imported"
+        },
+        {
+          "name": "terluna_industry_bundle/source_artifacts/Open_Moon_Archive_Review_2026-09-20.md",
+          "bytes": 19463,
+          "sha256": "dbd0d069cf0b96604c1ca0886522c20a146ca6bd0ef5f92145f74b14a6ae1774",
+          "destination": null,
+          "disposition": "duplicate_of_original_archive_member: Terluna_solar_shield_full_dump_2026-09-26.zip:Terluna_solar_shield_full_dump_2026-09-26/raw_sources/Open_Moon_Archive_Review_2026-09-20.md"
+        },
+        {
+          "name": "terluna_industry_bundle/MANIFEST.json",
+          "bytes": 6005,
+          "sha256": "4022394f2d7886446eaa97299189600e6a56a9a26651965a23be3314303e77a7",
+          "destination": null,
+          "disposition": "bundle index; not imported"
+        },
+        {
+          "name": "terluna_industry_bundle/README.md",
+          "bytes": 3103,
+          "sha256": "4fbc1d1fea49147df18c93693ebb463d11d708eba1c3ade55511a76e3a841cda",
+          "destination": null,
+          "disposition": "bundle guide describing its own layout; not imported"
+        }
+      ]
     }
   ],
   "retained": [
@@ -2535,6 +2795,102 @@
       "sha256": "d72603b567b9c3ad4a17e957620bf8ba671ecaaa4e3c71003baa021d9c887486",
       "bytes": 2052,
       "preservation": "verbatim"
+    },
+    {
+      "archive": "Terluna_industry_energy_logistics_recovery_2026-09-26.zip",
+      "member": "terluna_industry_bundle/calculations.py",
+      "path": "engineering/reference/industrial_architecture/calculations.py",
+      "sha256": "c1b5c26e56446bd122a83f66782f39dbeb99e11a98ca4477826d81ee9ce33d03",
+      "bytes": 5205,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Terluna_industry_energy_logistics_recovery_2026-09-26.zip",
+      "member": "terluna_industry_bundle/HISTORY_RECOVERY_NOTES.md",
+      "path": "engineering/reference/industrial_architecture/HISTORY_RECOVERY_NOTES.md",
+      "sha256": "be9cf021ce14530b9a45b59bf361e358c91c3b4ba1654e5b42e01e1c5137b5ef",
+      "bytes": 4969,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Terluna_industry_energy_logistics_recovery_2026-09-26.zip",
+      "member": "terluna_industry_bundle/RECOVERED_INDUSTRIAL_ARCHITECTURE.md",
+      "path": "engineering/reference/industrial_architecture/RECOVERED_INDUSTRIAL_ARCHITECTURE.md",
+      "sha256": "1ebc2e831751882746007b79965e928265125ad0e7e130b79c2ecc84eeb46dde",
+      "bytes": 17985,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Terluna_industry_energy_logistics_recovery_2026-09-26.zip",
+      "member": "terluna_industry_bundle/CALCULATION_PROVENANCE.md",
+      "path": "engineering/reference/industrial_architecture/CALCULATION_PROVENANCE.md",
+      "sha256": "5ff11daf7cd73d53a8e939371bb3228c248f58eceeae9229ba7cdbb19c393c70",
+      "bytes": 4703,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Terluna_industry_energy_logistics_recovery_2026-09-26.zip",
+      "member": "terluna_industry_bundle/EVIDENCE_LEDGER.csv",
+      "path": "engineering/reference/industrial_architecture/EVIDENCE_LEDGER.csv",
+      "sha256": "5de282b44271cdb887fe3e613695dc2d1c8ee51da951177e1fce00e0ea813be7",
+      "bytes": 3072,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Terluna_industry_energy_logistics_recovery_2026-09-26.zip",
+      "member": "terluna_industry_bundle/results/packet_kinetic_energy.csv",
+      "path": "engineering/reference/industrial_architecture/results/packet_kinetic_energy.csv",
+      "sha256": "e8ade40af690da7c5d04866136635e43621efef2d649cf5e0a1fb9c55fc73c62",
+      "bytes": 269,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Terluna_industry_energy_logistics_recovery_2026-09-26.zip",
+      "member": "terluna_industry_bundle/results/arrival_heat.csv",
+      "path": "engineering/reference/industrial_architecture/results/arrival_heat.csv",
+      "sha256": "c0ec123b59e68b9811fd074987d342ccef6ba44439b230e61a36be71b7050acb",
+      "bytes": 251,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Terluna_industry_energy_logistics_recovery_2026-09-26.zip",
+      "member": "terluna_industry_bundle/results/derived_industry_calculations.json",
+      "path": "engineering/reference/industrial_architecture/results/derived_industry_calculations.json",
+      "sha256": "2021602a5859f64315ae03146a63d9e5f7e84dccd5b53392d7aba63b11b3e0fa",
+      "bytes": 4402,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Terluna_industry_energy_logistics_recovery_2026-09-26.zip",
+      "member": "terluna_industry_bundle/results/radiator_area.csv",
+      "path": "engineering/reference/industrial_architecture/results/radiator_area.csv",
+      "sha256": "0f9ee260f8136811dc032c1864e2d0da48a1916be9960d2ec6160eb94adc4693",
+      "bytes": 118,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Terluna_industry_energy_logistics_recovery_2026-09-26.zip",
+      "member": "terluna_industry_bundle/results/calculation_stdout.json",
+      "path": "engineering/reference/industrial_architecture/results/calculation_stdout.json",
+      "sha256": "e14daf05e547fbf2808cf84c14467338f69ec60b3598c6e5b467ac63b9940374",
+      "bytes": 875,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Terluna_industry_energy_logistics_recovery_2026-09-26.zip",
+      "member": "terluna_industry_bundle/results/packet_rates.csv",
+      "path": "engineering/reference/industrial_architecture/results/packet_rates.csv",
+      "sha256": "b2915e8dea3d79563ac2f3728700e24e37137544361b7f585d1a970c74e10d7a",
+      "bytes": 784,
+      "preservation": "verbatim"
+    },
+    {
+      "archive": "Terluna_industry_energy_logistics_recovery_2026-09-26.zip",
+      "member": "terluna_industry_bundle/INDUSTRIAL_ARCHITECTURE.json",
+      "path": "engineering/reference/industrial_architecture/INDUSTRIAL_ARCHITECTURE.json",
+      "sha256": "b6c8f8c845b57348f27d8189853d52b173b0e35c6b4d643bfacebaba0c70d5f3",
+      "bytes": 3035,
+      "preservation": "verbatim"
     }
   ],
   "updates": [
@@ -2611,6 +2967,24 @@
         "archive/july_2026_knowledge_bundle/terluna_moon_terraforming_bundle/models/README.md",
         "archive/july_2026_knowledge_bundle/terluna_moon_terraforming_bundle/models/terluna_screening_calculations.py",
         "archive/july_2026_knowledge_bundle/terluna_moon_terraforming_bundle/references/references.bib"
+      ]
+    },
+    {
+      "date": "2026-09-26",
+      "summary": "Imported the recovered 19 September 2026 industrial architecture to engineering/reference/industrial_architecture/; its six traffic-safety rules are recorded in research/decisions.md.",
+      "retained_added": [
+        "engineering/reference/industrial_architecture/calculations.py",
+        "engineering/reference/industrial_architecture/HISTORY_RECOVERY_NOTES.md",
+        "engineering/reference/industrial_architecture/RECOVERED_INDUSTRIAL_ARCHITECTURE.md",
+        "engineering/reference/industrial_architecture/CALCULATION_PROVENANCE.md",
+        "engineering/reference/industrial_architecture/EVIDENCE_LEDGER.csv",
+        "engineering/reference/industrial_architecture/results/packet_kinetic_energy.csv",
+        "engineering/reference/industrial_architecture/results/arrival_heat.csv",
+        "engineering/reference/industrial_architecture/results/derived_industry_calculations.json",
+        "engineering/reference/industrial_architecture/results/radiator_area.csv",
+        "engineering/reference/industrial_architecture/results/calculation_stdout.json",
+        "engineering/reference/industrial_architecture/results/packet_rates.csv",
+        "engineering/reference/industrial_architecture/INDUSTRIAL_ARCHITECTURE.json"
       ]
     }
   ]

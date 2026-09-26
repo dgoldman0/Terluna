@@ -11,6 +11,21 @@ The route model is Sun-only and circular/coplanar. Electric propulsion includes 
 - **Shipped as water.** The oxygen for the 17.5% design comes to 6.2×10¹⁷ kg of water, about 6% of the 28% seas. The 7×10¹⁶ kg of hydrogen left over serves as propellant or as feedstock for ammonia and biomass.
 - **Source bodies.** Sources follow the study's principle 5: common icy bodies, with Saturn's rings, Titan's atmosphere and the ocean worlds left untouched.
 
+## Industrial architecture from 19 September
+
+The industrial design worked out with the author on 19 September 2026 is in
+[reference/industrial_architecture/](reference/industrial_architecture/README.md),
+recovered and imported on 2026-09-26. It keeps three power ledgers apart
+(civilization-wide power, the Open Moon's allocation, and where heat is
+released), sequences power from fission bootstrap through fusion to near-Sun
+collection with power beaming, and builds industry at the source bodies. Bulk
+material moves as a stream of standardized packets, about 2.7×10⁸ kg/s with
+some 5×10¹⁶ kg in transit, and a cislunar terminal layer brakes, captures,
+inspects, repacks, buffers and meters it; the Moon itself is never the brake.
+Its six traffic-safety rules are the author's decisions
+([research/decisions.md](../research/decisions.md)). The document ends with a
+specification for the network model listed below.
+
 ## Next work
 
 - Add water, nutrients, surface sinks and infrastructure to a shared material ledger.

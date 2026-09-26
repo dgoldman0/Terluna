@@ -1,0 +1,22 @@
+{
+  "sagan_k": 1.17,
+  "civilization_power_W": 5.011872336272715e+17,
+  "civilization_power_PW": 501.1872336272715,
+  "share_of_solar_luminosity": 1.3092665455257876e-09,
+  "dt_specific_energy_J_kg": 337592614151027.5,
+  "dt_fuel_kg_per_year_ideal": 46850154834.37182,
+  "dt_fuel_kg_per_year_at_50_percent_net": 93700309668.74364,
+  "fission_specific_energy_J_kg_200MeV_235u": 82115176303534.72,
+  "fissioned_mass_kg_per_year": 192610756694.3768,
+  "solar_area_100PW_1AU_km2_at_300Wm2": 333333333.3333333,
+  "solar_area_500PW_1AU_km2_at_300Wm2": 1666666666.6666667,
+  "solar_area_500PW_0p1AU_ideal_km2": 16666666.666666666,
+  "radiator_area_km2_for_K1p17": {
+    "350": 654445636.6970782,
+    "600": 75777583.60868466,
+    "1000": 9820774.83568553,
+    "1500": 1939906.1403823271
+  },
+  "bulk_flow_reference_kg_s": 270000000.0,
+  "six_year_pipeline_mass_kg": 5.1123312e+16
+}

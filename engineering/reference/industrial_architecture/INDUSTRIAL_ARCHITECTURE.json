@@ -1,0 +1,80 @@
+{
+  "schema": "terluna.recovered-industrial-architecture/1",
+  "status": "recovered design history plus archived quantitative baseline; requires integrated revalidation",
+  "reference_scenario": {
+    "surface_pressure_atm": 1.2,
+    "atmosphere_mass_kg_archived_spherical": 3.14134948e18,
+    "construction_rates_kg_s": {
+      "500_year": 1.99086716e8,
+      "300_year": 3.31811194e8,
+      "200_year": 4.97716791e8
+    },
+    "representative_bulk_packet_flow_kg_s": 2.7e8
+  },
+  "civilization_power_scenario": {
+    "sagan_K": 1.17,
+    "power_W": 5.011872336272715e17,
+    "interpretation": "illustrative civilization-wide controllable-power envelope, not asserted Open Moon continuous load"
+  },
+  "power_architecture_recovered": [
+    "fission seed / black-start",
+    "local solar where viable",
+    "D-T fusion",
+    "D-D and/or advanced fusion",
+    "near-Sun solar plus beamed/transmitted power backbone",
+    "fusion retained for mobile, dense and outer-system loads"
+  ],
+  "source_node_functions": [
+    "prospecting",
+    "excavation",
+    "beneficiation",
+    "volatile separation",
+    "power generation",
+    "heat rejection",
+    "fabrication",
+    "packet/container production",
+    "launch/injection",
+    "repair and recycling"
+  ],
+  "mature_bulk_logistics": [
+    "source extraction/refining",
+    "standardized packet formation",
+    "mass-driver/beamed/equivalent injection",
+    "autonomous heliocentric transfer",
+    "relay/tug/depot support",
+    "remote cislunar braking and capture",
+    "inspection/quarantine",
+    "repackaging",
+    "buffer storage",
+    "metered lunar delivery"
+  ],
+  "safety_rules_recovered": [
+    "passive failure trajectories miss inhabited planets",
+    "Earth never lies behind the lunar catcher",
+    "major braking occurs before close approach to the inhabited Moon",
+    "packet kinetic energy is capped",
+    "planetary-scale tracking and interceptor/tug backup",
+    "assigned arrival corridors and node traffic control",
+    "civilization-threatening kinetic payloads do not enter inhabited-world intercept trajectories before verified capture"
+  ],
+  "preferred_packet_mass_range_kg_recovered": [1e6, 1e8],
+  "large_packet_cases_are": "throughput illustrations rather than preferred safety architecture",
+  "current_source_policy": "prefer common icy bodies; current conservation decision leaves Saturn rings, Titan atmosphere and ocean worlds untouched",
+  "next_integrated_model": {
+    "form": "network of industrial nodes and transport edges",
+    "must_track": [
+      "material inventories and coproducts",
+      "manufacturing dependencies and critical imports",
+      "power by location",
+      "heat rejection by location and temperature",
+      "transport energy and propellant",
+      "packet cadence and in-transit capital",
+      "capture momentum and energy destinations",
+      "maintenance/replacement",
+      "recycling",
+      "fault recovery",
+      "environmental discharge",
+      "transition from replication growth to steady renewal"
+    ]
+  }
+}

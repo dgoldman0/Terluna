@@ -14,6 +14,9 @@ Sources:
   ([baselines/feasibility/report.md](baselines/feasibility/report.md), section 1).
 - **Sep 9**: the September protection report
   ([protection/report.md](../protection/report.md), section 3).
+- **Sep 19**: the 19 September 2026 industry discussion, recovered in
+  [engineering/reference/industrial_architecture/](../engineering/reference/industrial_architecture/README.md)
+  (`RECOVERED_INDUSTRIAL_ARCHITECTURE.md`, section 8).
 - The conservation study keeps its own decisions, D1–D11, in
   [its README](studies/conservation/README.md#4-decisions); they are not repeated here.
 
@@ -57,6 +60,19 @@ Sources:
 | The protection architecture: a solar-filter complex with an industrial hub; magnetic protection; protection that grows around occupied destinations and Earth–Moon traffic corridors, secondary to protecting the lunar atmosphere and surface; Earth–Sun L1/L2 hubs for freight, power and industry. | Sep 9, carrying the original 2025 architecture | Stands |
 | No superconducting planetary ring. | Sep 4 | Stands |
 | A surface radiation dose of at most 0.027 mSv/day. | Sep 4 | Stands |
+
+## Transport and safety
+
+The author regards these rules as set, to be reopened only for good reasons.
+
+| Decision | Source | Status |
+|---|---|---|
+| Passive failures miss planets: nominal transfer paths and their failure dispersions avoid inhabited bodies unless capture has been verified. | Sep 19 | Stands |
+| Earth never lies behind the lunar catcher, so a missed lunar capture cannot become an Earth-impact trajectory. | Sep 19 | Stands |
+| Major braking happens remotely: high-energy packets approach the inhabited Moon only after capture and deceleration. | Sep 19 | Stands |
+| Packet energy is capped. Mature dense traffic uses packets of roughly 10⁶–10⁸ kg in preference to 10¹²–10¹⁵ kg units, so each failure's consequences stay bounded; the exact cap awaits risk optimization. | Sep 19 | Stands |
+| Planetary-scale surveillance, tracking, interception and tug capability, and assigned arrival corridors are part of the infrastructure. | Sep 19 | Stands |
+| No civilization-threatening kinetic payload enters a planetary intercept corridor before verified capture. | Sep 19 | Stands |
 
 ## Life and people
 

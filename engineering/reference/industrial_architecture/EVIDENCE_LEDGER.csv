@@ -1,0 +1,22 @@
+item,status,primary_provenance,notes
+K=1.17 formula and 501.187 PW,repo_encoded,current main conservation screens/run/gates,Sagan interpolation stored in repo
+199/332/498 million kg/s construction rates,archived_executable,September feasibility model,Net delivered gas under 500/300/200-year effective schedules
+33-235 PW representative N2 transport cases,archived_executable,September feasibility report/model,Specific electric-propulsion scenarios; narrower than whole-system power
+20-352 PW full stored logistics table,archived_executable,September model logistics.csv,Includes 200/300/500-year schedules and propulsion cases
+Six-year pipeline ~5e16 kg,archived_report_plus_recovery,September report + September 19 discussion,Transit inventory strongly couples flight time to industrial capital
+3 km/s braking ~1.2 PW / 10 km/s ~13.4 PW,archived_report,September feasibility report,Reason to perform major capture/braking away from final atmosphere
+Solar 10 PW=33M km2 and 100 PW=333M km2 at 300 W/m2,archived_report,September feasibility report,Net collector output assumption
+500 PW solar 1 AU=1.67B km2,recomputed_extension,this bundle,Same 300 W/m2 assumption
+500 PW solar at 0.1 AU ideal=16.7M km2,recovered_plus_recomputed,September 19 discussion + this bundle,Inverse-square scaling only; no thermal/material closure
+D-T 500 PW ~46 Mt/yr ideal / ~90 Mt/yr at 50%,recovered_plus_recomputed,September 19 discussion + this bundle,Reacting D+T mass only
+Fission 500 PW ~2e8 t/yr fissioned mass,recovered_plus_recomputed,September 19 discussion + this bundle,Comparison using ~200 MeV/fission
+500 PW radiator areas at 350/600/1000/1500 K,recovered_plus_recomputed,September 19 discussion + this bundle,~654M/75.8M/9.82M/1.94M km2 ideal one-sided eps=0.9
+Fission seed -> solar -> D-T -> D-D/advanced fusion -> near-Sun beamed power,recovered_design_history,September 19 discussion,Technology architecture hypothesis
+Distributed source mines/refineries/factories,recovered_design_history,September 19 discussion,Shallow gravity wells/local replication favored
+Packetized mature matter stream,recovered_design_history,September 19 discussion,Mass drivers/packets/tugs/depots/cislunar capture layer
+Packet rate table at 2.7e8 kg/s,recovered_plus_recomputed,September 19 discussion + this bundle,Large packet cases are throughput illustrations
+Preferred packet scale 1e6-1e8 kg,recovered_design_history,September 19 safety discussion,Preference for bounded consequences; requires future risk optimization
+Passive failures miss planets / Earth not behind lunar catcher,recovered_design_history,September 19 safety discussion,Traffic-geometry design rule
+Remote cislunar braking and buffering,recovered_design_history,September 19 discussion,Final Moon is not high-energy brake pad
+Practical manufacturing closure vs mass fraction,archived_report,September feasibility report,Critical small components can stop nominal 99.9%-mass-closed factory
+Industrial dependency-network model,repo_planned,current engineering README and research plan,Explicit next work in current main

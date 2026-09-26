@@ -1,0 +1,130 @@
+{
+  "summary": {
+    "sagan_k": 1.17,
+    "civilization_power_W": 5.011872336272715e+17,
+    "civilization_power_PW": 501.1872336272715,
+    "share_of_solar_luminosity": 1.3092665455257876e-09,
+    "dt_specific_energy_J_kg": 337592614151027.5,
+    "dt_fuel_kg_per_year_ideal": 46850154834.37182,
+    "dt_fuel_kg_per_year_at_50_percent_net": 93700309668.74364,
+    "fission_specific_energy_J_kg_200MeV_235u": 82115176303534.72,
+    "fissioned_mass_kg_per_year": 192610756694.3768,
+    "solar_area_100PW_1AU_km2_at_300Wm2": 333333333.3333333,
+    "solar_area_500PW_1AU_km2_at_300Wm2": 1666666666.6666667,
+    "solar_area_500PW_0p1AU_ideal_km2": 16666666.666666666,
+    "radiator_area_km2_for_K1p17": {
+      "350": 654445636.6970782,
+      "600": 75777583.60868466,
+      "1000": 9820774.83568553,
+      "1500": 1939906.1403823271
+    },
+    "bulk_flow_reference_kg_s": 270000000.0,
+    "six_year_pipeline_mass_kg": 5.1123312e+16
+  },
+  "packet_rates": [
+    {
+      "packet_mass_kg": 1000000.0,
+      "packets_per_s": 270.0,
+      "interval_s": 0.003703703703703704,
+      "interval_minutes": 6.17283950617284e-05,
+      "interval_hours": 1.02880658436214e-06,
+      "interval_days": 4.2866941015089164e-08
+    },
+    {
+      "packet_mass_kg": 100000000.0,
+      "packets_per_s": 2.7,
+      "interval_s": 0.37037037037037035,
+      "interval_minutes": 0.006172839506172839,
+      "interval_hours": 0.00010288065843621399,
+      "interval_days": 4.286694101508916e-06
+    },
+    {
+      "packet_mass_kg": 1000000000.0,
+      "packets_per_s": 0.27,
+      "interval_s": 3.7037037037037037,
+      "interval_minutes": 0.0617283950617284,
+      "interval_hours": 0.00102880658436214,
+      "interval_days": 4.286694101508916e-05
+    },
+    {
+      "packet_mass_kg": 1000000000000.0,
+      "packets_per_s": 0.00027,
+      "interval_s": 3703.703703703704,
+      "interval_minutes": 61.7283950617284,
+      "interval_hours": 1.02880658436214,
+      "interval_days": 0.042866941015089165
+    },
+    {
+      "packet_mass_kg": 10000000000000.0,
+      "packets_per_s": 2.7e-05,
+      "interval_s": 37037.03703703704,
+      "interval_minutes": 617.283950617284,
+      "interval_hours": 10.2880658436214,
+      "interval_days": 0.4286694101508916
+    },
+    {
+      "packet_mass_kg": 100000000000000.0,
+      "packets_per_s": 2.7e-06,
+      "interval_s": 370370.3703703704,
+      "interval_minutes": 6172.83950617284,
+      "interval_hours": 102.88065843621399,
+      "interval_days": 4.286694101508917
+    },
+    {
+      "packet_mass_kg": 1000000000000000.0,
+      "packets_per_s": 2.7e-07,
+      "interval_s": 3703703.703703704,
+      "interval_minutes": 61728.3950617284,
+      "interval_hours": 1028.80658436214,
+      "interval_days": 42.86694101508917
+    }
+  ],
+  "packet_kinetic_energy": [
+    {
+      "packet_mass_kg": 1000000.0,
+      "speed_km_s": 10.0,
+      "kinetic_energy_J": 50000000000000.0,
+      "TNT_equivalent_megatons": 0.011950286806883365
+    },
+    {
+      "packet_mass_kg": 100000000.0,
+      "speed_km_s": 10.0,
+      "kinetic_energy_J": 5000000000000000.0,
+      "TNT_equivalent_megatons": 1.1950286806883366
+    },
+    {
+      "packet_mass_kg": 1000000000.0,
+      "speed_km_s": 10.0,
+      "kinetic_energy_J": 5e+16,
+      "TNT_equivalent_megatons": 11.950286806883366
+    },
+    {
+      "packet_mass_kg": 1000000000000.0,
+      "speed_km_s": 10.0,
+      "kinetic_energy_J": 5e+19,
+      "TNT_equivalent_megatons": 11950.286806883365
+    }
+  ],
+  "arrival_heat": [
+    {
+      "mass_flow_kg_s": 267095731.49278048,
+      "speed_km_s": 3.0,
+      "dissipation_power_W": 1201930791717512.2,
+      "dissipation_power_PW": 1.2019307917175122,
+      "global_mean_W_m2": 31.686185687536092
+    },
+    {
+      "mass_flow_kg_s": 267095731.49278048,
+      "speed_km_s": 10.0,
+      "dissipation_power_W": 1.3354786574639024e+16,
+      "dissipation_power_PW": 13.354786574639023,
+      "global_mean_W_m2": 352.0687298615121
+    }
+  ],
+  "notes": [
+    "K=1.17 is a civilization-scale scenario descriptor, not an asserted Moon-project load.",
+    "0.1 AU solar-area scaling assumes inverse-square sunlight and unchanged conversion fraction; thermal/material closure is omitted.",
+    "Radiator areas are ideal one-sided deep-space eps=0.9 areas.",
+    "Large packet masses are throughput illustrations; recovered design discussion favored smaller 1e6-1e8 kg packets for bounded consequences."
+  ]
+}

@@ -144,14 +144,19 @@
       "condition": "conditional_analytical_accounts",
       "material": [
         "../engineering/reference/",
-        "baselines/feasibility/model.py"
+        "baselines/feasibility/model.py",
+        "../engineering/reference/industrial_architecture/"
       ],
       "unresolved": [
         "complete source-to-use pathways",
         "manufacturing dependency network",
         "capture safety and lifetime resources",
         "commissioning order: a mostly nitrogen atmosphere first, holds at 10, 20, 40 and 60 kPa with escape measured at each, oxygen added last; gas stored in caverns, cryogenic tanks, chemical form and high-orbit depots, with strategic reserves kept from the open air (July 2026 bundle, archive/july_2026_knowledge_bundle/)",
-        "space access after the atmosphere: low lunar orbit ends; Earth-Moon L1/L2 logistics nodes, high orbits, tethers above the dense air, evacuated mass drivers, high-altitude airports and rocket corridors (July 2026 bundle, archive/july_2026_knowledge_bundle/)"
+        "space access after the atmosphere: low lunar orbit ends; Earth-Moon L1/L2 logistics nodes, high orbits, tethers above the dense air, evacuated mass drivers, high-altitude airports and rocket corridors (July 2026 bundle, archive/july_2026_knowledge_bundle/)",
+        "the integrated industrial network model specified in section 10 of the recovered architecture (engineering/reference/industrial_architecture/): nodes, tracked commodities, link and node properties, and outputs joining the logistics, growth, maintenance, conservation, protection and climate accounts",
+        "the packet matter stream (about 2.7e8 kg/s, about 5e16 kg in transit) and its geometry under the six traffic-safety rules (research/decisions.md)",
+        "the cislunar terminal layer: remote braking, capture, inspection and quarantine, repacking, buffering, metered delivery and kinetic-energy recovery; where its catchers sit so that Earth never lies behind them",
+        "three power ledgers kept apart (civilization-wide power, the Open Moon's allocation, and where heat is released), and the power sequence from fission bootstrap through fusion to near-Sun collection with power beaming"
       ],
       "next_session_task": "Add missing inventories and a small bottleneck/replacement network."
     },
