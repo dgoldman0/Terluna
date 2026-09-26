@@ -251,7 +251,7 @@
         "../atmosphere/loss_response/results/absorption_radius.json"
       ],
       "unresolved": [
-        "which loss budget in 1-100 kg/s works best (designed across the range for now)",
+        "which loss budget in 1-100 kg/s (atmospheric cycle times of about 100 billion to 1 billion years) works best (designed across the range for now)",
         "Earth's tidal barrier and exospheric ion escape in the loss response; both can lower the allowed leaks",
         "how many of the ions made in the sunlit exosphere escape (plasma model); if most do, charged-particle protection is needed at every budget",
         "the ultraviolet cut-off: titania stack or an ozone-forming edge",

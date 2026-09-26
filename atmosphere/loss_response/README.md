@@ -61,13 +61,16 @@ maximum.
 
 **The shield may leak a few tenths of a percent.** Largest allowed fraction of
 sunlight below 175 nm, across the three upper-air treatments, with the
-solar-wind loss at the low end of its range:
+solar-wind loss at the low end of its range. Each budget's cycle time is the
+atmosphere's mass (3.1×10¹⁸ kg, the feasibility baseline's hydrostatic column)
+over the loss rate, the time the loss and its resupply take to replace the
+whole atmosphere:
 
-| Budget | Titania, quiet Sun | Titania, solar maximum | 200-nm edge, quiet Sun | 200-nm edge, solar maximum |
+| Budget (cycle time) | Titania, quiet Sun | Titania, solar maximum | 200-nm edge, quiet Sun | 200-nm edge, solar maximum |
 |---|---|---|---|---|
-| 1 kg/s | 0.13–0.49% | 0.018–0.17% | 0.06% (none for the warmest upper air) | none |
-| 10 kg/s | 0.27–0.72% | 0.075–0.24% | 0.08–0.21% | 0.002–0.05% |
-| 100 kg/s | 0.74–1.2% | 0.26–0.45% | 0.50–0.65% | 0.17–0.23% |
+| 1 kg/s (100 billion years) | 0.13–0.49% | 0.018–0.17% | 0.06% (none for the warmest upper air) | none |
+| 10 kg/s (10 billion years) | 0.27–0.72% | 0.075–0.24% | 0.08–0.21% | 0.002–0.05% |
+| 100 kg/s (1 billion years) | 0.74–1.2% | 0.26–0.45% | 0.50–0.65% | 0.17–0.23% |
 
 Solar maximum with the warmest upper air is the binding case. The ozone-forming
 edge cannot meet a 1 kg/s budget at solar maximum even with a perfect shield,

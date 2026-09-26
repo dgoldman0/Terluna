@@ -48,7 +48,8 @@ reasons, stated.
 
 ## Next
 
-The loss budget is designed across 1–100 kg/s until the designs show which
+The loss budget is designed across 1–100 kg/s, atmospheric cycle times of
+about 100 billion to 1 billion years, until the designs show which
 rate works best (the author's decision of 2026-09-26); requirements.md shows
 what each budget asks. The protected radius is computed: the shield reaches to
 just under the exobase, 2.7–5.2 lunar radii across the range. Two losses the

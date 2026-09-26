@@ -32,18 +32,18 @@ outside this design.
 
 | ID | Requirement | Source | Status |
 |---|---|---|---|
-| R1 | A total loss budget: the long-term average loss the protection must hold. 1 kg/s loses 1% of the atmosphere per 10⁹ years, 10 kg/s about 10%, 100 kg/s about one atmosphere | September feasibility report, section 5; decisions.md (the author, 2026-09-26) | Designed across 1–100 kg/s until the designs show which rate works best |
+| R1 | A total loss budget: the long-term average rate at which the atmosphere escapes, which resupply must match. Each budget has an atmospheric cycle time, the atmosphere's mass (3.1×10¹⁸ kg) over the loss rate: the time the loss and its resupply take to replace the whole atmosphere. 1 kg/s is a cycle of about 100 billion years and a resupply of about 32,000 tonnes a year; 10 kg/s, 10 billion years; 100 kg/s, 1 billion years | September feasibility report, section 5; decisions.md (the author, 2026-09-26); the mass from the feasibility baseline's hydrostatic column (`research/baselines/feasibility/reference.json`) | Designed across 1–100 kg/s until the designs show which rate works best |
 | R2 | The budget is shared among ultraviolet-driven escape, solar-wind stripping, and the channels not yet in the loss response: Earth's tidal lowering of the escape barrier, the escape of ions made in the sunlit exosphere, atomic oxygen, photochemical escape and hydrogen from water | [atmosphere/loss_response](../../../atmosphere/loss_response/README.md) | Allocation open |
 
 What each budget asks of the protection, from the loss response. The ranges span
 the three treatments of the upper air and quiet Sun to solar maximum; solar
 maximum with the warmest upper air is the binding case.
 
-| Budget | Titania stack: allowed leak | 200-nm edge: allowed leak | Exobase at that leak | Protected radius for heating | Ions made outside that radius |
+| Budget (cycle time) | Titania stack: allowed leak | 200-nm edge: allowed leak | Exobase at that leak | Protected radius for heating | Ions made outside that radius |
 |---|---|---|---|---|---|
-| 1 kg/s | 0.018–0.49% | none at solar maximum | 2.8–3.2 lunar radii | 2.7–3.2 lunar radii | 13–36 kg/s |
-| 10 kg/s | 0.075–0.72% | 0.002–0.21% | 3.3–4.0 lunar radii | 3.3–4.0 lunar radii | 27–80 kg/s |
-| 100 kg/s | 0.26–1.2% | 0.17–0.65% | 4.3–5.2 lunar radii | 4.2–5.2 lunar radii | 59–172 kg/s |
+| 1 kg/s (100 billion years) | 0.018–0.49% | none at solar maximum | 2.8–3.2 lunar radii | 2.7–3.2 lunar radii | 13–36 kg/s |
+| 10 kg/s (10 billion years) | 0.075–0.72% | 0.002–0.21% | 3.3–4.0 lunar radii | 3.3–4.0 lunar radii | 27–80 kg/s |
+| 100 kg/s (1 billion years) | 0.26–1.2% | 0.17–0.65% | 4.3–5.2 lunar radii | 4.2–5.2 lunar radii | 59–172 kg/s |
 
 A tighter budget needs a tighter shield but a smaller one. The upper air expands
 with the heat the allowed leak deposits, and the shield has to cover it to just
@@ -97,7 +97,7 @@ charged-particle protection.
 
 ## Open decisions for the author
 
-The loss budget (R1), designed across 1–100 kg/s for now; the ultraviolet
+The loss budget (R1), designed across 1–100 kg/s (cycle times of 100 billion to 1 billion years) for now; the ultraviolet
 cut-off (O3); the dimmer's form (an even cut or one taken from the near
 infrared, fixed or adjustable) and its range;
 the use of the ring outside the window (transparent film or power collector);
