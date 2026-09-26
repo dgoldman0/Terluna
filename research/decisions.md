@@ -14,9 +14,11 @@ Sources:
   ([baselines/feasibility/report.md](baselines/feasibility/report.md), section 1).
 - **Sep 9**: the September protection report
   ([protection/report.md](../protection/report.md), section 3).
-- **Sep 19**: the 19 September 2026 industry discussion, recovered in
-  [engineering/reference/industrial_architecture/](../engineering/reference/industrial_architecture/README.md)
-  (`RECOVERED_INDUSTRIAL_ARCHITECTURE.md`, section 8).
+- **Sep 19**: the 19 September 2026 industry discussion, known through a
+  reconstruction written on 2026-09-26
+  ([engineering/reference/industrial_architecture/](../engineering/reference/industrial_architecture/README.md),
+  `RECOVERED_INDUSTRIAL_ARCHITECTURE.md`, section 8). The author confirmed its
+  six traffic-safety rules on 2026-09-26.
 - The conservation study keeps its own decisions, D1–D11, in
   [its README](studies/conservation/README.md#4-decisions); they are not repeated here.
 
@@ -63,7 +65,7 @@ Sources:
 
 ## Transport and safety
 
-The author regards these rules as set, to be reopened only for good reasons.
+The author confirmed these rules on 2026-09-26 and regards them as set, to be reopened only for good reasons.
 
 | Decision | Source | Status |
 |---|---|---|

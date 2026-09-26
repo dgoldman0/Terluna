@@ -588,7 +588,7 @@
           "bytes": 8786,
           "sha256": "ffe99c8b2fa0a41fd3abf03f710fb2ff73eea35bffd13e2cf53cbb96edd29fb9",
           "destination": "protection/reference/historical/HISTORICAL_LINEAGE.md",
-          "disposition": "conversation_recovered_reconstruction_imported_verbatim_2026-09-26; not an original artifact"
+          "disposition": "conversation_reconstruction_written_2026-09-26_imported_verbatim; not an original file"
         },
         {
           "name": "Terluna_solar_shield_full_dump_2026-09-26/docs/MISSING_AND_UNRECOVERED.md",
@@ -1358,28 +1358,28 @@
           "bytes": 1817,
           "sha256": "9ca16c58470def80e9032a16a0b461a51435c84496e2c258e10f04fbb195eeab",
           "destination": "protection/reference/historical/EL1_SH_BOM_recovered.csv",
-          "disposition": "conversation_recovered_reconstruction_imported_verbatim_2026-09-26; not an original artifact"
+          "disposition": "conversation_reconstruction_written_2026-09-26_imported_verbatim; not an original file"
         },
         {
           "name": "Terluna_solar_shield_full_dump_2026-09-26/recovered_historical_specs/Lunashield_L1_recovered.yaml",
           "bytes": 1260,
           "sha256": "c59c7a70512fb9226c67a40f6d0ba6ff92ba2af6b5d572fbf08c856721d1efed",
           "destination": "protection/reference/historical/Lunashield_L1_recovered.yaml",
-          "disposition": "conversation_recovered_reconstruction_imported_verbatim_2026-09-26; not an original artifact"
+          "disposition": "conversation_reconstruction_written_2026-09-26_imported_verbatim; not an original file"
         },
         {
           "name": "Terluna_solar_shield_full_dump_2026-09-26/recovered_historical_specs/README.md",
           "bytes": 400,
           "sha256": "d2b60357e3937a37bbe44f01317d7d18e9b097b1c8e7ba74decd47e2d850fc9d",
           "destination": "protection/reference/historical/README.md",
-          "disposition": "conversation_recovered_reconstruction_imported_verbatim_2026-09-26; not an original artifact"
+          "disposition": "conversation_reconstruction_written_2026-09-26_imported_verbatim; not an original file"
         },
         {
           "name": "Terluna_solar_shield_full_dump_2026-09-26/recovered_historical_specs/plasma_scaling_corridor_vs_region_recovered_notes.csv",
           "bytes": 387,
           "sha256": "ceca279a1511f27195368c6f5118cbd43f423790d227b6794a234ec790e7c7aa",
           "destination": "protection/reference/historical/plasma_scaling_corridor_vs_region_recovered_notes.csv",
-          "disposition": "conversation_recovered_reconstruction_imported_verbatim_2026-09-26; not an original artifact"
+          "disposition": "conversation_reconstruction_written_2026-09-26_imported_verbatim; not an original file"
         },
         {
           "name": "Terluna_solar_shield_full_dump_2026-09-26/recovered_state.json",
@@ -1766,14 +1766,14 @@
       "name": "Terluna_industry_energy_logistics_recovery_2026-09-26.zip",
       "sha256": "2d3ae5b2baf417e10ab706e97d13a3c72c7d5b9b0bba10214898e524c0207824",
       "bytes": 1128791,
-      "description": "Industry, energy and logistics recovery bundle prepared on 2026-09-26 in the author's other project space, recovering the 19 September 2026 industry discussion; it also carries copies of September baseline, planning and seed files.",
+      "description": "Industry, energy and logistics recovery bundle written on 2026-09-26 in the author's other project space: a reconstruction of the 19 September 2026 industry discussion from conversation records, with arithmetic computed that day; no file from 19 September survives. It also carries copies of September baseline, planning and seed files.",
       "members": [
         {
           "name": "terluna_industry_bundle/calculations.py",
           "bytes": 5205,
           "sha256": "c1b5c26e56446bd122a83f66782f39dbeb99e11a98ca4477826d81ee9ce33d03",
           "destination": "engineering/reference/industrial_architecture/calculations.py",
-          "disposition": "recovered_design_history_imported_verbatim_2026-09-26"
+          "disposition": "conversation_reconstruction_written_2026-09-26_imported_verbatim"
         },
         {
           "name": "terluna_industry_bundle/REPO_PATH_MAP.md",
@@ -1871,14 +1871,14 @@
           "bytes": 4969,
           "sha256": "be9cf021ce14530b9a45b59bf361e358c91c3b4ba1654e5b42e01e1c5137b5ef",
           "destination": "engineering/reference/industrial_architecture/HISTORY_RECOVERY_NOTES.md",
-          "disposition": "recovered_design_history_imported_verbatim_2026-09-26"
+          "disposition": "conversation_reconstruction_written_2026-09-26_imported_verbatim"
         },
         {
           "name": "terluna_industry_bundle/RECOVERED_INDUSTRIAL_ARCHITECTURE.md",
           "bytes": 17985,
           "sha256": "1ebc2e831751882746007b79965e928265125ad0e7e130b79c2ecc84eeb46dde",
           "destination": "engineering/reference/industrial_architecture/RECOVERED_INDUSTRIAL_ARCHITECTURE.md",
-          "disposition": "recovered_design_history_imported_verbatim_2026-09-26"
+          "disposition": "conversation_reconstruction_written_2026-09-26_imported_verbatim"
         },
         {
           "name": "terluna_industry_bundle/SHA256SUMS.txt",
@@ -1892,14 +1892,14 @@
           "bytes": 4703,
           "sha256": "5ff11daf7cd73d53a8e939371bb3228c248f58eceeae9229ba7cdbb19c393c70",
           "destination": "engineering/reference/industrial_architecture/CALCULATION_PROVENANCE.md",
-          "disposition": "recovered_design_history_imported_verbatim_2026-09-26"
+          "disposition": "conversation_reconstruction_written_2026-09-26_imported_verbatim"
         },
         {
           "name": "terluna_industry_bundle/EVIDENCE_LEDGER.csv",
           "bytes": 3072,
           "sha256": "5de282b44271cdb887fe3e613695dc2d1c8ee51da951177e1fce00e0ea813be7",
           "destination": "engineering/reference/industrial_architecture/EVIDENCE_LEDGER.csv",
-          "disposition": "recovered_design_history_imported_verbatim_2026-09-26"
+          "disposition": "conversation_reconstruction_written_2026-09-26_imported_verbatim"
         },
         {
           "name": "terluna_industry_bundle/CURRENT_REPO_AUDIT.json",
@@ -1913,49 +1913,49 @@
           "bytes": 269,
           "sha256": "e8ade40af690da7c5d04866136635e43621efef2d649cf5e0a1fb9c55fc73c62",
           "destination": "engineering/reference/industrial_architecture/results/packet_kinetic_energy.csv",
-          "disposition": "recovered_design_history_imported_verbatim_2026-09-26"
+          "disposition": "conversation_reconstruction_written_2026-09-26_imported_verbatim"
         },
         {
           "name": "terluna_industry_bundle/results/arrival_heat.csv",
           "bytes": 251,
           "sha256": "c0ec123b59e68b9811fd074987d342ccef6ba44439b230e61a36be71b7050acb",
           "destination": "engineering/reference/industrial_architecture/results/arrival_heat.csv",
-          "disposition": "recovered_design_history_imported_verbatim_2026-09-26"
+          "disposition": "conversation_reconstruction_written_2026-09-26_imported_verbatim"
         },
         {
           "name": "terluna_industry_bundle/results/derived_industry_calculations.json",
           "bytes": 4402,
           "sha256": "2021602a5859f64315ae03146a63d9e5f7e84dccd5b53392d7aba63b11b3e0fa",
           "destination": "engineering/reference/industrial_architecture/results/derived_industry_calculations.json",
-          "disposition": "recovered_design_history_imported_verbatim_2026-09-26"
+          "disposition": "conversation_reconstruction_written_2026-09-26_imported_verbatim"
         },
         {
           "name": "terluna_industry_bundle/results/radiator_area.csv",
           "bytes": 118,
           "sha256": "0f9ee260f8136811dc032c1864e2d0da48a1916be9960d2ec6160eb94adc4693",
           "destination": "engineering/reference/industrial_architecture/results/radiator_area.csv",
-          "disposition": "recovered_design_history_imported_verbatim_2026-09-26"
+          "disposition": "conversation_reconstruction_written_2026-09-26_imported_verbatim"
         },
         {
           "name": "terluna_industry_bundle/results/calculation_stdout.json",
           "bytes": 875,
           "sha256": "e14daf05e547fbf2808cf84c14467338f69ec60b3598c6e5b467ac63b9940374",
           "destination": "engineering/reference/industrial_architecture/results/calculation_stdout.json",
-          "disposition": "recovered_design_history_imported_verbatim_2026-09-26"
+          "disposition": "conversation_reconstruction_written_2026-09-26_imported_verbatim"
         },
         {
           "name": "terluna_industry_bundle/results/packet_rates.csv",
           "bytes": 784,
           "sha256": "b2915e8dea3d79563ac2f3728700e24e37137544361b7f585d1a970c74e10d7a",
           "destination": "engineering/reference/industrial_architecture/results/packet_rates.csv",
-          "disposition": "recovered_design_history_imported_verbatim_2026-09-26"
+          "disposition": "conversation_reconstruction_written_2026-09-26_imported_verbatim"
         },
         {
           "name": "terluna_industry_bundle/INDUSTRIAL_ARCHITECTURE.json",
           "bytes": 3035,
           "sha256": "b6c8f8c845b57348f27d8189853d52b173b0e35c6b4d643bfacebaba0c70d5f3",
           "destination": "engineering/reference/industrial_architecture/INDUSTRIAL_ARCHITECTURE.json",
-          "disposition": "recovered_design_history_imported_verbatim_2026-09-26"
+          "disposition": "conversation_reconstruction_written_2026-09-26_imported_verbatim"
         },
         {
           "name": "terluna_industry_bundle/source_artifacts/Open_Moon_Ensemble_Outline_plan-01.md",
@@ -2019,6 +2019,154 @@
           "sha256": "4fbc1d1fea49147df18c93693ebb463d11d708eba1c3ade55511a76e3a841cda",
           "destination": null,
           "disposition": "bundle guide describing its own layout; not imported"
+        }
+      ]
+    },
+    {
+      "name": "Terluna_historical_protection_recovery_2026-09-26.zip",
+      "sha256": "abad485cab2e1502e0c2db58f834da1411ef4ace21211bcde78498da956aa57c",
+      "bytes": 2449156,
+      "description": "Historical protection recovery bundle written on 2026-09-26 in the author's other project space. Its original sources are the September packages indexed above; it adds consolidated records of 2025 conversations and a plasma table recomputed from recalled assumptions.",
+      "members": [
+        {
+          "name": "Terluna_historical_protection_recovery_2026-09-26/provenance/RECOVERY_LEDGER.md",
+          "bytes": 1670,
+          "sha256": "24fe6fa56554b869509a50ea9ea7ddaec1314122fa6ad797b7e77526eb96140d",
+          "destination": null,
+          "disposition": "recovery ledger; lists private conversation identifiers as search keys; not imported"
+        },
+        {
+          "name": "Terluna_historical_protection_recovery_2026-09-26/provenance/PROVENANCE_NOTES.md",
+          "bytes": 1478,
+          "sha256": "2b2c6c0555ea0e82c4d9703b7481faf52a2b8e9c1a466c2137951352a2230340",
+          "destination": null,
+          "disposition": "duplicate_of_archive_member: Terluna_solar_shield_full_dump_2026-09-26.zip:Terluna_solar_shield_full_dump_2026-09-26/docs/PROVENANCE_NOTES.md"
+        },
+        {
+          "name": "Terluna_historical_protection_recovery_2026-09-26/provenance/MISSING_AND_UNRECOVERED.md",
+          "bytes": 2988,
+          "sha256": "2db4505697ba9df8842c040ab1c9140273906882be16d82591f074b3f44cdf5c",
+          "destination": null,
+          "disposition": "duplicate_of_archive_member: Terluna_solar_shield_full_dump_2026-09-26.zip:Terluna_solar_shield_full_dump_2026-09-26/docs/MISSING_AND_UNRECOVERED.md"
+        },
+        {
+          "name": "Terluna_historical_protection_recovery_2026-09-26/provenance/PACKAGE_MANIFEST.json",
+          "bytes": 3361,
+          "sha256": "2865e6bdcbc8bc9da26f409cb9712f23bda6744ec2f146d9323962726738d75b",
+          "destination": null,
+          "disposition": "bundle index; not imported"
+        },
+        {
+          "name": "Terluna_historical_protection_recovery_2026-09-26/provenance/source_dump_MANIFEST.sha256",
+          "bytes": 17237,
+          "sha256": "dfccb9dbd9e9bee8bd37daf10c34b78435b6283a7875ca000d2e038ca20c3e48",
+          "destination": null,
+          "disposition": "duplicate_of_archive_member: Terluna_solar_shield_full_dump_2026-09-26.zip:Terluna_solar_shield_full_dump_2026-09-26/MANIFEST.sha256"
+        },
+        {
+          "name": "Terluna_historical_protection_recovery_2026-09-26/provenance/PACKAGE_MANIFEST.sha256",
+          "bytes": 2215,
+          "sha256": "a8b588bb7f0fcc7ecd0d17cfbf2ca42fe2b8c1b9c2055981c0d6ab705deef214",
+          "destination": null,
+          "disposition": "bundle checksum list; not imported"
+        },
+        {
+          "name": "Terluna_historical_protection_recovery_2026-09-26/README_FIRST.md",
+          "bytes": 2084,
+          "sha256": "131ec4be23048dd3ade4d7cd4c3ffad29904decf1de7b3af0231af4f4ade8cb8",
+          "destination": null,
+          "disposition": "bundle guide; not imported"
+        },
+        {
+          "name": "Terluna_historical_protection_recovery_2026-09-26/original_2026_sources/Lunar_Protection_Model.zip",
+          "bytes": 1443872,
+          "sha256": "38947474fefd3acc06bc9acdffe267953b770e04856322770f5233ac5c60994d",
+          "destination": null,
+          "disposition": "original_source_archive; identical to Lunar_Protection_Model.zip indexed above"
+        },
+        {
+          "name": "Terluna_historical_protection_recovery_2026-09-26/original_2026_sources/2026-09-09_Lunar_Protection_full_report.md",
+          "bytes": 57329,
+          "sha256": "901370c757955b5841185b954af0d0108acf4c759cae6f95023419744c6d2a18",
+          "destination": null,
+          "disposition": "duplicate_of_archive_member: Lunar_Protection_Model.zip:Lunar_Protection_Model/report.md"
+        },
+        {
+          "name": "Terluna_historical_protection_recovery_2026-09-26/original_2026_sources/Lunar_Terraforming_Model.zip",
+          "bytes": 376353,
+          "sha256": "8c87621674742eeaa091e135ef763c6d0ed9404a616fb852c2e43f89c64fd46a",
+          "destination": null,
+          "disposition": "original_source_archive; identical to Lunar_Terraforming_Model.zip indexed above"
+        },
+        {
+          "name": "Terluna_historical_protection_recovery_2026-09-26/original_2026_sources/Lunar_Protection_Design.pdf",
+          "bytes": 192092,
+          "sha256": "e6c33cbf6cbbe5cc3b9554a4bfcdba4ebd31edc60cd23b08ddb3047aa59eaef2",
+          "destination": null,
+          "disposition": "duplicate_of_archive_member: Terluna_solar_shield_full_dump_2026-09-26.zip:Terluna_solar_shield_full_dump_2026-09-26/raw_sources/Lunar_Protection_Design.pdf"
+        },
+        {
+          "name": "Terluna_historical_protection_recovery_2026-09-26/original_2026_sources/Lunar_Terraforming_Feasibility.pdf",
+          "bytes": 563419,
+          "sha256": "9ab9ef642cb7dbef7ccf86a4b2de697a24189bccbe3ce8c625748ae57769bb0c",
+          "destination": null,
+          "disposition": "duplicate_of_archive_member: Terluna_solar_shield_full_dump_2026-09-26.zip:Terluna_solar_shield_full_dump_2026-09-26/raw_sources/Lunar_Terraforming_Feasibility.pdf"
+        },
+        {
+          "name": "Terluna_historical_protection_recovery_2026-09-26/recovered_2025_conversation_material/EL1_SH_BOM_recovered.csv",
+          "bytes": 1817,
+          "sha256": "9ca16c58470def80e9032a16a0b461a51435c84496e2c258e10f04fbb195eeab",
+          "destination": null,
+          "disposition": "duplicate_of_archive_member: Terluna_solar_shield_full_dump_2026-09-26.zip:Terluna_solar_shield_full_dump_2026-09-26/recovered_historical_specs/EL1_SH_BOM_recovered.csv"
+        },
+        {
+          "name": "Terluna_historical_protection_recovery_2026-09-26/recovered_2025_conversation_material/Lunashield_L1_recovered.yaml",
+          "bytes": 1260,
+          "sha256": "c59c7a70512fb9226c67a40f6d0ba6ff92ba2af6b5d572fbf08c856721d1efed",
+          "destination": null,
+          "disposition": "duplicate_of_archive_member: Terluna_solar_shield_full_dump_2026-09-26.zip:Terluna_solar_shield_full_dump_2026-09-26/recovered_historical_specs/Lunashield_L1_recovered.yaml"
+        },
+        {
+          "name": "Terluna_historical_protection_recovery_2026-09-26/recovered_2025_conversation_material/HISTORICAL_LINEAGE.md",
+          "bytes": 8786,
+          "sha256": "ffe99c8b2fa0a41fd3abf03f710fb2ff73eea35bffd13e2cf53cbb96edd29fb9",
+          "destination": null,
+          "disposition": "duplicate_of_archive_member: Terluna_solar_shield_full_dump_2026-09-26.zip:Terluna_solar_shield_full_dump_2026-09-26/docs/HISTORICAL_LINEAGE.md"
+        },
+        {
+          "name": "Terluna_historical_protection_recovery_2026-09-26/recovered_2025_conversation_material/reconstruct_plasma_scaling.py",
+          "bytes": 1318,
+          "sha256": "4e761e7402b21256d9315dbdc362b47eb1861acd963961ba1e428fd901e00faa",
+          "destination": null,
+          "disposition": "script that recomputed the plasma table on 2026-09-26; not imported"
+        },
+        {
+          "name": "Terluna_historical_protection_recovery_2026-09-26/recovered_2025_conversation_material/plasma_scaling_corridor_vs_region_RECONSTRUCTED.csv",
+          "bytes": 1419,
+          "sha256": "44e4e6d2c62945db1cd62afc0e03467e1eb4ad7009cec55e437591589ea44379",
+          "destination": null,
+          "disposition": "plasma table recomputed 2026-09-26 by the recovery pass from recalled assumptions; not imported"
+        },
+        {
+          "name": "Terluna_historical_protection_recovery_2026-09-26/recovered_2025_conversation_material/EL1_SH_CONVERSATION_RECOVERY.md",
+          "bytes": 4195,
+          "sha256": "6c927d1fe492a910baf0b05d8709f59b23772c7566dc54f8cd6052f76b3cb600",
+          "destination": "protection/reference/historical/EL1_SH_CONVERSATION_RECOVERY.md",
+          "disposition": "conversation_reconstruction_written_2026-09-26_imported; two private conversation identifiers replaced by a bracketed note; not an original file"
+        },
+        {
+          "name": "Terluna_historical_protection_recovery_2026-09-26/recovered_2025_conversation_material/Lunashield_L1_System_Design_Dossier_CONVERSATION_RECOVERY.md",
+          "bytes": 3741,
+          "sha256": "57a711fd1affeda06477069a9302e97a94f37b0570e6a76c2df3f85e723c176a",
+          "destination": "protection/reference/historical/Lunashield_L1_System_Design_Dossier_CONVERSATION_RECOVERY.md",
+          "disposition": "conversation_reconstruction_written_2026-09-26_imported_verbatim; not an original file"
+        },
+        {
+          "name": "Terluna_historical_protection_recovery_2026-09-26/recovered_2025_conversation_material/plasma_scaling_corridor_vs_region_recovered_notes.csv",
+          "bytes": 387,
+          "sha256": "ceca279a1511f27195368c6f5118cbd43f423790d227b6794a234ec790e7c7aa",
+          "destination": null,
+          "disposition": "duplicate_of_archive_member: Terluna_solar_shield_full_dump_2026-09-26.zip:Terluna_solar_shield_full_dump_2026-09-26/recovered_historical_specs/plasma_scaling_corridor_vs_region_recovered_notes.csv"
         }
       ]
     }
@@ -2346,7 +2494,8 @@
       "path": "protection/reference/historical/README.md",
       "sha256": "d2b60357e3937a37bbe44f01317d7d18e9b097b1c8e7ba74decd47e2d850fc9d",
       "bytes": 400,
-      "preservation": "verbatim"
+      "preservation": "verbatim",
+      "nature": "reconstruction written 2026-09-26 by the recovery pass from conversation records; not an original file"
     },
     {
       "archive": "Terluna_solar_shield_full_dump_2026-09-26.zip",
@@ -2354,7 +2503,8 @@
       "path": "protection/reference/historical/EL1_SH_BOM_recovered.csv",
       "sha256": "9ca16c58470def80e9032a16a0b461a51435c84496e2c258e10f04fbb195eeab",
       "bytes": 1817,
-      "preservation": "verbatim"
+      "preservation": "verbatim",
+      "nature": "reconstruction written 2026-09-26 by the recovery pass from conversation records; not an original file"
     },
     {
       "archive": "Terluna_solar_shield_full_dump_2026-09-26.zip",
@@ -2362,7 +2512,8 @@
       "path": "protection/reference/historical/Lunashield_L1_recovered.yaml",
       "sha256": "c59c7a70512fb9226c67a40f6d0ba6ff92ba2af6b5d572fbf08c856721d1efed",
       "bytes": 1260,
-      "preservation": "verbatim"
+      "preservation": "verbatim",
+      "nature": "reconstruction written 2026-09-26 by the recovery pass from conversation records; not an original file"
     },
     {
       "archive": "Terluna_solar_shield_full_dump_2026-09-26.zip",
@@ -2370,7 +2521,8 @@
       "path": "protection/reference/historical/plasma_scaling_corridor_vs_region_recovered_notes.csv",
       "sha256": "ceca279a1511f27195368c6f5118cbd43f423790d227b6794a234ec790e7c7aa",
       "bytes": 387,
-      "preservation": "verbatim"
+      "preservation": "verbatim",
+      "nature": "reconstruction written 2026-09-26 by the recovery pass from conversation records; not an original file"
     },
     {
       "archive": "Terluna_solar_shield_full_dump_2026-09-26.zip",
@@ -2378,7 +2530,8 @@
       "path": "protection/reference/historical/HISTORICAL_LINEAGE.md",
       "sha256": "ffe99c8b2fa0a41fd3abf03f710fb2ff73eea35bffd13e2cf53cbb96edd29fb9",
       "bytes": 8786,
-      "preservation": "verbatim"
+      "preservation": "verbatim",
+      "nature": "reconstruction written 2026-09-26 by the recovery pass from conversation records; not an original file"
     },
     {
       "archive": "Terluna_Moon_Terraforming_Knowledge_Bundle_v1.0.zip",
@@ -2802,7 +2955,8 @@
       "path": "engineering/reference/industrial_architecture/calculations.py",
       "sha256": "c1b5c26e56446bd122a83f66782f39dbeb99e11a98ca4477826d81ee9ce33d03",
       "bytes": 5205,
-      "preservation": "verbatim"
+      "preservation": "verbatim",
+      "nature": "computed 2026-09-26 by the recovery pass from its reconstruction; not an original file"
     },
     {
       "archive": "Terluna_industry_energy_logistics_recovery_2026-09-26.zip",
@@ -2810,7 +2964,8 @@
       "path": "engineering/reference/industrial_architecture/HISTORY_RECOVERY_NOTES.md",
       "sha256": "be9cf021ce14530b9a45b59bf361e358c91c3b4ba1654e5b42e01e1c5137b5ef",
       "bytes": 4969,
-      "preservation": "verbatim"
+      "preservation": "verbatim",
+      "nature": "reconstruction written 2026-09-26 by the recovery pass from conversation records; not an original file"
     },
     {
       "archive": "Terluna_industry_energy_logistics_recovery_2026-09-26.zip",
@@ -2818,7 +2973,8 @@
       "path": "engineering/reference/industrial_architecture/RECOVERED_INDUSTRIAL_ARCHITECTURE.md",
       "sha256": "1ebc2e831751882746007b79965e928265125ad0e7e130b79c2ecc84eeb46dde",
       "bytes": 17985,
-      "preservation": "verbatim"
+      "preservation": "verbatim",
+      "nature": "reconstruction written 2026-09-26 by the recovery pass from conversation records; not an original file"
     },
     {
       "archive": "Terluna_industry_energy_logistics_recovery_2026-09-26.zip",
@@ -2826,7 +2982,8 @@
       "path": "engineering/reference/industrial_architecture/CALCULATION_PROVENANCE.md",
       "sha256": "5ff11daf7cd73d53a8e939371bb3228c248f58eceeae9229ba7cdbb19c393c70",
       "bytes": 4703,
-      "preservation": "verbatim"
+      "preservation": "verbatim",
+      "nature": "reconstruction written 2026-09-26 by the recovery pass from conversation records; not an original file"
     },
     {
       "archive": "Terluna_industry_energy_logistics_recovery_2026-09-26.zip",
@@ -2834,7 +2991,8 @@
       "path": "engineering/reference/industrial_architecture/EVIDENCE_LEDGER.csv",
       "sha256": "5de282b44271cdb887fe3e613695dc2d1c8ee51da951177e1fce00e0ea813be7",
       "bytes": 3072,
-      "preservation": "verbatim"
+      "preservation": "verbatim",
+      "nature": "reconstruction written 2026-09-26 by the recovery pass from conversation records; not an original file"
     },
     {
       "archive": "Terluna_industry_energy_logistics_recovery_2026-09-26.zip",
@@ -2842,7 +3000,8 @@
       "path": "engineering/reference/industrial_architecture/results/packet_kinetic_energy.csv",
       "sha256": "e8ade40af690da7c5d04866136635e43621efef2d649cf5e0a1fb9c55fc73c62",
       "bytes": 269,
-      "preservation": "verbatim"
+      "preservation": "verbatim",
+      "nature": "computed 2026-09-26 by the recovery pass from its reconstruction; not an original file"
     },
     {
       "archive": "Terluna_industry_energy_logistics_recovery_2026-09-26.zip",
@@ -2850,7 +3009,8 @@
       "path": "engineering/reference/industrial_architecture/results/arrival_heat.csv",
       "sha256": "c0ec123b59e68b9811fd074987d342ccef6ba44439b230e61a36be71b7050acb",
       "bytes": 251,
-      "preservation": "verbatim"
+      "preservation": "verbatim",
+      "nature": "computed 2026-09-26 by the recovery pass from its reconstruction; not an original file"
     },
     {
       "archive": "Terluna_industry_energy_logistics_recovery_2026-09-26.zip",
@@ -2858,7 +3018,8 @@
       "path": "engineering/reference/industrial_architecture/results/derived_industry_calculations.json",
       "sha256": "2021602a5859f64315ae03146a63d9e5f7e84dccd5b53392d7aba63b11b3e0fa",
       "bytes": 4402,
-      "preservation": "verbatim"
+      "preservation": "verbatim",
+      "nature": "computed 2026-09-26 by the recovery pass from its reconstruction; not an original file"
     },
     {
       "archive": "Terluna_industry_energy_logistics_recovery_2026-09-26.zip",
@@ -2866,7 +3027,8 @@
       "path": "engineering/reference/industrial_architecture/results/radiator_area.csv",
       "sha256": "0f9ee260f8136811dc032c1864e2d0da48a1916be9960d2ec6160eb94adc4693",
       "bytes": 118,
-      "preservation": "verbatim"
+      "preservation": "verbatim",
+      "nature": "computed 2026-09-26 by the recovery pass from its reconstruction; not an original file"
     },
     {
       "archive": "Terluna_industry_energy_logistics_recovery_2026-09-26.zip",
@@ -2874,7 +3036,8 @@
       "path": "engineering/reference/industrial_architecture/results/calculation_stdout.json",
       "sha256": "e14daf05e547fbf2808cf84c14467338f69ec60b3598c6e5b467ac63b9940374",
       "bytes": 875,
-      "preservation": "verbatim"
+      "preservation": "verbatim",
+      "nature": "computed 2026-09-26 by the recovery pass from its reconstruction; not an original file"
     },
     {
       "archive": "Terluna_industry_energy_logistics_recovery_2026-09-26.zip",
@@ -2882,7 +3045,8 @@
       "path": "engineering/reference/industrial_architecture/results/packet_rates.csv",
       "sha256": "b2915e8dea3d79563ac2f3728700e24e37137544361b7f585d1a970c74e10d7a",
       "bytes": 784,
-      "preservation": "verbatim"
+      "preservation": "verbatim",
+      "nature": "computed 2026-09-26 by the recovery pass from its reconstruction; not an original file"
     },
     {
       "archive": "Terluna_industry_energy_logistics_recovery_2026-09-26.zip",
@@ -2890,7 +3054,28 @@
       "path": "engineering/reference/industrial_architecture/INDUSTRIAL_ARCHITECTURE.json",
       "sha256": "b6c8f8c845b57348f27d8189853d52b173b0e35c6b4d643bfacebaba0c70d5f3",
       "bytes": 3035,
-      "preservation": "verbatim"
+      "preservation": "verbatim",
+      "nature": "reconstruction written 2026-09-26 by the recovery pass from conversation records; not an original file"
+    },
+    {
+      "archive": "Terluna_historical_protection_recovery_2026-09-26.zip",
+      "member": "Terluna_historical_protection_recovery_2026-09-26/recovered_2025_conversation_material/EL1_SH_CONVERSATION_RECOVERY.md",
+      "path": "protection/reference/historical/EL1_SH_CONVERSATION_RECOVERY.md",
+      "sha256": "d7acbe1f2c255e71a945c58b94422444b67d9e0ea2148aac8ece27619f2930b4",
+      "bytes": 4157,
+      "preservation": "verbatim except two private conversation identifiers replaced by a bracketed note",
+      "archive_member_sha256": "6c927d1fe492a910baf0b05d8709f59b23772c7566dc54f8cd6052f76b3cb600",
+      "archive_member_bytes": 4195,
+      "nature": "reconstruction written 2026-09-26 by the recovery pass from conversation records; not an original file"
+    },
+    {
+      "archive": "Terluna_historical_protection_recovery_2026-09-26.zip",
+      "member": "Terluna_historical_protection_recovery_2026-09-26/recovered_2025_conversation_material/Lunashield_L1_System_Design_Dossier_CONVERSATION_RECOVERY.md",
+      "path": "protection/reference/historical/Lunashield_L1_System_Design_Dossier_CONVERSATION_RECOVERY.md",
+      "sha256": "57a711fd1affeda06477069a9302e97a94f37b0570e6a76c2df3f85e723c176a",
+      "bytes": 3741,
+      "preservation": "verbatim",
+      "nature": "reconstruction written 2026-09-26 by the recovery pass from conversation records; not an original file"
     }
   ],
   "updates": [
@@ -2985,6 +3170,14 @@
         "engineering/reference/industrial_architecture/results/calculation_stdout.json",
         "engineering/reference/industrial_architecture/results/packet_rates.csv",
         "engineering/reference/industrial_architecture/INDUSTRIAL_ARCHITECTURE.json"
+      ]
+    },
+    {
+      "date": "2026-09-26",
+      "summary": "Marked the imported recovery-pass documents as reconstructions written on 2026-09-26, and imported the consolidated Lunashield-L1 and EL1-SH conversation records to protection/reference/historical/, with two private conversation identifiers removed.",
+      "retained_added": [
+        "protection/reference/historical/EL1_SH_CONVERSATION_RECOVERY.md",
+        "protection/reference/historical/Lunashield_L1_System_Design_Dossier_CONVERSATION_RECOVERY.md"
       ]
     }
   ]

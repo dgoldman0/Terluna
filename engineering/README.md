@@ -13,16 +13,18 @@ The route model is Sun-only and circular/coplanar. Electric propulsion includes 
 
 ## Industrial architecture from 19 September
 
-The industrial design worked out with the author on 19 September 2026 is in
+A reconstruction of the industrial design worked out with the author on
+19 September 2026 is in
 [reference/industrial_architecture/](reference/industrial_architecture/README.md),
-recovered and imported on 2026-09-26. It keeps three power ledgers apart
+written on 2026-09-26 from the conversation record; no file from 19 September
+survives. It keeps three power ledgers apart
 (civilization-wide power, the Open Moon's allocation, and where heat is
 released), sequences power from fission bootstrap through fusion to near-Sun
 collection with power beaming, and builds industry at the source bodies. Bulk
 material moves as a stream of standardized packets, about 2.7×10⁸ kg/s with
 some 5×10¹⁶ kg in transit, and a cislunar terminal layer brakes, captures,
 inspects, repacks, buffers and meters it; the Moon itself is never the brake.
-Its six traffic-safety rules are the author's decisions
+The author confirmed its six traffic-safety rules as decisions on 2026-09-26
 ([research/decisions.md](../research/decisions.md)). The document ends with a
 specification for the network model listed below.
 

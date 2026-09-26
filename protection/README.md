@@ -102,14 +102,19 @@ reports:
   corridors, secondary to protecting the lunar atmosphere and surface.
 
 [reference/historical/](reference/historical/) holds reconstructions of older
-concepts whose original files are unrecovered, made from the author's earlier
-project conversations: Lunashield-L1 (2025), a 23–40 t plasma-inflated
-mini-magnetosphere for the solar wind; the Earth–Sun L1 super hub EL1-SH (2025),
-with an EUV metascreen of tiles, rafts and veils, transparent photovoltaics
-capped at 1–2% of sunlight, power beaming and a mature hub near 300 TW; and the
-lineage from the 2025 plasma ideas to this design. They are labelled as
-reconstructions, and paths inside the lineage refer to the recovery dump's
-layout ([research/archive_status.md](../research/archive_status.md)).
+concepts whose original files are unrecovered. The recovery pass in the
+author's other project space wrote them on 2026-09-26 from the 2025
+conversation records, so their values are as recalled there and none is an
+original file. They cover Lunashield-L1 (2025), a 23–40 t plasma-inflated
+mini-magnetosphere for the solar wind, with a consolidated record of its system
+design dossier; the Earth–Sun L1 super hub EL1-SH (2025), with an EUV metascreen
+of tiles, rafts and veils, transparent photovoltaics capped at 1–2% of sunlight,
+power beaming and a mature hub near 300 TW, also with a consolidated record; and
+the lineage from the 2025 plasma ideas to this design. The Lunashield record
+keeps the staged idea for charged-particle protection: seed stations with local
+cavities, then more nodes whose cavities grow and merge until they fill a
+protected volume, then redundancy. Paths inside the lineage refer to the
+recovery dump's layout ([research/archive_status.md](../research/archive_status.md)).
 
 ## Condition and remaining questions
 
