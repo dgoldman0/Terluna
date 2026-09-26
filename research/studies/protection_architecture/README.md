@@ -29,6 +29,7 @@ with sources and status, and what each loss budget asks of it.
 | Shield transmission T(λ), 200 nm–5 µm | `protection/spectra/shield_transmission.json` | atmosphere, climate | Exists |
 | Film transmission, 0.1–210 nm | `protection/spectra/stack_short_wave.json` | atmosphere | Exists |
 | Loss response | `atmosphere/loss_response/results/loss_response.json` | this study | Exists, as a screening model |
+| Protected radius and exospheric ion production | `atmosphere/loss_response/results/absorption_radius.json` | this study | Exists, as a screening model |
 | Climate response to dimming | climate/gcm runs `A28`, `A28_dim3`, `A28_dim5`, `A28_dim8` | this study | Exists for an even cut |
 | Module catalogue: each unit's mass, power, materials, lifetime and failure behaviour | `protection/modules/catalogue.json` | engineering's network model | Exists for the September reference design |
 | Supply ledger: replacement, propellant and fresh material over time | `engineering/network/results/protection_supply_ledger.json` | this study | Exists for the September reference design |
@@ -47,9 +48,14 @@ reasons, stated.
 
 ## Next
 
-The loss budget is the author's to set, and requirements.md shows what each
-choice asks. The calculations that follow are the radius of the ultraviolet
-absorption layer in the hotter upper-air profiles, which sizes the shield; the
-trade of how the shield is held, against requirement S6, with the module
-catalogue and supply ledger scoring each option; and the assessment of effects
-on Earth.
+The loss budget is designed across 1–100 kg/s until the designs show which
+rate works best (the author's decision of 2026-09-26); requirements.md shows
+what each budget asks. The protected radius is computed: the shield reaches to
+just under the exobase, 2.7–5.2 lunar radii across the range. Two losses the
+loss response leaves out are large enough to change the allowed leaks, Earth's
+tidal lowering of the escape barrier and the escape of ions made in the sunlit
+exosphere, and the second decides whether charged-particle protection is needed
+at every budget. Next come those two losses in the loss response, with a plasma
+estimate of the ions' escape; the trade of how the shield is held, against
+requirement S6, with the module catalogue and supply ledger scoring each
+option; and the assessment of effects on Earth.

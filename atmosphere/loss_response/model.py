@@ -29,11 +29,15 @@ ions that fall back into the air (a fraction of the pickup, times a yield of
 1-10) and from solar-wind protons that reach it (a precipitating fraction times
 a yield of 0.01-0.1 N2 molecules per proton). All of it scales with the share of
 each orbit the Moon spends in the solar wind rather than in Earth's magnetotail.
+absorption.py counts the ions the sunlit exosphere makes outside the shield's
+shadow; they exceed this cap 40-600 times, so the cap stands only if most of
+them stay with the Moon.
 
 Not included: atomic-oxygen escape (about half again behind the 200-nm edge, per
 the middle-atmosphere results), photochemical escape, hydrogen from water,
-Earth's tidal lowering of the escape barrier (flagged where the exobase passes
-3.5 lunar radii), the day-night circulation of the upper air, and plasma physics
+Earth's tidal lowering of the escape barrier (the feasibility baseline's barrier
+factor multiplies the molecular escape at the allowed leaks by 2.5-4.2; the
+column flags exobases beyond 3.5 lunar radii), the day-night circulation of the upper air, and plasma physics
 beyond the scalings above.
 """
 from __future__ import annotations
