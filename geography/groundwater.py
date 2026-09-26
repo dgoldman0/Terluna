@@ -89,7 +89,7 @@ def results():
         share=atlas.get('share'),
         standing_water=dict(seas_kg=float(f'{seas_kg:.3e}'), seas_layer_m=round(layer(seas_kg), 1),
                             rain_fed_lakes_kg=float(f'{lakes_kg:.3e}'), lakes_layer_m=round(layer(lakes_kg), 1),
-                            lakes_from='results/drainage.json (runoff from climate run A)'),
+                            lakes_from=f"results/drainage.json (runoff from climate run {drainage['climatology']['run']}, years {drainage['climatology']['years']})"),
         crust=rows)
 
 

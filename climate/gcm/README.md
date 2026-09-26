@@ -376,6 +376,45 @@ both corrections and runs 15 years. Years 10–14:
   spectral temperatures to the grid over steep terrain. The surface fields are
   unaffected; analyses of the lowest level should screen it.
 
+### A28: the 28% seas with their lakes
+
+The scenario's water share is 28% (`shared/scenarios/water.json`), and the
+geography domain's drainage estimate adds rain-fed lakes above sea level. Run
+`A28` takes both: the boundary builder combines the atlas's seas with the
+drainage estimate's lakes (`products/moon_28pct_water_lakes_*.nc`, with each
+cell's water surface height), and PlaSim's binary mask then makes 759 of the
+2,048 T21 cells water, 40% of the surface. 201 of them are lakes, standing at
+their own levels up to 8.1 km above sea level. A restart carries PlaSim's
+land-sea mask and orography, so a new coastline needs a cold start: `A28` ran
+30 years from ExoPlaSim's cold state with both cloud corrections, paused
+overnight after year 7 and resumed. Years 25–29, against the corrected 25% run:
+
+| | 25% water (`A_corrected_clouds`) | 28% seas and lakes, 40% water (`A28`) |
+|---|---|---|
+| Surface temperature | 299.6 K | 302.8 K, settling near 303.2 |
+| Sea surface | 302.4 K | 304.3 K |
+| Air over land; within 12° of the equator / poleward of 70° | 299.3; 299.7 / 299.3 K | 302.4; 302.4 / 302.0 K |
+| Land air, annual means: 5th / 50th / 95th percentile | 296.6 / 299.3 / 301.5 K | 300.3 / 302.3 / 304.4 K |
+| Coldest land cell, annual mean | 295.5 K, 7.2 km up | 297.1 K, 8.4 km up |
+| Half-hourly extremes of the air near the ground | 286.5–315.9 K | 289.4–317.8 K |
+| Planetary albedo | 0.293 | 0.278 |
+| Cloud effect: sunlight, infrared, net | −13.4, +7.6, −5.8 W/m² | −13.0, +6.7, −6.3 W/m² |
+| Cloud cover | 20% | 17% |
+| Precipitation; land under 0.5 / over 5 mm/day | 3.50 mm/day; 3% / 28% | 3.70 mm/day; 2% / 20% |
+| Water vapour | 263 kg/m² | 307 kg/m² |
+
+- **More water makes the Moon warmer and no more varied.** The water is darker
+  than the placeholder land and fills the air with vapour: the Moon settles
+  3.6 K warmer, near 303 K (30 °C), and annual means over land still span only
+  about 4 K. The lakes, a mean 4.5 km above sea level, run 0.8 K cooler than the
+  seas. Nowhere is cool: the coldest land, 8.4 km up, averages 24 °C.
+- **Lakes and climate agree.** The lakes came from run A's runoff; routed again
+  with `A28`'s own climatology (`python -m climate.gcm.climatology A28:20-29`,
+  then `python -m geography.drainage --climatology
+  climate/gcm/products/climatology_A28.npz`), they cover 12.9% instead of 12.0%
+  and would flip 84 T21 cells, raising the water from 40.1% to 40.9%, worth
+  about 0.1 K. The geography domain now carries that routing.
+
 ### Cloud amount: what published models say
 
 From a literature search, with Yang et al. (2014) and Way et al. (2018) checked
@@ -409,7 +448,7 @@ against the papers:
 | B, 35% water | Done (40 years, above) |
 | Cloud-water bracket | Done (15 years each, above): `A_earth_path_clouds`, `A_full_column_clouds`, and `A_patch_check` for the patch's regression test |
 | Corrected clouds | Done (15 years, above): `A_corrected_clouds`, both corrections; the design case with PlaSim's cloud amount |
-| 28% water with lakes | Next: the atlas's 28% seas with the large rain-fed lakes as water cells, for the geography domain's water balance and the design case |
+| A28, 28% seas with lakes | Done (30 years from cold, above): the design case with the scenario's water, 303 K |
 | C, 1.0 atm | Not run: no current decision needs it. The 1-D balance puts 1.0 atm 0.2–1.3 K cooler than 1.2 atm, depending on the clouds, and 1.2 atm is the design pressure. The runner keeps it defined |
 | D, E | Need ExoPlaSim's ozone profile from the 1-D results, and a way to add the trace gases' forcing |
 

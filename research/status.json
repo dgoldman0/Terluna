@@ -32,7 +32,7 @@
     },
     {
       "topic": "climate",
-      "condition": "periodic_conservative_spatial_linear_screen; uncalibrated; clear_sky_radiation_computed_for_prescribed_columns; single_column_month_long_day_night_with_weak_temperature_gradient_exchange; gcm_boundary_files_prepared; exoplasim_radiation_calibrated_to_line_by_line; exoplasim_design_case_settled_295k; exoplasim_cloud_water_corrected_and_bracketed_292_298k; exoplasim_convective_cloud_units_corrected_design_case_299.6k; slow_rotator_cloud_literature_reviewed",
+      "condition": "periodic_conservative_spatial_linear_screen; uncalibrated; clear_sky_radiation_computed_for_prescribed_columns; single_column_month_long_day_night_with_weak_temperature_gradient_exchange; gcm_boundary_files_prepared; exoplasim_radiation_calibrated_to_line_by_line; exoplasim_design_case_settled_295k; exoplasim_cloud_water_corrected_and_bracketed_292_298k; exoplasim_convective_cloud_units_corrected_design_case_299.6k; slow_rotator_cloud_literature_reviewed; design_case_28pct_seas_with_lakes_settles_303k",
       "material": [
         "../climate/reference/thermal_response.csv",
         "baselines/feasibility/model.py",
@@ -45,17 +45,17 @@
       ],
       "unresolved": [
         "absolute cloud amount: PlaSim diagnoses cover (20-28%); published slow-rotator GCMs suggest no thick day-side deck at this sunlight, but models disagree widely on amounts",
-        "open water at the atlas's 28% seas plus about 12% rain-fed lakes, which the GCM does not yet carry",
+        "a mix of climates: every run so far is warm and even (land annual means within about 5 K), and more water makes it warmer",
         "moisture/ice/clouds",
         "dynamical heat transport and weather, including the day-night and polar circulation the single column replaces with relaxation, and the free-atmosphere temperature it holds at the global mean",
         "actual terrain",
         "spatial resolution sensitivity"
       ],
-      "next_session_task": "Run the design case at the atlas's 28% seas with the large rain-fed lakes as water cells and both cloud corrections, and iterate the lakes with its rainfall (with geography). Then test cloud amount: a 1-day-rotation reference run against the published fast-to-slow changes, or a cloud-resolving model at lunar gravity; ROCKE-3D on rented compute; runs D and E."
+      "next_session_task": "Decide with the author how to give the Moon cooler climates alongside warm ones (less sunlight through the shield, shield-driven seasons, surface choices) and test the chosen levers in ExoPlaSim; then cloud amount (a 1-day-rotation reference run or a cloud-resolving model at lunar gravity); ROCKE-3D on rented compute; runs D and E."
     },
     {
       "topic": "geography",
-      "condition": "lola_topography_above_grail_geoid; hydrostatic_storage_computed; land_sea_masks_25_35pct; drainage_and_rainfed_lakes_first_estimate_run_A; atlas_at_28pct_water_share; iau_nomenclature_input",
+      "condition": "lola_topography_above_grail_geoid; hydrostatic_storage_computed; land_sea_masks_25_35pct; drainage_and_rainfed_lakes_from_run_A28_consistent_with_its_climate; atlas_at_28pct_water_share; iau_nomenclature_input; groundwater_first_estimate_from_grail_porosity",
       "material": [
         "../geography/datasets.json",
         "../geography/inputs.json",
@@ -70,15 +70,13 @@
         "../geography/results/drainage.json"
       ],
       "unresolved": [
-        "how the water inventory divides between the seas and rain-fed lakes: lakes above sea level hold about a third of the seas' volume in the first estimate",
-        "runoff from a climate run at 28% water (the first estimate uses run A at 25%)",
         "polar cold-trapping",
         "crustal loading",
         "erosion and sediment",
         "groundwater storage in the porous crust, which sets the delivered inventory for 28% cover and how much of the rain lakes keep",
         "polar heights from the LOLA polar stereographic grids"
       ],
-      "next_session_task": "Settle the sea level with rain-fed lakes in the water inventory (with groundwater), from a climate run at 28%; polar cold-trapping."
+      "next_session_task": "How fast and how deep the crust takes up water, which sets the inventory to deliver (1.8-6.9 times the seas, by the first estimate); polar cold-trapping."
     },
     {
       "topic": "illumination",
