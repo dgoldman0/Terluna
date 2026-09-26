@@ -1,0 +1,158 @@
+{
+  "schema": "terluna.protection.uv-transmission/1",
+  "producer": {
+    "domain": "protection",
+    "files": {
+      "protection/transmission/model.py": "2d5701bf2cf7002e",
+      "protection/spectra/stack_short_wave.json": "82b094f9724caf9f"
+    }
+  },
+  "evidence": "The time- and area-averaged share of the aperture left uncovered, for three sets of design choices: seams from a Gaussian relative-position error against an overlap, micrometeoroid holes from the Grun et al. (1985) flux with holes 1-4 times the particle diameter, cells missing between failure and cover, and a manufacturing defect specification. The choices are assumptions to test; no formation control, impact test or failure record for such cells exists yet.",
+  "reading_rule": "levels[name].transmission_by_hole_factor[\"k\"] is the fraction of direct sunlight below 175 nm that reaches the protected region, to set against the loss response's allowed transmission (its field allowed_leak_fraction). terms gives each contribution; sweeps give each term over its lever. The intact film adds film_transmission_max_10_175_nm at most.",
+  "film_transmission_max_10_175_nm": 1.71e-43,
+  "holing_rate_per_year_hole_factor_1": 1.4668156548555028e-07,
+  "dominant_particle_diameter_m": 5.840419749275994e-05,
+  "cell_side_m": 10000.0,
+  "missing_cell_patch": {
+    "radius_km": 367.69999999999993,
+    "share_of_full_sunlight": 0.00024196637386360165
+  },
+  "levels": {
+    "tight": {
+      "parameters": {
+        "sigma_m": 1.0,
+        "overlap_m": 50.0,
+        "layer_gap_m": 100.0,
+        "patch_years": 10.0,
+        "failures_per_cell_year": 0.01,
+        "cover_days": 1.0,
+        "defect_fraction": 1e-06
+      },
+      "terms": {
+        "seams": 0.0,
+        "missing_cells": 2.7378507871321012e-05,
+        "defects": 1e-06,
+        "micrometeoroid_holes_by_hole_factor": {
+          "1": 7.334078274277514e-07,
+          "2": 2.9336313097110055e-06,
+          "4": 1.1734525238844022e-05
+        }
+      },
+      "transmission_by_hole_factor": {
+        "1": 2.9111915698748763e-05,
+        "2": 3.1312139181032016e-05,
+        "4": 4.0113033110165035e-05
+      },
+      "overlap_film_mass_share": 0.01
+    },
+    "standard": {
+      "parameters": {
+        "sigma_m": 3.0,
+        "overlap_m": 50.0,
+        "layer_gap_m": 100.0,
+        "patch_years": 20.0,
+        "failures_per_cell_year": 0.01,
+        "cover_days": 7.0,
+        "defect_fraction": 1e-06
+      },
+      "terms": {
+        "seams": 5.455078842649493e-66,
+        "missing_cells": 0.00019164955509924712,
+        "defects": 1e-06,
+        "micrometeoroid_holes_by_hole_factor": {
+          "1": 1.4668156548555028e-06,
+          "2": 5.867262619422011e-06,
+          "4": 2.3469050477688044e-05
+        }
+      },
+      "transmission_by_hole_factor": {
+        "1": 0.0001941163707541026,
+        "2": 0.00019851681771866913,
+        "4": 0.00021611860557693518
+      },
+      "overlap_film_mass_share": 0.01
+    },
+    "relaxed": {
+      "parameters": {
+        "sigma_m": 10.0,
+        "overlap_m": 20.0,
+        "layer_gap_m": 100.0,
+        "patch_years": 100.0,
+        "failures_per_cell_year": 0.03,
+        "cover_days": 30.0,
+        "defect_fraction": 1e-05
+      },
+      "terms": {
+        "seams": 1.9217608975427993e-05,
+        "missing_cells": 0.002464065708418891,
+        "defects": 1e-05,
+        "micrometeoroid_holes_by_hole_factor": {
+          "1": 7.334078274277514e-06,
+          "2": 2.9336313097110055e-05,
+          "4": 0.00011734525238844022
+        }
+      },
+      "transmission_by_hole_factor": {
+        "1": 0.0025006173956685965,
+        "2": 0.002522619630491429,
+        "4": 0.002610628569782759
+      },
+      "overlap_film_mass_share": 0.004
+    }
+  },
+  "sweeps": {
+    "seams_by_overlap_m": {
+      "0": 0.0002887353782198116,
+      "5": 1.712172748571942e-05,
+      "10": 1.204250112653604e-07,
+      "20": 3.278909155251185e-15,
+      "50": 5.455078842649493e-66,
+      "100": 1.9957868974847125e-246
+    },
+    "seams_butt_joint_by_sigma_m": {
+      "1": 7.978845608028655e-05,
+      "3": 0.00023936536824085964,
+      "10": 0.0007978845608028654,
+      "30": 0.002393653682408596
+    },
+    "holes_by_patch_years": {
+      "10": {
+        "1": 7.334078274277514e-07,
+        "2": 2.9336313097110055e-06,
+        "4": 1.1734525238844022e-05
+      },
+      "20": {
+        "1": 1.4668156548555028e-06,
+        "2": 5.867262619422011e-06,
+        "4": 2.3469050477688044e-05
+      },
+      "100": {
+        "1": 7.334078274277514e-06,
+        "2": 2.9336313097110055e-05,
+        "4": 0.00011734525238844022
+      },
+      "1000": {
+        "1": 7.334078274277514e-05,
+        "2": 0.00029336313097110055,
+        "4": 0.0011734525238844022
+      }
+    },
+    "missing_by_cover_days": {
+      "1": {
+        "0.001": 2.7378507871321015e-06,
+        "0.01": 2.7378507871321012e-05,
+        "0.03": 8.213552361396303e-05
+      },
+      "7": {
+        "0.001": 1.916495550992471e-05,
+        "0.01": 0.00019164955509924712,
+        "0.03": 0.0005749486652977412
+      },
+      "30": {
+        "0.001": 8.213552361396303e-05,
+        "0.01": 0.0008213552361396304,
+        "0.03": 0.002464065708418891
+      }
+    }
+  }
+}

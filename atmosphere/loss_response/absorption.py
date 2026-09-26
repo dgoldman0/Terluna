@@ -22,7 +22,8 @@ with 2e-21 m^2 per molecule (N2, O2 and O photoabsorption is 1-3e-21 m^2 over
 cross-section that falls from about 1.5e-21 m^2 at 140 nm to 1e-23 m^2 at
 175 nm; the last two act on O2, 17.5% of the air. The protected radius is the
 smallest R at which f_limb is a tenth of the allowed leak (half is also
-reported). The aperture adds the Sun's angular radius times the shield's
+reported); a caller may hold it to shares of another reference, such as the
+whole heating expressed as an equivalent transmission. The aperture adds the Sun's angular radius times the shield's
 distance (78,000 km in the September design).
 
 Ionization of the exosphere. Above the exobase the air is collisionless, and
@@ -191,7 +192,8 @@ def aperture(radius_R, distance_km=SEPTEMBER['distance_km']):
     return dict(aperture_radius_km=r, area_over_september=(r / september) ** 2)
 
 
-def case(shield, treatment, activity, leak, budget, weights):
+def case(shield, treatment, activity, leak, budget, weights, reference=None):
+    """One column at the given leak. The limb deposit is held to shares of reference (default: the leak)."""
     base = lr.base_conditions(shield, treatment)
     cfg = ColumnConfig(surface_pressure_pa=base['surface_pressure_pa'],
                        surface_temperature_k=base['surface_temperature_k'],
@@ -204,8 +206,9 @@ def case(shield, treatment, activity, leak, budget, weights):
     summary, profile, _ = solve_column(q, cfg)
     b, heat, tau1 = limb_heating_curve(profile, weights)
     heating = {}
+    ref = leak if reference is None else reference
     for share in SHARES:
-        r = smallest_radius(b, heat, share * leak)
+        r = smallest_radius(b, heat, share * ref)
         heating[f'{share:g}'] = dict(radius_R=r, aperture=aperture(r) if r is not None else None)
     r_heat = heating[f'{SHARES[0]:g}']['radius_R']
     grid = np.linspace(1.5, 30.0, 115)

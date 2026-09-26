@@ -1,0 +1,2537 @@
+{
+  "schema": "terluna.research.protection-design-point/1",
+  "producer": {
+    "study": "protection_architecture",
+    "files": {
+      "research/studies/protection_architecture/run.py": "debaafa116df3edb",
+      "atmosphere/loss_response/model.py": "06cbbdf17910b415",
+      "atmosphere/loss_response/absorption.py": "94c2d40ab4773acd",
+      "atmosphere/thermal_column.py": "ca108980727d63d9"
+    },
+    "inputs": {
+      "protection/transmission/results/uv_transmission.json": "6589385e2665ade4",
+      "research/baselines/feasibility/reference.json": "5878ad8ff00e42bf"
+    }
+  },
+  "evidence": "The loss response and its absorption step evaluated at the ultraviolet transmission the swarm model gives for three levels of design choices. Screening models throughout; the loss leaves out Earth's tidal barrier and the escape of exospheric ions, which can each exceed it.",
+  "reading_rule": "summary[level][shield] gives ranges over the upper-air treatments, quiet Sun and solar maximum, and holes 1 and 4 times the particle diameter. total_loss_kg_s adds the solar-wind screening range to the ultraviolet-driven loss; cycle_time_years is the atmosphere's mass over that loss. protected_radius_R is in lunar radii from the Moon's centre.",
+  "atmosphere_mass_kg": 3.1413494805269903e+18,
+  "summary": {
+    "relaxed": {
+      "titania_stack": {
+        "transmission": [
+          0.0025006173956685965,
+          0.002610628569782759
+        ],
+        "uv_driven_loss_kg_s": [
+          0.0022504535505869718,
+          104.03260836137599
+        ],
+        "total_loss_kg_s": {
+          "low": [
+            0.03176017097273625,
+            104.06211807879814
+          ],
+          "central": [
+            0.18870970724410135,
+            104.2190676150695
+          ],
+          "high": [
+            2.133271863638089,
+            106.16362977146349
+          ]
+        },
+        "cycle_time_years": {
+          "low": [
+            956576322.2128254,
+            3134219846579.04
+          ],
+          "central": [
+            955135758.4694039,
+            527494635263.94714
+          ],
+          "high": [
+            937640870.1151106,
+            46662293676.78056
+          ]
+        },
+        "glow_share_of_heating": [
+          0.21918227275476868,
+          0.37436668084474006
+        ],
+        "exobase_radius_R": [
+          2.2346076427251833,
+          4.8777219033025325
+        ],
+        "protected_radius_R": [
+          2.206070561333059,
+          4.832159021580212
+        ],
+        "aperture_area_over_september": [
+          0.5663706542870179,
+          2.4679871056299905
+        ],
+        "exosphere_ion_production_kg_s": [
+          4.760653441780852,
+          162.97212841148863
+        ]
+      },
+      "edge_200nm": {
+        "transmission": [
+          0.0025006173956685965,
+          0.002610628569782759
+        ],
+        "uv_driven_loss_kg_s": [
+          15.490267750207787,
+          163.81351630140963
+        ],
+        "total_loss_kg_s": {
+          "low": [
+            15.519777467629936,
+            163.84302601883178
+          ],
+          "central": [
+            15.676727003901302,
+            163.99997555510316
+          ],
+          "high": [
+            17.62128916029529,
+            165.94453771149713
+          ]
+        },
+        "cycle_time_years": {
+          "low": [
+            607553220.9839202,
+            6413968138.468097
+          ],
+          "central": [
+            606971786.7735134,
+            6349753884.769518
+          ],
+          "high": [
+            599859203.3595862,
+            5649039482.184253
+          ]
+        },
+        "glow_share_of_heating": [
+          0.262669826643046,
+          0.3986422641171332
+        ],
+        "exobase_radius_R": [
+          3.924607776105053,
+          5.694086680005092
+        ],
+        "protected_radius_R": [
+          3.88132324366887,
+          5.64755924172247
+        ],
+        "aperture_area_over_september": [
+          1.6247576396580194,
+          3.330983046508802
+        ],
+        "exosphere_ion_production_kg_s": [
+          35.70831383907617,
+          198.12839137696142
+        ]
+      }
+    },
+    "standard": {
+      "titania_stack": {
+        "transmission": [
+          0.0001941163707541026,
+          0.00021611860557693518
+        ],
+        "uv_driven_loss_kg_s": [
+          1.7121547741497192e-07,
+          1.0164601110211513
+        ],
+        "total_loss_kg_s": {
+          "low": [
+            0.029509888637626693,
+            1.0459698284433006
+          ],
+          "central": [
+            0.18645942490899178,
+            1.2029193647146657
+          ],
+          "high": [
+            2.1310215813029796,
+            3.1474815211086535
+          ]
+        },
+        "cycle_time_years": {
+          "low": [
+            95168479516.8922,
+            3373220394555.1445
+          ],
+          "central": [
+            82751480368.01729,
+            533860695119.4835
+          ],
+          "high": [
+            31626351902.5938,
+            46711567384.79827
+          ]
+        },
+        "glow_share_of_heating": [
+          0.7555960862013767,
+          0.8848902354610991
+        ],
+        "exobase_radius_R": [
+          1.9128916219280974,
+          3.1596683975765814
+        ],
+        "protected_radius_R": [
+          1.90097818864406,
+          3.143325987391229
+        ],
+        "aperture_area_over_september": [
+          0.43230040918941987,
+          1.0913287227342159
+        ],
+        "exosphere_ion_production_kg_s": [
+          2.3433418132376107,
+          38.32752962694979
+        ]
+      },
+      "edge_200nm": {
+        "transmission": [
+          0.0001941163707541026,
+          0.00021611860557693518
+        ],
+        "uv_driven_loss_kg_s": [
+          0.2773721515326066,
+          16.95281072026257
+        ],
+        "total_loss_kg_s": {
+          "low": [
+            0.3068818689547559,
+            16.98232043768472
+          ],
+          "central": [
+            0.463831405226121,
+            17.139269973956083
+          ],
+          "high": [
+            2.408393561620109,
+            19.08383213035007
+          ]
+        },
+        "cycle_time_years": {
+          "low": [
+            5861587558.588355,
+            324370281413.29956
+          ],
+          "central": [
+            5807911208.864453,
+            214611078663.30316
+          ],
+          "high": [
+            5216109506.391234,
+            41331848656.21855
+          ]
+        },
+        "glow_share_of_heating": [
+          0.811437980406729,
+          0.8951733686396055
+        ],
+        "exobase_radius_R": [
+          3.0360643163541305,
+          4.146504244556159
+        ],
+        "protected_radius_R": [
+          3.015893312940309,
+          4.127091647492501
+        ],
+        "aperture_area_over_september": [
+          1.009930669815659,
+          1.8258826712287979
+        ],
+        "exosphere_ion_production_kg_s": [
+          12.137343130993278,
+          97.05087472738396
+        ]
+      }
+    },
+    "tight": {
+      "titania_stack": {
+        "transmission": [
+          2.9111915698748763e-05,
+          4.0113033110165035e-05
+        ],
+        "uv_driven_loss_kg_s": [
+          6.882032369609396e-08,
+          0.3674951865785901
+        ],
+        "total_loss_kg_s": {
+          "low": [
+            0.029509786242472975,
+            0.3970049040007394
+          ],
+          "central": [
+            0.18645932251383807,
+            0.5539544402721045
+          ],
+          "high": [
+            2.131021478907826,
+            2.4985165966660925
+          ]
+        },
+        "cycle_time_years": {
+          "low": [
+            250735840263.84747,
+            3373232099195.022
+          ],
+          "central": [
+            179695929767.43256,
+            533860988291.9954
+          ],
+          "high": [
+            39840983376.424095,
+            46711569629.27969
+          ]
+        },
+        "glow_share_of_heating": [
+          0.9213337798725901,
+          0.9805502563194747
+        ],
+        "exobase_radius_R": [
+          1.8943033202518345,
+          3.003227536313111
+        ],
+        "protected_radius_R": [
+          1.8835094512988635,
+          2.9892689215825787
+        ],
+        "aperture_area_over_september": [
+          0.4251711808260471,
+          0.9933226144892527
+        ],
+        "exosphere_ion_production_kg_s": [
+          2.2311807872763874,
+          30.375675277776377
+        ]
+      },
+      "edge_200nm": {
+        "transmission": [
+          2.9111915698748763e-05,
+          4.0113033110165035e-05
+        ],
+        "uv_driven_loss_kg_s": [
+          0.17960862167772187,
+          10.612864689261626
+        ],
+        "total_loss_kg_s": {
+          "low": [
+            0.20911833909987115,
+            10.642374406683775
+          ],
+          "central": [
+            0.36606787537123625,
+            10.79932394295514
+          ],
+          "high": [
+            2.310630031765224,
+            12.743886099349128
+          ]
+        },
+        "cycle_time_years": {
+          "low": [
+            9353491466.244305,
+            476014483578.8572
+          ],
+          "central": [
+            9217554609.835543,
+            271925959338.94696
+          ],
+          "high": [
+            7811067787.131078,
+            43080613003.82501
+          ]
+        },
+        "glow_share_of_heating": [
+          0.9586521177578976,
+          0.9827411349429237
+        ],
+        "exobase_radius_R": [
+          2.9799634457045445,
+          3.9734519438622815
+        ],
+        "protected_radius_R": [
+          2.961410893232616,
+          3.9564177894962507
+        ],
+        "aperture_area_over_september": [
+          0.9760924373951932,
+          1.6849666138423047
+        ],
+        "exosphere_ion_production_kg_s": [
+          11.135406147541259,
+          83.46775674285114
+        ]
+      }
+    }
+  },
+  "points": [
+    {
+      "shield": "titania_stack",
+      "treatment": "collisional",
+      "activity": "quiet",
+      "transmission": 2.9111915698748763e-05,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0012618286071211923,
+      "glow_share_of_heating": 0.9764729153589984,
+      "uv_driven_loss_kg_s": 6.882032369609396e-08,
+      "total_loss_kg_s": {
+        "low": 0.029509786242472975,
+        "central": 0.18645932251383807,
+        "high": 2.131021478907826
+      },
+      "cycle_time_years": {
+        "low": 3373232099195.022,
+        "central": 533860988291.9954,
+        "high": 46711569629.27969
+      },
+      "exobase_radius_R": 1.8943033202518345,
+      "exobase_temperature_k": 174.00856448354733,
+      "protected_radius_R": 1.8835094512988635,
+      "aperture": {
+        "aperture_radius_km": 3635.145767041694,
+        "area_over_september": 0.4251711808260471
+      },
+      "exosphere_ion_production_kg_s": 2.2311807872763874,
+      "level": "tight",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "collisional",
+      "activity": "solar_maximum",
+      "transmission": 2.9111915698748763e-05,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0007914061006433081,
+      "glow_share_of_heating": 0.934140986032921,
+      "uv_driven_loss_kg_s": 2.7316535947232154e-06,
+      "total_loss_kg_s": {
+        "low": 0.029512449075744,
+        "central": 0.1864619853471091,
+        "high": 2.131024141741097
+      },
+      "cycle_time_years": {
+        "low": 3372927741036.1455,
+        "central": 533853364310.0932,
+        "high": 46711511260.57362
+      },
+      "exobase_radius_R": 1.9786444876473168,
+      "exobase_temperature_k": 192.38336063297018,
+      "protected_radius_R": 1.9699404179327775,
+      "aperture": {
+        "aperture_radius_km": 3785.310928471456,
+        "area_over_september": 0.461023725083507
+      },
+      "exosphere_ion_production_kg_s": 6.5861914586740316,
+      "level": "tight",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "lte",
+      "activity": "quiet",
+      "transmission": 2.9111915698748763e-05,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0013646343459334782,
+      "glow_share_of_heating": 0.9782453456996423,
+      "uv_driven_loss_kg_s": 4.183607954696414e-05,
+      "total_loss_kg_s": {
+        "low": 0.02955155350169624,
+        "central": 0.18650108977306135,
+        "high": 2.131063246167049
+      },
+      "cycle_time_years": {
+        "low": 3368464476420.157,
+        "central": 533741429149.9318,
+        "high": 46710654117.15637
+      },
+      "exobase_radius_R": 2.167117831038794,
+      "exobase_temperature_k": 198.3380697778423,
+      "protected_radius_R": 2.1540333834516314,
+      "aperture": {
+        "aperture_radius_km": 4105.154046763912,
+        "area_over_september": 0.5422244236802315
+      },
+      "exosphere_ion_production_kg_s": 3.532166575903407,
+      "level": "tight",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "lte",
+      "activity": "solar_maximum",
+      "transmission": 2.9111915698748763e-05,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0008530895439306797,
+      "glow_share_of_heating": 0.9389029840926822,
+      "uv_driven_loss_kg_s": 0.0008112646417061909,
+      "total_loss_kg_s": {
+        "low": 0.03032098206385547,
+        "central": 0.18727051833522057,
+        "high": 2.1318326747292082
+      },
+      "cycle_time_years": {
+        "low": 3282985952890.869,
+        "central": 531548473718.15094,
+        "high": 46693795143.250534
+      },
+      "exobase_radius_R": 2.2947125088959512,
+      "exobase_temperature_k": 218.4535513692314,
+      "protected_radius_R": 2.2841833635194955,
+      "aperture": {
+        "aperture_radius_km": 4331.27662213382,
+        "area_over_september": 0.6036038497508018
+      },
+      "exosphere_ion_production_kg_s": 11.070849395249029,
+      "level": "tight",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "all_heats",
+      "activity": "quiet",
+      "transmission": 2.9111915698748763e-05,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0015263516542844075,
+      "glow_share_of_heating": 0.9805502563194747,
+      "uv_driven_loss_kg_s": 0.034042656507246485,
+      "total_loss_kg_s": {
+        "low": 0.06355237392939576,
+        "central": 0.22050191020076088,
+        "high": 2.165064066594749
+      },
+      "cycle_time_years": {
+        "low": 1566320060743.637,
+        "central": 451439890488.30475,
+        "high": 45977095888.001625
+      },
+      "exobase_radius_R": 2.735649555969966,
+      "exobase_temperature_k": 231.83880990116796,
+      "protected_radius_R": 2.7185631377513855,
+      "aperture": {
+        "aperture_radius_km": 5085.968041884305,
+        "area_over_september": 0.832276078418497
+      },
+      "exosphere_ion_production_kg_s": 8.073889202331952,
+      "level": "tight",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "all_heats",
+      "activity": "solar_maximum",
+      "transmission": 2.9111915698748763e-05,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0009501199289412371,
+      "glow_share_of_heating": 0.9451424774407372,
+      "uv_driven_loss_kg_s": 0.34345040924690556,
+      "total_loss_kg_s": {
+        "low": 0.37296012666905487,
+        "central": 0.52990966294042,
+        "high": 2.4744718193344077
+      },
+      "cycle_time_years": {
+        "low": 266900805409.21475,
+        "central": 187849675435.50076,
+        "high": 40228123600.239265
+      },
+      "exobase_radius_R": 2.9939222089532778,
+      "exobase_temperature_k": 254.57919667274692,
+      "protected_radius_R": 2.980108938726714,
+      "aperture": {
+        "aperture_radius_km": 5540.377716498841,
+        "area_over_september": 0.9876405349772104
+      },
+      "exosphere_ion_production_kg_s": 29.944336869532087,
+      "level": "tight",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "collisional",
+      "activity": "quiet",
+      "transmission": 2.9111915698748763e-05,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0015791487436871722,
+      "glow_share_of_heating": 0.9815648045726364,
+      "uv_driven_loss_kg_s": 0.17960862167772187,
+      "total_loss_kg_s": {
+        "low": 0.20911833909987115,
+        "central": 0.36606787537123625,
+        "high": 2.310630031765224
+      },
+      "cycle_time_years": {
+        "low": 476014483578.8572,
+        "central": 271925959338.94696,
+        "high": 43080613003.82501
+      },
+      "exobase_radius_R": 2.9799634457045445,
+      "exobase_temperature_k": 241.77440804530076,
+      "protected_radius_R": 2.961410893232616,
+      "aperture": {
+        "aperture_radius_km": 5507.891732257396,
+        "area_over_september": 0.9760924373951932
+      },
+      "exosphere_ion_production_kg_s": 11.135406147541259,
+      "level": "tight",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "collisional",
+      "activity": "solar_maximum",
+      "transmission": 2.9111915698748763e-05,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0009591340124918027,
+      "glow_share_of_heating": 0.9696477079119353,
+      "uv_driven_loss_kg_s": 1.3016690508549649,
+      "total_loss_kg_s": {
+        "low": 1.3311787682771141,
+        "central": 1.4881283045484792,
+        "high": 3.4326904609424673
+      },
+      "cycle_time_years": {
+        "low": 74778354767.72821,
+        "central": 66891650329.63771,
+        "high": 28998640957.03031
+      },
+      "exobase_radius_R": 3.279745091596587,
+      "exobase_temperature_k": 263.03764836641375,
+      "protected_radius_R": 3.2650637510580998,
+      "aperture": {
+        "aperture_radius_km": 6035.458207443391,
+        "area_over_september": 1.1720351923528398
+      },
+      "exosphere_ion_production_kg_s": 42.41491466691797,
+      "level": "tight",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "lte",
+      "activity": "quiet",
+      "transmission": 2.9111915698748763e-05,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0015817246375097154,
+      "glow_share_of_heating": 0.9815948269323396,
+      "uv_driven_loss_kg_s": 0.19358079563084724,
+      "total_loss_kg_s": {
+        "low": 0.22309051305299651,
+        "central": 0.38004004932436164,
+        "high": 2.3246022057183495
+      },
+      "cycle_time_years": {
+        "low": 446201664209.0305,
+        "central": 261928600342.15472,
+        "high": 42821674155.09811
+      },
+      "exobase_radius_R": 2.992681160026818,
+      "exobase_temperature_k": 242.2368011984502,
+      "protected_radius_R": 2.9740563526553423,
+      "aperture": {
+        "aperture_radius_km": 5529.86195345844,
+        "area_over_september": 0.9838949645019541
+      },
+      "exosphere_ion_production_kg_s": 11.31732210981586,
+      "level": "tight",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "lte",
+      "activity": "solar_maximum",
+      "transmission": 2.9111915698748763e-05,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0009606795487853287,
+      "glow_share_of_heating": 0.9696965385225933,
+      "uv_driven_loss_kg_s": 1.3878969226506621,
+      "total_loss_kg_s": {
+        "low": 1.4174066400728114,
+        "central": 1.5743561763441765,
+        "high": 3.5189183327381643
+      },
+      "cycle_time_years": {
+        "low": 70229216781.6993,
+        "central": 63227978324.85647,
+        "high": 28288055811.75172
+      },
+      "exobase_radius_R": 3.2954220211971803,
+      "exobase_temperature_k": 263.4672503049012,
+      "protected_radius_R": 3.2806827813169233,
+      "aperture": {
+        "aperture_radius_km": 6062.594710615072,
+        "area_over_september": 1.182598246878425
+      },
+      "exosphere_ion_production_kg_s": 43.19414012382961,
+      "level": "tight",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "all_heats",
+      "activity": "quiet",
+      "transmission": 2.9111915698748763e-05,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0016867804228420352,
+      "glow_share_of_heating": 0.9827411349429237,
+      "uv_driven_loss_kg_s": 2.614592497265351,
+      "total_loss_kg_s": {
+        "low": 2.6441022146875004,
+        "central": 2.8010517509588655,
+        "high": 4.745613907352853
+      },
+      "cycle_time_years": {
+        "low": 37647318488.88008,
+        "central": 35537850437.57848,
+        "high": 20975865322.55838
+      },
+      "exobase_radius_R": 3.5822220943106853,
+      "exobase_temperature_k": 258.33499086309,
+      "protected_radius_R": 3.560551179932873,
+      "aperture": {
+        "aperture_radius_km": 6548.838066370422,
+        "area_over_september": 1.3799033270855712
+      },
+      "exosphere_ion_production_kg_s": 22.28722208984071,
+      "level": "tight",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "all_heats",
+      "activity": "solar_maximum",
+      "transmission": 2.9111915698748763e-05,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0010237130199847206,
+      "glow_share_of_heating": 0.9715624250835618,
+      "uv_driven_loss_kg_s": 10.265439661178307,
+      "total_loss_kg_s": {
+        "low": 10.294949378600457,
+        "central": 10.451898914871823,
+        "high": 12.39646107126581
+      },
+      "cycle_time_years": {
+        "low": 9669144988.7465,
+        "central": 9523949571.67592,
+        "high": 8029981913.485659
+      },
+      "exobase_radius_R": 3.9621518677407277,
+      "exobase_temperature_k": 274.43914483782015,
+      "protected_radius_R": 3.945272291759614,
+      "aperture": {
+        "aperture_radius_km": 7217.2525260582015,
+        "area_over_september": 1.675961202292936
+      },
+      "exosphere_ion_production_kg_s": 82.5934322359224,
+      "level": "tight",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "collisional",
+      "activity": "quiet",
+      "transmission": 4.0113033110165035e-05,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0012728297245326087,
+      "glow_share_of_heating": 0.9680332215147357,
+      "uv_driven_loss_kg_s": 7.322777365386786e-08,
+      "total_loss_kg_s": {
+        "low": 0.029509790649922932,
+        "central": 0.18645932692128803,
+        "high": 2.131021483315276
+      },
+      "cycle_time_years": {
+        "low": 3373231595384.207,
+        "central": 533860975672.80585,
+        "high": 46711569532.669266
+      },
+      "exobase_radius_R": 1.895528106174668,
+      "exobase_temperature_k": 174.28902282297906,
+      "protected_radius_R": 1.8846597019346296,
+      "aperture": {
+        "aperture_radius_km": 3637.144212496274,
+        "area_over_september": 0.42563879067016275
+      },
+      "exosphere_ion_production_kg_s": 2.2385089157809865,
+      "level": "tight",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "collisional",
+      "activity": "solar_maximum",
+      "transmission": 4.0113033110165035e-05,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0008024072180547242,
+      "glow_share_of_heating": 0.9213337798725901,
+      "uv_driven_loss_kg_s": 3.1045841601374667e-06,
+      "total_loss_kg_s": {
+        "low": 0.029512822006309416,
+        "central": 0.18646235827767452,
+        "high": 2.131024514671662
+      },
+      "cycle_time_years": {
+        "low": 3372885119973.0264,
+        "central": 533852296586.61896,
+        "high": 46711503086.031204
+      },
+      "exobase_radius_R": 1.9820774333485842,
+      "exobase_temperature_k": 193.09285153506517,
+      "protected_radius_R": 1.9732675869735201,
+      "aperture": {
+        "aperture_radius_km": 3791.091551962842,
+        "area_over_september": 0.4624328772067575
+      },
+      "exosphere_ion_production_kg_s": 6.639262968998178,
+      "level": "tight",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "lte",
+      "activity": "quiet",
+      "transmission": 4.0113033110165035e-05,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0013756354633448946,
+      "glow_share_of_heating": 0.970422203455951,
+      "uv_driven_loss_kg_s": 4.382183947204403e-05,
+      "total_loss_kg_s": {
+        "low": 0.029553539261621322,
+        "central": 0.18650307553298642,
+        "high": 2.131065231926974
+      },
+      "cycle_time_years": {
+        "low": 3368238142724.314,
+        "central": 533735746228.41785,
+        "high": 46710610591.43805
+      },
+      "exobase_radius_R": 2.1688159845758896,
+      "exobase_temperature_k": 198.62405466949102,
+      "protected_radius_R": 2.155647594142582,
+      "aperture": {
+        "aperture_radius_km": 4107.95857641837,
+        "area_over_september": 0.5429655427239519
+      },
+      "exosphere_ion_production_kg_s": 3.5451491647140183,
+      "level": "tight",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "lte",
+      "activity": "solar_maximum",
+      "transmission": 4.0113033110165035e-05,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.000864090661342096,
+      "glow_share_of_heating": 0.9269493981693141,
+      "uv_driven_loss_kg_s": 0.0008937485210359423,
+      "total_loss_kg_s": {
+        "low": 0.030403465943185222,
+        "central": 0.1873530022145503,
+        "high": 2.131915158608538
+      },
+      "cycle_time_years": {
+        "low": 3274079290154.2734,
+        "central": 531314454622.40216,
+        "high": 46691988558.52389
+      },
+      "exobase_radius_R": 2.2996511448735855,
+      "exobase_temperature_k": 219.17963999929228,
+      "protected_radius_R": 2.2890011601057565,
+      "aperture": {
+        "aperture_radius_km": 4339.647061922789,
+        "area_over_september": 0.6059391019993167
+      },
+      "exosphere_ion_production_kg_s": 11.178193100841183,
+      "level": "tight",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "all_heats",
+      "activity": "quiet",
+      "transmission": 4.0113033110165035e-05,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0015373527716958239,
+      "glow_share_of_heating": 0.9735335528691236,
+      "uv_driven_loss_kg_s": 0.03517589125867266,
+      "total_loss_kg_s": {
+        "low": 0.06468560868082193,
+        "central": 0.22163514495218703,
+        "high": 2.166197301346175
+      },
+      "cycle_time_years": {
+        "low": 1538879516225.4727,
+        "central": 449131649292.2087,
+        "high": 45953043211.54525
+      },
+      "exobase_radius_R": 2.7386529684263246,
+      "exobase_temperature_k": 232.13351144023497,
+      "protected_radius_R": 2.721464032121985,
+      "aperture": {
+        "aperture_radius_km": 5091.008055763786,
+        "area_over_september": 0.8339264078516487
+      },
+      "exosphere_ion_production_kg_s": 8.11480552248726,
+      "level": "tight",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "all_heats",
+      "activity": "solar_maximum",
+      "transmission": 4.0113033110165035e-05,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0009611210463526535,
+      "glow_share_of_heating": 0.9343242528224123,
+      "uv_driven_loss_kg_s": 0.3674951865785901,
+      "total_loss_kg_s": {
+        "low": 0.3970049040007394,
+        "central": 0.5539544402721045,
+        "high": 2.4985165966660925
+      },
+      "cycle_time_years": {
+        "low": 250735840263.84747,
+        "central": 179695929767.43256,
+        "high": 39840983376.424095
+      },
+      "exobase_radius_R": 3.003227536313111,
+      "exobase_temperature_k": 255.3085110264156,
+      "protected_radius_R": 2.9892689215825787,
+      "aperture": {
+        "aperture_radius_km": 5556.292270712621,
+        "area_over_september": 0.9933226144892527
+      },
+      "exosphere_ion_production_kg_s": 30.375675277776377,
+      "level": "tight",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "collisional",
+      "activity": "quiet",
+      "transmission": 4.0113033110165035e-05,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0015901498610985884,
+      "glow_share_of_heating": 0.9747740548916238,
+      "uv_driven_loss_kg_s": 0.1849866836987138,
+      "total_loss_kg_s": {
+        "low": 0.21449640112086307,
+        "central": 0.3714459373922282,
+        "high": 2.316008093786216
+      },
+      "cycle_time_years": {
+        "low": 464079386289.579,
+        "central": 267988819294.53094,
+        "high": 42980574403.24388
+      },
+      "exobase_radius_R": 2.983631757813277,
+      "exobase_temperature_k": 242.0679389263874,
+      "protected_radius_R": 2.9649704794158223,
+      "aperture": {
+        "aperture_radius_km": 5514.076157292097,
+        "area_over_september": 0.9782856393752893
+      },
+      "exosphere_ion_production_kg_s": 11.198971847654507,
+      "level": "tight",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "collisional",
+      "activity": "solar_maximum",
+      "transmission": 4.0113033110165035e-05,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.000970135129903219,
+      "glow_share_of_heating": 0.9586521177578976,
+      "uv_driven_loss_kg_s": 1.3799700283175818,
+      "total_loss_kg_s": {
+        "low": 1.409479745739731,
+        "central": 1.566429282011096,
+        "high": 3.510991438405084
+      },
+      "cycle_time_years": {
+        "low": 70624184912.46257,
+        "central": 63547942659.557846,
+        "high": 28351922794.409443
+      },
+      "exobase_radius_R": 3.290629048540919,
+      "exobase_temperature_k": 263.7138598053784,
+      "protected_radius_R": 3.2757956409252906,
+      "aperture": {
+        "aperture_radius_km": 6054.103792898648,
+        "area_over_september": 1.1792880098518133
+      },
+      "exosphere_ion_production_kg_s": 43.049557930843264,
+      "level": "tight",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "lte",
+      "activity": "quiet",
+      "transmission": 4.0113033110165035e-05,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0015927257549211314,
+      "glow_share_of_heating": 0.9748148524714783,
+      "uv_driven_loss_kg_s": 0.19934575100833365,
+      "total_loss_kg_s": {
+        "low": 0.22885546843048293,
+        "central": 0.38580500470184803,
+        "high": 2.330367161095836
+      },
+      "cycle_time_years": {
+        "low": 434961676363.57245,
+        "central": 258014688716.7031,
+        "high": 42715740186.917175
+      },
+      "exobase_radius_R": 2.996384239872532,
+      "exobase_temperature_k": 242.53007202814638,
+      "protected_radius_R": 2.9776505395816715,
+      "aperture": {
+        "aperture_radius_km": 5536.106493824244,
+        "area_over_september": 0.9861183259102956
+      },
+      "exosphere_ion_production_kg_s": 11.382248958271278,
+      "level": "tight",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "lte",
+      "activity": "solar_maximum",
+      "transmission": 4.0113033110165035e-05,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0009716806661967451,
+      "glow_share_of_heating": 0.9587178848919867,
+      "uv_driven_loss_kg_s": 1.4705500982744977,
+      "total_loss_kg_s": {
+        "low": 1.500059815696647,
+        "central": 1.657009351968012,
+        "high": 3.601571508362
+      },
+      "cycle_time_years": {
+        "low": 66359592565.48999,
+        "central": 60074107653.80831,
+        "high": 27638867633.85852
+      },
+      "exobase_radius_R": 3.3063719920479713,
+      "exobase_temperature_k": 264.13897957335075,
+      "protected_radius_R": 3.2914805935454337,
+      "aperture": {
+        "aperture_radius_km": 6081.354829580885,
+        "area_over_september": 1.189928444788125
+      },
+      "exosphere_ion_production_kg_s": 43.83956538278978,
+      "level": "tight",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "all_heats",
+      "activity": "quiet",
+      "transmission": 4.0113033110165035e-05,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0016977815402534513,
+      "glow_share_of_heating": 0.9763732658418605,
+      "uv_driven_loss_kg_s": 2.671038332856349,
+      "total_loss_kg_s": {
+        "low": 2.700548050278498,
+        "central": 2.8574975865498633,
+        "high": 4.802059742943851
+      },
+      "cycle_time_years": {
+        "low": 36860428453.856964,
+        "central": 34835850312.53935,
+        "high": 20729304407.29367
+      },
+      "exobase_radius_R": 3.5871322562975303,
+      "exobase_temperature_k": 258.57912457687735,
+      "protected_radius_R": 3.5653429580185794,
+      "aperture": {
+        "aperture_radius_km": 6557.163301616528,
+        "area_over_september": 1.3834139718114797
+      },
+      "exosphere_ion_production_kg_s": 22.4187262826839,
+      "level": "tight",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "all_heats",
+      "activity": "solar_maximum",
+      "transmission": 4.0113033110165035e-05,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.001034714137396137,
+      "glow_share_of_heating": 0.9612327389175239,
+      "uv_driven_loss_kg_s": 10.612864689261626,
+      "total_loss_kg_s": {
+        "low": 10.642374406683775,
+        "central": 10.79932394295514,
+        "high": 12.743886099349128
+      },
+      "cycle_time_years": {
+        "low": 9353491466.244305,
+        "central": 9217554609.835543,
+        "high": 7811067787.131078
+      },
+      "exobase_radius_R": 3.9734519438622815,
+      "exobase_temperature_k": 274.8372966776912,
+      "protected_radius_R": 3.9564177894962507,
+      "aperture": {
+        "aperture_radius_km": 7236.616713825835,
+        "area_over_september": 1.6849666138423047
+      },
+      "exosphere_ion_production_kg_s": 83.46775674285114,
+      "level": "tight",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "collisional",
+      "activity": "quiet",
+      "transmission": 0.0001941163707541026,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0014268330621765462,
+      "glow_share_of_heating": 0.8635498372875231,
+      "uv_driven_loss_kg_s": 1.7121547741497192e-07,
+      "total_loss_kg_s": {
+        "low": 0.029509888637626693,
+        "central": 0.18645942490899178,
+        "high": 2.1310215813029796
+      },
+      "cycle_time_years": {
+        "low": 3373220394555.1445,
+        "central": 533860695119.4835,
+        "high": 46711567384.79827
+      },
+      "exobase_radius_R": 1.9128916219280974,
+      "exobase_temperature_k": 178.2202038861398,
+      "protected_radius_R": 1.90097818864406,
+      "aperture": {
+        "aperture_radius_km": 3665.4959513052386,
+        "area_over_september": 0.43230040918941987
+      },
+      "exosphere_ion_production_kg_s": 2.3433418132376107,
+      "level": "standard",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "collisional",
+      "activity": "solar_maximum",
+      "transmission": 0.0001941163707541026,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0009564105556986618,
+      "glow_share_of_heating": 0.7729785820560692,
+      "uv_driven_loss_kg_s": 1.7040502368983726e-05,
+      "total_loss_kg_s": {
+        "low": 0.02952675792451826,
+        "central": 0.18647629419588335,
+        "high": 2.1310384505898714
+      },
+      "cycle_time_years": {
+        "low": 3371293199475.695,
+        "central": 533812400244.97986,
+        "high": 46711197616.32639
+      },
+      "exobase_radius_R": 2.0318210404566517,
+      "exobase_temperature_k": 203.06078263904786,
+      "protected_radius_R": 2.0215115830209194,
+      "aperture": {
+        "aperture_radius_km": 3874.910670695594,
+        "area_over_september": 0.4831072426919065
+      },
+      "exosphere_ion_production_kg_s": 7.437071788191722,
+      "level": "standard",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "lte",
+      "activity": "quiet",
+      "transmission": 0.0001941163707541026,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0015296388009888322,
+      "glow_share_of_heating": 0.8727205380958738,
+      "uv_driven_loss_kg_s": 8.280412077667173e-05,
+      "total_loss_kg_s": {
+        "low": 0.02959252154292595,
+        "central": 0.18654205781429103,
+        "high": 2.131104214208279
+      },
+      "cycle_time_years": {
+        "low": 3363801156623.2754,
+        "central": 533624209788.61664,
+        "high": 46709756158.25273
+      },
+      "exobase_radius_R": 2.192957848665478,
+      "exobase_temperature_k": 202.63378428560006,
+      "protected_radius_R": 2.178605706030338,
+      "aperture": {
+        "aperture_radius_km": 4147.846000012157,
+        "area_over_september": 0.5535608985869426
+      },
+      "exosphere_ion_production_kg_s": 3.7327597988904895,
+      "level": "standard",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "lte",
+      "activity": "solar_maximum",
+      "transmission": 0.0001941163707541026,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0010180939989860335,
+      "glow_share_of_heating": 0.7867331693267041,
+      "uv_driven_loss_kg_s": 0.0032686055089771768,
+      "total_loss_kg_s": {
+        "low": 0.03277832293112645,
+        "central": 0.18972785920249155,
+        "high": 2.1342900155964792
+      },
+      "cycle_time_years": {
+        "low": 3036865504152.0337,
+        "central": 524663898132.39545,
+        "high": 46640033672.121956
+      },
+      "exobase_radius_R": 2.371844794102905,
+      "exobase_temperature_k": 229.38862280497318,
+      "protected_radius_R": 2.3594858632596356,
+      "aperture": {
+        "aperture_radius_km": 4462.107185182339,
+        "area_over_september": 0.6406195012896837
+      },
+      "exosphere_ion_production_kg_s": 12.83927711848573,
+      "level": "standard",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "all_heats",
+      "activity": "quiet",
+      "transmission": 0.0001941163707541026,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0016913561093397612,
+      "glow_share_of_heating": 0.8848902354610991,
+      "uv_driven_loss_kg_s": 0.05519345947200232,
+      "total_loss_kg_s": {
+        "low": 0.0847031768941516,
+        "central": 0.2416527131655167,
+        "high": 2.1862148695595045
+      },
+      "cycle_time_years": {
+        "low": 1175202180644.1423,
+        "central": 411927335263.613,
+        "high": 45532284854.30174
+      },
+      "exobase_radius_R": 2.7815917012389355,
+      "exobase_temperature_k": 236.2630584947234,
+      "protected_radius_R": 2.762978412367892,
+      "aperture": {
+        "aperture_radius_km": 5163.135140003024,
+        "area_over_september": 0.8577231723286876
+      },
+      "exosphere_ion_production_kg_s": 8.717352214917671,
+      "level": "standard",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "all_heats",
+      "activity": "solar_maximum",
+      "transmission": 0.0001941163707541026,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.001115124383996591,
+      "glow_share_of_heating": 0.8052901688750833,
+      "uv_driven_loss_kg_s": 0.9013360596227491,
+      "total_loss_kg_s": {
+        "low": 0.9308457770448983,
+        "central": 1.0877953133162634,
+        "high": 3.0323574697102513
+      },
+      "cycle_time_years": {
+        "low": 106938615019.02924,
+        "central": 91509272907.25737,
+        "high": 32827052610.98557
+      },
+      "exobase_radius_R": 3.1393929632659754,
+      "exobase_temperature_k": 265.3467190869099,
+      "protected_radius_R": 3.123354014949249,
+      "aperture": {
+        "aperture_radius_km": 5789.251711927874,
+        "area_over_september": 1.0783631131214648
+      },
+      "exosphere_ion_production_kg_s": 37.222700421389064,
+      "level": "standard",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "collisional",
+      "activity": "quiet",
+      "transmission": 0.0001941163707541026,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0017441531987425261,
+      "glow_share_of_heating": 0.8887045181042273,
+      "uv_driven_loss_kg_s": 0.2773721515326066,
+      "total_loss_kg_s": {
+        "low": 0.3068818689547559,
+        "central": 0.463831405226121,
+        "high": 2.408393561620109
+      },
+      "cycle_time_years": {
+        "low": 324370281413.29956,
+        "central": 214611078663.30316,
+        "high": 41331848656.21855
+      },
+      "exobase_radius_R": 3.0360643163541305,
+      "exobase_temperature_k": 246.16694154612912,
+      "protected_radius_R": 3.015893312940309,
+      "aperture": {
+        "aperture_radius_km": 5602.549488257541,
+        "area_over_september": 1.009930669815659
+      },
+      "exosphere_ion_production_kg_s": 12.137343130993278,
+      "level": "standard",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "collisional",
+      "activity": "solar_maximum",
+      "transmission": 0.0001941163707541026,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0011241384675471566,
+      "glow_share_of_heating": 0.8273198753017856,
+      "uv_driven_loss_kg_s": 2.9375267071982525,
+      "total_loss_kg_s": {
+        "low": 2.9670364246204017,
+        "central": 3.123985960891767,
+        "high": 5.068548117285754
+      },
+      "cycle_time_years": {
+        "low": 33549759405.54182,
+        "central": 31864214320.94978,
+        "high": 19639422550.613907
+      },
+      "exobase_radius_R": 3.4458745906331583,
+      "exobase_temperature_k": 272.7033027944218,
+      "protected_radius_R": 3.4288874414648265,
+      "aperture": {
+        "aperture_radius_km": 6320.085487156038,
+        "area_over_september": 1.2851862300861976
+      },
+      "exosphere_ion_production_kg_s": 52.72303995646871,
+      "level": "standard",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "lte",
+      "activity": "quiet",
+      "transmission": 0.0001941163707541026,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0017467290925650694,
+      "glow_share_of_heating": 0.8888686450690284,
+      "uv_driven_loss_kg_s": 0.29823031594328464,
+      "total_loss_kg_s": {
+        "low": 0.3277400333654339,
+        "central": 0.484689569636799,
+        "high": 2.429251726030787
+      },
+      "cycle_time_years": {
+        "low": 303726576125.9672,
+        "central": 205375490683.8331,
+        "high": 40976963040.44201
+      },
+      "exobase_radius_R": 3.049307234344169,
+      "exobase_temperature_k": 246.6242164897725,
+      "protected_radius_R": 3.0290588637925944,
+      "aperture": {
+        "aperture_radius_km": 5625.423316308302,
+        "area_over_september": 1.0181941000045542
+      },
+      "exosphere_ion_production_kg_s": 12.340680906450846,
+      "level": "standard",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "lte",
+      "activity": "solar_maximum",
+      "transmission": 0.0001941163707541026,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0011256840038406826,
+      "glow_share_of_heating": 0.8275569608417606,
+      "uv_driven_loss_kg_s": 3.1038180617838127,
+      "total_loss_kg_s": {
+        "low": 3.133327779205962,
+        "central": 3.290277315477327,
+        "high": 5.2348394718713145
+      },
+      "cycle_time_years": {
+        "low": 31769213184.175533,
+        "central": 30253789771.836464,
+        "high": 19015551236.742973
+      },
+      "exobase_radius_R": 3.4622766299775516,
+      "exobase_temperature_k": 273.04880538672296,
+      "protected_radius_R": 3.4452316565706127,
+      "aperture": {
+        "aperture_radius_km": 6348.48192648083,
+        "area_over_september": 1.2967609782767842
+      },
+      "exosphere_ion_production_kg_s": 53.64806710404008,
+      "level": "standard",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "all_heats",
+      "activity": "quiet",
+      "transmission": 0.0001941163707541026,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.001851784877897389,
+      "glow_share_of_heating": 0.8951733686396055,
+      "uv_driven_loss_kg_s": 3.5610902290419086,
+      "total_loss_kg_s": {
+        "low": 3.590599946464058,
+        "central": 3.747549482735423,
+        "high": 5.692111639129411
+      },
+      "cycle_time_years": {
+        "low": 27723321917.69834,
+        "central": 26562253187.60421,
+        "high": 17487949025.665688
+      },
+      "exobase_radius_R": 3.6559265857343743,
+      "exobase_temperature_k": 261.8950912727675,
+      "protected_radius_R": 3.6325146165500466,
+      "aperture": {
+        "aperture_radius_km": 6673.867341149099,
+        "area_over_september": 1.4330960463790614
+      },
+      "exosphere_ion_production_kg_s": 24.30076786749924,
+      "level": "standard",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "all_heats",
+      "activity": "solar_maximum",
+      "transmission": 0.0001941163707541026,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0011887174750400745,
+      "glow_share_of_heating": 0.8367010035352946,
+      "uv_driven_loss_kg_s": 16.085014777303638,
+      "total_loss_kg_s": {
+        "low": 16.11452449472579,
+        "central": 16.27147403099715,
+        "high": 18.21603618739114
+      },
+      "cycle_time_years": {
+        "low": 6177244524.098343,
+        "central": 6117660760.411961,
+        "high": 5464600375.706098
+      },
+      "exobase_radius_R": 4.125673084233901,
+      "exobase_temperature_k": 279.7878128165211,
+      "protected_radius_R": 4.106554798656875,
+      "aperture": {
+        "aperture_radius_km": 7497.464753541503,
+        "area_over_september": 1.8086270581199442
+      },
+      "exosphere_ion_production_kg_s": 95.40188953355114,
+      "level": "standard",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "collisional",
+      "activity": "quiet",
+      "transmission": 0.00021611860557693518,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0014488352969993785,
+      "glow_share_of_heating": 0.8504358371381832,
+      "uv_driven_loss_kg_s": 1.9274234213161425e-07,
+      "total_loss_kg_s": {
+        "low": 0.02950991016449141,
+        "central": 0.18645944643585652,
+        "high": 2.1310216028298443
+      },
+      "cycle_time_years": {
+        "low": 3373217933861.137,
+        "central": 533860633484.91797,
+        "high": 46711566912.9337
+      },
+      "exobase_radius_R": 1.9154060400147015,
+      "exobase_temperature_k": 178.78262680568363,
+      "protected_radius_R": 1.9033424373018064,
+      "aperture": {
+        "aperture_radius_km": 3669.6035969232066,
+        "area_over_september": 0.43326984517976763
+      },
+      "exosphere_ion_production_kg_s": 2.3586844653174337,
+      "level": "standard",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "collisional",
+      "activity": "solar_maximum",
+      "transmission": 0.00021611860557693518,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0009784127905214945,
+      "glow_share_of_heating": 0.7555960862013767,
+      "uv_driven_loss_kg_s": 2.1458288264015194e-05,
+      "total_loss_kg_s": {
+        "low": 0.029531175710413294,
+        "central": 0.1864807119817784,
+        "high": 2.1310428683757663
+      },
+      "cycle_time_years": {
+        "low": 3370788862916.5713,
+        "central": 533799754063.68134,
+        "high": 46711100781.075905
+      },
+      "exobase_radius_R": 2.0391962701800543,
+      "exobase_temperature_k": 204.4904882725651,
+      "protected_radius_R": 2.028670869093497,
+      "aperture": {
+        "aperture_radius_km": 3887.3492143180906,
+        "area_over_september": 0.4862137892799224
+      },
+      "exosphere_ion_production_kg_s": 7.560098044564662,
+      "level": "standard",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "lte",
+      "activity": "quiet",
+      "transmission": 0.00021611860557693518,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0015516410358116647,
+      "glow_share_of_heating": 0.8603453805879714,
+      "uv_driven_loss_kg_s": 9.051199888146879e-05,
+      "total_loss_kg_s": {
+        "low": 0.029600229421030747,
+        "central": 0.18654976569239584,
+        "high": 2.131111922086384
+      },
+      "cycle_time_years": {
+        "low": 3362925225260.878,
+        "central": 533602161460.93555,
+        "high": 46709587216.81748
+      },
+      "exobase_radius_R": 2.1964643961674564,
+      "exobase_temperature_k": 203.20761285925414,
+      "protected_radius_R": 2.1819438402783136,
+      "aperture": {
+        "aperture_radius_km": 4153.64567445459,
+        "area_over_september": 0.5551100002160598
+      },
+      "exosphere_ion_production_kg_s": 3.760455340100861,
+      "level": "standard",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "lte",
+      "activity": "solar_maximum",
+      "transmission": 0.00021611860557693518,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.001040096233808866,
+      "glow_share_of_heating": 0.7700905862927785,
+      "uv_driven_loss_kg_s": 0.0039005249479310716,
+      "total_loss_kg_s": {
+        "low": 0.03341024237008035,
+        "central": 0.19035977864144546,
+        "high": 2.1349219350354334
+      },
+      "cycle_time_years": {
+        "low": 2979426401367.1714,
+        "central": 522922220775.3752,
+        "high": 46626228603.455414
+      },
+      "exobase_radius_R": 2.3826508881881465,
+      "exobase_temperature_k": 230.85404509656613,
+      "protected_radius_R": 2.3700420917830303,
+      "aperture": {
+        "aperture_radius_km": 4480.447576618885,
+        "area_over_september": 0.6458965410591662
+      },
+      "exosphere_ion_production_kg_s": 13.103681719934437,
+      "level": "standard",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "all_heats",
+      "activity": "quiet",
+      "transmission": 0.00021611860557693518,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0017133583441625937,
+      "glow_share_of_heating": 0.8735268433141035,
+      "uv_driven_loss_kg_s": 0.05879227231726077,
+      "total_loss_kg_s": {
+        "low": 0.08830198973941006,
+        "central": 0.24525152601077516,
+        "high": 2.189813682404763
+      },
+      "cycle_time_years": {
+        "low": 1127305947320.7578,
+        "central": 405882727062.5018,
+        "high": 45457455578.67695
+      },
+      "exobase_radius_R": 2.78786522106122,
+      "exobase_temperature_k": 236.85354991244753,
+      "protected_radius_R": 2.7690467123486546,
+      "aperture": {
+        "aperture_radius_km": 5173.678204389601,
+        "area_over_september": 0.861229671101282
+      },
+      "exosphere_ion_production_kg_s": 8.808265906431267,
+      "level": "standard",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "all_heats",
+      "activity": "solar_maximum",
+      "transmission": 0.00021611860557693518,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0011371266188194237,
+      "glow_share_of_heating": 0.7897086293148684,
+      "uv_driven_loss_kg_s": 1.0164601110211513,
+      "total_loss_kg_s": {
+        "low": 1.0459698284433006,
+        "central": 1.2029193647146657,
+        "high": 3.1474815211086535
+      },
+      "cycle_time_years": {
+        "low": 95168479516.8922,
+        "central": 82751480368.01729,
+        "high": 31626351902.5938
+      },
+      "exobase_radius_R": 3.1596683975765814,
+      "exobase_temperature_k": 266.7442591691885,
+      "protected_radius_R": 3.143325987391229,
+      "aperture": {
+        "aperture_radius_km": 5823.951016848569,
+        "area_over_september": 1.0913287227342159
+      },
+      "exosphere_ion_production_kg_s": 38.32752962694979,
+      "level": "standard",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "collisional",
+      "activity": "quiet",
+      "transmission": 0.00021611860557693518,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0017661554335653585,
+      "glow_share_of_heating": 0.8776333036891016,
+      "uv_driven_loss_kg_s": 0.2935408114426798,
+      "total_loss_kg_s": {
+        "low": 0.3230505288648291,
+        "central": 0.4800000651361942,
+        "high": 2.424562221530182
+      },
+      "cycle_time_years": {
+        "low": 308135567966.0393,
+        "central": 207381968094.6278,
+        "high": 41056219266.94461
+      },
+      "exobase_radius_R": 3.043719766827587,
+      "exobase_temperature_k": 246.75060932091162,
+      "protected_radius_R": 3.023331560130031,
+      "aperture": {
+        "aperture_radius_km": 5615.472698924964,
+        "area_over_september": 1.0145951889289049
+      },
+      "exosphere_ion_production_kg_s": 12.279131347009402,
+      "level": "standard",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "collisional",
+      "activity": "solar_maximum",
+      "transmission": 0.00021611860557693518,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0011461407023699893,
+      "glow_share_of_heating": 0.811437980406729,
+      "uv_driven_loss_kg_s": 3.2405706837926243,
+      "total_loss_kg_s": {
+        "low": 3.2700804012147735,
+        "central": 3.4270299374861386,
+        "high": 5.3715920938801265
+      },
+      "cycle_time_years": {
+        "low": 30440645482.757854,
+        "central": 29046538842.46849,
+        "high": 18531444021.39239
+      },
+      "exobase_radius_R": 3.468272258095844,
+      "exobase_temperature_k": 273.90282741205954,
+      "protected_radius_R": 3.4509748896207895,
+      "aperture": {
+        "aperture_radius_km": 6358.460219582208,
+        "area_over_september": 1.3008405771921019
+      },
+      "exosphere_ion_production_kg_s": 54.20886121282018,
+      "level": "standard",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "lte",
+      "activity": "quiet",
+      "transmission": 0.00021611860557693518,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0017687313273879017,
+      "glow_share_of_heating": 0.8778115125624515,
+      "uv_driven_loss_kg_s": 0.31551110137831523,
+      "total_loss_kg_s": {
+        "low": 0.34502081880046453,
+        "central": 0.5019703550718296,
+        "high": 2.4465325114658176
+      },
+      "cycle_time_years": {
+        "low": 288514062831.27014,
+        "central": 198305252865.47906,
+        "high": 40687527235.782776
+      },
+      "exobase_radius_R": 3.057033022702344,
+      "exobase_temperature_k": 247.20698349390662,
+      "protected_radius_R": 3.036567117894218,
+      "aperture": {
+        "aperture_radius_km": 5638.468156984463,
+        "area_over_september": 1.022921772623165
+      },
+      "exosphere_ion_production_kg_s": 12.485466507677316,
+      "level": "standard",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "lte",
+      "activity": "solar_maximum",
+      "transmission": 0.00021611860557693518,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0011476862386635154,
+      "glow_share_of_heating": 0.8116919082095067,
+      "uv_driven_loss_kg_s": 3.419659676949386,
+      "total_loss_kg_s": {
+        "low": 3.4491693943715354,
+        "central": 3.6061189306429005,
+        "high": 5.550681087036889
+      },
+      "cycle_time_years": {
+        "low": 28860095522.10788,
+        "central": 27604014206.970943,
+        "high": 17933539440.04601
+      },
+      "exobase_radius_R": 3.484724152226574,
+      "exobase_temperature_k": 274.2347066790351,
+      "protected_radius_R": 3.4673692130972666,
+      "aperture": {
+        "aperture_radius_km": 6386.943717190239,
+        "area_over_september": 1.312521229034832
+      },
+      "exosphere_ion_production_kg_s": 55.14968997913138,
+      "level": "standard",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "all_heats",
+      "activity": "quiet",
+      "transmission": 0.00021611860557693518,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0018737871127202216,
+      "glow_share_of_heating": 0.8846621347164724,
+      "uv_driven_loss_kg_s": 3.7039983816734856,
+      "total_loss_kg_s": {
+        "low": 3.733508099095635,
+        "central": 3.890457635367,
+        "high": 5.835019791760988
+      },
+      "cycle_time_years": {
+        "low": 26662151400.610546,
+        "central": 25586542130.307312,
+        "high": 17059643625.21068
+      },
+      "exobase_radius_R": 3.665746698116407,
+      "exobase_temperature_k": 262.3527433662791,
+      "protected_radius_R": 3.6421023306321003,
+      "aperture": {
+        "aperture_radius_km": 6690.525035595259,
+        "area_over_september": 1.4402588701763361
+      },
+      "exosphere_ion_production_kg_s": 24.575357574138867,
+      "level": "standard",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "all_heats",
+      "activity": "solar_maximum",
+      "transmission": 0.00021611860557693518,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.001210719709862907,
+      "glow_share_of_heating": 0.8214957567665213,
+      "uv_driven_loss_kg_s": 16.95281072026257,
+      "total_loss_kg_s": {
+        "low": 16.98232043768472,
+        "central": 17.139269973956083,
+        "high": 19.08383213035007
+      },
+      "cycle_time_years": {
+        "low": 5861587558.588355,
+        "central": 5807911208.864453,
+        "high": 5216109506.391234
+      },
+      "exobase_radius_R": 4.146504244556159,
+      "exobase_temperature_k": 280.4075283711027,
+      "protected_radius_R": 4.127091647492501,
+      "aperture": {
+        "aperture_radius_km": 7533.145474708519,
+        "area_over_september": 1.8258826712287979
+      },
+      "exosphere_ion_production_kg_s": 97.05087472738396,
+      "level": "standard",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "collisional",
+      "activity": "quiet",
+      "transmission": 0.0025006173956685965,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.00373333408709104,
+      "glow_share_of_heating": 0.33003782408315924,
+      "uv_driven_loss_kg_s": 0.0022504535505869718,
+      "total_loss_kg_s": {
+        "low": 0.03176017097273625,
+        "central": 0.18870970724410135,
+        "high": 2.133271863638089
+      },
+      "cycle_time_years": {
+        "low": 3134219846579.04,
+        "central": 527494635263.94714,
+        "high": 46662293676.78056
+      },
+      "exobase_radius_R": 2.2346076427251833,
+      "exobase_temperature_k": 238.3897074902916,
+      "protected_radius_R": 2.206070561333059,
+      "aperture": {
+        "aperture_radius_km": 4195.5634396151045,
+        "area_over_september": 0.5663706542870179
+      },
+      "exosphere_ion_production_kg_s": 4.760653441780852,
+      "level": "relaxed",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "collisional",
+      "activity": "solar_maximum",
+      "transmission": 0.0025006173956685965,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.003262911580613156,
+      "glow_share_of_heating": 0.22657214482915433,
+      "uv_driven_loss_kg_s": 14.619422740395454,
+      "total_loss_kg_s": {
+        "low": 14.648932457817603,
+        "central": 14.805881994088969,
+        "high": 16.750444150482956
+      },
+      "cycle_time_years": {
+        "low": 6795263646.694666,
+        "central": 6723230553.454006,
+        "high": 5942729476.258301
+      },
+      "exobase_radius_R": 3.360733947191798,
+      "exobase_temperature_k": 343.8176984955643,
+      "protected_radius_R": 3.321254653294861,
+      "aperture": {
+        "aperture_radius_km": 6133.084280989539,
+        "area_over_september": 1.2102581724074233
+      },
+      "exosphere_ion_production_kg_s": 68.94276528919019,
+      "level": "relaxed",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "lte",
+      "activity": "quiet",
+      "transmission": 0.0025006173956685965,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0038361398259033263,
+      "glow_share_of_heating": 0.34799231990375906,
+      "uv_driven_loss_kg_s": 0.12864332845715015,
+      "total_loss_kg_s": {
+        "low": 0.15815304587929943,
+        "central": 0.31510258215066456,
+        "high": 2.2596647385446524
+      },
+      "cycle_time_years": {
+        "low": 629411578133.3977,
+        "central": 315907783154.55817,
+        "high": 44052268681.9483
+      },
+      "exobase_radius_R": 2.664805072188036,
+      "exobase_temperature_k": 264.17547111887257,
+      "protected_radius_R": 2.631301965457126,
+      "aperture": {
+        "aperture_radius_km": 4934.360481140258,
+        "area_over_september": 0.7833970033717107
+      },
+      "exosphere_ion_production_kg_s": 8.994966371598718,
+      "level": "relaxed",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "lte",
+      "activity": "solar_maximum",
+      "transmission": 0.0025006173956685965,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0033245950239005275,
+      "glow_share_of_heating": 0.24092207103019042,
+      "uv_driven_loss_kg_s": 42.30359435694473,
+      "total_loss_kg_s": {
+        "low": 42.33310407436688,
+        "central": 42.49005361063824,
+        "high": 44.43461576703223
+      },
+      "cycle_time_years": {
+        "low": 2351430644.410694,
+        "central": 2342744942.2791696,
+        "high": 2240220973.5624313
+      },
+      "exobase_radius_R": 3.9658339969237506,
+      "exobase_temperature_k": 340.1763571348006,
+      "protected_radius_R": 3.923648342461344,
+      "aperture": {
+        "aperture_radius_km": 7179.683076547388,
+        "area_over_september": 1.6585581649551342
+      },
+      "exosphere_ion_production_kg_s": 108.62437068866343,
+      "level": "relaxed",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "all_heats",
+      "activity": "quiet",
+      "transmission": 0.0025006173956685965,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.003997857134254255,
+      "glow_share_of_heating": 0.37436668084474006,
+      "uv_driven_loss_kg_s": 7.540148739653238,
+      "total_loss_kg_s": {
+        "low": 7.569658457075387,
+        "central": 7.726607993346752,
+        "high": 9.671170149740739
+      },
+      "cycle_time_years": {
+        "low": 13150310381.632868,
+        "central": 12883189917.129038,
+        "high": 10292793597.076979
+      },
+      "exobase_radius_R": 3.6014577908742127,
+      "exobase_temperature_k": 291.7154826386246,
+      "protected_radius_R": 3.560074429428944,
+      "aperture": {
+        "aperture_radius_km": 6548.009760044896,
+        "area_over_september": 1.3795542849013478
+      },
+      "exosphere_ion_production_kg_s": 27.339788374985297,
+      "level": "relaxed",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "all_heats",
+      "activity": "solar_maximum",
+      "transmission": 0.0025006173956685965,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.003421625408911085,
+      "glow_share_of_heating": 0.2624479877799135,
+      "uv_driven_loss_kg_s": 97.22845119452572,
+      "total_loss_kg_s": {
+        "low": 97.25796091194786,
+        "central": 97.41491044821923,
+        "high": 99.35947260461322
+      },
+      "cycle_time_years": {
+        "low": 1023498305.5383478,
+        "central": 1021849301.4619732,
+        "high": 1001850710.1946084
+      },
+      "exobase_radius_R": 4.822180889947395,
+      "exobase_temperature_k": 321.3722558803916,
+      "protected_radius_R": 4.777779121377427,
+      "aperture": {
+        "aperture_radius_km": 8663.64989183619,
+        "area_over_september": 2.4150267500219345
+      },
+      "exosphere_ion_production_kg_s": 159.4261954356745,
+      "level": "relaxed",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "collisional",
+      "activity": "quiet",
+      "transmission": 0.0025006173956685965,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.00405065422365702,
+      "glow_share_of_heating": 0.3826633285398071,
+      "uv_driven_loss_kg_s": 15.490267750207787,
+      "total_loss_kg_s": {
+        "low": 15.519777467629936,
+        "central": 15.676727003901302,
+        "high": 17.62128916029529
+      },
+      "cycle_time_years": {
+        "low": 6413968138.468097,
+        "central": 6349753884.769518,
+        "high": 5649039482.184253
+      },
+      "exobase_radius_R": 3.924607776105053,
+      "exobase_temperature_k": 293.58422808784445,
+      "protected_radius_R": 3.88132324366887,
+      "aperture": {
+        "aperture_radius_km": 7106.147449905343,
+        "area_over_september": 1.6247576396580194
+      },
+      "exosphere_ion_production_kg_s": 35.70831383907617,
+      "level": "relaxed",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "collisional",
+      "activity": "solar_maximum",
+      "transmission": 0.0025006173956685965,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0034306394924616505,
+      "glow_share_of_heating": 0.2710929256299437,
+      "uv_driven_loss_kg_s": 115.31058191323741,
+      "total_loss_kg_s": {
+        "low": 115.34009163065956,
+        "central": 115.49704116693093,
+        "high": 117.44160332332491
+      },
+      "cycle_time_years": {
+        "low": 863042128.5969657,
+        "central": 861869336.1124364,
+        "high": 847598767.1885209
+      },
+      "exobase_radius_R": 5.084843753140593,
+      "exobase_temperature_k": 314.1191705207876,
+      "protected_radius_R": 5.040203164110021,
+      "aperture": {
+        "aperture_radius_km": 9119.585423679799,
+        "area_over_september": 2.6759028975672705
+      },
+      "exosphere_ion_production_kg_s": 172.4927573024506,
+      "level": "relaxed",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "lte",
+      "activity": "quiet",
+      "transmission": 0.0025006173956685965,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.004053230117479563,
+      "glow_share_of_heating": 0.38305565605942804,
+      "uv_driven_loss_kg_s": 15.94436493662113,
+      "total_loss_kg_s": {
+        "low": 15.973874654043279,
+        "central": 16.130824190314645,
+        "high": 18.075386346708633
+      },
+      "cycle_time_years": {
+        "low": 6231635113.544431,
+        "central": 6171002610.843769,
+        "high": 5507122021.301605
+      },
+      "exobase_radius_R": 3.939807805840959,
+      "exobase_temperature_k": 293.59157593417814,
+      "protected_radius_R": 3.8964414062544925,
+      "aperture": {
+        "aperture_radius_km": 7132.4137455816035,
+        "area_over_september": 1.636790949329182
+      },
+      "exosphere_ion_production_kg_s": 36.109677981639116,
+      "level": "relaxed",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "lte",
+      "activity": "solar_maximum",
+      "transmission": 0.0025006173956685965,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0034321850287551765,
+      "glow_share_of_heating": 0.27142115744979267,
+      "uv_driven_loss_kg_s": 116.2642882261692,
+      "total_loss_kg_s": {
+        "low": 116.29379794359134,
+        "central": 116.45074747986271,
+        "high": 118.3953096362567
+      },
+      "cycle_time_years": {
+        "low": 855964462.0238243,
+        "central": 854810813.5648254,
+        "high": 840771129.3573905
+      },
+      "exobase_radius_R": 5.098063670842661,
+      "exobase_temperature_k": 313.77001573957864,
+      "protected_radius_R": 5.053401254583315,
+      "aperture": {
+        "aperture_radius_km": 9142.5157860681,
+        "area_over_september": 2.6893764408541734
+      },
+      "exosphere_ion_production_kg_s": 173.12261458957988,
+      "level": "relaxed",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "all_heats",
+      "activity": "quiet",
+      "transmission": 0.0025006173956685965,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.004158285902811883,
+      "glow_share_of_heating": 0.3986422641171332,
+      "uv_driven_loss_kg_s": 38.387961201935205,
+      "total_loss_kg_s": {
+        "low": 38.417470919357356,
+        "central": 38.57442045562872,
+        "high": 40.51898261202271
+      },
+      "cycle_time_years": {
+        "low": 2591096077.1583934,
+        "central": 2580553564.194074,
+        "high": 2456709220.62977
+      },
+      "exobase_radius_R": 4.530087423628769,
+      "exobase_temperature_k": 289.5971343926838,
+      "protected_radius_R": 4.484092787776525,
+      "aperture": {
+        "aperture_radius_km": 8153.399255837983,
+        "area_over_september": 2.1389349511235376
+      },
+      "exosphere_ion_production_kg_s": 51.489038767675254,
+      "level": "relaxed",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "all_heats",
+      "activity": "solar_maximum",
+      "transmission": 0.0025006173956685965,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0034952184999545682,
+      "glow_share_of_heating": 0.28456049437221165,
+      "uv_driven_loss_kg_s": 156.01583590665714,
+      "total_loss_kg_s": {
+        "low": 156.0453456240793,
+        "central": 156.20229516035067,
+        "high": 158.14685731674464
+      },
+      "cycle_time_years": {
+        "low": 637913023.2650336,
+        "central": 637272058.5911142,
+        "high": 629436208.1070188
+      },
+      "exobase_radius_R": 5.638207055918,
+      "exobase_temperature_k": 299.44660208330055,
+      "protected_radius_R": 5.592792937523157,
+      "aperture": {
+        "aperture_radius_km": 10079.654896007782,
+        "area_over_september": 3.2689741367855825
+      },
+      "exosphere_ion_production_kg_s": 195.76771105067837,
+      "level": "relaxed",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "collisional",
+      "activity": "quiet",
+      "transmission": 0.002610628569782759,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.003843345261205203,
+      "glow_share_of_heating": 0.3205908850074629,
+      "uv_driven_loss_kg_s": 0.003167375090382133,
+      "total_loss_kg_s": {
+        "low": 0.03267709251253141,
+        "central": 0.18962662878389652,
+        "high": 2.1341887851778845
+      },
+      "cycle_time_years": {
+        "low": 3046273414788.032,
+        "central": 524943985092.5986,
+        "high": 46642245936.643585
+      },
+      "exobase_radius_R": 2.253666322417568,
+      "exobase_temperature_k": 241.32874382347262,
+      "protected_radius_R": 2.2242514100002366,
+      "aperture": {
+        "aperture_radius_km": 4227.150846089459,
+        "area_over_september": 0.5749308993179031
+      },
+      "exosphere_ion_production_kg_s": 4.941786797532696,
+      "level": "relaxed",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "collisional",
+      "activity": "solar_maximum",
+      "transmission": 0.002610628569782759,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.003372922754727318,
+      "glow_share_of_heating": 0.21918227275476868,
+      "uv_driven_loss_kg_s": 18.199152698520766,
+      "total_loss_kg_s": {
+        "low": 18.228662415942917,
+        "central": 18.38561195221428,
+        "high": 20.33017410860827
+      },
+      "cycle_time_years": {
+        "low": 5460815276.628974,
+        "central": 5414198801.335245,
+        "high": 4896335745.169271
+      },
+      "exobase_radius_R": 3.431880878160075,
+      "exobase_temperature_k": 347.17720810063514,
+      "protected_radius_R": 3.390953253516667,
+      "aperture": {
+        "aperture_radius_km": 6254.178629014906,
+        "area_over_september": 1.2585217361674508
+      },
+      "exosphere_ion_production_kg_s": 74.47923481559071,
+      "level": "relaxed",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "lte",
+      "activity": "quiet",
+      "transmission": 0.002610628569782759,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.003946151000017489,
+      "glow_share_of_heating": 0.3382909568045887,
+      "uv_driven_loss_kg_s": 0.16876984325832906,
+      "total_loss_kg_s": {
+        "low": 0.19827956068047833,
+        "central": 0.35522909695184346,
+        "high": 2.2997912533458313
+      },
+      "cycle_time_years": {
+        "low": 502035398161.4105,
+        "central": 280222985807.3481,
+        "high": 43283649352.380875
+      },
+      "exobase_radius_R": 2.6941256638475584,
+      "exobase_temperature_k": 267.15895142857346,
+      "protected_radius_R": 2.6595963024710705,
+      "aperture": {
+        "aperture_radius_km": 4983.519062268286,
+        "area_over_september": 0.7990839466754676
+      },
+      "exosphere_ion_production_kg_s": 9.454680355544896,
+      "level": "relaxed",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "lte",
+      "activity": "solar_maximum",
+      "transmission": 0.002610628569782759,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.00343460619801469,
+      "glow_share_of_heating": 0.23320528535637225,
+      "uv_driven_loss_kg_s": 47.64887704665432,
+      "total_loss_kg_s": {
+        "low": 47.67838676407647,
+        "central": 47.835336300347834,
+        "high": 49.77989845674182
+      },
+      "cycle_time_years": {
+        "low": 2087808857.4191222,
+        "central": 2080958678.0885592,
+        "high": 1999669771.926023
+      },
+      "exobase_radius_R": 4.026757053101835,
+      "exobase_temperature_k": 341.6519381780526,
+      "protected_radius_R": 3.983295263407832,
+      "aperture": {
+        "aperture_radius_km": 7283.313636999816,
+        "area_over_september": 1.7067825049719467
+      },
+      "exosphere_ion_production_kg_s": 113.43218167146577,
+      "level": "relaxed",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "all_heats",
+      "activity": "quiet",
+      "transmission": 0.002610628569782759,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.004107868308368417,
+      "glow_share_of_heating": 0.3643409168675814,
+      "uv_driven_loss_kg_s": 8.667243378822112,
+      "total_loss_kg_s": {
+        "low": 8.696753096244262,
+        "central": 8.853702632515628,
+        "high": 10.798264788909615
+      },
+      "cycle_time_years": {
+        "low": 11446037054.505068,
+        "central": 11243133220.661371,
+        "high": 9218458719.009165
+      },
+      "exobase_radius_R": 3.6421418235247773,
+      "exobase_temperature_k": 293.5379667408134,
+      "protected_radius_R": 3.599666695799653,
+      "aperture": {
+        "aperture_radius_km": 6616.797363637365,
+        "area_over_september": 1.4086912852296933
+      },
+      "exosphere_ion_production_kg_s": 28.567888359297925,
+      "level": "relaxed",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "all_heats",
+      "activity": "solar_maximum",
+      "transmission": 0.002610628569782759,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0035316365830252473,
+      "glow_share_of_heating": 0.25427268134596687,
+      "uv_driven_loss_kg_s": 104.03260836137599,
+      "total_loss_kg_s": {
+        "low": 104.06211807879814,
+        "central": 104.2190676150695,
+        "high": 106.16362977146349
+      },
+      "cycle_time_years": {
+        "low": 956576322.2128254,
+        "central": 955135758.4694039,
+        "high": 937640870.1151106
+      },
+      "exobase_radius_R": 4.8777219033025325,
+      "exobase_temperature_k": 321.8205766212272,
+      "protected_radius_R": 4.832159021580212,
+      "aperture": {
+        "aperture_radius_km": 8758.129530448508,
+        "area_over_september": 2.4679871056299905
+      },
+      "exosphere_ion_production_kg_s": 162.97212841148863,
+      "level": "relaxed",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "collisional",
+      "activity": "quiet",
+      "transmission": 0.002610628569782759,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.004160665397771182,
+      "glow_share_of_heating": 0.3725454175716123,
+      "uv_driven_loss_kg_s": 17.141547856689062,
+      "total_loss_kg_s": {
+        "low": 17.171057574111213,
+        "central": 17.328007110382575,
+        "high": 19.272569266776564
+      },
+      "cycle_time_years": {
+        "low": 5797159421.535859,
+        "central": 5744651278.09471,
+        "high": 5165027911.721842
+      },
+      "exobase_radius_R": 3.9627685723083133,
+      "exobase_temperature_k": 294.85676207824184,
+      "protected_radius_R": 3.918433296407016,
+      "aperture": {
+        "aperture_radius_km": 7170.622455532598,
+        "area_over_september": 1.6543746697912758
+      },
+      "exosphere_ion_production_kg_s": 36.92991139020553,
+      "level": "relaxed",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "collisional",
+      "activity": "solar_maximum",
+      "transmission": 0.002610628569782759,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.003540650666575813,
+      "glow_share_of_heating": 0.262669826643046,
+      "uv_driven_loss_kg_s": 122.4591143369613,
+      "total_loss_kg_s": {
+        "low": 122.48862405438345,
+        "central": 122.64557359065482,
+        "high": 124.5901357470488
+      },
+      "cycle_time_years": {
+        "low": 812674311.2837766,
+        "central": 811634331.9958053,
+        "high": 798966608.36451
+      },
+      "exobase_radius_R": 5.140270624993098,
+      "exobase_temperature_k": 314.415180011578,
+      "protected_radius_R": 5.09448828158434,
+      "aperture": {
+        "aperture_radius_km": 9213.90038677968,
+        "area_over_september": 2.7315376044472557
+      },
+      "exosphere_ion_production_kg_s": 175.67565388154435,
+      "level": "relaxed",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "lte",
+      "activity": "quiet",
+      "transmission": 0.002610628569782759,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0041632412915937255,
+      "glow_share_of_heating": 0.37293363825583425,
+      "uv_driven_loss_kg_s": 17.61795949352287,
+      "total_loss_kg_s": {
+        "low": 17.647469210945022,
+        "central": 17.804418747216385,
+        "high": 19.748980903610374
+      },
+      "cycle_time_years": {
+        "low": 5640659122.485187,
+        "central": 5590935576.543689,
+        "high": 5040430120.386397
+      },
+      "exobase_radius_R": 3.977831961019355,
+      "exobase_temperature_k": 294.84169547329174,
+      "protected_radius_R": 3.933417627425589,
+      "aperture": {
+        "aperture_radius_km": 7196.656232244267,
+        "area_over_september": 1.66640927505623
+      },
+      "exosphere_ion_production_kg_s": 37.32837310395654,
+      "level": "relaxed",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "lte",
+      "activity": "solar_maximum",
+      "transmission": 0.002610628569782759,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.003542196202869339,
+      "glow_share_of_heating": 0.26299153963633304,
+      "uv_driven_loss_kg_s": 123.42942067464462,
+      "total_loss_kg_s": {
+        "low": 123.45893039206676,
+        "central": 123.61587992833813,
+        "high": 125.56044208473212
+      },
+      "cycle_time_years": {
+        "low": 806287223.4302944,
+        "central": 805263516.7196981,
+        "high": 792792351.9600108
+      },
+      "exobase_radius_R": 5.15348540032205,
+      "exobase_temperature_k": 314.0592103866913,
+      "protected_radius_R": 5.107682924186773,
+      "aperture": {
+        "aperture_radius_km": 9236.824758837147,
+        "area_over_september": 2.7451467558614513
+      },
+      "exosphere_ion_production_kg_s": 176.28620815943214,
+      "level": "relaxed",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "all_heats",
+      "activity": "quiet",
+      "transmission": 0.002610628569782759,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.004268297076926045,
+      "glow_share_of_heating": 0.3883676504394373,
+      "uv_driven_loss_kg_s": 40.75582287461564,
+      "total_loss_kg_s": {
+        "low": 40.78533259203779,
+        "central": 40.94228212830915,
+        "high": 42.886844284703145
+      },
+      "cycle_time_years": {
+        "low": 2440665598.8120246,
+        "central": 2431309468.327492,
+        "high": 2321069779.176981
+      },
+      "exobase_radius_R": 4.5635158061571515,
+      "exobase_temperature_k": 290.21676181289996,
+      "protected_radius_R": 4.516530659985592,
+      "aperture": {
+        "aperture_radius_km": 8209.756815014016,
+        "area_over_september": 2.1686064446136704
+      },
+      "exosphere_ion_production_kg_s": 52.526215808700535,
+      "level": "relaxed",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "all_heats",
+      "activity": "solar_maximum",
+      "transmission": 0.002610628569782759,
+      "status": "thermal_column",
+      "heating_as_equivalent_transmission": 0.0036052296740687307,
+      "glow_share_of_heating": 0.27587732105941015,
+      "uv_driven_loss_kg_s": 163.81351630140963,
+      "total_loss_kg_s": {
+        "low": 163.84302601883178,
+        "central": 163.99997555510316,
+        "high": 165.94453771149713
+      },
+      "cycle_time_years": {
+        "low": 607553220.9839202,
+        "central": 606971786.7735134,
+        "high": 599859203.3595862
+      },
+      "exobase_radius_R": 5.694086680005092,
+      "exobase_temperature_k": 299.5215217820869,
+      "protected_radius_R": 5.64755924172247,
+      "aperture": {
+        "aperture_radius_km": 10174.805872923667,
+        "area_over_september": 3.330983046508802
+      },
+      "exosphere_ion_production_kg_s": 198.12839137696142,
+      "level": "relaxed",
+      "hole_factor": 4.0
+    }
+  ]
+}

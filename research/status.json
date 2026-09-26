@@ -165,7 +165,7 @@
     },
     {
       "topic": "protection",
-      "condition": "historical_component_model; film_short_wave_transmission_computed_0.1_210_nm; module_catalogue_of_the_september_reference",
+      "condition": "historical_component_model; film_short_wave_transmission_computed_0.1_210_nm; module_catalogue_of_the_september_reference; swarm_uv_transmission_screened_for_three_design_levels",
       "material": [
         "../protection/model.py",
         "../protection/verify.py",
@@ -177,10 +177,12 @@
         "studies/environment_screens/results/plume_heat_interface.csv",
         "../protection/report.md",
         "../protection/reference/historical/",
-        "../protection/modules/catalogue.json"
+        "../protection/modules/catalogue.json",
+        "../protection/transmission/model.py",
+        "../protection/transmission/results/uv_transmission.json"
       ],
       "unresolved": [
-        "light bypassing the film through gaps, pinholes and edges of the aperture, and off-normal incidence",
+        "the swarm's UV transmission (3e-5 to 2.6e-3 by design level) rests on untested choices: neighbours held within 1-10 m, cell failures of 1-3% a year covered within a day to a month, holes in the oxide film 1-4 times the particle size",
         "a shield passing 5% less sunlight than the titania stack at every wavelength, the climate design the author chose (climate/gcm): how to build it",
         "coupled atmosphere and clean plumes",
         "full ephemerides and flexible structures",
@@ -192,7 +194,7 @@
         "solar-wind subsystem: whether sputtering and pickup need a magnetic system at all; the four 100 km regional loops (about 2e14 kg) against the 2025 plasma-inflated Lunashield-L1 concept (23-40 t, unvalidated; known from a 2026-09-26 reconstruction in reference/historical/)",
         "effects on Earth (report.md section 6): reflections toward Earth near full moon, and the screen crossing the full Moon and the Sun as seen from Earth"
       ],
-      "next_session_task": "Specify the aperture's leak fraction (gaps, pinholes, edges); constrain absorbed plume fractions and couple their heating to atmospheric physics.",
+      "next_session_task": "Constrain absorbed plume fractions and couple their heating to atmospheric physics; firm up the swarm's assumptions (formation control, cell failure and cover times, hypervelocity holes in the oxide film).",
       "requirements_from_september_reports": [
         "construction within 500 years of 2026; operation for at least 1e9 years",
         "an open atmosphere with no pressure dome; no superconducting planetary ring",
@@ -243,12 +245,14 @@
     },
     {
       "topic": "protection_architecture",
-      "condition": "requirements_with_sources; loss_budget_designed_across_1_to_100_kg_s; loss_response_screening_sizes_both_functions; protected_radius_computed_2.7_to_5.2_lunar_radii",
+      "condition": "requirements_with_sources; loss_budget_designed_across_1_to_100_kg_s; loss_response_screening_sizes_both_functions; protected_radius_computed_2.7_to_5.2_lunar_radii; design_point_from_swarm_transmission",
       "material": [
         "studies/protection_architecture/README.md",
         "studies/protection_architecture/requirements.md",
         "../atmosphere/loss_response/results/loss_response.json",
-        "../atmosphere/loss_response/results/absorption_radius.json"
+        "../atmosphere/loss_response/results/absorption_radius.json",
+        "../protection/transmission/results/uv_transmission.json",
+        "studies/protection_architecture/results/design_point.json"
       ],
       "unresolved": [
         "which loss budget in 1-100 kg/s (atmospheric cycle times of about 100 billion to 1 billion years) works best (designed across the range for now)",

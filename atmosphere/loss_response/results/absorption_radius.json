@@ -3,7 +3,7 @@
   "producer": {
     "domain": "atmosphere",
     "files": {
-      "atmosphere/loss_response/absorption.py": "16b4af763a743264",
+      "atmosphere/loss_response/absorption.py": "94c2d40ab4773acd",
       "atmosphere/loss_response/model.py": "06cbbdf17910b415",
       "atmosphere/thermal_column.py": "ca108980727d63d9"
     }

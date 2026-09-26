@@ -63,6 +63,7 @@ OPENBLAS_NUM_THREADS=1 python -m research.studies.environment_screens.run   # re
 OPENBLAS_NUM_THREADS=1 python -m research.studies.megaforest_wind.run       # results in research/runs/megaforest_wind
 OPENBLAS_NUM_THREADS=1 python -m research.studies.forest_patch.run --quick  # results in research/runs/forest_patch
 python -m research.studies.atmospheric_co2.run                             # results in studies/atmospheric_co2/results
+OPENBLAS_NUM_THREADS=1 python -m research.studies.protection_architecture.run # results in studies/protection_architecture/results
 ```
 
 For the environment screens, supply `--protection-archive /path/to/Lunar_Protection_Model.zip`

@@ -64,8 +64,8 @@ The atmosphere domain's escape calculation reads this. The film lets at most
 10⁻⁹ W/m² of heat into the upper air for the quiet Sun and 10⁻⁷ W/m² at solar
 maximum, so the exobase stays within 1.5 K of its base. How much extreme
 ultraviolet reaches the Moon is therefore set by light that bypasses the film:
-gaps, pinholes and edges of the aperture, and off-normal incidence. None of
-these is modelled; they are design parameters. The sky adds heat of its own:
+gaps, pinholes and edges of the aperture, and off-normal incidence, which
+[transmission/](transmission/README.md) now screens (below). The sky adds heat of its own:
 interplanetary hydrogen glows in Lyman-alpha at about 1,000 rayleigh and reaches
 the upper air from every direction, where no Sun-facing shield can block it
 ([report.md](report.md), section 9; a first estimate is in the atmosphere
@@ -130,6 +130,19 @@ outputs; the engineering domain's supply ledger
 ([engineering/network](../engineering/network/README.md)) reads the catalogue as
 demand. Regenerate it with `python -m protection.modules.catalogue`.
 
+## UV transmission of the swarm (2026-09-26)
+
+[transmission/model.py](transmission/model.py) writes
+[transmission/results/uv_transmission.json](transmission/results/uv_transmission.json)
+(schema `terluna.protection.uv-transmission/1`): the share of sunlight below
+175 nm that reaches the protected region through a formation of 10 × 10 km
+cells. It counts seams, micrometeoroid holes, missing cells and manufacturing
+defects for three levels of design choices. Tight choices hold 3–4×10⁻⁵,
+standard ones about 2×10⁻⁴ and relaxed ones 2.5×10⁻³. Failed cells waiting to
+be covered make up most of it, and overlapping seams and patching every 10–20
+years keep the rest small. The design levels are assumptions to test;
+[transmission/README.md](transmission/README.md) has the results and limits.
+
 ## Condition and remaining questions
 
 - Optical layers use measured constituent constants plus effective-medium and normal-incidence approximations. This is not a measured complete coating, irradiated lifetime test, or gap-free aperture.
@@ -138,7 +151,7 @@ demand. Regenerate it with `python -m protection.modules.catalogue`.
 - Holding the screen takes 2.8×10⁵ kg/s of propellant. The feasibility report's energy-limited loss with no filter at all is about 5,300–195,000 kg/s at 10% efficiency ([baseline report](../research/baselines/feasibility/report.md), section 6), so the reference screen spends more mass than it saves. It saves mass only if it is much lighter, uses much faster exhaust or is held without propellant.
 - The hub architecture above (industrial hub, depots, Earth–Sun L1/L2 hubs) has no design or budget here yet.
 - Magnetic moment, pressure-balance and rigidity estimates are component diagnostics. Global plasma performance, reconnection, trapped particles and human radiation dose remain unmodelled.
-- Thermospheric chemistry, lower climate, water loss and species escape remain to be coupled. The original model does not establish that its filter produces a 250 K exobase. The film's own short-wave transmission is now computed (above), and the atmosphere domain finds that it holds the exobase at 142–193 K before the sky's Lyman-alpha glow is counted. Light bypassing the film through the aperture is not yet specified.
+- Thermospheric chemistry, lower climate, water loss and species escape remain to be coupled. The original model does not establish that its filter produces a 250 K exobase. The film's own short-wave transmission is now computed (above), and the atmosphere domain finds that it holds the exobase at 142–193 K before the sky's Lyman-alpha glow is counted. Light bypassing the film through the aperture is screened for assumed design choices (above); formation control, cell failure rates and the oxide film's hole size are untested.
 - Hardware replacement may be much smaller than construction throughput while accumulated propellant/resource use remains substantial over geological time.
 
 The preserved results include successful and failed propulsion closures. Large sampled optical/phase grids and the rendered PDF are omitted from this curated import and recorded in [provenance](../research/provenance.json). Their numerical tables can be regenerated from the original code once inputs are restored. The older [shield geometry table](reference/legacy_shield_geometry.csv) remains explicitly separate from this later design.
