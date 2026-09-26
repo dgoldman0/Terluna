@@ -1,0 +1,6 @@
+gas,dry_mole_fraction,partial_pressure_kPa_at_80kPa,mass_fraction,mass_kg_at_80kPa,role
+N2,0.75,60.0,0.7222403077884546,1.349569276927546e+18,Primary inert buffer and nitrogen-cycle reservoir; must mostly be imported.
+O2,0.24,19.2,0.2639907514959552,4.932898424111618e+17,Breathing and biosphere oxidant; can be extracted from regolith or imported in water.
+Ar,0.009,0.72,0.012359251993203188,2.3094344909808136e+16,Minor inert buffer; optional and supply-constrained.
+CO2,0.0008,0.064,0.001210308245654623,2261566969239247.0,Photosynthesis and greenhouse control; actively buffered.
+trace,0.0002,0.016,0.00019938047673247026,372559884730391.75,"Water vapor, ozone, methane and other controlled trace gases."

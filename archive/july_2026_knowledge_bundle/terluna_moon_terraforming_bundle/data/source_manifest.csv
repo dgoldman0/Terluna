@@ -1,0 +1,21 @@
+id,title,publisher,url,use
+S01,NASA Moon Facts,NASA Science,https://science.nasa.gov/moon/facts/,"Moon size, distance, synchronous rotation, 27-day orbit and about 29-day phase cycle, current exosphere."
+S02,Compare Earth and the Moon,NASA Science,https://science.nasa.gov/moon/by-the-numbers/,Surface gravity and escape velocity.
+S03,Moon Water and Ices,NASA Science,https://science.nasa.gov/moon/moon-water-and-ices/,"Polar ice, LCROSS, M3 and sunlit water discoveries."
+S04,Turning Moon dust into oxygen,European Space Agency,https://www.esa.int/Science_Exploration/Human_and_Robotic_Exploration/Turning_Moon_dust_into_oxygen,Regolith about 45% oxygen by mass and molten-salt extraction concept.
+S05,"Needham & Kring 2017, Lunar volcanism produced a transient atmosphere",Earth and Planetary Science Letters,https://doi.org/10.1016/j.epsl.2017.09.002,Ancient lunar volcanism may have produced about 1 kPa atmosphere; estimated dissipation around 70 Myr.
+S06,"Tucker et al. 2021, Lifetime of a transient atmosphere",Icarus,https://doi.org/10.1016/j.icarus.2021.114304,Escape of a millibar CO atmosphere strongly depends on upper-atmosphere temperature and EUV heating.
+S07,"Li et al. 2018, Direct evidence of surface-exposed water ice",PNAS,https://doi.org/10.1073/pnas.1802345115,Direct spectral evidence for polar surface ice.
+S08,"Honniball et al. 2021, Molecular water detected on the sunlit Moon",Nature Astronomy,https://doi.org/10.1038/s41550-020-01222-x,Sunlit molecular water at roughly 100-400 micrograms per gram in observed high-latitude regions.
+S09,"Paul et al. 2022, Plants grown in Apollo lunar regolith",Communications Biology,https://doi.org/10.1038/s42003-022-03334-8,Plants germinated but showed severe stress and ionic/metal/reactive-oxygen responses.
+S10,"Zhang et al. 2020, First measurements of radiation dose on lunar surface",Science Advances,https://doi.org/10.1126/sciadv.aaz1334,Direct surface radiation dose measurements before terraforming.
+S11,"Way & Del Genio 2020, Venusian habitable climate scenarios",JGR Planets,https://doi.org/10.1029/2019JE006276,General circulation modeling of slowly rotating terrestrial climates.
+S12,"Yang, Cowan & Abbot 2013, Stabilizing cloud feedback",Astrophysical Journal Letters,https://doi.org/10.1088/2041-8205/771/2/L45,Slow/tidally locked climate cloud feedback precedent; not a lunar-specific model.
+S13,"Colyer & Vallis 2018, Zonal-mean dynamics of slowly rotating planets",Journal of Atmospheric Sciences / arXiv,https://arxiv.org/abs/1806.10494,Broad overturning circulation and weak-rotation atmospheric dynamics.
+S14,NASA Hazard: Gravity Fields,NASA Human Research Program,https://www.nasa.gov/hrp/hazard-gravity-fields/,"Bone, muscle, vision and adaptation risks in altered gravity."
+S15,"Du et al. 2025, Lunar and Martian gravity alter immune cell interactions",npj Microgravity,https://doi.org/10.1038/s41526-024-00456-7,Experimental partial-gravity cellular effects and major health uncertainty.
+S16,NASA What Is Lunar Regolith?,NASA Science,https://science.nasa.gov/biological-physical/what-is-lunar-regolith/,"Regolith is sharp fragmented material, not living soil."
+S17,"Linnarsson et al. 2012, Toxicity of lunar dust",Planetary and Space Science,https://doi.org/10.1016/j.pss.2012.05.013,Dust toxicity uncertainties and need for in-situ characterization.
+S18,"Crawford 2015, Lunar Resources: A Review",Progress in Physical Geography,https://arxiv.org/abs/1410.6865,Review of lunar resource opportunities and limitations.
+S19,Outer Space Treaty,United Nations Office for Outer Space Affairs,https://www.unoosa.org/oosa/en/ourwork/spacelaw/treaties/outerspacetreaty.html,"Peaceful use, due regard, responsibility, consultation and harmful-contamination provisions."
+S20,Artemis Accords,NASA,https://www.nasa.gov/artemis-accords/,Current cooperative principles for safe and sustainable exploration; governance would need to evolve far beyond them.

@@ -1,0 +1,21 @@
+id,parameter,value,unit,status,confidence,rationale
+A-001,Project name,Terluna,,recovered canon,high,Name used in the accessible Moon World project context.
+A-002,World target,Earth's existing Moon,,recovered canon,high,The concept modifies the natural Moon rather than constructing a replacement.
+A-003,Synodic solar cycle,29.530588,Earth days,physical constant,high,Sunrise-to-sunrise cycle; local illumination varies with latitude and terrain.
+A-004,Practical dawn transition,5,hours,recovered canon/correction,high,Operational twilight interval; it is included within the synodic cycle and does not add to it.
+A-005,Practical dusk transition,5,hours,recovered canon/correction,high,Operational twilight interval; previous 30-hour wording is superseded.
+A-006,Reference surface pressure,80,kPa,reconstructed baseline,medium,Chosen to provide near-terrestrial oxygen partial pressure without a full 101.3 kPa gas inventory.
+A-007,Reference dry oxygen mole fraction,0.24,fraction,reconstructed baseline,medium,Produces 19.2 kPa O2 at 80 kPa; requires fire testing.
+A-008,Reference dry nitrogen mole fraction,0.75,fraction,reconstructed baseline,medium,Primary buffer gas and biological nitrogen reservoir; its supply is the largest mass bottleneck.
+A-009,Reference mean surface temperature,285,K,engineering target,low,"A climate objective, not a prediction; requires a dedicated 3-D general circulation model."
+A-010,Reference hydrosphere mass,3e17,kg,reconstructed baseline,low,"Supports selected seas, lakes, wetlands, groundwater and ice rather than an Earth-depth ocean."
+A-011,Top of main troposphere,35–45,km,recovered/project-derived range,medium,"Consistent with the accessible atmospheric-layer discussion, but must be solved by climate modeling."
+A-012,Atmospheric layer names,Descriptive named bands,,recovered correction,high,L1–L5 are reserved for Earth–Moon Lagrange points and must not label atmospheric layers.
+A-013,Atmospheric gravity waves,Buoyancy waves,,recovered correction,high,"These are waves in a stratified atmosphere, not gravitational waves in spacetime."
+A-014,Aerial biosphere,Extensive engineered flying and gliding niches,,recovered canon,high,Low weight in a dense atmosphere makes aerial life a major Terluna design theme.
+A-015,Biological timing,Dual clock,,engineering inference,medium,Organisms retain shorter internal rhythms while also responding to the 708.7-hour environmental cycle.
+A-016,Atmosphere maintenance,Continuous monitoring and replenishment,,engineering requirement,high,The loss lifetime of a dense N2–O2 lunar atmosphere is unresolved.
+A-017,Human gravity mitigation,Routine artificial-gravity exposure,,engineering requirement,medium,"Lifelong health, pregnancy and development at 0.16 g are unknown."
+A-018,Climate philosophy,Adapt to the natural lunar cycle,,reconstructed intent,medium,The project does not assume a forced 24-hour rotation.
+A-019,Terraforming architecture,Staged and reversible until late phases,,engineering requirement,high,A global release follows decades of sealed and regional demonstrations and multiple stop gates.
+A-020,Fallback architecture,Paraterraforming and enclosed basins,,engineering requirement,high,"The project can stop at contained habitats if atmosphere, resources, health or governance do not close."

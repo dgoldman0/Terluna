@@ -1,0 +1,15 @@
+id,domain,requirement,priority,verification,reason
+R-001,Atmosphere,Maintain a globally collisional atmosphere in the 60-100 kPa design envelope.,Must,Pressure,Climate and human habitability.
+R-002,Atmosphere,Maintain oxygen partial pressure in a medically acceptable range while controlling fire risk.,Must,Composition,Open biosphere and human settlement.
+R-003,Atmosphere,Demonstrate a replenishment burden compatible with the mature lunar economy.,Must,Escape,No deployment before upper-atmosphere gate is passed.
+R-004,Climate,"Avoid irreversible runaway greenhouse, permanent global ice lock, or destructive day-night oscillations.",Must,Stability,Requires coupled atmosphere-ocean-land GCM.
+R-005,Climate,Retain a canonical practical dawn/dusk transition of about five hours.,Should,Illumination,Project-world continuity.
+R-006,Hydrosphere,Provide liquid-water refugia throughout the lunar night and controlled freeze-thaw zones elsewhere.,Must,Water,Ecological resilience.
+R-007,Geosphere,Convert raw regolith into biologically usable soil while suppressing toxic and abrasive dust.,Must,Soil,Agriculture and ecosystem safety.
+R-008,Biosphere,"Use staged, reversible ecological introductions before global release.",Must,Ecology,Avoid uncontrolled collapse or invasive dominance.
+R-009,Human factors,Provide regular 1 g or higher-partial-g exposure for residents until 0.16 g safety is established.,Must,Health,"Bone, muscle, immune, pregnancy and development risks."
+R-010,Infrastructure,Acquire and emplace at least order 10^18 kg of volatile material without sterilizing impacts.,Must,Logistics,Nitrogen is the main mass bottleneck.
+R-011,Energy,"Build a sustained industrial power system in the hundreds-of-terawatts range for centuries, or equivalent energy over a longer period.",Must,Energy,"Atmosphere, water and regolith processing."
+R-012,Science,Archive pristine lunar samples and protect designated heritage/science sites before irreversible alteration.,Must,Governance,Terraforming destroys the present lunar environment.
+R-013,Space access,"Replace current low lunar orbit operations with high-altitude aviation, tethers, launch corridors and higher orbits.",Must,Transportation,The engineered atmosphere extends hundreds of kilometers.
+R-014,Control,"Operate global atmospheric, hydrological and ecological observatories with intervention authority.",Must,Operations,Terluna is a maintained planetary system.

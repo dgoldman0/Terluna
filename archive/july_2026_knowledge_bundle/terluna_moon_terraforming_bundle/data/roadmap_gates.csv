@@ -1,0 +1,11 @@
+phase,name,duration_scenario,atmosphere,deliverables,gate,rollback
+0,"Authority, archive and baseline",25–100 years,Existing exosphere,Global archive; protected zones; legal authority; geodesy; resource census,No irreversible work without consent and preserved reference sites,Full
+1,Robotic industrial seed,50–200 years,Sealed facilities only,"Power, mines, oxygen plants, metals, mass drivers, high orbit logistics",Closed material loops and safe industrial scale-up,High
+2,Closed ecological cities,50–200 years overlap,Local pressure vessels,Multi-decade ecosystems through lunar cycles; artificial gravity; soil factories,No hidden ecological or health failures,High
+3,Paraterraformed basins,100–400 years,Roofed/enclosed regional atmospheres,"Seas, weather, aviation, open landscapes under containment",Regional climate and hydrology stable,Moderate
+4,Thin global atmosphere,100–500 years,"0.5–5 kPa, unbreathable","Dust suppression, thermal experiments, escape measurements, orbital transition",Measured loss agrees with affordable replenishment model,Moderate
+5,Pressure plateau ladder,200–1000 years,"10, 20, 40, then 60 kPa plateaus","GCM validation, atmospheric chemistry, drag map, hydrological pilots",Each plateau stable for multiple cycles and solar conditions,Declines with pressure
+6,Hydrosphere and soil expansion,200–1500 years overlap,Mostly inert buffer atmosphere,"Selected seas, watersheds, soil islands, nutrient reservoirs","No basin instability, contamination or night freeze crisis",Low to moderate
+7,Controlled oxygenation,100–1000 years,O2 rises in small increments,"Ozone chemistry, combustion controls, aerobic ecosystems",Fire and oxidation budgets remain controllable,Low
+8,Managed open biosphere,Centuries,60–100 kPa design range,"Staged ecological release, migration corridors, cities and aerial ecology",Biosphere stable without emergency intervention for long test periods,Very low
+9,Permanent stewardship,Indefinite,Actively maintained,"Climate operations, replenishment, biosecurity, protected reserves, governance",Continuous legitimacy and resource solvency,Not meaningfully global

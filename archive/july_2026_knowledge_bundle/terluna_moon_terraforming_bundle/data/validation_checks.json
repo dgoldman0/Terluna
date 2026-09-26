@@ -1,0 +1,53 @@
+{
+  "status": "PASS",
+  "issues": [],
+  "warnings": [],
+  "stats": {
+    "model_output": [
+      "80 kPa atmosphere mass, kg: 1.8685875911024855e+18",
+      "80 kPa column mass, kg/m^2: 49261.08374384236",
+      "Scale height at 285 K, km: 50.15885991985261",
+      "3e17 kg water GED, m: 7.908821183187536"
+    ],
+    "image_atmosphere_mass_vs_pressure.png": [
+      1440,
+      900
+    ],
+    "image_illumination_cycle.png": [
+      1782,
+      511
+    ],
+    "image_atmospheric_bands.png": [
+      1302,
+      1419
+    ],
+    "image_roadmap_schematic.png": [
+      1980,
+      1170
+    ],
+    "files": 50,
+    "bytes": 751079,
+    "markdown_words": 53750,
+    "source_ids_used": [
+      "S01",
+      "S02",
+      "S03",
+      "S04",
+      "S05",
+      "S06",
+      "S07",
+      "S08",
+      "S09",
+      "S10",
+      "S11",
+      "S12",
+      "S13",
+      "S14",
+      "S15",
+      "S16",
+      "S17",
+      "S19",
+      "S20"
+    ]
+  }
+}

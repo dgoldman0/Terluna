@@ -1,0 +1,12 @@
+from,depends_on,relationship,notes
+Global breathable atmosphere,Dense-atmosphere escape closure,hard gate,Annual replenishment must fit resource and energy budgets.
+Global breathable atmosphere,Nitrogen or alternative buffer inventory,hard gate,Largest mass flow in the reference design.
+Open biosphere,Stable pressure and climate plateaus,hard gate,Biology cannot be the first global experiment.
+Open human settlement,Artificial gravity and medical evidence,hard gate,Atmospheric habitability does not solve partial-gravity health.
+Regional seas,Atmosphere and thermal stability,hard gate,Liquid water needs pressure and night heat storage.
+Soil expansion,Dust passivation and nutrient imports,hard gate,Raw regolith lacks organics and key volatile nutrients.
+Aerial ecology,Dense lower atmosphere and weather mapping,hard gate,Flight niches emerge only after atmosphere and food webs.
+High-altitude platforms,Stratification and wind-shear characterization,design dependency,"35–45 km is a candidate operating layer, not guaranteed calm air."
+Orbital transition,Atmosphere build schedule,predecessor,Low lunar orbit assets move before drag becomes destructive.
+Global release,International authority and protected-zone settlement,hard gate,Physical capability does not create legitimacy.
+Climate control,Power grid and sensor network,operational dependency,Terluna remains actively managed.

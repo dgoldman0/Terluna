@@ -1,0 +1,13 @@
+id,name,scope,phase,deliverable
+WP-01,Lunar system baseline,"Map volatiles, geology, heritage and science reserves.",Phase 0,Global reference atlas and protected-zone treaty.
+WP-02,Upper-atmosphere model,"Couple GCM, thermosphere, exosphere, photochemistry, solar wind and Earth magnetotail.",Phase 0-1,Validated escape and replenishment envelope.
+WP-03,Partial-gravity biology,Run multi-generation organisms and long-duration human analogs at 0.16 g.,Phase 0-3,Health and reproduction design thresholds.
+WP-04,Regolith transformation,"Develop oxygen extraction, metal recovery, dust passivation and soil creation.",Phase 1-4,Industrial process chain and ecological substrate.
+WP-05,Volatile acquisition,"Identify, move, capture and process nitrogen- and water-bearing bodies.",Phase 1-6,Order-10^18 kg delivery capability.
+WP-06,Closed ecological pilots,Operate crater-scale sealed climates through full 29.5-day cycles.,Phase 2-4,Validated long-cycle ecology.
+WP-07,Planetary power grid,Deploy fission/fusion/solar/orbital generation with long-night storage.,Phase 1-7,Hundreds of TW sustained equivalent.
+WP-08,Atmosphere build,Raise pressure through controlled plateaus and verify each plateau.,Phase 4-7,Global atmosphere at reference pressure.
+WP-09,Hydrosphere build,"Fill selected basins, establish groundwater and freeze-thaw buffers.",Phase 4-7,Stable regional water cycle.
+WP-10,Biosphere succession,"Release microbes, lichens, soils, plants, fungi, invertebrates and later vertebrates.",Phase 5-8,Self-repairing but governed biosphere.
+WP-11,Human settlement,"Build cities, artificial-gravity facilities, transport and public health systems.",Phase 2-8,Permanent population capability.
+WP-12,Planetary operations,"Maintain atmosphere, climate, ecology, resources and emergency response.",Phase 7+,Permanent Terluna stewardship agency.

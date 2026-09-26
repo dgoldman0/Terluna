@@ -1,0 +1,261 @@
+{
+  "bundle_name": "Terluna Moon Terraforming Knowledge Bundle",
+  "version": "1.0",
+  "created_utc": "2026-07-12",
+  "description": "Portable reconstruction and engineering expansion of the Terluna Moon-terraforming concept.",
+  "integrity_scope": "Entries exclude BUNDLE_MANIFEST.json and SHA256SUMS.txt to avoid recursive checksums.",
+  "file_count": 50,
+  "total_bytes": 749601,
+  "files": [
+    {
+      "path": "00_EXECUTIVE_SUMMARY.md",
+      "bytes": 7199,
+      "sha256": "fe0f88a822b8211e10460e54db53595eeed870f5a8558e574390826e09c7eab2"
+    },
+    {
+      "path": "01_RECOVERED_CANON_AND_CORRECTIONS.md",
+      "bytes": 4874,
+      "sha256": "0549314bd1f9a33529052cfe13ed13df45cccecff074345cd338cf3f39569789"
+    },
+    {
+      "path": "02_FEASIBILITY_CASE.md",
+      "bytes": 10909,
+      "sha256": "42323db3021f9245e78952b88adf0aedf398303faf12d01ccc05969be6fd9e5a"
+    },
+    {
+      "path": "03_PHYSICAL_PARAMETERS_AND_CALCULATIONS.md",
+      "bytes": 11244,
+      "sha256": "19ea33640672af4d7c1e146e436b65305603714d5e890ec746f665c88e04123f"
+    },
+    {
+      "path": "04_ATMOSPHERE_CLIMATE_AND_WEATHER.md",
+      "bytes": 13105,
+      "sha256": "96cbaf462311c1d55cbbd968159a67486f4e2b95b886911b8a0ec52a8df62816"
+    },
+    {
+      "path": "05_HYDROSPHERE_GEOSPHERE_AND_SOIL.md",
+      "bytes": 10669,
+      "sha256": "a00638784849472610528f21dbab2f87c8484f7b9924b82ad787f8d2d8669290"
+    },
+    {
+      "path": "06_BIOSPHERE_AND_EVOLUTIONARY_DESIGN.md",
+      "bytes": 11060,
+      "sha256": "94597945125cceacd7a12a46b4f593130aa826c6372b15d15c14eb26c926cd18"
+    },
+    {
+      "path": "07_HUMAN_SETTLEMENT_HEALTH_AND_CULTURE.md",
+      "bytes": 9973,
+      "sha256": "2ace8e74479443322748371d6b7de6dfebcb89878206afd31cf2602e61fc32fa"
+    },
+    {
+      "path": "08_INFRASTRUCTURE_INDUSTRY_AND_LOGISTICS.md",
+      "bytes": 10878,
+      "sha256": "8e2467545cdda0ceec682114e948e2aa03a06ad6c3281fdc052b434bbed9cd3d"
+    },
+    {
+      "path": "09_IMPLEMENTATION_ROADMAP.md",
+      "bytes": 10545,
+      "sha256": "f18e0b3ba59be37f00c4f2586c9dc4583bf6b8b046c75c86646ea0094612f306"
+    },
+    {
+      "path": "10_RISKS_ETHICS_GOVERNANCE_AND_FAILURES.md",
+      "bytes": 11423,
+      "sha256": "79ca14bcbfd4960f9ae9d9f3e7dcd33559ab32b85f8929ee931eb541984ac566"
+    },
+    {
+      "path": "11_RESEARCH_AND_VALIDATION_PROGRAM.md",
+      "bytes": 9346,
+      "sha256": "5c8d71cbe119401a43cce2ec3a16319ab939902ba4e07a1063ee8f59c768b75f"
+    },
+    {
+      "path": "12_QA_HANDOFF.md",
+      "bytes": 19850,
+      "sha256": "a59a493f8b07f4283c3591f0e148f9fd160bc10a202be070412b6d032a822ed0"
+    },
+    {
+      "path": "13_EXTERNAL_WORKSPACE_CONTEXT.md",
+      "bytes": 9130,
+      "sha256": "bbd7ad68ea7d0435ea1359d58d31029eccbb8db5f92d1d10c5fe4491d79f93ba"
+    },
+    {
+      "path": "14_GLOSSARY.md",
+      "bytes": 8331,
+      "sha256": "0fffb113d7ad77fc79cafc91bf24f8d859975053f98a5f9eb22c86daa20ec01c"
+    },
+    {
+      "path": "15_SOURCE_NOTES.md",
+      "bytes": 8211,
+      "sha256": "c3575164e5514b69bf0235a23505a7b1a594fbe21a72ba4243f3804bd6421189"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "bytes": 1154,
+      "sha256": "640e3a872d4bff675c4b47e1fa12e7ca9b2556452abd03ad0981f990e2e5297c"
+    },
+    {
+      "path": "README.md",
+      "bytes": 5425,
+      "sha256": "410e2c25258ffb365c70008640b993b78de8d76215462b46bcfc7d0475a50cec"
+    },
+    {
+      "path": "TERLUNA_COMPLETE_DUMP.md",
+      "bytes": 191886,
+      "sha256": "af3687772c0eb5b9a1bad0349e1463d28b44ec847be7345523fb4bb3b1fff340"
+    },
+    {
+      "path": "TERLUNA_MASTER_SPEC.md",
+      "bytes": 16335,
+      "sha256": "2fd65520633071e62714164c3968c928a1daf5e7badfb5f4d6c89473e4f0fb63"
+    },
+    {
+      "path": "data/assumptions.csv",
+      "bytes": 3331,
+      "sha256": "f6ae63fb680fd65bc859cf81fa65e9b1709133dfce648d51d958b647fdab2794"
+    },
+    {
+      "path": "data/atmosphere_pressure_mass.csv",
+      "bytes": 613,
+      "sha256": "9e6f3e4925361784e36e16afd2c6aa59f99909e181ad610d8977924ff00b1750"
+    },
+    {
+      "path": "data/atmospheric_bands.csv",
+      "bytes": 1130,
+      "sha256": "56cd12168654f8b95248398211843c79090ea52aef9405895048741a53b92019"
+    },
+    {
+      "path": "data/biosphere_traits.csv",
+      "bytes": 1566,
+      "sha256": "18377e0af6f6e77064bcebf2ccde89ce0ffc6296f0b8f164df9a1adf54ab5170"
+    },
+    {
+      "path": "data/canon_registry.csv",
+      "bytes": 1544,
+      "sha256": "1d58e304aaf7b7766c235cf0e5e08141dc46c9b57dadf0842fa0bd0fcd628035"
+    },
+    {
+      "path": "data/decision_log.csv",
+      "bytes": 1480,
+      "sha256": "e596d8a61eaeafbe8ea0cdb217957ec0f2ac0bcc38ad7b9237ec2236b825e5d0"
+    },
+    {
+      "path": "data/dependency_matrix.csv",
+      "bytes": 1406,
+      "sha256": "b11e09ea93fb084c3257789c60c9bca51a680a3a5803d67e4ecd8da2e5c3ee75"
+    },
+    {
+      "path": "data/energy_scales.csv",
+      "bytes": 848,
+      "sha256": "8e4d12c67877b963859d51a1efd31122d4fde3388522dacbc231f2a593c7bd90"
+    },
+    {
+      "path": "data/glossary.csv",
+      "bytes": 8095,
+      "sha256": "5d6af9ef87b05dbd81bc8cd7bb4444b278bf5e4f11623d26e8501893f5ee367c"
+    },
+    {
+      "path": "data/hydrosphere_scenarios.csv",
+      "bytes": 565,
+      "sha256": "9810ce3afad0a841c673e9ec1abfaa0cb61bd221a9625b5df408f795b27a0ad5"
+    },
+    {
+      "path": "data/mass_budget_reference.csv",
+      "bytes": 736,
+      "sha256": "7422df4c9081308892f2e3118ad7d4cbbfad8b1adb9366b356f58504ceb74b8c"
+    },
+    {
+      "path": "data/open_questions.csv",
+      "bytes": 1544,
+      "sha256": "04dd5657b8524b7417d6fa9981c3b9da8dca200d7d1dd5d3be2d3982f5e9970c"
+    },
+    {
+      "path": "data/parameter_ranges.csv",
+      "bytes": 1513,
+      "sha256": "0a98ed4c5f3ef8ddaeaaa2b7bc8f1772648a3b89370e21c109bb68346c92216d"
+    },
+    {
+      "path": "data/pressure_with_altitude_reference.csv",
+      "bytes": 2418,
+      "sha256": "3bb85e9c869bd3c1e278ff07d10189041d23f165afeff9a29e137788c638698a"
+    },
+    {
+      "path": "data/qa_handoff.jsonl",
+      "bytes": 22422,
+      "sha256": "c3286fcf767d83c28fb36af6feb0cdec4bc05e091ccd8409114c7e7aa55ece70"
+    },
+    {
+      "path": "data/reference_atmosphere_composition.csv",
+      "bytes": 715,
+      "sha256": "5b5d024c75e82dedbbda95eb7d429d04e891f828511a97401ba8ce177c31e474"
+    },
+    {
+      "path": "data/requirements.csv",
+      "bytes": 2446,
+      "sha256": "9e48bd9c77e0e7e64d648284c38911cad13f37c41b3ce757a690cf529ea23fd6"
+    },
+    {
+      "path": "data/risk_register.csv",
+      "bytes": 2892,
+      "sha256": "22b31d231d2cfe1c2bef1bed774fc86a4a7c87440e2e54c56dddb5f20a85524f"
+    },
+    {
+      "path": "data/roadmap_gates.csv",
+      "bytes": 2153,
+      "sha256": "6f34d749eedae8b21876cc5dd22b7d2d5b38260f054ccc2b121c15b6bc4b6756"
+    },
+    {
+      "path": "data/source_manifest.csv",
+      "bytes": 3952,
+      "sha256": "931dbba43eab797a50420e634fc18d0d5508d2b658d742bd99a3eeb6ddd4bbd4"
+    },
+    {
+      "path": "data/terluna_context.json",
+      "bytes": 5835,
+      "sha256": "82c582d307dbc60a26d242f583c3e6177aea4cdabe7b9d7a8c9197a5cb4eb22c"
+    },
+    {
+      "path": "data/validation_checks.json",
+      "bytes": 942,
+      "sha256": "bfa9ac58e1427693a3ba62691b1f5cf66fdb8f774ae79b787da0a7d1249e2feb"
+    },
+    {
+      "path": "data/work_packages.csv",
+      "bytes": 1860,
+      "sha256": "1ce01a884cfc270e24562ff20e55332648f389f695b4e95071b6f90f9d9b04d8"
+    },
+    {
+      "path": "figures/atmosphere_mass_vs_pressure.png",
+      "bytes": 69260,
+      "sha256": "2832432100ac90e524e3c1a0dfd188cc0c86dfa711c395373e30ec469473e520"
+    },
+    {
+      "path": "figures/atmospheric_bands.png",
+      "bytes": 83488,
+      "sha256": "6ce297c5795b9106b621bed20afd04f29606d230981a6d48ae2435320c5ace5b"
+    },
+    {
+      "path": "figures/illumination_cycle.png",
+      "bytes": 48843,
+      "sha256": "1d6d4a9d5097f945b017296a93b1893c2eb4cd1f35d9385376f10422e4558e11"
+    },
+    {
+      "path": "figures/roadmap_schematic.png",
+      "bytes": 92700,
+      "sha256": "7c238b3aeb47cd3c7e80bc019c2c6a6de2792c8ddeb02d91b25c17d35090b6b4"
+    },
+    {
+      "path": "models/README.md",
+      "bytes": 453,
+      "sha256": "3fd3b98cc22d1e72d0fbf81a385e98eab666d2d3227fcecdbfb436f6a82b011e"
+    },
+    {
+      "path": "models/terluna_screening_calculations.py",
+      "bytes": 1252,
+      "sha256": "ee7d84431f7e82d2f0d33d961f9285936e450d45bf810d2707d728b8c59963d5"
+    },
+    {
+      "path": "references/references.bib",
+      "bytes": 2052,
+      "sha256": "d72603b567b9c3ad4a17e957620bf8ba671ecaaa4e3c71003baa021d9c887486"
+    }
+  ]
+}

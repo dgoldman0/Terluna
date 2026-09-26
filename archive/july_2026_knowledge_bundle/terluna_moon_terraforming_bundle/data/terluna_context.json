@@ -1,0 +1,150 @@
+{
+  "schema_version": "1.0",
+  "bundle": {
+    "title": "Terluna Moon Terraforming Knowledge Bundle",
+    "version": "1.0",
+    "date": "2026-07-12",
+    "scope": "reconstructed project canon plus quantitative engineering expansion",
+    "limitation": "The full historical conversation was not available as a verbatim export."
+  },
+  "project": {
+    "name": "Terluna",
+    "target": "Earth's natural Moon",
+    "goal": "Maintained breathable atmosphere, regional hydrosphere, engineered biosphere, human settlement and atmospheric flight",
+    "feasibility_status": "Far-future research and worldbuilding program; not proven or near-term."
+  },
+  "recovered_canon": [
+    "The terraformed Moon is called Terluna.",
+    "Terluna modifies Earth’s existing Moon.",
+    "The long lunar day-night cycle remains a defining environmental feature.",
+    "Practical dawn or dusk transition is about five hours.",
+    "Organisms store resources and adapt to prolonged illumination and darkness.",
+    "Aerial and gliding ecology is a major Terluna feature.",
+    "The top-of-troposphere/lower-stratosphere worldbuilding band is approximately 35–45 km.",
+    "Atmospheric gravity waves can be launched by mountains and terminator fronts.",
+    "High-altitude life is sparse and can include microbes or engineered radiation-hard algal films.",
+    "High-altitude platforms can support farside astronomy and nearside Earthlight photometry.",
+    "Atmospheric layers use descriptive names rather than L1–L5."
+  ],
+  "corrections": [
+    {
+      "topic": "twilight",
+      "rule": "Use about five hours for each practical dawn or dusk transition; do not use 30 hours.",
+      "geometry": "Five hours corresponds to about 2.54 degrees of solar motion and is included within the 29.53-day cycle."
+    },
+    {
+      "topic": "layers",
+      "rule": "Do not call atmospheric bands L1–L5; those labels are Lagrange points."
+    },
+    {
+      "topic": "waves",
+      "rule": "Atmospheric gravity waves are buoyancy waves, not gravitational waves in spacetime."
+    }
+  ],
+  "physical_constants": {
+    "moon_radius_m": 1737400.0,
+    "surface_area_m2": 37932328099380.46,
+    "surface_gravity_m_s2": 1.624,
+    "moon_mass_kg": 7.342e+22,
+    "synodic_cycle_days": 29.530588,
+    "synodic_cycle_hours": 708.734112,
+    "half_cycle_hours": 354.367056,
+    "equatorial_terminator_speed_m_s": 4.283,
+    "escape_speed_km_s": 2.38,
+    "vacuum_near_surface_orbital_speed_km_s": 1.68
+  },
+  "reference_design": {
+    "status": "editable reconstructed baseline",
+    "surface_pressure_kPa": 80.0,
+    "surface_temperature_target_K": 285.0,
+    "dry_mole_fractions": {
+      "N2": 0.75,
+      "O2": 0.24,
+      "Ar": 0.009,
+      "CO2": 0.0008,
+      "other_trace": 0.0002
+    },
+    "oxygen_partial_pressure_kPa": 19.2,
+    "water_inventory_kg": 3e+17,
+    "practical_dawn_hours": 5.0,
+    "practical_dusk_hours": 5.0,
+    "main_tropopause_range_km": [
+      35,
+      45
+    ]
+  },
+  "derived_screening": {
+    "atmosphere_mass_kg": 1.8685875911e+18,
+    "nitrogen_mass_kg": 1.34957e+18,
+    "oxygen_mass_kg": 4.9329e+17,
+    "argon_mass_kg": 2.3094e+16,
+    "carbon_dioxide_mass_kg": 2261600000000000.0,
+    "column_mass_kg_m2": 49261.08374384236,
+    "scale_height_km_at_285K": 50.16,
+    "dry_adiabatic_lapse_rate_K_km": 1.6175,
+    "water_global_equivalent_depth_m": 7.908,
+    "regolith_processed_for_oxygen_kg_at_45pct_and_75pct_recovery": 1.4616e+18,
+    "oxygen_process_power_TW_over_1000yr_range": [
+      313,
+      782
+    ]
+  },
+  "why_it_might_work": [
+    "Gravity can support a collisional lunar atmosphere for nonzero periods.",
+    "Published ancient-atmosphere and escape work shows atmosphere lifetime is state-dependent rather than instant by definition.",
+    "The Moon receives Earthlike solar flux.",
+    "The atmosphere and regional water inventory can provide planetary heat storage and day-night transport.",
+    "Lunar rock supplies oxygen and construction materials.",
+    "Low gravity strongly favors atmospheric flight and large structures."
+  ],
+  "hard_gates": [
+    "Dense-atmosphere thermosphere/exosphere/escape closure.",
+    "Ethical and economic nitrogen supply.",
+    "Long-cycle 3-D climate stability.",
+    "Fire safety through controlled oxygenation.",
+    "Multigenerational health at 0.16 g and artificial-gravity dose.",
+    "Stable hydrology, soil and nutrient cycles.",
+    "Science, heritage, resident and international legitimacy.",
+    "Orbital and surface infrastructure transition."
+  ],
+  "roadmap": [
+    "Authority/archive/baseline",
+    "Robotic industrial seed",
+    "Closed ecological cities",
+    "Paraterraformed basins",
+    "Thin global atmosphere",
+    "Pressure plateau ladder",
+    "Hydrosphere and soil expansion",
+    "Controlled oxygenation",
+    "Managed open biosphere",
+    "Permanent stewardship"
+  ],
+  "fallback": "Stop at sealed cities and paraterraformed basins if any global hard gate fails.",
+  "evidence_labels": [
+    "recovered canon",
+    "measured fact",
+    "published inference",
+    "screening calculation",
+    "engineering hypothesis",
+    "speculative worldbuilding"
+  ],
+  "primary_files": [
+    "00_EXECUTIVE_SUMMARY.md",
+    "TERLUNA_MASTER_SPEC.md",
+    "01_RECOVERED_CANON_AND_CORRECTIONS.md",
+    "02_FEASIBILITY_CASE.md",
+    "03_PHYSICAL_PARAMETERS_AND_CALCULATIONS.md",
+    "04_ATMOSPHERE_CLIMATE_AND_WEATHER.md",
+    "05_HYDROSPHERE_GEOSPHERE_AND_SOIL.md",
+    "06_BIOSPHERE_AND_EVOLUTIONARY_DESIGN.md",
+    "07_HUMAN_SETTLEMENT_HEALTH_AND_CULTURE.md",
+    "08_INFRASTRUCTURE_INDUSTRY_AND_LOGISTICS.md",
+    "09_IMPLEMENTATION_ROADMAP.md",
+    "10_RISKS_ETHICS_GOVERNANCE_AND_FAILURES.md",
+    "11_RESEARCH_AND_VALIDATION_PROGRAM.md",
+    "12_QA_HANDOFF.md",
+    "13_EXTERNAL_WORKSPACE_CONTEXT.md",
+    "14_GLOSSARY.md",
+    "15_SOURCE_NOTES.md"
+  ]
+}

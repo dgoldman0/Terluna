@@ -1,0 +1,12 @@
+id,statement,status,confidence,notes
+C-001,The terraformed Moon is called Terluna.,recovered canon,high,Project name.
+C-002,Terluna modifies Earth’s existing Moon.,recovered canon,high,No replacement moon.
+C-003,The long lunar day-night cycle remains a defining environmental feature.,recovered canon,high,Biology adapts rather than the rotation being forced to 24 hours.
+C-004,Practical dawn or dusk transition is about five hours.,recovered correction,high,The prior 30-hour value is superseded.
+C-005,Organisms store resources and adapt to prolonged illumination and darkness.,recovered canon,high,Core biological requirement.
+C-006,Aerial and gliding ecology is a major Terluna feature.,recovered canon,high,Supported by low gravity and dense atmosphere.
+C-007,The top-of-troposphere/lower-stratosphere worldbuilding band is approximately 35–45 km.,recovered/project-derived,medium,Requires GCM validation.
+C-008,Atmospheric gravity waves can be launched by mountains and terminator fronts.,recovered canon/terminology,high,"Buoyancy waves, not gravitational waves."
+C-009,High-altitude life is sparse and can include microbes or engineered radiation-hard algal films.,recovered canon,high,Not a dense free-floating ecosystem.
+C-010,High-altitude platforms can support farside astronomy and nearside Earthlight photometry.,recovered canon,high,Platform feasibility depends on winds and atmosphere.
+C-011,Atmospheric layers use descriptive names rather than L1–L5.,recovered correction,high,L1–L5 remain Lagrange points.

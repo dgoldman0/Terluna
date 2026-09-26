@@ -1,0 +1,9 @@
+quantity,value,unit,assumption
+Incident solar power on lunar disk,1.2906474635814202e+16,W,1361 W/m2 solar constant
+Absorbed planetary power,9034532245069940.0,W,0.30 Bond albedo screening value
+Energy absorbed during one illumination half-cycle,1.1525546138481019e+22,J,Constant global mean over 14.765 days
+Heat capacity of 3e17 kg water for 1 K,1.254e+21,J/K,Liquid-water heat capacity 4.18 kJ/kg/K
+Heat stored by 3e17 kg water over 10 K,1.254e+22,J,All reference water participates; optimistic upper scale
+Heat capacity of 80 kPa atmosphere for 1 K,1.8760619414668955e+21,J/K,Dry-air cp 1004 J/kg/K
+Heat stored by 80 kPa atmosphere over 10 K,1.8760619414668955e+22,J,All atmosphere participates; screening upper scale
+Average power represented by 10 K water swing over lunar night,9829732404169460.0,W,Uniform release over 14.765 days

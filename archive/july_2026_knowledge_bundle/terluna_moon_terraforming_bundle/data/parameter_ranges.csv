@@ -1,0 +1,13 @@
+parameter,minimum,reference,maximum,unit,interpretation
+Surface pressure,20,80,101.325,kPa,20 kPa is a thin-atmosphere research plateau; 60–100 kPa is the open-habitat design space.
+Oxygen partial pressure,16,19.2,22,kPa,"Medical, combustion and ecosystem trade space; values are not a final safety standard."
+Dry O2 mole fraction,0.20,0.24,0.30,fraction,Higher fractions reduce buffer gas but raise combustion risk.
+Dry CO2 mole fraction,0.0003,0.0008,0.003,fraction,Actively controlled photosynthesis and greenhouse range for model testing.
+Mean surface temperature target,275,285,295,K,Global mean target; local and cyclic extremes matter more.
+Water inventory,1e17,3e17,1e18,kg,From lake-district world to extensive shallow seas.
+Practical dawn/dusk transition,3,5,8,hours,Canon is 5 hours; range is for photometric sensitivity studies only.
+Main tropopause altitude,35,40,45,km,Worldbuilding range pending a lunar GCM.
+Atmosphere construction duration,500,1000,5000,years,"Scenario range, governed by power, resource acquisition and governance rather than physics alone."
+Oxygen production energy intensity,20,35,50,MJ/kg O2,Illustrative system-level screening range; real process depends on feedstock and coproduct credits.
+Regolith oxygen recovery,0.50,0.75,0.90,fraction of contained oxygen,"Screening range, not a demonstrated planetary-scale process yield."
+Artificial-gravity dose,unknown,daily access,continuous,operational policy,Research must determine required g-level and duration.

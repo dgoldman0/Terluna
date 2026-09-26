@@ -28,7 +28,8 @@
         "correlated-k top layer (0.1 Pa) 30-40 K off and unused (the escape base is 0.3 Pa); fix only if later work needs correlated-k above 0.3 Pa",
         "water supply to escape",
         "the sky's interplanetary Lyman-alpha glow (about 1,000 R), which no Sun-facing shield blocks: a first estimate puts about 2e-6 W/m2 above the 0.3 Pa base, like the 0.1% leak at quiet Sun (about +25 K at the exobase); not yet in the exobase tables",
-        "loss channels not yet included: Earth's tidal lowering of the escape barrier, solar-wind sputtering and ion pickup, hydrogen from water (sized in research/baselines/feasibility/report.md sections 4-5)"
+        "loss channels not yet included: Earth's tidal lowering of the escape barrier, solar-wind sputtering and ion pickup, hydrogen from water (sized in research/baselines/feasibility/report.md sections 4-5)",
+        "escape during the Moon's monthly passage through Earth's magnetotail (July 2026 bundle, archive/july_2026_knowledge_bundle/)"
       ],
       "next_session_task": "Couple the middle atmosphere and exobase to the 3-D circulation the author chooses."
     },
@@ -51,7 +52,8 @@
         "moisture/ice/clouds",
         "dynamical heat transport and weather, including the day-night and polar circulation the single column replaces with relaxation, and the free-atmosphere temperature it holds at the global mean",
         "actual terrain",
-        "spatial resolution sensitivity"
+        "spatial resolution sensitivity",
+        "superrotation, and the terminator as a moving front (4.3 m/s at the equator; dawn fog and frost release, dusk drainage winds): diagnose from the GCM runs (July 2026 bundle, archive/july_2026_knowledge_bundle/)"
       ],
       "next_session_task": "Test cloud amount and its response to cooling with a cloud-resolving model at lunar gravity; ROCKE-3D on rented compute for the chosen design (28% seas with lakes, the 5% dimmer shield, near 294 K); runs D and E."
     },
@@ -76,7 +78,8 @@
         "crustal loading",
         "erosion and sediment",
         "groundwater storage in the porous crust, which sets the delivered inventory for 28% cover and how much of the rain lakes keep",
-        "polar heights from the LOLA polar stereographic grids"
+        "polar heights from the LOLA polar stereographic grids",
+        "tides in the seas: Earth's tide is nearly fixed, so the orbit's eccentricity, libration and the Sun drive slow monthly tides and basin seiches (July 2026 bundle, archive/july_2026_knowledge_bundle/)"
       ],
       "next_session_task": "How fast and how deep the crust takes up water, which sets the inventory to deliver (1.8-6.9 times the seas, by the first estimate); polar cold-trapping."
     },
@@ -95,7 +98,8 @@
         "refraction and polarization",
         "earthlight spectrum (glow currently uses the solar atlas), airglow",
         "optical profiles tied to the solved atmospheric column",
-        "lunar global energy residual up to 4.6%"
+        "lunar global energy residual up to 4.6%",
+        "the five-hour practical dawn and dusk (research/decisions.md): a photometric definition for the actual atmosphere, from a working-light threshold to sunrise, about 2.54 degrees of solar elevation at the equator"
       ],
       "next_session_task": "Compute earthlit sky radiance with Earth's reflectance spectrum as the source, and test low-Sun and night radiance against appropriate benchmarks."
     },
@@ -112,7 +116,9 @@
       "unresolved": [
         "complete life cycles",
         "trait calibration",
-        "coupled nutrient/energy budgets"
+        "coupled nutrient/energy budgets",
+        "fire at 0.16 g in an oxygenated atmosphere: flame shape, ember lofting and wildfire spread; the bundle makes full-scale partial-gravity combustion research a condition for adding oxygen (July 2026 bundle, archive/july_2026_knowledge_bundle/)",
+        "timing: short internal clocks alongside the 708.7-hour environmental cycle (July 2026 bundle, archive/july_2026_knowledge_bundle/)"
       ],
       "next_session_task": "Calibrate trait and exchange ranges from complete sources; add growth/nutrient/ecological coupling and empirical life-cycle requirements."
     },
@@ -126,7 +132,10 @@
       "unresolved": [
         "supported floor area and mass",
         "wind/services/rescue",
-        "biological constraints and plural social uptake"
+        "biological constraints and plural social uptake",
+        "health at 0.16 g: artificial gravity as a public utility (rotating residences; 1 g clinics, maternity centres and schools) until 0.16 g is shown safe (July 2026 bundle, archive/july_2026_knowledge_bundle/)",
+        "civil time: 24-hour civil days inside the 29.53-day month, with named light phases (July 2026 bundle, archive/july_2026_knowledge_bundle/)",
+        "fire safety in settlements at 0.16 g (July 2026 bundle, archive/july_2026_knowledge_bundle/)"
       ],
       "next_session_task": "Size representative structures/vehicles, then compare networks and daily/monthly uses."
     },
@@ -140,7 +149,9 @@
       "unresolved": [
         "complete source-to-use pathways",
         "manufacturing dependency network",
-        "capture safety and lifetime resources"
+        "capture safety and lifetime resources",
+        "commissioning order: a mostly nitrogen atmosphere first, holds at 10, 20, 40 and 60 kPa with escape measured at each, oxygen added last; gas stored in caverns, cryogenic tanks, chemical form and high-orbit depots, with strategic reserves kept from the open air (July 2026 bundle, archive/july_2026_knowledge_bundle/)",
+        "space access after the atmosphere: low lunar orbit ends; Earth-Moon L1/L2 logistics nodes, high orbits, tethers above the dense air, evacuated mass drivers, high-altitude airports and rocket corridors (July 2026 bundle, archive/july_2026_knowledge_bundle/)"
       ],
       "next_session_task": "Add missing inventories and a small bottleneck/replacement network."
     },
@@ -200,7 +211,8 @@
         "delivered water inventory and shoreline for 28% cover (groundwater, crustal loading)",
         "lake levels from a climate run at 28%",
         "the Open Moon seen from Earth and its moonlight on Earth (illumination)",
-        "replacement systems for calibration, radio quiet and ranging, and their timing"
+        "replacement systems for calibration, radio quiet and ranging, and their timing",
+        "long-endurance high-altitude platforms for farside astronomy and nearside earthshine photometry (a decision in research/decisions.md) among the replacements for lost lunar science"
       ],
       "next_session_task": "Take the author's review of the register and principles; add groundwater storage to the atlas; compute the Open Moon's appearance from Earth."
     },

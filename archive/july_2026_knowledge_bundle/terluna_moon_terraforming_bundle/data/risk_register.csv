@@ -1,0 +1,16 @@
+id,risk,domain,impact,likelihood,mitigation
+K-001,Dense atmosphere escapes faster than replacement capacity,Atmosphere,Critical,High,Upper-atmosphere kinetic model; thermospheric cooling; volatile reserve; abort before global release.
+K-002,Nitrogen supply cannot be acquired ethically or economically,Resources,Critical,High,Outer-system resource census; multiple buffer-gas architectures; hybrid paraterraforming fallback.
+K-003,Long lunar night causes widespread freeze-out and ecosystem crash,Climate,Critical,Medium,"Ocean/soil heat storage, greenhouse tuning, circulation control, refugia, orbital energy support."
+K-004,Day-side cloud or greenhouse feedback drives dangerous warming,Climate,Critical,Medium,"3-D GCM ensembles, active albedo management, trace-gas removal."
+K-005,0.16 g is inadequate for lifelong human health or reproduction,Human,Critical,High,Rotating habitats and health centers; multi-generation animal studies; settlement design assumes artificial gravity.
+K-006,Wildfire becomes uncontrollable in oxygenated low gravity,Biosphere,High,High,"Oxygen fraction limits, firebreak landscapes, low-g combustion research, rapid atmospheric isolation zones."
+K-007,Raw regolith remains toxic or infertile at scale,Geosphere,High,Medium,"Wash, grind, weather, inoculate and amend; do not expose settlements to untreated fines."
+K-008,Imported volatile capture causes impacts or orbital debris,Logistics,Critical,Medium,Process resources away from Moon; deliver in small packets; redundant capture corridors.
+K-009,Atmosphere eliminates unique vacuum astronomy and contaminates ancient records,Science,Critical,Certain,Archive before transformation; retain orbital/farside radio observatories; international consent.
+K-010,Global biosphere enters unstable boom-bust oxygen/carbon cycles,Ecology,High,Medium,"Large reservoirs, slow release, automated carbon/oxygen controls, preserved seed and microbe banks."
+K-011,Atmospheric drag destroys low lunar satellites and launch architecture,Space access,High,Certain,Transition orbital assets before pressure rise; establish high-orbit and tether network.
+K-012,Governance conflict makes irreversible intervention illegitimate,Governance,Critical,High,"Multilateral authorization, transparent modeling, rights regime, compensation and veto thresholds."
+K-013,Atmospheric superrotation or terminator fronts exceed infrastructure design loads,Weather,High,Medium,GCM and staged-pressure tests; conservative wind load codes; sheltered settlement siting.
+K-014,Ocean placement destabilizes crustal mass distribution or inundates heritage zones,Hydrosphere,Medium,Low,"Basin-by-basin geodesy, staged filling, preserve protected regions."
+K-015,Biological contamination reaches protected scientific reserves before authorization,Governance,High,High,"Sterile buffer zones, sealed pilots, monitoring, legal liability."

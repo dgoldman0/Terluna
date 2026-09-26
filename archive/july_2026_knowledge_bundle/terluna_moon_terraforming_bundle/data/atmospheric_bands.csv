@@ -1,0 +1,7 @@
+band,altitude_km,pressure_at_reference,weather,use,status
+Surface boundary layer,0–3,80–75 kPa screening,"Terrain winds, fog, dust, convection, katabatic drainage","Settlements, agriculture, local aviation",project-derived
+Lower troposphere,3–12,75–63 kPa screening,"Most low clouds, rainfall and regional storms","Regional aircraft, balloons, weather control",project-derived
+Middle troposphere,12–25,63–49 kPa screening,"Layered clouds, return flow, long waves",Long-range aviation and freight,project-derived
+Upper troposphere,25–35,49–40 kPa screening,"Convective outflow, fronts, mountain-wave propagation",Fast transit and storm avoidance,project-derived
+Tropopause / lower stratosphere,35–45,40–33 kPa screening,"Possible weak-shear windows, gravity waves, stratified layers","Long-endurance platforms, astronomy, photometry, microbial research",recovered/project-derived
+Extended atmosphere,45–200+,33 kPa down to ~1.5 kPa at 200 km in isothermal screen,Stratospheric chemistry through thermosphere and escape interface,Specialized vehicles only; orbital drag transition,engineering inference

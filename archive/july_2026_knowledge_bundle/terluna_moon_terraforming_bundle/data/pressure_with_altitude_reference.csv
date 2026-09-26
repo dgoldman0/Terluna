@@ -1,0 +1,18 @@
+altitude_km,pressure_kPa_isothermal_reference,pressure_fraction_surface,note
+0,80.0,1.0,Isothermal constant-g screening calculation only; a real thermosphere requires a coupled model.
+2,76.87289319095412,0.9609111648869264,Isothermal constant-g screening calculation only; a real thermosphere requires a coupled model.
+5,72.4099230174208,0.9051240377177598,Isothermal constant-g screening calculation only; a real thermosphere requires a coupled model.
+10,65.53996189236005,0.8192495236545008,Isothermal constant-g screening calculation only; a real thermosphere requires a coupled model.
+20,53.69358256065012,0.6711697820081265,Isothermal constant-g screening calculation only; a real thermosphere requires a coupled model.
+30,43.988441936116224,0.5498555242014528,Isothermal constant-g screening calculation only; a real thermosphere requires a coupled model.
+35,39.814996178130755,0.4976874522266344,Isothermal constant-g screening calculation only; a real thermosphere requires a coupled model.
+40,36.03751010246688,0.45046887628083604,Isothermal constant-g screening calculation only; a real thermosphere requires a coupled model.
+45,32.618416653239386,0.4077302081654923,Isothermal constant-g screening calculation only; a real thermosphere requires a coupled model.
+60,24.187287799588354,0.30234109749485444,Isothermal constant-g screening calculation only; a real thermosphere requires a coupled model.
+80,16.233776679817534,0.20292220849771916,Isothermal constant-g screening calculation only; a real thermosphere requires a coupled model.
+100,10.895620355361741,0.13619525444202177,Isothermal constant-g screening calculation only; a real thermosphere requires a coupled model.
+150,4.0209896020843985,0.050262370026054985,Isothermal constant-g screening calculation only; a real thermosphere requires a coupled model.
+200,1.4839317866021637,0.018549147332527046,Isothermal constant-g screening calculation only; a real thermosphere requires a coupled model.
+300,0.20210446725088566,0.0025263058406360707,Isothermal constant-g screening calculation only; a real thermosphere requires a coupled model.
+500,0.0037488655395985673,4.686081924498209e-05,Isothermal constant-g screening calculation only; a real thermosphere requires a coupled model.
+1000,1.7567491042487073e-07,2.195936380310884e-09,Isothermal constant-g screening calculation only; a real thermosphere requires a coupled model.

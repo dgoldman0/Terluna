@@ -1,0 +1,10 @@
+id,decision,status,reason,revisit_when
+D-001,Use Terluna as the project name,fixed canon,Recovered from project context,Only by explicit creator decision
+D-002,Use about five hours as practical twilight,fixed canon/correction,User corrected prior 30-hour value,"Only to refine photometric definition, not replace the canonical value"
+D-003,Do not label atmospheric layers L1–L5,fixed terminology,Avoid confusion with Lagrange points,Never unless terminology system changes globally
+D-004,Keep natural lunar rotation and long solar cycle,working intent,Preserves lunar identity and drives biological design,Only if the project becomes an alternate-Moon rather than Moon terraforming concept
+D-005,Use 80 kPa as a reference case,open baseline,Quantitative modeling anchor,"After fire, escape and volatile optimization"
+D-006,Use regional seas rather than an Earthlike global ocean,open baseline,Reduces water import and preserves terrain,After basin and climate modeling
+D-007,Assume artificial gravity remains part of settlements,safety policy,0.16 g lifetime safety is unknown,After multigenerational partial-gravity evidence
+D-008,Treat nitrogen as the primary resource bottleneck,engineering conclusion,Reference case requires ~1.35e18 kg N2,If pressure/composition or buffer gas architecture changes
+D-009,Require staged plateaus and stop gates,program principle,Global intervention becomes progressively irreversible,No reason to remove; criteria can be tightened

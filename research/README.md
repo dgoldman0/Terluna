@@ -14,6 +14,7 @@ Models live in their domain folders. This folder holds what spans domains:
 | [findings.md](findings.md) | Equations, bounds, source limits and numerical examples from the environment screens |
 | [plan.md](plan.md) | The core-first work order |
 | [status.json](status.json) | Condition, open questions and next task for each topic |
+| [decisions.md](decisions.md) | The author's decisions, where each is recorded, and whether it stands |
 | [provenance.json](provenance.json), [archive_status.md](archive_status.md) | Every original archive member and its disposition; unresolved recovery |
 | [check.py](check.py), [checks.json](checks.json) | Byte integrity of the pinned imports and reproduction of the historical baseline |
 | [baselines/feasibility](baselines/feasibility/) | The September multi-domain feasibility script and its full report, kept intact |

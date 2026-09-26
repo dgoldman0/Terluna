@@ -1,0 +1,16 @@
+id,question,domain,priority
+Q-001,What is the lifetime of a 60-100 kPa N2-O2 atmosphere under modern solar forcing?,Atmosphere,Critical
+Q-002,Can thermospheric radiative coolants keep exobase temperatures low enough for manageable escape?,Atmosphere,Critical
+Q-003,"Which nitrogen source minimizes ecological, political and energy costs?",Resources,Critical
+Q-004,What ocean fraction prevents lethal night cooling without producing excessive humidity and cloud forcing?,Climate,Critical
+Q-005,"What wind regime emerges at 0.16 g, 29.5-day solar forcing and 60-100 kPa pressure?",Weather,Critical
+Q-006,How tall is the tropopause in a moist lunar atmosphere?,Weather,High
+Q-007,"Can humans conceive, gestate, grow and age normally at 0.16 g?",Human,Critical
+Q-008,How much daily or weekly 1 g exposure is sufficient?,Human,Critical
+Q-009,"How do flames, smoke and wildfire fronts behave at 0.16 g?",Safety,Critical
+Q-010,Which microbial succession passivates regolith fastest without mobilizing toxic metals?,Ecology,High
+Q-011,"How do rain, snow and hail microphysics change in low gravity?",Weather,High
+Q-012,How should the five-hour practical twilight be defined photometrically?,Canon,Medium
+Q-013,What protected lunar fraction must remain biologically untouched before transformation?,Governance,Critical
+Q-014,How should low-orbit assets be migrated before atmospheric build-up?,Space access,High
+Q-015,Can a hybrid network of giant enclosed basins deliver most benefits with far less volatile mass?,Architecture,Critical

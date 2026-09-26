@@ -1,0 +1,9 @@
+item,mass_kg,basis
+Total 80 kPa dry atmosphere,1.8685875911e+18,P*A/g
+Nitrogen in reference atmosphere,1.34957e+18,75% mole fraction converted to mass fraction
+Oxygen in reference atmosphere,4.9329e+17,24% mole fraction converted to mass fraction
+Argon in reference atmosphere,2.3094e+16,0.9% mole fraction converted to mass fraction
+Carbon dioxide in reference atmosphere,2261600000000000.0,800 ppm mole fraction converted to mass fraction
+Reference hydrosphere,3e+17,Reconstructed design baseline
+Imported hydrogen if all reference water manufactured from lunar oxygen,3.357150152537179e+16,Stoichiometric H fraction in water
+Regolith processed for reference oxygen at 45% O and 75% recovery,1.4616e+18,Screening calculation
