@@ -147,30 +147,36 @@
     },
     {
       "topic": "habitation",
-      "condition": "design_concepts; no complete sizing or service model",
+      "condition": "design_concepts; summit_sky_tower_concept_sizing_for_gravity_and_wind; wind_devices_screened; no complete sizing or service model",
       "material": [
         "../habitation/README.md",
-        "../ensemble/papers/babdd5f6-4920/seed-02.md"
+        "../ensemble/papers/babdd5f6-4920/seed-02.md",
+        "studies/summit_tower/README.md",
+        "../engineering/towers/"
       ],
       "unresolved": [
         "supported floor area and mass",
-        "wind/services/rescue",
         "biological constraints and plural social uptake",
         "health at 0.16 g: artificial gravity as a public utility (rotating residences; 1 g clinics, maternity centres and schools) until 0.16 g is shown safe (July 2026 bundle, archive/july_2026_knowledge_bundle/)",
         "civil time: 24-hour civil days inside the 29.53-day month, with named light phases (July 2026 bundle, archive/july_2026_knowledge_bundle/)",
-        "fire safety in settlements at 0.16 g (July 2026 bundle, archive/july_2026_knowledge_bundle/)"
+        "fire safety in settlements at 0.16 g (July 2026 bundle, archive/july_2026_knowledge_bundle/)",
+        "services and rescue for tall structures; fire and evacuation from great height",
+        "the summit sky tower: winds over the real summit (the study raises the models' winds by 1.4 for gusts, 1.2 for the dome and 1.2 for rarity), member and joint design, the dynamic gust response with dampers, stays, construction and footings in porous highland crust; sky-ship docking loads",
+        "comfort in sway at 0.16 g, where a sideways acceleration tilts the apparent vertical six times more than on Earth",
+        "a power plan for the summit city: wind in the frame gives 3-12% of the tower's own use with flier-safe devices; panels with pumped storage between the summit and the Korolev lake (1.35 kWh per m3) are the study's lead"
       ],
-      "next_session_task": "Size representative structures/vehicles, then compare networks and daily/monthly uses."
+      "next_session_task": "Run the summit's winds over its real relief (a terrain-resolving case over the dome and the Korolev basin) to replace the study's gust and speed-up factors; size the docking layers and a summit power plan with panels and pumped storage; then size other representative structures and vehicles and compare networks and daily/monthly uses."
     },
     {
       "topic": "engineering",
-      "condition": "conditional_analytical_accounts; network_vocabulary_with_passive_failure_check; protection_supply_ledger",
+      "condition": "conditional_analytical_accounts; network_vocabulary_with_passive_failure_check; protection_supply_ledger; tall_lattice_tower_sizing_and_wind_devices",
       "material": [
         "../engineering/reference/",
         "baselines/feasibility/model.py",
         "../engineering/reference/industrial_architecture/",
         "../engineering/network/",
-        "../engineering/network/results/protection_supply_ledger.json"
+        "../engineering/network/results/protection_supply_ledger.json",
+        "../engineering/towers/"
       ],
       "unresolved": [
         "complete source-to-use pathways",
