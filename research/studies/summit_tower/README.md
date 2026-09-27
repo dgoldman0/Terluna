@@ -357,5 +357,6 @@ and the wind carries about 1.95 GW through it. The Betz limit on that is 1.16 GW
 - **Leaving.** Every layer's rim is an exit, by ship, by air taxi, on wings or under a canopy. A falling person
   reaches 18–22 m/s in the tower's air, against 43 m/s on Earth. A round canopy 3.7–4.5 m across lands them at
   4 m/s; on Earth that takes 8.9 m. The ride down takes 12 minutes from 3 km, 42 from 10 km and 100 from the top.
-- **Fire.** Flight does not settle fire safety at 0.16 g: how flames and smoke behave under weak buoyancy, and
-  compartments that give people time to reach the rim. That question comes next, for the whole city.
+- **Fire.** Flight does not settle fire safety at 0.16 g. The [port fire study](../port_fire/README.md) works out
+  how flames and smoke behave under weak buoyancy in the port's spaces, the compartments that give people time to
+  leave, and what the tower's shafts, water, sealed zone and firefighting from the air ask.

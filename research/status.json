@@ -147,12 +147,14 @@
     },
     {
       "topic": "habitation",
-      "condition": "design_concepts; summit_sky_tower_concept_sizing_for_gravity_and_wind; wind_devices_screened; central_port_chosen_24km_to_the_flight_band_35km2_about_1.5_million_present; no complete sizing or service model",
+      "condition": "design_concepts; summit_sky_tower_concept_sizing_for_gravity_and_wind; wind_devices_screened; central_port_chosen_24km_to_the_flight_band_35km2_about_1.5_million_present; port_fire_safety_first_order_at_0.16g; no complete sizing or service model",
       "material": [
         "../habitation/README.md",
         "../ensemble/papers/babdd5f6-4920/seed-02.md",
         "studies/summit_tower/README.md",
-        "../engineering/towers/"
+        "../engineering/towers/",
+        "studies/port_fire/README.md",
+        "../engineering/fire/"
       ],
       "unresolved": [
         "supported floor area and mass",
@@ -165,20 +167,21 @@
         "comfort in sway at 0.16 g, where a sideways acceleration tilts the apparent vertical six times more than on Earth",
         "the central port's power: about 400 MW for its floors; screened slow rotors over its whole open face give 74% in the modelled winds (132% with the summit speed-up) for 43 Mt more steel; louvered panels on the face, level panels on the highland around the base and pumped storage with the Korolev lake are the other parts",
         "the central port's occupancy figures (areas per person, busy-hour shares) are rough planning figures to check against published standards",
-        "fire safety at 0.16 g for the port and the city: flames and smoke under weak buoyancy, compartments that give people time to reach an exit by air"
+        "fire at 0.16 g: the port has a first-order study (studies/port_fire: Earth correlations carried by Froude scaling, design fires bracketed, a materials test at 23.5% oxygen, compartments with sprinklers, shafts broken every three bands, 33 water pressure zones); open are full-scale fire data at partial gravity (NASA's FM2 is planned as the first fire on the Moon), sprinkler sprays at 0.16 g, crowd flows, wind-driven fire and smoke through a band (CFD of a band section), and the city"
       ],
-      "next_session_task": "Fire safety at 0.16 g for the central port and the city; then plan the megacity around the port. Later, the summit's winds over its real relief (a terrain-resolving case) to replace the study's gust and speed-up factors."
+      "next_session_task": "Plan the megacity around the port, carrying the port fire study's rules (sprinklered compartments of 2,000 m2 with open air on both faces, the materials test at 23.5% oxygen, air topped up by pressure). Later: CFD (FDS) of a band section with its wind, CPU-heavy and the author's call, and the summit's winds over its real relief (a terrain-resolving case) to replace the tower study's gust and speed-up factors."
     },
     {
       "topic": "engineering",
-      "condition": "conditional_analytical_accounts; network_vocabulary_with_passive_failure_check; protection_supply_ledger; tall_lattice_tower_sizing_and_wind_devices",
+      "condition": "conditional_analytical_accounts; network_vocabulary_with_passive_failure_check; protection_supply_ledger; tall_lattice_tower_sizing_and_wind_devices; fire_engineering_at_any_gravity",
       "material": [
         "../engineering/reference/",
         "baselines/feasibility/model.py",
         "../engineering/reference/industrial_architecture/",
         "../engineering/network/",
         "../engineering/network/results/protection_supply_ledger.json",
-        "../engineering/towers/"
+        "../engineering/towers/",
+        "../engineering/fire/"
       ],
       "unresolved": [
         "complete source-to-use pathways",

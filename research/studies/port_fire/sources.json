@@ -1,0 +1,180 @@
+{
+ "source_admission": "Published values used as constants, quoted ranges or cited findings; no external dataset files are admitted. 'access' records how far each source was checked in this session: read here (the text or table was read), abstract (a summary or abstract was read), or not re-read here (a standard published value used from the literature, not checked against its source in this session). Model products of this repository are cited by path in the README and hashed in the results.",
+ "sources": [
+  {
+   "citation": "Quintiere 1989, Fire Safety Journal 15(1):3-29",
+   "title": "Scaling applications in fire research",
+   "url": "",
+   "use": "Froude scaling of fire: equal Q* = Q/(rho cp T sqrt(g) L^(5/2)), times as sqrt(L/g); the basis for carrying Earth correlations to lunar gravity",
+   "access": "not re-read here; the Froude-modelling approach is also described in Liao et al. (read here)"
+  },
+  {
+   "citation": "Heskestad, SFPE Handbook of Fire Protection Engineering, 'Fire Plumes, Flame Height, and Air Entrainment'",
+   "title": "Flame height L = D (15.6 N^(1/5) - 1.02) and its Earth form 0.235 Q^(2/5) - 1.02 D",
+   "url": "",
+   "use": "flame height with gravity, air density and the heat per kg of air",
+   "access": "not re-read here; standard published correlation"
+  },
+  {
+   "citation": "Huggett 1980, Fire and Materials 4(2):61-65",
+   "title": "Estimation of rate of heat release by means of oxygen consumption measurements",
+   "url": "",
+   "use": "13.1 MJ released per kg of oxygen consumed",
+   "access": "not re-read here; standard published value"
+  },
+  {
+   "citation": "NFPA 92, Standard for Smoke Control Systems (2021), via Klote's AtriumCalc report for ASHRAE",
+   "title": "Axisymmetric plume and steady smoke-filling equations",
+   "url": "https://xp20.ashrae.org/HBofSmokeControl/AtriumCalcReport-V%201-1a.pdf",
+   "use": "plume m = 0.071 Qc^(1/3) z^(5/3) + 0.0018 Qc above the flame, 0.032 Qc^(3/5) z within it, flame limit 0.166 Qc^(2/5); steady filling z/H = 1.11 - 0.28 ln(t Q^(1/3) H^(-4/3) / (A/H^2)) as a check",
+   "access": "plume equations read here in the AtriumCalc report; the filling equation from a search summary"
+  },
+  {
+   "citation": "Evans and Stroup 1985, NBSIR 85-3167",
+   "title": "Methods to calculate the response time of heat and smoke detectors installed below large unobstructed ceilings",
+   "url": "https://nvlpubs.nist.gov/nistpubs/Legacy/IR/nbsir85-3167.pdf",
+   "use": "Heskestad and Delichatsios's t-squared ceiling-jet correlations (t2*, dT2*, u2*, A = g/(cp T rho); arrival 0.954(1 + r/H), dT2* = [(t2* - arrival)/(0.188 + 0.313 r/H)]^(4/3), u2*/sqrt(dT2*) = 0.59 (r/H)^-0.63) and the RTI response equation",
+   "access": "read here (equation set 2 and equation 1)"
+  },
+  {
+   "citation": "NFPA 72, National Fire Alarm and Signaling Code, Annex B; NIST, 'Comments on correction factors for heat of combustion in NFPA 72 Appendix B'",
+   "title": "Detector response with the corrected Heskestad-Delichatsios constants",
+   "url": "https://www.nist.gov/publications/comments-correction-factors-heat-combustion-nfpa-72-appendix-b",
+   "use": "the heat-of-combustion correction of 1.67 that turns the constants into 0.861, 0.146 and 0.242; the 13 K ceiling-jet rise as a surrogate for smoke detection",
+   "access": "the correction from a search summary of the NIST page; the resulting constants and the 13 K surrogate not re-read in NFPA 72 here"
+  },
+  {
+   "citation": "McCaffrey, Quintiere and Harkleroad 1981, Fire Technology 17(2):98-119",
+   "title": "Estimating room temperatures and the likelihood of flashover using fire test data correlations",
+   "url": "",
+   "use": "hot-layer rise 6.85 (Q^2/(Ao sqrt(Ho) hk AT))^(1/3), written with gravity explicit; flashover at a rise of about 500 K (610 (hk AT Ao sqrt(Ho))^(1/2) kW)",
+   "access": "not re-read here; standard published correlation"
+  },
+  {
+   "citation": "CEN 2002, EN 1991-1-2, Eurocode 1: Actions on structures, Part 1-2: Actions on structures exposed to fire, Annex E",
+   "title": "Fire load densities (Table E.4), fire growth rates and RHRf (Table E.5), ventilation-controlled heat release (E.6)",
+   "url": "https://www.phd.eng.br/wp-content/uploads/2015/12/en.1991.1.2.2002.pdf",
+   "use": "design fires for each port use; t_alpha 600/300/150/75 s to 1 MW; ventilation-controlled 0.10 m Hu Av sqrt(heq) MW",
+   "access": "read here (Tables E.4 and E.5 and clause E.4)"
+  },
+  {
+   "citation": "Peatross and Beyler 1997, Fire Safety Science 5:403-414",
+   "title": "Ventilation effects on compartment fire characterization",
+   "url": "https://publications.iafss.org/publications/fss/5/403/view/fss_5-403.pdf",
+   "use": "burning rate against oxygen, m/m0 = 10 X_O2 - 1.1 (0.65 at 17.46% relative to Earth's air)",
+   "access": "the correlation's form from search summaries of papers applying it; the original not re-read here"
+  },
+  {
+   "citation": "Ferkul and Olson 2011, Journal of Thermophysics and Heat Transfer 25(3):457-461",
+   "title": "Zero-gravity centrifuge used for the evaluation of material flammability in lunar gravity",
+   "url": "https://doi.org/10.2514/1.T3651",
+   "use": "Mylar G, Ultem 1000 and Nomex HT90-40 burned at lower oxygen in lunar gravity than in the 1 g upward test",
+   "access": "abstract summary; its numbers as tabled by Miller et al. (read here)"
+  },
+  {
+   "citation": "Miller, Olson and Johnston (with co-signers), decadal survey white paper, 'Topical: Spacecraft Materials Fire Safety', Table I",
+   "title": "Decadal Survey on Biological and Physical Sciences Research in Space 2023-2032",
+   "url": "https://science.nasa.gov/wp-content/uploads/2023/05/217_5dda37a2b088281953e769f275061ac8_MillerFletcherJ.pdf",
+   "use": "1 g, lunar, Martian and 0 g ULOI and MOC for three materials (lunar shifts 2.2-5.9 points); materials flight-qualified by NASA-STD-6001B Test 1 at the worst end-use atmosphere",
+   "access": "read here, including the table image"
+  },
+  {
+   "citation": "Olson et al. 2024, Fire Safety Journal",
+   "title": "Partial gravity flammability of cast PMMA rods in concurrent axial stagnation flow",
+   "url": "https://www.sciencedirect.com/science/article/abs/pii/S0379711224001802",
+   "use": "PMMA rods most flammable near lunar gravity (0.04 to 1 g, 13.2-15.2% O2)",
+   "access": "abstract, from a search summary"
+  },
+  {
+   "citation": "Feier, Shih, Sacksteder and T'ien 2002, Proceedings of the Combustion Institute 29:2569-2577",
+   "title": "Upward flame spread over thin solids in partial gravity",
+   "url": "https://doi.org/10.1016/S1540-7489(02)80313-3",
+   "use": "upward flame spread over very thin fuels roughly proportional to gravity, as summarised by Liao et al.",
+   "access": "cited through Liao et al. (read here); the paper not read here"
+  },
+  {
+   "citation": "Liao, Carmignani, Niehaus and Gollner (with co-signers), decadal survey white paper",
+   "title": "Topical: Challenges and Research Needs for Micro- and Partial-Gravity Fires",
+   "url": "https://science.nasa.gov/wp-content/uploads/2023/05/60_afb22b1e538432728848e83bb3ade8c2_LiaoYaTingT.pdf",
+   "use": "partial-gravity fire cannot be interpolated between 1 g and 0 g; partial-gravity tests limited to 20-30 s parabolic flights and the 5.18 s drop tower's centrifuge; lunar modules planned at 34% O2 and 56.5 kPa; Froude and pressure modelling",
+   "access": "read here"
+  },
+  {
+   "citation": "NASA Glenn Research Center, Flammability of Materials on the Moon (FM2)",
+   "title": "FM2 experiment page",
+   "url": "https://www.nasa.gov/glenn/glenn-expertise-space-exploration/physical-sciences-program/combustion-science/flammability-of-materials-on-the-moon-fm2/",
+   "use": "the first combustion experiment planned on another world; materials may burn at lower oxygen in lunar gravity",
+   "access": "read here"
+  },
+  {
+   "citation": "Linteris 2011, NIST final report to sponsor",
+   "title": "Large Scale Fire Dynamics in Spacecraft in Reduced Gravity",
+   "url": "https://www.nist.gov/publications/large-scale-fire-dynamics-spacecraft-reduced-gravity",
+   "use": "FDS modified for variable gravity; at lunar or Martian gravity buoyant mixing keeps oxygen transport close to 1 g",
+   "access": "abstract read here"
+  },
+  {
+   "citation": "Hirsch et al. 2010, NASA White Sands Test Facility, NTRS 20100015582",
+   "title": "Pressure Flammability Thresholds of Selected Aerospace Materials",
+   "url": "https://ntrs.nasa.gov/citations/20100015582",
+   "use": "oxygen-concentration flammability thresholds shift with total pressure, so 1 atm tests are conservative for the port's 0.74-0.95 atm",
+   "access": "abstract, from a search summary"
+  },
+  {
+   "citation": "De Witt, Edwards, Scott-Pandorf, Norcross and Gernhardt 2014, Journal of Experimental Biology 217:3200-3203",
+   "title": "The preferred walk to run transition speed in actual lunar gravity",
+   "url": "https://journals.biologists.com/jeb/article/217/18/3200/12423/The-preferred-walk-to-run-transition-speed-in",
+   "use": "walk-run transition at 1.42 +/- 0.24 m/s in lunar gravity on parabolic flights (Froude number 1.39)",
+   "access": "abstract read here"
+  },
+  {
+   "citation": "Kram, Domingo and Ferris 1997, Journal of Experimental Biology 200:821-826",
+   "title": "Effect of reduced gravity on the preferred walk-run transition speed",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/9076966/",
+   "use": "walk-run transition near Froude 0.5 down to 0.4 g, higher at lower gravity",
+   "access": "abstract, from a search summary"
+  },
+  {
+   "citation": "Gwynne and Rosenbaum, SFPE Handbook of Fire Protection Engineering, 'Employing the Hydraulic Model in Assessing Emergency Movement' (after Nelson and Mowrer)",
+   "title": "Hydraulic model of evacuation",
+   "url": "",
+   "use": "speed S = k - a k D (k = 1.40 m/s, a = 0.266 m2), free speed 0.85 k, peak specific flow 1.3 persons/s/m, 15 cm boundary at door jambs",
+   "access": "not re-read here; standard published values"
+  },
+  {
+   "citation": "NFPA 13, Standard for the Installation of Sprinkler Systems",
+   "title": "Ordinary hazard group 2 design and hose allowance",
+   "url": "",
+   "use": "0.20 gpm/ft2 (8.1 mm/min) over 1,500 ft2 (139 m2), 250 gpm (946 L/min) for hoses, 60-90 minutes; components rated 175 psi (1.21 MPa), high-pressure 300 psi",
+   "access": "not re-read here; standard published values"
+  },
+  {
+   "citation": "NFPA 92 and NFPA 101",
+   "title": "Stair pressurisation and door-opening force",
+   "url": "",
+   "use": "12.5 Pa minimum design pressure difference in sprinklered buildings; 133 N to set a door in motion",
+   "access": "not re-read here; standard published values"
+  },
+  {
+   "citation": "NFPA 1710, Standard for the Organization and Deployment of Fire Suppression Operations",
+   "title": "Response-time objectives",
+   "url": "",
+   "use": "240 seconds of travel for the first arriving engine company",
+   "access": "not re-read here; standard published value"
+  },
+  {
+   "citation": "Federal Aviation Administration, AC 61-107B",
+   "title": "Aircraft Operations at Altitudes Above 25,000 Feet MSL and/or Mach Numbers (Mmo) Greater Than .75",
+   "url": "https://www.faa.gov/documentLibrary/media/Advisory_Circular/AC_61-107B_CHG_1.pdf",
+   "use": "effective performance time 20-30 minutes at 18,000 ft, reduced by up to half after a rapid decompression",
+   "access": "table values from a search summary"
+  },
+  {
+   "citation": "Kerber and Madrzykowski 2009, NIST Technical Note 1629",
+   "title": "Fire Fighting Tactics Under Wind Driven Conditions: 7-Story Building Experiments",
+   "url": "https://nvlpubs.nist.gov/nistpubs/Legacy/TN/nbstechnicalnote1629.pdf",
+   "use": "with a 9-11 m/s wind through the fire floor, gases above 400 C and about 10 m/s in the corridor and stairwell above it",
+   "access": "abstract, from a search summary"
+  }
+ ]
+}
