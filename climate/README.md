@@ -150,6 +150,17 @@ and no frost anywhere. Published slow-rotator models suggest no thick day-side
 cloud deck at this sunlight, but the absolute cloud amount remains the main
 caveat.
 
+[crm/](crm/) runs the cloud-resolving model CM1 at lunar gravity for the chosen
+design (the 5% dimmer shield): the equator as a two-dimensional ring through two
+lunar days, with storms, rain and cloud formed by the model itself. Storms fill
+the afternoon over land, 30 km wide at the median and up to 250 km, raining up
+to 55 mm/h, with cloud reaching 28 km at the median and 82 km at most; nights
+over land are calm and saturated, with fog before dawn. A lunar air column holds
+about 215 mm of water, seven times Earth's, and water stays in the air about 90
+days. Over land the ring has half the GCM's cloud and under half its rain; over
+the seas, a quarter of its cloud and two thirds of its rain. Its README gives
+the day by local time, the storms, the winds by height and the flight band.
+
 ## Next step
 
 The atmosphere domain's [radiative–convective column](../atmosphere/radiative_convective/)

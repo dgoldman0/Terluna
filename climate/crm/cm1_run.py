@@ -1,0 +1,800 @@
+"""CM1, a cloud-resolving model, run at lunar gravity: fetch, patch, build, set up and run cases.
+
+    climate/gcm/.venv/bin/python -m climate.crm.cm1_run build                   # Moon and Earth-gravity executables
+    climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup ring              # write a case's inputs
+    climate/gcm/.venv/bin/python -m climate.crm.cm1_run run ring --hours 6      # run or resume, for at most 6 wall hours
+    climate/gcm/.venv/bin/python -m climate.crm.cm1_run status ring
+    climate/gcm/.venv/bin/python -m climate.crm.cm1_run stop ring               # stop cleanly at the next restart file
+
+CM1 (George Bryan, NCAR; MIT-style licence) is downloaded at a pinned hash and built outside the
+repository, in TERLUNA_CM1_HOME (default /media/projectspace/terluna-research/cm1). The runner patches
+a fresh copy of its source for every build, the way climate/gcm/exoplasim_run.py patches PlaSim:
+
+- gravity is a build-time constant (TERLUNA_G) in the dynamics, the RRTMG radiation (which converts
+  pressure to mass paths with it) and the CAPE diagnostic;
+- the Morrison scheme's fall speeds follow gravity: a particle regime V = A D^B has a Reynolds number
+  growing as the Best number X^((B+1)/3), and X is proportional to g, so V scales as g^((B+1)/3) at a
+  fixed size (Stokes droplets, B = 2, fall g times slower; hail, B = 0.5, as the square root of g);
+- the Sun keeps a solar day of var19 seconds at var17 W/m2 above the air, starting at hour angle
+  var18 degrees, and on a domain that wraps the Moon (var16 = its length in m) the hour angle grows
+  eastward along x, so the terminator crosses the domain;
+- the air holds the design's carbon dioxide and oxygen (TERLUNA_CO2, TERLUNA_O2), no ozone, methane,
+  nitrous oxide or halocarbons;
+- the soil's five layers are 5-80 cm thick, reaching below the month-long day's thermal wave;
+- land and water can be set along x from a file (initsfc = 9);
+- large-scale nudging of potential temperature and vapour can be confined above var14 m, reaching full
+  strength at var15 m.
+
+Runs live in climate/crm/runs (a link to the external drive), one folder per case, and restart from
+their latest restart file.
+"""
+from __future__ import annotations
+import argparse
+import hashlib
+import json
+import math
+import os
+from pathlib import Path
+import shutil
+import subprocess
+import sys
+import tarfile
+import time
+import urllib.request
+
+HERE = Path(__file__).resolve().parent
+RUNS = HERE / 'runs'
+CM1_HOME = Path(os.environ.get('TERLUNA_CM1_HOME', '/media/projectspace/terluna-research/cm1'))
+SOURCE = dict(version='cm1r22.0', url='https://www2.mmm.ucar.edu/people/bryan/cm1/cm1r22.0.tar.gz',
+              sha256='05f990bb79055873c49499c92d0ff447524a2795016a474447a7e87dd5a86226',
+              licence='MIT-style (see getcode.html on the CM1 site); not redistributed here')
+EARTH_G = 9.81                    # CM1's own value, kept for the Earth-gravity control
+
+DEFAULTS = "#ifndef TERLUNA_G\n#define TERLUNA_G 9.81\n#endif\n"
+GAS_DEFAULTS = ("#ifndef TERLUNA_CO2\n#define TERLUNA_CO2 400.e-6\n#endif\n"
+                "#ifndef TERLUNA_O2\n#define TERLUNA_O2 0.209488\n#endif\n")
+
+MORRISON_BLOCK = """         G = 9.81
+         ! Terluna: fall speeds at the host gravity. A regime V = A D^B has Re ~ X^((B+1)/3) with the
+         ! Best number X proportional to g, so V ~ g^((B+1)/3) at a fixed size; the Stokes law for
+         ! cloud droplets takes G itself. The caps on mean fall speeds scale the same way.
+         G = terluna_g_host
+         AI = AI*(G/9.81)**((BI+1.)/3.)
+         AS = AS*(G/9.81)**((BS+1.)/3.)
+         AR = AR*(G/9.81)**((BR+1.)/3.)
+         AG = AG*(G/9.81)**((BG+1.)/3.)
+         VCAPR = 9.1*(G/9.81)**((BR+1.)/3.)
+         VCAPS = 1.2*(G/9.81)**((BS+1.)/3.)
+         VCAPG = 20.*(G/9.81)**((BG+1.)/3.)
+         VCAPI = 1.2*(G/9.81)**((BI+1.)/3.)
+"""
+
+SUN_BLOCK = """!!!          albd = 0.07
+        ENDIF
+
+        IF( var19.gt.1.0 )THEN
+          ! Terluna: a solar day of var19 s and var17 W/m2 of sunlight above the air. The hour angle
+          ! starts at var18 degrees (0 = noon, -90 = sunrise); on a domain that wraps the Moon
+          ! (var16 = its length in m) it also grows eastward along x.
+          solcon = var17
+          do j=1,nj
+          do i=1,ni
+            hrang(i,j) = ( var18 + 360.0*real((mtime+0.5*dtrad)/var19) )*pi/180.0
+            if( var16.gt.1.0 ) hrang(i,j) = hrang(i,j) + 2.0*pi*xh(i)/var16
+            coszen(i,j) = min( 1.0 , max( -1.0 , cos(ctrlat*pi/180.0)*cos(hrang(i,j)) ) )
+          enddo
+          enddo
+        ENDIF
+"""
+
+SURFACE_BLOCK = """      ELSEIF( initsfc.eq.9 )THEN
+
+        ! Terluna: land and water along x from terluna_surface.txt: a segment count, then one line
+        ! per segment: x_west (m), x_east (m), xland (1 land, 2 water), land-use index, tsk (K), tmn (K)
+        open(unit=97,file='terluna_surface.txt',status='old',action='read')
+        read(97,*) nseg
+        do l=1,nseg
+          read(97,*) sx1,sx2,sxl,slu,stsk,stmn
+          do j=jb,je
+          do i=ib,ie
+            if( xh(i).ge.sx1 .and. xh(i).lt.sx2 )then
+              xland(i,j) = sxl
+              tsk(i,j) = stsk
+            endif
+          enddo
+          enddo
+          do j=jbl,jel
+          do i=ibl,iel
+            if( xh(i).ge.sx1 .and. xh(i).lt.sx2 )then
+              lu_index(i,j) = slu
+              tmn(i,j) = stmn
+            endif
+          enddo
+          enddo
+        enddo
+        close(unit=97)
+
+      ELSEIF( initsfc.ne.1 .and. initsfc.ne.2 )THEN
+"""
+
+NUDGE_WEIGHT = ("          terluna_w = 1.0   ! Terluna: above var14 m only, fully above var15 m\n"
+                "          if( var15.gt.var14 ) terluna_w = min(1.0,max(0.0,(zh(1,1,k)-var14)/(var15-var14)))\n")
+
+# (file, marker, edits) in the order applied. An edit is (old, new, count): old must occur exactly count
+# times; an empty old prepends new. A marker appears only in text its patch adds.
+CPP_RULE = ('$(CPP) $(DM) $(OMP) $(DP) $(ADV) $(OUTPUTOPT) $*.F > $*.f90',
+            '$(CPP) $(DM) $(OMP) $(DP) $(ADV) $(OUTPUTOPT) $(TERLUNA) $*.F > $*.f90', 1)
+# The Makefile's GNU sections: MPI for 3-D runs, OpenMP for 2-D ones (CM1 needs ny >= 3 under MPI).
+MAKEFILE = {
+    'mpi': ('Makefile', 'Terluna: GNU compiler with MPI', [
+        ('#FC = mpif90\n#OPTS = -ffree-form -ffree-line-length-none -O2 -finline-functions --param=max-vartrack-size=0 '
+         '-fallow-argument-mismatch\n#CPP  = cpp -C -P -traditional -Wno-invalid-pp-token -ffreestanding\n#DM = -DMPI\n',
+         '# Terluna: GNU compiler with MPI\nFC = mpif90\nOPTS = -ffree-form -ffree-line-length-none -O2 -finline-functions '
+         '--param=max-vartrack-size=0 -fallow-argument-mismatch\nCPP  = cpp -C -P -traditional -Wno-invalid-pp-token '
+         '-ffreestanding\nDM = -DMPI\n', 1), CPP_RULE]),
+    'omp': ('Makefile', 'Terluna: GNU compiler with OpenMP', [
+        ('#FC   = gfortran\n#OPTS = -ffree-form -ffree-line-length-none -O2 -finline-functions --param=max-vartrack-size=0 '
+         '-fopenmp\n#CPP  = cpp -C -P -traditional -Wno-invalid-pp-token -ffreestanding\n#OMP  = -DOPENMP\n',
+         '# Terluna: GNU compiler with OpenMP\nFC   = gfortran\nOPTS = -ffree-form -ffree-line-length-none -O2 '
+         '-finline-functions --param=max-vartrack-size=0 -fopenmp\nCPP  = cpp -C -P -traditional -Wno-invalid-pp-token '
+         '-ffreestanding\nOMP  = -DOPENMP\n', 1), CPP_RULE]),
+}
+PATCHES = [
+    ('constants.F', 'Terluna: gravity set at build time', [
+        ('', DEFAULTS, 1),
+        ('        g      = 9.81\n        rd     = 287.04\n',
+         '        g      = TERLUNA_G   ! Terluna: gravity set at build time\n        rd     = 287.04\n', 1)]),
+    ('module_ra_etc.F', 'Terluna: gravity for RRTMG', [
+        ('', DEFAULTS, 1),
+        ('   REAL    , PARAMETER :: g = 9.81  ! acceleration due to gravity (m {s}^-2)',
+         '   REAL    , PARAMETER :: g = TERLUNA_G  ! Terluna: gravity for RRTMG, set at build time', 1)]),
+    ('getcape.F', 'Terluna: gravity for CAPE', [
+        ('', DEFAULTS, 1),
+        ('    real, parameter :: g     = 9.81\n', '    real, parameter :: g     = TERLUNA_G   ! Terluna: gravity for CAPE\n', 1)]),
+    ('morrison.F', 'Terluna: fall speeds at the host gravity', [
+        ("     REAL, PRIVATE ::      BI,BC,BS,BR,BG ! 'B' PARAMETER IN FALLSPEED-DIAM RELATIONSHIP\n",
+         "     REAL, PRIVATE ::      BI,BC,BS,BR,BG ! 'B' PARAMETER IN FALLSPEED-DIAM RELATIONSHIP\n"
+         "     REAL, PRIVATE ::      VCAPR,VCAPS,VCAPG,VCAPI ! Terluna: fall-speed caps\n", 1),
+        ('SUBROUTINE GRAUPEL_INIT(cm1hail,cm1inum,cm1ndcnst,cm1db)\n',
+         'SUBROUTINE GRAUPEL_INIT(cm1hail,cm1inum,cm1ndcnst,cm1db)\n      use constants, only : terluna_g_host => g\n', 1),
+        ('         G = 9.81\n', MORRISON_BLOCK, 1),
+        ('UMS=MIN(UMS,1.2*dum)', 'UMS=MIN(UMS,VCAPS*dum)', 3),
+        ('UNS=MIN(UNS,1.2*dum)', 'UNS=MIN(UNS,VCAPS*dum)', 3),
+        ('UMR=MIN(UMR,9.1*dum)', 'UMR=MIN(UMR,VCAPR*dum)', 5),
+        ('UNR=MIN(UNR,9.1*dum)', 'UNR=MIN(UNR,VCAPR*dum)', 5),
+        ('UMG=MIN(UMG,20.*dum)', 'UMG=MIN(UMG,VCAPG*dum)', 3),
+        ('UNG=MIN(UNG,20.*dum)', 'UNG=MIN(UNG,VCAPG*dum)', 3),
+        ('UMI=MIN(UMI,1.2*(rhosu/rho(k))**0.35)', 'UMI=MIN(UMI,VCAPI*(rhosu/rho(k))**0.35)', 1),
+        ('UNI=MIN(UNI,1.2*(rhosu/rho(k))**0.35)', 'UNI=MIN(UNI,VCAPI*(rhosu/rho(k))**0.35)', 1)]),
+    ('radiation_driver.F', 'Terluna: a solar day of var19 s', [
+        ('      use constants, only : pi,g,cp,cpl,cpi,cv,cvv,rd,cvdcp,degdpi\n',
+         '      use constants, only : pi,g,cp,cpl,cpi,cv,cvv,rd,cvdcp,degdpi\n'
+         '      use input, only : var16,var17,var18,var19   ! Terluna: the lunar day\n', 1),
+        ('!!!          albd = 0.07\n        ENDIF\n', SUN_BLOCK, 1)]),
+    ('module_ra_rrtmg_lw.F', 'Terluna: the design air, longwave', [
+        ('', GAS_DEFAULTS + '! Terluna: the design air, longwave\n', 1),
+        ('      co2 = (280. + 90.*exp(0.02*(yr-2000)))*1.e-6\n', '      co2 = TERLUNA_CO2\n', 1),
+        ('    data ch4 / 1774.e-9 /', '    data ch4 / 0.0 /', 1),
+        ('    data n2o / 319.e-9 /', '    data n2o / 0.0 /', 1),
+        ('    data cfc11 / 0.251e-9 /', '    data cfc11 / 0.0 /', 1),
+        ('    data cfc12 / 0.538e-9 /', '    data cfc12 / 0.0 /', 1),
+        ('    data cfc22 / 0.169e-9 /', '    data cfc22 / 0.0 /', 1),
+        ('    data ccl4 / 0.093e-9 /', '    data ccl4 / 0.0 /', 1),
+        ('    data o2 / 0.209488 /', '    data o2 / TERLUNA_O2 /', 1),
+        ('o3vmr(ncol,k) = o3mmr(k) * amdo', 'o3vmr(ncol,k) = 0.0*o3mmr(k) * amdo', 2)]),
+    ('module_ra_rrtmg_sw.F', 'Terluna: the design air, shortwave', [
+        ('', GAS_DEFAULTS + '! Terluna: the design air, shortwave\n', 1),
+        ('      co2 = (280. + 90.*exp(0.02*(yr-2000)))*1.e-6\n', '      co2 = TERLUNA_CO2\n', 1),
+        ('    data ch4 / 1774.e-9 /', '    data ch4 / 0.0 /', 1),
+        ('    data n2o / 319.e-9 /', '    data n2o / 0.0 /', 1),
+        ('    data o2 / 0.209488 /', '    data o2 / TERLUNA_O2 /', 1),
+        ('o3vmr(ncol,k) = o3mmr(k) * amdo', 'o3vmr(ncol,k) = 0.0*o3mmr(k) * amdo', 2)]),
+    ('init_surface.F', 'Terluna: land and water along x', [
+        ('      integer :: i,j,k,l\n      real :: x1,x2,xcoast\n',
+         '      integer :: i,j,k,l\n      real :: x1,x2,xcoast\n      integer :: nseg,slu\n      real :: sx1,sx2,sxl,stsk,stmn\n', 1),
+        ('      ELSEIF( initsfc.ne.1 .and. initsfc.ne.2 )THEN\n', SURFACE_BLOCK, 1),
+        ('      slab_dzs(1)=.01\n', '      slab_dzs(1)=.05   ! Terluna: layers of 5-80 cm\n', 1)]),
+    ('solve1.F', 'Terluna: above var14 m only', [
+        ('      real :: dttmp,rtime,rdt,tem,tem0,tem1,tem2,thrad,prad\n',
+         '      real :: dttmp,rtime,rdt,tem,tem0,tem1,tem2,thrad,prad,terluna_w\n', 1),
+        ('          tem1 = -lsnudgefac*( thavg(k)-lsnudge_th(k,lsnudge_count) )/(lsnudge_tau)\n',
+         NUDGE_WEIGHT + '          tem1 = -lsnudgefac*terluna_w*( thavg(k)-lsnudge_th(k,lsnudge_count) )/(lsnudge_tau)\n', 1),
+        ('          tem1 = -lsnudgefac*( qavg(k,nqv)-lsnudge_qv(k,lsnudge_count) )/(lsnudge_tau)\n',
+         NUDGE_WEIGHT + '          tem1 = -lsnudgefac*terluna_w*( qavg(k,nqv)-lsnudge_qv(k,lsnudge_count) )/(lsnudge_tau)\n', 1)]),
+]
+
+
+def apply_patch(text: str, name: str, marker: str, edits) -> str:
+    """The text with one patch applied; unchanged if its marker is already present."""
+    if marker in text:
+        return text
+    for old, new, count in edits:
+        if not old:
+            text = new + text
+            continue
+        found = text.count(old)
+        if found != count:
+            raise RuntimeError(f'CM1 {name}: expected {count} of {old.strip()[:60]!r}, found {found}')
+        text = text.replace(old, new)
+    if marker not in text:
+        raise RuntimeError(f'CM1 {name}: the patch did not add its marker {marker!r}')
+    return text
+
+
+def fetch() -> Path:
+    """The pristine CM1 tree, downloaded and unpacked if missing, its tarball checked against the pin."""
+    CM1_HOME.mkdir(parents=True, exist_ok=True)
+    tarball = CM1_HOME / f"{SOURCE['version']}.tar.gz"
+    if not tarball.exists():
+        part = tarball.with_name(tarball.name + '.part')
+        with urllib.request.urlopen(SOURCE['url']) as response, open(part, 'wb') as out:
+            shutil.copyfileobj(response, out)
+        part.replace(tarball)
+    digest = hashlib.sha256(tarball.read_bytes()).hexdigest()
+    if digest != SOURCE['sha256']:
+        raise RuntimeError(f'{tarball} has sha256 {digest}, expected {SOURCE["sha256"]}; not using it')
+    tree = CM1_HOME / SOURCE['version']
+    if not (tree / 'src' / 'Makefile').exists():
+        with tarfile.open(tarball) as archive:
+            archive.extractall(CM1_HOME, filter='data')
+    return tree
+
+
+def planet():
+    return json.loads((HERE.parent / 'gcm' / 'products' / 'moon_gcm_configuration.json').read_text())['planet']
+
+
+def design_air():
+    """Carbon dioxide and oxygen mixing ratios of the design case's air, from its GCM run."""
+    progress = json.loads((HERE.parent / 'gcm' / 'runs' / 'A28_dim5' / 'progress.json').read_text())
+    cfg = progress['configuration']
+    gases = cfg['gases_bar']
+    total = sum(gases.values())
+    return dict(co2=gases['pCO2'] / total, o2=gases['pO2'] / total, surface_pa=cfg['pressure_pa'],
+                sunlight_w_m2=progress['inputs']['flux_w_m2'], run='A28_dim5')
+
+
+# label: (gravity, parallel mode)
+BUILDS = {'moon': (lambda: planet()['gravity_m_s2'], 'mpi'), 'earth_g': (lambda: EARTH_G, 'mpi'),
+          'moon_omp': (lambda: planet()['gravity_m_s2'], 'omp'), 'earth_g_omp': (lambda: EARTH_G, 'omp')}
+
+
+def build(label: str, jobs: int = 8) -> Path:
+    """Compile CM1 with the Terluna patches at the build's gravity; returns the executable."""
+    tree = fetch()
+    air = design_air()
+    gravity, mode = BUILDS[label][0](), BUILDS[label][1]
+    folder = CM1_HOME / 'build' / label
+    exe = folder / 'cm1.exe'
+    flags = f"-DTERLUNA_G={gravity!r} -DTERLUNA_CO2={air['co2']:.6e} -DTERLUNA_O2={air['o2']:.6f}"
+    src = folder / 'src'
+    if src.exists():
+        shutil.rmtree(src)
+    shutil.copytree(tree / 'src', src)
+    (folder / 'run').mkdir(parents=True, exist_ok=True)
+    hashes = {}
+    for name, marker, edits in [MAKEFILE[mode], *PATCHES]:
+        path = src / name
+        path.write_text(apply_patch(path.read_text(), name, marker, edits))
+    for name in sorted({p[0] for p in [MAKEFILE[mode], *PATCHES]}):
+        hashes[name] = hashlib.sha256((src / name).read_bytes()).hexdigest()[:16]
+    log = folder / 'build.log'
+    with open(log, 'w') as out:
+        done = subprocess.run(['make', f'-j{jobs}', f'TERLUNA={flags}'], cwd=src, stdout=out, stderr=subprocess.STDOUT)
+    if done.returncode != 0 or not (folder / 'run' / 'cm1.exe').exists():
+        raise RuntimeError(f'CM1 build {label} failed; see {log}')
+    (folder / 'run' / 'cm1.exe').replace(exe)
+    record = dict(label=label, gravity_m_s2=gravity, parallel=mode, flags=flags, source=SOURCE, patched=hashes,
+                  executable_sha256=hashlib.sha256(exe.read_bytes()).hexdigest()[:16], air=air)
+    (folder / 'build.json').write_text(json.dumps(record, indent=1) + '\n')
+    return exe
+
+
+# --------------------------------------------------------------------------------------------------
+# Cases
+
+GCM_RUN, GCM_YEARS = 'A28_dim5', (15, 24)          # the chosen design (5% dimmer shield), settled years
+EQUATOR_BAND_DEG = 10.0                              # GCM rows averaged for the equatorial profile
+ROW_BAND_DEG = 3.0                                   # half the GCM's row spacing: the one row nearest a latitude
+PLACEHOLDER_LAND = (28, "28,      20.,   .50,   .95,   10.,    4.,  2.00, 25.0e5,'Terluna placeholder land'\n")
+# PlaSim's bucket (landmod.f90): soil holds up to wsmax m of water and land evaporates at the rate of open
+# water times min(1, water / (drhsfull * wsmax)), the same factor as CM1's moisture availability.
+PLASIM_SOIL = dict(wsmax=0.5, drhsfull=0.4)
+
+CASES = {
+    'ring': dict(
+        purpose='the equator as a 2-D ring 10,917 km round, the Sun crossing it once a lunar day; seas and lakes '
+                'of the 28% scenario at sea level, the 5% dimmer shield, the GCM design case as reference',
+        build='moon_omp', dx_target_m=6000.0, ranks=8, z_grid=dict(dz0=100.0, z_fine=1000.0, stretch=1.08, dz_max=2000.0,
+                                                                ztop=150000.0),
+        start_hour_angle_deg=-90.0, days=59.06, output_s=10800.0, restart_s=43200.0, segment_s=86400.0,
+        nudge=dict(tau_s=259200.0, z_start_m=8000.0, z_full_m=16000.0, ramp_s=86400.0),
+        land_moisture=0.50, droplets_cm3=100.0),
+    # The gravity pair: the same air in pressure terms over the same sea, at lunar and at Earth gravity.
+    # Lengths and times of the Earth case are the Moon's times g_moon/g_earth, as the dynamics scale, so any
+    # difference comes from what does not scale: how fast drops and ice fall and how fast rain forms. No
+    # radiation. The air starts as the ring's own air over its seas, and above 8-16 km (lunar) its mean is
+    # held to the reference, which takes away the heat and vapour convection brings up, as in
+    # weak-temperature-gradient experiments; below, the boundary layer and convection are free. (Holding the
+    # air at every height kept the boundary layer at the reference's mean humidity, too dry to convect.)
+    'pair_moon': dict(kind='pair', build='moon_omp', nx=256, dx_moon_m=6000.0,
+                      z_grid=dict(dz0=100.0, z_fine=1000.0, stretch=1.08, dz_max=2000.0, ztop=150000.0),
+                      days=20.0, output_s=10800.0, restart_s=86400.0, segment_s=432000.0, initial='ring_sea',
+                      nudge=dict(tau_s=259200.0, z_start_m=8000.0, z_full_m=16000.0, ramp_s=86400.0), droplets_cm3=100.0),
+    'pair_earth': dict(kind='pair', build='earth_g_omp', nx=256, dx_moon_m=6000.0,
+                       z_grid=dict(dz0=100.0, z_fine=1000.0, stretch=1.08, dz_max=2000.0, ztop=150000.0),
+                       days=20.0, output_s=10800.0, restart_s=86400.0, segment_s=432000.0, initial='ring_sea',
+                       nudge=dict(tau_s=259200.0, z_start_m=8000.0, z_full_m=16000.0, ramp_s=86400.0), droplets_cm3=100.0),
+}
+# Rings along circles of latitude near the poles, set up as the equatorial ring except that the Sun never
+# climbs above 90 degrees less the latitude, the Coriolis force of the latitude turns departures from the
+# reference wind (whose own pressure gradient CM1 supplies, lspgrad = 1), the reference is the GCM row
+# nearest the latitude, and the land evaporates as readily as the GCM's land on that row. The Sun keeps the
+# equinox: the Moon's 1.5-degree tilt raises and lowers the daily sunlight at 80 degrees by about a quarter
+# over the year, alternately in the two hemispheres.
+for _lat, _tag in ((80.0, '80n'), (-80.0, '80s'), (70.0, '70n'), (-70.0, '70s')):
+    CASES[f'ring_{_tag}'] = dict(
+        CASES['ring'], latitude_deg=_lat, band_deg=ROW_BAND_DEG, land_moisture='gcm',
+        purpose=f'the circle of latitude {abs(_lat):.0f} {"N" if _lat > 0 else "S"} as a 2-D ring, the Sun crossing it '
+                'once a lunar day, seas and lakes of the 28% scenario at sea level, land as wet as the GCM\'s there, '
+                'the 5% dimmer shield, the GCM design case\'s row nearest the latitude as reference')
+
+
+def gcm_soil(folder: Path) -> dict:
+    """PlaSim's soil capacity and free-evaporation share for a GCM run: the defaults unless its
+    landmod_namelist sets them."""
+    import re
+    values = dict(PLASIM_SOIL)
+    path = folder / 'landmod_namelist'
+    text = path.read_text().lower() if path.exists() else ''
+    for key in values:
+        found = re.search(rf'\b{key}\s*=\s*([-+0-9.e]+)', text)
+        if found:
+            values[key] = float(found.group(1))
+    return values
+
+
+def gcm_equator_profile(run=GCM_RUN, years=GCM_YEARS, band=EQUATOR_BAND_DEG, latitude=0.0):
+    """The GCM's reference for a ring on the equator, or on another circle of latitude: mean potential
+    temperature, vapour and eastward wind of the sea columns within `band` degrees of the latitude against
+    height above the sea (their surface), the sea surface and land ground temperatures, the air near the
+    ground over the sea, and how readily the land there evaporates."""
+    import numpy as np
+    import netCDF4
+    from climate.gcm.compare import area_weights
+    gravity, rd, kappa = planet()['gravity_m_s2'], 287.04, 287.04 / 1005.7
+    folder = HERE.parent / 'gcm' / 'runs' / run / 'model'
+    fields = {k: [] for k in ('ta', 'hus', 'ua', 'ps', 'ts', 'tas', 'mrso')}
+    for year in range(years[0], years[1] + 1):
+        with netCDF4.Dataset(folder / f'MOST.{year:05d}.nc') as d:
+            for k in fields:
+                fields[k].append(np.asarray(d[k][:], dtype=float))
+            lat = np.asarray(d['lat'][:], dtype=float)
+            sigma = np.asarray(d['lev'][:], dtype=float)
+            lsm = np.asarray(d['lsm'][:], dtype=float)[0] > 0.5
+    f = {k: np.concatenate(v) for k, v in fields.items()}
+    height = np.loadtxt(folder.parent / 'inputs' / 'moon_topography.sra', skiprows=1).ravel().reshape(lsm.shape) / gravity
+    rows = np.abs(lat - latitude) < band
+    sea = rows[:, None] & ~lsm & (height < 1.0)                           # seas at sea level; lakes stand higher
+    land = rows[:, None] & lsm
+    w = area_weights(lat, 64)
+    mean = lambda x, m: float((x * w)[m].sum() / w[m].sum())
+    ps = f['ps'] * 100.0                                                  # hPa in the output
+    tv = f['ta'] * (1 + 0.608 * f['hus'])
+    z = np.zeros_like(f['ta'])                                            # heights above the ground
+    z[:, -1] = rd * tv[:, -1] / gravity * np.log(1 / sigma[-1])
+    for k in range(len(sigma) - 2, -1, -1):
+        z[:, k] = z[:, k + 1] + rd * 0.5 * (tv[:, k] + tv[:, k + 1]) / gravity * np.log(sigma[k + 1] / sigma[k])
+    theta = f['ta'] * (1e5 / (sigma[None, :, None, None] * ps[:, None])) ** kappa
+    tm = lambda x: x.mean(axis=0)                                         # time mean, (lev, lat, lon)
+    profile = dict(z_m=[mean(tm(z)[k], sea) for k in range(len(sigma))],
+                   theta_k=[mean(tm(theta)[k], sea) for k in range(len(sigma))],
+                   qv_kg_kg=[mean(tm(f['hus'])[k], sea) for k in range(len(sigma))],
+                   u_m_s=[mean(tm(f['ua'])[k], rows[:, None] & np.ones_like(lsm)) for k in range(len(sigma))])
+    # Land stands higher than the ring's flat ground at sea level: carry its ground temperature down at
+    # the lapse rate of the GCM's lowest kilometres.
+    lapse = (profile['theta_k'][-2] - profile['theta_k'][-1]) / (profile['z_m'][-2] - profile['z_m'][-1])
+    lapse = gravity / 1005.7 - lapse * (1e5 / mean(tm(ps), sea)) ** -kappa
+    land_sea_level = tm(f['ts']) + lapse * height
+    soil = gcm_soil(folder)
+    wetness = np.minimum(1.0, f['mrso'] / (soil['drhsfull'] * soil['wsmax']))
+    return dict(profile=profile, sea_surface_k=mean(tm(f['ts']), sea), land_ground_k=mean(land_sea_level, land),
+                land_ground_in_place_k=mean(tm(f['ts']), land), land_height_m=mean(height, land), lapse_k_m=lapse,
+                air_over_sea_k=mean(tm(f['tas']), sea), surface_pa_sea=mean(tm(ps), sea), sea_columns=int(sea.sum()),
+                land_wetness=mean(tm(wetness), land), soil=soil,
+                run=run, years=list(years), band_deg=band, latitude_deg=latitude, rows_deg=[float(v) for v in lat[rows]])
+
+
+def vertical_grid(dz0, z_fine, stretch, dz_max, ztop):
+    """Heights (m) of the w levels: dz0 up to z_fine, growing by `stretch` per level to dz_max, then even."""
+    levels, z, dz = [0.0], 0.0, dz0
+    while z < ztop - 1e-6:
+        if z >= z_fine:
+            dz = min(dz * stretch, dz_max)
+        z = min(z + dz, ztop)
+        levels.append(z)
+    if levels[-1] - levels[-2] < 0.5 * dz_max:                            # no sliver at the top
+        levels.pop(-2)
+    return levels
+
+
+def ring_surface(nx, dx, sea_k, land_k, band=1.0, latitude=0.0):
+    """Land and water segments along a ring on a circle of latitude (x eastward from 0 E): water where the
+    28% scenario's seas and rain-fed lakes cover at least half of the band within `band` degrees of the
+    latitude. A ring column narrower than the product's 0.25-degree columns takes the one under its centre;
+    a wider one, the mean of those whose centres it holds."""
+    import numpy as np
+    from climate.gcm import boundary
+    product = boundary.lakes_product(*boundary.LAKES)
+    lat, lon, water = product['lat_deg'], product['lon_deg'], product['water_fraction']
+    along = water[np.abs(lat - latitude) < band].mean(axis=0)             # 0.25-degree columns
+    if nx >= lon.size:
+        centres = (np.arange(nx) + 0.5) * 360.0 / nx
+        share = along[np.minimum((centres / (360.0 / lon.size)).astype(int), lon.size - 1)]
+    else:
+        holder = np.minimum((lon / (360.0 / nx)).astype(int), nx - 1)
+        share = np.bincount(holder, weights=along, minlength=nx) / np.bincount(holder, minlength=nx)
+    wet = share >= 0.5
+    segments, start = [], 0
+    for i in range(1, nx + 1):
+        if i == nx or wet[i] != wet[start]:
+            x0 = start * dx if start > 0 else -1e9
+            x1 = i * dx if i < nx else 1e9
+            segments.append((x0, x1, 2 if wet[start] else 1, 16 if wet[start] else PLACEHOLDER_LAND[0],
+                             sea_k if wet[start] else land_k, sea_k if wet[start] else land_k))
+            start = i
+    return segments, float(wet.mean()), product['sha256']
+
+
+def set_namelist(text: str, section: str, key: str, value) -> str:
+    """Set one entry of a Fortran namelist held as text; the entry must exist in its section."""
+    import re
+    start = text.index(f'&{section}\n')
+    end = text.index('\n /', start)
+    block = text[start:end]
+    pattern = re.compile(rf'^(\s*{re.escape(key)}\s*=\s*)([^,\n]*)(,?)', re.M)
+    if not pattern.search(block):
+        raise KeyError(f'{key} not in &{section}')
+    if isinstance(value, bool):
+        value = '.true.' if value else '.false.'
+    block = pattern.sub(lambda m: f'{m.group(1)}{value}{m.group(3)}', block, count=1)
+    return text[:start] + block + text[end:]
+
+
+def time_scale(cfg, gravity) -> float:
+    """Factor on the case's lengths and times: 1 at lunar gravity, g_moon/g for a pair case at gravity g."""
+    return planet()['gravity_m_s2'] / gravity if cfg.get('kind') == 'pair' else 1.0
+
+
+def case_settings(cfg, nx, dx, nz, ztop, air, gravity):
+    """Namelist entries of a case, by section, on top of CM1's RCE template."""
+    length = nx * dx
+    s = time_scale(cfg, gravity)
+    pair = cfg.get('kind') == 'pair'
+    latitude = cfg.get('latitude_deg', 0.0)
+    turning = coriolis(latitude)
+    rotating = turning != 0.0                                            # off the equator: the wind turns
+    return {
+        'param0': dict(nx=nx, ny=1, nz=nz, ppnode=cfg.get('ranks', 8), timeformat=3, timestats=1),
+        'param1': dict(dx=round(dx, 3), dy=round(dx, 3), dz=round(ztop / nz, 1), dtl=round(40.0 * s, 3), cfl_limit=1.0,
+                       timax=round(cfg['days'] * 86400.0 * s), run_time=-999.9, tapfrq=round(cfg['output_s'] * s, 3),
+                       rstfrq=round(cfg['restart_s'] * s, 3), statfrq=round(3600.0 * s, 3), prclfrq=1.0e9),
+        'param2': dict(cm1setup=2, testcase=0, adapt_dt=1, irst=0, rstnum=1, ipbl=2, sgsmodel=0, tconfig=2,
+                       horizturb=0, irdamp=2, psolver=3, ptype=5, ihail=0, icor=int(rotating), lspgrad=int(rotating),
+                       eqtset=2, idiss=1, wbc=1, ebc=1, sbc=1, nbc=1, bbc=3, tbc=1, isnd=7, iwnd=0, itern=0, iinit=0,
+                       irandp=1, iorigin=1, apmasscon=1),
+        # The Rayleigh layer's time and the PBL scheme's asymptotic length scale are Earth's values stretched
+        # by the ratio of gravities, as the dynamics stretch.
+        'param3': dict(fcor=float(f'{turning:.6e}'), rdalpha=round(gravity / EARTH_G / 300.0, 8), zd=0.77 * ztop,
+                       l_inf=round(75.0 * EARTH_G / gravity, 1), ndcnst=cfg['droplets_cm3']),
+        'param6': dict(stretch_z=4, ztop=ztop),
+        'param8': dict(var14=cfg['nudge']['z_start_m'] * s, var15=cfg['nudge']['z_full_m'] * s,
+                       var16=0.0 if pair else round(length, 3), var17=0.0 if pair else round(air['sunlight_w_m2'], 3),
+                       var18=0.0 if pair else cfg['start_hour_angle_deg'], var19=0.0 if pair else round(solar_day_s(), 1)),
+        'param9': dict(output_format=1, output_filetype=2, output_sfcparams=0, output_tke=0, output_km=0,
+                       output_kh=0, output_uinterp=1, output_vinterp=int(rotating), output_v=0, output_winterp=1,
+                       output_radten=1, output_cape=1, output_cin=1, output_lcl=1, output_lfc=1, output_pwat=1,
+                       output_lwp=1),
+        'param11': dict(radopt=0 if pair else 2, dtrad=1800.0, ctrlat=latitude, ctrlon=0.0, year=2014),
+        'param12': dict(isfcflx=1, sfcmodel=2, oceanmodel=1, initsfc=1 if pair else 9, season=1),
+        'param14': dict(dodomaindiag=True, diagfrq=round(cfg['output_s'] * s, 3)),
+        'param16': dict(restart_format=1, restart_filetype=2, restart_reset_frqtim=True),
+        'param19': dict(do_lsnudge=True, do_lsnudge_u=True, do_lsnudge_v=rotating, do_lsnudge_th=True,
+                        do_lsnudge_qv=True, lsnudge_tau=round(cfg['nudge']['tau_s'] * s, 3), lsnudge_start=1.0,
+                        lsnudge_end=1.0e12, lsnudge_ramp_time=round(cfg['nudge']['ramp_s'] * s, 3)),
+    }
+
+
+def coriolis(latitude_deg: float) -> float:
+    """The Coriolis parameter (1/s) at a latitude, from the Moon's sidereal rotation."""
+    return 2.0 * planet()['rotation_rate_rad_s'] * math.sin(math.radians(latitude_deg))
+
+
+def ring_grid(latitude_deg: float, dx_target_m: float, ranks: int):
+    """Columns, their width and the length of a ring around the Moon on a circle of latitude; the column
+    count a multiple of the ranks."""
+    length = 2.0 * math.pi * planet()['radius_m'] * math.cos(math.radians(latitude_deg))
+    nx = int(round(length / dx_target_m / ranks)) * ranks
+    return nx, length / nx, length
+
+
+def land_moisture(cfg: dict, ref: dict) -> float:
+    """The land's moisture availability: the case's own value, or the GCM's for 'gcm'."""
+    value = cfg.get('land_moisture', 0.5)
+    return float(ref['land_wetness']) if value == 'gcm' else float(value)
+
+
+def solar_day_s():
+    return planet()['solar_day_days'] * 86400.0
+
+
+def water_mean_profile(snapshots, land) -> dict:
+    """Mean potential temperature and vapour by level over the water columns of some snapshots, with the
+    mean surface pressure, 2 m temperature and 2 m vapour there."""
+    import numpy as np
+    sea = ~np.asarray(land, bool)
+    total, count = {}, 0
+    for d in snapshots:
+        for key, value in (('theta_k', d['th'][:, sea].mean(axis=1)), ('qv_kg_kg', d['qv'][:, sea].mean(axis=1)),
+                           ('surface_pa', d['psfc'][sea].mean()), ('air_2m_k', d['t2'][sea].mean()),
+                           ('qv_2m_kg_kg', d['q2'][sea].mean())):
+            total[key] = total.get(key, 0.0) + np.asarray(value, dtype=float)
+        count += 1
+    return {key: value / count for key, value in total.items()}
+
+
+def ring_sea_profile(days: float = 3.0, name: str = 'ring') -> dict:
+    """The ring's own air over its seas, averaged over its last `days`: where the gravity pair starts."""
+    from climate.crm import ring_analysis as ra
+    case = RUNS / name
+    geo = ra.case_geometry(case)
+    tap = geo['record']['configuration']['output_s']
+    outputs = sorted(int(p.name[8:14]) for p in case.glob('cm1out_t*_s.dat'))
+    last = (outputs[-1] - 1) * tap
+    use = [n for n in outputs if (n - 1) * tap >= last - days * 86400.0]
+    profile = water_mean_profile((ra.read_snapshot(case, n) for n in use), geo['land'])
+    profile.update(z_m=geo['zh'], span_days=[(use[0] - 1) * tap / 86400.0, last / 86400.0], case=name)
+    return profile
+
+
+def setup(name: str) -> Path:
+    """Write a case's inputs into climate/crm/runs/<name>: namelist, sounding, grid, nudging profile,
+    surface segments, land-use table and links to the executable and radiation tables."""
+    import numpy as np
+    cfg = CASES[name]
+    tree = fetch()
+    exe = CM1_HOME / 'build' / cfg['build'] / 'cm1.exe'
+    if not exe.exists():
+        raise RuntimeError(f'build {cfg["build"]} first')
+    build_record = json.loads((exe.parent / 'build.json').read_text())
+    air, gravity = build_record['air'], build_record['gravity_m_s2']
+    case = RUNS / name
+    if (case / 'progress.json').exists():
+        raise RuntimeError(f'{case} has started; remove it to set up afresh')
+    case.mkdir(parents=True, exist_ok=True)
+    latitude = cfg.get('latitude_deg', 0.0)
+    ref = gcm_equator_profile(band=cfg.get('band_deg', EQUATOR_BAND_DEG), latitude=latitude)
+    s = time_scale(cfg, gravity)
+    pair = cfg.get('kind') == 'pair'
+    if pair:
+        nx, dx = cfg['nx'], cfg['dx_moon_m'] * s
+        length = nx * dx
+    else:
+        nx, dx, length = ring_grid(latitude, cfg['dx_target_m'], cfg['ranks'])
+    zw = [z * s for z in vertical_grid(**cfg['z_grid'])]
+    nz = len(zw) - 1
+    zh = 0.5 * (np.array(zw[1:]) + np.array(zw[:-1]))
+    prof = ref['profile']
+    zg = np.array(prof['z_m'][::-1]) * s                                  # GCM levels, bottom first
+    th = np.array(prof['theta_k'][::-1])
+    qv = np.array(prof['qv_kg_kg'][::-1])
+    uu = np.array(prof['u_m_s'][::-1]) * (0.0 if pair else 1.0)
+    top_slope = (th[-1] - th[-2]) / (zg[-1] - zg[-2])
+    theta_at = lambda z: np.where(z <= zg[-1], np.interp(z, zg, th), th[-1] + top_slope * (z - zg[-1]))
+    qv_at = lambda z: np.exp(np.interp(z, zg, np.log(np.maximum(qv, 1e-9))))
+    u_at = lambda z: np.interp(z, zg, uu)
+    kappa = 287.04 / 1005.7
+    theta_sfc = ref['air_over_sea_k'] * (1e5 / ref['surface_pa_sea']) ** kappa
+    lines = [f"{ref['surface_pa_sea'] / 100:12.4f} {theta_sfc:12.4f} {qv[0] * 1000:12.5f}"]
+    start_theta, start_qv, initial = theta_at, qv_at, dict(source='GCM reference')
+    if cfg.get('initial') == 'ring_sea':
+        start = ring_sea_profile()
+        zr = np.asarray(start['z_m']) * s
+        start_theta = lambda z: np.interp(z, zr, start['theta_k'])
+        start_qv = lambda z: np.exp(np.interp(z, zr, np.log(np.maximum(start['qv_kg_kg'], 1e-12))))
+        theta_2m = float(start['air_2m_k']) * (1e5 / float(start['surface_pa'])) ** kappa
+        lines = [f"{float(start['surface_pa']) / 100:12.4f} {theta_2m:12.4f} {float(start['qv_2m_kg_kg']) * 1000:12.5f}"]
+        initial = dict(source='the ring over its seas', case=start['case'], span_days=start['span_days'])
+    # the sounding ends at the model top, above the highest scalar level, so rounding cannot leave it short
+    lines += [f'{z:12.3f} {float(start_theta(z)):12.4f} {float(start_qv(z)) * 1000:12.5f} {float(u_at(z)):8.3f} {0.0:8.3f}'
+              for z in [*zh, zw[-1]]]
+    (case / 'input_sounding').write_text('\n'.join(lines) + '\n')
+    (case / 'input_grid_z').write_text(''.join(f'{z:.3f}\n' for z in zw))
+    nudge = [' *  Header:   lsnudge_time1 (s)   lsnudge_time2 (s)', '                     0.0                1.0e30 ',
+             ' *  Profile.   Note: values will be ignored if nudging for that variable is off.',
+             ' *    z (m)   theta (K)    qv (g/kg)  u (m/s, grnd-reltv) v (m/s, grnd-reltv)']
+    nudge += [f'  {z:12.4f} {float(theta_at(z)):12.4f} {float(qv_at(z)) * 1000:12.6f} {float(u_at(z)):10.4f} {0.0:10.4f}'
+              for z in [0.0, *zh, zw[-1]]]
+    (case / 'lsnudge_0001.dat').write_text('\n'.join(nudge) + '\n')
+    if pair:
+        segments, water_share, surface_sha = [(-1e9, 1e9, 2, 16, ref['sea_surface_k'], ref['sea_surface_k'])], 1.0, None
+    else:
+        segments, water_share, surface_sha = ring_surface(nx, dx, ref['sea_surface_k'], ref['land_ground_k'],
+                                                          latitude=latitude)
+    (case / 'terluna_surface.txt').write_text(f'{len(segments)}\n' + ''.join(
+        f'{x0:.1f} {x1:.1f} {xl:.1f} {lu:d} {tsk:.3f} {tmn:.3f}\n' for x0, x1, xl, lu, tsk, tmn in segments))
+    table = (tree / 'run' / 'LANDUSE.TBL').read_text().splitlines(keepends=True)
+    index, row = PLACEHOLDER_LAND
+    table = [row.replace('.50', f"{land_moisture(cfg, ref):.2f}".lstrip('0')) if line.startswith(f'{index},') else line
+             for line in table]
+    (case / 'LANDUSE.TBL').write_text(''.join(table))
+    for link, target in (('cm1.exe', exe), ('RRTMG_LW_DATA', tree / 'run' / 'RRTMG_LW_DATA'),
+                         ('RRTMG_SW_DATA', tree / 'run' / 'RRTMG_SW_DATA')):
+        path = case / link
+        if path.is_symlink() or path.exists():
+            path.unlink()
+        path.symlink_to(target)
+    text = (tree / 'run' / 'config_files' / 'cpm_RadConvEquil' / 'namelist.input').read_text()
+    settings = case_settings(cfg, nx, dx, nz, zw[-1], air, gravity)
+    settings['param12'].update(tsk0=round(ref['sea_surface_k'], 3), tmn0=round(ref['land_ground_k'], 3), xland0=2.0, lu0=16)
+    for section, entries in settings.items():
+        for key, value in entries.items():
+            text = set_namelist(text, section, key, value)
+    (case / 'namelist.template').write_text(text)
+    digest = lambda p: hashlib.sha256(Path(p).read_bytes()).hexdigest()[:16]
+    record = dict(case=name, configuration=cfg, time_scale=s,
+                  grid=dict(nx=nx, dx_m=dx, length_m=length, nz=nz, ztop_m=zw[-1]),
+                  build=build_record, reference=ref, initial=initial, water_share=water_share, surface_product=surface_sha,
+                  latitude_deg=latitude, coriolis_1_s=coriolis(latitude), land_moisture=None if pair else land_moisture(cfg, ref),
+                  runner=digest(__file__),
+                  inputs={p: digest(case / p) for p in ('input_sounding', 'input_grid_z', 'lsnudge_0001.dat',
+                                                         'terluna_surface.txt', 'LANDUSE.TBL', 'namelist.template')})
+    (case / 'case.json').write_text(json.dumps(record, indent=1) + '\n')
+    return case
+
+
+def latest_restart(case: Path):
+    """Index of the newest complete restart set (cm1rst_tNNNNNN_{i,s,u,v,w,x}.dat), or 0."""
+    import re
+    found = {int(m.group(1)) for p in case.glob('cm1rst_t*_s.dat') if (m := re.match(r'cm1rst_t(\d+)_s\.dat$', p.name))}
+    complete = [n for n in found if all((case / f'cm1rst_t{n:06d}_{part}.dat').exists() for part in 'isuvwx')]
+    return max(complete, default=0)
+
+
+def stats(case: Path) -> dict:
+    """CM1's statistics file (cm1out_stats.dat) as arrays, one entry per statistics time."""
+    import numpy as np
+    lines = (case / 'cm1out_stats.ctl').read_text().splitlines()
+    i = next(k for k, line in enumerate(lines) if line.lower().startswith('vars'))
+    names = [line.split()[0] for line in lines[i + 1:i + 1 + int(lines[i].split()[1])]]
+    raw = np.fromfile(case / 'cm1out_stats.dat', dtype='<f4')
+    data = raw[:raw.size // len(names) * len(names)].reshape(-1, len(names))
+    return {name: data[:, k] for k, name in enumerate(names)}
+
+
+def _progress(case: Path) -> dict:
+    path = case / 'progress.json'
+    return json.loads(path.read_text()) if path.exists() else dict(segments=[])
+
+
+def _save_progress(case: Path, progress: dict):
+    tmp = case / 'progress.json.part'
+    tmp.write_text(json.dumps(progress, indent=1) + '\n')
+    tmp.replace(case / 'progress.json')
+
+
+def _unlimited_stack():
+    import resource
+    resource.setrlimit(resource.RLIMIT_STACK, (resource.RLIM_INFINITY, resource.RLIM_INFINITY))
+
+
+def case_length_s(cfg: dict, scale: float) -> float:
+    """Model seconds a case runs: its length in days, cut to the last whole restart interval, the last state a
+    later run can resume from (two lunar days at half-day restarts end at day 59.0)."""
+    restart_s = cfg['restart_s'] * scale
+    return math.floor(cfg['days'] * 86400.0 * scale / restart_s + 1e-6) * restart_s
+
+
+def run(name: str, hours: float, threads: int = 8) -> dict:
+    """Run a case in segments of segment_s model seconds, each from the newest restart file, until the
+    case's length, the wall-clock budget or a STOP file ends it."""
+    cfg = CASES[name]
+    case = RUNS / name
+    record = json.loads((case / 'case.json').read_text())
+    scale = record.get('time_scale', 1.0)                                # model seconds per lunar-equivalent second
+    restart_s, segment_s = cfg['restart_s'] * scale, cfg['segment_s'] * scale
+    total = case_length_s(cfg, scale)
+    progress = _progress(case)
+    (case / 'run.lock').write_text(str(os.getpid()))
+    deadline = time.time() + hours * 3600.0
+    env = dict(os.environ, OMP_NUM_THREADS=str(threads), OMP_STACKSIZE='512M')
+    try:
+        while True:
+            done = progress['segments'][-1]['model_s'] if progress['segments'] else 0.0
+            if done >= total - 1.0:
+                break
+            if (case / 'STOP').exists():
+                (case / 'STOP').unlink()
+                break
+            if progress['segments'] and time.time() + progress['segments'][-1]['wall_s'] > deadline:
+                break
+            rst = latest_restart(case)
+            if rst and abs(rst * restart_s - done) > 1.0:
+                raise RuntimeError(f'restart {rst} does not match the recorded model time {done} s')
+            text = (case / 'namelist.template').read_text()
+            text = set_namelist(text, 'param2', 'irst', 1 if rst else 0)
+            text = set_namelist(text, 'param2', 'rstnum', max(rst, 1))
+            text = set_namelist(text, 'param1', 'run_time', round(min(segment_s, total - done), 3))
+            (case / 'namelist.input').write_text(text)
+            log = case / f'cm1_segment_{len(progress["segments"]) + 1:03d}.log'
+            start = time.time()
+            with open(log, 'w') as out:
+                done_run = subprocess.run(['nice', '-n', '5', './cm1.exe'], cwd=case, env=env, stdout=out,
+                                          stderr=subprocess.STDOUT, preexec_fn=_unlimited_stack)
+            if done_run.returncode != 0 or 'Program terminated normally' not in log.read_text()[-4000:]:
+                raise RuntimeError(f'CM1 stopped abnormally; see {log}')
+            if latest_restart(case) <= rst:
+                raise RuntimeError(f'CM1 wrote no new restart file in {case}')
+            reached = latest_restart(case) * restart_s
+            progress['segments'].append(dict(segment=len(progress['segments']) + 1, model_s=reached,
+                                             wall_s=round(time.time() - start, 1), log=log.name,
+                                             finished=time.strftime('%Y-%m-%d %H:%M:%S')))
+            progress['case'] = record['case']
+            _save_progress(case, progress)
+    finally:
+        (case / 'run.lock').unlink(missing_ok=True)
+    return progress
+
+
+def status(name: str) -> str:
+    case = RUNS / name
+    progress = _progress(case)
+    cfg = CASES[name]
+    scale = json.loads((case / 'case.json').read_text()).get('time_scale', 1.0)
+    done = (progress['segments'][-1]['model_s'] if progress['segments'] else 0.0) / scale   # lunar-equivalent
+    total = case_length_s(cfg, scale) / scale
+    wall = sum(s['wall_s'] for s in progress['segments'])
+    rate = done * scale / wall if wall else float('nan')
+    running = (case / 'run.lock').exists()
+    return (f"{name}: {done / 86400:.2f} of {total / 86400:.2f} days ({100 * done / total:.0f}%), "
+            f"{wall / 3600:.1f} wall hours, {rate:.0f} model s per wall s; {'running' if running else 'idle'}")
+
+
+def main(argv=None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    sub = parser.add_subparsers(dest='command', required=True)
+    b = sub.add_parser('build')
+    b.add_argument('labels', nargs='*', default=sorted(BUILDS))
+    b.add_argument('--jobs', type=int, default=8)
+    s = sub.add_parser('setup')
+    s.add_argument('case', choices=sorted(CASES))
+    r = sub.add_parser('run')
+    r.add_argument('case', choices=sorted(CASES))
+    r.add_argument('--hours', type=float, default=4.0, help='wall-clock budget')
+    r.add_argument('--threads', type=int, default=8)
+    for command in ('status', 'stop'):
+        sub.add_parser(command).add_argument('case', choices=sorted(CASES))
+    args = parser.parse_args(argv)
+    if args.command == 'run':
+        run(args.case, args.hours, args.threads)
+        print(status(args.case))
+    elif args.command == 'status':
+        print(status(args.case))
+    elif args.command == 'stop':
+        (RUNS / args.case / 'STOP').write_text('stop after the current segment\n')
+        print(f'{args.case}: will stop after the current segment')
+    if args.command == 'build':
+        for label in args.labels:
+            exe = build(label, args.jobs)
+            print(f'{label}: {exe}')
+    elif args.command == 'setup':
+        case = setup(args.case)
+        record = json.loads((case / 'case.json').read_text())
+        g = record['grid']
+        print(f"{case}: {g['nx']} x {g['nz']} points, dx {g['dx_m']:.1f} m, top {g['ztop_m'] / 1000:.0f} km, "
+              f"water {record['water_share']:.2f} of the ring")
+    return 0
+
+
+if __name__ == '__main__':
+    sys.exit(main())
