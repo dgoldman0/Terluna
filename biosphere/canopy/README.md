@@ -20,6 +20,7 @@ coefficients (pinned in [inputs.json](inputs.json), ignored by Git), and
 | [leaf.py](leaf.py) | C3 leaf photosynthesis (Farquhar, von Caemmerer and Berry 1980) with Bernacchi et al. (2001) kinetics and the capacities of the [CO₂ study](../../research/studies/atmospheric_co2/README.md), whose light-saturated leaf it reproduces exactly; electron transport follows the absorbed photons |
 | [model.py](model.py) | Reads the [surface-light product](../../illumination/surface_light/README.md), adds the sky's return of what the canopy reflects, and integrates over Sun heights, the solar cycle and latitude; leaf carbon over the cycle and the store it needs through the night (the reserve arithmetic of [long_night.py](../long_night.py)) |
 | [plant.py](plant.py) | The whole plant through the lunar cycle, with twilight and the chosen climate's temperatures, for ways of getting through the night (below) |
+| [fruit.py](fruit.py) | A fruit on that plant: when in the cycle to set it, how large it grows and how much of the plant's growth it can take (below) |
 
 The base stand has a leaf area index of 5 in layers of 0.025, randomly placed leaves
 with a spherical angle distribution, soil reflecting 10%, and PROSPECT-D green leaves
@@ -213,3 +214,98 @@ What the model cannot test decides the matter:
 - Leaves are at the air temperature. There are no water limits, nutrients,
   reproduction or herbivores. The continuous-light physiology is as in the canopy
   model.
+
+## Fruit on the plant
+
+`python -m biosphere.canopy.fruit` (about a minute) writes
+[results/fruit.json](results/fruit.json) (schema `terluna.biosphere.fruit-carbon/1`).
+It hangs a fruit on the whole-plant model's stand at the equator, 30° and 60° on the
+near side and at the far side's equator. It finds when in the cycle to set the fruit,
+how large it grows, and how much of the plant's growth it can take.
+
+- **The fruit** is a watermelon: 7.5 kg at harvest (7.1–8.3 kg in Noh et al. 2013),
+  8.6% dry matter and 42% carbon in that dry matter (USDA composition). It develops in
+  degree-days above 10 °C: 560 from fruit set to harvest (490–630 tested), from
+  growers' 35–45 days with 25–35 °C days and 15–20 °C nights. Its potential dry mass
+  follows a beta sigmoid (Yin et al. 2003) that grows fastest at half its development
+  (0.4–0.6 tested). That matches the third of the harvest weight Noh et al. found
+  15 days after fruit set.
+- **Its cost** is its carbon, a quarter again in growth respiration, and upkeep of
+  0.01 g CH₂O per g of dry matter per day at 25 °C with Q10 = 2. Crop models give
+  that value to roots, and to every organ but the leaves in tropical crops (WOFOST,
+  after Spitters et al. 1989 and Penning de Vries et al. 1989).
+- **One cohort per cycle.** The plant sets fruit once each cycle. A fruit that takes
+  longer than a cycle overlaps the next one, and the plant carries both.
+- **Two ways of feeding it.** A *fed* fruit grows at its potential rate throughout,
+  drawing on the plant's store in the dark. A *daylight* fruit grows only on the
+  plant's surplus while photosynthesis exceeds upkeep. Its development runs on in the
+  dark, and the growth it misses there is lost.
+
+### Results
+
+A watermelon cannot ripen within one lunar day. At the equator the sunlit half gives
+199 degree-days, a third of what it needs, and the whole cycle gives 348. From set to
+harvest it takes 45 days at the equator, a cycle and a half. It takes 48 days at 30°,
+and 54 at 60° and on the far side's cooler equator. To ripen within the sunlit half,
+the fruit would need to be kept at 48 °C, above watermelon's 37 °C limit. A fruit set
+at sunrise has reached 29% of its harvest mass, about 2.2 kg, by sunset.
+
+- **The set time matters little.** Whatever it is, 37–45% of the fruit's potential
+  growth falls while the plant is in deficit. Setting at sunrise is best on both
+  counts. At the reference load the fed fruit then needs the smallest store, 108 g C
+  per m² against up to 126 for other set times, and the daylight fruit grows largest,
+  61% of full size against 53%. It ripens 45 days later, about a day after the next
+  sunset, in the evening twilight. Setting fruit every sunrise gives a harvest every
+  lunar cycle, with two cohorts on the plant for about half of each cycle.
+- **How fast a fruit can grow.** At the equator's temperatures the watermelon's
+  fastest growth is 21 g of dry matter a day, about 0.25 kg of fruit. While the Sun is
+  up, the plant's surplus would build 0.50 kg of watermelon per m² of ground a day,
+  enough for two fruits at their fastest. In the dark the fruit lives on the store.
+  Breeding can raise what a single fruit takes in: giant pumpkins, bred for more
+  phloem into the fruit, gain about 15 kg a day at their peak (Savage et al. 2015).
+
+How much can go to fruit: equatorial near side, the fruit fed and set at sunrise. The
+fruit share is the fruit's part of all new tissue carbon. The plant's own growth is
+also given as the cycles it would take to build a whole new canopy (211.5 g C).
+
+| Fruit share | Harvest per m² per cycle | Fruits per m² per cycle | Plant's own growth | A new canopy every | Store for the night |
+|---|---|---|---|---|---|
+| None | | | 229 g C | 0.9 cycles | 46 g C |
+| 30% | 1.8 kg | 0.24 | 154 g C | 1.4 cycles | 81 g C |
+| 50% | 3.0 kg | 0.39 | 107 g C | 2.0 cycles | 104 g C |
+| 60% | 3.5 kg | 0.47 | 84 g C | 2.5 cycles | 116 g C |
+| 70% | 4.0 kg | 0.54 | 62 g C | 3.4 cycles | 127 g C |
+| 80% | 4.6 kg | 0.61 | 41 g C | 5.1 cycles | 139 g C |
+
+- **Full-size fruit costs store.** A fed watermelon grows about a third of its mass in
+  the dark. At a 60% share the plant then needs 116 g C per m² at dusk, two and a half
+  times its own 46. Idling at a quarter of the daytime upkeep lowers that to 88 and
+  raises the harvest to 4.0 kg.
+- **Daylight-only fruit costs size.** Fed only on the daylight surplus, the same
+  carbon makes 68% more fruits at 59% of full size, about 4.4 kg each, with a store of
+  55.
+- **Earth, same stand and temperatures.** At a 60% share it grows 2.45 kg per m² in
+  29.5 days with a store of 3.8 g C. The Moon grows 43% more fruit per month and needs
+  a store 30 times larger. On Earth too a fruit grows 45% of its mass at night, on the
+  day's starch.
+- **Latitude and side.** At a 60% share the harvest is 3.1 kg at 30°, 2.05 kg at 60°
+  and 3.4 kg on the far side's equator.
+- **Sensitivity** (equatorial near side, 60% share). With 490 or 630 degree-days the
+  fruit takes 39 or 52 days and the harvest changes by 1%. A fruit zone 3 or 6 °C
+  warmer than the air ripens in 39 or 31 days, set just before sunset. It still lives
+  through a night, and the store stays at 117–121. Halving the fruit's upkeep adds 4%
+  to the harvest. More stem and root upkeep (an Earth carbon-use efficiency of 0.4)
+  gives 3.0 kg.
+
+### Limits of the fruit model
+
+- One fruit: growers' timing, one Korean cultivar's weights and a generic growth
+  curve, all measured under Earth's day.
+- Development follows temperature alone, and every pollinated flower sets. Whether a
+  fruit keeps developing through two weeks of darkness, whether it aborts when the
+  night comes, and how its sugar and flesh turn out are open. Cucumber fruits starved
+  early make up much of it later by expanding their cells more (Marcelis 1993); the
+  daylight case allows none of that.
+- The stand is the whole-plant model's (leaf area index 5, with stems and roots). A
+  watermelon crop's own canopy, flowering, seeds, water and nutrients are not
+  modelled.

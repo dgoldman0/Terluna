@@ -191,9 +191,9 @@ def leaf_respiration(lai, temp):
     return np.interp(temp, TEMPS_C, base) * np.asarray(lai, dtype=float) / 5.0
 
 
-def cycle(tables, world, latitude_deg, temp, solar_day_s, stem_root_25, night=1.0, regrow=False,
-          ramp_days=RAMP_DAYS, idle_when='deficit', twilight=True):
-    """Carbon over one solar cycle (g C per m2 of ground) for one way of getting through the night."""
+def fluxes(tables, world, latitude_deg, temp, solar_day_s, stem_root_25, night=1.0, regrow=False,
+           ramp_days=RAMP_DAYS, idle_when='deficit', twilight=True):
+    """Carbon fluxes at each step of one solar cycle (umol m-2 s-1 of ground) for one way through the night."""
     hour = (np.arange(STEPS) + 0.5) / STEPS * 360.0 - 180.0
     elevation = np.degrees(np.arcsin(math.cos(math.radians(latitude_deg)) * np.cos(np.radians(hour))))
     up = elevation > 0
@@ -222,20 +222,29 @@ def cycle(tables, world, latitude_deg, temp, solar_day_s, stem_root_25, night=1.
         cost = 5.0 * LEAF_DRY_G_M2 * CARBON_FRACTION * (1 + GROWTH_RESPIRATION) / GRAMS     # umol C per m2
         growing = leaves_on & (lai < 5.0)
         build[growing] = cost / (growing.sum() * dt)
-    net = gpp - r_leaf - r_stem_root - build
-    store = periodic_storage_requirement(net, dt)
+    return dict(hour=hour, elevation=elevation, up=up, dt=dt, gpp=gpp, r_leaf=r_leaf, r_stem_root=r_stem_root,
+                build=build, idle=idle, par=tables.par(world, elevation),
+                net=gpp - r_leaf - r_stem_root - build)
+
+
+def cycle(tables, world, latitude_deg, temp, solar_day_s, stem_root_25, night=1.0, regrow=False,
+          ramp_days=RAMP_DAYS, idle_when='deficit', twilight=True):
+    """Carbon over one solar cycle (g C per m2 of ground) for one way of getting through the night."""
+    f = fluxes(tables, world, latitude_deg, temp, solar_day_s, stem_root_25, night=night, regrow=regrow,
+               ramp_days=ramp_days, idle_when=idle_when, twilight=twilight)
+    dt, up, gpp, r_leaf, r_stem_root = f['dt'], f['up'], f['gpp'], f['r_leaf'], f['r_stem_root']
+    store = periodic_storage_requirement(f['net'], dt)
     total = lambda x: float(np.sum(x) * dt * GRAMS)
     growth = max(float(store['cycle_net'] * GRAMS), 0.0) / (1 + GROWTH_RESPIRATION)
-    par = tables.par(world, elevation)
     return dict(gpp=total(gpp), twilight_gpp=total(gpp * ~up),
                 leaf_respiration=total(r_leaf), stem_root_respiration=total(r_stem_root),
-                respiration_in_the_dark=total((r_leaf + r_stem_root) * ~up), new_canopy=total(build),
+                respiration_in_the_dark=total((r_leaf + r_stem_root) * ~up), new_canopy=total(f['build']),
                 growth=growth, growth_per_24h=growth * 86400.0 / solar_day_s,
                 carbon_use_efficiency=growth / total(gpp), balance_closes=bool(store['cycle_balance_feasible']),
                 store=float(store['worst_single_cycle_deficit'] * GRAMS),
                 deficit_hours=float(store['deficit_duration_days'] / 3600.0),
-                idle_hours=float(np.sum(idle) * dt / 3600.0) if night < 1.0 else 0.0,
-                dark_hours=float(np.sum(par < DARK_UMOL) * dt / 3600.0))
+                idle_hours=float(np.sum(f['idle']) * dt / 3600.0) if night < 1.0 else 0.0,
+                dark_hours=float(np.sum(f['par'] < DARK_UMOL) * dt / 3600.0))
 
 
 def calibrate(tables, temp_trace, cue=CUE_EARTH):

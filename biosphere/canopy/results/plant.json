@@ -3,7 +3,7 @@
  "producer": {
   "domain": "biosphere",
   "files": {
-   "biosphere/canopy/plant.py": "fda3ff396ee283ff",
+   "biosphere/canopy/plant.py": "8cd3bddc8c1e709a",
    "biosphere/canopy/model.py": "a0432ee55ced9a88",
    "biosphere/canopy/radiation.py": "efee02f040d919dd",
    "biosphere/canopy/leaf.py": "1b73e4e1a597c4ab",

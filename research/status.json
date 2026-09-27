@@ -111,7 +111,7 @@
     },
     {
       "topic": "biosphere",
-      "condition": "periodic_carbon_and_oxygen_requirement_models; hypothetical_traits; clear_sky_spectral_canopy_photosynthesis_moon_and_earth_prospect_d_fvcb; whole_plant_carbon_through_the_lunar_night_with_twilight_and_gcm_temperatures_scenarios",
+      "condition": "periodic_carbon_and_oxygen_requirement_models; hypothetical_traits; clear_sky_spectral_canopy_photosynthesis_moon_and_earth_prospect_d_fvcb; whole_plant_carbon_through_the_lunar_night_with_twilight_and_gcm_temperatures_scenarios; fruit_carbon_on_the_whole_plant_watermelon_degree_day_scenarios",
       "material": [
         "../biosphere/README.md",
         "../ensemble/papers/74a946e2-8f98/seed-02.md",
@@ -121,7 +121,9 @@
         "../biosphere/canopy/model.py",
         "../biosphere/canopy/results/canopy.json",
         "../biosphere/canopy/plant.py",
-        "../biosphere/canopy/results/plant.json"
+        "../biosphere/canopy/results/plant.json",
+        "../biosphere/canopy/fruit.py",
+        "../biosphere/canopy/results/fruit.json"
       ],
       "unresolved": [
         "complete life cycles",
@@ -129,6 +131,7 @@
         "coupled nutrient/energy budgets",
         "canopy photosynthesis over 354 hours of continuous light: acclimation, feedback from full sugar stores and photoinhibition are not modelled, nor are stomata, water supply, leaf temperature or the respiration of stems and roots; clear sky only",
         "whether leaves survive about 240 dark hours without dark-induced senescence, and how far and how fast night metabolism can slow and restart: the whole-plant store is 46 g C per m2 of ground at the daytime rate and 10 at a quarter of it (biosphere/canopy/plant.py, whose strategies are carbon scenarios)",
+        "fruit through the lunar night: a watermelon takes about 45 days at the equator's temperatures and grows a third of its mass in the dark whatever the set time; feeding it there needs a store of about 116 g C per m2 at a 60% fruit share (biosphere/canopy/fruit.py). Untested: whether fruit set, growth and ripening follow degree-days through two weeks of darkness, fruit abortion, and fruit quality",
         "fire at 0.16 g in an oxygenated atmosphere: flame shape, ember lofting and wildfire spread; the bundle makes full-scale partial-gravity combustion research a condition for adding oxygen (July 2026 bundle, archive/july_2026_knowledge_bundle/)",
         "timing: short internal clocks alongside the 708.7-hour environmental cycle (July 2026 bundle, archive/july_2026_knowledge_bundle/)"
       ],

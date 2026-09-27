@@ -29,7 +29,13 @@ at 60°. Every evergreen way through the night closes its carbon budget; idling 
 quarter of the daytime upkeep cuts the store from 46 to 10 g C per m² of ground, while
 regrowing the canopy every cycle leaves a tenth of the growth or none. Stomata, water,
 acclimation to continuous light, full sugar stores and whether leaves survive weeks of
-darkness are not yet in it.
+darkness are not yet in it. [fruit.py](canopy/fruit.py) hangs a watermelon on that
+plant. At the equator's temperatures it takes 45 days from set to harvest, so a third
+of its growth falls in a night whatever the set time; setting it at sunrise costs
+least. With 60% of the plant's new tissue going to fruit, the stand yields 3.5 kg per
+m² per lunar cycle, 43% more than the same stand on Earth. The plant keeps enough
+growth to rebuild its canopy every 2.5 cycles, but feeding the fruit through the dark
+raises the store from 46 to 116 g C per m².
 
 ## Remaining biological work
 
