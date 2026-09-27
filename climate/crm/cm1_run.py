@@ -379,11 +379,13 @@ for _lat, _tag in ((80.0, '80n'), (-80.0, '80s')):
 # The same with the GCM's mean vertical wind at the latitude imposed as large-scale vertical advection: a closed
 # ring cannot rise or sink on average, and the GCM's air sinks over the polar caps at about 2-7 mm/s through
 # most of its depth (the descending branch of its overturning between the equator and the poles).
-for _lat, _tag in ((80.0, '80n'), (-80.0, '80s'), (70.0, '70n'), (-70.0, '70s')):
+for _lat, _tag in ((80.0, '80n'), (-80.0, '80s'), (70.0, '70n'), (-70.0, '70s'), (45.0, '45n'), (-45.0, '45s')):
     CASES[f'ring_{_tag}_lsw'] = dict(
         CASES['ring'], latitude_deg=_lat, band_deg=ROW_BAND_DEG, land_moisture='gcm', large_scale_w='gcm',
-        purpose=f'the circle of latitude {abs(_lat):.0f} {"N" if _lat > 0 else "S"} as a 2-D ring, as ring_{_tag[:2]}'
-                f'{_tag[2]} would be, with the GCM\'s mean vertical wind there imposed as large-scale vertical advection')
+        purpose=f'the circle of latitude {abs(_lat):.0f} {"N" if _lat > 0 else "S"} as a 2-D ring, the Sun crossing it '
+                'once a lunar day, seas and lakes of the 28% scenario at sea level, land as wet as the GCM\'s there, '
+                'the 5% dimmer shield, the GCM design case\'s row nearest the latitude as reference, and its mean '
+                'vertical wind there imposed as large-scale vertical advection')
 
 
 def band_vertical_wind(lat, sigma_edges, flux, rows, radius, gravity):

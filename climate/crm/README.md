@@ -205,6 +205,8 @@ equatorial ring with four differences:
 | 80° S | 1,896 km | 43% | 0.03 | 20.3 °C | 17.1 °C |
 | 70° N | 3,734 km | 12% | 0.05 | 21.3 °C | 18.7 °C |
 | 70° S | 3,734 km | 37% | 0.22 | 21.6 °C | 17.1 °C |
+| 45° N | 7,719 km | 37% | 0.41 | 23.1 °C | 20.1 °C |
+| 45° S | 7,719 km | 33% | 0.46 | 24.4 °C | 19.2 °C |
 
 Both hemispheres are run because they share a sky but not a ground. The GCM's
 air over the two poles agrees to within a degree at every level, and the Sun
@@ -216,7 +218,8 @@ is drier at 70°.
 **The GCM's vertical wind.** A closed ring cannot rise or sink on average, but
 the GCM's air sinks over both polar caps and rises near the equator: its
 overturning between the equator and the poles. Cases `ring_80n_lsw`,
-`ring_80s_lsw`, `ring_70n_lsw` and `ring_70s_lsw` are the rings above with the
+`ring_80s_lsw`, `ring_70n_lsw`, `ring_70s_lsw`, `ring_45n_lsw` and `ring_45s_lsw`
+are the rings above, and two at 45° for the mid-latitudes, with the
 GCM's mean vertical wind at their latitude imposed through CM1's own large-scale
 vertical advection (`dolsw`), which carries temperature, vapour, condensate and
 wind with it. The wind comes from the mass budget of the band around the ring's
