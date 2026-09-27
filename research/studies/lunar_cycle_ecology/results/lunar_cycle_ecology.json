@@ -1,0 +1,963 @@
+{
+ "schema": "terluna.research.lunar-cycle-ecology/1",
+ "producer": {
+  "files": {
+   "research/studies/lunar_cycle_ecology/run.py": "7294dbbb04ac8c08"
+  },
+  "inputs": {
+   "biosphere/canopy/results/plant.json": "c354d2dd2479554e",
+   "biosphere/canopy/results/fruit.json": "e30ca6bbe7abbfb1",
+   "geography/results/atlas.json": "78cfbf2f469eb339",
+   "geography/products/atlas_28pct_4ppd.npz": "dc283827f349fdc1",
+   "geography/results/drainage.json": "1ea4c936c50f31c8"
+  }
+ },
+ "evidence": "Small calculations for an ideas register. The plant and fruit numbers are the biosphere models' clear-sky carbon scenarios at the chosen climate; distances come from the hydrostatic atlas at 28% water; runoff from the first drainage estimate. Nutrient losses use Earth's world-average river chemistry as a stand-in for lunar leaching, and rock stocks use typical lunar soil and crust compositions; flight uses fixed lift-to-drag ratios and muscle efficiencies. The conveyor and lure figures are scenarios with stated assumptions. None of this models an ecosystem, a population or a nutrient cycle. The weathering supply assumes congruent dissolution of soil with the stated composition at the Dessert basalt rate.",
+ "reading_rule": "Carbon in g C per m2 of ground; nutrients in g per m2 of land per year; energy per kilometre as grams of sugar. c4 gives how much warmer the Moon's CO2 puts the C3-C4 crossover. leaves compares the growth needed to replace the canopy at each leaf lifespan with what the plant keeps at each fruit share (equator, near side, day fruit). night gives land temperatures, the air column and the share of it the night's respiration plus the decay of a whole dusk fruit fall would use or add, and the speed of dusk over the ground. flight gives Moon-to-Earth ratios for the same animal and sugar per kilometre for two fliers. distances are area-weighted percentiles over land. nutrients gives the rock stocks of the top metre, the weathering supply (congruent dissolution at the Dessert basalt rate, 1 and 10 times for glassy regolith) and the years to weather through the top metre, the harvest export, Earth's river load at the Moon's runoff as a reference scale, and the dry migrant mass and flight sugar a conveyor would need to bring back a flux that size, against the sugar in a wild forest's dusk fruit fall (30% fruit share). lures gives the chemical power of a lure (photon energy over quantum yield, times 1 or 10 for making the luciferin), alone and spread over the circle it draws insects from, against the plant's night upkeep.",
+ "settings": {
+  "cycles_per_year": 12.37,
+  "design_pressure_pa": 121600.0,
+  "moon_air_k": 294.0,
+  "leaf_lifespan_months": [
+   6.0,
+   12.0,
+   24.0,
+   36.0
+  ],
+  "fliers": {
+   "moth_0.33g": [
+    0.00033,
+    4.0,
+    0.1
+   ],
+   "bird_100g": [
+    0.1,
+    10.0,
+    0.18
+   ]
+  },
+  "fruit_per_100g": {
+   "potassium": 0.112,
+   "phosphorus": 0.011,
+   "magnesium": 0.01,
+   "calcium": 0.007,
+   "sugars": 6.2
+  },
+  "river_mg_l": {
+   "potassium": [
+    1.06,
+    1.29
+   ],
+   "phosphate_p": [
+    0.01,
+    0.0125
+   ],
+   "dissolved_p": [
+    0.025,
+    0.025
+   ],
+   "particulate_p": [
+    0.18,
+    0.53
+   ]
+  },
+  "rock_wt_pct": {
+   "mare_soil": {
+    "K2O": 0.16,
+    "P2O5": 0.13,
+    "CaO": 11.4,
+    "MgO": 9.35
+   },
+   "highland_soil": {
+    "K2O": 0.17,
+    "P2O5": 0.11,
+    "CaO": 15.7,
+    "MgO": 5.7
+   },
+   "kreep_rich": {
+    "K2O": 0.55,
+    "P2O5": 0.51,
+    "CaO": 10.7,
+    "MgO": 9.4
+   },
+   "earth_upper_crust": {
+    "K2O": 2.8,
+    "P2O5": 0.15,
+    "CaO": 3.59,
+    "MgO": 2.48
+   }
+  },
+  "soil": {
+   "bulk_kg_m3": 1500.0,
+   "depth_m": 1.0
+  },
+  "body_p_pct": {
+   "insect": 0.7,
+   "fish": 2.5
+  },
+  "body_k_pct": {
+   "insect": 1.2
+  },
+  "earth_p": {
+   "seabird_colonies_gg_yr": 99.0,
+   "uk_insect_migration": [
+    10000.0,
+    70000.0
+   ],
+   "myvatn_shore_kg_ha_yr": 1.0,
+   "myvatn_emergence_g_m2_yr": [
+    0.15,
+    3.7
+   ],
+   "amazon_dust_g_ha_yr": [
+    7.0,
+    39.0
+   ],
+   "amazon_hydrological_loss_g_ha_yr": [
+    8.0,
+    40.0
+   ],
+   "rivers_dissolved_tg_yr": 1.0,
+   "rivers_particulate_tg_yr": [
+    6.56,
+    20.0
+   ]
+  },
+  "orbital_k_ppm": {
+   "moon_mean": 755.0,
+   "procellarum_kreep_terrane": 2004.0,
+   "feldspathic_highlands_below": 500.0
+  },
+  "airspeed_earth_m_s": {
+   "moth_0.33g": [
+    3.0,
+    5.0
+   ],
+   "bird_100g": [
+    10.0,
+    15.0
+   ]
+  },
+  "insect_dry_share": 0.3,
+  "lure_nm": 530.0,
+  "lure_quantum_yield": [
+   0.001,
+   0.017,
+   0.41
+  ],
+  "lure_flux_per_cm2_s": 1078000000.0,
+  "lure_areas_cm2": [
+   10.0,
+   1000.0,
+   10000.0
+  ],
+  "lure_substrate_factor": [
+   1.0,
+   10.0
+  ],
+  "lure_reach_m": [
+   10.0,
+   25.0
+  ]
+ },
+ "c4": {
+  "moon_co2_pa": 48.64,
+  "earth_co2_pa": 40.53,
+  "at_k": 300.0,
+  "shift_k": 3.606
+ },
+ "leaves": {
+  "canopy_carbon_g_m2": 211.5,
+  "leaf_replacement_g_c_per_cycle": {
+   "6_months": 34.2,
+   "12_months": 17.1,
+   "24_months": 8.55,
+   "36_months": 5.7
+  },
+  "plant_keeps_g_c_per_cycle_equator": {
+   "earth_like": {
+    "0.3": 158.0,
+    "0.5": 111.8,
+    "0.6": 88.98,
+    "0.7": 66.41,
+    "0.8": 44.06
+   },
+   "idle_quarter": {
+    "0.3": 178.9,
+    "0.5": 126.5,
+    "0.6": 100.7,
+    "0.7": 75.16,
+    "0.8": 49.87
+   }
+  }
+ },
+ "night": {
+  "land_temperatures_c": {
+   "near": {
+    "0": {
+     "night_mean_c": 20.1,
+     "coldest_c": 19.4
+    },
+    "30": {
+     "night_mean_c": 19.83,
+     "coldest_c": 19.14
+    },
+    "60": {
+     "night_mean_c": 19.2,
+     "coldest_c": 18.72
+    }
+   },
+   "far": {
+    "0": {
+     "night_mean_c": 19.23,
+     "coldest_c": 18.96
+    },
+    "30": {
+     "night_mean_c": 19.46,
+     "coldest_c": 19.18
+    },
+    "60": {
+     "night_mean_c": 19.04,
+     "coldest_c": 18.84
+    }
+   }
+  },
+  "air_column": {
+   "density_kg_m3": 1.434,
+   "column_kg_m2": 74860.0,
+   "o2_kg_m2": 14500.0,
+   "co2_kg_m2": 45.71,
+   "o2_mole_fraction": 0.1746
+  },
+  "night_draw_equator": {
+   "0.3": {
+    "carbon_g_m2": 121.0,
+    "o2_share_of_column": 2.222e-05,
+    "co2_share_of_column": 0.009699
+   },
+   "0.6": {
+    "carbon_g_m2": 186.7,
+    "o2_share_of_column": 3.43e-05,
+    "co2_share_of_column": 0.01497
+   }
+  },
+  "dusk_speed_km_h": {
+   "0": 15.4,
+   "30": 13.34,
+   "60": 7.701
+  },
+  "night_upkeep_w_m2": {
+   "earth_like": 2.421,
+   "idle_quarter": 0.7043
+  },
+  "dusk_fruit_fall_equator": {
+   "0.3": {
+    "sugar_g_m2": 116.3,
+    "mean_power_over_dark_hours_w_m2": 2.113
+   },
+   "0.6": {
+    "sugar_g_m2": 229.1,
+    "mean_power_over_dark_hours_w_m2": 4.165
+   }
+  }
+ },
+ "flight": {
+  "air_density_kg_m3": {
+   "moon": 1.434,
+   "earth": 1.225
+  },
+  "weight_ratio": 0.1656,
+  "hover_induced_power_ratio": 0.0623,
+  "energy_per_km_ratio_at_fixed_lift_to_drag": 0.1656,
+  "minimum_power_speed_ratio": 0.3761,
+  "fliers": {
+   "moth_0.33g": {
+    "mass_kg": 0.00033,
+    "lift_to_drag": 4.0,
+    "muscle_efficiency": 0.1,
+    "sugar_g_per_km": {
+     "moon": 8.613e-05,
+     "earth": 0.00052
+    },
+    "airspeed_m_s": {
+     "earth": [
+      3.0,
+      5.0
+     ],
+     "moon": [
+      1.128,
+      1.881
+     ]
+    }
+   },
+   "bird_100g": {
+    "mass_kg": 0.1,
+    "lift_to_drag": 10.0,
+    "muscle_efficiency": 0.18,
+    "sugar_g_per_km": {
+     "moon": 0.0058,
+     "earth": 0.03502
+    },
+    "airspeed_m_s": {
+     "earth": [
+      10.0,
+      15.0
+     ],
+     "moon": [
+      3.761,
+      5.642
+     ]
+    }
+   }
+  }
+ },
+ "distances": {
+  "seas_counted": [
+   {
+    "share": 0.1394,
+    "names": [
+     "Oceanus Procellarum",
+     "Mare Frigoris",
+     "Mare Imbrium"
+    ]
+   },
+   {
+    "share": 0.06124,
+    "names": [
+     "Mare Ingenii",
+     "Lacus Tenebrarum"
+    ]
+   },
+   {
+    "share": 0.00753,
+    "names": [
+     "Mare Smythii",
+     "Mare Marginis"
+    ]
+   },
+   {
+    "share": 0.0075,
+    "names": [
+     "Mare Humboldtianum"
+    ]
+   }
+  ],
+  "sea_share_min": 0.005,
+  "grid_pixels_per_degree": 4,
+  "sea": {
+   "p50": 475.8,
+   "p75": 812.4,
+   "p90": 1116.0,
+   "p99": 1536.0,
+   "max_km": 1735.0,
+   "land_share_within": {
+    "50_km": 0.09859,
+    "100_km": 0.1599,
+    "200_km": 0.2657,
+    "500_km": 0.5187
+   }
+  },
+  "any_water": {
+   "p50": 49.76,
+   "p75": 111.6,
+   "p90": 280.3,
+   "p99": 683.5,
+   "max_km": 873.7,
+   "land_share_within": {
+    "50_km": 0.5014,
+    "100_km": 0.723,
+    "200_km": 0.8605,
+    "500_km": 0.959
+   }
+  }
+ },
+ "nutrients": {
+  "runoff_m_per_yr_over_land": 0.3226,
+  "land_area_m2": 27310000000000.0,
+  "sea_area_m2": 10620000000000.0,
+  "land_mean_c": 21.79,
+  "weathering_co2_mol_m2_yr": 0.4228,
+  "rock_stock_top_metre": {
+   "mare_soil": {
+    "potassium_g_m2": 1992.0,
+    "phosphorus_g_m2": 851.1,
+    "potassium_ppm": 1328.0
+   },
+   "highland_soil": {
+    "potassium_g_m2": 2117.0,
+    "phosphorus_g_m2": 720.1,
+    "potassium_ppm": 1411.0
+   },
+   "kreep_rich": {
+    "potassium_g_m2": 6849.0,
+    "phosphorus_g_m2": 3339.0,
+    "potassium_ppm": 4566.0
+   },
+   "earth_upper_crust": {
+    "potassium_g_m2": 34870.0,
+    "phosphorus_g_m2": 982.0,
+    "potassium_ppm": 23240.0
+   }
+  },
+  "weathering_supply": {
+   "mare_soil": {
+    "rock_weathered_g_m2_yr": [
+     48.56,
+     485.6
+    ],
+    "potassium_g_m2_yr": [
+     0.0645,
+     0.645
+    ],
+    "phosphorus_g_m2_yr": [
+     0.02755,
+     0.2755
+    ],
+    "years_to_weather_top_metre": [
+     30890.0,
+     3089.0
+    ]
+   },
+   "highland_soil": {
+    "rock_weathered_g_m2_yr": [
+     50.16,
+     501.6
+    ],
+    "potassium_g_m2_yr": [
+     0.07079,
+     0.7079
+    ],
+    "phosphorus_g_m2_yr": [
+     0.02408,
+     0.2408
+    ],
+    "years_to_weather_top_metre": [
+     29900.0,
+     2990.0
+    ]
+   },
+   "kreep_rich": {
+    "rock_weathered_g_m2_yr": [
+     49.85,
+     498.5
+    ],
+    "potassium_g_m2_yr": [
+     0.2276,
+     2.276
+    ],
+    "phosphorus_g_m2_yr": [
+     0.111,
+     1.11
+    ],
+    "years_to_weather_top_metre": [
+     30090.0,
+     3009.0
+    ]
+   }
+  },
+  "orbital_potassium": {
+   "moon_mean": {
+    "ppm": 755.0,
+    "share_of_earth_crust": 0.03248
+   },
+   "procellarum_kreep_terrane": {
+    "ppm": 2004.0,
+    "share_of_earth_crust": 0.08622
+   },
+   "feldspathic_highlands_below": {
+    "ppm": 500.0,
+    "share_of_earth_crust": 0.02151
+   }
+  },
+  "kreep_maria_flooded": {
+   "Oceanus Procellarum": 0.599,
+   "Mare Imbrium": 0.992
+  },
+  "harvest_export": {
+   "earth_like_0.5": {
+    "fruit_kg_m2_yr": 38.27,
+    "nitrogen_g_m2_yr": 37.35,
+    "potassium_g_m2_yr": 42.86,
+    "phosphorus_g_m2_yr": 4.21,
+    "magnesium_g_m2_yr": 3.827,
+    "calcium_g_m2_yr": 2.679
+   },
+   "earth_like_0.6": {
+    "fruit_kg_m2_yr": 45.7,
+    "nitrogen_g_m2_yr": 44.6,
+    "potassium_g_m2_yr": 51.18,
+    "phosphorus_g_m2_yr": 5.027,
+    "magnesium_g_m2_yr": 4.57,
+    "calcium_g_m2_yr": 3.199
+   },
+   "idle_quarter_0.5": {
+    "fruit_kg_m2_yr": 43.32,
+    "nitrogen_g_m2_yr": 42.28,
+    "potassium_g_m2_yr": 48.51,
+    "phosphorus_g_m2_yr": 4.765,
+    "magnesium_g_m2_yr": 4.332,
+    "calcium_g_m2_yr": 3.032
+   },
+   "idle_quarter_0.6": {
+    "fruit_kg_m2_yr": 51.72,
+    "nitrogen_g_m2_yr": 50.48,
+    "potassium_g_m2_yr": 57.93,
+    "phosphorus_g_m2_yr": 5.69,
+    "magnesium_g_m2_yr": 5.172,
+    "calcium_g_m2_yr": 3.621
+   }
+  },
+  "earth_river_load_at_moon_runoff_g_m2_yr": {
+   "potassium": [
+    0.3419,
+    0.4161
+   ],
+   "phosphate_p": [
+    0.003226,
+    0.004032
+   ],
+   "dissolved_p": [
+    0.008064,
+    0.008064
+   ],
+   "particulate_p": [
+    0.05806,
+    0.171
+   ]
+  },
+  "earth_phosphorus_returns_g_m2_yr": {
+   "seabird_colonies": 0.0006649,
+   "uk_high_flying_insects": 0.0001429,
+   "myvatn_shore_within_50_m": 0.1,
+   "amazon_dust": [
+    0.0007,
+    0.0039
+   ],
+   "amazon_hydrological_loss": [
+    0.0008,
+    0.004
+   ],
+   "earth_rivers_dissolved": 0.006716,
+   "earth_rivers_particulate": [
+    0.04406,
+    0.1343
+   ]
+  },
+  "conveyor": {
+   "round_trip_km": 951.7,
+   "deaths_per_visit": [
+    0.1,
+    0.5
+   ],
+   "fruit_sugar_g_m2_yr_at_30pct": 1438.0,
+   "one_way_hours": {
+    "moth_0.33g": [
+     117.1,
+     70.28
+    ],
+    "bird_100g": [
+     35.14,
+     23.43
+    ]
+   },
+   "dissolved_phosphorus": {
+    "target_g_m2_yr": [
+     0.003226,
+     0.008064
+    ],
+    "dry_mass_left_on_land_g_m2_yr": {
+     "insect": [
+      0.4608,
+      1.152
+     ],
+     "fish": [
+      0.129,
+      0.3226
+     ]
+    },
+    "sea_emergence_needed_g_dry_m2_yr": [
+     1.185,
+     2.962
+    ],
+    "moth_deaths_per_m2_yr": [
+     4.655,
+     11.64
+    ],
+    "moth_flight_sugar_g_m2_yr": [
+     0.763,
+     9.538
+    ],
+    "share_of_fruit_sugar": [
+     0.0005307,
+     0.006633
+    ]
+   },
+   "particulate_phosphorus": {
+    "target_g_m2_yr": [
+     0.05806,
+     0.171
+    ],
+    "dry_mass_left_on_land_g_m2_yr": {
+     "insect": [
+      8.295,
+      24.42
+     ],
+     "fish": [
+      2.323,
+      6.839
+     ]
+    },
+    "sea_emergence_needed_g_dry_m2_yr": [
+     21.33,
+     62.8
+    ],
+    "moth_deaths_per_m2_yr": [
+     83.78,
+     246.7
+    ],
+    "moth_flight_sugar_g_m2_yr": [
+     13.73,
+     202.2
+    ],
+    "share_of_fruit_sugar": [
+     0.009552,
+     0.1406
+    ]
+   },
+   "potassium": {
+    "target_g_m2_yr": [
+     0.3419,
+     0.4161
+    ],
+    "dry_mass_left_on_land_g_m2_yr": {
+     "insect": [
+      28.49,
+      34.68
+     ]
+    },
+    "sea_emergence_needed_g_dry_m2_yr": [
+     73.27,
+     89.17
+    ],
+    "moth_deaths_per_m2_yr": [
+     287.8,
+     350.3
+    ],
+    "moth_flight_sugar_g_m2_yr": [
+     47.18,
+     287.1
+    ],
+    "share_of_fruit_sugar": [
+     0.03281,
+     0.1997
+    ]
+   }
+  }
+ },
+ "lures": {
+  "photon_energy_j": 3.748e-19,
+  "night_upkeep_w_m2": {
+   "earth_like": 2.421,
+   "idle_quarter": 0.7043
+  },
+  "lures": [
+   {
+    "area_cm2": 10.0,
+    "photons_s": 10780000000.0,
+    "quantum_yield": 0.001,
+    "lure_w": [
+     4.042e-06,
+     4.042e-05
+    ],
+    "ground_w_m2": [
+     2.058e-09,
+     1.286e-07
+    ],
+    "share_of_night_upkeep_one_lure_per_m2": {
+     "earth_like": [
+      1.67e-06,
+      1.67e-05
+     ],
+     "idle_quarter": [
+      5.739e-06,
+      5.739e-05
+     ]
+    },
+    "share_of_night_upkeep_at_reach": {
+     "earth_like": [
+      8.503e-10,
+      5.314e-08
+     ],
+     "idle_quarter": [
+      2.923e-09,
+      1.827e-07
+     ]
+    }
+   },
+   {
+    "area_cm2": 10.0,
+    "photons_s": 10780000000.0,
+    "quantum_yield": 0.017,
+    "lure_w": [
+     2.377e-07,
+     2.377e-06
+    ],
+    "ground_w_m2": [
+     1.211e-10,
+     7.568e-09
+    ],
+    "share_of_night_upkeep_one_lure_per_m2": {
+     "earth_like": [
+      9.821e-08,
+      9.821e-07
+     ],
+     "idle_quarter": [
+      3.376e-07,
+      3.376e-06
+     ]
+    },
+    "share_of_night_upkeep_at_reach": {
+     "earth_like": [
+      5.002e-11,
+      3.126e-09
+     ],
+     "idle_quarter": [
+      1.719e-10,
+      1.075e-08
+     ]
+    }
+   },
+   {
+    "area_cm2": 10.0,
+    "photons_s": 10780000000.0,
+    "quantum_yield": 0.41,
+    "lure_w": [
+     9.858e-09,
+     9.858e-08
+    ],
+    "ground_w_m2": [
+     5.02e-12,
+     3.138e-10
+    ],
+    "share_of_night_upkeep_one_lure_per_m2": {
+     "earth_like": [
+      4.072e-09,
+      4.072e-08
+     ],
+     "idle_quarter": [
+      1.4e-08,
+      1.4e-07
+     ]
+    },
+    "share_of_night_upkeep_at_reach": {
+     "earth_like": [
+      2.074e-12,
+      1.296e-10
+     ],
+     "idle_quarter": [
+      7.129e-12,
+      4.455e-10
+     ]
+    }
+   },
+   {
+    "area_cm2": 1000.0,
+    "photons_s": 1078000000000.0,
+    "quantum_yield": 0.001,
+    "lure_w": [
+     0.0004042,
+     0.004042
+    ],
+    "ground_w_m2": [
+     2.058e-07,
+     1.286e-05
+    ],
+    "share_of_night_upkeep_one_lure_per_m2": {
+     "earth_like": [
+      0.000167,
+      0.00167
+     ],
+     "idle_quarter": [
+      0.0005739,
+      0.005739
+     ]
+    },
+    "share_of_night_upkeep_at_reach": {
+     "earth_like": [
+      8.503e-08,
+      5.314e-06
+     ],
+     "idle_quarter": [
+      2.923e-07,
+      1.827e-05
+     ]
+    }
+   },
+   {
+    "area_cm2": 1000.0,
+    "photons_s": 1078000000000.0,
+    "quantum_yield": 0.017,
+    "lure_w": [
+     2.377e-05,
+     0.0002377
+    ],
+    "ground_w_m2": [
+     1.211e-08,
+     7.568e-07
+    ],
+    "share_of_night_upkeep_one_lure_per_m2": {
+     "earth_like": [
+      9.821e-06,
+      9.821e-05
+     ],
+     "idle_quarter": [
+      3.376e-05,
+      0.0003376
+     ]
+    },
+    "share_of_night_upkeep_at_reach": {
+     "earth_like": [
+      5.002e-09,
+      3.126e-07
+     ],
+     "idle_quarter": [
+      1.719e-08,
+      1.075e-06
+     ]
+    }
+   },
+   {
+    "area_cm2": 1000.0,
+    "photons_s": 1078000000000.0,
+    "quantum_yield": 0.41,
+    "lure_w": [
+     9.858e-07,
+     9.858e-06
+    ],
+    "ground_w_m2": [
+     5.02e-10,
+     3.138e-08
+    ],
+    "share_of_night_upkeep_one_lure_per_m2": {
+     "earth_like": [
+      4.072e-07,
+      4.072e-06
+     ],
+     "idle_quarter": [
+      1.4e-06,
+      1.4e-05
+     ]
+    },
+    "share_of_night_upkeep_at_reach": {
+     "earth_like": [
+      2.074e-10,
+      1.296e-08
+     ],
+     "idle_quarter": [
+      7.129e-10,
+      4.455e-08
+     ]
+    }
+   },
+   {
+    "area_cm2": 10000.0,
+    "photons_s": 10780000000000.0,
+    "quantum_yield": 0.001,
+    "lure_w": [
+     0.004042,
+     0.04042
+    ],
+    "ground_w_m2": [
+     2.058e-06,
+     0.0001286
+    ],
+    "share_of_night_upkeep_one_lure_per_m2": {
+     "earth_like": [
+      0.00167,
+      0.0167
+     ],
+     "idle_quarter": [
+      0.005739,
+      0.05739
+     ]
+    },
+    "share_of_night_upkeep_at_reach": {
+     "earth_like": [
+      8.503e-07,
+      5.314e-05
+     ],
+     "idle_quarter": [
+      2.923e-06,
+      0.0001827
+     ]
+    }
+   },
+   {
+    "area_cm2": 10000.0,
+    "photons_s": 10780000000000.0,
+    "quantum_yield": 0.017,
+    "lure_w": [
+     0.0002377,
+     0.002377
+    ],
+    "ground_w_m2": [
+     1.211e-07,
+     7.568e-06
+    ],
+    "share_of_night_upkeep_one_lure_per_m2": {
+     "earth_like": [
+      9.821e-05,
+      0.0009821
+     ],
+     "idle_quarter": [
+      0.0003376,
+      0.003376
+     ]
+    },
+    "share_of_night_upkeep_at_reach": {
+     "earth_like": [
+      5.002e-08,
+      3.126e-06
+     ],
+     "idle_quarter": [
+      1.719e-07,
+      1.075e-05
+     ]
+    }
+   },
+   {
+    "area_cm2": 10000.0,
+    "photons_s": 10780000000000.0,
+    "quantum_yield": 0.41,
+    "lure_w": [
+     9.858e-06,
+     9.858e-05
+    ],
+    "ground_w_m2": [
+     5.02e-09,
+     3.138e-07
+    ],
+    "share_of_night_upkeep_one_lure_per_m2": {
+     "earth_like": [
+      4.072e-06,
+      4.072e-05
+     ],
+     "idle_quarter": [
+      1.4e-05,
+      0.00014
+     ]
+    },
+    "share_of_night_upkeep_at_reach": {
+     "earth_like": [
+      2.074e-09,
+      1.296e-07
+     ],
+     "idle_quarter": [
+      7.129e-09,
+      4.455e-07
+     ]
+    }
+   }
+  ]
+ }
+}

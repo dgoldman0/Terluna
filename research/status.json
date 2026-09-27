@@ -123,7 +123,9 @@
         "../biosphere/canopy/plant.py",
         "../biosphere/canopy/results/plant.json",
         "../biosphere/canopy/fruit.py",
-        "../biosphere/canopy/results/fruit.json"
+        "../biosphere/canopy/results/fruit.json",
+        "studies/lunar_cycle_ecology/README.md",
+        "studies/lunar_cycle_ecology/results/lunar_cycle_ecology.json"
       ],
       "unresolved": [
         "complete life cycles",
@@ -133,9 +135,10 @@
         "whether leaves survive about 240 dark hours without dark-induced senescence, and how far and how fast night metabolism can slow and restart: the whole-plant store is 46 g C per m2 of ground at the daytime rate and 10 at a quarter of it (biosphere/canopy/plant.py, whose strategies are carbon scenarios)",
         "fruit designed for the lunar day (biosphere/canopy/fruit.py): a 7.5 kg fruit set at sunrise and ripe at sunset needs a program of about 200 degree-days at the equator (a third of today's watermelon's 560) and fills at up to 0.9 kg a day; the model sets these as requirements. Untested: whether a fruit's program can be compressed that far, cell division before set, fruit set on a dawn cue, sugar loading and ripening in the last days, and fruit quality",
         "fire at 0.16 g in an oxygenated atmosphere: flame shape, ember lofting and wildfire spread; the bundle makes full-scale partial-gravity combustion research a condition for adding oxygen (July 2026 bundle, archive/july_2026_knowledge_bundle/)",
-        "timing: short internal clocks alongside the 708.7-hour environmental cycle (July 2026 bundle, archive/july_2026_knowledge_bundle/)"
+        "timing: short internal clocks alongside the 708.7-hour environmental cycle (July 2026 bundle, archive/july_2026_knowledge_bundle/)",
+        "nutrients flow one way from land to sea without uplift or volcanism; potassium is the scarce rock nutrient (the lunar surface averages 755 ppm, 3% of Earth's upper crust), and farms carry off far more than rivers; a sea-forest migrant conveyor can return dissolved phosphorus at the top of Earth's lake-insect rates, not potassium or eroded phosphorus (research/studies/lunar_cycle_ecology, screening arithmetic)"
       ],
-      "next_session_task": "Gather measured dark tolerance (dark-induced senescence, respiration through extended darkness, polar-night survival) to bound the store-and-idle strategies; then clouds, stomata and water in the canopy and plant models; calibrate trait and exchange ranges from complete sources."
+      "next_session_task": "The author reviews the selection in the ecology register (research/studies/lunar_cycle_ecology). Then gather measured dark tolerance (dark-induced senescence, respiration through extended darkness, polar-night survival) to bound the store-and-idle strategies; build a land, lake and sea budget of nitrogen, phosphorus and potassium; add clouds, stomata and water to the canopy and plant models."
     },
     {
       "topic": "habitation",

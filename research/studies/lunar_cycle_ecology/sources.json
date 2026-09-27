@@ -1,0 +1,520 @@
+{
+ "source_admission": "Published values used as constants, quoted ranges or cited findings; no external dataset files are admitted. 'access' records how far each source was checked in this study: 'abstract' or 'full text' when read here; 'search summary' when the finding was confirmed through a literature search's reading of the paper and not re-read here; 'agent report' when a literature-gathering agent read the source and quoted it. Model products of this repository are cited by path in the README.",
+ "sources": [
+  {
+   "citation": "Velez-Ramirez et al. 2017, Functional Plant Biology 44, 597-611",
+   "title": "On the induction of injury in tomato under continuous light: circadian asynchrony as the main triggering factor",
+   "url": "https://www.publish.csiro.au/fp/FP16285",
+   "use": "continuous-light injury in tomato traced to circadian asynchrony, with spectrum, light continuity, continuous photosynthesis and photo-oxidative pressure tested (A4, C1)",
+   "access": "abstract, read by the literature agent; confirmed by a search summary"
+  },
+  {
+   "citation": "Velez-Ramirez et al. 2014, Nature Communications 5, 4549",
+   "title": "A single locus confers tolerance to continuous light and allows substantial yield increase in tomato",
+   "url": "https://www.nature.com/articles/ncomms5549",
+   "use": "CAB-13 and continuous-light tolerance from a wild tomato allele; yield up to 20% higher under continuous light (C1)",
+   "access": "full text, read by the literature agent"
+  },
+  {
+   "citation": "Haque et al. 2017, Frontiers in Plant Science 8, 1602",
+   "title": "Temperature variation under continuous light restores tomato leaf photosynthesis and maintains the diurnal pattern in stomatal conductance",
+   "url": "https://www.frontiersin.org/journals/plant-science/articles/10.3389/fpls.2017.01602/full",
+   "use": "a daily temperature cycle under continuous light prevents the injury (C1)",
+   "access": "search summary (finding); authors and volume checked on the journal page"
+  },
+  {
+   "citation": "Lanoue et al. 2019, Frontiers in Plant Science 10, 1114",
+   "title": "Alternating red and blue light-emitting diodes allows for injury-free tomato production with continuous lighting",
+   "url": "https://www.frontiersin.org/journals/plant-science/articles/10.3389/fpls.2019.01114/full",
+   "use": "alternating light quality prevents continuous-light injury (C1)",
+   "access": "search summary (finding); authors and volume checked on the journal page"
+  },
+  {
+   "citation": "Graf et al. 2010, PNAS 107, 9458-9463",
+   "title": "Circadian control of carbohydrate availability for growth in Arabidopsis plants at night",
+   "url": "https://www.pnas.org/doi/10.1073/pnas.0914299107",
+   "use": "starch exhausted about 24 h after the last dawn in 28-h and 17-h days (C2)",
+   "access": "abstract, read by the literature agent"
+  },
+  {
+   "citation": "Scialdone et al. 2013, eLife 2, e00669",
+   "title": "Arabidopsis plants perform arithmetic division to prevent starvation at night",
+   "url": "https://elifesciences.org/articles/00669",
+   "use": "starch divided by the time to expected dawn (C2)",
+   "access": "search summary"
+  },
+  {
+   "citation": "Weaver & Amasino 2001, Plant Physiology 127, 876",
+   "title": "Senescence is induced in individually darkened Arabidopsis leaves, but inhibited in whole darkened plants",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/11706170/",
+   "use": "darkening a single leaf induces senescence; darkening the whole plant inhibits it (B5)",
+   "access": "search summary of the abstract"
+  },
+  {
+   "citation": "Baena-Gonzalez et al. 2007, Nature 448, 938",
+   "title": "A central integrator of transcription networks in plant stress and energy signalling",
+   "url": "https://www.nature.com/articles/nature06069",
+   "use": "SnRK1 (KIN10/11) links energy status to growth and survival; kin10 kin11 impairs night starch mobilization (B5, C3)",
+   "access": "search summary of the abstract"
+  },
+  {
+   "citation": "Xiong et al. 2013, Nature 496, 181",
+   "title": "Glucose-TOR signalling reprograms the transcriptome and activates meristems",
+   "url": "https://www.nature.com/articles/nature12030",
+   "use": "glucose-TOR signalling as the growth-side energy switch (C3)",
+   "access": "search summary of the abstract"
+  },
+  {
+   "citation": "Savage, Haines & Holbrook 2015, Plant, Cell & Environment",
+   "title": "The making of giant pumpkins: how selective breeding changed the phloem of Cucurbita maxima from source to sink",
+   "url": "https://onlinelibrary.wiley.com/doi/10.1111/pce.12502",
+   "use": "giant varieties carry more phloem into the fruit; about 15 kg a day at peak, as reported by Science News Explores (D2)",
+   "access": "search summary; the 15 kg/day figure from https://www.snexplores.org/article/heres-how-giant-pumpkins-get-so-big"
+  },
+  {
+   "citation": "Wiechers, Kahlen & Stutzel 2011, Annals of Botany",
+   "title": "Dry matter partitioning models for the simulation of individual fruit growth in greenhouse cucumber canopies",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3189842/",
+   "use": "cucumber fruits grow from 5 to 30 cm in 10.1-14.5 days (D2)",
+   "access": "full text read through a fetch"
+  },
+  {
+   "citation": "Marcelis, Fruit growth and dry matter partitioning in cucumber, PhD thesis, Wageningen",
+   "url": "https://edepot.wur.nl/206322",
+   "use": "the fraction of dry matter going to fruits cycles between 40 and 90% over a season (D3)",
+   "access": "search summary of the thesis abstract; year not confirmed here (the related model appeared in Annals of Botany 74, 43, 1994)"
+  },
+  {
+   "citation": "USDA FoodData Central 167765, Watermelon, raw",
+   "url": "https://fdc.nal.usda.gov/food-details/167765/nutrients",
+   "use": "per 100 g: water 91.45 g, protein 0.61 g, K 112 mg, P 11 mg, Mg 10 mg, Ca 7 mg, sugars 6.2 g (G3; fruit sugar)",
+   "access": "read through the FoodData Central API, read by the literature agent"
+  },
+  {
+   "citation": "Dessert et al. 2003, Chemical Geology 202, 257",
+   "use": "basalt weathering law, through the atmospheric CO2 study (research/studies/atmospheric_co2)",
+   "access": "formula checked in that study"
+  },
+  {
+   "citation": "Oliveira et al. 2015, Current Biology 25, 964-968",
+   "title": "Circadian control sheds light on fungal bioluminescence",
+   "url": "https://doi.org/10.1016/j.cub.2015.02.021",
+   "use": "LED-lit artificial mushrooms at 530 nm caught 42 insects against 12 in dark controls over five nights (19 traps each); glow circadian (E3)",
+   "access": "full text (PMC4382382), read by the literature agent"
+  },
+  {
+   "citation": "Broadley & Stringer 2001, Invertebrate Biology 120, 170-177",
+   "title": "Prey attraction by larvae of the New Zealand glowworm, Arachnocampa luminosa",
+   "url": "https://doi.org/10.1111/j.1744-7410.2001.tb00121.x",
+   "use": "traps over glowworms caught more; flies 86-89% of the catch (E3)",
+   "access": "abstract, read by the literature agent"
+  },
+  {
+   "citation": "von Byern et al. 2019, Scientific Reports 9, 3082",
+   "title": "Biomechanical properties of fishing lines of the glowworm Arachnocampa luminosa",
+   "url": "https://doi.org/10.1038/s41598-019-39098-1",
+   "use": "sit-and-lure predation with adhesive fishing lines under 488-nm light (E3)",
+   "access": "full text, read by the literature agent"
+  },
+  {
+   "citation": "Mitiouchkina et al. 2020, Nature Biotechnology 38, 944-946",
+   "title": "Plants with genetically encoded autoluminescence",
+   "url": "https://doi.org/10.1038/s41587-020-0500-9",
+   "use": "fungal pathway in tobacco; up to 6.47e10 photons per minute per cm2 from flowers (Supplementary Table 1); glow follows the circadian clock and was effectively off on the third and fourth days of darkness (E3; lure brightness in run.py)",
+   "access": "full text and supplementary information, read by the literature agent"
+  },
+  {
+   "citation": "Kotlobay et al. 2018, PNAS 115, 12728-12732",
+   "title": "Genetically encodable bioluminescent system from fungi",
+   "url": "https://doi.org/10.1073/pnas.1803615115",
+   "use": "the fungal luciferin (caffeic acid) cycle; luciferase emission maximum 520 nm (E3)",
+   "access": "full text, read by the literature agent"
+  },
+  {
+   "citation": "Kaskova et al. 2017, Science Advances 3, e1602847",
+   "title": "Mechanism and color modulation of fungal bioluminescence",
+   "url": "https://doi.org/10.1126/sciadv.1602847",
+   "use": "fungal chemiluminescence quantum yield 0.1-0.9% (pH 6-8) (E3; run.py)",
+   "access": "full text and supplementary tables, read by the literature agent"
+  },
+  {
+   "citation": "Teranishi 2018, Luminescence 33, 1235-1242",
+   "url": "https://doi.org/10.1002/bio.3540",
+   "use": "Mycena chlorophos quantum yield 1.7% (gill luciferase) and 0.096% (stipe) (run.py)",
+   "access": "abstract, read by the literature agent"
+  },
+  {
+   "citation": "Ando et al. 2008, Nature Photonics 2, 44-47",
+   "title": "Firefly bioluminescence quantum yield and colour change by pH-sensitive green emission",
+   "url": "https://doi.org/10.1038/nphoton.2007.251",
+   "use": "firefly quantum yield 41.0 +/- 7.4% (run.py)",
+   "access": "abstract, read by the literature agent"
+  },
+  {
+   "citation": "Fabian et al. 2024, Nature Communications 15, 689",
+   "title": "Why flying insects gather at artificial light",
+   "url": "https://doi.org/10.1038/s41467-024-44785-3",
+   "use": "insects turn their backs toward the light rather than steering to it (E3)",
+   "access": "full text, read by the literature agent"
+  },
+  {
+   "citation": "Truxa & Fiedler 2012, European Journal of Entomology 109, 77-84",
+   "title": "Attraction to light - from how far do moths return to weak artificial sources of light?",
+   "url": "https://doi.org/10.14411/eje.2012.010",
+   "use": "radius of attraction of weak light traps often below 10 m; 28% recapture within 15 m, 12% at 16-40 m (E3; run.py)",
+   "access": "full text, read by the literature agent"
+  },
+  {
+   "citation": "Degen et al. 2016, Journal of Animal Ecology 85, 1352-1360",
+   "url": "https://doi.org/10.1111/1365-2656.12540",
+   "use": "street lights: an equivalent attraction radius of about 23 m (E3; run.py)",
+   "access": "abstract, read by the literature agent"
+  },
+  {
+   "citation": "Boyes et al. 2021, Insect Conservation and Diversity 14, 167-187",
+   "title": "Is light pollution driving moth population declines? A review of causal mechanisms across the life cycle",
+   "url": "https://doi.org/10.1111/icad.12447",
+   "use": "artificial light at night affects moths across most life stages (E3)",
+   "access": "search summary; full text read by the literature agent"
+  },
+  {
+   "citation": "Givnish et al. 1984, American Naturalist 124, 479-497",
+   "url": "https://doi.org/10.1086/284289",
+   "use": "cost-benefit model restricting carnivorous plants to sunny, moist, nutrient-poor sites (E4)",
+   "access": "abstract, read by the literature agent"
+  },
+  {
+   "citation": "Ellison & Adamec 2011, Oikos 120, 1721-1731",
+   "url": "https://doi.org/10.1111/j.1600-0706.2011.19604.x",
+   "use": "carnivory's costs rise while benefits saturate; 30-76% of prey N and 57-96% of P, K, Mg and micronutrients taken up (E4)",
+   "access": "full text, read by the literature agent"
+  },
+  {
+   "citation": "Ellison 2006, Plant Biology 8, 740-747",
+   "url": "https://doi.org/10.1055/s-2006-923956",
+   "use": "photosynthetic nutrient-use efficiency of carnivorous plants 20-50% of non-carnivorous plants' (E4)",
+   "access": "abstract, read by the literature agent"
+  },
+  {
+   "citation": "Millett, Jones & Waldron 2003, New Phytologist 158, 527-534",
+   "url": "https://doi.org/10.1046/j.1469-8137.2003.00763.x",
+   "use": "sundews (Drosera) take about 50% of their N from prey in Britain (E4)",
+   "access": "abstract, read by the literature agent"
+  },
+  {
+   "citation": "Schulze et al. 1997, Oecologia 112, 464-471",
+   "url": "https://doi.org/10.1007/s004420050333",
+   "use": "Nepenthes mirabilis 61.5% of tiller N from prey (E4)",
+   "access": "abstract, read by the literature agent"
+  },
+  {
+   "citation": "Clarke et al. 2009, Biology Letters 5, 632-635",
+   "title": "Tree shrew lavatories: a novel nitrogen sequestration strategy in a tropical pitcher plant",
+   "url": "https://doi.org/10.1098/rsbl.2009.0311",
+   "use": "Nepenthes lowii takes 57-100% of its foliar N from tree shrew faeces (E5)",
+   "access": "abstract and part of the full text, read by the literature agent"
+  },
+  {
+   "citation": "Grafe et al. 2011, Biology Letters 7, 436-439",
+   "title": "A novel resource-service mutualism between bats and pitcher plants",
+   "url": "https://doi.org/10.1098/rsbl.2010.1141",
+   "use": "about 33.8% of foliar N from Hardwicke's woolly bats; the plant, named N. rafflesiana var. elongata there, is now N. hemsleyana (Scharmann & Grafe 2013) (E5)",
+   "access": "abstract, read by the literature agent"
+  },
+  {
+   "citation": "Proches et al. 2006, Biological Journal of the Linnean Society 87, 27-43",
+   "title": "An overview of the Cape geophytes",
+   "url": "https://doi.org/10.1111/j.1095-8312.2006.00557.x",
+   "use": "the Cape as the world's foremost centre of geophyte diversity, about 2,100 species (F1)",
+   "access": "abstract, read by the literature agent"
+  },
+  {
+   "citation": "Parsons 2000, Australian Journal of Botany 48, 39-43",
+   "url": "https://doi.org/10.1071/BT98056",
+   "use": "most geophyte taxa are dormant in summer and grow in the cool season (F1)",
+   "access": "abstract, read by the literature agent"
+  },
+  {
+   "citation": "Howard et al. 2019, American Journal of Botany 106, 850-863",
+   "url": "https://doi.org/10.1002/ajb2.1289",
+   "use": "geophytes inhabit cooler, drier and more thermally variable climates than non-geophytes (F1)",
+   "access": "abstract, read by the literature agent"
+  },
+  {
+   "citation": "Dafni, Cohen & Noy-Meir 1981, Annals of the Missouri Botanical Garden 68",
+   "url": "https://doi.org/10.2307/2398893",
+   "use": "large perennial storage organs expected and found in arid, unpredictable areas (F1)",
+   "access": "abstract (OCR), read by the literature agent"
+  },
+  {
+   "citation": "Wright et al. 2004, Nature 428, 821-827",
+   "title": "The worldwide leaf economics spectrum",
+   "url": "https://doi.org/10.1038/nature02403",
+   "use": "leaf lifespans from 0.9 to 288 months across species; evergreens longer on average with wide ranges (D4). The GLOPNET dataset itself asks users to notify its organisers of any publication use; no statistics computed from it are used here.",
+   "access": "full text, read by the literature agent"
+  },
+  {
+   "citation": "Reich, Walters & Ellsworth 1997, PNAS 94, 13730-13734",
+   "url": "https://doi.org/10.1073/pnas.94.25.13730",
+   "use": "mean minimum and maximum leaf lifespans among six biomes 2.5 and 66 months (D4)",
+   "access": "table read through a fetch, read by the literature agent"
+  },
+  {
+   "citation": "Kaiser et al. 2016, Nature 540, 69-73",
+   "title": "The genomic basis of circadian and circalunar timing adaptations in a midge",
+   "url": "https://doi.org/10.1038/nature20151",
+   "use": "Clunio marinus emergence at low tides around new and full moon, set by circalunar and circadian clocks (C5)",
+   "access": "full text, read by the literature agent"
+  },
+  {
+   "citation": "Caspers 1984, Marine Biology 79, 229-236",
+   "url": "https://doi.org/10.1007/BF00393254",
+   "use": "Samoan palolo swarming at the third quarter moon of October or November (C5)",
+   "access": "abstract, read by the literature agent"
+  },
+  {
+   "citation": "Harrison et al. 1984, Science 223, 1186-1189",
+   "title": "Mass spawning in tropical reef corals",
+   "url": "https://doi.org/10.1126/science.223.4641.1186",
+   "use": "32 coral species spawn a few nights after late-spring full moons on the Great Barrier Reef (C5)",
+   "access": "abstract, read by the literature agent"
+  },
+  {
+   "citation": "Becher et al. 2012, Functional Ecology 26, 822-828",
+   "title": "Yeast, not fruit volatiles mediate Drosophila melanogaster attraction, oviposition and development",
+   "url": "https://doi.org/10.1111/j.1365-2435.2012.02006.x",
+   "use": "yeast alone suffices for fruit-fly attraction, egg-laying and larval development (E1)",
+   "access": "abstract, read by the literature agent"
+  },
+  {
+   "citation": "Otero et al. 2018, Nature Communications 9, 246",
+   "title": "Seabird colonies as important global drivers in the nitrogen and phosphorus cycles",
+   "url": "https://doi.org/10.1038/s41467-017-02446-8",
+   "use": "591 Gg N and 99 Gg P excreted at breeding colonies a year (H2; run.py)",
+   "access": "full text, read by the literature agent"
+  },
+  {
+   "citation": "Zwolicki et al. 2013, Polar Biology 36, 363-372",
+   "title": "Guano deposition and nutrient enrichment in the vicinity of planktivorous and piscivorous seabird colonies in Spitsbergen",
+   "url": "https://doi.org/10.1007/s00300-012-1265-5",
+   "use": "guano 0.32-0.37 g per m2 a day near colonies; deposition falls off within about 50-320 m (H2, H5)",
+   "access": "full text, read by the literature agent"
+  },
+  {
+   "citation": "Helfield & Naiman 2001, Ecology 82, 2403-2409",
+   "title": "Effects of salmon-derived nitrogen on riparian forest growth and implications for stream productivity",
+   "url": "https://doi.org/10.1890/0012-9658(2001)082[2403:EOSDNO]2.0.CO;2",
+   "use": "22-24% of foliar N from salmon; 86 against 307 years to 50 cm diameter; enrichment within 25-100 m (H2, H5)",
+   "access": "full text, read by the literature agent"
+  },
+  {
+   "citation": "Dreyer et al. 2015, Ecology 96, 499-509",
+   "title": "Quantifying aquatic insect deposition from lake to land",
+   "url": "https://doi.org/10.1890/14-0704.1",
+   "use": "Myvatn midge emergence 0.15-3.7 g dry per m2 a year; 1 kg P per ha a year within 50 m in a high year; most deposition within 100-200 m (H2, H4, H5; run.py)",
+   "access": "full text, read by the literature agent; earlier trap-based rates (Gratton et al. 2008) are 20-30 times too high"
+  },
+  {
+   "citation": "Gratton, Donaldson & Vander Zanden 2008, Ecosystems 11, 764-774",
+   "title": "Ecosystem linkages between lakes and the surrounding terrestrial landscape in northeast Iceland",
+   "url": "https://doi.org/10.1007/s10021-008-9158-8",
+   "use": "adult midges 9.2% N and 1.3% P (H6); their deposition rates are superseded by Dreyer et al. 2015",
+   "access": "full text, read by the literature agent"
+  },
+  {
+   "citation": "Green 2008, Arctic, Antarctic, and Alpine Research 40, 74-80",
+   "title": "Migratory Bogong moths (Agrotis infusa) transport arsenic and concentrate it to lethal effect by estivating gregariously in alpine regions of the Snowy Mountains of Australia",
+   "url": "https://doi.org/10.1657/1523-0430(06-100)[GREEN]2.0.CO;2",
+   "use": "about 1,000 km migration; about 0.33 g moths; arsenic brought from away from the mountains (H2, H6; run.py moth mass)",
+   "access": "read through a summarising fetch, read by the literature agent"
+  },
+  {
+   "citation": "Green 2011, Austral Ecology 36, 25-34",
+   "title": "The transport of nutrients and energy into the Australian Snowy Mountains by migrating bogong moths Agrotis infusa",
+   "url": "https://doi.org/10.1111/j.1442-9993.2010.02109.x",
+   "use": "about 1,015 million moths die above 1500 m a year, bringing 7.2 t N and 0.97 t P (model-based) (H2)",
+   "access": "abstract, read by the literature agent"
+  },
+  {
+   "citation": "Hu et al. 2016, Science 354, 1584-1587",
+   "title": "Mass seasonal bioflows of high-flying insect migrants",
+   "url": "https://doi.org/10.1126/science.aah4379",
+   "use": "about 3.4 trillion insects and 100 t N and 10 t P a year over about 70,000 km2 of southern Britain (H2; run.py)",
+   "access": "full text of the accepted manuscript, read by the literature agent"
+  },
+  {
+   "citation": "Yu et al. 2015, Geophysical Research Letters 42, 1984-1991",
+   "title": "The fertilizing role of African dust in the Amazon rainforest: a first multiyear assessment based on data from CALIPSO",
+   "url": "https://doi.org/10.1002/2015GL063040",
+   "use": "dust P 23 (7-39) g per ha a year against hydrological loss 8-40 (G5; run.py)",
+   "access": "full text, read by the literature agent"
+  },
+  {
+   "citation": "Crews et al. 1995, Ecology 76, 1407-1424",
+   "title": "Changes in soil phosphorus fractions and ecosystem dynamics across a long chronosequence in Hawaii",
+   "url": "https://doi.org/10.2307/1938144",
+   "use": "primary mineral P 82% of total P at 300 years, 1% at 20,000 years (G1)",
+   "access": "abstract, read by the literature agent"
+  },
+  {
+   "citation": "Vitousek & Farrington 1997, Biogeochemistry 37, 63-75",
+   "title": "Nutrient limitation and soil development: experimental test of a biogeochemical theory",
+   "url": "https://doi.org/10.1023/A:1005757218475",
+   "use": "N limits the youngest Hawaiian site, P the 4.1-million-year site (G1)",
+   "access": "search summary, read by the literature agent"
+  },
+  {
+   "citation": "Wardle, Walker & Bardgett 2004, Science 305, 509-513",
+   "title": "Ecosystem properties and forest decline in contrasting long-term chronosequences",
+   "url": "https://doi.org/10.1126/science.1098778",
+   "use": "forest decline with increasing phosphorus limitation across six chronosequences (G1)",
+   "access": "abstract, read by the literature agent"
+  },
+  {
+   "citation": "Meybeck 1982, American Journal of Science 282, 401-450",
+   "title": "Carbon, nitrogen, and phosphorus transport by world rivers",
+   "url": "https://doi.org/10.2475/ajs.282.4.401",
+   "use": "natural phosphate P 10-12.5 ug/L, total dissolved P 25 ug/L, 1.0 Tg/yr; particulate 95% of natural river P, 20 Tg/yr (G6; run.py)",
+   "access": "full text (OCR, table checked visually), read by the literature agent"
+  },
+  {
+   "citation": "Mayorga et al. 2010, Environmental Modelling & Software 25, 837-853",
+   "title": "Global Nutrient Export from WaterSheds 2 (NEWS 2)",
+   "url": "https://doi.org/10.1016/j.envsoft.2010.01.007",
+   "use": "total P export 9 Tg/yr, 76.5% particulate; 6.56 Tg particulate P to the coast (run.py)",
+   "access": "full text, read by the literature agent"
+  },
+  {
+   "citation": "Meybeck 1994, in National Research Council, Material Fluxes on the Surface of the Earth",
+   "title": "Origin and variable composition of present day riverborne materials",
+   "url": "https://doi.org/10.17226/1992",
+   "use": "natural river potassium 33 ueq/L discharge-weighted, 27 median (1.29 and 1.06 mg/L); ocean aerosols traced 2,000 km inland (G5; run.py)",
+   "access": "full text, read by the literature agent"
+  },
+  {
+   "citation": "McKay et al. 1991, The lunar regolith, Lunar Sourcebook chapter 7, Table 7.15",
+   "url": "https://www.lpi.usra.edu/publications/books/lunar_sourcebook/pdf/Chapter07.pdf",
+   "use": "average soil K2O, P2O5, CaO and MgO at the Apollo and Luna sites (G2; run.py)",
+   "access": "full text, table image checked, read by the literature agent"
+  },
+  {
+   "citation": "Taylor et al. 1991, Lunar rocks, Lunar Sourcebook chapter 6, Table A6.9",
+   "use": "KREEP basalts and breccias 0.53-0.83% K2O, 2400-3400 ug/g P (G4)",
+   "access": "page image, read by the literature agent"
+  },
+  {
+   "citation": "Prettyman et al. 2006, Journal of Geophysical Research 111, E12007, as reported by Zhu et al. 2013, Scientific Reports 3, 1611",
+   "url": "https://doi.org/10.1029/2005JE002656",
+   "use": "Lunar Prospector potassium: 755 ppm mean, 2004 ppm in the Procellarum KREEP Terrane; Chang'E-2 highlands under 500 ppm (G2; run.py)",
+   "access": "secondary (Zhu et al. 2013, full text), read by the literature agent"
+  },
+  {
+   "citation": "Rudnick & Gao 2003, Treatise on Geochemistry 3, 1-64",
+   "title": "Composition of the continental crust",
+   "url": "https://doi.org/10.1016/B0-08-043751-6/03016-4",
+   "use": "upper crust K2O 2.80, P2O5 0.15, CaO 3.59, MgO 2.48 wt% (G2; run.py)",
+   "access": "values read from the georefdatar dataset (2014 revision), read by the literature agent"
+  },
+  {
+   "citation": "Woods et al. 2004, Functional Ecology 18, 103-109",
+   "title": "Allometric and phylogenetic variation in insect phosphorus content",
+   "url": "https://doi.org/10.1111/j.1365-2435.2004.00823.x",
+   "use": "insect P 0.62% (large) to 0.97% (small) of dry mass (H6; run.py)",
+   "access": "abstract, read by the literature agent"
+  },
+  {
+   "citation": "Wiesenborn 2011, Florida Entomologist 94, 71-80",
+   "title": "Nitrogen content in riparian arthropods is most dependent on allometry and order",
+   "url": "https://doi.org/10.1653/024.094.0110",
+   "use": "insect N about 9.4-11.1% of dry mass (H6)",
+   "access": "full text, read by the literature agent"
+  },
+  {
+   "citation": "Finke & Oonincx 2023, Insects as food for insectivores, in Mass Production of Beneficial Organisms, 2nd edition, 511-540",
+   "url": "https://doi.org/10.1016/B978-0-12-822106-8.00019-1",
+   "use": "insect potassium 0.6-2.0% of dry matter (run.py)",
+   "access": "full text, read by the literature agent"
+  },
+  {
+   "citation": "Sterner & George 2000, Ecology 81, 127-140",
+   "title": "Carbon, nitrogen, and phosphorus stoichiometry of cyprinid fishes",
+   "url": "https://doi.org/10.1890/0012-9658(2000)081[0127:CNAPSO]2.0.CO;2",
+   "use": "fish P about 1-5% of dry mass (H6; run.py)",
+   "access": "full text, read by the literature agent"
+  },
+  {
+   "citation": "Hendrixson, Sterner & Kay 2007, Journal of Fish Biology 70, 121-140",
+   "title": "Elemental stoichiometry of freshwater fishes",
+   "url": "https://doi.org/10.1111/j.1095-8649.2006.01280.x",
+   "use": "bone holds about 73% of fish P (H6)",
+   "access": "full text, read by the literature agent"
+  },
+  {
+   "citation": "Lavoie et al. 2013, Environmental Science & Technology 47, 13385-13394",
+   "title": "Biomagnification of mercury in aquatic food webs: a worldwide meta-analysis",
+   "url": "https://doi.org/10.1021/es403103t",
+   "use": "methylmercury rises about 8.1-fold per trophic level (H6)",
+   "access": "full text, read by the literature agent"
+  },
+  {
+   "citation": "Pelletier et al. 2025, Science of the Total Environment 958, 178069",
+   "title": "Trophic magnification rates of eighteen trace elements in freshwater food webs",
+   "url": "https://doi.org/10.1016/j.scitotenv.2024.178069",
+   "use": "selenium neither biomagnified nor biodiluted (median TMF 1.01) (H6)",
+   "access": "abstract, read by the literature agent"
+  },
+  {
+   "citation": "Blais et al. 2005, Science 309, 445",
+   "title": "Arctic seabirds transport marine-derived contaminants",
+   "url": "https://doi.org/10.1126/science.1112658",
+   "use": "pond sediments most affected by seabirds: 60 times DDT, 25 times mercury (H6)",
+   "access": "abstract, read by the literature agent"
+  },
+  {
+   "citation": "Alerstam et al. 2011, Proceedings of the Royal Society B 278, 3074-3080",
+   "title": "Convergent patterns of long-distance nocturnal migration in noctuid moths and passerine birds",
+   "url": "https://doi.org/10.1098/rspb.2011.0058",
+   "use": "migrating noctuid moths fly at 3-5 m/s airspeed, passerines at 10-15 (H3; run.py)",
+   "access": "read through a summarising fetch, read by the literature agent"
+  },
+  {
+   "citation": "Henningsson & Hedenstrom 2011, Journal of Experimental Biology 214, 382-393; Rosen & Hedenstrom 2001, Journal of Experimental Biology 204, 1153-1166",
+   "use": "gliding lift-to-drag ratios of 12.5 (swift) and 12.6 (jackdaw) (run.py)",
+   "access": "abstracts, read by the literature agent"
+  },
+  {
+   "citation": "Ellington 1985, Journal of Experimental Biology 115, 293-304; Ward et al. 2001, Journal of Experimental Biology 204, 3311-3322",
+   "use": "flight muscle efficiency under 10% in insects; 0.13-0.23 (0.18 recommended) in starlings (run.py)",
+   "access": "abstracts, read by the literature agent"
+  },
+  {
+   "citation": "Cheng & Sun 2016, Scientific Reports 6, 25706",
+   "use": "hovering insects reach lift-to-drag ratios of only about 1; no forward-flight value for migrating moths was found, so the moth's ratio of 4 is an assumption (run.py)",
+   "access": "abstract, read by the literature agent"
+  },
+  {
+   "citation": "FAO 2003, Food energy - methods of analysis and conversion factors, Food and Nutrition Paper 77",
+   "use": "carbohydrate 17 kJ/g, monosaccharides 15.7 kJ/g, fat 37 kJ/g (run.py)",
+   "access": "full text, read by the literature agent"
+  },
+  {
+   "citation": "Johnson 2003, British Geological Survey report CR/03/004N",
+   "title": "Database of the iodine content of soils populated with data from published literature",
+   "url": "https://nora.nerc.ac.uk/id/eprint/10725/1/CR03004N.pdf",
+   "use": "soil iodine geometric mean 11.6 ug/g within 50 km of the coast, 2.6 beyond; no simple correlation with distance (G5)",
+   "access": "full text, read by the literature agent"
+  },
+  {
+   "citation": "Fuge & Johnson 1986, Environmental Geochemistry and Health 8, 31-54",
+   "title": "The geochemistry of iodine - a review",
+   "url": "https://doi.org/10.1007/BF02311063",
+   "use": "most soil iodine comes from the atmosphere and ultimately the oceans (G5)",
+   "access": "abstract, read by the literature agent"
+  },
+  {
+   "citation": "Bernacchi et al. 2001, Plant, Cell & Environment 24, 253",
+   "use": "temperature response of Gamma*, for the C3-C4 crossover shift (A3; run.py), through the atmospheric CO2 study",
+   "access": "as checked in research/studies/atmospheric_co2/sources.json"
+  }
+ ]
+}

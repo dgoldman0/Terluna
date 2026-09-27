@@ -48,6 +48,7 @@ the explorable experience, which reads them as baked products, is in
 | [forest_patch](studies/forest_patch/README.md) | Three-dimensional patch airflow, tree load sharing, compliant foundations, shared soil and damage | Wind climatology, gusts, nonlinear failure and evolved morphology open |
 | [atmospheric_co2](studies/atmospheric_co2/README.md) | Biology (plant CO2 needs, a C3 leaf model), weathering (a basalt law) and atmosphere (CO2 forcing, exobase): the CO2 level plants need, drawdown by biosphere build-up and weathering, and the return a settled Moon needs | Literature synthesis with Earth rates; no box model, ocean uptake or lunar soils |
 | [protection_architecture](studies/protection_architecture/README.md) | Atmosphere (the loss response), climate (dimming), protection (hardware), engineering (supply) and the decisions register: the requirements for the optical shield and charged-particle protection, and what each loss budget asks of them | Screening loss model with the exosphere's losses; the loss budget, the ultraviolet cut-off and the protected radius are the author's to set; hardware, holding and supply are still to design |
+| [lunar_cycle_ecology](studies/lunar_cycle_ecology/README.md) | Biosphere (plant and fruit carbon), geography (seas, lakes, runoff), atmosphere (air column, flight) and illumination (darkness): a register of design ideas for plants, animals, the night food web and the nutrient and mineral cycles, with light calculations and a recommended selection | Ideas and screening arithmetic; no ecosystem, population or nutrient-cycle model; the selection is the author's to make |
 
 The forest-patch folder also holds a [reviewed checkpoint](studies/forest_patch/reviewed/README.md)
 from a separate lineage (57 tests, 90-m spacing, 20-m/s reservoir flow), whose
@@ -64,6 +65,7 @@ OPENBLAS_NUM_THREADS=1 python -m research.studies.megaforest_wind.run       # re
 OPENBLAS_NUM_THREADS=1 python -m research.studies.forest_patch.run --quick  # results in research/runs/forest_patch
 python -m research.studies.atmospheric_co2.run                             # results in studies/atmospheric_co2/results
 OPENBLAS_NUM_THREADS=1 python -m research.studies.protection_architecture.run # results in studies/protection_architecture/results
+OPENBLAS_NUM_THREADS=1 python -m research.studies.lunar_cycle_ecology.run     # results in studies/lunar_cycle_ecology/results
 ```
 
 For the environment screens, supply `--protection-archive /path/to/Lunar_Protection_Model.zip`

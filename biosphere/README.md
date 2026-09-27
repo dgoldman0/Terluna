@@ -40,6 +40,15 @@ its canopy every 2.4 cycles, and its store stays at 46 g C per m². Today's wate
 takes 45 days, lives through a night, and needs a store of 116 g C per m² to reach
 full size.
 
+## Ecology of the lunar cycle
+
+The [ecology register](../research/studies/lunar_cycle_ecology/README.md) collects the
+design ideas built on these models: plants for the long night and the long day, the
+day fruit, the warm night's food web, plains of storage organs and forests of fruit,
+and the nutrient and mineral cycles, including a sea-to-forest migrant cycle. Each idea
+is set against the models and the literature, and the register recommends which to
+carry forward.
+
 ## Remaining biological work
 
 The wider portfolio retains soils, aquatic communities, detrital/subsurface habitats, varied plant architectures, aerial exchange and human developmental requirements. Nutrient compartments, ecological interactions, plant hydraulics, structural support and complete life cycles still need separate models and empirical tests. Megaforests remain one candidate within this scope.
