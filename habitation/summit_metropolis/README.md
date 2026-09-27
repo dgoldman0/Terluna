@@ -69,7 +69,8 @@ half Earth's speed and snow lies fluffier; skiing works on Earth's slope angles,
 
 ## The metropolis
 
-**Size.** At least 10 million people; the figure is open, with 50–100 million under consideration. At a sixth
+**Size.** About 100 million people at about 40,000 per km², within about 32 km of the tower: a rough planning
+scale, chosen on 2026-09-27. At a sixth
 of Earth's gravity height stops limiting density: the same steel reaches 2.5–3 times as high, the winds are light,
 and sky boats reach upper floors, which shrinks the lift cores that cap Earth's towers. A green district whose
 towers cover a fifth of the ground and average 30 storeys, at about 70 m² of floor per person for home, work and
@@ -127,7 +128,6 @@ it reaches milestones:
 
 ## Open
 
-- The population figure.
 - Sizing the legs, the transfer ring, the rings and the crown's docking arms in the tower model.
 - The long-haul ship class and berth count.
 - The land per person for food, and the power and heat plan for the chosen population.
