@@ -360,3 +360,9 @@ and the wind carries about 1.95 GW through it. The Betz limit on that is 1.16 GW
 - **Fire.** Flight does not settle fire safety at 0.16 g. The [port fire study](../port_fire/README.md) works out
   how flames and smoke behave under weak buoyancy in the port's spaces, the compartments that give people time to
   leave, and what the tower's shafts, water, sealed zone and firefighting from the air ask.
+
+**Form, chosen on 2026-09-27.** The author chose a round diagrid that gathers into six splayed legs, and full rings
+of floors, each a block of a few storeys with a park and open-air shops on its roof
+([decisions](../../decisions.md#the-summit-port-and-metropolis),
+[metropolis brief](../../../habitation/summit_metropolis/README.md)). The frame and floor figures above still
+assume the square lattice and a band every 200 m; the tower model has yet to size the new form.

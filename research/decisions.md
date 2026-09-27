@@ -87,3 +87,22 @@ The author confirmed these rules on 2026-09-26 and regards them as set, to be re
 | Aerial and gliding life is a major feature of the world. | July | Stands |
 | High-altitude life is sparse: microbes or engineered radiation-hard films. | July | Stands |
 | Long-endurance high-altitude platforms serve farside astronomy and nearside earthshine photometry. | July | Stands |
+
+## The summit port and metropolis
+
+The author set these on 2026-09-27. The [summit tower study](studies/summit_tower/README.md#the-central-port)
+sizes the port, and the [metropolis brief](../habitation/summit_metropolis/README.md) collects the tower's form,
+the metropolis and the first estimates behind them.
+
+| Decision | Source | Status |
+|---|---|---|
+| The Moon's largest sky port stands on the far side's summit (5.4° N, 158.6° W). It is commercial: trade, travel, hospitality and short stays, with no homes and no industry. It holds about 1.5 million people on a regular basis. | Author, 2026-09-27 | Stands |
+| Long-haul sky ships dock in the flight band, so the tower rises 24 km, to 35.6 km above sea level. Regional docks sit at 10–15 km, and every block of floors has berths. | Author, 2026-09-27 | Stands |
+| The frame is a round diagrid that gathers into six splayed legs, as on the Eiffel Tower, through a deep transfer ring a kilometre or two up. The ground between the legs stays open. | Author, 2026-09-27 | Stands; the tower model has yet to size the legs and the ring |
+| The floors are full rings round the frame, each a block of a few storeys with a park and open-air shops on its roof. They replace the earlier arcs turned by the golden angle; a first estimate gives about 20 rings. | Author, 2026-09-27 | Stands; the tower model has yet to size the rings |
+| Open-air parks follow the air: for everyone up to 3 km above the summit, for residents and acclimatised visitors up to 10 km, and a few short-visit high gardens, winter parks among them, from 10 to 15 km. Above 15 km the blocks are sealed. Every interior is kept at a comfortable pressure and temperature. | Author, 2026-09-27 | Stands |
+| A beautiful, sustainable mega-metropolis surrounds the port and centres on it, with at least 10 million people. | Author, 2026-09-27 | Stands; the population figure is open, with 50–100 million under consideration |
+| The metropolis uses the third dimension: small sky boats serve much as cars do, gliders fly throughout, and glider and parkour zones are designed in. | Author, 2026-09-27 | Stands |
+| A high-capacity backbone of metro, rail and large sky ferries carries the metropolis, with sky boats and gliders alongside. | Author, 2026-09-27 | Stands |
+| Fusion supplies most of the Moon's local power, supplemented by regional solar and wind. | Author, 2026-09-27 | Planning assumption; fusion is a conditional technology here ([engineering](../engineering/README.md)) |
+| Regional agriculture and foraging feed the metropolis. | Author, 2026-09-27 | Planning assumption; the land per person has not been computed |
