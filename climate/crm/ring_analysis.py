@@ -1,4 +1,5 @@
-"""What the equatorial ring shows: weather through the lunar day, storms, winds and clouds, from CM1 output.
+"""What a ring shows, on the equator or a circle of latitude: weather through the lunar day, storms, winds and
+clouds, from CM1 output.
 
     climate/gcm/.venv/bin/python -m climate.crm.ring_analysis ring --from-day 10
 
@@ -36,7 +37,7 @@ STORM_HALF_WIDTH = 120                # columns each side of the heaviest storm 
 FIELDS_SCHEMA = 'terluna.climate.crm-ring-fields/1'
 FIELDS_READING_RULE = ('Sections are means over every column by local time (10-degree bins, 0 = noon) and height, to '
                        '90 km; eastward wind is toward later local times. The storm is the snapshot with the heaviest '
-                       'rain of the span: 240 columns (1,440 km) centred on its core, heights to 100 km, instantaneous. '
+                       'rain of the span: 240 columns (about 1,450 km) centred on its core, heights to 100 km, instantaneous. '
                        'The rain map keeps the heaviest rain in each block of four columns (24 km), every 3 hours, with '
                        'the position of local noon.')
 EVIDENCE = ('CM1 r22.0 in two dimensions along the equator at lunar gravity (6-km columns, 111 levels to 150 km), '
@@ -47,6 +48,24 @@ EVIDENCE = ('CM1 r22.0 in two dimensions along the equator at lunar gravity (6-k
             'circulation along the equator; it has no north-south dimension, so air cannot converge on the storms '
             'from the north and south, and two-dimensional convection organises into lines more readily than '
             'real storms do.')
+
+
+def evidence(latitude: float) -> str:
+    """What a ring on the given circle of latitude is: EVIDENCE on the equator."""
+    if latitude == 0.0:
+        return EVIDENCE
+    return (f'CM1 r22.0 in two dimensions along the circle of latitude {abs(latitude):.0f} {"N" if latitude > 0 else "S"} at '
+            'lunar gravity (6-km columns, 111 levels to 150 km), with the Morrison microphysics given lunar fall speeds, '
+            'RRTMG radiation for the design air, the Sun crossing the ring once a lunar day and rising at most '
+            f'{90 - abs(latitude):.0f} degrees (equinox sunlight), the Coriolis force of the latitude on departures from '
+            'the reference wind, the 28% scenario\'s seas and lakes laid flat at sea level with a placeholder land '
+            'surface that evaporates as readily as the GCM\'s land on that circle, and the domain-mean temperature, '
+            'vapour and winds above 8-16 km held to the GCM design case\'s row nearest the latitude (A28_dim5, the 5% '
+            'dimmer shield). It has no north-south dimension, so air cannot cross the pole or converge on the storms '
+            'from the north and south; the land\'s wetness is prescribed, so rain does not wet it; two-dimensional '
+            'convection organises into lines more readily than real storms do.')
+
+
 READING_RULE = ('Composites are by local hour angle (0 = noon, negative = morning) in 10-degree bins; heights are '
                 'above the flat ground at sea level. Snapshots are instantaneous, every 3 model hours. Storm '
                 'widths are contiguous stretches of surface rain above 1 mm/h in one snapshot.')
@@ -150,6 +169,8 @@ def analyse(name: str, from_day: float) -> dict:
     if not use:
         raise RuntimeError(f'no output after day {from_day}')
     zh, land = geo['zh'], geo['land']
+    latitude = record.get('latitude_deg', 0.0)
+    has_v = any(key == 'vinterp' for key, _ in grads_layout(case / 'cm1out_s.ctl')[1])   # rings off the equator
     bins = np.linspace(-180.0, 180.0, HOUR_BINS + 1)
     surface_names = ('t2', 'tsk', 'rh2', 'tw2', 'prate', 'evap', 's10', 'u10', 'hpbl', 'lcl', 'cape', 'lwp', 'cwp', 'pwat')
     comp = {k: np.zeros((2, HOUR_BINS)) for k in (*surface_names, 'cloud', 'cloud_high', 'cloud_low', 'cloud_flight',
@@ -158,7 +179,7 @@ def analyse(name: str, from_day: float) -> dict:
     count = np.zeros((2, HOUR_BINS))
     cloud_top_count = np.zeros((2, HOUR_BINS))
     cloud_profile = np.zeros((2, 2, zh.size))                          # land/water, day/night, height
-    section = {k: np.zeros((HOUR_BINS, zh.size)) for k in ('u', 'w', 'cloud', 'th_anomaly', 'qv_anomaly')}
+    section = {k: np.zeros((HOUR_BINS, zh.size)) for k in ('u', 'w', 'cloud', 'th_anomaly', 'qv_anomaly', *(('v',) if has_v else ()))}
     section_count = np.zeros(HOUR_BINS)                                # all columns, by local time and height
     profile_count = np.zeros((2, 2))
     wind_samples = {z: [] for z in WIND_HEIGHTS_M}
@@ -200,6 +221,7 @@ def analyse(name: str, from_day: float) -> dict:
                             rain_water=d['qr'][:, cols] * 1000.0, updraft=d['winterp'][:, cols],
                             rain_mm_h=prate[cols], wind_10m=d['s10'][cols], air_2m=d['t2'][cols] - 273.15, land=land[cols])
         u = d['uinterp']
+        speed = np.hypot(u, d['vinterp']) if has_v else np.abs(u)          # horizontal wind speed
         th_anomaly = d['th'] - d['th'].mean(axis=1, keepdims=True)
         qv_anomaly = d['qv'] - d['qv'].mean(axis=1, keepdims=True)
         for b in range(HOUR_BINS):
@@ -207,7 +229,7 @@ def analyse(name: str, from_day: float) -> dict:
             if m.any():
                 section_count[b] += m.sum()
                 for key, field in (('u', u), ('w', d['winterp']), ('cloud', cloudy), ('th_anomaly', th_anomaly),
-                                   ('qv_anomaly', qv_anomaly)):
+                                   ('qv_anomaly', qv_anomaly), *((('v', d['vinterp']),) if has_v else ())):
                     section[key][b] += field[:, m].sum(axis=1)
         for s, sel in ((0, land), (1, ~land)):
             for b in range(HOUR_BINS):
@@ -227,14 +249,14 @@ def analyse(name: str, from_day: float) -> dict:
                 comp['cloud_top'][s, b] += np.nansum(top[ok])
                 comp['cloud_base'][s, b] += np.nansum(base[ok])
                 for j, z in enumerate(WIND_HEIGHTS_M):
-                    comp['wind_levels'][s, b, j] += np.abs(u[ilev[z], m]).sum()
+                    comp['wind_levels'][s, b, j] += speed[ilev[z], m].sum()
             for dn, sun in ((0, np.cos(np.radians(h)) > 0.0), (1, np.cos(np.radians(h)) <= 0.0)):
                 m = sel & sun
                 if m.any():
                     cloud_profile[s, dn] += cloudy[:, m].sum(axis=1)
                     profile_count[s, dn] += m.sum()
         for z in WIND_HEIGHTS_M:
-            wind_samples[z].append(np.abs(u[ilev[z]]))
+            wind_samples[z].append(speed[ilev[z]])
             vertical_samples[z].append(d['winterp'][ilev[z]])
         for key, sel in (('land', land), ('water', ~land)):
             wind10[key].append(d['s10'][sel])
@@ -269,7 +291,7 @@ def analyse(name: str, from_day: float) -> dict:
     section = {key: v / np.maximum(section_count, 1)[:, None] for key, v in section.items()}
     pct = lambda a, q: float(np.percentile(np.concatenate(a), q))
     summary = dict(
-        schema=SCHEMA, case=name, evidence=EVIDENCE, reading_rule=READING_RULE,
+        schema=SCHEMA, case=name, evidence=evidence(latitude), reading_rule=READING_RULE, latitude_deg=latitude,
         span_days=[(use[0] - 1) * tap / 86400.0, (use[-1] - 1) * tap / 86400.0], snapshots=len(use),
         land_share=float(land.mean()),
         air_2m_c={key: dict(p1=pct(v, 1) - 273.15, median=pct(v, 50) - 273.15, p99=pct(v, 99) - 273.15)
@@ -297,7 +319,7 @@ def analyse(name: str, from_day: float) -> dict:
         rain_spells=rain_spells(np.array(hov['prate']), land, tap),
         by_hour_angle=hour_angle_table(0.5 * (bins[1:] + bins[:-1]), composites),
         circulation=circulation_table(0.5 * (bins[1:] + bins[:-1]), zh, section),
-        gcm=gcm_equator_composites())
+        gcm=gcm_equator_composites(band=record['reference']['band_deg'], latitude=latitude))
     arrays = dict(hour_angle_deg=0.5 * (bins[1:] + bins[:-1]), heights_m=zh, wind_heights_m=np.array(WIND_HEIGHTS_M),
                   cloud_profile_land_day=profiles[0, 0], cloud_profile_land_night=profiles[0, 1],
                   cloud_profile_water_day=profiles[1, 0], cloud_profile_water_night=profiles[1, 1],
@@ -336,6 +358,7 @@ def write_fields(path: Path, summary: dict, arrays: dict) -> None:
         section_eastward_m_s=arrays['section_u'][:, sec].astype(np.float32),
         section_upward_m_s=arrays['section_w'][:, sec].astype(np.float32),
         section_cloud_fraction=arrays['section_cloud'][:, sec].astype(np.float32),
+        **({'section_northward_m_s': arrays['section_v'][:, sec].astype(np.float32)} if 'section_v' in arrays else {}),
         storm_day=np.float32(arrays['storm_day']), storm_hour_angle_deg=np.float32(arrays['storm_hour_angle_deg']),
         storm_rain_max_mm_h=np.float32(arrays['storm_rain_max_mm_h']), storm_height_km=zh[low].astype(np.float32),
         storm_x_km=(np.arange(2 * STORM_HALF_WIDTH) * (arrays['x_km'][1] - arrays['x_km'][0])).astype(np.float32),
@@ -373,10 +396,13 @@ def circulation_table(centres, zh, section) -> dict:
     (positive toward later local times, since places to the east are further into their day) and the mean
     vertical wind."""
     rows = [level_index(zh, z) for z in WIND_HEIGHTS_M]
-    return dict(hour_angle_deg=[round(float(c), 1) for c in centres], heights_km=[round(z / 1000.0) for z in WIND_HEIGHTS_M],
-                eastward_m_s=[[round(float(v), 2) for v in section['u'][:, k]] for k in rows],
-                upward_cm_s=[[round(float(v) * 100.0, 2) for v in section['w'][:, k]] for k in rows],
-                cloud_fraction=[[round(float(v), 3) for v in section['cloud'][:, k]] for k in rows])
+    out = dict(hour_angle_deg=[round(float(c), 1) for c in centres], heights_km=[round(z / 1000.0) for z in WIND_HEIGHTS_M],
+               eastward_m_s=[[round(float(v), 2) for v in section['u'][:, k]] for k in rows],
+               upward_cm_s=[[round(float(v) * 100.0, 2) for v in section['w'][:, k]] for k in rows],
+               cloud_fraction=[[round(float(v), 3) for v in section['cloud'][:, k]] for k in rows])
+    if 'v' in section:                                                 # off the equator, the wind turns
+        out['northward_m_s'] = [[round(float(v), 2) for v in section['v'][:, k]] for k in rows]
+    return out
 
 
 def hour_angle_table(centres, composites) -> dict:
@@ -488,9 +514,10 @@ def storm_summary(rows, snapshots):
                 hour_angle_deg=stats(get('hour_angle_deg')))
 
 
-def gcm_equator_composites(run='A28_dim5', years=(15, 24), band=10.0, bins=10):
-    """The GCM design case on the equator by local time, for comparison: air near the ground, ground,
-    rain and cloud cover of sea-level seas and of land (3-day means, ten 36-degree bins)."""
+def gcm_equator_composites(run='A28_dim5', years=(15, 24), band=10.0, bins=10, latitude=0.0):
+    """The GCM design case on the equator (or the rows within `band` degrees of another latitude) by local
+    time, for comparison: air near the ground, ground, rain and cloud cover of sea-level seas and of land
+    (3-day means, ten 36-degree bins)."""
     import netCDF4
     from climate.gcm.climatology import subsolar_longitudes
     from climate.crm.cm1_run import planet
@@ -504,12 +531,12 @@ def gcm_equator_composites(run='A28_dim5', years=(15, 24), band=10.0, bins=10):
             lsm = np.asarray(d['lsm'][:], float)[0] > 0.5
     f = {k: np.concatenate(v) for k, v in get.items()}
     height = np.loadtxt(folder.parent / 'inputs' / 'moon_topography.sra', skiprows=1).ravel().reshape(lsm.shape) / planet()['gravity_m_s2']
-    rows = (np.abs(lat) < band)[:, None]
+    rows = (np.abs(lat - latitude) < band)[:, None]
     groups = dict(land=rows & lsm, water=rows & ~lsm & (height < 1.0))
     sub = subsolar_longitudes(f['czen'], lat, lon)
     hour = (lon[None, :] - sub[:, None] + 180.0) % 360.0 - 180.0                       # (t, lon)
     k = np.clip(((hour + 180.0) / (360.0 / bins)).astype(int), 0, bins - 1)
-    out = dict(run=run, years=list(years), band_deg=band, hour_angle_deg=list((np.arange(bins) + 0.5) * 360.0 / bins - 180.0))
+    out = dict(run=run, years=list(years), band_deg=band, latitude_deg=latitude, hour_angle_deg=list((np.arange(bins) + 0.5) * 360.0 / bins - 180.0))
     for name, sel in groups.items():
         rows_out = {}
         for key, scale, offset in (('tas', 1.0, -273.15), ('ts', 1.0, -273.15), ('pr', 86400e3 / 24.0, 0.0), ('clt', 1.0, 0.0)):

@@ -178,6 +178,47 @@ are the GCM's. Two-dimensional storms organise into lines more readily than
 real storms, 6-km columns (1 km at Earth scale) resolve deep storms but not the
 smallest clouds, and lifetimes come from three-hourly snapshots.
 
+## Rings near the poles
+
+Cases `ring_80n`, `ring_80s`, `ring_70n` and `ring_70s` are circles of
+latitude, set up as the equatorial ring with four differences:
+
+- **The ring is shorter**, 2πR cos φ: 1,896 km in 312 columns at 80°, and
+  3,734 km in 624 columns at 70°.
+- **The Sun stays low.** It still crosses the ring once a lunar day, but climbs
+  at most 10° at 80° and 20° at 70°. It keeps the equinox: the Moon's 1.5° tilt
+  raises and lowers the daily sunlight at 80° by about a quarter over the year,
+  alternately in the two hemispheres, and the rings leave that out.
+- **The wind turns.** The Coriolis force of the latitude (5.2 × 10⁻⁶ s⁻¹ at 80°,
+  an inertial period of 14 Earth days) acts on departures from the reference
+  wind, whose balancing pressure gradient CM1 supplies (`lspgrad = 1`). The
+  north–south wind is held to zero above 8–16 km along with the rest.
+- **The reference is the GCM row nearest the latitude** (80.3° or 69.2°), and
+  the placeholder land evaporates as readily as the GCM's land on that row.
+  PlaSim's bucket lets land evaporate min(1, W / (0.4 × 0.5 m)) of what open
+  water would, the same factor as CM1's moisture availability. On the
+  equatorial ring's rows that factor is 0.61, against the ring's 0.5.
+
+| Case | Ring | Water along it | Land wetness | Sea | Land ground (sea level) |
+|---|---|---|---|---|---|
+| `ring_80n` | 1,896 km | 8% | 0.02 | 20.2 °C | 17.8 °C |
+| `ring_80s` | 1,896 km | 43% | 0.03 | 20.3 °C | 17.1 °C |
+| `ring_70n` | 3,734 km | 12% | 0.05 | 21.3 °C | 18.7 °C |
+| `ring_70s` | 3,734 km | 37% | 0.22 | 21.6 °C | 17.1 °C |
+
+Both hemispheres are run because they share a sky but not a ground. The GCM's
+air over the two poles agrees to within a degree at every level, and the Sun
+treats them alike over the year. The South Pole–Aitken basin's seas, though,
+cover close to half of each southern circle and about a tenth of each northern
+one. The northern land also stands lower (1.4 km against 2.1 km on average) and
+is drier at 70°.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup ring_80n
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run run ring_80n --hours 3 --threads 4
+climate/gcm/.venv/bin/python -m climate.crm.ring_analysis ring_80n --from-day 29.5
+```
+
 ## The gravity pair
 
 If lunar convection were Earth's stretched six times in size and duration, a

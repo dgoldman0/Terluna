@@ -295,7 +295,11 @@ def build(label: str, jobs: int = 8) -> Path:
 
 GCM_RUN, GCM_YEARS = 'A28_dim5', (15, 24)          # the chosen design (5% dimmer shield), settled years
 EQUATOR_BAND_DEG = 10.0                              # GCM rows averaged for the equatorial profile
+ROW_BAND_DEG = 3.0                                   # half the GCM's row spacing: the one row nearest a latitude
 PLACEHOLDER_LAND = (28, "28,      20.,   .50,   .95,   10.,    4.,  2.00, 25.0e5,'Terluna placeholder land'\n")
+# PlaSim's bucket (landmod.f90): soil holds up to wsmax m of water and land evaporates at the rate of open
+# water times min(1, water / (drhsfull * wsmax)), the same factor as CM1's moisture availability.
+PLASIM_SOIL = dict(wsmax=0.5, drhsfull=0.4)
 
 CASES = {
     'ring': dict(
@@ -322,18 +326,45 @@ CASES = {
                        days=20.0, output_s=10800.0, restart_s=86400.0, segment_s=432000.0, initial='ring_sea',
                        nudge=dict(tau_s=259200.0, z_start_m=8000.0, z_full_m=16000.0, ramp_s=86400.0), droplets_cm3=100.0),
 }
+# Rings along circles of latitude near the poles, set up as the equatorial ring except that the Sun never
+# climbs above 90 degrees less the latitude, the Coriolis force of the latitude turns departures from the
+# reference wind (whose own pressure gradient CM1 supplies, lspgrad = 1), the reference is the GCM row
+# nearest the latitude, and the land evaporates as readily as the GCM's land on that row. The Sun keeps the
+# equinox: the Moon's 1.5-degree tilt raises and lowers the daily sunlight at 80 degrees by about a quarter
+# over the year, alternately in the two hemispheres.
+for _lat, _tag in ((80.0, '80n'), (-80.0, '80s'), (70.0, '70n'), (-70.0, '70s')):
+    CASES[f'ring_{_tag}'] = dict(
+        CASES['ring'], latitude_deg=_lat, band_deg=ROW_BAND_DEG, land_moisture='gcm',
+        purpose=f'the circle of latitude {abs(_lat):.0f} {"N" if _lat > 0 else "S"} as a 2-D ring, the Sun crossing it '
+                'once a lunar day, seas and lakes of the 28% scenario at sea level, land as wet as the GCM\'s there, '
+                'the 5% dimmer shield, the GCM design case\'s row nearest the latitude as reference')
 
 
-def gcm_equator_profile(run=GCM_RUN, years=GCM_YEARS, band=EQUATOR_BAND_DEG):
-    """The GCM's equatorial reference: mean potential temperature, vapour and eastward wind of its sea
-    columns against height above the sea (their surface), the sea surface and land ground temperatures,
-    and the air near the ground over the sea."""
+def gcm_soil(folder: Path) -> dict:
+    """PlaSim's soil capacity and free-evaporation share for a GCM run: the defaults unless its
+    landmod_namelist sets them."""
+    import re
+    values = dict(PLASIM_SOIL)
+    path = folder / 'landmod_namelist'
+    text = path.read_text().lower() if path.exists() else ''
+    for key in values:
+        found = re.search(rf'\b{key}\s*=\s*([-+0-9.e]+)', text)
+        if found:
+            values[key] = float(found.group(1))
+    return values
+
+
+def gcm_equator_profile(run=GCM_RUN, years=GCM_YEARS, band=EQUATOR_BAND_DEG, latitude=0.0):
+    """The GCM's reference for a ring on the equator, or on another circle of latitude: mean potential
+    temperature, vapour and eastward wind of the sea columns within `band` degrees of the latitude against
+    height above the sea (their surface), the sea surface and land ground temperatures, the air near the
+    ground over the sea, and how readily the land there evaporates."""
     import numpy as np
     import netCDF4
     from climate.gcm.compare import area_weights
     gravity, rd, kappa = planet()['gravity_m_s2'], 287.04, 287.04 / 1005.7
     folder = HERE.parent / 'gcm' / 'runs' / run / 'model'
-    fields = {k: [] for k in ('ta', 'hus', 'ua', 'ps', 'ts', 'tas')}
+    fields = {k: [] for k in ('ta', 'hus', 'ua', 'ps', 'ts', 'tas', 'mrso')}
     for year in range(years[0], years[1] + 1):
         with netCDF4.Dataset(folder / f'MOST.{year:05d}.nc') as d:
             for k in fields:
@@ -343,7 +374,7 @@ def gcm_equator_profile(run=GCM_RUN, years=GCM_YEARS, band=EQUATOR_BAND_DEG):
             lsm = np.asarray(d['lsm'][:], dtype=float)[0] > 0.5
     f = {k: np.concatenate(v) for k, v in fields.items()}
     height = np.loadtxt(folder.parent / 'inputs' / 'moon_topography.sra', skiprows=1).ravel().reshape(lsm.shape) / gravity
-    rows = np.abs(lat) < band
+    rows = np.abs(lat - latitude) < band
     sea = rows[:, None] & ~lsm & (height < 1.0)                           # seas at sea level; lakes stand higher
     land = rows[:, None] & lsm
     w = area_weights(lat, 64)
@@ -365,10 +396,13 @@ def gcm_equator_profile(run=GCM_RUN, years=GCM_YEARS, band=EQUATOR_BAND_DEG):
     lapse = (profile['theta_k'][-2] - profile['theta_k'][-1]) / (profile['z_m'][-2] - profile['z_m'][-1])
     lapse = gravity / 1005.7 - lapse * (1e5 / mean(tm(ps), sea)) ** -kappa
     land_sea_level = tm(f['ts']) + lapse * height
+    soil = gcm_soil(folder)
+    wetness = np.minimum(1.0, f['mrso'] / (soil['drhsfull'] * soil['wsmax']))
     return dict(profile=profile, sea_surface_k=mean(tm(f['ts']), sea), land_ground_k=mean(land_sea_level, land),
                 land_ground_in_place_k=mean(tm(f['ts']), land), land_height_m=mean(height, land), lapse_k_m=lapse,
                 air_over_sea_k=mean(tm(f['tas']), sea), surface_pa_sea=mean(tm(ps), sea), sea_columns=int(sea.sum()),
-                run=run, years=list(years), band_deg=band)
+                land_wetness=mean(tm(wetness), land), soil=soil,
+                run=run, years=list(years), band_deg=band, latitude_deg=latitude, rows_deg=[float(v) for v in lat[rows]])
 
 
 def vertical_grid(dz0, z_fine, stretch, dz_max, ztop):
@@ -384,16 +418,23 @@ def vertical_grid(dz0, z_fine, stretch, dz_max, ztop):
     return levels
 
 
-def ring_surface(nx, dx, sea_k, land_k, band=1.0):
-    """Land and water segments along a ring on the equator (x eastward from 0 E): water where the 28%
-    scenario's seas and rain-fed lakes cover at least half of the band within `band` degrees of the equator."""
+def ring_surface(nx, dx, sea_k, land_k, band=1.0, latitude=0.0):
+    """Land and water segments along a ring on a circle of latitude (x eastward from 0 E): water where the
+    28% scenario's seas and rain-fed lakes cover at least half of the band within `band` degrees of the
+    latitude. A ring column narrower than the product's 0.25-degree columns takes the one under its centre;
+    a wider one, the mean of those whose centres it holds."""
     import numpy as np
     from climate.gcm import boundary
     product = boundary.lakes_product(*boundary.LAKES)
     lat, lon, water = product['lat_deg'], product['lon_deg'], product['water_fraction']
-    along = water[np.abs(lat) < band].mean(axis=0)                        # 0.25-degree columns
-    centres = (np.arange(nx) + 0.5) * 360.0 / nx
-    wet = along[np.minimum((centres / (360.0 / lon.size)).astype(int), lon.size - 1)] >= 0.5
+    along = water[np.abs(lat - latitude) < band].mean(axis=0)             # 0.25-degree columns
+    if nx >= lon.size:
+        centres = (np.arange(nx) + 0.5) * 360.0 / nx
+        share = along[np.minimum((centres / (360.0 / lon.size)).astype(int), lon.size - 1)]
+    else:
+        holder = np.minimum((lon / (360.0 / nx)).astype(int), nx - 1)
+        share = np.bincount(holder, weights=along, minlength=nx) / np.bincount(holder, minlength=nx)
+    wet = share >= 0.5
     segments, start = [], 0
     for i in range(1, nx + 1):
         if i == nx or wet[i] != wet[start]:
@@ -430,35 +471,57 @@ def case_settings(cfg, nx, dx, nz, ztop, air, gravity):
     length = nx * dx
     s = time_scale(cfg, gravity)
     pair = cfg.get('kind') == 'pair'
+    latitude = cfg.get('latitude_deg', 0.0)
+    turning = coriolis(latitude)
+    rotating = turning != 0.0                                            # off the equator: the wind turns
     return {
         'param0': dict(nx=nx, ny=1, nz=nz, ppnode=cfg.get('ranks', 8), timeformat=3, timestats=1),
         'param1': dict(dx=round(dx, 3), dy=round(dx, 3), dz=round(ztop / nz, 1), dtl=round(40.0 * s, 3), cfl_limit=1.0,
                        timax=round(cfg['days'] * 86400.0 * s), run_time=-999.9, tapfrq=round(cfg['output_s'] * s, 3),
                        rstfrq=round(cfg['restart_s'] * s, 3), statfrq=round(3600.0 * s, 3), prclfrq=1.0e9),
         'param2': dict(cm1setup=2, testcase=0, adapt_dt=1, irst=0, rstnum=1, ipbl=2, sgsmodel=0, tconfig=2,
-                       horizturb=0, irdamp=2, psolver=3, ptype=5, ihail=0, icor=0, eqtset=2, idiss=1,
-                       wbc=1, ebc=1, sbc=1, nbc=1, bbc=3, tbc=1, isnd=7, iwnd=0, itern=0, iinit=0, irandp=1,
-                       iorigin=1, apmasscon=1),
+                       horizturb=0, irdamp=2, psolver=3, ptype=5, ihail=0, icor=int(rotating), lspgrad=int(rotating),
+                       eqtset=2, idiss=1, wbc=1, ebc=1, sbc=1, nbc=1, bbc=3, tbc=1, isnd=7, iwnd=0, itern=0, iinit=0,
+                       irandp=1, iorigin=1, apmasscon=1),
         # The Rayleigh layer's time and the PBL scheme's asymptotic length scale are Earth's values stretched
         # by the ratio of gravities, as the dynamics stretch.
-        'param3': dict(fcor=0.0, rdalpha=round(gravity / EARTH_G / 300.0, 8), zd=0.77 * ztop,
+        'param3': dict(fcor=float(f'{turning:.6e}'), rdalpha=round(gravity / EARTH_G / 300.0, 8), zd=0.77 * ztop,
                        l_inf=round(75.0 * EARTH_G / gravity, 1), ndcnst=cfg['droplets_cm3']),
         'param6': dict(stretch_z=4, ztop=ztop),
         'param8': dict(var14=cfg['nudge']['z_start_m'] * s, var15=cfg['nudge']['z_full_m'] * s,
                        var16=0.0 if pair else round(length, 3), var17=0.0 if pair else round(air['sunlight_w_m2'], 3),
                        var18=0.0 if pair else cfg['start_hour_angle_deg'], var19=0.0 if pair else round(solar_day_s(), 1)),
         'param9': dict(output_format=1, output_filetype=2, output_sfcparams=0, output_tke=0, output_km=0,
-                       output_kh=0, output_uinterp=1, output_vinterp=0, output_v=0, output_winterp=1,
+                       output_kh=0, output_uinterp=1, output_vinterp=int(rotating), output_v=0, output_winterp=1,
                        output_radten=1, output_cape=1, output_cin=1, output_lcl=1, output_lfc=1, output_pwat=1,
                        output_lwp=1),
-        'param11': dict(radopt=0 if pair else 2, dtrad=1800.0, ctrlat=0.0, ctrlon=0.0, year=2014),
+        'param11': dict(radopt=0 if pair else 2, dtrad=1800.0, ctrlat=latitude, ctrlon=0.0, year=2014),
         'param12': dict(isfcflx=1, sfcmodel=2, oceanmodel=1, initsfc=1 if pair else 9, season=1),
         'param14': dict(dodomaindiag=True, diagfrq=round(cfg['output_s'] * s, 3)),
         'param16': dict(restart_format=1, restart_filetype=2, restart_reset_frqtim=True),
-        'param19': dict(do_lsnudge=True, do_lsnudge_u=True, do_lsnudge_v=False, do_lsnudge_th=True,
+        'param19': dict(do_lsnudge=True, do_lsnudge_u=True, do_lsnudge_v=rotating, do_lsnudge_th=True,
                         do_lsnudge_qv=True, lsnudge_tau=round(cfg['nudge']['tau_s'] * s, 3), lsnudge_start=1.0,
                         lsnudge_end=1.0e12, lsnudge_ramp_time=round(cfg['nudge']['ramp_s'] * s, 3)),
     }
+
+
+def coriolis(latitude_deg: float) -> float:
+    """The Coriolis parameter (1/s) at a latitude, from the Moon's sidereal rotation."""
+    return 2.0 * planet()['rotation_rate_rad_s'] * math.sin(math.radians(latitude_deg))
+
+
+def ring_grid(latitude_deg: float, dx_target_m: float, ranks: int):
+    """Columns, their width and the length of a ring around the Moon on a circle of latitude; the column
+    count a multiple of the ranks."""
+    length = 2.0 * math.pi * planet()['radius_m'] * math.cos(math.radians(latitude_deg))
+    nx = int(round(length / dx_target_m / ranks)) * ranks
+    return nx, length / nx, length
+
+
+def land_moisture(cfg: dict, ref: dict) -> float:
+    """The land's moisture availability: the case's own value, or the GCM's for 'gcm'."""
+    value = cfg.get('land_moisture', 0.5)
+    return float(ref['land_wetness']) if value == 'gcm' else float(value)
 
 
 def solar_day_s():
@@ -509,16 +572,15 @@ def setup(name: str) -> Path:
     if (case / 'progress.json').exists():
         raise RuntimeError(f'{case} has started; remove it to set up afresh')
     case.mkdir(parents=True, exist_ok=True)
-    ref = gcm_equator_profile()
+    latitude = cfg.get('latitude_deg', 0.0)
+    ref = gcm_equator_profile(band=cfg.get('band_deg', EQUATOR_BAND_DEG), latitude=latitude)
     s = time_scale(cfg, gravity)
     pair = cfg.get('kind') == 'pair'
     if pair:
         nx, dx = cfg['nx'], cfg['dx_moon_m'] * s
         length = nx * dx
     else:
-        length = 2 * np.pi * planet()['radius_m']
-        nx = int(round(length / cfg['dx_target_m'] / cfg['ranks'])) * cfg['ranks']
-        dx = length / nx
+        nx, dx, length = ring_grid(latitude, cfg['dx_target_m'], cfg['ranks'])
     zw = [z * s for z in vertical_grid(**cfg['z_grid'])]
     nz = len(zw) - 1
     zh = 0.5 * (np.array(zw[1:]) + np.array(zw[:-1]))
@@ -557,12 +619,13 @@ def setup(name: str) -> Path:
     if pair:
         segments, water_share, surface_sha = [(-1e9, 1e9, 2, 16, ref['sea_surface_k'], ref['sea_surface_k'])], 1.0, None
     else:
-        segments, water_share, surface_sha = ring_surface(nx, dx, ref['sea_surface_k'], ref['land_ground_k'])
+        segments, water_share, surface_sha = ring_surface(nx, dx, ref['sea_surface_k'], ref['land_ground_k'],
+                                                          latitude=latitude)
     (case / 'terluna_surface.txt').write_text(f'{len(segments)}\n' + ''.join(
         f'{x0:.1f} {x1:.1f} {xl:.1f} {lu:d} {tsk:.3f} {tmn:.3f}\n' for x0, x1, xl, lu, tsk, tmn in segments))
     table = (tree / 'run' / 'LANDUSE.TBL').read_text().splitlines(keepends=True)
     index, row = PLACEHOLDER_LAND
-    table = [row.replace('.50', f"{cfg.get('land_moisture', 0.5):.2f}".lstrip('0')) if line.startswith(f'{index},') else line
+    table = [row.replace('.50', f"{land_moisture(cfg, ref):.2f}".lstrip('0')) if line.startswith(f'{index},') else line
              for line in table]
     (case / 'LANDUSE.TBL').write_text(''.join(table))
     for link, target in (('cm1.exe', exe), ('RRTMG_LW_DATA', tree / 'run' / 'RRTMG_LW_DATA'),
@@ -582,6 +645,7 @@ def setup(name: str) -> Path:
     record = dict(case=name, configuration=cfg, time_scale=s,
                   grid=dict(nx=nx, dx_m=dx, length_m=length, nz=nz, ztop_m=zw[-1]),
                   build=build_record, reference=ref, initial=initial, water_share=water_share, surface_product=surface_sha,
+                  latitude_deg=latitude, coriolis_1_s=coriolis(latitude), land_moisture=None if pair else land_moisture(cfg, ref),
                   runner=digest(__file__),
                   inputs={p: digest(case / p) for p in ('input_sounding', 'input_grid_z', 'lsnudge_0001.dat',
                                                          'terluna_surface.txt', 'LANDUSE.TBL', 'namelist.template')})

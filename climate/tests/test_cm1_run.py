@@ -192,3 +192,57 @@ def test_water_mean_profile_skips_land_columns():
     prof = c.water_mean_profile([snap, snap], land)
     assert prof['theta_k'][0] == pytest.approx(291.0) and prof['qv_kg_kg'][0] == pytest.approx(0.011)
     assert prof['surface_pa'] == pytest.approx(1.21e5) and prof['air_2m_k'] == pytest.approx(299.0)
+
+
+def test_rings_off_the_equator_are_shorter_and_turn_the_wind():
+    nx, dx, length = c.ring_grid(80.0, 6000.0, 8)
+    assert length == pytest.approx(2 * np.pi * c.planet()['radius_m'] * np.cos(np.radians(80.0)))
+    assert nx % 8 == 0 and nx * dx == pytest.approx(length) and abs(dx - 6000.0) < 400.0
+    omega = c.planet()['rotation_rate_rad_s']
+    assert c.coriolis(80.0) == pytest.approx(2 * omega * np.sin(np.radians(80.0)))
+    assert c.coriolis(-80.0) == pytest.approx(-c.coriolis(80.0)) and c.coriolis(0.0) == 0.0
+
+
+def test_only_rings_off_the_equator_turn_the_wind_and_lower_the_sun():
+    air = dict(sunlight_w_m2=1300.0)
+    south = c.case_settings(c.CASES['ring_80s'], 312, 6075.7, 111, 150000.0, air, 1.6242)
+    assert south['param2']['icor'] == 1 and south['param2']['lspgrad'] == 1 and south['param3']['fcor'] < 0
+    assert south['param11']['ctrlat'] == -80.0 and south['param19']['do_lsnudge_v'] and south['param9']['output_vinterp'] == 1
+    equator = c.case_settings(c.CASES['ring'], 1816, 6011.0, 111, 150000.0, air, 1.6242)
+    assert equator['param2']['icor'] == 0 and equator['param2']['lspgrad'] == 0 and equator['param3']['fcor'] == 0.0
+    assert equator['param11']['ctrlat'] == 0.0 and not equator['param19']['do_lsnudge_v']
+    assert equator['param9']['output_vinterp'] == 0
+
+
+def test_ring_surface_off_the_equator_averages_wide_columns(monkeypatch):
+    lon = (np.arange(1440) + 0.5) * 0.25
+    lat = 89.875 - 0.25 * np.arange(720)
+    water = np.zeros((720, 1440))
+    water[np.ix_(np.abs(lat - 80.0) < 1.0, lon < 90.0)] = 1.0               # a quarter of 80 N is sea
+    water[np.ix_(np.abs(lat) < 1.0, lon < 180.0)] = 1.0                     # half of the equator, which 80 N ignores
+    water[np.ix_(np.abs(lat - 80.0) < 1.0, (lon > 180.0) & (lon < 180.5))] = 1.0   # a sliver narrower than a column
+    from climate.gcm import boundary
+    monkeypatch.setattr(boundary, 'lakes_product', lambda *a: dict(lat_deg=lat, lon_deg=lon, water_fraction=water,
+                                                                   sha256='test'))
+    segments, share, _ = c.ring_surface(nx=312, dx=6075.7, sea_k=293.0, land_k=291.0, latitude=80.0)
+    assert share == pytest.approx(0.25, abs=0.01)
+    assert [s[2] for s in segments] == [2, 1]
+
+
+def test_land_evaporates_as_the_gcm_bucket_allows(tmp_path):
+    assert c.gcm_soil(tmp_path) == c.PLASIM_SOIL
+    (tmp_path / 'landmod_namelist').write_text(' &landmod_nl\n WSMAX = 1.0\n /END\n')
+    assert c.gcm_soil(tmp_path) == dict(wsmax=1.0, drhsfull=0.4)
+    assert c.land_moisture(dict(land_moisture='gcm'), dict(land_wetness=0.03)) == pytest.approx(0.03)
+    assert c.land_moisture(dict(land_moisture=0.5), dict(land_wetness=0.03)) == pytest.approx(0.5)
+
+
+def test_circulation_reports_the_turned_wind_only_where_there_is_one():
+    from climate.crm import ring_analysis as ra
+    zh = np.array(ra.WIND_HEIGHTS_M)
+    section = dict(u=np.ones((2, zh.size)), w=np.zeros((2, zh.size)), cloud=np.zeros((2, zh.size)))
+    assert 'northward_m_s' not in ra.circulation_table(np.array([-5.0, 5.0]), zh, section)
+    section['v'] = np.full((2, zh.size), -2.0)
+    table = ra.circulation_table(np.array([-5.0, 5.0]), zh, section)
+    assert table['northward_m_s'][0] == [-2.0, -2.0]
+    assert 'S' in ra.evidence(-80.0) and ra.evidence(0.0) == ra.EVIDENCE
