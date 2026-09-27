@@ -57,7 +57,7 @@
         "spatial resolution sensitivity",
         "superrotation, and the terminator as a moving front (4.3 m/s at the equator; dawn fog and frost release, dusk drainage winds): diagnose from the GCM runs (July 2026 bundle, archive/july_2026_knowledge_bundle/)"
       ],
-      "next_session_task": "Test cloud amount and its response to cooling with a cloud-resolving model at lunar gravity; ROCKE-3D on rented compute for the chosen design (28% seas with lakes, the 5% dimmer shield, near 294 K); runs D and E."
+      "next_session_task": "Test cloud amount and its response to cooling with a cloud-resolving model at lunar gravity; ROCKE-3D with a slab ocean at 4°×5° for the chosen design (28% seas with lakes, the 5% dimmer shield, near 294 K), on this laptop as a few weeks of sessions (an estimated 2-5 hours per simulated year) or on rented compute; runs D and E."
     },
     {
       "topic": "geography",

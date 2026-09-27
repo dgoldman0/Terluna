@@ -72,11 +72,17 @@ A practical sequence:
    line and by correlated-k, and solar fluxes at zenith cosines 1.0 and 0.5
    and as a global mean.
 
-GPUs do not help these codes; all run on CPU cores with MPI. Rough expectations,
-to be checked on this machine: a T21 ExoPlaSim run
-of 30–50 simulated years (long enough for a slab ocean to settle) should take
-hours to a day on eight cores, and ROCKE-3D at 4°×5° days per simulated
-century.
+GPUs do not help these codes; all run on CPU cores with MPI. On this machine a
+T21 ExoPlaSim year takes about 3.3 minutes on eight cores. ROCKE-3D fits it too,
+with a slab ocean (its Q-flux ocean with no ocean heat transport, as in the
+PlaSim runs) at its standard 4°×5° grid, which GISS used for its own lunar runs
+(Aleinov et al. 2019, GRL 46, 5107). The Moon's small radius makes those cells
+3.7 times narrower than on Earth and shortens the model's time step, so a lunar
+year should cost two to four times the 11 CPU-hours GISS published for an Earth
+year (Way et al. 2017): about 2–5 hours on eight cores, by estimate. A 20–30
+year run started from PlaSim's settled state then takes a few weeks of sessions
+with rests, and a one-year benchmark would pin the cost down. Rented compute is
+the faster route.
 
 ## ExoPlaSim runs (2026-09-25)
 
@@ -361,20 +367,29 @@ both corrections and runs 15 years. Years 10–14:
 - **With both slips corrected and PlaSim's cloud amount, the design case is
   about 299.6 K (26.5 °C).** Fewer convective clouds reflect less sunlight, and
   the Moon settles 1.6 K warmer than with the cloud-water fix alone.
-- **The Moon is winterless.** Over years 10–14 the air near the ground never
-  falls below 286.5 K (13 °C) in any half-hour: on a 4 km plateau at 75°S, late
-  in the night. The hottest half-hour is 315.9 K (43 °C), over equatorial land
-  near noon. No snow or sea ice forms. Even the full-column clouds' 292 K case
-  bottoms out at 277 K (4 °C). The freezing level stands 32–34 km up (23–25 km
-  in the 292 K case), and the model's highest land is 8.2 km: at a sixth of
-  Earth's gravity the air cools only about 1 K per km, so mountains barely reach
-  cold air. The coldest spot sits 13–15 K below the global mean, so frost on the
-  highest ground would need a Moon about as cool as Earth on average.
+- **The Moon is winterless.** Over years 10–14 the ground never falls below
+  286.5 K (13 °C) in any half-hour, on a 4 km plateau at 75°S late in the
+  night, and its hottest half-hour is 315.9 K (43 °C), over equatorial land near
+  noon. The air near the ground stays within 292.0–310.6 K (19–38 °C) in 3-day
+  means. No snow or sea ice forms. Even the full-column clouds' 292 K case
+  bottoms out at 277 K (4 °C) on the ground. The freezing level stands 32–34 km
+  up (23–25 km in the 292 K case), and the model's highest land is 8.2 km: at a
+  sixth of Earth's gravity the air cools only about 1 K per km, so mountains
+  barely reach cold air. The coldest ground sits 13–15 K below the global mean,
+  so frost on the highest ground would need a Moon about as cool as Earth on
+  average.
 - **An output artefact to screen.** In 0.8% of 3-day windows the output's lowest
   model level reads up to about 20 K colder than the air near the ground, which
   no real atmosphere sustains. It most likely comes from converting the model's
   spectral temperatures to the grid over steep terrain. The surface fields are
   unaffected; analyses of the lowest level should screen it.
+- **What the output's temperatures are.** `tas` is the lowest model layer (the
+  bottom 1.8 km, centred 0.9 km up) carried to the ground along a dry adiabat
+  and averaged over each 3-day window. `maxt` and `mint` are the extremes of the
+  ground surface temperature within the window: PlaSim's `outmod.f90` tracks
+  `dt(:,NLEP)`, the surface, for them. Heat, cold and day–night figures in this
+  file use `tas` for the air and `maxt`/`mint` for the ground; on 2026-09-26
+  the tables below were corrected where they had listed ground extremes as air.
 
 ### A28: the 28% seas with their lakes
 
@@ -396,7 +411,8 @@ overnight after year 7 and resumed. Years 25–29, against the corrected 25% run
 | Air over land; within 12° of the equator / poleward of 70° | 299.3; 299.7 / 299.3 K | 302.4; 302.4 / 302.0 K |
 | Land air, annual means: 5th / 50th / 95th percentile | 296.6 / 299.3 / 301.5 K | 300.3 / 302.3 / 304.4 K |
 | Coldest land cell, annual mean | 295.5 K, 7.2 km up | 297.1 K, 8.4 km up |
-| Half-hourly extremes of the air near the ground | 286.5–315.9 K | 289.4–317.8 K |
+| Air near the ground, 3-day means, coldest–warmest | 292.0–310.6 K | 294.5–312.8 K |
+| Ground surface, half-hourly extremes | 286.5–315.9 K | 289.4–317.8 K |
 | Planetary albedo | 0.293 | 0.278 |
 | Cloud effect: sunlight, infrared, net | −13.4, +7.6, −5.8 W/m² | −13.0, +6.7, −6.3 W/m² |
 | Cloud cover | 20% | 17% |
@@ -417,9 +433,9 @@ overnight after year 7 and resumed. Years 25–29, against the corrected 25% run
 
 ### A dimmer shield: cooling the 28% Moon
 
-At 303 K the 28% Moon is hot and humid. Over land, 2.8% of 3-day windows reach
-40 °C and the humid heat peaks near 33 °C wet-bulb, close to where healthy people
-fail. The runner's `sunlight_scale` dims the shield evenly at every wavelength;
+At 303 K the 28% Moon is hot and humid. Over land, 2% of 3-day means of the air
+reach 35 °C, and the humid heat peaks near 32 °C wet-bulb, close to where healthy
+people fail. The runner's `sunlight_scale` dims the shield evenly at every wavelength;
 branches start from `A28`'s year 29, whose coastline they keep. After 8 years
 each, with the settling fit (`compare --settle`) and heat measures from years
 6–7 (their extremes are still falling):
@@ -428,9 +444,9 @@ each, with the settling fit (`compare --settle`) and heat measures from years
 |---|---|---|---|---|
 | Sunlight at the top of the air | 1,235 W/m² | 1,198 W/m² | 1,173 W/m² | 1,136 W/m² |
 | Settles near | 303 K | 297 K | 294 K | 288 K |
-| Hottest half-hours over land, 90th / 99th percentile | 36 / 42 °C | 32 / 37 °C | 30 / 35 °C | 26 / 31 °C |
-| Wet-bulb at those peaks, 99th percentile | 30 °C | 27 °C | 25 °C | 22 °C |
-| Coldest half-hour anywhere | 18 °C | 13 °C | 8 °C | 3 °C |
+| Air over land, 3-day means, 90th / 99th percentile | 33 / 36 °C | 29 / 32 °C | 27 / 30 °C | 23 / 26 °C |
+| Wet-bulb of those means, 99th percentile | 29 °C | 26 °C | 24 °C | 21 °C |
+| Coldest 3-day mean of the air; coldest half-hour of the ground | 22; 18 °C | 18; 13 °C | 15; 8 °C | 10; 3 °C |
 
 The response is linear, about 1.9 K per 1% of sunlight, as the energy balance
 alone predicts. Cloud cover rises as the Moon cools (17% at 303 K, 25% at
@@ -447,32 +463,35 @@ against the full shield:
 | Surface temperature | 302.8 K | 294.2 K, settling near 293.8 |
 | Sea surface | 304.3 K | 297.2 K |
 | Land air, annual means: 5th / 50th / 95th percentile | 300.5 / 302.5 / 304.5 K | 292.0 / 293.5 / 295.4 K |
-| Equatorial land: typical afternoon high / pre-dawn low | 32 / 26 °C | 25 / 17 °C |
-| Land above 5 km: the same | 28 / 23 °C | 21 / 13 °C |
-| Hottest half-hours over land: 90th / 99th percentile / hottest | 36 / 42 / 45 °C | 28 / 32 / 36 °C |
-| Wet-bulb at those peaks: typical / 99th percentile / highest | 24 / 30 / 33 °C | 17 / 23 / 26 °C |
-| Coldest half-hour anywhere | 18 °C | 3 °C, no frost |
+| Equatorial land, air at the warmest / coldest time of the lunar day | 32 / 28 °C | 24 / 19 °C |
+| Equatorial land, ground at its typical extremes | 35 / 26 °C | 27 / 15 °C |
+| Land above 5 km, air at the warmest / coldest time | 27 / 26 °C | 20 / 18 °C |
+| Air over land, 3-day means: 90th / 99th percentile / warmest | 33 / 36 / 40 °C | 24 / 27 / 31 °C |
+| Wet-bulb of those means: median / 99th percentile / highest | 24 / 29 / 32 °C | 17 / 22 / 25 °C |
+| Coldest 3-day mean of the air; coldest half-hour of the ground | 21; 16 °C | 12; 3 °C, no frost |
 | Cloud cover; cloud effect net | 17%; −6.3 W/m² | 25%; −6.2 W/m² |
 | Precipitation; land under 0.5 mm/day | 3.70 mm/day; 2% | 2.89 mm/day; 9% |
 | Water vapour | 307 kg/m² | 173 kg/m² |
 
-- **The 5% Moon is mild and safe to live in.** Days over equatorial land
-  typically reach 25 °C and nights fall to 17 °C, a wider swing than at 303 K
-  because the air holds half the vapour. One 3-day window in 25 reaches 30 °C,
-  35 °C is rare, and humid heat stays well under the danger range.
+- **The 5% Moon is mild and safe to live in.** The air over equatorial land
+  runs about 24 °C in the lunar afternoon and 19 °C late in the night, and the
+  ground swings from 27 to 15 °C, a wider swing than at 303 K because the air
+  holds half the vapour. Over land the warmest 3-day mean of the air is 31 °C,
+  and humid heat stays well under the danger range.
 - **A little more variety, mostly in water.** Dry land (under 0.5 mm/day)
-  triples to 9%, while annual means over land still span only about 3 K; the
-  high plateaus run about 4 K cooler than the lowlands by day and night.
+  triples to 9%, while annual means over land still span only about 3 K; land
+  above 5 km runs about 2.5 K cooler than equatorial land on average, 4–5 K by
+  day and 1–2 K at night.
 - **Its lakes stay close to the full shield's.** Routed with its own climate
   (`python -m climate.gcm.climatology A28_dim5:15-24`, then
   `python -m geography.drainage --climatology climate/gcm/products/climatology_A28_dim5.npz --out <folder>`),
   the lakes cover 11.6% instead of 12.9% and the rivers carry 25% less; at T21
   that would flip 105 cells and lower the water from 40.1% to 39.6%, worth
-  about 0.1 K. The geography domain keeps the full shield's routing until a
-  dimming level is chosen.
-- **Humid heat is estimated** from the model's lowest layer (about 0.9 km up)
-  with each window's mean humidity at its hottest half-hour; the air at the
-  ground could be about a degree more humid.
+  about 0.1 K. The geography domain now carries this routing.
+- **Humid heat is estimated** from each 3-day mean of the air with the humidity
+  of the model's lowest layer (about 0.9 km up); the air at the ground could be
+  about a degree more humid, and the 3-day means smooth the peaks of single
+  afternoons.
 - **Winter lives aloft.** The air cools about 0.6 K per km near the ground and
   0.8 K per km on average, so the 0 °C level stands 25.4 km above sea level
   (24.5–26.3 km over places and times, the same at the equator and poles, by
