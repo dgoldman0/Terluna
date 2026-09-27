@@ -316,7 +316,10 @@ carried per passenger with a cabin, services and a share of the crew:
 - **The distribution of flyers.** The next step: the classes from personal wings, canopies and micro gliders through
   air taxis, regional and long-haul ships and freighters to aerial platforms; for each its size, speed, energy,
   height band and capacity from these models; how many of each the Moon's trips and freight need; and how they share
-  the air by height.
+  the air by height. It starts from the author's decisions for the summit metropolis
+  ([research/decisions.md](../../decisions.md)): about 100 million people within about 32 km of the tower, small sky
+  boats serving much as cars do, gliders throughout with glider and parkour zones, and large sky ferries on a
+  backbone with metro and rail.
 - **The long-haul class and the crown's port.** The chosen class sets the berths, the docking arms and their loads in
   the flight band.
 - **Hydrogen.** The hydrogen aboard grows with a ship's volume. A hydrogen ship needs cells kept apart from the air and
