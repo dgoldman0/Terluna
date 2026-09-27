@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-26",
+  "updated": "2026-09-27",
   "base_commit": "79a60a1a51b4552ac9ae8e8bb295b567d9254995",
   "next_manuscript": "cef466e6-d9f8",
   "principle": "Each topic spans the open Moon; the root opening scene is one illustration",
@@ -37,7 +37,7 @@
     },
     {
       "topic": "climate",
-      "condition": "periodic_conservative_spatial_linear_screen; uncalibrated; clear_sky_radiation_computed_for_prescribed_columns; single_column_month_long_day_night_with_weak_temperature_gradient_exchange; gcm_boundary_files_prepared; exoplasim_radiation_calibrated_to_line_by_line; exoplasim_design_case_settled_295k; exoplasim_cloud_water_corrected_and_bracketed_292_298k; exoplasim_convective_cloud_units_corrected_design_case_299.6k; slow_rotator_cloud_literature_reviewed; design_case_28pct_seas_with_lakes_settles_303k; five_percent_dimmer_shield_settles_294k; author_chose_5pct_dimmer_shield",
+      "condition": "periodic_conservative_spatial_linear_screen; uncalibrated; clear_sky_radiation_computed_for_prescribed_columns; single_column_month_long_day_night_with_weak_temperature_gradient_exchange; gcm_boundary_files_prepared; exoplasim_radiation_calibrated_to_line_by_line; exoplasim_design_case_settled_295k; exoplasim_cloud_water_corrected_and_bracketed_292_298k; exoplasim_convective_cloud_units_corrected_design_case_299.6k; slow_rotator_cloud_literature_reviewed; design_case_28pct_seas_with_lakes_settles_303k; five_percent_dimmer_shield_settles_294k; author_chose_5pct_dimmer_shield; cloud_resolving_equatorial_ring_two_lunar_days_at_lunar_gravity; gravity_pair_without_radiation_does_not_convect",
       "material": [
         "../climate/reference/thermal_response.csv",
         "baselines/feasibility/model.py",
@@ -46,18 +46,23 @@
         "../atmosphere/radiative_convective/results/",
         "../climate/gcm/",
         "../climate/lunar_day.py",
-        "../climate/results/lunar_day/"
+        "../climate/results/lunar_day/",
+        "../climate/crm/",
+        "../climate/results/crm/",
+        "../visualization/equator-weather/"
       ],
       "unresolved": [
         "absolute cloud amount: PlaSim diagnoses cover (20-28%); published slow-rotator GCMs suggest no thick day-side deck at this sunlight, but models disagree widely on amounts",
         "a mix of climates: every run so far is warm and even (land annual means within about 5 K), and more water makes it warmer",
         "moisture/ice/clouds",
-        "dynamical heat transport and weather, including the day-night and polar circulation the single column replaces with relaxation, and the free-atmosphere temperature it holds at the global mean",
         "actual terrain",
         "spatial resolution sensitivity",
-        "superrotation, and the terminator as a moving front (4.3 m/s at the equator; dawn fog and frost release, dusk drainage winds): diagnose from the GCM runs (July 2026 bundle, archive/july_2026_knowledge_bundle/)"
+        "superrotation, and the terminator as a moving front (4.3 m/s at the equator; dawn fog and frost release, dusk drainage winds): diagnose from the GCM runs (July 2026 bundle, archive/july_2026_knowledge_bundle/)",
+        "dynamical heat transport and weather away from the equator: the cloud-resolving ring is two-dimensional, along the equator, with its upper air held to the GCM; the single column replaces the day-night and polar circulation with relaxation",
+        "cloud and rain amounts differ between the models: the cloud-resolving ring has half the GCM's cloud and under half its rain over land, a quarter of its cloud over the seas",
+        "what gravity changes in clouds beyond the stretch: the gravity pair needs a prescribed cooling to convect"
       ],
-      "next_session_task": "Test cloud amount and its response to cooling with a cloud-resolving model at lunar gravity; ROCKE-3D with a slab ocean at 4°×5° for the chosen design (28% seas with lakes, the 5% dimmer shield, near 294 K), on this laptop as a few weeks of sessions (an estimated 2-5 hours per simulated year) or on rented compute; runs D and E."
+      "next_session_task": "The gravity pair with a prescribed cooling (the ring's own radiative cooling over its seas); rings at higher latitudes for weather away from the equator; ROCKE-3D with a slab ocean at 4°×5° for the chosen design (28% seas with lakes, the 5% dimmer shield, near 294 K), on this laptop as a few weeks of sessions (an estimated 2-5 hours per simulated year) or on rented compute; runs D and E."
     },
     {
       "topic": "geography",
