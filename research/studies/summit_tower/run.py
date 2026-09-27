@@ -38,7 +38,7 @@ TOWER_HEIGHTS_KM = (0.0, 2.5, 5.0, 10.0, 15.0, 20.0, 30.0)
 
 # Design wind: the models' highest wind over the tower's heights, raised for what the models cannot show.
 GUST_FACTOR = 1.4       # 3-second gust over a 3-hourly snapshot of 6-km columns
-SUMMIT_SPEEDUP = 1.2    # flow over the broad summit dome
+SUMMIT_SPEEDUP = 1.2    # flow over the summit's broad rise
 RARITY_FACTOR = 1.2     # from two lunar days of ring to a return period of decades
 EARTH_DESIGN_GUST = 50.0
 
@@ -74,6 +74,28 @@ PANEL_EFFICIENCY = 0.22    # of the 202-1000 nm sunlight
 CLAD_DRAG = 1.3            # a closed tower: drag coefficient on its full width
 FLIERS = {'person_with_wings': dict(length_m=2.0, span_m=6.0, speed_m_s=6.0)}   # an assumed winged person
 STORAGE_ROUND_TRIP = 0.8   # pumped storage, pump to turbine
+
+# The central port, as the author chose it on 2026-09-27: long-haul sky ships dock in the named flight band
+# (35-45 km above sea level, research/decisions.md), floors follow the frame (up to 100,000 m2 a storey, 2% of the
+# frame's plan), and about 1.5 million people are present on a regular basis, in roughly this mix of uses.
+FLIGHT_BAND_KM = (35.0, 45.0)
+PORT_FLOORS = lt.Floors(area_per_storey_m2=100_000.0, plan_share=0.02)
+PORT_ZONES_KM = ((0.0, 3.0, 'open public floors and terraces'), (3.0, 10.0, 'enclosed floors, air topped up'),
+                 (10.0, 15.0, 'enclosed floors, air topped up'), (15.0, None, 'sealed, pressurised terminals and docks'))
+PORT_OCCUPANCY = 1.5e6
+# use: share of the floor, m2 of floor per person present (dense, roomy), share of capacity in use at a busy hour.
+# The areas per person are rough planning figures from Earth practice, not yet checked against published standards.
+PORT_USES = {
+    'travel: terminals, docks, customs, lounges, ship servicing': (7.5 / 35, (30.0, 50.0), 0.8),
+    'hotels': (7.0 / 35, (30.0, 45.0), 0.8),
+    'short stay: compact and transit rooms': (3.0 / 35, (12.0, 20.0), 0.8),
+    'commerce and trade': (7.0 / 35, (12.0, 20.0), 0.7),
+    'shops, markets, food and drink': (4.0 / 35, (4.0, 8.0), 0.5),
+    'events, conferences, leisure, observation': (3.5 / 35, (3.0, 6.0), 0.4),
+    'services and back of house': (3.0 / 35, (50.0, 100.0), 0.8),
+}
+HOTEL_ROOM_M2, GUESTS_PER_ROOM, SHORT_STAY_BED_M2, HOURS_IN_PORT = 60.0, 1.6, 15.0, 2.0
+PERSON = dict(mass_kg=80.0, drag_area_m2=0.7, canopy_drag_coefficient=1.3, landing_m_s=4.0)
 NIGHT_HOURS = 354.4        # half a synodic month
 FLUCTUATING_SWAY = 0.3     # gusts sway the top by about this share of the steady sway, roughly
 
@@ -116,9 +138,9 @@ def site() -> dict:
                              summit_above_lake_m=round(float(h[i, j]) - sea - lake['level_above_sea_m'])))
     LA, LO = np.meshgrid(a['lat_deg'], a['lon_deg'], indexing='ij')
     around = great_circle_km(lat, lon, LA, LO)
-    dome = {f'median_ground_within_{r}_km_above_sea_m': round(float(np.median(h[around < r])) - sea) for r in (100, 300)}
+    rise = {f'median_ground_within_{r}_km_above_sea_m': round(float(np.median(h[around < r])) - sea) for r in (100, 300)}
     return dict(lat_deg=lat, lon_deg=lon, ground_above_geoid_m=round(float(h[i, j])), ground_above_sea_m=round(float(h[i, j]) - sea),
-                sea_level_m=sea, grid='atlas 4 px/deg (7.6 km)', lola_peak=LOLA_PEAK, **dome,
+                sea_level_m=sea, grid='atlas 4 px/deg (7.6 km)', lola_peak=LOLA_PEAK, **rise,
                 nearest_lake_shore_km=round(float(dist.min())),
                 lakes=sorted(near, key=lambda d: d['centre_km']))
 
@@ -225,19 +247,20 @@ def profile(choice: dict, n=200):
     return z, bt + (b0 - bt) * (1.0 - z / H) ** p, H / n
 
 
-def energy(choice: dict, climate: list, rho, floors=FLOORS) -> dict:
-    """Mean output of each kind of device filling DEVICE_COVERAGE of the frame's open face, against the tower's own
-    use and a city's."""
+def energy(choice: dict, climate: list, rho, floors=FLOORS, coverage=DEVICE_COVERAGE, speedup=1.0) -> dict:
+    """Mean output of each kind of device filling `coverage` of the frame's open face, against the tower's own use
+    and a city's; `speedup` raises every wind speed by that factor (the flow over the summit)."""
     z, b, dz = profile(choice)
     open_share = 1.0 - floors.band_height_m / floors.spacing_m
-    area = DEVICE_COVERAGE * open_share * b * dz
+    area = coverage * open_share * b * dz
     hk = np.array([r['height_above_ground_km'] for r in climate]) * 1e3
     shape = np.interp(z, hk, [r['weibull']['shape'] for r in climate])
-    scale = np.interp(z, hk, [r['weibull']['scale_with_north_south'] for r in climate])
+    scale = speedup * np.interp(z, hk, [r['weibull']['scale_with_north_south'] for r in climate])
     dens = rho(z)
     demand = choice['floor_area_m2'] * BUILDING_ENERGY_W_M2
-    out = dict(device_area_km2=round(float(area.sum()) / 1e6, 3),
-               resource_mw=round(float(sum(a * we.resource_w_m2(k, c, d) for a, k, c, d in zip(area, shape, scale, dens))) / 1e6, 2),
+    resource = float(sum(a * we.resource_w_m2(k, c, d) for a, k, c, d in zip(area, shape, scale, dens)))
+    out = dict(device_area_km2=round(float(area.sum()) / 1e6, 3), resource_mw=round(resource / 1e6, 2),
+               betz_limit_mw=round(resource * 16.0 / 27.0 / 1e6, 1),
                tower_demand_mw=round(demand / 1e6), city_demand_mw=round(CITY['people'] * CITY['watts_each'] / 1e6),
                devices={})
     for key, dev in DEVICES.items():
@@ -337,6 +360,87 @@ def night_storage(site_info: dict, demands_mw: dict) -> dict:
                 water_mm3={k: round(mw * 1e3 * NIGHT_HOURS / per_m3 / 1e6, 1) for k, mw in demands_mw.items()})
 
 
+def air_at(gcm: dict, height_above_sea_m: float) -> dict:
+    """Mean pressure, temperature and density of the design run's air at the site, and the height on Earth whose
+    oxygen partial pressure matches (International Standard Atmosphere troposphere)."""
+    z = np.asarray(gcm['height_m']) + gcm['ground_height_m']
+    p = float(np.exp(np.interp(height_above_sea_m, z, np.log(gcm['pressure_pa']))))
+    t = float(np.interp(height_above_sea_m, z, gcm['temperature_k']))
+    rho = float(np.exp(np.interp(height_above_sea_m, z, np.log(gcm['density_kg_m3']))))
+    from atmosphere.radiative_convective.thermodynamics import earthlike_air
+    o2 = earthlike_air(gcm['configuration']['pressure_pa'], 400.0).fractions['O2']
+    earth_p = o2 * p / 0.2095
+    earth_m = (1.0 - (earth_p / 101325.0) ** (1.0 / 5.25588)) / 2.25577e-5
+    return dict(pressure_atm=round(p / 101325.0, 3), temperature_c=round(t - 273.15, 1), density_kg_m3=round(rho, 3),
+                oxygen_like_earth_at_m=round(earth_m, -1))
+
+
+def port(gcm: dict, site_info: dict, climate: list, world: lt.World, winds: dict, light: dict) -> dict:
+    """The central port: its frame, floors and air by zone, programme and occupancy, power and evacuation."""
+    ground = site_info['ground_above_sea_m']
+    H = float(np.ceil((FLIGHT_BAND_KM[0] * 1e3 - ground) / 1e3) * 1e3)
+    V, service = winds['model_based_design_gust_m_s'], winds['service_gust_m_s']
+    choice = next(iter(pick(scan(world, [H], [V], floors=PORT_FLOORS), service).values()))
+    z, b, dz = profile(choice)
+    per_m = PORT_FLOORS.area_per_m(b)
+    zones = []
+    for lo, hi, use in PORT_ZONES_KM:
+        top = H if hi is None else hi * 1e3
+        inside = (z >= lo * 1e3) & (z < top)
+        zones.append(dict(from_km=lo, to_km=round(top / 1e3, 1), use=use,
+                          floor_km2=round(float(per_m[inside].sum() * dz) / 1e6, 1),
+                          width_km=[round(float(np.interp(lo * 1e3, z, b)) / 1e3, 2), round(float(np.interp(top, z, b)) / 1e3, 2)],
+                          air_at_bottom=air_at(gcm, ground + lo * 1e3), air_at_top=air_at(gcm, ground + top)))
+    floor = choice['floor_area_m2']
+    uses, busy, full = {}, np.zeros(2), np.zeros(2)
+    for name, (share, (dense, roomy), present) in PORT_USES.items():
+        area = share * floor
+        cap = np.array([area / roomy, area / dense])
+        uses[name] = dict(floor_km2=round(area / 1e6, 2), m2_per_person=[dense, roomy],
+                          present_at_busy_hour=[round(float(v), -3) for v in cap * present])
+        busy += cap * present
+        full += cap
+    hotel = PORT_USES['hotels'][0] * floor / HOTEL_ROOM_M2
+    beds = PORT_USES['short stay: compact and transit rooms'][0] * floor / SHORT_STAY_BED_M2
+    travel = uses['travel: terminals, docks, customs, lounges, ship servicing']['present_at_busy_hour']
+    power = {f'{label}': energy(choice, climate, world.air_density, PORT_FLOORS, coverage, speedup)
+             for label, coverage, speedup in (('half_face', 0.5, 1.0), ('whole_face', 1.0, 1.0),
+                                               ('whole_face_summit_speedup', 1.0, SUMMIT_SPEEDUP))}
+    demand = power['whole_face']['tower_demand_mw']
+    open_share = 1.0 - PORT_FLOORS.band_height_m / PORT_FLOORS.spacing_m
+    steel = {}
+    slow = DEVICES['slow_rotor'].parked_drag_coefficient
+    for label, cd, cover in (('open_frame', 0.0, 0.0), ('louvers_edge_on_half_face', 0.15, 0.5),
+                             ('solid_panels_half_face', CLAD_DRAG, 0.5), ('slow_rotors_stopped_half_face', slow, 0.5),
+                             ('slow_rotors_stopped_whole_face', slow, 1.0)):
+        best = next(iter(pick(scan(world, [H], [V], floors=PORT_FLOORS, added_drag=cd * cover * open_share), service).values()))
+        steel[label] = None if best is None else round(best['frame_mass_kg'] / 1e9, 1)
+    canopy = {}
+    for label, height in (('base', 0.0), ('top', H)):
+        rho = float(world.air_density(height))
+        g = world.gravity_m_s2
+        canopy[label] = dict(density_kg_m3=round(rho, 3),
+                             free_fall_m_s=round(float(np.sqrt(2 * PERSON['mass_kg'] * g / (rho * PERSON['drag_area_m2']))), 1),
+                             canopy_across_m=round(float(np.sqrt(4 / np.pi * 2 * PERSON['mass_kg'] * g /
+                                                                 (rho * PERSON['canopy_drag_coefficient'] * PERSON['landing_m_s'] ** 2))), 1))
+    return dict(
+        height_km=H / 1e3, top_above_sea_km=round((ground + H) / 1e3, 1), flight_band_km=list(FLIGHT_BAND_KM),
+        design=summarise(choice), width_profile='width = 320 m + (base - 320 m) x (1 - z/H)^p',
+        zones=zones, floor_km2=round(floor / 1e6, 1),
+        occupancy=dict(regular_present=PORT_OCCUPANCY, busy_hour_range=[round(float(v), -4) for v in busy],
+                       all_full_range=[round(float(v), -4) for v in full], uses=uses,
+                       hotel_rooms=round(hotel, -3), hotel_guests=round(hotel * GUESTS_PER_ROOM, -3),
+                       short_stay_beds=round(beds, -3), travellers_present=travel,
+                       passengers_per_hour=[round(v / HOURS_IN_PORT, -3) for v in travel]),
+        power=dict(tower_use_mw=demand, wind=power,
+                   ground_panels_km2_for_tower=round(demand * 1e6 / light['horizontal_panel_w_m2'] / 1e6, 1),
+                   frame_steel_mt=steel,
+                   night_storage=night_storage(site_info, dict(tower=demand))),
+        evacuation=dict(person=PERSON, canopy=canopy,
+                        descent_minutes={f'from_{k}_km': round(k * 1e3 / PERSON['landing_m_s'] / 60.0)
+                                         for k in (3, 10, int(H / 1e3))}))
+
+
 def results() -> dict:
     gcm = json.loads(GCM_WINDS.read_text())
     ring = json.loads(RING.read_text())
@@ -389,7 +493,8 @@ def results() -> dict:
                           note='panels on half of the east and west faces; all of it by day',
                           city_horizontal_panels_km2=round(power['city_demand_mw'] * 1e6 / light['horizontal_panel_w_m2'] / 1e6, 1)),
         collisions=collisions(ecology),
-        night_storage=night_storage(s, dict(tower=power['tower_demand_mw'], city=power['city_demand_mw'])))
+        night_storage=night_storage(s, dict(tower=power['tower_demand_mw'], city=power['city_demand_mw'])),
+        port=port(gcm, s, climate, moon, winds, light))
 
 
 def main() -> int:

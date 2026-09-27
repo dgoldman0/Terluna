@@ -53,6 +53,25 @@ class SummitTowerTests(unittest.TestCase):
         self.assertGreater(p['slow_rotor']['moth_0.33g'], p['fast_rotor']['moth_0.33g'])
         self.assertGreater(r['night_storage']['water_mm3']['city'], r['night_storage']['water_mm3']['tower'])
 
+    def test_stored_port(self):
+        path = st.HERE / 'results' / 'summit_tower.json'
+        if not path.is_file():
+            self.skipTest('results have not been generated')
+        p = json.loads(path.read_text())['port']
+        self.assertGreaterEqual(p['top_above_sea_km'], st.FLIGHT_BAND_KM[0])
+        self.assertAlmostEqual(sum(z['floor_km2'] for z in p['zones']), p['floor_km2'], delta=0.2)
+        low, high = p['occupancy']['busy_hour_range']
+        self.assertTrue(low < p['occupancy']['regular_present'] < high)
+        self.assertLess(high, p['occupancy']['all_full_range'][1])
+        steel = p['power']['frame_steel_mt']
+        self.assertLess(steel['open_frame'], steel['louvers_edge_on_half_face'])
+        self.assertLess(steel['louvers_edge_on_half_face'], steel['slow_rotors_stopped_half_face'])
+        self.assertLess(steel['slow_rotors_stopped_half_face'], steel['slow_rotors_stopped_whole_face'])
+        for case in p['power']['wind'].values():
+            for dev in case['devices'].values():
+                self.assertLess(dev['mean_mw'], case['betz_limit_mw'])
+        self.assertLess(p['evacuation']['canopy']['top']['canopy_across_m'], 8.9)
+
 
 if __name__ == '__main__':
     unittest.main()

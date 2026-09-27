@@ -147,7 +147,7 @@
     },
     {
       "topic": "habitation",
-      "condition": "design_concepts; summit_sky_tower_concept_sizing_for_gravity_and_wind; wind_devices_screened; no complete sizing or service model",
+      "condition": "design_concepts; summit_sky_tower_concept_sizing_for_gravity_and_wind; wind_devices_screened; central_port_chosen_24km_to_the_flight_band_35km2_about_1.5_million_present; no complete sizing or service model",
       "material": [
         "../habitation/README.md",
         "../ensemble/papers/babdd5f6-4920/seed-02.md",
@@ -161,11 +161,13 @@
         "civil time: 24-hour civil days inside the 29.53-day month, with named light phases (July 2026 bundle, archive/july_2026_knowledge_bundle/)",
         "fire safety in settlements at 0.16 g (July 2026 bundle, archive/july_2026_knowledge_bundle/)",
         "services and rescue for tall structures; fire and evacuation from great height",
-        "the summit sky tower: winds over the real summit (the study raises the models' winds by 1.4 for gusts, 1.2 for the dome and 1.2 for rarity), member and joint design, the dynamic gust response with dampers, stays, construction and footings in porous highland crust; sky-ship docking loads",
+        "the summit sky tower: winds over the real summit (the study raises the models' winds by 1.4 for gusts, 1.2 for the summit's rise and 1.2 for rarity), member and joint design, the dynamic gust response with dampers, stays, construction and footings in porous highland crust; sky-ship docking loads",
         "comfort in sway at 0.16 g, where a sideways acceleration tilts the apparent vertical six times more than on Earth",
-        "a power plan for the summit city: wind in the frame gives 3-12% of the tower's own use with flier-safe devices; panels with pumped storage between the summit and the Korolev lake (1.35 kWh per m3) are the study's lead"
+        "the central port's power: about 400 MW for its floors; screened slow rotors over its whole open face give 74% in the modelled winds (132% with the summit speed-up) for 43 Mt more steel; louvered panels on the face, level panels on the highland around the base and pumped storage with the Korolev lake are the other parts",
+        "the central port's occupancy figures (areas per person, busy-hour shares) are rough planning figures to check against published standards",
+        "fire safety at 0.16 g for the port and the city: flames and smoke under weak buoyancy, compartments that give people time to reach an exit by air"
       ],
-      "next_session_task": "Run the summit's winds over its real relief (a terrain-resolving case over the dome and the Korolev basin) to replace the study's gust and speed-up factors; size the docking layers and a summit power plan with panels and pumped storage; then size other representative structures and vehicles and compare networks and daily/monthly uses."
+      "next_session_task": "Fire safety at 0.16 g for the central port and the city; then plan the megacity around the port. Later, the summit's winds over its real relief (a terrain-resolving case) to replace the study's gust and speed-up factors."
     },
     {
       "topic": "engineering",

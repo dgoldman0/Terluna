@@ -1,7 +1,7 @@
 # A sky tower on the summit
 
 The author proposes the Moon's largest skyport as a very tall tower near its highest point, on the far side's
-highland dome: many layers for the city's life, docking for sky ships on the way up, a frame that lets the wind
+highlands: many layers for the city's life, docking for sky ships on the way up, a frame that lets the wind
 through, and perhaps wind devices built into the frame (slow-turning blades, bladeless masts) to power the tower
 and the city around it while easing the wind's load. This study answers three questions with light calculations:
 
@@ -9,6 +9,7 @@ and the city around it while easing the wind's load. This study answers three qu
 - how a frame that lets the wind through stands up to it;
 - whether devices in the frame would give significant energy, and whether they ease the load.
 
+The last section, [the central port](#the-central-port), sets out the design the author chose from these results.
 The runner is [run.py](run.py), the numbers are in [results/summit_tower.json](results/summit_tower.json), and the
 models are in [engineering/towers](../../../engineering/towers/README.md). Everything is closed-form sizing and
 integrals over wind distributions; the whole study runs in about a second. Sources are in
@@ -19,9 +20,10 @@ integrals over wind distributions; the whole study runs in about a second. Sourc
 - **The summit.** The atlas's highest cell, at 5.375°N, 158.625°W, stands 11,589 m above sea level (9,935 m above the
   geoid) on its 7.6-km grid. The cell averages 7.6 km of ground. LOLA's highest point, 10,786 m above the mean lunar
   radius near Engel'gardt crater (LROC 2010), rises above that average.
-- **A broad dome.** Within 100 km of the summit the median ground is 8.6 km above sea level, and within 300 km,
-  6.5 km. All of it is land.
-- **High lakes.** The drainage estimate's rain-fed lakes fill the basins around the dome. The largest nearby fills
+- **A broad rise of highland.** The summit tops a gently rounded rise of land several hundred kilometres across.
+  Within 100 km of the summit the median ground is 8.6 km above sea level, and within 300 km, 6.5 km. All of it
+  is land.
+- **High lakes.** The drainage estimate's rain-fed lakes fill the basins around the rise. The largest nearby fills
   the Korolev basin: 141,000 km², up to 6.7 km deep, its surface 7,849 m above sea level. Its shore is 84 km from
   the summit and 3.7 km below it. A lake of 32,000 km² lies 156 km to the north, 6.1 km below the summit, and a
   small crater lake lies 9 km away.
@@ -63,7 +65,7 @@ eastward flow dominates.
 factors for what the models cannot show:
 
 - 1.4 for a three-second gust against a 3-hourly snapshot of 6-km columns;
-- 1.2 for the flow speeding up over the summit dome;
+- 1.2 for the flow speeding up over the summit's rise;
 - 1.2 for going from two lunar days to a return period of decades.
 
 That gives a design gust of 27.3 m/s. The service gust for sway is 19.0 m/s. A 50 m/s gust, an Earth-like design
@@ -146,7 +148,7 @@ tower of this height needs 8.2 Mt of steel, 2.8 times the open frame's.
 height "confuse the vortices" a tower sheds (Irwin 2008), as on the Burj Khalifa; varied and perforated band edges
 would do the same here.
 
-**Stays and dampers.** Stays anchored on the dome could narrow the base; the model leaves them out. The tallest
+**Stays and dampers.** Stays anchored in the highland around the base could narrow it; the model leaves them out. The tallest
 guyed masts, such as the Warsaw radio mast (646 m, 1974–1991; Wikipedia), carried their lateral loads on stays. Dampers such
 as Taipei 101's 660-tonne pendulum (the tower's operator) add to the frame's own damping.
 
@@ -234,7 +236,7 @@ illumination product) gives 33 W per m² of level panel and 15 W per m² of east
 efficiency. The summit, with less air above it, gets more. On a square metre, then, panels give 5–11 times what
 the best flier-safe wind device gives. Panels on half of the reference tower's east and west faces (9.9 km²)
 would give about 150 MW, more than the tower's own use, all of it by day. A city of a million would need about
-61 km² of level panels on the dome.
+61 km² of level panels on the highland around the tower.
 
 **Storage through the night.** The night lasts 354 hours. The summit stands 3.74 km above the Korolev lake, so
 water pumped up by day and run back down at night delivers 1.35 kWh per m³ at 80% round trip. A plant on Earth
@@ -243,7 +245,7 @@ million's night 0.53 km³; the Korolev lake holds 400,000 km³.
 
 ## What this leaves out, and what comes next
 
-- **Winds over the real summit.** A terrain-resolving run over the dome and the Korolev basin (CM1 in three
+- **Winds over the real summit.** A terrain-resolving run over the summit's rise and the Korolev basin (CM1 in three
   dimensions, or a large-eddy model) would replace the speed-up and gust factors with the summit's own winds.
   Longer runs would give its extremes.
 - **The structure.** Member and joint design, the dynamic gust response with dampers, stays, the order of
@@ -255,3 +257,83 @@ million's night 0.53 km³; the Korolev lake holds 400,000 km³.
   than on Earth. Also fire and evacuation from great height.
 - **Power.** A power plan for the summit city: panels, pumped storage with the Korolev lake, and supply from the
   wider industrial network.
+
+## The central port
+
+The author's choices, on 2026-09-27:
+- **Use.** The port is commercial: trade, travel, hospitality and short stays, with no homes and no industry.
+- **Long-haul docks.** Long-haul sky ships dock in the flight band, so they never descend through the storms.
+- **People.** The floors hold about 1.5 million people on a regular basis, in roughly the mix below.
+
+`port()` in run.py sizes it.
+
+**Height.** The named flight band begins 35 km above sea level
+([decisions](../../decisions.md)), 23.4 km above the summit ground. The tower therefore rises 24 km, and its top
+stands 35.6 km above sea level.
+
+**Frame.** The floors follow the frame: up to 100,000 m² a storey, and 2% of the frame's plan where that is less, in
+four storeys every 200 m. At the design gust the lightest steel frame for them has:
+- a base 8.2 km wide, narrowing as (1 − z/H)^1.5 to 320 m at the crown;
+- 33 Mt of steel in the frame and 17 Mt in the floors;
+- a first period of 45 s, and 44 m of sway at the top in the service gust (1/550 of its height);
+- footings of about 28,600 m² under each of its four legs at 1 MPa.
+
+The industrial architecture moves bulk material at about 2.7×10⁸ kg a second, so the frame is two minutes of that
+stream.
+
+| Height above the summit | Width | Floor | Air at the top of the band | Oxygen like Earth at | Use |
+|---|---|---|---|---|---|
+| 0–3 km | 8.2–6.8 km | 6.0 km² | 0.89 atm, 9 °C | 2,430 m | Open public floors and terraces: trade halls, markets, food, the ground interchange, big event halls |
+| 3–10 km | 6.8–3.8 km | 13.9 km² | 0.78 atm, 3 °C | 3,520 m | Enclosed floors with topped-up air: commerce, hotels, short stays, conferences |
+| 10–15 km | 3.8–2.1 km | 10.0 km² | 0.70 atm, −1 °C | 4,290 m | Enclosed floors: hotels, commerce, regional docking tiers |
+| 15–24 km | 2.1–0.32 km | 5.0 km² | 0.59 atm, −10 °C | 5,670 m | Sealed, pressurised terminals, customs, lounges and long-haul docks |
+| Total | | 34.9 km² | | | |
+
+**Programme and occupancy.** These are the areas per person assumed for each use:
+
+| Use | Floor | Floor per person present | Present at a busy hour |
+|---|---|---|---|
+| Travel: terminals, docks, customs, lounges, ship servicing | 7.5 km² | 30–50 m² | 120,000–200,000 |
+| Hotels | 7.0 km² | 30–45 m² | 124,000–186,000 |
+| Short stay: compact and transit rooms | 3.0 km² | 12–20 m² | 120,000–200,000 |
+| Commerce and trade | 7.0 km² | 12–20 m² | 245,000–408,000 |
+| Shops, markets, food and drink | 4.0 km² | 4–8 m² | 250,000–499,000 |
+| Events, conferences, leisure, observation | 3.5 km² | 3–6 m² | 233,000–466,000 |
+| Services and back of house | 3.0 km² | 50–100 m² | 24,000–48,000 |
+
+The busy hour counts each use at an assumed share of its capacity: 80% for travel, hotels and services, 70% for
+commerce, 50% for shops and food, 40% for events. That gives 1.1–2.0 million people present. The author set the
+design figure at about 1.5 million on a regular basis. With every space full, the tower holds 1.9–3.5 million, and
+its exits must be designed for that.
+- **Overnight.** The hotels hold about 116,000 rooms (186,000 guests), and short stays add 200,000 beds.
+- **Travellers.** 120,000–200,000 are in the port at a busy hour. At two hours each, that is 60,000–100,000
+  passengers an hour.
+
+The areas per person are rough planning figures from Earth practice, still to be checked against published
+standards. Terminals take the most, because their docks, baggage and servicing are counted in.
+
+**Power.** The floors use about 400 MW at 100 kWh per m² a year. The port's face is large: its open face is 77 km²,
+and the wind carries about 1.95 GW through it. The Betz limit on that is 1.16 GW.
+
+| Devices | Half the open face | The whole open face | The whole face, with the summit speed-up of 1.2 | Frame steel, devices stopped for storms |
+|---|---|---|---|---|
+| Screened slow rotors | 147 MW (37% of the tower's use) | 295 MW (74%) | 527 MW (132%) | 55.5 Mt (half face), 75.6 Mt (whole face) |
+| Fast rotors (not safe for fliers) | 317 MW (79%) | 634 MW (159%) | 1,158 MW (291%) | |
+| Bladeless masts | 35 MW (9%) | 70 MW (18%) | 125 MW (31%) | |
+
+- **Wind.** Screened slow rotors over the whole face cover three-quarters of the tower's use in the modelled winds,
+  and all of it if the summit's winds run a fifth stronger. The price is 43 Mt more steel, 2.3 times the open
+  frame.
+- **Panels on the tower.** Louvers over half the face that turn edge-on for storms add 14% to the steel (37.5 Mt).
+  Solid panels there would add 160% (85.5 Mt).
+- **Panels on the ground.** Level panels on the highland around the base need 12 km² for the tower's average use.
+- **Storage.** Carrying the tower through the 354-hour night takes 105 million m³ of water pumped between the
+  summit and the Korolev lake.
+
+**A sky-ship world.** On the Open Moon lift is cheap, and the third dimension is ordinary access.
+- **Building.** Sky ships can set frame segments anywhere up the tower.
+- **Leaving.** Every layer's rim is an exit, by ship, by air taxi, on wings or under a canopy. A falling person
+  reaches 18–22 m/s in the tower's air, against 43 m/s on Earth. A round canopy 3.7–4.5 m across lands them at
+  4 m/s; on Earth that takes 8.9 m. The ride down takes 12 minutes from 3 km, 42 from 10 km and 100 from the top.
+- **Fire.** Flight does not settle fire safety at 0.16 g: how flames and smoke behave under weak buoyancy, and
+  compartments that give people time to reach the rim. That question comes next, for the whole city.
