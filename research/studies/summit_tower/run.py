@@ -94,6 +94,20 @@ PORT_USES = {
     'events, conferences, leisure, observation': (3.5 / 35, (3.0, 6.0), 0.4),
     'services and back of house': (3.0 / 35, (50.0, 100.0), 0.8),
 }
+# Where each use sits (km2 by zone: 0-3, 3-10, 10-15, 15-24 km), before fitting. Travel splits by trip: long-haul
+# terminals in the sealed zone under the crown's docking arms, regional docks at 10-15 km, and local interchange at the
+# base and in the hub bands. Hotels sit low, where the air is best for sleep (pressurised above about 6 km). Markets,
+# food and the big event halls fill the open floors at the base. fit_programme scales the table to the uses' totals
+# and the zones' floor; zeros stay zero.
+PORT_ZONE_USES = {
+    'travel: terminals, docks, customs, lounges, ship servicing': (0.6, 0.4, 2.5, 4.0),
+    'hotels': (1.0, 5.2, 0.8, 0.0),
+    'short stay: compact and transit rooms': (0.0, 1.0, 1.6, 0.4),
+    'commerce and trade': (0.5, 3.5, 3.0, 0.0),
+    'shops, markets, food and drink': (2.0, 1.4, 0.4, 0.2),
+    'events, conferences, leisure, observation': (1.4, 1.4, 0.7, 0.0),
+    'services and back of house': (0.5, 1.0, 1.1, 0.4),
+}
 HOTEL_ROOM_M2, GUESTS_PER_ROOM, SHORT_STAY_BED_M2, HOURS_IN_PORT = 60.0, 1.6, 15.0, 2.0
 PERSON = dict(mass_kg=80.0, drag_area_m2=0.7, canopy_drag_coefficient=1.3, landing_m_s=4.0)
 NIGHT_HOURS = 354.4        # half a synodic month
@@ -375,6 +389,18 @@ def air_at(gcm: dict, height_above_sea_m: float) -> dict:
                 oxygen_like_earth_at_m=round(earth_m, -1))
 
 
+def fit_programme(seed, use_totals, zone_totals, rounds: int = 500) -> np.ndarray:
+    """Scale a use-by-zone table until its rows match the uses' floor and its columns the zones' floor (iterative
+    proportional fitting); entries that start at zero stay zero."""
+    m = np.array(seed, dtype=float)
+    uses = np.asarray(use_totals, dtype=float)
+    zones = np.asarray(zone_totals, dtype=float) * uses.sum() / np.sum(zone_totals)
+    for _ in range(rounds):
+        m *= (uses / m.sum(axis=1))[:, None]
+        m *= zones / m.sum(axis=0)
+    return m
+
+
 def port(gcm: dict, site_info: dict, climate: list, world: lt.World, winds: dict, light: dict) -> dict:
     """The central port: its frame, floors and air by zone, programme and occupancy, power and evacuation."""
     ground = site_info['ground_above_sea_m']
@@ -383,12 +409,13 @@ def port(gcm: dict, site_info: dict, climate: list, world: lt.World, winds: dict
     choice = next(iter(pick(scan(world, [H], [V], floors=PORT_FLOORS), service).values()))
     z, b, dz = profile(choice)
     per_m = PORT_FLOORS.area_per_m(b)
-    zones = []
+    zones, zone_floor = [], []
     for lo, hi, use in PORT_ZONES_KM:
         top = H if hi is None else hi * 1e3
         inside = (z >= lo * 1e3) & (z < top)
+        zone_floor.append(float(per_m[inside].sum() * dz))
         zones.append(dict(from_km=lo, to_km=round(top / 1e3, 1), use=use,
-                          floor_km2=round(float(per_m[inside].sum() * dz) / 1e6, 1),
+                          floor_km2=round(zone_floor[-1] / 1e6, 1),
                           width_km=[round(float(np.interp(lo * 1e3, z, b)) / 1e3, 2), round(float(np.interp(top, z, b)) / 1e3, 2)],
                           air_at_bottom=air_at(gcm, ground + lo * 1e3), air_at_top=air_at(gcm, ground + top)))
     floor = choice['floor_area_m2']
@@ -400,6 +427,16 @@ def port(gcm: dict, site_info: dict, climate: list, world: lt.World, winds: dict
                           present_at_busy_hour=[round(float(v), -3) for v in cap * present])
         busy += cap * present
         full += cap
+    names = list(PORT_USES)
+    table = fit_programme([PORT_ZONE_USES[n] for n in names], [PORT_USES[n][0] * floor for n in names], zone_floor)
+    for j, zone in enumerate(zones):
+        zone['uses_km2'] = {n: round(float(table[i, j]) / 1e6, 2) for i, n in enumerate(names)}
+        present = sum(table[i, j] / np.array([PORT_USES[n][1][1], PORT_USES[n][1][0]]) * PORT_USES[n][2]
+                      for i, n in enumerate(names))
+        zone['present_at_busy_hour'] = [round(float(v), -3) for v in present]
+    trips = table[names.index('travel: terminals, docks, customs, lounges, ship servicing')] / 1e6
+    travel_by_trip = dict(local_km2=round(float(trips[0] + trips[1]), 2), regional_km2=round(float(trips[2]), 2),
+                          long_haul_km2=round(float(trips[3]), 2))
     hotel = PORT_USES['hotels'][0] * floor / HOTEL_ROOM_M2
     beds = PORT_USES['short stay: compact and transit rooms'][0] * floor / SHORT_STAY_BED_M2
     travel = uses['travel: terminals, docks, customs, lounges, ship servicing']['present_at_busy_hour']
@@ -430,7 +467,7 @@ def port(gcm: dict, site_info: dict, climate: list, world: lt.World, winds: dict
         occupancy=dict(regular_present=PORT_OCCUPANCY, busy_hour_range=[round(float(v), -4) for v in busy],
                        all_full_range=[round(float(v), -4) for v in full], uses=uses,
                        hotel_rooms=round(hotel, -3), hotel_guests=round(hotel * GUESTS_PER_ROOM, -3),
-                       short_stay_beds=round(beds, -3), travellers_present=travel,
+                       short_stay_beds=round(beds, -3), travellers_present=travel, travel_by_trip=travel_by_trip,
                        passengers_per_hour=[round(v / HOURS_IN_PORT, -3) for v in travel]),
         power=dict(tower_use_mw=demand, wind=power,
                    ground_panels_km2_for_tower=round(demand * 1e6 / light['horizontal_panel_w_m2'] / 1e6, 1),

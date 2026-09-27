@@ -3,7 +3,7 @@
  "producer": {
   "study": "summit_tower",
   "files": {
-   "research/studies/summit_tower/run.py": "821ccb3943280be5",
+   "research/studies/summit_tower/run.py": "db7811ceecf27c31",
    "engineering/towers/lattice.py": "111fd23770eabeb1",
    "engineering/towers/wind_energy.py": "f7eb7dfc23790597"
   },
@@ -1619,7 +1619,20 @@
      "temperature_c": 9.0,
      "density_kg_m3": 1.108,
      "oxygen_like_earth_at_m": 2430.0
-    }
+    },
+    "uses_km2": {
+     "travel: terminals, docks, customs, lounges, ship servicing": 0.6,
+     "hotels": 1.0,
+     "short stay: compact and transit rooms": 0.0,
+     "commerce and trade": 0.5,
+     "shops, markets, food and drink": 2.0,
+     "events, conferences, leisure, observation": 1.4,
+     "services and back of house": 0.5
+    },
+    "present_at_busy_hour": [
+     267000.0,
+     516000.0
+    ]
    },
    {
     "from_km": 3.0,
@@ -1641,7 +1654,20 @@
      "temperature_c": 3.0,
      "density_kg_m3": 0.986,
      "oxygen_like_earth_at_m": 3520.0
-    }
+    },
+    "uses_km2": {
+     "travel: terminals, docks, customs, lounges, ship servicing": 0.4,
+     "hotels": 5.2,
+     "short stay: compact and transit rooms": 1.0,
+     "commerce and trade": 3.51,
+     "shops, markets, food and drink": 1.4,
+     "events, conferences, leisure, observation": 1.4,
+     "services and back of house": 1.0
+    },
+    "present_at_busy_hour": [
+     451000.0,
+     799000.0
+    ]
    },
    {
     "from_km": 10.0,
@@ -1663,7 +1689,20 @@
      "temperature_c": -1.2,
      "density_kg_m3": 0.906,
      "oxygen_like_earth_at_m": 4290.0
-    }
+    },
+    "uses_km2": {
+     "travel: terminals, docks, customs, lounges, ship servicing": 2.5,
+     "hotels": 0.79,
+     "short stay: compact and transit rooms": 1.59,
+     "commerce and trade": 2.98,
+     "shops, markets, food and drink": 0.4,
+     "events, conferences, leisure, observation": 0.69,
+     "services and back of house": 1.09
+    },
+    "present_at_busy_hour": [
+     302000.0,
+     527000.0
+    ]
    },
    {
     "from_km": 15.0,
@@ -1685,7 +1724,20 @@
      "temperature_c": -9.5,
      "density_kg_m3": 0.778,
      "oxygen_like_earth_at_m": 5670.0
-    }
+    },
+    "uses_km2": {
+     "travel: terminals, docks, customs, lounges, ship servicing": 3.98,
+     "hotels": 0.0,
+     "short stay: compact and transit rooms": 0.4,
+     "commerce and trade": 0.0,
+     "shops, markets, food and drink": 0.2,
+     "events, conferences, leisure, observation": 0.0,
+     "services and back of house": 0.4
+    },
+    "present_at_busy_hour": [
+     95000.0,
+     164000.0
+    ]
    }
   ],
   "floor_km2": 34.9,
@@ -1785,6 +1837,11 @@
     120000.0,
     200000.0
    ],
+   "travel_by_trip": {
+    "local_km2": 1.01,
+    "regional_km2": 2.5,
+    "long_haul_km2": 3.98
+   },
    "passengers_per_hour": [
     60000.0,
     100000.0

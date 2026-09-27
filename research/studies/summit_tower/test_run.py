@@ -2,6 +2,8 @@
 import json
 import unittest
 
+import numpy as np
+
 from research.studies.summit_tower import run as st
 
 
@@ -71,6 +73,27 @@ class SummitTowerTests(unittest.TestCase):
             for dev in case['devices'].values():
                 self.assertLess(dev['mean_mw'], case['betz_limit_mw'])
         self.assertLess(p['evacuation']['canopy']['top']['canopy_across_m'], 8.9)
+
+    def test_fit_programme(self):
+        m = st.fit_programme([[1.0, 1.0, 0.0], [2.0, 1.0, 1.0]], [4.0, 6.0], [3.0, 5.0, 2.0])
+        self.assertTrue(np.allclose(m.sum(axis=1), [4.0, 6.0]))
+        self.assertTrue(np.allclose(m.sum(axis=0), [3.0, 5.0, 2.0]))
+        self.assertEqual(m[0, 2], 0.0)
+
+    def test_stored_programme_by_zone(self):
+        path = st.HERE / 'results' / 'summit_tower.json'
+        if not path.is_file():
+            self.skipTest('results have not been generated')
+        p = json.loads(path.read_text())['port']
+        for z in p['zones']:
+            self.assertAlmostEqual(sum(z['uses_km2'].values()), z['floor_km2'], delta=0.1)
+        for name, use in p['occupancy']['uses'].items():
+            self.assertAlmostEqual(sum(z['uses_km2'][name] for z in p['zones']), use['floor_km2'], delta=0.05)
+        self.assertEqual(p['zones'][-1]['uses_km2']['hotels'], 0.0)
+        trips = p['occupancy']['travel_by_trip']
+        self.assertGreater(trips['long_haul_km2'], trips['regional_km2'])
+        self.assertAlmostEqual(sum(trips.values()), p['occupancy']['uses'][
+            'travel: terminals, docks, customs, lounges, ship servicing']['floor_km2'], delta=0.05)
 
 
 if __name__ == '__main__':

@@ -10,7 +10,7 @@ a frame and screen devices; they are not structural design.
 
 The tower model's assumptions:
 
-- **Loads.** Member buckling is one factor on the strength (0.75). One safety factor (1.6) covers gravity and wind together. The wind is a peak gust, taken as uniform up the tower, with a dynamic factor of 1.2 on its pressure. The lattice's force coefficient is the square-tower formula of the tower standards, Cf = 4.0e² − 5.9e + 4.0, times 0.51e² + 0.57 for round members. The floor bands' facades have a drag coefficient of 1.4.
+- **Loads.** Member buckling is one factor on the strength (0.75). One safety factor (1.6) covers gravity and wind together. The wind is a peak gust, taken as uniform up the tower, with a dynamic factor of 1.2 on its pressure. The lattice's force coefficient is TIA-222-G's square-tower formula, Cf = 4.0e² − 5.9e + 4.0, times 0.57 − 0.14e + 0.86e² − 0.24e³ (at most 1) for round members in subcritical flow, and times 1 + 0.75e (at most 1.2) for wind along a diagonal. The floor bands' facades have a drag coefficient of 1.4.
 - **Bracing.** It is 35% of the legs' mass, or what the wind's shear needs if that is more.
 - **Left out.** Joints, fatigue, member-level vortex shedding, construction stages, ice and the ground's own mechanics.
 

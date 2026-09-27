@@ -283,10 +283,10 @@ stream.
 
 | Height above the summit | Width | Floor | Air at the top of the band | Oxygen like Earth at | Use |
 |---|---|---|---|---|---|
-| 0–3 km | 8.2–6.8 km | 6.0 km² | 0.89 atm, 9 °C | 2,430 m | Open public floors and terraces: trade halls, markets, food, the ground interchange, big event halls |
-| 3–10 km | 6.8–3.8 km | 13.9 km² | 0.78 atm, 3 °C | 3,520 m | Enclosed floors with topped-up air: commerce, hotels, short stays, conferences |
-| 10–15 km | 3.8–2.1 km | 10.0 km² | 0.70 atm, −1 °C | 4,290 m | Enclosed floors: hotels, commerce, regional docking tiers |
-| 15–24 km | 2.1–0.32 km | 5.0 km² | 0.59 atm, −10 °C | 5,670 m | Sealed, pressurised terminals, customs, lounges and long-haul docks |
+| 0–3 km | 8.2–6.8 km | 6.0 km² | 0.89 atm, 9 °C | 2,430 m | Open public floors and terraces: markets, food, big event halls, the ground interchange, some hotels |
+| 3–10 km | 6.8–3.8 km | 13.9 km² | 0.78 atm, 3 °C | 3,520 m | Enclosed floors with topped-up air: most hotels (pressurised above about 6 km), commerce, conferences, short stays |
+| 10–15 km | 3.8–2.1 km | 10.0 km² | 0.70 atm, −1 °C | 4,290 m | Enclosed floors: regional docks and terminals, commerce, short stays |
+| 15–24 km | 2.1–0.32 km | 5.0 km² | 0.59 atm, −10 °C | 5,670 m | Sealed, pressurised long-haul terminals, customs, lounges and transit rooms, under the crown's docking arms |
 | Total | | 34.9 km² | | | |
 
 **Programme and occupancy.** These are the areas per person assumed for each use:
@@ -308,6 +308,28 @@ its exits must be designed for that.
 - **Overnight.** The hotels hold about 116,000 rooms (186,000 guests), and short stays add 200,000 beds.
 - **Travellers.** 120,000–200,000 are in the port at a busy hour. At two hours each, that is 60,000–100,000
   passengers an hour.
+
+**Programme by zone.** The uses are placed by where people arrive and what air they need, then scaled so that each
+use and each zone adds up (`fit_programme`, iterative proportional fitting). The floor is in km²:
+
+| Use | 0–3 km | 3–10 km | 10–15 km | 15–24 km | Total |
+|---|---|---|---|---|---|
+| Travel | 0.6 | 0.4 | 2.5 | 4.0 | 7.5 |
+| Hotels | 1.0 | 5.2 | 0.8 | – | 7.0 |
+| Short stay | – | 1.0 | 1.6 | 0.4 | 3.0 |
+| Commerce and trade | 0.5 | 3.5 | 3.0 | – | 7.0 |
+| Shops, markets, food and drink | 2.0 | 1.4 | 0.4 | 0.2 | 4.0 |
+| Events, conferences, leisure | 1.4 | 1.4 | 0.7 | – | 3.5 |
+| Services and back of house | 0.5 | 1.0 | 1.1 | 0.4 | 3.0 |
+| Floor | 6.0 | 13.9 | 10.0 | 5.0 | 34.9 |
+| Present at a busy hour | 267,000–516,000 | 451,000–799,000 | 302,000–527,000 | 95,000–164,000 | 1.1–2.0 million |
+
+- **Travel by trip.** Long-haul terminals (4.0 km²) fill the sealed zone under the crown's docking arms in the flight
+  band. Regional docks and terminals (2.5 km²) sit at 10–15 km. Local interchange (1.0 km²) is at the base and in the
+  hub bands.
+- **Sleep.** Hotels sit low, where the air is best: like 1,950–2,430 m on Earth at the base, and about 3,000 m at
+  6 km. Hotel floors above about 6 km are pressurised.
+- **Crowds.** Markets, food and the big event halls fill the open floors at the base, next to the ground interchange.
 
 The areas per person are rough planning figures from Earth practice, still to be checked against published
 standards. Terminals take the most, because their docks, baggage and servicing are counted in.
