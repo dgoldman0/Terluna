@@ -22,8 +22,14 @@ transport. At the equator, with a leaf area index of 5, the Moon's canopy absorb
 fewer photons over the cycle than the same canopy under Earth's clear sky and fixes 18%
 more carbon (11% more at equal CO₂): its diffuse sky spreads the light over leaves that
 can use it. Through the 354-hour night the leaves alone need a store of 33 g C per m² of
-ground, thirty times an Earth night's. Stomata, water, acclimation to continuous light,
-full sugar stores and the respiration of stems and roots are not yet in it.
+ground, thirty times an Earth night's. [plant.py](canopy/plant.py) follows the whole plant
+through the cycle, with the chosen climate's temperatures and the long twilight of the
+Moon's tall sky, which leaves only 238 of the 354 night hours dark at the equator and 34
+at 60°. Every evergreen way through the night closes its carbon budget; idling at a
+quarter of the daytime upkeep cuts the store from 46 to 10 g C per m² of ground, while
+regrowing the canopy every cycle leaves a tenth of the growth or none. Stomata, water,
+acclimation to continuous light, full sugar stores and whether leaves survive weeks of
+darkness are not yet in it.
 
 ## Remaining biological work
 

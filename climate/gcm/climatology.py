@@ -9,8 +9,10 @@ high deck (the layers above), each the largest layer cover in its column (maximu
 the mean cover and eastward wind of every layer.
 It also composites total, low and high cloud against the Sun, in latitude and local hour angle (degrees
 east of the subsolar point), so that a display can move clouds with the Sun as the slowly rotating Moon
-does. Each output interval is a 3-day mean, a tenth of a lunar day, so the hour angle is resolved to
-about 36 degrees.
+does, and the air temperature at 2 m over land the same way, for all land and for the near and far sides
+(longitudes within and beyond 90 degrees of the sub-Earth point), for work on how the lunar day and night
+feel to plants and people. Each output interval is a 3-day mean, a tenth of a lunar day, so the hour angle
+is resolved to about 36 degrees.
 """
 from __future__ import annotations
 import hashlib
@@ -21,7 +23,7 @@ import numpy as np
 
 HERE = Path(__file__).resolve().parent
 SCHEMA = 'terluna.climate.gcm-climatology/1'
-FIELDS = ('clt', 'pr', 'evap', 'mrso', 'ts', 'prw', 'sic', 'snd', 'lsm', 'czen')
+FIELDS = ('clt', 'pr', 'evap', 'mrso', 'ts', 'tas', 'prw', 'sic', 'snd', 'lsm', 'czen')
 HOUR_BINS = 36
 DECK_SIGMA = 0.5   # layers above this sigma form the low deck, layers below it the high deck
 EVIDENCE = ('Means of ExoPlaSim 3-day output means over the stated model years at T21 (32 x 64). PlaSim diagnoses '
@@ -31,8 +33,10 @@ EVIDENCE = ('Means of ExoPlaSim 3-day output means over the stated model years a
 READING_RULE = ('Latitudes north first as in the model; longitudes east, 0-360. Precipitation and evaporation in mm per '
                 'day of liquid water, evaporation positive upward. clt_sun[lat, k] is mean cloud cover at hour angle '
                 'hour_angle_deg[k] (degrees east of the subsolar point, -180..180); low_sun and high_sun likewise for '
-                'the two decks. cl_layer_mean[k] and ua_layer_mean[k] are the area-weighted mean cover and eastward '
-                'wind (m/s) of the layer at sigma[k].')
+                'the two decks. tas_land_sun, tas_land_sun_near and tas_land_sun_far[lat, k] are the mean 2-m air '
+                'temperature (K) of land cells at that hour angle, over all land and over land within and beyond 90 '
+                'degrees of longitude from the sub-Earth point (NaN where a row has no such land). cl_layer_mean[k] and '
+                'ua_layer_mean[k] are the area-weighted mean cover and eastward wind (m/s) of the layer at sigma[k].')
 
 
 def decks(cl, sigma, split=DECK_SIGMA):
@@ -69,18 +73,23 @@ def subsolar_longitudes(czen, lat, lon):
     return lon[np.argmax(czen[:, rows, :].mean(axis=1), axis=1)]
 
 
-def sun_composite(clt, czen, lat, lon, bins=HOUR_BINS):
+def sun_composite(clt, czen, lat, lon, bins=HOUR_BINS, mask=None):
+    """Mean of a field (time, lat, lon) by latitude and hour angle, over the cells of an optional (lat, lon)
+    mask; NaN where the mask leaves a latitude row no cells."""
     sub = subsolar_longitudes(czen, lat, lon)
     hour = (lon[None, :] - sub[:, None] + 180.0) % 360.0 - 180.0
     index = np.clip(((hour + 180.0) / 360.0 * bins).astype(int), 0, bins - 1)
+    weight = np.ones((lat.size, lon.size)) if mask is None else np.asarray(mask, dtype=float)
     total = np.zeros((lat.size, bins))
     count = np.zeros((lat.size, bins))
     for t in range(clt.shape[0]):
         for j in range(lon.size):
-            total[:, index[t, j]] += clt[t, :, j]
-            count[:, index[t, j]] += 1
+            total[:, index[t, j]] += clt[t, :, j] * weight[:, j]
+            count[:, index[t, j]] += weight[:, j]
     centres = (np.arange(bins) + 0.5) / bins * 360.0 - 180.0
-    return total / np.maximum(count, 1), centres
+    if mask is None:
+        return total / np.maximum(count, 1), centres
+    return np.where(count > 0, total / np.maximum(count, 1e-300), np.nan), centres
 
 
 def climatology(folder: str, first: int, last: int) -> dict:
@@ -89,6 +98,11 @@ def climatology(folder: str, first: int, last: int) -> dict:
     clt_sun, hour = sun_composite(f['clt'], f['czen'], lat, lon)
     low_sun, _ = sun_composite(f['low'], f['czen'], lat, lon)
     high_sun, _ = sun_composite(f['high'], f['czen'], lat, lon)
+    land = f['lsm'].mean(axis=0) > 0.5
+    near = ((lon < 90.0) | (lon > 270.0))[None, :]
+    tas_land = {name: sun_composite(f['tas'], f['czen'], lat, lon, mask=land & side)[0]
+                for name, side in (('tas_land_sun', np.ones_like(near)), ('tas_land_sun_near', near),
+                                   ('tas_land_sun_far', ~near))}
     evap = f['evap'].mean(axis=0) * mm_day
     evap = -evap if evap.mean() < 0 else evap
     weight = np.cos(np.radians(lat))
@@ -99,7 +113,7 @@ def climatology(folder: str, first: int, last: int) -> dict:
                 evap_mm_day=evap, mrso_m=f['mrso'].mean(axis=0), ts_k=f['ts'].mean(axis=0),
                 prw_kg_m2=f['prw'].mean(axis=0), sic=f['sic'].mean(axis=0), snd_m=f['snd'].mean(axis=0),
                 lsm=f['lsm'].mean(axis=0), clt_sun=clt_sun, low_sun=low_sun, high_sun=high_sun,
-                hour_angle_deg=hour, sigma=f['sigma'], cl_layer_mean=layer, ua_layer_mean=wind)
+                hour_angle_deg=hour, sigma=f['sigma'], cl_layer_mean=layer, ua_layer_mean=wind, **tas_land)
 
 
 def main(argv=None) -> int:

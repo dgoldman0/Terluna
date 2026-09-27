@@ -105,13 +105,13 @@
         "surface light below about 20 degrees of Sun height: the two-stream diffuse light falls short of the spherical sky solver (a quarter at 10 degrees, half at 5); a spherical spectral solution on the solved column would settle it",
         "surface light under clouds: colour and diffuse share",
         "lunar global energy residual up to 4.6%",
-        "the five-hour practical dawn and dusk (research/decisions.md): a photometric definition for the actual atmosphere, from a working-light threshold to sunrise, about 2.54 degrees of solar elevation at the equator"
+        "the five-hour practical dawn and dusk (research/decisions.md): a photometric definition for the actual atmosphere, from a working-light threshold to sunrise, about 2.54 degrees of solar elevation at the equator. The spherical sky atlas keeps about 1,000 lux on the ground until the Sun is some 13 degrees down (about a day at the equator) and 1 umol m-2 s-1 of photosynthetic light until 29 degrees down (58 hours; biosphere/canopy/plant.py)"
       ],
       "next_session_task": "Compute earthlit sky radiance with Earth's reflectance spectrum as the source, and test low-Sun and night radiance against appropriate benchmarks."
     },
     {
       "topic": "biosphere",
-      "condition": "periodic_carbon_and_oxygen_requirement_models; hypothetical_traits; clear_sky_spectral_canopy_photosynthesis_moon_and_earth_prospect_d_fvcb",
+      "condition": "periodic_carbon_and_oxygen_requirement_models; hypothetical_traits; clear_sky_spectral_canopy_photosynthesis_moon_and_earth_prospect_d_fvcb; whole_plant_carbon_through_the_lunar_night_with_twilight_and_gcm_temperatures_scenarios",
       "material": [
         "../biosphere/README.md",
         "../ensemble/papers/74a946e2-8f98/seed-02.md",
@@ -119,18 +119,20 @@
         "studies/environment_screens/results/carbon_budget.csv",
         "studies/environment_screens/results/oxygen_budget.csv",
         "../biosphere/canopy/model.py",
-        "../biosphere/canopy/results/canopy.json"
+        "../biosphere/canopy/results/canopy.json",
+        "../biosphere/canopy/plant.py",
+        "../biosphere/canopy/results/plant.json"
       ],
       "unresolved": [
         "complete life cycles",
         "trait calibration",
         "coupled nutrient/energy budgets",
         "canopy photosynthesis over 354 hours of continuous light: acclimation, feedback from full sugar stores and photoinhibition are not modelled, nor are stomata, water supply, leaf temperature or the respiration of stems and roots; clear sky only",
-        "where plants keep the night's store (33 g C per m2 of ground for the leaves alone at a leaf area index of 5) and how far night metabolism can slow",
+        "whether leaves survive about 240 dark hours without dark-induced senescence, and how far and how fast night metabolism can slow and restart: the whole-plant store is 46 g C per m2 of ground at the daytime rate and 10 at a quarter of it (biosphere/canopy/plant.py, whose strategies are carbon scenarios)",
         "fire at 0.16 g in an oxygenated atmosphere: flame shape, ember lofting and wildfire spread; the bundle makes full-scale partial-gravity combustion research a condition for adding oxygen (July 2026 bundle, archive/july_2026_knowledge_bundle/)",
         "timing: short internal clocks alongside the 708.7-hour environmental cycle (July 2026 bundle, archive/july_2026_knowledge_bundle/)"
       ],
-      "next_session_task": "Calibrate trait and exchange ranges from complete sources; add growth/nutrient/ecological coupling and empirical life-cycle requirements."
+      "next_session_task": "Gather measured dark tolerance (dark-induced senescence, respiration through extended darkness, polar-night survival) to bound the store-and-idle strategies; then clouds, stomata and water in the canopy and plant models; calibrate trait and exchange ranges from complete sources."
     },
     {
       "topic": "habitation",
