@@ -49,7 +49,8 @@
         "../climate/results/lunar_day/",
         "../climate/crm/",
         "../climate/results/crm/",
-        "../visualization/equator-weather/"
+        "../visualization/equator-weather/",
+        "../climate/results/gcm/"
       ],
       "unresolved": [
         "absolute cloud amount: PlaSim diagnoses cover (20-28%); published slow-rotator GCMs suggest no thick day-side deck at this sunlight, but models disagree widely on amounts",
@@ -147,7 +148,7 @@
     },
     {
       "topic": "habitation",
-      "condition": "design_concepts; summit_sky_tower_concept_sizing_for_gravity_and_wind; wind_devices_screened; central_port_chosen_24km_to_the_flight_band_35km2_about_1.5_million_present; port_fire_safety_first_order_at_0.16g; no complete sizing or service model",
+      "condition": "design_concepts; summit_sky_tower_concept_sizing_for_gravity_and_wind; wind_devices_screened; central_port_chosen_24km_to_the_flight_band_35km2_about_1.5_million_present; port_fire_safety_first_order_at_0.16g; no complete sizing or service model; sky_ship_size_first_order_rigid_hulls_fitted_to_four_airships_wings_to_ten_transports",
       "material": [
         "../habitation/README.md",
         "../ensemble/papers/babdd5f6-4920/seed-02.md",
@@ -155,7 +156,9 @@
         "../engineering/towers/",
         "studies/port_fire/README.md",
         "../engineering/fire/",
-        "../visualization/summit-port/"
+        "../visualization/summit-port/",
+        "studies/sky_ships/README.md",
+        "../engineering/flight/"
       ],
       "unresolved": [
         "supported floor area and mass",
@@ -169,13 +172,14 @@
         "the central port's power: about 400 MW for its floors; screened slow rotors over its whole open face give 74% in the modelled winds (132% with the summit speed-up) for 43 Mt more steel; louvered panels on the face, level panels on the highland around the base and pumped storage with the Korolev lake are the other parts",
         "the central port's occupancy figures (areas per person, busy-hour shares) are rough planning figures to check against published standards",
         "fire at 0.16 g: the port has a first-order study (studies/port_fire: Earth correlations carried by Froude scaling, design fires bracketed, a materials test at 23.5% oxygen, compartments with sprinklers, shafts broken every three bands, 33 water pressure zones); open are full-scale fire data at partial gravity (NASA's FM2 is planned as the first fire on the Moon), sprinkler sprays at 0.16 g, crowd flows, wind-driven fire and smoke through a band (CFD of a band section), and the city",
-        "the port's architecture is a first proposal (visualization/summit-port): six leg towers with lift cores, a four-storey wing every 200 m wrapped round two opposite legs, berths every 60 m, gate interchanges and a crown terminal; the building fills about 1/2,000 of the space inside the frame, so it reads as a lattice with shelves; the crown's docking arms as drawn are not credible structure; long-haul berths depend on a sky-ship class not yet designed (30,000-50,000 long-haul passengers an hour need about 15-25 ships at berth at 2,000 passengers each, 55-95 at 500); only the hexagonal frame is modelled"
+        "the port's architecture is a first proposal (visualization/summit-port): six leg towers with lift cores, a four-storey wing every 200 m wrapped round two opposite legs, berths every 60 m, gate interchanges and a crown terminal; the building fills about 1/2,000 of the space inside the frame, so it reads as a lattice with shelves; the crown's docking arms as drawn are not credible structure; long-haul berths depend on the long-haul class, still to choose (studies/sky_ships: the 32,000-53,000 long-haul passengers an hour fill 16-26 berths of 500 m ships of about 2,000 passengers, 5-8 of 750 m ships of about 7,000, or one of 1.5 km ships; moored in the band's 34.6 m/s design wind a ship takes 0.15-1.4 MN nose-on and 9-79 MN side-on); only the hexagonal frame is modelled",
+        "sky ships (studies/sky_ships): the rule of similarity at 0.16 g and a rigid-hull model fitted to four airships give rigid ships reasonable to about 3 km in the flight band (best near 750-900 m); open are the distribution of flyers from personal wings and micro gliders to the largest ships, the long-haul class, hydrogen safety at scale or a helium supply, buoyancy over the lunar day and night, docking and handling in wind, and sheds or open-air yards for kilometre-long ships"
       ],
-      "next_session_task": "How large a sky ship can be (buoyant, winged and hybrid, in the flight band's air at 0.16 g), then size the crown's long-haul port from the chosen ship class; render the hexagonal frame and the round diagrid with the same architecture from the same viewpoints; then plan the megacity around the port."
+      "next_session_task": "The distribution of the Open Moon's flyers, from personal wings, canopies and micro gliders to the largest ships: classes, sizes, speeds, energy, height bands and numbers, from the flight models and the sky-ship study; then the long-haul class and the crown's long-haul port; render the hexagonal frame and the round diagrid with the same architecture from the same viewpoints; then plan the megacity around the port."
     },
     {
       "topic": "engineering",
-      "condition": "conditional_analytical_accounts; network_vocabulary_with_passive_failure_check; protection_supply_ledger; tall_lattice_tower_sizing_and_wind_devices; fire_engineering_at_any_gravity",
+      "condition": "conditional_analytical_accounts; network_vocabulary_with_passive_failure_check; protection_supply_ledger; tall_lattice_tower_sizing_and_wind_devices; fire_engineering_at_any_gravity; flyers_sized_for_any_gravity_and_air",
       "material": [
         "../engineering/reference/",
         "baselines/feasibility/model.py",
@@ -183,7 +187,8 @@
         "../engineering/network/",
         "../engineering/network/results/protection_supply_ledger.json",
         "../engineering/towers/",
-        "../engineering/fire/"
+        "../engineering/fire/",
+        "../engineering/flight/"
       ],
       "unresolved": [
         "complete source-to-use pathways",

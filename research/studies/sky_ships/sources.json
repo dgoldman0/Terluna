@@ -1,0 +1,173 @@
+{
+ "source_admission": "Published values used as constants, fitted data or cited findings; no external dataset files are admitted. 'access' records how each source was read: two literature-gathering agents fetched and quoted most of them (from scanned reports by OCR where noted), and Woodward (1976) and NACA Report 333 were read here. Secondary sources are marked. Model products of this repository are cited by path in the README and hashed in the results.",
+ "sources": [
+  {
+   "citation": "Woodward 1976, Interagency Workshop on Lighter Than Air Vehicles, pp. 169-176 (NTRS 19760007942, N76-15030)",
+   "title": "An Aerodynamic Load Criterion for Airships",
+   "url": "https://ntrs.nasa.gov/api/citations/19760007942/downloads/19760007942.pdf",
+   "use": "the gust bending-moment envelope: bending moment = Cm q Vol^(2/3) L, with Cm / (W0/V0) rising from 0 at the nose to 0.065 at 0.3 L and 0.10 from 0.5 to 0.65 L, then falling to 0 at the stern; the Guggenheim Airship Institute's 35 ft/s as the largest crosswind gust; the Shenandoah example (91 ft/s top speed, peak coefficient 0.0385, 3,950,000 lb ft at 0.0021 slug/ft3); the envelope covers the measured and calculated circling, rudder-reversal and rough-air moments of the Shenandoah, Los Angeles and RS-1, and only the Akron's design curve exceeds it anywhere; aerodynamic loads became as important as or preponderant over static loads by the end of the First World War",
+   "access": "full text (scanned), read here"
+  },
+  {
+   "citation": "Thompson 1930, NACA Report 333",
+   "title": "Full-Scale Turning Characteristics of the U.S.S. Los Angeles",
+   "url": "https://ntrs.nasa.gov/citations/19930091403",
+   "use": "the Los Angeles (656 ft, 2,760,000 ft3) turned on a radius of about 3,000 ft, about 4.6 lengths; the radius does not depend on the speed; k2 - k1 = 0.9 for her",
+   "access": "full text (scanned), read here"
+  },
+  {
+   "citation": "Lamb 1932, Hydrodynamics, 6th edition, Cambridge University Press, section 373",
+   "title": "Hydrodynamics",
+   "url": "",
+   "use": "apparent-mass coefficients of prolate spheroids (k1 0.082, 0.045, 0.021 and k2 0.860, 0.918, 0.960 at fineness 4, 6 and 10), reproduced by the model's closed form; Munk's moment q Vol (k2 - k1) sin 2 alpha",
+   "access": "standard values; the model's closed form is checked against them"
+  },
+  {
+   "citation": "Goodyear Aerospace Corporation 1975, NASA CR-137692, vol. III (Historical Overview)",
+   "title": "Feasibility Study of Modern Airships, Phase I",
+   "url": "https://ntrs.nasa.gov/api/citations/19750023961/downloads/19750023961.pdf",
+   "use": "table 4, detailed weights of the Los Angeles, Graf Zeppelin, Macon and Hindenburg (from the German weight reports and the Macon's final weight statement): hull structure with longitudinals, empennage, gas cells, nettings, valves, outer cover, power plant, fuel and oil system, water recovery and the rest, and gross lift at 95% inflation with hydrogen 0.068 and helium 0.062 lb/ft3; table 3, gas volumes, diameters and top speeds; the 1975 proposals of Dacron-Tedlar covers at 3.35 oz/yd2 and scrim-film gas cells at 2.0 oz/yd2 (p. 122); the Macon's 17SRT compressive yield of 42,000 psi (table 25); the ships' lengths from their records (Hindenburg 245 m, Macon 785 ft, Graf Zeppelin 236.6 m) and NACA TM-286 (Los Angeles, 200 m and 27.64 m)",
+   "access": "full text, read by a literature-gathering agent (scanned, OCR); the rows used were checked against their percentages"
+  },
+  {
+   "citation": "Federal Aviation Administration 1987 (change 1, 1992), FAA-P-8110-2",
+   "title": "Airship Design Criteria",
+   "url": "https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/airships/aceAirshipDesignCriteria.pdf",
+   "use": "discrete gusts of 25 ft/s at V_H and 35 ft/s at V_B (3.9); the envelope must stay in tension under the limit loads (4.43(a)) and its fabric be four times as strong as the limit load (4.43(b)); factor of safety 1.5 (3.2)",
+   "access": "full text, read by a literature-gathering agent (scanned)"
+  },
+  {
+   "citation": "Luftfahrt-Bundesamt and Rijksluchtvaartdienst 2000",
+   "title": "Transport Airship Requirements (TAR), issue 1",
+   "url": "https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/airships/aceAirshipTARIssue1.pdf",
+   "use": "the same gusts (341), fabric four times the limit load (883, 885), a deflated cell beside a full one as a design case (885)",
+   "access": "full text, read by a literature-gathering agent"
+  },
+  {
+   "citation": "Roskam 1985 (and later editions), Airplane Design, part V, appendix A, tables A7.2, A7.4 and A10.1",
+   "title": "Component Weight Estimation",
+   "url": "https://aero.us.es/adesign/Slides/Extra/Structures/Roskam%205%20-%20Component%20Weight%20Estimation.pdf",
+   "use": "wing group weights, flight design gross weights and wing areas of the 747-100, C-5A, C-141B, KC-135, A300 B2, 707-321, DC-8, 727-100, 737-200 and DC-9-10, all at an ultimate load factor of 3.75",
+   "access": "full text, read by a literature-gathering agent (scanned tables, OCR)"
+  },
+  {
+   "citation": "Toll 1980, NASA TP-1625",
+   "title": "Parametric study of variation in cargo-airplane performance related to progression from current to spanloader designs",
+   "url": "https://ntrs.nasa.gov/api/citations/19800012833/downloads/19800012833.pdf",
+   "use": "the 747F-derived baseline wing, 195.7 ft span and 5,500 ft2; payload fraction 'shows almost no variation up to gross weights of at least 17.79 MN (4 x 10^6 lb)'",
+   "access": "full text, read by a literature-gathering agent"
+  },
+  {
+   "citation": "Manufacturers' published specifications, as listed in general reference works (Wikipedia)",
+   "title": "Spans of the C-141B, KC-135, A300 B2, 707-321, DC-8, 727-100, 737-200 and DC-9-10",
+   "url": "",
+   "use": "48.74, 39.88, 44.84, 43.41, 43.41, 32.92, 28.35 and 27.25 m, for the wing fit",
+   "access": "secondary reference values, not re-checked against the manufacturers' documents"
+  },
+  {
+   "citation": "Kroo 1996 (NASA CR-201614) and Stanford AA200b notes",
+   "title": "Studies of very large transport aircraft",
+   "url": "http://aero-comlab.stanford.edu/aa200b/lect_notes/nonplanarwings/largeaircraft.html",
+   "use": "'basic aerodynamics and structure do not limit the size of aircraft that can be operated economically'; '600-800 passengers represents a reasonable upper bound, at least for these conventional aircraft'",
+   "access": "full text, read by a literature-gathering agent"
+  },
+  {
+   "citation": "NASA 1971, TM X-2386, figure 4",
+   "title": "Lockheed CL-1201",
+   "url": "https://ntrs.nasa.gov/api/citations/19710028801/downloads/19710028801.pdf",
+   "use": "gross weight 5,375,000 kg, span 340 m, wing area 11,630 m2",
+   "access": "full text, read by a literature-gathering agent (OCR of the figure)"
+  },
+  {
+   "citation": "Lockheed Martin, C-5M Super Galaxy product card",
+   "title": "C-5M",
+   "url": "https://lockheedmartin.com/content/dam/lockheed-martin/aero/documents/c5/c5_product_card_m11-1132343a.pdf",
+   "use": "span 222.8 ft",
+   "access": "full text, read by a literature-gathering agent"
+  },
+  {
+   "citation": "Antonov, An-225 Mriya history page; Antonov Airlines brochure",
+   "title": "An-225",
+   "url": "https://antonov.com/en/history/an-225-mriya",
+   "use": "span 88.40 m, wing area 905.0 m2, cruise 800 km/h; maximum take-off weight 640,000 kg",
+   "access": "full text, read by a literature-gathering agent"
+  },
+  {
+   "citation": "Stratolaunch, Roc vehicle page",
+   "title": "Roc",
+   "url": "https://www.stratolaunch.com/vehicles/roc/",
+   "use": "1.3 million lb take-off weight, 385 ft span",
+   "access": "full text, read by a literature-gathering agent"
+  },
+  {
+   "citation": "Airforce Technology (secondary)",
+   "title": "Mil Mi-26 heavy-lift helicopter",
+   "url": "https://www.airforce-technology.com/projects/milmi-26heavylifthel/",
+   "use": "rotor 32 m, maximum take-off weight 56,000 kg",
+   "access": "full text, read by a literature-gathering agent; secondary source"
+  },
+  {
+   "citation": "Lobner, The Lyncean Group of San Diego, compilations on CargoLifter and on Airlander 10/50",
+   "title": "CargoLifter CL160; Airlander 10",
+   "url": "https://lynceans.org/wp-content/uploads/2020/12/Cargolifter-AG.pdf",
+   "use": "CL160: 260 m, 65 m across, 550,000 m3 envelope with a keel on catenary curtains, 160 t cargo, 90-125 km/h, programme halted 2002; Airlander 10: 98 m, 38,000 m3",
+   "access": "full text, read by a literature-gathering agent"
+  },
+  {
+   "citation": "Airport Technology",
+   "title": "SkyCat",
+   "url": "https://www.airport-technology.com/projects/skycat/",
+   "use": "SkyCat 1000: 307 m, 2 million m3, 1,000 t payload",
+   "access": "full text, read by a literature-gathering agent"
+  },
+  {
+   "citation": "EASA 2025, type certificate data sheet AS.001, issue 10",
+   "title": "Zeppelin LZ N07",
+   "url": "https://www.easa.europa.eu/en/downloads/7533/en",
+   "use": "75.1 m, 8,425 m3 envelope, envelope pressure 300-600 Pa",
+   "access": "full text, read by a literature-gathering agent"
+  },
+  {
+   "citation": "Lv et al. 2022, Frontiers in Materials 9, 992984",
+   "title": "Uretek 3216LV and other hull laminates",
+   "url": "https://www.frontiersin.org/journals/materials/articles/10.3389/fmats.2022.992984/full",
+   "use": "Uretek 3216LV (Vectran) about 995 N/cm warp; 200 g/m2 from Materials 2019, 12, 2680",
+   "access": "full text, read by a literature-gathering agent"
+  },
+  {
+   "citation": "Li et al. 2019, Journal of Textile and Apparel, Technology and Management, quoting Maekawa et al. 2008",
+   "title": "Envelope materials for stratospheric airships",
+   "url": "https://jtatm.textiles.ncsu.edu/index.php/JTATM/article/download/14767/6869",
+   "use": "Zylon laminate Z2929T-AB: 997 N/cm warp at 157 g/m2",
+   "access": "full text, read by a literature-gathering agent"
+  },
+  {
+   "citation": "Tenney and Dexter 1985, NASA TM",
+   "title": "Advanced composite materials for aircraft structures",
+   "url": "https://ntrs.nasa.gov/api/citations/19850008739/downloads/19850008739.pdf",
+   "use": "'the 0.004 limit currently used in many aerospace applications' for design strain",
+   "access": "full text, read by a literature-gathering agent"
+  },
+  {
+   "citation": "Hexcel, HexPly 8552 data sheet",
+   "title": "HexPly 8552",
+   "url": "https://www.hexcel.com/wp-content/uploads/2025/12/HexPly_8552_eu_DataSheet1.pdf",
+   "use": "nominal laminate density 1.57 g/cm3",
+   "access": "full text, read by a literature-gathering agent"
+  },
+  {
+   "citation": "U.S. Code of Federal Regulations, 14 CFR 25.337, 23.333(c) and 23.341 (2017 edition); MIL-F-8785C 3.7.2.4",
+   "title": "Load factors and gusts",
+   "url": "https://www.govinfo.gov/content/pkg/CFR-2017-title14-vol1/pdf/CFR-2017-title14-vol1-sec23-341.pdf",
+   "use": "limit manoeuvre load factor at least 2.5 for large transports; derived gust of 50 ft/s at V_C; Pratt's gust alleviation factor Kg = 0.88 mu / (5.3 + mu), mu = 2 (W/S) / (rho c a g)",
+   "access": "full text, read by a literature-gathering agent"
+  },
+  {
+   "citation": "NOAA and NASA 1976, NOAA-S/T 76-1562",
+   "title": "U.S. Standard Atmosphere, 1976",
+   "url": "https://ntrs.nasa.gov/citations/19770009539",
+   "use": "Earth's air for the equal-density heights and the Earth cases (the summit tower study's earth_air)",
+   "access": "as cited in the summit tower study"
+  }
+ ]
+}
