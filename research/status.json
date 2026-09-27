@@ -154,7 +154,8 @@
         "studies/summit_tower/README.md",
         "../engineering/towers/",
         "studies/port_fire/README.md",
-        "../engineering/fire/"
+        "../engineering/fire/",
+        "../visualization/summit-port/"
       ],
       "unresolved": [
         "supported floor area and mass",
@@ -167,9 +168,10 @@
         "comfort in sway at 0.16 g, where a sideways acceleration tilts the apparent vertical six times more than on Earth",
         "the central port's power: about 400 MW for its floors; screened slow rotors over its whole open face give 74% in the modelled winds (132% with the summit speed-up) for 43 Mt more steel; louvered panels on the face, level panels on the highland around the base and pumped storage with the Korolev lake are the other parts",
         "the central port's occupancy figures (areas per person, busy-hour shares) are rough planning figures to check against published standards",
-        "fire at 0.16 g: the port has a first-order study (studies/port_fire: Earth correlations carried by Froude scaling, design fires bracketed, a materials test at 23.5% oxygen, compartments with sprinklers, shafts broken every three bands, 33 water pressure zones); open are full-scale fire data at partial gravity (NASA's FM2 is planned as the first fire on the Moon), sprinkler sprays at 0.16 g, crowd flows, wind-driven fire and smoke through a band (CFD of a band section), and the city"
+        "fire at 0.16 g: the port has a first-order study (studies/port_fire: Earth correlations carried by Froude scaling, design fires bracketed, a materials test at 23.5% oxygen, compartments with sprinklers, shafts broken every three bands, 33 water pressure zones); open are full-scale fire data at partial gravity (NASA's FM2 is planned as the first fire on the Moon), sprinkler sprays at 0.16 g, crowd flows, wind-driven fire and smoke through a band (CFD of a band section), and the city",
+        "the port's architecture is a first proposal (visualization/summit-port): six leg towers with lift cores, a four-storey wing every 200 m wrapped round two opposite legs, berths every 60 m, gate interchanges and a crown terminal; the building fills about 1/2,000 of the space inside the frame, so it reads as a lattice with shelves; the crown's docking arms as drawn are not credible structure; long-haul berths depend on a sky-ship class not yet designed (30,000-50,000 long-haul passengers an hour need about 15-25 ships at berth at 2,000 passengers each, 55-95 at 500); only the hexagonal frame is modelled"
       ],
-      "next_session_task": "Plan the megacity around the port, carrying the port fire study's rules (sprinklered compartments of 2,000 m2 with open air on both faces, the materials test at 23.5% oxygen, air topped up by pressure). Later: CFD (FDS) of a band section with its wind, CPU-heavy and the author's call, and the summit's winds over its real relief (a terrain-resolving case) to replace the tower study's gust and speed-up factors."
+      "next_session_task": "How large a sky ship can be (buoyant, winged and hybrid, in the flight band's air at 0.16 g), then size the crown's long-haul port from the chosen ship class; render the hexagonal frame and the round diagrid with the same architecture from the same viewpoints; then plan the megacity around the port."
     },
     {
       "topic": "engineering",
