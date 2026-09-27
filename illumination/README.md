@@ -6,6 +6,7 @@ and earthlight.
 
 | Material | What it computes | Condition |
 |---|---|---|
+| [surface_light/](surface_light/) | Clear-sky direct and diffuse sunlight at the ground by wavelength (202–1000 nm): photosynthetic photons, colour, red:far-red, ultraviolet and ground brightness, for the design Moon, a 1.0-atm Moon and the Earth control | The atmosphere domain's radiation (1-nm ultraviolet-visible below 500 nm, line-by-line above) on its solved columns; two-stream, so light at Sun heights below about 20° is understated against the sky solver |
 | [sky/](sky/) | Spherical, spectral, scalar multiple-scattering sky radiance and surface irradiance for Earth and two Open Moon optical profiles, Sun from −90° to +90° | Conditional on prescribed exponential optical profiles. Numerically checked (solver tests, atlas invariants, six noon Monte Carlo spot checks); a lunar global energy residual of up to 4.6% is open |
 | [ephemeris.py](ephemeris.py) | Sun, Earth and star directions above a site; Earth's phase; earthlight as a fraction of sunlight | Mean-orbit geometry (synchronous rotation, lunar equator in the ecliptic, sinusoidal libration, Lambert-phase Earth of geometric albedo 0.367); good to a few degrees, not an ephemeris for dates |
 | [stars/](stars/) | The Yale Bright Star Catalogue (9,096 stars): J2000 position, V magnitude, B−V | Catalogue data; the build pins the source file's hash |

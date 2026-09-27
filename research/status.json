@@ -87,19 +87,23 @@
     },
     {
       "topic": "illumination",
-      "condition": "conditional_clear_sky_solver_and_site_geometry",
+      "condition": "conditional_clear_sky_solver_and_site_geometry; clear_sky_surface_spectra_202_1000nm_on_solved_columns_two_stream",
       "material": [
         "../illumination/geometry.py",
         "../illumination/sky/solver.py",
         "../illumination/sky/METHODS.md",
         "../illumination/ephemeris.py",
-        "../illumination/stars/bright_stars.json"
+        "../illumination/stars/bright_stars.json",
+        "../illumination/surface_light/model.py",
+        "../illumination/surface_light/results/surface_light.json"
       ],
       "unresolved": [
         "date-accurate ephemeris, lunar equator tilt and terrain horizon",
         "refraction and polarization",
         "earthlight spectrum (glow currently uses the solar atlas), airglow",
-        "optical profiles tied to the solved atmospheric column",
+        "optical profiles tied to the solved atmospheric column (the sky atlas; the surface-light spectra already use the solved columns)",
+        "surface light below about 20 degrees of Sun height: the two-stream diffuse light falls short of the spherical sky solver (a quarter at 10 degrees, half at 5); a spherical spectral solution on the solved column would settle it",
+        "surface light under clouds: colour and diffuse share",
         "lunar global energy residual up to 4.6%",
         "the five-hour practical dawn and dusk (research/decisions.md): a photometric definition for the actual atmosphere, from a working-light threshold to sunrise, about 2.54 degrees of solar elevation at the equator"
       ],
