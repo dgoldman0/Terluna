@@ -111,18 +111,22 @@
     },
     {
       "topic": "biosphere",
-      "condition": "periodic_carbon_and_oxygen_requirement_models; hypothetical_traits",
+      "condition": "periodic_carbon_and_oxygen_requirement_models; hypothetical_traits; clear_sky_spectral_canopy_photosynthesis_moon_and_earth_prospect_d_fvcb",
       "material": [
         "../biosphere/README.md",
         "../ensemble/papers/74a946e2-8f98/seed-02.md",
         "../biosphere/long_night.py",
         "studies/environment_screens/results/carbon_budget.csv",
-        "studies/environment_screens/results/oxygen_budget.csv"
+        "studies/environment_screens/results/oxygen_budget.csv",
+        "../biosphere/canopy/model.py",
+        "../biosphere/canopy/results/canopy.json"
       ],
       "unresolved": [
         "complete life cycles",
         "trait calibration",
         "coupled nutrient/energy budgets",
+        "canopy photosynthesis over 354 hours of continuous light: acclimation, feedback from full sugar stores and photoinhibition are not modelled, nor are stomata, water supply, leaf temperature or the respiration of stems and roots; clear sky only",
+        "where plants keep the night's store (33 g C per m2 of ground for the leaves alone at a leaf area index of 5) and how far night metabolism can slow",
         "fire at 0.16 g in an oxygenated atmosphere: flame shape, ember lofting and wildfire spread; the bundle makes full-scale partial-gravity combustion research a condition for adding oxygen (July 2026 bundle, archive/july_2026_knowledge_bundle/)",
         "timing: short internal clocks alongside the 708.7-hour environmental cycle (July 2026 bundle, archive/july_2026_knowledge_bundle/)"
       ],

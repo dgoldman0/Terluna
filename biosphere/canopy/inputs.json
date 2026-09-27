@@ -1,0 +1,17 @@
+{
+  "schema": "terluna.external-inputs/1",
+  "status": "external inputs; fetched and hash-checked by fetch_inputs.py; ignored by Git",
+  "input_directory": "inputs",
+  "retrieved": "2026-09-26",
+  "publication_note": "PROSPECT-D specific absorption coefficients and refractive index of leaf material (dataSpec_PDB.m of 16 January 2017) by Feret, Gitelson, Noble and Jacquemoud (2017), Remote Sensing of Environment 193, 204-215, doi:10.1016/j.rse.2017.03.004, as a text table in the prosail Python package (J. Gomez-Dans), pinned to one commit. Cite Feret et al. (2017) and, for the PROSPECT model, Jacquemoud and Baret (1990). The file is not redistributed by this repository. A hash mismatch means the upstream bytes changed and must be reviewed, never silently accepted.",
+  "files": [
+    {
+      "name": "prospect_d_spectra.txt",
+      "url": "https://raw.githubusercontent.com/jgomezdans/prosail/35a47930e498ec11d1ebf1124a6fd6b2293d5f09/prosail/prospect_d_spectra.txt",
+      "sha256": "e703b345f0a0860808e230ca0869f5b108ca1115ab9950c9651a29fee72c474d",
+      "bytes": 209107,
+      "credit": "PROSPECT-D refractive index and specific absorption coefficients of chlorophyll a+b, carotenoids, anthocyanins, brown pigments, water and dry matter, 400-2500 nm at 1 nm: Feret et al. (2017).",
+      "use": "leaf reflectance and transmittance"
+    }
+  ]
+}

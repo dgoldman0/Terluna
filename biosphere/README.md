@@ -9,9 +9,21 @@ The [accepted companion seed](../ensemble/papers/74a946e2-8f98/seed-02.md) owns 
 - Periodic carbon reserves: cycle-integrated surplus and the maximum cumulative deficit determine the minimum reservoir capacity for a prescribed production/demand cycle. The necessary-and-sufficient condition is proved under its model assumptions in [findings](../research/findings.md), with an O(N) implementation tested against exhaustive searches.
 - Mixed aquatic oxygen: production, respiration, exchange and a finite concentration ceiling are balanced exactly for each interval. Outgassing and unmet aerobic demand are reported explicitly. A mathematical periodic state can still fail the selected concentration or demand criteria.
 
-Trait rates, suppression, Q10, exchange coefficients, dissolved-oxygen ceiling and thresholds are hypothetical inputs. Units and every parameter are recorded. The models identify requirements; their outputs are not survival, health, reproduction, nutrient-cycle or ecosystem evidence. Excess carbon is unallocated surplus, not proven growth. The temperature/irradiance interface demonstrates how a climate trace alters these requirements; tissue injury and photosynthetic saturation remain unmodelled.
+Trait rates, suppression, Q10, exchange coefficients, dissolved-oxygen ceiling and thresholds are hypothetical inputs. Units and every parameter are recorded. The models identify requirements; their outputs are not survival, health, reproduction, nutrient-cycle or ecosystem evidence. Excess carbon is unallocated surplus, not proven growth. The temperature/irradiance interface demonstrates how a climate trace alters these requirements; tissue injury remains unmodelled there, and light saturation is in the canopy model below.
 
 [Results](../research/studies/environment_screens/results/) include 180 carbon cases, 20 oxygen cases and 18 climate-to-carbon demonstrations. Species-level calibration and long-night experiments are the next evidence step.
+
+## Canopy photosynthesis
+
+[canopy/](canopy/README.md) follows the illumination domain's clear-sky light at the
+ground into a plant canopy by wavelength: PROSPECT-D leaves, sunlit and shaded leaves
+layer by layer, and the C3 leaf model of the CO₂ study with light-limited electron
+transport. At the equator, with a leaf area index of 5, the Moon's canopy absorbs 35%
+fewer photons over the cycle than the same canopy under Earth's clear sky and fixes 18%
+more carbon (11% more at equal CO₂): its diffuse sky spreads the light over leaves that
+can use it. Through the 354-hour night the leaves alone need a store of 33 g C per m² of
+ground, thirty times an Earth night's. Stomata, water, acclimation to continuous light,
+full sugar stores and the respiration of stems and roots are not yet in it.
 
 ## Remaining biological work
 
