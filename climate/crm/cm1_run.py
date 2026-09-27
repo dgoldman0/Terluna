@@ -23,7 +23,10 @@ a fresh copy of its source for every build, the way climate/gcm/exoplasim_run.py
 - the soil's five layers are 5-80 cm thick, reaching below the month-long day's thermal wave;
 - land and water can be set along x from a file (initsfc = 9);
 - large-scale nudging of potential temperature and vapour can be confined above var14 m, reaching full
-  strength at var15 m.
+  strength at var15 m;
+- with var13 = 1 a large-scale vertical wind against height is read from terluna_wls.txt into CM1's own
+  large-scale vertical advection (its dolsw option), which carries temperature, vapour, condensate and
+  wind with it.
 
 Runs live in climate/crm/runs (a link to the external drive), one folder per case, and restart from
 their latest restart file.
@@ -117,6 +120,31 @@ SURFACE_BLOCK = """      ELSEIF( initsfc.eq.9 )THEN
       ELSEIF( initsfc.ne.1 .and. initsfc.ne.2 )THEN
 """
 
+LSW_BLOCK = """    IF( var13.gt.0.5 )THEN
+      ! Terluna: the large-scale vertical wind from terluna_wls.txt: a level count, then one line per level,
+      ! height (m) and vertical wind (m/s), heights increasing; interpolated to the w levels, zero outside
+      open(unit=97,file='terluna_wls.txt',status='old',action='read')
+      read(97,*) terluna_n
+      allocate( terluna_z(terluna_n) , terluna_w(terluna_n) )
+      do terluna_l=1,terluna_n
+        read(97,*) terluna_z(terluna_l),terluna_w(terluna_l)
+      enddo
+      close(unit=97)
+      do k=1,nk+1
+        wprof(k) = 0.0
+        do terluna_l=1,terluna_n-1
+          if( zf(1,1,k).ge.terluna_z(terluna_l) .and. zf(1,1,k).le.terluna_z(terluna_l+1) )then
+            wprof(k) = terluna_w(terluna_l) + (terluna_w(terluna_l+1)-terluna_w(terluna_l))     &
+                     *(zf(1,1,k)-terluna_z(terluna_l))/(terluna_z(terluna_l+1)-terluna_z(terluna_l))
+          endif
+        enddo
+        if( myid.eq.0 ) print *,'  Terluna large-scale w (k, z, w): ',k,zf(1,1,k),wprof(k)
+      enddo
+      deallocate( terluna_z , terluna_w )
+    ENDIF
+
+"""
+
 NUDGE_WEIGHT = ("          terluna_w = 1.0   ! Terluna: above var14 m only, fully above var15 m\n"
                 "          if( var15.gt.var14 ) terluna_w = min(1.0,max(0.0,(zh(1,1,k)-var14)/(var15-var14)))\n")
 
@@ -201,6 +229,16 @@ PATCHES = [
          NUDGE_WEIGHT + '          tem1 = -lsnudgefac*terluna_w*( thavg(k)-lsnudge_th(k,lsnudge_count) )/(lsnudge_tau)\n', 1),
         ('          tem1 = -lsnudgefac*( qavg(k,nqv)-lsnudge_qv(k,lsnudge_count) )/(lsnudge_tau)\n',
          NUDGE_WEIGHT + '          tem1 = -lsnudgefac*terluna_w*( qavg(k,nqv)-lsnudge_qv(k,lsnudge_count) )/(lsnudge_tau)\n', 1)]),
+    ('param.F', 'Terluna: large-scale vertical wind from terluna_wls.txt', [
+        ('      IF( testcase.eq.7 ) dolsw = .true.\n',
+         '      IF( testcase.eq.7 ) dolsw = .true.\n'
+         '      IF( var13.gt.0.5 ) dolsw = .true.   ! Terluna: large-scale vertical wind from terluna_wls.txt\n', 1)]),
+    ('base.F', 'Terluna: the large-scale vertical wind from terluna_wls.txt', [
+        ('      real :: z1,z2,z3,z4,z5,z6,z7,z8,z9\n',
+         '      real :: z1,z2,z3,z4,z5,z6,z7,z8,z9\n      integer :: terluna_n,terluna_l\n'
+         '      real, dimension(:), allocatable :: terluna_z,terluna_w\n', 1),
+        ('    ! boundary conditions:\n    wprof(1) = 0.0\n    wprof(nk+1) = 0.0\n',
+         LSW_BLOCK + '    ! boundary conditions:\n    wprof(1) = 0.0\n    wprof(nk+1) = 0.0\n', 1)]),
 ]
 
 
@@ -332,12 +370,92 @@ CASES = {
 # nearest the latitude, and the land evaporates as readily as the GCM's land on that row. The Sun keeps the
 # equinox: the Moon's 1.5-degree tilt raises and lowers the daily sunlight at 80 degrees by about a quarter
 # over the year, alternately in the two hemispheres.
-for _lat, _tag in ((80.0, '80n'), (-80.0, '80s'), (70.0, '70n'), (-70.0, '70s')):
+for _lat, _tag in ((80.0, '80n'), (-80.0, '80s')):
     CASES[f'ring_{_tag}'] = dict(
         CASES['ring'], latitude_deg=_lat, band_deg=ROW_BAND_DEG, land_moisture='gcm',
         purpose=f'the circle of latitude {abs(_lat):.0f} {"N" if _lat > 0 else "S"} as a 2-D ring, the Sun crossing it '
                 'once a lunar day, seas and lakes of the 28% scenario at sea level, land as wet as the GCM\'s there, '
                 'the 5% dimmer shield, the GCM design case\'s row nearest the latitude as reference')
+# The same with the GCM's mean vertical wind at the latitude imposed as large-scale vertical advection: a closed
+# ring cannot rise or sink on average, and the GCM's air sinks over the polar caps at about 2-7 mm/s through
+# most of its depth (the descending branch of its overturning between the equator and the poles).
+for _lat, _tag in ((80.0, '80n'), (-80.0, '80s'), (70.0, '70n'), (-70.0, '70s')):
+    CASES[f'ring_{_tag}_lsw'] = dict(
+        CASES['ring'], latitude_deg=_lat, band_deg=ROW_BAND_DEG, land_moisture='gcm', large_scale_w='gcm',
+        purpose=f'the circle of latitude {abs(_lat):.0f} {"N" if _lat > 0 else "S"} as a 2-D ring, as ring_{_tag[:2]}'
+                f'{_tag[2]} would be, with the GCM\'s mean vertical wind there imposed as large-scale vertical advection')
+
+
+def band_vertical_wind(lat, sigma_edges, flux, rows, radius, gravity):
+    """Mean vertical wind (m/s, up positive) at the GCM's layer interfaces over the band covered by `rows`
+    (a mask on lat, rows ordered north to south), from its mass budget. `flux` is the zonal and time mean of
+    surface pressure times northward wind by layer and row (Pa m/s). Its column mean is removed first, since
+    no net mass crosses a latitude circle in a steady state; then what converges on the band above an
+    interface sinks through it. The band's edges lie midway to the next rows out."""
+    import numpy as np
+    lat, sigma_edges, flux = (np.asarray(a, dtype=float) for a in (lat, sigma_edges, flux))
+    dsig = np.diff(sigma_edges)
+    flux = flux - (flux * dsig[:, None]).sum(axis=0) / dsig.sum()
+    above = np.vstack([np.zeros(lat.size), np.cumsum(flux * dsig[:, None], axis=0)]) / gravity   # kg/m/s
+    idx = np.flatnonzero(rows)
+    jn, js = idx.min(), idx.max()
+    edge_n, edge_s = 0.5 * (lat[jn] + lat[jn - 1]), 0.5 * (lat[js] + lat[js + 1])
+    across = lambda edge, j0, j1: 2 * np.pi * radius * np.cos(np.radians(edge)) * 0.5 * (above[:, j0] + above[:, j1])
+    into = across(edge_s, js, js + 1) - across(edge_n, jn, jn - 1)                 # kg/s converging above each interface
+    area = 2 * np.pi * radius ** 2 * (np.sin(np.radians(edge_n)) - np.sin(np.radians(edge_s)))
+    return -into / area, (float(edge_s), float(edge_n))                             # kg/m2/s, up positive
+
+
+def plasim_half_levels(sigma):
+    """PlaSim's layer interfaces from its full levels: the top at 0 and each full level midway between the
+    interfaces around it (plasim.f90). The output's levp holds midpoints between full levels instead."""
+    import numpy as np
+    edges = [0.0]
+    for s in np.asarray(sigma, dtype=float):
+        edges.append(2.0 * s - edges[-1])
+    return np.array(edges)
+
+
+def gcm_vertical_wind(latitude, band, run=GCM_RUN, years=GCM_YEARS) -> dict:
+    """The GCM's mean vertical wind over the band of rows within `band` degrees of a latitude, against height
+    above the ground (from the rows' mean virtual temperatures), ready for terluna_wls.txt."""
+    import numpy as np
+    import netCDF4
+    gravity, rd = planet()['gravity_m_s2'], 287.04
+    folder = HERE.parent / 'gcm' / 'runs' / run / 'model'
+    flux, temp, vap, surface = [], [], [], []
+    for year in range(years[0], years[1] + 1):
+        with netCDF4.Dataset(folder / f'MOST.{year:05d}.nc') as d:
+            ps = np.asarray(d['ps'][:], float) * 100.0                              # hPa in the output
+            flux.append((ps[:, None] * np.asarray(d['va'][:], float)).mean(axis=(0, 3)))
+            temp.append(np.asarray(d['ta'][:], float).mean(axis=(0, 3)))
+            vap.append(np.asarray(d['hus'][:], float).mean(axis=(0, 3)))
+            surface.append(ps.mean(axis=(0, 2)))
+            lat = np.asarray(d['lat'][:], float)
+            sigma = np.asarray(d['lev'][:], float)
+    flux, temp, vap, surface = (np.mean(a, axis=0) for a in (flux, temp, vap, surface))
+    edges = plasim_half_levels(sigma)
+    rows = np.abs(lat - latitude) < band
+    mass, span = band_vertical_wind(lat, edges, flux, rows, planet()['radius_m'], gravity)
+    t, q, p = temp[:, rows].mean(axis=1), vap[:, rows].mean(axis=1), surface[rows].mean()
+    z = np.zeros(edges.size)                                                        # interface heights, top first
+    for k in range(sigma.size - 1, -1, -1):
+        if edges[k] > 0:
+            z[k] = z[k + 1] + rd * t[k] * (1 + 0.608 * q[k]) / gravity * np.log(edges[k + 1] / edges[k])
+    rho = p * edges / (rd * np.interp(edges, sigma, t))
+    w = np.where(edges > 0, mass / np.maximum(rho, 1e-9), 0.0)
+    keep = edges > 0                                                                # the top interface has no height
+    return dict(z_m=[float(v) for v in z[keep][::-1]], w_m_s=[float(v) for v in w[keep][::-1]], band_edges_deg=list(span),
+                rows_deg=[float(v) for v in lat[rows]], run=run, years=list(years))
+
+
+def write_vertical_wind(path: Path, profile: dict, ztop: float) -> None:
+    """terluna_wls.txt: the level count, then height (m) and vertical wind (m/s) from the ground up, ending at
+    zero at the model top."""
+    z, w = list(profile['z_m']), list(profile['w_m_s'])
+    if z[-1] < ztop:
+        z, w = z + [ztop], w + [0.0]
+    path.write_text(f'{len(z)}\n' + ''.join(f'{a:.3f} {b:.6e}\n' for a, b in zip(z, w)))
 
 
 def gcm_soil(folder: Path) -> dict:
@@ -488,7 +606,8 @@ def case_settings(cfg, nx, dx, nz, ztop, air, gravity):
         'param3': dict(fcor=float(f'{turning:.6e}'), rdalpha=round(gravity / EARTH_G / 300.0, 8), zd=0.77 * ztop,
                        l_inf=round(75.0 * EARTH_G / gravity, 1), ndcnst=cfg['droplets_cm3']),
         'param6': dict(stretch_z=4, ztop=ztop),
-        'param8': dict(var14=cfg['nudge']['z_start_m'] * s, var15=cfg['nudge']['z_full_m'] * s,
+        'param8': dict(var13=1.0 if cfg.get('large_scale_w') else 0.0,
+                       var14=cfg['nudge']['z_start_m'] * s, var15=cfg['nudge']['z_full_m'] * s,
                        var16=0.0 if pair else round(length, 3), var17=0.0 if pair else round(air['sunlight_w_m2'], 3),
                        var18=0.0 if pair else cfg['start_hour_angle_deg'], var19=0.0 if pair else round(solar_day_s(), 1)),
         'param9': dict(output_format=1, output_filetype=2, output_sfcparams=0, output_tke=0, output_km=0,
@@ -628,6 +747,10 @@ def setup(name: str) -> Path:
     table = [row.replace('.50', f"{land_moisture(cfg, ref):.2f}".lstrip('0')) if line.startswith(f'{index},') else line
              for line in table]
     (case / 'LANDUSE.TBL').write_text(''.join(table))
+    vertical_wind = None
+    if cfg.get('large_scale_w') == 'gcm':
+        vertical_wind = gcm_vertical_wind(latitude, cfg.get('band_deg', EQUATOR_BAND_DEG))
+        write_vertical_wind(case / 'terluna_wls.txt', vertical_wind, zw[-1])
     for link, target in (('cm1.exe', exe), ('RRTMG_LW_DATA', tree / 'run' / 'RRTMG_LW_DATA'),
                          ('RRTMG_SW_DATA', tree / 'run' / 'RRTMG_SW_DATA')):
         path = case / link
@@ -646,9 +769,11 @@ def setup(name: str) -> Path:
                   grid=dict(nx=nx, dx_m=dx, length_m=length, nz=nz, ztop_m=zw[-1]),
                   build=build_record, reference=ref, initial=initial, water_share=water_share, surface_product=surface_sha,
                   latitude_deg=latitude, coriolis_1_s=coriolis(latitude), land_moisture=None if pair else land_moisture(cfg, ref),
+                  large_scale_w=vertical_wind,
                   runner=digest(__file__),
                   inputs={p: digest(case / p) for p in ('input_sounding', 'input_grid_z', 'lsnudge_0001.dat',
-                                                         'terluna_surface.txt', 'LANDUSE.TBL', 'namelist.template')})
+                                                         'terluna_surface.txt', 'LANDUSE.TBL', 'namelist.template',
+                                                         'terluna_wls.txt') if (case / p).exists()})
     (case / 'case.json').write_text(json.dumps(record, indent=1) + '\n')
     return case
 

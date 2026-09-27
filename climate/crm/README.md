@@ -180,8 +180,8 @@ smallest clouds, and lifetimes come from three-hourly snapshots.
 
 ## Rings near the poles
 
-Cases `ring_80n`, `ring_80s`, `ring_70n` and `ring_70s` are circles of
-latitude, set up as the equatorial ring with four differences:
+Cases `ring_80n` and `ring_80s` are circles of latitude, set up as the
+equatorial ring with four differences:
 
 - **The ring is shorter**, 2πR cos φ: 1,896 km in 312 columns at 80°, and
   3,734 km in 624 columns at 70°.
@@ -199,12 +199,12 @@ latitude, set up as the equatorial ring with four differences:
   water would, the same factor as CM1's moisture availability. On the
   equatorial ring's rows that factor is 0.61, against the ring's 0.5.
 
-| Case | Ring | Water along it | Land wetness | Sea | Land ground (sea level) |
+| Circle | Ring | Water along it | Land wetness | Sea | Land ground (sea level) |
 |---|---|---|---|---|---|
-| `ring_80n` | 1,896 km | 8% | 0.02 | 20.2 °C | 17.8 °C |
-| `ring_80s` | 1,896 km | 43% | 0.03 | 20.3 °C | 17.1 °C |
-| `ring_70n` | 3,734 km | 12% | 0.05 | 21.3 °C | 18.7 °C |
-| `ring_70s` | 3,734 km | 37% | 0.22 | 21.6 °C | 17.1 °C |
+| 80° N | 1,896 km | 8% | 0.02 | 20.2 °C | 17.8 °C |
+| 80° S | 1,896 km | 43% | 0.03 | 20.3 °C | 17.1 °C |
+| 70° N | 3,734 km | 12% | 0.05 | 21.3 °C | 18.7 °C |
+| 70° S | 3,734 km | 37% | 0.22 | 21.6 °C | 17.1 °C |
 
 Both hemispheres are run because they share a sky but not a ground. The GCM's
 air over the two poles agrees to within a degree at every level, and the Sun
@@ -213,10 +213,27 @@ cover close to half of each southern circle and about a tenth of each northern
 one. The northern land also stands lower (1.4 km against 2.1 km on average) and
 is drier at 70°.
 
+**The GCM's vertical wind.** A closed ring cannot rise or sink on average, but
+the GCM's air sinks over both polar caps and rises near the equator: its
+overturning between the equator and the poles. Cases `ring_80n_lsw`,
+`ring_80s_lsw`, `ring_70n_lsw` and `ring_70s_lsw` are the rings above with the
+GCM's mean vertical wind at their latitude imposed through CM1's own large-scale
+vertical advection (`dolsw`), which carries temperature, vapour, condensate and
+wind with it. The wind comes from the mass budget of the band around the ring's
+row: the zonal and time mean of surface pressure times northward wind in each
+layer, less its column mean (no net mass crosses a latitude circle), converges
+above each layer interface and sinks through it. The layer interfaces are
+PlaSim's own, with each full level midway between them; the output's `levp`
+holds midpoints between full levels instead. The air sinks at 1–6.5 mm/s from
+2 km to about 60 km at all four latitudes, fading to nothing by 80 km, and
+rises at 1–4 mm/s between 11° N and 11° S. Sinking at 4 mm/s through a lapse
+rate 1 K/km short of the dry adiabat warms the air by about 0.3 °C a day.
+
 ```sh
-climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup ring_80n
-climate/gcm/.venv/bin/python -m climate.crm.cm1_run run ring_80n --hours 3 --threads 4
-climate/gcm/.venv/bin/python -m climate.crm.ring_analysis ring_80n --from-day 29.5
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run build moon_omp               # after a patch change
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup ring_80n_lsw
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run run ring_80n_lsw --hours 3 --threads 4
+climate/gcm/.venv/bin/python -m climate.crm.ring_analysis ring_80n_lsw --from-day 29.5
 ```
 
 ## Tilted rings, a candidate

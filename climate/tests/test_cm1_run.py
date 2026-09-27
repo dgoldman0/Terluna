@@ -220,6 +220,9 @@ def test_only_rings_off_the_equator_turn_the_wind_and_lower_the_sun():
     assert equator['param2']['icor'] == 0 and equator['param2']['lspgrad'] == 0 and equator['param3']['fcor'] == 0.0
     assert equator['param11']['ctrlat'] == 0.0 and not equator['param19']['do_lsnudge_v']
     assert equator['param9']['output_vinterp'] == 0
+    assert equator['param8']['var13'] == 0.0 and south['param8']['var13'] == 0.0
+    sinking = c.case_settings(c.CASES['ring_70s_lsw'], 624, 5983.4, 111, 150000.0, air, 1.6242)
+    assert sinking['param8']['var13'] == 1.0 and sinking['param11']['ctrlat'] == -70.0
 
 
 def test_ring_surface_off_the_equator_averages_wide_columns(monkeypatch):
@@ -254,3 +257,30 @@ def test_circulation_reports_the_turned_wind_only_where_there_is_one():
     table = ra.circulation_table(np.array([-5.0, 5.0]), zh, section)
     assert table['northward_m_s'][0] == [-2.0, -2.0]
     assert 'S' in ra.evidence(-80.0) and ra.evidence(0.0) == ra.EVIDENCE
+
+
+def test_plasim_half_levels_put_each_full_level_midway():
+    half = np.array([0.0, 0.2, 0.5, 1.0])
+    assert c.plasim_half_levels(0.5 * (half[1:] + half[:-1])) == pytest.approx(half)
+
+
+def test_band_vertical_wind_sinks_where_air_converges_aloft():
+    lat = np.array([85.0, 80.0, 75.0, 70.0])                             # rows north to south
+    edges = np.array([0.0, 0.5, 1.0])
+    flux = np.array([[3.0] * 4, [-1.0] * 4])                             # poleward aloft, equatorward below
+    radius, gravity = 1.0e6, 1.6
+    w, (south, north) = c.band_vertical_wind(lat, edges, flux, lat == 80.0, radius, gravity)
+    assert (south, north) == (77.5, 82.5)
+    above = 2.0 * 0.5 / gravity                                          # the column mean (1.0) removed: 3 - 1 = 2
+    into = 2 * np.pi * radius * (np.cos(np.radians(77.5)) - np.cos(np.radians(82.5))) * above
+    area = 2 * np.pi * radius ** 2 * (np.sin(np.radians(82.5)) - np.sin(np.radians(77.5)))
+    assert w[1] == pytest.approx(-into / area) and w[1] < 0             # converging aloft, so it sinks
+    assert w[0] == 0.0 and w[2] == pytest.approx(0.0, abs=1e-15)
+
+
+def test_vertical_wind_file_ends_at_zero_at_the_model_top(tmp_path):
+    path = tmp_path / 'terluna_wls.txt'
+    c.write_vertical_wind(path, dict(z_m=[0.0, 2000.0, 60000.0], w_m_s=[0.0, -0.003, -0.002]), 150000.0)
+    lines = path.read_text().splitlines()
+    assert lines[0] == '4' and lines[-1].split() == ['150000.000', '0.000000e+00']
+    assert [float(l.split()[1]) for l in lines[1:3]] == [0.0, -0.003]
