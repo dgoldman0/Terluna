@@ -68,19 +68,35 @@ def product():
 
 def test_stored_product(product):
     assert product['schema'] == fr.SCHEMA
-    sunlit = product['calendar']['near']['0']['sunlit_days']
     for side, bands in product['results'].items():
         for band, strategies in bands.items():
-            for name, s in strategies.items():
-                for policy, b in s['best'].items():
-                    assert abs(b['set_hour_angle']) < 90.0                           # set with the Sun up
-                    assert b['days_to_harvest'] > sunlit                             # longer than one lunar day
-                    shares = [b['shares'][k] for k in ('0.3', '0.5', '0.7')]
+            sunlit = product['calendar'][side][band]['sunlit_days']
+            for name, fruits in strategies.items():
+                day, melon = fruits['day_fruit'], fruits['watermelon']
+                for policy in fr.POLICIES:
+                    # the day fruit, set at sunrise, is ripe at sunset and never draws on the night store
+                    d = day['best'][policy]
+                    assert abs(d['set_hour_angle'] + 90.0) < 10.0
+                    assert d['days_to_harvest'] == pytest.approx(sunlit, abs=0.1)
+                    assert d['growth_while_plant_short'] < 0.01
+                    for r in d['shares'].values():
+                        assert r['size'] == pytest.approx(1.0, abs=0.01)
+                        assert r['store'] == pytest.approx(day['store_without_fruit'], rel=0.02)
+                    # today's watermelon lives through a night: shrunken by daylight alone, or a larger store
+                    m = melon['best'][policy]
+                    assert abs(m['set_hour_angle']) < 90.0 and m['days_to_harvest'] > 2 * sunlit
+                    shares = [m['shares'][k] for k in ('0.3', '0.5', '0.7')]
                     assert np.all(np.diff([r['harvest_kg'] for r in shares]) > 0)
                     assert np.all(np.diff([r['plant_growth'] for r in shares]) < 0)
                     for r in shares:
-                        assert (r['size'] == pytest.approx(1.0)) if policy == 'fed' else (r['size'] < 0.8)
-    near = product['results']['near']['0']['earth_like']['best']['fed']['shares']['0.6']
+                        if policy == 'fed':
+                            assert r['size'] == pytest.approx(1.0) and r['store'] > 1.2 * melon['store_without_fruit']
+                        else:
+                            assert r['size'] < 0.8
+    programs = product['programs']['earth_like']
+    by_dd = {row['degree_days']: row for row in programs}
+    assert by_dd[199.0]['daylight']['size'] > 0.99 > by_dd[300.0]['daylight']['size']
+    assert by_dd[199.0]['fed']['store'] < by_dd[260.0]['fed']['store'] < by_dd[300.0]['fed']['store']
+    near = product['results']['near']['0']['earth_like']['day_fruit']['best']['fed']['shares']['0.6']
     earth = product['earth']['best']['fed']['shares']['0.6']
-    assert near['store'] > 10 * earth['store']
     assert near['harvest_kg'] > earth['harvest_kg_per_29_53_days']
