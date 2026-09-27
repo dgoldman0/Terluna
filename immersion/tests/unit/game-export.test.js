@@ -1,5 +1,5 @@
 /* The Unreal game's data exports carry the world and sky unchanged. */
-import { test } from 'node:test';
+import { test, after } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
@@ -15,6 +15,7 @@ import { treeAt } from '../../world/cove-flora.js';
 OM.world = cove;
 const immersion = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..'),
   out = fs.mkdtempSync(path.join(os.tmpdir(), 'game-export-'));
+after(() => fs.rmSync(out, { recursive: true, force: true }));
 
 test('the world export keeps heights, the planting rule and the landscape transform', () => {
   execFileSync(
