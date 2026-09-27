@@ -32,6 +32,7 @@ CLOUD_KG_KG = 1.0e-5                  # condensate (liquid + ice) that counts as
 RAIN_MM_H = 1.0                       # rain rate that counts as a storm's footprint
 WIND_HEIGHTS_M = (1000.0, 5000.0, 10000.0, 20000.0, 30000.0, 40000.0, 55000.0, 70000.0)
 FLIGHT_BAND_M = (35000.0, 45000.0)    # where low-gravity flight is expected to concentrate
+FOG_TOP_M = 200.0                     # cloud this near the ground counts as fog
 TRACK_REACH = 5                       # columns (30 km) a storm may shift between snapshots and stay the same storm
 STORM_HALF_WIDTH = 120                # columns each side of the heaviest storm kept as a section (1,440 km in all)
 FIELDS_SCHEMA = 'terluna.climate.crm-ring-fields/1'
@@ -67,7 +68,7 @@ def evidence(latitude: float) -> str:
 
 
 READING_RULE = ('Composites are by local hour angle (0 = noon, negative = morning) in 10-degree bins; heights are '
-                'above the flat ground at sea level. Snapshots are instantaneous, every 3 model hours. Storm '
+                'above the flat ground at sea level. Fog is cloud below 200 m. Snapshots are instantaneous, every 3 model hours. Storm '
                 'widths are contiguous stretches of surface rain above 1 mm/h in one snapshot.')
 
 
@@ -174,7 +175,7 @@ def analyse(name: str, from_day: float) -> dict:
     bins = np.linspace(-180.0, 180.0, HOUR_BINS + 1)
     surface_names = ('t2', 'tsk', 'rh2', 'tw2', 'prate', 'evap', 's10', 'u10', 'hpbl', 'lcl', 'cape', 'lwp', 'cwp', 'pwat')
     comp = {k: np.zeros((2, HOUR_BINS)) for k in (*surface_names, 'cloud', 'cloud_high', 'cloud_low', 'cloud_flight',
-                                                    'cloud_top', 'cloud_base', 'wind_levels')}
+                                                    'fog', 'cloud_top', 'cloud_base', 'wind_levels')}
     comp['wind_levels'] = np.zeros((2, HOUR_BINS, len(WIND_HEIGHTS_M)))
     count = np.zeros((2, HOUR_BINS))
     cloud_top_count = np.zeros((2, HOUR_BINS))
@@ -197,6 +198,7 @@ def analyse(name: str, from_day: float) -> dict:
     ilev = {z: level_index(zh, z) for z in WIND_HEIGHTS_M}
     high = zh >= 25000.0                                              # above the freezing level
     flight = (zh >= FLIGHT_BAND_M[0]) & (zh <= FLIGHT_BAND_M[1])
+    near_ground = zh < FOG_TOP_M
     for n in use:
         t = (n - 1) * tap
         d = read_snapshot(case, n)
@@ -244,6 +246,7 @@ def analyse(name: str, from_day: float) -> dict:
                 comp['cloud_high'][s, b] += cloudy[high][:, m].any(axis=0).sum()
                 comp['cloud_low'][s, b] += cloudy[~high][:, m].any(axis=0).sum()
                 comp['cloud_flight'][s, b] += cloudy[flight][:, m].any(axis=0).sum()
+                comp['fog'][s, b] += cloudy[near_ground][:, m].any(axis=0).sum()
                 ok = m & any_cloud
                 cloud_top_count[s, b] += ok.sum()
                 comp['cloud_top'][s, b] += np.nansum(top[ok])
@@ -283,7 +286,7 @@ def analyse(name: str, from_day: float) -> dict:
         hov['t2'].append(d['t2'].astype(np.float32))
         hov['u10'].append(d['u10'].astype(np.float32))
     safe = np.maximum(count, 1)
-    composites = {key: (comp[key] / safe) for key in (*surface_names, 'cloud', 'cloud_high', 'cloud_low', 'cloud_flight')}
+    composites = {key: (comp[key] / safe) for key in (*surface_names, 'cloud', 'cloud_high', 'cloud_low', 'cloud_flight', 'fog')}
     composites['cloud_top_m'] = comp['cloud_top'] / np.maximum(cloud_top_count, 1)
     composites['cloud_base_m'] = comp['cloud_base'] / np.maximum(cloud_top_count, 1)
     composites['wind_levels'] = comp['wind_levels'] / safe[:, :, None]
@@ -314,6 +317,7 @@ def analyse(name: str, from_day: float) -> dict:
                            for z, v in vertical_samples.items()},
         flight_band_km=[FLIGHT_BAND_M[0] / 1000.0, FLIGHT_BAND_M[1] / 1000.0],
         cloud_in_flight_band={key: float(composites['cloud_flight'][s].mean()) for s, key in ((0, 'land'), (1, 'water'))},
+        fog={key: float(composites['fog'][s].mean()) for s, key in ((0, 'land'), (1, 'water'))},
         storms=storm_summary(storm_rows, len(use)),
         storm_tracks=track_summary(track_storms(snapshot_storms, land.size), tap, geo['dx'], land.size),
         rain_spells=rain_spells(np.array(hov['prate']), land, tap),
@@ -413,7 +417,7 @@ def hour_angle_table(centres, composites) -> dict:
               ('mixed_layer_km', 'hpbl', 1e-3, 0.0, 1),
               ('cloud_base_lcl_km', 'lcl', 1e-3, 0.0, 1), ('cape_j_kg', 'cape', 1.0, 0.0, 0),
               ('cloud_cover', 'cloud', 1.0, 0.0, 2), ('cloud_above_25_km', 'cloud_high', 1.0, 0.0, 2),
-              ('cloud_in_flight_band', 'cloud_flight', 1.0, 0.0, 2),
+              ('cloud_in_flight_band', 'cloud_flight', 1.0, 0.0, 2), ('fog', 'fog', 1.0, 0.0, 2),
               ('cloud_top_km', 'cloud_top_m', 1e-3, 0.0, 1), ('precipitable_water_mm', 'pwat', 1e3, 0.0, 1))
     out = dict(hour_angle_deg=[round(float(c), 1) for c in centres],
                wind_heights_km=[round(z / 1000.0) for z in WIND_HEIGHTS_M])

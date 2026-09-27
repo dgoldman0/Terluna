@@ -219,6 +219,33 @@ climate/gcm/.venv/bin/python -m climate.crm.cm1_run run ring_80n --hours 3 --thr
 climate/gcm/.venv/bin/python -m climate.crm.ring_analysis ring_80n --from-day 29.5
 ```
 
+## Tilted rings, a candidate
+
+A ring along a great circle tilted to the equator, short of the poles, keeps
+the Sun sweeping it once a lunar day while it swings between its tilt's
+latitude north and south, crossing the equator twice. Two such rings, tilted
+about 35° and 65°, would cover every latitude to 65° in both hemispheres in
+continuous runs, and let storms and air drift between the tropics and high
+latitudes. They need four changes, each testable:
+
+- **The Sun** from each column's latitude and longitude along the great circle,
+  which spherical geometry gives exactly.
+- **A Coriolis parameter that varies along the ring** and changes sign at the
+  equator crossings. CM1 keeps a two-dimensional array for its beta-plane
+  option. The patch would fill it along x and use it in the Coriolis and
+  balancing-pressure terms, and a test would check the inertial period at each
+  point.
+- **Land, sea, sea temperatures and land wetness per stretch** of ring, from
+  the GCM along the path.
+- **One upper-air profile for the whole path.** That's defensible because the
+  GCM's air is nearly uniform with latitude: temperatures agree within 1.5 °C
+  at every level from the equator to 80°, and vapour aloft is about 20% lower
+  toward the poles.
+
+They stay two-dimensional, so storms still organise into lines. Each is a full
+great circle at the equatorial ring's cost, about 8.6 hours of machine time for
+two lunar days. Whether to run them waits on what the polar rings show.
+
 ## The gravity pair
 
 If lunar convection were Earth's stretched six times in size and duration, a

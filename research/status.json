@@ -62,7 +62,7 @@
         "cloud and rain amounts differ between the models: the cloud-resolving ring has half the GCM's cloud and under half its rain over land, a quarter of its cloud over the seas",
         "what gravity changes in clouds beyond the stretch: the gravity pair needs a prescribed cooling to convect"
       ],
-      "next_session_task": "The gravity pair with a prescribed cooling (the ring's own radiative cooling over its seas); rings at higher latitudes for weather away from the equator; ROCKE-3D with a slab ocean at 4°×5° for the chosen design (28% seas with lakes, the 5% dimmer shield, near 294 K), on this laptop as a few weeks of sessions (an estimated 2-5 hours per simulated year) or on rented compute; runs D and E."
+      "next_session_task": "The polar rings (70 and 80 degrees, north and south; climate/crm) analysed against the equatorial ring, then a decision on tilted great-circle rings (about 35 and 65 degrees, sketched in climate/crm/README.md); the gravity pair with a prescribed cooling (the ring's own radiative cooling over its seas); ROCKE-3D with a slab ocean at 4°×5° for the chosen design (28% seas with lakes, the 5% dimmer shield, near 294 K), on this laptop as a few weeks of sessions (an estimated 2-5 hours per simulated year) or on rented compute; runs D and E."
     },
     {
       "topic": "geography",

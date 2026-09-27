@@ -4,6 +4,10 @@ import pytest
 
 from climate.crm import cm1_run as c
 
+GCM_CONFIGURATION = c.HERE.parent / 'gcm' / 'products' / 'moon_gcm_configuration.json'
+needs_planet = pytest.mark.skipif(not GCM_CONFIGURATION.exists(), reason='climate/gcm/products/moon_gcm_configuration.json '
+                                  'is missing; python -m climate.gcm.boundary writes it')
+
 
 def test_patch_applies_once_and_is_idempotent():
     text = 'a = 1\nb = 2\nb = 2\n'
@@ -114,12 +118,13 @@ def test_hour_angle_table_keeps_land_and_water_apart():
     from climate.crm import ring_analysis as ra
     bins = ra.HOUR_BINS
     comp = {k: np.zeros((2, bins)) for k in ('t2', 'tsk', 'rh2', 'tw2', 'prate', 'evap', 's10', 'hpbl', 'lcl', 'cape',
-                                              'cloud', 'cloud_high', 'cloud_flight', 'cloud_top_m', 'pwat')}
+                                              'cloud', 'cloud_high', 'cloud_flight', 'fog', 'cloud_top_m', 'pwat')}
     comp['t2'][0], comp['t2'][1] = 300.0, 290.0
     comp['wind_levels'] = np.ones((2, bins, len(ra.WIND_HEIGHTS_M)))
     table = ra.hour_angle_table(np.linspace(-175.0, 175.0, bins), comp)
     assert table['land']['air_2m_c'][0] == pytest.approx(26.9) and table['water']['air_2m_c'][0] == pytest.approx(16.9)
     assert len(table['land']['wind_by_height_m_s']) == len(ra.WIND_HEIGHTS_M) == len(table['wind_heights_km'])
+    assert table['land']['fog'] == [0.0] * bins
 
 
 def test_storm_tracks_follow_overlap_and_measure_drift():
@@ -134,6 +139,7 @@ def test_storm_tracks_follow_overlap_and_measure_drift():
     assert len(across) == 1 and ra.track_summary(across, 3600.0, 1000.0, 50)['drift_m_s']['median'] > 0
 
 
+@needs_planet
 def test_rain_spells_count_runs_at_each_place():
     from climate.crm import ring_analysis as ra
     prate = np.zeros((6, 2))
@@ -194,6 +200,7 @@ def test_water_mean_profile_skips_land_columns():
     assert prof['surface_pa'] == pytest.approx(1.21e5) and prof['air_2m_k'] == pytest.approx(299.0)
 
 
+@needs_planet
 def test_rings_off_the_equator_are_shorter_and_turn_the_wind():
     nx, dx, length = c.ring_grid(80.0, 6000.0, 8)
     assert length == pytest.approx(2 * np.pi * c.planet()['radius_m'] * np.cos(np.radians(80.0)))
@@ -203,6 +210,7 @@ def test_rings_off_the_equator_are_shorter_and_turn_the_wind():
     assert c.coriolis(-80.0) == pytest.approx(-c.coriolis(80.0)) and c.coriolis(0.0) == 0.0
 
 
+@needs_planet
 def test_only_rings_off_the_equator_turn_the_wind_and_lower_the_sun():
     air = dict(sunlight_w_m2=1300.0)
     south = c.case_settings(c.CASES['ring_80s'], 312, 6075.7, 111, 150000.0, air, 1.6242)
