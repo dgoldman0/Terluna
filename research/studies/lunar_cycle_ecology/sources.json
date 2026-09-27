@@ -51,7 +51,7 @@
    "access": "search summary of the abstract"
   },
   {
-   "citation": "Baena-Gonzalez et al. 2007, Nature 448, 938",
+   "citation": "Baena-González et al. 2007, Nature 448, 938",
    "title": "A central integrator of transcription networks in plant stress and energy signalling",
    "url": "https://www.nature.com/articles/nature06069",
    "use": "SnRK1 (KIN10/11) links energy status to growth and survival; kin10 kin11 impairs night starch mobilization (B5, C3)",
@@ -87,7 +87,7 @@
   {
    "citation": "USDA FoodData Central 167765, Watermelon, raw",
    "url": "https://fdc.nal.usda.gov/food-details/167765/nutrients",
-   "use": "per 100 g: water 91.45 g, protein 0.61 g, K 112 mg, P 11 mg, Mg 10 mg, Ca 7 mg, sugars 6.2 g (G3; fruit sugar)",
+   "use": "sugars 6.2 g per 100 g fresh (the dusk fruit fall as food; run.py)",
    "access": "read through the FoodData Central API, read by the literature agent"
   },
   {
@@ -394,19 +394,8 @@
   {
    "citation": "McKay et al. 1991, The lunar regolith, Lunar Sourcebook chapter 7, Table 7.15",
    "url": "https://www.lpi.usra.edu/publications/books/lunar_sourcebook/pdf/Chapter07.pdf",
-   "use": "average soil K2O, P2O5, CaO and MgO at the Apollo and Luna sites (G2; run.py)",
-   "access": "full text, table image checked, read by the literature agent"
-  },
-  {
-   "citation": "Taylor et al. 1991, Lunar rocks, Lunar Sourcebook chapter 6, Table A6.9",
-   "use": "KREEP basalts and breccias 0.53-0.83% K2O, 2400-3400 ug/g P (G4)",
-   "access": "page image, read by the literature agent"
-  },
-  {
-   "citation": "Prettyman et al. 2006, Journal of Geophysical Research 111, E12007, as reported by Zhu et al. 2013, Scientific Reports 3, 1611",
-   "url": "https://doi.org/10.1029/2005JE002656",
-   "use": "Lunar Prospector potassium: 755 ppm mean, 2004 ppm in the Procellarum KREEP Terrane; Chang'E-2 highlands under 500 ppm (G2; run.py)",
-   "access": "secondary (Zhu et al. 2013, full text), read by the literature agent"
+   "use": "full average-soil compositions at the Apollo and Luna sites: mare medians, the Apollo 16 highland and Apollo 14 KREEP-rich averages (G2, H10; run.py)",
+   "access": "full text; table image read in this study"
   },
   {
    "citation": "Rudnick & Gao 2003, Treatise on Geochemistry 3, 1-64",
@@ -515,6 +504,37 @@
    "citation": "Bernacchi et al. 2001, Plant, Cell & Environment 24, 253",
    "use": "temperature response of Gamma*, for the C3-C4 crossover shift (A3; run.py), through the atmospheric CO2 study",
    "access": "as checked in research/studies/atmospheric_co2/sources.json"
+  },
+  {
+   "citation": "Lana et al. 2011, Global Biogeochemical Cycles",
+   "title": "An updated climatology of surface dimethlysulfide concentrations and emission fluxes in the global ocean",
+   "url": "https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/2010gb003850",
+   "use": "28.1 (17.6-34.4) Tg of sulfur a year from the ocean to the air as dimethyl sulfide (H8; run.py)",
+   "access": "search summary of the abstract"
+  },
+  {
+   "citation": "Carpenter et al. 2021, Proceedings of the Royal Society A 477, 20200824",
+   "title": "Marine iodine emissions in a changing world",
+   "url": "https://doi.org/10.1098/rspa.2020.0824",
+   "use": "the ocean emits iodine as methyl iodide and inorganic iodine, and its deposition supplies the land (H8)",
+   "access": "search summary; authors and volume from the publisher listing"
+  },
+  {
+   "citation": "U.S. Geological Survey (USGS) 2025, Mineral Commodity Summaries: Salt",
+   "url": "https://pubs.usgs.gov/periodicals/mcs2025/mcs2025-salt.pdf",
+   "use": "world salt production 270,000 (2023) and 280,000 (2024, estimated) thousand tonnes (H10; run.py)",
+   "access": "table read from the PDF"
+  },
+  {
+   "citation": "U.S. Department of Energy 1994, Handbook of methods for the analysis of the various parameters of the carbon dioxide system in sea water, ORNL/CDIAC-74, chapter 5, as tabulated on Wikipedia (Seawater)",
+   "url": "https://en.wikipedia.org/wiki/Seawater",
+   "use": "sea water at salinity 35: Na 0.469, Mg 0.0528, Ca 0.0103, K 0.0102 mol/kg, i.e. 10.78, 1.284, 0.412, 0.399 g/kg (G2; run.py); consistent with the reference composition of Millero et al. 2008, Deep-Sea Research I 55, 50-72",
+   "access": "secondary (Wikipedia table)"
+  },
+  {
+   "citation": "Martínez-Vilalta et al. 2016",
+   "use": "non-structural carbohydrate in Earth's forests, hundreds of g per m2 (F2)",
+   "access": "as cited in biosphere/canopy/README.md; not re-read here"
   }
  ]
 }

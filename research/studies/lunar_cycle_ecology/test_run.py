@@ -45,15 +45,19 @@ class EcologyTests(unittest.TestCase):
         self.assertLess(d['any_water']['p50'], d['sea']['p50'])
         within = list(d['sea']['land_share_within'].values())
         self.assertEqual(within, sorted(within))
-        n = r['nutrients']
+        n = r['return_limb']
         self.assertAlmostEqual(n['runoff_m_per_yr_over_land'] * n['land_area_m2'] / (365.25 * 86400), 279167, delta=300)
-        export = n['harvest_export']['earth_like_0.6']
-        self.assertAlmostEqual(export['potassium_g_m2_yr'], export['fruit_kg_m2_yr'] * 1.12, delta=0.1)
-        self.assertGreater(export['potassium_g_m2_yr'], 20 * max(n['earth_river_load_at_moon_runoff_g_m2_yr']['potassium']))
-        mare = n['weathering_supply']['mare_soil']
+        mare = n['soils']['mare_soil']
         self.assertAlmostEqual(mare['rock_weathered_g_m2_yr'][1] / mare['rock_weathered_g_m2_yr'][0], 10.0, places=3)
-        k_share = mare['potassium_g_m2_yr'][0] / mare['rock_weathered_g_m2_yr'][0]      # results keep 4 digits
+        k_share = mare['export_g_m2_yr']['K'][0] / mare['rock_weathered_g_m2_yr'][0]      # results keep 4 digits
         self.assertAlmostEqual(k_share / (e.ROCK_WT_PCT['mare_soil']['K2O'] / 100 * e.K_IN_K2O), 1.0, places=3)
+        years = mare['years_to_earth_seawater_if_dissolved']
+        self.assertTrue(years['Mg'][0] < years['K'][0] < years['Na'][0])                  # magnesium gathers first
+        bio = n['biology_at_myvatn_rate']['elements']
+        self.assertGreater(bio['P']['share_of_export'][0], 1.0)          # biology can return the dissolved phosphorus
+        for element in ('Mg', 'Ca'):
+            self.assertLess(bio[element]['share_of_export'][1], 0.01)    # but not the bulk of the salts
+        self.assertTrue(0.1 < n['engineered']['ratio_to_world_salt'][0] < n['engineered']['ratio_to_world_salt'][1])
         leaves = r['leaves']
         self.assertGreater(leaves['plant_keeps_g_c_per_cycle_equator']['earth_like']['0.6'],
                            leaves['leaf_replacement_g_c_per_cycle']['6_months'])

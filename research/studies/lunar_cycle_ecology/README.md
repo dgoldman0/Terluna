@@ -271,91 +271,84 @@ the equator unless stated.
   of standing water and 72% within 100 km. Lake shores and wetlands suit carnivorous
   plants, and lake insects carry nutrients onto the shore (G, H).
 
-### G. Nutrients and minerals
+### G. The rock cycle's missing return limb
 
-- **G1. Nutrients flow one way.** *Earth evidence and computed · adopt as a design
-  problem.* Without volcanism or uplift, weathering and runoff carry rock-derived
-  nutrients downhill into lakes and seas, and nothing lifts them back. Soils lose their
-  mineral phosphorus as they age:
-  - In Hawaii, mineral phosphate fell from 82% of total phosphorus at a 300-year-old
-    site to 1% at 20,000 years (Crews et al. 1995).
-  - Growth at the oldest site, 4.1 million years, is limited by phosphorus (Vitousek
-    and Farrington 1997).
-  - Across six long soil sequences, forests decline as phosphorus runs short (Wardle et
+- **G1. The problem.** *Earth evidence · adopt as the core problem.* On Earth, sea water
+  keeps a steady composition and the land stays fertile because the rock cycle closes:
+  - sea-floor sediments and evaporites are lifted back into mountains;
+  - subduction and eruption recycle the crust;
+  - hydrothermal exchange at the ocean ridges takes magnesium out of sea water.
+
+  The Moon has none of this. Every element weathered from the land moves one way,
+  downhill. The seas gather the soluble part and bury the rest as sediment, while the
+  soils run down from the surface. Imports can top up any element, but they don't close
+  the loop.
+  - **Elements with a gas phase** can come back through the air: carbon, nitrogen, and
+    some of the sulfur, iodine, selenium and mercury.
+  - **The rest have no way back:** phosphorus, potassium, calcium, magnesium, sodium,
+    iron and most trace metals.
+
+  On Earth's old soils the loss shows:
+  - in Hawaii, mineral phosphate fell from 82% of total phosphorus at a 300-year-old site
+    to 1% at 20,000 years (Crews et al. 1995);
+  - growth at the oldest site, 4.1 million years, is limited by phosphorus (Vitousek and
+    Farrington 1997);
+  - across six long soil sequences, forests decline as phosphorus runs short (Wardle et
     al. 2004).
+- **G2. How fast.** *Computed · adopt.* The basalt weathering law of the
+  [CO₂ study](../atmospheric_co2/README.md), applied at the Moon's runoff and land
+  temperature, dissolves about 50 g of soil per m² of land a year, and up to 500 from
+  fresh glassy regolith. The top metre weathers through in 3,000–31,000 years. For the
+  average mare soil, if every element left in step with the rock and each cation stayed
+  dissolved in the seas:
 
-  At the Moon's runoff and land temperature, the basalt weathering law of the
-  [CO₂ study](../atmospheric_co2/README.md) dissolves about 50 g of soil per m² a year,
-  and up to 500 from fresh glassy regolith. The top metre weathers through in
-  3,000–30,000 years. Fresh regolith supplies phosphorus and potassium for millennia,
-  and after that the Open Moon's soils age as Earth's old soils do, well within its
-  billion-year horizon.
-- **G2. Potassium is the scarce one.** *Earth evidence and computed · adopt.*
-  - **The Moon's potassium:** Lunar Prospector puts the surface at 755 ppm on average,
-    3% of Earth's upper continental crust at 23,240 ppm (Rudnick and Gao 2003). The
-    Procellarum KREEP Terrane averages 2,004 ppm and the feldspathic highlands under 500
-    (Prettyman et al. 2006, via Zhu et al. 2013).
-  - **Soil samples:** Apollo and Luna soils hold 0.04–0.55% K₂O (McKay et al. 1991).
-  - **Phosphorus:** it matches Earth's crust, at 0.05–0.5% P₂O₅ against 0.15%.
-  - **Supply:** weathering releases 0.06–0.7 g of potassium per m² a year from mare or
-    highland soil, and 0.2–2.3 g from soil rich in KREEP (the potassium-, rare-earth-
-    and phosphorus-rich component of lunar rock). Earth's rivers, draining crust with
-    thirty times the potassium, would carry 0.34–0.42 g off the same land at the Moon's
-    runoff. Plants need as much potassium as on Earth, from rock that holds a thirtieth
-    of it.
-  - **Where the rich rock lies:** under water. The Near-side Sea floods 99% of Mare
-    Imbrium and 60% of Oceanus Procellarum, the core of the KREEP terrane. That sea floor
-    is the Moon's best source of potassium and phosphorus, and sea spray and marine life
-    can bring some back (G5, H).
-- **G3. Farms carry off far more than rivers.** *Computed · adopt.* At a 60% fruit
-  share the equatorial stand's harvest is 46 kg of fruit per m² a year, at the model's
-  clear-sky potential. With watermelon's composition (USDA FoodData Central 167765) it
-  carries off, per m² a year:
+  | Element | Leaves the land, g per m² a year | Into the seas, kg a year | Years for the seas to reach Earth sea water's level |
+  |---|---|---|---|
+  | Calcium | 4–40 | 1.1–11 × 10¹¹ | 4,000–41,000, but it settles as carbonate first |
+  | Magnesium | 2.7–27 | 0.7–7 × 10¹¹ | 18,000–180,000 |
+  | Sodium | 0.13–1.3 | 0.4–4 × 10¹⁰ | 3–30 million |
+  | Potassium | 0.06–0.65 | 0.2–2 × 10¹⁰ | 0.24–2.4 million |
+  | Phosphorus, released | 0.03–0.3 | | most held in soil and sediment |
+  | Sulfur | 0.06–0.6 | 0.2–2 × 10¹⁰ | |
 
-  | Nutrient | Carried off by the harvest | Against Earth's rivers at the Moon's runoff |
+  Basalt is rich in calcium and magnesium and poor in sodium and potassium. So within
+  tens of thousands of years the Open Moon's seas would turn rich in magnesium and
+  carbonate, a different water from Earth's sodium chloride sea. Calcium carbonate
+  settling in them draws CO₂ from the air. This is a first estimate: real weathering
+  releases sodium, potassium, calcium and magnesium ahead of the rest, and sea chemistry
+  would also lay down silica and clays. The imported water's own salts come on top.
+- **G3. What each element needs.** *Computed and idea · adopt.* The paths in H share the
+  work according to what each element does:
+
+  | Element | Where it goes | What can bring it back |
   |---|---|---|
-  | Nitrogen | 45 g | |
-  | Potassium | 51 g | 120–150 times |
-  | Phosphorus | 5.0 g | 600–1,600 times the dissolved phosphorus |
-  | Magnesium | 4.6 g | |
-  | Calcium | 3.2 g | |
+  | Carbon, nitrogen | The air | Photosynthesis and nitrogen fixation already close their loops |
+  | Phosphorus | Held in soil, lost by leaching and erosion, buried in sea sediment | Biology (H1–H6); dredged sediment for what erosion takes (H10) |
+  | Sulfur, iodine, selenium | Seas | The air (H8) and biology |
+  | Potassium | Seas | Biology returns 3–27% (H4); salt works and spray the rest (H8, H10) |
+  | Magnesium, sodium | Seas | Salt works and spray; biology returns under 0.2% |
+  | Calcium | Settles as carbonate | Dredged lime and shells; the soils hold much more |
+  | Silica | Settles in the seas | Abundant in the soils |
+  | Iron, aluminium, titanium | Stay in the soil as oxides and clays | Erosion moves them as particles |
+- **G4. Settlements send their wastes to land.** *Idea · adopt.* Food waste and sewage
+  that go to the sea speed the downhill flow; returned to land, they keep the elements
+  in the land's cycle.
 
-  Those nutrients have to return to the fields from the settlements that eat the
-  harvest, as food waste, sewage and manure. It is the largest nutrient loop on farmed
-  land.
-- **G4. Potassium from rock and the sea.** *Idea · adopt.* Crushed KREEP basalt or
-  breccia (0.53–0.83% K₂O; Taylor et al. 1991) can be spread as rock dust, and potassium
-  can be recovered from the seas, which collect it. Farms return what they harvest
-  (G3).
-- **G5. Dust and sea spray.** *Earth evidence · in places.* Dust and spray already
-  carry nutrients inland on Earth:
-  - **Dust:** African dust brings the Amazon 7–39 g of phosphorus per hectare a year,
-    about what the forest loses to its rivers, 8–40 (Yu et al. 2015).
-  - **Spray reach:** ocean aerosols can be traced 2,000 km inland (Meybeck 1994).
-  - **Iodine:** most soil iodine comes from the sea through the air (Fuge and Johnson
-    1986). Soils more than 50 km inland hold a geometric mean of 2.6 µg/g against 11.6
-    near the coast, though soil iodine does not fall simply with distance (Johnson
-    2003).
+### H. The return paths
 
-  The median point of lunar land lies 476 km from a sea: within spray's reach, but far
-  enough that inland soils will be poor in iodine. People and animals will need iodine
-  supplied until the spray and the migrants carry enough.
-- **G6. Erosion and sediment.** *Computed · adopt as engineering.* Particulate matter
-  makes up 95% of the phosphorus Earth's rivers carry naturally (Meybeck 1982). Erosion at
-  Earth's rate would remove 0.06–0.17 g of phosphorus per m² of lunar land a year: 7–50
-  times the dissolved loss, and more than any conveyor of animals could return (H4).
-  Keep the land covered, trap sediment in lakes and deltas, and recover it; the
-  biosphere seed already notes that nutrients buried in sediment might need recovery.
+The biological path (H1–H7):
 
-### H. The sea–forest migrant cycle
-
-- **H1. The cycle.** *Idea · adopt as the candidate forest cycle.* Marine migrants grow
-  at sea and fly to the forests for the dusk fruit fall and to mate. On land they leave
-  nutrients as droppings, as carcasses and as the prey of glowing traps and pitcher
-  plants, and the survivors fly back to breed at sea. The plants pay in sugar, which the
-  long day makes in surplus. The migrants pay in the nitrogen and phosphorus the forest
-  lacks, and since fruit carries little protein, they build their bodies at sea. Growth
-  at sea and death on land give the largest net import, as with salmon.
+- **H1. The sea–forest migrant cycle.** *Idea · adopt as a candidate for the forests.*
+  Marine migrants grow at sea and fly to the forests for the dusk fruit fall and to
+  mate. On land they leave nutrients as droppings, as carcasses and as the prey of
+  glowing traps and pitcher plants, and the survivors fly back to breed at sea. The
+  plants pay in sugar, which the long day makes in surplus; the migrants pay in what
+  they built at sea. Growth at sea and death on land give the largest net import, as
+  with salmon. Life concentrates what it needs: phosphorus from sea water tens of
+  thousands of times over, nitrogen, sulfur, iodine and trace metals, potassium and
+  magnesium in tissue, and calcium and phosphorus in bone and shell. It leaves most of
+  the sodium and chloride behind. Colonies of seabird-like fliers, fish runs up the
+  rivers, and people harvesting fish and seaweed are part of the same path.
 - **H2. Earth has each piece.** *Earth evidence.*
   - **Seabirds:** colonies worldwide receive 591 Gg of nitrogen and 99 Gg of phosphorus
     a year in the birds' droppings (Otero et al. 2018). Near colonies on Spitsbergen,
@@ -382,19 +375,22 @@ the equator unless stated.
     moth three to five days and a 100 g bird one to one and a half.
   - **Keeping up with dusk:** dusk moves at 4.3 m/s at the equator. Small birds can keep
     pace with it (E6); moths only near the poles or with the wind.
-- **H4. How large the conveyor must be.** *Computed · test first.*
-  - **The target:** phosphorus returned as fast as Earth's rivers would carry it off in
-    solution at the Moon's runoff, 0.003–0.008 g per m² of land a year.
-  - **Bodies needed:** that takes 0.5–1.2 g of dry insect bodies left on each m² of land
-    a year, or 0.13–0.32 g of vertebrate bodies whose bone makes them rich in phosphorus.
+- **H4. What biology can carry.** *Computed · test first.*
+  - **The phosphorus target:** Earth's rivers, at the Moon's runoff, would carry
+    0.003–0.008 g of phosphorus per m² of land a year off in solution.
+  - **The migrants needed:** returning that takes 0.5–1.2 g of dry insect bodies left on
+    each m² of land a year, or 0.13–0.32 g of vertebrate bodies, whose bone makes them
+    rich in phosphorus.
   - **What the seas must produce:** with seas on 28% of the Moon, they must send up
     1.2–3.0 g of dry insects per m² of sea a year, the top of Mývatn's range.
-  - **Against Earth:** that is 5–12 times what all of Earth's seabird colonies deliver
-    per m² of land, and 20–60 times southern Britain's insect migrants.
+  - **Against Earth:** that is 5–12 times what all of Earth's seabird colonies deliver per
+    m² of land, and 20–60 times southern Britain's insect migrants.
   - **Fuel:** the flight sugar is 0.05–0.7% of a wild forest's dusk fruit fall.
-  - **Beyond its reach:** returning eroded phosphorus, or potassium at Earth's river
-    rates, would take 21–89 g of insects per m² of sea. The conveyor suits dissolved
-    phosphorus and nitrogen; potassium and eroded phosphorus need G4 and G6.
+
+  At Mývatn's highest rate, with every insect landing on land, the seas would return
+  1.2–3 times the dissolved phosphorus, 3–27% of the potassium, and under 0.2% of the
+  magnesium and calcium that weathering carries off. Biology closes the loop for the
+  elements life concentrates. It cannot carry the bulk of the salts.
 - **H5. Where the nutrients land.** *Earth evidence · a design point.* Animals deliver
   nutrients in patches:
   - guano deposition drops off within about 50–300 m of colonies (Zwolicki et al. 2013);
@@ -420,13 +416,58 @@ the equator unless stated.
 
   Each step up a food chain leaves roughly a tenth as much biomass. Carriers that feed
   low in the sea's food web bring the most nitrogen and phosphorus with the fewest
-  toxins. Vertebrate carriers add phosphorus through their bones.
+  toxins, and vertebrate carriers add phosphorus through their bones.
 - **H7. A life cycle one lunar month long.** *Idea.* Migrants leave the sea in the
   lunar afternoon, since the trip takes days, and arrive at dusk for the fruit fall.
   They feed and mate through the first nights while the lures glow, then fly back. Eggs
   laid at sea can hatch by dawn, when the sea's production restarts; the July bundle
   also proposes reproduction around dawn. A dusk-set timer (C2) and emergence timed by
   the Moon (C5) would govern it.
+
+The air and the land (H8–H9):
+
+- **H8. Through the air.** *Earth evidence and computed · adopt.*
+  - **Sulfur:** Earth's ocean releases 28 (18–34) Tg of sulfur a year as dimethyl sulfide
+    (Lana et al. 2011). Seas as active per m² would bring 0.02–0.04 g of sulfur per m² of
+    lunar land a year, 3–64% of what weathering carries off.
+  - **Iodine:** the sea also emits iodine, as methyl iodide and inorganic iodine
+    (Carpenter et al. 2021), and most soil iodine arrives this way (Fuge and Johnson
+    1986). Soils more than 50 km inland hold a geometric mean of 2.6 µg/g against 11.6
+    near the coast, though soil iodine does not fall simply with distance (Johnson 2003).
+  - **Spray and dust:** sea spray carries sea salts; ocean aerosols can be traced 2,000 km
+    inland (Meybeck 1994), and on the Moon they would be rich in magnesium. Dust does the
+    same from dry lake beds and exposed sediment: African dust brings the Amazon 7–39 g
+    of phosphorus per hectare a year, about what the forest loses to its rivers, 8–40 (Yu
+    et al. 2015).
+
+  The median point of lunar land lies 476 km from a sea, within spray's reach.
+  Biologically active seas are part of the design: plankton and seaweeds that release
+  sulfur and iodine to the air.
+- **H9. Relief keeps renewing the soil.** *Computed · idea.* The atlas's ground runs
+  from 8.3 km below to 9.9 km above the geoid. Erosion on that relief keeps exposing fresh
+  rock for a long time without uplift, though it drains the uplands into the basins.
+  Physical erosion on the Open Moon has not been estimated. Particulate matter makes up
+  95% of the phosphorus Earth's rivers carry naturally (Meybeck 1982), and at Earth's
+  rate erosion would take 0.06–0.17 g of phosphorus per m² of lunar land a year, 7–50
+  times the dissolved loss.
+
+The engineered path (H10):
+
+- **H10. Salt works, dredging and imports.** *Computed and idea · adopt.*
+  - **Salt works:** evaporation ponds suit the two-week day. Holding the seas'
+    composition would mean taking out the soluble magnesium, sodium and potassium,
+    8 × 10¹⁰–8 × 10¹¹ kg of these cations a year. That is 0.3–3 times the world's whole
+    salt output of 2.8 × 10¹¹ kg a year (USGS 2025), weighed as cations alone; the salts
+    weigh more. The salts return potassium, magnesium and sulfate to land as fertiliser.
+    Earth's great potash deposits likewise formed as old seas evaporated.
+  - **Dredging:** dredged sea and lake sediment returns phosphorus, carbonate (lime),
+    silica and trace metals, including what erosion carries off.
+  - **The richest sea floor:** the Near-side Sea floods 99% of Mare Imbrium and 60% of
+    Oceanus Procellarum, the core of the KREEP terrane (the potassium-, rare-earth- and
+    phosphorus-rich component of lunar rock).
+  - **Imports:** imports top up any element.
+
+  Biology works every lunar cycle; salt works and dredging can run in campaigns.
 
 ## Calculations
 
@@ -457,23 +498,30 @@ would shorten the second row):
 | The nearest sea | 476 km | 1,116 km | 1,735 km | 16% | 52% |
 | Any standing water | 50 km | 280 km | 874 km | 72% | 96% |
 
-Nutrients, per m² of land: the top metre's stock and what weathering releases
-each year (basalt law, 1–10 times for glassy regolith):
+The return limb, for the average mare soil (weathering at the basalt rate and ten
+times it). The top metre holds 122 kg of calcium, 85 of magnesium, 4.1 of sodium, 2.0
+of potassium and 0.85 of phosphorus per m². What leaves it each year, and what the
+return paths can bring back:
 
-| Soil | Potassium in the top metre | Phosphorus in the top metre | Potassium weathered a year | Phosphorus weathered a year |
+| Element | Leaves the land, g per m² a year | Biology at Mývatn's highest rate | The air | Engineered |
 |---|---|---|---|---|
-| Mare (median of six soils) | 2.0 kg | 0.85 kg | 0.06–0.6 g | 0.03–0.3 g |
-| Highland (Apollo 16) | 2.1 kg | 0.72 kg | 0.07–0.7 g | 0.02–0.2 g |
-| KREEP-rich (Apollo 14) | 6.8 kg | 3.3 kg | 0.2–2.3 g | 0.1–1.1 g |
-| Earth's upper crust | 34.9 kg | 0.98 kg | | |
+| Phosphorus in solution | 0.003–0.008 (Earth's river load at the Moon's runoff) | 1.2–3 times the loss | | |
+| Phosphorus on eroded particles | 0.06–0.17 (at Earth's rate) | | | Dredged sediment |
+| Potassium | 0.06–0.65 | 3–27% | | Salt works |
+| Sulfur | 0.06–0.6 | | 3–64% (dimethyl sulfide) | Salt works |
+| Magnesium | 2.7–27 | under 0.2% | | Salt works |
+| Calcium | 4–40 | under 0.2% | | Settles as carbonate; dredged lime |
+
+Holding the seas' composition takes out 8 × 10¹⁰–8 × 10¹¹ kg of soluble cations a year,
+0.3–3 times the world's salt output. The seas would reach Earth sea water's magnesium in
+18,000–180,000 years without that.
 
 Flows of phosphorus, per m² of land a year, for scale:
 
 | Flow | Phosphorus |
 |---|---|
 | Earth's rivers at the Moon's runoff, in solution | 0.003–0.008 g |
-| The same, as particles | 0.06–0.17 g |
-| A 60% fruit harvest | 5.0 g |
+| The same, on particles | 0.06–0.17 g |
 | Earth's seabird colonies, spread over Earth's land | 0.0007 g |
 | High-flying insects over southern Britain | 0.00014 g |
 | Lake Mývatn's midges, first 50 m of shore, high year | 0.1 g |
@@ -515,13 +563,19 @@ A recommendation for the author, judged on five criteria:
    margins between (F1–F3).
 5. **The dusk fruit fall and the warm night's food web.** The thing to watch is CO₂
    under still night air (E1, E2).
-6. **Nutrients returned from settlements to farms,** the largest nutrient loop on
-   farmed land (G3).
-7. **Potassium from KREEP rock and the seas, erosion kept low and sediment recovered**
-   (G2, G4, G6).
-8. **The sea–forest migrant cycle** for nitrogen and phosphorus in forests near seas and
-   lakes. Carriers feed low in the sea's food web, land in many places, and meet
-   pitcher plants and droppings-collecting plants at the forest end (E4, E5, H1–H6).
+6. **A designed return limb for the rock cycle** (G1–G4, H1–H10). Each path carries the
+   elements it suits:
+   - **Biology** returns what life concentrates: phosphorus, nitrogen, trace elements and
+     some potassium. The carriers are the sea–forest migrant cycle, seabird-like
+     colonies, fish runs and people's sea harvests. The carriers feed low in the sea's
+     food web and land in many places, and pitcher plants and droppings-collecting plants
+     wait at the forest end (E4, E5).
+   - **The air:** biologically active seas return sulfur and iodine, and spray and dust
+     carry salts inland.
+   - **Salt works** hold the seas' composition and return potassium, magnesium and
+     sulfate.
+   - **Dredging** returns what erosion carries off.
+   - **Settlements** send their wastes to land.
 
 **Test first:**
 
@@ -531,7 +585,8 @@ A recommendation for the author, judged on five criteria:
 - glowing lures that last through the first nights, with a catch the migrants can bear
   (E3);
 - the conveyor's size: seas producing insects at the top of Mývatn's range, spread over
-  hundreds of kilometres (H4).
+  hundreds of kilometres (H4);
+- the scale of salt works that could hold the seas' composition (H10).
 
 **In places:**
 
@@ -540,8 +595,7 @@ A recommendation for the author, judged on five criteria:
   light, on farms (C1);
 - fruit picked young (D5);
 - carnivorous plants on wet ground, on poor sands and in the canopy (E4);
-- dusk followers (E6);
-- dust and sea spray (G5).
+- dusk followers (E6).
 
 **Set aside:**
 
@@ -559,14 +613,15 @@ A recommendation for the author, judged on five criteria:
 - **Physiology to test:** B5, D2 and E3, and whether leaves use two weeks of continuous
   light (the canopy model's open question).
 - **Models to build:**
-  1. a land, lake and sea budget of nitrogen, phosphorus and potassium, over centuries
-     to millions of years: weathering, leaching, erosion and sediment, the harvest and
-     its return, dust, sea spray and the migrant conveyor;
+  1. a land, lake and sea budget of every rock-derived element over thousands to
+     millions of years, with the seas' chemistry (which elements settle and which build
+     up). It needs weathering, leaching, erosion and sediment, and each return path:
+     migrants, the air, spray and dust, salt works and dredging;
   2. a migrant population tied to the fruit fall, the lures and the traps, to size the
      catch the carriers can bear;
   3. water and stomata in the plant model, which decides whether a daily rhythm pays
      (A5);
   4. CO₂ under still night air near the ground (E2).
-- **Data:** weathering rates of lunar glass and soils; how much of their potassium and
-  phosphorus plants can take up; erosion under lunar gravity and rain; iodine and
-  selenium in lunar rock.
+- **Data:** weathering rates of lunar glass and soils, and which elements leave first;
+  erosion under lunar gravity and rain; iodine and selenium in lunar rock; the salts
+  the imported water brings.

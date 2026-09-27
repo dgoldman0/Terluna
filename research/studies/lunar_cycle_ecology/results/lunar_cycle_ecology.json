@@ -2,7 +2,7 @@
  "schema": "terluna.research.lunar-cycle-ecology/1",
  "producer": {
   "files": {
-   "research/studies/lunar_cycle_ecology/run.py": "7294dbbb04ac8c08"
+   "research/studies/lunar_cycle_ecology/run.py": "46673e4a76e72f15"
   },
   "inputs": {
    "biosphere/canopy/results/plant.json": "c354d2dd2479554e",
@@ -12,8 +12,8 @@
    "geography/results/drainage.json": "1ea4c936c50f31c8"
   }
  },
- "evidence": "Small calculations for an ideas register. The plant and fruit numbers are the biosphere models' clear-sky carbon scenarios at the chosen climate; distances come from the hydrostatic atlas at 28% water; runoff from the first drainage estimate. Nutrient losses use Earth's world-average river chemistry as a stand-in for lunar leaching, and rock stocks use typical lunar soil and crust compositions; flight uses fixed lift-to-drag ratios and muscle efficiencies. The conveyor and lure figures are scenarios with stated assumptions. None of this models an ecosystem, a population or a nutrient cycle. The weathering supply assumes congruent dissolution of soil with the stated composition at the Dessert basalt rate.",
- "reading_rule": "Carbon in g C per m2 of ground; nutrients in g per m2 of land per year; energy per kilometre as grams of sugar. c4 gives how much warmer the Moon's CO2 puts the C3-C4 crossover. leaves compares the growth needed to replace the canopy at each leaf lifespan with what the plant keeps at each fruit share (equator, near side, day fruit). night gives land temperatures, the air column and the share of it the night's respiration plus the decay of a whole dusk fruit fall would use or add, and the speed of dusk over the ground. flight gives Moon-to-Earth ratios for the same animal and sugar per kilometre for two fliers. distances are area-weighted percentiles over land. nutrients gives the rock stocks of the top metre, the weathering supply (congruent dissolution at the Dessert basalt rate, 1 and 10 times for glassy regolith) and the years to weather through the top metre, the harvest export, Earth's river load at the Moon's runoff as a reference scale, and the dry migrant mass and flight sugar a conveyor would need to bring back a flux that size, against the sugar in a wild forest's dusk fruit fall (30% fruit share). lures gives the chemical power of a lure (photon energy over quantum yield, times 1 or 10 for making the luciferin), alone and spread over the circle it draws insects from, against the plant's night upkeep.",
+ "evidence": "Small calculations for an ideas register. The plant and fruit numbers are the biosphere models' clear-sky carbon scenarios at the chosen climate; distances come from the hydrostatic atlas at 28% water; runoff from the first drainage estimate. Weathering assumes congruent dissolution of average lunar soils at the Dessert basalt rate (1 and 10 times for glassy regolith), and the sea timescales assume each cation stays dissolved; real weathering is incongruent and sea chemistry would precipitate carbonate, silica and clays. The return paths are scaled from Earth rates (Lake Myvatn's insect emergence, the ocean's dimethyl sulfide, river chemistry) and flight uses fixed lift-to-drag ratios and muscle efficiencies. The conveyor and lure figures are scenarios. None of this models an ecosystem, a population, a nutrient cycle or sea chemistry.",
+ "reading_rule": "Carbon in g C per m2 of ground; elements in g per m2 of land per year unless stated. c4 gives how much warmer the Moon's CO2 puts the C3-C4 crossover. leaves compares the growth needed to replace the canopy at each leaf lifespan with what the plant keeps at each fruit share (equator, near side, day fruit). night gives land temperatures, the air column, the share of it the night's respiration plus the decay of a whole dusk fruit fall would use or add, the speed of dusk and the dusk fruit fall as food. flight gives Moon-to-Earth ratios for the same animal, sugar per kilometre and airspeeds for two fliers. distances are area-weighted percentiles over land. return_limb.soils gives, per soil, the rock weathered and each element carried off (pairs: 1 and 10 times the basalt rate), the same per year into the seas (kg), and the years for the seas to reach Earth sea water's concentration of each cation if it all stayed dissolved. biology_at_myvatn_rate gives what insects emerging at Myvatn's highest rate and landing on land would bring back of each element and its share of the export; air the sulfur that dimethyl sulfide from seas as active as Earth's ocean would bring; engineered the soluble cations salt works would take out to hold the seas steady, against the world's salt output; conveyor the migrant cycle sized for dissolved phosphorus. lures gives the chemical power of a lure (photon energy over quantum yield, times 1 or 10 for making the luciferin), alone and over the circle it draws insects from, against the plant's night upkeep.",
  "settings": {
   "cycles_per_year": 12.37,
   "design_pressure_pa": 121600.0,
@@ -36,13 +36,7 @@
     0.18
    ]
   },
-  "fruit_per_100g": {
-   "potassium": 0.112,
-   "phosphorus": 0.011,
-   "magnesium": 0.01,
-   "calcium": 0.007,
-   "sugars": 6.2
-  },
+  "fruit_sugar_per_100g": 6.2,
   "river_mg_l": {
    "potassium": [
     1.06,
@@ -63,22 +57,31 @@
   },
   "rock_wt_pct": {
    "mare_soil": {
+    "SiO2": 43.05,
+    "MgO": 9.35,
+    "CaO": 11.4,
+    "Na2O": 0.365,
     "K2O": 0.16,
     "P2O5": 0.13,
-    "CaO": 11.4,
-    "MgO": 9.35
+    "S": 0.12
    },
    "highland_soil": {
+    "SiO2": 45.0,
+    "MgO": 5.7,
+    "CaO": 15.7,
+    "Na2O": 0.46,
     "K2O": 0.17,
     "P2O5": 0.11,
-    "CaO": 15.7,
-    "MgO": 5.7
+    "S": 0.07
    },
    "kreep_rich": {
+    "SiO2": 48.1,
+    "MgO": 9.4,
+    "CaO": 10.7,
+    "Na2O": 0.7,
     "K2O": 0.55,
     "P2O5": 0.51,
-    "CaO": 10.7,
-    "MgO": 9.4
+    "S": null
    },
    "earth_upper_crust": {
     "K2O": 2.8,
@@ -95,8 +98,11 @@
    "insect": 0.7,
    "fish": 2.5
   },
-  "body_k_pct": {
-   "insect": 1.2
+  "insect_pct": {
+   "P": 0.7,
+   "K": 1.2,
+   "Mg": 0.25,
+   "Ca": 0.3
   },
   "earth_p": {
    "seabird_colonies_gg_yr": 99.0,
@@ -123,11 +129,18 @@
     20.0
    ]
   },
-  "orbital_k_ppm": {
-   "moon_mean": 755.0,
-   "procellarum_kreep_terrane": 2004.0,
-   "feldspathic_highlands_below": 500.0
+  "earth_seawater_g_kg": {
+   "Na": 10.78,
+   "Mg": 1.284,
+   "Ca": 0.412,
+   "K": 0.399
   },
+  "ocean_dms_tg_s_yr": [
+   17.6,
+   28.1,
+   34.4
+  ],
+  "world_salt_kg_yr": 280000000000.0,
   "airspeed_earth_m_s": {
    "moth_0.33g": [
     3.0,
@@ -371,140 +384,298 @@
    }
   }
  },
- "nutrients": {
+ "return_limb": {
   "runoff_m_per_yr_over_land": 0.3226,
   "land_area_m2": 27310000000000.0,
   "sea_area_m2": 10620000000000.0,
+  "sea_water_kg": 1.071e+19,
   "land_mean_c": 21.79,
   "weathering_co2_mol_m2_yr": 0.4228,
   "rock_stock_top_metre": {
    "mare_soil": {
-    "potassium_g_m2": 1992.0,
-    "phosphorus_g_m2": 851.1,
-    "potassium_ppm": 1328.0
+    "Ca_kg_m2": 122.2,
+    "Mg_kg_m2": 84.58,
+    "Na_kg_m2": 4.062,
+    "K_kg_m2": 1.992,
+    "P_kg_m2": 0.8511
    },
    "highland_soil": {
-    "potassium_g_m2": 2117.0,
-    "phosphorus_g_m2": 720.1,
-    "potassium_ppm": 1411.0
+    "Ca_kg_m2": 168.3,
+    "Mg_kg_m2": 51.56,
+    "Na_kg_m2": 5.119,
+    "K_kg_m2": 2.117,
+    "P_kg_m2": 0.7201
    },
    "kreep_rich": {
-    "potassium_g_m2": 6849.0,
-    "phosphorus_g_m2": 3339.0,
-    "potassium_ppm": 4566.0
+    "Ca_kg_m2": 114.7,
+    "Mg_kg_m2": 85.03,
+    "Na_kg_m2": 7.79,
+    "K_kg_m2": 6.849,
+    "P_kg_m2": 3.339
    },
    "earth_upper_crust": {
-    "potassium_g_m2": 34870.0,
-    "phosphorus_g_m2": 982.0,
-    "potassium_ppm": 23240.0
+    "Ca_kg_m2": 38.49,
+    "Mg_kg_m2": 22.43,
+    "K_kg_m2": 34.87,
+    "P_kg_m2": 0.982
    }
   },
-  "weathering_supply": {
+  "soils": {
    "mare_soil": {
     "rock_weathered_g_m2_yr": [
      48.56,
      485.6
     ],
-    "potassium_g_m2_yr": [
-     0.0645,
-     0.645
-    ],
-    "phosphorus_g_m2_yr": [
-     0.02755,
-     0.2755
-    ],
     "years_to_weather_top_metre": [
      30890.0,
      3089.0
-    ]
+    ],
+    "export_g_m2_yr": {
+     "Ca": [
+      3.957,
+      39.57
+     ],
+     "Mg": [
+      2.738,
+      27.38
+     ],
+     "Na": [
+      0.1315,
+      1.315
+     ],
+     "K": [
+      0.0645,
+      0.645
+     ],
+     "P": [
+      0.02755,
+      0.2755
+     ],
+     "S": [
+      0.05827,
+      0.5827
+     ],
+     "Si": [
+      9.772,
+      97.72
+     ]
+    },
+    "sea_kg_yr": {
+     "Ca": [
+      108100000000.0,
+      1081000000000.0
+     ],
+     "Mg": [
+      74780000000.0,
+      747800000000.0
+     ],
+     "Na": [
+      3591000000.0,
+      35910000000.0
+     ],
+     "K": [
+      1762000000.0,
+      17620000000.0
+     ],
+     "P": [
+      752500000.0,
+      7525000000.0
+     ],
+     "S": [
+      1592000000.0,
+      15920000000.0
+     ],
+     "Si": [
+      266900000000.0,
+      2669000000000.0
+     ]
+    },
+    "years_to_earth_seawater_if_dissolved": {
+     "Na": [
+      32140000.0,
+      3214000.0
+     ],
+     "Mg": [
+      183800.0,
+      18380.0
+     ],
+     "Ca": [
+      40820.0,
+      4082.0
+     ],
+     "K": [
+      2425000.0,
+      242500.0
+     ]
+    }
    },
    "highland_soil": {
     "rock_weathered_g_m2_yr": [
      50.16,
      501.6
     ],
-    "potassium_g_m2_yr": [
-     0.07079,
-     0.7079
-    ],
-    "phosphorus_g_m2_yr": [
-     0.02408,
-     0.2408
-    ],
     "years_to_weather_top_metre": [
      29900.0,
      2990.0
-    ]
+    ],
+    "export_g_m2_yr": {
+     "Ca": [
+      5.628,
+      56.28
+     ],
+     "Mg": [
+      1.724,
+      17.24
+     ],
+     "Na": [
+      0.1712,
+      1.712
+     ],
+     "K": [
+      0.07079,
+      0.7079
+     ],
+     "P": [
+      0.02408,
+      0.2408
+     ],
+     "S": [
+      0.03511,
+      0.3511
+     ],
+     "Si": [
+      10.55,
+      105.5
+     ]
+    },
+    "sea_kg_yr": {
+     "Ca": [
+      153700000000.0,
+      1537000000000.0
+     ],
+     "Mg": [
+      47090000000.0,
+      470900000000.0
+     ],
+     "Na": [
+      4675000000.0,
+      46750000000.0
+     ],
+     "K": [
+      1933000000.0,
+      19330000000.0
+     ],
+     "P": [
+      657700000.0,
+      6577000000.0
+     ],
+     "S": [
+      959000000.0,
+      9590000000.0
+     ],
+     "Si": [
+      288200000000.0,
+      2882000000000.0
+     ]
+    },
+    "years_to_earth_seawater_if_dissolved": {
+     "Na": [
+      24690000.0,
+      2469000.0
+     ],
+     "Mg": [
+      292000.0,
+      29200.0
+     ],
+     "Ca": [
+      28700.0,
+      2870.0
+     ],
+     "K": [
+      2210000.0,
+      221000.0
+     ]
+    }
    },
    "kreep_rich": {
     "rock_weathered_g_m2_yr": [
      49.85,
      498.5
     ],
-    "potassium_g_m2_yr": [
-     0.2276,
-     2.276
-    ],
-    "phosphorus_g_m2_yr": [
-     0.111,
-     1.11
-    ],
     "years_to_weather_top_metre": [
      30090.0,
      3009.0
-    ]
-   }
-  },
-  "orbital_potassium": {
-   "moon_mean": {
-    "ppm": 755.0,
-    "share_of_earth_crust": 0.03248
-   },
-   "procellarum_kreep_terrane": {
-    "ppm": 2004.0,
-    "share_of_earth_crust": 0.08622
-   },
-   "feldspathic_highlands_below": {
-    "ppm": 500.0,
-    "share_of_earth_crust": 0.02151
-   }
-  },
-  "kreep_maria_flooded": {
-   "Oceanus Procellarum": 0.599,
-   "Mare Imbrium": 0.992
-  },
-  "harvest_export": {
-   "earth_like_0.5": {
-    "fruit_kg_m2_yr": 38.27,
-    "nitrogen_g_m2_yr": 37.35,
-    "potassium_g_m2_yr": 42.86,
-    "phosphorus_g_m2_yr": 4.21,
-    "magnesium_g_m2_yr": 3.827,
-    "calcium_g_m2_yr": 2.679
-   },
-   "earth_like_0.6": {
-    "fruit_kg_m2_yr": 45.7,
-    "nitrogen_g_m2_yr": 44.6,
-    "potassium_g_m2_yr": 51.18,
-    "phosphorus_g_m2_yr": 5.027,
-    "magnesium_g_m2_yr": 4.57,
-    "calcium_g_m2_yr": 3.199
-   },
-   "idle_quarter_0.5": {
-    "fruit_kg_m2_yr": 43.32,
-    "nitrogen_g_m2_yr": 42.28,
-    "potassium_g_m2_yr": 48.51,
-    "phosphorus_g_m2_yr": 4.765,
-    "magnesium_g_m2_yr": 4.332,
-    "calcium_g_m2_yr": 3.032
-   },
-   "idle_quarter_0.6": {
-    "fruit_kg_m2_yr": 51.72,
-    "nitrogen_g_m2_yr": 50.48,
-    "potassium_g_m2_yr": 57.93,
-    "phosphorus_g_m2_yr": 5.69,
-    "magnesium_g_m2_yr": 5.172,
-    "calcium_g_m2_yr": 3.621
+    ],
+    "export_g_m2_yr": {
+     "Ca": [
+      3.812,
+      38.12
+     ],
+     "Mg": [
+      2.826,
+      28.26
+     ],
+     "Na": [
+      0.2589,
+      2.589
+     ],
+     "K": [
+      0.2276,
+      2.276
+     ],
+     "P": [
+      0.111,
+      1.11
+     ],
+     "Si": [
+      11.21,
+      112.1
+     ]
+    },
+    "sea_kg_yr": {
+     "Ca": [
+      104100000000.0,
+      1041000000000.0
+     ],
+     "Mg": [
+      77170000000.0,
+      771700000000.0
+     ],
+     "Na": [
+      7070000000.0,
+      70700000000.0
+     ],
+     "K": [
+      6216000000.0,
+      62160000000.0
+     ],
+     "P": [
+      3030000000.0,
+      30300000000.0
+     ],
+     "Si": [
+      306100000000.0,
+      3061000000000.0
+     ]
+    },
+    "years_to_earth_seawater_if_dissolved": {
+     "Na": [
+      16330000.0,
+      1633000.0
+     ],
+     "Mg": [
+      178100.0,
+      17810.0
+     ],
+     "Ca": [
+      42370.0,
+      4237.0
+     ],
+     "K": [
+      687300.0,
+      68730.0
+     ]
+    }
    }
   },
   "earth_river_load_at_moon_runoff_g_m2_yr": {
@@ -525,6 +696,91 @@
     0.171
    ]
   },
+  "biology_at_myvatn_rate": {
+   "deposit_g_dry_m2_land_yr": 1.439,
+   "insect_pct": {
+    "P": 0.7,
+    "K": 1.2,
+    "Mg": 0.25,
+    "Ca": 0.3
+   },
+   "elements": {
+    "P": {
+     "returned_g_m2_yr": 0.01007,
+     "export_g_m2_yr": [
+      0.003226,
+      0.008064
+     ],
+     "share_of_export": [
+      1.249,
+      3.122
+     ]
+    },
+    "K": {
+     "returned_g_m2_yr": 0.01727,
+     "export_g_m2_yr": [
+      0.0645,
+      0.645
+     ],
+     "share_of_export": [
+      0.02677,
+      0.2677
+     ]
+    },
+    "Mg": {
+     "returned_g_m2_yr": 0.003597,
+     "export_g_m2_yr": [
+      2.738,
+      27.38
+     ],
+     "share_of_export": [
+      0.0001314,
+      0.001314
+     ]
+    },
+    "Ca": {
+     "returned_g_m2_yr": 0.004317,
+     "export_g_m2_yr": [
+      3.957,
+      39.57
+     ],
+     "share_of_export": [
+      0.0001091,
+      0.001091
+     ]
+    }
+   }
+  },
+  "air": {
+   "dms_sulfur_g_m2_yr": [
+    0.01896,
+    0.03027,
+    0.03706
+   ],
+   "land_sulfur_export_g_m2_yr": [
+    0.05827,
+    0.5827
+   ],
+   "share_of_export": [
+    0.03254,
+    0.6359
+   ]
+  },
+  "engineered": {
+   "soluble_cations_kg_yr": [
+    80130000000.0,
+    801300000000.0
+   ],
+   "world_salt_kg_yr": 280000000000.0,
+   "ratio_to_world_salt": [
+    0.2862,
+    2.862
+   ],
+   "kreep_maria_flooded": {
+    "Oceanus Procellarum": 0.599,
+    "Mare Imbrium": 0.992
+   }
+  },
   "earth_phosphorus_returns_g_m2_yr": {
    "seabird_colonies": 0.0006649,
    "uk_high_flying_insects": 0.0001429,
@@ -544,12 +800,29 @@
    ]
   },
   "conveyor": {
-   "round_trip_km": 951.7,
-   "deaths_per_visit": [
-    0.1,
-    0.5
+   "target_dissolved_p_g_m2_yr": [
+    0.003226,
+    0.008064
    ],
-   "fruit_sugar_g_m2_yr_at_30pct": 1438.0,
+   "dry_mass_left_on_land_g_m2_yr": {
+    "insect": [
+     0.4608,
+     1.152
+    ],
+    "fish": [
+     0.129,
+     0.3226
+    ]
+   },
+   "sea_emergence_needed_g_dry_m2_yr": [
+    1.185,
+    2.962
+   ],
+   "myvatn_emergence_g_m2_yr": [
+    0.15,
+    3.7
+   ],
+   "round_trip_km": 951.7,
    "one_way_hours": {
     "moth_0.33g": [
      117.1,
@@ -560,98 +833,23 @@
      23.43
     ]
    },
-   "dissolved_phosphorus": {
-    "target_g_m2_yr": [
-     0.003226,
-     0.008064
-    ],
-    "dry_mass_left_on_land_g_m2_yr": {
-     "insect": [
-      0.4608,
-      1.152
-     ],
-     "fish": [
-      0.129,
-      0.3226
-     ]
-    },
-    "sea_emergence_needed_g_dry_m2_yr": [
-     1.185,
-     2.962
-    ],
-    "moth_deaths_per_m2_yr": [
-     4.655,
-     11.64
-    ],
-    "moth_flight_sugar_g_m2_yr": [
-     0.763,
-     9.538
-    ],
-    "share_of_fruit_sugar": [
-     0.0005307,
-     0.006633
-    ]
-   },
-   "particulate_phosphorus": {
-    "target_g_m2_yr": [
-     0.05806,
-     0.171
-    ],
-    "dry_mass_left_on_land_g_m2_yr": {
-     "insect": [
-      8.295,
-      24.42
-     ],
-     "fish": [
-      2.323,
-      6.839
-     ]
-    },
-    "sea_emergence_needed_g_dry_m2_yr": [
-     21.33,
-     62.8
-    ],
-    "moth_deaths_per_m2_yr": [
-     83.78,
-     246.7
-    ],
-    "moth_flight_sugar_g_m2_yr": [
-     13.73,
-     202.2
-    ],
-    "share_of_fruit_sugar": [
-     0.009552,
-     0.1406
-    ]
-   },
-   "potassium": {
-    "target_g_m2_yr": [
-     0.3419,
-     0.4161
-    ],
-    "dry_mass_left_on_land_g_m2_yr": {
-     "insect": [
-      28.49,
-      34.68
-     ]
-    },
-    "sea_emergence_needed_g_dry_m2_yr": [
-     73.27,
-     89.17
-    ],
-    "moth_deaths_per_m2_yr": [
-     287.8,
-     350.3
-    ],
-    "moth_flight_sugar_g_m2_yr": [
-     47.18,
-     287.1
-    ],
-    "share_of_fruit_sugar": [
-     0.03281,
-     0.1997
-    ]
-   }
+   "moth_deaths_per_m2_yr": [
+    4.655,
+    11.64
+   ],
+   "deaths_per_visit": [
+    0.1,
+    0.5
+   ],
+   "moth_flight_sugar_g_m2_yr": [
+    0.763,
+    9.538
+   ],
+   "fruit_sugar_g_m2_yr_at_30pct": 1438.0,
+   "share_of_fruit_sugar": [
+    0.0005307,
+    0.006633
+   ]
   }
  },
  "lures": {
