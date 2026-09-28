@@ -716,9 +716,10 @@ WETNESS_CLASSES = ((20, 0.05), (21, 0.10), (22, 0.15), (23, 0.20), (25, 0.30), (
 # land wetness, ground temperature and GCM vertical wind of ring A's columns within 100 km of the crossing, all
 # land. The Sun is the site's, the same across the box; on the equator there is no Coriolis force. The box cannot
 # make the planet-wide day-night circulation that the rings carry along their length.
-# The box also takes the heating and moistening the rings' own day-night circulation brings there: the advection
-# along each ring by its longest waves (wavelengths of 2,180 km and more), the mean of rings A and A-prime over their
-# second lunar day by local time, refitted with the day's first four harmonics, up to 16 km.
+# The box also takes the heating and moistening the rings' own day-night circulation brings there: the advection by
+# the flow of each ring's longest waves (wavelengths of 2,180 km and more), along the ring and up or down, the mean of
+# rings A and A-prime over their second lunar day by local time, refitted with the day's first four harmonics, up to
+# 16 km.
 CASES['box_0e'] = dict(
     CASES['ring'], kind='box', nx=64, ny=64, site=dict(ring='ring_a', lat_deg=0.0, lon_deg=0.0, radius_m=100.0e3),
     land_moisture='gcm', large_scale_w='gcm',

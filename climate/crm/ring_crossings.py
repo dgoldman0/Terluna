@@ -8,11 +8,11 @@ writes the comparison to ../results/crm/crossings_<ring>_<ring>.json.
 Two great circles cross at two opposite points. At each, the analysis takes each ring's columns within 100 km of
 the crossing along the ring, land and water separately, in every 3-hour snapshot of the analysed span: the air at
 2 m with its dewpoint and humidity, the dewpoint at the height of the GCM's lowest layer, rain, cloud, fog, cloud in
-the flight band, the wind at 10 m and at 40 km, and whether the air is comfortable to be out in. Independent runs do not line up storm by storm, so the rings meet
-through composites by local time and through their means over the day, the night and the whole span. Every ring
-takes its local time from longitude, so each snapshot pairs the two patches at the same local time; the paired
-differences are resampled a day at a time (a moving-block bootstrap) for the range the weather of the span allows.
-The GCM design case's cells near the crossing give a third view.
+the flight band, the wind at 10 m and at 40 km, and whether the air is comfortable to be out in. Independent runs
+do not line up storm by storm, so the rings meet through composites by local time and through their means over the
+day, the night and the whole span. Every ring takes its local time from longitude, so each snapshot pairs the two
+patches at the same local time; the paired differences are resampled a day at a time (a moving-block bootstrap) for
+the range the weather of the span allows. The GCM design case's cells near the crossing give a third view.
 """
 from __future__ import annotations
 import argparse
@@ -122,13 +122,28 @@ def harmonic_fit(values, centres_deg, harmonics: int) -> np.ndarray:
     return basis @ coef
 
 
+def planet_scale_advection(d: dict, cols, wavenumbers: int, dx: float, zh) -> tuple:
+    """The heating (K/s) and moistening (kg/kg/s) at each level of a ring snapshot, averaged over the columns cols,
+    by the flow of the ring's longest waves (wavenumbers up to `wavenumbers` round the ring, which leaves out storms
+    and storm systems), carrying the equally smoothed air along the ring and up or down."""
+    nx = d['th'].shape[1]
+    k = np.fft.rfftfreq(nx, d=1.0 / nx)
+    keep = (k <= wavenumbers)[None, :]
+    slope = keep * (2j * np.pi * k / (nx * dx))[None, :]
+    low = lambda f: np.fft.irfft(np.fft.rfft(f, axis=-1) * keep, n=nx, axis=-1)[:, cols]
+    ddx = lambda f: np.fft.irfft(np.fft.rfft(f, axis=-1) * slope, n=nx, axis=-1)[:, cols]
+    u, w = low(d['uinterp']), low(d['winterp'])
+    tendency = lambda f: -(u * ddx(f) + w * np.gradient(low(f), zh, axis=0)).mean(axis=1)
+    return tendency(d['th']), tendency(d['qv'])
+
+
 def day_night_advection(names, lat_deg: float, lon_deg: float, from_day: float, wavenumbers: int, bins: int,
                         harmonics: int, top_m: float, radius_m: float = RADIUS_M) -> dict:
     """The heating and moistening the planet-wide day-night circulation brings to a place on rings along great
-    circles: on each ring, the advection along it by the flow of its longest waves (wavenumbers up to
-    `wavenumbers` round the ring, which leaves out storms and storm systems), averaged over its columns within
-    radius_m of the place, by local time in `bins` bins through the span from from_day; the rings averaged, each
-    level refitted with the day's mean and first harmonics, and nothing above top_m."""
+    circles: on each ring, the advection by the flow of its longest waves along the ring and up or down
+    (planet_scale_advection), averaged over its columns within radius_m of the place, by local time in `bins` bins
+    through the span from from_day; the rings averaged, each level refitted with the day's mean and first
+    harmonics, and nothing above top_m."""
     from climate.crm.cm1_run import solar_day_s
     day_s = solar_day_s()
     edges = np.linspace(-180.0, 180.0, bins + 1)
@@ -140,19 +155,13 @@ def day_night_advection(names, lat_deg: float, lon_deg: float, from_day: float, 
         tap, start = record['configuration']['output_s'], record['configuration']['start_hour_angle_deg']
         nx, dx, zh = record['grid']['nx'], geo['dx'], geo['zh']
         cols = patch_columns(nx, along_ring(ring_path(record), lat_deg, lon_deg), radius_m, dx)
-        k = np.fft.rfftfreq(nx, d=1.0 / nx)
-        keep = (k <= wavenumbers)[None, :]
-        slope = keep * (2j * np.pi * k / (nx * dx))[None, :]
-        low = lambda f: np.fft.irfft(np.fft.rfft(f, axis=-1) * keep, n=nx, axis=-1)[:, cols]
-        ddx = lambda f: np.fft.irfft(np.fft.rfft(f, axis=-1) * slope, n=nx, axis=-1)[:, cols]
         th, qv, count = np.zeros((bins, zh.size)), np.zeros((bins, zh.size)), np.zeros(bins)
         outputs = sorted(int(p.name[8:14]) for p in case.glob('cm1out_t*_s.dat'))
         for n in [n for n in outputs if (n - 1) * tap >= from_day * 86400.0]:
-            d = ra.read_snapshot(case, n)
-            u = low(d['uinterp'])
             b = min(int(np.digitize(local_hour_angle(start, lon_deg, (n - 1) * tap, day_s), edges)) - 1, bins - 1)
-            th[b] -= (u * ddx(d['th'])).mean(axis=1)
-            qv[b] -= (u * ddx(d['qv'])).mean(axis=1)
+            dth, dqv = planet_scale_advection(ra.read_snapshot(case, n), cols, wavenumbers, dx, zh)
+            th[b] += dth
+            qv[b] += dqv
             count[b] += 1
         if (count == 0).any():
             raise RuntimeError(f'{name}: no snapshot in some local-time bins after day {from_day}')
@@ -220,41 +229,44 @@ def block_bootstrap(values, block=BLOCK_SNAPSHOTS, resamples=RESAMPLES, seed=0) 
     return dict(mean=float(v.mean()), p5=float(np.percentile(means, 5)), p95=float(np.percentile(means, 95)))
 
 
-def patch_series(case: Path, patches: list, from_day: float, to_day: float | None, sigma: float) -> dict:
+def snapshot_fields(d: dict, zh, sigma: float) -> dict:
+    """Every variable of VARIABLES, column by column, in one snapshot; sigma is the GCM's lowest level."""
+    near_ground = zh < ra.FOG_TOP_M
+    flight = (zh >= ra.FLIGHT_BAND_M[0]) & (zh <= ra.FLIGHT_BAND_M[1])
+    k40 = ra.level_index(zh, FLIGHT_WIND_M)
+    e2 = ra.vapour_pa(d['q2'], d['psfc'])
+    air, dew = d['t2'] - 273.15, dewpoint_c(e2)
+    cloudy = (d['qc'] + d['qi']) >= ra.CLOUD_KG_KG
+    u40 = d['uinterp'][k40]
+    layer_dew = dewpoint_c(ra.vapour_pa(at_sigma(d['qv'], d['prs'], d['psfc'], sigma), sigma * d['psfc']))
+    return dict(air_c=air, dewpoint_c=dew, dewpoint_gcm_layer_c=layer_dew, humidity=e2 / ra.saturation_pa(d['t2']),
+                rain_mm_h=d['prate'] * 3600.0, cloud_cover=cloudy.any(axis=0), fog=cloudy[near_ground].any(axis=0),
+                cloud_in_flight_band=cloudy[flight].any(axis=0), wind_10m_m_s=d['s10'],
+                wind_40_km_m_s=np.hypot(u40, d['vinterp'][k40]) if 'vinterp' in d else np.abs(u40),
+                comfortable_strict=comfortable(air, dew, 'strict'), comfortable_loose=comfortable(air, dew, 'loose'))
+
+
+def patch_series(case: Path, patches: list, from_day: float, to_day: float | None, sigma: float,
+                 fields=snapshot_fields, keys=VARIABLES) -> dict:
     """Model times from from_day (to to_day) and, per snapshot, the mean of every variable over each patch's
     columns. patches holds, for each crossing, the land and the water columns near it; sigma is the GCM's lowest
-    level."""
+    level; fields gives a snapshot's variables column by column."""
     geo = ra.case_geometry(case)
     tap = geo['record']['configuration']['output_s']
     outputs = sorted(int(p.name[8:14]) for p in case.glob('cm1out_t*_s.dat'))
     use = [n for n in outputs if from_day * 86400.0 <= (n - 1) * tap <= (np.inf if to_day is None else to_day * 86400.0)]
-    zh = geo['zh']
-    near_ground = zh < ra.FOG_TOP_M
-    flight = (zh >= ra.FLIGHT_BAND_M[0]) & (zh <= ra.FLIGHT_BAND_M[1])
-    k40 = ra.level_index(zh, FLIGHT_WIND_M)
-    out = dict(time_s=[], patches=[{surface: {key: [] for key in VARIABLES} for surface in cols} for cols in patches])
+    out = dict(time_s=[], patches=[{surface: {key: [] for key in keys} for surface in cols} for cols in patches])
     for n in use:
-        d = ra.read_snapshot(case, n)
-        e2 = ra.vapour_pa(d['q2'], d['psfc'])
-        air, dew = d['t2'] - 273.15, dewpoint_c(e2)
-        cloudy = (d['qc'] + d['qi']) >= ra.CLOUD_KG_KG
-        u40 = d['uinterp'][k40]
-        layer_p = sigma * d['psfc']
-        layer_dew = dewpoint_c(ra.vapour_pa(at_sigma(d['qv'], d['prs'], d['psfc'], sigma), layer_p))
-        fields = dict(air_c=air, dewpoint_c=dew, dewpoint_gcm_layer_c=layer_dew, humidity=e2 / ra.saturation_pa(d['t2']), rain_mm_h=d['prate'] * 3600.0,
-                      cloud_cover=cloudy.any(axis=0), fog=cloudy[near_ground].any(axis=0),
-                      cloud_in_flight_band=cloudy[flight].any(axis=0), wind_10m_m_s=d['s10'],
-                      wind_40_km_m_s=np.hypot(u40, d['vinterp'][k40]) if 'vinterp' in d else np.abs(u40),
-                      comfortable_strict=comfortable(air, dew, 'strict'), comfortable_loose=comfortable(air, dew, 'loose'))
+        values = fields(ra.read_snapshot(case, n), geo['zh'], sigma)
         out['time_s'].append((n - 1) * tap)
         for cols, store in zip(patches, out['patches']):
             for surface, idx in cols.items():
-                for key in VARIABLES:
-                    store[surface][key].append(float(np.mean(fields[key][idx])))
+                for key in keys:
+                    store[surface][key].append(float(np.mean(values[key][idx])))
     return out
 
 
-def compare(hour_angle, series: dict, lunar_day_h: float) -> dict:
+def compare(hour_angle, series: dict, lunar_day_h: float, keys=VARIABLES) -> dict:
     """One surface at one crossing, from one or two rings' patch means at the same local times: each ring's
     composites by local time, its means over the day, the night and the span, its comfortable hours and rain per
     lunar day, and with two rings the differences (first minus second) with their bootstrap ranges."""
@@ -266,7 +278,7 @@ def compare(hour_angle, series: dict, lunar_day_h: float) -> dict:
     mean = lambda v: float(v.mean()) if v.size else None
     spans = lambda v: dict(all=mean(v), day=mean(v[day]), night=mean(v[~day]))
     out = dict(hour_angle_deg=[float(c) for c in (np.arange(BINS) + 0.5) * 360.0 / BINS - 180.0])
-    for key in VARIABLES:
+    for key in keys:
         values = {name: np.asarray(series[name][key], dtype=float) for name in names}
         row = dict(by_local_time={name: binned(v) for name, v in values.items()},
                    mean={name: spans(v) for name, v in values.items()})

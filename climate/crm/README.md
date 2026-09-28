@@ -389,14 +389,21 @@ ground, the cloud and the rain. It is ring A's patch where it crosses A′
 
 A box cannot make the planet-wide day–night circulation that the rings carry
 along their length. Keeping only its longest waves (2,180 km and more), that
-circulation cools the lowest 3 km at the crossing by up to 0.8 K/day around noon
-and 0.18 K/day on average, and moistens the mornings by up to 0.45 g/kg/day:
-as much as the GCM's vertical wind does there. The box takes it as a heating
-and moistening prescribed by local time and height (`var11 = 1`, read from
+circulation carries air along the rings and lifts and sinks it. At the crossing
+it rises through the afternoon (5 mm/s in the lowest 3 km, up to 23 mm/s at
+3–8 km) and sinks through the night and morning (3–4 mm/s low down, 6–13 mm/s
+above). In the lowest 3 km it warms and dries the night and early morning by up
+to 0.5 K/day and 0.35 g/kg/day, moistens the late morning by up to 0.5 g/kg/day,
+and cools the hours around noon and the afternoon by up to 0.8 K/day: as much as
+the GCM's vertical wind does there. The box takes it as a heating and
+moistening prescribed by local time and height (`var11 = 1`, read from
 `terluna_lsadv.txt`): the mean of A and A′ over their second lunar day,
-refitted with the day's first four harmonics, up to 16 km. The box then differs
-from ring A at the crossing in its second dimension, its uniform land and Sun,
-and its size; the rings' circulation itself stays untested.
+refitted with the day's first four harmonics, up to 16 km. A first run with
+only the part along the rings, stopped at day 47, rained in the mornings and
+stayed clear and hot through the afternoons. The box then differs from ring A at
+the crossing in its second dimension, its uniform land and Sun, its size and
+its surface wind, which lacks the circulation's own winds (1.1 against
+2.1 m/s by day in the first run); the rings' circulation itself stays untested.
 
 The patch was checked in two ways. The rebuilt CM1 reproduces the first day of
 `ring_80n_lsw` bit for bit. In two three-hour runs of the box, a heating and a

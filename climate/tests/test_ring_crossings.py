@@ -127,3 +127,19 @@ def test_harmonic_fit_keeps_the_day_and_drops_short_wiggles():
     both = np.column_stack([day + wiggle, 2 * day])                           # two levels
     fit = rc.harmonic_fit(both, centres, harmonics=4)
     assert np.allclose(fit[:, 0], day, atol=1e-9) and np.allclose(fit[:, 1], 2 * day, atol=1e-9)
+
+
+def test_planet_scale_advection_carries_the_long_waves_along_and_up():
+    nx, dx, zh = 64, 1000.0, np.array([50.0, 150.0, 250.0])
+    x = (np.arange(nx) + 0.5) * dx
+    phase = 2 * np.pi * x / (nx * dx)
+    wiggle = np.sin(10 * phase)                                           # a storm-sized wave, left out
+    d = dict(uinterp=np.full((3, nx), 2.0), winterp=np.broadcast_to(0.1 * np.sin(phase) + 0.05 * wiggle, (3, nx)).copy(),
+             th=300.0 + 0.01 * zh[:, None] + np.sin(phase) + 0.5 * wiggle,
+             qv=0.01 - 1e-6 * zh[:, None] + 1e-3 * np.cos(phase) + 1e-4 * wiggle)
+    i = 7
+    dth, dqv = rc.planet_scale_advection(d, [i], 5, dx, zh)
+    kx = 2 * np.pi / (nx * dx)
+    expect_th = -(2.0 * kx * np.cos(phase[i]) + 0.1 * np.sin(phase[i]) * 0.01)
+    expect_qv = -(2.0 * -1e-3 * kx * np.sin(phase[i]) + 0.1 * np.sin(phase[i]) * -1e-6)
+    assert dth == pytest.approx(np.full(3, expect_th), rel=1e-9) and dqv == pytest.approx(np.full(3, expect_qv), rel=1e-9)
