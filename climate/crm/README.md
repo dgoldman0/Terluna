@@ -297,6 +297,33 @@ They stay two-dimensional, so storms still organise into lines. Each is a full
 great circle the size of the equatorial ring; a pair run together on 4 threads
 each takes about 11–13 hours.
 
+**How the tilted rings are built** (cases `ring_a`, `ring_a_prime`, `ring_b`,
+`ring_b_prime`; `var12` is the tilt). The Sun block takes each column's
+latitude and the longitude it has gained since the ring's northward equator
+crossing from spherical geometry. CM1 switches its beta plane off in
+two-dimensional runs; a patch keeps it on for a tilted ring and fills its
+Coriolis array with 2Ω sin(latitude) column by column, acting on departures
+from the base-state wind (the rows' zonal-mean wind times cos(tilt)/cos(latitude),
+averaged along the path). The GCM's mean vertical wind at each column's
+latitude comes from a table, `terluna_wls2d.txt`, read into a per-column
+version of CM1's large-scale vertical advection. Each column has its own
+surface segment: water where the 28% scenario's seas and lakes cover half a
+box 1° across, sea temperatures of its latitude, and on land the ground of the
+nearest GCM land cell and a land-use row for its wetness (rows 20–23 and 25–30
+become the placeholder land at wetnesses 0.05–0.90).
+
+The patches were checked in three ways. The rebuilt CM1 reproduces the first
+model day of `ring_80n_lsw` bit for bit. The same day, with its vertical wind
+given as a table whose columns are all alike, is also bit-for-bit identical.
+A six-hour test of ring A gives the Sun's elevation within 8 × 10⁻⁷ of the
+formula and the Coriolis parameter within 3 × 10⁻¹² s⁻¹ of 2Ω sin(latitude).
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup ring_a
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run run ring_a --hours 16 --threads 4
+climate/gcm/.venv/bin/python -m climate.crm.ring_analysis ring_a --from-day 29.5
+```
+
 ## The gravity pair
 
 If lunar convection were Earth's stretched six times in size and duration, a

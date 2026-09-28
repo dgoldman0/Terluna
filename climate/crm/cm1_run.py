@@ -78,13 +78,24 @@ SUN_BLOCK = """!!!          albd = 0.07
         IF( var19.gt.1.0 )THEN
           ! Terluna: a solar day of var19 s and var17 W/m2 of sunlight above the air. The hour angle
           ! starts at var18 degrees (0 = noon, -90 = sunrise); on a domain that wraps the Moon
-          ! (var16 = its length in m) it also grows eastward along x.
+          ! (var16 = its length in m) it also grows eastward along x: on the circle of latitude ctrlat
+          ! by 360 degrees per var16, and on a great circle tilted var12 degrees to the equator, with x
+          ! from its northward equator crossing, by the longitude each column reaches.
           solcon = var17
           do j=1,nj
           do i=1,ni
             hrang(i,j) = ( var18 + 360.0*real((mtime+0.5*dtrad)/var19) )*pi/180.0
-            if( var16.gt.1.0 ) hrang(i,j) = hrang(i,j) + 2.0*pi*xh(i)/var16
-            coszen(i,j) = min( 1.0 , max( -1.0 , cos(ctrlat*pi/180.0)*cos(hrang(i,j)) ) )
+            terluna_lat = ctrlat*pi/180.0
+            if( var16.gt.1.0 )then
+              if( var12.gt.0.0 )then
+                terluna_s = 2.0*pi*xh(i)/var16
+                terluna_lat = asin( sin(var12*pi/180.0)*sin(terluna_s) )
+                hrang(i,j) = hrang(i,j) + atan2( cos(var12*pi/180.0)*sin(terluna_s) , cos(terluna_s) )
+              else
+                hrang(i,j) = hrang(i,j) + 2.0*pi*xh(i)/var16
+              endif
+            endif
+            coszen(i,j) = min( 1.0 , max( -1.0 , cos(terluna_lat)*cos(hrang(i,j)) ) )
           enddo
           enddo
         ENDIF
@@ -120,7 +131,7 @@ SURFACE_BLOCK = """      ELSEIF( initsfc.eq.9 )THEN
       ELSEIF( initsfc.ne.1 .and. initsfc.ne.2 )THEN
 """
 
-LSW_BLOCK = """    IF( var13.gt.0.5 )THEN
+LSW_BLOCK = """    IF( var13.gt.0.5 .and. var13.lt.1.5 )THEN
       ! Terluna: the large-scale vertical wind from terluna_wls.txt: a level count, then one line per level,
       ! height (m) and vertical wind (m/s), heights increasing; interpolated to the w levels, zero outside
       open(unit=97,file='terluna_wls.txt',status='old',action='read')
@@ -143,6 +154,135 @@ LSW_BLOCK = """    IF( var13.gt.0.5 )THEN
       deallocate( terluna_z , terluna_w )
     ENDIF
 
+    IF( var13.gt.1.5 )THEN
+      ! Terluna: the large-scale vertical wind varying along x, from terluna_wls2d.txt: the column and level
+      ! counts, the level heights (m), then for each column, evenly spaced from x = 0 around the ring, its
+      ! vertical wind (m/s) at those heights; interpolated to the w levels, zero outside the table
+      open(unit=97,file='terluna_wls2d.txt',status='old',action='read')
+      read(97,*) terluna_nc,terluna_n
+      allocate( terluna_z(terluna_n) , terluna_wc(terluna_nc,terluna_n) )
+      read(97,*) (terluna_z(terluna_l),terluna_l=1,terluna_n)
+      do terluna_c=1,terluna_nc
+        read(97,*) (terluna_wc(terluna_c,terluna_l),terluna_l=1,terluna_n)
+      enddo
+      close(unit=97)
+      if( .not. allocated(terluna_w2) ) allocate( terluna_w2(ib:ie,kb:ke+1) )
+      terluna_w2 = 0.0
+      do i=ib,ie
+        terluna_x = ( real(i+myi1-1) - 0.5 )*dx
+        terluna_c = 1 + modulo( int(floor(terluna_x/var16*real(terluna_nc))) , terluna_nc )
+        do k=2,nk
+          do terluna_l=1,terluna_n-1
+            if( zf(1,1,k).ge.terluna_z(terluna_l) .and. zf(1,1,k).le.terluna_z(terluna_l+1) )then
+              terluna_w2(i,k) = terluna_wc(terluna_c,terluna_l)                                          &
+                  + (terluna_wc(terluna_c,terluna_l+1)-terluna_wc(terluna_c,terluna_l))                  &
+                  *(zf(1,1,k)-terluna_z(terluna_l))/(terluna_z(terluna_l+1)-terluna_z(terluna_l))
+            endif
+          enddo
+        enddo
+      enddo
+      wprof = 0.0
+      do k=2,nk
+        wprof(k) = sum( terluna_w2(1:ni,k) )/real(ni)
+      enddo
+      if( myid.eq.0 ) print *,'  Terluna large-scale w varies along x: columns, levels ',terluna_nc,terluna_n
+      deallocate( terluna_z , terluna_wc )
+    ENDIF
+
+"""
+
+WSUB_BLOCK = """    end subroutine wsub
+
+
+    subroutine terluna_wsub(ix  ,jy  ,kz  ,a  ,wprof,c1,c2,mh,rr0,rf0,weps,dumz,subs,ustag)
+    ! Terluna: large-scale vertical advection as in wsub, with each column's own vertical wind (terluna_w2,
+    ! on w levels, averaged to u points when ustag = 1) once one has been read; otherwise wsub itself.
+    use input, only : ib,ie,jb,je,kb,ke,ngxy,ngz,nk,rdz,terluna_w2
+    implicit none
+
+    integer, intent(in) :: ix,jy,kz,ustag
+    real, intent(in), dimension(1-ngxy:ix+ngxy,1-ngxy:jy+ngxy,1-ngz:kz+ngz)   :: a
+    real, intent(in), dimension(kb:ke) :: wprof
+    real, intent(in), dimension(ib:ie,jb:je,kb:ke) :: c1,c2,mh,rr0,rf0
+    double precision, intent(in) :: weps
+    real, intent(inout), dimension(ib:ie,jb:je,kb:ke) :: dumz,subs
+
+    integer :: i,j,k
+    real :: div,wk,wk1
+
+    if( .not. allocated(terluna_w2) )then
+      call wsub(ix,jy,kz,a,wprof,c1,c2,mh,rr0,rf0,weps,dumz,subs)
+      return
+    endif
+
+    DO j=1,jy
+      do k=2,(nk-1)
+        do i=1,ix
+          wk = terluna_w2(i,k)
+          if( ustag.eq.1 ) wk = 0.5*( terluna_w2(i-1,k) + terluna_w2(i,k) )
+          if( wk.le.0.0 )then
+            dumz(i,j,k) = rf0(1,1,k)*wk*upstrpd(a(i,j,k+1),a(i,j,k  ),a(i,j,k-1),weps)
+          elseif( k.eq.2 )then
+            dumz(i,j,k) = rf0(1,1,k)*wk*(c1(i,j,k)*a(i,j,k-1)+c2(i,j,k)*a(i,j,k))
+          else
+            dumz(i,j,k) = rf0(1,1,k)*wk*upstrpd(a(i,j,k-2),a(i,j,k-1),a(i,j,k  ),weps)
+          endif
+        enddo
+      enddo
+      do i=1,ix
+        wk = terluna_w2(i,nk)
+        if( ustag.eq.1 ) wk = 0.5*( terluna_w2(i-1,nk) + terluna_w2(i,nk) )
+        dumz(i,j,nk) = rf0(1,1,nk)*wk*(c1(i,j,nk)*a(i,j,nk-1)+c2(i,j,nk)*a(i,j,nk))
+        dumz(i,j,1) = 0.0
+        dumz(i,j,nk+1) = 0.0
+      enddo
+      do k=1,nk
+        do i=1,ix
+          wk = terluna_w2(i,k)
+          wk1 = terluna_w2(i,k+1)
+          if( ustag.eq.1 )then
+            wk = 0.5*( terluna_w2(i-1,k) + terluna_w2(i,k) )
+            wk1 = 0.5*( terluna_w2(i-1,k+1) + terluna_w2(i,k+1) )
+          endif
+          div = (rf0(1,1,k+1)*wk1-rf0(1,1,k)*wk)*rdz*mh(1,1,k)
+          subs(i,j,k) = ( -(dumz(i,j,k+1)-dumz(i,j,k))*rdz*mh(1,1,k)   &
+                          +a(i,j,k)*div )*rr0(1,1,k)
+        enddo
+      enddo
+    ENDDO
+
+    end subroutine terluna_wsub
+"""
+
+CORIOLIS_BLOCK = """      if( var12.gt.0.0 )then
+        ! Terluna: the Coriolis parameter along a great circle tilted var12 degrees to the equator, x from its
+        ! northward equator crossing and var16 m round: fcor (twice the rotation rate) times sin(latitude)
+        do j=jb,je
+        do i=ib,ie
+          f2d(i,j) = fcor*sin(var12*pi/180.0)*sin(2.0*pi*xh(i)/var16)
+        enddo
+        enddo
+        if( myid.eq.0 ) print *,'  Terluna tilted ring: f2d at columns 1 and ni/4: ',f2d(1,1),f2d(max(1,ni/4),1)
+      endif
+
+"""
+
+BETA_OLD = """              ! beta plane:
+              uten(i,j,k)=uten(i,j,k)+0.125*(f2d(i,j)+f2d(i-1,j))           &
+                                           *( (v3d(i  ,j,k)+v3d(i  ,j+1,k)) &
+                                             +(v3d(i-1,j,k)+v3d(i-1,j+1,k)) )
+              vten(i,j,k)=vten(i,j,k)-0.125*(f2d(i,j)+f2d(i,j-1))           &
+                                           *( (u3d(i,j  ,k)+u3d(i+1,j  ,k)) &
+                                             +(u3d(i,j-1,k)+u3d(i+1,j-1,k)) )
+"""
+BETA_NEW = """              ! beta plane:
+              ! Terluna: acting on departures from the base-state wind, whose balancing pressure gradient is implied
+              uten(i,j,k)=uten(i,j,k)+0.125*(f2d(i,j)+f2d(i-1,j))           &
+                         *( (v3d(i  ,j,k)-v0(i  ,j,k)+v3d(i  ,j+1,k)-v0(i  ,j+1,k)) &
+                           +(v3d(i-1,j,k)-v0(i-1,j,k)+v3d(i-1,j+1,k)-v0(i-1,j+1,k)) )
+              vten(i,j,k)=vten(i,j,k)-0.125*(f2d(i,j)+f2d(i,j-1))           &
+                         *( (u3d(i,j  ,k)-u0(i,j  ,k)+u3d(i+1,j  ,k)-u0(i+1,j  ,k)) &
+                           +(u3d(i,j-1,k)-u0(i,j-1,k)+u3d(i+1,j-1,k)-u0(i+1,j-1,k)) )
 """
 
 NUDGE_WEIGHT = ("          terluna_w = 1.0   ! Terluna: above var14 m only, fully above var15 m\n"
@@ -197,7 +337,9 @@ PATCHES = [
     ('radiation_driver.F', 'Terluna: a solar day of var19 s', [
         ('      use constants, only : pi,g,cp,cpl,cpi,cv,cvv,rd,cvdcp,degdpi\n',
          '      use constants, only : pi,g,cp,cpl,cpi,cv,cvv,rd,cvdcp,degdpi\n'
-         '      use input, only : var16,var17,var18,var19   ! Terluna: the lunar day\n', 1),
+         '      use input, only : var12,var16,var17,var18,var19   ! Terluna: the lunar day\n', 1),
+        ('      real :: saltitude,sazimuth,zen,rtime\n',
+         '      real :: saltitude,sazimuth,zen,rtime\n      real :: terluna_lat,terluna_s   ! Terluna: tilted rings\n', 1),
         ('!!!          albd = 0.07\n        ENDIF\n', SUN_BLOCK, 1)]),
     ('module_ra_rrtmg_lw.F', 'Terluna: the design air, longwave', [
         ('', GAS_DEFAULTS + '! Terluna: the design air, longwave\n', 1),
@@ -235,10 +377,35 @@ PATCHES = [
          '      IF( var13.gt.0.5 ) dolsw = .true.   ! Terluna: large-scale vertical wind from terluna_wls.txt\n', 1)]),
     ('base.F', 'Terluna: the large-scale vertical wind from terluna_wls.txt', [
         ('      real :: z1,z2,z3,z4,z5,z6,z7,z8,z9\n',
-         '      real :: z1,z2,z3,z4,z5,z6,z7,z8,z9\n      integer :: terluna_n,terluna_l\n'
-         '      real, dimension(:), allocatable :: terluna_z,terluna_w\n', 1),
+         '      real :: z1,z2,z3,z4,z5,z6,z7,z8,z9\n      integer :: terluna_n,terluna_l,terluna_nc,terluna_c\n'
+         '      real :: terluna_x\n      real, dimension(:), allocatable :: terluna_z,terluna_w\n'
+         '      real, dimension(:,:), allocatable :: terluna_wc\n', 1),
         ('    ! boundary conditions:\n    wprof(1) = 0.0\n    wprof(nk+1) = 0.0\n',
          LSW_BLOCK + '    ! boundary conditions:\n    wprof(1) = 0.0\n    wprof(nk+1) = 0.0\n', 1)]),
+    ('input.F', 'Terluna: large-scale vertical wind by column', [
+        ('  MODULE input\n\n  implicit none\n\n  public\n',
+         '  MODULE input\n\n  implicit none\n\n  public\n\n      real, dimension(:,:), allocatable :: terluna_w2'
+         '   ! Terluna: large-scale vertical wind by column and w level\n', 1)]),
+    ('adv_routines.F', 'Terluna: large-scale vertical advection as in wsub', [
+        ('  public :: movesfc,wsub,zsgrad\n', '  public :: movesfc,wsub,zsgrad,terluna_wsub\n', 1),
+        ('    end subroutine wsub\n', WSUB_BLOCK, 1)]),
+    ('adv.F', 'Terluna: w by column', [
+        ('use adv_routines, only : advsaxi,wsub,', 'use adv_routines, only : advsaxi,wsub,terluna_wsub,', 1),
+        ('use adv_routines, only : advuaxi,wsub,', 'use adv_routines, only : advuaxi,wsub,terluna_wsub,', 1),
+        ('use adv_routines, only : advvaxi,wsub,', 'use adv_routines, only : advvaxi,wsub,terluna_wsub,', 1),
+        ('call     wsub(ni  ,nj  ,nk  ,s  ,wprof,c1,c2,mh,rr0,rf0,weps,dumz,subs)',
+         'call terluna_wsub(ni  ,nj  ,nk  ,s  ,wprof,c1,c2,mh,rr0,rf0,weps,dumz,subs,0)   ! Terluna: w by column', 1),
+        ('call     wsub(ni+1,nj  ,nk  ,u3d,wprof,c1,c2,mh,rr0,rf0,weps,dumz,subs)',
+         'call terluna_wsub(ni+1,nj  ,nk  ,u3d,wprof,c1,c2,mh,rr0,rf0,weps,dumz,subs,1)   ! Terluna: w by column', 1),
+        ('call     wsub(ni  ,nj+1,nk  ,v3d,wprof,c1,c2,mh,rr0,rf0,weps,dumz,subs)',
+         'call terluna_wsub(ni  ,nj+1,nk  ,v3d,wprof,c1,c2,mh,rr0,rf0,weps,dumz,subs,0)   ! Terluna: w by column', 1)]),
+    ('param.F', 'Terluna: the Coriolis parameter along a great circle', [
+        ('      if( axisymm.eq.1 .or. ny.le.3 )  betaplane = 0\n',
+         '      if( axisymm.eq.1 .or. ( ny.le.3 .and. var12.le.0.0 ) )  betaplane = 0'
+         '   ! Terluna: kept on a tilted ring, where f varies along x\n', 1),
+        ('    if( lspgrad.eq.3 )then\n      ! for lspgrad = 3\n',
+         CORIOLIS_BLOCK + '    if( lspgrad.eq.3 )then\n      ! for lspgrad = 3\n', 1)]),
+    ('solve2.F', 'Terluna: acting on departures from the base-state wind', [(BETA_OLD, BETA_NEW, 1)]),
 ]
 
 
@@ -459,6 +626,21 @@ def write_vertical_wind(path: Path, profile: dict, ztop: float) -> None:
         z, w = z + [ztop], w + [0.0]
     path.write_text(f'{len(z)}\n' + ''.join(f'{a:.3f} {b:.6e}\n' for a, b in zip(z, w)))
 
+# Rings along great circles tilted 45 degrees to the equator, in two mirrored pairs: A heads north across the
+# equator at 0 E and A-prime at 180 E, so the two cross there and at 180 E, one at 45 N where the other is at
+# 45 S; B and B-prime are the pair turned 90 degrees. Every column takes its latitude, longitude, Sun, Coriolis
+# parameter, surface and the GCM's mean vertical wind from its place on the path; the upper air is held to one
+# profile, the mean along the path (the GCM's air is nearly uniform with latitude).
+for _name, _node in (('ring_a', 0.0), ('ring_a_prime', 180.0), ('ring_b', 90.0), ('ring_b_prime', 270.0)):
+    CASES[_name] = dict(
+        CASES['ring'], kind='tilted', tilt_deg=45.0, node_deg=_node, land_moisture='gcm', large_scale_w='gcm',
+        purpose=f'a great circle tilted 45 degrees to the equator, heading north across it at {_node:.0f} E, as a 2-D '
+                'ring the Sun crosses once a lunar day, seas and lakes of the 28% scenario at sea level, land as wet '
+                'as the GCM\'s beneath it, the 5% dimmer shield, and the GCM design case\'s mean vertical wind at each '
+                'column\'s latitude')
+WETNESS_CLASSES = ((20, 0.05), (21, 0.10), (22, 0.15), (23, 0.20), (25, 0.30), (26, 0.40), (27, 0.50), (28, 0.60),
+                   (29, 0.75), (30, 0.90))                    # land-use rows given over to the placeholder land at these wetnesses
+
 
 def gcm_soil(folder: Path) -> dict:
     """PlaSim's soil capacity and free-evaporation share for a GCM run: the defaults unless its
@@ -566,6 +748,157 @@ def ring_surface(nx, dx, sea_k, land_k, band=1.0, latitude=0.0):
     return segments, float(wet.mean()), product['sha256']
 
 
+def tilted_path(nx: int, tilt_deg: float, node_deg: float) -> dict:
+    """Latitude, longitude and the longitude gained since x = 0 (0 to 360, degrees) at the column centres of a
+    ring along a great circle tilted tilt_deg to the equator, x eastward from its northward crossing at node_deg E."""
+    import numpy as np
+    s = 2.0 * np.pi * (np.arange(nx) + 0.5) / nx
+    tilt = np.radians(tilt_deg)
+    lat = np.degrees(np.arcsin(np.sin(tilt) * np.sin(s)))
+    gained = np.degrees(np.unwrap(np.arctan2(np.cos(tilt) * np.sin(s), np.cos(s))))
+    return dict(lat=lat, lon=(node_deg + gained) % 360.0, dlon=gained)
+
+
+def wetness_class(wetness) -> int:
+    """The land-use row whose wetness is nearest."""
+    return min(WETNESS_CLASSES, key=lambda c: abs(c[1] - float(wetness)))[0]
+
+
+def landuse_rows(classes) -> dict:
+    """Placeholder-land rows of the land-use table for (index, wetness) pairs."""
+    base = PLACEHOLDER_LAND[1]
+    return {index: base.replace('28,', f'{index},', 1).replace('.50', f'{w:.2f}'.lstrip('0') if w < 1 else f'{w:.2f}', 1)
+            .replace("'Terluna placeholder land'", f"'Terluna placeholder land, wetness {w:.2f}'") for index, w in classes}
+
+
+def gcm_path_reference(lat_path, lon_path, tilt_deg, zw, run=GCM_RUN, years=GCM_YEARS) -> dict:
+    """The GCM's reference along a tilted ring. One upper-air profile for the whole path: the mean over its
+    columns of the sea-column profiles of the GCM rows nearest them. The wind along the ring: each row's
+    zonal-mean eastward wind times the cosine between east and the ring's heading, cos(tilt)/cos(latitude),
+    averaged over the columns. For each column: the sea surface temperature of its latitude (rows interpolated),
+    the ground temperature and wetness of the nearest GCM land cell (ground carried to sea level at its row's lapse
+    rate), and the GCM's mean vertical wind at its latitude on the model's w levels zw."""
+    import numpy as np
+    import netCDF4
+    gravity, rd, kappa = planet()['gravity_m_s2'], 287.04, 287.04 / 1005.7
+    folder = HERE.parent / 'gcm' / 'runs' / run / 'model'
+    soil = gcm_soil(folder)
+    acc, count, flux = {}, 0, []
+    for year in range(years[0], years[1] + 1):
+        with netCDF4.Dataset(folder / f'MOST.{year:05d}.nc') as d:
+            f = {k: np.asarray(d[k][:], dtype=float) for k in ('ta', 'hus', 'ua', 'va', 'ps', 'ts', 'tas', 'mrso')}
+            lat = np.asarray(d['lat'][:], float)
+            lon = np.asarray(d['lon'][:], float)
+            sigma = np.asarray(d['lev'][:], float)
+            lsm = np.asarray(d['lsm'][:], float)[0] > 0.5
+        ps = f['ps'] * 100.0
+        pieces = dict(theta=f['ta'] * (1e5 / (sigma[None, :, None, None] * ps[:, None])) ** kappa, tv=f['ta'] * (1 + 0.608 * f['hus']),
+                      qv=f['hus'], u=f['ua'], ps=ps, ts=f['ts'], tas=f['tas'],
+                      wet=np.minimum(1.0, f['mrso'] / (soil['drhsfull'] * soil['wsmax'])))
+        for k, v in pieces.items():
+            acc[k] = acc.get(k, 0.0) + v.sum(axis=0)
+        count += f['ta'].shape[0]
+        flux.append((ps[:, None] * f['va']).mean(axis=(0, 3)))
+    m = {k: v / count for k, v in acc.items()}
+    flux = np.mean(flux, axis=0)
+    height = np.loadtxt(folder.parent / 'inputs' / 'moon_topography.sra', skiprows=1).ravel().reshape(lsm.shape) / gravity
+    sea = ~lsm & (height < 1.0)
+    edges = plasim_half_levels(sigma)
+    rows = {}
+    for j in range(1, lat.size - 1):
+        if abs(lat[j]) > tilt_deg + 8.0:
+            continue
+        s_cells = sea[j] if sea[j].any() else np.ones(lon.size, bool)
+        tv = m['tv'][:, j, s_cells].mean(axis=1)
+        z = np.zeros(sigma.size)                                              # layer heights above the sea, bottom last
+        z[-1] = rd * tv[-1] / gravity * np.log(1 / sigma[-1])
+        for k in range(sigma.size - 2, -1, -1):
+            z[k] = z[k + 1] + rd * 0.5 * (tv[k] + tv[k + 1]) / gravity * np.log(sigma[k + 1] / sigma[k])
+        theta = m['theta'][:, j, s_cells].mean(axis=1)
+        lapse = gravity / 1005.7 - (theta[-2] - theta[-1]) / (z[-2] - z[-1]) * (1e5 / m['ps'][j, s_cells].mean()) ** -kappa
+        mass, _ = band_vertical_wind(lat, edges, flux, lat == lat[j], planet()['radius_m'], gravity)
+        tvi = m['tv'][:, j].mean(axis=1)
+        zi = np.zeros(edges.size)
+        for k in range(sigma.size - 1, -1, -1):
+            if edges[k] > 0:
+                zi[k] = zi[k + 1] + rd * tvi[k] / gravity * np.log(edges[k + 1] / edges[k])
+        rho = m['ps'][j].mean() * edges / (rd * np.interp(edges, sigma, m['tv'][:, j].mean(axis=1)))
+        keep = edges > 0
+        w = np.where(keep, mass / np.maximum(rho, 1e-9), 0.0)
+        rows[float(lat[j])] = dict(z=z, theta=theta, qv=m['qv'][:, j, s_cells].mean(axis=1), u=m['u'][:, j].mean(axis=1),
+                                   sea_k=float(m['ts'][j, sea[j]].mean()) if sea[j].any() else np.nan,
+                                   air_k=float(m['tas'][j, s_cells].mean()), ps=float(m['ps'][j, s_cells].mean()), lapse=lapse,
+                                   w_z=zi[keep][::-1], w=w[keep][::-1])
+    lats = np.array(sorted(rows))
+    pick = lambda key: np.array([rows[la][key] for la in lats])
+    lat_path, lon_path = np.asarray(lat_path, float), np.asarray(lon_path, float)
+    nearest = lats[np.abs(lat_path[:, None] - lats[None, :]).argmin(axis=1)]
+    weights = {la: float((nearest == la).mean()) for la in lats}
+    mean_row = lambda key: sum(weights[la] * rows[la][key] for la in lats)
+    heading = np.cos(np.radians(tilt_deg)) / np.cos(np.radians(lat_path))           # cosine between east and the ring
+    u_rows = pick('u')                                                                # (rows, levels)
+    u_along = np.mean([np.array([np.interp(la, lats, u_rows[:, k]) for k in range(sigma.size)]) * h
+                       for la, h in zip(lat_path, heading)], axis=0)
+    sea_rows = pick('sea_k')
+    ok = np.isfinite(sea_rows)
+    sea_k = np.interp(lat_path, lats[ok], sea_rows[ok])
+    # nearest GCM land cell for ground and wetness (great-circle nearest among land cells)
+    glat, glon = np.meshgrid(lat, lon, indexing='ij')
+    land_lat, land_lon = glat[lsm], glon[lsm]
+    lapse_cells = np.interp(glat, lats, pick('lapse'))
+    land_ground = (m['ts'] + lapse_cells * height)[lsm]
+    land_wet = m['wet'][lsm]
+    def nearest_land(la, lo):
+        a, b = np.radians(la), np.radians(land_lat)
+        cosd = np.sin(a) * np.sin(b) + np.cos(a) * np.cos(b) * np.cos(np.radians(lo - land_lon))
+        return int(np.argmax(cosd))
+    near = np.array([nearest_land(la, lo) for la, lo in zip(lat_path, lon_path)])
+    zw = np.asarray(zw, float)
+    w_rows = np.array([np.interp(zw, rows[la]['w_z'], rows[la]['w'], left=0.0, right=0.0) for la in lats])
+    w_columns = np.array([[np.interp(la, lats, w_rows[:, k]) for k in range(zw.size)] for la in lat_path])
+    profile = dict(z_m=list(mean_row('z')), theta_k=list(mean_row('theta')), qv_kg_kg=list(mean_row('qv')), u_m_s=list(u_along))
+    return dict(profile=profile, sea_surface_k=float(sea_k.mean()), land_ground_k=float(land_ground[near].mean()),
+                air_over_sea_k=float(mean_row('air_k')), surface_pa_sea=float(mean_row('ps')),
+                sea_k=sea_k, land_k=land_ground[near], wetness=land_wet[near], w_columns=w_columns,
+                land_wetness=float(land_wet[near].mean()), soil=soil, rows_deg=[float(v) for v in lats],
+                row_weights=weights, run=run, years=list(years), tilt_deg=tilt_deg)
+
+
+def path_surface(lat, lon, dx, sea_k, land_k, wetness, half_width_deg=0.5):
+    """Land and water column by column along a path: water where the 28% scenario's seas and rain-fed lakes cover
+    at least half of a box half_width_deg of latitude (and as far east and west) around the column's centre. One
+    segment per column, with its own sea or land temperature and, on land, the land-use row of its wetness."""
+    import numpy as np
+    from climate.gcm import boundary
+    product = boundary.lakes_product(*boundary.LAKES)
+    plat, plon, water = product['lat_deg'], product['lon_deg'], product['water_fraction']
+    nx = len(lat)
+    share = np.zeros(nx)
+    for i, (la, lo) in enumerate(zip(lat, lon)):
+        r = np.abs(plat - la) <= half_width_deg
+        c = np.abs((plon - lo + 180.0) % 360.0 - 180.0) * np.cos(np.radians(la)) <= half_width_deg
+        share[i] = water[np.ix_(r, c)].mean()
+    wet = share >= 0.5
+    segments = []
+    for i in range(nx):
+        x0 = i * dx if i > 0 else -1e9
+        x1 = (i + 1) * dx if i < nx - 1 else 1e9
+        if wet[i]:
+            segments.append((x0, x1, 2, 16, float(sea_k[i]), float(sea_k[i])))
+        else:
+            segments.append((x0, x1, 1, wetness_class(wetness[i]), float(land_k[i]), float(land_k[i])))
+    return segments, float(wet.mean()), product['sha256']
+
+
+def write_vertical_wind_2d(path: Path, zw, w_columns) -> None:
+    """terluna_wls2d.txt: the column and level counts, the level heights (m), then one line per column of its
+    vertical wind (m/s), columns evenly spaced from x = 0."""
+    import numpy as np
+    w_columns = np.asarray(w_columns, float)
+    path.write_text(f'{w_columns.shape[0]} {len(zw)}\n' + ' '.join(f'{z:.3f}' for z in zw) + '\n'
+                    + ''.join(' '.join(f'{v:.6e}' for v in row) + '\n' for row in w_columns))
+
+
 def set_namelist(text: str, section: str, key: str, value) -> str:
     """Set one entry of a Fortran namelist held as text; the entry must exist in its section."""
     import re
@@ -592,15 +925,17 @@ def case_settings(cfg, nx, dx, nz, ztop, air, gravity):
     s = time_scale(cfg, gravity)
     pair = cfg.get('kind') == 'pair'
     latitude = cfg.get('latitude_deg', 0.0)
-    turning = coriolis(latitude)
-    rotating = turning != 0.0                                            # off the equator: the wind turns
+    tilted = cfg.get('kind') == 'tilted'
+    turning = coriolis(90.0) if tilted else coriolis(latitude)           # tilted: twice the rotation rate, times
+    rotating = turning != 0.0                                            # sin(latitude) column by column in CM1
     return {
         'param0': dict(nx=nx, ny=1, nz=nz, ppnode=cfg.get('ranks', 8), timeformat=3, timestats=1),
         'param1': dict(dx=round(dx, 3), dy=round(dx, 3), dz=round(ztop / nz, 1), dtl=round(40.0 * s, 3), cfl_limit=1.0,
                        timax=round(cfg['days'] * 86400.0 * s), run_time=-999.9, tapfrq=round(cfg['output_s'] * s, 3),
                        rstfrq=round(cfg['restart_s'] * s, 3), statfrq=round(3600.0 * s, 3), prclfrq=1.0e9),
         'param2': dict(cm1setup=2, testcase=0, adapt_dt=1, irst=0, rstnum=1, ipbl=2, sgsmodel=0, tconfig=2,
-                       horizturb=0, irdamp=2, psolver=3, ptype=5, ihail=0, icor=int(rotating), lspgrad=int(rotating),
+                       horizturb=0, irdamp=2, psolver=3, ptype=5, ihail=0, icor=int(rotating), betaplane=int(tilted),
+                       lspgrad=int(rotating and not tilted),
                        eqtset=2, idiss=1, wbc=1, ebc=1, sbc=1, nbc=1, bbc=3, tbc=1, isnd=7, iwnd=0, itern=0, iinit=0,
                        irandp=1, iorigin=1, apmasscon=1),
         # The Rayleigh layer's time and the PBL scheme's asymptotic length scale are Earth's values stretched
@@ -608,10 +943,12 @@ def case_settings(cfg, nx, dx, nz, ztop, air, gravity):
         'param3': dict(fcor=float(f'{turning:.6e}'), rdalpha=round(gravity / EARTH_G / 300.0, 8), zd=0.77 * ztop,
                        l_inf=round(75.0 * EARTH_G / gravity, 1), ndcnst=cfg['droplets_cm3']),
         'param6': dict(stretch_z=4, ztop=ztop),
-        'param8': dict(var13=1.0 if cfg.get('large_scale_w') else 0.0,
+        'param8': dict(var12=cfg['tilt_deg'] if tilted else 0.0,
+                       var13=(2.0 if tilted else 1.0) if cfg.get('large_scale_w') else 0.0,
                        var14=cfg['nudge']['z_start_m'] * s, var15=cfg['nudge']['z_full_m'] * s,
                        var16=0.0 if pair else round(length, 3), var17=0.0 if pair else round(air['sunlight_w_m2'], 3),
-                       var18=0.0 if pair else cfg['start_hour_angle_deg'], var19=0.0 if pair else round(solar_day_s(), 1)),
+                       var18=0.0 if pair else cfg['start_hour_angle_deg'] + (cfg['node_deg'] if tilted else 0.0),
+                       var19=0.0 if pair else round(solar_day_s(), 1)),
         'param9': dict(output_format=1, output_filetype=2, output_sfcparams=0, output_tke=0, output_km=0,
                        output_kh=0, output_uinterp=1, output_vinterp=int(rotating), output_v=0, output_winterp=1,
                        output_radten=1, output_cape=1, output_cin=1, output_lcl=1, output_lfc=1, output_pwat=1,
@@ -694,7 +1031,7 @@ def setup(name: str) -> Path:
         raise RuntimeError(f'{case} has started; remove it to set up afresh')
     case.mkdir(parents=True, exist_ok=True)
     latitude = cfg.get('latitude_deg', 0.0)
-    ref = gcm_equator_profile(band=cfg.get('band_deg', EQUATOR_BAND_DEG), latitude=latitude)
+    tilted = cfg.get('kind') == 'tilted'
     s = time_scale(cfg, gravity)
     pair = cfg.get('kind') == 'pair'
     if pair:
@@ -704,6 +1041,9 @@ def setup(name: str) -> Path:
         nx, dx, length = ring_grid(latitude, cfg['dx_target_m'], cfg['ranks'])
     zw = [z * s for z in vertical_grid(**cfg['z_grid'])]
     nz = len(zw) - 1
+    track = tilted_path(nx, cfg['tilt_deg'], cfg['node_deg']) if tilted else None
+    ref = (gcm_path_reference(track['lat'], track['lon'], cfg['tilt_deg'], zw) if tilted
+           else gcm_equator_profile(band=cfg.get('band_deg', EQUATOR_BAND_DEG), latitude=latitude))
     zh = 0.5 * (np.array(zw[1:]) + np.array(zw[:-1]))
     prof = ref['profile']
     zg = np.array(prof['z_m'][::-1]) * s                                  # GCM levels, bottom first
@@ -739,6 +1079,8 @@ def setup(name: str) -> Path:
     (case / 'lsnudge_0001.dat').write_text('\n'.join(nudge) + '\n')
     if pair:
         segments, water_share, surface_sha = [(-1e9, 1e9, 2, 16, ref['sea_surface_k'], ref['sea_surface_k'])], 1.0, None
+    elif tilted:
+        segments, water_share, surface_sha = path_surface(track['lat'], track['lon'], dx, ref['sea_k'], ref['land_k'], ref['wetness'])
     else:
         segments, water_share, surface_sha = ring_surface(nx, dx, ref['sea_surface_k'], ref['land_ground_k'],
                                                           latitude=latitude)
@@ -748,9 +1090,17 @@ def setup(name: str) -> Path:
     index, row = PLACEHOLDER_LAND
     table = [row.replace('.50', f"{land_moisture(cfg, ref):.2f}".lstrip('0')) if line.startswith(f'{index},') else line
              for line in table]
+    if tilted:                                                            # land-use rows for the wetness classes
+        rows = landuse_rows(WETNESS_CLASSES)
+        table = [next((r for i, r in rows.items() if line.startswith(f'{i},')), line) for line in table]
     (case / 'LANDUSE.TBL').write_text(''.join(table))
     vertical_wind = None
-    if cfg.get('large_scale_w') == 'gcm':
+    if tilted and cfg.get('large_scale_w') == 'gcm':
+        write_vertical_wind_2d(case / 'terluna_wls2d.txt', zw, ref['w_columns'])
+        wc = np.asarray(ref['w_columns'])
+        vertical_wind = dict(z_m=[float(z) for z in zw], path_mean_m_s=[float(v) for v in wc.mean(axis=0)],
+                             min_m_s=float(wc.min()), max_m_s=float(wc.max()), rows_deg=ref['rows_deg'])
+    elif cfg.get('large_scale_w') == 'gcm':
         vertical_wind = gcm_vertical_wind(latitude, cfg.get('band_deg', EQUATOR_BAND_DEG))
         write_vertical_wind(case / 'terluna_wls.txt', vertical_wind, zw[-1])
     for link, target in (('cm1.exe', exe), ('RRTMG_LW_DATA', tree / 'run' / 'RRTMG_LW_DATA'),
@@ -767,15 +1117,21 @@ def setup(name: str) -> Path:
             text = set_namelist(text, section, key, value)
     (case / 'namelist.template').write_text(text)
     digest = lambda p: hashlib.sha256(Path(p).read_bytes()).hexdigest()[:16]
+    if tilted:                                                            # per-column arrays as rounded lists
+        ref = {k: ([round(float(x), 4) for x in v] if isinstance(v, np.ndarray) else v) for k, v in ref.items() if k != 'w_columns'}
     record = dict(case=name, configuration=cfg, time_scale=s,
                   grid=dict(nx=nx, dx_m=dx, length_m=length, nz=nz, ztop_m=zw[-1]),
                   build=build_record, reference=ref, initial=initial, water_share=water_share, surface_product=surface_sha,
-                  latitude_deg=latitude, coriolis_1_s=coriolis(latitude), land_moisture=None if pair else land_moisture(cfg, ref),
+                  path=dict(tilt_deg=cfg['tilt_deg'], node_deg=cfg['node_deg'], lat=[round(float(v), 4) for v in track['lat']],
+                            lon=[round(float(v), 4) for v in track['lon']], dlon=[round(float(v), 4) for v in track['dlon']])
+                  if tilted else None,
+                  latitude_deg=latitude, coriolis_1_s=coriolis(90.0) if tilted else coriolis(latitude),
+                  land_moisture=None if pair else land_moisture(cfg, ref),
                   large_scale_w=vertical_wind,
                   runner=digest(__file__),
                   inputs={p: digest(case / p) for p in ('input_sounding', 'input_grid_z', 'lsnudge_0001.dat',
                                                          'terluna_surface.txt', 'LANDUSE.TBL', 'namelist.template',
-                                                         'terluna_wls.txt') if (case / p).exists()})
+                                                         'terluna_wls.txt', 'terluna_wls2d.txt') if (case / p).exists()})
     (case / 'case.json').write_text(json.dumps(record, indent=1) + '\n')
     return case
 

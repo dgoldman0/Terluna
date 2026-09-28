@@ -284,3 +284,72 @@ def test_vertical_wind_file_ends_at_zero_at_the_model_top(tmp_path):
     lines = path.read_text().splitlines()
     assert lines[0] == '4' and lines[-1].split() == ['150000.000', '0.000000e+00']
     assert [float(l.split()[1]) for l in lines[1:3]] == [0.0, -0.003]
+
+
+def test_tilted_path_crosses_the_equator_at_its_nodes_and_mirrors():
+    nx = 1816
+    a, a_prime = c.tilted_path(nx, 45.0, 0.0), c.tilted_path(nx, 45.0, 180.0)
+    assert abs(a['lat'][0]) < 0.2 and a['lon'][0] < 0.2                     # heading north across 0 E
+    assert a['lat'].max() == pytest.approx(45.0, abs=0.01) and a['lat'].min() == pytest.approx(-45.0, abs=0.01)
+    assert a['lon'][np.argmax(a['lat'])] == pytest.approx(90.0, abs=0.2)
+    assert np.all(np.diff(a['dlon']) > 0) and a['dlon'][-1] == pytest.approx(360.0, abs=0.3)
+    # A-prime is A mirrored across the equator: at the same longitude, the opposite latitude
+    lat_mirror = np.interp(a['lon'], np.sort(a_prime['lon']), a_prime['lat'][np.argsort(a_prime['lon'])])
+    assert np.allclose(lat_mirror, -a['lat'], atol=0.1)
+    # the Coriolis parameter CM1 builds along the ring is that of each column's latitude
+    s = 2 * np.pi * (np.arange(nx) + 0.5) / nx
+    omega2 = 2 * 2.6617e-6
+    assert np.allclose(omega2 * np.sin(np.radians(45.0)) * np.sin(s), omega2 * np.sin(np.radians(a['lat'])))
+
+
+def test_wetness_classes_and_their_land_use_rows():
+    assert c.wetness_class(0.02) == 20 and c.wetness_class(0.47) == 27 and c.wetness_class(1.0) == 30
+    rows = c.landuse_rows(((20, 0.05), (30, 0.90)))
+    assert rows[20].startswith('20,') and '   .05,' in rows[20] and 'wetness 0.05' in rows[20]
+    assert rows[30].startswith('30,') and '   .90,' in rows[30]
+    assert all(i != 16 and i != 24 for i, _ in c.WETNESS_CLASSES)           # water and snow keep their rows
+
+
+def test_path_surface_samples_the_product_along_the_path(monkeypatch):
+    lon = (np.arange(1440) + 0.5) * 0.25
+    lat = 89.875 - 0.25 * np.arange(720)
+    water = np.zeros((720, 1440))
+    water[:, lon < 90.0] = 1.0                                               # water west of 90 E
+    from climate.gcm import boundary
+    monkeypatch.setattr(boundary, 'lakes_product', lambda *a: dict(lat_deg=lat, lon_deg=lon, water_fraction=water, sha256='t'))
+    path = c.tilted_path(64, 45.0, 0.0)
+    n = len(path['lat'])
+    segs, share, _ = c.path_surface(path['lat'], path['lon'], 1000.0, np.full(n, 297.0), np.full(n, 293.0), np.full(n, 0.4))
+    wet = np.array([s[2] == 2 for s in segs])
+    assert np.array_equal(wet, path['lon'] < 90.0)
+    assert all(s[3] == 16 for s in segs if s[2] == 2) and all(s[3] == 26 for s in segs if s[2] == 1)
+    assert segs[0][0] < 0 and segs[-1][1] > 64 * 1000.0 and share == pytest.approx(wet.mean())
+
+
+def test_vertical_wind_table_has_one_row_per_column(tmp_path):
+    path = tmp_path / 'terluna_wls2d.txt'
+    c.write_vertical_wind_2d(path, [0.0, 1000.0, 2000.0], [[0.0, 0.002, 0.0], [0.0, -0.003, 0.0]])
+    lines = path.read_text().splitlines()
+    assert lines[0] == '2 3' and lines[1].split() == ['0.000', '1000.000', '2000.000']
+    assert float(lines[3].split()[1]) == -0.003
+
+
+@needs_planet
+def test_tilted_rings_use_the_beta_plane_and_their_own_sun():
+    air = dict(sunlight_w_m2=1300.0)
+    a_prime = c.case_settings(c.CASES['ring_a_prime'], 1816, 6011.0, 111, 150000.0, air, 1.6242)
+    assert a_prime['param2']['betaplane'] == 1 and a_prime['param2']['icor'] == 1 and a_prime['param2']['lspgrad'] == 0
+    assert a_prime['param8']['var12'] == 45.0 and a_prime['param8']['var13'] == 2.0
+    assert a_prime['param8']['var18'] == -90.0 + 180.0                     # local time follows longitude on every ring
+    assert a_prime['param3']['fcor'] == pytest.approx(c.coriolis(90.0), rel=1e-5)
+    equator = c.case_settings(c.CASES['ring'], 1816, 6011.0, 111, 150000.0, air, 1.6242)
+    assert equator['param2']['betaplane'] == 0 and equator['param8']['var12'] == 0.0
+
+
+def test_hour_angle_along_a_tilted_ring_follows_longitude():
+    from climate.crm import ring_analysis as ra
+    path = c.tilted_path(360, 45.0, 180.0)
+    geo = dict(x=(np.arange(360) + 0.5) * 1000.0, sun=dict(h0=-90.0 + 180.0, length=360000.0, dlon=path['dlon']))
+    h = ra.hour_angle(geo, 0.0, 100.0)
+    expected = (path['lon'] - 90.0 + 180.0) % 360.0 - 180.0                  # local time = longitude - 90 at t = 0
+    assert np.allclose(h, expected, atol=1e-6)

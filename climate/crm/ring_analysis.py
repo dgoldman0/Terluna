@@ -51,8 +51,20 @@ EVIDENCE = ('CM1 r22.0 in two dimensions along the equator at lunar gravity (6-k
             'real storms do.')
 
 
-def evidence(latitude: float) -> str:
-    """What a ring on the given circle of latitude is: EVIDENCE on the equator."""
+def evidence(latitude: float, path=None) -> str:
+    """What a ring on the given circle of latitude, or along a tilted great circle (path), is: EVIDENCE on the equator."""
+    if path:
+        return ('CM1 r22.0 in two dimensions along a great circle tilted '
+                f'{path["tilt_deg"]:.0f} degrees to the equator, heading north across it at {path["node_deg"]:.0f} E, at lunar '
+                'gravity (6-km columns, 111 levels to 150 km), with the Morrison microphysics given lunar fall speeds, RRTMG '
+                'radiation for the design air, the Sun crossing the ring once a lunar day at each column\'s latitude and '
+                'longitude (equinox sunlight), the Coriolis force of each column\'s latitude on departures from the reference '
+                'wind, the 28% scenario\'s seas and lakes laid flat at sea level with a placeholder land surface as wet as the '
+                'GCM\'s land nearest each column, the GCM design case\'s mean vertical wind at each column\'s latitude imposed '
+                'as large-scale vertical advection, and the domain-mean temperature, vapour and winds above 8-16 km held to '
+                'one profile, the GCM\'s mean along the path (A28_dim5, the 5% dimmer shield). It has no cross-ring '
+                'dimension, so air cannot converge on the storms from the sides; the land\'s wetness is prescribed; '
+                'two-dimensional convection organises into lines more readily than real storms do.')
     if latitude == 0.0:
         return EVIDENCE
     return (f'CM1 r22.0 in two dimensions along the circle of latitude {abs(latitude):.0f} {"N" if latitude > 0 else "S"} at '
@@ -105,12 +117,15 @@ def case_geometry(case: Path) -> dict:
     for x0, x1, xland, *_ in rows:
         land[(x >= x0) & (x < x1)] = xland == 1
     sun = dict(h0=record['configuration']['start_hour_angle_deg'], length=grid['length_m'])
+    if record.get('path'):                                             # a tilted ring: longitude gained along x
+        sun.update(h0=sun['h0'] + record['path']['node_deg'], dlon=np.asarray(record['path']['dlon'], float))
     return dict(record=record, x=x, dx=dx, zh=0.5 * (zw[1:] + zw[:-1]), zw=zw, land=land, sun=sun)
 
 
 def hour_angle(geo: dict, t_s: float, day_s: float) -> np.ndarray:
     """Local hour angle (degrees, -180..180, 0 = noon) of every column at model time t."""
-    h = geo['sun']['h0'] + 360.0 * t_s / day_s + 360.0 * geo['x'] / geo['sun']['length']
+    along = geo['sun']['dlon'] if 'dlon' in geo['sun'] else 360.0 * geo['x'] / geo['sun']['length']
+    h = geo['sun']['h0'] + 360.0 * t_s / day_s + along
     return (h + 180.0) % 360.0 - 180.0
 
 
@@ -294,7 +309,9 @@ def analyse(name: str, from_day: float) -> dict:
     section = {key: v / np.maximum(section_count, 1)[:, None] for key, v in section.items()}
     pct = lambda a, q: float(np.percentile(np.concatenate(a), q))
     summary = dict(
-        schema=SCHEMA, case=name, evidence=evidence(latitude), reading_rule=READING_RULE, latitude_deg=latitude,
+        schema=SCHEMA, case=name, evidence=evidence(latitude, record.get('path')), reading_rule=READING_RULE,
+        latitude_deg=latitude, **({'tilt_deg': record['path']['tilt_deg'], 'node_deg': record['path']['node_deg']}
+                                  if record.get('path') else {}),
         span_days=[(use[0] - 1) * tap / 86400.0, (use[-1] - 1) * tap / 86400.0], snapshots=len(use),
         land_share=float(land.mean()),
         air_2m_c={key: dict(p1=pct(v, 1) - 273.15, median=pct(v, 50) - 273.15, p99=pct(v, 99) - 273.15)
@@ -323,7 +340,8 @@ def analyse(name: str, from_day: float) -> dict:
         rain_spells=rain_spells(np.array(hov['prate']), land, tap),
         by_hour_angle=hour_angle_table(0.5 * (bins[1:] + bins[:-1]), composites),
         circulation=circulation_table(0.5 * (bins[1:] + bins[:-1]), zh, section),
-        gcm=gcm_equator_composites(band=record['reference']['band_deg'], latitude=latitude))
+        gcm=gcm_equator_composites(band=record['reference']['band_deg'] if not record.get('path')
+                                   else record['path']['tilt_deg'] + 3.0, latitude=latitude))
     arrays = dict(hour_angle_deg=0.5 * (bins[1:] + bins[:-1]), heights_m=zh, wind_heights_m=np.array(WIND_HEIGHTS_M),
                   cloud_profile_land_day=profiles[0, 0], cloud_profile_land_night=profiles[0, 1],
                   cloud_profile_water_day=profiles[1, 0], cloud_profile_water_night=profiles[1, 1],
@@ -343,6 +361,8 @@ def analyse(name: str, from_day: float) -> dict:
 
 def noon_x_km(geo: dict, t_s: float, day_s: float) -> float:
     """Where on the ring it is local noon at model time t (km east of the ring's origin)."""
+    if 'dlon' in geo['sun']:                                          # a tilted ring: the column nearest noon
+        return float(geo['x'][int(np.argmin(np.abs(hour_angle(geo, t_s, day_s))))] / 1000.0)
     return float((-(geo['sun']['h0'] + 360.0 * t_s / day_s) / 360.0 * geo['sun']['length']) % geo['sun']['length'] / 1000.0)
 
 
