@@ -295,7 +295,7 @@ A tilted ring needs five things beyond a ring on a circle of latitude:
 
 They stay two-dimensional, so storms still organise into lines. Each is a full
 great circle the size of the equatorial ring; a pair run together on 4 threads
-each takes about 11–13 hours.
+each takes about 10 hours (the A pair took 10.1–10.3).
 
 **How the tilted rings are built** (cases `ring_a`, `ring_a_prime`, `ring_b`,
 `ring_b_prime`; `var12` is the tilt). The Sun block takes each column's
@@ -322,7 +322,53 @@ formula and the Coriolis parameter within 3 × 10⁻¹² s⁻¹ of 2Ω sin(latit
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup ring_a
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run run ring_a --hours 16 --threads 4
 climate/gcm/.venv/bin/python -m climate.crm.ring_analysis ring_a --from-day 29.5
+climate/gcm/.venv/bin/python -m climate.crm.ring_crossings ring_a ring_a_prime --from-day 29.5
 ```
+
+**What the A pair shows** (the second lunar day, days 29.5–59:
+[ring_ring_a.json](../results/crm/ring_ring_a.json),
+[ring_ring_a_prime.json](../results/crm/ring_ring_a_prime.json)). A crosses 72%
+land and A′ 63%. Both are warm and humid from 45° S to 45° N alike. Over land
+the air at 2 m has a median of 22–23 °C and a hottest 1% of 32–35 °C, and over
+the seas a median of 24 °C. The dewpoint averages 21–22 °C in every 15° band
+of latitude and never falls below 17 °C anywhere on either ring, so neither has
+a comfortable hour. Over land it rains 1.3 mm/day on A and 2.2 on A′, over the
+seas 0.8 and 1.1; cloud covers 14–16% of the land, and fog 4.5–4.7%, 94% of it
+at night. The stretches between 30° and 45° rain 13–94 mm per lunar day over
+land, against 9–12 mm on the rings at 45°, where the GCM's air sinks faster
+(1.2–2.8 mm/s against 0.2–1.7 mm/s).
+
+**At the crossings** ([ring_crossings.py](ring_crossings.py),
+[crossings_ring_a_ring_a_prime.json](../results/crm/crossings_ring_a_ring_a_prime.json)).
+Each ring's patch is its columns within 100 km of the crossing. At 0° E the
+ground is wet land: A has 34 land columns there, A′ 25 and 9 of lake. At 180° E
+it is a lake district: A has 21 land and 13 water columns, A′ 10 and 24. The
+two rings agree on the air near the ground. Their lunar-day means differ by at
+most 0.3 °C in temperature and 0.1 °C in dewpoint, and through the lunar day by
+0.4–0.8 °C (root mean square over the 36° bins of local time). The largest
+steady difference is 0.7 °C by day at 0° E (bootstrap range 0.1–1.3 °C). Winds
+agree within 0.3 m/s, both at 10 m (means 1.1–2.4 m/s) and at 40 km in the
+flight band (4.1–4.5 m/s). Rain, cloud and fog differ severalfold. At 0° E, A
+brings 7 mm of rain per lunar day and A′ 70 mm; at 180° E, 28 and 8 mm over
+land and 7 and 35 mm over the water. Cloud cover differs by up to 0.10 (23%
+against 33% at 0° E), and fog by up to 0.06. Part of that is chance, since a
+patch's rain in one lunar day comes from a few storms, but the bootstrap ranges
+exclude zero at 0° E over land and at 180° E over the water. So a ring's
+temperature, humidity and wind at a place hold whichever way its slice faces,
+while its rain and cloud at a place depend on that direction by a factor of
+several.
+
+**Against the GCM at the crossings.** The GCM's air is its lowest layer carried
+to the ground along a dry adiabat, but its vapour is that of the layer itself,
+centred about 0.86 km up. There the rings' dewpoint is about 2 °C below its
+value at 2 m (5 °C at midday, about 1 °C at night). At that height the rings
+are 2.6–4.7 °C more humid than the GCM over land in the lunar-day mean
+(19.0–20.1 against 15.4–16.4 °C). The gap lies mostly in the night and
+morning. Near noon at 0° E both give 17–20 °C, while through the night and
+morning the rings stay at 19–21 °C and the GCM falls to 14–16 °C. Both slice
+directions share that night-time excess, so it comes from what every ring leaves
+out or from the GCM. The GCM also rains more here: 129–143 mm per lunar day on
+its land cells, most of it in the early afternoon, against the rings' 7–70 mm.
 
 ## The gravity pair
 
