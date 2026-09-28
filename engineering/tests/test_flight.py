@@ -129,5 +129,77 @@ class Wings(unittest.TestCase):
         self.assertAlmostEqual(float(m / e), (G_MOON / G_EARTH) ** 1.5, places=9)
 
 
+class Polars(unittest.TestCase):
+    # A 15 m sailplane: 10.2 m2, a drag area of 0.083 m2 (best glide about 45), span efficiency 0.95.
+    SAILPLANE = wi.Polar(15.0, 10.2, 0.083, 0.95, 1.5)
+
+    def test_least_power_and_least_drag_match_a_search(self):
+        p, w = self.SAILPLANE, 350.0 * G_EARTH
+        v = np.linspace(10.0, 80.0, 70001)
+        d = p.drag_n(w, 1.225, v)
+        low = wi.min_power(p, 350.0, G_EARTH, 1.225, stall_margin=0.0)
+        flat = wi.best_glide(p, 350.0, G_EARTH, 1.225, stall_margin=0.0)
+        self.assertAlmostEqual(float(low['power_w']) / (d * v).min(), 1.0, places=6)
+        self.assertAlmostEqual(float(low['speed_m_s']), float(v[np.argmin(d * v)]), delta=0.01)
+        self.assertAlmostEqual(float(flat['drag_n']) / d.min(), 1.0, places=6)
+        self.assertAlmostEqual(float(flat['lift_to_drag']), p.best_glide_ratio, places=9)
+
+    def test_gravity_leaves_the_glide_and_scales_speed_sink_and_power(self):
+        """The same flyer in the same air: the same glide ratio; speed and sink as sqrt(g); least power as g^1.5."""
+        p, ratio = self.SAILPLANE, G_MOON / G_EARTH
+        e = wi.min_power(p, 350.0, G_EARTH, 1.2, stall_margin=0.0)
+        m = wi.min_power(p, 350.0, G_MOON, 1.2, stall_margin=0.0)
+        self.assertAlmostEqual(float(m['lift_to_drag'] / e['lift_to_drag']), 1.0, places=9)
+        self.assertAlmostEqual(float(m['speed_m_s'] / e['speed_m_s']), ratio ** 0.5, places=9)
+        self.assertAlmostEqual(float(m['sink_m_s'] / e['sink_m_s']), ratio ** 0.5, places=9)
+        self.assertAlmostEqual(float(m['power_w'] / e['power_w']), ratio ** 1.5, places=9)
+
+    def test_a_sixth_of_the_wing_flies_at_earths_speed_and_sink(self):
+        p = self.SAILPLANE
+        small = wi.Polar(p.span_m / np.sqrt(SIMILAR), p.area_m2 / SIMILAR, p.drag_area_m2 / SIMILAR,
+                         p.span_efficiency, p.max_lift_coefficient)
+        e = wi.best_glide(p, 350.0, G_EARTH, 1.2, stall_margin=0.0)
+        m = wi.best_glide(small, 350.0, G_MOON, 1.2, stall_margin=0.0)
+        self.assertAlmostEqual(float(m['speed_m_s'] / e['speed_m_s']), 1.0, places=9)
+        self.assertAlmostEqual(float(m['sink_m_s'] / e['sink_m_s']), 1.0, places=9)
+
+    def test_stall_holds_the_speed(self):
+        p = wi.Polar(10.0, 5.0, 0.3, 0.85, 1.2)
+        r = wi.min_power(p, 100.0, G_MOON, 1.16, stall_margin=1.2)
+        self.assertGreaterEqual(float(r['speed_m_s']), 1.2 * float(p.stall_speed_m_s(100.0 * G_MOON, 1.16)) - 1e-12)
+
+    def test_turn_radius(self):
+        self.assertAlmostEqual(float(wi.turn_radius_m(10.0, G_EARTH, 45.0)), 100.0 / G_EARTH, places=9)
+        self.assertAlmostEqual(float(wi.turn_radius_m(10.0, G_MOON, 30.0) / wi.turn_radius_m(10.0, G_EARTH, 30.0)),
+                               SIMILAR, places=9)
+
+    def test_canopy_of_the_port_study(self):
+        """The summit tower study lands 80 kg at 4 m/s under a round canopy (drag coefficient 1.3) 3.7 m across in
+        the air at the tower's foot (1.163 kg/m3); on Earth at sea level the same descent takes 8.9 m."""
+        self.assertAlmostEqual(float(wi.canopy_diameter_m(80.0, G_MOON, 1.163, 4.0, 1.3)), 3.7, delta=0.05)
+        self.assertAlmostEqual(float(wi.canopy_diameter_m(80.0, G_EARTH, 1.225, 4.0, 1.3)), 8.9, delta=0.05)
+        area = np.pi / 4 * 3.7 ** 2
+        self.assertAlmostEqual(float(wi.descent_speed_m_s(80.0, G_MOON, 1.163, 1.3 * area)), 4.0, delta=0.05)
+
+
+class VerticalTakeOff(unittest.TestCase):
+    def test_trip_energy_adds_hover_climb_and_cruise(self):
+        t = wi.vtol_trip(1000.0, G_MOON, 1.16, 20.0, 12.0, 40.0, 10e3, hover_s=60.0, climb_m=500.0)
+        hover = wi.hover_power_w(1000.0, G_MOON, 1.16, 20.0)
+        cruise = wi.power_w(1000.0, G_MOON, 40.0, 12.0)
+        expect = hover * 60.0 + 1000.0 * G_MOON * 500.0 / 0.8 + cruise * 10e3 / 40.0
+        self.assertAlmostEqual(float(t['energy_j']) / float(expect), 1.0, places=12)
+
+    def test_electric_flyer_closes_and_is_lighter_under_lunar_gravity(self):
+        e = wi.electric_vtol(400.0, G_EARTH, 1.225, 50.0, 50e3, climb_m=500.0)
+        m = wi.electric_vtol(400.0, G_MOON, 1.16, 50.0, 50e3, climb_m=500.0)
+        for r in (e, m):
+            self.assertAlmostEqual(r['mass_kg'], r['payload_kg'] + r['airframe_kg'] + float(r['battery_kg'])
+                                   + float(r['drive_kg']), delta=1e-6 * r['mass_kg'])
+        self.assertLess(m['mass_kg'], e['mass_kg'])
+        self.assertLess(float(m['hover_w']), float(e['hover_w']) / 10.0)
+        self.assertIsNone(wi.electric_vtol(400.0, G_EARTH, 1.225, 50.0, 5e6))
+
+
 if __name__ == '__main__':
     unittest.main()
