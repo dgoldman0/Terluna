@@ -36,16 +36,25 @@ floors has berths.
   kilometre or two up. The six lift spines run down the legs. The flared legs carry the wind's overturning, as
   Eiffel's profile does, and the ground between them stays open for the city. Sharing the study's footing area six
   ways gives each leg about 19,000 m² at 1 MPa.
-- **Floors.** Full rings run all the way round the frame. Each is a block of a few storeys with a park and
-  open-air shops on its roof. Holding the port's 34.9 km² of floor in four-storey rings 40 m deep gives about 20
-  rings: about 2 km apart near the base, closest (about 560 m) near 15 km, where the frame is 2.2 km wide, and
-  wider apart again toward the crown as the floor programme shrinks.
+- **Floors.** Rings run round the frame in the lower tower, and disks round a central core from about 12 km up, as
+  in the author's picture of the port (chosen on 2026-09-28, replacing full rings). Each is a block of a few
+  storeys with a park and open-air shops on its roof. On the first estimate's levels, the eight below 12 km
+  (3.1–11.5 km) are rings and the twelve from 12.3 to 22.2 km are disks, 7.0 km² at the lowest and 0.2 km² at the
+  top. A disk holds far more floor than a ring, so fewer, more widely spaced disks may hold the programme.
+- **Wide lower rings.** The lower rings, where the open air is mildest, are wide, with fewer storeys under the
+  park. At 150 m instead of the first estimate's 40 m, ring 0's park grows from 0.83 km², a strip 21 km round, to
+  about 3 km², close to Central Park's size. Their decks cantilever from the frame. In lunar gravity a 150 m
+  cantilever carrying 3 t/m² (a park, two storeys and structure) bends like a 61 m one on Earth, about the 67 m
+  the Marina Bay Sands SkyPark cantilevers; its trusses taper, deep at the frame and thin at the inner edge. The
+  bending at the root, 21 km round each ring, goes into the frame, whose members need stiffening for a node level
+  above and below: roughly 2 Mt of steel for three wide rings, about 6% of the frame. Cables from the frame above
+  would need about a tenth of that.
 - **Crown.** The sealed long-haul terminal sits in the flight band. Its docking arms, as first drawn, cantilever
   0.9–1.3 km at about 90 times their depth, which is not credible structure; they need deeper or braced
   structure. At 30,000–50,000 long-haul passengers an hour, 2,000-passenger ships need 15–25 berths.
 
-The tower model still sizes a square lattice with a band every 200 m. The legs, the transfer ring and the rings
-are yet to be sized in it.
+The tower model still sizes a square lattice with a band every 200 m. The legs, the transfer ring, the rings and
+their cantilevers, and the disks and their core are yet to be sized in it.
 
 ## Parks and air by height
 
@@ -55,15 +64,26 @@ With the design's oxygen (17.5%), the air at the top of each zone compares with 
 |---|---|---|---|
 | 0–3 km | 1,900–2,400 m (Mexico City) | 12 to 9 °C | Parks and open-air shops for everyone |
 | 3–10 km | up to 3,500 m (La Paz) | down to 3 °C | Parks for residents and acclimatised visitors: cool alpine gardens |
-| 10–15 km | up to 4,300 m (El Alto) | down to −1 °C | A few high gardens for short visits, each beside a pressurised refuge; winter parks |
+| 10–15 km | up to 4,300 m (El Alto) | down to −1 °C | A few high gardens for short visits, each beside a pressurised refuge; winter parks on the disks from about 13.5 km |
 | 15–24 km | up to 5,700 m | down to −10 °C | None: the blocks are sealed |
+
+The summit is the Moon's highest ground, and the air cools about 0.9 °C per kilometre of height, a seventh of
+Earth's rate, since that rate scales with gravity. So the tower's foot averages about 12 °C against the lowlands'
+21–23 °C, and the metropolis runs from there to about 16 °C on its lowest ground, 4 km lower. The disks begin at
+12.3 km, where the air averages about 1 °C, so none of their open decks is temperate. The mild open-air parks are
+the ground and the lower rings: about 9 °C on ring 0 and 6–8 °C on rings 1 and 2.
 
 Every interior is kept at a comfortable pressure and temperature, so enclosed floors take topped-up air from
 about 3 km up. High parks close for the afternoon storms and their lightning.
 
 **Winter.** The climate run keeps ground-level air near 21 °C from the equator to the poles, so the tower's
-upper levels hold about the only winter on the Moon, and it lasts all year, since the Moon has no seasons. At 10–15 km the air
-stays near freezing by day and night; the storms bring wet snow, sleet and graupel, and night cloud leaves rime.
+upper levels hold about the only winter on the Moon, and it lasts all year, since the Moon has no seasons. Each
+height also keeps its temperature through the lunar day: in the climate run the air at the tower's heights changes
+by only 0.1–0.2 °C between noon and midnight (run A28_dim5, model years 15–24, read at the site; the site product
+does not yet carry temperature by hour angle). The mean air falls through freezing at about 13.6 km above the
+summit, so the open winter parks sit on the disks from about 13.5 to 15 km, just below freezing, and the high
+gardens below them, from 10 km, are raw and near freezing. Above 15 km, in the sealed blocks, the air is −2 to
+−10 °C. The storms bring wet snow, sleet and graupel, and night cloud leaves rime.
 Snowmaking and chilled rinks give reliable snow and ice. At a sixth of Earth's gravity snowflakes fall at under
 half Earth's speed and snow lies fluffier; skiing works on Earth's slope angles, more slowly.
 
@@ -128,7 +148,9 @@ it reaches milestones:
 
 ## Open
 
-- Sizing the legs, the transfer ring, the rings and the crown's docking arms in the tower model.
+- Sizing the legs, the transfer ring, the rings and their cantilevers, the disks and their core, and the crown's
+  docking arms in the tower model.
+- The number and spacing of the disks, and the width of the wide lower rings (150 m is an example).
 - The long-haul ship class and berth count.
 - The land per person for food, and the power and heat plan for the chosen population.
 - The metropolis through the 354-hour night.

@@ -361,8 +361,9 @@ and the wind carries about 1.95 GW through it. The Betz limit on that is 1.16 GW
   how flames and smoke behave under weak buoyancy in the port's spaces, the compartments that give people time to
   leave, and what the tower's shafts, water, sealed zone and firefighting from the air ask.
 
-**Form, chosen on 2026-09-27.** The author chose a round diagrid that gathers into six splayed legs, and full rings
-of floors, each a block of a few storeys with a park and open-air shops on its roof
+**Form, chosen on 2026-09-27 and 2026-09-28.** The author chose a round diagrid that gathers into six splayed legs.
+Its floors are rings in the lower tower and disks round a central core from about 12 km up, each a block of a few
+storeys with a park and open-air shops on its roof, and the wide lower rings cantilever from the frame
 ([decisions](../../decisions.md#the-summit-port-and-metropolis),
 [metropolis brief](../../../habitation/summit_metropolis/README.md)). The frame and floor figures above still
 assume the square lattice and a band every 200 m; the tower model has yet to size the new form.
