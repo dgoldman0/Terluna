@@ -24,6 +24,10 @@ the design run's air over the whole Moon
 mixed layer and storms ([climate/crm](../../../climate/crm/README.md)). The drawings are made in
 [visualization/sky-fleet](../../../visualization/sky-fleet/README.md).
 
+**Status.** The author adopted these findings on 2026-09-28 as the planning basis for the Open Moon's flyers
+([decisions register](../../decisions.md#sky-ships-and-flyers)); the long-haul class for the crown, whether winged
+liners join it, and the sky boats' share of trips, ownership and traffic system stay open.
+
 **Evidence.** First-order sizing of the kind used to compare concepts.
 - **What is tested.** The drag polar reproduces a search for least power and least drag, keeps the glide ratio
   under any gravity and scales speed, sink and power with it as theory says; the canopy model gives the summit tower

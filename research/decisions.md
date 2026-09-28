@@ -107,3 +107,23 @@ the metropolis and the first estimates behind them.
 | A high-capacity backbone of metro, rail and large sky ferries carries the metropolis, with sky boats and gliders alongside. | Author, 2026-09-27 | Stands |
 | Fusion supplies most of the Moon's local power, supplemented by regional solar and wind. | Author, 2026-09-27 | Planning assumption; fusion is a conditional technology here ([engineering](../engineering/README.md)) |
 | Regional agriculture and foraging feed the metropolis. | Author, 2026-09-27 | Planning assumption; the land per person has not been computed |
+
+## Sky ships and flyers
+
+The author adopted these findings on 2026-09-28 as the planning basis for the Open Moon's flyers. The
+[sky-ship study](studies/sky_ships/README.md) and the [sky-fleet study](studies/sky_fleet/README.md) work them out
+at first order, and the [metropolis brief](../habitation/summit_metropolis/README.md#flyers) collects what they mean
+for the summit. No flyer has been designed. The long-haul class for the crown, whether winged liners join it, and
+the sky boats' share of trips, ownership and traffic system stay open.
+
+| Decision | Source | Status |
+|---|---|---|
+| The rule of similarity: under a sixth of Earth's gravity, a flyer six times larger in every length, flying at the same speed in air of the same density, carries the same stresses from its weight and from the same gusts. From 9 km up the Moon's air has the density of Earth's at a sixth of the height above 9 km, so the flight band (35–45 km) holds the air of Earth's 4.3–5.8 km. | Author, 2026-09-28 ([sky-ship study](studies/sky_ships/README.md)) | Stands |
+| Rigid hydrogen ships are reasonable up to about 3 km in the flight band and at their best near 750–900 m; their structure would take all their lift near 7 km with 1930s materials and near 30 km with modern ones. Pressure hulls reach 280–350 m there, and wings carry their weight with the An-225's share at about 710 m of span. | Author, 2026-09-28 ([sky-ship study](studies/sky_ships/README.md)) | Stands; the hull model is fitted to four airships' weight statements |
+| Wings and rotors are cheap under lunar gravity: hovering takes a fifteenth of Earth's power and a kilometre on a wing a sixth of the energy, while buoyant lift per cubic metre is Earth's. The small flyers are winged or rotor-borne; from ferries up, the flyers are buoyant ships, which hold still at their berths for free. | Author, 2026-09-28 ([sky-fleet study](studies/sky_fleet/README.md)) | Stands |
+| People fly on their own power. A pedalled wing of about 11 m span flies level on about 63 W, within what an untrained adult holds for three hours; a foot-launched micro glider of about 9 m and 4.5 m² glides 15 to 1 at 8 m/s; a round canopy about 4.8 m across laid flat lands a person at 4 m/s. | Author, 2026-09-28 ([sky-fleet study](studies/sky_fleet/README.md)) | Stands |
+| A four-seat sky boat is an electric flyer that lifts off on rotors and cruises on a wing: about 700 kg, 11 kW to hover and about 0.74 kWh for a 10 km trip, a twenty-fourth of the same trip on Earth. | Author, 2026-09-28 ([sky-fleet study](studies/sky_fleet/README.md)) | Stands; sized with the Joby S4's technology |
+| Large sky ferries are rigid hydrogen ships of about 250 m carrying about 1,200 people at 25 m/s; a line every two or three minutes carries 24,000–36,000 people an hour each way. | Author, 2026-09-28 ([sky-fleet study](studies/sky_fleet/README.md)) | Stands |
+| At a car-like tenth of the metropolis's trips, sky boats fly more densely than NASA's urban air mobility spacing allows, which holds 7–8%; owned at the rate cars are owned in Tokyo, their berths would cover three-fifths of the metropolis's land, while a shared fleet of about 1.1 million fits in 65 km². | Author, 2026-09-28 ([sky-fleet study](studies/sky_fleet/README.md)) | Stands as a finding; the share of trips, ownership and the traffic system are open |
+| The flyers stack by height: wings, gliders and canopies below about 300 m above the ground, sky boats and air taxis to 1.5 km, sky ferries to 2.5 km; gliders soar to about 10 km by day; regional ships at the regional docks, 22–27 km above sea level; long-haul liners and freighters in the flight band; winged liners near 55 km; high platforms near 70 km. | Author, 2026-09-28 ([sky-fleet study](studies/sky_fleet/README.md)) | Stands, as a first arrangement |
+| Winged liners that take off and land on tilting rotors cross the Moon fast for little energy: a 300-seat liner reaches a mean destination in about 5 hours for about the energy per passenger-km of the largest airships. | Author, 2026-09-28 ([sky-fleet study](studies/sky_fleet/README.md)) | Stands as a finding; whether they serve the crown is open |

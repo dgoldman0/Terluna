@@ -21,6 +21,9 @@ and winds over the whole Moon come from a new climate product,
 and gusts from the cloud-resolving equatorial ring ([climate/crm](../../../climate/crm/README.md)); the port's traffic
 from the [summit tower study](../summit_tower/README.md#the-central-port).
 
+**Status.** The author adopted these findings on 2026-09-28 as the planning basis for the Open Moon's sky ships
+([decisions register](../../decisions.md#sky-ships-and-flyers)).
+
 **Evidence.** First-order sizing of the kind used to compare concepts.
 - **What is tested.** The models reproduce Lamb's apparent-mass coefficients, Woodward's gust moment for the
   Shenandoah and the elliptic wing's bending. Fitted to the weight statements of four rigid airships, the hull model

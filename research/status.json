@@ -148,7 +148,7 @@
     },
     {
       "topic": "habitation",
-      "condition": "design_concepts; summit_sky_tower_concept_sizing_for_gravity_and_wind; wind_devices_screened; central_port_chosen_24km_to_the_flight_band_35km2_about_1.5_million_present; port_fire_safety_first_order_at_0.16g; no complete sizing or service model; sky_ship_size_first_order_rigid_hulls_fitted_to_four_airships_wings_to_ten_transports; flyer_classes_from_canopies_to_long_haul_liners_sized_with_numbers_and_height_bands; long_haul_classes_drawn_at_the_crown_for_the_authors_choice",
+      "condition": "design_concepts; summit_sky_tower_concept_sizing_for_gravity_and_wind; wind_devices_screened; central_port_chosen_24km_to_the_flight_band_35km2_about_1.5_million_present; port_fire_safety_first_order_at_0.16g; no complete sizing or service model; sky_ship_size_first_order_rigid_hulls_fitted_to_four_airships_wings_to_ten_transports; flyer_classes_from_canopies_to_long_haul_liners_sized_with_numbers_and_height_bands; long_haul_classes_drawn_at_the_crown_for_the_authors_choice; sky_ship_and_flyer_findings_adopted_by_the_author_2026-09-28",
       "material": [
         "../habitation/README.md",
         "../ensemble/papers/babdd5f6-4920/seed-02.md",
@@ -160,7 +160,8 @@
         "studies/sky_ships/README.md",
         "../engineering/flight/",
         "studies/sky_fleet/README.md",
-        "../visualization/sky-fleet/"
+        "../visualization/sky-fleet/",
+        "../habitation/summit_metropolis/README.md"
       ],
       "unresolved": [
         "supported floor area and mass",

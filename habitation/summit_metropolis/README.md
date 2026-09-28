@@ -49,9 +49,16 @@ floors has berths.
   bending at the root, 21 km round each ring, goes into the frame, whose members need stiffening for a node level
   above and below: roughly 2 Mt of steel for three wide rings, about 6% of the frame. Cables from the frame above
   would need about a tenth of that.
-- **Crown.** The sealed long-haul terminal sits in the flight band. Its docking arms, as first drawn, cantilever
-  0.9–1.3 km at about 90 times their depth, which is not credible structure; they need deeper or braced
-  structure. At 30,000–50,000 long-haul passengers an hour, 2,000-passenger ships need 15–25 berths.
+- **Crown.** The sealed long-haul terminal sits in the flight band; the summit tower study's sized form makes it
+  eight storeys round the frame's top at 23.4 km. Its docking arms, as first drawn, cantilever 0.9–1.3 km at about
+  90 times their depth, which is not credible structure. The
+  [sky-fleet study](../../research/studies/sky_fleet/README.md#the-long-haul-ship-for-the-crown) sizes the arms for
+  each long-haul class instead: deep trusses running north and south from the frame above the
+  terminal, with ships nose-in on their lee side. For the crown's 31,900–53,100 long-haul passengers an hour it
+  compares 27 berths of 500 m liners on three levels (arms up to 772 m), 8 of 750 m on two (424 m), 4 of 1 km
+  (238 m) and one of 1.5 km, drawn to scale in visualization/sky-fleet. It recommends the 750 m liner, with winged
+  liners added for fast trips; the choice is open. Berths in the lee sit in the tower's wake, which needs a wind
+  study before they are fixed.
 
 The tower model still sizes a square lattice with a band every 200 m. The legs, the transfer ring, the rings and
 their cantilevers, and the disks and their core are yet to be sized in it.
@@ -131,6 +138,33 @@ been computed.
 drained roofs, canals and rain gardens, with drainage as a main job of the city's form. Districts set round the
 crater lakes. The city flows in under the tower between its legs.
 
+## Flyers
+
+The author adopted the flyer findings of the [sky-ship](../../research/studies/sky_ships/README.md) and
+[sky-fleet](../../research/studies/sky_fleet/README.md) studies on 2026-09-28
+([decisions register](../../research/decisions.md#sky-ships-and-flyers)). What they mean for the summit:
+
+- **People on wings.** A pedalled wing of about 11 m flies level on 63 W, within what an untrained adult holds for
+  three hours. A foot-launched micro glider of 9 m and 4.5 m² glides 15 to 1, so one launched from ring 0, 3 km up,
+  reaches anywhere in the metropolis. Canopies about 4.8 m across laid flat land a person at 4 m/s from any rim of
+  the port; the summit tower study's canopies, 3.7–4.5 m across with a coefficient of 1.3, are about a tenth larger
+  than Knacke's coefficients need. Thermals rise through a daytime mixed layer up to about 12 km deep on the
+  equatorial ring's land, and there are none at night.
+- **Sky boats.** Four-seat electric sky boats of about 700 kg hover on 11 kW and fly 10 km on 0.74 kWh. In a
+  planning case after Tokyo's 23 wards, with sky boats taking cars' tenth of 280 million trips a day, about 290,000
+  are aloft at the busy hour, 91 over each km². NASA's urban air mobility spacing, in lanes stacked every 61 m from
+  300 m to 1.5 km, holds sky boats for 7–8% of trips; a car-like share needs dense automated traffic management.
+  Owned at Tokyo's rate for cars, their berths would cover three-fifths of the land; shared, 1.1 million serve the
+  same trips from 65 km² of berths on roofs and façades.
+- **Sky ferries.** Rigid hydrogen ferries of about 250 m carry 1,200 people at 25 m/s. Lines every two or three
+  minutes carry 24,000–36,000 people an hour each way at 42 km/h with their stops, about half what the busiest metro
+  lines of Hong Kong and Tokyo carry. About 890 are aloft at the busy hour.
+- **Energy.** All the metropolis's flying uses about 1.0 GW, half a percent of its 200 GW.
+- **Heights.** Wings, gliders and canopies fly below about 300 m above the ground, sky boats and air taxis to
+  1.5 km and ferries to 2.5 km; regional ships use the docks 10–15 km above the summit, long-haul liners and
+  freighters the flight band, and winged liners cruise near 55 km.
+- **Storms.** Small flyers land for the afternoon storms, and the backbone carries on.
+
 ## The explorable map
 
 An Unreal map of the metropolis and its landscape, with the tower at the centre, is being built in
@@ -151,6 +185,9 @@ it reaches milestones:
 - Sizing the legs, the transfer ring, the rings and their cantilevers, the disks and their core, and the crown's
   docking arms in the tower model.
 - The number and spacing of the disks, and the width of the wide lower rings (150 m is an example).
-- The long-haul ship class and berth count.
+- The long-haul ship class: four sizes compared and drawn on the sized form (sky-fleet study, visualization/sky-fleet).
+  The study recommends the 750 m liner, with winged liners on landing pads for fast trips. A wind study of the
+  crown's wake comes before the berths are fixed.
+- The sky boats' share of trips, their ownership and their traffic system.
 - The land per person for food, and the power and heat plan for the chosen population.
 - The metropolis through the 354-hour night.
