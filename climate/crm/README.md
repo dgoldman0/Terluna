@@ -239,32 +239,63 @@ climate/gcm/.venv/bin/python -m climate.crm.cm1_run run ring_80n_lsw --hours 3 -
 climate/gcm/.venv/bin/python -m climate.crm.ring_analysis ring_80n_lsw --from-day 29.5
 ```
 
-## Tilted rings, a candidate
+## Tilted rings
 
-A ring along a great circle tilted to the equator, short of the poles, keeps
-the Sun sweeping it once a lunar day while it swings between its tilt's
-latitude north and south, crossing the equator twice. Two such rings, tilted
-about 35° and 65°, would cover every latitude to 65° in both hemispheres in
-continuous runs, and let storms and air drift between the tropics and high
-latitudes. They need four changes, each testable:
+Four rings run along great circles tilted 45° to the equator, in two mirrored
+pairs:
 
-- **The Sun** from each column's latitude and longitude along the great circle,
-  which spherical geometry gives exactly.
+- **A** crosses the equator heading north at 0° E and heading south at 180° E,
+  and reaches 45° N over 90° E and 45° S over 270° E.
+- **A′** is A mirrored across the equator. It crosses at the same two points,
+  but reaches 45° S over 90° E and 45° N over 270° E, so at every longitude the
+  pair stands the same distance from the equator on either side.
+- **B and B′** are the same pair turned 90° in longitude, crossing the equator
+  at 90° E and 270° E.
+
+Together they reach every longitude at every latitude up to 45°, and the Sun
+sweeps each of them once a lunar day, with local time advancing steadily
+around the ring.
+
+**Crossings.** Two great circles cross at two opposite points, so the four
+rings cross at 12. Four lie on the equator, at 0°, 90°, 180° and 270° E, where
+A meets A′ and B meets B′. The other eight lie at 35.3° N and 35.3° S, at 45°,
+135°, 225° and 315° E, where each ring of one pair meets each ring of the
+other. At a crossing two runs simulate the same place under the same Sun, each
+in a vertical slice facing a different way. Where they agree, a result does
+not depend on the slice's direction; where they disagree, the spread measures
+the error of the two-dimensional approximation there. Agreement cannot reveal
+errors every ring shares, such as the missing inflow from the sides. The
+comparisons are statistical: composites by local time over a patch around each
+crossing through the analysed lunar day, since independent runs do not line up
+storm by storm. Every ring takes its local time from its longitude, so the two
+rings at a crossing see the same Sun at the same moment.
+
+**The equatorial ring at the crossings.** It passes through the four
+equatorial crossings too. It joins those comparisons only after a rerun with
+the GCM's mean vertical wind at the equator (rising at 1–4 mm/s); as run so
+far it differs from the tilted rings in that forcing as well as in direction.
+
+A tilted ring needs five things beyond a ring on a circle of latitude:
+
+- **The Sun** from each column's latitude and longitude along the great
+  circle, which spherical geometry gives exactly.
 - **A Coriolis parameter that varies along the ring** and changes sign at the
-  equator crossings. CM1 keeps a two-dimensional array for its beta-plane
-  option. The patch would fill it along x and use it in the Coriolis and
-  balancing-pressure terms, and a test would check the inertial period at each
-  point.
-- **Land, sea, sea temperatures and land wetness per stretch** of ring, from
-  the GCM along the path.
-- **One upper-air profile for the whole path.** That's defensible because the
+  equator crossings. CM1's beta-plane option carries a two-dimensional array
+  of it into the Coriolis terms; a patch fills it along x and makes it act on
+  departures from the reference wind, as `lspgrad = 1` does on an f-plane.
+- **Land, sea, sea temperatures and land wetness column by column** from the
+  GCM along the path.
+- **One upper-air profile for the whole path.** That is defensible because the
   GCM's air is nearly uniform with latitude: temperatures agree within 1.5 °C
   at every level from the equator to 80°, and vapour aloft is about 20% lower
   toward the poles.
+- **The GCM's mean vertical wind at each column's latitude**, which along a
+  tilted ring changes from rising in the tropics to sinking in the
+  mid-latitudes, so CM1's large-scale vertical advection has to vary along x.
 
 They stay two-dimensional, so storms still organise into lines. Each is a full
-great circle at the equatorial ring's cost, about 8.6 hours of machine time for
-two lunar days. Whether to run them waits on what the polar rings show.
+great circle the size of the equatorial ring; a pair run together on 4 threads
+each takes about 11–13 hours.
 
 ## The gravity pair
 
