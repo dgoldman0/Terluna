@@ -365,5 +365,116 @@ and the wind carries about 1.95 GW through it. The Betz limit on that is 1.16 GW
 Its floors are rings in the lower tower and disks round a central core from about 12 km up, each a block of a few
 storeys with a park and open-air shops on its roof, and the wide lower rings cantilever from the frame
 ([decisions](../../decisions.md#the-summit-port-and-metropolis),
-[metropolis brief](../../../habitation/summit_metropolis/README.md)). The frame and floor figures above still
-assume the square lattice and a band every 200 m; the tower model has yet to size the new form.
+[metropolis brief](../../../habitation/summit_metropolis/README.md)). The frame and floor figures above assume
+the square lattice and a band every 200 m; the next section sizes the chosen form.
+
+## The chosen form, sized by hand
+
+[form.py](form.py) designs the chosen form system by system and sizes it by hand calculation:
+- forces from statics;
+- members at the study's allowable stress (S690 at 323 MPa), and cables of 1,770 MPa wire at 800 MPa;
+- member buckling held by a slenderness limit;
+- the frame's sway, period and buckling from the lattice model's Rayleigh routine.
+
+It is first-order design, as at concept stage; no structural analysis model has checked it. The results are in
+[results/summit_tower_form.json](results/summit_tower_form.json).
+
+**Levels.** Thirteen floor levels on every second node level (1,532 m apart), and the terminal:
+
+| Level | Height | Size | Storeys | Floor |
+|---|---|---|---|---|
+| Ring 0 | 3.1 km | 150 m wide, 6.7 km across | 9 m and 6 m | 6.1 km² |
+| Ring 1 | 4.6 km | 120 m wide | 2 × 6 m | 4.4 km² |
+| Ring 2 | 6.1 km | 100 m wide | 2 × 6 m | 3.3 km² |
+| Ring 3 | 7.7 km | 80 m wide | 3 × 5 m | 3.5 km² |
+| Ring 4 | 9.2 km | 60 m wide | 3 × 5 m | 2.3 km² |
+| Ring 5 | 10.7 km | 50 m wide | 3 × 5 m | 1.6 km² |
+| Disks 1–7 | 12.3–21.4 km | 3.0 km to 0.6 km across | 3 × 5 m, over 30% of the deck | 17.0 km² |
+| Terminal | 23.4 km | round the frame's top | 8 × 5 m | 1.0 km² |
+
+That is 39.3 km² of floor against the programme's 34.9 km². Ring 0 takes the base zone's 6 km², so the ground
+between the legs stays open.
+
+**The frame.** Each member carries a 48th of the weight above it and its share of the wind's overturning moment,
+along its helix:
+
+| Height | Member breadth | Lean from vertical | Force | Steel |
+|---|---|---|---|---|
+| 3.1 km | 48 m | 30° | 4.7 GN | 14.4 m² |
+| 12 km | 22 m | 15° | 2.1 GN | 6.4 m² |
+| 18 km | 9.4 m | 6° | 0.41 GN | 1.3 m² |
+| 23 km | 6 m | 2° | 0.07 GN | 0.22 m² |
+
+Rings brace the members at every node level. Above 5.7 km the node levels are more than 20 member breadths apart,
+so 70 further rings brace the members between them. Near the top they are about 120 m apart, as on Shukhov's
+towers. Members keep a 6 m minimum breadth near the top.
+
+**The base.** The diagrid lands on the transfer ring's 24 nodes: six on the legs, and three between each pair of
+legs, which the arch below takes at its crown and its two posts. So the arches carry three-quarters of the tower's
+weight to the feet, and the legs one quarter with the wind's overturning:
+- **Legs:** 3.6 km long, leaning 17.5°, carrying 14.7 GN each. Their 45 m² of steel is in four chords, each chord
+  a lattice box about 12 m across.
+- **Arches:** 8.0 km long over a 4.4 km span, carrying 11.8 GN at the springing on 36 m² of steel. Their ribs are
+  about 100 m deep and wide, twice the 55 m first drawn.
+- **Transfer ring:** 4.5 GN of hoop compression from the legs' tops, on 14 m² of steel.
+- **Feet:** 37 GN each, on 37,000 m² at 1 MPa. They push outward with 8.5 GN, held by a buried tie between them
+  along the hexagon's edges: 26 m² of steel, or prestressed rock anchors.
+
+**The rings.** Radial trusses every 15 m cantilever from the frame. At the frame they are a sixth of the ring's width
+deep, tapering to 2 m at the inner edge, and they are pre-cambered for their dead load. Ring 0's trusses are 25 m
+deep with chords of 0.08 m². In lunar gravity a 150 m cantilever carrying a park and two storeys bends like a 61 m
+one on Earth.
+
+A box girder along the frame takes the trusses' moment to the frame as torsion. It rests on the nodes, on a post
+from the node below at each mid-span, and on posts from the diagonals below at the quarter points; ring 0's girder
+spans 218 m and weighs 38 t/m. The frame takes the rings' moments as hoop forces a node level above and below,
+which adds 1.5 Mt of steel for the six rings.
+
+**The disks.** Each disk is a spoked wheel. The deck is the compression chord, and 144 radial cables are the tension
+chord. The cables hang from the rim down to a tension hub on the core a fifth of the radius below the deck, with
+eight posts each up to the deck. The chords' horizontal forces balance at the rim and at the hubs, so the frame
+takes only the deck's weight.
+- **Disk 1** (3.0 km across): the cables hang 298 m below the deck at the core. They are 0.72 m thick, the hub
+  rings have 21 m² of steel, and the structure weighs 490 kg/m².
+- **Disk 7** (0.6 km across): 58 m deep, with 0.13 m cables.
+
+The lowest hub, 300 m under disk 1, can serve as the station for air shuttles in the hollow below.
+
+**The core** is a 120 m lattice tube 11.5 km long, from disk 1's lower hub to the terminal, with 24 lift shafts. It
+carries only its own weight between the disks' hubs: 0.46 Mt.
+
+**The terminal** has eight storeys (1 km²) round the frame's top, with its eight docking arms; the sealed disks
+below hold the rest of the long-haul programme. It replaces the 950 m stack of tiers first drawn, which would have
+held 37 km² and weighed as much as a disk.
+
+**Totals.**
+
+| Part | Mass |
+|---|---|
+| Frame members | 44.9 Mt |
+| Node rings and the rings between them | 2.6 Mt |
+| Frame strengthening at the rings | 1.5 Mt |
+| Legs | 10.3 Mt |
+| Arches | 12.5 Mt |
+| Transfer ring | 3.0 Mt |
+| Buried tie | 5.4 Mt |
+| Ring structures | 2.7 Mt |
+| Disk structures | 6.8 Mt |
+| Core | 0.5 Mt |
+| **Steel** | **90 Mt** |
+| Floors, parks and buildings | 57.8 Mt |
+
+The parks drive the cost: 28 km² of decks carry 1.3 t/m² of soil and slab. The steel comes to nearly three times the
+square lattice's 33 Mt, which carried 17.5 Mt of light floors. The frame's first period is 104 s (the square
+lattice's is 45 s), its sway in the service gust is 30 m (1/800 of its height), and its whole-frame buckling
+factor is 18.
+
+**What this changes in the drawn tower:**
+- the arches need ribs about 100 m deep and wide;
+- the legs' chords are lattice boxes;
+- the upper frame needs rings between the node levels;
+- the terminal shrinks to eight storeys;
+- the rings stand on posts at the quarter points.
+
+**Left out:** joints and nodes, fatigue, construction stages, gust dynamics beyond one factor, ice, the pressurised
+halls' own structure, and the ground's mechanics under the feet and the tie.
