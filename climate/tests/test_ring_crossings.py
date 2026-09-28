@@ -110,3 +110,20 @@ def test_values_at_a_sigma_level_interpolate_in_log_pressure():
     w1 = np.log(1200.0 / 1140.0) / np.log(1200.0 / 1100.0)
     assert got == pytest.approx([w0, 5.0 + w1])
     assert rc.at_sigma(field, prs, np.array([1000.0e2, 1200.0e2]), 0.8)[0] == pytest.approx(2.0)
+
+
+def test_a_point_on_a_ring_is_found_along_it():
+    assert rc.along_ring(A, 0.0, 0.0) == pytest.approx(0.0, abs=1e-9)
+    assert rc.along_ring(A, 0.0, 180.0) == pytest.approx(0.5, abs=1e-9)
+    assert rc.along_ring(A, 45.0, 90.0) == pytest.approx(0.25, abs=1e-9)
+    assert rc.along_ring(A_PRIME, 0.0, 0.0) == pytest.approx(0.5, abs=1e-9)
+
+
+def test_harmonic_fit_keeps_the_day_and_drops_short_wiggles():
+    centres = np.arange(36) * 10.0 - 175.0
+    a = np.radians(centres)
+    day = 0.3 - 0.8 * np.cos(a) + 0.2 * np.sin(2 * a)
+    wiggle = 0.1 * np.cos(9 * a)
+    both = np.column_stack([day + wiggle, 2 * day])                           # two levels
+    fit = rc.harmonic_fit(both, centres, harmonics=4)
+    assert np.allclose(fit[:, 0], day, atol=1e-9) and np.allclose(fit[:, 1], 2 * day, atol=1e-9)

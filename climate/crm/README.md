@@ -370,6 +370,46 @@ directions share that night-time excess, so it comes from what every ring leaves
 out or from the GCM. The GCM also rains more here: 129–143 mm per lunar day on
 its land cells, most of it in the early afternoon, against the rings' 7–70 mm.
 
+## A three-dimensional box at a crossing
+
+Case `box_0e` tests what the rings' two dimensions do to the air near the
+ground, the cloud and the rain. It is ring A's patch where it crosses A′
+(0° N, 0° E) given a second horizontal dimension: 64 × 64 columns at the rings'
+6.0 km spacing, 385 km square and wrapping round on all four sides, on their
+111 levels. It keeps what ring A has there:
+
+- **the upper air and the wind along the ring**, the same reference profile and
+  nudging, with x running along ring A (45° east of north);
+- **land as wet as ring A's columns within 100 km** (0.86 on average, set as the
+  0.90 class), all of it land;
+- **the GCM's mean vertical wind there**, rising at up to 4.7 mm/s;
+- **the Sun of the site**, the same across the box. At this size the box spans
+  12.7° of longitude, a day of local time, which a box that wraps round cannot
+  carry. On the equator there is no Coriolis force.
+
+A box cannot make the planet-wide day–night circulation that the rings carry
+along their length. Keeping only its longest waves (2,180 km and more), that
+circulation cools the lowest 3 km at the crossing by up to 0.8 K/day around noon
+and 0.18 K/day on average, and moistens the mornings by up to 0.45 g/kg/day:
+as much as the GCM's vertical wind does there. The box takes it as a heating
+and moistening prescribed by local time and height (`var11 = 1`, read from
+`terluna_lsadv.txt`): the mean of A and A′ over their second lunar day,
+refitted with the day's first four harmonics, up to 16 km. The box then differs
+from ring A at the crossing in its second dimension, its uniform land and Sun,
+and its size; the rings' circulation itself stays untested.
+
+The patch was checked in two ways. The rebuilt CM1 reproduces the first day of
+`ring_80n_lsw` bit for bit. In two three-hour runs of the box, a heating and a
+moistening prescribed at 25–35 km, falling between two local-time bins, arrive
+at 98% of the amounts expected (the nudging takes back the rest) and at 99.8%.
+Two lunar days take about 7–10 hours on 8 threads, with 0.5 GB of memory and
+about 16 GB of output.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e     # after ring_a and ring_a_prime
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_0e --hours 12 --threads 8
+```
+
 ## The gravity pair
 
 If lunar convection were Earth's stretched six times in size and duration, a

@@ -85,14 +85,17 @@ READING_RULE = ('Composites are by local hour angle (0 = noon, negative = mornin
 
 
 def grads_layout(ctl: Path):
+    """The column count (nx, times ny for a three-dimensional run) and each variable's name and level count."""
     lines = ctl.read_text().splitlines()
     nx = int(next(l for l in lines if l.startswith('xdef')).split()[1])
+    ny = int(next((l for l in lines if l.startswith('ydef')), 'ydef 1').split()[1])
     i = next(k for k, l in enumerate(lines) if l.lower().startswith('vars'))
-    return nx, [(l.split()[0], max(1, int(l.split()[1]))) for l in lines[i + 1:i + 1 + int(lines[i].split()[1])]]
+    return nx * ny, [(l.split()[0], max(1, int(l.split()[1]))) for l in lines[i + 1:i + 1 + int(lines[i].split()[1])]]
 
 
 def read_snapshot(case: Path, n: int, kind: str = 's') -> dict:
-    """One output time: surface fields as (nx,) arrays, sections as (nz, nx)."""
+    """One output time: surface fields as (nx,) arrays, sections as (nz, nx). A three-dimensional run's columns
+    are laid out row by row, x fastest, as (ny * nx,) and (nz, ny * nx)."""
     nx, layout = grads_layout(case / f'cm1out_{kind}.ctl')
     raw = np.fromfile(case / f'cm1out_t{n:06d}_{kind}.dat', dtype='<f4')
     out, offset = {}, 0

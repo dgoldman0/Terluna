@@ -105,6 +105,67 @@ def heading_deg(path: dict, along: float) -> float:
     return float(np.degrees(np.arctan2(velocity @ east, velocity @ north))) % 360.0
 
 
+def along_ring(path: dict, lat_deg: float, lon_deg: float) -> float:
+    """Where on a ring a point lies (or the point of the ring nearest it), as a share of its length from x = 0."""
+    start, ahead = _frame(path)
+    la, lo = np.radians(lat_deg), np.radians(lon_deg)
+    point = np.array([np.cos(la) * np.cos(lo), np.cos(la) * np.sin(lo), np.sin(la)])
+    return float(np.round(np.arctan2(point @ ahead, point @ start) / (2.0 * np.pi), 12)) % 1.0
+
+
+def harmonic_fit(values, centres_deg, harmonics: int) -> np.ndarray:
+    """A periodic series (bins along the first axis) refitted, level by level, with its mean and the first
+    `harmonics` harmonics of the day, by least squares."""
+    a = np.radians(np.asarray(centres_deg, dtype=float))
+    basis = np.column_stack([np.ones_like(a)] + [f(n * a) for n in range(1, harmonics + 1) for f in (np.cos, np.sin)])
+    coef, *_ = np.linalg.lstsq(basis, np.asarray(values, dtype=float), rcond=None)
+    return basis @ coef
+
+
+def day_night_advection(names, lat_deg: float, lon_deg: float, from_day: float, wavenumbers: int, bins: int,
+                        harmonics: int, top_m: float, radius_m: float = RADIUS_M) -> dict:
+    """The heating and moistening the planet-wide day-night circulation brings to a place on rings along great
+    circles: on each ring, the advection along it by the flow of its longest waves (wavenumbers up to
+    `wavenumbers` round the ring, which leaves out storms and storm systems), averaged over its columns within
+    radius_m of the place, by local time in `bins` bins through the span from from_day; the rings averaged, each
+    level refitted with the day's mean and first harmonics, and nothing above top_m."""
+    from climate.crm.cm1_run import solar_day_s
+    day_s = solar_day_s()
+    edges = np.linspace(-180.0, 180.0, bins + 1)
+    total_th, total_qv, used = 0.0, 0.0, []
+    for name in names:
+        case = RUNS / name
+        geo = ra.case_geometry(case)
+        record = geo['record']
+        tap, start = record['configuration']['output_s'], record['configuration']['start_hour_angle_deg']
+        nx, dx, zh = record['grid']['nx'], geo['dx'], geo['zh']
+        cols = patch_columns(nx, along_ring(ring_path(record), lat_deg, lon_deg), radius_m, dx)
+        k = np.fft.rfftfreq(nx, d=1.0 / nx)
+        keep = (k <= wavenumbers)[None, :]
+        slope = keep * (2j * np.pi * k / (nx * dx))[None, :]
+        low = lambda f: np.fft.irfft(np.fft.rfft(f, axis=-1) * keep, n=nx, axis=-1)[:, cols]
+        ddx = lambda f: np.fft.irfft(np.fft.rfft(f, axis=-1) * slope, n=nx, axis=-1)[:, cols]
+        th, qv, count = np.zeros((bins, zh.size)), np.zeros((bins, zh.size)), np.zeros(bins)
+        outputs = sorted(int(p.name[8:14]) for p in case.glob('cm1out_t*_s.dat'))
+        for n in [n for n in outputs if (n - 1) * tap >= from_day * 86400.0]:
+            d = ra.read_snapshot(case, n)
+            u = low(d['uinterp'])
+            b = min(int(np.digitize(local_hour_angle(start, lon_deg, (n - 1) * tap, day_s), edges)) - 1, bins - 1)
+            th[b] -= (u * ddx(d['th'])).mean(axis=1)
+            qv[b] -= (u * ddx(d['qv'])).mean(axis=1)
+            count[b] += 1
+        if (count == 0).any():
+            raise RuntimeError(f'{name}: no snapshot in some local-time bins after day {from_day}')
+        total_th, total_qv = total_th + th / count[:, None], total_qv + qv / count[:, None]
+        used.append(dict(case=name, columns=[int(c) for c in cols], snapshots=int(count.sum())))
+    centres = 0.5 * (edges[1:] + edges[:-1])
+    below = zh <= top_m
+    fit = lambda v: np.where(below[None, :], harmonic_fit(v / len(names), centres, harmonics), 0.0)
+    return dict(z_m=zh, hour_angle_deg=centres, theta_k_s=fit(total_th), qv_kg_kg_s=fit(total_qv), rings=used,
+                wavenumbers=wavenumbers, shortest_wave_km=nx * dx / wavenumbers / 1000.0, harmonics=harmonics,
+                top_m=top_m, from_day=from_day)
+
+
 def patch_columns(nx: int, along: float, radius_m: float, dx: float) -> np.ndarray:
     """Columns whose centres lie within radius_m, along the ring, of the point at `along` (share of the length)."""
     length = nx * dx

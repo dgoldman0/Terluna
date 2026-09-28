@@ -288,6 +288,70 @@ BETA_NEW = """              ! beta plane:
 NUDGE_WEIGHT = ("          terluna_w = 1.0   ! Terluna: above var14 m only, fully above var15 m\n"
                 "          if( var15.gt.var14 ) terluna_w = min(1.0,max(0.0,(zh(1,1,k)-var14)/(var15-var14)))\n")
 
+ADVECTION_DECLARATIONS = """      integer, save :: terluna_nb = 0, terluna_nl = 0   ! Terluna: large-scale horizontal advection by local time
+      real, dimension(:), allocatable, save :: terluna_az
+      real, dimension(:,:), allocatable, save :: terluna_ath,terluna_aqv
+      real :: terluna_h,terluna_f,terluna_th,terluna_qv
+      integer :: terluna_b0,terluna_b1,terluna_l,terluna_m
+"""
+
+ADVECTION_BLOCK = """!--------------------------------------------------------------------
+!  Terluna: large-scale horizontal advection by local time (var11 = 1), the heating and moistening the
+!  planet-wide day-night circulation brings to a site. terluna_lsadv.txt holds the local-time bin count
+!  and the level count, the level heights (m), then for each bin, evenly spaced in hour angle from -180
+!  degrees, the theta tendency (K/s) and the vapour tendency (kg/kg/s) at each level. They are applied
+!  the same across the domain, linear in local time between bin centres (round the day) and in height,
+!  and zero outside the levels. The hour angle is the radiation's, var18 + 360 mtime / var19 degrees.
+
+    IF( var11.gt.0.5 )THEN
+      if( terluna_nb.eq.0 )then
+        open(unit=96,file='terluna_lsadv.txt',status='old',action='read')
+        read(96,*) terluna_nb,terluna_nl
+        allocate( terluna_az(terluna_nl) , terluna_ath(terluna_nl,terluna_nb) , terluna_aqv(terluna_nl,terluna_nb) )
+        read(96,*) terluna_az
+        do terluna_m=1,terluna_nb
+          read(96,*) terluna_ath(:,terluna_m)
+          read(96,*) terluna_aqv(:,terluna_m)
+        enddo
+        close(unit=96)
+        if( myid.eq.0 ) print *,'  Terluna: large-scale horizontal advection by local time; bins, levels = ',terluna_nb,terluna_nl
+      endif
+      terluna_h = modulo( var18 + 360.0*real(mtime/var19) + 180.0 , 360.0 )*real(terluna_nb)/360.0 - 0.5
+      terluna_m = int(floor(terluna_h))
+      terluna_f = terluna_h - real(terluna_m)
+      terluna_b0 = modulo(terluna_m,terluna_nb) + 1
+      terluna_b1 = modulo(terluna_m+1,terluna_nb) + 1
+      do k=1,nk
+        terluna_th = 0.0
+        terluna_qv = 0.0
+        if( zh(1,1,k).ge.terluna_az(1) .and. zh(1,1,k).le.terluna_az(terluna_nl) )then
+          terluna_l = 1
+          do terluna_m=1,terluna_nl-1
+            if( zh(1,1,k).ge.terluna_az(terluna_m) ) terluna_l = terluna_m
+          enddo
+          tem = (zh(1,1,k)-terluna_az(terluna_l))/(terluna_az(terluna_l+1)-terluna_az(terluna_l))
+          terluna_th = (1.0-terluna_f)*((1.0-tem)*terluna_ath(terluna_l,terluna_b0)+tem*terluna_ath(terluna_l+1,terluna_b0))  &
+                      +terluna_f*((1.0-tem)*terluna_ath(terluna_l,terluna_b1)+tem*terluna_ath(terluna_l+1,terluna_b1))
+          terluna_qv = (1.0-terluna_f)*((1.0-tem)*terluna_aqv(terluna_l,terluna_b0)+tem*terluna_aqv(terluna_l+1,terluna_b0))  &
+                      +terluna_f*((1.0-tem)*terluna_aqv(terluna_l,terluna_b1)+tem*terluna_aqv(terluna_l+1,terluna_b1))
+        endif
+        do j=1,nj
+        do i=1,ni
+          thten1(i,j,k) = thten1(i,j,k) + terluna_th
+        enddo
+        enddo
+        if( imoist.eq.1 )then
+          do j=1,nj
+          do i=1,ni
+            qten(i,j,k,nqv) = qten(i,j,k,nqv) + terluna_qv
+          enddo
+          enddo
+        endif
+      enddo
+    ENDIF
+
+"""
+
 # (file, marker, edits) in the order applied. An edit is (old, new, count): old must occur exactly count
 # times; an empty old prepends new. A marker appears only in text its patch adds.
 CPP_RULE = ('$(CPP) $(DM) $(OMP) $(DP) $(ADV) $(OUTPUTOPT) $*.F > $*.f90',
@@ -406,6 +470,12 @@ PATCHES = [
         ('    if( lspgrad.eq.3 )then\n      ! for lspgrad = 3\n',
          CORIOLIS_BLOCK + '    if( lspgrad.eq.3 )then\n      ! for lspgrad = 3\n', 1)]),
     ('solve2.F', 'Terluna: acting on departures from the base-state wind', [(BETA_OLD, BETA_NEW, 1)]),
+    ('solve1.F', 'Terluna: large-scale horizontal advection by local time', [
+        ('      real :: dttmp,rtime,rdt,tem,tem0,tem1,tem2,thrad,prad,terluna_w\n',
+         '      real :: dttmp,rtime,rdt,tem,tem0,tem1,tem2,thrad,prad,terluna_w\n' + ADVECTION_DECLARATIONS, 1),
+        ('!-------------------------------------------------------------------\n!    NOTE:  now ok to change dum7,dum8\n',
+         ADVECTION_BLOCK + '!-------------------------------------------------------------------\n'
+         '!    NOTE:  now ok to change dum7,dum8\n', 1)]),
 ]
 
 
@@ -640,6 +710,22 @@ for _name, _node in (('ring_a', 0.0), ('ring_a_prime', 180.0), ('ring_b', 90.0),
                 'column\'s latitude')
 WETNESS_CLASSES = ((20, 0.05), (21, 0.10), (22, 0.15), (23, 0.20), (25, 0.30), (26, 0.40), (27, 0.50), (28, 0.60),
                    (29, 0.75), (30, 0.90))                    # land-use rows given over to the placeholder land at these wetnesses
+# A three-dimensional box where rings A and A-prime cross (0 N, 0 E): ring A's patch there given a second horizontal
+# dimension, to show what the rings' two-dimensionality does. It keeps ring A's column spacing, levels, upper-air
+# reference and wind along the ring (its x axis runs along ring A, 45 degrees east of north there), and takes the
+# land wetness, ground temperature and GCM vertical wind of ring A's columns within 100 km of the crossing, all
+# land. The Sun is the site's, the same across the box; on the equator there is no Coriolis force. The box cannot
+# make the planet-wide day-night circulation that the rings carry along their length.
+# The box also takes the heating and moistening the rings' own day-night circulation brings there: the advection
+# along each ring by its longest waves (wavelengths of 2,180 km and more), the mean of rings A and A-prime over their
+# second lunar day by local time, refitted with the day's first four harmonics, up to 16 km.
+CASES['box_0e'] = dict(
+    CASES['ring'], kind='box', nx=64, ny=64, site=dict(ring='ring_a', lat_deg=0.0, lon_deg=0.0, radius_m=100.0e3),
+    land_moisture='gcm', large_scale_w='gcm',
+    day_night=dict(rings=('ring_a', 'ring_a_prime'), from_day=29.5, wavenumbers=5, bins=36, harmonics=4, top_m=16000.0),
+    purpose='ring A\'s patch where it crosses A-prime (0 N, 0 E) as a 3-D box 385 km square, all land as wet as the '
+            'GCM\'s beneath the patch, the Sun crossing it once a lunar day, the 5% dimmer shield, ring A\'s upper-air '
+            'reference and the GCM design case\'s mean vertical wind there')
 
 
 def gcm_soil(folder: Path) -> dict:
@@ -890,6 +976,41 @@ def path_surface(lat, lon, dx, sea_k, land_k, wetness, half_width_deg=0.5):
     return segments, float(wet.mean()), product['sha256']
 
 
+def box_site(cfg: dict, zw, nx_ring: int) -> dict:
+    """What a box takes from the ring it extends: the ring's GCM reference (upper air and wind along the ring), and
+    over the ring's columns within the site's radius of it, the mean land wetness and ground temperature of the land
+    columns and the mean GCM vertical wind on the w levels zw."""
+    import numpy as np
+    site = cfg['site']
+    ring = CASES[site['ring']]
+    track = tilted_path(nx_ring, ring['tilt_deg'], ring['node_deg'])
+    ref = gcm_path_reference(track['lat'], track['lon'], ring['tilt_deg'], zw)
+    a, b = np.radians(site['lat_deg']), np.radians(track['lat'])
+    cosd = np.sin(a) * np.sin(b) + np.cos(a) * np.cos(b) * np.cos(np.radians(track['lon'] - site['lon_deg']))
+    centre = int(np.argmax(cosd))
+    length = 2.0 * math.pi * planet()['radius_m']
+    reach = int(site['radius_m'] // (length / nx_ring))
+    cols = (centre + np.arange(-reach, reach + 1)) % nx_ring
+    segments, _, surface_sha = path_surface(track['lat'][cols], track['lon'][cols], 1.0, ref['sea_k'][cols],
+                                            ref['land_k'][cols], ref['wetness'][cols])
+    land = np.array([s[2] == 1 for s in segments])
+    if not land.any():
+        raise ValueError(f'no land within {site["radius_m"] / 1000:.0f} km of the site on {site["ring"]}')
+    return dict(ref=ref, columns=[int(c) for c in cols], land_share=float(land.mean()), surface_product=surface_sha,
+                wetness=float(ref['wetness'][cols][land].mean()), ground_k=float(ref['land_k'][cols][land].mean()),
+                w_m_s=[float(v) for v in np.asarray(ref['w_columns'])[cols].mean(axis=0)])
+
+
+def write_day_night(path: Path, forcing: dict) -> None:
+    """terluna_lsadv.txt: the local-time bin and level counts, the level heights (m), then per bin (evenly spaced in
+    hour angle from -180 degrees) a line of theta tendencies (K/s) and a line of vapour tendencies (kg/kg/s)."""
+    import numpy as np
+    z, th, qv = (np.asarray(forcing[k], float) for k in ('z_m', 'theta_k_s', 'qv_kg_kg_s'))
+    path.write_text(f'{th.shape[0]} {z.size}\n' + ' '.join(f'{v:.3f}' for v in z) + '\n'
+                    + ''.join(' '.join(f'{v:.6e}' for v in a) + '\n' + ' '.join(f'{v:.6e}' for v in b) + '\n'
+                              for a, b in zip(th, qv)))
+
+
 def write_vertical_wind_2d(path: Path, zw, w_columns) -> None:
     """terluna_wls2d.txt: the column and level counts, the level heights (m), then one line per column of its
     vertical wind (m/s), columns evenly spaced from x = 0."""
@@ -924,12 +1045,13 @@ def case_settings(cfg, nx, dx, nz, ztop, air, gravity):
     length = nx * dx
     s = time_scale(cfg, gravity)
     pair = cfg.get('kind') == 'pair'
-    latitude = cfg.get('latitude_deg', 0.0)
+    box = cfg.get('kind') == 'box'                                       # 3-D, one site: the Sun the same across it
+    latitude = cfg['site']['lat_deg'] if box else cfg.get('latitude_deg', 0.0)
     tilted = cfg.get('kind') == 'tilted'
     turning = coriolis(90.0) if tilted else coriolis(latitude)           # tilted: twice the rotation rate, times
     rotating = turning != 0.0                                            # sin(latitude) column by column in CM1
     return {
-        'param0': dict(nx=nx, ny=1, nz=nz, ppnode=cfg.get('ranks', 8), timeformat=3, timestats=1),
+        'param0': dict(nx=nx, ny=cfg['ny'] if box else 1, nz=nz, ppnode=cfg.get('ranks', 8), timeformat=3, timestats=1),
         'param1': dict(dx=round(dx, 3), dy=round(dx, 3), dz=round(ztop / nz, 1), dtl=round(40.0 * s, 3), cfl_limit=1.0,
                        timax=round(cfg['days'] * 86400.0 * s), run_time=-999.9, tapfrq=round(cfg['output_s'] * s, 3),
                        rstfrq=round(cfg['restart_s'] * s, 3), statfrq=round(3600.0 * s, 3), prclfrq=1.0e9),
@@ -943,21 +1065,23 @@ def case_settings(cfg, nx, dx, nz, ztop, air, gravity):
         'param3': dict(fcor=float(f'{turning:.6e}'), rdalpha=round(gravity / EARTH_G / 300.0, 8), zd=0.77 * ztop,
                        l_inf=round(75.0 * EARTH_G / gravity, 1), ndcnst=cfg['droplets_cm3']),
         'param6': dict(stretch_z=4, ztop=ztop),
-        'param8': dict(var12=cfg['tilt_deg'] if tilted else 0.0,
+        'param8': dict(**(dict(var11=1.0 if cfg.get('day_night') else 0.0) if box else {}),
+                       var12=cfg['tilt_deg'] if tilted else 0.0,
                        var13=(2.0 if tilted else 1.0) if cfg.get('large_scale_w') else 0.0,
                        var14=cfg['nudge']['z_start_m'] * s, var15=cfg['nudge']['z_full_m'] * s,
-                       var16=0.0 if pair else round(length, 3), var17=0.0 if pair else round(air['sunlight_w_m2'], 3),
-                       var18=0.0 if pair else cfg['start_hour_angle_deg'] + (cfg['node_deg'] if tilted else 0.0),
+                       var16=0.0 if pair or box else round(length, 3), var17=0.0 if pair else round(air['sunlight_w_m2'], 3),
+                       var18=0.0 if pair else cfg['start_hour_angle_deg'] + (cfg['node_deg'] if tilted else
+                                                                             cfg['site']['lon_deg'] if box else 0.0),
                        var19=0.0 if pair else round(solar_day_s(), 1)),
         'param9': dict(output_format=1, output_filetype=2, output_sfcparams=0, output_tke=0, output_km=0,
-                       output_kh=0, output_uinterp=1, output_vinterp=int(rotating), output_v=0, output_winterp=1,
-                       output_radten=1, output_cape=1, output_cin=1, output_lcl=1, output_lfc=1, output_pwat=1,
-                       output_lwp=1),
+                       output_kh=0, output_uinterp=1, output_vinterp=int(rotating or box), output_v=0, output_winterp=1,
+                       output_radten=int(not box), output_cape=1, output_cin=1, output_lcl=1, output_lfc=1, output_pwat=1,
+                       output_lwp=1, **(dict(output_u=0, output_w=0, output_dbz=0) if box else {})),
         'param11': dict(radopt=0 if pair else 2, dtrad=1800.0, ctrlat=latitude, ctrlon=0.0, year=2014),
         'param12': dict(isfcflx=1, sfcmodel=2, oceanmodel=1, initsfc=1 if pair else 9, season=1),
         'param14': dict(dodomaindiag=True, diagfrq=round(cfg['output_s'] * s, 3)),
         'param16': dict(restart_format=1, restart_filetype=2, restart_reset_frqtim=True),
-        'param19': dict(do_lsnudge=True, do_lsnudge_u=True, do_lsnudge_v=rotating, do_lsnudge_th=True,
+        'param19': dict(do_lsnudge=True, do_lsnudge_u=True, do_lsnudge_v=rotating or box, do_lsnudge_th=True,
                         do_lsnudge_qv=True, lsnudge_tau=round(cfg['nudge']['tau_s'] * s, 3), lsnudge_start=1.0,
                         lsnudge_end=1.0e12, lsnudge_ramp_time=round(cfg['nudge']['ramp_s'] * s, 3)),
     }
@@ -1030,19 +1154,24 @@ def setup(name: str) -> Path:
     if (case / 'progress.json').exists():
         raise RuntimeError(f'{case} has started; remove it to set up afresh')
     case.mkdir(parents=True, exist_ok=True)
-    latitude = cfg.get('latitude_deg', 0.0)
+    box = cfg.get('kind') == 'box'
+    latitude = cfg['site']['lat_deg'] if box else cfg.get('latitude_deg', 0.0)
     tilted = cfg.get('kind') == 'tilted'
     s = time_scale(cfg, gravity)
     pair = cfg.get('kind') == 'pair'
     if pair:
         nx, dx = cfg['nx'], cfg['dx_moon_m'] * s
         length = nx * dx
+    elif box:                                                             # the spacing of the ring it extends
+        nx_ring, dx, _ = ring_grid(0.0, cfg['dx_target_m'], cfg['ranks'])
+        nx, length = cfg['nx'], cfg['nx'] * dx
     else:
         nx, dx, length = ring_grid(latitude, cfg['dx_target_m'], cfg['ranks'])
     zw = [z * s for z in vertical_grid(**cfg['z_grid'])]
     nz = len(zw) - 1
     track = tilted_path(nx, cfg['tilt_deg'], cfg['node_deg']) if tilted else None
-    ref = (gcm_path_reference(track['lat'], track['lon'], cfg['tilt_deg'], zw) if tilted
+    site = box_site(cfg, zw, nx_ring) if box else None
+    ref = (gcm_path_reference(track['lat'], track['lon'], cfg['tilt_deg'], zw) if tilted else site['ref'] if box
            else gcm_equator_profile(band=cfg.get('band_deg', EQUATOR_BAND_DEG), latitude=latitude))
     zh = 0.5 * (np.array(zw[1:]) + np.array(zw[:-1]))
     prof = ref['profile']
@@ -1079,6 +1208,9 @@ def setup(name: str) -> Path:
     (case / 'lsnudge_0001.dat').write_text('\n'.join(nudge) + '\n')
     if pair:
         segments, water_share, surface_sha = [(-1e9, 1e9, 2, 16, ref['sea_surface_k'], ref['sea_surface_k'])], 1.0, None
+    elif box:
+        segments = [(-1e9, 1e9, 1, wetness_class(site['wetness']), site['ground_k'], site['ground_k'])]
+        water_share, surface_sha = 0.0, site['surface_product']
     elif tilted:
         segments, water_share, surface_sha = path_surface(track['lat'], track['lon'], dx, ref['sea_k'], ref['land_k'], ref['wetness'])
     else:
@@ -1090,12 +1222,16 @@ def setup(name: str) -> Path:
     index, row = PLACEHOLDER_LAND
     table = [row.replace('.50', f"{land_moisture(cfg, ref):.2f}".lstrip('0')) if line.startswith(f'{index},') else line
              for line in table]
-    if tilted:                                                            # land-use rows for the wetness classes
+    if tilted or box:                                                     # land-use rows for the wetness classes
         rows = landuse_rows(WETNESS_CLASSES)
         table = [next((r for i, r in rows.items() if line.startswith(f'{i},')), line) for line in table]
     (case / 'LANDUSE.TBL').write_text(''.join(table))
     vertical_wind = None
-    if tilted and cfg.get('large_scale_w') == 'gcm':
+    if box and cfg.get('large_scale_w') == 'gcm':
+        vertical_wind = dict(z_m=[float(z) for z in zw], w_m_s=site['w_m_s'], ring=cfg['site']['ring'],
+                             ring_columns=site['columns'], rows_deg=ref['rows_deg'])
+        write_vertical_wind(case / 'terluna_wls.txt', vertical_wind, zw[-1])
+    elif tilted and cfg.get('large_scale_w') == 'gcm':
         write_vertical_wind_2d(case / 'terluna_wls2d.txt', zw, ref['w_columns'])
         wc = np.asarray(ref['w_columns'])
         vertical_wind = dict(z_m=[float(z) for z in zw], path_mean_m_s=[float(v) for v in wc.mean(axis=0)],
@@ -1103,6 +1239,19 @@ def setup(name: str) -> Path:
     elif cfg.get('large_scale_w') == 'gcm':
         vertical_wind = gcm_vertical_wind(latitude, cfg.get('band_deg', EQUATOR_BAND_DEG))
         write_vertical_wind(case / 'terluna_wls.txt', vertical_wind, zw[-1])
+    day_night = None
+    if box and cfg.get('day_night'):                                      # the rings' day-night circulation there
+        from climate.crm.ring_crossings import day_night_advection
+        dn = cfg['day_night']
+        forcing = day_night_advection(dn['rings'], cfg['site']['lat_deg'], cfg['site']['lon_deg'], dn['from_day'],
+                                      dn['wavenumbers'], dn['bins'], dn['harmonics'], dn['top_m'], cfg['site']['radius_m'])
+        write_day_night(case / 'terluna_lsadv.txt', forcing)
+        low = forcing['z_m'] < 3000.0
+        spread = lambda a, scale: dict(mean=float(a[:, low].mean() * scale), min=float(a[:, low].mean(axis=1).min() * scale),
+                                       max=float(a[:, low].mean(axis=1).max() * scale))
+        day_night = dict({k: forcing[k] for k in ('rings', 'wavenumbers', 'shortest_wave_km', 'harmonics', 'top_m', 'from_day')},
+                         lowest_3_km=dict(theta_k_day=spread(forcing['theta_k_s'], 86400.0),
+                                          qv_g_kg_day=spread(forcing['qv_kg_kg_s'], 8.64e7)))
     for link, target in (('cm1.exe', exe), ('RRTMG_LW_DATA', tree / 'run' / 'RRTMG_LW_DATA'),
                          ('RRTMG_SW_DATA', tree / 'run' / 'RRTMG_SW_DATA')):
         path = case / link
@@ -1117,21 +1266,25 @@ def setup(name: str) -> Path:
             text = set_namelist(text, section, key, value)
     (case / 'namelist.template').write_text(text)
     digest = lambda p: hashlib.sha256(Path(p).read_bytes()).hexdigest()[:16]
-    if tilted:                                                            # per-column arrays as rounded lists
+    if tilted or box:                                                     # per-column arrays as rounded lists
         ref = {k: ([round(float(x), 4) for x in v] if isinstance(v, np.ndarray) else v) for k, v in ref.items() if k != 'w_columns'}
     record = dict(case=name, configuration=cfg, time_scale=s,
-                  grid=dict(nx=nx, dx_m=dx, length_m=length, nz=nz, ztop_m=zw[-1]),
+                  grid=dict(nx=nx, dx_m=dx, length_m=length, nz=nz, ztop_m=zw[-1], **(dict(ny=cfg['ny']) if box else {})),
+                  site=dict(cfg['site'], ring_columns=site['columns'], land_share=site['land_share'], wetness=site['wetness'],
+                            wetness_class=wetness_class(site['wetness']), ground_k=site['ground_k']) if box else None,
                   build=build_record, reference=ref, initial=initial, water_share=water_share, surface_product=surface_sha,
                   path=dict(tilt_deg=cfg['tilt_deg'], node_deg=cfg['node_deg'], lat=[round(float(v), 4) for v in track['lat']],
                             lon=[round(float(v), 4) for v in track['lon']], dlon=[round(float(v), 4) for v in track['dlon']])
                   if tilted else None,
                   latitude_deg=latitude, coriolis_1_s=coriolis(90.0) if tilted else coriolis(latitude),
-                  land_moisture=None if pair else land_moisture(cfg, ref),
+                  land_moisture=None if pair else site['wetness'] if box else land_moisture(cfg, ref),
                   large_scale_w=vertical_wind,
+                  day_night=day_night,
                   runner=digest(__file__),
                   inputs={p: digest(case / p) for p in ('input_sounding', 'input_grid_z', 'lsnudge_0001.dat',
                                                          'terluna_surface.txt', 'LANDUSE.TBL', 'namelist.template',
-                                                         'terluna_wls.txt', 'terluna_wls2d.txt') if (case / p).exists()})
+                                                         'terluna_wls.txt', 'terluna_wls2d.txt', 'terluna_lsadv.txt')
+                          if (case / p).exists()})
     (case / 'case.json').write_text(json.dumps(record, indent=1) + '\n')
     return case
 
@@ -1274,7 +1427,7 @@ def main(argv=None) -> int:
         case = setup(args.case)
         record = json.loads((case / 'case.json').read_text())
         g = record['grid']
-        print(f"{case}: {g['nx']} x {g['nz']} points, dx {g['dx_m']:.1f} m, top {g['ztop_m'] / 1000:.0f} km, "
+        print(f"{case}: {g['nx']}{' x ' + str(g['ny']) if 'ny' in g else ''} x {g['nz']} points, dx {g['dx_m']:.1f} m, top {g['ztop_m'] / 1000:.0f} km, "
               f"water {record['water_share']:.2f} of the ring")
     return 0
 

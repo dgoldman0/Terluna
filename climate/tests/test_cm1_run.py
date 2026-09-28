@@ -353,3 +353,31 @@ def test_hour_angle_along_a_tilted_ring_follows_longitude():
     h = ra.hour_angle(geo, 0.0, 100.0)
     expected = (path['lon'] - 90.0 + 180.0) % 360.0 - 180.0                  # local time = longitude - 90 at t = 0
     assert np.allclose(h, expected, atol=1e-6)
+
+
+@needs_planet
+def test_a_box_is_three_dimensional_with_one_sun_and_its_rings_forcing():
+    air = dict(sunlight_w_m2=1300.0)
+    box = c.case_settings(c.CASES['box_0e'], 64, 6011.0, 111, 150000.0, air, 1.6242)
+    assert box['param0']['nx'] == 64 and box['param0']['ny'] == 64 and box['param1']['dy'] == box['param1']['dx']
+    assert box['param8']['var16'] == 0.0                                     # the Sun the same across the box
+    assert box['param8']['var18'] == -90.0 + c.CASES['box_0e']['site']['lon_deg']   # the site's local time
+    assert box['param8']['var11'] == 1.0 and box['param8']['var13'] == 1.0 and box['param8']['var12'] == 0.0
+    assert box['param2']['icor'] == 0 and box['param2']['betaplane'] == 0 and box['param11']['ctrlat'] == 0.0
+    assert box['param19']['do_lsnudge_v'] and box['param9']['output_vinterp'] == 1
+    assert box['param9']['output_u'] == 0 and box['param9']['output_radten'] == 0
+    ring = c.case_settings(c.CASES['ring_a'], 1816, 6011.0, 111, 150000.0, air, 1.6242)
+    assert 'var11' not in ring['param8'] and 'output_u' not in ring['param9'] and ring['param0']['ny'] == 1
+
+
+def test_day_night_table_reads_as_the_patch_expects(tmp_path):
+    z = np.array([0.0, 500.0, 1000.0])
+    th = np.arange(6, dtype=float).reshape(2, 3) * 1e-5
+    qv = -np.arange(6, dtype=float).reshape(2, 3) * 1e-8
+    c.write_day_night(tmp_path / 'terluna_lsadv.txt', dict(z_m=z, theta_k_s=th, qv_kg_kg_s=qv))
+    lines = (tmp_path / 'terluna_lsadv.txt').read_text().splitlines()
+    assert lines[0].split() == ['2', '3'] and np.allclose(np.array(lines[1].split(), float), z)
+    for b in range(2):                                                      # per bin: a theta line, then a vapour line
+        assert np.allclose(np.array(lines[2 + 2 * b].split(), float), th[b])
+        assert np.allclose(np.array(lines[3 + 2 * b].split(), float), qv[b])
+    assert 'terluna_nb.eq.0' in c.ADVECTION_BLOCK and 'var11.gt.0.5' in c.ADVECTION_BLOCK
