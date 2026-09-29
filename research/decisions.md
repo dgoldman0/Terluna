@@ -54,7 +54,7 @@ Sources:
 | Decision | Source | Status |
 |---|---|---|
 | Standing water covers 28% of the surface. | [shared/scenarios/water.json](../shared/scenarios/water.json); conservation D10 | Stands; selected on 2026-09-25 within the author's 25–35% range. |
-| The shield passes 5% less sunlight than the titania stack at every wavelength, and the Moon settles near 294 K. | [climate/gcm](../climate/gcm/README.md) | Stands; chosen on 2026-09-26. |
+| The shield passes 5% less sunlight than the titania stack at every wavelength, and the Moon settles near 295 K (294.9 K with the GCM's Sun, tilt and sunlight split corrected; 294 K before). | [climate/gcm](../climate/gcm/README.md) | Stands; chosen on 2026-09-26 and kept on 2026-09-29 after the GCM's correction. |
 
 ## Protection
 
