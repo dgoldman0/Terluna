@@ -326,6 +326,43 @@ def test_path_surface_samples_the_product_along_the_path(monkeypatch):
     assert segs[0][0] < 0 and segs[-1][1] > 64 * 1000.0 and share == pytest.approx(wet.mean())
 
 
+def test_path_heights_keep_water_at_its_level_and_smooth_the_land(monkeypatch):
+    lon = (np.arange(1440) + 0.5) * 0.25
+    lat = 89.875 - 0.25 * np.arange(720)
+    level = -1000.0
+    water = np.zeros((720, 1440))
+    water[:, lon < 90.0] = 1.0                                               # sea west of 90 E
+    water[:, (lon > 180.0) & (lon < 200.0)] = 1.0                           # a raised lake
+    height = np.where(lon < 90.0, level - 500.0, level + 3000.0)[None, :] * np.ones((720, 1))
+    surface = np.where((lon > 180.0) & (lon < 200.0), level + 2000.0, level)[None, :] * np.ones((720, 1))
+    from climate.gcm import boundary
+    monkeypatch.setattr(boundary, 'lakes_product', lambda *a: dict(lat_deg=lat, lon_deg=lon, water_fraction=water,
+                                                                    mean_height_m=height, water_surface_m=surface,
+                                                                    meta=dict(level_m=level), sha256='t'))
+    path = c.tilted_path(360, 0.0, 0.0)                                      # the equator, one column a degree
+    z = c.path_heights(path['lat'], path['lon'], passes=2)
+    sea, lake = path['lon'] < 89.5, (path['lon'] > 180.5) & (path['lon'] < 199.5)
+    assert np.all(z[sea] == 0.0) and np.allclose(z[lake], 2000.0)            # water at its own level
+    inland = (path['lon'] > 95.0) & (path['lon'] < 175.0)
+    assert np.allclose(z[inland], 3000.0) and np.all(z >= 0.0)
+    coast = np.argmin(np.abs(path['lon'] - 90.5))
+    assert 0.0 < z[coast] < 3000.0                                           # the land's edge is smoothed
+
+
+@needs_planet
+def test_the_terrain_ring_is_the_flat_ring_with_ground_heights():
+    air = dict(sunlight_w_m2=1300.0)
+    flat, rough = (c.case_settings(c.CASES[n], 1816, 6011.0, 111, 150000.0, air, 1.6242)
+                   for n in ('ring_70_45e', 'ring_70_45e_terrain'))
+    assert rough['param0']['terrain_flag'] and rough['param2']['itern'] == 4 and rough['param2']['irdamp'] == 1
+    assert not flat['param0']['terrain_flag'] and flat['param2']['itern'] == 0 and flat['param2']['irdamp'] == 2
+    differ = {(s, k) for s in flat for k in flat[s] if flat[s][k] != rough[s].get(k)}
+    assert differ == {('param0', 'terrain_flag'), ('param2', 'itern'), ('param2', 'irdamp')}
+    assert c.CASES['ring_70_45e_terrain']['build'] == 'moon_omp_terrain' and 'moon_omp_terrain' in c.BUILD_PATCHES
+    patched = {name for name, _, _ in c.BUILD_PATCHES['moon_omp_terrain']}
+    assert patched == {'param.F', 'lsnudge.F', 'solve1.F'}
+
+
 def test_vertical_wind_table_has_one_row_per_column(tmp_path):
     path = tmp_path / 'terluna_wls2d.txt'
     c.write_vertical_wind_2d(path, [0.0, 1000.0, 2000.0], [[0.0, 0.002, 0.0], [0.0, -0.003, 0.0]])

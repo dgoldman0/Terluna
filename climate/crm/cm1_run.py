@@ -371,6 +371,67 @@ MAKEFILE = {
          '-finline-functions --param=max-vartrack-size=0 -fopenmp\nCPP  = cpp -C -P -traditional -Wno-invalid-pp-token '
          '-ffreestanding\nOMP  = -DOPENMP\n', 1), CPP_RULE]),
 }
+# Terrain (terrain_flag, itern = 4, heights from perts.dat). CM1 refuses its large-scale nudging over terrain, where
+# one model level lies at different heights in different columns. The terrain build nudges instead the domain mean of
+# each column's departure from the reference at the column's own height (the reference given on the first column's
+# levels, at sea level on the rings); without terrain it nudges as before. CM1 also switches its Rayleigh layer to
+# damp toward the domain mean whenever it nudges, which it then refuses over terrain; the terrain build keeps the
+# layer damping toward the initial state there. It refuses a large-scale vertical wind over terrain too; the terrain
+# build allows it, advecting on the first column's metrics, which understate vertical gradients over ground at
+# height z by the factor 1 - z/ztop (under 6% up to 8.3 km of a 150-km model).
+TERRAIN_NUDGE = """        ! Terluna: nudging over terrain: each column against the reference at its own height, the reference
+        ! given on the first column's levels; without terrain, the domain mean against the reference
+        do k=1,nk
+          terluna_dev(k) = {mean}(k{q})-lsnudge_{v}(k,lsnudge_count)
+        enddo
+        if( terrain_flag )then
+          terluna_dev = 0.0
+          do j=1,nj
+          do i=1,ni
+            terluna_kz = 1
+            do k=1,nk
+              do while( terluna_kz.lt.nk-1 .and. zh(1,1,terluna_kz+1).lt.zh(i,j,k) )
+                terluna_kz = terluna_kz+1
+              enddo
+              terluna_fz = max(0.0,min(1.0,(zh(i,j,k)-zh(1,1,terluna_kz))/(zh(1,1,terluna_kz+1)-zh(1,1,terluna_kz))))
+              terluna_dev(k) = terluna_dev(k) + {field}                                                         &
+                  - ( lsnudge_{v}(terluna_kz,lsnudge_count)                                                     &
+                    + terluna_fz*(lsnudge_{v}(terluna_kz+1,lsnudge_count)-lsnudge_{v}(terluna_kz,lsnudge_count)) )
+            enddo
+          enddo
+          enddo
+          terluna_dev = terluna_dev/real(ni*nj)
+        endif
+"""
+NUDGE_TH = "        if( myid.eq.0 ) print *,'  applying large-scale nudging of theta, lsnudge_count = ',lsnudge_count\n        rdt = 1.0/dt\n"
+NUDGE_QV = "        if( myid.eq.0 ) print *,'  applying large-scale nudging of qv, lsnudge_count = ',lsnudge_count\n        rdt = 1.0/dt\n"
+TERRAIN_PATCHES = [
+    ('param.F', 'Terluna: over terrain the Rayleigh layer damps toward the initial state', [
+        ('      IF( do_lsnudge .and. (do_lsnudge_u .or. do_lsnudge_v .or. do_lsnudge_th) .and. irdamp.eq.1 )THEN\n',
+         '      IF( do_lsnudge .and. (do_lsnudge_u .or. do_lsnudge_v .or. do_lsnudge_th) .and. irdamp.eq.1 &\n'
+         '          .and. .not. terrain_flag )THEN   ! Terluna: over terrain the Rayleigh layer damps toward the initial state\n', 1),
+        ('        if( terrain_flag  .or.  axisymm.eq.1  )then\n          print *\n'
+         "          print *,'  Cannot use large-scale vertical velocity with terrain or axisymmetric model '\n",
+         '        if( axisymm.eq.1 )then   ! Terluna: large-scale vertical wind allowed over terrain\n          print *\n'
+         "          print *,'  Cannot use large-scale vertical velocity with terrain or axisymmetric model '\n", 1)]),
+    ('lsnudge.F', 'Terluna: nudged column by column over terrain', [
+        ("      if( terrain_flag )then\n        if(myid.eq.0)then\n        print *\n"
+         "        print *,'  cannot use lsnudge with terrain (for now)  '\n",
+         "      if( terrain_flag .and. .false. )then   ! Terluna: nudged column by column over terrain (solve1.F)\n"
+         "        if(myid.eq.0)then\n        print *\n        print *,'  cannot use lsnudge with terrain (for now)  '\n", 1)]),
+    ('solve1.F', 'Terluna: nudging over terrain', [
+        ('      real :: dttmp,rtime,rdt,tem,tem0,tem1,tem2,thrad,prad,terluna_w\n',
+         '      real :: dttmp,rtime,rdt,tem,tem0,tem1,tem2,thrad,prad,terluna_w\n'
+         '      integer :: terluna_kz   ! Terluna: nudging over terrain\n      real :: terluna_fz\n'
+         '      real, dimension(nk) :: terluna_dev\n', 1),
+        (NUDGE_TH, NUDGE_TH + TERRAIN_NUDGE.format(mean='thavg', q='', v='th', field='th0(i,j,k)+tha(i,j,k)'), 1),
+        ('          tem1 = -lsnudgefac*terluna_w*( thavg(k)-lsnudge_th(k,lsnudge_count) )/(lsnudge_tau)\n',
+         '          tem1 = -lsnudgefac*terluna_w*terluna_dev(k)/(lsnudge_tau)\n', 1),
+        (NUDGE_QV, NUDGE_QV + TERRAIN_NUDGE.format(mean='qavg', q=',nqv', v='qv', field='qa(i,j,k,nqv)'), 1),
+        ('          tem1 = -lsnudgefac*terluna_w*( qavg(k,nqv)-lsnudge_qv(k,lsnudge_count) )/(lsnudge_tau)\n',
+         '          tem1 = -lsnudgefac*terluna_w*terluna_dev(k)/(lsnudge_tau)\n', 1)]),
+]
+
 PATCHES = [
     ('constants.F', 'Terluna: gravity set at build time', [
         ('', DEFAULTS, 1),
@@ -531,7 +592,9 @@ def design_air():
 
 # label: (gravity, parallel mode)
 BUILDS = {'moon': (lambda: planet()['gravity_m_s2'], 'mpi'), 'earth_g': (lambda: EARTH_G, 'mpi'),
-          'moon_omp': (lambda: planet()['gravity_m_s2'], 'omp'), 'earth_g_omp': (lambda: EARTH_G, 'omp')}
+          'moon_omp': (lambda: planet()['gravity_m_s2'], 'omp'), 'earth_g_omp': (lambda: EARTH_G, 'omp'),
+          'moon_omp_terrain': (lambda: planet()['gravity_m_s2'], 'omp')}
+BUILD_PATCHES = {'moon_omp_terrain': TERRAIN_PATCHES}               # patches beyond PATCHES, by build
 
 
 def build(label: str, jobs: int = 8) -> Path:
@@ -548,10 +611,11 @@ def build(label: str, jobs: int = 8) -> Path:
     shutil.copytree(tree / 'src', src)
     (folder / 'run').mkdir(parents=True, exist_ok=True)
     hashes = {}
-    for name, marker, edits in [MAKEFILE[mode], *PATCHES]:
+    patches = [MAKEFILE[mode], *PATCHES, *BUILD_PATCHES.get(label, [])]
+    for name, marker, edits in patches:
         path = src / name
         path.write_text(apply_patch(path.read_text(), name, marker, edits))
-    for name in sorted({p[0] for p in [MAKEFILE[mode], *PATCHES]}):
+    for name in sorted({p[0] for p in patches}):
         hashes[name] = hashlib.sha256((src / name).read_bytes()).hexdigest()[:16]
     log = folder / 'build.log'
     with open(log, 'w') as out:
@@ -724,7 +788,14 @@ for _name, _tilt, _node in (('ring_70_45e', 70.0, 45.0), ('ring_70_135e', 70.0, 
                 + ' as a 2-D ring the Sun crosses once a lunar day, seas and lakes of the 28% scenario at sea level, land as '
                 'wet as the GCM\'s beneath it, the 5% dimmer shield, and the corrected GCM design case\'s mean vertical '
                 'wind at each column\'s latitude')
-WETNESS_CLASSES =((20, 0.05), (21, 0.10), (22, 0.15), (23, 0.20), (25, 0.30), (26, 0.40), (27, 0.50), (28, 0.60),
+# ring_70_45e again with its ground and raised lakes at their real heights, in the build that nudges the upper air
+# column by column at each column's own height. Only the terrain and what it requires differ from the flat
+# ring_70_45e, its twin: the ground and lake temperatures carried to their heights, and the Rayleigh layer at the top
+# (above 115 km) damping toward the initial state, as CM1 requires with terrain, where the flat ring damps toward the
+# domain mean.
+CASES['ring_70_45e_terrain'] = dict(CASES['ring_70_45e'], build='moon_omp_terrain', terrain=dict(passes=2),
+                                    purpose=CASES['ring_70_45e']['purpose'] + ', with the ground and lakes at their real heights')
+WETNESS_CLASSES = ((20, 0.05), (21, 0.10), (22, 0.15), (23, 0.20), (25, 0.30), (26, 0.40), (27, 0.50), (28, 0.60),
                    (29, 0.75), (30, 0.90))                    # land-use rows given over to the placeholder land at these wetnesses
 # A three-dimensional box where rings A and A-prime cross (0 N, 0 E): ring A's patch there given a second horizontal
 # dimension, to show what the rings' two-dimensionality does. It keeps ring A's column spacing, levels, upper-air
@@ -992,6 +1063,7 @@ def gcm_path_reference(lat_path, lon_path, tilt_deg, zw, run=GCM_RUN, years=GCM_
     return dict(profile=profile, sea_surface_k=float(sea_k.mean()), land_ground_k=float(land_ground[near].mean()),
                 air_over_sea_k=float(mean_row('air_k')), surface_pa_sea=float(mean_row('ps')),
                 sea_k=sea_k, land_k=land_ground[near], wetness=land_wet[near], w_columns=w_columns,
+                lapse_k_m=np.interp(lat_path, lats, pick('lapse')),
                 land_wetness=float(land_wet[near].mean()), soil=soil, rows_deg=[float(v) for v in lats],
                 row_weights=weights, run=run, years=list(years), tilt_deg=tilt_deg)
 
@@ -1020,6 +1092,30 @@ def path_surface(lat, lon, dx, sea_k, land_k, wetness, half_width_deg=0.5):
         else:
             segments.append((x0, x1, 1, wetness_class(wetness[i]), float(land_k[i]), float(land_k[i])))
     return segments, float(wet.mean()), product['sha256']
+
+
+def path_heights(lat, lon, half_width_deg=0.5, passes=2):
+    """Height above sea level (m) of the surface under each column of a path, from the 28% scenario's atlas: on water
+    (at least half the box wet, as in path_surface) the water surface, at sea level on the seas and at their own
+    levels on raised lakes; on land the mean height of the box's dry cells. The land is then smoothed by `passes` of
+    a 1-2-1 filter along the ring, water held at its level, and nothing lies below sea level."""
+    import numpy as np
+    from climate.gcm import boundary
+    product = boundary.lakes_product(*boundary.LAKES)
+    plat, plon, level = product['lat_deg'], product['lon_deg'], product['meta']['level_m']
+    water, height, surface = product['water_fraction'], product['mean_height_m'], product['water_surface_m']
+    raw, wet_column = np.zeros(len(lat)), np.zeros(len(lat), bool)
+    for i, (la, lo) in enumerate(zip(lat, lon)):
+        r = np.abs(plat - la) <= half_width_deg
+        c = np.abs((plon - lo + 180.0) % 360.0 - 180.0) * np.cos(np.radians(la)) <= half_width_deg
+        w, h, s = (a[np.ix_(r, c)] for a in (water, height, surface))
+        wet_column[i] = w.mean() >= 0.5
+        raw[i] = (s[w >= 0.5].mean() if wet_column[i] else h[w < 0.5].mean()) - level
+    raw = np.maximum(raw, 0.0)
+    out = raw.copy()
+    for _ in range(passes):
+        out = np.where(wet_column, raw, 0.25 * np.roll(out, 1) + 0.5 * out + 0.25 * np.roll(out, -1))
+    return out
 
 
 def box_site(cfg: dict, zw, nx_ring: int) -> dict:
@@ -1097,14 +1193,17 @@ def case_settings(cfg, nx, dx, nz, ztop, air, gravity):
     turning = turning_rate(cfg, latitude)
     rotating = turning != 0.0
     return {
-        'param0': dict(nx=nx, ny=cfg['ny'] if box else 1, nz=nz, ppnode=cfg.get('ranks', 8), timeformat=3, timestats=1),
+        'param0': dict(nx=nx, ny=cfg['ny'] if box else 1, nz=nz, ppnode=cfg.get('ranks', 8), timeformat=3, timestats=1,
+                       terrain_flag=bool(cfg.get('terrain'))),
         'param1': dict(dx=round(dx, 3), dy=round(dx, 3), dz=round(ztop / nz, 1), dtl=round(40.0 * s, 3), cfl_limit=1.0,
                        timax=round(cfg['days'] * 86400.0 * s), run_time=-999.9, tapfrq=round(cfg['output_s'] * s, 3),
                        rstfrq=round(cfg['restart_s'] * s, 3), statfrq=round(3600.0 * s, 3), prclfrq=1.0e9),
         'param2': dict(cm1setup=2, testcase=0, adapt_dt=1, irst=0, rstnum=1, ipbl=2, sgsmodel=0, tconfig=2,
-                       horizturb=0, irdamp=2, psolver=3, ptype=5, ihail=0, icor=int(rotating), betaplane=int(tilted and rotating),
+                       horizturb=0, irdamp=1 if cfg.get('terrain') else 2, psolver=3, ptype=5, ihail=0, icor=int(rotating),
+                       betaplane=int(tilted and rotating),
                        lspgrad=int(rotating and not tilted),
-                       eqtset=2, idiss=1, wbc=1, ebc=1, sbc=1, nbc=1, bbc=3, tbc=1, isnd=7, iwnd=0, itern=0, iinit=0,
+                       eqtset=2, idiss=1, wbc=1, ebc=1, sbc=1, nbc=1, bbc=3, tbc=1, isnd=7, iwnd=0,
+                       itern=4 if cfg.get('terrain') else 0, iinit=0,
                        irandp=1, iorigin=1, apmasscon=1),
         # The Rayleigh layer's time and the PBL scheme's asymptotic length scale are Earth's values stretched
         # by the ratio of gravities, as the dynamics stretch.
@@ -1267,7 +1366,15 @@ def setup(name: str) -> Path:
         segments = [(-1e9, 1e9, 1, wetness_class(site['wetness']), site['ground_k'], site['ground_k'])]
         water_share, surface_sha = 0.0, site['surface_product']
     elif tilted:
-        segments, water_share, surface_sha = path_surface(track['lat'], track['lon'], dx, ref['sea_k'], ref['land_k'], ref['wetness'])
+        sea_k, land_k = ref['sea_k'], ref['land_k']                     # carried to sea level
+        if cfg.get('terrain'):                                            # the ground and raised lakes at their heights
+            heights = path_heights(track['lat'], track['lon'], passes=cfg['terrain']['passes'])
+            sea_k, land_k = sea_k - ref['lapse_k_m'] * heights, land_k - ref['lapse_k_m'] * heights
+            np.asarray(heights, dtype='<f4').tofile(case / 'perts.dat')   # CM1's itern = 4: nx by ny reals
+            slope = np.abs(np.diff(np.append(heights, heights[0]))) / dx
+            terrain = dict(cfg['terrain'], source='the 28% scenario atlas, 0.5-degree boxes', max_m=float(heights.max()),
+                           mean_m=float(heights.mean()), max_slope=float(slope.max()), p99_slope=float(np.percentile(slope, 99)))
+        segments, water_share, surface_sha = path_surface(track['lat'], track['lon'], dx, sea_k, land_k, ref['wetness'])
     else:
         segments, water_share, surface_sha = ring_surface(nx, dx, ref['sea_surface_k'], ref['land_ground_k'],
                                                           latitude=latitude)
@@ -1322,7 +1429,8 @@ def setup(name: str) -> Path:
     (case / 'namelist.template').write_text(text)
     digest = lambda p: hashlib.sha256(Path(p).read_bytes()).hexdigest()[:16]
     if tilted or box:                                                     # per-column arrays as rounded lists
-        ref = {k: ([round(float(x), 4) for x in v] if isinstance(v, np.ndarray) else v) for k, v in ref.items() if k != 'w_columns'}
+        ref = {k: ([round(float(x), 6 if k == 'lapse_k_m' else 4) for x in v] if isinstance(v, np.ndarray) else v)
+               for k, v in ref.items() if k != 'w_columns'}
     record = dict(case=name, configuration=cfg, time_scale=s,
                   grid=dict(nx=nx, dx_m=dx, length_m=length, nz=nz, ztop_m=zw[-1], **(dict(ny=cfg['ny']) if box else {})),
                   site=dict(cfg['site'], ring_columns=site['columns'], land_share=site['land_share'], wetness=site['wetness'],
@@ -1335,10 +1443,12 @@ def setup(name: str) -> Path:
                   land_moisture=None if pair else site['wetness'] if box else land_moisture(cfg, ref),
                   large_scale_w=vertical_wind,
                   day_night=day_night,
+                  terrain=terrain if cfg.get('terrain') else None,
                   runner=digest(__file__),
                   inputs={p: digest(case / p) for p in ('input_sounding', 'input_grid_z', 'lsnudge_0001.dat',
                                                          'terluna_surface.txt', 'LANDUSE.TBL', 'namelist.template',
-                                                         'terluna_wls.txt', 'terluna_wls2d.txt', 'terluna_lsadv.txt')
+                                                         'terluna_wls.txt', 'terluna_wls2d.txt', 'terluna_lsadv.txt',
+                                                         'perts.dat')
                           if (case / p).exists()})
     (case / 'case.json').write_text(json.dumps(record, indent=1) + '\n')
     return case

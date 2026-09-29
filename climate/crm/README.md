@@ -386,9 +386,27 @@ start of comfortable air and CM1 has no answer yet. The third is the equator
 again (`ring_equator`), set up as a great circle of no tilt so that, like the
 tilted rings, each column takes its own surface, land wetness and ground
 temperature, and the GCM's mean vertical wind rises through it (up to 4 mm/s).
-It crosses each steep ring on the equator, at 45°, 135°, 225° and 315° E. All
-three run together for two lunar days on 8 threads; their results will follow
-here.
+It crosses each steep ring on the equator, at 45°, 135°, 225° and 315° E.
+
+**The same ring with its highlands.** Every ring so far lays its land flat at
+sea level, yet 44% of the Moon's land stands above 2 km and 17% above 4 km,
+and about half the land along `ring_70_45e` lies above 2 km, up to 8.9 km.
+`ring_70_45e_terrain` is that ring with its ground and raised lakes at their
+real heights (the atlas's heights over 0.5° boxes, the land smoothed by two
+passes of a 1-2-1 filter to slopes of at most 0.19, up to 8.3 km); the flat
+ring is its twin, so their difference is what the highlands do. Ground and lake
+temperatures are carried from sea level to their heights at the GCM's lapse
+rate. CM1 allows none of the rings' upper-air hold, imposed vertical wind or
+top damping toward the domain mean over terrain, so the terrain ring runs in
+its own build (`moon_omp_terrain`): the upper air is held by comparing each
+column with the reference at its own height, the imposed vertical wind is
+advected on the sea-level column's metrics (understating vertical gradients by
+under 6% over the highest ground), and the damping layer above 115 km damps
+toward the initial state. A six-hour test gave surface pressure over ground at
+5.6 km of 1,087 hPa against 1,211 hPa at sea level, as the Moon's 52-km scale
+height implies, air there about 5 °C cooler, and slope winds building gently.
+
+All four run together for two lunar days; their results will follow here.
 
 ## A three-dimensional box at a crossing
 
