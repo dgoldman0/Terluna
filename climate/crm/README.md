@@ -483,15 +483,20 @@ runs on each model's own clear column at the crossing. CM1's radiation (RRTMG)
 is within 2.5 points of it in the shares of sunlight reflected, absorbed in the
 air and reaching the ground, near noon and with the Sun lower, and within
 8 W/m² in each over the lunar day. The GCM's is not. On its own column, which
-holds 195 kg/m² of water vapour, it reflects 131 W/m² over the lunar day in
-clear sky where line-by-line reflects 96, and absorbs 76 W/m² in the air where
-line-by-line absorbs 116; the ground's share is close (167 against 162). Its
-calibration matched the global-mean clear-sky albedo, partly by strengthening
-Rayleigh scattering; over this humid land it reflects too much, and its air
-gets 40 W/m² less of the Sun's heat than line-by-line gives it. Line-by-line
-puts CM1's wetter column (271 kg/m²) 8–9 W/m² above the GCM's in the sunlight
-its air absorbs, so most of the two models' difference there, 111 against
-76 W/m², is the GCM's radiation.
+holds 195 kg/m² of water vapour, it reflects 26% of the clear-sky sunlight
+arriving over the lunar day, as line-by-line does, while its air absorbs 23%
+against line-by-line's 31% and its ground takes 51% against 43%. On the
+328 W/m² that reaches its column that is 26 W/m² too little in the air and
+25 W/m² too much in the ground, and the GCM shows the same 8 points in every
+column of a wider check ([GCM README](../gcm/README.md), "How it splits the
+sunlight"). The 328 W/m² is itself short. CM1, like the Moon, has 373 W/m²
+arriving over a lunar day at 0° E; the GCM's Sun sweeps unevenly and has
+Earth's tilt, which take about 30 and 15 W/m² ([GCM README](../gcm/README.md),
+"How the Moon is set up"). The clear air's absorbed sunlight, 111 W/m² in CM1
+against 76 in the GCM, divides as follows: the GCM's missing sunlight about
+10 W/m², its split 29, CM1's wetter column (271 kg/m²) 9, and CM1's radiation
+−13, of which 8 is RRTMG absorbing less than line-by-line and 5 is the Sun's
+own spectrum it takes in place of the shield's.
 
 **Where CM1's rain goes.** The microphysics keeps a water budget. Over the
 second lunar day in the small box, 304 mm of water condensed; 52 mm evaporated
@@ -505,10 +510,13 @@ ground evaporates less into it. The GCM's rain scheme, fitted to Earth, brings
 129 mm per lunar day to the ground here, about what its ground evaporates.
 
 So neither the rings' two dimensions nor the land surface explains why the
-cloud-resolving model and the GCM disagree. Two differences stand out instead:
-the GCM's radiation, which heats this humid air about 40 W/m² too little, and
-the fate of rain at lunar gravity, which CM1 follows through the fall and the
-GCM's scheme takes from Earth.
+cloud-resolving model and the GCM disagree. Three differences stand out
+instead: the GCM's Sun, which brings 12% too little sunlight to 0° E; its
+radiation, which puts about 8% of the sunlight that does arrive into the ground
+where line-by-line puts it into the air; and the fate of rain at lunar gravity,
+which CM1 follows through the fall and the GCM's scheme takes from Earth. The
+first two are the GCM's to fix, and its comparisons with CM1 here are worth
+repeating once they are.
 
 ```sh
 climate/gcm/.venv/bin/python -m climate.crm.box_analysis box_0e_small_rough --from-day 29.5 --reference box_0e_small

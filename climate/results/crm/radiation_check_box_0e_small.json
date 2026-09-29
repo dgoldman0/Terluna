@@ -8,7 +8,7 @@
   "radius_m": 100000.0
  },
  "evidence": "Clear-sky solar fluxes only, with no cloud. CM1's fluxes are those RRTMG gave its cloud-free columns in the box; the GCM's are its own clear-sky diagnostics (3-day means). The line-by-line model (HITRAN lines, MT_CKD water continuum, collision-induced absorption, Rayleigh scattering, a delta-scaled two-stream solver with a pseudo-spherical direct beam) runs on mean profiles, so it leaves out how the fluxes vary with the profile from hour to hour; the GCM's column is its ten levels, extended isothermal and dry above its top.",
- "reading_rule": "Shares are of the sunlight arriving at the top of the air, for a ground albedo of 0.20. Daily means are W/m2 over the whole lunar day at the site, 373.5 W/m2 arriving on average. unfiltered is sunlight with the Sun's own spectrum, as CM1's RRTMG takes it; titania is sunlight through the titania stack, as the GCM takes it; both are scaled to the shield's total of 1,173.5 W/m2.",
+ "reading_rule": "Shares are of the sunlight arriving at the top of the air, for a ground albedo of 0.20. Daily means are W/m2 over the whole lunar day at the site, of the sunlight each model has arriving there: 373.5 W/m2 in CM1, and in the GCM its own time mean, which its uneven Sun makes 12% less at 0 E. Line-by-line shares are applied to each model's own arriving sunlight. unfiltered is sunlight with the Sun's own spectrum, as CM1's RRTMG takes it; titania is sunlight through the titania stack, as the GCM takes it; both are scaled to the shield's total of 1,173.5 W/m2.",
  "surface_albedo": 0.2,
  "sunlight_w_m2": 1173.4883,
  "arriving_daily_w_m2": 373.5329,
@@ -63,10 +63,28 @@
   "cm1": {
    "snapshots": 115,
    "water_kg_m2": 270.8984,
+   "arriving_w_m2": 373.5329,
    "own": {
     "reflected": 110.3419,
     "air": 111.0266,
     "ground": 150.249
+   },
+   "own_shares": {
+    "reflected": 0.2969,
+    "air": 0.2988,
+    "ground": 0.4043
+   },
+   "line_by_line_shares": {
+    "unfiltered": {
+     "reflected": 0.2818,
+     "air": 0.319,
+     "ground": 0.3992
+    },
+    "titania": {
+     "reflected": 0.2526,
+     "air": 0.3333,
+     "ground": 0.4141
+    }
    },
    "line_by_line": {
     "unfiltered": {
@@ -94,21 +112,39 @@
    ],
    "water_kg_m2": 195.2967,
    "gcm_prw_kg_m2": 190.2364,
+   "arriving_w_m2": 328.0742,
    "own": {
-    "reflected": 131.1982,
+    "reflected": 85.7395,
     "air": 75.8317,
     "ground": 166.5031
    },
-   "line_by_line": {
+   "own_shares": {
+    "reflected": 0.2613,
+    "air": 0.2311,
+    "ground": 0.5075
+   },
+   "line_by_line_shares": {
     "unfiltered": {
-     "reflected": 107.0152,
-     "air": 110.8796,
-     "ground": 155.6382
+     "reflected": 0.2865,
+     "air": 0.2968,
+     "ground": 0.4167
     },
     "titania": {
-     "reflected": 96.2236,
-     "air": 115.7128,
-     "ground": 161.5966
+     "reflected": 0.2576,
+     "air": 0.3098,
+     "ground": 0.4326
+    }
+   },
+   "line_by_line": {
+    "unfiltered": {
+     "reflected": 93.9915,
+     "air": 97.3856,
+     "ground": 136.6971
+    },
+    "titania": {
+     "reflected": 84.5132,
+     "air": 101.6306,
+     "ground": 141.9304
     }
    }
   }
@@ -116,7 +152,7 @@
  "producer": {
   "domain": "climate",
   "files": {
-   "crm/radiation_check.py": "a14bab0ad0cbecbc"
+   "crm/radiation_check.py": "52f5f1d364ad6f8b"
   }
  }
 }

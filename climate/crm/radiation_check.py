@@ -34,7 +34,9 @@ EVIDENCE = ('Clear-sky solar fluxes only, with no cloud. CM1\'s fluxes are those
             'with a pseudo-spherical direct beam) runs on mean profiles, so it leaves out how the fluxes vary with the '
             'profile from hour to hour; the GCM\'s column is its ten levels, extended isothermal and dry above its top.')
 READING_RULE = ('Shares are of the sunlight arriving at the top of the air, for a ground albedo of 0.20. Daily means are '
-                'W/m2 over the whole lunar day at the site, 373.5 W/m2 arriving on average. unfiltered is sunlight with '
+                'W/m2 over the whole lunar day at the site, of the sunlight each model has arriving there: 373.5 W/m2 in '
+                'CM1, and in the GCM its own time mean, which its uneven Sun makes 12% less at 0 E. Line-by-line shares '
+                'are applied to each model\'s own arriving sunlight. unfiltered is sunlight with '
                 'the Sun\'s own spectrum, as CM1\'s RRTMG takes it; titania is sunlight through the titania stack, as the '
                 'GCM takes it; both are scaled to the shield\'s total of 1,173.5 W/m2.')
 
@@ -57,7 +59,7 @@ def line_by_line_column(p, t, qv, surface_pa, surface_k):
     return col, water
 
 
-def solar_parts(col, cos_zenith, processes=8):
+def solar_parts(col, cos_zenith, processes=8, surface_albedo=SURFACE_ALBEDO, shields=('unfiltered', 'titania')):
     """For each sunlight (unfiltered, titania) and each Sun height: the shares of the arriving sunlight reflected,
     absorbed in the air and absorbed by the ground, clear sky."""
     from atmosphere.radiative_convective import optics, shortwave as sw, climate as cl
@@ -66,15 +68,16 @@ def solar_parts(col, cos_zenith, processes=8):
     grids = [(nu, tau_abs), (cl.UV_GRID.nu, cl._uv_optics(col, cl.UV_GRID.nu))]
     rayleigh = [optics.rayleigh_optical_depth(col, g) for g, _ in grids]
     out = {}
-    for label, shield in (('unfiltered', None), ('titania', cl.load_shield('titania_stack'))):
-        spectra = [sw.solar_spectrum(g, shield=shield) for g, _ in grids]
+    for label in shields:
+        spectra = [sw.solar_spectrum(g, shield=cl.load_shield('titania_stack') if label == 'titania' else None)
+                   for g, _ in grids]
         rows = []
         for mu0 in np.atleast_1d(cos_zenith):
             incident = reflected = ground = 0.0
             for (g, tau), tau_r, (spectrum, longward) in zip(grids, rayleigh, spectra):
                 w = np.full(g.size, g[1] - g[0]); w[0] *= 0.5; w[-1] *= 0.5
                 direct, diffuse, up = sw.column_fluxes(tau[::-1], tau_r[::-1], np.zeros_like(tau_r[::-1]),
-                                                       SURFACE_ALBEDO, float(mu0), radius)
+                                                       surface_albedo, float(mu0), radius)
                 f = spectrum * w
                 incident += mu0 * float(spectrum @ w)
                 reflected += float(up[0] @ f)
@@ -86,9 +89,10 @@ def solar_parts(col, cos_zenith, processes=8):
     return out
 
 
-def daily_mean(parts, nodes, weights, sunlight_w_m2):
-    """W/m2 over the lunar day at the equator from shares at Sun heights cos(h) for hour angles h at the nodes."""
-    mu0 = np.cos(nodes)
+def daily_mean(parts, nodes, weights, sunlight_w_m2, lat_deg=0.0):
+    """W/m2 over the lunar day at a latitude (the Sun on the equator) from shares at Sun heights cos(lat) cos(h)
+    for hour angles h at the nodes."""
+    mu0 = np.cos(np.radians(lat_deg)) * np.cos(nodes)
     return {part: float(sum(w * m * row[part] for w, m, row in zip(weights, mu0, parts)) * sunlight_w_m2 / np.pi)
             for part in ('reflected', 'air', 'ground')}
 
@@ -124,11 +128,12 @@ def cm1_clear(case: Path, from_day: float, lo: float, hi: float):
     return {k: v / used for k, v in acc.items()}, {k: v / total for k, v in flux.items()}, used
 
 
-def gcm_column(lat_deg: float, lon_deg: float, arriving_w_m2: float, run='A28_dim5', years=(15, 24)):
-    """The GCM's mean column on its land cells nearest the site and its own clear-sky solar fluxes (W/m2)."""
+def gcm_column(lat_deg: float, lon_deg: float, run='A28_dim5', years=(15, 24)):
+    """The GCM's mean column on its land cells nearest the site, the sunlight arriving there in the GCM, and the GCM's
+    own clear-sky solar fluxes (W/m2)."""
     import netCDF4
     folder = ra.HERE.parent / 'gcm' / 'runs' / run / 'model'
-    acc = {k: [] for k in ('ta', 'hus', 'ps', 'tas', 'prw', 'rstcs', 'rsscs')}
+    acc = {k: [] for k in ('ta', 'hus', 'ps', 'tas', 'prw', 'rstcs', 'rsscs', 'rst', 'rsut')}
     for year in range(years[0], years[1] + 1):
         with netCDF4.Dataset(folder / f'MOST.{year:05d}.nc') as d:
             lat, lon = np.asarray(d['lat'][:], float), np.asarray(d['lon'][:], float)
@@ -147,9 +152,10 @@ def gcm_column(lat_deg: float, lon_deg: float, arriving_w_m2: float, run='A28_di
     p = np.concatenate([sigma * ps, above])
     t = np.concatenate([t, np.full(above.size, t[0])])
     q = np.concatenate([q, np.full(above.size, 1e-7)])
-    own = dict(reflected=float(arriving_w_m2 - g['rstcs'].mean()), air=float(g['rstcs'].mean() - g['rsscs'].mean()),
+    arriving = float((g['rst'] - g['rsut']).mean())                       # rsut is negative, upward
+    own = dict(reflected=float(arriving - g['rstcs'].mean()), air=float(g['rstcs'].mean() - g['rsscs'].mean()),
                ground=float(g['rsscs'].mean()))
-    return dict(p=p, t=t, qv=q, ps=ps, t2=float(g['tas'].mean()), prw=float(g['prw'].mean()),
+    return dict(p=p, t=t, qv=q, ps=ps, t2=float(g['tas'].mean()), prw=float(g['prw'].mean()), arriving=arriving,
                 cells=[[float(lat[r]), float(lon[col])] for r in rows]), own
 
 
@@ -169,16 +175,22 @@ def analyse(name: str, from_day: float, processes: int = 8) -> dict:
         heights[label] = dict(snapshots=used, cos_zenith=state['cos_zenith'], water_kg_m2=water,
                               cm1={k: state[k] for k in ('reflected', 'air', 'ground')},
                               line_by_line={k: v[0] for k, v in lbl.items()})
+    shares = lambda parts: {k: v / sum(parts.values()) for k, v in parts.items()}
     state, own, used = cm1_clear(case, from_day, 0.0, 1.0)
     col, water = line_by_line_column(state['p'], state['t'], state['qv'], state['ps'], state['t2'])
     lbl = solar_parts(col, np.cos(hours), processes)
-    cm1_day = dict(snapshots=used, water_kg_m2=water, own=own,
-                   line_by_line={k: daily_mean(v, hours, hour_weights, sunlight) for k, v in lbl.items()})
-    gcm, gcm_own = gcm_column(site['lat_deg'], site['lon_deg'], sunlight / np.pi)
+    lbl = {k: shares(daily_mean(v, hours, hour_weights, sunlight)) for k, v in lbl.items()}
+    arriving = sunlight / np.pi
+    cm1_day = dict(snapshots=used, water_kg_m2=water, arriving_w_m2=arriving, own=own, own_shares=shares(own),
+                   line_by_line_shares=lbl,
+                   line_by_line={k: {p: s * arriving for p, s in v.items()} for k, v in lbl.items()})
+    gcm, gcm_own = gcm_column(site['lat_deg'], site['lon_deg'])
     col, water = line_by_line_column(gcm['p'], gcm['t'], gcm['qv'], gcm['ps'], gcm['t2'])
     lbl = solar_parts(col, np.cos(hours), processes)
-    gcm_day = dict(cells=gcm['cells'], water_kg_m2=water, gcm_prw_kg_m2=gcm['prw'], own=gcm_own,
-                   line_by_line={k: daily_mean(v, hours, hour_weights, sunlight) for k, v in lbl.items()})
+    lbl = {k: shares(daily_mean(v, hours, hour_weights, sunlight)) for k, v in lbl.items()}
+    gcm_day = dict(cells=gcm['cells'], water_kg_m2=water, gcm_prw_kg_m2=gcm['prw'], arriving_w_m2=gcm['arriving'],
+                   own=gcm_own, own_shares=shares(gcm_own), line_by_line_shares=lbl,
+                   line_by_line={k: {p: s * gcm['arriving'] for p, s in v.items()} for k, v in lbl.items()})
     return dict(schema=SCHEMA, case=name, site=site, evidence=EVIDENCE, reading_rule=READING_RULE,
                 surface_albedo=SURFACE_ALBEDO, sunlight_w_m2=sunlight, arriving_daily_w_m2=sunlight / np.pi,
                 from_day=from_day, cm1_at_sun_heights=heights, daily_mean_clear_sky=dict(cm1=cm1_day, gcm=gcm_day))

@@ -1,0 +1,339 @@
+{
+ "schema": "terluna.climate.gcm-radiation-check/1",
+ "run": "A28_dim5",
+ "years": [
+  15,
+  24
+ ],
+ "evidence": "Clear-sky solar fluxes only. The GCM's are its own clear-sky diagnostics (3-day means over the years). The line-by-line model (HITRAN lines, MT_CKD water continuum, collision-induced absorption, Rayleigh scattering, a delta-scaled two-stream solver with a pseudo-spherical direct beam) runs on each column's time-mean profile on the GCM's ten levels, extended isothermal and dry above its top, with the column's mean surface albedo and the Sun on the equator (the Moon's 1.5 degree tilt left out), so it leaves out how the fluxes vary with the profile from day to day and season to season.",
+ "reading_rule": "Shares are of the sunlight arriving at the top of each column over the lunar day, clear sky. The GCM's arriving sunlight is its own time mean, which its uneven Sun makes up to 12% less or more than it should be depending on longitude; the shares compare how each model divides whatever arrives. difference is the GCM minus line-by-line, in points of the arriving sunlight.",
+ "columns": [
+  {
+   "label": "site land",
+   "j": 15,
+   "i": 0,
+   "lat_deg": 2.7689,
+   "lon_deg": 0.0,
+   "land": true,
+   "height_m": 665.933,
+   "surface_albedo": 0.2,
+   "water_kg_m2": 194.24,
+   "line_by_line_water_kg_m2": 199.3907,
+   "arriving_w_m2": 327.9538,
+   "gcm": {
+    "reflected": 0.2616,
+    "air": 0.2326,
+    "ground": 0.5058
+   },
+   "line_by_line": {
+    "reflected": 0.2578,
+    "air": 0.3113,
+    "ground": 0.4308
+   },
+   "difference_points": {
+    "reflected": 0.3787,
+    "air": -7.8742,
+    "ground": 7.4955
+   }
+  },
+  {
+   "label": "land, water vapour at its 5th percentile",
+   "j": 25,
+   "i": 46,
+   "lat_deg": -52.6065,
+   "lon_deg": 258.75,
+   "land": true,
+   "height_m": 2044.8623,
+   "surface_albedo": 0.2,
+   "water_kg_m2": 150.8972,
+   "line_by_line_water_kg_m2": 154.2082,
+   "arriving_w_m2": 225.4564,
+   "gcm": {
+    "reflected": 0.2778,
+    "air": 0.2372,
+    "ground": 0.485
+   },
+   "line_by_line": {
+    "reflected": 0.2956,
+    "air": 0.3163,
+    "ground": 0.388
+   },
+   "difference_points": {
+    "reflected": -1.7832,
+    "air": -7.9147,
+    "ground": 9.6978
+   }
+  },
+  {
+   "label": "land, water vapour at its 25th percentile",
+   "j": 9,
+   "i": 43,
+   "lat_deg": 35.9951,
+   "lon_deg": 241.875,
+   "land": true,
+   "height_m": 3732.8577,
+   "surface_albedo": 0.2,
+   "water_kg_m2": 163.4594,
+   "line_by_line_water_kg_m2": 167.2658,
+   "arriving_w_m2": 288.6281,
+   "gcm": {
+    "reflected": 0.2726,
+    "air": 0.2289,
+    "ground": 0.4985
+   },
+   "line_by_line": {
+    "reflected": 0.2716,
+    "air": 0.3078,
+    "ground": 0.4206
+   },
+   "difference_points": {
+    "reflected": 0.0939,
+    "air": -7.8921,
+    "ground": 7.7982
+   }
+  },
+  {
+   "label": "land, water vapour at its 50th percentile",
+   "j": 21,
+   "i": 2,
+   "lat_deg": -30.4576,
+   "lon_deg": 11.25,
+   "land": true,
+   "height_m": 1688.5132,
+   "surface_albedo": 0.2,
+   "water_kg_m2": 172.1025,
+   "line_by_line_water_kg_m2": 176.571,
+   "arriving_w_m2": 288.8203,
+   "gcm": {
+    "reflected": 0.266,
+    "air": 0.2294,
+    "ground": 0.5045
+   },
+   "line_by_line": {
+    "reflected": 0.2691,
+    "air": 0.3102,
+    "ground": 0.4208
+   },
+   "difference_points": {
+    "reflected": -0.3027,
+    "air": -8.0734,
+    "ground": 8.3761
+   }
+  },
+  {
+   "label": "land, water vapour at its 75th percentile",
+   "j": 14,
+   "i": 19,
+   "lat_deg": 8.3067,
+   "lon_deg": 106.875,
+   "land": true,
+   "height_m": 1447.3363,
+   "surface_albedo": 0.2,
+   "water_kg_m2": 181.7564,
+   "line_by_line_water_kg_m2": 185.5724,
+   "arriving_w_m2": 374.6813,
+   "gcm": {
+    "reflected": 0.2564,
+    "air": 0.2293,
+    "ground": 0.5142
+   },
+   "line_by_line": {
+    "reflected": 0.2582,
+    "air": 0.3067,
+    "ground": 0.4351
+   },
+   "difference_points": {
+    "reflected": -0.1817,
+    "air": -7.7336,
+    "ground": 7.9154
+   }
+  },
+  {
+   "label": "land, water vapour at its 95th percentile",
+   "j": 14,
+   "i": 51,
+   "lat_deg": 8.3067,
+   "lon_deg": 286.875,
+   "land": true,
+   "height_m": 492.3062,
+   "surface_albedo": 0.2,
+   "water_kg_m2": 195.4328,
+   "line_by_line_water_kg_m2": 199.5511,
+   "arriving_w_m2": 324.9231,
+   "gcm": {
+    "reflected": 0.2625,
+    "air": 0.2314,
+    "ground": 0.506
+   },
+   "line_by_line": {
+    "reflected": 0.2588,
+    "air": 0.3109,
+    "ground": 0.4302
+   },
+   "difference_points": {
+    "reflected": 0.3706,
+    "air": -7.9516,
+    "ground": 7.581
+   }
+  },
+  {
+   "label": "tropical highland",
+   "j": 15,
+   "i": 35,
+   "lat_deg": 2.7689,
+   "lon_deg": 196.875,
+   "land": true,
+   "height_m": 8400.209,
+   "surface_albedo": 0.2,
+   "water_kg_m2": 142.4639,
+   "line_by_line_water_kg_m2": 146.1151,
+   "arriving_w_m2": 404.7327,
+   "gcm": {
+    "reflected": 0.2564,
+    "air": 0.2104,
+    "ground": 0.5332
+   },
+   "line_by_line": {
+    "reflected": 0.2516,
+    "air": 0.2876,
+    "ground": 0.4608
+   },
+   "difference_points": {
+    "reflected": 0.475,
+    "air": -7.7168,
+    "ground": 7.2418
+   }
+  },
+  {
+   "label": "sea near 0 degrees",
+   "j": 15,
+   "i": 56,
+   "lat_deg": 2.7689,
+   "lon_deg": 315.0,
+   "land": false,
+   "height_m": 0.0,
+   "surface_albedo": 0.069,
+   "water_kg_m2": 199.6319,
+   "line_by_line_water_kg_m2": 203.9338,
+   "arriving_w_m2": 327.9448,
+   "gcm": {
+    "reflected": 0.1964,
+    "air": 0.2226,
+    "ground": 0.581
+   },
+   "line_by_line": {
+    "reflected": 0.2121,
+    "air": 0.303,
+    "ground": 0.4849
+   },
+   "difference_points": {
+    "reflected": -1.5666,
+    "air": -8.0442,
+    "ground": 9.6108
+   }
+  },
+  {
+   "label": "sea near 25 degrees",
+   "j": 11,
+   "i": 3,
+   "lat_deg": 24.9199,
+   "lon_deg": 16.875,
+   "land": false,
+   "height_m": 0.0,
+   "surface_albedo": 0.069,
+   "water_kg_m2": 193.447,
+   "line_by_line_water_kg_m2": 198.3909,
+   "arriving_w_m2": 299.7314,
+   "gcm": {
+    "reflected": 0.2028,
+    "air": 0.2262,
+    "ground": 0.571
+   },
+   "line_by_line": {
+    "reflected": 0.2209,
+    "air": 0.3071,
+    "ground": 0.472
+   },
+   "difference_points": {
+    "reflected": -1.8097,
+    "air": -8.0872,
+    "ground": 9.8969
+   }
+  },
+  {
+   "label": "sea near 45 degrees",
+   "j": 7,
+   "i": 62,
+   "lat_deg": 47.0696,
+   "lon_deg": 348.75,
+   "land": false,
+   "height_m": 0.0,
+   "surface_albedo": 0.069,
+   "water_kg_m2": 183.8506,
+   "line_by_line_water_kg_m2": 188.8704,
+   "arriving_w_m2": 233.754,
+   "gcm": {
+    "reflected": 0.2167,
+    "air": 0.2362,
+    "ground": 0.5471
+   },
+   "line_by_line": {
+    "reflected": 0.2456,
+    "air": 0.3182,
+    "ground": 0.4361
+   },
+   "difference_points": {
+    "reflected": -2.8963,
+    "air": -8.2021,
+    "ground": 11.0983
+   }
+  },
+  {
+   "label": "sea near 60 degrees",
+   "j": 5,
+   "i": 57,
+   "lat_deg": 58.143,
+   "lon_deg": 320.625,
+   "land": false,
+   "height_m": 0.0,
+   "surface_albedo": 0.069,
+   "water_kg_m2": 172.4313,
+   "line_by_line_water_kg_m2": 176.9411,
+   "arriving_w_m2": 192.3069,
+   "gcm": {
+    "reflected": 0.2256,
+    "air": 0.2426,
+    "ground": 0.5318
+   },
+   "line_by_line": {
+    "reflected": 0.2664,
+    "air": 0.325,
+    "ground": 0.4086
+   },
+   "difference_points": {
+    "reflected": -4.0796,
+    "air": -8.2422,
+    "ground": 12.3218
+   }
+  }
+ ],
+ "mean_difference_points": {
+  "land": {
+   "reflected": -0.1356,
+   "air": -7.8795,
+   "ground": 8.0151
+  },
+  "sea": {
+   "reflected": -2.588,
+   "air": -8.1439,
+   "ground": 10.732
+  }
+ },
+ "producer": {
+  "domain": "climate",
+  "files": {
+   "gcm/radiation_check.py": "730c41d7f86175e2",
+   "crm/radiation_check.py": "52f5f1d364ad6f8b"
+  }
+ }
+}

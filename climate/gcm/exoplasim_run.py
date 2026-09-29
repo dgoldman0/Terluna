@@ -37,9 +37,11 @@ transmission (protection/spectra/shield_transmission.json) sets both the total f
 between ExoPlaSim's two solar bands. The air is the 1-D models' dry composition (O2 at 21,227 Pa,
 Earth's Ar/N2, 400 ppm CO2, N2 the balance), with the pressure set at the water level as on Earth:
 land stands above it, so the global mean surface pressure is a few per cent lower. The land albedo
-is a uniform placeholder. PlaSim fits 12 lunar days into its year, which makes its solar day 29.8
-Earth days (0.9% longer than the real 29.53; the rotation keeps the true 27.32 days) and its year
-357.5 days. Output is ten means per lunar day. The random seed is fixed, so runs repeat exactly.
+is a uniform placeholder. PlaSim counts 12 of the Moon's rotations in a 360-day year, which makes its
+solar day 29.8 Earth days (0.9% longer than the real 29.53; the rotation keeps the true 27.32 days),
+and runs 360 days a year. Output is ten means per lunar day. The random seed is fixed, so runs repeat
+exactly. As configured here PlaSim's Sun sweeps unevenly and its orbit is Earth's for 1 AD, with a
+23.7 degree tilt: see the README ("How the Moon is set up").
 """
 from __future__ import annotations
 import argparse
@@ -78,9 +80,9 @@ EXPERIMENTS = {
     'A28': dict(pressure_pa=121590.0, water=28, lakes=True, shield='titania_stack', mldepth=50.0,
                 purpose='design case with the atlas seas and rain-fed lakes'),
 }
-# PlaSim fits a whole number of solar days into its year: 12 lunar days of 1430 half-hour steps
-# (29.8 Earth days each, 0.9% longer than the real 29.53, with the true 27.32-day rotation), 357.5
-# Earth days in all. Output: 10 means per lunar day (about 3 days each), 120 a year.
+# PlaSim's lunar day is 1430 half-hour steps (29.8 Earth days, 0.9% longer than the real 29.53, with the
+# true 27.32-day rotation); its year runs ExoPlaSim's 17,280 steps, 360 Earth days. Output: 10 means per
+# lunar day (about 3 days each), 120 a year, covering 17,160 of the steps.
 MODEL = dict(resolution='T21', layers=10, timestep_min=30.0, land_albedo=0.2, steps_per_lunar_day=1430,
              writes_per_lunar_day=10, lunar_days_per_year=12, seed=1,
              # Radiation calibrated against the line-by-line model on cloud-free lunar columns at 280 and
