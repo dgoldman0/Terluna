@@ -447,6 +447,74 @@ disagreement lies in what every CM1 case here shares (the placeholder land
 surface, the large-scale forcing, the physics at lunar gravity) or in the GCM's
 own convection and clouds.
 
+## What else divides CM1 and the GCM at the crossing
+
+With the rings' two dimensions ruled out, three more pieces were tested at the
+same crossing: the land surface every CM1 case shares, the radiation of both
+models, and where CM1's rain goes.
+
+**The land surface** (cases `box_0e_small`, `box_0e_small_rough`,
+`box_0e_small_soil` and `box_0e_small_gcm_land`: boxes 192 km square, a quarter
+of `box_0e`, under the same forcing, 2.8–3.0 hours each on 4 threads). The GCM's
+land (PlaSim as run) has a roughness length of 2 m everywhere against the
+placeholder's 10 cm, a soil that holds heat about a quarter better, and the same
+albedo of 0.20; at 0° E its bucket stays full. The small box with the
+placeholder land runs 0.4 °C warmer and more humid than `box_0e`, with the same
+rain and daytime cloud. Against it, over the second lunar day:
+
+| Land given the GCM's | Air at 2 m | Dewpoint at the GCM's layer | Rain per lunar day |
+|---|---|---|---|
+| Roughness (2 m) | +0.05 °C | +0.20 °C | +1 mm |
+| Soil | 0.00 °C | +0.07 °C | 0 mm |
+| Roughness, soil and full wetness | −0.10 °C | +0.28 °C | +7 mm |
+
+The ground divides its energy the same way in all four: 139–140 W/m² of net
+sunlight and −6 to −10 W/m² of net infrared, 26–27 W/m² carried into the air as
+heat and 101–105 W/m² evaporating water. The GCM's ground takes the same
+130 W/m² in all, but carries 8 W/m² into the air and evaporates 122. So the
+land accounts for a few tenths of a degree of the 4.2 °C gap in the air and
+none of the 5.0 °C gap in the dewpoint; rougher land halves the wind at 10 m
+and changes little else.
+
+**Radiation** ([radiation_check.py](radiation_check.py),
+[radiation_check_box_0e_small.json](../results/crm/radiation_check_box_0e_small.json)).
+The repository's line-by-line model, against which the GCM was calibrated,
+runs on each model's own clear column at the crossing. CM1's radiation (RRTMG)
+is within 2.5 points of it in the shares of sunlight reflected, absorbed in the
+air and reaching the ground, near noon and with the Sun lower, and within
+8 W/m² in each over the lunar day. The GCM's is not. On its own column, which
+holds 195 kg/m² of water vapour, it reflects 131 W/m² over the lunar day in
+clear sky where line-by-line reflects 96, and absorbs 76 W/m² in the air where
+line-by-line absorbs 116; the ground's share is close (167 against 162). Its
+calibration matched the global-mean clear-sky albedo, partly by strengthening
+Rayleigh scattering; over this humid land it reflects too much, and its air
+gets 40 W/m² less of the Sun's heat than line-by-line gives it. Line-by-line
+puts CM1's wetter column (271 kg/m²) 8–9 W/m² above the GCM's in the sunlight
+its air absorbs, so most of the two models' difference there, 111 against
+76 W/m², is the GCM's radiation.
+
+**Where CM1's rain goes.** The microphysics keeps a water budget. Over the
+second lunar day in the small box, 304 mm of water condensed; 52 mm evaporated
+back from cloud, 197 mm evaporated from rain, snow and graupel on the way down,
+and 34 mm reached the ground: 11% of what condensed, with 85% of the falling
+water evaporating. The large box loses the same share; the rings lose 57–73%.
+At lunar gravity raindrops fall about three times slower and graupel 2.3 times,
+through a daytime mixed layer 8–10 km deep at 65–75% humidity, so most rain
+evaporates back into the lower air. That keeps the lower air humid, and the
+ground evaporates less into it. The GCM's rain scheme, fitted to Earth, brings
+129 mm per lunar day to the ground here, about what its ground evaporates.
+
+So neither the rings' two dimensions nor the land surface explains why the
+cloud-resolving model and the GCM disagree. Two differences stand out instead:
+the GCM's radiation, which heats this humid air about 40 W/m² too little, and
+the fate of rain at lunar gravity, which CM1 follows through the fall and the
+GCM's scheme takes from Earth.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.box_analysis box_0e_small_rough --from-day 29.5 --reference box_0e_small
+climate/gcm/.venv/bin/python -m climate.crm.radiation_check box_0e_small --from-day 29.5    # about a quarter of an hour on 8 cores
+```
+
 ## The gravity pair
 
 If lunar convection were Earth's stretched six times in size and duration, a

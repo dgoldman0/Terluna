@@ -1,0 +1,122 @@
+{
+ "schema": "terluna.climate.crm-radiation-check/1",
+ "case": "box_0e_small",
+ "site": {
+  "ring": "ring_a",
+  "lat_deg": 0.0,
+  "lon_deg": 0.0,
+  "radius_m": 100000.0
+ },
+ "evidence": "Clear-sky solar fluxes only, with no cloud. CM1's fluxes are those RRTMG gave its cloud-free columns in the box; the GCM's are its own clear-sky diagnostics (3-day means). The line-by-line model (HITRAN lines, MT_CKD water continuum, collision-induced absorption, Rayleigh scattering, a delta-scaled two-stream solver with a pseudo-spherical direct beam) runs on mean profiles, so it leaves out how the fluxes vary with the profile from hour to hour; the GCM's column is its ten levels, extended isothermal and dry above its top.",
+ "reading_rule": "Shares are of the sunlight arriving at the top of the air, for a ground albedo of 0.20. Daily means are W/m2 over the whole lunar day at the site, 373.5 W/m2 arriving on average. unfiltered is sunlight with the Sun's own spectrum, as CM1's RRTMG takes it; titania is sunlight through the titania stack, as the GCM takes it; both are scaled to the shield's total of 1,173.5 W/m2.",
+ "surface_albedo": 0.2,
+ "sunlight_w_m2": 1173.4883,
+ "arriving_daily_w_m2": 373.5329,
+ "from_day": 29.5,
+ "cm1_at_sun_heights": {
+  "near_noon": {
+   "snapshots": 42,
+   "cos_zenith": 0.9488,
+   "water_kg_m2": 276.178,
+   "cm1": {
+    "reflected": 0.2719,
+    "air": 0.2929,
+    "ground": 0.4351
+   },
+   "line_by_line": {
+    "unfiltered": {
+     "reflected": 0.2628,
+     "ground": 0.4279,
+     "air": 0.3092
+    },
+    "titania": {
+     "reflected": 0.2334,
+     "ground": 0.4436,
+     "air": 0.323
+    }
+   }
+  },
+  "lower_sun": {
+   "snapshots": 13,
+   "cos_zenith": 0.5251,
+   "water_kg_m2": 264.1313,
+   "cm1": {
+    "reflected": 0.332,
+    "air": 0.3095,
+    "ground": 0.3585
+   },
+   "line_by_line": {
+    "unfiltered": {
+     "reflected": 0.3094,
+     "ground": 0.3561,
+     "air": 0.3345
+    },
+    "titania": {
+     "reflected": 0.2803,
+     "ground": 0.3701,
+     "air": 0.3496
+    }
+   }
+  }
+ },
+ "daily_mean_clear_sky": {
+  "cm1": {
+   "snapshots": 115,
+   "water_kg_m2": 270.8984,
+   "own": {
+    "reflected": 110.3419,
+    "air": 111.0266,
+    "ground": 150.249
+   },
+   "line_by_line": {
+    "unfiltered": {
+     "reflected": 105.2589,
+     "air": 119.1661,
+     "ground": 149.1079
+    },
+    "titania": {
+     "reflected": 94.3565,
+     "air": 124.4873,
+     "ground": 154.6891
+    }
+   }
+  },
+  "gcm": {
+   "cells": [
+    [
+     2.7689,
+     0.0
+    ],
+    [
+     -2.7689,
+     0.0
+    ]
+   ],
+   "water_kg_m2": 195.2967,
+   "gcm_prw_kg_m2": 190.2364,
+   "own": {
+    "reflected": 131.1982,
+    "air": 75.8317,
+    "ground": 166.5031
+   },
+   "line_by_line": {
+    "unfiltered": {
+     "reflected": 107.0152,
+     "air": 110.8796,
+     "ground": 155.6382
+    },
+    "titania": {
+     "reflected": 96.2236,
+     "air": 115.7128,
+     "ground": 161.5966
+    }
+   }
+  }
+ },
+ "producer": {
+  "domain": "climate",
+  "files": {
+   "crm/radiation_check.py": "a14bab0ad0cbecbc"
+  }
+ }
+}
