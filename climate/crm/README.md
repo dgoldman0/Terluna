@@ -409,13 +409,43 @@ The patch was checked in two ways. The rebuilt CM1 reproduces the first day of
 `ring_80n_lsw` bit for bit. In two three-hour runs of the box, a heating and a
 moistening prescribed at 25–35 km, falling between two local-time bins, arrive
 at 98% of the amounts expected (the nudging takes back the rest) and at 99.8%.
-Two lunar days take about 7–10 hours on 8 threads, with 0.5 GB of memory and
-about 16 GB of output.
+Two lunar days take about 7 hours on 8 threads, with 0.5 GB of memory and
+about 23 GB of output and restart files.
 
 ```sh
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e     # after ring_a and ring_a_prime
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_0e --hours 12 --threads 8
+climate/gcm/.venv/bin/python -m climate.crm.box_analysis box_0e --from-day 29.5
 ```
+
+**What the box shows** (the second lunar day, days 29.5–59, against the rings'
+land within 100 km of the crossing:
+[box_box_0e.json](../results/crm/box_box_0e.json)). Two lunar days took 6.6
+hours on 8 threads. The box's day has the rings' shape: clear mornings, storms
+from early afternoon with the most rain late in the afternoon, and a saturated
+night. Its rain and daytime cloud fall between the two rings': 38 mm per lunar
+day against 7 on A and 70 on A′, and 14% daytime cloud against 12% and 23%. It
+is warmer and more humid than both around the clock, at the same relative
+humidity (88% over the lunar day): by 1.6–1.9 °C in the air at 2 m (25.4
+against 23.5–23.8 °C), 1.8 °C in the dewpoint at 2 m and 1.6–1.8 °C at the
+height of the GCM's lowest layer, all far outside the day-to-day scatter. Its
+nights are foggier: fog covers the box 56% of the night against 16–25% on the
+rings, under low cloud up to about 1 km, which keeps it warmer. Two limits of
+the box could run it warm. Its surface wind lacks the circulation's own winds
+(0.65 against 1.1–1.3 m/s over the lunar day, and nearly calm at night). Its
+prescribed heating cannot respond to its own warmth, where a warmer stretch of
+ring drives a circulation that carries the heat away.
+
+Against the GCM the box stands further off than the rings. Its air measured the
+GCM's way averages 25.5 °C against the GCM's 21.6 °C, and its dewpoint at the
+GCM's layer 20.8 against 16.4 °C. It rains 38 mm per lunar day against the
+GCM's 129, with 14% daytime cloud against 32%. No hour is comfortable in the
+box or on either ring. So the rings' two dimensions do not explain why the
+cloud-resolving model and the GCM disagree: a third dimension leaves rain and
+cloud within the spread of the two slices and makes the air warmer. The
+disagreement lies in what every CM1 case here shares (the placeholder land
+surface, the large-scale forcing, the physics at lunar gravity) or in the GCM's
+own convection and clouds.
 
 ## The gravity pair
 
