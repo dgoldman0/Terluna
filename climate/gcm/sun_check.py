@@ -47,14 +47,34 @@ def plasim_day_steps(rotspd: float, days_per_year: int, mpstep_min: float) -> in
     return int(round(solar)) // int(round(mpstep_min * 60))
 
 
+CLOCKS = ('plasim', 'model_day', 'synodic')                  # NSUNCLOCK 0, 1, 2 (climate/gcm/exoplasim_run.py)
+
+
+def solang_hour_angle(steps, nlon: int, day_steps: int, mpstep_min: float, rotspd: float, clock: str = 'plasim',
+                      sidereal_day_s: float | None = None, sidereal_year_s: float | None = None) -> np.ndarray:
+    """The Sun's hour angle (radians, time by longitude) at the given steps, as solang has it. PlaSim's own clock
+    counts whole minutes from the start of each model day and turns the Sun ROTSPD times per 1440 of them; the
+    Terluna patch's clocks turn it once per model day, or at the synodic rate continuously from step 0."""
+    steps = np.asarray(steps)
+    lon = np.arange(nlon) * 2 * np.pi / nlon - np.pi
+    if clock == 'synodic':
+        turns = np.mod(steps * mpstep_min * 60.0 * (1.0 / sidereal_day_s - 1.0 / sidereal_year_s), 1.0)
+        return turns[:, None] * 2 * np.pi + lon[None, :]
+    minutes = np.floor((steps % day_steps) * mpstep_min)
+    rate = 2 * np.pi / (day_steps * mpstep_min) if clock == 'model_day' else rotspd * 2 * np.pi / 1440.0
+    return minutes[:, None] * rate + lon[None, :]
+
+
 def solang_mean_mu(lat_deg: float, nlon: int, day_steps: int, mpstep_min: float, rotspd: float,
-                   declination_deg: float = 0.0) -> np.ndarray:
-    """Mean cosine of the Sun's zenith angle by longitude over one model day, as solang has it: the clock counts
-    whole minutes from the start of the model day and turns the Sun ROTSPD times per 1440 of them."""
-    minutes = np.floor(np.arange(day_steps) * mpstep_min)
-    hour = minutes[:, None] * rotspd * 2 * np.pi / 1440.0 + np.arange(nlon)[None, :] * 2 * np.pi / nlon - np.pi
+                   declination_deg: float = 0.0, clock: str = 'plasim', steps=None, **year) -> np.ndarray:
+    """Mean cosine of the Sun's zenith angle by longitude over the steps given, one model day by default."""
+    steps = np.arange(day_steps) if steps is None else np.asarray(steps)
     lat, dec = np.radians(lat_deg), np.radians(declination_deg)
-    return np.maximum(0.0, np.sin(dec) * np.sin(lat) + np.cos(lat) * np.cos(dec) * np.cos(hour)).mean(axis=0)
+    total = np.zeros(nlon)
+    for chunk in np.array_split(steps, max(1, steps.size // 20000)):
+        hour = solang_hour_angle(chunk, nlon, day_steps, mpstep_min, rotspd, clock, **year)
+        total += np.maximum(0.0, np.sin(dec) * np.sin(lat) + np.cos(lat) * np.cos(dec) * np.cos(hour)).sum(axis=0)
+    return total / steps.size
 
 
 def annual_mean_insolation(lat_deg, obliquity_deg: float, eccentricity: float, sunlight_w_m2: float) -> np.ndarray:
@@ -99,11 +119,20 @@ def check(run: str, years) -> dict:
             count += d['time'].size
             lat, lon = np.asarray(d['lat'][:], float), np.asarray(d['lon'][:], float)
     arriving = arriving / count
+    clock = CLOCKS[int(namelist(folder / 'radmod_namelist').get('NSUNCLOCK', 0))]
     steps = plasim_day_steps(nl['ROTSPD'], int(nl['N_DAYS_PER_YEAR']), nl['MPSTEP'])
-    sweep = steps * nl['MPSTEP'] * nl['ROTSPD'] * 360.0 / 1440.0
+    minutes = steps * nl['MPSTEP']
+    year = dict(sidereal_day_s=86400.0 / nl['ROTSPD'], sidereal_year_s=nl['SIDEREAL_YEAR'])
+    synodic_s = 1.0 / (1.0 / year['sidereal_day_s'] - 1.0 / year['sidereal_year_s'])
+    sweep = dict(plasim=minutes * nl['ROTSPD'] * 360.0 / 1440.0, model_day=360.0,
+                 synodic=360.0 * minutes * 60.0 / synodic_s)[clock]
+    sun_day = dict(plasim=None, model_day=minutes / 1440.0, synodic=synodic_s / 86400.0)[clock]
     j = int(np.argmin(np.abs(lat)))
     row = arriving[j] / arriving[j].mean()
-    model = solang_mean_mu(lat[j], lon.size, steps, nl['MPSTEP'], nl['ROTSPD'])
+    # The synodic clock turns the Sun evenly, but the years analysed need not hold whole lunar days: the span
+    # of steps they cover gives the unevenness to expect (its phase is not tracked, only its size).
+    span = np.arange(int(count / 120 * nl['N_RUN_STEPS'])) if clock == 'synodic' else None
+    model = solang_mean_mu(lat[j], lon.size, steps, nl['MPSTEP'], nl['ROTSPD'], clock=clock, steps=span, **year)
     model = model / model.mean()
     used = logged_orbit(folder / f'MOST_DIAG.{years[0]:05d}')
     asked = dict(obliquity_deg=nl['OBLIQ'], eccentricity=nl['ECCEN'])
@@ -113,12 +142,13 @@ def check(run: str, years) -> dict:
     rms = lambda a: float(np.sqrt(np.mean((zonal - a) ** 2)))
     weight = np.cos(np.radians(lat))
     return dict(schema=SCHEMA, run=run, years=list(years), evidence=EVIDENCE, reading_rule=READING_RULE,
-                model_day=dict(steps=steps, days=steps * nl['MPSTEP'] / 1440.0, sun_sweep_deg=sweep,
-                               skip_back_deg=sweep - 360.0),
+                model_day=dict(steps=steps, days=minutes / 1440.0, sun_clock=clock, sun_sweep_deg=sweep,
+                               skip_back_deg=sweep - 360.0 if clock == 'plasim' else 0.0, sun_day_days=sun_day),
                 along_row=dict(lat_deg=float(lat[j]), lon_deg=lon.tolist(), arriving_w_m2=arriving[j].tolist(),
                                relative=row.tolist(), solang_relative=model.tolist(),
                                relative_range=[float(row.min()), float(row.max())],
-                               correlation_with_solang=float(np.corrcoef(row, model)[0, 1])),
+                               solang_relative_range=[float(model.min()), float(model.max())],
+                               correlation_with_solang=float(np.corrcoef(row, model)[0, 1]) if clock == 'plasim' else None),
                 orbit=dict(asked=asked, used=used),
                 by_latitude=dict(lat_deg=lat.tolist(), arriving_w_m2=zonal.tolist(), orbit_used_w_m2=expect_used.tolist(),
                                  orbit_asked_w_m2=expect_asked.tolist(), rms_against_used_w_m2=rms(expect_used),
@@ -138,10 +168,13 @@ def main(argv=None) -> int:
     path = RESULTS / f'sun_check_{args.run}.json'
     path.write_text(json.dumps(rounded(result, 4), indent=1) + '\n')
     a, b = result['along_row'], result['by_latitude']
-    print(f"model day {result['model_day']['steps']} steps ({result['model_day']['days']:.2f} d): the Sun sweeps "
-          f"{result['model_day']['sun_sweep_deg']:.1f} deg and skips back {result['model_day']['skip_back_deg']:.1f}")
+    day = result['model_day']
+    print(f"model day {day['steps']} steps ({day['days']:.2f} d), Sun clock {day['sun_clock']}: the Sun sweeps "
+          f"{day['sun_sweep_deg']:.1f} deg per model day and skips back {day['skip_back_deg']:.1f}"
+          + (f"; the Sun's day is {day['sun_day_days']:.2f} d" if day['sun_day_days'] else ''))
     print(f"row at {a['lat_deg']:.1f}: sunlight {a['relative_range'][0]:.3f}-{a['relative_range'][1]:.3f} of its mean; "
-          f"correlation with solang {a['correlation_with_solang']:.4f}")
+          f"solang's arithmetic gives {a['solang_relative_range'][0]:.3f}-{a['solang_relative_range'][1]:.3f}"
+          + (f", correlation {a['correlation_with_solang']:.4f}" if a['correlation_with_solang'] is not None else ''))
     print(f"tilt asked {result['orbit']['asked']['obliquity_deg']:.3f}, used {result['orbit']['used']['obliquity_deg']:.3f}; "
           f"rows' means rms {b['rms_against_used_w_m2']:.1f} W/m2 from the orbit used, {b['rms_against_asked_w_m2']:.1f} from the one asked")
     print(path)

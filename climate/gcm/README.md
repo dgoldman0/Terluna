@@ -88,13 +88,14 @@ the faster route.
 
 ## ExoPlaSim runs (2026-09-25)
 
-**The runs' sunlight has two faults (found 2026-09-29).** Every run so far has
-Earth's 23.7° tilt in place of the Moon's 1.54°, and a Sun that sweeps unevenly
-across longitude (both under "How the Moon is set up" below). The global total
-of sunlight is right. Where it falls is not, so results that vary with latitude
-(above all near the poles), with the seasons or with longitude are not the
-Moon's, and global means can move once the runs are repeated with both fixed.
-The radiation calibration was made with them too.
+**The sunlight of runs before 2026-09-29 has two faults (found and fixed that
+day).** They have Earth's 23.7° tilt in place of the Moon's 1.54°, and a Sun
+that sweeps unevenly across longitude (both under "How the Moon is set up"
+below). Their global total of sunlight is right. Where it falls is not, so
+their results that vary with latitude (above all near the poles), with the
+seasons or with longitude are not the Moon's, and their global means can differ
+from the corrected runs'. The runner now fixes both, and the radiation is
+recalibrated with the Sun corrected.
 
 ExoPlaSim 3.4.2 is installed in `climate/gcm/.venv` (ignored by Git), built with
 gfortran and Open MPI. Its postprocessor needs `meson` and `ninja` in the same
@@ -136,9 +137,9 @@ resume stopped them, and its second year's restart and output were
 byte-identical to an uninterrupted run's.
 
 **How the Moon is set up.**
-- **Planet:** radius, gravity and the true 27.32-day rotation from `products/`.
-  The runner passes the Moon's 1.54° tilt as well, but the runs so far have
-  Earth's (see "Its tilt is Earth's" below).
+- **Planet:** radius, gravity, the true 27.32-day rotation and the Moon's 1.54°
+  tilt from `products/`, the orbit held to them (`fixed_orbit`; runs before
+  2026-09-29 have Earth's, see "Its tilt was Earth's" below).
 - **Air:** the 1-D models' dry composition, with 1.2 atm at the water level. Land
   stands above it, so the global mean surface pressure is 1.16 atm and ranges
   from 1.03 to 1.22 atm.
@@ -152,14 +153,15 @@ byte-identical to an uninterrupted run's.
   titania stack that gives 1235 W/m², and it sets the split between ExoPlaSim's two
   solar bands.
 - **Calendar:** ExoPlaSim counts the Moon's rotations in a 360-day year, 12,
-  and PlaSim makes its solar day 12/11 of the 27.32-day rotation: 29.8 days,
-  1,430 half-hour steps, 0.9% longer than the real 29.53. The orbit follows the
-  real year. Each model year runs 17,280 steps (360 days), while the runner's
-  120 output means of 143 steps cover 17,160, so from one year to the next the
-  output numbers fall 120 steps, 33° of the Sun's path, later in the day.
-  Day–night analyses should sort by the Sun's position (`czen`), not by output
-  number.
-- **Its Sun sweeps 393° a day and skips back 33° (found 2026-09-29).** PlaSim's
+  and PlaSim makes its model day 12/11 of the 27.32-day rotation: 29.8 days,
+  1,430 half-hour steps. A model year is 12 of them, 17,160 steps, and the
+  output holds ten means per model day (`whole_lunar_days`; before 2026-09-29
+  each year ran ExoPlaSim's 17,280 steps, and the output numbers slipped 120
+  steps against the Sun from one year to the next). The orbit follows the real
+  year. The Sun keeps its own day of 29.53 (below), 3.2° of its path behind the
+  model day each day, so day–night analyses sort by the Sun's position
+  (`czen`).
+- **Its Sun swept 393° a day and skipped back 33° (found and fixed 2026-09-29).** PlaSim's
   `solang` (in `radmod.f90`) turns the Sun at the planet's rotation rate, one
   turn in 27.32 days, and restarts its clock at the start of every model day of
   29.8. Each model day the Sun therefore sweeps 392.5° and then skips back
@@ -171,9 +173,14 @@ byte-identical to an uninterrupted run's.
   [sun_check_A28_dim5.json](../results/gcm/sun_check_A28_dim5.json)). The skip
   is 1/(N − 1) of a turn for a planet whose rotations ExoPlaSim counts as N in a
   360-day year: about a degree for N near 360, and 33° for the Moon's 12. It is
-  in ExoPlaSim 3.4.2, the latest release, and in its current source. The fix is
-  a one-line patch that turns the Sun once per model day.
-- **Its tilt is Earth's (found 2026-09-29).** ExoPlaSim uses the obliquity it
+  in ExoPlaSim 3.4.2, the latest release, and in its current source. The
+  runner's patch to `solang` (`sun_clock`) now turns the Sun evenly at the
+  synodic rate that the rotation and the orbit give, one turn per 29.53 days. In
+  the two-year test `A28_dim5_sun_test` the equator's sunlight varies along the
+  row only by what 12.1 lunar days in a year leave, 0.991–1.017 of its mean, as
+  `solang`'s new arithmetic predicts
+  ([sun_check_A28_dim5_sun_test.json](../results/gcm/sun_check_A28_dim5_sun_test.json)).
+- **Its tilt was Earth's (found and fixed 2026-09-29).** ExoPlaSim uses the obliquity it
   is given only when the orbit is fixed (`fixedorbit=True`, PlaSim's
   `NFIXORB=1`). The runner kept the default, with which PlaSim replaces the
   namelist's orbit with Earth's for its start year, 1 AD, from Berger's (1978)
@@ -182,16 +189,15 @@ byte-identical to an uninterrupted run's.
   seasons. In `A28_dim5` the rows' mean sunlight follows that orbit within
   1.8 W/m² rms and misses the Moon's by 44: 4% short on the equator, 6% over at
   58°, 29% over at 69°, and 149 W/m² at 86° against the Moon's 29, where the
-  Sun stays down for about five of the year's twelve lunar days.
-- **Together** the two faults leave 328 W/m² of the 373 due at 0° E over a
-  lunar day: the sweep takes about 30 and the tilt about 15. Every result below
-  that varies with latitude, season or longitude carries them, and so do the
-  products other lanes read: the lakes and groundwater in `geography/`, the
-  canopy models in `biosphere/canopy/`, `illumination/surface_light/`, the atlas
-  and the CM1 boxes' GCM inputs. The fix is the `solang` patch and
-  `fixedorbit=True` in the runner. A short run should then show `sun_check` a
-  flat row and the Moon's rows before the radiation is recalibrated and the runs
-  are repeated.
+  Sun stays down for about five of the year's twelve lunar days. The runner now
+  holds the orbit (`fixed_orbit`): the test's log reports 1.5424° and 0.016715,
+  and its rows follow the Moon's orbit within 0.1 W/m² rms.
+- **Together** the two faults left 328 W/m² of the 373 due at 0° E over a
+  lunar day: the sweep took about 30 and the tilt about 15. Every result below
+  from runs before 2026-09-29 that varies with latitude, season or longitude
+  carries them, as do the products other lanes built from those runs: the lakes
+  and groundwater in `geography/`, the canopy models in `biosphere/canopy/`, the
+  atlas and the CM1 boxes' GCM inputs.
 
 **Radiation, checked against line-by-line and calibrated.** The line-by-line model
 (`atmosphere/radiative_convective`) was run on the GCM's own cloud-free columns:
@@ -250,6 +256,26 @@ Sun heights; the tropical columns show the same 8 points. Neither calibrated
 setting (Rayleigh scattering, the longwave continuum) moves sunlight into the
 air. PlaSim's near-infrared water-vapour absorption, fitted to Earth's water
 paths, is the likely place to recalibrate.
+
+**Recalibrated (2026-09-29).** PlaSim's near-infrared band absorbs through
+Lacis and Hansen's (1974) formula, fitted to Earth's water paths. It levels off
+toward half the sunlight, so over the Moon's paths, several times Earth's, it
+absorbs too little. [plasim_shortwave.py](plasim_shortwave.py) repeats PlaSim's
+clear-sky shortwave for one column, and on the corrected Sun's two-year test it
+reproduces the GCM's own clear-sky split within 0.4 points on all 11 columns
+([shortwave_validate_A28_dim5_sun_test.json](../results/gcm/shortwave_validate_A28_dim5_sun_test.json)).
+Fitted against line-by-line on the radiation check's columns
+([shortwave_fit_A28_dim5.json](../results/gcm/shortwave_fit_A28_dim5.json)), a
+multiplier of 1.356 on the absorptivity (the runner's `sw_water_absorption`, a
+patch to `swr` that keeps the band's transmission above 0.001), with the
+Rayleigh multiplier raised from 1.8 to 2.215 to keep the reflection, leaves the
+air 0.3 points and the reflection 0.7 points rms from line-by-line; before, the
+air was 8.1 points short. Of three ways tried to raise the absorption (a longer
+path, a larger absorptivity, a term growing with the path), the larger
+absorptivity carried over best to two columns the fit did not see: a warmer,
+moister column from the full shield's run (303 K, 338 kg/m² of water vapour),
+where the air stays 0.7 points short against 9.7 before, and a cooler one from
+the 8%-dimmer run, 0.2 points short.
 
 ### Run A, the design case
 

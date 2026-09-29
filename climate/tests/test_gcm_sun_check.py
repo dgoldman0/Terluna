@@ -21,6 +21,17 @@ def test_solang_sweeps_evenly_only_when_its_model_day_is_one_turn():
     assert np.ptp(even) / even.mean() < 5e-3
 
 
+def test_the_patched_clocks_turn_the_sun_evenly():
+    one_turn = s.solang_mean_mu(0.0, 64, 1430, 30.0, MOON_ROTSPD, clock='model_day')
+    assert np.ptp(one_turn) / one_turn.mean() < 1e-3
+    year = dict(sidereal_day_s=86400.0 / MOON_ROTSPD, sidereal_year_s=365.25636 * 86400.0)
+    synodic_s = 1.0 / (1.0 / year['sidereal_day_s'] - 1.0 / year['sidereal_year_s'])
+    assert np.isclose(synodic_s / 86400.0, 29.5306, atol=1e-3)            # the real lunar day
+    steps = np.arange(int(20 * synodic_s / 1800.0))                      # 20 lunar days of half-hour steps
+    synodic = s.solang_mean_mu(0.0, 64, 1430, 30.0, MOON_ROTSPD, clock='synodic', steps=steps, **year)
+    assert np.ptp(synodic) / synodic.mean() < 1e-3
+
+
 def test_annual_means_keep_the_global_sunlight_and_spread_it_by_tilt():
     lat = np.linspace(-89.5, 89.5, 180)
     weight = np.cos(np.radians(lat))

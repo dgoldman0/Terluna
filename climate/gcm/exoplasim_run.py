@@ -38,10 +38,12 @@ between ExoPlaSim's two solar bands. The air is the 1-D models' dry composition 
 Earth's Ar/N2, 400 ppm CO2, N2 the balance), with the pressure set at the water level as on Earth:
 land stands above it, so the global mean surface pressure is a few per cent lower. The land albedo
 is a uniform placeholder. PlaSim counts 12 of the Moon's rotations in a 360-day year, which makes its
-solar day 29.8 Earth days (0.9% longer than the real 29.53; the rotation keeps the true 27.32 days),
-and runs 360 days a year. Output is ten means per lunar day. The random seed is fixed, so runs repeat
-exactly. As configured here PlaSim's Sun sweeps unevenly and its orbit is Earth's for 1 AD, with a
-23.7 degree tilt: see the README ("How the Moon is set up").
+model day 29.8 Earth days (the rotation keeps the true 27.32 days); a model year is 12 of them, and the
+output ten means per model day. The random seed is fixed, so runs repeat exactly. A patch to PlaSim's
+solang turns the Sun evenly at the synodic rate, one turn per 29.53 days, and the orbit is held to the
+Moon's elements with its 1.54 degree tilt. Runs before 2026-09-29 had PlaSim's own clock, which sweeps the
+Sun unevenly, and Earth's orbit for 1 AD with a 23.7 degree tilt: see the README ("How the Moon is set
+up").
 """
 from __future__ import annotations
 import argparse
@@ -80,16 +82,22 @@ EXPERIMENTS = {
     'A28': dict(pressure_pa=121590.0, water=28, lakes=True, shield='titania_stack', mldepth=50.0,
                 purpose='design case with the atlas seas and rain-fed lakes'),
 }
-# PlaSim's lunar day is 1430 half-hour steps (29.8 Earth days, 0.9% longer than the real 29.53, with the
-# true 27.32-day rotation); its year runs ExoPlaSim's 17,280 steps, 360 Earth days. Output: 10 means per
-# lunar day (about 3 days each), 120 a year, covering 17,160 of the steps.
+# PlaSim's model day is 1430 half-hour steps (29.8 Earth days; with the synodic Sun clock the Sun's own day
+# is the real 29.53). A model year is 12 of them, 17,160 steps (whole_lunar_days; ExoPlaSim's own year is
+# 17,280). Output: 10 means per model day (about 3 days each), 120 a year.
 MODEL = dict(resolution='T21', layers=10, timestep_min=30.0, land_albedo=0.2, steps_per_lunar_day=1430,
              writes_per_lunar_day=10, lunar_days_per_year=12, seed=1,
-             # Radiation calibrated against the line-by-line model on cloud-free lunar columns at 280 and
-             # 310 K (see the README): a multiplier on ExoPlaSim's spectrum-derived Rayleigh coefficient,
-             # and PlaSim's water-vapour continuum coefficient. 1.0 and 0.024 reproduce the unmodified
-             # model, which absorbed about 14 W/m2 too much sunlight and emitted 12 W/m2 too little when warm.
-             rayleigh_scale=1.8, h2o_continuum=0.004,
+             # Radiation calibrated against the line-by-line model (see the README): a multiplier on ExoPlaSim's
+             # spectrum-derived Rayleigh coefficient and PlaSim's water-vapour continuum coefficient, first
+             # fitted on cloud-free lunar columns at 280 and 310 K (1.8 and 0.004, runs before 2026-09-29),
+             # the Rayleigh multiplier then refitted beside the water absorption below. 1.0 and 0.024
+             # reproduce the unmodified model, which absorbed about 14 W/m2 too much sunlight and emitted
+             # 12 W/m2 too little when warm.
+             rayleigh_scale=2.215, h2o_continuum=0.004,
+             # A multiplier on water vapour's absorptivity in PlaSim's near-infrared band (SHORTWAVE_EDITS below;
+             # 1.0 is PlaSim's own). With the Rayleigh multiplier refitted beside it, it brings PlaSim's clear-sky
+             # split of the sunlight to line-by-line's on 11 columns of the design case (plasim_shortwave.py).
+             sw_water_absorption=1.356,
              # How the radiation sees cloud water (CLOUD_WATER below). Runs A and B used 'plasim', ExoPlaSim
              # unmodified; 'earth_path' corrects its Earth-fitted formula for the Moon's gravity.
              cloud_water='earth_path',
@@ -104,7 +112,23 @@ MODEL = dict(resolution='T21', layers=10, timestep_min=30.0, land_albedo=0.2, st
              clear_sky=1,
              # A multiplier on the sunlight the shield passes, the same at every wavelength: 0.92 is a shield
              # that passes 8% less. 1.0 keeps the shield product's transmission.
-             sunlight_scale=1.0)
+             sunlight_scale=1.0,
+             # The Sun's clock (the Terluna patch to solang, SUN_CLOCKS below): 'synodic' turns the Sun
+             # evenly, once per 29.53-day lunar day. 'plasim' keeps PlaSim's own clock, which sweeps the Sun
+             # 392.5 degrees per 29.8-day model day and skips it back 32.5 (README, "How the Moon is set
+             # up"); every run before 2026-09-29 had it.
+             sun_clock='synodic',
+             # 1 holds the orbit to the planet's own elements (ExoPlaSim's fixedorbit): the Moon's 1.54 degree
+             # tilt. With 0, ExoPlaSim's default, PlaSim replaces them with Earth's orbit for its start year,
+             # 1 AD, and its 23.7 degree tilt; every run before 2026-09-29 had that.
+             fixed_orbit=1,
+             # 1 makes each model year exactly lunar_days_per_year model days (17,160 steps), all of it in
+             # the output's 120 means. 0 keeps ExoPlaSim's 360-day year (17,280 steps), whose last 120 steps
+             # fall outside them.
+             whole_lunar_days=1)
+# The Sun's clock, PlaSim's NSUNCLOCK (the index): its own; one turn per model day of steps_per_lunar_day
+# steps (29.8 days); or the synodic rate the rotation and the orbit give, continuous in time.
+SUN_CLOCKS = ('plasim', 'model_day', 'synodic')
 # Cloud water. PlaSim uses it only for the clouds' radiation: rain comes from its condensation and
 # convection schemes, which rain out any excess vapour at once. It diagnoses the water with CCM3's
 # formula, 0.21 g/m3 at the ground falling off with geometric height on a scale of
@@ -190,10 +214,51 @@ CONVECTIVE_EDITS = [
      "      zrfac = solar_day * 1000.0 ! convert m/s into mm/day\n"
      "      if(convday > 0.) zrfac = convday * 1000.0 ! Terluna: per convday seconds\n"),
 ]
+# The Sun's clock (radmod.f90, solang): NSUNCLOCK 0, the default, keeps PlaSim's hour angle, which turns at
+# the rotation rate and restarts every model day. 1 turns the Sun once per model day. 2 turns it at the
+# synodic rate, 1/sidereal_day - 1/sidereal_year, continuously from step 0 (for runs that are not
+# synchronous; slowdown does not apply). Reported upstream as a bug in solang (README).
+SUN_EDITS = [
+    ("      real :: rayscale = 1.0     ! Terluna: multiplier on rcoeff, calibrated against line-by-line\n",
+     "      real :: rayscale = 1.0     ! Terluna: multiplier on rcoeff, calibrated against line-by-line\n"
+     "      integer :: nsunclock = 0   ! Terluna: the Sun's clock (0 PlaSim's, 1 a turn per model day, 2 synodic)\n"),
+    (",nsimplealbedo,nstarfile,starfile,starfilehr,minwavel,rayscale\n",
+     ",nsimplealbedo,nstarfile,starfile,starfilehr,minwavel,rayscale,nsunclock\n"),
+    ("      call mpbcr(rayscale)\n", "      call mpbcr(rayscale)\n      call mpbci(nsunclock)\n"),
+    ("      zrtim = rotspd * TWOPI / 1440.0         ! scale time   to radians\n",
+     "      zrtim = rotspd * TWOPI / 1440.0         ! scale time   to radians\n"
+     "      if (nsunclock == 1) zrtim = TWOPI / (ntspd * mpstep) ! Terluna: one turn per model day\n"
+     "      if (nsunclock == 2) zturns = mod(real(nstep) * mpstep * 60.0                              &\n"
+     "     &    * (1.0 / sidereal_day - 1.0 / sidereal_year), 1.0) ! Terluna: synodic turns since step 0\n"),
+    ("         if (ngenkeplerian==1) zhangle = zhangle - rasc\n",
+     "         if (ngenkeplerian==1) zhangle = zhangle - rasc\n"
+     "         if (nsunclock == 2) zhangle = zturns * TWOPI + jlon * zrlon - PI ! Terluna: synodic clock\n"),
+]
+# Water vapour's sunlight (radmod.f90, swr): SWH2OSCALE multiplies the absorptivity of PlaSim's near-infrared
+# band, Lacis and Hansen's formula fitted to Earth's water paths, which absorbs too little over the Moon's much
+# longer ones; the band's transmission is kept above 0.001. 1, the default, keeps PlaSim's. The form was chosen
+# with plasim_shortwave.py, which holds the fit.
+SHORTWAVE_EDITS = [
+    ("      integer :: nsunclock = 0   ! Terluna: the Sun's clock (0 PlaSim's, 1 a turn per model day, 2 synodic)\n",
+     "      integer :: nsunclock = 0   ! Terluna: the Sun's clock (0 PlaSim's, 1 a turn per model day, 2 synodic)\n"
+     "      real :: swh2oscale = 1.0   ! Terluna: multiplier on water vapour's shortwave absorptivity\n"),
+    (",minwavel,rayscale,nsunclock\n", ",minwavel,rayscale,nsunclock,swh2oscale\n"),
+    ("      call mpbci(nsunclock)\n", "      call mpbci(nsunclock)\n      call mpbcr(swh2oscale)\n"),
+    ("       ztwvtu(:)=1.-2.9*zwv(:)/((1.+141.5*zwv(:))**0.635+5.925*zwv(:))  &\n"
+     "     &            /zsolar2\n",
+     "       ztwvtu(:)=max(0.001,1.-swh2oscale*2.9*zwv(:)/((1.+141.5*zwv(:))**0.635+5.925*zwv(:))  &\n"
+     "     &            /zsolar2) ! Terluna: calibrated absorptivity\n"),
+    ("       ztwv(:)=(1.-2.9*zwv(:)/((1.+141.5*zwv(:))**0.635+5.925*zwv(:))   &\n",
+     "       ztwv(:)=max(0.001,1.-swh2oscale*2.9*zwv(:)/((1.+141.5*zwv(:))**0.635+5.925*zwv(:))   &\n"),
+    ("     &         /(1.-2.9*zwv(:)/((1.+141.5*zwv(:))**0.635+5.925*zwv(:))  &\n",
+     "     &         /max(0.001,1.-swh2oscale*2.9*zwv(:)/((1.+141.5*zwv(:))**0.635+5.925*zwv(:))  &\n"),
+]
 # (file, marker, edits) in the order applied; a marker appears only in the text its patch adds.
 PATCHES = [('radmod.f90', 'Terluna: calibration multiplier', RADMOD_EDITS),
            ('rainmod.f90', 'Terluna: gravity for the heights below', RAINMOD_EDITS),
-           ('rainmod.f90', 'Terluna: seconds per day in the convective cloud formula', CONVECTIVE_EDITS)]
+           ('rainmod.f90', 'Terluna: seconds per day in the convective cloud formula', CONVECTIVE_EDITS),
+           ('radmod.f90', "Terluna: the Sun's clock", SUN_EDITS),
+           ('radmod.f90', 'Terluna: calibrated absorptivity', SHORTWAVE_EDITS)]
 
 
 def ensure_patched() -> dict:
@@ -237,6 +302,12 @@ def configuration(name, ncpus, overrides=None):
         raise ValueError('convective_day_s must be 0 (the solar day) or a positive number of seconds')
     if not 0.0 < model['sunlight_scale'] <= 1.5:
         raise ValueError('sunlight_scale must lie between 0 and 1.5')
+    if model['sun_clock'] not in SUN_CLOCKS:
+        raise ValueError(f'sun_clock must be one of {SUN_CLOCKS}, not {model["sun_clock"]!r}')
+    if model['fixed_orbit'] not in (0, 1) or model['whole_lunar_days'] not in (0, 1):
+        raise ValueError('fixed_orbit and whole_lunar_days are 0 or 1')
+    if not 0.0 < model['sw_water_absorption'] <= 3.0:
+        raise ValueError('sw_water_absorption must lie between 0 and 3')
     return dict(experiment=name, **exp, model=model, output=output_variables(model), ncpus=ncpus,
                 exoplasim=version('exoplasim'), source=ensure_patched(),
                 planet=dict(radius=planet['radius_m'] / EARTH_RADIUS_M, gravity=planet['gravity_m_s2'],
@@ -357,9 +428,10 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
     p = cfg['planet']
     model.configure(flux=flux, starspec=starspec, **cfg['gases_bar'], gravity=p['gravity'], radius=p['radius'],
                     rotationperiod=p['rotationperiod'], synchronous=False, year=p['year'],
-                    eccentricity=p['eccentricity'], obliquity=p['obliquity'], landmap=str(landmap),
-                    topomap=str(topomap), mldepth=cfg['mldepth'], seaice=True, ozone=False,
+                    eccentricity=p['eccentricity'], obliquity=p['obliquity'], fixedorbit=bool(m['fixed_orbit']),
+                    landmap=str(landmap), topomap=str(topomap), mldepth=cfg['mldepth'], seaice=True, ozone=False,
                     soilalbedo=m['land_albedo'], timestep=m['timestep_min'], snapshots=None,
+                    runsteps=m['steps_per_lunar_day'] * m['lunar_days_per_year'] if m['whole_lunar_days'] else None,
                     restartfile=str(restart) if restart else None)
     # The namelist holds file names in 80 characters, too few for an absolute path here: the model
     # reads the spectrum from short names in its own working folder instead.
@@ -372,6 +444,8 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
     model._edit_namelist('plasim_namelist', 'SEED', str(m['seed']))
     model._edit_namelist('plasim_namelist', 'NSTPW', str(m['steps_per_lunar_day'] // m['writes_per_lunar_day']))
     model._edit_namelist('radmod_namelist', 'RAYSCALE', str(m['rayleigh_scale']))
+    model._edit_namelist('radmod_namelist', 'NSUNCLOCK', str(SUN_CLOCKS.index(m['sun_clock'])))
+    model._edit_namelist('radmod_namelist', 'SWH2OSCALE', str(m['sw_water_absorption']))
     model._edit_namelist('radmod_namelist', 'TH2OC', str(m['h2o_continuum']))
     gref, scale = cloud_water_namelist(m['cloud_water'], p['gravity'])
     model._edit_namelist('rainmod_namelist', 'CWGREF', str(gref))

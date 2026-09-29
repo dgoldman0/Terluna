@@ -10,8 +10,10 @@
  "model_day": {
   "steps": 1430,
   "days": 29.7917,
+  "sun_clock": "plasim",
   "sun_sweep_deg": 392.5457,
-  "skip_back_deg": 32.5457
+  "skip_back_deg": 32.5457,
+  "sun_day_days": null
  },
  "along_row": {
   "lat_deg": 2.7689,
@@ -283,6 +285,10 @@
    0.9171,
    1.1737
   ],
+  "solang_relative_range": [
+   0.9171,
+   1.174
+  ],
   "correlation_with_solang": 1.0
  },
  "orbit": {
@@ -439,7 +445,7 @@
  "producer": {
   "domain": "climate",
   "files": {
-   "gcm/sun_check.py": "277dda7c2cc0a2be"
+   "gcm/sun_check.py": "e17e52f459ba34f3"
   }
  }
 }

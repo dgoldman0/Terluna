@@ -1,0 +1,59 @@
+{
+ "schema": "terluna.climate.gcm-radiation-check/1",
+ "run": "A28_dim8",
+ "years": [
+  4,
+  7
+ ],
+ "evidence": "Clear-sky solar fluxes only. The GCM's are its own clear-sky diagnostics (3-day means over the years). The line-by-line model (HITRAN lines, MT_CKD water continuum, collision-induced absorption, Rayleigh scattering, a delta-scaled two-stream solver with a pseudo-spherical direct beam) runs on each column's time-mean profile on the GCM's ten levels, extended isothermal and dry above its top, with the column's mean surface albedo and the Sun on the equator (the Moon's 1.5 degree tilt left out), so it leaves out how the fluxes vary with the profile from day to day and season to season.",
+ "reading_rule": "Shares are of the sunlight arriving at the top of each column over the lunar day, clear sky. The GCM's arriving sunlight is its own time mean, which its uneven Sun makes up to 12% less or more than it should be depending on longitude; the shares compare how each model divides whatever arrives. difference is the GCM minus line-by-line, in points of the arriving sunlight.",
+ "columns": [
+  {
+   "label": "site land",
+   "j": 15,
+   "i": 0,
+   "lat_deg": 2.7689,
+   "lon_deg": 0.0,
+   "land": true,
+   "height_m": 665.933,
+   "surface_albedo": 0.2,
+   "water_kg_m2": 186.8,
+   "line_by_line_water_kg_m2": 191.5884,
+   "arriving_w_m2": 317.1065,
+   "gcm": {
+    "reflected": 0.2601,
+    "air": 0.2308,
+    "ground": 0.5091
+   },
+   "line_by_line": {
+    "reflected": 0.2584,
+    "air": 0.3089,
+    "ground": 0.4327
+   },
+   "difference_points": {
+    "reflected": 0.1685,
+    "air": -7.8048,
+    "ground": 7.6363
+   }
+  }
+ ],
+ "mean_difference_points": {
+  "land": {
+   "reflected": 0.1685,
+   "air": -7.8048,
+   "ground": 7.6363
+  },
+  "sea": {
+   "reflected": null,
+   "air": null,
+   "ground": null
+  }
+ },
+ "producer": {
+  "domain": "climate",
+  "files": {
+   "gcm/radiation_check.py": "2d32b7d240a68169",
+   "crm/radiation_check.py": "52f5f1d364ad6f8b"
+  }
+ }
+}

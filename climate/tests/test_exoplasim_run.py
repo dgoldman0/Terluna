@@ -46,11 +46,18 @@ class RunnerTests(unittest.TestCase):
         # The convective patch edits text the cloud-water patch wrote, so it must come after it.
         order = [marker for name, marker, _ in er.PATCHES if name == 'rainmod.f90']
         self.assertEqual(order[0], 'Terluna: gravity for the heights below')
+        # The Sun's clock extends the namelist and broadcast lines the calibration patch wrote, and the
+        # shortwave path extends the Sun's.
+        radmod = [marker for name, marker, _ in er.PATCHES if name == 'radmod.f90']
+        self.assertEqual(radmod, ['Terluna: calibration multiplier', "Terluna: the Sun's clock", 'Terluna: calibrated absorptivity'])
 
     def test_default_settings_are_the_corrected_physics(self):
         self.assertEqual(er.MODEL['cloud_water'], 'earth_path')
         self.assertEqual(er.MODEL['convective_day_s'], 86400.0)
         self.assertEqual(er.MODEL['sunlight_scale'], 1.0)                 # the shield product as it is
+        self.assertEqual(er.MODEL['sun_clock'], 'synodic')               # an even Sun, one turn per 29.53 days
+        self.assertEqual((er.MODEL['fixed_orbit'], er.MODEL['whole_lunar_days']), (1, 1))
+        self.assertEqual(er.SUN_CLOCKS.index('plasim'), 0)                # PlaSim's own clock is the default off
 
     def test_clear_sky_output(self):
         off = er.output_variables({**er.MODEL, 'clear_sky': 0})

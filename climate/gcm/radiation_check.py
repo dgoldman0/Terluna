@@ -102,13 +102,15 @@ def column_profile(f: dict, j: int, i: int) -> dict:
                 qv=np.concatenate([f['hus'][:, j, i], np.full(above.size, 1e-7)]), ps=ps, t2=float(f['tas'][j, i]))
 
 
-def check(run: str, years, processes: int = 8, site=(0.0, 0.0)) -> dict:
+def check(run: str, years, processes: int = 8, site=(0.0, 0.0), only: str | None = None) -> dict:
     from climate.crm.radiation_check import line_by_line_column, solar_parts, daily_mean
     f = mean_fields(run, years)
     nodes, weights = np.polynomial.legendre.leggauss(6)
     hours, hour_weights = 0.25 * np.pi * (nodes + 1.0), 0.25 * np.pi * weights
     rows = []
     for pick in choose_columns(f, site):
+        if only and pick['label'] != only:
+            continue
         j, i = pick['j'], pick['i']
         lat, albedo = float(f['lat'][j]), float(f['alb'][j, i])
         prof = column_profile(f, j, i)
@@ -140,13 +142,14 @@ def main(argv=None) -> int:
     parser.add_argument('run')
     parser.add_argument('--years', type=int, nargs=2, default=(15, 24))
     parser.add_argument('--processes', type=int, default=8)
+    parser.add_argument('--only', help="one column's label, e.g. 'site land'; the result is named after it")
     args = parser.parse_args(argv)
-    result = check(args.run, tuple(args.years), args.processes)
+    result = check(args.run, tuple(args.years), args.processes, only=args.only)
     result['producer'] = dict(domain='climate', files={f'{Path(p).parent.name}/{Path(p).name}': hashlib.sha256(Path(p).read_bytes()).hexdigest()[:16]
                                                        for p in (__file__, HERE.parent / 'crm' / 'radiation_check.py')})
     from climate.crm.ring_crossings import rounded
     RESULTS.mkdir(parents=True, exist_ok=True)
-    path = RESULTS / f'radiation_check_{args.run}.json'
+    path = RESULTS / f"radiation_check_{args.run}{'_' + args.only.split()[0] if args.only else ''}.json"
     path.write_text(json.dumps(rounded(result, 4), indent=1) + '\n')
     print(path)
     return 0
