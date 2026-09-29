@@ -375,6 +375,21 @@ of it in the early afternoon, against the rings' 7–70 mm; at 180° E it brings
 78 mm, against their 8–28. Before its correction the GCM was 2.6–4.7 °C drier
 than the rings at both crossings and rained 129–143 mm at both.
 
+**Steep rings from the corrected GCM.** Three rings set up on 2026-09-29 take
+their upper air, vertical wind, sea and ground temperatures and land wetness
+from the corrected design case (`A28_dim5_moon`, years 20–29). Two are great
+circles tilted 70° to the equator, heading north across it at 45° E
+(`ring_70_45e`) and 135° E (`ring_70_135e`). Together they reach 70° on either
+side, with 3,200–4,600 km of land in each band of latitude, and they cross each
+other at 62.8° N, 180° E and 62.8° S, 0° E, at 83°, where the GCM puts the
+start of comfortable air and CM1 has no answer yet. The third is the equator
+again (`ring_equator`), set up as a great circle of no tilt so that, like the
+tilted rings, each column takes its own surface, land wetness and ground
+temperature, and the GCM's mean vertical wind rises through it (up to 4 mm/s).
+It crosses each steep ring on the equator, at 45°, 135°, 225° and 315° E. All
+three run together for two lunar days on 8 threads; their results will follow
+here.
+
 ## A three-dimensional box at a crossing
 
 Case `box_0e` tests what the rings' two dimensions do to the air near the

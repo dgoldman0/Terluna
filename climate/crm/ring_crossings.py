@@ -44,8 +44,7 @@ EVIDENCE = ('Two CM1 rings along great circles, compared where they cross (each 
             'model has to choose; errors every ring shares, such as the missing inflow from the sides, agree and stay '
             'hidden. The analysed span is one lunar day after a lunar day of spin-up, so the ranges reflect the '
             f'weather of that one day. The GCM design case ({GCM_RUN}, years {GCM_YEARS[0]}-{GCM_YEARS[1]}, 3-day means, '
-            'cells about 170 km wide) is a third view. The rings\' upper air and large-scale vertical wind come from the '
-            'GCM as it was before its Sun, tilt and sunlight split were corrected (A28_dim5).')
+            'cells about 170 km wide) is a third view.')
 READING_RULE = ('A ring\'s patch is its columns within the radius of the crossing along the ring, land and water '
                 'separately; a surface is compared where each ring has at least 5 columns of it. Values are patch means of '
                 'snapshots every 3 model hours, composited by the local hour angle at the crossing (0 = noon, negative = '
@@ -59,6 +58,14 @@ READING_RULE = ('A ring\'s patch is its columns within the radius of the crossin
                 '(sigma 0.983); dewpoint_gcm_layer_c is the rings\' dewpoint at that pressure, the like-for-like '
                 'comparison. Its comfortable hours use that dewpoint and 3-day means, which smooth out the warmest and '
                 'coolest hours.')
+
+
+def evidence(forcing: str) -> str:
+    """EVIDENCE, with the GCM run the rings took their upper air and large-scale vertical wind from."""
+    if forcing == GCM_RUN:
+        return EVIDENCE + ' The rings\' upper air and large-scale vertical wind come from the same GCM run.'
+    return EVIDENCE + (f' The rings\' upper air and large-scale vertical wind come from the GCM run {forcing}'
+                       + (', before its Sun, tilt and sunlight split were corrected.' if forcing == 'A28_dim5' else '.'))
 
 
 def ring_path(record: dict) -> dict:
@@ -356,6 +363,9 @@ def analyse(names, from_day: float, radius_m: float = RADIUS_M, gcm: bool = True
     for key in ('start_hour_angle_deg', 'output_s'):
         if len({r['configuration'][key] for r in records}) != 1:
             raise ValueError(f'the rings differ in {key}')
+    forcing = {r['reference'].get('run', 'A28_dim5') for r in records}
+    if len(forcing) != 1:
+        raise ValueError(f'the rings were forced from different GCM runs: {sorted(forcing)}')
     start = records[0]['configuration']['start_hour_angle_deg']
     paths = [ring_path(r) for r in records]
     points = crossings(*paths)
@@ -392,7 +402,7 @@ def analyse(names, from_day: float, radius_m: float = RADIUS_M, gcm: bool = True
                                      day_s / 3600.0) if have else None
         entry['gcm'] = near_gcm[i]
         found.append(entry)
-    return dict(schema=SCHEMA, rings=list(names), evidence=EVIDENCE, reading_rule=READING_RULE,
+    return dict(schema=SCHEMA, rings=list(names), evidence=evidence(forcing.pop()), reading_rule=READING_RULE,
                 span_days=[times[0] / 86400.0, times[-1] / 86400.0], snapshots=len(times), radius_km=radius_m / 1000.0,
                 gcm_lowest_sigma=sigma,
                 paths={name: path for name, path in zip(names, paths)}, crossings=found)

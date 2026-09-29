@@ -41,39 +41,45 @@ FIELDS_READING_RULE = ('Sections are means over every column by local time (10-d
                        'rain of the span: 240 columns (about 1,450 km) centred on its core, heights to 100 km, instantaneous. '
                        'The rain map keeps the heaviest rain in each block of four columns (24 km), every 3 hours, with '
                        'the position of local noon.')
-EVIDENCE = ('CM1 r22.0 in two dimensions along the equator at lunar gravity (6-km columns, 111 levels to 150 km), '
+EVIDENCE_ON = ('CM1 r22.0 in two dimensions along the equator at lunar gravity (6-km columns, 111 levels to 150 km), '
             'with the Morrison microphysics given lunar fall speeds, RRTMG radiation for the design air, the Sun '
             'crossing the ring once a lunar day, the 28% scenario\'s seas and lakes laid flat at sea level with a '
             'placeholder land surface, and the domain-mean temperature, vapour and eastward wind above 8-16 km held '
-            'to the GCM design case (A28_dim5, the 5% dimmer shield). It resolves storms and the day-night '
+            'to the GCM design case ({run}, the 5% dimmer shield). It resolves storms and the day-night '
             'circulation along the equator; it has no north-south dimension, so air cannot converge on the storms '
             'from the north and south, and two-dimensional convection organises into lines more readily than '
             'real storms do.')
+EVIDENCE = EVIDENCE_ON.format(run='A28_dim5')         # the equatorial ring as first run
 
 
-def evidence(latitude: float, path=None) -> str:
-    """What a ring on the given circle of latitude, or along a tilted great circle (path), is: EVIDENCE on the equator."""
+def evidence(latitude: float, path=None, run: str = 'A28_dim5') -> str:
+    """What a ring on the given circle of latitude, or along a great circle (path), is, forced from the GCM run `run`:
+    EVIDENCE on the equator."""
     if path:
-        return ('CM1 r22.0 in two dimensions along a great circle tilted '
-                f'{path["tilt_deg"]:.0f} degrees to the equator, heading north across it at {path["node_deg"]:.0f} E, at lunar '
+        where = ('along the equator, a great circle of no tilt,' if path['tilt_deg'] == 0.0 else
+                 f'along a great circle tilted {path["tilt_deg"]:.0f} degrees to the equator, heading north across it at '
+                 f'{path["node_deg"]:.0f} E,')
+        turning = ('' if path['tilt_deg'] == 0.0 else
+                   'the Coriolis force of each column\'s latitude on departures from the reference wind, ')
+        return (f'CM1 r22.0 in two dimensions {where} at lunar '
                 'gravity (6-km columns, 111 levels to 150 km), with the Morrison microphysics given lunar fall speeds, RRTMG '
                 'radiation for the design air, the Sun crossing the ring once a lunar day at each column\'s latitude and '
-                'longitude (equinox sunlight), the Coriolis force of each column\'s latitude on departures from the reference '
-                'wind, the 28% scenario\'s seas and lakes laid flat at sea level with a placeholder land surface as wet as the '
+                f'longitude (equinox sunlight), {turning}'
+                'the 28% scenario\'s seas and lakes laid flat at sea level with a placeholder land surface as wet as the '
                 'GCM\'s land nearest each column, the GCM design case\'s mean vertical wind at each column\'s latitude imposed '
                 'as large-scale vertical advection, and the domain-mean temperature, vapour and winds above 8-16 km held to '
-                'one profile, the GCM\'s mean along the path (A28_dim5, the 5% dimmer shield). It has no cross-ring '
+                f'one profile, the GCM\'s mean along the path ({run}, the 5% dimmer shield). It has no cross-ring '
                 'dimension, so air cannot converge on the storms from the sides; the land\'s wetness is prescribed; '
                 'two-dimensional convection organises into lines more readily than real storms do.')
     if latitude == 0.0:
-        return EVIDENCE
+        return EVIDENCE_ON.format(run=run)
     return (f'CM1 r22.0 in two dimensions along the circle of latitude {abs(latitude):.0f} {"N" if latitude > 0 else "S"} at '
             'lunar gravity (6-km columns, 111 levels to 150 km), with the Morrison microphysics given lunar fall speeds, '
             'RRTMG radiation for the design air, the Sun crossing the ring once a lunar day and rising at most '
             f'{90 - abs(latitude):.0f} degrees (equinox sunlight), the Coriolis force of the latitude on departures from '
             'the reference wind, the 28% scenario\'s seas and lakes laid flat at sea level with a placeholder land '
             'surface that evaporates as readily as the GCM\'s land on that circle, and the domain-mean temperature, '
-            'vapour and winds above 8-16 km held to the GCM design case\'s row nearest the latitude (A28_dim5, the 5% '
+            f'vapour and winds above 8-16 km held to the GCM design case\'s row nearest the latitude ({run}, the 5% '
             'dimmer shield). It has no north-south dimension, so air cannot cross the pole or converge on the storms '
             'from the north and south; the land\'s wetness is prescribed, so rain does not wet it; two-dimensional '
             'convection organises into lines more readily than real storms do.')
@@ -311,8 +317,9 @@ def analyse(name: str, from_day: float) -> dict:
     profiles = cloud_profile / np.maximum(profile_count, 1)[:, :, None]
     section = {key: v / np.maximum(section_count, 1)[:, None] for key, v in section.items()}
     pct = lambda a, q: float(np.percentile(np.concatenate(a), q))
+    forcing = dict(run=record['reference'].get('run', 'A28_dim5'), years=tuple(record['reference'].get('years', (15, 24))))
     summary = dict(
-        schema=SCHEMA, case=name, evidence=evidence(latitude, record.get('path')), reading_rule=READING_RULE,
+        schema=SCHEMA, case=name, evidence=evidence(latitude, record.get('path'), forcing['run']), reading_rule=READING_RULE,
         latitude_deg=latitude, **({'tilt_deg': record['path']['tilt_deg'], 'node_deg': record['path']['node_deg']}
                                   if record.get('path') else {}),
         span_days=[(use[0] - 1) * tap / 86400.0, (use[-1] - 1) * tap / 86400.0], snapshots=len(use),
@@ -343,7 +350,7 @@ def analyse(name: str, from_day: float) -> dict:
         rain_spells=rain_spells(np.array(hov['prate']), land, tap),
         by_hour_angle=hour_angle_table(0.5 * (bins[1:] + bins[:-1]), composites),
         circulation=circulation_table(0.5 * (bins[1:] + bins[:-1]), zh, section),
-        gcm=gcm_equator_composites(band=record['reference']['band_deg'] if not record.get('path')
+        gcm=gcm_equator_composites(**forcing, band=record['reference']['band_deg'] if not record.get('path')
                                    else record['path']['tilt_deg'] + 3.0, latitude=latitude))
     arrays = dict(hour_angle_deg=0.5 * (bins[1:] + bins[:-1]), heights_m=zh, wind_heights_m=np.array(WIND_HEIGHTS_M),
                   cloud_profile_land_day=profiles[0, 0], cloud_profile_land_night=profiles[0, 1],

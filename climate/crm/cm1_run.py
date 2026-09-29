@@ -710,7 +710,21 @@ for _name, _node in (('ring_a', 0.0), ('ring_a_prime', 180.0), ('ring_b', 90.0),
                 'ring the Sun crosses once a lunar day, seas and lakes of the 28% scenario at sea level, land as wet '
                 'as the GCM\'s beneath it, the 5% dimmer shield, and the GCM design case\'s mean vertical wind at each '
                 'column\'s latitude')
-WETNESS_CLASSES = ((20, 0.05), (21, 0.10), (22, 0.15), (23, 0.20), (25, 0.30), (26, 0.40), (27, 0.50), (28, 0.60),
+# Rings forced from the corrected GCM (set up on 2026-09-29). Two great circles tilted 70 degrees, heading north across
+# the equator at 45 and 135 E: together they reach 70 degrees on either side with 3,200-4,600 km of land in each band
+# of latitude, and they cross each other nearly at right angles (83 degrees) at 62.8 N, 180 E and 62.8 S, 0 E, where
+# comfort is in question. With them the equatorial ring again, set up as a great circle of no tilt so that, as on the
+# tilted rings, each column takes its own surface, land wetness and ground temperature and the GCM's vertical wind;
+# it crosses each steep ring on the equator.
+for _name, _tilt, _node in (('ring_70_45e', 70.0, 45.0), ('ring_70_135e', 70.0, 135.0), ('ring_equator', 0.0, 0.0)):
+    CASES[_name] = dict(
+        CASES['ring'], kind='tilted', tilt_deg=_tilt, node_deg=_node, land_moisture='gcm', large_scale_w='gcm',
+        purpose=(f'a great circle tilted {_tilt:.0f} degrees to the equator, heading north across it at {_node:.0f} E,'
+                 if _tilt > 0.0 else 'the equator, a great circle of no tilt,')
+                + ' as a 2-D ring the Sun crosses once a lunar day, seas and lakes of the 28% scenario at sea level, land as '
+                'wet as the GCM\'s beneath it, the 5% dimmer shield, and the corrected GCM design case\'s mean vertical '
+                'wind at each column\'s latitude')
+WETNESS_CLASSES =((20, 0.05), (21, 0.10), (22, 0.15), (23, 0.20), (25, 0.30), (26, 0.40), (27, 0.50), (28, 0.60),
                    (29, 0.75), (30, 0.90))                    # land-use rows given over to the placeholder land at these wetnesses
 # A three-dimensional box where rings A and A-prime cross (0 N, 0 E): ring A's patch there given a second horizontal
 # dimension, to show what the rings' two-dimensionality does. It keeps ring A's column spacing, levels, upper-air
@@ -1080,15 +1094,15 @@ def case_settings(cfg, nx, dx, nz, ztop, air, gravity):
     box = cfg.get('kind') == 'box'                                       # 3-D, one site: the Sun the same across it
     latitude = cfg['site']['lat_deg'] if box else cfg.get('latitude_deg', 0.0)
     tilted = cfg.get('kind') == 'tilted'
-    turning = coriolis(90.0) if tilted else coriolis(latitude)           # tilted: twice the rotation rate, times
-    rotating = turning != 0.0                                            # sin(latitude) column by column in CM1
+    turning = turning_rate(cfg, latitude)
+    rotating = turning != 0.0
     return {
         'param0': dict(nx=nx, ny=cfg['ny'] if box else 1, nz=nz, ppnode=cfg.get('ranks', 8), timeformat=3, timestats=1),
         'param1': dict(dx=round(dx, 3), dy=round(dx, 3), dz=round(ztop / nz, 1), dtl=round(40.0 * s, 3), cfl_limit=1.0,
                        timax=round(cfg['days'] * 86400.0 * s), run_time=-999.9, tapfrq=round(cfg['output_s'] * s, 3),
                        rstfrq=round(cfg['restart_s'] * s, 3), statfrq=round(3600.0 * s, 3), prclfrq=1.0e9),
         'param2': dict(cm1setup=2, testcase=0, adapt_dt=1, irst=0, rstnum=1, ipbl=2, sgsmodel=0, tconfig=2,
-                       horizturb=0, irdamp=2, psolver=3, ptype=5, ihail=0, icor=int(rotating), betaplane=int(tilted),
+                       horizturb=0, irdamp=2, psolver=3, ptype=5, ihail=0, icor=int(rotating), betaplane=int(tilted and rotating),
                        lspgrad=int(rotating and not tilted),
                        eqtset=2, idiss=1, wbc=1, ebc=1, sbc=1, nbc=1, bbc=3, tbc=1, isnd=7, iwnd=0, itern=0, iinit=0,
                        irandp=1, iorigin=1, apmasscon=1),
@@ -1123,6 +1137,14 @@ def case_settings(cfg, nx, dx, nz, ztop, air, gravity):
 def coriolis(latitude_deg: float) -> float:
     """The Coriolis parameter (1/s) at a latitude, from the Moon's sidereal rotation."""
     return 2.0 * planet()['rotation_rate_rad_s'] * math.sin(math.radians(latitude_deg))
+
+
+def turning_rate(cfg: dict, latitude: float) -> float:
+    """CM1's fcor for a case: the Coriolis parameter of its latitude; on a tilted ring twice the rotation rate,
+    which CM1 multiplies by sin(latitude) column by column; none on a great circle of no tilt, the equator."""
+    if cfg.get('kind') == 'tilted':
+        return coriolis(90.0) if cfg['tilt_deg'] > 0.0 else 0.0
+    return coriolis(latitude)
 
 
 def ring_grid(latitude_deg: float, dx_target_m: float, ranks: int):
@@ -1309,7 +1331,7 @@ def setup(name: str) -> Path:
                   path=dict(tilt_deg=cfg['tilt_deg'], node_deg=cfg['node_deg'], lat=[round(float(v), 4) for v in track['lat']],
                             lon=[round(float(v), 4) for v in track['lon']], dlon=[round(float(v), 4) for v in track['dlon']])
                   if tilted else None,
-                  latitude_deg=latitude, coriolis_1_s=coriolis(90.0) if tilted else coriolis(latitude),
+                  latitude_deg=latitude, coriolis_1_s=turning_rate(cfg, latitude),
                   land_moisture=None if pair else site['wetness'] if box else land_moisture(cfg, ref),
                   large_scale_w=vertical_wind,
                   day_night=day_night,

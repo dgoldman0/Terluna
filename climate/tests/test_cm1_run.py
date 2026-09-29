@@ -346,6 +346,23 @@ def test_tilted_rings_use_the_beta_plane_and_their_own_sun():
     assert equator['param2']['betaplane'] == 0 and equator['param8']['var12'] == 0.0
 
 
+@needs_planet
+def test_a_great_circle_of_no_tilt_is_the_equator_with_no_coriolis_force():
+    air = dict(sunlight_w_m2=1300.0)
+    cfg = c.CASES['ring_equator']
+    equator = c.case_settings(cfg, 1816, 6011.0, 111, 150000.0, air, 1.6242)
+    assert equator['param2']['icor'] == 0 and equator['param2']['betaplane'] == 0 and equator['param3']['fcor'] == 0.0
+    assert not equator['param19']['do_lsnudge_v'] and equator['param11']['ctrlat'] == 0.0
+    assert equator['param8']['var12'] == 0.0 and equator['param8']['var13'] == 2.0     # the GCM's vertical wind by column
+    assert c.turning_rate(cfg, 0.0) == 0.0 and c.turning_rate(c.CASES['ring_70_45e'], 0.0) == c.coriolis(90.0)
+    path = c.tilted_path(360, 0.0, 0.0)
+    assert np.allclose(path['lat'], 0.0) and np.allclose(path['lon'], np.arange(360) + 0.5)
+    from climate.crm import ring_analysis as ra
+    text = ra.evidence(0.0, dict(tilt_deg=0.0, node_deg=0.0), 'A28_dim5_moon')
+    assert 'along the equator' in text and 'Coriolis' not in text and '(A28_dim5_moon, the 5% dimmer shield)' in text
+    assert 'tilted 70 degrees' in ra.evidence(0.0, dict(tilt_deg=70.0, node_deg=45.0), 'A28_dim5_moon')
+
+
 def test_hour_angle_along_a_tilted_ring_follows_longitude():
     from climate.crm import ring_analysis as ra
     path = c.tilted_path(360, 45.0, 180.0)

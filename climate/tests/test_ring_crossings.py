@@ -44,6 +44,26 @@ def test_the_equatorial_ring_is_a_great_circle_of_no_tilt():
         rc.crossings(A, A)
 
 
+def test_the_steep_pair_crosses_near_63_degrees_nearly_square_and_the_equator_at_its_nodes():
+    paths = [rc.ring_path({'path': dict(c.CASES[name], lat=[])}) for name in ('ring_70_45e', 'ring_70_135e')]
+    south, north = rc.crossings(*paths)
+    tilt = np.radians(70.0)                                               # where the planes' common line meets the sphere
+    lat = np.degrees(np.arcsin(np.sin(tilt) / np.sqrt(1.0 + np.cos(tilt) ** 2)))
+    assert (south['lat_deg'], south['lon_deg']) == pytest.approx((-lat, 0.0)) and lat == pytest.approx(62.76, abs=0.01)
+    assert (north['lat_deg'], north['lon_deg']) == pytest.approx((lat, 180.0))
+    turn = abs(rc.heading_deg(paths[0], north['along'][0]) - rc.heading_deg(paths[1], north['along'][1])) % 180.0
+    assert min(turn, 180.0 - turn) == pytest.approx(np.degrees(np.arccos(np.cos(np.radians(70.0)) ** 2)), abs=1e-6)
+    equator = rc.ring_path({'path': dict(c.CASES['ring_equator'], lat=[])})
+    assert equator == EQUATOR
+    for path in paths:
+        assert [p['lon_deg'] for p in rc.crossings(equator, path)] == pytest.approx([path['node_deg'], path['node_deg'] + 180.0])
+
+
+def test_the_crossings_say_which_gcm_run_forced_the_rings():
+    assert rc.evidence(rc.GCM_RUN).endswith('come from the same GCM run.')
+    assert rc.evidence('A28_dim5').endswith('A28_dim5, before its Sun, tilt and sunlight split were corrected.')
+
+
 def test_patches_wrap_round_the_ring():
     assert rc.patch_columns(100, 0.0, 2.5, 1.0).tolist() == [0, 1, 2, 97, 98, 99]
     assert rc.patch_columns(100, 0.5, 1.0, 1.0).tolist() == [49, 50]
