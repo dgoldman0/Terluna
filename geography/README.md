@@ -95,26 +95,30 @@ polar stereographic grids.
   through the lowest pass on its way to the sea. A priority flood over the graph of catchments and their shared
   passes finds those passes.
 - **Water balance.** Runoff is precipitation less evaporation over land, where positive, from climate run
-  A28_dim5 (model years 15–24, T21): the 28% seas with the lakes as water, PlaSim's cloud scheme corrected for
-  lunar gravity, and the author's chosen shield, 5% dimmer than the titania stack (see climate/gcm). A depression fills and overflows when its inflow and the rain on its lake exceed the
+  A28_dim5_moon (model years 20–29, T21): the 28% seas with the lakes as water, PlaSim's cloud scheme corrected for
+  lunar gravity, the author's chosen shield, 5% dimmer than the titania stack, and the GCM's Sun, tilt and sunlight
+  split corrected (see climate/gcm). A depression fills and overflows when its inflow and the rain on its lake exceed the
   lake's open-water evaporation (the run's evaporation over sea at that latitude). Otherwise it keeps the smaller
   lake whose evaporation balances its inflow.
 
 Results at 28%:
 
-- **Lakes.** 180,000 closed depressions lie above sea level. 38,800 of them hold rain-fed lakes, 11,400 of those
-  without an outlet. Together they cover 11.6% of the Moon on top of the 28% sea and hold 3.5 million km³, about
-  a third of the seas' volume.
-- **Where.** Lakes cover 17–19% of the equatorial belt and 0.1% of the dry polar regions. The largest fill far-side
+- **Lakes.** 180,000 closed depressions lie above sea level. 27,900 of them hold rain-fed lakes, 2,500 of those
+  without an outlet. Together they cover 10.3% of the Moon on top of the 28% sea and hold 3.1 million km³, three
+  tenths of the seas' volume.
+- **Where.** Lakes cover 24% of the surface within 15° of the equator, 12% between 15° and 30°, 5% between 30°
+  and 45° and 0.1% between 45° and 60°, where the corrected climate hardly rains (22, 13, 10 and 4% with the
+  climate before its correction). The largest fill far-side
   basins: Hertzsprung (200,000 km², up to 4.7 km deep, its surface 5.1 km above sea level) and Korolev (141,000 km²,
   up to 6.7 km deep, 7.8 km above sea level).
-- **Rivers.** 279,000 m³/s reaches the seas, about 1.3 times Earth's runoff per unit of land. The largest river
-  enters the Orientale sea with 57,100 m³/s from a basin of 833,000 km².
+- **Rivers.** 229,000 m³/s reaches the seas, about 1.1 times Earth's runoff per unit of land. The largest river
+  enters the Orientale sea with 57,400 m³/s from a basin of 833,000 km².
 - **Lakes and climate agree.** The first estimate took its runoff from run A (25% water, PlaSim's clouds as they
   were): 39,400 lakes over 12.0% of the Moon. Run A28 was set up with those lakes as water; its runoff gave
-  12.9%, and the chosen dimmer shield's climate gives the 11.6% above. At the GCM's T21 resolution these lakes
-  differ from A28's coastline by 105 of 2,048 cells and lower the water from 40.1% to 39.6%, worth about 0.1 K,
-  so no further round is needed.
+  12.9%, the chosen dimmer shield's climate 11.6%, and the same climate with the GCM's Sun, tilt and sunlight
+  split corrected gives the 10.3% above. At the GCM's T21 resolution these lakes differ from A28's coastline by
+  111 of 2,048 cells (68 water cells become land and 43 land cells water) and lower the water from 40.1% to
+  38.3%. Whether to rebuild the GCM's coastline with them, which needs a cold start, is open (climate/gcm).
 
 With a fixed water inventory, water held in lakes above sea level comes out of the seas. The sea level then falls
 below −1,654 m unless the lakes' water is delivered on top, or groundwater and infiltration keep the basins
@@ -133,13 +137,13 @@ exponential profile through both (13.5% at the surface, falling off over
 
 | Crust saturated to | Pore water (global layer) | Seas + lakes + crust | Against the seas alone |
 |---|---|---|---|
-| none | 0 | 1.42×10¹⁹ kg (375 m) | 1.33 |
-| 1 km | 131 m | 1.92×10¹⁹ kg | 1.79 |
-| 4 km | 480 m | 3.24×10¹⁹ kg | 3.03 |
-| 10 km | 1,013 m | 5.26×10¹⁹ kg | 4.92 |
-| 20 km | 1,563 m | 7.35×10¹⁹ kg | 6.87 |
+| none | 0 | 1.38×10¹⁹ kg (364 m) | 1.29 |
+| 1 km | 131 m | 1.88×10¹⁹ kg | 1.76 |
+| 4 km | 480 m | 3.20×10¹⁹ kg | 2.99 |
+| 10 km | 1,013 m | 5.22×10¹⁹ kg | 4.88 |
+| 20 km | 1,563 m | 7.31×10¹⁹ kg | 6.83 |
 
-The seas are a 282 m global layer and the lakes 93 m. So the crust, not the
+The seas are a 282 m global layer and the lakes 82 m. So the crust, not the
 seas, may set how much water has to be delivered for the seas to stay at 28%:
 saturating even its upper kilometre takes half as much again as the seas hold,
 and the whole porous crust five to seven times as much. Seas laid on dry crust
@@ -159,7 +163,7 @@ minerals and the water table's shape on land.
 - **Not modelled:** crustal loading by the water (subsidence of order 10–30% of
   the depth under large seas), groundwater beyond the first estimate above, polar
   ice and the water held in the air and soil (the design case's air holds about
-  260 kg/m², 0.1% of the seas).
+  180 kg/m², 0.06% of the seas).
 
 ## Next work
 

@@ -34,7 +34,12 @@ ROWS = [('surface_k', 'Surface temperature (K)', 2), ('sea_surface_k', 'Sea surf
         ('equator_land_range_k', 'Equatorial land, range of 3-day means at a place in a year (K)', 1),
         ('lat60_land_range_k', 'Land at 55–65°, the same range (K)', 1),
         ('coldest_air_k', 'Coldest 3-day mean anywhere (K)', 1), ('warmest_air_k', 'Warmest 3-day mean anywhere (K)', 1),
-        ('sea_ice_share', 'Sea ice (share of the sea)', 3)]
+        ('sea_ice_share', 'Sea ice (share of the sea)', 3),
+        ('near_land_air_k', 'Air over near-side land, within 90° of 0° E (K)', 1),
+        ('far_land_air_k', 'Air over far-side land (K)', 1),
+        ('land_air_p5_k', 'Air over land, annual means at a place: 5th percentile of the area (K)', 1),
+        ('land_air_p95_k', 'The same, 95th percentile (K)', 1),
+        ('dry_land_share', 'Land under 0.5 mm/day of rain (share of the land)', 3)]
 
 
 def area_weights(lat, nlon):
@@ -42,6 +47,13 @@ def area_weights(lat, nlon):
     _, weights = np.polynomial.legendre.leggauss(len(lat))
     w = weights[np.argsort(np.argsort(np.sin(np.radians(lat))))][:, None] * np.ones(nlon)
     return w / w.sum()
+
+
+def weighted_percentile(values, weights, q):
+    """The q-th percentile of values when each carries its weight (area)."""
+    order = np.argsort(values)
+    cum = np.cumsum(weights[order]) / weights.sum()
+    return float(values[order][np.searchsorted(cum, q / 100.0)])
 
 
 def summarise(years, lat):
@@ -67,6 +79,12 @@ def summarise(years, lat):
                coldest_air_k=float(min(y['tas'].min() for y in years)),
                warmest_air_k=float(max(y['tas'].max() for y in years)),
                sea_ice_share=mean(avg('sic'), ~land))
+    lon = np.arange(land.shape[1]) * 360.0 / land.shape[1]
+    near = (np.abs((lon + 180.0) % 360.0 - 180.0) < 90.0)[None, :] * np.ones_like(land)
+    air = avg('tas')
+    out.update(near_land_air_k=mean(air, land * near), far_land_air_k=mean(air, land * (1 - near)),
+               land_air_p5_k=weighted_percentile(air[land], w[land], 5), land_air_p95_k=weighted_percentile(air[land], w[land], 95),
+               dry_land_share=mean(avg('pr') * 86400e3 < 0.5, land))
     if all(k in years[0] for k in CLEAR):
         sw, lw = mean(avg('rst') - avg('rstcs')), mean(avg('rlut') - avg('rltcs'))
         out.update(cloud_effect_sw_w_m2=sw, cloud_effect_lw_w_m2=lw, cloud_effect_net_w_m2=sw + lw)

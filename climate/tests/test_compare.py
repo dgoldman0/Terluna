@@ -37,6 +37,15 @@ class CompareTests(unittest.TestCase):
         self.assertAlmostEqual(out['equator_land_day_k'], 294.0)
         self.assertAlmostEqual(out['equator_land_night_k'], 288.0)
         self.assertNotIn('cloud_effect_net_w_m2', out)
+        self.assertAlmostEqual(out['near_land_air_k'], 291.0)      # land spans the near side and beyond it
+        self.assertAlmostEqual(out['far_land_air_k'], 291.0)
+        self.assertAlmostEqual(out['land_air_p95_k'], 291.0)
+        self.assertAlmostEqual(out['dry_land_share'], 0.0)         # 3 mm/day everywhere
+
+    def test_weighted_percentile(self):
+        values, weights = np.array([1.0, 2.0, 3.0, 4.0]), np.array([1.0, 1.0, 1.0, 7.0])
+        self.assertEqual(compare.weighted_percentile(values, weights, 50), 4.0)   # the heavy value holds the middle
+        self.assertEqual(compare.weighted_percentile(values, np.ones(4), 25), 1.0)
 
     def test_cloud_effect(self):
         out = compare.summarise([year(self.lat, clear=True)], self.lat)

@@ -358,17 +358,22 @@ temperature, humidity and wind at a place hold whichever way its slice faces,
 while its rain and cloud at a place depend on that direction by a factor of
 several.
 
-**Against the GCM at the crossings.** The GCM's air is its lowest layer carried
-to the ground along a dry adiabat, but its vapour is that of the layer itself,
-centred about 0.86 km up. There the rings' dewpoint is about 2 °C below its
-value at 2 m (5 °C at midday, about 1 °C at night). At that height the rings
-are 2.6–4.7 °C more humid than the GCM over land in the lunar-day mean
-(19.0–20.1 against 15.4–16.4 °C). The gap lies mostly in the night and
-morning. Near noon at 0° E both give 17–20 °C, while through the night and
-morning the rings stay at 19–21 °C and the GCM falls to 14–16 °C. Both slice
-directions share that night-time excess, so it comes from what every ring leaves
-out or from the GCM. The GCM also rains more here: 129–143 mm per lunar day on
-its land cells, most of it in the early afternoon, against the rings' 7–70 mm.
+**Against the GCM at the crossings.** The GCM here is the corrected design case
+(`A28_dim5_moon`, with its Sun, tilt and sunlight split corrected; the rings
+themselves were forced with the GCM before its correction). Its air is its
+lowest layer carried to the ground along a dry adiabat, but its vapour is that
+of the layer itself, centred about 0.86 km up. There the rings' dewpoint is
+about 2 °C below its value at 2 m (5 °C at midday, about 1 °C at night). At
+that height the rings are more humid than the GCM over land in the lunar-day
+mean: by 1.1–1.4 °C at 0° E (19.0–19.2 against 17.9 °C) and by 5.3–5.6 °C at
+180° E (19.9–20.1 against 14.6 °C). The gap lies in the night. At 0° E the GCM
+is 0.4 °C more humid by day and 2.8–3.2 °C drier at night; at 180° E it is
+drier around the clock, most at night. Both slice directions share that
+night-time excess, so it comes from what every ring leaves out or from the GCM.
+The GCM also rains more at 0° E: 180 mm per lunar day on its land cells, most
+of it in the early afternoon, against the rings' 7–70 mm; at 180° E it brings
+78 mm, against their 8–28. Before its correction the GCM was 2.6–4.7 °C drier
+than the rings at both crossings and rained 129–143 mm at both.
 
 ## A three-dimensional box at a crossing
 
@@ -436,10 +441,11 @@ the box could run it warm. Its surface wind lacks the circulation's own winds
 prescribed heating cannot respond to its own warmth, where a warmer stretch of
 ring drives a circulation that carries the heat away.
 
-Against the GCM the box stands further off than the rings. Its air measured the
-GCM's way averages 25.5 °C against the GCM's 21.6 °C, and its dewpoint at the
-GCM's layer 20.8 against 16.4 °C. It rains 38 mm per lunar day against the
-GCM's 129, with 14% daytime cloud against 32%. No hour is comfortable in the
+Against the corrected GCM the box stands further off than the rings. Its air
+measured the GCM's way averages 25.5 °C against the GCM's 22.0 °C, and its
+dewpoint at the GCM's layer 20.8 against 17.9 °C. It rains 38 mm per lunar day
+against the GCM's 180, with 14% daytime cloud against 39% (before the GCM's
+correction: 21.6 °C, 16.4 °C, 129 mm and 32%). No hour is comfortable in the
 box or on either ring. So the rings' two dimensions do not explain why the
 cloud-resolving model and the GCM disagree: a third dimension leaves rain and
 cloud within the spread of the two slices and makes the air warmer. The
@@ -470,11 +476,13 @@ rain and daytime cloud. Against it, over the second lunar day:
 
 The ground divides its energy the same way in all four: 139–140 W/m² of net
 sunlight and −6 to −10 W/m² of net infrared, 26–27 W/m² carried into the air as
-heat and 101–105 W/m² evaporating water. The GCM's ground takes the same
-130 W/m² in all, but carries 8 W/m² into the air and evaporates 122. So the
-land accounts for a few tenths of a degree of the 4.2 °C gap in the air and
-none of the 5.0 °C gap in the dewpoint; rougher land halves the wind at 10 m
-and changes little else.
+heat and 101–105 W/m² evaporating water. The GCM's ground took the same
+130 W/m² in all before its correction, carrying 8 W/m² into the air and
+evaporating 122; corrected, it takes 121, carries 5 and evaporates 116. So the
+land accounts for a few tenths of a degree of the gap in the air (4.2 °C against
+the GCM before its correction, 3.9 °C after) and none of the gap in the dewpoint
+(5.0 °C before, 3.5 °C after); rougher land halves the wind at 10 m and changes
+little else.
 
 **Radiation** ([radiation_check.py](radiation_check.py),
 [radiation_check_box_0e_small.json](../results/crm/radiation_check_box_0e_small.json)).
@@ -496,7 +504,10 @@ Earth's tilt, which take about 30 and 15 W/m² ([GCM README](../gcm/README.md),
 against 76 in the GCM, divides as follows: the GCM's missing sunlight about
 10 W/m², its split 29, CM1's wetter column (271 kg/m²) 9, and CM1's radiation
 −13, of which 8 is RRTMG absorbing less than line-by-line and 5 is the Sun's
-own spectrum it takes in place of the shield's.
+own spectrum it takes in place of the shield's. These are the GCM before
+2026-09-29. With its Sun and tilt corrected and its sunlight split
+recalibrated, 373 W/m² reaches its column at 0° E and its clear air takes 31.4%
+of it, as line-by-line's does ([GCM README](../gcm/README.md), "Recalibrated").
 
 **Where CM1's rain goes.** The microphysics keeps a water budget. Over the
 second lunar day in the small box, 304 mm of water condensed; 52 mm evaporated
@@ -510,13 +521,18 @@ ground evaporates less into it. The GCM's rain scheme, fitted to Earth, brings
 129 mm per lunar day to the ground here, about what its ground evaporates.
 
 So neither the rings' two dimensions nor the land surface explains why the
-cloud-resolving model and the GCM disagree. Three differences stand out
-instead: the GCM's Sun, which brings 12% too little sunlight to 0° E; its
-radiation, which puts about 8% of the sunlight that does arrive into the ground
-where line-by-line puts it into the air; and the fate of rain at lunar gravity,
-which CM1 follows through the fall and the GCM's scheme takes from Earth. The
-first two are the GCM's to fix, and its comparisons with CM1 here are worth
-repeating once they are.
+cloud-resolving model and the GCM disagree. Three differences stood out: the
+GCM's Sun, which brought 12% too little sunlight to 0° E; its radiation, which
+put about 8% of the sunlight that did arrive into the ground where line-by-line
+puts it into the air; and the fate of rain at lunar gravity, which CM1 follows
+through the fall and the GCM's scheme takes from Earth. With the first two
+corrected (`A28_dim5_moon`), the GCM at 0° E is 0.4 °C warmer and 1.5 °C more
+humid at its lowest layer and rains 40% more. The box stays 3.5 °C warmer and
+2.9 °C more humid, and the gap in rain widens: 180 mm per lunar day in the GCM
+against 38 in the box. The fate of rain at lunar gravity is now the largest
+difference left. The CM1 cases still carry the uncorrected GCM's upper air,
+vertical wind and soil wetness; setting them up again from the corrected run
+and running them costs hours per case.
 
 ```sh
 climate/gcm/.venv/bin/python -m climate.crm.box_analysis box_0e_small_rough --from-day 29.5 --reference box_0e_small

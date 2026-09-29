@@ -27,7 +27,7 @@ heating:
 - the delta-two-stream solver with a pseudo-spherical direct beam, as both of
   those models use.
 
-Columns: the design Moon (1.2 atm, a 294 K surface, the chosen climate's global
+Columns: the design Moon (1.2 atm, a 294.9 K surface, the chosen climate's global
 mean), the same air at 1.0 atm, and the middle atmosphere's Earth control (1 atm,
 288 K, 277 DU of solved ozone). Each is the moist adiabat with Manabe–Wetherald
 humidity up to the tropopause and the middle atmosphere's solved temperatures and
@@ -54,11 +54,11 @@ Clear sky over ground of albedo 0.1, with the Sun overhead. Photons are
 | | Design Moon | Moon air, unfiltered sunlight | Moon, 1.0 atm | Earth control |
 |---|---|---|---|---|
 | Photosynthetic photons | 1,560 | 1,670 | 1,630 | 2,250 |
-| Illuminance | 89,800 lux | 95,600 lux | 93,900 lux | 124,600 lux |
+| Illuminance | 89,600 lux | 95,400 lux | 93,700 lux | 124,600 lux |
 | Diffuse share of those photons (of blue) | 37% (65%) | 37% (65%) | 32% (58%) | 7% (12%) |
 | Blue (400–500) ÷ red (600–700) photons | 0.58 | 0.60 | 0.61 | 0.80 |
-| Red ÷ far-red, 660 ÷ 730 nm | 1.83 | 1.82 | 1.79 | 1.15 |
-| Red ÷ far-red, 600–700 ÷ 700–750 nm | 2.63 | 2.61 | 2.63 | 2.18 |
+| Red ÷ far-red, 660 ÷ 730 nm | 1.88 | 1.87 | 1.84 | 1.15 |
+| Red ÷ far-red, 600–700 ÷ 700–750 nm | 2.66 | 2.64 | 2.66 | 2.18 |
 | UV-A photons (315–400 nm) | 35 | | 40 | 200 |
 | UV index | 0.11 | | 0.12 | 14.8 |
 | Photosynthetic photons sent back to space | 33% | 33% | 30% | 13% |
@@ -75,8 +75,8 @@ Clear sky over ground of albedo 0.1, with the Sun overhead. Photons are
   Earth's depth (0.756 at 550 nm) sends blue back to space: in the same
   sunlight the Moon's air brings to the ground 49% of what Earth's does at
   400–410 nm, 58% at 440–450, 75% at 540–550 and 79–87% in the red. The water
-  vapour column (191 kg/m², ten times the Earth control's) and the O2 column cut
-  deep bands into the far-red and near infrared: 47% of Earth's light at
+  vapour column (205 kg/m², ten times the Earth control's) and the O2 column cut
+  deep bands into the far-red and near infrared: 46% of Earth's light at
   720–730 nm, 55% in the O2 A band at 760–770 nm and 3% at 940–950 nm. The
   red:far-red ratio in the 10-nm windows plants' phytochrome is usually measured
   by is 1.8 overhead and 2.3 at 30°, against Earth's 1.15 and 1.22; over the

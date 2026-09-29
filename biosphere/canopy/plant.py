@@ -5,7 +5,7 @@ of getting through the 354-hour night.
 
 The base stand (model.py: leaf area index 5) is followed through one solar cycle at each latitude band,
 with its leaves at the land air temperature of the chosen climate through the lunar day, on the near and
-far sides (climate/gcm/climatology.py, run A28_dim5, years 15-24, composited by hour angle).
+far sides (climate/gcm/climatology.py, run A28_dim5_moon, years 20-29, composited by hour angle).
 
 Light. Above 30 degrees of Sun height the canopy gets the surface-light product's spectra. Lower down the
 two-stream product falls short of the spherical sky atlas (illumination/sky), so its diffuse light is
@@ -44,9 +44,11 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 RESULTS = HERE / 'results'
 SCHEMA = 'terluna.biosphere.plant-carbon-cycle/1'
-CLIMATOLOGY = ROOT / 'climate' / 'gcm' / 'products' / 'climatology_A28_dim5.npz'
+# The chosen design's climate: the 5% dimmer shield with the GCM's Sun, tilt and sunlight split corrected
+# (climate/gcm README); A28_dim5, years 15-24, before 2026-09-29.
+CLIMATE_RUN, CLIMATE_YEARS = 'A28_dim5_moon', (20, 29)
+CLIMATOLOGY = ROOT / 'climate' / 'gcm' / 'products' / f'climatology_{CLIMATE_RUN}.npz'
 CLIMATOLOGY_SCHEMA = 'terluna.climate.gcm-climatology/1'
-CLIMATE_YEARS = (15, 24)
 ATLASES = dict(moon=ROOT / 'illumination' / 'sky' / 'data' / 'moon_no_ozone_atlas.npz',
                earth=ROOT / 'illumination' / 'sky' / 'data' / 'earth_atlas.npz')
 ATLAS_CASES = dict(moon='moon_1.2atm/unfiltered', earth='earth_control/unfiltered')
@@ -79,9 +81,9 @@ def temperatures():
     data = np.load(CLIMATOLOGY)
     meta = json.loads(str(data['metadata']))
     if meta['schema'] != CLIMATOLOGY_SCHEMA or 'tas_land_sun_near' not in data.files:
-        raise ValueError('Regenerate the climatology: python -m climate.gcm.climatology A28_dim5:15-24')
-    if meta['run'] != 'A28_dim5' or tuple(meta['years']) != CLIMATE_YEARS:
-        raise ValueError(f"Expected run A28_dim5, years {CLIMATE_YEARS}; found {meta['run']} {meta['years']}")
+        raise ValueError(f'Regenerate the climatology: python -m climate.gcm.climatology {CLIMATE_RUN}:{CLIMATE_YEARS[0]}-{CLIMATE_YEARS[1]}')
+    if meta['run'] != CLIMATE_RUN or tuple(meta['years']) != CLIMATE_YEARS:
+        raise ValueError(f"Expected run {CLIMATE_RUN}, years {CLIMATE_YEARS}; found {meta['run']} {meta['years']}")
     lat, hour = data['lat'].astype(float), data['hour_angle_deg'].astype(float)
     traces = {}
     for side in SIDES:
@@ -253,7 +255,9 @@ def calibrate(tables, temp_trace, cue=CUE_EARTH):
     unit = cycle(tables, 'earth', 0.0, temp_trace, 86400.0, 1.0)
     needed = probe['gpp'] * (1 - (1 + GROWTH_RESPIRATION) * cue) - probe['leaf_respiration']
     if needed <= 0:
-        raise ValueError(f'Leaf respiration alone exceeds the budget for a carbon-use efficiency of {cue}')
+        share = probe['leaf_respiration'] / probe['gpp']
+        raise ValueError(f'Leaf respiration alone, {share:.1%} of photosynthesis, exceeds the budget for a carbon-use '
+                         f'efficiency of {cue}')
     return needed / unit['stem_root_respiration']
 
 
@@ -318,10 +322,14 @@ def run():
                 for name, (n, r) in STRATEGIES.items()}
     sensitivity = dict(carbon_use_efficiency={}, regrowth_days={})
     for cue in CUE_RANGE:
-        r25 = calibrate(tables, equator, cue)
+        try:
+            r25 = calibrate(tables, equator, cue)
+        except ValueError as err:          # a bound the stand cannot reach: its leaves alone take the upkeep budget
+            sensitivity['carbon_use_efficiency'][str(cue)] = dict(reachable=False, reason=str(err))
+            continue
         sensitivity['carbon_use_efficiency'][str(cue)] = dict(
-            stem_root_25=r25, **{name: cycle(tables, 'moon', 0.0, equator, MOON_DAY_S, r25, night=n, regrow=r)
-                                 for name, (n, r) in STRATEGIES.items()})
+            reachable=True, stem_root_25=r25, **{name: cycle(tables, 'moon', 0.0, equator, MOON_DAY_S, r25, night=n, regrow=r)
+                                                 for name, (n, r) in STRATEGIES.items()})
     for ramp in RAMP_RANGE:
         sensitivity['regrowth_days'][str(ramp)] = cycle(tables, 'moon', 0.0, equator, MOON_DAY_S, stem_root_25,
                                                         regrow=True, ramp_days=ramp)
@@ -337,7 +345,7 @@ def run():
             'biosphere/canopy/plant.py', 'biosphere/canopy/model.py', 'biosphere/canopy/radiation.py',
             'biosphere/canopy/leaf.py', 'biosphere/canopy/leaf_optics.py', 'biosphere/long_night.py')},
             inputs=dict(**{f'{k}_sha256': v for k, v in tables.shas.items()}, climatology_sha256=climate_sha,
-                        climatology_schema=CLIMATOLOGY_SCHEMA, climatology_run='A28_dim5',
+                        climatology_schema=CLIMATOLOGY_SCHEMA, climatology_run=CLIMATE_RUN,
                         climatology_years=CLIMATE_YEARS)),
         evidence=EVIDENCE, reading_rule=READING_RULE,
         units=dict(carbon='g C m-2 of ground per solar cycle', temperature='C', light='umol m-2 s-1 of 400-700 nm'),

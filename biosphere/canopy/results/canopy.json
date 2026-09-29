@@ -10,7 +10,7 @@
    "biosphere/long_night.py": "10b3ed59853a4aa4"
   },
   "inputs": {
-   "surface_light_sha256": "7e13ba63ee445a91",
+   "surface_light_sha256": "e2406dbceb34193e",
    "surface_light_schema": "terluna.illumination.surface-light/1",
    "prospect_d_sha256": "e703b345f0a08608"
   }
@@ -93,146 +93,146 @@
   "moon": [
    {
     "sun_deg": 90.0,
-    "gpp_umol_m2_s": 33.015,
-    "absorbed_umol_m2_s": 1372.8,
-    "incident_par_umol_m2_s": 1523.29,
-    "incident_band_umol_m2_s": 1523.29,
-    "sky_return_par": 0.0306267,
-    "canopy_albedo_par": 0.032445,
+    "gpp_umol_m2_s": 32.9937,
+    "absorbed_umol_m2_s": 1369.56,
+    "incident_par_umol_m2_s": 1519.66,
+    "incident_band_umol_m2_s": 1519.66,
+    "sky_return_par": 0.0305779,
+    "canopy_albedo_par": 0.032444,
     "sunlit_lai": 1.83583,
-    "diffuse_share_par": 0.352141
+    "diffuse_share_par": 0.352522
    },
    {
     "sun_deg": 75.0,
-    "gpp_umol_m2_s": 32.4741,
-    "absorbed_umol_m2_s": 1318.72,
-    "incident_par_umol_m2_s": 1456.75,
-    "incident_band_umol_m2_s": 1456.75,
-    "sky_return_par": 0.0302385,
-    "canopy_albedo_par": 0.0328933,
+    "gpp_umol_m2_s": 32.4525,
+    "absorbed_umol_m2_s": 1315.54,
+    "incident_par_umol_m2_s": 1453.21,
+    "incident_band_umol_m2_s": 1453.21,
+    "sky_return_par": 0.0301902,
+    "canopy_albedo_par": 0.0328921,
     "sunlit_lai": 1.78666,
-    "diffuse_share_par": 0.361045
+    "diffuse_share_par": 0.361439
    },
    {
     "sun_deg": 60.0,
-    "gpp_umol_m2_s": 30.7653,
-    "absorbed_umol_m2_s": 1158.35,
-    "incident_par_umol_m2_s": 1264.59,
-    "incident_band_umol_m2_s": 1264.59,
-    "sky_return_par": 0.0290236,
-    "canopy_albedo_par": 0.0342539,
+    "gpp_umol_m2_s": 30.7423,
+    "absorbed_umol_m2_s": 1155.38,
+    "incident_par_umol_m2_s": 1261.34,
+    "incident_band_umol_m2_s": 1261.34,
+    "sky_return_par": 0.0289769,
+    "canopy_albedo_par": 0.0342519,
     "sunlit_lai": 1.63548,
-    "diffuse_share_par": 0.389861
+    "diffuse_share_par": 0.390297
    },
    {
     "sun_deg": 45.0,
-    "gpp_umol_m2_s": 27.6019,
-    "absorbed_umol_m2_s": 900.753,
-    "incident_par_umol_m2_s": 969.811,
-    "incident_band_umol_m2_s": 969.811,
-    "sky_return_par": 0.0268115,
-    "canopy_albedo_par": 0.0365174,
+    "gpp_umol_m2_s": 27.5764,
+    "absorbed_umol_m2_s": 898.207,
+    "incident_par_umol_m2_s": 967.066,
+    "incident_band_umol_m2_s": 967.066,
+    "sky_return_par": 0.026768,
+    "canopy_albedo_par": 0.0365135,
     "sunlit_lai": 1.373,
-    "diffuse_share_par": 0.446025
+    "diffuse_share_par": 0.446537
    },
    {
     "sun_deg": 30.0,
-    "gpp_umol_m2_s": 22.3698,
-    "absorbed_umol_m2_s": 574.249,
-    "incident_par_umol_m2_s": 613.78,
-    "incident_band_umol_m2_s": 613.78,
-    "sky_return_par": 0.0232722,
-    "canopy_albedo_par": 0.0393503,
+    "gpp_umol_m2_s": 22.341,
+    "absorbed_umol_m2_s": 572.404,
+    "incident_par_umol_m2_s": 611.812,
+    "incident_band_umol_m2_s": 611.812,
+    "sky_return_par": 0.0232352,
+    "canopy_albedo_par": 0.0393422,
     "sunlit_lai": 0.993262,
-    "diffuse_share_par": 0.546376
+    "diffuse_share_par": 0.547003
    },
    {
     "sun_deg": 20.0,
-    "gpp_umol_m2_s": 17.1193,
-    "absorbed_umol_m2_s": 349.044,
-    "incident_par_umol_m2_s": 373.771,
-    "incident_band_umol_m2_s": 373.771,
-    "sky_return_par": 0.0199941,
-    "canopy_albedo_par": 0.0408285,
+    "gpp_umol_m2_s": 17.0892,
+    "absorbed_umol_m2_s": 347.83,
+    "incident_par_umol_m2_s": 372.474,
+    "incident_band_umol_m2_s": 372.474,
+    "sky_return_par": 0.0199651,
+    "canopy_albedo_par": 0.0408158,
     "sunlit_lai": 0.683583,
-    "diffuse_share_par": 0.653002
+    "diffuse_share_par": 0.653691
    },
    {
     "sun_deg": 15.0,
-    "gpp_umol_m2_s": 13.7163,
-    "absorbed_umol_m2_s": 244.557,
-    "incident_par_umol_m2_s": 262.469,
-    "incident_band_umol_m2_s": 262.469,
-    "sky_return_par": 0.0181097,
-    "canopy_albedo_par": 0.0410594,
+    "gpp_umol_m2_s": 13.6872,
+    "absorbed_umol_m2_s": 243.686,
+    "incident_par_umol_m2_s": 261.537,
+    "incident_band_umol_m2_s": 261.537,
+    "sky_return_par": 0.0180862,
+    "canopy_albedo_par": 0.0410443,
     "sunlit_lai": 0.517605,
-    "diffuse_share_par": 0.722015
+    "diffuse_share_par": 0.722696
    },
    {
     "sun_deg": 10.0,
-    "gpp_umol_m2_s": 9.65554,
-    "absorbed_umol_m2_s": 150.275,
-    "incident_par_umol_m2_s": 161.651,
-    "incident_band_umol_m2_s": 161.651,
-    "sky_return_par": 0.0161805,
-    "canopy_albedo_par": 0.0407383,
+    "gpp_umol_m2_s": 9.63075,
+    "absorbed_umol_m2_s": 149.74,
+    "incident_par_umol_m2_s": 161.077,
+    "incident_band_umol_m2_s": 161.077,
+    "sky_return_par": 0.0161635,
+    "canopy_albedo_par": 0.0407222,
     "sunlit_lai": 0.347296,
-    "diffuse_share_par": 0.800465
+    "diffuse_share_par": 0.801071
    },
    {
     "sun_deg": 7.0,
-    "gpp_umol_m2_s": 6.89879,
-    "absorbed_umol_m2_s": 99.7122,
-    "incident_par_umol_m2_s": 107.39,
-    "incident_band_umol_m2_s": 107.39,
-    "sky_return_par": 0.0150852,
-    "canopy_albedo_par": 0.040269,
+    "gpp_umol_m2_s": 6.87912,
+    "absorbed_umol_m2_s": 99.3637,
+    "incident_par_umol_m2_s": 107.014,
+    "incident_band_umol_m2_s": 107.014,
+    "sky_return_par": 0.0150723,
+    "canopy_albedo_par": 0.0402534,
     "sunlit_lai": 0.243739,
-    "diffuse_share_par": 0.849513
+    "diffuse_share_par": 0.850029
    },
    {
     "sun_deg": 5.0,
-    "gpp_umol_m2_s": 4.95771,
-    "absorbed_umol_m2_s": 68.6789,
-    "incident_par_umol_m2_s": 74.0177,
-    "incident_band_umol_m2_s": 74.0177,
-    "sky_return_par": 0.0144198,
-    "canopy_albedo_par": 0.0398703,
+    "gpp_umol_m2_s": 4.94279,
+    "absorbed_umol_m2_s": 68.4435,
+    "incident_par_umol_m2_s": 73.7641,
+    "incident_band_umol_m2_s": 73.7641,
+    "sky_return_par": 0.0144096,
+    "canopy_albedo_par": 0.0398559,
     "sunlit_lai": 0.174311,
-    "diffuse_share_par": 0.881304
+    "diffuse_share_par": 0.88174
    },
    {
     "sun_deg": 3.0,
-    "gpp_umol_m2_s": 2.97291,
-    "absorbed_umol_m2_s": 39.7546,
-    "incident_par_umol_m2_s": 42.87,
-    "incident_band_umol_m2_s": 42.87,
-    "sky_return_par": 0.0138315,
-    "canopy_albedo_par": 0.0394411,
+    "gpp_umol_m2_s": 2.96364,
+    "absorbed_umol_m2_s": 39.6219,
+    "incident_par_umol_m2_s": 42.7268,
+    "incident_band_umol_m2_s": 42.7268,
+    "sky_return_par": 0.0138237,
+    "canopy_albedo_par": 0.0394283,
     "sunlit_lai": 0.104672,
-    "diffuse_share_par": 0.910897
+    "diffuse_share_par": 0.911241
    },
    {
     "sun_deg": 2.0,
-    "gpp_umol_m2_s": 1.97693,
-    "absorbed_umol_m2_s": 26.0457,
-    "incident_par_umol_m2_s": 28.0938,
-    "incident_band_umol_m2_s": 28.0938,
-    "sky_return_par": 0.0135728,
-    "canopy_albedo_par": 0.0392287,
+    "gpp_umol_m2_s": 1.97071,
+    "absorbed_umol_m2_s": 25.9601,
+    "incident_par_umol_m2_s": 28.0014,
+    "incident_band_umol_m2_s": 28.0014,
+    "sky_return_par": 0.013566,
+    "canopy_albedo_par": 0.0392168,
     "sunlit_lai": 0.069799,
-    "diffuse_share_par": 0.92441
+    "diffuse_share_par": 0.924706
    },
    {
     "sun_deg": 1.0,
-    "gpp_umol_m2_s": 0.984822,
-    "absorbed_umol_m2_s": 12.8055,
-    "incident_par_umol_m2_s": 13.8155,
-    "incident_band_umol_m2_s": 13.8155,
-    "sky_return_par": 0.0133403,
-    "canopy_albedo_par": 0.0390248,
+    "gpp_umol_m2_s": 0.981708,
+    "absorbed_umol_m2_s": 12.7641,
+    "incident_par_umol_m2_s": 13.7707,
+    "incident_band_umol_m2_s": 13.7707,
+    "sky_return_par": 0.0133344,
+    "canopy_albedo_par": 0.039014,
     "sunlit_lai": 0.0349048,
-    "diffuse_share_par": 0.936827
+    "diffuse_share_par": 0.937074
    }
   ],
   "earth": [
@@ -384,47 +384,47 @@
  "summaries": {
   "moon": {
    "0.0": {
-    "gpp_mean_umol_m2_s": 12.0324,
-    "gpp_g_c_m2_per_24h": 12.4867,
-    "par_mean_umol_m2_s": 446.115,
-    "absorbed_mean_umol_m2_s": 408.551,
+    "gpp_mean_umol_m2_s": 12.0205,
+    "gpp_g_c_m2_per_24h": 12.4743,
+    "par_mean_umol_m2_s": 444.924,
+    "absorbed_mean_umol_m2_s": 407.464,
     "cycle": {
-     "gpp_g_c_m2": 368.738,
+     "gpp_g_c_m2": 368.373,
      "day_respiration_g_c_m2": 39.5068,
      "night_respiration_g_c_m2": 32.5359,
-     "net_g_c_m2": 296.696,
+     "net_g_c_m2": 296.331,
      "balance_closes": true,
-     "store_for_the_night_g_c_m2": 33.1087,
+     "store_for_the_night_g_c_m2": 33.1106,
      "longest_deficit_hours": 364.703
     }
    },
    "30.0": {
-    "gpp_mean_umol_m2_s": 11.0543,
-    "gpp_g_c_m2_per_24h": 11.4716,
-    "par_mean_umol_m2_s": 370.259,
-    "absorbed_mean_umol_m2_s": 342.266,
+    "gpp_mean_umol_m2_s": 11.042,
+    "gpp_g_c_m2_per_24h": 11.4588,
+    "par_mean_umol_m2_s": 369.211,
+    "absorbed_mean_umol_m2_s": 341.298,
     "cycle": {
-     "gpp_g_c_m2": 338.762,
+     "gpp_g_c_m2": 338.385,
      "day_respiration_g_c_m2": 39.5068,
      "night_respiration_g_c_m2": 32.5359,
-     "net_g_c_m2": 266.72,
+     "net_g_c_m2": 266.342,
      "balance_closes": true,
-     "store_for_the_night_g_c_m2": 33.1974,
+     "store_for_the_night_g_c_m2": 33.1995,
      "longest_deficit_hours": 366.179
     }
    },
    "60.0": {
-    "gpp_mean_umol_m2_s": 7.6498,
-    "gpp_g_c_m2_per_24h": 7.93858,
-    "par_mean_umol_m2_s": 181.253,
-    "absorbed_mean_umol_m2_s": 169.346,
+    "gpp_mean_umol_m2_s": 7.63699,
+    "gpp_g_c_m2_per_24h": 7.92529,
+    "par_mean_umol_m2_s": 180.65,
+    "absorbed_mean_umol_m2_s": 168.781,
     "cycle": {
-     "gpp_g_c_m2": 234.431,
+     "gpp_g_c_m2": 234.039,
      "day_respiration_g_c_m2": 39.5068,
      "night_respiration_g_c_m2": 32.5359,
-     "net_g_c_m2": 162.388,
+     "net_g_c_m2": 161.996,
      "balance_closes": true,
-     "store_for_the_night_g_c_m2": 33.6822,
+     "store_for_the_night_g_c_m2": 33.6858,
      "longest_deficit_hours": 375.038
     }
    }
@@ -489,125 +489,125 @@
    "60.0": 6.81104
   },
   "earth_light_scaled_to_moon_photons": {
-   "0.0": 9.05816,
-   "30.0": 8.11372,
-   "60.0": 5.22087
+   "0.0": 9.04835,
+   "30.0": 8.10407,
+   "60.0": 5.21243
   },
   "moon_light_earth_diffuse_share": {
-   "0.0": 9.11617,
-   "30.0": 8.1575,
-   "60.0": 5.21997
+   "0.0": 9.10673,
+   "30.0": 8.14833,
+   "60.0": 5.21239
   },
   "moon": {
-   "0.0": 12.0324,
-   "30.0": 11.0543,
-   "60.0": 7.6498
+   "0.0": 12.0205,
+   "30.0": 11.042,
+   "60.0": 7.63699
   }
  },
  "lai": {
   "moon": {
    "1.0": {
-    "gpp_mean_umol_m2_s": 5.06615,
-    "gpp_g_c_m2_per_24h": 5.25739,
-    "par_mean_umol_m2_s": 448.337,
-    "absorbed_mean_umol_m2_s": 214.877,
+    "gpp_mean_umol_m2_s": 5.06285,
+    "gpp_g_c_m2_per_24h": 5.25398,
+    "par_mean_umol_m2_s": 447.14,
+    "absorbed_mean_umol_m2_s": 214.311,
     "cycle": {
-     "gpp_g_c_m2": 155.254,
+     "gpp_g_c_m2": 155.153,
      "day_respiration_g_c_m2": 10.5522,
      "night_respiration_g_c_m2": 8.69028,
-     "net_g_c_m2": 136.012,
+     "net_g_c_m2": 135.911,
      "balance_closes": true,
-     "store_for_the_night_g_c_m2": 8.75913,
+     "store_for_the_night_g_c_m2": 8.75933,
      "longest_deficit_hours": 358.797
     }
    },
    "2.0": {
-    "gpp_mean_umol_m2_s": 8.29973,
-    "gpp_g_c_m2_per_24h": 8.61305,
-    "par_mean_umol_m2_s": 446.71,
-    "absorbed_mean_umol_m2_s": 312.786,
+    "gpp_mean_umol_m2_s": 8.29321,
+    "gpp_g_c_m2_per_24h": 8.60628,
+    "par_mean_umol_m2_s": 445.517,
+    "absorbed_mean_umol_m2_s": 311.957,
     "cycle": {
-     "gpp_g_c_m2": 254.348,
+     "gpp_g_c_m2": 254.149,
      "day_respiration_g_c_m2": 19.5721,
      "night_respiration_g_c_m2": 16.1187,
-     "net_g_c_m2": 218.658,
+     "net_g_c_m2": 218.458,
      "balance_closes": true,
-     "store_for_the_night_g_c_m2": 16.2924,
+     "store_for_the_night_g_c_m2": 16.293,
      "longest_deficit_hours": 360.765
     }
    },
    "3.0": {
-    "gpp_mean_umol_m2_s": 10.2529,
-    "gpp_g_c_m2_per_24h": 10.64,
-    "par_mean_umol_m2_s": 446.278,
-    "absorbed_mean_umol_m2_s": 364.211,
+    "gpp_mean_umol_m2_s": 10.2438,
+    "gpp_g_c_m2_per_24h": 10.6306,
+    "par_mean_umol_m2_s": 445.086,
+    "absorbed_mean_umol_m2_s": 363.244,
     "cycle": {
-     "gpp_g_c_m2": 314.205,
+     "gpp_g_c_m2": 313.927,
      "day_respiration_g_c_m2": 27.2824,
      "night_respiration_g_c_m2": 22.4685,
-     "net_g_c_m2": 264.454,
+     "net_g_c_m2": 264.176,
      "balance_closes": true,
-     "store_for_the_night_g_c_m2": 22.7671,
+     "store_for_the_night_g_c_m2": 22.7681,
      "longest_deficit_hours": 362.242
     }
    },
    "4.0": {
-    "gpp_mean_umol_m2_s": 11.3859,
-    "gpp_g_c_m2_per_24h": 11.8158,
-    "par_mean_umol_m2_s": 446.153,
-    "absorbed_mean_umol_m2_s": 392.548,
+    "gpp_mean_umol_m2_s": 11.3751,
+    "gpp_g_c_m2_per_24h": 11.8045,
+    "par_mean_umol_m2_s": 444.962,
+    "absorbed_mean_umol_m2_s": 391.504,
     "cycle": {
-     "gpp_g_c_m2": 348.926,
+     "gpp_g_c_m2": 348.595,
      "day_respiration_g_c_m2": 33.8731,
      "night_respiration_g_c_m2": 27.8963,
-     "net_g_c_m2": 287.157,
+     "net_g_c_m2": 286.825,
      "balance_closes": true,
-     "store_for_the_night_g_c_m2": 28.3302,
+     "store_for_the_night_g_c_m2": 28.3315,
      "longest_deficit_hours": 363.226
     }
    },
    "5.0": {
-    "gpp_mean_umol_m2_s": 12.0324,
-    "gpp_g_c_m2_per_24h": 12.4867,
-    "par_mean_umol_m2_s": 446.115,
-    "absorbed_mean_umol_m2_s": 408.551,
+    "gpp_mean_umol_m2_s": 12.0205,
+    "gpp_g_c_m2_per_24h": 12.4743,
+    "par_mean_umol_m2_s": 444.924,
+    "absorbed_mean_umol_m2_s": 407.464,
     "cycle": {
-     "gpp_g_c_m2": 368.738,
+     "gpp_g_c_m2": 368.373,
      "day_respiration_g_c_m2": 39.5068,
      "night_respiration_g_c_m2": 32.5359,
-     "net_g_c_m2": 296.696,
+     "net_g_c_m2": 296.331,
      "balance_closes": true,
-     "store_for_the_night_g_c_m2": 33.1087,
+     "store_for_the_night_g_c_m2": 33.1106,
      "longest_deficit_hours": 364.703
     }
    },
    "6.0": {
-    "gpp_mean_umol_m2_s": 12.4006,
-    "gpp_g_c_m2_per_24h": 12.8687,
-    "par_mean_umol_m2_s": 446.103,
-    "absorbed_mean_umol_m2_s": 417.725,
+    "gpp_mean_umol_m2_s": 12.388,
+    "gpp_g_c_m2_per_24h": 12.8557,
+    "par_mean_umol_m2_s": 444.912,
+    "absorbed_mean_umol_m2_s": 416.613,
     "cycle": {
-     "gpp_g_c_m2": 380.022,
+     "gpp_g_c_m2": 379.637,
      "day_respiration_g_c_m2": 44.3224,
      "night_respiration_g_c_m2": 36.5019,
-     "net_g_c_m2": 299.197,
+     "net_g_c_m2": 298.812,
      "balance_closes": true,
-     "store_for_the_night_g_c_m2": 37.2111,
+     "store_for_the_night_g_c_m2": 37.2133,
      "longest_deficit_hours": 365.687
     }
    },
    "8.0": {
-    "gpp_mean_umol_m2_s": 12.7326,
-    "gpp_g_c_m2_per_24h": 13.2132,
-    "par_mean_umol_m2_s": 446.098,
-    "absorbed_mean_umol_m2_s": 426.137,
+    "gpp_mean_umol_m2_s": 12.7194,
+    "gpp_g_c_m2_per_24h": 13.1996,
+    "par_mean_umol_m2_s": 444.907,
+    "absorbed_mean_umol_m2_s": 425.002,
     "cycle": {
-     "gpp_g_c_m2": 390.195,
+     "gpp_g_c_m2": 389.791,
      "day_respiration_g_c_m2": 51.9575,
      "night_respiration_g_c_m2": 42.7898,
-     "net_g_c_m2": 295.448,
+     "net_g_c_m2": 295.043,
      "balance_closes": true,
-     "store_for_the_night_g_c_m2": 43.75,
+     "store_for_the_night_g_c_m2": 43.7531,
      "longest_deficit_hours": 367.656
     }
    }
@@ -723,17 +723,17 @@
  "variants": {
   "extended_par": {
    "moon": {
-    "gpp_mean_umol_m2_s": 12.7539,
-    "gpp_g_c_m2_per_24h": 13.2353,
-    "par_mean_umol_m2_s": 446.115,
-    "absorbed_mean_umol_m2_s": 449.868,
+    "gpp_mean_umol_m2_s": 12.73,
+    "gpp_g_c_m2_per_24h": 13.2106,
+    "par_mean_umol_m2_s": 444.924,
+    "absorbed_mean_umol_m2_s": 448.029,
     "cycle": {
-     "gpp_g_c_m2": 390.847,
+     "gpp_g_c_m2": 390.116,
      "day_respiration_g_c_m2": 39.5068,
      "night_respiration_g_c_m2": 32.5359,
-     "net_g_c_m2": 318.805,
+     "net_g_c_m2": 318.074,
      "balance_closes": true,
-     "store_for_the_night_g_c_m2": 33.0644,
+     "store_for_the_night_g_c_m2": 33.0669,
      "longest_deficit_hours": 363.718
     }
    },
@@ -755,17 +755,17 @@
   },
   "pale_top_third": {
    "moon": {
-    "gpp_mean_umol_m2_s": 12.382,
-    "gpp_g_c_m2_per_24h": 12.8494,
-    "par_mean_umol_m2_s": 450.021,
-    "absorbed_mean_umol_m2_s": 398.102,
+    "gpp_mean_umol_m2_s": 12.3689,
+    "gpp_g_c_m2_per_24h": 12.8358,
+    "par_mean_umol_m2_s": 448.815,
+    "absorbed_mean_umol_m2_s": 397.045,
     "cycle": {
-     "gpp_g_c_m2": 379.45,
+     "gpp_g_c_m2": 379.049,
      "day_respiration_g_c_m2": 39.5068,
      "night_respiration_g_c_m2": 32.5359,
-     "net_g_c_m2": 307.407,
+     "net_g_c_m2": 307.006,
      "balance_closes": true,
-     "store_for_the_night_g_c_m2": 33.1238,
+     "store_for_the_night_g_c_m2": 33.1256,
      "longest_deficit_hours": 364.703
     }
    },
@@ -787,17 +787,17 @@
   },
   "clumped": {
    "moon": {
-    "gpp_mean_umol_m2_s": 12.3731,
-    "gpp_g_c_m2_per_24h": 12.8402,
-    "par_mean_umol_m2_s": 446.183,
-    "absorbed_mean_umol_m2_s": 380.466,
+    "gpp_mean_umol_m2_s": 12.3601,
+    "gpp_g_c_m2_per_24h": 12.8267,
+    "par_mean_umol_m2_s": 444.992,
+    "absorbed_mean_umol_m2_s": 379.455,
     "cycle": {
-     "gpp_g_c_m2": 379.178,
+     "gpp_g_c_m2": 378.781,
      "day_respiration_g_c_m2": 39.5068,
      "night_respiration_g_c_m2": 32.5359,
-     "net_g_c_m2": 307.135,
+     "net_g_c_m2": 306.738,
      "balance_closes": true,
-     "store_for_the_night_g_c_m2": 33.1363,
+     "store_for_the_night_g_c_m2": 33.1383,
      "longest_deficit_hours": 365.195
     }
    },
@@ -819,17 +819,17 @@
   },
   "vcmax_40": {
    "moon": {
-    "gpp_mean_umol_m2_s": 9.65082,
-    "gpp_g_c_m2_per_24h": 10.0151,
-    "par_mean_umol_m2_s": 446.115,
-    "absorbed_mean_umol_m2_s": 408.551,
+    "gpp_mean_umol_m2_s": 9.64231,
+    "gpp_g_c_m2_per_24h": 10.0063,
+    "par_mean_umol_m2_s": 444.924,
+    "absorbed_mean_umol_m2_s": 407.464,
     "cycle": {
-     "gpp_g_c_m2": 295.753,
+     "gpp_g_c_m2": 295.492,
      "day_respiration_g_c_m2": 27.9829,
      "night_respiration_g_c_m2": 23.0454,
-     "net_g_c_m2": 244.725,
+     "net_g_c_m2": 244.464,
      "balance_closes": true,
-     "store_for_the_night_g_c_m2": 23.3361,
+     "store_for_the_night_g_c_m2": 23.3371,
      "longest_deficit_hours": 361.75
     }
    },
@@ -851,18 +851,18 @@
   },
   "vcmax_90": {
    "moon": {
-    "gpp_mean_umol_m2_s": 14.5369,
-    "gpp_g_c_m2_per_24h": 15.0857,
-    "par_mean_umol_m2_s": 446.115,
-    "absorbed_mean_umol_m2_s": 408.551,
+    "gpp_mean_umol_m2_s": 14.5208,
+    "gpp_g_c_m2_per_24h": 15.0689,
+    "par_mean_umol_m2_s": 444.924,
+    "absorbed_mean_umol_m2_s": 407.464,
     "cycle": {
-     "gpp_g_c_m2": 445.489,
+     "gpp_g_c_m2": 444.995,
      "day_respiration_g_c_m2": 53.002,
      "night_respiration_g_c_m2": 43.65,
-     "net_g_c_m2": 348.837,
+     "net_g_c_m2": 348.343,
      "balance_closes": true,
-     "store_for_the_night_g_c_m2": 44.6679,
-     "longest_deficit_hours": 367.656
+     "store_for_the_night_g_c_m2": 44.671,
+     "longest_deficit_hours": 368.148
     }
    },
    "earth": {

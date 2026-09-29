@@ -35,14 +35,17 @@ FLIGHT_WIND_M = 40000.0
 COMFORT = {'strict': (18.0, 26.0, 15.0), 'loose': (17.0, 27.0, 16.0)}   # air at 2 m from, to (C); highest dewpoint (C)
 VARIABLES = ('air_c', 'dewpoint_c', 'dewpoint_gcm_layer_c', 'humidity', 'rain_mm_h', 'cloud_cover', 'fog',
              'cloud_in_flight_band', 'wind_10m_m_s', 'wind_40_km_m_s', 'comfortable_strict', 'comfortable_loose')
-GCM_RUN, GCM_YEARS = 'A28_dim5', (15, 24)
+# The GCM view: the design case with its Sun, tilt and sunlight split corrected (climate/gcm README); comparisons
+# made before 2026-09-29 used A28_dim5, years 15-24, which also forced the rings.
+GCM_RUN, GCM_YEARS = 'A28_dim5_moon', (20, 29)
 EVIDENCE = ('Two CM1 rings along great circles, compared where they cross (each ring\'s own summary says what a ring '
             'is). At a crossing both simulate the same ground under the same Sun, each in a vertical slice facing a '
             'different way, so their agreement shows how much a result depends on the direction a two-dimensional '
             'model has to choose; errors every ring shares, such as the missing inflow from the sides, agree and stay '
             'hidden. The analysed span is one lunar day after a lunar day of spin-up, so the ranges reflect the '
-            'weather of that one day. The GCM design case (A28_dim5, years 15-24, 3-day means, cells about 170 km '
-            'wide) is a third view.')
+            f'weather of that one day. The GCM design case ({GCM_RUN}, years {GCM_YEARS[0]}-{GCM_YEARS[1]}, 3-day means, '
+            'cells about 170 km wide) is a third view. The rings\' upper air and large-scale vertical wind come from the '
+            'GCM as it was before its Sun, tilt and sunlight split were corrected (A28_dim5).')
 READING_RULE = ('A ring\'s patch is its columns within the radius of the crossing along the ring, land and water '
                 'separately; a surface is compared where each ring has at least 5 columns of it. Values are patch means of '
                 'snapshots every 3 model hours, composited by the local hour angle at the crossing (0 = noon, negative = '

@@ -521,12 +521,12 @@ def planet():
 
 def design_air():
     """Carbon dioxide and oxygen mixing ratios of the design case's air, from its GCM run."""
-    progress = json.loads((HERE.parent / 'gcm' / 'runs' / 'A28_dim5' / 'progress.json').read_text())
+    progress = json.loads((HERE.parent / 'gcm' / 'runs' / GCM_RUN / 'progress.json').read_text())
     cfg = progress['configuration']
     gases = cfg['gases_bar']
     total = sum(gases.values())
     return dict(co2=gases['pCO2'] / total, o2=gases['pO2'] / total, surface_pa=cfg['pressure_pa'],
-                sunlight_w_m2=progress['inputs']['flux_w_m2'], run='A28_dim5')
+                sunlight_w_m2=progress['inputs']['flux_w_m2'], run=GCM_RUN)
 
 
 # label: (gravity, parallel mode)
@@ -568,7 +568,9 @@ def build(label: str, jobs: int = 8) -> Path:
 # --------------------------------------------------------------------------------------------------
 # Cases
 
-GCM_RUN, GCM_YEARS = 'A28_dim5', (15, 24)          # the chosen design (5% dimmer shield), settled years
+# The chosen design (5% dimmer shield) with the GCM's Sun, tilt and sunlight split corrected, settled years. Every
+# case set up before 2026-09-29 took its forcing from A28_dim5, years 15-24.
+GCM_RUN, GCM_YEARS = 'A28_dim5_moon', (20, 29)
 EQUATOR_BAND_DEG = 10.0                              # GCM rows averaged for the equatorial profile
 ROW_BAND_DEG = 3.0                                   # half the GCM's row spacing: the one row nearest a latitude
 PLACEHOLDER_LAND = (28, "28,      20.,   .50,   .95,   10.,    4.,  2.00, 25.0e5,'Terluna placeholder land'\n")

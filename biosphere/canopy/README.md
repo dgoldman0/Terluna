@@ -30,8 +30,8 @@ with depth (Lloyd et al. 2010). A sunlit leaf's share of the direct beam is spre
 its orientations (uniform in the cosine for spherical leaves). Photons from 400 to
 700 nm drive photosynthesis. Both worlds hold O₂ at Earth's partial pressure and
 400 ppm of CO₂: 48.6 Pa on the Moon at 1.2 atm and 40.5 Pa on Earth. Leaves are at
-22 °C by day and respire at 19 °C by night, the equatorial land air of the chosen
-climate at its warmest and coldest; Earth gets the same temperatures, so the two
+22 °C by day and respire at 19 °C by night: the chosen climate's equatorial land air
+averages 22.6 °C by day and falls to 19.7 °C before dawn (GCM run A28_dim5_moon); Earth gets the same temperatures, so the two
 skies and the two CO₂ pressures are what differ.
 
 The PROSPECT-D code matches the prosail package's implementation to 10⁻¹⁵. The canopy
@@ -114,14 +114,15 @@ at the equator:
 [results/plant.json](results/plant.json) (schema
 `terluna.biosphere.plant-carbon-cycle/1`). Besides the canopy's inputs it reads two
 generated products: the chosen climate's climatology with land air temperature by
-local time (`climate/gcm/.venv/bin/python -m climate.gcm.climatology A28_dim5:15-24`)
+local time (`climate/gcm/.venv/bin/python -m climate.gcm.climatology A28_dim5_moon:20-29`)
 and the sky atlases ([illumination/sky](../../illumination/sky/README.md)).
 
 It follows the base stand through one solar cycle at the equator, 30° and 60°, on the
 near and far sides, and treats the parts of the day the canopy model leaves out:
 
 - **Temperature.** Leaves are at the land air temperature of the chosen climate
-  through the lunar day (GCM run A28_dim5, 3-day means composited by hour angle).
+  through the lunar day (GCM run A28_dim5_moon, years 20–29, the chosen design with the
+  GCM's Sun, tilt and sunlight split corrected; 3-day means composited by hour angle).
 - **Low Sun and twilight.** Below 30° of Sun height the diffuse light is scaled to
   the spherical sky atlas, and after sunset the canopy gets the atlas's twilight,
   cut by the shield's 6%, with the spectrum of the diffuse light at 1°.
@@ -142,8 +143,8 @@ The strategies are:
 
 ### Results
 
-The chosen climate's land nights stay at 19–20 °C at every latitude and on both
-sides, with days of 21–23.5 °C. Cold does not slow respiration anywhere.
+The chosen climate's land nights stay at 19.5–21 °C at every latitude and on both
+sides, with days of 21.5–24 °C. Cold does not slow respiration anywhere.
 
 The night is shorter than the Sun's geometry says. The Moon's tall sky stays sunlit
 far above the ground after sunset. At the equator, photosynthetic light stays above
@@ -159,37 +160,38 @@ has the same temperatures over 24 hours:
 
 | Strategy | Growth per cycle | Per 24 hours | Carbon-use efficiency | Store for the night | Deficit lasts |
 |---|---|---|---|---|---|
-| Earth's stand, one day | 5.4 g C | 5.4 g C | 0.50 | 1.8 g C | 12 h |
-| Earth-like | 229 g C | 7.8 g C | 0.56 | 46 g C | 336 h |
-| Idle at half | 249 g C | 8.4 g C | 0.61 | 21 g C | 314 h |
-| Idle at a quarter | 259 g C | 8.8 g C | 0.64 | 10 g C | 295 h |
-| Idle at a tenth | 265 g C | 9.0 g C | 0.65 | 3.7 g C | 273 h |
-| Regrow leaves | 28 g C | 0.9 g C | 0.07 | 206 g C | 467 h |
+| Earth's stand, one day | 5.4 g C | 5.4 g C | 0.50 | 1.9 g C | 12 h |
+| Earth-like | 228 g C | 7.7 g C | 0.56 | 47 g C | 337 h |
+| Idle at half | 249 g C | 8.4 g C | 0.61 | 22 g C | 315 h |
+| Idle at a quarter | 260 g C | 8.8 g C | 0.64 | 10 g C | 296 h |
+| Idle at a tenth | 266 g C | 9.0 g C | 0.65 | 3.9 g C | 274 h |
+| Regrow leaves | 29 g C | 1.0 g C | 0.08 | 206 g C | 467 h |
 
 - **Every evergreen strategy closes its budget.** Even the Earth-like plant grows
   faster than the same stand on Earth. Its canopy fixes more (the diffuse sky, the
   CO₂ pressure and the twilight) while it respires the same per hour. Its store is
   25 times an Earth night's.
 - **Idling shrinks the store more than it adds growth.** A quarter-rate night cuts
-  the store from 46 to 10 g C/m² and adds 13% to growth. The trigger matters:
-  idling only in full darkness, below 1 µmol m⁻² s⁻¹, leaves a store of 19.
-- **Twilight is worth 14% of the Earth-like store and a quarter of the idling
-  one.** Cutting the light at sunset raises them to 53 and 13.
+  the store from 47 to 10 g C/m² and adds 14% to growth. The trigger matters:
+  idling only in full darkness, below 1 µmol m⁻² s⁻¹, leaves a store of 20.
+- **Twilight is worth 13% of the Earth-like store and a quarter of the idling
+  one.** Cutting the light at sunset raises them to 55 and 14.
 - **Regrowth is the weakest strategy.** A new canopy costs 264 g C/m² every cycle
-  and has to be built at dawn from reserves. Growth falls to 28 at the equator, 3 at
-  30° and none at 60°, and the store rises to 206–232. Regrowing over 2 days leaves
-  37; over 10 days, nothing. Idling stems and roots meanwhile adds only 11.
-- **Near and far sides differ by 3–4% for evergreen plants.** The far side's cooler
-  equatorial days (21 against 23.5 °C) lower photosynthesis and respiration together.
-  Regrowth's thin margin shrinks by a third there (19 against 28). The sides differ
+  and has to be built at dawn from reserves. Growth falls to 29 at the equator, 8 at
+  30° and none at 60°, and the store rises to 206–230. Regrowing over 2 days leaves
+  38; over 10 days, nothing. Idling stems and roots meanwhile adds only 11.
+- **Near and far sides differ by 2–3% for evergreen plants.** The far side's cooler
+  equatorial days (21.5 against 23.6 °C) lower photosynthesis and respiration together.
+  Regrowth's thin margin shrinks by a quarter there (21.5 against 29). The sides differ
   more in their night cue: earthlight lights only the near side.
-- **Latitude.** At 60° the Earth-like plant grows 135 g C/m² per cycle with a store
-  of 35. Idling at a quarter there needs 5.6, because twilight fills most of the
+- **Latitude.** At 60° the Earth-like plant grows 137 g C/m² per cycle with a store
+  of 34. Idling at a quarter there needs 5.5, because twilight fills most of the
   night.
 - **Calibration.** With an Earth carbon-use efficiency of 0.4 (more upkeep for stems
-  and roots), the Earth-like plant grows 197 with a store of 63, idling at a quarter
-  239 with 14, and regrowth nothing. An efficiency of 0.6 leaves stems and roots
-  almost no upkeep in this stand.
+  and roots), the Earth-like plant grows 196 with a store of 65, idling at a quarter
+  239 with 14, and regrowth nothing. An efficiency of 0.6 is out of reach: the
+  stand's leaves alone respire 25.2% of its photosynthesis, more than the quarter
+  that efficiency leaves for all upkeep.
 - **Storage capacity.** Stores of tens of grams of carbon per m² are small next to
   what Earth's forests carry as non-structural carbohydrates: hundreds of grams per
   m², several per cent of their dry mass (Martínez-Vilalta et al. 2016). For small
@@ -228,7 +230,7 @@ cover the equator, 30° and 60° on the near side and the far side's equator.
   (7.1–8.3 kg in Noh et al. 2013), 8.6% dry matter and 42% carbon in that dry matter
   (USDA composition). Its program is the degree-days above 10 °C it needs from fruit
   set to harvest. The design case, the *day fruit*, needs the degree-days of one
-  sunlit half at its site: 199 at the equator, 187 at 30°, 167 at 60° and 165 on the
+  sunlit half at its site: 201 at the equator, 203 at 30°, 183 at 60° and 170 on the
   far side's equator. Today's watermelon needs 560, from growers' 35–45 days with
   25–35 °C days and 15–20 °C nights, and is kept as the baseline. At the equator the
   program is swept from 120 to 560 degree-days.
@@ -251,21 +253,21 @@ cover the equator, 30° and 60° on the near side and the far side's equator.
 The day fruit, set at sunrise, is ripe at sunset 14.8 days later. Its fastest growth
 comes at local noon, when the plant's surplus peaks, and none of its growth falls
 while the plant is in deficit. It reaches full size on the daylight surplus alone and
-is off the plant before the night, so the plant's store stays at its own 46 g C per m²
+is off the plant before the night, so the plant's store stays at its own 47 g C per m²
 (10 when it idles at a quarter of its daytime upkeep).
 
 - **How fast a large fruit can grow.** At the equator the plant's daytime surplus
   would build 0.50 kg of fruit per m² of ground a day. A 7.5 kg day fruit grows at up
-  to 0.87 kg a day, 3.5 times today's watermelon's fastest (0.25 kg a day at the
+  to 0.85 kg a day, 3.4 times today's watermelon's fastest (0.25 kg a day at the
   equator's temperatures). Giant pumpkins, bred for more phloem into the fruit, gain
   about 15 kg a day at their peak (Savage et al. 2015), so what one fruit can take in
   leaves room for far larger fruits. Canopy area sets the size: at a 60% fruit share,
   each 7.5 kg fruit draws on about 2 m² of canopy.
 - **The program is what to design.** Programs up to the length of the day cost
-  nothing at night. Longer ones spill into it. At 230 degree-days (17.5 days) the fruit
-  reaches 94% of full size on daylight alone, or needs 13 g C more store when fed; at
-  260 (20 days) 83% or 32 more; at 300 (24.5 days) 70% or 56 more; today's
-  watermelon, 45 days, 60% or 70 more. Shorter programs (120–160 degree-days, 9–12
+  nothing at night. Longer ones spill into it. At 230 degree-days (17 days) the fruit
+  reaches 94% of full size on daylight alone, or needs 12 g C more store when fed; at
+  260 (20 days) 84% or 31 more; at 300 (23.5 days) 70% or 55 more; today's
+  watermelon, 44 days, 57% or 74 more. Shorter programs (120–160 degree-days, 9–12
   days) add nothing, because the carbon then limits the harvest.
 - **When to set it.** At sunrise, with the harvest at sunset. The plant is in surplus
   from about half a day before sunrise to 0.3 days after sunset (15.5 days), which
@@ -274,31 +276,31 @@ is off the plant before the night, so the plant's store stays at its own 46 g C 
 How much can go to fruit: the day fruit at the equator on the near side. The fruit
 share is the fruit's part of all new tissue carbon. The plant's own growth is also
 given as the cycles it would take to build a whole new canopy (211.5 g C). The store
-for the night is the plant's own at every share: 46 g C per m², or 10 when it idles.
+for the night is the plant's own at every share: 47 g C per m², or 10 when it idles.
 
 | Fruit share | Harvest per m² per lunar cycle | Plant's own growth | A new canopy every | Harvest when the plant idles at night |
 |---|---|---|---|---|
-| None | | 229 g C | 0.9 cycles | |
-| 30% | 1.9 kg | 158 g C | 1.3 cycles | 2.1 kg |
-| 50% | 3.1 kg | 112 g C | 1.9 cycles | 3.5 kg |
+| None | | 228 g C | 0.9 cycles | |
+| 30% | 1.9 kg | 157 g C | 1.3 cycles | 2.1 kg |
+| 50% | 3.1 kg | 111 g C | 1.9 cycles | 3.5 kg |
 | 60% | 3.7 kg | 89 g C | 2.4 cycles | 4.2 kg |
 | 70% | 4.3 kg | 66 g C | 3.2 cycles | 4.9 kg |
 | 80% | 4.9 kg | 44 g C | 4.8 cycles | 5.5 kg |
 
 - **Against today's watermelon.** Today's watermelon takes 45 days and lives through a
   night, growing about a third of its mass in the dark whatever the set time. At a 60%
-  share it yields 3.5 kg per m² per cycle and either needs a store of 116 g C or
-  reaches 59% of full size on daylight alone. The day fruit yields 5% more and leaves
+  share it yields 3.5 kg per m² per cycle and either needs a store of 121 g C or
+  reaches 57% of full size on daylight alone. The day fruit yields 5% more and leaves
   the plant its own store.
 - **Earth.** The same stand and temperatures on Earth, with today's watermelon at a
-  60% share, grow 2.45 kg per m² in 29.5 days with a store of 3.8 g C. The day fruit
-  on the Moon yields 51% more per month, and 71% more when the plant idles at night.
+  60% share, grow 2.45 kg per m² in 29.5 days with a store of 3.9 g C. The day fruit
+  on the Moon yields 50% more per month, and 71% more when the plant idles at night.
 - **Latitude and side.** At a 60% share the day fruit yields 3.3 kg at 30°, 2.2 kg at
   60° and 3.6 kg on the far side's equator (3.8, 2.6 and 4.1 when the plant idles).
 - **Sensitivity** (day fruit, equatorial near side, 60% share). A growth peak at 0.4
   or 0.6 of the program changes the harvest by under 1%. Halving the fruit's upkeep
   adds 2%. More stem and root upkeep (an Earth carbon-use efficiency of 0.4) gives
-  3.2 kg, with the plant's own store at 63.
+  3.2 kg, with the plant's own store at 65.
 
 ### What the design asks of the plant
 
@@ -307,8 +309,8 @@ The model sets these requirements; whether a plant can meet them is untested.
 - **A program one lunar day long:** about 200 degree-days from set to ripe at the
   equator, a third of today's watermelon's. Cucumbers already grow from 5 to 30 cm,
   picking size, in 10–15 days, unripe (Wiechers et al. 2011).
-- **Filling at up to 0.9 kg a day** for a 7.5 kg fruit: 3.5 times today's
-  watermelon, and a seventeenth of a giant pumpkin's peak.
+- **Filling at up to 0.85 kg a day** for a 7.5 kg fruit: 3.4 times today's
+  watermelon, and an eighteenth of a giant pumpkin's peak.
 - **Setting on cue at sunrise.** Parthenocarpic cucumbers set fruit without
   pollination, which frees the set from pollinators and from seed development.
 - **Cells ready by sunrise.** Growth this fast is mostly cell expansion. One way to

@@ -6,8 +6,8 @@
 Direct and diffuse downward irradiance at the surface from 202 to 1000 nm in 1-nm bins, at
 Sun heights from 1 to 90 degrees, for three columns:
 
-- the design Moon: 1.2 atm (121,590 Pa of dry air) and a 294 K surface, the chosen climate's
-  global mean (climate/gcm run A28_dim5), behind the titania film passing 5% less sunlight
+- the design Moon: 1.2 atm (121,590 Pa of dry air) and a 294.9 K surface, the chosen climate's
+  global mean (climate/gcm run A28_dim5_moon, years 20-29), behind the titania film passing 5% less sunlight
   at every wavelength (research/decisions.md);
 - the same air at 1.0 atm;
 - the middle atmosphere's Earth control (1 atm, 288 K, its solved ozone) in unfiltered sunlight.
@@ -24,7 +24,7 @@ every second level. Both use the delta-two-stream solver with a pseudo-spherical
 (radiative_convective/shortwave.py). Each column is the moist adiabat from its surface
 temperature with Manabe-Wetherald humidity up to the tropopause, and above it the middle
 atmosphere's solved temperatures; trace gases are its solved mixing ratios. For the Moon at
-294 K both are interpolated between its stored cases at 288 and 298 K.
+294.9 K both are interpolated between its stored cases at 288 and 298 K.
 
 The ground is Lambertian with albedo A. The downward light at the ground is the light over a
 black ground divided by (1 - A R), where R is the atmosphere's reflectance for diffuse light
@@ -82,7 +82,7 @@ BANDS_NM = dict(uv_b=(280, 315), uv_a=(315, 400), blue=(400, 500), green=(500, 6
 TRACE = ('O3', 'NO2', 'NO3', 'N2O5', 'N2O', 'HNO3', 'H2O2')
 DOBSON_CM2 = 2.6867e16
 
-DESIGN_TS = 294.0
+DESIGN_TS = 294.9                 # the chosen climate's global mean (A28_dim5's 294 K before 2026-09-29)
 W298 = (DESIGN_TS - 288.0) / 10.0
 
 

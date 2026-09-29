@@ -9,11 +9,11 @@
   },
   "depressions": 179990,
   "lakes": {
-    "bodies": 38836,
-    "closed_bodies": 11361,
-    "area_share": 0.1159,
-    "volume_km3": 3507878,
-    "median_depth_m": 399,
+    "bodies": 27865,
+    "closed_bodies": 2495,
+    "area_share": 0.1034,
+    "volume_km3": 3108625,
+    "median_depth_m": 352,
     "largest": [
       {
         "centre": [
@@ -39,13 +39,24 @@
       },
       {
         "centre": [
-          24.61,
-          -169.45
+          24.16,
+          -168.72
         ],
-        "area_km2": 81796,
-        "volume_km3": 125786,
-        "max_depth_m": 5054,
+        "area_km2": 46438,
+        "volume_km3": 63186,
+        "max_depth_m": 4615,
         "level_above_sea_m": 5065,
+        "spills": false
+      },
+      {
+        "centre": [
+          -13.72,
+          -82.5
+        ],
+        "area_km2": 39219,
+        "volume_km3": 21996,
+        "max_depth_m": 1925,
+        "level_above_sea_m": 2296,
         "spills": true
       },
       {
@@ -61,13 +72,13 @@
       },
       {
         "centre": [
-          37.37,
-          -138.92
+          -29.59,
+          -69.07
         ],
-        "area_km2": 29825,
-        "volume_km3": 26481,
-        "max_depth_m": 4541,
-        "level_above_sea_m": 5333,
+        "area_km2": 32062,
+        "volume_km3": 17012,
+        "max_depth_m": 1764,
+        "level_above_sea_m": 1907,
         "spills": false
       },
       {
@@ -83,14 +94,14 @@
       },
       {
         "centre": [
-          -14.5,
+          -14.49,
           -152.71
         ],
-        "area_km2": 29279,
-        "volume_km3": 60820,
+        "area_km2": 29155,
+        "volume_km3": 60235,
         "max_depth_m": 5348,
         "level_above_sea_m": 6070,
-        "spills": true
+        "spills": false
       },
       {
         "centre": [
@@ -112,17 +123,6 @@
         "volume_km3": 31383,
         "max_depth_m": 4661,
         "level_above_sea_m": 5285,
-        "spills": true
-      },
-      {
-        "centre": [
-          31.53,
-          -165.42
-        ],
-        "area_km2": 22046,
-        "volume_km3": 41043,
-        "max_depth_m": 5338,
-        "level_above_sea_m": 5571,
         "spills": true
       },
       {
@@ -150,15 +150,15 @@
     ]
   },
   "rivers": {
-    "discharge_to_sea_m3s": 279167,
-    "channels_over_100_m3s_km": 8054,
+    "discharge_to_sea_m3s": 229410,
+    "channels_over_100_m3s_km": 7541,
     "largest": [
       {
         "mouth": [
           -18.34,
           -100.03
         ],
-        "discharge_m3s": 57147.0,
+        "discharge_m3s": 57435.0,
         "basin_km2": 833158
       },
       {
@@ -166,88 +166,88 @@
           3.59,
           171.16
         ],
-        "discharge_m3s": 42728.8,
-        "basin_km2": 592497
-      },
-      {
-        "mouth": [
-          21.97,
-          -178.34
-        ],
-        "discharge_m3s": 22818.5,
-        "basin_km2": 442033
+        "discharge_m3s": 31255.3,
+        "basin_km2": 571137
       },
       {
         "mouth": [
           -19.66,
           -157.59
         ],
-        "discharge_m3s": 21718.6,
-        "basin_km2": 298426
-      },
-      {
-        "mouth": [
-          47.16,
-          -175.97
-        ],
-        "discharge_m3s": 13016.1,
-        "basin_km2": 367922
-      },
-      {
-        "mouth": [
-          -35.47,
-          -124.16
-        ],
-        "discharge_m3s": 6122.9,
-        "basin_km2": 289538
-      },
-      {
-        "mouth": [
-          5.09,
-          151.66
-        ],
-        "discharge_m3s": 5428.7,
-        "basin_km2": 105470
+        "discharge_m3s": 18416.0,
+        "basin_km2": 242717
       },
       {
         "mouth": [
           17.22,
           -86.47
         ],
-        "discharge_m3s": 5155.8,
-        "basin_km2": 429625
+        "discharge_m3s": 12659.0,
+        "basin_km2": 506628
       },
       {
         "mouth": [
-          -25.84,
-          138.66
+          21.97,
+          -178.34
         ],
-        "discharge_m3s": 4365.3,
-        "basin_km2": 130753
+        "discharge_m3s": 10595.7,
+        "basin_km2": 362059
+      },
+      {
+        "mouth": [
+          -35.47,
+          -124.16
+        ],
+        "discharge_m3s": 6723.4,
+        "basin_km2": 287972
+      },
+      {
+        "mouth": [
+          47.16,
+          -175.97
+        ],
+        "discharge_m3s": 6600.6,
+        "basin_km2": 297883
+      },
+      {
+        "mouth": [
+          -14.03,
+          -89.97
+        ],
+        "discharge_m3s": 5880.6,
+        "basin_km2": 125617
       },
       {
         "mouth": [
           -3.03,
           122.59
         ],
-        "discharge_m3s": 4238.9,
+        "discharge_m3s": 3672.2,
         "basin_km2": 163259
       },
       {
         "mouth": [
-          28.91,
-          157.97
+          5.09,
+          151.66
         ],
-        "discharge_m3s": 3943.6,
-        "basin_km2": 313627
+        "discharge_m3s": 3106.0,
+        "basin_km2": 105470
       },
       {
         "mouth": [
-          -27.09,
-          -92.78
+          1.16,
+          0.34
         ],
-        "discharge_m3s": 2934.3,
-        "basin_km2": 212043
+        "discharge_m3s": 3095.9,
+        "basin_km2": 156450
+      },
+      {
+        "mouth": [
+          3.66,
+          -87.47
+        ],
+        "discharge_m3s": 2875.4,
+        "basin_km2": 73949
       }
     ]
   },
@@ -263,13 +263,13 @@
   },
   "sources": {
     "geography/results/atlas.json": "78cfbf2f469eb339b686e34385c3ed72fc83752da59bb24167e2260a765e537e",
-    "climate/gcm/products/climatology_A28_dim5.npz": "39acc18e1431341e73aaa093bc67f85225fa9ca6e33b72441b9bf621fcd3cd55"
+    "climate/gcm/products/climatology_A28_dim5_moon.npz": "3fb185c8087ea9b5bffdfbfb191cfed5cc3f4397a9a7d0eb52269f925ee6f05c"
   },
   "climatology": {
-    "run": "A28_dim5",
+    "run": "A28_dim5_moon",
     "years": [
-      15,
-      24
+      20,
+      29
     ]
   }
 }

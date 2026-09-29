@@ -195,9 +195,10 @@ byte-identical to an uninterrupted run's.
 - **Together** the two faults left 328 W/m² of the 373 due at 0° E over a
   lunar day: the sweep took about 30 and the tilt about 15. Every result below
   from runs before 2026-09-29 that varies with latitude, season or longitude
-  carries them, as do the products other lanes built from those runs: the lakes
-  and groundwater in `geography/`, the canopy models in `biosphere/canopy/`, the
-  atlas and the CM1 boxes' GCM inputs.
+  carries them, as did the products other lanes built from those runs. Those
+  products were regenerated from the corrected design case ("The corrected
+  design case" below), except the atlas's clouds, which come from run A, and the
+  forcing the CM1 cases were set up with.
 
 **Radiation, checked against line-by-line and calibrated.** The line-by-line model
 (`atmosphere/radiative_convective`) was run on the GCM's own cloud-free columns:
@@ -229,7 +230,7 @@ warm (year 9) states, are in `runs/calibration/`:
 | 1.0, 0.024 (unmodified) | – | 0.203 / 0.248 | +3.4 / −11.8 W/m² |
 | 1.5, 0.012 | 0.250 / 0.275 | 0.235 / 0.247 | −0.5 / −8.7 W/m² |
 | 1.9, 0.004 | 0.276 / 0.276 | 0.261 / 0.247 | +2.1 / −2.1 W/m² |
-| **1.8, 0.004 (used)** | about −0.007 | about +0.007 | about ±2 W/m² |
+| **1.8, 0.004 (used until 2026-09-29)** | about −0.007 | about +0.007 | about ±2 W/m² |
 
 What the calibration does not reach is the clouds. PlaSim diagnoses them from
 humidity, with Earth-tuned optical properties, and the cloud effect moves the
@@ -275,7 +276,11 @@ path, a larger absorptivity, a term growing with the path), the larger
 absorptivity carried over best to two columns the fit did not see: a warmer,
 moister column from the full shield's run (303 K, 338 kg/m² of water vapour),
 where the air stays 0.7 points short against 9.7 before, and a cooler one from
-the 8%-dimmer run, 0.2 points short.
+the 8%-dimmer run, 0.2 points short. In the corrected design case's own output
+(years 20–29), on 11 new columns, the GCM's clear air takes line-by-line's share
+within 0.6 points rms, its ground within 0.6 and its reflection within 0.8
+([radiation_check_A28_dim5_moon.json](../results/gcm/radiation_check_A28_dim5_moon.json));
+at 0° E its air takes 31.4%, as line-by-line's does.
 
 ### Run A, the design case
 
@@ -592,10 +597,69 @@ against the full shield:
   is 0.72 atm with 12.8 kPa of oxygen, what Earth's air gives at about 4,200 m;
   at −10 °C 0.58 atm and 10.3 kPa (about 6,100 m); at −20 °C 0.48 atm and
   8.5 kPa (about 7,700 m). Snow forms in the clouds above 25 km and melts on
-  the way down.
+  the way down. The corrected design case (below) keeps the same upper air: over
+  its seas the freezing level stands where `A28_dim5`'s does, and the flight
+  band's air differs by at most 0.2 °C.
 
-The author chose the 5% dimmer shield (2026-09-26); the geography domain's
-lakes now come from its climate.
+The author chose the 5% dimmer shield (2026-09-26). Other lanes now read its
+corrected run, below.
+
+### The corrected design case
+
+`A28_dim5_moon` is the chosen design, the 28% seas with lakes behind the 5%
+dimmer shield, with the GCM's Sun, tilt and sunlight split corrected
+(2026-09-29). It branched from `A28_dim5`'s year 24 and ran 30 years. It settled
+within about five years: over years 20–29 its surface warmed 0.08 K per decade
+and the top of the atmosphere gained 0.07 W/m². Along the equator its sunlight
+is even to 0.1%, every row gets the Moon's sunlight within 0.1 W/m² rms
+([sun_check_A28_dim5_moon.json](../results/gcm/sun_check_A28_dim5_moon.json)),
+and its clear-sky split matches line-by-line on 11 columns (above,
+"Recalibrated"). Against the uncorrected run
+(`python -m climate.gcm.compare A28_dim5:15-24 A28_dim5_moon:20-29`):
+
+| | `A28_dim5`, years 15–24 | `A28_dim5_moon`, years 20–29 |
+|---|---|---|
+| Surface temperature | 294.3 K | 294.9 K |
+| Sea surface | 297.3 K | 297.0 K |
+| Air over land | 293.7 K | 294.3 K |
+| Air poleward of 70° | 293.2 K | 292.6 K |
+| Coldest 3-day mean anywhere | 284.5 K | 287.4 K |
+| Year's range of 3-day means, land at 55–65° | 10.8 K | 7.3 K |
+| Planetary albedo | 0.293 | 0.280 |
+| Cloud cover; cloud effect in sunlight / net | 25%; −15.7 / −6.3 W/m² | 23.5%; −8.5 / −1.6 W/m² |
+| Precipitation | 2.91 mm/day | 2.24 mm/day |
+| Land under 0.5 mm/day | 9% | 42% |
+| Water vapour | 174 kg/m² | 176 kg/m² |
+
+- **The Moon stays warm and even.** Its surface is 0.6 K warmer. The poles now
+  get only the grazing sunlight of a 1.54° tilt, 29 W/m² at 86° against 149,
+  and the air poleward of 70° stays at 292.6 K, 0.6 K cooler: the heavy air's
+  circulation carries the heat, as the uncorrected runs found. Without seasons
+  the year's range at a place shrinks, and no 3-day mean anywhere falls below
+  14 °C.
+- **Its rain is weaker and keeps to the tropics.** Tropical land keeps its rain,
+  4.8 mm/day within 15° of the equator, but land between 30° and 45° gets
+  1.3 mm/day instead of 2.8, and between 45° and 60° 0.2 instead of 1.9. Two
+  changes do it. With only the Sun and tilt corrected (`A28_dim5_sun_test`, two
+  years), the high latitudes already dry out and 36% of the land gets under
+  0.5 mm/day: Earth's seasons had carried summer rain to 60°. The recalibrated
+  sunlight then cuts the total rain by a further 18%, because the air now
+  absorbs sunlight that used to evaporate water at the ground.
+- **Clouds matter less.** Cover falls from 25% to 23.5%, and their net effect
+  from −6.3 to −1.6 W/m², mostly in sunlight. About a third of that comes with
+  the Sun and tilt corrected (−13 W/m² in sunlight in the two-year test), the
+  rest with the air absorbing more of the sunlight around them.
+- **The chosen shield still gives about 294 K**: 294.9 K, where the uncorrected
+  run gave 294.3.
+- **What reads it was regenerated from it:** the climatology
+  (`python -m climate.gcm.climatology A28_dim5_moon:20-29`), geography's lakes
+  and groundwater, the surface light at 294.9 K, the canopy models and the CM1
+  comparisons. The lakes cover 10.3% of the Moon instead of 11.6%: those within
+  15° of the equator grow a little, and those between 30° and 60° shrink to a
+  fraction. Built into the GCM's T21 coastline they would change 111 of its
+  2,048 cells and lower the water from 40.1% to 38.3%; whether to rebuild the
+  coastline, which needs a cold start, is open. The atlas's clouds still come
+  from run A.
 
 ### Cloud amount: what published models say
 
@@ -632,6 +696,8 @@ against the papers:
 | Corrected clouds | Done (15 years, above): `A_corrected_clouds`, both corrections; the design case with PlaSim's cloud amount |
 | A28, 28% seas with lakes | Done (30 years from cold, above): the design case with the scenario's water, 303 K |
 | Dimmer shield (`A28_dim3`, `A28_dim5`, `A28_dim8`) | 3% and 8% run 8 years (paused); 5% run 25 years and settled near 294 K (above) |
+| Sun test (`A28_dim5_sun_test`) | Done (2 years from `A28_dim5`'s year 24): the corrected Sun and tilt with the old sunlight split |
+| Corrected design case (`A28_dim5_moon`) | Done (30 years from `A28_dim5`'s year 24, above): the 5% dimmer shield with the Sun, tilt and sunlight split corrected, 294.9 K |
 | C, 1.0 atm | Not run: no current decision needs it. The 1-D balance puts 1.0 atm 0.2–1.3 K cooler than 1.2 atm, depending on the clouds, and 1.2 atm is the design pressure. The runner keeps it defined |
 | D, E | Need ExoPlaSim's ozone profile from the 1-D results, and a way to add the trace gases' forcing |
 

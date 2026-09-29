@@ -17,7 +17,7 @@
   "ring_a_prime"
  ],
  "evidence": "CM1 r22.0 in three dimensions at lunar gravity: a box 385 km square of 64 x 64 columns 6.0 km wide on 111 levels to 150 km, wrapping round on all sides, at 0 N 0 E, all land (the placeholder surface at wetness 0.90), with the Morrison microphysics given lunar fall speeds, RRTMG radiation for the design air and the Sun of the site, the same across the box; the upper air above 8-16 km held to ring A's reference; the GCM design case's mean vertical wind there imposed as large-scale vertical advection; and the heating and moistening of the rings' own day-night circulation there prescribed by local time and height. It resolves storms in three dimensions. It cannot make the planet-wide circulation, which it takes from the rings, and has no land and water around it.",
- "reading_rule": "The box takes all its columns; each ring, its land columns within 100 km of the site along the ring. Values are means over those columns of snapshots every 3 model hours, composited by the local hour angle at the site (0 = noon, negative = morning) in 36-degree bins; day is when the Sun is up. Differences are the box minus the ring, snapshot by snapshot at the same local time; p5 and p95 bound 90% of the means of series rebuilt from one-day blocks drawn at random (a moving-block bootstrap, 2,000 draws). air_gcm_layer_c is the mass-weighted mean temperature of the GCM's lowest layer (the bottom 3.3% of the air's mass, about 1.8 km deep) carried to the ground along a dry adiabat, as the GCM's own air near the ground is; raining is the share of columns with rain of at least 1 mm/h. Comfortable means air at 2 m of 18-26 C with a dewpoint of at most 15 C (strict), or 17-27 C and 16 C (loose). The GCM values are its cells whose centres lie within 150 km, as in ring_crossings. Cloud profiles are the share of columns with condensate of at least 0.01 g/kg at each height, by day and by night.",
+ "reading_rule": "The box takes all its columns; each ring, its land columns within 100 km of the site along the ring. Values are means over those columns of snapshots every 3 model hours, composited by the local hour angle at the site (0 = noon, negative = morning) in 36-degree bins; day is when the Sun is up. Differences are the box minus the ring, snapshot by snapshot at the same local time; p5 and p95 bound 90% of the means of series rebuilt from one-day blocks drawn at random (a moving-block bootstrap, 2,000 draws). air_gcm_layer_c is the mass-weighted mean temperature of the GCM's lowest layer (the bottom 3.3% of the air's mass, about 1.8 km deep) carried to the ground along a dry adiabat, as the GCM's own air near the ground is; raining is the share of columns with rain of at least 1 mm/h. Comfortable means air at 2 m of 18-26 C with a dewpoint of at most 15 C (strict), or 17-27 C and 16 C (loose). The GCM values are its cells whose centres lie within 150 km, as in ring_crossings. Cloud profiles are the share of columns with condensate of at least 0.01 g/kg at each height, by day and by night. Surface energy terms are in W/m2: net sunlight and net infrared at the ground positive downward, written only by the boxes that write the radiation at the ground; the heat carried into the air and the heat of evaporation positive upward; the GCM's are 3-day means on its land cells within 150 km.",
  "gcm_lowest_sigma": 0.983,
  "span_days": [
   29.5,
@@ -1707,10 +1707,10 @@
   }
  },
  "gcm": {
-  "run": "A28_dim5",
+  "run": "A28_dim5_moon",
   "years": [
-   15,
-   24
+   20,
+   29
   ],
   "radius_km": 150.0,
   "land": {
@@ -1726,85 +1726,85 @@
    ],
    "air_c": {
     "by_local_time": [
-     20.23,
-     19.544,
-     19.181,
-     20.677,
-     23.81,
-     25.103,
-     24.443,
-     22.031,
-     21.259,
-     20.926
+     21.066,
+     20.495,
+     20.058,
+     20.95,
+     23.131,
+     24.303,
+     24.382,
+     22.513,
+     21.87,
+     21.584
     ],
     "mean": {
-     "all": 21.619,
-     "day": 23.017,
-     "night": 20.429
+     "all": 22.031,
+     "day": 22.814,
+     "night": 21.196
     }
    },
    "dewpoint_c": {
     "by_local_time": [
-     15.351,
-     14.951,
-     14.34,
-     14.828,
-     16.695,
-     18.662,
-     19.581,
-     18.323,
-     16.204,
-     15.465
+     16.59,
+     16.129,
+     15.154,
+     15.979,
+     19.057,
+     20.227,
+     20.979,
+     19.992,
+     17.358,
+     17.165
     ],
     "mean": {
-     "all": 16.369,
-     "day": 17.243,
-     "night": 15.625
+     "all": 17.869,
+     "day": 18.769,
+     "night": 16.91
     }
    },
    "rain_mm_h": {
     "by_local_time": [
-     0.013,
-     0.011,
-     0.014,
-     0.07,
-     0.257,
-     0.741,
-     0.661,
-     0.122,
-     0.012,
-     0.008
+     0.031,
+     0.026,
+     0.026,
+     0.136,
+     0.33,
+     0.681,
+     0.939,
+     0.325,
+     0.017,
+     0.025
     ],
     "mean": {
-     "all": 0.182,
-     "day": 0.374,
-     "night": 0.019
+     "all": 0.254,
+     "day": 0.466,
+     "night": 0.029
     }
    },
    "cloud_cover": {
     "by_local_time": [
-     0.166,
+     0.173,
+     0.144,
      0.163,
-     0.126,
-     0.143,
-     0.268,
-     0.475,
-     0.476,
-     0.311,
-     0.188,
-     0.184
+     0.239,
+     0.399,
+     0.478,
+     0.567,
+     0.394,
+     0.235,
+     0.212
     ],
     "mean": {
-     "all": 0.245,
-     "day": 0.324,
-     "night": 0.178
+     "all": 0.3,
+     "day": 0.393,
+     "night": 0.201
     }
    },
    "comfortable_hours_per_lunar_day": {
-    "strict": 201.989,
-    "loose": 293.829
+    "strict": 104.538,
+    "loose": 163.599
    },
-   "rain_mm_per_lunar_day": 128.991
+   "rain_mm_per_lunar_day": 180.11
   },
   "water": null
  },
@@ -2563,11 +2563,172 @@
    ]
   }
  },
+ "surface_energy": {
+  "box_0e": {
+   "sensible": {
+    "by_local_time": [
+     -0.269,
+     -0.33,
+     4.207,
+     46.617,
+     79.086,
+     82.039,
+     48.41,
+     2.392,
+     -0.035,
+     0.066
+    ],
+    "mean": 26.027
+   },
+   "latent": {
+    "by_local_time": [
+     0.256,
+     0.127,
+     8.91,
+     156.34,
+     335.688,
+     336.735,
+     172.277,
+     24.37,
+     0.949,
+     0.653
+    ],
+    "mean": 102.895
+   }
+  },
+  "ring_a": {
+   "sensible": {
+    "by_local_time": [
+     -0.867,
+     -1.04,
+     2.866,
+     51.467,
+     63.125,
+     84.296,
+     44.272,
+     1.304,
+     -1.934,
+     -1.475
+    ],
+    "mean": 23.959
+   },
+   "latent": {
+    "by_local_time": [
+     -0.115,
+     -0.343,
+     8.319,
+     162.435,
+     345.701,
+     340.636,
+     167.673,
+     26.988,
+     3.093,
+     0.84
+    ],
+    "mean": 104.759
+   }
+  },
+  "ring_a_prime": {
+   "sensible": {
+    "by_local_time": [
+     -1.156,
+     -1.073,
+     3.878,
+     54.229,
+     82.063,
+     91.187,
+     46.274,
+     1.629,
+     -1.103,
+     -1.056
+    ],
+    "mean": 27.247
+   },
+   "latent": {
+    "by_local_time": [
+     -0.567,
+     -0.499,
+     8.792,
+     166.673,
+     320.966,
+     271.741,
+     124.402,
+     24.754,
+     1.309,
+     -0.53
+    ],
+    "mean": 91.049
+   }
+  },
+  "gcm": {
+   "cells": 2,
+   "net_sunlight": {
+    "by_local_time": [
+     0.0,
+     0.0,
+     43.222,
+     255.97,
+     408.905,
+     389.794,
+     209.024,
+     33.299,
+     0.0,
+     0.0
+    ],
+    "mean": 132.831
+   },
+   "net_infrared": {
+    "by_local_time": [
+     -7.477,
+     -8.037,
+     -11.492,
+     -20.982,
+     -21.398,
+     -16.128,
+     -11.008,
+     -7.89,
+     -6.784,
+     -6.463
+    ],
+    "mean": -11.698
+   },
+   "sensible": {
+    "by_local_time": [
+     -1.68,
+     -1.041,
+     -1.838,
+     14.175,
+     37.023,
+     23.005,
+     0.019,
+     -6.246,
+     -3.872,
+     -3.219
+    ],
+    "mean": 5.482
+   },
+   "latent": {
+    "by_local_time": [
+     1.772,
+     1.219,
+     31.48,
+     203.562,
+     333.102,
+     340.244,
+     197.156,
+     46.276,
+     5.707,
+     3.945
+    ],
+    "mean": 115.642
+   }
+  }
+ },
  "producer": {
   "domain": "climate",
   "files": {
-   "crm/box_analysis.py": "36e095e0e4ec7890",
-   "crm/ring_crossings.py": "b38f7b25ccff12b7"
+   "crm/box_analysis.py": "94f9cd41492440f0",
+   "crm/ring_crossings.py": "298da5baa4896238"
   }
  }
 }

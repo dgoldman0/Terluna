@@ -32,6 +32,12 @@ def test_calibration_gives_the_earth_stand_its_carbon_use_efficiency():
         assert earth['carbon_use_efficiency'] == pytest.approx(cue, rel=1e-9)
 
 
+def test_an_efficiency_the_leaves_alone_rule_out_is_refused_with_their_share():
+    # At 0.79 the stand keeps 1 - 1.25 * 0.79, about 1%, of its photosynthesis for upkeep: less than its leaves use.
+    with pytest.raises(ValueError, match='of photosynthesis, exceeds the budget'):
+        plant.calibrate(SimpleTables(), trace(), 0.79)
+
+
 def test_idling_lowers_the_store_and_raises_growth():
     tables, temp = SimpleTables(), trace()
     r25 = plant.calibrate(tables, temp)

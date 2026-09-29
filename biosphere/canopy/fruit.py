@@ -316,7 +316,7 @@ def run():
             'biosphere/canopy/radiation.py', 'biosphere/canopy/leaf.py', 'biosphere/canopy/leaf_optics.py',
             'biosphere/long_night.py')},
             inputs=dict(**{f'{k}_sha256': v for k, v in tables.shas.items()}, climatology_sha256=climate_sha,
-                        climatology_run='A28_dim5', climatology_years=plant.CLIMATE_YEARS)),
+                        climatology_run=plant.CLIMATE_RUN, climatology_years=plant.CLIMATE_YEARS)),
         evidence=EVIDENCE, reading_rule=READING_RULE,
         units=dict(carbon='g C m-2 of ground per solar cycle', load='fruits of 7.5 kg m-2 per cycle',
                    harvest='kg fresh fruit m-2 per cycle', temperature='C', hour_angle='degrees from local noon'),

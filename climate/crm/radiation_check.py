@@ -128,10 +128,13 @@ def cm1_clear(case: Path, from_day: float, lo: float, hi: float):
     return {k: v / used for k, v in acc.items()}, {k: v / total for k, v in flux.items()}, used
 
 
-def gcm_column(lat_deg: float, lon_deg: float, run='A28_dim5', years=(15, 24)):
+def gcm_column(lat_deg: float, lon_deg: float, run=None, years=None):
     """The GCM's mean column on its land cells nearest the site, the sunlight arriving there in the GCM, and the GCM's
-    own clear-sky solar fluxes (W/m2)."""
+    own clear-sky solar fluxes (W/m2). By default the comparisons' GCM run and years (ring_crossings; the committed
+    check of 2026-09-29 used A28_dim5, years 15-24, the GCM before its correction)."""
     import netCDF4
+    from climate.crm.ring_crossings import GCM_RUN, GCM_YEARS
+    run, years = run or GCM_RUN, years or GCM_YEARS
     folder = ra.HERE.parent / 'gcm' / 'runs' / run / 'model'
     acc = {k: [] for k in ('ta', 'hus', 'ps', 'tas', 'prw', 'rstcs', 'rsscs', 'rst', 'rsut')}
     for year in range(years[0], years[1] + 1):
