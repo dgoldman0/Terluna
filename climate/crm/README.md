@@ -413,7 +413,23 @@ low-lying stretches differ, flat against terrain, the other rings are rerun with
 their ground heights; if only the high ground itself differs, the two resume
 from their restart files and are read for low-lying land. In two dimensions air
 cannot flow around a mountain, only over it, so the twin may overstate how much
-highlands disturb the air beyond them. Results will follow here.
+highlands disturb the air beyond them.
+
+That limit decided it. For eleven model days the terrain ring behaved as
+expected: low-lying places within 0.4 °C of the flat ring in air (seas within
+0.1 °C by day and 0.6 °C at night), dewpoints on low land about 0.8 °C lower,
+high ground about 1 °C cooler per kilometre with dewpoints 2–6 °C lower, and
+the ring's first comfortable hours, at night over land at 0.5–2 km and over the
+raised lakes. Around day 11, as night reached much of its high ground, gales
+broke out along the whole ring: a median wind at 10 m of 7–10 m/s against 1–2
+in the flat ring, jets of 30–35 m/s through the lowest 2 km and 55 m/s aloft,
+as strong over the seas and level land as on slopes, by day and by night, and
+on slopes blowing downhill only half the time, so not cold air draining off the
+highlands. Air forced over 8-km mountains in two dimensions is the likely cause,
+perhaps helped by the steep slopes in CM1's terrain-following levels; highlands
+the air can flow around very likely do not do this. The gales also cut its time
+step from 80 s to about 23 s. It was stopped at day 13 (restart files kept); a
+sound test of highlands needs three dimensions. The flat twin runs on alone.
 
 ## A three-dimensional box at a crossing
 
