@@ -55,6 +55,7 @@ Sources:
 |---|---|---|
 | Standing water covers 28% of the surface. | [shared/scenarios/water.json](../shared/scenarios/water.json); conservation D10 | Stands; selected on 2026-09-25 within the author's 25–35% range. |
 | The shield passes 5% less sunlight than the titania stack at every wavelength, and the Moon settles near 295 K (294.9 K with the GCM's Sun, tilt and sunlight split corrected; 294 K before). | [climate/gcm](../climate/gcm/README.md) | Stands; chosen on 2026-09-26 and kept on 2026-09-29 after the GCM's correction. |
+| The corrected climate's drier land and smaller lakes are accepted for the comfort it brings. Rain-fed lakes cover 10.3% of the Moon (11.6% before the GCM's correction), 42% of the land gets under 0.5 mm of rain a day, and the GCM's comfortable hours over land rise, most of all poleward of 45°. | Author, 2026-09-29; [climate/gcm](../climate/gcm/README.md), [geography](../geography/README.md) | Stands. How humid the air is at head height, and so where comfort begins, is still being checked with CM1 ([climate/crm](../climate/crm/README.md)). |
 
 ## Protection
 
