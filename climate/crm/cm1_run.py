@@ -727,6 +727,21 @@ CASES['box_0e'] = dict(
     purpose='ring A\'s patch where it crosses A-prime (0 N, 0 E) as a 3-D box 385 km square, all land as wet as the '
             'GCM\'s beneath the patch, the Sun crossing it once a lunar day, the 5% dimmer shield, ring A\'s upper-air '
             'reference and the GCM design case\'s mean vertical wind there')
+# Tests of the land surface every CM1 case shares, at the same site and under the same forcing in boxes a quarter the
+# size (32 x 32 columns, 192 km square): the placeholder land as in box_0e, then the GCM's land one property at a time
+# and all together. PlaSim's land (landmod.f90 as run) has a roughness length of 2 m everywhere, a soil of thermal
+# inertia sqrt(1.8 W/m/K x 2.4e6 J/m3/K) = 2,080 SI (CM1's slab soil, whose diffusivity is fixed, takes it as THERIN
+# 4.97 against the placeholder's 4) and the placeholder's albedo of 0.20; at 0 E its bucket stays full (wetness 1).
+# These boxes also write the radiation at the ground.
+GCM_LAND = dict(roughness_cm=200.0, therin=4.97, wetness=1.0)
+for _tag, _land in (('', None), ('_rough', dict(roughness_cm=GCM_LAND['roughness_cm'])),
+                    ('_soil', dict(therin=GCM_LAND['therin'])), ('_gcm_land', GCM_LAND)):
+    CASES[f'box_0e_small{_tag}'] = dict(
+        CASES['box_0e'], nx=32, ny=32, land=_land, surface_output=True,
+        purpose='box_0e at a quarter of its size (192 km square), ' + (
+            'with the placeholder land' if _land is None else 'with the placeholder land given the GCM\'s '
+            + ', '.join({'roughness_cm': 'roughness (2 m)', 'therin': 'soil thermal inertia',
+                         'wetness': 'full wetness'}[k] for k in _land)))
 
 
 def gcm_soil(folder: Path) -> dict:
@@ -851,11 +866,25 @@ def wetness_class(wetness) -> int:
     return min(WETNESS_CLASSES, key=lambda c: abs(c[1] - float(wetness)))[0]
 
 
-def landuse_rows(classes) -> dict:
-    """Placeholder-land rows of the land-use table for (index, wetness) pairs."""
+def landuse_rows(classes, land=None) -> dict:
+    """Placeholder-land rows of the land-use table for (index, wetness) pairs. `land` may override the albedo
+    (albedo_percent), roughness length (roughness_cm), soil thermal inertia (therin, as the table's THERIN) and
+    wetness (for every row)."""
     base = PLACEHOLDER_LAND[1]
-    return {index: base.replace('28,', f'{index},', 1).replace('.50', f'{w:.2f}'.lstrip('0') if w < 1 else f'{w:.2f}', 1)
+    rows = {index: base.replace('28,', f'{index},', 1).replace('.50', f'{w:.2f}'.lstrip('0') if w < 1 else f'{w:.2f}', 1)
             .replace("'Terluna placeholder land'", f"'Terluna placeholder land, wetness {w:.2f}'") for index, w in classes}
+    if not land:
+        return rows
+    columns = dict(albedo_percent=1, wetness=2, roughness_cm=4, therin=5)       # after the index: ALBD SLMO SFEM SFZ0 THERIN
+    labels = dict(albedo_percent='albedo {:g}%', roughness_cm='roughness {:g} cm', therin='THERIN {:g}')
+    for index, w in classes:
+        fields = rows[index].split(',', 7)
+        for key, value in land.items():
+            fields[columns[key]] = f'   {value:.2f}' if key in ('wetness', 'therin') else f'   {value:.0f}.'
+        extra = ''.join(', ' + labels[k].format(v) for k, v in land.items() if k in labels)
+        fields[7] = fields[7].split(',')[0] + f",'Terluna placeholder land, wetness {land.get('wetness', w):.2f}{extra}'\n"
+        rows[index] = ','.join(fields)
+    return rows
 
 
 def gcm_path_reference(lat_path, lon_path, tilt_deg, zw, run=GCM_RUN, years=GCM_YEARS) -> dict:
@@ -1074,7 +1103,8 @@ def case_settings(cfg, nx, dx, nz, ztop, air, gravity):
                        var18=0.0 if pair else cfg['start_hour_angle_deg'] + (cfg['node_deg'] if tilted else
                                                                              cfg['site']['lon_deg'] if box else 0.0),
                        var19=0.0 if pair else round(solar_day_s(), 1)),
-        'param9': dict(output_format=1, output_filetype=2, output_sfcparams=0, output_tke=0, output_km=0,
+        'param9': dict(output_format=1, output_filetype=2, output_sfcparams=int(bool(cfg.get('surface_output'))),
+                       output_tke=0, output_km=0,
                        output_kh=0, output_uinterp=1, output_vinterp=int(rotating or box), output_v=0, output_winterp=1,
                        output_radten=int(not box), output_cape=1, output_cin=1, output_lcl=1, output_lfc=1, output_pwat=1,
                        output_lwp=1, **(dict(output_u=0, output_w=0, output_dbz=0) if box else {})),
@@ -1224,7 +1254,7 @@ def setup(name: str) -> Path:
     table = [row.replace('.50', f"{land_moisture(cfg, ref):.2f}".lstrip('0')) if line.startswith(f'{index},') else line
              for line in table]
     if tilted or box:                                                     # land-use rows for the wetness classes
-        rows = landuse_rows(WETNESS_CLASSES)
+        rows = landuse_rows(WETNESS_CLASSES, cfg.get('land'))
         table = [next((r for i, r in rows.items() if line.startswith(f'{i},')), line) for line in table]
     (case / 'LANDUSE.TBL').write_text(''.join(table))
     vertical_wind = None

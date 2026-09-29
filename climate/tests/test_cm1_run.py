@@ -381,3 +381,23 @@ def test_day_night_table_reads_as_the_patch_expects(tmp_path):
         assert np.allclose(np.array(lines[2 + 2 * b].split(), float), th[b])
         assert np.allclose(np.array(lines[3 + 2 * b].split(), float), qv[b])
     assert 'terluna_nb.eq.0' in c.ADVECTION_BLOCK and 'var11.gt.0.5' in c.ADVECTION_BLOCK
+
+
+def test_land_overrides_reach_the_right_columns_of_the_table():
+    plain = c.landuse_rows(c.WETNESS_CLASSES)
+    assert c.landuse_rows(c.WETNESS_CLASSES, None) == plain
+    rough = c.landuse_rows(c.WETNESS_CLASSES, dict(roughness_cm=200.0, therin=4.97, wetness=1.0))
+    fields = rough[30].split(',')                                           # index ALBD SLMO SFEM SFZ0 THERIN SCFX SFHC name
+    assert [float(f) for f in fields[1:6]] == [20.0, 1.0, 0.95, 200.0, 4.97] and fields[0] == '30'
+    assert float(plain[30].split(',')[4]) == 10.0 and float(plain[30].split(',')[2]) == 0.9
+    assert 'roughness 200 cm' in rough[30] and 'wetness 1.00' in rough[30]
+
+
+@needs_planet
+def test_the_land_tests_are_quarter_boxes_that_write_the_radiation_at_the_ground():
+    air = dict(sunlight_w_m2=1300.0)
+    small = c.case_settings(c.CASES['box_0e_small_rough'], 32, 6011.0, 111, 150000.0, air, 1.6242)
+    assert small['param0']['nx'] == 32 and small['param0']['ny'] == 32 and small['param9']['output_sfcparams'] == 1
+    big = c.case_settings(c.CASES['box_0e'], 64, 6011.0, 111, 150000.0, air, 1.6242)
+    assert big['param9']['output_sfcparams'] == 0
+    assert c.CASES['box_0e_small_gcm_land']['land'] == c.GCM_LAND and c.CASES['box_0e_small']['land'] is None
