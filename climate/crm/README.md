@@ -406,7 +406,14 @@ toward the initial state. A six-hour test gave surface pressure over ground at
 5.6 km of 1,087 hPa against 1,211 hPa at sea level, as the Moon's 52-km scale
 height implies, air there about 5 °C cooler, and slope winds building gently.
 
-All four run together for two lunar days; their results will follow here.
+The four started together on 2026-09-29. After about two hours `ring_equator`
+and `ring_70_135e` were paused, a sixth of the way through, until the twin
+shows whether terrain matters enough that every ring needs it: if the twin's
+low-lying stretches differ, flat against terrain, the other rings are rerun with
+their ground heights; if only the high ground itself differs, the two resume
+from their restart files and are read for low-lying land. In two dimensions air
+cannot flow around a mountain, only over it, so the twin may overstate how much
+highlands disturb the air beyond them. Results will follow here.
 
 ## A three-dimensional box at a crossing
 
