@@ -56,6 +56,7 @@ Sources:
 | Standing water covers 28% of the surface. | [shared/scenarios/water.json](../shared/scenarios/water.json); conservation D10 | Stands; selected on 2026-09-25 within the author's 25–35% range. |
 | The shield passes 5% less sunlight than the titania stack at every wavelength, and the Moon settles near 295 K (294.9 K with the GCM's Sun, tilt and sunlight split corrected; 294 K before). | [climate/gcm](../climate/gcm/README.md) | Stands; chosen on 2026-09-26 and kept on 2026-09-29 after the GCM's correction. |
 | The corrected climate's drier land and smaller lakes are accepted for the comfort it brings. Rain-fed lakes cover 10.3% of the Moon (11.6% before the GCM's correction), 42% of the land gets under 0.5 mm of rain a day, and the GCM's comfortable hours over land rise, most of all poleward of 45°. | Author, 2026-09-29; [climate/gcm](../climate/gcm/README.md), [geography](../geography/README.md) | Stands. How humid the air is at head height, and so where comfort begins, is still being checked with CM1 ([climate/crm](../climate/crm/README.md)). |
+| The CM1 rings run flat and are read for low-lying land; the highlands' climate comes from their results corrected for height (about 1 °C cooler per kilometre with lower dewpoints, from the terrain ring's first eleven days, checked against the GCM's highland cells). Rings with terrain are not used: in two dimensions air forced over 8-km mountains turned into gales along the whole ring. The highlands' own weather (winds up and down slopes, rain on the slopes facing the wind, cold air pooling in valleys) waits for a possible 3-D box, 385 km square, over high ground on `ring_70_45e`'s path, forced by that ring and decided after its results. | Author, 2026-09-29; [climate/crm](../climate/crm/README.md) | Stands; the 3-D box is open. |
 
 ## Protection
 
@@ -80,6 +81,12 @@ The author confirmed these rules on 2026-09-26 and regards them as set, to be re
 | Packet energy is capped. Mature dense traffic uses packets of roughly 10⁶–10⁸ kg in preference to 10¹²–10¹⁵ kg units, so each failure's consequences stay bounded; the exact cap awaits risk optimization. | Sep 19 | Stands |
 | Planetary-scale surveillance, tracking, interception and tug capability, and assigned arrival corridors are part of the infrastructure. | Sep 19 | Stands |
 | No civilization-threatening kinetic payload enters a planetary intercept corridor before verified capture. | Sep 19 | Stands |
+
+## Research practice
+
+| Decision | Source | Status |
+|---|---|---|
+| Simulation work fits the author's laptop (8 cores and 31 GB shared with the author's own work, runs of hours with rests between); there is no budget for rented compute. | Author, 2026-09-29 | Stands |
 
 ## Life and people
 

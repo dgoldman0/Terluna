@@ -431,6 +431,21 @@ the air can flow around very likely do not do this. The gales also cut its time
 step from 80 s to about 23 s. It was stopped at day 13 (restart files kept); a
 sound test of highlands needs three dimensions. The flat twin runs on alone.
 
+**The plan for highlands** (the author's, 2026-09-29, recorded in the decisions
+register). The rings stay flat and are read for low-lying land, so
+`ring_equator` and `ring_70_135e` resume from their restart files and finish
+beside `ring_70_45e`. The highlands' climate comes from the flat rings corrected
+for height, about 1 °C cooler per kilometre with lower dewpoints as the terrain
+ring's first eleven days showed, checked against the GCM's highland cells; that
+covers how warm and humid high ground is and how often it is comfortable. The
+highlands' own weather, winds up and down slopes, rain on the slopes facing the
+wind and cold air pooling in valleys, needs three dimensions: a box the size of
+`box_0e`, 385 km square, over a stretch of high ground on `ring_70_45e`'s path,
+with its ground heights in the terrain build and the ring's day-night forcing.
+That fits one overnight run on the laptop, and whether to run it is decided
+after the flat ring's results. There is no budget for rented compute, so larger
+highland domains stay out of reach.
+
 ## A three-dimensional box at a crossing
 
 Case `box_0e` tests what the rings' two dimensions do to the air near the
