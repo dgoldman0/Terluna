@@ -585,7 +585,9 @@ over high ground, which the plan leaves to these results; and an independent
 model for the rest of the gap (ROCKE-3D is open). The rain test, which the
 author chose to run first on the faster build, found that the slow fall of rain
 at lunar gravity explains none of the gap in warmth and humidity (below, "The
-rain test").
+rain test"). With no affordable way left to tell which model is right, the
+author paused the climate work on 2026-09-30 (decisions register), carrying
+comfort as the range between the two.
 
 ```sh
 climate/gcm/.venv/bin/python -m climate.crm.ring_analysis ring_70_45e --from-day 29.5    # likewise ring_equator and ring_70_135e
