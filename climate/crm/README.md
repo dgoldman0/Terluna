@@ -580,11 +580,12 @@ air over land is near the ground. The decisions register accepts the corrected
 climate's drier land for the comfort the GCM counts; the rings find comfort
 only on high ground poleward of 30°, at about a tenth of the GCM's hours. Open
 for the author: a rerun of the steep rings with those drier classes, which
-shows how much of the gap poleward of 30° is the rings' own ground; the 3-D box over high ground, which the plan
-leaves to these results and which would take the same ground; the test of CM1's
-rain at lunar gravity (a small box with Earth's fall speeds); and an
-independent model for the rest of the gap (ROCKE-3D is open). The author chose
-the rain test to run first, on the faster build.
+shows how much of the gap poleward of 30° is the rings' own ground; the 3-D box
+over high ground, which the plan leaves to these results; and an independent
+model for the rest of the gap (ROCKE-3D is open). The rain test, which the
+author chose to run first on the faster build, found that the slow fall of rain
+at lunar gravity explains none of the gap in warmth and humidity (below, "The
+rain test").
 
 ```sh
 climate/gcm/.venv/bin/python -m climate.crm.ring_analysis ring_70_45e --from-day 29.5    # likewise ring_equator and ring_70_135e
@@ -746,14 +747,48 @@ through the fall and the GCM's scheme takes from Earth. With the first two
 corrected (`A28_dim5_moon`), the GCM at 0° E is 0.4 °C warmer and 1.5 °C more
 humid at its lowest layer and rains 40% more. The box stays 3.5 °C warmer and
 2.9 °C more humid, and the gap in rain widens: 180 mm per lunar day in the GCM
-against 38 in the box. The fate of rain at lunar gravity is now the largest
-difference left. The CM1 cases still carry the uncorrected GCM's upper air,
-vertical wind and soil wetness; setting them up again from the corrected run
-and running them costs hours per case.
+against 38 in the box. That left the fate of rain at lunar gravity as the
+largest known difference. The three flat rings set up since from the corrected
+run (above) keep the gap over land.
+
+**The rain test** (the author's go-ahead of 2026-09-30:
+`box_0e_small_earth_fall`,
+[box_box_0e_small_earth_fall.json](../results/crm/box_box_0e_small_earth_fall.json)).
+The small box ran again from its inputs as written, on a build where rain,
+snow, graupel, ice and cloud droplets fall at Earth's speeds and everything
+else, droplet activation included, keeps lunar gravity; the pair differs in the
+fall alone, and both keep the forcing of the GCM before its correction. Over the
+second lunar day, from CM1's running totals of its microphysics:
+
+| | Lunar fall | Earth fall |
+|---|---|---|
+| Water condensed | 304 mm | 231 mm |
+| Evaporated back from cloud | 52 mm | 53 mm |
+| Evaporated from rain, snow and graupel on the way down | 197 mm | 108 mm |
+| Reaching the ground | 34 mm | 60 mm |
+| Share of the falling water evaporated | 85% | 64% |
+
+With the fall at Earth's speeds 77% more rain reaches the ground, still a third
+of the GCM's 180 mm. The air near the ground turns warmer and more humid: 1.0 °C
+warmer at 2 m (26.8 against 25.8 °C) with a dewpoint 1.0 °C higher at 2 m and
+at the height of the GCM's lowest layer (22.3 against 21.3 °C there, where the
+GCM has 17.9 °C), at the same relative humidity (88%). Rain that falls quickly
+leaves less cloud behind, 9% of the box by day against 14% and 75% at night
+against 85%, so more sunlight reaches the ground, while the heat carried into
+the air falls by 1.6 W/m² and the evaporation rises by 4.0 W/m². So the slow fall at lunar gravity
+keeps the lower air cooler and less humid, and explains part of the gap in rain
+and none of the gap in warmth and humidity. The rest lies in what every CM1
+case shares (the large-scale forcing held from the GCM, the boundary layer, the
+placeholder land) or in the GCM's own convection and clouds; an independent
+model would show which.
 
 ```sh
 climate/gcm/.venv/bin/python -m climate.crm.box_analysis box_0e_small_rough --from-day 29.5 --reference box_0e_small
 climate/gcm/.venv/bin/python -m climate.crm.radiation_check box_0e_small --from-day 29.5    # about a quarter of an hour on 8 cores
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run build moon_omp_earth_fall
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_small_earth_fall    # box_0e_small's inputs as written
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_0e_small_earth_fall --hours 5 --threads 4    # 2.3 hours
+climate/gcm/.venv/bin/python -m climate.crm.box_analysis box_0e_small_earth_fall --from-day 29.5 --reference box_0e_small
 ```
 
 ## The gravity pair

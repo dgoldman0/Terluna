@@ -35,7 +35,8 @@ EVIDENCE = ('CM1 r22.0 in three dimensions at lunar gravity: a box 385 km square
             'design case\'s mean vertical wind there imposed as large-scale vertical advection; and the heating and '
             'moistening of the rings\' own day-night circulation there prescribed by local time and height. It '
             'resolves storms in three dimensions. It cannot make the planet-wide circulation, which it takes from the '
-            'rings, and has no land and water around it.')
+            'rings, and has no land and water around it. The boxes built on it (size, land, fall speeds) say how they '
+            'depart from it in their purpose, given with the results.')
 READING_RULE = ('The box takes all its columns; each ring, its land columns within 100 km of the site along the ring. '
                 'Values are means over those columns of snapshots every 3 model hours, composited by the local hour angle '
                 'at the site (0 = noon, negative = morning) in 36-degree bins; day is when the Sun is up. Differences are '
@@ -141,6 +142,25 @@ def gcm_surface_energy(lat_deg: float, lon_deg: float, radius_m=rc.GCM_RADIUS_M,
     return out
 
 
+def microphysics_budget(case: Path, from_day: float) -> dict:
+    """What the microphysics did with the box's water from from_day to the end, from CM1's running totals in
+    cm1out_stats (kg): water condensed, evaporated back from cloud, evaporated from rain, snow and graupel on the way
+    down, and reaching the ground, in mm over the box, with the share of the falling water that evaporated."""
+    ctl = (case / 'cm1out_stats.ctl').read_text().splitlines()
+    i = next(k for k, line in enumerate(ctl) if line.lower().startswith('vars'))
+    names = [line.split()[0] for line in ctl[i + 1:i + 1 + int(ctl[i].split()[1])]]
+    totals = dict(zip(names, np.fromfile(case / 'cm1out_stats.dat', dtype='<f4').reshape(-1, len(names)).T))
+    grid = json.loads((case / 'case.json').read_text())['grid']
+    area = grid['nx'] * grid.get('ny', 1) * grid['dx_m'] ** 2
+    day = totals['mtime'] / 86400.0
+    mm = lambda key: float((totals[key][-1] - np.interp(from_day, day, totals[key])) / area)      # kg/m2 = mm
+    out = dict(span_days=[from_day, float(day[-1])], condensed_mm=mm('tcond'), evaporated_from_cloud_mm=mm('tevac'),
+               evaporated_on_the_way_down_mm=mm('tevar'), reached_the_ground_mm=mm('train'))
+    falling = out['evaporated_on_the_way_down_mm'] + out['reached_the_ground_mm']
+    out['share_of_falling_water_evaporated'] = out['evaporated_on_the_way_down_mm'] / falling if falling > 0 else None
+    return out
+
+
 def analyse(name: str, from_day: float, reference: str | None = None) -> dict:
     """The box against the rings it extends, the GCM and, if given, a reference box at the same site."""
     from climate.crm.cm1_run import CASES, solar_day_s
@@ -174,7 +194,8 @@ def analyse(name: str, from_day: float, reference: str | None = None) -> dict:
     hour = [rc.local_hour_angle(start, site['lon_deg'], t, day_s) for t in times]
     others = [*rings, *([reference] if reference else [])]
     against = {k: rc.compare(hour, {name: aligned[name], k: aligned[k]}, day_s / 3600.0, KEYS) for k in others}
-    return dict(schema=SCHEMA, case=name, site=dict(site, land_columns={k: int(v.size) for k, v in columns.items()}),
+    return dict(schema=SCHEMA, case=name, purpose=cfg.get('purpose'), build=record['build']['label'],
+                site=dict(site, land_columns={k: int(v.size) for k, v in columns.items()}),
                 rings=rings, evidence=EVIDENCE, reading_rule=READING_RULE, gcm_lowest_sigma=sigma,
                 span_days=[times[0] / 86400.0, times[-1] / 86400.0], snapshots=len(times), against=against,
                 gcm=rc.gcm_near([dict(lat_deg=site['lat_deg'], lon_deg=site['lon_deg'])])[0],
@@ -182,6 +203,8 @@ def analyse(name: str, from_day: float, reference: str | None = None) -> dict:
                                 for k in (name, *others)},
                 surface_energy=dict({k: surface_energy(RUNS / k, columns[k], times, start, site['lon_deg'], day_s)
                                      for k in (name, *others)}, gcm=gcm_surface_energy(site['lat_deg'], site['lon_deg'])),
+                microphysics={k: microphysics_budget(RUNS / k, from_day) for k in (name, *([reference] if reference else []))
+                              if (RUNS / k / 'cm1out_stats.dat').exists()},
                 **({'reference': reference} if reference else {}))
 
 
