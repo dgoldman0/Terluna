@@ -361,11 +361,14 @@ def test_tilted_path_crosses_the_equator_at_its_nodes_and_mirrors():
 
 
 def test_wetness_classes_and_their_land_use_rows():
-    assert c.wetness_class(0.02) == 20 and c.wetness_class(0.47) == 27 and c.wetness_class(1.0) == 30
-    rows = c.landuse_rows(((20, 0.05), (30, 0.90)))
+    assert c.wetness_class(0.04) == 20 and c.wetness_class(0.47) == 27 and c.wetness_class(1.0) == 30
+    assert [c.wetness_class(w) for w in (0.001, 0.005, 0.013, 0.018)] == [31, 31, 32, 33]   # ground drier than 0.05
+    rows = c.landuse_rows(((20, 0.05), (30, 0.90), (31, 0.003)))
     assert rows[20].startswith('20,') and '   .05,' in rows[20] and 'wetness 0.05' in rows[20]
     assert rows[30].startswith('30,') and '   .90,' in rows[30]
-    assert all(i != 16 and i != 24 for i, _ in c.WETNESS_CLASSES)           # water and snow keep their rows
+    assert rows[31].startswith('31,') and '   .003,' in rows[31] and 'wetness 0.003' in rows[31]
+    indices = [i for i, _ in c.WETNESS_CLASSES]
+    assert len(set(indices)) == len(indices) and not {16, 24} & set(indices)   # water and snow keep their rows
 
 
 def test_path_surface_samples_the_product_along_the_path(monkeypatch):

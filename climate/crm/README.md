@@ -545,7 +545,10 @@ the columns below 0.05, and 36–39% at 30–45°). There the rings' land evapor
 evaporate within 15% of each other. The floor does not explain the rest: the
 equatorial ring's land is as wet as the GCM's, evaporates less (2.9 against
 3.7 mm a day), and is still 2.4 °C warmer and 3.0 °C more humid than the GCM's
-low cells.
+low cells. Since 2026-09-30 the classes reach down to 0.003 (0.003, 0.01 and
+0.02, in the land-use table's residential and commercial rows, which no case
+uses and CM1 treats as any other land), so cases set up from then on take the
+GCM's dry ground as it is; the three flat rings ran with the floor.
 
 Corrected for height, comfort appears on high ground poleward of 30°. Over
 model days 1–11 the terrain twin's land ran 1.0 °C cooler per kilometre of
@@ -576,9 +579,8 @@ So CM1 and the GCM disagree about what comfort turns on, how warm and humid the
 air over land is near the ground. The decisions register accepts the corrected
 climate's drier land for the comfort the GCM counts; the rings find comfort
 only on high ground poleward of 30°, at about a tenth of the GCM's hours. Open
-for the author: a rerun with the rings' ground as dry as the GCM's poleward of
-30° (land-use classes down to about 0.003), which shows how much of the gap
-there is the rings' own ground; the 3-D box over high ground, which the plan
+for the author: a rerun of the steep rings with those drier classes, which
+shows how much of the gap poleward of 30° is the rings' own ground; the 3-D box over high ground, which the plan
 leaves to these results and which would take the same ground; the test of CM1's
 rain at lunar gravity (a small box with Earth's fall speeds); and an
 independent model for the rest of the gap (ROCKE-3D is open). The author chose

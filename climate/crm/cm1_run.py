@@ -841,8 +841,12 @@ for _name, _tilt, _node in (('ring_70_45e', 70.0, 45.0), ('ring_70_135e', 70.0, 
 # domain mean.
 CASES['ring_70_45e_terrain'] = dict(CASES['ring_70_45e'], build='moon_omp_terrain', terrain=dict(passes=2),
                                     purpose=CASES['ring_70_45e']['purpose'] + ', with the ground and lakes at their real heights')
-WETNESS_CLASSES = ((20, 0.05), (21, 0.10), (22, 0.15), (23, 0.20), (25, 0.30), (26, 0.40), (27, 0.50), (28, 0.60),
-                   (29, 0.75), (30, 0.90))                    # land-use rows given over to the placeholder land at these wetnesses
+# Land-use rows given over to the placeholder land at these wetnesses. Rows 31-33 (the USGS table's residential and
+# commercial land, which no case uses) hold the driest since 2026-09-30: the corrected GCM's ground poleward of 45
+# degrees is drier than 0.05 almost everywhere (median 0.005-0.013), and cases set up before then, the three flat rings
+# among them, gave such land 0.05.
+WETNESS_CLASSES = ((31, 0.003), (32, 0.01), (33, 0.02), (20, 0.05), (21, 0.10), (22, 0.15), (23, 0.20), (25, 0.30),
+                   (26, 0.40), (27, 0.50), (28, 0.60), (29, 0.75), (30, 0.90))
 # A three-dimensional box where rings A and A-prime cross (0 N, 0 E): ring A's patch there given a second horizontal
 # dimension, to show what the rings' two-dimensionality does. It keeps ring A's column spacing, levels, upper-air
 # reference and wind along the ring (its x axis runs along ring A, 45 degrees east of north there), and takes the
@@ -1010,8 +1014,9 @@ def landuse_rows(classes, land=None) -> dict:
     (albedo_percent), roughness length (roughness_cm), soil thermal inertia (therin, as the table's THERIN) and
     wetness (for every row)."""
     base = PLACEHOLDER_LAND[1]
-    rows = {index: base.replace('28,', f'{index},', 1).replace('.50', f'{w:.2f}'.lstrip('0') if w < 1 else f'{w:.2f}', 1)
-            .replace("'Terluna placeholder land'", f"'Terluna placeholder land, wetness {w:.2f}'") for index, w in classes}
+    text = lambda w: f'{w:.2f}' if abs(w - round(w, 2)) < 1e-9 else f'{w:.3f}'          # 0.05, 0.90, 0.003
+    rows = {index: base.replace('28,', f'{index},', 1).replace('.50', text(w).lstrip('0') if w < 1 else text(w), 1)
+            .replace("'Terluna placeholder land'", f"'Terluna placeholder land, wetness {text(w)}'") for index, w in classes}
     if not land:
         return rows
     columns = dict(albedo_percent=1, wetness=2, roughness_cm=4, therin=5)       # after the index: ALBD SLMO SFEM SFZ0 THERIN
