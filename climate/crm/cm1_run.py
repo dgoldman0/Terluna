@@ -595,6 +595,45 @@ BUILDS = {'moon': (lambda: planet()['gravity_m_s2'], 'mpi'), 'earth_g': (lambda:
           'moon_omp': (lambda: planet()['gravity_m_s2'], 'omp'), 'earth_g_omp': (lambda: EARTH_G, 'omp'),
           'moon_omp_terrain': (lambda: planet()['gravity_m_s2'], 'omp')}
 BUILD_PATCHES = {'moon_omp_terrain': TERRAIN_PATCHES}               # patches beyond PATCHES, by build
+# Faster builds (the author's decision of 2026-09-29, in the decisions register). Two rebuilds of moon_omp at -O3 for
+# this laptop's processor were tested on 2026-09-30 (build_check.py): moon_omp_o3 lets gfortran fuse multiplies and
+# adds and call glibc's vector exp and log in the loops it vectorizes; moon_omp_o3_strict does neither (no contraction,
+# and -nostdinc drops the vector-maths declarations gfortran pre-includes, the compiler's own module folder named again
+# for omp_lib and the IEEE modules). Neither matched moon_omp bit for bit, both stayed within a last-bit nudge of it,
+# and moon_omp_o3 ran 11-15% faster, so every OpenMP build compiles as it does (OMP_DEFAULT). moon_omp_o2 keeps CM1's
+# own -O2 for comparisons; the MPI builds keep -O2, untested.
+OMP_OPTS = '\nOPTS = -ffree-form -ffree-line-length-none -O2 -finline-functions --param=max-vartrack-size=0 -fopenmp\n'
+OMP_DEFAULT = '-O3 -march=native'
+OPTIMIZATION = {'moon_omp_o2': '-O2', 'moon_omp_o3': '-O3 -march=native',
+                'moon_omp_o3_strict': '-O3 -march=native -ffp-contract=off -nostdinc'}
+for _label in OPTIMIZATION:
+    BUILDS[_label] = BUILDS['moon_omp']
+
+
+# The rain test (the author's go-ahead of 2026-09-30): lunar gravity everywhere except in how fast rain, snow, graupel,
+# ice and cloud droplets fall, which take Earth's speeds, so a box run with it shows what the slow fall at lunar
+# gravity does to the rain reaching the ground and to the humidity of the lower air. Droplet activation keeps the host
+# gravity.
+EARTH_FALL_PATCH = ('morrison.F', 'Terluna: Earth fall speeds for the rain test', [
+    ("     REAL, PRIVATE ::      VCAPR,VCAPS,VCAPG,VCAPI ! Terluna: fall-speed caps\n",
+     "     REAL, PRIVATE ::      VCAPR,VCAPS,VCAPG,VCAPI ! Terluna: fall-speed caps\n"
+     "     REAL, PARAMETER, PRIVATE :: GFALL = 9.81 ! Terluna: Earth fall speeds for the rain test\n", 1),
+    ('(G/9.81)', '(GFALL/9.81)', 8),
+    ('ACN(K) = G*RHOW/(18.*MU(K))', 'ACN(K) = GFALL*RHOW/(18.*MU(K))', 1)])
+BUILDS['moon_omp_earth_fall'] = BUILDS['moon_omp']
+BUILD_PATCHES['moon_omp_earth_fall'] = [EARTH_FALL_PATCH]
+
+
+def optimization_for(label: str, mode: str):
+    """The optimisation flags a build compiles with: its own if it has any, OMP_DEFAULT for the other OpenMP builds, and
+    the Makefile's for the MPI builds (None)."""
+    return OPTIMIZATION.get(label, OMP_DEFAULT if mode == 'omp' else None)
+
+
+def optimization_patch(label: str, flags: str):
+    """The Makefile patch that compiles an OpenMP build with flags in place of -O2."""
+    return ('Makefile', f'Terluna: optimisation for {label}',
+            [(OMP_OPTS, OMP_OPTS.replace(' -O2 ', f' {flags} ').rstrip('\n') + f'   # Terluna: optimisation for {label}\n', 1)])
 
 
 def build(label: str, jobs: int = 8) -> Path:
@@ -612,6 +651,13 @@ def build(label: str, jobs: int = 8) -> Path:
     (folder / 'run').mkdir(parents=True, exist_ok=True)
     hashes = {}
     patches = [MAKEFILE[mode], *PATCHES, *BUILD_PATCHES.get(label, [])]
+    optimization = optimization_for(label, mode)
+    if optimization and '-nostdinc' in optimization:     # omp_lib and the IEEE modules live in the compiler's own folder
+        finclude = subprocess.run(['gfortran', '-print-file-name=finclude'], capture_output=True, text=True,
+                                  check=True).stdout.strip()
+        optimization += f' -I{finclude} -fintrinsic-modules-path {finclude}'
+    if optimization:
+        patches.append(optimization_patch(label, optimization))
     for name, marker, edits in patches:
         path = src / name
         path.write_text(apply_patch(path.read_text(), name, marker, edits))
@@ -623,8 +669,8 @@ def build(label: str, jobs: int = 8) -> Path:
     if done.returncode != 0 or not (folder / 'run' / 'cm1.exe').exists():
         raise RuntimeError(f'CM1 build {label} failed; see {log}')
     (folder / 'run' / 'cm1.exe').replace(exe)
-    record = dict(label=label, gravity_m_s2=gravity, parallel=mode, flags=flags, source=SOURCE, patched=hashes,
-                  executable_sha256=hashlib.sha256(exe.read_bytes()).hexdigest()[:16], air=air)
+    record = dict(label=label, gravity_m_s2=gravity, parallel=mode, flags=flags, optimization=optimization or '-O2',
+                  source=SOURCE, patched=hashes, executable_sha256=hashlib.sha256(exe.read_bytes()).hexdigest()[:16], air=air)
     (folder / 'build.json').write_text(json.dumps(record, indent=1) + '\n')
     return exe
 
@@ -829,6 +875,12 @@ for _tag, _land in (('', None), ('_rough', dict(roughness_cm=GCM_LAND['roughness
             'with the placeholder land' if _land is None else 'with the placeholder land given the GCM\'s '
             + ', '.join({'roughness_cm': 'roughness (2 m)', 'therin': 'soil thermal inertia',
                          'wetness': 'full wetness'}[k] for k in _land)))
+# The rain test's box: box_0e_small's inputs as they were written, run with Earth's fall speeds, so the pair differs in
+# how fast rain, snow, graupel, ice and cloud droplets fall and in nothing else. Both keep the forcing of the GCM before
+# its correction, with which box_0e_small was set up.
+CASES['box_0e_small_earth_fall'] = dict(
+    CASES['box_0e_small'], build='moon_omp_earth_fall', inputs_from='box_0e_small',
+    purpose='box_0e_small\'s inputs as written, with rain, snow, graupel, ice and cloud droplets falling at Earth\'s speeds')
 
 
 def gcm_soil(folder: Path) -> dict:
@@ -1293,11 +1345,46 @@ def ring_sea_profile(days: float = 3.0, name: str = 'ring') -> dict:
     return profile
 
 
+def setup_from(name: str, cfg: dict) -> Path:
+    """Set up a case with another case's inputs as they were written and only its executable changed, so the pair
+    differs in the build alone, whatever the setup has learned since."""
+    source = RUNS / cfg['inputs_from']
+    exe = CM1_HOME / 'build' / cfg['build'] / 'cm1.exe'
+    if not exe.exists():
+        raise RuntimeError(f'build {cfg["build"]} first')
+    case = RUNS / name
+    if (case / 'progress.json').exists():
+        raise RuntimeError(f'{case} has started; remove it to set up afresh')
+    case.mkdir(parents=True, exist_ok=True)
+    for item in sorted(source.iterdir()):
+        if item.name.startswith(('cm1out_', 'cm1rst_', 'cm1_segment_')) or item.name in (
+                'progress.json', 'run.lock', 'STOP', 'namelist.input', 'cm1.exe', 'case.json'):
+            continue
+        target = case / item.name
+        if target.is_symlink() or target.exists():
+            target.unlink()
+        if item.is_symlink():
+            target.symlink_to(item.resolve())
+        elif item.is_file():
+            shutil.copy2(item, target)
+    if (case / 'cm1.exe').is_symlink() or (case / 'cm1.exe').exists():
+        (case / 'cm1.exe').unlink()
+    (case / 'cm1.exe').symlink_to(exe)
+    record = json.loads((source / 'case.json').read_text())
+    record.update(case=name, purpose=cfg['purpose'], build=json.loads((exe.parent / 'build.json').read_text()),
+                  inputs_from=dict(case=cfg['inputs_from'], build=record['build']['label'],
+                                   executable_sha256=record['build']['executable_sha256']))
+    (case / 'case.json').write_text(json.dumps(record, indent=1) + '\n')
+    return case
+
+
 def setup(name: str) -> Path:
     """Write a case's inputs into climate/crm/runs/<name>: namelist, sounding, grid, nudging profile,
     surface segments, land-use table and links to the executable and radiation tables."""
     import numpy as np
     cfg = CASES[name]
+    if cfg.get('inputs_from'):
+        return setup_from(name, cfg)
     tree = fetch()
     exe = CM1_HOME / 'build' / cfg['build'] / 'cm1.exe'
     if not exe.exists():
@@ -1509,6 +1596,7 @@ def run(name: str, hours: float, threads: int = 8) -> dict:
     (case / 'run.lock').write_text(str(os.getpid()))
     deadline = time.time() + hours * 3600.0
     env = dict(os.environ, OMP_NUM_THREADS=str(threads), OMP_STACKSIZE='512M')
+    executable = hashlib.sha256((case / 'cm1.exe').resolve().read_bytes()).hexdigest()[:16]   # the build each segment ran
     try:
         while True:
             done = progress['segments'][-1]['model_s'] if progress['segments'] else 0.0
@@ -1539,7 +1627,8 @@ def run(name: str, hours: float, threads: int = 8) -> dict:
             reached = latest_restart(case) * restart_s
             progress['segments'].append(dict(segment=len(progress['segments']) + 1, model_s=reached,
                                              wall_s=round(time.time() - start, 1), log=log.name,
-                                             finished=time.strftime('%Y-%m-%d %H:%M:%S')))
+                                             finished=time.strftime('%Y-%m-%d %H:%M:%S'), executable=executable,
+                                             threads=threads))
             progress['case'] = record['case']
             _save_progress(case, progress)
     finally:

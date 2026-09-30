@@ -35,26 +35,44 @@ its source for every build and compiles it outside the repository
   of temperature, vapour and wind can be confined above a height, so the model's
   own boundary layer and convection stay free.
 
-**A faster build comes before any further run** (the author's decision of
-2026-09-29, in the [decisions register](../../research/decisions.md)). The builds
-use CM1's own gfortran settings, `-O2` with no processor target, so the laptop's
-wider vector instructions and fused multiply-add go unused. Two rebuilds are to
-be tested against the current `moon_omp`: `-O3 -march=native`, and a milder
-variant without fused multiply-adds or glibc's vector versions of exp and log
-(which gfortran calls in the loops it vectorizes), which may reproduce the
-current build bit for bit. Each needs a build label of its own: `build moon_omp`
-replaces the executable every case's `cm1.exe` links to, and running cases would
-pick it up at their next model day. One model day from a copy of a ring's
-restart file, run with the current build and each rebuild side by side, gives
-their relative speed (untested; 10–30% is a guess) and whether the restart files
-match byte for byte. A rebuild whose files differ is used only if it differs from
-the current build no more than the current build differs from itself after a
-one-bit nudge: the analyses compare lunar-day statistics, and a last-bit change
-moves individual storms within days, as the runs' random starting perturbations
-do. The settings that pass then go into every CM1 build, and the runner records
-which executable ran each segment, since a case can change builds between
-segments by relinking its `cm1.exe` and resuming from its restart files. The flat
-rings running on 2026-09-29 finish on the current build.
+**A faster build** (the author's decision of 2026-09-29, in the
+[decisions register](../../research/decisions.md); tested on 2026-09-30 with
+[build_check.py](build_check.py),
+[build_check_ring_equator.json](../results/crm/build_check_ring_equator.json)).
+The builds used CM1's own gfortran settings, `-O2` with no processor target, so
+the laptop's wider vector instructions and fused multiply-add went unused. Two
+rebuilds of `moon_omp` were tested, each under a label of its own:
+`-O3 -march=native` (`moon_omp_o3`), and a stricter variant without fused
+multiply-adds or glibc's vector exp and log (`moon_omp_o3_strict`:
+`-ffp-contract=off`, and `-nostdinc`, which drops the vector-maths declarations
+gfortran pre-includes). Each ran one model day of `ring_equator` from a copy of
+its last restart files, side by side with `moon_omp` and with two copies of
+`moon_omp` nudged in the last bit, all five on one thread each. A compiler's
+changes touch the last bit of every operation at once, so the nudge flips the
+last bit of every value of the scalar restart file that is neither zero nor a
+whole number (and the second nudge of every other one); a first try nudging a
+single value hit fields the model does not carry forward, and one value could not
+reach the whole ring within a day. Neither rebuild reproduced `moon_omp` bit for
+bit, the strict variant included, and both drifted from it as the nudged runs
+did, and less. After the day the air at 2 m differed from `moon_omp` by
+0.28–0.32 °C (root mean square) in the rebuilds and 0.31–0.33 °C in the nudged
+runs, with domain means within 0.04 °C. Over the day each field compared (air,
+vapour, pressure and skin temperature at the surface, rain, wind at 10 m, and
+potential temperature, vapour and wind aloft) differed by 0.69–0.97 of the
+larger nudge's difference with `-O3 -march=native` and 0.82–0.99 with the strict
+variant. By CM1's own timings `-O3 -march=native` ran 11–15% faster than
+`moon_omp` in two checks, and the strict variant 8–10%; three runs of `moon_omp`
+itself agreed within 0.7%. So every OpenMP build now compiles at
+`-O3 -march=native` (`OMP_DEFAULT` in [cm1_run.py](cm1_run.py)), `moon_omp_o2`
+keeps CM1's own `-O2` for comparisons, and the MPI builds keep `-O2`, untested.
+A case's executable changes only when its build is rebuilt (`build moon_omp`
+replaces the one every such case links to), so the runner records the executable
+and thread count of every segment.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run build moon_omp_o3 moon_omp_o3_strict
+climate/gcm/.venv/bin/python -m climate.crm.build_check ring_equator moon_omp_o3 moon_omp_o3_strict --threads 1    # about 25 minutes
+```
 
 ## The equatorial ring
 
@@ -563,8 +581,8 @@ for the author: a rerun with the rings' ground as dry as the GCM's poleward of
 there is the rings' own ground; the 3-D box over high ground, which the plan
 leaves to these results and which would take the same ground; the test of CM1's
 rain at lunar gravity (a small box with Earth's fall speeds); and an
-independent model for the rest of the gap (ROCKE-3D is open). Every further run
-waits for the faster build.
+independent model for the rest of the gap (ROCKE-3D is open). The author chose
+the rain test to run first, on the faster build.
 
 ```sh
 climate/gcm/.venv/bin/python -m climate.crm.ring_analysis ring_70_45e --from-day 29.5    # likewise ring_equator and ring_70_135e

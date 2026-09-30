@@ -1,4 +1,6 @@
 """Checks of the CM1 runner's pure pieces: patching, namelist editing, grids, surfaces and restarts."""
+import json
+
 import numpy as np
 import pytest
 
@@ -27,6 +29,62 @@ def test_patch_refuses_a_different_source():
 def test_every_patch_adds_its_marker():
     for name, marker, edits in [*c.MAKEFILE.values(), *c.PATCHES]:
         assert any(marker in new for _, new, _ in edits), name
+
+
+def test_openmp_builds_compile_at_o3_for_this_processor_unless_given_their_own_flags():
+    makefile = '#FC   = gfortran\n#OPTS = -ffree-form -ffree-line-length-none -O2 -finline-functions ' \
+               '--param=max-vartrack-size=0 -fopenmp\n#CPP  = cpp -C -P -traditional -Wno-invalid-pp-token ' \
+               '-ffreestanding\n#OMP  = -DOPENMP\n.F.o:\n\t$(CPP) $(DM) $(OMP) $(DP) $(ADV) $(OUTPUTOPT) $*.F > $*.f90\n'
+    name, marker, edits = c.MAKEFILE['omp']
+    base = c.apply_patch(makefile, name, marker, edits)
+    for label, flags in c.OPTIMIZATION.items():
+        assert c.BUILDS[label] == c.BUILDS['moon_omp']
+        name, marker, edits = c.optimization_patch(label, flags)
+        fast = c.apply_patch(base, name, marker, edits)
+        opts = [line for line in fast.splitlines() if line.startswith('OPTS')]
+        assert len(opts) == 1 and f' {flags} -finline-functions ' in opts[0] and (' -O2 ' in opts[0]) == (flags == '-O2')
+        assert fast.replace(opts[0], '') == base.replace(c.OMP_OPTS.strip('\n'), '')
+    assert c.optimization_for('moon_omp', 'omp') == c.optimization_for('moon_omp_earth_fall', 'omp') == '-O3 -march=native'
+    assert c.optimization_for('moon_omp_o2', 'omp') == '-O2' and c.optimization_for('moon', 'mpi') is None
+
+
+def test_the_rain_test_build_takes_earth_fall_speeds_and_keeps_the_host_gravity_elsewhere():
+    source = ("     REAL, PRIVATE ::      BI,BC,BS,BR,BG ! 'B' PARAMETER IN FALLSPEED-DIAM RELATIONSHIP\n"
+              'SUBROUTINE GRAUPEL_INIT(cm1hail,cm1inum,cm1ndcnst,cm1db)\n         G = 9.81\n'
+              '            ACN(K) = G*RHOW/(18.*MU(K))\n           ALPHA = G*MW*XXLV(K)/(CPM(K)*RR*T3D(K)**2)\n')
+    for old in ('UMS=MIN(UMS,1.2*dum)', 'UNS=MIN(UNS,1.2*dum)', 'UMG=MIN(UMG,20.*dum)', 'UNG=MIN(UNG,20.*dum)'):
+        source += (old + '\n') * 3
+    for old in ('UMR=MIN(UMR,9.1*dum)', 'UNR=MIN(UNR,9.1*dum)'):
+        source += (old + '\n') * 5
+    source += 'UMI=MIN(UMI,1.2*(rhosu/rho(k))**0.35)\nUNI=MIN(UNI,1.2*(rhosu/rho(k))**0.35)\n'
+    lunar = c.apply_patch(source, *next(p for p in c.PATCHES if p[0] == 'morrison.F'))
+    earth = c.apply_patch(lunar, *c.EARTH_FALL_PATCH)
+    assert '(G/9.81)' not in earth and earth.count('(GFALL/9.81)') == 8 and 'GFALL = 9.81' in earth
+    assert 'ACN(K) = GFALL*RHOW' in earth and 'ALPHA = G*MW' in earth and 'G = terluna_g_host' in earth
+    assert c.BUILD_PATCHES['moon_omp_earth_fall'] == [c.EARTH_FALL_PATCH]
+
+
+def test_a_case_set_up_from_another_takes_its_inputs_and_only_a_new_executable(tmp_path, monkeypatch):
+    monkeypatch.setattr(c, 'RUNS', tmp_path / 'runs')
+    monkeypatch.setattr(c, 'CM1_HOME', tmp_path / 'cm1')
+    source = tmp_path / 'runs' / 'box_0e_small'
+    source.mkdir(parents=True)
+    for name in ('input_sounding', 'namelist.template', 'terluna_surface.txt', 'progress.json', 'namelist.input',
+                 'cm1out_t000001_s.dat', 'cm1rst_t000002_s.dat', 'cm1_segment_001.log'):
+        (source / name).write_text(name)
+    (source / 'RRTMG_LW_DATA').symlink_to(source / 'input_sounding')
+    (source / 'case.json').write_text(json.dumps(dict(case='box_0e_small', build=dict(label='moon_omp', executable_sha256='old'))))
+    build = tmp_path / 'cm1' / 'build' / 'moon_omp_earth_fall'
+    build.mkdir(parents=True)
+    (build / 'cm1.exe').write_text('exe')
+    (build / 'build.json').write_text(json.dumps(dict(label='moon_omp_earth_fall', executable_sha256='new')))
+    case = c.setup('box_0e_small_earth_fall')
+    assert sorted(p.name for p in case.iterdir()) == ['RRTMG_LW_DATA', 'case.json', 'cm1.exe', 'input_sounding',
+                                                      'namelist.template', 'terluna_surface.txt']
+    assert (case / 'cm1.exe').resolve() == (build / 'cm1.exe').resolve() and (case / 'RRTMG_LW_DATA').is_symlink()
+    record = json.loads((case / 'case.json').read_text())
+    assert record['case'] == 'box_0e_small_earth_fall' and record['build']['label'] == 'moon_omp_earth_fall'
+    assert record['inputs_from'] == dict(case='box_0e_small', build='moon_omp', executable_sha256='old')
 
 
 def test_morrison_fall_speeds_follow_gravity():
