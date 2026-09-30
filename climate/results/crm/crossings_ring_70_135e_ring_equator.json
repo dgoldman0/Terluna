@@ -1,0 +1,2743 @@
+{
+ "schema": "terluna.climate.crm-crossings/1",
+ "rings": [
+  "ring_70_135e",
+  "ring_equator"
+ ],
+ "evidence": "Two CM1 rings along great circles, compared where they cross (each ring's own summary says what a ring is). At a crossing both simulate the same ground under the same Sun, each in a vertical slice facing a different way, so their agreement shows how much a result depends on the direction a two-dimensional model has to choose; errors every ring shares, such as the missing inflow from the sides, agree and stay hidden. The analysed span is one lunar day after a lunar day of spin-up, so the ranges reflect the weather of that one day. The GCM design case (A28_dim5_moon, years 20-29, 3-day means, cells about 170 km wide) is a third view. The rings' upper air and large-scale vertical wind come from the same GCM run.",
+ "reading_rule": "A ring's patch is its columns within the radius of the crossing along the ring, land and water separately; a surface is compared where each ring has at least 5 columns of it. Values are patch means of snapshots every 3 model hours, composited by the local hour angle at the crossing (0 = noon, negative = morning) in 36-degree bins; day is when the Sun is up there. Differences are the first ring minus the second, snapshot by snapshot at the same local time; p5 and p95 bound 90% of the means of series rebuilt from one-day blocks drawn at random (a moving-block bootstrap, 2,000 draws). Comfortable means air at 2 m of 18-26 C with a dewpoint of at most 15 C (strict), or 17-27 C and 16 C (loose); hours per lunar day are the comfortable share of the patch through the span times the lunar day. The GCM's cells are those whose centres lie within 150 km, land and sea-level water separately. Its air is its lowest layer carried to the ground along a dry adiabat, but its vapour is that of the layer itself, centred about 0.86 km up (sigma 0.983); dewpoint_gcm_layer_c is the rings' dewpoint at that pressure, the like-for-like comparison. Its comfortable hours use that dewpoint and 3-day means, which smooth out the warmest and coolest hours.",
+ "span_days": [
+  29.5,
+  59.0
+ ],
+ "snapshots": 237,
+ "radius_km": 100.0,
+ "gcm_lowest_sigma": 0.983,
+ "paths": {
+  "ring_70_135e": {
+   "tilt_deg": 70.0,
+   "node_deg": 135.0
+  },
+  "ring_equator": {
+   "tilt_deg": 0.0,
+   "node_deg": 0.0
+  }
+ },
+ "crossings": [
+  {
+   "lat_deg": 0.0,
+   "lon_deg": 135.0,
+   "rings": {
+    "ring_70_135e": {
+     "column": 0,
+     "heading_deg": 20.0,
+     "land_columns": 12,
+     "water_columns": 22
+    },
+    "ring_equator": {
+     "column": 681,
+     "heading_deg": 90.0,
+     "land_columns": 26,
+     "water_columns": 8
+    }
+   },
+   "land": {
+    "hour_angle_deg": [
+     -162.0,
+     -126.0,
+     -90.0,
+     -54.0,
+     -18.0,
+     18.0,
+     54.0,
+     90.0,
+     126.0,
+     162.0
+    ],
+    "air_c": {
+     "by_local_time": {
+      "ring_70_135e": [
+       21.608,
+       21.117,
+       21.636,
+       26.446,
+       29.524,
+       31.775,
+       27.3,
+       24.751,
+       22.737,
+       22.251
+      ],
+      "ring_equator": [
+       22.23,
+       22.043,
+       22.589,
+       27.145,
+       30.222,
+       28.264,
+       27.462,
+       22.45,
+       22.064,
+       22.539
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 24.92,
+       "day": 27.732,
+       "night": 22.084
+      },
+      "ring_equator": {
+       "all": 24.695,
+       "day": 27.199,
+       "night": 22.171
+      }
+     },
+     "difference": {
+      "all": {
+       "mean": 0.225,
+       "p5": -0.25,
+       "p95": 0.757
+      },
+      "day": {
+       "mean": 0.533,
+       "p5": -0.225,
+       "p95": 1.433
+      },
+      "night": {
+       "mean": -0.086,
+       "p5": -0.453,
+       "p95": 0.342
+      },
+      "rms_by_local_time": 1.46
+     }
+    },
+    "dewpoint_c": {
+     "by_local_time": {
+      "ring_70_135e": [
+       20.941,
+       20.365,
+       20.626,
+       22.406,
+       22.158,
+       22.111,
+       22.967,
+       23.567,
+       22.203,
+       21.594
+      ],
+      "ring_equator": [
+       22.179,
+       21.965,
+       21.997,
+       23.398,
+       23.919,
+       23.964,
+       24.033,
+       21.962,
+       21.707,
+       22.443
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 21.899,
+       "day": 22.353,
+       "night": 21.441
+      },
+      "ring_equator": {
+       "all": 22.756,
+       "day": 23.501,
+       "night": 22.005
+      }
+     },
+     "difference": {
+      "all": {
+       "mean": -0.857,
+       "p5": -1.179,
+       "p95": -0.502
+      },
+      "day": {
+       "mean": -1.147,
+       "p5": -1.509,
+       "p95": -0.746
+      },
+      "night": {
+       "mean": -0.564,
+       "p5": -1.012,
+       "p95": -0.064
+      },
+      "rms_by_local_time": 1.348
+     }
+    },
+    "dewpoint_gcm_layer_c": {
+     "by_local_time": {
+      "ring_70_135e": [
+       19.248,
+       18.834,
+       19.354,
+       19.732,
+       16.223,
+       14.216,
+       19.029,
+       21.764,
+       20.839,
+       19.864
+      ],
+      "ring_equator": [
+       21.682,
+       21.322,
+       21.118,
+       20.719,
+       19.492,
+       20.538,
+       21.588,
+       20.787,
+       20.353,
+       21.996
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 18.916,
+       "day": 17.96,
+       "night": 19.879
+      },
+      "ring_equator": {
+       "all": 20.961,
+       "day": 20.662,
+       "night": 21.262
+      }
+     },
+     "difference": {
+      "all": {
+       "mean": -2.045,
+       "p5": -2.649,
+       "p95": -1.431
+      },
+      "day": {
+       "mean": -2.702,
+       "p5": -3.637,
+       "p95": -1.787
+      },
+      "night": {
+       "mean": -1.383,
+       "p5": -1.969,
+       "p95": -0.746
+      },
+      "rms_by_local_time": 2.813
+     }
+    },
+    "humidity": {
+     "by_local_time": {
+      "ring_70_135e": [
+       0.96,
+       0.955,
+       0.941,
+       0.786,
+       0.648,
+       0.568,
+       0.78,
+       0.932,
+       0.968,
+       0.961
+      ],
+      "ring_equator": [
+       0.997,
+       0.995,
+       0.966,
+       0.803,
+       0.691,
+       0.784,
+       0.82,
+       0.971,
+       0.978,
+       0.994
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 0.85,
+       "day": 0.739,
+       "night": 0.961
+      },
+      "ring_equator": {
+       "all": 0.9,
+       "day": 0.811,
+       "night": 0.99
+      }
+     },
+     "difference": {
+      "all": {
+       "mean": -0.05,
+       "p5": -0.071,
+       "p95": -0.034
+      },
+      "day": {
+       "mean": -0.072,
+       "p5": -0.11,
+       "p95": -0.04
+      },
+      "night": {
+       "mean": -0.029,
+       "p5": -0.034,
+       "p95": -0.023
+      },
+      "rms_by_local_time": 0.076
+     }
+    },
+    "rain_mm_h": {
+     "by_local_time": {
+      "ring_70_135e": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.629,
+       0.0,
+       0.534,
+       0.0
+      ],
+      "ring_equator": [
+       0.0,
+       0.0,
+       0.001,
+       0.0,
+       0.0,
+       0.92,
+       0.468,
+       0.981,
+       0.0,
+       0.0
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 0.118,
+       "day": 0.127,
+       "night": 0.109
+      },
+      "ring_equator": {
+       "all": 0.24,
+       "day": 0.478,
+       "night": 0.0
+      }
+     },
+     "difference": {
+      "all": {
+       "mean": -0.122,
+       "p5": -0.373,
+       "p95": 0.093
+      },
+      "day": {
+       "mean": -0.351,
+       "p5": -0.809,
+       "p95": 0.026
+      },
+      "night": {
+       "mean": 0.108,
+       "p5": -0.0,
+       "p95": 0.279
+      },
+      "rms_by_local_time": 0.46
+     }
+    },
+    "cloud_cover": {
+     "by_local_time": {
+      "ring_70_135e": [
+       0.0,
+       0.0,
+       0.0,
+       0.031,
+       0.0,
+       0.0,
+       0.361,
+       0.056,
+       0.438,
+       0.0
+      ],
+      "ring_equator": [
+       0.232,
+       0.33,
+       0.375,
+       0.103,
+       0.09,
+       0.433,
+       0.361,
+       0.37,
+       0.056,
+       0.162
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 0.09,
+       "day": 0.089,
+       "night": 0.09
+      },
+      "ring_equator": {
+       "all": 0.252,
+       "day": 0.29,
+       "night": 0.213
+      }
+     },
+     "difference": {
+      "all": {
+       "mean": -0.162,
+       "p5": -0.249,
+       "p95": -0.068
+      },
+      "day": {
+       "mean": -0.201,
+       "p5": -0.302,
+       "p95": -0.106
+      },
+      "night": {
+       "mean": -0.123,
+       "p5": -0.257,
+       "p95": 0.039
+      },
+      "rms_by_local_time": 0.278
+     }
+    },
+    "fog": {
+     "by_local_time": {
+      "ring_70_135e": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "ring_equator": [
+       0.208,
+       0.311,
+       0.339,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 0.0,
+       "day": 0.0,
+       "night": 0.0
+      },
+      "ring_equator": {
+       "all": 0.086,
+       "day": 0.018,
+       "night": 0.154
+      }
+     },
+     "difference": {
+      "all": {
+       "mean": -0.086,
+       "p5": -0.141,
+       "p95": -0.036
+      },
+      "day": {
+       "mean": -0.018,
+       "p5": -0.048,
+       "p95": 0.0
+      },
+      "night": {
+       "mean": -0.154,
+       "p5": -0.242,
+       "p95": -0.07
+      },
+      "rms_by_local_time": 0.16
+     }
+    },
+    "cloud_in_flight_band": {
+     "by_local_time": {
+      "ring_70_135e": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.038,
+       0.0,
+       0.035,
+       0.0
+      ],
+      "ring_equator": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.022,
+       0.038,
+       0.029,
+       0.0,
+       0.0
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 0.007,
+       "day": 0.008,
+       "night": 0.007
+      },
+      "ring_equator": {
+       "all": 0.009,
+       "day": 0.018,
+       "night": 0.0
+      }
+     },
+     "difference": {
+      "all": {
+       "mean": -0.002,
+       "p5": -0.01,
+       "p95": 0.007
+      },
+      "day": {
+       "mean": -0.01,
+       "p5": -0.025,
+       "p95": 0.001
+      },
+      "night": {
+       "mean": 0.007,
+       "p5": 0.0,
+       "p95": 0.018
+      },
+      "rms_by_local_time": 0.016
+     }
+    },
+    "wind_10m_m_s": {
+     "by_local_time": {
+      "ring_70_135e": [
+       0.317,
+       0.469,
+       0.521,
+       1.686,
+       2.333,
+       1.961,
+       2.449,
+       0.379,
+       1.117,
+       0.248
+      ],
+      "ring_equator": [
+       0.254,
+       0.101,
+       0.557,
+       1.879,
+       2.571,
+       2.494,
+       2.109,
+       1.767,
+       0.938,
+       0.719
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 1.149,
+       "day": 1.786,
+       "night": 0.508
+      },
+      "ring_equator": {
+       "all": 1.34,
+       "day": 2.153,
+       "night": 0.52
+      }
+     },
+     "difference": {
+      "all": {
+       "mean": -0.19,
+       "p5": -0.408,
+       "p95": 0.021
+      },
+      "day": {
+       "mean": -0.367,
+       "p5": -0.7,
+       "p95": -0.026
+      },
+      "night": {
+       "mean": -0.012,
+       "p5": -0.218,
+       "p95": 0.198
+      },
+      "rms_by_local_time": 0.53
+     }
+    },
+    "wind_40_km_m_s": {
+     "by_local_time": {
+      "ring_70_135e": [
+       6.864,
+       6.756,
+       6.476,
+       6.547,
+       6.829,
+       6.302,
+       7.426,
+       8.428,
+       7.87,
+       7.21
+      ],
+      "ring_equator": [
+       9.253,
+       10.702,
+       9.048,
+       10.696,
+       9.309,
+       10.699,
+       13.194,
+       9.899,
+       11.542,
+       10.467
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 7.074,
+       "day": 6.993,
+       "night": 7.155
+      },
+      "ring_equator": {
+       "all": 10.492,
+       "day": 10.591,
+       "night": 10.392
+      }
+     },
+     "difference": {
+      "all": {
+       "mean": -3.418,
+       "p5": -3.859,
+       "p95": -2.983
+      },
+      "day": {
+       "mean": -3.598,
+       "p5": -4.369,
+       "p95": -2.877
+      },
+      "night": {
+       "mean": -3.237,
+       "p5": -3.694,
+       "p95": -2.764
+      },
+      "rms_by_local_time": 3.607
+     }
+    },
+    "comfortable_strict": {
+     "by_local_time": {
+      "ring_70_135e": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "ring_equator": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 0.0,
+       "day": 0.0,
+       "night": 0.0
+      },
+      "ring_equator": {
+       "all": 0.0,
+       "day": 0.0,
+       "night": 0.0
+      }
+     },
+     "difference": {
+      "all": {
+       "mean": 0.0,
+       "p5": 0.0,
+       "p95": 0.0
+      },
+      "day": {
+       "mean": 0.0,
+       "p5": 0.0,
+       "p95": 0.0
+      },
+      "night": {
+       "mean": 0.0,
+       "p5": 0.0,
+       "p95": 0.0
+      },
+      "rms_by_local_time": 0.0
+     }
+    },
+    "comfortable_loose": {
+     "by_local_time": {
+      "ring_70_135e": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "ring_equator": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 0.0,
+       "day": 0.0,
+       "night": 0.0
+      },
+      "ring_equator": {
+       "all": 0.0,
+       "day": 0.0,
+       "night": 0.0
+      }
+     },
+     "difference": {
+      "all": {
+       "mean": 0.0,
+       "p5": 0.0,
+       "p95": 0.0
+      },
+      "day": {
+       "mean": 0.0,
+       "p5": 0.0,
+       "p95": 0.0
+      },
+      "night": {
+       "mean": 0.0,
+       "p5": 0.0,
+       "p95": 0.0
+      },
+      "rms_by_local_time": 0.0
+     }
+    },
+    "comfortable_hours_per_lunar_day": {
+     "strict": {
+      "ring_70_135e": 0.0,
+      "ring_equator": 0.0
+     },
+     "loose": {
+      "ring_70_135e": 0.0,
+      "ring_equator": 0.0
+     }
+    },
+    "rain_mm_per_lunar_day": {
+     "ring_70_135e": 83.52,
+     "ring_equator": 170.131
+    }
+   },
+   "water": {
+    "hour_angle_deg": [
+     -162.0,
+     -126.0,
+     -90.0,
+     -54.0,
+     -18.0,
+     18.0,
+     54.0,
+     90.0,
+     126.0,
+     162.0
+    ],
+    "air_c": {
+     "by_local_time": {
+      "ring_70_135e": [
+       24.057,
+       23.801,
+       23.695,
+       25.03,
+       26.809,
+       27.824,
+       26.293,
+       25.529,
+       23.928,
+       24.174
+      ],
+      "ring_equator": [
+       24.027,
+       24.121,
+       24.159,
+       25.707,
+       27.701,
+       26.538,
+       26.467,
+       23.555,
+       23.602,
+       23.876
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 25.117,
+       "day": 26.092,
+       "night": 24.134
+      },
+      "ring_equator": {
+       "all": 24.972,
+       "day": 26.053,
+       "night": 23.881
+      }
+     },
+     "difference": {
+      "all": {
+       "mean": 0.145,
+       "p5": -0.16,
+       "p95": 0.451
+      },
+      "day": {
+       "mean": 0.039,
+       "p5": -0.425,
+       "p95": 0.57
+      },
+      "night": {
+       "mean": 0.253,
+       "p5": -0.002,
+       "p95": 0.568
+      },
+      "rms_by_local_time": 0.857
+     }
+    },
+    "dewpoint_c": {
+     "by_local_time": {
+      "ring_70_135e": [
+       21.579,
+       21.272,
+       21.462,
+       21.764,
+       20.373,
+       21.521,
+       22.944,
+       23.227,
+       22.81,
+       22.157
+      ],
+      "ring_equator": [
+       23.254,
+       22.974,
+       22.495,
+       22.611,
+       22.43,
+       23.409,
+       23.553,
+       22.83,
+       22.649,
+       23.39
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 21.918,
+       "day": 21.777,
+       "night": 22.061
+      },
+      "ring_equator": {
+       "all": 22.962,
+       "day": 22.941,
+       "night": 22.983
+      }
+     },
+     "difference": {
+      "all": {
+       "mean": -1.044,
+       "p5": -1.302,
+       "p95": -0.776
+      },
+      "day": {
+       "mean": -1.165,
+       "p5": -1.508,
+       "p95": -0.812
+      },
+      "night": {
+       "mean": -0.922,
+       "p5": -1.294,
+       "p95": -0.498
+      },
+      "rms_by_local_time": 1.318
+     }
+    },
+    "dewpoint_gcm_layer_c": {
+     "by_local_time": {
+      "ring_70_135e": [
+       19.327,
+       18.939,
+       19.43,
+       19.902,
+       16.229,
+       12.688,
+       19.327,
+       21.406,
+       20.415,
+       19.856
+      ],
+      "ring_equator": [
+       21.75,
+       21.337,
+       20.607,
+       20.644,
+       19.318,
+       20.572,
+       21.583,
+       20.892,
+       20.242,
+       21.919
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 18.755,
+       "day": 17.706,
+       "night": 19.813
+      },
+      "ring_equator": {
+       "all": 20.89,
+       "day": 20.547,
+       "night": 21.235
+      }
+     },
+     "difference": {
+      "all": {
+       "mean": -2.135,
+       "p5": -2.866,
+       "p95": -1.47
+      },
+      "day": {
+       "mean": -2.842,
+       "p5": -4.094,
+       "p95": -1.692
+      },
+      "night": {
+       "mean": -1.422,
+       "p5": -1.939,
+       "p95": -0.851
+      },
+      "rms_by_local_time": 3.081
+     }
+    },
+    "humidity": {
+     "by_local_time": {
+      "ring_70_135e": [
+       0.861,
+       0.858,
+       0.873,
+       0.822,
+       0.68,
+       0.688,
+       0.822,
+       0.872,
+       0.935,
+       0.885
+      ],
+      "ring_equator": [
+       0.955,
+       0.934,
+       0.905,
+       0.833,
+       0.731,
+       0.837,
+       0.842,
+       0.957,
+       0.944,
+       0.971
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 0.83,
+       "day": 0.777,
+       "night": 0.883
+      },
+      "ring_equator": {
+       "all": 0.891,
+       "day": 0.835,
+       "night": 0.948
+      }
+     },
+     "difference": {
+      "all": {
+       "mean": -0.061,
+       "p5": -0.078,
+       "p95": -0.046
+      },
+      "day": {
+       "mean": -0.058,
+       "p5": -0.087,
+       "p95": -0.034
+      },
+      "night": {
+       "mean": -0.065,
+       "p5": -0.079,
+       "p95": -0.051
+      },
+      "rms_by_local_time": 0.075
+     }
+    },
+    "rain_mm_h": {
+     "by_local_time": {
+      "ring_70_135e": [
+       0.0,
+       0.0,
+       0.0,
+       0.003,
+       0.0,
+       0.0,
+       0.144,
+       0.0,
+       0.898,
+       0.0
+      ],
+      "ring_equator": [
+       0.0,
+       0.015,
+       0.0,
+       0.0,
+       0.0,
+       2.179,
+       1.456,
+       0.39,
+       0.0,
+       0.0
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 0.106,
+       "day": 0.03,
+       "night": 0.183
+      },
+      "ring_equator": {
+       "all": 0.409,
+       "day": 0.812,
+       "night": 0.003
+      }
+     },
+     "difference": {
+      "all": {
+       "mean": -0.303,
+       "p5": -0.776,
+       "p95": 0.088
+      },
+      "day": {
+       "mean": -0.782,
+       "p5": -1.615,
+       "p95": -0.054
+      },
+      "night": {
+       "mean": 0.18,
+       "p5": -0.003,
+       "p95": 0.45
+      },
+      "rms_by_local_time": 0.862
+     }
+    },
+    "cloud_cover": {
+     "by_local_time": {
+      "ring_70_135e": [
+       0.0,
+       0.0,
+       0.0,
+       0.093,
+       0.004,
+       0.0,
+       0.301,
+       0.112,
+       0.498,
+       0.0
+      ],
+      "ring_equator": [
+       0.151,
+       0.188,
+       0.065,
+       0.104,
+       0.033,
+       0.38,
+       0.443,
+       0.375,
+       0.031,
+       0.158
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 0.102,
+       "day": 0.094,
+       "night": 0.111
+      },
+      "ring_equator": {
+       "all": 0.194,
+       "day": 0.263,
+       "night": 0.125
+      }
+     },
+     "difference": {
+      "all": {
+       "mean": -0.092,
+       "p5": -0.173,
+       "p95": -0.005
+      },
+      "day": {
+       "mean": -0.169,
+       "p5": -0.27,
+       "p95": -0.074
+      },
+      "night": {
+       "mean": -0.014,
+       "p5": -0.13,
+       "p95": 0.124
+      },
+      "rms_by_local_time": 0.232
+     }
+    },
+    "fog": {
+     "by_local_time": {
+      "ring_70_135e": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "ring_equator": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 0.0,
+       "day": 0.0,
+       "night": 0.0
+      },
+      "ring_equator": {
+       "all": 0.0,
+       "day": 0.0,
+       "night": 0.0
+      }
+     },
+     "difference": {
+      "all": {
+       "mean": 0.0,
+       "p5": 0.0,
+       "p95": 0.0
+      },
+      "day": {
+       "mean": 0.0,
+       "p5": 0.0,
+       "p95": 0.0
+      },
+      "night": {
+       "mean": 0.0,
+       "p5": 0.0,
+       "p95": 0.0
+      },
+      "rms_by_local_time": 0.0
+     }
+    },
+    "cloud_in_flight_band": {
+     "by_local_time": {
+      "ring_70_135e": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.049,
+       0.0,
+       0.011,
+       0.0
+      ],
+      "ring_equator": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.016,
+       0.031,
+       0.0,
+       0.0,
+       0.0
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 0.006,
+       "day": 0.01,
+       "night": 0.002
+      },
+      "ring_equator": {
+       "all": 0.005,
+       "day": 0.009,
+       "night": 0.0
+      }
+     },
+     "difference": {
+      "all": {
+       "mean": 0.001,
+       "p5": -0.004,
+       "p95": 0.007
+      },
+      "day": {
+       "mean": 0.0,
+       "p5": -0.009,
+       "p95": 0.011
+      },
+      "night": {
+       "mean": 0.002,
+       "p5": 0.0,
+       "p95": 0.006
+      },
+      "rms_by_local_time": 0.008
+     }
+    },
+    "wind_10m_m_s": {
+     "by_local_time": {
+      "ring_70_135e": [
+       1.587,
+       1.931,
+       1.859,
+       1.703,
+       2.211,
+       1.788,
+       3.097,
+       0.912,
+       2.249,
+       1.361
+      ],
+      "ring_equator": [
+       1.024,
+       0.833,
+       1.234,
+       2.115,
+       2.933,
+       3.111,
+       2.473,
+       2.441,
+       1.898,
+       1.559
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 1.871,
+       "day": 2.0,
+       "night": 1.74
+      },
+      "ring_equator": {
+       "all": 1.963,
+       "day": 2.589,
+       "night": 1.332
+      }
+     },
+     "difference": {
+      "all": {
+       "mean": -0.092,
+       "p5": -0.402,
+       "p95": 0.216
+      },
+      "day": {
+       "mean": -0.589,
+       "p5": -1.001,
+       "p95": -0.163
+      },
+      "night": {
+       "mean": 0.409,
+       "p5": 0.117,
+       "p95": 0.693
+      },
+      "rms_by_local_time": 0.851
+     }
+    },
+    "wind_40_km_m_s": {
+     "by_local_time": {
+      "ring_70_135e": [
+       6.871,
+       6.762,
+       6.48,
+       6.556,
+       6.839,
+       6.403,
+       7.672,
+       8.401,
+       7.961,
+       7.2
+      ],
+      "ring_equator": [
+       9.282,
+       10.752,
+       9.057,
+       10.667,
+       9.251,
+       10.151,
+       13.556,
+       9.743,
+       11.599,
+       10.495
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 7.118,
+       "day": 7.062,
+       "night": 7.174
+      },
+      "ring_equator": {
+       "all": 10.466,
+       "day": 10.502,
+       "night": 10.43
+      }
+     },
+     "difference": {
+      "all": {
+       "mean": -3.348,
+       "p5": -3.775,
+       "p95": -2.915
+      },
+      "day": {
+       "mean": -3.44,
+       "p5": -4.165,
+       "p95": -2.756
+      },
+      "night": {
+       "mean": -3.256,
+       "p5": -3.709,
+       "p95": -2.802
+      },
+      "rms_by_local_time": 3.545
+     }
+    },
+    "comfortable_strict": {
+     "by_local_time": {
+      "ring_70_135e": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "ring_equator": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 0.0,
+       "day": 0.0,
+       "night": 0.0
+      },
+      "ring_equator": {
+       "all": 0.0,
+       "day": 0.0,
+       "night": 0.0
+      }
+     },
+     "difference": {
+      "all": {
+       "mean": 0.0,
+       "p5": 0.0,
+       "p95": 0.0
+      },
+      "day": {
+       "mean": 0.0,
+       "p5": 0.0,
+       "p95": 0.0
+      },
+      "night": {
+       "mean": 0.0,
+       "p5": 0.0,
+       "p95": 0.0
+      },
+      "rms_by_local_time": 0.0
+     }
+    },
+    "comfortable_loose": {
+     "by_local_time": {
+      "ring_70_135e": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "ring_equator": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 0.0,
+       "day": 0.0,
+       "night": 0.0
+      },
+      "ring_equator": {
+       "all": 0.0,
+       "day": 0.0,
+       "night": 0.0
+      }
+     },
+     "difference": {
+      "all": {
+       "mean": 0.0,
+       "p5": 0.0,
+       "p95": 0.0
+      },
+      "day": {
+       "mean": 0.0,
+       "p5": 0.0,
+       "p95": 0.0
+      },
+      "night": {
+       "mean": 0.0,
+       "p5": 0.0,
+       "p95": 0.0
+      },
+      "rms_by_local_time": 0.0
+     }
+    },
+    "comfortable_hours_per_lunar_day": {
+     "strict": {
+      "ring_70_135e": 0.0,
+      "ring_equator": 0.0
+     },
+     "loose": {
+      "ring_70_135e": 0.0,
+      "ring_equator": 0.0
+     }
+    },
+    "rain_mm_per_lunar_day": {
+     "ring_70_135e": 75.004,
+     "ring_equator": 289.966
+    }
+   },
+   "gcm": {
+    "run": "A28_dim5_moon",
+    "years": [
+     20,
+     29
+    ],
+    "radius_km": 150.0,
+    "land": {
+     "cells": [
+      [
+       2.769,
+       135.0
+      ]
+     ],
+     "air_c": {
+      "by_local_time": [
+       19.381,
+       18.911,
+       18.818,
+       19.81,
+       21.364,
+       22.227,
+       22.07,
+       20.311,
+       19.404,
+       19.605
+      ],
+      "mean": {
+       "all": 20.188,
+       "day": 21.011,
+       "night": 19.309
+      }
+     },
+     "dewpoint_c": {
+      "by_local_time": [
+       15.209,
+       13.925,
+       14.109,
+       14.812,
+       16.708,
+       18.353,
+       18.748,
+       18.248,
+       16.398,
+       15.436
+      ],
+      "mean": {
+       "all": 16.209,
+       "day": 16.935,
+       "night": 15.433
+      }
+     },
+     "rain_mm_h": {
+      "by_local_time": [
+       0.073,
+       0.069,
+       0.039,
+       0.099,
+       0.305,
+       0.531,
+       0.83,
+       0.503,
+       0.155,
+       0.084
+      ],
+      "mean": {
+       "all": 0.269,
+       "day": 0.419,
+       "night": 0.11
+      }
+     },
+     "cloud_cover": {
+      "by_local_time": [
+       0.208,
+       0.174,
+       0.142,
+       0.222,
+       0.361,
+       0.439,
+       0.508,
+       0.488,
+       0.295,
+       0.257
+      ],
+      "mean": {
+       "all": 0.31,
+       "day": 0.372,
+       "night": 0.243
+      }
+     },
+     "comfortable_hours_per_lunar_day": {
+      "strict": 191.358,
+      "loose": 280.541
+     },
+     "rain_mm_per_lunar_day": 190.962
+    },
+    "water": null
+   }
+  },
+  {
+   "lat_deg": 0.0,
+   "lon_deg": 315.0,
+   "rings": {
+    "ring_70_135e": {
+     "column": 908,
+     "heading_deg": 160.0,
+     "land_columns": 7,
+     "water_columns": 27
+    },
+    "ring_equator": {
+     "column": 1589,
+     "heading_deg": 90.0,
+     "land_columns": 0,
+     "water_columns": 34
+    }
+   },
+   "land": {
+    "hour_angle_deg": [
+     -162.0,
+     -126.0,
+     -90.0,
+     -54.0,
+     -18.0,
+     18.0,
+     54.0,
+     90.0,
+     126.0,
+     162.0
+    ],
+    "air_c": {
+     "by_local_time": {
+      "ring_70_135e": [
+       22.701,
+       20.64,
+       19.66,
+       26.538,
+       31.066,
+       30.655,
+       31.088,
+       26.054,
+       24.731,
+       23.784
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 25.676,
+       "day": 28.548,
+       "night": 22.827
+      }
+     }
+    },
+    "dewpoint_c": {
+     "by_local_time": {
+      "ring_70_135e": [
+       22.34,
+       20.21,
+       18.795,
+       19.661,
+       22.828,
+       22.659,
+       22.131,
+       23.073,
+       23.5,
+       22.947
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 21.8,
+       "day": 21.591,
+       "night": 22.007
+      }
+     }
+    },
+    "dewpoint_gcm_layer_c": {
+     "by_local_time": {
+      "ring_70_135e": [
+       20.904,
+       19.031,
+       17.912,
+       15.991,
+       16.657,
+       17.49,
+       16.27,
+       20.487,
+       21.579,
+       21.028
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 18.727,
+       "day": 16.987,
+       "night": 20.452
+      }
+     }
+    },
+    "humidity": {
+     "by_local_time": {
+      "ring_70_135e": [
+       0.978,
+       0.974,
+       0.949,
+       0.664,
+       0.617,
+       0.628,
+       0.593,
+       0.839,
+       0.929,
+       0.951
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 0.812,
+       "day": 0.671,
+       "night": 0.952
+      }
+     }
+    },
+    "rain_mm_h": {
+     "by_local_time": {
+      "ring_70_135e": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.127,
+       0.003,
+       0.002,
+       0.0,
+       0.0
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 0.013,
+       "day": 0.027,
+       "night": 0.0
+      }
+     }
+    },
+    "cloud_cover": {
+     "by_local_time": {
+      "ring_70_135e": [
+       0.012,
+       0.0,
+       0.0,
+       0.0,
+       0.037,
+       0.417,
+       0.238,
+       0.056,
+       0.065,
+       0.348
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 0.117,
+       "day": 0.151,
+       "night": 0.083
+      }
+     }
+    },
+    "fog": {
+     "by_local_time": {
+      "ring_70_135e": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 0.0,
+       "day": 0.0,
+       "night": 0.0
+      }
+     }
+    },
+    "cloud_in_flight_band": {
+     "by_local_time": {
+      "ring_70_135e": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.006,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 0.001,
+       "day": 0.001,
+       "night": 0.0
+      }
+     }
+    },
+    "wind_10m_m_s": {
+     "by_local_time": {
+      "ring_70_135e": [
+       0.24,
+       0.617,
+       0.66,
+       1.689,
+       2.576,
+       2.402,
+       2.095,
+       1.65,
+       0.576,
+       0.261
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 1.274,
+       "day": 2.057,
+       "night": 0.497
+      }
+     }
+    },
+    "wind_40_km_m_s": {
+     "by_local_time": {
+      "ring_70_135e": [
+       6.885,
+       6.58,
+       7.015,
+       7.116,
+       6.435,
+       6.587,
+       6.889,
+       7.456,
+       7.327,
+       6.637
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 6.893,
+       "day": 6.865,
+       "night": 6.922
+      }
+     }
+    },
+    "comfortable_strict": {
+     "by_local_time": {
+      "ring_70_135e": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 0.0,
+       "day": 0.0,
+       "night": 0.0
+      }
+     }
+    },
+    "comfortable_loose": {
+     "by_local_time": {
+      "ring_70_135e": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 0.0,
+       "day": 0.0,
+       "night": 0.0
+      }
+     }
+    },
+    "comfortable_hours_per_lunar_day": {
+     "strict": {
+      "ring_70_135e": 0.0
+     },
+     "loose": {
+      "ring_70_135e": 0.0
+     }
+    },
+    "rain_mm_per_lunar_day": {
+     "ring_70_135e": 9.425
+    }
+   },
+   "water": {
+    "hour_angle_deg": [
+     -162.0,
+     -126.0,
+     -90.0,
+     -54.0,
+     -18.0,
+     18.0,
+     54.0,
+     90.0,
+     126.0,
+     162.0
+    ],
+    "air_c": {
+     "by_local_time": {
+      "ring_70_135e": [
+       25.314,
+       24.157,
+       23.218,
+       24.282,
+       26.164,
+       26.93,
+       27.588,
+       26.367,
+       26.027,
+       25.804
+      ],
+      "ring_equator": [
+       25.128,
+       25.205,
+       25.542,
+       25.411,
+       26.159,
+       27.057,
+       26.788,
+       24.895,
+       24.999,
+       25.096
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 25.578,
+       "day": 25.933,
+       "night": 25.227
+      },
+      "ring_equator": {
+       "all": 25.631,
+       "day": 26.153,
+       "night": 25.114
+      }
+     },
+     "difference": {
+      "all": {
+       "mean": -0.053,
+       "p5": -0.409,
+       "p95": 0.289
+      },
+      "day": {
+       "mean": -0.219,
+       "p5": -0.683,
+       "p95": 0.182
+      },
+      "night": {
+       "mean": 0.113,
+       "p5": -0.383,
+       "p95": 0.561
+      },
+      "rms_by_local_time": 1.104
+     }
+    },
+    "dewpoint_c": {
+     "by_local_time": {
+      "ring_70_135e": [
+       22.654,
+       22.122,
+       21.474,
+       19.912,
+       20.668,
+       22.191,
+       22.891,
+       23.028,
+       23.204,
+       22.668
+      ],
+      "ring_equator": [
+       22.66,
+       22.041,
+       22.076,
+       23.163,
+       22.783,
+       22.839,
+       24.045,
+       23.353,
+       22.992,
+       23.001
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 22.081,
+       "day": 21.536,
+       "night": 22.621
+      },
+      "ring_equator": {
+       "all": 22.893,
+       "day": 23.133,
+       "night": 22.656
+      }
+     },
+     "difference": {
+      "all": {
+       "mean": -0.813,
+       "p5": -1.154,
+       "p95": -0.491
+      },
+      "day": {
+       "mean": -1.597,
+       "p5": -2.033,
+       "p95": -1.161
+      },
+      "night": {
+       "mean": -0.035,
+       "p5": -0.146,
+       "p95": 0.076
+      },
+      "rms_by_local_time": 1.32
+     }
+    },
+    "dewpoint_gcm_layer_c": {
+     "by_local_time": {
+      "ring_70_135e": [
+       20.72,
+       20.17,
+       19.384,
+       17.282,
+       15.55,
+       16.798,
+       16.648,
+       20.317,
+       21.377,
+       20.87
+      ],
+      "ring_equator": [
+       20.911,
+       20.423,
+       20.35,
+       21.187,
+       20.312,
+       19.83,
+       21.619,
+       21.528,
+       21.297,
+       21.198
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 18.911,
+       "day": 17.104,
+       "night": 20.704
+      },
+      "ring_equator": {
+       "all": 20.864,
+       "day": 20.796,
+       "night": 20.931
+      }
+     },
+     "difference": {
+      "all": {
+       "mean": -1.952,
+       "p5": -2.568,
+       "p95": -1.373
+      },
+      "day": {
+       "mean": -3.692,
+       "p5": -4.29,
+       "p95": -3.076
+      },
+      "night": {
+       "mean": -0.227,
+       "p5": -0.344,
+       "p95": -0.114
+      },
+      "rms_by_local_time": 2.729
+     }
+    },
+    "humidity": {
+     "by_local_time": {
+      "ring_70_135e": [
+       0.853,
+       0.885,
+       0.899,
+       0.768,
+       0.718,
+       0.754,
+       0.757,
+       0.819,
+       0.845,
+       0.829
+      ],
+      "ring_equator": [
+       0.862,
+       0.826,
+       0.812,
+       0.874,
+       0.817,
+       0.778,
+       0.85,
+       0.912,
+       0.887,
+       0.882
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 0.813,
+       "day": 0.77,
+       "night": 0.856
+      },
+      "ring_equator": {
+       "all": 0.85,
+       "day": 0.836,
+       "night": 0.863
+      }
+     },
+     "difference": {
+      "all": {
+       "mean": -0.037,
+       "p5": -0.057,
+       "p95": -0.016
+      },
+      "day": {
+       "mean": -0.066,
+       "p5": -0.09,
+       "p95": -0.039
+      },
+      "night": {
+       "mean": -0.007,
+       "p5": -0.03,
+       "p95": 0.017
+      },
+      "rms_by_local_time": 0.074
+     }
+    },
+    "rain_mm_h": {
+     "by_local_time": {
+      "ring_70_135e": [
+       0.031,
+       0.019,
+       0.0,
+       0.0,
+       0.0,
+       0.004,
+       0.003,
+       0.004,
+       0.0,
+       0.006
+      ],
+      "ring_equator": [
+       0.003,
+       0.0,
+       0.016,
+       0.025,
+       0.0,
+       0.0,
+       0.0,
+       0.102,
+       0.0,
+       0.001
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 0.007,
+       "day": 0.002,
+       "night": 0.011
+      },
+      "ring_equator": {
+       "all": 0.015,
+       "day": 0.025,
+       "night": 0.004
+      }
+     },
+     "difference": {
+      "all": {
+       "mean": -0.008,
+       "p5": -0.023,
+       "p95": 0.005
+      },
+      "day": {
+       "mean": -0.023,
+       "p5": -0.048,
+       "p95": -0.003
+      },
+      "night": {
+       "mean": 0.007,
+       "p5": -0.002,
+       "p95": 0.017
+      },
+      "rms_by_local_time": 0.034
+     }
+    },
+    "cloud_cover": {
+     "by_local_time": {
+      "ring_70_135e": [
+       0.171,
+       0.165,
+       0.022,
+       0.0,
+       0.0,
+       0.293,
+       0.157,
+       0.085,
+       0.0,
+       0.166
+      ],
+      "ring_equator": [
+       0.211,
+       0.156,
+       0.042,
+       0.077,
+       0.0,
+       0.0,
+       0.043,
+       0.522,
+       0.211,
+       0.079
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 0.106,
+       "day": 0.113,
+       "night": 0.1
+      },
+      "ring_equator": {
+       "all": 0.133,
+       "day": 0.105,
+       "night": 0.161
+      }
+     },
+     "difference": {
+      "all": {
+       "mean": -0.027,
+       "p5": -0.095,
+       "p95": 0.04
+      },
+      "day": {
+       "mean": 0.007,
+       "p5": -0.098,
+       "p95": 0.109
+      },
+      "night": {
+       "mean": -0.061,
+       "p5": -0.135,
+       "p95": 0.01
+      },
+      "rms_by_local_time": 0.187
+     }
+    },
+    "fog": {
+     "by_local_time": {
+      "ring_70_135e": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "ring_equator": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 0.0,
+       "day": 0.0,
+       "night": 0.0
+      },
+      "ring_equator": {
+       "all": 0.0,
+       "day": 0.0,
+       "night": 0.0
+      }
+     },
+     "difference": {
+      "all": {
+       "mean": 0.0,
+       "p5": 0.0,
+       "p95": 0.0
+      },
+      "day": {
+       "mean": 0.0,
+       "p5": 0.0,
+       "p95": 0.0
+      },
+      "night": {
+       "mean": 0.0,
+       "p5": 0.0,
+       "p95": 0.0
+      },
+      "rms_by_local_time": 0.0
+     }
+    },
+    "cloud_in_flight_band": {
+     "by_local_time": {
+      "ring_70_135e": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.003,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "ring_equator": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.045,
+       0.004,
+       0.001
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 0.0,
+       "day": 0.001,
+       "night": 0.0
+      },
+      "ring_equator": {
+       "all": 0.005,
+       "day": 0.009,
+       "night": 0.001
+      }
+     },
+     "difference": {
+      "all": {
+       "mean": -0.005,
+       "p5": -0.011,
+       "p95": 0.0
+      },
+      "day": {
+       "mean": -0.008,
+       "p5": -0.02,
+       "p95": 0.001
+      },
+      "night": {
+       "mean": -0.001,
+       "p5": -0.002,
+       "p95": 0.0
+      },
+      "rms_by_local_time": 0.014
+     }
+    },
+    "wind_10m_m_s": {
+     "by_local_time": {
+      "ring_70_135e": [
+       1.983,
+       2.131,
+       2.08,
+       1.667,
+       2.398,
+       2.102,
+       1.958,
+       2.852,
+       2.032,
+       1.786
+      ],
+      "ring_equator": [
+       1.813,
+       0.87,
+       1.279,
+       3.36,
+       3.658,
+       0.747,
+       2.008,
+       3.828,
+       2.264,
+       2.47
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 2.096,
+       "day": 2.159,
+       "night": 2.032
+      },
+      "ring_equator": {
+       "all": 2.216,
+       "day": 2.524,
+       "night": 1.91
+      }
+     },
+     "difference": {
+      "all": {
+       "mean": -0.12,
+       "p5": -0.476,
+       "p95": 0.236
+      },
+      "day": {
+       "mean": -0.365,
+       "p5": -0.935,
+       "p95": 0.217
+      },
+      "night": {
+       "mean": 0.122,
+       "p5": -0.276,
+       "p95": 0.534
+      },
+      "rms_by_local_time": 1.001
+     }
+    },
+    "wind_40_km_m_s": {
+     "by_local_time": {
+      "ring_70_135e": [
+       6.904,
+       6.543,
+       6.989,
+       7.097,
+       6.405,
+       6.601,
+       6.936,
+       7.414,
+       7.265,
+       6.732
+      ],
+      "ring_equator": [
+       9.876,
+       9.245,
+       10.276,
+       9.686,
+       9.073,
+       10.834,
+       10.639,
+       13.474,
+       10.588,
+       10.072
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 6.889,
+       "day": 6.85,
+       "night": 6.928
+      },
+      "ring_equator": {
+       "all": 10.37,
+       "day": 10.494,
+       "night": 10.247
+      }
+     },
+     "difference": {
+      "all": {
+       "mean": -3.481,
+       "p5": -3.88,
+       "p95": -3.115
+      },
+      "day": {
+       "mean": -3.645,
+       "p5": -4.398,
+       "p95": -2.971
+      },
+      "night": {
+       "mean": -3.318,
+       "p5": -3.63,
+       "p95": -3.006
+      },
+      "rms_by_local_time": 3.624
+     }
+    },
+    "comfortable_strict": {
+     "by_local_time": {
+      "ring_70_135e": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "ring_equator": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 0.0,
+       "day": 0.0,
+       "night": 0.0
+      },
+      "ring_equator": {
+       "all": 0.0,
+       "day": 0.0,
+       "night": 0.0
+      }
+     },
+     "difference": {
+      "all": {
+       "mean": 0.0,
+       "p5": 0.0,
+       "p95": 0.0
+      },
+      "day": {
+       "mean": 0.0,
+       "p5": 0.0,
+       "p95": 0.0
+      },
+      "night": {
+       "mean": 0.0,
+       "p5": 0.0,
+       "p95": 0.0
+      },
+      "rms_by_local_time": 0.0
+     }
+    },
+    "comfortable_loose": {
+     "by_local_time": {
+      "ring_70_135e": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "ring_equator": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ]
+     },
+     "mean": {
+      "ring_70_135e": {
+       "all": 0.0,
+       "day": 0.0,
+       "night": 0.0
+      },
+      "ring_equator": {
+       "all": 0.0,
+       "day": 0.0,
+       "night": 0.0
+      }
+     },
+     "difference": {
+      "all": {
+       "mean": 0.0,
+       "p5": 0.0,
+       "p95": 0.0
+      },
+      "day": {
+       "mean": 0.0,
+       "p5": 0.0,
+       "p95": 0.0
+      },
+      "night": {
+       "mean": 0.0,
+       "p5": 0.0,
+       "p95": 0.0
+      },
+      "rms_by_local_time": 0.0
+     }
+    },
+    "comfortable_hours_per_lunar_day": {
+     "strict": {
+      "ring_70_135e": 0.0,
+      "ring_equator": 0.0
+     },
+     "loose": {
+      "ring_70_135e": 0.0,
+      "ring_equator": 0.0
+     }
+    },
+    "rain_mm_per_lunar_day": {
+     "ring_70_135e": 4.729,
+     "ring_equator": 10.306
+    }
+   },
+   "gcm": {
+    "run": "A28_dim5_moon",
+    "years": [
+     20,
+     29
+    ],
+    "radius_km": 150.0,
+    "land": null,
+    "water": {
+     "cells": [
+      [
+       2.769,
+       315.0
+      ],
+      [
+       -2.769,
+       315.0
+      ]
+     ],
+     "air_c": {
+      "by_local_time": [
+       22.772,
+       22.546,
+       22.376,
+       22.378,
+       23.483,
+       25.407,
+       25.417,
+       23.496,
+       22.797,
+       22.792
+      ],
+      "mean": {
+       "all": 23.358,
+       "day": 23.942,
+       "night": 22.738
+      }
+     },
+     "dewpoint_c": {
+      "by_local_time": [
+       17.886,
+       17.853,
+       17.833,
+       17.807,
+       17.161,
+       16.512,
+       17.769,
+       20.259,
+       18.964,
+       17.745
+      ],
+      "mean": {
+       "all": 17.989,
+       "day": 17.669,
+       "night": 18.328
+      }
+     },
+     "rain_mm_h": {
+      "by_local_time": [
+       0.346,
+       0.264,
+       0.208,
+       0.088,
+       0.03,
+       0.084,
+       0.286,
+       0.153,
+       0.14,
+       0.244
+      ],
+      "mean": {
+       "all": 0.185,
+       "day": 0.139,
+       "night": 0.235
+      }
+     },
+     "cloud_cover": {
+      "by_local_time": [
+       0.548,
+       0.527,
+       0.509,
+       0.428,
+       0.359,
+       0.33,
+       0.445,
+       0.475,
+       0.439,
+       0.477
+      ],
+      "mean": {
+       "all": 0.454,
+       "day": 0.414,
+       "night": 0.497
+      }
+     },
+     "comfortable_hours_per_lunar_day": {
+      "strict": 38.685,
+      "loose": 90.364
+     },
+     "rain_mm_per_lunar_day": 131.243
+    }
+   }
+  }
+ ],
+ "producer": {
+  "domain": "climate",
+  "files": {
+   "crm/ring_crossings.py": "9b84d0da6588fb64"
+  }
+ }
+}

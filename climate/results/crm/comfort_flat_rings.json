@@ -1,0 +1,1069 @@
+{
+ "schema": "terluna.climate.crm-comfort/1",
+ "rings": [
+  "ring_equator",
+  "ring_70_45e",
+  "ring_70_135e"
+ ],
+ "evidence": "CM1 r22.0 rings along great circles at lunar gravity, their land laid flat at sea level (each ring's own summary says what a ring is), read over their second lunar day after a lunar day of spin-up. The height correction comes from one ring's path over its first eleven days, in a two-dimensional run whose air, forced over its mountains, later broke into gales along the whole ring; it assumes high ground everywhere cools and dries with height as that path's did then, and it carries none of the highlands' own weather (slope winds, rain on the slopes facing the wind, cold air pooling in valleys). The GCM design case (A28_dim5_moon, years 20-29, 3-day means, cells about 170 km wide) is the other view.",
+ "reading_rule": "Hours per lunar day are the share of the 3-hourly snapshots of the second lunar day (model days 29.53 to 59.0) in which a column's air at 2 m and dewpoint fall in the band, times the lunar day, averaged over the columns: strict means 18-26 C with a dewpoint of at most 15 C, loose 17-27 C and 16 C. Corrected values add the twin's difference at the column's height, the day's or the night's as the Sun is up or down at the column; flat values are the ring as run. The GCM's hours come from its 3-day means at the nearest land cell, its air carried to the ground along a dry adiabat and its dewpoint that of its lowest layer, about 0.86 km up; the cell stands at its own height, given beside. Settling is the mean over the last third of the second lunar day minus that over the same third of the first, the same local times at every column. Evaporation is over the second lunar day; the GCM's is its mean over its years at the nearest land cell, whose wetness the ring took.",
+ "span_days": {
+  "ring_equator": [
+   29.625,
+   59.0
+  ],
+  "ring_70_45e": [
+   29.625,
+   59.0
+  ],
+  "ring_70_135e": [
+   29.625,
+   59.0
+  ]
+ },
+ "snapshots": {
+  "ring_equator": 236,
+  "ring_70_45e": 236,
+  "ring_70_135e": 236
+ },
+ "twin": {
+  "rings": [
+   "ring_70_45e",
+   "ring_70_45e_terrain"
+  ],
+  "days": [
+   1.0,
+   11.0
+  ],
+  "snapshots": 81,
+  "classes": [
+   {
+    "from_m": 0,
+    "to_m": 500,
+    "columns": 95,
+    "mean_height_m": 295.874,
+    "air_day_c": 0.421,
+    "dewpoint_day_c": -0.797,
+    "air_night_c": -0.359,
+    "dewpoint_night_c": -0.893
+   },
+   {
+    "from_m": 500,
+    "to_m": 1000,
+    "columns": 192,
+    "mean_height_m": 765.985,
+    "air_day_c": -0.2,
+    "dewpoint_day_c": -1.207,
+    "air_night_c": -0.169,
+    "dewpoint_night_c": -1.545
+   },
+   {
+    "from_m": 1000,
+    "to_m": 2000,
+    "columns": 323,
+    "mean_height_m": 1469.663,
+    "air_day_c": -1.243,
+    "dewpoint_day_c": -1.692,
+    "air_night_c": -1.107,
+    "dewpoint_night_c": -2.264
+   },
+   {
+    "from_m": 2000,
+    "to_m": 3000,
+    "columns": 140,
+    "mean_height_m": 2423.973,
+    "air_day_c": -2.51,
+    "dewpoint_day_c": -2.321,
+    "air_night_c": -2.006,
+    "dewpoint_night_c": -3.085
+   },
+   {
+    "from_m": 3000,
+    "to_m": 4000,
+    "columns": 102,
+    "mean_height_m": 3518.992,
+    "air_day_c": -4.021,
+    "dewpoint_day_c": -3.92,
+    "air_night_c": -3.295,
+    "dewpoint_night_c": -4.231
+   },
+   {
+    "from_m": 4000,
+    "to_m": 6000,
+    "columns": 229,
+    "mean_height_m": 4718.905,
+    "air_day_c": -4.993,
+    "dewpoint_day_c": -5.204,
+    "air_night_c": -4.577,
+    "dewpoint_night_c": -5.298
+   },
+   {
+    "from_m": 6000,
+    "to_m": 9000,
+    "columns": 117,
+    "mean_height_m": 6964.128,
+    "air_day_c": -6.761,
+    "dewpoint_day_c": -6.072,
+    "air_night_c": -7.499,
+    "dewpoint_night_c": -7.928
+   }
+  ],
+  "per_km_above_500_m": {
+   "air_day_c": -1.012,
+   "dewpoint_day_c": -0.977,
+   "air_night_c": -1.003,
+   "dewpoint_night_c": -1.167
+  }
+ },
+ "gcm_height_rates": [
+  {
+   "from_deg": 0,
+   "to_deg": 30,
+   "cells": 354,
+   "heights_km": [
+    0.058,
+    8.4
+   ],
+   "air_per_km_c": -0.744,
+   "air_at_sea_level_c": 23.148,
+   "dewpoint_per_km_c": -0.427,
+   "dewpoint_at_sea_level_c": 17.209
+  },
+  {
+   "from_deg": 30,
+   "to_deg": 60,
+   "cells": 470,
+   "heights_km": [
+    0.163,
+    5.29
+   ],
+   "air_per_km_c": -0.474,
+   "air_at_sea_level_c": 22.197,
+   "dewpoint_per_km_c": -0.174,
+   "dewpoint_at_sea_level_c": 13.214
+  },
+  {
+   "from_deg": 60,
+   "to_deg": 90,
+   "cells": 465,
+   "heights_km": [
+    0.268,
+    5.303
+   ],
+   "air_per_km_c": -0.072,
+   "air_at_sea_level_c": 19.715,
+   "dewpoint_per_km_c": -0.624,
+   "dewpoint_at_sea_level_c": 12.51
+  }
+ ],
+ "settling": {
+  "ring_equator": {
+   "land": {
+    "air_c": 0.135,
+    "dew_c": 0.314
+   },
+   "water": {
+    "air_c": 0.03,
+    "dew_c": 0.302
+   }
+  },
+  "ring_70_45e": {
+   "land": {
+    "air_c": 0.543,
+    "dew_c": 0.429
+   },
+   "water": {
+    "air_c": 0.138,
+    "dew_c": 0.159
+   }
+  },
+  "ring_70_135e": {
+   "land": {
+    "air_c": 0.539,
+    "dew_c": 0.541
+   },
+   "water": {
+    "air_c": 0.416,
+    "dew_c": 0.521
+   }
+  }
+ },
+ "against_gcm": {
+  "ring_equator": {
+   "sea": {
+    "columns": 289,
+    "gcm_cell_height_m": 0.0,
+    "cm1": {
+     "air_c": 25.6,
+     "dewpoint_2m_c": 23.049,
+     "dewpoint_gcm_layer_c": 21.0,
+     "rain_mm_day": 3.35,
+     "strict_hours": 0.0
+    },
+    "gcm": {
+     "air_c": 23.707,
+     "dewpoint_gcm_layer_c": 18.523,
+     "rain_mm_day": 3.075,
+     "strict_hours": 35.764
+    }
+   },
+   "low_land": {
+    "columns": 282,
+    "gcm_cell_height_m": 580.867,
+    "cm1": {
+     "air_c": 24.975,
+     "dewpoint_2m_c": 22.328,
+     "dewpoint_gcm_layer_c": 20.909,
+     "rain_mm_day": 2.887,
+     "strict_hours": 0.0
+    },
+    "gcm": {
+     "air_c": 22.574,
+     "dewpoint_gcm_layer_c": 17.889,
+     "rain_mm_day": 4.711,
+     "strict_hours": 115.934
+    }
+   },
+   "all_land_rain_mm_day": {
+    "cm1": 3.939,
+    "gcm_nearest_land_cell": 5.598
+   }
+  },
+  "ring_70_45e": {
+   "sea": {
+    "columns": 294,
+    "gcm_cell_height_m": 0.0,
+    "cm1": {
+     "air_c": 24.019,
+     "dewpoint_2m_c": 20.608,
+     "dewpoint_gcm_layer_c": 16.696,
+     "rain_mm_day": 0.109,
+     "strict_hours": 0.0
+    },
+    "gcm": {
+     "air_c": 22.205,
+     "dewpoint_gcm_layer_c": 15.916,
+     "rain_mm_day": 1.228,
+     "strict_hours": 266.82
+    }
+   },
+   "low_land": {
+    "columns": 60,
+    "gcm_cell_height_m": 729.861,
+    "cm1": {
+     "air_c": 26.044,
+     "dewpoint_2m_c": 20.147,
+     "dewpoint_gcm_layer_c": 17.154,
+     "rain_mm_day": 0.006,
+     "strict_hours": 0.0
+    },
+    "gcm": {
+     "air_c": 21.368,
+     "dewpoint_gcm_layer_c": 12.035,
+     "rain_mm_day": 0.162,
+     "strict_hours": 457.852
+    }
+   },
+   "all_land_rain_mm_day": {
+    "cm1": 0.126,
+    "gcm_nearest_land_cell": 1.883
+   }
+  },
+  "ring_70_135e": {
+   "sea": {
+    "columns": 373,
+    "gcm_cell_height_m": 0.0,
+    "cm1": {
+     "air_c": 24.646,
+     "dewpoint_2m_c": 21.154,
+     "dewpoint_gcm_layer_c": 18.219,
+     "rain_mm_day": 0.031,
+     "strict_hours": 0.0
+    },
+    "gcm": {
+     "air_c": 22.265,
+     "dewpoint_gcm_layer_c": 17.03,
+     "rain_mm_day": 1.663,
+     "strict_hours": 159.502
+    }
+   },
+   "low_land": {
+    "columns": 160,
+    "gcm_cell_height_m": 674.741,
+    "cm1": {
+     "air_c": 25.329,
+     "dewpoint_2m_c": 19.811,
+     "dewpoint_gcm_layer_c": 16.291,
+     "rain_mm_day": 0.047,
+     "strict_hours": 0.0
+    },
+    "gcm": {
+     "air_c": 22.075,
+     "dewpoint_gcm_layer_c": 14.671,
+     "rain_mm_day": 1.361,
+     "strict_hours": 338.254
+    }
+   },
+   "all_land_rain_mm_day": {
+    "cm1": 0.219,
+    "gcm_nearest_land_cell": 1.258
+   }
+  }
+ },
+ "sea_level": {
+  "ring_equator": [
+   {
+    "from_deg": 0,
+    "to_deg": 15,
+    "columns": 1034,
+    "comfortable_hours": {
+     "strict": 0.0,
+     "loose": 0.0
+    },
+    "uncomfortable_hours": {
+     "too_hot": 240.237,
+     "too_cold": 0.0,
+     "too_humid": 468.497
+    },
+    "air_day_c": {
+     "median": 27.696,
+     "p95": 33.184
+    },
+    "air_night_c": {
+     "p5": 21.347,
+     "median": 22.355
+    },
+    "dewpoint_c": {
+     "day": 23.364,
+     "night": 22.142
+    },
+    "evaporation_mm_day": {
+     "cm1": 2.921,
+     "gcm": 3.676
+    },
+    "gcm_wetness_median": 1.0,
+    "share_given_the_driest_class": 0.0,
+    "gcm": {
+     "comfortable_hours": {
+      "strict": 168.453,
+      "loose": 278.43
+     },
+     "cell_height_km": 2.563
+    }
+   }
+  ],
+  "ring_70_45e": [
+   {
+    "from_deg": 0,
+    "to_deg": 15,
+    "columns": 127,
+    "comfortable_hours": {
+     "strict": 0.0,
+     "loose": 0.0
+    },
+    "uncomfortable_hours": {
+     "too_hot": 289.552,
+     "too_cold": 0.0,
+     "too_humid": 419.182
+    },
+    "air_day_c": {
+     "median": 29.651,
+     "p95": 33.926
+    },
+    "air_night_c": {
+     "p5": 20.621,
+     "median": 22.12
+    },
+    "dewpoint_c": {
+     "day": 22.24,
+     "night": 21.445
+    },
+    "evaporation_mm_day": {
+     "cm1": 3.723,
+     "gcm": 3.349
+    },
+    "gcm_wetness_median": 1.0,
+    "share_given_the_driest_class": 0.0,
+    "gcm": {
+     "comfortable_hours": {
+      "strict": 147.295,
+      "loose": 360.413
+     },
+     "cell_height_km": 4.461
+    }
+   },
+   {
+    "from_deg": 15,
+    "to_deg": 30,
+    "columns": 139,
+    "comfortable_hours": {
+     "strict": 0.0,
+     "loose": 0.0
+    },
+    "uncomfortable_hours": {
+     "too_hot": 281.342,
+     "too_cold": 0.0,
+     "too_humid": 427.392
+    },
+    "air_day_c": {
+     "median": 29.779,
+     "p95": 34.821
+    },
+    "air_night_c": {
+     "p5": 19.705,
+     "median": 22.089
+    },
+    "dewpoint_c": {
+     "day": 22.053,
+     "night": 20.64
+    },
+    "evaporation_mm_day": {
+     "cm1": 2.392,
+     "gcm": 2.355
+    },
+    "gcm_wetness_median": 0.451,
+    "share_given_the_driest_class": 0.144,
+    "gcm": {
+     "comfortable_hours": {
+      "strict": 361.871,
+      "loose": 505.347
+     },
+     "cell_height_km": 3.568
+    }
+   },
+   {
+    "from_deg": 30,
+    "to_deg": 45,
+    "columns": 290,
+    "comfortable_hours": {
+     "strict": 0.0,
+     "loose": 0.0
+    },
+    "uncomfortable_hours": {
+     "too_hot": 298.52,
+     "too_cold": 0.0,
+     "too_humid": 410.215
+    },
+    "air_day_c": {
+     "median": 30.956,
+     "p95": 35.819
+    },
+    "air_night_c": {
+     "p5": 19.296,
+     "median": 21.741
+    },
+    "dewpoint_c": {
+     "day": 20.605,
+     "night": 20.115
+    },
+    "evaporation_mm_day": {
+     "cm1": 1.04,
+     "gcm": 1.009
+    },
+    "gcm_wetness_median": 0.068,
+    "share_given_the_driest_class": 0.39,
+    "gcm": {
+     "comfortable_hours": {
+      "strict": 474.887,
+      "loose": 592.231
+     },
+     "cell_height_km": 2.629
+    }
+   },
+   {
+    "from_deg": 45,
+    "to_deg": 60,
+    "columns": 296,
+    "comfortable_hours": {
+     "strict": 0.0,
+     "loose": 4.9
+    },
+    "uncomfortable_hours": {
+     "too_hot": 283.713,
+     "too_cold": 3.186,
+     "too_humid": 421.836
+    },
+    "air_day_c": {
+     "median": 30.191,
+     "p95": 34.15
+    },
+    "air_night_c": {
+     "p5": 18.497,
+     "median": 21.307
+    },
+    "dewpoint_c": {
+     "day": 19.034,
+     "night": 19.628
+    },
+    "evaporation_mm_day": {
+     "cm1": 0.513,
+     "gcm": 0.2
+    },
+    "gcm_wetness_median": 0.013,
+    "share_given_the_driest_class": 0.997,
+    "gcm": {
+     "comfortable_hours": {
+      "strict": 541.248,
+      "loose": 649.855
+     },
+     "cell_height_km": 2.513
+    }
+   },
+   {
+    "from_deg": 60,
+    "to_deg": 90,
+    "columns": 346,
+    "comfortable_hours": {
+     "strict": 1.033,
+     "loose": 24.771
+    },
+    "uncomfortable_hours": {
+     "too_hot": 210.66,
+     "too_cold": 33.512,
+     "too_humid": 463.529
+    },
+    "air_day_c": {
+     "median": 26.915,
+     "p95": 30.52
+    },
+    "air_night_c": {
+     "p5": 17.599,
+     "median": 20.929
+    },
+    "dewpoint_c": {
+     "day": 18.141,
+     "night": 18.993
+    },
+    "evaporation_mm_day": {
+     "cm1": 0.292,
+     "gcm": 0.081
+    },
+    "gcm_wetness_median": 0.008,
+    "share_given_the_driest_class": 1.0,
+    "gcm": {
+     "comfortable_hours": {
+      "strict": 600.038,
+      "loose": 681.957
+     },
+     "cell_height_km": 1.935
+    }
+   }
+  ],
+  "ring_70_135e": [
+   {
+    "from_deg": 0,
+    "to_deg": 15,
+    "columns": 169,
+    "comfortable_hours": {
+     "strict": 0.0,
+     "loose": 0.231
+    },
+    "uncomfortable_hours": {
+     "too_hot": 268.45,
+     "too_cold": 2.808,
+     "too_humid": 437.477
+    },
+    "air_day_c": {
+     "median": 29.496,
+     "p95": 33.46
+    },
+    "air_night_c": {
+     "p5": 19.022,
+     "median": 22.0
+    },
+    "dewpoint_c": {
+     "day": 21.857,
+     "night": 21.458
+    },
+    "evaporation_mm_day": {
+     "cm1": 3.116,
+     "gcm": 3.527
+    },
+    "gcm_wetness_median": 0.517,
+    "share_given_the_driest_class": 0.0,
+    "gcm": {
+     "comfortable_hours": {
+      "strict": 149.771,
+      "loose": 235.78
+     },
+     "cell_height_km": 2.305
+    }
+   },
+   {
+    "from_deg": 15,
+    "to_deg": 30,
+    "columns": 123,
+    "comfortable_hours": {
+     "strict": 0.0,
+     "loose": 0.024
+    },
+    "uncomfortable_hours": {
+     "too_hot": 253.067,
+     "too_cold": 1.05,
+     "too_humid": 454.617
+    },
+    "air_day_c": {
+     "median": 29.007,
+     "p95": 34.614
+    },
+    "air_night_c": {
+     "p5": 19.652,
+     "median": 21.283
+    },
+    "dewpoint_c": {
+     "day": 21.974,
+     "night": 20.583
+    },
+    "evaporation_mm_day": {
+     "cm1": 2.433,
+     "gcm": 2.807
+    },
+    "gcm_wetness_median": 0.514,
+    "share_given_the_driest_class": 0.106,
+    "gcm": {
+     "comfortable_hours": {
+      "strict": 227.381,
+      "loose": 340.01
+     },
+     "cell_height_km": 2.67
+    }
+   },
+   {
+    "from_deg": 30,
+    "to_deg": 45,
+    "columns": 241,
+    "comfortable_hours": {
+     "strict": 0.0,
+     "loose": 28.237
+    },
+    "uncomfortable_hours": {
+     "too_hot": 283.763,
+     "too_cold": 0.0,
+     "too_humid": 424.971
+    },
+    "air_day_c": {
+     "median": 30.504,
+     "p95": 35.64
+    },
+    "air_night_c": {
+     "p5": 19.296,
+     "median": 20.815
+    },
+    "dewpoint_c": {
+     "day": 20.893,
+     "night": 19.012
+    },
+    "evaporation_mm_day": {
+     "cm1": 1.158,
+     "gcm": 1.076
+    },
+    "gcm_wetness_median": 0.089,
+    "share_given_the_driest_class": 0.361,
+    "gcm": {
+     "comfortable_hours": {
+      "strict": 441.243,
+      "loose": 548.311
+     },
+     "cell_height_km": 2.185
+    }
+   },
+   {
+    "from_deg": 45,
+    "to_deg": 60,
+    "columns": 269,
+    "comfortable_hours": {
+     "strict": 2.032,
+     "loose": 93.844
+    },
+    "uncomfortable_hours": {
+     "too_hot": 273.026,
+     "too_cold": 0.0,
+     "too_humid": 433.676
+    },
+    "air_day_c": {
+     "median": 29.781,
+     "p95": 33.533
+    },
+    "air_night_c": {
+     "p5": 18.765,
+     "median": 20.692
+    },
+    "dewpoint_c": {
+     "day": 19.41,
+     "night": 18.947
+    },
+    "evaporation_mm_day": {
+     "cm1": 0.475,
+     "gcm": 0.189
+    },
+    "gcm_wetness_median": 0.005,
+    "share_given_the_driest_class": 0.944,
+    "gcm": {
+     "comfortable_hours": {
+      "strict": 595.802,
+      "loose": 677.456
+     },
+     "cell_height_km": 1.862
+    }
+   },
+   {
+    "from_deg": 60,
+    "to_deg": 90,
+    "columns": 416,
+    "comfortable_hours": {
+     "strict": 4.043,
+     "loose": 35.243
+    },
+    "uncomfortable_hours": {
+     "too_hot": 217.119,
+     "too_cold": 11.976,
+     "too_humid": 475.596
+    },
+    "air_day_c": {
+     "median": 27.275,
+     "p95": 31.271
+    },
+    "air_night_c": {
+     "p5": 18.112,
+     "median": 20.017
+    },
+    "dewpoint_c": {
+     "day": 18.253,
+     "night": 18.256
+    },
+    "evaporation_mm_day": {
+     "cm1": 0.297,
+     "gcm": 0.055
+    },
+    "gcm_wetness_median": 0.005,
+    "share_given_the_driest_class": 1.0,
+    "gcm": {
+     "comfortable_hours": {
+      "strict": 642.667,
+      "loose": 696.98
+     },
+     "cell_height_km": 2.103
+    }
+   }
+  ]
+ },
+ "corrected_for_height": [
+  {
+   "from_deg": 0,
+   "to_deg": 30,
+   "from_m": 0,
+   "to_m": 500,
+   "columns": 324,
+   "mean_height_km": 0.247,
+   "comfortable_hours": {
+    "strict": 0.0,
+    "loose": 0.881,
+    "strict_flat": 0.0
+   },
+   "air_c": 25.513,
+   "dewpoint_c": 21.552,
+   "gcm": {
+    "comfortable_hours": {
+     "strict": 99.048,
+     "loose": 164.857
+    },
+    "cell_height_km": 0.5,
+    "air_c": 22.901,
+    "dewpoint_c": 17.771
+   }
+  },
+  {
+   "from_deg": 0,
+   "to_deg": 30,
+   "from_m": 500,
+   "to_m": 2000,
+   "columns": 398,
+   "mean_height_km": 1.12,
+   "comfortable_hours": {
+    "strict": 0.0,
+    "loose": 0.551,
+    "strict_flat": 0.0
+   },
+   "air_c": 24.665,
+   "dewpoint_c": 20.57,
+   "gcm": {
+    "comfortable_hours": {
+     "strict": 159.921,
+     "loose": 240.781
+    },
+    "cell_height_km": 1.438,
+    "air_c": 22.271,
+    "dewpoint_c": 17.172
+   }
+  },
+  {
+   "from_deg": 0,
+   "to_deg": 30,
+   "from_m": 2000,
+   "to_m": 4000,
+   "columns": 346,
+   "mean_height_km": 2.906,
+   "comfortable_hours": {
+    "strict": 2.595,
+    "loose": 11.422,
+    "strict_flat": 0.0
+   },
+   "air_c": 22.163,
+   "dewpoint_c": 19.17,
+   "gcm": {
+    "comfortable_hours": {
+     "strict": 233.49,
+     "loose": 328.469
+    },
+    "cell_height_km": 2.566,
+    "air_c": 21.381,
+    "dewpoint_c": 16.227
+   }
+  },
+  {
+   "from_deg": 0,
+   "to_deg": 30,
+   "from_m": 4000,
+   "to_m": 9000,
+   "columns": 524,
+   "mean_height_km": 5.79,
+   "comfortable_hours": {
+    "strict": 16.408,
+    "loose": 53.821,
+    "strict_flat": 0.0
+   },
+   "air_c": 19.279,
+   "dewpoint_c": 16.323,
+   "gcm": {
+    "comfortable_hours": {
+     "strict": 228.891,
+     "loose": 424.972
+    },
+    "cell_height_km": 5.36,
+    "air_c": 19.385,
+    "dewpoint_c": 15.329
+   }
+  },
+  {
+   "from_deg": 30,
+   "to_deg": 60,
+   "from_m": 0,
+   "to_m": 500,
+   "columns": 61,
+   "mean_height_km": 0.354,
+   "comfortable_hours": {
+    "strict": 32.985,
+    "loose": 64.05,
+    "strict_flat": 0.591
+   },
+   "air_c": 25.385,
+   "dewpoint_c": 18.64,
+   "gcm": {
+    "comfortable_hours": {
+     "strict": 510.26,
+     "loose": 613.094
+    },
+    "cell_height_km": 1.584,
+    "air_c": 21.526,
+    "dewpoint_c": 12.892
+   }
+  },
+  {
+   "from_deg": 30,
+   "to_deg": 60,
+   "from_m": 500,
+   "to_m": 2000,
+   "columns": 540,
+   "mean_height_km": 1.157,
+   "comfortable_hours": {
+    "strict": 37.772,
+    "loose": 77.959,
+    "strict_flat": 0.267
+   },
+   "air_c": 24.717,
+   "dewpoint_c": 18.003,
+   "gcm": {
+    "comfortable_hours": {
+     "strict": 501.294,
+     "loose": 609.918
+    },
+    "cell_height_km": 1.574,
+    "air_c": 21.429,
+    "dewpoint_c": 12.701
+   }
+  },
+  {
+   "from_deg": 30,
+   "to_deg": 60,
+   "from_m": 2000,
+   "to_m": 4000,
+   "columns": 284,
+   "mean_height_km": 2.957,
+   "comfortable_hours": {
+    "strict": 99.875,
+    "loose": 200.13,
+    "strict_flat": 1.142
+   },
+   "air_c": 22.189,
+   "dewpoint_c": 15.986,
+   "gcm": {
+    "comfortable_hours": {
+     "strict": 516.087,
+     "loose": 615.763
+    },
+    "cell_height_km": 2.915,
+    "air_c": 20.769,
+    "dewpoint_c": 12.687
+   }
+  },
+  {
+   "from_deg": 30,
+   "to_deg": 60,
+   "from_m": 4000,
+   "to_m": 9000,
+   "columns": 211,
+   "mean_height_km": 4.774,
+   "comfortable_hours": {
+    "strict": 141.459,
+    "loose": 247.821,
+    "strict_flat": 0.199
+   },
+   "air_c": 20.81,
+   "dewpoint_c": 14.292,
+   "gcm": {
+    "comfortable_hours": {
+     "strict": 550.445,
+     "loose": 648.584
+    },
+    "cell_height_km": 3.598,
+    "air_c": 20.465,
+    "dewpoint_c": 12.664
+   }
+  },
+  {
+   "from_deg": 60,
+   "to_deg": 90,
+   "from_m": 0,
+   "to_m": 500,
+   "columns": 79,
+   "mean_height_km": 0.348,
+   "comfortable_hours": {
+    "strict": 8.857,
+    "loose": 42.272,
+    "strict_flat": 1.901
+   },
+   "air_c": 23.598,
+   "dewpoint_c": 17.806,
+   "gcm": {
+    "comfortable_hours": {
+     "strict": 626.116,
+     "loose": 692.982
+    },
+    "cell_height_km": 1.15,
+    "air_c": 20.176,
+    "dewpoint_c": 11.414
+   }
+  },
+  {
+   "from_deg": 60,
+   "to_deg": 90,
+   "from_m": 500,
+   "to_m": 2000,
+   "columns": 377,
+   "mean_height_km": 1.366,
+   "comfortable_hours": {
+    "strict": 50.304,
+    "loose": 175.065,
+    "strict_flat": 1.729
+   },
+   "air_c": 22.454,
+   "dewpoint_c": 16.492,
+   "gcm": {
+    "comfortable_hours": {
+     "strict": 613.434,
+     "loose": 686.875
+    },
+    "cell_height_km": 1.763,
+    "air_c": 19.969,
+    "dewpoint_c": 11.52
+   }
+  },
+  {
+   "from_deg": 60,
+   "to_deg": 90,
+   "from_m": 2000,
+   "to_m": 4000,
+   "columns": 273,
+   "mean_height_km": 2.61,
+   "comfortable_hours": {
+    "strict": 99.301,
+    "loose": 312.918,
+    "strict_flat": 4.488
+   },
+   "air_c": 20.87,
+   "dewpoint_c": 15.245,
+   "gcm": {
+    "comfortable_hours": {
+     "strict": 637.588,
+     "loose": 693.35
+    },
+    "cell_height_km": 2.48,
+    "air_c": 19.954,
+    "dewpoint_c": 11.1
+   }
+  },
+  {
+   "from_deg": 60,
+   "to_deg": 90,
+   "from_m": 4000,
+   "to_m": 9000,
+   "columns": 33,
+   "mean_height_km": 5.252,
+   "comfortable_hours": {
+    "strict": 248.803,
+    "loose": 351.273,
+    "strict_flat": 0.364
+   },
+   "air_c": 18.163,
+   "dewpoint_c": 12.177,
+   "gcm": {
+    "comfortable_hours": {
+     "strict": 611.301,
+     "loose": 694.506
+    },
+    "cell_height_km": 3.396,
+    "air_c": 19.55,
+    "dewpoint_c": 10.327
+   }
+  }
+ ],
+ "land_shares": {
+  "columns": 3450,
+  "mean_hours": {
+   "corrected": 42.058,
+   "gcm": 387.236,
+   "corrected_loose": 102.652,
+   "gcm_loose": 489.845
+  },
+  "at_least": {
+   "100": {
+    "corrected": 0.184,
+    "gcm": 0.917
+   },
+   "200": {
+    "corrected": 0.048,
+    "gcm": 0.697
+   },
+   "350": {
+    "corrected": 0.001,
+    "gcm": 0.553
+   }
+  }
+ },
+ "producer": {
+  "domain": "climate",
+  "files": {
+   "crm/ring_comfort.py": "8ad09e89e411ab2b"
+  }
+ }
+}

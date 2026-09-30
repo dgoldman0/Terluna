@@ -467,6 +467,111 @@ That fits one overnight run on the laptop, and whether to run it is decided
 after the flat ring's results. There is no budget for rented compute, so larger
 highland domains stay out of reach.
 
+**What the three flat rings show** (their second lunar day, days 29.6–59.0:
+[ring_ring_equator.json](../results/crm/ring_ring_equator.json),
+[ring_ring_70_45e.json](../results/crm/ring_ring_70_45e.json),
+[ring_ring_70_135e.json](../results/crm/ring_ring_70_135e.json), the crossings
+[crossings_ring_70_45e_ring_70_135e.json](../results/crm/crossings_ring_70_45e_ring_70_135e.json),
+[crossings_ring_70_45e_ring_equator.json](../results/crm/crossings_ring_70_45e_ring_equator.json)
+and [crossings_ring_70_135e_ring_equator.json](../results/crm/crossings_ring_70_135e_ring_equator.json),
+and [ring_comfort.py](ring_comfort.py) with
+[comfort_flat_rings.json](../results/crm/comfort_flat_rings.json)). All three
+finished on 2026-09-30, in 11.5–12.3 wall hours each on 2–4 threads. Their
+second lunar day has nearly settled: over its last third the land runs
+0.1–0.5 °C warmer, with dewpoints 0.3–0.5 °C higher, than at the same local
+times a lunar day before, and the seas 0.0–0.4 °C warmer.
+
+Low-lying land is never comfortable. At sea level the land of all three rings
+has 0–4 comfortable hours per lunar day in every band of latitude, and at most
+94 on the loose band's terms. For 58–67% of the lunar day the air is in the
+comfortable range but too humid, and for 30–42% it is too hot. Ranges span the
+rings that cross each band:
+
+| Latitude (land columns) | Sunlit air: median, hottest 5% | Night air, median | Dewpoint at 2 m, day and night | Hours too hot, too humid |
+|---|---|---|---|---|
+| 0–15° (1,330) | 27.7–29.7 °C, 33.2–33.9 °C | 22.0–22.4 °C | 21.4–23.4 °C | 240–290, 419–468 |
+| 15–30° (262) | 29.0–29.8, 34.6–34.8 | 21.3–22.1 | 20.6–22.1 | 253–281, 427–455 |
+| 30–45° (531) | 30.5–31.0, 35.6–35.8 | 20.8–21.7 | 19.0–20.9 | 284–299, 410–425 |
+| 45–60° (565) | 29.8–30.2, 33.5–34.1 | 20.7–21.3 | 18.9–19.6 | 273–284, 422–434 |
+| 60–70° (762) | 26.9–27.3, 30.5–31.3 | 20.0–20.9 | 18.1–19.0 | 211–217, 464–476 |
+
+The rings agree where they cross. At 62.8° S, 0° E the steep pair's land
+differs by 0.3 °C in air and 0.2 °C in dewpoint over the lunar day (bootstrap
+ranges −0.1 to 0.7 and −0.5 to 0.9 °C), and at 62.8° N, 180° E by 0.7 and
+1.7 °C (0.3 to 1.1 and 1.2 to 2.2 °C); there `ring_70_135e` has the only
+comfortable hours at any crossing, 10 strict and 120 loose. Neither rains at
+either. At the four equatorial crossings the steep rings run within 0.7 °C of
+the equatorial ring in air and 0.5–1.0 °C drier in dewpoint, and they rain
+2–30 times less, 5–84 mm per lunar day against 10–290 mm. As with the A pair, a
+ring's temperature and humidity at a place hold whichever way its slice faces,
+and its rain does not. Along its path the equatorial ring rains 3.9 mm a day
+over land against 5.6 at the GCM's nearest land cells, and 3.4 against 3.1 over
+the seas; the steep rings rain 0.1–0.2 mm a day over land against the GCM's
+1.3–1.9, and 0.03–0.1 over the seas against 1.2–1.7.
+
+Against the corrected GCM the gap lies over land. Where a ring and the GCM both
+have sea at sea level, the ring's air is 1.8–2.4 °C warmer and its dewpoint at
+the height of the GCM's lowest layer 0.8–2.5 °C higher. Where the GCM cell
+nearest a land column is land below 1 km (580–730 m on average), the ring's air
+is 2.4–4.7 °C warmer and that dewpoint 1.6–5.1 °C higher, and at 2 m the ring's
+dewpoint stands a further 1.4–3.5 °C above it. The GCM counts 116–458
+comfortable hours per lunar day at those cells, and the rings none.
+
+Part of that gap poleward of 30° is the rings' own ground. Each land column
+takes the land-use class nearest the GCM's wetness beneath it
+(`WETNESS_CLASSES` in [cm1_run.py](cm1_run.py)), and the driest class has a
+moisture availability of 0.05. The corrected GCM's ground poleward of 45° is
+drier than that almost everywhere (median wetness 0.005–0.013, with 94–100% of
+the columns below 0.05, and 36–39% at 30–45°). There the rings' land evaporates
+0.3–0.5 mm a day against the GCM's 0.1–0.2; equatorward of 45° the two
+evaporate within 15% of each other. The floor does not explain the rest: the
+equatorial ring's land is as wet as the GCM's, evaporates less (2.9 against
+3.7 mm a day), and is still 2.4 °C warmer and 3.0 °C more humid than the GCM's
+low cells.
+
+Corrected for height, comfort appears on high ground poleward of 30°. Over
+model days 1–11 the terrain twin's land ran 1.0 °C cooler per kilometre of
+height by day and by night, with dewpoints 1.0 °C lower per kilometre by day and
+1.2 °C at night (fits through zero over its height classes above 0.5 km;
+6.8–7.5 °C cooler and 6.1–7.9 °C drier at 7 km), and its land below 0.5 km ran
+0.8–0.9 °C drier than the flat ring's. The GCM's own land cells change more
+slowly with height: 0.7, 0.5 and 0.1 °C cooler per kilometre at 0–30°, 30–60°
+and 60–90°, with lowest-layer dewpoints 0.4, 0.2 and 0.6 °C lower. So the check
+does not bear out the twin's rate, and the GCM's comfort comes from air that is
+cooler and drier at every height. The rings' land has a median height of
+1.8–2.4 km, 42–55% of it above 2 km. With the twin's differences added at each
+column's height, the comfortable hours per lunar day (strict), with the GCM's
+at the nearest land cell in brackets, are:
+
+| Latitude | Below 0.5 km | 0.5–2 km | 2–4 km | Above 4 km |
+|---|---|---|---|---|
+| 0–30° | 0 (99) | 0 (160) | 3 (233) | 16 (229) |
+| 30–60° | 33 (510) | 38 (501) | 100 (516) | 141 (550) |
+| 60–70° | 9 (626) | 50 (613) | 99 (638) | 249 (611) |
+
+Over the rings' 3,450 land columns that is 42 hours per lunar day (103 on the
+loose band's terms) against the GCM's 387 (490): 18% of the land has at least
+100 hours against the GCM's 92%, and 5% at least 200 against 70%. The tropics
+stay too humid at every height, with corrected dewpoints of 16–22 °C.
+
+So CM1 and the GCM disagree about what comfort turns on, how warm and humid the
+air over land is near the ground. The decisions register accepts the corrected
+climate's drier land for the comfort the GCM counts; the rings find comfort
+only on high ground poleward of 30°, at about a tenth of the GCM's hours. Open
+for the author: a rerun with the rings' ground as dry as the GCM's poleward of
+30° (land-use classes down to about 0.003), which shows how much of the gap
+there is the rings' own ground; the 3-D box over high ground, which the plan
+leaves to these results and which would take the same ground; the test of CM1's
+rain at lunar gravity (a small box with Earth's fall speeds); and an
+independent model for the rest of the gap (ROCKE-3D is open). Every further run
+waits for the faster build.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.ring_analysis ring_70_45e --from-day 29.5    # likewise ring_equator and ring_70_135e
+climate/gcm/.venv/bin/python -m climate.crm.ring_crossings ring_70_45e ring_70_135e --from-day 29.5    # and each steep ring with ring_equator
+climate/gcm/.venv/bin/python -m climate.crm.ring_comfort ring_equator ring_70_45e ring_70_135e
+```
+
 ## A three-dimensional box at a crossing
 
 Case `box_0e` tests what the rings' two dimensions do to the air near the
