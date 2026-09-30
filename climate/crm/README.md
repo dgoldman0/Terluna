@@ -35,6 +35,27 @@ its source for every build and compiles it outside the repository
   of temperature, vapour and wind can be confined above a height, so the model's
   own boundary layer and convection stay free.
 
+**A faster build comes before any further run** (the author's decision of
+2026-09-29, in the [decisions register](../../research/decisions.md)). The builds
+use CM1's own gfortran settings, `-O2` with no processor target, so the laptop's
+wider vector instructions and fused multiply-add go unused. Two rebuilds are to
+be tested against the current `moon_omp`: `-O3 -march=native`, and a milder
+variant without fused multiply-adds or glibc's vector versions of exp and log
+(which gfortran calls in the loops it vectorizes), which may reproduce the
+current build bit for bit. Each needs a build label of its own: `build moon_omp`
+replaces the executable every case's `cm1.exe` links to, and running cases would
+pick it up at their next model day. One model day from a copy of a ring's
+restart file, run with the current build and each rebuild side by side, gives
+their relative speed (untested; 10–30% is a guess) and whether the restart files
+match byte for byte. A rebuild whose files differ is used only if it differs from
+the current build no more than the current build differs from itself after a
+one-bit nudge: the analyses compare lunar-day statistics, and a last-bit change
+moves individual storms within days, as the runs' random starting perturbations
+do. The settings that pass then go into every CM1 build, and the runner records
+which executable ran each segment, since a case can change builds between
+segments by relinking its `cm1.exe` and resuming from its restart files. The flat
+rings running on 2026-09-29 finish on the current build.
+
 ## The equatorial ring
 
 Case `ring` is the equator as a two-dimensional ring 10,916 km round, in 1,816

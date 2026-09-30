@@ -87,6 +87,7 @@ The author confirmed these rules on 2026-09-26 and regards them as set, to be re
 | Decision | Source | Status |
 |---|---|---|
 | Simulation work fits the author's laptop (8 cores and 31 GB shared with the author's own work, runs of hours with rests between); there is no budget for rented compute. | Author, 2026-09-29 | Stands |
+| Before any further CM1 run, CM1 is rebuilt for speed and tested: gfortran at `-O3` for this laptop's processor (`-march=native`), and a milder variant without fused multiply-adds or glibc's vector maths that may reproduce the current build bit for bit. A rebuild is used for every later run if it runs faster and matches the current build, byte for byte or within the current build's own spread after a one-bit nudge. The flat rings running on 2026-09-29 (`ring_70_45e`, `ring_equator`, `ring_70_135e`) finish on the current build. | Author, 2026-09-29; [climate/crm](../climate/crm/README.md) | Stands; the test is due on the morning of 2026-09-30. |
 
 ## Life and people
 
