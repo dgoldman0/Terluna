@@ -699,6 +699,7 @@ against the papers:
 | Sun test (`A28_dim5_sun_test`) | Done (2 years from `A28_dim5`'s year 24): the corrected Sun and tilt with the old sunlight split |
 | Corrected design case (`A28_dim5_moon`) | Done (30 years from `A28_dim5`'s year 24, above): the 5% dimmer shield with the Sun, tilt and sunlight split corrected, 294.9 K |
 | Thin convective cloud (`A28_dim5_moon_thin_convective`) | Done (15 years from `A28_dim5_moon`'s year 29, 2026-10-01): `convective_day_s` 2,400 s, the convective cloud near its floor; 296.6 K over years 5–14, settling near 297.1 K, warmer alike from the ground to 18 km. A test of whether the GCM's daytime cloud separates it from CM1 ([../crm](../crm/README.md), "The GCM's daytime cloud") |
+| More low cloud (`A28_dim5_moon_low_cloud`) | Done (15 years from `A28_dim5_moon`'s year 29, 2026-10-01): `surface_cloud_rcrit` 0.6, the lowest layer's cloud threshold lowered from 0.983; cloud cover 43%, 289.9 K over years 5–14, settling near 289.0 K, cooler about alike from the ground to 18 km. A test of whether CM1's foggy nights explain the gap ([../crm](../crm/README.md), "The GCM's low cloud at night") |
 | C, 1.0 atm | Not run: no current decision needs it. The 1-D balance puts 1.0 atm 0.2–1.3 K cooler than 1.2 atm, depending on the clouds, and 1.2 atm is the design pressure. The runner keeps it defined |
 | D, E | Need ExoPlaSim's ozone profile from the 1-D results, and a way to add the trace gases' forcing |
 

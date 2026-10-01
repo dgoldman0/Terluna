@@ -54,6 +54,7 @@ class RunnerTests(unittest.TestCase):
     def test_default_settings_are_the_corrected_physics(self):
         self.assertEqual(er.MODEL['cloud_water'], 'earth_path')
         self.assertEqual(er.MODEL['convective_day_s'], 86400.0)
+        self.assertEqual(er.MODEL['surface_cloud_rcrit'], 0.0)       # PlaSim's own threshold near the ground
         self.assertEqual(er.MODEL['sunlight_scale'], 1.0)                 # the shield product as it is
         self.assertEqual(er.MODEL['sun_clock'], 'synodic')               # an even Sun, one turn per 29.53 days
         self.assertEqual((er.MODEL['fixed_orbit'], er.MODEL['whole_lunar_days']), (1, 1))

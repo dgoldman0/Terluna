@@ -834,6 +834,44 @@ climate/gcm/.venv/bin/python -m climate.gcm.compare --levels A28_dim5_moon:20-29
 climate/gcm/.venv/bin/python -m climate.crm.ring_comfort ring_equator ring_70_45e ring_70_135e --gcm A28_dim5_moon_thin_convective:5-14
 ```
 
+**The GCM's low cloud at night** (the author's go-ahead of 2026-10-01: GCM run
+`A28_dim5_moon_low_cloud`,
+[comfort_flat_rings_A28_dim5_moon_low_cloud.json](../results/crm/comfort_flat_rings_A28_dim5_moon_low_cloud.json)).
+CM1's nights at 0° E are fogged 85% of the time, against the GCM's 22% cloud,
+and fog would keep the lowest air warm at night. The GCM makes cloud in its
+lowest layer (the ground to about 1.8 km) only above 98.3% relative humidity.
+The test lowered that threshold to 0.6 (the runner's `surface_cloud_rcrit`),
+everything else as the design case, for 15 years from its last year. Cloud in
+the lowest layer over tropical land rose from 4% to 32%: 36% in dark 3-day
+means and 26% in sunlit ones, since the GCM's air there is barely more humid at
+night than by day. The Moon cooled 5.0 K (294.9 to 289.9 K, settling near
+289.0 K): cloud cover 23.5% to 43.2% and planetary albedo 0.280 to 0.309, the
+clouds' effect on sunlight going from −8.5 to −16.0 W/m² and on the infrared
+from +6.9 to +7.4 W/m², and the water vapour from 176 to 124 kg/m². Over the
+tropical land the lowest layer cooled 4.9 °C in dark spells against 4.4 °C at
+10 km, and 4.4 °C in sunlit spells against 4.45 °C. So more low cloud left the
+GCM's lowest air at night slightly cooler against the air above, which runs
+the wrong way to explain CM1's warm, muggy lowlands.
+
+Both cloud tests leave the warmth of the lowest air against the air above within
+half a degree of the design case's. In the GCM, cloud sets how warm the whole
+Moon is; the gap with CM1 lies in how each model treats the lowest few
+kilometres themselves: the surface's fluxes, the boundary layer's mixing and the
+convection, which the GCM resolves with two layers, and the forcing CM1 takes
+from the GCM (its air held from 8 km up, the vertical wind it is given). The
+tests also show how much the GCM's climate rests on its cloud, fitted to Earth.
+Settings that move its cloud cover between 20% and 43% move the Moon between
+about 297 and 289 K. Its comfortable hours on the rings' land, 387 per lunar
+day as designed, fall to 290 with the warmer Moon and to 121 with the cooler
+one, whose air is too cool.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.gcm.exoplasim_run A28 --set sunlight_scale=0.95 --set surface_cloud_rcrit=0.6 \
+    --start-from climate/gcm/runs/A28_dim5_moon/model/MOST_REST.00029 --folder A28_dim5_moon_low_cloud --years 15
+climate/gcm/.venv/bin/python -m climate.gcm.compare --levels A28_dim5_moon:20-29 A28_dim5_moon_low_cloud:5-14
+climate/gcm/.venv/bin/python -m climate.crm.ring_comfort ring_equator ring_70_45e ring_70_135e --gcm A28_dim5_moon_low_cloud:5-14
+```
+
 ## The gravity pair
 
 If lunar convection were Earth's stretched six times in size and duration, a

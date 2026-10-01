@@ -13,9 +13,9 @@ out for runs without them.
 
     python -m climate.gcm.compare --levels A28_dim5_moon:20-29 A28_dim5_moon_thin_convective:5-14
 
---levels gives each run's air temperature at each of its levels, area-weighted over the globe and over the land
-within 30 degrees of the equator, with each run's change from the first: whether a change reaches the ground alone
-or the whole column.
+--levels gives each run's air temperature and cloud cover at each of its levels, area-weighted over the globe and
+over the land within 30 degrees of the equator, that land also in its sunlit and dark 3-day means, with each run's
+change from the first: whether a change reaches the ground alone or the whole column, by day or by night.
 
 --settle estimates where a branch that has not finished warming or cooling would settle. It fits a
 line to each year's top-of-atmosphere imbalance against its global surface temperature (a Gregory
@@ -126,14 +126,22 @@ def load(folder, first, last):
     return years, lat
 
 
-def level_means(ta, land, lat, within_deg=30.0):
-    """Area-weighted means of air temperature (time, level, lat, lon) at each level: over the globe, and over the land
-    within within_deg of the equator."""
-    w = area_weights(lat, ta.shape[-1])
+def level_means(field, land, lat, sun, within_deg=30.0):
+    """Area-weighted means of a field (time, level, lat, lon) at each level: over the globe, over the land within
+    within_deg of the equator, and over that land in its sunlit (Sun's cosine above 0.3) and dark (below 0.01) 3-day
+    means. sun is the Sun's zenith-angle cosine (time, lat, lon)."""
+    w = area_weights(lat, field.shape[-1])
     tropic = land & (np.abs(lat)[:, None] < within_deg)
-    mean = ta.mean(axis=0)
-    return dict(globe=[float((m * w).sum()) for m in mean],
-                tropical_land=[float((m[tropic] * w[tropic]).sum() / w[tropic].sum()) for m in mean])
+    out = dict(globe=[float((m * w).sum()) for m in field.mean(axis=0)],
+               tropical_land=[float((m[tropic] * w[tropic]).sum() / w[tropic].sum()) for m in field.mean(axis=0)])
+    weights = np.broadcast_to(w * tropic, sun.shape)
+    for name, times in (('sunlit', sun > 0.3), ('dark', sun < 0.01)):
+        ww = weights * times
+        out[f'tropical_land_{name}'] = [float((field[:, k] * ww).sum() / ww.sum()) for k in range(field.shape[1])]
+    return out
+
+
+LEVEL_PARTS = ('globe', 'tropical_land', 'tropical_land_sunlit', 'tropical_land_dark')
 
 
 def levels(items) -> int:
@@ -143,22 +151,26 @@ def levels(items) -> int:
     for item in items:
         folder, span = item.split(':')
         first, last = (int(v) for v in span.split('-'))
-        ta = []
+        got = {k: [] for k in ('ta', 'cl', 'czen')}
         for year in range(first, last + 1):
             with netCDF4.Dataset(RUNS / folder / 'model' / f'MOST.{year:05d}.nc') as d:
-                ta.append(np.asarray(d['ta'][:], dtype=float))
+                for k in got:
+                    got[k].append(np.asarray(d[k][:], dtype=float))
                 lat, sigma = np.asarray(d['lat'][:], dtype=float), np.asarray(d['lev'][:], dtype=float)
                 land = np.asarray(d['lsm'][:], dtype=float)[0] > 0.5
-        rows[f'{folder}, years {first}–{last}'] = level_means(np.concatenate(ta), land, lat)
+        sun = np.concatenate(got['czen'])
+        rows[f'{folder}, years {first}–{last}'] = {k: level_means(np.concatenate(got[k]), land, lat, sun) for k in ('ta', 'cl')}
     names = list(rows)
-    print('| Sigma | ' + ' | '.join(f'{n}: globe, tropical land (K)' for n in names)
-          + ''.join(f' | change, {n}' for n in names[1:]) + ' |')
-    print('|---|' + '---|' * (2 * len(names) - 1))
-    for k in range(len(sigma) - 1, -1, -1):                              # from the ground up
-        cells = [f"{rows[n]['globe'][k]:.2f}, {rows[n]['tropical_land'][k]:.2f}" for n in names]
-        cells += [f"{rows[n]['globe'][k] - rows[names[0]]['globe'][k]:+.2f}, "
-                  f"{rows[n]['tropical_land'][k] - rows[names[0]]['tropical_land'][k]:+.2f}" for n in names[1:]]
-        print(f'| {sigma[k]:.3f} | ' + ' | '.join(cells) + ' |')
+    for field, label, digits in (('ta', 'Air temperature (K)', 2), ('cl', 'Cloud cover', 3)):
+        print(f'{label}: globe, tropical land, its sunlit and its dark 3-day means')
+        print('| Sigma | ' + ' | '.join(names) + ''.join(f' | change, {n}' for n in names[1:]) + ' |')
+        print('|---|' + '---|' * (2 * len(names) - 1))
+        for k in range(len(sigma) - 1, -1, -1):                          # from the ground up
+            cells = [', '.join(f'{rows[n][field][part][k]:.{digits}f}' for part in LEVEL_PARTS) for n in names]
+            cells += [', '.join(f'{rows[n][field][part][k] - rows[names[0]][field][part][k]:+.{digits}f}' for part in LEVEL_PARTS)
+                      for n in names[1:]]
+            print(f'| {sigma[k]:.3f} | ' + ' | '.join(cells) + ' |')
+        print()
     return 0
 
 

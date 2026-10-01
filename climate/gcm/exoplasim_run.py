@@ -107,6 +107,11 @@ MODEL = dict(resolution='T21', layers=10, timestep_min=30.0, land_albedo=0.2, st
              # 0.42, up to the cap. 86400 counts it per Earth day, as fitted; 0 keeps PlaSim's behaviour (runs
              # A and B and the cloud-water bracket).
              convective_day_s=86400.0,
+             # PlaSim's critical relative humidity for cloud in its lowest layer (sigma 0.983, the ground to about
+             # 1.8 km), above which cover grows as ((rh - rcrit)/(1 - rcrit))^2. 0 keeps PlaSim's own,
+             # max(0.85, sigma) = 0.983; a lower one gives low cloud and fog more often (the night fog test of
+             # 2026-10-01, against CM1's foggy nights).
+             surface_cloud_rcrit=0.0,
              # PlaSim's clear-sky diagnostic (1 on, 0 off): the radiation computed a second time without
              # clouds, for the clouds' radiative effect. It changes no prognostic field.
              clear_sky=1,
@@ -300,6 +305,8 @@ def configuration(name, ncpus, overrides=None):
     cloud_water_namelist(model['cloud_water'], planet['gravity_m_s2'])        # refuses an unknown choice
     if model['convective_day_s'] < 0:
         raise ValueError('convective_day_s must be 0 (the solar day) or a positive number of seconds')
+    if not 0.0 <= model['surface_cloud_rcrit'] < 1.0:
+        raise ValueError('surface_cloud_rcrit must be 0 (PlaSim\'s own) or lie below 1')
     if not 0.0 < model['sunlight_scale'] <= 1.5:
         raise ValueError('sunlight_scale must lie between 0 and 1.5')
     if model['sun_clock'] not in SUN_CLOCKS:
@@ -452,6 +459,8 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
     model._edit_namelist('rainmod_namelist', 'CWSCALE', str(scale))
     model._edit_namelist('plasim_namelist', 'NDIAGCF', str(m['clear_sky']))
     model._edit_namelist('rainmod_namelist', 'CONVDAY', str(float(m['convective_day_s'])))
+    if m['surface_cloud_rcrit'] > 0.0:                                 # the lowest layer is the last of RCRIT
+        model._edit_namelist('rainmod_namelist', f"RCRIT({m['layers']})", str(float(m['surface_cloud_rcrit'])))
     from exoplasim import pyburn
     for code, (name, long_name) in CLEAR_SKY.items():
         pyburn.ilibrary[str(code)] = [name, long_name, 'W m-2']
