@@ -6,13 +6,13 @@
   "ring_70_135e"
  ],
  "gcm": {
-  "run": "A28_dim5_moon",
+  "run": "A28_dim5_moon_thin_convective",
   "years": [
-   20,
-   29
+   5,
+   14
   ]
  },
- "evidence": "CM1 r22.0 rings along great circles at lunar gravity, their land laid flat at sea level (each ring's own summary says what a ring is), read over their second lunar day after a lunar day of spin-up. The height correction comes from one ring's path over its first eleven days, in a two-dimensional run whose air, forced over its mountains, later broke into gales along the whole ring; it assumes high ground everywhere cools and dries with height as that path's did then, and it carries none of the highlands' own weather (slope winds, rain on the slopes facing the wind, cold air pooling in valleys). The GCM run (A28_dim5_moon, years 20-29, 3-day means, cells about 170 km wide) is the other view.",
+ "evidence": "CM1 r22.0 rings along great circles at lunar gravity, their land laid flat at sea level (each ring's own summary says what a ring is), read over their second lunar day after a lunar day of spin-up. The height correction comes from one ring's path over its first eleven days, in a two-dimensional run whose air, forced over its mountains, later broke into gales along the whole ring; it assumes high ground everywhere cools and dries with height as that path's did then, and it carries none of the highlands' own weather (slope winds, rain on the slopes facing the wind, cold air pooling in valleys). The GCM run (A28_dim5_moon_thin_convective, years 5-14, 3-day means, cells about 170 km wide) is the other view.",
  "reading_rule": "Hours per lunar day are the share of the 3-hourly snapshots of the second lunar day (model days 29.53 to 59.0) in which a column's air at 2 m and dewpoint fall in the band, times the lunar day, averaged over the columns: strict means 18-26 C with a dewpoint of at most 15 C, loose 17-27 C and 16 C. Corrected values add the twin's difference at the column's height, the day's or the night's as the Sun is up or down at the column; flat values are the ring as run. The GCM's hours come from its 3-day means at the nearest land cell, its air carried to the ground along a dry adiabat and its dewpoint that of its lowest layer, about 0.86 km up; the cell stands at its own height, given beside. Settling is the mean over the last third of the second lunar day minus that over the same third of the first, the same local times at every column. Evaporation is over the second lunar day; the GCM's is its mean over its years at the nearest land cell, whose wetness the ring took.",
  "span_days": {
   "ring_equator": [
@@ -131,10 +131,10 @@
     0.058,
     8.4
    ],
-   "air_per_km_c": -0.744,
-   "air_at_sea_level_c": 23.148,
-   "dewpoint_per_km_c": -0.427,
-   "dewpoint_at_sea_level_c": 17.209
+   "air_per_km_c": -0.781,
+   "air_at_sea_level_c": 24.738,
+   "dewpoint_per_km_c": -0.411,
+   "dewpoint_at_sea_level_c": 18.618
   },
   {
    "from_deg": 30,
@@ -144,10 +144,10 @@
     0.163,
     5.29
    ],
-   "air_per_km_c": -0.474,
-   "air_at_sea_level_c": 22.197,
-   "dewpoint_per_km_c": -0.174,
-   "dewpoint_at_sea_level_c": 13.214
+   "air_per_km_c": -0.517,
+   "air_at_sea_level_c": 23.865,
+   "dewpoint_per_km_c": -0.18,
+   "dewpoint_at_sea_level_c": 14.771
   },
   {
    "from_deg": 60,
@@ -157,10 +157,10 @@
     0.268,
     5.303
    ],
-   "air_per_km_c": -0.072,
-   "air_at_sea_level_c": 19.715,
-   "dewpoint_per_km_c": -0.624,
-   "dewpoint_at_sea_level_c": 12.51
+   "air_per_km_c": -0.091,
+   "air_at_sea_level_c": 21.384,
+   "dewpoint_per_km_c": -0.646,
+   "dewpoint_at_sea_level_c": 14.065
   }
  ],
  "settling": {
@@ -208,10 +208,10 @@
      "strict_hours": 0.0
     },
     "gcm": {
-     "air_c": 23.707,
-     "dewpoint_gcm_layer_c": 18.523,
-     "rain_mm_day": 3.075,
-     "strict_hours": 35.764
+     "air_c": 25.311,
+     "dewpoint_gcm_layer_c": 19.83,
+     "rain_mm_day": 3.148,
+     "strict_hours": 11.252
     }
    },
    "low_land": {
@@ -225,15 +225,15 @@
      "strict_hours": 0.0
     },
     "gcm": {
-     "air_c": 22.574,
-     "dewpoint_gcm_layer_c": 17.889,
-     "rain_mm_day": 4.711,
-     "strict_hours": 115.934
+     "air_c": 24.207,
+     "dewpoint_gcm_layer_c": 19.186,
+     "rain_mm_day": 4.961,
+     "strict_hours": 60.146
     }
    },
    "all_land_rain_mm_day": {
     "cm1": 3.939,
-    "gcm_nearest_land_cell": 5.598
+    "gcm_nearest_land_cell": 6.15
    }
   },
   "ring_70_45e": {
@@ -248,10 +248,10 @@
      "strict_hours": 0.0
     },
     "gcm": {
-     "air_c": 22.205,
-     "dewpoint_gcm_layer_c": 15.916,
-     "rain_mm_day": 1.228,
-     "strict_hours": 266.82
+     "air_c": 23.797,
+     "dewpoint_gcm_layer_c": 17.442,
+     "rain_mm_day": 1.246,
+     "strict_hours": 150.606
     }
    },
    "low_land": {
@@ -265,15 +265,15 @@
      "strict_hours": 0.0
     },
     "gcm": {
-     "air_c": 21.368,
-     "dewpoint_gcm_layer_c": 12.035,
-     "rain_mm_day": 0.162,
-     "strict_hours": 457.852
+     "air_c": 23.154,
+     "dewpoint_gcm_layer_c": 13.645,
+     "rain_mm_day": 0.148,
+     "strict_hours": 359.279
     }
    },
    "all_land_rain_mm_day": {
     "cm1": 0.126,
-    "gcm_nearest_land_cell": 1.883
+    "gcm_nearest_land_cell": 2.02
    }
   },
   "ring_70_135e": {
@@ -288,10 +288,10 @@
      "strict_hours": 0.0
     },
     "gcm": {
-     "air_c": 22.265,
-     "dewpoint_gcm_layer_c": 17.03,
-     "rain_mm_day": 1.663,
-     "strict_hours": 159.502
+     "air_c": 23.854,
+     "dewpoint_gcm_layer_c": 18.409,
+     "rain_mm_day": 1.646,
+     "strict_hours": 84.564
     }
    },
    "low_land": {
@@ -305,15 +305,15 @@
      "strict_hours": 0.0
     },
     "gcm": {
-     "air_c": 22.075,
-     "dewpoint_gcm_layer_c": 14.671,
-     "rain_mm_day": 1.361,
-     "strict_hours": 338.254
+     "air_c": 23.693,
+     "dewpoint_gcm_layer_c": 16.136,
+     "rain_mm_day": 1.462,
+     "strict_hours": 228.331
     }
    },
    "all_land_rain_mm_day": {
     "cm1": 0.219,
-    "gcm_nearest_land_cell": 1.258
+    "gcm_nearest_land_cell": 1.414
    }
   }
  },
@@ -346,14 +346,14 @@
     },
     "evaporation_mm_day": {
      "cm1": 2.921,
-     "gcm": 3.676
+     "gcm": 4.081
     },
     "gcm_wetness_median": 1.0,
     "share_given_the_driest_class": 0.0,
     "gcm": {
      "comfortable_hours": {
-      "strict": 168.453,
-      "loose": 278.43
+      "strict": 98.152,
+      "loose": 162.51
      },
      "cell_height_km": 2.563
     }
@@ -387,14 +387,14 @@
     },
     "evaporation_mm_day": {
      "cm1": 3.723,
-     "gcm": 3.349
+     "gcm": 3.787
     },
     "gcm_wetness_median": 1.0,
     "share_given_the_driest_class": 0.0,
     "gcm": {
      "comfortable_hours": {
-      "strict": 147.295,
-      "loose": 360.413
+      "strict": 100.86,
+      "loose": 209.909
      },
      "cell_height_km": 4.461
     }
@@ -426,14 +426,14 @@
     },
     "evaporation_mm_day": {
      "cm1": 2.392,
-     "gcm": 2.355
+     "gcm": 2.496
     },
     "gcm_wetness_median": 0.451,
     "share_given_the_driest_class": 0.144,
     "gcm": {
      "comfortable_hours": {
-      "strict": 361.871,
-      "loose": 505.347
+      "strict": 240.077,
+      "loose": 344.339
      },
      "cell_height_km": 3.568
     }
@@ -465,14 +465,14 @@
     },
     "evaporation_mm_day": {
      "cm1": 1.04,
-     "gcm": 1.009
+     "gcm": 1.063
     },
     "gcm_wetness_median": 0.068,
     "share_given_the_driest_class": 0.39,
     "gcm": {
      "comfortable_hours": {
-      "strict": 474.887,
-      "loose": 592.231
+      "strict": 318.794,
+      "loose": 433.69
      },
      "cell_height_km": 2.629
     }
@@ -504,14 +504,14 @@
     },
     "evaporation_mm_day": {
      "cm1": 0.513,
-     "gcm": 0.2
+     "gcm": 0.199
     },
     "gcm_wetness_median": 0.013,
     "share_given_the_driest_class": 0.997,
     "gcm": {
      "comfortable_hours": {
-      "strict": 541.248,
-      "loose": 649.855
+      "strict": 443.962,
+      "loose": 544.287
      },
      "cell_height_km": 2.513
     }
@@ -543,14 +543,14 @@
     },
     "evaporation_mm_day": {
      "cm1": 0.292,
-     "gcm": 0.081
+     "gcm": 0.068
     },
     "gcm_wetness_median": 0.008,
     "share_given_the_driest_class": 1.0,
     "gcm": {
      "comfortable_hours": {
-      "strict": 600.038,
-      "loose": 681.957
+      "strict": 551.242,
+      "loose": 632.103
      },
      "cell_height_km": 1.935
     }
@@ -584,14 +584,14 @@
     },
     "evaporation_mm_day": {
      "cm1": 3.116,
-     "gcm": 3.527
+     "gcm": 3.703
     },
     "gcm_wetness_median": 0.517,
     "share_given_the_driest_class": 0.0,
     "gcm": {
      "comfortable_hours": {
-      "strict": 149.771,
-      "loose": 235.78
+      "strict": 78.922,
+      "loose": 126.961
      },
      "cell_height_km": 2.305
     }
@@ -623,14 +623,14 @@
     },
     "evaporation_mm_day": {
      "cm1": 2.433,
-     "gcm": 2.807
+     "gcm": 3.275
     },
     "gcm_wetness_median": 0.514,
     "share_given_the_driest_class": 0.106,
     "gcm": {
      "comfortable_hours": {
-      "strict": 227.381,
-      "loose": 340.01
+      "strict": 121.267,
+      "loose": 189.639
      },
      "cell_height_km": 2.67
     }
@@ -662,14 +662,14 @@
     },
     "evaporation_mm_day": {
      "cm1": 1.158,
-     "gcm": 1.076
+     "gcm": 1.317
     },
     "gcm_wetness_median": 0.089,
     "share_given_the_driest_class": 0.361,
     "gcm": {
      "comfortable_hours": {
-      "strict": 441.243,
-      "loose": 548.311
+      "strict": 263.459,
+      "loose": 380.67
      },
      "cell_height_km": 2.185
     }
@@ -701,14 +701,14 @@
     },
     "evaporation_mm_day": {
      "cm1": 0.475,
-     "gcm": 0.189
+     "gcm": 0.199
     },
     "gcm_wetness_median": 0.005,
     "share_given_the_driest_class": 0.944,
     "gcm": {
      "comfortable_hours": {
-      "strict": 595.802,
-      "loose": 677.456
+      "strict": 407.173,
+      "loose": 535.678
      },
      "cell_height_km": 1.862
     }
@@ -740,14 +740,14 @@
     },
     "evaporation_mm_day": {
      "cm1": 0.297,
-     "gcm": 0.055
+     "gcm": 0.047
     },
     "gcm_wetness_median": 0.005,
     "share_given_the_driest_class": 1.0,
     "gcm": {
      "comfortable_hours": {
-      "strict": 642.667,
-      "loose": 696.98
+      "strict": 568.884,
+      "loose": 643.273
      },
      "cell_height_km": 2.103
     }
@@ -771,12 +771,12 @@
    "dewpoint_c": 21.552,
    "gcm": {
     "comfortable_hours": {
-     "strict": 99.048,
-     "loose": 164.857
+     "strict": 48.935,
+     "loose": 80.602
     },
     "cell_height_km": 0.5,
-    "air_c": 22.901,
-    "dewpoint_c": 17.771
+    "air_c": 24.553,
+    "dewpoint_c": 19.091
    }
   },
   {
@@ -795,12 +795,12 @@
    "dewpoint_c": 20.57,
    "gcm": {
     "comfortable_hours": {
-     "strict": 159.921,
-     "loose": 240.781
+     "strict": 79.994,
+     "loose": 130.142
     },
     "cell_height_km": 1.438,
-    "air_c": 22.271,
-    "dewpoint_c": 17.172
+    "air_c": 23.821,
+    "dewpoint_c": 18.529
    }
   },
   {
@@ -819,12 +819,12 @@
    "dewpoint_c": 19.17,
    "gcm": {
     "comfortable_hours": {
-     "strict": 233.49,
-     "loose": 328.469
+     "strict": 130.57,
+     "loose": 198.19
     },
     "cell_height_km": 2.566,
-    "air_c": 21.381,
-    "dewpoint_c": 16.227
+    "air_c": 22.844,
+    "dewpoint_c": 17.713
    }
   },
   {
@@ -843,12 +843,12 @@
    "dewpoint_c": 16.323,
    "gcm": {
     "comfortable_hours": {
-     "strict": 228.891,
-     "loose": 424.972
+     "strict": 158.499,
+     "loose": 268.804
     },
     "cell_height_km": 5.36,
-    "air_c": 19.385,
-    "dewpoint_c": 15.329
+    "air_c": 20.846,
+    "dewpoint_c": 16.773
    }
   },
   {
@@ -867,12 +867,12 @@
    "dewpoint_c": 18.64,
    "gcm": {
     "comfortable_hours": {
-     "strict": 510.26,
-     "loose": 613.094
+     "strict": 331.624,
+     "loose": 450.898
     },
     "cell_height_km": 1.584,
-    "air_c": 21.526,
-    "dewpoint_c": 12.892
+    "air_c": 23.082,
+    "dewpoint_c": 14.504
    }
   },
   {
@@ -891,12 +891,12 @@
    "dewpoint_c": 18.003,
    "gcm": {
     "comfortable_hours": {
-     "strict": 501.294,
-     "loose": 609.918
+     "strict": 328.332,
+     "loose": 450.145
     },
     "cell_height_km": 1.574,
-    "air_c": 21.429,
-    "dewpoint_c": 12.701
+    "air_c": 23.031,
+    "dewpoint_c": 14.298
    }
   },
   {
@@ -915,12 +915,12 @@
    "dewpoint_c": 15.986,
    "gcm": {
     "comfortable_hours": {
-     "strict": 516.087,
-     "loose": 615.763
+     "strict": 388.444,
+     "loose": 494.138
     },
     "cell_height_km": 2.915,
-    "air_c": 20.769,
-    "dewpoint_c": 12.687
+    "air_c": 22.304,
+    "dewpoint_c": 14.25
    }
   },
   {
@@ -939,12 +939,12 @@
    "dewpoint_c": 14.292,
    "gcm": {
     "comfortable_hours": {
-     "strict": 550.445,
-     "loose": 648.584
+     "strict": 421.991,
+     "loose": 529.857
     },
     "cell_height_km": 3.598,
-    "air_c": 20.465,
-    "dewpoint_c": 12.664
+    "air_c": 21.976,
+    "dewpoint_c": 14.186
    }
   },
   {
@@ -963,12 +963,12 @@
    "dewpoint_c": 17.806,
    "gcm": {
     "comfortable_hours": {
-     "strict": 626.116,
-     "loose": 692.982
+     "strict": 534.384,
+     "loose": 632.71
     },
     "cell_height_km": 1.15,
-    "air_c": 20.176,
-    "dewpoint_c": 11.414
+    "air_c": 21.856,
+    "dewpoint_c": 12.976
    }
   },
   {
@@ -987,12 +987,12 @@
    "dewpoint_c": 16.492,
    "gcm": {
     "comfortable_hours": {
-     "strict": 613.434,
-     "loose": 686.875
+     "strict": 545.022,
+     "loose": 628.759
     },
     "cell_height_km": 1.763,
-    "air_c": 19.969,
-    "dewpoint_c": 11.52
+    "air_c": 21.625,
+    "dewpoint_c": 13.039
    }
   },
   {
@@ -1011,12 +1011,12 @@
    "dewpoint_c": 15.245,
    "gcm": {
     "comfortable_hours": {
-     "strict": 637.588,
-     "loose": 693.35
+     "strict": 581.945,
+     "loose": 648.074
     },
     "cell_height_km": 2.48,
-    "air_c": 19.954,
-    "dewpoint_c": 11.1
+    "air_c": 21.567,
+    "dewpoint_c": 12.57
    }
   },
   {
@@ -1035,12 +1035,12 @@
    "dewpoint_c": 12.177,
    "gcm": {
     "comfortable_hours": {
-     "strict": 611.301,
-     "loose": 694.506
+     "strict": 631.06,
+     "loose": 677.539
     },
     "cell_height_km": 3.396,
-    "air_c": 19.55,
-    "dewpoint_c": 10.327
+    "air_c": 21.085,
+    "dewpoint_c": 11.992
    }
   }
  ],
@@ -1048,22 +1048,22 @@
   "columns": 3450,
   "mean_hours": {
    "corrected": 42.058,
-   "gcm": 387.236,
+   "gcm": 289.912,
    "corrected_loose": 102.652,
-   "gcm_loose": 489.845
+   "gcm_loose": 375.758
   },
   "at_least": {
    "100": {
     "corrected": 0.184,
-    "gcm": 0.917
+    "gcm": 0.737
    },
    "200": {
     "corrected": 0.048,
-    "gcm": 0.697
+    "gcm": 0.567
    },
    "350": {
     "corrected": 0.001,
-    "gcm": 0.553
+    "gcm": 0.403
    }
   }
  },

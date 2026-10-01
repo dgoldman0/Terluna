@@ -54,6 +54,17 @@ class CompareTests(unittest.TestCase):
         self.assertAlmostEqual(out['cloud_effect_net_w_m2'], -10.0)
 
 
+    def test_level_means_weigh_the_globe_and_the_tropical_land(self):
+        lat = np.array([60.0, 10.0, -10.0, -60.0])
+        land = np.zeros((4, 8), bool); land[:, :4] = True
+        ta = np.ones((2, 3, 4, 8)) * np.array([250.0, 270.0, 290.0])[None, :, None, None]
+        ta[:, :, 1:3, :4] += 2.0                                       # the tropical land runs 2 K warmer at every level
+        out = compare.level_means(ta, land, lat)
+        np.testing.assert_allclose(out['tropical_land'], [252.0, 272.0, 292.0])
+        w = compare.area_weights(lat, 8)
+        np.testing.assert_allclose(out['globe'], [250.0 + 2.0 * w[1:3, :4].sum(), 270.0 + 2.0 * w[1:3, :4].sum(),
+                                                  290.0 + 2.0 * w[1:3, :4].sum()])
+
     def test_settle(self):
         # Imbalance falling 1.2 W/m2 per K from +3 W/m2 at 295 K reaches a +0.3 W/m2 baseline at 297.25 K.
         temps = np.array([295.0, 295.5, 296.0, 296.4])

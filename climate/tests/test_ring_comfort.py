@@ -61,3 +61,14 @@ def test_the_rings_land_is_pooled_by_latitude_and_height_and_counted_in_shares()
     assert shares['columns'] == 5
     assert shares['at_least']['100'] == pytest.approx(dict(corrected=0.6, gcm=0.8))
     assert shares['at_least']['350'] == pytest.approx(dict(corrected=0.0, gcm=0.8))
+
+
+def test_column_wetness_reads_the_class_each_column_was_given(tmp_path):
+    (tmp_path / 'terluna_surface.txt').write_text('3\n-1e9 2.0 2.0 16 300.0 300.0\n2.0 4.0 1.0 20 295.0 295.0\n'
+                                                  '4.0 1e9 1.0 30 295.0 295.0\n')
+    (tmp_path / 'LANDUSE.TBL').write_text("USGS\n33,2, 'ALBD   SLMO'\nSUMMER\n16,  8., 1.0, .98,'Water Bodies'\n"
+                                          "20,  20., .05, .95,'Terluna placeholder land, wetness 0.05'\n"
+                                          "30,  20., .90, .95,'Terluna placeholder land, wetness 0.90'\nWINTER\n"
+                                          "20,  20., .07, .95,'winter row'\n")
+    wet = rcf.column_wetness(tmp_path, np.array([1.0, 3.0, 5.0]))
+    assert np.isnan(wet[0]) and list(wet[1:]) == [0.05, 0.90]           # water, then the summer rows

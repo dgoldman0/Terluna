@@ -2,7 +2,8 @@
 
     climate/gcm/.venv/bin/python -m climate.crm.ring_comfort ring_equator ring_70_45e ring_70_135e
 
-writes the comparison to ../results/crm/comfort_flat_rings.json.
+writes the comparison to ../results/crm/comfort_flat_rings.json; with --gcm RUN:FIRST-LAST it compares another GCM
+run instead of the design case and writes comfort_flat_rings_<RUN>.json.
 
 The rings lay their land at sea level. The author's plan of 2026-09-29 (research/decisions.md) reads them for
 low-lying land and takes high ground from them corrected for height, with what the terrain twin showed before its
@@ -35,14 +36,14 @@ LATITUDE_BANDS = ((0, 15), (15, 30), (30, 45), (45, 60), (60, 90))
 REPORT_BANDS = ((0, 30), (30, 60), (60, 90))
 REPORT_HEIGHTS_M = ((0, 500), (500, 2000), (2000, 4000), (4000, 9000))
 SHARES_H = (100, 200, 350)                              # comfortable hours per lunar day the land shares are counted at
-EVIDENCE = ('CM1 r22.0 rings along great circles at lunar gravity, their land laid flat at sea level (each ring\'s own '
+EVIDENCE_WITH = ('CM1 r22.0 rings along great circles at lunar gravity, their land laid flat at sea level (each ring\'s own '
             'summary says what a ring is), read over their second lunar day after a lunar day of spin-up. The height '
             'correction comes from one ring\'s path over its first eleven days, in a two-dimensional run whose air, '
             'forced over its mountains, later broke into gales along the whole ring; it assumes high ground everywhere '
             'cools and dries with height as that path\'s did then, and it carries none of the highlands\' own weather '
-            '(slope winds, rain on the slopes facing the wind, cold air pooling in valleys). The GCM design case '
-            f'({rc.GCM_RUN}, years {rc.GCM_YEARS[0]}-{rc.GCM_YEARS[1]}, 3-day means, cells about 170 km wide) is the '
-            'other view.')
+            '(slope winds, rain on the slopes facing the wind, cold air pooling in valleys). The GCM run '
+            '({run}, years {first}-{last}, 3-day means, cells about 170 km wide) is the other view.')
+EVIDENCE = EVIDENCE_WITH.format(run=rc.GCM_RUN, first=rc.GCM_YEARS[0], last=rc.GCM_YEARS[1])
 READING_RULE = ('Hours per lunar day are the share of the 3-hourly snapshots of the second lunar day (model days 29.53 to '
                 '59.0) in which a column\'s air at 2 m and dewpoint fall in the band, times the lunar day, averaged over '
                 'the columns: strict means 18-26 C with a dewpoint of at most 15 C, loose 17-27 C and 16 C. Corrected '
@@ -79,6 +80,23 @@ def surface_reader(case: Path, sigma: float | None = None):
             out['layer_dew_c'] = rc.dewpoint_c(ra.vapour_pa(layer, sigma * f['psfc']))
         return out
     return read
+
+
+def column_wetness(case: Path, x) -> np.ndarray:
+    """The moisture availability each column of a case was given: the SLMO of its land-use row in the case's own
+    table (the classes in force when the case was set up), NaN on water."""
+    lu = np.zeros(len(x), int)
+    for x0, x1, land, row, *_ in np.loadtxt(case / 'terluna_surface.txt', skiprows=1, ndmin=2):
+        lu[(x >= x0) & (x < x1)] = int(row) if land == 1 else 0
+    lines = (case / 'LANDUSE.TBL').read_text().splitlines()
+    start = next(i for i, line in enumerate(lines) if line.strip() == 'SUMMER') + 1
+    slmo = {}
+    for line in lines[start:]:
+        if line.strip() == 'WINTER':
+            break
+        fields = line.split(',')
+        slmo[int(fields[0])] = float(fields[2])                         # index, ALBD, SLMO
+    return np.array([slmo.get(k, np.nan) for k in lu])
 
 
 def snapshots(case: Path, output_s: float, from_s: float, to_s: float) -> list:
@@ -213,7 +231,7 @@ def ring_columns(name: str, table: list, gcm: dict) -> dict:
     """Column by column over the second lunar day of one flat ring: latitude, ground height, land, comfortable hours
     per lunar day as run and corrected for height, what keeps the rest uncomfortable, the mean corrected air and
     dewpoint, evaporation, and the GCM's nearest land cell; with the ring's settling and its air by day and night."""
-    from climate.crm.cm1_run import path_heights, solar_day_s, WETNESS_CLASSES
+    from climate.crm.cm1_run import path_heights, solar_day_s
     case = ra.RUNS / name
     geo = ra.case_geometry(case)
     record = geo['record']
@@ -235,7 +253,7 @@ def ring_columns(name: str, table: list, gcm: dict) -> dict:
                 for surface, sel in (('land', land), ('water', ~land))}
     rows, cols = nearest_land_cells(lat, lon, gcm['lat'], gcm['lon'], gcm['land'])
     g_air, g_dew = gcm['air_c'][:, rows, cols], gcm['dew_c'][:, rows, cols]
-    driest = min(w for _, w in WETNESS_CLASSES)
+    driest = float(np.nanmin(column_wetness(case, geo['x'])[land]))       # the driest class the ring's land was given
     rows_any, cols_any = nearest_land_cells(lat, lon, gcm['lat'], gcm['lon'], np.ones_like(gcm['land']))
     cell_land, cell_height = gcm['land'][rows_any, cols_any], gcm['height_m'][rows_any, cols_any]
     against = {}
@@ -321,11 +339,12 @@ def land_shares(rings: list, thresholds=SHARES_H) -> dict:
                 at_least={str(t): dict(corrected=float(np.mean(cm1 >= t)), gcm=float(np.mean(gcm >= t))) for t in thresholds})
 
 
-def analyse(names) -> dict:
+def analyse(names, gcm_run: str = rc.GCM_RUN, gcm_years=rc.GCM_YEARS) -> dict:
     twin = twin_differences()
-    gcm = gcm_land()
+    gcm = gcm_land(gcm_run, gcm_years)
     rings = [ring_columns(name, twin['classes'], gcm) for name in names]
-    return dict(schema=SCHEMA, rings=list(names), evidence=EVIDENCE, reading_rule=READING_RULE,
+    return dict(schema=SCHEMA, rings=list(names), gcm=dict(run=gcm_run, years=list(gcm_years)),
+                evidence=EVIDENCE_WITH.format(run=gcm_run, first=gcm_years[0], last=gcm_years[1]), reading_rule=READING_RULE,
                 span_days={r['name']: r['span_days'] for r in rings}, snapshots={r['name']: r['snapshots'] for r in rings},
                 twin=twin, gcm_height_rates=height_rates(gcm),
                 settling={r['name']: r['settling'] for r in rings},
@@ -337,11 +356,17 @@ def analyse(names) -> dict:
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument('rings', nargs='+')
+    parser.add_argument('--gcm', metavar='RUN:FIRST-LAST', help='another GCM run and its years (default: the design case)')
     parser.add_argument('--output', type=Path, help='where to write the comparison (default: the results folder)')
     args = parser.parse_args(argv)
-    result = analyse(args.rings)
+    gcm_run, gcm_years = rc.GCM_RUN, rc.GCM_YEARS
+    if args.gcm:
+        gcm_run, span = args.gcm.split(':')
+        gcm_years = tuple(int(v) for v in span.split('-'))
+    result = analyse(args.rings, gcm_run, gcm_years)
     result['producer'] = dict(domain='climate', files={'crm/ring_comfort.py': hashlib.sha256(Path(__file__).read_bytes()).hexdigest()[:16]})
-    path = args.output or RESULTS / 'comfort_flat_rings.json'
+    path = args.output or RESULTS / ('comfort_flat_rings.json' if gcm_run == rc.GCM_RUN and tuple(gcm_years) == tuple(rc.GCM_YEARS)
+                                     else f'comfort_flat_rings_{gcm_run}.json')
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(rc.rounded(result), indent=1) + '\n')
     shares = result['land_shares']

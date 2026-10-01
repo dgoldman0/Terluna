@@ -11,6 +11,12 @@ cosine above 0.3 over the 3 days, dark ones below 0.01. The cloud effect needs t
 clear-sky fluxes, which are snapshots at each output time (see exoplasim_run.CLEAR_SKY), and is left
 out for runs without them.
 
+    python -m climate.gcm.compare --levels A28_dim5_moon:20-29 A28_dim5_moon_thin_convective:5-14
+
+--levels gives each run's air temperature at each of its levels, area-weighted over the globe and over the land
+within 30 degrees of the equator, with each run's change from the first: whether a change reaches the ground alone
+or the whole column.
+
 --settle estimates where a branch that has not finished warming or cooling would settle. It fits a
 line to each year's top-of-atmosphere imbalance against its global surface temperature (a Gregory
 plot) and finds where the line reaches the baseline run's settled imbalance: PlaSim does not close
@@ -120,8 +126,46 @@ def load(folder, first, last):
     return years, lat
 
 
+def level_means(ta, land, lat, within_deg=30.0):
+    """Area-weighted means of air temperature (time, level, lat, lon) at each level: over the globe, and over the land
+    within within_deg of the equator."""
+    w = area_weights(lat, ta.shape[-1])
+    tropic = land & (np.abs(lat)[:, None] < within_deg)
+    mean = ta.mean(axis=0)
+    return dict(globe=[float((m * w).sum()) for m in mean],
+                tropical_land=[float((m[tropic] * w[tropic]).sum() / w[tropic].sum()) for m in mean])
+
+
+def levels(items) -> int:
+    import netCDF4
+    from climate.gcm.exoplasim_run import RUNS
+    rows = {}
+    for item in items:
+        folder, span = item.split(':')
+        first, last = (int(v) for v in span.split('-'))
+        ta = []
+        for year in range(first, last + 1):
+            with netCDF4.Dataset(RUNS / folder / 'model' / f'MOST.{year:05d}.nc') as d:
+                ta.append(np.asarray(d['ta'][:], dtype=float))
+                lat, sigma = np.asarray(d['lat'][:], dtype=float), np.asarray(d['lev'][:], dtype=float)
+                land = np.asarray(d['lsm'][:], dtype=float)[0] > 0.5
+        rows[f'{folder}, years {first}–{last}'] = level_means(np.concatenate(ta), land, lat)
+    names = list(rows)
+    print('| Sigma | ' + ' | '.join(f'{n}: globe, tropical land (K)' for n in names)
+          + ''.join(f' | change, {n}' for n in names[1:]) + ' |')
+    print('|---|' + '---|' * (2 * len(names) - 1))
+    for k in range(len(sigma) - 1, -1, -1):                              # from the ground up
+        cells = [f"{rows[n]['globe'][k]:.2f}, {rows[n]['tropical_land'][k]:.2f}" for n in names]
+        cells += [f"{rows[n]['globe'][k] - rows[names[0]]['globe'][k]:+.2f}, "
+                  f"{rows[n]['tropical_land'][k] - rows[names[0]]['tropical_land'][k]:+.2f}" for n in names[1:]]
+        print(f'| {sigma[k]:.3f} | ' + ' | '.join(cells) + ' |')
+    return 0
+
+
 def main(argv=None) -> int:
     args = list(argv or sys.argv[1:])
+    if args and args[0] == '--levels':
+        return levels(args[1:])
     if args and args[0] == '--settle':
         years, base = _years(args[1]), _years(args[3])
         baseline = float(np.mean([y['toa_net_w_m2'] for y in base]))

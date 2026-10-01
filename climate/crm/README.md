@@ -793,6 +793,47 @@ climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_0e_small_earth_fall 
 climate/gcm/.venv/bin/python -m climate.crm.box_analysis box_0e_small_earth_fall --from-day 29.5 --reference box_0e_small
 ```
 
+**The GCM's daytime cloud** (the author's go-ahead of 2026-10-01: GCM run
+`A28_dim5_moon_thin_convective`,
+[comfort_flat_rings_A28_dim5_moon_thin_convective.json](../results/crm/comfort_flat_rings_A28_dim5_moon_thin_convective.json)).
+At 0° E by day the GCM has 42% cloud against the box's 14%, and the rain test
+showed how directly cloud sets the warmth near the ground. Nearly all of the
+GCM's daytime cloud there is convective: thunderstorm columns (5% at every
+middle level) and their anvils (13–14% at 20–60 km), with 12 mm of convective
+rain a day. Its humidity thresholds make little cloud by day, since the relative
+humidity over tropical land averages 39–74% by level against thresholds of
+85–98%. So the test thinned the convective cloud, whose cover is
+0.245 + 0.125 ln(convective rain in mm per `convective_day_s`), by counting the
+rain per 2,400 s in place of a day (cover near its floor of 0.05 even at 12 mm a
+day). It branched from the corrected design case's last year with every input and
+other setting checked identical, and ran 15 years.
+
+Over years 5–14 the daytime cloud at 0° E fell to 26% and the sunlight reaching
+the ground there by day rose from 246 to 272 W/m². The whole Moon warmed:
+cloud cover 23.5% to 20.0%, planetary albedo 0.280 to 0.268, the surface 294.9
+to 296.6 K, on its way to about 297.1 K. Near the ground the air warmed 1.5 °C
+by day and by night at 0° E and along every ring, with dewpoints about as much
+higher, which brings the GCM within 0.2–0.7 °C of CM1's air over the seas and
+0.8–2.8 °C over low land. It warmed alike from the ground up: 1.5 °C at 0.9 km,
+1.45–1.5 °C at 4 and 10 km and 1.6 °C at 18 km, over the globe and over the
+tropical land, and 2.0–2.7 °C higher up. The air near the ground stays as warm
+as before against the air above 8 km, which CM1 holds to the GCM's, and CM1
+forced from this run would warm with it. So the GCM's daytime cloud sets how
+warm the whole Moon is (its comfortable hours on the rings' land fall from 387
+to 290 per lunar day with these 1.7 K). The warmth of the lowest air against the
+air above, which is where the two models differ, stays as it was. That leaves the
+lowest few kilometres: each model's boundary layer and convection, which the GCM
+resolves with two layers (at 0.9 and 4 km), and CM1's nights, fogged 85% of the
+time at 0° E against the GCM's 22% cloud, which is untested.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.gcm.exoplasim_run A28 --set sunlight_scale=0.95 --set convective_day_s=2400 \
+    --start-from climate/gcm/runs/A28_dim5_moon/model/MOST_REST.00029 --folder A28_dim5_moon_thin_convective --years 15
+climate/gcm/.venv/bin/python -m climate.gcm.compare A28_dim5_moon:20-29 A28_dim5_moon_thin_convective:5-14
+climate/gcm/.venv/bin/python -m climate.gcm.compare --levels A28_dim5_moon:20-29 A28_dim5_moon_thin_convective:5-14
+climate/gcm/.venv/bin/python -m climate.crm.ring_comfort ring_equator ring_70_45e ring_70_135e --gcm A28_dim5_moon_thin_convective:5-14
+```
+
 ## The gravity pair
 
 If lunar convection were Earth's stretched six times in size and duration, a
