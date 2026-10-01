@@ -405,6 +405,36 @@ TERRAIN_NUDGE = """        ! Terluna: nudging over terrain: each column against 
 """
 NUDGE_TH = "        if( myid.eq.0 ) print *,'  applying large-scale nudging of theta, lsnudge_count = ',lsnudge_count\n        rdt = 1.0/dt\n"
 NUDGE_QV = "        if( myid.eq.0 ) print *,'  applying large-scale nudging of qv, lsnudge_count = ',lsnudge_count\n        rdt = 1.0/dt\n"
+SURFACE_2D_BLOCK = """
+        ! Terluna: every column's ground from terluna_surface2d.txt when it exists (boxes over terrain): the
+        ! column counts in x and y, then one line per column, x fastest: tsk (K), tmn (K), land-use index.
+        ! Columns are found by position, so the halo takes the neighbours across the box's periodic edges.
+        inquire(file='terluna_surface2d.txt',exist=terluna_two)
+        if( terluna_two )then
+          open(unit=97,file='terluna_surface2d.txt',status='old',action='read')
+          read(97,*) terluna_nx,terluna_ny
+          allocate( terluna_tsk(terluna_nx,terluna_ny) , terluna_tmn(terluna_nx,terluna_ny) , terluna_lu(terluna_nx,terluna_ny) )
+          do terluna_j=1,terluna_ny
+          do terluna_i=1,terluna_nx
+            read(97,*) terluna_tsk(terluna_i,terluna_j),terluna_tmn(terluna_i,terluna_j),terluna_lu(terluna_i,terluna_j)
+          enddo
+          enddo
+          close(unit=97)
+          do j=jb,je
+          do i=ib,ie
+            tsk(i,j) = terluna_tsk(modulo(floor(xh(i)/dx),terluna_nx)+1,modulo(floor(yh(j)/dy),terluna_ny)+1)
+          enddo
+          enddo
+          do j=jbl,jel
+          do i=ibl,iel
+            tmn(i,j) = terluna_tmn(modulo(floor(xh(i)/dx),terluna_nx)+1,modulo(floor(yh(j)/dy),terluna_ny)+1)
+            lu_index(i,j) = terluna_lu(modulo(floor(xh(i)/dx),terluna_nx)+1,modulo(floor(yh(j)/dy),terluna_ny)+1)
+          enddo
+          enddo
+          deallocate( terluna_tsk , terluna_tmn , terluna_lu )
+          if( myid.eq.0 ) print *,'  Terluna: ground temperature and land use for every column from terluna_surface2d.txt'
+        endif
+"""
 TERRAIN_PATCHES = [
     ('param.F', 'Terluna: over terrain the Rayleigh layer damps toward the initial state', [
         ('      IF( do_lsnudge .and. (do_lsnudge_u .or. do_lsnudge_v .or. do_lsnudge_th) .and. irdamp.eq.1 )THEN\n',
@@ -430,6 +460,15 @@ TERRAIN_PATCHES = [
         (NUDGE_QV, NUDGE_QV + TERRAIN_NUDGE.format(mean='qavg', q=',nqv', v='qv', field='qa(i,j,k,nqv)'), 1),
         ('          tem1 = -lsnudgefac*terluna_w*( qavg(k,nqv)-lsnudge_qv(k,lsnudge_count) )/(lsnudge_tau)\n',
          '          tem1 = -lsnudgefac*terluna_w*terluna_dev(k)/(lsnudge_tau)\n', 1)]),
+    ('init_surface.F', "Terluna: every column's ground", [
+        ('      real :: sx1,sx2,sxl,stsk,stmn\n',
+         '      real :: sx1,sx2,sxl,stsk,stmn\n'
+         "      logical :: terluna_two   ! Terluna: every column's ground from terluna_surface2d.txt\n"
+         '      integer :: terluna_nx,terluna_ny,terluna_i,terluna_j\n'
+         '      real, dimension(:,:), allocatable :: terluna_tsk,terluna_tmn\n'
+         '      integer, dimension(:,:), allocatable :: terluna_lu\n', 1),
+        ('        close(unit=97)\n\n      ELSEIF( initsfc.ne.1 .and. initsfc.ne.2 )THEN\n',
+         '        close(unit=97)\n' + SURFACE_2D_BLOCK + '\n      ELSEIF( initsfc.ne.1 .and. initsfc.ne.2 )THEN\n', 1)]),
 ]
 
 PATCHES = [
@@ -885,6 +924,19 @@ for _tag, _land in (('', None), ('_rough', dict(roughness_cm=GCM_LAND['roughness
 CASES['box_0e_small_earth_fall'] = dict(
     CASES['box_0e_small'], build='moon_omp_earth_fall', inputs_from='box_0e_small',
     purpose='box_0e_small\'s inputs as written, with rain, snow, graupel, ice and cloud droplets falling at Earth\'s speeds')
+# The highland box (the author's go-ahead of 2026-10-01; the plan of 2026-09-29 in the decisions register): box_0e's
+# size (64 x 64 columns, 385 km square) over high ground on ring_70_45e's path at 44.7 S, 246.1 E on the far side, its x
+# axis along the ring. The ground stands at the atlas's heights (each column the mean of its 0.25-degree neighbourhood,
+# smoothed by two passes of a 1-2-1 filter and blended toward the edge columns' mean over 50 km at each side, so it
+# joins where the box wraps round), all of it land at the site's wetness, the ground temperature of every column carried
+# from the ring's sea-level ground at the GCM's lapse rate; it runs in the terrain build. The upper air, the vertical
+# wind and the day-night circulation come from ring_70_45e, forced from the corrected GCM.
+CASES['box_highland'] = dict(
+    CASES['box_0e'], site=dict(ring='ring_70_45e', lat_deg=-44.7, lon_deg=246.1, radius_m=100.0e3),
+    day_night=dict(rings=('ring_70_45e',), from_day=29.5, wavenumbers=5, bins=36, harmonics=4, top_m=16000.0),
+    build='moon_omp_terrain', terrain=dict(half_width_deg=0.25, passes=2, taper_km=50.0), surface_output=True,
+    purpose='box_0e\'s size over high ground on ring_70_45e\'s path (44.7 S, 246.1 E), the ground at its heights, forced '
+            'by that ring and the corrected GCM')
 
 
 def gcm_soil(folder: Path) -> dict:
@@ -1151,11 +1203,11 @@ def path_surface(lat, lon, dx, sea_k, land_k, wetness, half_width_deg=0.5):
     return segments, float(wet.mean()), product['sha256']
 
 
-def path_heights(lat, lon, half_width_deg=0.5, passes=2):
-    """Height above sea level (m) of the surface under each column of a path, from the 28% scenario's atlas: on water
-    (at least half the box wet, as in path_surface) the water surface, at sea level on the seas and at their own
-    levels on raised lakes; on land the mean height of the box's dry cells. The land is then smoothed by `passes` of
-    a 1-2-1 filter along the ring, water held at its level, and nothing lies below sea level."""
+def atlas_heights(lat, lon, half_width_deg=0.5):
+    """Height above sea level (m) of the surface under each point, from the 28% scenario's atlas, and whether it is
+    water: on water (at least half the box within half_width_deg wet, as in path_surface) the water surface, at sea
+    level on the seas and at their own levels on raised lakes; on land the mean height of the box's dry cells; nothing
+    below sea level."""
     import numpy as np
     from climate.gcm import boundary
     product = boundary.lakes_product(*boundary.LAKES)
@@ -1168,11 +1220,57 @@ def path_heights(lat, lon, half_width_deg=0.5, passes=2):
         w, h, s = (a[np.ix_(r, c)] for a in (water, height, surface))
         wet_column[i] = w.mean() >= 0.5
         raw[i] = (s[w >= 0.5].mean() if wet_column[i] else h[w < 0.5].mean()) - level
-    raw = np.maximum(raw, 0.0)
+    return np.maximum(raw, 0.0), wet_column
+
+
+def path_heights(lat, lon, half_width_deg=0.5, passes=2):
+    """Height above sea level (m) of the surface under each column of a path (atlas_heights), the land then smoothed
+    by `passes` of a 1-2-1 filter along the ring, water held at its level."""
+    import numpy as np
+    raw, wet_column = atlas_heights(lat, lon, half_width_deg)
     out = raw.copy()
     for _ in range(passes):
         out = np.where(wet_column, raw, 0.25 * np.roll(out, 1) + 0.5 * out + 0.25 * np.roll(out, -1))
     return out
+
+
+def box_columns(lat0: float, lon0: float, heading_deg: float, nx: int, ny: int, dx: float) -> tuple:
+    """Latitude and longitude (degrees, arrays ny by nx) of a box's columns about a site at its centre: x along
+    heading_deg (clockwise from north), y 90 degrees to its left, azimuthal-equidistant about the site."""
+    import numpy as np
+    radius = planet()['radius_m']
+    x = (np.arange(nx) + 0.5) * dx - 0.5 * nx * dx
+    y = (np.arange(ny) + 0.5) * dx - 0.5 * ny * dx
+    xx, yy = np.meshgrid(x, y)
+    a = np.radians(heading_deg)
+    east, north = xx * np.sin(a) - yy * np.cos(a), xx * np.cos(a) + yy * np.sin(a)
+    delta, bearing = np.hypot(east, north) / radius, np.arctan2(east, north)
+    la0, lo0 = np.radians(lat0), np.radians(lon0)
+    lat = np.arcsin(np.sin(la0) * np.cos(delta) + np.cos(la0) * np.sin(delta) * np.cos(bearing))
+    lon = lo0 + np.arctan2(np.sin(bearing) * np.sin(delta) * np.cos(la0), np.cos(delta) - np.sin(la0) * np.sin(lat))
+    return np.degrees(lat), np.degrees(lon) % 360.0
+
+
+def box_heights(raw, dx: float, passes: int = 2, taper_m: float = 50.0e3) -> dict:
+    """A box's ground heights (m, ny by nx) from the atlas's (atlas_heights), smoothed by `passes` of a 1-2-1 filter in
+    x and in y and blended toward the mean of the box's edge columns over taper_m at each side (a cosine taper), so the
+    ground joins where the box wraps round; the largest slope and the heights' spread with them."""
+    import numpy as np
+    h = np.asarray(raw, dtype=float).copy()
+    for _ in range(passes):
+        for axis in (0, 1):
+            h = 0.25 * np.roll(h, 1, axis) + 0.5 * h + 0.25 * np.roll(h, -1, axis)
+    edge = float(np.concatenate([h[0], h[-1], h[1:-1, 0], h[1:-1, -1]]).mean())
+    ny, nx = h.shape
+
+    def weight(n):                                                   # 0 at the edge, 1 beyond taper_m from it
+        d = np.minimum(np.arange(n) + 0.5, n - np.arange(n) - 0.5) * dx
+        return np.where(d < taper_m, 0.5 * (1.0 - np.cos(np.pi * d / taper_m)), 1.0)
+    w = weight(ny)[:, None] * weight(nx)[None, :]
+    h = np.maximum(edge + (h - edge) * w, 0.0)
+    slope = np.hypot((np.roll(h, -1, 1) - h) / dx, (np.roll(h, -1, 0) - h) / dx)
+    return dict(heights=h, edge_m=edge, max_slope=float(slope.max()), p99_slope=float(np.percentile(slope, 99)),
+                min_m=float(h.min()), max_m=float(h.max()), mean_m=float(h.mean()))
 
 
 def box_site(cfg: dict, zw, nx_ring: int) -> dict:
@@ -1195,9 +1293,13 @@ def box_site(cfg: dict, zw, nx_ring: int) -> dict:
     land = np.array([s[2] == 1 for s in segments])
     if not land.any():
         raise ValueError(f'no land within {site["radius_m"] / 1000:.0f} km of the site on {site["ring"]}')
+    a0, a1 = np.radians(track['lat'][(centre - 1) % nx_ring]), np.radians(track['lat'][(centre + 1) % nx_ring])
+    dl = np.radians(track['lon'][(centre + 1) % nx_ring] - track['lon'][(centre - 1) % nx_ring])
+    heading = np.degrees(np.arctan2(np.sin(dl) * np.cos(a1), np.cos(a0) * np.sin(a1) - np.sin(a0) * np.cos(a1) * np.cos(dl)))
     return dict(ref=ref, columns=[int(c) for c in cols], land_share=float(land.mean()), surface_product=surface_sha,
                 wetness=float(ref['wetness'][cols][land].mean()), ground_k=float(ref['land_k'][cols][land].mean()),
-                w_m_s=[float(v) for v in np.asarray(ref['w_columns'])[cols].mean(axis=0)])
+                w_m_s=[float(v) for v in np.asarray(ref['w_columns'])[cols].mean(axis=0)],
+                heading_deg=float(heading % 360.0), lapse_k_m=float(np.asarray(ref['lapse_k_m'])[cols].mean()))
 
 
 def write_day_night(path: Path, forcing: dict) -> None:
@@ -1457,6 +1559,19 @@ def setup(name: str) -> Path:
     elif box:
         segments = [(-1e9, 1e9, 1, wetness_class(site['wetness']), site['ground_k'], site['ground_k'])]
         water_share, surface_sha = 0.0, site['surface_product']
+        if cfg.get('terrain'):                                            # the ground at its heights, all of it land
+            t = cfg['terrain']
+            blat, blon = box_columns(cfg['site']['lat_deg'], cfg['site']['lon_deg'], site['heading_deg'], nx, cfg['ny'], dx)
+            raw, wet = atlas_heights(blat.ravel(), blon.ravel(), t['half_width_deg'])
+            shape = box_heights(raw.reshape(blat.shape), dx, t['passes'], t['taper_km'] * 1000.0)
+            heights = shape.pop('heights')
+            np.asarray(heights, dtype='<f4').tofile(case / 'perts.dat')   # CM1's itern = 4: nx by ny reals, x fastest
+            ground = site['ground_k'] - site['lapse_k_m'] * heights       # carried from sea level to each column's height
+            row = wetness_class(site['wetness'])
+            (case / 'terluna_surface2d.txt').write_text(f'{nx} {cfg["ny"]}\n' + ''.join(
+                f'{g:.3f} {g:.3f} {row:d}\n' for g in ground.ravel()))
+            terrain = dict(t, source='the 28% scenario atlas, 0.25-degree cells', heading_deg=site['heading_deg'],
+                           water_share=float(wet.mean()), lapse_k_m=site['lapse_k_m'], **shape)
     elif tilted:
         sea_k, land_k = ref['sea_k'], ref['land_k']                     # carried to sea level
         if cfg.get('terrain'):                                            # the ground and raised lakes at their heights
@@ -1540,7 +1655,7 @@ def setup(name: str) -> Path:
                   inputs={p: digest(case / p) for p in ('input_sounding', 'input_grid_z', 'lsnudge_0001.dat',
                                                          'terluna_surface.txt', 'LANDUSE.TBL', 'namelist.template',
                                                          'terluna_wls.txt', 'terluna_wls2d.txt', 'terluna_lsadv.txt',
-                                                         'perts.dat')
+                                                         'perts.dat', 'terluna_surface2d.txt')
                           if (case / p).exists()})
     (case / 'case.json').write_text(json.dumps(record, indent=1) + '\n')
     return case

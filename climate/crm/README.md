@@ -872,6 +872,50 @@ climate/gcm/.venv/bin/python -m climate.gcm.compare --levels A28_dim5_moon:20-29
 climate/gcm/.venv/bin/python -m climate.crm.ring_comfort ring_equator ring_70_45e ring_70_135e --gcm A28_dim5_moon_low_cloud:5-14
 ```
 
+## A box over the highlands
+
+The author's plan for highlands (2026-09-29) left a three-dimensional box over
+high ground to the flat rings' results, and the author chose to run it on
+2026-10-01, with CM1 and the GCM still apart on the air near the ground. Case
+`box_highland` is `box_0e`'s size, 64 by 64 columns 6.0 km apart (385 km
+square) on 111 levels, centred where `ring_70_45e` crosses 44.7° S, 246.1° E on
+the far side, its x axis along the ring (151° from north). The site was chosen
+along the ring's path for high, varied land at mid-latitudes, where the flat
+rings, corrected for height, put their comfort: the box's ground runs from the
+floor of a small basin at sea level to 6.9 km, half of it between 1.3 and
+5.2 km, with a mean of 3.1 km.
+
+- **Ground.** Each column takes the atlas's height over its 0.25° neighbourhood
+  ([atlas_heights](cm1_run.py)), smoothed by two passes of a 1-2-1 filter in x
+  and y and blended toward the mean of the edge columns (2.9 km) over 50 km at
+  each side, so the ground joins where the box wraps round
+  ([box_heights](cm1_run.py)); the steepest slope is 0.18, as gentle as the
+  terrain ring's. 3% of the columns hold water in the atlas, a basin's floor,
+  laid as land at its level.
+- **Surface.** All land at the site's wetness (0.06, class 0.05). Every column's
+  ground and deep-soil temperature is carried from the ring's sea-level ground,
+  293.7 K, at the GCM's lapse rate there, 0.46 °C per kilometre, as the terrain
+  ring's were; the terrain build reads them from `terluna_surface2d.txt`, a
+  patch to CM1's surface set-up for boxes over terrain.
+- **Forcing.** The corrected GCM's upper air along `ring_70_45e`, held above
+  8–16 km column by column at each column's own height (the terrain build's
+  nudging); the GCM's mean vertical wind at the site; and the heating and
+  moistening of `ring_70_45e`'s own day-night circulation there over its second
+  lunar day, on the levels of the box's corner column (2.9 km), which follow the
+  ground. The Coriolis force is the site's (f = −3.7 × 10⁻⁶ s⁻¹).
+
+A first model day ran in 6.6 minutes on 8 threads at CM1's longest time step
+(80 s), with the wind at 10 m under 1.3 m/s through the first night and the air
+cooling 0.8 °C per kilometre of height by its end. The two lunar days run in
+sessions of up to seven hours with an hour's rest between, about 6½ hours in
+all on the faster build.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run build moon_omp_terrain
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_highland
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_highland --hours 7 --threads 8    # restartable
+```
+
 ## The gravity pair
 
 If lunar convection were Earth's stretched six times in size and duration, a

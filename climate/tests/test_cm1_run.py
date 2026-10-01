@@ -421,7 +421,7 @@ def test_the_terrain_ring_is_the_flat_ring_with_ground_heights():
     assert differ == {('param0', 'terrain_flag'), ('param2', 'itern'), ('param2', 'irdamp')}
     assert c.CASES['ring_70_45e_terrain']['build'] == 'moon_omp_terrain' and 'moon_omp_terrain' in c.BUILD_PATCHES
     patched = {name for name, _, _ in c.BUILD_PATCHES['moon_omp_terrain']}
-    assert patched == {'param.F', 'lsnudge.F', 'solve1.F'}
+    assert patched == {'param.F', 'lsnudge.F', 'solve1.F', 'init_surface.F'}   # every column's ground, for boxes
 
 
 def test_vertical_wind_table_has_one_row_per_column(tmp_path):
@@ -516,3 +516,41 @@ def test_the_land_tests_are_quarter_boxes_that_write_the_radiation_at_the_ground
     big = c.case_settings(c.CASES['box_0e'], 64, 6011.0, 111, 150000.0, air, 1.6242)
     assert big['param9']['output_sfcparams'] == 0
     assert c.CASES['box_0e_small_gcm_land']['land'] == c.GCM_LAND and c.CASES['box_0e_small']['land'] is None
+
+
+def test_box_columns_lie_along_the_heading_with_y_to_its_left(monkeypatch):
+    monkeypatch.setattr(c, 'planet', lambda: dict(radius_m=1.0e6))
+    lat, lon = c.box_columns(0.0, 10.0, 0.0, 3, 3, 1.0e4)               # heading north on the equator
+    assert lat.shape == (3, 3) and lat[1, 1] == pytest.approx(0.0) and lon[1, 1] == pytest.approx(10.0)
+    assert lat[1, 2] > 0.0 and lon[1, 2] == pytest.approx(10.0)          # x runs north
+    assert lon[2, 1] < 10.0 and lat[2, 1] == pytest.approx(0.0, abs=1e-9)   # y runs west, to the left
+    step = np.radians(lat[1, 2]) * 1.0e6
+    assert step == pytest.approx(1.0e4, rel=1e-6)
+
+
+def test_box_heights_join_at_the_edges_and_keep_the_interior():
+    raw = np.full((40, 40), 1000.0)
+    raw[15:25, 15:25] = 3000.0                                           # a plateau in the middle
+    raw[0, :] = 500.0                                                    # a low edge
+    out = c.box_heights(raw, 6000.0, passes=0, taper_m=30.0e3)
+    h = out['heights']
+    assert np.abs(h[0] - h[-1]).max() < 0.05 * 500.0                     # the 500 m step where the box wraps is gone
+    assert np.abs(h[:, 0] - out['edge_m']).max() < 0.05 * 500.0
+    assert np.allclose(h[17:23, 17:23], 3000.0)                          # beyond the taper the ground is the atlas's
+    assert out['max_m'] == pytest.approx(3000.0) and out['max_slope'] > 0.0
+
+
+def test_the_terrain_build_reads_every_column_s_ground():
+    name, marker, edits = next(p for p in c.TERRAIN_PATCHES if p[0] == 'init_surface.F')
+    text = ('      real :: sx1,sx2,sxl,stsk,stmn\n        enddo\n        close(unit=97)\n\n'
+            '      ELSEIF( initsfc.ne.1 .and. initsfc.ne.2 )THEN\n')
+    out = c.apply_patch(text, name, marker, edits)
+    assert "file='terluna_surface2d.txt'" in out and 'logical :: terluna_two' in out
+    assert out.index('terluna_surface2d.txt') < out.index('ELSEIF( initsfc.ne.1')
+
+
+def test_the_highland_box_is_box_0e_over_terrain_on_ring_70_45e():
+    box, base = c.CASES['box_highland'], c.CASES['box_0e']
+    assert {k for k in box if box[k] != base.get(k)} == {'site', 'day_night', 'build', 'terrain', 'surface_output', 'purpose'}
+    assert box['site']['ring'] == 'ring_70_45e' and box['day_night']['rings'] == ('ring_70_45e',)
+    assert box['build'] == 'moon_omp_terrain' and (box['nx'], box['ny']) == (64, 64)
