@@ -1,0 +1,184 @@
+{
+  "schema": "terluna.climate.wave-checks/1",
+  "checked_at_utc": "2026-10-02T22:10:30.061900+00:00",
+  "scope": "Implementation, bounded SWAN integration and repository verification; numerical wave-study controls are recorded separately in results/waves.json.",
+  "scientific_validation": false,
+  "manuscript_clearance": false,
+  "base_commit": "88bb4f5e967804f6c0da01ba0ad2c89d95453516",
+  "checked_files_sha256": {
+    "climate/tests/test_waves.py": "1cbd978da19925131a1a8b0664f3f9d2a47f4352baf4f35ddefbe4767437f91e",
+    "climate/waves/model.py": "a829868a2f5def93ccde5640b3ac6afc891ae0aa5c1e6eaa65bc7c69f5259439",
+    "climate/waves/build.py": "632227996579bae8e38544133874fad6ce09bc594940afbfc416aa1ea38f048c",
+    "climate/waves/run.py": "4aceff41110caa9b640bee7af6a132acb0305c5e4376c4d8e0bcea020445f8ad",
+    "Makefile": "5d34f62ad6eb618962730458d545a13b0802b6fc86a6d8f272350151f9d40187"
+  },
+  "result": "WAVE_TESTS_PASS_REPOSITORY_CHECKS_INCOMPLETE",
+  "environment": {
+    "python": "3.12.14",
+    "pytest": "9.1.1",
+    "node": "24.19.0",
+    "threads": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1"
+    },
+    "dependency_note": "pytest was supplied through a temporary dependency directory. Reproduction requires an environment with the repository Python dependencies and pytest; that directory is not a project input."
+  },
+  "targeted_wave_tests": {
+    "status": "PASS",
+    "command": "TERLUNA_SWAN_EXECUTABLE=<build-root>/<variant>/swan.exe python -m pytest climate/tests/test_waves.py -q",
+    "variants": [
+      {
+        "variant": "stock",
+        "passed": 28,
+        "failed": 0,
+        "skipped": 0,
+        "executable_sha256": "b22dc0e63b29e19c2965e6edfa4264fc6ffe6f0a385c580b8a8ae3227c92cbec"
+      },
+      {
+        "variant": "patched_agrow",
+        "passed": 28,
+        "failed": 0,
+        "skipped": 0,
+        "executable_sha256": "0a32101df580b9dc228f3b6987b3b74dfb65f5bab38424d3e7e50af7612f8c4c"
+      }
+    ],
+    "integration_scope": "Each variant completed a serial 10-cell, one-hour Earth-gravity wind-wave run; full output coverage, positive final waves, valid spectral output and zero depth-breaking fraction checked. This is wrapper integration, not physical validation."
+  },
+  "make_check": {
+    "status": "FAIL",
+    "command": "TERLUNA_SWAN_EXECUTABLE=<build-root>/patched_agrow/swan.exe make check",
+    "exit_code": 2,
+    "layer_check": {
+      "status": "PASS",
+      "files_checked": 282,
+      "violations": 0
+    },
+    "python": {
+      "passed": 398,
+      "failed": 13,
+      "skipped": 40,
+      "collected": 451,
+      "elapsed_s": 10.38,
+      "wave_tests_passed": 28,
+      "failed_tests": [
+        "atmosphere/tests/test_absorption.py::test_ion_production_falls_with_the_shadow_and_ends_at_the_outer_radius",
+        "atmosphere/tests/test_absorption.py::test_ionization_rate_is_of_the_tabulated_order",
+        "atmosphere/tests/test_absorption.py::test_design_case_needs_a_radius_just_under_the_exobase",
+        "atmosphere/tests/test_exosphere.py::test_dissociation_rates_agree_with_heays",
+        "atmosphere/tests/test_exosphere.py::test_ions_made_match_the_absorption_step",
+        "atmosphere/tests/test_exosphere.py::test_charge_exchange_thin_limit_counts_the_swept_exosphere",
+        "atmosphere/tests/test_exosphere.py::test_magnetosphere_accounts_for_every_ion_and_a_stronger_one_keeps_more",
+        "atmosphere/tests/test_exosphere.py::test_levels_are_ordered_and_wider_shadows_never_lose_more",
+        "climate/tests/test_cm1_run.py::test_the_terrain_build_forces_each_column_at_its_own_height",
+        "climate/tests/test_exoplasim_run.py::RunnerTests::test_process_lookup_finds_this_process",
+        "climate/tests/test_ring_comfort.py::test_hours_are_shares_of_the_lunar_day",
+        "climate/tests/test_ring_comfort.py::test_the_rings_land_is_pooled_by_latitude_and_height_and_counted_in_shares",
+        "research/studies/protection_architecture/test_run.py::test_design_point_holds_together"
+      ],
+      "failure_groups": [
+        {
+          "count": 9,
+          "cause": "Missing hash-pinned solar-spectrum input",
+          "path": "atmosphere/middle_atmosphere/inputs/whi2008_ref_solar_irradiance_ver2.dat"
+        },
+        {
+          "count": 3,
+          "cause": "Missing generated GCM planet configuration",
+          "path": "climate/gcm/products/moon_gcm_configuration.json"
+        },
+        {
+          "count": 1,
+          "cause": "Process-discovery assertion: current process ID absent from returned process-group members; environment-specific process visibility",
+          "test": "climate/tests/test_exoplasim_run.py::RunnerTests::test_process_lookup_finds_this_process"
+        }
+      ]
+    },
+    "stopped_before": [
+      "test-js",
+      "check-provenance",
+      "check-ensemble"
+    ],
+    "followup_note": "Remaining targets were attempted separately; their outcomes follow. No unrelated failures were repaired."
+  },
+  "javascript": {
+    "make_test_js": {
+      "status": "FAIL",
+      "command": "make test-js",
+      "cause": "The Node 24 invocation treats tests/unit/ as a module path and returns MODULE_NOT_FOUND. The test directory exists. The immersion bake completed before this failure.",
+      "domain_directory_invocation": "The subsequent node --test invocation with the three domain test directories was attempted separately and failed for the same directory-argument behavior; the directories exist."
+    },
+    "explicit_immersion_files": {
+      "status": "FAIL",
+      "command": "node --test --test-concurrency=1 immersion/tests/unit/*.test.js",
+      "file_level_passed": 5,
+      "file_level_failed": 5,
+      "failed_files": [
+        {
+          "path": "immersion/tests/unit/cloud-cache.test.js",
+          "cause": "Missing three package"
+        },
+        {
+          "path": "immersion/tests/unit/forest.test.js",
+          "cause": "Missing three package in one dynamic-import test; direct-file run passed five tests and failed one"
+        },
+        {
+          "path": "immersion/tests/unit/game-export.test.js",
+          "cause": "World-export subprocess returned exit 1; that exporter imports the unavailable three package. Direct-file run passed sky export and failed world export."
+        },
+        {
+          "path": "immersion/tests/unit/landscape.test.js",
+          "cause": "Missing three package"
+        },
+        {
+          "path": "immersion/tests/unit/m1.test.js",
+          "cause": "Missing three package"
+        }
+      ]
+    },
+    "explicit_domain_files": {
+      "status": "FAIL",
+      "command": "node --test atmosphere/column/tests/*.cjs illumination/references/tests/*.cjs visualization/atmospheric-columns/tests/*.mjs",
+      "file_level_passed": 3,
+      "file_level_failed": 1,
+      "failed_file": "visualization/atmospheric-columns/tests/column-viewer.test.mjs",
+      "cause": "spawnSync of the column exporter returned EPERM in the test runner"
+    }
+  },
+  "provenance": {
+    "command": "python research/check.py",
+    "status": "PASS_WITH_BLOCKED_INPUTS",
+    "integrity": "PASS",
+    "retained_files": 110,
+    "illumination": "PASS",
+    "historical_feasibility": "PASS",
+    "protection": {
+      "status": "BLOCKED",
+      "reason": "external inputs absent or changed",
+      "inputs": [
+        "TSIS1_HSRS_stride100.csv",
+        "TiO2_Siefke.yml",
+        "o.nff",
+        "si.nff",
+        "ti.nff",
+        "SiO2_Franta.yml"
+      ],
+      "verifier_executed": false
+    },
+    "scope": "artifact integrity and numerical implementation only"
+  },
+  "ensemble": {
+    "command": "python ensemble/tools/validate_setup.py",
+    "result": "PASS",
+    "scope": "planning snapshot and workspace integrity only",
+    "snapshot_files": 14,
+    "paper_workspaces": 5,
+    "scientific_or_manuscript_clearance": false
+  },
+  "not_established": [
+    "All-repository test pass",
+    "Empirical validation of SWAN at lunar gravity",
+    "Scholarly source admission or manuscript clearance"
+  ]
+}

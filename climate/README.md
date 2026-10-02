@@ -161,6 +161,16 @@ days. Over land the ring has half the GCM's cloud and under half its rain; over
 the seas, a quarter of its cloud and two thirds of its rain. Its README gives
 the day by local time, the storms, the winds by height and the flight band.
 
+## Wind waves in the seas
+
+[waves/](waves/) drives SWAN with three corrected CM1 water-wind magnitudes,
+comparing Earth and lunar gravity over a flat 100 km strip for up to 48 hours.
+The study includes a gravity audit, stock and modified wind-source builds,
+repeatability and resolution checks, and explicit input provenance. Fetch,
+direction and persistence are imposed; the outputs are conditional wave
+responses. Named-basin forcing, sea-temperature gradients and underwater
+light profiles remain open.
+
 ## Next step
 
 The atmosphere domain's [radiative–convective column](../atmosphere/radiative_convective/)

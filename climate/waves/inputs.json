@@ -1,0 +1,198 @@
+{
+  "schema": "terluna.climate.wave-input-inventory/1",
+  "rings": [
+    {
+      "path": "climate/results/crm/ring_ring_equator.json",
+      "schema": "terluna.climate.crm-ring/1",
+      "sha256": "7da8c01d24121e32712fd94a00ea03f1b212a39bed21b7a54b3a4a61707a72c8",
+      "bytes": 38583,
+      "case": "ring_equator",
+      "span_days": [
+        29.5,
+        59.0
+      ],
+      "snapshots": 237,
+      "water_wind_10m_m_s": {
+        "median": 2.1526074409484863,
+        "p90": 4.001058578491211,
+        "p99": 5.83651065826416,
+        "max": 10.92531681060791
+      }
+    },
+    {
+      "path": "climate/results/crm/ring_ring_70_45e.json",
+      "schema": "terluna.climate.crm-ring/1",
+      "sha256": "024fb3f570c4fbf54ed3de5ad815a0e85edd4ec2e749d7935c97ae315c542292",
+      "bytes": 41471,
+      "case": "ring_70_45e",
+      "span_days": [
+        29.5,
+        59.0
+      ],
+      "snapshots": 237,
+      "water_wind_10m_m_s": {
+        "median": 1.9065377712249756,
+        "p90": 3.5157947540283203,
+        "p99": 5.13630485534668,
+        "max": 10.665343284606934
+      }
+    },
+    {
+      "path": "climate/results/crm/ring_ring_70_135e.json",
+      "schema": "terluna.climate.crm-ring/1",
+      "sha256": "87e478815badcc05ccfe67bc281b85f63fdd966fc80469f65646ef962489bb6e",
+      "bytes": 41596,
+      "case": "ring_70_135e",
+      "span_days": [
+        29.5,
+        59.0
+      ],
+      "snapshots": 237,
+      "water_wind_10m_m_s": {
+        "median": 1.8119261264801025,
+        "p90": 3.1506803035736084,
+        "p99": 4.982414245605469,
+        "max": 10.77832317352295
+      }
+    }
+  ],
+  "compact_equatorial_fields": {
+    "path": "climate/results/crm/ring_ring_equator_fields.npz",
+    "schema": "terluna.climate.crm-ring-fields/1",
+    "sha256": "8bb5af46c30b0203a40798791270cc7def50e682b1220d0a72eec5de627eceef",
+    "bytes": 172505,
+    "contents": "Local-time/height composites, one heaviest-rain storm snapshot, rain map and pooled land mask; no complete 10 m wind vector time series."
+  },
+  "atlas": {
+    "path": "geography/results/atlas.json",
+    "schema": "terluna.geography.atlas/1",
+    "sha256": "78cfbf2f469eb339b686e34385c3ed72fc83752da59bb24167e2260a765e537e",
+    "bytes": 23296,
+    "sea_level_m_above_geoid": -1654.2,
+    "water_share": 0.28,
+    "grid": {
+      "pixels_per_degree": 4,
+      "geoid_degree": 200
+    },
+    "units": {
+      "heights": "m above the geoid",
+      "areas": "km2",
+      "shares": "fraction of the whole Moon",
+      "water_mass": "kg at 1000 kg/m3"
+    },
+    "reference_bodies": [
+      {
+        "name": "Near-side Sea",
+        "label": 433,
+        "area_km2": 5288444,
+        "share": 0.13942,
+        "mean_depth_m": 648,
+        "max_depth_m": 3751,
+        "volume_km3": 3424489,
+        "centroid": [
+          26.09,
+          -12.2
+        ]
+      },
+      {
+        "name": "South Pole\u2013Aitken Sea",
+        "label": 1417,
+        "area_km2": 2322833,
+        "share": 0.06124,
+        "mean_depth_m": 2082,
+        "max_depth_m": 6693,
+        "volume_km3": 4836569,
+        "centroid": [
+          -55.78,
+          -171.61
+        ]
+      },
+      {
+        "name": "Smythii\u2013Marginis Sea",
+        "label": 874,
+        "area_km2": 285480,
+        "share": 0.00753,
+        "mean_depth_m": 1229,
+        "max_depth_m": 3716,
+        "volume_km3": 350811,
+        "centroid": [
+          5.03,
+          88.44
+        ]
+      },
+      {
+        "name": "Humboldtianum Sea",
+        "label": 213,
+        "area_km2": 284341,
+        "share": 0.0075,
+        "mean_depth_m": 1165,
+        "max_depth_m": 4116,
+        "volume_km3": 331360,
+        "centroid": [
+          57.89,
+          85.25
+        ]
+      },
+      {
+        "name": "Orientale Lake",
+        "label": 1296,
+        "area_km2": 88056,
+        "share": 0.00232,
+        "mean_depth_m": 849,
+        "max_depth_m": 2690,
+        "volume_km3": 74776,
+        "centroid": [
+          -19.25,
+          -94.06
+        ]
+      },
+      {
+        "name": "Moscoviense Lake",
+        "label": 714,
+        "area_km2": 66449,
+        "share": 0.00175,
+        "mean_depth_m": 1070,
+        "max_depth_m": 3720,
+        "volume_km3": 71131,
+        "centroid": [
+          26.89,
+          148.4
+        ]
+      }
+    ],
+    "extent_note": "Areas and centroids only; no coast polygons, directional fetch, or local bathymetry in this summary. Centroid coordinate order is latitude, longitude in degrees, east-positive longitude."
+  },
+  "missing_local_products": [
+    {
+      "path": "climate/crm/products/ring_ring_equator.npz",
+      "exists": false
+    },
+    {
+      "path": "climate/crm/products/ring_ring_70_45e.npz",
+      "exists": false
+    },
+    {
+      "path": "climate/crm/products/ring_ring_70_135e.npz",
+      "exists": false
+    },
+    {
+      "path": "climate/crm/runs/ring_equator",
+      "exists": false
+    },
+    {
+      "path": "geography/products/atlas_28pct_4ppd.npz",
+      "exists": false
+    },
+    {
+      "path": "geography/inputs",
+      "exists": false
+    },
+    {
+      "path": "climate/gcm/products",
+      "exists": false
+    }
+  ],
+  "evidence": "Input inventory for a conditional wave sensitivity experiment. The corrected atmospheric rings are two-dimensional CM1 results sampled every three hours; wind quantiles do not determine event duration or spatial coherence. Atlas values describe hydrostatic storage geometry.",
+  "planned_experiment_boundary": "Uniform-wind Cartesian one-dimensional strips with 1000 m reference depth and 100 km length, sampled at 10, 25, 50 and 100 km after 1, 3, 6, 12, 24 and 48 hours. Depth, fetch and persistence are imposed scenarios. They do not reconstruct a named basin.",
+  "inventory_date": "2026-10-02"
+}
