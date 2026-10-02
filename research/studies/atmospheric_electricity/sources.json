@@ -1,0 +1,43 @@
+{
+  "checked": "2026-10-02",
+  "source_admission": "Sources for the agreed modeling plan. Reading scope is recorded per entry; no outside code or dataset is imported, no implementation is installed, and full manuscript source admission remains outstanding.",
+  "sources": [
+    {
+      "id": "S1",
+      "citation": "CM1 documentation, namelist.input guide",
+      "url": "https://cm1.readthedocs.io/en/latest/README.namelist/",
+      "use": "Availability of double-moment mass/number output through output_q and Morrison fall-speed output through output_fallvel; actual saved fields require inspection.",
+      "access": "Relevant output-variable documentation read; the project's pinned CM1 r22.0 source and individual run control files remain authoritative for implementation."
+    },
+    {
+      "id": "S2",
+      "citation": "Edward R. Mansell, MicroTed/wrf4-elec developer repository",
+      "url": "https://github.com/MicroTed/wrf4-elec",
+      "use": "Existing WRF-ELEC candidate implementation; repository advertises beta versions for several WRF releases. No release selected for Terluna.",
+      "access": "Repository overview read; electrical implementation and build instructions have not been audited or installed."
+    },
+    {
+      "id": "S3",
+      "citation": "Sun et al. (2021), Aerosol effects on electrification and lightning discharges in a multicell thunderstorm simulated by the WRF-ELEC model, Atmospheric Chemistry and Physics 21, 14141–14158",
+      "url": "https://acp.copernicus.org/articles/21/14141/2021/",
+      "doi": "10.5194/acp-21-14141-2021",
+      "use": "Published example of NSSL double-moment microphysics, charging, electric-field solution and discharge parameterization; links between particle populations and charging.",
+      "access": "Abstract and model overview (section 2.3) read in the publisher's full text; the full paper has not received a systematic source review."
+    },
+    {
+      "id": "S4",
+      "citation": "Pasko, Inan, Bell and Taranenko (1997), Sprites produced by quasi-electrostatic heating and ionization in the lower ionosphere, Journal of Geophysical Research 102(A3), 4529–4561",
+      "url": "https://pure.psu.edu/en/publications/sprites-produced-by-quasi-electrostatic-heating-and-ionization-in/",
+      "doi": "10.1029/96JA03528",
+      "use": "Dependence of sprite response on removed storm charge, its height and timescale, and upper-atmosphere conductivity; motivates a separate response model.",
+      "access": "Author institution's abstract and bibliographic record read; full paper not reviewed."
+    },
+    {
+      "id": "S5",
+      "citation": "Ebert et al. (2010), Review of recent results on streamer discharges and discussion of their relevance for sprites and lightning",
+      "url": "https://arxiv.org/abs/1002.0070",
+      "use": "Gas-density scaling and the distinction between storm-scale modeling and detailed streamer propagation; follow-up reading for the TLE stage.",
+      "access": "Author-posted abstract read; full review not read for this plan."
+    }
+  ]
+}

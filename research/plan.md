@@ -19,6 +19,23 @@ Candidate external resources, recorded as leads rather than installed tools or a
 
 Installation, input acquisition, applicability checks and benchmarks precede any promise of full GCM or spectral runs. The current workspace supplies no installed specialist climate/ephemeris/radiative-transfer dependency.
 
+## Atmospheric electricity
+
+The author adopted the [atmospheric-electricity plan](studies/atmospheric_electricity/README.md)
+on 2026-10-02. Start by inventorying saved CM1 output and comparing graupel mass,
+number, inferred sizes, and mixed-phase volume and duration before and after
+each specified correction. Follow with matched 3-D boxes and short instrumented
+windows where existing output leaves a gap; use rings and the GCM for context
+and forcing. Measure local rates as well as the total volume and duration
+available for charging.
+
+Keep CM1 as the baseline while evaluating WRF-ELEC for explicit charging,
+fields and lightning. Ionization/conductivity columns and appropriate circuit
+and TLE models follow when storm electrical output is available. ROCKE-3D
+retains its separate role as an independent background-climate check. Preserve
+the GCM–CM1 uncertainty and the existing laptop/no-rented-compute constraint.
+The plan is recorded; these analyses and implementations remain future work.
+
 ## Biology in parallel
 
 Extract literature parameters with actual experimental boundaries, then implement long-night reserve/respiration, aquatic oxygen, nutrient/detrital and vegetation-mechanics models. Compare several communities and architectures. Literature-calibrated traits, engineered-trait proposals and unmeasured gravity responses remain distinct. Complete reproduction and lifelong human health require empirical work; simulations can identify conditions and discriminating experiments.
