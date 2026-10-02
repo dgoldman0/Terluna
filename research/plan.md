@@ -21,20 +21,16 @@ Installation, input acquisition, applicability checks and benchmarks precede any
 
 ## Atmospheric electricity
 
-The author adopted the [atmospheric-electricity plan](studies/atmospheric_electricity/README.md)
-on 2026-10-02. Start by inventorying saved CM1 output and comparing graupel mass,
-number, inferred sizes, and mixed-phase volume and duration before and after
-each specified correction. Follow with matched 3-D boxes and short instrumented
-windows where existing output leaves a gap; use rings and the GCM for context
-and forcing. Measure local rates as well as the total volume and duration
-available for charging.
-
-Keep CM1 as the baseline while evaluating WRF-ELEC for explicit charging,
-fields and lightning. Ionization/conductivity columns and appropriate circuit
-and TLE models follow when storm electrical output is available. ROCKE-3D
-retains its separate role as an independent background-climate check. Preserve
-the GCM–CM1 uncertainty and the existing laptop/no-rented-compute constraint.
-The plan is recorded; these analyses and implementations remain future work.
+The [atmospheric-electricity plan](studies/atmospheric_electricity/README.md) of
+2026-10-02 aims to understand the Open Moon's atmospheric electricity as well as
+its other subjects of similar importance. Stage 1 reads the CM1 storms already
+run for graupel, ice and supercooled water, applies laboratory charging laws to
+them, isolates slower settling with the fall-speed pair, and builds an
+ionization and conductivity column, so that storm generator currents can be set
+against what the air conducts at breakdown. Stage 2 electrifies CM1, with the
+NSSL microphysics patched for lunar gravity and the electrical physics following
+WRF-ELEC. Stage 3 takes the global circuit and transient luminous events.
+ROCKE-3D stays a separate background-climate check.
 
 ## Biology in parallel
 

@@ -7,13 +7,10 @@ its own clouds and rain, at lunar gravity. It shows the weather people would mee
 through the month-long day: storms, rain, cloud, winds from the ground to the
 flight band, and the air near the ground by day and by night.
 
-The author adopted an [atmospheric-electricity plan](../../research/studies/atmospheric_electricity/README.md)
-on 2026-10-02: first compare graupel mass, number, inferred sizes and mixed-phase
-volume and duration from saved output, then use matched 3-D boxes where needed.
-Rings supply environmental context; WRF-ELEC is a candidate for a later
-electrical model, followed by conductivity, global-circuit and TLE work. The
-graupel changes after the corrections remain unmeasured, and these CM1 runs
-provide no charge, electric-field or lightning prediction.
+The [atmospheric-electricity study](../../research/studies/atmospheric_electricity/README.md)
+(2026-10-02) reads these runs' storms: their graupel, cloud ice and snow, the air
+where they meet supercooled water, and what slower settling at lunar gravity does
+to them.
 
 ## How CM1 is set up for the Moon
 

@@ -1,6 +1,6 @@
 {
   "checked": "2026-10-02",
-  "source_admission": "Sources for the agreed modeling plan. Reading scope is recorded per entry; no outside code or dataset is imported, no implementation is installed, and full manuscript source admission remains outstanding.",
+  "source_admission": "Sources for the plan of 2026-10-02, each with what was read of it. None is imported or installed; source admission for the manuscripts is separate.",
   "sources": [
     {
       "id": "S1",
