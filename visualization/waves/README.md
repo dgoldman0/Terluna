@@ -9,15 +9,14 @@ Lines connect the sampled outputs without introducing intermediate model runs.
 
 Solid lines show the AGROW sensitivity patch, which scales an arbitrary
 wind-wave onset frequency with gravity; dashed lines show stock SWAN. Both
-use uniform steady wind, flat 1000 m water, initially calm conditions and no
-incoming swell or currents. The comparison is a numerical experiment.
-Wind percentile labels select forcing magnitudes; the resulting waves do
-not acquire those percentiles. Consult the source product for numerical
-checks and the remaining physical evidence limits.
+use uniform steady wind, flat 1000 m water and initially calm conditions,
+with incoming swell and currents set to zero. Wind percentile labels select
+forcing magnitudes. The source product records the numerical checks and
+remaining physical uncertainties.
 
 Early growth is sensitive to the timestep. The numerical resolution checks
-cover only the 48-hour lunar endpoint at the middle wind magnitude; they do
-not establish convergence of the other endpoints or the entire time histories.
+cover the 48-hour lunar endpoint at the middle wind magnitude. Earlier outputs
+retain the reported timestep sensitivity; other wind cases need further checks.
 
 Run from the repository root after producing the climate data:
 
@@ -29,4 +28,15 @@ The generated `results/waves.png` and `results/waves.json` stay outside Git.
 The sidecar records the product and renderer hashes, image hash, source
 evidence, numerical checks and exact plotted rows. The renderer checks the
 schema, units, complete plotted time series and the stated scenario conditions.
-It imports no climate model and performs no wave calculation.
+Wave calculations come from the climate data product.
+
+## Basin and slope pilot
+
+`python visualization/waves/pilot.py` reads
+`climate/waves/results/pilot.json` and writes `results/pilot.png` with a
+provenance sidecar. The two maps show the actual coarse SWAN nodes at hour 12;
+the lower panels show the offshore node's hourly values and the three assumed
+slope profiles. Each map cell displays its computed value. Source and image
+hashes are recorded, and the displayed arrays are checked against the product.
+The climate domain's `results/pilot_checks.json` records the resolution
+differences and their implications for geographic predictions.

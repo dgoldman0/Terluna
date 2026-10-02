@@ -1,0 +1,133 @@
+{
+  "schema": "terluna.climate.wave-pilot-verification/1",
+  "date": "2026-10-02",
+  "base_commit": "8785f7eff824238adac9689bb6fe974e371d0c5c",
+  "branch": "research/lunar-seas",
+  "make_check": {
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 TERLUNA_SWAN_EXECUTABLE=/tmp/terluna-lunar-seas-swan/coupled_air/swan.exe nice -n 10 make check",
+    "exit_code": 0,
+    "result": "PASS",
+    "python_tests": 458,
+    "javascript_tests": {
+      "immersion": 128,
+      "domain_and_viewer": 48
+    },
+    "layer_files": 294,
+    "layer_violations": 0,
+    "provenance": "PASS; all five protection inputs available",
+    "ensemble": "PASS; 14 locked snapshot files and five paper workspaces",
+    "execution": "Approved execution outside the sandbox for the Node subprocess tests",
+    "log": "research/runs/waves/pilot_precommit_make_check.log"
+  },
+  "earlier_make_check": {
+    "command": "make check",
+    "exit_code": 2,
+    "reason": "The sandbox denied the column-viewer subprocess (EPERM). The test passed on an approved retry outside the sandbox; the remaining make targets passed separately.",
+    "completed_before_failure": [
+      "tracked layer check: 288 files, 0 violations",
+      "457 Python tests passed (before the additional spectrum parser test)",
+      "immersion JavaScript: 10 test files passed",
+      "other domain JavaScript: 3 test files passed"
+    ]
+  },
+  "evidence": "Repository verification and recorded numerical checks. Empirical lunar validation, scholarly source admission, manuscript review and exact-build PDF review remain open.",
+  "numerical_outcome": {
+    "spectral_edges": "PASS, five final offshore spectra",
+    "stationary_stopping": "PASS, six slopes meet their 99%-of-wet-nodes criterion",
+    "ideal_slope_grid": "PASS stated 5% Hs bound: 1.51% maximum difference",
+    "basin_final_timestep_and_frequency": "PASS stated 5% Hs/Tm01 bounds",
+    "basin_spatial": "FAIL: 41.3% maximum Hs and 22.7% maximum Tm01 difference at matched final wet nodes",
+    "early_growth_20min_to_2h": "FAIL: 2-to-1 s mean-period difference reaches 12.2%",
+    "early_growth_1_to_2h": "PASS for the follow-up 1-to-2-hour window, examined after the broader check failed. Earlier times remain unresolved."
+  },
+  "source_sha256": {
+    "climate/crm/wave_forcing.py": "2d00d85ea87e5b825b9957889a1f7ee6810ca3498769d90b7706c3a28e0812c9",
+    "climate/waves/build.py": "d67b1c98651722faa8b8e79d763bc987294d0b26260c390f4a6c3d02a56178d8",
+    "climate/waves/model.py": "a829868a2f5def93ccde5640b3ac6afc891ae0aa5c1e6eaa65bc7c69f5259439",
+    "climate/waves/early_growth.py": "f3cba5960adcadc3a78887372b3e4f4a40bb684593a0cfd815fd16aa253ec555",
+    "climate/waves/pilot.py": "1351b386d29ac6f63b335c7e999040117b76128de68d9ea5f0dd1609b0e59da8",
+    "climate/waves/pilot_checks.py": "054d89579ce87b579c03e58d779a5bea4b89a65939195b7b6e50eb9c7fb1ace1",
+    "climate/tests/test_wave_pilot.py": "e96733af811c3b7aafe112501bb0fd73711e2d32aeacf29691e70995dbdd8c8a",
+    "shared/constants.json": "19a9d8fd60cb75f2b10eca5ef93ab22c4748e08646d1e088843710cde7da2665",
+    "shared/constants.py": "99103546c186507d74991aa64ee8e54773a14a40750db2d1a6d394cc22ee6307",
+    "visualization/waves/pilot.py": "c6eefe1a40969bec674eb41d953d8ac7a53fa991d0c8e76f9fed98adc4e2945c"
+  },
+  "product_sha256": {
+    "climate/waves/results/forcing.json": "c5bac5fd97c20a0080a9e685364cdb23cbb89e1b730c6ad7bf12a7c5bc43d74b",
+    "climate/waves/results/early_growth.json": "56a3032af443a40df2a69d780454b5600f86e19b1d71a36c8328a004185db149",
+    "climate/waves/results/pilot.json": "8cdba54a8f44000227a7a8f12733518b56f33e9b155c92e876205d74023bfd94",
+    "climate/waves/results/pilot_checks.json": "c535f33940af061f6a512bd4e37d16ba36c7013bcaae6b77d3caee00b8997f11"
+  },
+  "logs": {
+    "research/runs/waves/pilot_make_check.log": "3e0c4a2667595e8e3490491db0eaf75674729b807a1390ce13b10b4b3fa172db",
+    "research/runs/waves/pilot_python_final.log": "0b9cb112edf5058fc10d1ab236579dd17eac23fdab27915592106f4948daa2d1",
+    "research/runs/waves/pilot_wave_tests_final.log": "60c181a919910ee55e6201a2fda8c02593ccfbce568502232515d5b849564bba",
+    "research/runs/waves/pilot_column_viewer_check.log": "51228d89dbd246b9f5ac67b7dc20aa4272db04538fa1decf742c10fe4127c672",
+    "research/runs/waves/pilot_remaining_checks.log": "e3f952645ada2d4211fb910d21795958f41e15e7fd0268bf211887d2a468dec6",
+    "research/runs/waves/pilot_layer_check.json": "5c831dc1bd396c52dcad739bd9c5c7a1edcdf5d1dab93f08d2bda1160d00a8d0",
+    "research/runs/waves/pilot_audit_final.log": "49864bbd98b03bc9b1b3f400d0c4824914a0eeeef5bb2c28720f860f4fc23bbd",
+    "research/runs/waves/pilot_final_integrity.log": "188f4dd7f6dffc7df9bff4e7895fbc5120330d3e63d3947d16f4516725c7f52c",
+    "research/runs/waves/pilot_style_forcing.log": "419ba654a6399d20287c67375774fa35b02178c2289e2b523e91606b7cf53284",
+    "research/runs/waves/pilot_style_early_growth.log": "1835435b120b71b885ec7111d1a3e8c8d9a198f363d4308997ec8bb0d154265d",
+    "research/runs/waves/pilot_style_export.log": "c2d78db21db58d9b06a0bd46a1ed2b5d3e46a5613e6fb49fe79f8ceebad7bdd8",
+    "research/runs/waves/pilot_style_audit.log": "f03cb855d40a15269bca6d65d9cabaa2f51a1129ce3e8bd58e03392b2c3b2e3a",
+    "research/runs/waves/pilot_style_figure.log": "04dcd29219b04d64f17dcabe1bb19f3a6ee02601f2425eb87fe2ef790fea34f0",
+    "research/runs/waves/pilot_precommit_make_check.log": "a71dab47d27460a73c1cc4a9e32d0699a23c9d7df87a360d4575ea430a9e434f"
+  },
+  "figure": {
+    "path": "visualization/waves/results/pilot.png",
+    "sha256": "bd1832fb52dba0aa4f2c5a322c0f323f4675f3334940dfd1b8f26e06ac9d59e2",
+    "metadata": "visualization/waves/results/pilot.json",
+    "tracked": false
+  },
+  "preserved_user_agents_sha256": "698cb9cb65ac23084a874538d3ee809bdb031caa40dfe6ece94156eea744de13",
+  "worktree_state": "Pre-commit verification on research/lunar-seas.",
+  "final_integrity_note": "The complete make check passed after the style review. Source, product, log and figure hashes match; all numerical fields match the saved pre-edit products.",
+  "pending_work": [
+    "Basin-wide wind histories and surf-occurrence probabilities.",
+    "Coastal directional refinement, beach morphology, sediment evolution and geographic surf-location selection.",
+    "Empirical calibration of lunar wind input and breaking.",
+    "A SWASH source audit and individual-wave simulations of crests, run-up and currents.",
+    "Sea-temperature, mixing and underwater-light calculations.",
+    "Full scholarly-source, manuscript and exact-build PDF review."
+  ],
+  "style_review": "Direct statements of results, assumptions and remaining work replace repeated contrastive qualifications. All numerical fields match the products saved before editing.",
+  "checks_before_style_review": [
+    {
+      "command": "python -m pytest",
+      "result": "458 passed in 36.42 s; 0 skipped",
+      "scope": "Full repository Python suite, including executable SWAN controls."
+    },
+    {
+      "command": "TERLUNA_SWAN_EXECUTABLE=/tmp/terluna-lunar-seas-swan/coupled_air/swan.exe OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m pytest climate/tests/test_waves.py climate/tests/test_wave_pilot.py",
+      "result": "35 passed in 4.96 s; 0 skipped",
+      "scope": "Final wave sources; includes independent metre/spherical-grid and linear-wave energy-flux controls."
+    },
+    {
+      "command": "node --test visualization/atmospheric-columns/tests/column-viewer.test.mjs",
+      "result": "4 passed; 0 skipped",
+      "execution": "Approved retry outside the sandbox"
+    },
+    {
+      "command": "make check-provenance check-ensemble",
+      "result": "PASS; all five protection inputs available; 14 locked snapshot files and five paper workspaces intact"
+    },
+    {
+      "command": "shared.check_layers rules over git ls-files plus untracked Python/JavaScript sources, with AST parsing",
+      "result": "294 files checked, 0 violations",
+      "detail_log": "research/runs/waves/pilot_layer_check.json"
+    },
+    {
+      "command": "git diff --check",
+      "result": "PASS"
+    },
+    {
+      "command": "python -m climate.waves.pilot_checks",
+      "result": "Completed; the audit records both passing and failed numerical bounds."
+    },
+    {
+      "command": "OPENBLAS_NUM_THREADS=1 MPLCONFIGDIR=/tmp/terluna-lunar-seas-mpl-cache python visualization/waves/pilot.py",
+      "result": "Completed; plotted arrays checked against the product; rendered PNG visually inspected."
+    }
+  ]
+}

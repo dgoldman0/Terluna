@@ -1,0 +1,67 @@
+{
+  "schema": "terluna.climate.cm1-wave-forcing/1",
+  "evidence": "CM1 r22.0 in two dimensions along the equator, a great circle of no tilt, at lunar gravity (6-km columns, 111 levels to 150 km), with the Morrison microphysics given lunar fall speeds, RRTMG radiation for the design air, the Sun crossing the ring once a lunar day at each column's latitude and longitude (equinox sunlight), the 28% scenario's seas and lakes laid flat at sea level with a placeholder land surface as wet as the GCM's land nearest each column, the GCM design case's mean vertical wind at each column's latitude imposed as large-scale vertical advection, and the domain-mean temperature, vapour and winds above 8-16 km held to one profile, the GCM's mean along the path (A28_dim5_moon, the 5% dimmer shield). It has no cross-ring dimension, so air cannot converge on the storms from the sides; the land's wetness is prescribed; two-dimensional convection organises into lines more readily than real storms do.",
+  "reading_rule": "Instantaneous vectors every three hours along one equatorial line, at the original sample locations and times. Density is total moist air at 2 m using CM1's ideal-gas closure, with condensate loading omitted. Selected-byte hashes cover the six listed surface fields in FIELDS order.",
+  "units": {
+    "time_s": "model seconds",
+    "longitude_deg": "east degrees",
+    "latitude_deg": "north degrees",
+    "u10": "eastward m/s",
+    "v10": "northward m/s",
+    "s10": "m/s",
+    "psfc": "Pa",
+    "t2": "K",
+    "q2": "kg vapour / kg dry air",
+    "density_kg_m3": "kg/m3"
+  },
+  "producer": {
+    "domain": "climate",
+    "files": {
+      "climate/crm/wave_forcing.py": "2d00d85ea87e5b825b9957889a1f7ee6810ca3498769d90b7706c3a28e0812c9",
+      "climate/crm/ring_analysis.py": "cee51ef7e823cee30cf0477485ceff62f9eb26d2fcad6126ea721f35046f7ee9",
+      "shared/constants.json": "19a9d8fd60cb75f2b10eca5ef93ab22c4748e08646d1e088843710cde7da2665"
+    }
+  },
+  "inputs": {
+    "ring_ring_equator.json": "7da8c01d24121e32712fd94a00ea03f1b212a39bed21b7a54b3a4a61707a72c8",
+    "case.json": "66979fb6a66703ee7edc3a8144f924e1b377a5e0fd83378c62ca88a96908b748",
+    "cm1out_s.ctl": "c7fb14c4a082804174553943f2ae65371d07ea5b01858f3a672ccbaf1e092aa9",
+    "cm1out_metadata.ctl": "a762b4b008238918854f9f2906594087d8711de138c4046db54129ac87d98e93",
+    "cm1out_metadata.dat": "f9ffb55986fdcba70e5d6884fd2360ca9b4947adb2dfc03efa9c094d7a3089c8",
+    "terluna_surface.txt": "c79a049c85a9050d6213db3f7741937936752366942e8287e7528970e3f64c7b"
+  },
+  "product": {
+    "path": "research/runs/waves/inputs/ring_equator.npz",
+    "sha256": "b180e1c6e5199af59cbe4927595b3b3962e05051f6e899d9fbee7abc7b37435a"
+  },
+  "span_days": [
+    29.5,
+    59.0
+  ],
+  "snapshots": 237,
+  "water_density_statistics": {
+    "minimum": 1.3801666498184204,
+    "median": 1.4065719842910767,
+    "mean": 1.405499815940857,
+    "p90": 1.412519097328186,
+    "p99": 1.417368769645691,
+    "maximum": 1.4231467247009277
+  },
+  "water_wind_statistics": {
+    "minimum": 4.08643318223767e-05,
+    "median": 2.1526074409484863,
+    "mean": 2.254056215286255,
+    "p90": 4.001059055328369,
+    "p99": 5.836511135101318,
+    "maximum": 10.92531681060791
+  },
+  "smythii_marginis_equatorial_water_columns": 72,
+  "smythii_marginis_equatorial_density_statistics": {
+    "minimum": 1.3802858591079712,
+    "median": 1.406306505203247,
+    "mean": 1.4039006233215332,
+    "p90": 1.4102394580841064,
+    "p99": 1.414190411567688,
+    "maximum": 1.4166827201843262
+  }
+}

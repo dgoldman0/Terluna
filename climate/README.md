@@ -168,8 +168,14 @@ comparing Earth and lunar gravity over a flat 100 km strip for up to 48 hours.
 The study includes a gravity audit, stock and modified wind-source builds,
 repeatability and resolution checks, and explicit input provenance. Fetch,
 direction and persistence are imposed; the outputs are conditional wave
-responses. Named-basin forcing, sea-temperature gradients and underwater
-light profiles remain open.
+responses. A follow-up recovers three-hourly equatorial CM1 vectors and moist
+air density, drives a Smythii–Marginis basin pilot with stated wind episodes,
+and transfers an offshore spectrum to three idealised coastal slopes. These
+produce roughly metre-scale significant heights where breaking begins under
+the assumed lunar breaking coefficients. Halving the basin grid changes some
+local heights by 41%; choosing surf locations requires finer coastal grids. The
+earliest growth remains timestep-sensitive. Basin-wide wind histories,
+sea-temperature gradients and underwater light profiles remain open.
 
 ## Next step
 

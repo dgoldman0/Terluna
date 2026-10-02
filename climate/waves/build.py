@@ -11,6 +11,7 @@ import argparse
 import difflib
 import hashlib
 import json
+import math
 import os
 from pathlib import Path, PurePosixPath
 import shutil
@@ -26,6 +27,7 @@ SOURCE_SHA256 = "325c229f3dde0b812db4ec9ae6fa1cd4086d2109562c389576590ce8f94b26b
 AGROW_SOURCE_SHA256 = "b164c7b9ac8f94672b637e114dbacad503b624c8c1c8ae50339b80c0083558af"
 MAX_ARCHIVE_BYTES = 4 * 1024**2
 MAX_EXTRACTED_BYTES = 64 * 1024**2
+MAIN_SOURCE_SHA256 = "d89c664cddb06de60b84655e8523e04fb8b17dc342ff5add158579369bfb568a"
 
 
 def sha256(path: Path) -> str:
@@ -105,6 +107,50 @@ def compile_source(source: Path, environment: dict) -> dict:
                 elapsed_wall_s=time.monotonic() - start, commands=commands,
                 macros_inc=macros, macros_sha256=sha256(source / "macros.inc"),
                 build_log_sha256=sha256(source / "build.log"))
+
+
+def patch_air_density(source: Path, density: float) -> dict:
+    """Change the fixed air density, keeping SWAN's subsequent ratio reset intact."""
+    if not math.isfinite(density) or density <= 0:
+        raise ValueError("Air density must be positive and finite")
+    path = source / "swanmain.ftn"
+    if sha256(path) != MAIN_SOURCE_SHA256:
+        raise ValueError("Air-density patch requires pristine SWAN 41.51 swanmain.ftn")
+    before = path.read_text(encoding="ascii")
+    old = "      PWIND(16) = 1.28\n"
+    if before.count(old) != 1:
+        raise ValueError("SWAN air-density anchor changed")
+    after = before.replace(old, f"      PWIND(16) = {density:.12g}\n")
+    path.write_text(after, encoding="ascii")
+    return dict(path=path.name, before_sha256=MAIN_SOURCE_SHA256, after_sha256=sha256(path),
+                air_density_kg_m3=density, unified_diff="".join(difflib.unified_diff(
+                    before.splitlines(True), after.splitlines(True), fromfile="a/swanmain.ftn", tofile="b/swanmain.ftn")))
+
+
+def build_coupled(build_root: Path, density: float) -> dict:
+    """Add the AGROW+density build in its own directory."""
+    target = build_root / "coupled_air"
+    manifest = build_root / "coupled_air.json"
+    if manifest.exists():
+        record = json.loads(manifest.read_text())
+        if record["air_density_kg_m3"] != density or sha256(target / "swan.exe") != record["build"]["executable_sha256"]:
+            raise ValueError("Existing coupled build differs from requested density or executable")
+        return record
+    if target.exists():
+        raise FileExistsError("Incomplete coupled build; inspect before retrying")
+    source = extract_source(build_root / "swan4151.tar.gz", build_root / "coupled_source")
+    shutil.copytree(source, target)
+    patches = [patch_agrow(target), patch_air_density(target, density)]
+    env = dict(os.environ, FC="gfortran", OMP_NUM_THREADS="1", OPENBLAS_NUM_THREADS="1")
+    for name in ("MAKEFLAGS", "MFLAGS", "GNUMAKEFLAGS"):
+        env.pop(name, None)
+    compiled = compile_source(target, env)
+    record = dict(schema="terluna.climate.swan-coupled-build/1", source_sha256=SOURCE_SHA256,
+                  producer_sha256=sha256(Path(__file__)), air_density_kg_m3=density,
+                  evidence="Fixed representative CM1 surface density. Spatial/temporal density feedback and lunar validation of drag/growth laws remain open.",
+                  patches=patches, build=compiled)
+    manifest.write_text(json.dumps(record, indent=2) + "\n")
+    return record
 
 
 def build(build_root: Path, *, archive: Path | None = None, download: bool = False) -> dict:

@@ -1,0 +1,2428 @@
+{
+  "schema": "terluna.climate.wave-early-growth/1",
+  "evidence": "Numerical refinement of a six-hour, uniform p90-wind episode on the original deep strip. Empirical validation remains open.",
+  "reading_rule": "Comparisons use matched time, fetch and wind, with reference Hs at least 1 cm. Five percent is the chosen numerical tolerance for this wind case; physical accuracy requires separate validation.",
+  "units": {
+    "time": "s or labelled minutes",
+    "length": "m or labelled km",
+    "period": "s",
+    "frequency": "Hz"
+  },
+  "producer": {
+    "domain": "climate",
+    "files": {
+      "climate/waves/early_growth.py": "f3cba5960adcadc3a78887372b3e4f4a40bb684593a0cfd815fd16aa253ec555",
+      "climate/waves/model.py": "a829868a2f5def93ccde5640b3ac6afc891ae0aa5c1e6eaa65bc7c69f5259439"
+    }
+  },
+  "inputs": {
+    "wind": {
+      "path": "climate/results/crm/ring_ring_equator.json",
+      "sha256": "7da8c01d24121e32712fd94a00ea03f1b212a39bed21b7a54b3a4a61707a72c8",
+      "schema": "terluna.climate.crm-ring/1",
+      "span_days": [
+        29.5,
+        59.0
+      ],
+      "snapshots": 237
+    },
+    "build_sha256": "308682bd98908d99b86e9531bbfd21cb57b74a0640aabafe2ab62151ff7c69d9"
+  },
+  "checks": {
+    "dt_300_to_150": {
+      "hs_relative_max": 0.2532998114393462,
+      "hs_relative_rms": 0.1464014816238845,
+      "hs_absolute_max": 0.07700000000000001,
+      "mean_period_relative_max": 0.22630198576245797,
+      "mean_period_relative_rms": 0.09528686659119753,
+      "mean_period_absolute_max": 0.657,
+      "samples": 6279,
+      "within_five_percent": false
+    },
+    "dt_150_to_75": {
+      "hs_relative_max": 0.24414490311710202,
+      "hs_relative_rms": 0.1095004303634112,
+      "hs_absolute_max": 0.051799999999999985,
+      "mean_period_relative_max": 0.17680776014109356,
+      "mean_period_relative_rms": 0.06802230769624956,
+      "mean_period_absolute_max": 0.5380000000000003,
+      "samples": 6279,
+      "within_five_percent": false
+    },
+    "dt_75_to_30": {
+      "hs_relative_max": 0.325812274368231,
+      "hs_relative_rms": 0.10207343500847395,
+      "hs_absolute_max": 0.054900000000000004,
+      "mean_period_relative_max": 0.16967509025270755,
+      "mean_period_relative_rms": 0.05731050494780494,
+      "mean_period_absolute_max": 0.47699999999999987,
+      "samples": 6279,
+      "within_five_percent": false
+    },
+    "dt_30_to_15": {
+      "hs_relative_max": 0.2226419166846536,
+      "hs_relative_rms": 0.05437157192818188,
+      "hs_absolute_max": 0.030300000000000007,
+      "mean_period_relative_max": 0.11939163498098859,
+      "mean_period_relative_rms": 0.030160359599956513,
+      "mean_period_absolute_max": 0.31400000000000006,
+      "samples": 6279,
+      "within_five_percent": false
+    },
+    "frequency_48_to_96": {
+      "hs_relative_max": 0.008003766478342778,
+      "hs_relative_rms": 0.0015590607905410097,
+      "hs_absolute_max": 0.001700000000000007,
+      "mean_period_relative_max": 0.01445550915515581,
+      "mean_period_relative_rms": 0.0030825234077536874,
+      "mean_period_absolute_max": 0.04499999999999993,
+      "samples": 6279,
+      "within_five_percent": true
+    },
+    "frequency_96_to_192": {
+      "hs_relative_max": 0.004501125281320295,
+      "hs_relative_rms": 0.0009478634283473889,
+      "hs_absolute_max": 0.0011999999999999789,
+      "mean_period_relative_max": 0.007609013754755756,
+      "mean_period_relative_rms": 0.0022395182651117006,
+      "mean_period_absolute_max": 0.026000000000000245,
+      "samples": 6279,
+      "within_five_percent": true
+    },
+    "first_two_hours_dt_15_to_5": {
+      "hs_relative_max": 0.37978580990629185,
+      "hs_relative_rms": 0.10672921182121681,
+      "hs_absolute_max": 0.05674,
+      "mean_period_relative_max": 0.171969696969697,
+      "mean_period_relative_rms": 0.052294977450968894,
+      "mean_period_absolute_max": 0.4540000000000002,
+      "samples": 1911,
+      "within_five_percent": false
+    },
+    "first_two_hours_dt_5_to_2": {
+      "hs_relative_max": 0.21574803149606303,
+      "hs_relative_rms": 0.05806806278311695,
+      "hs_absolute_max": 0.0411,
+      "mean_period_relative_max": 0.1836273179556761,
+      "mean_period_relative_rms": 0.04548753695564739,
+      "mean_period_absolute_max": 0.4059999999999999,
+      "samples": 1911,
+      "within_five_percent": false
+    },
+    "first_two_hours_dt_2_to_1": {
+      "hs_relative_max": 0.046272493573264795,
+      "hs_relative_rms": 0.018939345839715824,
+      "hs_absolute_max": 0.009000000000000008,
+      "mean_period_relative_max": 0.12227074235807867,
+      "mean_period_relative_rms": 0.029511482086604444,
+      "mean_period_absolute_max": 0.3080000000000003,
+      "samples": 1911,
+      "within_five_percent": false
+    },
+    "hours_one_to_two_dt_2_to_1": {
+      "hs_relative_max": 0.01684483317136376,
+      "hs_relative_rms": 0.011703329382864057,
+      "hs_absolute_max": 0.005199999999999982,
+      "mean_period_relative_max": 0.01143292682926822,
+      "mean_period_relative_rms": 0.008098777008422653,
+      "mean_period_absolute_max": 0.04499999999999993,
+      "samples": 1183,
+      "within_five_percent": true,
+      "scope_note": "Follow-up diagnostic for 1\u20132 hours, examined after the full 20-minute\u20132-hour check failed for mean period. Earlier times remain unresolved."
+    }
+  },
+  "cases": [
+    {
+      "name": "early_dt300_nf48",
+      "gravity_m_s2": 1.6242188765608128,
+      "wind_m_s": 4.001058578491211,
+      "length_m": 100000.0,
+      "depth_m": 1000.0,
+      "cells": 100,
+      "direction_bins": 36,
+      "frequency_intervals": 48,
+      "earth_low_hz": 0.03,
+      "earth_high_hz": 3.0,
+      "steps": 72,
+      "step_s": 300,
+      "output_every_steps": 1,
+      "agrow": true,
+      "seed_height_m": 0.0,
+      "seed_period_s": 2.0,
+      "water_density_kg_m3": 1025.0
+    },
+    {
+      "name": "early_dt150_nf48",
+      "gravity_m_s2": 1.6242188765608128,
+      "wind_m_s": 4.001058578491211,
+      "length_m": 100000.0,
+      "depth_m": 1000.0,
+      "cells": 100,
+      "direction_bins": 36,
+      "frequency_intervals": 48,
+      "earth_low_hz": 0.03,
+      "earth_high_hz": 3.0,
+      "steps": 144,
+      "step_s": 150,
+      "output_every_steps": 2,
+      "agrow": true,
+      "seed_height_m": 0.0,
+      "seed_period_s": 2.0,
+      "water_density_kg_m3": 1025.0
+    },
+    {
+      "name": "early_dt75_nf48",
+      "gravity_m_s2": 1.6242188765608128,
+      "wind_m_s": 4.001058578491211,
+      "length_m": 100000.0,
+      "depth_m": 1000.0,
+      "cells": 100,
+      "direction_bins": 36,
+      "frequency_intervals": 48,
+      "earth_low_hz": 0.03,
+      "earth_high_hz": 3.0,
+      "steps": 288,
+      "step_s": 75,
+      "output_every_steps": 4,
+      "agrow": true,
+      "seed_height_m": 0.0,
+      "seed_period_s": 2.0,
+      "water_density_kg_m3": 1025.0
+    },
+    {
+      "name": "early_dt30_nf48",
+      "gravity_m_s2": 1.6242188765608128,
+      "wind_m_s": 4.001058578491211,
+      "length_m": 100000.0,
+      "depth_m": 1000.0,
+      "cells": 100,
+      "direction_bins": 36,
+      "frequency_intervals": 48,
+      "earth_low_hz": 0.03,
+      "earth_high_hz": 3.0,
+      "steps": 720,
+      "step_s": 30,
+      "output_every_steps": 10,
+      "agrow": true,
+      "seed_height_m": 0.0,
+      "seed_period_s": 2.0,
+      "water_density_kg_m3": 1025.0
+    },
+    {
+      "name": "early_dt15_nf48",
+      "gravity_m_s2": 1.6242188765608128,
+      "wind_m_s": 4.001058578491211,
+      "length_m": 100000.0,
+      "depth_m": 1000.0,
+      "cells": 100,
+      "direction_bins": 36,
+      "frequency_intervals": 48,
+      "earth_low_hz": 0.03,
+      "earth_high_hz": 3.0,
+      "steps": 1440,
+      "step_s": 15,
+      "output_every_steps": 20,
+      "agrow": true,
+      "seed_height_m": 0.0,
+      "seed_period_s": 2.0,
+      "water_density_kg_m3": 1025.0
+    },
+    {
+      "name": "early_dt15_nf96",
+      "gravity_m_s2": 1.6242188765608128,
+      "wind_m_s": 4.001058578491211,
+      "length_m": 100000.0,
+      "depth_m": 1000.0,
+      "cells": 100,
+      "direction_bins": 36,
+      "frequency_intervals": 96,
+      "earth_low_hz": 0.03,
+      "earth_high_hz": 3.0,
+      "steps": 1440,
+      "step_s": 15,
+      "output_every_steps": 20,
+      "agrow": true,
+      "seed_height_m": 0.0,
+      "seed_period_s": 2.0,
+      "water_density_kg_m3": 1025.0
+    },
+    {
+      "name": "early_dt15_nf192",
+      "gravity_m_s2": 1.6242188765608128,
+      "wind_m_s": 4.001058578491211,
+      "length_m": 100000.0,
+      "depth_m": 1000.0,
+      "cells": 100,
+      "direction_bins": 36,
+      "frequency_intervals": 192,
+      "earth_low_hz": 0.03,
+      "earth_high_hz": 3.0,
+      "steps": 1440,
+      "step_s": 15,
+      "output_every_steps": 20,
+      "agrow": true,
+      "seed_height_m": 0.0,
+      "seed_period_s": 2.0,
+      "water_density_kg_m3": 1025.0
+    },
+    {
+      "name": "early_dt5_nf48",
+      "gravity_m_s2": 1.6242188765608128,
+      "wind_m_s": 4.001058578491211,
+      "length_m": 100000.0,
+      "depth_m": 1000.0,
+      "cells": 100,
+      "direction_bins": 36,
+      "frequency_intervals": 48,
+      "earth_low_hz": 0.03,
+      "earth_high_hz": 3.0,
+      "steps": 1440,
+      "step_s": 5,
+      "output_every_steps": 60,
+      "agrow": true,
+      "seed_height_m": 0.0,
+      "seed_period_s": 2.0,
+      "water_density_kg_m3": 1025.0
+    },
+    {
+      "name": "early_dt2_nf48",
+      "gravity_m_s2": 1.6242188765608128,
+      "wind_m_s": 4.001058578491211,
+      "length_m": 100000.0,
+      "depth_m": 1000.0,
+      "cells": 100,
+      "direction_bins": 36,
+      "frequency_intervals": 48,
+      "earth_low_hz": 0.03,
+      "earth_high_hz": 3.0,
+      "steps": 3600,
+      "step_s": 2,
+      "output_every_steps": 150,
+      "agrow": true,
+      "seed_height_m": 0.0,
+      "seed_period_s": 2.0,
+      "water_density_kg_m3": 1025.0
+    },
+    {
+      "name": "early_dt1_nf48",
+      "gravity_m_s2": 1.6242188765608128,
+      "wind_m_s": 4.001058578491211,
+      "length_m": 100000.0,
+      "depth_m": 1000.0,
+      "cells": 100,
+      "direction_bins": 36,
+      "frequency_intervals": 48,
+      "earth_low_hz": 0.03,
+      "earth_high_hz": 3.0,
+      "steps": 7200,
+      "step_s": 1,
+      "output_every_steps": 300,
+      "agrow": true,
+      "seed_height_m": 0.0,
+      "seed_period_s": 2.0,
+      "water_density_kg_m3": 1025.0
+    }
+  ],
+  "rows": [
+    {
+      "step_s": 300,
+      "frequency_intervals": 48,
+      "duration_min": 20,
+      "fetch_km": 10,
+      "hs_m": 0.03949,
+      "peak_period_s": 6.364,
+      "mean_period_s": 3.272
+    },
+    {
+      "step_s": 300,
+      "frequency_intervals": 48,
+      "duration_min": 20,
+      "fetch_km": 25,
+      "hs_m": 0.03949,
+      "peak_period_s": 6.364,
+      "mean_period_s": 3.273
+    },
+    {
+      "step_s": 300,
+      "frequency_intervals": 48,
+      "duration_min": 20,
+      "fetch_km": 50,
+      "hs_m": 0.03949,
+      "peak_period_s": 6.364,
+      "mean_period_s": 3.273
+    },
+    {
+      "step_s": 300,
+      "frequency_intervals": 48,
+      "duration_min": 20,
+      "fetch_km": 100,
+      "hs_m": 0.03949,
+      "peak_period_s": 6.364,
+      "mean_period_s": 3.273
+    },
+    {
+      "step_s": 300,
+      "frequency_intervals": 48,
+      "duration_min": 60,
+      "fetch_km": 10,
+      "hs_m": 0.132,
+      "peak_period_s": 3.579,
+      "mean_period_s": 2.892
+    },
+    {
+      "step_s": 300,
+      "frequency_intervals": 48,
+      "duration_min": 60,
+      "fetch_km": 25,
+      "hs_m": 0.132,
+      "peak_period_s": 3.579,
+      "mean_period_s": 2.894
+    },
+    {
+      "step_s": 300,
+      "frequency_intervals": 48,
+      "duration_min": 60,
+      "fetch_km": 50,
+      "hs_m": 0.132,
+      "peak_period_s": 3.579,
+      "mean_period_s": 2.894
+    },
+    {
+      "step_s": 300,
+      "frequency_intervals": 48,
+      "duration_min": 60,
+      "fetch_km": 100,
+      "hs_m": 0.132,
+      "peak_period_s": 3.579,
+      "mean_period_s": 2.895
+    },
+    {
+      "step_s": 300,
+      "frequency_intervals": 48,
+      "duration_min": 120,
+      "fetch_km": 10,
+      "hs_m": 0.2965,
+      "peak_period_s": 4.773,
+      "mean_period_s": 3.739
+    },
+    {
+      "step_s": 300,
+      "frequency_intervals": 48,
+      "duration_min": 120,
+      "fetch_km": 25,
+      "hs_m": 0.2981,
+      "peak_period_s": 4.773,
+      "mean_period_s": 3.747
+    },
+    {
+      "step_s": 300,
+      "frequency_intervals": 48,
+      "duration_min": 120,
+      "fetch_km": 50,
+      "hs_m": 0.2981,
+      "peak_period_s": 4.773,
+      "mean_period_s": 3.747
+    },
+    {
+      "step_s": 300,
+      "frequency_intervals": 48,
+      "duration_min": 120,
+      "fetch_km": 100,
+      "hs_m": 0.298,
+      "peak_period_s": 4.773,
+      "mean_period_s": 3.754
+    },
+    {
+      "step_s": 300,
+      "frequency_intervals": 48,
+      "duration_min": 180,
+      "fetch_km": 10,
+      "hs_m": 0.446,
+      "peak_period_s": 5.782,
+      "mean_period_s": 4.944
+    },
+    {
+      "step_s": 300,
+      "frequency_intervals": 48,
+      "duration_min": 180,
+      "fetch_km": 25,
+      "hs_m": 0.4544,
+      "peak_period_s": 5.782,
+      "mean_period_s": 5.002
+    },
+    {
+      "step_s": 300,
+      "frequency_intervals": 48,
+      "duration_min": 180,
+      "fetch_km": 50,
+      "hs_m": 0.4545,
+      "peak_period_s": 5.782,
+      "mean_period_s": 5.001
+    },
+    {
+      "step_s": 300,
+      "frequency_intervals": 48,
+      "duration_min": 180,
+      "fetch_km": 100,
+      "hs_m": 0.4544,
+      "peak_period_s": 5.782,
+      "mean_period_s": 5.007
+    },
+    {
+      "step_s": 300,
+      "frequency_intervals": 48,
+      "duration_min": 360,
+      "fetch_km": 10,
+      "hs_m": 0.6751,
+      "peak_period_s": 7.711,
+      "mean_period_s": 6.645
+    },
+    {
+      "step_s": 300,
+      "frequency_intervals": 48,
+      "duration_min": 360,
+      "fetch_km": 25,
+      "hs_m": 0.7878,
+      "peak_period_s": 8.487,
+      "mean_period_s": 7.329
+    },
+    {
+      "step_s": 300,
+      "frequency_intervals": 48,
+      "duration_min": 360,
+      "fetch_km": 50,
+      "hs_m": 0.7938,
+      "peak_period_s": 8.487,
+      "mean_period_s": 7.362
+    },
+    {
+      "step_s": 300,
+      "frequency_intervals": 48,
+      "duration_min": 360,
+      "fetch_km": 100,
+      "hs_m": 0.7937,
+      "peak_period_s": 8.487,
+      "mean_period_s": 7.363
+    },
+    {
+      "step_s": 150,
+      "frequency_intervals": 48,
+      "duration_min": 20,
+      "fetch_km": 10,
+      "hs_m": 0.04641,
+      "peak_period_s": 6.364,
+      "mean_period_s": 2.669
+    },
+    {
+      "step_s": 150,
+      "frequency_intervals": 48,
+      "duration_min": 20,
+      "fetch_km": 25,
+      "hs_m": 0.04641,
+      "peak_period_s": 6.364,
+      "mean_period_s": 2.669
+    },
+    {
+      "step_s": 150,
+      "frequency_intervals": 48,
+      "duration_min": 20,
+      "fetch_km": 50,
+      "hs_m": 0.04641,
+      "peak_period_s": 6.364,
+      "mean_period_s": 2.669
+    },
+    {
+      "step_s": 150,
+      "frequency_intervals": 48,
+      "duration_min": 20,
+      "fetch_km": 100,
+      "hs_m": 0.04641,
+      "peak_period_s": 6.364,
+      "mean_period_s": 2.669
+    },
+    {
+      "step_s": 150,
+      "frequency_intervals": 48,
+      "duration_min": 60,
+      "fetch_km": 10,
+      "hs_m": 0.1757,
+      "peak_period_s": 3.579,
+      "mean_period_s": 2.788
+    },
+    {
+      "step_s": 150,
+      "frequency_intervals": 48,
+      "duration_min": 60,
+      "fetch_km": 25,
+      "hs_m": 0.1758,
+      "peak_period_s": 3.579,
+      "mean_period_s": 2.788
+    },
+    {
+      "step_s": 150,
+      "frequency_intervals": 48,
+      "duration_min": 60,
+      "fetch_km": 50,
+      "hs_m": 0.1758,
+      "peak_period_s": 3.579,
+      "mean_period_s": 2.788
+    },
+    {
+      "step_s": 150,
+      "frequency_intervals": 48,
+      "duration_min": 60,
+      "fetch_km": 100,
+      "hs_m": 0.1757,
+      "peak_period_s": 3.579,
+      "mean_period_s": 2.79
+    },
+    {
+      "step_s": 150,
+      "frequency_intervals": 48,
+      "duration_min": 120,
+      "fetch_km": 10,
+      "hs_m": 0.3675,
+      "peak_period_s": 5.253,
+      "mean_period_s": 4.357
+    },
+    {
+      "step_s": 150,
+      "frequency_intervals": 48,
+      "duration_min": 120,
+      "fetch_km": 25,
+      "hs_m": 0.3686,
+      "peak_period_s": 5.253,
+      "mean_period_s": 4.372
+    },
+    {
+      "step_s": 150,
+      "frequency_intervals": 48,
+      "duration_min": 120,
+      "fetch_km": 50,
+      "hs_m": 0.3686,
+      "peak_period_s": 5.253,
+      "mean_period_s": 4.371
+    },
+    {
+      "step_s": 150,
+      "frequency_intervals": 48,
+      "duration_min": 120,
+      "fetch_km": 100,
+      "hs_m": 0.3686,
+      "peak_period_s": 5.253,
+      "mean_period_s": 4.381
+    },
+    {
+      "step_s": 150,
+      "frequency_intervals": 48,
+      "duration_min": 180,
+      "fetch_km": 10,
+      "hs_m": 0.5134,
+      "peak_period_s": 6.364,
+      "mean_period_s": 5.527
+    },
+    {
+      "step_s": 150,
+      "frequency_intervals": 48,
+      "duration_min": 180,
+      "fetch_km": 25,
+      "hs_m": 0.5222,
+      "peak_period_s": 6.364,
+      "mean_period_s": 5.59
+    },
+    {
+      "step_s": 150,
+      "frequency_intervals": 48,
+      "duration_min": 180,
+      "fetch_km": 50,
+      "hs_m": 0.5222,
+      "peak_period_s": 6.364,
+      "mean_period_s": 5.59
+    },
+    {
+      "step_s": 150,
+      "frequency_intervals": 48,
+      "duration_min": 180,
+      "fetch_km": 100,
+      "hs_m": 0.5222,
+      "peak_period_s": 6.364,
+      "mean_period_s": 5.592
+    },
+    {
+      "step_s": 150,
+      "frequency_intervals": 48,
+      "duration_min": 360,
+      "fetch_km": 10,
+      "hs_m": 0.6862,
+      "peak_period_s": 7.711,
+      "mean_period_s": 6.754
+    },
+    {
+      "step_s": 150,
+      "frequency_intervals": 48,
+      "duration_min": 360,
+      "fetch_km": 25,
+      "hs_m": 0.8214,
+      "peak_period_s": 8.487,
+      "mean_period_s": 7.565
+    },
+    {
+      "step_s": 150,
+      "frequency_intervals": 48,
+      "duration_min": 360,
+      "fetch_km": 50,
+      "hs_m": 0.8278,
+      "peak_period_s": 8.487,
+      "mean_period_s": 7.602
+    },
+    {
+      "step_s": 150,
+      "frequency_intervals": 48,
+      "duration_min": 360,
+      "fetch_km": 100,
+      "hs_m": 0.8277,
+      "peak_period_s": 8.487,
+      "mean_period_s": 7.603
+    },
+    {
+      "step_s": 75,
+      "frequency_intervals": 48,
+      "duration_min": 20,
+      "fetch_km": 10,
+      "hs_m": 0.05528,
+      "peak_period_s": 6.364,
+      "mean_period_s": 2.268
+    },
+    {
+      "step_s": 75,
+      "frequency_intervals": 48,
+      "duration_min": 20,
+      "fetch_km": 25,
+      "hs_m": 0.05528,
+      "peak_period_s": 6.364,
+      "mean_period_s": 2.268
+    },
+    {
+      "step_s": 75,
+      "frequency_intervals": 48,
+      "duration_min": 20,
+      "fetch_km": 50,
+      "hs_m": 0.05528,
+      "peak_period_s": 6.364,
+      "mean_period_s": 2.268
+    },
+    {
+      "step_s": 75,
+      "frequency_intervals": 48,
+      "duration_min": 20,
+      "fetch_km": 100,
+      "hs_m": 0.05528,
+      "peak_period_s": 6.364,
+      "mean_period_s": 2.268
+    },
+    {
+      "step_s": 75,
+      "frequency_intervals": 48,
+      "duration_min": 60,
+      "fetch_km": 10,
+      "hs_m": 0.2241,
+      "peak_period_s": 3.939,
+      "mean_period_s": 3.011
+    },
+    {
+      "step_s": 75,
+      "frequency_intervals": 48,
+      "duration_min": 60,
+      "fetch_km": 25,
+      "hs_m": 0.2242,
+      "peak_period_s": 3.939,
+      "mean_period_s": 3.011
+    },
+    {
+      "step_s": 75,
+      "frequency_intervals": 48,
+      "duration_min": 60,
+      "fetch_km": 50,
+      "hs_m": 0.2242,
+      "peak_period_s": 3.939,
+      "mean_period_s": 3.011
+    },
+    {
+      "step_s": 75,
+      "frequency_intervals": 48,
+      "duration_min": 60,
+      "fetch_km": 100,
+      "hs_m": 0.2242,
+      "peak_period_s": 3.939,
+      "mean_period_s": 3.013
+    },
+    {
+      "step_s": 75,
+      "frequency_intervals": 48,
+      "duration_min": 120,
+      "fetch_km": 10,
+      "hs_m": 0.4115,
+      "peak_period_s": 5.782,
+      "mean_period_s": 4.771
+    },
+    {
+      "step_s": 75,
+      "frequency_intervals": 48,
+      "duration_min": 120,
+      "fetch_km": 25,
+      "hs_m": 0.4129,
+      "peak_period_s": 5.782,
+      "mean_period_s": 4.779
+    },
+    {
+      "step_s": 75,
+      "frequency_intervals": 48,
+      "duration_min": 120,
+      "fetch_km": 50,
+      "hs_m": 0.4129,
+      "peak_period_s": 5.782,
+      "mean_period_s": 4.779
+    },
+    {
+      "step_s": 75,
+      "frequency_intervals": 48,
+      "duration_min": 120,
+      "fetch_km": 100,
+      "hs_m": 0.4129,
+      "peak_period_s": 5.782,
+      "mean_period_s": 4.782
+    },
+    {
+      "step_s": 75,
+      "frequency_intervals": 48,
+      "duration_min": 180,
+      "fetch_km": 10,
+      "hs_m": 0.5461,
+      "peak_period_s": 6.364,
+      "mean_period_s": 5.786
+    },
+    {
+      "step_s": 75,
+      "frequency_intervals": 48,
+      "duration_min": 180,
+      "fetch_km": 25,
+      "hs_m": 0.5563,
+      "peak_period_s": 7.005,
+      "mean_period_s": 5.85
+    },
+    {
+      "step_s": 75,
+      "frequency_intervals": 48,
+      "duration_min": 180,
+      "fetch_km": 50,
+      "hs_m": 0.5563,
+      "peak_period_s": 7.005,
+      "mean_period_s": 5.85
+    },
+    {
+      "step_s": 75,
+      "frequency_intervals": 48,
+      "duration_min": 180,
+      "fetch_km": 100,
+      "hs_m": 0.5563,
+      "peak_period_s": 7.005,
+      "mean_period_s": 5.851
+    },
+    {
+      "step_s": 75,
+      "frequency_intervals": 48,
+      "duration_min": 360,
+      "fetch_km": 10,
+      "hs_m": 0.6908,
+      "peak_period_s": 7.711,
+      "mean_period_s": 6.791
+    },
+    {
+      "step_s": 75,
+      "frequency_intervals": 48,
+      "duration_min": 360,
+      "fetch_km": 25,
+      "hs_m": 0.8413,
+      "peak_period_s": 8.487,
+      "mean_period_s": 7.691
+    },
+    {
+      "step_s": 75,
+      "frequency_intervals": 48,
+      "duration_min": 360,
+      "fetch_km": 50,
+      "hs_m": 0.8486,
+      "peak_period_s": 8.487,
+      "mean_period_s": 7.731
+    },
+    {
+      "step_s": 75,
+      "frequency_intervals": 48,
+      "duration_min": 360,
+      "fetch_km": 100,
+      "hs_m": 0.8485,
+      "peak_period_s": 8.487,
+      "mean_period_s": 7.732
+    },
+    {
+      "step_s": 30,
+      "frequency_intervals": 48,
+      "duration_min": 20,
+      "fetch_km": 10,
+      "hs_m": 0.07203,
+      "peak_period_s": 2.013,
+      "mean_period_s": 1.939
+    },
+    {
+      "step_s": 30,
+      "frequency_intervals": 48,
+      "duration_min": 20,
+      "fetch_km": 25,
+      "hs_m": 0.07203,
+      "peak_period_s": 2.013,
+      "mean_period_s": 1.939
+    },
+    {
+      "step_s": 30,
+      "frequency_intervals": 48,
+      "duration_min": 20,
+      "fetch_km": 50,
+      "hs_m": 0.07203,
+      "peak_period_s": 2.013,
+      "mean_period_s": 1.939
+    },
+    {
+      "step_s": 30,
+      "frequency_intervals": 48,
+      "duration_min": 20,
+      "fetch_km": 100,
+      "hs_m": 0.07203,
+      "peak_period_s": 2.013,
+      "mean_period_s": 1.939
+    },
+    {
+      "step_s": 30,
+      "frequency_intervals": 48,
+      "duration_min": 60,
+      "fetch_km": 10,
+      "hs_m": 0.2649,
+      "peak_period_s": 4.336,
+      "mean_period_s": 3.474
+    },
+    {
+      "step_s": 30,
+      "frequency_intervals": 48,
+      "duration_min": 60,
+      "fetch_km": 25,
+      "hs_m": 0.2649,
+      "peak_period_s": 4.336,
+      "mean_period_s": 3.474
+    },
+    {
+      "step_s": 30,
+      "frequency_intervals": 48,
+      "duration_min": 60,
+      "fetch_km": 50,
+      "hs_m": 0.2649,
+      "peak_period_s": 4.336,
+      "mean_period_s": 3.474
+    },
+    {
+      "step_s": 30,
+      "frequency_intervals": 48,
+      "duration_min": 60,
+      "fetch_km": 100,
+      "hs_m": 0.265,
+      "peak_period_s": 4.336,
+      "mean_period_s": 3.479
+    },
+    {
+      "step_s": 30,
+      "frequency_intervals": 48,
+      "duration_min": 120,
+      "fetch_km": 10,
+      "hs_m": 0.4403,
+      "peak_period_s": 5.782,
+      "mean_period_s": 4.996
+    },
+    {
+      "step_s": 30,
+      "frequency_intervals": 48,
+      "duration_min": 120,
+      "fetch_km": 25,
+      "hs_m": 0.4416,
+      "peak_period_s": 5.782,
+      "mean_period_s": 5.004
+    },
+    {
+      "step_s": 30,
+      "frequency_intervals": 48,
+      "duration_min": 120,
+      "fetch_km": 50,
+      "hs_m": 0.4416,
+      "peak_period_s": 5.782,
+      "mean_period_s": 5.004
+    },
+    {
+      "step_s": 30,
+      "frequency_intervals": 48,
+      "duration_min": 120,
+      "fetch_km": 100,
+      "hs_m": 0.4416,
+      "peak_period_s": 5.782,
+      "mean_period_s": 5.006
+    },
+    {
+      "step_s": 30,
+      "frequency_intervals": 48,
+      "duration_min": 180,
+      "fetch_km": 10,
+      "hs_m": 0.5679,
+      "peak_period_s": 7.005,
+      "mean_period_s": 5.935
+    },
+    {
+      "step_s": 30,
+      "frequency_intervals": 48,
+      "duration_min": 180,
+      "fetch_km": 25,
+      "hs_m": 0.5792,
+      "peak_period_s": 7.005,
+      "mean_period_s": 6.007
+    },
+    {
+      "step_s": 30,
+      "frequency_intervals": 48,
+      "duration_min": 180,
+      "fetch_km": 50,
+      "hs_m": 0.5792,
+      "peak_period_s": 7.005,
+      "mean_period_s": 6.007
+    },
+    {
+      "step_s": 30,
+      "frequency_intervals": 48,
+      "duration_min": 180,
+      "fetch_km": 100,
+      "hs_m": 0.5792,
+      "peak_period_s": 7.005,
+      "mean_period_s": 6.008
+    },
+    {
+      "step_s": 30,
+      "frequency_intervals": 48,
+      "duration_min": 360,
+      "fetch_km": 10,
+      "hs_m": 0.6931,
+      "peak_period_s": 7.711,
+      "mean_period_s": 6.809
+    },
+    {
+      "step_s": 30,
+      "frequency_intervals": 48,
+      "duration_min": 360,
+      "fetch_km": 25,
+      "hs_m": 0.8543,
+      "peak_period_s": 8.487,
+      "mean_period_s": 7.768
+    },
+    {
+      "step_s": 30,
+      "frequency_intervals": 48,
+      "duration_min": 360,
+      "fetch_km": 50,
+      "hs_m": 0.8625,
+      "peak_period_s": 9.342,
+      "mean_period_s": 7.812
+    },
+    {
+      "step_s": 30,
+      "frequency_intervals": 48,
+      "duration_min": 360,
+      "fetch_km": 100,
+      "hs_m": 0.8624,
+      "peak_period_s": 9.342,
+      "mean_period_s": 7.813
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 48,
+      "duration_min": 20,
+      "fetch_km": 10,
+      "hs_m": 0.09266,
+      "peak_period_s": 2.013,
+      "mean_period_s": 1.806
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 48,
+      "duration_min": 20,
+      "fetch_km": 25,
+      "hs_m": 0.09266,
+      "peak_period_s": 2.013,
+      "mean_period_s": 1.806
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 48,
+      "duration_min": 20,
+      "fetch_km": 50,
+      "hs_m": 0.09266,
+      "peak_period_s": 2.013,
+      "mean_period_s": 1.806
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 48,
+      "duration_min": 20,
+      "fetch_km": 100,
+      "hs_m": 0.09266,
+      "peak_period_s": 2.013,
+      "mean_period_s": 1.806
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 48,
+      "duration_min": 60,
+      "fetch_km": 10,
+      "hs_m": 0.2799,
+      "peak_period_s": 4.336,
+      "mean_period_s": 3.652
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 48,
+      "duration_min": 60,
+      "fetch_km": 25,
+      "hs_m": 0.2799,
+      "peak_period_s": 4.336,
+      "mean_period_s": 3.652
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 48,
+      "duration_min": 60,
+      "fetch_km": 50,
+      "hs_m": 0.2799,
+      "peak_period_s": 4.336,
+      "mean_period_s": 3.652
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 48,
+      "duration_min": 60,
+      "fetch_km": 100,
+      "hs_m": 0.28,
+      "peak_period_s": 4.336,
+      "mean_period_s": 3.656
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 48,
+      "duration_min": 120,
+      "fetch_km": 10,
+      "hs_m": 0.4518,
+      "peak_period_s": 5.782,
+      "mean_period_s": 5.09
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 48,
+      "duration_min": 120,
+      "fetch_km": 25,
+      "hs_m": 0.4531,
+      "peak_period_s": 5.782,
+      "mean_period_s": 5.098
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 48,
+      "duration_min": 120,
+      "fetch_km": 50,
+      "hs_m": 0.4531,
+      "peak_period_s": 5.782,
+      "mean_period_s": 5.098
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 48,
+      "duration_min": 120,
+      "fetch_km": 100,
+      "hs_m": 0.4531,
+      "peak_period_s": 5.782,
+      "mean_period_s": 5.099
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 48,
+      "duration_min": 180,
+      "fetch_km": 10,
+      "hs_m": 0.5764,
+      "peak_period_s": 7.005,
+      "mean_period_s": 5.994
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 48,
+      "duration_min": 180,
+      "fetch_km": 25,
+      "hs_m": 0.5884,
+      "peak_period_s": 7.005,
+      "mean_period_s": 6.072
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 48,
+      "duration_min": 180,
+      "fetch_km": 50,
+      "hs_m": 0.5884,
+      "peak_period_s": 7.005,
+      "mean_period_s": 6.072
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 48,
+      "duration_min": 180,
+      "fetch_km": 100,
+      "hs_m": 0.5883,
+      "peak_period_s": 7.005,
+      "mean_period_s": 6.073
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 48,
+      "duration_min": 360,
+      "fetch_km": 10,
+      "hs_m": 0.6938,
+      "peak_period_s": 7.711,
+      "mean_period_s": 6.814
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 48,
+      "duration_min": 360,
+      "fetch_km": 25,
+      "hs_m": 0.8595,
+      "peak_period_s": 8.487,
+      "mean_period_s": 7.797
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 48,
+      "duration_min": 360,
+      "fetch_km": 50,
+      "hs_m": 0.8681,
+      "peak_period_s": 9.342,
+      "mean_period_s": 7.843
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 48,
+      "duration_min": 360,
+      "fetch_km": 100,
+      "hs_m": 0.8679,
+      "peak_period_s": 9.342,
+      "mean_period_s": 7.844
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 96,
+      "duration_min": 20,
+      "fetch_km": 10,
+      "hs_m": 0.09265,
+      "peak_period_s": 2.111,
+      "mean_period_s": 1.801
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 96,
+      "duration_min": 20,
+      "fetch_km": 25,
+      "hs_m": 0.09265,
+      "peak_period_s": 2.111,
+      "mean_period_s": 1.801
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 96,
+      "duration_min": 20,
+      "fetch_km": 50,
+      "hs_m": 0.09265,
+      "peak_period_s": 2.111,
+      "mean_period_s": 1.801
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 96,
+      "duration_min": 20,
+      "fetch_km": 100,
+      "hs_m": 0.09265,
+      "peak_period_s": 2.111,
+      "mean_period_s": 1.801
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 96,
+      "duration_min": 60,
+      "fetch_km": 10,
+      "hs_m": 0.2811,
+      "peak_period_s": 4.336,
+      "mean_period_s": 3.622
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 96,
+      "duration_min": 60,
+      "fetch_km": 25,
+      "hs_m": 0.2811,
+      "peak_period_s": 4.336,
+      "mean_period_s": 3.623
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 96,
+      "duration_min": 60,
+      "fetch_km": 50,
+      "hs_m": 0.2811,
+      "peak_period_s": 4.336,
+      "mean_period_s": 3.623
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 96,
+      "duration_min": 60,
+      "fetch_km": 100,
+      "hs_m": 0.2812,
+      "peak_period_s": 4.336,
+      "mean_period_s": 3.627
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 96,
+      "duration_min": 120,
+      "fetch_km": 10,
+      "hs_m": 0.4517,
+      "peak_period_s": 5.782,
+      "mean_period_s": 5.103
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 96,
+      "duration_min": 120,
+      "fetch_km": 25,
+      "hs_m": 0.4529,
+      "peak_period_s": 5.782,
+      "mean_period_s": 5.111
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 96,
+      "duration_min": 120,
+      "fetch_km": 50,
+      "hs_m": 0.4529,
+      "peak_period_s": 5.782,
+      "mean_period_s": 5.111
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 96,
+      "duration_min": 120,
+      "fetch_km": 100,
+      "hs_m": 0.4529,
+      "peak_period_s": 5.782,
+      "mean_period_s": 5.113
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 96,
+      "duration_min": 180,
+      "fetch_km": 10,
+      "hs_m": 0.5762,
+      "peak_period_s": 6.677,
+      "mean_period_s": 5.993
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 96,
+      "duration_min": 180,
+      "fetch_km": 25,
+      "hs_m": 0.5883,
+      "peak_period_s": 7.005,
+      "mean_period_s": 6.073
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 96,
+      "duration_min": 180,
+      "fetch_km": 50,
+      "hs_m": 0.5883,
+      "peak_period_s": 7.005,
+      "mean_period_s": 6.073
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 96,
+      "duration_min": 180,
+      "fetch_km": 100,
+      "hs_m": 0.5882,
+      "peak_period_s": 7.005,
+      "mean_period_s": 6.075
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 96,
+      "duration_min": 360,
+      "fetch_km": 10,
+      "hs_m": 0.6934,
+      "peak_period_s": 7.711,
+      "mean_period_s": 6.808
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 96,
+      "duration_min": 360,
+      "fetch_km": 25,
+      "hs_m": 0.8588,
+      "peak_period_s": 8.904,
+      "mean_period_s": 7.795
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 96,
+      "duration_min": 360,
+      "fetch_km": 50,
+      "hs_m": 0.8675,
+      "peak_period_s": 8.904,
+      "mean_period_s": 7.844
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 96,
+      "duration_min": 360,
+      "fetch_km": 100,
+      "hs_m": 0.8673,
+      "peak_period_s": 8.904,
+      "mean_period_s": 7.846
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 192,
+      "duration_min": 20,
+      "fetch_km": 10,
+      "hs_m": 0.09264,
+      "peak_period_s": 2.061,
+      "mean_period_s": 1.8
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 192,
+      "duration_min": 20,
+      "fetch_km": 25,
+      "hs_m": 0.09264,
+      "peak_period_s": 2.061,
+      "mean_period_s": 1.8
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 192,
+      "duration_min": 20,
+      "fetch_km": 50,
+      "hs_m": 0.09264,
+      "peak_period_s": 2.061,
+      "mean_period_s": 1.8
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 192,
+      "duration_min": 20,
+      "fetch_km": 100,
+      "hs_m": 0.09264,
+      "peak_period_s": 2.061,
+      "mean_period_s": 1.8
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 192,
+      "duration_min": 60,
+      "fetch_km": 10,
+      "hs_m": 0.2817,
+      "peak_period_s": 4.233,
+      "mean_period_s": 3.611
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 192,
+      "duration_min": 60,
+      "fetch_km": 25,
+      "hs_m": 0.2818,
+      "peak_period_s": 4.233,
+      "mean_period_s": 3.612
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 192,
+      "duration_min": 60,
+      "fetch_km": 50,
+      "hs_m": 0.2818,
+      "peak_period_s": 4.233,
+      "mean_period_s": 3.612
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 192,
+      "duration_min": 60,
+      "fetch_km": 100,
+      "hs_m": 0.2819,
+      "peak_period_s": 4.233,
+      "mean_period_s": 3.616
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 192,
+      "duration_min": 120,
+      "fetch_km": 10,
+      "hs_m": 0.4516,
+      "peak_period_s": 5.782,
+      "mean_period_s": 5.119
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 192,
+      "duration_min": 120,
+      "fetch_km": 25,
+      "hs_m": 0.4529,
+      "peak_period_s": 5.782,
+      "mean_period_s": 5.127
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 192,
+      "duration_min": 120,
+      "fetch_km": 50,
+      "hs_m": 0.4529,
+      "peak_period_s": 5.782,
+      "mean_period_s": 5.127
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 192,
+      "duration_min": 120,
+      "fetch_km": 100,
+      "hs_m": 0.4529,
+      "peak_period_s": 5.782,
+      "mean_period_s": 5.129
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 192,
+      "duration_min": 180,
+      "fetch_km": 10,
+      "hs_m": 0.5761,
+      "peak_period_s": 6.677,
+      "mean_period_s": 5.994
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 192,
+      "duration_min": 180,
+      "fetch_km": 25,
+      "hs_m": 0.5882,
+      "peak_period_s": 6.839,
+      "mean_period_s": 6.077
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 192,
+      "duration_min": 180,
+      "fetch_km": 50,
+      "hs_m": 0.5883,
+      "peak_period_s": 6.839,
+      "mean_period_s": 6.077
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 192,
+      "duration_min": 180,
+      "fetch_km": 100,
+      "hs_m": 0.5882,
+      "peak_period_s": 6.839,
+      "mean_period_s": 6.079
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 192,
+      "duration_min": 360,
+      "fetch_km": 10,
+      "hs_m": 0.6933,
+      "peak_period_s": 7.711,
+      "mean_period_s": 6.806
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 192,
+      "duration_min": 360,
+      "fetch_km": 25,
+      "hs_m": 0.8587,
+      "peak_period_s": 8.693,
+      "mean_period_s": 7.797
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 192,
+      "duration_min": 360,
+      "fetch_km": 50,
+      "hs_m": 0.8674,
+      "peak_period_s": 8.904,
+      "mean_period_s": 7.847
+    },
+    {
+      "step_s": 15,
+      "frequency_intervals": 192,
+      "duration_min": 360,
+      "fetch_km": 100,
+      "hs_m": 0.8673,
+      "peak_period_s": 8.904,
+      "mean_period_s": 7.848
+    },
+    {
+      "step_s": 5,
+      "frequency_intervals": 48,
+      "duration_min": 20,
+      "fetch_km": 10,
+      "hs_m": 0.1494,
+      "peak_period_s": 2.438,
+      "mean_period_s": 1.805
+    },
+    {
+      "step_s": 5,
+      "frequency_intervals": 48,
+      "duration_min": 20,
+      "fetch_km": 25,
+      "hs_m": 0.1494,
+      "peak_period_s": 2.438,
+      "mean_period_s": 1.805
+    },
+    {
+      "step_s": 5,
+      "frequency_intervals": 48,
+      "duration_min": 20,
+      "fetch_km": 50,
+      "hs_m": 0.1494,
+      "peak_period_s": 2.438,
+      "mean_period_s": 1.805
+    },
+    {
+      "step_s": 5,
+      "frequency_intervals": 48,
+      "duration_min": 20,
+      "fetch_km": 100,
+      "hs_m": 0.1494,
+      "peak_period_s": 2.438,
+      "mean_period_s": 1.805
+    },
+    {
+      "step_s": 5,
+      "frequency_intervals": 48,
+      "duration_min": 60,
+      "fetch_km": 10,
+      "hs_m": 0.2948,
+      "peak_period_s": 4.336,
+      "mean_period_s": 3.81
+    },
+    {
+      "step_s": 5,
+      "frequency_intervals": 48,
+      "duration_min": 60,
+      "fetch_km": 25,
+      "hs_m": 0.2949,
+      "peak_period_s": 4.336,
+      "mean_period_s": 3.81
+    },
+    {
+      "step_s": 5,
+      "frequency_intervals": 48,
+      "duration_min": 60,
+      "fetch_km": 50,
+      "hs_m": 0.2949,
+      "peak_period_s": 4.336,
+      "mean_period_s": 3.81
+    },
+    {
+      "step_s": 5,
+      "frequency_intervals": 48,
+      "duration_min": 60,
+      "fetch_km": 100,
+      "hs_m": 0.295,
+      "peak_period_s": 4.336,
+      "mean_period_s": 3.813
+    },
+    {
+      "step_s": 5,
+      "frequency_intervals": 48,
+      "duration_min": 120,
+      "fetch_km": 10,
+      "hs_m": 0.463,
+      "peak_period_s": 5.782,
+      "mean_period_s": 5.181
+    },
+    {
+      "step_s": 5,
+      "frequency_intervals": 48,
+      "duration_min": 120,
+      "fetch_km": 25,
+      "hs_m": 0.4643,
+      "peak_period_s": 5.782,
+      "mean_period_s": 5.189
+    },
+    {
+      "step_s": 5,
+      "frequency_intervals": 48,
+      "duration_min": 120,
+      "fetch_km": 50,
+      "hs_m": 0.4643,
+      "peak_period_s": 5.782,
+      "mean_period_s": 5.189
+    },
+    {
+      "step_s": 5,
+      "frequency_intervals": 48,
+      "duration_min": 120,
+      "fetch_km": 100,
+      "hs_m": 0.4643,
+      "peak_period_s": 5.782,
+      "mean_period_s": 5.19
+    },
+    {
+      "step_s": 2,
+      "frequency_intervals": 48,
+      "duration_min": 20,
+      "fetch_km": 10,
+      "hs_m": 0.1905,
+      "peak_period_s": 2.684,
+      "mean_period_s": 2.211
+    },
+    {
+      "step_s": 2,
+      "frequency_intervals": 48,
+      "duration_min": 20,
+      "fetch_km": 25,
+      "hs_m": 0.1905,
+      "peak_period_s": 2.684,
+      "mean_period_s": 2.211
+    },
+    {
+      "step_s": 2,
+      "frequency_intervals": 48,
+      "duration_min": 20,
+      "fetch_km": 50,
+      "hs_m": 0.1905,
+      "peak_period_s": 2.684,
+      "mean_period_s": 2.211
+    },
+    {
+      "step_s": 2,
+      "frequency_intervals": 48,
+      "duration_min": 20,
+      "fetch_km": 100,
+      "hs_m": 0.1905,
+      "peak_period_s": 2.684,
+      "mean_period_s": 2.211
+    },
+    {
+      "step_s": 2,
+      "frequency_intervals": 48,
+      "duration_min": 60,
+      "fetch_km": 10,
+      "hs_m": 0.3035,
+      "peak_period_s": 4.773,
+      "mean_period_s": 3.891
+    },
+    {
+      "step_s": 2,
+      "frequency_intervals": 48,
+      "duration_min": 60,
+      "fetch_km": 25,
+      "hs_m": 0.3036,
+      "peak_period_s": 4.773,
+      "mean_period_s": 3.891
+    },
+    {
+      "step_s": 2,
+      "frequency_intervals": 48,
+      "duration_min": 60,
+      "fetch_km": 50,
+      "hs_m": 0.3036,
+      "peak_period_s": 4.773,
+      "mean_period_s": 3.891
+    },
+    {
+      "step_s": 2,
+      "frequency_intervals": 48,
+      "duration_min": 60,
+      "fetch_km": 100,
+      "hs_m": 0.3037,
+      "peak_period_s": 4.773,
+      "mean_period_s": 3.894
+    },
+    {
+      "step_s": 2,
+      "frequency_intervals": 48,
+      "duration_min": 120,
+      "fetch_km": 10,
+      "hs_m": 0.4694,
+      "peak_period_s": 5.782,
+      "mean_period_s": 5.231
+    },
+    {
+      "step_s": 2,
+      "frequency_intervals": 48,
+      "duration_min": 120,
+      "fetch_km": 25,
+      "hs_m": 0.4707,
+      "peak_period_s": 5.782,
+      "mean_period_s": 5.238
+    },
+    {
+      "step_s": 2,
+      "frequency_intervals": 48,
+      "duration_min": 120,
+      "fetch_km": 50,
+      "hs_m": 0.4707,
+      "peak_period_s": 5.782,
+      "mean_period_s": 5.238
+    },
+    {
+      "step_s": 2,
+      "frequency_intervals": 48,
+      "duration_min": 120,
+      "fetch_km": 100,
+      "hs_m": 0.4707,
+      "peak_period_s": 5.782,
+      "mean_period_s": 5.24
+    },
+    {
+      "step_s": 1,
+      "frequency_intervals": 48,
+      "duration_min": 20,
+      "fetch_km": 10,
+      "hs_m": 0.1924,
+      "peak_period_s": 2.954,
+      "mean_period_s": 2.519
+    },
+    {
+      "step_s": 1,
+      "frequency_intervals": 48,
+      "duration_min": 20,
+      "fetch_km": 25,
+      "hs_m": 0.1924,
+      "peak_period_s": 2.954,
+      "mean_period_s": 2.519
+    },
+    {
+      "step_s": 1,
+      "frequency_intervals": 48,
+      "duration_min": 20,
+      "fetch_km": 50,
+      "hs_m": 0.1924,
+      "peak_period_s": 2.954,
+      "mean_period_s": 2.519
+    },
+    {
+      "step_s": 1,
+      "frequency_intervals": 48,
+      "duration_min": 20,
+      "fetch_km": 100,
+      "hs_m": 0.1923,
+      "peak_period_s": 2.954,
+      "mean_period_s": 2.519
+    },
+    {
+      "step_s": 1,
+      "frequency_intervals": 48,
+      "duration_min": 60,
+      "fetch_km": 10,
+      "hs_m": 0.3087,
+      "peak_period_s": 4.773,
+      "mean_period_s": 3.936
+    },
+    {
+      "step_s": 1,
+      "frequency_intervals": 48,
+      "duration_min": 60,
+      "fetch_km": 25,
+      "hs_m": 0.3087,
+      "peak_period_s": 4.773,
+      "mean_period_s": 3.936
+    },
+    {
+      "step_s": 1,
+      "frequency_intervals": 48,
+      "duration_min": 60,
+      "fetch_km": 50,
+      "hs_m": 0.3087,
+      "peak_period_s": 4.773,
+      "mean_period_s": 3.936
+    },
+    {
+      "step_s": 1,
+      "frequency_intervals": 48,
+      "duration_min": 60,
+      "fetch_km": 100,
+      "hs_m": 0.3089,
+      "peak_period_s": 4.773,
+      "mean_period_s": 3.939
+    },
+    {
+      "step_s": 1,
+      "frequency_intervals": 48,
+      "duration_min": 120,
+      "fetch_km": 10,
+      "hs_m": 0.4731,
+      "peak_period_s": 5.782,
+      "mean_period_s": 5.259
+    },
+    {
+      "step_s": 1,
+      "frequency_intervals": 48,
+      "duration_min": 120,
+      "fetch_km": 25,
+      "hs_m": 0.4744,
+      "peak_period_s": 5.782,
+      "mean_period_s": 5.267
+    },
+    {
+      "step_s": 1,
+      "frequency_intervals": 48,
+      "duration_min": 120,
+      "fetch_km": 50,
+      "hs_m": 0.4744,
+      "peak_period_s": 5.782,
+      "mean_period_s": 5.267
+    },
+    {
+      "step_s": 1,
+      "frequency_intervals": 48,
+      "duration_min": 120,
+      "fetch_km": 100,
+      "hs_m": 0.4744,
+      "peak_period_s": 5.782,
+      "mean_period_s": 5.268
+    }
+  ],
+  "runs": {
+    "early_dt300_nf48": {
+      "schema": "terluna.climate.swan-run/1",
+      "identity": {
+        "case": {
+          "name": "early_dt300_nf48",
+          "gravity_m_s2": 1.6242188765608128,
+          "wind_m_s": 4.001058578491211,
+          "length_m": 100000.0,
+          "depth_m": 1000.0,
+          "cells": 100,
+          "direction_bins": 36,
+          "frequency_intervals": 48,
+          "earth_low_hz": 0.03,
+          "earth_high_hz": 3.0,
+          "steps": 72,
+          "step_s": 300,
+          "output_every_steps": 1,
+          "agrow": true,
+          "seed_height_m": 0.0,
+          "seed_period_s": 2.0,
+          "water_density_kg_m3": 1025.0
+        },
+        "executable_sha256": "a7d809de637fd495c3fdbf8a685b1422b8eac136b6464d7cb239a8cce51ce673",
+        "input_sha256": "9c59eafaf3b97fb91466d8274007bc5e029d561dc7895143456d82df9c8286bb",
+        "depth_sha256": "b58139719b50c0ffc85e1301b1e1f8d30c902eb21738a1f40705a74c172fa2de"
+      },
+      "producer_sha256": "a829868a2f5def93ccde5640b3ac6afc891ae0aa5c1e6eaa65bc7c69f5259439",
+      "analysis_sha256": "a829868a2f5def93ccde5640b3ac6afc891ae0aa5c1e6eaa65bc7c69f5259439",
+      "elapsed_wall_s": 4.2251682340001935,
+      "threads": 1,
+      "address_space_limit_bytes": 2147483648,
+      "spectral_edges": {
+        "resolved_variance_m2": 0.03933625702600001,
+        "below_output_floor_bins": 23,
+        "below_output_floor_variance_bound_m2": 2.3907520093818325e-13,
+        "low_two_interval_fraction": 0.0,
+        "high_two_interval_fraction": 0.0012061263217962174,
+        "low_hz": 0.005,
+        "high_hz": 0.4969,
+        "peak_at_band_edge": false
+      },
+      "maximum_breaking_fraction": 0.0,
+      "warnings": [],
+      "output_sha256": {
+        "profile.tbl": "7fc1b3be0036029da92b2668608ba5ed84cb5a9190538da3dbe6bab8dd17afbb",
+        "breaking.tbl": "ed8fca677281900cadc60ab181660c8b227452dfa4e0ed9e65945b9c5eb29521",
+        "end.spc": "95b287e6424adc0bfc1e345bdb83eb9079a48fec10eb32d29130ea4ac15dd223",
+        "PRINT": "6121a649999905f18c194c508926c03502f72260684bbee07206c2dd548de12c",
+        "norm_end": "100f0bb219742b03e57aa3a429956d6993d16b1bd4f64ee3e6de102ef8d89fb1"
+      }
+    },
+    "early_dt150_nf48": {
+      "schema": "terluna.climate.swan-run/1",
+      "identity": {
+        "case": {
+          "name": "early_dt150_nf48",
+          "gravity_m_s2": 1.6242188765608128,
+          "wind_m_s": 4.001058578491211,
+          "length_m": 100000.0,
+          "depth_m": 1000.0,
+          "cells": 100,
+          "direction_bins": 36,
+          "frequency_intervals": 48,
+          "earth_low_hz": 0.03,
+          "earth_high_hz": 3.0,
+          "steps": 144,
+          "step_s": 150,
+          "output_every_steps": 2,
+          "agrow": true,
+          "seed_height_m": 0.0,
+          "seed_period_s": 2.0,
+          "water_density_kg_m3": 1025.0
+        },
+        "executable_sha256": "a7d809de637fd495c3fdbf8a685b1422b8eac136b6464d7cb239a8cce51ce673",
+        "input_sha256": "753fd97ed4c7f50d9398b1c3190fddec550bc613dbfa6f8e2b9982fcecb5154c",
+        "depth_sha256": "b58139719b50c0ffc85e1301b1e1f8d30c902eb21738a1f40705a74c172fa2de"
+      },
+      "producer_sha256": "a829868a2f5def93ccde5640b3ac6afc891ae0aa5c1e6eaa65bc7c69f5259439",
+      "analysis_sha256": "a829868a2f5def93ccde5640b3ac6afc891ae0aa5c1e6eaa65bc7c69f5259439",
+      "elapsed_wall_s": 7.63512631399999,
+      "threads": 1,
+      "address_space_limit_bytes": 2147483648,
+      "spectral_edges": {
+        "resolved_variance_m2": 0.04278213200350001,
+        "below_output_floor_bins": 23,
+        "below_output_floor_variance_bound_m2": 2.3907520093818325e-13,
+        "low_two_interval_fraction": 0.0,
+        "high_two_interval_fraction": 0.000935704302831963,
+        "low_hz": 0.005,
+        "high_hz": 0.4969,
+        "peak_at_band_edge": false
+      },
+      "maximum_breaking_fraction": 0.0,
+      "warnings": [],
+      "output_sha256": {
+        "profile.tbl": "0a98c47328ddad81ab7cde9bf61cd9ef0ec6f407c1efc315f5aad5a20665c352",
+        "breaking.tbl": "ed8fca677281900cadc60ab181660c8b227452dfa4e0ed9e65945b9c5eb29521",
+        "end.spc": "c14226fe18c846a31806b9d3b0caa294d99ce56d2ff03c2b1a8e943e310bbb49",
+        "PRINT": "eacbfd115df94db6972a914100bdcfe357af9ac7cc05d0fc273c84f87170366b",
+        "norm_end": "100f0bb219742b03e57aa3a429956d6993d16b1bd4f64ee3e6de102ef8d89fb1"
+      }
+    },
+    "early_dt75_nf48": {
+      "schema": "terluna.climate.swan-run/1",
+      "identity": {
+        "case": {
+          "name": "early_dt75_nf48",
+          "gravity_m_s2": 1.6242188765608128,
+          "wind_m_s": 4.001058578491211,
+          "length_m": 100000.0,
+          "depth_m": 1000.0,
+          "cells": 100,
+          "direction_bins": 36,
+          "frequency_intervals": 48,
+          "earth_low_hz": 0.03,
+          "earth_high_hz": 3.0,
+          "steps": 288,
+          "step_s": 75,
+          "output_every_steps": 4,
+          "agrow": true,
+          "seed_height_m": 0.0,
+          "seed_period_s": 2.0,
+          "water_density_kg_m3": 1025.0
+        },
+        "executable_sha256": "a7d809de637fd495c3fdbf8a685b1422b8eac136b6464d7cb239a8cce51ce673",
+        "input_sha256": "ee53e7827eab5009e46ff742ed245d0d65001a90dcdc0be8f936575577f6430a",
+        "depth_sha256": "b58139719b50c0ffc85e1301b1e1f8d30c902eb21738a1f40705a74c172fa2de"
+      },
+      "producer_sha256": "a829868a2f5def93ccde5640b3ac6afc891ae0aa5c1e6eaa65bc7c69f5259439",
+      "analysis_sha256": "a829868a2f5def93ccde5640b3ac6afc891ae0aa5c1e6eaa65bc7c69f5259439",
+      "elapsed_wall_s": 14.216386994999993,
+      "threads": 1,
+      "address_space_limit_bytes": 2147483648,
+      "spectral_edges": {
+        "resolved_variance_m2": 0.04495515878450001,
+        "below_output_floor_bins": 23,
+        "below_output_floor_variance_bound_m2": 2.3907520093818325e-13,
+        "low_two_interval_fraction": 0.0,
+        "high_two_interval_fraction": 0.0008115969554217154,
+        "low_hz": 0.005,
+        "high_hz": 0.4969,
+        "peak_at_band_edge": false
+      },
+      "maximum_breaking_fraction": 0.0,
+      "warnings": [],
+      "output_sha256": {
+        "profile.tbl": "875de6772829f82bb56b6af1e51f7eaf7fdb8a481f7db36c4dc43ed05b9f398b",
+        "breaking.tbl": "ed8fca677281900cadc60ab181660c8b227452dfa4e0ed9e65945b9c5eb29521",
+        "end.spc": "52f6c46f62358b4f422f3fd113bee2f95727b8f72d39a686cbc90d0cbc66f93b",
+        "PRINT": "5bb241063fe8adbfc24314bf54e0289efb426d03e92c50ba403fb8ac1a7111cc",
+        "norm_end": "100f0bb219742b03e57aa3a429956d6993d16b1bd4f64ee3e6de102ef8d89fb1"
+      }
+    },
+    "early_dt30_nf48": {
+      "schema": "terluna.climate.swan-run/1",
+      "identity": {
+        "case": {
+          "name": "early_dt30_nf48",
+          "gravity_m_s2": 1.6242188765608128,
+          "wind_m_s": 4.001058578491211,
+          "length_m": 100000.0,
+          "depth_m": 1000.0,
+          "cells": 100,
+          "direction_bins": 36,
+          "frequency_intervals": 48,
+          "earth_low_hz": 0.03,
+          "earth_high_hz": 3.0,
+          "steps": 720,
+          "step_s": 30,
+          "output_every_steps": 10,
+          "agrow": true,
+          "seed_height_m": 0.0,
+          "seed_period_s": 2.0,
+          "water_density_kg_m3": 1025.0
+        },
+        "executable_sha256": "a7d809de637fd495c3fdbf8a685b1422b8eac136b6464d7cb239a8cce51ce673",
+        "input_sha256": "4f3c43472e2fdbf0d6ffe48b55bb69e18835e0e89d0ddfc255db6fc69b6d5646",
+        "depth_sha256": "b58139719b50c0ffc85e1301b1e1f8d30c902eb21738a1f40705a74c172fa2de"
+      },
+      "producer_sha256": "a829868a2f5def93ccde5640b3ac6afc891ae0aa5c1e6eaa65bc7c69f5259439",
+      "analysis_sha256": "a829868a2f5def93ccde5640b3ac6afc891ae0aa5c1e6eaa65bc7c69f5259439",
+      "elapsed_wall_s": 34.38382811499969,
+      "threads": 1,
+      "address_space_limit_bytes": 2147483648,
+      "spectral_edges": {
+        "resolved_variance_m2": 0.046434287582500004,
+        "below_output_floor_bins": 23,
+        "below_output_floor_variance_bound_m2": 2.3907520093818325e-13,
+        "low_two_interval_fraction": 0.0,
+        "high_two_interval_fraction": 0.0007518244990401646,
+        "low_hz": 0.005,
+        "high_hz": 0.4969,
+        "peak_at_band_edge": false
+      },
+      "maximum_breaking_fraction": 0.0,
+      "warnings": [],
+      "output_sha256": {
+        "profile.tbl": "5c517a5f44aacc3079b3d9a5f0e9a59922847e917e80fd04612533ff83f8210f",
+        "breaking.tbl": "ed8fca677281900cadc60ab181660c8b227452dfa4e0ed9e65945b9c5eb29521",
+        "end.spc": "3eb6d03f6e5a07bb8dd3a86f550a3b18677398211de80eca477d1991c987d6e7",
+        "PRINT": "919b6a262f63da4c223d9e1ee4af389cfb45b01ae9475a40889270be9485da9a",
+        "norm_end": "100f0bb219742b03e57aa3a429956d6993d16b1bd4f64ee3e6de102ef8d89fb1"
+      }
+    },
+    "early_dt15_nf48": {
+      "schema": "terluna.climate.swan-run/1",
+      "identity": {
+        "case": {
+          "name": "early_dt15_nf48",
+          "gravity_m_s2": 1.6242188765608128,
+          "wind_m_s": 4.001058578491211,
+          "length_m": 100000.0,
+          "depth_m": 1000.0,
+          "cells": 100,
+          "direction_bins": 36,
+          "frequency_intervals": 48,
+          "earth_low_hz": 0.03,
+          "earth_high_hz": 3.0,
+          "steps": 1440,
+          "step_s": 15,
+          "output_every_steps": 20,
+          "agrow": true,
+          "seed_height_m": 0.0,
+          "seed_period_s": 2.0,
+          "water_density_kg_m3": 1025.0
+        },
+        "executable_sha256": "a7d809de637fd495c3fdbf8a685b1422b8eac136b6464d7cb239a8cce51ce673",
+        "input_sha256": "a337d4f1768ab987a38e2f889a4aa13338054a029a011bc5115fbeae8f8ef1bf",
+        "depth_sha256": "b58139719b50c0ffc85e1301b1e1f8d30c902eb21738a1f40705a74c172fa2de"
+      },
+      "producer_sha256": "a829868a2f5def93ccde5640b3ac6afc891ae0aa5c1e6eaa65bc7c69f5259439",
+      "analysis_sha256": "a829868a2f5def93ccde5640b3ac6afc891ae0aa5c1e6eaa65bc7c69f5259439",
+      "elapsed_wall_s": 71.26425797299999,
+      "threads": 1,
+      "address_space_limit_bytes": 2147483648,
+      "spectral_edges": {
+        "resolved_variance_m2": 0.047028794730500006,
+        "below_output_floor_bins": 23,
+        "below_output_floor_variance_bound_m2": 2.3907520093818325e-13,
+        "low_two_interval_fraction": 0.0,
+        "high_two_interval_fraction": 0.0007330987365840461,
+        "low_hz": 0.005,
+        "high_hz": 0.4969,
+        "peak_at_band_edge": false
+      },
+      "maximum_breaking_fraction": 0.0,
+      "warnings": [],
+      "output_sha256": {
+        "profile.tbl": "047edf587f9fce9bf419e711f595919bcf621a818ac4eb5b4769e9b01645ae8f",
+        "breaking.tbl": "ed8fca677281900cadc60ab181660c8b227452dfa4e0ed9e65945b9c5eb29521",
+        "end.spc": "f82de237ad199b3f16d05bc3094d514bca71a10501c247dd3d6f60481516425d",
+        "PRINT": "9a0b5463ca63327fc568e27631f7bc5b8afcce8de19454ee9f903abd2fff3d7e",
+        "norm_end": "100f0bb219742b03e57aa3a429956d6993d16b1bd4f64ee3e6de102ef8d89fb1"
+      }
+    },
+    "early_dt15_nf96": {
+      "schema": "terluna.climate.swan-run/1",
+      "identity": {
+        "case": {
+          "name": "early_dt15_nf96",
+          "gravity_m_s2": 1.6242188765608128,
+          "wind_m_s": 4.001058578491211,
+          "length_m": 100000.0,
+          "depth_m": 1000.0,
+          "cells": 100,
+          "direction_bins": 36,
+          "frequency_intervals": 96,
+          "earth_low_hz": 0.03,
+          "earth_high_hz": 3.0,
+          "steps": 1440,
+          "step_s": 15,
+          "output_every_steps": 20,
+          "agrow": true,
+          "seed_height_m": 0.0,
+          "seed_period_s": 2.0,
+          "water_density_kg_m3": 1025.0
+        },
+        "executable_sha256": "a7d809de637fd495c3fdbf8a685b1422b8eac136b6464d7cb239a8cce51ce673",
+        "input_sha256": "168911c7b5d8ce7c825e8ca9d021af157fa23556a999f36e91c5a4c61f6d2ebf",
+        "depth_sha256": "b58139719b50c0ffc85e1301b1e1f8d30c902eb21738a1f40705a74c172fa2de"
+      },
+      "producer_sha256": "a829868a2f5def93ccde5640b3ac6afc891ae0aa5c1e6eaa65bc7c69f5259439",
+      "analysis_sha256": "a829868a2f5def93ccde5640b3ac6afc891ae0aa5c1e6eaa65bc7c69f5259439",
+      "elapsed_wall_s": 149.8533132360003,
+      "threads": 1,
+      "address_space_limit_bytes": 2147483648,
+      "spectral_edges": {
+        "resolved_variance_m2": 0.046984600878,
+        "below_output_floor_bins": 46,
+        "below_output_floor_variance_bound_m2": 2.4535838624536285e-13,
+        "low_two_interval_fraction": 0.0,
+        "high_two_interval_fraction": 0.00020530720320573707,
+        "low_hz": 0.005,
+        "high_hz": 0.4969,
+        "peak_at_band_edge": false
+      },
+      "maximum_breaking_fraction": 0.0,
+      "warnings": [],
+      "output_sha256": {
+        "profile.tbl": "a4075f05d3e4a1c0927ed23dd97ca9837c1b7335f82337f72bee2170f99094b8",
+        "breaking.tbl": "ed8fca677281900cadc60ab181660c8b227452dfa4e0ed9e65945b9c5eb29521",
+        "end.spc": "8597d91548c91b363a4f46adb8c30e4fe46aece95b1847c2f5ca2c2633383605",
+        "PRINT": "366dbf21cdcc27eae8f1cf49eb9a73c7623591c98a602806a8585aea15c64ff3",
+        "norm_end": "100f0bb219742b03e57aa3a429956d6993d16b1bd4f64ee3e6de102ef8d89fb1"
+      }
+    },
+    "early_dt15_nf192": {
+      "schema": "terluna.climate.swan-run/1",
+      "identity": {
+        "case": {
+          "name": "early_dt15_nf192",
+          "gravity_m_s2": 1.6242188765608128,
+          "wind_m_s": 4.001058578491211,
+          "length_m": 100000.0,
+          "depth_m": 1000.0,
+          "cells": 100,
+          "direction_bins": 36,
+          "frequency_intervals": 192,
+          "earth_low_hz": 0.03,
+          "earth_high_hz": 3.0,
+          "steps": 1440,
+          "step_s": 15,
+          "output_every_steps": 20,
+          "agrow": true,
+          "seed_height_m": 0.0,
+          "seed_period_s": 2.0,
+          "water_density_kg_m3": 1025.0
+        },
+        "executable_sha256": "a7d809de637fd495c3fdbf8a685b1422b8eac136b6464d7cb239a8cce51ce673",
+        "input_sha256": "1f899e09c9780568c2cdf87f791e88edea46f9b547bbadd51e8fcd3a05ecbb1c",
+        "depth_sha256": "b58139719b50c0ffc85e1301b1e1f8d30c902eb21738a1f40705a74c172fa2de"
+      },
+      "producer_sha256": "a829868a2f5def93ccde5640b3ac6afc891ae0aa5c1e6eaa65bc7c69f5259439",
+      "analysis_sha256": "a829868a2f5def93ccde5640b3ac6afc891ae0aa5c1e6eaa65bc7c69f5259439",
+      "elapsed_wall_s": 290.4279925249998,
+      "threads": 1,
+      "address_space_limit_bytes": 2147483648,
+      "spectral_edges": {
+        "resolved_variance_m2": 0.04698832155450001,
+        "below_output_floor_bins": 92,
+        "below_output_floor_variance_bound_m2": 2.488141381643116e-13,
+        "low_two_interval_fraction": 0.0,
+        "high_two_interval_fraction": 6.504984427789742e-05,
+        "low_hz": 0.005,
+        "high_hz": 0.4969,
+        "peak_at_band_edge": false
+      },
+      "maximum_breaking_fraction": 0.0,
+      "warnings": [
+        "** Warning          : relative frequency resolution (df/f) deviates more",
+        "** Warning          : than 5% from 10%-resolution. This may be problematic",
+        "** Warning          : when quadruplets are approximated by means of DIA."
+      ],
+      "output_sha256": {
+        "profile.tbl": "bec2587da1f1ccfd6fa9dd08cfcf3ae355f84612968a6d2355318b93405010a4",
+        "breaking.tbl": "ed8fca677281900cadc60ab181660c8b227452dfa4e0ed9e65945b9c5eb29521",
+        "end.spc": "59973808483d65e5e1f4736557765f71374c073a51fa09d70cd1643f7a8c7fbb",
+        "PRINT": "64265985f5ab08a096ff763f3246e7a0c9d199d0bd42ee6e9cd5a75a71f1d1a7",
+        "norm_end": "100f0bb219742b03e57aa3a429956d6993d16b1bd4f64ee3e6de102ef8d89fb1"
+      }
+    },
+    "early_dt5_nf48": {
+      "schema": "terluna.climate.swan-run/1",
+      "identity": {
+        "case": {
+          "name": "early_dt5_nf48",
+          "gravity_m_s2": 1.6242188765608128,
+          "wind_m_s": 4.001058578491211,
+          "length_m": 100000.0,
+          "depth_m": 1000.0,
+          "cells": 100,
+          "direction_bins": 36,
+          "frequency_intervals": 48,
+          "earth_low_hz": 0.03,
+          "earth_high_hz": 3.0,
+          "steps": 1440,
+          "step_s": 5,
+          "output_every_steps": 60,
+          "agrow": true,
+          "seed_height_m": 0.0,
+          "seed_period_s": 2.0,
+          "water_density_kg_m3": 1025.0
+        },
+        "executable_sha256": "a7d809de637fd495c3fdbf8a685b1422b8eac136b6464d7cb239a8cce51ce673",
+        "input_sha256": "398fb90ae1c5ebf6183d997a216a90e3be16d4ec1385f1d1ab97acf2ab3a1612",
+        "depth_sha256": "b58139719b50c0ffc85e1301b1e1f8d30c902eb21738a1f40705a74c172fa2de"
+      },
+      "producer_sha256": "a829868a2f5def93ccde5640b3ac6afc891ae0aa5c1e6eaa65bc7c69f5259439",
+      "analysis_sha256": "a829868a2f5def93ccde5640b3ac6afc891ae0aa5c1e6eaa65bc7c69f5259439",
+      "elapsed_wall_s": 73.96930894900015,
+      "threads": 1,
+      "address_space_limit_bytes": 2147483648,
+      "spectral_edges": {
+        "resolved_variance_m2": 0.0133411778295,
+        "below_output_floor_bins": 23,
+        "below_output_floor_variance_bound_m2": 2.3907520093818325e-13,
+        "low_two_interval_fraction": 0.0,
+        "high_two_interval_fraction": 0.0091953856374462,
+        "low_hz": 0.005,
+        "high_hz": 0.4969,
+        "peak_at_band_edge": false
+      },
+      "maximum_breaking_fraction": 0.0,
+      "warnings": [],
+      "output_sha256": {
+        "profile.tbl": "d7667a5bb3abaf47c56de961ae993575290371c731616f42cd6f4bab99209059",
+        "breaking.tbl": "e65c20c68724cbd66ce483506e5452ea6fbb3807d288dcf5480d65fbc82bcb1f",
+        "end.spc": "39b2411ed009ef8054b31a7a1180a306666fc6db69389118ce2845c2a98a2475",
+        "PRINT": "8dd4ee4597ca213b63e285e71f92748be6be9c17e940ae0fa1c5482919ae18ec",
+        "norm_end": "100f0bb219742b03e57aa3a429956d6993d16b1bd4f64ee3e6de102ef8d89fb1"
+      }
+    },
+    "early_dt2_nf48": {
+      "schema": "terluna.climate.swan-run/1",
+      "identity": {
+        "case": {
+          "name": "early_dt2_nf48",
+          "gravity_m_s2": 1.6242188765608128,
+          "wind_m_s": 4.001058578491211,
+          "length_m": 100000.0,
+          "depth_m": 1000.0,
+          "cells": 100,
+          "direction_bins": 36,
+          "frequency_intervals": 48,
+          "earth_low_hz": 0.03,
+          "earth_high_hz": 3.0,
+          "steps": 3600,
+          "step_s": 2,
+          "output_every_steps": 150,
+          "agrow": true,
+          "seed_height_m": 0.0,
+          "seed_period_s": 2.0,
+          "water_density_kg_m3": 1025.0
+        },
+        "executable_sha256": "a7d809de637fd495c3fdbf8a685b1422b8eac136b6464d7cb239a8cce51ce673",
+        "input_sha256": "f5bd550635eb2cd6287853bba6c232244a45496981a033b3cea406a7d32e19e3",
+        "depth_sha256": "b58139719b50c0ffc85e1301b1e1f8d30c902eb21738a1f40705a74c172fa2de"
+      },
+      "producer_sha256": "a829868a2f5def93ccde5640b3ac6afc891ae0aa5c1e6eaa65bc7c69f5259439",
+      "analysis_sha256": "a829868a2f5def93ccde5640b3ac6afc891ae0aa5c1e6eaa65bc7c69f5259439",
+      "elapsed_wall_s": 189.74168965100034,
+      "threads": 1,
+      "address_space_limit_bytes": 2147483648,
+      "spectral_edges": {
+        "resolved_variance_m2": 0.013717684829499999,
+        "below_output_floor_bins": 23,
+        "below_output_floor_variance_bound_m2": 2.3907520093818325e-13,
+        "low_two_interval_fraction": 0.0,
+        "high_two_interval_fraction": 0.008749410085723242,
+        "low_hz": 0.005,
+        "high_hz": 0.4969,
+        "peak_at_band_edge": false
+      },
+      "maximum_breaking_fraction": 0.0,
+      "warnings": [],
+      "output_sha256": {
+        "profile.tbl": "f03f2fa2aab8020f20301fad1abb0d4325989ce68135833f3f97e973bca951ed",
+        "breaking.tbl": "e65c20c68724cbd66ce483506e5452ea6fbb3807d288dcf5480d65fbc82bcb1f",
+        "end.spc": "7d68a542f85f093978c03dd8844b9fa89f4b1496b81fa07cf65f9186e14f140e",
+        "PRINT": "91910cafac15c38584de8a797c466a728f6c1504303bd5e1a6e86c67b3d2fc11",
+        "norm_end": "100f0bb219742b03e57aa3a429956d6993d16b1bd4f64ee3e6de102ef8d89fb1"
+      }
+    },
+    "early_dt1_nf48": {
+      "schema": "terluna.climate.swan-run/1",
+      "identity": {
+        "case": {
+          "name": "early_dt1_nf48",
+          "gravity_m_s2": 1.6242188765608128,
+          "wind_m_s": 4.001058578491211,
+          "length_m": 100000.0,
+          "depth_m": 1000.0,
+          "cells": 100,
+          "direction_bins": 36,
+          "frequency_intervals": 48,
+          "earth_low_hz": 0.03,
+          "earth_high_hz": 3.0,
+          "steps": 7200,
+          "step_s": 1,
+          "output_every_steps": 300,
+          "agrow": true,
+          "seed_height_m": 0.0,
+          "seed_period_s": 2.0,
+          "water_density_kg_m3": 1025.0
+        },
+        "executable_sha256": "a7d809de637fd495c3fdbf8a685b1422b8eac136b6464d7cb239a8cce51ce673",
+        "input_sha256": "57bbe60024563d13a4944d27a70471be88865644b477ec315c616f279b8588f9",
+        "depth_sha256": "b58139719b50c0ffc85e1301b1e1f8d30c902eb21738a1f40705a74c172fa2de"
+      },
+      "producer_sha256": "a829868a2f5def93ccde5640b3ac6afc891ae0aa5c1e6eaa65bc7c69f5259439",
+      "analysis_sha256": "a829868a2f5def93ccde5640b3ac6afc891ae0aa5c1e6eaa65bc7c69f5259439",
+      "elapsed_wall_s": 370.02929697699983,
+      "threads": 1,
+      "address_space_limit_bytes": 2147483648,
+      "spectral_edges": {
+        "resolved_variance_m2": 0.0139407290595,
+        "below_output_floor_bins": 23,
+        "below_output_floor_variance_bound_m2": 2.3907520093818325e-13,
+        "low_two_interval_fraction": 0.0,
+        "high_two_interval_fraction": 0.00850844668838677,
+        "low_hz": 0.005,
+        "high_hz": 0.4969,
+        "peak_at_band_edge": false
+      },
+      "maximum_breaking_fraction": 0.0,
+      "warnings": [],
+      "output_sha256": {
+        "profile.tbl": "c005ce9436811f3ab777ac85eb4108e7374c8bcaeeaf8350e9e68a4b59b09711",
+        "breaking.tbl": "e65c20c68724cbd66ce483506e5452ea6fbb3807d288dcf5480d65fbc82bcb1f",
+        "end.spc": "6d16be74f5cbb4039d1e38a50e0abdf02ac2c71f12c00ec45b9c58881401bd45",
+        "PRINT": "ad2a8f8946801624a67b6aac00ad394d02d641de1959d9c3bbadd988e94125cd",
+        "norm_end": "100f0bb219742b03e57aa3a429956d6993d16b1bd4f64ee3e6de102ef8d89fb1"
+      }
+    }
+  }
+}

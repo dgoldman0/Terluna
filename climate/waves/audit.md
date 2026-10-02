@@ -37,11 +37,10 @@ archive's original `.ftn` and `.ftn90` files, before preprocessing or patching.
 
 The stock initialization fixes air density to **1.28 kg/m³**
 (`swanmain.ftn:1740–1743`). After input parsing, the density ratio is reset
-using that value and the selected water density (`6624–6627`). The present
+using that value and the selected water density (`6624–6627`). The first strip
 experiments hold air density at 1.28 kg/m³ and water density at 1025 kg/m³.
-These are controlled coupling assumptions; the atmosphere's greater column
-mass does not imply a proportionate increase in its surface density.
-`SET RHO` alone cannot supply a different air density.
+These are controlled coupling assumptions. `SET RHO` sets water density;
+air density requires the separate source change described below.
 
 ## The AGROW sensitivity
 
@@ -71,7 +70,7 @@ The wind source creates the waves during the run.
 Initial runs with `OFF BREAKING` failed repeatability: identical executables
 and inputs produced different wave histories. A repeated Earth control
 differed by about 2.5% in significant wave height at some sampled locations.
-Those outputs cannot establish the effect of the AGROW change or gravity.
+Those outputs failed the repeatability criterion and were excluded.
 
 Source inspection identified an uninitialized directional-partition value,
 `KTETA`. `SINTGRL` declares it as an output (`swancom1.ftn:5706`) and assigns it
@@ -87,10 +86,9 @@ The production configuration uses the supported command
 `BREAKING CONSTANT 1.0 0.73`, retaining default DIA option 2. It initializes
 `KTETA` through the normal path. At the deep-water conditions used here,
 depth breaking should contribute zero; output checks verify the breaker
-fraction throughout the runs. The breaker index remains Earth calibrated,
-so this workaround does not validate future surf-zone calculations. No
-source modification beyond the separately recorded AGROW sensitivity is
-needed for this configuration.
+fraction throughout the runs. The breaker index remains Earth calibrated;
+lunar surf-zone calibration remains open. This configuration uses the
+separately recorded AGROW source change.
 
 With that command, the diagnostic repeated Earth profiles matched exactly,
 as did stock and AGROW-modified Earth profiles. The corresponding sixfold
@@ -114,9 +112,8 @@ The first cases use Cartesian one-dimensional strips, uniform winds, flat
 depth and the first-order backward-space/backward-time propagation scheme
 (BSBT). Time and space refinement test its numerical diffusion. Frequency
 range and resolution require separate checks: the first wider-band test
-retains roughly 10% spacing between frequency bins and therefore tests
-truncation, not convergence with finer frequency spacing. An outgoing boundary receives
-no prescribed incoming wave spectrum. Currents, bottom friction, depth
+retains roughly 10% spacing between frequency bins to test band truncation.
+Incoming boundary spectra are set to zero. Currents, bottom friction, depth
 variation, vegetation, mud and ice are omitted. Depth breaking is enabled
 with its contribution checked as described above.
 
@@ -126,15 +123,14 @@ time-step, spatial, directional and spectral-band changes. Early growth is
 less settled: halving the time step changes significant height by as much
 as 33.2% and mean period by 17.0% over the sampled profiles. The height
 difference is largest at one hour; the mean-period difference at two hours.
-The endpoint checks therefore do not establish convergence of the early
-wave-growth history or of the other wind cases.
+Early growth and the other wind cases require their own refinement checks.
 
 The spectral output marks very small variance densities with an exception
 value: `SWCMSP`, `swanout2.ftn:2388–2403`, applies a floor of
 `1e-12 m²/(rad/s)`, equivalent to `2π × 1e-12 m²/Hz`. Edge diagnostics can
 bound the omitted resolved variance. Significant wave height also includes
-SWAN's diagnostic high-frequency tail, so a trapezoidal integral of the
-printed resolved spectrum need not reproduce it exactly.
+SWAN's diagnostic high-frequency tail. Integrating the printed resolved
+spectrum alone therefore gives a different value.
 
 Several options need further work before expansion: ST6's FAN and ECMWF drag
 paths set Earth gravity directly (`SdsBabanin.ftn90:2305,2466–2471`), and the
@@ -147,3 +143,50 @@ Numerical similarity, convergence and Earth benchmarks establish distinct
 checks on the implementation. Terluna sea-state predictions still require
 assessment of air–water coupling, wind persistence and direction, real basin
 geometry and the empirical growth and dissipation laws at lunar gravity.
+
+## Basin and slope follow-up
+
+The pilot keeps the AGROW change and adds a separate air-density change in
+`swanmain.ftn`, anchored to the pinned original file hash. The assignment to
+`PWIND(16)` uses the mean moist surface density recovered from the equatorial
+CM1 water columns near Smythii–Marginis. SWAN's existing post-parse reset of
+`PWIND(9)` then supplies that air/water ratio to Komen growth. The coupled build
+occupies a separate directory. The Wu drag law and empirical AGROW source
+coefficient retain their existing values; their calibration at lunar gravity
+remains open.
+
+The radius is an input parameter. SWAN 41.51's
+`swanpre1.ftn:827–828` reads `REARTH` from `COORDINATES SPHERICAL` and derives
+the length of a degree. `swancom5.ftn:204–205` uses that length in propagation
+metrics, and `1918` uses `REARTH` for geographic turning. The pilot supplies
+`MOON_RADIUS` from shared constants. An executable control compares the same
+small physical grid in Cartesian metres and lunar degrees, with a 1% tolerance
+on height and mean period, covering the geographic options used by this pilot.
+
+The chosen constant-index breaking path assigns `BRCOEF = PSURF(2)` in
+`BRKPAR` (`swancom2.ftn:3120–3122`). Its limiting height is set by depth and
+that dimensionless index. Dispersion and group speed use configured gravity;
+the inherited default index 0.73 remains empirical. The slope experiments
+retain depth breaking; quadruplets, whitecapping, bottom friction and triads
+are disabled. A small-amplitude, narrow-band executable control checks
+`Hs² Cg` conservation to 2% before breaking; the gravity-wave dispersion
+relation supplies the independent group-speed calculation.
+
+The [boundary-input documentation](https://swanmodel.sourceforge.io/online_doc/swanuse/node27.html)
+allows spectral boundary files. The pilot transfers the final `SPEC1D`
+variance, mean direction and spread from its offshore node into stationary
+slope cases, retaining frequencies and density values. SWAN reconstructs the
+directional distributions from their moments; transferring multiple directional
+peaks requires the full two-dimensional spectrum. The separate
+[numerical audit](results/pilot_checks.json) checks final timestamps, spectral
+edges, stationary stopping and grid differences; it distinguishes Hs in a
+region with `Qb ≥ 0.01` from individual-wave height. Wave groups and run-up
+require a subsequent individual-wave calculation and a SWASH source audit.
+
+An initial geographic smoke run exposed a data-reading issue: roundoff in
+interpolation of exception-marked bottom nodes excluded some adjacent water
+nodes. Those diagnostics were rejected. The accepted inputs use finite
+negative depths on dry ground, and output the computational grid directly.
+The reader checks every wet node's reported depth against the atlas input,
+with explicit allowance for output precision, and rejects incomplete wet-node
+output.

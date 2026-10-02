@@ -36,6 +36,14 @@
     "radius_m": 695700000.0,
     "au_m": 149597870700.0
   },
+  "model_closures": {
+    "cm1_r22": {
+      "dry_air_gas_constant_J_kg_K": 287.04,
+      "water_vapour_gas_constant_J_kg_K": 461.5,
+      "source": "CM1 r22.0 src/constants.F, default branch lines 114 and 126; source SHA256 2e02843339a72a428a61bcbd32c27bfbb973766fef842d53200bafaf0ebd3771",
+      "note": "These solver closure constants apply to CM1 thermodynamics. Other Terluna compositions use their own gas constants."
+    }
+  },
   "legacy": {
     "moon_surface_gravity_rounded_m_s2": {
       "value": 1.62,

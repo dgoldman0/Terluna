@@ -71,25 +71,30 @@
     },
     {
       "topic": "seas",
-      "condition": "swan_41_51_serial_builds; audited_gravity_paths; stock_and_gravity_scaled_agrow_knee; conditional_uniform_wind_wave_experiments_with_earth_controls; ocean_heat_and_underwater_light_models_not_yet_run",
+      "condition": "swan_41_51_serial_builds; audited_gravity_paths; conditional_wind_wave_experiments_with_earth_controls; recovered_three_hour_equatorial_cm1_vectors_and_surface_density; smythii_marginis_basin_and_idealised_slopes_run; local_basin_grid_and_earliest_growth_bounds_fail; ocean_heat_and_underwater_light_models_pending",
       "material": [
         "../climate/waves/README.md",
         "../climate/waves/audit.md",
         "../climate/waves/inputs.json",
         "../climate/waves/results/waves.json",
         "../climate/waves/checks.json",
+        "../climate/waves/results/forcing.json",
+        "../climate/waves/results/early_growth.json",
+        "../climate/waves/results/pilot.json",
+        "../climate/waves/results/pilot_checks.json",
+        "../climate/waves/pilot_verification.json",
         "../visualization/waves/"
       ],
       "unresolved": [
-        "Real wind persistence, direction and spatial coherence: available corrected CM1 ring products provide wind quantiles, not full forcing histories.",
-        "Directional basin fetch and bathymetry: atlas summaries are available, but the gridded atlas must be restored for named-basin calculations.",
-        "Air-water coupling, wind input and dissipation at lunar gravity; the AGROW change is a numerical parameterization sensitivity, with no lunar empirical validation.",
-        "Numerical checks currently cover gravity similarity and one lunar wind case under time, spatial and directional refinement and spectral-band widening; frequency-bin convergence and basin-scale resolution remain open.",
+        "Three-hourly equatorial CM1 vectors are recovered. Basin-wide wind persistence, direction and spatial coherence require additional forcing data; the pilot uses imposed episodes.",
+        "The 28% flooded atlas is available. Refining the Smythii–Marginis grid from 1 to 0.5 degrees changes final local Hs by up to 41.3% and mean period by 22.7%; geographic coastal predictions remain unresolved, although the selected offshore node changes by less than 0.002%.",
+        "The pilot uses a fixed representative CM1 moist-air density of 1.4039 kg/m3. Spatial and temporal density feedback, air-water coupling, and calibration of wind input and breaking at lunar gravity remain open.",
+        "At 4.001 m/s, frequency refinement passes the 5% bound. The 2-to-1-second timestep comparison over 20 minutes to 2 hours fails for mean period (12.2%); the later 1-to-2-hour window passes. Other short wind events and directional refinement on the geographic grid remain untested.",
+        "Idealised slopes yield significant heights of 0.96–1.10 m at the chosen one-percent-breaking diagnostic near 2 m depth, conditional on the offshore spectrum and assumed breaking index. The 400-to-800-cell slope comparison passes 5%; sediment evolution, actual beaches, currents, shoreline run-up and individual breaking waves remain uncomputed. A SWASH source audit and pilot run remain pending.",
         "Sea temperature gradients, mixing and currents; the existing climate uses a slab ocean or fixed sea-surface temperatures.",
-        "Spectral underwater light, including diffuse incidence, water absorption/scattering and dissolved/particulate/biological constituents; euphotic and aphotic definitions must be explicit.",
-        "Lunar shallow-water, breaking, coastal flow and geographic-radius treatment before surf or named-coast predictions."
+        "Spectral underwater light, including diffuse incidence, water absorption/scattering and dissolved/particulate/biological constituents; euphotic and aphotic definitions must be explicit."
       ],
-      "next_session_task": "Use the initial wave results to select a bounded basin case. Restore existing atlas grids and wind-vector histories; add CM1 boxes only where missing coastal or storm forcing requires them. Then build vertical heat/mixing and spectral underwater-light calculations as separate climate and illumination work."
+      "next_session_task": "Refine the geographic coastal grid and check directional resolution before selecting surf locations. Recover basin-wide wind histories; add CM1 boxes for identified coastal or storm gaps. Resolve the earliest wave-growth timestep sensitivity for short-gust predictions. Audit SWASH gravity and boundary transfer for individual-wave work. Ocean heat/mixing and underwater light remain separate future calculations."
     },
     {
       "topic": "geography",

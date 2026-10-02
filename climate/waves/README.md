@@ -4,8 +4,7 @@ SWAN (Simulating WAves Nearshore) runs here as a spectral wave model driven by
 prescribed winds. The first experiment compares Earth and lunar gravity over
 the same flat, 100 km strip of water, with winds drawn from the corrected CM1
 equatorial ring. It establishes a runnable wave calculation and measures its
-numerical sensitivities. A new three-dimensional CM1 box is not required for
-this comparison.
+numerical sensitivities.
 
 The [results](results/waves.json) contain significant wave height, peak period
 and mean period at four fetches and six forcing durations. Significant height
@@ -13,6 +12,10 @@ is the spectral quantity `Hs = 4 sqrt(m0)`; mean period is `Tm01 = m0/m1`.
 The [CSV](results/waves.csv) is a tabular companion. Read it with the JSON's
 evidence statement, units, source hashes and numerical checks. The
 [renderer](../../visualization/waves/) plots the 100 km time series.
+
+The follow-up below adds recovered equatorial wind vectors and surface density,
+early-growth refinement, a two-dimensional Smythii–Marginis pilot and simple
+coastal slopes. The original strip calculation and its outputs are retained.
 
 ## Findings from the first run
 
@@ -51,9 +54,9 @@ outputs from 1–48 hours and fetches from 10–100 km.
 the difference falls to 4.3% after 6 hours and disappears at the printed
 precision after 48 hours. The AGROW modification also changes early lunar
 heights substantially. These curves show conditional development, with the
-strongest numerical support at the tested late endpoint. Frequency-bin
-convergence and comparable refinement tests at the other wind strengths
-remain unperformed.
+strongest numerical support at the tested late endpoint. The follow-up adds
+frequency-bin convergence tests.
+Comparable refinement at the other wind strengths remains unperformed.
 
 All 22 accepted runs have zero diagnosed depth-breaking fraction after
 initialization. Every final spectrum passes the edge checks; the largest
@@ -67,8 +70,8 @@ The corrected equatorial ring supplies 10 m wind magnitudes of 2.15, 4.00 and
 5.84 m/s: its water median, 90th percentile and 99th percentile. The source
 holds 237 snapshots, three hours apart, across days 29.5–59. Each wave case
 imposes one magnitude, a fixed direction and uniform wind for up to 48 hours.
-These wind labels do not assign percentiles to the resulting waves, and the
-ring summary does not establish that these winds persist for 48 hours.
+Each wind percentile selects the magnitude of an imposed episode. Estimating
+event durations and wave occurrence probabilities requires wind histories.
 
 | Choice | Value or treatment |
 |---|---|
@@ -83,8 +86,8 @@ ring summary does not establish that these winds persist for 48 hours.
 | Grid | 1 km, 300 s; 36 directions; 49 logarithmically spaced frequencies |
 | Frequency band | 0.03–3 Hz at Earth gravity, scaled in proportion to gravity |
 | Propagation | First-order backward-space/backward-time scheme |
-| Boundaries | No prescribed incoming swell; outgoing waves can leave |
-| Other processes | No currents, varying bathymetry, bottom friction, ice, vegetation or capillary-wave physics |
+| Boundaries | Incoming swell set to zero; outgoing waves can leave |
+| Omitted processes | Currents, varying bathymetry, bottom friction, ice, vegetation and capillary-wave physics |
 
 Depth breaking is explicitly enabled with `BREAKING CONSTANT 1.0 0.73` and
 its diagnosed fraction must remain zero. Source review and a debug build
@@ -92,11 +95,9 @@ found an uninitialized-variable path when breaking was disabled. The supported
 configuration avoids that path without adding a second source patch; the
 [audit](audit.md) records the diagnosis and the checks.
 
-The [input inventory](inputs.json) records the available atmospheric and
-geographic products. The atlas summary gives sea areas and depth summaries,
-but the local checkout lacks its gridded bathymetry and the rings' full wind
-vector histories. The strip therefore represents a stated fetch and depth,
-rather than the shoreline of a named lunar sea.
+The [input inventory](inputs.json) records the atmospheric and geographic
+products. The first experiment uses a prescribed strip with a stated fetch and
+depth. The follow-up adds the gridded atlas and full equatorial wind histories.
 
 ## Source change and evidence
 
@@ -111,9 +112,8 @@ The two comparisons serve different purposes. The numerical similarity test
 reduces gravity exactly sixfold while enlarging length, depth and duration
 sixfold and reducing frequencies sixfold. It checks corresponding
 dimensionless states. The main experiment keeps the physical basin and wind
-duration fixed while changing gravity to the actual lunar value. Finite
-fetch and duration mean that its wave heights need not follow an exact
-inverse-gravity ratio.
+duration fixed while changing gravity to the actual lunar value. Its wave
+heights depend on the combined effects of gravity, fetch and duration.
 
 Identical Earth controls must repeat exactly, and the modified build must
 preserve stock Earth profiles. The modified similarity test requires height
@@ -123,15 +123,146 @@ spaced grid.
 
 For the lunar 4.00 m/s case, separate runs halve the time step, halve the cell
 width, double the number of directions and widen the frequency band. The
-wider band keeps approximately the same frequency spacing; it does not test
-frequency-resolution convergence. Acceptance requires changes below 5% in
+wider band keeps approximately the same frequency spacing to test the band
+limits. Acceptance requires changes below 5% in
 the final 100 km height and mean period. Maximum and RMS differences across
 the earlier times and inner fetches are retained too. These checks apply to
-that case and endpoint; they do not establish convergence of every output.
+that case and endpoint; earlier outputs retain the reported timestep sensitivity.
 Final spectra must have interior peaks and little resolved variance at the
 band edges. The source audit explains how the spectral output floor is
 handled and why integrated printed spectra differ from SWAN's height
 diagnostic, which includes a high-frequency tail.
+
+## Follow-up: recovered inputs, early growth and coastal waves
+
+The local workspace holds the atlas grid and CM1 snapshots.
+[wave_forcing.py](../crm/wave_forcing.py)
+recovers both 10 m wind components, surface pressure, 2 m temperature and
+vapour mixing ratio from the same 237 equatorial snapshots. It reads only the
+required byte ranges and records **selected-byte hashes**, offsets and
+source-file sizes. The resulting line product is kept in ignored
+`research/runs/waves/inputs/`; its description and hash are
+in [results/forcing.json](results/forcing.json).
+
+Using CM1's moist ideal-gas closure, the air over the equatorial water columns
+between 75°E and 103°E has mean density **1.40390 kg/m³**, ranging from 1.38029
+to 1.41668 kg/m³. The coupled SWAN build uses that mean, with a separate,
+recorded change to `PWIND(16)`. Density stays fixed through each run. CM1's
+closure constants are recorded in `shared/constants.json` for interpreting
+its thermodynamics. The wind record covers one equatorial line every three
+hours; basin-wide winds and shorter gusts need additional forcing data.
+
+### Early growth
+
+[early_growth.py](early_growth.py) holds air density at the original 1.28 kg/m³
+to isolate numerical refinement. At 100 km fetch, with the
+4.001 m/s wind, the one-hour significant height changes as follows:
+
+| Timestep | One-hour Hs |
+|---|---:|
+| 300 s | 0.1320 m |
+| 75 s | 0.2242 m |
+| 15 s | 0.2800 m |
+| 5 s | 0.2950 m |
+| 2 s | 0.3037 m |
+| 1 s | 0.3089 m |
+
+The [full record](results/early_growth.json) retains every comparison,
+including failed criteria. From **one to two hours**, the 2→1 s change is at
+most 1.69% in height and 1.15% in mean period over 10–100 km, excluding heights
+below 1 cm. That window was examined after the broader check failed: over
+20 minutes–2 hours, the largest height change is 4.63%, but the mean-period
+change still reaches **12.23%**. The earliest transients are therefore still
+unresolved. Predicting the response to a twenty-minute gust requires further
+timestep refinement.
+
+Frequency spacing is a separate check. At a 15 s timestep, increasing from
+96 to 192 frequency intervals changes height by at most 0.451% and mean period
+by 0.761% over the tested 20-minute–6-hour samples. These time and frequency
+checks apply to this wind and numerical source choice; other wind strengths
+and physical wind-wave onset remain open.
+
+### Basin and assumed coastal slopes
+
+[pilot.py](pilot.py) uses atlas body 874, Smythii–Marginis, at the 28% water
+scenario's common level, −1,654.2 m above the geoid. It uses spherical
+coordinates with the lunar radius explicitly supplied. Native atlas nodes
+are sampled every 1° and 0.5° (about 30.3 and 15.2 km at the equator), retaining
+their water depths. The finite ground elevations keep dry nodes dry; other
+disconnected waters inside the rectangular crop are excluded. Small channels,
+shoals and coastlines require finer grids. The bathymetry represents flooded
+rock; beach and sediment profiles require separate assumptions.
+
+Two imposed episodes start from calm water: a 4.001 m/s wind toward the east
+for twelve hours, and a wind that turns from east at hour 5 to north at hour 6
+and then holds north. SWAN interpolates the vector components during that
+hour, so the speed briefly falls to 2.83 m/s. The turning episode therefore
+changes both direction and speed.
+The original coarse runs give basin maxima of 1.222 m and 0.990 m at hour 12.
+Estimating the frequency of those wave heights requires wind histories.
+
+The [pilot product](results/pilot.json) records the episodes, selected
+offshore node, maps, source/build hashes and numerical differences. The
+75→30 s timestep comparison uses 96 frequency intervals. A separate 96→48
+interval comparison uses the coarse grid, and **both grids in the spatial
+comparison use 48 intervals**. This separates spectral and spatial changes
+while bounding run cost. The initially attempted fine-grid, 96-interval run
+was interrupted after its projected cost exceeded the run cap; its partial
+output is retained for diagnosis under ignored
+`research/runs/waves/pilot_interrupted/`. The comparisons use the five completed
+basin runs.
+
+At hour 12, over matched wet nodes with Hs at least 0.1 m in both runs:
+
+| Comparison | Largest relative Hs difference | Largest relative mean-period difference |
+|---|---:|---:|
+| 75 → 30 s timestep, 96 frequency intervals | 0.55% | 0.39% |
+| 96 → 48 frequency intervals, coarse grid | 0.12% | 0.09% |
+| 1° → 0.5° grid, 48 frequency intervals | **41.3%** | **22.7%** |
+
+Differences use the second run as the denominator. The spatial comparison
+changes local heights by up to 0.35 m and **fails the 5% bound**. Selecting surf
+locations or ranking sheltered coasts requires finer coastal grids. At the selected
+offshore node, final Hs and mean period each change by less than 0.002% under
+that grid refinement, supporting its use in the slope experiment. The timestep
+difference over the full hourly record reaches 16.5% in Hs. Early growth and
+geographic directional refinement remain open.
+
+The final spectrum at 89.125°E, 1.125°S from the 30 s run drives three
+stationary slopes, from 50 m depth to 0.25 m. `SPEC1D` retains frequency
+variance and each frequency's mean direction and spread. SWAN reconstructs
+the directional distributions from those moments. Resolving multiple
+directional peaks requires a full two-dimensional spectrum. Bottom friction, triads,
+whitecapping, quadruplets and currents are omitted in these slope cases to
+isolate propagation and depth breaking.
+
+With the assumed breaking index 0.73, at the first sampled point where
+SWAN's breaking fraction `Qb` reaches 1%:
+
+| Assumed slope (400 cells) | Depth | Significant height |
+|---|---:|---:|
+| 1:20 | 2.24 m | 1.100 m |
+| 1:50 | 2.12 m | 1.041 m |
+| 1:100 | 1.99 m | 0.958 m |
+
+The 800-cell 1:50 case reaches that diagnostic at 2.18 m with Hs 1.057 m.
+At matched depths, the 400→800-cell comparison differs by at most 1.51% in
+Hs (0.0047 m), below the stated 5% bound in this single refinement check.
+All six stationary runs satisfy their
+99%-of-wet-nodes stopping criterion, and all five offshore spectra pass the
+stated spectral-edge checks.
+Changing its breaking index to 0.60 or 0.90, on the 400-cell grid, moves the
+diagnostic to 2.49 or 1.74 m respectively. The coefficients are assumed
+sensitivity values; lunar calibration remains open. Here `Qb ≥ 0.01` marks
+the chosen onset of breaking, and Hs describes the wave spectrum. The
+calculations support metre-scale surf under the stated wind and slope assumptions.
+
+[pilot_checks.py](pilot_checks.py) writes the [numerical audit](results/pilot_checks.json):
+spectral edges, stationary solver stopping, matched slope-grid errors and
+the separate basin resolution differences. Independent executable tests compare
+metre and lunar-degree grids and check conservation of linear-wave energy flux
+before breaking. Physical validation, run-up, wave-driven currents and individual
+breaking waves remain future work. SWASH needs a source audit and pilot run.
 
 ## Reproduction
 
@@ -159,23 +290,44 @@ An incomplete directory is retained for inspection and blocks replacement.
 Raw runs live under ignored `research/runs/waves/`; selected results and
 provenance live here. The actual repository checks are in [checks.json](checks.json).
 
+For the follow-up, the raw equatorial CM1 case and atlas grid must already be
+available. The exporter stops with an error if either input is missing.
+With the build above:
+
+```sh
+OPENBLAS_NUM_THREADS=1 python -m climate.crm.wave_forcing
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m climate.waves.early_growth --build-root /tmp/terluna-swan
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m climate.waves.pilot --build-root /tmp/terluna-swan
+python -m climate.waves.pilot_checks
+python visualization/waves/pilot.py
+```
+
+The pilot adds an isolated `coupled_air` build and leaves the stock and
+AGROW-only executables intact. Its individual runs are serial, capped at
+900 seconds and 2 GiB; the early-growth runs have a 600-second cap. The
+follow-up's actual repository verification is in
+[pilot_verification.json](pilot_verification.json), distinct from the
+first experiment's check record and from the numerical audit.
+
 ## Next sea calculations
 
-Restore the existing gridded atlas and wind-vector histories to drive a
-bounded two-dimensional basin case with changing wind direction and duration.
-Audit the geographic radius and shallow-water physics before using lunar
-coastlines or interpreting surf. Local CM1 boxes become useful if the basin
-needs unresolved gust fronts, coastal flow or storm winds; they are an
-additional forcing source, not a prerequisite for spectral wave modeling.
+The atlas grid and equatorial wind vectors are recovered, and the bounded
+basin and idealised slopes now have runners. Use the numerical audit to choose
+the next basin grid and a coast to refine. A basin-wide wind history, short
+transients, directional resolution on geographic grids and physical lunar
+wind input and breaking remain open. Local CM1 boxes become useful if a basin
+needs unresolved gust fronts, coastal flow or storm winds. An individual-wave
+SWASH calculation needs its own source/gravity audit, resolved coastal geometry
+and input-spectrum checks before any run-up or breaking-crest claim.
 
 Temperature gradients, mixing and light penetration need their own ocean
 calculations. Start with vertical heat/mixing and spectral underwater-light
 columns, using the atmosphere's surface fluxes and illumination products.
 Water absorption and scattering, dissolved material, particles and biological
-optics must be specified before a light-depth result is meaningful. The
-conventional 1% photosynthetically active radiation depth is a useful
-euphotic-zone diagnostic; it does not define a universal boundary of all
-biologically usable light. The abstract of
+optics supply the inputs to those calculations. The conventional 1%
+photosynthetically active radiation depth provides an optical diagnostic;
+biological compensation depth also depends on an organism's energy balance.
+The abstract of
 [Wu et al. (2021)](https://doi.org/10.1029/2020JC016874), read through the
 [NOAA repository](https://repository.library.noaa.gov/view/noaa/55092), explains
 the distinction between this optical threshold and biological compensation

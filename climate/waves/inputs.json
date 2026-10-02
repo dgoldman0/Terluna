@@ -162,37 +162,48 @@
     ],
     "extent_note": "Areas and centroids only; no coast polygons, directional fetch, or local bathymetry in this summary. Centroid coordinate order is latitude, longitude in degrees, east-positive longitude."
   },
-  "missing_local_products": [
+  "evidence": "Input inventory for conditional wave experiments. The corrected atmospheric rings are two-dimensional CM1 results sampled every three hours. Wave occurrence probabilities require wind duration and spatial coherence; atlas values describe hydrostatic storage geometry.",
+  "planned_experiment_boundary": "Uniform-wind Cartesian one-dimensional strips with 1000 m reference depth and 100 km length, sampled at 10, 25, 50 and 100 km after 1, 3, 6, 12, 24 and 48 hours. Depth, fetch and persistence are imposed scenarios.",
+  "inventory_date": "2026-10-02",
+  "local_products": [
     {
       "path": "climate/crm/products/ring_ring_equator.npz",
-      "exists": false
+      "exists": true,
+      "sha256": "4ab91ca26460aa12d5a96c74ef5f985cd9ea63cd08166aa01e006cb01d5befec"
     },
     {
       "path": "climate/crm/products/ring_ring_70_45e.npz",
-      "exists": false
+      "exists": true,
+      "sha256": "f3f566d56d2176253f0f5de50af01b3b84cde1ea33bd1511afdb49cadb8e2410"
     },
     {
       "path": "climate/crm/products/ring_ring_70_135e.npz",
-      "exists": false
+      "exists": true,
+      "sha256": "609f42c1c387bcc52e6dca842e364ca163ab41940594234e94e9bb2cb38d472e"
     },
     {
       "path": "climate/crm/runs/ring_equator",
-      "exists": false
+      "exists": true
     },
     {
       "path": "geography/products/atlas_28pct_4ppd.npz",
-      "exists": false
+      "exists": true,
+      "sha256": "dc283827f349fdc134816e1a55deef3d608047fba9fbb7521a6005c171d81693"
     },
     {
       "path": "geography/inputs",
-      "exists": false
+      "exists": true
     },
     {
       "path": "climate/gcm/products",
-      "exists": false
+      "exists": true
     }
   ],
-  "evidence": "Input inventory for a conditional wave sensitivity experiment. The corrected atmospheric rings are two-dimensional CM1 results sampled every three hours; wind quantiles do not determine event duration or spatial coherence. Atlas values describe hydrostatic storage geometry.",
-  "planned_experiment_boundary": "Uniform-wind Cartesian one-dimensional strips with 1000 m reference depth and 100 km length, sampled at 10, 25, 50 and 100 km after 1, 3, 6, 12, 24 and 48 hours. Depth, fetch and persistence are imposed scenarios. They do not reconstruct a named basin.",
-  "inventory_date": "2026-10-02"
+  "availability_note": "This local workspace holds the atlas grid, ring products and raw CM1 snapshots. The pilot recovery records selected-byte provenance from the original data.",
+  "recovered_wave_forcing": {
+    "record": "climate/waves/results/forcing.json",
+    "sha256": "c5bac5fd97c20a0080a9e685364cdb23cbb89e1b730c6ad7bf12a7c5bc43d74b",
+    "schema": "terluna.climate.cm1-wave-forcing/1",
+    "scope": "237 equatorial snapshots; both 10 m wind components and 2 m moist density, sampled along the equatorial ring."
+  }
 }

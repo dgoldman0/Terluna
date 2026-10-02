@@ -1,0 +1,220 @@
+{
+  "schema": "terluna.climate.wave-pilot-checks/1",
+  "evidence": "Numerical diagnostics for the wave pilot. Empirical lunar validation and manuscript/source review remain open.",
+  "reading_rule": "Failed local basin resolution bounds restrict geographic interpretation. A converged ideal slope is still conditional on its offshore spectrum, assumed slope and Earth-derived breaking parameters. Early-time dt and frequency checks cover separate runs and only the 4.001 m/s wind.",
+  "producer": {
+    "domain": "climate",
+    "path": "climate/waves/pilot_checks.py",
+    "sha256": "054d89579ce87b579c03e58d779a5bea4b89a65939195b7b6e50eb9c7fb1ace1"
+  },
+  "inputs": {
+    "pilot_sha256": "8cdba54a8f44000227a7a8f12733518b56f33e9b155c92e876205d74023bfd94",
+    "early_growth_sha256": "56a3032af443a40df2a69d780454b5600f86e19b1d71a36c8328a004185db149"
+  },
+  "units": {
+    "relative_errors": "dimensionless",
+    "heights_and_depths": "m",
+    "periods": "s"
+  },
+  "spectra": {
+    "smythii_east": {
+      "frequencies": 97,
+      "resolved_hs_m": 1.22222600462838,
+      "resolved_tm01_s": 9.735318275652089,
+      "low_two_interval_variance_fraction": 0.0,
+      "high_two_interval_variance_fraction": 3.112608033992807e-05,
+      "peak_at_edge": false,
+      "edges_pass": true,
+      "omitted_variance_upper_bound_m2": 2.0860175219836227e-13,
+      "note": "Integrals cover the resolved printed spectrum. SWAN's Hs and Tm01 also include a diagnostic high-frequency tail. SPEC1D retains variance and mean direction/spread by frequency; transferring multiple directional peaks requires a full two-dimensional spectrum."
+    },
+    "smythii_turn": {
+      "frequencies": 97,
+      "resolved_hs_m": 0.9891674297795927,
+      "resolved_tm01_s": 8.521526932292973,
+      "low_two_interval_variance_fraction": 0.0,
+      "high_two_interval_variance_fraction": 0.00013138380746294606,
+      "peak_at_edge": false,
+      "edges_pass": true,
+      "omitted_variance_upper_bound_m2": 2.324778563656447e-13,
+      "note": "Integrals cover the resolved printed spectrum. SWAN's Hs and Tm01 also include a diagnostic high-frequency tail. SPEC1D retains variance and mean direction/spread by frequency; transferring multiple directional peaks requires a full two-dimensional spectrum."
+    },
+    "smythii_east_dt30": {
+      "frequencies": 97,
+      "resolved_hs_m": 1.229005718266167,
+      "resolved_tm01_s": 9.773535207615973,
+      "low_two_interval_variance_fraction": 0.0,
+      "high_two_interval_variance_fraction": 3.0245475913178735e-05,
+      "peak_at_edge": false,
+      "edges_pass": true,
+      "omitted_variance_upper_bound_m2": 2.0860175219836227e-13,
+      "note": "Integrals cover the resolved printed spectrum. SWAN's Hs and Tm01 also include a diagnostic high-frequency tail. SPEC1D retains variance and mean direction/spread by frequency; transferring multiple directional peaks requires a full two-dimensional spectrum."
+    },
+    "smythii_east_frequency48": {
+      "frequencies": 49,
+      "resolved_hs_m": 1.2221556401124236,
+      "resolved_tm01_s": 9.736154723145951,
+      "low_two_interval_variance_fraction": 0.0,
+      "high_two_interval_variance_fraction": 0.00016079772578613747,
+      "peak_at_edge": false,
+      "edges_pass": true,
+      "omitted_variance_upper_bound_m2": 2.1457077824018286e-13,
+      "note": "Integrals cover the resolved printed spectrum. SWAN's Hs and Tm01 also include a diagnostic high-frequency tail. SPEC1D retains variance and mean direction/spread by frequency; transferring multiple directional peaks requires a full two-dimensional spectrum."
+    },
+    "smythii_east_half_grid": {
+      "frequencies": 49,
+      "resolved_hs_m": 1.2221559495983476,
+      "resolved_tm01_s": 9.736168319904657,
+      "low_two_interval_variance_fraction": 0.0,
+      "high_two_interval_variance_fraction": 0.00016079764434869656,
+      "peak_at_edge": false,
+      "edges_pass": true,
+      "omitted_variance_upper_bound_m2": 2.1457077824018286e-13,
+      "note": "Integrals cover the resolved printed spectrum. SWAN's Hs and Tm01 also include a diagnostic high-frequency tail. SPEC1D retains variance and mean direction/spread by frequency; transferring multiple directional peaks requires a full two-dimensional spectrum."
+    }
+  },
+  "stationary_stopping": {
+    "slope_1in20_n400_g73": {
+      "final_percent": 99.25,
+      "required_percent": 99.0,
+      "passed": true
+    },
+    "slope_1in50_n400_g73": {
+      "final_percent": 99.75,
+      "required_percent": 99.0,
+      "passed": true
+    },
+    "slope_1in100_n400_g73": {
+      "final_percent": 99.25,
+      "required_percent": 99.0,
+      "passed": true
+    },
+    "slope_1in50_n800_g73": {
+      "final_percent": 99.63,
+      "required_percent": 99.0,
+      "passed": true
+    },
+    "slope_1in50_n400_g60": {
+      "final_percent": 100.0,
+      "required_percent": 99.0,
+      "passed": true
+    },
+    "slope_1in50_n400_g90": {
+      "final_percent": 99.0,
+      "required_percent": 99.0,
+      "passed": true
+    }
+  },
+  "slope_grid_refinement": {
+    "hs_relative_max": 0.01512290059332888,
+    "hs_absolute_max_m": 0.004608390000000018,
+    "passed": true,
+    "comparison_min_hs_m": 0.1
+  },
+  "breaking_diagnostics": {
+    "slope_1in20_n400_g73": {
+      "first_one_percent_breaking_depth_m": 2.24000001,
+      "first_one_percent_breaking_hs_m": 1.09981596,
+      "maximum_hs_where_at_least_one_percent_break_m": 1.09981596,
+      "note": "Qb >= 0.01 marks the chosen onset-of-breaking diagnostic; Hs describes the wave spectrum."
+    },
+    "slope_1in50_n400_g73": {
+      "first_one_percent_breaking_depth_m": 2.1156249,
+      "first_one_percent_breaking_hs_m": 1.04098213,
+      "maximum_hs_where_at_least_one_percent_break_m": 1.04098213,
+      "note": "Qb >= 0.01 marks the chosen onset-of-breaking diagnostic; Hs describes the wave spectrum."
+    },
+    "slope_1in100_n400_g73": {
+      "first_one_percent_breaking_depth_m": 1.99125004,
+      "first_one_percent_breaking_hs_m": 0.957874954,
+      "maximum_hs_where_at_least_one_percent_break_m": 0.957874954,
+      "note": "Qb >= 0.01 marks the chosen onset-of-breaking diagnostic; Hs describes the wave spectrum."
+    },
+    "slope_1in50_n800_g73": {
+      "first_one_percent_breaking_depth_m": 2.17781258,
+      "first_one_percent_breaking_hs_m": 1.05692518,
+      "maximum_hs_where_at_least_one_percent_break_m": 1.05692518,
+      "note": "Qb >= 0.01 marks the chosen onset-of-breaking diagnostic; Hs describes the wave spectrum."
+    },
+    "slope_1in50_n400_g60": {
+      "first_one_percent_breaking_depth_m": 2.48874998,
+      "first_one_percent_breaking_hs_m": 1.00504601,
+      "maximum_hs_where_at_least_one_percent_break_m": 1.00504601,
+      "note": "Qb >= 0.01 marks the chosen onset-of-breaking diagnostic; Hs describes the wave spectrum."
+    },
+    "slope_1in50_n400_g90": {
+      "first_one_percent_breaking_depth_m": 1.74249995,
+      "first_one_percent_breaking_hs_m": 1.07097709,
+      "maximum_hs_where_at_least_one_percent_break_m": 1.07097709,
+      "note": "Qb >= 0.01 marks the chosen onset-of-breaking diagnostic; Hs describes the wave spectrum."
+    }
+  },
+  "basin_resolution": {
+    "smythii_east_dt30": {
+      "reference_case": "smythii_east",
+      "hs_relative_max": 0.16476839807167665,
+      "hs_final_relative_max": 0.0055182371658784035,
+      "hs_final_absolute_max_m": 0.006781219999999921,
+      "mean_period_final_relative_max": 0.003919075850829179,
+      "offshore_final_hs_relative_change": 0.005547236308972359,
+      "offshore_final_tm01_relative_change": 0.0039326058163722255,
+      "final_hs_within_five_percent": true,
+      "final_hs_tm01_within_five_percent": true
+    },
+    "smythii_east_frequency48": {
+      "reference_case": "smythii_east",
+      "hs_relative_max": 0.00633904523676132,
+      "hs_final_relative_max": 0.0011592902964494556,
+      "hs_final_absolute_max_m": 0.001214150000000025,
+      "mean_period_final_relative_max": 0.0009228649309339643,
+      "offshore_final_hs_relative_change": -2.7992665054488164e-05,
+      "offshore_final_tm01_relative_change": 9.103502521456974e-05,
+      "final_hs_within_five_percent": true,
+      "final_hs_tm01_within_five_percent": true
+    },
+    "smythii_east_half_grid": {
+      "reference_case": "smythii_east_frequency48",
+      "hs_relative_max": 0.41343314818773425,
+      "hs_final_relative_max": 0.41343314818773425,
+      "hs_final_absolute_max_m": 0.34850060799999993,
+      "mean_period_final_relative_max": 0.22722192144615305,
+      "offshore_final_hs_relative_change": 1.1316848729903128e-05,
+      "offshore_final_tm01_relative_change": 6.466610525279748e-06,
+      "final_hs_within_five_percent": false,
+      "final_hs_tm01_within_five_percent": false
+    }
+  },
+  "early_first_two_hours_2_to_1_s": {
+    "hs_relative_max": 0.046272493573264795,
+    "hs_relative_rms": 0.018939345839715824,
+    "hs_absolute_max": 0.009000000000000008,
+    "mean_period_relative_max": 0.12227074235807867,
+    "mean_period_relative_rms": 0.029511482086604444,
+    "mean_period_absolute_max": 0.3080000000000003,
+    "samples": 1911,
+    "within_five_percent": false
+  },
+  "early_hours_one_to_two_2_to_1_s": {
+    "hs_relative_max": 0.01684483317136376,
+    "hs_relative_rms": 0.011703329382864057,
+    "hs_absolute_max": 0.005199999999999982,
+    "mean_period_relative_max": 0.01143292682926822,
+    "mean_period_relative_rms": 0.008098777008422653,
+    "mean_period_absolute_max": 0.04499999999999993,
+    "samples": 1183,
+    "within_five_percent": true,
+    "scope_note": "Follow-up diagnostic for 1\u20132 hours, examined after the full 20-minute\u20132-hour check failed for mean period. Earlier times remain unresolved."
+  },
+  "frequency_spacing": {
+    "hs_relative_max": 0.004501125281320295,
+    "hs_relative_rms": 0.0009478634283473889,
+    "hs_absolute_max": 0.0011999999999999789,
+    "mean_period_relative_max": 0.007609013754755756,
+    "mean_period_relative_rms": 0.0022395182651117006,
+    "mean_period_absolute_max": 0.026000000000000245,
+    "samples": 6279,
+    "within_five_percent": true
+  },
+  "spectral_edges_pass": true,
+  "stationary_stopping_pass": true
+}
