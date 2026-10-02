@@ -421,7 +421,8 @@ def test_the_terrain_ring_is_the_flat_ring_with_ground_heights():
     assert differ == {('param0', 'terrain_flag'), ('param2', 'itern'), ('param2', 'irdamp')}
     assert c.CASES['ring_70_45e_terrain']['build'] == 'moon_omp_terrain' and 'moon_omp_terrain' in c.BUILD_PATCHES
     patched = {name for name, _, _ in c.BUILD_PATCHES['moon_omp_terrain']}
-    assert patched == {'param.F', 'lsnudge.F', 'solve1.F', 'init_surface.F'}   # every column's ground, for boxes
+    assert patched == {'param.F', 'lsnudge.F', 'solve1.F', 'init_surface.F',   # every column's ground, for boxes
+                       'input.F', 'base.F', 'adv_routines.F', 'adv.F'}      # and its own wind
 
 
 def test_vertical_wind_table_has_one_row_per_column(tmp_path):
@@ -554,3 +555,16 @@ def test_the_highland_box_is_box_0e_over_terrain_on_ring_70_45e():
     assert {k for k in box if box[k] != base.get(k)} == {'site', 'day_night', 'build', 'terrain', 'surface_output', 'purpose'}
     assert box['site']['ring'] == 'ring_70_45e' and box['day_night']['rings'] == ('ring_70_45e',)
     assert box['build'] == 'moon_omp_terrain' and (box['nx'], box['ny']) == (64, 64)
+
+
+def test_the_terrain_build_forces_each_column_at_its_own_height():
+    # every edit the terrain build makes to text the common patches wrote finds its anchor exactly once there
+    assert c.ADVECTION_BLOCK.count(c.ADVECTION_OLD) == 1 and 'zh(i,j,k)' in c.ADVECTION_COLUMNS
+    assert c.LSW_BLOCK.count('    IF( var13.gt.1.5 )THEN\n') == 1
+    assert all(c.WSUB_BLOCK.count(old) == 1 for name, _, edits in c.TERRAIN_PATCHES if name == 'adv_routines.F'
+               for old, _, _ in edits if 'terluna_w2(i' in old)
+    assert 'zh(i,j,k)-var14' in c.TERRAIN_NUDGE and '{ten} = {ten}' in c.TERRAIN_NUDGE      # the hold by each column's height
+    assert 'zf(i,j,k).ge.terluna_z' in c.W3_BLOCK
+    air = dict(sunlight_w_m2=1300.0)
+    setting = lambda n: c.case_settings(c.CASES[n], 64, 6011.0, 111, 150000.0, air, 1.6242)['param8']['var13']
+    assert setting('box_highland') == 3.0 and setting('box_0e') == 1.0 and setting('ring_70_45e') == 2.0

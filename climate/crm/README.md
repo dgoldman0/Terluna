@@ -978,6 +978,36 @@ run slightly warm.
 climate/gcm/.venv/bin/python -m climate.crm.highland_analysis box_highland --from-day 29.5
 ```
 
+**The box again, each column at its own height** (case
+`box_highland_own_height`, the author's go-ahead of 2026-10-02). The terrain
+build now holds and forces every column at its own height above sea level. The
+hold to the GCM's air weighs each column's own height (from 8 km above sea
+level, fully from 16 km): at each level it averages the held columns'
+departures from the reference at their heights and applies that to each column
+with its weight. The ring's day-night heating and moistening and the GCM's
+vertical wind (a new mode, `var13 = 3`, staggered once to u and v points) are
+interpolated to each column's own heights. The inputs are the first run's,
+byte for byte. At start-up the model prints where each forcing lands, and the
+first model day showed:
+
+| Column | Ground | Held from | Vertical wind at its lowest w level | Day-night forcing from |
+|---|---|---|---|---|
+| Lowest | 0 m | 8.6 km above sea level | 0.015 mm/s | the ring's lowest level, 50 m |
+| Corner | 2.9 km | 8.0 km | 0.38 mm/s | the ring's level at 2.9 km |
+| Highest | 6.9 km | 8.1 km | 0.46 mm/s | the ring's level at 7.0 km |
+
+The precomputed weights and threaded loops keep the cost near the first run's
+(188 model seconds per wall second on the first day against 217). The stopped
+terrain ring would now be held this way too if it were resumed, from 8 km above
+sea level over every column, where it was held from 8 km above each column's
+ground.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run build moon_omp_terrain
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_highland_own_height
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_highland_own_height --hours 7 --threads 8    # restartable
+```
+
 ## The gravity pair
 
 If lunar convection were Earth's stretched six times in size and duration, a

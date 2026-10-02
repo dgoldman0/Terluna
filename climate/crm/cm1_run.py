@@ -379,28 +379,55 @@ MAKEFILE = {
 # layer damping toward the initial state there. It refuses a large-scale vertical wind over terrain too; the terrain
 # build allows it, advecting on the first column's metrics, which understate vertical gradients over ground at
 # height z by the factor 1 - z/ztop (under 6% up to 8.3 km of a 150-km model).
-TERRAIN_NUDGE = """        ! Terluna: nudging over terrain: each column against the reference at its own height, the reference
-        ! given on the first column's levels; without terrain, the domain mean against the reference
+TERRAIN_NUDGE = """        ! Terluna: nudging over terrain, each column at its own height: at each level, the mean of the columns'
+        ! departures from the reference at their own heights, weighted by how fully each column's height there is
+        ! held (above var14 m, fully above var15 m), applied to each column with its weight. The reference is
+        ! given on the first column's levels; where each column's levels fall on it, and their weights, are found
+        ! once and kept. Without terrain, the domain mean against the reference.
         do k=1,nk
           terluna_dev(k) = {mean}(k{q})-lsnudge_{v}(k,lsnudge_count)
         enddo
         if( terrain_flag )then
-          terluna_dev = 0.0
-          do j=1,nj
-          do i=1,ni
-            terluna_kz = 1
-            do k=1,nk
-              do while( terluna_kz.lt.nk-1 .and. zh(1,1,terluna_kz+1).lt.zh(i,j,k) )
-                terluna_kz = terluna_kz+1
+          if( .not. allocated(terluna_nk) )then
+            allocate( terluna_nk(ni,nj,nk) , terluna_nf(ni,nj,nk) , terluna_nw(ni,nj,nk) , terluna_sw(nk) )
+            terluna_sw = 0.0
+            do j=1,nj
+            do i=1,ni
+              terluna_kz = 1
+              do k=1,nk
+                do while( terluna_kz.lt.nk-1 .and. zh(1,1,terluna_kz+1).lt.zh(i,j,k) )
+                  terluna_kz = terluna_kz+1
+                enddo
+                terluna_nk(i,j,k) = terluna_kz
+                terluna_nf(i,j,k) = max(0.0,min(1.0,(zh(i,j,k)-zh(1,1,terluna_kz))/(zh(1,1,terluna_kz+1)-zh(1,1,terluna_kz))))
+                terluna_nw(i,j,k) = 1.0
+                if( var15.gt.var14 ) terluna_nw(i,j,k) = min(1.0,max(0.0,(zh(i,j,k)-var14)/(var15-var14)))
+                terluna_sw(k) = terluna_sw(k) + terluna_nw(i,j,k)
               enddo
-              terluna_fz = max(0.0,min(1.0,(zh(i,j,k)-zh(1,1,terluna_kz))/(zh(1,1,terluna_kz+1)-zh(1,1,terluna_kz))))
-              terluna_dev(k) = terluna_dev(k) + {field}                                                         &
-                  - ( lsnudge_{v}(terluna_kz,lsnudge_count)                                                     &
-                    + terluna_fz*(lsnudge_{v}(terluna_kz+1,lsnudge_count)-lsnudge_{v}(terluna_kz,lsnudge_count)) )
             enddo
+            enddo
+          endif
+          !$omp parallel do default(shared) private(i,j,k,terluna_kz)
+          do k=1,nk
+            terluna_dev(k) = 0.0
+            if( terluna_sw(k).gt.0.0 )then
+              do j=1,nj
+              do i=1,ni
+                terluna_kz = terluna_nk(i,j,k)
+                terluna_dev(k) = terluna_dev(k) + terluna_nw(i,j,k)*( {field}                                  &
+                    - ( lsnudge_{v}(terluna_kz,lsnudge_count)                                                   &
+                      + terluna_nf(i,j,k)*(lsnudge_{v}(terluna_kz+1,lsnudge_count)-lsnudge_{v}(terluna_kz,lsnudge_count)) ) )
+              enddo
+              enddo
+              terluna_dev(k) = terluna_dev(k)/terluna_sw(k)
+              do j=1,nj
+              do i=1,ni
+                {ten} = {ten} - lsnudgefac*terluna_nw(i,j,k)*terluna_dev(k)/(lsnudge_tau)
+              enddo
+              enddo
+            endif
           enddo
-          enddo
-          terluna_dev = terluna_dev/real(ni*nj)
+          terluna_dev = 0.0   ! applied above, column by column; the domain-wide step below adds nothing
         endif
 """
 NUDGE_TH = "        if( myid.eq.0 ) print *,'  applying large-scale nudging of theta, lsnudge_count = ',lsnudge_count\n        rdt = 1.0/dt\n"
@@ -435,6 +462,157 @@ SURFACE_2D_BLOCK = """
           if( myid.eq.0 ) print *,'  Terluna: ground temperature and land use for every column from terluna_surface2d.txt'
         endif
 """
+ADVECTION_OLD = """      do k=1,nk
+        terluna_th = 0.0
+        terluna_qv = 0.0
+        if( zh(1,1,k).ge.terluna_az(1) .and. zh(1,1,k).le.terluna_az(terluna_nl) )then
+          terluna_l = 1
+          do terluna_m=1,terluna_nl-1
+            if( zh(1,1,k).ge.terluna_az(terluna_m) ) terluna_l = terluna_m
+          enddo
+          tem = (zh(1,1,k)-terluna_az(terluna_l))/(terluna_az(terluna_l+1)-terluna_az(terluna_l))
+          terluna_th = (1.0-terluna_f)*((1.0-tem)*terluna_ath(terluna_l,terluna_b0)+tem*terluna_ath(terluna_l+1,terluna_b0))  &
+                      +terluna_f*((1.0-tem)*terluna_ath(terluna_l,terluna_b1)+tem*terluna_ath(terluna_l+1,terluna_b1))
+          terluna_qv = (1.0-terluna_f)*((1.0-tem)*terluna_aqv(terluna_l,terluna_b0)+tem*terluna_aqv(terluna_l+1,terluna_b0))  &
+                      +terluna_f*((1.0-tem)*terluna_aqv(terluna_l,terluna_b1)+tem*terluna_aqv(terluna_l+1,terluna_b1))
+        endif
+        do j=1,nj
+        do i=1,ni
+          thten1(i,j,k) = thten1(i,j,k) + terluna_th
+        enddo
+        enddo
+        if( imoist.eq.1 )then
+          do j=1,nj
+          do i=1,ni
+            qten(i,j,k,nqv) = qten(i,j,k,nqv) + terluna_qv
+          enddo
+          enddo
+        endif
+      enddo
+"""
+ADVECTION_COLUMNS = """      ! Terluna: over terrain each column takes the forcing at its own height above sea level, its levels
+      ! found once and kept; the corner, the lowest and the highest column's lowest forced level are printed
+      if( .not. allocated(terluna_al) )then
+        allocate( terluna_al(ni,nj,nk) , terluna_at(ni,nj,nk) )
+        terluna_al = 0
+        terluna_at = 0.0
+        do j=1,nj
+        do i=1,ni
+        do k=1,nk
+          if( zh(i,j,k).ge.terluna_az(1) .and. zh(i,j,k).le.terluna_az(terluna_nl) )then
+            terluna_l = 1
+            do terluna_m=1,terluna_nl-1
+              if( zh(i,j,k).ge.terluna_az(terluna_m) ) terluna_l = terluna_m
+            enddo
+            terluna_al(i,j,k) = terluna_l
+            terluna_at(i,j,k) = (zh(i,j,k)-terluna_az(terluna_l))/(terluna_az(terluna_l+1)-terluna_az(terluna_l))
+          endif
+        enddo
+        enddo
+        enddo
+        terluna_ii = 1
+        terluna_jj = 1
+        terluna_iq = 1
+        terluna_jq = 1
+        do j=1,nj
+        do i=1,ni
+          if( zh(i,j,1).lt.zh(terluna_ii,terluna_jj,1) )then
+            terluna_ii = i
+            terluna_jj = j
+          endif
+          if( zh(i,j,1).gt.zh(terluna_iq,terluna_jq,1) )then
+            terluna_iq = i
+            terluna_jq = j
+          endif
+        enddo
+        enddo
+        if( myid.eq.0 )then
+          print *,'  Terluna: day-night forcing at each column''s own height; levels from ',terluna_az(1),' to ',  &
+                  terluna_az(terluna_nl),' m'
+          print *,'  Terluna: corner column, lowest level at ',zh(1,1,1),' m, forced level index ',terluna_al(1,1,1)
+          print *,'  Terluna: lowest column ',terluna_ii,terluna_jj,', lowest level at ',zh(terluna_ii,terluna_jj,1),   &
+                  ' m, forced level index ',terluna_al(terluna_ii,terluna_jj,1)
+          print *,'  Terluna: highest column ',terluna_iq,terluna_jq,', lowest level at ',zh(terluna_iq,terluna_jq,1),  &
+                  ' m, forced level index ',terluna_al(terluna_iq,terluna_jq,1)
+        endif
+      endif
+      !$omp parallel do default(shared) private(i,j,k,terluna_l,tem)
+      do k=1,nk
+      do j=1,nj
+      do i=1,ni
+        terluna_l = terluna_al(i,j,k)
+        if( terluna_l.gt.0 )then
+          tem = terluna_at(i,j,k)
+          thten1(i,j,k) = thten1(i,j,k)                                                                          &
+              +(1.0-terluna_f)*((1.0-tem)*terluna_ath(terluna_l,terluna_b0)+tem*terluna_ath(terluna_l+1,terluna_b0))  &
+              +terluna_f*((1.0-tem)*terluna_ath(terluna_l,terluna_b1)+tem*terluna_ath(terluna_l+1,terluna_b1))
+          if( imoist.eq.1 ) qten(i,j,k,nqv) = qten(i,j,k,nqv)                                                     &
+              +(1.0-terluna_f)*((1.0-tem)*terluna_aqv(terluna_l,terluna_b0)+tem*terluna_aqv(terluna_l+1,terluna_b0))  &
+              +terluna_f*((1.0-tem)*terluna_aqv(terluna_l,terluna_b1)+tem*terluna_aqv(terluna_l+1,terluna_b1))
+        endif
+      enddo
+      enddo
+      enddo
+"""
+W3_BLOCK = """    IF( var13.gt.2.5 )THEN
+      ! Terluna: the large-scale vertical wind against height from terluna_wls.txt at each column's own height
+      ! (boxes over terrain): interpolated to every column's w levels, zero outside the table. The corner, the
+      ! lowest and the highest column are printed with the level the nudging starts from (var14 m).
+      open(unit=97,file='terluna_wls.txt',status='old',action='read')
+      read(97,*) terluna_n
+      allocate( terluna_z(terluna_n) , terluna_w(terluna_n) )
+      do terluna_l=1,terluna_n
+        read(97,*) terluna_z(terluna_l),terluna_w(terluna_l)
+      enddo
+      close(unit=97)
+      if( .not. allocated(terluna_w3) ) allocate( terluna_w3(ib:ie,jb:je,kb:ke+1) )
+      terluna_w3 = 0.0
+      do j=jb,je
+      do i=ib,ie
+      do k=2,nk
+        do terluna_l=1,terluna_n-1
+          if( zf(i,j,k).ge.terluna_z(terluna_l) .and. zf(i,j,k).le.terluna_z(terluna_l+1) )then
+            terluna_w3(i,j,k) = terluna_w(terluna_l) + (terluna_w(terluna_l+1)-terluna_w(terluna_l))   &
+                *(zf(i,j,k)-terluna_z(terluna_l))/(terluna_z(terluna_l+1)-terluna_z(terluna_l))
+          endif
+        enddo
+      enddo
+      enddo
+      enddo
+      wprof = 0.0
+      do k=2,nk
+        wprof(k) = sum( terluna_w3(1:ni,1:nj,k) )/real(ni*nj)
+      enddo
+      terluna_ci = 1
+      terluna_cj = 1
+      do j=1,nj
+      do i=1,ni
+        if( zf(i,j,1).lt.zf(terluna_ci(2),terluna_cj(2),1) )then
+          terluna_ci(2) = i
+          terluna_cj(2) = j
+        endif
+        if( zf(i,j,1).gt.zf(terluna_ci(3),terluna_cj(3),1) )then
+          terluna_ci(3) = i
+          terluna_cj(3) = j
+        endif
+      enddo
+      enddo
+      if( myid.eq.0 )then
+        do terluna_q=1,3
+          i = terluna_ci(terluna_q)
+          j = terluna_cj(terluna_q)
+          terluna_kk = nk
+          do k=nk,1,-1
+            if( zh(i,j,k).gt.var14 ) terluna_kk = k
+          enddo
+          print *,'  Terluna column ',i,j,': ground at ',zf(i,j,1),' m; nudged from level ',terluna_kk,' at ',   &
+                  zh(i,j,terluna_kk),' m; large-scale w at its lowest w levels ',terluna_w3(i,j,2),terluna_w3(i,j,3)
+        enddo
+      endif
+      deallocate( terluna_z , terluna_w )
+    ENDIF
+
+"""
 TERRAIN_PATCHES = [
     ('param.F', 'Terluna: over terrain the Rayleigh layer damps toward the initial state', [
         ('      IF( do_lsnudge .and. (do_lsnudge_u .or. do_lsnudge_v .or. do_lsnudge_th) .and. irdamp.eq.1 )THEN\n',
@@ -453,11 +631,15 @@ TERRAIN_PATCHES = [
         ('      real :: dttmp,rtime,rdt,tem,tem0,tem1,tem2,thrad,prad,terluna_w\n',
          '      real :: dttmp,rtime,rdt,tem,tem0,tem1,tem2,thrad,prad,terluna_w\n'
          '      integer :: terluna_kz   ! Terluna: nudging over terrain\n      real :: terluna_fz\n'
-         '      real, dimension(nk) :: terluna_dev\n', 1),
-        (NUDGE_TH, NUDGE_TH + TERRAIN_NUDGE.format(mean='thavg', q='', v='th', field='th0(i,j,k)+tha(i,j,k)'), 1),
+         '      real, dimension(nk) :: terluna_dev\n      real, dimension(:), allocatable, save :: terluna_sw\n'
+         '      integer, dimension(:,:,:), allocatable, save :: terluna_nk\n'
+         '      real, dimension(:,:,:), allocatable, save :: terluna_nf,terluna_nw\n', 1),
+        (NUDGE_TH, NUDGE_TH + TERRAIN_NUDGE.format(mean='thavg', q='', v='th', field='th0(i,j,k)+tha(i,j,k)',
+                                                   ten='thten1(i,j,k)'), 1),
         ('          tem1 = -lsnudgefac*terluna_w*( thavg(k)-lsnudge_th(k,lsnudge_count) )/(lsnudge_tau)\n',
          '          tem1 = -lsnudgefac*terluna_w*terluna_dev(k)/(lsnudge_tau)\n', 1),
-        (NUDGE_QV, NUDGE_QV + TERRAIN_NUDGE.format(mean='qavg', q=',nqv', v='qv', field='qa(i,j,k,nqv)'), 1),
+        (NUDGE_QV, NUDGE_QV + TERRAIN_NUDGE.format(mean='qavg', q=',nqv', v='qv', field='qa(i,j,k,nqv)',
+                                                   ten='qten(i,j,k,nqv)'), 1),
         ('          tem1 = -lsnudgefac*terluna_w*( qavg(k,nqv)-lsnudge_qv(k,lsnudge_count) )/(lsnudge_tau)\n',
          '          tem1 = -lsnudgefac*terluna_w*terluna_dev(k)/(lsnudge_tau)\n', 1)]),
     ('init_surface.F', "Terluna: every column's ground", [
@@ -469,6 +651,60 @@ TERRAIN_PATCHES = [
          '      integer, dimension(:,:), allocatable :: terluna_lu\n', 1),
         ('        close(unit=97)\n\n      ELSEIF( initsfc.ne.1 .and. initsfc.ne.2 )THEN\n',
          '        close(unit=97)\n' + SURFACE_2D_BLOCK + '\n      ELSEIF( initsfc.ne.1 .and. initsfc.ne.2 )THEN\n', 1)]),
+    ('solve1.F', "Terluna: over terrain each column takes the forcing at its own height", [
+        ('      integer :: terluna_b0,terluna_b1,terluna_l,terluna_m\n',
+         '      integer :: terluna_b0,terluna_b1,terluna_l,terluna_m\n'
+         "      integer, dimension(:,:,:), allocatable, save :: terluna_al   ! Terluna: each column's own height\n"
+         '      real, dimension(:,:,:), allocatable, save :: terluna_at\n'
+         '      integer :: terluna_ii,terluna_jj,terluna_iq,terluna_jq\n', 1),
+        (ADVECTION_OLD, ADVECTION_COLUMNS, 1)]),
+    ('input.F', "Terluna: large-scale vertical wind at each column's own height", [
+        ('   ! Terluna: large-scale vertical wind by column and w level\n',
+         '   ! Terluna: large-scale vertical wind by column and w level\n'
+         "      real, dimension(:,:,:), allocatable :: terluna_w3   ! Terluna: large-scale vertical wind at each column's own height\n", 1)]),
+    ('base.F', "Terluna: the large-scale vertical wind against height from terluna_wls.txt at each column's own height", [
+        ('      real, dimension(:,:), allocatable :: terluna_wc\n',
+         '      real, dimension(:,:), allocatable :: terluna_wc\n'
+         '      integer :: terluna_ci(3),terluna_cj(3),terluna_q,terluna_kk   ! Terluna: sample columns\n', 1),
+        ('    IF( var13.gt.1.5 )THEN\n', '    IF( var13.gt.1.5 .and. var13.lt.2.5 )THEN\n', 1),
+        ('    ! boundary conditions:\n    wprof(1) = 0.0\n    wprof(nk+1) = 0.0\n',
+         W3_BLOCK + '    ! boundary conditions:\n    wprof(1) = 0.0\n    wprof(nk+1) = 0.0\n', 1)]),
+    ('adv_routines.F', "Terluna: each column's own wind, staggered once", [
+        ('    use input, only : ib,ie,jb,je,kb,ke,ngxy,ngz,nk,rdz,terluna_w2\n',
+         '    use input, only : ib,ie,jb,je,kb,ke,ngxy,ngz,nk,rdz,terluna_w2,terluna_w3\n', 1),
+        ('    integer :: i,j,k\n    real :: div,wk,wk1\n',
+         '    integer :: i,j,k\n    real :: div,wk,wk1\n'
+         "    real, dimension(:,:,:,:), allocatable, save :: terluna_ws   ! Terluna: each column's own wind, staggered once\n", 1),
+        ('    if( .not. allocated(terluna_w2) )then\n      call wsub(ix,jy,kz,a,wprof,c1,c2,mh,rr0,rf0,weps,dumz,subs)\n'
+         '      return\n    endif\n',
+         '    if( .not. allocated(terluna_w2) .and. .not. allocated(terluna_w3) )then\n'
+         '      call wsub(ix,jy,kz,a,wprof,c1,c2,mh,rr0,rf0,weps,dumz,subs)\n      return\n    endif\n'
+         '    if( .not. allocated(terluna_ws) )then   ! the winds never change: at scalar (0), u (1) and v (2) points\n'
+         '      allocate( terluna_ws(ib:ie,jb:je,kb:ke+1,0:2) )\n'
+         '      terluna_ws = 0.0\n'
+         '      do k=kb,ke+1\n      do j=jb+1,je\n      do i=ib+1,ie\n'
+         '        if( allocated(terluna_w3) )then\n'
+         '          terluna_ws(i,j,k,0) = terluna_w3(i,j,k)\n'
+         '          terluna_ws(i,j,k,1) = 0.5*( terluna_w3(i-1,j,k) + terluna_w3(i,j,k) )\n'
+         '          terluna_ws(i,j,k,2) = 0.5*( terluna_w3(i,j-1,k) + terluna_w3(i,j,k) )\n'
+         '        else\n'
+         '          terluna_ws(i,j,k,0) = terluna_w2(i,k)\n'
+         '          terluna_ws(i,j,k,1) = 0.5*( terluna_w2(i-1,k) + terluna_w2(i,k) )\n'
+         '          terluna_ws(i,j,k,2) = terluna_w2(i,k)\n'
+         '        endif\n'
+         '      enddo\n      enddo\n      enddo\n'
+         '    endif\n', 1),
+        ('          wk = terluna_w2(i,k)\n          if( ustag.eq.1 ) wk = 0.5*( terluna_w2(i-1,k) + terluna_w2(i,k) )\n',
+         '          wk = terluna_ws(i,j,k,ustag)\n', 1),
+        ('        wk = terluna_w2(i,nk)\n        if( ustag.eq.1 ) wk = 0.5*( terluna_w2(i-1,nk) + terluna_w2(i,nk) )\n',
+         '        wk = terluna_ws(i,j,nk,ustag)\n', 1),
+        ('          wk = terluna_w2(i,k)\n          wk1 = terluna_w2(i,k+1)\n          if( ustag.eq.1 )then\n'
+         '            wk = 0.5*( terluna_w2(i-1,k) + terluna_w2(i,k) )\n'
+         '            wk1 = 0.5*( terluna_w2(i-1,k+1) + terluna_w2(i,k+1) )\n          endif\n',
+         '          wk = terluna_ws(i,j,k,ustag)\n          wk1 = terluna_ws(i,j,k+1,ustag)\n', 1)]),
+    ('adv.F', "Terluna: v points take each column's own wind", [
+        ('call terluna_wsub(ni  ,nj+1,nk  ,v3d,wprof,c1,c2,mh,rr0,rf0,weps,dumz,subs,0)   ! Terluna: w by column',
+         "call terluna_wsub(ni  ,nj+1,nk  ,v3d,wprof,c1,c2,mh,rr0,rf0,weps,dumz,subs,2)   ! Terluna: v points take each column's own wind", 1)]),
 ]
 
 PATCHES = [
@@ -937,6 +1173,13 @@ CASES['box_highland'] = dict(
     build='moon_omp_terrain', terrain=dict(half_width_deg=0.25, passes=2, taper_km=50.0), surface_output=True,
     purpose='box_0e\'s size over high ground on ring_70_45e\'s path (44.7 S, 246.1 E), the ground at its heights, forced '
             'by that ring and the corrected GCM')
+# box_highland again with the terrain build of 2026-10-02, which holds and forces each column at its own height above
+# sea level: the hold to the GCM's air from 8 km above sea level over every column, the ring's day-night heating and
+# moistening and the GCM's vertical wind at each column's own height. The first run placed all three by the levels of
+# its corner column at 2.9 km (README, "A box over the highlands").
+CASES['box_highland_own_height'] = dict(
+    CASES['box_highland'],
+    purpose=CASES['box_highland']['purpose'] + ', the forcing held and applied at each column\'s own height')
 
 
 def gcm_soil(folder: Path) -> dict:
@@ -1371,7 +1614,8 @@ def case_settings(cfg, nx, dx, nz, ztop, air, gravity):
         'param6': dict(stretch_z=4, ztop=ztop),
         'param8': dict(**(dict(var11=1.0 if cfg.get('day_night') else 0.0) if box else {}),
                        var12=cfg['tilt_deg'] if tilted else 0.0,
-                       var13=(2.0 if tilted else 1.0) if cfg.get('large_scale_w') else 0.0,
+                       var13=(3.0 if box and cfg.get('terrain') else 2.0 if tilted else 1.0)
+                       if cfg.get('large_scale_w') else 0.0,          # 3: at each column's own height
                        var14=cfg['nudge']['z_start_m'] * s, var15=cfg['nudge']['z_full_m'] * s,
                        var16=0.0 if pair or box else round(length, 3), var17=0.0 if pair else round(air['sunlight_w_m2'], 3),
                        var18=0.0 if pair else cfg['start_hour_angle_deg'] + (cfg['node_deg'] if tilted else
