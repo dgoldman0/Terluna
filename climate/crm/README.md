@@ -897,12 +897,17 @@ floor of a small basin at sea level to 6.9 km, half of it between 1.3 and
   293.7 K, at the GCM's lapse rate there, 0.46 °C per kilometre, as the terrain
   ring's were; the terrain build reads them from `terluna_surface2d.txt`, a
   patch to CM1's surface set-up for boxes over terrain.
-- **Forcing.** The corrected GCM's upper air along `ring_70_45e`, held above
-  8–16 km column by column at each column's own height (the terrain build's
-  nudging); the GCM's mean vertical wind at the site; and the heating and
-  moistening of `ring_70_45e`'s own day-night circulation there over its second
-  lunar day, on the levels of the box's corner column (2.9 km), which follow the
-  ground. The Coriolis force is the site's (f = −3.7 × 10⁻⁶ s⁻¹).
+- **Forcing.** The corrected GCM's upper air along `ring_70_45e`, the GCM's
+  mean vertical wind at the site, and the heating and moistening of the ring's
+  own day-night circulation there over its second lunar day. The terrain build
+  places all three by the heights of the box's first column, a corner at 2.9 km
+  on the blended edge, and its levels follow the ground. So the air is held from
+  5.3 km above every column's ground (8.0 km above sea level at the corner),
+  each level toward the reference at its own height, where the flat rings hold
+  theirs from 8 km above the ground. The day-night forcing and the vertical wind
+  reach every column 2.9 km higher above its ground than on the ring, and the
+  ring's forcing in its lowest 2.9 km goes unused. The Coriolis force is the
+  site's (f = −3.7 × 10⁻⁶ s⁻¹).
 
 A first model day ran in 6.6 minutes on 8 threads at CM1's longest time step
 (80 s), with the wind at 10 m under 1.3 m/s through the first night and the air
@@ -914,6 +919,63 @@ all on the faster build.
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run build moon_omp_terrain
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_highland
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_highland --hours 7 --threads 8    # restartable
+```
+
+**What the highland box shows** (its second lunar day, days 29.6–59.0:
+[highland_analysis.py](highland_analysis.py),
+[highland_box_highland.json](../results/crm/highland_box_highland.json)). The
+run took 6.4 hours on 8 threads, its time step falling from 80 s to about 42 s
+through the sunlit hours as convection grew. Over the last third of the second
+lunar day its air ran 0.2 °C warmer and its dewpoint 0.1 °C lower than at the
+same local times a lunar day before. The analysis takes the 2,116 columns beyond
+the blended edges, from sea level to 6.9 km (mean 3.4 km): 768 valleys and
+basins, 582 slopes and 766 ridges and summits.
+
+These highlands are dry and sunny. Cloud covers 1% of the box (4% of the ground
+above 6 km), no fog forms at night, and 0.2 mm of rain falls per lunar day
+(1 mm above 6 km). Days are hot and nights mild: the sunlit air has a median of
+30.0 °C (hottest 5%, 36.5 °C), the dark air 18.4 °C (coldest 5%, 15.3 °C), and
+dewpoints are 15.5 °C by day and 13.9 °C at night. Of each lunar day 192 hours
+are comfortable on the strict terms (308 on the loose), 262 too hot and 184 too
+cold, and comfort rises with height:
+
+| Ground | Columns | Sunlit air: median, hottest 5% | Dark air: coldest 5%, median | Dewpoint, day, night | Comfortable hours (flat ring corrected) |
+|---|---|---|---|---|---|
+| 0–1 km | 155 | 35.0, 38.4 °C | 15.3, 18.5 °C | 17.9, 14.5 °C | 134 (3) |
+| 1–2 km | 450 | 33.6, 37.0 | 15.1, 18.4 | 17.2, 14.4 | 126 (71) |
+| 2–3 km | 333 | 32.3, 35.7 | 16.1, 19.3 | 16.6, 14.6 | 160 (136) |
+| 3–4 km | 273 | 30.7, 34.1 | 15.9, 19.1 | 15.8, 14.2 | 228 (170) |
+| 4–5 km | 481 | 29.5, 32.8 | 15.3, 18.4 | 14.9, 13.5 | 243 (194) |
+| 5–6 km | 297 | 27.9, 31.2 | 15.2, 17.8 | 14.2, 12.9 | 240 (175) |
+| 6–7 km | 127 | 26.6, 29.9 | 14.5, 16.8 | 13.5, 12.2 | 199 (179) |
+
+Valleys get 160 comfortable hours, slopes 194 and ridges 223. By day the air
+cools 1.1 °C per kilometre of height and its dewpoint falls 0.6 °C; at night
+only 0.35 and 0.4 °C, because cold air drains downhill. Through the night the
+wind at 10 m blows down the slopes, 0.2–0.7 m/s and strongest just after
+sunset, and valleys run 0.3 °C colder than ridges beyond what their heights
+give. Through the sunlit hours it blows uphill at 1.2–1.7 m/s, 81–98% of the
+time, the two switching about six Earth days before and after noon. What little
+rain falls is three times heavier on slopes the wind blows up than on those it
+blows down (0.011 against 0.004 mm a day).
+
+Against the plan's height correction the box agrees on high ground, 228–243
+comfortable hours at 3–6 km against the corrected flat ring's 170–194, and finds
+far more comfort low down, 126–134 hours below 2 km against 3–71, since its
+nights are cooler and drier than the flat ring's muggy ones. The twin's 1 °C per
+kilometre holds by day; at night the air changes less with height. Against the
+GCM's four land cells near the site (at 1.9–3.9 km: air 20.3 °C, lowest-layer
+dewpoint 11.6 °C, 602 comfortable hours, 16 mm of rain per lunar day) the box
+keeps CM1's warm, humid offset and rains almost nothing. Two of its settings
+bear on these numbers. Its air is held from 5.3 km above the ground where the
+flat rings' is held from 8 km, which may keep its low ground drier and more
+comfortable than a like-for-like ring would; a rerun holding and forcing each
+column at its own height would settle that. Its deep ground follows the GCM's
+0.46 °C per kilometre, gentler than the air's change by day, so high ground may
+run slightly warm.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.highland_analysis box_highland --from-day 29.5
 ```
 
 ## The gravity pair

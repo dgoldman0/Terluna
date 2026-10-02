@@ -1,0 +1,572 @@
+{
+ "schema": "terluna.climate.crm-highland/1",
+ "case": "box_highland",
+ "evidence": "CM1 r22.0 in three dimensions at lunar gravity over the atlas's ground (smoothed to slopes of at most about 0.2 and blended to a common height at the edges, where the box wraps round), the upper air held to the corrected GCM's along the ring, the GCM's mean vertical wind and the ring's own day-night circulation prescribed, the ground's deep temperature carried from sea level at the GCM's lapse rate. It resolves slope winds, cold air in valleys and storms over the terrain; it has no land and water around it and takes the planet-wide circulation from the ring. Like every CM1 case here it runs warmer and more humid near the ground than the GCM, for reasons not yet found, so its absolute warmth and humidity are CM1's end of the range; the contrasts within the box rest on the terrain and the Sun.",
+ "reading_rule": "Columns within 50 km of the box's edge, where its ground is blended, are left out. Heights are the ground's above sea level. Day and night follow the Sun at the site; hours per lunar day are shares of the snapshots times the lunar day. Comfortable means air at 2 m of 18-26 C with a dewpoint of at most 15 C (strict), or 17-27 C and 16 C (loose). The change with height is a least-squares line over the columns; a valley's or ridge's warmth is its mean departure from that line. The upslope wind is the wind at 10 m along the ground's steepest ascent on slopes of at least 0.05. Windward slopes are those where the wind at 10 m blows uphill at that moment. The corrected flat ring adds the terrain twin's difference at each band's mean height to the ring's land near the site over the same span; the GCM's values are its 3-day means on its land cells within 150 km, at their own heights.",
+ "span_days": [
+  29.5,
+  59.0
+ ],
+ "snapshots": 237,
+ "columns": 2116,
+ "site": {
+  "ring": "ring_70_45e",
+  "lat_deg": -44.7,
+  "lon_deg": 246.1,
+  "radius_m": 100000.0,
+  "heading_deg": 151.329
+ },
+ "heights_m": {
+  "min": 0.0,
+  "max": 6944.992,
+  "mean": 3369.366
+ },
+ "places": {
+  "valleys": 768,
+  "slopes": 582,
+  "ridges": 766,
+  "steep": 1118
+ },
+ "box": {
+  "group": "all",
+  "columns": 2116,
+  "mean_height_m": 3369.366,
+  "air_day_c": {
+   "median": 30.042,
+   "p95": 36.534
+  },
+  "air_night_c": {
+   "p5": 15.254,
+   "median": 18.415
+  },
+  "dewpoint_c": {
+   "day": 15.469,
+   "night": 13.895
+  },
+  "wind_10m_m_s": {
+   "median": 0.518,
+   "p95": 2.8
+  },
+  "rain_mm_per_lunar_day": 0.218,
+  "cloud": 0.01,
+  "fog_night": 0.0,
+  "comfortable_hours": {
+   "strict": 192.082,
+   "loose": 308.46
+  },
+  "uncomfortable_hours": {
+   "too_hot": 262.445,
+   "too_cold": 184.0,
+   "too_humid": 70.207
+  }
+ },
+ "by_height": [
+  {
+   "group": "0-1 km",
+   "columns": 155,
+   "mean_height_m": 534.319,
+   "air_day_c": {
+    "median": 35.034,
+    "p95": 38.426
+   },
+   "air_night_c": {
+    "p5": 15.336,
+    "median": 18.53
+   },
+   "dewpoint_c": {
+    "day": 17.877,
+    "night": 14.533
+   },
+   "wind_10m_m_s": {
+    "median": 0.206,
+    "p95": 2.235
+   },
+   "rain_mm_per_lunar_day": 0.007,
+   "cloud": 0.002,
+   "fog_night": 0.002,
+   "comfortable_hours": {
+    "strict": 133.567,
+    "loose": 254.573
+   },
+   "uncomfortable_hours": {
+    "too_hot": 301.61,
+    "too_cold": 181.857,
+    "too_humid": 91.7
+   }
+  },
+  {
+   "group": "1-2 km",
+   "columns": 450,
+   "mean_height_m": 1536.896,
+   "air_day_c": {
+    "median": 33.646,
+    "p95": 36.964
+   },
+   "air_night_c": {
+    "p5": 15.116,
+    "median": 18.424
+   },
+   "dewpoint_c": {
+    "day": 17.185,
+    "night": 14.388
+   },
+   "wind_10m_m_s": {
+    "median": 0.252,
+    "p95": 2.441
+   },
+   "rain_mm_per_lunar_day": 0.007,
+   "cloud": 0.002,
+   "fog_night": 0.001,
+   "comfortable_hours": {
+    "strict": 126.429,
+    "loose": 251.556
+   },
+   "uncomfortable_hours": {
+    "too_hot": 291.103,
+    "too_cold": 188.677,
+    "too_humid": 102.526
+   }
+  },
+  {
+   "group": "2-3 km",
+   "columns": 333,
+   "mean_height_m": 2461.488,
+   "air_day_c": {
+    "median": 32.287,
+    "p95": 35.69
+   },
+   "air_night_c": {
+    "p5": 16.079,
+    "median": 19.282
+   },
+   "dewpoint_c": {
+    "day": 16.582,
+    "night": 14.64
+   },
+   "wind_10m_m_s": {
+    "median": 0.364,
+    "p95": 2.73
+   },
+   "rain_mm_per_lunar_day": 0.02,
+   "cloud": 0.002,
+   "fog_night": 0.0,
+   "comfortable_hours": {
+    "strict": 159.598,
+    "loose": 290.998
+   },
+   "uncomfortable_hours": {
+    "too_hot": 283.894,
+    "too_cold": 134.336,
+    "too_humid": 130.906
+   }
+  },
+  {
+   "group": "3-4 km",
+   "columns": 273,
+   "mean_height_m": 3537.214,
+   "air_day_c": {
+    "median": 30.743,
+    "p95": 34.12
+   },
+   "air_night_c": {
+    "p5": 15.912,
+    "median": 19.148
+   },
+   "dewpoint_c": {
+    "day": 15.766,
+    "night": 14.164
+   },
+   "wind_10m_m_s": {
+    "median": 0.611,
+    "p95": 3.0
+   },
+   "rain_mm_per_lunar_day": 0.1,
+   "cloud": 0.005,
+   "fog_night": 0.0,
+   "comfortable_hours": {
+    "strict": 227.953,
+    "loose": 337.131
+   },
+   "uncomfortable_hours": {
+    "too_hot": 264.977,
+    "too_cold": 142.018,
+    "too_humid": 73.786
+   }
+  },
+  {
+   "group": "4-5 km",
+   "columns": 481,
+   "mean_height_m": 4435.885,
+   "air_day_c": {
+    "median": 29.463,
+    "p95": 32.778
+   },
+   "air_night_c": {
+    "p5": 15.252,
+    "median": 18.399
+   },
+   "dewpoint_c": {
+    "day": 14.894,
+    "night": 13.503
+   },
+   "wind_10m_m_s": {
+    "median": 0.619,
+    "p95": 2.934
+   },
+   "rain_mm_per_lunar_day": 0.244,
+   "cloud": 0.014,
+   "fog_night": 0.0,
+   "comfortable_hours": {
+    "strict": 243.021,
+    "loose": 341.184
+   },
+   "uncomfortable_hours": {
+    "too_hot": 247.74,
+    "too_cold": 180.732,
+    "too_humid": 37.241
+   }
+  },
+  {
+   "group": "5-6 km",
+   "columns": 297,
+   "mean_height_m": 5487.264,
+   "air_day_c": {
+    "median": 27.869,
+    "p95": 31.203
+   },
+   "air_night_c": {
+    "p5": 15.207,
+    "median": 17.777
+   },
+   "dewpoint_c": {
+    "day": 14.191,
+    "night": 12.938
+   },
+   "wind_10m_m_s": {
+    "median": 0.678,
+    "p95": 3.043
+   },
+   "rain_mm_per_lunar_day": 0.605,
+   "cloud": 0.023,
+   "fog_night": 0.0,
+   "comfortable_hours": {
+    "strict": 240.232,
+    "loose": 358.148
+   },
+   "uncomfortable_hours": {
+    "too_hot": 224.162,
+    "too_cold": 226.005,
+    "too_humid": 18.335
+   }
+  },
+  {
+   "group": "6-7 km",
+   "columns": 127,
+   "mean_height_m": 6349.938,
+   "air_day_c": {
+    "median": 26.569,
+    "p95": 29.852
+   },
+   "air_night_c": {
+    "p5": 14.464,
+    "median": 16.774
+   },
+   "dewpoint_c": {
+    "day": 13.503,
+    "night": 12.193
+   },
+   "wind_10m_m_s": {
+    "median": 0.619,
+    "p95": 2.997
+   },
+   "rain_mm_per_lunar_day": 0.992,
+   "cloud": 0.036,
+   "fog_night": 0.0,
+   "comfortable_hours": {
+    "strict": 198.664,
+    "loose": 319.883
+   },
+   "uncomfortable_hours": {
+    "too_hot": 196.639,
+    "too_cold": 304.648,
+    "too_humid": 8.783
+   }
+  }
+ ],
+ "by_place": [
+  {
+   "group": "valleys and basins",
+   "columns": 768,
+   "mean_height_m": 2007.24,
+   "air_day_c": {
+    "median": 32.427,
+    "p95": 37.42
+   },
+   "air_night_c": {
+    "p5": 15.216,
+    "median": 18.62
+   },
+   "dewpoint_c": {
+    "day": 16.738,
+    "night": 14.268
+   },
+   "wind_10m_m_s": {
+    "median": 0.363,
+    "p95": 2.581
+   },
+   "rain_mm_per_lunar_day": 0.031,
+   "cloud": 0.003,
+   "fog_night": 0.001,
+   "comfortable_hours": {
+    "strict": 159.669,
+    "loose": 278.224
+   },
+   "uncomfortable_hours": {
+    "too_hot": 285.431,
+    "too_cold": 176.296,
+    "too_humid": 87.338
+   }
+  },
+  {
+   "group": "slopes",
+   "columns": 582,
+   "mean_height_m": 3549.57,
+   "air_day_c": {
+    "median": 30.149,
+    "p95": 35.836
+   },
+   "air_night_c": {
+    "p5": 15.173,
+    "median": 18.371
+   },
+   "dewpoint_c": {
+    "day": 15.385,
+    "night": 13.846
+   },
+   "wind_10m_m_s": {
+    "median": 0.586,
+    "p95": 2.782
+   },
+   "rain_mm_per_lunar_day": 0.162,
+   "cloud": 0.008,
+   "fog_night": 0.0,
+   "comfortable_hours": {
+    "strict": 194.348,
+    "loose": 308.986
+   },
+   "uncomfortable_hours": {
+    "too_hot": 261.766,
+    "too_cold": 186.378,
+    "too_humid": 66.242
+   }
+  },
+  {
+   "group": "ridges and summits",
+   "columns": 766,
+   "mean_height_m": 4598.13,
+   "air_day_c": {
+    "median": 28.569,
+    "p95": 34.393
+   },
+   "air_night_c": {
+    "p5": 15.357,
+    "median": 18.267
+   },
+   "dewpoint_c": {
+    "day": 14.703,
+    "night": 13.515
+   },
+   "wind_10m_m_s": {
+    "median": 0.567,
+    "p95": 3.004
+   },
+   "rain_mm_per_lunar_day": 0.449,
+   "cloud": 0.019,
+   "fog_night": 0.0,
+   "comfortable_hours": {
+    "strict": 222.858,
+    "loose": 338.376
+   },
+   "uncomfortable_hours": {
+    "too_hot": 239.914,
+    "too_cold": 189.916,
+    "too_humid": 56.045
+   }
+  }
+ ],
+ "change_with_height": {
+  "air_day_per_km": -1.143,
+  "dew_day_per_km": -0.629,
+  "air_night_per_km": -0.352,
+  "dew_night_per_km": -0.411
+ },
+ "valleys_and_ridges": {
+  "valleys_day_c": -0.005,
+  "ridges_day_c": -0.01,
+  "valleys_night_c": -0.13,
+  "ridges_night_c": 0.146
+ },
+ "upslope_wind_by_local_time": [
+  {
+   "hour_angle_deg": -165.0,
+   "upslope_m_s": -0.26,
+   "share_uphill": 0.004
+  },
+  {
+   "hour_angle_deg": -135.0,
+   "upslope_m_s": -0.227,
+   "share_uphill": 0.005
+  },
+  {
+   "hour_angle_deg": -105.0,
+   "upslope_m_s": -0.194,
+   "share_uphill": 0.004
+  },
+  {
+   "hour_angle_deg": -75.0,
+   "upslope_m_s": 0.208,
+   "share_uphill": 0.573
+  },
+  {
+   "hour_angle_deg": -45.0,
+   "upslope_m_s": 1.302,
+   "share_uphill": 0.979
+  },
+  {
+   "hour_angle_deg": -15.0,
+   "upslope_m_s": 1.686,
+   "share_uphill": 0.901
+  },
+  {
+   "hour_angle_deg": 15.0,
+   "upslope_m_s": 1.256,
+   "share_uphill": 0.814
+  },
+  {
+   "hour_angle_deg": 45.0,
+   "upslope_m_s": 1.171,
+   "share_uphill": 0.829
+  },
+  {
+   "hour_angle_deg": 75.0,
+   "upslope_m_s": 0.304,
+   "share_uphill": 0.594
+  },
+  {
+   "hour_angle_deg": 105.0,
+   "upslope_m_s": -0.72,
+   "share_uphill": 0.017
+  },
+  {
+   "hour_angle_deg": 135.0,
+   "upslope_m_s": -0.432,
+   "share_uphill": 0.005
+  },
+  {
+   "hour_angle_deg": 165.0,
+   "upslope_m_s": -0.302,
+   "share_uphill": 0.005
+  }
+ ],
+ "rain_on_slopes": {
+  "windward_mm_day": 0.011,
+  "leeward_mm_day": 0.004,
+  "windward_share_of_slope_time": 0.396
+ },
+ "flat_ring": {
+  "ring": "ring_70_45e",
+  "columns": 33,
+  "sea_level": {
+   "air_c": 25.018,
+   "dewpoint_c": 17.885,
+   "comfortable_hours": 0.0
+  },
+  "bands": [
+   {
+    "group": "0-1 km",
+    "mean_height_m": 534.319,
+    "air_c": 24.939,
+    "dewpoint_c": 16.697,
+    "comfortable_hours": 2.9
+   },
+   {
+    "group": "1-2 km",
+    "mean_height_m": 1536.896,
+    "air_c": 23.767,
+    "dewpoint_c": 15.636,
+    "comfortable_hours": 71.408
+   },
+   {
+    "group": "2-3 km",
+    "mean_height_m": 2461.488,
+    "air_c": 22.712,
+    "dewpoint_c": 14.871,
+    "comfortable_hours": 136.201
+   },
+   {
+    "group": "3-4 km",
+    "mean_height_m": 3537.214,
+    "air_c": 21.344,
+    "dewpoint_c": 13.676,
+    "comfortable_hours": 170.455
+   },
+   {
+    "group": "4-5 km",
+    "mean_height_m": 4435.885,
+    "air_c": 20.499,
+    "dewpoint_c": 12.86,
+    "comfortable_hours": 194.469
+   },
+   {
+    "group": "5-6 km",
+    "mean_height_m": 5487.264,
+    "air_c": 19.43,
+    "dewpoint_c": 11.789,
+    "comfortable_hours": 174.895
+   },
+   {
+    "group": "6-7 km",
+    "mean_height_m": 6349.938,
+    "air_c": 18.529,
+    "dewpoint_c": 10.917,
+    "comfortable_hours": 178.792
+   }
+  ]
+ },
+ "gcm": {
+  "run": "A28_dim5_moon",
+  "years": [
+   20,
+   29
+  ],
+  "cells": 4,
+  "heights_m": [
+   3857.222,
+   3739.707,
+   1948.199,
+   3597.886
+  ],
+  "air_c": {
+   "all": 20.283,
+   "day": 21.074,
+   "night": 19.441
+  },
+  "dewpoint_c": {
+   "all": 11.644,
+   "day": 11.298,
+   "night": 12.012
+  },
+  "comfortable_hours": {
+   "strict": 601.538,
+   "loose": 671.821
+  },
+  "rain_mm_per_lunar_day": 15.631
+ },
+ "producer": {
+  "domain": "climate",
+  "files": {
+   "crm/highland_analysis.py": "64664683f26aa12d",
+   "crm/ring_comfort.py": "c05e1816e4ca3d38"
+  }
+ }
+}
