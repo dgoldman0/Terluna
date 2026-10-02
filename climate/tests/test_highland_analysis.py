@@ -26,3 +26,9 @@ def test_the_interior_leaves_out_the_blended_edges_and_stats_allow_an_empty_span
     assert keep.sum() == (64 - 2 * 9) ** 2 and not keep[8].any() and keep[9, 9]
     assert ha.stat(np.median, np.array([])) is None and ha.stat(np.percentile, [1.0, 3.0], 50) == pytest.approx(2.0)
     assert ha.line([0.0, 1.0, 2.0], [5.0, 4.0, 3.0]) == pytest.approx((-1.0, 5.0))
+
+
+def test_departures_name_real_cases_and_point_to_their_reruns():
+    from climate.crm.cm1_run import CASES
+    assert set(ha.DEPARTURES) <= set(CASES)
+    assert 'box_highland_own_height' in ha.DEPARTURES['box_highland'] and 'box_highland_own_height' in CASES

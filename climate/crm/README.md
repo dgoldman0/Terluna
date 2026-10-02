@@ -968,11 +968,12 @@ GCM's four land cells near the site (at 1.9–3.9 km: air 20.3 °C, lowest-layer
 dewpoint 11.6 °C, 602 comfortable hours, 16 mm of rain per lunar day) the box
 keeps CM1's warm, humid offset and rains almost nothing. Two of its settings
 bear on these numbers. Its air is held from 5.3 km above the ground where the
-flat rings' is held from 8 km, which may keep its low ground drier and more
-comfortable than a like-for-like ring would; a rerun holding and forcing each
-column at its own height would settle that. Its deep ground follows the GCM's
-0.46 °C per kilometre, gentler than the air's change by day, so high ground may
-run slightly warm.
+flat rings' is held from 8 km, and every column takes the day-night forcing at
+the corner's heights, which may keep its low ground drier and more comfortable
+than a like-for-like ring would; the rerun below, with each column held and
+forced at its own height, finds that it did, through the day-night forcing. Its
+deep ground follows the GCM's 0.46 °C per kilometre, gentler than the air's
+change by day, so high ground may run slightly warm.
 
 ```sh
 climate/gcm/.venv/bin/python -m climate.crm.highland_analysis box_highland --from-day 29.5
@@ -1006,6 +1007,81 @@ ground.
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run build moon_omp_terrain
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_highland_own_height
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_highland_own_height --hours 7 --threads 8    # restartable
+```
+
+**What the box shows at its own heights** (its second lunar day, days
+29.6–59.0: [highland_analysis.py](highland_analysis.py),
+[highland_box_highland_own_height.json](../results/crm/highland_box_highland_own_height.json);
+both runs' summaries now carry their purpose and executable, and the first
+run's states its departure). The run took 7.7 hours on 8 threads in two
+sessions, at 185 model seconds per wall second (the first run took 6.4 hours at
+220). It settled as the first did: over the last third of its second lunar day
+its air ran 0.3 °C warmer and its dewpoint 0.2 °C lower than at the same local
+times a lunar day before.
+
+Holding and forcing each column at its own height changed the low ground and
+little else. The air at 2 m stays within 0.4 °C of the first run's in every
+height band, by day and by night (over the box a sunlit median of 30.1 °C and a
+dark one of 18.5 °C), and so do the cloud (1% of the box) and the air's change
+with height by day (1.15 °C cooler per kilometre). The low ground is more
+humid, because the ring's day-night forcing now reaches it at its own height.
+The ring's circulation cools its lowest kilometre at night by 0.04–0.18 °C a
+day and moistens it by 0.07–0.28 g/kg a day, and in sunlight moistens it by
+0.15–0.33 g/kg a day; at 2.9 km, where the first run took the low ground's
+forcing from, it warms the air at night by 0.18 °C a day and moistens it by
+0.05 g/kg. Over the low ground the air 0.5–1 km above sea level now runs
+0.5–0.65 °C cooler and about 0.45 g/kg moister at night than in the first run,
+and 0.5 g/kg moister by day. The GCM's vertical wind, which the first run also
+took from 2.9 km, works the other way and more weakly: its ascent cooled that
+air by about 0.09 °C a day at night. After sunrise the low ground's dewpoint at 2 m
+climbs to 16.4 °C, where the first run's stayed near 13.4 °C, so the morning
+passes through comfortable warmth in muggy air, and comfort falls low down:
+
+| Ground | Comfortable hours, first run → own heights (flat ring corrected) | Too humid | Too cold | Rain, mm per lunar day |
+|---|---|---|---|---|
+| 0–1 km | 134 → 82 (3) | 92 → 133 | 182 → 197 | 0.01 → 0.02 |
+| 1–2 km | 126 → 101 (71) | 103 → 126 | 189 → 193 | 0.01 → 0.03 |
+| 2–3 km | 160 → 145 (136) | 131 → 145 | 134 → 133 | 0.02 → 0.03 |
+| 3–4 km | 228 → 216 (170) | 74 → 83 | 142 → 138 | 0.10 → 0.06 |
+| 4–5 km | 243 → 244 (194) | 37 → 39 | 181 → 176 | 0.24 → 0.12 |
+| 5–6 km | 240 → 262 (175) | 18 → 17 | 226 → 204 | 0.60 → 0.19 |
+| 6–7 km | 199 → 205 (179) | 9 → 11 | 305 → 296 | 0.99 → 0.26 |
+
+Over the box 183 hours of each lunar day are comfortable on the strict terms
+(192 in the first run) and 309 on the loose (308). Valleys and basins lose the
+most, 134 hours against 160, while slopes and ridges keep theirs (194 and 223),
+so comfort now climbs more steeply with height, from 82 hours below 1 km to 262
+at 5–6 km. By day the dewpoint falls 0.8 °C per kilometre of height (0.6 in the
+first run). At night the air cools 0.25 °C per kilometre (0.35), and valleys run
+0.17 °C colder than ridges beyond what their heights give (0.28). Low cloud
+gathers around sunrise over up to 17% of the low ground, with a trace of
+drizzle. On the first lunar day, from the starting state, it grew into a deck
+over 79% of the low ground, its base 150–650 m and its top up to 1.7 km above
+the ground, which drizzled at up to 0.4 mm a day and cleared within three Earth
+days of sunrise; the first run had only thin fog then, gone within an Earth day
+of sunrise. From late morning the upslope wind is weaker, 1.4 m/s against
+1.7 before noon and 0.8–0.9 against 1.2–1.3 in the afternoon, and it turns
+downhill before sunset; just after sunset the downslope wind is stronger,
+0.9 m/s against 0.7. Rain falls to 0.09 mm per lunar day (0.2), still most on
+the highest ground.
+
+Above 2 km the two runs' air agrees within 0.15 °C. Over the second lunar day,
+moving the hold to 8 km above sea level changed the moisture of the air above
+5 km by at most 0.35 g/kg: drier at 6–8 km over the low ground at night, where
+the first run held it and this one does not, and moister at 7–9 km over the
+high ground, weakly held now. So the first run's error reached the ground through the
+day-night forcing over the low ground.
+
+Against the plan's height correction the box now agrees at 1–3 km (101 and 145
+hours against the corrected flat ring's 71 and 136) and still finds more
+comfort in the basin below 1 km (82 against 3) and on high ground (216–262 hours
+at 3–6 km against 170–194). The GCM's four land cells near the site (602
+comfortable hours, 16 mm of rain per lunar day) stay far from both: the box
+keeps CM1's warm, humid offset and rains almost nothing. Its deep ground still
+follows the GCM's 0.46 °C per kilometre.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.highland_analysis box_highland_own_height --from-day 29.5
 ```
 
 ## The gravity pair

@@ -52,6 +52,13 @@ READING_RULE = ('Columns within 50 km of the box\'s edge, where its ground is bl
                 'where the wind at 10 m blows uphill at that moment. The corrected flat ring adds the terrain twin\'s '
                 'difference at each band\'s mean height to the ring\'s land near the site over the same span; the GCM\'s '
                 'values are its 3-day means on its land cells within 150 km, at their own heights.')
+DEPARTURES = {'box_highland': 'The terrain build of 2026-10-01 placed the hold to the GCM\'s air, the ring\'s day-night '
+                              'forcing and the GCM\'s vertical wind by the levels of the box\'s corner column, whose '
+                              'ground is at 2.9 km on the blended edge. The air was held from 5.3 km above every '
+                              'column\'s ground, and every column took the forcing at the corner\'s heights, from 2.9 km '
+                              'above sea level at its lowest level: too high for ground below 2.9 km and too low for '
+                              'ground above it. box_highland_own_height reruns the case with each column held and '
+                              'forced at its own height.'}
 
 
 def periodic_mean(field, radius_cells: int):
@@ -132,6 +139,7 @@ def analyse(name: str, from_day: float) -> dict:
     case = ra.RUNS / name
     cfg = CASES[name]
     record = json.loads((case / 'case.json').read_text())
+    segments = json.loads((case / 'progress.json').read_text())['segments']
     grid, site = record['grid'], cfg['site']
     ny, nx, dx = grid['ny'], grid['nx'], grid['dx_m']
     heights = np.fromfile(case / 'perts.dat', dtype='<f4').astype(float).reshape(ny, nx)
@@ -204,7 +212,10 @@ def analyse(name: str, from_day: float) -> dict:
     leeward = (f['up'] < 0) & steep[None]
     rain_slopes = dict(windward_mm_day=float(f['rain'][windward].mean()), leeward_mm_day=float(f['rain'][leeward].mean()),
                        windward_share_of_slope_time=float(windward.sum() / max(1, (windward | leeward).sum())))
-    return dict(schema=SCHEMA, case=name, evidence=EVIDENCE, reading_rule=READING_RULE,
+    return dict(schema=SCHEMA, case=name, purpose=record['configuration'].get('purpose'),
+                build=dict(label=record['build']['label'],
+                           executables=sorted({s['executable'] for s in segments if s.get('executable')})),
+                departures=DEPARTURES.get(name), evidence=EVIDENCE, reading_rule=READING_RULE,
                 span_days=[(numbers[0] - 1) * output_s / 86400.0, (numbers[-1] - 1) * output_s / 86400.0],
                 snapshots=len(numbers), columns=int(keep.sum()), site=dict(site, heading_deg=record['terrain']['heading_deg']),
                 heights_m=dict(min=float(heights[keep].min()), max=float(heights[keep].max()), mean=float(heights[keep].mean())),
