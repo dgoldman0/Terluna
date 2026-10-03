@@ -5,7 +5,7 @@
     "runner": "research/studies/optical_comfort/run.py",
     "files": {
       "research/studies/optical_comfort/run.py": "5982c4f9b5314e25830b4b90b957fe1a1b657b06bfee685c93e21416eb0d5da9",
-      "research/studies/optical_comfort/sources.json": "937e2f6be7860c64c044c1e9870c27e2b472004bcf46100bbf53c69d59a988e9",
+      "research/studies/optical_comfort/sources.json": "c56ada107eb54fac44c7f6c75df221b79e0689cce4b2d95d3941000a7be1e7f2",
       "shared/constants.json": "63a94123983be8ff627e7556d2b63b0c835044b5ee81f924f81e65d8a264e006",
       "shared/constants.py": "8e6252e5f6055b6664289247c71fbefbef49b2e0c8442b7c36b9f470118d92b6"
     },

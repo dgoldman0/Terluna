@@ -1,8 +1,8 @@
 # Optical comfort and surface vision
 
-The committed light fluxes give dimmer horizontal matte ground and more strongly filled solar-only shadows on the design Moon at noon. Eye illumination depends additionally on the angular sky and the direction of gaze. Under an imposed uniform sky, a level eye receives more ambient light on the Moon; looking steeply down reverses that comparison because the lunar ground is dimmer. Optical comfort therefore needs to be assessed for a specified surface, gaze and shelter geometry.
+The committed light fluxes give dimmer horizontal matte ground and more strongly filled solar-only shadows on the design Moon at noon. Transferring the repo's computed angular sky patterns onto those fluxes gives 1.83 times Earth's ambient illumination for a level eye over dark ground, compared with 2.11 under a uniform sky. Looking down reverses the ordering. Finite pale surroundings can bring the two worlds' eye illumination close together, while physical roofs, side screens and shaded ground change both illumination and surface contrast. Optical comfort therefore needs a specified surface, gaze and shelter geometry.
 
-**Evidence state:** a reproducible screening calculation from committed clear-sky products, with imposed scene geometries. The quantities below describe light and selected contrast mechanisms. Human discomfort, visual performance in real landscapes and eye safety remain unvalidated. All albedos are spectrally neutral scenario values; a dark landscape represents open ground, rather than a modelled forest interior.
+**Evidence state:** reproducible screening from committed clear-sky products, with prescribed scene geometries. Sections 1–8 retain the initial flux-based calculation and imposed sky shapes. Section 9 adds computed angular patterns transferred from a different atmospheric model, and finite scenes with repeated matte reflection. The quantities describe light and selected contrast mechanisms. Human discomfort, visual performance in real landscapes and eye safety remain unvalidated. All albedos are spectrally neutral scenario values; a dark landscape represents open ground, rather than a modelled forest interior.
 
 ## Inputs and reproduction
 
@@ -14,6 +14,8 @@ The runner consumes the stored photopic band summaries, whose albedo feedback wa
 OPENBLAS_NUM_THREADS=1 python -m research.studies.optical_comfort.run
 python -m pytest research/studies/optical_comfort -q
 MPLCONFIGDIR=/tmp/terluna-mpl python visualization/optical-comfort/plot.py
+OPENBLAS_NUM_THREADS=1 python -m research.studies.optical_comfort.directional
+MPLCONFIGDIR=/tmp/terluna-mpl python visualization/optical-comfort/directional_scenes.py
 ```
 
 The stable outputs are [optical_comfort.json](results/optical_comfort.json), schema `terluna.research.optical-comfort/1`, and [surface_scenes.csv](results/surface_scenes.csv). The JSON records the full input and implementation SHA-256 hashes, assumptions, units, reading rule and numerical convergence. It contains 273 combinations of world, solar elevation and landscape albedo, 80 gaze cases, plus local surfaces, angular masks, glare sensitivities, smooth-water reflection and low-Sun proxies. Its provenance depends on the input and implementation bytes, so a commit-message change leaves the product unchanged. The plotting code reads that product and writes ignored figures with a hash manifest.
@@ -100,7 +102,7 @@ The Moon–Earth ordering reverses in steep downward views in this model. On pal
 
 The uniform-sky calculation is a transparent angular approximation. Horizontal diffuse illuminance alone does not specify vertical illumination. To expose that uncertainty, the study holds horizontal flux fixed and tests three axisymmetric shapes, with radiance proportional to 1, 1 + 2 sin(elevation), or 3 − 2 sin(elevation). Their vertical-to-horizontal diffuse ratios are 0.500, 0.396 and 0.645.
 
-These shapes give 17.0–24.9 klux for a level gaze in the dark-ground lunar noon scene and 8.94–10.7 klux for Earth. This interval describes three imposed shapes, rather than a confidence interval or a bound on the real sky. Horizontal diffuse flux alone places no finite upper bound on vertical sky illumination if arbitrarily strong radiance near the horizon is allowed. The actual scattering solution must supply the angular distribution. The missing circumsolar structure, azimuth dependence and horizon brightness can change a particular view. The full sky atlas is the appropriate next input.
+These shapes give 17.0–24.9 klux for a level gaze in the dark-ground lunar noon scene and 8.94–10.7 klux for Earth. This interval describes three imposed shapes, rather than a confidence interval or a bound on the real sky. Horizontal diffuse flux alone places no finite upper bound on vertical sky illumination if arbitrarily strong radiance near the horizon is allowed. The actual scattering solution must supply the angular distribution. The missing circumsolar structure, azimuth dependence and horizon brightness can change a particular view. The committed packed atlas supplies a reduced-resolution angular input in section 9. Its proxy profiles and unfiltered source still require a transfer assumption to use with the chosen design.
 
 ## 3. Shadows, shape cues and material contrast
 
@@ -209,18 +211,114 @@ The first-pass findings are consequently specific:
 
 The upstream low UV index describes its protected atmospheric scenario. It supplies no visible-light discomfort threshold or comprehensive eye-safety assessment. This study therefore carries no retinal-hazard, clinical or photobiological clearance.
 
-## 9. Next data and experiments
+## 9. Directional sky and finite scenes
+
+The [directional product](results/directional_scenes.json), schema `terluna.research.optical-comfort-directional-scenes/1`, adds 630 angular views and 24 scene cases, each with six probes. The runner is [directional.py](directional.py), with angular recovery in [angular.py](angular.py) and surface transport in [scenes.py](scenes.py). A second [figure generator](../../../visualization/optical-comfort/directional_scenes.py) displays the stored results.
+
+### 9.1 Recovering the sky already in the repository
+
+The original atlas archives are ignored by Git, but [immersion/assets/sky/atmosphere.json](../../../immersion/assets/sky/atmosphere.json) retains a packed copy. Its bake preserves photopic luminance while mapping signed RGB into positive RGB, then subsamples and quantizes to half precision. Each of 174 Sun positions has 41 elevation samples across the full sphere and 33 azimuth samples over the symmetric half-plane; 21 elevation samples cover the sky. The original atlas had 81 × 65 angular samples. The diffuse panorama excludes the directly viewed solar disk, whose beam is stored separately.
+
+We recover luminance as `0.2126 R + 0.7152 G + 0.0722 B`. The study interpolates bilinearly in sine of view elevation and azimuth; it normalizes by the exact horizontal integral of that interpolant. This is an explicit scientific reading rule, rather than the renderer's texture interpolation or display exposure. Across the 14 selected Moon/Earth frames, the recovered horizontal sky flux differs from the stored full-resolution flux by at most 0.326%. This checks integrated fidelity, without bounding fine angular features. The packed beam and diffuse tables also agree with the earlier surface-light atlas comparison to within 0.00044% at its stored angles. Archive hashes differ; that agreement concerns the recorded summaries, rather than proof of byte-identical original archives.
+
+The Moon uses `moon_no_ozone`, the atlas case paired with the upstream lunar comparison; Earth uses `earth`. These atlases have prescribed exponential optical profiles, unfiltered sunlight and landscape albedo 0.1. For each world and exact solar angle, we scale its angular sky shape to the **current** diffuse illuminance and use the **current** direct beam separately. The resulting field is a hybrid sensitivity. It does not resolve the effects of the shield spectrum or solved vertical profiles on sky direction. All new scenes keep the atmospheric boundary at albedo 0.1; the local pale ground never resets the whole column's albedo.
+
+At noon, the atlas sky alone gives vertical/horizontal diffuse ratios of 0.529 on the Moon and 0.783 on Earth, against 0.5 for a uniform sky. Earth's brighter horizon therefore moderates the Moon/Earth level-eye comparison. With the current dark-ground fluxes:
+
+| Gaze at noon | Moon eye illumination, klux | Earth, klux |
+|---|---:|---:|
+| Level | 21.26 | 11.59 |
+| 30° down | 15.36 | 12.66 |
+| 45° down | 12.78 | 12.86 |
+| 60° down | 10.73 | 12.83 |
+| Straight down | 8.96 | 12.46 |
+
+At 30° Sun, a level view's sky contribution also varies with azimuth. Its ratio to horizontal diffuse illumination ranges from about 0.52 to 0.63 on the Moon and 0.85 to 1.05 on Earth across the sampled headings. These are disk-excluded sky contributions; the direct beam must still be added when it lies in front of the eye plane. The downward-eye reversal and a brighter lunar ambient field in some views both survive using computed angular structure.
+
+### 9.2 Geometry and transport
+
+The six scenes share flat, dark ground with reflectance 0.1 extending outside the local structures. Coordinates are metres, with z up and the Sun along +x. The observer is at `(0, 0, 1.6)`, facing the opening toward −y. This level view excludes the directly viewed Sun at both tested elevations. A second eye plane points at the work surface, 38.7° downward. Scene dimensions and every reflectance are stored in the product.
+
+| Scene | Prescribed local geometry |
+|---|---|
+| Open dark ground | Reflectance 0.1 throughout |
+| Open pale patch | An 8 × 8 m ground patch, reflectance 0.8, centred on the observer |
+| Pale courtyard | The same patch, with 3 m-high walls of reflectance 0.8 at x = ±4 m and y = +4 m; open toward −y |
+| Canopy, dark floor | A 6 × 6 m opaque roof at z = 3 m, reflectance 0.3 on both faces |
+| Canopy, pale floor | The same roof over the 8 × 8 m pale patch |
+| Screened canopy, pale floor | The preceding canopy plus 3 m-high walls of reflectance 0.3 at x = ±3 m and y = +3 m |
+
+Every surface obeys the diffuse relation `L = rho E / pi`. Irradiance includes the visible solar beam and the cosine-weighted integral of incoming radiance. Ray intersections determine sky exposure and solar shadows. At reflected surfaces the same transport is evaluated again, so a roof changes the illumination of nearby ground, and that altered ground changes the roof, walls and observer's view. The surface rendering equation and path estimator follow the primary reference recorded in [sources.json](sources.json).
+
+Cosine-weighted paths use two fixed scrambled Sobol sequences of 131,072 samples per probe, with up to 18 surface reflections. The collimated Sun is evaluated explicitly at each surface and at the initial plane; diffuse paths cannot count it twice. The product separates unobstructed sky, reflected sky, reflected sunlight and directly incident sunlight, and also separates visible ground from structures. No volume scattering or extinction is added between local surfaces. Materials are neutral, opaque and matte; weather, specular reflection and vegetation transmission remain outside these scenes.
+
+### 9.3 What reaches the eye and the work surface
+
+Noon values below are klux. The workplane is an infinitesimal horizontal measurement patch at `(0, −1, 0.8)`; it adds no table geometry or scene-wide reflectance change.
+
+| Scene | Moon level eye | Earth level eye | Moon workplane | Earth workplane |
+|---|---:|---:|---:|---:|
+| Open dark ground | 21.26 | 11.59 | 89.60 | 124.60 |
+| Open pale patch | 39.47 | 36.93 | 89.60 | 124.60 |
+| Pale courtyard | 41.07 | 40.84 | 89.48 | 127.56 |
+| Canopy, dark floor | 11.62 | 7.64 | 12.40 | 4.44 |
+| Canopy, pale floor | 19.66 | 15.07 | 15.72 | 7.81 |
+| Screened canopy, pale floor | 12.87 | 10.23 | 6.75 | 3.27 |
+
+Pale local surroundings raise reflected light substantially on both worlds. The level-eye comparison becomes almost equal in the pale courtyard, despite the dimmer lunar open horizontal surface. That is different from applying albedo 0.8 to the entire atmospheric column in section 1: the finite patch changes local reflection while the incoming sky remains the albedo-0.1 boundary.
+
+A roof gives a larger reduction at the workplane than at a level eye looking out. On the Moon at noon, the dark-floor canopy reduces workplane illumination from 89.6 to 12.4 klux, while level-eye illumination falls from 21.3 to 11.6 klux. With a pale floor, the eye receives 19.7 klux under that same roof: 8.43 from unobstructed sky, 9.49 from visible ground and 1.73 from the roof. The ground term now includes its computed shade. The three screens reduce that total to 12.9 klux. Shade effectiveness therefore depends on the observer's view as well as the illumination of the task.
+
+At 30° Sun, the beam enters below the bare roof's edge. At the central workplane, its ray reaches the roof's height 3.81 m to the side, beyond the roof's 3 m half-width. The roof blocks the noon beam but leaves this beam visible. The side screen intercepts it.
+
+| Canopy scene, Sun 30° | Moon workplane, klux | Earth workplane, klux |
+|---|---:|---:|
+| Canopy, dark floor | 23.86 | 55.93 |
+| Canopy, pale floor | 26.38 | 60.58 |
+| Screened canopy, pale floor | 4.13 | 2.13 |
+
+The open workplane at that Sun angle receives 35.9 klux on the Moon and 57.8 klux on Earth. With the dark-floor canopy, Earth retains about 97% of that illumination because its direct beam dominates; the Moon retains about 67%. Roof depth, height, heading and side screening therefore deserve joint treatment for the long lunar low-Sun intervals. These particular dimensions are test scenes, rather than optimized buildings.
+
+### 9.4 Two visual tasks
+
+The first task is a neutral mark of reflectance 0.1 on a work surface of reflectance 0.2. They share the same illumination, so their physical Weber contrast remains −0.5 in every scene; their absolute luminances change with the workplane values above. Ocular scatter, gloss and adaptation would require additional modelling.
+
+The second task is a raised block 2 m wide, 1 m deep and 0.15 m high, with reflectance 0.2 on its tread and riser. It sits from y = −2 to −1 m. The two surface probes sample the centres of the tread and the viewer-facing riser, with the block itself present for ray visibility. Other scene probes omit the block. The signed shading contrast is `(L_tread − L_riser)/(L_tread + L_riser)`; a negative value means a brighter riser. At noon:
+
+| Scene | Moon tread–riser contrast | Earth tread–riser contrast |
+|---|---:|---:|
+| Open dark ground | 0.620 | 0.830 |
+| Open pale patch | 0.280 | 0.390 |
+| Pale courtyard | 0.270 | 0.326 |
+| Canopy, dark floor | 0.127 | -0.007 |
+| Canopy, pale floor | 0.009 | -0.048 |
+| Screened canopy, pale floor | 0.682 | 0.501 |
+
+Open-ground shading is weaker on the Moon, consistent with the first pass. Inside a shelter, the angular light reaching each face becomes decisive. Under the dark-floor roof the Moon retains a shading difference while the Earth pair is nearly equal; under the pale-floor roof both pairs are weakly differentiated. The screened shelter directs enough light toward the tread relative to the riser to restore a strong difference. At 30° Sun the courtyard even reverses the Earth tread–riser ordering. Thus a general claim that lunar diffuse light always reduces shape contrast would fail in these controlled scenes.
+
+These values measure one shading cue. They do not predict whether a person will detect a step: edge boundaries, texture, angular size, binocular cues and movement remain available, and adaptation and ocular scatter are absent. The task contrast here is also distinct from the two-horizontal-patch solar-shadow contrast in section 3.
+
+### 9.5 Numerical review and remaining uncertainty
+
+The focused tests include exact normalization of a bilinear sky, uniform-sky tilted-plane integrals, packed flux reconstruction, explicit ray intersections, analytic open-ground illuminance and the point-to-square view factor for a black canopy. Additional checks cover an unilluminated roof underside, linearity in source strength, positive repeated reflection and both component ledgers. These tests assess the specified calculation.
+
+Doubling the directional quadrature changes sky illumination by at most 0.000137 of the horizontal diffuse illuminance. Across the 144 scene probes, increasing the nested samples from 32,768 to 131,072 per scramble changes illuminance by at most 0.407%; the two full scrambled estimates differ by at most 0.318%. A preliminary 65,536-path, 12-reflection run and the retained run differ in step contrast by at most 0.00170. A conservative radiance estimate on paths still live after 18 reflections gives a largest sampled omitted-tail contribution of 0.00091% of probe illumination. Those sampling diagnostics are not confidence intervals or a certified whole-scene error bound.
+
+The dominant remaining uncertainty is the physical illumination boundary: the packed proxy sky needs a consistent spherical calculation with the chosen shield and solved columns. Cloud fields, glossy/wet surfaces and measured material spectra would change the scene inputs. The current results identify mechanisms and useful design comparisons without establishing human comfort thresholds.
+
+## 10. Next data and experiments
 
 | Next input | What it resolves |
 |---|---|
-| `illumination/sky/data/*_atlas.npz`, including metadata and source hashes | Directional sky radiance and eye-plane integrals for actual viewing directions; a spectral shield treatment and consistency with the solved columns still need attention |
-| Local scene geometry, observer height and gaze, surface spectra and BRDFs | Ground, facades, shade and near-field reflections; equivalent-task contrasts and their dependence on gaze |
-| Water directional spectra or slope distributions, with wind and observation geometry | Highlight extent and time variability; a lunar wave-to-glint calculation |
-| Selected GCM/CRM cloud fields or representative cloud optical cases | Bright clouds, broken-cloud conditions and overcast scenes; annual or monthly exposure statistics after scene validation |
-| Defined visual tasks and an outdoor human-factors validation protocol | Whether computed light fields actually cause discomfort or impair performance |
+| Spherical spectral source fields using the current shield and solved atmospheric profiles | A consistent directional sky and low-Sun flux, replacing the angular-shape transfer |
+| Original atlas archives and source metadata | Full angular precision and provenance; the packed copy is already sufficient for the present screening |
+| Specific site/building geometry, surface spectra and BRDFs | Replace the six prescribed scenes with locally supported environments, including wet surfaces and vegetation |
+| Water directional spectra or slope distributions, with wind and viewing geometry | Highlight extent and variability; a lunar wave-to-glint calculation |
+| Selected GCM/CRM cloud fields or representative cloud optical cases | Cloudy and foggy scenes, then the frequency and duration of particular lighting conditions |
+| Defined visual tasks and an outdoor human-factors validation protocol | How the computed scenes affect perceived comfort and task performance |
 
-The full climate and cloud archives are unnecessary for the immediate angular clear-sky extension. Useful first scenes are an open dark plain, a pale courtyard, a coast, and a shaded workspace facing bright terrain, with identical Earth controls. A forest interior adds canopy transmission and occlusion. These are candidate tests, with no mapped biome or settlement assumed.
+The next high-value local calculation is a consistent angular clear-sky boundary, followed by a small selection of weather and surface cases chosen around the mechanisms above. A higher-resolution copy of the old atlas improves angular precision but retains its physical assumptions.
 
 ## Checks
 
-The checks cover independent solid-angle integration, tilted eye planes, gaze-dependent reversal, source-angle guards, annular integration, Fresnel limits, solar residence, separation of local reflectance from landscape feedback, and reproduction and provenance of the stored scene product. Numerical reproduction verifies the stated model; empirical visual comfort remains open. [checks.json](checks.json) records the actual test counts and repository-wide results. The existing Python failures reproduce on the untouched starting commit; the full gate also encounters missing inputs, dependencies and runtime restrictions.
+There are 34 passing focused checks across the two runners. The first-pass checks cover independent solid-angle integration, tilted eye planes, gaze-dependent reversal, source-angle guards, annular integration, Fresnel limits, solar residence, separation of local reflectance from landscape feedback, and reproduction and provenance of the stored scene product. Numerical reproduction verifies the stated model; empirical visual comfort remains open. [checks.json](checks.json) records the actual test counts and repository-wide results. The existing Python failures reproduce on the untouched starting commit; the full gate also encounters missing inputs, dependencies and runtime restrictions.

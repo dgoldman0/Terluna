@@ -1,6 +1,6 @@
 # Human habitation and society
 
-**Current condition:** constrained design reasoning and scenarios, with a first optical-comfort screening. Complete airship/neighborhood mass models, settlement networks, service simulations and empirical human-use validation remain open. The [human companion seed](../ensemble/papers/babdd5f6-4920/seed-02.md) covers life, culture, spatial/temporal design and society; [biosphere](../biosphere/) owns biological evidence.
+**Current condition:** constrained design reasoning and scenarios, with optical-comfort screens of angular light, surface reflection and shelter geometry. Complete airship/neighborhood mass models, settlement networks, service simulations and empirical human-use validation remain open. The [human companion seed](../ensemble/papers/babdd5f6-4920/seed-02.md) covers life, culture, spatial/temporal design and society; [biosphere](../biosphere/) owns biological evidence.
 
 Existing theory includes hydrostatic pressure/density profiles, aerodynamic scaling, and the buoyancy relation: gross supported mass per volume is ambient density minus lifting-gas density. Envelope, structure and services consume that allowance. Gravity cancels in the ideal mass-lift relation. No geometric air volume is counted as usable floor area.
 
@@ -21,10 +21,12 @@ People choose among them with climate, ecology and the wishes of those who would
 
 The [optical-comfort study](../research/studies/optical_comfort/) compares surface
 brightness, viewing direction, shade and contrast mechanisms with Earth using
-the committed illumination data. The next step is to apply the angular sky
-atlas to specific surfaces and visual tasks in open ground, pale courtyards,
-coasts and sheltered workspaces. Human discomfort thresholds require outdoor
-validation; horizontal lux alone does not supply them.
+the committed illumination data. Its directional extension compares six finite
+settings with roofs, walls and locally shaded ground. It transfers packed sky
+patterns onto current light totals and follows repeated matte reflection.
+Workplane illumination and tread–riser contrast depend strongly on the setting.
+The next step is a consistent shielded spherical sky and specific local surface
+conditions. Human discomfort thresholds require outdoor validation.
 
 Compare complete buoyant/tethered/mobile mass budgets, operating altitude, wind/tether loads, utilities and rescue. Compare flight energy and travel times for several vehicle/route concepts. Map supported capacity and dependable service access across different terrain and environmental scenarios. Mobility must accommodate different bodies and activities.
 

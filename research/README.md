@@ -67,7 +67,8 @@ OPENBLAS_NUM_THREADS=1 python -m research.studies.forest_patch.run --quick  # re
 python -m research.studies.atmospheric_co2.run                             # results in studies/atmospheric_co2/results
 OPENBLAS_NUM_THREADS=1 python -m research.studies.protection_architecture.run # results in studies/protection_architecture/results
 OPENBLAS_NUM_THREADS=1 python -m research.studies.lunar_cycle_ecology.run     # results in studies/lunar_cycle_ecology/results
-OPENBLAS_NUM_THREADS=1 python -m research.studies.optical_comfort.run          # results in studies/optical_comfort/results
+OPENBLAS_NUM_THREADS=1 python -m research.studies.optical_comfort.run
+OPENBLAS_NUM_THREADS=1 python -m research.studies.optical_comfort.directional  # results in studies/optical_comfort/results
 ```
 
 For the environment screens, supply `--protection-archive /path/to/Lunar_Protection_Model.zip`

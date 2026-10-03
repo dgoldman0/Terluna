@@ -97,7 +97,7 @@
     },
     {
       "topic": "illumination",
-      "condition": "conditional_clear_sky_solver_and_site_geometry; clear_sky_surface_spectra_202_1000nm_on_solved_columns_two_stream; optical_comfort_clear_sky_surface_and_eye_screen_with_earth_controls",
+      "condition": "conditional_clear_sky_solver_and_site_geometry; clear_sky_surface_spectra_202_1000nm_on_solved_columns_two_stream; optical_comfort_clear_sky_surface_and_eye_screen_with_earth_controls; optical_comfort_packed_angular_sky_transfer_and_finite_matte_scene_transport",
       "material": [
         "../illumination/geometry.py",
         "../illumination/sky/solver.py",
@@ -107,7 +107,8 @@
         "../illumination/surface_light/model.py",
         "../illumination/surface_light/results/surface_light.json",
         "studies/optical_comfort/README.md",
-        "studies/optical_comfort/results/optical_comfort.json"
+        "studies/optical_comfort/results/optical_comfort.json",
+        "studies/optical_comfort/results/directional_scenes.json"
       ],
       "unresolved": [
         "date-accurate ephemeris, lunar equator tilt and terrain horizon",
@@ -118,7 +119,7 @@
         "surface light under clouds: colour and diffuse share",
         "lunar global energy residual up to 4.6%",
         "the five-hour practical dawn and dusk (research/decisions.md): a photometric definition for the actual atmosphere, from a working-light threshold to sunrise, about 2.54 degrees of solar elevation at the equator. The spherical sky atlas keeps about 1,000 lux on the ground until the Sun is some 13 degrees down (about a day at the equator) and 1 umol m-2 s-1 of photosynthetic light until 29 degrees down (58 hours; biosphere/canopy/plant.py)",
-        "optical comfort: resolved angular sky, surface BRDFs and shade geometry, water-slope statistics, clouds and outdoor human-factors validation; first-pass physical light and contrast sensitivities are in studies/optical_comfort/"
+        "optical comfort: a spherical angular sky with the current shield and solved columns; site-specific surface BRDFs and geometry, water slopes, clouds and human-factors validation. Packed sky transfer and six finite matte settings now supply directional light and task-contrast screens in studies/optical_comfort/."
       ],
       "next_session_task": "Compute earthlit sky radiance with Earth's reflectance spectrum as the source, and test low-Sun and night radiance against appropriate benchmarks."
     },
@@ -155,12 +156,13 @@
     },
     {
       "topic": "habitation",
-      "condition": "design_concepts; no complete sizing or service model; optical_comfort_clear_sky_surface_and_eye_screen_with_earth_controls",
+      "condition": "design_concepts; no complete sizing or service model; optical_comfort_clear_sky_surface_and_eye_screen_with_earth_controls; optical_comfort_packed_angular_sky_transfer_and_finite_matte_scene_transport",
       "material": [
         "../habitation/README.md",
         "../ensemble/papers/babdd5f6-4920/seed-02.md",
         "studies/optical_comfort/README.md",
-        "studies/optical_comfort/results/optical_comfort.json"
+        "studies/optical_comfort/results/optical_comfort.json",
+        "studies/optical_comfort/results/directional_scenes.json"
       ],
       "unresolved": [
         "supported floor area and mass",
@@ -169,7 +171,7 @@
         "health at 0.16 g: artificial gravity as a public utility (rotating residences; 1 g clinics, maternity centres and schools) until 0.16 g is shown safe (July 2026 bundle, archive/july_2026_knowledge_bundle/)",
         "civil time: 24-hour civil days inside the 29.53-day month, with named light phases (July 2026 bundle, archive/july_2026_knowledge_bundle/)",
         "fire safety in settlements at 0.16 g (July 2026 bundle, archive/july_2026_knowledge_bundle/)",
-        "optical comfort: resolved angular sky, surface BRDFs and shade geometry, water-slope statistics, clouds and outdoor human-factors validation; first-pass physical light and contrast sensitivities are in studies/optical_comfort/"
+        "optical comfort: a spherical angular sky with the current shield and solved columns; site-specific surface BRDFs and geometry, water slopes, clouds and human-factors validation. Packed sky transfer and six finite matte settings now supply directional light and task-contrast screens in studies/optical_comfort/."
       ],
       "next_session_task": "Size representative structures/vehicles, then compare networks and daily/monthly uses."
     },
