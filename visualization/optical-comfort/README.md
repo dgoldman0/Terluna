@@ -1,0 +1,5 @@
+# Optical-comfort figures
+
+Run `MPLCONFIGDIR=/tmp/terluna-mpl python visualization/optical-comfort/plot.py` from the repository root after generating the [study product](../../research/studies/optical_comfort/). The plot reads the product's schema and draws the noon rows for albedos 0.1, 0.3, 0.5 and 0.8. It introduces no new physical calculations.
+
+`figures/` is generated and ignored. It holds a PNG, an SVG and a manifest with product and plot hashes. The first two panels display surface luminance and vertical ambient illumination; the third displays the residual illumination of a patch whose solar disk alone has been screened. The fourth shows how the ratio of Moon to Earth eye-plane illumination changes with gaze for albedos 0.1 and 0.8. These level and downward views exclude the overhead collimated Sun. The shaded areas in the second panel span three imposed angular sky shapes. They are scenario sensitivities, rather than statistical uncertainty bounds. Connecting lines only guide the eye between sampled values.

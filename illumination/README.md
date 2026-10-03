@@ -33,6 +33,12 @@ python illumination/geometry.py
 
 Consumers read these products; they do not import the models.
 
+The [optical-comfort study](../research/studies/optical_comfort/) consumes the
+committed surface-light summaries to compare matte surface luminance, eye-plane
+illumination, shadow contrast and ideal water glint with Earth. It keeps
+landscape albedo separate from local surface reflectance and identifies the
+angular sky data needed for a resolved visual-comfort calculation.
+
 For a near-side equatorial site 65° from the sub-Earth point, full Earth (earthlight
 about 1.0 × 10⁻⁴ of sunlight above the atmosphere) comes near sunset, and the
 midnight Earth is 72% lit. Through the reference Open Moon atmosphere that leaves
