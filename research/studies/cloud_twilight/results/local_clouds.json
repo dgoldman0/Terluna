@@ -1,0 +1,805 @@
+{
+  "schema": "terluna.research.cloud-twilight-local/1",
+  "producer": {
+    "lane": "research",
+    "runner": "research/studies/cloud_twilight/local.py",
+    "files": {
+      "research/studies/cloud_twilight/local.py": "40b95d0ce1367e0d3adf2a77f81b39b50627ef1e44c957b36e52ed70f7821350",
+      "climate/crm/cloud_columns.py": "c3343a7828bc49988a6d7b04a1b0140cf3470e5935679d6e5d9221ad3f3c788b",
+      "illumination/cloud_light/condensate.py": "60cab8d3fbef4e811b01ce32a721fbf46efd273280ac50c7386ebfad3bf8f936",
+      "illumination/cloud_light/model.py": "7bb800ee4695c58856acd23125b8cee4579947106dd4c81b2a2411f46af009d3",
+      "research/studies/cloud_twilight/run.py": "2c805b45e611665b21b62d505f2e44615450b6b265aa33765e81ca98d493a453",
+      "research/studies/cloud_twilight/local_sources.json": "8b75182296b433a41a29dd60bd19a51db3112ef753e7a564e4d5a92423b5d5d8"
+    },
+    "input": {
+      "file": "research/runs/optical_comfort/dusk_columns.npz",
+      "sha256": "bb6e7ccf9a95f1eead5450a5fdc963467cf9349063cbd43c5061fb10fedb646f",
+      "schema": "terluna.climate.cm1-dusk-columns/1"
+    },
+    "raw_input_manifest": {
+      "file": "research/runs/optical_comfort/dusk_source_manifest.json",
+      "sha256": "04693d12a547c58b496bc7bc2095e77286c9c84e4372221bfdd1e9406382b9ef"
+    }
+  },
+  "evidence": "Post-spin-up local CM1 dusk columns with separate cloud liquid, rain, cloud ice, snow and graupel. Liquid optical depth uses prescribed effective radii and geometric-optics extinction. Molecular illumination at selected cloud tops excludes intervening cloud extinction.",
+  "reading_rule": "Statistics sample the equatorial ring at local hour angle [90,110), over the saved second-cycle snapshots. Fractions weight each sampled 6-km column equally; they describe this ring experiment. Clear columns contribute zero condensate. Cloudy means qc+qi >= 1e-5 kg/kg in any layer. Height bands split partial layers by overlap. Effective radii 5, 10 and 20 micrometres are sensitivity choices; the raw fixed droplet count is retained for later size-distribution work. Selected mass maxima illustrate mechanisms. Appearance, self-shadowing, ice scattering and cloud lifetimes require further transport.",
+  "units": {
+    "water_path": "kg m^-2",
+    "optical_depth": "dimensionless",
+    "height": "km",
+    "occurrence": "fraction of sampled columns"
+  },
+  "source": {
+    "schema": "terluna.climate.cm1-dusk-columns/1",
+    "producer": {
+      "lane": "climate",
+      "file": "climate/crm/cloud_columns.py",
+      "sha256": "c3343a7828bc49988a6d7b04a1b0140cf3470e5935679d6e5d9221ad3f3c788b",
+      "reader_sha256": "cee51ef7e823cee30cf0477485ceff62f9eb26d2fcad6126ea721f35046f7ee9"
+    },
+    "evidence": "Resolved microphysics from the corrected CM1 equatorial ring, at 6-km horizontal spacing. Only samples after the first complete synodic cycle enter this product. The 2-D run represents a selected circulation experiment; particle habits and three-dimensional cloud morphology remain model assumptions.",
+    "reading_rule": "Rows are individual columns, grouped by increasing snapshot time then local hour angle. Dusk is local hour angle [90,110) degrees. Arrays are (row,height); mixing ratios and particle counts use dry-air mass. Raw model levels are preserved. First-cycle data serve spin-up. Coverage ends at the last saved three-hour snapshot.",
+    "units": {
+      "time_day": "Earth days since simulation start",
+      "hour_angle_deg": "degrees after local noon",
+      "height_m": "metres above sea level",
+      "species": "kg per kg dry air",
+      "numbers": "particles per kg dry air",
+      "density_kg_m3": "dry-air kg m^-3",
+      "temperature_k": "K"
+    },
+    "case": "ring_equator",
+    "gcm_run": "A28_dim5_moon",
+    "requested_span_days": [
+      29.53059,
+      59.06118
+    ],
+    "sampled_span_days": [
+      29.625,
+      59.0
+    ],
+    "snapshot_spacing_hours": 3.0,
+    "snapshots": 236,
+    "columns": 23810,
+    "grid": {
+      "nx": 1816,
+      "dx_m": 6011.2368682234655,
+      "length_m": 10916406.152693814,
+      "nz": 111,
+      "ztop_m": 150000.0
+    },
+    "constants": {
+      "rd": 287.04,
+      "cp": 1005.7,
+      "rv": 461.5,
+      "p00": 100000.0,
+      "liquid_density_kg_m3": 997.0
+    },
+    "source_hashes": {
+      "constants.F": "b885840755ef83e1c424c1b09985ce0d59e8582096237ad6d603ae3f15ff2f34",
+      "solve2.F": "e34c6d479d0f589cd8c31faf95df52a06f3b9d0edcb1744f694463b0bdddc375",
+      "morrison.F": "8427670b64e6bad03b68d9aa5532f85e685807671b344d6d4480cf6d0db0ab8c"
+    },
+    "source_archive": {
+      "version": "cm1r22.0",
+      "url": "https://www2.mmm.ucar.edu/people/bryan/cm1/cm1r22.0.tar.gz",
+      "sha256": "05f990bb79055873c49499c92d0ff447524a2795016a474447a7e87dd5a86226",
+      "licence": "MIT-style (see getcode.html on the CM1 site); not redistributed here"
+    },
+    "cloud_droplet_number_cm3": 100.0,
+    "fixed_inputs": {
+      "case.json": "66979fb6a66703ee7edc3a8144f924e1b377a5e0fd83378c62ca88a96908b748",
+      "namelist.input": "e75c6b730a9f80672bfa4b796df18ec5597bfb8aff8b4865e47397bc61baa850",
+      "cm1out_s.ctl": "c7fb14c4a082804174553943f2ae65371d07ea5b01858f3a672ccbaf1e092aa9",
+      "cm1out_diag_s.ctl": "c1a945fe0b615862958673738cc2f3b8baaa7f9bcc0839596547a62afd68386a",
+      "input_grid_z": "6ceb41a7a3b13cd506792208be6b8ac4ad3697b1efff7870fe98dd15ecd2aed8",
+      "terluna_surface.txt": "c79a049c85a9050d6213db3f7741937936752366942e8287e7528970e3f64c7b"
+    },
+    "checks": {
+      "maximum_mean_density_relative_error": 1.2125493786818708e-07
+    }
+  },
+  "cloud_column_fraction": 0.2252834943301134,
+  "cloud_top_km_cloudy": {
+    "count": 5364,
+    "mean": 22.521236496830724,
+    "p50": 23.8628585,
+    "p90": 35.794122,
+    "maximum": 79.794122
+  },
+  "species_path_kg_m2": {
+    "qc": {
+      "count": 23810,
+      "mean": 0.08266929738295924,
+      "p50": 2.714729677643485e-05,
+      "p90": 0.19159930640503897,
+      "maximum": 5.472973022132886
+    },
+    "qr": {
+      "count": 23810,
+      "mean": 0.7857552761418256,
+      "p50": 5.875569762908969e-06,
+      "p90": 0.41391819542065805,
+      "maximum": 107.9333746044547
+    },
+    "qi": {
+      "count": 23810,
+      "mean": 0.006586487256007909,
+      "p50": 0.0037257693203660352,
+      "p90": 0.017315615921168172,
+      "maximum": 0.06161952634029187
+    },
+    "qs": {
+      "count": 23810,
+      "mean": 0.6633834329470788,
+      "p50": 0.0029878947641375597,
+      "p90": 1.4450010515419303,
+      "maximum": 35.39107676906929
+    },
+    "qg": {
+      "count": 23810,
+      "mean": 0.029668689553270046,
+      "p50": 0.0,
+      "p90": 0.0013754286840558184,
+      "maximum": 19.72973892535682
+    }
+  },
+  "height_bands": [
+    {
+      "height_km": [
+        0.0,
+        20.0
+      ],
+      "cloud_column_fraction": 0.13292734145317095,
+      "species_water_path_kg_m2": {
+        "qc": {
+          "count": 23810,
+          "mean": 0.038839324316295366,
+          "p50": 1.2261554439508e-05,
+          "p90": 0.02819021545954871,
+          "maximum": 4.4912136338287585
+        },
+        "qr": {
+          "count": 23810,
+          "mean": 0.6714791018621078,
+          "p50": 3.043771634800423e-06,
+          "p90": 0.2583712472526093,
+          "maximum": 92.99068491322987
+        },
+        "qi": {
+          "count": 23810,
+          "mean": 0.0,
+          "p50": 0.0,
+          "p90": 0.0,
+          "maximum": 0.0
+        },
+        "qs": {
+          "count": 23810,
+          "mean": 4.97212782929058e-06,
+          "p50": 0.0,
+          "p90": 0.0,
+          "maximum": 0.0023069532992877656
+        },
+        "qg": {
+          "count": 23810,
+          "mean": 0.00014660403522425927,
+          "p50": 0.0,
+          "p90": 0.0,
+          "maximum": 0.7006314368446949
+        }
+      },
+      "mean_frozen_mass_fraction": 0.0002133463236364782
+    },
+    {
+      "height_km": [
+        20.0,
+        40.0
+      ],
+      "cloud_column_fraction": 0.13074338513229736,
+      "species_water_path_kg_m2": {
+        "qc": {
+          "count": 23810,
+          "mean": 0.04379015612827521,
+          "p50": 1.0830233987489224e-06,
+          "p90": 0.07518181115513085,
+          "maximum": 4.763746936754594
+        },
+        "qr": {
+          "count": 23810,
+          "mean": 0.11427566770394812,
+          "p50": 0.0,
+          "p90": 0.10938484537609991,
+          "maximum": 27.740508258632456
+        },
+        "qi": {
+          "count": 23810,
+          "mean": 4.695639458782855e-05,
+          "p50": 0.0,
+          "p90": 7.856748153075385e-05,
+          "maximum": 0.01917336604155167
+        },
+        "qs": {
+          "count": 23810,
+          "mean": 0.5327001230920546,
+          "p50": 3.440046518141653e-06,
+          "p90": 1.1456442146844212,
+          "maximum": 26.841724229213007
+        },
+        "qg": {
+          "count": 23810,
+          "mean": 0.028932959442135503,
+          "p50": 0.0,
+          "p90": 0.0008479155341818038,
+          "maximum": 19.695557654515575
+        }
+      },
+      "mean_frozen_mass_fraction": 0.7803866169846807
+    },
+    {
+      "height_km": [
+        40.0,
+        60.0
+      ],
+      "cloud_column_fraction": 0.002645947081058379,
+      "species_water_path_kg_m2": {
+        "qc": {
+          "count": 23810,
+          "mean": 3.9816938388672756e-05,
+          "p50": 0.0,
+          "p90": 1.1485911322956206e-06,
+          "maximum": 0.2171852602848759
+        },
+        "qr": {
+          "count": 23810,
+          "mean": 5.065757696552384e-07,
+          "p50": 0.0,
+          "p90": 0.0,
+          "maximum": 0.004338619730408673
+        },
+        "qi": {
+          "count": 23810,
+          "mean": 0.00042908582074627336,
+          "p50": 0.0,
+          "p90": 0.0003991937687776549,
+          "maximum": 0.042449763574475226
+        },
+        "qs": {
+          "count": 23810,
+          "mean": 0.12752563831734473,
+          "p50": 4.6768462229269454e-06,
+          "p90": 0.17628620122676375,
+          "maximum": 16.61803071468105
+        },
+        "qg": {
+          "count": 23810,
+          "mean": 0.0005825583970096052,
+          "p50": 0.0,
+          "p90": 7.68821432870032e-06,
+          "maximum": 0.41896441283371616
+        }
+      },
+      "mean_frozen_mass_fraction": 0.9996863877358014
+    },
+    {
+      "height_km": [
+        60.0,
+        150.0
+      ],
+      "cloud_column_fraction": 0.006593868122637547,
+      "species_water_path_kg_m2": {
+        "qc": {
+          "count": 23810,
+          "mean": 0.0,
+          "p50": 0.0,
+          "p90": 0.0,
+          "maximum": 0.0
+        },
+        "qr": {
+          "count": 23810,
+          "mean": 0.0,
+          "p50": 0.0,
+          "p90": 0.0,
+          "maximum": 0.0
+        },
+        "qi": {
+          "count": 23810,
+          "mean": 0.006110445040673807,
+          "p50": 0.0035298677079292594,
+          "p90": 0.0160083515010345,
+          "maximum": 0.057850730599891736
+        },
+        "qs": {
+          "count": 23810,
+          "mean": 0.003152699409850093,
+          "p50": 0.0004885792946660058,
+          "p90": 0.006247199949960571,
+          "maximum": 0.6562558861790901
+        },
+        "qg": {
+          "count": 23810,
+          "mean": 6.5676789006814456e-06,
+          "p50": 0.0,
+          "p90": 0.0,
+          "maximum": 0.01666775906051861
+        }
+      },
+      "mean_frozen_mass_fraction": 1.0
+    }
+  ],
+  "local_time_bins": [
+    {
+      "hour_angle_deg": [
+        90.0,
+        95.0
+      ],
+      "columns": 5952,
+      "cloud_fraction": 0.28393817204301075,
+      "cloud_top_km_cloudy": {
+        "count": 1690,
+        "mean": 21.178142084615388,
+        "p50": 23.8628585,
+        "p90": 33.794122,
+        "maximum": 79.794122
+      },
+      "species_path_kg_m2": {
+        "qc": {
+          "count": 5952,
+          "mean": 0.1127820075621536,
+          "p50": 3.66696491595108e-05,
+          "p90": 0.29334552973251243,
+          "maximum": 5.472973022132886
+        },
+        "qr": {
+          "count": 5952,
+          "mean": 1.0308708942107292,
+          "p50": 3.0830504204483755e-05,
+          "p90": 0.8975175001251567,
+          "maximum": 89.07125263165034
+        },
+        "qi": {
+          "count": 5952,
+          "mean": 0.006484393049853316,
+          "p50": 0.0035092458117150474,
+          "p90": 0.01767636204678798,
+          "maximum": 0.05786101688291438
+        },
+        "qs": {
+          "count": 5952,
+          "mean": 0.8316823703611216,
+          "p50": 0.002742129750947824,
+          "p90": 2.3420542942293823,
+          "maximum": 35.39107676906929
+        },
+        "qg": {
+          "count": 5952,
+          "mean": 0.04985854011985518,
+          "p50": 0.0,
+          "p90": 0.005359120785401813,
+          "maximum": 19.72973892535682
+        }
+      }
+    },
+    {
+      "hour_angle_deg": [
+        95.0,
+        100.0
+      ],
+      "columns": 5954,
+      "cloud_fraction": 0.2262344642257306,
+      "cloud_top_km_cloudy": {
+        "count": 1347,
+        "mean": 22.944803928359317,
+        "p50": 23.8628585,
+        "p90": 35.794122,
+        "maximum": 77.794122
+      },
+      "species_path_kg_m2": {
+        "qc": {
+          "count": 5954,
+          "mean": 0.08531523269622847,
+          "p50": 2.6376802414179833e-05,
+          "p90": 0.19296706722394974,
+          "maximum": 5.301347316472722
+        },
+        "qr": {
+          "count": 5954,
+          "mean": 0.8182043357778029,
+          "p50": 1.0632535090158556e-05,
+          "p90": 0.529717234823566,
+          "maximum": 85.6979863934028
+        },
+        "qi": {
+          "count": 5954,
+          "mean": 0.006510908071294875,
+          "p50": 0.0036823787988801183,
+          "p90": 0.016674956465562864,
+          "maximum": 0.06161952634029187
+        },
+        "qs": {
+          "count": 5954,
+          "mean": 0.7262830217039683,
+          "p50": 0.0029151659125525157,
+          "p90": 1.6526617058047388,
+          "maximum": 25.1945192112264
+        },
+        "qg": {
+          "count": 5954,
+          "mean": 0.020397024022586398,
+          "p50": 0.0,
+          "p90": 0.0024427710068342583,
+          "maximum": 6.377751433393163
+        }
+      }
+    },
+    {
+      "hour_angle_deg": [
+        100.0,
+        105.0
+      ],
+      "columns": 5950,
+      "cloud_fraction": 0.19411764705882353,
+      "cloud_top_km_cloudy": {
+        "count": 1155,
+        "mean": 23.673461074458874,
+        "p50": 25.794121999999998,
+        "p90": 35.794122,
+        "maximum": 75.794122
+      },
+      "species_path_kg_m2": {
+        "qc": {
+          "count": 5950,
+          "mean": 0.0681680881671208,
+          "p50": 2.468255418141433e-05,
+          "p90": 0.14102442150282252,
+          "maximum": 3.654564681285203
+        },
+        "qr": {
+          "count": 5950,
+          "mean": 0.7160265895860306,
+          "p50": 2.554432862731142e-06,
+          "p90": 0.3610450175289375,
+          "maximum": 107.9333746044547
+        },
+        "qi": {
+          "count": 5950,
+          "mean": 0.0066359321314103225,
+          "p50": 0.0037483852906158867,
+          "p90": 0.017296577793963673,
+          "maximum": 0.05173050545197269
+        },
+        "qs": {
+          "count": 5950,
+          "mean": 0.6328988380641144,
+          "p50": 0.003134158046512498,
+          "p90": 1.34540400527579,
+          "maximum": 26.575503428383275
+        },
+        "qg": {
+          "count": 5950,
+          "mean": 0.03756710350135898,
+          "p50": 0.0,
+          "p90": 0.000950066665927876,
+          "maximum": 13.12275761984776
+        }
+      }
+    },
+    {
+      "hour_angle_deg": [
+        105.0,
+        110.0
+      ],
+      "columns": 5954,
+      "cloud_fraction": 0.19684245885119248,
+      "cloud_top_km_cloudy": {
+        "count": 1172,
+        "mean": 22.83562629138225,
+        "p50": 23.8628585,
+        "p90": 35.794122,
+        "maximum": 73.794122
+      },
+      "species_path_kg_m2": {
+        "qc": {
+          "count": 5954,
+          "mean": 0.06441223406291705,
+          "p50": 2.2767074329224708e-05,
+          "p90": 0.15106715068979124,
+          "maximum": 4.130122021329797
+        },
+        "qr": {
+          "count": 5954,
+          "mean": 0.5779547765093528,
+          "p50": 7.919978261576872e-07,
+          "p90": 0.23484503126892747,
+          "maximum": 57.24974299871356
+        },
+        "qi": {
+          "count": 5954,
+          "mean": 0.006714714695068906,
+          "p50": 0.00403665898733682,
+          "p90": 0.01734699870884738,
+          "maximum": 0.048500017151740335
+        },
+        "qs": {
+          "count": 5954,
+          "mean": 0.4627055546479075,
+          "p50": 0.0031926868462189588,
+          "p90": 0.9489234997276231,
+          "maximum": 24.894961583164594
+        },
+        "qg": {
+          "count": 5954,
+          "mean": 0.010864178805242921,
+          "p50": 0.0,
+          "p90": 0.00027537442992069686,
+          "maximum": 5.635950589655495
+        }
+      }
+    }
+  ],
+  "liquid_extinction_scenarios": [
+    {
+      "prescribed_effective_radius_um": 5.0,
+      "optical_depth_all_dusk_columns": {
+        "count": 23810,
+        "mean": 24.875415461271587,
+        "p50": 0.008168695118285312,
+        "p90": 57.65275017202778,
+        "maximum": 1646.8324038514202
+      },
+      "column_fraction_tau_ge_1": 0.22960940781184377,
+      "column_fraction_tau_ge_10": 0.1749685006299874,
+      "optical_depth_cloudy_columns": {
+        "count": 5364,
+        "mean": 110.16959470480656,
+        "p50": 46.13564513798027,
+        "p90": 313.66591591764325,
+        "maximum": 1646.8324038514202
+      }
+    },
+    {
+      "prescribed_effective_radius_um": 10.0,
+      "optical_depth_all_dusk_columns": {
+        "count": 23810,
+        "mean": 12.437707730635793,
+        "p50": 0.004084347559142656,
+        "p90": 28.82637508601389,
+        "maximum": 823.4162019257101
+      },
+      "column_fraction_tau_ge_1": 0.21889962200755986,
+      "column_fraction_tau_ge_10": 0.15178496430071398,
+      "optical_depth_cloudy_columns": {
+        "count": 5364,
+        "mean": 55.08479735240328,
+        "p50": 23.067822568990135,
+        "p90": 156.83295795882162,
+        "maximum": 823.4162019257101
+      }
+    },
+    {
+      "prescribed_effective_radius_um": 20.0,
+      "optical_depth_all_dusk_columns": {
+        "count": 23810,
+        "mean": 6.218853865317897,
+        "p50": 0.002042173779571328,
+        "p90": 14.413187543006945,
+        "maximum": 411.70810096285504
+      },
+      "column_fraction_tau_ge_1": 0.20327593448131037,
+      "column_fraction_tau_ge_10": 0.12091558168836623,
+      "optical_depth_cloudy_columns": {
+        "count": 5364,
+        "mean": 27.54239867620164,
+        "p50": 11.533911284495067,
+        "p90": 78.41647897941081,
+        "maximum": 411.70810096285504
+      }
+    }
+  ],
+  "illumination_examples": [
+    {
+      "selection": "maximum full-column cloud-liquid path",
+      "snapshot": 330,
+      "time_day": 41.125,
+      "column_index": 197,
+      "local_hour_angle_deg": 90.49653798586485,
+      "cloud_top_km": 41.794122,
+      "species_path_kg_m2": {
+        "qc": 5.472973022132886,
+        "qr": 15.867367777607491,
+        "qi": 0.020924493094302526,
+        "qs": 16.841521696490467,
+        "qg": 5.288850088545641
+      },
+      "cloud_top_molecular_illumination": {
+        "height_km": 41.794122,
+        "westward_surface_range_km": 0.0,
+        "observer_sun_depression_deg": 0.49653798586484754,
+        "hours_after_surface_solar_centre_set": 0.9775373120000405,
+        "cloud_local_sun_elevation_deg": -0.49653798586484754,
+        "cloud_hour_angle_deg": 90.49653798586485,
+        "apparent_elevation_deg": 90.0,
+        "scattering_angle_deg": 90.49653798586485,
+        "line_of_sight_blocked": false,
+        "cloud_direct_normal_lux": 10591.676486286144,
+        "cloud_solar_transmission": 0.08496030947862608,
+        "observer_path_source_weighted_transmission": 0.6695893111789027,
+        "two_path_source_fraction": 0.06120854784473489,
+        "solar_transmission_450_550_650nm": [
+          0.0017868979660757508,
+          0.06213764381719113,
+          0.2446255866919476
+        ],
+        "two_path_transmission_450_550_650nm": [
+          0.0006991225278529092,
+          0.041156280246812726,
+          0.19853559219220054
+        ]
+      }
+    },
+    {
+      "selection": "maximum full-column cloud-ice path",
+      "snapshot": 250,
+      "time_day": 31.125,
+      "column_index": 835,
+      "local_hour_angle_deg": 95.06485154553297,
+      "cloud_top_km": 61.794122,
+      "species_path_kg_m2": {
+        "qc": 4.998912918305813e-06,
+        "qr": 0.0,
+        "qi": 0.06161952634029187,
+        "qs": 0.4760395420878111,
+        "qg": 9.153548907444719e-08
+      },
+      "cloud_top_molecular_illumination": {
+        "height_km": 61.794122,
+        "westward_surface_range_km": 0.0,
+        "observer_sun_depression_deg": 5.064851545532974,
+        "hours_after_surface_solar_centre_set": 9.971203626800039,
+        "cloud_local_sun_elevation_deg": -5.064851545532974,
+        "cloud_hour_angle_deg": 95.06485154553297,
+        "apparent_elevation_deg": 90.0,
+        "scattering_angle_deg": 95.06485154553297,
+        "line_of_sight_blocked": false,
+        "cloud_direct_normal_lux": 9132.94137405614,
+        "cloud_solar_transmission": 0.0732591791860924,
+        "observer_path_source_weighted_transmission": 0.5993074868492227,
+        "two_path_source_fraction": 0.04836772295431531,
+        "solar_transmission_450_550_650nm": [
+          0.0011745728473264042,
+          0.05164809141455853,
+          0.22271631699493424
+        ],
+        "two_path_transmission_450_550_650nm": [
+          0.00035221146751532816,
+          0.030438013329418867,
+          0.1703678026823889
+        ]
+      }
+    },
+    {
+      "selection": "maximum cloud path at 20\u201340 km",
+      "snapshot": 330,
+      "time_day": 41.125,
+      "column_index": 197,
+      "local_hour_angle_deg": 90.49653798586485,
+      "cloud_top_km": 41.794122,
+      "species_path_kg_m2": {
+        "qc": 5.472973022132886,
+        "qr": 15.867367777607491,
+        "qi": 0.020924493094302526,
+        "qs": 16.841521696490467,
+        "qg": 5.288850088545641
+      },
+      "cloud_top_molecular_illumination": {
+        "height_km": 41.794122,
+        "westward_surface_range_km": 0.0,
+        "observer_sun_depression_deg": 0.49653798586484754,
+        "hours_after_surface_solar_centre_set": 0.9775373120000405,
+        "cloud_local_sun_elevation_deg": -0.49653798586484754,
+        "cloud_hour_angle_deg": 90.49653798586485,
+        "apparent_elevation_deg": 90.0,
+        "scattering_angle_deg": 90.49653798586485,
+        "line_of_sight_blocked": false,
+        "cloud_direct_normal_lux": 10591.676486286144,
+        "cloud_solar_transmission": 0.08496030947862608,
+        "observer_path_source_weighted_transmission": 0.6695893111789027,
+        "two_path_source_fraction": 0.06120854784473489,
+        "solar_transmission_450_550_650nm": [
+          0.0017868979660757508,
+          0.06213764381719113,
+          0.2446255866919476
+        ],
+        "two_path_transmission_450_550_650nm": [
+          0.0006991225278529092,
+          0.041156280246812726,
+          0.19853559219220054
+        ]
+      }
+    },
+    {
+      "selection": "maximum cloud path at 40\u201360 km",
+      "snapshot": 330,
+      "time_day": 41.125,
+      "column_index": 197,
+      "local_hour_angle_deg": 90.49653798586485,
+      "cloud_top_km": 41.794122,
+      "species_path_kg_m2": {
+        "qc": 5.472973022132886,
+        "qr": 15.867367777607491,
+        "qi": 0.020924493094302526,
+        "qs": 16.841521696490467,
+        "qg": 5.288850088545641
+      },
+      "cloud_top_molecular_illumination": {
+        "height_km": 41.794122,
+        "westward_surface_range_km": 0.0,
+        "observer_sun_depression_deg": 0.49653798586484754,
+        "hours_after_surface_solar_centre_set": 0.9775373120000405,
+        "cloud_local_sun_elevation_deg": -0.49653798586484754,
+        "cloud_hour_angle_deg": 90.49653798586485,
+        "apparent_elevation_deg": 90.0,
+        "scattering_angle_deg": 90.49653798586485,
+        "line_of_sight_blocked": false,
+        "cloud_direct_normal_lux": 10591.676486286144,
+        "cloud_solar_transmission": 0.08496030947862608,
+        "observer_path_source_weighted_transmission": 0.6695893111789027,
+        "two_path_source_fraction": 0.06120854784473489,
+        "solar_transmission_450_550_650nm": [
+          0.0017868979660757508,
+          0.06213764381719113,
+          0.2446255866919476
+        ],
+        "two_path_transmission_450_550_650nm": [
+          0.0006991225278529092,
+          0.041156280246812726,
+          0.19853559219220054
+        ]
+      }
+    },
+    {
+      "selection": "maximum cloud path at 60\u2013150 km",
+      "snapshot": 375,
+      "time_day": 46.75,
+      "column_index": 1684,
+      "local_hour_angle_deg": 93.84919910855149,
+      "cloud_top_km": 73.794122,
+      "species_path_kg_m2": {
+        "qc": 2.4127835739099413e-06,
+        "qr": 0.0,
+        "qi": 0.05786101688291438,
+        "qs": 0.00577435709294069,
+        "qg": 0.0
+      },
+      "cloud_top_molecular_illumination": {
+        "height_km": 73.794122,
+        "westward_surface_range_km": 0.0,
+        "observer_sun_depression_deg": 3.8491991085514883,
+        "hours_after_surface_solar_centre_set": 7.577941380199966,
+        "cloud_local_sun_elevation_deg": -3.8491991085514883,
+        "cloud_hour_angle_deg": 93.84919910855149,
+        "apparent_elevation_deg": 90.0,
+        "scattering_angle_deg": 93.84919910855149,
+        "line_of_sight_blocked": false,
+        "cloud_direct_normal_lux": 18552.129793731725,
+        "cloud_solar_transmission": 0.14881446679417626,
+        "observer_path_source_weighted_transmission": 0.5698049782928126,
+        "two_path_source_fraction": 0.09206180423646697,
+        "solar_transmission_450_550_650nm": [
+          0.00843762699711481,
+          0.12285948346328594,
+          0.3455747634488024
+        ],
+        "two_path_transmission_450_550_650nm": [
+          0.002239492870056966,
+          0.06862865983021678,
+          0.2572695151222544
+        ]
+      }
+    }
+  ],
+  "illumination_source": "Same current solved molecular column and binned ASTM solar source as cloud_twilight.json; these incident cloud-top values retain the earlier spectral approximation.",
+  "checks": {
+    "maximum_mean_density_relative_error": 1.2125493786818708e-07,
+    "maximum_height_band_mass_closure_kg_m2": 1.4210854715202004e-14
+  }
+}

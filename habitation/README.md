@@ -33,3 +33,5 @@ Compare complete buoyant/tethered/mobile mass budgets, operating altitude, wind/
 Daily/monthly schedule and public-space studies can examine how people use the long illumination cycle. Twilight festivals, mobile settlements, shared infrastructure and particular institutions are plural cultural possibilities, not predicted social outcomes. Exact outdoor light curves come from [illumination](../illumination/) and [climate](../climate/).
 
 Use multiple settlement and activity patterns across the Moon. Existing landscapes and the root's itinerary supply examples rather than a universal specification. See [research plan](../research/plan.md) and [status](../research/status.json).
+
+The optical-comfort study now repeats the finite scenes with native sky data: scene illumination changes by at most 0.081%. Local dusk-cloud and wave-slope inputs extend the physical basis for cloudy and waterfront settings. [Results and remaining work](../research/studies/optical_comfort/README.md#10-follow-up-with-local-data) distinguish those inputs from a complete comfort assessment.

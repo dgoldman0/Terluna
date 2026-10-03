@@ -1,0 +1,19 @@
+{
+  "schema": "terluna.research.source-notes/1",
+  "reviewed": "2026-10-03",
+  "sources": [
+    {
+      "title": "SWAN User Manual: spectrum files, input and output",
+      "url": "https://swanmodel.sourceforge.io/online_doc/swanuse/node50.html",
+      "reading_scope": "File-format definition, periodic Cartesian directions, variance-density units, FACTOR, ZERO and NODATA records.",
+      "use": "Strict reader for the coastal spectral product."
+    },
+    {
+      "title": "Hwang et al.: Variable Spectral Slope and Nonequilibrium Surface Wave Spectrum",
+      "url": "https://arxiv.org/pdf/1906.07998",
+      "reading_scope": "Section 2.2.1, elevation and slope spectra; k-squared weighting and the influence of short waves.",
+      "use": "Independent method check for resolved slope moments. Terrestrial wind fits in the paper are outside this calculation."
+    }
+  ],
+  "review_boundary": "Focused method and format reading; full-paper scholarly review remains separate."
+}

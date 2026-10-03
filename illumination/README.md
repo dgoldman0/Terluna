@@ -70,3 +70,5 @@ about 2 lux on the ground at midnight.
 Original NASA/USNO source admission remains as recorded in the immutable
 [planning reference manifest](../ensemble/planning/planning_references/manifest.json).
 See [status](../research/status.json).
+
+Local follow-up on `study/optical-comfort` now checks native sky resolution, recovers second-cycle dusk microphysics and derives resolved coastal water slopes. [The study](../research/studies/optical_comfort/README.md#10-follow-up-with-local-data) records the remote baseline’s data access and the new local products.
