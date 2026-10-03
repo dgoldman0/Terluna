@@ -58,7 +58,8 @@ def test_incomplete_or_corrupt_reporting_histories_are_rejected():
         exceedance([0,1],[0,np.nan],1)
 
 
-def test_cycle_product_excludes_spinup_from_every_height_statistic(monkeypatch):
+@pytest.mark.parametrize("external_storage", [False, True], ids=["checkout", "external-drive"])
+def test_cycle_product_excludes_spinup_from_every_height_statistic(monkeypatch, tmp_path, external_storage):
     values = np.zeros((7,2,9))
     values[...,0] = np.arange(7)[:,None]*3600
     values[...,1] = [80,81]
@@ -75,13 +76,29 @@ def test_cycle_product_excludes_spinup_from_every_height_statistic(monkeypatch):
                     atmosphere_metadata=dict(first_snapshot_restart_step=5,
                         source_configuration=dict(model=dict(timestep_min=30,sun_clock="synodic"),
                             planet=dict(rotationperiod=CYCLE_HOURS/48,year=CYCLE_HOURS/24)))))
-    # Supply an analytical basin history; raw-file and spectrum parsing have
-    # separate checks against the executable's retained output.
+    # Read an analytical history through the same checkout path with either
+    # local storage or a symlink to a directory outside that checkout.
+    root = tmp_path/"checkout"
+    runs = root/"research/runs/waves"
+    runs.parent.mkdir(parents=True)
+    if external_storage:
+        storage = tmp_path/"drive/wave-runs"
+        storage.mkdir(parents=True)
+        runs.symlink_to(storage, target_is_directory=True)
+    else:
+        runs.mkdir()
+    path = runs/"analytic/product.json"
+    path.parent.mkdir()
+    path.write_text(json.dumps(case))
+    here = root/"climate/waves"
+    monkeypatch.setattr("climate.waves.cycle.ROOT", root)
+    monkeypatch.setattr("climate.waves.cycle.HERE", here)
+    monkeypatch.setattr("climate.waves.cycle.__file__", str(here/"cycle.py"))
+    monkeypatch.chdir(root)
     monkeypatch.setattr("climate.waves.cycle.sha256",lambda _:"analytic")
     monkeypatch.setattr("climate.waves.cycle.spectrum_diagnostics",lambda *_:dict(passed=True))
-    from climate.waves.model import ROOT
-    monkeypatch.setattr("climate.waves.cycle.read_case",lambda _:case)
-    result=summarize(ROOT/"research/runs/analytic/product.json",cycle_hours=2.25)
+    result=summarize(path.relative_to(root),cycle_hours=2.25)
+    assert result["inputs"]["case_path"] == "research/runs/waves/analytic/product.json"
     assert result["statistics"]["max_hs_m"] == 2.5
     assert result["statistics"]["area_time_mean_hs_m"] == pytest.approx(1.375)
     threshold=next(t for t in result["statistics"]["thresholds"] if t["hs_m"]==2)
@@ -90,8 +107,9 @@ def test_cycle_product_excludes_spinup_from_every_height_statistic(monkeypatch):
     # The reporting boundary lies between directions 350 and 10 degrees.
     assert result["series"]["offshore"][0][7] == pytest.approx(355)
     case["forcing"]["atmosphere_metadata"]["source_configuration"]["model"]["sun_clock"]="rotation"
+    path.write_text(json.dumps(case))
     with pytest.raises(ValueError,match="synodic solar clock"):
-        summarize(ROOT/"research/runs/analytic/product.json",cycle_hours=2.25)
+        summarize(path.relative_to(root),cycle_hours=2.25)
 
 
 def test_explicit_forcing_uses_the_requested_dates_and_same_overlap(tmp_path):

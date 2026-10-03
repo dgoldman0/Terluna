@@ -314,6 +314,13 @@ An incomplete directory is retained for inspection and blocks replacement.
 Raw runs live under ignored `research/runs/waves/`; selected results and
 provenance live here. The actual repository checks are in [checks.json](checks.json).
 
+On the author's machine, `research/runs/waves` links to
+`/media/projectspace/terluna-research/wave-runs` on the large drive. Bulk inputs,
+copied atmospheric continuations and raw wave outputs use that directory;
+commands and recorded paths continue to use `research/runs/waves/`. Keep the
+drive mounted for wave runs. Code and compact research reports stay in the
+repository.
+
 For the follow-up, the raw equatorial CM1 case and atlas grid must already be
 available. The exporter stops with an error if either input is missing.
 With the build above:

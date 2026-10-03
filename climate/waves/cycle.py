@@ -78,7 +78,8 @@ def read_case(path):
 
 
 def summarize(path, *, cycle_hours=CYCLE_HOURS):
-    path = path.resolve()
+    # Preserve the checkout path when the run directory links to external storage.
+    path = path.absolute()
     case = read_case(path)
     if case["forcing"]["first_snapshot_index"] != 0:
         raise ValueError("A cycle study begins at the first atmospheric snapshot")
