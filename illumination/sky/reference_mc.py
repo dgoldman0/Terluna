@@ -8,7 +8,10 @@ or solar-transmittance lookup tables. Returns sampling standard errors.
 import math
 import numpy as np
 from numba import njit,prange
-from solver import solar_columns,densities,EARTH,MOON,MOON_ZERO,SW,SF,O3
+if __package__:
+    from .solver import solar_columns,densities,EARTH,MOON,MOON_ZERO,SW,SF,O3
+else:
+    from solver import solar_columns,densities,EARTH,MOON,MOON_ZERO,SW,SF,O3
 
 @njit(cache=True)
 def rotate_direction(dx,dy,dz,c,phi):

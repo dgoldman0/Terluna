@@ -97,7 +97,7 @@
     },
     {
       "topic": "illumination",
-      "condition": "conditional_clear_sky_solver_and_site_geometry; clear_sky_surface_spectra_202_1000nm_on_solved_columns_two_stream; optical_comfort_clear_sky_surface_and_eye_screen_with_earth_controls; optical_comfort_packed_angular_sky_transfer_and_finite_matte_scene_transport; cloud_twilight_corrected_cm1_occurrence_and_spherical_molecular_beam_screen; optical_comfort_local_native_sky_and_resolved_wave_slopes; cloud_twilight_local_second_cycle_condensate_and_liquid_extinction_scenarios",
+      "condition": "conditional_clear_sky_solver_and_site_geometry; clear_sky_surface_spectra_202_1000nm_on_solved_columns_two_stream; optical_comfort_clear_sky_surface_and_eye_screen_with_earth_controls; optical_comfort_packed_angular_sky_transfer_and_finite_matte_scene_transport; cloud_twilight_corrected_cm1_occurrence_and_spherical_molecular_beam_screen; optical_comfort_local_native_sky_and_resolved_wave_slopes; cloud_twilight_local_second_cycle_condensate_and_liquid_extinction_scenarios; solved_column_shielded_spherical_sky_and_updated_gaze_and_finite_scenes",
       "material": [
         "../illumination/geometry.py",
         "../illumination/sky/solver.py",
@@ -114,20 +114,23 @@
         "studies/optical_comfort/results/directional_scenes.json",
         "studies/optical_comfort/results/native_sky.json",
         "studies/optical_comfort/results/water_slopes.json",
-        "studies/cloud_twilight/results/local_clouds.json"
+        "studies/cloud_twilight/results/local_clouds.json",
+        "../illumination/sky/SOLVED_COLUMN.md",
+        "../illumination/sky/results/solved_sky.json",
+        "studies/optical_comfort/results/spherical_sky.json"
       ],
       "unresolved": [
         "date-accurate ephemeris, lunar equator tilt and terrain horizon",
         "refraction and polarization",
         "earthlight spectrum (glow currently uses the solar atlas), airglow",
-        "optical profiles tied to the solved atmospheric column (the sky atlas; the surface-light spectra already use the solved columns)",
-        "surface light below about 20 degrees of Sun height: the two-stream diffuse light falls short of the spherical sky solver (a quarter at 10 degrees, half at 5); a spherical spectral solution on the solved column would settle it",
-        "surface light under clouds: colour and diffuse share; elevated direct sunlight and molecular viewing extinction are screened, and local second-cycle microphysics are recovered. Cloud radiance and persistence require size-distribution closure, spatial light transport and a coupled spherical sky",
-        "lunar global energy residual up to 4.6%",
-        "the five-hour practical dawn and dusk (research/decisions.md): a photometric definition for the actual atmosphere, from a working-light threshold to sunrise, about 2.54 degrees of solar elevation at the equator. The spherical sky atlas keeps about 1,000 lux on the ground until the Sun is some 13 degrees down (about a day at the equator) and 1 umol m-2 s-1 of photosynthetic light until 29 degrees down (58 hours; biosphere/canopy/plant.py)",
-        "optical comfort: a spherical angular sky with the current shield and solved columns; site-specific surface BRDFs and geometry, water slopes, clouds and human-factors validation. Native sky archives verify the packed-input scene results; local coastal spectra supply resolved slope covariance. Shorter-wave roughness and actual reflection remain open."
+        "regional optical profiles, horizontal weather variation and the effects of aerosols",
+        "propagate the new solved-column low-Sun spherical light into remaining consumers of the older two-stream and exponential-atlas products",
+        "surface light under clouds: colour and diffuse share; elevated direct sunlight and molecular viewing extinction are screened, and local second-cycle microphysics are recovered. Cloud radiance and persistence require size-distribution closure, spatial light transport coupled to the solved spherical sky",
+        "the historical exponential atlas retains its 4.6% global-energy issue; the solved-column product records a separate channel-by-channel and weighted energy ledger",
+        "the five-hour practical dawn and dusk (research/decisions.md): choose a working-light threshold for a site. The solved clear lunar sky reaches 1,000 lux near -11.0 degrees of solar elevation, about 22 hours after ideal equatorial geometric sunset",
+        "optical comfort: site-specific surface BRDFs and geometry, cloud radiance and human-factors validation. The shielded solved-column sky now supplies consistent flux and direction; local coastal spectra supply resolved slope covariance. Shorter-wave roughness and actual water reflection remain open."
       ],
-      "next_session_task": "Compute earthlit sky radiance with Earth's reflectance spectrum as the source, and test low-Sun and night radiance against appropriate benchmarks."
+      "next_session_task": "Use the solved spherical radiation field with recovered cloud microphysics and water-slope spectra; extend faint-twilight benchmarks and regional profiles. Earthlight spectral radiance remains a separate source calculation."
     },
     {
       "topic": "biosphere",
@@ -162,7 +165,7 @@
     },
     {
       "topic": "habitation",
-      "condition": "design_concepts; no complete sizing or service model; optical_comfort_clear_sky_surface_and_eye_screen_with_earth_controls; optical_comfort_packed_angular_sky_transfer_and_finite_matte_scene_transport; optical_comfort_local_native_sky_and_resolved_wave_slopes",
+      "condition": "design_concepts; no complete sizing or service model; optical_comfort_clear_sky_surface_and_eye_screen_with_earth_controls; optical_comfort_packed_angular_sky_transfer_and_finite_matte_scene_transport; optical_comfort_local_native_sky_and_resolved_wave_slopes; solved_column_shielded_spherical_sky_and_updated_gaze_and_finite_scenes",
       "material": [
         "../habitation/README.md",
         "../ensemble/papers/babdd5f6-4920/seed-02.md",
@@ -170,7 +173,10 @@
         "studies/optical_comfort/results/optical_comfort.json",
         "studies/optical_comfort/results/directional_scenes.json",
         "studies/optical_comfort/results/native_sky.json",
-        "studies/optical_comfort/results/water_slopes.json"
+        "studies/optical_comfort/results/water_slopes.json",
+        "../illumination/sky/SOLVED_COLUMN.md",
+        "../illumination/sky/results/solved_sky.json",
+        "studies/optical_comfort/results/spherical_sky.json"
       ],
       "unresolved": [
         "supported floor area and mass",

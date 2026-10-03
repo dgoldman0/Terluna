@@ -7,7 +7,7 @@ and earthlight.
 | Material | What it computes | Condition |
 |---|---|---|
 | [surface_light/](surface_light/) | Clear-sky direct and diffuse sunlight at the ground by wavelength (202–1000 nm): photosynthetic photons, colour, red:far-red, ultraviolet and ground brightness, for the design Moon, a 1.0-atm Moon and the Earth control | The atmosphere domain's radiation (1-nm ultraviolet-visible below 500 nm, line-by-line above) on its solved columns; two-stream, so light at Sun heights below about 20° is understated against the sky solver |
-| [sky/](sky/) | Spherical, spectral, scalar multiple-scattering sky radiance and surface irradiance for Earth and two Open Moon optical profiles, Sun from −90° to +90° | Conditional on prescribed exponential optical profiles. Numerically checked (solver tests, atlas invariants, six noon Monte Carlo spot checks); a lunar global energy residual of up to 4.6% is open |
+| [sky/](sky/) | Spherical spectral sky radiance: established exponential-profile atlases, plus current solved-column skies for the shielded design Moon and Earth | The new product includes spectral and spatial checks, independent Monte Carlo and a global-energy ledger. Clouds, aerosols, polarization and refraction remain additional inputs |
 | [cloud_light/](cloud_light/) | Spherical molecular solar and observer paths to elevated features, using current column layers and an atlas-proxy control | Direct beam and atmospheric transmission only; cloud scattering and resolved twilight radiance remain open |
 | [ephemeris.py](ephemeris.py) | Sun, Earth and star directions above a site; Earth's phase; earthlight as a fraction of sunlight | Mean-orbit geometry (synchronous rotation, lunar equator in the ecliptic, sinusoidal libration, Lambert-phase Earth of geometric albedo 0.367); good to a few degrees, not an ephemeris for dates |
 | [stars/](stars/) | The Yale Bright Star Catalogue (9,096 stars): J2000 position, V magnitude, B−V | Catalogue data; the build pins the source file's hash |
@@ -41,7 +41,7 @@ landscape albedo separate from local surface reflectance and identifies the
 remaining inputs for a resolved visual-comfort calculation. Its directional
 extension recovers the packed atlas's angular patterns and transfers them onto
 current light totals. Six finite matte scenes include cast shadows and repeated
-reflection. A consistent shielded spherical sky remains open.
+reflection. The [solved-column follow-up](sky/SOLVED_COLUMN.md) now supplies absolute angular radiance and flux from the same shielded spherical atmosphere, with updated gaze and finite-scene results.
 
 The [cloud-twilight study](../research/studies/cloud_twilight/) couples molecular
 paths to corrected CM1 cloud heights and occurrence. It screens the long
@@ -61,8 +61,8 @@ about 2 lux on the ground at midnight.
 - Earthlight's own spectrum. Earthlit sky glow currently reuses the solar atlas at
   Earth's elevation, which treats earthlight as sunlight-coloured; the solver could
   compute it with Earth's reflectance spectrum as the source.
-- Tie the optical profiles to the atmosphere domain's solved column instead of the
-  exponential proxies.
+- Extend the solved-column sky to regional profiles, cloud radiance and the
+  remaining consumers of the older illumination products.
 - Benchmark low-Sun and night radiance. The libRadtran documentation
   (https://www.libradtran.org/doku.php?id=basic_usage) is a method lead, not an
   installed dependency.

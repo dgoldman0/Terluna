@@ -1,8 +1,10 @@
 # Optical comfort and surface vision
 
-The committed light fluxes give dimmer horizontal matte ground and more strongly filled solar-only shadows on the design Moon at noon. Transferring the repo's computed angular sky patterns onto those fluxes gives 1.83 times Earth's ambient illumination for a level eye over dark ground, compared with 2.11 under a uniform sky. Looking down reverses the ordering. Finite pale surroundings can bring the two worlds' eye illumination close together, while physical roofs, side screens and shaded ground change both illumination and surface contrast. Optical comfort therefore needs a specified surface, gaze and shelter geometry.
+The current clear-sky calculation gives dimmer horizontal matte ground and more strongly filled solar shadows on the design Moon at noon. Over dark ground, a level eye receives 1.71 times Earth's ambient illumination. Looking down reverses the ordering. Finite pale surroundings can bring the two worlds' eye illumination close together, while physical roofs, side screens and shaded ground change both illumination and surface contrast. Optical comfort therefore needs a specified surface, gaze and shelter geometry.
 
-**Evidence state:** reproducible screening from committed clear-sky products, with prescribed scene geometries. Sections 1–8 retain the initial flux-based calculation and imposed sky shapes. Section 9 adds computed angular patterns transferred from a different atmospheric model, and finite scenes with repeated matte reflection. The quantities describe light and selected contrast mechanisms. Human discomfort, visual performance in real landscapes and eye safety remain unvalidated. All albedos are spectrally neutral scenario values; a dark landscape represents open ground. Forest interiors require canopy geometry.
+**Evidence state:** reproducible screening from committed clear-sky products, with prescribed scene geometries. Sections 1–8 retain the initial flux-based calculation and imposed sky shapes. Section 9 adds computed angular patterns transferred from a different atmospheric model, and finite scenes with repeated matte reflection. Section 11 supplies a consistent radiation field from the current shield and atmospheric profiles. The quantities describe light and selected contrast mechanisms. Human discomfort, visual performance in real landscapes and eye safety remain unvalidated. All albedos are spectrally neutral scenario values; a dark landscape represents open ground. Forest interiors require canopy geometry.
+
+The [current spherical-sky results](#11-a-consistent-shielded-spherical-sky) combine the solved atmospheric profiles and chosen shield in one radiation field. They give 87.7 klux at lunar noon and 5.16 klux with the Sun 1° above the horizon, and update every gaze and finite-scene case. Earlier sections retain the calculations used to establish and compare these mechanisms.
 
 ## Remote and local data access
 
@@ -373,4 +375,40 @@ make check
 
 The Python environment needs the repository’s scientific dependencies; local verification additionally used Numba and netCDF4. `--include-check-inputs` copies the existing Node dependencies after checking the lockfile. The cloud exporter also reads the run’s CM1 build source from `TERLUNA_CM1_HOME`, whose default is `/media/projectspace/terluna-research/cm1`, and checks its recorded hashes. Complete remote reproduction of these new calculations requires the ignored local inputs. The original committed-input runners remain reproducible from their documented inputs.
 
-The next physical priorities are a spherical angular sky with the current shield and solved atmospheric profile; cloud illumination with the recovered species, size distributions and spatial fields; and rough-water reflection with an explicit short-wave treatment. Site materials, vegetation geometry and human response remain additional inputs to a comfort assessment.
+The spherical angular sky now uses the current shield and solved atmospheric profile, as recorded below. The next physical priorities are cloud illumination with the recovered species, size distributions and spatial fields, and rough-water reflection with an explicit short-wave treatment. Site materials, vegetation geometry and human response remain additional inputs to a comfort assessment.
+
+## 11. A consistent shielded spherical sky
+
+The current atmospheric profiles and shield now produce the sky’s absolute brightness, colour and angular pattern together. [The illumination product](../../../illumination/sky/results/solved_sky.json) supplies the [updated gaze and scene results](results/spherical_sky.json). [The method and reproduction guide](../../../illumination/sky/SOLVED_COLUMN.md) records spectral, spatial, Monte Carlo and energy checks.
+
+The design Moon uses 1.2 atm of dry air, a 294.9 K surface and titania-stack transmission multiplied by 0.95. The Earth control uses its solved 1-atm, 288 K column and unfiltered sunlight. Both have a clear molecular atmosphere and ground albedo 0.1.
+
+| Sun elevation | Moon: horizontal light | Earth: horizontal light | Moon: diffuse share |
+|---|---:|---:|---:|
+| 90° | 87,661 lux | 124,511 lux | 34.1% |
+| 10° | 11,536 lux | 15,740 lux | 88.4% |
+| 1° | 5,158 lux | 1,559 lux | 99.6% |
+| 0° | 4,640 lux | 943 lux | 100.0% |
+| -6° | 2,207 lux | 2.98 lux | 100.0% |
+| -12° | 838 lux | 0.00569 lux | 100.0% |
+
+The largest practical revision is the light around the horizon. At a Sun elevation of 1°, the lunar total rises from 806 lux in the two-stream result to 5,158 lux here, a factor of 6.40. At noon it changes from 89,603 to 87,661 lux. The spherical field includes scattered light arriving through illuminated air beyond the local horizon.
+
+The lunar curve crosses 1,000 lux at an interpolated Sun elevation of about -11.0°. At the ideal equatorial angular rate, that is roughly 22 hours after geometric sunset. The sampled −6° and −12° states correspond to about 12 and 24 hours after sunset. Latitude, season and the terrain horizon set a site’s actual timing.
+
+All 630 gaze cases and 24 finite matte scenes have been recomputed with this field. At noon, level-gaze ambient eye illumination is 19.89 klux on the Moon and 11.61 klux on Earth. Looking vertically down gives 8.77 and 12.45 klux respectively. Viewing direction continues to matter because the sky and ground contribute different shares.
+
+The numerical record separates several questions:
+
+- Independent fine-spectrum Monte Carlo comparisons with relative sampling error at most 2% differ from the spherical calculation by up to 1.32%. Photon counts and individual sampling errors remain in the product.
+- The sampled three-channel refinement changes lunar daylight radiance by at most 0.37%, reaching 1.58% at −18°.
+- Surface illumination is integrated from the same angular sky used by the scene calculations. Doubling its angular sampling changes diffuse illuminance by at most 0.014% for the Moon and 0.19% for Earth across the checked solar elevations.
+- Halving the absorption-line spacing changes tested lunar direct-beam illuminance by at most 0.010%. The separate reduced-spectrum slant-beam check reaches 1.11%.
+- The internal moment-grid photopic global-energy residual is 0.67% for the Moon and 0.04% for Earth. Individual channel residuals are retained alongside these weighted values.
+- Earth twilight is sensitive to solar-angle sampling: interpolating the coarse 2° source grid at −5° differs by 82% from the standard 1° grid, where surface light is about 9.8 lux. At −3° the difference is 48%, with about 97 lux in the standard result. The independent broadband comparisons cover 0°, −2° and −6°; the latter has a 13% sampling error. Deeper Earth twilight needs additional importance sampling, and the zero-contribution −12° sample is explicitly unresolved.
+
+These results establish a consistent clear-sky foundation for the study. Cloud radiance with the recovered microphysics, rough-water reflection, regional atmospheric profiles and measured surface reflectance remain the next physical work. Human-factors evidence is a separate part of assessing comfort.
+
+Bulk optical tables, moment fields, validation runs and figures are stored on the research drive through `research/runs/optical_comfort`. The committed products carry their source and artifact hashes.
+
+Repository verification: `make check` passed with 526 Python tests passing and 13 skipped, 176 JavaScript tests passing, and successful layer, provenance and ensemble workspace checks. The figure was also inspected against the stored values.

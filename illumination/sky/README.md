@@ -52,3 +52,7 @@ Open Moon it makes direct sunlight 6% too bright with the Sun overhead, 24% at 2
 coefficients fitted to the spectral sunlight over Sun elevations (within 2–6% at every
 elevation), and reports both against the spectral result in `direct_sun_check`.
 Neither replaces the atlas for the sky's own brightness and colour.
+
+## Solved atmospheric columns and the shield
+
+The [solved-column follow-up](SOLVED_COLUMN.md) produces one consistent absolute sky field for the design Moon and Earth control. It includes the current molecular profiles, narrow gas absorption bands and the chosen lunar shield. The optical-comfort study consumes its [versioned product](results/solved_sky.json). Its numerical ledger includes independent spectral Monte Carlo, grid refinement and global energy. The established exponential-profile atlases retain their own inputs and check records.
