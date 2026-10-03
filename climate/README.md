@@ -190,6 +190,13 @@ smaller waves retain timestep and spectral-band sensitivity. Further cycles,
 other seas, finer coastal winds and terrain, sea-temperature gradients and
 underwater light profiles remain further work.
 
+The [shore study](waves/shore.md) uses native 118 m flooded-rock terrain to
+locate exposed and sheltered coasts. Its [evolving follow-up](waves/coastal_history.md)
+measures second-cycle event timing and duration through nested directional
+spectra. [SWASH shore profiles](waves/runup.md) add individual-wave breaking
+and run-up, with explicit beach geometries, lunar gravity controls and
+separate numerical and physical limits.
+
 ## Next step
 
 The atmosphere domain's [radiative–convective column](../atmosphere/radiative_convective/)

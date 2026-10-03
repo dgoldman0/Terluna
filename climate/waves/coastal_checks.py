@@ -13,12 +13,8 @@ from climate.waves.coastal import RUNS, TERRAIN, load_terrain, read_coastal
 from climate.waves.model import ORIGIN, ROOT, sha256
 
 
-def nesting_spectra(path, selected_dates=None):
-    """Read full directional spectra, optionally retaining selected timestamps.
-
-    Streaming allows a long parent record to supply a few coastal snapshots.
-    Every time record is consumed; selected records receive the full value checks.
-    """
+def iter_nesting_spectra(path, selected_dates=None):
+    """Yield one validated directional record at a time with bounded memory."""
     def data_lines():
         with path.open() as stream:
             for raw in stream:
@@ -67,7 +63,7 @@ def nesting_spectra(path, selected_dates=None):
             np.any(frequency <= 0) or np.any(np.diff(frequency) <= 0) or
             not np.allclose(np.diff(direction), 360/nd)):
         raise ValueError("Invalid nesting coordinates")
-    dates, spectra, available = [], [], []
+    dates = []
     previous = None
     records = lines if time_dependent else chain(["stationary"], lines)
     for date_line in records:
@@ -99,15 +95,23 @@ def nesting_spectra(path, selected_dates=None):
                 raise ValueError(f"Unsupported nesting record {kind}")
         if keep:
             dates.append(date)
-            spectra.append(values)
-            available.append(wet)
+            yield dict(dates=[date], locations=locations, frequency=frequency, direction=direction,
+                       spectra=values[None], available=wet[None], time_dependent=time_dependent,
+                       frequency_reference=frequency_reference)
     if selected_dates is not None and set(dates) != set(selected_dates):
         raise ValueError("Selected nesting times are absent")
     if not dates or any(b <= a for a, b in zip(dates, dates[1:])) or exception >= 0:
         raise ValueError("Invalid nesting times or exception value")
-    return dict(dates=dates, locations=locations, frequency=frequency, direction=direction,
-                spectra=np.asarray(spectra), available=np.asarray(available),
-                time_dependent=time_dependent, frequency_reference=frequency_reference)
+
+
+def nesting_spectra(path, selected_dates=None):
+    """Collect full directional spectra, optionally retaining selected timestamps."""
+    records = list(iter_nesting_spectra(path, selected_dates))
+    result = dict(records[0])
+    result.update(dates=[r['dates'][0] for r in records],
+                  spectra=np.concatenate([r['spectra'] for r in records]),
+                  available=np.concatenate([r['available'] for r in records]))
+    return result
 
 
 def audit(product_path, run_root=RUNS):

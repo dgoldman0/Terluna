@@ -1,0 +1,1357 @@
+{
+  "schema": "terluna.climate.shore-history-verification/1",
+  "verified_utc": "2026-10-03T14:51:19.935605+00:00",
+  "evidence": "Completed evolving coastal and wave-resolving profile calculations with recorded numerical checks, source audit, data integrity and repository checks.",
+  "reading_rule": "Coastal occurrence uses the second solar cycle after a full preceding cycle at every spectral scale. Run-up describes selected finite sea states on explicit one-dimensional profiles. Numerical bounds and lunar physical calibration retain separate evidence states.",
+  "sources": {
+    "climate/waves/model.py": "72b736b62b0799ae6601829d568a3ad1647994bcf1d9766e1d5c7523ea2c66f2",
+    "climate/waves/pilot.py": "9d09daedb49f65ea8c482c2b57a2db8edebbbda0f70b594e3ab8f72c20ba38b6",
+    "climate/waves/coastal_checks.py": "f7c6404875724c42ac6f136b865f8f716704420d74d128ac179ae6ebf522b301",
+    "climate/waves/shore_history.py": "72d30e5530db4011883e0da71f23519e9922738e904324fdbf92a80370c25a67",
+    "climate/waves/coastal_history.py": "ca34f753f3e0fc747737567ed28757ba8ec989aa2d3aba9cd7bf9762b49da51b",
+    "climate/waves/coastal_history_checks.py": "bd34935da7c978d3cfb5e4466cd11a3c27236c900d14995acba63081982f43e8",
+    "climate/waves/history_controls.py": "ffd71994c2f28a208a3443628b73a92fdcab0fb0f4d850a83f2b8c5ff4598ec9",
+    "climate/waves/swash_build.py": "7fea0b8ba09e6966c1701863c4838a863f37668d62315ea6bdf0bc12a71aa687",
+    "climate/waves/runup.py": "b5c806bc0b5500b161436a3f134fcea86564196883a0c0944b40c989d7e34903",
+    "climate/waves/runup_controls.py": "7e1a901030259bb68a27cb3032b9b0ac2ee6af7a362f1ae503a5379fc58b20e5",
+    "climate/waves/runup_checks.py": "3d9a8c1d57cadd3ea539164a442c244876878eae61e820fea5d992bd2f4e9435",
+    "climate/tests/test_coastal_history.py": "d3c96e04d0478c05142837a5cf7e5c6b0cc89a8a24b171dcff9859bbfd663010",
+    "geography/shore_profiles.py": "491829a3c57c58409a2f27ffc3358383f65531b031e78983f1c71d4b4a08ca7f",
+    "geography/tests/test_shore_profiles.py": "fb80ecd6f8c8f4fcf70e2d0a75a1da7dea1825c90380ebc5c0d5bad29b42f189",
+    "shared/constants.json": "f71c3261095e42eab8557c98826627891a5a205ebc76a6aa92760f193c2a0b44",
+    "shared/scenarios/waves.json": "e6a86ec35b01d1864188bfaebb2a1d21a3047b841e118478df1831d4d0112323",
+    "visualization/waves/coastal_history.py": "273a0b13580faa566187c55108fa2558946cc56413ef1683ae9c927e1cd192c1",
+    "visualization/waves/runup.py": "182c94904a39fd0650e8129475e835eee350dc0a429fd114c6ac89dc09f7ec07"
+  },
+  "artifacts": {
+    "climate/waves/results/coastal_history.json": "856f4c76e71faf7254feddd7984b493d22144dc4592c1df93acb425688e317b9",
+    "climate/waves/results/coastal_history_checks.json": "ffcf42c96b8591526c96e100286872c315e13c0290a2a39bfbd8992423e60d45",
+    "climate/waves/results/runup.json": "93bfcd72166babb4ef3cf69a5dcd80ecb0b1ec68ed0f34e51a15d9109ac6543e",
+    "research/runs/waves/shore_history/profiles.json": "dd450c06d76fab8055cb944cc9731495c0526c92f67334a2e4e8d28ca03c51d8",
+    "research/runs/waves/shore_history/parent/product.json": "6f9b35a1686554c41f64688077928b8c492b2cb83d8f5764b92ec75afd3f199f",
+    "research/runs/waves/shore_history/region_s16_dt900_0_1419/product.json": "86c77d3ac7d22462d63b109bac49dc61109a47b083226e353f39c1bcb40ef7bf",
+    "research/runs/waves/shore_history/coast_s4_dt900_0_1419/product.json": "8988e262b9bee09bbef58f23161041e1193a59f7eed9873b40d5b2fe9a6f43df",
+    "research/runs/waves/shore_history/restart_control/comparison.json": "506419b5e121a9c2fc803758f9319011a8b18196e9049d063ebdeed0e01a6e3c",
+    "research/runs/waves/shore_history/clock_control/run.json": "fc660c80ab4f77dca604f8bd790c5b6a76d20c5cd7cf10f43537891b778318be",
+    "research/runs/waves/swash_source/build.json": "c79842a0a895a400e009c7be62d337f4dec134077c5826ab5f2ec8353dd0a830",
+    "research/runs/waves/swash_source/swash-12.01.tar.gz": "c8a2e149e4c1583f3f5a10fa6e9fa110e6db7d1eb41978420a4a387877ac397f",
+    "research/runs/waves/runup/controls.json": "baf5327636cd59213072137d2bc5219278a9987ec5a381da549726032a16aea4",
+    "research/runs/waves/runup/shore_controls.json": "ed3c863daf79f111c32defddd510dcf2803e81c6f757c534a9871fb387fae90f",
+    "research/runs/waves/runup/history_west_slope50/interruption.json": "c1a60ea6af71e074409a3696a683d519a373167260ffd6b0f3172a9b7094a6fd",
+    "research/runs/waves/runup/irregular_input_flat/clock_diagnostic.json": "184575c856ea3a3b11349aba0fd4c649172cb85d25b9e05fb8b6f69e6996e5c3",
+    "research/runs/waves/shore_history/coast_s4_dt450_816_1097/product.json": "4e981467ca4473a7a3c92dc1930d720da0d9d1ebf213a4f5e9f9b418dd0d5d3b",
+    "research/runs/waves/shore_history/coast_s4_dt450_696_912/product.json": "d81525bf9a343e2eca9382a7692c0b745aad2118715ef4df3168a5e0631ab02c",
+    "visualization/waves/results/coastal_history.json": "9d8f8e9a4e27e5942d5a91ea8c4d56e0b6985b5e1da2fce4a90e4053194cb8ec",
+    "visualization/waves/results/coastal_history.png": "73d822ee680be6c1f144230c19c69f5ab363ad51245d7cc43d213ef4b688ecc6",
+    "visualization/waves/results/coastal_history_maps.json": "149fe188b57fbf672d9beae762350f01650a355f0c93dbfcfabe6a99bee56efc",
+    "visualization/waves/results/coastal_history_maps.png": "e71cb6d67bf191ca8369a0c51b3843d4ac1cb260f0ced89f29930e1a556687a5",
+    "visualization/waves/results/runup.json": "eaffd91d521331a0221b18a4d4287e56668be7b010e319c148c5580bcd7ae78a",
+    "visualization/waves/results/runup.png": "77868993fb5c8daac4f8d0508f8faaf54de0f3cad8bfc84b9881e573ea76ec38"
+  },
+  "basin_replay": {
+    "reference_values_compared": 4076820,
+    "all_retained_values_exact": true,
+    "hours": 1419,
+    "hourly_spectral_nodes": 30
+  },
+  "clock": {
+    "spinup_hours": [
+      0,
+      708.73416
+    ],
+    "report_hours": [
+      708.73416,
+      1417.46832
+    ],
+    "station_interval_hours": 0.25,
+    "spectrum_interval_hours": 1.0,
+    "restart_control": {
+      "all_station_values_exact": true,
+      "values_compared": 624,
+      "maximum_height_difference_m": 0.0
+    }
+  },
+  "thread_controls": {
+    "cases": {
+      "preview": {
+        "threads": 2,
+        "elapsed_wall_s": 165.28448053300235,
+        "station_sha256": "1ff973dc851caf6d10157e7855d5b8bc04579dc54a351812ec6e061b03c904d5",
+        "spectrum_sha256": "ed7f1ba99e0eda32a48acc9b93d1c2ec2a278bb04a4a1e61b741e05369c69b5b"
+      },
+      "preview_4threads": {
+        "threads": 4,
+        "elapsed_wall_s": 92.2925359140063,
+        "station_sha256": "1ff973dc851caf6d10157e7855d5b8bc04579dc54a351812ec6e061b03c904d5",
+        "spectrum_sha256": "ed7f1ba99e0eda32a48acc9b93d1c2ec2a278bb04a4a1e61b741e05369c69b5b"
+      },
+      "preview_8threads": {
+        "threads": 8,
+        "elapsed_wall_s": 65.65583374999551,
+        "station_sha256": "1ff973dc851caf6d10157e7855d5b8bc04579dc54a351812ec6e061b03c904d5",
+        "spectrum_sha256": "ed7f1ba99e0eda32a48acc9b93d1c2ec2a278bb04a4a1e61b741e05369c69b5b"
+      }
+    },
+    "station_and_spectral_bytes_exact": true
+  },
+  "coastal_checks": {
+    "spectral_checks": {
+      "maximum_transport_relative_error": 0.005515273626350083,
+      "transport_pass": true,
+      "high_edge_failure_fraction": 0.37229129662522203,
+      "maximum_high_edge_fraction": 0.1260768452689683
+    },
+    "solver_log_diagnostics": {
+      "region_s16_dt900_0_1419": {
+        "print_sha256": "7d5e27589698f15744b2ab80b6500a065408ff3945dbdb8fe065568b40501705",
+        "second_cycle_boundary_warning_blocks": 1936,
+        "steps": 2835,
+        "iteration_accuracy_percent_range": [
+          1.19,
+          99.75
+        ],
+        "steps_reaching_99_percent": 68,
+        "iterations_per_step": 1,
+        "reading_rule": "Transient steps advance after one iteration. The selected timestep comparisons provide a separate sensitivity check. Total-height boundary warnings include the computed outgoing field alongside externally prescribed incoming directions; further evolving boundary and iteration controls remain open."
+      },
+      "coast_s4_dt900_0_1419": {
+        "print_sha256": "b00b304c8e0052527d05882614125ca3993634fe07a1d2534b77060e17464e27",
+        "second_cycle_boundary_warning_blocks": 2424,
+        "steps": 2835,
+        "iteration_accuracy_percent_range": [
+          1.73,
+          98.7
+        ],
+        "steps_reaching_99_percent": 0,
+        "iterations_per_step": 1,
+        "reading_rule": "Transient steps advance after one iteration. The selected timestep comparisons provide a separate sensitivity check. Total-height boundary warnings include the computed outgoing field alongside externally prescribed incoming directions; further evolving boundary and iteration controls remain open."
+      }
+    },
+    "selected_timestep_comparisons": [
+      {
+        "reference": "research/runs/waves/shore_history/coast_s4_dt900_0_1419/product.json",
+        "reference_sha256": "8988e262b9bee09bbef58f23161041e1193a59f7eed9873b40d5b2fe9a6f43df",
+        "test": "research/runs/waves/shore_history/coast_s4_dt450_816_1097/product.json",
+        "test_sha256": "4e981467ca4473a7a3c92dc1930d720da0d9d1ebf213a4f5e9f9b418dd0d5d3b",
+        "numerical_bounds": {
+          "hs_relative_p95": 0.05,
+          "hs_relative_max": 0.15,
+          "period_relative_p95": 0.05,
+          "flux_relative_p95": 0.1
+        },
+        "flux_definition": "Relative difference of the net east/north energy-transport vectors, with the refined vector as denominator.",
+        "interval_hours": [
+          840.0,
+          1097.0
+        ],
+        "stations": {
+          "west_face": {
+            "samples": 1029,
+            "hs_relative_p95": 0.012600924430276087,
+            "hs_relative_max": 0.03492276003446645,
+            "period_relative_p95": 0.028372125768279542,
+            "flux_relative_p95": 0.016436236293214074,
+            "paired_height_bands": {
+              "0.5": {
+                "samples": 828,
+                "hs_relative_p95": 0.009540652307561324,
+                "hs_relative_max": 0.03492276003446645,
+                "period_relative_p95": 0.04057982067566073,
+                "flux_relative_p95": 0.012625245462533869
+              },
+              "1.0": {
+                "samples": 278,
+                "hs_relative_p95": 0.006439465844371653,
+                "hs_relative_max": 0.006553733065067861,
+                "period_relative_p95": 0.016907723475486757,
+                "flux_relative_p95": 0.005762148124483203
+              }
+            },
+            "threshold_comparison": {
+              "0.5": {
+                "reference_hours": 207.34522576671486,
+                "test_hours": 207.0850151038171,
+                "duration_difference_hours": -0.2602106628977481,
+                "reference_intervals_hours": [
+                  [
+                    840.0,
+                    921.0386636719858
+                  ],
+                  [
+                    938.4999391681138,
+                    1064.8065012628429
+                  ]
+                ],
+                "test_intervals_hours": [
+                  [
+                    840.0,
+                    920.9841736438374
+                  ],
+                  [
+                    938.5061759920455,
+                    1064.6070174520253
+                  ]
+                ]
+              },
+              "1.0": {
+                "reference_hours": 69.5970640399064,
+                "test_hours": 69.26665936487984,
+                "duration_difference_hours": -0.330404675026557,
+                "reference_intervals_hours": [
+                  [
+                    840.0,
+                    882.7468016815595
+                  ],
+                  [
+                    976.6208641206534,
+                    983.6510386357455
+                  ],
+                  [
+                    1016.5706018158627,
+                    1036.3906896591175
+                  ]
+                ],
+                "test_intervals_hours": [
+                  [
+                    840.0,
+                    882.7481895748401
+                  ],
+                  [
+                    976.6742497526053,
+                    983.6093209829121
+                  ],
+                  [
+                    1016.7372627197016,
+                    1036.3206612794345
+                  ]
+                ]
+              }
+            },
+            "passed": true
+          },
+          "east_face": {
+            "samples": 953,
+            "hs_relative_p95": 0.04542710924875855,
+            "hs_relative_max": 0.1479794219495661,
+            "period_relative_p95": 0.023681774546432555,
+            "flux_relative_p95": 0.13828909954633353,
+            "paired_height_bands": {
+              "0.5": {
+                "samples": 192,
+                "hs_relative_p95": 0.03739520500032058,
+                "hs_relative_max": 0.047182386814549324,
+                "period_relative_p95": 0.012401972229601658,
+                "flux_relative_p95": 0.08122760036683385
+              },
+              "1.0": {
+                "samples": 0
+              }
+            },
+            "threshold_comparison": {
+              "0.5": {
+                "reference_hours": 47.820922373641,
+                "test_hours": 47.79137454486249,
+                "duration_difference_hours": -0.02954782877850448,
+                "reference_intervals_hours": [
+                  [
+                    1049.179077626359,
+                    1097.0
+                  ]
+                ],
+                "test_intervals_hours": [
+                  [
+                    1049.2086254551375,
+                    1097.0
+                  ]
+                ]
+              },
+              "1.0": {
+                "reference_hours": 0.0,
+                "test_hours": 0.0,
+                "duration_difference_hours": 0.0,
+                "reference_intervals_hours": [],
+                "test_intervals_hours": []
+              }
+            },
+            "passed": false
+          },
+          "southern_shore": {
+            "samples": 1029,
+            "hs_relative_p95": 0.01477243747585922,
+            "hs_relative_max": 0.030978151869778835,
+            "period_relative_p95": 0.03694866453593151,
+            "flux_relative_p95": 0.02679717821313597,
+            "paired_height_bands": {
+              "0.5": {
+                "samples": 867,
+                "hs_relative_p95": 0.011793252447555613,
+                "hs_relative_max": 0.030978151869778835,
+                "period_relative_p95": 0.035709848488690736,
+                "flux_relative_p95": 0.030337784250553404
+              },
+              "1.0": {
+                "samples": 162,
+                "hs_relative_p95": 0.004404108445123243,
+                "hs_relative_max": 0.00524715402087247,
+                "period_relative_p95": 0.0066776796741421255,
+                "flux_relative_p95": 0.0046616188482746825
+              }
+            },
+            "threshold_comparison": {
+              "0.5": {
+                "reference_hours": 217.0635302532953,
+                "test_hours": 217.2876525425139,
+                "duration_difference_hours": 0.22412228921859878,
+                "reference_intervals_hours": [
+                  [
+                    840.0,
+                    920.798756189536
+                  ],
+                  [
+                    939.1265763450629,
+                    964.7648745128253
+                  ],
+                  [
+                    969.2152844862658,
+                    1079.8417603822627
+                  ]
+                ],
+                "test_intervals_hours": [
+                  [
+                    840.0,
+                    920.7260925927416
+                  ],
+                  [
+                    939.1254549205024,
+                    964.7662314729497
+                  ],
+                  [
+                    968.5780746452858,
+                    1079.498858042611
+                  ]
+                ]
+              },
+              "1.0": {
+                "reference_hours": 40.33090075570021,
+                "test_hours": 40.335201929672735,
+                "duration_difference_hours": 0.00430117397252161,
+                "reference_intervals_hours": [
+                  [
+                    840.0,
+                    880.3309007557002
+                  ]
+                ],
+                "test_intervals_hours": [
+                  [
+                    840.0,
+                    880.3352019296727
+                  ]
+                ]
+              }
+            },
+            "passed": true
+          },
+          "offshore": {
+            "samples": 1029,
+            "hs_relative_p95": 0.014678842672410031,
+            "hs_relative_max": 0.04532786540330053,
+            "period_relative_p95": 0.017431639149526838,
+            "flux_relative_p95": 0.03256579569534852,
+            "paired_height_bands": {
+              "0.5": {
+                "samples": 976,
+                "hs_relative_p95": 0.015385133055404256,
+                "hs_relative_max": 0.04532786540330053,
+                "period_relative_p95": 0.01894225974301924,
+                "flux_relative_p95": 0.033077165334278937
+              },
+              "1.0": {
+                "samples": 508,
+                "hs_relative_p95": 0.02033603913960263,
+                "hs_relative_max": 0.04532786540330053,
+                "period_relative_p95": 0.01716887322365723,
+                "flux_relative_p95": 0.0791853975349273
+              }
+            },
+            "threshold_comparison": {
+              "0.5": {
+                "reference_hours": 243.65690703254165,
+                "test_hours": 243.6134120086815,
+                "duration_difference_hours": -0.04349502386014592,
+                "reference_intervals_hours": [
+                  [
+                    840.0,
+                    923.5796975494176
+                  ],
+                  [
+                    936.9227905168759,
+                    1097.0
+                  ]
+                ],
+                "test_intervals_hours": [
+                  [
+                    840.0,
+                    923.5201219312322
+                  ],
+                  [
+                    936.9067099225507,
+                    1097.0
+                  ]
+                ]
+              },
+              "1.0": {
+                "reference_hours": 126.87356096026042,
+                "test_hours": 126.86187736681393,
+                "duration_difference_hours": -0.011683593446491614,
+                "reference_intervals_hours": [
+                  [
+                    840.0,
+                    884.6014425342095
+                  ],
+                  [
+                    975.214419233292,
+                    993.1262352075951
+                  ],
+                  [
+                    1010.4730220532872,
+                    1074.833324505035
+                  ]
+                ],
+                "test_intervals_hours": [
+                  [
+                    840.0,
+                    884.6002018127617
+                  ],
+                  [
+                    975.2242462663751,
+                    993.1272845736536
+                  ],
+                  [
+                    1010.303104457633,
+                    1074.6617417044067
+                  ]
+                ]
+              }
+            },
+            "passed": true
+          }
+        },
+        "all_stations_pass": false
+      },
+      {
+        "reference": "research/runs/waves/shore_history/coast_s4_dt900_0_1419/product.json",
+        "reference_sha256": "8988e262b9bee09bbef58f23161041e1193a59f7eed9873b40d5b2fe9a6f43df",
+        "test": "research/runs/waves/shore_history/coast_s4_dt450_696_912/product.json",
+        "test_sha256": "d81525bf9a343e2eca9382a7692c0b745aad2118715ef4df3168a5e0631ab02c",
+        "numerical_bounds": {
+          "hs_relative_p95": 0.05,
+          "hs_relative_max": 0.15,
+          "period_relative_p95": 0.05,
+          "flux_relative_p95": 0.1
+        },
+        "flux_definition": "Relative difference of the net east/north energy-transport vectors, with the refined vector as denominator.",
+        "interval_hours": [
+          720.0,
+          912.0
+        ],
+        "stations": {
+          "west_face": {
+            "samples": 769,
+            "hs_relative_p95": 0.0038616030211702543,
+            "hs_relative_max": 0.007666038133530973,
+            "period_relative_p95": 0.007796726789299653,
+            "flux_relative_p95": 0.006125827535048492,
+            "paired_height_bands": {
+              "0.5": {
+                "samples": 750,
+                "hs_relative_p95": 0.003931893992100282,
+                "hs_relative_max": 0.007666038133530973,
+                "period_relative_p95": 0.007053005679192494,
+                "flux_relative_p95": 0.0061963356123471225
+              },
+              "1.0": {
+                "samples": 418,
+                "hs_relative_p95": 0.0032846459359361377,
+                "hs_relative_max": 0.0038824378596120338,
+                "period_relative_p95": 0.005079815098061377,
+                "flux_relative_p95": 0.004716731677353735
+              }
+            },
+            "threshold_comparison": {
+              "0.5": {
+                "reference_hours": 187.1936624332808,
+                "test_hours": 187.1756281607752,
+                "duration_difference_hours": -0.018034272505587978,
+                "reference_intervals_hours": [
+                  [
+                    720.0,
+                    796.8461757336828
+                  ],
+                  [
+                    801.652513300402,
+                    912.0
+                  ]
+                ],
+                "test_intervals_hours": [
+                  [
+                    720.0,
+                    796.8934626195982
+                  ],
+                  [
+                    801.717834458823,
+                    912.0
+                  ]
+                ]
+              },
+              "1.0": {
+                "reference_hours": 104.66625343364888,
+                "test_hours": 104.53002311827015,
+                "duration_difference_hours": -0.1362303153787252,
+                "reference_intervals_hours": [
+                  [
+                    720.0,
+                    776.8852411998151
+                  ],
+                  [
+                    834.9657894477258,
+                    882.7468016815595
+                  ]
+                ],
+                "test_intervals_hours": [
+                  [
+                    720.0,
+                    776.7908973548876
+                  ],
+                  [
+                    835.0090653001912,
+                    882.7481910635737
+                  ]
+                ]
+              }
+            },
+            "passed": true
+          },
+          "east_face": {
+            "samples": 769,
+            "hs_relative_p95": 0.0188246065832131,
+            "hs_relative_max": 0.06653207928124119,
+            "period_relative_p95": 0.013840458330292045,
+            "flux_relative_p95": 0.029832979404343596,
+            "paired_height_bands": {
+              "0.5": {
+                "samples": 0
+              },
+              "1.0": {
+                "samples": 0
+              }
+            },
+            "threshold_comparison": {
+              "0.5": {
+                "reference_hours": 0.0,
+                "test_hours": 0.0,
+                "duration_difference_hours": 0.0,
+                "reference_intervals_hours": [],
+                "test_intervals_hours": []
+              },
+              "1.0": {
+                "reference_hours": 0.0,
+                "test_hours": 0.0,
+                "duration_difference_hours": 0.0,
+                "reference_intervals_hours": [],
+                "test_intervals_hours": []
+              }
+            },
+            "passed": true
+          },
+          "southern_shore": {
+            "samples": 769,
+            "hs_relative_p95": 0.0051041992799551105,
+            "hs_relative_max": 0.014021322457655788,
+            "period_relative_p95": 0.009133020856150855,
+            "flux_relative_p95": 0.006346456040961121,
+            "paired_height_bands": {
+              "0.5": {
+                "samples": 739,
+                "hs_relative_p95": 0.004713666317537462,
+                "hs_relative_max": 0.00966336358684803,
+                "period_relative_p95": 0.008362342996065274,
+                "flux_relative_p95": 0.006198174066107658
+              },
+              "1.0": {
+                "samples": 340,
+                "hs_relative_p95": 0.004195333503816981,
+                "hs_relative_max": 0.005222418818232327,
+                "period_relative_p95": 0.006804602939196495,
+                "flux_relative_p95": 0.0046267783575619495
+              }
+            },
+            "threshold_comparison": {
+              "0.5": {
+                "reference_hours": 184.64597499552303,
+                "test_hours": 184.58158600107868,
+                "duration_difference_hours": -0.0643889944443572,
+                "reference_intervals_hours": [
+                  [
+                    720.0,
+                    794.5035235656715
+                  ],
+                  [
+                    801.8575485701484,
+                    912.0
+                  ]
+                ],
+                "test_intervals_hours": [
+                  [
+                    720.0,
+                    794.4969547700018
+                  ],
+                  [
+                    801.9153687689231,
+                    912.0
+                  ]
+                ]
+              },
+              "1.0": {
+                "reference_hours": 85.00193851878157,
+                "test_hours": 84.83176457196976,
+                "duration_difference_hours": -0.17017394681181486,
+                "reference_intervals_hours": [
+                  [
+                    720.0,
+                    722.7041086531308
+                  ],
+                  [
+                    734.6138371181534,
+                    772.6453225221466
+                  ],
+                  [
+                    836.0645562940426,
+                    880.3309007557002
+                  ]
+                ],
+                "test_intervals_hours": [
+                  [
+                    720.0,
+                    722.6397913139144
+                  ],
+                  [
+                    734.5594468591125,
+                    772.5674695192479
+                  ],
+                  [
+                    836.1512513317527,
+                    880.3352019296727
+                  ]
+                ]
+              }
+            },
+            "passed": true
+          },
+          "offshore": {
+            "samples": 769,
+            "hs_relative_p95": 0.003377166593547274,
+            "hs_relative_max": 0.0055171384237807895,
+            "period_relative_p95": 0.008571319184308654,
+            "flux_relative_p95": 0.00344853988809351,
+            "paired_height_bands": {
+              "0.5": {
+                "samples": 769,
+                "hs_relative_p95": 0.003377166593547274,
+                "hs_relative_max": 0.0055171384237807895,
+                "period_relative_p95": 0.008571319184308654,
+                "flux_relative_p95": 0.00344853988809351
+              },
+              "1.0": {
+                "samples": 440,
+                "hs_relative_p95": 0.0022558189630603226,
+                "hs_relative_max": 0.0029337750531232953,
+                "period_relative_p95": 0.004714532552159218,
+                "flux_relative_p95": 0.0025976720450788904
+              }
+            },
+            "threshold_comparison": {
+              "0.5": {
+                "reference_hours": 192.0,
+                "test_hours": 192.0,
+                "duration_difference_hours": 0.0,
+                "reference_intervals_hours": [
+                  [
+                    720.0,
+                    912.0
+                  ]
+                ],
+                "test_intervals_hours": [
+                  [
+                    720.0,
+                    912.0
+                  ]
+                ]
+              },
+              "1.0": {
+                "reference_hours": 109.78468460021895,
+                "test_hours": 109.78384184835454,
+                "duration_difference_hours": -0.0008427518644111842,
+                "reference_intervals_hours": [
+                  [
+                    720.0,
+                    778.9074936370317
+                  ],
+                  [
+                    833.7242515710223,
+                    884.6014425342095
+                  ]
+                ],
+                "test_intervals_hours": [
+                  [
+                    720.0,
+                    778.9156956100567
+                  ],
+                  [
+                    833.7320555744639,
+                    884.6002018127617
+                  ]
+                ]
+              }
+            },
+            "passed": true
+          }
+        },
+        "all_stations_pass": true
+      }
+    ],
+    "analytic_pulse_controls": {
+      "900": {
+        "step_s": 900,
+        "frequency_hz": 0.08835784856963316,
+        "group_speed_eastward_m_s": 1.4572490566564285,
+        "x_m": [
+          0.0,
+          2000.0,
+          5000.0,
+          8000.0
+        ],
+        "analytic_delay_hours": [
+          0.0,
+          0.3812358313205876,
+          0.953089578301469,
+          1.5249433252823503
+        ],
+        "measured_delay_hours": [
+          0.0,
+          0.3813027592455045,
+          0.9531566248174155,
+          1.5250104281030312
+        ],
+        "delay_error_hours": [
+          0.0,
+          6.692792491691524e-05,
+          6.704651594646727e-05,
+          6.710282068089768e-05
+        ],
+        "maximum_delay_error_minutes": 0.004026169240853861,
+        "half_peak_rise_error_minutes": [
+          0.0,
+          -3.130041634497591,
+          -7.078960245153039,
+          -10.98817264538238
+        ],
+        "pulse_height_ratio": [
+          1.0,
+          0.9863653771819226,
+          0.9706985942419156,
+          0.9555882193352931
+        ],
+        "passed": true
+      },
+      "450": {
+        "step_s": 450,
+        "frequency_hz": 0.08835784856963316,
+        "group_speed_eastward_m_s": 1.4572490566564285,
+        "x_m": [
+          0.0,
+          2000.0,
+          5000.0,
+          8000.0
+        ],
+        "analytic_delay_hours": [
+          0.0,
+          0.3812358313205876,
+          0.953089578301469,
+          1.5249433252823503
+        ],
+        "measured_delay_hours": [
+          0.0,
+          0.38127044299220625,
+          0.9531238826028554,
+          1.5249777391992305
+        ],
+        "delay_error_hours": [
+          0.0,
+          3.4611671618667295e-05,
+          3.430430138640084e-05,
+          3.4413916880193796e-05
+        ],
+        "maximum_delay_error_minutes": 0.0020767002971200377,
+        "half_peak_rise_error_minutes": [
+          0.0,
+          -2.1006801633261962,
+          -4.301334108450772,
+          -6.588224848288435
+        ],
+        "pulse_height_ratio": [
+          1.0,
+          0.9904519914271195,
+          0.9815235128914107,
+          0.972096084325765
+        ],
+        "passed": true
+      },
+      "150": {
+        "step_s": 150,
+        "frequency_hz": 0.08835784856963316,
+        "group_speed_eastward_m_s": 1.4572490566564285,
+        "x_m": [
+          0.0,
+          2000.0,
+          5000.0,
+          8000.0
+        ],
+        "analytic_delay_hours": [
+          0.0,
+          0.3812358313205876,
+          0.953089578301469,
+          1.5249433252823503
+        ],
+        "measured_delay_hours": [
+          0.0,
+          0.3812475760742968,
+          0.953101627905439,
+          1.5249553650404764
+        ],
+        "delay_error_hours": [
+          0.0,
+          1.1744753709241884e-05,
+          1.204960396994359e-05,
+          1.2039758126025646e-05
+        ],
+        "maximum_delay_error_minutes": 0.0007229762381966154,
+        "half_peak_rise_error_minutes": [
+          0.0,
+          -1.3629497642435884,
+          -2.403110309565517,
+          -3.5544853999416492
+        ],
+        "pulse_height_ratio": [
+          1.0,
+          0.993606149616369,
+          0.9894554613673276,
+          0.9843642110618527
+        ],
+        "passed": true
+      }
+    }
+  },
+  "profile_checks": {
+    "completed_cases": 25,
+    "selected_cases": [
+      "history_west_rock_fine",
+      "history_west_slope20",
+      "history_west_slope50_fine"
+    ],
+    "linear_gravity_controls": {
+      "moon": {
+        "gravity_m_s2": 1.6242188765608128,
+        "period_s": 10.0,
+        "amplitudes_m": [
+          0.009966576861211484,
+          0.009823956770065185,
+          0.009839254134261252
+        ],
+        "amplitude_relative_max": 0.01760432299348147,
+        "phase_relative_max": 0.0028870961746025087,
+        "passed": true
+      },
+      "four_gravity": {
+        "gravity_m_s2": 6.496875506243251,
+        "period_s": 5.0,
+        "amplitudes_m": [
+          0.009966573570719868,
+          0.00982394667035961,
+          0.009839238869902778
+        ],
+        "amplitude_relative_max": 0.01760533296403899,
+        "phase_relative_max": 0.002887186319890367,
+        "passed": true
+      },
+      "earth": {
+        "gravity_m_s2": 9.80665,
+        "period_s": 4.0696957157186295,
+        "amplitudes_m": [
+          0.009966724881896087,
+          0.009824044821731388,
+          0.009839372776415525
+        ],
+        "amplitude_relative_max": 0.017595517826861196,
+        "phase_relative_max": 0.002886647276486615,
+        "passed": true
+      }
+    },
+    "linear_gravity_similarity": {
+      "gravity_ratio": 4,
+      "clock_ratio": 0.5,
+      "amplitude_normalized_max_error": 9.080999999969835e-06,
+      "passed": true
+    },
+    "still_water": {
+      "0.5": {
+        "dx_m": 0.5,
+        "maximum_wet_surface_residual_m": 0.0,
+        "still_water_runup_diagnostic_m": 0.0407007486,
+        "diagnostic_range_m": 0.0,
+        "passed": true
+      },
+      "0.25": {
+        "dx_m": 0.25,
+        "maximum_wet_surface_residual_m": 0.0,
+        "still_water_runup_diagnostic_m": 0.008915364740000003,
+        "diagnostic_range_m": 0.0,
+        "passed": true
+      }
+    },
+    "nonlinear_gravity": {
+      "source_sha256": "a18c6c77ba18cecc173cdeba239978e2789bd866d35e1bf77999846ed13a8549",
+      "gravity_ratio": 4,
+      "time_ratio": 0.5,
+      "maximum_pointwise_runup_difference_m": 0.2766072451,
+      "runup_p98_relative_difference": 0.01204336071369614,
+      "maximum_profile_hs_relative_difference": 0.0018871635932967339,
+      "passed": true
+    },
+    "reflection": {
+      "incident_amplitude_m": 0.008956488245115626,
+      "reflected_amplitude_m": 0.009047770843010672,
+      "reflection_amplitude_ratio": 1.0101917844803545,
+      "relative_fit_residual": 0.007763118194414805,
+      "passed": true,
+      "reading_rule": "A fully reflective vertical wall has unit amplitude reflection. Three gauges separate the two linear travelling components using the analytic lunar dispersion relation."
+    },
+    "irregular_input": {
+      "directory": "irregular_input_flat",
+      "dx_m": 0.5,
+      "layers": 4,
+      "source_case_sha256": "a18c6c77ba18cecc173cdeba239978e2789bd866d35e1bf77999846ed13a8549",
+      "expected_hs_m": 1.7190702201568704,
+      "expected_mean_period_s": 12.736344143307464,
+      "measured_hs_m": [
+        1.6591868049228875,
+        1.6390106157885285,
+        1.629273464784699
+      ],
+      "measured_mean_period_s": [
+        13.199889310252855,
+        13.355987209959096,
+        13.536512175290103
+      ],
+      "maximum_clock_rounding_s": 0.00020000081894977484,
+      "maximum_breaking_flag": 0.0,
+      "maximum_hs_relative_difference": 0.05223565292404242,
+      "maximum_period_relative_difference": 0.06282556618910928,
+      "passed": false,
+      "reading_rule": "The transferred irregular spectrum drives constant-depth water with an absorbing downstream reach. Three gauges cover one complete 3600 s phase period after 900 s initialization. Nonlinear evolution and residual reflection accompany the input-normalization check."
+    },
+    "irregular_input_refinements": {
+      "half_spacing": {
+        "directory": "irregular_input_flat_dx0p25_k4",
+        "dx_m": 0.25,
+        "layers": 4,
+        "source_case_sha256": "a18c6c77ba18cecc173cdeba239978e2789bd866d35e1bf77999846ed13a8549",
+        "expected_hs_m": 1.7190702201568704,
+        "expected_mean_period_s": 12.736344143307464,
+        "measured_hs_m": [
+          1.6664690455462638,
+          1.6454688427423563,
+          1.6343604073196967
+        ],
+        "measured_mean_period_s": [
+          13.09462837602034,
+          13.26869901753843,
+          13.466275503855561
+        ],
+        "maximum_clock_rounding_s": 0.00020000081894977484,
+        "maximum_breaking_flag": 0.0,
+        "maximum_hs_relative_difference": 0.049276528581504775,
+        "maximum_period_relative_difference": 0.057310901176587103,
+        "passed": false,
+        "reading_rule": "The transferred irregular spectrum drives constant-depth water with an absorbing downstream reach. Three gauges cover one complete 3600 s phase period after 900 s initialization. Nonlinear evolution and residual reflection accompany the input-normalization check."
+      },
+      "six_layers": {
+        "directory": "irregular_input_flat_dx0p5_k6",
+        "dx_m": 0.5,
+        "layers": 6,
+        "source_case_sha256": "a18c6c77ba18cecc173cdeba239978e2789bd866d35e1bf77999846ed13a8549",
+        "expected_hs_m": 1.7190702201568704,
+        "expected_mean_period_s": 12.736344143307464,
+        "measured_hs_m": [
+          1.643053355559877,
+          1.6247697053093262,
+          1.6224739806056094
+        ],
+        "measured_mean_period_s": [
+          13.376104845328703,
+          13.463995515204678,
+          13.59468811354611
+        ],
+        "maximum_clock_rounding_s": 0.00020000081894977484,
+        "maximum_breaking_flag": 0.0,
+        "maximum_hs_relative_difference": 0.05619097952987995,
+        "maximum_period_relative_difference": 0.0673932771116017,
+        "passed": false,
+        "reading_rule": "The transferred irregular spectrum drives constant-depth water with an absorbing downstream reach. Three gauges cover one complete 3600 s phase period after 900 s initialization. Nonlinear evolution and residual reflection accompany the input-normalization check."
+      }
+    },
+    "comparisons": [
+      {
+        "reference": "calibration_west_rock_dx0p5_k4_ilu",
+        "test": "calibration_west_rock_dx0p25_k4",
+        "label": "Rock spacing 0.5 to 0.25 m",
+        "relative_differences": {
+          "runup_time_p98_m": 0.020000881005342218,
+          "runup_peak_p98_m": 0.024101170570010755,
+          "runup_max_m": 0.027584229579822345,
+          "runup_mean_m": 0.07452639372226956,
+          "maximum_profile_hs_m": 0.017257036535691314
+        },
+        "numerical_bounds": {
+          "runup_time_p98": 0.05,
+          "runup_peak_p98": 0.05,
+          "runup_max": 0.1
+        },
+        "within_numerical_bounds": true
+      },
+      {
+        "reference": "calibration_west_rock_dx0p5_k4_ilu",
+        "test": "calibration_west_rock_dx0p5_k6",
+        "label": "Four to six layers, including the incident velocity formulation",
+        "relative_differences": {
+          "runup_time_p98_m": 0.0016566313522897386,
+          "runup_peak_p98_m": 0.011584631929312729,
+          "runup_max_m": 0.03419652562719855,
+          "runup_mean_m": 0.0016345518454767202,
+          "maximum_profile_hs_m": 0.0024638128429850495
+        },
+        "numerical_bounds": {
+          "runup_time_p98": 0.05,
+          "runup_peak_p98": 0.05,
+          "runup_max": 0.1
+        },
+        "within_numerical_bounds": true
+      },
+      {
+        "reference": "calibration_west_slope20_dx1_k4",
+        "test": "calibration_west_slope20_settled",
+        "label": "1:20 beach, 600 to 4200 s initialization with the same forcing phases",
+        "relative_differences": {
+          "runup_time_p98_m": 0.024250106719986658,
+          "runup_peak_p98_m": 0.034357678616005256,
+          "runup_max_m": 0.03432672269778181,
+          "runup_mean_m": 0.004262006527499468,
+          "maximum_profile_hs_m": 0.0004624451337719061
+        },
+        "numerical_bounds": {
+          "runup_time_p98": 0.05,
+          "runup_peak_p98": 0.05,
+          "runup_max": 0.1
+        },
+        "within_numerical_bounds": true
+      },
+      {
+        "reference": "calibration_west_slope50_dx1_k4",
+        "test": "calibration_west_slope50_settled",
+        "label": "1:50 beach, 600 to 4200 s initialization with the same forcing phases",
+        "relative_differences": {
+          "runup_time_p98_m": 0.05127194309460185,
+          "runup_peak_p98_m": 0.10003339856385582,
+          "runup_max_m": 0.014033452662053752,
+          "runup_mean_m": 0.1513948156244315,
+          "maximum_profile_hs_m": 0.0007447360956161815
+        },
+        "numerical_bounds": {
+          "runup_time_p98": 0.05,
+          "runup_peak_p98": 0.05,
+          "runup_max": 0.1
+        },
+        "within_numerical_bounds": false
+      },
+      {
+        "reference": "calibration_west_slope100_dx1_k4",
+        "test": "calibration_west_slope100_settled",
+        "label": "1:100 beach, 600 to 4200 s initialization with the same forcing phases",
+        "relative_differences": {
+          "runup_time_p98_m": 0.20828648443556258,
+          "runup_peak_p98_m": 0.19930052759068442,
+          "runup_max_m": 0.2090414209046843,
+          "runup_mean_m": 0.42914529513243366,
+          "maximum_profile_hs_m": 0.0002060804549093008
+        },
+        "numerical_bounds": {
+          "runup_time_p98": 0.05,
+          "runup_peak_p98": 0.05,
+          "runup_max": 0.1
+        },
+        "within_numerical_bounds": false
+      },
+      {
+        "reference": "calibration_west_slope50_settled",
+        "test": "calibration_west_slope50_dx0p5_settled",
+        "label": "Settled 1:50 beach spacing 1 to 0.5 m",
+        "relative_differences": {
+          "runup_time_p98_m": 0.05964806290007893,
+          "runup_peak_p98_m": 0.07992548301196632,
+          "runup_max_m": 0.08237334040392585,
+          "runup_mean_m": 0.04928632238795826,
+          "maximum_profile_hs_m": 0.004602121012074181
+        },
+        "numerical_bounds": {
+          "runup_time_p98": 0.05,
+          "runup_peak_p98": 0.05,
+          "runup_max": 0.1
+        },
+        "within_numerical_bounds": false
+      },
+      {
+        "reference": "calibration_west_slope50_settled",
+        "test": "calibration_west_slope50_later",
+        "label": "1:50 beach, 4200 to 7800 s initialization with the same forcing phases",
+        "relative_differences": {
+          "runup_time_p98_m": 0.009023631555533337,
+          "runup_peak_p98_m": 0.012149967606722715,
+          "runup_max_m": 0.015463115374829172,
+          "runup_mean_m": 0.00031516145163444127,
+          "maximum_profile_hs_m": 0.0006964830491395997
+        },
+        "numerical_bounds": {
+          "runup_time_p98": 0.05,
+          "runup_peak_p98": 0.05,
+          "runup_max": 0.1
+        },
+        "within_numerical_bounds": true
+      },
+      {
+        "reference": "history_west_rock",
+        "test": "history_west_rock_fine",
+        "label": "Evolving-history peak, rock spacing 0.5 to 0.25 m",
+        "relative_differences": {
+          "runup_time_p98_m": 0.01114140185959361,
+          "runup_peak_p98_m": 0.013394170318782473,
+          "runup_max_m": 0.036260397145071066,
+          "runup_mean_m": 0.06762611685112437,
+          "maximum_profile_hs_m": 0.018254157952484376
+        },
+        "numerical_bounds": {
+          "runup_time_p98": 0.05,
+          "runup_peak_p98": 0.05,
+          "runup_max": 0.1
+        },
+        "within_numerical_bounds": true
+      },
+      {
+        "reference": "history_west_slope50_dx1",
+        "test": "history_west_slope50_fine",
+        "label": "Evolving-history peak, 1:50 beach spacing 1 to 0.5 m",
+        "relative_differences": {
+          "runup_time_p98_m": 0.05190250901328133,
+          "runup_peak_p98_m": 0.012946099766045447,
+          "runup_max_m": 0.020855890250684718,
+          "runup_mean_m": 0.08376476830647706,
+          "maximum_profile_hs_m": 0.01048636591117861
+        },
+        "numerical_bounds": {
+          "runup_time_p98": 0.05,
+          "runup_peak_p98": 0.05,
+          "runup_max": 0.1
+        },
+        "within_numerical_bounds": false
+      },
+      {
+        "reference": "history_east_bandlimited_k4",
+        "test": "history_east_bandlimited_k6",
+        "label": "Eastern rock, four to six layers with the same restricted frequency band",
+        "relative_differences": {
+          "runup_time_p98_m": 0.06753728693734863,
+          "runup_peak_p98_m": 0.06033311344576817,
+          "runup_max_m": 0.1066373542118552,
+          "runup_mean_m": 0.11130339111801257,
+          "maximum_profile_hs_m": 0.11925460179709407
+        },
+        "numerical_bounds": {
+          "runup_time_p98": 0.05,
+          "runup_peak_p98": 0.05,
+          "runup_max": 0.1
+        },
+        "within_numerical_bounds": false,
+        "incoming_spectrum_sha256": "93d1fa2200bc64250f17f13a072557fdaf01e193189b83fcdc6be0ff12a3cd87",
+        "removed_variance_fraction": 0.04517740749269694,
+        "reading_rule": "An explicit common-band sensitivity includes the vertical discretization and the incident velocity formulation. The relaxed 5% variance guard is specific to these labelled cases; the main transfers retain the 1% guard."
+      }
+    ],
+    "sensitivities": [
+      {
+        "reference": "history_east_face_rock",
+        "test": "history_east_bandlimited_k6",
+        "parameter": "Eastern six-layer case with its frequency ceiling reduced to the four-layer limit",
+        "changes_m": {
+          "runup_time_p98_m": 0.0017629259999999425,
+          "runup_max_m": 0.00036501799999999474,
+          "runup_mean_m": 0.0005669293329655378
+        },
+        "reading_rule": "The frequency tail and finite realization change together; this complements the identical-spectrum four-to-six-layer comparison."
+      },
+      {
+        "reference": "calibration_west_rock_dx0p5_k4_ilu",
+        "test": "calibration_west_rock_buffer200",
+        "parameter": "Constant-depth wavemaker reach 100 to 200 m",
+        "changes_m": {
+          "runup_time_p98_m": -0.07489634,
+          "runup_max_m": 0.08759784999999987,
+          "runup_mean_m": -0.02860897656611383
+        },
+        "reading_rule": "Changing the buffer also changes frequency-dependent travel phases within the finite reporting window. This is a boundary-placement sensitivity, with those phase effects retained."
+      },
+      {
+        "reference": "history_west_rock",
+        "test": "history_west_rock_seed2",
+        "parameter": "Random-phase realization",
+        "changes_m": {
+          "runup_time_p98_m": 0.055067059999999834,
+          "runup_max_m": 0.34497069999999974,
+          "runup_mean_m": -0.04162014448747864
+        },
+        "reading_rule": "A finite case comparison for the stated parameter; an ensemble probability distribution requires more realizations."
+      },
+      {
+        "reference": "history_west_rock",
+        "test": "history_west_rock_friction",
+        "parameter": "Dimensionless bottom friction 0 to 0.005",
+        "changes_m": {
+          "runup_time_p98_m": -0.04188036999999989,
+          "runup_max_m": 0.11266850999999978,
+          "runup_mean_m": 0.002071631878584168
+        },
+        "reading_rule": "A finite case comparison for the stated parameter; an ensemble probability distribution requires more realizations."
+      },
+      {
+        "reference": "history_west_rock",
+        "test": "history_west_rock_alpha0p5",
+        "parameter": "Breaking onset coefficient 0.6 to 0.5",
+        "changes_m": {
+          "runup_time_p98_m": -0.0459313400000001,
+          "runup_max_m": 0.11966562000000014,
+          "runup_mean_m": -0.004595682571312154
+        },
+        "reading_rule": "A finite case comparison for the stated parameter; an ensemble probability distribution requires more realizations."
+      }
+    ],
+    "transfers": {
+      "main_history_cases": {
+        "cases": [
+          "history_east_face_rock",
+          "history_southern_shore_rock",
+          "history_west_rock",
+          "history_west_rock_alpha0p5",
+          "history_west_rock_fine",
+          "history_west_rock_friction",
+          "history_west_rock_seed2",
+          "history_west_slope100",
+          "history_west_slope20",
+          "history_west_slope50_dx1",
+          "history_west_slope50_fine"
+        ],
+        "maximum_removed_variance_fraction": 0.0065174824703524425,
+        "maximum_transport_relative_difference": 0.0034315922699128094
+      },
+      "explicit_common_band_cases": {
+        "cases": [
+          "history_east_bandlimited_k4",
+          "history_east_bandlimited_k6"
+        ],
+        "maximum_removed_variance_fraction": 0.04517740749269694,
+        "maximum_transport_relative_difference": 0.02037717063554614
+      }
+    }
+  },
+  "source_audit": {
+    "model": "Unmodified official SWASH 12.01",
+    "source_url": "https://swash.sourceforge.io/download/zip/swash-12.01.tar.gz",
+    "source_sha256": "c8a2e149e4c1583f3f5a10fa6e9fa110e6db7d1eb41978420a4a387877ac397f",
+    "license": "GNU GPL v3 or later; Delft University of Technology",
+    "executable_sha256": "2b5f94d2999121898dad72caa5e9f50c9c388085eff6ea7685d40b5cc063c124",
+    "original_archive_files": 171,
+    "compiler_configuration_changes": [
+      "macros.inc generated by make config"
+    ],
+    "inspected_routines": {
+      "SwashRunupHeight.ftn90": "b61d537a42e0e83ccb9526b36a0aa1bac1379745e0e395b13b7140d707d789c9",
+      "SwashBounCond.ftn90": "eddd6dd85c1f01063ec4d7c375e531a7a70d9eb39ab4d0e7b188e93f26bb14c0",
+      "SwashBreakPoint.ftn90": "f4d74c2a12bb654a9d511ae12114a820d4ef2015c9727d4ad5f5fb57c283f62d",
+      "SwashBCspecfile.ftn90": "33ae0c4e4250a49681c54b316525f1b162095342a8143aa5331dbf16296add91",
+      "SwashBCStokeswave.ftn90": "65d619a9fc454b0eef20dc9420d7eb2776be3830a69294af08f812553c5b73ea",
+      "SwashReadInput.ftn90": "dcac9ecbbb589c1f540530197272e6200859cdc97018e471b1ca5299da551c3f",
+      "SwashCheckPrep.ftn90": "9d4a4ee3e002c85dd7e67c3f96dfb5dbfe558c116ba523da6fbb8038a4b46fd9",
+      "SwashBCshortwave.ftn90": "7c472b48091e4539447ac10c1ad39c1ac92070108502a571f9477ea9267a643f"
+    },
+    "scope": "Configured gravity, pressure scheme, spectral frequency cutoff and reconstruction, the discrete-Stokes to continuum-cosh incident velocity change above four uniform Keller-box layers, bulk breaking, wall reflection and waterline diagnostic; analytic and gravity-scaling execution controls.",
+    "references": [
+      "https://swash.sourceforge.io/download/download.htm",
+      "https://swash.sourceforge.io/online_doc/swashuse/swashuse.html",
+      "https://swanmodel.sourceforge.io/online_doc/swanuse/node29.html",
+      "https://swanmodel.sourceforge.io/online_doc/swanuse/node27.html",
+      "https://swanmodel.sourceforge.io/online_doc/swanuse/node34.html"
+    ]
+  },
+  "repository_check": {
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 NUMBA_NUM_THREADS=1 MPLCONFIGDIR=/tmp/terluna-wave-mpl PYTEST_ADDOPTS='--basetemp=research/runs/waves/shore_history/pytest_final' TERLUNA_SWAN_EXECUTABLE=/tmp/terluna-lunar-seas-swan/coupled_air/swan.exe TERLUNA_SWASH_EXECUTABLE=/home/kir/Documents/Projects/terluna/research/runs/waves/swash_source/source/swash-12.01/swash.exe nice -n 10 make check",
+    "passed": true,
+    "python_tests_passed": 496,
+    "javascript_tests_passed": 176,
+    "layer_files_checked": 331,
+    "layer_violations": 0,
+    "provenance_check": "PASS",
+    "ensemble_snapshot_files": 14,
+    "ensemble_paper_workspaces": 5,
+    "log": "research/runs/waves/shore_history/make_check_final.log",
+    "log_sha256": "4f84414d67af7514f3bf428d9ac95800f34c0729f96afed23056c2d8d4947692"
+  },
+  "visualization": {
+    "figures": 3,
+    "exact_display_array_checks": 21,
+    "final_images_visually_inspected": true
+  },
+  "storage": {
+    "logical_directory": "research/runs/waves",
+    "physical_directory": "/media/projectspace/terluna-research/wave-runs",
+    "study_directories": [
+      "shore_history",
+      "runup",
+      "swash_source"
+    ],
+    "bulk_data_bytes": 23072884961
+  },
+  "retained_diagnostics": [
+    "Default ILUD pressure preconditioning failed in initial flat and rock spectral cases; ILU completed the accepted controls and cases.",
+    "An initial SET keyword order and a zero-height regular-wave boundary were rejected by SWASH; corrected inputs use the documented order and zero Fourier components.",
+    "The initial linear phase comparison selected the wrong 2*pi branch between gauges; the corrected diagnostic uses the analytic dispersion branch on the unchanged raw runs.",
+    "The first irregular-input clock check used a tolerance below single-precision print rounding; the diagnostic now accepts one printed-clock ULP and preserves the raw run.",
+    "The original changing-history 1:50 beach worker exited with signal 15 at 3306.5 simulated seconds. Its partial directory and interruption record remain intact; history_west_slope50_dx1 is the completed replacement.",
+    "Short initialization of the gentler beach slopes retained a transient; later phase-matched records and the remaining spatial differences are preserved."
+  ],
+  "pending": [
+    "Complete-cycle and upstream timestep/frequency refinements, remaining coastal spatial outliers and weak-wave band coverage.",
+    "Iterations per transient step and evolving boundary-position controls, retaining total-height warnings and the printed iteration-accuracy diagnostics.",
+    "Irregular-spectrum boundary normalization and propagation loss, including the incident velocity change above four uniform Keller-box layers.",
+    "Finer geographic bed measurements and sediment/erosion histories, including which beach profiles occur.",
+    "Additional wave-phase realizations, further beach resolution and initialization checks, and longer changing run-up histories.",
+    "Two-dimensional shoreline groups and currents, water-level variations and two-way reflection coupling.",
+    "Laboratory benchmark comparison and lunar physical calibration of growth, dissipation, breaking and friction.",
+    "Further atmospheric cycles and other lunar seas."
+  ]
+}

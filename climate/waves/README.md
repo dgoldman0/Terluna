@@ -48,6 +48,13 @@ shoreline spur. Full directional spectra measure incoming and outgoing
 power at bathymetry-selected shore stations. Spatial, boundary and spectral
 comparisons accompany the conditional exposure results.
 
+The [evolving coastal history](coastal_history.md) carries changing wind and
+directional spectra through a complete second cycle, after a full first cycle
+of spin-up at every spectral scale. It measures event onsets, durations and
+incoming energy at the three coastal stations. The [SWASH profile study](runup.md)
+then resolves individual waves, breaking and run-up on interpolated rock and
+explicit beach slopes, with lunar gravity, reflection and numerical controls.
+
 ## Findings from the first run
 
 At 100 km fetch after 48 hours of the imposed wind, the modified build gives:
@@ -292,8 +299,9 @@ calculations support metre-scale surf under the stated wind and slope assumption
 spectral edges, stationary solver stopping, matched slope-grid errors and
 the separate basin resolution differences. Independent executable tests compare
 metre and lunar-degree grids and check conservation of linear-wave energy flux
-before breaking. Physical validation, run-up, wave-driven currents and individual
-breaking waves remain future work. SWASH needs a source audit and pilot run.
+before breaking. The later [SWASH study](runup.md) adds the source audit,
+individual waves and run-up. Physical calibration and two-dimensional
+wave-driven currents remain further work.
 
 ## Reproduction
 
@@ -349,19 +357,22 @@ first experiment's check record and from the numerical audit.
 
 ## Next sea calculations
 
-The [shore exposure study](shore.md) now supplies native 118 m terrain and
-selected second-cycle coastal spectra. Extend those nests through evolving
-weather, widen the frequency band for short waves, and refine the remaining
-shoreline outliers. Explicit cross-shore profiles can then supply the
-wave-resolving coastal calculations. The global three-hourly atmospheric
+The [shore exposure study](shore.md) supplies native 118 m terrain, and the
+[evolving coastal study](coastal_history.md) adds continuous second-cycle
+spectra and coastal event histories. Widen the frequency band for short
+waves, refine the remaining shoreline outliers, resolve the measured
+irregular-spectrum boundary and propagation errors, and extend the
+[wave-resolving profiles](runup.md) into two-dimensional coastal patches.
+Higher-resolution bed information, sediment scenarios and water-level
+variations will constrain the breaking reaches and run-up further.
+The global three-hourly atmospheric
 record supports continuous wave histories and comparisons between seas.
 Extend the [second-cycle calculation](cycle.md) to further cycles and basins,
 and widen the frequency band where the smaller waves reach its upper edge.
 Short wind transients, parent directional resolution, and physical lunar wind
 input and breaking remain open. Local CM1 boxes can address identified gaps
-in gust fronts, coastal flow or storm winds. An individual-wave SWASH
-calculation needs a source/gravity audit, resolved coastal geometry and
-input-spectrum checks before interpreting run-up or breaking crests.
+in gust fronts, coastal flow or storm winds. The SWASH gravity and numerical
+checks establish a runnable model; lunar physical calibration remains open.
 
 Temperature gradients, mixing and light penetration need their own ocean
 calculations. Start with vertical heat/mixing and spectral underwater-light

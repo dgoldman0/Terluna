@@ -38,6 +38,11 @@ surface under seas and lakes, selected on 25 September 2026 within the author's 
 records the basis for the choice. The geography [atlas](../geography/README.md#atlas-at-the-selected-water-share)
 reads the share, and the water to deliver follows from the domains' hydrology.
 
+[scenarios/waves.json](scenarios/waves.json) records the 1,025 kg/m³ seawater
+density used by the wind-wave studies and their shoreline continuation.
+It is a calculation scenario; ocean composition and density variations remain
+separate research inputs.
+
 ## Lanes and the layer check
 
 | Lane | Folders | May import |

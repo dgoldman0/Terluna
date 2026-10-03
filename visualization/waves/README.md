@@ -100,3 +100,23 @@ With all three weather phases present, the command also writes
 `results/shore_phases.png` and its sidecar. These maps share a power scale
 and the same 237 m wave grid. Equal-length arrows show the local direction
 of net wave-energy transport; the colours compare its magnitude.
+
+## Changing coastal waves and shoreline motion
+
+`python -m visualization.waves.coastal_history` reads the domain's
+`terluna.climate.coastal-history/1` product and its hashed array archive.
+`results/coastal_history.png` shows the complete reported cycle of station
+heights and incoming power. `results/coastal_history_maps.png` shows the
+six-hourly mean and maximum heights across the coast. The captions retain
+the distinct sampling intervals, first-cycle spin-up and terrain assumptions.
+
+`python -m visualization.waves.runup` reads the selected cases from
+`climate/waves/results/runup.json`. `results/runup.png` displays the actual bed
+and computed water surface near each case's largest recorded run-up, followed
+by its complete reported waterline history. The upper panels use the nearest
+one-second surface sample; the lower panels retain the 0.1 s waterline record.
+Rock and assumed beach geometries carry separate labels.
+
+Both renderers verify the displayed arrays and write source, renderer and
+image hashes beside the ignored figures. The domain products own the
+calculations and the finite-record interpretation of the run-up percentiles.

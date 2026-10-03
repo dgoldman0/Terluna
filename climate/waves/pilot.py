@@ -71,10 +71,11 @@ def load_basin(path=ATLAS, stride=4, body=874):
 
 def execute(executable, directory, files, outputs, timeout_s=900, *, threads=1):
     """Hash all run inputs and required outputs, with bounded execution."""
-    if threads not in (1, 2, 4) or timeout_s < 1:
-        raise ValueError("Use one, two or four threads and a positive wall-time limit")
+    if threads not in (1, 2, 4, 8) or timeout_s < 1:
+        raise ValueError("Use one, two, four or eight threads and a positive wall-time limit")
     identity = dict(executable_sha256=sha256(executable),
-                    inputs={name: hashlib.sha256(data.encode()).hexdigest() for name, data in files.items()})
+                    inputs={name: sha256(data) if isinstance(data, Path) else
+                            hashlib.sha256(data.encode()).hexdigest() for name, data in files.items()})
     record_path = directory / "run.json"
     if directory.exists():
         if not record_path.exists():
@@ -90,7 +91,11 @@ def execute(executable, directory, files, outputs, timeout_s=900, *, threads=1):
         return record
     directory.mkdir(parents=True)
     for name, data in files.items():
-        (directory / name).write_text(data)
+        if isinstance(data, Path):
+            import shutil
+            shutil.copyfile(data, directory / name)
+        else:
+            (directory / name).write_text(data)
     def limits():
         resource.setrlimit(resource.RLIMIT_CPU, (timeout_s*threads, timeout_s*threads))
         resource.setrlimit(resource.RLIMIT_AS, (2 * 1024**3, 2 * 1024**3))

@@ -1,0 +1,7 @@
+{
+  "schema": "terluna.scenario.waves/1",
+  "name": "Seawater reference for lunar wind-wave studies",
+  "water_density_kg_m3": 1025.0,
+  "basis": "The density already used by the SWAN strip, basin and coastal experiments; retained for their SWASH shoreline continuation.",
+  "reading_rule": "A prescribed seawater density for this calculation family. Sea composition, temperature and density variations require their own ocean model. Lunar gravity comes from shared/constants.json."
+}

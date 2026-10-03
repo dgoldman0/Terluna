@@ -28,7 +28,8 @@ TABLE_COLUMNS = ("time_s", "fetch_m", "hs_m", "peak_period_s", "mean_period_s", 
 
 
 def sha256(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+    with path.open("rb") as stream:
+        return hashlib.file_digest(stream, "sha256").hexdigest()
 
 
 @dataclass(frozen=True)

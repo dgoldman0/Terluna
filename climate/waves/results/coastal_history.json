@@ -1,0 +1,781 @@
+{
+  "schema": "terluna.climate.coastal-history/1",
+  "evidence": "A complete evolving coastal second cycle after a full cycle of spin-up at basin, regional and coastal scales.",
+  "reading_rule": "Occurrence describes this single simulated cycle. Threshold crossings use piecewise-linear histories. Coast-to-offshore onset differences combine propagation, local growth and direction changes; they require those qualifications when interpreted as arrival delays.",
+  "producer": {
+    "path": "climate/waves/coastal_history_checks.py",
+    "sha256": "bd34935da7c978d3cfb5e4466cd11a3c27236c900d14995acba63081982f43e8"
+  },
+  "case": {
+    "path": "research/runs/waves/shore_history/coast_s4_dt900_0_1419/product.json",
+    "sha256": "8988e262b9bee09bbef58f23161041e1193a59f7eed9873b40d5b2fe9a6f43df",
+    "stride": 4,
+    "step_s": 900
+  },
+  "arrays": {
+    "path": "research/runs/waves/shore_history/coast_s4_dt900_0_1419/analysis.npz",
+    "sha256": "5bf15fde3de177a9047447a00b90d5c35d24090f61d96cf3d58f28ee014538ef",
+    "station_columns": [
+      "time_s",
+      "longitude_deg",
+      "latitude_deg",
+      "hs_m",
+      "peak_period_s",
+      "mean_period_s",
+      "depth_m",
+      "direction_deg",
+      "breaking_fraction",
+      "transport_east_m3_s",
+      "transport_north_m3_s",
+      "breaking_loss_m2_s"
+    ],
+    "power_columns": [
+      "incoming_w_m",
+      "outgoing_w_m",
+      "net_vector_magnitude_w_m",
+      "eastward_w_m",
+      "northward_w_m",
+      "resolved_hs_m"
+    ]
+  },
+  "clock": {
+    "spinup_hours": [
+      0,
+      708.73416
+    ],
+    "report_hours": [
+      708.73416,
+      1417.46832
+    ],
+    "station_interval_hours": 0.25,
+    "spectrum_interval_hours": 1.0
+  },
+  "units": {
+    "height": "m",
+    "period": "s",
+    "time": "Earth hours from basin origin",
+    "power": "W per metre of contour"
+  },
+  "stations": {
+    "west_face": {
+      "longitude_latitude": [
+        93.251953125,
+        2.361328125
+      ],
+      "depth_m": 22.3817883,
+      "maximum_hs_m": 1.79661047,
+      "peak_hs_hour": 854.25,
+      "peak_hs_day_in_second_cycle": 6.063160000000001,
+      "mean_period_at_peak_s": 12.2390537,
+      "time_mean_hs_m": 0.6594977561219424,
+      "height_thresholds": {
+        "0.5": {
+          "hours": 385.82370503829225,
+          "fraction": 0.5443842371564146,
+          "longest_episode_hours": 126.30656209472909,
+          "episode_count": 5,
+          "intervals_hours": [
+            [
+              708.73416,
+              796.8461757336828
+            ],
+            [
+              801.652513300402,
+              921.0386636719858
+            ],
+            [
+              938.4999391681138,
+              1064.8065012628429
+            ],
+            [
+              1185.6388081505434,
+              1233.471652766549
+            ],
+            [
+              1254.1268898125695,
+              1258.3130220348605
+            ]
+          ],
+          "begins_above": true,
+          "ends_above": false
+        },
+        "1.0": {
+          "hours": 142.78235579199577,
+          "fraction": 0.201461089150826,
+          "longest_episode_hours": 68.15108119981517,
+          "episode_count": 4,
+          "intervals_hours": [
+            [
+              708.73416,
+              776.8852411998151
+            ],
+            [
+              834.9657894477258,
+              882.7468016815595
+            ],
+            [
+              976.6208641206534,
+              983.6510386357455
+            ],
+            [
+              1016.5706018158627,
+              1036.3906896591175
+            ]
+          ],
+          "begins_above": true,
+          "ends_above": false
+        },
+        "1.5": {
+          "hours": 50.96988472802195,
+          "fraction": 0.07191678855725249,
+          "longest_episode_hours": 28.0546190273933,
+          "episode_count": 3,
+          "intervals_hours": [
+            [
+              708.73416,
+              717.3945055012351
+            ],
+            [
+              740.2483738848797,
+              754.5032940842732
+            ],
+            [
+              845.5729047747925,
+              873.6275238021858
+            ]
+          ],
+          "begins_above": true,
+          "ends_above": false
+        },
+        "2.0": {
+          "hours": 0.0,
+          "fraction": 0.0,
+          "longest_episode_hours": 0.0,
+          "episode_count": 0,
+          "intervals_hours": [],
+          "begins_above": false,
+          "ends_above": false
+        }
+      },
+      "maximum_incoming_w_m": 546.458637200572,
+      "peak_incoming_hour": 855.0,
+      "selected_spectrum_hour": 855.0,
+      "mean_incoming_w_m": 91.62961272517084,
+      "incoming_energy_mj_m": 233.78773178123737,
+      "source_band_checks": {
+        "eligible_spectra": 709,
+        "high_edge_failures": 266,
+        "maximum_high_edge_fraction": 0.08700552280633721,
+        "failed_resolved_hs_range_m": [
+          0.15688200858710144,
+          0.7518166365166602
+        ],
+        "metre_scale_eligible_spectra": 143,
+        "metre_scale_high_edge_failures": 0
+      },
+      "power_thresholds": {
+        "10.0": {
+          "hours": 502.744255153915,
+          "fraction": 0.7093551906033639,
+          "longest_episode_hours": 368.6841888939871,
+          "episode_count": 5,
+          "intervals_hours": [
+            [
+              708.73416,
+              1077.418348893987
+            ],
+            [
+              1148.0925792292433,
+              1154.2945609394344
+            ],
+            [
+              1157.8255261781371,
+              1170.275187412994
+            ],
+            [
+              1179.5412321630465,
+              1265.8170064550927
+            ],
+            [
+              1286.6690178107333,
+              1315.801666833567
+            ]
+          ],
+          "begins_above": true,
+          "ends_above": false
+        },
+        "100.0": {
+          "hours": 221.92122395367755,
+          "fraction": 0.31312336342540276,
+          "longest_episode_hours": 77.9013196229713,
+          "episode_count": 4,
+          "intervals_hours": [
+            [
+              708.73416,
+              780.8598123477561
+            ],
+            [
+              834.4379744605002,
+              889.0664345228604
+            ],
+            [
+              975.7545219058971,
+              1053.6558415288685
+            ],
+            [
+              1196.5950775201209,
+              1213.8608694407108
+            ]
+          ],
+          "begins_above": true,
+          "ends_above": false
+        },
+        "300.0": {
+          "hours": 61.59526727122409,
+          "fraction": 0.08690884501915935,
+          "longest_episode_hours": 31.020875902516764,
+          "episode_count": 3,
+          "intervals_hours": [
+            [
+              708.73416,
+              719.9587422372724
+            ],
+            [
+              739.5679190961582,
+              758.9177282275931
+            ],
+            [
+              844.789872643726,
+              875.8107485462427
+            ]
+          ],
+          "begins_above": true,
+          "ends_above": false
+        }
+      },
+      "power_definition": "Incoming power across the local depth contour toward shallower water"
+    },
+    "east_face": {
+      "longitude_latitude": [
+        93.408203125,
+        2.330078125
+      ],
+      "depth_m": 49.0394669,
+      "maximum_hs_m": 0.968091011,
+      "peak_hs_hour": 1061.75,
+      "peak_hs_day_in_second_cycle": 14.708993333333334,
+      "mean_period_at_peak_s": 8.67567348,
+      "time_mean_hs_m": 0.3091389523764925,
+      "height_thresholds": {
+        "0.5": {
+          "hours": 77.6958086162806,
+          "fraction": 0.10962616591851676,
+          "longest_episode_hours": 49.77730425326581,
+          "episode_count": 3,
+          "intervals_hours": [
+            [
+              1049.179077626359,
+              1098.9563818796248
+            ],
+            [
+              1314.6995613635538,
+              1342.370404815432
+            ],
+            [
+              1417.2206590888634,
+              1417.46832
+            ]
+          ],
+          "begins_above": false,
+          "ends_above": true
+        },
+        "1.0": {
+          "hours": 0.0,
+          "fraction": 0.0,
+          "longest_episode_hours": 0.0,
+          "episode_count": 0,
+          "intervals_hours": [],
+          "begins_above": false,
+          "ends_above": false
+        },
+        "1.5": {
+          "hours": 0.0,
+          "fraction": 0.0,
+          "longest_episode_hours": 0.0,
+          "episode_count": 0,
+          "intervals_hours": [],
+          "begins_above": false,
+          "ends_above": false
+        },
+        "2.0": {
+          "hours": 0.0,
+          "fraction": 0.0,
+          "longest_episode_hours": 0.0,
+          "episode_count": 0,
+          "intervals_hours": [],
+          "begins_above": false,
+          "ends_above": false
+        }
+      },
+      "maximum_incoming_w_m": 93.00249892471268,
+      "peak_incoming_hour": 1061.0,
+      "selected_spectrum_hour": 1061.0,
+      "mean_incoming_w_m": 7.33580481994747,
+      "incoming_energy_mj_m": 18.716887681161918,
+      "source_band_checks": {
+        "eligible_spectra": 688,
+        "high_edge_failures": 553,
+        "maximum_high_edge_fraction": 0.1260768452689683,
+        "failed_resolved_hs_range_m": [
+          0.10068278522730499,
+          0.4709952304623286
+        ],
+        "metre_scale_eligible_spectra": 0,
+        "metre_scale_high_edge_failures": 0
+      },
+      "power_thresholds": {
+        "10.0": {
+          "hours": 108.57375962667288,
+          "fraction": 0.1531939135354685,
+          "longest_episode_hours": 72.34633721175032,
+          "episode_count": 4,
+          "intervals_hours": [
+            [
+              1047.9551084501124,
+              1120.3014456618628
+            ],
+            [
+              1298.6270960643908,
+              1299.1817639828862
+            ],
+            [
+              1312.1607749869088,
+              1347.466936071947
+            ],
+            [
+              1417.101726588611,
+              1417.46832
+            ]
+          ],
+          "begins_above": false,
+          "ends_above": true
+        },
+        "100.0": {
+          "hours": 0.0,
+          "fraction": 0.0,
+          "longest_episode_hours": 0.0,
+          "episode_count": 0,
+          "intervals_hours": [],
+          "begins_above": false,
+          "ends_above": false
+        },
+        "300.0": {
+          "hours": 0.0,
+          "fraction": 0.0,
+          "longest_episode_hours": 0.0,
+          "episode_count": 0,
+          "intervals_hours": [],
+          "begins_above": false,
+          "ends_above": false
+        }
+      },
+      "power_definition": "Incoming power across the local depth contour toward shallower water"
+    },
+    "southern_shore": {
+      "longitude_latitude": [
+        92.986328125,
+        1.830078125
+      ],
+      "depth_m": 13.5493546,
+      "maximum_hs_m": 1.53355384,
+      "peak_hs_hour": 853.75,
+      "peak_hs_day_in_second_cycle": 6.042326666666668,
+      "mean_period_at_peak_s": 12.4159002,
+      "time_mean_hs_m": 0.6174300227896367,
+      "height_thresholds": {
+        "0.5": {
+          "hours": 384.32803119992093,
+          "fraction": 0.54227389180722,
+          "longest_episode_hours": 118.94120761938757,
+          "episode_count": 8,
+          "intervals_hours": [
+            [
+              708.73416,
+              794.5035235656715
+            ],
+            [
+              801.8575485701484,
+              920.798756189536
+            ],
+            [
+              939.1265763450629,
+              964.7648745128253
+            ],
+            [
+              969.2152844862658,
+              1079.8417603822627
+            ],
+            [
+              1162.2647286269118,
+              1171.0723496720623
+            ],
+            [
+              1190.6713994296615,
+              1214.0398792102835
+            ],
+            [
+              1251.1730512442455,
+              1259.7537028770105
+            ],
+            [
+              1414.8723865074348,
+              1417.46832
+            ]
+          ],
+          "begins_above": true,
+          "ends_above": true
+        },
+        "1.0": {
+          "hours": 96.2677785187816,
+          "fraction": 0.13583058917151897,
+          "longest_episode_hours": 44.26634446165758,
+          "episode_count": 3,
+          "intervals_hours": [
+            [
+              708.73416,
+              722.7041086531308
+            ],
+            [
+              734.6138371181534,
+              772.6453225221466
+            ],
+            [
+              836.0645562940426,
+              880.3309007557002
+            ]
+          ],
+          "begins_above": true,
+          "ends_above": false
+        },
+        "1.5": {
+          "hours": 6.010906869692121,
+          "fraction": 0.008481186894804283,
+          "longest_episode_hours": 6.010906869692121,
+          "episode_count": 1,
+          "intervals_hours": [
+            [
+              850.8486298431267,
+              856.8595367128188
+            ]
+          ],
+          "begins_above": false,
+          "ends_above": false
+        },
+        "2.0": {
+          "hours": 0.0,
+          "fraction": 0.0,
+          "longest_episode_hours": 0.0,
+          "episode_count": 0,
+          "intervals_hours": [],
+          "begins_above": false,
+          "ends_above": false
+        }
+      },
+      "maximum_incoming_w_m": 243.4211267189926,
+      "peak_incoming_hour": 855.0,
+      "selected_spectrum_hour": 855.0,
+      "mean_incoming_w_m": 35.75555031792202,
+      "incoming_energy_mj_m": 91.2282477116767,
+      "source_band_checks": {
+        "eligible_spectra": 709,
+        "high_edge_failures": 214,
+        "maximum_high_edge_fraction": 0.045213277432081214,
+        "failed_resolved_hs_range_m": [
+          0.22931677664339362,
+          0.7120869650586495
+        ],
+        "metre_scale_eligible_spectra": 96,
+        "metre_scale_high_edge_failures": 0
+      },
+      "power_thresholds": {
+        "10.0": {
+          "hours": 580.0900405537606,
+          "fraction": 0.8184874855668881,
+          "longest_episode_hours": 222.3781649626393,
+          "episode_count": 5,
+          "intervals_hours": [
+            [
+              708.73416,
+              931.1123249626393
+            ],
+            [
+              938.2847559907586,
+              1090.1727342122483
+            ],
+            [
+              1132.1670598574601,
+              1207.1151618055899
+            ],
+            [
+              1221.0405485114306,
+              1273.7907665564862
+            ],
+            [
+              1339.3427426235537,
+              1417.46832
+            ]
+          ],
+          "begins_above": true,
+          "ends_above": true
+        },
+        "100.0": {
+          "hours": 55.75617039094311,
+          "fraction": 0.07867007622567976,
+          "longest_episode_hours": 40.80506070685885,
+          "episode_count": 3,
+          "intervals_hours": [
+            [
+              708.73416,
+              714.6625293084342
+            ],
+            [
+              740.6335352232244,
+              749.6562755988745
+            ],
+            [
+              839.8929592014596,
+              880.6980199083184
+            ]
+          ],
+          "begins_above": true,
+          "ends_above": false
+        },
+        "300.0": {
+          "hours": 0.0,
+          "fraction": 0.0,
+          "longest_episode_hours": 0.0,
+          "episode_count": 0,
+          "intervals_hours": [],
+          "begins_above": false,
+          "ends_above": false
+        }
+      },
+      "power_definition": "Incoming power across the local depth contour toward shallower water"
+    },
+    "offshore": {
+      "longitude_latitude": [
+        92.845703125,
+        2.345703125
+      ],
+      "depth_m": 1270.76587,
+      "maximum_hs_m": 1.95278192,
+      "peak_hs_hour": 853.75,
+      "peak_hs_day_in_second_cycle": 6.042326666666668,
+      "mean_period_at_peak_s": 12.5287418,
+      "time_mean_hs_m": 0.8638859473676894,
+      "height_thresholds": {
+        "0.5": {
+          "hours": 622.8225352294938,
+          "fraction": 0.8787815945396139,
+          "longest_episode_hours": 214.8455375494176,
+          "episode_count": 6,
+          "intervals_hours": [
+            [
+              708.73416,
+              923.5796975494176
+            ],
+            [
+              936.9227905168759,
+              1108.4484771346742
+            ],
+            [
+              1131.6006289220056,
+              1176.0628904679968
+            ],
+            [
+              1178.0765600125435,
+              1269.1672202579127
+            ],
+            [
+              1282.5801880905728,
+              1378.8241370603275
+            ],
+            [
+              1412.8138796988371,
+              1417.46832
+            ]
+          ],
+          "begins_above": true,
+          "ends_above": true
+        },
+        "1.0": {
+          "hours": 203.32264302626993,
+          "fraction": 0.2868813929136278,
+          "longest_episode_hours": 70.17333363703176,
+          "episode_count": 4,
+          "intervals_hours": [
+            [
+              708.73416,
+              778.9074936370317
+            ],
+            [
+              833.7242515710223,
+              884.6014425342095
+            ],
+            [
+              975.214419233292,
+              993.1262352075951
+            ],
+            [
+              1010.4730220532872,
+              1074.833324505035
+            ]
+          ],
+          "begins_above": true,
+          "ends_above": false
+        },
+        "1.5": {
+          "hours": 60.78997632526648,
+          "fraction": 0.08577260665023749,
+          "longest_episode_hours": 32.07804902164696,
+          "episode_count": 3,
+          "intervals_hours": [
+            [
+              708.73416,
+              718.8673171935376
+            ],
+            [
+              739.1184804636728,
+              757.6972505737547
+            ],
+            [
+              842.9301870981653,
+              875.0082361198123
+            ]
+          ],
+          "begins_above": true,
+          "ends_above": false
+        },
+        "2.0": {
+          "hours": 0.0,
+          "fraction": 0.0,
+          "longest_episode_hours": 0.0,
+          "episode_count": 0,
+          "intervals_hours": [],
+          "begins_above": false,
+          "ends_above": false
+        }
+      },
+      "maximum_incoming_w_m": 615.9142220203514,
+      "peak_incoming_hour": 855.0,
+      "selected_spectrum_hour": 855.0,
+      "mean_incoming_w_m": 113.83623474669182,
+      "incoming_energy_mj_m": 290.4466615587339,
+      "source_band_checks": {
+        "eligible_spectra": 709,
+        "high_edge_failures": 15,
+        "maximum_high_edge_fraction": 0.013411613833820979,
+        "failed_resolved_hs_range_m": [
+          0.39134168063785774,
+          0.4943849431921526
+        ],
+        "metre_scale_eligible_spectra": 203,
+        "metre_scale_high_edge_failures": 0
+      },
+      "power_thresholds": {
+        "10.0": {
+          "hours": 680.5930391851555,
+          "fraction": 0.9602938274982478,
+          "longest_episode_hours": 402.73569580149524,
+          "episode_count": 3,
+          "intervals_hours": [
+            [
+              708.73416,
+              1111.4698558014952
+            ],
+            [
+              1135.9637543136555,
+              1273.8161268226881
+            ],
+            [
+              1277.4633491253724,
+              1417.46832
+            ]
+          ],
+          "begins_above": true,
+          "ends_above": true
+        },
+        "100.0": {
+          "hours": 235.46514538387726,
+          "fraction": 0.3322333798386087,
+          "longest_episode_hours": 77.0075878641062,
+          "episode_count": 4,
+          "intervals_hours": [
+            [
+              708.73416,
+              781.3156649420815
+            ],
+            [
+              833.0725066233358,
+              890.4913449911903
+            ],
+            [
+              974.8177382582146,
+              1051.8253261223208
+            ],
+            [
+              1192.9992532377335,
+              1221.4564674475685
+            ]
+          ],
+          "begins_above": true,
+          "ends_above": false
+        },
+        "300.0": {
+          "hours": 81.29811760069072,
+          "fraction": 0.11470890241933691,
+          "longest_episode_hours": 33.92355564419813,
+          "episode_count": 4,
+          "intervals_hours": [
+            [
+              708.73416,
+              720.2176803539692
+            ],
+            [
+              739.0168655280185,
+              759.5677866181347
+            ],
+            [
+              842.7064035456153,
+              876.6299591898135
+            ],
+            [
+              1022.0182078100024,
+              1037.3583283224095
+            ]
+          ],
+          "begins_above": true,
+          "ends_above": false
+        }
+      },
+      "power_definition": "Net transport magnitude at offshore reference"
+    }
+  },
+  "maps": {
+    "sampling_hours": 6,
+    "reading_rule": "Spatial maps summarize six-hourly fields, with the final state supplying the reporting endpoint. Station histories have their separately stated sampling."
+  },
+  "spectral_checks": {
+    "maximum_transport_relative_error": 0.005515273626350083,
+    "transport_pass": true,
+    "high_edge_failure_fraction": 0.37229129662522203,
+    "maximum_high_edge_fraction": 0.1260768452689683
+  },
+  "limitations": [
+    "One simulated reporting cycle; variability across cycles and other seas remains open.",
+    "The 474 m propagation grid retains the local spatial limits measured in the shore study.",
+    "Temporal and spectral refinements accompany the record; weak waves retain their frequency-band question.",
+    "Currents, changing water levels, diffraction, reflection and sediment evolution are absent from this spectral history.",
+    "Lunar growth and dissipation parameterizations require physical calibration."
+  ]
+}

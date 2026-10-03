@@ -1,0 +1,1001 @@
+{
+  "schema": "terluna.climate.coastal-history-checks/1",
+  "evidence": "A selected-window timestep refinement with unchanged upstream forcing, and analytic propagation controls.",
+  "reading_rule": "A 24-hour adjustment after the restart precedes the selected comparison window. Other times and upstream refinements retain their stated limits.",
+  "producer": {
+    "path": "climate/waves/coastal_history_checks.py",
+    "sha256": "bd34935da7c978d3cfb5e4466cd11a3c27236c900d14995acba63081982f43e8"
+  },
+  "comparisons": [
+    {
+      "reference": "research/runs/waves/shore_history/coast_s4_dt900_0_1419/product.json",
+      "reference_sha256": "8988e262b9bee09bbef58f23161041e1193a59f7eed9873b40d5b2fe9a6f43df",
+      "test": "research/runs/waves/shore_history/coast_s4_dt450_816_1097/product.json",
+      "test_sha256": "4e981467ca4473a7a3c92dc1930d720da0d9d1ebf213a4f5e9f9b418dd0d5d3b",
+      "numerical_bounds": {
+        "hs_relative_p95": 0.05,
+        "hs_relative_max": 0.15,
+        "period_relative_p95": 0.05,
+        "flux_relative_p95": 0.1
+      },
+      "flux_definition": "Relative difference of the net east/north energy-transport vectors, with the refined vector as denominator.",
+      "interval_hours": [
+        840.0,
+        1097.0
+      ],
+      "stations": {
+        "west_face": {
+          "samples": 1029,
+          "hs_relative_p95": 0.012600924430276087,
+          "hs_relative_max": 0.03492276003446645,
+          "period_relative_p95": 0.028372125768279542,
+          "flux_relative_p95": 0.016436236293214074,
+          "paired_height_bands": {
+            "0.5": {
+              "samples": 828,
+              "hs_relative_p95": 0.009540652307561324,
+              "hs_relative_max": 0.03492276003446645,
+              "period_relative_p95": 0.04057982067566073,
+              "flux_relative_p95": 0.012625245462533869
+            },
+            "1.0": {
+              "samples": 278,
+              "hs_relative_p95": 0.006439465844371653,
+              "hs_relative_max": 0.006553733065067861,
+              "period_relative_p95": 0.016907723475486757,
+              "flux_relative_p95": 0.005762148124483203
+            }
+          },
+          "threshold_comparison": {
+            "0.5": {
+              "reference_hours": 207.34522576671486,
+              "test_hours": 207.0850151038171,
+              "duration_difference_hours": -0.2602106628977481,
+              "reference_intervals_hours": [
+                [
+                  840.0,
+                  921.0386636719858
+                ],
+                [
+                  938.4999391681138,
+                  1064.8065012628429
+                ]
+              ],
+              "test_intervals_hours": [
+                [
+                  840.0,
+                  920.9841736438374
+                ],
+                [
+                  938.5061759920455,
+                  1064.6070174520253
+                ]
+              ]
+            },
+            "1.0": {
+              "reference_hours": 69.5970640399064,
+              "test_hours": 69.26665936487984,
+              "duration_difference_hours": -0.330404675026557,
+              "reference_intervals_hours": [
+                [
+                  840.0,
+                  882.7468016815595
+                ],
+                [
+                  976.6208641206534,
+                  983.6510386357455
+                ],
+                [
+                  1016.5706018158627,
+                  1036.3906896591175
+                ]
+              ],
+              "test_intervals_hours": [
+                [
+                  840.0,
+                  882.7481895748401
+                ],
+                [
+                  976.6742497526053,
+                  983.6093209829121
+                ],
+                [
+                  1016.7372627197016,
+                  1036.3206612794345
+                ]
+              ]
+            }
+          },
+          "passed": true
+        },
+        "east_face": {
+          "samples": 953,
+          "hs_relative_p95": 0.04542710924875855,
+          "hs_relative_max": 0.1479794219495661,
+          "period_relative_p95": 0.023681774546432555,
+          "flux_relative_p95": 0.13828909954633353,
+          "paired_height_bands": {
+            "0.5": {
+              "samples": 192,
+              "hs_relative_p95": 0.03739520500032058,
+              "hs_relative_max": 0.047182386814549324,
+              "period_relative_p95": 0.012401972229601658,
+              "flux_relative_p95": 0.08122760036683385
+            },
+            "1.0": {
+              "samples": 0
+            }
+          },
+          "threshold_comparison": {
+            "0.5": {
+              "reference_hours": 47.820922373641,
+              "test_hours": 47.79137454486249,
+              "duration_difference_hours": -0.02954782877850448,
+              "reference_intervals_hours": [
+                [
+                  1049.179077626359,
+                  1097.0
+                ]
+              ],
+              "test_intervals_hours": [
+                [
+                  1049.2086254551375,
+                  1097.0
+                ]
+              ]
+            },
+            "1.0": {
+              "reference_hours": 0.0,
+              "test_hours": 0.0,
+              "duration_difference_hours": 0.0,
+              "reference_intervals_hours": [],
+              "test_intervals_hours": []
+            }
+          },
+          "passed": false
+        },
+        "southern_shore": {
+          "samples": 1029,
+          "hs_relative_p95": 0.01477243747585922,
+          "hs_relative_max": 0.030978151869778835,
+          "period_relative_p95": 0.03694866453593151,
+          "flux_relative_p95": 0.02679717821313597,
+          "paired_height_bands": {
+            "0.5": {
+              "samples": 867,
+              "hs_relative_p95": 0.011793252447555613,
+              "hs_relative_max": 0.030978151869778835,
+              "period_relative_p95": 0.035709848488690736,
+              "flux_relative_p95": 0.030337784250553404
+            },
+            "1.0": {
+              "samples": 162,
+              "hs_relative_p95": 0.004404108445123243,
+              "hs_relative_max": 0.00524715402087247,
+              "period_relative_p95": 0.0066776796741421255,
+              "flux_relative_p95": 0.0046616188482746825
+            }
+          },
+          "threshold_comparison": {
+            "0.5": {
+              "reference_hours": 217.0635302532953,
+              "test_hours": 217.2876525425139,
+              "duration_difference_hours": 0.22412228921859878,
+              "reference_intervals_hours": [
+                [
+                  840.0,
+                  920.798756189536
+                ],
+                [
+                  939.1265763450629,
+                  964.7648745128253
+                ],
+                [
+                  969.2152844862658,
+                  1079.8417603822627
+                ]
+              ],
+              "test_intervals_hours": [
+                [
+                  840.0,
+                  920.7260925927416
+                ],
+                [
+                  939.1254549205024,
+                  964.7662314729497
+                ],
+                [
+                  968.5780746452858,
+                  1079.498858042611
+                ]
+              ]
+            },
+            "1.0": {
+              "reference_hours": 40.33090075570021,
+              "test_hours": 40.335201929672735,
+              "duration_difference_hours": 0.00430117397252161,
+              "reference_intervals_hours": [
+                [
+                  840.0,
+                  880.3309007557002
+                ]
+              ],
+              "test_intervals_hours": [
+                [
+                  840.0,
+                  880.3352019296727
+                ]
+              ]
+            }
+          },
+          "passed": true
+        },
+        "offshore": {
+          "samples": 1029,
+          "hs_relative_p95": 0.014678842672410031,
+          "hs_relative_max": 0.04532786540330053,
+          "period_relative_p95": 0.017431639149526838,
+          "flux_relative_p95": 0.03256579569534852,
+          "paired_height_bands": {
+            "0.5": {
+              "samples": 976,
+              "hs_relative_p95": 0.015385133055404256,
+              "hs_relative_max": 0.04532786540330053,
+              "period_relative_p95": 0.01894225974301924,
+              "flux_relative_p95": 0.033077165334278937
+            },
+            "1.0": {
+              "samples": 508,
+              "hs_relative_p95": 0.02033603913960263,
+              "hs_relative_max": 0.04532786540330053,
+              "period_relative_p95": 0.01716887322365723,
+              "flux_relative_p95": 0.0791853975349273
+            }
+          },
+          "threshold_comparison": {
+            "0.5": {
+              "reference_hours": 243.65690703254165,
+              "test_hours": 243.6134120086815,
+              "duration_difference_hours": -0.04349502386014592,
+              "reference_intervals_hours": [
+                [
+                  840.0,
+                  923.5796975494176
+                ],
+                [
+                  936.9227905168759,
+                  1097.0
+                ]
+              ],
+              "test_intervals_hours": [
+                [
+                  840.0,
+                  923.5201219312322
+                ],
+                [
+                  936.9067099225507,
+                  1097.0
+                ]
+              ]
+            },
+            "1.0": {
+              "reference_hours": 126.87356096026042,
+              "test_hours": 126.86187736681393,
+              "duration_difference_hours": -0.011683593446491614,
+              "reference_intervals_hours": [
+                [
+                  840.0,
+                  884.6014425342095
+                ],
+                [
+                  975.214419233292,
+                  993.1262352075951
+                ],
+                [
+                  1010.4730220532872,
+                  1074.833324505035
+                ]
+              ],
+              "test_intervals_hours": [
+                [
+                  840.0,
+                  884.6002018127617
+                ],
+                [
+                  975.2242462663751,
+                  993.1272845736536
+                ],
+                [
+                  1010.303104457633,
+                  1074.6617417044067
+                ]
+              ]
+            }
+          },
+          "passed": true
+        }
+      },
+      "all_stations_pass": false
+    },
+    {
+      "reference": "research/runs/waves/shore_history/coast_s4_dt900_0_1419/product.json",
+      "reference_sha256": "8988e262b9bee09bbef58f23161041e1193a59f7eed9873b40d5b2fe9a6f43df",
+      "test": "research/runs/waves/shore_history/coast_s4_dt450_696_912/product.json",
+      "test_sha256": "d81525bf9a343e2eca9382a7692c0b745aad2118715ef4df3168a5e0631ab02c",
+      "numerical_bounds": {
+        "hs_relative_p95": 0.05,
+        "hs_relative_max": 0.15,
+        "period_relative_p95": 0.05,
+        "flux_relative_p95": 0.1
+      },
+      "flux_definition": "Relative difference of the net east/north energy-transport vectors, with the refined vector as denominator.",
+      "interval_hours": [
+        720.0,
+        912.0
+      ],
+      "stations": {
+        "west_face": {
+          "samples": 769,
+          "hs_relative_p95": 0.0038616030211702543,
+          "hs_relative_max": 0.007666038133530973,
+          "period_relative_p95": 0.007796726789299653,
+          "flux_relative_p95": 0.006125827535048492,
+          "paired_height_bands": {
+            "0.5": {
+              "samples": 750,
+              "hs_relative_p95": 0.003931893992100282,
+              "hs_relative_max": 0.007666038133530973,
+              "period_relative_p95": 0.007053005679192494,
+              "flux_relative_p95": 0.0061963356123471225
+            },
+            "1.0": {
+              "samples": 418,
+              "hs_relative_p95": 0.0032846459359361377,
+              "hs_relative_max": 0.0038824378596120338,
+              "period_relative_p95": 0.005079815098061377,
+              "flux_relative_p95": 0.004716731677353735
+            }
+          },
+          "threshold_comparison": {
+            "0.5": {
+              "reference_hours": 187.1936624332808,
+              "test_hours": 187.1756281607752,
+              "duration_difference_hours": -0.018034272505587978,
+              "reference_intervals_hours": [
+                [
+                  720.0,
+                  796.8461757336828
+                ],
+                [
+                  801.652513300402,
+                  912.0
+                ]
+              ],
+              "test_intervals_hours": [
+                [
+                  720.0,
+                  796.8934626195982
+                ],
+                [
+                  801.717834458823,
+                  912.0
+                ]
+              ]
+            },
+            "1.0": {
+              "reference_hours": 104.66625343364888,
+              "test_hours": 104.53002311827015,
+              "duration_difference_hours": -0.1362303153787252,
+              "reference_intervals_hours": [
+                [
+                  720.0,
+                  776.8852411998151
+                ],
+                [
+                  834.9657894477258,
+                  882.7468016815595
+                ]
+              ],
+              "test_intervals_hours": [
+                [
+                  720.0,
+                  776.7908973548876
+                ],
+                [
+                  835.0090653001912,
+                  882.7481910635737
+                ]
+              ]
+            }
+          },
+          "passed": true
+        },
+        "east_face": {
+          "samples": 769,
+          "hs_relative_p95": 0.0188246065832131,
+          "hs_relative_max": 0.06653207928124119,
+          "period_relative_p95": 0.013840458330292045,
+          "flux_relative_p95": 0.029832979404343596,
+          "paired_height_bands": {
+            "0.5": {
+              "samples": 0
+            },
+            "1.0": {
+              "samples": 0
+            }
+          },
+          "threshold_comparison": {
+            "0.5": {
+              "reference_hours": 0.0,
+              "test_hours": 0.0,
+              "duration_difference_hours": 0.0,
+              "reference_intervals_hours": [],
+              "test_intervals_hours": []
+            },
+            "1.0": {
+              "reference_hours": 0.0,
+              "test_hours": 0.0,
+              "duration_difference_hours": 0.0,
+              "reference_intervals_hours": [],
+              "test_intervals_hours": []
+            }
+          },
+          "passed": true
+        },
+        "southern_shore": {
+          "samples": 769,
+          "hs_relative_p95": 0.0051041992799551105,
+          "hs_relative_max": 0.014021322457655788,
+          "period_relative_p95": 0.009133020856150855,
+          "flux_relative_p95": 0.006346456040961121,
+          "paired_height_bands": {
+            "0.5": {
+              "samples": 739,
+              "hs_relative_p95": 0.004713666317537462,
+              "hs_relative_max": 0.00966336358684803,
+              "period_relative_p95": 0.008362342996065274,
+              "flux_relative_p95": 0.006198174066107658
+            },
+            "1.0": {
+              "samples": 340,
+              "hs_relative_p95": 0.004195333503816981,
+              "hs_relative_max": 0.005222418818232327,
+              "period_relative_p95": 0.006804602939196495,
+              "flux_relative_p95": 0.0046267783575619495
+            }
+          },
+          "threshold_comparison": {
+            "0.5": {
+              "reference_hours": 184.64597499552303,
+              "test_hours": 184.58158600107868,
+              "duration_difference_hours": -0.0643889944443572,
+              "reference_intervals_hours": [
+                [
+                  720.0,
+                  794.5035235656715
+                ],
+                [
+                  801.8575485701484,
+                  912.0
+                ]
+              ],
+              "test_intervals_hours": [
+                [
+                  720.0,
+                  794.4969547700018
+                ],
+                [
+                  801.9153687689231,
+                  912.0
+                ]
+              ]
+            },
+            "1.0": {
+              "reference_hours": 85.00193851878157,
+              "test_hours": 84.83176457196976,
+              "duration_difference_hours": -0.17017394681181486,
+              "reference_intervals_hours": [
+                [
+                  720.0,
+                  722.7041086531308
+                ],
+                [
+                  734.6138371181534,
+                  772.6453225221466
+                ],
+                [
+                  836.0645562940426,
+                  880.3309007557002
+                ]
+              ],
+              "test_intervals_hours": [
+                [
+                  720.0,
+                  722.6397913139144
+                ],
+                [
+                  734.5594468591125,
+                  772.5674695192479
+                ],
+                [
+                  836.1512513317527,
+                  880.3352019296727
+                ]
+              ]
+            }
+          },
+          "passed": true
+        },
+        "offshore": {
+          "samples": 769,
+          "hs_relative_p95": 0.003377166593547274,
+          "hs_relative_max": 0.0055171384237807895,
+          "period_relative_p95": 0.008571319184308654,
+          "flux_relative_p95": 0.00344853988809351,
+          "paired_height_bands": {
+            "0.5": {
+              "samples": 769,
+              "hs_relative_p95": 0.003377166593547274,
+              "hs_relative_max": 0.0055171384237807895,
+              "period_relative_p95": 0.008571319184308654,
+              "flux_relative_p95": 0.00344853988809351
+            },
+            "1.0": {
+              "samples": 440,
+              "hs_relative_p95": 0.0022558189630603226,
+              "hs_relative_max": 0.0029337750531232953,
+              "period_relative_p95": 0.004714532552159218,
+              "flux_relative_p95": 0.0025976720450788904
+            }
+          },
+          "threshold_comparison": {
+            "0.5": {
+              "reference_hours": 192.0,
+              "test_hours": 192.0,
+              "duration_difference_hours": 0.0,
+              "reference_intervals_hours": [
+                [
+                  720.0,
+                  912.0
+                ]
+              ],
+              "test_intervals_hours": [
+                [
+                  720.0,
+                  912.0
+                ]
+              ]
+            },
+            "1.0": {
+              "reference_hours": 109.78468460021895,
+              "test_hours": 109.78384184835454,
+              "duration_difference_hours": -0.0008427518644111842,
+              "reference_intervals_hours": [
+                [
+                  720.0,
+                  778.9074936370317
+                ],
+                [
+                  833.7242515710223,
+                  884.6014425342095
+                ]
+              ],
+              "test_intervals_hours": [
+                [
+                  720.0,
+                  778.9156956100567
+                ],
+                [
+                  833.7320555744639,
+                  884.6002018127617
+                ]
+              ]
+            }
+          },
+          "passed": true
+        }
+      },
+      "all_stations_pass": true
+    }
+  ],
+  "pulse_control": {
+    "path": "research/runs/waves/shore_history/timing_controls/controls.json",
+    "sha256": "ed6ca4e015ec4dc1262b6e3f70b1855acc8bbe4e51c4b1507bcdf8f44b2fc349",
+    "record": {
+      "schema": "terluna.climate.coastal-timing-controls/1",
+      "cases": {
+        "900": {
+          "step_s": 900,
+          "frequency_hz": 0.08835784856963316,
+          "group_speed_eastward_m_s": 1.4572490566564285,
+          "x_m": [
+            0.0,
+            2000.0,
+            5000.0,
+            8000.0
+          ],
+          "analytic_delay_hours": [
+            0.0,
+            0.3812358313205876,
+            0.953089578301469,
+            1.5249433252823503
+          ],
+          "measured_delay_hours": [
+            0.0,
+            0.3813027592455045,
+            0.9531566248174155,
+            1.5250104281030312
+          ],
+          "delay_error_hours": [
+            0.0,
+            6.692792491691524e-05,
+            6.704651594646727e-05,
+            6.710282068089768e-05
+          ],
+          "maximum_delay_error_minutes": 0.004026169240853861,
+          "half_peak_rise_error_minutes": [
+            0.0,
+            -3.130041634497591,
+            -7.078960245153039,
+            -10.98817264538238
+          ],
+          "pulse_height_ratio": [
+            1.0,
+            0.9863653771819226,
+            0.9706985942419156,
+            0.9555882193352931
+          ],
+          "passed": true,
+          "run": {
+            "schema": "terluna.climate.swan-pilot-run/1",
+            "identity": {
+              "executable_sha256": "8883fc9eca573573cda0be4d6f3e9719f276b78364f29a583f24247659734875",
+              "inputs": {
+                "INPUT": "01781297fccb457d44ca7d75866576fd672984b2799b2e4583a68a75f91dd08c",
+                "depth.bot": "b58139719b50c0ffc85e1301b1e1f8d30c902eb21738a1f40705a74c172fa2de",
+                "pulse.spc": "a9071440a946c21510ac592ca647a9b2a6e19791c362e2dd5b56827c149358c1"
+              }
+            },
+            "producer_sha256": "9d09daedb49f65ea8c482c2b57a2db8edebbbda0f70b594e3ab8f72c20ba38b6",
+            "elapsed_wall_s": 0.9228345080045983,
+            "threads": 1,
+            "address_space_limit_bytes": 2147483648,
+            "cpu_limit_s": 300,
+            "warnings": [
+              "** Warning          : Limiter is de-activated in case of no quadruplets",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary"
+            ],
+            "output_sha256": {
+              "pulse.tbl": "e37893ac5d522149bc4a22723db5365ec23c1a64d20a1c646a34d5e368c17f3f",
+              "PRINT": "dbfe14a7edbf63f22b0579d5d7c45aa80b02377203f907bf2f95e3f1fcb85ca5",
+              "norm_end": "100f0bb219742b03e57aa3a429956d6993d16b1bd4f64ee3e6de102ef8d89fb1"
+            }
+          }
+        },
+        "450": {
+          "step_s": 450,
+          "frequency_hz": 0.08835784856963316,
+          "group_speed_eastward_m_s": 1.4572490566564285,
+          "x_m": [
+            0.0,
+            2000.0,
+            5000.0,
+            8000.0
+          ],
+          "analytic_delay_hours": [
+            0.0,
+            0.3812358313205876,
+            0.953089578301469,
+            1.5249433252823503
+          ],
+          "measured_delay_hours": [
+            0.0,
+            0.38127044299220625,
+            0.9531238826028554,
+            1.5249777391992305
+          ],
+          "delay_error_hours": [
+            0.0,
+            3.4611671618667295e-05,
+            3.430430138640084e-05,
+            3.4413916880193796e-05
+          ],
+          "maximum_delay_error_minutes": 0.0020767002971200377,
+          "half_peak_rise_error_minutes": [
+            0.0,
+            -2.1006801633261962,
+            -4.301334108450772,
+            -6.588224848288435
+          ],
+          "pulse_height_ratio": [
+            1.0,
+            0.9904519914271195,
+            0.9815235128914107,
+            0.972096084325765
+          ],
+          "passed": true,
+          "run": {
+            "schema": "terluna.climate.swan-pilot-run/1",
+            "identity": {
+              "executable_sha256": "8883fc9eca573573cda0be4d6f3e9719f276b78364f29a583f24247659734875",
+              "inputs": {
+                "INPUT": "1f8a1b320fc98ead293b1e9fe8db387da9184c2f396c07d4a6db3552b3492d74",
+                "depth.bot": "b58139719b50c0ffc85e1301b1e1f8d30c902eb21738a1f40705a74c172fa2de",
+                "pulse.spc": "a9071440a946c21510ac592ca647a9b2a6e19791c362e2dd5b56827c149358c1"
+              }
+            },
+            "producer_sha256": "9d09daedb49f65ea8c482c2b57a2db8edebbbda0f70b594e3ab8f72c20ba38b6",
+            "elapsed_wall_s": 1.6206597090058494,
+            "threads": 1,
+            "address_space_limit_bytes": 2147483648,
+            "cpu_limit_s": 300,
+            "warnings": [
+              "** Warning          : Limiter is de-activated in case of no quadruplets",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary"
+            ],
+            "output_sha256": {
+              "pulse.tbl": "0997d3b508fdf9d8a4f07ec06646c78d5d79a8b158726f5a2e4b73926f7496fe",
+              "PRINT": "268453dae5cb87eb01ca87d78830351a70ca9e27bbe8ca9a14d72d45223c81ed",
+              "norm_end": "100f0bb219742b03e57aa3a429956d6993d16b1bd4f64ee3e6de102ef8d89fb1"
+            }
+          }
+        },
+        "150": {
+          "step_s": 150,
+          "frequency_hz": 0.08835784856963316,
+          "group_speed_eastward_m_s": 1.4572490566564285,
+          "x_m": [
+            0.0,
+            2000.0,
+            5000.0,
+            8000.0
+          ],
+          "analytic_delay_hours": [
+            0.0,
+            0.3812358313205876,
+            0.953089578301469,
+            1.5249433252823503
+          ],
+          "measured_delay_hours": [
+            0.0,
+            0.3812475760742968,
+            0.953101627905439,
+            1.5249553650404764
+          ],
+          "delay_error_hours": [
+            0.0,
+            1.1744753709241884e-05,
+            1.204960396994359e-05,
+            1.2039758126025646e-05
+          ],
+          "maximum_delay_error_minutes": 0.0007229762381966154,
+          "half_peak_rise_error_minutes": [
+            0.0,
+            -1.3629497642435884,
+            -2.403110309565517,
+            -3.5544853999416492
+          ],
+          "pulse_height_ratio": [
+            1.0,
+            0.993606149616369,
+            0.9894554613673276,
+            0.9843642110618527
+          ],
+          "passed": true,
+          "run": {
+            "schema": "terluna.climate.swan-pilot-run/1",
+            "identity": {
+              "executable_sha256": "8883fc9eca573573cda0be4d6f3e9719f276b78364f29a583f24247659734875",
+              "inputs": {
+                "INPUT": "2814a55e469c308ba0c6ddc2a2beca0a2746ce42afc8decdf6560dce8c0333c2",
+                "depth.bot": "b58139719b50c0ffc85e1301b1e1f8d30c902eb21738a1f40705a74c172fa2de",
+                "pulse.spc": "a9071440a946c21510ac592ca647a9b2a6e19791c362e2dd5b56827c149358c1"
+              }
+            },
+            "producer_sha256": "9d09daedb49f65ea8c482c2b57a2db8edebbbda0f70b594e3ab8f72c20ba38b6",
+            "elapsed_wall_s": 4.883112159004668,
+            "threads": 1,
+            "address_space_limit_bytes": 2147483648,
+            "cpu_limit_s": 300,
+            "warnings": [
+              "** Warning          : Limiter is de-activated in case of no quadruplets",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary",
+              "** WARNING : Differences in wave height at the boundary"
+            ],
+            "output_sha256": {
+              "pulse.tbl": "6dd50f3d0d6a759d324667225e2dbf04779c0be77464482e88b7b8ffb5e272ce",
+              "PRINT": "ae50cbe4f9f1e695d4ebc22485dead27fdc334f1e6afc4a06991575001e24c7c",
+              "norm_end": "100f0bb219742b03e57aa3a429956d6993d16b1bd4f64ee3e6de102ef8d89fb1"
+            }
+          }
+        }
+      },
+      "producer_sha256": "ffd71994c2f28a208a3443628b73a92fdcab0fb0f4d850a83f2b8c5ff4598ec9",
+      "evidence": "A linear narrowband pulse in a flat lunar flume, checked against analytic group velocity.",
+      "reading_rule": "Centroids measure travel delay; peak-height reduction records numerical spreading. Real coastal event onsets also depend on local growth and changing direction."
+    }
+  }
+}
