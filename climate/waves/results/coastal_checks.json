@@ -1,0 +1,135 @@
+{
+  "schema": "terluna.climate.coastal-resolution-checks/1",
+  "evidence": "Output integrity and numerical resolution diagnostics for the conditional eastern Smythii experiment.",
+  "reading_rule": "Boundary spectra retain dry parent locations as NODATA. Wet child locations at those points receive zero incident energy through SWAN's nesting interpolation. The western boundary carries the imposed eastward wind sea. Kilometre terrain leaves most of the narrow surf zone between nodes.",
+  "producer": {
+    "domain": "climate",
+    "path": "climate/waves/coastal_checks.py",
+    "sha256": "5b98e68052cdbb2bb37015d45b4e27f0cf89cf1f85153ba5a369d100fd7572d6"
+  },
+  "inputs": {
+    "coastal_sha256": "5f838587e2f397364e8a78be46f8c33ea6191021a4abf7c0b8779bb57731d432"
+  },
+  "units": {
+    "heights_and_depths": "m",
+    "locations": "degrees east and north",
+    "variance_fractions": "dimensionless"
+  },
+  "boundary": {
+    "snapshots": 49,
+    "locations": 32,
+    "frequencies": 49,
+    "directions": 36,
+    "wet_child_locations_with_parent_nodata": [
+      [
+        93.03125,
+        -1.03125
+      ]
+    ],
+    "western_wet_locations_with_parent_nodata": 0,
+    "variance_nonnegative": true,
+    "final_resolved_hs_range_m": [
+      1.1844712162783027,
+      1.2220686304566528
+    ],
+    "maximum_final_low_two_interval_variance_fraction": 0.0,
+    "maximum_final_high_two_interval_variance_fraction": 0.00019428929182221662,
+    "final_spectral_edges_pass": true,
+    "spectral_reading_rule": "Resolved printed variance integrated over direction and frequency at final wet locations with Hs >= 0.1 m. SWAN's bulk Hs also includes its diagnostic high-frequency tail."
+  },
+  "parent_matches_prior_half_degree_table": true,
+  "cases": {
+    "coast_s4_d36": {
+      "wet_nodes": 202,
+      "minimum_depth_m": 7.45255041,
+      "nodes_shallower_than_ten_m": 1,
+      "nodes_with_one_percent_breaking": 0,
+      "maximum_final_hs_m": 1.22263014
+    },
+    "coast_s2_d36": {
+      "wet_nodes": 776,
+      "minimum_depth_m": 2.70700383,
+      "nodes_shallower_than_ten_m": 5,
+      "nodes_with_one_percent_breaking": 0,
+      "maximum_final_hs_m": 1.22287273
+    },
+    "coast_s1_d36": {
+      "wet_nodes": 2994,
+      "minimum_depth_m": 0.199022293,
+      "nodes_shallower_than_ten_m": 11,
+      "nodes_with_one_percent_breaking": 1,
+      "maximum_final_hs_m": 1.22307217
+    },
+    "coast_s2_d72": {
+      "wet_nodes": 776,
+      "minimum_depth_m": 2.70700383,
+      "nodes_shallower_than_ten_m": 5,
+      "nodes_with_one_percent_breaking": 0,
+      "maximum_final_hs_m": 1.22715592
+    }
+  },
+  "maximum_height_difference_locations": {
+    "coast_s4_d36_to_coast_s2_d36": {
+      "longitude_deg": 93.53125,
+      "latitude_deg": 1.71875,
+      "depth_m": 186.086639,
+      "coarse_hs_m": 0.674848616,
+      "refined_hs_m": 0.805528462
+    },
+    "coast_s2_d36_to_coast_s1_d36": {
+      "longitude_deg": 93.40625,
+      "latitude_deg": 2.34375,
+      "depth_m": 48.3169899,
+      "coarse_hs_m": 1.15011966,
+      "refined_hs_m": 0.527554274
+    },
+    "coast_s2_d36_to_coast_s2_d72": {
+      "longitude_deg": 94.03125,
+      "latitude_deg": 1.71875,
+      "depth_m": 44.8909912,
+      "coarse_hs_m": 0.915072441,
+      "refined_hs_m": 0.920354486
+    }
+  },
+  "resolution": {
+    "coast_s4_d36_to_coast_s2_d36": {
+      "matched_interior_nodes": 128,
+      "boundary_buffer_coarse_cells": 2,
+      "minimum_hs_m": 0.1,
+      "relative_denominator": "refined run",
+      "hs_relative_max": 0.16222871340330114,
+      "hs_relative_p95": 0.02880310119731914,
+      "hs_absolute_max": 0.13067984599999993,
+      "tm01_relative_max": 0.09488375893337919,
+      "tm01_relative_p95": 0.022090667082165377,
+      "tm01_absolute_max": 0.7091422099999996,
+      "within_five_percent": false
+    },
+    "coast_s2_d36_to_coast_s1_d36": {
+      "matched_interior_nodes": 623,
+      "boundary_buffer_coarse_cells": 2,
+      "minimum_hs_m": 0.1,
+      "relative_denominator": "refined run",
+      "hs_relative_max": 1.1800973220814055,
+      "hs_relative_p95": 0.07502972146979257,
+      "hs_absolute_max": 0.6225653860000001,
+      "tm01_relative_max": 0.6734475470106827,
+      "tm01_relative_p95": 0.04879473151615758,
+      "tm01_absolute_max": 3.8314332899999997,
+      "within_five_percent": false
+    },
+    "coast_s2_d36_to_coast_s2_d72": {
+      "matched_interior_nodes": 623,
+      "boundary_buffer_coarse_cells": 2,
+      "minimum_hs_m": 0.1,
+      "relative_denominator": "refined run",
+      "hs_relative_max": 0.0057391419071108896,
+      "hs_relative_p95": 0.004507063274760026,
+      "hs_absolute_max": 0.005722409999999956,
+      "tm01_relative_max": 0.0031215170347526078,
+      "tm01_relative_p95": 0.002548359542302858,
+      "tm01_absolute_max": 0.027559280000000186,
+      "within_five_percent": true
+    }
+  }
+}

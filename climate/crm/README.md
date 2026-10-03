@@ -7,6 +7,11 @@ its own clouds and rain, at lunar gravity. It shows the weather people would mee
 through the month-long day: storms, rain, cloud, winds from the ground to the
 flight band, and the air near the ground by day and by night.
 
+[wave_coverage.py](wave_coverage.py) exports geographic 10 m wind vectors and
+surface density from the three corrected rings, preserving their three-hourly
+histories and independent realisations. The [coastal-wave study](../waves/coastal.md)
+records their spatial coverage and the remaining basin forcing requirements.
+
 ## How CM1 is set up for the Moon
 
 [cm1_run.py](cm1_run.py) downloads CM1 at a pinned hash, patches a fresh copy of

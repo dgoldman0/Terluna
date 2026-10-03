@@ -17,6 +17,11 @@ The follow-up below adds recovered equatorial wind vectors and surface density,
 early-growth refinement, a two-dimensional Smythii–Marginis pilot and simple
 coastal slopes. The original strip calculation and its outputs are retained.
 
+The [coastal-resolution follow-up](coastal.md) nests eastern Smythii at
+7.6, 3.8 and 1.9 km spacing and checks directional refinement. It also recovers
+all three corrected CM1 ring histories and ten GCM years of regional wind
+means, with each product's height and sampling interval retained.
+
 ## Findings from the first run
 
 At 100 km fetch after 48 hours of the imposed wind, the modified build gives:
@@ -311,14 +316,16 @@ first experiment's check record and from the numerical audit.
 
 ## Next sea calculations
 
-The atlas grid and equatorial wind vectors are recovered, and the bounded
-basin and idealised slopes now have runners. Use the numerical audit to choose
-the next basin grid and a coast to refine. A basin-wide wind history, short
-transients, directional resolution on geographic grids and physical lunar
-wind input and breaking remain open. Local CM1 boxes become useful if a basin
-needs unresolved gust fronts, coastal flow or storm winds. An individual-wave
-SWASH calculation needs its own source/gravity audit, resolved coastal geometry
-and input-spectrum checks before any run-up or breaking-crest claim.
+The [coastal follow-up](coastal.md) adds native 16-pixel/degree terrain and
+full directional nesting, alongside geographic winds from three CM1 rings and
+regional GCM means. Use its numerical comparisons to choose smaller coastal
+areas and finer cross-shore profiles. A basin-wide history of hourly or
+three-hourly surface winds requires a dedicated atmospheric output run.
+Short wind transients, parent directional resolution, and physical lunar wind
+input and breaking remain open. Local CM1 boxes can address identified gaps
+in gust fronts, coastal flow or storm winds. An individual-wave SWASH
+calculation needs a source/gravity audit, resolved coastal geometry and
+input-spectrum checks before interpreting run-up or breaking crests.
 
 Temperature gradients, mixing and light penetration need their own ocean
 calculations. Start with vertical heat/mixing and spectral underwater-light

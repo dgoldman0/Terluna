@@ -1,0 +1,228 @@
+{
+  "schema": "terluna.climate.gcm-regional-wind-context/1",
+  "evidence": "Saved means from the settled A28_dim5_moon GCM at its lowest model level. These fields describe circulation across the Smythii\u2013Marginis region.",
+  "reading_rule": "Each vector averages the preceding 143 model steps (71.5 Earth hours), on the native T21 Gaussian grid, at sigma 0.9833. Heights follow terrain and atmospheric thickness. Direct SWAN forcing requires 10 m vectors with finer temporal sampling. Timestamp values preserve the model's saved step convention; years index the archived files.",
+  "units": {
+    "time_s": "model seconds",
+    "longitude_deg": "degrees east",
+    "latitude_deg": "degrees north",
+    "eastward_m_s": "m/s",
+    "northward_m_s": "m/s"
+  },
+  "producer": {
+    "domain": "climate",
+    "files": {
+      "climate/gcm/wave_coverage.py": "0bf38159ae3c3981a20e78169e3ed0634bc650abb43f630a7fba5dadd84f3db3",
+      "climate/gcm/exoplasim_run.py": "18d56982653ceff27adabc12b5c50068c3a688b38f809765f9629466d436aaa6"
+    }
+  },
+  "inputs": {
+    "progress_sha256": "d287252f152cb52f5b9f07f35f1e51fca87bddab6226fd960a1c35bdfc31be6d",
+    "namelist_sha256": "ebe3cc08315417f17df7cc8865e2dc5aac683fec8808b697b62f4d5fc3e78241",
+    "files": [
+      {
+        "path": "climate/gcm/runs/A28_dim5_moon/model/MOST.00020.nc",
+        "sha256": "bbeed3420f4a58f77d39cfb23cf9da90fc55bded3d1117fd48f740136915a480",
+        "year": 20,
+        "sigma": 0.9833002090454102,
+        "near_surface_variable_names": []
+      },
+      {
+        "path": "climate/gcm/runs/A28_dim5_moon/model/MOST.00021.nc",
+        "sha256": "b6f830c4c54ae2a7bec27f7e42511ff54433840fab03f7d3f37d80da23470b6a",
+        "year": 21,
+        "sigma": 0.9833002090454102,
+        "near_surface_variable_names": []
+      },
+      {
+        "path": "climate/gcm/runs/A28_dim5_moon/model/MOST.00022.nc",
+        "sha256": "0ae90b2451546663f33121c96470d4a9ccdfcac9f6f9d7a3e545c35c43fc1404",
+        "year": 22,
+        "sigma": 0.9833002090454102,
+        "near_surface_variable_names": []
+      },
+      {
+        "path": "climate/gcm/runs/A28_dim5_moon/model/MOST.00023.nc",
+        "sha256": "bf5af81306d22099ed49bcab4e7f1b757b64f929478af1af25a478cd64431426",
+        "year": 23,
+        "sigma": 0.9833002090454102,
+        "near_surface_variable_names": []
+      },
+      {
+        "path": "climate/gcm/runs/A28_dim5_moon/model/MOST.00024.nc",
+        "sha256": "c1f46da8ff09eb0f52e0de1f53b221220d48abe5594345157802b12cc33dae77",
+        "year": 24,
+        "sigma": 0.9833002090454102,
+        "near_surface_variable_names": []
+      },
+      {
+        "path": "climate/gcm/runs/A28_dim5_moon/model/MOST.00025.nc",
+        "sha256": "f53383a1c75d092575cdaf224ec60d2e617745857a6a8f9ca292725dab46559f",
+        "year": 25,
+        "sigma": 0.9833002090454102,
+        "near_surface_variable_names": []
+      },
+      {
+        "path": "climate/gcm/runs/A28_dim5_moon/model/MOST.00026.nc",
+        "sha256": "03cbe4834edc0ee5e40187eab7e375834877af686ae8559714eb97723749d99b",
+        "year": 26,
+        "sigma": 0.9833002090454102,
+        "near_surface_variable_names": []
+      },
+      {
+        "path": "climate/gcm/runs/A28_dim5_moon/model/MOST.00027.nc",
+        "sha256": "492ce573560b816e751e14a69ce7f2bcb24b883c6c2b1a1a35c2da6809aed974",
+        "year": 27,
+        "sigma": 0.9833002090454102,
+        "near_surface_variable_names": []
+      },
+      {
+        "path": "climate/gcm/runs/A28_dim5_moon/model/MOST.00028.nc",
+        "sha256": "fec03a0274b828d20509aec761f365439090ef3d4a769e9f396e59ea530fba56",
+        "year": 28,
+        "sigma": 0.9833002090454102,
+        "near_surface_variable_names": []
+      },
+      {
+        "path": "climate/gcm/runs/A28_dim5_moon/model/MOST.00029.nc",
+        "sha256": "31040636f8423f55650b499b14b5187c7273aa9f0b3d8f58cb9fb52c5149bec1",
+        "year": 29,
+        "sigma": 0.9833002090454102,
+        "near_surface_variable_names": []
+      }
+    ]
+  },
+  "output_settings": {
+    "NLOWIO": 1,
+    "NSNAPSHOT": 0,
+    "NHCADENCE": 0
+  },
+  "run": "A28_dim5_moon",
+  "years": [
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29
+  ],
+  "snapshots": 1200,
+  "averaging_interval_s": 257400.0,
+  "sigma": 0.9833002090454102,
+  "grid_shape": [
+    8,
+    7
+  ],
+  "swan_surface_forcing_ready": false,
+  "requirements": [
+    "Instantaneous 10 m eastward and northward vectors",
+    "Hourly or three-hourly sampling",
+    "Atmospheric surface-layer diagnostic checked at lunar gravity"
+  ],
+  "source_configuration": {
+    "experiment": "A28",
+    "pressure_pa": 121590.0,
+    "water": 28,
+    "lakes": true,
+    "shield": "titania_stack",
+    "mldepth": 50.0,
+    "purpose": "design case with the atlas seas and rain-fed lakes",
+    "model": {
+      "resolution": "T21",
+      "layers": 10,
+      "timestep_min": 30.0,
+      "land_albedo": 0.2,
+      "steps_per_lunar_day": 1430,
+      "writes_per_lunar_day": 10,
+      "lunar_days_per_year": 12,
+      "seed": 1,
+      "rayleigh_scale": 2.215,
+      "h2o_continuum": 0.004,
+      "sw_water_absorption": 1.356,
+      "cloud_water": "earth_path",
+      "convective_day_s": 86400.0,
+      "clear_sky": 1,
+      "sunlight_scale": 0.95,
+      "sun_clock": "synodic",
+      "fixed_orbit": 1,
+      "whole_lunar_days": 1
+    },
+    "output": [
+      "ta",
+      "ua",
+      "va",
+      "hus",
+      "cl",
+      "ts",
+      "tas",
+      "maxt",
+      "mint",
+      "ps",
+      "psl",
+      "pr",
+      "prc",
+      "evap",
+      "prw",
+      "clt",
+      "sic",
+      "sit",
+      "snd",
+      "mrso",
+      "rst",
+      "rsut",
+      "rlut",
+      "ntr",
+      "nbr",
+      "rss",
+      "rls",
+      "hfss",
+      "hfls",
+      "alb",
+      "czen",
+      "lsm",
+      "rsscs",
+      "rlscs",
+      "rstcs",
+      "rltcs"
+    ],
+    "ncpus": 8,
+    "exoplasim": "3.4.2",
+    "source": {
+      "radmod": "ddcf0412e7c2e0b8",
+      "rainmod": "44c0668de3e8f7db"
+    },
+    "planet": {
+      "radius": 0.2727044420028253,
+      "gravity": 1.6242188765608128,
+      "rotationperiod": 27.321661,
+      "year": 365.25636,
+      "obliquity": 1.5424,
+      "eccentricity": 0.016715
+    },
+    "gases_bar": {
+      "pN2": 0.9912863902624719,
+      "pO2": 0.21227,
+      "pAr": 0.011857249737528157,
+      "pCO2": 0.00048635999999999997
+    },
+    "initial_state": {
+      "path": "climate/gcm/runs/A28_dim5/model/MOST_REST.00024",
+      "sha256": "56b44e2cbed0ab62"
+    },
+    "key": "52cf9fb8271add53"
+  },
+  "snapshot_files_available": 0,
+  "product": {
+    "path": "research/runs/waves/coverage/gcm_region.npz",
+    "sha256": "36068d99c2f0b90096b04f8a6cf35e6bbb7e00492c609e30390032e8f9e5a27c"
+  },
+  "water_vector_mean_speed_percentiles_m_s": {
+    "median": 2.785766124725342,
+    "p90": 4.722872591018677,
+    "p99": 6.286146073341364
+  }
+}

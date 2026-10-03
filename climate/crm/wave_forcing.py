@@ -54,15 +54,13 @@ def read_surface(path, nx, layout):
                        byte_offsets=offsets, bytes_per_field=nx * 4)
 
 
-def export(case_dir, summary_path, output):
+def read_series(case_dir, summary_path):
+    """Read the surface fields and exact times represented by a ring summary."""
     summary = json.loads(summary_path.read_text())
     if summary.get("schema") != "terluna.climate.crm-ring/1":
         raise ValueError("Unsupported ring summary")
     geo = case_geometry(case_dir)
     record = geo["record"]
-    track = record["path"]
-    if not track or not np.allclose(track["lat"], 0) or track["node_deg"] != 0:
-        raise ValueError("This exporter requires the equatorial ring with node zero")
     nx, layout = grads_layout(case_dir / "cm1out_s.ctl")
     if nx != record["grid"]["nx"]:
         raise ValueError("Ring control and case grids disagree")
@@ -86,6 +84,14 @@ def export(case_dir, summary_path, output):
             values[k].append(fields[k])
         sources.append(source)
     values = {k: np.asarray(v) for k, v in values.items()}
+    return summary, geo, times, values, sources
+
+
+def export(case_dir, summary_path, output):
+    summary, geo, times, values, sources = read_series(case_dir, summary_path)
+    track = geo["record"]["path"]
+    if not track or not np.allclose(track["lat"], 0) or track["node_deg"] != 0:
+        raise ValueError("This exporter requires the equatorial ring with node zero")
     density = moist_density(values["psfc"], values["t2"], values["q2"])
     water = ~geo["land"]
     lon = np.asarray(track["lon"]) % 360

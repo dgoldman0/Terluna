@@ -1,0 +1,145 @@
+{
+  "schema": "terluna.climate.coastal-verification/1",
+  "date": "2026-10-02",
+  "base_commit": "f863b67bb2ee355c06de3f29efb10f5b86e9a39d",
+  "branch": "research/lunar-seas",
+  "evidence": "Repository checks, completed numerical experiments and recovery checks for the coastal follow-up. Physical lunar wind-input and breaking calibration remain open.",
+  "reading_rule": "Repository tests validate implementation and integrity. The spatial wave-grid comparisons fail the stated five-percent criterion. Directional agreement applies to the child at 3.8 km with a 36-direction parent. Recovered GCM vectors retain their model height and averaging window.",
+  "make_check": {
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 TERLUNA_SWAN_EXECUTABLE=/tmp/terluna-lunar-seas-swan/coupled_air/swan.exe nice -n 10 make check",
+    "exit_code": 0,
+    "result": "PASS",
+    "python_tests": 465,
+    "javascript_tests": {
+      "immersion": 128,
+      "domain_and_viewer": 48
+    },
+    "layer_files": 302,
+    "layer_violations": 0,
+    "provenance": "PASS; all five protection inputs available",
+    "ensemble": "PASS; 14 locked snapshot files and five paper workspaces",
+    "execution": "Approved execution outside the sandbox for Node subprocess tests",
+    "log": "research/runs/waves/coastal_final_make_check.log"
+  },
+  "numerical_outcome": {
+    "resolution": {
+      "coast_s4_d36_to_coast_s2_d36": {
+        "matched_interior_nodes": 128,
+        "boundary_buffer_coarse_cells": 2,
+        "minimum_hs_m": 0.1,
+        "relative_denominator": "refined run",
+        "hs_relative_max": 0.16222871340330114,
+        "hs_relative_p95": 0.02880310119731914,
+        "hs_absolute_max": 0.13067984599999993,
+        "tm01_relative_max": 0.09488375893337919,
+        "tm01_relative_p95": 0.022090667082165377,
+        "tm01_absolute_max": 0.7091422099999996,
+        "within_five_percent": false
+      },
+      "coast_s2_d36_to_coast_s1_d36": {
+        "matched_interior_nodes": 623,
+        "boundary_buffer_coarse_cells": 2,
+        "minimum_hs_m": 0.1,
+        "relative_denominator": "refined run",
+        "hs_relative_max": 1.1800973220814055,
+        "hs_relative_p95": 0.07502972146979257,
+        "hs_absolute_max": 0.6225653860000001,
+        "tm01_relative_max": 0.6734475470106827,
+        "tm01_relative_p95": 0.04879473151615758,
+        "tm01_absolute_max": 3.8314332899999997,
+        "within_five_percent": false
+      },
+      "coast_s2_d36_to_coast_s2_d72": {
+        "matched_interior_nodes": 623,
+        "boundary_buffer_coarse_cells": 2,
+        "minimum_hs_m": 0.1,
+        "relative_denominator": "refined run",
+        "hs_relative_max": 0.0057391419071108896,
+        "hs_relative_p95": 0.004507063274760026,
+        "hs_absolute_max": 0.005722409999999956,
+        "tm01_relative_max": 0.0031215170347526078,
+        "tm01_relative_p95": 0.002548359542302858,
+        "tm01_absolute_max": 0.027559280000000186,
+        "within_five_percent": true
+      }
+    },
+    "parent_table_exactly_preserved": true,
+    "boundary_spectral_edges": true,
+    "flat_depth_nesting_control": "PASS: interior Hs and Tm01 within 2% of the parent",
+    "terrain_control": "PASS: native pixel orientation, wet depths and exclusion of a disconnected lake",
+    "geographic_rotation": "PASS: independent Cartesian tangent and left-of-track basis",
+    "equatorial_recovery": "PASS: original winds, coordinates, times, mask and density preserved exactly",
+    "gcm_recovery": "PASS: 224 scalar source reads across first/final windows match the regional vectors"
+  },
+  "execution": {
+    "swan_threads_per_run": 1,
+    "maximum_concurrent_swan_runs": 2,
+    "address_space_limit_per_run_bytes": 2147483648,
+    "completed_wall_s": {
+      "parent": 376.8883012819997,
+      "coast_s4_d36": 60.49242996800058,
+      "coast_s2_d36": 234.31421940100063,
+      "coast_s1_d36": 1049.7977088449989,
+      "coast_s2_d72": 524.8973352379999
+    },
+    "native_run_cap_s": 1500,
+    "other_run_cap_s": 900,
+    "interrupted_attempt": "research/runs/waves/coastal_interrupted/native_initial_cap/interruption.json"
+  },
+  "source_sha256": {
+    "geography/coastal_grid.py": "3ecca870e11f0071b11d3380e79a3e015ab8c363b2080928adc91233437feb61",
+    "geography/tests/test_coastal_grid.py": "1269e384d1db3448b35b74ba3c381bb51bac253118bf4f07d3e53dace5b1bc27",
+    "climate/crm/wave_forcing.py": "296a247a82b1840da68ca23fb574ea703c0a402b0f678170192f3ace4b430d4e",
+    "climate/crm/wave_coverage.py": "4eacf25e39d7e6fd94d751f20e8495c88281d8cd060d53d0cfa23af446470c2b",
+    "climate/gcm/wave_coverage.py": "0bf38159ae3c3981a20e78169e3ed0634bc650abb43f630a7fba5dadd84f3db3",
+    "climate/waves/coastal.py": "2953e4c5c125dc08a7699be0e0d5f3deebcc62e5e3c627c6c068c254554e6864",
+    "climate/waves/coastal_checks.py": "5b98e68052cdbb2bb37015d45b4e27f0cf89cf1f85153ba5a369d100fd7572d6",
+    "climate/waves/pilot.py": "1351b386d29ac6f63b335c7e999040117b76128de68d9ea5f0dd1609b0e59da8",
+    "climate/waves/model.py": "a829868a2f5def93ccde5640b3ac6afc891ae0aa5c1e6eaa65bc7c69f5259439",
+    "climate/tests/test_wave_coverage.py": "c9131879d2d2649cb29d0ea7b4d736f7af070e7bdc24a14ad5f5e084aab1d667",
+    "visualization/waves/coastal.py": "1ad5340ba7fe4b630e5de9be30c10987caafa7828dbee9dc17f831a6a894538e",
+    "shared/constants.json": "19a9d8fd60cb75f2b10eca5ef93ab22c4748e08646d1e088843710cde7da2665"
+  },
+  "product_sha256": {
+    "climate/waves/results/coastal.json": "5f838587e2f397364e8a78be46f8c33ea6191021a4abf7c0b8779bb57731d432",
+    "climate/waves/results/coastal_checks.json": "a0ec70dbd651b8dc86ce07626e7c6c0bd8385b2edfba18f6f2674e03f2114af8",
+    "climate/waves/results/ring_coverage.json": "34db89b928265856e0a7a27a3d7df8cee17979d03bc7f1fdeb90d04c1d234a06",
+    "climate/waves/results/gcm_coverage.json": "44fb1da923e08cf6502f70008621611296a066af3830bb0f2cd720c7f35b3f2a"
+  },
+  "logs": {
+    "research/runs/waves/coastal_final_make_check.log": "681e3391447964f0c49f384e6a7d0a6ff16d3398e81a8bdfbcaf733b753eafc9",
+    "research/runs/waves/coastal_control_tests.log": "c29208c88b65d7f8b87eb5d62c3868bca287e46b080c029faa6cf2b5bbc4ae78",
+    "research/runs/waves/coastal_audit.log": "a0ec70dbd651b8dc86ce07626e7c6c0bd8385b2edfba18f6f2674e03f2114af8",
+    "research/runs/waves/coastal_render.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "research/runs/waves/coastal_layer_check.json": "207887423d4ae8a26ec6ead590f6eb8bbed38d96a87b152116745ee53d4f40d4",
+    "research/runs/waves/gcm_coverage_check.json": "b227925eb838b800e45e0c61b753eb1174d72d214349e0e25049b4545f06698d",
+    "research/runs/waves/ring_coverage_check.json": "19a748f1857a34512649057b7270bde6a72436e8b3c5ce488da8ebc54f54d874",
+    "research/runs/waves/coastal_interrupted/native_initial_cap/interruption.json": "1b1c4867e91db423b04f8a17c7176522bccf53fde48042ccf291280b4a651702"
+  },
+  "figures": [
+    {
+      "path": "visualization/waves/results/coastal.png",
+      "sha256": "3359013790de6cf69f40227ddffacc4eea1490f60fdfd7d6a1d08dabfc906c14",
+      "sidecar": "visualization/waves/results/coastal.json",
+      "sidecar_sha256": "29a64933f02d4b1ce2c2da5335fac34e613c645a16d0e13df208f573221689fc",
+      "tracked": false
+    },
+    {
+      "path": "visualization/waves/results/wind_coverage.png",
+      "sha256": "6d8fa8de88cd33c684cf30dbc566eba437509d22929112efe86eb54998764064",
+      "sidecar": "visualization/waves/results/wind_coverage.json",
+      "sidecar_sha256": "18687af2514aa25e3a4c2da25c8d3793ad53ff9c20ccffa30ee90692ccc823d3",
+      "tracked": false
+    }
+  ],
+  "rendering": "Both figures rendered with array equality checks against their source products and visually inspected. The final difference-map colour range includes the largest displayed difference.",
+  "preserved_user_agents_sha256": "7e59eda3f6660c0c9a3af68b6f86ac709b0a5be7a8be1504e5bdaca23b41ff4a",
+  "pending_work": [
+    "Local wave-grid refinement around the shoreline spur near 93.4 E, 2.34 N; consistent parent/child shoreline; coastal timestep and parent directional checks.",
+    "Basin-wide hourly or three-hourly 10 m wind histories and an audited surface-layer diagnostic.",
+    "Finer beach profiles, sediment evolution, diffraction and empirical lunar wind-input/breaking calibration.",
+    "SWASH source audit, individual waves, run-up and wave-driven currents.",
+    "Ocean heat, mixing and underwater-light models.",
+    "Full scholarly-source review, manuscript review and exact-build PDF review."
+  ]
+}

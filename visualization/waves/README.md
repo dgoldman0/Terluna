@@ -40,3 +40,16 @@ slope profiles. Each map cell displays its computed value. Source and image
 hashes are recorded, and the displayed arrays are checked against the product.
 The climate domain's `results/pilot_checks.json` records the resolution
 differences and their implications for geographic predictions.
+
+## Coastal resolution and wind coverage
+
+`python visualization/waves/coastal.py` reads the coastal, CM1 ring-coverage
+and GCM coverage products. It writes `results/coastal.png` and
+`results/wind_coverage.png`, each with a hash sidecar. `--coverage-only` draws
+the recovered atmospheric records independently of the coastal simulation.
+
+The coastal maps display native wave-grid values and differences at common
+wet nodes. The coverage figure shows the three CM1 paths, one equatorial
+surface-wind history, and the GCM's final saved regional mean at its original
+model level. Captions distinguish their time sampling and height. Array checks
+compare plotted values with the products; source hashes identify the inputs.
