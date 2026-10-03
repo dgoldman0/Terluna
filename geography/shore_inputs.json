@@ -1,0 +1,61 @@
+{
+  "schema": "terluna.geography.coastal-source/1",
+  "source_url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_256_00n_90n_000_180.img",
+  "label_url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_256_00n_90n_000_180.lbl",
+  "label_sha256": "0d631ad27e215ebece591306e21f49d3c72e6b4da278c6cbaeb79199717dd54b",
+  "label_bytes": 5186,
+  "source_size_bytes": 2123366400,
+  "source_etag": "\"0e8ded85f1ad51:0\"",
+  "source_last_modified": "Mon, 03 Jun 2019 22:58:24 GMT",
+  "selected_byte_range": [
+    1981808640,
+    2123366399
+  ],
+  "selected_sha256": "aa53e733d3ab069605548084d27d16cc7f1e0d5786b7a1ab0ec69b152e8686cf",
+  "selected_bytes": 141557760,
+  "first_row": 21504,
+  "row_count": 1536,
+  "row_bytes": 92160,
+  "lines": 23040,
+  "samples": 46080,
+  "pixels_per_degree": 256,
+  "latitude_bounds_deg": [
+    0,
+    6
+  ],
+  "longitude_bounds_deg": [
+    0,
+    180
+  ],
+  "sample_type": "<i2",
+  "scale_m": 0.5,
+  "coordinate_frame": "Mean Earth/polar axis of DE421",
+  "product_version": "V4.0",
+  "product_creation_date": "2019-06-03",
+  "retrieved": "2026-10-03",
+  "independent_range_checks": [
+    {
+      "source_offset": 1981808640,
+      "bytes": 2048,
+      "sha256": "e4be59076124b246bbda60c42f9bf8bcbbef9e5230aed5ee3f7b340e033d4574",
+      "matches": true
+    },
+    {
+      "source_offset": 2052635008,
+      "bytes": 2048,
+      "sha256": "71d12b5c3dcb2fc7bc8a78bb9cfddc8b7389c27cf3b9f3b16a5f4134e30e9c60",
+      "matches": true
+    },
+    {
+      "source_offset": 2123364352,
+      "bytes": 2048,
+      "sha256": "4fb6657292b1a156b7a013612dbb3a507463a2e333a11eac57102ad67c7fd00b",
+      "matches": true
+    }
+  ],
+  "credit": "NASA LRO LOLA Science Team, NASA Goddard Space Flight Center; archived by the PDS Geosciences Node at Washington University in St. Louis.",
+  "rights": "NASA scientific data; retain source attribution. External bytes remain in ignored storage.",
+  "evidence": "Archived altimetry-derived raster, with interpolation for incomplete coverage; 118 m pixel spacing describes the grid sampling.",
+  "local_image": "research/runs/waves/shore/inputs/ldem_256_rows_0n_6n.img",
+  "local_label": "research/runs/waves/shore/inputs/ldem_256_00n_90n_000_180.lbl"
+}

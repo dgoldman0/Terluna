@@ -79,3 +79,24 @@ durations integrate its hourly heights; the renderer uses those supplied
 statistics. Array checks cover every plotted map and curve. The caption
 states the single-cycle scope and the remaining weak-wave and coastal
 resolution questions.
+
+## Energy approaching the shore
+
+`python -m visualization.waves.shore` reads
+`climate/waves/results/shore.json` and its hashed coastal case and terrain
+products. It writes `results/shore.png` with a provenance sidecar. The three
+maps show native flooded-rock depth, computed significant wave height and
+net wave-energy transport for the selected eastward phase of the second
+solar cycle. Arrows retain the computed transport direction and relative
+magnitude, with the latitude–longitude geometry accounted for.
+
+The renderer checks all three displayed arrays against their products.
+Station labels connect the maps to the domain report's separate incoming
+and outgoing powers. The caption states the stationary weather phase and
+the geographic and physical assumptions; the domain report retains the
+refinement and boundary checks.
+
+With all three weather phases present, the command also writes
+`results/shore_phases.png` and its sidecar. These maps share a power scale
+and the same 237 m wave grid. Equal-length arrows show the local direction
+of net wave-energy transport; the colours compare its magnitude.

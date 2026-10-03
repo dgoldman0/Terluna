@@ -41,6 +41,13 @@ offshore reference point has Hs of at least 1 m for 309.6 hours, with a
 period and direction, together with timestep, history and evolving spectral
 checks. Small-wave frequency coverage and finer basin geometry remain open.
 
+The [shore exposure study](shore.md) follows selected second-cycle spectra
+through eastern Smythii's finer geography. It adds native 118 m terrain,
+a regional propagation grid and local coastal refinements around the
+shoreline spur. Full directional spectra measure incoming and outgoing
+power at bathymetry-selected shore stations. Spatial, boundary and spectral
+comparisons accompany the conditional exposure results.
+
 ## Findings from the first run
 
 At 100 km fetch after 48 hours of the imposed wind, the modified build gives:
@@ -342,11 +349,12 @@ first experiment's check record and from the numerical audit.
 
 ## Next sea calculations
 
-The [coastal follow-up](coastal.md) adds native 16-pixel/degree terrain and
-full directional nesting, alongside geographic winds from three CM1 rings and
-regional GCM means. Use its numerical comparisons to choose smaller coastal
-areas and finer cross-shore profiles. The global three-hourly atmospheric
-record now supports continuous wave histories and comparisons between seas.
+The [shore exposure study](shore.md) now supplies native 118 m terrain and
+selected second-cycle coastal spectra. Extend those nests through evolving
+weather, widen the frequency band for short waves, and refine the remaining
+shoreline outliers. Explicit cross-shore profiles can then supply the
+wave-resolving coastal calculations. The global three-hourly atmospheric
+record supports continuous wave histories and comparisons between seas.
 Extend the [second-cycle calculation](cycle.md) to further cycles and basins,
 and widen the frequency band where the smaller waves reach its upper edge.
 Short wind transients, parent directional resolution, and physical lunar wind

@@ -1,0 +1,149 @@
+{
+  "schema": "terluna.climate.shore-verification/1",
+  "verified_utc": "2026-10-03T11:39:14.050083+00:00",
+  "evidence": "Completed coastal simulations, input/output integrity checks, numerical comparisons, executable physics controls and repository checks for a conditional lunar shore study.",
+  "reading_rule": "The basin histories retain the full first cycle of spin-up. Coastal cases use selected second-cycle phases held steady. Numerical bounds and physical calibration are separate evidence states; local spatial and weak-wave spectral limits remain in the report.",
+  "sources": {
+    "climate/waves/shore.py": "ea7cb0afe09a3d540699befa3348ba9fbdbfac22c0480145d03688a425d17224",
+    "climate/waves/shore_region.py": "dfa25d8903a0833729f4f80270381305907858a8b53543069e9e115a991c173b",
+    "climate/waves/shore_checks.py": "89d35f0a032eb323535cf05e762025822e4e3c94137b8d97c6f66e1d1d1913fa",
+    "climate/waves/coastal.py": "2953e4c5c125dc08a7699be0e0d5f3deebcc62e5e3c627c6c068c254554e6864",
+    "climate/waves/coastal_checks.py": "2c812f1a378ddf18896276e0ca6ef7c233addebf34430257f4a7c970b840e50e",
+    "climate/waves/pilot.py": "08b71bd9a092123cc8f97ecfc34970d39a4117a48b2423f2fa1a264066f79258",
+    "climate/waves/weather.py": "655f8026133e60cddbf7554307aab93bec5bb67615543cf09e910370df3006bd",
+    "climate/waves/model.py": "a829868a2f5def93ccde5640b3ac6afc891ae0aa5c1e6eaa65bc7c69f5259439",
+    "climate/waves/cycle.py": "0e7f1d9374938956d431605e8a3b12a47e966e1b45de536bb63dee432010caf4",
+    "climate/tests/test_wave_shore.py": "01b73d51cb1b58adc326796ee3baadba8fc835c57ae45c135a8fcc575c524637",
+    "geography/shore_terrain.py": "3b43d144e74098fbbf5cc064ee5b09afc5cb3d84b80d68809f7203c738cbf301",
+    "geography/shore_inputs.json": "4b7ef9c19e8b536a0246a3648ebc1a241d2ffa161a44e2dc9ec09fe1bc83ebca",
+    "geography/topography.py": "228e08f79efca868b49bcae0687c7f80a239b18234629c4390c147075b3f5c29",
+    "geography/fetch_inputs.py": "eadef4f9b0d45b5bcb30c06143e538aca1c3aca93d347bf7d1b2062bebc66b6d",
+    "geography/tests/test_shore_terrain.py": "a95562ea494f31d568b154f8286e963a200060a5e98deea42bbc0b4eee0ea3bb",
+    "shared/constants.json": "f71c3261095e42eab8557c98826627891a5a205ebc76a6aa92760f193c2a0b44",
+    "visualization/waves/shore.py": "f7c17e219de739925486e31d62097e444e9c127be6fb364bd98c66ffe0647e76"
+  },
+  "artifacts": {
+    "climate/waves/results/shore.json": "ee28d0f3027a2a4c2ace7d52a633b7a7145eb1dd9de993fee29855853f30e3f6",
+    "research/runs/waves/shore/terrain.npz": "8b3edf0af4b57ca7df703f86a8ad407c41d13aa15d37fbd2f823b9a9fc9b5dc5",
+    "research/runs/waves/shore/expanded_terrain.npz": "c127727cfe54bc0d209e61cad73ec1fdedd0e762f2a1f7a25700d502ce3c18f4",
+    "research/runs/waves/shore/regional_terrain.npz": "8c8e295952bfa29a2e1c964bb76d3981947bf8de04077f877a1777e7da8a17b2",
+    "research/runs/waves/shore/parent/product.json": "57ac4eb5f680ec140167adcf983211447df5ba8c0f8eb973046f53c46b1d4adf",
+    "research/runs/waves/shore/parent_fields/product.json": "bdebbf24be13786477e915d59cf1a6e01a76800950fe10cc82024214d7a22fc7",
+    "visualization/waves/results/shore.png": "40599dabb65430ca45d8575e705e7f0fde51339859b078b47ed8eab5debce160",
+    "visualization/waves/results/shore.json": "da3002e11d87bd051140bf814d9bf6145600f766d58877aa8d8745652c62391c",
+    "visualization/waves/results/shore_phases.png": "6c53f55ca0fc5b925d67bba1e7b4912bae702b8e6452fa4d62b8e1dc75601ea0",
+    "visualization/waves/results/shore_phases.json": "840ec0b8ed1286c28826877be29b2c5c45806be7ab20d946fb7e834e14329fc9"
+  },
+  "terrain_source": {
+    "selected_bytes": 141557760,
+    "selected_sha256": "aa53e733d3ab069605548084d27d16cc7f1e0d5786b7a1ab0ec69b152e8686cf",
+    "label_sha256": "0d631ad27e215ebece591306e21f49d3c72e6b4da278c6cbaeb79199717dd54b",
+    "independent_range_checks": [
+      {
+        "source_offset": 1981808640,
+        "bytes": 2048,
+        "sha256": "e4be59076124b246bbda60c42f9bf8bcbbef9e5230aed5ee3f7b340e033d4574",
+        "matches": true
+      },
+      {
+        "source_offset": 2052635008,
+        "bytes": 2048,
+        "sha256": "71d12b5c3dcb2fc7bc8a78bb9cfddc8b7389c27cf3b9f3b16a5f4134e30e9c60",
+        "matches": true
+      },
+      {
+        "source_offset": 2123364352,
+        "bytes": 2048,
+        "sha256": "4fb6657292b1a156b7a013612dbb3a507463a2e333a11eac57102ad67c7fd00b",
+        "matches": true
+      }
+    ],
+    "local_bytes_and_ranges_rechecked": true,
+    "credit": "NASA LRO LOLA Science Team, NASA Goddard Space Flight Center; archived by the PDS Geosciences Node at Washington University in St. Louis."
+  },
+  "basin_replays": {
+    "completed": 2,
+    "reference_values_compared_per_replay": 3103551,
+    "all_retained_values_exact": true,
+    "first_cycle_hours": 708.73416,
+    "selected_second_cycle_hours": [
+      852,
+      1020,
+      1068
+    ]
+  },
+  "coastal_checks": {
+    "completed_cases": 13,
+    "all_stationary_stopping_criteria_pass": true,
+    "accepted_regional_cases": 6,
+    "undamped_regional_attempt": {
+      "passed": false,
+      "iterations": 300,
+      "achieved_percent": 48.12
+    },
+    "station_spectral_transport_checks": 49,
+    "maximum_transport_relative_difference": 0.0009240112635285678,
+    "exposure_bounds": {
+      "h852_s8_d36_to_h852_s4_d36": false,
+      "h852_s4_d36_to_h852_s2_d36": false,
+      "h852_s2_d36_to_h852_s1_d36": false,
+      "h852_s4_d36_to_h852_s4_d72": true,
+      "h852_s4_d36_to_h852_s4_d36_expanded": true,
+      "h852_s4_d36_to_h852_s4_d36_band": true,
+      "h852_s4_d36_to_h852_s4_d36_accuracy": false,
+      "h852_s4_d36_to_h852_s4_d36_regional_accuracy": true,
+      "h852_s4_d36_to_h852_s4_d36_r8": true,
+      "h852_s4_d36_to_h852_s4_d36_nearest": true
+    },
+    "input_output_and_recorded_source_hashes_checked": true
+  },
+  "executable_controls": [
+    "SWAN transport direction and magnitude against lunar deep-water group velocity",
+    "SWAN variance transport versus its rho*g energy-output setting",
+    "Finite-depth group-speed deep- and shallow-water limits",
+    "Separate incoming and outgoing transport for opposing waves",
+    "Spectrum transfer, dry boundaries, and bounded wet-node interpolation"
+  ],
+  "source_audit": {
+    "scope": "SWAN output transport integration, direction-bin registration and documented stationary under-relaxation.",
+    "files": {
+      "swanout1.f": "9137125a27466c8c88deff6a5d7092b3e2a451099ee9909102fa682c8566f1fc",
+      "swanpre1.f": "43ec688f2df3867b81c83ea27874dfaa68b0d673290fd864ccbb60312c185048"
+    },
+    "references": [
+      "https://swanmodel.sourceforge.io/online_doc/swanuse/node32.html",
+      "https://swanmodel.sourceforge.io/online_doc/swantech/node48.html"
+    ]
+  },
+  "repository_check": {
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 NUMBA_NUM_THREADS=1 TERLUNA_SWAN_EXECUTABLE=/tmp/terluna-lunar-seas-swan/coupled_air/swan.exe nice -n 10 make check",
+    "passed": true,
+    "python_tests_passed": 490,
+    "javascript_tests_passed": 176,
+    "layer_files_checked": 318,
+    "layer_violations": 0,
+    "provenance_check": "PASS",
+    "ensemble_snapshot_files": 14,
+    "ensemble_paper_workspaces": 5,
+    "log": "research/runs/waves/shore/make_check_final.log",
+    "log_sha256": "48bc369c48ab3b9a2f059ef07e6d38c589deff1046ad723cdf364dd87976af57"
+  },
+  "visualization": {
+    "figures": 2,
+    "exact_display_array_checks": 6,
+    "both_final_images_visually_inspected": true
+  },
+  "storage": {
+    "logical_directory": "research/runs/waves/shore",
+    "physical_directory": "/media/projectspace/terluna-research/wave-runs/shore",
+    "bulk_data_bytes": 2413129534
+  },
+  "pending": [
+    "Time-dependent coastal histories, arrival lag, duration and occurrence.",
+    "Further spatial and iterative convergence at shoreline outliers and weak waves.",
+    "Wider regional and basin spectral coverage; the child-only band check leaves inherited boundary coverage explicit.",
+    "Separate numerical refinement for the two later weather phases.",
+    "Beach profiles, sediment, reflection, diffraction, currents, changing water levels and run-up.",
+    "Lunar wind-input and breaking calibration, further cycles and other seas."
+  ]
+}

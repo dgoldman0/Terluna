@@ -1,0 +1,3148 @@
+{
+  "schema": "terluna.climate.shore-exposure/1",
+  "evidence": "Conditional coastal wave exposure from native 118 m flooded lunar terrain and directional spectra sampled during the second solar cycle of the established basin history.",
+  "reading_rule": "Cases hold the selected wind and boundary spectra fixed. Shoreward power integrates the incoming part of the directional spectrum across the local shallower-water normal. These are station-specific fluxes per metre, with separate grid, boundary, spectral and stopping checks. Coastal event durations and beach run-up require further calculations.",
+  "units": {
+    "height": "m",
+    "period": "s",
+    "power_per_width": "W/m",
+    "breaking_loss": "W/m2",
+    "angles": "degrees east and north; wave travel direction counterclockwise from east"
+  },
+  "producer": {
+    "path": "climate/waves/shore_checks.py",
+    "sha256": "89d35f0a032eb323535cf05e762025822e4e3c94137b8d97c6f66e1d1d1913fa"
+  },
+  "parent": {
+    "path": "research/runs/waves/shore/parent/product.json",
+    "sha256": "57ac4eb5f680ec140167adcf983211447df5ba8c0f8eb973046f53c46b1d4adf",
+    "reference_values_exact": true,
+    "reference_values_compared": 3103551
+  },
+  "parent_fields": {
+    "path": "research/runs/waves/shore/parent_fields/product.json",
+    "sha256": "bdebbf24be13786477e915d59cf1a6e01a76800950fe10cc82024214d7a22fc7",
+    "reference_values_exact": true
+  },
+  "site_selection": "Bathymetry-selected points on the 474 m grid: nearest water 10\u201360 m deep to west (93.26 E, 2.36 N), east (93.42 E, 2.35 N), and south (93 E, 1.84 N) targets; offshore water deeper than 500 m nearest (92.85 E, 2.35 N). All finer grids share these physical points.",
+  "episode_selection": {
+    "source_path": "research/runs/waves/cycle/basin_dt150/product.json",
+    "source_sha256": "c0d80ad03e6093264cd46a18551f7de5eb272c7ce2cc7dfde02c7314cc5bf789",
+    "region_deg": [
+      90,
+      94,
+      0,
+      4
+    ],
+    "wet_nodes": 16,
+    "selection_proxy": "Mean Hs^2 * Tm01 * max(cos(travel_direction), 0) over the region",
+    "second_cycle_peak_proxy_hour": 853,
+    "nearest_saved_spectrum_hour": 852,
+    "phases": [
+      {
+        "hour": 852,
+        "regional_mean_hs_m": 1.9040881450000002,
+        "regional_mean_tm01_s": 12.25455921875,
+        "variance_weighted_travel_direction_deg": 19.80574098047936
+      },
+      {
+        "hour": 1020,
+        "regional_mean_hs_m": 1.54379972125,
+        "regional_mean_tm01_s": 11.67487358125,
+        "variance_weighted_travel_direction_deg": 69.87877764162786
+      },
+      {
+        "hour": 1068,
+        "regional_mean_hs_m": 1.2558753968125,
+        "regional_mean_tm01_s": 10.722246219375,
+        "variance_weighted_travel_direction_deg": 195.14619390341136
+      }
+    ]
+  },
+  "exposure_tolerances": {
+    "hs_relative_p95": 0.05,
+    "hs_relative_max": 0.15,
+    "flux_vector_relative_p95": 0.1,
+    "flux_vector_relative_max": 0.3
+  },
+  "assumptions": [
+    "Static flooded LOLA rock at the atlas sea level; source interpolation and the inherited geoid frame approximation remain.",
+    "Inherited gravity-scaled SWAN wind growth and breaking parameters, fixed air-density build and spatial surface-density wind correction.",
+    "Current-free waves; bottom friction, diffraction, shoreline reflection, beach sediment and erosion are omitted.",
+    "Linear spectral transport and phase-averaged breaking; the narrow swash zone requires a separate model."
+  ],
+  "regional_cases": [
+    {
+      "path": "research/runs/waves/shore/region_h1020_s16_relaxed/product.json",
+      "sha256": "1c492e2808ea405010b087d371c7bc8199d063d259ff01a3022ff2755778e985",
+      "name": "region_h1020_s16_relaxed",
+      "hour": 1020,
+      "stride": 16,
+      "stopping": {
+        "last_percent": 99.04,
+        "passed": true
+      },
+      "boundary_mapping": {
+        "method": "Inverse-square interpolation among available wet spectra",
+        "neighbors": 4,
+        "source_spacing_deg": 1.0,
+        "wet_boundary_locations": 182,
+        "maximum_nearest_distance_deg": 1.008202655442783,
+        "maximum_supported_distance_deg": 1.9417463388511587,
+        "maximum_nearest_distance_in_source_cells": 1.008202655442783,
+        "reading_rule": "The source and receiving grids resolve different shorelines. Wet spectra are extended over the recorded distances; dry locations retain NODATA. Boundary-position and source-grid controls measure sensitivity to this assumption."
+      },
+      "wet_nodes": 5707,
+      "elapsed_wall_s": 45.31713755999954
+    },
+    {
+      "path": "research/runs/waves/shore/region_h1068_s16_relaxed/product.json",
+      "sha256": "12b2dcf1afc62e11a768ee7ee402072a61be00b9b16feb5448d396a38e2ca1ae",
+      "name": "region_h1068_s16_relaxed",
+      "hour": 1068,
+      "stride": 16,
+      "stopping": {
+        "last_percent": 99.04,
+        "passed": true
+      },
+      "boundary_mapping": {
+        "method": "Inverse-square interpolation among available wet spectra",
+        "neighbors": 4,
+        "source_spacing_deg": 1.0,
+        "wet_boundary_locations": 182,
+        "maximum_nearest_distance_deg": 1.008202655442783,
+        "maximum_supported_distance_deg": 1.9417463388511587,
+        "maximum_nearest_distance_in_source_cells": 1.008202655442783,
+        "reading_rule": "The source and receiving grids resolve different shorelines. Wet spectra are extended over the recorded distances; dry locations retain NODATA. Boundary-position and source-grid controls measure sensitivity to this assumption."
+      },
+      "wet_nodes": 5707,
+      "elapsed_wall_s": 44.16989902300702
+    },
+    {
+      "path": "research/runs/waves/shore/region_h852_s16/product.json",
+      "sha256": "53d85c51768c8bb05a49612a03d9934fc27a3b46b6a04f90c62de701152ae409",
+      "name": "region_h852_s16",
+      "hour": 852,
+      "stride": 16,
+      "stopping": {
+        "last_percent": 48.12,
+        "passed": false
+      },
+      "boundary_mapping": {
+        "method": "Inverse-square interpolation among available wet spectra",
+        "neighbors": 4,
+        "source_spacing_deg": 1.0,
+        "wet_boundary_locations": 182,
+        "maximum_nearest_distance_deg": 1.008202655442783,
+        "maximum_supported_distance_deg": 1.9417463388511587,
+        "maximum_nearest_distance_in_source_cells": 1.008202655442783,
+        "reading_rule": "The source and receiving grids resolve different shorelines. Wet spectra are extended over the recorded distances; dry locations retain NODATA. Boundary-position and source-grid controls measure sensitivity to this assumption."
+      },
+      "wet_nodes": 5707,
+      "elapsed_wall_s": 386.525572782004
+    },
+    {
+      "path": "research/runs/waves/shore/region_h852_s16_relaxed/product.json",
+      "sha256": "9dd92434d338870516157821cf10f3db44cd8edbb0891de1327d1a1072f0bd3a",
+      "name": "region_h852_s16_relaxed",
+      "hour": 852,
+      "stride": 16,
+      "stopping": {
+        "last_percent": 99.14,
+        "passed": true
+      },
+      "boundary_mapping": {
+        "method": "Inverse-square interpolation among available wet spectra",
+        "neighbors": 4,
+        "source_spacing_deg": 1.0,
+        "wet_boundary_locations": 182,
+        "maximum_nearest_distance_deg": 1.008202655442783,
+        "maximum_supported_distance_deg": 1.9417463388511587,
+        "maximum_nearest_distance_in_source_cells": 1.008202655442783,
+        "reading_rule": "The source and receiving grids resolve different shorelines. Wet spectra are extended over the recorded distances; dry locations retain NODATA. Boundary-position and source-grid controls measure sensitivity to this assumption."
+      },
+      "wet_nodes": 5707,
+      "elapsed_wall_s": 29.935550734997378
+    },
+    {
+      "path": "research/runs/waves/shore/region_h852_s16_relaxed_nearest/product.json",
+      "sha256": "d6bad29be05ea5c440162506067a062d0f0ce9a1c72102cfcea09e0946d9be19",
+      "name": "region_h852_s16_relaxed_nearest",
+      "hour": 852,
+      "stride": 16,
+      "stopping": {
+        "last_percent": 99.18,
+        "passed": true
+      },
+      "boundary_mapping": {
+        "method": "Inverse-square interpolation among available wet spectra",
+        "neighbors": 1,
+        "source_spacing_deg": 1.0,
+        "wet_boundary_locations": 182,
+        "maximum_nearest_distance_deg": 1.008202655442783,
+        "maximum_supported_distance_deg": 1.008202655442783,
+        "maximum_nearest_distance_in_source_cells": 1.008202655442783,
+        "reading_rule": "The source and receiving grids resolve different shorelines. Wet spectra are extended over the recorded distances; dry locations retain NODATA. Boundary-position and source-grid controls measure sensitivity to this assumption."
+      },
+      "wet_nodes": 5707,
+      "elapsed_wall_s": 26.62601019399881
+    },
+    {
+      "path": "research/runs/waves/shore/region_h852_s16_strict/product.json",
+      "sha256": "9c296d72e364815885cf4143266e5b126748d978d7f8fee966d35b16200bbc31",
+      "name": "region_h852_s16_strict",
+      "hour": 852,
+      "stride": 16,
+      "stopping": {
+        "last_percent": 99.02,
+        "passed": true
+      },
+      "boundary_mapping": {
+        "method": "Inverse-square interpolation among available wet spectra",
+        "neighbors": 4,
+        "source_spacing_deg": 1.0,
+        "wet_boundary_locations": 182,
+        "maximum_nearest_distance_deg": 1.008202655442783,
+        "maximum_supported_distance_deg": 1.9417463388511587,
+        "maximum_nearest_distance_in_source_cells": 1.008202655442783,
+        "reading_rule": "The source and receiving grids resolve different shorelines. Wet spectra are extended over the recorded distances; dry locations retain NODATA. Boundary-position and source-grid controls measure sensitivity to this assumption."
+      },
+      "wet_nodes": 5707,
+      "elapsed_wall_s": 102.64093341999978
+    },
+    {
+      "path": "research/runs/waves/shore/region_h852_s8_relaxed/product.json",
+      "sha256": "00d1bf3b28e403a5746dd0fb61fbf9be129a8e54ddf8a400e018fc3c42d02347",
+      "name": "region_h852_s8_relaxed",
+      "hour": 852,
+      "stride": 8,
+      "stopping": {
+        "last_percent": 99.01,
+        "passed": true
+      },
+      "boundary_mapping": {
+        "method": "Inverse-square interpolation among available wet spectra",
+        "neighbors": 4,
+        "source_spacing_deg": 1.0,
+        "wet_boundary_locations": 363,
+        "maximum_nearest_distance_deg": 1.008202655442783,
+        "maximum_supported_distance_deg": 1.9417463388511587,
+        "maximum_nearest_distance_in_source_cells": 1.008202655442783,
+        "reading_rule": "The source and receiving grids resolve different shorelines. Wet spectra are extended over the recorded distances; dry locations retain NODATA. Boundary-position and source-grid controls measure sensitivity to this assumption."
+      },
+      "wet_nodes": 22647,
+      "elapsed_wall_s": 99.39658475900069
+    }
+  ],
+  "cases": [
+    {
+      "name": "h1020_s2_d36",
+      "path": "research/runs/waves/shore/h1020_s2_d36/product.json",
+      "sha256": "b34b90148aa878dec7e77a7ec0ec08933b5b6d47b60cb268ac966d3fc4977f80",
+      "hour": 1020,
+      "day_in_second_cycle": 12.969410000000002,
+      "stride": 2,
+      "spacing_m": 236.90117518866782,
+      "directions": 36,
+      "frequency_intervals": 48,
+      "wet_nodes": 13641,
+      "maximum_hs_m": 1.41133368,
+      "minimum_depth_m": 0.431319892,
+      "nodes_below_ten_m": 60,
+      "nodes_with_one_percent_breaking": 5,
+      "maximum_breaking_fraction": 0.0866967589,
+      "maximum_breaking_loss_w_m2": 0.7947591332922223,
+      "boundary": {
+        "wet_locations": 421,
+        "missing_parent_spectra": 0,
+        "frequency_bins": 49,
+        "direction_bins": 36,
+        "maximum_low_edge_fraction": 0.0,
+        "maximum_high_edge_fraction": 0.051855778176227336,
+        "spectral_edges_pass": false,
+        "resolved_hs_range_m": [
+          0.23659324272051757,
+          1.409774278661706
+        ]
+      },
+      "stopping": {
+        "criterion_percent": 99.0,
+        "last_percent": 99.08,
+        "passed": true
+      },
+      "sites": {
+        "west_face": {
+          "longitude_deg": 93.251953125,
+          "latitude_deg": 2.361328125,
+          "depth_m": 22.3817883,
+          "hs_m": 1.02460372,
+          "peak_period_s": 16.6119823,
+          "mean_period_s": 10.8519545,
+          "direction_deg": 43.356987,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": [
+            0.8923895171314518,
+            0.45126594122966385
+          ],
+          "transport": {
+            "vector_w_m": [
+              147.45298530480133,
+              121.76232664967816
+            ],
+            "magnitude_w_m": 191.22878200323527,
+            "all_directions_w_m": 203.12570536792552,
+            "shoreward_w_m": 186.6231904666001,
+            "seaward_w_m": 0.09050116897666077,
+            "net_shoreward_w_m": 186.53268929762345
+          },
+          "table_vector_w_m": [
+            147.45409820751394,
+            121.76830879902336
+          ],
+          "transport_relative_difference": 3.1818646384592775e-05,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.002562317680160677,
+          "spectral_edges_pass": true
+        },
+        "east_face": {
+          "longitude_deg": 93.408203125,
+          "latitude_deg": 2.330078125,
+          "depth_m": 49.0394669,
+          "hs_m": 0.332576483,
+          "peak_period_s": 6.36435986,
+          "mean_period_s": 4.38126802,
+          "direction_deg": 144.299835,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": [
+            -0.9838355081400166,
+            -0.17907454571455822
+          ],
+          "transport": {
+            "vector_w_m": [
+              -5.8634459682181275,
+              3.4895257498438346
+            ],
+            "magnitude_w_m": 6.823253518742844,
+            "all_directions_w_m": 7.514430073760957,
+            "shoreward_w_m": 5.248595210429498,
+            "seaward_w_m": 0.10481410524862085,
+            "net_shoreward_w_m": 5.143781105180877
+          },
+          "table_vector_w_m": [
+            -5.865613895294538,
+            3.4901441903646258
+          ],
+          "transport_relative_difference": 0.00033029592960213597,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.02765502394940816,
+          "spectral_edges_pass": false
+        },
+        "southern_shore": {
+          "longitude_deg": 92.986328125,
+          "latitude_deg": 1.830078125,
+          "depth_m": 13.5493546,
+          "hs_m": 0.648283541,
+          "peak_period_s": 16.6119823,
+          "mean_period_s": 11.8627453,
+          "direction_deg": 16.0207348,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": [
+            0.4523288110119487,
+            -0.891851246973685
+          ],
+          "transport": {
+            "vector_w_m": [
+              83.56620130732179,
+              22.018109683984328
+            ],
+            "magnitude_w_m": 86.4182107833285,
+            "all_directions_w_m": 93.33207999555137,
+            "shoreward_w_m": 24.536744918626212,
+            "seaward_w_m": 6.374223018164982,
+            "net_shoreward_w_m": 18.16252190046123
+          },
+          "table_vector_w_m": [
+            83.58589233493893,
+            22.03028480829638
+          ],
+          "transport_relative_difference": 0.00026782665175352857,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.004580643275358206,
+          "spectral_edges_pass": true
+        },
+        "offshore": {
+          "longitude_deg": 92.845703125,
+          "latitude_deg": 2.345703125,
+          "depth_m": 1270.76587,
+          "hs_m": 1.34775114,
+          "peak_period_s": 16.6119823,
+          "mean_period_s": 11.5231352,
+          "direction_deg": 61.2446632,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": null,
+          "transport": {
+            "vector_w_m": [
+              157.0839790716981,
+              238.76008066698918
+            ],
+            "magnitude_w_m": 285.8001969927678,
+            "all_directions_w_m": 326.29138767838845
+          },
+          "table_vector_w_m": [
+            157.00845638616542,
+            238.7405962764686
+          ],
+          "transport_relative_difference": 0.0002729578138533278,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.0005536982333282085,
+          "spectral_edges_pass": true
+        }
+      },
+      "boundary_source": {
+        "path": "research/runs/waves/shore/region_h1020_s16_relaxed/product.json",
+        "sha256": "1c492e2808ea405010b087d371c7bc8199d063d259ff01a3022ff2755778e985"
+      },
+      "boundary_mapping": {
+        "method": "Inverse-square interpolation among available wet spectra",
+        "neighbors": 4,
+        "source_spacing_deg": 0.0625,
+        "wet_boundary_locations": 421,
+        "maximum_nearest_distance_deg": 0.0546453896026273,
+        "maximum_supported_distance_deg": 0.10148418791600615,
+        "maximum_nearest_distance_in_source_cells": 0.8743262336420368,
+        "reading_rule": "The source and receiving grids resolve different shorelines. Wet spectra are extended over the recorded distances; dry locations retain NODATA. Boundary-position and source-grid controls measure sensitivity to this assumption."
+      },
+      "elapsed_wall_s": 66.12253096899803
+    },
+    {
+      "name": "h1068_s2_d36",
+      "path": "research/runs/waves/shore/h1068_s2_d36/product.json",
+      "sha256": "faf463c228ad1bb49ca3f89ac4f6d935e7ec13e5533adf6edac91592debaa529",
+      "hour": 1068,
+      "day_in_second_cycle": 14.969410000000002,
+      "stride": 2,
+      "spacing_m": 236.90117518866782,
+      "directions": 36,
+      "frequency_intervals": 48,
+      "wet_nodes": 13641,
+      "maximum_hs_m": 0.918419063,
+      "minimum_depth_m": 0.431319892,
+      "nodes_below_ten_m": 60,
+      "nodes_with_one_percent_breaking": 0,
+      "maximum_breaking_fraction": 0.00490761641,
+      "maximum_breaking_loss_w_m2": 0.19514844263745731,
+      "boundary": {
+        "wet_locations": 421,
+        "missing_parent_spectra": 0,
+        "frequency_bins": 49,
+        "direction_bins": 36,
+        "maximum_low_edge_fraction": 0.0,
+        "maximum_high_edge_fraction": 0.039142937510759784,
+        "spectral_edges_pass": false,
+        "resolved_hs_range_m": [
+          0.26779282975027924,
+          0.8992435135893395
+        ]
+      },
+      "stopping": {
+        "criterion_percent": 99.0,
+        "last_percent": 99.02,
+        "passed": true
+      },
+      "sites": {
+        "west_face": {
+          "longitude_deg": 93.251953125,
+          "latitude_deg": 2.361328125,
+          "depth_m": 22.3817883,
+          "hs_m": 0.25037986,
+          "peak_period_s": 15.0922785,
+          "mean_period_s": 6.72987652,
+          "direction_deg": 31.2103577,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": [
+            0.8923895171314518,
+            0.45126594122966385
+          ],
+          "transport": {
+            "vector_w_m": [
+              6.981155096995435,
+              3.8638341895305794
+            ],
+            "magnitude_w_m": 7.97908147172911,
+            "all_directions_w_m": 10.04086889277929,
+            "shoreward_w_m": 8.353638435577363,
+            "seaward_w_m": 0.3801120372559611,
+            "net_shoreward_w_m": 7.973526398321401
+          },
+          "table_vector_w_m": [
+            6.977610677247164,
+            3.8618276801531493
+          ],
+          "transport_relative_difference": 0.0005107152465895225,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.0326923273493849,
+          "spectral_edges_pass": false
+        },
+        "east_face": {
+          "longitude_deg": 93.408203125,
+          "latitude_deg": 2.330078125,
+          "depth_m": 49.0394669,
+          "hs_m": 0.771066844,
+          "peak_period_s": 10.2822485,
+          "mean_period_s": 7.78913546,
+          "direction_deg": 219.597717,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": [
+            -0.9838355081400166,
+            -0.17907454571455822
+          ],
+          "transport": {
+            "vector_w_m": [
+              -45.90968001505537,
+              -42.44166555372513
+            ],
+            "magnitude_w_m": 62.52194569956243,
+            "all_directions_w_m": 70.1451088996002,
+            "shoreward_w_m": 52.87870339461291,
+            "seaward_w_m": 0.1109080500528054,
+            "net_shoreward_w_m": 52.767795344560106
+          },
+          "table_vector_w_m": [
+            -45.93798803878939,
+            -42.46647516408045
+          ],
+          "transport_relative_difference": 0.0006016859060286971,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.002355227195052155,
+          "spectral_edges_pass": true
+        },
+        "southern_shore": {
+          "longitude_deg": 92.986328125,
+          "latitude_deg": 1.830078125,
+          "depth_m": 13.5493546,
+          "hs_m": 0.485832125,
+          "peak_period_s": 10.2822485,
+          "mean_period_s": 6.91593027,
+          "direction_deg": 257.531372,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": [
+            0.4523288110119487,
+            -0.891851246973685
+          ],
+          "transport": {
+            "vector_w_m": [
+              -1.116321796724698,
+              -20.951767758524337
+            ],
+            "magnitude_w_m": 20.981485804417726,
+            "all_directions_w_m": 28.941091507658573,
+            "shoreward_w_m": 18.665777604027934,
+            "seaward_w_m": 0.48486191330414974,
+            "net_shoreward_w_m": 18.180915690723783
+          },
+          "table_vector_w_m": [
+            -1.1104150922728162,
+            -20.94670108405187
+          ],
+          "transport_relative_difference": 0.0003709959513863197,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.011354200316741636,
+          "spectral_edges_pass": false
+        },
+        "offshore": {
+          "longitude_deg": 92.845703125,
+          "latitude_deg": 2.345703125,
+          "depth_m": 1270.76587,
+          "hs_m": 0.836970866,
+          "peak_period_s": 11.3176117,
+          "mean_period_s": 8.21616936,
+          "direction_deg": 222.157654,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": null,
+          "transport": {
+            "vector_w_m": [
+              -36.50823442549318,
+              -38.95129086916375
+            ],
+            "magnitude_w_m": 53.38589927350634,
+            "all_directions_w_m": 89.24699291078346
+          },
+          "table_vector_w_m": [
+            -36.52146516297389,
+            -38.96831261361329
+          ],
+          "transport_relative_difference": 0.00040367165071528946,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.0023158876696574094,
+          "spectral_edges_pass": true
+        }
+      },
+      "boundary_source": {
+        "path": "research/runs/waves/shore/region_h1068_s16_relaxed/product.json",
+        "sha256": "12b2dcf1afc62e11a768ee7ee402072a61be00b9b16feb5448d396a38e2ca1ae"
+      },
+      "boundary_mapping": {
+        "method": "Inverse-square interpolation among available wet spectra",
+        "neighbors": 4,
+        "source_spacing_deg": 0.0625,
+        "wet_boundary_locations": 421,
+        "maximum_nearest_distance_deg": 0.0546453896026273,
+        "maximum_supported_distance_deg": 0.10148418791600615,
+        "maximum_nearest_distance_in_source_cells": 0.8743262336420368,
+        "reading_rule": "The source and receiving grids resolve different shorelines. Wet spectra are extended over the recorded distances; dry locations retain NODATA. Boundary-position and source-grid controls measure sensitivity to this assumption."
+      },
+      "elapsed_wall_s": 107.369524835005
+    },
+    {
+      "name": "h852_s1_d36",
+      "path": "research/runs/waves/shore/h852_s1_d36/product.json",
+      "sha256": "279b989cc19a27ab6a8b03f85b816f18ac80f19572ab5341596114711c54ac4e",
+      "hour": 852,
+      "day_in_second_cycle": 5.969410000000001,
+      "stride": 1,
+      "spacing_m": 118.45058759433391,
+      "directions": 36,
+      "frequency_intervals": 48,
+      "wet_nodes": 54135,
+      "maximum_hs_m": 2.03972483,
+      "minimum_depth_m": 0.0568984747,
+      "nodes_below_ten_m": 234,
+      "nodes_with_one_percent_breaking": 45,
+      "maximum_breaking_fraction": 1.0,
+      "maximum_breaking_loss_w_m2": 6.963555497574626,
+      "boundary": {
+        "wet_locations": 842,
+        "missing_parent_spectra": 0,
+        "frequency_bins": 49,
+        "direction_bins": 36,
+        "maximum_low_edge_fraction": 0.0,
+        "maximum_high_edge_fraction": 0.023545789601841657,
+        "spectral_edges_pass": false,
+        "resolved_hs_range_m": [
+          0.48097918913762144,
+          2.0403616721895603
+        ]
+      },
+      "stopping": {
+        "criterion_percent": 99.0,
+        "last_percent": 99.06,
+        "passed": true
+      },
+      "sites": {
+        "west_face": {
+          "longitude_deg": 93.251953125,
+          "latitude_deg": 2.361328125,
+          "depth_m": 22.3817883,
+          "hs_m": 1.84203935,
+          "peak_period_s": 16.6119823,
+          "mean_period_s": 12.6049566,
+          "direction_deg": 18.2926121,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": [
+            0.8923895171314518,
+            0.45126594122966385
+          ],
+          "transport": {
+            "vector_w_m": [
+              583.8549404267576,
+              174.410649851239
+            ],
+            "magnitude_w_m": 609.3485589071859,
+            "all_directions_w_m": 683.7583632445268,
+            "shoreward_w_m": 599.7339802581214,
+            "seaward_w_m": 0.002365830277980771,
+            "net_shoreward_w_m": 599.7316144278434
+          },
+          "table_vector_w_m": [
+            583.9565887055867,
+            174.4356004285303
+          ],
+          "transport_relative_difference": 0.00017173704994378935,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.0,
+          "spectral_edges_pass": true
+        },
+        "east_face": {
+          "longitude_deg": 93.408203125,
+          "latitude_deg": 2.330078125,
+          "depth_m": 49.0394669,
+          "hs_m": 0.22833094,
+          "peak_period_s": 3.57894301,
+          "mean_period_s": 2.88689733,
+          "direction_deg": 36.3097763,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": [
+            -0.9838355081400166,
+            -0.17907454571455822
+          ],
+          "transport": {
+            "vector_w_m": [
+              1.2979316260862674,
+              0.5658916191927246
+            ],
+            "magnitude_w_m": 1.4159307294735524,
+            "all_directions_w_m": 2.479239611109347,
+            "shoreward_w_m": 0.020821383306258816,
+            "seaward_w_m": 1.3991093888184525,
+            "net_shoreward_w_m": -1.3782880055121938
+          },
+          "table_vector_w_m": [
+            1.297982627383194,
+            0.5663720330238369
+          ],
+          "transport_relative_difference": 0.00034114095069403427,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.08878146759581708,
+          "spectral_edges_pass": false
+        },
+        "southern_shore": {
+          "longitude_deg": 92.986328125,
+          "latitude_deg": 1.830078125,
+          "depth_m": 13.5493546,
+          "hs_m": 1.33395684,
+          "peak_period_s": 18.2847137,
+          "mean_period_s": 12.35114,
+          "direction_deg": 352.341797,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": [
+            0.4523288110119487,
+            -0.891851246973685
+          ],
+          "transport": {
+            "vector_w_m": [
+              346.924765607106,
+              -54.47463413273876
+            ],
+            "magnitude_w_m": 351.1755668543032,
+            "all_directions_w_m": 379.59558175487643,
+            "shoreward_w_m": 210.17582179914203,
+            "seaward_w_m": 4.668484681762461,
+            "net_shoreward_w_m": 205.50733711737956
+          },
+          "table_vector_w_m": [
+            347.1505799205467,
+            -54.469504441962634
+          ],
+          "transport_relative_difference": 0.0006427830084949121,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.00040001071153877323,
+          "spectral_edges_pass": true
+        },
+        "offshore": {
+          "longitude_deg": 92.845703125,
+          "latitude_deg": 2.345703125,
+          "depth_m": 1270.76587,
+          "hs_m": 1.99662638,
+          "peak_period_s": 16.6119823,
+          "mean_period_s": 12.8590202,
+          "direction_deg": 22.3675499,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": null,
+          "transport": {
+            "vector_w_m": [
+              597.8185391005188,
+              226.38967465769147
+            ],
+            "magnitude_w_m": 639.2490050707111,
+            "all_directions_w_m": 755.9226076469477
+          },
+          "table_vector_w_m": [
+            597.8143834737207,
+            226.43244664908457
+          ],
+          "transport_relative_difference": 6.722362531229918e-05,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.0,
+          "spectral_edges_pass": true
+        }
+      },
+      "boundary_source": {
+        "path": "research/runs/waves/shore/region_h852_s16_relaxed/product.json",
+        "sha256": "9dd92434d338870516157821cf10f3db44cd8edbb0891de1327d1a1072f0bd3a"
+      },
+      "boundary_mapping": {
+        "method": "Inverse-square interpolation among available wet spectra",
+        "neighbors": 4,
+        "source_spacing_deg": 0.0625,
+        "wet_boundary_locations": 842,
+        "maximum_nearest_distance_deg": 0.058548622795404834,
+        "maximum_supported_distance_deg": 0.10538742110879037,
+        "maximum_nearest_distance_in_source_cells": 0.9367779647264773,
+        "reading_rule": "The source and receiving grids resolve different shorelines. Wet spectra are extended over the recorded distances; dry locations retain NODATA. Boundary-position and source-grid controls measure sensitivity to this assumption."
+      },
+      "elapsed_wall_s": 327.12138493299426
+    },
+    {
+      "name": "h852_s2_d36",
+      "path": "research/runs/waves/shore/h852_s2_d36/product.json",
+      "sha256": "717699894e633b7028cad7b584fff3ed96158bfb92c5a097df0136604e2cd12a",
+      "hour": 852,
+      "day_in_second_cycle": 5.969410000000001,
+      "stride": 2,
+      "spacing_m": 236.90117518866782,
+      "directions": 36,
+      "frequency_intervals": 48,
+      "wet_nodes": 13641,
+      "maximum_hs_m": 2.0398159,
+      "minimum_depth_m": 0.431319892,
+      "nodes_below_ten_m": 60,
+      "nodes_with_one_percent_breaking": 10,
+      "maximum_breaking_fraction": 0.388157994,
+      "maximum_breaking_loss_w_m2": 3.211675481113712,
+      "boundary": {
+        "wet_locations": 421,
+        "missing_parent_spectra": 0,
+        "frequency_bins": 49,
+        "direction_bins": 36,
+        "maximum_low_edge_fraction": 0.0,
+        "maximum_high_edge_fraction": 0.023545789601841657,
+        "spectral_edges_pass": false,
+        "resolved_hs_range_m": [
+          0.48097918913762144,
+          2.0403616721895603
+        ]
+      },
+      "stopping": {
+        "criterion_percent": 99.0,
+        "last_percent": 99.12,
+        "passed": true
+      },
+      "sites": {
+        "west_face": {
+          "longitude_deg": 93.251953125,
+          "latitude_deg": 2.361328125,
+          "depth_m": 22.3817883,
+          "hs_m": 1.78739822,
+          "peak_period_s": 16.6119823,
+          "mean_period_s": 12.5633354,
+          "direction_deg": 18.971611,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": [
+            0.8923895171314518,
+            0.45126594122966385
+          ],
+          "transport": {
+            "vector_w_m": [
+              552.7463894493949,
+              171.0118971466564
+            ],
+            "magnitude_w_m": 578.596266851974,
+            "all_directions_w_m": 642.8609119663233,
+            "shoreward_w_m": 570.4396922687531,
+            "seaward_w_m": 0.0027639644979193935,
+            "net_shoreward_w_m": 570.4369283042552
+          },
+          "table_vector_w_m": [
+            552.8431709208259,
+            171.03937207623645
+          ],
+          "transport_relative_difference": 0.0001738488654253731,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.0,
+          "spectral_edges_pass": true
+        },
+        "east_face": {
+          "longitude_deg": 93.408203125,
+          "latitude_deg": 2.330078125,
+          "depth_m": 49.0394669,
+          "hs_m": 0.271684021,
+          "peak_period_s": 3.57894301,
+          "mean_period_s": 3.07034349,
+          "direction_deg": 23.8758068,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": [
+            -0.9838355081400166,
+            -0.17907454571455822
+          ],
+          "transport": {
+            "vector_w_m": [
+              2.3736770681394255,
+              0.12907971980150015
+            ],
+            "magnitude_w_m": 2.3771841320930553,
+            "all_directions_w_m": 3.978212229491809,
+            "shoreward_w_m": 0.038809338093264825,
+            "seaward_w_m": 2.397232014770937,
+            "net_shoreward_w_m": -2.358422676677672
+          },
+          "table_vector_w_m": [
+            2.3734744129482657,
+            0.13023526797547091
+          ],
+          "transport_relative_difference": 0.0004935472824474696,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.08189274178861308,
+          "spectral_edges_pass": false
+        },
+        "southern_shore": {
+          "longitude_deg": 92.986328125,
+          "latitude_deg": 1.830078125,
+          "depth_m": 13.5493546,
+          "hs_m": 1.35853553,
+          "peak_period_s": 18.2847137,
+          "mean_period_s": 12.3331318,
+          "direction_deg": 351.821564,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": [
+            0.4523288110119487,
+            -0.891851246973685
+          ],
+          "transport": {
+            "vector_w_m": [
+              353.69178734297935,
+              -57.824047745866096
+            ],
+            "magnitude_w_m": 358.3873615678816,
+            "all_directions_w_m": 393.70269614207365,
+            "shoreward_w_m": 218.78101833988535,
+            "seaward_w_m": 7.225583619127929,
+            "net_shoreward_w_m": 211.55543472075743
+          },
+          "table_vector_w_m": [
+            353.9191930108156,
+            -57.83301017223993
+          ],
+          "transport_relative_difference": 0.0006346174347218835,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.0004641722907213608,
+          "spectral_edges_pass": true
+        },
+        "offshore": {
+          "longitude_deg": 92.845703125,
+          "latitude_deg": 2.345703125,
+          "depth_m": 1270.76587,
+          "hs_m": 1.99647808,
+          "peak_period_s": 16.6119823,
+          "mean_period_s": 12.8523111,
+          "direction_deg": 22.3463974,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": null,
+          "transport": {
+            "vector_w_m": [
+              597.7869972687423,
+              226.0347145314093
+            ],
+            "magnitude_w_m": 639.0938790794941,
+            "all_directions_w_m": 755.6377551483225
+          },
+          "table_vector_w_m": [
+            597.7657606137991,
+            226.07829023025786
+          ],
+          "transport_relative_difference": 7.585028886148185e-05,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.0,
+          "spectral_edges_pass": true
+        }
+      },
+      "boundary_source": {
+        "path": "research/runs/waves/shore/region_h852_s16_relaxed/product.json",
+        "sha256": "9dd92434d338870516157821cf10f3db44cd8edbb0891de1327d1a1072f0bd3a"
+      },
+      "boundary_mapping": {
+        "method": "Inverse-square interpolation among available wet spectra",
+        "neighbors": 4,
+        "source_spacing_deg": 0.0625,
+        "wet_boundary_locations": 421,
+        "maximum_nearest_distance_deg": 0.0546453896026273,
+        "maximum_supported_distance_deg": 0.10148418791600615,
+        "maximum_nearest_distance_in_source_cells": 0.8743262336420368,
+        "reading_rule": "The source and receiving grids resolve different shorelines. Wet spectra are extended over the recorded distances; dry locations retain NODATA. Boundary-position and source-grid controls measure sensitivity to this assumption."
+      },
+      "elapsed_wall_s": 85.74988765300077
+    },
+    {
+      "name": "h852_s4_d36",
+      "path": "research/runs/waves/shore/h852_s4_d36/product.json",
+      "sha256": "a8939ae8fc4cdc6783b28aa464c7154c015a288c6f7f31dd4a4b406792f429f9",
+      "hour": 852,
+      "day_in_second_cycle": 5.969410000000001,
+      "stride": 4,
+      "spacing_m": 473.80235037733564,
+      "directions": 36,
+      "frequency_intervals": 48,
+      "wet_nodes": 3462,
+      "maximum_hs_m": 2.03980398,
+      "minimum_depth_m": 0.58513999,
+      "nodes_below_ten_m": 14,
+      "nodes_with_one_percent_breaking": 3,
+      "maximum_breaking_fraction": 0.205081403,
+      "maximum_breaking_loss_w_m2": 1.7428450097066275,
+      "boundary": {
+        "wet_locations": 210,
+        "missing_parent_spectra": 0,
+        "frequency_bins": 49,
+        "direction_bins": 36,
+        "maximum_low_edge_fraction": 0.0,
+        "maximum_high_edge_fraction": 0.023545789601841657,
+        "spectral_edges_pass": false,
+        "resolved_hs_range_m": [
+          0.48097918913762144,
+          2.0403616721895603
+        ]
+      },
+      "stopping": {
+        "criterion_percent": 99.0,
+        "last_percent": 99.02,
+        "passed": true
+      },
+      "sites": {
+        "west_face": {
+          "longitude_deg": 93.251953125,
+          "latitude_deg": 2.361328125,
+          "depth_m": 22.3817883,
+          "hs_m": 1.81712627,
+          "peak_period_s": 16.6119823,
+          "mean_period_s": 12.5538321,
+          "direction_deg": 20.947052,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": [
+            0.8923895171314518,
+            0.45126594122966385
+          ],
+          "transport": {
+            "vector_w_m": [
+              558.2230898389869,
+              192.79990655129424
+            ],
+            "magnitude_w_m": 590.5800724673779,
+            "all_directions_w_m": 662.7518339748407,
+            "shoreward_w_m": 585.1608793139565,
+            "seaward_w_m": 0.004414422054863743,
+            "net_shoreward_w_m": 585.1564648919016
+          },
+          "table_vector_w_m": [
+            558.3335868155392,
+            192.83310149341074
+          ],
+          "transport_relative_difference": 0.00019532134952755242,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.0,
+          "spectral_edges_pass": true
+        },
+        "east_face": {
+          "longitude_deg": 93.408203125,
+          "latitude_deg": 2.330078125,
+          "depth_m": 49.0394669,
+          "hs_m": 0.314973801,
+          "peak_period_s": 3.93932176,
+          "mean_period_s": 3.40100169,
+          "direction_deg": 20.2180786,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": [
+            -0.9838355081400166,
+            -0.17907454571455822
+          ],
+          "transport": {
+            "vector_w_m": [
+              4.040810376598191,
+              0.05904166104605045
+            ],
+            "magnitude_w_m": 4.041241692520097,
+            "all_directions_w_m": 6.028523659674971,
+            "shoreward_w_m": 0.046704648589875164,
+            "seaward_w_m": 4.032770237377862,
+            "net_shoreward_w_m": -3.9860655887879872
+          },
+          "table_vector_w_m": [
+            4.039568306526515,
+            0.06000443174638661
+          ],
+          "transport_relative_difference": 0.00038898799873275533,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.06624101843872174,
+          "spectral_edges_pass": false
+        },
+        "southern_shore": {
+          "longitude_deg": 92.986328125,
+          "latitude_deg": 1.830078125,
+          "depth_m": 13.5493546,
+          "hs_m": 1.49612033,
+          "peak_period_s": 18.2847137,
+          "mean_period_s": 12.446949,
+          "direction_deg": 1.91701818,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": [
+            0.4523288110119487,
+            -0.891851246973685
+          ],
+          "transport": {
+            "vector_w_m": [
+              429.97257659084414,
+              5.0553475829348535
+            ],
+            "magnitude_w_m": 430.0022943652204,
+            "all_directions_w_m": 479.1371925220299,
+            "shoreward_w_m": 211.7080288183592,
+            "seaward_w_m": 21.72766252700451,
+            "net_shoreward_w_m": 189.9803662913547
+          },
+          "table_vector_w_m": [
+            430.2644782374144,
+            5.094829239839084
+          ],
+          "transport_relative_difference": 0.000684553318302933,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.0002016714139931355,
+          "spectral_edges_pass": true
+        },
+        "offshore": {
+          "longitude_deg": 92.845703125,
+          "latitude_deg": 2.345703125,
+          "depth_m": 1270.76587,
+          "hs_m": 1.99629962,
+          "peak_period_s": 16.6119823,
+          "mean_period_s": 12.8475952,
+          "direction_deg": 22.3284531,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": null,
+          "transport": {
+            "vector_w_m": [
+              597.7380088113675,
+              225.7324225186662
+            ],
+            "magnitude_w_m": 638.9411974148514,
+            "all_directions_w_m": 755.3784802750914
+          },
+          "table_vector_w_m": [
+            597.7183763831928,
+            225.78970125357148
+          ],
+          "transport_relative_difference": 9.47656593942506e-05,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.0,
+          "spectral_edges_pass": true
+        }
+      },
+      "boundary_source": {
+        "path": "research/runs/waves/shore/region_h852_s16_relaxed/product.json",
+        "sha256": "9dd92434d338870516157821cf10f3db44cd8edbb0891de1327d1a1072f0bd3a"
+      },
+      "boundary_mapping": {
+        "method": "Inverse-square interpolation among available wet spectra",
+        "neighbors": 4,
+        "source_spacing_deg": 0.0625,
+        "wet_boundary_locations": 210,
+        "maximum_nearest_distance_deg": 0.046838923217076986,
+        "maximum_supported_distance_deg": 0.10000172808023365,
+        "maximum_nearest_distance_in_source_cells": 0.7494227714732318,
+        "reading_rule": "The source and receiving grids resolve different shorelines. Wet spectra are extended over the recorded distances; dry locations retain NODATA. Boundary-position and source-grid controls measure sensitivity to this assumption."
+      },
+      "elapsed_wall_s": 24.073730901996896
+    },
+    {
+      "name": "h852_s4_d36_accuracy",
+      "path": "research/runs/waves/shore/h852_s4_d36_accuracy/product.json",
+      "sha256": "ed37d690b3018bf4e454f6fa0cdcc29a665aa45d72d783df9b75fc860cdce2d2",
+      "hour": 852,
+      "day_in_second_cycle": 5.969410000000001,
+      "stride": 4,
+      "spacing_m": 473.80235037733564,
+      "directions": 36,
+      "frequency_intervals": 48,
+      "wet_nodes": 3462,
+      "maximum_hs_m": 2.03781629,
+      "minimum_depth_m": 0.58513999,
+      "nodes_below_ten_m": 14,
+      "nodes_with_one_percent_breaking": 3,
+      "maximum_breaking_fraction": 0.211879015,
+      "maximum_breaking_loss_w_m2": 1.8054273718454144,
+      "boundary": {
+        "wet_locations": 210,
+        "missing_parent_spectra": 0,
+        "frequency_bins": 49,
+        "direction_bins": 36,
+        "maximum_low_edge_fraction": 0.0,
+        "maximum_high_edge_fraction": 0.023545789601841657,
+        "spectral_edges_pass": false,
+        "resolved_hs_range_m": [
+          0.48097918913762144,
+          2.0403616721895603
+        ]
+      },
+      "stopping": {
+        "criterion_percent": 99.0,
+        "last_percent": 99.02,
+        "passed": true
+      },
+      "sites": {
+        "west_face": {
+          "longitude_deg": 93.251953125,
+          "latitude_deg": 2.361328125,
+          "depth_m": 22.3817883,
+          "hs_m": 1.82381964,
+          "peak_period_s": 16.6119823,
+          "mean_period_s": 12.4760628,
+          "direction_deg": 21.1719265,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": [
+            0.8923895171314518,
+            0.45126594122966385
+          ],
+          "transport": {
+            "vector_w_m": [
+              562.0290226583037,
+              195.05129000700762
+            ],
+            "magnitude_w_m": 594.9131264677607,
+            "all_directions_w_m": 665.0165451665897,
+            "shoreward_w_m": 589.5742247586147,
+            "seaward_w_m": 0.005412641636812377,
+            "net_shoreward_w_m": 589.5688121169779
+          },
+          "table_vector_w_m": [
+            562.137866945293,
+            195.09677647862677
+          ],
+          "transport_relative_difference": 0.00019825275998294382,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.0,
+          "spectral_edges_pass": true
+        },
+        "east_face": {
+          "longitude_deg": 93.408203125,
+          "latitude_deg": 2.330078125,
+          "depth_m": 49.0394669,
+          "hs_m": 0.333971947,
+          "peak_period_s": 4.77259731,
+          "mean_period_s": 3.90090847,
+          "direction_deg": 21.2154713,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": [
+            -0.9838355081400166,
+            -0.17907454571455822
+          ],
+          "transport": {
+            "vector_w_m": [
+              4.956462455409294,
+              0.49262398792090856
+            ],
+            "magnitude_w_m": 4.980883301720392,
+            "all_directions_w_m": 7.4260632292504,
+            "shoreward_w_m": 0.047178321135770813,
+            "seaward_w_m": 5.011738496375319,
+            "net_shoreward_w_m": -4.964560175239548
+          },
+          "table_vector_w_m": [
+            4.95501276273194,
+            0.4931491475055192
+          ],
+          "transport_relative_difference": 0.00030964648992941584,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.04121189148960408,
+          "spectral_edges_pass": false
+        },
+        "southern_shore": {
+          "longitude_deg": 92.986328125,
+          "latitude_deg": 1.830078125,
+          "depth_m": 13.5493546,
+          "hs_m": 1.49632835,
+          "peak_period_s": 18.2847137,
+          "mean_period_s": 12.3995504,
+          "direction_deg": 2.03161716,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": [
+            0.4523288110119487,
+            -0.891851246973685
+          ],
+          "transport": {
+            "vector_w_m": [
+              429.445371501347,
+              5.72024522542312
+            ],
+            "magnitude_w_m": 429.4834668638234,
+            "all_directions_w_m": 478.5701580222622,
+            "shoreward_w_m": 210.9395200724272,
+            "seaward_w_m": 21.790613623927193,
+            "net_shoreward_w_m": 189.14890644850001
+          },
+          "table_vector_w_m": [
+            429.7453993241547,
+            5.753102302216191
+          ],
+          "transport_relative_difference": 0.0007022636294566038,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.0002700571134484743,
+          "spectral_edges_pass": true
+        },
+        "offshore": {
+          "longitude_deg": 92.845703125,
+          "latitude_deg": 2.345703125,
+          "depth_m": 1270.76587,
+          "hs_m": 1.9929291,
+          "peak_period_s": 16.6119823,
+          "mean_period_s": 12.8198509,
+          "direction_deg": 22.0018806,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": null,
+          "transport": {
+            "vector_w_m": [
+              598.0212002809135,
+              222.21596200069988
+            ],
+            "magnitude_w_m": 637.972797032382,
+            "all_directions_w_m": 752.37860097064
+          },
+          "table_vector_w_m": [
+            598.0145819312735,
+            222.25719204493583
+          ],
+          "transport_relative_difference": 6.545314929331129e-05,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.0,
+          "spectral_edges_pass": true
+        }
+      },
+      "boundary_source": {
+        "path": "research/runs/waves/shore/region_h852_s16_relaxed/product.json",
+        "sha256": "9dd92434d338870516157821cf10f3db44cd8edbb0891de1327d1a1072f0bd3a"
+      },
+      "boundary_mapping": {
+        "method": "Inverse-square interpolation among available wet spectra",
+        "neighbors": 4,
+        "source_spacing_deg": 0.0625,
+        "wet_boundary_locations": 210,
+        "maximum_nearest_distance_deg": 0.046838923217076986,
+        "maximum_supported_distance_deg": 0.10000172808023365,
+        "maximum_nearest_distance_in_source_cells": 0.7494227714732318,
+        "reading_rule": "The source and receiving grids resolve different shorelines. Wet spectra are extended over the recorded distances; dry locations retain NODATA. Boundary-position and source-grid controls measure sensitivity to this assumption."
+      },
+      "elapsed_wall_s": 51.53766001900658
+    },
+    {
+      "name": "h852_s4_d36_band",
+      "path": "research/runs/waves/shore/h852_s4_d36_band/product.json",
+      "sha256": "c4ca50e900678dd9a5ebce1e00462b78121794554a470aec62d32883de54317e",
+      "hour": 852,
+      "day_in_second_cycle": 5.969410000000001,
+      "stride": 4,
+      "spacing_m": 473.80235037733564,
+      "directions": 36,
+      "frequency_intervals": 55,
+      "wet_nodes": 3462,
+      "maximum_hs_m": 2.03964376,
+      "minimum_depth_m": 0.58513999,
+      "nodes_below_ten_m": 14,
+      "nodes_with_one_percent_breaking": 3,
+      "maximum_breaking_fraction": 0.205343962,
+      "maximum_breaking_loss_w_m2": 1.7500828835063522,
+      "boundary": {
+        "wet_locations": 210,
+        "missing_parent_spectra": 0,
+        "frequency_bins": 49,
+        "direction_bins": 36,
+        "maximum_low_edge_fraction": 0.0,
+        "maximum_high_edge_fraction": 0.023545789601841657,
+        "spectral_edges_pass": false,
+        "resolved_hs_range_m": [
+          0.48097918913762144,
+          2.0403616721895603
+        ]
+      },
+      "stopping": {
+        "criterion_percent": 99.0,
+        "last_percent": 99.08,
+        "passed": true
+      },
+      "sites": {
+        "west_face": {
+          "longitude_deg": 93.251953125,
+          "latitude_deg": 2.361328125,
+          "depth_m": 22.3817883,
+          "hs_m": 1.81822479,
+          "peak_period_s": 16.6119823,
+          "mean_period_s": 12.547123,
+          "direction_deg": 20.9547062,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": [
+            0.8923895171314518,
+            0.45126594122966385
+          ],
+          "transport": {
+            "vector_w_m": [
+              559.0726729727094,
+              192.97937323399847
+            ],
+            "magnitude_w_m": 591.4417064754876,
+            "all_directions_w_m": 663.3405666370122,
+            "shoreward_w_m": 586.0001089109725,
+            "seaward_w_m": 0.0044977351154091285,
+            "net_shoreward_w_m": 585.9956111758571
+          },
+          "table_vector_w_m": [
+            559.1802282434832,
+            193.01213836867007
+          ],
+          "transport_relative_difference": 0.00019006761701659706,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.0,
+          "spectral_edges_pass": true
+        },
+        "east_face": {
+          "longitude_deg": 93.408203125,
+          "latitude_deg": 2.330078125,
+          "depth_m": 49.0394669,
+          "hs_m": 0.306214452,
+          "peak_period_s": 3.93932176,
+          "mean_period_s": 3.70602512,
+          "direction_deg": 19.6400223,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": [
+            -0.9838355081400166,
+            -0.17907454571455822
+          ],
+          "transport": {
+            "vector_w_m": [
+              4.107664590350752,
+              0.1071408720328945
+            ],
+            "magnitude_w_m": 4.109061639021904,
+            "all_directions_w_m": 6.106511001079702,
+            "shoreward_w_m": 0.04460974345688184,
+            "seaward_w_m": 4.105062225960119,
+            "net_shoreward_w_m": -4.060452482503237
+          },
+          "table_vector_w_m": [
+            4.106367618795259,
+            0.10813725777971372
+          ],
+          "transport_relative_difference": 0.00039815027352162587,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.003946299105185012,
+          "spectral_edges_pass": true
+        },
+        "southern_shore": {
+          "longitude_deg": 92.986328125,
+          "latitude_deg": 1.830078125,
+          "depth_m": 13.5493546,
+          "hs_m": 1.49578547,
+          "peak_period_s": 18.2847137,
+          "mean_period_s": 12.4530373,
+          "direction_deg": 1.93964982,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": [
+            0.4523288110119487,
+            -0.891851246973685
+          ],
+          "transport": {
+            "vector_w_m": [
+              429.75133216756444,
+              5.199694521533271
+            ],
+            "magnitude_w_m": 429.7827873739403,
+            "all_directions_w_m": 478.8922672132359,
+            "shoreward_w_m": 211.48679745283903,
+            "seaward_w_m": 21.73524238559525,
+            "net_shoreward_w_m": 189.75155506724377
+          },
+          "table_vector_w_m": [
+            430.0502869312126,
+            5.241595376354746
+          ],
+          "transport_relative_difference": 0.0007019049599085862,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.0,
+          "spectral_edges_pass": true
+        },
+        "offshore": {
+          "longitude_deg": 92.845703125,
+          "latitude_deg": 2.345703125,
+          "depth_m": 1270.76587,
+          "hs_m": 1.99595618,
+          "peak_period_s": 16.6119823,
+          "mean_period_s": 12.8435478,
+          "direction_deg": 22.2948856,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": null,
+          "transport": {
+            "vector_w_m": [
+              597.7367054736123,
+              225.34251844660463
+            ],
+            "magnitude_w_m": 638.8023322517744,
+            "all_directions_w_m": 755.0384413601882
+          },
+          "table_vector_w_m": [
+            597.7245795187151,
+            225.3844663589092
+          ],
+          "transport_relative_difference": 6.835471635907826e-05,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.0,
+          "spectral_edges_pass": true
+        }
+      },
+      "boundary_source": {
+        "path": "research/runs/waves/shore/region_h852_s16_relaxed/product.json",
+        "sha256": "9dd92434d338870516157821cf10f3db44cd8edbb0891de1327d1a1072f0bd3a"
+      },
+      "boundary_mapping": {
+        "method": "Inverse-square interpolation among available wet spectra",
+        "neighbors": 4,
+        "source_spacing_deg": 0.0625,
+        "wet_boundary_locations": 210,
+        "maximum_nearest_distance_deg": 0.046838923217076986,
+        "maximum_supported_distance_deg": 0.10000172808023365,
+        "maximum_nearest_distance_in_source_cells": 0.7494227714732318,
+        "reading_rule": "The source and receiving grids resolve different shorelines. Wet spectra are extended over the recorded distances; dry locations retain NODATA. Boundary-position and source-grid controls measure sensitivity to this assumption."
+      },
+      "elapsed_wall_s": 30.184195706999162
+    },
+    {
+      "name": "h852_s4_d36_expanded",
+      "path": "research/runs/waves/shore/h852_s4_d36_expanded/product.json",
+      "sha256": "6dbd5a5b5eb80180115485f8dc1b14405e45c181aad20891dfd090c7e7e22aeb",
+      "hour": 852,
+      "day_in_second_cycle": 5.969410000000001,
+      "stride": 4,
+      "spacing_m": 473.80235037733564,
+      "directions": 36,
+      "frequency_intervals": 48,
+      "wet_nodes": 7979,
+      "maximum_hs_m": 2.07487249,
+      "minimum_depth_m": 0.58513999,
+      "nodes_below_ten_m": 28,
+      "nodes_with_one_percent_breaking": 4,
+      "maximum_breaking_fraction": 0.203183264,
+      "maximum_breaking_loss_w_m2": 1.7214031042893676,
+      "boundary": {
+        "wet_locations": 332,
+        "missing_parent_spectra": 0,
+        "frequency_bins": 49,
+        "direction_bins": 36,
+        "maximum_low_edge_fraction": 0.0,
+        "maximum_high_edge_fraction": 0.04066129200543457,
+        "spectral_edges_pass": false,
+        "resolved_hs_range_m": [
+          0.32131698232506023,
+          2.073243075464897
+        ]
+      },
+      "stopping": {
+        "criterion_percent": 99.0,
+        "last_percent": 99.06,
+        "passed": true
+      },
+      "sites": {
+        "west_face": {
+          "longitude_deg": 93.251953125,
+          "latitude_deg": 2.361328125,
+          "depth_m": 22.3817883,
+          "hs_m": 1.81022024,
+          "peak_period_s": 16.6119823,
+          "mean_period_s": 12.5460386,
+          "direction_deg": 20.824028,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": [
+            0.8923895171314518,
+            0.45126594122966385
+          ],
+          "transport": {
+            "vector_w_m": [
+              552.9515256889031,
+              189.84370310414735
+            ],
+            "magnitude_w_m": 584.633236627872,
+            "all_directions_w_m": 656.9339518636701,
+            "shoreward_w_m": 579.122692076748,
+            "seaward_w_m": 0.004549702310292426,
+            "net_shoreward_w_m": 579.1181423744376
+          },
+          "table_vector_w_m": [
+            553.0539393481671,
+            189.8666808431626
+          ],
+          "transport_relative_difference": 0.00017949877903390934,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.0,
+          "spectral_edges_pass": true
+        },
+        "east_face": {
+          "longitude_deg": 93.408203125,
+          "latitude_deg": 2.330078125,
+          "depth_m": 49.0394669,
+          "hs_m": 0.309090286,
+          "peak_period_s": 3.93932176,
+          "mean_period_s": 3.32412028,
+          "direction_deg": 19.4847851,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": [
+            -0.9838355081400166,
+            -0.17907454571455822
+          ],
+          "transport": {
+            "vector_w_m": [
+              3.845764354549554,
+              -0.08228203255697203
+            ],
+            "magnitude_w_m": 3.8466444862510567,
+            "all_directions_w_m": 5.759144238306656,
+            "shoreward_w_m": 0.04454440375344215,
+            "seaward_w_m": 3.8134093140978558,
+            "net_shoreward_w_m": -3.768864910344414
+          },
+          "table_vector_w_m": [
+            3.844576936736688,
+            -0.08106345120400295
+          ],
+          "transport_relative_difference": 0.00044245777032693993,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.07060362183269855,
+          "spectral_edges_pass": false
+        },
+        "southern_shore": {
+          "longitude_deg": 92.986328125,
+          "latitude_deg": 1.830078125,
+          "depth_m": 13.5493546,
+          "hs_m": 1.50767064,
+          "peak_period_s": 16.6119823,
+          "mean_period_s": 12.5174646,
+          "direction_deg": 1.83375561,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": [
+            0.4523288110119487,
+            -0.891851246973685
+          ],
+          "transport": {
+            "vector_w_m": [
+              438.8072612566233,
+              4.582805027436407
+            ],
+            "magnitude_w_m": 438.8311915001689,
+            "all_directions_w_m": 488.10160014480095,
+            "shoreward_w_m": 215.63584739343386,
+            "seaward_w_m": 21.237861024172297,
+            "net_shoreward_w_m": 194.39798636926156
+          },
+          "table_vector_w_m": [
+            439.14389048745187,
+            4.640305855184262
+          ],
+          "transport_relative_difference": 0.0007776171439305801,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.00016823779629813763,
+          "spectral_edges_pass": true
+        },
+        "offshore": {
+          "longitude_deg": 92.845703125,
+          "latitude_deg": 2.345703125,
+          "depth_m": 1270.76587,
+          "hs_m": 2.01218319,
+          "peak_period_s": 16.6119823,
+          "mean_period_s": 12.9375601,
+          "direction_deg": 22.430481,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": null,
+          "transport": {
+            "vector_w_m": [
+              611.1149635582876,
+              232.29133827242316
+            ],
+            "magnitude_w_m": 653.774245838149,
+            "all_directions_w_m": 770.4313039396696
+          },
+          "table_vector_w_m": [
+            611.1410926153937,
+            232.3652613123912
+          ],
+          "transport_relative_difference": 0.00011991741495844255,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.0,
+          "spectral_edges_pass": true
+        }
+      },
+      "boundary_source": {
+        "path": "research/runs/waves/shore/region_h852_s16_relaxed/product.json",
+        "sha256": "9dd92434d338870516157821cf10f3db44cd8edbb0891de1327d1a1072f0bd3a"
+      },
+      "boundary_mapping": {
+        "method": "Inverse-square interpolation among available wet spectra",
+        "neighbors": 4,
+        "source_spacing_deg": 0.0625,
+        "wet_boundary_locations": 332,
+        "maximum_nearest_distance_deg": 0.03124987500024971,
+        "maximum_supported_distance_deg": 0.08835422310007762,
+        "maximum_nearest_distance_in_source_cells": 0.49999800000399536,
+        "reading_rule": "The source and receiving grids resolve different shorelines. Wet spectra are extended over the recorded distances; dry locations retain NODATA. Boundary-position and source-grid controls measure sensitivity to this assumption."
+      },
+      "elapsed_wall_s": 50.572856863997
+    },
+    {
+      "name": "h852_s4_d36_nearest",
+      "path": "research/runs/waves/shore/h852_s4_d36_nearest/product.json",
+      "sha256": "3aab5d158b6082d13056bf6f48676cdb7fd0cfea1f6f93ed9144f5c71ec82203",
+      "hour": 852,
+      "day_in_second_cycle": 5.969410000000001,
+      "stride": 4,
+      "spacing_m": 473.80235037733564,
+      "directions": 36,
+      "frequency_intervals": 48,
+      "wet_nodes": 3462,
+      "maximum_hs_m": 2.04575467,
+      "minimum_depth_m": 0.58513999,
+      "nodes_below_ten_m": 14,
+      "nodes_with_one_percent_breaking": 3,
+      "maximum_breaking_fraction": 0.208503813,
+      "maximum_breaking_loss_w_m2": 1.7687019294065816,
+      "boundary": {
+        "wet_locations": 210,
+        "missing_parent_spectra": 0,
+        "frequency_bins": 49,
+        "direction_bins": 36,
+        "maximum_low_edge_fraction": 0.0,
+        "maximum_high_edge_fraction": 0.023510609661980902,
+        "spectral_edges_pass": false,
+        "resolved_hs_range_m": [
+          0.48130931087033046,
+          2.0462706437443914
+        ]
+      },
+      "stopping": {
+        "criterion_percent": 99.0,
+        "last_percent": 99.13,
+        "passed": true
+      },
+      "sites": {
+        "west_face": {
+          "longitude_deg": 93.251953125,
+          "latitude_deg": 2.361328125,
+          "depth_m": 22.3817883,
+          "hs_m": 1.82204711,
+          "peak_period_s": 16.6119823,
+          "mean_period_s": 12.5692053,
+          "direction_deg": 20.6025333,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": [
+            0.8923895171314518,
+            0.45126594122966385
+          ],
+          "transport": {
+            "vector_w_m": [
+              564.3450734392303,
+              189.3784163369027
+            ],
+            "magnitude_w_m": 595.2726656662503,
+            "all_directions_w_m": 667.8582742052405,
+            "shoreward_w_m": 589.0801413668922,
+            "seaward_w_m": 0.004484488088317284,
+            "net_shoreward_w_m": 589.0756568788039
+          },
+          "table_vector_w_m": [
+            564.4283222949787,
+            189.41546516481984
+          ],
+          "transport_relative_difference": 0.00015305061540891332,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.0,
+          "spectral_edges_pass": true
+        },
+        "east_face": {
+          "longitude_deg": 93.408203125,
+          "latitude_deg": 2.330078125,
+          "depth_m": 49.0394669,
+          "hs_m": 0.317919433,
+          "peak_period_s": 3.93932176,
+          "mean_period_s": 3.42929101,
+          "direction_deg": 20.3166332,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": [
+            -0.9838355081400166,
+            -0.17907454571455822
+          ],
+          "transport": {
+            "vector_w_m": [
+              4.152816186930848,
+              0.06957080930391944
+            ],
+            "magnitude_w_m": 4.153398894874181,
+            "all_directions_w_m": 6.195591419925681,
+            "shoreward_w_m": 0.04878428260377245,
+            "seaward_w_m": 4.146930667156063,
+            "net_shoreward_w_m": -4.09814638455229
+          },
+          "table_vector_w_m": [
+            4.151400401547033,
+            0.07072561153705764
+          ],
+          "transport_relative_difference": 0.0004400343671493271,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.06471312601592602,
+          "spectral_edges_pass": false
+        },
+        "southern_shore": {
+          "longitude_deg": 92.986328125,
+          "latitude_deg": 1.830078125,
+          "depth_m": 13.5493546,
+          "hs_m": 1.5027796,
+          "peak_period_s": 18.2847137,
+          "mean_period_s": 12.4808826,
+          "direction_deg": 1.68719673,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": [
+            0.4523288110119487,
+            -0.891851246973685
+          ],
+          "transport": {
+            "vector_w_m": [
+              435.6836523048206,
+              2.584325354049909
+            ],
+            "magnitude_w_m": 435.6913169013165,
+            "all_directions_w_m": 484.95119196649506,
+            "shoreward_w_m": 216.02303199867887,
+            "seaward_w_m": 21.25559736389119,
+            "net_shoreward_w_m": 194.7674346347877
+          },
+          "table_vector_w_m": [
+            435.96174189812837,
+            2.625195071970217
+          ],
+          "transport_relative_difference": 0.0006447163966928184,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.00020156688470517154,
+          "spectral_edges_pass": true
+        },
+        "offshore": {
+          "longitude_deg": 92.845703125,
+          "latitude_deg": 2.345703125,
+          "depth_m": 1270.76587,
+          "hs_m": 2.00081801,
+          "peak_period_s": 16.6119823,
+          "mean_period_s": 12.8639116,
+          "direction_deg": 21.8012886,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": null,
+          "transport": {
+            "vector_w_m": [
+              604.9831252810061,
+              220.45968446618187
+            ],
+            "magnitude_w_m": 643.8998791347161,
+            "all_directions_w_m": 760.2605194726216
+          },
+          "table_vector_w_m": [
+            604.9372029275467,
+            220.49983176469968
+          ],
+          "transport_relative_difference": 9.473532570762032e-05,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.0,
+          "spectral_edges_pass": true
+        }
+      },
+      "boundary_source": {
+        "path": "research/runs/waves/shore/region_h852_s16_relaxed_nearest/product.json",
+        "sha256": "d6bad29be05ea5c440162506067a062d0f0ce9a1c72102cfcea09e0946d9be19"
+      },
+      "boundary_mapping": {
+        "method": "Inverse-square interpolation among available wet spectra",
+        "neighbors": 4,
+        "source_spacing_deg": 0.0625,
+        "wet_boundary_locations": 210,
+        "maximum_nearest_distance_deg": 0.046838923217076986,
+        "maximum_supported_distance_deg": 0.10000172808023365,
+        "maximum_nearest_distance_in_source_cells": 0.7494227714732318,
+        "reading_rule": "The source and receiving grids resolve different shorelines. Wet spectra are extended over the recorded distances; dry locations retain NODATA. Boundary-position and source-grid controls measure sensitivity to this assumption."
+      },
+      "elapsed_wall_s": 22.573010161999264
+    },
+    {
+      "name": "h852_s4_d36_r8",
+      "path": "research/runs/waves/shore/h852_s4_d36_r8/product.json",
+      "sha256": "ead5e75a48dec3cb769a1d1d67202a7f73f2b45b662fec5f0b9bf8748cb1a029",
+      "hour": 852,
+      "day_in_second_cycle": 5.969410000000001,
+      "stride": 4,
+      "spacing_m": 473.80235037733564,
+      "directions": 36,
+      "frequency_intervals": 48,
+      "wet_nodes": 3462,
+      "maximum_hs_m": 2.03899646,
+      "minimum_depth_m": 0.58513999,
+      "nodes_below_ten_m": 14,
+      "nodes_with_one_percent_breaking": 3,
+      "maximum_breaking_fraction": 0.20458059,
+      "maximum_breaking_loss_w_m2": 1.7434902123828788,
+      "boundary": {
+        "wet_locations": 210,
+        "missing_parent_spectra": 0,
+        "frequency_bins": 49,
+        "direction_bins": 36,
+        "maximum_low_edge_fraction": 0.0,
+        "maximum_high_edge_fraction": 0.031062831841533693,
+        "spectral_edges_pass": false,
+        "resolved_hs_range_m": [
+          0.38961407226581135,
+          2.0399658500299176
+        ]
+      },
+      "stopping": {
+        "criterion_percent": 99.0,
+        "last_percent": 99.16,
+        "passed": true
+      },
+      "sites": {
+        "west_face": {
+          "longitude_deg": 93.251953125,
+          "latitude_deg": 2.361328125,
+          "depth_m": 22.3817883,
+          "hs_m": 1.81578577,
+          "peak_period_s": 16.6119823,
+          "mean_period_s": 12.5431242,
+          "direction_deg": 20.9532795,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": [
+            0.8923895171314518,
+            0.45126594122966385
+          ],
+          "transport": {
+            "vector_w_m": [
+              557.2730499048026,
+              192.4020785300471
+            ],
+            "magnitude_w_m": 589.5522131015056,
+            "all_directions_w_m": 661.7151515688888,
+            "shoreward_w_m": 584.1334432012032,
+            "seaward_w_m": 0.004310223879708066,
+            "net_shoreward_w_m": 584.1291329773236
+          },
+          "table_vector_w_m": [
+            557.3723338849734,
+            192.43198370936227
+          ],
+          "transport_relative_difference": 0.00017584844581176927,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.0,
+          "spectral_edges_pass": true
+        },
+        "east_face": {
+          "longitude_deg": 93.408203125,
+          "latitude_deg": 2.330078125,
+          "depth_m": 49.0394669,
+          "hs_m": 0.315574467,
+          "peak_period_s": 3.93932176,
+          "mean_period_s": 3.42576504,
+          "direction_deg": 20.392622,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": [
+            -0.9838355081400166,
+            -0.17907454571455822
+          ],
+          "transport": {
+            "vector_w_m": [
+              4.080219034118766,
+              0.10663688941457629
+            ],
+            "magnitude_w_m": 4.081612278569474,
+            "all_directions_w_m": 6.069152776364474,
+            "shoreward_w_m": 0.04661846796064366,
+            "seaward_w_m": 4.079978787243776,
+            "net_shoreward_w_m": -4.0333603192831315
+          },
+          "table_vector_w_m": [
+            4.078941419016188,
+            0.10768957835476953
+          ],
+          "transport_relative_difference": 0.0004057070108151429,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.06455486716873857,
+          "spectral_edges_pass": false
+        },
+        "southern_shore": {
+          "longitude_deg": 92.986328125,
+          "latitude_deg": 1.830078125,
+          "depth_m": 13.5493546,
+          "hs_m": 1.49437547,
+          "peak_period_s": 18.2847137,
+          "mean_period_s": 12.436533,
+          "direction_deg": 1.88831031,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": [
+            0.4523288110119487,
+            -0.891851246973685
+          ],
+          "transport": {
+            "vector_w_m": [
+              428.7601406121645,
+              4.86050789484873
+            ],
+            "magnitude_w_m": 428.78768955598406,
+            "all_directions_w_m": 477.9053281954391,
+            "shoreward_w_m": 211.4033784326902,
+            "seaward_w_m": 21.79766384722012,
+            "net_shoreward_w_m": 189.60571458547008
+          },
+          "table_vector_w_m": [
+            429.04170137959534,
+            4.897535384678829
+          ],
+          "transport_relative_difference": 0.000661862319964956,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.00021965819913706376,
+          "spectral_edges_pass": true
+        },
+        "offshore": {
+          "longitude_deg": 92.845703125,
+          "latitude_deg": 2.345703125,
+          "depth_m": 1270.76587,
+          "hs_m": 1.99524927,
+          "peak_period_s": 18.2847137,
+          "mean_period_s": 12.8435259,
+          "direction_deg": 22.3202133,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": null,
+          "transport": {
+            "vector_w_m": [
+              596.5929356548004,
+              225.22130940624288
+            ],
+            "magnitude_w_m": 637.6893985976835,
+            "all_directions_w_m": 754.5935931938496
+          },
+          "table_vector_w_m": [
+            596.5684355906194,
+            225.2705490880405
+          ],
+          "transport_relative_difference": 8.624677361081775e-05,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.0,
+          "spectral_edges_pass": true
+        }
+      },
+      "boundary_source": {
+        "path": "research/runs/waves/shore/region_h852_s8_relaxed/product.json",
+        "sha256": "00d1bf3b28e403a5746dd0fb61fbf9be129a8e54ddf8a400e018fc3c42d02347"
+      },
+      "boundary_mapping": {
+        "method": "Inverse-square interpolation among available wet spectra",
+        "neighbors": 4,
+        "source_spacing_deg": 0.03125,
+        "wet_boundary_locations": 210,
+        "maximum_nearest_distance_deg": 0.01562512500049913,
+        "maximum_supported_distance_deg": 0.04687487500016628,
+        "maximum_nearest_distance_in_source_cells": 0.5000040000159721,
+        "reading_rule": "The source and receiving grids resolve different shorelines. Wet spectra are extended over the recorded distances; dry locations retain NODATA. Boundary-position and source-grid controls measure sensitivity to this assumption."
+      },
+      "elapsed_wall_s": 22.318749616002606
+    },
+    {
+      "name": "h852_s4_d36_regional_accuracy",
+      "path": "research/runs/waves/shore/h852_s4_d36_regional_accuracy/product.json",
+      "sha256": "b593e4b0f1cef0e2ac5665c6e9068ac6df774a3c5d686a61ccba234efc4c8f10",
+      "hour": 852,
+      "day_in_second_cycle": 5.969410000000001,
+      "stride": 4,
+      "spacing_m": 473.80235037733564,
+      "directions": 36,
+      "frequency_intervals": 48,
+      "wet_nodes": 3462,
+      "maximum_hs_m": 2.06453109,
+      "minimum_depth_m": 0.58513999,
+      "nodes_below_ten_m": 14,
+      "nodes_with_one_percent_breaking": 3,
+      "maximum_breaking_fraction": 0.218847156,
+      "maximum_breaking_loss_w_m2": 1.8253815735766339,
+      "boundary": {
+        "wet_locations": 210,
+        "missing_parent_spectra": 0,
+        "frequency_bins": 49,
+        "direction_bins": 36,
+        "maximum_low_edge_fraction": 0.0,
+        "maximum_high_edge_fraction": 0.013699424012424197,
+        "spectral_edges_pass": false,
+        "resolved_hs_range_m": [
+          0.5817555268756079,
+          2.062424681788553
+        ]
+      },
+      "stopping": {
+        "criterion_percent": 99.0,
+        "last_percent": 99.08,
+        "passed": true
+      },
+      "sites": {
+        "west_face": {
+          "longitude_deg": 93.251953125,
+          "latitude_deg": 2.361328125,
+          "depth_m": 22.3817883,
+          "hs_m": 1.84708643,
+          "peak_period_s": 16.6119823,
+          "mean_period_s": 12.6502609,
+          "direction_deg": 20.2992764,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": [
+            0.8923895171314518,
+            0.45126594122966385
+          ],
+          "transport": {
+            "vector_w_m": [
+              583.6910350344825,
+              189.88823821975873
+            ],
+            "magnitude_w_m": 613.8018958864736,
+            "all_directions_w_m": 684.4291256778096,
+            "shoreward_w_m": 606.5760146876439,
+            "seaward_w_m": 0.006159230582597864,
+            "net_shoreward_w_m": 606.5698554570613
+          },
+          "table_vector_w_m": [
+            583.7254794543556,
+            189.87124579152612
+          ],
+          "transport_relative_difference": 6.257083952292457e-05,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.0,
+          "spectral_edges_pass": true
+        },
+        "east_face": {
+          "longitude_deg": 93.408203125,
+          "latitude_deg": 2.330078125,
+          "depth_m": 49.0394669,
+          "hs_m": 0.31816712,
+          "peak_period_s": 3.93932176,
+          "mean_period_s": 3.44154,
+          "direction_deg": 20.0605679,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": [
+            -0.9838355081400166,
+            -0.17907454571455822
+          ],
+          "transport": {
+            "vector_w_m": [
+              4.110882512908651,
+              0.022986078051474776
+            ],
+            "magnitude_w_m": 4.110946775953482,
+            "all_directions_w_m": 6.215947344124719,
+            "shoreward_w_m": 0.05211170252405298,
+            "seaward_w_m": 4.10066011000027,
+            "net_shoreward_w_m": -4.048548407476217
+          },
+          "table_vector_w_m": [
+            4.109582161536755,
+            0.024117759279495565
+          ],
+          "transport_relative_difference": 0.00041946062971411996,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.06386417099155926,
+          "spectral_edges_pass": false
+        },
+        "southern_shore": {
+          "longitude_deg": 92.986328125,
+          "latitude_deg": 1.830078125,
+          "depth_m": 13.5493546,
+          "hs_m": 1.52335584,
+          "peak_period_s": 15.0922785,
+          "mean_period_s": 12.5867758,
+          "direction_deg": 2.15557861,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": [
+            0.4523288110119487,
+            -0.891851246973685
+          ],
+          "transport": {
+            "vector_w_m": [
+              451.9236115794023,
+              3.422457716448445
+            ],
+            "magnitude_w_m": 451.93657068198337,
+            "all_directions_w_m": 499.6555479901142,
+            "shoreward_w_m": 221.1455360639968,
+            "seaward_w_m": 19.77978935218929,
+            "net_shoreward_w_m": 201.3657467118075
+          },
+          "table_vector_w_m": [
+            452.3359919212534,
+            3.4906221281385856
+          ],
+          "transport_relative_difference": 0.0009240112635285678,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.00010494152030025527,
+          "spectral_edges_pass": true
+        },
+        "offshore": {
+          "longitude_deg": 92.845703125,
+          "latitude_deg": 2.345703125,
+          "depth_m": 1270.76587,
+          "hs_m": 2.01089668,
+          "peak_period_s": 15.0922785,
+          "mean_period_s": 12.8856497,
+          "direction_deg": 21.7324333,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": null,
+          "transport": {
+            "vector_w_m": [
+              620.0645384321228,
+              221.59445442086147
+            ],
+            "magnitude_w_m": 658.4710578690007,
+            "all_directions_w_m": 766.2515615203256
+          },
+          "table_vector_w_m": [
+            620.1053959237844,
+            221.65994463404218
+          ],
+          "transport_relative_difference": 0.0001172154009516658,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.0,
+          "spectral_edges_pass": true
+        }
+      },
+      "boundary_source": {
+        "path": "research/runs/waves/shore/region_h852_s16_strict/product.json",
+        "sha256": "9c296d72e364815885cf4143266e5b126748d978d7f8fee966d35b16200bbc31"
+      },
+      "boundary_mapping": {
+        "method": "Inverse-square interpolation among available wet spectra",
+        "neighbors": 4,
+        "source_spacing_deg": 0.0625,
+        "wet_boundary_locations": 210,
+        "maximum_nearest_distance_deg": 0.046838923217076986,
+        "maximum_supported_distance_deg": 0.10000172808023365,
+        "maximum_nearest_distance_in_source_cells": 0.7494227714732318,
+        "reading_rule": "The source and receiving grids resolve different shorelines. Wet spectra are extended over the recorded distances; dry locations retain NODATA. Boundary-position and source-grid controls measure sensitivity to this assumption."
+      },
+      "elapsed_wall_s": 24.971734972001286
+    },
+    {
+      "name": "h852_s4_d72",
+      "path": "research/runs/waves/shore/h852_s4_d72/product.json",
+      "sha256": "331165cd1deec1c706c4e4905ccc7396c5d49ffb238cca4db79f28af672c867b",
+      "hour": 852,
+      "day_in_second_cycle": 5.969410000000001,
+      "stride": 4,
+      "spacing_m": 473.80235037733564,
+      "directions": 72,
+      "frequency_intervals": 48,
+      "wet_nodes": 3462,
+      "maximum_hs_m": 2.03931046,
+      "minimum_depth_m": 0.58513999,
+      "nodes_below_ten_m": 14,
+      "nodes_with_one_percent_breaking": 3,
+      "maximum_breaking_fraction": 0.205852002,
+      "maximum_breaking_loss_w_m2": 1.74725284859638,
+      "boundary": {
+        "wet_locations": 210,
+        "missing_parent_spectra": 0,
+        "frequency_bins": 49,
+        "direction_bins": 36,
+        "maximum_low_edge_fraction": 0.0,
+        "maximum_high_edge_fraction": 0.023545789601841657,
+        "spectral_edges_pass": false,
+        "resolved_hs_range_m": [
+          0.48097918913762144,
+          2.0403616721895603
+        ]
+      },
+      "stopping": {
+        "criterion_percent": 99.0,
+        "last_percent": 99.02,
+        "passed": true
+      },
+      "sites": {
+        "west_face": {
+          "longitude_deg": 93.251953125,
+          "latitude_deg": 2.361328125,
+          "depth_m": 22.3817883,
+          "hs_m": 1.81777167,
+          "peak_period_s": 16.6119823,
+          "mean_period_s": 12.5518513,
+          "direction_deg": 20.8863583,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": [
+            0.8923895171314518,
+            0.45126594122966385
+          ],
+          "transport": {
+            "vector_w_m": [
+              559.1544277460966,
+              192.4057104047654
+            ],
+            "magnitude_w_m": 591.3320822215105,
+            "all_directions_w_m": 663.1399872260557,
+            "shoreward_w_m": 585.8131724516102,
+            "seaward_w_m": 0.0034786695891249773,
+            "net_shoreward_w_m": 585.8096937820211
+          },
+          "table_vector_w_m": [
+            559.2527663051704,
+            192.43135107610982
+          ],
+          "transport_relative_difference": 0.0001718305963291138,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.0,
+          "spectral_edges_pass": true
+        },
+        "east_face": {
+          "longitude_deg": 93.408203125,
+          "latitude_deg": 2.330078125,
+          "depth_m": 49.0394669,
+          "hs_m": 0.315179676,
+          "peak_period_s": 3.93932176,
+          "mean_period_s": 3.3945055,
+          "direction_deg": 20.5369511,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": [
+            -0.9838355081400166,
+            -0.17907454571455822
+          ],
+          "transport": {
+            "vector_w_m": [
+              4.070922332407639,
+              0.0864856599222151
+            ],
+            "magnitude_w_m": 4.071840911168735,
+            "all_directions_w_m": 6.032808812798281,
+            "shoreward_w_m": 0.03833477152265202,
+            "seaward_w_m": 4.058940093286857,
+            "net_shoreward_w_m": -4.020605321764205
+          },
+          "table_vector_w_m": [
+            4.069665999992853,
+            0.0874514759587117
+          ],
+          "transport_relative_difference": 0.00038929533006840247,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.06672508682267922,
+          "spectral_edges_pass": false
+        },
+        "southern_shore": {
+          "longitude_deg": 92.986328125,
+          "latitude_deg": 1.830078125,
+          "depth_m": 13.5493546,
+          "hs_m": 1.49758434,
+          "peak_period_s": 18.2847137,
+          "mean_period_s": 12.4509678,
+          "direction_deg": 1.92584705,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": [
+            0.4523288110119487,
+            -0.891851246973685
+          ],
+          "transport": {
+            "vector_w_m": [
+              431.4178139654473,
+              5.145091676997956
+            ],
+            "magnitude_w_m": 431.44849307314774,
+            "all_directions_w_m": 480.19867444830453,
+            "shoreward_w_m": 212.09858503839462,
+            "seaward_w_m": 21.5445346259543,
+            "net_shoreward_w_m": 190.55405041244032
+          },
+          "table_vector_w_m": [
+            431.713403169906,
+            5.180653815149085
+          ],
+          "transport_relative_difference": 0.000689576258036387,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.00019371838391131792,
+          "spectral_edges_pass": true
+        },
+        "offshore": {
+          "longitude_deg": 92.845703125,
+          "latitude_deg": 2.345703125,
+          "depth_m": 1270.76587,
+          "hs_m": 1.99572289,
+          "peak_period_s": 16.6119823,
+          "mean_period_s": 12.8460703,
+          "direction_deg": 22.292572,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": null,
+          "transport": {
+            "vector_w_m": [
+              597.5057677330145,
+              225.23145173883685
+            ],
+            "magnitude_w_m": 638.5470611682455,
+            "all_directions_w_m": 754.9207031590486
+          },
+          "table_vector_w_m": [
+            597.4966950322472,
+            225.26943199090266
+          ],
+          "transport_relative_difference": 6.115220311569957e-05,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.0,
+          "spectral_edges_pass": true
+        }
+      },
+      "boundary_source": {
+        "path": "research/runs/waves/shore/region_h852_s16_relaxed/product.json",
+        "sha256": "9dd92434d338870516157821cf10f3db44cd8edbb0891de1327d1a1072f0bd3a"
+      },
+      "boundary_mapping": {
+        "method": "Inverse-square interpolation among available wet spectra",
+        "neighbors": 4,
+        "source_spacing_deg": 0.0625,
+        "wet_boundary_locations": 210,
+        "maximum_nearest_distance_deg": 0.046838923217076986,
+        "maximum_supported_distance_deg": 0.10000172808023365,
+        "maximum_nearest_distance_in_source_cells": 0.7494227714732318,
+        "reading_rule": "The source and receiving grids resolve different shorelines. Wet spectra are extended over the recorded distances; dry locations retain NODATA. Boundary-position and source-grid controls measure sensitivity to this assumption."
+      },
+      "elapsed_wall_s": 48.73188115999801
+    },
+    {
+      "name": "h852_s8_d36",
+      "path": "research/runs/waves/shore/h852_s8_d36/product.json",
+      "sha256": "c0f216f44acf965e6fbfea089f43bc923a6fb399ef30bbc7f5b5ffd9188ce34c",
+      "hour": 852,
+      "day_in_second_cycle": 5.969410000000001,
+      "stride": 8,
+      "spacing_m": 947.6047007546713,
+      "directions": 36,
+      "frequency_intervals": 48,
+      "wet_nodes": 894,
+      "maximum_hs_m": 2.03964663,
+      "minimum_depth_m": 0.58513999,
+      "nodes_below_ten_m": 5,
+      "nodes_with_one_percent_breaking": 1,
+      "maximum_breaking_fraction": 0.107740827,
+      "maximum_breaking_loss_w_m2": 0.6226335915200808,
+      "boundary": {
+        "wet_locations": 104,
+        "missing_parent_spectra": 0,
+        "frequency_bins": 49,
+        "direction_bins": 36,
+        "maximum_low_edge_fraction": 0.0,
+        "maximum_high_edge_fraction": 0.023545789601841657,
+        "spectral_edges_pass": false,
+        "resolved_hs_range_m": [
+          0.48097918913762144,
+          2.0403616721895603
+        ]
+      },
+      "stopping": {
+        "criterion_percent": 99.0,
+        "last_percent": 99.11,
+        "passed": true
+      },
+      "sites": {
+        "offshore": {
+          "longitude_deg": 92.845703125,
+          "latitude_deg": 2.345703125,
+          "depth_m": 1270.76587,
+          "hs_m": 1.99601638,
+          "peak_period_s": 16.6119823,
+          "mean_period_s": 12.8409147,
+          "direction_deg": 22.3048344,
+          "breaking_fraction": 0.0,
+          "shoreward_normal": null,
+          "transport": {
+            "vector_w_m": [
+              597.624910247321,
+              225.30564535838693
+            ],
+            "magnitude_w_m": 638.6847165687291,
+            "all_directions_w_m": 755.0074598849619
+          },
+          "table_vector_w_m": [
+            597.6022765276032,
+            225.35241349572803
+          ],
+          "transport_relative_difference": 8.135080554033729e-05,
+          "transport_agrees": true,
+          "low_frequency_edge_fraction": 0.0,
+          "high_frequency_edge_fraction": 0.0,
+          "spectral_edges_pass": true
+        }
+      },
+      "boundary_source": {
+        "path": "research/runs/waves/shore/region_h852_s16_relaxed/product.json",
+        "sha256": "9dd92434d338870516157821cf10f3db44cd8edbb0891de1327d1a1072f0bd3a"
+      },
+      "boundary_mapping": {
+        "method": "Inverse-square interpolation among available wet spectra",
+        "neighbors": 4,
+        "source_spacing_deg": 0.0625,
+        "wet_boundary_locations": 104,
+        "maximum_nearest_distance_deg": 0.03124987500024971,
+        "maximum_supported_distance_deg": 0.09367772153043842,
+        "maximum_nearest_distance_in_source_cells": 0.49999800000399536,
+        "reading_rule": "The source and receiving grids resolve different shorelines. Wet spectra are extended over the recorded distances; dry locations retain NODATA. Boundary-position and source-grid controls measure sensitivity to this assumption."
+      },
+      "elapsed_wall_s": 6.83452494499943
+    }
+  ],
+  "comparisons": [
+    {
+      "from_case": "h852_s8_d36",
+      "to_case": "h852_s4_d36",
+      "boundary_buffer_m": 2000,
+      "minimum_hs_m": 0.1,
+      "flux_denominator_floor_w_m": 1.0,
+      "period_denominator_floor_s": 1.0,
+      "all_depths": {
+        "nodes": 592,
+        "hs_relative_p95": 0.06244138433948015,
+        "hs_relative_max": 0.46677661226634426,
+        "hs_absolute_max_m": 0.1352797699999999,
+        "mean_period_relative_p95": 0.03634434799814589,
+        "flux_vector_relative_p95": 0.1586922558596757,
+        "flux_vector_relative_max": 1.9045119115379403
+      },
+      "depth_bands": {
+        "0_10m": {
+          "nodes": 3,
+          "hs_relative_p95": 0.23851033347659054,
+          "hs_relative_max": 0.25319819162390234,
+          "hs_absolute_max_m": 0.08081385500000005,
+          "mean_period_relative_p95": 0.08396669920756906,
+          "flux_vector_relative_p95": 0.603281251060049,
+          "flux_vector_relative_max": 0.6472415798521488
+        },
+        "10_50m": {
+          "nodes": 7,
+          "hs_relative_p95": 0.421010396253321,
+          "hs_relative_max": 0.46677661226634426,
+          "hs_absolute_max_m": 0.11436980899999999,
+          "mean_period_relative_p95": 0.1997259328205345,
+          "flux_vector_relative_p95": 1.6212985368567288,
+          "flux_vector_relative_max": 1.9045119115379403
+        },
+        "50_200m": {
+          "nodes": 47,
+          "hs_relative_p95": 0.16606719455876917,
+          "hs_relative_max": 0.3306545807985271,
+          "hs_absolute_max_m": 0.1352797699999999,
+          "mean_period_relative_p95": 0.13038632489198076,
+          "flux_vector_relative_p95": 0.6683878339950557,
+          "flux_vector_relative_max": 1.456574923611149
+        },
+        "200_100000m": {
+          "nodes": 535,
+          "hs_relative_p95": 0.0439348881343727,
+          "hs_relative_max": 0.15326123382232276,
+          "hs_absolute_max_m": 0.12528479000000003,
+          "mean_period_relative_p95": 0.02953395125256156,
+          "flux_vector_relative_p95": 0.10789945362323336,
+          "flux_vector_relative_max": 0.5606815925494183
+        }
+      },
+      "largest_height_change": {
+        "longitude_deg": 93.408203125,
+        "latitude_deg": 2.283203125,
+        "depth_m": 20.3497066,
+        "from_hs_m": 0.289472401,
+        "to_hs_m": 0.197352752
+      },
+      "exposure_tolerance_pass": false
+    },
+    {
+      "from_case": "h852_s4_d36",
+      "to_case": "h852_s2_d36",
+      "boundary_buffer_m": 2000,
+      "minimum_hs_m": 0.1,
+      "flux_denominator_floor_w_m": 1.0,
+      "period_denominator_floor_s": 1.0,
+      "all_depths": {
+        "nodes": 2457,
+        "hs_relative_p95": 0.03565908711819391,
+        "hs_relative_max": 0.35079935782655136,
+        "hs_absolute_max_m": 0.2079868949999999,
+        "mean_period_relative_p95": 0.02715809275907599,
+        "flux_vector_relative_p95": 0.10444517398999986,
+        "flux_vector_relative_max": 1.1543016451352197
+      },
+      "depth_bands": {
+        "0_10m": {
+          "nodes": 8,
+          "hs_relative_p95": 0.2922936970800152,
+          "hs_relative_max": 0.3283895203071715,
+          "hs_absolute_max_m": 0.07908153000000007,
+          "mean_period_relative_p95": 0.08611316294304087,
+          "flux_vector_relative_p95": 0.9361361759169509,
+          "flux_vector_relative_max": 1.1543016451352197
+        },
+        "10_50m": {
+          "nodes": 35,
+          "hs_relative_p95": 0.251557961380996,
+          "hs_relative_max": 0.35079935782655136,
+          "hs_absolute_max_m": 0.13758480000000017,
+          "mean_period_relative_p95": 0.12226596818052647,
+          "flux_vector_relative_p95": 0.7710407776619229,
+          "flux_vector_relative_max": 1.021554120687257
+        },
+        "50_200m": {
+          "nodes": 193,
+          "hs_relative_p95": 0.12785796977039407,
+          "hs_relative_max": 0.24965598914272855,
+          "hs_absolute_max_m": 0.2079868949999999,
+          "mean_period_relative_p95": 0.09228757438677768,
+          "flux_vector_relative_p95": 0.46113164244133314,
+          "flux_vector_relative_max": 1.0709432752006898
+        },
+        "200_100000m": {
+          "nodes": 2221,
+          "hs_relative_p95": 0.020773440280098344,
+          "hs_relative_max": 0.14158867850178672,
+          "hs_absolute_max_m": 0.1722118800000001,
+          "mean_period_relative_p95": 0.018831834916441414,
+          "flux_vector_relative_p95": 0.058566338441421374,
+          "flux_vector_relative_max": 0.4426485700503764
+        }
+      },
+      "largest_height_change": {
+        "longitude_deg": 93.408203125,
+        "latitude_deg": 2.283203125,
+        "depth_m": 20.3497066,
+        "from_hs_m": 0.197352752,
+        "to_hs_m": 0.146100715
+      },
+      "exposure_tolerance_pass": false
+    },
+    {
+      "from_case": "h852_s2_d36",
+      "to_case": "h852_s1_d36",
+      "boundary_buffer_m": 2000,
+      "minimum_hs_m": 0.1,
+      "flux_denominator_floor_w_m": 1.0,
+      "period_denominator_floor_s": 1.0,
+      "all_depths": {
+        "nodes": 10027,
+        "hs_relative_p95": 0.028398661769103276,
+        "hs_relative_max": 0.39087739970519353,
+        "hs_absolute_max_m": 0.19102633000000013,
+        "mean_period_relative_p95": 0.017266695158436922,
+        "flux_vector_relative_p95": 0.07891954886064916,
+        "flux_vector_relative_max": 1.4899834323851917
+      },
+      "depth_bands": {
+        "0_10m": {
+          "nodes": 39,
+          "hs_relative_p95": 0.2919142638976256,
+          "hs_relative_max": 0.35689503523262994,
+          "hs_absolute_max_m": 0.09743577199999998,
+          "mean_period_relative_p95": 0.2056498781372596,
+          "flux_vector_relative_p95": 0.8309707125652438,
+          "flux_vector_relative_max": 1.4197536678094262
+        },
+        "10_50m": {
+          "nodes": 149,
+          "hs_relative_p95": 0.2154772351327223,
+          "hs_relative_max": 0.39087739970519353,
+          "hs_absolute_max_m": 0.18331617200000005,
+          "mean_period_relative_p95": 0.09122444643790455,
+          "flux_vector_relative_p95": 0.7494740316672415,
+          "flux_vector_relative_max": 1.4899834323851917
+        },
+        "50_200m": {
+          "nodes": 815,
+          "hs_relative_p95": 0.10129356513089084,
+          "hs_relative_max": 0.2347392889929346,
+          "hs_absolute_max_m": 0.19102633000000013,
+          "mean_period_relative_p95": 0.06181952375985974,
+          "flux_vector_relative_p95": 0.37130519168546267,
+          "flux_vector_relative_max": 0.9061006062445911
+        },
+        "200_100000m": {
+          "nodes": 9024,
+          "hs_relative_p95": 0.016796259301041522,
+          "hs_relative_max": 0.0840489369231785,
+          "hs_absolute_max_m": 0.10633121999999995,
+          "mean_period_relative_p95": 0.011518527600210458,
+          "flux_vector_relative_p95": 0.04010021176059335,
+          "flux_vector_relative_max": 0.3622108340904166
+        }
+      },
+      "largest_height_change": {
+        "longitude_deg": 93.416015625,
+        "latitude_deg": 2.275390625,
+        "depth_m": 13.4187698,
+        "from_hs_m": 0.149758518,
+        "to_hs_m": 0.107671976
+      },
+      "exposure_tolerance_pass": false
+    },
+    {
+      "from_case": "h852_s4_d36",
+      "to_case": "h852_s4_d72",
+      "boundary_buffer_m": 2000,
+      "minimum_hs_m": 0.1,
+      "flux_denominator_floor_w_m": 1.0,
+      "period_denominator_floor_s": 1.0,
+      "all_depths": {
+        "nodes": 2457,
+        "hs_relative_p95": 0.005783712826193249,
+        "hs_relative_max": 0.0243139537737895,
+        "hs_absolute_max_m": 0.024912353000000054,
+        "mean_period_relative_p95": 0.004599893005752895,
+        "flux_vector_relative_p95": 0.01645022132538947,
+        "flux_vector_relative_max": 0.07926949338607377
+      },
+      "depth_bands": {
+        "0_10m": {
+          "nodes": 8,
+          "hs_relative_p95": 0.001862889300370768,
+          "hs_relative_max": 0.0019062133729579097,
+          "hs_absolute_max_m": 0.002498150000000088,
+          "mean_period_relative_p95": 0.0038828445029943305,
+          "flux_vector_relative_p95": 0.012976711502143771,
+          "flux_vector_relative_max": 0.016253389449131732
+        },
+        "10_50m": {
+          "nodes": 35,
+          "hs_relative_p95": 0.017179003246645147,
+          "hs_relative_max": 0.019756466082262378,
+          "hs_absolute_max_m": 0.019962966000000026,
+          "mean_period_relative_p95": 0.012832505241426645,
+          "flux_vector_relative_p95": 0.0526461707668848,
+          "flux_vector_relative_max": 0.0656426379656099
+        },
+        "50_200m": {
+          "nodes": 193,
+          "hs_relative_p95": 0.00986564324764533,
+          "hs_relative_max": 0.0243139537737895,
+          "hs_absolute_max_m": 0.024912353000000054,
+          "mean_period_relative_p95": 0.008206548209795194,
+          "flux_vector_relative_p95": 0.028086586185426792,
+          "flux_vector_relative_max": 0.07926949338607377
+        },
+        "200_100000m": {
+          "nodes": 2221,
+          "hs_relative_p95": 0.004253926995741522,
+          "hs_relative_max": 0.00956241167194781,
+          "hs_absolute_max_m": 0.010981439999999898,
+          "mean_period_relative_p95": 0.0032566534459531242,
+          "flux_vector_relative_p95": 0.012783727702695768,
+          "flux_vector_relative_max": 0.023811882735485762
+        }
+      },
+      "largest_height_change": {
+        "longitude_deg": 93.673828125,
+        "latitude_deg": 1.845703125,
+        "depth_m": 53.3940697,
+        "from_hs_m": 0.999698997,
+        "to_hs_m": 1.02461135
+      },
+      "exposure_tolerance_pass": true
+    },
+    {
+      "from_case": "h852_s4_d36",
+      "to_case": "h852_s4_d36_expanded",
+      "boundary_buffer_m": 2000,
+      "minimum_hs_m": 0.1,
+      "flux_denominator_floor_w_m": 1.0,
+      "period_denominator_floor_s": 1.0,
+      "all_depths": {
+        "nodes": 2457,
+        "hs_relative_p95": 0.00959180100533824,
+        "hs_relative_max": 0.04871506705577776,
+        "hs_absolute_max_m": 0.019207830000000037,
+        "mean_period_relative_p95": 0.007871939354592261,
+        "flux_vector_relative_p95": 0.022990088735959827,
+        "flux_vector_relative_max": 0.10294142734180725
+      },
+      "depth_bands": {
+        "0_10m": {
+          "nodes": 8,
+          "hs_relative_p95": 0.04093283991360998,
+          "hs_relative_max": 0.04871506705577776,
+          "hs_absolute_max_m": 0.010439305999999982,
+          "mean_period_relative_p95": 0.006692806315500944,
+          "flux_vector_relative_p95": 0.05803553271559486,
+          "flux_vector_relative_max": 0.0779549785790701
+        },
+        "10_50m": {
+          "nodes": 35,
+          "hs_relative_p95": 0.04005877286263729,
+          "hs_relative_max": 0.04660847912471839,
+          "hs_absolute_max_m": 0.014213622000000037,
+          "mean_period_relative_p95": 0.03559470820393471,
+          "flux_vector_relative_p95": 0.06655720584189655,
+          "flux_vector_relative_max": 0.10294142734180725
+        },
+        "50_200m": {
+          "nodes": 193,
+          "hs_relative_p95": 0.018217108553884656,
+          "hs_relative_max": 0.034914944451714176,
+          "hs_absolute_max_m": 0.017612809999999923,
+          "mean_period_relative_p95": 0.020093957635661637,
+          "flux_vector_relative_p95": 0.03828529389925169,
+          "flux_vector_relative_max": 0.1015780630252617
+        },
+        "200_100000m": {
+          "nodes": 2221,
+          "hs_relative_p95": 0.00848657451400808,
+          "hs_relative_max": 0.016523984669687998,
+          "hs_absolute_max_m": 0.019207830000000037,
+          "mean_period_relative_p95": 0.007232263416332552,
+          "flux_vector_relative_p95": 0.02234542199888695,
+          "flux_vector_relative_max": 0.039008662463935334
+        }
+      },
+      "largest_height_change": {
+        "longitude_deg": 93.392578125,
+        "latitude_deg": 2.345703125,
+        "depth_m": 8.90550423,
+        "from_hs_m": 0.224732473,
+        "to_hs_m": 0.214293167
+      },
+      "exposure_tolerance_pass": true
+    },
+    {
+      "from_case": "h852_s4_d36",
+      "to_case": "h852_s4_d36_band",
+      "boundary_buffer_m": 2000,
+      "minimum_hs_m": 0.1,
+      "flux_denominator_floor_w_m": 1.0,
+      "period_denominator_floor_s": 1.0,
+      "all_depths": {
+        "nodes": 2457,
+        "hs_relative_p95": 0.004731194359448296,
+        "hs_relative_max": 0.07336537470008876,
+        "hs_absolute_max_m": 0.019604592999999948,
+        "mean_period_relative_p95": 0.033903769936427866,
+        "flux_vector_relative_p95": 0.003862904235133445,
+        "flux_vector_relative_max": 0.1311009714614445
+      },
+      "depth_bands": {
+        "0_10m": {
+          "nodes": 8,
+          "hs_relative_p95": 0.0619725873900862,
+          "hs_relative_max": 0.07336537470008876,
+          "hs_absolute_max_m": 0.01779297000000002,
+          "mean_period_relative_p95": 0.04917910513886051,
+          "flux_vector_relative_p95": 0.0922146400062929,
+          "flux_vector_relative_max": 0.12316327560609126
+        },
+        "10_50m": {
+          "nodes": 35,
+          "hs_relative_p95": 0.05638700790129779,
+          "hs_relative_max": 0.05765748405725293,
+          "hs_absolute_max_m": 0.019604592999999948,
+          "mean_period_relative_p95": 0.1098231280125584,
+          "flux_vector_relative_p95": 0.07281701989028888,
+          "flux_vector_relative_max": 0.1311009714614445
+        },
+        "50_200m": {
+          "nodes": 193,
+          "hs_relative_p95": 0.011398614999688233,
+          "hs_relative_max": 0.02576688467757168,
+          "hs_absolute_max_m": 0.012064575999999994,
+          "mean_period_relative_p95": 0.05303333375353999,
+          "flux_vector_relative_p95": 0.013900524502697513,
+          "flux_vector_relative_max": 0.06906655339484592
+        },
+        "200_100000m": {
+          "nodes": 2221,
+          "hs_relative_p95": 0.003219331172988729,
+          "hs_relative_max": 0.01111467818384653,
+          "hs_absolute_max_m": 0.006746410999999952,
+          "mean_period_relative_p95": 0.030030253629181287,
+          "flux_vector_relative_p95": 0.0034300725212581696,
+          "flux_vector_relative_max": 0.01934322498993147
+        }
+      },
+      "largest_height_change": {
+        "longitude_deg": 93.392578125,
+        "latitude_deg": 2.345703125,
+        "depth_m": 8.90550423,
+        "from_hs_m": 0.224732473,
+        "to_hs_m": 0.242525443
+      },
+      "exposure_tolerance_pass": true
+    },
+    {
+      "from_case": "h852_s4_d36",
+      "to_case": "h852_s4_d36_accuracy",
+      "boundary_buffer_m": 2000,
+      "minimum_hs_m": 0.1,
+      "flux_denominator_floor_w_m": 1.0,
+      "period_denominator_floor_s": 1.0,
+      "all_depths": {
+        "nodes": 2457,
+        "hs_relative_p95": 0.048200063395038656,
+        "hs_relative_max": 0.18213479749842584,
+        "hs_absolute_max_m": 0.074396193,
+        "mean_period_relative_p95": 0.03725359665757532,
+        "flux_vector_relative_p95": 0.0646623490216127,
+        "flux_vector_relative_max": 0.4524022748467577
+      },
+      "depth_bands": {
+        "0_10m": {
+          "nodes": 8,
+          "hs_relative_p95": 0.15891629095781007,
+          "hs_relative_max": 0.18109250080619038,
+          "hs_absolute_max_m": 0.049697146000000025,
+          "mean_period_relative_p95": 0.09286376484987141,
+          "flux_vector_relative_p95": 0.2953953808882646,
+          "flux_vector_relative_max": 0.3770118866483978
+        },
+        "10_50m": {
+          "nodes": 35,
+          "hs_relative_p95": 0.14623085301738675,
+          "hs_relative_max": 0.18213479749842584,
+          "hs_absolute_max_m": 0.074396193,
+          "mean_period_relative_p95": 0.1655829584472568,
+          "flux_vector_relative_p95": 0.297022970677504,
+          "flux_vector_relative_max": 0.4524022748467577
+        },
+        "50_200m": {
+          "nodes": 193,
+          "hs_relative_p95": 0.09154178338520308,
+          "hs_relative_max": 0.14277622057507833,
+          "hs_absolute_max_m": 0.06362938900000004,
+          "mean_period_relative_p95": 0.11000926469247552,
+          "flux_vector_relative_p95": 0.18971670862735696,
+          "flux_vector_relative_max": 0.40725658322971064
+        },
+        "200_100000m": {
+          "nodes": 2221,
+          "hs_relative_p95": 0.03966654588572059,
+          "hs_relative_max": 0.1008589877160544,
+          "hs_absolute_max_m": 0.049799858999999946,
+          "mean_period_relative_p95": 0.028571359763995767,
+          "flux_vector_relative_p95": 0.05601362463204764,
+          "flux_vector_relative_max": 0.2546733942167045
+        }
+      },
+      "largest_height_change": {
+        "longitude_deg": 93.408203125,
+        "latitude_deg": 2.283203125,
+        "depth_m": 20.3497066,
+        "from_hs_m": 0.197352752,
+        "to_hs_m": 0.241302297
+      },
+      "exposure_tolerance_pass": false
+    },
+    {
+      "from_case": "h852_s4_d36",
+      "to_case": "h852_s4_d36_regional_accuracy",
+      "boundary_buffer_m": 2000,
+      "minimum_hs_m": 0.1,
+      "flux_denominator_floor_w_m": 1.0,
+      "period_denominator_floor_s": 1.0,
+      "all_depths": {
+        "nodes": 2457,
+        "hs_relative_p95": 0.025525200455466933,
+        "hs_relative_max": 0.06315422918895146,
+        "hs_absolute_max_m": 0.0691820299999999,
+        "mean_period_relative_p95": 0.018412247505860808,
+        "flux_vector_relative_p95": 0.06217179122382134,
+        "flux_vector_relative_max": 0.1345815095844138
+      },
+      "depth_bands": {
+        "0_10m": {
+          "nodes": 8,
+          "hs_relative_p95": 0.027875771451634772,
+          "hs_relative_max": 0.030955094237167385,
+          "hs_absolute_max_m": 0.042159549999999824,
+          "mean_period_relative_p95": 0.015569941429452316,
+          "flux_vector_relative_p95": 0.06102520389001323,
+          "flux_vector_relative_max": 0.06384546394461368
+        },
+        "10_50m": {
+          "nodes": 35,
+          "hs_relative_p95": 0.054320373585284534,
+          "hs_relative_max": 0.05718503957619177,
+          "hs_absolute_max_m": 0.06101131999999998,
+          "mean_period_relative_p95": 0.03867643688353846,
+          "flux_vector_relative_p95": 0.10951697023921336,
+          "flux_vector_relative_max": 0.11766971127594618
+        },
+        "50_200m": {
+          "nodes": 193,
+          "hs_relative_p95": 0.05580376727468462,
+          "hs_relative_max": 0.06315422918895146,
+          "hs_absolute_max_m": 0.0691820299999999,
+          "mean_period_relative_p95": 0.039988663567976764,
+          "flux_vector_relative_p95": 0.11783484881804268,
+          "flux_vector_relative_max": 0.1345815095844138
+        },
+        "200_100000m": {
+          "nodes": 2221,
+          "hs_relative_p95": 0.023769621299340342,
+          "hs_relative_max": 0.040092705909557776,
+          "hs_absolute_max_m": 0.052645330000000046,
+          "mean_period_relative_p95": 0.017729047888825986,
+          "flux_vector_relative_p95": 0.06107408025624216,
+          "flux_vector_relative_max": 0.07554769985829475
+        }
+      },
+      "largest_height_change": {
+        "longitude_deg": 93.642578125,
+        "latitude_deg": 1.845703125,
+        "depth_m": 55.5652885,
+        "from_hs_m": 1.0084703,
+        "to_hs_m": 1.07645285
+      },
+      "exposure_tolerance_pass": true
+    },
+    {
+      "from_case": "h852_s4_d36",
+      "to_case": "h852_s4_d36_r8",
+      "boundary_buffer_m": 2000,
+      "minimum_hs_m": 0.1,
+      "flux_denominator_floor_w_m": 1.0,
+      "period_denominator_floor_s": 1.0,
+      "all_depths": {
+        "nodes": 2457,
+        "hs_relative_p95": 0.0023530101156258743,
+        "hs_relative_max": 0.013919124540065,
+        "hs_absolute_max_m": 0.008801225999999884,
+        "mean_period_relative_p95": 0.002177613274325203,
+        "flux_vector_relative_p95": 0.006346539402886448,
+        "flux_vector_relative_max": 0.03588321655106699
+      },
+      "depth_bands": {
+        "0_10m": {
+          "nodes": 8,
+          "hs_relative_p95": 0.011003721799777474,
+          "hs_relative_max": 0.013919124540065,
+          "hs_absolute_max_m": 0.0031722340000000238,
+          "mean_period_relative_p95": 0.002458261497319005,
+          "flux_vector_relative_p95": 0.018695500676496512,
+          "flux_vector_relative_max": 0.02520304070250447
+        },
+        "10_50m": {
+          "nodes": 35,
+          "hs_relative_p95": 0.010654665585273148,
+          "hs_relative_max": 0.01140890209663507,
+          "hs_absolute_max_m": 0.003861933999999956,
+          "mean_period_relative_p95": 0.011969210856463193,
+          "flux_vector_relative_p95": 0.019114146350784143,
+          "flux_vector_relative_max": 0.029936798977218043
+        },
+        "50_200m": {
+          "nodes": 193,
+          "hs_relative_p95": 0.004832167978388079,
+          "hs_relative_max": 0.008725944657654899,
+          "hs_absolute_max_m": 0.008801225999999884,
+          "mean_period_relative_p95": 0.005503469322775673,
+          "flux_vector_relative_p95": 0.017754228441624234,
+          "flux_vector_relative_max": 0.03588321655106699
+        },
+        "200_100000m": {
+          "nodes": 2221,
+          "hs_relative_p95": 0.0018092169806467175,
+          "hs_relative_max": 0.004663088404033641,
+          "hs_absolute_max_m": 0.004958269999999931,
+          "mean_period_relative_p95": 0.0019486849440541738,
+          "flux_vector_relative_p95": 0.004405285873981568,
+          "flux_vector_relative_max": 0.011758131915000684
+        }
+      },
+      "largest_height_change": {
+        "longitude_deg": 93.392578125,
+        "latitude_deg": 2.345703125,
+        "depth_m": 8.90550423,
+        "from_hs_m": 0.224732473,
+        "to_hs_m": 0.227904707
+      },
+      "exposure_tolerance_pass": true
+    },
+    {
+      "from_case": "h852_s4_d36",
+      "to_case": "h852_s4_d36_nearest",
+      "boundary_buffer_m": 2000,
+      "minimum_hs_m": 0.1,
+      "flux_denominator_floor_w_m": 1.0,
+      "period_denominator_floor_s": 1.0,
+      "all_depths": {
+        "nodes": 2457,
+        "hs_relative_p95": 0.008642050999602219,
+        "hs_relative_max": 0.01772883564069089,
+        "hs_absolute_max_m": 0.01257514999999998,
+        "mean_period_relative_p95": 0.00494211224725609,
+        "flux_vector_relative_p95": 0.023008334973581956,
+        "flux_vector_relative_max": 0.03564243589947721
+      },
+      "depth_bands": {
+        "0_10m": {
+          "nodes": 8,
+          "hs_relative_p95": 0.015203301364365119,
+          "hs_relative_max": 0.01772883564069089,
+          "hs_absolute_max_m": 0.009604689999999971,
+          "mean_period_relative_p95": 0.004265849786786215,
+          "flux_vector_relative_p95": 0.029267030935826558,
+          "flux_vector_relative_max": 0.03564243589947721
+        },
+        "10_50m": {
+          "nodes": 35,
+          "hs_relative_p95": 0.01493893648870227,
+          "hs_relative_max": 0.01692119418564022,
+          "hs_absolute_max_m": 0.009597179999999872,
+          "mean_period_relative_p95": 0.005724299739211196,
+          "flux_vector_relative_p95": 0.032611308771487275,
+          "flux_vector_relative_max": 0.035112810433789866
+        },
+        "50_200m": {
+          "nodes": 193,
+          "hs_relative_p95": 0.011348058093653841,
+          "hs_relative_max": 0.013872189458309418,
+          "hs_absolute_max_m": 0.011590479999999959,
+          "mean_period_relative_p95": 0.006204489763251203,
+          "flux_vector_relative_p95": 0.02715697071137393,
+          "flux_vector_relative_max": 0.035555925633811554
+        },
+        "200_100000m": {
+          "nodes": 2221,
+          "hs_relative_p95": 0.008127470342789217,
+          "hs_relative_max": 0.011174318588159348,
+          "hs_absolute_max_m": 0.01257514999999998,
+          "mean_period_relative_p95": 0.004813411464948945,
+          "flux_vector_relative_p95": 0.02217693349694347,
+          "flux_vector_relative_max": 0.029494715632648397
+        }
+      },
+      "largest_height_change": {
+        "longitude_deg": 93.392578125,
+        "latitude_deg": 2.345703125,
+        "depth_m": 8.90550423,
+        "from_hs_m": 0.224732473,
+        "to_hs_m": 0.228788629
+      },
+      "exposure_tolerance_pass": true
+    }
+  ]
+}

@@ -71,7 +71,7 @@
     },
     {
       "topic": "seas",
-      "condition": "swan_41_51_serial_builds; audited_gravity_paths; conditional_wind_wave_experiments_with_earth_controls; three_corrected_cm1_rings_recovered_as_geographic_vectors; ten_gcm_years_of_regional_model_level_means_recovered; smythii_marginis_basin_and_idealised_slopes_run; eastern_smythii_nested_to_1p9_km; child_directional_bound_passes; local_coastal_grid_and_earliest_growth_bounds_fail; ocean_heat_and_underwater_light_models_pending; global_three_hourly_gcm_surface_stress_captured_from_isolated_restart; seven_day_weather_driven_sea_with_48h_and_96h_history_controls; history_bound_passes_after_first_selected_day; full_field_weather_timestep_bound_fails_in_small_waves; sixty_day_global_surface_stress_record; continuous_two_solar_cycle_waves_with_first_cycle_excluded; second_cycle_occurrence_and_persistence_measured; metre_scale_timestep_subset_passes; weak_wave_spectral_edges_and_full_field_timestep_bound_fail",
+      "condition": "swan_41_51_serial_builds; audited_gravity_paths; conditional_wind_wave_experiments_with_earth_controls; three_corrected_cm1_rings_recovered_as_geographic_vectors; ten_gcm_years_of_regional_model_level_means_recovered; smythii_marginis_basin_and_idealised_slopes_run; eastern_smythii_nested_to_1p9_km; child_directional_bound_passes; local_coastal_grid_and_earliest_growth_bounds_fail; ocean_heat_and_underwater_light_models_pending; global_three_hourly_gcm_surface_stress_captured_from_isolated_restart; seven_day_weather_driven_sea_with_48h_and_96h_history_controls; history_bound_passes_after_first_selected_day; full_field_weather_timestep_bound_fails_in_small_waves; sixty_day_global_surface_stress_record; continuous_two_solar_cycle_waves_with_first_cycle_excluded; second_cycle_occurrence_and_persistence_measured; metre_scale_timestep_subset_passes; weak_wave_spectral_edges_and_full_field_timestep_bound_fail; native_118m_shore_terrain; second_cycle_stationary_coastal_exposure_with_regional_nesting; headland_shelter_changes_with_wave_direction; boundary_and_direction_controls_pass; pointwise_spatial_and_weak_wave_spectral_convergence_remain_open",
       "material": [
         "../climate/waves/README.md",
         "../climate/waves/coastal.md",
@@ -101,23 +101,31 @@
         "../climate/waves/cycle.md",
         "../climate/waves/results/cycle.json",
         "../climate/waves/results/cycle_checks.json",
-        "../climate/waves/cycle_verification.json"
+        "../climate/waves/cycle_verification.json",
+        "../climate/waves/shore.md",
+        "../climate/waves/shore.py",
+        "../climate/waves/shore_region.py",
+        "../climate/waves/shore_checks.py",
+        "../climate/waves/results/shore.json",
+        "../climate/waves/shore_verification.json",
+        "../geography/shore_terrain.py",
+        "../geography/shore_inputs.json"
       ],
       "unresolved": [
         "An isolated continuation of A28_dim5_moon year 29 supplies 481 global instantaneous snapshots over 60 Earth days at three-hour intervals. The original 30-day export overlaps exactly in all 6,416,962 values, and recording preserves final climate state and ordinary output. The wave model now follows two solar cycles, excluding the first 29.53059 days and analyzing the second. Inter-cycle and seasonal occurrence, other seas, coastal winds, gusts and an independent 10 m diagnostic remain further work. CM1 ring products retain only days 29.5–59.0.",
-        "Eastern Smythii is nested from the 0.5-degree basin into fixed 16-pixel/degree LOLA/GRAIL terrain. Refining the wave grid from 3.8 to 1.9 km changes final Hs by up to 0.623 m (118% relative to the fine run; 7.50% at the 95th percentile), failing the 5% criterion. A narrow shoreline spur skipped by the coarser grid is resolved at 1.9 km. One southern boundary sample has a wet child and dry parent. Finer local grids and a consistent nesting shoreline remain necessary for site selection.",
+        "The shore study adds native 118 m LOLA/GRAIL terrain, a regional propagation grid, and local wave grids from 948 to 118 m. Two basin replays retain all 3,103,551 wave values exactly while recovering directional spectra from the second cycle. The east-northeast phase gives 1.842 m Hs and 600 W/m shoreward power on the western face, versus 0.228 m and 0.021 W/m on the eastern face. In a later west-southwest phase at 237 m spacing, exposure reverses: eastern Hs 0.771 m and incoming power 52.9 W/m, western Hs 0.250 m and 8.35 W/m. All 13 coastal cases meet their stationary stopping criterion. Boundary position, regional grid, wet-spectrum interpolation and directional controls pass the stated exposure bounds. The 237-to-118-m comparison has height differences of 2.84% at the 95th percentile and 39.09% maximum; local shoreline convergence remains open. The three phases are stationary responses; coastal duration and lag require evolving boundary spectra.",
         "The weather coupling preserves GCM dimensional surface stress through SWAN's Wu drag law at fixed air density 1.4039 kg/m3. The GCM stress-closure density over the selected sea and week ranges from 1.3885 to 1.4093 kg/m3. Spatial and temporal density effects within the wave source terms, two-way air–water coupling and lunar calibration of growth and breaking remain open.",
         "At 4.001 m/s, frequency refinement passes the 5% bound. The 2-to-1-second timestep comparison over 20 minutes to 2 hours fails for mean period (12.2%); the later 1-to-2-hour window passes. Doubling coastal child directions from 36 to 72 at 3.8 km changes final Hs by at most 0.57% and mean period by 0.31%. Coastal timestep and parent directional refinements remain open.",
         "The second-cycle Smythii–Marginis record reaches Hs 3.375 m with mean period 15.84 s at the peak; Hs>=1 m covers up to 84.7% of the coarse basin. Mean local Hs over area and time is 0.880 m. The offshore reference has Hs>=1 m for 309.6 hours, with a 98.1-hour continuous episode. In the selected six-day comparison, halving the timestep changes metre-scale heights by at most 0.376% and mean period by 0.870%; time above 1 m changes by at most 19 minutes per node. Across all paired Hs>=0.1 m, maximum differences are 16.29% and 29.37%, failing the 5% criterion. A shorter preceding history agrees with the continuous run within 0.440% in Hs and 0.913% in mean period over that window. Of 708 second-cycle spectra at three diagnostic nodes, 129 fail the band criterion, with resolved Hs 0.118–0.507 m. Widening the frequency band, complete-cycle timestep refinement and finer basin geography remain open.",
-        "Idealised slopes yield significant heights of 0.96–1.10 m at the chosen one-percent-breaking diagnostic near 2 m depth, conditional on the offshore spectrum and assumed breaking index. The 400-to-800-cell slope comparison passes 5%. The 1.9 km geographic terrain has only 11 nodes shallower than 10 m; one reaches one-percent breaking at 0.199 m depth with Hs 0.114 m. Resolving actual beaches needs finer cross-shore terrain and sediment assumptions. Currents, shoreline run-up and individual breaking waves require further modelling; a SWASH source audit and pilot remain pending.",
+        "The native shore terrain has 234 active wave nodes below 10 m depth in the eastward 118 m case, with 45 reaching the Qb>=0.01 breaking diagnostic. The narrow breaking and swash zones on steep rock can still lie between nodes. The sheltered eastern station has 8.88% of its resolved variance in the highest two frequency intervals, failing the 1% edge criterion. Wider coastal frequency coverage and tighter solver accuracy retain uncertainty in short-wave periods and small-wave outliers. Reflection, diffraction, sediment evolution, wave-driven currents and shoreline run-up require further models. Idealised slope benchmarks remain in the earlier pilot; a SWASH gravity audit and beach-scale pilot remain pending.",
         "Sea temperature gradients, mixing and currents; the existing climate uses a slab ocean or fixed sea-surface temperatures.",
         "Spectral underwater light, including diffuse incidence, water absorption/scattering and dissolved/particulate/biological constituents; euphotic and aphotic definitions must be explicit."
       ],
-      "next_session_task": "Widen the frequency band for the smaller seas identified by the evolving spectral checks, then refine timestep and basin spacing. Extend the continuous record to further solar cycles and another sea. Use the resulting exposure and persistence patterns to select coastal nests; resolve the shoreline spur near 93.4 E, 2.34 N with consistent boundaries and finer terrain. Coastal breaking, run-up and wave-driven currents require a gravity-audited coastal model."
+      "next_session_task": "Extend the new coastal nests through evolving second-cycle wind and directional spectra, with wider frequency coverage for short waves. Refine the remaining shoreline outliers and the later weather phases. Prepare explicit cross-shore profiles and audit SWASH gravity, breaking and reflection before calculating run-up or individual waves. Further solar cycles and other seas remain part of the wave-climate programme."
     },
     {
       "topic": "geography",
-      "condition": "lola_topography_above_grail_geoid; hydrostatic_storage_computed; land_sea_masks_25_35pct; drainage_and_rainfed_lakes_from_the_corrected_design_climate_A28_dim5_moon; atlas_at_28pct_water_share; iau_nomenclature_input; groundwater_first_estimate_from_grail_porosity",
+      "condition": "lola_topography_above_grail_geoid; hydrostatic_storage_computed; land_sea_masks_25_35pct; drainage_and_rainfed_lakes_from_the_corrected_design_climate_A28_dim5_moon; atlas_at_28pct_water_share; iau_nomenclature_input; groundwater_first_estimate_from_grail_porosity; pinned_256px_per_degree_coastal_lola_rows_and_native_118m_flooded_shore_products",
       "material": [
         "../geography/datasets.json",
         "../geography/inputs.json",
@@ -129,7 +137,9 @@
         "../geography/results/atlas.json",
         "../shared/scenarios/water.json",
         "../geography/drainage.py",
-        "../geography/results/drainage.json"
+        "../geography/results/drainage.json",
+        "../geography/shore_terrain.py",
+        "../geography/shore_inputs.json"
       ],
       "unresolved": [
         "polar cold-trapping",

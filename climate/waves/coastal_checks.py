@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 from datetime import datetime, timedelta
+from itertools import chain
 import json
 from pathlib import Path
 
@@ -12,10 +13,19 @@ from climate.waves.coastal import RUNS, TERRAIN, load_terrain, read_coastal
 from climate.waves.model import ORIGIN, ROOT, sha256
 
 
-def nesting_spectra(path):
-    """Read SWAN's full directional nesting format, including dry locations."""
-    lines = iter(line.strip() for line in path.read_text().splitlines()
-                 if line.strip() and not line.startswith("$"))
+def nesting_spectra(path, selected_dates=None):
+    """Read full directional spectra, optionally retaining selected timestamps.
+
+    Streaming allows a long parent record to supply a few coastal snapshots.
+    Every time record is consumed; selected records receive the full value checks.
+    """
+    def data_lines():
+        with path.open() as stream:
+            for raw in stream:
+                text = raw.strip()
+                if text and not text.startswith("$"):
+                    yield text
+    lines = data_lines()
 
     def line():
         try:
@@ -28,13 +38,19 @@ def nesting_spectra(path):
             raise ValueError(f"Expected nesting field {keyword}")
 
     expect("SWAN")
-    expect("TIME")
-    if int(line().split()[0]) != 1:
-        raise ValueError("Unsupported nesting time code")
-    expect("LONLAT")
+    coordinates = line().split()[0]
+    time_dependent = coordinates == "TIME"
+    if time_dependent:
+        if int(line().split()[0]) != 1:
+            raise ValueError("Unsupported nesting time code")
+        coordinates = line().split()[0]
+    if coordinates != "LONLAT":
+        raise ValueError("Expected nesting field LONLAT")
     nloc = int(line().split()[0])
     locations = np.array([[float(v) for v in line().split()] for _ in range(nloc)])
-    expect("RFREQ")
+    frequency_reference = line().split()[0]
+    if frequency_reference not in ("RFREQ", "AFREQ"):
+        raise ValueError("Expected relative or absolute frequencies")
     nf = int(line().split()[0])
     frequency = np.array([float(line().split()[0]) for _ in range(nf)])
     expect("CDIR")
@@ -52,29 +68,46 @@ def nesting_spectra(path):
             not np.allclose(np.diff(direction), 360/nd)):
         raise ValueError("Invalid nesting coordinates")
     dates, spectra, available = [], [], []
-    for date_line in lines:
-        dates.append(datetime.strptime(date_line.split()[0], "%Y%m%d.%H%M%S"))
-        values = np.zeros((nloc, nf, nd))
-        wet = np.ones(nloc, bool)
+    previous = None
+    records = lines if time_dependent else chain(["stationary"], lines)
+    for date_line in records:
+        date = datetime.strptime(date_line.split()[0], "%Y%m%d.%H%M%S") if time_dependent else None
+        if previous is not None and date <= previous:
+            raise ValueError("Invalid nesting times")
+        previous = date
+        keep = selected_dates is None or date in selected_dates
+        values = np.zeros((nloc, nf, nd)) if keep else None
+        wet = np.ones(nloc, bool) if keep else None
         for i in range(nloc):
             kind = line()
             if kind == "NODATA":
-                wet[i] = False
+                if keep:
+                    wet[i] = False
             elif kind == "FACTOR":
                 scale = float(line())
-                table = np.array([[float(v) for v in line().split()] for _ in range(nf)])
-                if (table.shape != (nf, nd) or not np.isfinite(table).all() or
-                        np.any(table < 0) or not np.isfinite(scale) or scale <= 0):
+                if not np.isfinite(scale) or scale <= 0:
                     raise ValueError("Invalid nesting variance")
-                values[i] = table * scale
+                if keep:
+                    table = np.array([[float(v) for v in line().split()] for _ in range(nf)])
+                    if table.shape != (nf, nd) or not np.isfinite(table).all() or np.any(table < 0):
+                        raise ValueError("Invalid nesting variance")
+                    values[i] = table * scale
+                else:
+                    for _ in range(nf):
+                        line()
             elif kind != "ZERO":
                 raise ValueError(f"Unsupported nesting record {kind}")
-        spectra.append(values)
-        available.append(wet)
+        if keep:
+            dates.append(date)
+            spectra.append(values)
+            available.append(wet)
+    if selected_dates is not None and set(dates) != set(selected_dates):
+        raise ValueError("Selected nesting times are absent")
     if not dates or any(b <= a for a, b in zip(dates, dates[1:])) or exception >= 0:
         raise ValueError("Invalid nesting times or exception value")
     return dict(dates=dates, locations=locations, frequency=frequency, direction=direction,
-                spectra=np.asarray(spectra), available=np.asarray(available))
+                spectra=np.asarray(spectra), available=np.asarray(available),
+                time_dependent=time_dependent, frequency_reference=frequency_reference)
 
 
 def audit(product_path, run_root=RUNS):
