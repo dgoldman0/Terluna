@@ -1,5 +1,5 @@
 {
-  "checked": "2026-10-02",
+  "checked": "2026-10-03",
   "source_admission": "Sources for the plan of 2026-10-02, each with what was read of it. None is imported or installed; source admission for the manuscripts is separate.",
   "sources": [
     {
@@ -38,6 +38,147 @@
       "url": "https://arxiv.org/abs/1002.0070",
       "use": "Gas-density scaling and the distinction between storm-scale modeling and detailed streamer propagation; follow-up reading for the TLE stage.",
       "access": "Author-posted abstract read; full review not read for this plan."
+    },
+    {
+      "id": "S6",
+      "citation": "Mansell, MacGorman, Ziegler and Straka (2005), Charge structure and lightning sensitivity in a simulated multicell thunderstorm, J. Geophys. Res. 110, D12101",
+      "use": "Structure of the Saunders-Peck and Takahashi schemes, Table 1 size and speed constants (from Brooks et al. 1997), collision and sticking efficiencies.",
+      "access": "Full text of an archived copy, all sections and Tables 1-2; equation images not read.",
+      "doi": "10.1029/2004JD005287"
+    },
+    {
+      "id": "S7",
+      "citation": "Fierro, Mansell, MacGorman and Ziegler (2013), The implementation of an explicit charging and discharge lightning scheme within the WRF-ARW model, Mon. Wea. Rev. 141, 2390-2415",
+      "use": "The charge law and the critical rime accretion rate, Eqs. (2)-(5).",
+      "access": "Full text, the electrification section and equation images e1-e6.",
+      "doi": "10.1175/MWR-D-12-00278.1"
+    },
+    {
+      "id": "S8",
+      "citation": "WRF-ELEC, MicroTed/wrf4-elec at commit e43041b000ebfd77c4a528f2ca3847746e839aa8, elec/module_mp_nssl_2mom_elec.F (sha256 9203693d76b841f1...) and elec/takahashi.txt",
+      "use": "The implemented laws: routines saund6 and TAKA, the scheme dispatch for nssl_isaund = 12, the charging block (ecollmx, caps), and Takahashi's table (an external input).",
+      "access": "Code read for those routines; LICENSE.txt is the WRF public-domain notice.",
+      "url": "https://github.com/MicroTed/wrf4-elec"
+    },
+    {
+      "id": "S9",
+      "citation": "Saunders and Peck (1998), Laboratory studies of the influence of the rime accretion rate on charge transfer during crystal/graupel collisions, J. Geophys. Res. 103, 13949-13956",
+      "use": "The critical rime accretion rate; experiments at 3-14 m/s (as quoted by Saunders et al. 2006).",
+      "access": "Abstract only; values through S6-S8.",
+      "doi": "10.1029/97JD02644"
+    },
+    {
+      "id": "S10",
+      "citation": "Takahashi (1978), Riming electrification as a charge generation mechanism in thunderstorms, J. Atmos. Sci. 35, 1536-1548",
+      "use": "The Takahashi charge table (through S8); experiments at 9 m/s (Takahashi and Miyawaki 2002).",
+      "access": "Abstract only.",
+      "doi": "10.1175/1520-0469(1978)035<1536:REAACG>2.0.CO;2"
+    },
+    {
+      "id": "S11",
+      "citation": "Berdeklis and List (2001), The ice crystal-graupel collision charging mechanism of thunderstorm electrification, J. Atmos. Sci. 58, 2751-2770",
+      "use": "Speed dependence not monotonic over 3-6 m/s; Keith and Saunders's V^2.5 and V^2.8 quoted.",
+      "access": "Full text.",
+      "doi": "10.1175/1520-0469(2001)058<2751:TICGCC>2.0.CO;2"
+    },
+    {
+      "id": "S12",
+      "citation": "Ávila, Lighezzolo, Castellano, Pereyra and Bürgesser (2013), Laboratory measurements of charge separation in low liquid water content conditions and low impact velocity, J. Geophys. Res. Atmos. 118, 6680-6687",
+      "use": "Charge per collision of 0.01-0.2 fC at 1-3 m/s, -7 to -13 C; the low-speed lower bracket.",
+      "access": "Full text (author copy).",
+      "doi": "10.1002/jgrd.50555"
+    },
+    {
+      "id": "S13",
+      "citation": "Pradeep Kumar, Pulakeshi and Wagh (2024), Laboratory studies on cloud electrification during ice crystal-graupel collisions: new parametrization scheme, J. Earth Syst. Sci. 133, 226",
+      "use": "Eq. 3 for 2-mm graupel at 1.2 m/s, -7 to -18.5 C; the low-speed upper bracket.",
+      "access": "Full text.",
+      "doi": "10.1007/s12040-024-02417-w"
+    },
+    {
+      "id": "S14",
+      "citation": "Dwyer (2007), Relativistic breakdown in planetary atmospheres, Phys. Plasmas 14, 042901",
+      "use": "The runaway threshold, 284 kV/m times n/n0 with n0 = 2.69e25 per m3.",
+      "access": "Full text, sections I-IV.",
+      "doi": "10.1063/1.2709652"
+    },
+    {
+      "id": "S15",
+      "citation": "Mach, Blakeslee, Bateman and Bailey (2009, 2010, 2011), storm conduction currents from aircraft overflights, J. Geophys. Res. 114 D10204, 115 D03201, 116 D05201",
+      "use": "Earth benchmarks: current densities and currents above storms.",
+      "access": "Abstracts only.",
+      "doi": "10.1029/2008JD011495"
+    },
+    {
+      "id": "S16",
+      "citation": "Kuhlman, Ziegler, Mansell, MacGorman and Straka (2006), Numerically simulated electrification and lightning of the 29 June 2000 STEPS supercell storm, Mon. Wea. Rev. 134, 2734-2757",
+      "use": "Earth benchmark: modeled charging-rate peaks of about 300 pC m-3 s-1.",
+      "access": "Parts of the full text and the Fig. 16 caption.",
+      "doi": "10.1175/MWR3217.1"
+    },
+    {
+      "id": "S17",
+      "citation": "Usoskin and Kovaltsov (2006), J. Geophys. Res. 111, D21206; Usoskin, Kovaltsov and Mironova (2010), J. Geophys. Res. 115, D10302 (CRAC:CRII)",
+      "use": "Cosmic-ray ion production by depth; the v2 tables are an external input.",
+      "access": "Full text of both; the tables read whole.",
+      "doi": "10.1029/2006JD007150"
+    },
+    {
+      "id": "S18",
+      "citation": "MCEq 1.4.2 (Fedynitch et al., matrix cascade equations), with SIBYLL 2.3e and the Hillas-Gaisser 2012 H3a primary spectrum through crflux",
+      "use": "Muon fluxes through the Earth and Open Moon columns.",
+      "access": "Documentation (tutorial, environment and configuration pages) and the installed source for the density-model interface.",
+      "url": "https://mceq.readthedocs.io"
+    },
+    {
+      "id": "S19",
+      "citation": "Particle Data Group: Beatty, Matthews and Wakely (2022), Cosmic rays, Prog. Theor. Exp. Phys. 2022, 083C01; Atomic and Nuclear Properties, muon table for dry air (2024)",
+      "use": "Muon intensities, decay constants and energy loss; the muon table is an external input.",
+      "access": "Review sections 30.1-30.4; the table read whole.",
+      "url": "https://pdg.lbl.gov"
+    },
+    {
+      "id": "S20",
+      "citation": "Bogdanova, Gavrilov, Kornoukhov and Starostin (2006), Cosmic muon flux at shallow depths underground, Phys. At. Nucl. 69, 1293-1298",
+      "use": "The sea-level muon fit used to check MCEq.",
+      "access": "Full text.",
+      "url": "arXiv:nucl-ex/0601019"
+    },
+    {
+      "id": "S21",
+      "citation": "Nicoll (2012), Measurements of atmospheric electricity aloft, Surv. Geophys. 33, 991-1057 (Gringel 1978 fit, Eq. 9)",
+      "use": "Earth's measured fair-weather conductivity profile, the check of the ion chain.",
+      "access": "Sections 2.1-2.2, 3.2-3.3, 5.2.",
+      "doi": "10.1007/s10712-012-9188-9"
+    },
+    {
+      "id": "S22",
+      "citation": "Zauner-Wieczorek, Curtius and Kürten (2022), The ion-ion recombination coefficient alpha, Atmos. Chem. Phys. 22, 12443-12465",
+      "use": "The Brasseur and Chatel (1983) recombination formula and its range.",
+      "access": "Sections 1, 2, 6-9 and Tables 1-2.",
+      "doi": "10.5194/acp-22-12443-2022"
+    },
+    {
+      "id": "S23",
+      "citation": "Tammet (1997, report; 1998, J. Geophys. Res. 103, 13933) on ion mobility; Hirsikko et al. (2011), Atmos. Chem. Phys. 11, 767-798, on small-ion mobilities",
+      "use": "Mobilities of 1.36 and 1.53 cm2/(V s), scaling with pressure and as T^0.6.",
+      "access": "Tammet 1997 sections and 1998 abstract; Hirsikko sections 1-2.3 and 4.1.",
+      "doi": "10.5194/acp-11-767-2011"
+    },
+    {
+      "id": "S24",
+      "citation": "Baumgaertner, Thayer, Neely and Lucas (2013), Toward a comprehensive global electric circuit model, J. Geophys. Res. Atmos. 118, 9221-9232",
+      "use": "Ion attachment to aerosol (Tinsley and Zhou 2006 coefficient) and to droplets; in-cloud conductivity.",
+      "access": "Introduction and sections 2-3 (parts).",
+      "doi": "10.1002/jgrd.50725"
+    },
+    {
+      "id": "S25",
+      "citation": "Gronoff et al. (2011), Astron. Astrophys. 529, A143; López-Moreno et al. (2008), Geophys. Res. Lett. 35, L22104 (Titan)",
+      "use": "Titan's cosmic-ray ionization and the Huygens conductivity, for context.",
+      "access": "Full text of both.",
+      "doi": "10.1029/2008GL035338"
     }
-  ]
+  ],
+  "notes": "Stage 1's literature notes, with every value's location in its source, are kept on the data drive at /media/projectspace/terluna-research/atmospheric-electricity/ (charging_laws.md, ionization_conductivity.md)."
 }

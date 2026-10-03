@@ -15,6 +15,8 @@ span the analysis gives:
   course through the lunar day, and the width and depth of its patches;
 - in the zone, by temperature band, the mass, number, mass-weighted diameter and mass-weighted fall speed of
   graupel, cloud ice and snow, the cloud water, the air's density and the updrafts;
+- the share of the zone's graupel held at the scheme's largest size (a slope of 1/(2 mm), a mass-weighted diameter
+  of 8 mm), where the scheme limits growth;
 - the graupel's bulk residence time aloft: its mass above the melting level over the rate it falls through it;
 - how deep the storms reach: the cloud tops and the heights of the 0 and -40 C levels.
 """
@@ -48,6 +50,8 @@ WARMEST_C, COLDEST_C = 0.0, -40.0
 BANDS_C = ((0.0, -10.0), (-10.0, -20.0), (-20.0, -30.0), (-30.0, -40.0))
 CLOUD_TOP_KG_KG = 1.0e-5                          # condensate that counts toward the cloud top
 HOUR_BINS = 12
+CURRENT_EDGES_LOG10_NA_M2 = np.arange(-7.0, 4.01, 0.25)  # histogram of storm-column currents, nA/m2
+CHARGING_WEIGHT = 0.5                             # WRF-ELEC's ecollmx on every separating collision
 EVIDENCE = ('CM1 r22.0 at lunar gravity with Morrison two-moment microphysics (graupel), its fall speeds scaled for '
             'the host gravity; the particles are the scheme\'s bulk populations with exponential size distributions '
             'and fixed densities, sampled every 3 model hours. Patch widths are limited by the grid spacing, and '
@@ -100,6 +104,45 @@ def speed_at(d, rho_air, species: dict, g_fall: float):
         np.asarray(d, float) ** species['b']
 
 
+def separation_efficiency(other: str, t_c):
+    """The share of graupel's collisions with cloud ice or snow that separate charge, as the NSSL scheme sets them
+    (CM1 r22's module_mp_nssl_2mom.F; WRF-ELEC's charging block): collisions with ice count fully (ehi_collsn = 1) and
+    with snow at 0.5 (ehs_collsn) for snow wider than 150 um, falling to none at 40 um; those that stick, 0.1 exp(0.1 T)
+    with ice (eii0, eii1) and 0.1 exp(0.1 T) (rho_g - 300)/300 with snow for graupel of density rho_g (ehs0, ehs1), are
+    removed; and WRF-ELEC charges the rest at half weight (ecollmx = 0.5). Returns a number or a function of the
+    other particle's diameter."""
+    t_c = np.minimum(np.asarray(t_c, float), 0.0)
+    if other == 'ice':
+        return CHARGING_WEIGHT * (1.0 - 0.1 * np.exp(0.1 * t_c))
+    stick = 0.1 * np.exp(0.1 * t_c) * min(1.0, max(0.0, SPECIES['graupel']['rho'] - 300.0) / 300.0)
+    return lambda d: CHARGING_WEIGHT * 0.5 * np.clip((d - 40.0e-6) / 110.0e-6, 0.0, 1.0) * (1.0 - stick)
+
+
+def cell_charging(cells: dict, g_fall: float, laws: dict) -> dict:
+    """Charging rates (C m-3 s-1, positive where graupel gains positive charge) in the zone's cells, summed over
+    graupel's collisions with cloud ice and with snow, for each law, with the run's fall speeds ('run') and with the
+    same particles falling at Earth's speeds ('earth_speeds'). cells holds 1-D arrays: rho (kg/m3), t_c, lwc_g_m3,
+    and n (m-3) and lam (1/m) for each ice type. A law is called as law(t_c, lwc_g_m3, graupel_speed, other) and
+    returns the charge per bounce, transfer(d_g, d_x, dv) in C."""
+    from atmosphere.electricity import charging as ch
+    out = {}
+    t_c, lwc = cells['t_c'][:, None, None], cells['lwc_g_m3'][:, None, None]
+    for regime, g in (('run', g_fall), ('earth_speeds', G_EARTH)):
+        speed = {}
+        for key, sp in SPECIES.items():
+            k = (gravity_factor(sp, g) * (RHOSU / cells['rho']) ** sp['c'] * sp['a'])[:, None, None]
+            speed[key] = (lambda d, k=k, b=sp['b']: k * d ** b)
+        for name, law in laws.items():
+            total = np.zeros(cells['rho'].shape)
+            for other in ('ice', 'snow'):
+                n_x, lam_x = cells['n'][other], cells['lam'][other]
+                total += ch.pair_rate(cells['n']['graupel'], cells['lam']['graupel'], n_x, lam_x, speed['graupel'],
+                                      speed[other], law(t_c, lwc, speed['graupel'], other),
+                                      separation_efficiency(other, t_c))
+            out[(name, regime)] = total
+    return out
+
+
 def zone_mask(t_c, qc, qg, qi, qs, threshold: float):
     """The charging zone: 0 to -40 C with graupel, cloud ice and snow together, and cloud water at the threshold."""
     return (t_c < WARMEST_C) & (t_c >= COLDEST_C) & (qc >= threshold) & (qg >= threshold) & (qi + qs >= threshold)
@@ -147,6 +190,17 @@ def crossing_height(zh, t_c, value: float):
     return float(zh[k - 1] + (zh[k] - zh[k - 1]) * (t_c[k - 1] - value) / (t_c[k - 1] - t_c[k]))
 
 
+def significant(value, digits: int = 4):
+    """Floats rounded to significant figures, through dicts and lists."""
+    if isinstance(value, float):
+        return float(f'{value:.{digits}g}') if np.isfinite(value) and value != 0.0 else value
+    if isinstance(value, dict):
+        return {k: significant(v, digits) for k, v in value.items()}
+    if isinstance(value, list):
+        return [significant(v, digits) for v in value]
+    return value
+
+
 def stats(values) -> dict:
     v = np.asarray(values, float)
     v = v[np.isfinite(v)]
@@ -156,7 +210,7 @@ def stats(values) -> dict:
                 p90=float(np.percentile(v, 90)), max=float(v.max()))
 
 
-def analyse(name: str, from_day: float, to_day: float = np.inf) -> dict:
+def analyse(name: str, from_day: float, to_day: float = np.inf, laws: dict | None = None) -> dict:
     from climate.crm.cm1_run import solar_day_s
     case = ra.RUNS / name
     record = json.loads((case / 'case.json').read_text())
@@ -179,12 +233,17 @@ def analyse(name: str, from_day: float, to_day: float = np.inf) -> dict:
     band_depth = {t: np.zeros(len(BANDS_C)) for t in THRESHOLDS}
     hour_sum, hour_count = np.zeros(HOUR_BINS), np.zeros(HOUR_BINS)
     keys = ('vol', 'rho', 'p', 'z', 'qc', 'w', 'mg', 'ng', 'mi', 'ni', 'ms', 'ns', 'dg', 'di', 'ds', 'vg', 'vi', 'vs',
-            'dv_i', 'vol_i', 'dv_s', 'vol_s')
+            'dv_i', 'vol_i', 'dv_s', 'vol_s', 'mg_cap')
     acc = {k: np.zeros(len(BANDS_C)) for k in keys}
     w_zone, zone_columns, widths, depths_m = [], 0, [], []
     tops, z0c, z40c = [], [], []
     p_sum, t_sum, rho_sum = np.zeros(len(zh)), np.zeros(len(zh)), np.zeros(len(zh))
     mass_aloft, flux_melt, present = [], [], 0
+    if laws is None:
+        from atmosphere.electricity.charging import laws as published
+        laws = published()
+    charge = {(name, regime): dict(abs=np.zeros(len(BANDS_C)), signed=np.zeros(len(BANDS_C)), columns=[], ground=[])
+              for name in laws for regime in ('run', 'earth_speeds')}
     for n in numbers:
         raw = np.memmap(case / f'cm1out_t{n:06d}_s.dat', dtype='<f4', mode='r')
 
@@ -252,10 +311,29 @@ def analyse(name: str, from_day: float, to_day: float = np.inf) -> dict:
                     acc[nk][b] += (r * num[key][m] * v).sum()
                     acc[dk][b] += (np.where(ok, 4.0 / lm, 0.0) * mass * v).sum()
                     acc[vk][b] += (np.where(ok, speeds[key], 0.0) * mass * v).sum()
+                    if key == 'graupel':                                    # held at the scheme's largest size
+                        acc['mg_cap'][b] += (np.where(ok & (lm <= sp['lam'][0] * (1.0 + 1e-9)), mass, 0.0) * v).sum()
                 for other, dk, vk in (('ice', 'dv_i', 'vol_i'), ('snow', 'dv_s', 'vol_s')):
                     both = np.isfinite(speeds['graupel']) & np.isfinite(speeds[other])
                     acc[dk][b] += (np.abs(speeds['graupel'] - speeds[other])[both] * v[both]).sum()
                     acc[vk][b] += v[both].sum()
+            if laws:
+                where = np.nonzero(zone)
+                cells = dict(rho=rho[where], t_c=t_c[where], lwc_g_m3=(rho * qc)[where] * 1000.0,
+                             n={key: np.where(mix[key][where] > 0.0, rho[where] * num[key][where], 0.0) for key in SPECIES},
+                             lam={key: np.where(mix[key][where] > 0.0, lam[key][where], 1.0) for key in SPECIES})
+                band_of = np.full(cells['rho'].shape, -1)
+                for b, (warm, cold) in enumerate(BANDS_C):
+                    band_of[(cells['t_c'] < warm) & (cells['t_c'] >= cold)] = b
+                cell_dz = dz[where[0]]
+                for key, rate in cell_charging(cells, g_fall, laws).items():
+                    c = charge[key]
+                    np.add.at(c['abs'], band_of, np.abs(rate) * cell_dz)
+                    np.add.at(c['signed'], band_of, rate * cell_dz)
+                    column_current = np.zeros(nxy)
+                    np.add.at(column_current, where[1], np.abs(rate) * cell_dz)
+                    c['columns'].append(column_current[column_current > 0.0])
+                    c['ground'].append(column_current.sum() / ncol)
             w_zone.append(w[zone])
             columns = zone.any(axis=0)
             zone_columns += int(columns.sum())
@@ -295,10 +373,23 @@ def analyse(name: str, from_day: float, to_day: float = np.inf) -> dict:
                 row[key] = dict(mass_g_m3=float(acc[mk][b] / v * 1000.0), number_per_litre=float(acc[nk][b] / v / 1000.0),
                                 diameter_mm=float(acc[dk][b] / acc[mk][b] * 1000.0) if acc[mk][b] > 0 else None,
                                 fall_speed_m_s=float(acc[vk][b] / acc[mk][b]) if acc[mk][b] > 0 else None)
+            row['graupel']['mass_share_at_size_cap'] = float(acc['mg_cap'][b] / acc['mg'][b]) if acc['mg'][b] > 0 else None
             row['graupel_speed_over_ice_m_s'] = float(acc['dv_i'][b] / acc['vol_i'][b]) if acc['vol_i'][b] > 0 else None
             row['graupel_speed_over_snow_m_s'] = float(acc['dv_s'][b] / acc['vol_s'][b]) if acc['vol_s'][b] > 0 else None
             bands.append(row)
     w_all = np.concatenate(w_zone) if w_zone else np.zeros(0)
+    charging = {}
+    for (name, regime), c in charge.items():
+        charging.setdefault(name, {})[regime] = dict(
+            band_rate_pc_m3_s=[float(a / acc['vol'][b] * 1e12) if acc['vol'][b] > 0 else None for b, a in enumerate(c['abs'])],
+            band_signed_rate_pc_m3_s=[float(s / acc['vol'][b] * 1e12) if acc['vol'][b] > 0 else None
+                                      for b, s in enumerate(c['signed'])],
+            column_current_na_m2=stats(np.concatenate(c['columns']) * 1e9 if c['columns'] else []),
+            column_current_histogram=dict(
+                edges_log10_na_m2=CURRENT_EDGES_LOG10_NA_M2.tolist(),
+                counts=np.histogram(np.log10(np.maximum(np.concatenate(c['columns']) * 1e9, 1e-30)) if c['columns'] else [],
+                                    bins=CURRENT_EDGES_LOG10_NA_M2)[0].tolist()),
+            mean_over_ground_pa_m2=float(np.sum(c['ground']) / count * 1e12))
     melt = float(np.mean(flux_melt)) if flux_melt else 0.0
     return dict(
         schema=SCHEMA, case=name, purpose=record['configuration'].get('purpose'),
@@ -322,6 +413,7 @@ def analyse(name: str, from_day: float, to_day: float = np.inf) -> dict:
                                depth_km=stats(np.array(depths_m) / 1000.0)),
                   updraft_m_s=stats(w_all), updraft_share_above_5_m_s=float((w_all > 5.0).mean()) if w_all.size else None,
                   bands=bands),
+        charging=charging,
         graupel_aloft=dict(mass_kg_m2=float(np.mean(mass_aloft)) if mass_aloft else 0.0,
                            flux_through_melting_level_g_m2_h=melt * 3.6e6,
                            residence_h=float(np.mean(mass_aloft) / melt / 3600.0) if melt > 0 else None))
@@ -339,7 +431,10 @@ def main(argv=None) -> int:
                                                        hashlib.sha256(Path(__file__).read_bytes()).hexdigest()[:16]})
     path = args.output or RESULTS / f'mixed_phase_{args.case}.json'
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(rc.rounded(result), indent=1) + '\n')
+    charging = result.pop('charging')
+    result = rc.rounded(result)
+    result['charging'] = significant(charging)
+    path.write_text(json.dumps(result, indent=1) + '\n')
     z = result['zone']
     print(f'{path}: {result["snapshots"]} snapshots; charging zone {z["depth_m"][f"{MAIN:g}"]:.0f} m deep per unit of '
           f'ground, present in {z["share_of_snapshots"]:.0%} of snapshots; graupel residence '

@@ -30,7 +30,9 @@ ionization and conductivity column, so that storm generator currents can be set
 against what the air conducts at breakdown. Stage 2 electrifies CM1, with the
 NSSL microphysics patched for lunar gravity and the electrical physics following
 WRF-ELEC. Stage 3 takes the global circuit and transient luminous events.
-ROCKE-3D stays a separate background-climate check.
+ROCKE-3D stays a separate background-climate check. Stage 1 (2026-10-03) found
+lunar cloud conducting about 10⁻¹⁶ S/m and some storm columns reaching breakdown
+under every charging law tried; the charge slow graupel separates sets how often.
 
 ## Biology in parallel
 

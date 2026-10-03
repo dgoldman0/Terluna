@@ -1089,6 +1089,50 @@ follows the GCM's 0.46 °C per kilometre.
 climate/gcm/.venv/bin/python -m climate.crm.highland_analysis box_highland_own_height --from-day 29.5
 ```
 
+## What the storms hold for charging
+
+The atmospheric-electricity study reads the storms of six runs over their second
+lunar day with [mixed_phase_analysis.py](mixed_phase_analysis.py): the two
+equatorial boxes, `box_0e_small`'s twin with Earth's fall speeds, and the three
+flat rings. It takes Morrison's size distributions and fall-speed laws as the
+runs used them and finds the charging zone, the air from 0 to −40 °C where
+graupel, cloud ice or snow, and supercooled cloud water each reach 0.01 g/kg
+(0.001 and 0.1 g/kg as checks):
+
+| Run | Charging zone, m of air per m² of ground (snapshots with it) | Graupel aloft, kg/m², and its residence | Graupel in the zone, g/m³, mass-weighted diameter | Cloud ice in the zone, per litre | Updrafts in the zone, median / top tenth |
+|---|---|---|---|---|---|
+| `box_0e` | 22 (34 %) | 0.30, 4.9 h | 1.8–2.5, 5.4–6.9 mm | 3–7 | 3.1 / 10.3 m/s |
+| `box_0e_small` | 22 (31 %) | 0.23, 4.4 h | 1.7–2.3, 5.0–6.9 mm | 2–10 | 3.4 / 9.9 m/s |
+| `box_0e_small_earth_fall` | 11 (21 %) | 0.04, 2.2 h | 0.7–1.3, 5.3–6.2 mm | 3–7 | 4.5 / 12.5 m/s |
+| `ring_equator` | 50 (98 %) | 0.10, 3.2 h | 0.5–0.9, 6.3–6.9 mm | 0.6–13 | 0.9 / 3.5 m/s |
+| `ring_70_45e` | 3.6 (22 %) | 0.007, 2.8 h | 0.6–0.9, 6.8–7.0 mm | 0.2–2.8 | 1.0 / 3.6 m/s |
+| `ring_70_135e` | 8.4 (35 %) | 0.017, 3.2 h | 0.5–1.1, 6.7–7.0 mm | 0.4–3.6 | 0.8 / 3.2 m/s |
+
+In every run the 0 °C level stands near 25 km and −40 °C near 60 km, five to six
+times their heights in Earth's tropics, and cloud tops reach 55–80 km. The
+charging zone is shallow and warm: four-fifths of it lies between 0 and −10 °C
+(30–32 km, 650–680 hPa), a fifth between −10 and −20 °C, almost none colder,
+because the supercooled cloud water thins from 0.10–0.17 g/m³ near 0 °C to
+0.03–0.05 g/m³ at −20 to −30 °C. Graupel is plentiful and large; a quarter of it
+between 0 and −10 °C sits at the scheme's largest size (a mass-weighted diameter
+of 8 mm), where the scheme limits growth. Cloud ice is scarce, and snow (0.5–1
+g/m³) carries most of the ice that graupel meets. Graupel strikes cloud ice at
+1.3–1.5 m/s and snow at 0.8–1.0 m/s. The zone forms from late morning to the
+end of the afternoon, and in the boxes its patches are about 10 km wide, near the
+grid's limit, and a median 6 km deep.
+
+With Earth's fall speeds the same box holds a sixth as much graupel aloft, half
+the charging zone and half the residence, and its graupel strikes ice at
+2.9–3.3 m/s. The analysis also integrates graupel's collisions with ice and snow
+over their size distributions under four laboratory charging laws, at the runs'
+fall speeds and at Earth's; the study weighs the result against the air's
+conductivity
+([research/studies/atmospheric_electricity](../../research/studies/atmospheric_electricity/README.md)).
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.mixed_phase_analysis box_0e --from-day 29.5
+```
+
 ## The gravity pair
 
 If lunar convection were Earth's stretched six times in size and duration, a

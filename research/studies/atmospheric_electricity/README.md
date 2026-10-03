@@ -89,6 +89,95 @@ scales with air density). Comparing the two, and the time to reach breakdown
 with the storms' lifetimes, shows which charging cases produce lightning, on the
 Moon and in the Earth-fall twin.
 
+### What stage 1 found
+
+The Open Moon has lightning. Its air holds storm charge so well that some
+storm columns reach the breakdown field under every charging law tried; how
+many, and how fast, turns on how much charge slow, lightly rimed graupel
+separates, which the laboratory has barely measured
+([stage1.py](stage1.py), [results/stage1.json](results/stage1.json); 2026-10-03).
+
+**The storms** ([climate/crm](../../../climate/crm/README.md), "What the storms
+hold for charging"). The 0 °C level stands near 25 km and −40 °C near 60 km,
+five to six times their heights in Earth's tropics. The charging zone is
+shallow and warm: four-fifths of it lies between 0 and −10 °C, a fifth between
+−10 and −20 °C, almost none colder, because the supercooled cloud water thins
+from 0.10–0.17 g/m³ to 0.03–0.05 g/m³. Graupel is plentiful (1.7–2.5 g/m³ in the
+boxes), 5–7 mm across by mass, and stays aloft for 4–5 hours; cloud ice is
+scarce, 2–10 crystals per litre, and snow carries most of the ice graupel
+meets. Graupel strikes ice at 1.3–1.5 m/s and rimes at 0.1–0.2 g m⁻² s⁻¹, the
+bottom of the range the laboratory measured.
+
+**Charging** ([charging.py](../../../atmosphere/electricity/charging.py)), in the
+equatorial box (385 km) and with the same particles falling at Earth's speeds,
+with the fall-speed pair's total charge separation at lunar against Earth's fall
+speeds:
+
+| Law (laboratory impact speeds) | Charging in the zone, pC m⁻³ s⁻¹ | At Earth's fall speeds | Storm-column current, top tenth / strongest, nA/m² | Fall-speed pair, lunar ÷ Earth's |
+|---|---|---|---|---|
+| Saunders and Peck (3–14 m/s) | 0.0003–0.0015 | 0.04–0.10 | 0.036 / 0.32 | 0.10 |
+| Takahashi (9 m/s) | 0.27–0.71 | 0.89–2.0 | 6.9 / 93 | 1.35 |
+| Pradeep Kumar et al. 2024 (1.2 m/s) | 0.02–0.09 | 0.05–0.21 | 1.1 / 15 | 1.29 |
+| Ávila et al. 2013 (1–3 m/s) | 0.0006–0.0014 | 0.0014–0.003 | 0.024 / 0.33 | 1.24 |
+
+Saunders and Peck's law nearly stops because most slow graupel rimes below its
+threshold of 0.1 g m⁻² s⁻¹. Takahashi's charge grows only linearly with impact
+speed, and the two experiments near lunar impact speeds bracket what slow bounces
+carry, 0.2 fC (Ávila et al.) to 6–8 fC (Pradeep Kumar et al.). Slower settling on
+its own cuts total charging tenfold under Saunders and Peck and raises it by a
+quarter to a third under the other laws, because six times more graupel stays
+aloft.
+
+**The conducting air** ([conductivity.py](../../../atmosphere/electricity/conductivity.py),
+[muons.py](../../../atmosphere/electricity/muons.py)). Below Earth's sea-level
+depth only muons and their decay electrons ionize the air. Traced with MCEq
+through the Open Moon's column, they make 0.05–0.06 ion pairs per cm³ per second
+at the charging zone (2,700–4,100 g/cm², 30–50 km), against 12 in an Earth storm's
+charging zone at 6 km, and 0.04 at the ground, against 2 over Earth's seas. Clear
+air there conducts 1.2–1.9 × 10⁻¹⁴ S/m without aerosol and 0.2–0.3 × 10⁻¹⁴ S/m with
+1000 particles per cm³. Inside cloud, where droplets take up the scarce ions, it
+conducts 1 × 10⁻¹⁶ S/m, so separated charge leaks away over about a day; in an
+Earth storm, over half an hour. The solar cycle leaves this unchanged below about
+90 km, since the muons' parent cosmic rays lie far above the energies it
+modulates. The same ion chain reproduces Earth's measured fair-weather
+conductivity (Gringel 1978) within 2–8 % from 5 to 30 km, and MCEq Earth's
+sea-level muons within 6–13 % above 10 GeV/c; it falls 30 % short at 1–10 GeV/c,
+energies that never reach the lunar troposphere.
+
+**Breakdown.** The runaway threshold at the zone's air density is 178–188 kV/m.
+Lunar cloud conducts 0.016–0.019 nA/m² at that field, against 0.8 nA/m² in Earth's
+storm clouds, whose charging currents of roughly 20–1000 nA/m² reach breakdown in
+seconds to minutes. In the lunar storms:
+
+| Law | Storm columns reaching breakdown, box (equatorial ring) | Time to breakdown in the box, top-tenth column / strongest |
+|---|---|---|
+| Saunders and Peck | 21 % (2 %) | 16 h / 1.4 h |
+| Takahashi | 67 % (28 %) | 4 min / 17 s |
+| Pradeep Kumar et al. | 62 % (15 %) | 24 min / 2 min |
+| Ávila et al. | 13 % (2 %) | 31 h / 1.3 h |
+
+With Earth's fall speeds (the twin), Saunders and Peck's law brings 55 % of
+storm columns to breakdown, the top tenth in 45 minutes. If Takahashi's law or
+the 1.2 m/s measurements hold, most lunar storms make lightning within minutes,
+as Earth's do. If Saunders and Peck's law or Ávila's small charges hold, only the
+strongest storm columns do, after one to sixteen hours, which may outlast a
+single convective cell; the three-hourly output cannot tell. The rings' weaker
+updrafts, in two dimensions, put fewer columns over the threshold.
+
+The comparison is a one-dimensional bound: all separated charge forms one layer,
+and it leaks through cloud. Stage 2 replaces it with charge carried on the
+particles, a field solver and discharges, and follows each cell's life. The
+decisive laboratory quantity is the charge per bounce at impact speeds of
+1–1.5 m/s and rime accretion rates of 0.1–0.3 g m⁻² s⁻¹, within reach of existing
+wind tunnels.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.mixed_phase_analysis box_0e          # each storm run
+/media/projectspace/terluna-research/venvs/mceq/bin/python -m atmosphere.electricity.muons moon   # and earth
+climate/gcm/.venv/bin/python -m atmosphere.electricity.conductivity
+climate/gcm/.venv/bin/python -m research.studies.atmospheric_electricity.stage1
+```
+
 ## Stage 2: an electrified storm in CM1
 
 CM1 r22 includes the NSSL two-moment microphysics with Mansell's electrification

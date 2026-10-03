@@ -66,3 +66,26 @@ def test_the_crossing_height_interpolates_and_ignores_warming_aloft():
     t = np.array([10.0, 4.0, -2.0, -8.0, 5.0])                            # warming again above, like a stratosphere
     assert mpa.crossing_height(zh, t, 0.0) == pytest.approx(1000.0 + 1000.0 * 4.0 / 6.0)
     assert np.isnan(mpa.crossing_height(zh, t, -40.0))
+
+
+def test_the_charging_pass_matches_a_direct_pair_integral_and_earth_speeds_charge_faster():
+    from atmosphere.electricity import charging as ch
+    law = lambda t_c, lwc, vg, other: ch.power_law(1.0e-15, 100.0e-6, 1.0, 2.0, 2.5)
+    rho = np.array([0.8])
+    cells = dict(rho=rho, t_c=np.array([-15.0]), lwc_g_m3=np.array([0.2]),
+                 n={'graupel': np.array([800.0]), 'ice': np.array([3.0e3]), 'snow': np.array([2.0e3])},
+                 lam={'graupel': np.array([1.0 / 1.5e-3]), 'ice': np.array([1.0 / 0.1e-3]), 'snow': np.array([1.0 / 1.0e-3])})
+    out = mpa.cell_charging(cells, 1.624, {'test': law})
+    speed = lambda key, g: (lambda d: mpa.speed_at(d, rho[:, None, None], mpa.SPECIES[key], g))
+    direct = sum(ch.pair_rate(800.0, 1.0 / 1.5e-3, cells['n'][o], cells['lam'][o], speed('graupel', 1.624),
+                              speed(o, 1.624), law(None, None, None, o), mpa.separation_efficiency(o, -15.0))
+                 for o in ('ice', 'snow'))
+    assert out[('test', 'run')] == pytest.approx(direct)
+    assert out[('test', 'earth_speeds')][0] > 10.0 * out[('test', 'run')][0]
+
+
+def test_separation_follows_the_nssl_settings():
+    assert mpa.separation_efficiency('ice', -10.0) == pytest.approx(0.5 * (1.0 - 0.1 * np.exp(-1.0)))
+    snow = mpa.separation_efficiency('snow', -10.0)
+    stick = 0.1 * np.exp(-1.0) * (400.0 - 300.0) / 300.0
+    assert snow(np.array([30e-6, 95e-6, 400e-6])) == pytest.approx([0.0, 0.125 * (1 - stick), 0.25 * (1 - stick)])

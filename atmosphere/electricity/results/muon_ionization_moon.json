@@ -1,0 +1,329 @@
+{
+ "schema": "terluna.atmosphere.muon-ionization/1",
+ "case": "moon",
+ "model": {
+  "mceq": "MCEq 1.4.2",
+  "interaction": "SIBYLL23E",
+  "primaries": "Hillas-Gaisser 2012 H3a, no cutoff, unmodulated",
+  "zenith": "8 Gauss-Legendre angles, cos 0.15 to 1",
+  "w_ev": 35.0
+ },
+ "rows": [
+  {
+   "depth_g_cm2": 100.0,
+   "height_km": 166.70311809264203,
+   "air_density_g_cm3": 2.9936154654504517e-05,
+   "scalar_flux_cm2_s": 0.048897643511809,
+   "vertical": {
+    "above_1_gev_c_m2_s_sr": 52.87200897045994,
+    "total_m2_s_sr": 117.11356607172642
+   },
+   "ion_pairs_per_g_s": {
+    "muons": 2923.4022724461734,
+    "decay_in_flight": 26873.16049091223,
+    "decay_at_rest": 106.4775819303379,
+    "total": 29903.04034528874
+   }
+  },
+  {
+   "depth_g_cm2": 200.0,
+   "height_km": 143.77467047662373,
+   "air_density_g_cm3": 6.207918445018714e-05,
+   "scalar_flux_cm2_s": 0.04067503443186581,
+   "vertical": {
+    "above_1_gev_c_m2_s_sr": 58.625567847738985,
+    "total_m2_s_sr": 131.88416412611772
+   },
+   "ion_pairs_per_g_s": {
+    "muons": 2451.784367376291,
+    "decay_in_flight": 10799.524620109652,
+    "decay_at_rest": 104.56506090651857,
+    "total": 13355.874048392461
+   }
+  },
+  {
+   "depth_g_cm2": 300.0,
+   "height_km": 130.59641285410206,
+   "air_density_g_cm3": 9.145740685125363e-05,
+   "scalar_flux_cm2_s": 0.026171027361671012,
+   "vertical": {
+    "above_1_gev_c_m2_s_sr": 50.26219548342184,
+    "total_m2_s_sr": 107.85390834077481
+   },
+   "ion_pairs_per_g_s": {
+    "muons": 1609.641231638646,
+    "decay_in_flight": 4709.977042853324,
+    "decay_at_rest": 66.24282980139166,
+    "total": 6385.861104293362
+   }
+  },
+  {
+   "depth_g_cm2": 500.0,
+   "height_km": 113.57206574752338,
+   "air_density_g_cm3": 0.00014720720941081004,
+   "scalar_flux_cm2_s": 0.010282540554306123,
+   "vertical": {
+    "above_1_gev_c_m2_s_sr": 30.80551977875139,
+    "total_m2_s_sr": 54.85388640965746
+   },
+   "ion_pairs_per_g_s": {
+    "muons": 674.0786982901938,
+    "decay_in_flight": 1141.1986171593048,
+    "decay_at_rest": 18.92649885439354,
+    "total": 1834.203814303892
+   }
+  },
+  {
+   "depth_g_cm2": 700.0,
+   "height_km": 101.98107191506863,
+   "air_density_g_cm3": 0.00020033291540812434,
+   "scalar_flux_cm2_s": 0.005026429895405888,
+   "vertical": {
+    "above_1_gev_c_m2_s_sr": 19.385606632356865,
+    "total_m2_s_sr": 27.423186623709835
+   },
+   "ion_pairs_per_g_s": {
+    "muons": 354.27847056445773,
+    "decay_in_flight": 406.21095072554016,
+    "decay_at_rest": 4.570263613132111,
+    "total": 765.0596849031299
+   }
+  },
+  {
+   "depth_g_cm2": 1000.0,
+   "height_km": 89.32125787707128,
+   "air_density_g_cm3": 0.0002758200164603151,
+   "scalar_flux_cm2_s": 0.0027291508303067475,
+   "vertical": {
+    "above_1_gev_c_m2_s_sr": 11.68104124317452,
+    "total_m2_s_sr": 13.1086366595319
+   },
+   "ion_pairs_per_g_s": {
+    "muons": 205.6756649492218,
+    "decay_in_flight": 159.0563204179952,
+    "decay_at_rest": 0.47300536532644255,
+    "total": 365.2049907325435
+   }
+  },
+  {
+   "depth_g_cm2": 1500.0,
+   "height_km": 74.08001161315165,
+   "air_density_g_cm3": 0.00038498709758751185,
+   "scalar_flux_cm2_s": 0.0016837309959641074,
+   "vertical": {
+    "above_1_gev_c_m2_s_sr": 7.062638255910614,
+    "total_m2_s_sr": 7.23760806910029
+   },
+   "ion_pairs_per_g_s": {
+    "muons": 131.5892951082334,
+    "decay_in_flight": 70.18235459037602,
+    "decay_at_rest": 0.011366594161962475,
+    "total": 201.78301629277135
+   }
+  },
+  {
+   "depth_g_cm2": 2000.0,
+   "height_km": 62.538096059853466,
+   "air_density_g_cm3": 0.0004834015600492288,
+   "scalar_flux_cm2_s": 0.0012555769613613156,
+   "vertical": {
+    "above_1_gev_c_m2_s_sr": 5.160298169484407,
+    "total_m2_s_sr": 5.241676048675597
+   },
+   "ion_pairs_per_g_s": {
+    "muons": 99.60967832703183,
+    "decay_in_flight": 41.67721129623643,
+    "decay_at_rest": 0.002578520493859566,
+    "total": 141.28946814376212
+   }
+  },
+  {
+   "depth_g_cm2": 2500.0,
+   "height_km": 53.07911377720658,
+   "air_density_g_cm3": 0.0005758915654802517,
+   "scalar_flux_cm2_s": 0.0010043038886236686,
+   "vertical": {
+    "above_1_gev_c_m2_s_sr": 4.0866519099138126,
+    "total_m2_s_sr": 4.145685206850619
+   },
+   "ion_pairs_per_g_s": {
+    "muons": 80.47101034889927,
+    "decay_in_flight": 27.98245622378208,
+    "decay_at_rest": 0.0026425004535761713,
+    "total": 108.45610907313493
+   }
+  },
+  {
+   "depth_g_cm2": 3000.0,
+   "height_km": 45.012254793125486,
+   "air_density_g_cm3": 0.0006653629755194998,
+   "scalar_flux_cm2_s": 0.0008353730225479522,
+   "vertical": {
+    "above_1_gev_c_m2_s_sr": 3.3828152318624354,
+    "total_m2_s_sr": 3.431823564650081
+   },
+   "ion_pairs_per_g_s": {
+    "muons": 67.44913376960689,
+    "decay_in_flight": 20.145920188611544,
+    "decay_at_rest": 0.0029696499615803587,
+    "total": 87.59802360818001
+   }
+  },
+  {
+   "depth_g_cm2": 3500.0,
+   "height_km": 37.953242288708566,
+   "air_density_g_cm3": 0.0007531940819410698,
+   "scalar_flux_cm2_s": 0.0007127772697367322,
+   "vertical": {
+    "above_1_gev_c_m2_s_sr": 2.880665203236836,
+    "total_m2_s_sr": 2.923595726263264
+   },
+   "ion_pairs_per_g_s": {
+    "muons": 57.91629028524222,
+    "decay_in_flight": 15.185114265924202,
+    "decay_at_rest": 0.003276441976204394,
+    "total": 73.10468099314262
+   }
+  },
+  {
+   "depth_g_cm2": 4000.0,
+   "height_km": 31.673917488044918,
+   "air_density_g_cm3": 0.0008407045521062612,
+   "scalar_flux_cm2_s": 0.0006193756824998502,
+   "vertical": {
+    "above_1_gev_c_m2_s_sr": 2.502730422135837,
+    "total_m2_s_sr": 2.541376283164462
+   },
+   "ion_pairs_per_g_s": {
+    "muons": 50.60259893320915,
+    "decay_in_flight": 11.821934024284737,
+    "decay_at_rest": 0.0035341876135003406,
+    "total": 62.42806714510739
+   }
+  },
+  {
+   "depth_g_cm2": 4500.0,
+   "height_km": 26.013640501480513,
+   "air_density_g_cm3": 0.0009274386085760156,
+   "scalar_flux_cm2_s": 0.0005456314411668882,
+   "vertical": {
+    "above_1_gev_c_m2_s_sr": 2.2070699218200023,
+    "total_m2_s_sr": 2.2423697807258494
+   },
+   "ion_pairs_per_g_s": {
+    "muons": 44.79467556617664,
+    "decay_in_flight": 9.440582908651052,
+    "decay_at_rest": 0.003728169033520772,
+    "total": 54.23898664386122
+   }
+  },
+  {
+   "depth_g_cm2": 5000.0,
+   "height_km": 20.85893562434576,
+   "air_density_g_cm3": 0.0010136371557572011,
+   "scalar_flux_cm2_s": 0.00048584361428533854,
+   "vertical": {
+    "above_1_gev_c_m2_s_sr": 1.9690619034188968,
+    "total_m2_s_sr": 2.0015799483342316
+   },
+   "ion_pairs_per_g_s": {
+    "muons": 40.06244464129292,
+    "decay_in_flight": 7.691397384476831,
+    "decay_at_rest": 0.0038623849422705693,
+    "total": 47.75770441071202
+   }
+  },
+  {
+   "depth_g_cm2": 5500.0,
+   "height_km": 16.121108911815657,
+   "air_density_g_cm3": 0.0010973531829909563,
+   "scalar_flux_cm2_s": 0.00043632378661563154,
+   "vertical": {
+    "above_1_gev_c_m2_s_sr": 1.7730386586435192,
+    "total_m2_s_sr": 1.8031333122902915
+   },
+   "ion_pairs_per_g_s": {
+    "muons": 36.12601108402132,
+    "decay_in_flight": 6.380577692442988,
+    "decay_at_rest": 0.003936540462248631,
+    "total": 42.51052531692656
+   }
+  },
+  {
+   "depth_g_cm2": 6000.0,
+   "height_km": 11.723301629699693,
+   "air_density_g_cm3": 0.0011774952187901494,
+   "scalar_flux_cm2_s": 0.00039454897358463835,
+   "vertical": {
+    "above_1_gev_c_m2_s_sr": 1.6084181433927787,
+    "total_m2_s_sr": 1.63632116212529
+   },
+   "ion_pairs_per_g_s": {
+    "muons": 32.79300683204323,
+    "decay_in_flight": 5.377059575858078,
+    "decay_at_rest": 0.00394878989288407,
+    "total": 38.17401519779419
+   }
+  },
+  {
+   "depth_g_cm2": 6500.0,
+   "height_km": 7.612409725729232,
+   "air_density_g_cm3": 0.0012557789637732532,
+   "scalar_flux_cm2_s": 0.0003588341330391878,
+   "vertical": {
+    "above_1_gev_c_m2_s_sr": 1.468126396377223,
+    "total_m2_s_sr": 1.4940464617702964
+   },
+   "ion_pairs_per_g_s": {
+    "muons": 29.933835268309153,
+    "decay_in_flight": 4.585519277079456,
+    "decay_at_rest": 0.003917119138155691,
+    "total": 34.52327166452677
+   }
+  },
+  {
+   "depth_g_cm2": 7000.0,
+   "height_km": 3.7514867209720837,
+   "air_density_g_cm3": 0.0013354744988499578,
+   "scalar_flux_cm2_s": 0.00032798776837222215,
+   "vertical": {
+    "above_1_gev_c_m2_s_sr": 1.3471960172334465,
+    "total_m2_s_sr": 1.3713348612774925
+   },
+   "ion_pairs_per_g_s": {
+    "muons": 27.456348081425254,
+    "decay_in_flight": 3.941254360801045,
+    "decay_at_rest": 0.003859860598168383,
+    "total": 31.40146230282447
+   }
+  },
+  {
+   "depth_g_cm2": 7400.0,
+   "height_km": 0.8265371005292363,
+   "air_density_g_cm3": 0.0014002508121175943,
+   "scalar_flux_cm2_s": 0.0003062223413379505,
+   "vertical": {
+    "above_1_gev_c_m2_s_sr": 1.2619437754595342,
+    "total_m2_s_sr": 1.284798048700043
+   },
+   "ion_pairs_per_g_s": {
+    "muons": 25.7030830735478,
+    "decay_in_flight": 3.509512576258561,
+    "decay_at_rest": 0.0038045610615816128,
+    "total": 29.216400210867942
+   }
+  }
+ ],
+ "column": {
+  "surface_depth_g_cm2": 7516.482410504703,
+  "top_km": 550.5267191524051,
+  "joined_at_hpa": 22.342,
+  "upper_air": "atmosphere/middle_atmosphere/results/profiles/moon_1.2atm_titania_stack.csv"
+ },
+ "producer": {
+  "domain": "atmosphere",
+  "files": {
+   "electricity/muons.py": "9c5618acbf0a389e"
+  }
+ }
+}
