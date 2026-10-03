@@ -71,7 +71,7 @@
     },
     {
       "topic": "seas",
-      "condition": "swan_41_51_serial_builds; audited_gravity_paths; conditional_wind_wave_experiments_with_earth_controls; three_corrected_cm1_rings_recovered_as_geographic_vectors; ten_gcm_years_of_regional_model_level_means_recovered; smythii_marginis_basin_and_idealised_slopes_run; eastern_smythii_nested_to_1p9_km; child_directional_bound_passes; local_coastal_grid_and_earliest_growth_bounds_fail; ocean_heat_and_underwater_light_models_pending",
+      "condition": "swan_41_51_serial_builds; audited_gravity_paths; conditional_wind_wave_experiments_with_earth_controls; three_corrected_cm1_rings_recovered_as_geographic_vectors; ten_gcm_years_of_regional_model_level_means_recovered; smythii_marginis_basin_and_idealised_slopes_run; eastern_smythii_nested_to_1p9_km; child_directional_bound_passes; local_coastal_grid_and_earliest_growth_bounds_fail; ocean_heat_and_underwater_light_models_pending; global_three_hourly_gcm_surface_stress_captured_from_isolated_restart; seven_day_weather_driven_sea_with_48h_and_96h_history_controls; history_bound_passes_after_first_selected_day; full_field_weather_timestep_bound_fails_in_small_waves",
       "material": [
         "../climate/waves/README.md",
         "../climate/waves/coastal.md",
@@ -90,18 +90,24 @@
         "../climate/waves/results/gcm_coverage.json",
         "../climate/waves/coastal_verification.json",
         "../geography/coastal_grid.py",
-        "../visualization/waves/"
+        "../visualization/waves/",
+        "../climate/gcm/wave_snapshots.py",
+        "../climate/waves/weather.py",
+        "../climate/waves/weather.md",
+        "../climate/waves/results/weather.json",
+        "../climate/waves/weather_verification.json"
       ],
       "unresolved": [
-        "Three-hourly geographic 10 m vectors and surface density are recovered from all three corrected CM1 rings. Only the equatorial ring crosses the Smythii–Marginis rectangle (70 water columns). Ten GCM years supply 1,200 regional 71.5-hour means at sigma 0.9833. Basin-wide hourly or three-hourly 10 m winds require a dedicated output run and an audited surface-layer diagnostic; the wave episodes remain prescribed.",
+        "An isolated continuation of A28_dim5_moon year 29 now supplies 241 global instantaneous snapshots over 30 Earth days at three-hour intervals, with lowest-level winds and surface stress. A selected seven-day Smythii–Marginis run uses 16 open-water atmospheric cells and stress-equivalent SWAN input. Representative monthly and seasonal wave occurrence needs longer continuous wave histories; coastal winds, gusts and an independent 10 m diagnostic require finer atmospheric work. The three recovered CM1 rings and ten years of GCM regional means retain their original sampling and height.",
         "Eastern Smythii is nested from the 0.5-degree basin into fixed 16-pixel/degree LOLA/GRAIL terrain. Refining the wave grid from 3.8 to 1.9 km changes final Hs by up to 0.623 m (118% relative to the fine run; 7.50% at the 95th percentile), failing the 5% criterion. A narrow shoreline spur skipped by the coarser grid is resolved at 1.9 km. One southern boundary sample has a wet child and dry parent. Finer local grids and a consistent nesting shoreline remain necessary for site selection.",
-        "The pilot uses a fixed representative CM1 moist-air density of 1.4039 kg/m3. Spatial and temporal density feedback, air-water coupling, and calibration of wind input and breaking at lunar gravity remain open.",
+        "The weather coupling preserves GCM dimensional surface stress through SWAN's Wu drag law at fixed air density 1.4039 kg/m3. The GCM stress-closure density over the selected sea and week ranges from 1.3885 to 1.4093 kg/m3. Spatial and temporal density effects within the wave source terms, two-way air–water coupling and lunar calibration of growth and breaking remain open.",
         "At 4.001 m/s, frequency refinement passes the 5% bound. The 2-to-1-second timestep comparison over 20 minutes to 2 hours fails for mean period (12.2%); the later 1-to-2-hour window passes. Doubling coastal child directions from 36 to 72 at 3.8 km changes final Hs by at most 0.57% and mean period by 0.31%. Coastal timestep and parent directional refinements remain open.",
+        "The selected weather week reaches Hs 3.162 m with mean period 15.40 s at its peak; metre-scale seas cover up to 86.0% of the coarse basin. The 150-to-75-second timestep comparison changes Hs by up to 12.95% and mean period by 26.73% in small waves, failing the full-field 5% criterion; the Hs>=1 m subset changes by at most 0.446% and 1.760%. The 48-to-96-hour preceding-weather comparison passes over selected hours 24–168 (2.42% Hs, 2.24% mean period); including the first selected day still fails. Spectral-band and timestep refinement of weak-wave transients, finer basin geography and timestep refinement with longer initial histories remain further checks.",
         "Idealised slopes yield significant heights of 0.96–1.10 m at the chosen one-percent-breaking diagnostic near 2 m depth, conditional on the offshore spectrum and assumed breaking index. The 400-to-800-cell slope comparison passes 5%. The 1.9 km geographic terrain has only 11 nodes shallower than 10 m; one reaches one-percent breaking at 0.199 m depth with Hs 0.114 m. Resolving actual beaches needs finer cross-shore terrain and sediment assumptions. Currents, shoreline run-up and individual breaking waves require further modelling; a SWASH source audit and pilot remain pending.",
         "Sea temperature gradients, mixing and currents; the existing climate uses a slab ocean or fixed sea-surface temperatures.",
         "Spectral underwater light, including diffuse incidence, water absorption/scattering and dissolved/particulate/biological constituents; euphotic and aphotic definitions must be explicit."
       ],
-      "next_session_task": "Refine the shoreline spur near 93.4 E, 2.34 N and its sheltered water, reconcile the nested shoreline, and check the coastal timestep before selecting surf locations. Prepare an isolated atmospheric restart with hourly or three-hourly surface diagnostics for basin-wide forcing; audit the 10 m wind diagnostic at lunar gravity. Add CM1 boxes for identified coastal or storm gaps. Resolve the earliest wave-growth timestep sensitivity for short gusts. Audit SWASH gravity and boundary transfer for individual-wave work. Ocean heat/mixing and underwater light remain separate future calculations."
+      "next_session_task": "Extend the continuous wave record through a complete lunar day and compare another sea using the new global atmospheric forcing. Refine the basin grid and weak-wave timestep/frequency coverage; revisit the shoreline spur near 93.4 E, 2.34 N with consistent nesting and finer terrain. Track wave height, period, direction, shelter and persistence through the weather cycle, then evaluate coastal breaking, run-up and wave-driven currents with a gravity-audited coastal model."
     },
     {
       "topic": "geography",

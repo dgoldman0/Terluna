@@ -1,7 +1,13 @@
 # Wind waves at lunar gravity
 
-SWAN (Simulating WAves Nearshore) runs here as a spectral wave model driven by
-prescribed winds. The first experiment compares Earth and lunar gravity over
+The aim is the wave climate of the lunar seas: how winds build waves, how
+energy travels across a basin, where terrain shelters or concentrates it,
+and how conditions change through the lunar day. Coastal breaking, marine
+travel and wave-driven mixing draw on that common picture.
+
+SWAN (Simulating WAves Nearshore) runs here as a spectral wave model. The
+experiments progress from prescribed winds to recovered atmospheric surface
+stress. The first experiment compares Earth and lunar gravity over
 the same flat, 100 km strip of water, with winds drawn from the corrected CM1
 equatorial ring. It establishes a runnable wave calculation and measures its
 numerical sensitivities.
@@ -21,6 +27,11 @@ The [coastal-resolution follow-up](coastal.md) nests eastern Smythii at
 7.6, 3.8 and 1.9 km spacing and checks directional refinement. It also recovers
 all three corrected CM1 ring histories and ten GCM years of regional wind
 means, with each product's height and sampling interval retained.
+
+The [weather-sequence study](weather.md) captures 241 global atmospheric
+snapshots from a 30-Earth-day continuation, then drives a selected week of basin waves
+with their surface stress. It checks the timestep and the influence of
+48 and 96 additional hours of preceding weather.
 
 ## Findings from the first run
 

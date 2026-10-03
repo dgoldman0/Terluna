@@ -37,6 +37,19 @@
     "au_m": 149597870700.0
   },
   "model_closures": {
+    "exoplasim_3_4_2": {
+      "postprocessor_reference_radius_m": 6371220.0,
+      "source": "ExoPlaSim 3.4.2 pyburn.py dataset(): plarad = radius * 6371220.0",
+      "note": "Unit convention for the installed postprocessor's radius argument. Divide the configured planetary radius by this value to recover its actual radius in the spectral wind transform."
+    },
+    "swan_41_51_wu": {
+      "low_speed_drag_coefficient": 0.0012875,
+      "transition_speed_m_s": 7.5,
+      "high_speed_intercept": 0.0008,
+      "high_speed_slope_s_m": 0.000065,
+      "source": "SWAN 41.51 swancom3.ftn, WINDP1 and WINDP2 Wu branches; archive SHA256 325c229f3dde0b812db4ec9ae6fa1cd4086d2109562c389576590ce8f94b26bb",
+      "note": "The weather-forced wave pilot inverts this drag relation to match atmospheric surface stress. These coefficients describe the pinned wave solver's closure."
+    },
     "cm1_r22": {
       "dry_air_gas_constant_J_kg_K": 287.04,
       "water_vapour_gas_constant_J_kg_K": 461.5,

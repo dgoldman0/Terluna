@@ -53,3 +53,14 @@ wet nodes. The coverage figure shows the three CM1 paths, one equatorial
 surface-wind history, and the GCM's final saved regional mean at its original
 model level. Captions distinguish their time sampling and height. Array checks
 compare plotted values with the products; source hashes identify the inputs.
+
+## Waves through changing weather
+
+`python -m visualization.waves.weather` reads
+`climate/waves/results/weather.json` and writes `results/weather.png` with a
+hash sidecar. It displays the recovered month of basin-mean atmospheric
+stress, the selected week's wave-height map and histories, and mean period
+at the offshore reference point. The input-speed curve is labelled as the
+stress-equivalent SWAN input. Array checks compare the plotted values exactly
+with the climate product. The climate study records timestep, prior-history
+and remaining geographic sensitivities.

@@ -173,9 +173,17 @@ air density, drives a Smythii–Marginis basin pilot with stated wind episodes,
 and transfers an offshore spectrum to three idealised coastal slopes. These
 produce roughly metre-scale significant heights where breaking begins under
 the assumed lunar breaking coefficients. Halving the basin grid changes some
-local heights by 41%; choosing surf locations requires finer coastal grids. The
-earliest growth remains timestep-sensitive. Basin-wide wind histories,
-sea-temperature gradients and underwater light profiles remain open.
+local heights by 41%. The [eastern coastal refinement](waves/coastal.md)
+reaches 1.9 km and exposes a shoreline spur that changes nearby heights by
+118%; coastal heights and shelter require further spatial refinement.
+The earliest growth remains timestep-sensitive.
+
+The [weather-sequence study](waves/weather.md) captures 241 global three-hourly
+wind and surface-stress snapshots from a 30-day atmospheric continuation.
+It drives a selected week of sea-wide wave evolution, comparing timesteps
+and two or four days of preceding weather. Longer histories, other seas,
+finer coastal winds, sea-temperature gradients and underwater light profiles
+remain further work.
 
 ## Next step
 
@@ -186,4 +194,4 @@ the quantities this screen prescribes through A, B and the albedo. Using them
 here is the next step, but it needs an explicit cloud assumption, because the
 column is clear-sky. Water/ice treatment and measured terrain follow. The present temperature/irradiance interface can supply biological requirement calculations, with all atmospheric and trait assumptions retained.
 
-Run `python -m pytest climate` and `python -m research.studies.environment_screens.run` from the repository root. This folder supplies no GCM weather prediction.
+Run `python -m pytest climate` and `python -m research.studies.environment_screens.run` from the repository root. The thermal screen and the GCM, CM1 and SWAN simulations retain their separate evidence statements.

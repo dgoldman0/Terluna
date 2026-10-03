@@ -1,0 +1,156 @@
+{
+  "schema": "terluna.climate.weather-wave-verification/1",
+  "verified_utc": "2026-10-03T01:46:30.076549+00:00",
+  "evidence": "Completed atmospheric and wave runs, direct binary-data checks, numerical comparisons and repository checks. Physical calibration at lunar gravity remains open.",
+  "reading_rule": "Functional test results and numerical acceptance criteria are reported separately. The selected model episode and coarse geography define the scope of the wave estimates.",
+  "sources": {
+    "climate/gcm/wave_snapshots.py": "8a19157f5e7174e3f31422e84a2a7b31889c713d20a6a5d4ed9b66cba3aa5e65",
+    "climate/waves/weather.py": "5ba38a5ebf40444dc53aedc01fd3a0ff03f93ac9aa0c16feb6973e6040c74de2",
+    "climate/waves/weather_checks.py": "71eb3f033ed47a513e7d760b37cdff82314718c9cefc839ec51cd82a9fb6c239",
+    "climate/tests/test_wave_weather.py": "929d70819d78a9e0a5d78cba4078b48f0e6afd1d15cab30e3cfe172d3429e4a3",
+    "shared/constants.json": "f71c3261095e42eab8557c98826627891a5a205ebc76a6aa92760f193c2a0b44",
+    "visualization/waves/weather.py": "618e89ca11ef42ccd0538ba85aba8be373d112097722ee47e1c87a90331f4327"
+  },
+  "artifacts": {
+    "climate/waves/results/weather.json": "4c84837d19575a41b3e75934235391d9116018e39747d35aee0042aee0942114",
+    "research/runs/waves/weather/atmosphere.npz": "601d0b08522f8399c0563a25c8422798973b395b30dcbd2ee0b168efbad27f14",
+    "visualization/waves/results/weather.png": "f25bab253ddaa5fdda55abd3f1f29fd90509eef48d53304075608fe3fafc22e1",
+    "visualization/waves/results/weather.json": "71f2b68b8311a0f855724f5f5b8746f69261af20d0c77a77cb4e1eec20810dd3"
+  },
+  "repository_check": {
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 TERLUNA_SWAN_EXECUTABLE=/tmp/terluna-lunar-seas-swan/coupled_air/swan.exe nice -n 10 make check",
+    "passed": true,
+    "log": "research/runs/waves/weather/make_check.log",
+    "log_sha256": "34ab62b1ff94f2c6b1621422fd004a93f440a408c48f7c4440f0ec955ecad97c",
+    "python_tests_passed": 472,
+    "javascript_tests_passed": 176,
+    "layer_files_checked": 307,
+    "layer_violations": 0,
+    "provenance_check": "PASS",
+    "ensemble_snapshot_files": 14,
+    "ensemble_paper_workspaces": 5
+  },
+  "atmospheric_checks": {
+    "control_equal_bytes": {
+      "plasim_status": true,
+      "plasim_output": true
+    },
+    "original_atmospheric_inputs_unchanged": true,
+    "independent_surface_values_checked": 3454976,
+    "independent_surface_values_exact": true,
+    "wind_stress_direction_cosine_max_error": 2.398587994889567e-10,
+    "snapshot_count": 241,
+    "duration_s": 2592000.0,
+    "surface_closure_relative_max": 0.005152038231789242,
+    "source_audit_files": {
+      "fluxmod.f90": "0a551de81e9f15c7d49117604f7fcf82775dde43ce7f82274399acd24fbaaafc",
+      "glaciermod.f90": "39421da92363969159a3bdf5800d57b771a1ca753f56e59368bba744d5a620be",
+      "icemod.f90": "7fb8ee55911138e27b9bf6ce8484c95cb92bf2be8e4b094f0650291517c547e3",
+      "oceanmod.f90": "b3f776eca7982901e330813d556e1a3e6a6fb15fa7fcda4d2a80586b852106da",
+      "outmod.f90": "2f582ee248ca70c7feee759ea723b8de327fdac2cfc0234fd8ce351240d79364",
+      "plasim.f90": "04fd8941a51b9b70cf07791b54bcde33d40deebf7e19d0e60c5eb053748b9129",
+      "seamod.f90": "6e51582bf6b76f4f6bd68e40d96db3de45e1dca146f05a7de14b18d8bcb8f5f0"
+    },
+    "source_audit_scope": "Installed source read alongside the archived executable; executable hash retained in each run manifest.",
+    "optional_source_snow_overrides_present": {
+      "restart_dsnow": false,
+      "restart_xsnow": false
+    },
+    "run_manifests": {
+      "snapshots": "7fb699b5e77285b8e54b2cb65dc544fa4e796076922269e90fe9ea463fbde70f",
+      "control": "3dbd02d26487e4993111a63c300f1f3cd37820ff1135df6d3857869ce50e26db"
+    }
+  },
+  "common_forcing_checks": [
+    {
+      "compared_cases": [
+        "basin_dt150",
+        "basin_dt75"
+      ],
+      "common_forcing_max_absolute_difference_m_s": 0.0,
+      "passed": true
+    },
+    {
+      "compared_cases": [
+        "basin_dt150",
+        "basin_lead48_dt150"
+      ],
+      "common_forcing_max_absolute_difference_m_s": 1.000000082740371e-09,
+      "passed": true
+    },
+    {
+      "compared_cases": [
+        "basin_lead48_dt150",
+        "basin_lead96_dt150"
+      ],
+      "common_forcing_max_absolute_difference_m_s": 1.000000082740371e-10,
+      "passed": true
+    }
+  ],
+  "numerical_acceptance": {
+    "full_field_timestep_150_to_75_s": false,
+    "preceding_history_48_to_96h_after_selected_hour24": true,
+    "preceding_history_48_to_96h_including_first_selected_day": false,
+    "final_offshore_spectral_edges": true
+  },
+  "completed_wave_runs": {
+    "basin_dt150": {
+      "wall_s": 750.6203772579993,
+      "threads": 1,
+      "output_sha256": {
+        "basin.tbl": "55cedaac71a6500692b92ed71644bbeb2303e6d65433e9da487bb5a7dc884d7f",
+        "offshore.spc": "472f9076ac0d3d9d6e58cb350ff674b114f922220091351140ca6b131ccf2eda",
+        "wind.tbl": "5b616c41d890741cb64cc4c34229c7a259192f776a03bc25e8e8bfc26a566bcd",
+        "PRINT": "486d32c5078bee844bf1715ef5c0a404130c23240761f701b9287e3494b9980b",
+        "norm_end": "d0ca999a2c3d76bef4c2bf5a82286d8d3618dec3d70e1436b85266fa162b1736"
+      }
+    },
+    "basin_dt75": {
+      "wall_s": 1470.927784804,
+      "threads": 1,
+      "output_sha256": {
+        "basin.tbl": "7fb786e7a2895514574e764d09976cc33c1d31f6ca7f322a6a666f41b6cc214b",
+        "offshore.spc": "1855da9337221faf5a167be690b002455f1cf6b79a0cc9df887072ed35573b5d",
+        "wind.tbl": "5b616c41d890741cb64cc4c34229c7a259192f776a03bc25e8e8bfc26a566bcd",
+        "PRINT": "058da8b508f3a38094361e2759826432216f22cdaecae59adb34c50eacc35786",
+        "norm_end": "d0ca999a2c3d76bef4c2bf5a82286d8d3618dec3d70e1436b85266fa162b1736"
+      }
+    },
+    "basin_lead48_dt150": {
+      "wall_s": 944.0290173379999,
+      "threads": 1,
+      "output_sha256": {
+        "basin.tbl": "33bdb600f54b5d89856b32c31b4af9d93cca4adf0475f8bc4a77b08639e83501",
+        "offshore.spc": "ac6b72f3d9fca688374b6139b65b0d50c5b0be2f5f95762551da954c24b7a3ef",
+        "wind.tbl": "0a56843622aa11ee1284bbba1063b12b239a3cdbd51517f97b9446f5d3773993",
+        "PRINT": "a5497e47f4b953817d8b09ae81cc88202ad2723288df982f54af7ab06eb2fa5b",
+        "norm_end": "d0ca999a2c3d76bef4c2bf5a82286d8d3618dec3d70e1436b85266fa162b1736"
+      }
+    },
+    "basin_lead96_dt150": {
+      "wall_s": 1089.9558823030002,
+      "threads": 1,
+      "output_sha256": {
+        "basin.tbl": "38755ac9222ed23e41bc0211403ccdec056ebb9fd57cc143d1ea3dbbc8ecb78b",
+        "offshore.spc": "a5e393b5d44ad5466433631b054c7c4390cd50c0c4b7b30726cfad76ff6e1ac8",
+        "wind.tbl": "cbb0c38239172d34f2f182801050345260b1e2badde8609161aa3e0b34363e9b",
+        "PRINT": "a0ede275dbb092b1dba635c162ae4171c3b89886695bdd3121b0a47fca79265f",
+        "norm_end": "d0ca999a2c3d76bef4c2bf5a82286d8d3618dec3d70e1436b85266fa162b1736"
+      }
+    }
+  },
+  "visualization": {
+    "plotted_arrays_checked_exact": true,
+    "final_image_visually_inspected": true,
+    "latitude_longitude_aspect_adjusted_at_grid_mean_latitude": true,
+    "undefined_calm_periods_masked": true
+  },
+  "pending": [
+    "Continuous monthly wave histories and another sea.",
+    "Finer basin/coastal terrain and consistent nesting.",
+    "Weak-wave timestep and spectral-band refinement.",
+    "Timestep refinement with the longer initial histories.",
+    "Independent surface-wind diagnostics and lunar air\u2013water calibration.",
+    "Changing water levels, ocean currents, shoreline run-up and individual breaking waves."
+  ]
+}

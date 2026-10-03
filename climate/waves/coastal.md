@@ -136,6 +136,11 @@ surface-layer treatment. That history will support event durations and surf
 occurrence calculations. The recovered ring tracks and GCM means provide the
 available context for choosing and checking the run.
 
+The [weather-sequence study](weather.md) continues the forcing work with
+241 global three-hourly snapshots from an isolated GCM continuation and a
+week of sea-wide wave evolution. Its surface-stress coupling provides
+regional forcing for subsequent coastal studies.
+
 ## Reproduction
 
 The original pilot supplies the `coupled_air` SWAN build. The LOLA/GRAIL files,
