@@ -64,3 +64,18 @@ at the offshore reference point. The input-speed curve is labelled as the
 stress-equivalent SWAN input. Array checks compare the plotted values exactly
 with the climate product. The climate study records timestep, prior-history
 and remaining geographic sensitivities.
+
+## The second lunar cycle
+
+`python -m visualization.waves.cycle` reads
+`climate/waves/results/cycle.json` and writes `results/cycle.png` with its
+hash sidecar. Maps show the second cycle's largest local significant height
+and the share of time above 1 m. Histories show basin and reference-point
+heights, the area above four height thresholds, mean period at the reference
+point, and the atmospheric surface stress supplied to the basin.
+
+The climate product defines the spin-up and reporting intervals. Threshold
+durations integrate its hourly heights; the renderer uses those supplied
+statistics. Array checks cover every plotted map and curve. The caption
+states the single-cycle scope and the remaining weak-wave and coastal
+resolution questions.

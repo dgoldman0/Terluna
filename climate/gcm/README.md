@@ -8,7 +8,7 @@ ExoPlaSim, the first model installed (2026-09-25).
 |---|---|
 | [boundary.py](boundary.py) | Builds the planet parameters and the surface files below from `shared/constants.json` and the geography product |
 | [wave_coverage.py](wave_coverage.py) | Recovers years 20–29 of the corrected design case over Smythii–Marginis: 71.5-hour means at the lowest model level, with source hashes and explicit surface-forcing requirements ([coastal-wave study](../waves/coastal.md)) |
-| [wave_snapshots.py](wave_snapshots.py) | Runs an isolated copy of the corrected year-29 restart, capturing 241 global three-hourly wind and surface-stress snapshots over 30 Earth days; a matching control checks that recording preserves atmospheric evolution ([weather-driven waves](../waves/weather.md)) |
+| [wave_snapshots.py](wave_snapshots.py) | Runs an isolated copy of the corrected year-29 restart, capturing global three-hourly winds and surface stress: 241 snapshots over 30 Earth days and 481 over 60 days. Matching controls preserve the final climate state and ordinary output exactly ([weather episode](../waves/weather.md), [full-cycle waves](../waves/cycle.md)) |
 | `products/moon_{25,35}pct_water_{grid}.nc` | Land fraction, land elevation above the water level and ocean depth on regular 4°×5° and 2°×2.5° grids and on Gaussian T21 and T42 grids (NetCDF 3). These are area-conserving averages of the LOLA/GRAIL hydrostatic filling |
 | `products/moon_gcm_configuration.json` | Radius, gravity, rotation (synchronous, 27.32 d) and solar day (29.53 d), obliquity 1.54°, solar constant, and pointers to the atmosphere, ozone and shield products |
 | [exoplasim_run.py](exoplasim_run.py) | Runs the ExoPlaSim experiments one simulated year at a time, resumable after any stop |

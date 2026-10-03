@@ -86,8 +86,8 @@ def apply_weights(field, indices, weights):
     return np.sum(field.reshape(*field.shape[:-2], -1)[..., indices] * weights, axis=-1)
 
 
-def forcing(atmosphere, basin, density, hours=168):
-    """Select a week containing the largest basin-mean stress and retain its dates."""
+def forcing(atmosphere, basin, density, hours=168, *, start_hour=None):
+    """Map an explicit continuous window or select the strongest weather episode."""
     with np.load(atmosphere, allow_pickle=False) as d:
         meta = json.loads(d["metadata"].item())
         if meta["schema"] != "terluna.climate.gcm-wave-snapshots/1":
@@ -100,13 +100,22 @@ def forcing(atmosphere, basin, density, hours=168):
         tx = apply_weights(d["stress_eastward_Pa"][:, ::-1], indices, weights)
         ty = apply_weights(d["stress_northward_Pa"][:, ::-1], indices, weights)
         rho = apply_weights(d["stress_closure_density_kg_m3"][:, ::-1], indices, weights)
-    if not np.allclose(np.diff(times), 10800) or hours % 3 or hours < 48 or hours*3600 > times[-1]:
+    if (len(times) < 2 or times[0] != 0 or not np.allclose(np.diff(times), 10800)
+            or hours % 3 or hours < 48 or hours*3600 > times[-1]):
         raise ValueError("A complete three-hourly record and multi-day window are required")
     wet = basin["wet"]
     area_weight = np.cos(np.radians(yy[wet]))
     mean_stress = np.average(np.hypot(tx, ty)[:, wet], weights=area_weight, axis=1)
     peak_index = int(np.argmax(mean_stress))
-    first = int(np.clip(peak_index - 24//3, 0, len(times) - 1 - hours//3))
+    if start_hour is None:
+        first = int(np.clip(peak_index - 24//3, 0, len(times) - 1 - hours//3))
+        selection = (f"{hours}-hour window containing the maximum area-weighted basin-mean stress; "
+                     "starts 24 hours before that peak where the archive permits")
+    else:
+        if start_hour < 0 or start_hour % 3 or (start_hour + hours)*3600 > times[-1]:
+            raise ValueError("Explicit forcing window must fit the archive on three-hour boundaries")
+        first = int(start_hour // 3)
+        selection = f"Explicit continuous {hours}-hour window starting {start_hour} hours after the first snapshot"
     last = first + hours//3
     # Interpolate stress vectors every 15 minutes before converting to SWAN
     # input. This keeps momentum interpolation close between native snapshots.
@@ -135,7 +144,7 @@ def forcing(atmosphere, basin, density, hours=168):
                   interpretation="Stress-equivalent SWAN input; atmospheric 10 m wind diagnostics remain a separate surface-layer calculation.",
                   time_interpolation="Linear surface stress at 15-minute knots, then SWAN linear vector interpolation between knots",
                   spatial_interpolation="Bilinear ocean-corner weights renormalized over cells remaining ice-free; nearest open-water cell fills an empty stencil",
-                  selection=f"{hours}-hour window containing the maximum area-weighted basin-mean stress; starts 24 hours before that peak where the archive permits",
+                  selection=selection,
                   first_snapshot_index=first, last_snapshot_index=last, hours=hours,
                   start_day_from_first_snapshot=float(times[first]/86400),
                   end_day_from_first_snapshot=float(times[last]/86400),
@@ -153,7 +162,7 @@ def forcing(atmosphere, basin, density, hours=168):
     return dict(u=u, v=v, time_s=target_time, record=record)
 
 
-def files(case, basin, inputs):
+def files(case, basin, inputs, *, diagnostic_spectra=False):
     result = basin_files(case, basin, 1.)
     lon, lat = basin["lon"], basin["lat"]
     start = ORIGIN.strftime("%Y%m%d.%H%M%S")
@@ -167,21 +176,34 @@ READINP WIND 1 'wind.dat' 3 0 0 0 FREE
     result["INPUT"] = old[:begin] + wind_grid + old[finish:]
     # Extra output checks the physical components seen by SWAN against the file.
     result["INPUT"] = result["INPUT"].replace("COMPUTE NONSTAT", f"TABLE 'COMPGRID' NOHEAD 'wind.tbl' TSEC XP YP WIND UFRI CDRAG &\n OUTPUT {start} 3 HR\nCOMPUTE NONSTAT")
+    if diagnostic_spectra:
+        targets = np.array([basin["offshore"], [88.125,18.875], [95.125,-7.125]])
+        chosen = [np.argmin(np.sum((basin["points"]-point)**2,axis=1)) for point in targets]
+        result["diagnostics.xy"] = array_text(basin["points"][chosen])
+        extra = ("POINTS 'diag' FILE 'diagnostics.xy'\n"
+                 f"SPEC 'diag' SPEC1D ABS 'diagnostics.spc' OUTPUT {start} 3 HR\n")
+        result["INPUT"] = result["INPUT"].replace("COMPUTE NONSTAT", extra+"COMPUTE NONSTAT")
     result["wind.dat"] = "".join(array_text(field) for pair in zip(inputs["u"], inputs["v"]) for field in pair)
     return result
 
 
-def run_case(executable, atmosphere, name, stride=4, step_s=150, hours=168):
+def run_case(executable, atmosphere, name, stride=4, step_s=150, hours=168, *,
+             start_hour=None, frequency_intervals=48, run_root=RUNS, timeout_s=3600, threads=1,
+             diagnostic_spectra=False):
     build = json.loads((executable.parent.parent / "coupled_air.json").read_text())
     if sha256(executable) != build["build"]["executable_sha256"]:
         raise ValueError("SWAN executable differs from its density/build record")
+    if threads > 1 and not build["build"].get("openmp", False):
+        raise ValueError("Multiple threads require a recorded OpenMP build")
     basin = load_basin(stride=stride)
-    inputs = forcing(atmosphere, basin, build["air_density_kg_m3"], hours)
-    case = BasinCase(name, stride=stride, step_s=step_s, frequency_intervals=48, hours=hours)
-    record = execute(executable, RUNS / name, files(case, basin, inputs),
-                     ("basin.tbl", "offshore.spc", "wind.tbl"), timeout_s=3600)
-    cube = read_basin(RUNS / name / "basin.tbl", case, basin)
-    wind = np.loadtxt(RUNS / name / "wind.tbl").reshape(hours//3 + 1, *basin["wet"].shape, 7)
+    inputs = forcing(atmosphere, basin, build["air_density_kg_m3"], hours, start_hour=start_hour)
+    case = BasinCase(name, stride=stride, step_s=step_s, frequency_intervals=frequency_intervals, hours=hours)
+    directory = run_root / name
+    outputs = ("basin.tbl", "offshore.spc", "wind.tbl") + (("diagnostics.spc",) if diagnostic_spectra else ())
+    record = execute(executable, directory, files(case, basin, inputs, diagnostic_spectra=diagnostic_spectra),
+                     outputs, timeout_s=timeout_s, threads=threads)
+    cube = read_basin(directory / "basin.tbl", case, basin)
+    wind = np.loadtxt(directory / "wind.tbl").reshape(hours//3 + 1, *basin["wet"].shape, 7)
     if not np.allclose(wind[:, basin["wet"], 3:5],
                        np.stack((inputs["u"][::12, basin["wet"]], inputs["v"][::12, basin["wet"]]), axis=-1),
                        rtol=8e-5, atol=1e-5):
@@ -193,14 +215,15 @@ def run_case(executable, atmosphere, name, stride=4, step_s=150, hours=168):
     if not np.allclose(wind[1:, basin["wet"], 5], expected_ustar, rtol=1e-4, atol=1e-6):
         raise ValueError("SWAN friction velocity differs from the stress coupling")
     result = dict(schema="terluna.climate.weather-wave-case/1", name=name, stride=stride,
-                  step_s=step_s, frequency_intervals=48, hours=hours, run=record,
+                  step_s=step_s, frequency_intervals=frequency_intervals, hours=hours, run=record,
+                  producer_sha256=sha256(Path(__file__)),
                   forcing=inputs["record"], atlas_sha256=basin["source_sha256"],
                   longitude_deg=basin["lon"].tolist(), latitude_deg=basin["lat"].tolist(),
                   offshore_index=basin["offshore_index"], wet=basin["wet"].tolist(),
                   columns=["time_s","longitude_deg","latitude_deg","hs_m","peak_period_s","mean_period_s","depth_m","direction_deg","breaking_fraction"],
                   stress_coupling_ustar_absolute_max_m_s=float(ustar_error.max()),
                   values=cube.tolist())
-    path = RUNS / name / "product.json"
+    path = directory / "product.json"
     path.write_text(json.dumps(result, separators=(",", ":")) + "\n")
     return path
 
@@ -213,8 +236,17 @@ def main():
     p.add_argument("--step", type=int, default=150)
     p.add_argument("--stride", type=int, default=4)
     p.add_argument("--hours", type=int, default=168)
+    p.add_argument("--start-hour", type=int, help="Explicit archive window; otherwise select the strongest episode")
+    p.add_argument("--frequencies", type=int, default=48, help="Frequency intervals")
+    p.add_argument("--run-root", type=Path, default=RUNS)
+    p.add_argument("--timeout", type=int, default=3600, help="Wall limit in seconds; aggregate CPU limit scales with thread count")
+    p.add_argument("--threads", type=int, choices=(1,2,4), default=1)
+    p.add_argument("--diagnostic-spectra", action="store_true", help="Three-hourly spectra at the reference and two weak-wave nodes")
     a = p.parse_args()
-    print(run_case(a.executable, a.atmosphere, a.name, a.stride, a.step, a.hours))
+    print(run_case(a.executable, a.atmosphere, a.name, a.stride, a.step, a.hours,
+                   start_hour=a.start_hour, frequency_intervals=a.frequencies,
+                   run_root=a.run_root, timeout_s=a.timeout, threads=a.threads,
+                   diagnostic_spectra=a.diagnostic_spectra))
 
 
 if __name__ == "__main__":

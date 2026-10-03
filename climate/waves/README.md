@@ -33,6 +33,14 @@ snapshots from a 30-Earth-day continuation, then drives a selected week of basin
 with their surface stress. It checks the timestep and the influence of
 48 and 96 additional hours of preceding weather.
 
+The [continuous-cycle study](cycle.md) extends the global atmospheric record
+to 60 Earth days and follows the waves through two solar cycles. It excludes
+the first 29.53059 days and measures the second: Hs reaches 3.375 m, and the
+offshore reference point has Hs of at least 1 m for 309.6 hours, with a
+98.1-hour continuous episode. The study records occurrence, persistence,
+period and direction, together with timestep, history and evolving spectral
+checks. Small-wave frequency coverage and finer basin geometry remain open.
+
 ## Findings from the first run
 
 At 100 km fetch after 48 hours of the imposed wind, the modified build gives:
@@ -330,8 +338,10 @@ first experiment's check record and from the numerical audit.
 The [coastal follow-up](coastal.md) adds native 16-pixel/degree terrain and
 full directional nesting, alongside geographic winds from three CM1 rings and
 regional GCM means. Use its numerical comparisons to choose smaller coastal
-areas and finer cross-shore profiles. A basin-wide history of hourly or
-three-hourly surface winds requires a dedicated atmospheric output run.
+areas and finer cross-shore profiles. The global three-hourly atmospheric
+record now supports continuous wave histories and comparisons between seas.
+Extend the [second-cycle calculation](cycle.md) to further cycles and basins,
+and widen the frequency band where the smaller waves reach its upper edge.
 Short wind transients, parent directional resolution, and physical lunar wind
 input and breaking remain open. Local CM1 boxes can address identified gaps
 in gust fronts, coastal flow or storm winds. An individual-wave SWASH

@@ -181,9 +181,14 @@ The earliest growth remains timestep-sensitive.
 The [weather-sequence study](waves/weather.md) captures 241 global three-hourly
 wind and surface-stress snapshots from a 30-day atmospheric continuation.
 It drives a selected week of sea-wide wave evolution, comparing timesteps
-and two or four days of preceding weather. Longer histories, other seas,
-finer coastal winds, sea-temperature gradients and underwater light profiles
-remain further work.
+and two or four days of preceding weather. The [continuous-cycle study](waves/cycle.md)
+extends the atmospheric record to 60 days, excludes a full first cycle of
+wave spin-up, and measures the second 29.53059-day cycle. Significant height
+reaches 3.375 m; the offshore reference point spends 309.6 hours at Hs of at
+least 1 m. Metre-scale waves agree closely in the selected timestep test;
+smaller waves retain timestep and spectral-band sensitivity. Further cycles,
+other seas, finer coastal winds and terrain, sea-temperature gradients and
+underwater light profiles remain further work.
 
 ## Next step
 

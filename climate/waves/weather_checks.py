@@ -48,15 +48,15 @@ def read_grid_records(path, codes):
     return {c: (np.asarray(times[c]), np.asarray(result[c])) for c in codes}
 
 
-def atmospheric_checks():
-    records = [json.loads((RUNS / name / "run.json").read_text()) for name in ("snapshots", "control")]
+def atmospheric_checks(run_root=RUNS):
+    records = [json.loads((run_root / name / "run.json").read_text()) for name in ("snapshots", "control")]
     for record, name in zip(records, ("snapshots", "control")):
         if record["state"] != "complete":
             raise ValueError("Atmospheric run remains incomplete")
-        if sha256(RUNS / name / "producer.py") != record["producer_sha256"]:
+        if sha256(run_root / name / "producer.py") != record["producer_sha256"]:
             raise ValueError("Archived atmospheric runner source changed")
         for filename, expected in record["output_sha256"].items():
-            if sha256(RUNS / name / filename) != expected:
+            if sha256(run_root / name / filename) != expected:
                 raise ValueError("Atmospheric run bytes differ from their manifest")
         for filename, expected in record["source_inputs"].items():
             if sha256(Path(filename)) != expected:
@@ -67,10 +67,10 @@ def atmospheric_checks():
         raise ValueError("Snapshot recording changes the atmospheric control")
     codes = {139:"surface_temperature_K",159:"friction_velocity_cubed_m3_s3",172:"land_fraction",
              173:"roughness_m",180:"stress_eastward_Pa",181:"stress_northward_Pa",210:"sea_ice_fraction"}
-    raw = read_grid_records(RUNS / "snapshots/plasim_snapshot", codes)
-    with np.load(RUNS / "atmosphere.npz") as d:
+    raw = read_grid_records(run_root / "snapshots/plasim_snapshot", codes)
+    with np.load(run_root / "atmosphere.npz") as d:
         meta = json.loads(d["metadata"].item())
-        if sha256(RUNS / "snapshots/export_producer.py") != meta["producer"]["source_sha256"]:
+        if sha256(run_root / "snapshots/export_producer.py") != meta["producer"]["source_sha256"]:
             raise ValueError("Archived atmospheric exporter source changed")
         count = 0
         for code, key in codes.items():
@@ -99,7 +99,7 @@ def atmospheric_checks():
                 surface_closure_relative_max=meta["stress_closure_relative_max"],
                 source_audit_files=audited, source_audit_scope="Installed source read alongside the archived executable; executable hash retained in each run manifest.",
                 optional_source_snow_overrides_present=optional_restart,
-                run_manifests={name: sha256(RUNS / name / "run.json") for name in ("snapshots","control")})
+                run_manifests={name: sha256(run_root / name / "run.json") for name in ("snapshots","control")})
 
 
 def load_case(name):

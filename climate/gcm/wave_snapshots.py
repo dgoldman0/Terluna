@@ -41,6 +41,31 @@ def scalar(text, key):
     return float(matches[0].replace("d", "e").replace("D", "e"))
 
 
+def collect_variable_records(buffer, decoder):
+    """Use pyburn's record parser, concatenating each variable once.
+
+    The upstream collector repeatedly copies its growing arrays. Keeping its
+    parser and record order preserves the values while bounding that copying.
+    """
+    endian = decoder._getEndian(buffer)
+    marker_bytes, marker_format = decoder._getwordlength(buffer, 0, endian)
+    header, field, cursor = decoder.readrecord(buffer, 0, endian, marker_bytes, marker_format)
+    headers = {"main": header}
+    chunks = {"main": [np.asarray(field)]}
+    sigma, times = np.asarray(field[:header[6]]), []
+    while cursor < len(buffer):
+        header, field, cursor = decoder.readrecord(buffer, cursor, endian, marker_bytes, marker_format)
+        key = str(header[0])
+        if key == "139":
+            times.append(header[6])
+        if key not in chunks:
+            headers[key], chunks[key] = header, []
+        chunks[key].append(np.asarray(field))
+    variables = {key: np.concatenate(value) for key,value in chunks.items()}
+    variables.update(sigmah=sigma, time=times)
+    return headers, variables
+
+
 def run(source=DEFAULT_SOURCE, output=DEFAULT_OUTPUT, *, steps=1446, cadence=6, snapshots=True):
     """Run the saved eight-rank binary, using copied inputs and a bounded duration."""
     if cadence < 1 or steps < cadence or steps % cadence:
@@ -126,10 +151,15 @@ def export(run_dir=DEFAULT_OUTPUT / "snapshots", output=DEFAULT_OUTPUT / "atmosp
     # pyburn's API takes radius in its own reference Earth radii. This cancels
     # the reference-radius conversion in that installed implementation.
     reference_radius = DATA["model_closures"]["exoplasim_3_4_2"]["postprocessor_reference_radius_m"]
-    data = pyburn.dataset(str(run_dir / "plasim_snapshot"),
-                          [str(n) for n in (130, 131, 132, 133, 134, 139, 159, 172, 173, 180, 181, 210)],
-                          radius=radius / reference_radius, gravity=scalar(planet, "GA"), gascon=gascon,
-                          logfile=str(run_dir / "decode.log"))
+    original_collector = pyburn.readallvariables
+    pyburn.readallvariables = lambda buffer: collect_variable_records(buffer, pyburn)
+    try:
+        data = pyburn.dataset(str(run_dir / "plasim_snapshot"),
+                              [str(n) for n in (130, 131, 132, 133, 134, 139, 159, 172, 173, 180, 181, 210)],
+                              radius=radius / reference_radius, gravity=scalar(planet, "GA"), gascon=gascon,
+                              logfile=str(run_dir / "decode.log"))
+    finally:
+        pyburn.readallvariables = original_collector
     # Retain the decoded intermediate so later audits can inspect units and
     # coordinates independently of this exporter's field selection.
     np.savez_compressed(run_dir / "decoded.npz", **{k: np.asarray(v[0]) for k, v in data.items()},
@@ -172,7 +202,8 @@ def export(run_dir=DEFAULT_OUTPUT / "snapshots", output=DEFAULT_OUTPUT / "atmosp
                     evidence="Instantaneous atmospheric fields from a copied settled GCM restart, with unchanged climate physics.",
                     reading_rule=f"Global native T21 grid, sampled every {cadence * record['timestep_s']/3600:g} Earth hours. Winds are at the lowest sigma level. Surface stress is the model's downward momentum transfer; its density closure uses surface temperature and the configured dry-gas constant. Wave forcing requires an explicit surface coupling rule.",
                     producer=dict(domain="climate", source_sha256=producer_sha256,
-                                  postprocessor_sha256=digest(Path(pyburn.__file__))),
+                                  postprocessor_sha256=digest(Path(pyburn.__file__)),
+                                  record_collection="Upstream record parser with a single concatenation per variable; installed code is preserved"),
                     run_record_sha256=digest(run_dir / "run.json"), raw_sha256=record["output_sha256"]["plasim_snapshot"],
                     source_configuration=record["source_configuration"], sigma_lowest=float(get("lev")[-1]),
                     gas_constant_J_kg_K=gascon, gravity_m_s2=scalar(planet, "GA"), radius_m=radius,
@@ -201,12 +232,15 @@ def main():
     parser.add_argument("action", choices=("run", "control", "export"))
     parser.add_argument("--source", type=Path, default=DEFAULT_SOURCE)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument("--steps", type=int, default=1446,
+                        help="Half-hour steps; 2886 supplies 60 days between the first and last snapshots")
+    parser.add_argument("--cadence", type=int, default=6, help="Model steps between snapshots")
     args = parser.parse_args()
     if args.action == "export":
         result = export(args.output / "snapshots", args.output / "atmosphere.npz")
     else:
         result = run(args.source, args.output / ("snapshots" if args.action == "run" else "control"),
-                     snapshots=args.action == "run")
+                     steps=args.steps, cadence=args.cadence, snapshots=args.action == "run")
     print(json.dumps(result, indent=2))
 
 

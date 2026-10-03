@@ -1,0 +1,654 @@
+{
+  "schema": "terluna.climate.wave-cycle-verification/1",
+  "verified_utc": "2026-10-03T02:46:34.122256+00:00",
+  "evidence": "Completed atmospheric continuations, wave calculations, direct byte comparisons, numerical checks and repository checks. Lunar physical calibration remains open.",
+  "reading_rule": "The first solar cycle initializes the waves. Statistics use only the second cycle. Functional checks and numerical acceptance are distinct; the complete-field timestep and evolving spectral criteria fail in smaller waves.",
+  "sources": {
+    "climate/gcm/wave_snapshots.py": "f5a199bed749db65e24a91f9ec7a2cc6d516d083172981fe732a571d215260ee",
+    "climate/waves/build.py": "74afe80f1161372ecc6e9297d58c0c305b8f4f48c4be48c2c650b93b55d4a378",
+    "climate/waves/pilot.py": "08b71bd9a092123cc8f97ecfc34970d39a4117a48b2423f2fa1a264066f79258",
+    "climate/waves/weather.py": "655f8026133e60cddbf7554307aab93bec5bb67615543cf09e910370df3006bd",
+    "climate/waves/weather_checks.py": "816a0569d7b016d59f35dd06c37d364fc28f3445438733dbbe85d7abd4171d05",
+    "climate/waves/cycle.py": "f35cef9369582301153318466e7888617064a997ec36ba69061cada5611e068d",
+    "climate/waves/cycle_checks.py": "388704769549cfcef714e021f15dd1fcc4096179cd13d273a7105da39f616bf4",
+    "climate/tests/test_wave_cycle.py": "e083bd10e3db9ac37ca0cfcd74522911f5e368000244ea61b01fe0027674d229",
+    "climate/tests/test_wave_weather.py": "929d70819d78a9e0a5d78cba4078b48f0e6afd1d15cab30e3cfe172d3429e4a3",
+    "shared/constants.json": "f71c3261095e42eab8557c98826627891a5a205ebc76a6aa92760f193c2a0b44",
+    "visualization/waves/cycle.py": "e541b221e6ae25113078c5795f7970296e36b6437478681670a5f15e3129370f"
+  },
+  "artifacts": {
+    "climate/waves/results/cycle.json": "a15ef85b3efb9eb86641eed996fdc84acf3e4cc1ef387011e00edaff9c0cb1ce",
+    "climate/waves/results/cycle_checks.json": "cdfd1b29b57d3f8c0b46845f0266bc7d94709f63ddd69f074b06aec5f353e197",
+    "research/runs/waves/cycle/atmosphere.npz": "4a6bf0fe4832ac4f5a5a62c2dceec813f7de3e37aaf7652e224ddca6f16de9c1",
+    "visualization/waves/results/cycle.png": "94141e309f0548e188bd532117f078e6025c7746553c06f4959298b4f1ef0580",
+    "visualization/waves/results/cycle.json": "5b4b47235bd18509f854ad6e9d919327543423adfb5dc48431fb059b51a77286"
+  },
+  "atmospheric_initial_state": {
+    "source_restart": "/media/projectspace/terluna-research/gcm-runs/A28_dim5_moon/model/MOST_REST.00029",
+    "sha256": "3d19d93541515be9b117e913d209b2a988858e805c0811b63e90efc8dcc83409",
+    "copied_restart_matches": true,
+    "source_inputs_rechecked_at_verification": true,
+    "run_steps": 2886,
+    "snapshot_cadence_steps": 6
+  },
+  "atmospheric_checks": {
+    "control_equal_bytes": {
+      "plasim_status": true,
+      "plasim_output": true
+    },
+    "original_atmospheric_inputs_unchanged": true,
+    "independent_surface_values_checked": 6895616,
+    "independent_surface_values_exact": true,
+    "wind_stress_direction_cosine_max_error": 2.398587994889567e-10,
+    "snapshot_count": 481,
+    "duration_s": 5184000.0,
+    "surface_closure_relative_max": 0.007183474388659523,
+    "source_audit_files": {
+      "fluxmod.f90": "0a551de81e9f15c7d49117604f7fcf82775dde43ce7f82274399acd24fbaaafc",
+      "glaciermod.f90": "39421da92363969159a3bdf5800d57b771a1ca753f56e59368bba744d5a620be",
+      "icemod.f90": "7fb8ee55911138e27b9bf6ce8484c95cb92bf2be8e4b094f0650291517c547e3",
+      "oceanmod.f90": "b3f776eca7982901e330813d556e1a3e6a6fb15fa7fcda4d2a80586b852106da",
+      "outmod.f90": "2f582ee248ca70c7feee759ea723b8de327fdac2cfc0234fd8ce351240d79364",
+      "plasim.f90": "04fd8941a51b9b70cf07791b54bcde33d40deebf7e19d0e60c5eb053748b9129",
+      "seamod.f90": "6e51582bf6b76f4f6bd68e40d96db3de45e1dca146f05a7de14b18d8bcb8f5f0"
+    },
+    "source_audit_scope": "Installed source read alongside the archived executable; executable hash retained in each run manifest.",
+    "optional_source_snow_overrides_present": {
+      "restart_dsnow": false,
+      "restart_xsnow": false
+    },
+    "run_manifests": {
+      "snapshots": "7322228e5626d18c023e472c3957a3cdbbae37824e80ec036fc72acd1b828794",
+      "control": "11d91269296ef308c9e9efcdc87343196c04f13dc08ead662627786f3715d3af"
+    },
+    "previous_30_day_export_values_compared": 6416962,
+    "previous_30_day_export_exact": true
+  },
+  "decoder_check": {
+    "upstream_collector_comparison_exact": true,
+    "variables_compared": 90,
+    "values_compared": 2809946,
+    "complete_snapshots": 8,
+    "prefix_bytes": 11319792,
+    "upstream_source_sha256": "b8c4c1dfde96e6804de1458a4f9310c33807fd22463bd6c99080c0c2301fcfe2"
+  },
+  "original_surface_record_overlap": {
+    "first_30_days_exact": true,
+    "surface_values_compared": 3454976,
+    "new_snapshot_count": 481,
+    "new_snapshot_sha256": "d25b24247bd78965cff8a96c6f4b4e390e1e4c9caac8a005e3c9fd31cfccd6e9",
+    "old_atmosphere_sha256": "601d0b08522f8399c0563a25c8422798973b395b30dcbd2ee0b168efbad27f14"
+  },
+  "builds": {
+    "reference": {
+      "manifest_sha256": "10900afb5cc4ac3afe62a0cda36f80ab98a43648316b0409bf75510fcb594fd1",
+      "source_sha256": "325c229f3dde0b812db4ec9ae6fa1cd4086d2109562c389576590ce8f94b26bb",
+      "air_density_kg_m3": 1.4039006233215332,
+      "executable_sha256": "b0cac8ff4f09c6267967a64d2a1582a1d0859bf2162c8084f35ff263756cd3c1",
+      "commands": [
+        [
+          "make",
+          "config"
+        ],
+        [
+          "make",
+          "-j1",
+          "ser"
+        ]
+      ],
+      "compiler_version": null,
+      "native_optimization": false,
+      "openmp": false
+    },
+    "optimized_serial": {
+      "manifest_sha256": "dd6441256de5c8b928c16729ee58d141c2bf1a2d96b23a164521dafdc8682ae1",
+      "source_sha256": "325c229f3dde0b812db4ec9ae6fa1cd4086d2109562c389576590ce8f94b26bb",
+      "air_density_kg_m3": 1.4039006233215332,
+      "executable_sha256": "ed8baf28200494313dfd971efe783c5ef749838aa895bdcc1d83f7d386746f56",
+      "commands": [
+        [
+          "make",
+          "config"
+        ],
+        [
+          "make",
+          "-j1",
+          "ser",
+          "FLAGS_OPT=-O3 -march=native"
+        ]
+      ],
+      "compiler_version": "GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+      "native_optimization": true,
+      "openmp": false
+    },
+    "optimized_openmp": {
+      "manifest_sha256": "6647f088bcaef95444cffd688f63785f2359b3e7217eab45a7db6366b8b9e18a",
+      "source_sha256": "325c229f3dde0b812db4ec9ae6fa1cd4086d2109562c389576590ce8f94b26bb",
+      "air_density_kg_m3": 1.4039006233215332,
+      "executable_sha256": "8883fc9eca573573cda0be4d6f3e9719f276b78364f29a583f24247659734875",
+      "commands": [
+        [
+          "make",
+          "config"
+        ],
+        [
+          "make",
+          "-j1",
+          "omp",
+          "FLAGS_OPT=-O3 -march=native"
+        ]
+      ],
+      "compiler_version": "GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+      "native_optimization": true,
+      "openmp": true
+    }
+  },
+  "build_comparisons": {
+    "optimized_week": {
+      "first_compared_hour": 0,
+      "last_compared_hour": 168,
+      "compared_cases": [
+        "basin_dt150",
+        "optimized_week"
+      ],
+      "additional_history_hours": 0,
+      "paired_wet_samples": 53207,
+      "minimum_hs_m": 0.1,
+      "hs_relative_max": 0.005121358967596477,
+      "hs_relative_p95": 2.4141336826526165e-05,
+      "hs_absolute_max_m": 0.003071307999999995,
+      "hs_worst_pair": {
+        "coarse": [
+          550800.0,
+          99.125,
+          13.875,
+          0.363859177,
+          20.1258774,
+          4.98027515,
+          595.584473,
+          5.45245981,
+          0.0
+        ],
+        "reference": [
+          550800.0,
+          99.125,
+          13.875,
+          0.365732223,
+          20.1258774,
+          4.95829248,
+          595.584473,
+          4.90316677,
+          0.0
+        ]
+      },
+      "tm01_relative_max": 0.016203895421405115,
+      "tm01_relative_p95": 4.8326569480595294e-05,
+      "tm01_absolute_max_s": 0.14684294999999992,
+      "tm01_worst_pair": {
+        "coarse": [
+          486000.0,
+          91.125,
+          12.875,
+          0.666543901,
+          18.2847137,
+          9.2090435,
+          272.046387,
+          118.929382,
+          0.0
+        ],
+        "reference": [
+          486000.0,
+          91.125,
+          12.875,
+          0.669615209,
+          18.2847137,
+          9.06220055,
+          272.046387,
+          119.363014,
+          0.0
+        ]
+      },
+      "strong_sea_diagnostic": {
+        "paired_samples": 26920,
+        "minimum_hs_m": 1.0,
+        "hs_relative_max": 0.0021025981821589657,
+        "tm01_relative_max": 0.008473821029999606
+      },
+      "within_five_percent": true,
+      "elapsed_wall_s": 585.2917859469999,
+      "threads": 1
+    },
+    "openmp_2_week": {
+      "first_compared_hour": 0,
+      "last_compared_hour": 168,
+      "compared_cases": [
+        "basin_dt150",
+        "openmp_2_week"
+      ],
+      "additional_history_hours": 0,
+      "paired_wet_samples": 53207,
+      "minimum_hs_m": 0.1,
+      "hs_relative_max": 0.005121358967596477,
+      "hs_relative_p95": 2.4141336826526165e-05,
+      "hs_absolute_max_m": 0.003071307999999995,
+      "hs_worst_pair": {
+        "coarse": [
+          550800.0,
+          99.125,
+          13.875,
+          0.363859177,
+          20.1258774,
+          4.98027515,
+          595.584473,
+          5.45245981,
+          0.0
+        ],
+        "reference": [
+          550800.0,
+          99.125,
+          13.875,
+          0.365732223,
+          20.1258774,
+          4.95829248,
+          595.584473,
+          4.90316677,
+          0.0
+        ]
+      },
+      "tm01_relative_max": 0.016203895421405115,
+      "tm01_relative_p95": 4.8326569480595294e-05,
+      "tm01_absolute_max_s": 0.14684294999999992,
+      "tm01_worst_pair": {
+        "coarse": [
+          486000.0,
+          91.125,
+          12.875,
+          0.666543901,
+          18.2847137,
+          9.2090435,
+          272.046387,
+          118.929382,
+          0.0
+        ],
+        "reference": [
+          486000.0,
+          91.125,
+          12.875,
+          0.669615209,
+          18.2847137,
+          9.06220055,
+          272.046387,
+          119.363014,
+          0.0
+        ]
+      },
+      "strong_sea_diagnostic": {
+        "paired_samples": 26920,
+        "minimum_hs_m": 1.0,
+        "hs_relative_max": 0.0021025981821589657,
+        "tm01_relative_max": 0.008473821029999606
+      },
+      "within_five_percent": true,
+      "elapsed_wall_s": 329.71265620600025,
+      "threads": 2
+    },
+    "openmp_4_48h": {
+      "first_compared_hour": 0,
+      "last_compared_hour": 48,
+      "compared_cases": [
+        "basin_dt150",
+        "openmp_4_48h"
+      ],
+      "additional_history_hours": 0,
+      "paired_wet_samples": 14929,
+      "minimum_hs_m": 0.1,
+      "hs_relative_max": 0.00112405596894322,
+      "hs_relative_p95": 7.64426606072321e-06,
+      "hs_absolute_max_m": 0.0006353259999999361,
+      "hs_worst_pair": {
+        "coarse": [
+          122400.0,
+          86.125,
+          4.875,
+          0.543015778,
+          13.7116003,
+          6.85103321,
+          3612.23218,
+          102.296631,
+          0.0
+        ],
+        "reference": [
+          122400.0,
+          86.125,
+          4.875,
+          0.543626845,
+          13.7116003,
+          6.83444691,
+          3612.23218,
+          102.506493,
+          0.0
+        ]
+      },
+      "tm01_relative_max": 0.002426867926317708,
+      "tm01_relative_p95": 1.5268880237587945e-05,
+      "tm01_absolute_max_s": 0.016586300000000165,
+      "tm01_worst_pair": {
+        "coarse": [
+          122400.0,
+          86.125,
+          4.875,
+          0.543015778,
+          13.7116003,
+          6.85103321,
+          3612.23218,
+          102.296631,
+          0.0
+        ],
+        "reference": [
+          122400.0,
+          86.125,
+          4.875,
+          0.543626845,
+          13.7116003,
+          6.83444691,
+          3612.23218,
+          102.506493,
+          0.0
+        ]
+      },
+      "strong_sea_diagnostic": {
+        "paired_samples": 4592,
+        "minimum_hs_m": 1.0,
+        "hs_relative_max": 7.852462513990854e-05,
+        "tm01_relative_max": 0.00044839489229442364
+      },
+      "within_five_percent": true,
+      "elapsed_wall_s": 60.532402948998424,
+      "threads": 4
+    }
+  },
+  "thread_comparisons": {
+    "first_compared_hour": 0,
+    "last_compared_hour": 48,
+    "compared_cases": [
+      "openmp_2_week",
+      "openmp_4_48h"
+    ],
+    "additional_history_hours": 0,
+    "paired_wet_samples": 14929,
+    "minimum_hs_m": 0.1,
+    "hs_relative_max": 0.0,
+    "hs_relative_p95": 0.0,
+    "hs_absolute_max_m": 0.0,
+    "hs_worst_pair": {
+      "coarse": [
+        3600.0,
+        81.125,
+        -4.125,
+        0.111494355,
+        2.95407438,
+        2.27182937,
+        1612.46094,
+        74.5765686,
+        0.0
+      ],
+      "reference": [
+        3600.0,
+        81.125,
+        -4.125,
+        0.111494355,
+        2.95407438,
+        2.27182937,
+        1612.46094,
+        74.5765686,
+        0.0
+      ]
+    },
+    "tm01_relative_max": 0.0,
+    "tm01_relative_p95": 0.0,
+    "tm01_absolute_max_s": 0.0,
+    "tm01_worst_pair": {
+      "coarse": [
+        3600.0,
+        81.125,
+        -4.125,
+        0.111494355,
+        2.95407438,
+        2.27182937,
+        1612.46094,
+        74.5765686,
+        0.0
+      ],
+      "reference": [
+        3600.0,
+        81.125,
+        -4.125,
+        0.111494355,
+        2.95407438,
+        2.27182937,
+        1612.46094,
+        74.5765686,
+        0.0
+      ]
+    },
+    "strong_sea_diagnostic": {
+      "paired_samples": 4592,
+      "minimum_hs_m": 1.0,
+      "hs_relative_max": 0.0,
+      "tm01_relative_max": 0.0
+    },
+    "within_five_percent": true,
+    "all_table_values_exact": true,
+    "optimized_serial_vs_two_threads_full_week_exact": true
+  },
+  "regenerated_inputs": [
+    {
+      "case": "basin_dt150",
+      "inputs_regenerated_and_matched": true,
+      "all_retained_outputs_hash_checked": true,
+      "previous_product_sha256": "c0d80ad03e6093264cd46a18551f7de5eb272c7ce2cc7dfde02c7314cc5bf789",
+      "current_product_sha256": "c0d80ad03e6093264cd46a18551f7de5eb272c7ce2cc7dfde02c7314cc5bf789"
+    },
+    {
+      "case": "lead96_dt150",
+      "inputs_regenerated_and_matched": true,
+      "all_retained_outputs_hash_checked": true,
+      "previous_product_sha256": "89e32afb81a3647c5eadae45a22ce65851e26ff934a54e354224d01df0e57cf0",
+      "current_product_sha256": "5a05d6f2840da3b859ae1198d7f87c700987736f4309010be35a68b59f195cb6"
+    },
+    {
+      "case": "lead96_dt75",
+      "inputs_regenerated_and_matched": true,
+      "all_retained_outputs_hash_checked": true,
+      "previous_product_sha256": "e8bfba2742c9200076af9a8c424bed5fc56215268539b9338378915d3711dd7b",
+      "current_product_sha256": "e8bfba2742c9200076af9a8c424bed5fc56215268539b9338378915d3711dd7b"
+    }
+  ],
+  "independent_duration_integration": {
+    "method": "Independent one-minute midpoint integration of interpolated raw hourly heights, restricted to the second solar cycle",
+    "interval_hours": [
+      708.73416,
+      1417.46832
+    ],
+    "checks": 1276,
+    "max_node_hours_error": 0.053126330003919975,
+    "max_node_minutes_error": 3.1875798002351985,
+    "threshold_max_node_hours_error": {
+      "0.5": 0.053126330003919975,
+      "1.0": 0.046609485054204924,
+      "2.0": 0.021800539818855214,
+      "3.0": 0.014804958073568741
+    },
+    "bounded_by_one_minute_per_episode": true,
+    "mean_area_fraction_error_max": 1.3730162377367227e-06
+  },
+  "clock": {
+    "cycle_hours": 708.73416,
+    "cycle_days": 29.53059,
+    "basis": "Shared synodic month; elapsed time is measured from the first atmospheric snapshot",
+    "phase_origin": "First saved snapshot; the reporting boundary is independent of local sunrise",
+    "atmospheric_solar_period_days": 29.530588233598227,
+    "two_cycle_clock_difference_s": 0.30523422642545484,
+    "spinup_interval_hours": [
+      0,
+      708.73416
+    ],
+    "report_interval_hours": [
+      708.73416,
+      1417.46832
+    ],
+    "reported_hours": 708.73416,
+    "interpolated_boundary_hours": [
+      708.73416,
+      1417.46832
+    ],
+    "first_snapshot_restart_elapsed_s": 9000.0
+  },
+  "numerical_acceptance": {
+    "full_field_timestep": false,
+    "metre_scale_timestep_subset": true,
+    "shorter_history_against_continuous_record": true,
+    "evolving_spectral_edges": false,
+    "final_offshore_spectral_edges": true,
+    "comparison_archive_hours": [
+      1011,
+      1155
+    ]
+  },
+  "completed_wave_runs": {
+    "basin_dt150": {
+      "schema": "terluna.climate.swan-pilot-run/1",
+      "identity": {
+        "executable_sha256": "8883fc9eca573573cda0be4d6f3e9719f276b78364f29a583f24247659734875",
+        "inputs": {
+          "INPUT": "85641471ffb15ff8ac2b66176ae5e78e1b7f641706803fd315e878e82ec2ed39",
+          "depth.bot": "31b0fcda64e130eff067113737c12cfc6b14c70a12ed5b248ceabcb6cd34efe1",
+          "points.xy": "2a68fb8e230cd54392c3480b4fe6fdce50995485571320c50832ad617256e950",
+          "wind.dat": "71b442ad3341585c31300a5aa15bbadab7452ae7e919f329c241701dae6f6ea8",
+          "diagnostics.xy": "482e58872583df1c018e3264fe09b2bb4868a68c2779d6d45e2edfcf7d45ee7e"
+        }
+      },
+      "producer_sha256": "08b71bd9a092123cc8f97ecfc34970d39a4117a48b2423f2fa1a264066f79258",
+      "elapsed_wall_s": 1784.4450296729992,
+      "threads": 4,
+      "address_space_limit_bytes": 2147483648,
+      "cpu_limit_s": 28800,
+      "warnings": [],
+      "output_sha256": {
+        "basin.tbl": "587f2c1dd1cb2004dd9295fb362afbb6e65ef93949676ce90e260fe7613322d7",
+        "offshore.spc": "df6d15d4db6cfb90089f9c82b65e830f0ee958ea38c9a2fd34bdda675d031703",
+        "wind.tbl": "62af8d3d0e0dced660d6f679c1eec331b55fdb0dc959973429455a3ca1d9c850",
+        "diagnostics.spc": "01d1e015000608656a5302c8d3205e8132e604fe745bbbc372f66abe5c100b6f",
+        "PRINT": "bbe82f4469c6941271760a121c526f39aa84e8e52dca4a96417f131879b32519",
+        "norm_end": "d0ca999a2c3d76bef4c2bf5a82286d8d3618dec3d70e1436b85266fa162b1736"
+      }
+    },
+    "lead96_dt150": {
+      "schema": "terluna.climate.swan-pilot-run/1",
+      "identity": {
+        "executable_sha256": "8883fc9eca573573cda0be4d6f3e9719f276b78364f29a583f24247659734875",
+        "inputs": {
+          "INPUT": "763c0da28963f303d77b46b87f30dc65eb882b1eec291761d9000f9e40111832",
+          "depth.bot": "31b0fcda64e130eff067113737c12cfc6b14c70a12ed5b248ceabcb6cd34efe1",
+          "points.xy": "2a68fb8e230cd54392c3480b4fe6fdce50995485571320c50832ad617256e950",
+          "wind.dat": "b555e27da3bb0c7d24339db4fa847e2a2bb43481eca0ebe2dd360fc292ff3429",
+          "diagnostics.xy": "482e58872583df1c018e3264fe09b2bb4868a68c2779d6d45e2edfcf7d45ee7e"
+        }
+      },
+      "producer_sha256": "08b71bd9a092123cc8f97ecfc34970d39a4117a48b2423f2fa1a264066f79258",
+      "elapsed_wall_s": 529.4305270040022,
+      "threads": 2,
+      "address_space_limit_bytes": 2147483648,
+      "cpu_limit_s": 14400,
+      "warnings": [],
+      "output_sha256": {
+        "basin.tbl": "29211ca5ecb4e2711abbf3c68360e8017bff61338c72979fda620c1325c6f1b0",
+        "offshore.spc": "043fc9a97abbf91e2accf8bfa3855ece5698adc8b3a723e86d9965fbb801915a",
+        "wind.tbl": "fe567b8366a1600b9b7f5c936d12515b60b4ed73d03d204c4da764c0e3dee416",
+        "diagnostics.spc": "992da048ee26860fa68766a52b09734f6044a7267a517d54ea10baa6d599b774",
+        "PRINT": "dae6585eb7bd228c0e339b44b9be9105eca6326a143a3a67a0b79a1c556040c6",
+        "norm_end": "d0ca999a2c3d76bef4c2bf5a82286d8d3618dec3d70e1436b85266fa162b1736"
+      }
+    },
+    "lead96_dt75": {
+      "schema": "terluna.climate.swan-pilot-run/1",
+      "identity": {
+        "executable_sha256": "8883fc9eca573573cda0be4d6f3e9719f276b78364f29a583f24247659734875",
+        "inputs": {
+          "INPUT": "3b6bf1c32ebcd76bb6eff5380bc09d2e7fde2a58eca37d5c3d0550143948c711",
+          "depth.bot": "31b0fcda64e130eff067113737c12cfc6b14c70a12ed5b248ceabcb6cd34efe1",
+          "points.xy": "2a68fb8e230cd54392c3480b4fe6fdce50995485571320c50832ad617256e950",
+          "wind.dat": "b555e27da3bb0c7d24339db4fa847e2a2bb43481eca0ebe2dd360fc292ff3429",
+          "diagnostics.xy": "482e58872583df1c018e3264fe09b2bb4868a68c2779d6d45e2edfcf7d45ee7e"
+        }
+      },
+      "producer_sha256": "08b71bd9a092123cc8f97ecfc34970d39a4117a48b2423f2fa1a264066f79258",
+      "elapsed_wall_s": 1029.769042079999,
+      "threads": 2,
+      "address_space_limit_bytes": 2147483648,
+      "cpu_limit_s": 14400,
+      "warnings": [],
+      "output_sha256": {
+        "basin.tbl": "5f64f8e41d67fd624bdeac3fa28257a44d5d8fe9f53335331e35c49b282ee260",
+        "offshore.spc": "926ca19e66f52677cd7278592d12c73b92186aa415f0cd412eaa36c729366206",
+        "wind.tbl": "fe567b8366a1600b9b7f5c936d12515b60b4ed73d03d204c4da764c0e3dee416",
+        "diagnostics.spc": "7d4378ad5f59989547999b539ab23cf2e88b3d42b60a6e933e7cbcf87b7f50b6",
+        "PRINT": "7ceb76ae91b7c07bfb0ade79207e2e22899a36185fdf7a1dd66368c5be4737a3",
+        "norm_end": "d0ca999a2c3d76bef4c2bf5a82286d8d3618dec3d70e1436b85266fa162b1736"
+      }
+    },
+    "spectral_output_check": {
+      "schema": "terluna.climate.swan-pilot-run/1",
+      "identity": {
+        "executable_sha256": "8883fc9eca573573cda0be4d6f3e9719f276b78364f29a583f24247659734875",
+        "inputs": {
+          "INPUT": "eeff0074b41d773a7b3c3066d1391e83720a18aad456f76ea570b46afb5c5f5c",
+          "depth.bot": "31b0fcda64e130eff067113737c12cfc6b14c70a12ed5b248ceabcb6cd34efe1",
+          "points.xy": "2a68fb8e230cd54392c3480b4fe6fdce50995485571320c50832ad617256e950",
+          "wind.dat": "a5028e3567c5c9597437fc536222822ed86714ee0365f23b356d3d65c8fc20ea",
+          "diagnostics.xy": "482e58872583df1c018e3264fe09b2bb4868a68c2779d6d45e2edfcf7d45ee7e"
+        }
+      },
+      "producer_sha256": "08b71bd9a092123cc8f97ecfc34970d39a4117a48b2423f2fa1a264066f79258",
+      "elapsed_wall_s": 4.2861325519988895,
+      "threads": 4,
+      "address_space_limit_bytes": 2147483648,
+      "cpu_limit_s": 3600,
+      "warnings": [],
+      "output_sha256": {
+        "basin.tbl": "d26ae3ee8919c75e839b21d9b12f7e71de47fc91968605b09aa631013e2c5e48",
+        "offshore.spc": "fdcf9aa586f26c26464c632e26d6ccc2cddcdabc5850b9f333ffffed8d4525cc",
+        "wind.tbl": "cca0e4d34903d0803304137859487ffaa53109e7968c27fdaf6b9409488afc0a",
+        "diagnostics.spc": "2db4e297b867fa4642fa8f9982f063d2cacbe23d8b78a0f55ad320b728665807",
+        "PRINT": "f2103ec8506695f83bad3ad615e0883bbeed0abdd0629585c4dd2c7d69139e9c",
+        "norm_end": "d0ca999a2c3d76bef4c2bf5a82286d8d3618dec3d70e1436b85266fa162b1736"
+      }
+    }
+  },
+  "repository_check": {
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 TERLUNA_SWAN_EXECUTABLE=/tmp/terluna-lunar-seas-swan/coupled_air/swan.exe nice -n 10 make check",
+    "passed": true,
+    "log": "research/runs/waves/cycle/make_check_final.log",
+    "log_sha256": "2d8c83e691d36484815ac128f8e707ad0f64a23e5881cbaa194e75b38261ab5c",
+    "python_tests_passed": 480,
+    "javascript_tests_passed": 176,
+    "layer_files_checked": 311,
+    "layer_violations": 0,
+    "provenance_check": "PASS",
+    "ensemble_snapshot_files": 14,
+    "ensemble_paper_workspaces": 5
+  },
+  "visualization": {
+    "plotted_arrays_checked_exact": true,
+    "final_image_visually_inspected": true,
+    "full_reporting_interval_shown": true,
+    "latitude_longitude_aspect_adjusted": true
+  },
+  "pending": [
+    "Wider frequency coverage and further weak-wave timestep checks.",
+    "Complete-cycle timestep and basin-grid refinement.",
+    "Additional solar cycles, seasonal variation and other seas.",
+    "Finer coastal terrain, consistent nesting and coastal winds.",
+    "Lunar wave-growth/dissipation calibration, currents, changing water level and beach run-up."
+  ]
+}

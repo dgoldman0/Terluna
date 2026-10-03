@@ -91,10 +91,12 @@ def patch_agrow(source: Path) -> dict:
                 evidence="numerical similarity sensitivity; no lunar empirical validation")
 
 
-def compile_source(source: Path, environment: dict) -> dict:
-    """Use SWAN's compiler configuration and serial build targets."""
+def compile_source(source: Path, environment: dict, *, optimize: bool = False, openmp: bool = False) -> dict:
+    """Use SWAN's compiler configuration with explicit build and optimization choices."""
     start = time.monotonic()
-    commands = [["make", "config"], ["make", "-j1", "ser"]]
+    commands = [["make", "config"], ["make", "-j1", "omp" if openmp else "ser"]]
+    if optimize:
+        commands[1].append("FLAGS_OPT=-O3 -march=native")
     with (source / "build.log").open("x") as log:
         for command in commands:
             subprocess.run(command, cwd=source, env=environment, check=True,
@@ -105,6 +107,9 @@ def compile_source(source: Path, environment: dict) -> dict:
     macros = (source / "macros.inc").read_text()
     return dict(executable=str(executable), executable_sha256=sha256(executable),
                 elapsed_wall_s=time.monotonic() - start, commands=commands,
+                native_optimization=optimize,
+                openmp=openmp,
+                compiler_version=subprocess.check_output(["gfortran", "--version"], text=True).splitlines()[0],
                 macros_inc=macros, macros_sha256=sha256(source / "macros.inc"),
                 build_log_sha256=sha256(source / "build.log"))
 
@@ -127,13 +132,16 @@ def patch_air_density(source: Path, density: float) -> dict:
                     before.splitlines(True), after.splitlines(True), fromfile="a/swanmain.ftn", tofile="b/swanmain.ftn")))
 
 
-def build_coupled(build_root: Path, density: float) -> dict:
+def build_coupled(build_root: Path, density: float, *, optimize: bool = False, openmp: bool = False) -> dict:
     """Add the AGROW+density build in its own directory."""
     target = build_root / "coupled_air"
     manifest = build_root / "coupled_air.json"
     if manifest.exists():
         record = json.loads(manifest.read_text())
-        if record["air_density_kg_m3"] != density or sha256(target / "swan.exe") != record["build"]["executable_sha256"]:
+        if (record["air_density_kg_m3"] != density or
+                record["build"].get("native_optimization", False) != optimize or
+                record["build"].get("openmp", False) != openmp or
+                sha256(target / "swan.exe") != record["build"]["executable_sha256"]):
             raise ValueError("Existing coupled build differs from requested density or executable")
         return record
     if target.exists():
@@ -144,7 +152,7 @@ def build_coupled(build_root: Path, density: float) -> dict:
     env = dict(os.environ, FC="gfortran", OMP_NUM_THREADS="1", OPENBLAS_NUM_THREADS="1")
     for name in ("MAKEFLAGS", "MFLAGS", "GNUMAKEFLAGS"):
         env.pop(name, None)
-    compiled = compile_source(target, env)
+    compiled = compile_source(target, env, optimize=optimize, openmp=openmp)
     record = dict(schema="terluna.climate.swan-coupled-build/1", source_sha256=SOURCE_SHA256,
                   producer_sha256=sha256(Path(__file__)), air_density_kg_m3=density,
                   evidence="Fixed representative CM1 surface density. Spatial/temporal density feedback and lunar validation of drag/growth laws remain open.",
