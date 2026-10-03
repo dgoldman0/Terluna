@@ -1,0 +1,341 @@
+{
+ "schema": "terluna.climate.wave-review-checks/1",
+ "producer": {
+  "domain": "climate",
+  "files": {
+   "climate/waves/review_checks.py": "45a756be68459cd9d4abb1b5286e95576d71bf5f4feaab2a75c91f0e00777472",
+   "climate/waves/weather.py": "655f8026133e60cddbf7554307aab93bec5bb67615543cf09e910370df3006bd",
+   "shared/constants.json": "186e9ca8904b20d492607e5e0ade5d2591d6bcbe3ef586f1f59082d15d04c400"
+  }
+ },
+ "inputs": {
+  "geography/results/atlas.json": "78cfbf2f469eb339b686e34385c3ed72fc83752da59bb24167e2260a765e537e",
+  "geography/products/atlas_28pct_4ppd.npz": "dc283827f349fdc134816e1a55deef3d608047fba9fbb7521a6005c171d81693",
+  "climate/waves/results/forcing.json": "c5bac5fd97c20a0080a9e685364cdb23cbb89e1b730c6ad7bf12a7c5bc43d74b",
+  "climate/waves/results/coastal_history.json": "856f4c76e71faf7254feddd7984b493d22144dc4592c1df93acb425688e317b9",
+  "climate/waves/results/cycle.json": "a15ef85b3efb9eb86641eed996fdc84acf3e4cc1ef387011e00edaff9c0cb1ce",
+  "shared/scenarios/waves.json": "e6a86ec35b01d1864188bfaebb2a1d21a3047b841e118478df1831d4d0112323",
+  "research/runs/waves/cycle/atmosphere.npz": "4a6bf0fe4832ac4f5a5a62c2dceec813f7de3e37aaf7652e224ddca6f16de9c1"
+ },
+ "evidence": "Recomputations from committed wave, climate and geography products and the 60-day GCM surface archive. The tide is a first estimate: Keplerian distance, the two leading optical librations and a circular solar term, in equilibrium with each sea's mean removed; the geography tide product supersedes it.",
+ "reading_rule": "Percentiles pool every open-sea cell and archive time named in each section. Ranges are maximum minus minimum over the sampled span at each node, summarised over the sea's nodes.",
+ "seas": {
+  "water_share_of_moon": 0.28,
+  "small_lakes_share_of_moon": 0.0557,
+  "bodies": [
+   {
+    "label": 433,
+    "names": [
+     "Oceanus Procellarum",
+     "Mare Frigoris",
+     "Mare Imbrium",
+     "Mare Fecunditatis"
+    ],
+    "area_km2": 5288444,
+    "share_of_moon": 0.13942,
+    "share_of_water": 0.49792857142857133,
+    "mean_depth_m": 648,
+    "max_depth_m": 3751
+   },
+   {
+    "label": 1417,
+    "names": [
+     "Mare Ingenii",
+     "Lacus Tenebrarum"
+    ],
+    "area_km2": 2322833,
+    "share_of_moon": 0.06124,
+    "share_of_water": 0.2187142857142857,
+    "mean_depth_m": 2082,
+    "max_depth_m": 6693
+   },
+   {
+    "label": 874,
+    "names": [
+     "Mare Smythii",
+     "Mare Marginis"
+    ],
+    "area_km2": 285480,
+    "share_of_moon": 0.00753,
+    "share_of_water": 0.026892857142857142,
+    "mean_depth_m": 1229,
+    "max_depth_m": 3716
+   },
+   {
+    "label": 213,
+    "names": [
+     "Mare Humboldtianum"
+    ],
+    "area_km2": 284341,
+    "share_of_moon": 0.0075,
+    "share_of_water": 0.02678571428571428,
+    "mean_depth_m": 1165,
+    "max_depth_m": 4116
+   },
+   {
+    "label": 1296,
+    "names": [
+     "Mare Orientale"
+    ],
+    "area_km2": 88056,
+    "share_of_moon": 0.00232,
+    "share_of_water": 0.008285714285714285,
+    "mean_depth_m": 849,
+    "max_depth_m": 2690
+   },
+   {
+    "label": 714,
+    "names": [
+     "Mare Moscoviense"
+    ],
+    "area_km2": 66449,
+    "share_of_moon": 0.00175,
+    "share_of_water": 0.0062499999999999995,
+    "mean_depth_m": 1070,
+    "max_depth_m": 3720
+   },
+   {
+    "label": 1557,
+    "names": [],
+    "area_km2": 63732,
+    "share_of_moon": 0.00168,
+    "share_of_water": 0.005999999999999999,
+    "mean_depth_m": 480,
+    "max_depth_m": 2686
+   },
+   {
+    "label": 2132,
+    "names": [],
+    "area_km2": 28770,
+    "share_of_moon": 0.00076,
+    "share_of_water": 0.0027142857142857142,
+    "mean_depth_m": 1100,
+    "max_depth_m": 3731
+   },
+   {
+    "label": 1455,
+    "names": [],
+    "area_km2": 28592,
+    "share_of_moon": 0.00075,
+    "share_of_water": 0.002678571428571428,
+    "mean_depth_m": 1327,
+    "max_depth_m": 3173
+   },
+   {
+    "label": 125,
+    "names": [],
+    "area_km2": 28065,
+    "share_of_moon": 0.00074,
+    "share_of_water": 0.0026428571428571425,
+    "mean_depth_m": 1100,
+    "max_depth_m": 2570
+   },
+   {
+    "label": 1934,
+    "names": [],
+    "area_km2": 21115,
+    "share_of_moon": 0.00056,
+    "share_of_water": 0.0019999999999999996,
+    "mean_depth_m": 773,
+    "max_depth_m": 3038
+   }
+  ]
+ },
+ "smythii_development": {
+  "peak_basin_mean_stress_Pa": 0.03610331329213976,
+  "stress_equivalent_wind_m_s": 4.469219939707822,
+  "fully_developed_hs_m": 2.951414072237691,
+  "fully_developed_rule": "g Hs / U10^2 = 0.24, the Pierson-Moskowitz limit",
+  "computed_maximum_hs_m": 3.37518144,
+  "wind_setup_m": 0.01063823700567139,
+  "wind_setup_rule": "tau L / (rho g h) across a disc-equivalent sea of the mean depth"
+ },
+ "gcm_sea_roughness": {
+  "samples": 203389,
+  "friction_velocity_threshold_m_s": 0.07358031613053437,
+  "ratio_to_charnock_at_lunar_gravity": {
+   "median": 0.9999997028694317,
+   "p5": 0.9999985813462807,
+   "p95": 1.0000008235889741
+  },
+  "ratio_to_charnock_at_earth_gravity": {
+   "median": 6.037762045291277,
+   "p5": 6.037755273799349,
+   "p95": 6.037768811931204
+  },
+  "charnock_parameter": 0.018,
+  "roughness_floor_m": 1.5e-05
+ },
+ "drag_against_wu": [
+  {
+   "wind_10m_m_s": 2.1526074409484863,
+   "wu": 0.0012875,
+   "charnock_lunar": 0.0010948525911687141,
+   "charnock_earth": 0.0008897325581774426,
+   "lunar_charnock_to_wu": 0.8503709445970595
+  },
+  {
+   "wind_10m_m_s": 4.001059055328369,
+   "wu": 0.0012875,
+   "charnock_lunar": 0.0014285872294007552,
+   "charnock_earth": 0.0009835861743264012,
+   "lunar_charnock_to_wu": 1.109582314097674
+  },
+  {
+   "wind_10m_m_s": 5.836511135101318,
+   "wu": 0.0012875,
+   "charnock_lunar": 0.0017212139463017562,
+   "charnock_earth": 0.0011389559550963708,
+   "lunar_charnock_to_wu": 1.3368652010110729
+  },
+  {
+   "wind_10m_m_s": 7.0,
+   "wu": 0.0012875,
+   "charnock_lunar": 0.0018987048540604842,
+   "charnock_earth": 0.0012282675490960615,
+   "lunar_charnock_to_wu": 1.4747222167460072
+  },
+  {
+   "wind_10m_m_s": 10.0,
+   "wu": 0.00145,
+   "charnock_lunar": 0.002348650785011413,
+   "charnock_earth": 0.0014399845609025278,
+   "lunar_charnock_to_wu": 1.6197591620768366
+  }
+ ],
+ "equatorial_sea_winds": {
+  "gcm_rows_deg": [
+   2.769,
+   -2.769
+  ],
+  "gcm_sea_cells": 64,
+  "samples": 30784,
+  "gcm_stress_equivalent_wu": {
+   "p50": 2.444,
+   "p90": 4.683,
+   "p99": 6.565
+  },
+  "gcm_neutral_10m_charnock": {
+   "p50": 2.612,
+   "p90": 4.419,
+   "p99": 5.772
+  },
+  "gcm_lowest_level": {
+   "p50": 3.463,
+   "p90": 6.116,
+   "p99": 8.194
+  },
+  "cm1_equatorial_ring_10m": {
+   "p50": 2.153,
+   "p90": 4.001,
+   "p99": 5.837
+  },
+  "gcm_neutral_to_cm1": {
+   "p50": 1.213,
+   "p90": 1.104,
+   "p99": 0.989
+  },
+  "cm1_span_days": [
+   29.5,
+   59.0
+  ]
+ },
+ "gcm_lowest_level": {
+  "sigma": 0.9833000004291534,
+  "mean_sea_surface_temperature_K": 295.97252363718457,
+  "scale_height_m": 52549.312830058705,
+  "height_m": 884.9838580756665
+ },
+ "inverse_barometer": {
+  "water_density_kg_m3": 1025.0,
+  "seas": {
+   "433": {
+    "cells": 216,
+    "range_median_m": 0.09945386313209946,
+    "range_max_m": 0.17797997924068804
+   },
+   "1417": {
+    "cells": 182,
+    "range_median_m": 0.06961210128932653,
+    "range_max_m": 0.09266001759454726
+   },
+   "874": {
+    "cells": 11,
+    "range_median_m": 0.052882257846938174,
+    "range_max_m": 0.09254147386748579
+   }
+  }
+ },
+ "monthly_tide_first_estimate": {
+  "433": {
+   "nodes": 7053,
+   "range_median_m": 3.4228793196558804,
+   "range_p95_m": 6.712174733699011,
+   "range_max_m": 8.29857126476393
+  },
+  "1417": {
+   "nodes": 5603,
+   "range_median_m": 2.081786584128335,
+   "range_p95_m": 3.3983581447742663,
+   "range_max_m": 3.8619856845462035
+  },
+  "874": {
+   "nodes": 319,
+   "range_median_m": 0.5026666965191193,
+   "range_p95_m": 1.2423559077187631,
+   "range_max_m": 1.6774449894440373
+  },
+  "headland": {
+   "longitude_deg": 93.4,
+   "latitude_deg": 2.34,
+   "range_m": 0.7020937947717352
+  },
+  "settings": {
+   "earth_coefficient_m": 12.871758144755296,
+   "sun_coefficient_m": 0.07270857450899819,
+   "love_factor": 0.9869499999999999,
+   "samples": 2922,
+   "span_days": 365.25,
+   "step_days": 0.125
+  }
+ },
+ "appearance": {
+  "cases": [
+   {
+    "case": "western face, strongest arrival",
+    "hs_m": 1.79661047,
+    "period_s": 12.2390537,
+    "wavelength_m": 38.72223049327302,
+    "phase_speed_m_s": 3.1638255246214846,
+    "group_speed_m_s": 1.5819127623107423,
+    "steepness_hs_over_wavelength": 0.04639739103645164,
+    "earth_period_same_wavelength_s": 4.980922440734024,
+    "earth_speed_same_wavelength_m_s": 7.774108301025188
+   },
+   {
+    "case": "basin peak, mean period",
+    "hs_m": 3.37518144,
+    "period_s": 15.8428354,
+    "wavelength_m": 64.88293773129672,
+    "phase_speed_m_s": 4.095411969709458,
+    "group_speed_m_s": 2.047705984854729,
+    "steepness_hs_over_wavelength": 0.05201955333739395,
+    "earth_period_same_wavelength_s": 6.4475519352215445,
+    "earth_speed_same_wavelength_m_s": 10.06318962346866
+   },
+   {
+    "case": "basin peak, peak period",
+    "hs_m": 3.37518144,
+    "period_s": 18.2847137,
+    "wavelength_m": 86.42532360347255,
+    "phase_speed_m_s": 4.726643524282939,
+    "group_speed_m_s": 2.3633217621414695,
+    "steepness_hs_over_wavelength": 0.03905315362758313,
+    "earth_period_same_wavelength_s": 7.441322100803174,
+    "earth_speed_same_wavelength_m_s": 11.614243064971518
+   }
+  ],
+  "speed_ratio_same_wavelength": 0.406969571571863,
+  "fall_time_ratio_same_height": 2.457186162930167
+ }
+}

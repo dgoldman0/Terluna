@@ -5,6 +5,9 @@ energy travels across a basin, where terrain shelters or concentrates it,
 and how conditions change through the lunar day. Coastal breaking, marine
 travel and wave-driven mixing draw on that common picture.
 
+The [review of 3 October 2026](review.md) records what these studies establish,
+what they leave out and where their uncertainty lies.
+
 SWAN (Simulating WAves Nearshore) runs here as a spectral wave model. The
 experiments progress from prescribed winds to recovered atmospheric surface
 stress. The first experiment compares Earth and lunar gravity over

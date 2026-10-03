@@ -21,7 +21,11 @@
     "anomalistic_month_days": 27.55455,
     "draconic_month_days": 27.212221,
     "optical_libration_longitude_deg": 7.9,
-    "optical_libration_latitude_deg": 6.7
+    "optical_libration_latitude_deg": 6.7,
+    "orbit_eccentricity": 0.0549,
+    "orbit_inclination_to_ecliptic_deg": 5.145,
+    "love_number_k2": 0.02405,
+    "love_number_h2": 0.0371
   },
   "earth": {
     "radius_m": 6371000.0,
@@ -34,13 +38,18 @@
   "sun": {
     "solar_constant_W_m2": 1361.0,
     "radius_m": 695700000.0,
-    "au_m": 149597870700.0
+    "au_m": 149597870700.0,
+    "gm_m3_s2": 1.32712440018e+20
   },
   "model_closures": {
     "exoplasim_3_4_2": {
       "postprocessor_reference_radius_m": 6371220.0,
       "source": "ExoPlaSim 3.4.2 pyburn.py dataset(): plarad = radius * 6371220.0",
-      "note": "Unit convention for the installed postprocessor's radius argument. Divide the configured planetary radius by this value to recover its actual radius in the spectral wind transform."
+      "note": "Unit convention for the installed postprocessor's radius argument. Divide the configured planetary radius by this value to recover its actual radius in the spectral wind transform.",
+      "charnock_parameter": 0.018,
+      "sea_roughness_floor_m": 1.5e-05,
+      "von_karman_constant": 0.4,
+      "sea_surface_source": "ExoPlaSim 3.4.2 seamod.f90 namelist defaults charnock and dz0sea (open-sea roughness max(charnock u*^2/g, dz0sea), with the configured planetary gravity) and fluxmod.f90 parameter vonkarman"
     },
     "swan_41_51_wu": {
       "low_speed_drag_coefficient": 0.0012875,
@@ -70,6 +79,9 @@
   },
   "notes": {
     "optical_libration": "Amplitudes of the mean optical librations in longitude and latitude; the ephemeris uses them as sinusoids with the anomalistic and draconic months.",
-    "geometric_albedo_visible": "Earth's visible geometric albedo varies with cloud cover and viewing geometry; 0.367 is a representative value used for earthlight."
+    "geometric_albedo_visible": "Earth's visible geometric albedo varies with cloud cover and viewing geometry; 0.367 is a representative value used for earthlight.",
+    "lunar_orbit": "Mean orbital eccentricity and inclination to the ecliptic from the NASA GSFC Moon Fact Sheet (nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html).",
+    "love_numbers": "Lunar degree-2 tidal Love numbers: k2 = 0.02405 +/- 0.00018 from GRAIL (Konopliv et al. 2013, J. Geophys. Res. Planets, doi:10.1002/jgre.20097); h2 = 0.0371 +/- 0.0033 from LOLA crossovers (Mazarico et al. 2014, Geophys. Res. Lett., doi:10.1002/2013GL059085). A later global LOLA analysis gives h2 = 0.0387 +/- 0.0025 (Thor et al. 2021, J. Geodesy, doi:10.1007/s00190-020-01455-8).",
+    "sun_gm": "Heliocentric gravitational constant (TDB-compatible) of the JPL planetary ephemerides."
   }
 }
