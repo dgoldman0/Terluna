@@ -97,7 +97,7 @@
     },
     {
       "topic": "illumination",
-      "condition": "conditional_clear_sky_solver_and_site_geometry; clear_sky_surface_spectra_202_1000nm_on_solved_columns_two_stream; optical_comfort_clear_sky_surface_and_eye_screen_with_earth_controls; optical_comfort_packed_angular_sky_transfer_and_finite_matte_scene_transport",
+      "condition": "conditional_clear_sky_solver_and_site_geometry; clear_sky_surface_spectra_202_1000nm_on_solved_columns_two_stream; optical_comfort_clear_sky_surface_and_eye_screen_with_earth_controls; optical_comfort_packed_angular_sky_transfer_and_finite_matte_scene_transport; cloud_twilight_corrected_cm1_occurrence_and_spherical_molecular_beam_screen",
       "material": [
         "../illumination/geometry.py",
         "../illumination/sky/solver.py",
@@ -106,6 +106,9 @@
         "../illumination/stars/bright_stars.json",
         "../illumination/surface_light/model.py",
         "../illumination/surface_light/results/surface_light.json",
+        "../illumination/cloud_light/model.py",
+        "studies/cloud_twilight/README.md",
+        "studies/cloud_twilight/results/cloud_twilight.json",
         "studies/optical_comfort/README.md",
         "studies/optical_comfort/results/optical_comfort.json",
         "studies/optical_comfort/results/directional_scenes.json"
@@ -116,7 +119,7 @@
         "earthlight spectrum (glow currently uses the solar atlas), airglow",
         "optical profiles tied to the solved atmospheric column (the sky atlas; the surface-light spectra already use the solved columns)",
         "surface light below about 20 degrees of Sun height: the two-stream diffuse light falls short of the spherical sky solver (a quarter at 10 degrees, half at 5); a spherical spectral solution on the solved column would settle it",
-        "surface light under clouds: colour and diffuse share",
+        "surface light under clouds: colour and diffuse share; cloud_twilight now screens elevated direct sunlight and viewing extinction using committed data, but cloud radiance and persistence require local time-resolved microphysics/spatial fields and a coupled spherical sky",
         "lunar global energy residual up to 4.6%",
         "the five-hour practical dawn and dusk (research/decisions.md): a photometric definition for the actual atmosphere, from a working-light threshold to sunrise, about 2.54 degrees of solar elevation at the equator. The spherical sky atlas keeps about 1,000 lux on the ground until the Sun is some 13 degrees down (about a day at the equator) and 1 umol m-2 s-1 of photosynthetic light until 29 degrees down (58 hours; biosphere/canopy/plant.py)",
         "optical comfort: a spherical angular sky with the current shield and solved columns; site-specific surface BRDFs and geometry, water slopes, clouds and human-factors validation. Packed sky transfer and six finite matte settings now supply directional light and task-contrast screens in studies/optical_comfort/."

@@ -8,6 +8,7 @@ and earthlight.
 |---|---|---|
 | [surface_light/](surface_light/) | Clear-sky direct and diffuse sunlight at the ground by wavelength (202–1000 nm): photosynthetic photons, colour, red:far-red, ultraviolet and ground brightness, for the design Moon, a 1.0-atm Moon and the Earth control | The atmosphere domain's radiation (1-nm ultraviolet-visible below 500 nm, line-by-line above) on its solved columns; two-stream, so light at Sun heights below about 20° is understated against the sky solver |
 | [sky/](sky/) | Spherical, spectral, scalar multiple-scattering sky radiance and surface irradiance for Earth and two Open Moon optical profiles, Sun from −90° to +90° | Conditional on prescribed exponential optical profiles. Numerically checked (solver tests, atlas invariants, six noon Monte Carlo spot checks); a lunar global energy residual of up to 4.6% is open |
+| [cloud_light/](cloud_light/) | Spherical molecular solar and observer paths to elevated features, using current column layers and an atlas-proxy control | Direct beam and atmospheric transmission only; cloud scattering and resolved twilight radiance remain open |
 | [ephemeris.py](ephemeris.py) | Sun, Earth and star directions above a site; Earth's phase; earthlight as a fraction of sunlight | Mean-orbit geometry (synchronous rotation, lunar equator in the ecliptic, sinusoidal libration, Lambert-phase Earth of geometric albedo 0.367); good to a few degrees, not an ephemeris for dates |
 | [stars/](stars/) | The Yale Bright Star Catalogue (9,096 stars): J2000 position, V magnitude, B−V | Catalogue data; the build pins the source file's hash |
 | [geometry.py](geometry.py) | Angular sweep with a 29.53-day period, idealized equatorial horizon and a six-degree interval | Simple angular arithmetic |
@@ -41,6 +42,12 @@ remaining inputs for a resolved visual-comfort calculation. Its directional
 extension recovers the packed atlas's angular patterns and transfers them onto
 current light totals. Six finite matte scenes include cast shadows and repeated
 reflection. A consistent shielded spherical sky remains open.
+
+The [cloud-twilight study](../research/studies/cloud_twilight/) couples molecular
+paths to corrected CM1 cloud heights and occurrence. It screens the long
+illumination window, spectral filtering and sunsetward viewing geometry, with
+the inherited sky atlas supplying separate ground-light context. Local cloud
+microphysics and spatial fields are needed for a resolved appearance study.
 
 For a near-side equatorial site 65° from the sub-Earth point, full Earth (earthlight
 about 1.0 × 10⁻⁴ of sunlight above the atmosphere) comes near sunset, and the

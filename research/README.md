@@ -50,6 +50,7 @@ the explorable experience, which reads them as baked products, is in
 | [protection_architecture](studies/protection_architecture/README.md) | Atmosphere (the loss response), climate (dimming), protection (hardware), engineering (supply) and the decisions register: the requirements for the optical shield and charged-particle protection, and what each loss budget asks of them | Screening loss model with the exosphere's losses; the loss budget, the ultraviolet cut-off and the protected radius are the author's to set; hardware, holding and supply are still to design |
 | [lunar_cycle_ecology](studies/lunar_cycle_ecology/README.md) | Biosphere (plant and fruit carbon), geography (seas, lakes, runoff), atmosphere (air column, flight) and illumination (darkness): a register of design ideas for plants, animals, the night food web and the nutrient and mineral cycles, with light calculations and a recommended selection | Ideas and screening arithmetic; no ecosystem, population or nutrient-cycle model; the selection is the author's to make |
 | [optical_comfort](studies/optical_comfort/README.md) | Illumination, surfaces and human vision: 273 clear-sky cases, 80 gaze cases, matte surface orientation, eye illumination, shade, shadow contrast, restricted disability-glare sensitivities and ideal water glint, with matched Earth controls | Imposed angular skies and geometries; downward gaze can reverse the level-gaze Moon–Earth comparison; full sky atlases, surface BRDFs, clouds and outdoor discomfort validation remain open |
+| [cloud_twilight](studies/cloud_twilight/README.md) | Corrected CM1 cloud heights and occurrence, spherical solar/viewing paths through the current optical column, and separately labelled twilight-sky context | Incident light and molecular transmission only; cloud radiance, colour contrast and event persistence need local cloud fields and resolved scattering |
 
 The forest-patch folder also holds a [reviewed checkpoint](studies/forest_patch/reviewed/README.md)
 from a separate lineage (57 tests, 90-m spacing, 20-m/s reservoir flow), whose
@@ -69,6 +70,7 @@ OPENBLAS_NUM_THREADS=1 python -m research.studies.protection_architecture.run # 
 OPENBLAS_NUM_THREADS=1 python -m research.studies.lunar_cycle_ecology.run     # results in studies/lunar_cycle_ecology/results
 OPENBLAS_NUM_THREADS=1 python -m research.studies.optical_comfort.run
 OPENBLAS_NUM_THREADS=1 python -m research.studies.optical_comfort.directional  # results in studies/optical_comfort/results
+OPENBLAS_NUM_THREADS=1 python -m research.studies.cloud_twilight.run      # results in studies/cloud_twilight/results
 ```
 
 For the environment screens, supply `--protection-archive /path/to/Lunar_Protection_Model.zip`
