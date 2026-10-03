@@ -1,0 +1,381 @@
+{
+  "schema": "terluna.illumination.evening-context/1",
+  "producer": {
+    "files": {
+      "illumination/cloud_light/evening_context.py": "da43e0d3aef8e9157c83916fedb78977ec71857beca13cbaffffb0b8844ca29c"
+    },
+    "inputs": {
+      "research/runs/optical_comfort/spherical/moon_1.2atm_draft.npz": "7a205bd0e12d87477c16cd64f2fe2d4d4153f848ff950afef6eb6233dbc1f334",
+      "research/runs/optical_comfort/spherical/moon_1.2atm_standard.npz": "c9c5c2f3618b01ffb20c360f07f1ae19663a6c3546433f0ab0560ce4d6c79c57"
+    }
+  },
+  "source": {
+    "path": "illumination/sky/results/solved_sky.json",
+    "sha256": "6fa7583100f5a364b53b22949caef21a4544387a231d009640fd12b1cefe6ef3"
+  },
+  "archive": {
+    "path": "research/runs/optical_comfort/evening/clear_evening.npz",
+    "sha256": "d91d30a4ce4ccb2d9f226ebf232252c8ea2b8d78e014fa5ae96d5365f1b12b1b"
+  },
+  "assumptions": "Bilinear angular interpolation in sin(elevation), azimuth; linear solar-angle radiance. Solar illumination only. Molecular air and ground albedo 0.1 match solved_sky.json. Deep-twilight values extend the same scattering series; refinement is recorded separately.",
+  "sun_deg": [
+    -60.0,
+    -58.0,
+    -56.0,
+    -54.0,
+    -52.0,
+    -50.0,
+    -48.0,
+    -46.0,
+    -44.0,
+    -42.0,
+    -40.0,
+    -38.0,
+    -36.0,
+    -34.0,
+    -32.0,
+    -30.0,
+    -28.0,
+    -26.0,
+    -24.0,
+    -23.0,
+    -22.0,
+    -21.0,
+    -20.0,
+    -19.0,
+    -18.0,
+    -17.0,
+    -16.0,
+    -15.0,
+    -14.0,
+    -13.0,
+    -12.0,
+    -11.0,
+    -10.0,
+    -9.0,
+    -8.0,
+    -7.0,
+    -6.0,
+    -5.0,
+    -4.0,
+    -3.0,
+    -2.0,
+    -1.0,
+    0.0,
+    2.0,
+    5.0,
+    10.0
+  ],
+  "surface_lux": [
+    0.08778675373339237,
+    0.13211684698957676,
+    0.18865836059384378,
+    0.27867823475174547,
+    0.4076482186343734,
+    0.5795384427384044,
+    0.8682032717481123,
+    1.2330249447228638,
+    1.798555750142707,
+    2.59208240883855,
+    3.597047254993735,
+    5.183619093602052,
+    7.588689385987561,
+    11.163988083015493,
+    16.471086994280107,
+    24.366564817263505,
+    36.149946258673666,
+    53.79024877699402,
+    80.25370100082213,
+    98.10321742675555,
+    119.95991984305917,
+    146.69699275766885,
+    179.34520939535236,
+    219.12976111609834,
+    267.4521202158027,
+    325.9208240006673,
+    396.3267709530315,
+    480.62577910162435,
+    580.9138354876669,
+    699.3610957076443,
+    838.162373111991,
+    999.471852126205,
+    1185.3223950972592,
+    1397.5721317897444,
+    1637.8372257848948,
+    1907.4559460656874,
+    2207.40421924386,
+    2538.28883346424,
+    2900.406695102268,
+    3293.154635985826,
+    3715.274916152614,
+    4164.594453769669,
+    4639.520782166609,
+    5712.249462536041,
+    7598.196646482415,
+    11535.747624116495
+  ],
+  "coarse_relative_difference": [
+    -0.0017793477432959115,
+    0.0008570199990824978,
+    0.0025325596718852594,
+    0.004299158117215152,
+    0.0057457491565457985,
+    0.006970339685714588,
+    0.008861668933003441,
+    0.010182452828628952,
+    0.012500655001265626,
+    0.01502549335049852,
+    0.01905137219728248,
+    0.02184493388781039,
+    0.021779502543200824,
+    0.021156507631011623,
+    0.020309946736431606,
+    0.01930508217847904,
+    0.018211899522569297,
+    0.017018141149161226,
+    0.015784484364808726,
+    0.017443307091460136,
+    0.01447014345786024,
+    0.016000393922375622,
+    0.013054658572585476,
+    0.014433749078337499,
+    0.011558441510487238,
+    0.01275563819078096,
+    0.009987478233640434,
+    0.011004951189796719,
+    0.008415724903188204,
+    0.009215731978633457,
+    0.0068343289767112125,
+    0.007389451420408033,
+    0.0052265053999254185,
+    0.005578103817546198,
+    0.0036667066146587324,
+    0.0038531014677354314,
+    0.002283268339731137,
+    0.0023388591770971967,
+    0.0011746165564692213,
+    0.0010896376793514406,
+    -0.00039929472131172705,
+    -0.0006421425991469665,
+    -0.0015344364560603285,
+    -0.0020607108098791294,
+    -0.0022635694811494744,
+    -0.0024217296113643316
+  ],
+  "thresholds": [
+    {
+      "level_lux": 100.0,
+      "sun_depression_deg": 22.904791396833133,
+      "coarse_sun_depression_deg": 22.99063067589446
+    },
+    {
+      "level_lux": 10.0,
+      "sun_depression_deg": 34.57045781423609,
+      "coarse_sun_depression_deg": 34.67999823259296
+    },
+    {
+      "level_lux": 1.0,
+      "sun_depression_deg": 47.194244794440976,
+      "coarse_sun_depression_deg": 47.247351938053356
+    },
+    {
+      "level_lux": 0.1,
+      "sun_depression_deg": 59.36268504626301,
+      "coarse_sun_depression_deg": 59.35811326715196
+    }
+  ],
+  "geometry_bounds": [
+    {
+      "cloud_height_km": 20.0,
+      "minimum_view_elevation_deg": 0.0,
+      "last_geometric_sun_depression_deg": 17.57064586461893,
+      "clear_ground_lux": 291.1474528740375
+    },
+    {
+      "cloud_height_km": 20.0,
+      "minimum_view_elevation_deg": 5.0,
+      "last_geometric_sun_depression_deg": 13.90197715477624,
+      "clear_ground_lux": 591.5771034796002
+    },
+    {
+      "cloud_height_km": 20.0,
+      "minimum_view_elevation_deg": 10.0,
+      "last_geometric_sun_depression_deg": 12.113153254990833,
+      "clear_ground_lux": 821.1666338250902
+    },
+    {
+      "cloud_height_km": 24.0,
+      "minimum_view_elevation_deg": 0.0,
+      "last_geometric_sun_depression_deg": 19.20433294051798,
+      "clear_ground_lux": 210.34007880685994
+    },
+    {
+      "cloud_height_km": 24.0,
+      "minimum_view_elevation_deg": 5.0,
+      "last_geometric_sun_depression_deg": 15.432733197786312,
+      "clear_ground_lux": 442.14434561082754
+    },
+    {
+      "cloud_height_km": 24.0,
+      "minimum_view_elevation_deg": 10.0,
+      "last_geometric_sun_depression_deg": 13.473962444774353,
+      "clear_ground_lux": 640.4790887751242
+    },
+    {
+      "cloud_height_km": 36.0,
+      "minimum_view_elevation_deg": 0.0,
+      "last_geometric_sun_depression_deg": 23.39498748009161,
+      "clear_ground_lux": 90.62189953534174
+    },
+    {
+      "cloud_height_km": 36.0,
+      "minimum_view_elevation_deg": 5.0,
+      "last_geometric_sun_depression_deg": 19.416107586569826,
+      "clear_ground_lux": 201.60216176980612
+    },
+    {
+      "cloud_height_km": 36.0,
+      "minimum_view_elevation_deg": 10.0,
+      "last_geometric_sun_depression_deg": 17.074371523357918,
+      "clear_ground_lux": 321.16345375764996
+    },
+    {
+      "cloud_height_km": 40.0,
+      "minimum_view_elevation_deg": 0.0,
+      "last_geometric_sun_depression_deg": 24.62315781212583,
+      "clear_ground_lux": 70.84751899011178
+    },
+    {
+      "cloud_height_km": 40.0,
+      "minimum_view_elevation_deg": 5.0,
+      "last_geometric_sun_depression_deg": 20.595269152986514,
+      "clear_ground_lux": 159.12612718948947
+    },
+    {
+      "cloud_height_km": 40.0,
+      "minimum_view_elevation_deg": 10.0,
+      "last_geometric_sun_depression_deg": 18.15466269179816,
+      "clear_ground_lux": 259.3348080787514
+    },
+    {
+      "cloud_height_km": 60.0,
+      "minimum_view_elevation_deg": 0.0,
+      "last_geometric_sun_depression_deg": 29.95804973181556,
+      "clear_ground_lux": 24.569008321356673
+    },
+    {
+      "cloud_height_km": 60.0,
+      "minimum_view_elevation_deg": 5.0,
+      "last_geometric_sun_depression_deg": 25.759475421977285,
+      "clear_ground_lux": 56.44175517808805
+    },
+    {
+      "cloud_height_km": 60.0,
+      "minimum_view_elevation_deg": 10.0,
+      "last_geometric_sun_depression_deg": 22.94889556936842,
+      "clear_ground_lux": 99.11682272794243
+    },
+    {
+      "cloud_height_km": 80.0,
+      "minimum_view_elevation_deg": 0.0,
+      "last_geometric_sun_depression_deg": 34.39291643241627,
+      "clear_ground_lux": 10.348624670391402
+    },
+    {
+      "cloud_height_km": 80.0,
+      "minimum_view_elevation_deg": 5.0,
+      "last_geometric_sun_depression_deg": 30.089474688432688,
+      "clear_ground_lux": 23.94339527737936
+    },
+    {
+      "cloud_height_km": 80.0,
+      "minimum_view_elevation_deg": 10.0,
+      "last_geometric_sun_depression_deg": 27.031828352006574,
+      "clear_ground_lux": 43.81863886282947
+    },
+    {
+      "cloud_height_km": 100.0,
+      "minimum_view_elevation_deg": 0.0,
+      "last_geometric_sun_depression_deg": 38.24633998129804,
+      "clear_ground_lux": 4.955501503885005
+    },
+    {
+      "cloud_height_km": 100.0,
+      "minimum_view_elevation_deg": 5.0,
+      "last_geometric_sun_depression_deg": 33.870050054630354,
+      "clear_ground_lux": 11.449692557483814
+    },
+    {
+      "cloud_height_km": 100.0,
+      "minimum_view_elevation_deg": 10.0,
+      "last_geometric_sun_depression_deg": 30.63213672391254,
+      "clear_ground_lux": 21.529795958469816
+    }
+  ],
+  "latitude_comparison": [
+    {
+      "latitude_deg": 0.0,
+      "darkest_sun_elevation_deg": -90.0,
+      "midnight_lux": null,
+      "hours_after_sunset_to_100_lux": 45.092800251693774,
+      "hours_after_sunset_to_10_lux": 68.05906772163348,
+      "hours_after_sunset_to_1_lux": 92.91159289228472,
+      "hours_after_sunset_to_0.1_lux": 116.86767422668828
+    },
+    {
+      "latitude_deg": 15.0,
+      "darkest_sun_elevation_deg": -75.0,
+      "midnight_lux": null,
+      "hours_after_sunset_to_100_lux": 46.77942130976641,
+      "hours_after_sunset_to_10_lux": 70.82467802431471,
+      "hours_after_sunset_to_1_lux": 97.3010748982541,
+      "hours_after_sunset_to_0.1_lux": 123.9678328548419
+    },
+    {
+      "latitude_deg": 30.0,
+      "darkest_sun_elevation_deg": -60.0,
+      "midnight_lux": 0.08778675373339238,
+      "hours_after_sunset_to_100_lux": 52.57601437065463,
+      "hours_after_sunset_to_10_lux": 80.588517456072,
+      "hours_after_sunset_to_1_lux": 113.99604591067437,
+      "hours_after_sunset_to_0.1_lux": 164.33167461189146
+    },
+    {
+      "latitude_deg": 45.0,
+      "darkest_sun_elevation_deg": -45.0,
+      "midnight_lux": 1.4891823610292663,
+      "hours_after_sunset_to_100_lux": 65.74566989645072,
+      "hours_after_sunset_to_10_lux": 105.05978615838195,
+      "hours_after_sunset_to_1_lux": null,
+      "hours_after_sunset_to_0.1_lux": null
+    },
+    {
+      "latitude_deg": 60.0,
+      "darkest_sun_elevation_deg": -30.0,
+      "midnight_lux": 24.36656481726351,
+      "hours_after_sunset_to_100_lux": 100.62940901605154,
+      "hours_after_sunset_to_10_lux": null,
+      "hours_after_sunset_to_1_lux": null,
+      "hours_after_sunset_to_0.1_lux": null
+    },
+    {
+      "latitude_deg": 70.0,
+      "darkest_sun_elevation_deg": -20.0,
+      "midnight_lux": 179.3452093953523,
+      "hours_after_sunset_to_100_lux": null,
+      "hours_after_sunset_to_10_lux": null,
+      "hours_after_sunset_to_1_lux": null,
+      "hours_after_sunset_to_0.1_lux": null
+    },
+    {
+      "latitude_deg": 80.0,
+      "darkest_sun_elevation_deg": -10.0,
+      "midnight_lux": 1185.3223950972595,
+      "hours_after_sunset_to_100_lux": null,
+      "hours_after_sunset_to_10_lux": null,
+      "hours_after_sunset_to_1_lux": null,
+      "hours_after_sunset_to_0.1_lux": null
+    }
+  ],
+  "evidence": "Clear solar twilight on the solved mean column. Geometric bounds allow a cloud at any sunsetward distance and exclude extinction from the illumination criterion. Cloud radiance, terrain and earthlight are separate calculations."
+}

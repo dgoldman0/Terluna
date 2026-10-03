@@ -1,0 +1,726 @@
+{
+  "schema": "terluna.research.cloud-evening-scenes/1",
+  "mode": "selected",
+  "producer": {
+    "file": "research/studies/cloud_twilight/scenes.py",
+    "sha256": "92eeb19af46393b76da5f4551f05c333547e3238ed982751666174da7b35c541",
+    "regional_input_sha256": "8c26a77957ddea186a86a73ee2ea3bcb370d1a6d46a1bc9b066c41f098385c49"
+  },
+  "evidence": "Computed optical scenarios on saved evolving cloud fields. Cross-ring width and particle phase functions are sensitivities; the sampled regional occurrence and the rendered scenes have separate denominators.",
+  "scenes": [
+    {
+      "schema": "terluna.illumination.cloud-evening-scene/1",
+      "case": "ring_equator",
+      "snapshot": 260,
+      "time_day": 32.375,
+      "observer_latitude_deg": 0.0,
+      "observer_longitude_deg": 146.0022,
+      "observer_sun_elevation_deg": -0.677687350574511,
+      "observer_height_m": 1.6,
+      "camera_azimuth_in_ring_basis_deg": 180.0,
+      "cross_ring_width_km": 200.0,
+      "phase_parameters": {
+        "liquid_g": 0.85,
+        "frozen_g": 0.8
+      },
+      "photons_per_pixel": 1024,
+      "groups": 16,
+      "surface_photons": 65536,
+      "shape": [
+        16,
+        32
+      ],
+      "seed": 819,
+      "surface_lux": 659.3372016170813,
+      "surface_standard_error_lux": 53.33499791802174,
+      "clear_surface_lux": 4314.997824057686,
+      "cloudy_direct_horizontal_lux": 0.0,
+      "clear_surface_monte_carlo_lux": 4358.290081909556,
+      "clear_surface_monte_carlo_standard_error_lux": 49.623598231927645,
+      "clear_recess_formal_lux": 69.55491191562486,
+      "clear_recess_monte_carlo_lux": 70.94364867357717,
+      "recess_lux": 4.083417899516703,
+      "recess_standard_error_lux": 0.21633699332155984,
+      "recess_geometry": "Black recess with a sky opening 20 degrees wide, elevations 5\u201325 degrees, centred on the camera; excluded sky/terrain surfaces have zero radiance",
+      "sampled_truncated_paths": 0,
+      "seconds": 630.6703207610117,
+      "negative_Y_pixels": 0,
+      "median_pixel_relative_standard_error": 0.3209573343256395,
+      "raw_clear_monte_carlo_mean_cd_m2": 1806.1779072282095,
+      "formal_clear_mean_cd_m2": 1800.5930907869438,
+      "source": {
+        "cloud_section": "research/runs/optical_comfort/evening/sections/ring_equator_736_260.npz",
+        "cloud_sha256": "87e4e2c7cb473605590ca52a8cdd1ec5e278a671c053f383b2cb84572d998f80",
+        "molecular_product_sha256": "6fa7583100f5a364b53b22949caef21a4544387a231d009640fd12b1cefe6ef3",
+        "molecular_fields_sha256": "c9c5c2f3618b01ffb20c360f07f1ae19663a6c3546433f0ab0560ce4d6c79c57"
+      },
+      "producer": {
+        "illumination/cloud_light/render.py": "8863722ce32af90fe8524b3f864e15289a8f55f8df9d9ce66e6da53c3d6e75b3",
+        "illumination/cloud_light/volume.py": "a771a90400582433c91cc6a709cf15a57d28d5d985aa3eaf449d7e2414bcf5df",
+        "illumination/cloud_light/microphysics.py": "61a9600b4ab6ea1cdf69d6ce20db9b290815551a1709508e697508670fbee8ff",
+        "illumination/sky/solved_transport.py": "3fe4c255e8ffe53227a57529e957a441daf5b1899cf4ba1e71b3a2d8906eb00c"
+      },
+      "evidence": "Spectral Monte Carlo with molecular and particle multiple scattering, finite-Sun illumination, cloud self-shadowing and foreground atmospheric scattering. Equivalent-sphere particle areas follow the recorded Morrison size distributions; nonabsorbing HG phase functions and cross-ring extrusion are explicit optical and geometric scenarios.",
+      "reading_rule": "XYZ uses the photopic scale, Y in cd m^-2. Independent photon blocks estimate absolute cloudy radiance and sampling uncertainty; paired clear histories check the formal clear solution at sea level. The scene uses the common solved molecular column and Lambertian ground albedo 0.1. Earthlight, aerosols, terrain beyond spherical ground and ice optical features require additional inputs. RGB display mapping belongs to visualization.",
+      "archive": {
+        "path": "research/runs/optical_comfort/evening/scenes/ring_equator_736_260_w200_g0.8_h1.6_16x32_1024.npz",
+        "sha256": "ce3de46eb03965495a54277046bcf3e655d50bfcb84c36b67a6c07dcbfd6df85"
+      },
+      "selection": "largest land-observer source score at Sun depression 0\u201310\u00b0",
+      "initial_pick": {
+        "selection": "largest land-observer source score at Sun depression 0\u201310\u00b0",
+        "case": "ring_equator",
+        "snapshot": 260,
+        "time_day": 32.375,
+        "observer_column": 736,
+        "cloud_column": 728,
+        "observer_latitude_deg": 0.0,
+        "observer_longitude_deg": 146.0022,
+        "cloud_latitude_deg": 0.0,
+        "cloud_longitude_deg": 144.4163,
+        "observer_land": true,
+        "sun_elevation_deg": -0.6776873469352722,
+        "hours_after_sunset": 1.334169626235962,
+        "cloud_top_km": 77.79412841796875,
+        "view_elevation_deg": 56.91346655164295,
+        "range_km": 92.0182581669003,
+        "cloud_direct_normal_lux": 38462.89561596728,
+        "clear_ground_lux": 4312.104840618596,
+        "upper_cloud_water_path_kg_m2": 0.053063295781612396,
+        "selection_score": 488.3177952427428,
+        "source_sha256": "b17940de79cbbc151d646cd499250f0c39f86bfd59f2a811bf18d753738d7771"
+      },
+      "delta_hours": 0,
+      "section": {
+        "path": "/home/kir/Documents/Projects/terluna-optical-comfort/research/runs/optical_comfort/evening/sections/ring_equator_736_260.npz",
+        "sha256": "87e4e2c7cb473605590ca52a8cdd1ec5e278a671c053f383b2cb84572d998f80",
+        "schema": "terluna.climate.cloud-section/1",
+        "metadata": {
+          "schema": "terluna.climate.cloud-section/1",
+          "case": "ring_equator",
+          "snapshot": 260,
+          "time_day": 32.375,
+          "observer_column": 736,
+          "observer_latitude_deg": 0.0,
+          "observer_longitude_deg": 146.0022,
+          "observer_hour_angle_deg": 90.6776873505745,
+          "observer_sun_elevation_deg": -0.677687350574511,
+          "dx_m": 6011.2368682234655,
+          "radius_m": 1737400.0,
+          "droplets_cm3": 100.0,
+          "source": {
+            "file": "/home/kir/Documents/Projects/terluna-optical-comfort/climate/crm/runs/ring_equator/cm1out_t000260_s.dat",
+            "sha256": "b17940de79cbbc151d646cd499250f0c39f86bfd59f2a811bf18d753738d7771",
+            "case_sha256": "66979fb6a66703ee7edc3a8144f924e1b377a5e0fd83378c62ca88a96908b748"
+          },
+          "producer": {
+            "file": "climate/crm/cloud_scene.py",
+            "sha256": "27d2d3e0856f35c7ec09778a62932ace89791139f20f81ef67bb902881c4a232"
+          },
+          "thermodynamic_source_hashes": {
+            "constants.F": "b885840755ef83e1c424c1b09985ce0d59e8582096237ad6d603ae3f15ff2f34",
+            "solve2.F": "e34c6d479d0f589cd8c31faf95df52a06f3b9d0edcb1744f694463b0bdddc375",
+            "morrison.F": "8427670b64e6bad03b68d9aa5532f85e685807671b344d6d4480cf6d0db0ab8c"
+          },
+          "evidence": "Saved evolving CM1 section in the second lunar cycle; the simulation resolves the along-ring and vertical dimensions. Cross-ring extent is supplied by the optical scenario.",
+          "reading_rule": "Local Cartesian basis: x along the ring, y across it, z radially outward. Each column is bounded by great-circle planes, each vertical cell by concentric shells. The observer is at the centre column, simulated sea level."
+        }
+      }
+    },
+    {
+      "schema": "terluna.illumination.cloud-evening-scene/1",
+      "case": "ring_equator",
+      "snapshot": 375,
+      "time_day": 46.75,
+      "observer_latitude_deg": -0.0,
+      "observer_longitude_deg": 340.2753,
+      "observer_sun_elevation_deg": -10.19279910855154,
+      "observer_height_m": 1.6,
+      "camera_azimuth_in_ring_basis_deg": 180.0,
+      "cross_ring_width_km": 200.0,
+      "phase_parameters": {
+        "liquid_g": 0.85,
+        "frozen_g": 0.8
+      },
+      "photons_per_pixel": 1024,
+      "groups": 16,
+      "surface_photons": 65536,
+      "shape": [
+        16,
+        32
+      ],
+      "seed": 819,
+      "surface_lux": 1024.1687064767905,
+      "surface_standard_error_lux": 46.664002430480004,
+      "clear_surface_lux": 1147.5771976326332,
+      "cloudy_direct_horizontal_lux": 0.0,
+      "clear_surface_monte_carlo_lux": 1185.7990816098431,
+      "clear_surface_monte_carlo_standard_error_lux": 25.116996958762613,
+      "clear_recess_formal_lux": 24.18996144681948,
+      "clear_recess_monte_carlo_lux": 24.52838068167366,
+      "recess_lux": 27.978828725972598,
+      "recess_standard_error_lux": 1.2221961017408558,
+      "recess_geometry": "Black recess with a sky opening 20 degrees wide, elevations 5\u201325 degrees, centred on the camera; excluded sky/terrain surfaces have zero radiance",
+      "sampled_truncated_paths": 0,
+      "seconds": 315.7741515039961,
+      "negative_Y_pixels": 0,
+      "median_pixel_relative_standard_error": 0.1984262923854611,
+      "raw_clear_monte_carlo_mean_cd_m2": 570.8448473562454,
+      "formal_clear_mean_cd_m2": 570.0683720200796,
+      "source": {
+        "cloud_section": "research/runs/optical_comfort/evening/sections/ring_equator_1716_375.npz",
+        "cloud_sha256": "fe22f17bd6a3acd527b4a822188873fe951e7ebb6f908e89c7abe3c08d6089aa",
+        "molecular_product_sha256": "6fa7583100f5a364b53b22949caef21a4544387a231d009640fd12b1cefe6ef3",
+        "molecular_fields_sha256": "c9c5c2f3618b01ffb20c360f07f1ae19663a6c3546433f0ab0560ce4d6c79c57"
+      },
+      "producer": {
+        "illumination/cloud_light/render.py": "8863722ce32af90fe8524b3f864e15289a8f55f8df9d9ce66e6da53c3d6e75b3",
+        "illumination/cloud_light/volume.py": "a771a90400582433c91cc6a709cf15a57d28d5d985aa3eaf449d7e2414bcf5df",
+        "illumination/cloud_light/microphysics.py": "61a9600b4ab6ea1cdf69d6ce20db9b290815551a1709508e697508670fbee8ff",
+        "illumination/sky/solved_transport.py": "3fe4c255e8ffe53227a57529e957a441daf5b1899cf4ba1e71b3a2d8906eb00c"
+      },
+      "evidence": "Spectral Monte Carlo with molecular and particle multiple scattering, finite-Sun illumination, cloud self-shadowing and foreground atmospheric scattering. Equivalent-sphere particle areas follow the recorded Morrison size distributions; nonabsorbing HG phase functions and cross-ring extrusion are explicit optical and geometric scenarios.",
+      "reading_rule": "XYZ uses the photopic scale, Y in cd m^-2. Independent photon blocks estimate absolute cloudy radiance and sampling uncertainty; paired clear histories check the formal clear solution at sea level. The scene uses the common solved molecular column and Lambertian ground albedo 0.1. Earthlight, aerosols, terrain beyond spherical ground and ice optical features require additional inputs. RGB display mapping belongs to visualization.",
+      "archive": {
+        "path": "research/runs/optical_comfort/evening/scenes/ring_equator_1716_375_w200_g0.8_h1.6_16x32_1024.npz",
+        "sha256": "90a05e6fbb1ef543d01fe8d112eeceeb110d97e0f7d04c6c5e39a8b1c8c4faec"
+      },
+      "selection": "largest land-observer source score at Sun depression 10\u201320\u00b0",
+      "initial_pick": {
+        "selection": "largest land-observer source score at Sun depression 10\u201320\u00b0",
+        "case": "ring_equator",
+        "snapshot": 375,
+        "time_day": 46.75,
+        "observer_column": 1716,
+        "cloud_column": 1684,
+        "observer_latitude_deg": -0.0,
+        "observer_longitude_deg": 340.2753,
+        "cloud_latitude_deg": -0.0,
+        "cloud_longitude_deg": 333.9317,
+        "observer_land": true,
+        "sun_elevation_deg": -10.19279956817627,
+        "hours_after_sunset": 20.066631317138672,
+        "cloud_top_km": 73.79412841796875,
+        "view_elevation_deg": 17.397167077271497,
+        "range_km": 209.71311073830628,
+        "cloud_direct_normal_lux": 18274.97834216427,
+        "clear_ground_lux": 1146.9820255280033,
+        "upper_cloud_water_path_kg_m2": 0.05786101892590523,
+        "selection_score": 160.84411115271206,
+        "source_sha256": "86ee8b2126cdcad4df1543727305cad0d0326acb434a2a28ebe9fd9c5d0fa544"
+      },
+      "delta_hours": 0,
+      "section": {
+        "path": "/home/kir/Documents/Projects/terluna-optical-comfort/research/runs/optical_comfort/evening/sections/ring_equator_1716_375.npz",
+        "sha256": "fe22f17bd6a3acd527b4a822188873fe951e7ebb6f908e89c7abe3c08d6089aa",
+        "schema": "terluna.climate.cloud-section/1",
+        "metadata": {
+          "schema": "terluna.climate.cloud-section/1",
+          "case": "ring_equator",
+          "snapshot": 375,
+          "time_day": 46.75,
+          "observer_column": 1716,
+          "observer_latitude_deg": -0.0,
+          "observer_longitude_deg": 340.2753,
+          "observer_hour_angle_deg": 100.19279910855153,
+          "observer_sun_elevation_deg": -10.19279910855154,
+          "dx_m": 6011.2368682234655,
+          "radius_m": 1737400.0,
+          "droplets_cm3": 100.0,
+          "source": {
+            "file": "/home/kir/Documents/Projects/terluna-optical-comfort/climate/crm/runs/ring_equator/cm1out_t000375_s.dat",
+            "sha256": "86ee8b2126cdcad4df1543727305cad0d0326acb434a2a28ebe9fd9c5d0fa544",
+            "case_sha256": "66979fb6a66703ee7edc3a8144f924e1b377a5e0fd83378c62ca88a96908b748"
+          },
+          "producer": {
+            "file": "climate/crm/cloud_scene.py",
+            "sha256": "27d2d3e0856f35c7ec09778a62932ace89791139f20f81ef67bb902881c4a232"
+          },
+          "thermodynamic_source_hashes": {
+            "constants.F": "b885840755ef83e1c424c1b09985ce0d59e8582096237ad6d603ae3f15ff2f34",
+            "solve2.F": "e34c6d479d0f589cd8c31faf95df52a06f3b9d0edcb1744f694463b0bdddc375",
+            "morrison.F": "8427670b64e6bad03b68d9aa5532f85e685807671b344d6d4480cf6d0db0ab8c"
+          },
+          "evidence": "Saved evolving CM1 section in the second lunar cycle; the simulation resolves the along-ring and vertical dimensions. Cross-ring extent is supplied by the optical scenario.",
+          "reading_rule": "Local Cartesian basis: x along the ring, y across it, z radially outward. Each column is bounded by great-circle planes, each vertical cell by concentric shells. The observer is at the centre column, simulated sea level."
+        }
+      }
+    },
+    {
+      "schema": "terluna.illumination.cloud-evening-scene/1",
+      "case": "ring_equator",
+      "snapshot": 319,
+      "time_day": 39.75,
+      "observer_latitude_deg": 0.0,
+      "observer_longitude_deg": 75.4295,
+      "observer_sun_elevation_deg": -20.011758600319247,
+      "observer_height_m": 1.6,
+      "camera_azimuth_in_ring_basis_deg": 180.0,
+      "cross_ring_width_km": 200.0,
+      "phase_parameters": {
+        "liquid_g": 0.85,
+        "frozen_g": 0.8
+      },
+      "photons_per_pixel": 1024,
+      "groups": 16,
+      "surface_photons": 65536,
+      "shape": [
+        16,
+        32
+      ],
+      "seed": 819,
+      "surface_lux": 226.49002308225306,
+      "surface_standard_error_lux": 13.312010070611336,
+      "clear_surface_lux": 178.92242950631322,
+      "cloudy_direct_horizontal_lux": 0.0,
+      "clear_surface_monte_carlo_lux": 190.7963599803494,
+      "clear_surface_monte_carlo_standard_error_lux": 11.906723218466725,
+      "clear_recess_formal_lux": 5.617444698843003,
+      "clear_recess_monte_carlo_lux": 5.71377991041458,
+      "recess_lux": 6.76849850913878,
+      "recess_standard_error_lux": 0.3480080624475389,
+      "recess_geometry": "Black recess with a sky opening 20 degrees wide, elevations 5\u201325 degrees, centred on the camera; excluded sky/terrain surfaces have zero radiance",
+      "sampled_truncated_paths": 0,
+      "seconds": 110.88836845000333,
+      "negative_Y_pixels": 0,
+      "median_pixel_relative_standard_error": 0.35030819650920797,
+      "raw_clear_monte_carlo_mean_cd_m2": 110.59902329221867,
+      "formal_clear_mean_cd_m2": 111.31979289480296,
+      "source": {
+        "cloud_section": "research/runs/optical_comfort/evening/sections/ring_equator_380_319.npz",
+        "cloud_sha256": "bb961b1135aebcbb82567d0874eb5127918fb7e878310c9bf747eabba65520df",
+        "molecular_product_sha256": "6fa7583100f5a364b53b22949caef21a4544387a231d009640fd12b1cefe6ef3",
+        "molecular_fields_sha256": "c9c5c2f3618b01ffb20c360f07f1ae19663a6c3546433f0ab0560ce4d6c79c57"
+      },
+      "producer": {
+        "illumination/cloud_light/render.py": "8863722ce32af90fe8524b3f864e15289a8f55f8df9d9ce66e6da53c3d6e75b3",
+        "illumination/cloud_light/volume.py": "a771a90400582433c91cc6a709cf15a57d28d5d985aa3eaf449d7e2414bcf5df",
+        "illumination/cloud_light/microphysics.py": "61a9600b4ab6ea1cdf69d6ce20db9b290815551a1709508e697508670fbee8ff",
+        "illumination/sky/solved_transport.py": "3fe4c255e8ffe53227a57529e957a441daf5b1899cf4ba1e71b3a2d8906eb00c"
+      },
+      "evidence": "Spectral Monte Carlo with molecular and particle multiple scattering, finite-Sun illumination, cloud self-shadowing and foreground atmospheric scattering. Equivalent-sphere particle areas follow the recorded Morrison size distributions; nonabsorbing HG phase functions and cross-ring extrusion are explicit optical and geometric scenarios.",
+      "reading_rule": "XYZ uses the photopic scale, Y in cd m^-2. Independent photon blocks estimate absolute cloudy radiance and sampling uncertainty; paired clear histories check the formal clear solution at sea level. The scene uses the common solved molecular column and Lambertian ground albedo 0.1. Earthlight, aerosols, terrain beyond spherical ground and ice optical features require additional inputs. RGB display mapping belongs to visualization.",
+      "archive": {
+        "path": "research/runs/optical_comfort/evening/scenes/ring_equator_380_319_w200_g0.8_h1.6_16x32_1024.npz",
+        "sha256": "101392ae0fac921d180004cb46a0c3237176f8064defd814f95026c198adcf87"
+      },
+      "selection": "largest land-observer source score at Sun depression 20\u201330\u00b0",
+      "initial_pick": {
+        "selection": "largest land-observer source score at Sun depression 20\u201330\u00b0",
+        "case": "ring_equator",
+        "snapshot": 319,
+        "time_day": 39.75,
+        "observer_column": 380,
+        "cloud_column": 348,
+        "observer_latitude_deg": 0.0,
+        "observer_longitude_deg": 75.4295,
+        "cloud_latitude_deg": 0.0,
+        "cloud_longitude_deg": 69.0859,
+        "observer_land": true,
+        "sun_elevation_deg": -20.01175880432129,
+        "hours_after_sunset": 39.39726638793945,
+        "cloud_top_km": 67.79412841796875,
+        "view_elevation_deg": 15.879464218100015,
+        "range_km": 207.3706542532852,
+        "cloud_direct_normal_lux": 237.49771120081593,
+        "clear_ground_lux": 178.92194327920268,
+        "upper_cloud_water_path_kg_m2": 0.020026177167892456,
+        "selection_score": 4.202349298231862,
+        "source_sha256": "c7530fb2e71c2c2dcfa548c09dbce487bc2cce702ee1a0148cf3f4f3bb49dd5b"
+      },
+      "delta_hours": 0,
+      "section": {
+        "path": "/home/kir/Documents/Projects/terluna-optical-comfort/research/runs/optical_comfort/evening/sections/ring_equator_380_319.npz",
+        "sha256": "bb961b1135aebcbb82567d0874eb5127918fb7e878310c9bf747eabba65520df",
+        "schema": "terluna.climate.cloud-section/1",
+        "metadata": {
+          "schema": "terluna.climate.cloud-section/1",
+          "case": "ring_equator",
+          "snapshot": 319,
+          "time_day": 39.75,
+          "observer_column": 380,
+          "observer_latitude_deg": 0.0,
+          "observer_longitude_deg": 75.4295,
+          "observer_hour_angle_deg": 110.01175860031924,
+          "observer_sun_elevation_deg": -20.011758600319247,
+          "dx_m": 6011.2368682234655,
+          "radius_m": 1737400.0,
+          "droplets_cm3": 100.0,
+          "source": {
+            "file": "/home/kir/Documents/Projects/terluna-optical-comfort/climate/crm/runs/ring_equator/cm1out_t000319_s.dat",
+            "sha256": "c7530fb2e71c2c2dcfa548c09dbce487bc2cce702ee1a0148cf3f4f3bb49dd5b",
+            "case_sha256": "66979fb6a66703ee7edc3a8144f924e1b377a5e0fd83378c62ca88a96908b748"
+          },
+          "producer": {
+            "file": "climate/crm/cloud_scene.py",
+            "sha256": "27d2d3e0856f35c7ec09778a62932ace89791139f20f81ef67bb902881c4a232"
+          },
+          "thermodynamic_source_hashes": {
+            "constants.F": "b885840755ef83e1c424c1b09985ce0d59e8582096237ad6d603ae3f15ff2f34",
+            "solve2.F": "e34c6d479d0f589cd8c31faf95df52a06f3b9d0edcb1744f694463b0bdddc375",
+            "morrison.F": "8427670b64e6bad03b68d9aa5532f85e685807671b344d6d4480cf6d0db0ab8c"
+          },
+          "evidence": "Saved evolving CM1 section in the second lunar cycle; the simulation resolves the along-ring and vertical dimensions. Cross-ring extent is supplied by the optical scenario.",
+          "reading_rule": "Local Cartesian basis: x along the ring, y across it, z radially outward. Each column is bounded by great-circle planes, each vertical cell by concentric shells. The observer is at the centre column, simulated sea level."
+        }
+      }
+    },
+    {
+      "schema": "terluna.illumination.cloud-evening-scene/1",
+      "case": "ring_equator",
+      "snapshot": 350,
+      "time_day": 43.625,
+      "observer_latitude_deg": 0.0,
+      "observer_longitude_deg": 13.3811,
+      "observer_sun_elevation_deg": -5.202509595947728,
+      "observer_height_m": 1.6,
+      "camera_azimuth_in_ring_basis_deg": 180.0,
+      "cross_ring_width_km": 200.0,
+      "phase_parameters": {
+        "liquid_g": 0.85,
+        "frozen_g": 0.8
+      },
+      "photons_per_pixel": 1024,
+      "groups": 16,
+      "surface_photons": 65536,
+      "shape": [
+        16,
+        32
+      ],
+      "seed": 819,
+      "surface_lux": 1026.9415065738267,
+      "surface_standard_error_lux": 50.34465879597,
+      "clear_surface_lux": 2468.8740892965443,
+      "cloudy_direct_horizontal_lux": 0.0,
+      "clear_surface_monte_carlo_lux": 2513.360593852877,
+      "clear_surface_monte_carlo_standard_error_lux": 38.21401751168902,
+      "clear_recess_formal_lux": 43.92632690999068,
+      "clear_recess_monte_carlo_lux": 44.745588913883,
+      "recess_lux": 7.422844797248176,
+      "recess_standard_error_lux": 0.2917006913358781,
+      "recess_geometry": "Black recess with a sky opening 20 degrees wide, elevations 5\u201325 degrees, centred on the camera; excluded sky/terrain surfaces have zero radiance",
+      "sampled_truncated_paths": 0,
+      "seconds": 284.976799156997,
+      "negative_Y_pixels": 0,
+      "median_pixel_relative_standard_error": 0.2444997392951324,
+      "raw_clear_monte_carlo_mean_cd_m2": 1103.0865717569804,
+      "formal_clear_mean_cd_m2": 1100.1686032536293,
+      "source": {
+        "cloud_section": "research/runs/optical_comfort/evening/sections/ring_equator_67_350.npz",
+        "cloud_sha256": "5b8f3921389ff2dcc653ba18bf2433629a7cf6ff04c74582fb4a17e1d9ea5bf9",
+        "molecular_product_sha256": "6fa7583100f5a364b53b22949caef21a4544387a231d009640fd12b1cefe6ef3",
+        "molecular_fields_sha256": "c9c5c2f3618b01ffb20c360f07f1ae19663a6c3546433f0ab0560ce4d6c79c57"
+      },
+      "producer": {
+        "illumination/cloud_light/render.py": "8863722ce32af90fe8524b3f864e15289a8f55f8df9d9ce66e6da53c3d6e75b3",
+        "illumination/cloud_light/volume.py": "a771a90400582433c91cc6a709cf15a57d28d5d985aa3eaf449d7e2414bcf5df",
+        "illumination/cloud_light/microphysics.py": "61a9600b4ab6ea1cdf69d6ce20db9b290815551a1709508e697508670fbee8ff",
+        "illumination/sky/solved_transport.py": "3fe4c255e8ffe53227a57529e957a441daf5b1899cf4ba1e71b3a2d8906eb00c"
+      },
+      "evidence": "Spectral Monte Carlo with molecular and particle multiple scattering, finite-Sun illumination, cloud self-shadowing and foreground atmospheric scattering. Equivalent-sphere particle areas follow the recorded Morrison size distributions; nonabsorbing HG phase functions and cross-ring extrusion are explicit optical and geometric scenarios.",
+      "reading_rule": "XYZ uses the photopic scale, Y in cd m^-2. Independent photon blocks estimate absolute cloudy radiance and sampling uncertainty; paired clear histories check the formal clear solution at sea level. The scene uses the common solved molecular column and Lambertian ground albedo 0.1. Earthlight, aerosols, terrain beyond spherical ground and ice optical features require additional inputs. RGB display mapping belongs to visualization.",
+      "archive": {
+        "path": "research/runs/optical_comfort/evening/scenes/ring_equator_67_350_w200_g0.8_h1.6_16x32_1024.npz",
+        "sha256": "d04b39f9c4d573d570314cb9d60a0e5977c463b3fe6aa0dde823cad56c393fb4"
+      },
+      "selection": "strong 20\u201340 km cloud example in established twilight",
+      "initial_pick": {
+        "selection": "strong 20\u201340 km cloud example in established twilight",
+        "case": "ring_equator",
+        "snapshot": 350,
+        "time_day": 43.625,
+        "observer_column": 67,
+        "cloud_column": 59,
+        "observer_latitude_deg": 0.0,
+        "observer_longitude_deg": 13.3811,
+        "cloud_latitude_deg": 0.0,
+        "cloud_longitude_deg": 11.7952,
+        "observer_land": true,
+        "sun_elevation_deg": -5.20250940322876,
+        "hours_after_sunset": 10.242206573486328,
+        "cloud_top_km": 35.79412078857422,
+        "view_elevation_deg": 35.58279541677819,
+        "range_km": 60.344721944901046,
+        "cloud_direct_normal_lux": 3408.7931195561946,
+        "clear_ground_lux": 2467.499007831259,
+        "upper_cloud_water_path_kg_m2": 0.07793769985437393,
+        "selection_score": 39.91403071735937,
+        "source_sha256": "450a4e25775bc37234380fb26ef2c3dc6578d30ce2de41fb11df8b000526aa31"
+      },
+      "delta_hours": 0,
+      "section": {
+        "path": "/home/kir/Documents/Projects/terluna-optical-comfort/research/runs/optical_comfort/evening/sections/ring_equator_67_350.npz",
+        "sha256": "5b8f3921389ff2dcc653ba18bf2433629a7cf6ff04c74582fb4a17e1d9ea5bf9",
+        "schema": "terluna.climate.cloud-section/1",
+        "metadata": {
+          "schema": "terluna.climate.cloud-section/1",
+          "case": "ring_equator",
+          "snapshot": 350,
+          "time_day": 43.625,
+          "observer_column": 67,
+          "observer_latitude_deg": 0.0,
+          "observer_longitude_deg": 13.3811,
+          "observer_hour_angle_deg": 95.20250959594773,
+          "observer_sun_elevation_deg": -5.202509595947728,
+          "dx_m": 6011.2368682234655,
+          "radius_m": 1737400.0,
+          "droplets_cm3": 100.0,
+          "source": {
+            "file": "/home/kir/Documents/Projects/terluna-optical-comfort/climate/crm/runs/ring_equator/cm1out_t000350_s.dat",
+            "sha256": "450a4e25775bc37234380fb26ef2c3dc6578d30ce2de41fb11df8b000526aa31",
+            "case_sha256": "66979fb6a66703ee7edc3a8144f924e1b377a5e0fd83378c62ca88a96908b748"
+          },
+          "producer": {
+            "file": "climate/crm/cloud_scene.py",
+            "sha256": "27d2d3e0856f35c7ec09778a62932ace89791139f20f81ef67bb902881c4a232"
+          },
+          "thermodynamic_source_hashes": {
+            "constants.F": "b885840755ef83e1c424c1b09985ce0d59e8582096237ad6d603ae3f15ff2f34",
+            "solve2.F": "e34c6d479d0f589cd8c31faf95df52a06f3b9d0edcb1744f694463b0bdddc375",
+            "morrison.F": "8427670b64e6bad03b68d9aa5532f85e685807671b344d6d4480cf6d0db0ab8c"
+          },
+          "evidence": "Saved evolving CM1 section in the second lunar cycle; the simulation resolves the along-ring and vertical dimensions. Cross-ring extent is supplied by the optical scenario.",
+          "reading_rule": "Local Cartesian basis: x along the ring, y across it, z radially outward. Each column is bounded by great-circle planes, each vertical cell by concentric shells. The observer is at the centre column, simulated sea level."
+        }
+      }
+    },
+    {
+      "schema": "terluna.illumination.cloud-evening-scene/1",
+      "case": "ring_70_45e",
+      "snapshot": 328,
+      "time_day": 40.875,
+      "observer_latitude_deg": -0.8383,
+      "observer_longitude_deg": 44.6949,
+      "observer_sun_elevation_deg": -2.9914303188057008,
+      "observer_height_m": 1.6,
+      "camera_azimuth_in_ring_basis_deg": 180.0,
+      "cross_ring_width_km": 200.0,
+      "phase_parameters": {
+        "liquid_g": 0.85,
+        "frozen_g": 0.8
+      },
+      "photons_per_pixel": 1024,
+      "groups": 16,
+      "surface_photons": 65536,
+      "shape": [
+        16,
+        32
+      ],
+      "seed": 819,
+      "surface_lux": 1188.1637836176683,
+      "surface_standard_error_lux": 38.70341162248182,
+      "clear_surface_lux": 3296.655287041108,
+      "cloudy_direct_horizontal_lux": 0.0,
+      "clear_surface_monte_carlo_lux": 3314.9227430045344,
+      "clear_surface_monte_carlo_standard_error_lux": 40.33103853422932,
+      "clear_recess_formal_lux": 35.47371399583254,
+      "clear_recess_monte_carlo_lux": 36.270321928122556,
+      "recess_lux": 5.884117857362837,
+      "recess_standard_error_lux": 0.22066751436457624,
+      "recess_geometry": "Black recess with a sky opening 20 degrees wide, elevations 5\u201325 degrees, centred on the camera; excluded sky/terrain surfaces have zero radiance",
+      "sampled_truncated_paths": 0,
+      "seconds": 685.6261870329909,
+      "negative_Y_pixels": 0,
+      "median_pixel_relative_standard_error": 0.22411346124592468,
+      "raw_clear_monte_carlo_mean_cd_m2": 1121.4255524727723,
+      "formal_clear_mean_cd_m2": 1114.8090460827739,
+      "source": {
+        "cloud_section": "research/runs/optical_comfort/evening/sections/ring_70_45e_1811_328.npz",
+        "cloud_sha256": "bd04435198fe1d652da69a3626a0aa453f29be3c5fad361457b0d49d22ea3946",
+        "molecular_product_sha256": "6fa7583100f5a364b53b22949caef21a4544387a231d009640fd12b1cefe6ef3",
+        "molecular_fields_sha256": "c9c5c2f3618b01ffb20c360f07f1ae19663a6c3546433f0ab0560ce4d6c79c57"
+      },
+      "producer": {
+        "illumination/cloud_light/render.py": "8863722ce32af90fe8524b3f864e15289a8f55f8df9d9ce66e6da53c3d6e75b3",
+        "illumination/cloud_light/volume.py": "a771a90400582433c91cc6a709cf15a57d28d5d985aa3eaf449d7e2414bcf5df",
+        "illumination/cloud_light/microphysics.py": "61a9600b4ab6ea1cdf69d6ce20db9b290815551a1709508e697508670fbee8ff",
+        "illumination/sky/solved_transport.py": "3fe4c255e8ffe53227a57529e957a441daf5b1899cf4ba1e71b3a2d8906eb00c"
+      },
+      "evidence": "Spectral Monte Carlo with molecular and particle multiple scattering, finite-Sun illumination, cloud self-shadowing and foreground atmospheric scattering. Equivalent-sphere particle areas follow the recorded Morrison size distributions; nonabsorbing HG phase functions and cross-ring extrusion are explicit optical and geometric scenarios.",
+      "reading_rule": "XYZ uses the photopic scale, Y in cd m^-2. Independent photon blocks estimate absolute cloudy radiance and sampling uncertainty; paired clear histories check the formal clear solution at sea level. The scene uses the common solved molecular column and Lambertian ground albedo 0.1. Earthlight, aerosols, terrain beyond spherical ground and ice optical features require additional inputs. RGB display mapping belongs to visualization.",
+      "archive": {
+        "path": "research/runs/optical_comfort/evening/scenes/ring_70_45e_1811_328_w200_g0.8_h1.6_16x32_1024.npz",
+        "sha256": "e638155cbb0697afd70ad7d1f8d09e406b66ff0964c1d7a4363429042cfe8d79"
+      },
+      "selection": "largest source score on ring_70_45e",
+      "initial_pick": {
+        "selection": "largest source score on ring_70_45e",
+        "case": "ring_70_45e",
+        "snapshot": 328,
+        "time_day": 40.875,
+        "observer_column": 1811,
+        "cloud_column": 1803,
+        "observer_latitude_deg": -0.8383,
+        "observer_longitude_deg": 44.6949,
+        "cloud_latitude_deg": -2.3284,
+        "cloud_longitude_deg": 44.152,
+        "observer_land": true,
+        "sun_elevation_deg": -2.9914302825927734,
+        "hours_after_sunset": 5.889881610870361,
+        "cloud_top_km": 35.79412078857422,
+        "view_elevation_deg": 35.58381441399357,
+        "range_km": 60.34330646713618,
+        "cloud_direct_normal_lux": 4699.859523173066,
+        "clear_ground_lux": 3296.560086485714,
+        "upper_cloud_water_path_kg_m2": 2.76820707321167,
+        "selection_score": 47.63187752285337,
+        "source_sha256": "d81877110499b2d239ef156d1c8fdde9dbc600ce00c2e420ed440eaf43cd773d"
+      },
+      "delta_hours": 0,
+      "section": {
+        "path": "/home/kir/Documents/Projects/terluna-optical-comfort/research/runs/optical_comfort/evening/sections/ring_70_45e_1811_328.npz",
+        "sha256": "bd04435198fe1d652da69a3626a0aa453f29be3c5fad361457b0d49d22ea3946",
+        "schema": "terluna.climate.cloud-section/1",
+        "metadata": {
+          "schema": "terluna.climate.cloud-section/1",
+          "case": "ring_70_45e",
+          "snapshot": 328,
+          "time_day": 40.875,
+          "observer_column": 1811,
+          "observer_latitude_deg": -0.8383,
+          "observer_longitude_deg": 44.6949,
+          "observer_hour_angle_deg": 92.99175082485658,
+          "observer_sun_elevation_deg": -2.9914303188057008,
+          "dx_m": 6011.2368682234655,
+          "radius_m": 1737400.0,
+          "droplets_cm3": 100.0,
+          "source": {
+            "file": "/home/kir/Documents/Projects/terluna-optical-comfort/climate/crm/runs/ring_70_45e/cm1out_t000328_s.dat",
+            "sha256": "d81877110499b2d239ef156d1c8fdde9dbc600ce00c2e420ed440eaf43cd773d",
+            "case_sha256": "edd90a4aa83c16819d72e53c14f98fbcd2f132c0d61bcc5a559cbe6c05af792b"
+          },
+          "producer": {
+            "file": "climate/crm/cloud_scene.py",
+            "sha256": "27d2d3e0856f35c7ec09778a62932ace89791139f20f81ef67bb902881c4a232"
+          },
+          "thermodynamic_source_hashes": {
+            "constants.F": "b885840755ef83e1c424c1b09985ce0d59e8582096237ad6d603ae3f15ff2f34",
+            "solve2.F": "e34c6d479d0f589cd8c31faf95df52a06f3b9d0edcb1744f694463b0bdddc375",
+            "morrison.F": "8427670b64e6bad03b68d9aa5532f85e685807671b344d6d4480cf6d0db0ab8c"
+          },
+          "evidence": "Saved evolving CM1 section in the second lunar cycle; the simulation resolves the along-ring and vertical dimensions. Cross-ring extent is supplied by the optical scenario.",
+          "reading_rule": "Local Cartesian basis: x along the ring, y across it, z radially outward. Each column is bounded by great-circle planes, each vertical cell by concentric shells. The observer is at the centre column, simulated sea level."
+        }
+      }
+    },
+    {
+      "schema": "terluna.illumination.cloud-evening-scene/1",
+      "case": "ring_70_135e",
+      "snapshot": 258,
+      "time_day": 32.125,
+      "observer_latitude_deg": 32.6045,
+      "observer_longitude_deg": 148.4625,
+      "observer_sun_elevation_deg": -0.07606978072340857,
+      "observer_height_m": 1.6,
+      "camera_azimuth_in_ring_basis_deg": 180.0,
+      "cross_ring_width_km": 200.0,
+      "phase_parameters": {
+        "liquid_g": 0.85,
+        "frozen_g": 0.8
+      },
+      "photons_per_pixel": 1024,
+      "groups": 16,
+      "surface_photons": 65536,
+      "shape": [
+        16,
+        32
+      ],
+      "seed": 819,
+      "surface_lux": 4829.962992394082,
+      "surface_standard_error_lux": 72.23894781369259,
+      "clear_surface_lux": 4602.13229719731,
+      "cloudy_direct_horizontal_lux": 0.4363574308816674,
+      "clear_surface_monte_carlo_lux": 4624.499650837086,
+      "clear_surface_monte_carlo_standard_error_lux": 48.04468187094048,
+      "clear_recess_formal_lux": 50.67127693712662,
+      "clear_recess_monte_carlo_lux": 51.819590898723085,
+      "recess_lux": 36.38201443152292,
+      "recess_standard_error_lux": 0.6980711074220419,
+      "recess_geometry": "Black recess with a sky opening 20 degrees wide, elevations 5\u201325 degrees, centred on the camera; excluded sky/terrain surfaces have zero radiance",
+      "sampled_truncated_paths": 0,
+      "seconds": 266.7765225649928,
+      "negative_Y_pixels": 0,
+      "median_pixel_relative_standard_error": 0.11235691243741186,
+      "raw_clear_monte_carlo_mean_cd_m2": 1577.76141786519,
+      "formal_clear_mean_cd_m2": 1568.3966854681787,
+      "source": {
+        "cloud_section": "research/runs/optical_comfort/evening/sections/ring_70_135e_176_258.npz",
+        "cloud_sha256": "d0db8004106802271efe5bcb9759a33e3c5949402a50feb2158cb4d24aac34ef",
+        "molecular_product_sha256": "6fa7583100f5a364b53b22949caef21a4544387a231d009640fd12b1cefe6ef3",
+        "molecular_fields_sha256": "c9c5c2f3618b01ffb20c360f07f1ae19663a6c3546433f0ab0560ce4d6c79c57"
+      },
+      "producer": {
+        "illumination/cloud_light/render.py": "8863722ce32af90fe8524b3f864e15289a8f55f8df9d9ce66e6da53c3d6e75b3",
+        "illumination/cloud_light/volume.py": "a771a90400582433c91cc6a709cf15a57d28d5d985aa3eaf449d7e2414bcf5df",
+        "illumination/cloud_light/microphysics.py": "61a9600b4ab6ea1cdf69d6ce20db9b290815551a1709508e697508670fbee8ff",
+        "illumination/sky/solved_transport.py": "3fe4c255e8ffe53227a57529e957a441daf5b1899cf4ba1e71b3a2d8906eb00c"
+      },
+      "evidence": "Spectral Monte Carlo with molecular and particle multiple scattering, finite-Sun illumination, cloud self-shadowing and foreground atmospheric scattering. Equivalent-sphere particle areas follow the recorded Morrison size distributions; nonabsorbing HG phase functions and cross-ring extrusion are explicit optical and geometric scenarios.",
+      "reading_rule": "XYZ uses the photopic scale, Y in cd m^-2. Independent photon blocks estimate absolute cloudy radiance and sampling uncertainty; paired clear histories check the formal clear solution at sea level. The scene uses the common solved molecular column and Lambertian ground albedo 0.1. Earthlight, aerosols, terrain beyond spherical ground and ice optical features require additional inputs. RGB display mapping belongs to visualization.",
+      "archive": {
+        "path": "research/runs/optical_comfort/evening/scenes/ring_70_135e_176_258_w200_g0.8_h1.6_16x32_1024.npz",
+        "sha256": "24d3af57574a314a9c366a7a64f22cc93f05509b51ac55aa26fe941dcfa4b9ff"
+      },
+      "selection": "largest source score on ring_70_135e",
+      "initial_pick": {
+        "selection": "largest source score on ring_70_135e",
+        "case": "ring_70_135e",
+        "snapshot": 258,
+        "time_day": 32.125,
+        "observer_column": 176,
+        "cloud_column": 168,
+        "observer_latitude_deg": 32.6045,
+        "observer_longitude_deg": 148.4625,
+        "cloud_latitude_deg": 31.153,
+        "cloud_longitude_deg": 147.7102,
+        "observer_land": true,
+        "sun_elevation_deg": -0.07606977969408035,
+        "hours_after_sunset": 0.17777712643146515,
+        "cloud_top_km": 57.79412078857422,
+        "view_elevation_deg": 48.975135580054925,
+        "range_km": 75.69334138291136,
+        "cloud_direct_normal_lux": 21466.32215414753,
+        "clear_ground_lux": 4601.563512794889,
+        "upper_cloud_water_path_kg_m2": 0.046655237674713135,
+        "selection_score": 236.49008501782592,
+        "source_sha256": "b38926e991a229ee214e3d462c215aeca082c2177ca19b049ec14b912f28c72f"
+      },
+      "delta_hours": 0,
+      "section": {
+        "path": "/home/kir/Documents/Projects/terluna-optical-comfort/research/runs/optical_comfort/evening/sections/ring_70_135e_176_258.npz",
+        "sha256": "d0db8004106802271efe5bcb9759a33e3c5949402a50feb2158cb4d24aac34ef",
+        "schema": "terluna.climate.cloud-section/1",
+        "metadata": {
+          "schema": "terluna.climate.cloud-section/1",
+          "case": "ring_70_135e",
+          "snapshot": 258,
+          "time_day": 32.125,
+          "observer_column": 176,
+          "observer_latitude_deg": 32.6045,
+          "observer_longitude_deg": 148.4625,
+          "observer_hour_angle_deg": 90.09030018956616,
+          "observer_sun_elevation_deg": -0.07606978072340857,
+          "dx_m": 6011.2368682234655,
+          "radius_m": 1737400.0,
+          "droplets_cm3": 100.0,
+          "source": {
+            "file": "/home/kir/Documents/Projects/terluna-optical-comfort/climate/crm/runs/ring_70_135e/cm1out_t000258_s.dat",
+            "sha256": "b38926e991a229ee214e3d462c215aeca082c2177ca19b049ec14b912f28c72f",
+            "case_sha256": "5f8b83867035db97e879a1b9cd6982b7e017d3110963c7c3cbd95c8852b26337"
+          },
+          "producer": {
+            "file": "climate/crm/cloud_scene.py",
+            "sha256": "27d2d3e0856f35c7ec09778a62932ace89791139f20f81ef67bb902881c4a232"
+          },
+          "thermodynamic_source_hashes": {
+            "constants.F": "b885840755ef83e1c424c1b09985ce0d59e8582096237ad6d603ae3f15ff2f34",
+            "solve2.F": "e34c6d479d0f589cd8c31faf95df52a06f3b9d0edcb1744f694463b0bdddc375",
+            "morrison.F": "8427670b64e6bad03b68d9aa5532f85e685807671b344d6d4480cf6d0db0ab8c"
+          },
+          "evidence": "Saved evolving CM1 section in the second lunar cycle; the simulation resolves the along-ring and vertical dimensions. Cross-ring extent is supplied by the optical scenario.",
+          "reading_rule": "Local Cartesian basis: x along the ring, y across it, z radially outward. Each column is bounded by great-circle planes, each vertical cell by concentric shells. The observer is at the centre column, simulated sea level."
+        }
+      }
+    }
+  ]
+}

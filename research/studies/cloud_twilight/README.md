@@ -1,8 +1,229 @@
-# High clouds through the long twilight
+# Evening clouds across the Open Moon
 
-The remote baseline used committed cloud summaries and packed sky data to calculate sunlight reaching elevated features after surface sunset. The current evidence favours studying illuminated sides, rims and thin upper structures against a luminous twilight sky. Their appearance depends on cloud scattering and the surrounding light field.
+The regional follow-up couples saved second-cycle cloud fields to the solved,
+shielded spherical atmosphere. It surveys three great-circle rings and a
+highland terrain box, selects six regional views plus a distant horizon case, and follows an equatorial
+observer through evolving weather. Absolute light transport supplies cloud
+colour and contrast alongside the illumination of the open ground and a
+specified viewing recess.
 
-The [local follow-up](#local-dusk-columns) now recovers the raw dusk condensate and particle fields, with explicit second-cycle sampling. It adds liquid-extinction scenarios while preserving the original mechanism screen below. Both stages reuse completed climate simulations.
+## Regional survey
+
+Every new climate sample comes from days **29.625–59.0**, inside the second
+complete lunar cycle. Each case supplies 236 three-hour snapshots. The three
+rings each contain 1,816 horizontal columns; the highland box contains 4,096.
+The exporter reads the corrected `A28_dim5_moon` cases and records raw snapshot,
+case, producing-model and calculation hashes. The earlier first-cycle spin-up
+is outside this survey.
+
+Cloud occurrence uses `qc + qi >= 1e-5 kg/kg` somewhere in a column. In the
+first 88.6 hours after equinox sunset, the equatorial ring has **19.83% cloudy
+column samples**. Its cloudy tops have a median of **23.9 km** and a 90th
+percentile of **33.8 km**; the largest sampled top is **79.8 km**.
+
+| Sampled region | Cloudy evening columns | Character in this cycle |
+|---|---:|---|
+| Equatorial ring | 19.83% | Frequent 20–40 km cloud systems, with intermittent much higher material |
+| Tilted ring through 45°E, within 15° of equator | 14.19% | Strongest activity in its low-latitude sectors |
+| Tilted ring through 135°E, within 15° of equator | 13.67% | Low-latitude activity plus sparse higher-latitude events |
+| Tilted-ring bands 15–30° from equator | 0.98–2.27% | Fewer evening systems |
+| Tilted-ring bands 30–45° from equator | 0.15–0.84% | Intermittent examples for comparison |
+| Corrected highland box, 44.7°S, 113.9°W | 0% | Clear throughout the sampled evenings at this cloud threshold |
+
+On the equatorial track, promising cloud-bearing sectors include **45–60°E**
+(47.4% of evening column samples), **60–75°W** (38.0%), **150–165°E** (36.1%)
+and **165–180°E** (30.7%). These are 15° longitude bins with explicit sample
+counts. The 45–60°E segment is mostly water in the run's land mask, which makes
+nearby land with a sunsetward view a useful target for a coastal study.
+The tilted tracks add candidate sectors around 133–137°E near the equator and
+around 137°W at low northern latitudes.
+
+**Far-side equatorial sectors deserve particular attention for dark surroundings.**
+The 150–180°E cloud-bearing sector also keeps Earth below the horizon.
+Near-side locations receive an additional phase-dependent Earth source.
+The appearance product reports the existing solar-coloured, clear-atmosphere
+Earthlight proxy separately; the cloud images themselves contain the solar
+component. Earth's spectrum and its illumination of the cloud require a
+separate source calculation.
+
+The percentages describe one cycle along the sampled tracks. Nearby columns
+share weather systems, and their spatial correlation limits probability
+inference. Further cycles and three-dimensional regional dynamics will test
+which locations repeatedly provide good viewing conditions. The climate
+programme's existing CM1/GCM warmth and humidity discrepancy also carries
+through to these cloud distributions.
+
+## Darkness and latitude
+
+In the common clear molecular column, open horizontal ground reaches:
+
+| Illumination | Sun below local horizontal | Hours after equatorial sunset |
+|---|---:|---:|
+| 100 lux | 22.9° | 45.1 h |
+| 10 lux | 34.6° | 68.1 h |
+| 1 lux | 47.2° | 92.9 h |
+
+These are operational light levels for comparison. The calculation uses the
+design shield and ground albedo 0.1. Earthlight, terrain, aerosols and cloud
+cover change a site's total illumination. Draft versus standard atmospheric
+sampling shifts these threshold angles by about 0.05–0.11°; that comparison
+measures numerical grid sensitivity within the chosen atmosphere.
+
+Higher latitudes retain a luminous sky deeper into their long evening. At
+45° latitude the clear equinox midnight value is about 1.5 lux; at 60° it is
+24 lux; at 70° it is 179 lux; at 80° it is about 1,185 lux. The survey's cloud
+activity falls toward higher latitudes, so prolonged twilight and abundant
+evening cloud occur in different proportions across these regions.
+
+Straight-ray geometry places a useful limit on directly sunlit clouds seen
+from low ground. A 40-km cloud 5° above the observer's horizontal can retain
+the Sun's last limb until a surface depression of 20.6°; the clear ground then
+still receives about 159 lux. An 80-km cloud at the same viewing elevation
+extends that geometric limit to 30.1°, with about 24 lux on clear ground.
+Atmospheric extinction reduces the direct beam throughout these late windows.
+These limits allow the most favourable sunsetward position at each height.
+
+A shaded foreground offers another viewing configuration. The scene products
+measure a black recess with a 20° wide opening, elevations 5–25°, aimed at the
+cloud system. That angular restriction can substantially reduce local ground
+light while retaining a view of the cloud. Its results depend on the opening;
+actual terrain or shelter surfaces require their own reflecting geometry.
+
+## Computed appearance and evolving weather
+
+The scene selection combines cloud height, mass, solar exposure, viewing angle
+and local clear light. The retained candidates supply six examples across
+three rings. Their selection score screens available incident light; the full
+transport calculation then measures the resulting view.
+
+The first calculations show a range from warm brightening to dark cloud banks.
+At **0°, 19.7°W**, the selected window is **111 ± 12% brighter** than the clear
+reference at 8.1 hours after sunset and **43 ± 13% brighter** at 20.1 hours
+(errors here are twice the photon sampling standard error). Its broad colour
+shifts from gold toward orange. The weather then changes: at 32–56 hours the
+same window is about 76–80% dimmer than its clear reference. The long twilight
+provides many hours of illumination while the cloud systems evolve within it.
+
+| Hours after sunset at 0°, 19.7°W | Solar light on open ground | Solar light in the 5–25° viewing recess | Mean window luminance |
+|---:|---:|---:|---:|
+| 8.1 h | 2,826 lux | 106 lux | 3,420 cd/m² |
+| 20.1 h | 1,024 lux | 28.0 lux | 1,138 cd/m² |
+| 32.1 h | 242 lux | 2.44 lux | 71.8 cd/m² |
+| 44.1 h | 85.0 lux | 0.79 lux | 29.9 cd/m² |
+| 56.1 h | 27.4 lux | 0.30 lux | 8.4 cd/m² |
+| 68.1 h | 11.4 lux | 0.47 lux | 17.7 cd/m² |
+| 80.1 h | 2.8 lux | 0.17 lux | 4.2 cd/m² |
+
+The product retains errors for every entry. The 68–80 h cloud enhancements
+have broad confidence intervals that include the clear reference. Individual
+faint pixels have high sampling noise, so broad angular averages carry the
+strongest evidence. The separate clear Earthlight proxy at this near-side
+site rises from about **4.4 to 7.1 lux** through the sequence; cloud-modified
+Earthlight requires its own source calculation.
+
+At **0°, 75.4°E**, a separate view remains reddish at **39.4 h** after sunset:
+about **226 lux** reaches open ground, **6.77 ± 0.70 lux** enters the viewing
+recess, and its window averages about **205 cd/m²**. The window is brighter
+than adjacent parts of that cloudy view. Its enhancement over the clear
+reference is small at the current sampling precision.
+
+### A low horizon view with a nearly dark foreground
+
+The expanded search follows clouds up to about 577 km along each ring and
+admits viewing elevations down to 0.5°. It finds a far-side candidate at
+**0°, 113.1°W**, **49.2 h after sunset**: a **73.8-km cloud about 399 km away**,
+with its top about **4.25° above horizontal**. The source screen estimates
+roughly **1,000 lux** incident normally at that top. The full view includes
+internal shadowing and the long intervening atmospheric path.
+
+The refined view spans elevations 0.5–15°. A black recess with a 20° wide
+opening at **0.5–5° elevation** admits **0.055 ± 0.008 lux** onto a horizontal
+surface. The viewed band averages **42.4 ± 4.7 cd/m²**, with a warm amber/orange
+colour; open ground receives **70 ± 15 lux**. This configuration supports a
+luminous coloured horizon above a very dark sheltered foreground.
+
+The cloud dims the selected band by **36 ± 7%** against the clear reference
+and by **22 ± 11%** against neighbouring parts of the cloudy view. It appears
+as a subdued darker band within the coloured twilight. The earlier examples provide clearer brightening of the cloud-facing view. These outcomes distinguish the available illumination at a
+cloud from the full appearance along the observer's sightline.
+
+In the expanded search, 17 eligible observer–cloud pairs at 25–30° Sun
+depression receive at least 1 lux of incident direct sunlight. The sampled
+30–45° bins contain 2,275 geometrically eligible pairs, all below that incident
+level. These are overlapping search pairs with recorded geometry and cloud
+criteria; they describe this cycle and the tested sightlines.
+
+For the representative 20–40 km cloud case, changing the assumed cross-ring
+width from 100 to 400 km changes open-ground light from about **1,377 to
+885 lux** and recess light from **10.4 to 6.6 lux**. Frozen-particle asymmetry
+0.7–0.9 changes the recess result from **5.8 to 11.7 lux**. A 6-km observer gives
+about **7.7 lux** for the same opening, compared with **7.4 lux** in the standard
+low view. These sensitivities guide the next spatial and particle-optics work.
+
+Particle areas follow the producing microphysics size distributions. Spectral
+photon histories include solar attenuation through clouds, internal multiple
+scattering, molecular scattering along the viewing path and ground reflection.
+The 200-km cross-ring extrusion, nonabsorbing equivalent spheres, liquid
+asymmetry 0.85 and frozen asymmetry 0.8 are stated scenarios. Width, frozen
+phase function and observer height receive separate sensitivity scenes.
+
+The fixed observer is at **0°, 19.7°W**, looking toward the original selected
+cloud. Seven saved snapshots span about **8–80 hours after sunset**. Each uses
+its contemporary cloud field and solar geometry. Feature and aperture angles
+stay fixed, so the sequence measures changing weather and illumination at one
+viewpoint. Independent photon blocks retain statistical errors for radiance,
+colour, contrast and local illuminance. Contrast compares the cloudy view
+with the corresponding clear atmospheric sightline.
+
+The source products are [regional_evenings.json](results/regional_evenings.json),
+[evening_scenes_selected.json](results/evening_scenes_selected.json),
+[evening_scenes_history.json](results/evening_scenes_history.json),
+[evening_scenes_sensitivity.json](results/evening_scenes_sensitivity.json) and
+[evening_appearance.json](results/evening_appearance.json). The expanded search and low-horizon scene are [deep_evenings.json](results/deep_evenings.json) and [evening_scenes_deep.json](results/evening_scenes_deep.json). Their bulk radiance,
+climate sections and figures live beneath `research/runs/optical_comfort/evening`,
+linked to the large research drive. Code and compact reports stay in this
+isolated branch.
+
+The [visualizer](../../../visualization/cloud-twilight/evening.py) produces a
+regional map, matched-exposure colour fields, the evolving evening sequence
+and an interactive HTML viewer. The viewer exposes the absolute radiance and
+sampling error under the cursor, plus screen exposure and recess controls.
+Display smoothing averages colour across three pixels and luminance across
+one pixel in each angular direction; raw arrays preserve the resolved values.
+Faint colour maps retain substantial sampling noise. The current 2-D sections and angular
+sampling establish broad cloud lighting and colour. Detailed billows, local
+terrain silhouettes and ice optical features need further spatial and optical
+inputs.
+
+```bash
+OPENBLAS_NUM_THREADS=1 python -m climate.crm.evening_columns --output research/runs/optical_comfort/evening
+OPENBLAS_NUM_THREADS=1 NUMBA_NUM_THREADS=2 python -m illumination.cloud_light.evening_context
+OPENBLAS_NUM_THREADS=1 python -m research.studies.cloud_twilight.regional
+OPENBLAS_NUM_THREADS=1 NUMBA_NUM_THREADS=2 python -m research.studies.cloud_twilight.scenes --mode selected --photons 1024
+OPENBLAS_NUM_THREADS=1 NUMBA_NUM_THREADS=2 python -m research.studies.cloud_twilight.scenes --mode history --photons 1024
+OPENBLAS_NUM_THREADS=1 NUMBA_NUM_THREADS=2 python -m research.studies.cloud_twilight.scenes --mode sensitivity --photons 512
+OPENBLAS_NUM_THREADS=1 python -m research.studies.cloud_twilight.deep
+OPENBLAS_NUM_THREADS=1 NUMBA_NUM_THREADS=2 python -m research.studies.cloud_twilight.deep_scene
+OPENBLAS_NUM_THREADS=1 NUMBA_NUM_THREADS=2 python -m research.studies.cloud_twilight.appearance
+MPLCONFIGDIR=/tmp/terluna-mpl python visualization/cloud-twilight/evening.py
+```
+
+The figure basemap uses the existing admitted 28%-water geography grid.
+[evening_sources.json](evening_sources.json) records the focused source reading.
+Cloud occurrence, optical scenarios, numerical convergence and empirical
+validation retain separate evidence states. [evening_checks.json](evening_checks.json)
+records repository checks, source admission and numerical comparisons.
+
+The next substantive step is a three-dimensional moist regional cloud case
+with local terrain and an Earth-source calculation. Repeated lunar cycles will
+test the persistence of the regional rankings. Higher photon counts will
+improve the faint views before detailed visual interpretations.
+
+## Earlier mechanism screen
+
+The following sections preserve the preceding direct-beam screen and local
+microphysics recovery. The regional scene products above extend their
+illuminated-height geometry into a full spectral cloud view.
 
 ## What the corrected cloud run supplies
 

@@ -97,7 +97,7 @@
     },
     {
       "topic": "illumination",
-      "condition": "conditional_clear_sky_solver_and_site_geometry; clear_sky_surface_spectra_202_1000nm_on_solved_columns_two_stream; optical_comfort_clear_sky_surface_and_eye_screen_with_earth_controls; optical_comfort_packed_angular_sky_transfer_and_finite_matte_scene_transport; cloud_twilight_corrected_cm1_occurrence_and_spherical_molecular_beam_screen; optical_comfort_local_native_sky_and_resolved_wave_slopes; cloud_twilight_local_second_cycle_condensate_and_liquid_extinction_scenarios; solved_column_shielded_spherical_sky_and_updated_gaze_and_finite_scenes",
+      "condition": "conditional_clear_sky_solver_and_site_geometry; clear_sky_surface_spectra_202_1000nm_on_solved_columns_two_stream; optical_comfort_clear_sky_surface_and_eye_screen_with_earth_controls; optical_comfort_packed_angular_sky_transfer_and_finite_matte_scene_transport; cloud_twilight_corrected_cm1_occurrence_and_spherical_molecular_beam_screen; optical_comfort_local_native_sky_and_resolved_wave_slopes; cloud_twilight_local_second_cycle_condensate_and_liquid_extinction_scenarios; solved_column_shielded_spherical_sky_and_updated_gaze_and_finite_scenes; second_cycle_regional_evening_clouds_and_spectral_multiple_scattering_scenarios",
       "material": [
         "../illumination/geometry.py",
         "../illumination/sky/solver.py",
@@ -117,7 +117,11 @@
         "studies/cloud_twilight/results/local_clouds.json",
         "../illumination/sky/SOLVED_COLUMN.md",
         "../illumination/sky/results/solved_sky.json",
-        "studies/optical_comfort/results/spherical_sky.json"
+        "studies/optical_comfort/results/spherical_sky.json",
+        "../illumination/cloud_light/volume.py",
+        "studies/cloud_twilight/results/regional_evenings.json",
+        "studies/cloud_twilight/results/evening_appearance.json",
+        "studies/cloud_twilight/results/deep_evenings.json"
       ],
       "unresolved": [
         "date-accurate ephemeris, lunar equator tilt and terrain horizon",
@@ -125,12 +129,12 @@
         "earthlight spectrum (glow currently uses the solar atlas), airglow",
         "regional optical profiles, horizontal weather variation and the effects of aerosols",
         "propagate the new solved-column low-Sun spherical light into remaining consumers of the older two-stream and exponential-atlas products",
-        "surface light under clouds: colour and diffuse share; elevated direct sunlight and molecular viewing extinction are screened, and local second-cycle microphysics are recovered. Cloud radiance and persistence require size-distribution closure, spatial light transport coupled to the solved spherical sky",
+        "cloud appearance: three-dimensional cloud and terrain structure, regional optical profiles, ice habits and spectral particle optics; the second-cycle scenes now compute molecular/particle multiple scattering, shadowing, colour, contrast and evolving views",
         "the historical exponential atlas retains its 4.6% global-energy issue; the solved-column product records a separate channel-by-channel and weighted energy ledger",
         "the five-hour practical dawn and dusk (research/decisions.md): choose a working-light threshold for a site. The solved clear lunar sky reaches 1,000 lux near -11.0 degrees of solar elevation, about 22 hours after ideal equatorial geometric sunset",
         "optical comfort: site-specific surface BRDFs and geometry, cloud radiance and human-factors validation. The shielded solved-column sky now supplies consistent flux and direction; local coastal spectra supply resolved slope covariance. Shorter-wave roughness and actual water reflection remain open."
       ],
-      "next_session_task": "Use the solved spherical radiation field with recovered cloud microphysics and water-slope spectra; extend faint-twilight benchmarks and regional profiles. Earthlight spectral radiance remains a separate source calculation."
+      "next_session_task": "Use the regional evening survey and computed cloud views to choose terrain-aware three-dimensional regional scenes; extend the source to Earthlight and improve faint-scene sampling. Repeatability across lunar cycles and the climate humidity discrepancy remain conditions on location rankings."
     },
     {
       "topic": "biosphere",

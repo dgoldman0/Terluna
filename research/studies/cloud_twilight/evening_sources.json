@@ -1,0 +1,33 @@
+{
+  "schema": "terluna.research.source-notes/1",
+  "reviewed": "2026-10-03",
+  "sources": [
+    {
+      "title": "CM1 r22.0 Morrison microphysics, producing build",
+      "url": "https://www2.mmm.ucar.edu/people/bryan/cm1/cm1r22.0.tar.gz",
+      "local_source": "/media/projectspace/terluna-research/cm1/build/moon_omp/src/morrison.F",
+      "sha256": "8427670b64e6bad03b68d9aa5532f85e685807671b344d6d4480cf6d0db0ab8c",
+      "reading_scope": "Particle densities and inverse-slope bounds; liquid gamma shape and number concentration; mass/number exponential slopes for cloud ice, rain, snow and graupel. The repeated closure blocks around lines 1960–2055 and 5080–5260 were inspected.",
+      "use": "Derive volume-to-area effective radii from the saved mass and number fields, preserving the scheme's slope limits. The visible extinction uses Q_ext = 2 and the scheme's equivalent spherical particle volumes. Angular scattering uses stated HG scenarios. Ice habit and spectral particle absorption require further optical inputs."
+    },
+    {
+      "title": "Physically Based Rendering, fourth edition: Phase Functions",
+      "url": "https://pbr-book.org/4ed/Volume_Scattering/Phase_Functions",
+      "reading_scope": "Henyey–Greenstein normalization, mean cosine and inverse sampling.",
+      "use": "Normalized HG particle phase functions with liquid g = 0.85 and frozen g = 0.8; sensitivity g = 0.7–0.9. The code uses the cosine between backward viewing and backward source directions, so its forward peak has cosine +1."
+    },
+    {
+      "title": "Physically Based Rendering, fourth edition: The Equation of Transfer",
+      "url": "https://pbr-book.org/4ed/Light_Transport_II_Volume_Rendering/The_Equation_of_Transfer",
+      "reading_scope": "Attenuation, scattering sources and path-based evaluation of volume radiance.",
+      "use": "Independent spectral backward Monte Carlo with exact cell-segment optical depths, molecular/particle mixture scattering, finite-Sun next-event estimates, Lambertian ground and roulette at low path weights. Solar irradiance enters through the hash-admitted solved-column spectral product."
+    },
+    {
+      "title": "Brenguier, Burnet and Geoffroy (2011): Cloud optical thickness and liquid water path",
+      "url": "https://acp.copernicus.org/articles/11/9771/2011/acp-11-9771-2011.pdf",
+      "reading_scope": "Equations 1–5, already inspected for the preceding local cloud-column work.",
+      "use": "Visible area/mass relation beta = 3 rho_air q / (2 rho_particle r_effective). The new closure supplies r_effective from the saved producing-model distribution."
+    }
+  ],
+  "review_boundary": "Focused equation and model-source reading. Full scholarly reading, three-dimensional cloud validation and perceptual validation remain separate evidence states."
+}

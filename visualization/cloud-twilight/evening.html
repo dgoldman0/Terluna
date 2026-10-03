@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Evening clouds · Terluna</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,sans-serif;background:#10222d;color:#e6edf0}body{max-width:1180px;margin:36px auto;padding:0 22px;line-height:1.55}h1{font-weight:600;font-size:2.1rem;margin-bottom:4px}.intro{color:#b9ccd5;max-width:870px}label{display:inline-block;margin:8px 24px 8px 0}select,input,button{accent-color:#82cfbd;font:inherit}select{max-width:90vw;padding:5px;background:#203641;color:inherit;border:1px solid #617986}canvas{width:100%;height:auto;background:#000;border:1px solid #405762;image-rendering:auto}#values{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:20px 0}#values>div{padding:12px;background:#203641;border-radius:4px}strong{display:block;font-size:1.3rem}small{color:#b9ccd5}.readout{font-variant-numeric:tabular-nums;min-height:30px}a{color:#91d8c6}figure{margin:25px 0}figure img{width:100%;background:white}details{margin:20px 0}footer{color:#b9ccd5;font-size:.9rem;margin:35px 0}@media(max-width:650px){#values{grid-template-columns:1fr 1fr}}
+</style>
+<h1>Evening clouds on the Open Moon</h1>
+<p class="intro">Explore coarse cloud colour and brightness from the second lunar cycle. The map locates the sampled regions; the evening sequence keeps one observer and viewing direction fixed while the clouds evolve.</p>
+<label>View <select id="scene"></select></label><br>
+<label>Screen exposure scale <input id="exposure" type="range" min="-1" max="4" step=".05" value="3.17609"> <output id="scale"></output> cd/m²</label>
+<label><input id="recess" type="checkbox"> View through the dark recess</label>
+<label><input id="smooth" type="checkbox" checked> Average colour and brightness</label>
+<canvas id="view" width="1024" height="630" aria-label="Computed spectral cloud radiance view"></canvas>
+<p class="readout" id="hover">Move across the image to inspect the raw luminance and contrast.</p>
+<div id="values"></div>
+<p id="scenario"></p>
+<small id="extent"></small><small> Lower exposure scales brighten the display. The exposure control applies consistently across views; adaptation of the eye is a further model. Recess interiors are ideal absorbers.</small>
+<details open><summary>Regional cloud occurrence and evening light</summary><figure><img src="regions.png" alt="Sampled cloud occurrence on three lunar tracks and a terrain box, with latitude and twilight comparisons"></figure></details>
+<details><summary>Six regional views at a shared exposure</summary><figure><img src="cloud_views.png" alt="Six computed evening cloud views at the same exposure"></figure></details>
+<details><summary>A fixed observer through the evening</summary><figure><img src="evening_history.png" alt="Evolving ground light and cloud contrast with a fixed observer"></figure></details>
+<details><summary>A distant cloud deep into evening</summary><figure><img src="deep_evening.png" alt="Computed low-horizon cloud and clear views, with the narrow opening marked"></figure></details>
+<footer>Saved CM1 cloud sections resolve the vertical and along-track dimensions. Across-track width and particle phase functions are explicit scenarios. The light transport includes molecular and particle multiple scattering, cloud shadows and foreground air. Solar light is included; Earthlight, terrain horizons and detailed ice optical features require further inputs. Display averaging uses 3 pixels for colour and 1 for luminance; the faint frames retain substantial sampling noise. Bulk data and provenance: <a href="manifest.json">figure manifest</a>.</footer>
+<script>
+const scenes=/*SCENES*/[];
+const select=document.querySelector('#scene'),canvas=document.querySelector('#view'),ctx=canvas.getContext('2d');
+const exposure=document.querySelector('#exposure'),recess=document.querySelector('#recess'),smooth=document.querySelector('#smooth');
+for (const [i,s] of scenes.entries()){const o=document.createElement('option');o.value=i;o.textContent=s.label;select.append(o)}
+function rgb(x,scale){let r=[3.2406*x[0]-1.5372*x[1]-.4986*x[2],-.9689*x[0]+1.8758*x[1]+.0415*x[2],.0557*x[0]-.2040*x[1]+1.0570*x[2]].map(v=>Math.max(0,v));const d=scale+Math.max(...r);return r.map(v=>{v/=d;return Math.round(255*(v<=.0031308?12.92*v:1.055*Math.pow(v,1/2.4)-.055))})}
+function render(){const s=scenes[+select.value],scale=10**(+exposure.value),a=smooth.checked?s.xyz:s.raw_xyz;
+ document.querySelector('#scale').value=scale.toPrecision(3);canvas.height=Math.round(canvas.width*(s.e.at(-1)-s.e[0])/(s.a.at(-1)-s.a[0]));const h=s.shape[0],w=s.shape[1],small=document.createElement('canvas');small.width=w;small.height=h;const c=small.getContext('2d'),pixels=c.createImageData(w,h);
+ for(let j=0;j<h;j++)for(let i=0;i<w;i++){const p=((h-1-j)*w+i)*4,v=rgb(a[j][i],scale);for(let k=0;k<3;k++)pixels.data[p+k]=v[k];pixels.data[p+3]=255}
+ c.putImageData(pixels,0,0);ctx.imageSmoothingEnabled=smooth.checked;ctx.drawImage(small,0,0,canvas.width,canvas.height);
+ const e0=s.e[0],e1=s.e.at(-1),a0=s.a[0],a1=s.a.at(-1),bounds=s.stats.recess_elevation_limits_deg;
+ document.querySelector('#extent').textContent='This view spans azimuth offsets '+a0.toFixed(0)+'° to '+a1.toFixed(0)+'° and elevations '+e0+'–'+e1+'°. The recess admits a 20° wide opening at '+bounds[0]+'–'+bounds[1]+'° elevation.';
+ if(recess.checked){const left=(-10-a0)/(a1-a0)*canvas.width,right=(10-a0)/(a1-a0)*canvas.width,top=Math.max(0,(e1-bounds[1])/(e1-e0)*canvas.height),bottom=Math.min(canvas.height,(e1-bounds[0])/(e1-e0)*canvas.height);ctx.fillStyle='#000';ctx.fillRect(0,0,canvas.width,top);ctx.fillRect(0,bottom,canvas.width,canvas.height-bottom);ctx.fillRect(0,top,left,bottom-top);ctx.fillRect(right,top,canvas.width-right,bottom-top)}
+ const t=s.stats;document.querySelector('#values').innerHTML=[['Open ground',t.surface_lux.toPrecision(3)+' lx','± '+(2*t.surface_standard_error_lux).toPrecision(2)+' lx (2 SE)'],['Black recess',t.recess_lux.toPrecision(3)+' lx','± '+(2*t.recess_standard_error_lux).toPrecision(2)+' lx (2 SE)'],['Time after sunset',t.hours_after_sunset.toFixed(1)+' h','Sun '+t.sun_deg.toFixed(1)+'°'],['Aperture contrast',(100*t.aperture.contrast).toFixed(0)+'%','Relative to the same clear view']].map(v=>'<div>'+v[0]+'<strong>'+v[1]+'</strong><small>'+v[2]+'</small></div>').join('');
+ document.querySelector('#scenario').textContent='Across-track cloud width '+t.width_km+' km; frozen-particle asymmetry g = '+t.ice_g+'; observer '+t.observer_height_m+' m above the spherical ground. '+(t.earthlight_context.clear_surface_proxy_lux===null?'Earth is below the local horizon.':'Separate clear Earthlight proxy: '+t.earthlight_context.clear_surface_proxy_lux.toFixed(1)+' lux; its effects on the cloudy view require an Earth-source render.');
+}
+canvas.addEventListener('mousemove',event=>{const s=scenes[+select.value],r=canvas.getBoundingClientRect(),i=Math.min(s.shape[1]-1,Math.max(0,Math.floor((event.clientX-r.left)/r.width*s.shape[1]))),j=Math.min(s.shape[0]-1,Math.max(0,Math.floor((1-(event.clientY-r.top)/r.height)*s.shape[0]))),y=s.raw_xyz[j][i][1];document.querySelector('#hover').textContent='Elevation '+s.e[j].toFixed(1)+'°, offset '+s.a[i].toFixed(1)+'° · Luminance '+y.toPrecision(4)+' ± '+(2*s.se[j][i][1]).toPrecision(2)+' cd/m² (2 SE) · Contrast '+(100*(y/s.clear[j][i][1]-1)).toFixed(1)+'%'});
+for(const control of [select,exposure,recess,smooth])control.addEventListener('input',render);render();
+</script></html>
