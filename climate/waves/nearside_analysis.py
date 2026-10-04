@@ -36,6 +36,10 @@ SMYTHII = HERE / "results/cycle.json"
 FIELDS = ("hs", "tp", "tm01", "dir", "qb", "tx", "ty")
 THRESHOLDS = (0.5, 1.0, 2.0, 3.0, 4.0, 5.0)
 WAVE_AGE = 1.2 * 28        # wind sea where 28 u* cos(angle) / c exceeds 1/1.2, the WAM partition
+# Landmarks that name a coast: the gazetteer's water bodies, mountains, scarps and valleys, and craters 20 km
+# across or more.
+LANDMARK_TYPES = ("Mare", "Oceanus", "Sinus", "Lacus", "Palus", "Promontorium", "Mons", "Rupes", "Vallis")
+LANDMARK_CRATER_KM = 20.0
 
 
 def run_root(name):
@@ -128,6 +132,30 @@ def node_statistics(t, hs, direction):
                 direction=np.degrees(np.angle(integrated)) % 360,
                 resultant=np.divide(np.abs(integrated), energy, out=np.zeros_like(energy), where=energy > 0),
                 hours_above={c: time_above(t, hs, c) for c in THRESHOLDS})
+
+
+def landmarks():
+    from geography import nomenclature
+    return [f for f in nomenclature.features() if f["type"].split(",")[0] in LANDMARK_TYPES
+            or (f["type"].split(",")[0] == "Crater" and f["diameter_km"] >= LANDMARK_CRATER_KM)]
+
+
+def landmark_near(features, lon, lat):
+    """The landmark whose centre lies nearest a point, and its distance (km)."""
+    unit = lambda lo, la: np.array([math.cos(math.radians(la)) * math.cos(math.radians(lo)),
+                                    math.cos(math.radians(la)) * math.sin(math.radians(lo)), math.sin(math.radians(la))])
+    v = unit(lon, lat)
+    best = max(features, key=lambda f: float(unit(f["lon"], f["lat"]) @ v))
+    return best["name"], math.acos(min(1.0, float(unit(best["lon"], best["lat"]) @ v))) * nearside.MOON_RADIUS / 1000
+
+
+def energy_mean(t, hs, values):
+    """Time mean of a field weighted by wave energy (Hs squared), on piecewise-linear histories."""
+    dt = np.diff(t)[:, None]
+    energy = hs**2
+    weight = np.sum(dt * (energy[:-1] + energy[1:]) * .5, axis=0)
+    total = np.sum(dt * (energy[:-1] * values[:-1] + energy[1:] * values[1:]) * .5, axis=0)
+    return np.divide(total, weight, out=np.zeros_like(weight), where=weight > 0)
 
 
 def coastal_nodes(sea):
@@ -248,15 +276,7 @@ def summarize(name="dt300", *, start=CYCLE_HOURS, end=2 * CYCLE_HOURS, cube_path
     power = water * MOON_SURFACE_GRAVITY * np.maximum(tx[:, coast] * normal[:, 0] + ty[:, coast] * normal[:, 1], 0)
     dt = np.diff(t)[:, None]
     mean_power = np.sum(dt * (power[:-1] + power[1:]) * .5, axis=0) / (t[-1] - t[0])
-    from geography import nomenclature
-    features = [f for f in nomenclature.features() if f["type"].split(",")[0] in
-                ("Mare", "Oceanus", "Sinus", "Lacus", "Palus", "Promontorium", "Mons", "Montes")]
-    def feature_near(lon, lat):
-        v = np.array([math.cos(math.radians(lat)) * math.cos(math.radians(lon)),
-                      math.cos(math.radians(lat)) * math.sin(math.radians(lon)), math.sin(math.radians(lat))])
-        best = max(features, key=lambda f: math.cos(math.radians(f["lat"])) * math.cos(math.radians(f["lon"])) * v[0]
-                   + math.cos(math.radians(f["lat"])) * math.sin(math.radians(f["lon"])) * v[1] + math.sin(math.radians(f["lat"])) * v[2])
-        return best["name"]
+    features = landmarks()
     # The strongest coasts, each at least 300 km from a stronger one already listed.
     coast_lon, coast_lat = np.radians(cube["lon"][coast]), np.radians(cube["lat"][coast])
     unit = np.stack((np.cos(coast_lat) * np.cos(coast_lon), np.cos(coast_lat) * np.sin(coast_lon), np.sin(coast_lat)), axis=-1)
@@ -284,7 +304,9 @@ def summarize(name="dt300", *, start=CYCLE_HOURS, end=2 * CYCLE_HOURS, cube_path
                   "stress with the Smythii cycle's physics and a 300 s timestep; the first lunar cycle spins the sea up "
                   "and the second is measured."),
         reading_rule=("Statistics use the second solar cycle, interpolated hourly heights and exact cycle endpoints; "
-                      "area fractions weight nodes by the cosine of latitude. Coastal power is the time-mean shoreward "
+                      "area fractions weight nodes by the cosine of latitude. p95_hs_m is the 95th percentile of each "
+                      "node's hourly heights; energy_mean_tm01_s is its mean period weighted by Hs squared, the period "
+                      "of the waves that carry the energy. Coastal power is the time-mean shoreward "
                       "component of SWAN's energy transport at 1-degree nodes beside land, per metre of coast."),
         producer=dict(domain="climate", files={str(p.relative_to(ROOT)): sha256(p) for p in
                       (Path(__file__), HERE / "nearside.py", HERE / "cycle.py", ROOT / "shared/constants.json")}),
@@ -315,11 +337,15 @@ def summarize(name="dt300", *, start=CYCLE_HOURS, end=2 * CYCLE_HOURS, cube_path
         coast=dict(nodes=int(len(coast)), mean_power_W_m=dict(median=float(np.median(mean_power)),
                                                                p90=float(np.percentile(mean_power, 90)),
                                                                max=float(mean_power.max())),
+                   landmarks=f"Nearest gazetteer feature of types {', '.join(LANDMARK_TYPES)}, or crater at least {LANDMARK_CRATER_KM:g} km across, with the distance to its centre",
                    strongest=[dict(lon_lat=[float(cube["lon"][coast[k]]), float(cube["lat"][coast[k]])],
-                                   mean_power_W_m=float(mean_power[k]), near=feature_near(cube["lon"][coast[k]], cube["lat"][coast[k]]))
+                                   mean_power_W_m=float(mean_power[k]),
+                                   **dict(zip(("near", "near_km"), landmark_near(features, cube["lon"][coast[k]], cube["lat"][coast[k]]))))
                               for k in ranked[:10]]),
         maps=dict(active=active.astype(int).tolist(), rows=rows.tolist(), cols=cols.tolist(), lon=cube["lon"].round(3).tolist(), lat=cube["lat"].round(3).tolist(),
                   max_hs_m=stats["max_hs"].round(3).tolist(), mean_hs_m=stats["mean_hs"].round(3).tolist(),
+                  p95_hs_m=np.percentile(hs, 95, axis=0).round(3).tolist(),
+                  energy_mean_tm01_s=energy_mean(t, hs, tm01).round(2).tolist(),
                   direction_deg=stats["direction"].round(1).tolist(), direction_resultant=stats["resultant"].round(3).tolist(),
                   hours_above_1m=stats["hours_above"][1.0].round(1).tolist(), hours_above_2m=stats["hours_above"][2.0].round(1).tolist(),
                   coastal_nodes=coast.tolist(), coastal_mean_power_W_m=mean_power.round(1).tolist()))

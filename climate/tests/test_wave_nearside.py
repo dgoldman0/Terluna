@@ -82,3 +82,19 @@ def test_coastal_normals_point_to_the_land():
     assert np.allclose(lookup[(1, 3)], (0, -1))           # the southern edge (row 0 is south)
     assert (3, 3) not in lookup                           # an interior node
     assert np.allclose(np.hypot(*normals.T), 1)
+
+
+def test_energy_mean_weights_periods_by_wave_energy():
+    from climate.waves.nearside_analysis import energy_mean
+    t = np.array([0.0, 1.0, 2.0])
+    hs = np.array([[1.0, 0.0], [1.0, 0.0], [2.0, 0.0]])
+    period = np.array([[10.0, 7.0], [10.0, 7.0], [16.0, 7.0]])
+    # Trapezoids of E = Hs^2 and E T: (1 + 1)/2 + (1 + 4)/2 = 3.5 and (10 + 10)/2 + (10 + 64)/2 = 47.
+    assert np.allclose(energy_mean(t, hs, period), [47 / 3.5, 0.0])
+
+
+def test_landmark_near_names_the_closest_feature_with_its_distance():
+    from climate.waves.nearside_analysis import landmark_near
+    features = [dict(name="A", lon=0.0, lat=0.0), dict(name="B", lon=10.0, lat=0.0)]
+    name, km = landmark_near(features, 8.0, 0.0)
+    assert name == "B" and km == pytest.approx(N.MOON_RADIUS * np.radians(2.0) / 1000)
