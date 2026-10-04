@@ -1232,6 +1232,19 @@ CASES['supercell_elec_cylinders'] = dict(
     CASES['supercell_elec'], elec=dict(lightning=1),
     purpose='CM1\'s supercell at Earth\'s gravity with WRF-ELEC\'s NSSL microphysics, charging and cylindrical '
             'lightning')
+# The benchmark at the fine box's 2-km spacing: supercell_elec on a grid twice as coarse over the same 120 km, and the
+# storm in WRF-ELEC's own test settings (its em_quarter_ss namelist: 2 km over 84 km, 800 CCN per cm3, Saunders and
+# Peck's law as isaund 11 sets it, screening layers and branched lightning), each for two hours (WRF-ELEC's test runs
+# one).
+CASES['supercell_elec_2km'] = dict(
+    CASES['supercell_elec'], namelist=dict(param0=dict(nx=60, ny=60), param1=dict(dx=2000.0, dy=2000.0)),
+    purpose='CM1\'s supercell at Earth\'s gravity with WRF-ELEC\'s NSSL microphysics, charging and branched lightning '
+            'at 2-km spacing, the benchmark at the fine box\'s spacing')
+CASES['supercell_elec_wrf'] = dict(
+    CASES['supercell_elec'], elec=dict(isaund=11, screen=1),
+    namelist=dict(param0=dict(nx=42, ny=42), param1=dict(dx=2000.0, dy=2000.0), nssl2mom_params=dict(ccn=0.8e9)),
+    purpose='CM1\'s supercell at Earth\'s gravity in WRF-ELEC\'s own test settings: 2-km spacing over 84 km, 800 CCN '
+            'per cm3, Saunders and Peck\'s law as isaund 11 sets it, screening layers and branched lightning')
 
 
 def gcm_soil(folder: Path) -> dict:

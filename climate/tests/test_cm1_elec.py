@@ -70,7 +70,7 @@ def test_cm1_calls_the_reordering_driver_with_the_charge_tracers_and_the_time():
     assert 'pta(i,j,k,n)=0.001' not in patched('init3d.F')
     make = patched('Makefile')
     assert ('\tterluna_lightning.F \\\n\tterluna_mlint2.F \\\n\tmodule_discharge_msz.F \\\n\tterluna_branched.F \\\n'
-            '\tterluna_elec.F \\\n') in make
+            '\tterluna_screen.F \\\n\tterluna_elec.F \\\n') in make
     assert 'mp_driver.o: terluna_elec.o' in make and 'terluna_branched.o: module_discharge_msz.o' in make
     assert 'cm1.o: terluna_elec.o' in make
 
@@ -87,6 +87,12 @@ def test_the_module_takes_cm1_s_settings_and_runs_both_drivers_slabs_in_parallel
     check_directive(sed[:sed.index('!$OMP PARALLEL DO')], e.SED_OMP_DIRECTIVE)
     # the sedimentation driver prints its charge totals once a step, at the last sub-step
     assert "ipelec > 0 .and. lastlooptmp ) THEN !{ ! Terluna" in sed
+    # and hands cloud ice's effective radius on whole; terluna_elec.F caps what the radiation reads at RRTMG's 140
+    # microns and logs the ice the cap cuts
+    assert 'MIN(t2(ix,1,kz), 200.E-6)' not in sed and sed.count('MIN(t2(ix,1,kz), 1.E-2)') == 1
+    driver = (e.FORTRAN / 'terluna_elec.F').read_text()
+    assert 'real, parameter :: rmax = 140.0e-6' in driver and 'wrei(i,k,j) = min(wrei(i,k,j), rmax)' in driver
+    assert "call open_log('terluna_ice_optics.txt', unit)" in driver
 
 
 def test_branched_lightning_runs_on_one_process_and_reports_to_its_unit():
@@ -121,17 +127,21 @@ def test_fall_speeds_scale_only_where_each_particle_is_present_and_not_at_earth_
 def test_an_electrified_case_takes_nssl_and_the_charge_tracers():
     hail = e.namelist_settings({})
     assert hail['param2'] == dict(ptype=27, iptra=1, npt=7, pdtra=0)
-    assert hail['param8'] == dict(var4=0.0, var5=0.0, var6=3.0, var7=12.0, var8=3.0, var9=0.0, var10=12000.0)
+    assert hail['param8'] == dict(var3=0.0, var4=0.0, var5=0.0, var6=3.0, var7=12.0, var8=3.0, var9=0.0, var10=12000.0)
     graupel = e.namelist_settings(dict(hail=False, ipelec=2, lightning=2, leakage=1, radius_m=6000.0))
     assert graupel['param2'] == dict(ptype=26, iptra=1, npt=6, pdtra=0)
-    assert graupel['param8'] == dict(var4=0.0, var5=0.0, var6=2.0, var7=12.0, var8=2.0, var9=1.0, var10=6000.0)
+    assert graupel['param8'] == dict(var3=0.0, var4=0.0, var5=0.0, var6=2.0, var7=12.0, var8=2.0, var9=1.0,
+                                     var10=6000.0)
+    assert e.namelist_settings(dict(screen=1, isaund=11))['param8']['var3'] == 1.0
     moon = e.namelist_settings(e.LUNAR)
     assert moon['param8']['var4'] == 5000.0 and moon['param8']['var5'] == 6.8 and moon['param8']['var8'] == 3.0
 
 
-def test_leakage_writes_the_conductivity_by_height(tmp_path):
+def test_leakage_and_lunar_screening_write_the_conductivity_by_height(tmp_path):
     if not e.CONDUCTIVITY.exists():
         pytest.skip('the conductivity product is missing')
+    assert 'conductivity' in e.run_files(tmp_path, dict(screen=2), ' &param0\n /\n')[1]
+    assert 'conductivity' not in e.run_files(tmp_path, dict(screen=1), ' &param0\n /\n')[1]
     text, record = e.run_files(tmp_path, dict(leakage=1), ' &param0\n /\n')
     assert text == ' &param0\n /\n' and record['conductivity']['cloud'] == '0.1_g_m3'
     lines = (tmp_path / 'terluna_conductivity.txt').read_text().splitlines()

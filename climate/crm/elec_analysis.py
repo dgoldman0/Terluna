@@ -41,6 +41,8 @@ FLASH_COLUMNS = ('time_s', 'step', 'substep', 'kind', 'x_m', 'y_m', 'z_m', 'e_v_
 FIELD_COLUMNS = ('time_s', 'step', 'e_max_v_m', 'x_m', 'y_m', 'z_m', 'positive_c', 'negative_c', 'energy_j',
                  'noninductive_max_c_m3_s', 'inductive_max_c_m3_s')
 KINDS = {1: 'in_cloud', 2: 'negative_to_ground', 3: 'positive_to_ground', 9: 'cylinders'}
+# the cloud ice the radiation reads with its size capped at 140 microns (terluna_ice_optics.txt, runs with radiation)
+ICE_COLUMNS = ('time_s', 'step', 'ice_kg', 'ice_above_140um_kg', 'mean_radius_above_um', 'max_radius_um', 'cells_above')
 # WRF-ELEC's charging totals (module_mp_nssl_2mom.F, its driver): negative and positive parts of the domain's charging
 # rate, C/s, by the collisions that separate it
 CHARGING = {'ctghi': 'graupel and hail with cloud ice', 'ctghs': 'graupel and hail with snow',
@@ -188,6 +190,23 @@ def binned(times: np.ndarray, values: np.ndarray, edges: np.ndarray, how: str = 
     return out
 
 
+def ice_cap_summary(ice: dict) -> dict | None:
+    """The ice the 140-micron cap cuts from the radiation's view: the share of the domain's cloud ice above it (largest,
+    and over all logged steps by mass), the mass-weighted size of that ice and the largest size where ice is 0.001
+    g/kg or more. For the radiation and cloud-optics work: that ice reaches the radiation optically thicker than its
+    size gives, by its size over 140 microns."""
+    if not ice['time_s'].size or not np.any(ice['ice_kg'] > 0.0):
+        return None
+    has = ice['ice_kg'] > 0.0
+    above = ice['ice_above_140um_kg']
+    return dict(rows=int(has.sum()), share_above_max=float(np.max(above[has] / ice['ice_kg'][has])),
+                share_above_overall=float(above.sum() / ice['ice_kg'].sum()),
+                mean_radius_above_um=float(np.sum(above * ice['mean_radius_above_um']) / above.sum())
+                if above.sum() > 0 else None,
+                max_radius_um=float(ice['max_radius_um'].max()), optical_depth_overstated=(
+                    float(np.sum(above * ice['mean_radius_above_um']) / above.sum() / 140.0) if above.sum() > 0 else None))
+
+
 def flash_summary(f: dict, edges: np.ndarray) -> dict:
     """Flashes of one kind: how many and when, the charge each neutralized, the energy it released, where it started
     and how far its channels reached, and the nitrogen oxides it made."""
@@ -218,6 +237,7 @@ def analyse(name: str) -> dict:
           else np.concatenate([[0.0], 1000.0 * (zh[:-1] + zh[1:]) / 2.0, [1000.0 * (2 * zh[-1] - (zh[-1] + zh[-2]) / 2.0)]]))
     flashes = read_log(case / 'terluna_flashes.txt', FLASH_COLUMNS)
     field = read_log(case / 'terluna_field.txt', FIELD_COLUMNS)
+    ice = read_log(case / 'terluna_ice_optics.txt', ICE_COLUMNS)
     rates = charging(case)
     end = float(max(field['time_s'].max() if field['time_s'].size else 0.0,
                     rates['time_s'].max() if rates['time_s'].size else 0.0))
@@ -275,7 +295,7 @@ def analyse(name: str) -> dict:
         producer=dict(domain='climate', files={'crm/elec_analysis.py': hashlib.sha256(
             Path(__file__).read_bytes()).hexdigest()[:16]}),
         evidence=EVIDENCE, reading_rule=READING_RULE, end_s=end, bin_s=BIN_S,
-        lightning=lightning, field=fields, charging=separated, structure=structures)
+        lightning=lightning, field=fields, charging=separated, structure=structures, ice_cap=ice_cap_summary(ice))
 
 
 def against(name: str, other: str) -> dict:

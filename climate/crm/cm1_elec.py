@@ -11,11 +11,11 @@ under the WRF notice), drops the module in for CM1's module_mp_nssl_2mom.F, and 
 (i,j,k) to WRF's (i,k,j), keeps the charges in CM1's passive tracers, and, as WRF-ELEC's own driver does, runs the
 sedimentation in sub-steps, each followed by the field and lightning; terluna_lightning.F solves Poisson's equation by
 FFT and carries WRF-ELEC's cylindrical discharge (light1d); terluna_branched.F runs one flash of the branched scheme
-(lightmsz) on a domain that wraps around. Settings are in the header of terluna_elec.F; CM1 passes var6 and var7 to the
-module's set-up as the charging switch and law.
+(lightmsz) on a domain that wraps around; terluna_screen.F ports WRF-ELEC's screening layers at cloud edges. Settings
+are in the header of terluna_elec.F; CM1 passes var6 and var7 to the module's set-up as the charging switch and law.
 
 Not carried: CM1's own water budget from the NSSL scheme (the condensation, evaporation and rain totals CM1's copy adds
-to qbudget), three-moment arrays, activated CCN and IN, terrain under the field solver, and WRF-ELEC's screening layers.
+to qbudget), three-moment arrays, activated CCN and IN, and terrain under the field solver.
 """
 from __future__ import annotations
 import hashlib
@@ -119,10 +119,11 @@ TAKAHASHI = REPO / 'atmosphere' / 'electricity' / 'inputs' / 'takahashi.txt'
 # Brooks's critical rime accretion rate) and inductive charging, its branched lightning (lightning 3; 1 for its
 # cylinders, 2 and 4 for those two with the breakdown field unbounded), its breakdown field and its 0.75-s sub-step
 # (substep_s 0), its ground-strike rule (ground_m 0: a downward channel reaching air warmer than -7 C), no leakage, and
-# the NSSL scheme with hail. Leakage takes the Moon's conductivity at solar minimum, for 100 aerosol particles per cm3
-# in clear air and 0.1 g/m3 of cloud water in cloud (atmosphere/electricity/conductivity.py).
+# the NSSL scheme with hail, and no screening layers (screen 1 for WRF-ELEC's, with Earth's conductivity; 2 with the
+# conductivity below). Leakage and screening take the Moon's conductivity at solar minimum, for 100 aerosol particles
+# per cm3 in clear air and 0.1 g/m3 of cloud water in cloud (atmosphere/electricity/conductivity.py).
 SETTINGS = dict(ipelec=3, isaund=12, lightning=3, leakage=0, radius_m=12000.0, hail=True, substep_s=0.0, ground_m=0.0,
-                conductivity=dict(sun='solar_minimum', clear_air='100_per_cm3', cloud='0.1_g_m3'))
+                screen=0, conductivity=dict(sun='solar_minimum', clear_air='100_per_cm3', cloud='0.1_g_m3'))
 # The lunar boxes. WRF-ELEC's 0.75-s sub-step lets graupel settle through about 1 % of the 500-m layers of its supercell
 # in each; in the boxes' charging zone (25-35 km) the layers are 2 km deep and graupel falls at 0.44 of Earth's speed,
 # so 0.75 x 4 / 0.44 = 6.8 s keeps that share. WRF-ELEC's ground-strike rule stands about 5 km above Earth's ground; on
@@ -138,6 +139,7 @@ def sources(home: Path) -> dict:
             'terluna_mlint2.F': lambda: mlint2(fetch_boxmg(home).read_text(encoding='latin-1')),
             'terluna_lightning.F': lambda: (FORTRAN / 'terluna_lightning.F').read_text(),
             'terluna_branched.F': lambda: (FORTRAN / 'terluna_branched.F').read_text(),
+            'terluna_screen.F': lambda: (FORTRAN / 'terluna_screen.F').read_text(),
             'terluna_elec.F': lambda: (FORTRAN / 'terluna_elec.F').read_text()}
 
 
@@ -146,7 +148,8 @@ def namelist_settings(elec: dict) -> dict:
     CM1's passive tracers without its positivity limiter, and the settings terluna_elec.F reads."""
     e = dict(SETTINGS, **elec)
     return {'param2': dict(ptype=27 if e['hail'] else 26, iptra=1, npt=7 if e['hail'] else 6, pdtra=0),
-            'param8': dict(var4=float(e['ground_m']), var5=float(e['substep_s']), var6=float(e['ipelec']),
+            'param8': dict(var3=float(e['screen']), var4=float(e['ground_m']), var5=float(e['substep_s']),
+                           var6=float(e['ipelec']),
                            var7=float(e['isaund']), var8=float(e['lightning']), var9=float(e['leakage']),
                            var10=float(e['radius_m']))}
 
@@ -163,7 +166,7 @@ def run_files(case: Path, elec: dict, namelist: str) -> tuple:
         shutil.copyfile(TAKAHASHI, case / 'takahashi.txt')
         namelist = namelist.rstrip('\n') + '\n\n &nssl_mp_params\n nonigrd = -1,\n /\n'
         record['takahashi'] = hashlib.sha256(TAKAHASHI.read_bytes()).hexdigest()[:16]
-    if e['leakage']:
+    if e['leakage'] or e['screen'] == 2:
         import json
         product = json.loads(CONDUCTIVITY.read_text())
         choice = e['conductivity']
@@ -268,6 +271,12 @@ MODULE_PATCH = ('module_mp_nssl_2mom.F', 'Terluna: WRF-ELEC NSSL module in CM1',
     (SED_OMP_ANCHOR, SED_OMP_ANCHOR.replace('     DO jy = jts,jye\n', SED_OMP_DIRECTIVE + '     DO jy = jts,jye\n'),
      1),
     (SED_PRINT, SED_PRINT.replace('ipelec > 0 ) THEN !{', 'ipelec > 0 .and. lastlooptmp ) THEN !{ ! Terluna'), 1),
+    # the sedimentation driver sets the effective radii radiation reads once the sub-steps run; it hands cloud ice's on
+    # whole (its 200-micron bound lifted), and terluna_elec.F caps it at RRTMG's 140 microns and logs what it cuts
+    ('             re_ice(ix,kz,jy)   = MAX(10.01E-6, MIN(t2(ix,1,kz), 200.E-6))\n',
+     '             re_ice(ix,kz,jy)   = MAX(10.01E-6, MIN(t2(ix,1,kz), 1.E-2)) ! Terluna: capped in terluna_elec.F\n', 1),
+    ('             IF ( .not. present(qi) ) re_ice(ix,kz,jy)  = MAX(10.E-6, MIN(t3(ix,1,kz), 200.E-6))\n',
+     '             IF ( .not. present(qi) ) re_ice(ix,kz,jy)  = MAX(10.E-6, MIN(t3(ix,1,kz), 1.E-2)) ! Terluna\n', 1),
 ])
 
 # WRF-ELEC's branched lightning on one process: WRF-ELEC runs it only under MPI, where a few lines outside its MPI
@@ -372,7 +381,7 @@ INIT3D_PATCH = ('init3d.F', 'Terluna: the tracers carry charge', [
 MAKEFILE_PATCH = ('Makefile', 'Terluna: electrified NSSL', [
     ('\tmodule_mp_nssl_2mom.F \\\n',
      '\tmodule_mp_nssl_2mom.F \\\n\tterluna_lightning.F \\\n\tterluna_mlint2.F \\\n\tmodule_discharge_msz.F \\\n'
-     '\tterluna_branched.F \\\n\tterluna_elec.F \\\n', 1),
+     '\tterluna_branched.F \\\n\tterluna_screen.F \\\n\tterluna_elec.F \\\n', 1),
     ('mp_driver.o: constants.o input.o misclibs.o', 'mp_driver.o: terluna_elec.o constants.o input.o misclibs.o', 1),
     ('poiss.o: input.o singleton.o\n',
      'poiss.o: input.o singleton.o\n'
@@ -380,7 +389,7 @@ MAKEFILE_PATCH = ('Makefile', 'Terluna: electrified NSSL', [
      'terluna_lightning.o: singleton.o\n'
      'module_discharge_msz.o: terluna_lightning.o\n'
      'terluna_branched.o: module_discharge_msz.o terluna_lightning.o\n'
-     'terluna_elec.o: input.o constants.o module_mp_nssl_2mom.o terluna_lightning.o terluna_branched.o\n'
+     'terluna_elec.o: input.o constants.o module_mp_nssl_2mom.o terluna_lightning.o terluna_branched.o terluna_screen.o\n'
      'cm1.o: terluna_elec.o\n', 1),
 ])
 

@@ -9,16 +9,19 @@
 ! With charging on it follows WRF-ELEC's own driver (include_microphysics_driver_elec.F): the microphysics runs without
 ! sedimentation, and the step's sedimentation then runs in sub-steps (WRF-ELEC's 0.75 s, or var5), each followed by
 ! the electric field of the net charge (terluna_lightning) and lightning, so a discharge acts as the field reaches
-! breakdown. Leakage, where asked, follows once a step, and the last field's vertical component is kept for the next
-! step's inductive charging.
+! breakdown. Screening layers and leakage, where asked, follow once a step, and the last field's vertical component is
+! kept for the next step's inductive charging.
 !
 ! Settings from CM1's namelist (param8):
+!   var3  screening layers at cloud edges (WRF-ELEC's iscreen, terluna_screen.F): 0 none; 1 with WRF-ELEC's Earth
+!         clear-air conductivity and a tenth of it in cloud; 2 with both by height from terluna_conductivity.txt
 !   var4  for branched lightning, the height (m) below which a downward channel counts as reaching the ground; zero or
 !         less for WRF-ELEC's rule, air warmer than 266.16 K
 !   var5  the sub-step (s) for sedimentation and lightning; WRF-ELEC's 0.75 s if zero
 !   var6  ipelec: 0 off, 2 non-inductive charging, 3 with inductive charging
 !   var7  isaund, the non-inductive charging law: 12 Saunders and Peck with Brooks's critical rime accretion rate, as
-!         WRF-ELEC's default; 1 Takahashi (with nonigrd = -1 in &nssl_mp_params and takahashi.txt in the run folder)
+!         WRF-ELEC's default; 11 the same law with a smooth critical rate and charging below -32.5 C, as WRF-ELEC's
+!         test case; 1 Takahashi (with nonigrd = -1 in &nssl_mp_params and takahashi.txt in the run folder)
 !   var8  lightning: 0 none; 1 WRF-ELEC's cylinders (light1d) and 3 its branched scheme (lightmsz), with its breakdown
 !         field (nssl_ibrkd = 4: 284 kV/m times air density over 1.225 kg/m3, within 50-180 kV/m); 2 and 4 the same
 !         with the breakdown field unbounded
@@ -27,7 +30,8 @@
 !   var10 cylinder radius (m); 12 km if zero
 ! Each discharge or flash is logged to terluna_flashes.txt and lightmsz's own report on the first 2000 flashes of a
 ! run to terluna_msz.log; every ten steps terluna_field.txt takes the largest field, the domain's charge and
-! electrostatic energy and the largest charging rates.
+! electrostatic energy and the largest charging rates. The cloud ice size the radiation reads is capped at 140
+! microns, where RRTMG's ice optics end, and terluna_ice_optics.txt logs the ice the cap cuts.
 !-----------------------------------------------------------------------------------------------------------------------
 module terluna_elec_module
   implicit none
@@ -60,12 +64,13 @@ contains
                                dx, dy, re_cloud, re_ice, re_snow, has_reqc, has_reqi, has_reqs, diagflag,               &
                                ids, ide, jds, jde, kds, kde, ims, ime, jms, jme, kms, kme, its, ite, jts, jte, kts, kte,  &
                                pt3d, mtime)
-    use input, only : ibp, iep, jbp, jep, kbp, kep, npt, var4, var5, var6, var8, var9, var10, nssl_3moment
+    use input, only : ibp, iep, jbp, jep, kbp, kep, npt, var3, var4, var5, var6, var8, var9, var10, nssl_3moment
     use index_module, only : lhl, lvh, lvhl, lccna, lcina
     use module_mp_nssl_2mom, only : nssl_2mom_driver, nssl_2mom_sed_driver
     use module_boxmgsetup, only : terluna_ebrk_lo, terluna_ebrk_hi
     use terluna_lightning, only : potential, field, energy, breakdown_field, discharge, eps0
     use terluna_branched, only : branched_flash, flash_record
+    use terluna_screen, only : screen, earth_air_conductivity
     integer, intent(in) :: ids, ide, jds, jde, kds, kde, ims, ime, jms, jme, kms, kme, its, ite, jts, jte, kts, kte
     integer, intent(in) :: itimestep
     real, intent(in) :: dtp
@@ -87,7 +92,7 @@ contains
     real, allocatable, dimension(:,:,:), save :: q, phi, ex, ey, ez, emag, ebrk, dep, rho3, prs3, tk3, cld3
     integer, allocatable, dimension(:,:,:), save :: used
     real, allocatable, dimension(:), save :: zh1, zf1, dz1
-    integer :: ipelec, nchg, ilight, ileak, nsub, isub, ni, nj, nk, seed, k
+    integer :: ipelec, nchg, ilight, ileak, iscreen, nsub, isub, ni, nj, nk, seed, k
     real :: dts, radius, time0
     logical :: elec, hail, diag
     logical, save :: checked = .false.
@@ -104,6 +109,7 @@ contains
     nk = kte - kts + 1
     ilight = nint(var8)
     ileak = nint(var9)
+    iscreen = nint(var3)
     radius = var10
     if( radius .le. 0.0 ) radius = 12000.0
     if( .not. checked )then
@@ -115,11 +121,13 @@ contains
       if( elec .and. ( ibp .ne. ims .or. iep .ne. ime .or. jbp .ne. jms .or. jep .ne. jme .or. kbp .ne. kms .or.    &
                        kep .ne. kme ) ) stop 'Terluna: the passive tracers must span the model arrays'
       if( elec .and. ( ilight .lt. 0 .or. ilight .gt. 4 ) ) stop 'Terluna: var8 (lightning) takes 0 to 4'
+      if( elec .and. ( iscreen .lt. 0 .or. iscreen .gt. 2 ) ) stop 'Terluna: var3 (screening layers) takes 0 to 2'
       if( ilight .eq. 2 .or. ilight .eq. 4 )then
         terluna_ebrk_lo = 0.0
         terluna_ebrk_hi = 1.0e30
       endif
-      print *,'Terluna: WRF-ELEC NSSL driver, ipelec = ',ipelec,', charge tracers = ',nchg,', lightning = ',ilight
+      print *,'Terluna: WRF-ELEC NSSL driver, ipelec = ',ipelec,', charge tracers = ',nchg,', lightning = ',ilight,  &
+              ', screening = ',iscreen
     endif
 
     call load(th, wth, .true.)
@@ -225,12 +233,14 @@ contains
         if( ilight .ge. 1 ) call lightning(time0 + isub*dts, isub)
       enddo
       RAINNCV(its:ite,jts:jte) = RAINNC(its:ite,jts:jte)   ! the step's precipitation (CM1 zeroes RAINNC before the call)
+      if( iscreen .ge. 1 ) call screening(dtp)              ! once a step, after the sub-steps, as in WRF-ELEC
       if( ileak .eq. 1 )then
         call leakage(dtp)
         call fields()
       endif
       call save_ez()
       if( mod(itimestep, 10) .eq. 0 ) call log_field(time0 + dtp, itimestep)
+      if( allocated(wrei) ) call cap_ice_size(time0 + dtp, itimestep)
     endif
 
     call store(th, wth)
@@ -364,6 +374,69 @@ contains
       call potential(ni, nj, nk, dx, dy, zh1, zf1, q, phi)
       call field(ni, nj, nk, dx, dy, zh1, zf1, phi, ex, ey, ez, emag)
     end subroutine fields
+
+    subroutine cap_ice_size(time, nstep)
+      ! RRTMG's ice optics end at 140 microns (CM1's Morrison caps its cloud ice there too), so the cloud ice size the
+      ! radiation reads is capped there. Lunar ice grows past it, and every ten steps terluna_ice_optics.txt logs the
+      ! ice the cap cuts, which the radiation treats as optically thicker than its size gives
+      real, intent(in) :: time
+      integer, intent(in) :: nstep
+      real, parameter :: rmax = 140.0e-6
+      double precision :: dm, mass, cut, cutr
+      real :: rbig
+      integer :: i, j, k, n, unit
+      mass = 0.0d0
+      cut = 0.0d0
+      cutr = 0.0d0
+      rbig = 0.0
+      n = 0
+      do j = jts,jte
+        do k = kts,kte
+          do i = its,ite
+            if( wqi(i,k,j) .gt. 0.0 )then
+              dm = dble(wqi(i,k,j))*wdn(i,k,j)*dx*dy*wdz(i,k,j)
+              mass = mass + dm
+              if( wrei(i,k,j) .gt. rmax )then
+                cut = cut + dm
+                cutr = cutr + dm*wrei(i,k,j)
+                n = n + 1
+                if( wqi(i,k,j) .ge. 1.0e-6 ) rbig = max(rbig, wrei(i,k,j))
+              endif
+            endif
+            wrei(i,k,j) = min(wrei(i,k,j), rmax)
+          enddo
+        enddo
+      enddo
+      if( mod(nstep, 10) .ne. 0 ) return
+      call open_log('terluna_ice_optics.txt', unit)
+      write(unit,'(f13.1,i9,2es12.4,2f9.1,i8)') time, nstep, mass, cut, 1.0e6*cutr/max(cut, 1.0d-30), 1.0e6*rbig, n
+      close(unit)
+    end subroutine cap_ice_size
+
+    subroutine screening(dt)
+      ! WRF-ELEC's screening layers from the field of the step's last solve: Earth's clear-air conductivity and a tenth
+      ! of it in cloud (var3 = 1), or both by height from terluna_conductivity.txt (var3 = 2)
+      real, intent(in) :: dt
+      real, dimension(nk) :: sa, sc
+      double precision :: qp, qn
+      integer :: k
+      if( iscreen .eq. 1 )then
+        do k = 1,nk
+          sa(k) = earth_air_conductivity(zh1(k))
+          sc(k) = 0.1*sa(k)
+        enddo
+      else
+        call read_conductivity()
+        do k = 1,nk
+          sa(k) = interp(zh1(k), sigclear)
+          sc(k) = interp(zh1(k), sigcloud)
+        enddo
+      endif
+      call screen(ni, nj, nk, dx, dy, zh1, zf1, dt, phi, cld3, q, sa, sc, dep, qp, qn)
+      call to_ions(dep)
+      if( mod(itimestep, 10) .eq. 0 ) print '(a,i9,2es12.4)', ' Terluna: screening charge this step (C):',       &
+                                             itimestep, qp, qn
+    end subroutine screening
 
     subroutine to_ions(add)
       ! charge handed to the small ions (C/m3 on CM1's order) into their tracer (C/kg) and into the net charge
@@ -615,6 +688,13 @@ contains
       write(unit,'(a)') '# time_s step substep kind x_m y_m z_m e_V_m e_break_V_m e_over_break_max extent_m2 '//    &
                         'regions positive_C negative_C energy_before_J energy_after_J z_low_m z_high_m points nox_mol'
       write(unit,'(a)') '# kind: 1 in cloud, 2 negative and 3 positive charge to ground (branched); 9 cylinders'
+    elseif( name .eq. 'terluna_ice_optics.txt' )then
+      write(unit,'(a)') '# Cloud ice reaches the radiation (RRTMG) with its effective radius capped at 140 microns, '//  &
+                        'where RRTMG''s ice optics end, as CM1''s Morrison caps it.'
+      write(unit,'(a)') '# For the radiation and cloud-optics work: the ice above the cap is treated as optically '//    &
+                        'thicker than its size gives, by its radius over 140 microns.'
+      write(unit,'(a)') '# Every ten steps: time_s step ice_kg ice_above_140um_kg mean_radius_above_um '//                &
+                        'max_radius_um (where ice is 0.001 g/kg or more) cells_above'
     else
       write(unit,'(a)') '# time_s step e_max_V_m x_m y_m z_m positive_C negative_C energy_J '//                     &
                         'noninductive_max_C_m3_s inductive_max_C_m3_s'
@@ -629,6 +709,9 @@ contains
     write(unit,'(a,f13.1)') '# run from ', time
     close(unit)
     call open_log('terluna_field.txt', unit)
+    write(unit,'(a,f13.1)') '# run from ', time
+    close(unit)
+    call open_log('terluna_ice_optics.txt', unit)
     write(unit,'(a,f13.1)') '# run from ', time
     close(unit)
   end subroutine mark_start

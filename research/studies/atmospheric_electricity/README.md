@@ -194,15 +194,17 @@ WRF-ELEC's driver does, it runs the sedimentation in sub-steps, each followed by
 a solve for the field and by lightning: WRF-ELEC's branched flashes
 (MacGorman, Straka and Ziegler 2001 [S27]), in cloud and to ground, with the
 charge each neutralizes, its channels and the nitrogen oxides it makes, or its
-cylinders. Leakage through stage 1's conductivity is a switch. The scheme's fall
-speeds take lunar gravity as Morrison's do.
+cylinders. Leakage through stage 1's conductivity and WRF-ELEC's screening
+layers at cloud edges are switches. The scheme's fall speeds take lunar gravity as
+Morrison's do.
 
 1. The builds, their checks (the field solver and the lightning against numpy
    and against charge laid out by hand, the results against the number of
    threads and across restarts) and an Earth benchmark storm, CM1's own
    supercell, compared with published runs of the same charging and lightning
    schemes ([S7], [S16], [S26]–[S30]; below). Done on 2026-10-03, and again on
-   2026-10-04 with the sub-steps and the branched flashes.
+   2026-10-04 with the sub-steps and the branched flashes, at 2 km and in WRF-ELEC's
+   own test settings.
 2. `box_0e_elec`: `box_0e`'s inputs as written, with the NSSL microphysics,
    charging and branched lightning from the start, over two lunar days with
    three-hourly output and twelve-hourly restarts. Its sub-steps are 6.8 s,

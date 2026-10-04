@@ -39,6 +39,20 @@ def test_flashes_are_summed_by_kind_and_the_field_is_read_before_each_sub_step_s
     assert list(first) == [True, False, True, True]
 
 
+def test_the_ice_above_the_radiation_s_cap_is_summed_by_mass(tmp_path):
+    log = tmp_path / 'terluna_ice_optics.txt'
+    log.write_text('# header\n# run from 0.0\n'
+                   '800.0 10 0.0 0.0 0.0 0.0 0\n'
+                   '1600.0 20 1.0e6 0.0 0.0 0.0 0\n'
+                   '2400.0 30 2.0e6 5.0e5 175.0 190.0 12\n'
+                   '3200.0 40 1.0e6 5.0e5 154.0 160.0 4\n')
+    s = ea.ice_cap_summary(ea.read_log(log, ea.ICE_COLUMNS))
+    assert s['rows'] == 3 and s['share_above_max'] == pytest.approx(0.5) and s['share_above_overall'] == pytest.approx(0.25)
+    assert s['mean_radius_above_um'] == pytest.approx(164.5) and s['max_radius_um'] == 190.0
+    assert s['optical_depth_overstated'] == pytest.approx(164.5 / 140.0)
+    assert ea.ice_cap_summary(ea.read_log(tmp_path / 'missing.txt', ea.ICE_COLUMNS)) is None
+
+
 def test_charging_totals_go_to_the_step_whose_time_line_follows_them(tmp_path):
     block = ('Integrated pos/neg charging rates:\n'
              'ctswin,ctswip = -1.00000E-02,  2.00000E-02\n'

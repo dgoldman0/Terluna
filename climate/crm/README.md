@@ -1145,7 +1145,7 @@ separates when graupel or hail rebounds from cloud ice or snow (non-inductive
 charging; by default Saunders and Peck's law with Brooks et al.'s critical rime
 accretion rate above −15 °C and none below −32.5 °C, WRF-ELEC's `isaund = 12`)
 and when cloud droplets rebound from graupel polarised by the field (inductive
-charging). The small ions' net charge attaches to the particles. Three Terluna
+charging). The small ions' net charge attaches to the particles. Four Terluna
 files in [fortran/](fortran/) and two of WRF-ELEC's complete it:
 
 - [terluna_elec.F](fortran/terluna_elec.F) passes CM1's calls of the scheme to
@@ -1200,6 +1200,20 @@ files in [fortran/](fortran/) and two of WRF-ELEC's complete it:
   oxides to the domain. The patch to `lightmsz` replaces its few MPI calls
   outside its MPI blocks, takes the breakdown field's bounds from the build,
   recomputes that field at each call and sends its report to its own log.
+- [terluna_screen.F](fortran/terluna_screen.F) ports WRF-ELEC's screening
+  layers (`screen`; Ziegler et al. 1991), off unless a case asks for them.
+  Clear air conducts better than cloud, so where cloud meets clear air the
+  current the field drives into the edge does not match the current leaving it,
+  and charge gathers there. Once a step, at each cloud point with cloud on one
+  side and clear air beyond it on the other (along x, y or z), it takes the
+  field normal to the edge inside and outside and gives the small ions the
+  charge the two conduction currents leave in a step, capped at 0.25 nC/m³ of
+  net charge there. The conductivity is WRF-ELEC's table of Earth's clear air
+  with a tenth of it in cloud, or the clear air and cloud of
+  [atmosphere/electricity](../../atmosphere/electricity/README.md) by height.
+  Its vertical differences take the distances between CM1's scalar levels,
+  where WRF-ELEC takes the depth of the layer below; the two agree on an even
+  grid.
 
 Lunar gravity enters the scheme as it enters Morrison's: the module's gravity is
 the build's, the drag-law fall speeds (graupel and hail under drag laws, cloud
@@ -1241,11 +1255,15 @@ scaling fault. Restarted from its restart at 30 minutes, on 4 threads and on 2,
 the benchmark storm below repeats its first run's output fields at 35 and 40
 minutes and its 41 flashes in between bit for bit.
 
-A case sets the electricity in CM1's namelist: `var4` the height a downward
+A case sets the electricity in CM1's namelist: `var3` the screening layers (0
+none, 1 with WRF-ELEC's Earth conductivity, 2 with the conductivity file),
+`var4` the height a downward
 channel must reach to strike the ground (m; 0 for WRF-ELEC's −7 °C rule),
 `var5` the sub-step (s; 0 for WRF-ELEC's 0.75 s), `var6` the charging (2
 non-inductive, 3 with inductive), `var7` the charging law (12 Saunders and
-Peck, 1 Takahashi), `var8` the lightning (0 none, 1 cylinders, 3 branched; 2
+Peck, cut off below −32.5 °C; 11 the same law as WRF-ELEC's test case sets it,
+with a smooth critical rime accretion rate and charging below −32.5 °C; 1
+Takahashi), `var8` the lightning (0 none, 1 cylinders, 3 branched; 2
 and 4 the same with the breakdown field's scaling unbounded), `var9` leakage
 through the conductivity of
 [atmosphere/electricity](../../atmosphere/electricity/README.md) and `var10`
@@ -1265,16 +1283,18 @@ the snapshots.
 The build leaves out CM1's own water budget from the NSSL scheme (the
 condensation, evaporation and rain totals CM1's copy adds to its budget
 output), the three-moment option, the activated CCN and IN arrays, terrain under
-the field solver, WRF-ELEC's screening layers and `lightmsz`'s horizontal steps
-of the starting channel, which WRF-ELEC leaves off as well. Charge leaves the
-air by lightning to the ground, by falling to the ground on rain and hail, and,
-where a case turns it on, by leakage, which relaxes the net charge at σ/ε₀ with
-the conductivity of clear air or of cloud by height and leaves out the
-screening layers that conductivity gradients build at cloud edges.
+the field solver and `lightmsz`'s horizontal steps of the starting channel, which
+WRF-ELEC leaves off as well. Charge leaves the air by lightning to the ground, by
+falling to the ground on rain and hail, and, where a case turns it on, by
+leakage, which relaxes the net charge at σ/ε₀ with the conductivity of clear air
+or of cloud by height; the screening layers that conductivity gradients build at
+cloud edges come with `var3`.
 
-The solver and the lightning are checked against numpy and against charge laid
-out by hand ([test_cm1_elec_field.py](../tests/test_cm1_elec_field.py),
-[test_cm1_elec_branched.py](../tests/test_cm1_elec_branched.py)). The
+The solver, the lightning and the screening are checked against numpy and
+against charge laid out by hand
+([test_cm1_elec_field.py](../tests/test_cm1_elec_field.py),
+[test_cm1_elec_branched.py](../tests/test_cm1_elec_branched.py),
+[test_cm1_elec_screen.py](../tests/test_cm1_elec_screen.py)). The
 potential matches a direct solve of the same difference equations on stretched
 levels to one part in 10⁵, and the exact potential of a charged layer between
 grounded plates to one part in 10³. A cylinder call removes the charge
@@ -1286,7 +1306,10 @@ no starting point is left; a channel that runs down through a strong lower
 positive region strikes the ground with negative charge, the same storm with
 every charge reversed strikes with the same amount of positive charge, and
 moving the ground-strike height from 3 to 5 km turns that flash from one in
-cloud to one to ground.
+cloud to one to ground. In an upward field a block of cloud gathers negative
+screening charge on its top and positive on its base, each as the formula
+gives it, none inside it, in clear air or on sides the field runs along, never
+past the cap, and edges across the domain's wrap gather it too.
 
 ### The benchmark storm
 
@@ -1376,6 +1399,27 @@ cylinder around every point above breakdown, through the whole column, so its
 charge and energy stand for several flashes together, and its counts follow the
 trends of a storm's lightning (Fierro et al. 2013).
 
+At the fine box's 2-km spacing (`supercell_elec_2km`, the same storm on a grid
+twice as coarse, [elec_supercell_elec_2km.json](../results/crm/elec_supercell_elec_2km.json))
+the scheme keeps its onset and rates: the first flash at 30 minutes, up to 125
+flashes a minute and 90 a minute through the second hour (153 and 111 at 1
+km), a median 15 C per flash over a median 44 km² (9.4 C and 27 km² at 1 km).
+The field builds further past breakdown in places. Before a sub-step's first
+flash it stands a median 1.22 times breakdown, as at 1 km, but 2.2 times at the
+90th percentile (1.6 at 1 km), and it reached 680 kV/m at 9 km once (255 kV/m
+at 1 km). Each grid point starts at most one flash a step, as in WRF-ELEC, and a
+coarser grid holds fewer points in a charged volume; whether that holds the
+flashes back there is not yet checked.
+
+In WRF-ELEC's own test settings (`supercell_elec_wrf`, [elec_supercell_elec_wrf.json](../results/crm/elec_supercell_elec_wrf.json):
+its 2-km grid over 84 km, 800 CCN per cm³, Saunders and Peck's law as its test
+case sets it and the screening layers, run for two hours where WRF-ELEC's test
+runs one) the storm flashes about twice as often, up to 298 a minute, a median 18
+C per flash; its net charge reaches −19.6 nC/m³ and its field 620 kV/m. The
+screening layers add 2–20 C a step at cloud edges. No output of WRF-ELEC's own
+run of this case is at hand to set beside it. Neither 2-km storm strikes the
+ground in two hours.
+
 ```sh
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run build earth_g_omp_elec moon_omp_elec earth_g_omp
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup supercell_elec    # and supercell_elec_cylinders, supercell_nssl
@@ -1394,6 +1438,20 @@ restarts. It runs from 2026-10-04. A first start, before the sub-steps and the
 branched lightning, was stopped at day 4, before its storms had charged. Each
 restart keeps its vertical field (`terluna_ez_<time>.bin`), so windows of the
 storms can run again from it with frequent output.
+
+**Ice sizes in the radiation, a note for the radiation and cloud-optics work.**
+CM1's radiation (RRTMG) takes cloud ice sizes up to 140 µm, where its ice optics
+table ends, and stops beyond. Lunar ice falls slowly and grows larger: the box
+stopped at day 6.45, as its storms began, on ice of 157 µm. The electrified
+build caps the ice size the radiation reads at 140 µm, as CM1's Morrison scheme
+does in every earlier lunar run, and every ten steps `terluna_ice_optics.txt`
+logs the ice mass above the cap, its mean size and the largest size where ice
+reaches 0.001 g/kg. The capped ice reaches the radiation as optically thicker
+than its size gives, by its size over 140 µm: anvils of large crystals reflect
+too much sunlight by day and hold too much heat by night. Snow above 130 µm RRTMG
+handles itself, cutting its mass by (130 µm / size)². The microphysics and the
+electricity use the scheme's own sizes and do not see the cap. The box resumed
+from its day-6 restart with this build.
 
 ```sh
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_elec
