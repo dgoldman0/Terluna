@@ -171,5 +171,17 @@
     "study_tests_passed": 41,
     "make_check": "13 existing failures, 585 passed, 55 skipped; collected before the final product-invariant regression was added",
     "full_suite_later_targets": "make stops at the existing Python failures; earlier JavaScript and provenance statuses above belong to the preceding checkpoint"
+  },
+  "fleet_checkpoint": {
+    "status": "PILOT_COMPLETE_COVERAGE_UNACHIEVED",
+    "study_tests_passed": 49,
+    "make_check": "13 existing failures, 594 passed, 55 skipped",
+    "product": "results/fleet_checkpoint.json",
+    "report": "fleet.md",
+    "raw_trajectories": "576 distinct members in each of two populations; common epoch; 30 days",
+    "coverage": "Finite squares, 16 solar directions, six-hour dates; full-Sun area zero",
+    "collisions": "Conservative swept guards every 600 seconds; incompatible complete trajectories removed",
+    "beam_safety": "Earth and Moon exclusion cones including finite Sun, corners, motion and pointing allowance",
+    "collector_habitat_power": "Not included"
   }
 }
