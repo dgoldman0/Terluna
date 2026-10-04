@@ -57,3 +57,28 @@ def test_the_nearside_sea_loads_across_the_seam():
     assert sea["lon"][0] < 0 < sea["lon"][-1] and np.allclose(np.diff(sea["lon"]), 1.0)
     assert sea["wet"].sum() == 7053
     assert all(r["depth_m"] >= N.REFERENCE_DEPTH_M and r["offset_km"] < 150 for r in sea["references"])
+
+
+def test_time_above_matches_the_cycle_episode_count():
+    from climate.waves import nearside_analysis as A
+    from climate.waves.cycle import exceedance
+    rng = np.random.default_rng(5)
+    t = np.arange(60.0)
+    heights = np.abs(rng.normal(1.0, 0.7, size=(60, 12)))
+    for threshold in (0.5, 1.0, 2.0):
+        expected = [exceedance(t, heights[:, k], threshold)["hours"] for k in range(12)]
+        assert np.allclose(A.time_above(t, heights, threshold), expected)
+
+
+def test_coastal_normals_point_to_the_land():
+    from climate.waves import nearside_analysis as A
+    wet = np.zeros((6, 8), bool)
+    wet[1:5, 1:7] = True
+    wet[2:4, 6] = False          # a notch of land on the east side
+    nodes, normals = A.coastal_nodes(dict(wet=wet))
+    rows, cols = np.nonzero(wet)
+    lookup = {(r, c): n for r, c, n in zip(rows[nodes], cols[nodes], normals)}
+    assert np.allclose(lookup[(2, 5)], (1, 0))            # land to the east
+    assert np.allclose(lookup[(1, 3)], (0, -1))           # the southern edge (row 0 is south)
+    assert (3, 3) not in lookup                           # an interior node
+    assert np.allclose(np.hypot(*normals.T), 1)

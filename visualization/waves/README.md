@@ -120,3 +120,26 @@ Rock and assumed beach geometries carry separate labels.
 Both renderers verify the displayed arrays and write source, renderer and
 image hashes beside the ignored figures. The domain products own the
 calculations and the finite-record interpretation of the run-up percentiles.
+
+## The nearside sea and the monthly tide
+
+`python -m visualization.waves.nearside` draws the seas as seen from Earth, in
+the atlas sheets' orthographic projection over their neutral shaded relief.
+The mapped quantity takes a one-hue orange ramp, since the atlas's blues mean
+depth. Each image has a sidecar with product and renderer hashes and
+round-trip checks of the drawn values.
+
+- `results/tides.png` reads the geography tide product: the typical monthly
+  tide range on the near side, the eastern limb (Smythii–Marginis and
+  Humboldtianum) and the far side, with contours every metre and the
+  product's stations. The tide grid is the atlas's quarter-degree nodes.
+- `results/nearside_waves.png` reads `climate/waves/results/nearside.json`:
+  the second cycle's mean significant wave height with the mean direction of
+  travel, the share of the cycle with Hs of at least 1 m, and the sea's
+  largest and area-mean heights through the cycle beside Smythii–Marginis.
+  The wave fields are computed on 1-degree nodes; the maps interpolate between
+  nodes inside the atlas's shoreline.
+- `results/nearside_coasts.png` shows the time-mean wave power travelling
+  toward each 1-degree coastal node, with the strongest coasts named.
+
+`python -m visualization.waves.nearside tides` draws the tide maps alone.
