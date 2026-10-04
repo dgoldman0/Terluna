@@ -12,9 +12,10 @@ is included as a comparison. The finite-Sun aperture margin is additional to
 the protected radius. The author confirmed that four radii is an acceptable
 primary target on 4 October 2026.
 
-The investigation is **paused at the author's request on 4 October 2026**.
-This report preserves the completed search, its failed gates and the work
-needed before resuming. No expanded search is running.
+The passive fleet search was checkpointed at the author's request on
+4 October 2026. The author subsequently resumed work on
+[active assistance](active.md), using separate 10 km tiles. This report
+preserves the original fleet search and its failed gates.
 
 ## Repair and checkpoints
 

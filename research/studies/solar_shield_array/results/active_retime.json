@@ -1,0 +1,469 @@
+{
+  "schema": "terluna.research.active-orbital-retiming/1",
+  "producer": {
+    "source_hashes": {
+      "protection/dynamics/cycling.py": "704fbd03c9d4070ea05bdfeba57914ec225941f3560710da2472bd24ca870ed4",
+      "protection/dynamics/ephemeris.py": "9a162c3acf63a844284eb61b444a7d34f1447b5182d254d3e87616516f8748d9",
+      "protection/dynamics/ephemeris.json": "90fde7cb6142e5d4d8082270a978ba2f8f47baaefab0e8d1cf82ec6f07a27222",
+      "protection/dynamics/model.py": "01c9191588037ab4f42bac38dc4d5bd99e57427d37fa75cd672120e32b53733a",
+      "protection/dynamics/optical.py": "06a13ae9f24834876edbc12b513deaa5e3735f02f8249eb57c8996d74ce00b56",
+      "research/studies/solar_shield_array/scenario.json": "a53b784941518b6e36ccdf728252cf6c8e0c46c1126b6c621ed4e28c23128699",
+      "research/studies/solar_shield_array/cycling_search.py": "4789a0185620f6662916462b2715aa9002e6454e74f4f32ef5f7dadf5f732093",
+      "research/studies/solar_shield_array/cycling_feedback.py": "0eb32d26e14472f0a512cdf45d60f00ab8260376cd51ca715e7615bf7df02775",
+      "protection/dynamics/fleet.py": "f3e52653876c2956a4b355dc1290a0a1cadd2b9b601cafc664259827df1cc93c",
+      "research/studies/solar_shield_array/fleet_run.py": "9b8bc9765b9288745ea7d4d69d59e857e76e54d29cc91b37160503e9d9090833",
+      "protection/dynamics/active_formation.py": "597c12c6a4a89c0ea70663fddd69b9b5d9e599c88a2bd1742f5009d19e050b7a",
+      "protection/dynamics/active_retime.py": "9ba27a7ec48460a345289ebc7550c502f845487beaec5fe35084a67b2d9d736b",
+      "research/studies/solar_shield_array/active_retime_run.py": "c56ee88d1c4d0b6034ef32b1dea24e4d1919451a8eb14555e701a8f6d7f7160d"
+    },
+    "constants": {
+      "AU": 149597870700.0,
+      "EARTH_GM": 398600441800000.0,
+      "EARTH_MOON_DISTANCE": 384400000.0,
+      "EARTH_OBLIQUITY_DEG": 23.4393,
+      "EARTH_RADIUS": 6371000.0,
+      "JULIAN_DAY": 86400.0,
+      "MOON_GM": 4902800118000.0,
+      "MOON_RADIUS": 1737400.0,
+      "SOLAR_CONSTANT": 1361.0,
+      "SOLAR_SYSTEM_GM": {
+        "mercury": 22031868551000.0,
+        "venus": 324858592000000.0,
+        "mars": 42828375816000.0,
+        "jupiter": 1.267127641e+17,
+        "saturn": 3.79405848418e+16,
+        "uranus": 5794556400000000.0,
+        "neptune": 6836527100580000.0,
+        "pluto": 975500000000.0
+      },
+      "SPEED_OF_LIGHT": 299792458.0,
+      "SUN_GM": 1.3271244004127942e+20,
+      "SUN_RADIUS": 695700000.0
+    }
+  },
+  "evidence": "Finite 10 km tile, actual ephemeris propagation and smooth electric-thrust arcs; endpoint compared with a same-date phase-rotated reference state",
+  "parameters": {
+    "days": [
+      3.0,
+      7.0
+    ],
+    "displacement_km": 1400.0,
+    "burn_hours": 6.0,
+    "arcs": 4,
+    "output": "active_retime.json"
+  },
+  "propulsion_assumptions": {
+    "exhaust_velocity_m_s": 30000,
+    "efficiency": 0.7,
+    "specific_power_W_kg": 300,
+    "cant_deg": 45,
+    "propellant_buffer_days": 7,
+    "peak_margin_factor": 1.25
+  },
+  "cases": {
+    "3.0": {
+      "days": 3.0,
+      "requested_phase_arc_m": 1400000.0,
+      "burn_hours": 6.0,
+      "arcs": 4,
+      "initial_state": [
+        12845526.613716662,
+        7105599.222007712,
+        3082678.3342574667,
+        295.2116392370203,
+        -449.2052902034173,
+        -194.72554149945225
+      ],
+      "same_date_reference_final": [
+        -14915463.967742119,
+        -3271317.923867094,
+        -1459608.735861006,
+        -124.16819621110062,
+        501.4618019899344,
+        217.98977813079964
+      ],
+      "target_state": [
+        -15179853.241129234,
+        -2010983.5067946229,
+        -911616.6447622826,
+        -73.81650433076828,
+        509.707517521792,
+        221.69933117847592
+      ],
+      "parameters_m_s": [
+        -0.39667872878068366,
+        -1.2146696649194602,
+        0.03868288651367069,
+        -0.09194282784482118,
+        -1.615676093218405,
+        -0.013226329858146577,
+        -0.5843959709983628,
+        1.3610672155410475,
+        -0.011508070855903598,
+        0.05963330687088599,
+        1.06951843380337,
+        0.0368085511298223
+      ],
+      "shooting_history": [
+        {
+          "iteration": 0,
+          "position_error_m": 1399514.1523565683,
+          "velocity_error_m_s": 51.157066800763396,
+          "parameters_m_s": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "iteration": 1,
+          "position_error_m": 64573.2284729205,
+          "velocity_error_m_s": 2.511644150002425,
+          "parameters_m_s": [
+            -0.4958759519943383,
+            0.0639707614841121,
+            0.022521997906558212,
+            0.6613926875847321,
+            -2.4906818405816145,
+            -0.006782810410487629,
+            -0.7227953347563667,
+            -0.41145617999022466,
+            -0.0065030567963489,
+            0.837101303586334,
+            -2.2912823832850844,
+            0.020242540930957526
+          ]
+        },
+        {
+          "iteration": 2,
+          "position_error_m": 32079.99980380742,
+          "velocity_error_m_s": 1.0834708859250886,
+          "parameters_m_s": [
+            -0.4812799239665622,
+            -0.605825684888211,
+            0.02902040466220053,
+            0.304754204703203,
+            -2.028040166985433,
+            -0.009447759242130375,
+            -0.6838708917209216,
+            0.4883707051176638,
+            -0.008559460373624591,
+            0.46180697885039346,
+            -0.5146786232641658,
+            0.027093214603756497
+          ]
+        },
+        {
+          "iteration": 3,
+          "position_error_m": 3015.840955928942,
+          "velocity_error_m_s": 0.05876559554496748,
+          "parameters_m_s": [
+            -0.40775025027505674,
+            -1.2486205125759477,
+            0.03824745759147611,
+            -0.1012878898478049,
+            -1.5920538918737643,
+            -0.013117519498583578,
+            -0.5943207434778713,
+            1.4159849649555531,
+            -0.011336675409203288,
+            0.048638146815738525,
+            1.1796803712749317,
+            0.03636297351856524
+          ]
+        },
+        {
+          "iteration": 4,
+          "position_error_m": 110.87409136133665,
+          "velocity_error_m_s": 0.0037769106240554485,
+          "parameters_m_s": [
+            -0.39611555516522307,
+            -1.2133796923499023,
+            0.03845510247467647,
+            -0.09171790744218972,
+            -1.6167083748780458,
+            -0.01315983706230112,
+            -0.5838893579004729,
+            1.3589673606127022,
+            -0.011436691818484323,
+            0.05993738322472716,
+            1.0650908962211412,
+            0.03657930888313298
+          ]
+        },
+        {
+          "iteration": 5,
+          "position_error_m": 0.22496703121763603,
+          "velocity_error_m_s": 8.263347450985393e-06,
+          "parameters_m_s": [
+            -0.39667872878068366,
+            -1.2146696649194602,
+            0.03868288651367069,
+            -0.09194282784482118,
+            -1.615676093218405,
+            -0.013226329858146577,
+            -0.5843959709983628,
+            1.3610672155410475,
+            -0.011508070855903598,
+            0.05963330687088599,
+            1.06951843380337,
+            0.0368085511298223
+          ]
+        }
+      ],
+      "initial_phase_alignment_radians": [
+        0.0784228422554123,
+        0.015006742499236964,
+        0.002650733698011949,
+        0.00046038523824277724
+      ],
+      "independent_replay_position_error_m": 0.33826800735318896,
+      "independent_replay_velocity_error_m_s": 1.0857158021846228e-05,
+      "replay_agreement_within_50m": true,
+      "projected_position_shift_at_arrival_m": 1398085.600712889,
+      "final_sunward_distance_m": 15276269.280551532,
+      "final_shadow_centre_distance_m": 1390203.5199434534,
+      "delta_v_m_s": 5.449810819327299,
+      "peak_acceleration_m_s2": 0.00014984667682952152,
+      "optical_mass_kg": 5000000.0,
+      "ideal_electric_energy_J": 825771039970.7457,
+      "mean_electric_power_over_maneuver_W": 3185845.0616155313,
+      "peak_electric_power_W": 22705200.28380509,
+      "propellant_kg": 1284.5327288433823,
+      "propellant_fraction_of_base_optical_mass": 0.00025690654576867645,
+      "minimum_earth_beam_margin_deg": 3.0859339858640324,
+      "minimum_moon_beam_margin_deg": 4.1809014233214095,
+      "radius_range_km": [
+        14769.08271574744,
+        15394.364131985607
+      ],
+      "max_finite_extent_gravity_correction_m_s2": 2.4785767421026037e-09,
+      "raw_path": "research/runs/solar_shield_array/active/retime_3d.npz",
+      "raw_sha256": "a504310463530fd92384ef498ca9ae63219790b5bf3c3e0c30cb6508cec7a47a",
+      "replay_nfev": 29027,
+      "elapsed_s": 76.92219987399949
+    },
+    "7.0": {
+      "days": 7.0,
+      "requested_phase_arc_m": 1400000.0,
+      "burn_hours": 6.0,
+      "arcs": 4,
+      "initial_state": [
+        2111904.2446955116,
+        13624891.858636454,
+        5907806.894415143,
+        566.0160540286105,
+        -73.87957026008772,
+        -31.952728835982807
+      ],
+      "same_date_reference_final": [
+        -14330107.698118674,
+        -3979640.2509673024,
+        -1756012.178594015,
+        -168.12388410385034,
+        503.1920169734337,
+        216.3693653448943
+      ],
+      "target_state": [
+        -14673569.30403365,
+        -2733364.0120588867,
+        -1219912.6999389813,
+        -116.25943846907664,
+        515.3544342574646,
+        221.7591005341905
+      ],
+      "parameters_m_s": [
+        -0.21175222593070298,
+        -1.0067261344925535,
+        0.0012387389106088154,
+        2.1496315402812685,
+        0.4082365377619827,
+        0.010831082886148324,
+        2.079158727311413,
+        -0.4807847482556529,
+        0.0072565402722715115,
+        -0.8663468560029476,
+        1.1492779679041814,
+        -0.004477751197274683
+      ],
+      "shooting_history": [
+        {
+          "iteration": 0,
+          "position_error_m": 1399490.260566182,
+          "velocity_error_m_s": 53.54338764594588,
+          "parameters_m_s": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "iteration": 1,
+          "position_error_m": 61445.51194530484,
+          "velocity_error_m_s": 2.783420718406067,
+          "parameters_m_s": [
+            -0.8823073506736946,
+            -0.5769786961303618,
+            0.0009097498634567115,
+            -1.0418054502079932,
+            0.1665886065510812,
+            0.01047357760132063,
+            0.1676413875119289,
+            -0.7096657894734069,
+            0.006694711436771374,
+            1.1747613333403717,
+            -3.9191548884133964,
+            -0.005599632363923042
+          ]
+        },
+        {
+          "iteration": 2,
+          "position_error_m": 37034.795931540124,
+          "velocity_error_m_s": 1.53838922458209,
+          "parameters_m_s": [
+            -0.5873781664339602,
+            -0.752577255292678,
+            0.0008981076732925832,
+            0.3035370996942688,
+            0.2550104746374974,
+            0.010506918020280845,
+            0.9590879918573856,
+            -0.6113693411274534,
+            0.006979583304742459,
+            0.30589860543296366,
+            -1.7531563547793407,
+            -0.004974916048644585
+          ]
+        },
+        {
+          "iteration": 3,
+          "position_error_m": 5488.939579529152,
+          "velocity_error_m_s": 0.2438835603259233,
+          "parameters_m_s": [
+            -0.19651086099186477,
+            -1.0222848783421272,
+            0.0012039091128887291,
+            2.2301121388595053,
+            0.4209561141713333,
+            0.010852499309892714,
+            2.1298619547867217,
+            -0.46304521450839664,
+            0.007319127648944795,
+            -0.9157255535325907,
+            1.2892576940042133,
+            -0.00442437456521534
+          ]
+        },
+        {
+          "iteration": 4,
+          "position_error_m": 469.7846032192845,
+          "velocity_error_m_s": 0.01690647763628918,
+          "parameters_m_s": [
+            -0.21427570387388017,
+            -1.0035256056806992,
+            0.0012345296023387358,
+            2.1315100540095027,
+            0.40575559817362983,
+            0.010819996993753852,
+            2.0678673783099097,
+            -0.48270095593118967,
+            0.007242625791240933,
+            -0.8535652955757719,
+            1.1178525161651882,
+            -0.0044892511219431054
+          ]
+        },
+        {
+          "iteration": 5,
+          "position_error_m": 10.376839194918531,
+          "velocity_error_m_s": 0.0003904749363876933,
+          "parameters_m_s": [
+            -0.2117832266759014,
+            -1.0066896836520431,
+            0.0012385887972881523,
+            2.1494092971445977,
+            0.4082125743378429,
+            0.010830949346419724,
+            2.0790196258616462,
+            -0.48079264848469927,
+            0.007256470791422921,
+            -0.8661915558132716,
+            1.1489182864797127,
+            -0.004477814323053772
+          ]
+        },
+        {
+          "iteration": 6,
+          "position_error_m": 0.01679417096581822,
+          "velocity_error_m_s": 6.809821295627153e-07,
+          "parameters_m_s": [
+            -0.21175222593070298,
+            -1.0067261344925535,
+            0.0012387389106088154,
+            2.1496315402812685,
+            0.4082365377619827,
+            0.010831082886148324,
+            2.079158727311413,
+            -0.4807847482556529,
+            0.0072565402722715115,
+            -0.8663468560029476,
+            1.1492779679041814,
+            -0.004477751197274683
+          ]
+        }
+      ],
+      "initial_phase_alignment_radians": [
+        -0.11392471536098189,
+        -0.050883969567422443,
+        -0.02019494444258258,
+        -0.007511195927286957
+      ],
+      "independent_replay_position_error_m": 0.019835417485656984,
+      "independent_replay_velocity_error_m_s": 4.769540185851964e-06,
+      "replay_agreement_within_50m": true,
+      "projected_position_shift_at_arrival_m": 1397430.3351091146,
+      "final_sunward_distance_m": 14899368.382294333,
+      "final_shadow_centre_distance_m": 1508947.2011397714,
+      "delta_v_m_s": 6.79011194735787,
+      "peak_acceleration_m_s2": 0.00020259991654470076,
+      "optical_mass_kg": 5000000.0,
+      "ideal_electric_energy_J": 1028857329212.6879,
+      "mean_electric_power_over_maneuver_W": 1701152.991423095,
+      "peak_electric_power_W": 30698523.18355425,
+      "propellant_kg": 1600.4447343308477,
+      "propellant_fraction_of_base_optical_mass": 0.00032008894686616957,
+      "minimum_earth_beam_margin_deg": 2.3517783747007748,
+      "minimum_moon_beam_margin_deg": 4.279227833249635,
+      "radius_range_km": [
+        14702.098493179015,
+        15040.14315917544
+      ],
+      "max_finite_extent_gravity_correction_m_s2": 2.6133193847409397e-09,
+      "raw_path": "research/runs/solar_shield_array/active/retime_7d.npz",
+      "raw_sha256": "6ac1b284010aec95c29d7b9be76b51ddb39e68236e745731e6e65c29bdb1ef3a",
+      "replay_nfev": 66983,
+      "elapsed_s": 176.9299540059983
+    }
+  },
+  "reading_rule": "This measures individually reachable orbital phase changes. The target rotation specifies a boundary condition only; actual trajectories are independently propagated. No phase-shifted reference is counted as another fleet member. Multi-tile assignment, collisions, plume safety, coverage handovers, actuator dynamics and complete return schedules remain unproved. Power hardware, collector and habitat loads are excluded from the 50 g/m2 dynamics.",
+  "global_coverage_demonstrated": false,
+  "delivered_power_W": null
+}

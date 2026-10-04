@@ -197,3 +197,10 @@ the protected aperture. Swept collision and mutual-shadow exclusions reduce
 the candidate populations further. The 50 m placement gate fails on independent
 replay, and large-square probes need extended-body dynamics. Four lunar radii
 is the primary target; continuous coverage and payload power remain unresolved.
+
+The [active-assistance tests](../research/studies/solar_shield_array/active.md)
+use separate 10 km tiles. Bounded feedback closes local finite-Sun gaps while
+preserving physical separation, and independently replayed phase transfers
+move a tile's projected arrival by about 1,400 km with 5.45–6.79 m/s of correction.
+Their energy and propellant budgets are explicit. A global assignment and its
+recurring handover/return costs remain to be solved.

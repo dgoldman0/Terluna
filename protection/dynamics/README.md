@@ -53,3 +53,11 @@ inventory exclusions and control bounds at 50 g/m². Continuous coverage remains
 unachieved, and an independent replay differs by 898 m against a 50 m placement
 allowance. Large-square stress probes expose significant finite-extent force
 errors; neither practical formation control nor delivered power is established.
+
+[active_formation.py](active_formation.py) adds bounded electric feedback for
+separate 10 km tiles, finite-Sun mutual illumination and swept finite-square
+separation. [active_retime.py](active_retime.py) integrates finite-extent gravity
+and smooth thrust arcs for individual phase transfers. The
+[active study](../../research/studies/solar_shield_array/active.md) records local
+gap acquisition and independently replayed 1,400 km orbital retiming. Its local
+coverage and control budgets leave the global fleet assignment unresolved.

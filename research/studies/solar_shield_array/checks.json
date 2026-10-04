@@ -1,6 +1,6 @@
 {
   "schema": "terluna.research.solar-shield-checks/1",
-  "checked_at_utc": "2026-10-04T22:05:52.647201+00:00",
+  "checked_at_utc": "2026-10-04T22:47:14.722591+00:00",
   "scope": "Numerical implementation, source identity and repository checks",
   "scientific_validation": false,
   "base_main_commit": "2f2e0a104a3a1ea962a6dead4179f522762f997e",
@@ -232,5 +232,67 @@
     "report": "fleet.md",
     "repair_checkpoint": "218237465f9b2caaf7659a245ee71f0a2896eaef",
     "pilot_checkpoint": "93b8ef29a31fb1d9c6ac1a66b9dfbf4a7ade3959"
+  },
+  "active_assistance": {
+    "status": "LOCAL_GAP_ACQUISITION_AND_INDIVIDUAL_TRANSFERS_GLOBAL_FLEET_UNRESOLVED",
+    "report": "active.md",
+    "study_tests": {
+      "status": "PASS",
+      "passed": 62,
+      "command": "python -m pytest protection/dynamics research/studies/solar_shield_array -q"
+    },
+    "make_check": {
+      "status": "FAIL_EXISTING",
+      "summary": "13 failed, 607 passed, 55 skipped in 14.75s",
+      "same_failed_tests_as_prior_checkpoints": true,
+      "layer_check": "PASS",
+      "later_targets": "Not reached after Python failures; earlier JavaScript/provenance entries retain their historical scope"
+    },
+    "products": {
+      "results/active_acquisition.json": "818a61d85782b086bc8b63780106a8c14a3f58d29d80208ebe54bcde6ff5cfd3",
+      "results/active_formation.json": "26134c430ae9f58e263d643be50ea517a947ff7a6fc2fb970e32d44ea038372b",
+      "results/active_formation_replay.json": "892d93abb618c2838df760f148a163bcbc2498088de3826e1f831aafd782aa7a",
+      "results/active_gap_scale.json": "f320f4bd0a1728ce46b10bc0d19c2937a6ca0019d005fb531e729e668b3cb898",
+      "results/active_retime.json": "3973b10136901b56df60035e355ff726eac2da37bc109ab7bd8a08a309c85dd2",
+      "results/active_search.json": "db743cdbd78f95911b065d79b846e1da3b706507032e6f5759d40367612ce8bb",
+      "results/active_validation.json": "ba415eebe3305b825ea83ce7bc944742dc2fbef0a84375f1a1314398d497cad1"
+    },
+    "local_formation": {
+      "tiles": 625,
+      "tile_side_m": 10000,
+      "moving_receiver_diameter_m": 100000,
+      "six_hour_maintenance_complete": true,
+      "possible_collision_pairs": 0,
+      "ideal_feedback_assumes_exact_modelled_forces_and_states": true
+    },
+    "local_gap_acquisition": {
+      "initial_ray_coverage_32_sun": 0.9432525254549238,
+      "first_full_sample_minutes": 50,
+      "solar_refinement": "128 directions confirm full sampled coverage at 50 and 180 minutes; initially perforated full-Sun area is not claimed converged",
+      "first_50m_tracking_sample_minutes": 61,
+      "possible_collision_pairs": 0
+    },
+    "orbital_retiming": {
+      "requested_arc_km": 1400,
+      "three_day_delta_v_m_s": 5.449810819327299,
+      "seven_day_delta_v_m_s": 6.79011194735787,
+      "independent_arrival_errors_m": [
+        0.33826800735318896,
+        0.019835417485656984
+      ],
+      "finite_extent_gravity_included": true,
+      "energy_optimality_claimed": false,
+      "initial_failed_two_arc_shooting_preserved": true
+    },
+    "coverage_scope": "Simultaneous local finite-tile coverage and individual transfers; no global assignment, continuous coverage certificate or recurring return schedule",
+    "collector_habitat_loads": "Separate, not included",
+    "delivered_power_W": null,
+    "figure": {
+      "status": "VISUALLY_REVIEWED",
+      "renderer": "../../../visualization/solar-shield-array/active_plot.py",
+      "reads_saved_products_only": true,
+      "generated_image_ignored_by_git": true
+    },
+    "preceding_checkpoint": "a2574b4609d4d3d9ec12928d5a09f8b7bdf6ba8a"
   }
 }

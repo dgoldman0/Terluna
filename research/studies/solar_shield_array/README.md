@@ -30,6 +30,13 @@ extended-body dynamics; the 10 km replay also fails the 50 m phase-accuracy
 gate. No sufficient inventory or collector/habitat power is demonstrated.
 Four lunar radii remains primary, with three radii as a comparison.
 
+The [active follow-up](active.md) returns to separate 10 km tiles. Bounded
+electric control closes explicit gaps in a 625-tile local formation, and
+independently replayed orbital transfers shift a tile's projected arrival by
+about 1,400 km with 5.45–6.79 m/s of correction. Power and propellant are
+reported. A collision-safe global assignment, recurring handovers and return
+schedules remain to be solved; delivered power is still unevaluated.
+
 The study couples protection, engineering, illumination and habitation. Its
 runners, compact numerical results and interpretation belong together here;
 dynamics components belong in the protection domain. Computation files and

@@ -1,0 +1,342 @@
+{
+  "schema": "terluna.research.active-gap-scale/1",
+  "producer": {
+    "source_hashes": {
+      "protection/dynamics/cycling.py": "704fbd03c9d4070ea05bdfeba57914ec225941f3560710da2472bd24ca870ed4",
+      "protection/dynamics/ephemeris.py": "9a162c3acf63a844284eb61b444a7d34f1447b5182d254d3e87616516f8748d9",
+      "protection/dynamics/ephemeris.json": "90fde7cb6142e5d4d8082270a978ba2f8f47baaefab0e8d1cf82ec6f07a27222",
+      "protection/dynamics/model.py": "01c9191588037ab4f42bac38dc4d5bd99e57427d37fa75cd672120e32b53733a",
+      "protection/dynamics/optical.py": "06a13ae9f24834876edbc12b513deaa5e3735f02f8249eb57c8996d74ce00b56",
+      "research/studies/solar_shield_array/scenario.json": "a53b784941518b6e36ccdf728252cf6c8e0c46c1126b6c621ed4e28c23128699",
+      "research/studies/solar_shield_array/cycling_search.py": "4789a0185620f6662916462b2715aa9002e6454e74f4f32ef5f7dadf5f732093",
+      "research/studies/solar_shield_array/cycling_feedback.py": "0eb32d26e14472f0a512cdf45d60f00ab8260376cd51ca715e7615bf7df02775",
+      "protection/dynamics/fleet.py": "f3e52653876c2956a4b355dc1290a0a1cadd2b9b601cafc664259827df1cc93c",
+      "research/studies/solar_shield_array/fleet_run.py": "9b8bc9765b9288745ea7d4d69d59e857e76e54d29cc91b37160503e9d9090833",
+      "research/studies/solar_shield_array/active_gap_scale.py": "bae3d0c5b3e5bdba8f61b02e3262676e3f06e014b49459428694c0a7185a6bf3",
+      "research/studies/solar_shield_array/cycling_analysis.py": "4fe32b4c27af48048db63ae073d99dc10b7897c9f3eaa68c2cd34036618f8fc0"
+    },
+    "constants": {
+      "AU": 149597870700.0,
+      "EARTH_GM": 398600441800000.0,
+      "EARTH_MOON_DISTANCE": 384400000.0,
+      "EARTH_OBLIQUITY_DEG": 23.4393,
+      "EARTH_RADIUS": 6371000.0,
+      "JULIAN_DAY": 86400.0,
+      "JULIAN_YEAR_DAYS": 365.25,
+      "MOON_GM": 4902800118000.0,
+      "MOON_RADIUS": 1737400.0,
+      "SOLAR_CONSTANT": 1361.0,
+      "SOLAR_SYSTEM_GM": {
+        "mercury": 22031868551000.0,
+        "venus": 324858592000000.0,
+        "mars": 42828375816000.0,
+        "jupiter": 1.267127641e+17,
+        "saturn": 3.79405848418e+16,
+        "uranus": 5794556400000000.0,
+        "neptune": 6836527100580000.0,
+        "pluto": 975500000000.0
+      },
+      "SPEED_OF_LIGHT": 299792458.0,
+      "SUN_GM": 1.3271244004127942e+20,
+      "SUN_RADIUS": 695700000.0
+    },
+    "raw_sha256": "86c20f6014140e001222b6f3743549456c6b4ebbed4dfd5cbe57014c428f49b0"
+  },
+  "evidence": "Spatial distance witnesses on actual simultaneous finite-Sun footprints of the earlier giant-square geometry probe; ideal maneuver scales only",
+  "parameters": {
+    "case": "dense_double_1000km",
+    "receiver_grid_width": 129,
+    "receiver_interior_points": 12853,
+    "boundary_points": 1024,
+    "solar_directions": 16
+  },
+  "records": [
+    {
+      "day": 0.0,
+      "mean_unintercepted_fraction_on_spatial_grid": 0.3581945849218081,
+      "maximum_identified_distance_to_a_footprint_m": 1109119.038709504,
+      "witness": {
+        "point_xy_km": [3536.1659586175765,5982.680876757027],
+        "solar_direction_index": 11
+      },
+      "area_solar_ray_distance_percentiles_m": {
+        "50": 0.0,
+        "90": 402307.35287594,
+        "95": 575419.6493914032,
+        "99": 833838.2348606545
+      },
+      "optimistic_dilated_ray_reach_fraction": {
+        "0.0": 0.6418054150781919,
+        "1000.0": 0.6425883062320081,
+        "10000.0": 0.6525227573329184,
+        "100000.0": 0.7308507741383334,
+        "500000.0": 0.9314800046681708,
+        "1000000.0": 0.9992511475920018
+      }
+    },
+    {
+      "day": 7.5,
+      "mean_unintercepted_fraction_on_spatial_grid": 0.3712703259939314,
+      "maximum_identified_distance_to_a_footprint_m": 1247412.154680067,
+      "witness": {
+        "point_xy_km": [-2714.6875,3583.3875],
+        "solar_direction_index": 6
+      },
+      "area_solar_ray_distance_percentiles_m": {
+        "50": 0.0,
+        "90": 388440.47542378114,
+        "95": 557452.2779782339,
+        "99": 875273.5961917148
+      },
+      "optimistic_dilated_ray_reach_fraction": {
+        "0.0": 0.6287296740060686,
+        "1000.0": 0.6298043258383257,
+        "10000.0": 0.6405459814829223,
+        "100000.0": 0.7310452812572941,
+        "500000.0": 0.9364788376254571,
+        "1000000.0": 0.9962606006379834
+      }
+    },
+    {
+      "day": 15.0,
+      "mean_unintercepted_fraction_on_spatial_grid": 0.39523360304987165,
+      "maximum_identified_distance_to_a_footprint_m": 1288068.0979931382,
+      "witness": {
+        "point_xy_km": [434.35,-6080.9],
+        "solar_direction_index": 15
+      },
+      "area_solar_ray_distance_percentiles_m": {
+        "50": 0.0,
+        "90": 381626.39689039055,
+        "95": 582618.4297088566,
+        "99": 960201.0617379323
+      },
+      "optimistic_dilated_ray_reach_fraction": {
+        "0.0": 0.6047663969501283,
+        "1000.0": 0.6060939080370341,
+        "10000.0": 0.6187368707694701,
+        "100000.0": 0.72332334863456,
+        "500000.0": 0.9340426359604762,
+        "1000000.0": 0.9924239477164865
+      }
+    },
+    {
+      "day": 22.5,
+      "mean_unintercepted_fraction_on_spatial_grid": 0.46357367929666227,
+      "maximum_identified_distance_to_a_footprint_m": 1357599.817849466,
+      "witness": {
+        "point_xy_km": [-325.7625,3691.975],
+        "solar_direction_index": 6
+      },
+      "area_solar_ray_distance_percentiles_m": {
+        "50": 0.0,
+        "90": 459305.035021118,
+        "95": 662387.4175789179,
+        "99": 1023198.9946859877
+      },
+      "optimistic_dilated_ray_reach_fraction": {
+        "0.0": 0.5364263207033377,
+        "1000.0": 0.53791916284136,
+        "10000.0": 0.5487775227573329,
+        "100000.0": 0.6511028553645063,
+        "500000.0": 0.9134200186726834,
+        "1000000.0": 0.988387924998055
+      }
+    },
+    {
+      "day": 29.25,
+      "mean_unintercepted_fraction_on_spatial_grid": 0.49424258927876763,
+      "maximum_identified_distance_to_a_footprint_m": 1406471.3462556682,
+      "witness": {
+        "point_xy_km": [-217.175,3583.3875],
+        "solar_direction_index": 8
+      },
+      "area_solar_ray_distance_percentiles_m": {
+        "50": 0.0,
+        "90": 492084.96654798277,
+        "95": 657802.411762245,
+        "99": 1015917.0441669059
+      },
+      "optimistic_dilated_ray_reach_fraction": {
+        "0.0": 0.5057574107212324,
+        "1000.0": 0.5068271998755154,
+        "10000.0": 0.5181961409787598,
+        "100000.0": 0.6177886485645374,
+        "500000.0": 0.9031403174356182,
+        "1000000.0": 0.9891367774060531
+      }
+    },
+    {
+      "day": 30.0,
+      "mean_unintercepted_fraction_on_spatial_grid": 0.48299035244689953,
+      "maximum_identified_distance_to_a_footprint_m": 1428908.651732039,
+      "witness": {
+        "point_xy_km": [-1397.596770298603,-6807.618043607537],
+        "solar_direction_index": 7
+      },
+      "area_solar_ray_distance_percentiles_m": {
+        "50": 0.0,
+        "90": 457484.98910863354,
+        "95": 629493.5722403608,
+        "99": 976185.048314599
+      },
+      "optimistic_dilated_ray_reach_fraction": {
+        "0.0": 0.5170096475531004,
+        "1000.0": 0.5186872714541352,
+        "10000.0": 0.5297693145569128,
+        "100000.0": 0.6379006846650588,
+        "500000.0": 0.9159729246090407,
+        "1000000.0": 0.991242316968801
+      }
+    }
+  ],
+  "ideal_maneuver_scales": [
+    {
+      "distance_m": 100.0,
+      "hours": 6.0,
+      "symmetric_rest_to_rest_acceleration_m_s2": 8.573388203017833e-07,
+      "maneuver_delta_v_m_s": 0.018518518518518517,
+      "mean_power_per_10km_tile_W": 129906.44863068555,
+      "propellant_per_10km_tile_kg": 4.364856673991033,
+      "fraction_of_maximum_ideal_transverse_photon_acceleration": 0.08891706958999089
+    },
+    {
+      "distance_m": 100.0,
+      "hours": 24.0,
+      "symmetric_rest_to_rest_acceleration_m_s2": 5.3583676268861454e-08,
+      "maneuver_delta_v_m_s": 0.004629629629629629,
+      "mean_power_per_10km_tile_W": 8119.153039417847,
+      "propellant_per_10km_tile_kg": 1.0912141684977583,
+      "fraction_of_maximum_ideal_transverse_photon_acceleration": 0.005557316849374431
+    },
+    {
+      "distance_m": 100.0,
+      "hours": 72.0,
+      "symmetric_rest_to_rest_acceleration_m_s2": 5.953741807651273e-09,
+      "maneuver_delta_v_m_s": 0.0015432098765432098,
+      "mean_power_per_10km_tile_W": 902.1281154908718,
+      "propellant_per_10km_tile_kg": 0.3637380561659195,
+      "fraction_of_maximum_ideal_transverse_photon_acceleration": 0.0006174796499304923
+    },
+    {
+      "distance_m": 10000.0,
+      "hours": 6.0,
+      "symmetric_rest_to_rest_acceleration_m_s2": 8.573388203017832e-05,
+      "maneuver_delta_v_m_s": 1.8518518518518519,
+      "mean_power_per_10km_tile_W": 12990644.863068553,
+      "propellant_per_10km_tile_kg": 436.48566739910336,
+      "fraction_of_maximum_ideal_transverse_photon_acceleration": 8.891706958999087
+    },
+    {
+      "distance_m": 10000.0,
+      "hours": 24.0,
+      "symmetric_rest_to_rest_acceleration_m_s2": 5.358367626886145e-06,
+      "maneuver_delta_v_m_s": 0.46296296296296297,
+      "mean_power_per_10km_tile_W": 811915.3039417845,
+      "propellant_per_10km_tile_kg": 109.12141684977584,
+      "fraction_of_maximum_ideal_transverse_photon_acceleration": 0.555731684937443
+    },
+    {
+      "distance_m": 10000.0,
+      "hours": 72.0,
+      "symmetric_rest_to_rest_acceleration_m_s2": 5.953741807651273e-07,
+      "maneuver_delta_v_m_s": 0.15432098765432098,
+      "mean_power_per_10km_tile_W": 90212.81154908719,
+      "propellant_per_10km_tile_kg": 36.373805616591945,
+      "fraction_of_maximum_ideal_transverse_photon_acceleration": 0.06174796499304923
+    },
+    {
+      "distance_m": 100000.0,
+      "hours": 6.0,
+      "symmetric_rest_to_rest_acceleration_m_s2": 0.0008573388203017832,
+      "maneuver_delta_v_m_s": 18.51851851851852,
+      "mean_power_per_10km_tile_W": 129906448.63068552,
+      "propellant_per_10km_tile_kg": 4364.856673991034,
+      "fraction_of_maximum_ideal_transverse_photon_acceleration": 88.91706958999089
+    },
+    {
+      "distance_m": 100000.0,
+      "hours": 24.0,
+      "symmetric_rest_to_rest_acceleration_m_s2": 5.358367626886145e-05,
+      "maneuver_delta_v_m_s": 4.62962962962963,
+      "mean_power_per_10km_tile_W": 8119153.039417845,
+      "propellant_per_10km_tile_kg": 1091.2141684977585,
+      "fraction_of_maximum_ideal_transverse_photon_acceleration": 5.5573168493744305
+    },
+    {
+      "distance_m": 100000.0,
+      "hours": 72.0,
+      "symmetric_rest_to_rest_acceleration_m_s2": 5.953741807651273e-06,
+      "maneuver_delta_v_m_s": 1.5432098765432098,
+      "mean_power_per_10km_tile_W": 902128.1154908718,
+      "propellant_per_10km_tile_kg": 363.7380561659195,
+      "fraction_of_maximum_ideal_transverse_photon_acceleration": 0.6174796499304922
+    },
+    {
+      "distance_m": 500000.0,
+      "hours": 6.0,
+      "symmetric_rest_to_rest_acceleration_m_s2": 0.0042866941015089165,
+      "maneuver_delta_v_m_s": 92.5925925925926,
+      "mean_power_per_10km_tile_W": 649532243.1534276,
+      "propellant_per_10km_tile_kg": 21824.28336995517,
+      "fraction_of_maximum_ideal_transverse_photon_acceleration": 444.58534794995444
+    },
+    {
+      "distance_m": 500000.0,
+      "hours": 24.0,
+      "symmetric_rest_to_rest_acceleration_m_s2": 0.0002679183813443073,
+      "maneuver_delta_v_m_s": 23.14814814814815,
+      "mean_power_per_10km_tile_W": 40595765.197089225,
+      "propellant_per_10km_tile_kg": 5456.070842488793,
+      "fraction_of_maximum_ideal_transverse_photon_acceleration": 27.786584246872152
+    },
+    {
+      "distance_m": 500000.0,
+      "hours": 72.0,
+      "symmetric_rest_to_rest_acceleration_m_s2": 2.9768709038256365e-05,
+      "maneuver_delta_v_m_s": 7.716049382716049,
+      "mean_power_per_10km_tile_W": 4510640.577454359,
+      "propellant_per_10km_tile_kg": 1818.6902808295974,
+      "fraction_of_maximum_ideal_transverse_photon_acceleration": 3.0873982496524617
+    },
+    {
+      "distance_m": 1428908.651732039,
+      "hours": 6.0,
+      "symmetric_rest_to_rest_acceleration_m_s2": 0.012250588577949579,
+      "maneuver_delta_v_m_s": 264.6127132837109,
+      "mean_power_per_10km_tile_W": 1856244483.6417022,
+      "propellant_per_10km_tile_kg": 62369.81465036119,
+      "fraction_of_maximum_ideal_transverse_photon_acceleration": 1270.5437002379774
+    },
+    {
+      "distance_m": 1428908.651732039,
+      "hours": 24.0,
+      "symmetric_rest_to_rest_acceleration_m_s2": 0.0007656617861218487,
+      "maneuver_delta_v_m_s": 66.15317832092772,
+      "mean_power_per_10km_tile_W": 116015280.22760639,
+      "propellant_per_10km_tile_kg": 15592.453662590298,
+      "fraction_of_maximum_ideal_transverse_photon_acceleration": 79.40898126487359
+    },
+    {
+      "distance_m": 1428908.651732039,
+      "hours": 72.0,
+      "symmetric_rest_to_rest_acceleration_m_s2": 8.507353179131653e-05,
+      "maneuver_delta_v_m_s": 22.051059440309242,
+      "mean_power_per_10km_tile_W": 12890586.691956267,
+      "propellant_per_10km_tile_kg": 5197.484554196766,
+      "fraction_of_maximum_ideal_transverse_photon_acceleration": 8.823220140541512
+    }
+  ],
+  "propulsion_assumptions": {
+    "exhaust_velocity_m_s": 30000,
+    "efficiency": 0.7,
+    "specific_power_W_kg": 300,
+    "cant_deg": 45,
+    "propellant_buffer_days": 7,
+    "peak_margin_factor": 1.25
+  },
+  "maximum_transverse_photon_acceleration_m_s2": 9.642004895742664e-06,
+  "reading_rule": "The largest identified hole is a sampled geometric witness, not a global maximum certificate. Dilation is an optimistic reach envelope with invented extra area, not achieved coverage. Rest-to-rest scales omit orbital gravity, initial/final velocity constraints, finite-extent force errors, target assignment, collisions and return legs; they are neither an optimized solution nor a rigorous thrust lower bound. Long lead times can exploit orbital phase changes.",
+  "global_coverage_demonstrated": false,
+  "delivered_power_W": null
+}
