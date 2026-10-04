@@ -6,8 +6,8 @@
     "files": {
       "research/studies/optical_comfort/run.py": "5982c4f9b5314e25830b4b90b957fe1a1b657b06bfee685c93e21416eb0d5da9",
       "research/studies/optical_comfort/sources.json": "c56ada107eb54fac44c7f6c75df221b79e0689cce4b2d95d3941000a7be1e7f2",
-      "shared/constants.json": "63a94123983be8ff627e7556d2b63b0c835044b5ee81f924f81e65d8a264e006",
-      "shared/constants.py": "8e6252e5f6055b6664289247c71fbefbef49b2e0c8442b7c36b9f470118d92b6"
+      "shared/constants.json": "bdcfa12192c7ba164b339aa3468a8eecfd2fc98283a83b8931e8a52ec7bbfb83",
+      "shared/constants.py": "bee345e928a5e8ebc367a95057e4de0129a4603758f20fb0495f37ace2e146ca"
     },
     "inputs": {
       "illumination/surface_light/results/surface_light.json": {
