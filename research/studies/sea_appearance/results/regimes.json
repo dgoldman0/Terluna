@@ -9,7 +9,7 @@
    "research/studies/sea_appearance/regimes.py": "ae7a83f72a54d517ba4d8dd500b79d6c42efad08a41365c767455fd72030917b",
    "illumination/water_surface/reflection.py": "df023219b0ca76f009e2b15f90f10599100f2a7855fb3afd18e4e92125b6c0b6",
    "illumination/water_column/model.py": "fade27dafbd24bb47070a26b7f0762760281ef6a742a3e506f52c078f9879f56",
-   "illumination/earthlight/model.py": "481d9a3456f77024892007a3033e60d179da19af8b1637a6a6e38da2e65ea370",
+   "illumination/earthlight/model.py": "c18de649cd0eee3c1b9ce74eae32e68d753d27a4080083567617228e531737af",
    "research/studies/sea_appearance/lighting.py": "c07a8b5db4782baee24b8dd7fb1a2c89708649513dea61a2161cd3534a6ccf23",
    "illumination/sky/solved_transport.py": "3fe4c255e8ffe53227a57529e957a441daf5b1899cf4ba1e71b3a2d8906eb00c"
   },
@@ -17,20 +17,23 @@
    "AU": 149597870700.0,
    "EARTH_MOON_DISTANCE": 384400000.0,
    "EARTH_RADIUS": 6371000.0,
+   "EARTH_VISUAL_PHASE_ASYMMETRY": -0.33,
+   "EARTH_VISUAL_PHASE_NORMALISATION": 0.23,
+   "EARTH_VISUAL_PHASE_OBSERVED_LIMIT_DEG": 144.0,
    "MOON_RADIUS": 1737400.0,
    "SUN_RADIUS": 695700000.0
   }
  },
  "inputs": {
-  "research/studies/sea_appearance/results/lighting_calendar.json": "226f64c2770f019d8a812ffdf98dacb7a256b3d6078ce5ab88898b51503f4e9d",
-  "research/studies/sea_appearance/results/sea_slopes.json": "c875cfd50969348d10a3acf43ff3affdaa3b5a606bdfba46c54b46d3ed5f7b41",
+  "research/studies/sea_appearance/results/lighting_calendar.json": "b76f394595eb0c89487c4208eedc4e9a6d1eff3af72bf63bdb79883920b2f674",
+  "research/studies/sea_appearance/results/sea_slopes.json": "a619b20ff34fc05736cabbbb5158f0e7b0fc68d71c22695fceb65d8895c809e2",
   "research/studies/sea_appearance/results/sea_slopes.npz": "aef6bcd9c97c668488fb23af58004b70bd4ec0974e9a190922be1a7a654bda2a",
   "biosphere/living_water/waters.json": "bdf2a5dede623718921e367db11cd6eef95f8d67e944a6cbf277bddd2f962734",
   "research/runs/optical_comfort/spherical/moon_1.2atm_standard.npz": "d6d7fef07d99fedf32d1a54f63e345ff245bf3ee8ec29a33d498fd621bf41273"
  },
  "panoramas": {
   "path": "research/runs/sea_appearance/regimes.npz",
-  "sha256": "1a7dfd4fcff0efd817f670b238b4b5e3785a754dfbd0af43e94a7e715c304cea",
+  "sha256": "e5706c198b43be86ec7c7e7c2acf97efef0bf1d7730b578ba88b13e79e3ff718",
   "shape": [
    24,
    120,
@@ -918,7 +921,7 @@
     "phase_angle_deg": 167.6,
     "lit_fraction": 0.012
    },
-   "light_on_ground_lux": 6813.4271,
+   "light_on_ground_lux": 6813.4257,
    "slopes": {
     "mean_square": 0.00266,
     "short_waves": 0.0,
@@ -926,7 +929,7 @@
     "resolved_source": "spectrum 0 h from the moment"
    },
    "water": "productive_coast",
-   "water_leaving_nadir_cd_m2": 19.226229,
+   "water_leaving_nadir_cd_m2": 19.226226,
    "glitter": {
     "peak_cd_m2": 587395.38,
     "peak_elevation_deg": -0.25,
@@ -935,28 +938,28 @@
    },
    "readout": {
     "toward/sky_30": {
-     "luminance_cd_m2": 3228.400684,
+     "luminance_cd_m2": 3228.399851,
      "chromaticity_xy": [
       0.3607,
       0.3882
      ]
     },
     "toward/sky_5": {
-     "luminance_cd_m2": 2863.065991,
+     "luminance_cd_m2": 2863.065271,
      "chromaticity_xy": [
       0.4201,
       0.4039
      ]
     },
     "toward/sky_1": {
-     "luminance_cd_m2": 2377.987141,
+     "luminance_cd_m2": 2377.986585,
      "chromaticity_xy": [
       0.424,
       0.3976
      ]
     },
     "toward/sea_1": {
-     "luminance_cd_m2": 587418.157663,
+     "luminance_cd_m2": 587418.157142,
      "chromaticity_xy": [
       0.5912,
       0.4004
@@ -964,7 +967,7 @@
      "wave_contrast": 0.0571
     },
     "toward/sea_5": {
-     "luminance_cd_m2": 398713.398883,
+     "luminance_cd_m2": 398713.398469,
      "chromaticity_xy": [
       0.5911,
       0.4004
@@ -972,7 +975,7 @@
      "wave_contrast": 0.0822
     },
     "toward/sea_20": {
-     "luminance_cd_m2": 540.291236,
+     "luminance_cd_m2": 540.291104,
      "chromaticity_xy": [
       0.3995,
       0.4017
@@ -980,28 +983,28 @@
      "wave_contrast": 0.1918
     },
     "away/sky_30": {
-     "luminance_cd_m2": 2169.815017,
+     "luminance_cd_m2": 2169.814749,
      "chromaticity_xy": [
       0.3687,
       0.3832
      ]
     },
     "away/sky_5": {
-     "luminance_cd_m2": 1348.49573,
+     "luminance_cd_m2": 1348.495542,
      "chromaticity_xy": [
       0.3819,
       0.3722
      ]
     },
     "away/sky_1": {
-     "luminance_cd_m2": 1153.259515,
+     "luminance_cd_m2": 1153.259344,
      "chromaticity_xy": [
       0.3729,
       0.3707
      ]
     },
     "away/sea_1": {
-     "luminance_cd_m2": 992.41585,
+     "luminance_cd_m2": 992.415713,
      "chromaticity_xy": [
       0.382,
       0.3731
@@ -1009,7 +1012,7 @@
      "wave_contrast": 0.0431
     },
     "away/sea_5": {
-     "luminance_cd_m2": 791.60761,
+     "luminance_cd_m2": 791.607504,
      "chromaticity_xy": [
       0.3838,
       0.3748
@@ -1017,7 +1020,7 @@
      "wave_contrast": 0.0549
     },
     "away/sea_20": {
-     "luminance_cd_m2": 296.214471,
+     "luminance_cd_m2": 296.214436,
      "chromaticity_xy": [
       0.3826,
       0.387
@@ -1041,7 +1044,7 @@
     "phase_angle_deg": 175.5,
     "lit_fraction": 0.002
    },
-   "light_on_ground_lux": 2803.8453,
+   "light_on_ground_lux": 2803.8451,
    "slopes": {
     "mean_square": 0.00973,
     "short_waves": 0.00147,
@@ -1049,7 +1052,7 @@
     "resolved_source": "spectrum 0 h from the moment"
    },
    "water": "productive_coast",
-   "water_leaving_nadir_cd_m2": 7.885172,
+   "water_leaving_nadir_cd_m2": 7.885171,
    "glitter": {
     "peak_cd_m2": 0.0,
     "peak_elevation_deg": 29.75,
@@ -1058,28 +1061,28 @@
    },
    "readout": {
     "toward/sky_30": {
-     "luminance_cd_m2": 1536.212989,
+     "luminance_cd_m2": 1536.212827,
      "chromaticity_xy": [
       0.3777,
       0.3948
      ]
     },
     "toward/sky_5": {
-     "luminance_cd_m2": 1314.55719,
+     "luminance_cd_m2": 1314.557051,
      "chromaticity_xy": [
       0.4388,
       0.4038
      ]
     },
     "toward/sky_1": {
-     "luminance_cd_m2": 1033.096526,
+     "luminance_cd_m2": 1033.096418,
      "chromaticity_xy": [
       0.4381,
       0.3954
      ]
     },
     "toward/sea_1": {
-     "luminance_cd_m2": 859.533924,
+     "luminance_cd_m2": 859.533833,
      "chromaticity_xy": [
       0.4287,
       0.4068
@@ -1087,7 +1090,7 @@
      "wave_contrast": 0.1313
     },
     "toward/sea_5": {
-     "luminance_cd_m2": 675.846816,
+     "luminance_cd_m2": 675.846744,
      "chromaticity_xy": [
       0.4269,
       0.4064
@@ -1095,7 +1098,7 @@
      "wave_contrast": 0.1663
     },
     "toward/sea_20": {
-     "luminance_cd_m2": 230.034192,
+     "luminance_cd_m2": 230.034167,
      "chromaticity_xy": [
       0.4028,
       0.4056
@@ -1103,28 +1106,28 @@
      "wave_contrast": 0.3233
     },
     "away/sky_30": {
-     "luminance_cd_m2": 703.028454,
+     "luminance_cd_m2": 703.028398,
      "chromaticity_xy": [
       0.3758,
       0.3724
      ]
     },
     "away/sky_5": {
-     "luminance_cd_m2": 393.508625,
+     "luminance_cd_m2": 393.508587,
      "chromaticity_xy": [
       0.3354,
       0.3634
      ]
     },
     "away/sky_1": {
-     "luminance_cd_m2": 359.743179,
+     "luminance_cd_m2": 359.743145,
      "chromaticity_xy": [
       0.337,
       0.3648
      ]
     },
     "away/sea_1": {
-     "luminance_cd_m2": 257.068951,
+     "luminance_cd_m2": 257.068927,
      "chromaticity_xy": [
       0.3452,
       0.3625
@@ -1132,7 +1135,7 @@
      "wave_contrast": 0.1226
     },
     "away/sea_5": {
-     "luminance_cd_m2": 206.929368,
+     "luminance_cd_m2": 206.929349,
      "chromaticity_xy": [
       0.3467,
       0.3634
@@ -1140,7 +1143,7 @@
      "wave_contrast": 0.1467
     },
     "away/sea_20": {
-     "luminance_cd_m2": 84.399606,
+     "luminance_cd_m2": 84.399599,
      "chromaticity_xy": [
       0.3638,
       0.3699
@@ -1164,7 +1167,7 @@
     "phase_angle_deg": 169.6,
     "lit_fraction": 0.008
    },
-   "light_on_ground_lux": 448.6582,
+   "light_on_ground_lux": 448.6567,
    "slopes": {
     "mean_square": 0.0239,
     "short_waves": 0.00801,
@@ -1172,7 +1175,7 @@
     "resolved_source": "spectrum 0 h from the moment"
    },
    "water": "productive_coast",
-   "water_leaving_nadir_cd_m2": 1.257599,
+   "water_leaving_nadir_cd_m2": 1.257595,
    "glitter": {
     "peak_cd_m2": 0.0,
     "peak_elevation_deg": 29.75,
@@ -1181,28 +1184,28 @@
    },
    "readout": {
     "toward/sky_30": {
-     "luminance_cd_m2": 332.479476,
+     "luminance_cd_m2": 332.478602,
      "chromaticity_xy": [
       0.396,
       0.4027
      ]
     },
     "toward/sky_5": {
-     "luminance_cd_m2": 331.639355,
+     "luminance_cd_m2": 331.638613,
      "chromaticity_xy": [
       0.4741,
       0.4103
      ]
     },
     "toward/sky_1": {
-     "luminance_cd_m2": 249.60035,
+     "luminance_cd_m2": 249.599771,
      "chromaticity_xy": [
       0.4761,
       0.4001
      ]
     },
     "toward/sea_1": {
-     "luminance_cd_m2": 183.520339,
+     "luminance_cd_m2": 183.519917,
      "chromaticity_xy": [
       0.4512,
       0.4152
@@ -1210,7 +1213,7 @@
      "wave_contrast": 0.2915
     },
     "toward/sea_5": {
-     "luminance_cd_m2": 145.380392,
+     "luminance_cd_m2": 145.380056,
      "chromaticity_xy": [
       0.4508,
       0.414
@@ -1218,7 +1221,7 @@
      "wave_contrast": 0.3045
     },
     "toward/sea_20": {
-     "luminance_cd_m2": 51.042319,
+     "luminance_cd_m2": 51.042195,
      "chromaticity_xy": [
       0.431,
       0.4124
@@ -1226,28 +1229,28 @@
      "wave_contrast": 0.4727
     },
     "away/sky_30": {
-     "luminance_cd_m2": 73.198171,
+     "luminance_cd_m2": 73.197828,
      "chromaticity_xy": [
       0.3253,
       0.3517
      ]
     },
     "away/sky_5": {
-     "luminance_cd_m2": 62.609385,
+     "luminance_cd_m2": 62.609173,
      "chromaticity_xy": [
       0.3444,
       0.3666
      ]
     },
     "away/sky_1": {
-     "luminance_cd_m2": 57.395286,
+     "luminance_cd_m2": 57.395092,
      "chromaticity_xy": [
       0.346,
       0.3679
      ]
     },
     "away/sea_1": {
-     "luminance_cd_m2": 32.923596,
+     "luminance_cd_m2": 32.923478,
      "chromaticity_xy": [
       0.3394,
       0.3635
@@ -1255,7 +1258,7 @@
      "wave_contrast": 0.2906
     },
     "away/sea_5": {
-     "luminance_cd_m2": 26.992631,
+     "luminance_cd_m2": 26.992534,
      "chromaticity_xy": [
       0.3396,
       0.3643
@@ -1263,7 +1266,7 @@
      "wave_contrast": 0.3094
     },
     "away/sea_20": {
-     "luminance_cd_m2": 10.643741,
+     "luminance_cd_m2": 10.6437,
      "chromaticity_xy": [
       0.336,
       0.365
@@ -1287,7 +1290,7 @@
     "phase_angle_deg": 147.4,
     "lit_fraction": 0.079
    },
-   "light_on_ground_lux": 9.1095,
+   "light_on_ground_lux": 9.1066,
    "slopes": {
     "mean_square": 0.02713,
     "short_waves": 0.01057,
@@ -1295,7 +1298,7 @@
     "resolved_source": "spectrum 0 h from the moment"
    },
    "water": "productive_coast",
-   "water_leaving_nadir_cd_m2": 0.025511,
+   "water_leaving_nadir_cd_m2": 0.025503,
    "glitter": {
     "peak_cd_m2": 0.0,
     "peak_elevation_deg": 29.75,
@@ -1304,44 +1307,44 @@
    },
    "readout": {
     "toward/sky_30": {
-     "luminance_cd_m2": 6.731802,
+     "luminance_cd_m2": 6.730221,
      "chromaticity_xy": [
       0.3925,
       0.4033
      ]
     },
     "toward/sky_5": {
-     "luminance_cd_m2": 13.39087,
+     "luminance_cd_m2": 13.389535,
      "chromaticity_xy": [
       0.5196,
       0.4139
      ]
     },
     "toward/sky_1": {
-     "luminance_cd_m2": 10.662436,
+     "luminance_cd_m2": 10.661381,
      "chromaticity_xy": [
       0.5389,
       0.3981
      ]
     },
     "toward/sea_1": {
-     "luminance_cd_m2": 4.973931,
+     "luminance_cd_m2": 4.973268,
      "chromaticity_xy": [
-      0.4755,
+      0.4756,
       0.4198
      ],
      "wave_contrast": 0.5757
     },
     "toward/sea_5": {
-     "luminance_cd_m2": 4.009821,
+     "luminance_cd_m2": 4.00929,
      "chromaticity_xy": [
       0.479,
       0.418
      ],
-     "wave_contrast": 0.5938
+     "wave_contrast": 0.5939
     },
     "toward/sea_20": {
-     "luminance_cd_m2": 1.358442,
+     "luminance_cd_m2": 1.358234,
      "chromaticity_xy": [
       0.4608,
       0.416
@@ -1349,36 +1352,36 @@
      "wave_contrast": 0.7962
     },
     "away/sky_30": {
-     "luminance_cd_m2": 1.899838,
+     "luminance_cd_m2": 1.899066,
      "chromaticity_xy": [
       0.3564,
       0.3703
      ]
     },
     "away/sky_5": {
-     "luminance_cd_m2": 1.476316,
+     "luminance_cd_m2": 1.475889,
      "chromaticity_xy": [
       0.3675,
       0.3772
      ]
     },
     "away/sky_1": {
-     "luminance_cd_m2": 1.327949,
+     "luminance_cd_m2": 1.327562,
      "chromaticity_xy": [
       0.3662,
       0.3776
      ]
     },
     "away/sea_1": {
-     "luminance_cd_m2": 0.712141,
+     "luminance_cd_m2": 0.711908,
      "chromaticity_xy": [
       0.365,
       0.3756
      ],
-     "wave_contrast": 0.332
+     "wave_contrast": 0.3321
     },
     "away/sea_5": {
-     "luminance_cd_m2": 0.583672,
+     "luminance_cd_m2": 0.583481,
      "chromaticity_xy": [
       0.3646,
       0.3762
@@ -1386,9 +1389,9 @@
      "wave_contrast": 0.347
     },
     "away/sea_20": {
-     "luminance_cd_m2": 0.247975,
+     "luminance_cd_m2": 0.247889,
      "chromaticity_xy": [
-      0.361,
+      0.3611,
       0.3777
      ],
      "wave_contrast": 0.414
@@ -1533,7 +1536,7 @@
     "phase_angle_deg": 170.1,
     "lit_fraction": 0.007
    },
-   "light_on_ground_lux": 75016.401,
+   "light_on_ground_lux": 75016.3495,
    "slopes": {
     "mean_square": 0.05252,
     "short_waves": 0.03592,
@@ -1541,7 +1544,7 @@
     "resolved_source": "spectrum 18 h from the moment"
    },
    "water": "productive_coast",
-   "water_leaving_nadir_cd_m2": 212.06554,
+   "water_leaving_nadir_cd_m2": 212.065394,
    "glitter": {
     "peak_cd_m2": 1109.581,
     "peak_elevation_deg": -29.75,
@@ -1550,28 +1553,28 @@
    },
    "readout": {
     "toward/sky_30": {
-     "luminance_cd_m2": 10925.149012,
+     "luminance_cd_m2": 10925.141705,
      "chromaticity_xy": [
       0.2794,
       0.3154
      ]
     },
     "toward/sky_5": {
-     "luminance_cd_m2": 10472.461583,
+     "luminance_cd_m2": 10472.454602,
      "chromaticity_xy": [
       0.3109,
       0.3463
      ]
     },
     "toward/sky_1": {
-     "luminance_cd_m2": 9642.275005,
+     "luminance_cd_m2": 9642.268569,
      "chromaticity_xy": [
       0.3162,
       0.3491
      ]
     },
     "toward/sea_1": {
-     "luminance_cd_m2": 3909.655539,
+     "luminance_cd_m2": 3909.652975,
      "chromaticity_xy": [
       0.297,
       0.3335
@@ -1579,7 +1582,7 @@
      "wave_contrast": 0.5082
     },
     "toward/sea_5": {
-     "luminance_cd_m2": 3364.268972,
+     "luminance_cd_m2": 3364.266787,
      "chromaticity_xy": [
       0.3008,
       0.337
@@ -1587,7 +1590,7 @@
      "wave_contrast": 0.5225
     },
     "toward/sea_20": {
-     "luminance_cd_m2": 2005.112441,
+     "luminance_cd_m2": 2005.111264,
      "chromaticity_xy": [
       0.3237,
       0.3551
@@ -1595,28 +1598,28 @@
      "wave_contrast": 0.5762
     },
     "away/sky_30": {
-     "luminance_cd_m2": 8587.607318,
+     "luminance_cd_m2": 8587.601373,
      "chromaticity_xy": [
       0.2672,
       0.3014
      ]
     },
     "away/sky_5": {
-     "luminance_cd_m2": 9811.154661,
+     "luminance_cd_m2": 9811.148056,
      "chromaticity_xy": [
       0.3084,
       0.3438
      ]
     },
     "away/sky_1": {
-     "luminance_cd_m2": 9339.571841,
+     "luminance_cd_m2": 9339.565571,
      "chromaticity_xy": [
       0.3158,
       0.3484
      ]
     },
     "away/sea_1": {
-     "luminance_cd_m2": 3274.827774,
+     "luminance_cd_m2": 3274.825542,
      "chromaticity_xy": [
       0.2875,
       0.3242
@@ -1624,7 +1627,7 @@
      "wave_contrast": 0.5697
     },
     "away/sea_5": {
-     "luminance_cd_m2": 2798.308407,
+     "luminance_cd_m2": 2798.306501,
      "chromaticity_xy": [
       0.2904,
       0.3275
@@ -1632,7 +1635,7 @@
      "wave_contrast": 0.5903
     },
     "away/sea_20": {
-     "luminance_cd_m2": 1302.424623,
+     "luminance_cd_m2": 1302.423733,
      "chromaticity_xy": [
       0.292,
       0.3318

@@ -30,6 +30,18 @@ test('The experience evaluates the published ephemeris exactly at every golden s
   }
 });
 
+test("The Earth's disk follows the measured phase curve that sets its earthlight", () => {
+  const k = product.constants,
+    full = k.earth_visual_phase_normalisation * (k.earth_radius_m / k.earth_moon_distance_m) ** 2;
+  for (const g of product.samples) {
+    const s = sky.state(g.t_s),
+      a = s.earthPhaseAngle,
+      lambert = (Math.sin(a) + (Math.PI - a) * Math.cos(a)) / Math.PI;
+    if (lambert > 1e-6)
+      assert.ok(Math.abs((s.earthDiskPhaseGain * lambert) / (s.earthlightRatio / full) - 1) < 1e-9);
+  }
+});
+
 test("The ephemeris Sun matches the scene's solar clock", () => {
   for (const phase of [0, 0.1, 0.25, 0.4, 0.5, 0.77, 0.99]) {
     const a = sky.scene(phase * sky.period).sun,

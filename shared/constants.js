@@ -29,6 +29,9 @@ export const LIBRATION_LATITUDE_DEG = data.moon.optical_libration_latitude_deg;
 export const EARTH_SIDEREAL_DAY_S = data.earth.sidereal_day_s;
 export const EARTH_OBLIQUITY_DEG = data.earth.obliquity_deg;
 export const EARTH_GEOMETRIC_ALBEDO = data.earth.geometric_albedo_visible;
+export const EARTH_VISUAL_PHASE_NORMALISATION = data.earth.visual_phase_normalisation;
+export const EARTH_VISUAL_PHASE_ASYMMETRY = data.earth.visual_phase_asymmetry;
+export const EARTH_VISUAL_PHASE_OBSERVED_LIMIT_DEG = data.earth.visual_phase_observed_limit_deg;
 
 export const SOLAR_CONSTANT = data.sun.solar_constant_W_m2;
 export const SUN_RADIUS = data.sun.radius_m;

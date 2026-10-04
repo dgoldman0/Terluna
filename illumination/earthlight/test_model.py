@@ -25,10 +25,11 @@ def test_phase_curves_are_one_at_full_phase_and_fall():
 
 def test_the_visual_fit_gives_robinsons_phase_integral_and_spherical_albedo():
     """Robinson et al. (2025): phase integral 1.22 and spherical albedo 0.294 from their full model; the analytic
-    fit, which levels off near full phase, gives a little more."""
-    q = 2 * quad(lambda a: E.visual_phase_curve(np.degrees(a)) * np.sin(a), 0, np.pi)[0]
-    assert q == pytest.approx(1.35, abs=0.01)
-    assert q * E.VISUAL_NORMALISATION == pytest.approx(0.294, rel=0.07)
+    fit, which levels off near full phase, with its Lambert-shaped tail past their data, gives a little more."""
+    q = 2 * quad(lambda a: float(E.visual_phase_curve(np.degrees(a))) * np.sin(a), 0, np.pi,
+                 points=[np.radians(144.0)])[0]
+    assert q == pytest.approx(1.32, abs=0.01)
+    assert q * E.EARTH_VISUAL_PHASE_NORMALISATION == pytest.approx(0.294, rel=0.05)
 
 
 def test_calibration_reproduces_the_visual_brightness_and_keeps_the_spectral_shape():
@@ -54,3 +55,5 @@ def test_beyond_the_observed_phases_the_earth_fades_to_dark_without_a_step():
     at, past = (E.calibrated_irradiance(bands, solar, a, EARTH_MOON_DISTANCE) for a in (144.0, 144.0001))
     assert past == pytest.approx(at, rel=1e-4)
     assert E.calibrated_irradiance(bands, solar, 180.0, EARTH_MOON_DISTANCE) == pytest.approx([0.0, 0.0], abs=1e-15)
+    assert E.visual_phase_curve(143.9999) == pytest.approx(E.visual_phase_curve(144.0001), rel=1e-4)
+    assert E.visual_phase_curve(180.0) == pytest.approx(0.0, abs=1e-15)

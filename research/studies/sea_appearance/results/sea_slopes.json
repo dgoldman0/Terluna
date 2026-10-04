@@ -22,7 +22,7 @@
   }
  },
  "inputs": {
-  "research/studies/sea_appearance/results/lighting_calendar.json": "226f64c2770f019d8a812ffdf98dacb7a256b3d6078ce5ab88898b51503f4e9d",
+  "research/studies/sea_appearance/results/lighting_calendar.json": "b76f394595eb0c89487c4208eedc4e9a6d1eff3af72bf63bdb79883920b2f674",
   "research/runs/waves/cycle/atmosphere.npz": "4a6bf0fe4832ac4f5a5a62c2dceec813f7de3e37aaf7652e224ddca6f16de9c1",
   "research/runs/waves/nearside/dt300/sea.npz": "5c8302d6a97b2339621f976fc837fd12ef3d6fcdeadb6b7c7ed77672d532005e",
   "research/runs/waves/shore_history/coast_s4_dt900_0_1419/sites.tbl": "6a5b5843bd90d59decc47cd0aa8c207fbaf83722efb696c57c6373f7ad30640b",

@@ -5,7 +5,8 @@ Reads the illumination domain's ephemeris model and star catalogue and the site 
 shared/scenarios/sites.json, and writes assets/sky/site-sky.json and assets/sky/stars.json.
 The Earth imagery is checked against assets/earth/manifest.json; a gain is written to
 assets/earth/calibration.json so the drawn disk's full-phase brightness matches the
-geometric albedo used for earthlight.
+earthlight's measured visual phase curve at full phase. The engine scales the disk at
+other phases from its Lambert shading to that curve.
 """
 from __future__ import annotations
 
@@ -45,11 +46,12 @@ def earth_calibration() -> dict:
     mean = (albedo * weight).sum(axis=(0, 1)) / weight.sum() / albedo.shape[1]
     luminance = float(mean @ [0.2126, 0.7152, 0.0722]) + float(np.dot(HAZE, [0.2126, 0.7152, 0.0722]))
     # A Lambert sphere's geometric albedo is 2/3 of its (uniform) albedo.
-    gain = 1.5 * K.EARTH_GEOMETRIC_ALBEDO / luminance
+    gain = 1.5 * K.EARTH_VISUAL_PHASE_NORMALISATION / luminance
     return {"schema": "terluna.immersion.earth-calibration/1", "gain": gain, "cloud_albedo": CLOUD_ALBEDO,
             "haze": HAZE, "mean_albedo_before_gain": mean.tolist(),
-            "target_geometric_albedo": K.EARTH_GEOMETRIC_ALBEDO,
-            "note": "Global-mean calibration so the disk's full-phase brightness matches earthlight; informed, not measured."}
+            "target_full_phase_reflectance": K.EARTH_VISUAL_PHASE_NORMALISATION,
+            "note": ("Global-mean calibration so the disk's full-phase brightness matches the earthlight's measured "
+                     "visual phase curve (Robinson et al. 2025); the imagery is informed, not measured.")}
 
 
 def main() -> int:

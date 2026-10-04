@@ -34,7 +34,10 @@
     "moon_mean_distance_m": 384400000.0,
     "sidereal_day_s": 86164.0905,
     "obliquity_deg": 23.4393,
-    "geometric_albedo_visible": 0.367
+    "geometric_albedo_visible": 0.242,
+    "visual_phase_normalisation": 0.23,
+    "visual_phase_asymmetry": -0.33,
+    "visual_phase_observed_limit_deg": 144.0
   },
   "sun": {
     "solar_constant_W_m2": 1361.0,
@@ -80,7 +83,8 @@
   },
   "notes": {
     "optical_libration": "Amplitudes of the mean optical librations in longitude and latitude; the ephemeris uses them as sinusoids with the anomalistic and draconic months.",
-    "geometric_albedo_visible": "Earth's visible geometric albedo varies with cloud cover and viewing geometry; 0.367 is a representative value used for earthlight.",
+    "geometric_albedo_visible": "Earth's visual (0.4-0.7 um) geometric albedo, 0.242 (+0.005/-0.004), from Robinson et al. (2025, Planet. Sci. J., arXiv:2507.22258), who fit ground and spacecraft photometry from 5 to 144 degrees of phase. The long-quoted 0.367 (Allen's Astrophysical Quantities, from Danjon's earthshine work) overestimates it. The Earth's turning continents and clouds move its light by about 10% within a day.",
+    "visual_phase_curve": "Earthlight follows Robinson et al.'s analytic fit to the Earth's visual phase curve, I/F = f P_HG(180 - alpha; g) / (pi P_HG(180; g)) with f = visual_phase_normalisation and g = visual_phase_asymmetry; f is the fit's value at full phase, which the full model's backscatter raises to 0.242 within a few degrees of it. Beyond visual_phase_observed_limit_deg, where their data end, the curve follows a Lambert sphere's shape down to dark at new Earth.",
     "lunar_orbit": "Mean orbital eccentricity and inclination to the ecliptic from the NASA GSFC Moon Fact Sheet (nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html).",
     "love_numbers": "Lunar degree-2 tidal Love numbers: k2 = 0.02405 +/- 0.00018 from GRAIL (Konopliv et al. 2013, J. Geophys. Res. Planets, doi:10.1002/jgre.20097); h2 = 0.0371 +/- 0.0033 from LOLA crossovers (Mazarico et al. 2014, Geophys. Res. Lett., doi:10.1002/2013GL059085). A later global LOLA analysis gives h2 = 0.0387 +/- 0.0025 (Thor et al. 2021, J. Geodesy, doi:10.1007/s00190-020-01455-8).",
     "sun_gm": "Heliocentric gravitational constant (TDB-compatible) of the JPL planetary ephemerides."

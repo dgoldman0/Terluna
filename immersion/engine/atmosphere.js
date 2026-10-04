@@ -13,7 +13,7 @@ const SKY_UNIFORMS =
 uniform sampler2D uSkyA,uSkyB;uniform float uBlend,uTime,uCover,uTau,uCloudBase,uCloudDepth,uWind,uVisibility,uR,uSide,uSteps,uEyeHeight,uDrift;
 uniform vec3 uSun,uDirect,uDiffuse,uCloudDirect,uCloudDiffuse,uLocalExtinction,uWhiteBalance;
 uniform vec2 uObserver;uniform bool uShowDisk;
-uniform sampler2D uEarthSkyA,uEarthSkyB,uEarthDay,uEarthClouds;uniform float uEarthBlend,uEarthScale,uEarthShow,uEarthCos,uEarthSin,uEarthGain,uEarthCloudAlbedo,uEarthLod,uEarthDisplay;
+uniform sampler2D uEarthSkyA,uEarthSkyB,uEarthDay,uEarthClouds;uniform float uEarthBlend,uEarthScale,uEarthShow,uEarthCos,uEarthSin,uEarthGain,uEarthCloudAlbedo,uEarthLod,uEarthDisplay,uEarthPhaseGain;
 uniform vec2 uEarthSide;uniform vec3 uEarth,uEarthSunlit,uEarthHaze;uniform mat3 uEarthBasis;
 const float OM_PI=3.141592653589793;
 ` + Column.UNIFORMS;
@@ -24,7 +24,7 @@ float omDensity(vec3 p){float h=(p.y-uCloudBase)/uCloudDepth;float shape=smooths
 float omCloudShadow(vec3 w){if(uColumnMode>.5)return omColumnShadow(w);if(uCover<.005||uTau<.001||uSun.y<-.01)return 1.;vec3 ro=vec3(w.x,uR+max(w.y,0.),w.z);float l0=omShell(ro,uSun,uR+uCloudBase),l1=omShell(ro,uSun,uR+uCloudBase+uCloudDepth);float depth=0.;for(int i=0;i<4;i++){float s=mix(l0,l1,(float(i)+.5)/4.);vec3 p=ro+uSun*s;p.y=length(p)-uR;depth+=omDensity(p)*(l1-l0)*.25/uCloudDepth;}return exp(-min(30.,uTau*depth));}
 `;
 const CLEAR_LOOKUP = `vec3 omAtlas(vec3 d,sampler2D a,sampler2D b,float blend,vec2 side){float e=asin(clamp(d.y,-1.,1.));float v=.5+.5*sign(e)*sqrt(abs(e)/(OM_PI*.5));float az=acos(clamp(dot(d.xz,side)/max(length(d.xz),.000001),-1.,1.))/OM_PI;vec2 uv=vec2((az*32.+.5)/33.,(v*40.+.5)/41.);return mix(texture2D(a,uv).rgb,texture2D(b,uv).rgb,blend);}
-vec3 omEarthDisk(vec3 d){float c=dot(d,uEarth);if(uEarthShow<.5||c<uEarthCos)return vec3(0.);vec3 perp=d-uEarth*c;float r=length(perp)/uEarthSin;float aa=max(fwidth(r),.0005);float cover=1.-smoothstep(1.-aa,1.+aa,r);float s=min(r,1.);vec3 p=r>1e-6?normalize(perp):vec3(0.);vec3 n=-uEarth*sqrt(max(0.,1.-s*s))+p*s;vec3 q=uEarthBasis*n;vec2 uv=vec2(atan(q.y,q.x)/(2.*OM_PI)+.5,asin(clamp(q.z,-1.,1.))/OM_PI+.5);vec3 ground=textureLod(uEarthDay,uv,uEarthLod).rgb;float cloud=textureLod(uEarthClouds,uv,uEarthLod).r;vec3 albedo=min(vec3(1.),uEarthGain*mix(ground,vec3(uEarthCloudAlbedo),cloud)+uEarthHaze);return albedo/OM_PI*uEarthSunlit*max(0.,dot(n,uSun))*cover*uEarthDisplay;}
+vec3 omEarthDisk(vec3 d){float c=dot(d,uEarth);if(uEarthShow<.5||c<uEarthCos)return vec3(0.);vec3 perp=d-uEarth*c;float r=length(perp)/uEarthSin;float aa=max(fwidth(r),.0005);float cover=1.-smoothstep(1.-aa,1.+aa,r);float s=min(r,1.);vec3 p=r>1e-6?normalize(perp):vec3(0.);vec3 n=-uEarth*sqrt(max(0.,1.-s*s))+p*s;vec3 q=uEarthBasis*n;vec2 uv=vec2(atan(q.y,q.x)/(2.*OM_PI)+.5,asin(clamp(q.z,-1.,1.))/OM_PI+.5);vec3 ground=textureLod(uEarthDay,uv,uEarthLod).rgb;float cloud=textureLod(uEarthClouds,uv,uEarthLod).r;vec3 albedo=min(vec3(1.),uEarthGain*mix(ground,vec3(uEarthCloudAlbedo),cloud)+uEarthHaze);return albedo/OM_PI*uEarthSunlit*max(0.,dot(n,uSun))*cover*uEarthDisplay*uEarthPhaseGain;}
 vec3 omEarthLight(vec3 d){return uEarthScale>0.?uEarthScale*omAtlas(d,uEarthSkyA,uEarthSkyB,uEarthBlend,uEarthSide)+omEarthDisk(d):vec3(0.);}
 vec3 omSunSky(vec3 d){float e=asin(clamp(d.y,-1.,1.));float v=.5+.5*sign(e)*sqrt(abs(e)/(OM_PI*.5));float az=acos(clamp(d.x*uSide/max(length(d.xz),.000001),-1.,1.))/OM_PI;vec2 uv=vec2((az*32.+.5)/33.,(v*40.+.5)/41.);return mix(texture2D(uSkyA,uv).rgb,texture2D(uSkyB,uv).rgb,uBlend);}
 vec3 omClear(vec3 d){return omSunSky(d)+omEarthLight(d);}
@@ -132,6 +132,7 @@ class Atmosphere {
       uEarthCos: { value: 1 },
       uEarthSin: { value: 0.0166 },
       uEarthGain: { value: 1 },
+      uEarthPhaseGain: { value: 1 },
       uEarthCloudAlbedo: { value: 0.75 },
       uEarthLod: { value: 0 },
       uEarthDisplay: { value: 1 },
@@ -369,6 +370,7 @@ class Atmosphere {
       horizontal.reduce((sum, v, i) => sum + (v + diffuse[i]) * [0.2126, 0.7152, 0.0722][i], 0);
     this.clearLux += this.earthLux;
     u.uEarthScale.value = ratio;
+    u.uEarthPhaseGain.value = st.earthDiskPhaseGain;
     u.uEarthShow.value = u.uEarthDay.value ? 1 : 0;
     u.uEarthBlend.value = blend;
     u.uEarth.value.set(x, y, z);

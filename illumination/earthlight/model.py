@@ -17,9 +17,10 @@ The model's Earth is fainter than the observed one. Robinson et al. (2025, Plane
 combined ground and spacecraft photometry from 5 to 144 degrees of phase into the Earth's visual (0.4-0.7
 micrometre) phase curve: a geometric albedo of 0.242, against the long-quoted 0.367 that rests on Danjon's
 extrapolated earthshine, and an analytic fit I/F = f P_HG(180 - alpha; g) / (pi P_HG(180; g)) with f = 0.23 and
-g = -0.33. calibrated_irradiance keeps Glenar et al.'s spectral shape and scales it, at each phase angle, to
-that visual brightness, weighting by the solar spectrum over 400-700 nm. Beyond the 144 degrees their data
-reach, the scale stays at its 144-degree value and Glenar et al.'s curve carries the Earth to dark at new Earth.
+g = -0.33 (shared/constants.json). Beyond the 144 degrees their data reach, the curve follows a Lambert sphere's
+shape, continuous there, down to dark at new Earth. calibrated_irradiance takes the spectral shape from Glenar et
+al. at the phase angle (held at its 144-degree shape beyond) and the visual brightness from that curve, weighting
+by the solar spectrum over 400-700 nm.
 """
 from __future__ import annotations
 
@@ -28,13 +29,12 @@ from functools import lru_cache
 import numpy as np
 
 from illumination.earthlight.fetch_inputs import path
-from shared.constants import EARTH_RADIUS
+from shared.constants import (EARTH_RADIUS, EARTH_VISUAL_PHASE_ASYMMETRY, EARTH_VISUAL_PHASE_NORMALISATION,
+                              EARTH_VISUAL_PHASE_OBSERVED_LIMIT_DEG)
 
 TABLE = "Earthshine_Spring_Approximation_Revised_Sept2018.txt"
 VALID_PHASE_DEG = 60.0
-VISUAL_NORMALISATION, VISUAL_ASYMMETRY = 0.23, -0.33     # Robinson et al. (2025), equation 14
 VISUAL_BAND_NM = (400.0, 700.0)
-OBSERVED_PHASE_DEG = 144.0       # the largest phase angle in Robinson et al.'s data
 
 
 @lru_cache(maxsize=1)
@@ -94,16 +94,31 @@ def solid_angle(distance_m):
     return 2 * np.pi * (1 - np.sqrt(1 - (EARTH_RADIUS / np.asarray(distance_m, float)) ** 2))
 
 
-def visual_phase_curve(phase_deg, asymmetry=VISUAL_ASYMMETRY):
-    """The Earth's visual phase function, one at full phase: a Henyey-Greenstein lobe at scattering angle 180 - alpha."""
+def lambert_phase(phase_deg):
+    a = np.radians(np.asarray(phase_deg, float))
+    return (np.sin(a) + (np.pi - a) * np.cos(a)) / np.pi
+
+
+def visual_phase_curve(phase_deg):
+    """The Earth's visual phase function, one at full phase: a Henyey-Greenstein lobe at scattering angle 180 - alpha
+    where Robinson et al.'s data reach, a Lambert sphere's shape, continuous with it, beyond."""
+    g = EARTH_VISUAL_PHASE_ASYMMETRY
+
     def lobe(cos_theta):
-        return (1 - asymmetry ** 2) / (1 + asymmetry ** 2 - 2 * asymmetry * cos_theta) ** 1.5
-    return lobe(-np.cos(np.radians(phase_deg))) / lobe(-1.0)
+        return (1 - g ** 2) / (1 + g ** 2 - 2 * g * cos_theta) ** 1.5
+
+    def fitted(a):
+        return lobe(-np.cos(np.radians(a))) / lobe(-1.0)
+
+    a = np.asarray(phase_deg, float)
+    limit = EARTH_VISUAL_PHASE_OBSERVED_LIMIT_DEG
+    tail = fitted(limit) * lambert_phase(a) / lambert_phase(limit)
+    return np.where(a <= limit, fitted(a), tail)
 
 
 def visual_intensity(phase_deg):
     """The Earth's visual disk-averaged intensity over the solar flux, I/F (per steradian)."""
-    return VISUAL_NORMALISATION * visual_phase_curve(phase_deg) / np.pi
+    return EARTH_VISUAL_PHASE_NORMALISATION * visual_phase_curve(phase_deg) / np.pi
 
 
 def calibrated_irradiance(bands_nm, solar_band_irradiance, phase_deg, distance_m, sub_latitude_deg=0.0):
@@ -114,8 +129,6 @@ def calibrated_irradiance(bands_nm, solar_band_irradiance, phase_deg, distance_m
     bands = np.atleast_2d(np.asarray(bands_nm, float))
     width = bands[:, 1] - bands[:, 0]
     visual = (bands[:, 0] >= VISUAL_BAND_NM[0]) & (bands[:, 1] <= VISUAL_BAND_NM[1])
-    anchor = min(float(phase_deg), OBSERVED_PHASE_DEG)
-    modelled = ((band_radiance(bands, anchor, sub_latitude_deg) * width)[visual].sum()
-                / np.asarray(solar_band_irradiance, float)[visual].sum())
-    intensity = band_radiance(bands, phase_deg, sub_latitude_deg) * width          # W m-2 sr-1 per band
-    return intensity * visual_intensity(anchor) / modelled * solid_angle(distance_m)
+    shape = band_radiance(bands, min(float(phase_deg), EARTH_VISUAL_PHASE_OBSERVED_LIMIT_DEG), sub_latitude_deg) * width
+    modelled = shape[visual].sum() / np.asarray(solar_band_irradiance, float)[visual].sum()
+    return shape * visual_intensity(phase_deg) / modelled * solid_angle(distance_m)
