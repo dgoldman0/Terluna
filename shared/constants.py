@@ -22,6 +22,7 @@ CM1_VAPOUR_GAS_CONSTANT = DATA["model_closures"]["cm1_r22"]["water_vapour_gas_co
 ELEMENTARY_CHARGE = DATA["physics"]["elementary_charge_C"]
 VACUUM_PERMEABILITY = DATA["physics"]["vacuum_permeability_N_A2"]
 CLASSICAL_ELECTRON_RADIUS = DATA["physics"]["classical_electron_radius_m"]
+GRAVITATIONAL_CONSTANT = DATA["physics"]["gravitational_constant_m3_kg_s2"]
 
 MOON_RADIUS = DATA["moon"]["radius_m"]
 MOON_GM = DATA["moon"]["gm_m3_s2"]

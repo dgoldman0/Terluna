@@ -6,8 +6,10 @@ the GRAIL GL0420A gravity field are fetched and hash-checked
 referred to the geoid, and hydrostatic water storage is computed. The IAU lunar
 nomenclature is fetched and hash-checked the same way and names the atlas's seas,
 islands and targets. A first estimate of rivers and rain-fed lakes routes the
-climate run's runoff over the terrain. Erosion, groundwater and climate-coupled
-shorelines are the next layer.
+climate run's runoff over the terrain. The monthly tide of every sea is computed
+from the lunar orbit and librations, with each sea's volume and the water's own
+attraction, and checked against a dynamic solution. Erosion, groundwater and
+climate-coupled shorelines are the next layer.
 
 | File | Holds |
 |---|---|
@@ -21,6 +23,9 @@ shorelines are the next layer.
 | [nomenclature.py](nomenclature.py) | IAU lunar feature names from the USGS gazetteer archive (read by a small dBase reader built on the standard library) |
 | [drainage.py](drainage.py) | Rivers and rain-fed lakes above sea level: runoff from the climate run routed over the 16 px/deg terrain, with fill-and-spill lakes set by each depression's water balance ([results/drainage.json](results/drainage.json); grid product in `products/`). `--climatology` takes another run's climate product, `--out` writes elsewhere |
 | [groundwater.py](groundwater.py) | A first estimate of the water the porous crust takes up, from GRAIL's porosity, beside the seas and lakes ([results/groundwater.json](results/groundwater.json)) |
+| [lunar_ephemeris.py](lunar_ephemeris.py) | The Earth's and the Sun's directions over the Moon and their distances: the truncated ELP-2000/82 lunar theory with the optical librations, checked against JPL Horizons ([tides_ephemeris_check.csv](tides_ephemeris_check.csv)) |
+| [tides.py](tides.py) | The monthly tide of every sea, 2026–2045: equilibrium height with each sea's volume held and the water's self-attraction, constituents, ranges and stations ([results/tides.json](results/tides.json); grid product in `products/`) |
+| [tide_dynamics.py](tide_dynamics.py) | Linear shallow-water response of a sea to one tidal line, with the Moon's rotation and bed friction, and the sea's seiches |
 
 ## What the topography allows
 
@@ -156,6 +161,84 @@ saturation depth is a question of time this estimate does not settle. It leaves
 out the maria's less porous basalt fill, closed pores, water bound into new
 minerals and the water table's shape on land.
 
+## The monthly tide
+
+Earth raises a tide on the Moon 12.9 m high at the sub-Earth point. Its permanent
+part already shapes the atlas's equipotential. The orbit's eccentricity and the
+evection change the Earth's distance through each month, and the optical
+librations swing the sub-Earth point by about 7° in longitude and latitude, so
+the bulge swells, shrinks and rocks. The Sun adds 7 cm. `python -m geography.tides`
+(about five minutes) writes [results/tides.json](results/tides.json) (schema
+`terluna.geography.tides/1`) and the grid product `products/tides_28pct_4ppd.npz`,
+kept out of Git.
+
+- **Ephemeris.** [lunar_ephemeris.py](lunar_ephemeris.py) takes the truncated
+  ELP-2000/82 lunar theory and the optical librations as tabulated by Meeus
+  (*Astronomical Algorithms*, 1998, chapters 47 and 53). Against JPL Horizons
+  (DE441) over 2026–2045, the sub-Earth and sub-solar points agree within
+  0.05°, the physical librations it leaves out, and the Earth's distance within
+  11 km.
+- **Height.** The degree-2 and degree-3 potential of the Earth and the Sun, every
+  three hours from 2026 to 2045, through the 18.6-year nodal cycle, on the atlas's
+  quarter-degree nodes. The solid Moon's own tide enters through the Love numbers
+  k2 = 0.02405 (GRAIL) and h2 = 0.0371 (LOLA). Each sea keeps its volume. The
+  water's self-attraction, solved for all seas together through spherical
+  harmonics to degree 60, adds 9% in the largest seas.
+
+Ranges below are the highest minus the lowest level within an anomalistic month
+(27.55 days), the median over the record's 251 months, weighted by area over
+each sea:
+
+| Sea | Typical monthly range | 95th percentile of the sea's area | Largest in 19 years |
+|---|---:|---:|---:|
+| Nearside | 3.7 m | 6.0 m | 9.8 m |
+| South Pole–Aitken | 2.1 m | 3.5 m | 6.7 m |
+| Humboldtianum | 0.85 m | 1.9 m | 3.9 m |
+| Smythii–Marginis | 0.55 m | 1.4 m | 2.8 m |
+| Moscoviense | 0.40 m | 0.61 m | 1.1 m |
+| Orientale | 0.37 m | 0.81 m | 1.5 m |
+
+The nearside sea's typical monthly range is 3.3–3.5 m at Procellarum, Imbrium
+and Frigoris, 4.1 m in Serenitatis, 5.0 m in Tranquillitatis and 5.5–6.0 m in
+Fecunditatis, Nubium and Humorum. Mare Ingenii's is 3.1 m. Mare Smythii's is
+0.23 m and the eastern Smythii headland of the wave studies 0.78 m (1.0 m at
+most): there the monthly tide moves the waterline 40–80 m on 1:50 and 1:100
+beaches.
+
+The forcing is a monthly pair: the anomalistic month M′ (27.55 days, from the
+eccentricity and the libration in longitude) and the draconic month F (27.21 days,
+the libration in latitude), each up to 2.2 m. The evection 2D − M′ (31.8 days)
+and 2D (14.77 days) reach 0.44 m. The fortnightly lines M′ + F, 2M′ and 2F
+(13.6–13.8 days) reach 0.13–0.31 m, and 2D + M′ (9.61 days) 0.09 m. Twelve lines
+hold 95% of the forcing's variance.
+
+[tide_dynamics.py](tide_dynamics.py) solves the linear shallow-water equations
+for the eight leading lines on each main sea's quarter-degree cells, with the
+Moon's rotation and bed friction for 1 cm/s flows. It covers the 94–99% of each
+sea joined through shared cell faces.
+
+- **Smythii–Marginis** follows its equilibrium within 1.4%. Its seiches take
+  40, 21 and 17 hours.
+- **The South Pole–Aitken sea** follows within 6% in RMS. A sub-basin by Lacus
+  Tenebrarum, near the pole, joins it through narrow passages and, at
+  quarter-degree cells, exchanges water over 15 days.
+- **The nearside sea's monthly lines** follow within 7% in RMS.
+- **Mare Fecunditatis** joins the nearside sea through a strait near 40° E, 7° S,
+  60–180 m deep and a few cells wide. It exchanges water with the main sea every
+  9.5 days: 13.0 at half-degree cells and 9.1 at whole degrees, so the strait's
+  geometry sets the period. Inside Fecunditatis the fortnightly lines rise to
+  about twice their equilibrium height. The 9.61-day line, close to the exchange
+  period, resonates: 39 times its equilibrium height with bed friction for
+  1 cm/s flows, 5.4 times with ten times that friction and 0.6 times with a
+  hundred times. A strait moving a metre of Fecunditatis's level flows at
+  about 1 m/s, the hundredfold case. The strait's true geometry and nonlinear
+  friction set Fecunditatis's tide.
+
+The self-attraction holds the solid Moon rigid under the water's load and uses
+the 1,025 kg/m³ water density of the wave studies. Fresh water would lower the
+9% self-attraction by 2.5% of itself. Degree 3 also uses a rigid Moon and adds
+at most 6 cm.
+
 ## Limits
 
 - **Datums:** LOLA (mean-Earth frame) and GL0420A (principal-axis frame) differ
@@ -171,6 +254,8 @@ minerals and the water table's shape on land.
 ## Next work
 
 - How fast, and how deep, the crust takes up water, which sets the inventory to deliver (see "Groundwater").
+- The straits of Mare Fecunditatis and of the Tenebrarum sub-basin at 16 px/deg, with nonlinear bed friction, which
+  set those basins' fortnightly and 9.6-day tides; the tide's water levels in the wave and run-up calculations.
 - Groundwater storage in the porous crust (GRAIL: about 12%) and crustal loading, which set how much water
   to deliver for 28% cover and where the shore falls.
 - LOLA polar stereographic grids for the polar cold traps.

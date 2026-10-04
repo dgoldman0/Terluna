@@ -10,7 +10,8 @@
     "standard_gravity_m_s2": 9.80665,
     "elementary_charge_C": 1.602176634e-19,
     "vacuum_permeability_N_A2": 1.25663706212e-06,
-    "classical_electron_radius_m": 2.8179403262e-15
+    "classical_electron_radius_m": 2.8179403262e-15,
+    "gravitational_constant_m3_kg_s2": 6.6743e-11
   },
   "moon": {
     "radius_m": 1737400.0,

@@ -56,22 +56,24 @@ thousands of kilometres.
 **The monthly tide.** The atlas's equipotential already holds Earth's static
 tide. The orbit's eccentricity and the optical librations move that tide
 through each month, and every coastal and run-up calculation holds the water
-level fixed. A first equilibrium estimate, with each sea's mean level held and
-the lunar Love numbers k₂ = 0.02405 and h₂ = 0.0371, gives these monthly ranges:
+level fixed. The [geography tide product](../../geography/README.md#the-monthly-tide)
+computes it for every sea, with each sea's volume held, the water's
+self-attraction and a dynamic check. Typical monthly ranges:
 
-| Sea | Median range | 95th percentile | Largest |
+| Sea | Median over the sea's area | 95th percentile | Largest in 19 years |
 |---|---:|---:|---:|
-| Nearside | 3.4 m | 6.7 m | 8.3 m |
-| South Pole–Aitken | 2.1 m | 3.4 m | 3.9 m |
-| Smythii–Marginis | 0.50 m | 1.2 m | 1.7 m |
+| Nearside | 3.7 m | 6.0 m | 9.8 m |
+| South Pole–Aitken | 2.1 m | 3.5 m | 6.7 m |
+| Smythii–Marginis | 0.55 m | 1.4 m | 2.8 m |
 
-At the eastern Smythii headland the range is 0.70 m. That moves the waterline
-35–70 m on the 1:50 and 1:100 beaches, against run-up of 1–2.4 m. The
-geography tide product supersedes this estimate. Air pressure tilts the seas
-by at most 0.18 m (nearside) and 0.09 m (Smythii–Marginis). That is 6.0 times the
-Earth response per hectopascal, but small, because the GCM's pressure
-differences across a sea are small. Wind setup across Smythii–Marginis is about
-1 cm at its peak stress.
+At the eastern Smythii headland the typical monthly range is 0.78 m. That
+moves the waterline 40–80 m on the 1:50 and 1:100 beaches, against run-up of
+1–2.4 m. The review's first estimate (Keplerian distance and the leading
+librations, [review_checks.py](review_checks.py)) gave 3.4, 2.1 and 0.50 m. Air
+pressure tilts the seas by at most 0.18 m (nearside) and 0.09 m
+(Smythii–Marginis), 6.0 times the Earth response per hectopascal, small because
+the GCM's pressure differences across a sea are small. Wind setup across
+Smythii–Marginis is about 1 cm at its peak stress.
 
 **Coasts of regolith.** The shore profiles interpolate 118 m LOLA pixels over
 today's regolith-covered surface, with mean slopes of 1:3.8 to 1:6.5. The
