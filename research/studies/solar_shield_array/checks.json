@@ -1,10 +1,10 @@
 {
   "schema": "terluna.research.solar-shield-checks/1",
-  "checked_at_utc": "2026-10-04T19:46:21.715390+00:00",
+  "checked_at_utc": "2026-10-04T20:10:53.819056+00:00",
   "scope": "Numerical implementation, source identity and repository checks",
   "scientific_validation": false,
   "base_main_commit": "2f2e0a104a3a1ea962a6dead4179f522762f997e",
-  "design_commit": "4fb7a35",
+  "design_commit": "c97912d89d9d4cc3f6f45ffe6b013af4e4e59e91",
   "runtime": {
     "python": "3.12.14",
     "numpy": "2.3.5",
@@ -39,7 +39,7 @@
   },
   "python_repository_tests": {
     "status": "FAIL_EXISTING",
-    "summary": "13 failed, 570 passed, 55 skipped in 14.37s",
+    "summary": "13 failed, 570 passed, 55 skipped in 13.44s",
     "same_failed_tests_before_model_changes": true,
     "failed_tests": [
       "atmosphere/tests/test_absorption.py::test_ion_production_falls_with_the_shadow_and_ends_at_the_outer_radius",
@@ -99,7 +99,25 @@
     "generated_png_ignored_by_git": true
   },
   "publication": {
-    "status": "LOCAL_BRANCH",
-    "remote_push": "Automatic approval review rejected the push as insufficiently authorized; no bypass attempted"
+    "status": "PUBLISHED_BRANCH",
+    "branch": "research/solar-shield-habitat-array",
+    "remote_design_commit": "c97912d89d9d4cc3f6f45ffe6b013af4e4e59e91",
+    "remote_study_commit": "3af0bc982d972c936cc6d8572ead18b862d88117",
+    "method": "Connected GitHub Git-data API; both remote Git trees exactly match the original local commits; fetched and aligned the local branch",
+    "git_transport_attempt": "Direct push found no configured write credentials",
+    "authorization": "Author explicitly authorized remote publication on 2026-10-04",
+    "preceding_review": "An earlier push was rejected as insufficiently authorized; no publication was performed before the author supplied explicit authorization"
+  },
+  "original_local_design_commit": "4fb7a35c9b57816a16c837b754216474451acf8f",
+  "tacking_followup": {
+    "status": "ALGEBRAIC_SCREEN_REPRODUCED",
+    "runner": "tacking_screen.py",
+    "product": "results/tacking_screen.json",
+    "sha256": "2ef3e76c3ad39484882154bbc3f011d3ab500e9f5efa066fcd55f1ad4cceaa25",
+    "primary_source_review": "Targeted reading of orbital/control methods and results; 2026 sunshade work available as an abstract only",
+    "referenced_chat": "Not retrieved from history search; the direct view was signed out and contained no conversation messages",
+    "cycling_orbit_solved": false,
+    "fleet_coverage_demonstrated": false,
+    "make_check_repeat": "Layer and historical provenance checks pass with existing missing inputs; ensemble setup passes. The same 13 Python failures and Node directory-selector blocker remain."
   }
 }

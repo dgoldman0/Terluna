@@ -12,6 +12,11 @@ eclipses and propagated control. The selected monthly trajectory reduces the
 50-g/m² array's mean holding power from about 309 to 238 TW under the reference
 propulsion assumptions. It still consumes about 371,000 kg/s of propellant.
 
+[Photogravitational tacking](tacking.md) is the next research direction:
+search returning sail-assisted trajectories and phased tile handovers at the
+same 50-g/m² base mass. The literature review and algebraic inventory screen
+do not yet establish an orbit or continuous shield coverage.
+
 The study couples protection, engineering, illumination and habitation. Its
 runners, compact numerical results and interpretation belong together here;
 dynamics components belong in the protection domain. Computation files and
@@ -26,6 +31,7 @@ python -m protection.dynamics.ephemeris --download
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.run
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.validate
 python -m research.studies.solar_shield_array.publish
+python -m research.studies.solar_shield_array.tacking_screen
 python -m pytest protection/dynamics research/studies/solar_shield_array
 python visualization/solar-shield-array/plot.py
 ```
