@@ -1,0 +1,105 @@
+{
+  "schema": "terluna.research.solar-shield-checks/1",
+  "checked_at_utc": "2026-10-04T19:46:21.715390+00:00",
+  "scope": "Numerical implementation, source identity and repository checks",
+  "scientific_validation": false,
+  "base_main_commit": "2f2e0a104a3a1ea962a6dead4179f522762f997e",
+  "design_commit": "4fb7a35",
+  "runtime": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "matplotlib": "3.10.8",
+    "jplephem": "2.24",
+    "pytest": "9.1.1",
+    "calculation_threads": 1
+  },
+  "study_tests": {
+    "status": "PASS",
+    "command": "python -m pytest protection/dynamics research/studies/solar_shield_array -q",
+    "passed": 25
+  },
+  "numerical_validation": {
+    "status": "PASS",
+    "product": "results/validation.json",
+    "sha256": "a86f07d44598ed02a062b62fb829d2583c88ad24bdb30691996173f1cb02adf1",
+    "checks": [
+      "DE440s checksum",
+      "momentum direction and force envelope",
+      "finite-Sun eclipse and ray geometry",
+      "independent circular limit",
+      "velocity difference convergence",
+      "kernel interpolation",
+      "retarded positions versus exact kernel",
+      "hourly versus ten-minute holding",
+      "96 versus 384 spatial nodes",
+      "feedback and uncontrolled trajectory propagation",
+      "19-year eclipse contacts"
+    ]
+  },
+  "python_repository_tests": {
+    "status": "FAIL_EXISTING",
+    "summary": "13 failed, 570 passed, 55 skipped in 14.37s",
+    "same_failed_tests_before_model_changes": true,
+    "failed_tests": [
+      "atmosphere/tests/test_absorption.py::test_ion_production_falls_with_the_shadow_and_ends_at_the_outer_radius",
+      "atmosphere/tests/test_absorption.py::test_ionization_rate_is_of_the_tabulated_order",
+      "atmosphere/tests/test_absorption.py::test_design_case_needs_a_radius_just_under_the_exobase",
+      "atmosphere/tests/test_exosphere.py::test_dissociation_rates_agree_with_heays",
+      "atmosphere/tests/test_exosphere.py::test_ions_made_match_the_absorption_step",
+      "atmosphere/tests/test_exosphere.py::test_charge_exchange_thin_limit_counts_the_swept_exosphere",
+      "atmosphere/tests/test_exosphere.py::test_magnetosphere_accounts_for_every_ion_and_a_stronger_one_keeps_more",
+      "atmosphere/tests/test_exosphere.py::test_levels_are_ordered_and_wider_shadows_never_lose_more",
+      "climate/tests/test_cm1_run.py::test_the_terrain_build_forces_each_column_at_its_own_height",
+      "climate/tests/test_exoplasim_run.py::RunnerTests::test_process_lookup_finds_this_process",
+      "climate/tests/test_ring_comfort.py::test_hours_are_shares_of_the_lunar_day",
+      "climate/tests/test_ring_comfort.py::test_the_rings_land_is_pooled_by_latitude_and_height_and_counted_in_shares",
+      "research/studies/protection_architecture/test_run.py::test_design_point_holds_together"
+    ],
+    "causes": [
+      "missing pinned WHI solar spectrum",
+      "missing generated moon_gcm_configuration.json",
+      "process-group lookup does not see the test process in this execution environment"
+    ]
+  },
+  "javascript_make_target": {
+    "status": "BLOCKED",
+    "reason": "The Node directory test selector cannot load immersion/tests/unit as a module in this environment"
+  },
+  "javascript_explicit_file_tests": {
+    "status": "INCOMPLETE",
+    "command": "node --test --test-concurrency=1 immersion/tests/unit/*.test.js atmosphere/column/tests/*.test.cjs illumination/references/tests/*.test.cjs visualization/atmospheric-columns/tests/*.test.mjs",
+    "passed": 119,
+    "failed": 5,
+    "cause": "three is not installed in this worktree; related landscape/forest/cache and game-export checks fail"
+  },
+  "layer_check": {
+    "status": "PASS"
+  },
+  "historical_provenance": {
+    "status": "PASS_WITH_BLOCKED_INPUTS",
+    "missing": [
+      "TSIS1_HSRS_stride100.csv",
+      "TiO2_Siefke.yml",
+      "o.nff",
+      "si.nff",
+      "ti.nff",
+      "SiO2_Franta.yml"
+    ],
+    "new_study_uses_its_own_pinned_ephemeris": true
+  },
+  "ensemble_workspace": {
+    "status": "PASS",
+    "scope": "setup integrity"
+  },
+  "figure": {
+    "status": "VISUALLY_REVIEWED",
+    "renderer": "../../../visualization/solar-shield-array/plot.py",
+    "data_product": "results/holding.json",
+    "generated_png_ignored_by_git": true
+  },
+  "publication": {
+    "status": "LOCAL_BRANCH",
+    "remote_push": "Automatic approval review rejected the push as insufficiently authorized; no bypass attempted"
+  }
+}

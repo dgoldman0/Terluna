@@ -6,9 +6,11 @@ with a full Sun–Earth–Moon ephemeris. The branch starts at main commit
 `2f2e0a104a3a1ea962a6dead4179f522762f997e`.
 
 [design.md](design.md) records the proposed architecture before dynamics work.
-The first calculation will compare the September held screen with physically
-allowed solar-radiation-pressure control, variable sunward distance and
-alternative trajectories. Protection and climate coverage remain constraints.
+The [full-ephemeris study](report.md) compares the September held screen with
+conserved solar momentum, variable sunward distance, transverse motion,
+eclipses and propagated control. The selected monthly trajectory reduces the
+50-g/m² array's mean holding power from about 309 to 238 TW under the reference
+propulsion assumptions. It still consumes about 371,000 kg/s of propellant.
 
 The study couples protection, engineering, illumination and habitation. Its
 runners, compact numerical results and interpretation belong together here;
@@ -16,11 +18,39 @@ dynamics components belong in the protection domain. Computation files and
 external ephemeris kernels go in ignored `research/runs/`. The historical
 protection implementation and its imported results remain byte-pinned.
 
-## Initial branch checks
+## Reproduce the study
+
+```sh
+python -m pip install -r research/requirements.txt
+python -m protection.dynamics.ephemeris --download
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.run
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.validate
+python -m research.studies.solar_shield_array.publish
+python -m pytest protection/dynamics research/studies/solar_shield_array
+python visualization/solar-shield-array/plot.py
+```
+
+The runner writes raw results to `research/runs/solar_shield_array/`.
+`publish.py` checks source identity, relevant constants, time/area convergence
+and the matching validation product before exporting compact
+[holding](results/holding.json) and [validation](results/validation.json)
+snapshots. The plot and its provenance are generated locally under
+`visualization/solar-shield-array/results/`. `--quick` provides the centre-force
+pilot without optimization, nodal-span propagation or the final exporter.
+
+The final comparisons preserve a four-lunar-radius protected region and the
+selected climate spectrum. Optical control is an optimistic lower bound;
+10-g/m² films require a replacement optical stack. The 19-year test and ideal
+feedback propagation establish numerical behavior for the tested families.
+Final holding architecture, actual filter/PV forces, safe plumes, tile seams,
+habitat capacity and long-term resource closure remain open.
+
+## Checks
 
 `make check` was run before this design-only commit: 545 Python tests passed,
 55 skipped and 13 failed. The failures concern absent solar-spectrum inputs,
 CM1 build configuration, the ExoPlaSim process lookup and ring-comfort tests.
-No executable model was changed in this commit. The remaining make targets
-were also run separately; see the study's later validation record for the
-complete state of the workspace.
+No executable model was changed in that initial commit. The final study has
+25 passing targeted tests. Repository-wide check status and the numerical
+verification are recorded in [checks.json](checks.json) and
+[validation.json](results/validation.json).

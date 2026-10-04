@@ -276,7 +276,8 @@
         "studies/optical_comfort/results/water_slopes.json",
         "../illumination/sky/SOLVED_COLUMN.md",
         "../illumination/sky/results/solved_sky.json",
-        "studies/optical_comfort/results/spherical_sky.json"
+        "studies/optical_comfort/results/spherical_sky.json",
+        "studies/solar_shield_array/"
       ],
       "unresolved": [
         "supported floor area and mass",
@@ -285,7 +286,8 @@
         "health at 0.16 g: artificial gravity as a public utility (rotating residences; 1 g clinics, maternity centres and schools) until 0.16 g is shown safe (July 2026 bundle, archive/july_2026_knowledge_bundle/)",
         "civil time: 24-hour civil days inside the 29.53-day month, with named light phases (July 2026 bundle, archive/july_2026_knowledge_bundle/)",
         "fire safety in settlements at 0.16 g (July 2026 bundle, archive/july_2026_knowledge_bundle/)",
-        "optical comfort: a spherical angular sky with the current shield and solved columns; site-specific surface BRDFs and geometry, water slopes, clouds and human-factors validation. Native sky archives verify the packed-input scene results; local coastal spectra supply resolved slope covariance. Shorter-wave roughness and actual reflection remain open."
+        "optical comfort: a spherical angular sky with the current shield and solved columns; site-specific surface BRDFs and geometry, water slopes, clouds and human-factors validation. Native sky archives verify the packed-input scene results; local coastal spectra supply resolved slope covariance. Shorter-wave roughness and actual reflection remain open.",
+        "counterrotating toroidal nodes: complete floor-area, pressure-vessel, radiation-shielding and service budgets; compare attached wheels with economical trajectories"
       ],
       "next_session_task": "Size representative structures/vehicles, then compare networks and daily/monthly uses."
     },
@@ -297,7 +299,8 @@
         "baselines/feasibility/model.py",
         "../engineering/reference/industrial_architecture/",
         "../engineering/network/",
-        "../engineering/network/results/protection_supply_ledger.json"
+        "../engineering/network/results/protection_supply_ledger.json",
+        "studies/solar_shield_array/"
       ],
       "unresolved": [
         "complete source-to-use pathways",
@@ -308,13 +311,14 @@
         "the integrated industrial network model specified in section 10 of the reconstructed architecture (engineering/reference/industrial_architecture/): nodes, tracked commodities, link and node properties, and outputs joining the logistics, growth, maintenance, conservation, protection and climate accounts",
         "the packet matter stream (about 2.7e8 kg/s, about 5e16 kg in transit) and its geometry under the six traffic-safety rules (research/decisions.md)",
         "the cislunar terminal layer: remote braking, capture, inspection and quarantine, repacking, buffering, metered delivery and kinetic-energy recovery; where its catchers sit so that Earth never lies behind them",
-        "three power ledgers kept apart (civilization-wide power, the Open Moon's allocation, and where heat is released), and the power sequence from fission bootstrap through fusion to near-Sun collection with power beaming"
+        "three power ledgers kept apart (civilization-wide power, the Open Moon's allocation, and where heat is released), and the power sequence from fission bootstrap through fusion to near-Sun collection with power beaming",
+        "solar shield/habitat power network: gross collection, holding load, delivered 100-TW case, conversion and transfer losses, thermal paths and returned momentum carriers"
       ],
       "next_session_task": "Add source, transport and capture nodes with capacities and the delivery routes to the network model, then score the protection holding options in the supply ledger."
     },
     {
       "topic": "protection",
-      "condition": "historical_component_model; film_short_wave_transmission_computed_0.1_210_nm; module_catalogue_of_the_september_reference; swarm_uv_transmission_screened_for_three_design_levels",
+      "condition": "historical_component_model; film_short_wave_transmission_computed_0.1_210_nm; module_catalogue_of_the_september_reference; swarm_uv_transmission_screened_for_three_design_levels; de440_full_ephemeris_point_mass_holding; bounded_monthly_trajectory_search; finite_sun_eclipses_with_retarded_body_positions; independent_tile_area_quadrature; 19_year_nodal_span; ideal_feedback_propagation",
       "material": [
         "../protection/model.py",
         "../protection/verify.py",
@@ -335,7 +339,7 @@
         "the swarm's UV transmission (3e-5 to 2.6e-3 by design level) rests on untested choices: neighbours held within 1-10 m, cell failures of 1-3% a year covered within a day to a month, holes in the oxide film 1-4 times the particle size",
         "a shield passing 5% less sunlight than the titania stack at every wavelength, the climate design the author chose (climate/gcm): how to build it",
         "coupled atmosphere and clean plumes",
-        "full ephemerides and flexible structures",
+        "holding outside the tested DE440 bounded trajectory families; flexible structures, seam errors and constrained formation control",
         "plasma interaction and dose",
         "material aging",
         "holding propellant: the reference screen uses 2.8e5 kg/s, more than the feasibility report's energy-limited loss with no filter (about 5,300-195,000 kg/s at 10% efficiency); it saves mass only if much lighter, with much faster exhaust, or held without propellant",
@@ -344,7 +348,7 @@
         "solar-wind subsystem: a 1 kg/s budget needs one against the solar wind's charge exchange (atmosphere/loss_response exosphere step); a dipole of about 3e19 A m^2 suffices for cool upper air, far below the four 100 km regional loops (1.5e21 A m^2, about 2e14 kg); the 2025 plasma-inflated Lunashield-L1 concept (23-40 t, unvalidated; known from a 2026-09-26 reconstruction in reference/historical/) is another candidate",
         "effects on Earth (report.md section 6): reflections toward Earth near full moon, and the screen crossing the full Moon and the Sun as seen from Earth"
       ],
-      "next_session_task": "Run the full-ephemeris photogravitational holding study; compare physically admissible optical control, protected aperture and propulsion closure for the solar shield/habitat array.",
+      "next_session_task": "Extend the holding search to broader trajectories and fleet handover with shadow coverage; compare external momentum return/capture. Replace the ideal optical envelope with filter/PV or routed-light spectral forces and complete areal mass.",
       "requirements_from_september_reports": [
         "construction within 500 years of 2026; operation for at least 1e9 years",
         "an open atmosphere with no pressure dome; no superconducting planetary ring",

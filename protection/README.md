@@ -169,3 +169,15 @@ years keep the rest small. The design levels are assumptions to test;
 The preserved results include successful and failed propulsion closures. Large sampled optical/phase grids and the rendered PDF are omitted from this curated import and recorded in [provenance](../research/provenance.json). Their numerical tables can be regenerated from the original code once inputs are restored. The older [shield geometry table](reference/legacy_shield_geometry.csv) remains explicitly separate from this later design.
 
 [Checks](../research/checks.json) report precisely which implementation tests were run, without granting environmental or engineering validation.
+
+## Full-ephemeris array study (2026-10-04)
+
+[The solar shield/habitat study](../research/studies/solar_shield_array/report.md)
+adds [DE440 dynamics](dynamics/README.md), conserved photon-momentum bounds,
+a bounded monthly trajectory search, area quadrature and 19-year eclipse
+checks. The 50-g/m² reference reduces mean holding power from about 309 to
+238 TW on the selected moving path, with about 371,000 kg/s of propellant.
+A 10-g/m² replacement film gives about 40 TW on that path; the stored oxides
+alone already weigh about 26 g/m². The imported September model stays intact.
+Optical material performance, safe plumes, tile formation, passive solutions
+and lifetime material closure remain open.

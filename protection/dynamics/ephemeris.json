@@ -1,0 +1,13 @@
+{
+  "schema": "terluna.protection.ephemeris-input/1",
+  "name": "de440s.bsp",
+  "url": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/spk/planets/de440s.bsp",
+  "bytes": 32726016,
+  "sha256": "c1c7feeab882263fc493a9d5a5b2ddd71b54826cdf65d8d17a76126b260a49f2",
+  "published_md5": "3917ee56769db332790c751e2168843d",
+  "checksum_source": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/spk/planets/aa_checksums.txt",
+  "reference": "Park, Folkner, Williams and Boggs (2021), The JPL Planetary and Lunar Ephemerides DE440 and DE441, Astronomical Journal 161, 105, doi:10.3847/1538-3881/abd414",
+  "credit": "NASA/JPL Solar System Dynamics and NAIF",
+  "coverage": "1849-12-26 to 2150-01-22; geometric ICRF states, TDB",
+  "storage": "research/runs/solar_shield_array/inputs; external binary is not committed"
+}

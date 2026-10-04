@@ -84,6 +84,12 @@ The author confirmed these rules on 2026-09-26 and regards them as set, to be re
 | Planetary-scale surveillance, tracking, interception and tug capability, and assigned arrival corridors are part of the infrastructure. | Sep 19 | Stands |
 | No civilization-threatening kinetic payload enters a planetary intercept corridor before verified capture. | Sep 19 | Stands |
 
+## Solar shield and habitat array
+
+| Decision | Source | Status |
+|---|---|---|
+| Develop the combined titania/PV shield, optical-routing alternatives, regional power grid and toroidal habitat fleet; create a branch from main and investigate holding with a full ephemeris. | Author, 2026-10-04; [design brief](studies/solar_shield_array/design.md) | Stands as a research direction. [DE440 study](studies/solar_shield_array/report.md) completed for bounded trajectory families; final materials, holding architecture and inhabited capacity remain open. |
+
 ## Research practice
 
 | Decision | Source | Status |

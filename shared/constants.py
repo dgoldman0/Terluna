@@ -54,3 +54,9 @@ SUN_GM = DATA["sun"]["gm_m3_s2"]
 
 # Rounded lunar gravity still used by the sky solver, column model and immersion.
 LEGACY_MOON_GRAVITY = DATA["legacy"]["moon_surface_gravity_rounded_m_s2"]["value"]
+
+# DE440 point-mass dynamics; planetary values describe whole systems.
+SUN_GM = DATA["sun"]["gm_m3_s2"]
+SOLAR_SYSTEM_GM = DATA["solar_system_gm_m3_s2"]
+JULIAN_DAY = DATA["time"]["julian_day_s"]
+JULIAN_YEAR_DAYS = DATA["time"]["julian_year_days"]

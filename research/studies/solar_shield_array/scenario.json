@@ -1,0 +1,23 @@
+{
+  "schema": "terluna.research.solar-shield-scenario/1",
+  "epoch_tdb": "2026-10-04",
+  "primary_days": 365.25,
+  "nodal_span_years": 19,
+  "protected_radii": 4,
+  "baseline_distance_km": 78000,
+  "baseline_areal_mass_kg_m2": 0.05,
+  "climate_flux_before_dimming_W_m2": 1235,
+  "climate_sunlight_scale": 0.95,
+  "distance_bounds_km": [20000, 180000],
+  "harmonics": 3,
+  "formation_margin_m": 50,
+  "propulsion": {
+    "exhaust_velocity_m_s": 30000,
+    "efficiency": 0.7,
+    "specific_power_W_kg": 300,
+    "cant_deg": 45,
+    "propellant_buffer_days": 7,
+    "peak_margin_factor": 1.25
+  },
+  "evidence": "Protected radius and propulsion assumptions follow the September reference; optical force ball is an optimistic lower bound. A 10 g/m2 film requires replacement of the stored oxide design. Calendar dates are TDB."
+}
