@@ -89,7 +89,7 @@ The author confirmed these rules on 2026-09-26 and regards them as set, to be re
 | Decision | Source | Status |
 |---|---|---|
 | Develop the combined titania/PV shield, optical-routing alternatives, regional power grid and toroidal habitat fleet; create a branch from main and investigate holding with a full ephemeris. | Author, 2026-10-04; [design brief](studies/solar_shield_array/design.md) | Stands as a research direction. [DE440 study](studies/solar_shield_array/report.md) completed for bounded trajectory families; final materials, holding architecture and inhabited capacity remain open. |
-| Consider photogravitational tacking as a route to lower holding cost at the existing mass per area. | Author, 2026-10-04; [tacking review](studies/solar_shield_array/tacking.md) | Research direction. Returning sail-assisted trajectories and phased tile handovers remain to solve at the 50-g/m² reference allocation. The literature review and algebraic inventory screen do not establish continuous shield coverage. |
+| Consider photogravitational tacking as a route to lower holding cost at the existing mass per area. | Author, 2026-10-04; [tacking review](studies/solar_shield_array/tacking.md) | Research direction. [Numerical cycling study](studies/solar_shield_array/cycling.md) now supplies a replayed return arc and a three-year bounded point-tile candidate at 50 g/m². Measured useful projected area is about 15.7%; spatial fleet coverage, practical control and architecture selection remain open. |
 
 ## Research practice
 

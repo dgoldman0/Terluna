@@ -1,6 +1,6 @@
 {
   "schema": "terluna.research.solar-shield-checks/1",
-  "checked_at_utc": "2026-10-04T20:10:53.819056+00:00",
+  "checked_at_utc": "2026-10-04T20:59:00.757483+00:00",
   "scope": "Numerical implementation, source identity and repository checks",
   "scientific_validation": false,
   "base_main_commit": "2f2e0a104a3a1ea962a6dead4179f522762f997e",
@@ -12,12 +12,13 @@
     "matplotlib": "3.10.8",
     "jplephem": "2.24",
     "pytest": "9.1.1",
-    "calculation_threads": 1
+    "calculation_threads": 1,
+    "maximum_concurrent_cycling_propagations": 2
   },
   "study_tests": {
     "status": "PASS",
     "command": "python -m pytest protection/dynamics research/studies/solar_shield_array -q",
-    "passed": 25
+    "passed": 35
   },
   "numerical_validation": {
     "status": "PASS",
@@ -39,7 +40,7 @@
   },
   "python_repository_tests": {
     "status": "FAIL_EXISTING",
-    "summary": "13 failed, 570 passed, 55 skipped in 13.44s",
+    "summary": "13 failed, 580 passed, 55 skipped in 14.30s",
     "same_failed_tests_before_model_changes": true,
     "failed_tests": [
       "atmosphere/tests/test_absorption.py::test_ion_production_falls_with_the_shadow_and_ends_at_the_outer_radius",
@@ -110,14 +111,53 @@
   },
   "original_local_design_commit": "4fb7a35c9b57816a16c837b754216474451acf8f",
   "tacking_followup": {
-    "status": "ALGEBRAIC_SCREEN_REPRODUCED",
-    "runner": "tacking_screen.py",
-    "product": "results/tacking_screen.json",
-    "sha256": "2ef3e76c3ad39484882154bbc3f011d3ab500e9f5efa066fcd55f1ad4cceaa25",
-    "primary_source_review": "Targeted reading of orbital/control methods and results; 2026 sunshade work available as an abstract only",
-    "referenced_chat": "Not retrieved from history search; the direct view was signed out and contained no conversation messages",
-    "cycling_orbit_solved": false,
+    "status": "NUMERICAL_RETURN_AND_BOUNDED_POINT_TILE_CYCLING",
+    "report": "cycling.md",
+    "product": "results/cycling.json",
+    "sha256": "85e50097c1becf90fe95421c2d4d2828ebafc68c3d8a314ec3c4731bd8cfd102",
+    "algebraic_screen": "results/tacking_screen.json",
+    "return_arc_independent_replay": {
+      "status": "PASS",
+      "closure_position_m": 16.391675953549345,
+      "closure_velocity_m_s": 0.00016519372142915765,
+      "electric_thrust_used": false
+    },
+    "long_propagation": {
+      "days": 1095.75,
+      "completed": true,
+      "areal_mass_kg_m2": 0.05,
+      "moon_range_km": [
+        13971.719359938132,
+        16003.073963466382
+      ],
+      "useful_projected_area_fraction": 0.1573659776758925
+    },
+    "convergence": {
+      "maximum_position_difference_m": 5704.58385142391,
+      "final_position_difference_m": 5593.342104484818,
+      "useful_fraction_relative_difference": 1.1302588127204416e-05,
+      "service_quadrature_300_to_120_s_relative_difference": 0.0002769494394134764,
+      "maximum_perturbation_separation_m": 47692.61036928306,
+      "final_perturbation_separation_m": 47087.7700828509,
+      "perturbed_useful_fraction_relative_change": -0.00011248229343208127,
+      "perturbation": "1 m in ICRF x and 1 mm/s in ICRF y at initial epoch",
+      "interpretation": "Bounded orbital response is separate from seam/formation stability; no attitude actuator dynamics were integrated"
+    },
+    "cycling_orbit_solved": "Finite return arc and bounded point-tile service/coast propagation; no stability theorem",
     "fleet_coverage_demonstrated": false,
-    "make_check_repeat": "Layer and historical provenance checks pass with existing missing inputs; ensemble setup passes. The same 13 Python failures and Node directory-selector blocker remain."
+    "practical_attitude_and_formation_control_demonstrated": false,
+    "make_check_repeat": "35 targeted tests pass. Repository-wide 580 Python tests pass, 55 skip, and the same 13 existing failures remain; Node directory-selector blocker remains. Layer check has zero violations; historical provenance and ensemble statuses retain their existing input limitations.",
+    "figure": {
+      "status": "VISUALLY_REVIEWED",
+      "renderer": "../../../visualization/solar-shield-array/cycling_plot.py",
+      "data_product": "results/cycling.json",
+      "generated_png_ignored_by_git": true
+    },
+    "additional_checks": {
+      "published_return_schedule_replay": "PASS",
+      "raw_cache_source_and_config_validation": "PASS",
+      "standalone_historical_provenance": "PASS_WITH_BLOCKED_INPUTS",
+      "standalone_ensemble_setup": "PASS"
+    }
   }
 }

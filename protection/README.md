@@ -181,3 +181,11 @@ A 10-g/m² replacement film gives about 40 TW on that path; the stored oxides
 alone already weigh about 26 g/m². The imported September model stays intact.
 Optical material performance, safe plumes, tile formation, passive solutions
 and lifetime material closure remain open.
+
+The [cycling follow-up](../research/studies/solar_shield_array/cycling.md)
+keeps 50 g/m² and lets gravity return tiles between shadow-service passes.
+A 15,000-km seed stays bounded for three years in the ideal point-sail model,
+with about 15.7% useful projected area and no electric thrust. A separate
+optimized solar-sail return arc is independently replayed. These results
+support a fleet-inventory alternative; spatial coverage, real spectral and
+attitude response, seams, collision avoidance and payload mass remain open.

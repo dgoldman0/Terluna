@@ -1,18 +1,16 @@
 # Photogravitational tacking and a cycling shield fleet
 
 The author proposed photogravitational tacking on 4 October 2026 as a route
-to lower holding costs at the existing mass per area. The next dynamics
-search should keep the **50 g/m² base allocation** and allow gravity and
-scheduled optical momentum to carry tiles around returning trajectories.
-The required optical coverage belongs to the fleet; an individual tile may
-leave the shadow corridor while another takes its place. This is a proposed
-architecture and research direction, with no demonstrated orbit or handover.
+to lower holding costs at the existing mass per area. The first
+[numerical cycling study](cycling.md) now tests that direction at **50 g/m²**:
+free orbital motion, a physically constrained ideal specular sail, lunar and
+Earth eclipses, returning arcs and multi-year service-and-coast propagation.
+It establishes candidate tile motion and measured shadow-service fractions.
+Fleet coverage and handovers remain unsolved.
 
-The author's linked earlier chat could not be retrieved from the history
-index, and its direct view was signed out. This note records the author's
-present proposal, the accessible primary literature
-and implications for the implemented study. It does not reconstruct that
-chat's explanation or attribute a particular orbit design to it.
+The sections below record the original literature review and inventory screen.
+Their assumed duty fractions are superseded for the computed candidates by
+[results/cycling.json](results/cycling.json); they remain useful algebraic comparisons.
 
 ## Why the existing result leaves this route open
 
@@ -127,7 +125,7 @@ from the committed holding product and named shared constants. Its
 [data product](results/tacking_screen.json) records the input and source
 identities. It contains no candidate trajectory or achieved duty fraction.
 
-## The next ephemeris calculation
+## Study sequence and remaining acceptance conditions
 
 1. Generate seeds from distant retrograde and synodic-resonant libration
    orbit families, then use multiple shooting or direct collocation to vary
@@ -149,9 +147,9 @@ identities. It contains no candidate trajectory or achieved duty fraction.
    optical settings and control rates. Extend promising annual solutions over
    the nodal cycle before comparing lifetime inventories.
 
-The immediate objective is a dynamically returning tile path with a measured
-service interval. Continuous fleet coverage is the following acceptance
-condition. Solar-only orbital control becomes a shield solution only when
-both have been demonstrated. Habitat wheels and collection hubs can use their
+Returning point-tile paths and measured service intervals are now available in
+[cycling.md](cycling.md). Continuous fleet coverage is the next acceptance
+condition. Solar-only orbital control becomes a shield solution when both
+have been demonstrated. Habitat wheels and collection hubs can use their
 own candidate trajectories; attaching their mass to a tile requires a new
 control and inventory calculation.

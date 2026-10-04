@@ -30,3 +30,13 @@ forces, flexible structures and optical device physics. The array study records
 the point-mass acceleration residual and numerical convergence. The ideal
 optical ball is a lower bound on electrical thrust, with achievable materials,
 exhaust paths and Earth-safe outgoing rays still to supply.
+
+## Cycling membrane experiment
+
+[cycling.py](cycling.py) adds an ideal specular sail, Earth/Moon eclipse unions,
+retarded shadow-service geometry, circular-problem retrograde seeds and
+service/feathering control. It is separate from the unchanged held-aperture
+producer. The [cycling study](../../research/studies/solar_shield_array/cycling.md)
+contains the collocation search and independent full-ephemeris propagation.
+A 50-g/m² candidate remains bounded for three years; continuous fleet coverage
+and practical attitude/formation control are not demonstrated.

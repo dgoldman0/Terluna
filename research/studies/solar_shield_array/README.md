@@ -12,10 +12,14 @@ eclipses and propagated control. The selected monthly trajectory reduces the
 50-g/m² array's mean holding power from about 309 to 238 TW under the reference
 propulsion assumptions. It still consumes about 371,000 kg/s of propellant.
 
-[Photogravitational tacking](tacking.md) is the next research direction:
-search returning sail-assisted trajectories and phased tile handovers at the
-same 50-g/m² base mass. The literature review and algebraic inventory screen
-do not yet establish an orbit or continuous shield coverage.
+[Photogravitational cycling](cycling.md) now has propagated point-tile
+candidates at the same 50-g/m² base mass. A 15,000-km retrograde seed with
+filtering during service and feathering between passes stays bounded for
+three years and averages about 15.7% useful projected area. A separate
+optimized 8.9-day solar-sail arc closes within 17 m on independent replay.
+These establish orbital motion and an inventory comparison; continuous fleet
+coverage, finite tiles, handovers, attitude hardware and real optics remain
+open. [tacking.md](tacking.md) retains the initial literature review.
 
 The study couples protection, engineering, illumination and habitation. Its
 runners, compact numerical results and interpretation belong together here;
@@ -32,8 +36,10 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.validate
 python -m research.studies.solar_shield_array.publish
 python -m research.studies.solar_shield_array.tacking_screen
+python -m research.studies.solar_shield_array.cycling_replay
 python -m pytest protection/dynamics research/studies/solar_shield_array
 python visualization/solar-shield-array/plot.py
+python visualization/solar-shield-array/cycling_plot.py
 ```
 
 The runner writes raw results to `research/runs/solar_shield_array/`.
@@ -56,7 +62,12 @@ habitat capacity and long-term resource closure remain open.
 `make check` was run before this design-only commit: 545 Python tests passed,
 55 skipped and 13 failed. The failures concern absent solar-spectrum inputs,
 CM1 build configuration, the ExoPlaSim process lookup and ring-comfort tests.
-No executable model was changed in that initial commit. The final study has
-25 passing targeted tests. Repository-wide check status and the numerical
+No executable model was changed in that initial commit. The combined holding and cycling suite has
+35 passing targeted tests. Repository-wide check status and the numerical
 verification are recorded in [checks.json](checks.json) and
 [validation.json](results/validation.json).
+
+The cycling [report](cycling.md) gives the full run matrix, convergence limits,
+source/constant provenance and reproduction commands. Its annual useful-area
+statistic is numerically well resolved; orbit phase and perturbed tile
+positions drift by kilometres, so metre-scale seam control is not established.
