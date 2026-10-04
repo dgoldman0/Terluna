@@ -1400,6 +1400,28 @@ climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_elec
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_0e_elec --threads 8 --hours 30    # about half a day
 ```
 
+### The fine box
+
+`box_0e_elec_fine` is `box_0e_elec` at a third of its spacing, 2.0 km, over a
+box a third as wide, 128 km, with the same 64 by 64 columns. CM1 cannot move a
+run onto a finer grid, so it starts from the coarse run's output at a chosen day:
+the air averaged over the coarse box's columns, by level (potential
+temperature, vapour and wind), with the surface pressure, the air at 2 m and the
+skin temperature of the land (the soil's layers between it and the deep
+ground), under the Sun and the day-night forcing of that hour (`var18`). Its
+nudging, vertical wind, land, CCN and electricity are the coarse box's, its first
+time step a third of the coarse one's, and it writes output every 15 minutes and
+restarts every 3 hours over two model days. It builds its own clouds from that
+air, so its storms start a few hours into the run. The day it starts from is
+chosen once the coarse run has shown its storms, a few hours before a stormy
+window; the case refuses to set up until it is set. A check from day 5 ran its
+first five model minutes cleanly.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_elec_fine    # after setting fine_from['day']
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_0e_elec_fine --threads 4 --hours 24
+```
+
 ## The gravity pair
 
 If lunar convection were Earth's stretched six times in size and duration, a

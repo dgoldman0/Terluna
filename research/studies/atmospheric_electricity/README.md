@@ -212,7 +212,12 @@ speeds take lunar gravity as Morrison's do.
    structure and lightning. Running from 2026-10-04 at the author's go-ahead; a
    first start without the sub-steps was stopped at day 4, before its storms had
    charged.
-3. Windows of `box_0e_elec`'s second lunar day run again from its restarts with
+3. `box_0e_elec_fine`, the same site at 2 km over a box 128 km square, started
+   from the coarse run's averaged air a few hours before a stormy window and run
+   for two model days with output every 15 minutes, to resolve the storm cells
+   and draw the flashes on a finer grid. Set up on 2026-10-04 at the author's
+   request; it starts once the coarse run's storms show it worthwhile.
+4. Windows of `box_0e_elec`'s second lunar day run again from its restarts with
    output every few minutes, to follow each storm's life, under Takahashi's law,
    with leakage, and with the unbounded breakdown field.
 

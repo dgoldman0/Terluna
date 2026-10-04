@@ -302,7 +302,7 @@
     },
     {
       "topic": "atmospheric_electricity",
-      "condition": "plan_adopted_and_revised_2026_10_02; stage_1_done_2026_10_03; breakdown_reached_under_every_charging_law_in_a_one_dimensional_bound; stage_2_electrified_cm1_built_and_benchmarked_on_an_earth_supercell_2026_10_03; stage_2_sub_steps_and_branched_lightning_2026_10_04; box_0e_elec_running_2026_10_04",
+      "condition": "plan_adopted_and_revised_2026_10_02; stage_1_done_2026_10_03; breakdown_reached_under_every_charging_law_in_a_one_dimensional_bound; stage_2_electrified_cm1_built_and_benchmarked_on_an_earth_supercell_2026_10_03; stage_2_sub_steps_and_branched_lightning_2026_10_04; box_0e_elec_running_2026_10_04; box_0e_elec_fine_set_up_2026_10_04",
       "material": [
         "../atmosphere/electricity/",
         "../atmosphere/middle_atmosphere/README.md",
@@ -329,7 +329,7 @@
         "the ground-strike conditions (a potential beyond 50 MV and a field above 10 kV/m at the start) and the fractions of breakdown that start and stop channels are WRF-ELEC's calibrations for Earth, kept on the Moon; the lunar box's 6-km grid draws flash channels coarsely",
         "the fair-weather field, the global circuit and transient luminous events"
       ],
-      "next_session_task": "Read box_0e_elec when it finishes (two lunar days from 2026-10-04, about half a day of wall time on 8 threads): compare its NSSL storm with Morrison's at the same site and forcing, and read its charge structure, flash rates and kinds, charge per flash and nitrogen oxides; then run windows of its second lunar day from its restarts (each with its terluna_ez_<time>.bin) with output every few minutes, under Takahashi's law, with leakage and with the unbounded breakdown field."
+      "next_session_task": "Read box_0e_elec as it runs (two lunar days from 2026-10-04, about a day of wall time on 8 threads): compare its NSSL storm with Morrison's at the same site and forcing, and read its charge structure, flash rates and kinds, charge per flash and nitrogen oxides (from flash counts and observed yields per flash). Once its storms show the fine box worthwhile, set box_0e_elec_fine's starting day a few hours before a stormy window and run it (2 km over 128 km, two model days). Then run windows of the coarse run's second lunar day from its restarts (each with its terluna_ez_<time>.bin) with output every few minutes, under Takahashi's law, with leakage and with the unbounded breakdown field."
     }
   ],
   "new_check_record": "studies/environment_screens/checks.json",

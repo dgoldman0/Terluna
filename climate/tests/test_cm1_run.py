@@ -568,3 +568,79 @@ def test_the_terrain_build_forces_each_column_at_its_own_height():
     air = dict(sunlight_w_m2=1300.0)
     setting = lambda n: c.case_settings(c.CASES[n], 64, 6011.0, 111, 150000.0, air, 1.6242)['param8']['var13']
     assert setting('box_highland') == 3.0 and setting('box_0e') == 1.0 and setting('ring_70_45e') == 2.0
+
+
+FINE_TEMPLATE = (' &param1\n dx     =  6000.0,\n dy     =  6000.0,\n dtl    =  40.0,\n timax  = 5102784,\n'
+                 ' run_time =  -999.9,\n tapfrq =   10800.0,\n rstfrq =  43200.0,\n /\n'
+                 ' &param2\n irst      =  0,\n rstnum    =  1,\n ptype     =  27,\n iptra     =  1,\n npt       =  7,\n'
+                 ' pdtra     =  0,\n /\n'
+                 ' &param8\n var4      =   5000.0,\n var5      =   6.8,\n var6      =   3.0,\n var7      =   12.0,\n'
+                 ' var8      =   3.0,\n var9      =   0.0,\n var10     =   12000.0,\n var18     =   -90.0,\n'
+                 ' var19     =   2551443.0,\n /\n'
+                 ' &param14\n diagfrq        =     10800.0,\n /\n')
+
+
+def coarse_run(folder):
+    """A coarse box of two by two columns and three levels with one output, at day 7.5."""
+    folder.mkdir(parents=True)
+    np.savetxt(folder / 'input_grid_z', [0.0, 100.0, 300.0, 700.0])
+    for name in ('lsnudge_0001.dat', 'terluna_wls.txt', 'terluna_lsadv.txt', 'LANDUSE.TBL'):
+        (folder / name).write_text(name)
+    (folder / 'terluna_surface.txt').write_text('1\n-1000000000.0 1000000000.0 1.0 30 294.163 294.163\n')
+    (folder / 'namelist.template').write_text(FINE_TEMPLATE)
+    (folder / 'case.json').write_text(json.dumps(dict(
+        case='coarse', configuration=dict(output_s=10800.0, site=dict(lat_deg=0.0, lon_deg=0.0)),
+        grid=dict(nx=2, ny=2, dx_m=6000.0, length_m=12000.0, nz=3, ztop_m=700.0),
+        build=dict(label='moon_omp_elec', executable_sha256='coarse'), site=dict(ring='ring_a'))))
+    names = [('th', 3), ('qv', 3), ('uinterp', 3), ('vinterp', 3), ('psfc', 0), ('t2', 0), ('q2', 0), ('tsk', 0)]
+    (folder / 'cm1out_s.ctl').write_text('xdef 2 linear 0 1\nydef 2 linear 0 1\nzdef 3 levels\n1\n2\n3\n'
+                                         f'vars {len(names)}\n' + ''.join(f'{n} {k} 99 {n}\n' for n, k in names) +
+                                         'endvars\n')
+    th = np.array([[300.0, 302.0, 304.0, 306.0], [310.0, 310.0, 310.0, 310.0], [320.0, 321.0, 322.0, 323.0]])
+    fields = [th, np.full((3, 4), 0.01), np.full((3, 4), 2.0), np.full((3, 4), -1.0), np.full(4, 1.2e5),
+              np.array([294.0, 295.0, 296.0, 297.0]), np.full(4, 0.012), np.array([300.0, 302.0, 304.0, 306.0])]
+    n = round(7.5 * 86400.0 / 10800.0) + 1
+    np.concatenate([f.ravel() for f in fields]).astype('<f4').tofile(folder / f'cm1out_t{n:06d}_s.dat')
+
+
+def test_a_fine_box_starts_from_the_coarse_run_s_averaged_air_at_its_hour(tmp_path, monkeypatch):
+    monkeypatch.setattr(c, 'RUNS', tmp_path / 'runs')
+    monkeypatch.setattr(c, 'CM1_HOME', tmp_path / 'cm1')
+    tree = tmp_path / 'tree'
+    (tree / 'run').mkdir(parents=True)
+    for name in ('RRTMG_LW_DATA', 'RRTMG_SW_DATA'):
+        (tree / 'run' / name).write_text(name)
+    monkeypatch.setattr(c, 'fetch', lambda: tree)
+    build = tmp_path / 'cm1' / 'build' / 'moon_omp_elec'
+    build.mkdir(parents=True)
+    (build / 'cm1.exe').write_text('exe')
+    (build / 'build.json').write_text(json.dumps(dict(label='moon_omp_elec', executable_sha256='fine')))
+    coarse_run(tmp_path / 'runs' / 'coarse')
+    monkeypatch.setitem(c.CASES, 'fine', dict(c.CASES['box_0e_elec_fine'],
+                                              fine_from=dict(case='coarse', day=None, refine=3)))
+    with pytest.raises(RuntimeError, match='choose the day'):
+        c.setup('fine')
+    monkeypatch.setitem(c.CASES, 'fine', dict(c.CASES['box_0e_elec_fine'],
+                                              fine_from=dict(case='coarse', day=7.5, refine=3)))
+    case = c.setup('fine')
+    lines = (case / 'input_sounding').read_text().splitlines()
+    assert [float(v) for v in lines[0].split()] == pytest.approx([1200.0, 295.5 * (1.0e5 / 1.2e5) ** (287.04 / 1005.7),
+                                                                 12.0], abs=1e-3)
+    rows = np.array([[float(v) for v in line.split()] for line in lines[1:]])
+    assert rows[:, 0].tolist() == [50.0, 200.0, 500.0, 700.0]                    # scalar levels, then the top
+    assert rows[:3, 1].tolist() == pytest.approx([303.0, 310.0, 321.5])         # the means over the columns
+    assert rows[3, 1] == pytest.approx(321.5 + 11.5 / 300.0 * 200.0, abs=1e-3)   # carried on the top two levels' slope
+    assert rows[:, 2] == pytest.approx(10.0) and rows[:, 3] == pytest.approx(2.0) and rows[:, 4] == pytest.approx(-1.0)
+    assert (case / 'terluna_surface.txt').read_text().split()[5:] == ['303.000', '294.163']   # mean skin, deep ground
+    text = (case / 'namelist.template').read_text()
+    hour = (-90.0 + 360.0 * 7.5 * 86400.0 / 2551443.0 + 180.0) % 360.0 - 180.0
+    assert c.namelist_value(text, 'param1', 'dx') == '2000.0' and c.namelist_value(text, 'param1', 'dtl') == '13.333'
+    assert float(c.namelist_value(text, 'param8', 'var18')) == pytest.approx(hour, abs=1e-4)
+    assert c.namelist_value(text, 'param1', 'tapfrq') == '900.0' and c.namelist_value(text, 'param8', 'var5') == '6.8'
+    assert c.namelist_value(text, 'param1', 'timax') == str(round(2.0 * 86400.0))
+    assert (case / 'lsnudge_0001.dat').read_text() == 'lsnudge_0001.dat' and (case / 'cm1.exe').is_symlink()
+    record = json.loads((case / 'case.json').read_text())
+    assert record['grid']['dx_m'] == pytest.approx(2000.0) and record['grid']['length_m'] == pytest.approx(4000.0)
+    assert record['initial']['snapshot'] == 61 and record['initial']['day'] == 7.5
+    assert record['configuration']['start_hour_angle_deg'] == pytest.approx(hour, abs=1e-4)
+    assert record['build']['executable_sha256'] == 'fine' and record['site'] == dict(ring='ring_a')

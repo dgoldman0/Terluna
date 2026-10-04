@@ -1207,6 +1207,16 @@ CASES['box_highland_own_height'] = dict(
 CASES['box_0e_elec'] = dict(
     CASES['box_0e'], build='moon_omp_elec', elec=dict(cm1_elec.LUNAR), inputs_from='box_0e',
     purpose=CASES['box_0e']['purpose'] + ', with the NSSL microphysics and WRF-ELEC\'s charging and branched lightning')
+# The fine box (stage 2): box_0e_elec's site at a third of its spacing (2.0 km) over a box a third as wide (128 km, the
+# same 64 by 64 columns), started from box_0e_elec's air averaged over its columns and its mean skin temperature at a
+# day of its run a few hours before a stormy window (fine_from day, set once box_0e_elec has shown its storms), under
+# the same Sun, forcing, land and electricity, with output every 15 minutes over two model days. It resolves the storm
+# cells and draws the flashes on a grid three times finer.
+CASES['box_0e_elec_fine'] = dict(
+    CASES['box_0e_elec'], inputs_from=None, fine_from=dict(case='box_0e_elec', day=None, refine=3), days=2.0,
+    output_s=900.0, restart_s=10800.0, segment_s=43200.0,
+    purpose=CASES['box_0e_elec']['purpose'] + '; a box a third as wide at a third of the spacing, started from that '
+            'run\'s averaged air a few hours before a stormy window')
 # The same storm with CM1's own copy of the NSSL scheme and no electricity, to check that WRF-ELEC's copy, run through
 # terluna_elec.F, makes the same storm.
 CASES['supercell_nssl'] = dict(
@@ -1789,6 +1799,126 @@ def setup_from(name: str, cfg: dict) -> Path:
     return case
 
 
+def fine_start(snapshot: dict) -> dict:
+    """A finer box's starting air from one output of a coarser box: the means over its columns of potential
+    temperature (K), vapour (kg/kg) and wind (m/s) by level, and at the surface its pressure (Pa), the potential
+    temperature and vapour at 2 m and the skin temperature (K)."""
+    import numpy as np
+    mean = lambda name: np.asarray(snapshot[name], float).mean(axis=-1)
+    kappa = 287.04 / 1005.7
+    theta_2m = np.asarray(snapshot['t2'], float) * (1.0e5 / np.asarray(snapshot['psfc'], float)) ** kappa
+    return dict(theta_k=mean('th'), qv_kg_kg=mean('qv'), u_m_s=mean('uinterp'), v_m_s=mean('vinterp'),
+                surface_pa=float(mean('psfc')), theta_2m_k=float(theta_2m.mean()), qv_2m_kg_kg=float(mean('q2')),
+                skin_k=float(mean('tsk')))
+
+
+def fine_sounding(start: dict, zw) -> str:
+    """CM1's input_sounding (isnd = 7) from a finer box's starting air: the surface line, then height (m), potential
+    temperature (K), vapour (g/kg) and wind (m/s) at the scalar levels and at the model top, where the potential
+    temperature carries on the slope of the top two levels."""
+    import numpy as np
+    zw = np.asarray(zw, float)
+    zh = 0.5 * (zw[1:] + zw[:-1])
+    th, qv, u, v = (np.asarray(start[k], float) for k in ('theta_k', 'qv_kg_kg', 'u_m_s', 'v_m_s'))
+    if th.size != zh.size:
+        raise ValueError(f'{th.size} levels of air for {zh.size} scalar levels')
+    top = th[-1] + (th[-1] - th[-2]) / (zh[-1] - zh[-2]) * (zw[-1] - zh[-1])
+    rows = [*zip(zh, th, qv, u, v), (zw[-1], top, qv[-1], u[-1], v[-1])]
+    lines = [f"{start['surface_pa'] / 100:12.4f} {start['theta_2m_k']:12.4f} {start['qv_2m_kg_kg'] * 1000:12.5f}"]
+    lines += [f'{z:12.3f} {t:12.4f} {q * 1000:12.5f} {uu:8.3f} {vv:8.3f}' for z, t, q, uu, vv in rows]
+    return '\n'.join(lines) + '\n'
+
+
+def fine_namelist(text: str, refine: int, day: float, cfg: dict) -> tuple:
+    """A coarser box's namelist for a finer box: the spacing and the first time step divided by refine, the finer
+    case's length, output and restarts, and the Sun's hour angle (var18, which also times the day-night forcing) at the
+    coarser run's day it starts from. Returns the namelist and the finer box's spacing and starting hour angle."""
+    dx = float(namelist_value(text, 'param1', 'dx')) / refine
+    dtl = float(namelist_value(text, 'param1', 'dtl')) / refine
+    h0, day_s = float(namelist_value(text, 'param8', 'var18')), float(namelist_value(text, 'param8', 'var19'))
+    hour = (h0 + 360.0 * day * 86400.0 / day_s + 180.0) % 360.0 - 180.0
+    for section, key, value in (('param1', 'dx', round(dx, 3)), ('param1', 'dy', round(dx, 3)),
+                                ('param1', 'dtl', round(dtl, 3)), ('param1', 'timax', round(cfg['days'] * 86400.0)),
+                                ('param1', 'run_time', -999.9), ('param1', 'tapfrq', float(cfg['output_s'])),
+                                ('param1', 'rstfrq', float(cfg['restart_s'])), ('param2', 'irst', 0),
+                                ('param2', 'rstnum', 1), ('param8', 'var18', round(hour, 4)),
+                                ('param14', 'diagfrq', float(cfg['output_s']))):
+        text = set_namelist(text, section, key, value)
+    return text, dict(dx_m=dx, dtl_s=dtl, hour_angle_deg=hour)
+
+
+def setup_fine(name: str, cfg: dict) -> Path:
+    """Set up a finer box inside a coarser box's run (cfg['fine_from']: the coarser case, the day of its run to start
+    from and the factor its spacing is divided by). The finer box keeps the coarser one's column count, vertical grid,
+    nudging, vertical wind, day-night forcing, land and electricity, and starts from the coarser run's output at that
+    day: its air averaged over the columns, by level, and its mean skin temperature over the land, under the Sun and
+    the day-night forcing of that hour. CM1 cannot move a run onto a finer grid, so the finer box builds its own clouds
+    from there."""
+    import numpy as np
+    from climate.crm import ring_analysis as ra
+    fine = cfg['fine_from']
+    if fine.get('day') is None:
+        raise RuntimeError(f"{name}: choose the day of {fine['case']} to start from (fine_from['day']) first")
+    source = RUNS / fine['case']
+    src = json.loads((source / 'case.json').read_text())
+    if src['configuration'].get('terrain'):
+        raise RuntimeError(f"{fine['case']} has terrain, which a finer box does not carry")
+    exe = CM1_HOME / 'build' / cfg['build'] / 'cm1.exe'
+    if not exe.exists():
+        raise RuntimeError(f'build {cfg["build"]} first')
+    case = RUNS / name
+    if (case / 'progress.json').exists():
+        raise RuntimeError(f'{case} has started; remove it to set up afresh')
+    output_s = src['configuration']['output_s']
+    n = round(fine['day'] * 86400.0 / output_s) + 1
+    if abs((n - 1) * output_s - fine['day'] * 86400.0) > 1.0 or not (source / f'cm1out_t{n:06d}_s.dat').exists():
+        raise RuntimeError(f"{fine['case']} has no output at day {fine['day']}")
+    case.mkdir(parents=True, exist_ok=True)
+    start = fine_start(ra.read_snapshot(source, n))
+    (case / 'input_sounding').write_text(fine_sounding(start, np.loadtxt(source / 'input_grid_z')))
+    for item in ('input_grid_z', 'lsnudge_0001.dat', 'terluna_wls.txt', 'terluna_lsadv.txt', 'LANDUSE.TBL'):
+        if (source / item).exists():
+            shutil.copy2(source / item, case / item)
+    segments = np.loadtxt(source / 'terluna_surface.txt', skiprows=1, ndmin=2)
+    (case / 'terluna_surface.txt').write_text(f'{len(segments)}\n' + ''.join(
+        f'{x0:.1f} {x1:.1f} {xl:.1f} {int(lu):d} {start["skin_k"] if xl == 1 else tsk:.3f} {tmn:.3f}\n'
+        for x0, x1, xl, lu, tsk, tmn in segments))
+    text, grid = fine_namelist((source / 'namelist.template').read_text(), fine['refine'], fine['day'], cfg)
+    electricity = None
+    if cfg.get('elec') is not None:
+        for section, entries in cm1_elec.namelist_settings(cfg['elec']).items():
+            for key, value in entries.items():
+                text = set_namelist(text, section, key, value)
+        text, files = cm1_elec.run_files(case, cfg['elec'], text)
+        electricity = dict(cm1_elec.SETTINGS, **cfg['elec'], files=files)
+    (case / 'namelist.template').write_text(text)
+    tree = fetch()
+    for link, target in (('cm1.exe', exe), ('RRTMG_LW_DATA', tree / 'run' / 'RRTMG_LW_DATA'),
+                         ('RRTMG_SW_DATA', tree / 'run' / 'RRTMG_SW_DATA')):
+        path = case / link
+        if path.is_symlink() or path.exists():
+            path.unlink()
+        path.symlink_to(target)
+    digest = lambda p: hashlib.sha256(Path(p).read_bytes()).hexdigest()[:16]
+    lon = src['configuration'].get('site', {}).get('lon_deg', 0.0)
+    record = dict(src, case=name, purpose=cfg['purpose'], inputs_from=None,
+                  configuration=dict(cfg, start_hour_angle_deg=round(grid['hour_angle_deg'] - lon, 4)),
+                  grid=dict(src['grid'], dx_m=grid['dx_m'], length_m=src['grid']['nx'] * grid['dx_m']),
+                  build=json.loads((exe.parent / 'build.json').read_text()), electricity=electricity,
+                  initial=dict(source=f"{fine['case']}'s output {n} (day {fine['day']}), averaged over its columns",
+                               case=fine['case'], day=fine['day'], snapshot=n,
+                               hour_angle_deg=round(grid['hour_angle_deg'], 4),
+                               **{k: round(start[k], 4) for k in ('surface_pa', 'theta_2m_k', 'skin_k')},
+                               qv_2m_kg_kg=round(start['qv_2m_kg_kg'], 7)),
+                  runner=digest(__file__),
+                  inputs={p: digest(case / p) for p in ('input_sounding', 'input_grid_z', 'lsnudge_0001.dat',
+                                                         'terluna_surface.txt', 'LANDUSE.TBL', 'namelist.template',
+                                                         'terluna_wls.txt', 'terluna_lsadv.txt')
+                          if (case / p).exists()})
+    (case / 'case.json').write_text(json.dumps(record, indent=1) + '\n')
+    return case
+
+
 def namelist_value(text: str, section: str, key: str) -> str:
     """One entry of a Fortran namelist held as text, as written."""
     import re
@@ -1844,6 +1974,8 @@ def setup(name: str) -> Path:
     surface segments, land-use table and links to the executable and radiation tables."""
     import numpy as np
     cfg = CASES[name]
+    if cfg.get('fine_from'):
+        return setup_fine(name, cfg)
     if cfg.get('inputs_from'):
         return setup_from(name, cfg)
     if cfg.get('kind') == 'sample':
