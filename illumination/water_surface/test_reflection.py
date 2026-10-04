@@ -83,3 +83,15 @@ def test_glitter_matches_facet_sampling_for_a_wide_source():
     lam = R.smith_lambda(view, cov) + R.smith_lambda(source, cov)
     assert lam < 0.01
     assert predicted * (1 + lam) == pytest.approx(sampled, rel=0.03)
+
+
+def test_the_batch_agrees_with_single_views_and_converges_in_order():
+    cov = np.array([[0.018, 0.003], [0.003, 0.011]])
+    sky = lambda d: np.c_[1 + 3 * d[:, 2] ** 0.5 + 0.5 * d[:, 0], 2 - d[:, 1]]
+    views = np.array([unit(e, a) for e, a in ((40.0, 10.0), (12.0, 200.0), (3.0, 95.0))])
+    single = np.array([R.sky_reflection(v, cov, N, sky, order=24)[0] for v in views])
+    batch, square = R.sky_reflection_batch(views, cov, N, sky, order=24, block=2)
+    assert batch == pytest.approx(single, rel=1e-6)
+    assert np.all(square >= batch ** 2 * (1 - 1e-9))
+    fine, _ = R.sky_reflection_batch(views, cov, N, sky, order=48)
+    assert batch == pytest.approx(fine, rel=1e-2)       # a 3-degree grazing view of a sky with a kink at the horizon

@@ -122,3 +122,36 @@ def sky_reflection(view, covariance, n, sky, order=40):
     again = sky(second) * fresnel(second[:, 2], n)[:, None]
     radiance = (w * rho * escape) @ direct + (w * rho * (1 - escape)) @ again
     return radiance, dict(weight_sum=float(w.sum()), escaping=float((w * escape).sum()))
+
+
+def sky_reflection_batch(views, covariance, n, sky, order=24, block=2000):
+    """sky_reflection for many view directions at once (views shape (V, 3)).
+
+    Returns the mean reflected radiance (V, channels) and the mean of its square, so the facet-to-facet
+    spread of radiance that shows the waves follows as their difference.
+    """
+    views = np.atleast_2d(np.asarray(views, float))
+    gradient, weight = facet_nodes(covariance, order)
+    normal = np.c_[-gradient, np.ones(len(gradient))]
+    normal /= np.linalg.norm(normal, axis=1, keepdims=True)
+    mean, square = [], []
+    for start in range(0, len(views), block):
+        v = views[start:start + block]
+        cos_v = v @ normal.T                                           # (V, G)
+        lam_v = smith_lambda(v, covariance)[:, None]
+        w = weight[None, :] * np.maximum(cos_v, 0.0) / (v[:, 2:3] * normal[None, :, 2]) / (1 + lam_v)
+        reflected = 2 * cos_v[..., None] * normal[None] - v[:, None, :]  # (V, G, 3)
+        rho = fresnel(cos_v, n)
+        lam_i = smith_lambda(reflected, covariance)
+        up = reflected[..., 2] > 0
+        escape = np.where(up, (1 + lam_v) / (1 + lam_v + lam_i), 0.0)
+        second = np.where(up[..., None], reflected, reflected * [1.0, 1.0, -1.0])
+        second[..., 2] = np.maximum(second[..., 2], 1e-6)
+        second /= np.linalg.norm(second, axis=-1, keepdims=True)
+        flat = second.reshape(-1, 3)
+        seen = sky(flat).reshape(*second.shape[:2], -1)                 # (V, G, channels)
+        again = fresnel(second[..., 2], n)
+        value = rho[..., None] * seen * (escape + (1 - escape) * again)[..., None]
+        mean.append(np.einsum("vg,vgc->vc", w, value))
+        square.append(np.einsum("vg,vgc->vc", w, value ** 2))
+    return np.concatenate(mean), np.concatenate(square)

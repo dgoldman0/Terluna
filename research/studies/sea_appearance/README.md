@@ -90,11 +90,14 @@ The author's, on 2026-10-04:
    positions, the Earth's phase, the light reaching the ground from the sky and
    from the Earth, which source dominates and which mode of vision applies. With
    it, a map of where the Earth stands over every sea and where it rises and sets.
-2. **The reflection and water-colour models.**
+   Done: [the lighting calendar](#the-lighting-calendar).
+2. **The reflection and water-colour models.** Done: [the sea's slopes](#the-seas-slopes),
+   [the surface's reflection](#the-surfaces-reflection) and
+   [the waters' colour](#the-waters-colour).
 3. **Results by regime** (day, the long evening, earthlit night, the far side's
    twilit night):
    radiance and colour by direction of view, the glitter paths and the contrast of
-   the waves.
+   the waves. Done for clear skies: [the seas by regime](#the-seas-by-regime).
 4. **Scientific renderings of the four coasts** in [visualization](../../../visualization/),
    extending the [B1 spectral path tracer](../../../visualization/reference-renderer/),
    judged against photographs of seascapes.
@@ -312,3 +315,80 @@ python -m illumination.water_column.fetch_inputs --download
 OPENBLAS_NUM_THREADS=1 python -m research.studies.sea_appearance.waters
 python visualization/sea-appearance/waters.py
 ```
+
+## The seas by regime
+
+[regimes.py](regimes.py) puts the pieces together at the four rendering coasts
+for six moments of the shore month: the Sun at its highest; 4° up in the
+afternoon; 4°, 15° and 35° below the horizon; and the darkest hour. For an eye
+2 m above the water it computes the colour and radiance of sky and sea in every
+direction:
+- the solved sky lit by the Sun and, weighted by its spectrum, by the Earth;
+- the sky reflected by that hour's wave slopes;
+- the glitter of both disks;
+- the productive coast's own light.
+
+[regimes.json](results/regimes.json) holds readouts toward the brighter source
+and away from it. The panoramas themselves sit on the research drive;
+[the figures](../../../visualization/sea-appearance/) show them. The sea fills
+every direction below the horizon; the coastline is left to the renderings.
+
+**By day the sea is darker than its sky and its waves show strongly.** With the
+Sun 54–87° up the sky is a pale blue, 8,000–11,000 cd/m² at 30°, whitening to
+about 9,500 at the horizon. The sea just below the horizon is a blue-grey
+3,300–5,000 cd/m², 0.35–0.53 times the sky above it. The spread of reflected
+light over the facets is 0.34–0.59 of its mean, so the waves stand out. The
+Sun's glitter lies more than 30° below the horizon, near the observer's feet.
+
+**A low Sun lays a deep orange glitter path that lasts for hours.** With the Sun
+4° up, its glitter runs from the horizon to about 15° below it, deep orange
+(chromaticity 0.59, 0.40). The Sun sinks half a degree an hour, so the path
+stays for most of a day. On the glassy hours at the Smythii headland and southern
+Mare Nubium (mean square slope 0.002–0.003) it is narrow and reaches
+590,000–830,000 cd/m². On the rippled seas of western Procellarum and the Ingenii
+coast (0.025–0.031) it is broader and reaches 100,000–114,000. Away from the Sun
+the sea is 0.65–0.86 times the sky above it.
+
+**For days after sunset the sea reflects a warm arch and the Moon's shadow.**
+With the Sun 4° down the sky toward it glows orange at the horizon (about
+1,000 cd/m², x 0.44), and the sea beneath reflects it at 0.56–0.92 of its
+brightness. The Moon's own shadow lies on the opposite horizon as a grey band
+(about 360 cd/m²). At 15° down the arch has narrowed to 250–260 cd/m² and the
+eastern horizon to about 60. At 35° down it is an orange-red band at the horizon
+(10.4–10.7 cd/m², x 0.53–0.54) under a yellow glow 10–15° up, and the ground has
+9–12 lux. Where the Earth is up, as at western Procellarum, its glitter path lies
+on the sea opposite the arch.
+
+**The darkest hour differs coast by coast.**
+
+| Coast | The Earth | Light on the ground | What the sea shows |
+|---|---|---:|---|
+| Southern Mare Nubium | 53° up, 90% lit | 2.9 lux | A blue earthlit sky (about 0.5 cd/m², chromaticity 0.27, 0.30) over a blue-grey sea, with a faint pink glow toward the hidden Sun |
+| Western Oceanus Procellarum | 20° up, 58% lit | 0.48 lux | The Earth's yellow-orange glitter on a glassy sea, 2.5 cd/m², ten times its sky |
+| Eastern Smythii headland | rising, 1.4° up, 38% lit | 0.085 lux | A deep-orange glitter of the rising Earth across a mirror-calm sea (mean square slope 0.0007), 5 cd/m² under a sky of 0.01–0.04 |
+| South Pole–Aitken sea, by Mare Ingenii | 45° below the horizon | 0.46 lux | A golden twilight arch over the southern horizon all night, 0.44 cd/m² at its foot, reflected in the sea |
+
+**Through this air the Sun and the Earth are yellow to orange.** The
+column of air is seven times Earth's. The Sun's direct light is a pale yellow at
+60° up (chromaticity 0.42, 0.42, with 41% of it reaching the ground). It is
+orange at 15° (0.52, 0.44, 10%) and red-orange at 5° (0.58, 0.41, 2.7%). The
+Earth is bluish-white above the air and a pale yellow disk at 60° up, orange near
+the horizon. The sky, which takes the scattered blue, stays blue by day and
+under a high Earth.
+
+**Boundaries.** Clear sky only; clouds from the cloud-light model come next. The
+coastline, foam, polarization and reflections beyond the second bounce are left
+out. The panoramas are statistical, 1° by 0.5°, without wave texture. Below a
+few cd/m² the eye sees colour ever more weakly, so the night colours are what a
+long photographic exposure would record. The resolved waves come from the
+nearest spectrum, up to 21 hours from the moment at the nearside shores; the
+Ingenii coast borrows the nearside shores' median, since its sea has no wave run.
+Every coast carries the productive coast's water.
+
+```sh
+NUMBA_NUM_THREADS=4 OPENBLAS_NUM_THREADS=1 <environment>/bin/python -m research.studies.sea_appearance.regimes
+python visualization/sea-appearance/regimes.py
+```
+
+The runner needs numba, as the optical comfort study's environment provides, and
+writes its panoramas to `research/runs/sea_appearance/`.

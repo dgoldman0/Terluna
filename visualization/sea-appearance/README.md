@@ -33,3 +33,13 @@ map:
   Earth's clear daylight with the Sun 45° up, at one exposure on a display with
   Earth-daylight (D65) white, with their luminance and the depth where
   photosynthetic light falls to 1%.
+
+`python visualization/sea-appearance/regimes.py` reads the regime product and its
+panoramas on the research drive:
+
+- `results/regimes_<coast>.png`, one per rendering coast: six strips through the
+  month (the Sun at its highest, 4° up, 4°, 15° and 35° below the horizon, and
+  the darkest hour), each the whole horizon 30° above and below from an eye 2 m
+  above the water, with the sea in every direction. Colours are as calculated on
+  a display with Earth-daylight (D65) white, unadapted; each strip has its own
+  exposure, printed as the luminance shown white, and brighter highlights clip.
