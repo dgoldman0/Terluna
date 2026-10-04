@@ -70,6 +70,21 @@ variant. By CM1's own timings `-O3 -march=native` ran 11–15% faster than
 itself agreed within 0.7%. So every OpenMP build now compiles at
 `-O3 -march=native` (`OMP_DEFAULT` in [cm1_run.py](cm1_run.py)), `moon_omp_o2`
 keeps CM1's own `-O2` for comparisons, and the MPI builds keep `-O2`, untested.
+
+**Threads and reproducibility** (found 2026-10-04). On one thread a run
+repeats itself bit for bit; on several it does not always. Restarted from
+`box_0e`'s day-10.5 restart on 4 threads, `moon_omp` repeated the one-thread
+run once and once parted from it about 85 steps in (a domain total first,
+then the state), and the electrified build, run the same way twice, parted
+from itself about 50 steps in. Storm weather then grows the difference into
+different storms within about an hour. A result that changes only in some
+runs is a race between threads, not a change of summing order. It lies in
+CM1's own threaded loops on these cases' paths, since every Terluna patch in
+a threaded region writes only its own points and WRF-ELEC's threaded loops
+write only their own slabs (checked by compiling them with no default
+sharing). Each run is a valid realization; runs that differ in one setting
+compare as realizations, not as the same storms. The one-thread checks above
+and the supercell's restart check stand.
 A case's executable changes only when its build is rebuilt (`build moon_omp`
 replaces the one every such case links to), so the runner records the executable
 and thread count of every segment.
@@ -1587,7 +1602,12 @@ kg/m³). The two share an executable, so the second differs from the first only
 in the ground's discharge. They show what point discharge changes: the field at
 the ground and how much charge the ground gives off under storms, and whether
 the space charge alters the lightning above. Later runs take it up once that is
-known. Each takes about three hours on 4 threads, after the fine box's
+known. On several threads CM1 does not repeat itself bit for bit (above,
+"Threads and reproducibility"): the uncapped rerun parted from the first run
+about 50 steps after the restart and flashed first at day 10.842, against
+10.919, so each pair compares two realizations of the same day. The cap's
+effect shows as a shift in the flashes' heights, depths and charge, and point
+discharge's as the field at the ground. Each takes about three hours on 4 threads, after the fine box's
 extension, from 2026-10-04.
 
 ```sh
