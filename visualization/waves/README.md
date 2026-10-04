@@ -123,23 +123,33 @@ calculations and the finite-record interpretation of the run-up percentiles.
 
 ## The nearside sea and the monthly tide
 
-`python -m visualization.waves.nearside` draws the seas as seen from Earth, in
-the atlas sheets' orthographic projection over their neutral shaded relief.
-The mapped quantity takes a one-hue orange ramp, since the atlas's blues mean
-depth. Each image has a sidecar with product and renderer hashes and
-round-trip checks of the drawn values.
+`python -m visualization.waves.nearside` draws the nearside sea's waves and
+coasts, a month at four of its shores, and the seas' monthly tide over the
+atlas's neutral shaded relief. The wave and coast maps use a Lambert azimuthal
+equal-area projection centred on the nearside sea (6° W, 19° N), so its western
+coasts keep their width; the tide maps show the whole Moon in three
+orthographic views. Coastlines are the half-level contour of the bilinearly
+interpolated water mask. Heights take a one-hue orange ramp and periods a
+violet one, since the atlas's blues mean depth. Each image has a sidecar with
+product and renderer hashes and round-trip checks of the drawn values.
 
-- `results/tides.png` reads the geography tide product: the typical monthly
-  tide range on the near side, the eastern limb (Smythii–Marginis and
-  Humboldtianum) and the far side, with contours every metre and the
-  product's stations. The tide grid is the atlas's quarter-degree nodes.
 - `results/nearside_waves.png` reads `climate/waves/results/nearside.json`:
   the second cycle's mean significant wave height with the mean direction of
-  travel, the share of the cycle with Hs of at least 1 m, and the sea's
-  largest and area-mean heights through the cycle beside Smythii–Marginis.
-  The wave fields are computed on 1-degree nodes; the maps interpolate between
+  travel, the height exceeded 5% of the time on the same scale, and the mean
+  period of the wave energy with its deep-water wavelength, above the sea's
+  largest and area-mean heights through the cycle beside Smythii–Marginis. The
+  wave fields are computed on 1-degree nodes; the maps interpolate between
   nodes inside the atlas's shoreline.
-- `results/nearside_coasts.png` shows the time-mean wave power travelling
-  toward each 1-degree coastal node, with the strongest coasts named.
+- `results/nearside_coasts.png` draws each 1-degree coastal node as a dot
+  coloured and sized by the time-mean wave power travelling toward it, on a
+  logarithmic scale, with the eight strongest coasts numbered and listed.
+- `results/nearside_shores.png` reads `climate/waves/results/shore_month.json`:
+  hourly wave height, mean period (where Hs is at least 0.5 m) and tide at four
+  coastal nodes, with lunar day and night at each and a locator map.
+- `results/tides.png` reads the geography tide product: the typical monthly
+  tide range on the near side, the eastern limb (Smythii–Marginis and
+  Humboldtianum) and the far side, with every tidal sea outlined, contours
+  every metre in the nearside and South Pole–Aitken seas, and the product's
+  stations. The tide grid is the atlas's quarter-degree nodes.
 
 `python -m visualization.waves.nearside tides` draws the tide maps alone.

@@ -7,7 +7,9 @@ two lunar cycles of the recovered weather, with the physics of the
 [Smythii–Marginis cycle](cycle.md), and measures the second cycle.
 [nearside.py](nearside.py) runs the waves, [nearside_analysis.py](nearside_analysis.py)
 measures them, and the [product](results/nearside.json) holds the statistics,
-maps, reference points, swell and coastal power.
+maps, reference points, swell and coastal power. [shore_month.py](shore_month.py)
+follows four shores through the month with their tide
+([product](results/shore_month.json)).
 
 ## The sea through the cycle
 
@@ -26,10 +28,15 @@ its area mean stays between 1.02 and 1.84 m.
 The largest Hs is 4.91 m, in Mare Imbrium at 11.9° W, 39.9° N over 1,292 m of
 water, 26.2 days into the cycle, with a 19.3 s mean period and a 22.2 s peak
 period. Half the sea's nodes reach at least 2.9 m at some time in the cycle and
-a tenth reach 3.9 m. Where Hs is at least 0.5 m, mean periods run from 8.3 to
+a tenth reach 3.9 m. The height exceeded 5% of the time is 2.4 m at the median
+node, 1.7 times its mean height, and reaches 4.3 m in north-western Oceanus
+Procellarum, by Harding. Where Hs is at least 0.5 m, mean periods run from 8.3 to
 15.1 s (10th to 90th percentile, median 11.5 s), and metre-scale seas peak at
 16.6 s at the median and 20.1 s at the 90th percentile. These waves are 34 to
-130 m long and travel at 3 to 6 m/s.
+130 m long and travel at 3 to 6 m/s. Weighted by wave energy, the mean period
+runs from 10.3 to 14.9 s across the sea (10th to 90th percentile of nodes), longest
+in western Oceanus Procellarum (14.5 s on average, 16.7 s at most, by von Braun)
+and Mare Imbrium (14.1 s) and shortest in Serenitatis and Crisium (11.2 s).
 
 North of 10° N the waves run steadily toward the south-west: their
 energy-weighted mean direction points 247° counterclockwise from east, with a
@@ -70,19 +77,58 @@ equatorward seas:
 
 | Coast | Land lies to the | Mean power toward it |
 |---|---|---:|
-| Western Oceanus Procellarum, by Montes Agricola | south-west | 731 W/m |
-| Western Oceanus Procellarum, by Mons Rümker | west | 654 W/m |
+| Western Oceanus Procellarum, by Russell | south-west | 731 W/m |
+| North-western Oceanus Procellarum, by Harding | west | 654 W/m |
 | Western Oceanus Procellarum, near 12° N | south-west | 595 W/m |
-| South-western Mare Imbrium, by Mons Delisle | south | 584 W/m |
-| Southern Mare Imbrium, along Montes Carpatus | south | 583 W/m |
-| Eastern Mare Fecunditatis | east | 575 W/m |
-| The Tranquillitatis plateau's north-western shore | south-east | 520 W/m |
-| The Aristarchus plateau's north-eastern shore, by Mons Herodotus | south-west | 506 W/m |
+| South-western Mare Imbrium, by Delisle | south | 584 W/m |
+| Southern Mare Imbrium, at the eastern end of Montes Carpatus | south | 583 W/m |
+| Eastern Mare Fecunditatis, by Atwood | east | 575 W/m |
+| The Tranquillitatis plateau's north-western shore, by Jansen | south-east | 520 W/m |
+| The Aristarchus plateau's north-eastern shore, by Rupes Toscanelli | south-west | 506 W/m |
 
+Each coast is named by the nearest gazetteer landmark: a sea, mountain, scarp or
+valley, or a crater at least 20 km across. The landmarks lie 20–105 km from
+their nodes; the coast near 12° N lies 143 km from Cardanus, the nearest.
 The [coastal figure](../../visualization/waves/results/nearside_coasts.png)
-colours the atlas shoreline by its nearest coastal node. At 1-degree spacing
-these are the sea-scale exposures of 30 km stretches of coast; headlands and
-bays inside them need the nested grids of the [shore study](shore.md).
+draws every coastal node as a dot coloured and sized by its power. At 1-degree
+spacing these are the sea-scale exposures of 30 km stretches of coast;
+headlands and bays inside them need the nested grids of the
+[shore study](shore.md).
+
+## A month at four shores
+
+Four coastal nodes show how the waves and the tide meet at a shore through the
+month ([figure](../../visualization/waves/results/nearside_shores.png)): the
+most exposed coast, in western Oceanus Procellarum by Russell; southern Mare
+Imbrium at the eastern end of Montes Carpatus; the largest tide on the most
+exposed tenth of the coast, in southern Mare Nubium by Pitatus; and a coast of
+Mare Nectaris by Fracastorius near the median exposure.
+
+| Shore | Depth | Mean power toward it | Largest Hs (day) | Hours with Hs ≥ 1 m | Tide range this month (typical) |
+|---|---:|---:|---:|---:|---:|
+| Western Oceanus Procellarum | 78 m | 731 W/m | 3.4 m (23.1) | 442 | 2.8 m (3.2 m) |
+| Southern Mare Imbrium | 209 m | 583 W/m | 4.0 m (13.7) | 661 | 3.0 m (3.4 m) |
+| Southern Mare Nubium | 101 m | 363 W/m | 3.5 m (13.7) | 403 | 7.7 m (6.3 m) |
+| Mare Nectaris | 151 m | 111 W/m | 2.2 m (16.6) | 274 | 7.6 m (6.2 m) |
+
+Storms reach the shores on different days. Southern Imbrium and southern Nubium
+peak together on day 13.7, while western Procellarum stays mostly below 1 m
+from day 7 to day 17.6 and then holds 2.7–3.4 m from day 20.5 to day 27, with
+mean periods up to 20 s: swell about 100 m from crest to crest. The tide rises
+and falls once through the month, by about 3 m on the northern shores and
+7.6–7.7 m on the southern ones. Southern Nubium's high water, on day 14.6, comes
+as western Procellarum's water stands lowest.
+
+The GCM's month has no date, so the tide is a real one. The GCM's Sun turns
+evenly once per synodic month on a clock that matches the GCM's own sunlight to
+0.0001° over the year before the wave run. In each of the 234 months of
+2026–2045 the real Sun stands once over the longitude where the GCM's Sun
+stands at the middle of the wave month; the tide is the month of 7 February to
+8 March 2038, within 23% of every shore's typical range, and its Sun stays
+within 0.5° of the GCM's. No month is typical at every shore: across the
+matched months the ranges at southern Imbrium and southern Nubium correlate at
+−0.67. Air pressure moves the level by under 0.2 m and wind setup by about
+1 cm.
 
 ## The calculation
 
@@ -100,8 +146,15 @@ coupled-air OpenMP build (air 1.404 kg/m³), Komen growth and whitecapping, the
 gravity-scaled AGROW knee, depth breaking with index 0.73, and 36 directions by
 48 frequency intervals from 0.00497 to 0.497 Hz. The timestep is 300 s, the
 author's choice on 2026-10-03 for a run of 3.3 hours on eight threads against
-about 7.5 hours at Smythii's 150 s. Repeating the second cycle's stormiest three days at 150 s from the main run's hotfile (hours 1,224–1,296 after a day's adjustment, around the peak basin-mean stress at hour 1,242) changes metre-scale seas by at most 3.6% in Hs and 9.0% in mean period, 0.12% and 0.25% at the 95th percentile. Seas of a few decimetres change by up to 86% in Hs and 145% in mean period at single nodes, with 95th percentiles of 0.20% and 0.53%, and the time above 1 m changes by at most 2.6 hours of the 72 at any node. One node shallower than
-SWAN's 5 cm minimum depth stays dry and leaves the statistics.
+about 7.5 hours at Smythii's 150 s. Repeating the second cycle's stormiest
+three days at 150 s from the main run's hotfile (hours 1,224–1,296 after a
+day's adjustment, around the peak basin-mean stress at hour 1,242) changes
+metre-scale seas by at most 3.6% in Hs and 9.0% in mean period, 0.12% and 0.25%
+at the 95th percentile. Seas of a few decimetres change by up to 86% in Hs and
+145% in mean period at single nodes, with 95th percentiles of 0.20% and 0.53%,
+and the time above 1 m changes by at most 2.6 hours of the 72 at any node. One
+node shallower than SWAN's 5 cm minimum depth stays dry and leaves the
+statistics.
 
 The record runs in 48-hour segments, each ending in a SWAN hotfile that starts
 the next. A hotstart reproduces an unbroken run bit for bit: hours 4–6 of a
@@ -124,6 +177,8 @@ OPENBLAS_NUM_THREADS=1 nice -n 10 python -m climate.waves.nearside run --executa
 python -m climate.waves.nearside_analysis assemble
 python -m climate.waves.nearside_analysis check --executable $EXE
 python -m climate.waves.nearside_analysis summarize
+climate/gcm/.venv/bin/python -m climate.waves.shore_month check-sun   # netCDF4: the GCM's Sun clock
+python -m climate.waves.shore_month
 python -m visualization.waves.nearside
 ```
 

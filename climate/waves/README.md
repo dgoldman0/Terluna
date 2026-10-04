@@ -34,8 +34,9 @@ The nearside sea, eighteen times larger, stays rougher than Smythii–Marginis
 through the whole cycle. Its mean periods run 8–15 s, and metre-scale seas
 peak near 17 s. North of 10° N its waves run steadily toward the south-west;
 in the south their direction varies with a northward tendency, so the seas
-travel toward the equator from both sides. Swell that has outrun the local
-wind carries a third to two thirds of the wave energy
+travel toward the equator from both sides. The height exceeded 5% of the time
+is 2.4 m at the median node, 1.7 times its mean, and 4.3 m at most. Swell that
+has outrun the local wind carries a third to two thirds of the wave energy
 ([nearside sea](nearside.md), [Smythii–Marginis](cycle.md)).
 
 **How the waves look.** Lunar waves keep Earth's shapes and steepness (height
@@ -49,8 +50,8 @@ same height.
 **Where the energy reaches the shore.** Over the nearside sea the shores the
 equatorward seas run onto take the most energy. On average through the cycle
 these are western Oceanus Procellarum (595–731 W/m), the southern shore of Mare
-Imbrium along Montes Carpatus and by Mons Delisle (583–584 W/m) and eastern
-Mare Fecunditatis (575 W/m), against 87 W/m along the median coast
+Imbrium by Delisle and at the eastern end of Montes Carpatus (583–584 W/m) and
+eastern Mare Fecunditatis (575 W/m), against 87 W/m along the median coast
 ([nearside sea](nearside.md)). At the eastern Smythii headland, computed on
 474 m to 118 m grids over native terrain, the western face takes 12.5 times the
 eastern face's wave energy through the cycle, and the exposed side switches
@@ -65,10 +66,19 @@ the librations move the Earth's tide through each month. The typical monthly
 range is 3.7 m over the nearside sea (5.5–6.0 m at Fecunditatis, Nubium and
 Humorum), 2.1 m in the South Pole–Aitken sea and 0.55 m in Smythii–Marginis,
 with 0.78 m at the headland. Mare Fecunditatis joins the nearside sea through a
-narrow strait and exchanges water with it every 9.5 days, which doubles its
-fortnightly tides. Air pressure tilts the seas by at most 0.18 m, and wind
-setup is about 1 cm ([geography](../../geography/README.md#the-monthly-tide),
-[review](review.md)).
+narrow strait whose geometry and friction set its fortnightly tide: twice the
+equilibrium with bed friction for slow flows, 0.8–1.05 times it with the
+friction of the metre-per-second flows the strait would carry. Air pressure
+tilts the seas by at most 0.18 m, and wind setup is about 1 cm
+([geography](../../geography/README.md#the-monthly-tide), [review](review.md)).
+
+**At a shore the waves and the tide meet.** Followed through the month at four
+shores of the nearside sea, with the tide of a real month matched to the GCM's
+Sun, the water rises and falls about 3 m on the northern shores and 7.6–7.7 m on
+the southern ones, and storms arrive on their own days: southern Imbrium and
+southern Nubium peak together at 3.5–4.0 m, while western Procellarum stays
+mostly below 1 m for ten days and then holds 2.7–3.4 m for six, with swell up
+to 100 m from crest to crest ([a month at four shores](nearside.md#a-month-at-four-shores)).
 
 **The shores are regolith.** The seas flood today's regolith-mantled ground. At
 lunar gravity the same waves move grains about six times larger, and fine grains
@@ -86,7 +96,7 @@ The calculations form one chain; each study's record holds its checks:
 | Recovered winds and coastal resolution | CM1 ring and GCM wind records; eastern Smythii at 7.6–1.9 km | [coastal.md](coastal.md) |
 | A weather week | The GCM's surface stress coupled to SWAN | [weather.md](weather.md) |
 | Smythii–Marginis through a lunar cycle | Two cycles of waves, the second measured | [cycle.md](cycle.md) |
-| The nearside sea through a lunar cycle | The same for half of the Moon's water, with swell and coastal power | [nearside.md](nearside.md) |
+| The nearside sea through a lunar cycle | The same for half of the Moon's water, with swell, coastal power and a month at four shores with their tide | [nearside.md](nearside.md) |
 | Shore exposure | Directional energy at the headland on 118 m terrain | [shore.md](shore.md) |
 | Coastal history | Arrivals and durations at the headland through the cycle | [coastal_history.md](coastal_history.md) |
 | Breaking and run-up | Individual waves on rock and beach profiles (SWASH) | [runup.md](runup.md) |
@@ -141,7 +151,9 @@ reads an uninitialised variable, so every run keeps breaking on.
   irregular input spectrum within 5–6%.
 - **Tide.** The ephemeris matches JPL Horizons within 0.05° and 11 km.
   Smythii–Marginis and the South Pole–Aitken sea follow their equilibrium tide
-  within 1.4% and 6%, and the nearside sea's monthly lines within 7%.
+  within 1.4% and 6%, and the nearside sea's monthly lines within 7%. The
+  GCM's Sun clock, which places the shore month's tide, reproduces the GCM's own
+  sunlight to 0.0001°.
 
 ## Next calculations
 
@@ -187,4 +199,5 @@ then [first experiments](first_experiments.md#reproduction),
 [shore](shore.md#reproduction-and-storage),
 [coastal history](coastal_history.md#reproduction-and-storage) and
 [run-up](runup.md#reproduction-and-storage). The review's numbers come from
-`python -m climate.waves.review_checks` and the tide from `python -m geography.tides`.
+`python -m climate.waves.review_checks`, the tide from `python -m geography.tides`
+and the shore month from `python -m climate.waves.shore_month`.
