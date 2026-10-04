@@ -69,7 +69,7 @@ def load_basin(path=ATLAS, stride=4, body=874):
                 offshore_index=int(choice), metadata=metadata, source_sha256=sha256(path))
 
 
-def execute(executable, directory, files, outputs, timeout_s=900, *, threads=1):
+def execute(executable, directory, files, outputs, timeout_s=900, *, threads=1, address_space_bytes=2 * 1024**3):
     """Hash all run inputs and required outputs, with bounded execution."""
     if threads not in (1, 2, 4, 8) or timeout_s < 1:
         raise ValueError("Use one, two, four or eight threads and a positive wall-time limit")
@@ -98,7 +98,7 @@ def execute(executable, directory, files, outputs, timeout_s=900, *, threads=1):
             (directory / name).write_text(data)
     def limits():
         resource.setrlimit(resource.RLIMIT_CPU, (timeout_s*threads, timeout_s*threads))
-        resource.setrlimit(resource.RLIMIT_AS, (2 * 1024**3, 2 * 1024**3))
+        resource.setrlimit(resource.RLIMIT_AS, (address_space_bytes, address_space_bytes))
     start = time.monotonic()
     with (directory / "console.log").open("w") as log:
         result = subprocess.run([str(executable.resolve())], cwd=directory, stdout=log, stderr=subprocess.STDOUT,
@@ -109,7 +109,7 @@ def execute(executable, directory, files, outputs, timeout_s=900, *, threads=1):
         raise RuntimeError(f"SWAN failed; inspect {directory}")
     record = dict(schema="terluna.climate.swan-pilot-run/1", identity=identity,
                   producer_sha256=sha256(Path(__file__)), elapsed_wall_s=time.monotonic() - start,
-                  threads=threads, address_space_limit_bytes=2 * 1024**3, cpu_limit_s=timeout_s*threads,
+                  threads=threads, address_space_limit_bytes=address_space_bytes, cpu_limit_s=timeout_s*threads,
                   warnings=[line.strip() for line in printed.splitlines() if "warning" in line.lower()],
                   output_sha256={name: sha256(directory / name) for name in (*outputs, "PRINT", "norm_end")})
     record_path.write_text(json.dumps(record, indent=2) + "\n")
