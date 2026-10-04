@@ -1,8 +1,9 @@
 # Sea appearance
 
-Figures of the [sea appearance study](../../research/studies/sea_appearance/README.md).
+Figures of the [sea appearance study](../../research/studies/sea_appearance/README.md),
+written as ignored files with provenance sidecars to `results/`.
 `python visualization/sea-appearance/lighting.py` reads its lighting calendar and
-map and writes ignored figures with provenance sidecars to `results/`:
+map:
 
 - `results/lighting_calendar.png`: the clear-sky light on the ground hour by hour
   through 7 February to 8 March 2038 at six coasts, from the sky lit by the Sun,
@@ -13,3 +14,14 @@ map and writes ignored figures with provenance sidecars to `results/`:
   the share of 2026–2045 the Earth's centre spends above its horizon, on the
   atlas's relief, with every water body outlined. The cividis ramp runs from dark,
   where the Earth never rises, to bright, where it always stands.
+
+`python visualization/sea-appearance/slopes.py` reads the sea-slope product:
+
+- `results/slope_spectra.png`: the curvature spectrum of the unified spectrum of
+  Elfouhaily et al. (1997) at lunar and Earth gravity under the same 10 m winds,
+  3 and 5 m/s, with the capillary scales of both worlds and the wavelength below
+  which the study takes the waves from the wave runs.
+- `results/sea_slopes.png`: the mean square slope through the month at the six
+  coasts: the short waves hour by hour, all waves where the wave runs give
+  spectra, Earth's clean sea under the same wind, and the hours too calm for short
+  waves.

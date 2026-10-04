@@ -173,3 +173,68 @@ python visualization/sea-appearance/lighting.py
 
 The runner reads the cached scattering solution from
 `research/runs/optical_comfort/spherical/`, linked to the research drive.
+
+## The sea's slopes
+
+How the water reflects the sky, the Sun and the Earth follows from the
+distribution of its surface slopes. [slopes.py](slopes.py) assembles them hour by
+hour through the shore month at the calendar's six coasts and writes
+[sea_slopes.json](results/sea_slopes.json) with its hourly series
+([sea_slopes.npz](results/sea_slopes.npz)); the
+[figures](../../../visualization/sea-appearance/) show them. Two parts add up:
+
+- **The waves longer than about 1 m** (the wave runs' highest frequency, 0.497 Hz):
+  their slope covariance from the wave runs' directional spectra. At the four
+  nearside shores these come from the nearside run's restart files at the end of
+  each 48-hour segment, which hold the full spectrum of every grid point and match
+  SWAN's printed spectra to their printed precision; at the Smythii headland from
+  the shore history's hourly spectra at its east face.
+- **The shorter waves,** down through the capillary roll-off: the short-wave regime
+  of the unified spectrum of Elfouhaily et al. (1997)
+  ([short_waves.py](../../../illumination/water_surface/short_waves.py)), whose
+  dispersion and capillary scales carry gravity and surface tension, driven by the
+  friction velocity of the GCM's surface stress at each coast, interpolated as the
+  wave coupling interpolates it. At Earth's gravity the spectrum stays within 0.006
+  of Cox and Munk's clean-sea slopes from 5 to 14 m/s.
+
+**Lunar gravity moves the capillary waves.** The gravity–capillary waves are
+4.2 cm long against Earth's 1.7 cm, and the slowest ripples travel at 0.147 m/s
+against 0.230. Short waves form once the friction velocity passes 0.054 m/s
+(Earth's 0.085), and the same wind drives them harder. Under a 3 m/s wind the
+waves shorter than 1 m have a mean square slope of 0.009 on the Moon and 0.001 on
+Earth; under 5 m/s, 0.026 against 0.010.
+
+**The winds are light, and the seas are often glassy.** The median 10 m wind at
+the coasts is 2.2–3.5 m/s. For 6–29% of the month's hours the stress is too weak
+for short waves, and only the longer waves tilt the water.
+
+| Coast | Median 10 m wind | Hours without short waves | Waves longer than 1 m | Short waves | All waves, median (90th percentile) | Earth's clean sea under the same wind |
+|---|---:|---:|---:|---:|---:|---:|
+| Western Oceanus Procellarum | 3.1 m/s | 14% | 0.015 | 0.010 | 0.026 (0.042) | 0.019 |
+| Southern Mare Imbrium | 3.3 m/s | 14% | 0.015 | 0.011 | 0.026 (0.031) | 0.020 |
+| Southern Mare Nubium | 3.5 m/s | 6% | 0.015 | 0.012 | 0.026 (0.038) | 0.021 |
+| Mare Nectaris | 2.6 m/s | 24% | 0.016 | 0.007 | 0.029 (0.039) | 0.016 |
+| Eastern Smythii headland | 2.2 m/s | 29% | 0.012 | 0.004 | 0.016 (0.033) | 0.015 |
+| South Pole–Aitken sea, by Mare Ingenii | 2.5 m/s | 22% | no wave run | 0.007 | — | 0.016 |
+
+Values are mean square slopes: medians over the month, the longer waves' over the
+times with spectra (15 at each nearside shore, hourly at the headland). At the
+median the seas are 1.1–1.3 times as steep as Earth's clean sea under the same
+wind. They are smoother than Earth's in the calm hours, down to a third as
+steep, and up to twice as steep in the strongest winds. A mean square slope of
+0.026 is an rms tilt of 9°.
+
+**Boundaries.** The short-wave laws are Earth fits. At lunar gravity they hold if
+the same balance of wind and capillarity sets the short waves, and the lunar seas'
+u*/c_m, up to 1.8, stays inside the range the fit spans. The GCM's stress is a
+170 km, three-hourly mean, without gusts, sea breezes or the surface films of a
+living sea. Gusts would break the calm hours into patches of ripples. Films damp
+capillary waves in light winds: Cox and Munk measured slicks at about half the
+clean slope. The nearside shores have spectra every 48 hours; the South
+Pole–Aitken sea has no wave run. The shape of the slope distribution comes with
+the reflection model.
+
+```sh
+OPENBLAS_NUM_THREADS=1 python -m research.studies.sea_appearance.slopes
+python visualization/sea-appearance/slopes.py
+```
