@@ -406,7 +406,12 @@ what the products say each one holds. It writes [scenes.json](results/scenes.jso
 - the water's own colour.
 
 [scenes.md](scenes.md) describes each frame in words and numbers, for picturing the
-scenes before they are rendered.
+scenes before they are rendered. It is written from [scenes.template.md](scenes.template.md),
+which holds the words and takes every number from the product.
+
+Each frame's colours come from the regime results' model, evaluated for that frame's
+directions with the scene's own wave slopes and the Sun and the Earth as its camera sees
+them. Sizes in pixels follow the rectilinear lens.
 
 **Two cameras moved off the study's points.** At the 118 m resolution of the coast's
 terrain ([geography/coast_terrain.py](../../../geography/coast_terrain.py)):
@@ -434,5 +439,8 @@ a star to the naked eye.
 - Whitecaps are not modelled. The windiest frames, at 5 to 6 m/s, would show the first of them.
 
 ```sh
-OPENBLAS_NUM_THREADS=1 python -m research.studies.sea_appearance.scenes
+OPENBLAS_NUM_THREADS=1 NUMBA_NUM_THREADS=2 <environment>/bin/python -m research.studies.sea_appearance.scenes
+python -m research.studies.sea_appearance.scenes --text     # rewrite scenes.md from the product only
 ```
+
+The runner needs numba for the solved sky, as the results by regime do.

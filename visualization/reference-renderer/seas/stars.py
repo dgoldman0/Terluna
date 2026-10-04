@@ -79,7 +79,7 @@ def layer(common, record, geometry, camera, arrays, width, height, fov_deg):
     f, right, upv = camera[3:6], camera[6:9], camera[9:12]
     th = math.tan(math.radians(fov_deg) / 2)
     aspect = width / height
-    pixel = math.radians(fov_deg) / width
+    focal = width / 2 / th                     # a rectilinear lens: a pixel at angle a off the axis spans cos^3 a / f^2
     drawn, brightest = 0, []
     for i in np.flatnonzero(visible):
         d = local[i]
@@ -97,14 +97,15 @@ def layer(common, record, geometry, camera, arrays, width, height, fov_deg):
                              for c in range(sky.direct_channels.shape[1])]) / math.sin(math.radians(max(elevation[i], 0.5)))
         seen = (per_channel * np.clip(transmit, 0, 1)) @ xyz
         e = V0_LUX * 10 ** (-0.4 * stars[i, 2]) * seen / above[1]
-        # A Gaussian spot holding the illuminance: radiance = E * spot / pixel solid angle.
+        # A Gaussian spot holding the illuminance: radiance = E * spot / the solid angle of a pixel there.
+        omega = z ** 3 / focal ** 2
         r = 3
         cu, cv = int(math.floor(u)), int(math.floor(v))
         ys, xs = np.mgrid[cv - r:cv + r + 1, cu - r:cu + r + 1]
         w = np.exp(-(((xs + 0.5) - u) ** 2 + ((ys + 0.5) - v) ** 2) / (2 * SPOT_SIGMA_PX ** 2))
         w /= w.sum()
         ok = (xs >= 0) & (ys >= 0) & (xs < width) & (ys < height)
-        image[ys[ok], xs[ok]] += w[ok][:, None] * e / pixel ** 2
+        image[ys[ok], xs[ok]] += w[ok][:, None] * e / omega
         drawn += 1
         brightest.append((float(stars[i, 2]), round(float(e[1]), 9)))
     brightest.sort()

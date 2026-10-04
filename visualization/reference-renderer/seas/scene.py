@@ -436,7 +436,7 @@ def build(common, coast_name, moment, width, height, fov_deg=65.0, seed=20380207
     params[k.P_TER_OFFSET], params[k.P_TER_HMAX], params[k.P_HAS_TERRAIN] = coast_["offset"], coast_["hmax"], 1.0
     params[k.P_TEX_X0], params[k.P_TEX_Y0], params[k.P_TEX_DX] = coast_["x0"], coast_["y0"], coast_["tex_dx"]
     params[k.P_SKY_AZ_STEP], params[k.P_LUT_AZ_STEP] = SKY_AZ_STEP, LUT_AZ_STEP
-    params[k.P_PIXEL] = math.radians(fov_deg) / width
+    params[k.P_PIXEL] = 2 * math.tan(math.radians(fov_deg) / 2) / width     # a pixel's angle at the centre
     params[k.P_INTERREFLECT] = 4 * sea["dx"]
     params[k.P_SEA_BLOCK], params[k.P_TER_BLOCK] = SEA_BLOCK, TERRAIN_BLOCK
     params[k.P_TAN_HALF], params[k.P_ASPECT] = math.tan(math.radians(fov_deg) / 2), width / height
