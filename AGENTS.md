@@ -1,3 +1,11 @@
+# Commits
+
+Use informative commit messages. Multiple phrases for a commit message.
+
+# System Usage Limits
+
+Be mindfulof system resource availability esp. when other tests are running in other sessions as well.
+
 # Terluna research and paper workspace
 
 The repository holds shared research in subject domains, cross-domain studies, scientific visualization, an immersive experience and the five-paper manuscript ensemble. Start with `research/README.md`, `research/status.json` and the relevant domain README. `ensemble/AGENTS.md` and its complete editorial charter govern manuscript work.
