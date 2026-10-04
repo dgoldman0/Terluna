@@ -1,392 +1,190 @@
-# Wind waves at lunar gravity
+# Waves and tides of the Open Moon's seas
 
-The aim is the wave climate of the lunar seas: how winds build waves, how
-energy travels across a basin, where terrain shelters or concentrates it,
-and how conditions change through the lunar day. Coastal breaking, marine
-travel and wave-driven mixing draw on that common picture.
+This folder holds the wave climate of the Open Moon's seas and the coasts the
+waves reach. It covers how the light lunar winds build waves at one sixth of
+Earth's gravity, where the waves run, which shores take their energy, and how
+they break and run up. The seas' monthly tide comes from the
+[geography tide product](../../geography/README.md#the-monthly-tide). SWAN
+(Simulating WAves Nearshore) computes the sea states and SWASH the individual
+waves at the shore, both at lunar gravity, on the 28% atlas and the corrected
+design climate A28_dim5_moon.
 
-The [review of 3 October 2026](review.md) records what these studies establish,
-what they leave out and where their uncertainty lies.
+## What the seas are like
 
-SWAN (Simulating WAves Nearshore) runs here as a spectral wave model. The
-experiments progress from prescribed winds to recovered atmospheric surface
-stress. The first experiment compares Earth and lunar gravity over
-the same flat, 100 km strip of water, with winds drawn from the corrected CM1
-equatorial ring. It establishes a runnable wave calculation and measures its
-numerical sensitivities.
+**Light winds raise big, slow waves.** Over the seas the winds are light. The
+GCM's surface stress corresponds to 10 m winds of 2.6 m/s at the median and
+5.8 m/s at the 99th percentile over the equatorial seas, close to CM1's 2.15
+and 5.84 m/s. At one sixth of Earth's gravity the same wind, fetch and duration
+build waves 4–5 times as high as on Earth, with periods five times as long
+([first experiments](first_experiments.md)).
 
-The [results](results/waves.json) contain significant wave height, peak period
-and mean period at four fetches and six forcing durations. Significant height
-is the spectral quantity `Hs = 4 sqrt(m0)`; mean period is `Tm01 = m0/m1`.
-The [CSV](results/waves.csv) is a tabular companion. Read it with the JSON's
-evidence statement, units, source hashes and numerical checks. The
-[renderer](../../visualization/waves/) plots the 100 km time series.
+**Sea states through a lunar cycle.** Driven by 60 days of the GCM's weather,
+with the first lunar cycle spinning the seas up and the second measured:
 
-The follow-up below adds recovered equatorial wind vectors and surface density,
-early-growth refinement, a two-dimensional Smythii–Marginis pilot and simple
-coastal slopes. The original strip calculation and its outputs are retained.
-
-The [coastal-resolution follow-up](coastal.md) nests eastern Smythii at
-7.6, 3.8 and 1.9 km spacing and checks directional refinement. It also recovers
-all three corrected CM1 ring histories and ten GCM years of regional wind
-means, with each product's height and sampling interval retained.
-
-The [weather-sequence study](weather.md) captures 241 global atmospheric
-snapshots from a 30-Earth-day continuation, then drives a selected week of basin waves
-with their surface stress. It checks the timestep and the influence of
-48 and 96 additional hours of preceding weather.
-
-The [continuous-cycle study](cycle.md) extends the global atmospheric record
-to 60 Earth days and follows the waves through two solar cycles. It excludes
-the first 29.53059 days and measures the second: Hs reaches 3.375 m, and the
-offshore reference point has Hs of at least 1 m for 309.6 hours, with a
-98.1-hour continuous episode. The study records occurrence, persistence,
-period and direction, together with timestep, history and evolving spectral
-checks. Small-wave frequency coverage and finer basin geometry remain open.
-
-The [shore exposure study](shore.md) follows selected second-cycle spectra
-through eastern Smythii's finer geography. It adds native 118 m terrain,
-a regional propagation grid and local coastal refinements around the
-shoreline spur. Full directional spectra measure incoming and outgoing
-power at bathymetry-selected shore stations. Spatial, boundary and spectral
-comparisons accompany the conditional exposure results.
-
-The [evolving coastal history](coastal_history.md) carries changing wind and
-directional spectra through a complete second cycle, after a full first cycle
-of spin-up at every spectral scale. It measures event onsets, durations and
-incoming energy at the three coastal stations. The [SWASH profile study](runup.md)
-then resolves individual waves, breaking and run-up on interpolated rock and
-explicit beach slopes, with lunar gravity, reflection and numerical controls.
-
-## Findings from the first run
-
-At 100 km fetch after 48 hours of the imposed wind, the modified build gives:
-
-| Wind at 10 m | Earth Hs | Lunar Hs | Earth mean period | Lunar mean period |
-|---|---:|---:|---:|---:|
-| 2.15 m/s, water median | 0.099 m | 0.472 m | 1.24 s | 6.39 s |
-| 4.00 m/s, water p90 | 0.296 m | 1.357 m | 2.12 s | 10.69 s |
-| 5.84 m/s, water p99 | 0.573 m | 2.412 m | 2.92 s | 13.74 s |
-
-Lower gravity produces heights 4.2–4.8 times as large and substantially longer
-periods under these matched conditions. The Earth controls use the same
-lunar-derived wind magnitudes, so this establishes a gravity effect within
-the chosen model. Whether the actual lunar seas are rougher than Earth's
-seas depends on their different wind histories, fetches and coupling physics.
-
-The numerical similarity test agrees within 0.303% in height and 0.326% in
-mean period with the modified source, against 5.44% and 3.91% for stock SWAN.
-Earth outputs are exactly preserved. At the three main 48-hour endpoints,
-the modification changes lunar height by at most 0.11%.
-
-The lunar 4.00 m/s case has these sensitivity results. Endpoint differences
-are signed; maxima are absolute relative differences across all hourly
-outputs from 1–48 hours and fetches from 10–100 km.
-
-| Change | Final Hs change | Final mean-period change | Largest earlier/local Hs change | Largest earlier/local mean-period change |
-|---|---:|---:|---:|---:|
-| Time step 300 → 150 s | 0.00% | 0.00% | 33.2% | 17.0% |
-| Cell width 1000 → 500 m | −0.295% | −0.187% | 2.52% | 1.86% |
-| Directions 36 → 72 | +0.147% | +0.094% | 0.479% | 0.372% |
-| Low frequency halved, high frequency doubled | +0.074% | +0.094% | 0.906% | 5.61% |
-
-**The early growth curves remain sensitive to numerical choices.** At
-100 km, halving the time step raises the 1-hour height from 0.132 to 0.176 m;
-the difference falls to 4.3% after 6 hours and disappears at the printed
-precision after 48 hours. The AGROW modification also changes early lunar
-heights substantially. These curves show conditional development, with the
-strongest numerical support at the tested late endpoint. The follow-up adds
-frequency-bin convergence tests.
-Comparable refinement at the other wind strengths remains unperformed.
-
-All 22 accepted runs have zero diagnosed depth-breaking fraction after
-initialization. Every final spectrum passes the edge checks; the largest
-high-edge fraction is 0.683% of resolved variance. The numerical runs take
-about 7.5 minutes total on one thread in this environment, excluding builds
-and the rejected disabled-breaking diagnostics.
-
-## Experiment
-
-The corrected equatorial ring supplies 10 m wind magnitudes of 2.15, 4.00 and
-5.84 m/s: its water median, 90th percentile and 99th percentile. The source
-holds 237 snapshots, three hours apart, across days 29.5–59. Each wave case
-imposes one magnitude, a fixed direction and uniform wind for up to 48 hours.
-Each wind percentile selects the magnitude of an imposed episode. Estimating
-event durations and wave occurrence probabilities requires wind histories.
-
-| Choice | Value or treatment |
-|---|---|
-| Geometry | Cartesian, one-dimensional propagation strip; directional wave spectrum |
-| Fetch samples | 10, 25, 50 and 100 km |
-| Duration samples | 1, 3, 6, 12, 24 and 48 hours, starting from calm water |
-| Depth | Uniform 1000 m, an imposed deep-water reference |
-| Gravity | Earth standard 9.80665 m/s²; Moon `GM/R²`, 1.62421887656 m/s², from shared constants |
-| Densities | Air 1.28 kg/m³, SWAN's fixed default; water 1025 kg/m³, a seawater scenario |
-| Physics | Komen wind input and whitecapping; Wu drag; default discrete interaction approximation for four-wave interactions |
-| Initial wind source | AGROW linear growth from `INIT ZERO`; stock and gravity-scaled frequency-knee variants |
-| Grid | 1 km, 300 s; 36 directions; 49 logarithmically spaced frequencies |
-| Frequency band | 0.03–3 Hz at Earth gravity, scaled in proportion to gravity |
-| Propagation | First-order backward-space/backward-time scheme |
-| Boundaries | Incoming swell set to zero; outgoing waves can leave |
-| Omitted processes | Currents, varying bathymetry, bottom friction, ice, vegetation and capillary-wave physics |
-
-Depth breaking is explicitly enabled with `BREAKING CONSTANT 1.0 0.73` and
-its diagnosed fraction must remain zero. Source review and a debug build
-found an uninitialized-variable path when breaking was disabled. The supported
-configuration avoids that path without adding a second source patch; the
-[audit](audit.md) records the diagnosis and the checks.
-
-The [input inventory](inputs.json) records the atmospheric and geographic
-products. The first experiment uses a prescribed strip with a stated fetch and
-depth. The follow-up adds the gridded atlas and full equatorial wind histories.
-
-## Source change and evidence
-
-The builder verifies the original SWAN 41.51 archive and creates independent
-stock and modified serial builds. The modification scales AGROW's arbitrary
-1 Hz frequency knee with gravity. The source audit explains why this restores
-dimensional similarity and which other Earth-specific options are avoided.
-The patch is a parameterization sensitivity; lunar air–water coupling and
-growth/dissipation laws still need physical validation.
-
-The two comparisons serve different purposes. The numerical similarity test
-reduces gravity exactly sixfold while enlarging length, depth and duration
-sixfold and reducing frequencies sixfold. It checks corresponding
-dimensionless states. The main experiment keeps the physical basin and wind
-duration fixed while changing gravity to the actual lunar value. Its wave
-heights depend on the combined effects of gravity, fetch and duration.
-
-Identical Earth controls must repeat exactly, and the modified build must
-preserve stock Earth profiles. The modified similarity test requires height
-and mean-period agreement within 1% wherever the reference height is at least
-1 cm. Peak period remains a frequency-bin diagnostic on an approximately 10%
-spaced grid.
-
-For the lunar 4.00 m/s case, separate runs halve the time step, halve the cell
-width, double the number of directions and widen the frequency band. The
-wider band keeps approximately the same frequency spacing to test the band
-limits. Acceptance requires changes below 5% in
-the final 100 km height and mean period. Maximum and RMS differences across
-the earlier times and inner fetches are retained too. These checks apply to
-that case and endpoint; earlier outputs retain the reported timestep sensitivity.
-Final spectra must have interior peaks and little resolved variance at the
-band edges. The source audit explains how the spectral output floor is
-handled and why integrated printed spectra differ from SWAN's height
-diagnostic, which includes a high-frequency tail.
-
-## Follow-up: recovered inputs, early growth and coastal waves
-
-The local workspace holds the atlas grid and CM1 snapshots.
-[wave_forcing.py](../crm/wave_forcing.py)
-recovers both 10 m wind components, surface pressure, 2 m temperature and
-vapour mixing ratio from the same 237 equatorial snapshots. It reads only the
-required byte ranges and records **selected-byte hashes**, offsets and
-source-file sizes. The resulting line product is kept in ignored
-`research/runs/waves/inputs/`; its description and hash are
-in [results/forcing.json](results/forcing.json).
-
-Using CM1's moist ideal-gas closure, the air over the equatorial water columns
-between 75°E and 103°E has mean density **1.40390 kg/m³**, ranging from 1.38029
-to 1.41668 kg/m³. The coupled SWAN build uses that mean, with a separate,
-recorded change to `PWIND(16)`. Density stays fixed through each run. CM1's
-closure constants are recorded in `shared/constants.json` for interpreting
-its thermodynamics. The wind record covers one equatorial line every three
-hours; basin-wide winds and shorter gusts need additional forcing data.
-
-### Early growth
-
-[early_growth.py](early_growth.py) holds air density at the original 1.28 kg/m³
-to isolate numerical refinement. At 100 km fetch, with the
-4.001 m/s wind, the one-hour significant height changes as follows:
-
-| Timestep | One-hour Hs |
-|---|---:|
-| 300 s | 0.1320 m |
-| 75 s | 0.2242 m |
-| 15 s | 0.2800 m |
-| 5 s | 0.2950 m |
-| 2 s | 0.3037 m |
-| 1 s | 0.3089 m |
-
-The [full record](results/early_growth.json) retains every comparison,
-including failed criteria. From **one to two hours**, the 2→1 s change is at
-most 1.69% in height and 1.15% in mean period over 10–100 km, excluding heights
-below 1 cm. That window was examined after the broader check failed: over
-20 minutes–2 hours, the largest height change is 4.63%, but the mean-period
-change still reaches **12.23%**. The earliest transients are therefore still
-unresolved. Predicting the response to a twenty-minute gust requires further
-timestep refinement.
-
-Frequency spacing is a separate check. At a 15 s timestep, increasing from
-96 to 192 frequency intervals changes height by at most 0.451% and mean period
-by 0.761% over the tested 20-minute–6-hour samples. These time and frequency
-checks apply to this wind and numerical source choice; other wind strengths
-and physical wind-wave onset remain open.
-
-### Basin and assumed coastal slopes
-
-[pilot.py](pilot.py) uses atlas body 874, Smythii–Marginis, at the 28% water
-scenario's common level, −1,654.2 m above the geoid. It uses spherical
-coordinates with the lunar radius explicitly supplied. Native atlas nodes
-are sampled every 1° and 0.5° (about 30.3 and 15.2 km at the equator), retaining
-their water depths. The finite ground elevations keep dry nodes dry; other
-disconnected waters inside the rectangular crop are excluded. Small channels,
-shoals and coastlines require finer grids. The bathymetry represents flooded
-rock; beach and sediment profiles require separate assumptions.
-
-Two imposed episodes start from calm water: a 4.001 m/s wind toward the east
-for twelve hours, and a wind that turns from east at hour 5 to north at hour 6
-and then holds north. SWAN interpolates the vector components during that
-hour, so the speed briefly falls to 2.83 m/s. The turning episode therefore
-changes both direction and speed.
-The original coarse runs give basin maxima of 1.222 m and 0.990 m at hour 12.
-Estimating the frequency of those wave heights requires wind histories.
-
-The [pilot product](results/pilot.json) records the episodes, selected
-offshore node, maps, source/build hashes and numerical differences. The
-75→30 s timestep comparison uses 96 frequency intervals. A separate 96→48
-interval comparison uses the coarse grid, and **both grids in the spatial
-comparison use 48 intervals**. This separates spectral and spatial changes
-while bounding run cost. The initially attempted fine-grid, 96-interval run
-was interrupted after its projected cost exceeded the run cap; its partial
-output is retained for diagnosis under ignored
-`research/runs/waves/pilot_interrupted/`. The comparisons use the five completed
-basin runs.
-
-At hour 12, over matched wet nodes with Hs at least 0.1 m in both runs:
-
-| Comparison | Largest relative Hs difference | Largest relative mean-period difference |
+| | Nearside sea | Smythii–Marginis |
 |---|---:|---:|
-| 75 → 30 s timestep, 96 frequency intervals | 0.55% | 0.39% |
-| 96 → 48 frequency intervals, coarse grid | 0.12% | 0.09% |
-| 1° → 0.5° grid, 48 frequency intervals | **41.3%** | **22.7%** |
+| Area | 5.29 million km² | 285,000 km² |
+| Mean Hs over area and time | 1.39 m | 0.88 m |
+| Area mean through the cycle | 1.0–1.8 m | 0.4–1.5 m |
+| Share of area and time with Hs ≥ 1 m | 68% | 34% |
+| Share of area and time with Hs ≥ 2 m | 17% | 1.3% |
+| Largest Hs (mean period) | 4.9 m (19.3 s) | 3.4 m (15.8 s) |
 
-Differences use the second run as the denominator. The spatial comparison
-changes local heights by up to 0.35 m and **fails the 5% bound**. Selecting surf
-locations or ranking sheltered coasts requires finer coastal grids. At the selected
-offshore node, final Hs and mean period each change by less than 0.002% under
-that grid refinement, supporting its use in the slope experiment. The timestep
-difference over the full hourly record reaches 16.5% in Hs. Early growth and
-geographic directional refinement remain open.
+The nearside sea, eighteen times larger, stays rougher than Smythii–Marginis
+through the whole cycle. Its mean periods run 8–15 s, and metre-scale seas
+peak near 17 s. North of 10° N its waves run steadily toward the south-west;
+in the south their direction varies with a northward tendency, so the seas
+travel toward the equator from both sides. Swell that has outrun the local
+wind carries a third to two thirds of the wave energy
+([nearside sea](nearside.md), [Smythii–Marginis](cycle.md)).
 
-The final spectrum at 89.125°E, 1.125°S from the 30 s run drives three
-stationary slopes, from 50 m depth to 0.25 m. `SPEC1D` retains frequency
-variance and each frequency's mean direction and spread. SWAN reconstructs
-the directional distributions from those moments. Resolving multiple
-directional peaks requires a full two-dimensional spectrum. Bottom friction, triads,
-whitecapping, quadruplets and currents are omitted in these slope cases to
-isolate propagation and depth breaking.
+**How the waves look.** Lunar waves keep Earth's shapes and steepness (height
+4–5% of wavelength) and move at 0.41 times the speed of an Earth wave of the
+same length. A typical nearside wave, with an 11.5 s mean period, is 34 m long
+and travels at 3.0 m/s; an Earth wave that long has a 4.7 s period and
+travels at 7.3 m/s. The largest sea, with a 22 s peak period, has crests
+127 m apart moving at 5.7 m/s. Spray takes 2.5 times as long to fall from the
+same height.
 
-With the assumed breaking index 0.73, at the first sampled point where
-SWAN's breaking fraction `Qb` reaches 1%:
+**Where the energy reaches the shore.** Over the nearside sea the shores the
+equatorward seas run onto take the most energy. On average through the cycle
+these are western Oceanus Procellarum (595–731 W/m), the southern shore of Mare
+Imbrium along Montes Carpatus and by Mons Delisle (583–584 W/m) and eastern
+Mare Fecunditatis (575 W/m), against 87 W/m along the median coast
+([nearside sea](nearside.md)). At the eastern Smythii headland, computed on
+474 m to 118 m grids over native terrain, the western face takes 12.5 times the
+eastern face's wave energy through the cycle, and the exposed side switches
+when the sea turns ([shore](shore.md), [coastal history](coastal_history.md)).
+Followed wave by wave on today's steep slopes, the 98th percentile of run-up is
+2.1 m at the exposed western face and 1.3 m on the southern shore (largest
+2.4 and 1.7 m in 30-minute records). On 1:20 to 1:100 beaches it is 0.9–1.1 m
+([run-up](runup.md)).
 
-| Assumed slope (400 cells) | Depth | Significant height |
-|---|---:|---:|
-| 1:20 | 2.24 m | 1.100 m |
-| 1:50 | 2.12 m | 1.041 m |
-| 1:100 | 1.99 m | 0.958 m |
+**The water level moves with a monthly tide.** The orbit's eccentricity and
+the librations move the Earth's tide through each month. The typical monthly
+range is 3.7 m over the nearside sea (5.5–6.0 m at Fecunditatis, Nubium and
+Humorum), 2.1 m in the South Pole–Aitken sea and 0.55 m in Smythii–Marginis,
+with 0.78 m at the headland. Mare Fecunditatis joins the nearside sea through a
+narrow strait and exchanges water with it every 9.5 days, which doubles its
+fortnightly tides. Air pressure tilts the seas by at most 0.18 m, and wind
+setup is about 1 cm ([geography](../../geography/README.md#the-monthly-tide),
+[review](review.md)).
 
-The 800-cell 1:50 case reaches that diagnostic at 2.18 m with Hs 1.057 m.
-At matched depths, the 400→800-cell comparison differs by at most 1.51% in
-Hs (0.0047 m), below the stated 5% bound in this single refinement check.
-All six stationary runs satisfy their
-99%-of-wet-nodes stopping criterion, and all five offshore spectra pass the
-stated spectral-edge checks.
-Changing its breaking index to 0.60 or 0.90, on the 400-cell grid, moves the
-diagnostic to 2.49 or 1.74 m respectively. The coefficients are assumed
-sensitivity values; lunar calibration remains open. Here `Qb ≥ 0.01` marks
-the chosen onset of breaking, and Hs describes the wave spectrum. The
-calculations support metre-scale surf under the stated wind and slope assumptions.
+**The shores are regolith.** The seas flood today's regolith-mantled ground. At
+lunar gravity the same waves move grains about six times larger, and fine grains
+settle about six times slower. Newly flooded slopes rework toward gentle,
+fine-grained shores, and coastal water stays turbid.
 
-[pilot_checks.py](pilot_checks.py) writes the [numerical audit](results/pilot_checks.json):
-spectral edges, stationary solver stopping, matched slope-grid errors and
-the separate basin resolution differences. Independent executable tests compare
-metre and lunar-degree grids and check conservation of linear-wave energy flux
-before breaking. The later [SWASH study](runup.md) adds the source audit,
-individual waves and run-up. Physical calibration and two-dimensional
-wave-driven currents remain further work.
+## How the picture is built
+
+The calculations form one chain; each study's record holds its checks:
+
+| Study | What it computes | Record |
+|---|---|---|
+| Source audit | How SWAN 41.51 carries gravity; the lunar source changes | [audit.md](audit.md) |
+| First experiments | Earth against Moon over a strip; early growth; the Smythii–Marginis pilot and assumed slopes | [first_experiments.md](first_experiments.md) |
+| Recovered winds and coastal resolution | CM1 ring and GCM wind records; eastern Smythii at 7.6–1.9 km | [coastal.md](coastal.md) |
+| A weather week | The GCM's surface stress coupled to SWAN | [weather.md](weather.md) |
+| Smythii–Marginis through a lunar cycle | Two cycles of waves, the second measured | [cycle.md](cycle.md) |
+| The nearside sea through a lunar cycle | The same for half of the Moon's water, with swell and coastal power | [nearside.md](nearside.md) |
+| Shore exposure | Directional energy at the headland on 118 m terrain | [shore.md](shore.md) |
+| Coastal history | Arrivals and durations at the headland through the cycle | [coastal_history.md](coastal_history.md) |
+| Breaking and run-up | Individual waves on rock and beach profiles (SWASH) | [runup.md](runup.md) |
+| Review | What the chain establishes and where its uncertainty lies | [review.md](review.md) |
+| Monthly tide | Every sea's tide, with a dynamic check | [geography](../../geography/README.md#the-monthly-tide) |
+
+The atmosphere enters as the GCM's surface stress, every three hours over 60
+days at T21. The coupling inverts that stress through SWAN's own drag law, so
+SWAN's friction velocity equals the GCM's, and the GCM's sea roughness follows
+Charnock's law at lunar gravity. The first lunar cycle spins the seas up and
+the second is measured. Regional and coastal nests pass hourly directional
+spectra down to 1.9 km, 474 m and 118 m grids over native LOLA terrain, and
+SWASH takes the shoreward spectrum onto one-dimensional profiles. The figures
+are in [visualization/waves](../../visualization/waves/).
+
+## The physics at lunar gravity
+
+Under Froude similarity the dimensionless parts of the wave physics carry over
+to lunar gravity unchanged: the breaking indices, the whitecapping and the
+four-wave interactions. Three parts change with gravity:
+
+- the air–sea momentum transfer, which the GCM's Charnock roughness carries into the forced runs;
+- the capillary physics of centimetre waves, below the scales computed here;
+- sediment, which has its own calculation to come.
+
+Two source changes make SWAN gravity-consistent. AGROW's 1 Hz growth knee
+scales with gravity, and the air density fixed in the code, 1.28 kg/m³, becomes
+CM1's 1.404 kg/m³ over the seas. With depth breaking switched off, SWAN 41.51
+reads an uninitialised variable, so every run keeps breaking on.
+
+## Evidence
+
+- **The code.** The lunar handling of SWAN and SWASH matches their sources. All
+  52 wave tests pass with the executables, including the lunar-radius,
+  energy-flux, nesting, group-delay and SWASH gravity controls.
+- **Basin grid.** The seas run on the atlas's 1-degree nodes. In the pilot,
+  0.5-degree nodes changed local heights by up to 41% and the open sea by under
+  0.002%.
+- **Timestep.** Between 150 and 75 s, Smythii–Marginis's metre-scale seas change
+  by under 1% and seas of a few decimetres by up to 16%. The nearside sea's
+  300 s run matches a 150 s rerun of its stormiest three days within 3.6% for
+  metre-scale seas (0.12% at the 95th percentile); seas of a few decimetres
+  differ by up to 86% at single nodes, and the time above 1 m by at most
+  2.6 hours.
+- **Spectral band.** Seas under about 0.75 m put more than 1% of their variance
+  in the top two frequency intervals in 37% of the coastal spectra; the
+  nearside reference spectra pass in 1,864 of 1,888 cases.
+- **Forcing.** The T21 GCM's lowest level sits about 885 m above the sea, and
+  one lunar cycle supplies each sea's statistics.
+- **Coasts.** Between 237 m and 118 m grids, shoreline heights change by 2.8% at
+  the 95th percentile and by up to 39% at single nodes. SWASH reproduces an
+  irregular input spectrum within 5–6%.
+- **Tide.** The ephemeris matches JPL Horizons within 0.05° and 11 km.
+  Smythii–Marginis and the South Pole–Aitken sea follow their equilibrium tide
+  within 1.4% and 6%, and the nearside sea's monthly lines within 7%.
+
+## Next calculations
+
+- Further lunar cycles, for the variability between months. The atmosphere
+  costs seconds per month, and the nearside sea about 3.3 hours per two cycles.
+- The South Pole–Aitken sea's waves.
+- The monthly tide's water level in the coastal and run-up calculations, and
+  Mare Fecunditatis's strait at 16 px/deg with nonlinear friction.
+- A 0.5-degree basin for Smythii–Marginis's cycle and coastal histories.
+- One run with SWAN's Janssen physics, which derives Charnock's roughness from
+  the configured gravity, to test the growth and drag physics together.
+- A wider frequency band for weak seas.
+- Sediment supply and beach evolution on regolith coasts.
+- The seas' composition and density, a choice for the author.
+- Vertical heat and mixing columns and spectral underwater light, from the
+  atmosphere's surface fluxes and the illumination products.
+
+## Builds and storage
+
+SWAN 41.51 and SWASH 12.01 come from their official archives, pinned by SHA-256
+and licensed GPL-3.0-or-later by Delft University of Technology. The
+repository keeps the patches and hashes, and the builds live on the research
+drive:
+
+- `python -m climate.waves.build --download --build-root <dir>` makes the stock
+  and AGROW builds. `build_coupled(<dir>, density, optimize=True, openmp=True)`
+  in [build.py](build.py) adds the coupled-air OpenMP build used since the
+  lunar-cycle studies. The recorded builds are in
+  `/media/projectspace/terluna-research/wave-runs/swan_builds/lunar-seas-swan/`,
+  and the coupled OpenMP executable's SHA-256 begins `8883fc9e`.
+- [swash_build.py](swash_build.py) builds SWASH under
+  `research/runs/waves/swash_source/`.
+- `research/runs/waves` links to `/media/projectspace/terluna-research/wave-runs`,
+  which holds the inputs, atmospheric archives and every run. Completed runs are
+  reused once their input, executable and output hashes match.
 
 ## Reproduction
 
-Use Python with NumPy, and `gfortran`, `gcc`, `make` and Perl on the executable
-search path. The source download and builds go to an explicitly selected new
-directory. SWAN source headers specify GNU GPL version 3 or later and credit
-Delft University of Technology; keep those terms when distributing SWAN or a
-modified executable. This repository records the download hash and patch,
-without vendoring the upstream source or binary.
-
-```sh
-python -m climate.waves.build --download --build-root /tmp/terluna-swan
-# Or replace --download with --archive /path/to/swan4151.tar.gz.
-OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m climate.waves.run \
-  --build-root /tmp/terluna-swan
-TERLUNA_SWAN_EXECUTABLE=/tmp/terluna-swan/patched_agrow/swan.exe \
-  OPENBLAS_NUM_THREADS=1 python -m pytest climate/tests/test_waves.py
-python visualization/waves/plot.py
-```
-
-Builds and runs use one thread. Each run has a three-minute wall/CPU limit
-and a 2 GiB address-space limit. Completed runs are reused only after input,
-executable and output hashes match and the outputs pass the current parser.
-An incomplete directory is retained for inspection and blocks replacement.
-Raw runs live under ignored `research/runs/waves/`; selected results and
-provenance live here. The actual repository checks are in [checks.json](checks.json).
-
-On the author's machine, `research/runs/waves` links to
-`/media/projectspace/terluna-research/wave-runs` on the large drive. Bulk inputs,
-copied atmospheric continuations and raw wave outputs use that directory;
-commands and recorded paths continue to use `research/runs/waves/`. Keep the
-drive mounted for wave runs. Code and compact research reports stay in the
-repository.
-
-For the follow-up, the raw equatorial CM1 case and atlas grid must already be
-available. The exporter stops with an error if either input is missing.
-With the build above:
-
-```sh
-OPENBLAS_NUM_THREADS=1 python -m climate.crm.wave_forcing
-OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m climate.waves.early_growth --build-root /tmp/terluna-swan
-OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m climate.waves.pilot --build-root /tmp/terluna-swan
-python -m climate.waves.pilot_checks
-python visualization/waves/pilot.py
-```
-
-The pilot adds an isolated `coupled_air` build and leaves the stock and
-AGROW-only executables intact. Its individual runs are serial, capped at
-900 seconds and 2 GiB; the early-growth runs have a 600-second cap. The
-follow-up's actual repository verification is in
-[pilot_verification.json](pilot_verification.json), distinct from the
-first experiment's check record and from the numerical audit.
-
-## Next sea calculations
-
-The [shore exposure study](shore.md) supplies native 118 m terrain, and the
-[evolving coastal study](coastal_history.md) adds continuous second-cycle
-spectra and coastal event histories. Widen the frequency band for short
-waves, refine the remaining shoreline outliers, resolve the measured
-irregular-spectrum boundary and propagation errors, and extend the
-[wave-resolving profiles](runup.md) into two-dimensional coastal patches.
-Higher-resolution bed information, sediment scenarios and water-level
-variations will constrain the breaking reaches and run-up further.
-The global three-hourly atmospheric
-record supports continuous wave histories and comparisons between seas.
-Extend the [second-cycle calculation](cycle.md) to further cycles and basins,
-and widen the frequency band where the smaller waves reach its upper edge.
-Short wind transients, parent directional resolution, and physical lunar wind
-input and breaking remain open. Local CM1 boxes can address identified gaps
-in gust fronts, coastal flow or storm winds. The SWASH gravity and numerical
-checks establish a runnable model; lunar physical calibration remains open.
-
-Temperature gradients, mixing and light penetration need their own ocean
-calculations. Start with vertical heat/mixing and spectral underwater-light
-columns, using the atmosphere's surface fluxes and illumination products.
-Water absorption and scattering, dissolved material, particles and biological
-optics supply the inputs to those calculations. The conventional 1%
-photosynthetically active radiation depth provides an optical diagnostic;
-biological compensation depth also depends on an organism's energy balance.
-The abstract of
-[Wu et al. (2021)](https://doi.org/10.1029/2020JC016874), read through the
-[NOAA repository](https://repository.library.noaa.gov/view/noaa/55092), explains
-the distinction between this optical threshold and biological compensation
-depth; full-paper review remains pending. These ocean and optical calculations
-remain unperformed.
+Each study's record ends with its commands. Run them in this order: the builds,
+then [first experiments](first_experiments.md#reproduction),
+[coastal](coastal.md#reproduction), [weather](weather.md#reproduction),
+[cycle](cycle.md#reproduction), [nearside](nearside.md#reproduction),
+[shore](shore.md#reproduction-and-storage),
+[coastal history](coastal_history.md#reproduction-and-storage) and
+[run-up](runup.md#reproduction-and-storage). The review's numbers come from
+`python -m climate.waves.review_checks` and the tide from `python -m geography.tides`.

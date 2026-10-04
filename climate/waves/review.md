@@ -49,9 +49,9 @@ Pole–Aitken sea holds 22%, 2.32 million km². The 60-day global stress archive
 already covers both. Smythii–Marginis comes close to full development under its
 strongest weather: its peak basin-mean stress of 0.036 Pa corresponds to a
 4.47 m/s wind, whose fully developed sea (`g Hs/U² = 0.24`) has Hs 2.95 m, and
-the basin reached 3.38 m. The larger seas' waves therefore depend on what
-Smythii–Marginis cannot show: their own winds, longer events, and swell crossing
-thousands of kilometres.
+the basin reached 3.38 m. The larger seas' waves therefore depend on their own
+winds, on longer events and on swell crossing thousands of kilometres. (The
+nearside sea's run of 3 October, [nearside.md](nearside.md), now measures them.)
 
 **The monthly tide.** The atlas's equipotential already holds Earth's static
 tide. The orbit's eccentricity and the optical librations move that tide
@@ -137,8 +137,8 @@ replaces it with what the seas are like, followed by the evidence.
 The figures are clean, and their renderers check the displayed arrays against
 the products. They need three things:
 
-- **Geography in the basin maps.** These are bare 1° cells, with no coastline at
-  the atlas's resolution, no relief, no names, no wave direction and no locator.
+- **Geography in the basin maps.** These draw bare 1° cells; they need the
+  coastline at the atlas's resolution, relief, names, wave direction and a locator.
 - **A scale that shows the third phase.** The three-phase shore map shares one
   linear 0–700 W/m scale, which leaves the third phase (the eastern face at
   52.9 W/m) nearly black.
