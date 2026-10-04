@@ -100,7 +100,9 @@ The author's, on 2026-10-04:
    the waves. Done for clear skies: [the seas by regime](#the-seas-by-regime).
 4. **Scientific renderings of the four coasts** in [visualization](../../../visualization/),
    extending the [B1 spectral path tracer](../../../visualization/reference-renderer/),
-   judged against photographs of seascapes.
+   judged against photographs of seascapes. The renderer is built and its parts are tested;
+   the full frames wait for a quieter machine. The 24 frames are
+   [described scene by scene](#the-scenes-described) meanwhile.
 
 Models belong to their domains (optics in illumination, sea states in climate,
 the tide and the seas in geography, the living water's guesses in the biosphere);
@@ -392,3 +394,45 @@ python visualization/sea-appearance/regimes.py
 
 The runner needs numba, as the optical comfort study's environment provides, and
 writes its panoramas to `research/runs/sea_appearance/`.
+
+## The scenes, described
+
+[scenes.py](scenes.py) sets a camera and a view for each of the 24 frames and gathers
+what the products say each one holds. It writes [scenes.json](results/scenes.json):
+- where the Sun, the Earth and the stars stand in the frame;
+- the colours and brightness of sky and sea from the regime panoramas;
+- the coast's skyline from LOLA heights at the moment's tide;
+- the hour's waves;
+- the water's own colour.
+
+[scenes.md](scenes.md) describes each frame in words and numbers, for picturing the
+scenes before they are rendered.
+
+**Two cameras moved off the study's points.** At the 118 m resolution of the coast's
+terrain ([geography/coast_terrain.py](../../../geography/coast_terrain.py)):
+- **S Nubium:** the wave grid's shore point falls on an island 4 by 6 km, so the
+  camera floats 1.5 km off its west shore.
+- **Smythii:** the headland's point lies on its east face, with the land between it and the
+  western sea, so the camera floats 1 km off the west face. It takes the shore history's
+  west-face waves.
+
+**The coasts change what the open-sea panoramas showed.**
+- At the Ingenii coast the darkest hour's twilight arch stands above a range 700 to
+  1,300 m high, 10 to 21 km away, which hides the arch's lowest, reddest part.
+- At S Nubium the darkest hour falls at low tide, 3.1 m below the mean level, with the
+  island in front of the hidden Sun.
+- Every coast reflects in the water below it, where the panoramas assumed open sky.
+
+**Few stars show.** The night skies of these frames are 0.03 to 0.8 cd/m², and the thick
+air dims stars near the horizon by two to four magnitudes. Only the darkest hour at Smythii,
+under a low crescent Earth, records stars: Aldebaran and seven fainter ones. No frame shows
+a star to the naked eye.
+
+**Boundaries.**
+- The coast's colour is a placeholder: bare Apollo soil, without beaches, surf or plants.
+- The sea's colours are the panoramas', statistical and without wave texture.
+- Whitecaps are not modelled. The windiest frames, at 5 to 6 m/s, would show the first of them.
+
+```sh
+OPENBLAS_NUM_THREADS=1 python -m research.studies.sea_appearance.scenes
+```
