@@ -45,6 +45,8 @@ import tarfile
 import time
 import urllib.request
 
+from climate.crm import cm1_elec
+
 HERE = Path(__file__).resolve().parent
 RUNS = HERE / 'runs'
 CM1_HOME = Path(os.environ.get('TERLUNA_CM1_HOME', '/media/projectspace/terluna-research/cm1'))
@@ -898,6 +900,14 @@ EARTH_FALL_PATCH = ('morrison.F', 'Terluna: Earth fall speeds for the rain test'
 BUILDS['moon_omp_earth_fall'] = BUILDS['moon_omp']
 BUILD_PATCHES['moon_omp_earth_fall'] = [EARTH_FALL_PATCH]
 
+# Electrified storms (stage 2 of the atmospheric-electricity study): WRF-ELEC's NSSL microphysics with the field,
+# lightning and leakage of climate/crm/cm1_elec.py, at the Moon's gravity and at Earth's for the benchmark storm.
+BUILD_FILES = {}                                                     # whole source files put in before patching, by build
+for _label, _host in (('moon_omp_elec', 'moon_omp'), ('earth_g_omp_elec', 'earth_g_omp')):
+    BUILDS[_label] = BUILDS[_host]
+    BUILD_PATCHES[_label] = cm1_elec.PATCHES
+    BUILD_FILES[_label] = cm1_elec.sources(CM1_HOME)
+
 
 def optimization_for(label: str, mode: str):
     """The optimisation flags a build compiles with: its own if it has any, OMP_DEFAULT for the other OpenMP builds, and
@@ -925,6 +935,9 @@ def build(label: str, jobs: int = 8) -> Path:
     shutil.copytree(tree / 'src', src)
     (folder / 'run').mkdir(parents=True, exist_ok=True)
     hashes = {}
+    for name, text in BUILD_FILES.get(label, {}).items():
+        (src / name).write_text(text(), encoding='latin-1')
+        hashes[name] = hashlib.sha256((src / name).read_bytes()).hexdigest()[:16]
     patches = [MAKEFILE[mode], *PATCHES, *BUILD_PATCHES.get(label, [])]
     optimization = optimization_for(label, mode)
     if optimization and '-nostdinc' in optimization:     # omp_lib and the IEEE modules live in the compiler's own folder
@@ -935,7 +948,7 @@ def build(label: str, jobs: int = 8) -> Path:
         patches.append(optimization_patch(label, optimization))
     for name, marker, edits in patches:
         path = src / name
-        path.write_text(apply_patch(path.read_text(), name, marker, edits))
+        path.write_text(apply_patch(path.read_text(encoding='latin-1'), name, marker, edits), encoding='latin-1')
     for name in sorted({p[0] for p in patches}):
         hashes[name] = hashlib.sha256((src / name).read_bytes()).hexdigest()[:16]
     log = folder / 'build.log'
@@ -1180,6 +1193,29 @@ CASES['box_highland'] = dict(
 CASES['box_highland_own_height'] = dict(
     CASES['box_highland'],
     purpose=CASES['box_highland']['purpose'] + ', the forcing held and applied at each column\'s own height')
+# The benchmark storm of the electrified build (stage 2 of the atmospheric-electricity study): CM1's own supercell
+# (Weisman and Rotunno 2000: the Weisman and Klemp sounding, the quarter-circle hodograph, a warm bubble, 1 km spacing,
+# 120 km square, two hours) at Earth's gravity, with WRF-ELEC's NSSL microphysics with hail, its default charging and
+# lightning, and output every 5 minutes.
+# The equatorial box electrified (stage 2): box_0e's inputs as they were written (its site, surface, grid, starting
+# air and forcing, from the GCM before its correction), with the NSSL microphysics with hail in place of Morrison,
+# given lunar fall speeds, its CCN at box_0e's 100 droplets per cm3, and WRF-ELEC's charging and lightning; its
+# restarts let windows of its storms run again with output every few minutes, other charging laws, leakage or the
+# unbounded breakdown field.
+CASES['box_0e_elec'] = dict(
+    CASES['box_0e'], build='moon_omp_elec', elec={}, inputs_from='box_0e',
+    purpose=CASES['box_0e']['purpose'] + ', with the NSSL microphysics and WRF-ELEC\'s charging and lightning')
+# The same storm with CM1's own copy of the NSSL scheme and no electricity, to check that WRF-ELEC's copy, run through
+# terluna_elec.F, makes the same storm.
+CASES['supercell_nssl'] = dict(
+    kind='sample', sample='supercell', build='earth_g_omp', days=7200.0 / 86400.0, output_s=300.0, restart_s=1800.0,
+    segment_s=7200.0, namelist=dict(param2=dict(ptype=27)),
+    purpose='CM1\'s supercell at Earth\'s gravity with CM1\'s own NSSL microphysics, the electrified benchmark\'s twin')
+CASES['supercell_elec'] = dict(
+    kind='sample', sample='supercell', build='earth_g_omp_elec', days=7200.0 / 86400.0, output_s=300.0,
+    restart_s=1800.0, segment_s=7200.0, elec={},
+    purpose='CM1\'s supercell at Earth\'s gravity with WRF-ELEC\'s NSSL microphysics, charging and lightning, the '
+            'electrified build\'s benchmark')
 
 
 def gcm_soil(folder: Path) -> dict:
@@ -1594,7 +1630,7 @@ def case_settings(cfg, nx, dx, nz, ztop, air, gravity):
     tilted = cfg.get('kind') == 'tilted'
     turning = turning_rate(cfg, latitude)
     rotating = turning != 0.0
-    return {
+    settings = {
         'param0': dict(nx=nx, ny=cfg['ny'] if box else 1, nz=nz, ppnode=cfg.get('ranks', 8), timeformat=3, timestats=1,
                        terrain_flag=bool(cfg.get('terrain'))),
         'param1': dict(dx=round(dx, 3), dy=round(dx, 3), dz=round(ztop / nz, 1), dtl=round(40.0 * s, 3), cfl_limit=1.0,
@@ -1634,6 +1670,11 @@ def case_settings(cfg, nx, dx, nz, ztop, air, gravity):
                         do_lsnudge_qv=True, lsnudge_tau=round(cfg['nudge']['tau_s'] * s, 3), lsnudge_start=1.0,
                         lsnudge_end=1.0e12, lsnudge_ramp_time=round(cfg['nudge']['ramp_s'] * s, 3)),
     }
+    if cfg.get('elec') is not None:                                       # NSSL with charge, its CCN the case's droplets
+        for section, entries in cm1_elec.namelist_settings(cfg['elec']).items():
+            settings.setdefault(section, {}).update(entries)
+        settings['nssl2mom_params'] = dict(ccn=cfg['droplets_cm3'] * 1.0e6)
+    return settings
 
 
 def coriolis(latitude_deg: float) -> float:
@@ -1698,7 +1739,8 @@ def ring_sea_profile(days: float = 3.0, name: str = 'ring') -> dict:
 
 def setup_from(name: str, cfg: dict) -> Path:
     """Set up a case with another case's inputs as they were written and only its executable changed, so the pair
-    differs in the build alone, whatever the setup has learned since."""
+    differs in the build alone, whatever the setup has learned since. An electrified case also changes the namelist to
+    the NSSL microphysics with the charge tracers and its electricity, and writes the files that needs."""
     source = RUNS / cfg['inputs_from']
     exe = CM1_HOME / 'build' / cfg['build'] / 'cm1.exe'
     if not exe.exists():
@@ -1725,6 +1767,68 @@ def setup_from(name: str, cfg: dict) -> Path:
     record.update(case=name, purpose=cfg['purpose'], build=json.loads((exe.parent / 'build.json').read_text()),
                   inputs_from=dict(case=cfg['inputs_from'], build=record['build']['label'],
                                    executable_sha256=record['build']['executable_sha256']))
+    if cfg.get('elec') is not None:
+        text = (case / 'namelist.template').read_text()
+        settings = cm1_elec.namelist_settings(cfg['elec'])
+        settings['nssl2mom_params'] = dict(ccn=cfg['droplets_cm3'] * 1.0e6)
+        for section, entries in settings.items():
+            for key, value in entries.items():
+                text = set_namelist(text, section, key, value)
+        text, files = cm1_elec.run_files(case, cfg['elec'], text)
+        (case / 'namelist.template').write_text(text)
+        record.update(configuration=cfg, electricity=dict(cm1_elec.SETTINGS, **cfg['elec'], files=files))
+        record.setdefault('inputs', {})['namelist.template'] = hashlib.sha256(
+            (case / 'namelist.template').read_bytes()).hexdigest()[:16]
+    (case / 'case.json').write_text(json.dumps(record, indent=1) + '\n')
+    return case
+
+
+def namelist_value(text: str, section: str, key: str) -> str:
+    """One entry of a Fortran namelist held as text, as written."""
+    import re
+    start = text.index(f'&{section}\n')
+    block = text[start:text.index('\n /', start)]
+    return re.search(rf'^\s*{re.escape(key)}\s*=\s*([^,\n!]*)', block, re.M).group(1).strip()
+
+
+def setup_sample(name: str, cfg: dict) -> Path:
+    """Set up one of CM1's own sample cases (run/config_files/<sample>) with the case's changes to its namelist and,
+    when it is electrified, its electricity."""
+    tree = fetch()
+    exe = CM1_HOME / 'build' / cfg['build'] / 'cm1.exe'
+    if not exe.exists():
+        raise RuntimeError(f'build {cfg["build"]} first')
+    case = RUNS / name
+    if (case / 'progress.json').exists():
+        raise RuntimeError(f'{case} has started; remove it to set up afresh')
+    case.mkdir(parents=True, exist_ok=True)
+    text = (tree / 'run' / 'config_files' / cfg['sample'] / 'namelist.input').read_text()
+    settings = {'param1': dict(timax=round(cfg['days'] * 86400.0, 3), run_time=-999.9, tapfrq=cfg['output_s'],
+                               rstfrq=cfg['restart_s']),
+                'param16': dict(restart_format=1, restart_filetype=2, restart_reset_frqtim=True)}
+    for section, entries in cfg.get('namelist', {}).items():
+        settings.setdefault(section, {}).update(entries)
+    if cfg.get('elec') is not None:
+        for section, entries in cm1_elec.namelist_settings(cfg['elec']).items():
+            settings.setdefault(section, {}).update(entries)
+    for section, entries in settings.items():
+        for key, value in entries.items():
+            text = set_namelist(text, section, key, value)
+    electricity = None
+    if cfg.get('elec') is not None:
+        text, files = cm1_elec.run_files(case, cfg['elec'], text)
+        electricity = dict(cm1_elec.SETTINGS, **cfg['elec'], files=files)
+    (case / 'namelist.template').write_text(text)
+    if (case / 'cm1.exe').is_symlink() or (case / 'cm1.exe').exists():
+        (case / 'cm1.exe').unlink()
+    (case / 'cm1.exe').symlink_to(exe)
+    value = lambda section, key: float(namelist_value(text, section, key))
+    grid = dict(nx=int(value('param0', 'nx')), ny=int(value('param0', 'ny')), nz=int(value('param0', 'nz')),
+                dx_m=value('param1', 'dx'), dy_m=value('param1', 'dy'), dz_m=value('param1', 'dz'))
+    record = dict(case=name, configuration=cfg, time_scale=1.0, sample=cfg['sample'], grid=grid,
+                  build=json.loads((exe.parent / 'build.json').read_text()), electricity=electricity,
+                  runner=hashlib.sha256(Path(__file__).read_bytes()).hexdigest()[:16],
+                  inputs={'namelist.template': hashlib.sha256((case / 'namelist.template').read_bytes()).hexdigest()[:16]})
     (case / 'case.json').write_text(json.dumps(record, indent=1) + '\n')
     return case
 
@@ -1736,6 +1840,8 @@ def setup(name: str) -> Path:
     cfg = CASES[name]
     if cfg.get('inputs_from'):
         return setup_from(name, cfg)
+    if cfg.get('kind') == 'sample':
+        return setup_sample(name, cfg)
     tree = fetch()
     exe = CM1_HOME / 'build' / cfg['build'] / 'cm1.exe'
     if not exe.exists():
@@ -1877,6 +1983,10 @@ def setup(name: str) -> Path:
     for section, entries in settings.items():
         for key, value in entries.items():
             text = set_namelist(text, section, key, value)
+    electricity = None
+    if cfg.get('elec') is not None:
+        text, electricity = cm1_elec.run_files(case, cfg['elec'], text)
+        electricity = dict(cm1_elec.SETTINGS, **cfg['elec'], files=electricity)
     (case / 'namelist.template').write_text(text)
     digest = lambda p: hashlib.sha256(Path(p).read_bytes()).hexdigest()[:16]
     if tilted or box:                                                     # per-column arrays as rounded lists
@@ -1895,6 +2005,7 @@ def setup(name: str) -> Path:
                   large_scale_w=vertical_wind,
                   day_night=day_night,
                   terrain=terrain if cfg.get('terrain') else None,
+                  electricity=electricity,
                   runner=digest(__file__),
                   inputs={p: digest(case / p) for p in ('input_sounding', 'input_grid_z', 'lsnudge_0001.dat',
                                                          'terluna_surface.txt', 'LANDUSE.TBL', 'namelist.template',
@@ -2045,8 +2156,11 @@ def main(argv=None) -> int:
         case = setup(args.case)
         record = json.loads((case / 'case.json').read_text())
         g = record['grid']
-        print(f"{case}: {g['nx']}{' x ' + str(g['ny']) if 'ny' in g else ''} x {g['nz']} points, dx {g['dx_m']:.1f} m, top {g['ztop_m'] / 1000:.0f} km, "
-              f"water {record['water_share']:.2f} of the ring")
+        if record.get('sample'):
+            print(f"{case}: CM1's {record['sample']} case, {g['nx']} x {g['ny']} x {g['nz']} points, dx {g['dx_m']:.0f} m")
+        else:
+            print(f"{case}: {g['nx']}{' x ' + str(g['ny']) if 'ny' in g else ''} x {g['nz']} points, dx {g['dx_m']:.1f} m, "
+                  f"top {g['ztop_m'] / 1000:.0f} km, water {record['water_share']:.2f} of the ring")
     return 0
 
 

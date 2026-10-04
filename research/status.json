@@ -302,13 +302,17 @@
     },
     {
       "topic": "atmospheric_electricity",
-      "condition": "plan_adopted_and_revised_2026_10_02; stage_1_done_2026_10_03; breakdown_reached_under_every_charging_law_in_a_one_dimensional_bound",
+      "condition": "plan_adopted_and_revised_2026_10_02; stage_1_done_2026_10_03; breakdown_reached_under_every_charging_law_in_a_one_dimensional_bound; stage_2_electrified_cm1_built_and_benchmarked_on_an_earth_supercell_2026_10_03",
       "material": [
         "../atmosphere/electricity/",
         "../atmosphere/middle_atmosphere/README.md",
         "../climate/crm/README.md",
+        "../climate/crm/cm1_elec.py",
         "../climate/crm/cm1_run.py",
+        "../climate/crm/elec_analysis.py",
+        "../climate/crm/fortran/",
         "../climate/crm/mixed_phase_analysis.py",
+        "../climate/results/crm/elec_supercell_elec.json",
         "studies/atmospheric_electricity/README.md",
         "studies/atmospheric_electricity/results/stage1.json",
         "studies/atmospheric_electricity/sources.json",
@@ -317,11 +321,12 @@
       "unresolved": [
         "the charge per bounce at impact speeds of 1-1.5 m/s and rime accretion rates of 0.1-0.3 g m-2 s-1: the laws differ by a hundred to five hundred times, Saunders and Peck's nearly stopping where Takahashi's and the 1.2 m/s measurements charge strongly",
         "storm cells' lifetimes against the hours the weaker laws need to reach breakdown; the three-hourly output cannot resolve cells",
-        "an electrified storm at lunar gravity: the NSSL microphysics patched for lunar gravity, with charge transport, a field solver and discharges, benchmarked against WRF-ELEC on Earth",
+        "the electrified lunar storm: box_0e with the NSSL microphysics and WRF-ELEC's charging, beside the Morrison box at the same site and forcing, then windows of its storms with frequent output and other charging laws, leakage and breakdown fields (multi-hour runs, waiting for the author's go-ahead)",
+        "the benchmark storm charges several times faster than published runs of the scheme, with tens of nC/m3 on single particle types, from the cloud-ice numbers its homogeneous freezing makes; the cylinder scheme discharges after the field passes breakdown and counts calls, not flashes",
         "aerosol in the lunar air and the ground's radioactivity over land, bracketed or left out of the conductivity column",
         "the fair-weather field, the global circuit and transient luminous events"
       ],
-      "next_session_task": "Stage 2 of the atmospheric-electricity plan: patch CM1's NSSL microphysics for lunar gravity and run it beside the Morrison box; add charge on each particle type, a charging law, a field solver and discharges following WRF-ELEC, reproducing an Earth benchmark first; then run the equatorial box electrified from saved restarts with output frequent enough to follow cell lifetimes. Stage 1 (2026-10-03): lunar cloud conducts about 1e-16 S/m and some storm columns reach breakdown under every charging law tried."
+      "next_session_task": "Stage 2 of the atmospheric-electricity plan, with the author's go-ahead for the multi-hour runs: run box_0e_elec (box_0e's inputs with the NSSL microphysics, charging and lightning, two lunar days), compare its storm with Morrison's and read its charge structure and lightning; then run windows of its second lunar day from restarts with output every few minutes, under Takahashi's law, with leakage and with the unbounded breakdown field. The electrified builds and the Earth benchmark storm were done on 2026-10-03."
     }
   ],
   "new_check_record": "studies/environment_screens/checks.json",

@@ -185,15 +185,27 @@ hooks, the collision terms that charging uses, behind a switch CM1 leaves off.
 It has no charge-transfer law, charge transport, field solver or discharge
 scheme, and it fixes gravity at 9.8 m/s² in its own code.
 
-1. Patch the NSSL scheme for lunar gravity (fall speeds, drag and collection)
-   and run it beside the Morrison box at the same site and forcing, to see how
-   much the storm itself changes with the scheme.
-2. Add charge carried on each particle type, a laboratory charging law, a
-   Poisson solver for the field and a discharge scheme, following WRF-ELEC
-   (Mansell's electrification in WRF; [S2], [S3]) where its licence allows.
-   Reproduce an Earth benchmark storm against WRF-ELEC first.
-3. Run the equatorial box electrified from saved restarts, with output frequent
-   enough to follow each storm's life.
+The electrified builds `earth_g_omp_elec` and `moon_omp_elec` (2026-10-03;
+[climate/crm](../../../climate/crm/README.md), "Electrified storms") put
+WRF-ELEC's NSSL module, which carries charge through every microphysical process
+([S8]), in place of CM1's copy of the scheme. Terluna's code passes CM1's arrays
+to WRF-ELEC's driver in WRF's order, keeps the charges in CM1's tracers, solves
+for the field every step, and runs WRF-ELEC's cylindrical lightning; leakage
+through stage 1's conductivity is a switch. The scheme's fall speeds take lunar
+gravity as Morrison's do.
+
+1. The builds, their checks (the field solver and discharges against numpy, the
+   results against the number of threads) and an Earth benchmark storm, CM1's
+   own supercell, compared with published runs of the same charging scheme
+   ([S7], [S16], [S26]–[S30]; below). Done.
+2. `box_0e_elec`: `box_0e`'s inputs as written, with the NSSL microphysics and
+   charging from the start, over two lunar days with three-hourly output and
+   twelve-hourly restarts. It compares the NSSL storm with Morrison's at the
+   same site and forcing, and gives the first lunar charge structure and
+   lightning. A multi-hour run, waiting for the author's go-ahead.
+3. Windows of `box_0e_elec`'s second lunar day run again from its restarts with
+   output every few minutes, to follow each storm's life, under Takahashi's law,
+   with leakage, and with the unbounded breakdown field.
 
 It gives the storms' charge structure, the field by height, flash rates and
 types (within cloud and to ground), flash extent, the charge each flash moves

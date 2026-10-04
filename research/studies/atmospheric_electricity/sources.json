@@ -22,7 +22,7 @@
       "url": "https://acp.copernicus.org/articles/21/14141/2021/",
       "doi": "10.5194/acp-21-14141-2021",
       "use": "Published example of NSSL double-moment microphysics, charging, electric-field solution and discharge parameterization; links between particle populations and charging.",
-      "access": "Abstract and model overview (section 2.3) read in the publisher's full text; the full paper has not received a systematic source review."
+      "access": "Abstract and model overview (section 2.3) read in the publisher's full text; the full paper has not received a systematic source review. Read for the stage-2 benchmark on 2026-10-03 by a literature agent: model setup, CCN runs and charge densities (pp. 14144-14150)."
     },
     {
       "id": "S4",
@@ -50,14 +50,14 @@
       "id": "S7",
       "citation": "Fierro, Mansell, MacGorman and Ziegler (2013), The implementation of an explicit charging and discharge lightning scheme within the WRF-ARW model, Mon. Wea. Rev. 141, 2390-2415",
       "use": "The charge law and the critical rime accretion rate, Eqs. (2)-(5).",
-      "access": "Full text, the electrification section and equation images e1-e6.",
+      "access": "Full text, the electrification section and equation images e1-e6. Read for the stage-2 benchmark on 2026-10-03 by a literature agent: the discharge scheme (12-km or 6-km cylinders, 30 % of max(S+, S-), fixed 120 kV/m), the flash-origin density and the squall-line and Rita results (pp. 2393-2405).",
       "doi": "10.1175/MWR-D-12-00278.1"
     },
     {
       "id": "S8",
       "citation": "WRF-ELEC, MicroTed/wrf4-elec at commit e43041b000ebfd77c4a528f2ca3847746e839aa8, elec/module_mp_nssl_2mom_elec.F (sha256 9203693d76b841f1...) and elec/takahashi.txt",
-      "use": "The implemented laws: routines saund6 and TAKA, the scheme dispatch for nssl_isaund = 12, the charging block (ecollmx, caps), and Takahashi's table (an external input).",
-      "access": "Code read for those routines; LICENSE.txt is the WRF public-domain notice.",
+      "use": "The implemented laws: routines saund6 and TAKA, the scheme dispatch for nssl_isaund = 12, the charging block (ecollmx, caps), and Takahashi's table (an external input). Stage 2 runs this module in CM1 (climate/crm/cm1_elec.py) and ports elec/module_discharge.F, routine light1d, to terluna_lightning.F.",
+      "access": "Code read for those routines; LICENSE.txt is the WRF public-domain notice. The NSSL driver, its charge handling and light1d read in full for the port.",
       "url": "https://github.com/MicroTed/wrf4-elec"
     },
     {
@@ -113,7 +113,7 @@
       "id": "S16",
       "citation": "Kuhlman, Ziegler, Mansell, MacGorman and Straka (2006), Numerically simulated electrification and lightning of the 29 June 2000 STEPS supercell storm, Mon. Wea. Rev. 134, 2734-2757",
       "use": "Earth benchmark: modeled charging-rate peaks of about 300 pC m-3 s-1.",
-      "access": "Parts of the full text and the Fig. 16 caption.",
+      "access": "Parts of the full text and the Fig. 16 caption. Read for the stage-2 benchmark on 2026-10-03 by a literature agent: first flashes, flash totals by charging law and charging rates (pp. 2738-2751).",
       "doi": "10.1175/MWR3217.1"
     },
     {
@@ -178,7 +178,53 @@
       "use": "Titan's cosmic-ray ionization and the Huygens conductivity, for context.",
       "access": "Full text of both.",
       "doi": "10.1029/2008GL035338"
+    },
+    {
+      "id": "S26",
+      "citation": "Sun, Qie, Mansell, et al. (2023), J. Geophys. Res. Atmos. 128, e2022JD037450",
+      "doi": "10.1029/2022JD037450",
+      "use": "Closest published benchmark: WRF-ELEC on the Weisman-Klemp sounding with 12-km cylinders; onset, flash-count trends, charge structure and non-inductive charging rates against CCN and CAPE.",
+      "access": "Read for the stage-2 benchmark on 2026-10-03 by a literature agent: full text (pp. 2-14, Fig. 18); the unit of its flash-count figure is not stated."
+    },
+    {
+      "id": "S27",
+      "citation": "MacGorman, Straka and Ziegler (2001), A lightning parameterization for numerical cloud models, J. Appl. Meteor. 40, 459-478",
+      "use": "Supercell test with branched lightning: first flash at 1950 s, 2.7-39.6 C per flash.",
+      "access": "Read for the stage-2 benchmark on 2026-10-03 by a literature agent: full text (pp. 467, 475)."
+    },
+    {
+      "id": "S28",
+      "citation": "Mansell (2014), Storm-scale ensemble Kalman filter assimilation of total lightning flash-extent data, Mon. Wea. Rev. 142, 3683-3695",
+      "doi": "10.1175/MWR-D-14-00061.1",
+      "use": "COMMAS run on the Weisman-Klemp sounding (qv 14 g/kg, weak shear, 1 km) with SP98 and Brooks: peak 34 flashes per minute.",
+      "access": "Read for the stage-2 benchmark on 2026-10-03 by a literature agent: model and results sections (pp. 3684-3686)."
+    },
+    {
+      "id": "S29",
+      "citation": "Brothers, Bruning and Mansell (2018), Investigating the relative contributions of charge deposition and turbulence in organizing charge within a thunderstorm, J. Atmos. Sci. 75, 3265-3284",
+      "doi": "10.1175/JAS-D-18-0007.1",
+      "use": "COMMAS supercell on a Weisman-Klemp sounding with 40 m/s of shear: 75 flashes per minute at 1 km, 175 at 125 m.",
+      "access": "Read for the stage-2 benchmark on 2026-10-03 by a literature agent: full text (pp. 3266-3275)."
+    },
+    {
+      "id": "S30",
+      "citation": "Ziegler and MacGorman (1994), Observed lightning morphology relative to modeled space charge and electric field distributions in a tornadic storm, J. Atmos. Sci. 51, 833-851",
+      "use": "Origin of the cylindrical discharge scheme; kinematic supercell with fields of 201-238 kV/m and about 1 nC/m3.",
+      "access": "Read for the stage-2 benchmark on 2026-10-03 by a literature agent: OCR of the scanned full text (pp. 833-846)."
+    },
+    {
+      "id": "S31",
+      "citation": "Mansell, Ziegler and Bruning (2010), Simulated electrification of a small thunderstorm with two-moment bulk microphysics, J. Atmos. Sci. 67, 171-194; Mansell and Ziegler (2013), Aerosol effects on simulated storm electrification and precipitation in a two-moment bulk microphysics model, J. Atmos. Sci. 70, 2032-2050",
+      "doi": "10.1175/2009JAS2965.1",
+      "use": "The two-moment scheme WRF-ELEC carries; small-storm fields and flash counts, and their dependence on CCN and ice multiplication.",
+      "access": "Read for the stage-2 benchmark on 2026-10-03 by a literature agent: 2010 p. 175; 2013 Fig. 9b and p. 2046."
+    },
+    {
+      "id": "S32",
+      "citation": "Calhoun, Mansell, MacGorman and Dowell (2014), Mon. Wea. Rev. 142, 3977-3997; Fierro et al. (2006), Mon. Wea. Rev. 134, 3149-3172; Sun, Li, Wang, Mansell, et al. (2024), J. Geophys. Res. Atmos. 129, e2023JD039251",
+      "use": "Context: flash rates of assimilated and simulated supercells, flash counts across charging laws, and charge inverting at high CCN.",
+      "access": "Read for the stage-2 benchmark on 2026-10-03 by a literature agent: Calhoun pp. 3985-3994; Fierro 2006 Fig. 9; Sun 2024 pp. 2-12 and Table 2."
     }
   ],
-  "notes": "Stage 1's literature notes, with every value's location in its source, are kept on the data drive at /media/projectspace/terluna-research/atmospheric-electricity/ (charging_laws.md, ionization_conductivity.md)."
+  "notes": "Stage 1's literature notes, with every value's location in its source, are kept on the data drive at /media/projectspace/terluna-research/atmospheric-electricity/ (charging_laws.md, ionization_conductivity.md). Stage 2's benchmark notes, with each value's place in its source, are in benchmark_literature.md in the same folder."
 }

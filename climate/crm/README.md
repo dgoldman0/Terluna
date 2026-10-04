@@ -1133,6 +1133,164 @@ conductivity
 climate/gcm/.venv/bin/python -m climate.crm.mixed_phase_analysis box_0e --from-day 29.5
 ```
 
+## Electrified storms
+
+[cm1_elec.py](cm1_elec.py) builds CM1 with electrified storms, stage 2 of the
+atmospheric-electricity study. WRF-ELEC's version of the NSSL two-moment
+microphysics (MicroTed/wrf4-elec at commit e43041b, in the public domain under
+the WRF notice; Mansell et al. 2005, 2010; Fierro et al. 2013) replaces CM1's
+own copy of the same scheme. It carries charge on cloud droplets, rain, cloud
+ice, snow, graupel and hail through every microphysical process. Charge
+separates when graupel or hail rebounds from cloud ice or snow (non-inductive
+charging; by default Saunders and Peck's law with Brooks et al.'s critical rime
+accretion rate above −15 °C and none below −32.5 °C, WRF-ELEC's `isaund = 12`)
+and when cloud droplets rebound from graupel polarised by the field (inductive
+charging). The small ions' net charge attaches to the particles. Two Terluna
+files in [fortran/](fortran/) complete it:
+
+- [terluna_elec.F](fortran/terluna_elec.F) passes CM1's calls of the scheme to
+  WRF-ELEC's driver with the arrays reordered from CM1's (i, j, k) to WRF's
+  (i, k, j), and keeps the charges in CM1's passive tracers (C/kg), which CM1
+  advects and mixes like any tracer, without its positivity limiter. After the
+  microphysics, every step, it solves for the electric field of the net charge,
+  runs lightning and, where a case asks, leakage, and keeps the vertical field
+  for the next step's inductive charging.
+- [terluna_lightning.F](fortran/terluna_lightning.F) solves Poisson's equation
+  for the potential by Fourier transform across the periodic domain and a
+  tridiagonal solve on CM1's stretched levels, with the potential zero at the
+  ground and at the model top. It carries WRF-ELEC's cylindrical discharge
+  scheme (`light1d`; Ziegler and MacGorman 1994). Where the field exceeds the
+  breakdown field (284 kV/m at 1.225 kg/m³, scaled by air density and held
+  within 50–180 kV/m, WRF-ELEC's `nssl_ibrkd = 4`), every column within 12 km
+  that holds more than 0.1 nC/m³ joins the discharge. The discharge removes
+  shares of the charge above that level, set so that it carries comparable
+  positive and negative charge (about 30 % of it), and hands them to the small
+  ions with the opposite sign. It repeats within a step while the field stays
+  above breakdown.
+
+Lunar gravity enters the scheme as it enters Morrison's: the module's gravity is
+the build's, the drag-law fall speeds (graupel and hail under drag laws, cloud
+droplets under Stokes's law) follow it directly, and the fitted fall-speed laws
+V = a D^b scale by (g/9.81)^((b+1)/3): rain with b = 0.8, snow with 0.42, cloud
+ice with 0.55, and graupel and hail with each particle's exponent in WRF-ELEC's
+default table (Milbrandt and Morrison 2013), whose coefficient also sets their
+collection and ventilation. The scheme sets a particle's fall speeds and
+coefficients only where that particle is present, and the scaling acts only
+there; at Earth's 9.81 m/s² it leaves them as they are. WRF-ELEC's driver runs
+in one thread, since WRF divides its work outside the microphysics; the build
+gives its slab loop the OpenMP directive CM1's copy has, with every per-slab
+array private, the charge totals summed across threads, and what the driver sets
+before the loop shared.
+
+Two faults in the first version showed up as results that changed with the
+number of threads. The scaling ran wherever graupel might be, also where the
+scheme had set no graupel exponent, so it multiplied by whatever value was left
+in memory there; and the directive made private the fall-speed moments the driver
+sets before the loop (`infdo`), leaving each thread's copy unset. Both are fixed,
+a test keeps every private variable from being set before the loop, and a build
+that fills unset reals with signalling NaNs and stops at the first invalid
+operation located the first. The supercell below, run for 25 minutes on 2 and on
+4 threads, now matches bit for bit in every output field and in both logs, as
+CM1's own NSSL scheme does.
+
+A case sets the electricity in CM1's namelist (`var6` the charging: 2
+non-inductive, 3 with inductive; `var7` the charging law: 12 Saunders and Peck,
+1 Takahashi; `var8` lightning: 1 WRF-ELEC's breakdown field, 2 the same scaling
+unbounded; `var9` leakage through the conductivity of
+[atmosphere/electricity](../../atmosphere/electricity/README.md); `var10` the
+discharge radius). Each run logs every discharge (`terluna_flashes.txt`: the
+field at initiation, the columns and separate regions taken, the positive and
+negative charge removed, the electrostatic energy before and after) and, every
+ten steps, the largest field, the domain's charge and energy and the largest
+charging rates (`terluna_field.txt`); WRF-ELEC's driver prints the domain's
+charging by collision pair every step. [elec_analysis.py](elec_analysis.py)
+reads the logs and the charge tracers of the snapshots.
+
+The build leaves out CM1's own water budget from the NSSL scheme (the
+condensation, evaporation and rain totals CM1's copy adds to its budget
+output), the three-moment option, the activated CCN and IN arrays, terrain under
+the field solver, and WRF-ELEC's screening layers and branched discharges.
+Charge leaves the air only by lightning, by falling to the ground on rain and
+hail, and, where a case turns it on, by leakage, which relaxes the net charge at
+σ/ε₀ with the conductivity of clear air or of cloud by height and leaves out the
+screening layers that conductivity gradients build at cloud edges.
+
+The solver and the discharge scheme are checked against numpy
+([test_cm1_elec_field.py](../tests/test_cm1_elec_field.py)): the potential
+matches a direct solve of the same difference equations on stretched levels to
+one part in 10⁵, and the exact potential of a charged layer between grounded
+plates to one part in 10³; a discharge removes the charge WRF-ELEC's rule sets,
+only within the cylinders, and counts separate regions across the domain's
+edges.
+
+### The benchmark storm
+
+`supercell_elec` is CM1's own supercell (Weisman and Rotunno 2000: the Weisman
+and Klemp sounding with 14 g/kg of vapour at the ground, the quarter-circle
+hodograph, a warm bubble, 1-km spacing, a domain 120 km square, two hours) at
+Earth's gravity, with 600 CCN per cm³ and WRF-ELEC's defaults
+([elec_supercell_elec.json](../results/crm/elec_supercell_elec.json)). Its twin
+`supercell_nssl` runs CM1's own copy of the NSSL scheme without electricity. The
+two storms agree: the largest updraft within 5 % at every half hour (28, 45, 54
+and 54 m/s against 28, 46, 56 and 56), reflectivity within 3 dBZ, graupel within
+14 %, cloud-ice numbers within a factor of 1.5, the domain's condensate within
+10 % and at each level holding much of it within 22 %, and the heaviest rain
+within a quarter. Hail differs most, up to a factor of two once it forms, as the
+two copies of the scheme are different versions. The reordering of the arrays
+between CM1 and WRF-ELEC therefore leaves the storm as CM1's own scheme makes it.
+The electricity adds a quarter to the run's time.
+
+No published run puts this scheme in CM1 or in WRF's idealized supercell, so the
+benchmark sets the storm beside published runs of the same charging and
+discharge schemes on similar storms (notes and pages in the study's
+[sources](../../research/studies/atmospheric_electricity/sources.json)):
+
+| | `supercell_elec` | Published runs |
+|---|---|---|
+| First discharge | 28.6 min | 27–28 min (Kuhlman et al. 2006), 32.5 min (MacGorman et al. 2001), 30–40 min (Sun et al. 2023) |
+| Discharges | 1,903 calls in 92 min, at most 41 a minute (88 separate regions) | 34 flashes a minute at the peak (Mansell 2014), 75 (Brothers et al. 2018, 1 km) |
+| Net charge density | up to +3.2 and −3.4 nC/m³ | about 1 nC/m³ (Ziegler and MacGorman 1994), up to 4 (Sun et al. 2021) |
+| Charge on one particle type | up to 43 (graupel), 53 (cloud ice) and 86 (hail) nC/m³, largely cancelling | up to 1.2 nC/m³, in a weaker storm (Sun et al. 2024) |
+| Largest non-inductive charging | 3.3 nC/m³/s | 0.3–0.55 nC/m³/s (Kuhlman et al. 2006; Sun et al. 2023) |
+| Inductive against non-inductive charging | a seventh of the domain's charge separated | about a tenth (two-moment runs) |
+
+The storm electrifies when the published storms do, its net charge densities are
+those of the published runs, and it discharges about as often. Its charging is several times stronger and the charge on each
+particle type tens of times larger. Both follow from its cloud ice: up to 2×10⁸
+crystals per kilogram where droplets freeze homogeneously in updrafts of 50 m/s,
+which CM1's own copy of the scheme makes as well, and each crystal that bounces
+off graupel carries charge away.
+
+At 30–40 minutes the storm's net charge lies as a normal tripole's does: negative
+at 6–8 km (−16 to −25 °C) between positive above (8–9 km, −28 to −33 °C) and
+below (4–6 km), tens of coulombs at each level. Graupel carries part of the
+negative charge only at 35 minutes; at 30 and 40 minutes it is positive, and
+cloud ice and snow carry the negative. From 45 minutes, as the updrafts pass
+50 m/s, the main negative charge rises to 9–12 km (−36 to −54 °C), up to 1,700 C
+at one level, carried by snow and cloud ice, while graupel and hail at the same
+levels carry positive charge. Saunders and Peck's law charges graupel positively
+where it rimes fast in strong, wet updrafts, and the published runs with this
+law report the same inverted charge in such storms (Kuhlman et al. 2006;
+Mansell et al. 2005), as high CCN does (Sun et al. 2023, 2024).
+
+A discharge removes a median 150 C (25–540 C from the 10th to the 90th
+percentile) from a median 14.5 km of the column and dissipates a median 9 GJ of
+electrostatic energy. One call discharges every 12-km cylinder around every point
+above the breakdown field at once, through the whole column, so each call stands
+for many flashes and its charge and energy are theirs together; counts of calls
+follow the trends of a storm's lightning (Fierro et al. 2013). At the first discharge of a
+step the field stands a median 3.2 times above the breakdown field: within one
+6-second step, graupel and hail falling through ice and snow that carry tens of
+nC/m³ of the opposite charge move enough net charge to raise it that far. The
+scheme discharges once a step, after the field has passed the breakdown field.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run build earth_g_omp_elec moon_omp_elec earth_g_omp
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup supercell_elec        # and supercell_nssl
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run run supercell_elec --threads 4    # 20 minutes
+climate/gcm/.venv/bin/python -m climate.crm.elec_analysis supercell_elec --against supercell_nssl
+```
+
 ## The gravity pair
 
 If lunar convection were Earth's stretched six times in size and duration, a

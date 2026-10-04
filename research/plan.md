@@ -33,6 +33,10 @@ WRF-ELEC. Stage 3 takes the global circuit and transient luminous events.
 ROCKE-3D stays a separate background-climate check. Stage 1 (2026-10-03) found
 lunar cloud conducting about 10⁻¹⁶ S/m and some storm columns reaching breakdown
 under every charging law tried; the charge slow graupel separates sets how often.
+Stage 2's electrified CM1 (2026-10-03) runs WRF-ELEC's NSSL microphysics with its
+charging and lightning; on an Earth supercell it electrifies when published runs
+of the scheme do, with their net charge densities, while charging several times
+faster. The electrified lunar box waits for the author's go-ahead.
 
 ## Biology in parallel
 
