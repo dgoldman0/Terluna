@@ -1,7 +1,7 @@
 # How the Open Moon's seas look
 
 This study works out how the seas look by day, through the long evening, under
-earthlight and in the dark far-side night. It couples the
+earthlight and in the far side's twilit night. It couples the
 [wave studies](../../../climate/waves/README.md), the
 [monthly tide](../../../geography/README.md#the-monthly-tide), the solved sky and
 cloud light of [illumination](../../../illumination/), the
@@ -16,16 +16,17 @@ cloud light of [illumination](../../../illumination/), the
   atmosphere keeps the sky bright far below the horizon. The
   [solved sky](../../../illumination/sky/results/solved_sky.json) gives the ground
   2,210 lux with the Sun 6° down, 267 lux at 18° and 24 lux at 30°, where Earth's
-  sky would be in full night. The register's practical dawn and dusk of about
-  five hours still awaits a photometric definition for this atmosphere; the
-  lighting calendar supplies one.
+  sky would be in full night. The register defines dawn and dusk by this light
+  from the [lighting calendar](#the-lighting-calendar).
 - **The nearside night is earthlit.** The Earth stays nearly fixed in the
   nearside sky and is near full through the night. Its 1.9° disk gives about
   13 lux above the air at full Earth, a ten-thousandth of direct sunlight
   ([illumination/ephemeris.py](../../../illumination/ephemeris.py): a Lambert-phase
   sphere of geometric albedo 0.367).
-- **The far side's nights are dark,** lit by the stars and by an airglow not yet
-  estimated for this atmosphere.
+- **The far side's nights are twilit.** The twilight wraps round the Moon: at
+  latitude φ the Sun sinks at most 90° − φ below the horizon. Only seas near the
+  far side's equator grow dark around local midnight, lit then by the stars and
+  an airglow not yet estimated for this atmosphere.
 - **Around the limb the Earth rises and sets with the libration.** Over
   Smythii–Marginis, where the wave studies' headland stands, it spends part of
   each month above the horizon and part below.
@@ -54,8 +55,10 @@ The author's, on 2026-10-04:
   western Oceanus Procellarum by Russell, the most exposed coast, where a full
   Earth stands about 14° up in the east-southeast over the open water at night;
   the eastern Smythii headland, where the Earth rises and sets over the western
-  sea; southern Mare Nubium, with the largest tide; and a South Pole–Aitken coast
-  under the dark far-side night.
+  sea; southern Mare Nubium, with the largest tide; and the South Pole–Aitken
+  coast by Mare Ingenii under the far side's twilit night, the more representative
+  far-side night, chosen first once the calendar showed how far the twilight
+  reaches.
 
 ## Building blocks
 
@@ -70,8 +73,8 @@ The author's, on 2026-10-04:
    tables, the living constituents above and suspended regolith fines, mare basalt
    and highland, from Apollo soil spectra. The same optics give the light under
    water for the ecology work.
-3. **The light sources:** the solved sky, extended below 30° of solar depression
-   to find where night begins; the earthlight, with a published Earth reflectance
+3. **The light sources:** the solved sky, whose cached scattering solution the
+   calendar reads down to the Sun's lowest point; the earthlight, with a published Earth reflectance
    spectrum, and the earthlit sky from the sky solver; clouds from the cloud-light
    model; the stars, with airglow a labelled placeholder until the atmosphere
    domain estimates it.
@@ -87,7 +90,8 @@ The author's, on 2026-10-04:
    from the Earth, which source dominates and which mode of vision applies. With
    it, a map of where the Earth stands over every sea and where it rises and sets.
 2. **The reflection and water-colour models.**
-3. **Results by regime** (day, the long evening, earthlit night, dark night):
+3. **Results by regime** (day, the long evening, earthlit night, the far side's
+   twilit night):
    radiance and colour by direction of view, the glitter paths and the contrast of
    the waves.
 4. **Scientific renderings of the four coasts** in [visualization](../../../visualization/),
@@ -147,8 +151,13 @@ Pole–Aitken sea and all of Moscoviense. It rises and sets with the libration o
 93% of Smythii–Marginis, 81% of Humboldtianum and 99% of Orientale, and over the
 polar seas, where it skims the horizon.
 
-The register's practical dawn and dusk of about five hours awaits a photometric
-definition; by these numbers day vision outlasts sunset by two days.
+**Dawn and dusk.** The [register](../../decisions.md#light-and-time) now defines
+them by this light. Practical dusk lasts until the light falls to the level at
+which Earth's civil twilight ends, 2.98 lux in the same solver's Earth control
+([optical comfort](../optical_comfort/README.md)), with the Sun 41.4° down: 82
+hours after sunset at the equator and 98 hours at 30° latitude, and poleward of
+48.6° a clear night never falls that low. Day vision holds for its first 46 hours
+at the equator. Where the Earth stands high, the night stays above the level.
 
 **Boundaries.** The light is clear-sky, from a horizontally uniform solved column
 without refraction; the twilight's paths cross the terminator through night-side
