@@ -97,3 +97,70 @@ The author's, on 2026-10-04:
 Models belong to their domains (optics in illumination, sea states in climate,
 the tide and the seas in geography, the living water's guesses in the biosphere);
 this folder holds the coupled runners, their results and the write-up.
+
+## The lighting calendar
+
+[lighting.py](lighting.py) follows six coasts hour by hour through the shore month
+of the wave studies, 7 February to 8 March 2038, and writes
+[lighting_calendar.json](results/lighting_calendar.json); the
+[figure](../../../visualization/sea-appearance/results/lighting_calendar.png) shows it.
+
+**The light lasts days after sunset.** The solved sky's light on the ground, read
+from its cached scattering solution, falls slowly as the Sun sinks:
+
+| Sun below the horizon | 6° | 18° | 30° | 40° | 50° | 60° | 90° |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Clear-sky light on the ground | 2,200 lux | 266 lux | 24 lux | 3.6 lux | 0.58 lux | 0.088 lux | 0.001 lux |
+
+An 18% grey surface stays in day vision (above 5 cd/m², CIE 191:2010) until the
+Sun is 23.6° down, 46 hours after sunset at the equator. It would reach night
+vision (below 0.005 cd/m²) only with the Sun 60° down, five days after sunset.
+Away from the far side's equator the Sun never sinks that far: at latitude φ its
+lowest point is 90° − φ below the horizon. The last scattering order adds under
+0.05% of the light even with the Sun straight below.
+
+**The nearside night is earthlit, and nowhere in the month reaches night vision.**
+
+| Coast | The Earth's elevation | Light from a full Earth | Hours the Earth outshines the Sun's sky | Darkest moment |
+|---|---:|---:|---:|---:|
+| Western Oceanus Procellarum, by Russell | 6–21° | 1.7 lux | 132 | 0.96 lux |
+| Southern Mare Imbrium, Montes Carpatus | 59–74° | 7.8 lux | 200 | 5.9 lux |
+| Southern Mare Nubium, by Pitatus | 53–66° | 6.5 lux | 175 | 5.7 lux |
+| Mare Nectaris, by Fracastorius | 43–58° | 6.1 lux | 184 | 5.1 lux |
+| Eastern Smythii headland | −10.5 to +2.7° | 0.49 lux | 131 | 0.12 lux |
+| South Pole–Aitken sea, by Mare Ingenii | below the horizon | none | 0 | 0.46 lux |
+
+Each night lasts about 350 of the month's 709 hours. On the nearside the twilight
+outshines the Earth until the Sun is about 40° down; then the Earth lights the
+night, between new Earth at local noon and full Earth at local midnight. At the
+Smythii headland the Earth stands above the horizon for 213 hours and lights the
+night faintly from near the horizon. The Ingenii coast never sees the Earth, yet
+its darkest moment keeps 0.46 lux of twilight, as bright as a night under a full
+Moon on Earth.
+
+**Where the Earth stands.** Every water cell at 1-degree spacing, followed every
+six hours through 2026–2045
+([earth_over_seas.npz](results/earth_over_seas.npz),
+[map](../../../visualization/sea-appearance/results/earth_over_seas.png)): the Earth
+is always up over 99% of the nearside sea and never over 94% of the South
+Pole–Aitken sea and all of Moscoviense. It rises and sets with the libration over
+93% of Smythii–Marginis, 81% of Humboldtianum and 99% of Orientale, and over the
+polar seas, where it skims the horizon.
+
+The register's practical dawn and dusk of about five hours awaits a photometric
+definition; by these numbers day vision outlasts sunset by two days.
+
+**Boundaries.** The light is clear-sky, from a horizontally uniform solved column
+without refraction; the twilight's paths cross the terminator through night-side
+air this column does not hold. The earthlight is a Lambert sphere of the Earth's
+geometric albedo with sunlight's colour, through the same air as sunlight.
+Starlight and airglow stand in as 0.001 lux. Modes of vision are for an 18% grey
+surface; clouds come in the regime results.
+
+```sh
+OPENBLAS_NUM_THREADS=1 python -m research.studies.sea_appearance.lighting
+python visualization/sea-appearance/lighting.py
+```
+
+The runner reads the cached scattering solution from
+`research/runs/optical_comfort/spherical/`, linked to the research drive.

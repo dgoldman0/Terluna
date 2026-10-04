@@ -16,6 +16,7 @@ experience and labels what is computed, informed by research, or artistic.
 | [waves](waves/) | The wave studies' figures: Earth and lunar gravity over a strip, the Smythii–Marginis basin and its lunar cycle, coastal nests and shore exposure, breaking and run-up, the nearside sea's waves and coasts, a month at four shores, and every sea's monthly tide | [climate/waves](../climate/waves/) products and the [geography tide product](../geography/README.md#the-monthly-tide) |
 | [optical-comfort](optical-comfort/) | Surface luminance, eye illumination and shaded light against Earth; the directional scenes' gaze, finite scenes, workplane light and tread–riser contrast | The [optical comfort study](../research/studies/optical_comfort/) |
 | [cloud-twilight](cloud-twilight/) | Evening clouds: their illumination and occurrence, the regional survey's maps, computed cloud views in colour and brightness, a cloud system through 72 hours and a distant cloud in the deep evening, with a local gallery | The [cloud twilight study](../research/studies/cloud_twilight/) |
+| [sea-appearance](sea-appearance/) | How the seas look: the light through a month at six coasts, from the Sun's long twilight and the Earth, and where the Earth stands over every sea | The [sea appearance study](../research/studies/sea_appearance/) |
 
 Rules for this lane:
 
