@@ -22,6 +22,15 @@ The numerical product is [results/cycling.json](results/cycling.json).
 [cycling_plot.py](../../../visualization/solar-shield-array/cycling_plot.py)
 renders its trajectory, range, service intervals and inventory comparison.
 
+The follow-up corrects Boolean trapezoidal integration in the raw service-time
+diagnostic. NumPy's Boolean addition counted adjacent active samples once
+before division by two. Casting the indicator to floating point restores the
+annual inner case from **8.00394% to 15.82345%** and its three-year case from
+**8.03610% to 15.88746%**. Every affected diagnostic was regenerated from the
+hash-verified trajectories. The useful projected-area fractions, trajectories,
+return arc and inventory comparisons are unchanged. Regression checks include
+all-active, all-inactive and mixed runs on an irregular time grid.
+
 ## What was computed
 
 Every propagated case starts on 2026-10-04 TDB and uses the pinned DE440s

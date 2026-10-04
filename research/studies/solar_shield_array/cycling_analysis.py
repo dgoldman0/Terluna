@@ -58,6 +58,15 @@ def episodes(t, active):
     return [[float(t[a]), float(t[b])] for a, b in zip(starts, stops)]
 
 
+def time_average(values, t):
+    """Trapezoidal time mean, including Boolean indicator plateaus.
+
+    NumPy adds adjacent ordinates before division by two. Boolean addition
+    preserves dtype (True + True is True), so cast before that addition.
+    """
+    return float(np.trapezoid(np.asarray(values, dtype=float), t)/(t[-1]-t[0]))
+
+
 def analyze(trace, env, sample_step=300.):
     t = np.linspace(trace["t"][0], trace["t"][-1], int(np.ceil(np.ptp(trace["t"])/sample_step))+1)
     p = spline(trace)
@@ -69,7 +78,7 @@ def analyze(trace, env, sample_step=300.):
     full = dict(t=t, state=state, angles=angles, **diagnostic)
     useful = service_fraction(full, SCENARIO["protected_radii"]*K.MOON_RADIUS)
     duration = t[-1]-t[0]
-    avg = lambda y: float(np.trapezoid(y, t)/duration)
+    avg = lambda y: time_average(y, t)
     radius = np.linalg.norm(state[:, :3], axis=-1)
     windows = episodes(t, useful > .001)
     gaps = [b[0]-a[1] for a, b in zip(windows[:-1], windows[1:])]

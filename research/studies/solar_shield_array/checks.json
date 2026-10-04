@@ -1,6 +1,6 @@
 {
   "schema": "terluna.research.solar-shield-checks/1",
-  "checked_at_utc": "2026-10-04T20:59:00.757483+00:00",
+  "checked_at_utc": "2026-10-04T21:20:54.120084+00:00",
   "scope": "Numerical implementation, source identity and repository checks",
   "scientific_validation": false,
   "base_main_commit": "2f2e0a104a3a1ea962a6dead4179f522762f997e",
@@ -114,7 +114,7 @@
     "status": "NUMERICAL_RETURN_AND_BOUNDED_POINT_TILE_CYCLING",
     "report": "cycling.md",
     "product": "results/cycling.json",
-    "sha256": "85e50097c1becf90fe95421c2d4d2828ebafc68c3d8a314ec3c4731bd8cfd102",
+    "sha256": "5ee80bb99516007df8fe963ba1d01bf4324c5ce58f5b550d3bcaf25068420b3b",
     "algebraic_screen": "results/tacking_screen.json",
     "return_arc_independent_replay": {
       "status": "PASS",
@@ -159,5 +159,17 @@
       "standalone_historical_provenance": "PASS_WITH_BLOCKED_INPUTS",
       "standalone_ensemble_setup": "PASS"
     }
+  },
+  "boolean_integration_repair": {
+    "status": "PASS",
+    "regression": "All-active, all-inactive, mixed plateau and numeric ordinates on nonuniform times; weighted-area versus raw-time invariant",
+    "annual_inner_raw_service_fraction_before": 0.08003935660506502,
+    "annual_inner_raw_service_fraction_after": 0.15823446649935358,
+    "raw_traces": "Reused only after source, constant, configuration and SHA-256 validation",
+    "affected_diagnostics_regenerated": 7,
+    "weighted_area_and_inventory_unchanged": true,
+    "study_tests_passed": 41,
+    "make_check": "13 existing failures, 585 passed, 55 skipped; collected before the final product-invariant regression was added",
+    "full_suite_later_targets": "make stops at the existing Python failures; earlier JavaScript and provenance statuses above belong to the preceding checkpoint"
   }
 }
