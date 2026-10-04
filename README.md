@@ -6,8 +6,8 @@ The project combines shared numerical research with a five-paper ensemble. The n
 
 ## Start here
 
-- [Current findings, equations and limits](research/findings.md)
-- [Research inventory](research/README.md) and [condition register](research/status.json)
+- [Research inventory](research/README.md), [condition register](research/status.json) and [decisions register](research/decisions.md)
+- [The environment screens' equations, bounds and limits](research/findings.md)
 - [Five-paper ensemble and accepted seeds](ensemble/README.md)
 - [Core-first research plan](research/plan.md)
 
@@ -27,15 +27,20 @@ The project combines shared numerical research with a five-paper ensemble. The n
 
 | Area | Available work | Evidence boundary |
 |---|---|---|
-| [Atmosphere](atmosphere/) | Historical baselines; a solved molecular thermal column; band-energy interface | Prescribed lower boundary; full spectral chemistry and kinetic escape remain open |
-| [Climate](climate/) | Conservative, periodic latitude–longitude energy-balance screen | Synthetic geography and uncalibrated radiation/transport; no weather or ice model |
-| [Biosphere](biosphere/) | Periodic carbon-storage theorem and model; oxygen budget with explicit shortfalls | Hypothetical functional traits; no life-cycle or ecosystem validation |
-| [Protection](protection/) | Optical, positioning, magnetic and renewal estimates | Component calculations; important EUV response/input gap documented |
-| [Engineering](engineering/) | Resource transport, growth and maintenance accounting | Conditional budgets; complete industrial and safety closure remains open |
-| [Illumination](illumination/) | Spectral clear-sky solver; light-transport references; Sun, Earth and star geometry and earthlight for a site | Prescribed optical profiles; mean-orbit geometry; earthlight spectrum approximated |
-| [Geography](geography/), [habitation](habitation/) | Data leads and design requirements | Actual-terrain climates and settlement capacity still require work |
+| [Atmosphere](atmosphere/) | A solved thermal column; line-by-line radiative–convective and photochemical columns under the shield (ozone, surface ultraviolet); the exobase, its heating and escape; the loss response to protection | Three-dimensional middle-atmosphere transport; light bypassing the shield film through aperture gaps |
+| [Climate](climate/) | An ExoPlaSim GCM design climate near 299.6 K with lunar-gravity corrections; CM1 cloud-resolving rings and a highland box; [the seas' waves](climate/waves/) through two lunar cycles, from the open sea to run-up on the shore | Paused since 2026-09-30 while CM1 and the GCM disagree on warmth and humidity over land; the waves rest on one sampled month and a 1-degree sea grid |
+| [Biosphere](biosphere/) | The carbon reserve theorem and model; an oxygen box; tree and forest-patch mechanics; canopy photosynthesis by wavelength; a plant's carbon through the lunar night; fruit designed for the lunar day | Measured traits, complete life cycles and ecological interactions |
+| [Geography](geography/) | LOLA topography above the GRAIL geoid; the atlas at 28% water, named from the IAU gazetteer; rivers and rain-fed lakes; [every sea's monthly tide](geography/README.md#the-monthly-tide) | How the water divides between seas and lakes; groundwater; Mare Fecunditatis's strait |
+| [Illumination](illumination/) | A spectral clear-sky solver and light-transport references; Sun, Earth and star geometry with earthlight; surface spectra; a shielded spherical sky; evening cloud radiance | Regional profiles, three-dimensional clouds, aerosols, polarization and the earthlight spectrum |
+| [Protection](protection/) | The component model and its September design report; the film's transmission from hard X-rays to the far ultraviolet | Aperture leakage, clean operation, particle transport and lifetime resources |
+| [Engineering](engineering/) | Resource transport, growth and renewal accounts; plume-heat sensitivity | A complete industrial network and safe source-to-use routes |
+| [Habitation](habitation/) | Design concepts; a first optical-comfort screen | Practical inhabited capacity; visual comfort in resolved scenes and human validation |
 
-The [results](research/studies/environment_screens/results/) contain numerical cases and approximation flags. Solving the selected equations establishes their conditional consequences. Environmental compatibility, biological persistence and engineering performance require additional evidence.
+Cross-domain studies, from conservation and the protection architecture to
+lunar-cycle ecology, optical comfort and evening clouds, are listed in the
+[research inventory](research/README.md#studies).
+
+The environment screens' [results](research/studies/environment_screens/results/) contain numerical cases and approximation flags. Solving the selected equations establishes their conditional consequences. Environmental compatibility, biological persistence and engineering performance require additional evidence.
 
 ## Run
 
