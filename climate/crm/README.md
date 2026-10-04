@@ -1473,7 +1473,9 @@ restarts every 3 hours over two model days. It builds its own clouds from that
 air, so its storms start a few hours into the run. The day it starts from is
 chosen once the coarse run has shown its storms, a few hours before a stormy
 window; the case refuses to set up until it is set. A check from day 5 ran its
-first five model minutes cleanly.
+first five model minutes cleanly. It runs from 2026-10-04, from the coarse run's
+day 10.75, 41° past local noon and four hours before the coarse run's first
+flash (day 10.92), through days 11–12, when `box_0e`'s storms peaked.
 
 ```sh
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_elec_fine    # after setting fine_from['day']

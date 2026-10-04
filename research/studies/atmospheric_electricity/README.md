@@ -218,7 +218,8 @@ Morrison's do.
    from the coarse run's averaged air a few hours before a stormy window and run
    for two model days with output every 15 minutes, to resolve the storm cells
    and draw the flashes on a finer grid. Set up on 2026-10-04 at the author's
-   request; it starts once the coarse run's storms show it worthwhile.
+   request and running from the same day at the author's go-ahead, from the
+   coarse run's day 10.75, four hours before its first flash.
 4. Windows of `box_0e_elec`'s second lunar day run again from its restarts with
    output every few minutes, to follow each storm's life, under Takahashi's law,
    with leakage, and with the unbounded breakdown field.

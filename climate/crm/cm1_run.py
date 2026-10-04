@@ -1209,11 +1209,11 @@ CASES['box_0e_elec'] = dict(
     purpose=CASES['box_0e']['purpose'] + ', with the NSSL microphysics and WRF-ELEC\'s charging and branched lightning')
 # The fine box (stage 2): box_0e_elec's site at a third of its spacing (2.0 km) over a box a third as wide (128 km, the
 # same 64 by 64 columns), started from box_0e_elec's air averaged over its columns and its mean skin temperature at a
-# day of its run a few hours before a stormy window (fine_from day, set once box_0e_elec has shown its storms), under
+# day of its run a few hours before a stormy window (day 10.75, four hours before box_0e_elec's first flash), under
 # the same Sun, forcing, land and electricity, with output every 15 minutes over two model days. It resolves the storm
 # cells and draws the flashes on a grid three times finer.
 CASES['box_0e_elec_fine'] = dict(
-    CASES['box_0e_elec'], inputs_from=None, fine_from=dict(case='box_0e_elec', day=None, refine=3), days=2.0,
+    CASES['box_0e_elec'], inputs_from=None, fine_from=dict(case='box_0e_elec', day=10.75, refine=3), days=2.0,
     output_s=900.0, restart_s=10800.0, segment_s=43200.0,
     purpose=CASES['box_0e_elec']['purpose'] + '; a box a third as wide at a third of the spacing, started from that '
             'run\'s averaged air a few hours before a stormy window')
