@@ -224,7 +224,7 @@ Morrison's do.
    in updrafts and graupel and charged to about 1,500 C of each sign, but no
    flash struck: the field peaked at 73 % of breakdown. At the coarse box's rate
    of flashing storms per unit area, a box this size sees none in that time
-   about 60 % of the time, so the effect of the finer grid on the lightning is
+   55 % of the time, so the effect of the finer grid on the lightning is
    still open (climate/crm README, "The fine box").
 4. Windows of `box_0e_elec`'s second lunar day run again from its restarts with
    output every few minutes, to follow each storm's life, under Takahashi's law,

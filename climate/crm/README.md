@@ -1500,7 +1500,7 @@ the coarse box held between its flashes, but the strongest field aloft reached
 starts at 90 %. Over the same days the coarse box flashed 56 times, in bursts
 from seven or eight storms over nine times the area, four or five of them after
 day 11.9. At that rate per unit area the fine box would expect half a flashing
-storm while its storms were mature and see none about 60 % of the time, so
+storm while its storms were mature and see none 55 % of the time, so
 these two days leave open whether the finer grid changes the lightning. The box
 is also small for these storms: lunar storms stand four to five times taller
 than Earth's, so 128 km is like a 30-km box on Earth, room for one or two storms
