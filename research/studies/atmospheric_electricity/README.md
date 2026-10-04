@@ -225,13 +225,27 @@ Morrison's do.
    flash struck: the field peaked at 73 % of breakdown. At the coarse box's rate
    of flashing storms per unit area, a box this size sees none in that time
    55 % of the time, so the effect of the finer grid on the lightning is
-   still open (climate/crm README, "The fine box").
-4. Windows of `box_0e_elec`'s second lunar day run again from its restarts with
-   output every few minutes, to follow each storm's life, under Takahashi's law,
-   with leakage, and with the unbounded breakdown field. WRF-ELEC caps the
+   still open (climate/crm README, "The fine box"). At the author's direction
+   it runs on to four model days, through the coarse box's busiest lightning.
+4. The first lunar day's storms again from the coarse run's day-10.5 restart
+   (climate/crm README, "The first lunar day again"). WRF-ELEC caps the
    breakdown field at 180 kV/m, a cap that on Earth applies only below about
    4.5 km; in the lunar air it applies below about 36 km, where half the first
-   lunar day's flashes started (climate/crm README, the lunar settings).
+   lunar day's flashes started. The author lifted it for the lunar runs on
+   2026-10-04, and the coarse run runs without it from day 18;
+   `box_0e_elec_uncapped` gives its first lunar day without it.
+   `box_0e_elec_uncapped_corona` adds point discharge from the ground (Standler
+   and Winn 1979), which WRF-ELEC lacks and the author left to the agent's
+   judgement: without it the field at the ground under the storms reaches
+   100–220 kV/m, where on Earth the ground's plants and points hold it near
+   5–12 kV/m. The pair shows what that discharge changes before other runs take
+   it up. A 30-minute check held the ground's field at the onset where no
+   particles reach the lowest level, but not under rain, where WRF-ELEC hands
+   the ground's ions to the rain at once and the scheme's ions do not climb in
+   the field.
+5. Windows of `box_0e_elec`'s second lunar day run again from its restarts with
+   output every few minutes, to follow each storm's life, under Takahashi's law
+   and with leakage.
 
 It gives the storms' charge structure, the field by height, flash rates and
 types (within cloud and to ground), flash extent, the charge each flash moves

@@ -9,10 +9,13 @@
 ! With charging on it follows WRF-ELEC's own driver (include_microphysics_driver_elec.F): the microphysics runs without
 ! sedimentation, and the step's sedimentation then runs in sub-steps (WRF-ELEC's 0.75 s, or var5), each followed by
 ! the electric field of the net charge (terluna_lightning) and lightning, so a discharge acts as the field reaches
-! breakdown. Screening layers and leakage, where asked, follow once a step, and the last field's vertical component is
-! kept for the next step's inductive charging.
+! breakdown. Screening layers, leakage and point discharge from the ground, where asked, follow once a step, and the
+! last field's vertical component is kept for the next step's inductive charging.
 !
 ! Settings from CM1's namelist (param8):
+!   var2  point discharge from the ground (WRF-ELEC has none): its onset field (V/m) at 1.225 kg/m3, scaled by the
+!         air's density at the ground; 0 none. Standler and Winn (1979) measured onsets of 3 kV/m over dense vegetation
+!         and 5 kV/m on a barren ridge
 !   var3  screening layers at cloud edges (WRF-ELEC's iscreen, terluna_screen.F): 0 none; 1 with WRF-ELEC's Earth
 !         clear-air conductivity and a tenth of it in cloud; 2 with both by height from terluna_conductivity.txt
 !   var4  for branched lightning, the height (m) below which a downward channel counts as reaching the ground; zero or
@@ -24,14 +27,17 @@
 !         test case; 1 Takahashi (with nonigrd = -1 in &nssl_mp_params and takahashi.txt in the run folder)
 !   var8  lightning: 0 none; 1 WRF-ELEC's cylinders (light1d) and 3 its branched scheme (lightmsz), with its breakdown
 !         field (nssl_ibrkd = 4: 284 kV/m times air density over 1.225 kg/m3, within 50-180 kV/m); 2 and 4 the same
-!         with the breakdown field unbounded
+!         without the 180-kV/m cap, which in lunar air applies below about 36 km (the 50-kV/m floor stays: above
+!         about 100 km in lunar air, 14 km in Earth's)
 !   var9  leakage: 0 none; 1 net charge relaxes at the rate sigma/eps0, sigma by height from terluna_conductivity.txt
 !         (cloud where cloud water and ice reach 0.01 g/kg), its opposite going to the small ions
 !   var10 cylinder radius (m); 12 km if zero
 ! Each discharge or flash is logged to terluna_flashes.txt and lightmsz's own report on the first 2000 flashes of a
 ! run to terluna_msz.log; every ten steps terluna_field.txt takes the largest field, the domain's charge and
-! electrostatic energy and the largest charging rates. The cloud ice size the radiation reads is capped at 140
-! microns, where RRTMG's ice optics end, and terluna_ice_optics.txt logs the ice the cap cuts.
+! electrostatic energy and the largest charging rates, and terluna_ground.txt the field at the ground and the charge
+! the ground's points give off.
+! The cloud ice size the radiation reads is capped at 140 microns, where RRTMG's ice optics end, and
+! terluna_ice_optics.txt logs the ice the cap cuts.
 !-----------------------------------------------------------------------------------------------------------------------
 module terluna_elec_module
   implicit none
@@ -53,6 +59,10 @@ module terluna_elec_module
   real, parameter :: dts_wrf = 0.75               ! WRF-ELEC's sub-step (s)
   real, parameter :: tgrnd = 266.16               ! WRF-ELEC's nssl_tgrnd (K)
   real, parameter :: eint = 200.0                 ! WRF-ELEC's nssl_einternal (V/m)
+  real, allocatable, save :: landx(:)              ! 1 over land, 0 over water, by column along x
+  double precision, save :: corpos = 0.0d0, corneg = 0.0d0   ! charge the ground's points gave off since the last log
+  real, save :: coremax = 0.0, coredry = 0.0      ! the largest field at the ground (V/m) since then, before discharge,
+                                                  ! over all land and where no particles reach the lowest level
 
 contains
 
@@ -64,13 +74,13 @@ contains
                                dx, dy, re_cloud, re_ice, re_snow, has_reqc, has_reqi, has_reqs, diagflag,               &
                                ids, ide, jds, jde, kds, kde, ims, ime, jms, jme, kms, kme, its, ite, jts, jte, kts, kte,  &
                                pt3d, mtime)
-    use input, only : ibp, iep, jbp, jep, kbp, kep, npt, var3, var4, var5, var6, var8, var9, var10, nssl_3moment
+    use input, only : ibp, iep, jbp, jep, kbp, kep, npt, var2, var3, var4, var5, var6, var8, var9, var10, nssl_3moment
     use index_module, only : lhl, lvh, lvhl, lccna, lcina
     use module_mp_nssl_2mom, only : nssl_2mom_driver, nssl_2mom_sed_driver
     use module_boxmgsetup, only : terluna_ebrk_lo, terluna_ebrk_hi
     use terluna_lightning, only : potential, field, energy, breakdown_field, discharge, eps0
     use terluna_branched, only : branched_flash, flash_record
-    use terluna_screen, only : screen, earth_air_conductivity
+    use terluna_screen, only : screen, earth_air_conductivity, ground_discharge
     integer, intent(in) :: ids, ide, jds, jde, kds, kde, ims, ime, jms, jme, kms, kme, its, ite, jts, jte, kts, kte
     integer, intent(in) :: itimestep
     real, intent(in) :: dtp
@@ -122,12 +132,9 @@ contains
                        kep .ne. kme ) ) stop 'Terluna: the passive tracers must span the model arrays'
       if( elec .and. ( ilight .lt. 0 .or. ilight .gt. 4 ) ) stop 'Terluna: var8 (lightning) takes 0 to 4'
       if( elec .and. ( iscreen .lt. 0 .or. iscreen .gt. 2 ) ) stop 'Terluna: var3 (screening layers) takes 0 to 2'
-      if( ilight .eq. 2 .or. ilight .eq. 4 )then
-        terluna_ebrk_lo = 0.0
-        terluna_ebrk_hi = 1.0e30
-      endif
+      if( ilight .eq. 2 .or. ilight .eq. 4 ) terluna_ebrk_hi = 1.0e30
       print *,'Terluna: WRF-ELEC NSSL driver, ipelec = ',ipelec,', charge tracers = ',nchg,', lightning = ',ilight,  &
-              ', screening = ',iscreen
+              ', screening = ',iscreen,', point discharge onset (V/m at 1.225 kg/m3) = ',var2
     endif
 
     call load(th, wth, .true.)
@@ -238,6 +245,8 @@ contains
         call leakage(dtp)
         call fields()
       endif
+      call point_discharge(dtp)                         ! and, without it (var2 0), the field at the ground's log
+      if( var2 .gt. 0.0 ) call fields()
       call save_ez()
       if( mod(itimestep, 10) .eq. 0 ) call log_field(time0 + dtp, itimestep)
       if( allocated(wrei) ) call cap_ice_size(time0 + dtp, itimestep)
@@ -567,6 +576,72 @@ contains
       call to_ions(dep)
     end subroutine leakage
 
+    subroutine point_discharge(dt)
+      ! point discharge from the ground (terluna_screen's ground_discharge) from the field at the lowest level, its ions
+      ! joining the small ions' charge there, which CM1 then carries with the air (the small ions do not drift in the
+      ! field here). WRF-ELEC's scheme hands the small ions' charge at once to any particles in a cell, so where cloud or
+      ! rain reaches the lowest level the ions go to the particles. Without point discharge (var2 0) it only logs the
+      ! field at the ground
+      real, intent(in) :: dt
+      double precision :: qp, qn
+      real :: emax, onset
+      integer :: i, j, ii, jj, n, nwet, unit
+      logical :: wet
+      call land_columns()
+      onset = var2
+      if( var2 .le. 0.0 ) onset = 1.0e30
+      dep = 0.0
+      call ground_discharge(ni, nj, dx, dy, dz1(1), dt, onset, landx(its:ite), ez(:,:,1), rho3(:,:,1), dep(:,:,1),   &
+                            qp, qn, emax, n)
+      nwet = 0
+      do j = 1,nj
+        jj = jts - 1 + j
+        do i = 1,ni
+          ii = its - 1 + i
+          if( landx(ii) .lt. 0.5 ) cycle
+          wet = wqc(ii,1,jj) + wqr(ii,1,jj) + wqi(ii,1,jj) + wqs(ii,1,jj) + wqh(ii,1,jj) .gt. 1.0e-9
+          if( hail ) wet = wet .or. wqhl(ii,1,jj) .gt. 1.0e-9
+          if( wet .and. dep(i,j,1) .ne. 0.0 ) nwet = nwet + 1
+          if( .not. wet ) coredry = max(coredry, abs(ez(i,j,1)))
+        enddo
+      enddo
+      if( var2 .gt. 0.0 ) call to_ions(dep)
+      corpos = corpos + qp
+      corneg = corneg + qn
+      coremax = max(coremax, emax)
+      if( mod(itimestep, 10) .eq. 0 )then
+        call open_log('terluna_ground.txt', unit)
+        write(unit,'(f13.1,i9,2es12.4,2f11.1,2i8)') time0 + dt, itimestep, corpos, corneg, coremax, coredry, n, nwet
+        close(unit)
+        corpos = 0.0d0
+        corneg = 0.0d0
+        coremax = 0.0
+        coredry = 0.0
+      endif
+    end subroutine point_discharge
+
+    subroutine land_columns()
+      ! land and open water along x from terluna_surface.txt, as CM1 reads it (initsfc = 9); land throughout without it
+      real :: x0, x1, xl, lu, t1, t2
+      integer :: unit, nseg, m, i
+      logical :: exists
+      if( allocated(landx) ) return
+      allocate( landx(ims:ime) )
+      landx = 1.0
+      inquire( file='terluna_surface.txt', exist=exists )
+      if( .not. exists ) return
+      open( newunit=unit, file='terluna_surface.txt', status='old', action='read' )
+      read(unit,*) nseg
+      do m = 1,nseg
+        read(unit,*) x0, x1, xl, lu, t1, t2
+        do i = ims,ime
+          if( (i - 0.5)*dx .ge. x0 .and. (i - 0.5)*dx .lt. x1 ) landx(i) = merge(1.0, 0.0, nint(xl) .eq. 1)
+        enddo
+      enddo
+      close(unit)
+      print *,'Terluna: land under ',count(landx(its:ite) .gt. 0.5),' of ',ite-its+1,' columns along x'
+    end subroutine land_columns
+
     subroutine save_ez()
       integer :: i, j, k
       !$omp parallel do default(shared) private(i,j,k)
@@ -688,6 +763,12 @@ contains
       write(unit,'(a)') '# time_s step substep kind x_m y_m z_m e_V_m e_break_V_m e_over_break_max extent_m2 '//    &
                         'regions positive_C negative_C energy_before_J energy_after_J z_low_m z_high_m points nox_mol'
       write(unit,'(a)') '# kind: 1 in cloud, 2 negative and 3 positive charge to ground (branched); 9 cylinders'
+    elseif( name .eq. 'terluna_ground.txt' )then
+      write(unit,'(a)') '# The field at the ground (the lowest level) over land and, where var2 sets its onset (V/m at '//  &
+                        '1.225 kg/m3), point discharge (Standler and Winn 1979; J = a (E**2 - E0**2), 1 nA/m2 at 8 kV/m)'
+      write(unit,'(a)') '# Every ten steps: time_s step positive_C negative_C (given off since the line before) '//      &
+                        'e_ground_max_V_m e_ground_dry_max_V_m (largest field before discharge since then, over all '//  &
+                        'land and where no particles reach the lowest level) columns columns_wet (discharging this step)'
     elseif( name .eq. 'terluna_ice_optics.txt' )then
       write(unit,'(a)') '# Cloud ice reaches the radiation (RRTMG) with its effective radius capped at 140 microns, '//  &
                         'where RRTMG''s ice optics end, as CM1''s Morrison caps it.'
@@ -705,6 +786,9 @@ contains
     ! rows a restart replaces (those after the time the run takes up from) are dropped when the logs are read
     real, intent(in) :: time
     integer :: unit
+    call open_log('terluna_ground.txt', unit)
+    write(unit,'(a,f13.1)') '# run from ', time
+    close(unit)
     call open_log('terluna_flashes.txt', unit)
     write(unit,'(a,f13.1)') '# run from ', time
     close(unit)

@@ -574,7 +574,7 @@ FINE_TEMPLATE = (' &param1\n dx     =  6000.0,\n dy     =  6000.0,\n dtl    =  4
                  ' run_time =  -999.9,\n tapfrq =   10800.0,\n rstfrq =  43200.0,\n /\n'
                  ' &param2\n irst      =  0,\n rstnum    =  1,\n ptype     =  27,\n iptra     =  1,\n npt       =  7,\n'
                  ' pdtra     =  0,\n /\n'
-                 ' &param8\n var3      =   0.0,\n var4      =   5000.0,\n var5      =   6.8,\n var6      =   3.0,\n var7      =   12.0,\n'
+                 ' &param8\n var2      =   0.0,\n var3      =   0.0,\n var4      =   5000.0,\n var5      =   6.8,\n var6      =   3.0,\n var7      =   12.0,\n'
                  ' var8      =   3.0,\n var9      =   0.0,\n var10     =   12000.0,\n var18     =   -90.0,\n'
                  ' var19     =   2551443.0,\n /\n'
                  ' &param14\n diagfrq        =     10800.0,\n /\n')
@@ -637,10 +637,54 @@ def test_a_fine_box_starts_from_the_coarse_run_s_averaged_air_at_its_hour(tmp_pa
     assert c.namelist_value(text, 'param1', 'dx') == '2000.0' and c.namelist_value(text, 'param1', 'dtl') == '13.333'
     assert float(c.namelist_value(text, 'param8', 'var18')) == pytest.approx(hour, abs=1e-4)
     assert c.namelist_value(text, 'param1', 'tapfrq') == '900.0' and c.namelist_value(text, 'param8', 'var5') == '6.8'
-    assert c.namelist_value(text, 'param1', 'timax') == str(round(2.0 * 86400.0))
+    assert c.namelist_value(text, 'param1', 'timax') == str(round(4.0 * 86400.0))
     assert (case / 'lsnudge_0001.dat').read_text() == 'lsnudge_0001.dat' and (case / 'cm1.exe').is_symlink()
     record = json.loads((case / 'case.json').read_text())
     assert record['grid']['dx_m'] == pytest.approx(2000.0) and record['grid']['length_m'] == pytest.approx(4000.0)
     assert record['initial']['snapshot'] == 61 and record['initial']['day'] == 7.5
     assert record['configuration']['start_hour_angle_deg'] == pytest.approx(hour, abs=1e-4)
     assert record['build']['executable_sha256'] == 'fine' and record['site'] == dict(ring='ring_a')
+
+
+def test_a_rerun_from_a_restart_takes_the_run_s_inputs_and_restart_and_its_own_electricity(tmp_path, monkeypatch):
+    monkeypatch.setattr(c, 'RUNS', tmp_path / 'runs')
+    monkeypatch.setattr(c, 'CM1_HOME', tmp_path / 'cm1')
+    tree = tmp_path / 'tree'
+    (tree / 'run').mkdir(parents=True)
+    for name in ('RRTMG_LW_DATA', 'RRTMG_SW_DATA'):
+        (tree / 'run' / name).write_text(name)
+    monkeypatch.setattr(c, 'fetch', lambda: tree)
+    build = tmp_path / 'cm1' / 'build' / 'moon_omp_elec'
+    build.mkdir(parents=True)
+    (build / 'cm1.exe').write_text('exe')
+    (build / 'build.json').write_text(json.dumps(dict(label='moon_omp_elec', executable_sha256='rerun')))
+    source = tmp_path / 'runs' / 'coarse'
+    coarse_run(source)
+    for part in 'isuvwx':
+        (source / f'cm1rst_t000015_{part}.dat').write_text(part)
+    (source / 'progress.json').write_text(json.dumps(dict(segments=[
+        dict(segment=7, model_s=604800.0, executable='first'), dict(segment=8, model_s=691200.0, executable='second')])))
+    monkeypatch.setitem(c.CASES, 'again', dict(c.CASES['box_0e_elec_uncapped'],
+                                               restart_from=dict(case='coarse', day=7.0)))
+    with pytest.raises(RuntimeError, match='no restart at day 7.0'):
+        c.setup('again')
+    monkeypatch.setitem(c.CASES, 'again', dict(c.CASES['box_0e_elec_uncapped_corona'],
+                                               restart_from=dict(case='coarse', day=7.5)))
+    with pytest.raises(RuntimeError, match='vertical field'):
+        c.setup('again')
+    (source / 'terluna_ez_648000.bin').write_text('ez')
+    case = c.setup('again')
+    assert all((case / f'cm1rst_t000015_{part}.dat').read_text() == part for part in 'isuvwx')
+    assert (case / 'terluna_ez_648000.bin').read_text() == 'ez' and (case / 'cm1.exe').is_symlink()
+    assert (case / 'lsnudge_0001.dat').read_text() == 'lsnudge_0001.dat' and (case / 'cm1out_s.ctl').exists()
+    text = (case / 'namelist.template').read_text()
+    assert c.namelist_value(text, 'param8', 'var8') == '4.0' and c.namelist_value(text, 'param8', 'var2') == '3000.0'
+    assert c.namelist_value(text, 'param1', 'dx') == '6000.0'                  # the run's own grid
+    progress = json.loads((case / 'progress.json').read_text())
+    assert progress['segments'] == [] and progress['start_s'] == 648000.0
+    record = json.loads((case / 'case.json').read_text())
+    assert record['restart_from'] == dict(case='coarse', day=7.5, restart=15, model_s=648000.0, made_by='second')
+    assert record['electricity']['corona_v_m'] == 3000.0 and record['build']['executable_sha256'] == 'rerun'
+    assert c.status('again').startswith('again: 7.50 of 14.50 days')
+    with pytest.raises(RuntimeError, match='has been set up'):
+        c.setup('again')

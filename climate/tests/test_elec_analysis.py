@@ -53,6 +53,18 @@ def test_the_ice_above_the_radiation_s_cap_is_summed_by_mass(tmp_path):
     assert ea.ice_cap_summary(ea.read_log(tmp_path / 'missing.txt', ea.ICE_COLUMNS)) is None
 
 
+def test_the_field_at_the_ground_and_its_point_discharge_are_read_by_interval(tmp_path):
+    log = tmp_path / 'terluna_ground.txt'
+    log.write_text('# header\n# run from 0.0\n'
+                   '      400.0       10  2.0000E+00 -1.0000E+00    12000.0     6000.0      30       4\n'
+                   '      800.0       20  5.0000E+00  0.0000E+00     4000.0     3000.0       2       0\n')
+    s = ea.ground_summary(ea.read_log(log, ea.GROUND_COLUMNS))
+    assert s['positive_c'] == pytest.approx(7.0) and s['negative_c'] == pytest.approx(-1.0) and s['columns_max'] == 30
+    assert s['e_ground_max_kv_m'] == pytest.approx(12.0) and s['e_ground_median_kv_m'] == pytest.approx(8.0)
+    assert s['e_ground_dry_max_kv_m'] == pytest.approx(6.0) and s['columns_wet_max'] == 4
+    assert ea.ground_summary(ea.read_log(tmp_path / 'missing.txt', ea.GROUND_COLUMNS)) is None
+
+
 def test_charging_totals_go_to_the_step_whose_time_line_follows_them(tmp_path):
     block = ('Integrated pos/neg charging rates:\n'
              'ctswin,ctswip = -1.00000E-02,  2.00000E-02\n'

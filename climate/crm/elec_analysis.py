@@ -43,6 +43,11 @@ FIELD_COLUMNS = ('time_s', 'step', 'e_max_v_m', 'x_m', 'y_m', 'z_m', 'positive_c
 KINDS = {1: 'in_cloud', 2: 'negative_to_ground', 3: 'positive_to_ground', 9: 'cylinders'}
 # the cloud ice the radiation reads with its size capped at 140 microns (terluna_ice_optics.txt, runs with radiation)
 ICE_COLUMNS = ('time_s', 'step', 'ice_kg', 'ice_above_140um_kg', 'mean_radius_above_um', 'max_radius_um', 'cells_above')
+# the field at the ground and point discharge (terluna_ground.txt): the charge the ground's points gave off since the
+# line before (where a case turns point discharge on), the largest field at the ground before discharge since then
+# over all land and where no particles reach the lowest level, and the columns discharging, all and wet
+GROUND_COLUMNS = ('time_s', 'step', 'positive_c', 'negative_c', 'e_ground_max_v_m', 'e_ground_dry_max_v_m',
+                  'columns', 'columns_wet')
 # WRF-ELEC's charging totals (module_mp_nssl_2mom.F, its driver): negative and positive parts of the domain's charging
 # rate, C/s, by the collisions that separate it
 CHARGING = {'ctghi': 'graupel and hail with cloud ice', 'ctghs': 'graupel and hail with snow',
@@ -59,7 +64,8 @@ EVIDENCE = ('CM1 r22.0 with WRF-ELEC\'s NSSL two-moment microphysics (MicroTed/w
             'populations; branched channels run on the model grid and neutralize the charge where they reach; the '
             'ground-strike rule, the 50-MV potential and 10-kV/m field a ground flash needs at its start and the '
             'nitrogen oxide yield are WRF-ELEC\'s calibrations for Earth; nothing conducts charge away except where a '
-            'case turns on leakage.')
+            'case turns on leakage, and the ground gives off ions only where a case turns on point discharge '
+            '(Standler and Winn\'s 1 nA/m2 at 8 kV/m over Earth\'s vegetation, its onset scaled by density).')
 READING_RULE = ('Times are model seconds from the start. Kinds: 1 in cloud, 2 negative and 3 positive charge to ground '
                 '(branched flashes), 9 a call of the cylindrical scheme, whose regions are the separate areas one call '
                 'takes. A flash\'s positive and negative charge are what it neutralized; a ground flash neutralizes '
@@ -207,6 +213,21 @@ def ice_cap_summary(ice: dict) -> dict | None:
                     float(np.sum(above * ice['mean_radius_above_um']) / above.sum() / 140.0) if above.sum() > 0 else None))
 
 
+def ground_summary(g: dict) -> dict | None:
+    """The field at the ground over land, before any point discharge: largest and median over the logged intervals,
+    over all land and where no particles reach the lowest level; and the charge the ground's points gave off of each
+    sign, in all and at most in one logged interval, with the columns discharging (all and wet) at most."""
+    if not g['time_s'].size:
+        return None
+    return dict(rows=int(g['time_s'].size), e_ground_max_kv_m=float(g['e_ground_max_v_m'].max() / 1e3),
+                e_ground_median_kv_m=float(np.median(g['e_ground_max_v_m']) / 1e3),
+                e_ground_dry_max_kv_m=float(g['e_ground_dry_max_v_m'].max() / 1e3),
+                e_ground_dry_median_kv_m=float(np.median(g['e_ground_dry_max_v_m']) / 1e3),
+                positive_c=float(g['positive_c'].sum()), negative_c=float(g['negative_c'].sum()),
+                positive_c_max=float(g['positive_c'].max()), negative_c_min=float(g['negative_c'].min()),
+                columns_max=int(g['columns'].max()), columns_wet_max=int(g['columns_wet'].max()))
+
+
 def flash_summary(f: dict, edges: np.ndarray) -> dict:
     """Flashes of one kind: how many and when, the charge each neutralized, the energy it released, where it started
     and how far its channels reached, and the nitrogen oxides it made."""
@@ -238,6 +259,7 @@ def analyse(name: str) -> dict:
     flashes = read_log(case / 'terluna_flashes.txt', FLASH_COLUMNS)
     field = read_log(case / 'terluna_field.txt', FIELD_COLUMNS)
     ice = read_log(case / 'terluna_ice_optics.txt', ICE_COLUMNS)
+    ground = read_log(case / 'terluna_ground.txt', GROUND_COLUMNS)
     rates = charging(case)
     end = float(max(field['time_s'].max() if field['time_s'].size else 0.0,
                     rates['time_s'].max() if rates['time_s'].size else 0.0))
@@ -295,7 +317,8 @@ def analyse(name: str) -> dict:
         producer=dict(domain='climate', files={'crm/elec_analysis.py': hashlib.sha256(
             Path(__file__).read_bytes()).hexdigest()[:16]}),
         evidence=EVIDENCE, reading_rule=READING_RULE, end_s=end, bin_s=BIN_S,
-        lightning=lightning, field=fields, charging=separated, structure=structures, ice_cap=ice_cap_summary(ice))
+        lightning=lightning, field=fields, charging=separated, structure=structures, ice_cap=ice_cap_summary(ice),
+        ground=ground_summary(ground))
 
 
 def against(name: str, other: str) -> dict:

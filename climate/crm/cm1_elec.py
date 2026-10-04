@@ -117,19 +117,24 @@ TAKAHASHI = REPO / 'atmosphere' / 'electricity' / 'inputs' / 'takahashi.txt'
 
 # A case's electricity (its 'elec' entry overrides these): WRF-ELEC's defaults of non-inductive (Saunders and Peck with
 # Brooks's critical rime accretion rate) and inductive charging, its branched lightning (lightning 3; 1 for its
-# cylinders, 2 and 4 for those two with the breakdown field unbounded), its breakdown field and its 0.75-s sub-step
+# cylinders, 2 and 4 for those two without the breakdown field's 180-kV/m cap), its breakdown field and its 0.75-s sub-step
 # (substep_s 0), its ground-strike rule (ground_m 0: a downward channel reaching air warmer than -7 C), no leakage, and
 # the NSSL scheme with hail, and no screening layers (screen 1 for WRF-ELEC's, with Earth's conductivity; 2 with the
 # conductivity below). Leakage and screening take the Moon's conductivity at solar minimum, for 100 aerosol particles
-# per cm3 in clear air and 0.1 g/m3 of cloud water in cloud (atmosphere/electricity/conductivity.py).
+# per cm3 in clear air and 0.1 g/m3 of cloud water in cloud (atmosphere/electricity/conductivity.py). Point discharge
+# from the ground, which WRF-ELEC does not have, is off (corona_v_m 0); otherwise it is its onset field at 1.225 kg/m3
+# (Standler and Winn 1979: 3000 over dense vegetation, 5000 on a barren ridge).
 SETTINGS = dict(ipelec=3, isaund=12, lightning=3, leakage=0, radius_m=12000.0, hail=True, substep_s=0.0, ground_m=0.0,
-                screen=0, conductivity=dict(sun='solar_minimum', clear_air='100_per_cm3', cloud='0.1_g_m3'))
+                screen=0, conductivity=dict(sun='solar_minimum', clear_air='100_per_cm3', cloud='0.1_g_m3'),
+                corona_v_m=0.0)
 # The lunar boxes. WRF-ELEC's 0.75-s sub-step lets graupel settle through about 1 % of the 500-m layers of its supercell
 # in each; in the boxes' charging zone (25-35 km) the layers are 2 km deep and graupel falls at 0.44 of Earth's speed,
 # so 0.75 x 4 / 0.44 = 6.8 s keeps that share. WRF-ELEC's ground-strike rule stands about 5 km above Earth's ground; on
 # the Moon air warmer than -7 C lies about 27 km up, so the boxes count a downward channel that comes within 5 km of
-# the ground.
-LUNAR = dict(substep_s=6.8, ground_m=5000.0)
+# the ground. WRF-ELEC caps the breakdown field at 180 kV/m, which on Earth applies only below about 4.5 km, beneath
+# where flashes start; the denser lunar air would put it below about 36 km, where lunar flashes start, so the boxes
+# lift it (lightning 4; the author's decision, 2026-10-04).
+LUNAR = dict(substep_s=6.8, ground_m=5000.0, lightning=4)
 
 
 def sources(home: Path) -> dict:
@@ -148,8 +153,8 @@ def namelist_settings(elec: dict) -> dict:
     CM1's passive tracers without its positivity limiter, and the settings terluna_elec.F reads."""
     e = dict(SETTINGS, **elec)
     return {'param2': dict(ptype=27 if e['hail'] else 26, iptra=1, npt=7 if e['hail'] else 6, pdtra=0),
-            'param8': dict(var3=float(e['screen']), var4=float(e['ground_m']), var5=float(e['substep_s']),
-                           var6=float(e['ipelec']),
+            'param8': dict(var2=float(e['corona_v_m']), var3=float(e['screen']), var4=float(e['ground_m']),
+                           var5=float(e['substep_s']), var6=float(e['ipelec']),
                            var7=float(e['isaund']), var8=float(e['lightning']), var9=float(e['leakage']),
                            var10=float(e['radius_m']))}
 

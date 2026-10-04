@@ -35,10 +35,7 @@ program check
   call potential(ni, nj, nk, dx, dy, zh1, zf1, q, phi)
   call field(ni, nj, nk, dx, dy, zh1, zf1, phi, ex, ey, ez, emag)
   w = energy(ni, nj, nk, dx, dy, zf1, q, phi)
-  if( option .eq. 2 )then                     ! unbounded
-    terluna_ebrk_lo = 0.0
-    terluna_ebrk_hi = 1.0e30
-  endif
+  if( option .eq. 2 ) terluna_ebrk_hi = 1.0e30   ! the cap lifted, as lightning 2 and 4 set it
   call breakdown_field(ni, nj, nk, rho, ebrk)
   call discharge(ni, nj, nk, dx, dy, zf1, rho, emag, ebrk, radius, q, dep, ninit, ncol, nregion, qpos, qneg)
   open(newunit=u, file='out.bin', access='stream', form='unformatted', status='replace')
@@ -154,6 +151,18 @@ def test_a_charged_layer_between_grounded_plates_has_its_exact_potential(program
                               s * (top - zc) / top * zh1 - q0 / EPS0 * (zh1 - z1) ** 2 / 2.0))
     assert np.abs(out['phi'][2, 2] - exact).max() < 1.0e-3 * exact.max()
     assert np.abs(out['ex']).max() < 1.0e-6 * np.abs(out['ez']).max()
+
+
+def test_the_breakdown_field_scales_with_density_and_the_lunar_setting_lifts_its_cap(program):
+    zf1 = np.linspace(0.0, 3000.0, 4)
+    zh1 = 0.5 * (zf1[:-1] + zf1[1:])
+    q = np.zeros((4, 4, 3))
+    rho = np.ones((4, 4, 3)) * np.array([1.39, 0.6, 0.1])           # the lunar ground, 50 km up, far above
+    scaled = 284.0e3 * np.array([1.39, 0.6, 0.1]) / 1.225
+    capped = run(program, q, zh1, zf1, 1000.0, 1000.0, rho=rho)['ebrk'][1, 2]
+    lifted = run(program, q, zh1, zf1, 1000.0, 1000.0, rho=rho, option=2)['ebrk'][1, 2]
+    assert capped == pytest.approx([180.0e3, scaled[1], 50.0e3], rel=1.0e-5)
+    assert lifted == pytest.approx([scaled[0], scaled[1], 50.0e3], rel=1.0e-5)
 
 
 def light1d_shares(q, columns, dv, thr=0.1e-9, frac=0.3):

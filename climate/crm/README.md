@@ -1214,6 +1214,40 @@ files in [fortran/](fortran/) and two of WRF-ELEC's complete it:
   Its vertical differences take the distances between CM1's scalar levels,
   where WRF-ELEC takes the depth of the layer below; the two agree on an even
   grid.
+- The same file holds point discharge from the ground (`ground_discharge`),
+  which WRF-ELEC does not have, off unless a case asks for it (`corona_v_m`,
+  `var2`). Under a storm, plants and other grounded points go into corona once
+  the field at the ground passes an onset, about 3 kV/m over dense vegetation
+  and 5 kV/m on a barren ridge, and the ions they give off hold the field at the
+  ground near 5–12 kV/m while it stands several times stronger a few hundred
+  metres up (Standler and Winn 1979; Soula and Chauzy 1991). Once a step, over
+  land, the field at the lowest level drives a current J = a(E² − E₀²) up from
+  the ground, with a set by Standler and Winn's 1 nA/m² at 8 kV/m over a
+  3-kV/m onset and E₀ scaled by the density of the air at the ground. The charge
+  takes the sign of the ground's induced charge, joins the small ions' charge in
+  the lowest layer and moves with the air from there; the small ions do not
+  drift in the field in this scheme. A step gives off at most the charge that
+  brings the field at the ground back to the onset, so where a storm charges
+  faster than the points discharge, the field there settles near the onset, as
+  measured. WRF-ELEC hands the small ions' charge in a cell at once to any
+  cloud or precipitation particles there, so where rain or cloud reaches the
+  lowest level the ground's ions go into it, and rain carries them back down.
+  In a 10-kV/m field raindrops would take up such ions within about a minute,
+  while the ions climb about 100 m, so the two are alike there; the scheme's
+  ions only rise on the air's motion, so it may underplay screening in calm air.
+  Every electrified run logs the field at the ground every ten steps
+  (`terluna_ground.txt`): its largest value over land, and where no particles
+  reach the lowest level, with the charge the ground gave off and the columns
+  discharging, wet and dry. Without point discharge the field at the ground
+  under the boxes' storms reaches 100–220 kV/m. In a 30-minute check from the
+  coarse box's day-10.5 restart the ground gave off about 500 C every eight
+  minutes, mostly negative, from 35–41 of the 4,096 columns at a time, at a
+  mean field there of about 7–8 kV/m by the charge given off. Of those columns
+  33–38 had cloud or rain at the lowest level, and there the strongest field at
+  the ground stayed at 35–40 kV/m; where no particles reached the lowest level
+  it was 3.6–3.8 kV/m, at the onset. Under rain this scheme screens the ground
+  less than point discharge would, since its ions neither climb in the field
+  nor wait to be taken up.
 
 Lunar gravity enters the scheme as it enters Morrison's: the module's gravity is
 the build's, the drag-law fall speeds (graupel and hail under drag laws, cloud
@@ -1239,16 +1273,18 @@ the height that rule stands at on Earth. The 50-MV and 10-kV/m conditions for a
 ground strike, the 0.9 and 0.8 fractions of breakdown, the 200-V/m internal
 field and the nitrogen oxide yield stay as WRF-ELEC calibrates them for Earth.
 
-The breakdown field's bounds also stay WRF-ELEC's, and the upper one reaches
-into the lunar storms. On Earth the 180-kV/m cap applies below about 4.5 km,
-beneath where flashes start. The lunar air is dense enough for it to apply below
-about 36 km: there it sets the breakdown field below the density scaling by 4 %
-at 34 km, 10 % at 30 km, 23 % at 20 km and 44 % at the ground (180 against 322
-kV/m). In `box_0e_elec`'s first lunar day 84 of its 162 flashes started at
-32–34 km, where the cap lowered the field a flash starts at by 4–7 %, and 152
-ran channels below 36 km, where it lowers the field a channel stops at by
-10–19 % at their lower ends (24–30 km). The 50-kV/m floor applies only above
-about 100 km in the lunar air.
+WRF-ELEC also caps the breakdown field at 180 kV/m. On Earth the cap applies
+below about 4.5 km, beneath where flashes start. The lunar air is dense enough
+for it to apply below about 36 km: there it sets the breakdown field below the
+density scaling by 4 % at 34 km, 10 % at 30 km, 23 % at 20 km and 44 % at the
+ground (180 against 322 kV/m). In `box_0e_elec`'s first lunar day 84 of its 162
+flashes started at 32–34 km, where the cap lowered the field a flash starts at
+by 4–7 %, and 152 ran channels below 36 km, where it lowers the field a channel
+stops at by 10–19 % at their lower ends (24–30 km). The lunar boxes therefore
+lift the cap (`lightning` 4; the author's decision, 2026-10-04), keeping the
+density scaling at every height. WRF-ELEC's 50-kV/m floor stays: it applies
+only above about 100 km in the lunar air, far above the clouds, near the model
+top where the potential is held at zero.
 
 Three faults in the first version were found and fixed. It discharged once a
 6-second step, after the step's charging and all its sedimentation; WRF-ELEC
@@ -1464,6 +1500,14 @@ handles itself, cutting its mass by (130 µm / size)². The microphysics and the
 electricity use the scheme's own sizes and do not see the cap. The box resumed
 from its day-6 restart with this build.
 
+From day 18, in its first lunar night, the box runs with the breakdown field's
+cap lifted (`lightning` 4, executable `d2643310f7275844`), so its second lunar
+day's storms have the density scaling at every height. A flash is the only
+thing the cap changes, and none strikes between the first lunar day's last
+(day 14.3) and the second's storms. Its first lunar day ran under the cap; those
+storms run again without it from the day-10.5 restart (below). The box has no
+point discharge from the ground on either day.
+
 ```sh
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_elec
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_0e_elec --threads 8 --hours 30    # about half a day
@@ -1506,9 +1550,40 @@ is also small for these storms: lunar storms stand four to five times taller
 than Earth's, so 128 km is like a 30-km box on Earth, room for one or two storms
 at a time.
 
+At the author's direction it runs on to four model days, through day 14.75 and
+the coarse box's busiest lightning: after day 12.75 the coarse box had 11
+flashing storms and 106 of its first lunar day's 162 flashes. Its storms are
+mature by then, so the whole extension counts. At the coarse box's rate per unit
+area the extension has about a three-in-four chance of a storm that flashes and
+one in four of one of the large ones (17–46 flashes). It runs from its day-2
+restart with the cap lifted, as the coarse box now does. Its first two days hold
+under either setting, since they made no flash.
+
 ```sh
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_elec_fine    # after setting fine_from['day']
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_0e_elec_fine --threads 4 --hours 24
+```
+
+### The first lunar day again
+
+A case with `restart_from` runs on from another case's restart: it takes that
+case's inputs, restart files and kept vertical field, and its namelist with its
+own electricity, and its progress starts at the restart (`setup_restart`).
+`box_0e_elec_uncapped` runs `box_0e_elec`'s first lunar day's storms again,
+days 10.5–14.5 from the day-10.5 restart, before the first flash, with the
+breakdown field's cap lifted, beside the first run under it.
+`box_0e_elec_uncapped_corona` adds point discharge from the ground, with an
+onset of 3 kV/m at 1.225 kg/m³ (dense vegetation; 3.4 kV/m at the box's 1.39
+kg/m³). The two share an executable, so the second differs from the first only
+in the ground's discharge. They show what point discharge changes: the field at
+the ground and how much charge the ground gives off under storms, and whether
+the space charge alters the lightning above. Later runs take it up once that is
+known. Each takes about three hours on 4 threads, after the fine box's
+extension, from 2026-10-04.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_elec_uncapped    # and box_0e_elec_uncapped_corona
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_0e_elec_uncapped --threads 4 --hours 8
 ```
 
 ## The gravity pair

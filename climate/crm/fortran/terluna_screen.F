@@ -14,11 +14,14 @@
 ! with ds the cube root of the cell's volume. It goes to the small ions, capped so that the net charge there reaches at
 ! most 0.25 nC/m3 of either sign. The vertical differences take the distances between CM1's scalar levels; WRF-ELEC
 ! takes the depth of the layer below for all of them, the same on an even grid.
+!
+! It also holds the ground's own screening layer, point discharge from the ground (ground_discharge), which WRF-ELEC
+! does not have.
 !-----------------------------------------------------------------------------------------------------------------------
 module terluna_screen
   implicit none
   private
-  public :: screen, earth_air_conductivity
+  public :: screen, earth_air_conductivity, ground_discharge
 
   real, parameter :: qctol = 1.0e-5, qctol2 = 1.0e-6, fin1 = 1.5, fin2 = 2.25
   real, parameter :: epascl = 5.0, sc_thresh = 0.25e-9, eps = 8.8592e-12   ! WRF-ELEC's eperao
@@ -199,5 +202,50 @@ contains
     end function jj
 
   end subroutine screen
+
+  subroutine ground_discharge(ni, nj, dx, dy, dz, dt, onset, land, ez, rho, dep, qpos, qneg, emax, n)
+    ! Point discharge from the ground (Standler and Winn 1979), the screening layer the ground itself gives off: where
+    ! the field at the ground passes the onset field, plants and other grounded points give off ions of the ground's
+    ! induced charge, the sign of the upward field ez, at J = a (E**2 - E0**2) per unit of ground, a set by their
+    ! 1 nA/m2 at 8 kV/m over an onset of 3 kV/m. The onset (given at 1.225 kg/m3) scales with the density of the air at
+    ! the ground, and open water (land 0) gives off none. A step of dt gives off at most the charge that brings the
+    ! field at the ground back to the onset, so where a storm charges faster than the points discharge the field there
+    ! settles near the onset, as measured. dep returns the charge density (C/m3) added to the lowest layer (depth dz),
+    ! qpos and qneg the charge given off of each sign (C), emax the largest field at the ground over land beforehand
+    ! and n the columns discharging.
+    integer, intent(in) :: ni, nj
+    real, intent(in) :: dx, dy, dz, dt, onset
+    real, dimension(ni), intent(in) :: land
+    real, dimension(ni,nj), intent(in) :: ez, rho
+    real, dimension(ni,nj), intent(out) :: dep
+    double precision, intent(out) :: qpos, qneg
+    real, intent(out) :: emax
+    integer, intent(out) :: n
+    real, parameter :: acor = 1.0e-9/(8.0e3**2 - 3.0e3**2)       ! A/V2
+    real :: e, e0, s
+    integer :: i, j
+    dep = 0.0
+    qpos = 0.0d0
+    qneg = 0.0d0
+    emax = 0.0
+    n = 0
+    do j = 1,nj
+      do i = 1,ni
+        if( land(i) .lt. 0.5 ) cycle
+        e = abs(ez(i,j))
+        emax = max(emax, e)
+        e0 = onset*rho(i,j)/1.225
+        if( e .le. e0 ) cycle
+        s = min( acor*(e*e - e0*e0)*dt, eps*(e - e0) )              ! C/m2 given off
+        dep(i,j) = sign(s, ez(i,j))/dz
+        if( ez(i,j) .gt. 0.0 )then
+          qpos = qpos + dble(s)*dx*dy
+        else
+          qneg = qneg - dble(s)*dx*dy
+        endif
+        n = n + 1
+      enddo
+    enddo
+  end subroutine ground_discharge
 
 end module terluna_screen

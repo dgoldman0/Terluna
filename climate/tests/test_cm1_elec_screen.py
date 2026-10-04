@@ -125,3 +125,78 @@ def test_edges_along_x_gather_charge_across_the_domain_s_wrap(program):
     assert np.allclose(dep[3, :, 10], expected(50.0, sa[10]), rtol=1e-4)
     assert np.allclose(dep[13, :, 10], expected(-50.0, sa[10]), rtol=1e-4)
     assert not np.any(dep[[14, 15, 0, 1, 2], :, 10])
+
+
+GROUND = """
+program ground
+  use terluna_screen
+  implicit none
+  integer :: ni, nj, u, n
+  real :: dx, dy, dz, dt, onset, emax
+  real, allocatable :: land(:), ez(:,:), rho(:,:), dep(:,:)
+  double precision :: qpos, qneg
+  open(newunit=u, file='in.bin', access='stream', form='unformatted', status='old')
+  read(u) ni, nj, dx, dy, dz, dt, onset
+  allocate( land(ni), ez(ni,nj), rho(ni,nj), dep(ni,nj) )
+  read(u) land, ez, rho
+  close(u)
+  call ground_discharge(ni, nj, dx, dy, dz, dt, onset, land, ez, rho, dep, qpos, qneg, emax, n)
+  open(newunit=u, file='out.bin', access='stream', form='unformatted', status='replace')
+  write(u) dep, qpos, qneg, emax, n
+  close(u)
+end program ground
+"""
+
+
+@pytest.fixture(scope='module')
+def ground(tmp_path_factory):
+    if shutil.which('gfortran') is None:
+        pytest.skip('gfortran is missing')
+    folder = tmp_path_factory.mktemp('ground')
+    (folder / 'ground.f90').write_text(GROUND)
+    subprocess.run(['gfortran', '-O2', '-ffree-form', '-ffree-line-length-none', '-cpp', str(HERE / 'terluna_screen.F'),
+                    'ground.f90', '-o', 'ground'], cwd=folder, check=True, capture_output=True)
+    return folder
+
+
+def discharge(folder, land, ez, rho, dt=10.0, onset=3000.0, dx=2000.0, dz=100.0):
+    ni, nj = ez.shape
+    with open(folder / 'in.bin', 'wb') as out:
+        np.array([ni, nj], np.int32).tofile(out)
+        np.array([dx, dx, dz, dt, onset], np.float32).tofile(out)
+        for a in (land, ez, rho):
+            np.asarray(a, np.float32).ravel(order='F').tofile(out)
+    subprocess.run([str(folder / 'ground')], cwd=folder, check=True, capture_output=True)
+    raw = (folder / 'out.bin').read_bytes()
+    dep = np.frombuffer(raw[:4 * ni * nj], np.float32).reshape(nj, ni).T
+    qpos, qneg = np.frombuffer(raw[4 * ni * nj:4 * ni * nj + 16], np.float64)
+    emax = np.frombuffer(raw[4 * ni * nj + 16:4 * ni * nj + 20], np.float32)[0]
+    n = np.frombuffer(raw[4 * ni * nj + 20:], np.int32)[0]
+    return dep, qpos, qneg, emax, n
+
+
+A_COR = 1.0e-9 / (8.0e3 ** 2 - 3.0e3 ** 2)     # Standler and Winn's 1 nA/m2 at 8 kV/m over a 3-kV/m onset
+
+
+def test_point_discharge_follows_the_law_until_it_would_undo_the_field_and_skips_water(ground):
+    land = np.array([1.0, 1.0, 1.0, 1.0, 0.0])
+    ez = np.array([[8.0e3, -8.0e3, 2.0e3, 2.0e5, 3.0e5]]).T * np.ones((1, 3))
+    rho = np.full(ez.shape, 1.225)
+    dep, qpos, qneg, emax, n = discharge(ground, land, ez, rho)
+    s_law = 1.0e-9 * 10.0                                          # 1 nA/m2 for 10 s at 8 kV/m
+    assert dep[0] == pytest.approx(s_law / 100.0, rel=1e-4)        # the ground's induced sign: positive under an upward field
+    assert dep[1] == pytest.approx(-s_law / 100.0, rel=1e-4)
+    assert not np.any(dep[2]) and not np.any(dep[4])               # below the onset, and over water
+    s_cap = 8.8592e-12 * (2.0e5 - 3.0e3)                           # the law would give 4e-6 C/m2: held to the field's worth
+    assert A_COR * (2.0e5 ** 2 - 3.0e3 ** 2) * 10.0 > s_cap
+    assert dep[3] == pytest.approx(s_cap / 100.0, rel=1e-4)
+    assert qpos == pytest.approx(3 * (s_law + s_cap) * 2000.0 ** 2, rel=1e-4)
+    assert qneg == pytest.approx(-3 * s_law * 2000.0 ** 2, rel=1e-4)
+    assert emax == pytest.approx(2.0e5) and n == 9                 # the water column's 300 kV/m does not count
+
+
+def test_the_onset_scales_with_the_density_of_the_air_at_the_ground(ground):
+    ez = np.full((2, 2), 3.3e3)
+    lunar = np.full((2, 2), 1.39)                                  # the box's ground: an onset of 3.40 kV/m
+    assert not np.any(discharge(ground, np.ones(2), ez, lunar)[0])
+    assert np.all(discharge(ground, np.ones(2), ez, np.full((2, 2), 1.225))[0] > 0.0)

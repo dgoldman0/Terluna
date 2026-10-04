@@ -1210,13 +1210,25 @@ CASES['box_0e_elec'] = dict(
 # The fine box (stage 2): box_0e_elec's site at a third of its spacing (2.0 km) over a box a third as wide (128 km, the
 # same 64 by 64 columns), started from box_0e_elec's air averaged over its columns and its mean skin temperature at a
 # day of its run a few hours before a stormy window (day 10.75, four hours before box_0e_elec's first flash), under
-# the same Sun, forcing, land and electricity, with output every 15 minutes over two model days. It resolves the storm
-# cells and draws the flashes on a grid three times finer.
+# the same Sun, forcing, land and electricity, with output every 15 minutes. It resolves the storm cells and draws the
+# flashes on a grid three times finer. It ran two model days without a flash and was extended to four (2026-10-04, at
+# the author's direction), through box_0e_elec's busiest lightning (days 12.7-14.3).
 CASES['box_0e_elec_fine'] = dict(
-    CASES['box_0e_elec'], inputs_from=None, fine_from=dict(case='box_0e_elec', day=10.75, refine=3), days=2.0,
+    CASES['box_0e_elec'], inputs_from=None, fine_from=dict(case='box_0e_elec', day=10.75, refine=3), days=4.0,
     output_s=900.0, restart_s=10800.0, segment_s=43200.0,
     purpose=CASES['box_0e_elec']['purpose'] + '; a box a third as wide at a third of the spacing, started from that '
             'run\'s averaged air a few hours before a stormy window')
+# box_0e_elec's first lunar day's storms again (days 10.5-14.5, from its day-10.5 restart, before its first flash at day
+# 10.92), with the breakdown field's 180-kV/m cap lifted (the author's decision, 2026-10-04), beside the first run under
+# the cap; and the same with point discharge from the ground, which the author left to the agent's judgement, its onset
+# Standler and Winn's 3 kV/m over dense vegetation scaled by the density at the ground.
+CASES['box_0e_elec_uncapped'] = dict(
+    CASES['box_0e_elec'], inputs_from=None, restart_from=dict(case='box_0e_elec', day=10.5), days=14.5,
+    purpose=CASES['box_0e_elec']['purpose'] + '; its first lunar day\'s storms again from its day-10.5 restart, with '
+            'the breakdown field\'s 180-kV/m cap lifted')
+CASES['box_0e_elec_uncapped_corona'] = dict(
+    CASES['box_0e_elec_uncapped'], elec=dict(cm1_elec.LUNAR, corona_v_m=3000.0),
+    purpose=CASES['box_0e_elec_uncapped']['purpose'] + ', and point discharge from the ground')
 # The same storm with CM1's own copy of the NSSL scheme and no electricity, to check that WRF-ELEC's copy, run through
 # terluna_elec.F, makes the same storm.
 CASES['supercell_nssl'] = dict(
@@ -1932,6 +1944,71 @@ def setup_fine(name: str, cfg: dict) -> Path:
     return case
 
 
+RESTART_INPUTS = ('input_sounding', 'input_grid_z', 'lsnudge_0001.dat', 'terluna_wls.txt', 'terluna_lsadv.txt',
+                  'terluna_surface.txt', 'LANDUSE.TBL', 'cm1out_s.ctl', 'cm1out_stats.ctl', 'cm1out_metadata.ctl',
+                  'cm1out_metadata.dat')
+
+
+def setup_restart(name: str, cfg: dict) -> Path:
+    """Set up a case that runs on from another case's restart (cfg['restart_from']: the case and the day), so that a
+    window of a run can run again under other settings: the other case's inputs, restart files and kept vertical field,
+    and its namelist with this case's electricity. Its progress starts at the restart, and the runner takes up from
+    there; output and restarts keep the other case's numbering."""
+    fr = cfg['restart_from']
+    source = RUNS / fr['case']
+    src = json.loads((source / 'case.json').read_text())
+    scale = src.get('time_scale', 1.0)
+    restart_s = cfg['restart_s'] * scale
+    start_s = fr['day'] * 86400.0 * scale
+    n = round(start_s / restart_s)
+    files = [source / f'cm1rst_t{n:06d}_{part}.dat' for part in 'isuvwx']
+    if abs(n * restart_s - start_s) > 1.0 or not all(f.exists() for f in files):
+        raise RuntimeError(f"{fr['case']} has no restart at day {fr['day']}")
+    ez = source / f'terluna_ez_{round(n * restart_s)}.bin'
+    if cfg.get('elec') is not None and not ez.exists():
+        raise RuntimeError(f'{ez} is missing: the restart\'s vertical field for the inductive charging')
+    exe = CM1_HOME / 'build' / cfg['build'] / 'cm1.exe'
+    if not exe.exists():
+        raise RuntimeError(f'build {cfg["build"]} first')
+    case = RUNS / name
+    if (case / 'progress.json').exists():
+        raise RuntimeError(f'{case} has been set up; remove it to set up afresh')
+    case.mkdir(parents=True, exist_ok=True)
+    for item in RESTART_INPUTS:
+        if (source / item).exists():
+            shutil.copy2(source / item, case / item)
+    for f in files + ([ez] if ez.exists() else []):
+        shutil.copy2(f, case / f.name)
+    text = (source / 'namelist.template').read_text()
+    electricity = None
+    if cfg.get('elec') is not None:
+        for section, entries in cm1_elec.namelist_settings(cfg['elec']).items():
+            for key, value in entries.items():
+                text = set_namelist(text, section, key, value)
+        text, efiles = cm1_elec.run_files(case, cfg['elec'], text)
+        electricity = dict(cm1_elec.SETTINGS, **cfg['elec'], files=efiles)
+    (case / 'namelist.template').write_text(text)
+    tree = fetch()
+    for link, target in (('cm1.exe', exe), ('RRTMG_LW_DATA', tree / 'run' / 'RRTMG_LW_DATA'),
+                         ('RRTMG_SW_DATA', tree / 'run' / 'RRTMG_SW_DATA')):
+        path = case / link
+        if path.is_symlink() or path.exists():
+            path.unlink()
+        path.symlink_to(target)
+    made = next((s for s in _progress(source)['segments'] if s['model_s'] >= n * restart_s - 1.0), {})
+    digest = lambda p: hashlib.sha256(Path(p).read_bytes()).hexdigest()[:16]
+    record = dict(src, case=name, purpose=cfg['purpose'], inputs_from=None, configuration=dict(cfg),
+                  build=json.loads((exe.parent / 'build.json').read_text()), electricity=electricity,
+                  restart_from=dict(case=fr['case'], day=fr['day'], restart=n, model_s=n * restart_s,
+                                    made_by=made.get('executable')),
+                  runner=digest(__file__),
+                  inputs={p: digest(case / p) for p in RESTART_INPUTS + ('namelist.template',) if (case / p).exists()})
+    (case / 'case.json').write_text(json.dumps(record, indent=1) + '\n')
+    _save_progress(case, dict(segments=[], case=name, start_s=n * restart_s,
+                              start=f"{fr['case']}'s restart {n} (day {fr['day']})"))
+    return case
+
+
 def namelist_value(text: str, section: str, key: str) -> str:
     """One entry of a Fortran namelist held as text, as written."""
     import re
@@ -1987,6 +2064,8 @@ def setup(name: str) -> Path:
     surface segments, land-use table and links to the executable and radiation tables."""
     import numpy as np
     cfg = CASES[name]
+    if cfg.get('restart_from'):
+        return setup_restart(name, cfg)
     if cfg.get('fine_from'):
         return setup_fine(name, cfg)
     if cfg.get('inputs_from'):
@@ -2225,7 +2304,7 @@ def run(name: str, hours: float, threads: int = 8) -> dict:
     executable = hashlib.sha256((case / 'cm1.exe').resolve().read_bytes()).hexdigest()[:16]   # the build each segment ran
     try:
         while True:
-            done = progress['segments'][-1]['model_s'] if progress['segments'] else 0.0
+            done = progress['segments'][-1]['model_s'] if progress['segments'] else progress.get('start_s', 0.0)
             if done >= total - 1.0:
                 break
             if (case / 'STOP').exists():
@@ -2267,10 +2346,11 @@ def status(name: str) -> str:
     progress = _progress(case)
     cfg = CASES[name]
     scale = json.loads((case / 'case.json').read_text()).get('time_scale', 1.0)
-    done = (progress['segments'][-1]['model_s'] if progress['segments'] else 0.0) / scale   # lunar-equivalent
+    start = progress.get('start_s', 0.0)                         # a case run on from another's restart starts there
+    done = (progress['segments'][-1]['model_s'] if progress['segments'] else start) / scale   # lunar-equivalent
     total = case_length_s(cfg, scale) / scale
     wall = sum(s['wall_s'] for s in progress['segments'])
-    rate = done * scale / wall if wall else float('nan')
+    rate = (done * scale - start) / wall if wall else float('nan')
     running = (case / 'run.lock').exists()
     return (f"{name}: {done / 86400:.2f} of {total / 86400:.2f} days ({100 * done / total:.0f}%), "
             f"{wall / 3600:.1f} wall hours, {rate:.0f} model s per wall s; {'running' if running else 'idle'}")
