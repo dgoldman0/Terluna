@@ -37,6 +37,7 @@ Sources:
 | Decision | Source | Status |
 |---|---|---|
 | Practical dawn and dusk each last about five hours, inside the 29.53-day cycle. This replaced an earlier 30-hour figure. At the equator five hours is about 2.54° of solar elevation. | July | Stands; settled on 2026-09-26 against the ensemble plan's nominal 12.5-hour sunset, a design case. It still needs a photometric definition for the actual atmosphere. |
+| How the seas look is studied by day, through the evening, under earthlight and in the dark far-side night, in this order: a lighting calendar of six coasts with a map of where the Earth stands over the seas, the surface's reflection and the water's colour, results by regime, then renderings of four coasts (western Oceanus Procellarum by Russell, the eastern Smythii headland, southern Mare Nubium and a South Pole–Aitken coast). Cloud ice keeps the cloud scheme's own sizes, with 140 µm as a check. | Author, 2026-10-04; [research/studies/sea_appearance](studies/sea_appearance/README.md) | Stands. The calendar also gives the practical dawn and dusk the photometric definition their row awaits. |
 
 ## Atmosphere
 
@@ -100,3 +101,4 @@ The author confirmed these rules on 2026-09-26 and regards them as set, to be re
 | Aerial and gliding life is a major feature of the world. | July | Stands |
 | High-altitude life is sparse: microbes or engineered radiation-hard films. | July | Stands |
 | Long-endurance high-altitude platforms serve farside astronomy and nearside earthshine photometry. | July | Stands |
+| The seas are living: optical studies use stated best guesses with ranges for plankton pigments, dissolved organic matter and bioluminescence, drawn from the biosphere and lunar-cycle ecology work and labelled as design guesses, beside the regolith fines. | Author, 2026-10-04; [research/studies/sea_appearance](studies/sea_appearance/README.md) | Stands |
