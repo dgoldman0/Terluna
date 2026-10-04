@@ -1,0 +1,32 @@
+{
+  "scope": "Source access for a repo-only cloud-twilight mechanism study; not manuscript source admission or empirical validation.",
+  "accessed": "2026-10-03",
+  "sources": [
+    {
+      "id": "pbrt_transmittance",
+      "citation": "Pharr, Jakob and Humphreys, Physically Based Rendering, fourth edition, section 11.2, Transmittance.",
+      "url": "https://pbr-book.org/4ed/Volume_Scattering/Transmittance",
+      "access": "Author-maintained section inspected, particularly beam extinction, reciprocity and composition.",
+      "use": "Beer-Lambert path attenuation. In-scattering is outside this diagnostic; an attenuated source factor is not a complete rendered radiance."
+    },
+    {
+      "id": "bruneton",
+      "citation": "Bruneton, Precomputed Atmospheric Scattering: a New Implementation, annotated functions.glsl.",
+      "url": "https://ebruneton.github.io/precomputed_atmospheric_scattering/atmosphere/functions.glsl.html",
+      "access": "Author-maintained implementation and transmittance description inspected; existing repo source and license records retained.",
+      "use": "Spherical ray/ground geometry and separation of transmittance from scattering. New shell intersections are independently implemented."
+    },
+    {
+      "id": "inherited_optical_inputs",
+      "paths": ["illumination/sky/SOURCES.md", "illumination/sky/LICENSES.txt", "illumination/sky/atmospheres.py", "illumination/sky/colour_matching.py", "atmosphere/radiative_convective/spectroscopy.py"],
+      "access": "Repository code and source records inspected. Upstream ASTM, ozone and Bodhaine datasets/papers were not newly retrieved.",
+      "use": "Existing 10-nm solar/ozone arrays, Wyman photopic fit, and current-column Rayleigh cross sections. No new external spectral data required."
+    },
+    {
+      "id": "corrected_cloud_products",
+      "paths": ["climate/results/crm/ring_ring_equator.json", "climate/results/crm/ring_ring_equator_fields.npz", "climate/crm/ring_analysis.py"],
+      "access": "Committed corrected A28_dim5_moon equatorial ring summary and compact fields inspected; raw CM1 snapshots not available here.",
+      "use": "Storm-top statistics, sampled storm-track lifetimes, and cloud occurrence by height/local time. The daytime heavy-rain slice is not repurposed as a twilight event."
+    }
+  ]
+}

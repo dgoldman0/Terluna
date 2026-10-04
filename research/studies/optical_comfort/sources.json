@@ -1,0 +1,61 @@
+{
+  "scope": "Methods used in a conditional optical screen. Source access is recorded individually; manuscript source admission remains separate.",
+  "accessed": "2026-10-03",
+  "sources": [
+    {
+      "id": "cie146",
+      "citation": "CIE (2002), CIE Equations for Disability Glare, CIE 146:2002, in CIE 146/147:2002.",
+      "url": "https://www.cie.co.at/publications/cie-collection-glare-2002",
+      "access": "Official public description read; full paid report not accessed.",
+      "use": "Eye-plane illuminance and angle conventions; age-adjusted formula valid strictly between 1 and 30 degrees. Broader angular formulas are not implemented."
+    },
+    {
+      "id": "vos2003",
+      "citation": "Vos, J. J. (2003), On the cause of disability glare and its dependence on glare angle, age and ocular pigmentation, Clinical and Experimental Optometry 86(6), 363-370.",
+      "doi": "10.1111/j.1444-0938.2003.tb03080.x",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/14632612/",
+      "access": "Author's abstract read through PubMed; equation and validity range are explicitly given there. Full paper not read.",
+      "use": "Lveil/Eeye = 10 [1 + (age/70)^4] / theta_deg^2; substantial individual variation."
+    },
+    {
+      "id": "cie252",
+      "citation": "CIE (2024), Assessment of Discomfort Glare from Daylight in Buildings, CIE 252:2024.",
+      "doi": "10.25039/TR.252.2024",
+      "url": "https://www.cie.co.at/publications/assessment-discomfort-glare-daylight-buildings",
+      "access": "Official public description read; full paid report not accessed.",
+      "use": "Separate contrast and total-amount discomfort effects; respect each metric's validation domain. No outdoor discomfort threshold is taken from this report."
+    },
+    {
+      "id": "wienold2006",
+      "citation": "Wienold, J. and Christoffersen, J. (2006), Evaluation methods and development of a new glare prediction model for daylight environments with the use of CCD cameras, Energy and Buildings 38, 743-757.",
+      "doi": "10.1016/j.enbuild.2006.03.017",
+      "url": "https://vbn.aau.dk/en/publications/evaluation-methods-and-development-of-a-new-glare-prediction-mode/",
+      "access": "Author institution record and original-paper PDF sections on the fitted equation and validity inspected; full-source editorial review outstanding.",
+      "pdf_read_url": "https://discourse.ladybug.tools/uploads/short-url/x2nKmOIasXBZYaB1AC8NWWBGgde.pdf",
+      "use": "Indoor office experiment and DGP validation limits; prevents interpreting an extrapolated outdoor score as a probability."
+    },
+    {
+      "id": "pbrt",
+      "citation": "Pharr, M., Jakob, W. and Humphreys, G., Physically Based Rendering, 4th edition, Specular Reflection and Transmission.",
+      "url": "https://www.pbr-book.org/4ed/Reflection_Models/Specular_Reflection_and_Transmission",
+      "access": "Author-maintained book section, dielectric Fresnel equations inspected.",
+      "use": "Unpolarized dielectric Fresnel reflection. Water index 1.333 is an imposed scenario."
+    },
+    {
+      "id": "cox_munk1954",
+      "citation": "Cox, C. and Munk, W. (1954), Measurement of the Roughness of the Sea Surface from Photographs of the Sun's Glitter, JOSA 44(11), 838-850.",
+      "doi": "10.1364/JOSA.44.000838",
+      "url": "https://opg.optica.org/josa/abstract.cfm?uri=josa-44-11-838",
+      "access": "Publisher abstract/record inspected; full paper not read.",
+      "use": "Method lead for rough-water glint. No Earth wind-to-slope relation is transferred to the Moon."
+    },
+    {
+      "id": "pbrt_transport",
+      "citation": "Pharr, M., Jakob, W. and Humphreys, G., Physically Based Rendering, 4th edition, The Light Transport Equation and A Simple Path Tracer.",
+      "url": "https://www.pbr-book.org/4ed/Light_Transport_I_Surface_Reflection/The_Light_Transport_Equation",
+      "implementation_reference_url": "https://www.pbr-book.org/4ed/Light_Transport_I_Surface_Reflection/A_Simple_Path_Tracer",
+      "access": "Author-maintained chapters inspected for the surface rendering equation, path throughput, separate delta-source evaluation, and analytic-limit checks.",
+      "use": "Neutral Lambertian surface transport with cosine-weighted paths and a separately evaluated collimated Sun; independently implemented small-scene integrator."
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "date": "2026-10-03",
+  "scope": "Numerical and software checks; no empirical visual-comfort validation.",
+  "base_commit": "88bb4f5e967804f6c0da01ba0ad2c89d95453516",
+  "input_sha256": "e2406dbceb34193eaef5bd8a1dd6ea20940be72934301ef618221fdc79ad5572",
+  "study_tests": {
+    "command": "python -m pytest research/studies/optical_comfort -q",
+    "passed": 34,
+    "failed": 0
+  },
+  "required_make_check": {
+    "command": "OPENBLAS_NUM_THREADS=1 make check PYTHON=/tmp/terluna-optical-venv/bin/python",
+    "layer_check": "PASS, 290 files checked, zero violations",
+    "python": {
+      "passed": 404,
+      "failed": 13,
+      "skipped": 40,
+      "failure_nodes": [
+        "atmosphere/tests/test_absorption.py::test_ion_production_falls_with_the_shadow_and_ends_at_the_outer_radius",
+        "atmosphere/tests/test_absorption.py::test_ionization_rate_is_of_the_tabulated_order",
+        "atmosphere/tests/test_absorption.py::test_design_case_needs_a_radius_just_under_the_exobase",
+        "atmosphere/tests/test_exosphere.py::test_dissociation_rates_agree_with_heays",
+        "atmosphere/tests/test_exosphere.py::test_ions_made_match_the_absorption_step",
+        "atmosphere/tests/test_exosphere.py::test_charge_exchange_thin_limit_counts_the_swept_exosphere",
+        "atmosphere/tests/test_exosphere.py::test_magnetosphere_accounts_for_every_ion_and_a_stronger_one_keeps_more",
+        "atmosphere/tests/test_exosphere.py::test_levels_are_ordered_and_wider_shadows_never_lose_more",
+        "climate/tests/test_cm1_run.py::test_the_terrain_build_forces_each_column_at_its_own_height",
+        "climate/tests/test_exoplasim_run.py::RunnerTests::test_process_lookup_finds_this_process",
+        "climate/tests/test_ring_comfort.py::test_hours_are_shares_of_the_lunar_day",
+        "climate/tests/test_ring_comfort.py::test_the_rings_land_is_pooled_by_latitude_and_height_and_counted_in_shares",
+        "research/studies/protection_architecture/test_run.py::test_design_point_holds_together"
+      ]
+    },
+    "result": "FAIL"
+  },
+  "baseline_recheck": {
+    "scope": "The same 13 failing Python checks on an untouched detached worktree at base_commit",
+    "failed": 13,
+    "reason": "Missing WHI spectrum (9); missing moon_gcm_configuration.json (3); process lookup assumption in this runtime (1)."
+  },
+  "remaining_make_targets": {
+    "command": "make -k test-js check-provenance check-ensemble",
+    "javascript": "Directory arguments were treated as modules by this Node runtime; test directories are present.",
+    "provenance": "PASS_WITH_BLOCKED_INPUTS; external protection spectral/material bytes unavailable.",
+    "ensemble": "PASS; planning snapshot and workspace integrity only.",
+    "scope": "First-pass check record; unchanged JavaScript/provenance/ensemble targets were not repeated for the directional extension."
+  },
+  "javascript_explicit_files": {
+    "command": "node --test --test-concurrency=1 immersion/tests/unit/*.test.js atmosphere/column/tests/*.test.cjs illumination/references/tests/*.test.cjs visualization/atmospheric-columns/tests/*.test.mjs",
+    "file_processes_passed": 8,
+    "file_processes_failed": 6,
+    "observed_causes": [
+      "three package absent in cloud-cache, landscape and m1 tests",
+      "child-process EPERM in column-viewer test",
+      "forest and game-export file processes failed without diagnostic detail; not investigated beyond task scope"
+    ],
+    "scope": "First-pass check record."
+  },
+  "figure_review": "Both products have plot generators. Directional four-panel PNG visually inspected against stored values; gaze, scene lighting, canopy geometry and signed step contrast are labelled.",
+  "source_access": "See sources.json. Full paid CIE reports and full scholarly source admission remain outstanding.",
+  "final_layer_check": "PASS, 290 files checked, zero violations",
+  "review": {
+    "status": "completed before remote publication",
+    "confirmed": [
+      "Photopic illuminance reconstructed from stored spectra and albedo reading rule",
+      "Eye-plane hemisphere integrals checked by independent full-sphere quadrature",
+      "Glare equation eye-plane convention and restricted angular validity",
+      "Fresnel normal, grazing and Brewster limits",
+      "Upstream and study producer file hashes",
+      "Same 13 full-suite Python failures as the untouched starting commit"
+    ],
+    "corrections": [
+      "Added 80 gaze scenarios: downward gaze can reverse the level-eye Moon/Earth comparison",
+      "Separated horizontal-flux consequences from angular assumptions in the report and figure",
+      "Made the aerosol-free Earth baseline, collimated Sun, water viewing direction and achromatic glare kernel explicit",
+      "Flagged the 20-degree solar sample for low-Sun sensitivity",
+      "Removed Git HEAD from numerical provenance so local commit-message changes leave products stable",
+      "Added stored-product reproduction and hash checks"
+    ],
+    "spectral_reconstruction": {
+      "upstream_summaries": 364,
+      "maximum_fractional_difference": 0.001762687704597199,
+      "at": {
+        "case": "moon_1.2atm/design",
+        "sun_deg": 10,
+        "albedo": 0.8
+      },
+      "method": "Apply the input reading rule to direct, black-ground diffuse and reflectance-from-below spectra; integrate against the upstream analytic photopic matching function at 1-nm centres."
+    },
+    "limits": [
+      "Angular skies and geometries remain imposed scenarios",
+      "No empirical outdoor discomfort or performance validation",
+      "Full source admission remains separate from this methods review"
+    ]
+  },
+  "directional_extension": {
+    "parent_commit": "6d6b454",
+    "angular_views": 630,
+    "scene_cases": 24,
+    "probes_per_case": 6,
+    "surface_reflections": 18,
+    "paths_per_scramble": 131072,
+    "scramble_seeds": [
+      17,
+      43
+    ],
+    "numerical_checks": {
+      "maximum_angular_coefficient_change_64_to_128": 0.0001362789405074949,
+      "maximum_packed_horizontal_relative_difference": 0.0032557129368564475,
+      "maximum_scene_nested_sample_relative_change": 0.0040686093644974886,
+      "maximum_scene_scramble_relative_difference": 0.0031799321674069203,
+      "maximum_sampled_tail_upper_fraction": 9.051228743305964e-06,
+      "numerical_interpretation": "Nested refinement and two-scramble differences are diagnostics, not confidence intervals. Tail bounds are conservative per surviving path and then sampled; they are not a certified global quadrature bound."
+    },
+    "max_step_contrast_change_from_initial_65536_path_12_reflection_run": 0.0016976979587913776,
+    "packed_vs_previous_atlas_summary_max_relative_difference": 4.369378070467889e-06,
+    "reviewed": [
+      "Packed RGB luminance recovery, angular grid and separate solar beam",
+      "Exact horizontal normalization; model transfer keeps the current direct and diffuse fluxes",
+      "Finite pale surfaces do not change the atmospheric albedo",
+      "Analytic open-ground and black-canopy projected-solid-angle limits",
+      "Opaque two-sided geometry, solar shadows and repeated Lambertian reflection",
+      "Two independent component ledgers and source-strength linearity",
+      "Enclosed-scene stored probes reproduced with both Moon and Earth fields",
+      "Sampling refinement and residual reflection-tail estimate",
+      "Gaze and surface-contrast orderings depend on the physical scene"
+    ],
+    "limits": [
+      "Angular shape is transferred from an unfiltered exponential proxy atmosphere; this is not a new solved-column spherical sky",
+      "No scene clouds, volume extinction, glossy surfaces or material spectral variation",
+      "Task contrast describes optical signals; human comfort and detection thresholds remain unvalidated"
+    ]
+  }
+}

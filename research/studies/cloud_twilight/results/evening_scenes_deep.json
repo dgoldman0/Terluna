@@ -1,0 +1,149 @@
+{
+  "schema": "terluna.research.cloud-evening-scenes/1",
+  "mode": "deep",
+  "producer": {
+    "file": "research/studies/cloud_twilight/deep_scene.py",
+    "sha256": "02413db6069528efe9ef1f24e79cb2ae858bbaca21aa0b855e7d6a80a1aa3d25",
+    "deep_input_sha256": "ea45c38f1c147b38824f0d928f1dbdb7aba9ee721b8273512074acc0d9c73445"
+  },
+  "evidence": "Full spectral cloud transport for the expanded long-range search. A 0.5\u201315 degree view resolves the distant cloud; a separate 0.5\u20135 degree opening probes dark foreground viewing.",
+  "scenes": [
+    {
+      "schema": "terluna.illumination.cloud-evening-scene/1",
+      "case": "ring_equator",
+      "snapshot": 446,
+      "time_day": 55.625,
+      "observer_latitude_deg": -0.0,
+      "observer_longitude_deg": 246.9053,
+      "observer_sun_elevation_deg": -25.01569332434608,
+      "observer_height_m": 1.6,
+      "camera_azimuth_in_ring_basis_deg": 180.0,
+      "cross_ring_width_km": 200.0,
+      "phase_parameters": {
+        "liquid_g": 0.85,
+        "frozen_g": 0.8
+      },
+      "photons_per_pixel": 2048,
+      "groups": 16,
+      "surface_photons": 65536,
+      "shape": [
+        16,
+        48
+      ],
+      "seed": 9819,
+      "surface_lux": 70.2769632834143,
+      "surface_standard_error_lux": 7.33877459308274,
+      "clear_surface_lux": 65.47722695309278,
+      "cloudy_direct_horizontal_lux": 0.0,
+      "clear_surface_monte_carlo_lux": 69.78634117935462,
+      "clear_surface_monte_carlo_standard_error_lux": 8.150153641861268,
+      "clear_recess_formal_lux": 0.09282543507695012,
+      "clear_recess_monte_carlo_lux": 0.09762851429468339,
+      "recess_lux": 0.05518818090384356,
+      "recess_standard_error_lux": 0.004130109167097671,
+      "recess_geometry": "Black recess with a sky opening 20 degrees wide, elevations 0.5\u20135 degrees, centred on the camera; excluded surrounding directions have zero radiance",
+      "sampled_truncated_paths": 0,
+      "seconds": 106.16611898499832,
+      "negative_Y_pixels": 0,
+      "median_pixel_relative_standard_error": 0.2983692156089689,
+      "raw_clear_monte_carlo_mean_cd_m2": 76.68307842034915,
+      "formal_clear_mean_cd_m2": 73.44565046713002,
+      "source": {
+        "cloud_section": "research/runs/optical_comfort/evening/sections/deep_ring_equator_1245_446.npz",
+        "cloud_sha256": "e49a2aa464f062d3c77365c9a031ec4536b4b96f3b14985b27e9ae3b7fce9f5b",
+        "molecular_product_sha256": "6fa7583100f5a364b53b22949caef21a4544387a231d009640fd12b1cefe6ef3",
+        "molecular_fields_sha256": "c9c5c2f3618b01ffb20c360f07f1ae19663a6c3546433f0ab0560ce4d6c79c57"
+      },
+      "producer": {
+        "illumination/cloud_light/render.py": "8863722ce32af90fe8524b3f864e15289a8f55f8df9d9ce66e6da53c3d6e75b3",
+        "illumination/cloud_light/volume.py": "a771a90400582433c91cc6a709cf15a57d28d5d985aa3eaf449d7e2414bcf5df",
+        "illumination/cloud_light/microphysics.py": "61a9600b4ab6ea1cdf69d6ce20db9b290815551a1709508e697508670fbee8ff",
+        "illumination/sky/solved_transport.py": "3fe4c255e8ffe53227a57529e957a441daf5b1899cf4ba1e71b3a2d8906eb00c",
+        "illumination/cloud_light/detail.py": "407f69eec9237cd5ce5f7b4b53a41359942addcec1f9e990f3432973a0483820"
+      },
+      "evidence": "Spectral Monte Carlo with molecular and particle multiple scattering, finite-Sun illumination, cloud self-shadowing and foreground atmospheric scattering. Equivalent-sphere particle areas follow the recorded Morrison size distributions; nonabsorbing HG phase functions and cross-ring extrusion are explicit optical and geometric scenarios.",
+      "reading_rule": "XYZ uses the photopic scale, Y in cd m^-2. Independent photon blocks estimate absolute cloudy radiance and sampling uncertainty; paired clear histories check the formal clear solution at sea level. The scene uses the common solved molecular column and Lambertian ground albedo 0.1. Earthlight, aerosols, terrain beyond spherical ground and ice optical features require additional inputs. RGB display mapping belongs to visualization. This product refines the low-horizon angular field. Open-ground flux is inherited from the admitted parent scene; its independent aperture probe covers elevations 0.5\u20135 degrees.",
+      "selection": "long-range source candidate, Sun 25\u201330 degrees down",
+      "initial_pick": {
+        "selection": "long-range source candidate, Sun 25\u201330 degrees down",
+        "case": "ring_equator",
+        "snapshot": 446,
+        "observer_column": 1245,
+        "cloud_column": 1181,
+        "observer_latitude_deg": -0.0,
+        "observer_longitude_deg": 246.9053,
+        "observer_land": true,
+        "cloud_latitude_deg": -0.0,
+        "cloud_longitude_deg": 234.2181,
+        "time_day": 55.625,
+        "sun_elevation_deg": -25.01569366455078,
+        "hours_after_sunset": 49.2485466003418,
+        "cloud_top_km": 73.79412841796875,
+        "view_elevation_deg": 4.251273903170266,
+        "range_km": 398.88683976456326,
+        "cloud_direct_normal_lux": 1000.1689206654378,
+        "clear_ground_lux": 65.49691336780168,
+        "upper_cloud_water_path_kg_m2": 0.03619614243507385,
+        "selection_score": 8.915917562564259,
+        "source_sha256": "a22d6cd54da1cc276aa7f052b241bbe4ff09933ad1e14188f0579864bcaef76a"
+      },
+      "delta_hours": 0,
+      "section": {
+        "path": "/home/kir/Documents/Projects/terluna-optical-comfort/research/runs/optical_comfort/evening/sections/deep_ring_equator_1245_446.npz",
+        "sha256": "e49a2aa464f062d3c77365c9a031ec4536b4b96f3b14985b27e9ae3b7fce9f5b",
+        "schema": "terluna.climate.cloud-section/1",
+        "metadata": {
+          "schema": "terluna.climate.cloud-section/1",
+          "case": "ring_equator",
+          "snapshot": 446,
+          "time_day": 55.625,
+          "observer_column": 1245,
+          "observer_latitude_deg": -0.0,
+          "observer_longitude_deg": 246.9053,
+          "observer_hour_angle_deg": 115.0156933243461,
+          "observer_sun_elevation_deg": -25.01569332434608,
+          "dx_m": 6011.2368682234655,
+          "radius_m": 1737400.0,
+          "droplets_cm3": 100.0,
+          "source": {
+            "file": "/home/kir/Documents/Projects/terluna-optical-comfort/climate/crm/runs/ring_equator/cm1out_t000446_s.dat",
+            "sha256": "a22d6cd54da1cc276aa7f052b241bbe4ff09933ad1e14188f0579864bcaef76a",
+            "case_sha256": "66979fb6a66703ee7edc3a8144f924e1b377a5e0fd83378c62ca88a96908b748"
+          },
+          "producer": {
+            "file": "climate/crm/cloud_scene.py",
+            "sha256": "27d2d3e0856f35c7ec09778a62932ace89791139f20f81ef67bb902881c4a232"
+          },
+          "thermodynamic_source_hashes": {
+            "constants.F": "b885840755ef83e1c424c1b09985ce0d59e8582096237ad6d603ae3f15ff2f34",
+            "solve2.F": "e34c6d479d0f589cd8c31faf95df52a06f3b9d0edcb1744f694463b0bdddc375",
+            "morrison.F": "8427670b64e6bad03b68d9aa5532f85e685807671b344d6d4480cf6d0db0ab8c"
+          },
+          "evidence": "Saved evolving CM1 section in the second lunar cycle; the simulation resolves the along-ring and vertical dimensions. Cross-ring extent is supplied by the optical scenario.",
+          "reading_rule": "Local Cartesian basis: x along the ring, y across it, z radially outward. Each column is bounded by great-circle planes, each vertical cell by concentric shells. The observer is at the centre column, simulated sea level."
+        }
+      },
+      "parent_scene": {
+        "path": "research/runs/optical_comfort/evening/scenes/deep_ring_equator_1245_446_overview.npz",
+        "sha256": "e8bf7da4e6625ad9eb28c24be89d26305300c7f8a6f85f303e095fafe64904e2"
+      },
+      "clear_photons_per_pixel": 128,
+      "view_elevation_limits_deg": [
+        0.5,
+        15.0
+      ],
+      "view_azimuth_offset_limits_deg": [
+        -30.0,
+        30.0
+      ],
+      "recess_elevation_limits_deg": [
+        0.5,
+        5.0
+      ],
+      "archive": {
+        "path": "research/runs/optical_comfort/evening/scenes/deep_ring_equator_1245_446_detail.npz",
+        "sha256": "05a7e78b9b7fdea2f8e617f51bb80db7343585bed12f5c950e7f81f0153b24ba"
+      }
+    }
+  ]
+}

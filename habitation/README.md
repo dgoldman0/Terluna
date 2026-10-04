@@ -1,6 +1,6 @@
 # Human habitation and society
 
-**Current condition:** constrained design reasoning and scenarios. No complete airship/neighborhood mass model, settlement network, service simulation or human-use study has been implemented. The [human companion seed](../ensemble/papers/babdd5f6-4920/seed-02.md) covers life, culture, spatial/temporal design and society; [biosphere](../biosphere/) owns biological evidence.
+**Current condition:** constrained design reasoning and scenarios, with optical-comfort screens of angular light, surface reflection and shelter geometry. Complete airship/neighborhood mass models, settlement networks, service simulations and empirical human-use validation remain open. The [human companion seed](../ensemble/papers/babdd5f6-4920/seed-02.md) covers life, culture, spatial/temporal design and society; [biosphere](../biosphere/) owns biological evidence.
 
 Existing theory includes hydrostatic pressure/density profiles, aerodynamic scaling, and the buoyancy relation: gross supported mass per volume is ambient density minus lifting-gas density. Envelope, structure and services consume that allowance. Gravity cancels in the ideal mass-lift relation. No geometric air volume is counted as usable floor area.
 
@@ -19,8 +19,19 @@ People choose among them with climate, ecology and the wishes of those who would
 
 ## Next executable studies
 
+The [optical-comfort study](../research/studies/optical_comfort/) compares surface
+brightness, viewing direction, shade and contrast mechanisms with Earth using
+the committed illumination data. Its directional extension compares six finite
+settings with roofs, walls and locally shaded ground. It transfers packed sky
+patterns onto current light totals and follows repeated matte reflection.
+Workplane illumination and tread–riser contrast depend strongly on the setting.
+The next step is a consistent shielded spherical sky and specific local surface
+conditions. Human discomfort thresholds require outdoor validation.
+
 Compare complete buoyant/tethered/mobile mass budgets, operating altitude, wind/tether loads, utilities and rescue. Compare flight energy and travel times for several vehicle/route concepts. Map supported capacity and dependable service access across different terrain and environmental scenarios. Mobility must accommodate different bodies and activities.
 
 Daily/monthly schedule and public-space studies can examine how people use the long illumination cycle. Twilight festivals, mobile settlements, shared infrastructure and particular institutions are plural cultural possibilities, not predicted social outcomes. Exact outdoor light curves come from [illumination](../illumination/) and [climate](../climate/).
 
 Use multiple settlement and activity patterns across the Moon. Existing landscapes and the root's itinerary supply examples rather than a universal specification. See [research plan](../research/plan.md) and [status](../research/status.json).
+
+The optical-comfort study now repeats the finite scenes with native sky data: scene illumination changes by at most 0.081%. Local dusk-cloud and wave-slope inputs extend the physical basis for cloudy and waterfront settings. [Results and remaining work](../research/studies/optical_comfort/README.md#10-follow-up-with-local-data) distinguish those inputs from a complete comfort assessment.

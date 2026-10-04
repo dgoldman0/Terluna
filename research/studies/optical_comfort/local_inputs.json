@@ -1,0 +1,36 @@
+{
+  "schema": "terluna.research.optical-local-input-admission/1",
+  "remote_baseline_commit": "9ad3a7e",
+  "remote_access": "Tracked repository files and packed sky atlas; ignored native sky archives, raw CM1 snapshots, coastal wave histories and several spectral input files were absent from the remote workspace.",
+  "local_access": "Verified local input copies and research-drive links in the isolated study/optical-comfort checkout.",
+  "native_atlases": {
+    "moon_no_ozone_atlas.npz": {
+      "sha256": "fde1358cbecbe9877949d51064e8925ea4e19a10f007ec6f993dc03761473cca",
+      "bytes": 7307092,
+      "evidence": "Existing unfiltered exponential-profile sky solution; array-level comparison with the packed archive is recorded by local_sky.py."
+    },
+    "earth_atlas.npz": {
+      "sha256": "926dd81add9ff2934c8d561d1b98d6028ee36a134da2df41387ce09e5d7c2000",
+      "bytes": 7876946,
+      "evidence": "Existing unfiltered exponential-profile sky solution; array-level comparison with the packed archive is recorded by local_sky.py."
+    },
+    "moon_atlas.npz": {
+      "sha256": "c3fae3340b4c5c91ecf39cf4457ef559e1dd049dc10cd290e466cd5052d9184d",
+      "bytes": 7298000,
+      "evidence": "Existing unfiltered exponential-profile sky solution; array-level comparison with the packed archive is recorded by local_sky.py."
+    }
+  },
+  "coastal_wave_history": {
+    "path": "research/runs/waves/shore_history/coast_s4_dt900_0_1419/product.json",
+    "product_sha256": "8988e262b9bee09bbef58f23161041e1193a59f7eed9873b40d5b2fe9a6f43df",
+    "source_commit": "54545a4",
+    "evidence": "Existing nonstationary nested SWAN coastal history on research/lunar-seas. Local spectral files are checked against its output hashes."
+  },
+  "cloud_inputs": {
+    "case": "ring_equator",
+    "gcm_run": "A28_dim5_moon",
+    "source": "climate/crm/runs/ring_equator",
+    "admission": "cloud_columns.py checks the CM1 build source and reconstructs dry density against saved domain diagnostics. Each consumed scalar and diagnostic snapshot is hashed in the exported source manifest."
+  },
+  "storage": "Bulk inputs, Python environment and generated histories live on the research drive; ignored checkout paths link to that storage."
+}

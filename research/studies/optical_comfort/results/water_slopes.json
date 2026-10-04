@@ -1,0 +1,237 @@
+{
+  "schema": "terluna.research.optical-water-slopes/1",
+  "producer": {
+    "lane": "research",
+    "runner": "research/studies/optical_comfort/water_slopes.py",
+    "files": {
+      "research/studies/optical_comfort/water_slopes.py": "6bed6ac4f610dce30ce05f25b207bf8c5deaacedfa585176cc104a30f4716997",
+      "research/studies/optical_comfort/local_inputs.json": "a0ea7863a7bb3b6c6df3146c811297fcf158ebfde73c6b0c48a25c1b2b90f01f",
+      "research/studies/optical_comfort/local_sources.json": "f25a7b1e03037cd22993103ed5c0462268cb73aca44b8550f26cddc22e5b2698",
+      "illumination/water_surface/model.py": "9e4ebbabf5e35017baa18a3b048666a1b1da263301532505f41e520b495aee77",
+      "shared/constants.json": "63a94123983be8ff627e7556d2b63b0c835044b5ee81f924f81e65d8a264e006"
+    },
+    "input": {
+      "file": "research/runs/waves/shore_history/coast_s4_dt900_0_1419/product.json",
+      "schema": "terluna.climate.coastal-history-case/1",
+      "sha256": "8988e262b9bee09bbef58f23161041e1193a59f7eed9873b40d5b2fe9a6f43df",
+      "verified_files": {
+        "sites.spc": "b82c6a5b7431c29199e01f7f5558344be934cbe719b0e966c61201aaf59cfe29",
+        "sites.tbl": "6a5b5843bd90d59decc47cd0aa8c207fbaf83722efb696c57c6373f7ad30640b",
+        "INPUT": "b6eec8a79d39a9e02594cf32a096cf8b83c76405becc68e027b888be1c2a4693"
+      },
+      "branch": "research/lunar-seas",
+      "source_commit": "54545a4"
+    },
+    "history": {
+      "file": "research/runs/optical_comfort/water_slope_history.json",
+      "sha256": "7ee5212f21c52b6e0d89b37e2bf3e2ae0a385536a8052099751eedeb691c3fdb"
+    }
+  },
+  "evidence": "Resolved gravity-wave slope covariance from the second-cycle SWAN coastal history. Wave variance is weighted by wavenumber squared at the simulated lunar gravity and local depth. The spectral upper cutoff leaves shorter-wave roughness open; this result supplies part of a water-reflection model.",
+  "reading_rule": "Cartesian east/north slope covariance. The source spectrum is m2/Hz/degree; periodic direction integration uses the printed bin width. Linear frequency interpolation of variance is integrated with four subdivisions per native interval. Dispersion is omega\u00b2=g*k*tanh(k*depth). The run prescribes zero current, so AFREQ is intrinsic here. Quantiles weight saved hourly samples equally. Spin-up precedes the first requested time. Spectral energy beyond the printed frequency range is omitted. RMS gradient is sqrt(trace(covariance)); a probability distribution of facets and a glitter image require additional assumptions. Earth wind-to-slope fits are unused.",
+  "units": {
+    "frequency": "Hz",
+    "depth": "m",
+    "wave_height": "m",
+    "slope_covariance": "dimensionless",
+    "rms_gradient": "dimensionless",
+    "time": "hours since wave-run start"
+  },
+  "source_evidence": "Nonstationary spectral propagation with changing basin boundary spectra and GCM surface stress.",
+  "source_reading_rule": "All levels retain the first solar cycle before second-cycle statistics. Boundary spectra are hourly; station wave diagnostics are every 15 minutes. Spatial, temporal and physical limits accompany the analysis.",
+  "requested_span_hours": [
+    708.73416,
+    1417.46832
+  ],
+  "sampled_span_hours": [
+    709.0,
+    1417.0
+  ],
+  "gravity_m_s2": 1.62421887656,
+  "frequency_range_hz": [
+    0.005,
+    0.4969
+  ],
+  "native_frequency_count": 49,
+  "summaries": {
+    "west_face": {
+      "location_deg": [
+        93.251953125,
+        2.361328125
+      ],
+      "depth_m": 22.3817883,
+      "snapshots": 709,
+      "resolved_hs_m": {
+        "minimum": 0.15688200858710144,
+        "p10": 0.22484764496452955,
+        "p50": 0.5498824603165187,
+        "p90": 1.3210094593911073,
+        "maximum": 1.7954142332005905
+      },
+      "rms_gradient": {
+        "minimum": 0.015093555120161205,
+        "p10": 0.04481101078868474,
+        "p50": 0.11395797309917731,
+        "p90": 0.1361251148579327,
+        "maximum": 0.1718749405917342
+      },
+      "slope_fraction_above_025hz": {
+        "minimum": 0.003085339196891946,
+        "p10": 0.25929216425429746,
+        "p50": 0.6983634023304016,
+        "p90": 0.9170427956251875,
+        "maximum": 0.9787458292427373
+      },
+      "elevation_variance_fraction_above_025hz": {
+        "minimum": 3.830957056967234e-05,
+        "p10": 0.004902237528988002,
+        "p50": 0.039560257265363094,
+        "p90": 0.2756393374140307,
+        "maximum": 0.5190845364953409
+      },
+      "slope_fraction_in_last_two_native_intervals": {
+        "minimum": 0.0,
+        "p10": 0.008542184769078916,
+        "p50": 0.2631142330371838,
+        "p90": 0.3981793880983869,
+        "maximum": 0.6708005320080903
+      }
+    },
+    "east_face": {
+      "location_deg": [
+        93.408203125,
+        2.330078125
+      ],
+      "depth_m": 49.0394669,
+      "snapshots": 709,
+      "resolved_hs_m": {
+        "minimum": 0.07043630055887659,
+        "p10": 0.1490824496132523,
+        "p50": 0.26704854658479427,
+        "p90": 0.5368779729600356,
+        "maximum": 0.9673658960914236
+      },
+      "rms_gradient": {
+        "minimum": 0.01923087726861378,
+        "p10": 0.06422103586749976,
+        "p50": 0.10891214926274813,
+        "p90": 0.1375476604997899,
+        "maximum": 0.15192370014203835
+      },
+      "slope_fraction_above_025hz": {
+        "minimum": 0.4181397433579524,
+        "p10": 0.5958052770354098,
+        "p50": 0.8281054174127422,
+        "p90": 0.9567386508196439,
+        "maximum": 0.9945650592824161
+      },
+      "elevation_variance_fraction_above_025hz": {
+        "minimum": 0.0116268160744962,
+        "p10": 0.04374805646192225,
+        "p50": 0.29143184587741283,
+        "p90": 0.5433518209195435,
+        "maximum": 0.8156371068125235
+      },
+      "slope_fraction_in_last_two_native_intervals": {
+        "minimum": 0.06321017164947607,
+        "p10": 0.17427432459918948,
+        "p50": 0.3246412432155723,
+        "p90": 0.39621757187800666,
+        "maximum": 0.6927553692385298
+      }
+    },
+    "southern_shore": {
+      "location_deg": [
+        92.986328125,
+        1.830078125
+      ],
+      "depth_m": 13.5493546,
+      "snapshots": 709,
+      "resolved_hs_m": {
+        "minimum": 0.22931677664339362,
+        "p10": 0.30118266405435884,
+        "p50": 0.5295568704471814,
+        "p90": 1.1041119001369903,
+        "maximum": 1.532977001742711
+      },
+      "rms_gradient": {
+        "minimum": 0.023901525739034955,
+        "p10": 0.05016808815634835,
+        "p50": 0.11031633932744372,
+        "p90": 0.1332004520542247,
+        "maximum": 0.1656393985812168
+      },
+      "slope_fraction_above_025hz": {
+        "minimum": 0.00282185932404023,
+        "p10": 0.337349553615055,
+        "p50": 0.717856707418138,
+        "p90": 0.8833720578485317,
+        "maximum": 0.9506990581000527
+      },
+      "elevation_variance_fraction_above_025hz": {
+        "minimum": 4.003905914999359e-05,
+        "p10": 0.005767742405770963,
+        "p50": 0.04549774837163441,
+        "p90": 0.16612592535920795,
+        "maximum": 0.3146861876114823
+      },
+      "slope_fraction_in_last_two_native_intervals": {
+        "minimum": 0.0,
+        "p10": 0.051148900349430856,
+        "p50": 0.27523664400988745,
+        "p90": 0.39125970616956207,
+        "maximum": 0.6285261764168026
+      }
+    },
+    "offshore": {
+      "location_deg": [
+        92.845703125,
+        2.345703125
+      ],
+      "depth_m": 1270.76587,
+      "snapshots": 709,
+      "resolved_hs_m": {
+        "minimum": 0.38371429215960356,
+        "p10": 0.4893415274892474,
+        "p50": 0.7392566811500039,
+        "p90": 1.4342378175901154,
+        "maximum": 1.9524947589599397
+      },
+      "rms_gradient": {
+        "minimum": 0.036449570488683636,
+        "p10": 0.05419988618728575,
+        "p50": 0.11677415544209609,
+        "p90": 0.13245578023541646,
+        "maximum": 0.17769957373027925
+      },
+      "slope_fraction_above_025hz": {
+        "minimum": 0.003149266422394592,
+        "p10": 0.18971314759499194,
+        "p50": 0.527867435142155,
+        "p90": 0.6952319656695359,
+        "maximum": 0.8288030277456447
+      },
+      "elevation_variance_fraction_above_025hz": {
+        "minimum": 4.4930407477689515e-05,
+        "p10": 0.0033719523419403013,
+        "p50": 0.020596878260112382,
+        "p90": 0.06591275452178566,
+        "maximum": 0.1032097686215211
+      },
+      "slope_fraction_in_last_two_native_intervals": {
+        "minimum": 0.0,
+        "p10": 0.0,
+        "p50": 0.14407951029828833,
+        "p90": 0.24559296210902407,
+        "maximum": 0.41999973917873956
+      }
+    }
+  },
+  "checks": {
+    "maximum_slope_integral_relative_change_1_to_4": 0.0199700225032996,
+    "maximum_slope_integral_relative_change_2_to_4": 0.0040015160375780345,
+    "maximum_resolved_hs_relative_difference_from_bulk": 0.07962375989483561,
+    "maximum_dispersion_relative_residual": 5.551115123125783e-16,
+    "comparison_scope": "Quadrature and Hs diagnostics use samples with resolved Hs >= 0.1 m. Bulk SWAN Hs also includes its diagnostic high-frequency tail."
+  }
+}

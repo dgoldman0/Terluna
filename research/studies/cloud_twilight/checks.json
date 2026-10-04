@@ -1,0 +1,75 @@
+{
+  "date": "2026-10-03",
+  "scope": "Numerical geometry/transport and software checks; no physical cloud-appearance validation.",
+  "parent_commit": "2ac6945",
+  "branch": "study/optical-comfort",
+  "new_tests": {
+    "passed": 19,
+    "failed": 0,
+    "run_as_part_of": "Required full Python suite",
+    "coverage": [
+      "Analytic vertical and tangent shell paths",
+      "Finite-segment solid-body blockage",
+      "Reciprocity and composition",
+      "Half-visible finite Sun in vacuum",
+      "Sunset geometry and viewing direction",
+      "Independent continuous exponential quadrature",
+      "Current layer optical-depth conservation",
+      "Corrected cloud-product identity",
+      "Solar/viewing spectral-product convention",
+      "Committed product source/input hashes and physical transmission bounds"
+    ]
+  },
+  "required_make_check": {
+    "command": "OPENBLAS_NUM_THREADS=1 make check PYTHON=/tmp/terluna-optical-venv/bin/python",
+    "result": "FAIL; same 13 pre-existing failures as recorded baseline",
+    "layer_check": "PASS; 295 files checked, zero violations",
+    "python": {
+      "passed": 423,
+      "failed": 13,
+      "skipped": 40,
+      "failure_nodes": [
+        "atmosphere/tests/test_absorption.py::test_ion_production_falls_with_the_shadow_and_ends_at_the_outer_radius",
+        "atmosphere/tests/test_absorption.py::test_ionization_rate_is_of_the_tabulated_order",
+        "atmosphere/tests/test_absorption.py::test_design_case_needs_a_radius_just_under_the_exobase",
+        "atmosphere/tests/test_exosphere.py::test_dissociation_rates_agree_with_heays",
+        "atmosphere/tests/test_exosphere.py::test_ions_made_match_the_absorption_step",
+        "atmosphere/tests/test_exosphere.py::test_charge_exchange_thin_limit_counts_the_swept_exosphere",
+        "atmosphere/tests/test_exosphere.py::test_magnetosphere_accounts_for_every_ion_and_a_stronger_one_keeps_more",
+        "atmosphere/tests/test_exosphere.py::test_levels_are_ordered_and_wider_shadows_never_lose_more",
+        "climate/tests/test_cm1_run.py::test_the_terrain_build_forces_each_column_at_its_own_height",
+        "climate/tests/test_exoplasim_run.py::RunnerTests::test_process_lookup_finds_this_process",
+        "climate/tests/test_ring_comfort.py::test_hours_are_shares_of_the_lunar_day",
+        "climate/tests/test_ring_comfort.py::test_the_rings_land_is_pooled_by_latitude_and_height_and_counted_in_shares",
+        "research/studies/protection_architecture/test_run.py::test_design_point_holds_together"
+      ]
+    },
+    "same_failures_as_previous_baseline": true,
+    "reasons": "Missing WHI spectrum (9); missing moon_gcm_configuration.json (3); process lookup assumption in this runtime (1).",
+    "subsequent_targets": "Not reached because Python target failed. Unchanged JavaScript/provenance/ensemble targets were not repeated; prior records are in optical_comfort/checks.json."
+  },
+  "numerics": {
+    "solar_disk_max_absolute_lux_32_vs_64": 1.774867362951241,
+    "proxy_shell_max_relative_lux_1000_vs_500m_above_1lux": 0.0011500197399503254
+  },
+  "figure_review": "Four-panel PNG inspected against stored data. Adjusted panel C annotation to avoid its curve. Models, units and omitted cloud radiance are labelled; cloud occurrence is per height/time cell.",
+  "review": [
+    "Corrected ring data replace old uncorrected cloud-height summaries",
+    "Geometric light windows are not inferred cloud lifetimes",
+    "Rain tracking lifetime is sample count times output interval, not anvil persistence",
+    "Direct normal illuminance does not illuminate a horizontal upper face when the local Sun is below horizontal",
+    "Current-column beam is not quantitatively compared with old sky radiance as a cloud contrast",
+    "Atlas cloud irradiance at 2.5 km is not extrapolated to high clouds",
+    "Maximum-rain daytime slice is not re-timed or converted from bulk condensate to optical depth"
+  ],
+  "corrections": [
+    "Vacuum half-disk test exposed near-horizon roundoff in outward-ray ground intersection; solid-body crossing is excluded geometrically for outward rays."
+  ],
+  "remaining": [
+    "Cloud scattering, internal extinction, phase functions and visual contrast",
+    "Refraction and omitted gas/aerosol extinction",
+    "Spherical diffuse sky on the current solved column with the design shield",
+    "Local time-resolved cloud species, sizes, density and geometry; 3-D or labelled extrusion sensitivity"
+  ],
+  "publication": "Local commit only; remote publication remains paused."
+}

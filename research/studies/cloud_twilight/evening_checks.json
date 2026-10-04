@@ -1,0 +1,243 @@
+{
+  "schema": "terluna.research.cloud-evening-checks/1",
+  "date": "2026-10-03",
+  "branch": "study/optical-comfort",
+  "evidence": "Numerical and repository checks for optical scenarios. Regional climate, cloud geometry and perceptual validation remain separate.",
+  "inputs": {
+    "cases": 4,
+    "snapshots_per_case": 236,
+    "days": [
+      29.625,
+      59.0
+    ],
+    "first_cycle": "Excluded",
+    "column_samples": 2252384,
+    "source_admission": "All consumed raw snapshots and producing CM1 sources are hash-admitted by the exporters; scene and molecular products are checked again before use.",
+    "storage": "Bulk fields, input copies, radiance archives, figures, environment and check logs on /media/projectspace/terluna-research/optical-comfort-runs"
+  },
+  "transport": {
+    "displayed_scene_records": 19,
+    "distinct_displayed_archives": 18,
+    "sampled_truncated_paths": 0,
+    "photon_blocks": 16,
+    "photons_per_pixel": {
+      "regional": 1024,
+      "history": 1024,
+      "sensitivity": 512,
+      "deep_detail": 2048
+    },
+    "max_event_count": 100000,
+    "max_segment_count": 10000,
+    "solar_path_optical_depth_cutoff": 40,
+    "aperture": "Independent cosine-weighted photon integral; the deep scene uses its own 0.5\u20135 degree opening",
+    "cache": "Shared scene keys are locked. Reruns verify geometry, input archives and producer hashes before reuse."
+  },
+  "numerical": {
+    "clear_angular_comparisons": [
+      {
+        "path": "research/runs/optical_comfort/evening/scenes/ring_equator_736_260_w200_g0.8_h1.6_16x32_1024.npz",
+        "sun_deg": -0.677687350574511,
+        "formal_mean_cd_m2": 1800.5930907869438,
+        "mc_mean_cd_m2": 1806.1779072282095,
+        "standard_error_cd_m2": 7.006804733445892,
+        "difference_over_standard_error": 0.7970560981394954,
+        "relative_difference": 0.003101653821644401
+      },
+      {
+        "path": "research/runs/optical_comfort/evening/scenes/ring_equator_1716_375_w200_g0.8_h1.6_16x32_1024.npz",
+        "sun_deg": -10.19279910855154,
+        "formal_mean_cd_m2": 570.0683720200796,
+        "mc_mean_cd_m2": 570.8448473562453,
+        "standard_error_cd_m2": 3.38440818436315,
+        "difference_over_standard_error": 0.22942721263742658,
+        "relative_difference": 0.0013620740498445638
+      },
+      {
+        "path": "research/runs/optical_comfort/evening/scenes/ring_equator_380_319_w200_g0.8_h1.6_16x32_1024.npz",
+        "sun_deg": -20.011758600319247,
+        "formal_mean_cd_m2": 111.31979289480296,
+        "mc_mean_cd_m2": 110.59902329221865,
+        "standard_error_cd_m2": 1.6844924141953104,
+        "difference_over_standard_error": -0.42788533596847744,
+        "relative_difference": -0.006474765931925863
+      },
+      {
+        "path": "research/runs/optical_comfort/evening/scenes/ring_equator_67_350_w200_g0.8_h1.6_16x32_1024.npz",
+        "sun_deg": -5.202509595947728,
+        "formal_mean_cd_m2": 1100.1686032536293,
+        "mc_mean_cd_m2": 1103.0865717569807,
+        "standard_error_cd_m2": 5.196049844282873,
+        "difference_over_standard_error": 0.5615743864662875,
+        "relative_difference": 0.002652292107520493
+      },
+      {
+        "path": "research/runs/optical_comfort/evening/scenes/ring_70_45e_1811_328_w200_g0.8_h1.6_16x32_1024.npz",
+        "sun_deg": -2.9914303188057008,
+        "formal_mean_cd_m2": 1114.8090460827739,
+        "mc_mean_cd_m2": 1121.4255524727723,
+        "standard_error_cd_m2": 4.795373870837967,
+        "difference_over_standard_error": 1.3797686203854318,
+        "relative_difference": 0.00593510288891852
+      },
+      {
+        "path": "research/runs/optical_comfort/evening/scenes/ring_70_135e_176_258_w200_g0.8_h1.6_16x32_1024.npz",
+        "sun_deg": -0.07606978072340857,
+        "formal_mean_cd_m2": 1568.3966854681787,
+        "mc_mean_cd_m2": 1577.7614178651897,
+        "standard_error_cd_m2": 5.89066041380508,
+        "difference_over_standard_error": 1.5897593375208463,
+        "relative_difference": 0.005970895299498569
+      },
+      {
+        "path": "research/runs/optical_comfort/evening/scenes/ring_equator_1716_371_w200_g0.8_h1.6_16x32_1024.npz",
+        "sun_deg": -4.0974247865349245,
+        "formal_mean_cd_m2": 1251.9301403131376,
+        "mc_mean_cd_m2": 1255.3598825255635,
+        "standard_error_cd_m2": 5.62596820429558,
+        "difference_over_standard_error": 0.6096270166986074,
+        "relative_difference": 0.0027395635762614834
+      },
+      {
+        "path": "research/runs/optical_comfort/evening/scenes/ring_equator_1716_379_w200_g0.8_h1.6_16x32_1024.npz",
+        "sun_deg": -16.288173430568147,
+        "formal_mean_cd_m2": 216.66443288003805,
+        "mc_mean_cd_m2": 216.2224050842081,
+        "standard_error_cd_m2": 2.0757700270436925,
+        "difference_over_standard_error": -0.21294641991698798,
+        "relative_difference": -0.002040149321945628
+      },
+      {
+        "path": "research/runs/optical_comfort/evening/scenes/ring_equator_1716_383_w200_g0.8_h1.6_16x32_1024.npz",
+        "sun_deg": -22.38354775258474,
+        "formal_mean_cd_m2": 71.31783829563855,
+        "mc_mean_cd_m2": 70.45712553546548,
+        "standard_error_cd_m2": 1.407734443442143,
+        "difference_over_standard_error": -0.611416992872951,
+        "relative_difference": -0.012068688293735197
+      },
+      {
+        "path": "research/runs/optical_comfort/evening/scenes/ring_equator_1716_387_w200_g0.8_h1.6_16x32_1024.npz",
+        "sun_deg": -28.47892207460132,
+        "formal_mean_cd_m2": 21.757191965334194,
+        "mc_mean_cd_m2": 21.090653833776003,
+        "standard_error_cd_m2": 0.6562881281132634,
+        "difference_over_standard_error": -1.0156181454544897,
+        "relative_difference": -0.03063530131186909
+      },
+      {
+        "path": "research/runs/optical_comfort/evening/scenes/ring_equator_1716_391_w200_g0.8_h1.6_16x32_1024.npz",
+        "sun_deg": -34.57429639661794,
+        "formal_mean_cd_m2": 6.48673600673917,
+        "mc_mean_cd_m2": 5.9724737852783445,
+        "standard_error_cd_m2": 0.3373107432219805,
+        "difference_over_standard_error": -1.524594848502631,
+        "relative_difference": -0.07927904279233045
+      },
+      {
+        "path": "research/runs/optical_comfort/evening/scenes/ring_equator_1716_395_w200_g0.8_h1.6_16x32_1024.npz",
+        "sun_deg": -40.66967071863453,
+        "formal_mean_cd_m2": 1.9541331566825901,
+        "mc_mean_cd_m2": 1.5995153811958274,
+        "standard_error_cd_m2": 0.2001338675895171,
+        "difference_over_standard_error": -1.771902875599739,
+        "relative_difference": -0.18147063022500232
+      },
+      {
+        "path": "research/runs/optical_comfort/evening/scenes/ring_equator_67_350_w100_g0.8_h1.6_12x24_512.npz",
+        "sun_deg": -5.202509595947728,
+        "formal_mean_cd_m2": 1091.5926463969236,
+        "mc_mean_cd_m2": 1101.2503085896349,
+        "standard_error_cd_m2": 7.892835284308723,
+        "difference_over_standard_error": 1.2235985985810622,
+        "relative_difference": 0.008847313349525487
+      },
+      {
+        "path": "research/runs/optical_comfort/evening/scenes/ring_equator_67_350_w400_g0.8_h1.6_12x24_512.npz",
+        "sun_deg": -5.202509595947728,
+        "formal_mean_cd_m2": 1091.5926463969236,
+        "mc_mean_cd_m2": 1101.2496485343186,
+        "standard_error_cd_m2": 7.892879306436743,
+        "difference_over_standard_error": 1.223508147339793,
+        "relative_difference": 0.008846708677701765
+      },
+      {
+        "path": "research/runs/optical_comfort/evening/scenes/ring_equator_67_350_w200_g0.7_h1.6_12x24_512.npz",
+        "sun_deg": -5.202509595947728,
+        "formal_mean_cd_m2": 1091.5926463969236,
+        "mc_mean_cd_m2": 1101.2499768626399,
+        "standard_error_cd_m2": 7.8928563262486096,
+        "difference_over_standard_error": 1.2235533077676506,
+        "relative_difference": 0.008847009456863564
+      },
+      {
+        "path": "research/runs/optical_comfort/evening/scenes/ring_equator_67_350_w200_g0.9_h1.6_12x24_512.npz",
+        "sun_deg": -5.202509595947728,
+        "formal_mean_cd_m2": 1091.5926463969236,
+        "mc_mean_cd_m2": 1101.2499768626399,
+        "standard_error_cd_m2": 7.8928563262486096,
+        "difference_over_standard_error": 1.2235533077676506,
+        "relative_difference": 0.008847009456863564
+      },
+      {
+        "path": "research/runs/optical_comfort/evening/scenes/deep_ring_equator_1245_446_detail.npz",
+        "sun_deg": -25.01569332434608,
+        "formal_mean_cd_m2": 73.44565046713002,
+        "mc_mean_cd_m2": 76.68307842034916,
+        "standard_error_cd_m2": 3.1603421594897187,
+        "difference_over_standard_error": 1.0243915974407871,
+        "relative_difference": 0.044079233183019095
+      }
+    ],
+    "maximum_clear_flux_difference_over_standard_error": 1.5217537367211167,
+    "pixel_relative_standard_error_range": [
+      0.11235691243741186,
+      0.9972219773873614
+    ],
+    "faint_scene_interpretation": "Monte Carlo clear references remain consistent with the formal field at the recorded uncertainty. Broad aperture estimates are more precise than individual pixels. The 68\u201380 hour cloud enhancements include the clear reference within two sampling standard errors."
+  },
+  "make_check": {
+    "status": "PASS",
+    "command": "PYTEST_ADDOPTS=-ra OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=2 NUMBA_NUM_THREADS=2 make check PYTHON=<research-drive-environment>/bin/python",
+    "python_passed": 542,
+    "python_skipped": 13,
+    "javascript_passed": 176,
+    "layers_checked": 333,
+    "layer_violations": 0,
+    "provenance": "PASS",
+    "ensemble_integrity": "PASS",
+    "log": "research/runs/optical_comfort/evening/make-check-final.log",
+    "sha256": "c5bc9c19e6f6a548f3de6c04f8b7d6ec7625495f2e1e0f2ec627078faf5522f3"
+  },
+  "skipped": {
+    "correlated_k_tables": 4,
+    "PROSPECT_D_coefficients": 1,
+    "geography_and_conservation_inputs": 8
+  },
+  "visualization": {
+    "status": "Generated and inspected against the data",
+    "manifest": "research/runs/optical_comfort/evening/figures/manifest.json",
+    "manifest_sha256": "b31ef039105c5f60fff34f8caa69a2a4babf15a38e8cf4b96d91cec884364a72",
+    "display": "Colour averages three pixels; luminance averages one pixel. Raw radiance and photon-block errors are preserved. The viewer maintains equal angular scale on both axes.",
+    "data_round_trip": "Per-pixel XYZ reproduced from photon-block means to rtol 1e-12 and atol 1e-10; averaged display luminance checked separately.",
+    "controls": {
+      "status": "PASS",
+      "scenes": 19,
+      "rendered_states": 153,
+      "rgba_values_exercised": 285696,
+      "checks": [
+        "Every scene, raw and averaged colour, both recess states, both exposure endpoints, centre-pixel radiance/uncertainty readout",
+        "Angular aspect ratio and finite aperture mask bounds",
+        "Canvas/DOM stand-ins exercise data and controls; raster figures reviewed separately"
+      ]
+    }
+  },
+  "scientific_reading": "Focused CM1 microphysics source and radiative-transfer equations; references and reading scope in evening_sources.json.",
+  "remaining": [
+    "Three-dimensional moist regional cloud fields and local terrain",
+    "Repeated lunar cycles and the CM1/GCM humidity discrepancy",
+    "Regional optical profiles, ice habits, spectral particle absorption, aerosols and refraction",
+    "Earth-source cloud radiance and spectrum",
+    "Higher photon counts for faint colour fields; broader faint-twilight benchmarks",
+    "Human visual adaptation and physical validation"
+  ]
+}

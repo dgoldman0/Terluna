@@ -19,7 +19,10 @@ from numba import njit, prange
 
 ROOT=Path(__file__).resolve().parent
 PI=np.pi
-from atmospheres import SW, SF, O3, Atmosphere, EARTH, MOON, MOON_ZERO, rayleigh, ozone_absorption
+if __package__:
+    from .atmospheres import SW, SF, O3, Atmosphere, EARTH, MOON, MOON_ZERO, rayleigh, ozone_absorption
+else:
+    from atmospheres import SW, SF, O3, Atmosphere, EARTH, MOON, MOON_ZERO, rayleigh, ozone_absorption
 
 @njit(cache=True)
 def bracket(grid,x):
@@ -165,7 +168,7 @@ def build_paths(atm,rgrid,mus,beta,absorb,nshell=56):
 
 @njit(parallel=True,cache=True)
 def transport(prev,beam,rg,ag,srg,sag,mus,muw,cp,sp,dphi,geom,weights,ends,nseg,gb,albedo,include_beam):
-    nr=len(rg);na=len(ag);nl=prev.shape[2];nm=len(mus);np_=len(cp)
+    nr=len(rg);na=len(ag);nl=prev.shape[2];nm=mus.shape[-1];np_=len(cp)
     out=np.zeros_like(prev)
     fac=3./(16*math.pi)
     for idx in prange(nr*na):
@@ -173,7 +176,9 @@ def transport(prev,beam,rg,ag,srg,sag,mus,muw,cp,sp,dphi,geom,weights,ends,nseg,
         ca=math.cos(ag[ia]);sa=math.sin(ag[ia])
         acc=np.zeros((nl,prev.shape[3]))
         for im in range(nm):
-            mu=mus[im];st=math.sqrt(max(0.,1-mu*mu))
+            mu=mus[ir,im] if mus.ndim==2 else mus[im]
+            angular_weight=muw[ir,im] if muw.ndim==2 else muw[im]
+            st=math.sqrt(max(0.,1-mu*mu))
             for ip in range(np_):
                 vx=st*cp[ip];vy=st*sp[ip]
                 nu=sa*mu+ca*vx
@@ -202,7 +207,7 @@ def transport(prev,beam,rg,ag,srg,sag,mus,muw,cp,sp,dphi,geom,weights,ends,nseg,
                             F=(1-bu)*((1-bv)*beam[bi,bj,l,0]+bv*beam[bi,bj+1,l,0])+bu*((1-bv)*beam[bi+1,bj,l,0]+bv*beam[bi+1,bj+1,l,0])
                             src+=F*(1+nu*nu)
                         I[l]+=weights[ir,im,k,l]*fac*max(0.,src)
-                dw=muw[im]*dphi
+                dw=angular_weight*dphi
                 for l in range(nl):
                     x=I[l]*dw
                     acc[l,0]+=x;acc[l,1]+=x*mu*mu;acc[l,2]+=x*vx*vx

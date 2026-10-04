@@ -1,0 +1,3457 @@
+{
+  "schema": "terluna.research.cloud-evening-appearance/1",
+  "producer": {
+    "file": "research/studies/cloud_twilight/appearance.py",
+    "sha256": "2e25dc71b943352d495a6d942c4be6998ffc3bd2cbe043dd32a4b456b6864e0b",
+    "inputs": {
+      "research/studies/cloud_twilight/results/evening_scenes_selected.json": "92308273ca19ed509ff9df63d23b62db7902e676dcf2e062c829846ce3a8b780",
+      "research/studies/cloud_twilight/results/evening_scenes_history.json": "be7531ae090710e8daa8a78f3cbfbfae4e50491be82ca57cb4e2929743c6e9dc",
+      "research/studies/cloud_twilight/results/evening_scenes_sensitivity.json": "ec862abb0bfd564f336a2ffa1657f971eb4c162196b9873b54a3eedf2a746ca4",
+      "research/studies/cloud_twilight/results/evening_scenes_deep.json": "aafa2e11e9734ce3a4baa6c2a196377629099682f5a2b43b168b7f320d44b5a4",
+      "illumination/cloud_light/earthlight.py": "d7dfdcf3e099868d29e8dd44312d3b7c2cbedb5cbc162b755a7b53f71c836a92",
+      "illumination/ephemeris.py": "831a0127bf8cd283666cbc740020a8dfc021226e94cb294f7bf14181b1bc0e76",
+      "shared/constants.json": "63a94123983be8ff627e7556d2b63b0c835044b5ee81f924f81e65d8a264e006",
+      "illumination/sky/results/solved_sky.json": "6fa7583100f5a364b53b22949caef21a4544387a231d009640fd12b1cefe6ef3"
+    }
+  },
+  "evidence": "Radiance, colour and contrast from the computed cloud scenes, on sampled second-cycle CM1 fields.",
+  "reading_rule": "Contrast is cloudy radiance divided by the same clear sightline minus one. Angular patches are fixed geometrically or by line-of-sight cloud optical depth, independently of sampled brightness. Errors are one standard error across 16 independent photon blocks; model and geometry uncertainty are separate. The feature patch stays at its initial viewing angles through the fixed-site history. The adjacent-view comparison uses the same elevations and offsets 20\u201340 degrees on either side, including any cloud there. The black-recess probe admits 20 degrees of azimuth and the recorded elevation range (5\u201325 degrees in the regional views, 0.5\u20135 degrees in the deep horizon scene); surface reflection inside a real shelter adds light. Elevated clear backgrounds use their own photon estimate.",
+  "assumptions": {
+    "admitted_morrison_source_sha256": "8427670b64e6bad03b68d9aa5532f85e685807671b344d6d4480cf6d0db0ab8c"
+  },
+  "selected": [
+    {
+      "recess_elevation_limits_deg": [
+        5,
+        25
+      ],
+      "case": "ring_equator",
+      "snapshot": 260,
+      "time_day": 32.375,
+      "latitude_deg": 0.0,
+      "longitude_deg": 146.0022,
+      "sun_deg": -0.677687350574511,
+      "hours_after_sunset": 1.334169626235962,
+      "cloud_top_at_selection_km": 77.79412841796875,
+      "width_km": 200.0,
+      "ice_g": 0.8,
+      "observer_height_m": 1.6,
+      "surface_lux": 659.3372016170813,
+      "surface_standard_error_lux": 53.33499791802174,
+      "clear_surface_lux": 4314.997824057686,
+      "recess_lux": 4.083417899516703,
+      "recess_standard_error_lux": 0.21633699332155984,
+      "median_pixel_relative_standard_error": 0.3209573343256395,
+      "field": {
+        "pixels": 512,
+        "xyz_cd_m2": [
+          180.68710781631367,
+          182.42137316440756,
+          170.02769563391897
+        ],
+        "standard_error_xyz": [
+          4.511847858248935,
+          4.1426400926127505,
+          6.053296960204532
+        ],
+        "clear_xyz_cd_m2": [
+          1802.651083214,
+          1856.0445599593572,
+          1118.8527198439076
+        ],
+        "contrast": -0.9017149819030196,
+        "contrast_standard_error": 0.0022319723254400014,
+        "chromaticity_xy": [
+          0.3389136129603101,
+          0.34216656300227927
+        ]
+      },
+      "cloud": {
+        "pixels": 512,
+        "xyz_cd_m2": [
+          180.68710781631367,
+          182.42137316440756,
+          170.02769563391897
+        ],
+        "standard_error_xyz": [
+          4.511847858248935,
+          4.1426400926127505,
+          6.053296960204532
+        ],
+        "clear_xyz_cd_m2": [
+          1802.651083214,
+          1856.0445599593572,
+          1118.8527198439076
+        ],
+        "contrast": -0.9017149819030196,
+        "contrast_standard_error": 0.0022319723254400014,
+        "chromaticity_xy": [
+          0.3389136129603101,
+          0.34216656300227927
+        ]
+      },
+      "thin_cloud": null,
+      "feature": {
+        "pixels": 30,
+        "xyz_cd_m2": [
+          177.8842779107504,
+          199.82261107678292,
+          178.27863878757455
+        ],
+        "standard_error_xyz": [
+          7.706473413444461,
+          18.37269479287404,
+          23.90980964424011
+        ],
+        "clear_xyz_cd_m2": [
+          1504.0943325785418,
+          1622.1206403949748,
+          1286.4756664675112
+        ],
+        "contrast": -0.8768139643250409,
+        "contrast_standard_error": 0.011326343019962078,
+        "chromaticity_xy": [
+          0.31994407952054343,
+          0.3594025403438374
+        ]
+      },
+      "aperture": {
+        "pixels": 30,
+        "xyz_cd_m2": [
+          147.90073965334904,
+          148.16681488638065,
+          119.22629729333256
+        ],
+        "standard_error_xyz": [
+          17.21246426849035,
+          17.35327934258958,
+          8.794084219001554
+        ],
+        "clear_xyz_cd_m2": [
+          2285.0158981992126,
+          2278.84301107244,
+          1054.1717715792847
+        ],
+        "contrast": -0.9349815611841326,
+        "contrast_standard_error": 0.007614951647951828,
+        "chromaticity_xy": [
+          0.3561351534594869,
+          0.3567758449406085
+        ]
+      },
+      "adjacent": {
+        "pixels": 60,
+        "xyz_cd_m2": [
+          141.41323827052267,
+          146.30213936754387,
+          139.29991450935864
+        ],
+        "standard_error_xyz": [
+          11.98266516037338,
+          14.512379252274716,
+          9.433786040292222
+        ],
+        "clear_xyz_cd_m2": [
+          2079.366864645299,
+          2083.1951935396355,
+          1009.3170216994625
+        ],
+        "contrast": -0.9297703163768555,
+        "contrast_standard_error": 0.00696640396314288,
+        "chromaticity_xy": [
+          0.33116668388939186,
+          0.34261569095524025
+        ]
+      },
+      "aperture_vs_adjacent_contrast": 0.0127453742433139,
+      "aperture_vs_adjacent_standard_error": 0.11503920644149393,
+      "cloud_ray_fraction": 1.0,
+      "clear_surface_mc_lux": 4358.290081909556,
+      "clear_surface_mc_standard_error_lux": 49.623598231927645,
+      "clear_mc_relative_error": 0.003101653821644401,
+      "source": {
+        "path": "research/runs/optical_comfort/evening/scenes/ring_equator_736_260_w200_g0.8_h1.6_16x32_1024.npz",
+        "sha256": "ce3de46eb03965495a54277046bcf3e655d50bfcb84c36b67a6c07dcbfd6df85"
+      },
+      "earthlight_context": {
+        "earth_elevation_deg": -56.002199999999995,
+        "earth_illuminated_fraction": 0.21553612279311318,
+        "source_ratio": 8.761551612943714e-06,
+        "clear_surface_proxy_lux": null,
+        "reading_rule": "Separate clear-atmosphere, solar-coloured Earth proxy. Cloud attenuation and reflection, Earth spectrum, larger angular disk and libration require a separate Earth-source render. The surface proxy is evaluated where Earth is above the horizon."
+      }
+    },
+    {
+      "recess_elevation_limits_deg": [
+        5,
+        25
+      ],
+      "case": "ring_equator",
+      "snapshot": 375,
+      "time_day": 46.75,
+      "latitude_deg": -0.0,
+      "longitude_deg": 340.2753,
+      "sun_deg": -10.19279910855154,
+      "hours_after_sunset": 20.066631317138672,
+      "cloud_top_at_selection_km": 73.79412841796875,
+      "width_km": 200.0,
+      "ice_g": 0.8,
+      "observer_height_m": 1.6,
+      "surface_lux": 1024.1687064767905,
+      "surface_standard_error_lux": 46.664002430480004,
+      "clear_surface_lux": 1147.5771976326332,
+      "recess_lux": 27.978828725972598,
+      "recess_standard_error_lux": 1.2221961017408558,
+      "median_pixel_relative_standard_error": 0.1984262923854611,
+      "field": {
+        "pixels": 512,
+        "xyz_cd_m2": [
+          615.622326195947,
+          590.672499473721,
+          286.2492857668755
+        ],
+        "standard_error_xyz": [
+          6.224493965157621,
+          8.78971072167668,
+          6.26692027752702
+        ],
+        "clear_xyz_cd_m2": [
+          597.2862623633262,
+          594.7377324646757,
+          311.216670660876
+        ],
+        "contrast": -0.006835337273974118,
+        "contrast_standard_error": 0.014779137495196243,
+        "chromaticity_xy": [
+          0.41246507991205894,
+          0.3957487721453074
+        ]
+      },
+      "cloud": {
+        "pixels": 462,
+        "xyz_cd_m2": [
+          615.7290088422002,
+          586.6646440676298,
+          285.9385942819537
+        ],
+        "standard_error_xyz": [
+          6.960970290365054,
+          9.816229061139081,
+          6.7734277221308306
+        ],
+        "clear_xyz_cd_m2": [
+          591.4774357902326,
+          590.0178377760927,
+          315.01618397069745
+        ],
+        "contrast": -0.005683207343530339,
+        "contrast_standard_error": 0.016637173374517984,
+        "chromaticity_xy": [
+          0.41370400325866113,
+          0.39417586037967045
+        ]
+      },
+      "thin_cloud": {
+        "pixels": 280,
+        "xyz_cd_m2": [
+          484.57407811983444,
+          488.4429325500993,
+          270.7649494054786
+        ],
+        "standard_error_xyz": [
+          8.35387910408166,
+          8.277328931335807,
+          8.605106818104518
+        ],
+        "clear_xyz_cd_m2": [
+          534.4857050618461,
+          528.5591129567562,
+          286.8238456631173
+        ],
+        "contrast": -0.07589724483652782,
+        "contrast_standard_error": 0.015660176370874555,
+        "chromaticity_xy": [
+          0.38959728768734836,
+          0.3927078444846428
+        ]
+      },
+      "feature": {
+        "pixels": 24,
+        "xyz_cd_m2": [
+          1566.8101342092705,
+          1252.9983030291905,
+          279.2968203249426
+        ],
+        "standard_error_xyz": [
+          101.81073174230917,
+          64.25674020709869,
+          24.494403339617726
+        ],
+        "clear_xyz_cd_m2": [
+          832.7445831831814,
+          791.6797453998931,
+          291.7471565123625
+        ],
+        "contrast": 0.582708551418448,
+        "contrast_standard_error": 0.08116506779473225,
+        "chromaticity_xy": [
+          0.5055685444647133,
+          0.4043096955068671
+        ]
+      },
+      "aperture": {
+        "pixels": 30,
+        "xyz_cd_m2": [
+          1392.4170659554509,
+          1137.5104535975815,
+          300.5165940920561
+        ],
+        "standard_error_xyz": [
+          82.58604854132787,
+          52.89320841060561,
+          21.891293361631064
+        ],
+        "clear_xyz_cd_m2": [
+          826.1360998539145,
+          794.2828957198773,
+          306.66590096189344
+        ],
+        "contrast": 0.43212255951530865,
+        "contrast_standard_error": 0.0665924051690264,
+        "chromaticity_xy": [
+          0.4919429637359189,
+          0.40188408883038446
+        ]
+      },
+      "adjacent": {
+        "pixels": 60,
+        "xyz_cd_m2": [
+          660.7873834463135,
+          625.7790795234692,
+          262.0726394791276
+        ],
+        "standard_error_xyz": [
+          24.359216356462202,
+          25.977212067627867,
+          16.767272154619345
+        ],
+        "clear_xyz_cd_m2": [
+          723.4977836636295,
+          699.2111718788286,
+          287.0125322501965
+        ],
+        "contrast": -0.10502133734225427,
+        "contrast_standard_error": 0.03715216963399671,
+        "chromaticity_xy": [
+          0.4266890732652883,
+          0.4040832228334579
+        ]
+      },
+      "aperture_vs_adjacent_contrast": 0.8177508498107606,
+      "aperture_vs_adjacent_standard_error": 0.1378020812057261,
+      "cloud_ray_fraction": 0.90234375,
+      "clear_surface_mc_lux": 1185.7990816098431,
+      "clear_surface_mc_standard_error_lux": 25.116996958762613,
+      "clear_mc_relative_error": 0.0013620740498447859,
+      "source": {
+        "path": "research/runs/optical_comfort/evening/scenes/ring_equator_1716_375_w200_g0.8_h1.6_16x32_1024.npz",
+        "sha256": "90a05e6fbb1ef543d01fe8d112eeceeb110d97e0f7d04c6c5e39a8b1c8c4faec"
+      },
+      "earthlight_context": {
+        "earth_elevation_deg": 70.27530000000003,
+        "earth_illuminated_fraction": 0.7493762659641585,
+        "source_ratio": 6.131079596588669e-05,
+        "clear_surface_proxy_lux": 4.909276520342197,
+        "reading_rule": "Separate clear-atmosphere, solar-coloured Earth proxy. Cloud attenuation and reflection, Earth spectrum, larger angular disk and libration require a separate Earth-source render. The surface proxy is evaluated where Earth is above the horizon."
+      }
+    },
+    {
+      "recess_elevation_limits_deg": [
+        5,
+        25
+      ],
+      "case": "ring_equator",
+      "snapshot": 319,
+      "time_day": 39.75,
+      "latitude_deg": 0.0,
+      "longitude_deg": 75.4295,
+      "sun_deg": -20.011758600319247,
+      "hours_after_sunset": 39.39726638793945,
+      "cloud_top_at_selection_km": 67.79412841796875,
+      "width_km": 200.0,
+      "ice_g": 0.8,
+      "observer_height_m": 1.6,
+      "surface_lux": 226.49002308225306,
+      "surface_standard_error_lux": 13.312010070611336,
+      "clear_surface_lux": 178.92242950631322,
+      "recess_lux": 6.76849850913878,
+      "recess_standard_error_lux": 0.3480080624475389,
+      "median_pixel_relative_standard_error": 0.35030819650920797,
+      "field": {
+        "pixels": 512,
+        "xyz_cd_m2": [
+          142.1365690477979,
+          129.999076404128,
+          47.777913058801296
+        ],
+        "standard_error_xyz": [
+          3.6599588668765186,
+          2.878570714697672,
+          1.6313524124629333
+        ],
+        "clear_xyz_cd_m2": [
+          124.50803320738859,
+          119.70114439987346,
+          53.84229362908505
+        ],
+        "contrast": 0.08603035548142546,
+        "contrast_standard_error": 0.024047979901357694,
+        "chromaticity_xy": [
+          0.444296796014139,
+          0.406356882807044
+        ]
+      },
+      "cloud": {
+        "pixels": 448,
+        "xyz_cd_m2": [
+          141.93881425011773,
+          130.07943042361794,
+          49.73751285615956
+        ],
+        "standard_error_xyz": [
+          3.643700551687882,
+          2.8451762679553307,
+          1.863183620911173
+        ],
+        "clear_xyz_cd_m2": [
+          121.7406366401924,
+          119.0683605072923,
+          56.69107174285927
+        ],
+        "contrast": 0.09247687521196091,
+        "contrast_standard_error": 0.023895317411220078,
+        "chromaticity_xy": [
+          0.4411383819198007,
+          0.40428003968672377
+        ]
+      },
+      "thin_cloud": {
+        "pixels": 46,
+        "xyz_cd_m2": [
+          147.10335712386035,
+          131.44048546837502,
+          32.62318594204366
+        ],
+        "standard_error_xyz": [
+          10.466921284511054,
+          9.679347653731805,
+          3.118866454970743
+        ],
+        "clear_xyz_cd_m2": [
+          144.85480033136685,
+          126.62960566248505,
+          38.45045372192553
+        ],
+        "contrast": 0.03799174593272259,
+        "contrast_standard_error": 0.07643826736324887,
+        "chromaticity_xy": [
+          0.4727472503008301,
+          0.4224113527950316
+        ]
+      },
+      "feature": {
+        "pixels": 30,
+        "xyz_cd_m2": [
+          219.34415252911305,
+          177.34255445606883,
+          42.04655389109558
+        ],
+        "standard_error_xyz": [
+          14.625705403297475,
+          12.552733936290869,
+          4.647369386871114
+        ],
+        "clear_xyz_cd_m2": [
+          203.4813762598017,
+          182.11424618653967,
+          50.84178425553715
+        ],
+        "contrast": -0.02620163897328054,
+        "contrast_standard_error": 0.06892779779256314,
+        "chromaticity_xy": [
+          0.4999487663438582,
+          0.40421497586452493
+        ]
+      },
+      "aperture": {
+        "pixels": 30,
+        "xyz_cd_m2": [
+          252.86591128579818,
+          205.2891977386586,
+          57.62586112149814
+        ],
+        "standard_error_xyz": [
+          16.66762438580077,
+          14.177025582742937,
+          5.889700873555698
+        ],
+        "clear_xyz_cd_m2": [
+          204.929925288743,
+          189.33989083211696,
+          57.78928668007798
+        ],
+        "contrast": 0.0842363795418235,
+        "contrast_standard_error": 0.0748760629386512,
+        "chromaticity_xy": [
+          0.49025831878644643,
+          0.39801623096052996
+        ]
+      },
+      "adjacent": {
+        "pixels": 60,
+        "xyz_cd_m2": [
+          156.55461688380208,
+          140.7977389667364,
+          42.57466376735986
+        ],
+        "standard_error_xyz": [
+          10.682436866710917,
+          8.488531338836935,
+          2.6709583200883804
+        ],
+        "clear_xyz_cd_m2": [
+          167.7271712281589,
+          156.21637587982752,
+          52.258001091555506
+        ],
+        "contrast": -0.09870051603906238,
+        "contrast_standard_error": 0.0543382938634225,
+        "chromaticity_xy": [
+          0.46055361253653904,
+          0.41419990421768427
+        ]
+      },
+      "aperture_vs_adjacent_contrast": 0.45804328425443197,
+      "aperture_vs_adjacent_standard_error": 0.13272509022513748,
+      "cloud_ray_fraction": 0.875,
+      "clear_surface_mc_lux": 190.7963599803494,
+      "clear_surface_mc_standard_error_lux": 11.906723218466725,
+      "clear_mc_relative_error": -0.006474765931925641,
+      "source": {
+        "path": "research/runs/optical_comfort/evening/scenes/ring_equator_380_319_w200_g0.8_h1.6_16x32_1024.npz",
+        "sha256": "101392ae0fac921d180004cb46a0c3237176f8064defd814f95026c198adcf87"
+      },
+      "earthlight_context": {
+        "earth_elevation_deg": 14.570499999999996,
+        "earth_illuminated_fraction": 0.08834391309572542,
+        "source_ratio": 2.2674140316382523e-06,
+        "clear_surface_proxy_lux": 0.036197943709775124,
+        "reading_rule": "Separate clear-atmosphere, solar-coloured Earth proxy. Cloud attenuation and reflection, Earth spectrum, larger angular disk and libration require a separate Earth-source render. The surface proxy is evaluated where Earth is above the horizon."
+      }
+    },
+    {
+      "recess_elevation_limits_deg": [
+        5,
+        25
+      ],
+      "case": "ring_equator",
+      "snapshot": 350,
+      "time_day": 43.625,
+      "latitude_deg": 0.0,
+      "longitude_deg": 13.3811,
+      "sun_deg": -5.202509595947728,
+      "hours_after_sunset": 10.242206573486328,
+      "cloud_top_at_selection_km": 35.79412078857422,
+      "width_km": 200.0,
+      "ice_g": 0.8,
+      "observer_height_m": 1.6,
+      "surface_lux": 1026.9415065738267,
+      "surface_standard_error_lux": 50.34465879597,
+      "clear_surface_lux": 2468.8740892965443,
+      "recess_lux": 7.422844797248176,
+      "recess_standard_error_lux": 0.2917006913358781,
+      "median_pixel_relative_standard_error": 0.2444997392951324,
+      "field": {
+        "pixels": 512,
+        "xyz_cd_m2": [
+          282.55400369608725,
+          295.78701263421715,
+          248.95857283074636
+        ],
+        "standard_error_xyz": [
+          5.0226341659100555,
+          4.509168237433917,
+          5.304250280613155
+        ],
+        "clear_xyz_cd_m2": [
+          1122.4569701105638,
+          1137.7701155943305,
+          644.5778574100432
+        ],
+        "contrast": -0.7400291951949287,
+        "contrast_standard_error": 0.003963162835471811,
+        "chromaticity_xy": [
+          0.3415377058057288,
+          0.35753313129790054
+        ]
+      },
+      "cloud": {
+        "pixels": 512,
+        "xyz_cd_m2": [
+          282.55400369608725,
+          295.78701263421715,
+          248.95857283074636
+        ],
+        "standard_error_xyz": [
+          5.0226341659100555,
+          4.509168237433917,
+          5.304250280613155
+        ],
+        "clear_xyz_cd_m2": [
+          1122.4569701105638,
+          1137.7701155943305,
+          644.5778574100432
+        ],
+        "contrast": -0.7400291951949287,
+        "contrast_standard_error": 0.003963162835471811,
+        "chromaticity_xy": [
+          0.3415377058057288,
+          0.35753313129790054
+        ]
+      },
+      "thin_cloud": {
+        "pixels": 8,
+        "xyz_cd_m2": [
+          600.7720968110614,
+          549.1304454152526,
+          189.04261715829378
+        ],
+        "standard_error_xyz": [
+          44.109207882150436,
+          39.01113816592883,
+          22.629423322227694
+        ],
+        "clear_xyz_cd_m2": [
+          1039.9751830020841,
+          983.4654506906685,
+          436.3388393481803
+        ],
+        "contrast": -0.44163727863585955,
+        "contrast_standard_error": 0.03966701437100009,
+        "chromaticity_xy": [
+          0.448690592441577,
+          0.4101216853927298
+        ]
+      },
+      "feature": {
+        "pixels": 30,
+        "xyz_cd_m2": [
+          214.29840371522332,
+          266.8057912896096,
+          281.5338674709049
+        ],
+        "standard_error_xyz": [
+          13.058481567165913,
+          27.52306165219327,
+          15.707946768570585
+        ],
+        "clear_xyz_cd_m2": [
+          1290.3963431779011,
+          1344.006370301537,
+          773.8303587242884
+        ],
+        "contrast": -0.801484727167067,
+        "contrast_standard_error": 0.020478371427672837,
+        "chromaticity_xy": [
+          0.28099620810892967,
+          0.3498458894426052
+        ]
+      },
+      "aperture": {
+        "pixels": 30,
+        "xyz_cd_m2": [
+          222.13866091903964,
+          242.45761168571332,
+          216.85464206909487
+        ],
+        "standard_error_xyz": [
+          14.253140440601316,
+          24.447296864231593,
+          17.12820556955531
+        ],
+        "clear_xyz_cd_m2": [
+          1466.3072757972102,
+          1437.031281009196,
+          616.8692664516349
+        ],
+        "contrast": -0.8312788212129658,
+        "contrast_standard_error": 0.017012362352378848,
+        "chromaticity_xy": [
+          0.32597896067886034,
+          0.35579614975167656
+        ]
+      },
+      "adjacent": {
+        "pixels": 60,
+        "xyz_cd_m2": [
+          278.8998168675492,
+          282.56364404836165,
+          198.6783372157265
+        ],
+        "standard_error_xyz": [
+          15.62517161646152,
+          14.946416681510257,
+          17.567282775402035
+        ],
+        "clear_xyz_cd_m2": [
+          1314.7954527209383,
+          1294.6634298781785,
+          585.3422769760508
+        ],
+        "contrast": -0.7817474120861284,
+        "contrast_standard_error": 0.011544634950348943,
+        "chromaticity_xy": [
+          0.3669049874024304,
+          0.37172491335547997
+        ]
+      },
+      "aperture_vs_adjacent_contrast": -0.14193627951578947,
+      "aperture_vs_adjacent_standard_error": 0.10111563105770495,
+      "cloud_ray_fraction": 1.0,
+      "clear_surface_mc_lux": 2513.360593852877,
+      "clear_surface_mc_standard_error_lux": 38.21401751168902,
+      "clear_mc_relative_error": 0.002652292107520271,
+      "source": {
+        "path": "research/runs/optical_comfort/evening/scenes/ring_equator_67_350_w200_g0.8_h1.6_16x32_1024.npz",
+        "sha256": "d04b39f9c4d573d570314cb9d60a0e5977c463b3fe6aa0dde823cad56c393fb4"
+      },
+      "earthlight_context": {
+        "earth_elevation_deg": 76.61890000000001,
+        "earth_illuminated_fraction": 0.4288704387645309,
+        "source_ratio": 2.5244134461428754e-05,
+        "clear_surface_proxy_lux": 2.125166750577364,
+        "reading_rule": "Separate clear-atmosphere, solar-coloured Earth proxy. Cloud attenuation and reflection, Earth spectrum, larger angular disk and libration require a separate Earth-source render. The surface proxy is evaluated where Earth is above the horizon."
+      }
+    },
+    {
+      "recess_elevation_limits_deg": [
+        5,
+        25
+      ],
+      "case": "ring_70_45e",
+      "snapshot": 328,
+      "time_day": 40.875,
+      "latitude_deg": -0.8383,
+      "longitude_deg": 44.6949,
+      "sun_deg": -2.9914303188057008,
+      "hours_after_sunset": 5.889881610870361,
+      "cloud_top_at_selection_km": 35.79412078857422,
+      "width_km": 200.0,
+      "ice_g": 0.8,
+      "observer_height_m": 1.6,
+      "surface_lux": 1188.1637836176683,
+      "surface_standard_error_lux": 38.70341162248182,
+      "clear_surface_lux": 3296.655287041108,
+      "recess_lux": 5.884117857362837,
+      "recess_standard_error_lux": 0.22066751436457624,
+      "median_pixel_relative_standard_error": 0.22411346124592468,
+      "field": {
+        "pixels": 512,
+        "xyz_cd_m2": [
+          200.59010842545186,
+          197.60762365378395,
+          171.06356784745856
+        ],
+        "standard_error_xyz": [
+          3.816794738056819,
+          2.531239494240939,
+          3.2921203871151907
+        ],
+        "clear_xyz_cd_m2": [
+          1096.5283985950273,
+          1129.6459273786688,
+          734.1744723393863
+        ],
+        "contrast": -0.8250711848159977,
+        "contrast_standard_error": 0.0022407370600756762,
+        "chromaticity_xy": [
+          0.35236912899451006,
+          0.3471299097255171
+        ]
+      },
+      "cloud": {
+        "pixels": 512,
+        "xyz_cd_m2": [
+          200.59010842545186,
+          197.60762365378395,
+          171.06356784745856
+        ],
+        "standard_error_xyz": [
+          3.816794738056819,
+          2.531239494240939,
+          3.2921203871151907
+        ],
+        "clear_xyz_cd_m2": [
+          1096.5283985950273,
+          1129.6459273786688,
+          734.1744723393863
+        ],
+        "contrast": -0.8250711848159977,
+        "contrast_standard_error": 0.0022407370600756762,
+        "chromaticity_xy": [
+          0.35236912899451006,
+          0.3471299097255171
+        ]
+      },
+      "thin_cloud": null,
+      "feature": {
+        "pixels": 30,
+        "xyz_cd_m2": [
+          212.02139486383743,
+          224.2460727449836,
+          209.26893902370068
+        ],
+        "standard_error_xyz": [
+          14.374185799312547,
+          17.45749230570998,
+          14.656204037471973
+        ],
+        "clear_xyz_cd_m2": [
+          1123.2364409955273,
+          1184.4859164481688,
+          803.6144314947305
+        ],
+        "contrast": -0.8106806762064223,
+        "contrast_standard_error": 0.014738454939218259,
+        "chromaticity_xy": [
+          0.32844219580094547,
+          0.34737943583194064
+        ]
+      },
+      "aperture": {
+        "pixels": 30,
+        "xyz_cd_m2": [
+          157.7534828429878,
+          173.28618201097558,
+          157.79716534446487
+        ],
+        "standard_error_xyz": [
+          5.554341575412761,
+          11.362782241147897,
+          10.345167762633864
+        ],
+        "clear_xyz_cd_m2": [
+          1141.135509801016,
+          1151.464568042876,
+          646.8940930511123
+        ],
+        "contrast": -0.8495080206371377,
+        "contrast_standard_error": 0.009868112798695159,
+        "chromaticity_xy": [
+          0.322711942099274,
+          0.35448675571485766
+        ]
+      },
+      "adjacent": {
+        "pixels": 60,
+        "xyz_cd_m2": [
+          209.0063486353219,
+          197.4492839295473,
+          163.03724327606358
+        ],
+        "standard_error_xyz": [
+          19.510666615320137,
+          12.406828549904041,
+          8.212705292691087
+        ],
+        "clear_xyz_cd_m2": [
+          1201.6806557077546,
+          1204.0034641143957,
+          651.910758915917
+        ],
+        "contrast": -0.8360060499703121,
+        "contrast_standard_error": 0.010304645227104791,
+        "chromaticity_xy": [
+          0.3670043252546328,
+          0.3467107180892946
+        ]
+      },
+      "aperture_vs_adjacent_contrast": -0.12237624486495213,
+      "aperture_vs_adjacent_standard_error": 0.0788812133435731,
+      "cloud_ray_fraction": 1.0,
+      "clear_surface_mc_lux": 3314.9227430045344,
+      "clear_surface_mc_standard_error_lux": 40.33103853422932,
+      "clear_mc_relative_error": 0.00593510288891852,
+      "source": {
+        "path": "research/runs/optical_comfort/evening/scenes/ring_70_45e_1811_328_w200_g0.8_h1.6_16x32_1024.npz",
+        "sha256": "e638155cbb0697afd70ad7d1f8d09e406b66ff0964c1d7a4363429042cfe8d79"
+      },
+      "earthlight_context": {
+        "earth_elevation_deg": 45.29890216313752,
+        "earth_illuminated_fraction": 0.16736431687457792,
+        "source_ratio": 5.962842612017545e-06,
+        "clear_surface_proxy_lux": 0.3327895565960007,
+        "reading_rule": "Separate clear-atmosphere, solar-coloured Earth proxy. Cloud attenuation and reflection, Earth spectrum, larger angular disk and libration require a separate Earth-source render. The surface proxy is evaluated where Earth is above the horizon."
+      }
+    },
+    {
+      "recess_elevation_limits_deg": [
+        5,
+        25
+      ],
+      "case": "ring_70_135e",
+      "snapshot": 258,
+      "time_day": 32.125,
+      "latitude_deg": 32.6045,
+      "longitude_deg": 148.4625,
+      "sun_deg": -0.07606978072340857,
+      "hours_after_sunset": 0.17777712643146515,
+      "cloud_top_at_selection_km": 57.79412078857422,
+      "width_km": 200.0,
+      "ice_g": 0.8,
+      "observer_height_m": 1.6,
+      "surface_lux": 4829.962992394082,
+      "surface_standard_error_lux": 72.23894781369259,
+      "clear_surface_lux": 4602.13229719731,
+      "recess_lux": 36.38201443152292,
+      "recess_standard_error_lux": 0.6980711074220419,
+      "median_pixel_relative_standard_error": 0.11235691243741186,
+      "field": {
+        "pixels": 512,
+        "xyz_cd_m2": [
+          1354.0386634768838,
+          1337.7146905443728,
+          840.1859934423077
+        ],
+        "standard_error_xyz": [
+          8.471083808580975,
+          7.337665239598671,
+          5.068005920898841
+        ],
+        "clear_xyz_cd_m2": [
+          1532.4099636710982,
+          1593.5042914640571,
+          1057.0625997506766
+        ],
+        "contrast": -0.16052018327774542,
+        "contrast_standard_error": 0.004604735160679784,
+        "chromaticity_xy": [
+          0.3833697383419895,
+          0.3787479225839602
+        ]
+      },
+      "cloud": {
+        "pixels": 482,
+        "xyz_cd_m2": [
+          1346.6431037469188,
+          1336.432840363017,
+          858.3714397204527
+        ],
+        "standard_error_xyz": [
+          8.091298586533302,
+          7.268294354821868,
+          6.027122530983363
+        ],
+        "clear_xyz_cd_m2": [
+          1542.1265678227185,
+          1612.9912100209533,
+          1085.9291282339193
+        ],
+        "contrast": -0.17145683618098806,
+        "contrast_standard_error": 0.004506096691455281,
+        "chromaticity_xy": [
+          0.38025218443042497,
+          0.37736910802767504
+        ]
+      },
+      "thin_cloud": {
+        "pixels": 46,
+        "xyz_cd_m2": [
+          1514.4755198390203,
+          1461.2267185786807,
+          636.2411345466777
+        ],
+        "standard_error_xyz": [
+          18.707508397700906,
+          23.45527245023053,
+          29.795043800560567
+        ],
+        "clear_xyz_cd_m2": [
+          1461.3147514504205,
+          1420.7202104867458,
+          742.7316089450071
+        ],
+        "contrast": 0.02851124928958182,
+        "contrast_standard_error": 0.016509424077380187,
+        "chromaticity_xy": [
+          0.41929658454087737,
+          0.40455416037694664
+        ]
+      },
+      "feature": {
+        "pixels": 30,
+        "xyz_cd_m2": [
+          1210.0942030055926,
+          1266.118590573361,
+          980.834203116857
+        ],
+        "standard_error_xyz": [
+          28.85313610371803,
+          28.68450029415303,
+          25.77564706672477
+        ],
+        "clear_xyz_cd_m2": [
+          1411.4587953128532,
+          1523.651789611813,
+          1209.0602477283076
+        ],
+        "contrast": -0.16902365802626385,
+        "contrast_standard_error": 0.018826152070783243,
+        "chromaticity_xy": [
+          0.3500369547079287,
+          0.36624280543003795
+        ]
+      },
+      "aperture": {
+        "pixels": 30,
+        "xyz_cd_m2": [
+          1246.6701865052596,
+          1228.0462741805495,
+          699.5982680758206
+        ],
+        "standard_error_xyz": [
+          25.935515719283305,
+          20.86602111068028,
+          37.60702379828671
+        ],
+        "clear_xyz_cd_m2": [
+          1620.1729951462978,
+          1651.1298578916937,
+          936.075680808344
+        ],
+        "contrast": -0.2562388304523632,
+        "contrast_standard_error": 0.012637419771043224,
+        "chromaticity_xy": [
+          0.39273679298700576,
+          0.3868697275205718
+        ]
+      },
+      "adjacent": {
+        "pixels": 60,
+        "xyz_cd_m2": [
+          1449.52783169329,
+          1363.8151419084631,
+          714.4598360529501
+        ],
+        "standard_error_xyz": [
+          27.60191701793002,
+          21.833246096025007,
+          15.35586071313133
+        ],
+        "clear_xyz_cd_m2": [
+          1692.451397817162,
+          1712.9298047411855,
+          939.8171391351011
+        ],
+        "contrast": -0.20381142406794173,
+        "contrast_standard_error": 0.012746141748245132,
+        "chromaticity_xy": [
+          0.410886863553229,
+          0.38659052546135697
+        ]
+      },
+      "aperture_vs_adjacent_contrast": -0.09955078482111923,
+      "aperture_vs_adjacent_standard_error": 0.02031680216248311,
+      "cloud_ray_fraction": 0.94140625,
+      "clear_surface_mc_lux": 4624.499650837086,
+      "clear_surface_mc_standard_error_lux": 48.04468187094048,
+      "clear_mc_relative_error": 0.005970895299498791,
+      "source": {
+        "path": "research/runs/optical_comfort/evening/scenes/ring_70_135e_176_258_w200_g0.8_h1.6_16x32_1024.npz",
+        "sha256": "24d3af57574a314a9c366a7a64f22cc93f05509b51ac55aa26fe941dcfa4b9ff"
+      },
+      "earthlight_context": {
+        "earth_elevation_deg": -45.888321159107704,
+        "earth_illuminated_fraction": 0.23780043702848658,
+        "source_ratio": 1.0179520302241646e-05,
+        "clear_surface_proxy_lux": null,
+        "reading_rule": "Separate clear-atmosphere, solar-coloured Earth proxy. Cloud attenuation and reflection, Earth spectrum, larger angular disk and libration require a separate Earth-source render. The surface proxy is evaluated where Earth is above the horizon."
+      }
+    }
+  ],
+  "history": [
+    {
+      "recess_elevation_limits_deg": [
+        5,
+        25
+      ],
+      "case": "ring_equator",
+      "snapshot": 371,
+      "time_day": 46.25,
+      "latitude_deg": -0.0,
+      "longitude_deg": 340.2753,
+      "sun_deg": -4.0974247865349245,
+      "hours_after_sunset": 8.066631317138672,
+      "cloud_top_at_selection_km": 73.79412841796875,
+      "width_km": 200.0,
+      "ice_g": 0.8,
+      "observer_height_m": 1.6,
+      "surface_lux": 2826.390174084218,
+      "surface_standard_error_lux": 78.53053836781025,
+      "clear_surface_lux": 2863.8208371831583,
+      "recess_lux": 106.38799483021937,
+      "recess_standard_error_lux": 2.435108501240507,
+      "median_pixel_relative_standard_error": 0.14545175483812559,
+      "field": {
+        "pixels": 512,
+        "xyz_cd_m2": [
+          1636.0804198595554,
+          1592.7918425380371,
+          742.204336282031
+        ],
+        "standard_error_xyz": [
+          18.50986651557797,
+          12.641260571886722,
+          9.004150803506466
+        ],
+        "clear_xyz_cd_m2": [
+          1271.0954243187803,
+          1293.1685931316515,
+          744.3796544749855
+        ],
+        "contrast": 0.23169697361794994,
+        "contrast_standard_error": 0.009775415702969964,
+        "chromaticity_xy": [
+          0.4119992095855188,
+          0.4010982419900029
+        ]
+      },
+      "cloud": {
+        "pixels": 404,
+        "xyz_cd_m2": [
+          1706.6934941397838,
+          1649.8748796185403,
+          782.043996253977
+        ],
+        "standard_error_xyz": [
+          24.156294039508623,
+          12.050669017749572,
+          10.074346901341872
+        ],
+        "clear_xyz_cd_m2": [
+          1234.2858817522015,
+          1266.2583405960727,
+          771.2959043722855
+        ],
+        "contrast": 0.3029528230723326,
+        "contrast_standard_error": 0.009516753913010274,
+        "chromaticity_xy": [
+          0.41238302637526575,
+          0.39865412174700393
+        ]
+      },
+      "thin_cloud": {
+        "pixels": 512,
+        "xyz_cd_m2": [
+          1636.0804198595554,
+          1592.7918425380371,
+          742.204336282031
+        ],
+        "standard_error_xyz": [
+          18.50986651557797,
+          12.641260571886722,
+          9.004150803506466
+        ],
+        "clear_xyz_cd_m2": [
+          1271.0954243187803,
+          1293.1685931316515,
+          744.3796544749855
+        ],
+        "contrast": 0.23169697361794994,
+        "contrast_standard_error": 0.009775415702969964,
+        "chromaticity_xy": [
+          0.4119992095855188,
+          0.4010982419900029
+        ]
+      },
+      "feature": {
+        "pixels": 24,
+        "xyz_cd_m2": [
+          3902.231807075982,
+          3505.5913644918214,
+          798.712112254822
+        ],
+        "standard_error_xyz": [
+          135.74344415068228,
+          118.42591162251733,
+          65.26004744685578
+        ],
+        "clear_xyz_cd_m2": [
+          1649.342588919566,
+          1606.1641983810773,
+          675.655273485462
+        ],
+        "contrast": 1.1825859199359936,
+        "contrast_standard_error": 0.0737321325813911,
+        "chromaticity_xy": [
+          0.4755029585711246,
+          0.4271706930210027
+        ]
+      },
+      "aperture": {
+        "pixels": 30,
+        "xyz_cd_m2": [
+          3798.456377438254,
+          3420.361709012822,
+          822.73838597045
+        ],
+        "standard_error_xyz": [
+          102.9780330606963,
+          96.54319074974467,
+          54.546087089020936
+        ],
+        "clear_xyz_cd_m2": [
+          1645.375663485111,
+          1619.0571297499291,
+          709.0083863559048
+        ],
+        "contrast": 1.1125639399402245,
+        "contrast_standard_error": 0.05962926753835809,
+        "chromaticity_xy": [
+          0.4723533796554236,
+          0.42533578179086773
+        ]
+      },
+      "adjacent": {
+        "pixels": 60,
+        "xyz_cd_m2": [
+          1541.397802646127,
+          1482.1928522451776,
+          656.2608586081012
+        ],
+        "standard_error_xyz": [
+          30.565628662424317,
+          24.405018265789366,
+          18.542526477369623
+        ],
+        "clear_xyz_cd_m2": [
+          1481.6412092955204,
+          1464.7470597588178,
+          674.4690760445849
+        ],
+        "contrast": 0.011910447179346084,
+        "contrast_standard_error": 0.016661592254575232,
+        "chromaticity_xy": [
+          0.418874999980723,
+          0.40278604905872023
+        ]
+      },
+      "aperture_vs_adjacent_contrast": 1.3076360838144434,
+      "aperture_vs_adjacent_standard_error": 0.07461062823742055,
+      "cloud_ray_fraction": 0.7890625,
+      "clear_surface_mc_lux": 2908.3356459568095,
+      "clear_surface_mc_standard_error_lux": 41.25477850329073,
+      "clear_mc_relative_error": 0.0027395635762621495,
+      "source": {
+        "path": "research/runs/optical_comfort/evening/scenes/ring_equator_1716_371_w200_g0.8_h1.6_16x32_1024.npz",
+        "sha256": "39f743913d07a5439cea58a80e42d5dd498427f34b9e023c7b476a49e3f822fd"
+      },
+      "earthlight_context": {
+        "earth_elevation_deg": 70.27530000000003,
+        "earth_illuminated_fraction": 0.7019493157182984,
+        "source_ratio": 5.5103566652313726e-05,
+        "clear_surface_proxy_lux": 4.412251410075178,
+        "reading_rule": "Separate clear-atmosphere, solar-coloured Earth proxy. Cloud attenuation and reflection, Earth spectrum, larger angular disk and libration require a separate Earth-source render. The surface proxy is evaluated where Earth is above the horizon."
+      }
+    },
+    {
+      "recess_elevation_limits_deg": [
+        5,
+        25
+      ],
+      "case": "ring_equator",
+      "snapshot": 375,
+      "time_day": 46.75,
+      "latitude_deg": -0.0,
+      "longitude_deg": 340.2753,
+      "sun_deg": -10.19279910855154,
+      "hours_after_sunset": 20.066631317138672,
+      "cloud_top_at_selection_km": 73.79412841796875,
+      "width_km": 200.0,
+      "ice_g": 0.8,
+      "observer_height_m": 1.6,
+      "surface_lux": 1024.1687064767905,
+      "surface_standard_error_lux": 46.664002430480004,
+      "clear_surface_lux": 1147.5771976326332,
+      "recess_lux": 27.978828725972598,
+      "recess_standard_error_lux": 1.2221961017408558,
+      "median_pixel_relative_standard_error": 0.1984262923854611,
+      "field": {
+        "pixels": 512,
+        "xyz_cd_m2": [
+          615.622326195947,
+          590.672499473721,
+          286.2492857668755
+        ],
+        "standard_error_xyz": [
+          6.224493965157621,
+          8.78971072167668,
+          6.26692027752702
+        ],
+        "clear_xyz_cd_m2": [
+          597.2862623633262,
+          594.7377324646757,
+          311.216670660876
+        ],
+        "contrast": -0.006835337273974118,
+        "contrast_standard_error": 0.014779137495196243,
+        "chromaticity_xy": [
+          0.41246507991205894,
+          0.3957487721453074
+        ]
+      },
+      "cloud": {
+        "pixels": 462,
+        "xyz_cd_m2": [
+          615.7290088422002,
+          586.6646440676298,
+          285.9385942819537
+        ],
+        "standard_error_xyz": [
+          6.960970290365054,
+          9.816229061139081,
+          6.7734277221308306
+        ],
+        "clear_xyz_cd_m2": [
+          591.4774357902326,
+          590.0178377760927,
+          315.01618397069745
+        ],
+        "contrast": -0.005683207343530339,
+        "contrast_standard_error": 0.016637173374517984,
+        "chromaticity_xy": [
+          0.41370400325866113,
+          0.39417586037967045
+        ]
+      },
+      "thin_cloud": {
+        "pixels": 280,
+        "xyz_cd_m2": [
+          484.57407811983444,
+          488.4429325500993,
+          270.7649494054786
+        ],
+        "standard_error_xyz": [
+          8.35387910408166,
+          8.277328931335807,
+          8.605106818104518
+        ],
+        "clear_xyz_cd_m2": [
+          534.4857050618461,
+          528.5591129567562,
+          286.8238456631173
+        ],
+        "contrast": -0.07589724483652782,
+        "contrast_standard_error": 0.015660176370874555,
+        "chromaticity_xy": [
+          0.38959728768734836,
+          0.3927078444846428
+        ]
+      },
+      "feature": {
+        "pixels": 24,
+        "xyz_cd_m2": [
+          1566.8101342092705,
+          1252.9983030291905,
+          279.2968203249426
+        ],
+        "standard_error_xyz": [
+          101.81073174230917,
+          64.25674020709869,
+          24.494403339617726
+        ],
+        "clear_xyz_cd_m2": [
+          832.7445831831814,
+          791.6797453998931,
+          291.7471565123625
+        ],
+        "contrast": 0.582708551418448,
+        "contrast_standard_error": 0.08116506779473225,
+        "chromaticity_xy": [
+          0.5055685444647133,
+          0.4043096955068671
+        ]
+      },
+      "aperture": {
+        "pixels": 30,
+        "xyz_cd_m2": [
+          1392.4170659554509,
+          1137.5104535975815,
+          300.5165940920561
+        ],
+        "standard_error_xyz": [
+          82.58604854132787,
+          52.89320841060561,
+          21.891293361631064
+        ],
+        "clear_xyz_cd_m2": [
+          826.1360998539145,
+          794.2828957198773,
+          306.66590096189344
+        ],
+        "contrast": 0.43212255951530865,
+        "contrast_standard_error": 0.0665924051690264,
+        "chromaticity_xy": [
+          0.4919429637359189,
+          0.40188408883038446
+        ]
+      },
+      "adjacent": {
+        "pixels": 60,
+        "xyz_cd_m2": [
+          660.7873834463135,
+          625.7790795234692,
+          262.0726394791276
+        ],
+        "standard_error_xyz": [
+          24.359216356462202,
+          25.977212067627867,
+          16.767272154619345
+        ],
+        "clear_xyz_cd_m2": [
+          723.4977836636295,
+          699.2111718788286,
+          287.0125322501965
+        ],
+        "contrast": -0.10502133734225427,
+        "contrast_standard_error": 0.03715216963399671,
+        "chromaticity_xy": [
+          0.4266890732652883,
+          0.4040832228334579
+        ]
+      },
+      "aperture_vs_adjacent_contrast": 0.8177508498107606,
+      "aperture_vs_adjacent_standard_error": 0.1378020812057261,
+      "cloud_ray_fraction": 0.90234375,
+      "clear_surface_mc_lux": 1185.7990816098431,
+      "clear_surface_mc_standard_error_lux": 25.116996958762613,
+      "clear_mc_relative_error": 0.0013620740498447859,
+      "source": {
+        "path": "research/runs/optical_comfort/evening/scenes/ring_equator_1716_375_w200_g0.8_h1.6_16x32_1024.npz",
+        "sha256": "90a05e6fbb1ef543d01fe8d112eeceeb110d97e0f7d04c6c5e39a8b1c8c4faec"
+      },
+      "earthlight_context": {
+        "earth_elevation_deg": 70.27530000000003,
+        "earth_illuminated_fraction": 0.7493762659641585,
+        "source_ratio": 6.131079596588669e-05,
+        "clear_surface_proxy_lux": 4.909276520342197,
+        "reading_rule": "Separate clear-atmosphere, solar-coloured Earth proxy. Cloud attenuation and reflection, Earth spectrum, larger angular disk and libration require a separate Earth-source render. The surface proxy is evaluated where Earth is above the horizon."
+      }
+    },
+    {
+      "recess_elevation_limits_deg": [
+        5,
+        25
+      ],
+      "case": "ring_equator",
+      "snapshot": 379,
+      "time_day": 47.25,
+      "latitude_deg": -0.0,
+      "longitude_deg": 340.2753,
+      "sun_deg": -16.288173430568147,
+      "hours_after_sunset": 32.06663131713867,
+      "cloud_top_at_selection_km": 73.79412841796875,
+      "width_km": 200.0,
+      "ice_g": 0.8,
+      "observer_height_m": 1.6,
+      "surface_lux": 241.58784643051345,
+      "surface_standard_error_lux": 13.073933068185395,
+      "clear_surface_lux": 374.7665110897993,
+      "recess_lux": 2.4405956489571503,
+      "recess_standard_error_lux": 0.19851173974873587,
+      "median_pixel_relative_standard_error": 0.35008639472230113,
+      "field": {
+        "pixels": 512,
+        "xyz_cd_m2": [
+          84.69984544739707,
+          83.7916485861032,
+          49.42644417561659
+        ],
+        "standard_error_xyz": [
+          2.373349355231385,
+          2.3613848851302826,
+          1.950286546523391
+        ],
+        "clear_xyz_cd_m2": [
+          236.4404226544357,
+          230.07574157984425,
+          109.02465635946496
+        ],
+        "contrast": -0.6358084167816337,
+        "contrast_standard_error": 0.010263510915646881,
+        "chromaticity_xy": [
+          0.38867771117638794,
+          0.3845101017140482
+        ]
+      },
+      "cloud": {
+        "pixels": 512,
+        "xyz_cd_m2": [
+          84.69984544739707,
+          83.7916485861032,
+          49.42644417561659
+        ],
+        "standard_error_xyz": [
+          2.373349355231385,
+          2.3613848851302826,
+          1.950286546523391
+        ],
+        "clear_xyz_cd_m2": [
+          236.4404226544357,
+          230.07574157984425,
+          109.02465635946496
+        ],
+        "contrast": -0.6358084167816337,
+        "contrast_standard_error": 0.010263510915646881,
+        "chromaticity_xy": [
+          0.38867771117638794,
+          0.3845101017140482
+        ]
+      },
+      "thin_cloud": {
+        "pixels": 30,
+        "xyz_cd_m2": [
+          166.5983565917522,
+          151.00442440172893,
+          42.02691757686438
+        ],
+        "standard_error_xyz": [
+          9.663868126303003,
+          11.974922210018923,
+          3.491998880119576
+        ],
+        "clear_xyz_cd_m2": [
+          223.29173186389716,
+          197.93713062704688,
+          69.13446818107631
+        ],
+        "contrast": -0.2371091572189583,
+        "contrast_standard_error": 0.06049861474743751,
+        "chromaticity_xy": [
+          0.463249718402121,
+          0.4198886382354533
+        ]
+      },
+      "feature": {
+        "pixels": 24,
+        "xyz_cd_m2": [
+          71.67932386530546,
+          75.73446998142576,
+          36.78390498488196
+        ],
+        "standard_error_xyz": [
+          8.734273577569528,
+          13.295551068952868,
+          4.269809585008713
+        ],
+        "clear_xyz_cd_m2": [
+          370.4752997031703,
+          342.8073710810611,
+          107.42057729468779
+        ],
+        "contrast": -0.7790757248229724,
+        "contrast_standard_error": 0.03878432084766628,
+        "chromaticity_xy": [
+          0.38914342752366354,
+          0.41115861089371947
+        ]
+      },
+      "aperture": {
+        "pixels": 30,
+        "xyz_cd_m2": [
+          69.09290414462899,
+          71.80442119715784,
+          38.99149616834639
+        ],
+        "standard_error_xyz": [
+          6.883556179429199,
+          11.226902595780086,
+          4.019828818686208
+        ],
+        "clear_xyz_cd_m2": [
+          362.6907010018389,
+          339.8586914482327,
+          112.96910620469062
+        ],
+        "contrast": -0.7887227162230892,
+        "contrast_standard_error": 0.033034031137880046,
+        "chromaticity_xy": [
+          0.38408670180062837,
+          0.3991599955704478
+        ]
+      },
+      "adjacent": {
+        "pixels": 60,
+        "xyz_cd_m2": [
+          85.8989900283032,
+          80.23916647725122,
+          38.02192479532503
+        ],
+        "standard_error_xyz": [
+          12.500067126675743,
+          7.843580187074747,
+          2.6189022861877627
+        ],
+        "clear_xyz_cd_m2": [
+          305.31791675814503,
+          287.95222550151476,
+          103.53222933243408
+        ],
+        "contrast": -0.7213455588422631,
+        "contrast_standard_error": 0.02723917196129983,
+        "chromaticity_xy": [
+          0.4207433180912099,
+          0.3930208391668855
+        ]
+      },
+      "aperture_vs_adjacent_contrast": -0.1051200510972996,
+      "aperture_vs_adjacent_standard_error": 0.16787250200199302,
+      "cloud_ray_fraction": 1.0,
+      "clear_surface_mc_lux": 396.6296729048295,
+      "clear_surface_mc_standard_error_lux": 15.339881208813592,
+      "clear_mc_relative_error": -0.002040149321945628,
+      "source": {
+        "path": "research/runs/optical_comfort/evening/scenes/ring_equator_1716_379_w200_g0.8_h1.6_16x32_1024.npz",
+        "sha256": "a6be0ccb3e456c7fa31c24598b09c085f29a51986e36c36c760457e25a630049"
+      },
+      "earthlight_context": {
+        "earth_elevation_deg": 70.27530000000003,
+        "earth_illuminated_fraction": 0.7939835287173973,
+        "source_ratio": 6.745316559586479e-05,
+        "clear_surface_proxy_lux": 5.401108187647454,
+        "reading_rule": "Separate clear-atmosphere, solar-coloured Earth proxy. Cloud attenuation and reflection, Earth spectrum, larger angular disk and libration require a separate Earth-source render. The surface proxy is evaluated where Earth is above the horizon."
+      }
+    },
+    {
+      "recess_elevation_limits_deg": [
+        5,
+        25
+      ],
+      "case": "ring_equator",
+      "snapshot": 383,
+      "time_day": 47.75,
+      "latitude_deg": -0.0,
+      "longitude_deg": 340.2753,
+      "sun_deg": -22.38354775258474,
+      "hours_after_sunset": 44.06663131713867,
+      "cloud_top_at_selection_km": 73.79412841796875,
+      "width_km": 200.0,
+      "ice_g": 0.8,
+      "observer_height_m": 1.6,
+      "surface_lux": 84.96762586246966,
+      "surface_standard_error_lux": 9.249520400593648,
+      "clear_surface_lux": 111.07966325507874,
+      "recess_lux": 0.7860156451300838,
+      "recess_standard_error_lux": 0.12179461420224387,
+      "median_pixel_relative_standard_error": 0.5298593294695411,
+      "field": {
+        "pixels": 512,
+        "xyz_cd_m2": [
+          27.61284391204279,
+          25.3080033699783,
+          15.183691435729763
+        ],
+        "standard_error_xyz": [
+          1.635192687108564,
+          1.2412195015346332,
+          0.779187912899337
+        ],
+        "clear_xyz_cd_m2": [
+          80.89242653513382,
+          77.26565782430177,
+          33.79225478582291
+        ],
+        "contrast": -0.6724546961403288,
+        "contrast_standard_error": 0.016064310283322822,
+        "chromaticity_xy": [
+          0.405447925085876,
+          0.37160523874720836
+        ]
+      },
+      "cloud": {
+        "pixels": 512,
+        "xyz_cd_m2": [
+          27.61284391204279,
+          25.3080033699783,
+          15.183691435729763
+        ],
+        "standard_error_xyz": [
+          1.635192687108564,
+          1.2412195015346332,
+          0.779187912899337
+        ],
+        "clear_xyz_cd_m2": [
+          80.89242653513382,
+          77.26565782430177,
+          33.79225478582291
+        ],
+        "contrast": -0.6724546961403288,
+        "contrast_standard_error": 0.016064310283322822,
+        "chromaticity_xy": [
+          0.405447925085876,
+          0.37160523874720836
+        ]
+      },
+      "thin_cloud": {
+        "pixels": 22,
+        "xyz_cd_m2": [
+          57.95815709330594,
+          49.60936403934094,
+          11.565957570510536
+        ],
+        "standard_error_xyz": [
+          8.46047345838419,
+          5.781339334136575,
+          2.3384070702977153
+        ],
+        "clear_xyz_cd_m2": [
+          81.31176931207912,
+          69.15991547658557,
+          20.688133712881005
+        ],
+        "contrast": -0.2826861673054468,
+        "contrast_standard_error": 0.08359378831360598,
+        "chromaticity_xy": [
+          0.48649764721232697,
+          0.41641832824299235
+        ]
+      },
+      "feature": {
+        "pixels": 24,
+        "xyz_cd_m2": [
+          24.880452597135,
+          28.73363393725456,
+          8.885588743079671
+        ],
+        "standard_error_xyz": [
+          5.2602918307020055,
+          6.325662385777592,
+          2.532445353234855
+        ],
+        "clear_xyz_cd_m2": [
+          144.51963068643317,
+          130.66914168962256,
+          35.33627223962604
+        ],
+        "contrast": -0.780103905438475,
+        "contrast_standard_error": 0.04840976457014535,
+        "chromaticity_xy": [
+          0.3980893098512507,
+          0.4597405316058157
+        ]
+      },
+      "aperture": {
+        "pixels": 30,
+        "xyz_cd_m2": [
+          30.05765199579074,
+          29.924097998843088,
+          9.100324146882972
+        ],
+        "standard_error_xyz": [
+          6.941975837245205,
+          5.087274364783747,
+          2.125414165643269
+        ],
+        "clear_xyz_cd_m2": [
+          138.79779986212688,
+          127.29417921452743,
+          37.07089422884505
+        ],
+        "contrast": -0.7649217098260844,
+        "contrast_standard_error": 0.03996470534768303,
+        "chromaticity_xy": [
+          0.4351006012676558,
+          0.43316733567586047
+        ]
+      },
+      "adjacent": {
+        "pixels": 60,
+        "xyz_cd_m2": [
+          29.581535043361924,
+          26.24639202412297,
+          12.555324343338683
+        ],
+        "standard_error_xyz": [
+          6.452738330189495,
+          4.6208006184072135,
+          1.6957581277143434
+        ],
+        "clear_xyz_cd_m2": [
+          111.55788637249213,
+          103.27378000988297,
+          33.256773394014154
+        ],
+        "contrast": -0.7458561890383864,
+        "contrast_standard_error": 0.04474321185846996,
+        "chromaticity_xy": [
+          0.43258450619210853,
+          0.38381316305718594
+        ]
+      },
+      "aperture_vs_adjacent_contrast": 0.14012234410504676,
+      "aperture_vs_adjacent_standard_error": 0.27382889025852725,
+      "cloud_ray_fraction": 1.0,
+      "clear_surface_mc_lux": 118.10359585724675,
+      "clear_surface_mc_standard_error_lux": 10.007185628361562,
+      "clear_mc_relative_error": -0.012068688293735641,
+      "source": {
+        "path": "research/runs/optical_comfort/evening/scenes/ring_equator_1716_383_w200_g0.8_h1.6_16x32_1024.npz",
+        "sha256": "d0b051031671d28d27770abe6fb2dd1e0d204e6ffa57b65baa2d4d78dbad6f51"
+      },
+      "earthlight_context": {
+        "earth_elevation_deg": 70.27530000000003,
+        "earth_illuminated_fraction": 0.8352667314372715,
+        "source_ratio": 7.341927654612455e-05,
+        "clear_surface_proxy_lux": 5.878826474360992,
+        "reading_rule": "Separate clear-atmosphere, solar-coloured Earth proxy. Cloud attenuation and reflection, Earth spectrum, larger angular disk and libration require a separate Earth-source render. The surface proxy is evaluated where Earth is above the horizon."
+      }
+    },
+    {
+      "recess_elevation_limits_deg": [
+        5,
+        25
+      ],
+      "case": "ring_equator",
+      "snapshot": 387,
+      "time_day": 48.25,
+      "latitude_deg": -0.0,
+      "longitude_deg": 340.2753,
+      "sun_deg": -28.47892207460132,
+      "hours_after_sunset": 56.06663131713867,
+      "cloud_top_at_selection_km": 73.79412841796875,
+      "width_km": 200.0,
+      "ice_g": 0.8,
+      "observer_height_m": 1.6,
+      "surface_lux": 27.409998927128818,
+      "surface_standard_error_lux": 3.5800331479680265,
+      "clear_surface_lux": 32.89281726253911,
+      "recess_lux": 0.29904156148432925,
+      "recess_standard_error_lux": 0.041424287451689495,
+      "median_pixel_relative_standard_error": 0.6911694898501504,
+      "field": {
+        "pixels": 512,
+        "xyz_cd_m2": [
+          11.622699916431204,
+          10.611905211257913,
+          4.972662480149592
+        ],
+        "standard_error_xyz": [
+          0.5524083550356317,
+          0.4865675103592825,
+          0.23298425069265713
+        ],
+        "clear_xyz_cd_m2": [
+          25.325161153569386,
+          23.895851143234506,
+          9.935974814767143
+        ],
+        "contrast": -0.5559101390593321,
+        "contrast_standard_error": 0.02036200792525616,
+        "chromaticity_xy": [
+          0.4271910021968755,
+          0.3900393587557653
+        ]
+      },
+      "cloud": {
+        "pixels": 506,
+        "xyz_cd_m2": [
+          11.405513888301382,
+          10.495200006440253,
+          5.034764818730287
+        ],
+        "standard_error_xyz": [
+          0.5340317318514302,
+          0.4624879886439655,
+          0.23595321194027816
+        ],
+        "clear_xyz_cd_m2": [
+          25.3544080167087,
+          23.963795509572773,
+          10.001242217454063
+        ],
+        "contrast": -0.5620393271071039,
+        "contrast_standard_error": 0.019299446469538444,
+        "chromaticity_xy": [
+          0.42343832124271297,
+          0.3896422305348159
+        ]
+      },
+      "thin_cloud": {
+        "pixels": 22,
+        "xyz_cd_m2": [
+          29.37719251444669,
+          22.93336445760248,
+          2.408234105913177
+        ],
+        "standard_error_xyz": [
+          4.163590354536198,
+          2.6967109831582854,
+          0.7739135152236162
+        ],
+        "clear_xyz_cd_m2": [
+          28.03391156188301,
+          23.315809946048923,
+          6.188444854152961
+        ],
+        "contrast": -0.016402839503812827,
+        "contrast_standard_error": 0.11566018891894715,
+        "chromaticity_xy": [
+          0.5368757594185624,
+          0.4191131420452516
+        ]
+      },
+      "feature": {
+        "pixels": 24,
+        "xyz_cd_m2": [
+          6.521616084858949,
+          6.191560422415914,
+          4.097886629625929
+        ],
+        "standard_error_xyz": [
+          1.2970354874371621,
+          1.6442560652879465,
+          1.4487936393345409
+        ],
+        "clear_xyz_cd_m2": [
+          49.807940980618895,
+          44.439490804185375,
+          10.911559059029925
+        ],
+        "contrast": -0.8606743616910933,
+        "contrast_standard_error": 0.03699988536171724,
+        "chromaticity_xy": [
+          0.38793597000678703,
+          0.3683027285065185
+        ]
+      },
+      "aperture": {
+        "pixels": 30,
+        "xyz_cd_m2": [
+          8.381372951940149,
+          8.427418137309168,
+          4.609181492640287
+        ],
+        "standard_error_xyz": [
+          1.3234284756668995,
+          1.7525826181389652,
+          1.1903165171415286
+        ],
+        "clear_xyz_cd_m2": [
+          46.91908134341046,
+          42.50218290685572,
+          11.377092949322687
+        ],
+        "contrast": -0.8017179927963229,
+        "contrast_standard_error": 0.041235120134412405,
+        "chromaticity_xy": [
+          0.3913242917785405,
+          0.39347413043357515
+        ]
+      },
+      "adjacent": {
+        "pixels": 60,
+        "xyz_cd_m2": [
+          10.746124554878392,
+          10.518156327193152,
+          5.2962897134399896
+        ],
+        "standard_error_xyz": [
+          1.3518064540849173,
+          1.4655710865571916,
+          0.9904794932674115
+        ],
+        "clear_xyz_cd_m2": [
+          36.18381301634357,
+          33.205287467760485,
+          10.046504557090987
+        ],
+        "contrast": -0.6832385102099963,
+        "contrast_standard_error": 0.0441366781715152,
+        "chromaticity_xy": [
+          0.4045893711596082,
+          0.3960064144469326
+        ]
+      },
+      "aperture_vs_adjacent_contrast": -0.1987742076506971,
+      "aperture_vs_adjacent_standard_error": 0.2192921878457579,
+      "cloud_ray_fraction": 0.98828125,
+      "clear_surface_mc_lux": 36.89898338732981,
+      "clear_surface_mc_standard_error_lux": 6.014136404319362,
+      "clear_mc_relative_error": -0.030635301311869423,
+      "source": {
+        "path": "research/runs/optical_comfort/evening/scenes/ring_equator_1716_387_w200_g0.8_h1.6_16x32_1024.npz",
+        "sha256": "2cc751a28162a40cb58851138f70981c10bdda490dfa8091e8f967dceda4952f"
+      },
+      "earthlight_context": {
+        "earth_elevation_deg": 70.27530000000003,
+        "earth_illuminated_fraction": 0.8727590865972518,
+        "source_ratio": 7.909309201199589e-05,
+        "clear_surface_proxy_lux": 6.333140084362969,
+        "reading_rule": "Separate clear-atmosphere, solar-coloured Earth proxy. Cloud attenuation and reflection, Earth spectrum, larger angular disk and libration require a separate Earth-source render. The surface proxy is evaluated where Earth is above the horizon."
+      }
+    },
+    {
+      "recess_elevation_limits_deg": [
+        5,
+        25
+      ],
+      "case": "ring_equator",
+      "snapshot": 391,
+      "time_day": 48.75,
+      "latitude_deg": -0.0,
+      "longitude_deg": 340.2753,
+      "sun_deg": -34.57429639661794,
+      "hours_after_sunset": 68.06663131713867,
+      "cloud_top_at_selection_km": 73.79412841796875,
+      "width_km": 200.0,
+      "ice_g": 0.8,
+      "observer_height_m": 1.6,
+      "surface_lux": 11.361169646717325,
+      "surface_standard_error_lux": 2.4509216412037786,
+      "clear_surface_lux": 9.99238718857756,
+      "recess_lux": 0.47485353973036765,
+      "recess_standard_error_lux": 0.04474276085841263,
+      "median_pixel_relative_standard_error": 0.767343223865752,
+      "field": {
+        "pixels": 512,
+        "xyz_cd_m2": [
+          9.840047661130466,
+          8.680407928430903,
+          2.8909071508255684
+        ],
+        "standard_error_xyz": [
+          0.5858360464421192,
+          0.49679594271008387,
+          0.273698201625745
+        ],
+        "clear_xyz_cd_m2": [
+          7.622925299932109,
+          7.149589703383611,
+          2.908406094233489
+        ],
+        "contrast": 0.21411273773134387,
+        "contrast_standard_error": 0.06948593742029288,
+        "chromaticity_xy": [
+          0.4595712930765396,
+          0.40541127781921055
+        ]
+      },
+      "cloud": {
+        "pixels": 488,
+        "xyz_cd_m2": [
+          9.823143061000824,
+          8.660494505891869,
+          3.037977704180588
+        ],
+        "standard_error_xyz": [
+          0.5939357776550928,
+          0.49801930822812307,
+          0.2867554059117062
+        ],
+        "clear_xyz_cd_m2": [
+          7.5188543284410425,
+          7.121929537371923,
+          2.9755394550151153
+        ],
+        "contrast": 0.21603204025628364,
+        "contrast_standard_error": 0.06992758150930796,
+        "chromaticity_xy": [
+          0.456431496301483,
+          0.40240913132260314
+        ]
+      },
+      "thin_cloud": {
+        "pixels": 416,
+        "xyz_cd_m2": [
+          7.340909961193089,
+          6.85395642007034,
+          2.798264595777786
+        ],
+        "standard_error_xyz": [
+          0.5489866094049797,
+          0.408373204076706,
+          0.3275327092112174
+        ],
+        "clear_xyz_cd_m2": [
+          6.01770873418214,
+          5.866901915854406,
+          2.891781301273455
+        ],
+        "contrast": 0.16824118050253567,
+        "contrast_standard_error": 0.06960627771416117,
+        "chromaticity_xy": [
+          0.4319927840908847,
+          0.40333687943266405
+        ]
+      },
+      "feature": {
+        "pixels": 24,
+        "xyz_cd_m2": [
+          23.626181808860146,
+          15.862969279573761,
+          4.862235316812749
+        ],
+        "standard_error_xyz": [
+          4.225606229734863,
+          2.6750320868400044,
+          1.653030592007386
+        ],
+        "clear_xyz_cd_m2": [
+          15.49420998714056,
+          13.759665893036235,
+          3.2582966980094272
+        ],
+        "contrast": 0.15286006236546834,
+        "contrast_standard_error": 0.19441112216204592,
+        "chromaticity_xy": [
+          0.5327044704529288,
+          0.35766569131866444
+        ]
+      },
+      "aperture": {
+        "pixels": 30,
+        "xyz_cd_m2": [
+          23.116478846347043,
+          17.654663535677408,
+          5.373731571215703
+        ],
+        "standard_error_xyz": [
+          3.81934295297673,
+          2.8057367258855614,
+          1.2261083785934277
+        ],
+        "clear_xyz_cd_m2": [
+          14.396817961693545,
+          12.98494273677063,
+          3.3755873884392
+        ],
+        "contrast": 0.3596258292062473,
+        "contrast_standard_error": 0.21607617243781171,
+        "chromaticity_xy": [
+          0.5009544260489605,
+          0.38259208495330066
+        ]
+      },
+      "adjacent": {
+        "pixels": 60,
+        "xyz_cd_m2": [
+          14.133652397049202,
+          11.64158982298109,
+          2.3091329571422246
+        ],
+        "standard_error_xyz": [
+          1.9086719697456336,
+          1.4801262708197418,
+          0.47698335198338976
+        ],
+        "clear_xyz_cd_m2": [
+          10.84426621789471,
+          9.940257000387955,
+          2.9659428016040494
+        ],
+        "contrast": 0.17115581845889216,
+        "contrast_standard_error": 0.14890221357073308,
+        "chromaticity_xy": [
+          0.5032567863050514,
+          0.4145219450153045
+        ]
+      },
+      "aperture_vs_adjacent_contrast": 0.5165165414801169,
+      "aperture_vs_adjacent_standard_error": 0.37358303773275875,
+      "cloud_ray_fraction": 0.953125,
+      "clear_surface_mc_lux": 11.998430042516421,
+      "clear_surface_mc_standard_error_lux": 3.262237937727462,
+      "clear_mc_relative_error": -0.07927904279233033,
+      "source": {
+        "path": "research/runs/optical_comfort/evening/scenes/ring_equator_1716_391_w200_g0.8_h1.6_16x32_1024.npz",
+        "sha256": "2f6cd6e2179128c30342517d4a2e1a71e1d741c5a3bc2d7e7415c0d096f83c49"
+      },
+      "earthlight_context": {
+        "earth_elevation_deg": 70.27530000000003,
+        "earth_illuminated_fraction": 0.9060366696329666,
+        "source_ratio": 8.435579867584906e-05,
+        "clear_surface_proxy_lux": 6.754535400657312,
+        "reading_rule": "Separate clear-atmosphere, solar-coloured Earth proxy. Cloud attenuation and reflection, Earth spectrum, larger angular disk and libration require a separate Earth-source render. The surface proxy is evaluated where Earth is above the horizon."
+      }
+    },
+    {
+      "recess_elevation_limits_deg": [
+        5,
+        25
+      ],
+      "case": "ring_equator",
+      "snapshot": 395,
+      "time_day": 49.25,
+      "latitude_deg": -0.0,
+      "longitude_deg": 340.2753,
+      "sun_deg": -40.66967071863453,
+      "hours_after_sunset": 80.06663131713867,
+      "cloud_top_at_selection_km": 73.79412841796875,
+      "width_km": 200.0,
+      "ice_g": 0.8,
+      "observer_height_m": 1.6,
+      "surface_lux": 2.847510348663994,
+      "surface_standard_error_lux": 1.3907200844838228,
+      "clear_surface_lux": 3.2214756792842967,
+      "recess_lux": 0.17358944140317303,
+      "recess_standard_error_lux": 0.02274054349191545,
+      "median_pixel_relative_standard_error": 0.9972219773873614,
+      "field": {
+        "pixels": 512,
+        "xyz_cd_m2": [
+          2.5082938071913543,
+          2.5108384492527356,
+          0.8081130191833757
+        ],
+        "standard_error_xyz": [
+          0.2863921384922012,
+          0.32726281979816496,
+          0.10685529025690867
+        ],
+        "clear_xyz_cd_m2": [
+          2.288433526990289,
+          2.145427741668706,
+          0.8891569938757156
+        ],
+        "contrast": 0.1703206780107236,
+        "contrast_standard_error": 0.1525396607128894,
+        "chromaticity_xy": [
+          0.430442462698855,
+          0.4308791428008621
+        ]
+      },
+      "cloud": {
+        "pixels": 494,
+        "xyz_cd_m2": [
+          2.4545599553729365,
+          2.5151201519960455,
+          0.8445646945383257
+        ],
+        "standard_error_xyz": [
+          0.30303914495128653,
+          0.3539209938740137,
+          0.1121078249451252
+        ],
+        "clear_xyz_cd_m2": [
+          2.2680036586881727,
+          2.141710991130649,
+          0.904560889617156
+        ],
+        "contrast": 0.17435086359073448,
+        "contrast_standard_error": 0.16525151868748278,
+        "chromaticity_xy": [
+          0.4221631594472496,
+          0.4325789913714993
+        ]
+      },
+      "thin_cloud": {
+        "pixels": 470,
+        "xyz_cd_m2": [
+          2.334791917557011,
+          2.40244471511839,
+          0.8626210427266846
+        ],
+        "standard_error_xyz": [
+          0.29100121007884505,
+          0.30543748725106923,
+          0.11903047663020189
+        ],
+        "clear_xyz_cd_m2": [
+          2.0924371138858455,
+          1.999788897821303,
+          0.9014416074931627
+        ],
+        "contrast": 0.2013491612718552,
+        "contrast_standard_error": 0.15273486495691233,
+        "chromaticity_xy": [
+          0.41693772465196915,
+          0.42901888840342495
+        ]
+      },
+      "feature": {
+        "pixels": 24,
+        "xyz_cd_m2": [
+          7.182728599359601,
+          5.015678283241755,
+          0.553792717567168
+        ],
+        "standard_error_xyz": [
+          2.363121805225718,
+          1.6013105248525175,
+          0.36989343874354724
+        ],
+        "clear_xyz_cd_m2": [
+          4.5265224095951195,
+          4.029051320579141,
+          0.983040647104644
+        ],
+        "contrast": 0.24487823166293032,
+        "contrast_standard_error": 0.3974410841265589,
+        "chromaticity_xy": [
+          0.5632540914168783,
+          0.39331867760095846
+        ]
+      },
+      "aperture": {
+        "pixels": 30,
+        "xyz_cd_m2": [
+          6.0226733213459385,
+          4.222773756753763,
+          0.5691201016100675
+        ],
+        "standard_error_xyz": [
+          1.9221297665444543,
+          1.3130254011177884,
+          0.3112602120235694
+        ],
+        "clear_xyz_cd_m2": [
+          4.19131453066193,
+          3.788205618711634,
+          1.0146368460989157
+        ],
+        "contrast": 0.11471609035570918,
+        "contrast_standard_error": 0.3466087993302611,
+        "chromaticity_xy": [
+          0.5569037781415465,
+          0.3904708978715771
+        ]
+      },
+      "adjacent": {
+        "pixels": 60,
+        "xyz_cd_m2": [
+          2.1458601126196215,
+          1.9794737451543167,
+          0.5994179393839342
+        ],
+        "standard_error_xyz": [
+          0.636523278185772,
+          0.5452700337583148,
+          0.2596695128356417
+        ],
+        "clear_xyz_cd_m2": [
+          3.1726148519361557,
+          2.917809411744183,
+          0.9001406085891008
+        ],
+        "contrast": -0.3215890876261709,
+        "contrast_standard_error": 0.18687650795956823,
+        "chromaticity_xy": [
+          0.45417414601766853,
+          0.41895825011274657
+        ]
+      },
+      "aperture_vs_adjacent_contrast": 1.133281013244539,
+      "aperture_vs_adjacent_standard_error": 0.9127923857934269,
+      "cloud_ray_fraction": 0.96484375,
+      "clear_surface_mc_lux": 2.2525247907549844,
+      "clear_surface_mc_standard_error_lux": 0.8624842438380222,
+      "clear_mc_relative_error": -0.1814706302250022,
+      "source": {
+        "path": "research/runs/optical_comfort/evening/scenes/ring_equator_1716_395_w200_g0.8_h1.6_16x32_1024.npz",
+        "sha256": "0b53922525ef562e075471c3788737af5ce55c4dec225853be459f2e4cbb148f"
+      },
+      "earthlight_context": {
+        "earth_elevation_deg": 70.27530000000003,
+        "earth_illuminated_fraction": 0.9347232122403423,
+        "source_ratio": 8.908776815972697e-05,
+        "clear_surface_proxy_lux": 7.1334335427578175,
+        "reading_rule": "Separate clear-atmosphere, solar-coloured Earth proxy. Cloud attenuation and reflection, Earth spectrum, larger angular disk and libration require a separate Earth-source render. The surface proxy is evaluated where Earth is above the horizon."
+      }
+    }
+  ],
+  "sensitivity": [
+    {
+      "recess_elevation_limits_deg": [
+        5,
+        25
+      ],
+      "case": "ring_equator",
+      "snapshot": 350,
+      "time_day": 43.625,
+      "latitude_deg": 0.0,
+      "longitude_deg": 13.3811,
+      "sun_deg": -5.202509595947728,
+      "hours_after_sunset": 10.242206573486328,
+      "cloud_top_at_selection_km": 35.79412078857422,
+      "width_km": 100,
+      "ice_g": 0.8,
+      "observer_height_m": 1.6,
+      "surface_lux": 1376.6581862715975,
+      "surface_standard_error_lux": 44.92995289100218,
+      "clear_surface_lux": 2468.8740892965443,
+      "recess_lux": 10.387385910683339,
+      "recess_standard_error_lux": 0.425364199879746,
+      "median_pixel_relative_standard_error": 0.2365486572785011,
+      "field": {
+        "pixels": 288,
+        "xyz_cd_m2": [
+          451.14590260778135,
+          455.53845763912113,
+          330.36016857064044
+        ],
+        "standard_error_xyz": [
+          9.928676040269435,
+          6.516069644789978,
+          5.03500045029605
+        ],
+        "clear_xyz_cd_m2": [
+          1115.0945689931652,
+          1129.2720695244373,
+          640.0844571076581
+        ],
+        "contrast": -0.5966087624650462,
+        "contrast_standard_error": 0.005770150365566064,
+        "chromaticity_xy": [
+          0.364696574858966,
+          0.3682474211939306
+        ]
+      },
+      "cloud": {
+        "pixels": 288,
+        "xyz_cd_m2": [
+          451.14590260778135,
+          455.53845763912113,
+          330.36016857064044
+        ],
+        "standard_error_xyz": [
+          9.928676040269435,
+          6.516069644789978,
+          5.03500045029605
+        ],
+        "clear_xyz_cd_m2": [
+          1115.0945689931652,
+          1129.2720695244373,
+          640.0844571076581
+        ],
+        "contrast": -0.5966087624650462,
+        "contrast_standard_error": 0.005770150365566064,
+        "chromaticity_xy": [
+          0.364696574858966,
+          0.3682474211939306
+        ]
+      },
+      "thin_cloud": {
+        "pixels": 44,
+        "xyz_cd_m2": [
+          750.5704986068192,
+          704.2080318007754,
+          310.3698788914493
+        ],
+        "standard_error_xyz": [
+          21.842355145721914,
+          17.380621544633357,
+          20.49843498739101
+        ],
+        "clear_xyz_cd_m2": [
+          1101.5583743296843,
+          1052.0453502099156,
+          469.5122671144988
+        ],
+        "contrast": -0.3306295858251128,
+        "contrast_standard_error": 0.016520791181830124,
+        "chromaticity_xy": [
+          0.4252166529753027,
+          0.3989511749215595
+        ]
+      },
+      "feature": {
+        "pixels": 12,
+        "xyz_cd_m2": [
+          309.28665177129596,
+          331.32664646977884,
+          279.08243352840447
+        ],
+        "standard_error_xyz": [
+          24.388630116635557,
+          26.341841388697823,
+          32.39105682718082
+        ],
+        "clear_xyz_cd_m2": [
+          1304.3210348224545,
+          1358.5623222678369,
+          776.9252368107722
+        ],
+        "contrast": -0.7561196560223324,
+        "contrast_standard_error": 0.019389497969239722,
+        "chromaticity_xy": [
+          0.33629236397154266,
+          0.3602568056201717
+        ]
+      },
+      "aperture": {
+        "pixels": 16,
+        "xyz_cd_m2": [
+          288.93037743575877,
+          311.223350059927,
+          269.80161373601516
+        ],
+        "standard_error_xyz": [
+          22.59219629987594,
+          30.155771948158353,
+          32.53756457366412
+        ],
+        "clear_xyz_cd_m2": [
+          1467.4317621526143,
+          1449.4514586167497,
+          639.9741141814644
+        ],
+        "contrast": -0.7852819780822907,
+        "contrast_standard_error": 0.0208049547081327,
+        "chromaticity_xy": [
+          0.332120930514301,
+          0.3577463523809055
+        ]
+      },
+      "adjacent": {
+        "pixels": 32,
+        "xyz_cd_m2": [
+          596.0982216720515,
+          576.1288091060526,
+          328.0037311437579
+        ],
+        "standard_error_xyz": [
+          28.962484047972822,
+          37.13728926756625,
+          36.47051594483438
+        ],
+        "clear_xyz_cd_m2": [
+          1303.9010514707638,
+          1294.085312320039,
+          603.3605483452552
+        ],
+        "contrast": -0.5547984328226649,
+        "contrast_standard_error": 0.028697713291395324,
+        "chromaticity_xy": [
+          0.3973376875091025,
+          0.38402679356341557
+        ]
+      },
+      "aperture_vs_adjacent_contrast": -0.45980248662996903,
+      "aperture_vs_adjacent_standard_error": 0.05822898591550695,
+      "cloud_ray_fraction": 1.0,
+      "clear_surface_mc_lux": 2496.0581113624303,
+      "clear_surface_mc_standard_error_lux": 50.09026411493043,
+      "clear_mc_relative_error": 0.008847313349525265,
+      "source": {
+        "path": "research/runs/optical_comfort/evening/scenes/ring_equator_67_350_w100_g0.8_h1.6_12x24_512.npz",
+        "sha256": "5dcf0caeb4202f0cf1fd8376e95c9dda61115d5b7ba30fe198ca0d87a3c4e0bf"
+      },
+      "earthlight_context": {
+        "earth_elevation_deg": 76.61890000000001,
+        "earth_illuminated_fraction": 0.4288704387645309,
+        "source_ratio": 2.5244134461428754e-05,
+        "clear_surface_proxy_lux": 2.125166750577364,
+        "reading_rule": "Separate clear-atmosphere, solar-coloured Earth proxy. Cloud attenuation and reflection, Earth spectrum, larger angular disk and libration require a separate Earth-source render. The surface proxy is evaluated where Earth is above the horizon."
+      }
+    },
+    {
+      "recess_elevation_limits_deg": [
+        5,
+        25
+      ],
+      "case": "ring_equator",
+      "snapshot": 350,
+      "time_day": 43.625,
+      "latitude_deg": 0.0,
+      "longitude_deg": 13.3811,
+      "sun_deg": -5.202509595947728,
+      "hours_after_sunset": 10.242206573486328,
+      "cloud_top_at_selection_km": 35.79412078857422,
+      "width_km": 400,
+      "ice_g": 0.8,
+      "observer_height_m": 1.6,
+      "surface_lux": 884.6218659698964,
+      "surface_standard_error_lux": 78.06832273676284,
+      "clear_surface_lux": 2468.8740892965443,
+      "recess_lux": 6.637754482150858,
+      "recess_standard_error_lux": 0.5336797979304765,
+      "median_pixel_relative_standard_error": 0.3994931898286733,
+      "field": {
+        "pixels": 288,
+        "xyz_cd_m2": [
+          231.80256189803214,
+          242.62437950518785,
+          245.4596696078742
+        ],
+        "standard_error_xyz": [
+          11.377799677532279,
+          13.35662233531333,
+          20.17614536329962
+        ],
+        "clear_xyz_cd_m2": [
+          1115.0945689931652,
+          1129.2720695244373,
+          640.0844571076581
+        ],
+        "contrast": -0.7851497561545442,
+        "contrast_standard_error": 0.011827638968294075,
+        "chromaticity_xy": [
+          0.3219987125089896,
+          0.3370313821567224
+        ]
+      },
+      "cloud": {
+        "pixels": 288,
+        "xyz_cd_m2": [
+          231.80256189803214,
+          242.62437950518785,
+          245.4596696078742
+        ],
+        "standard_error_xyz": [
+          11.377799677532279,
+          13.35662233531333,
+          20.17614536329962
+        ],
+        "clear_xyz_cd_m2": [
+          1115.0945689931652,
+          1129.2720695244373,
+          640.0844571076581
+        ],
+        "contrast": -0.7851497561545442,
+        "contrast_standard_error": 0.011827638968294075,
+        "chromaticity_xy": [
+          0.3219987125089896,
+          0.3370313821567224
+        ]
+      },
+      "thin_cloud": null,
+      "feature": {
+        "pixels": 12,
+        "xyz_cd_m2": [
+          170.30461136480986,
+          228.65362681993975,
+          182.44250174308766
+        ],
+        "standard_error_xyz": [
+          35.505005679625604,
+          64.57856798077752,
+          24.312918403906355
+        ],
+        "clear_xyz_cd_m2": [
+          1304.3210348224545,
+          1358.5623222678369,
+          776.9252368107722
+        ],
+        "contrast": -0.8316944146969643,
+        "contrast_standard_error": 0.04753449063196236,
+        "chromaticity_xy": [
+          0.2929212153839843,
+          0.39328059136684274
+        ]
+      },
+      "aperture": {
+        "pixels": 16,
+        "xyz_cd_m2": [
+          219.16986121845494,
+          222.03390434818635,
+          255.03504831538848
+        ],
+        "standard_error_xyz": [
+          44.602726000351524,
+          59.03347520712824,
+          72.516814868738
+        ],
+        "clear_xyz_cd_m2": [
+          1467.4317621526143,
+          1449.4514586167497,
+          639.9741141814644
+        ],
+        "contrast": -0.8468152189380117,
+        "contrast_standard_error": 0.04072814916027989,
+        "chromaticity_xy": [
+          0.31479121365904045,
+          0.31890480668578125
+        ]
+      },
+      "adjacent": {
+        "pixels": 32,
+        "xyz_cd_m2": [
+          209.32397887727788,
+          230.21723391968666,
+          225.6215525903981
+        ],
+        "standard_error_xyz": [
+          25.356897947962022,
+          35.59560889983925,
+          36.51975680501926
+        ],
+        "clear_xyz_cd_m2": [
+          1303.9010514707638,
+          1294.085312320039,
+          603.3605483452552
+        ],
+        "contrast": -0.8221004197111605,
+        "contrast_standard_error": 0.027506385058975256,
+        "chromaticity_xy": [
+          0.314695875610801,
+          0.3461066161537438
+        ]
+      },
+      "aperture_vs_adjacent_contrast": -0.03554612064514295,
+      "aperture_vs_adjacent_standard_error": 0.3078474584567141,
+      "cloud_ray_fraction": 1.0,
+      "clear_surface_mc_lux": 2496.057928846022,
+      "clear_surface_mc_standard_error_lux": 50.09026302390963,
+      "clear_mc_relative_error": 0.008846708677701542,
+      "source": {
+        "path": "research/runs/optical_comfort/evening/scenes/ring_equator_67_350_w400_g0.8_h1.6_12x24_512.npz",
+        "sha256": "614b440a7403112d61c577b22aff63dab754d4481038b8f09a98066d5ed9cfc2"
+      },
+      "earthlight_context": {
+        "earth_elevation_deg": 76.61890000000001,
+        "earth_illuminated_fraction": 0.4288704387645309,
+        "source_ratio": 2.5244134461428754e-05,
+        "clear_surface_proxy_lux": 2.125166750577364,
+        "reading_rule": "Separate clear-atmosphere, solar-coloured Earth proxy. Cloud attenuation and reflection, Earth spectrum, larger angular disk and libration require a separate Earth-source render. The surface proxy is evaluated where Earth is above the horizon."
+      }
+    },
+    {
+      "recess_elevation_limits_deg": [
+        5,
+        25
+      ],
+      "case": "ring_equator",
+      "snapshot": 350,
+      "time_day": 43.625,
+      "latitude_deg": 0.0,
+      "longitude_deg": 13.3811,
+      "sun_deg": -5.202509595947728,
+      "hours_after_sunset": 10.242206573486328,
+      "cloud_top_at_selection_km": 35.79412078857422,
+      "width_km": 200,
+      "ice_g": 0.7,
+      "observer_height_m": 1.6,
+      "surface_lux": 846.2951174743504,
+      "surface_standard_error_lux": 59.826789336077326,
+      "clear_surface_lux": 2468.8740892965443,
+      "recess_lux": 5.827772120739441,
+      "recess_standard_error_lux": 0.4058202782588358,
+      "median_pixel_relative_standard_error": 0.3154236725868087,
+      "field": {
+        "pixels": 288,
+        "xyz_cd_m2": [
+          219.6318250165414,
+          233.88964205393518,
+          200.25384906969973
+        ],
+        "standard_error_xyz": [
+          6.077993245458078,
+          6.367210257450287,
+          6.632519432854728
+        ],
+        "clear_xyz_cd_m2": [
+          1115.0945689931652,
+          1129.2720695244373,
+          640.0844571076581
+        ],
+        "contrast": -0.7928845949830039,
+        "contrast_standard_error": 0.0056383314785529645,
+        "chromaticity_xy": [
+          0.33594389325254065,
+          0.35775232909494975
+        ]
+      },
+      "cloud": {
+        "pixels": 288,
+        "xyz_cd_m2": [
+          219.6318250165414,
+          233.88964205393518,
+          200.25384906969973
+        ],
+        "standard_error_xyz": [
+          6.077993245458078,
+          6.367210257450287,
+          6.632519432854728
+        ],
+        "clear_xyz_cd_m2": [
+          1115.0945689931652,
+          1129.2720695244373,
+          640.0844571076581
+        ],
+        "contrast": -0.7928845949830039,
+        "contrast_standard_error": 0.0056383314785529645,
+        "chromaticity_xy": [
+          0.33594389325254065,
+          0.35775232909494975
+        ]
+      },
+      "thin_cloud": {
+        "pixels": 4,
+        "xyz_cd_m2": [
+          456.36111443461687,
+          360.1925397921093,
+          227.56940896728844
+        ],
+        "standard_error_xyz": [
+          63.58026965970658,
+          51.63739605907246,
+          59.32858179774348
+        ],
+        "clear_xyz_cd_m2": [
+          1056.0667831358269,
+          1010.0086608942296,
+          454.0695266761333
+        ],
+        "contrast": -0.6433767810731383,
+        "contrast_standard_error": 0.05112569630180631,
+        "chromaticity_xy": [
+          0.43707598320698887,
+          0.34497134723781103
+        ]
+      },
+      "feature": {
+        "pixels": 12,
+        "xyz_cd_m2": [
+          182.84148064734268,
+          229.86644441708333,
+          158.1266145467968
+        ],
+        "standard_error_xyz": [
+          20.055755185572696,
+          33.44656540913858,
+          17.392269366825882
+        ],
+        "clear_xyz_cd_m2": [
+          1304.3210348224545,
+          1358.5623222678369,
+          776.9252368107722
+        ],
+        "contrast": -0.8308016933419962,
+        "contrast_standard_error": 0.024619088032197523,
+        "chromaticity_xy": [
+          0.3203055666040639,
+          0.40268489109582967
+        ]
+      },
+      "aperture": {
+        "pixels": 16,
+        "xyz_cd_m2": [
+          205.40569286556465,
+          226.6458663209592,
+          179.32394864263637
+        ],
+        "standard_error_xyz": [
+          27.689049380871474,
+          29.49386921894064,
+          20.869111229901872
+        ],
+        "clear_xyz_cd_m2": [
+          1467.4317621526143,
+          1449.4514586167497,
+          639.9741141814644
+        ],
+        "contrast": -0.8436333517941654,
+        "contrast_standard_error": 0.020348297311789543,
+        "chromaticity_xy": [
+          0.3359730480452322,
+          0.37071466458596186
+        ]
+      },
+      "adjacent": {
+        "pixels": 32,
+        "xyz_cd_m2": [
+          199.17148602257774,
+          195.44500417090237,
+          175.08351062396133
+        ],
+        "standard_error_xyz": [
+          13.530876835143891,
+          10.529137285182046,
+          18.51832003816779
+        ],
+        "clear_xyz_cd_m2": [
+          1303.9010514707638,
+          1294.085312320039,
+          603.3605483452552
+        ],
+        "contrast": -0.8489705413466844,
+        "contrast_standard_error": 0.008136354832978813,
+        "chromaticity_xy": [
+          0.34960766322063186,
+          0.3430665330708541
+        ]
+      },
+      "aperture_vs_adjacent_contrast": 0.1596401109479062,
+      "aperture_vs_adjacent_standard_error": 0.17588833901514717,
+      "cloud_ray_fraction": 1.0,
+      "clear_surface_mc_lux": 2496.0579935514297,
+      "clear_surface_mc_standard_error_lux": 50.09026347473,
+      "clear_mc_relative_error": 0.008847009456863564,
+      "source": {
+        "path": "research/runs/optical_comfort/evening/scenes/ring_equator_67_350_w200_g0.7_h1.6_12x24_512.npz",
+        "sha256": "d22ee973e2c1bd96d9d6f87abf9f08bb35f561ac54b300630f2841e00c8159c4"
+      },
+      "earthlight_context": {
+        "earth_elevation_deg": 76.61890000000001,
+        "earth_illuminated_fraction": 0.4288704387645309,
+        "source_ratio": 2.5244134461428754e-05,
+        "clear_surface_proxy_lux": 2.125166750577364,
+        "reading_rule": "Separate clear-atmosphere, solar-coloured Earth proxy. Cloud attenuation and reflection, Earth spectrum, larger angular disk and libration require a separate Earth-source render. The surface proxy is evaluated where Earth is above the horizon."
+      }
+    },
+    {
+      "recess_elevation_limits_deg": [
+        5,
+        25
+      ],
+      "case": "ring_equator",
+      "snapshot": 350,
+      "time_day": 43.625,
+      "latitude_deg": 0.0,
+      "longitude_deg": 13.3811,
+      "sun_deg": -5.202509595947728,
+      "hours_after_sunset": 10.242206573486328,
+      "cloud_top_at_selection_km": 35.79412078857422,
+      "width_km": 200,
+      "ice_g": 0.9,
+      "observer_height_m": 1.6,
+      "surface_lux": 1321.0281493041346,
+      "surface_standard_error_lux": 188.5456507457843,
+      "clear_surface_lux": 2468.8740892965443,
+      "recess_lux": 11.749557188882694,
+      "recess_standard_error_lux": 0.8393617650492854,
+      "median_pixel_relative_standard_error": 0.28819803949718104,
+      "field": {
+        "pixels": 288,
+        "xyz_cd_m2": [
+          378.2715056848171,
+          381.62718993172996,
+          343.66692005689845
+        ],
+        "standard_error_xyz": [
+          19.860320867569396,
+          24.826522146356947,
+          21.47416927931107
+        ],
+        "clear_xyz_cd_m2": [
+          1115.0945689931652,
+          1129.2720695244373,
+          640.0844571076581
+        ],
+        "contrast": -0.6620591262011447,
+        "contrast_standard_error": 0.02198453571672234,
+        "chromaticity_xy": [
+          0.342772101914374,
+          0.34581286741055617
+        ]
+      },
+      "cloud": {
+        "pixels": 288,
+        "xyz_cd_m2": [
+          378.2715056848171,
+          381.62718993172996,
+          343.66692005689845
+        ],
+        "standard_error_xyz": [
+          19.860320867569396,
+          24.826522146356947,
+          21.47416927931107
+        ],
+        "clear_xyz_cd_m2": [
+          1115.0945689931652,
+          1129.2720695244373,
+          640.0844571076581
+        ],
+        "contrast": -0.6620591262011447,
+        "contrast_standard_error": 0.02198453571672234,
+        "chromaticity_xy": [
+          0.342772101914374,
+          0.34581286741055617
+        ]
+      },
+      "thin_cloud": {
+        "pixels": 4,
+        "xyz_cd_m2": [
+          555.879581197531,
+          522.9744806029884,
+          200.11942565804537
+        ],
+        "standard_error_xyz": [
+          53.686666267402124,
+          65.06435756373561,
+          47.62845822686288
+        ],
+        "clear_xyz_cd_m2": [
+          1056.0667831358269,
+          1010.0086608942296,
+          454.0695266761333
+        ],
+        "contrast": -0.48220792469248397,
+        "contrast_standard_error": 0.06441960359639856,
+        "chromaticity_xy": [
+          0.43462947953840203,
+          0.40890173700331006
+        ]
+      },
+      "feature": {
+        "pixels": 12,
+        "xyz_cd_m2": [
+          601.8062172665093,
+          430.6128674051903,
+          245.01168885820243
+        ],
+        "standard_error_xyz": [
+          333.0332084659225,
+          160.96430447919894,
+          37.11809138570557
+        ],
+        "clear_xyz_cd_m2": [
+          1304.3210348224545,
+          1358.5623222678369,
+          776.9252368107722
+        ],
+        "contrast": -0.6830378258346133,
+        "contrast_standard_error": 0.11848135476810703,
+        "chromaticity_xy": [
+          0.4711067164943496,
+          0.33709291832330396
+        ]
+      },
+      "aperture": {
+        "pixels": 16,
+        "xyz_cd_m2": [
+          310.73907126605127,
+          281.0719477460526,
+          238.84382528412584
+        ],
+        "standard_error_xyz": [
+          56.3048529859828,
+          34.14306206443286,
+          21.989409953465987
+        ],
+        "clear_xyz_cd_m2": [
+          1467.4317621526143,
+          1449.4514586167497,
+          639.9741141814644
+        ],
+        "contrast": -0.8060839181090707,
+        "contrast_standard_error": 0.023555850636775722,
+        "chromaticity_xy": [
+          0.37408927835643235,
+          0.33837393434356017
+        ]
+      },
+      "adjacent": {
+        "pixels": 32,
+        "xyz_cd_m2": [
+          415.3654985039565,
+          402.04571602587845,
+          312.4874647113693
+        ],
+        "standard_error_xyz": [
+          88.27594658001382,
+          75.93948336170274,
+          54.61634220574379
+        ],
+        "clear_xyz_cd_m2": [
+          1303.9010514707638,
+          1294.085312320039,
+          603.3605483452552
+        ],
+        "contrast": -0.6893205477271896,
+        "contrast_standard_error": 0.05868197609441859,
+        "chromaticity_xy": [
+          0.3676130489708154,
+          0.3558245738422109
+        ]
+      },
+      "aperture_vs_adjacent_contrast": -0.30089555355948416,
+      "aperture_vs_adjacent_standard_error": 0.16809481008118216,
+      "cloud_ray_fraction": 1.0,
+      "clear_surface_mc_lux": 2496.0579935514297,
+      "clear_surface_mc_standard_error_lux": 50.09026347473,
+      "clear_mc_relative_error": 0.008847009456863564,
+      "source": {
+        "path": "research/runs/optical_comfort/evening/scenes/ring_equator_67_350_w200_g0.9_h1.6_12x24_512.npz",
+        "sha256": "58e655a6c05063ea898323489f08533e1477ccc9f1f8500ef98dfc9f0f977ffb"
+      },
+      "earthlight_context": {
+        "earth_elevation_deg": 76.61890000000001,
+        "earth_illuminated_fraction": 0.4288704387645309,
+        "source_ratio": 2.5244134461428754e-05,
+        "clear_surface_proxy_lux": 2.125166750577364,
+        "reading_rule": "Separate clear-atmosphere, solar-coloured Earth proxy. Cloud attenuation and reflection, Earth spectrum, larger angular disk and libration require a separate Earth-source render. The surface proxy is evaluated where Earth is above the horizon."
+      }
+    },
+    {
+      "recess_elevation_limits_deg": [
+        5,
+        25
+      ],
+      "case": "ring_equator",
+      "snapshot": 350,
+      "time_day": 43.625,
+      "latitude_deg": 0.0,
+      "longitude_deg": 13.3811,
+      "sun_deg": -5.202509595947728,
+      "hours_after_sunset": 10.242206573486328,
+      "cloud_top_at_selection_km": 35.79412078857422,
+      "width_km": 200,
+      "ice_g": 0.8,
+      "observer_height_m": 6000.0,
+      "surface_lux": 1053.2080910402603,
+      "surface_standard_error_lux": 76.18460793455905,
+      "clear_surface_lux": 2583.130511100424,
+      "recess_lux": 7.743358893911646,
+      "recess_standard_error_lux": 0.5574312511127596,
+      "median_pixel_relative_standard_error": 0.2962436144782543,
+      "field": {
+        "pixels": 288,
+        "xyz_cd_m2": [
+          319.86627551793975,
+          331.5701184027991,
+          298.81363869451286
+        ],
+        "standard_error_xyz": [
+          12.072857524172154,
+          10.214607235984955,
+          12.705890017755529
+        ],
+        "clear_xyz_cd_m2": [
+          1258.2462556506396,
+          1273.9070005635576,
+          747.700394510364
+        ],
+        "contrast": -0.7397218805955872,
+        "contrast_standard_error": 0.007986723938376208,
+        "chromaticity_xy": [
+          0.33661274879161296,
+          0.348929341775723
+        ]
+      },
+      "cloud": {
+        "pixels": 286,
+        "xyz_cd_m2": [
+          317.0876452943886,
+          328.7519105084397,
+          298.95151054771895
+        ],
+        "standard_error_xyz": [
+          12.333598937417245,
+          10.200395351168316,
+          12.768776610505794
+        ],
+        "clear_xyz_cd_m2": [
+          1260.5278281031913,
+          1277.232016035373,
+          749.74944373453
+        ],
+        "contrast": -0.7426059585251307,
+        "contrast_standard_error": 0.007980944414841078,
+        "chromaticity_xy": [
+          0.3356166845641395,
+          0.3479625519516316
+        ]
+      },
+      "thin_cloud": {
+        "pixels": 10,
+        "xyz_cd_m2": [
+          738.5497769493193,
+          663.9977690968307,
+          265.6523780942608
+        ],
+        "standard_error_xyz": [
+          51.33121505870013,
+          34.87864280092364,
+          42.161854168714264
+        ],
+        "clear_xyz_cd_m2": [
+          1140.8490800757343,
+          1011.028067471318,
+          531.3586443253325
+        ],
+        "contrast": -0.3432449696895603,
+        "contrast_standard_error": 0.03429885010752101,
+        "chromaticity_xy": [
+          0.44272258154542177,
+          0.3980324896843376
+        ]
+      },
+      "feature": {
+        "pixels": 12,
+        "xyz_cd_m2": [
+          243.55971765763337,
+          273.71024941899435,
+          178.89259978396217
+        ],
+        "standard_error_xyz": [
+          48.17906163346972,
+          68.31884159501192,
+          26.89069749279377
+        ],
+        "clear_xyz_cd_m2": [
+          1417.9378938936388,
+          1514.7696088355106,
+          884.8437681444941
+        ],
+        "contrast": -0.8193056899065918,
+        "contrast_standard_error": 0.047042262717592605,
+        "chromaticity_xy": [
+          0.3498604051004763,
+          0.39317001868301577
+        ]
+      },
+      "aperture": {
+        "pixels": 16,
+        "xyz_cd_m2": [
+          219.20277490866025,
+          247.39833739359585,
+          236.5509369348494
+        ],
+        "standard_error_xyz": [
+          17.03347867396012,
+          25.954155648949392,
+          27.25731528874454
+        ],
+        "clear_xyz_cd_m2": [
+          1665.6954553112876,
+          1683.196265233857,
+          834.4964613213644
+        ],
+        "contrast": -0.853018722472496,
+        "contrast_standard_error": 0.01625191388633595,
+        "chromaticity_xy": [
+          0.31174306488402803,
+          0.35184187781577836
+        ]
+      },
+      "adjacent": {
+        "pixels": 32,
+        "xyz_cd_m2": [
+          257.8598149092795,
+          271.86441848444986,
+          319.7667350911317
+        ],
+        "standard_error_xyz": [
+          17.678750965586865,
+          24.079710369858773,
+          46.16772332080481
+        ],
+        "clear_xyz_cd_m2": [
+          1466.3719046032177,
+          1483.3632275004284,
+          724.6369670540763
+        ],
+        "contrast": -0.8167243103750383,
+        "contrast_standard_error": 0.01737083017707652,
+        "chromaticity_xy": [
+          0.30354627003179835,
+          0.3200321469801416
+        ]
+      },
+      "aperture_vs_adjacent_contrast": -0.0899936859234618,
+      "aperture_vs_adjacent_standard_error": 0.12248849292109053,
+      "cloud_ray_fraction": 0.9930555555555556,
+      "clear_surface_mc_lux": 2583.130511100424,
+      "clear_surface_mc_standard_error_lux": 62.55828517493964,
+      "clear_mc_relative_error": 2.220446049250313e-16,
+      "source": {
+        "path": "research/runs/optical_comfort/evening/scenes/ring_equator_67_350_w200_g0.8_h6000_12x24_512.npz",
+        "sha256": "d464e2242009819c315c233f195c6a72e3861393a81b0bd7e9f5468181b3eda1"
+      },
+      "earthlight_context": {
+        "earth_elevation_deg": 76.61890000000001,
+        "earth_illuminated_fraction": 0.4288704387645309,
+        "source_ratio": 2.5244134461428754e-05,
+        "clear_surface_proxy_lux": 2.125166750577364,
+        "reading_rule": "Separate clear-atmosphere, solar-coloured Earth proxy. Cloud attenuation and reflection, Earth spectrum, larger angular disk and libration require a separate Earth-source render. The surface proxy is evaluated where Earth is above the horizon."
+      }
+    }
+  ],
+  "deep": [
+    {
+      "recess_elevation_limits_deg": [
+        0.5,
+        5.0
+      ],
+      "case": "ring_equator",
+      "snapshot": 446,
+      "time_day": 55.625,
+      "latitude_deg": -0.0,
+      "longitude_deg": 246.9053,
+      "sun_deg": -25.01569332434608,
+      "hours_after_sunset": 49.2485466003418,
+      "cloud_top_at_selection_km": 73.79412841796875,
+      "width_km": 200.0,
+      "ice_g": 0.8,
+      "observer_height_m": 1.6,
+      "surface_lux": 70.2769632834143,
+      "surface_standard_error_lux": 7.33877459308274,
+      "clear_surface_lux": 65.47722695309278,
+      "recess_lux": 0.05518818090384356,
+      "recess_standard_error_lux": 0.004130109167097671,
+      "median_pixel_relative_standard_error": 0.2983692156089689,
+      "field": {
+        "pixels": 768,
+        "xyz_cd_m2": [
+          74.82137925655866,
+          61.88741983598382,
+          16.0952504204271
+        ],
+        "standard_error_xyz": [
+          1.2343785999636676,
+          0.8370155623626224,
+          0.5010150081890216
+        ],
+        "clear_xyz_cd_m2": [
+          85.44144827708371,
+          73.37481094275616,
+          17.271106034647346
+        ],
+        "contrast": -0.1565576927446437,
+        "contrast_standard_error": 0.011407396511258144,
+        "chromaticity_xy": [
+          0.4896557355321138,
+          0.40501164748733304
+        ]
+      },
+      "cloud": {
+        "pixels": 568,
+        "xyz_cd_m2": [
+          74.77781595068521,
+          61.91591098343604,
+          16.005510361013602
+        ],
+        "standard_error_xyz": [
+          1.5050431988747555,
+          1.0248355981867556,
+          0.6947785381742209
+        ],
+        "clear_xyz_cd_m2": [
+          88.95403752651222,
+          76.48920195012245,
+          17.784847301837154
+        ],
+        "contrast": -0.1905274286452805,
+        "contrast_standard_error": 0.013398434969357331,
+        "chromaticity_xy": [
+          0.48970654520137347,
+          0.4054762294834903
+        ]
+      },
+      "thin_cloud": {
+        "pixels": 314,
+        "xyz_cd_m2": [
+          74.2228638151897,
+          61.807030591714074,
+          16.265008593343197
+        ],
+        "standard_error_xyz": [
+          1.7048490337730136,
+          1.374409070109047,
+          0.8813650278679823
+        ],
+        "clear_xyz_cd_m2": [
+          77.22883781970091,
+          65.41790991512545,
+          15.62757674377917
+        ],
+        "contrast": -0.05519710623736229,
+        "contrast_standard_error": 0.02100967566668262,
+        "chromaticity_xy": [
+          0.48736275707841215,
+          0.4058378144908359
+        ]
+      },
+      "feature": {
+        "pixels": 160,
+        "xyz_cd_m2": [
+          59.007107387899865,
+          47.13810901999605,
+          11.822454200290549
+        ],
+        "standard_error_xyz": [
+          2.47772163482802,
+          1.7113929877835605,
+          0.9094596837832387
+        ],
+        "clear_xyz_cd_m2": [
+          90.91101542854797,
+          74.85482813988867,
+          15.469788393724958
+        ],
+        "contrast": -0.3702729644652396,
+        "contrast_standard_error": 0.02286282702547002,
+        "chromaticity_xy": [
+          0.5001972750982252,
+          0.39958497762118955
+        ]
+      },
+      "aperture": {
+        "pixels": 80,
+        "xyz_cd_m2": [
+          50.43383919927278,
+          42.37341173347156,
+          10.246453482201074
+        ],
+        "standard_error_xyz": [
+          2.223529007636568,
+          2.3592637608693625,
+          0.7966983485739085
+        ],
+        "clear_xyz_cd_m2": [
+          83.40263396890283,
+          66.2275065245905,
+          13.483301807564997
+        ],
+        "contrast": -0.3601840993705814,
+        "contrast_standard_error": 0.035623623546711065,
+        "chromaticity_xy": [
+          0.4893937533405018,
+          0.41117795788160266
+        ]
+      },
+      "adjacent": {
+        "pixels": 80,
+        "xyz_cd_m2": [
+          66.83806035916332,
+          54.29441847490217,
+          12.001535200592919
+        ],
+        "standard_error_xyz": [
+          2.612868326812823,
+          1.9354331738547619,
+          1.2066934167050594
+        ],
+        "clear_xyz_cd_m2": [
+          69.02613128395755,
+          55.63591339991723,
+          12.780188696435504
+        ],
+        "contrast": -0.024112032013786422,
+        "contrast_standard_error": 0.03478747908644277,
+        "chromaticity_xy": [
+          0.5020359435851124,
+          0.4078177832208068
+        ]
+      },
+      "aperture_vs_adjacent_contrast": -0.21956228791622734,
+      "aperture_vs_adjacent_standard_error": 0.05575872330620836,
+      "cloud_ray_fraction": 0.7395833333333334,
+      "clear_surface_mc_lux": 69.78634117935462,
+      "clear_surface_mc_standard_error_lux": 8.150153641861268,
+      "clear_mc_relative_error": 0.04407923318301887,
+      "source": {
+        "path": "research/runs/optical_comfort/evening/scenes/deep_ring_equator_1245_446_detail.npz",
+        "sha256": "05a7e78b9b7fdea2f8e617f51bb80db7343585bed12f5c950e7f81f0153b24ba"
+      },
+      "earthlight_context": {
+        "earth_elevation_deg": -23.094700000000007,
+        "earth_illuminated_fraction": 0.8338487605366279,
+        "source_ratio": 7.32096194696151e-05,
+        "clear_surface_proxy_lux": null,
+        "reading_rule": "Separate clear-atmosphere, solar-coloured Earth proxy. Cloud attenuation and reflection, Earth spectrum, larger angular disk and libration require a separate Earth-source render. The surface proxy is evaluated where Earth is above the horizon."
+      }
+    }
+  ]
+}

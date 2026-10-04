@@ -1,3 +1,16 @@
 __pycache__/
 *.py[cod]
 .pytest_cache/
+
+# Local data directories may be links to the research drive.
+/atmosphere/column/products
+/atmosphere/middle_atmosphere/inputs
+/atmosphere/middle_atmosphere/cache
+/atmosphere/radiative_convective/inputs
+/atmosphere/radiative_convective/cache
+/climate/crm/products
+/climate/gcm/products
+/illumination/sky/data
+/illumination/sky/work
+/immersion/node_modules
+/protection/sources

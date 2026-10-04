@@ -1,0 +1,93 @@
+{
+  "schema": "terluna.research.optical-local-checks/1",
+  "date": "2026-10-03",
+  "branch": "study/optical-comfort",
+  "evidence": "Numerical, input-provenance and repository checks for the local follow-up. Human comfort and scene appearance require separate physical and empirical validation.",
+  "remote_baseline": {
+    "commit": "9ad3a7e",
+    "records": [
+      "research/studies/optical_comfort/checks.json",
+      "research/studies/cloud_twilight/checks.json"
+    ],
+    "access": "Tracked products and packed sky data. Raw local archives, simulations and several spectral inputs were outside that execution environment."
+  },
+  "local_input_setup": {
+    "status": "PASS",
+    "verified_copied_files": 115,
+    "copied_bytes": 320225360,
+    "repeatability": "prepare_local.py was rerun successfully against the existing verified inputs and links.",
+    "storage": "Research-drive optical-comfort-runs for copied inputs, caches, Python environment and generated products; existing CM1/GCM/wave runs linked from that drive.",
+    "other_checkouts": "Source checkout read for input copies; branch edits and generated reports confined to study/optical-comfort."
+  },
+  "baseline_local_make_check": {
+    "status": "PASS",
+    "python_passed": 494,
+    "python_skipped": 13,
+    "javascript_passed": 176
+  },
+  "focused": {
+    "status": "PASS",
+    "passed": 68,
+    "command": "python -m pytest research/studies/optical_comfort research/studies/cloud_twilight illumination/cloud_light illumination/water_surface climate/crm/test_cloud_columns.py -q"
+  },
+  "make_check": {
+    "status": "PASS",
+    "command": "PYTEST_ADDOPTS=-ra OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=2 NUMBA_NUM_THREADS=2 make check PYTHON=<isolated-environment>/bin/python",
+    "python": {
+      "passed": 509,
+      "skipped": 13,
+      "failed": 0
+    },
+    "javascript": {
+      "immersion_passed": 128,
+      "other_passed": 48,
+      "failed": 0
+    },
+    "provenance": "PASS",
+    "ensemble_integrity": "PASS",
+    "log_file": "research/runs/optical_comfort/final-check.log",
+    "log_sha256": "01532016bd8441b045fa44060df449c155a05421adbaedeb8dbd6b4512e411cd"
+  },
+  "layer_check": {
+    "status": "PASS",
+    "files": 307,
+    "violations": 0,
+    "scope": "Repeated after staging so the newly added modules are included by the Git-based file discovery."
+  },
+  "skipped": {
+    "correlated_k_tables": 4,
+    "PROSPECT_D_coefficients": 1,
+    "geography_and_conservation_inputs": 8,
+    "explanation": "These optional inputs were outside the local optical setup; their dependent tests report explicit skips."
+  },
+  "numerical": {
+    "native_sky": "630 gaze cases and 24 finite scenes; fixed baseline Sobol seeds and geometry; angular and sample-refinement diagnostics retained.",
+    "cloud": "236 saved second-cycle snapshots, 23,810 dusk columns; CM1 source hashes, raw snapshot hashes, dry-density comparison and species mass closure.",
+    "water": "709 hourly spectra at four stations, second cycle only; output hashes, dispersion residual, frequency-refinement diagnostics and finite-band slope covariance."
+  },
+  "scientific_review": {
+    "method_reading": "Focused primary-source equations and SWAN format definitions; CM1 source conventions inspected locally.",
+    "remaining": [
+      "Full scholarly source review",
+      "Spherical angular sky with the current shield and solved profiles",
+      "Cloud size-distribution closure, self-shadowing and multiple scattering",
+      "Sub-metre wave roughness, facet distribution and glitter radiance",
+      "Site-specific materials and human-response validation"
+    ]
+  },
+  "visualization": {
+    "status": "Generated and visually inspected",
+    "file": "research/runs/optical_comfort/figures/local_data.png",
+    "manifest": "research/runs/optical_comfort/figures/manifest.json",
+    "scope": "Stored quantities and hourly percentiles; source-product and output hashes recorded."
+  },
+  "runtime": {
+    "python": "3.13.7",
+    "numpy": "2.3.3",
+    "scipy": "1.16.2",
+    "numba": "0.68.0",
+    "netCDF4": "1.7.4",
+    "pytest": "9.0.2",
+    "node": "20.20.2"
+  }
+}

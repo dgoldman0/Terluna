@@ -1,0 +1,19 @@
+{
+  "schema": "terluna.research.source-notes/1",
+  "reviewed": "2026-10-03",
+  "sources": [
+    {
+      "title": "Brenguier, Burnet and Geoffroy (2011): Cloud optical thickness and liquid water path",
+      "url": "https://acp.copernicus.org/articles/11/9771/2011/acp-11-9771-2011.pdf",
+      "reading_scope": "Equations 1\u20135, relating extinction cross section, liquid-water path and effective radius.",
+      "use": "Geometric-optics liquid extinction at prescribed uniform effective radius. Ice and size-distribution closure remain separate."
+    },
+    {
+      "title": "CM1 r22.0 source supplied with the local simulation",
+      "url": "https://www2.mmm.ucar.edu/people/bryan/cm1/cm1r22.0.tar.gz",
+      "reading_scope": "Locally inspected constants.F default branch, solve2.F dry-density expression and morrison.F liquid density; hashes checked against the recorded build.",
+      "use": "Decode saved thermodynamic and microphysical fields using their producing model conventions."
+    }
+  ],
+  "review_boundary": "Focused equation and source-code reading; full-paper scholarly review remains separate."
+}
