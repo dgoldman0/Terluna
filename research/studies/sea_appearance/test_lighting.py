@@ -8,7 +8,6 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from illumination import ephemeris as illumination_ephemeris
 from research.studies.sea_appearance import lighting as L
 from shared.provenance import constants_changed
 
@@ -23,17 +22,25 @@ def test_directions_overhead_and_on_the_eastern_horizon():
     assert az == pytest.approx(0.0) or az == pytest.approx(360.0)
 
 
-def test_phase_law_matches_the_illumination_domain():
-    for alpha in (0.0, 0.5, 1.2, 2.0, 3.0):
-        assert L.lambert_phase(alpha) == pytest.approx(illumination_ephemeris.lambert_phase(alpha))
-
-
-def test_the_earth_stands_high_over_the_sub_earth_point_and_full_earth_is_a_ten_thousandth_of_sunlight():
+def test_the_earth_stands_high_over_the_sub_earth_point():
     jd = np.array([L.JD_START + 10.0])
     g = L.geometry(jd, 0.0, 0.0)
     assert g["earth_elevation"][0] > 80
-    ratio = L.EARTH_GEOMETRIC_ALBEDO * (L.EARTH_RADIUS / 384_400e3) ** 2
-    assert ratio == pytest.approx(1.0e-4, rel=0.02)
+    assert 0 <= g["earth_phase_angle"][0] <= 180 and g["earth_sunlight_factor"][0] == pytest.approx(1.0, abs=0.04)
+
+
+def test_full_earth_gives_the_observed_visual_earthlight_above_the_air():
+    """Robinson et al. (2025): I/F = 0.23/pi at full phase in the visual band; photopically a little less, as
+    Glenar et al.'s Earth is bluer than the Sun."""
+    if not (L.SPHERICAL / "moon_1.2atm_standard.npz").exists():
+        pytest.skip("The cached scattering solution lives on the research drive")
+    sky = L.Sky()
+    light = L.Earthlight(sky)
+    weights = light.weights(np.array([0.0, 60.0]), np.full(2, L.EARTH_MOON_DISTANCE), np.ones(2))
+    lux = weights @ sky.channel_y
+    visual = 0.23 * (6_371_000.0 / L.EARTH_MOON_DISTANCE) ** 2 * sky.unfiltered_above_air
+    assert lux[0] == pytest.approx(visual, rel=0.1) and lux[0] < visual
+    assert lux[1] / lux[0] == pytest.approx(0.44, abs=0.02)
 
 
 def test_modes_of_vision_for_an_eighteen_percent_grey_surface():

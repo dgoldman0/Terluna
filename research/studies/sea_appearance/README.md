@@ -20,9 +20,10 @@ cloud light of [illumination](../../../illumination/), the
   from the [lighting calendar](#the-lighting-calendar).
 - **The nearside night is earthlit.** The Earth stays nearly fixed in the
   nearside sky and is near full through the night. Its 1.9° disk gives about
-  13 lux above the air at full Earth, a ten-thousandth of direct sunlight
-  ([illumination/ephemeris.py](../../../illumination/ephemeris.py): a Lambert-phase
-  sphere of geometric albedo 0.367).
+  7.8 lux above the air at full Earth, 1/16,000 of the sunlight there. The Earth's
+  visual geometric albedo is 0.242 (Robinson et al. 2025), below the 0.367 long
+  quoted from Danjon's earthshine work
+  ([illumination/earthlight](../../../illumination/earthlight/README.md)).
 - **The far side's nights are twilit.** The twilight wraps round the Moon: at
   latitude φ the Sun sinks at most 90° − φ below the horizon. Only seas near the
   far side's equator grow dark around local midnight, lit then by the stars and
@@ -123,24 +124,27 @@ Away from the far side's equator the Sun never sinks that far: at latitude φ it
 lowest point is 90° − φ below the horizon. The last scattering order adds under
 0.05% of the light even with the Sun straight below.
 
-**The nearside night is earthlit, and nowhere in the month reaches night vision.**
+**The nearside night is earthlit.** Only the Smythii headland, with the Earth
+low, reaches night vision, for 16 hours.
 
-| Coast | The Earth's elevation | Light from a full Earth | Hours the Earth outshines the Sun's sky | Darkest moment |
+| Coast | The Earth's elevation | Light from the Earth on the ground, brightest | Hours the Earth outshines the Sun's sky | Darkest moment |
 |---|---:|---:|---:|---:|
-| Western Oceanus Procellarum, by Russell | 6–21° | 1.7 lux | 132 | 0.96 lux |
-| Southern Mare Imbrium, Montes Carpatus | 59–74° | 7.8 lux | 200 | 5.9 lux |
-| Southern Mare Nubium, by Pitatus | 53–66° | 6.5 lux | 175 | 5.7 lux |
-| Mare Nectaris, by Fracastorius | 43–58° | 6.1 lux | 184 | 5.1 lux |
-| Eastern Smythii headland | −10.5 to +2.7° | 0.49 lux | 131 | 0.12 lux |
+| Western Oceanus Procellarum, by Russell | 6–21° | 0.94 lux | 108 | 0.48 lux |
+| Southern Mare Imbrium, Montes Carpatus | 59–74° | 4.5 lux | 183 | 2.7 lux |
+| Southern Mare Nubium, by Pitatus | 53–66° | 3.8 lux | 154 | 2.9 lux |
+| Mare Nectaris, by Fracastorius | 43–58° | 3.5 lux | 165 | 2.3 lux |
+| Eastern Smythii headland | −10.5 to +2.7° | 0.26 lux | 120 | 0.085 lux |
 | South Pole–Aitken sea, by Mare Ingenii | below the horizon | none | 0 | 0.46 lux |
 
 Each night lasts about 350 of the month's 709 hours. On the nearside the twilight
-outshines the Earth until the Sun is about 40° down; then the Earth lights the
-night, between new Earth at local noon and full Earth at local midnight. At the
-Smythii headland the Earth stands above the horizon for 213 hours and lights the
-night faintly from near the horizon. The Ingenii coast never sees the Earth, yet
-its darkest moment keeps 0.46 lux of twilight, as bright as a night under a full
-Moon on Earth.
+outshines the Earth until the Sun is 40–50° down; then the Earth lights the
+night, between new Earth at local noon and full Earth at local midnight. Above
+the air the brightest earthlight of the month is 7.2 lux. Its spectrum is bluer
+than sunlight: chromaticity (0.295, 0.303) against (0.322, 0.332). At the Smythii
+headland the Earth stands above the horizon for 213 hours and lights the night
+faintly from near the horizon. The Ingenii coast never sees the Earth, yet its
+darkest moment keeps 0.46 lux of twilight, as bright as the darkest moment at
+western Procellarum and of a night under a full Moon on Earth.
 
 **Where the Earth stands.** Every water cell at 1-degree spacing, followed every
 six hours through 2026–2045
@@ -157,12 +161,17 @@ which Earth's civil twilight ends, 2.98 lux in the same solver's Earth control
 ([optical comfort](../optical_comfort/README.md)), with the Sun 41.4° down: 82
 hours after sunset at the equator and 98 hours at 30° latitude, and poleward of
 48.6° a clear night never falls that low. Day vision holds for its first 46 hours
-at the equator. Where the Earth stands high, the night stays above the level.
+at the equator. Where the Earth stands high, its light holds the night near the
+level: the darkest moments at the three high-Earth coasts are 2.3–2.9 lux.
 
 **Boundaries.** The light is clear-sky, from a horizontally uniform solved column
 without refraction; the twilight's paths cross the terminator through night-side
-air this column does not hold. The earthlight is a Lambert sphere of the Earth's
-geometric albedo with sunlight's colour, through the same air as sunlight.
+air this column does not hold. The earthlight is Glenar et al.'s (2019) model
+spectrum of the whole Earth, scaled to the visual phase curve that Robinson et al.
+(2025) fit to the observations, and carried through the air by wavelength. The
+model's spectrum is 11% bluer, blue band to red, than Robinson et al.'s band
+albedos, and the Earth's turning continents and clouds move its light by about
+10%.
 Starlight and airglow stand in as 0.001 lux. Modes of vision are for an 18% grey
 surface; clouds come in the regime results.
 

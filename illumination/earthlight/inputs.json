@@ -1,0 +1,17 @@
+{
+ "schema": "terluna.external-inputs/1",
+ "status": "external inputs; fetched and hash-checked by fetch_inputs.py; ignored by Git",
+ "input_directory": "inputs",
+ "retrieved": "2026-10-04",
+ "publication_note": "The Earth's spectral radiance at the Moon from Glenar et al., published on Mendeley Data under CC BY 4.0 (creativecommons.org/licenses/by/4.0): use requires credit and a link to the licence. Not redistributed by this repository. A hash mismatch means the upstream bytes changed and must be reviewed, never silently accepted.",
+ "files": [
+  {
+   "name": "Earthshine_Spring_Approximation_Revised_Sept2018.txt",
+   "url": "https://data.mendeley.com/public-files/datasets/xfjm6nmh3m/files/16cb2472-48ee-417c-9433-5b0a3797246a/file_downloaded",
+   "sha256": "4e7b6dc2eda2e06c85b7a301657a9f70627a6b8251076b129787dfb661e1cea2",
+   "bytes": 80850,
+   "credit": "Glenar, D., Stubbs, T., Schwieterman, E., Robinson, T. and Livengood, T. (2018), Spring season approximation for Earth's solar-band radiance at the Moon, Revised, Mendeley Data v2, doi:10.17632/xfjm6nmh3m.2, CC BY 4.0; accompanying Glenar et al. (2019), Earthshine as an illumination source at the Moon, Icarus 321, 841-856. Fitted to NASA Virtual Planetary Laboratory models of March-April 2008 (Robinson et al. 2011, Astrobiology 11, 393).",
+   "use": "The Earth's disk-averaged spectral radiance seen from the Moon, by phase angle and sub-observer latitude"
+  }
+ ]
+}

@@ -110,8 +110,8 @@ def calendar_figure(record):
     fig.text(0.06, 0.975, "Light through a month at six coasts", fontsize=13, color=INK, ha="left", va="top")
     note = ("Clear-sky horizontal illuminance hour by hour, 7 February to 8 March 2038, the tide month of the wave "
             "studies' shore month. The Sun's light comes from the solved spherical sky of the design atmosphere, which "
-            "scatters light far past the horizon; the Earth's from a Lambert sphere of the Earth's albedo seen through "
-            "the same air. Bands: modes of vision for an 18% grey surface (CIE 191:2010). Lower panels: the Sun's and "
+            "scatters light far past the horizon; the Earth's from a model spectrum of the whole Earth at its observed "
+            "visual brightness (geometric albedo 0.242), seen through the same air. Bands: modes of vision for an 18% grey surface (CIE 191:2010). Lower panels: the Sun's and "
             "the Earth's elevation.")
     fig.text(0.06, 0.95, textwrap.fill(note, 215), fontsize=7.6, color=INK2, ha="left", va="top")
     path = OUT / "lighting_calendar.png"

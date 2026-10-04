@@ -8,13 +8,14 @@ South Pole–Aitken coast by Mare Ingenii:
 
 - the Sun's and the Earth's elevation and azimuth, from geography/lunar_ephemeris.py, checked against JPL Horizons
   within 0.05 degrees; the Earth's direction is topocentric (its parallax reaches 0.26 degrees);
-- the Earth's phase angle and lit fraction, and its earthlight above the air: illumination/ephemeris.py's
-  Lambert-phase sphere of geometric albedo 0.367, lit by the unfiltered sunlight above the Earth control's air;
+- the Earth's phase angle and lit fraction, and its earthlight above the air by wavelength: Glenar et al.'s
+  spectrum of the whole Earth scaled to Robinson et al.'s (2025) observed visual phase curve, geometric albedo
+  0.242 (illumination/earthlight/model.py), lit by the unshielded sunlight of the Earth control;
 - the clear-sky light on the ground from the Sun: the solved spherical sky's direct beam, interpolated between its
   stored solar elevations, and its diffuse light, read from the cached scattering solution, which spans the Sun from
   90 degrees above the horizon to 90 below;
-- the earthlight on the ground through the same air, scaled from the Sun's direct beam and diffuse light at the
-  Earth's elevation, so with the photopic transmission of shielded sunlight;
+- the earthlight on the ground through the same air, channel by channel: the solved sky's direct beam and
+  diffuse light for a source at the Earth's elevation, weighted by the earthlight's spectrum;
 - starlight and airglow as a placeholder of 0.001 lux, a clear moonless night on Earth;
 - which source dominates, and the mode of vision for an 18% grey surface against CIE 191:2010's mesopic range,
   0.005 to 5 cd/m2.
@@ -32,7 +33,9 @@ import numpy as np
 
 from climate.waves.cycle import CYCLE_HOURS
 from geography import lunar_ephemeris as ephemeris
-from shared.constants import AU, EARTH_GEOMETRIC_ALBEDO, EARTH_RADIUS, MOON_RADIUS
+from illumination.earthlight import model as earthlight
+from illumination.earthlight.fetch_inputs import INPUTS as EARTHLIGHT_INPUTS
+from shared.constants import AU, EARTH_MOON_DISTANCE, MOON_RADIUS
 from shared.provenance import constants_used
 
 HERE = Path(__file__).resolve().parent
@@ -79,13 +82,8 @@ def horizontal(vectors, frame):
     return np.degrees(np.arcsin(np.clip(v @ up, -1, 1))), np.degrees(np.arctan2(v @ east, v @ north)) % 360
 
 
-def lambert_phase(alpha):
-    """illumination/ephemeris.py's Lambert-sphere phase law, for arrays."""
-    return (np.sin(alpha) + (np.pi - alpha) * np.cos(alpha)) / np.pi
-
-
 def geometry(jd, lon_deg, lat_deg):
-    """The Sun and the Earth over a site, the Earth's phase and its earthlight above the air."""
+    """The Sun and the Earth over a site, the Earth's phase and the sunlight that falls on it."""
     g = ephemeris.earth_and_sun(jd)
     frame = local_frame(lon_deg, lat_deg)
     earth = g["earth"] * g["earth_distance_m"][..., None] - MOON_RADIUS * frame[2]
@@ -95,11 +93,10 @@ def geometry(jd, lon_deg, lat_deg):
     to_moon = -g["earth"]
     cos_alpha = np.sum(to_sun * to_moon, axis=-1) / np.linalg.norm(to_sun, axis=-1)
     alpha = np.arccos(np.clip(cos_alpha, -1, 1))
-    ratio = EARTH_GEOMETRIC_ALBEDO * (EARTH_RADIUS / g["earth_distance_m"]) ** 2 * lambert_phase(alpha)
-    sunlight_factor = (AU / np.linalg.norm(to_sun, axis=-1)) ** 2
     return dict(sun_elevation=sun_el, sun_azimuth=sun_az, earth_elevation=earth_el, earth_azimuth=earth_az,
                 earth_phase_angle=np.degrees(alpha), earth_lit_fraction=(1 + np.cos(alpha)) / 2,
-                earthlight_ratio=ratio * sunlight_factor)
+                earth_distance_m=g["earth_distance_m"],
+                earth_sunlight_factor=(AU / np.linalg.norm(to_sun, axis=-1)) ** 2)
 
 
 class Sky:
@@ -114,6 +111,10 @@ class Sky:
             down = z["moments"][0, :, :, 5] @ z["xyz"][:, 1]
             last = z["last_order"][0, :, :, 5] @ z["xyz"][:, 1]
             self.above_air = float(z["xyz"][:, 1].sum())
+            # Per channel and unit source: diffuse light and the direct beam on the ground, by source elevation.
+            self.channel_y, self.channel_band, self.channel_energy = z["xyz"][:, 1], z["band"], z["energy"]
+            self.diffuse_channels = z["moments"][0, :, :, 5]
+            self.beam_angles, self.direct_channels = np.degrees(z["sa"]), z["beam"][0, :, :, 1]
         self.diffuse_table = down
         self.last_order_fraction = float(np.max(last / np.maximum(down, 1e-300)))
         rows = sorted(moon["samples"], key=lambda r: r["sun_deg"])
@@ -121,6 +122,7 @@ class Sky:
         self.direct_normal = np.array([r["direct_normal_lux"] for r in rows])
         with np.load(Path(directory) / "earth_control_standard.npz", allow_pickle=False) as z:
             self.unfiltered_above_air = float(z["xyz"][:, 1].sum())
+            self.unshielded_band, self.unshielded_energy = z["band"], z["energy"]
         stored = np.array([r["moment_diffuse_horizontal_lux"] for r in rows])
         self.readout_check = float(np.max(np.abs(self.diffuse(self.sample_deg) / stored - 1)))
         self.inputs = {str(p.relative_to(ROOT)): sha256(p) for p in (Path(sky), path,
@@ -138,6 +140,43 @@ class Sky:
 
     def ground(self, elevation):
         return self.direct(elevation) + self.diffuse(elevation)
+
+    def ground_channels(self, elevation):
+        """Light on the ground per channel and unit source, for sources at the given elevations (n, channels)."""
+        e = np.atleast_1d(np.asarray(elevation, float))
+        diffuse = np.stack([np.interp(e, self.angles, self.diffuse_channels[:, c])
+                            for c in range(self.diffuse_channels.shape[1])], -1)
+        direct = np.stack([np.interp(e, self.beam_angles, self.direct_channels[:, c])
+                           for c in range(self.direct_channels.shape[1])], -1)
+        return diffuse + direct
+
+
+class Earthlight:
+    """The Earth's light above the air in each of the sky's channels, per unit of that channel's shielded sunlight.
+
+    Bands share a weight across their channels: within a 10 nm band the earthlight and the sunlight keep the same
+    spectral shape, and the channels split a band by absorption strength.
+    """
+
+    def __init__(self, sky, step_deg=0.5):
+        bands = np.unique(sky.channel_band, axis=0)
+        if not np.array_equal(bands, np.unique(sky.unshielded_band, axis=0)):
+            raise ValueError("The shielded and unshielded skies use different bands")
+        shielded = np.array([sky.channel_energy[(sky.channel_band == b).all(1)].sum() for b in bands])
+        unshielded = np.array([sky.unshielded_energy[(sky.unshielded_band == b).all(1)].sum() for b in bands])
+        self.phase = np.arange(0.0, 180.0 + step_deg / 2, step_deg)
+        table = np.array([earthlight.calibrated_irradiance(bands, unshielded, a, EARTH_MOON_DISTANCE)
+                          for a in self.phase])
+        self.per_unit = table / shielded
+        self.channel_index = np.array([int(np.flatnonzero((bands == b).all(1))[0]) for b in sky.channel_band])
+        self.reference_solid_angle = earthlight.solid_angle(EARTH_MOON_DISTANCE)
+
+    def weights(self, phase_deg, distance_m, sunlight_factor):
+        """Per-channel weights (n, channels) for the Earth at the given phase angles and distances."""
+        per_band = np.stack([np.interp(phase_deg, self.phase, self.per_unit[:, b])
+                             for b in range(self.per_unit.shape[1])], -1)
+        scale = earthlight.solid_angle(distance_m) / self.reference_solid_angle * sunlight_factor
+        return per_band[:, self.channel_index] * np.asarray(scale)[:, None]
 
 
 def regime(lux):
@@ -206,12 +245,14 @@ def build():
     sites = [(s["name"], s["short"], *s["lon_lat"]) for s in month["shores"]]
     sites += [HEADLAND, ("South Pole–Aitken sea, by Mare Ingenii", "Ingenii coast", *spa)]
     sky = Sky()
+    earth_light = Earthlight(sky)
     records = []
     for name, short, lon, lat in sites:
         g = geometry(jd, lon, lat)
         sun = sky.ground(g["sun_elevation"])
-        earth_above_air = g["earthlight_ratio"] * sky.unfiltered_above_air
-        earth = earth_above_air * sky.ground(g["earth_elevation"]) / sky.above_air
+        weights = earth_light.weights(g["earth_phase_angle"], g["earth_distance_m"], g["earth_sunlight_factor"])
+        earth_above_air = weights @ sky.channel_y
+        earth = np.einsum("tc,tc,c->t", weights, sky.ground_channels(g["earth_elevation"]), sky.channel_y)
         total = sun + earth + FLOOR_LUX
         sources = np.array(["sky lit by the Sun", "the Earth", "stars and airglow (placeholder)"])
         dominant = sources[np.argmax(np.stack([sun, earth, np.full_like(sun, FLOOR_LUX)]), axis=0)]
@@ -240,20 +281,24 @@ def build():
                         share_earth_up=grid["share"].astype(np.float32), mean_elevation_deg=grid["mean"].astype(np.float32),
                         lowest_elevation_deg=grid["low"].astype(np.float32), highest_elevation_deg=grid["high"].astype(np.float32))
     elevations = np.arange(-90, 90.25, 0.5)
-    files = [Path(__file__), ROOT / "geography/lunar_ephemeris.py", ROOT / "climate/waves/cycle.py"]
+    files = [Path(__file__), ROOT / "geography/lunar_ephemeris.py", ROOT / "climate/waves/cycle.py",
+             ROOT / "illumination/earthlight/model.py"]
     return dict(
         schema="terluna.research.sea-lighting-calendar/1",
         evidence=("Geometry from a truncated lunar theory checked against JPL Horizons; clear-sky light from the solved "
                   "spherical sky of the design atmosphere (horizontally uniform, no refraction, no clouds); earthlight "
-                  "from a Lambert sphere with the Earth's geometric albedo and sunlight's colour. Starlight and airglow "
-                  "are a placeholder."),
+                  "from a model spectrum of the whole Earth (Glenar et al. 2019) scaled to its observed visual phase "
+                  "curve (Robinson et al. 2025), carried through the same air by wavelength. Starlight and airglow are "
+                  "a placeholder."),
         reading_rule=("time_hours count from the first atmospheric snapshot of the wave runs; the calendar dates are the "
                       "shore month's tide month. Elevations in degrees above the horizon, azimuths clockwise from north. "
                       "ground_lux_* is horizontal illuminance at the surface, clear sky. The mode of vision applies to an "
                       "18% grey surface lit by the total including the 0.001-lux placeholder."),
         producer=dict(domain="research", files={str(p.relative_to(ROOT)): sha256(p) for p in files},
                       constants=constants_used(files)),
-        inputs=dict(shore_month_sha256=sha256(SHORE_MONTH), atlas_sha256=sha256(ATLAS), **sky.inputs),
+        inputs=dict(shore_month_sha256=sha256(SHORE_MONTH), atlas_sha256=sha256(ATLAS), **sky.inputs,
+                    **{f"illumination/earthlight/inputs/{f['name']}": f["sha256"]
+                       for f in EARTHLIGHT_INPUTS.manifest()["files"]}),
         sky=dict(shielded_sunlight_above_air_lux=sky.above_air, unfiltered_sunlight_above_air_lux=sky.unfiltered_above_air,
                  diffuse_readout_relative_difference_max=sky.readout_check,
                  last_scattering_order_fraction_max=sky.last_order_fraction,
