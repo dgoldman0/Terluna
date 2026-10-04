@@ -18,6 +18,7 @@ SINGLETON = cm1_run.CM1_HOME / cm1_run.SOURCE['version'] / 'src' / 'singleton.F'
 
 DRIVER = """
 program check
+  use module_boxmgsetup
   use terluna_lightning
   implicit none
   integer :: ni, nj, nk, option, ninit, ncol, nregion, u
@@ -34,7 +35,11 @@ program check
   call potential(ni, nj, nk, dx, dy, zh1, zf1, q, phi)
   call field(ni, nj, nk, dx, dy, zh1, zf1, phi, ex, ey, ez, emag)
   w = energy(ni, nj, nk, dx, dy, zf1, q, phi)
-  call breakdown_field(ni, nj, nk, rho, option, ebrk)
+  if( option .eq. 2 )then                     ! unbounded
+    terluna_ebrk_lo = 0.0
+    terluna_ebrk_hi = 1.0e30
+  endif
+  call breakdown_field(ni, nj, nk, rho, ebrk)
   call discharge(ni, nj, nk, dx, dy, zf1, rho, emag, ebrk, radius, q, dep, ninit, ncol, nregion, qpos, qneg)
   open(newunit=u, file='out.bin', access='stream', form='unformatted', status='replace')
   write(u) phi, ex, ey, ez, emag, ebrk, q, dep, w, qpos, qneg, ninit, ncol, nregion

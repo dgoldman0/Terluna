@@ -1,5 +1,5 @@
 {
-  "checked": "2026-10-03",
+  "checked": "2026-10-04",
   "source_admission": "Sources for the plan of 2026-10-02, each with what was read of it. None is imported or installed; source admission for the manuscripts is separate.",
   "sources": [
     {
@@ -55,9 +55,9 @@
     },
     {
       "id": "S8",
-      "citation": "WRF-ELEC, MicroTed/wrf4-elec at commit e43041b000ebfd77c4a528f2ca3847746e839aa8, elec/module_mp_nssl_2mom_elec.F (sha256 9203693d76b841f1...) and elec/takahashi.txt",
-      "use": "The implemented laws: routines saund6 and TAKA, the scheme dispatch for nssl_isaund = 12, the charging block (ecollmx, caps), and Takahashi's table (an external input). Stage 2 runs this module in CM1 (climate/crm/cm1_elec.py) and ports elec/module_discharge.F, routine light1d, to terluna_lightning.F.",
-      "access": "Code read for those routines; LICENSE.txt is the WRF public-domain notice. The NSSL driver, its charge handling and light1d read in full for the port.",
+      "citation": "WRF-ELEC, MicroTed/wrf4-elec at commit e43041b000ebfd77c4a528f2ca3847746e839aa8, elec/module_mp_nssl_2mom_elec.F (sha256 9203693d76b841f1...), elec/takahashi.txt, elec/module_discharge_msz.F (sha256 1cde4951dfc5e01f...) and elec/module_boxmgsetup.F (sha256 eca6882798713e9b...)",
+      "use": "The implemented laws: routines saund6 and TAKA, the scheme dispatch for nssl_isaund = 12, the charging block (ecollmx, caps), and Takahashi's table (an external input). Stage 2 runs the NSSL module in CM1 (climate/crm/cm1_elec.py) with its sedimentation sub-steps as WRF-ELEC's driver (elec/include_microphysics_driver_elec.F) runs them, ports elec/module_discharge.F's light1d to terluna_lightning.F, and runs the branched lightning lightmsz from module_discharge_msz.F with mlint2 from module_boxmgsetup.F, patched for one process.",
+      "access": "Code read for those routines; LICENSE.txt is the WRF public-domain notice. The NSSL driver, its charge handling, light1d, WRF-ELEC's microphysics driver and lightmsz's start, channel, ground-strike, charge and nitrogen oxide code read for the port.",
       "url": "https://github.com/MicroTed/wrf4-elec"
     },
     {
@@ -224,6 +224,12 @@
       "citation": "Calhoun, Mansell, MacGorman and Dowell (2014), Mon. Wea. Rev. 142, 3977-3997; Fierro et al. (2006), Mon. Wea. Rev. 134, 3149-3172; Sun, Li, Wang, Mansell, et al. (2024), J. Geophys. Res. Atmos. 129, e2023JD039251",
       "use": "Context: flash rates of assimilated and simulated supercells, flash counts across charging laws, and charge inverting at high CCN.",
       "access": "Read for the stage-2 benchmark on 2026-10-03 by a literature agent: Calhoun pp. 3985-3994; Fierro 2006 Fig. 9; Sun 2024 pp. 2-12 and Table 2."
+    },
+    {
+      "id": "S33",
+      "citation": "Wang, DeSilva, Goldenbaum and Dickerson (1998), Nitric oxide production by simulated lightning: dependence on current, energy, and pressure, J. Geophys. Res. 103, 19149-19159",
+      "use": "The nitric oxide yield per metre of channel, 0.34e21 + 1.30e16 p molecules (p in Pa), that lightmsz applies to each flash's channel.",
+      "access": "Not read; the yield is taken as WRF-ELEC codes it (S8)."
     }
   ],
   "notes": "Stage 1's literature notes, with every value's location in its source, are kept on the data drive at /media/projectspace/terluna-research/atmospheric-electricity/ (charging_laws.md, ionization_conductivity.md). Stage 2's benchmark notes, with each value's place in its source, are in benchmark_literature.md in the same folder."

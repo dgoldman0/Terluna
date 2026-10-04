@@ -1,23 +1,24 @@
-"""What an electrified CM1 storm shows: when and where it discharges, the field it reaches, the charge it carries and
-which collisions charged it. Stage 2 of the atmospheric-electricity study (climate/crm/cm1_elec.py).
+"""What an electrified CM1 storm shows: how often and where it flashes, the field it reaches, the charge it carries
+and which collisions charged it. Stage 2 of the atmospheric-electricity study (climate/crm/cm1_elec.py).
 
-    python3 -m climate.crm.elec_analysis supercell_elec
+    python3 -m climate.crm.elec_analysis supercell_elec_msz
 
 writes ../results/crm/elec_<case>.json from:
-- the discharge log (terluna_flashes.txt): each call of WRF-ELEC's cylindrical scheme, with the points above the
-  breakdown field, the columns and separate regions it took, the positive and negative charge it removed and the
-  electrostatic energy before and after;
-- the field log (terluna_field.txt, every ten steps and at every discharge): the largest field, the domain's positive
-  and negative charge and its electrostatic energy;
+- the flash log (terluna_flashes.txt): each flash of WRF-ELEC's branched scheme (in cloud, or negative or positive
+  charge to ground) with its starting point and the field there, the charge it neutralized, the electrostatic energy
+  before and after, the levels and area its channels reached and the nitrogen oxides it made; or each call of the
+  cylindrical scheme, with the points above breakdown, the columns and separate regions it took and the charge it
+  removed. Each row also carries the domain's largest field over breakdown just before it;
+- the field log (terluna_field.txt, every ten steps): the largest field, the domain's positive and negative charge and
+  its electrostatic energy, and the largest charging rates;
 - the charging totals WRF-ELEC's driver prints every step into CM1's log (C/s over the domain, by collision pair:
   graupel and hail with cloud ice and with snow, snow with ice, and inductive charging of graupel by cloud droplets);
 - the charge tracers in the output snapshots (C/kg; times the air density, C/m3): the charge by height and particle
   type, and where the main negative and the positive charge regions sit in height and temperature.
 
-A discharge here is one call of the scheme: it acts at once in every cylinder around every point above the
-breakdown field, so a call that takes several separate regions counts them in its regions column, and the scheme
-repeats within a time step while the field stays above breakdown. Rates are given per call and per region; each
-stands for several flashes as a lightning mapping array would count them.
+A branched flash is one flash as a lightning mapping array would count it, though its channels run on the model's
+grid. A cylindrical discharge acts at once in every cylinder around every point above the breakdown field, so a call
+that takes several separate regions counts them in its regions column and stands for several flashes.
 """
 from __future__ import annotations
 import argparse
@@ -34,11 +35,12 @@ RESULTS = ra.RESULTS
 SCHEMA = 'terluna.climate.crm-electricity/1'
 RD, CP, P00 = 287.04, 1005.7, 1.0e5
 SPECIES = ('cloud_water', 'rain', 'cloud_ice', 'snow', 'graupel', 'small_ions', 'hail')   # passive tracers 1-7
-FLASH_COLUMNS = ('time_s', 'step', 'discharge', 'points_above', 'e_max_v_m', 'e_break_v_m', 'x_m', 'y_m', 'z_m',
-                 'columns', 'regions', 'positive_c', 'negative_c', 'energy_before_j', 'energy_after_j', 'z_low_m',
-                 'z_high_m')
+FLASH_COLUMNS = ('time_s', 'step', 'substep', 'kind', 'x_m', 'y_m', 'z_m', 'e_v_m', 'e_break_v_m', 'e_over_break_max',
+                 'extent_m2', 'regions', 'positive_c', 'negative_c', 'energy_before_j', 'energy_after_j', 'z_low_m',
+                 'z_high_m', 'points', 'nox_mol')
 FIELD_COLUMNS = ('time_s', 'step', 'e_max_v_m', 'x_m', 'y_m', 'z_m', 'positive_c', 'negative_c', 'energy_j',
-                 'discharges', 'noninductive_max_c_m3_s', 'inductive_max_c_m3_s')
+                 'noninductive_max_c_m3_s', 'inductive_max_c_m3_s')
+KINDS = {1: 'in_cloud', 2: 'negative_to_ground', 3: 'positive_to_ground', 9: 'cylinders'}
 # WRF-ELEC's charging totals (module_mp_nssl_2mom.F, its driver): negative and positive parts of the domain's charging
 # rate, C/s, by the collisions that separate it
 CHARGING = {'ctghi': 'graupel and hail with cloud ice', 'ctghs': 'graupel and hail with snow',
@@ -49,14 +51,21 @@ TIME_UNITS = {'sec': 1.0, 'min': 60.0, 'hour': 3600.0, 'hrs': 3600.0, 'day': 864
 BIN_S = 300.0
 EVIDENCE = ('CM1 r22.0 with WRF-ELEC\'s NSSL two-moment microphysics (MicroTed/wrf4-elec e43041b) and its charging '
             '(non-inductive by collisions of graupel and hail with ice and snow, inductive by droplets rebounding from '
-            'graupel in the field), the small ions\' net charge attaching to particles, an FFT field solver and '
-            'WRF-ELEC\'s cylindrical discharge scheme; charge is carried by bulk particle populations, lightning '
-            'removes a share of the charge in 12-km cylinders instead of following channels, and nothing conducts '
-            'charge away except where a case turns on leakage.')
-READING_RULE = ('Times are model seconds from the start. A discharge is one call of the cylindrical scheme; regions '
-                'are the separate areas one call takes. Charging rates are the domain\'s totals of each sign (C/s). '
-                'Charge densities are nC/m3; heights are above the ground; temperatures are the air\'s at the level, '
-                'weighted by the charge there.')
+            'graupel in the field), the small ions\' net charge attaching to particles, an FFT field solver, and '
+            'WRF-ELEC\'s lightning on its own sub-steps of the sedimentation: the branched scheme (lightmsz, '
+            'MacGorman, Straka and Ziegler 2001) or the cylindrical one. Charge is carried by bulk particle '
+            'populations; branched channels run on the model grid and neutralize the charge where they reach; the '
+            'ground-strike rule, the 50-MV potential and 10-kV/m field a ground flash needs at its start and the '
+            'nitrogen oxide yield are WRF-ELEC\'s calibrations for Earth; nothing conducts charge away except where a '
+            'case turns on leakage.')
+READING_RULE = ('Times are model seconds from the start. Kinds: 1 in cloud, 2 negative and 3 positive charge to ground '
+                '(branched flashes), 9 a call of the cylindrical scheme, whose regions are the separate areas one call '
+                'takes. A flash\'s positive and negative charge are what it neutralized; a ground flash neutralizes '
+                'one sign only, the ground supplying the other. Nitrogen oxides are lightmsz\'s: Wang et al.\'s yield '
+                'per metre of channel at its pressure, times 0.1 where the flash changes the charge by 1 nC/kg or '
+                'more. Charging rates are the domain\'s totals of each sign (C/s). Charge densities are nC/m3; '
+                'heights are above the ground; temperatures are the air\'s at the level, weighted by the charge '
+                'there.')
 
 
 def read_log(path: Path, names: tuple) -> dict:
@@ -179,6 +188,25 @@ def binned(times: np.ndarray, values: np.ndarray, edges: np.ndarray, how: str = 
     return out
 
 
+def flash_summary(f: dict, edges: np.ndarray) -> dict:
+    """Flashes of one kind: how many and when, the charge each neutralized, the energy it released, where it started
+    and how far its channels reached, and the nitrogen oxides it made."""
+    n = f['time_s'].size
+    dissipated = f['energy_before_j'] - f['energy_after_j']
+    out = dict(count=int(n), first_s=float(f['time_s'].min()), per_5_min=binned(f['time_s'], np.ones(n), edges),
+               positive_c=stats(f['positive_c']), negative_c=stats(f['negative_c']),
+               energy_dissipated_j=stats(dissipated), initiation_z_km=stats(f['z_m'] / 1000.0),
+               e_at_initiation_kv_m=stats(f['e_v_m'] / 1000.0),
+               e_break_at_initiation_kv_m=stats(f['e_break_v_m'] / 1000.0), extent_km2=stats(f['extent_m2'] / 1.0e6),
+               z_low_km=stats(f['z_low_m'] / 1000.0), z_high_km=stats(f['z_high_m'] / 1000.0),
+               points=stats(f['points']))
+    if np.any(f['nox_mol'] > 0.0):
+        out.update(nox_mol=stats(f['nox_mol']), nox_total_mol=float(f['nox_mol'].sum()))
+    if np.any(f['regions'] != 1):
+        out['regions'] = int(f['regions'].sum())
+    return out
+
+
 def analyse(name: str) -> dict:
     case = ra.RUNS / name
     record = json.loads((case / 'case.json').read_text())
@@ -195,26 +223,23 @@ def analyse(name: str) -> dict:
                     rates['time_s'].max() if rates['time_s'].size else 0.0))
     edges = np.arange(0.0, end + BIN_S, BIN_S)
 
-    dissipated = flashes['energy_before_j'] - flashes['energy_after_j']
-    removed = flashes['positive_c'] + flashes['negative_c']
-    discharges = dict(
-        count=int(flashes['time_s'].size), regions=int(flashes['regions'].sum()),
-        first_s=float(flashes['time_s'].min()) if flashes['time_s'].size else None,
-        per_5_min=binned(flashes['time_s'], np.ones_like(flashes['time_s']), edges),
-        regions_per_5_min=binned(flashes['time_s'], flashes['regions'], edges),
-        charge_removed_c=stats(removed) if removed.size else None,
-        energy_dissipated_j=stats(dissipated) if dissipated.size else None,
-        initiation_z_km=stats(flashes['z_m'] / 1000.0) if flashes['z_m'].size else None,
-        e_max_at_initiation_kv_m=stats(flashes['e_max_v_m'] / 1000.0) if flashes['z_m'].size else None,
-        e_break_at_initiation_kv_m=stats(flashes['e_break_v_m'] / 1000.0) if flashes['z_m'].size else None,
-        # the field over the breakdown field at the step's first discharge (what charging and transport built in one
-        # step) and at its later ones (what remained after a discharge)
-        over_breakdown_first=stats((flashes['e_max_v_m'] / flashes['e_break_v_m'])[flashes['discharge'] == 1])
-        if flashes['z_m'].size else None,
-        over_breakdown_later=stats((flashes['e_max_v_m'] / flashes['e_break_v_m'])[flashes['discharge'] > 1])
-        if flashes['z_m'].size else None,
-        discharges_per_step_max=int(flashes['discharge'].max()) if flashes['z_m'].size else None,
-        depth_km=stats((flashes['z_high_m'] - flashes['z_low_m']) / 1000.0) if flashes['z_m'].size else None)
+    lightning = {}
+    first = np.r_[True, (np.diff(flashes['step']) != 0) | (np.diff(flashes['substep']) != 0)] if flashes['step'].size \
+        else np.array([], bool)
+    for code, label in KINDS.items():
+        sel = flashes['kind'] == code
+        if sel.any():
+            lightning[label] = flash_summary({k: v[sel] for k, v in flashes.items()}, edges)
+    if flashes['step'].size:
+        groups = np.cumsum(first)
+        over = flashes['e_over_break_max']
+        lightning['all'] = dict(
+            count=int(flashes['step'].size), first_s=float(flashes['time_s'].min()),
+            per_5_min=binned(flashes['time_s'], np.ones_like(flashes['time_s']), edges),
+            # the field over breakdown before a sub-step's first flash (what charging and transport built since the
+            # last) and before its later ones (what the flashes before them left)
+            over_breakdown_first=stats(over[first]), over_breakdown_later=stats(over[~first]),
+            per_substep_max=int(np.bincount(groups).max()))
     fields = dict(
         e_max_kv_m=float(field['e_max_v_m'].max() / 1000.0) if field['time_s'].size else None,
         e_max_per_5_min_kv_m=binned(field['time_s'], field['e_max_v_m'] / 1000.0, edges, 'max'),
@@ -250,7 +275,7 @@ def analyse(name: str) -> dict:
         producer=dict(domain='climate', files={'crm/elec_analysis.py': hashlib.sha256(
             Path(__file__).read_bytes()).hexdigest()[:16]}),
         evidence=EVIDENCE, reading_rule=READING_RULE, end_s=end, bin_s=BIN_S,
-        discharges=discharges, field=fields, charging=separated, structure=structures)
+        lightning=lightning, field=fields, charging=separated, structure=structures)
 
 
 def against(name: str, other: str) -> dict:

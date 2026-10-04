@@ -1,20 +1,21 @@
 """CM1 with electrified storms: WRF-ELEC's NSSL two-moment microphysics in place of CM1's own copy, the electric field,
-lightning and leakage after it, and the patches that fit them to CM1 and to lunar gravity. Stage 2 of the
-atmospheric-electricity study (research/studies/atmospheric_electricity).
+lightning and leakage, and the patches that fit them to CM1 and to lunar gravity. Stage 2 of the atmospheric-electricity
+study (research/studies/atmospheric_electricity).
 
 WRF-ELEC (MicroTed/wrf4-elec; Mansell et al. 2005, 2010; Fierro et al. 2013) carries charge on every particle type
 through every microphysical process, with non-inductive and inductive charging and small ions. Its NSSL module is the
 same scheme as CM1 r22's (Mansell maintains both) with the electrification kept and CM1's driver options dropped. The
-build fetches it at a pinned commit (in the public domain under the WRF notice), drops it in for CM1's
-module_mp_nssl_2mom.F, and adds two Terluna files (climate/crm/fortran): terluna_elec.F passes CM1's calls to
-WRF-ELEC's driver with the arrays reordered from CM1's (i,j,k) to WRF's (i,k,j) and keeps the charges in CM1's passive
-tracers; after the microphysics it solves for the field and runs lightning and leakage with terluna_lightning.F, which
-solves Poisson's equation by FFT and carries WRF-ELEC's cylindrical discharge scheme (light1d). Settings are in the
-header of terluna_elec.F; CM1 passes var6 and var7 to the module's set-up as the charging switch and law.
+build fetches it and WRF-ELEC's branched lightning (module_discharge_msz.F) at a pinned commit (in the public domain
+under the WRF notice), drops the module in for CM1's module_mp_nssl_2mom.F, and adds three Terluna files
+(climate/crm/fortran): terluna_elec.F passes CM1's calls to WRF-ELEC's driver with the arrays reordered from CM1's
+(i,j,k) to WRF's (i,k,j), keeps the charges in CM1's passive tracers, and, as WRF-ELEC's own driver does, runs the
+sedimentation in sub-steps, each followed by the field and lightning; terluna_lightning.F solves Poisson's equation by
+FFT and carries WRF-ELEC's cylindrical discharge (light1d); terluna_branched.F runs one flash of the branched scheme
+(lightmsz) on a domain that wraps around. Settings are in the header of terluna_elec.F; CM1 passes var6 and var7 to the
+module's set-up as the charging switch and law.
 
 Not carried: CM1's own water budget from the NSSL scheme (the condensation, evaporation and rain totals CM1's copy adds
-to qbudget), three-moment arrays, activated CCN and IN, terrain under the field solver, and WRF-ELEC's screening-layer
-and 3-D discharge options.
+to qbudget), three-moment arrays, activated CCN and IN, terrain under the field solver, and WRF-ELEC's screening layers.
 """
 from __future__ import annotations
 import hashlib
@@ -45,23 +46,98 @@ def fetch_module(home: Path) -> Path:
     return path
 
 
+# WRF-ELEC's branched lightning (lightmsz; MacGorman, Straka and Ziegler 2001), at the same commit
+MSZ_SOURCE = dict(
+    url='https://raw.githubusercontent.com/MicroTed/wrf4-elec/e43041b000ebfd77c4a528f2ca3847746e839aa8/elec/'
+        'module_discharge_msz.F',
+    sha256='1cde4951dfc5e01f72bccb3437be6e6c03dd0e239b49b8f6b6485d9217a7c283', bytes=165455)
+
+
+def fetch_msz(home: Path) -> Path:
+    """WRF-ELEC's branched lightning at the pinned commit, downloaded once and checked against the pin."""
+    folder = home / 'wrf4-elec' / ELEC_SOURCE['commit'][:12]
+    path = folder / 'module_discharge_msz.F'
+    if not path.exists():
+        folder.mkdir(parents=True, exist_ok=True)
+        part = path.with_name(path.name + '.part')
+        with urllib.request.urlopen(MSZ_SOURCE['url']) as response, open(part, 'wb') as out:
+            shutil.copyfileobj(response, out)
+        part.replace(path)
+    data = path.read_bytes()
+    if len(data) != MSZ_SOURCE['bytes'] or hashlib.sha256(data).hexdigest() != MSZ_SOURCE['sha256']:
+        raise RuntimeError(f'{path} does not match the pinned WRF-ELEC branched lightning; not using it')
+    return path
+
+
+def quiet_msz(text: str) -> str:
+    """lightmsz's report to standard output and error goes to the unit it is given (terluna_msz.log): every write to
+    units 6, 0 or * in the routine after it takes up that unit."""
+    import re
+    start = text.index('       iunit = iunit0')
+    end = text.index('      end subroutine lightmsz')
+    body = re.sub(r'(?i)\bwrite *\( *(6|0|\*) *,', 'write(iunit,', text[start:end])
+    return text[:start] + body + text[end:]
+
+
+# WRF-ELEC's trilinear interpolation (mlint2), which lightmsz calls, stands outside the multigrid module in this file
+BOXMG_SOURCE = dict(
+    url='https://raw.githubusercontent.com/MicroTed/wrf4-elec/e43041b000ebfd77c4a528f2ca3847746e839aa8/elec/'
+        'module_boxmgsetup.F',
+    sha256='eca6882798713e9b940219ec64aad168fc22ce900149dc33e1754451cdfa11ac', bytes=264072)
+
+
+def fetch_boxmg(home: Path) -> Path:
+    """WRF-ELEC's multigrid set-up at the pinned commit, downloaded once and checked against the pin."""
+    folder = home / 'wrf4-elec' / ELEC_SOURCE['commit'][:12]
+    path = folder / 'module_boxmgsetup.F'
+    if not path.exists():
+        folder.mkdir(parents=True, exist_ok=True)
+        part = path.with_name(path.name + '.part')
+        with urllib.request.urlopen(BOXMG_SOURCE['url']) as response, open(part, 'wb') as out:
+            shutil.copyfileobj(response, out)
+        part.replace(path)
+    data = path.read_bytes()
+    if len(data) != BOXMG_SOURCE['bytes'] or hashlib.sha256(data).hexdigest() != BOXMG_SOURCE['sha256']:
+        raise RuntimeError(f'{path} does not match the pinned WRF-ELEC multigrid set-up; not using it')
+    return path
+
+
+def mlint2(text: str) -> str:
+    """WRF-ELEC's mlint2 as its own file: the subroutine after the multigrid module, to its closing end."""
+    start = text.index('      subroutine mlint2')
+    end = text.index('\n      return\n      end\n', start) + len('\n      return\n      end\n')
+    return ('! WRF-ELEC (MicroTed/wrf4-elec e43041b, elec/module_boxmgsetup.F): mlint2, trilinear interpolation for '
+            'lightmsz;\n! taken out by climate/crm/cm1_elec.py\n' + text[start:end])
+
+
 FORTRAN = Path(__file__).resolve().parent / 'fortran'
 REPO = Path(__file__).resolve().parents[2]
 CONDUCTIVITY = REPO / 'atmosphere' / 'electricity' / 'results' / 'conductivity_moon.json'
 TAKAHASHI = REPO / 'atmosphere' / 'electricity' / 'inputs' / 'takahashi.txt'
 
 # A case's electricity (its 'elec' entry overrides these): WRF-ELEC's defaults of non-inductive (Saunders and Peck with
-# Brooks's critical rime accretion rate) and inductive charging, its cylindrical lightning and breakdown field, no
-# leakage, and the NSSL scheme with hail. Leakage takes the Moon's conductivity at solar minimum, for 100 aerosol
-# particles per cm3 in clear air and 0.1 g/m3 of cloud water in cloud (atmosphere/electricity/conductivity.py).
-SETTINGS = dict(ipelec=3, isaund=12, lightning=1, leakage=0, radius_m=12000.0, hail=True,
+# Brooks's critical rime accretion rate) and inductive charging, its branched lightning (lightning 3; 1 for its
+# cylinders, 2 and 4 for those two with the breakdown field unbounded), its breakdown field and its 0.75-s sub-step
+# (substep_s 0), its ground-strike rule (ground_m 0: a downward channel reaching air warmer than -7 C), no leakage, and
+# the NSSL scheme with hail. Leakage takes the Moon's conductivity at solar minimum, for 100 aerosol particles per cm3
+# in clear air and 0.1 g/m3 of cloud water in cloud (atmosphere/electricity/conductivity.py).
+SETTINGS = dict(ipelec=3, isaund=12, lightning=3, leakage=0, radius_m=12000.0, hail=True, substep_s=0.0, ground_m=0.0,
                 conductivity=dict(sun='solar_minimum', clear_air='100_per_cm3', cloud='0.1_g_m3'))
+# The lunar boxes. WRF-ELEC's 0.75-s sub-step lets graupel settle through about 1 % of the 500-m layers of its supercell
+# in each; in the boxes' charging zone (25-35 km) the layers are 2 km deep and graupel falls at 0.44 of Earth's speed,
+# so 0.75 x 4 / 0.44 = 6.8 s keeps that share. WRF-ELEC's ground-strike rule stands about 5 km above Earth's ground; on
+# the Moon air warmer than -7 C lies about 27 km up, so the boxes count a downward channel that comes within 5 km of
+# the ground.
+LUNAR = dict(substep_s=6.8, ground_m=5000.0)
 
 
 def sources(home: Path) -> dict:
     """Whole files the electrified builds put in CM1's source before patching: name -> function giving its text."""
     return {'module_mp_nssl_2mom.F': lambda: fetch_module(home).read_text(encoding='latin-1'),
+            'module_discharge_msz.F': lambda: quiet_msz(fetch_msz(home).read_text(encoding='latin-1')),
+            'terluna_mlint2.F': lambda: mlint2(fetch_boxmg(home).read_text(encoding='latin-1')),
             'terluna_lightning.F': lambda: (FORTRAN / 'terluna_lightning.F').read_text(),
+            'terluna_branched.F': lambda: (FORTRAN / 'terluna_branched.F').read_text(),
             'terluna_elec.F': lambda: (FORTRAN / 'terluna_elec.F').read_text()}
 
 
@@ -70,8 +146,9 @@ def namelist_settings(elec: dict) -> dict:
     CM1's passive tracers without its positivity limiter, and the settings terluna_elec.F reads."""
     e = dict(SETTINGS, **elec)
     return {'param2': dict(ptype=27 if e['hail'] else 26, iptra=1, npt=7 if e['hail'] else 6, pdtra=0),
-            'param8': dict(var6=float(e['ipelec']), var7=float(e['isaund']), var8=float(e['lightning']),
-                           var9=float(e['leakage']), var10=float(e['radius_m']))}
+            'param8': dict(var4=float(e['ground_m']), var5=float(e['substep_s']), var6=float(e['ipelec']),
+                           var7=float(e['isaund']), var8=float(e['lightning']), var9=float(e['leakage']),
+                           var10=float(e['radius_m']))}
 
 
 def run_files(case: Path, elec: dict, namelist: str) -> tuple:
@@ -146,6 +223,26 @@ OMP_DIRECTIVE = (
     '!$OMP REDUCTION(min:scwmin,scrmin,scimin,scsmin,schmin,schlmin,sctotmin,scionmin)\n'
     '#endif\n')
 
+SED_OMP_ANCHOR = ('          ancuten(its:ite,1,kts:kte,:) = 0.0\n          thproclocal(:,:) = 0.0\n\n'
+                  '     DO jy = jts,jye\n     \n     xfall(:,:,:) = 0.0\n')
+SED_OMP_DIRECTIVE = (
+    '#if defined(OPENMP)\n'
+    '! Terluna: the slabs in parallel, as in the microphysics driver\n'
+    '!$OMP PARALLEL DO DEFAULT(SHARED) &\n'
+    '!$OMP PRIVATE(ix,jy,kz,il,xfall,axtra2d,an,t0,t1,t2,t3,t4,t5,t6,t7,t8,t9,t00,t77,dbz2d,vzf2d,dn1,pn,wn, &\n'
+    '!$OMP dz2d,dz2dinv,ltemq,elec2,sciona2d,kediagloc,alpha2d,hailmax1d,hailmaxk1,tmp,tmpchg,dv,dv1,refl) &\n'
+    '!$OMP FIRSTPRIVATE(ancuten,thproclocal) &\n'
+    '!$OMP REDUCTION(+:chgiona1,chgiona2,chgiona3,chgneg1,chgpos1,chgneg2,chgpos2,chgneg3,chgpos3,sctot3, &\n'
+    '!$OMP scwtot,scrtot,scitot,scstot,schtot,schltot,cwmass1,cwmass2,rwmass1,rwmass2,icemass1,icemass2, &\n'
+    '!$OMP swmass1,swmass2,grmass1,grmass2,hlmass1,hlmass2,wvol5,wvol10,ctswin,ctswip,ctswwn,ctswwp, &\n'
+    '!$OMP ctghsn,ctghsp,ctghin,ctghip,ctghwn,ctghwp,ctgsn,ctgsp,ctgin,ctgip,cthsn,cthsp,cthin,cthip, &\n'
+    '!$OMP timesed,timesed1,timesed2,timesed3,timesetvt,timevtcalc,timegs,timenucond) &\n'
+    '!$OMP REDUCTION(max:scwmax,scrmax,scimax,scsmax,schmax,schlmax,sctotmax,scionmax,zmaxsed) &\n'
+    '!$OMP REDUCTION(min:scwmin,scrmin,scimin,scsmin,schmin,schlmin,sctotmin,scionmin)\n'
+    '#endif\n')
+SED_PRINT = ("#else\n         IF ( present(scw) .and. ipelec > 0 ) THEN !{\n#endif\n           iunit = 6\n"
+             "         IF ( mytask == 0 ) THEN\n           write(iunit,'(a,3(2x,1pe13.5))' ) 'pre-sed: pos/neg/tot = '")
+
 MODULE_PATCH = ('module_mp_nssl_2mom.F', 'Terluna: WRF-ELEC NSSL module in CM1', [
     ('', '! Terluna: WRF-ELEC NSSL module in CM1 (MicroTed/wrf4-elec e43041b), patched by climate/crm/cm1_elec.py\n', 1),
     *[(line + '\n', line.replace('private', 'public', 1) + '\n', 1) for line in PUBLIC_LINES],
@@ -167,6 +264,34 @@ MODULE_PATCH = ('module_mp_nssl_2mom.F', 'Terluna: WRF-ELEC NSSL module in CM1',
     # private to it, the charge and timing totals are summed across threads, and what the driver sets before the loop
     # (infdo, the fall-speed moments) stays shared.
     (OMP_ANCHOR, OMP_ANCHOR.replace('     DO jy = jts,jye\n', OMP_DIRECTIVE + '     DO jy = jts,jye\n'), 1),
+    # the sedimentation driver, which the sub-steps call, likewise; its totals are printed at the step's last sub-step
+    (SED_OMP_ANCHOR, SED_OMP_ANCHOR.replace('     DO jy = jts,jye\n', SED_OMP_DIRECTIVE + '     DO jy = jts,jye\n'),
+     1),
+    (SED_PRINT, SED_PRINT.replace('ipelec > 0 ) THEN !{', 'ipelec > 0 .and. lastlooptmp ) THEN !{ ! Terluna'), 1),
+])
+
+# WRF-ELEC's branched lightning on one process: WRF-ELEC runs it only under MPI, where a few lines outside its MPI
+# blocks read the tile count. Its breakdown field takes the bounds the build sets (module_boxmgsetup) and is computed
+# afresh at each call, since terluna_branched.F recentres the arrays on each flash; its debugging output is off.
+MSZ_PATCH = ('module_discharge_msz.F', 'Terluna: branched lightning on one process', [
+    ('', '! Terluna: branched lightning on one process (MicroTed/wrf4-elec e43041b), patched by climate/crm/cm1_elec.py\n',
+     1),
+    ('      use module_boxmgsetup, only: igslg0, jgslg0, kgslg0\n',
+     '      use module_boxmgsetup, only: igslg0, jgslg0, kgslg0, terluna_ebrk_lo, terluna_ebrk_hi\n', 2),
+    ('      CALL MPI_AllReduce(mpitotindp, mpitotoutdp, 2, MPI_DOUBLE_PRECISION, MPI_SUM, local_communicator, '
+     'mpi_error_code)\n',
+     '      mpitotoutdp(1:2) = mpitotindp(1:2) ! Terluna: one process\n', 1),
+    ('      IF ( ntasks == 0 ) THEN\n', '      IF ( .false. ) THEN ! Terluna: one process; WRF always has a task\n', 1),
+    ('      IF ( .false. .and. ntasks == 1 ) THEN ! only do horizontal if single processor -- for now.\n',
+     '      IF ( .false. ) THEN ! Terluna: one process (the streamline stays vertical, as in WRF-ELEC)\n', 1),
+    ('       IF ( mpi_setup_flag < 0 ) THEN\n         CALL TASK_PROC_MAP()\n       ENDIF\n',
+     '       ! Terluna: one process, no MPI task map\n', 1),
+    ('      integer, parameter :: ndebug = 1\n', '      integer, parameter :: ndebug = 0 ! Terluna\n', 1),
+    ('      IF ( .not. allocated( ebrkd ) ) THEN ! {\n',
+     '      IF ( allocated( ebrkd ) ) deallocate( ebrkd, ebrkdp, zlev, cghgt, t2, t4 ) ! Terluna: afresh each call\n'
+     '      IF ( .not. allocated( ebrkd ) ) THEN ! {\n', 1),
+    ('        ebrkd(ix,jy,kz)= Max( 50.e3, Min( ebrkdp(ix,jy,kz), 180.0e3 ) )\n',
+     '        ebrkd(ix,jy,kz)= Max( terluna_ebrk_lo, Min( ebrkdp(ix,jy,kz), terluna_ebrk_hi ) ) ! Terluna\n', 1),
 ])
 
 # CM1's calls go to terluna_nssl_elec with the charge tracers. WRF-ELEC's driver reports rain as WRF does (RAINNC
@@ -208,22 +333,28 @@ DRIVER_PATCH = ('mp_driver.F', 'Terluna: WRF-ELEC NSSL driver', [
     ('             call nssl_2mom_driver(                          &\n',
      '             call terluna_nssl_elec(                         &\n', 3),
     ('                              its = 1 ,ite = ni, jts = 1,jte = nj, kts = 1,kte = nk)\n',
-     '                              its = 1 ,ite = ni, jts = 1,jte = nj, kts = 1,kte = nk, pt3d = pt3d)\n', 3),
+     '                              its = 1 ,ite = ni, jts = 1,jte = nj, kts = 1,kte = nk, pt3d = pt3d, mtime = mtime)\n',
+     3),
     ('                         getdbz,getvt,getsed,getqdiags,dotbud,doqbud)\n',
-     '                         getdbz,getvt,getsed,getqdiags,dotbud,doqbud,pt3d)\n', 1),
+     '                         getdbz,getvt,getsed,getqdiags,dotbud,doqbud,pt3d,mtime)\n', 1),
     ('    logical, intent(in) :: dotbud,doqbud\n',
      '    logical, intent(in) :: dotbud,doqbud\n'
-     '    real, intent(inout), dimension(ibp:iep,jbp:jep,kbp:kep,npt) :: pt3d   ! Terluna: the charge tracers\n', 1),
+     '    real, intent(inout), dimension(ibp:iep,jbp:jep,kbp:kep,npt) :: pt3d   ! Terluna: the charge tracers\n'
+     '    double precision, intent(in) :: mtime   ! Terluna: the time at the step\'s start, for the lightning logs\n', 1),
 ])
 
-# The field, lightning and leakage after each step's microphysics, while the step's new state is in the 3d arrays.
-CM1_PATCH = ('cm1.F', 'Terluna: field, lightning and leakage', [
+# CM1 passes the charge tracers and the time to the microphysics, and keeps the vertical field the inductive charging
+# takes from the step before with each restart (as WRF-ELEC keeps elecz).
+CM1_PATCH = ('cm1.F', 'Terluna: charge tracers to the microphysics', [
+    ('                         getdbz,getvt,getsed,getqdiags,dotbud,doqbud)\n      endif\n',
+     '                         getdbz,getvt,getsed,getqdiags,dotbud,doqbud,pt3d,mtime)   ! Terluna: charge tracers to the microphysics\n'
+     '      endif\n', 1),
     ('      use mp_driver_module, only : mp_driver\n',
      '      use mp_driver_module, only : mp_driver\n'
-     '      use terluna_elec_module, only : terluna_elec_step   ! Terluna: field, lightning and leakage\n', 1),
-    ('                         getdbz,getvt,getsed,getqdiags,dotbud,doqbud)\n      endif\n',
-     '                         getdbz,getvt,getsed,getqdiags,dotbud,doqbud,pt3d)\n'
-     '        call terluna_elec_step(nstep,mtime,dt,zh,zf,rho,q3d,pt3d)\n      endif\n', 1),
+     '      use terluna_elec_module, only : terluna_elec_restart_write   ! Terluna: the field kept with each restart\n', 1),
+    ('          ! end_restart_write\n',
+     '          ! end_restart_write\n'
+     '        call terluna_elec_restart_write(mtime)   ! Terluna: the field kept with each restart\n', 1),
 ])
 
 # The module's set-up takes the charging switch (var6) and law (var7).
@@ -240,14 +371,17 @@ INIT3D_PATCH = ('init3d.F', 'Terluna: the tracers carry charge', [
 
 MAKEFILE_PATCH = ('Makefile', 'Terluna: electrified NSSL', [
     ('\tmodule_mp_nssl_2mom.F \\\n',
-     '\tmodule_mp_nssl_2mom.F \\\n\tterluna_lightning.F \\\n\tterluna_elec.F \\\n', 1),
+     '\tmodule_mp_nssl_2mom.F \\\n\tterluna_lightning.F \\\n\tterluna_mlint2.F \\\n\tmodule_discharge_msz.F \\\n'
+     '\tterluna_branched.F \\\n\tterluna_elec.F \\\n', 1),
     ('mp_driver.o: constants.o input.o misclibs.o', 'mp_driver.o: terluna_elec.o constants.o input.o misclibs.o', 1),
-    ('cm1.o: constants.o input.o param.o', 'cm1.o: terluna_elec.o constants.o input.o param.o', 1),
     ('poiss.o: input.o singleton.o\n',
      'poiss.o: input.o singleton.o\n'
      '# Terluna: electrified NSSL\n'
      'terluna_lightning.o: singleton.o\n'
-     'terluna_elec.o: input.o constants.o module_mp_nssl_2mom.o terluna_lightning.o\n', 1),
+     'module_discharge_msz.o: terluna_lightning.o\n'
+     'terluna_branched.o: module_discharge_msz.o terluna_lightning.o\n'
+     'terluna_elec.o: input.o constants.o module_mp_nssl_2mom.o terluna_lightning.o terluna_branched.o\n'
+     'cm1.o: terluna_elec.o\n', 1),
 ])
 
 # Lunar gravity. Graupel and hail under the drag laws (icdx 1-5) and cloud droplets (Stokes) fall with gr itself. Rain,
@@ -300,4 +434,5 @@ GRAVITY_PATCH = ('module_mp_nssl_2mom.F', 'Terluna: fall speeds at the host grav
      GRAVITY_TEXT + "      if ( ndebug1 .gt. 0 ) write(0,*) 'SETVTZ: END OF ROUTINE'\n", 1),
 ])
 
-PATCHES = [MODULE_PATCH, GRAVITY_PATCH, DRIVER_PATCH, CM1_PATCH, PARAM_PATCH, INIT3D_PATCH, MAKEFILE_PATCH]
+PATCHES = [MODULE_PATCH, GRAVITY_PATCH, MSZ_PATCH, DRIVER_PATCH, CM1_PATCH, PARAM_PATCH, INIT3D_PATCH,
+           MAKEFILE_PATCH]

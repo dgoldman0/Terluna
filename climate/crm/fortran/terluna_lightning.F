@@ -15,7 +15,18 @@
 !
 ! Apart from CM1's FFT (module singleton) the module stands alone, so climate/tests/test_cm1_elec_field.py checks it
 ! against numpy.
+!
+! module_boxmgsetup stands in for WRF-ELEC's multigrid set-up, which the branched scheme (module_discharge_msz.F) reads
+! for its tile's offsets in the domain: zero on one process. It also holds the bounds of the breakdown field both
+! lightning schemes use (WRF-ELEC's nssl_ibrkd = 4: 284 kV/m times air density over 1.225 kg/m3, held within 50-180
+! kV/m; 0 and 1e30 for the unbounded scaling).
 !-----------------------------------------------------------------------------------------------------------------------
+module module_boxmgsetup
+  implicit none
+  integer :: igslg0 = 0, jgslg0 = 0, kgslg0 = 0
+  real :: terluna_ebrk_lo = 50.0e3, terluna_ebrk_hi = 180.0e3
+end module module_boxmgsetup
+
 module terluna_lightning
   implicit none
   private
@@ -164,17 +175,13 @@ contains
     enddo
   end function energy
 
-  subroutine breakdown_field(ni, nj, nk, rho, option, ebrk)
-    ! option 1: WRF-ELEC's nssl_ibrkd = 4, 284 kV/m at 1.225 kg/m3 scaled by air density and held within 50-180 kV/m;
-    ! option 2: the same scaling without the bounds, the runaway-breakdown field's proportion to air density
-    integer, intent(in) :: ni, nj, nk, option
+  subroutine breakdown_field(ni, nj, nk, rho, ebrk)
+    ! WRF-ELEC's nssl_ibrkd = 4: 284 kV/m at 1.225 kg/m3 scaled by air density, within the bounds module_boxmgsetup holds
+    use module_boxmgsetup, only : terluna_ebrk_lo, terluna_ebrk_hi
+    integer, intent(in) :: ni, nj, nk
     real, dimension(ni,nj,nk), intent(in) :: rho
     real, dimension(ni,nj,nk), intent(out) :: ebrk
-    if( option .eq. 2 )then
-      ebrk = 284.0e3*rho/1.225
-    else
-      ebrk = max( 50.0e3, min( 284.0e3*rho/1.225, 180.0e3 ) )
-    endif
+    ebrk = max( terluna_ebrk_lo, min( 284.0e3*rho/1.225, terluna_ebrk_hi ) )
   end subroutine breakdown_field
 
   subroutine discharge(ni, nj, nk, dx, dy, zf1, rho, emag, ebrk, radius, q, dep, ninit, ncol, nregion, qpos, qneg)

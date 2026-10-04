@@ -189,20 +189,29 @@ The electrified builds `earth_g_omp_elec` and `moon_omp_elec` (2026-10-03;
 [climate/crm](../../../climate/crm/README.md), "Electrified storms") put
 WRF-ELEC's NSSL module, which carries charge through every microphysical process
 ([S8]), in place of CM1's copy of the scheme. Terluna's code passes CM1's arrays
-to WRF-ELEC's driver in WRF's order, keeps the charges in CM1's tracers, solves
-for the field every step, and runs WRF-ELEC's cylindrical lightning; leakage
-through stage 1's conductivity is a switch. The scheme's fall speeds take lunar
-gravity as Morrison's do.
+to WRF-ELEC's driver in WRF's order and keeps the charges in CM1's tracers. As
+WRF-ELEC's driver does, it runs the sedimentation in sub-steps, each followed by
+a solve for the field and by lightning: WRF-ELEC's branched flashes
+(MacGorman, Straka and Ziegler 2001 [S27]), in cloud and to ground, with the
+charge each neutralizes, its channels and the nitrogen oxides it makes, or its
+cylinders. Leakage through stage 1's conductivity is a switch. The scheme's fall
+speeds take lunar gravity as Morrison's do.
 
-1. The builds, their checks (the field solver and discharges against numpy, the
-   results against the number of threads) and an Earth benchmark storm, CM1's
-   own supercell, compared with published runs of the same charging scheme
-   ([S7], [S16], [S26]–[S30]; below). Done.
-2. `box_0e_elec`: `box_0e`'s inputs as written, with the NSSL microphysics and
-   charging from the start, over two lunar days with three-hourly output and
-   twelve-hourly restarts. It compares the NSSL storm with Morrison's at the
-   same site and forcing, and gives the first lunar charge structure and
-   lightning. A multi-hour run, waiting for the author's go-ahead.
+1. The builds, their checks (the field solver and the lightning against numpy
+   and against charge laid out by hand, the results against the number of
+   threads and across restarts) and an Earth benchmark storm, CM1's own
+   supercell, compared with published runs of the same charging and lightning
+   schemes ([S7], [S16], [S26]–[S30]; below). Done on 2026-10-03, and again on
+   2026-10-04 with the sub-steps and the branched flashes.
+2. `box_0e_elec`: `box_0e`'s inputs as written, with the NSSL microphysics,
+   charging and branched lightning from the start, over two lunar days with
+   three-hourly output and twelve-hourly restarts. Its sub-steps are 6.8 s,
+   scaled to its 2-km layers and slower graupel, and a downward channel strikes
+   the ground when it comes within 5 km of it. It compares the NSSL storm with
+   Morrison's at the same site and forcing, and gives the first lunar charge
+   structure and lightning. Running from 2026-10-04 at the author's go-ahead; a
+   first start without the sub-steps was stopped at day 4, before its storms had
+   charged.
 3. Windows of `box_0e_elec`'s second lunar day run again from its restarts with
    output every few minutes, to follow each storm's life, under Takahashi's law,
    with leakage, and with the unbounded breakdown field.

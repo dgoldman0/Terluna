@@ -302,7 +302,7 @@
     },
     {
       "topic": "atmospheric_electricity",
-      "condition": "plan_adopted_and_revised_2026_10_02; stage_1_done_2026_10_03; breakdown_reached_under_every_charging_law_in_a_one_dimensional_bound; stage_2_electrified_cm1_built_and_benchmarked_on_an_earth_supercell_2026_10_03",
+      "condition": "plan_adopted_and_revised_2026_10_02; stage_1_done_2026_10_03; breakdown_reached_under_every_charging_law_in_a_one_dimensional_bound; stage_2_electrified_cm1_built_and_benchmarked_on_an_earth_supercell_2026_10_03; stage_2_sub_steps_and_branched_lightning_2026_10_04; box_0e_elec_running_2026_10_04",
       "material": [
         "../atmosphere/electricity/",
         "../atmosphere/middle_atmosphere/README.md",
@@ -313,6 +313,7 @@
         "../climate/crm/fortran/",
         "../climate/crm/mixed_phase_analysis.py",
         "../climate/results/crm/elec_supercell_elec.json",
+        "../climate/results/crm/elec_supercell_elec_cylinders.json",
         "studies/atmospheric_electricity/README.md",
         "studies/atmospheric_electricity/results/stage1.json",
         "studies/atmospheric_electricity/sources.json",
@@ -321,12 +322,14 @@
       "unresolved": [
         "the charge per bounce at impact speeds of 1-1.5 m/s and rime accretion rates of 0.1-0.3 g m-2 s-1: the laws differ by a hundred to five hundred times, Saunders and Peck's nearly stopping where Takahashi's and the 1.2 m/s measurements charge strongly",
         "storm cells' lifetimes against the hours the weaker laws need to reach breakdown; the three-hourly output cannot resolve cells",
-        "the electrified lunar storm: box_0e with the NSSL microphysics and WRF-ELEC's charging, beside the Morrison box at the same site and forcing, then windows of its storms with frequent output and other charging laws, leakage and breakdown fields (multi-hour runs, waiting for the author's go-ahead)",
-        "the benchmark storm charges several times faster than published runs of the scheme, with tens of nC/m3 on single particle types, from the cloud-ice numbers its homogeneous freezing makes; the cylinder scheme discharges after the field passes breakdown and counts calls, not flashes",
+        "the electrified lunar storm: box_0e_elec runs from 2026-10-04 (two lunar days, with branched lightning), beside the Morrison box at the same site and forcing; then windows of its storms with frequent output and other charging laws, leakage and breakdown fields",
+        "the benchmark storm charges several times faster than published runs of the scheme, with tens of nC/m3 on single particle types, from the cloud-ice numbers its homogeneous freezing makes; it made no ground flash in two hours",
         "aerosol in the lunar air and the ground's radioactivity over land, bracketed or left out of the conductivity column",
+        "nitrogen oxides per flash follow WRF-ELEC's yield along the model's channels (a median 4.7 mol per flash in the benchmark storm), unchecked against the yields observed per flash",
+        "the ground-strike conditions (a potential beyond 50 MV and a field above 10 kV/m at the start) and the fractions of breakdown that start and stop channels are WRF-ELEC's calibrations for Earth, kept on the Moon; the lunar box's 6-km grid draws flash channels coarsely",
         "the fair-weather field, the global circuit and transient luminous events"
       ],
-      "next_session_task": "Stage 2 of the atmospheric-electricity plan, with the author's go-ahead for the multi-hour runs: run box_0e_elec (box_0e's inputs with the NSSL microphysics, charging and lightning, two lunar days), compare its storm with Morrison's and read its charge structure and lightning; then run windows of its second lunar day from restarts with output every few minutes, under Takahashi's law, with leakage and with the unbounded breakdown field. The electrified builds and the Earth benchmark storm were done on 2026-10-03."
+      "next_session_task": "Read box_0e_elec when it finishes (two lunar days from 2026-10-04, about half a day of wall time on 8 threads): compare its NSSL storm with Morrison's at the same site and forcing, and read its charge structure, flash rates and kinds, charge per flash and nitrogen oxides; then run windows of its second lunar day from its restarts (each with its terluna_ez_<time>.bin) with output every few minutes, under Takahashi's law, with leakage and with the unbounded breakdown field."
     }
   ],
   "new_check_record": "studies/environment_screens/checks.json",

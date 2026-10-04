@@ -6,33 +6,49 @@
 ! of cloud water, rain, cloud ice, snow, graupel, hail and the small ions' net charge in CM1's passive tracers 1-6 (7 with
 ! hail: scw, scr, sci, scs, sch, sciona, schl; C/kg), which CM1 advects without its positivity limiter (pdtra = 0).
 !
-! terluna_elec_step follows the microphysics each time step with what WRF-ELEC does outside it: the electric field of the
-! net charge (terluna_lightning), lightning, and, where asked, leakage through the air's conductivity. Its vertical
-! component is kept for the next step's inductive charging.
+! With charging on it follows WRF-ELEC's own driver (include_microphysics_driver_elec.F): the microphysics runs without
+! sedimentation, and the step's sedimentation then runs in sub-steps (WRF-ELEC's 0.75 s, or var5), each followed by
+! the electric field of the net charge (terluna_lightning) and lightning, so a discharge acts as the field reaches
+! breakdown. Leakage, where asked, follows once a step, and the last field's vertical component is kept for the next
+! step's inductive charging.
 !
 ! Settings from CM1's namelist (param8):
+!   var4  for branched lightning, the height (m) below which a downward channel counts as reaching the ground; zero or
+!         less for WRF-ELEC's rule, air warmer than 266.16 K
+!   var5  the sub-step (s) for sedimentation and lightning; WRF-ELEC's 0.75 s if zero
 !   var6  ipelec: 0 off, 2 non-inductive charging, 3 with inductive charging
 !   var7  isaund, the non-inductive charging law: 12 Saunders and Peck with Brooks's critical rime accretion rate, as
 !         WRF-ELEC's default; 1 Takahashi (with nonigrd = -1 in &nssl_mp_params and takahashi.txt in the run folder)
-!   var8  lightning: 0 none; 1 WRF-ELEC's cylinders with its breakdown field (nssl_ibrkd = 4); 2 the same with the
-!         breakdown field 284 kV/m times air density over 1.225 kg/m3, unbounded
+!   var8  lightning: 0 none; 1 WRF-ELEC's cylinders (light1d) and 3 its branched scheme (lightmsz), with its breakdown
+!         field (nssl_ibrkd = 4: 284 kV/m times air density over 1.225 kg/m3, within 50-180 kV/m); 2 and 4 the same
+!         with the breakdown field unbounded
 !   var9  leakage: 0 none; 1 net charge relaxes at the rate sigma/eps0, sigma by height from terluna_conductivity.txt
 !         (cloud where cloud water and ice reach 0.01 g/kg), its opposite going to the small ions
-!   var10 discharge radius (m); 12 km if zero
-! Each discharge is logged to terluna_flashes.txt, and every ten steps terluna_field.txt takes the largest field, the
-! domain's charge and electrostatic energy and the largest charging rates.
+!   var10 cylinder radius (m); 12 km if zero
+! Each discharge or flash is logged to terluna_flashes.txt and lightmsz's own report on the first 2000 flashes of a
+! run to terluna_msz.log; every ten steps terluna_field.txt takes the largest field, the domain's charge and
+! electrostatic energy and the largest charging rates.
 !-----------------------------------------------------------------------------------------------------------------------
 module terluna_elec_module
   implicit none
   private
-  public :: terluna_nssl_elec, terluna_elec_step
+  public :: terluna_nssl_elec, terluna_elec_restart_write
 
   real, allocatable, save :: ezsave(:,:,:)        ! vertical field (V/m) at scalar points, WRF's (i,k,j) order
   real, allocatable, save :: winduc(:,:,:), wnoninduc(:,:,:)   ! the step's charging rates (C/m3/s), WRF's order
   integer, save :: nsig = 0
   real, allocatable, save :: zsig(:), sigclear(:), sigcloud(:)
   logical, save :: sigread = .false.
-  integer, parameter :: maxdisch = 20             ! discharges per time step at most
+  integer, save :: mszunit = 0                    ! newunit's numbers are negative
+  logical, save :: mszopen = .false.
+  integer, save :: mszcount = 0                   ! flashes lightmsz has reported in this run
+  integer, parameter :: mszmax = 2000             ! lightmsz's report (about 2.5 kB a flash) stops after these
+  logical, save :: started = .false.
+  integer, parameter :: maxdisch = 20             ! cylinder discharges per sub-step at most
+  integer, parameter :: maxflash = 120            ! branched flashes per sub-step at most (WRF-ELEC's maxiter)
+  real, parameter :: dts_wrf = 0.75               ! WRF-ELEC's sub-step (s)
+  real, parameter :: tgrnd = 266.16               ! WRF-ELEC's nssl_tgrnd (K)
+  real, parameter :: eint = 200.0                 ! WRF-ELEC's nssl_einternal (V/m)
 
 contains
 
@@ -43,16 +59,20 @@ contains
                                zrw, zhw, zhl, vhw, vhl, pii, p, w, dn, dz, dtp, itimestep, RAINNC, RAINNCV, dbz,       &
                                dx, dy, re_cloud, re_ice, re_snow, has_reqc, has_reqi, has_reqs, diagflag,               &
                                ids, ide, jds, jde, kds, kde, ims, ime, jms, jme, kms, kme, its, ite, jts, jte, kts, kte,  &
-                               pt3d)
-    use input, only : ibp, iep, jbp, jep, kbp, kep, npt, var6, nssl_3moment
+                               pt3d, mtime)
+    use input, only : ibp, iep, jbp, jep, kbp, kep, npt, var4, var5, var6, var8, var9, var10, nssl_3moment
     use index_module, only : lhl, lvh, lvhl, lccna, lcina
-    use module_mp_nssl_2mom, only : nssl_2mom_driver
+    use module_mp_nssl_2mom, only : nssl_2mom_driver, nssl_2mom_sed_driver
+    use module_boxmgsetup, only : terluna_ebrk_lo, terluna_ebrk_hi
+    use terluna_lightning, only : potential, field, energy, breakdown_field, discharge, eps0
+    use terluna_branched, only : branched_flash, flash_record
     integer, intent(in) :: ids, ide, jds, jde, kds, kde, ims, ime, jms, jme, kms, kme, its, ite, jts, jte, kts, kte
     integer, intent(in) :: itimestep
     real, intent(in) :: dtp
     real, intent(in), optional :: dx, dy
     integer, intent(in), optional :: has_reqc, has_reqi, has_reqs
     logical, intent(in), optional :: diagflag
+    double precision, intent(in), optional :: mtime
     real, dimension(ims:ime,jms:jme,kms:kme), intent(inout) :: qv, qc, qr, qs, qh
     real, dimension(ims:ime,jms:jme,kms:kme), intent(inout), optional :: th, qi, qhl, cn, cna, cni, ccw, crw, cci,    &
                                                    csw, chw, chl, zrw, zhw, zhl, vhw, vhl, dbz, re_cloud, re_ice, re_snow
@@ -63,7 +83,12 @@ contains
     real, allocatable, dimension(:,:,:), save :: wth, wqv, wqc, wqr, wqi, wqs, wqh, wqhl, wcn, wccw, wcrw, wcci,     &
                                                  wcsw, wchw, wchl, wvhw, wvhl, wpii, wp, ww, wdn, wdz, wdbz, wrec,     &
                                                  wrei, wres, wscw, wscr, wsci, wscs, wsch, wsciona, wschl, wsctot
-    integer :: ipelec, nchg
+    ! the field on CM1's (i,j,k) order, for the solver and the lightning schemes
+    real, allocatable, dimension(:,:,:), save :: q, phi, ex, ey, ez, emag, ebrk, dep, rho3, prs3, tk3, cld3
+    integer, allocatable, dimension(:,:,:), save :: used
+    real, allocatable, dimension(:), save :: zh1, zf1, dz1
+    integer :: ipelec, nchg, ilight, ileak, nsub, isub, ni, nj, nk, seed, k
+    real :: dts, radius, time0
     logical :: elec, hail, diag
     logical, save :: checked = .false.
 
@@ -74,6 +99,13 @@ contains
     if( hail ) nchg = 7
     diag = .false.
     if( present(diagflag) ) diag = diagflag
+    ni = ite - its + 1
+    nj = jte - jts + 1
+    nk = kte - kts + 1
+    ilight = nint(var8)
+    ileak = nint(var9)
+    radius = var10
+    if( radius .le. 0.0 ) radius = 12000.0
     if( .not. checked )then
       checked = .true.
       if( nssl_3moment ) stop 'Terluna: the electrified NSSL build carries no three-moment arrays'
@@ -82,7 +114,12 @@ contains
       if( elec .and. npt .lt. nchg ) stop 'Terluna: electrified NSSL needs npt = 6 passive tracers (7 with hail)'
       if( elec .and. ( ibp .ne. ims .or. iep .ne. ime .or. jbp .ne. jms .or. jep .ne. jme .or. kbp .ne. kms .or.    &
                        kep .ne. kme ) ) stop 'Terluna: the passive tracers must span the model arrays'
-      print *,'Terluna: WRF-ELEC NSSL driver, ipelec = ',ipelec,', charge tracers = ',nchg
+      if( elec .and. ( ilight .lt. 0 .or. ilight .gt. 4 ) ) stop 'Terluna: var8 (lightning) takes 0 to 4'
+      if( ilight .eq. 2 .or. ilight .eq. 4 )then
+        terluna_ebrk_lo = 0.0
+        terluna_ebrk_hi = 1.0e30
+      endif
+      print *,'Terluna: WRF-ELEC NSSL driver, ipelec = ',ipelec,', charge tracers = ',nchg,', lightning = ',ilight
     endif
 
     call load(th, wth, .true.)
@@ -124,13 +161,18 @@ contains
         allocate( wsctot(ims:ime,kms:kme,jms:jme), winduc(ims:ime,kms:kme,jms:jme), wnoninduc(ims:ime,kms:kme,jms:jme) )
         winduc = 0.0                                      ! the driver writes the interior only
         wnoninduc = 0.0
+        wsctot = 0.0
       endif
       if( .not. allocated(ezsave) )then
         allocate( ezsave(ims:ime,kms:kme,jms:jme) )
         ezsave = 0.0
+        if( present(mtime) )then                          ! a restarted run takes up the field its restart kept
+          if( mtime .gt. 0.0d0 ) call read_ez(mtime)
+        endif
       endif
     endif
 
+    ! the microphysics; with charging on, without sedimentation, which follows in sub-steps as in WRF-ELEC
     call nssl_2mom_driver(th=wth, qv=wqv, qc=wqc, qr=wqr, qi=wqi, qs=wqs, qh=wqh, qhl=wqhl, cn=wcn,                    &
                           ccw=wccw, crw=wcrw, cci=wcci, csw=wcsw, chw=wchw, chl=wchl, vhw=wvhw, vhl=wvhl,                &
                           pii=wpii, p=wp, w=ww, dn=wdn, dz=wdz, dtp=dtp, itimestep=itimestep,                           &
@@ -139,9 +181,57 @@ contains
                           has_reqs=has_reqs, diagflag=diagflag,                                                         &
                           scw=wscw, scr=wscr, sci=wsci, scs=wscs, sch=wsch, schl=wschl, sciona=wsciona, sctot=wsctot,   &
                           f_sciona=elec, f_scion=.false., elecz=ezsave, ipelectmp=ipelec, induc=winduc,                &
-                          noninduc=wnoninduc,                                                                           &
+                          noninduc=wnoninduc, isedonly_in=merge(1, 0, elec),                                            &
                           ids=ids, ide=ide, jds=jds, jde=jde, kds=kds, kde=kde, ims=ims, ime=ime, jms=jms, jme=jme,     &
                           kms=kms, kme=kme, its=its, ite=ite, jts=jts, jte=jte, kts=kts, kte=kte)
+
+    if( elec )then
+      if( .not. started )then                             ! a run's first step: mark where it takes the logs up
+        started = .true.
+        if( present(mtime) ) call mark_start(real(mtime))
+      endif
+      if( .not. allocated(q) )then
+        allocate( q(ni,nj,nk), phi(ni,nj,nk), ex(ni,nj,nk), ey(ni,nj,nk), ez(ni,nj,nk), emag(ni,nj,nk),           &
+                  ebrk(ni,nj,nk), dep(ni,nj,nk), rho3(ni,nj,nk), prs3(ni,nj,nk), tk3(ni,nj,nk), cld3(ni,nj,nk),      &
+                  used(ni,nj,nk), zh1(nk), zf1(nk+1), dz1(nk) )
+      endif
+      ! the levels: CM1's scalar levels lie midway between its w levels, the ground flat at zero
+      zf1(1) = 0.0
+      do k = 1,nk
+        dz1(k) = wdz(its,k,jts)
+        zf1(k+1) = zf1(k) + dz1(k)
+        zh1(k) = zf1(k) + 0.5*dz1(k)
+      enddo
+      time0 = 0.0
+      if( present(mtime) ) time0 = real(mtime)
+      used = 0
+      seed = 1 + modulo(itimestep, 2147483000)
+      dts = dts_wrf
+      if( var5 .gt. 0.0 ) dts = var5
+      nsub = max(1, nint(dtp/dts))
+      dts = dtp/nsub
+      do isub = 1,nsub
+        call nssl_2mom_sed_driver(th=wth, qv=wqv, qc=wqc, qr=wqr, qi=wqi, qs=wqs, qh=wqh, qhl=wqhl, cn=wcn,          &
+                          ccw=wccw, crw=wcrw, cci=wcci, csw=wcsw, chw=wchw, chl=wchl, vhw=wvhw, vhl=wvhl,                &
+                          pii=wpii, p=wp, w=ww, dn=wdn, dz=wdz, dtp=dts, itimestep=itimestep,                           &
+                          lastloop=( isub .eq. nsub ), RAINNC=RAINNC, RAINNCV=RAINNCV, dbz=wdbz, dx=dx, dy=dy,          &
+                          re_cloud=wrec, re_ice=wrei, re_snow=wres, has_reqc=has_reqc, has_reqi=has_reqi,               &
+                          has_reqs=has_reqs, diagflag=diagflag,                                                         &
+                          scw=wscw, scr=wscr, sci=wsci, scs=wscs, sch=wsch, schl=wschl, sciona=wsciona, sctot=wsctot,   &
+                          f_sciona=.true., f_scion=.false., elecz=ezsave, ipelectmp=ipelec, isedonly_in=0,              &
+                          ids=ids, ide=ide, jds=jds, jde=jde, kds=kds, kde=kde, ims=ims, ime=ime, jms=jms, jme=jme,     &
+                          kms=kms, kme=kme, its=its, ite=ite, jts=jts, jte=jte, kts=kts, kte=kte)
+        call fields()
+        if( ilight .ge. 1 ) call lightning(time0 + isub*dts, isub)
+      enddo
+      RAINNCV(its:ite,jts:jte) = RAINNC(its:ite,jts:jte)   ! the step's precipitation (CM1 zeroes RAINNC before the call)
+      if( ileak .eq. 1 )then
+        call leakage(dtp)
+        call fields()
+      endif
+      call save_ez()
+      if( mod(itimestep, 10) .eq. 0 ) call log_field(time0 + dtp, itimestep)
+    endif
 
     call store(th, wth)
     call store(qv, wqv)
@@ -252,155 +342,196 @@ contains
       enddo
     end subroutine untracer
 
-  end subroutine terluna_nssl_elec
-
-!-----------------------------------------------------------------------------------------------------------------------
-! The field, lightning and leakage after the microphysics
-!-----------------------------------------------------------------------------------------------------------------------
-  subroutine terluna_elec_step(nstep, mtime, dt, zh, zf, rho, q3d, pt3d)
-    use input, only : ni, nj, nk, ib, ie, jb, je, kb, ke, ibm, iem, jbm, jem, kbm, kem, numq, ibp, iep, jbp, jep,     &
-                      kbp, kep, npt, dx, dy, var6, var8, var9, var10, terrain_flag
-    use index_module, only : lc, li, lhl
-    use terluna_lightning, only : potential, field, energy, breakdown_field, discharge, eps0
-    integer, intent(in) :: nstep
-    double precision, intent(in) :: mtime
-    real, intent(in) :: dt
-    real, dimension(ib:ie,jb:je,kb:ke), intent(in) :: zh, rho
-    real, dimension(ib:ie,jb:je,kb:ke+1), intent(in) :: zf
-    real, dimension(ibm:iem,jbm:jem,kbm:kem,numq), intent(in) :: q3d
-    real, dimension(ibp:iep,jbp:jep,kbp:kep,npt), intent(inout) :: pt3d
-
-    real, allocatable, dimension(:,:,:), save :: q, phi, ex, ey, ez, emag, ebrk, dep, rhoc
-    real, dimension(nk) :: zh1
-    real, dimension(nk+1) :: zf1
-    integer :: i, j, k, n, nchg, ilight, ileak, iter, ninit, ncol, nregion, loc(3), flashes
-    real :: radius, sig, frac, time, e0, rates(2)
-    double precision :: w0, w1, qpos, qneg, totpos, totneg
-    logical, save :: started = .false.
-
-    if( nint(var6) .le. 0 ) return
-    if( .not. started )then                              ! a run's first step: mark where it takes the logs up
-      started = .true.
-      call mark_start(real(mtime))
-    endif
-    if( terrain_flag ) stop 'Terluna: the electric field solver takes flat ground'
-    ilight = nint(var8)
-    ileak = nint(var9)
-    radius = var10
-    if( radius .le. 0.0 ) radius = 12000.0
-    nchg = 6
-    if( lhl .gt. 1 ) nchg = 7
-    time = real(mtime) + dt
-    if( .not. allocated(q) )then
-      allocate( q(ni,nj,nk), phi(ni,nj,nk), ex(ni,nj,nk), ey(ni,nj,nk), ez(ni,nj,nk), emag(ni,nj,nk) )
-      allocate( ebrk(ni,nj,nk), dep(ni,nj,nk), rhoc(ni,nj,nk) )
-    endif
-    if( .not. allocated(ezsave) )then
-      allocate( ezsave(ib:ie,kb:ke,jb:je) )
-      ezsave = 0.0
-    endif
-    do k = 1,nk
-      zh1(k) = zh(1,1,k)
-      zf1(k) = zf(1,1,k)
-    enddo
-    zf1(nk+1) = zf(1,1,nk+1)
-
-    !$omp parallel do default(shared) private(i,j,k,n)
-    do k = 1,nk
-      do j = 1,nj
-        do i = 1,ni
-          rhoc(i,j,k) = rho(i,j,k)
-          q(i,j,k) = 0.0
-          do n = 1,nchg
-            q(i,j,k) = q(i,j,k) + pt3d(i,j,k,n)
+    subroutine fields()
+      ! the net charge (C/m3), the air, and the potential and field of the charge, on CM1's order
+      integer :: i, j, k, ii, jj
+      !$omp parallel do default(shared) private(i,j,k,ii,jj)
+      do k = 1,nk
+        do j = 1,nj
+          jj = jts - 1 + j
+          do i = 1,ni
+            ii = its - 1 + i
+            q(i,j,k) = wscw(ii,k,jj) + wscr(ii,k,jj) + wsci(ii,k,jj) + wscs(ii,k,jj) + wsch(ii,k,jj) + wsciona(ii,k,jj)
+            if( hail ) q(i,j,k) = q(i,j,k) + wschl(ii,k,jj)
+            q(i,j,k) = q(i,j,k)*wdn(ii,k,jj)
+            rho3(i,j,k) = wdn(ii,k,jj)
+            prs3(i,j,k) = wp(ii,k,jj)
+            tk3(i,j,k) = wth(ii,k,jj)*wpii(ii,k,jj)
+            cld3(i,j,k) = wqc(ii,k,jj) + wqi(ii,k,jj)
           enddo
-          q(i,j,k) = q(i,j,k)*rho(i,j,k)
         enddo
       enddo
-    enddo
+      call potential(ni, nj, nk, dx, dy, zh1, zf1, q, phi)
+      call field(ni, nj, nk, dx, dy, zh1, zf1, phi, ex, ey, ez, emag)
+    end subroutine fields
 
-    if( ileak .eq. 1 )then
+    subroutine to_ions(add)
+      ! charge handed to the small ions (C/m3 on CM1's order) into their tracer (C/kg) and into the net charge
+      real, dimension(ni,nj,nk), intent(in) :: add
+      integer :: i, j, k, ii, jj
+      !$omp parallel do default(shared) private(i,j,k,ii,jj)
+      do k = 1,nk
+        do j = 1,nj
+          jj = jts - 1 + j
+          do i = 1,ni
+            ii = its - 1 + i
+            wsciona(ii,k,jj) = wsciona(ii,k,jj) + add(i,j,k)/wdn(ii,k,jj)
+            q(i,j,k) = q(i,j,k) + add(i,j,k)
+          enddo
+        enddo
+      enddo
+    end subroutine to_ions
+
+    subroutine lightning(time, isub)
+      ! WRF-ELEC's discharges for one sub-step: cylinders until no point is above the breakdown field (maxdisch at most),
+      ! or branched flashes one at a time, the field solved again after each, until no starting point is left
+      real, intent(in) :: time
+      integer, intent(in) :: isub
+      type(flash_record) :: rec
+      integer :: iter, ninit, ncol, nregion, loc(3)
+      double precision :: w0, w1, qpos, qneg
+      real :: e0, over
+      call breakdown_field(ni, nj, nk, rho3, ebrk)
+      if( ilight .le. 2 )then
+        do iter = 1,maxdisch
+          if( .not. any( emag .gt. ebrk ) ) exit
+          loc = maxloc( emag/ebrk )
+          e0 = emag(loc(1),loc(2),loc(3))
+          w0 = energy(ni, nj, nk, dx, dy, zf1, q, phi)
+          call discharge(ni, nj, nk, dx, dy, zf1, rho3, emag, ebrk, radius, q, dep, ninit, ncol, nregion, qpos, qneg)
+          if( ncol .eq. 0 ) exit                          ! above breakdown where no column holds charge to remove
+          q = q - dep                                     ! discharge has already taken it off q
+          call to_ions(dep)
+          call potential(ni, nj, nk, dx, dy, zh1, zf1, q, phi)
+          call field(ni, nj, nk, dx, dy, zh1, zf1, phi, ex, ey, ez, emag)
+          w1 = energy(ni, nj, nk, dx, dy, zf1, q, phi)
+          call log_flash(time, itimestep, isub, 9, loc(1), loc(2), loc(3), e0, ebrk(loc(1),loc(2),loc(3)),          &
+                         e0/ebrk(loc(1),loc(2),loc(3)), ncol*dx*dy, nregion, qpos, qneg, w0, w1, depth_lo(dep),       &
+                         depth_hi(dep), ninit, 0.0d0)
+          if( iter .eq. maxdisch ) print *,'Terluna: ',maxdisch,' discharges in sub-step ',isub,' of step ',itimestep
+        enddo
+      else
+        if( .not. mszopen )then
+          open( newunit=mszunit, file='terluna_msz.log', status='unknown', position='append', action='write' )
+          mszopen = .true.
+        endif
+        do iter = 1,maxflash
+          if( mszcount .eq. mszmax )then
+            write(mszunit,'(a,i0,a)') '# lightmsz''s report stops after ',mszmax,' flashes; terluna_flashes.txt '//   &
+                                      'has every flash'
+            close(mszunit)
+            open( newunit=mszunit, file='/dev/null', status='old', action='write' )
+            mszcount = mszmax + 1
+          endif
+          w0 = energy(ni, nj, nk, dx, dy, zf1, q, phi)
+          over = maxval( emag/ebrk )
+          call branched_flash(ni, nj, nk, dx, dy, dz1, rho3, prs3, tk3, cld3, phi, ex, ey, ez, emag, q, ebrk, used,     &
+                              seed, itimestep, dts, eint, tgrnd, var4, radius, mszunit, dep, rec)
+          if( rec%kind .ge. 0 .and. mszcount .lt. mszmax ) mszcount = mszcount + 1
+          if( rec%kind .le. 0 ) exit                      ! no starting point left, or no flash from the one chosen
+          call to_ions(dep)
+          call potential(ni, nj, nk, dx, dy, zh1, zf1, q, phi)
+          call field(ni, nj, nk, dx, dy, zh1, zf1, phi, ex, ey, ez, emag)
+          w1 = energy(ni, nj, nk, dx, dy, zf1, q, phi)
+          call log_flash(time, itimestep, isub, rec%kind, rec%i0, rec%j0, rec%k0, rec%e0, rec%ebrk0, over, rec%area,  &
+                         1, rec%qpos, rec%qneg, w0, w1, rec%zlo, rec%zhi, rec%npos + rec%nneg, rec%nox)
+        enddo
+        if( iter .gt. maxflash )then
+          ! WRF-ELEC's driver then takes 5 % of the net charge everywhere (to the small ions) and moves on
+          dep = -0.05*q
+          call to_ions(dep)
+          call potential(ni, nj, nk, dx, dy, zh1, zf1, q, phi)
+          call field(ni, nj, nk, dx, dy, zh1, zf1, phi, ex, ey, ez, emag)
+          print *,'Terluna: ',maxflash,' flashes in sub-step ',isub,' of step ',itimestep,'; 5 % of all charge removed'
+        endif
+      endif
+    end subroutine lightning
+
+    real function depth_lo(d)
+      real, dimension(ni,nj,nk), intent(in) :: d
+      integer :: k
+      depth_lo = -1.0
+      do k = 1,nk
+        if( any( d(:,:,k) .ne. 0.0 ) )then
+          depth_lo = zh1(k)
+          return
+        endif
+      enddo
+    end function depth_lo
+
+    real function depth_hi(d)
+      real, dimension(ni,nj,nk), intent(in) :: d
+      integer :: k
+      depth_hi = -1.0
+      do k = nk,1,-1
+        if( any( d(:,:,k) .ne. 0.0 ) )then
+          depth_hi = zh1(k)
+          return
+        endif
+      enddo
+    end function depth_hi
+
+    subroutine leakage(dt)
+      ! net charge relaxes through the air's conductivity, its opposite going to the small ions
+      real, intent(in) :: dt
+      integer :: i, j, k
+      real :: sig, frac
       call read_conductivity()
       !$omp parallel do default(shared) private(i,j,k,sig,frac)
       do k = 1,nk
         do j = 1,nj
           do i = 1,ni
-            if( q3d(i,j,k,lc) + q3d(i,j,k,li) .ge. 1.0e-5 )then
+            if( cld3(i,j,k) .ge. 1.0e-5 )then
               sig = interp(zh1(k), sigcloud)
             else
               sig = interp(zh1(k), sigclear)
             endif
             frac = 1.0 - exp( -dt*sig/eps0 )
-            pt3d(i,j,k,6) = pt3d(i,j,k,6) - frac*q(i,j,k)/rho(i,j,k)
-            q(i,j,k) = q(i,j,k)*(1.0 - frac)
+            dep(i,j,k) = -frac*q(i,j,k)
           enddo
         enddo
       enddo
-    endif
+      call to_ions(dep)
+    end subroutine leakage
 
-    call potential(ni, nj, nk, dx, dy, zh1, zf1, q, phi)
-    call field(ni, nj, nk, dx, dy, zh1, zf1, phi, ex, ey, ez, emag)
-
-    flashes = 0
-    if( ilight .ge. 1 )then
-      call breakdown_field(ni, nj, nk, rhoc, ilight, ebrk)
-      do iter = 1,maxdisch
-        if( .not. any( emag .gt. ebrk ) ) exit
-        loc = maxloc( emag/ebrk )
-        e0 = emag(loc(1),loc(2),loc(3))
-        w0 = energy(ni, nj, nk, dx, dy, zf1, q, phi)
-        call discharge(ni, nj, nk, dx, dy, zf1, rhoc, emag, ebrk, radius, q, dep, ninit, ncol, nregion, qpos, qneg)
-        if( ncol .eq. 0 ) exit                            ! above breakdown where no column holds charge to remove
-        !$omp parallel do default(shared) private(i,j,k)
+    subroutine save_ez()
+      integer :: i, j, k
+      !$omp parallel do default(shared) private(i,j,k)
+      do j = 1,nj
         do k = 1,nk
-          do j = 1,nj
-            do i = 1,ni
-              pt3d(i,j,k,6) = pt3d(i,j,k,6) + dep(i,j,k)/rho(i,j,k)
-            enddo
+          do i = 1,ni
+            ezsave(its-1+i,k,jts-1+j) = ez(i,j,k)
           enddo
         enddo
-        call potential(ni, nj, nk, dx, dy, zh1, zf1, q, phi)
-        call field(ni, nj, nk, dx, dy, zh1, zf1, phi, ex, ey, ez, emag)
-        w1 = energy(ni, nj, nk, dx, dy, zf1, q, phi)
-        call log_flash(time, nstep, iter, ninit, e0, ebrk(loc(1),loc(2),loc(3)),                                 &
-                       (loc(1)-0.5)*dx, (loc(2)-0.5)*dy, zh1(loc(3)), ncol, nregion, qpos, qneg, w0, w1,           &
-                       ni, nj, nk, dep, zh1)
-        flashes = flashes + 1
       enddo
-      if( flashes .eq. maxdisch ) print *,'Terluna: ',maxdisch,' discharges in step ',nstep
-    endif
+    end subroutine save_ez
 
-    !$omp parallel do default(shared) private(i,j,k)
-    do j = 1,nj
-      do k = 1,nk
-        do i = 1,ni
-          ezsave(i,k,j) = ez(i,j,k)
-        enddo
-      enddo
-    enddo
-
-    if( mod(nstep, 10) .eq. 0 .or. flashes .gt. 0 )then
+    subroutine log_field(time, nstep)
+      real, intent(in) :: time
+      integer, intent(in) :: nstep
+      double precision :: totpos, totneg
+      real :: rates(2)
+      integer :: i, j, k, unit, loc(3)
       totpos = 0.0d0
       totneg = 0.0d0
       do k = 1,nk
         do j = 1,nj
           do i = 1,ni
             if( q(i,j,k) .gt. 0.0 )then
-              totpos = totpos + dble(q(i,j,k))*dx*dy*(zf1(k+1) - zf1(k))
+              totpos = totpos + dble(q(i,j,k))*dx*dy*dz1(k)
             else
-              totneg = totneg + dble(q(i,j,k))*dx*dy*(zf1(k+1) - zf1(k))
+              totneg = totneg + dble(q(i,j,k))*dx*dy*dz1(k)
             endif
           enddo
         enddo
       enddo
+      rates = (/ maxval(abs(wnoninduc(its:ite,kts:kte,jts:jte))), maxval(abs(winduc(its:ite,kts:kte,jts:jte))) /)
       loc = maxloc( emag )
-      rates = 0.0
-      if( allocated(wnoninduc) ) rates = (/ maxval(abs(wnoninduc(1:ni,1:nk,1:nj))), maxval(abs(winduc(1:ni,1:nk,1:nj))) /)
-      call log_field(time, nstep, emag(loc(1),loc(2),loc(3)), (loc(1)-0.5)*dx, (loc(2)-0.5)*dy, zh1(loc(3)),          &
-                     totpos, totneg, energy(ni, nj, nk, dx, dy, zf1, q, phi), flashes, rates)
-    endif
-
-  contains
+      call open_log('terluna_field.txt', unit)
+      write(unit,'(f13.1,i9,es11.3,3f11.1,3es12.4,2es11.3)') time, nstep, emag(loc(1),loc(2),loc(3)),                 &
+            (loc(1)-0.5)*dx, (loc(2)-0.5)*dy, zh1(loc(3)), totpos, totneg, energy(ni, nj, nk, dx, dy, zf1, q, phi), rates
+      close(unit)
+    end subroutine log_field
 
     real function interp(z, vs)
       ! log-linear in the conductivity, held at the ends of the table
@@ -420,41 +551,57 @@ contains
       enddo
     end function interp
 
-  end subroutine terluna_elec_step
+    subroutine log_flash(time, nstep, isub, kind, i0, j0, k0, e0, ebrk0, over, extent, regions, qpos, qneg, w0, w1,  &
+                         zlo, zhi, points, nox)
+      real, intent(in) :: time, e0, ebrk0, over, extent, zlo, zhi
+      integer, intent(in) :: nstep, isub, kind, i0, j0, k0, regions, points
+      double precision, intent(in) :: qpos, qneg, w0, w1, nox
+      integer :: unit
+      call open_log('terluna_flashes.txt', unit)
+      write(unit,'(f13.1,i9,i5,i3,3f11.1,2es11.3,f9.3,es11.3,i5,4es12.4,2f11.1,i8,es11.3)') time, nstep, isub, kind, &
+            (i0-0.5)*dx, (j0-0.5)*dy, zh1(k0), e0, ebrk0, over, extent, regions, qpos, qneg, w0, w1, zlo, zhi,       &
+            points, nox
+      close(unit)
+    end subroutine log_flash
 
-  subroutine log_flash(time, nstep, iter, ninit, emax, ebrk, x, y, z, ncol, nregion, qpos, qneg, w0, w1,             &
-                       ni, nj, nk, dep, zh1)
-    real, intent(in) :: time, emax, ebrk, x, y, z
-    integer, intent(in) :: nstep, iter, ninit, ncol, nregion, ni, nj, nk
-    double precision, intent(in) :: qpos, qneg, w0, w1
-    real, dimension(ni,nj,nk), intent(in) :: dep
-    real, dimension(nk), intent(in) :: zh1
-    real :: zlo, zhi
-    integer :: k, unit
-    zlo = -1.0
-    zhi = -1.0
-    do k = 1,nk
-      if( any( dep(:,:,k) .ne. 0.0 ) )then
-        if( zlo .lt. 0.0 ) zlo = zh1(k)
-        zhi = zh1(k)
-      endif
-    enddo
-    call open_log('terluna_flashes.txt', unit)
-    write(unit,'(f13.1,i9,i4,i8,2es11.3,3f11.1,2i6,4es12.4,2f11.1)') time, nstep, iter, ninit, emax, ebrk, x, y, z,   &
-          ncol, nregion, qpos, qneg, w0, w1, zlo, zhi
-    close(unit)
-  end subroutine log_flash
+  end subroutine terluna_nssl_elec
 
-  subroutine log_field(time, nstep, emax, x, y, z, totpos, totneg, w, flashes, rates)
-    real, intent(in) :: time, emax, x, y, z, rates(2)
-    integer, intent(in) :: nstep, flashes
-    double precision, intent(in) :: totpos, totneg, w
+!-----------------------------------------------------------------------------------------------------------------------
+! The vertical field the inductive charging takes from the step before, kept with each restart as WRF-ELEC keeps elecz:
+! cm1.F calls this after writing a restart, and the file's name carries the time the run takes up from (whole seconds)
+!-----------------------------------------------------------------------------------------------------------------------
+  subroutine terluna_elec_restart_write(mtime)
+    double precision, intent(in) :: mtime
     integer :: unit
-    call open_log('terluna_field.txt', unit)
-    write(unit,'(f13.1,i9,es11.3,3f11.1,3es12.4,i4,2es11.3)') time, nstep, emax, x, y, z, totpos, totneg, w, flashes, &
-          rates
+    if( .not. allocated(ezsave) ) return
+    open( newunit=unit, file=ez_name(mtime), access='stream', form='unformatted', status='replace', action='write' )
+    write(unit) lbound(ezsave), ubound(ezsave)
+    write(unit) ezsave
     close(unit)
-  end subroutine log_field
+  end subroutine terluna_elec_restart_write
+
+  subroutine read_ez(mtime)
+    double precision, intent(in) :: mtime
+    integer :: unit, b(6)
+    logical :: exists
+    inquire( file=ez_name(mtime), exist=exists )
+    if( .not. exists )then
+      print *,'Terluna: no ',trim(ez_name(mtime)),'; the first step''s inductive charging takes no field'
+      return
+    endif
+    open( newunit=unit, file=ez_name(mtime), access='stream', form='unformatted', status='old', action='read' )
+    read(unit) b
+    if( any( b .ne. (/ lbound(ezsave), ubound(ezsave) /) ) ) stop 'Terluna: the kept vertical field does not fit the grid'
+    read(unit) ezsave
+    close(unit)
+    print *,'Terluna: vertical field taken up from ',trim(ez_name(mtime))
+  end subroutine read_ez
+
+  function ez_name(mtime) result(name)
+    double precision, intent(in) :: mtime
+    character(len=40) :: name
+    write(name,'(a,i0,a)') 'terluna_ez_', nint(mtime), '.bin'
+  end function ez_name
 
   subroutine open_log(name, unit)
     ! a log opened for appending, its column names written when it is new
@@ -465,10 +612,11 @@ contains
     open( newunit=unit, file=name, status='unknown', position='append', action='write' )
     if( exists ) return
     if( name .eq. 'terluna_flashes.txt' )then
-      write(unit,'(a)') '# time_s step discharge points_above e_max_V_m e_break_V_m x_m y_m z_m columns regions '//  &
-                        'positive_C negative_C energy_before_J energy_after_J z_low_m z_high_m'
+      write(unit,'(a)') '# time_s step substep kind x_m y_m z_m e_V_m e_break_V_m e_over_break_max extent_m2 '//    &
+                        'regions positive_C negative_C energy_before_J energy_after_J z_low_m z_high_m points nox_mol'
+      write(unit,'(a)') '# kind: 1 in cloud, 2 negative and 3 positive charge to ground (branched); 9 cylinders'
     else
-      write(unit,'(a)') '# time_s step e_max_V_m x_m y_m z_m positive_C negative_C energy_J discharges '//         &
+      write(unit,'(a)') '# time_s step e_max_V_m x_m y_m z_m positive_C negative_C energy_J '//                     &
                         'noninductive_max_C_m3_s inductive_max_C_m3_s'
     endif
   end subroutine open_log

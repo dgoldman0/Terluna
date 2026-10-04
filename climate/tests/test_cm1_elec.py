@@ -1,6 +1,7 @@
 """Checks of the electrified CM1's patches and case files (climate/crm/cm1_elec.py): every patch marks its file, the
-patches fit CM1 r22 and the pinned WRF-ELEC module, and an electrified case gets the NSSL scheme, the charge tracers,
+patches fit CM1 r22 and the pinned WRF-ELEC files, and an electrified case gets the NSSL scheme, the charge tracers,
 the settings terluna_elec.F reads and the files leakage and Takahashi's charging need."""
+import re
 import json
 
 import pytest
@@ -15,13 +16,15 @@ def test_every_electrified_patch_adds_its_marker():
 
 
 def patched(name):
-    """A CM1 file, or WRF-ELEC's module, with the patches every OpenMP build takes and then the electrified ones."""
+    """A CM1 file, or one of WRF-ELEC's, with the patches every OpenMP build takes and then the electrified ones."""
     tree = c.CM1_HOME / c.SOURCE['version'] / 'src'
-    module = c.CM1_HOME / 'wrf4-elec' / e.ELEC_SOURCE['commit'][:12] / 'module_mp_nssl_2mom_elec.F'
-    if not tree.exists() or not module.exists():
-        pytest.skip('the CM1 source or the WRF-ELEC module is missing')
-    if name == 'module_mp_nssl_2mom.F':
-        text = module.read_text(encoding='latin-1')
+    folder = c.CM1_HOME / 'wrf4-elec' / e.ELEC_SOURCE['commit'][:12]
+    pinned = {'module_mp_nssl_2mom.F': folder / 'module_mp_nssl_2mom_elec.F',
+              'module_discharge_msz.F': folder / 'module_discharge_msz.F'}
+    if not tree.exists() or not pinned.get(name, tree).exists():
+        pytest.skip('the CM1 source or the WRF-ELEC file is missing')
+    if name in pinned:
+        text = e.sources(c.CM1_HOME)[name]()
     else:
         text = (tree / name).read_text(encoding='latin-1')
         for pname, marker, edits in [c.MAKEFILE['omp'], *c.PATCHES]:
@@ -33,43 +36,73 @@ def patched(name):
     return text
 
 
-def test_cm1_calls_the_reordering_driver_and_follows_it_with_the_field():
-    driver = patched('mp_driver.F')
-    assert driver.count('call terluna_nssl_elec(') == 3 and 'call nssl_2mom_driver(' not in driver
-    assert driver.count('kts = 1,kte = nk, pt3d = pt3d)') == 3
-    assert driver.count('getdbz,getvt,getsed,getqdiags,dotbud,doqbud,pt3d)') == 1
-    main = patched('cm1.F')
-    assert main.index('doqbud,pt3d)') < main.index('call terluna_elec_step(nstep,mtime,dt,zh,zf,rho,q3d,pt3d)')
-    assert patched('param.F').count('ipelec_tmp=nint(var6),isaund_tmp=nint(var7)') == 2
-    assert 'pta(i,j,k,n)=0.001' not in patched('init3d.F')
-    make = patched('Makefile')
-    assert '\tterluna_lightning.F \\\n\tterluna_elec.F \\\n' in make and 'mp_driver.o: terluna_elec.o' in make
+def directive_names(directive: str, clause: str = r'(?:FIRSTPRIVATE|PRIVATE|REDUCTION)') -> set:
+    flat = directive.replace('&\n!$OMP', '')
+    clauses = re.findall(rf'\b{clause}\((?:[+a-z]+:)?([^)]*)\)', flat)
+    return {name.strip() for c_ in clauses for name in c_.split(',')}
 
 
-def test_the_module_takes_cm1_s_settings_and_runs_its_slabs_in_parallel():
-    module = patched('module_mp_nssl_2mom.F')
-    assert module.count('!$OMP PARALLEL DO') == 1
-    assert 'IF ( present( isaund_tmp ) ) isaund = isaund_tmp' in module
-    assert 'real, parameter :: gr = TERLUNA_G' in module
-    # every variable the directive names is one of the driver's own
-    import re
-    declarations = module[module.index('SUBROUTINE nssl_2mom_driver('):module.index('!$OMP PARALLEL DO')]
-    clauses = re.findall(r'(?:PRIVATE|REDUCTION)\((?:[+a-z]+:)?([^)]*)\)', e.OMP_DIRECTIVE.replace('&\n!$OMP', ''))
-    listed = {name.strip() for clause in clauses for name in clause.split(',')}
-    assert {'an', 'elec2', 'sciona2d', 'ctghin', 'zmaxsed', 'scwmin', 'tke2d'} <= listed
-    for name in listed:
-        assert re.search(rf'\b{name}\b', declarations, re.I), name
-    # a private copy starts unset, so nothing private may be set before the loop (firstprivate copies start from the
-    # value set there, and sums start from it as well)
-    flat = e.OMP_DIRECTIVE.replace('&\n!$OMP', '')
-    private = {name.strip() for name in re.search(r'\bPRIVATE\(([^)]*)\)', flat).group(1).split(',')}
-    body = declarations[declarations.index('implicit none'):]
-    for name in private:
+def check_directive(routine: str, directive: str):
+    """Every variable the directive names is one of the routine's own, and nothing private is set before the loop (a
+    private copy starts unset; firstprivate copies and sums start from the value set there)."""
+    for name in directive_names(directive):
+        assert re.search(rf'\b{name}\b', routine, re.I), name
+    body = routine[routine.index('implicit none'):]
+    for name in directive_names(directive, r'PRIVATE'):
         for line in body.splitlines():
             code = line.split('!')[0]
             if '::' in code or re.match(r'\s*do\s', code, re.I):
                 continue
             assert not re.search(rf'(^|[^a-z0-9_]){name}\s*(\(.*\))?\s*=[^=]', code, re.I), (name, line)
+
+
+def test_cm1_calls_the_reordering_driver_with_the_charge_tracers_and_the_time():
+    driver = patched('mp_driver.F')
+    assert driver.count('call terluna_nssl_elec(') == 3 and 'call nssl_2mom_driver(' not in driver
+    assert driver.count('kts = 1,kte = nk, pt3d = pt3d, mtime = mtime)') == 3
+    assert driver.count('getdbz,getvt,getsed,getqdiags,dotbud,doqbud,pt3d,mtime)') == 1
+    main = patched('cm1.F')
+    assert 'doqbud,pt3d,mtime)' in main and 'terluna_elec_step' not in main
+    # the vertical field the inductive charging takes from the step before is kept with each restart
+    write = main.index('call     restart_write(')
+    assert write < main.index('call terluna_elec_restart_write(mtime)') < main.index("next rsttim = ")
+    assert patched('param.F').count('ipelec_tmp=nint(var6),isaund_tmp=nint(var7)') == 2
+    assert 'pta(i,j,k,n)=0.001' not in patched('init3d.F')
+    make = patched('Makefile')
+    assert ('\tterluna_lightning.F \\\n\tterluna_mlint2.F \\\n\tmodule_discharge_msz.F \\\n\tterluna_branched.F \\\n'
+            '\tterluna_elec.F \\\n') in make
+    assert 'mp_driver.o: terluna_elec.o' in make and 'terluna_branched.o: module_discharge_msz.o' in make
+    assert 'cm1.o: terluna_elec.o' in make
+
+
+def test_the_module_takes_cm1_s_settings_and_runs_both_drivers_slabs_in_parallel():
+    module = patched('module_mp_nssl_2mom.F')
+    assert module.count('!$OMP PARALLEL DO') == 2
+    assert 'IF ( present( isaund_tmp ) ) isaund = isaund_tmp' in module
+    assert 'real, parameter :: gr = TERLUNA_G' in module
+    assert {'an', 'elec2', 'sciona2d', 'ctghin', 'zmaxsed', 'scwmin', 'tke2d'} <= directive_names(e.OMP_DIRECTIVE)
+    main = module[module.index('SUBROUTINE nssl_2mom_driver('):]
+    check_directive(main[:main.index('!$OMP PARALLEL DO')], e.OMP_DIRECTIVE)
+    sed = module[module.index('SUBROUTINE nssl_2mom_sed_driver('):]
+    check_directive(sed[:sed.index('!$OMP PARALLEL DO')], e.SED_OMP_DIRECTIVE)
+    # the sedimentation driver prints its charge totals once a step, at the last sub-step
+    assert "ipelec > 0 .and. lastlooptmp ) THEN !{ ! Terluna" in sed
+
+
+def test_branched_lightning_runs_on_one_process_and_reports_to_its_unit():
+    msz = patched('module_discharge_msz.F')
+    routine = msz[msz.index('      subroutine lightmsz('):msz.index('      end subroutine lightmsz')]
+    assert not re.search(r'(?i)\bwrite *\( *(6|0|\*) *,', routine[routine.index('       iunit = iunit0'):])
+    assert 'mpitotoutdp(1:2) = mpitotindp(1:2) ! Terluna: one process' in routine     # outside its MPI blocks
+    assert 'CALL TASK_PROC_MAP()' not in routine and 'ndebug = 0 ! Terluna' in msz
+    assert msz.count('use module_boxmgsetup, only: igslg0, jgslg0, kgslg0, terluna_ebrk_lo, terluna_ebrk_hi') == 2
+    assert 'Max( terluna_ebrk_lo, Min( ebrkdp(ix,jy,kz), terluna_ebrk_hi ) )' in routine
+    assert routine.index('deallocate( ebrkd, ebrkdp, zlev, cghgt, t2, t4 )') < routine.index('allocate( ebrkd(')
+    boxmg = c.CM1_HOME / 'wrf4-elec' / e.ELEC_SOURCE['commit'][:12] / 'module_boxmgsetup.F'
+    if boxmg.exists():
+        mlint2 = e.sources(c.CM1_HOME)['terluna_mlint2.F']()
+        assert '      subroutine mlint2' in mlint2 and mlint2.rstrip().endswith('end')
+        assert 'module ' not in mlint2.lower().replace('module_boxmgsetup.f', '')
 
 
 def test_fall_speeds_scale_only_where_each_particle_is_present_and_not_at_earth_gravity():
@@ -88,10 +121,12 @@ def test_fall_speeds_scale_only_where_each_particle_is_present_and_not_at_earth_
 def test_an_electrified_case_takes_nssl_and_the_charge_tracers():
     hail = e.namelist_settings({})
     assert hail['param2'] == dict(ptype=27, iptra=1, npt=7, pdtra=0)
-    assert hail['param8'] == dict(var6=3.0, var7=12.0, var8=1.0, var9=0.0, var10=12000.0)
+    assert hail['param8'] == dict(var4=0.0, var5=0.0, var6=3.0, var7=12.0, var8=3.0, var9=0.0, var10=12000.0)
     graupel = e.namelist_settings(dict(hail=False, ipelec=2, lightning=2, leakage=1, radius_m=6000.0))
     assert graupel['param2'] == dict(ptype=26, iptra=1, npt=6, pdtra=0)
-    assert graupel['param8'] == dict(var6=2.0, var7=12.0, var8=2.0, var9=1.0, var10=6000.0)
+    assert graupel['param8'] == dict(var4=0.0, var5=0.0, var6=2.0, var7=12.0, var8=2.0, var9=1.0, var10=6000.0)
+    moon = e.namelist_settings(e.LUNAR)
+    assert moon['param8']['var4'] == 5000.0 and moon['param8']['var5'] == 6.8 and moon['param8']['var8'] == 3.0
 
 
 def test_leakage_writes_the_conductivity_by_height(tmp_path):

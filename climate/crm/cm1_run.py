@@ -1195,16 +1195,18 @@ CASES['box_highland_own_height'] = dict(
     purpose=CASES['box_highland']['purpose'] + ', the forcing held and applied at each column\'s own height')
 # The benchmark storm of the electrified build (stage 2 of the atmospheric-electricity study): CM1's own supercell
 # (Weisman and Rotunno 2000: the Weisman and Klemp sounding, the quarter-circle hodograph, a warm bubble, 1 km spacing,
-# 120 km square, two hours) at Earth's gravity, with WRF-ELEC's NSSL microphysics with hail, its default charging and
-# lightning, and output every 5 minutes.
+# 120 km square, two hours) at Earth's gravity, with WRF-ELEC's NSSL microphysics with hail, its default charging, its
+# branched lightning on its 0.75-s sub-steps, and output every 5 minutes; supercell_elec_cylinders has WRF-ELEC's
+# cylindrical lightning in its place.
 # The equatorial box electrified (stage 2): box_0e's inputs as they were written (its site, surface, grid, starting
 # air and forcing, from the GCM before its correction), with the NSSL microphysics with hail in place of Morrison,
-# given lunar fall speeds, its CCN at box_0e's 100 droplets per cm3, and WRF-ELEC's charging and lightning; its
-# restarts let windows of its storms run again with output every few minutes, other charging laws, leakage or the
-# unbounded breakdown field.
+# given lunar fall speeds, its CCN at box_0e's 100 droplets per cm3, WRF-ELEC's charging and its branched lightning on
+# sub-steps scaled to the box's layers and fall speeds, a downward channel striking within 5 km of the ground
+# (cm1_elec.LUNAR); its restarts let windows of its storms run again with output every few minutes, other charging
+# laws, leakage or the unbounded breakdown field.
 CASES['box_0e_elec'] = dict(
-    CASES['box_0e'], build='moon_omp_elec', elec={}, inputs_from='box_0e',
-    purpose=CASES['box_0e']['purpose'] + ', with the NSSL microphysics and WRF-ELEC\'s charging and lightning')
+    CASES['box_0e'], build='moon_omp_elec', elec=dict(cm1_elec.LUNAR), inputs_from='box_0e',
+    purpose=CASES['box_0e']['purpose'] + ', with the NSSL microphysics and WRF-ELEC\'s charging and branched lightning')
 # The same storm with CM1's own copy of the NSSL scheme and no electricity, to check that WRF-ELEC's copy, run through
 # terluna_elec.F, makes the same storm.
 CASES['supercell_nssl'] = dict(
@@ -1214,8 +1216,12 @@ CASES['supercell_nssl'] = dict(
 CASES['supercell_elec'] = dict(
     kind='sample', sample='supercell', build='earth_g_omp_elec', days=7200.0 / 86400.0, output_s=300.0,
     restart_s=1800.0, segment_s=7200.0, elec={},
-    purpose='CM1\'s supercell at Earth\'s gravity with WRF-ELEC\'s NSSL microphysics, charging and lightning, the '
-            'electrified build\'s benchmark')
+    purpose='CM1\'s supercell at Earth\'s gravity with WRF-ELEC\'s NSSL microphysics, charging and branched lightning, '
+            'the electrified build\'s benchmark')
+CASES['supercell_elec_cylinders'] = dict(
+    CASES['supercell_elec'], elec=dict(lightning=1),
+    purpose='CM1\'s supercell at Earth\'s gravity with WRF-ELEC\'s NSSL microphysics, charging and cylindrical '
+            'lightning')
 
 
 def gcm_soil(folder: Path) -> dict:

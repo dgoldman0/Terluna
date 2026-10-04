@@ -1145,28 +1145,61 @@ separates when graupel or hail rebounds from cloud ice or snow (non-inductive
 charging; by default Saunders and Peck's law with Brooks et al.'s critical rime
 accretion rate above −15 °C and none below −32.5 °C, WRF-ELEC's `isaund = 12`)
 and when cloud droplets rebound from graupel polarised by the field (inductive
-charging). The small ions' net charge attaches to the particles. Two Terluna
-files in [fortran/](fortran/) complete it:
+charging). The small ions' net charge attaches to the particles. Three Terluna
+files in [fortran/](fortran/) and two of WRF-ELEC's complete it:
 
 - [terluna_elec.F](fortran/terluna_elec.F) passes CM1's calls of the scheme to
   WRF-ELEC's driver with the arrays reordered from CM1's (i, j, k) to WRF's
   (i, k, j), and keeps the charges in CM1's passive tracers (C/kg), which CM1
-  advects and mixes like any tracer, without its positivity limiter. After the
-  microphysics, every step, it solves for the electric field of the net charge,
-  runs lightning and, where a case asks, leakage, and keeps the vertical field
-  for the next step's inductive charging.
+  advects and mixes like any tracer, without its positivity limiter. It runs
+  the steps as WRF-ELEC's own driver does: the microphysics once, without
+  sedimentation, then the sedimentation in sub-steps of about 0.75 s, each
+  followed by a solve for the electric field of the net charge and by
+  lightning. Leakage, where a case asks, follows once a step. It keeps the
+  vertical field for the next step's inductive charging, also across restarts
+  (`terluna_ez_<time>.bin` beside CM1's restart files, as WRF keeps it in its
+  own).
 - [terluna_lightning.F](fortran/terluna_lightning.F) solves Poisson's equation
   for the potential by Fourier transform across the periodic domain and a
   tridiagonal solve on CM1's stretched levels, with the potential zero at the
   ground and at the model top. It carries WRF-ELEC's cylindrical discharge
-  scheme (`light1d`; Ziegler and MacGorman 1994). Where the field exceeds the
+  scheme (`light1d`; Ziegler and MacGorman 1994): where the field exceeds the
   breakdown field (284 kV/m at 1.225 kg/m³, scaled by air density and held
   within 50–180 kV/m, WRF-ELEC's `nssl_ibrkd = 4`), every column within 12 km
-  that holds more than 0.1 nC/m³ joins the discharge. The discharge removes
-  shares of the charge above that level, set so that it carries comparable
-  positive and negative charge (about 30 % of it), and hands them to the small
-  ions with the opposite sign. It repeats within a step while the field stays
-  above breakdown.
+  that holds more than 0.1 nC/m³ joins the discharge, which removes shares of
+  the charge above that level, set so that it carries comparable positive and
+  negative charge (about 30 % of it), and hands them to the small ions with the
+  opposite sign.
+- WRF-ELEC's branched lightning (`lightmsz` in `module_discharge_msz.F`;
+  MacGorman, Straka and Ziegler 2001), the builds' default, makes one flash at a
+  time. It starts at a point where the field reaches 0.9 of the breakdown field
+  in air colder than 275 K, drawn at random among such points, runs a channel up
+  and down from it while the field stays above 0.8 of breakdown, and spreads
+  each end through the connected cells whose potential differs from the
+  channel's by more than its 200-V/m internal field allows. It neutralizes the
+  charge in those cells, handing the opposite charge to the small ions. A
+  downward channel strikes the ground when it reaches air warmer than −7 °C
+  (about 5 km above Earth's ground), if the flash started where the potential
+  lies beyond 50 MV of either sign with a vertical field above 10 kV/m in the
+  matching direction, and the channel's end lies in charge of the matching
+  sign. A ground flash neutralizes charge of one sign in the cloud, the ground
+  supplying the opposite charge. Each flash makes nitrogen oxides
+  along its channel at Wang et al.'s (1998) yield per metre at the channel's
+  pressure, times WRF-ELEC's factor of 0.1, reduced in proportion where the
+  flash changes the charge by less than 1 nC/kg. After each flash the field is
+  solved again, until no starting point is left or a chosen one gives no flash;
+  after 120 flashes in a sub-step, 5 % of all charge goes to the small ions, as
+  in WRF-ELEC. Its trilinear interpolation (`mlint2`) comes from WRF-ELEC's
+  `module_boxmgsetup.F`.
+- [terluna_branched.F](fortran/terluna_branched.F) runs `lightmsz` on one
+  process; WRF-ELEC runs it under MPI. It draws the starting point as `lightmsz`
+  does, with the same Park and Miller generator, seeded from the step so that a
+  restarted run repeats its flashes, recentres the arrays on that point across
+  the periodic domain (the channels stop at the arrays' edges), hands
+  `lightmsz` that point alone and returns the charge, channels and nitrogen
+  oxides to the domain. The patch to `lightmsz` replaces its few MPI calls
+  outside its MPI blocks, takes the breakdown field's bounds from the build,
+  recomputes that field at each call and sends its report to its own log.
 
 Lunar gravity enters the scheme as it enters Morrison's: the module's gravity is
 the build's, the drag-law fall speeds (graupel and hail under drag laws, cloud
@@ -1176,119 +1209,195 @@ ice with 0.55, and graupel and hail with each particle's exponent in WRF-ELEC's
 default table (Milbrandt and Morrison 2013), whose coefficient also sets their
 collection and ventilation. The scheme sets a particle's fall speeds and
 coefficients only where that particle is present, and the scaling acts only
-there; at Earth's 9.81 m/s² it leaves them as they are. WRF-ELEC's driver runs
-in one thread, since WRF divides its work outside the microphysics; the build
-gives its slab loop the OpenMP directive CM1's copy has, with every per-slab
-array private, the charge totals summed across threads, and what the driver sets
-before the loop shared.
+there; at Earth's 9.81 m/s² it leaves them as they are. WRF-ELEC's driver and
+its sedimentation driver run in one thread, since WRF divides its work outside
+the microphysics; the build gives each slab loop the OpenMP directive CM1's
+copy has, with every per-slab array private, the charge totals summed across
+threads, and what the driver sets before the loop shared.
 
-Two faults in the first version showed up as results that changed with the
-number of threads. The scaling ran wherever graupel might be, also where the
-scheme had set no graupel exponent, so it multiplied by whatever value was left
-in memory there; and the directive made private the fall-speed moments the driver
-sets before the loop (`infdo`), leaving each thread's copy unset. Both are fixed,
-a test keeps every private variable from being set before the loop, and a build
-that fills unset reals with signalling NaNs and stops at the first invalid
-operation located the first. The supercell below, run for 25 minutes on 2 and on
-4 threads, now matches bit for bit in every output field and in both logs, as
-CM1's own NSSL scheme does.
+The lunar boxes change two of WRF-ELEC's Earth settings (`cm1_elec.LUNAR`).
+WRF-ELEC's 0.75-s sub-step lets graupel settle through about 1 % of the 500-m
+layers of its storms in each; in the boxes' charging zone, 25–35 km up, the
+layers are 2 km deep and graupel falls at 0.44 of Earth's speed, so a 6.8-s
+sub-step keeps that share. On the Moon air warmer than −7 °C lies about 27 km
+up, so a downward channel strikes the ground when it comes within 5 km of it,
+the height that rule stands at on Earth. The 50-MV and 10-kV/m conditions for a
+ground strike, the 0.9 and 0.8 fractions of breakdown, the 200-V/m internal
+field and the nitrogen oxide yield stay as WRF-ELEC calibrates them for Earth.
 
-A case sets the electricity in CM1's namelist (`var6` the charging: 2
-non-inductive, 3 with inductive; `var7` the charging law: 12 Saunders and Peck,
-1 Takahashi; `var8` lightning: 1 WRF-ELEC's breakdown field, 2 the same scaling
-unbounded; `var9` leakage through the conductivity of
-[atmosphere/electricity](../../atmosphere/electricity/README.md); `var10` the
-discharge radius). Each run logs every discharge (`terluna_flashes.txt`: the
-field at initiation, the columns and separate regions taken, the positive and
-negative charge removed, the electrostatic energy before and after) and, every
-ten steps, the largest field, the domain's charge and energy and the largest
-charging rates (`terluna_field.txt`); WRF-ELEC's driver prints the domain's
-charging by collision pair every step. [elec_analysis.py](elec_analysis.py)
-reads the logs and the charge tracers of the snapshots.
+Three faults in the first version were found and fixed. It discharged once a
+6-second step, after the step's charging and all its sedimentation; WRF-ELEC
+sub-steps the sedimentation and discharges after each sub-step, and without
+that the field stood a median 3.2 times above breakdown at a step's first
+discharge and each discharge removed a median 150 C. Two faults showed up as
+results that changed with the number of threads. The scaling ran wherever
+graupel might be, also where the scheme had set no graupel exponent, so it
+multiplied by whatever value was left in memory there; and the directive made
+private the fall-speed moments the driver sets before the loop (`infdo`),
+leaving each thread's copy unset. A test keeps every private variable of both
+directives from being set before their loops, and a build that fills unset
+reals with signalling NaNs and stops at the first invalid operation located the
+scaling fault. Restarted from its restart at 30 minutes, on 4 threads and on 2,
+the benchmark storm below repeats its first run's output fields at 35 and 40
+minutes and its 41 flashes in between bit for bit.
+
+A case sets the electricity in CM1's namelist: `var4` the height a downward
+channel must reach to strike the ground (m; 0 for WRF-ELEC's −7 °C rule),
+`var5` the sub-step (s; 0 for WRF-ELEC's 0.75 s), `var6` the charging (2
+non-inductive, 3 with inductive), `var7` the charging law (12 Saunders and
+Peck, 1 Takahashi), `var8` the lightning (0 none, 1 cylinders, 3 branched; 2
+and 4 the same with the breakdown field's scaling unbounded), `var9` leakage
+through the conductivity of
+[atmosphere/electricity](../../atmosphere/electricity/README.md) and `var10`
+the cylinders' radius. Each run logs every flash or cylinder
+call (`terluna_flashes.txt`: its kind, start, the field and breakdown field
+there and the domain's largest field over breakdown before it, the area and the
+levels where it neutralizes charge, the positive and negative charge it
+neutralizes, the electrostatic energy before and after, its channel points and
+nitrogen oxides),
+`lightmsz`'s own report on the first 2,000 flashes of each run
+(`terluna_msz.log`), and, every ten steps, the largest field, the domain's
+charge and energy and the largest charging rates (`terluna_field.txt`);
+WRF-ELEC's driver prints the domain's charging by collision pair every step.
+[elec_analysis.py](elec_analysis.py) reads the logs and the charge tracers of
+the snapshots.
 
 The build leaves out CM1's own water budget from the NSSL scheme (the
 condensation, evaporation and rain totals CM1's copy adds to its budget
 output), the three-moment option, the activated CCN and IN arrays, terrain under
-the field solver, and WRF-ELEC's screening layers and branched discharges.
-Charge leaves the air only by lightning, by falling to the ground on rain and
-hail, and, where a case turns it on, by leakage, which relaxes the net charge at
-σ/ε₀ with the conductivity of clear air or of cloud by height and leaves out the
+the field solver, WRF-ELEC's screening layers and `lightmsz`'s horizontal steps
+of the starting channel, which WRF-ELEC leaves off as well. Charge leaves the
+air by lightning to the ground, by falling to the ground on rain and hail, and,
+where a case turns it on, by leakage, which relaxes the net charge at σ/ε₀ with
+the conductivity of clear air or of cloud by height and leaves out the
 screening layers that conductivity gradients build at cloud edges.
 
-The solver and the discharge scheme are checked against numpy
-([test_cm1_elec_field.py](../tests/test_cm1_elec_field.py)): the potential
-matches a direct solve of the same difference equations on stretched levels to
-one part in 10⁵, and the exact potential of a charged layer between grounded
-plates to one part in 10³; a discharge removes the charge WRF-ELEC's rule sets,
-only within the cylinders, and counts separate regions across the domain's
-edges.
+The solver and the lightning are checked against numpy and against charge laid
+out by hand ([test_cm1_elec_field.py](../tests/test_cm1_elec_field.py),
+[test_cm1_elec_branched.py](../tests/test_cm1_elec_branched.py)). The
+potential matches a direct solve of the same difference equations on stretched
+levels to one part in 10⁵, and the exact potential of a charged layer between
+grounded plates to one part in 10³. A cylinder call removes the charge
+WRF-ELEC's rule sets, only within the cylinders, and counts separate regions
+across the domain's edges. A branched flash between two charge regions
+neutralizes equal positive and negative charge in both and makes nitrogen
+oxides; a flash at the domain's edge reaches both sides; flashes continue until
+no starting point is left; a channel that runs down through a strong lower
+positive region strikes the ground with negative charge, the same storm with
+every charge reversed strikes with the same amount of positive charge, and
+moving the ground-strike height from 3 to 5 km turns that flash from one in
+cloud to one to ground.
 
 ### The benchmark storm
 
 `supercell_elec` is CM1's own supercell (Weisman and Rotunno 2000: the Weisman
 and Klemp sounding with 14 g/kg of vapour at the ground, the quarter-circle
 hodograph, a warm bubble, 1-km spacing, a domain 120 km square, two hours) at
-Earth's gravity, with 600 CCN per cm³ and WRF-ELEC's defaults
-([elec_supercell_elec.json](../results/crm/elec_supercell_elec.json)). Its twin
-`supercell_nssl` runs CM1's own copy of the NSSL scheme without electricity. The
-two storms agree: the largest updraft within 5 % at every half hour (28, 45, 54
-and 54 m/s against 28, 46, 56 and 56), reflectivity within 3 dBZ, graupel within
-14 %, cloud-ice numbers within a factor of 1.5, the domain's condensate within
-10 % and at each level holding much of it within 22 %, and the heaviest rain
-within a quarter. Hail differs most, up to a factor of two once it forms, as the
-two copies of the scheme are different versions. The reordering of the arrays
-between CM1 and WRF-ELEC therefore leaves the storm as CM1's own scheme makes it.
-The electricity adds a quarter to the run's time.
+Earth's gravity, with 600 CCN per cm³ and WRF-ELEC's defaults: its charging,
+its 0.75-s sub-steps and its branched lightning
+([elec_supercell_elec.json](../results/crm/elec_supercell_elec.json)).
+`supercell_elec_cylinders` runs the same storm with the cylinders
+([elec_supercell_elec_cylinders.json](../results/crm/elec_supercell_elec_cylinders.json)),
+and `supercell_nssl` runs it with CM1's own copy of the NSSL scheme without
+electricity. The electrified storm and CM1's own agree. At every half hour the
+largest updraft is within 6 % (28, 46, 53 and 56 m/s against 28, 46, 56 and
+56), reflectivity within 3.4 dBZ, and the domain's condensate within 9 % and at
+each level holding much of it within 19 %; from 30 minutes on, graupel is
+within 12 % and cloud-ice numbers within a factor of 1.5 (reflectivity once
+differs by 7 dBZ, at 35 minutes), and the rain at the end is within a third.
+Hail differs most, up to a factor of two once it
+forms, as the two copies of the scheme are different versions. The reordering of
+the arrays between CM1 and WRF-ELEC and the sub-stepped sedimentation therefore
+leave the storm as CM1's own scheme makes it. The electricity, with its
+sub-steps and flashes, triples the run's time: 56 minutes on 4 threads, beside
+the lunar box on the other 4, against 18 for `supercell_nssl`.
 
 No published run puts this scheme in CM1 or in WRF's idealized supercell, so the
 benchmark sets the storm beside published runs of the same charging and
-discharge schemes on similar storms (notes and pages in the study's
+lightning schemes on similar storms (notes and pages in the study's
 [sources](../../research/studies/atmospheric_electricity/sources.json)):
 
 | | `supercell_elec` | Published runs |
 |---|---|---|
-| First discharge | 28.6 min | 27–28 min (Kuhlman et al. 2006), 32.5 min (MacGorman et al. 2001), 30–40 min (Sun et al. 2023) |
-| Discharges | 1,903 calls in 92 min, at most 41 a minute (88 separate regions) | 34 flashes a minute at the peak (Mansell 2014), 75 (Brothers et al. 2018, 1 km) |
-| Net charge density | up to +3.2 and −3.4 nC/m³ | about 1 nC/m³ (Ziegler and MacGorman 1994), up to 4 (Sun et al. 2021) |
-| Charge on one particle type | up to 43 (graupel), 53 (cloud ice) and 86 (hail) nC/m³, largely cancelling | up to 1.2 nC/m³, in a weaker storm (Sun et al. 2024) |
-| Largest non-inductive charging | 3.3 nC/m³/s | 0.3–0.55 nC/m³/s (Kuhlman et al. 2006; Sun et al. 2023) |
-| Inductive against non-inductive charging | a seventh of the domain's charge separated | about a tenth (two-moment runs) |
+| First flash | 28.5 min | 32.5 min (MacGorman et al. 2001, the same branched scheme), 27–28 min (Kuhlman et al. 2006), about 30 min (Ziegler et al. 2014), 30–40 min (Sun et al. 2023) |
+| Flash rate | rising to 153 a minute at 75–80 min, about 110 a minute through the second hour | 34 a minute at the peak (Mansell 2014), 75 (Brothers et al. 2018, 1 km), 100–200 with peaks of 400–500 (Ziegler et al. 2014), 300–600 in a mature storm (Calhoun et al. 2014) |
+| Kinds | all 7,134 in cloud | 99.67 % in cloud (Salinas et al. 2021, of Brothers et al.'s storm); a first ground flash at 34 min (Ziegler et al. 2014) |
+| Charge per flash | median 9.4 C; 2.8–67 C from the 10th to the 90th percentile | 2.7–39.6 C (MacGorman et al. 2001) |
+| Flash area | median 27 km², mean 79 km² | mean 160 km² at 1 km (Brothers et al. 2018, with a different branched scheme) |
+| Net charge density | up to +4.7 and −4.8 nC/m³ | about 1 nC/m³ (Ziegler and MacGorman 1994), up to 4 (Sun et al. 2021) |
+| Charge on one particle type | up to 45 (graupel), 48 (cloud ice) and 53 (hail) nC/m³, largely cancelling | up to 1.2 nC/m³, in a weaker storm (Sun et al. 2024) |
+| Largest non-inductive charging | 3.2 nC/m³/s | 0.3–0.55 nC/m³/s (Kuhlman et al. 2006; Sun et al. 2023) |
+| Inductive against non-inductive charging | a sixth of the domain's charge separated | about a tenth (two-moment runs) |
 
-The storm electrifies when the published storms do, its net charge densities are
-those of the published runs, and it discharges about as often. Its charging is several times stronger and the charge on each
-particle type tens of times larger. Both follow from its cloud ice: up to 2×10⁸
-crystals per kilogram where droplets freeze homogeneously in updrafts of 50 m/s,
-which CM1's own copy of the scheme makes as well, and each crystal that bounces
-off graupel carries charge away.
+The storm electrifies and flashes when the published storms do, with their net
+charge densities, flash rates and charge per flash. Its charging is several
+times stronger and the charge on each particle type tens of times larger. Both
+follow from its cloud ice: up to 2×10⁸ crystals per kilogram where droplets
+freeze homogeneously in updrafts of 50 m/s, which CM1's own copy of the scheme
+makes as well, and each crystal that bounces off graupel carries charge away.
 
-At 30–40 minutes the storm's net charge lies as a normal tripole's does: negative
-at 6–8 km (−16 to −25 °C) between positive above (8–9 km, −28 to −33 °C) and
-below (4–6 km), tens of coulombs at each level. Graupel carries part of the
-negative charge only at 35 minutes; at 30 and 40 minutes it is positive, and
-cloud ice and snow carry the negative. From 45 minutes, as the updrafts pass
-50 m/s, the main negative charge rises to 9–12 km (−36 to −54 °C), up to 1,700 C
-at one level, carried by snow and cloud ice, while graupel and hail at the same
-levels carry positive charge. Saunders and Peck's law charges graupel positively
-where it rimes fast in strong, wet updrafts, and the published runs with this
-law report the same inverted charge in such storms (Kuhlman et al. 2006;
-Mansell et al. 2005), as high CCN does (Sun et al. 2023, 2024).
+At 30–35 minutes the storm's net charge lies as a normal tripole's does:
+negative at 7.75 km (−24 to −25 °C) between positive above (8.25–8.75 km, −29
+to −33 °C) and below (6.25 km), 14–38 C at the negative level. Snow, cloud ice
+and cloud droplets carry the negative charge at 30 minutes, and cloud ice,
+cloud droplets and graupel at 35. From 40 minutes, as the updrafts pass 50 m/s,
+the main negative charge rises to 10.75–11.75 km (−47 to −55 °C), and from 75
+minutes it lies mostly at 8.75–9.75 km (−33 to −40 °C), up to 340 C at one
+level. Snow and cloud ice carry it, snow alone from 90 minutes, while graupel
+and hail at the same levels carry positive charge. Saunders and
+Peck's law charges graupel positively where it rimes fast in strong, wet
+updrafts, and the published runs with this law report the same inverted charge
+in such storms (Kuhlman et al. 2006; Mansell et al. 2005), as high CCN does (Sun
+et al. 2023, 2024).
 
-A discharge removes a median 150 C (25–540 C from the 10th to the 90th
-percentile) from a median 14.5 km of the column and dissipates a median 9 GJ of
-electrostatic energy. One call discharges every 12-km cylinder around every point
-above the breakdown field at once, through the whole column, so each call stands
-for many flashes and its charge and energy are theirs together; counts of calls
-follow the trends of a storm's lightning (Fierro et al. 2013). At the first discharge of a
-step the field stands a median 3.2 times above the breakdown field: within one
-6-second step, graupel and hail falling through ice and snow that carry tens of
-nC/m³ of the opposite charge move enough net charge to raise it that far. The
-scheme discharges once a step, after the field has passed the breakdown field.
+A flash starts a median 8.75 km up (5.75–9.75 km), where the field reaches a
+median 107 kV/m against a breakdown field of 109 kV/m; it neutralizes charge
+between a median 4.75 and 10.75 km over a median 27 km², and dissipates a
+median 1.2 GJ (0.34–6.9 GJ) of electrostatic energy. A few span much of the
+storm: 169 flashes neutralized more than 200 C each, and the largest 1,490 C
+over 4,270 km². Before a sub-step's first
+flash the domain's largest field stands a median 1.20 times the breakdown field
+(1.03–1.59), before later flashes 1.12, and once 4.4. WRF-ELEC's sub-steps hold
+it near breakdown: without them the first version's field stood a median 3.2
+times above breakdown at a step's first discharge. Within one sub-step at most
+12 flashes follow one another, against WRF-ELEC's cap of 120. The flashes make a
+median 4.7 mol of nitrogen oxides each and 109,000 mol over the two hours, at
+WRF-ELEC's yield along the model's 1-km channels; how that compares with the
+yields observed per flash is open.
+
+With the cylinders (`supercell_elec_cylinders`) the sub-steps also hold the
+field near breakdown: a median 1.15 times it at a sub-step's first discharge
+(1.02–1.35, at most 1.5), against 3.2 times in the first version, which
+discharged once a 6-second step. A call removes a median 32 C of each sign
+(14–124 C), against 150 C before, from 12-km cylinders reaching from near the
+ground to 15 km, and dissipates a median 3.0 GJ. The 4,026 calls in 92 minutes,
+up to 86 a minute, take 5,520 separate regions. Each call acts at once in every
+cylinder around every point above breakdown, through the whole column, so its
+charge and energy stand for several flashes together, and its counts follow the
+trends of a storm's lightning (Fierro et al. 2013).
 
 ```sh
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run build earth_g_omp_elec moon_omp_elec earth_g_omp
-climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup supercell_elec        # and supercell_nssl
-climate/gcm/.venv/bin/python -m climate.crm.cm1_run run supercell_elec --threads 4    # 20 minutes
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup supercell_elec    # and supercell_elec_cylinders, supercell_nssl
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run run supercell_elec --threads 4    # about an hour
 climate/gcm/.venv/bin/python -m climate.crm.elec_analysis supercell_elec --against supercell_nssl
+```
+
+### The electrified equatorial box
+
+`box_0e_elec` runs `box_0e`'s inputs as they were written (its site, surface,
+grid, starting air and forcing, from the GCM before its correction) with the
+NSSL microphysics with hail in place of Morrison's, its CCN at `box_0e`'s 100
+droplets per cm³, and WRF-ELEC's charging and branched lightning with the lunar
+settings above, over two lunar days with three-hourly output and twelve-hourly
+restarts. It runs from 2026-10-04. A first start, before the sub-steps and the
+branched lightning, was stopped at day 4, before its storms had charged. Each
+restart keeps its vertical field (`terluna_ez_<time>.bin`), so windows of the
+storms can run again from it with frequent output.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_elec
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_0e_elec --threads 8 --hours 30    # about half a day
 ```
 
 ## The gravity pair
