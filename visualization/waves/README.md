@@ -1,4 +1,13 @@
-# Wind-wave comparison
+# Waves and tides
+
+The figures of the [wave studies](../../climate/waves/README.md) and the seas'
+monthly tide, each reading a committed domain product: Earth and lunar gravity
+over a strip, the Smythii–Marginis basin and its lunar cycle, coastal nests and
+shore exposure, breaking and run-up, the nearside sea's waves and coasts, a
+month at four of its shores, and every sea's monthly tide. Every figure and its
+sidecar are written to the ignored `results/`.
+
+## Earth and lunar gravity over a strip
 
 `plot.py` reads `climate/waves/results/waves.json`, schema
 `terluna.climate.wind-waves/1`, and displays its Earth and lunar gravity
