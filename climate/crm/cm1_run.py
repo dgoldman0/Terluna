@@ -1211,8 +1211,9 @@ CASES['box_0e_elec'] = dict(
 # same 64 by 64 columns), started from box_0e_elec's air averaged over its columns and its mean skin temperature at a
 # day of its run a few hours before a stormy window (day 10.75, four hours before box_0e_elec's first flash), under
 # the same Sun, forcing, land and electricity, with output every 15 minutes. It resolves the storm cells and draws the
-# flashes on a grid three times finer. It ran two model days without a flash and was extended to four (2026-10-04, at
-# the author's direction), through box_0e_elec's busiest lightning (days 12.7-14.3).
+# flashes on a grid three times finer. It ran two model days without a flash and was extended toward box_0e_elec's
+# busiest lightning (days 12.7-14.3; 2026-10-04, at the author's direction); its deep convection collapsed after
+# coarse day 13.25 and the author stopped it at day 3.0 of its run.
 CASES['box_0e_elec_fine'] = dict(
     CASES['box_0e_elec'], inputs_from=None, fine_from=dict(case='box_0e_elec', day=10.75, refine=3), days=4.0,
     output_s=900.0, restart_s=10800.0, segment_s=43200.0,

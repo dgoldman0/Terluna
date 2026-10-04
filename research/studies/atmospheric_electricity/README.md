@@ -226,7 +226,11 @@ Morrison's do.
    of flashing storms per unit area, a box this size sees none in that time
    55 % of the time, so the effect of the finer grid on the lightning is
    still open (climate/crm README, "The fine box"). At the author's direction
-   it runs on to four model days, through the coarse box's busiest lightning.
+   it ran on toward the coarse box's busiest lightning, but its deep convection
+   collapsed after coarse day 13.25 while the coarse box's carried on, and the
+   author stopped it at coarse day 13.75 after three days without a flash. The
+   2-km lightning stays unmeasured; it needs a box wide enough for several
+   storms.
 4. The first lunar day's storms again from the coarse run's day-10.5 restart
    (climate/crm README, "The first lunar day again"). WRF-ELEC caps the
    breakdown field at 180 kV/m, a cap that on Earth applies only below about

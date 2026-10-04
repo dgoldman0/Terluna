@@ -1550,14 +1550,23 @@ is also small for these storms: lunar storms stand four to five times taller
 than Earth's, so 128 km is like a 30-km box on Earth, room for one or two storms
 at a time.
 
-At the author's direction it runs on to four model days, through day 14.75 and
-the coarse box's busiest lightning: after day 12.75 the coarse box had 11
-flashing storms and 106 of its first lunar day's 162 flashes. Its storms are
-mature by then, so the whole extension counts. At the coarse box's rate per unit
-area the extension has about a three-in-four chance of a storm that flashes and
-one in four of one of the large ones (17–46 flashes). It runs from its day-2
-restart with the cap lifted, as the coarse box now does. Its first two days hold
-under either setting, since they made no flash.
+At the author's direction it ran on from its day-2 restart, with the cap lifted
+as the coarse box now has it, toward day 14.75 and the coarse box's busiest
+lightning: after day 12.75 the coarse box had 11 flashing storms and 106 of its
+first lunar day's 162 flashes. At the coarse box's rate per unit area that gave
+about a three-in-four chance of a storm that flashes. Its first two days hold
+under either setting, since they made no flash. Until day 13.0 its storms
+matched the coarse box's (updrafts to 19 m/s, graupel and hail per unit area
+close to the coarse box's) and its field reached 120 kV/m at 34 km. Then its
+deep convection collapsed: from day 13.25 its cloud tops fell from about 66 km
+to 34–48 km, its graupel and hail a hundredfold, and its strongest field to
+17–24 kV/m, while the coarse box's storms kept their tops at 78–88 km and
+flashed 94 times between days 12.75 and 13.84. A box this small holds one or two
+storms, and their outflow and anvils may stabilize all of its air with no
+surroundings to renew it; that is not yet checked. The author stopped it at day
+3.0 of its run (coarse day 13.75), 2026-10-04, after three days without a
+flash. The 2-km lightning stays unmeasured; a box wide enough to hold several
+storms is the way to measure it.
 
 ```sh
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_elec_fine    # after setting fine_from['day']
