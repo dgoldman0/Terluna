@@ -238,3 +238,68 @@ the reflection model.
 OPENBLAS_NUM_THREADS=1 python -m research.studies.sea_appearance.slopes
 python visualization/sea-appearance/slopes.py
 ```
+
+## The surface's reflection
+
+[reflection.py](../../../illumination/water_surface/reflection.py) reflects light
+off a sea of Fresnel facets whose gradients follow a Gaussian with the slope
+covariance above. Smith's (1967) shadowing hides facets from the observer and
+blocks reflected rays on other waves. A small bright source, the Sun or the
+Earth, appears as glitter by Cox and Munk's formula, averaged over its disk. The
+sky reflects through the same kernel integrated over the facets the observer
+sees. A ray sent into the water or onto another wave reflects once more off a
+level surface. Seawater's index follows Quan and Fry (1995).
+
+Checks: the visible facets' weights sum to one, a flat sea mirrors the sky, the
+glitter of an overhead source returns Fresnel's 2%, and the glitter formula agrees
+with direct sampling of the facets within 3%. Polarization, the slopes'
+skewness and peakedness, foam, and multiple reflection beyond the second bounce
+are left out. The renderings will trace multiple reflection on explicit waves.
+
+## The waters' colour
+
+[waters.py](waters.py) takes the biosphere's
+[design guesses](../../../biosphere/living_water/waters.json) of what the seas
+carry through the seawater optics of
+[illumination/water_column](../../../illumination/water_column/README.md) to a
+reflectance in each of the solved sky's channels. Multiplied by the clear-sky
+daylight on the water with the Sun 45° up, it gives the light leaving the water
+([water_colours.json](results/water_colours.json),
+[figure](../../../visualization/sea-appearance/)). This is the water's own colour,
+seen looking down past the reflected sky.
+
+| Water | Chlorophyll | Light leaving the water, under the Moon's sky (Earth's) | Colour | Photosynthetic light falls to 1% at |
+|---|---:|---:|---|---:|
+| Open sea | 0.1 mg/m³ | 63 cd/m² (102) | deep blue | 68 m |
+| Productive coast, mare fines | 2 mg/m³ | 156 cd/m² (241) | olive green | 9.5 m |
+| Productive coast, high-titanium mare fines | 2 mg/m³ | 125 cd/m² (193) | darker olive | 8.9 m |
+| Productive coast, highland fines | 2 mg/m³ | 317 cd/m² (489) | pale green | 12 m |
+| River mouth | 5 mg/m³ | 186 cd/m² (283) | tan | 1.6 m |
+
+**The lunar daylight warms every water's colour.** With the Sun 45° up the
+Moon's clear sky puts 55,490 lux on the water against Earth's 85,200, and 951
+against 1,529 µmol of photosynthetic photons per m² per second. The tall air takes
+more blue out of the sunbeam, so each water's own light comes out greener and
+yellower than under Earth's sky: the open sea at chromaticity (0.186, 0.237)
+against (0.177, 0.202).
+
+**The plankton's month changes the open sea little.** Dusk's chlorophyll, twice
+dawn's by the design guess, turns the open sea slightly greener (y 0.246 against
+0.225) and lifts the 1% depth from 65 to 72 m between dusk and dawn.
+
+**The fines set the coasts.** At the same 3 g/m³, highland fines make a coast
+twice as bright as mare fines and paler; high-titanium mare fines darken it.
+Suspended at lunar gravity, fines settle six times slower than on Earth.
+
+**Boundaries.** Earth's seawater optics and its nadir reflectance model without
+bidirectional effects; the fines' optics through Hapke's isotropic and
+equivalent-slab approximations for grains 4 µm across, from space-weathered Apollo
+soils, which seawater would weather; the contents are design guesses. The
+reflected sky, the glitter and the views across the water come in the results by
+regime.
+
+```sh
+python -m illumination.water_column.fetch_inputs --download
+OPENBLAS_NUM_THREADS=1 python -m research.studies.sea_appearance.waters
+python visualization/sea-appearance/waters.py
+```

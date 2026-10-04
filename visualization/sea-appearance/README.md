@@ -25,3 +25,11 @@ map:
   coasts: the short waves hour by hour, all waves where the wave runs give
   spectra, Earth's clean sea under the same wind, and the hours too calm for short
   waves.
+
+`python visualization/sea-appearance/waters.py` reads the water-colour product:
+
+- `results/water_colours.png`: the remote-sensing reflectance of the biosphere's
+  design-guess waters, and swatches of the light leaving each under the Moon's and
+  Earth's clear daylight with the Sun 45° up, at one exposure on a display with
+  Earth-daylight (D65) white, with their luminance and the depth where
+  photosynthetic light falls to 1%.

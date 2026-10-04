@@ -1,0 +1,49 @@
+{
+ "schema": "terluna.external-inputs/1",
+ "status": "external inputs; fetched and hash-checked by fetch_inputs.py; ignored by Git",
+ "input_directory": "inputs",
+ "retrieved": "2026-10-04",
+ "publication_note": "Published tables for the colour of seawater. The NASA files are United States government works that redistribute the cited measurements; RELAB's spectra are public with a citation request. None is redistributed by this repository. A hash mismatch means the upstream bytes changed and must be reviewed, never silently accepted.",
+ "files": [
+  {
+   "name": "water_spectra.dat",
+   "url": "https://oceandata.sci.gsfc.nasa.gov/manifest/tags/T2020.2/common/water_spectra.dat",
+   "sha256": "ad907267fc9fc04af92a53851f966c787bc03d3dd0773456e05d19fe5639d4a5",
+   "bytes": 61075,
+   "credit": "NASA Ocean Biology Processing Group, OCSSW common data, tag T2020.2: pure-water absorption from Pope and Fry (1997, Appl. Opt. 36, 8710) and Kou, Labrie and Chylek (1993, Appl. Opt. 32, 3531); pure-seawater scattering from Zhang, Hu and He (2009, Opt. Express 17, 5698) at 20 C and 38.4 g/kg. Cite the measurement papers.",
+   "use": "Absorption and scattering of pure seawater"
+  },
+  {
+   "name": "aph_bricaud_1998.txt",
+   "url": "https://oceandata.sci.gsfc.nasa.gov/manifest/tags/T2020.2/common/aph_bricaud_1998.txt",
+   "sha256": "909897937e4c303c98eb93638d090e0abf6c194efa5c11a619d30852223187ba",
+   "bytes": 6678,
+   "credit": "Bricaud, Morel, Babin, Allali and Claustre (1998, J. Geophys. Res. 103, 31033): particulate and phytoplankton absorption as power laws of chlorophyll a from 1,166 spectra, 400-700 nm at 2 nm, as tabulated in NASA OBPG OCSSW common data, tag T2020.2.",
+   "use": "Absorption by phytoplankton and the particles that vary with them"
+  },
+  {
+   "name": "12001Kdata.txt",
+   "url": "https://sites.brown.edu/relab/files/2022/02/12001Kdata.txt",
+   "sha256": "83c91f8b938ffad962a68289f7dc1dc5c7199e5aebe8f7ebfe0b5c11d3020811",
+   "bytes": 31103,
+   "credit": "Apollo 12 soil 12001, Oceanus Procellarum, low-titanium mare. Lunar Soil Characterization Consortium bidirectional reflectance (RELAB, incidence 30 degrees, emission 0) of the <10, 10-20, 20-45 and <45 micrometre fractions, 300-2600 nm at 5 nm, as served by Brown University's RELAB (Taylor et al. 2001, J. Geophys. Res. 106, 27985; Pieters et al. 2000, LPSC 31, 1865; Taylor et al. 2010, J. Geophys. Res. 115, E02002 for the highland soils). Cite the consortium papers and RELAB.",
+   "use": "Mare regolith fines suspended near the coasts"
+  },
+  {
+   "name": "10084Kdata.txt",
+   "url": "https://sites.brown.edu/relab/files/2022/02/10084Kdata.txt",
+   "sha256": "d10dc847becce1fbb095fbae0204069e41db740148041b87409d28c69883a40f",
+   "bytes": 35647,
+   "credit": "Apollo 11 soil 10084, Mare Tranquillitatis, high-titanium mare. Lunar Soil Characterization Consortium bidirectional reflectance (RELAB, incidence 30 degrees, emission 0) of the <10, 10-20, 20-45 and <45 micrometre fractions, 300-2600 nm at 5 nm, as served by Brown University's RELAB (Taylor et al. 2001, J. Geophys. Res. 106, 27985; Pieters et al. 2000, LPSC 31, 1865; Taylor et al. 2010, J. Geophys. Res. 115, E02002 for the highland soils). Cite the consortium papers and RELAB.",
+   "use": "Darker, high-titanium mare fines"
+  },
+  {
+   "name": "62231Kdata.txt",
+   "url": "https://sites.brown.edu/relab/files/2022/02/62231Kdata.txt",
+   "sha256": "8d8bcaf7748281b4792e783de9395ea53bcb2b05904c625ea38f570f9ff01a89",
+   "bytes": 32730,
+   "credit": "Apollo 16 soil 62231, Descartes highlands. Lunar Soil Characterization Consortium bidirectional reflectance (RELAB, incidence 30 degrees, emission 0) of the <10, 10-20, 20-45 and <45 micrometre fractions, 300-2600 nm at 5 nm, as served by Brown University's RELAB (Taylor et al. 2001, J. Geophys. Res. 106, 27985; Pieters et al. 2000, LPSC 31, 1865; Taylor et al. 2010, J. Geophys. Res. 115, E02002 for the highland soils). Cite the consortium papers and RELAB.",
+   "use": "Highland regolith fines"
+  }
+ ]
+}
