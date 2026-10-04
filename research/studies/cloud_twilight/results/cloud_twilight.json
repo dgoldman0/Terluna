@@ -4,20 +4,33 @@
     "lane": "research",
     "runner": "research/studies/cloud_twilight/run.py",
     "files": {
-      "research/studies/cloud_twilight/run.py": "2c805b45e611665b21b62d505f2e44615450b6b265aa33765e81ca98d493a453",
+      "research/studies/cloud_twilight/run.py": "9ff861292b3bb2b8feb80742afdbe6bcfce87e1b3b8c2a1051111fb20903360e",
       "research/studies/cloud_twilight/sources.json": "3f0115bd393ac67496d215c799f2532fa8d7e69529e574ca2e17d33ee40aaa49",
       "illumination/cloud_light/model.py": "7bb800ee4695c58856acd23125b8cee4579947106dd4c81b2a2411f46af009d3",
       "illumination/surface_light/model.py": "48749d6652dbd7f4d2b9744d8a28e3f2cb3b2e6c9ca01c5e75a310a62e1a34ca",
       "illumination/sky/atmospheres.py": "69065d459a41ef20e912cb22b9c611844e393da8c93ab8786cfa1e2149af3aca",
       "illumination/sky/colour_matching.py": "485f65f4eccac4c91b1d2143d0c4c976ebe9ee74c6db88a4c41f5301aee031e7",
       "research/studies/optical_comfort/angular.py": "bf977100dca3a8f764abce5108756f22218d46c14959c6214cc6d74f4af80c66",
-      "shared/constants.py": "bee345e928a5e8ebc367a95057e4de0129a4603758f20fb0495f37ace2e146ca",
-      "shared/constants.json": "bdcfa12192c7ba164b339aa3468a8eecfd2fc98283a83b8931e8a52ec7bbfb83",
       "atmosphere/middle_atmosphere/equilibrium.py": "265bc854a481936e739d9fc4b6a2a6e34986f35740ee89bd8793f7c8f3590f4f",
       "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f",
       "atmosphere/radiative_convective/optics.py": "e4167418b3c759ff2603044ba0abec2848e185a639fae5a41543ec170dbdeabb",
       "atmosphere/radiative_convective/spectroscopy.py": "42df50591383ce4eb4769511de0654c8255fc08c2bf6abbaaf1ec00b14d98efc",
       "atmosphere/radiative_convective/climate.py": "a74bf6fada62a9dc26e2e9edecc2c469d4f46fc3ff0eb1529fb43c5cfc46545f"
+    },
+    "constants": {
+      "AU": 149597870700.0,
+      "AVOGADRO": 6.02214076e+23,
+      "BOLTZMANN": 1.380649e-23,
+      "EARTH_GM": 398600441800000.0,
+      "EARTH_RADIUS": 6371000.0,
+      "GAS_CONSTANT": 8.31446261815324,
+      "MOON_GM": 4902800118000.0,
+      "MOON_RADIUS": 1737400.0,
+      "PLANCK": 6.62607015e-34,
+      "SOLAR_CONSTANT": 1361.0,
+      "SPEED_OF_LIGHT": 299792458.0,
+      "SUN_RADIUS": 695700000.0,
+      "SYNODIC_MONTH_DAYS": 29.53059
     },
     "inputs": {
       "climate/results/crm/ring_ring_equator.json": {

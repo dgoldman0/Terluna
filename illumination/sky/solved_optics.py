@@ -21,6 +21,7 @@ from atmosphere.middle_atmosphere import photolysis as ph
 from atmosphere.radiative_convective import optics, shortwave as sw
 from illumination.cloud_light.model import MolecularColumn
 from illumination.sky.colour_matching import cmf
+from shared.provenance import constants_used
 from illumination.surface_light import model as surface
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -36,8 +37,7 @@ def inputs(column):
     files = [
         'illumination/sky/solved_optics.py', 'illumination/sky/colour_matching.py',
         'illumination/sky/atmospheres.py', 'illumination/cloud_light/model.py',
-        'illumination/surface_light/model.py', 'shared/constants.json', 'shared/constants.py',
-        'shared/external_inputs.py',
+        'illumination/surface_light/model.py', 'shared/external_inputs.py',
         'atmosphere/radiative_convective/optics.py', 'atmosphere/radiative_convective/spectroscopy.py',
         'atmosphere/radiative_convective/shortwave.py', 'atmosphere/radiative_convective/thermodynamics.py',
         'atmosphere/radiative_convective/climate.py', 'atmosphere/radiative_convective/longwave.py',
@@ -62,7 +62,7 @@ def inputs(column):
                 if sha != record['sha256'] or p.stat().st_size != record['bytes']:
                     raise ValueError(f'Spectral input checksum differs: {p}')
                 external[str(p.relative_to(ROOT))] = sha
-    return dict(files={f: digest(ROOT / f) for f in files}, external_inputs=external,
+    return dict(files={f: digest(ROOT / f) for f in files}, constants=constants_used(files), external_inputs=external,
                 software=dict(python=platform.python_version(),numpy=np.__version__,scipy=scipy.__version__))
 
 

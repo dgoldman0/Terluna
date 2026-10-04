@@ -2,16 +2,29 @@
   "schema": "terluna.research.cloud-evening-appearance/1",
   "producer": {
     "file": "research/studies/cloud_twilight/appearance.py",
-    "sha256": "2e25dc71b943352d495a6d942c4be6998ffc3bd2cbe043dd32a4b456b6864e0b",
+    "sha256": "bdce19f3b4f6a0503e63d9974a412e8e9d46d35ae3fec7b5e931dde5adca545d",
     "inputs": {
-      "research/studies/cloud_twilight/results/evening_scenes_selected.json": "92308273ca19ed509ff9df63d23b62db7902e676dcf2e062c829846ce3a8b780",
-      "research/studies/cloud_twilight/results/evening_scenes_history.json": "be7531ae090710e8daa8a78f3cbfbfae4e50491be82ca57cb4e2929743c6e9dc",
-      "research/studies/cloud_twilight/results/evening_scenes_sensitivity.json": "ec862abb0bfd564f336a2ffa1657f971eb4c162196b9873b54a3eedf2a746ca4",
-      "research/studies/cloud_twilight/results/evening_scenes_deep.json": "aafa2e11e9734ce3a4baa6c2a196377629099682f5a2b43b168b7f320d44b5a4",
+      "research/studies/cloud_twilight/results/evening_scenes_selected.json": "df2363a965ae2cba47fda100330958865fd41cc2d2e12eb039f93e300ab1de01",
+      "research/studies/cloud_twilight/results/evening_scenes_history.json": "78265644a6f16c455ae1a4feb6a3648f08334a8b73d9ed44edfcb63c371af50a",
+      "research/studies/cloud_twilight/results/evening_scenes_sensitivity.json": "5dcd7c38e453adc3abb3cf5b2e616634e6cac3d67ace830b7d92d1f9a47bd26a",
+      "research/studies/cloud_twilight/results/evening_scenes_deep.json": "c3d5f9de8a48112adf95349e3d1815ba9924022c7fcaf36fa31b3949a4b43878",
       "illumination/cloud_light/earthlight.py": "d7dfdcf3e099868d29e8dd44312d3b7c2cbedb5cbc162b755a7b53f71c836a92",
       "illumination/ephemeris.py": "831a0127bf8cd283666cbc740020a8dfc021226e94cb294f7bf14181b1bc0e76",
-      "shared/constants.json": "63a94123983be8ff627e7556d2b63b0c835044b5ee81f924f81e65d8a264e006",
-      "illumination/sky/results/solved_sky.json": "6fa7583100f5a364b53b22949caef21a4544387a231d009640fd12b1cefe6ef3"
+      "illumination/sky/results/solved_sky.json": "a94333cd71a83169df57796cf199b06ec4efff12b1d1f2f9f9ac07bec01f7c6a"
+    },
+    "constants": {
+      "ANOMALISTIC_MONTH_DAYS": 27.55455,
+      "DRACONIC_MONTH_DAYS": 27.212221,
+      "EARTH_GEOMETRIC_ALBEDO": 0.367,
+      "EARTH_MOON_DISTANCE": 384400000.0,
+      "EARTH_OBLIQUITY_DEG": 23.4393,
+      "EARTH_RADIUS": 6371000.0,
+      "EARTH_SIDEREAL_DAY_S": 86164.0905,
+      "LIBRATION_LATITUDE_DEG": 6.7,
+      "LIBRATION_LONGITUDE_DEG": 7.9,
+      "MOON_RADIUS": 1737400.0,
+      "SIDEREAL_MONTH_DAYS": 27.321661,
+      "SYNODIC_MONTH_DAYS": 29.53059
     }
   },
   "evidence": "Radiance, colour and contrast from the computed cloud scenes, on sampled second-cycle CM1 fields.",
@@ -171,7 +184,7 @@
       "clear_mc_relative_error": 0.003101653821644401,
       "source": {
         "path": "research/runs/optical_comfort/evening/scenes/ring_equator_736_260_w200_g0.8_h1.6_16x32_1024.npz",
-        "sha256": "ce3de46eb03965495a54277046bcf3e655d50bfcb84c36b67a6c07dcbfd6df85"
+        "sha256": "3484a0b78875e186bcda55edb65376f235629a98bd5b2c18fb44b8dd3e8a2974"
       },
       "earthlight_context": {
         "earth_elevation_deg": -56.002199999999995,
@@ -355,7 +368,7 @@
       "clear_mc_relative_error": 0.0013620740498447859,
       "source": {
         "path": "research/runs/optical_comfort/evening/scenes/ring_equator_1716_375_w200_g0.8_h1.6_16x32_1024.npz",
-        "sha256": "90a05e6fbb1ef543d01fe8d112eeceeb110d97e0f7d04c6c5e39a8b1c8c4faec"
+        "sha256": "e0e177851e016aa5719248d572b7a39b5a817525b20c67400627fd38814318e1"
       },
       "earthlight_context": {
         "earth_elevation_deg": 70.27530000000003,
@@ -539,7 +552,7 @@
       "clear_mc_relative_error": -0.006474765931925641,
       "source": {
         "path": "research/runs/optical_comfort/evening/scenes/ring_equator_380_319_w200_g0.8_h1.6_16x32_1024.npz",
-        "sha256": "101392ae0fac921d180004cb46a0c3237176f8064defd814f95026c198adcf87"
+        "sha256": "cfbf5229f8b7fe713dc9530c1f056184d6ce12986d76126f16128ab70adf7fde"
       },
       "earthlight_context": {
         "earth_elevation_deg": 14.570499999999996,
@@ -723,7 +736,7 @@
       "clear_mc_relative_error": 0.002652292107520271,
       "source": {
         "path": "research/runs/optical_comfort/evening/scenes/ring_equator_67_350_w200_g0.8_h1.6_16x32_1024.npz",
-        "sha256": "d04b39f9c4d573d570314cb9d60a0e5977c463b3fe6aa0dde823cad56c393fb4"
+        "sha256": "afaebd5a48331786ed1ac2f3dd98935ceef1dd4232456e9643dd1c8bc5cb2729"
       },
       "earthlight_context": {
         "earth_elevation_deg": 76.61890000000001,
@@ -884,7 +897,7 @@
       "clear_mc_relative_error": 0.00593510288891852,
       "source": {
         "path": "research/runs/optical_comfort/evening/scenes/ring_70_45e_1811_328_w200_g0.8_h1.6_16x32_1024.npz",
-        "sha256": "e638155cbb0697afd70ad7d1f8d09e406b66ff0964c1d7a4363429042cfe8d79"
+        "sha256": "9174d5b1738e66c5b2ab4fa8e5e54310c937be59740c07cc7666eb11fbf4ffb2"
       },
       "earthlight_context": {
         "earth_elevation_deg": 45.29890216313752,
@@ -1068,7 +1081,7 @@
       "clear_mc_relative_error": 0.005970895299498791,
       "source": {
         "path": "research/runs/optical_comfort/evening/scenes/ring_70_135e_176_258_w200_g0.8_h1.6_16x32_1024.npz",
-        "sha256": "24d3af57574a314a9c366a7a64f22cc93f05509b51ac55aa26fe941dcfa4b9ff"
+        "sha256": "ac691dc3e53b8776e74d9cd3ba72109d854b93ac206aaee984b5547d284089c1"
       },
       "earthlight_context": {
         "earth_elevation_deg": -45.888321159107704,
@@ -1254,7 +1267,7 @@
       "clear_mc_relative_error": 0.0027395635762621495,
       "source": {
         "path": "research/runs/optical_comfort/evening/scenes/ring_equator_1716_371_w200_g0.8_h1.6_16x32_1024.npz",
-        "sha256": "39f743913d07a5439cea58a80e42d5dd498427f34b9e023c7b476a49e3f822fd"
+        "sha256": "bb1ba54c5da7df983ef7bbcf489c9041a5c4add240c8fbfac3be920c5cb4e38f"
       },
       "earthlight_context": {
         "earth_elevation_deg": 70.27530000000003,
@@ -1438,7 +1451,7 @@
       "clear_mc_relative_error": 0.0013620740498447859,
       "source": {
         "path": "research/runs/optical_comfort/evening/scenes/ring_equator_1716_375_w200_g0.8_h1.6_16x32_1024.npz",
-        "sha256": "90a05e6fbb1ef543d01fe8d112eeceeb110d97e0f7d04c6c5e39a8b1c8c4faec"
+        "sha256": "e0e177851e016aa5719248d572b7a39b5a817525b20c67400627fd38814318e1"
       },
       "earthlight_context": {
         "earth_elevation_deg": 70.27530000000003,
@@ -1622,7 +1635,7 @@
       "clear_mc_relative_error": -0.002040149321945628,
       "source": {
         "path": "research/runs/optical_comfort/evening/scenes/ring_equator_1716_379_w200_g0.8_h1.6_16x32_1024.npz",
-        "sha256": "a6be0ccb3e456c7fa31c24598b09c085f29a51986e36c36c760457e25a630049"
+        "sha256": "5733cd2cd8ef560f7eda46c823673deaefb8e2f38fdd654464401a2767f9d9d5"
       },
       "earthlight_context": {
         "earth_elevation_deg": 70.27530000000003,
@@ -1806,7 +1819,7 @@
       "clear_mc_relative_error": -0.012068688293735641,
       "source": {
         "path": "research/runs/optical_comfort/evening/scenes/ring_equator_1716_383_w200_g0.8_h1.6_16x32_1024.npz",
-        "sha256": "d0b051031671d28d27770abe6fb2dd1e0d204e6ffa57b65baa2d4d78dbad6f51"
+        "sha256": "99c1185f051802ca872f3d0819fd501f96d5ae1f5271cac5c1edfd8bfd6c6c81"
       },
       "earthlight_context": {
         "earth_elevation_deg": 70.27530000000003,
@@ -1990,7 +2003,7 @@
       "clear_mc_relative_error": -0.030635301311869423,
       "source": {
         "path": "research/runs/optical_comfort/evening/scenes/ring_equator_1716_387_w200_g0.8_h1.6_16x32_1024.npz",
-        "sha256": "2cc751a28162a40cb58851138f70981c10bdda490dfa8091e8f967dceda4952f"
+        "sha256": "959d8a49eb6d9f55d09e718062e5d3f7a2c634d03c3af1e7763d8529c026c35a"
       },
       "earthlight_context": {
         "earth_elevation_deg": 70.27530000000003,
@@ -2174,7 +2187,7 @@
       "clear_mc_relative_error": -0.07927904279233033,
       "source": {
         "path": "research/runs/optical_comfort/evening/scenes/ring_equator_1716_391_w200_g0.8_h1.6_16x32_1024.npz",
-        "sha256": "2f6cd6e2179128c30342517d4a2e1a71e1d741c5a3bc2d7e7415c0d096f83c49"
+        "sha256": "4e80494b521f0447e07f9ea94dfb9bf721e3e4b3301d48eb145f75f3abfc96dd"
       },
       "earthlight_context": {
         "earth_elevation_deg": 70.27530000000003,
@@ -2358,7 +2371,7 @@
       "clear_mc_relative_error": -0.1814706302250022,
       "source": {
         "path": "research/runs/optical_comfort/evening/scenes/ring_equator_1716_395_w200_g0.8_h1.6_16x32_1024.npz",
-        "sha256": "0b53922525ef562e075471c3788737af5ce55c4dec225853be459f2e4cbb148f"
+        "sha256": "b2e5d61a0ae7ea4a6ced1e277df13398e644dc9a09ae3913227f2fba26226fb8"
       },
       "earthlight_context": {
         "earth_elevation_deg": 70.27530000000003,
@@ -2544,7 +2557,7 @@
       "clear_mc_relative_error": 0.008847313349525265,
       "source": {
         "path": "research/runs/optical_comfort/evening/scenes/ring_equator_67_350_w100_g0.8_h1.6_12x24_512.npz",
-        "sha256": "5dcf0caeb4202f0cf1fd8376e95c9dda61115d5b7ba30fe198ca0d87a3c4e0bf"
+        "sha256": "a7d7add400f2c8748b88b24731c73eb33587f60ad8bd25e223f4e4df82f8e037"
       },
       "earthlight_context": {
         "earth_elevation_deg": 76.61890000000001,
@@ -2705,7 +2718,7 @@
       "clear_mc_relative_error": 0.008846708677701542,
       "source": {
         "path": "research/runs/optical_comfort/evening/scenes/ring_equator_67_350_w400_g0.8_h1.6_12x24_512.npz",
-        "sha256": "614b440a7403112d61c577b22aff63dab754d4481038b8f09a98066d5ed9cfc2"
+        "sha256": "e4844b4b3fe16d8f8fa3726790f5cc3ed4cd34356194ddaab288151c2444d177"
       },
       "earthlight_context": {
         "earth_elevation_deg": 76.61890000000001,
@@ -2889,7 +2902,7 @@
       "clear_mc_relative_error": 0.008847009456863564,
       "source": {
         "path": "research/runs/optical_comfort/evening/scenes/ring_equator_67_350_w200_g0.7_h1.6_12x24_512.npz",
-        "sha256": "d22ee973e2c1bd96d9d6f87abf9f08bb35f561ac54b300630f2841e00c8159c4"
+        "sha256": "a8b903c358bdf378b5c26779f7492e247c5289df349d38fb78310a768003a855"
       },
       "earthlight_context": {
         "earth_elevation_deg": 76.61890000000001,
@@ -3073,7 +3086,7 @@
       "clear_mc_relative_error": 0.008847009456863564,
       "source": {
         "path": "research/runs/optical_comfort/evening/scenes/ring_equator_67_350_w200_g0.9_h1.6_12x24_512.npz",
-        "sha256": "58e655a6c05063ea898323489f08533e1477ccc9f1f8500ef98dfc9f0f977ffb"
+        "sha256": "693b8769663dc1c1237e93bd7a1d3d1597563b349aa5b1b3d28a27cd4dd2f6dc"
       },
       "earthlight_context": {
         "earth_elevation_deg": 76.61890000000001,
@@ -3257,7 +3270,7 @@
       "clear_mc_relative_error": 2.220446049250313e-16,
       "source": {
         "path": "research/runs/optical_comfort/evening/scenes/ring_equator_67_350_w200_g0.8_h6000_12x24_512.npz",
-        "sha256": "d464e2242009819c315c233f195c6a72e3861393a81b0bd7e9f5468181b3eda1"
+        "sha256": "85dbf136e22e55b4d1e0d2411d09afa098386c13b0ac6ecca85609b491988df2"
       },
       "earthlight_context": {
         "earth_elevation_deg": 76.61890000000001,
@@ -3443,7 +3456,7 @@
       "clear_mc_relative_error": 0.04407923318301887,
       "source": {
         "path": "research/runs/optical_comfort/evening/scenes/deep_ring_equator_1245_446_detail.npz",
-        "sha256": "05a7e78b9b7fdea2f8e617f51bb80db7343585bed12f5c950e7f81f0153b24ba"
+        "sha256": "0a77c7308a8e596c8876d942ac815475edec8bb7e4d9de2612a923b4d7035e75"
       },
       "earthlight_context": {
         "earth_elevation_deg": -23.094700000000007,

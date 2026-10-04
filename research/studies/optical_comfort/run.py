@@ -16,6 +16,7 @@ from pathlib import Path
 import numpy as np
 
 from shared.constants import AU, SUN_RADIUS, SYNODIC_MONTH_DAYS
+from shared.provenance import constants_used
 
 ROOT = Path(__file__).resolve().parents[3]
 HERE = Path(__file__).resolve().parent
@@ -311,11 +312,12 @@ def interval_hours(low_deg, high_deg, latitude_deg=0.0, period_hours=SYNODIC_MON
 
 def build(data, input_path=INPUT):
     rows = surface_rows(data)
-    sources = [Path(__file__), HERE / 'sources.json', ROOT / 'shared/constants.json', ROOT / 'shared/constants.py']
+    sources = [Path(__file__), HERE / 'sources.json']
     return dict(
         schema=SCHEMA,
         producer=dict(lane='research', runner='research/studies/optical_comfort/run.py',
                       files={str(p.relative_to(ROOT)): digest(p) for p in sources},
+                      constants=constants_used(sources),
                       inputs={str(input_path.relative_to(ROOT)) if input_path.is_relative_to(ROOT) else str(input_path):
                               dict(schema=data['schema'], sha256=digest(input_path))}),
         evidence='Conditional clear-sky screening from committed illuminance summaries. '

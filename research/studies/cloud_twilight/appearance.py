@@ -10,6 +10,7 @@ from climate.crm.cloud_columns import sha256
 from illumination.cloud_light.volume import cloud_depth
 from illumination.cloud_light.earthlight import context as earthlight_context
 from shared.constants import MOON_RADIUS
+from shared.provenance import constants_changed, constants_used
 
 ROOT=Path(__file__).resolve().parents[3]
 HERE=Path(__file__).resolve().parent
@@ -112,6 +113,8 @@ def main():
     for file,expected in sky['producer']['files'].items():
         if sha256(ROOT/file)!=expected:
             raise ValueError(f'Molecular dependency changed: {file}')
+    if constants_changed(sky['producer'].get('constants')):
+        raise ValueError('A shared constant the molecular sky used has changed')
     for mode in ('selected','history','sensitivity','deep'):
         path=HERE/'results'/f'evening_scenes_{mode}.json'
         if not path.exists():
@@ -119,9 +122,11 @@ def main():
         inputs[str(path.relative_to(ROOT))]=sha256(path)
         product=json.loads(path.read_text())
         products[mode]=[analyse(s) for s in product['scenes']]
-    for file in ('illumination/cloud_light/earthlight.py','illumination/ephemeris.py','shared/constants.json','illumination/sky/results/solved_sky.json'):
+    for file in ('illumination/cloud_light/earthlight.py','illumination/ephemeris.py','illumination/sky/results/solved_sky.json'):
         inputs[file]=sha256(ROOT/file)
-    result=dict(schema=SCHEMA,producer=dict(file=str(Path(__file__).relative_to(ROOT)),sha256=sha256(__file__),inputs=inputs),
+    used=constants_used([Path(__file__),ROOT/'illumination/cloud_light/earthlight.py',ROOT/'illumination/ephemeris.py'])
+    result=dict(schema=SCHEMA,producer=dict(file=str(Path(__file__).relative_to(ROOT)),sha256=sha256(__file__),inputs=inputs,
+                                            constants=used),
         evidence='Radiance, colour and contrast from the computed cloud scenes, on sampled second-cycle CM1 fields.',
         reading_rule='Contrast is cloudy radiance divided by the same clear sightline minus one. Angular patches '
                      'are fixed geometrically or by line-of-sight cloud optical depth, independently of sampled brightness. '

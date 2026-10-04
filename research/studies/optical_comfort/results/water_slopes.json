@@ -4,11 +4,14 @@
     "lane": "research",
     "runner": "research/studies/optical_comfort/water_slopes.py",
     "files": {
-      "research/studies/optical_comfort/water_slopes.py": "6bed6ac4f610dce30ce05f25b207bf8c5deaacedfa585176cc104a30f4716997",
+      "research/studies/optical_comfort/water_slopes.py": "a29f5b5771974b40fcb1967773e450319a01310584bdd9742b3d1dd2cd715bbd",
       "research/studies/optical_comfort/local_inputs.json": "a0ea7863a7bb3b6c6df3146c811297fcf158ebfde73c6b0c48a25c1b2b90f01f",
       "research/studies/optical_comfort/local_sources.json": "f25a7b1e03037cd22993103ed5c0462268cb73aca44b8550f26cddc22e5b2698",
-      "illumination/water_surface/model.py": "9e4ebbabf5e35017baa18a3b048666a1b1da263301532505f41e520b495aee77",
-      "shared/constants.json": "bdcfa12192c7ba164b339aa3468a8eecfd2fc98283a83b8931e8a52ec7bbfb83"
+      "illumination/water_surface/model.py": "9e4ebbabf5e35017baa18a3b048666a1b1da263301532505f41e520b495aee77"
+    },
+    "constants": {
+      "MOON_SURFACE_GRAVITY": 1.6242188765608128,
+      "SYNODIC_MONTH_DAYS": 29.53059
     },
     "input": {
       "file": "research/runs/waves/shore_history/coast_s4_dt900_0_1419/product.json",

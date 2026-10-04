@@ -7,7 +7,7 @@
       "research/studies/optical_comfort/directional.py": "44ff2394778ba8c7d09c5417d08910c102b8535f38ce14a6e1cdba34a76e4be9",
       "research/studies/optical_comfort/angular.py": "bf977100dca3a8f764abce5108756f22218d46c14959c6214cc6d74f4af80c66",
       "research/studies/optical_comfort/scenes.py": "d3906d9b956929556974cea43b27647b3b04b1c32d6b9806f435fd8934992152",
-      "research/studies/optical_comfort/run.py": "5982c4f9b5314e25830b4b90b957fe1a1b657b06bfee685c93e21416eb0d5da9",
+      "research/studies/optical_comfort/run.py": "0ed18f83738475265c6aea01875e0705b17af96e8696b199dd7f1ae10189d7e9",
       "research/studies/optical_comfort/sources.json": "c56ada107eb54fac44c7f6c75df221b79e0689cce4b2d95d3941000a7be1e7f2"
     },
     "input_interpretation_files": {
@@ -27,8 +27,8 @@
       }
     },
     "runtime": {
-      "numpy": "2.3.5",
-      "scipy": "1.17.0"
+      "numpy": "2.3.3",
+      "scipy": "1.16.2"
     }
   },
   "evidence": "Angular-shape transfer and prescribed finite-scene transport. The packed atlas computes an unfiltered exponential proxy atmosphere over albedo 0.1. Its normalized sky shape is combined with current solved-column direct and diffuse photopic fluxes, separately for each world. This is a hybrid sensitivity, not a shielded spherical atmosphere solution. Neutral Lambertian local scenes include occlusion and repeated diffuse reflection. Task luminance and contrast are optical signals, without a psychophysical visibility threshold.",

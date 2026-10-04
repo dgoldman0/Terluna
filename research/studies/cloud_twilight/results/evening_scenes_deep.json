@@ -4,7 +4,7 @@
   "producer": {
     "file": "research/studies/cloud_twilight/deep_scene.py",
     "sha256": "02413db6069528efe9ef1f24e79cb2ae858bbaca21aa0b855e7d6a80a1aa3d25",
-    "deep_input_sha256": "ea45c38f1c147b38824f0d928f1dbdb7aba9ee721b8273512074acc0d9c73445"
+    "deep_input_sha256": "e0aa34807a5a0c0d3675dbdc3b0233be5b677dd23d30627a97201ba11b57cb81"
   },
   "evidence": "Full spectral cloud transport for the expanded long-range search. A 0.5\u201315 degree view resolves the distant cloud; a separate 0.5\u20135 degree opening probes dark foreground viewing.",
   "scenes": [
@@ -43,16 +43,16 @@
       "recess_standard_error_lux": 0.004130109167097671,
       "recess_geometry": "Black recess with a sky opening 20 degrees wide, elevations 0.5\u20135 degrees, centred on the camera; excluded surrounding directions have zero radiance",
       "sampled_truncated_paths": 0,
-      "seconds": 106.16611898499832,
+      "seconds": 200.0253726899973,
       "negative_Y_pixels": 0,
       "median_pixel_relative_standard_error": 0.2983692156089689,
       "raw_clear_monte_carlo_mean_cd_m2": 76.68307842034915,
       "formal_clear_mean_cd_m2": 73.44565046713002,
       "source": {
         "cloud_section": "research/runs/optical_comfort/evening/sections/deep_ring_equator_1245_446.npz",
-        "cloud_sha256": "e49a2aa464f062d3c77365c9a031ec4536b4b96f3b14985b27e9ae3b7fce9f5b",
-        "molecular_product_sha256": "6fa7583100f5a364b53b22949caef21a4544387a231d009640fd12b1cefe6ef3",
-        "molecular_fields_sha256": "c9c5c2f3618b01ffb20c360f07f1ae19663a6c3546433f0ab0560ce4d6c79c57"
+        "cloud_sha256": "e90b65c148a521168adeacce7e49ae77161dd167c8fdf78a1c4eefcb7da156e6",
+        "molecular_product_sha256": "a94333cd71a83169df57796cf199b06ec4efff12b1d1f2f9f9ac07bec01f7c6a",
+        "molecular_fields_sha256": "d6d7fef07d99fedf32d1a54f63e345ff245bf3ee8ec29a33d498fd621bf41273"
       },
       "producer": {
         "illumination/cloud_light/render.py": "8863722ce32af90fe8524b3f864e15289a8f55f8df9d9ce66e6da53c3d6e75b3",
@@ -89,8 +89,8 @@
       },
       "delta_hours": 0,
       "section": {
-        "path": "/home/kir/Documents/Projects/terluna-optical-comfort/research/runs/optical_comfort/evening/sections/deep_ring_equator_1245_446.npz",
-        "sha256": "e49a2aa464f062d3c77365c9a031ec4536b4b96f3b14985b27e9ae3b7fce9f5b",
+        "path": "/home/kir/Documents/Projects/terluna/research/runs/optical_comfort/evening/sections/deep_ring_equator_1245_446.npz",
+        "sha256": "e90b65c148a521168adeacce7e49ae77161dd167c8fdf78a1c4eefcb7da156e6",
         "schema": "terluna.climate.cloud-section/1",
         "metadata": {
           "schema": "terluna.climate.cloud-section/1",
@@ -106,7 +106,7 @@
           "radius_m": 1737400.0,
           "droplets_cm3": 100.0,
           "source": {
-            "file": "/home/kir/Documents/Projects/terluna-optical-comfort/climate/crm/runs/ring_equator/cm1out_t000446_s.dat",
+            "file": "/home/kir/Documents/Projects/terluna/climate/crm/runs/ring_equator/cm1out_t000446_s.dat",
             "sha256": "a22d6cd54da1cc276aa7f052b241bbe4ff09933ad1e14188f0579864bcaef76a",
             "case_sha256": "66979fb6a66703ee7edc3a8144f924e1b377a5e0fd83378c62ca88a96908b748"
           },
@@ -125,7 +125,7 @@
       },
       "parent_scene": {
         "path": "research/runs/optical_comfort/evening/scenes/deep_ring_equator_1245_446_overview.npz",
-        "sha256": "e8bf7da4e6625ad9eb28c24be89d26305300c7f8a6f85f303e095fafe64904e2"
+        "sha256": "dea76c943c0a4a8502df4e89de2e77d81a5bb27e3152f78ad6b901f0f7e02cf4"
       },
       "clear_photons_per_pixel": 128,
       "view_elevation_limits_deg": [
@@ -142,7 +142,7 @@
       ],
       "archive": {
         "path": "research/runs/optical_comfort/evening/scenes/deep_ring_equator_1245_446_detail.npz",
-        "sha256": "05a7e78b9b7fdea2f8e617f51bb80db7343585bed12f5c950e7f81f0153b24ba"
+        "sha256": "0a77c7308a8e596c8876d942ac815475edec8bb7e4d9de2612a923b4d7035e75"
       }
     }
   ]

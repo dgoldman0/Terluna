@@ -6,6 +6,7 @@ import numpy as np
 import pytest
 
 from research.studies.optical_comfort import run as m
+from shared.provenance import constants_changed
 
 
 def test_eye_plane_recovers_horizontal_up_and_down_limits():
@@ -160,4 +161,5 @@ def test_stored_scene_products_reproduce_and_provenance_matches():
                     assert actual[field] == value
     for path, digest in stored['producer']['files'].items():
         assert m.digest(m.ROOT / path) == digest
+    assert not constants_changed(stored['producer']['constants'])
     assert stored['producer']['inputs'][str(m.INPUT.relative_to(m.ROOT))]['sha256'] == m.digest(m.INPUT)

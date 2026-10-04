@@ -5,8 +5,8 @@
     "sha256": "0f53f8ed77c71cfff9b40e3ca33b194052c810558872b7e4f28ea9739e4b5c63",
     "inputs": {
       "research/runs/optical_comfort/evening/regional_inputs.json": "d46d7fb8760609a18f8b98a4a79ea6e740a7f169f3373d56180b85ece2b645a9",
-      "illumination/cloud_light/results/evening_context.json": "0986d60860aec5251f0430ff0c2fae6df095720d1f7626aa30fce5c5050c3ee5",
-      "illumination/sky/results/solved_sky.json": "6fa7583100f5a364b53b22949caef21a4544387a231d009640fd12b1cefe6ef3"
+      "illumination/cloud_light/results/evening_context.json": "7d4462d9dde067433a42af828de4d1b368e17bdb88a0c79e9b42e39f57461a2b",
+      "illumination/sky/results/solved_sky.json": "a94333cd71a83169df57796cf199b06ec4efff12b1d1f2f9f9ac07bec01f7c6a"
     }
   },
   "evidence": "One saved post-spin-up lunar cycle on three corrected flat great-circle rings, plus a corrected terrain box. Regional occurrence describes the sampled tracks. Scene selection uses geometric exposure and incident illumination; full cloud appearance is a separate transport product.",
@@ -4959,17 +4959,17 @@
         "illumination/cloud_light/evening_context.py": "da43e0d3aef8e9157c83916fedb78977ec71857beca13cbaffffb0b8844ca29c"
       },
       "inputs": {
-        "research/runs/optical_comfort/spherical/moon_1.2atm_draft.npz": "7a205bd0e12d87477c16cd64f2fe2d4d4153f848ff950afef6eb6233dbc1f334",
-        "research/runs/optical_comfort/spherical/moon_1.2atm_standard.npz": "c9c5c2f3618b01ffb20c360f07f1ae19663a6c3546433f0ab0560ce4d6c79c57"
+        "research/runs/optical_comfort/spherical/moon_1.2atm_draft.npz": "6715d654df8c0f18e56d106c533fdbf0574d6ca116fe83ecd4c31929a8600a5d",
+        "research/runs/optical_comfort/spherical/moon_1.2atm_standard.npz": "d6d7fef07d99fedf32d1a54f63e345ff245bf3ee8ec29a33d498fd621bf41273"
       }
     },
     "source": {
       "path": "illumination/sky/results/solved_sky.json",
-      "sha256": "6fa7583100f5a364b53b22949caef21a4544387a231d009640fd12b1cefe6ef3"
+      "sha256": "a94333cd71a83169df57796cf199b06ec4efff12b1d1f2f9f9ac07bec01f7c6a"
     },
     "archive": {
       "path": "research/runs/optical_comfort/evening/clear_evening.npz",
-      "sha256": "d91d30a4ce4ccb2d9f226ebf232252c8ea2b8d78e014fa5ae96d5365f1b12b1b"
+      "sha256": "e7f64df535e7da853cfbd7fe298a9791a2e6d9a3da0fc32c88fa8256ec270197"
     },
     "assumptions": "Bilinear angular interpolation in sin(elevation), azimuth; linear solar-angle radiance. Solar illumination only. Molecular air and ground albedo 0.1 match solved_sky.json. Deep-twilight values extend the same scattering series; refinement is recorded separately.",
     "sun_deg": [

@@ -7,6 +7,7 @@ import pytest
 from illumination.cloud_light.model import MolecularColumn, atlas_proxy, photopic_weights
 from research.studies.cloud_twilight.run import HERE, ROOT, digest, path_row, read_clouds
 from shared.constants import MOON_RADIUS
+from shared.provenance import constants_changed
 
 
 def test_corrected_cloud_product_and_occurrence():
@@ -40,6 +41,7 @@ def test_committed_result_is_current_and_bounded():
     product = json.loads((HERE / 'results/cloud_twilight.json').read_text())
     for path, expected in product['producer']['files'].items():
         assert digest(ROOT / path) == expected, path
+    assert not constants_changed(product['producer']['constants'])
     for path, record in product['producer']['inputs'].items():
         assert digest(ROOT / path) == record['sha256'], path
     for row in product['overhead'] + product['views']:

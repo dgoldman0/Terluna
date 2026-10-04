@@ -74,3 +74,14 @@ an import. A product is a file whose header states:
 Consumers check the schema and record the hash of the product they used. The
 [column set](../atmosphere/column/export_columns.cjs) is the current example; the
 immersion's [bake step](../immersion/bake/) packs products into runtime assets.
+
+A producer records the shared constants its code reads by name and value
+instead of pinning `constants.json` or `constants.py` by hash:
+[provenance.py](provenance.py) finds them from the `shared.constants` imports of
+the producer's pinned Python files. The product's tests compare the recorded
+values with the current ones, so adding a constant anywhere leaves products
+current while a change to a value one of them used shows up. This follows
+workflow tools such as DVC and Snakemake, which track the parameters a step
+uses. The optical, sky and cloud-twilight producers follow it; the wave, tide
+and coastal products still record the constants file's hash as a record of
+their run, without a test of it.

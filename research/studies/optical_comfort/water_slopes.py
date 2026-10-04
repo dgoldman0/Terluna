@@ -12,6 +12,7 @@ import numpy as np
 
 from illumination.water_surface.model import fraction_above, iter_swan, slope_moments
 from shared.constants import MOON_SURFACE_GRAVITY, SYNODIC_MONTH_DAYS
+from shared.provenance import constants_used
 from .run import HERE, ROOT, digest
 
 SCHEMA = 'terluna.research.optical-water-slopes/1'
@@ -111,10 +112,9 @@ def build():
     history.write_text(json.dumps(dict(schema=SCHEMA, reading_rule='One row per hourly spectrum and station; '
                                        'frequency integration uses four subdivisions per native interval.', rows=rows),
                                       separators=(',', ':'), allow_nan=False) + '\n')
-    files = [Path(__file__), MANIFEST, HERE / 'local_sources.json', ROOT / 'illumination/water_surface/model.py',
-             ROOT / 'shared/constants.json']
+    files = [Path(__file__), MANIFEST, HERE / 'local_sources.json', ROOT / 'illumination/water_surface/model.py']
     return dict(schema=SCHEMA, producer=dict(lane='research', runner=str(Path(__file__).relative_to(ROOT)),
-                files={str(p.relative_to(ROOT)): digest(p) for p in files},
+                files={str(p.relative_to(ROOT)): digest(p) for p in files}, constants=constants_used(files),
                 input=dict(file=str((SOURCE / 'product.json').relative_to(ROOT)), schema=source['schema'],
                            sha256=admitted['product_sha256'], verified_files=hashes,
                            branch='research/lunar-seas', source_commit=admitted['source_commit']),

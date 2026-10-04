@@ -4,7 +4,7 @@
   "producer": {
     "file": "research/studies/cloud_twilight/scenes.py",
     "sha256": "92eeb19af46393b76da5f4551f05c333547e3238ed982751666174da7b35c541",
-    "regional_input_sha256": "8c26a77957ddea186a86a73ee2ea3bcb370d1a6d46a1bc9b066c41f098385c49"
+    "regional_input_sha256": "70ed3ce009c291503fc4f01bc116bc2f50e765155c93074584f2184774dedc9a"
   },
   "evidence": "Computed optical scenarios on saved evolving cloud fields. Cross-ring width and particle phase functions are sensitivities; the sampled regional occurrence and the rendered scenes have separate denominators.",
   "scenes": [
@@ -43,16 +43,16 @@
       "recess_standard_error_lux": 2.435108501240507,
       "recess_geometry": "Black recess with a sky opening 20 degrees wide, elevations 5\u201325 degrees, centred on the camera; excluded sky/terrain surfaces have zero radiance",
       "sampled_truncated_paths": 0,
-      "seconds": 381.11649635000504,
+      "seconds": 272.177434259007,
       "negative_Y_pixels": 0,
       "median_pixel_relative_standard_error": 0.14545175483812559,
       "raw_clear_monte_carlo_mean_cd_m2": 1255.3598825255642,
       "formal_clear_mean_cd_m2": 1251.9301403131376,
       "source": {
         "cloud_section": "research/runs/optical_comfort/evening/sections/ring_equator_1716_371.npz",
-        "cloud_sha256": "21232127fc4de0f2faa807dd72356f0cd02c0f9db8090485bea50f5deeab18ee",
-        "molecular_product_sha256": "6fa7583100f5a364b53b22949caef21a4544387a231d009640fd12b1cefe6ef3",
-        "molecular_fields_sha256": "c9c5c2f3618b01ffb20c360f07f1ae19663a6c3546433f0ab0560ce4d6c79c57"
+        "cloud_sha256": "65912f8ddcf226c89b2f243661ebaf3551f6500b0d0a9d8d63e8bc87b055854b",
+        "molecular_product_sha256": "a94333cd71a83169df57796cf199b06ec4efff12b1d1f2f9f9ac07bec01f7c6a",
+        "molecular_fields_sha256": "d6d7fef07d99fedf32d1a54f63e345ff245bf3ee8ec29a33d498fd621bf41273"
       },
       "producer": {
         "illumination/cloud_light/render.py": "8863722ce32af90fe8524b3f864e15289a8f55f8df9d9ce66e6da53c3d6e75b3",
@@ -64,7 +64,7 @@
       "reading_rule": "XYZ uses the photopic scale, Y in cd m^-2. Independent photon blocks estimate absolute cloudy radiance and sampling uncertainty; paired clear histories check the formal clear solution at sea level. The scene uses the common solved molecular column and Lambertian ground albedo 0.1. Earthlight, aerosols, terrain beyond spherical ground and ice optical features require additional inputs. RGB display mapping belongs to visualization.",
       "archive": {
         "path": "research/runs/optical_comfort/evening/scenes/ring_equator_1716_371_w200_g0.8_h1.6_16x32_1024.npz",
-        "sha256": "39f743913d07a5439cea58a80e42d5dd498427f34b9e023c7b476a49e3f822fd"
+        "sha256": "bb1ba54c5da7df983ef7bbcf489c9041a5c4add240c8fbfac3be920c5cb4e38f"
       },
       "selection": "largest land-observer source score at Sun depression 10\u201320\u00b0",
       "initial_pick": {
@@ -92,8 +92,8 @@
       },
       "delta_hours": -12,
       "section": {
-        "path": "/home/kir/Documents/Projects/terluna-optical-comfort/research/runs/optical_comfort/evening/sections/ring_equator_1716_371.npz",
-        "sha256": "21232127fc4de0f2faa807dd72356f0cd02c0f9db8090485bea50f5deeab18ee",
+        "path": "/home/kir/Documents/Projects/terluna/research/runs/optical_comfort/evening/sections/ring_equator_1716_371.npz",
+        "sha256": "65912f8ddcf226c89b2f243661ebaf3551f6500b0d0a9d8d63e8bc87b055854b",
         "schema": "terluna.climate.cloud-section/1",
         "metadata": {
           "schema": "terluna.climate.cloud-section/1",
@@ -109,7 +109,7 @@
           "radius_m": 1737400.0,
           "droplets_cm3": 100.0,
           "source": {
-            "file": "/home/kir/Documents/Projects/terluna-optical-comfort/climate/crm/runs/ring_equator/cm1out_t000371_s.dat",
+            "file": "/home/kir/Documents/Projects/terluna/climate/crm/runs/ring_equator/cm1out_t000371_s.dat",
             "sha256": "f146272dc6869ebac9dbaba2e58676abebbd046d516f9c34174da1b15329fad9",
             "case_sha256": "66979fb6a66703ee7edc3a8144f924e1b377a5e0fd83378c62ca88a96908b748"
           },
@@ -162,16 +162,16 @@
       "recess_standard_error_lux": 1.2221961017408558,
       "recess_geometry": "Black recess with a sky opening 20 degrees wide, elevations 5\u201325 degrees, centred on the camera; excluded sky/terrain surfaces have zero radiance",
       "sampled_truncated_paths": 0,
-      "seconds": 315.7741515039961,
+      "seconds": 201.83564025399392,
       "negative_Y_pixels": 0,
       "median_pixel_relative_standard_error": 0.1984262923854611,
       "raw_clear_monte_carlo_mean_cd_m2": 570.8448473562454,
       "formal_clear_mean_cd_m2": 570.0683720200796,
       "source": {
         "cloud_section": "research/runs/optical_comfort/evening/sections/ring_equator_1716_375.npz",
-        "cloud_sha256": "fe22f17bd6a3acd527b4a822188873fe951e7ebb6f908e89c7abe3c08d6089aa",
-        "molecular_product_sha256": "6fa7583100f5a364b53b22949caef21a4544387a231d009640fd12b1cefe6ef3",
-        "molecular_fields_sha256": "c9c5c2f3618b01ffb20c360f07f1ae19663a6c3546433f0ab0560ce4d6c79c57"
+        "cloud_sha256": "a2456e6adee2f5033686a4e60d180da68c8b50d5410f54dc4f13dc42b27658e6",
+        "molecular_product_sha256": "a94333cd71a83169df57796cf199b06ec4efff12b1d1f2f9f9ac07bec01f7c6a",
+        "molecular_fields_sha256": "d6d7fef07d99fedf32d1a54f63e345ff245bf3ee8ec29a33d498fd621bf41273"
       },
       "producer": {
         "illumination/cloud_light/render.py": "8863722ce32af90fe8524b3f864e15289a8f55f8df9d9ce66e6da53c3d6e75b3",
@@ -183,7 +183,7 @@
       "reading_rule": "XYZ uses the photopic scale, Y in cd m^-2. Independent photon blocks estimate absolute cloudy radiance and sampling uncertainty; paired clear histories check the formal clear solution at sea level. The scene uses the common solved molecular column and Lambertian ground albedo 0.1. Earthlight, aerosols, terrain beyond spherical ground and ice optical features require additional inputs. RGB display mapping belongs to visualization.",
       "archive": {
         "path": "research/runs/optical_comfort/evening/scenes/ring_equator_1716_375_w200_g0.8_h1.6_16x32_1024.npz",
-        "sha256": "90a05e6fbb1ef543d01fe8d112eeceeb110d97e0f7d04c6c5e39a8b1c8c4faec"
+        "sha256": "e0e177851e016aa5719248d572b7a39b5a817525b20c67400627fd38814318e1"
       },
       "selection": "largest land-observer source score at Sun depression 10\u201320\u00b0",
       "initial_pick": {
@@ -211,8 +211,8 @@
       },
       "delta_hours": 0,
       "section": {
-        "path": "/home/kir/Documents/Projects/terluna-optical-comfort/research/runs/optical_comfort/evening/sections/ring_equator_1716_375.npz",
-        "sha256": "fe22f17bd6a3acd527b4a822188873fe951e7ebb6f908e89c7abe3c08d6089aa",
+        "path": "/home/kir/Documents/Projects/terluna/research/runs/optical_comfort/evening/sections/ring_equator_1716_375.npz",
+        "sha256": "a2456e6adee2f5033686a4e60d180da68c8b50d5410f54dc4f13dc42b27658e6",
         "schema": "terluna.climate.cloud-section/1",
         "metadata": {
           "schema": "terluna.climate.cloud-section/1",
@@ -228,7 +228,7 @@
           "radius_m": 1737400.0,
           "droplets_cm3": 100.0,
           "source": {
-            "file": "/home/kir/Documents/Projects/terluna-optical-comfort/climate/crm/runs/ring_equator/cm1out_t000375_s.dat",
+            "file": "/home/kir/Documents/Projects/terluna/climate/crm/runs/ring_equator/cm1out_t000375_s.dat",
             "sha256": "86ee8b2126cdcad4df1543727305cad0d0326acb434a2a28ebe9fd9c5d0fa544",
             "case_sha256": "66979fb6a66703ee7edc3a8144f924e1b377a5e0fd83378c62ca88a96908b748"
           },
@@ -281,16 +281,16 @@
       "recess_standard_error_lux": 0.19851173974873587,
       "recess_geometry": "Black recess with a sky opening 20 degrees wide, elevations 5\u201325 degrees, centred on the camera; excluded sky/terrain surfaces have zero radiance",
       "sampled_truncated_paths": 0,
-      "seconds": 266.3113760730048,
+      "seconds": 170.37891732301796,
       "negative_Y_pixels": 0,
       "median_pixel_relative_standard_error": 0.35008639472230113,
       "raw_clear_monte_carlo_mean_cd_m2": 216.2224050842081,
       "formal_clear_mean_cd_m2": 216.66443288003805,
       "source": {
         "cloud_section": "research/runs/optical_comfort/evening/sections/ring_equator_1716_379.npz",
-        "cloud_sha256": "ca9b83b4b709db8396acb95b918fd3950647fe3dce2a94a4ca50b7ce5a66c4ea",
-        "molecular_product_sha256": "6fa7583100f5a364b53b22949caef21a4544387a231d009640fd12b1cefe6ef3",
-        "molecular_fields_sha256": "c9c5c2f3618b01ffb20c360f07f1ae19663a6c3546433f0ab0560ce4d6c79c57"
+        "cloud_sha256": "e07101a6cac25cc46f30f45091a46d8169f4e58773399086dc6884b3e32a5ab3",
+        "molecular_product_sha256": "a94333cd71a83169df57796cf199b06ec4efff12b1d1f2f9f9ac07bec01f7c6a",
+        "molecular_fields_sha256": "d6d7fef07d99fedf32d1a54f63e345ff245bf3ee8ec29a33d498fd621bf41273"
       },
       "producer": {
         "illumination/cloud_light/render.py": "8863722ce32af90fe8524b3f864e15289a8f55f8df9d9ce66e6da53c3d6e75b3",
@@ -302,7 +302,7 @@
       "reading_rule": "XYZ uses the photopic scale, Y in cd m^-2. Independent photon blocks estimate absolute cloudy radiance and sampling uncertainty; paired clear histories check the formal clear solution at sea level. The scene uses the common solved molecular column and Lambertian ground albedo 0.1. Earthlight, aerosols, terrain beyond spherical ground and ice optical features require additional inputs. RGB display mapping belongs to visualization.",
       "archive": {
         "path": "research/runs/optical_comfort/evening/scenes/ring_equator_1716_379_w200_g0.8_h1.6_16x32_1024.npz",
-        "sha256": "a6be0ccb3e456c7fa31c24598b09c085f29a51986e36c36c760457e25a630049"
+        "sha256": "5733cd2cd8ef560f7eda46c823673deaefb8e2f38fdd654464401a2767f9d9d5"
       },
       "selection": "largest land-observer source score at Sun depression 10\u201320\u00b0",
       "initial_pick": {
@@ -330,8 +330,8 @@
       },
       "delta_hours": 12,
       "section": {
-        "path": "/home/kir/Documents/Projects/terluna-optical-comfort/research/runs/optical_comfort/evening/sections/ring_equator_1716_379.npz",
-        "sha256": "ca9b83b4b709db8396acb95b918fd3950647fe3dce2a94a4ca50b7ce5a66c4ea",
+        "path": "/home/kir/Documents/Projects/terluna/research/runs/optical_comfort/evening/sections/ring_equator_1716_379.npz",
+        "sha256": "e07101a6cac25cc46f30f45091a46d8169f4e58773399086dc6884b3e32a5ab3",
         "schema": "terluna.climate.cloud-section/1",
         "metadata": {
           "schema": "terluna.climate.cloud-section/1",
@@ -347,7 +347,7 @@
           "radius_m": 1737400.0,
           "droplets_cm3": 100.0,
           "source": {
-            "file": "/home/kir/Documents/Projects/terluna-optical-comfort/climate/crm/runs/ring_equator/cm1out_t000379_s.dat",
+            "file": "/home/kir/Documents/Projects/terluna/climate/crm/runs/ring_equator/cm1out_t000379_s.dat",
             "sha256": "ea4c0eb9b91fe02b2787b9c244d02e117a845d1703393b18157b451047b97d8b",
             "case_sha256": "66979fb6a66703ee7edc3a8144f924e1b377a5e0fd83378c62ca88a96908b748"
           },
@@ -400,16 +400,16 @@
       "recess_standard_error_lux": 0.12179461420224387,
       "recess_geometry": "Black recess with a sky opening 20 degrees wide, elevations 5\u201325 degrees, centred on the camera; excluded sky/terrain surfaces have zero radiance",
       "sampled_truncated_paths": 0,
-      "seconds": 202.9211679680011,
+      "seconds": 124.82925976000843,
       "negative_Y_pixels": 0,
       "median_pixel_relative_standard_error": 0.5298593294695411,
       "raw_clear_monte_carlo_mean_cd_m2": 70.45712553546545,
       "formal_clear_mean_cd_m2": 71.31783829563855,
       "source": {
         "cloud_section": "research/runs/optical_comfort/evening/sections/ring_equator_1716_383.npz",
-        "cloud_sha256": "641c63c66c8423fe7776d36062df9091c5e26c6aeb19bba8c355dd3dd774481f",
-        "molecular_product_sha256": "6fa7583100f5a364b53b22949caef21a4544387a231d009640fd12b1cefe6ef3",
-        "molecular_fields_sha256": "c9c5c2f3618b01ffb20c360f07f1ae19663a6c3546433f0ab0560ce4d6c79c57"
+        "cloud_sha256": "c66fbb0114e25df13deafc4acf2f79521e884b2c7d013bb0a24a456f80daeda6",
+        "molecular_product_sha256": "a94333cd71a83169df57796cf199b06ec4efff12b1d1f2f9f9ac07bec01f7c6a",
+        "molecular_fields_sha256": "d6d7fef07d99fedf32d1a54f63e345ff245bf3ee8ec29a33d498fd621bf41273"
       },
       "producer": {
         "illumination/cloud_light/render.py": "8863722ce32af90fe8524b3f864e15289a8f55f8df9d9ce66e6da53c3d6e75b3",
@@ -421,7 +421,7 @@
       "reading_rule": "XYZ uses the photopic scale, Y in cd m^-2. Independent photon blocks estimate absolute cloudy radiance and sampling uncertainty; paired clear histories check the formal clear solution at sea level. The scene uses the common solved molecular column and Lambertian ground albedo 0.1. Earthlight, aerosols, terrain beyond spherical ground and ice optical features require additional inputs. RGB display mapping belongs to visualization.",
       "archive": {
         "path": "research/runs/optical_comfort/evening/scenes/ring_equator_1716_383_w200_g0.8_h1.6_16x32_1024.npz",
-        "sha256": "d0b051031671d28d27770abe6fb2dd1e0d204e6ffa57b65baa2d4d78dbad6f51"
+        "sha256": "99c1185f051802ca872f3d0819fd501f96d5ae1f5271cac5c1edfd8bfd6c6c81"
       },
       "selection": "largest land-observer source score at Sun depression 10\u201320\u00b0",
       "initial_pick": {
@@ -449,8 +449,8 @@
       },
       "delta_hours": 24,
       "section": {
-        "path": "/home/kir/Documents/Projects/terluna-optical-comfort/research/runs/optical_comfort/evening/sections/ring_equator_1716_383.npz",
-        "sha256": "641c63c66c8423fe7776d36062df9091c5e26c6aeb19bba8c355dd3dd774481f",
+        "path": "/home/kir/Documents/Projects/terluna/research/runs/optical_comfort/evening/sections/ring_equator_1716_383.npz",
+        "sha256": "c66fbb0114e25df13deafc4acf2f79521e884b2c7d013bb0a24a456f80daeda6",
         "schema": "terluna.climate.cloud-section/1",
         "metadata": {
           "schema": "terluna.climate.cloud-section/1",
@@ -466,7 +466,7 @@
           "radius_m": 1737400.0,
           "droplets_cm3": 100.0,
           "source": {
-            "file": "/home/kir/Documents/Projects/terluna-optical-comfort/climate/crm/runs/ring_equator/cm1out_t000383_s.dat",
+            "file": "/home/kir/Documents/Projects/terluna/climate/crm/runs/ring_equator/cm1out_t000383_s.dat",
             "sha256": "cbe2610c4f4b013dbf45452bb0e1f1ea932f981ba6fca61c53a6b5349a2c8504",
             "case_sha256": "66979fb6a66703ee7edc3a8144f924e1b377a5e0fd83378c62ca88a96908b748"
           },
@@ -519,16 +519,16 @@
       "recess_standard_error_lux": 0.041424287451689495,
       "recess_geometry": "Black recess with a sky opening 20 degrees wide, elevations 5\u201325 degrees, centred on the camera; excluded sky/terrain surfaces have zero radiance",
       "sampled_truncated_paths": 0,
-      "seconds": 171.29630327099585,
+      "seconds": 117.99359369298327,
       "negative_Y_pixels": 0,
       "median_pixel_relative_standard_error": 0.6647911800397248,
       "raw_clear_monte_carlo_mean_cd_m2": 21.090653833775995,
       "formal_clear_mean_cd_m2": 21.757191965334194,
       "source": {
         "cloud_section": "research/runs/optical_comfort/evening/sections/ring_equator_1716_387.npz",
-        "cloud_sha256": "b1803839f81eee0ee9705e57b7e5e017427ea19325498dd46a4f8e891c25f3ec",
-        "molecular_product_sha256": "6fa7583100f5a364b53b22949caef21a4544387a231d009640fd12b1cefe6ef3",
-        "molecular_fields_sha256": "c9c5c2f3618b01ffb20c360f07f1ae19663a6c3546433f0ab0560ce4d6c79c57"
+        "cloud_sha256": "ac5c54960db3d7b5ff282ec658093af914645252ad345cc62a22ee303fc6c953",
+        "molecular_product_sha256": "a94333cd71a83169df57796cf199b06ec4efff12b1d1f2f9f9ac07bec01f7c6a",
+        "molecular_fields_sha256": "d6d7fef07d99fedf32d1a54f63e345ff245bf3ee8ec29a33d498fd621bf41273"
       },
       "producer": {
         "illumination/cloud_light/render.py": "8863722ce32af90fe8524b3f864e15289a8f55f8df9d9ce66e6da53c3d6e75b3",
@@ -540,7 +540,7 @@
       "reading_rule": "XYZ uses the photopic scale, Y in cd m^-2. Independent photon blocks estimate absolute cloudy radiance and sampling uncertainty; paired clear histories check the formal clear solution at sea level. The scene uses the common solved molecular column and Lambertian ground albedo 0.1. Earthlight, aerosols, terrain beyond spherical ground and ice optical features require additional inputs. RGB display mapping belongs to visualization.",
       "archive": {
         "path": "research/runs/optical_comfort/evening/scenes/ring_equator_1716_387_w200_g0.8_h1.6_16x32_1024.npz",
-        "sha256": "2cc751a28162a40cb58851138f70981c10bdda490dfa8091e8f967dceda4952f"
+        "sha256": "959d8a49eb6d9f55d09e718062e5d3f7a2c634d03c3af1e7763d8529c026c35a"
       },
       "selection": "largest land-observer source score at Sun depression 10\u201320\u00b0",
       "initial_pick": {
@@ -568,8 +568,8 @@
       },
       "delta_hours": 36,
       "section": {
-        "path": "/home/kir/Documents/Projects/terluna-optical-comfort/research/runs/optical_comfort/evening/sections/ring_equator_1716_387.npz",
-        "sha256": "b1803839f81eee0ee9705e57b7e5e017427ea19325498dd46a4f8e891c25f3ec",
+        "path": "/home/kir/Documents/Projects/terluna/research/runs/optical_comfort/evening/sections/ring_equator_1716_387.npz",
+        "sha256": "ac5c54960db3d7b5ff282ec658093af914645252ad345cc62a22ee303fc6c953",
         "schema": "terluna.climate.cloud-section/1",
         "metadata": {
           "schema": "terluna.climate.cloud-section/1",
@@ -585,7 +585,7 @@
           "radius_m": 1737400.0,
           "droplets_cm3": 100.0,
           "source": {
-            "file": "/home/kir/Documents/Projects/terluna-optical-comfort/climate/crm/runs/ring_equator/cm1out_t000387_s.dat",
+            "file": "/home/kir/Documents/Projects/terluna/climate/crm/runs/ring_equator/cm1out_t000387_s.dat",
             "sha256": "654a4dcdd7e4025d2e96f56d3b060217c2a5b38f75c4396347ab99e431f5724f",
             "case_sha256": "66979fb6a66703ee7edc3a8144f924e1b377a5e0fd83378c62ca88a96908b748"
           },
@@ -638,16 +638,16 @@
       "recess_standard_error_lux": 0.04474276085841263,
       "recess_geometry": "Black recess with a sky opening 20 degrees wide, elevations 5\u201325 degrees, centred on the camera; excluded sky/terrain surfaces have zero radiance",
       "sampled_truncated_paths": 0,
-      "seconds": 155.56749606999801,
+      "seconds": 97.39806439500535,
       "negative_Y_pixels": 0,
       "median_pixel_relative_standard_error": 0.6631580441413532,
       "raw_clear_monte_carlo_mean_cd_m2": 5.972473785278345,
       "formal_clear_mean_cd_m2": 6.48673600673917,
       "source": {
         "cloud_section": "research/runs/optical_comfort/evening/sections/ring_equator_1716_391.npz",
-        "cloud_sha256": "5567bdf81acef4423a85cb5137a337c3054a7526fe04a4b78ab712af030d6c20",
-        "molecular_product_sha256": "6fa7583100f5a364b53b22949caef21a4544387a231d009640fd12b1cefe6ef3",
-        "molecular_fields_sha256": "c9c5c2f3618b01ffb20c360f07f1ae19663a6c3546433f0ab0560ce4d6c79c57"
+        "cloud_sha256": "890a17f2a19cf7d7ffdc537953312360748de2154dc7c5e2153ceb05674d6c8b",
+        "molecular_product_sha256": "a94333cd71a83169df57796cf199b06ec4efff12b1d1f2f9f9ac07bec01f7c6a",
+        "molecular_fields_sha256": "d6d7fef07d99fedf32d1a54f63e345ff245bf3ee8ec29a33d498fd621bf41273"
       },
       "producer": {
         "illumination/cloud_light/render.py": "8863722ce32af90fe8524b3f864e15289a8f55f8df9d9ce66e6da53c3d6e75b3",
@@ -659,7 +659,7 @@
       "reading_rule": "XYZ uses the photopic scale, Y in cd m^-2. Independent photon blocks estimate absolute cloudy radiance and sampling uncertainty; paired clear histories check the formal clear solution at sea level. The scene uses the common solved molecular column and Lambertian ground albedo 0.1. Earthlight, aerosols, terrain beyond spherical ground and ice optical features require additional inputs. RGB display mapping belongs to visualization.",
       "archive": {
         "path": "research/runs/optical_comfort/evening/scenes/ring_equator_1716_391_w200_g0.8_h1.6_16x32_1024.npz",
-        "sha256": "2f6cd6e2179128c30342517d4a2e1a71e1d741c5a3bc2d7e7415c0d096f83c49"
+        "sha256": "4e80494b521f0447e07f9ea94dfb9bf721e3e4b3301d48eb145f75f3abfc96dd"
       },
       "selection": "largest land-observer source score at Sun depression 10\u201320\u00b0",
       "initial_pick": {
@@ -687,8 +687,8 @@
       },
       "delta_hours": 48,
       "section": {
-        "path": "/home/kir/Documents/Projects/terluna-optical-comfort/research/runs/optical_comfort/evening/sections/ring_equator_1716_391.npz",
-        "sha256": "5567bdf81acef4423a85cb5137a337c3054a7526fe04a4b78ab712af030d6c20",
+        "path": "/home/kir/Documents/Projects/terluna/research/runs/optical_comfort/evening/sections/ring_equator_1716_391.npz",
+        "sha256": "890a17f2a19cf7d7ffdc537953312360748de2154dc7c5e2153ceb05674d6c8b",
         "schema": "terluna.climate.cloud-section/1",
         "metadata": {
           "schema": "terluna.climate.cloud-section/1",
@@ -704,7 +704,7 @@
           "radius_m": 1737400.0,
           "droplets_cm3": 100.0,
           "source": {
-            "file": "/home/kir/Documents/Projects/terluna-optical-comfort/climate/crm/runs/ring_equator/cm1out_t000391_s.dat",
+            "file": "/home/kir/Documents/Projects/terluna/climate/crm/runs/ring_equator/cm1out_t000391_s.dat",
             "sha256": "846b300e218b720e4b198d8d4532960e9dc2e16e6076317ef2356ad67e16a4f0",
             "case_sha256": "66979fb6a66703ee7edc3a8144f924e1b377a5e0fd83378c62ca88a96908b748"
           },
@@ -757,16 +757,16 @@
       "recess_standard_error_lux": 0.02274054349191545,
       "recess_geometry": "Black recess with a sky opening 20 degrees wide, elevations 5\u201325 degrees, centred on the camera; excluded sky/terrain surfaces have zero radiance",
       "sampled_truncated_paths": 0,
-      "seconds": 164.97403806100192,
+      "seconds": 101.05711867799982,
       "negative_Y_pixels": 0,
       "median_pixel_relative_standard_error": 0.07870155525814837,
       "raw_clear_monte_carlo_mean_cd_m2": 1.5995153811958276,
       "formal_clear_mean_cd_m2": 1.9541331566825901,
       "source": {
         "cloud_section": "research/runs/optical_comfort/evening/sections/ring_equator_1716_395.npz",
-        "cloud_sha256": "510b39dda77d1bd204121874407780426c29ad191eefa8236d40c985474b63b0",
-        "molecular_product_sha256": "6fa7583100f5a364b53b22949caef21a4544387a231d009640fd12b1cefe6ef3",
-        "molecular_fields_sha256": "c9c5c2f3618b01ffb20c360f07f1ae19663a6c3546433f0ab0560ce4d6c79c57"
+        "cloud_sha256": "6e3ec5bff6b0daa070ac18994e9c1f2594b61ab5a33b264c05b8a1094a1a0d61",
+        "molecular_product_sha256": "a94333cd71a83169df57796cf199b06ec4efff12b1d1f2f9f9ac07bec01f7c6a",
+        "molecular_fields_sha256": "d6d7fef07d99fedf32d1a54f63e345ff245bf3ee8ec29a33d498fd621bf41273"
       },
       "producer": {
         "illumination/cloud_light/render.py": "8863722ce32af90fe8524b3f864e15289a8f55f8df9d9ce66e6da53c3d6e75b3",
@@ -778,7 +778,7 @@
       "reading_rule": "XYZ uses the photopic scale, Y in cd m^-2. Independent photon blocks estimate absolute cloudy radiance and sampling uncertainty; paired clear histories check the formal clear solution at sea level. The scene uses the common solved molecular column and Lambertian ground albedo 0.1. Earthlight, aerosols, terrain beyond spherical ground and ice optical features require additional inputs. RGB display mapping belongs to visualization.",
       "archive": {
         "path": "research/runs/optical_comfort/evening/scenes/ring_equator_1716_395_w200_g0.8_h1.6_16x32_1024.npz",
-        "sha256": "0b53922525ef562e075471c3788737af5ce55c4dec225853be459f2e4cbb148f"
+        "sha256": "b2e5d61a0ae7ea4a6ced1e277df13398e644dc9a09ae3913227f2fba26226fb8"
       },
       "selection": "largest land-observer source score at Sun depression 10\u201320\u00b0",
       "initial_pick": {
@@ -806,8 +806,8 @@
       },
       "delta_hours": 60,
       "section": {
-        "path": "/home/kir/Documents/Projects/terluna-optical-comfort/research/runs/optical_comfort/evening/sections/ring_equator_1716_395.npz",
-        "sha256": "510b39dda77d1bd204121874407780426c29ad191eefa8236d40c985474b63b0",
+        "path": "/home/kir/Documents/Projects/terluna/research/runs/optical_comfort/evening/sections/ring_equator_1716_395.npz",
+        "sha256": "6e3ec5bff6b0daa070ac18994e9c1f2594b61ab5a33b264c05b8a1094a1a0d61",
         "schema": "terluna.climate.cloud-section/1",
         "metadata": {
           "schema": "terluna.climate.cloud-section/1",
@@ -823,7 +823,7 @@
           "radius_m": 1737400.0,
           "droplets_cm3": 100.0,
           "source": {
-            "file": "/home/kir/Documents/Projects/terluna-optical-comfort/climate/crm/runs/ring_equator/cm1out_t000395_s.dat",
+            "file": "/home/kir/Documents/Projects/terluna/climate/crm/runs/ring_equator/cm1out_t000395_s.dat",
             "sha256": "a13eabfe62f16f789d34f370cebdfabf0ccbab9560269ec51532c46a2228ffab",
             "case_sha256": "66979fb6a66703ee7edc3a8144f924e1b377a5e0fd83378c62ca88a96908b748"
           },

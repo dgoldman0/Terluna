@@ -8,7 +8,7 @@
       "climate/crm/cloud_columns.py": "c3343a7828bc49988a6d7b04a1b0140cf3470e5935679d6e5d9221ad3f3c788b",
       "illumination/cloud_light/condensate.py": "60cab8d3fbef4e811b01ce32a721fbf46efd273280ac50c7386ebfad3bf8f936",
       "illumination/cloud_light/model.py": "7bb800ee4695c58856acd23125b8cee4579947106dd4c81b2a2411f46af009d3",
-      "research/studies/cloud_twilight/run.py": "2c805b45e611665b21b62d505f2e44615450b6b265aa33765e81ca98d493a453",
+      "research/studies/cloud_twilight/run.py": "9ff861292b3bb2b8feb80742afdbe6bcfce87e1b3b8c2a1051111fb20903360e",
       "research/studies/cloud_twilight/local_sources.json": "8b75182296b433a41a29dd60bd19a51db3112ef753e7a564e4d5a92423b5d5d8"
     },
     "input": {

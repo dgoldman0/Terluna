@@ -5,6 +5,7 @@ import numpy as np
 import pytest
 
 from shared.constants import SYNODIC_MONTH_DAYS
+from shared.provenance import constants_changed
 from .angular import PackedAtlas
 from .local_sky import NativeAtlas
 from .run import HERE, ROOT, digest
@@ -15,6 +16,7 @@ def product(name):
     value = json.loads((HERE / 'results' / name).read_text())
     for path, expected in value['producer']['files'].items():
         assert digest(ROOT / path) == expected
+    assert not constants_changed(value['producer'].get('constants'))
     return value
 
 

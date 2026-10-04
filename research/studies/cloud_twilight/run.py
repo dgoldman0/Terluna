@@ -18,6 +18,7 @@ from illumination.cloud_light.model import (
 )
 from research.studies.optical_comfort.angular import PackedAtlas, Y_WEIGHTS
 from shared.constants import EARTH_RADIUS, MOON_RADIUS, SYNODIC_MONTH_DAYS
+from shared.provenance import constants_used
 
 ROOT = Path(__file__).resolve().parents[3]
 HERE = Path(__file__).resolve().parent
@@ -106,7 +107,6 @@ def provenance():
     sources = [Path(__file__), HERE / 'sources.json', ROOT / 'illumination/cloud_light/model.py',
                ROOT / 'illumination/surface_light/model.py', ROOT / 'illumination/sky/atmospheres.py',
                ROOT / 'illumination/sky/colour_matching.py', ROOT / 'research/studies/optical_comfort/angular.py',
-               ROOT / 'shared/constants.py', ROOT / 'shared/constants.json',
                ROOT / 'atmosphere/middle_atmosphere/equilibrium.py',
                ROOT / 'atmosphere/radiative_convective/thermodynamics.py',
                ROOT / 'atmosphere/radiative_convective/optics.py',
@@ -118,7 +118,7 @@ def provenance():
         inputs += [ROOT / f'atmosphere/middle_atmosphere/results/profiles/{name}.csv',
                    ROOT / f'atmosphere/middle_atmosphere/results/cases/{name}.json']
     return dict(lane='research', runner=str(Path(__file__).relative_to(ROOT)),
-                files={str(p.relative_to(ROOT)): digest(p) for p in sources},
+                files={str(p.relative_to(ROOT)): digest(p) for p in sources}, constants=constants_used(sources),
                 inputs={str(p.relative_to(ROOT)): dict(sha256=digest(p)) for p in inputs})
 
 

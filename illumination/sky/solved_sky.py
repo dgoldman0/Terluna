@@ -19,6 +19,7 @@ import numba
 
 from illumination.sky.solved_optics import ROOT, adaptive_spectrum, digest, fine_optics
 from illumination.sky.solved_transport import energy_audit, evaluate, solar_table, solve
+from shared.provenance import constants_used
 
 SCHEMA = 'terluna.illumination.solved-spherical-sky/1'
 ARCHIVE_SCHEMA = 'terluna.illumination.solved-spherical-sky-atlas/1'
@@ -31,7 +32,7 @@ MODEL_FILES = ('illumination/sky/solved_optics.py','illumination/sky/solved_tran
                'illumination/sky/solved_reference.py','illumination/sky/solved_sky.py',
                'illumination/sky/solved_checks.py',
                'illumination/sky/solver.py','illumination/sky/reference_mc.py',
-               'illumination/sky/colour_matching.py','shared/constants.json')
+               'illumination/sky/colour_matching.py')
 
 
 def load(path):
@@ -146,7 +147,8 @@ def export(directory,worlds=WORLDS,reuse_atlases=False):
         if (directory/name).is_file():
             checks[name] = json.loads((directory/name).read_text())
     product = dict(schema=SCHEMA,producer=dict(lane='illumination',runner='illumination/sky/solved_sky.py',
-                                              files={f:digest(ROOT/f) for f in MODEL_FILES}),
+                                              files={f:digest(ROOT/f) for f in MODEL_FILES},
+                                              constants=constants_used(MODEL_FILES)),
                    software=dict(python=platform.python_version(),numpy=np.__version__,numba=numba.__version__),
                    evidence='Scalar clear-sky multiple scattering on the current solved molecular columns. '
                             'The Moon uses titania-stack transmission times 0.95; Earth uses unfiltered sunlight. '

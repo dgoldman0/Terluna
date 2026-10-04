@@ -6,6 +6,8 @@ from pathlib import Path
 import numpy as np
 import pytest
 
+from shared.provenance import constants_changed
+
 ROOT = Path(__file__).resolve().parents[3]
 HERE = Path(__file__).resolve().parent
 
@@ -21,6 +23,7 @@ def test_stored_spherical_products_match_their_producers_and_inputs():
         for group in ('files','inputs'):
             for name,expected in producer.get(group,{}).items():
                 assert hashlib.sha256((ROOT/name).read_bytes()).hexdigest()==expected,name
+        assert not constants_changed(producer.get('constants'))
 
 
 def test_stored_sky_convergence_and_independent_checks_are_explicit():

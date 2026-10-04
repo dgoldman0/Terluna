@@ -5,8 +5,8 @@
     "sha256": "078e23a4aac46504ea6409d81e655c2917baf03587054455d8c11634d0402fc7",
     "inputs": {
       "research/runs/optical_comfort/evening/regional_inputs.json": "d46d7fb8760609a18f8b98a4a79ea6e740a7f169f3373d56180b85ece2b645a9",
-      "illumination/sky/results/solved_sky.json": "6fa7583100f5a364b53b22949caef21a4544387a231d009640fd12b1cefe6ef3",
-      "illumination/cloud_light/results/evening_context.json": "0986d60860aec5251f0430ff0c2fae6df095720d1f7626aa30fce5c5050c3ee5"
+      "illumination/sky/results/solved_sky.json": "a94333cd71a83169df57796cf199b06ec4efff12b1d1f2f9f9ac07bec01f7c6a",
+      "illumination/cloud_light/results/evening_context.json": "7d4462d9dde067433a42af828de4d1b368e17bdb88a0c79e9b42e39f57461a2b"
     }
   },
   "evidence": "Expanded geometric and incident-beam search on the same saved second-cycle tracks. Sun depression 25\u201345 degrees, elevations 0.5\u201315 degrees, target offsets to 96 columns (about 577 km). Pair counts share observers and clouds and serve as search diagnostics. Foreground extinction and cloud radiance are further calculations.",
