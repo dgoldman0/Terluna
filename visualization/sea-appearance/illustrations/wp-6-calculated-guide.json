@@ -1,0 +1,117 @@
+{
+  "schema": "terluna.visualization.sea-image-guide/1",
+  "scene_id": "WP-6",
+  "producer": {
+    "script": "visualization/sea-appearance/wp6_guides.py",
+    "sha256": "1789becac09961be5d2e5ada32714b347478c3220598be494a59b37fb66dc5fb"
+  },
+  "inputs": {
+    "research/studies/sea_appearance/results/scenes.json": "0ba873220a8767982e880fd9960c57795d1b297f0966e794718ef6a5483f5605",
+    "research/runs/sea_appearance/terrain/w_procellarum.npz": "91bfe6540bb6a9d7466cf8ba5d7b2dad82c4c47bd8d462ab18ca1becf62f634a"
+  },
+  "source_files": {
+    "visualization/sea-appearance/image_guides.py": "bb07d86af8fa53465deff7ac2db92926a2a5da7aaaf695c14126c5f1fccf0692",
+    "research/studies/sea_appearance/scenes.py": "02cba9bb06a7de7fa387cecf6dcacdaf78afe2eeadebab922a1d32ebb7da2a89",
+    "illumination/water_surface/reflection.py": "df023219b0ca76f009e2b15f90f10599100f2a7855fb3afd18e4e92125b6c0b6",
+    "shared/constants.json": "1a73c712dcd6e550275cc3abe85e2a8ac3c0c5f39570e19841c0091e617c8cae"
+  },
+  "evidence": "Projected LOLA coast and stored scene XYZ colours. Domain uniform-disk reflection reconstructs the mean glitter path. Disk phase uses the stored illumination angle; no textured Earth map is introduced.",
+  "reading_rule": "An image-generation guide, not the full radiance renderer. Background colours interpolate sparse samples; land appearance is constant, shadows are not solved, and the small display bloom is illustrative.",
+  "native_size": [
+    1920,
+    1080
+  ],
+  "horizon_y": 647.7,
+  "earth": {
+    "elevation_deg": 20.3,
+    "azimuth_deg": 94.4,
+    "diameter_deg": 1.814,
+    "diameter_px_at_centre": 47.7,
+    "above_horizon": true,
+    "in_frame": true,
+    "x": 970.3,
+    "y": 99.5,
+    "width_px": 49.7,
+    "height_px": 51.8,
+    "normal_illuminance_lux": 0.332197,
+    "disk_luminance_cd_m2": 729.334,
+    "times_white": 3078.5,
+    "colour_chromaticity": [
+      0.4857,
+      0.4405
+    ],
+    "colour": "vivid amber",
+    "disk_srgb": "#ffcd2d",
+    "above_the_air_colour": "very pale blue",
+    "lit_fraction": 0.579,
+    "phase_angle_deg": 81.0,
+    "lit_side_toward_deg": 242.0,
+    "lit_side_toward": "lower left"
+  },
+  "earth_mask_lit_fraction": 0.5773042616451932,
+  "maximum_skyline_difference_px": 0.7,
+  "skyline_comparison": [
+    {
+      "x": 0,
+      "difference_px": -0.7
+    },
+    {
+      "x": 120,
+      "difference_px": -0.7
+    },
+    {
+      "x": 240,
+      "difference_px": -0.7
+    },
+    {
+      "x": 360,
+      "difference_px": -0.7
+    },
+    {
+      "x": 480,
+      "difference_px": -0.7
+    },
+    {
+      "x": 600,
+      "difference_px": -0.7
+    },
+    {
+      "x": 720,
+      "difference_px": 0.3
+    },
+    {
+      "x": 840,
+      "difference_px": -0.7
+    },
+    {
+      "x": 960,
+      "difference_px": -0.7
+    },
+    {
+      "x": 1079,
+      "difference_px": -0.7
+    },
+    {
+      "x": 1199,
+      "difference_px": -0.7
+    },
+    {
+      "x": 1319,
+      "difference_px": -0.7
+    },
+    {
+      "x": 1439,
+      "difference_px": 0.3
+    },
+    {
+      "x": 1559,
+      "difference_px": 0.3
+    }
+  ],
+  "region_fractions": {
+    "0": 0.574434799382716,
+    "1": 0.025003375771604937,
+    "2": 0.4,
+    "3": 0.0005618248456790123
+  }
+}

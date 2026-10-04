@@ -1,0 +1,38 @@
+{
+  "schema": "terluna.visualization.sea-wave-guide/1",
+  "scene_id": "WP-6",
+  "producer_sha256": "1789becac09961be5d2e5ada32714b347478c3220598be494a59b37fb66dc5fb",
+  "inputs": {
+    "research/runs/waves/nearside/dt300/s0768_0816/end.hot": "8bca9e7e29ed0732bad35b82b93a516730883539903130d2ddd9874fbfc5f798",
+    "research/studies/sea_appearance/results/scenes.json": "0ba873220a8767982e880fd9960c57795d1b297f0966e794718ef6a5483f5605"
+  },
+  "seed": 20380211,
+  "cascades": [
+    [
+      512.0,
+      512
+    ],
+    [
+      31.7,
+      512
+    ]
+  ],
+  "source_hs_m": 1.116,
+  "guide_hs_m": 1.0808206796646118,
+  "source_peak_wavelength_m": 71.34,
+  "guide_peak_wavelength_m": 71.33565932110882,
+  "source_mss": 0.00459,
+  "guide_mss": 0.004330580307796353,
+  "evidence": "Domain realization of the stored local W Procellarum SWAN spectrum, at lunar gravity, with no short wind-wave addition. Projected wave heights and normals with a uniform-disk mirror-hit reference.",
+  "reading_rule": "Use for broad wave scale and glassy reflection structure. It is a single instantaneous realization; its bright facets need not match the statistical glitter guide.",
+  "omissions": [
+    "spectral reflected-sky transport",
+    "terrain reflections",
+    "light-source visibility behind terrain",
+    "facet shadowing",
+    "phase-dependent Earth reflectance",
+    "height variations of the short-wave tile",
+    "wave visibility above the nominal flat horizon",
+    "time integration and camera motion of a long exposure"
+  ]
+}

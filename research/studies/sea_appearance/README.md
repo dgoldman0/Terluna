@@ -434,7 +434,10 @@ under a low crescent Earth, records stars: Aldebaran and seven fainter ones. No 
 a star to the naked eye.
 
 **Boundaries.**
-- The coast's colour is a placeholder: bare Apollo soil, without beaches, surf or plants.
+- The coast's colour is a placeholder: bare Apollo soil, without beaches or surf. Land vegetation is
+  omitted to isolate coastal optics; these shorelines do not represent the intended mature
+  landscape. The water is modelled as a living, productive coast. Coastal vegetation and habitats
+  remain to be supplied by the domain research.
 - The sea's colours are the panoramas', statistical and without wave texture.
 - Whitecaps are not modelled. The windiest frames, at 5 to 6 m/s, would show the first of them.
 

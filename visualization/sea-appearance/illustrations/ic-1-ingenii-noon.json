@@ -1,0 +1,1092 @@
+{
+  "scene_id": "IC-1",
+  "coast": "Ingenii coast",
+  "moment": "noon",
+  "method": "Built-in image_gen, nine generation/edit passes with calculated terrain, colour and wave guides; separate photographic terrain component and water composition. No programmatic editing of generated imagery.",
+  "evidence": "AI-generated photographic illustration guided by the scene description; not a computed radiance image or empirical validation.",
+  "reading_rule": "Use for visual discussion of coastal optics. Colours, geometry and wave texture are illustrative approximations. Land vegetation is intentionally omitted as an optical-study placeholder, not as a claim about the intended mature landscape.",
+  "source_files": {
+    "research/studies/sea_appearance/scenes.md": "80a6e399a90fe0aa101cd6db667fd73bbdfb4674505dd0d8610a61a71cb581d6",
+    "research/studies/sea_appearance/scenes.template.md": "64290be44bbb4a3c9fe0b522110af37e21a9ba6509cb165ec4dc4f437f0dcc7b",
+    "research/studies/sea_appearance/results/scenes.json": "0ba873220a8767982e880fd9960c57795d1b297f0966e794718ef6a5483f5605",
+    "visualization/sea-appearance/image_guides.py": "bb07d86af8fa53465deff7ac2db92926a2a5da7aaaf695c14126c5f1fccf0692",
+    "research/studies/sea_appearance/scenes.py": "02cba9bb06a7de7fa387cecf6dcacdaf78afe2eeadebab922a1d32ebb7da2a89",
+    "illumination/water_surface/realization.py": "5336dd0afcdb69558c99a181455609817b76fb696a5a80e79c32645fb6fe4989",
+    "illumination/water_surface/hotfile.py": "c98b19008ada46d9ba1f8ab862c4721558be51859834785d7d6d67227525d0fa",
+    "illumination/water_surface/model.py": "9e4ebbabf5e35017baa18a3b048666a1b1da263301532505f41e520b495aee77",
+    "illumination/water_surface/short_waves.py": "7ccd95e855c62522417a3f4859601a7099a9ffa1fb7cfee0b5c4efcadcef7ffe",
+    "illumination/water_surface/reflection.py": "df023219b0ca76f009e2b15f90f10599100f2a7855fb3afd18e4e92125b6c0b6",
+    "shared/constants.py": "ed5ac84f7bfeafed3f8e18aa869840b66558070f15ca95fd7b5c3ce2106557c9",
+    "shared/constants.json": "1a73c712dcd6e550275cc3abe85e2a8ac3c0c5f39570e19841c0091e617c8cae"
+  },
+  "selected_scene": {
+    "coast": "Ingenii coast",
+    "moment": "noon",
+    "hour": 1391,
+    "day_of_month": 28.42,
+    "hours_from_sunset": -179,
+    "camera": {
+      "lon_lat_deg": [
+        162.875,
+        -37.125
+      ],
+      "note": "at the study's coast point, 5.4 km off the coast",
+      "eye_height_m": 2,
+      "view_azimuth_deg": 180,
+      "pitch_deg": -2,
+      "horizontal_fov_deg": 65,
+      "vertical_fov_deg": 39.43,
+      "frame": [
+        1920,
+        1080
+      ],
+      "horizon_row_at_centre": 489.7,
+      "horizon_dip_deg": 0.0869
+    },
+    "light": {
+      "ground_lux": 65987.3669,
+      "vision": "photopic",
+      "white_cd_m2": 12175.08745,
+      "share_of_frame": {
+        "sky": 0.323,
+        "land": 0.13,
+        "sea": 0.546
+      }
+    },
+    "sun": {
+      "elevation_deg": 54.2,
+      "azimuth_deg": 0.9,
+      "diameter_deg": 0.537,
+      "diameter_px_at_centre": 14.1,
+      "above_horizon": true,
+      "in_frame": false,
+      "x": null,
+      "y": null,
+      "normal_illuminance_lux": 49140.951685,
+      "disk_luminance_cd_m2": 712200562.772,
+      "times_white": 58496.5,
+      "colour_chromaticity": [
+        0.4254,
+        0.4221
+      ],
+      "colour": "amber",
+      "disk_srgb": "#ffd874"
+    },
+    "earth": {
+      "elevation_deg": -55.45,
+      "azimuth_deg": 212.1,
+      "diameter_deg": 1.801,
+      "diameter_px_at_centre": 47.4,
+      "above_horizon": false,
+      "in_frame": false,
+      "x": 1853,
+      "y": 2927.8,
+      "lit_fraction": 0.976,
+      "phase_angle_deg": 17.9,
+      "lit_side_toward_deg": 333,
+      "lit_side_toward": "lower right"
+    },
+    "sky": [
+      {
+        "label": "top of frame, left edge",
+        "x": 40,
+        "y": 30,
+        "elevation_deg": 14.4,
+        "azimuth_deg": 148.9,
+        "luminance_cd_m2": 9397.74926,
+        "chromaticity_xy": [
+          0.294,
+          0.3335
+        ],
+        "colour": "very pale cyan",
+        "srgb": "#caeae6"
+      },
+      {
+        "label": "top of frame, centre",
+        "x": 960,
+        "y": 30,
+        "elevation_deg": 16.7,
+        "azimuth_deg": 180,
+        "luminance_cd_m2": 9401.89058,
+        "chromaticity_xy": [
+          0.2909,
+          0.3304
+        ],
+        "colour": "very pale cyan",
+        "srgb": "#c8eae9"
+      },
+      {
+        "label": "top of frame, right edge",
+        "x": 1880,
+        "y": 30,
+        "elevation_deg": 14.4,
+        "azimuth_deg": 211.1,
+        "luminance_cd_m2": 9413.27226,
+        "chromaticity_xy": [
+          0.2941,
+          0.3337
+        ],
+        "colour": "very pale cyan",
+        "srgb": "#caeae6"
+      },
+      {
+        "label": "15 degrees up, left edge",
+        "x": 40,
+        "y": 9,
+        "elevation_deg": 15,
+        "azimuth_deg": 148.9,
+        "luminance_cd_m2": 9364.87041,
+        "chromaticity_xy": [
+          0.2928,
+          0.3324
+        ],
+        "colour": "very pale cyan",
+        "srgb": "#c9eae7"
+      },
+      {
+        "label": "15 degrees up, centre",
+        "x": 960,
+        "y": 79,
+        "elevation_deg": 15,
+        "azimuth_deg": 180,
+        "luminance_cd_m2": 9526.82412,
+        "chromaticity_xy": [
+          0.2942,
+          0.3337
+        ],
+        "colour": "very pale aqua",
+        "srgb": "#cbece7"
+      },
+      {
+        "label": "15 degrees up, right edge",
+        "x": 1880,
+        "y": 9,
+        "elevation_deg": 15,
+        "azimuth_deg": 211.1,
+        "luminance_cd_m2": 9379.82933,
+        "chromaticity_xy": [
+          0.2929,
+          0.3325
+        ],
+        "colour": "very pale cyan",
+        "srgb": "#c9eae7"
+      },
+      {
+        "label": "8 degrees up, left edge",
+        "x": 40,
+        "y": 237,
+        "elevation_deg": 8,
+        "azimuth_deg": 148.8,
+        "luminance_cd_m2": 9535.2504,
+        "chromaticity_xy": [
+          0.3071,
+          0.3448
+        ],
+        "colour": "very pale green",
+        "srgb": "#d5eadc"
+      },
+      {
+        "label": "8 degrees up, centre",
+        "x": 960,
+        "y": 274,
+        "elevation_deg": 8,
+        "azimuth_deg": 180,
+        "luminance_cd_m2": 9753.49579,
+        "chromaticity_xy": [
+          0.309,
+          0.3464
+        ],
+        "colour": "very pale green",
+        "srgb": "#d8eddc"
+      },
+      {
+        "label": "8 degrees up, right edge",
+        "x": 1880,
+        "y": 237,
+        "elevation_deg": 8,
+        "azimuth_deg": 211.2,
+        "luminance_cd_m2": 9556.05767,
+        "chromaticity_xy": [
+          0.3073,
+          0.3449
+        ],
+        "colour": "very pale green",
+        "srgb": "#d5ebdc"
+      },
+      {
+        "label": "3 degrees up, left edge",
+        "x": 40,
+        "y": 394,
+        "elevation_deg": 3,
+        "azimuth_deg": 148.7,
+        "luminance_cd_m2": 9198.19935,
+        "chromaticity_xy": [
+          0.317,
+          0.3511
+        ],
+        "colour": "very pale yellow-green",
+        "srgb": "#d9e5d1"
+      },
+      {
+        "label": "3 degrees up, centre",
+        "x": 960,
+        "y": 408,
+        "elevation_deg": 3,
+        "azimuth_deg": 180,
+        "luminance_cd_m2": 9439.31007,
+        "chromaticity_xy": [
+          0.3191,
+          0.3528
+        ],
+        "colour": "very pale yellow-green",
+        "srgb": "#dde8d2"
+      },
+      {
+        "label": "3 degrees up, right edge",
+        "x": 1880,
+        "y": 394,
+        "elevation_deg": 3,
+        "azimuth_deg": 211.3,
+        "luminance_cd_m2": 9221.47062,
+        "chromaticity_xy": [
+          0.3172,
+          0.3513
+        ],
+        "colour": "very pale yellow-green",
+        "srgb": "#d9e6d1"
+      },
+      {
+        "label": "1 degree up, left edge",
+        "x": 40,
+        "y": 456,
+        "elevation_deg": 1,
+        "azimuth_deg": 148.6,
+        "luminance_cd_m2": 8914.63698,
+        "chromaticity_xy": [
+          0.3207,
+          0.3532
+        ],
+        "colour": "very pale yellow-green",
+        "srgb": "#d9e2cc"
+      },
+      {
+        "label": "1 degree up, centre",
+        "x": 960,
+        "y": 461,
+        "elevation_deg": 1,
+        "azimuth_deg": 180,
+        "luminance_cd_m2": 9159.90213,
+        "chromaticity_xy": [
+          0.3228,
+          0.3549
+        ],
+        "colour": "very pale yellow-green",
+        "srgb": "#dde4cc"
+      },
+      {
+        "label": "1 degree up, right edge",
+        "x": 1880,
+        "y": 456,
+        "elevation_deg": 1,
+        "azimuth_deg": 211.4,
+        "luminance_cd_m2": 8938.40602,
+        "chromaticity_xy": [
+          0.3209,
+          0.3533
+        ],
+        "colour": "very pale yellow-green",
+        "srgb": "#d9e2cc"
+      },
+      {
+        "label": "just above the horizon, left edge",
+        "x": 40,
+        "y": 479,
+        "elevation_deg": 0.25,
+        "azimuth_deg": 148.6,
+        "luminance_cd_m2": 8778.33862,
+        "chromaticity_xy": [
+          0.3221,
+          0.354
+        ],
+        "colour": "very pale yellow-green",
+        "srgb": "#d8e0c9"
+      },
+      {
+        "label": "just above the horizon, centre",
+        "x": 960,
+        "y": 480,
+        "elevation_deg": 0.25,
+        "azimuth_deg": 180,
+        "luminance_cd_m2": 9024.44664,
+        "chromaticity_xy": [
+          0.3242,
+          0.3557
+        ],
+        "colour": "very pale yellow",
+        "srgb": "#dce2ca"
+      },
+      {
+        "label": "just above the horizon, right edge",
+        "x": 1880,
+        "y": 479,
+        "elevation_deg": 0.25,
+        "azimuth_deg": 211.4,
+        "luminance_cd_m2": 8802.2247,
+        "chromaticity_xy": [
+          0.3223,
+          0.3542
+        ],
+        "colour": "very pale yellow-green",
+        "srgb": "#d9e0c9"
+      }
+    ],
+    "sea": [
+      {
+        "label": "just below the horizon, left edge",
+        "x": 40,
+        "y": 499,
+        "elevation_deg": -0.4,
+        "azimuth_deg": 148.6,
+        "luminance_cd_m2": 3877.4721,
+        "chromaticity_xy": [
+          0.2958,
+          0.3335
+        ],
+        "colour": "greyish aqua",
+        "srgb": "#899d9a"
+      },
+      {
+        "label": "just below the horizon, centre",
+        "x": 960,
+        "y": 497,
+        "elevation_deg": -0.4,
+        "azimuth_deg": 180,
+        "luminance_cd_m2": 4133.71118,
+        "chromaticity_xy": [
+          0.2984,
+          0.3362
+        ],
+        "colour": "greyish aqua",
+        "srgb": "#8ea29d"
+      },
+      {
+        "label": "just below the horizon, right edge",
+        "x": 1880,
+        "y": 499,
+        "elevation_deg": -0.4,
+        "azimuth_deg": 211.4,
+        "luminance_cd_m2": 4479.47616,
+        "chromaticity_xy": [
+          0.2995,
+          0.3373
+        ],
+        "colour": "greyish aqua",
+        "srgb": "#94a8a2"
+      },
+      {
+        "label": "1 degree down, left edge",
+        "x": 40,
+        "y": 518,
+        "elevation_deg": -1,
+        "azimuth_deg": 148.6,
+        "luminance_cd_m2": 3722.52179,
+        "chromaticity_xy": [
+          0.2958,
+          0.3337
+        ],
+        "colour": "greyish aqua",
+        "srgb": "#869a97"
+      },
+      {
+        "label": "1 degree down, centre",
+        "x": 960,
+        "y": 513,
+        "elevation_deg": -1,
+        "azimuth_deg": 180,
+        "luminance_cd_m2": 4029.23478,
+        "chromaticity_xy": [
+          0.2988,
+          0.3366
+        ],
+        "colour": "greyish aqua",
+        "srgb": "#8da09b"
+      },
+      {
+        "label": "1 degree down, right edge",
+        "x": 1880,
+        "y": 518,
+        "elevation_deg": -1,
+        "azimuth_deg": 211.4,
+        "luminance_cd_m2": 4334.45541,
+        "chromaticity_xy": [
+          0.2997,
+          0.3375
+        ],
+        "colour": "greyish aqua",
+        "srgb": "#92a5a0"
+      },
+      {
+        "label": "3 degrees down, left edge",
+        "x": 40,
+        "y": 579,
+        "elevation_deg": -3,
+        "azimuth_deg": 148.6,
+        "luminance_cd_m2": 3356.82929,
+        "chromaticity_xy": [
+          0.2966,
+          0.3346
+        ],
+        "colour": "greyish aqua",
+        "srgb": "#809390"
+      },
+      {
+        "label": "3 degrees down, centre",
+        "x": 960,
+        "y": 566,
+        "elevation_deg": -3,
+        "azimuth_deg": 180,
+        "luminance_cd_m2": 3671.07554,
+        "chromaticity_xy": [
+          0.2998,
+          0.3376
+        ],
+        "colour": "greyish aqua",
+        "srgb": "#879994"
+      },
+      {
+        "label": "3 degrees down, right edge",
+        "x": 1880,
+        "y": 579,
+        "elevation_deg": -3,
+        "azimuth_deg": 211.4,
+        "luminance_cd_m2": 3959.548,
+        "chromaticity_xy": [
+          0.3006,
+          0.3385
+        ],
+        "colour": "greyish aqua",
+        "srgb": "#8c9f99"
+      },
+      {
+        "label": "8 degrees down, left edge",
+        "x": 40,
+        "y": 734,
+        "elevation_deg": -8,
+        "azimuth_deg": 148.5,
+        "luminance_cd_m2": 2619.28095,
+        "chromaticity_xy": [
+          0.2979,
+          0.3362
+        ],
+        "colour": "dark greyish aqua",
+        "srgb": "#738380"
+      },
+      {
+        "label": "8 degrees down, centre",
+        "x": 960,
+        "y": 698,
+        "elevation_deg": -8,
+        "azimuth_deg": 180,
+        "luminance_cd_m2": 2836.28683,
+        "chromaticity_xy": [
+          0.3006,
+          0.3387
+        ],
+        "colour": "dark greyish aqua",
+        "srgb": "#788883"
+      },
+      {
+        "label": "8 degrees down, right edge",
+        "x": 1880,
+        "y": 734,
+        "elevation_deg": -8,
+        "azimuth_deg": 211.5,
+        "luminance_cd_m2": 3013.05177,
+        "chromaticity_xy": [
+          0.3008,
+          0.3391
+        ],
+        "colour": "dark greyish aqua",
+        "srgb": "#7c8c86"
+      },
+      {
+        "label": "bottom of frame, left edge",
+        "x": 40,
+        "y": 1050,
+        "elevation_deg": -17.82,
+        "azimuth_deg": 148.3,
+        "luminance_cd_m2": 1466.80544,
+        "chromaticity_xy": [
+          0.2957,
+          0.3359
+        ],
+        "colour": "dark greyish aqua",
+        "srgb": "#566462"
+      },
+      {
+        "label": "bottom of frame, centre",
+        "x": 960,
+        "y": 1050,
+        "elevation_deg": -20.7,
+        "azimuth_deg": 180,
+        "luminance_cd_m2": 1275.93754,
+        "chromaticity_xy": [
+          0.2959,
+          0.3366
+        ],
+        "colour": "dark greyish aqua",
+        "srgb": "#505e5b"
+      },
+      {
+        "label": "bottom of frame, right edge",
+        "x": 1880,
+        "y": 1050,
+        "elevation_deg": -17.82,
+        "azimuth_deg": 211.7,
+        "luminance_cd_m2": 1574.01009,
+        "chromaticity_xy": [
+          0.2962,
+          0.3365
+        ],
+        "colour": "dark greyish aqua",
+        "srgb": "#596865"
+      }
+    ],
+    "glitter": {},
+    "water_leaving": {
+      "luminance_cd_m2": 187.3524,
+      "chromaticity_xy": [
+        0.3411,
+        0.4147
+      ],
+      "colour": "pale yellow-green",
+      "srgb": "#1e2314"
+    },
+    "waves": {
+      "source": "borrowed: the Nectaris restart spectrum at hour 816, the month's median resolved slope, turned +230 degrees to the local wind, as deep water",
+      "file": "research/runs/waves/nearside/dt300/s0768_0816/end.hot",
+      "depth_m": 1000,
+      "significant_height_m": 1.235,
+      "peak_period_s": 11.32,
+      "peak_wavelength_m": 33.11,
+      "waves_travel_toward_compass_deg": 325.1,
+      "directional_spread_deg": 29.9,
+      "steepness_hs_over_wavelength": 0.0373,
+      "wind_10m_m_s": 3.71,
+      "wind_toward_compass_deg": 325.6,
+      "friction_velocity_m_s": 0.1377,
+      "short_waves_present": true,
+      "capillary_wavelength_cm": 4.17,
+      "mean_square_slope": {
+        "longer_than_1m": 0.01541,
+        "short": 0.01275,
+        "total": 0.02816
+      },
+      "rms_tilt_deg": 9.53,
+      "slope_covariance_east_north": [
+        [
+          0.0133806,
+          -0.0035485
+        ],
+        [
+          -0.0035485,
+          0.0147838
+        ]
+      ],
+      "travel_relative_to_view_deg": 145.1
+    },
+    "tide_m": -0.532,
+    "land": [
+      {
+        "shore_now_km": 5.45,
+        "shore_at_mean_level_km": 5.5,
+        "shore_azimuth_deg": 194.5,
+        "x_from": -76,
+        "x_to": 1996,
+        "azimuth_from_deg": 145.5,
+        "azimuth_to_deg": 214.5,
+        "highest_elevation_deg": 6.292,
+        "highest_y": 315.6,
+        "highest_x": 1323.4,
+        "height_above_horizon_px": 174,
+        "highest_point_distance_km": 11.2,
+        "highest_point_height_m": 1273,
+        "nearest_shore_km": 5.45,
+        "farthest_skyline_km": 21.35,
+        "lit_face_toward_camera": true,
+        "earthlit_face_toward_camera": false,
+        "haze_transmittance_550nm": 0.863,
+        "haze_transmittance_450nm": 0.72,
+        "apparent_luminance_cd_m2": 4701.43905,
+        "apparent_colour": "pale orange",
+        "apparent_srgb": "#b9a48d"
+      }
+    ],
+    "land_profile": [
+      {
+        "x": 0,
+        "px_above_horizon": 77,
+        "distance_km": 21.1,
+        "height_m": 1004,
+        "shore_km": 6.5
+      },
+      {
+        "x": 120,
+        "px_above_horizon": 97,
+        "distance_km": 17.2,
+        "height_m": 1028,
+        "shore_km": 6.3
+      },
+      {
+        "x": 240,
+        "px_above_horizon": 112,
+        "distance_km": 12.6,
+        "height_m": 867,
+        "shore_km": 6.3
+      },
+      {
+        "x": 360,
+        "px_above_horizon": 123,
+        "distance_km": 12.9,
+        "height_m": 1009,
+        "shore_km": 6.5
+      },
+      {
+        "x": 480,
+        "px_above_horizon": 132,
+        "distance_km": 13.2,
+        "height_m": 1132,
+        "shore_km": 6.5
+      },
+      {
+        "x": 600,
+        "px_above_horizon": 132,
+        "distance_km": 13.6,
+        "height_m": 1190,
+        "shore_km": 6.5
+      },
+      {
+        "x": 720,
+        "px_above_horizon": 140,
+        "distance_km": 13.4,
+        "height_m": 1254,
+        "shore_km": 6.2
+      },
+      {
+        "x": 840,
+        "px_above_horizon": 146,
+        "distance_km": 10.5,
+        "height_m": 1026,
+        "shore_km": 6.1
+      },
+      {
+        "x": 960,
+        "px_above_horizon": 145,
+        "distance_km": 10.9,
+        "height_m": 1066,
+        "shore_km": 6
+      },
+      {
+        "x": 1079,
+        "px_above_horizon": 153,
+        "distance_km": 11.7,
+        "height_m": 1201,
+        "shore_km": 6.1
+      },
+      {
+        "x": 1199,
+        "px_above_horizon": 167,
+        "distance_km": 11.9,
+        "height_m": 1325,
+        "shore_km": 5.9
+      },
+      {
+        "x": 1319,
+        "px_above_horizon": 174,
+        "distance_km": 11.2,
+        "height_m": 1273,
+        "shore_km": 5.5
+      },
+      {
+        "x": 1439,
+        "px_above_horizon": 168,
+        "distance_km": 11.1,
+        "height_m": 1190,
+        "shore_km": 5.5
+      },
+      {
+        "x": 1559,
+        "px_above_horizon": 165,
+        "distance_km": 12.1,
+        "height_m": 1247,
+        "shore_km": 5.8
+      },
+      {
+        "x": 1679,
+        "px_above_horizon": 162,
+        "distance_km": 11.8,
+        "height_m": 1174,
+        "shore_km": 6
+      },
+      {
+        "x": 1799,
+        "px_above_horizon": 139,
+        "distance_km": 11.1,
+        "height_m": 913,
+        "shore_km": 6.4
+      },
+      {
+        "x": 1919,
+        "px_above_horizon": 115,
+        "distance_km": 10.8,
+        "height_m": 716,
+        "shore_km": 7.1
+      }
+    ],
+    "colour_basis": {
+      "slope_covariance_east_north": [
+        [
+          0.0133806,
+          -0.0035485
+        ],
+        [
+          -0.0035485,
+          0.0147838
+        ]
+      ],
+      "sun": [
+        54.199,
+        0.9
+      ],
+      "earth": [
+        -55.445,
+        212.12
+      ],
+      "camera_lon_lat_deg": [
+        162.875,
+        -37.125
+      ]
+    },
+    "stars": {
+      "in_frame": 402,
+      "eye_sees": 0,
+      "long_exposure_shows": 0,
+      "recorded": [],
+      "brightest": [
+        {
+          "name": "Acrux",
+          "v_above_air": 1.33,
+          "v_seen": 4.25,
+          "b_minus_v": -0.24,
+          "x": 1885,
+          "y": 147,
+          "elevation_deg": 10.84,
+          "naked_eye_limit": -11.02,
+          "eye_sees_it": false,
+          "long_exposure_shows_it": false
+        },
+        {
+          "name": "Adhara",
+          "v_above_air": 1.5,
+          "v_seen": 4.55,
+          "b_minus_v": -0.21,
+          "x": 61,
+          "y": 180,
+          "elevation_deg": 9.88,
+          "naked_eye_limit": -11.02,
+          "eye_sees_it": false,
+          "long_exposure_shows_it": false
+        },
+        {
+          "name": null,
+          "v_above_air": 1.63,
+          "v_seen": 5.57,
+          "b_minus_v": 1.59,
+          "x": 1911,
+          "y": 335,
+          "elevation_deg": 4.88,
+          "naked_eye_limit": -11,
+          "eye_sees_it": false,
+          "long_exposure_shows_it": false
+        },
+        {
+          "name": "Acrux",
+          "v_above_air": 1.73,
+          "v_seen": 4.65,
+          "b_minus_v": -0.26,
+          "x": 1885,
+          "y": 147,
+          "elevation_deg": 10.84,
+          "naked_eye_limit": -11.02,
+          "eye_sees_it": false,
+          "long_exposure_shows_it": false
+        },
+        {
+          "name": null,
+          "v_above_air": 1.78,
+          "v_seen": 4.63,
+          "b_minus_v": -0.22,
+          "x": 764,
+          "y": 179,
+          "elevation_deg": 11.38,
+          "naked_eye_limit": -11.04,
+          "eye_sees_it": false,
+          "long_exposure_shows_it": false
+        },
+        {
+          "name": "Wezen",
+          "v_above_air": 1.84,
+          "v_seen": 5.43,
+          "b_minus_v": 0.68,
+          "x": 38,
+          "y": 282,
+          "elevation_deg": 6.59,
+          "naked_eye_limit": -11.01,
+          "eye_sees_it": false,
+          "long_exposure_shows_it": false
+        },
+        {
+          "name": null,
+          "v_above_air": 1.96,
+          "v_seen": 4.61,
+          "b_minus_v": 0.04,
+          "x": 1011,
+          "y": 136,
+          "elevation_deg": 13,
+          "naked_eye_limit": -11.03,
+          "eye_sees_it": false,
+          "long_exposure_shows_it": false
+        },
+        {
+          "name": null,
+          "v_above_air": 2.25,
+          "v_seen": 4.81,
+          "b_minus_v": 0.18,
+          "x": 1184,
+          "y": 107,
+          "elevation_deg": 13.9,
+          "naked_eye_limit": -11.02,
+          "eye_sees_it": false,
+          "long_exposure_shows_it": false
+        },
+        {
+          "name": null,
+          "v_above_air": 2.25,
+          "v_seen": 5.77,
+          "b_minus_v": -0.26,
+          "x": 599,
+          "y": 296,
+          "elevation_deg": 6.99,
+          "naked_eye_limit": -11.04,
+          "eye_sees_it": false,
+          "long_exposure_shows_it": false
+        },
+        {
+          "name": null,
+          "v_above_air": 2.45,
+          "v_seen": 6.2,
+          "b_minus_v": -0.08,
+          "x": 194,
+          "y": 316,
+          "elevation_deg": 5.78,
+          "naked_eye_limit": -11.01,
+          "eye_sees_it": false,
+          "long_exposure_shows_it": false
+        },
+        {
+          "name": null,
+          "v_above_air": 2.5,
+          "v_seen": 5.53,
+          "b_minus_v": -0.18,
+          "x": 1133,
+          "y": 218,
+          "elevation_deg": 9.99,
+          "naked_eye_limit": -11.04,
+          "eye_sees_it": false,
+          "long_exposure_shows_it": false
+        },
+        {
+          "name": null,
+          "v_above_air": 2.7,
+          "v_seen": 5.49,
+          "b_minus_v": 1.62,
+          "x": 355,
+          "y": 144,
+          "elevation_deg": 11.87,
+          "naked_eye_limit": -11.03,
+          "eye_sees_it": false,
+          "long_exposure_shows_it": false
+        },
+        {
+          "name": null,
+          "v_above_air": 2.76,
+          "v_seen": 5.33,
+          "b_minus_v": -0.22,
+          "x": 1514,
+          "y": 90,
+          "elevation_deg": 13.79,
+          "naked_eye_limit": -11.02,
+          "eye_sees_it": false,
+          "long_exposure_shows_it": false
+        },
+        {
+          "name": null,
+          "v_above_air": 2.8,
+          "v_seen": 6.42,
+          "b_minus_v": -0.23,
+          "x": 1834,
+          "y": 289,
+          "elevation_deg": 6.47,
+          "naked_eye_limit": -11.02,
+          "eye_sees_it": false,
+          "long_exposure_shows_it": false
+        }
+      ]
+    }
+  },
+  "schema": "terluna.visualization.generated-sea-illustration/1",
+  "generation_passes": [
+    {
+      "stage": "initial",
+      "prompt": "Use case: photorealistic-natural.\nAsset type: first photographic illustration of the Terluna sea appearance optical study, frame IC-1, the Ingenii coast at midday.\nOutput: one wide landscape image, 16:9 aspect ratio, ideally 1920 by 1080. No collage, inset, text, labels, border or watermark.\n\nThis is a terraformed Moon with an open breathable atmosphere and liquid living seawater. It is an illustration based on a scientific scene description, not a numerical rendering. In this optical study the land deliberately uses bare tan soil as a placeholder: vegetation and settlement are omitted to isolate the sea, sky and coastal lighting. This omission does not describe the mature ecosystem. Keep the biological constituents of the water visually implicit, with a faint olive undertone; do not draw individual organisms or floating plants.\n\nSCENE DESCRIPTION:\nPhotograph from a small boat at sea at midday, eye 2 m above the water, 28 mm lens,\nlooking south across 5 km of open water to a mountainous coast, with the high Sun behind the camera,\ntilted 2 degrees down, horizon 45% from the top.\n\nA range of bare, sunlit mountains spans the whole width of the frame, 10 to 21 km away. It rises 77\npixels above the horizon at the left edge, climbs in rounded peaks and shoulders to 174 pixels at\ntwo-thirds of the way across (1,270 m), then falls to 115 pixels at the right edge. The mountains are\npale tan-beige highland ground (#b9a48d), softened and cooled by haze. Their front faces are\nlit, with gentle shading in the folds. Vegetation is omitted for this optical study; the bare ground\nis a rendering placeholder.\n\nThe sky is a very pale cyan-blue, almost white (#c8eae9 at the top), fading to pale cream-grey at\nthe horizon behind the peaks (#dce2ca).\n\nThe sea is a grey-teal slate (#8ea29d below the horizon), darkening to deep slate-teal\n(#505e5b) at the bottom. The band of water nearest the horizon mirrors the pale mountains in\nblurred streaks. A swell 1.2 m high and 33 m from crest to crest comes from the front\nleft; wind ripples under a 3.7 m/s breeze give it a lively, fine texture. No foam, no boats,\nno people, no buildings.\n\nCOMPOSITION AND SCALE:\nThe eye is only 2 metres above the water, with a rectilinear 28 mm full-frame lens, facing south and pitched 2 degrees down. No camera, boat hull or foreground shore is visible. The nominal sea horizon/waterline is 45.4 percent down from the top; water occupies the bottom 55 percent. The mountain range is a modest distant band, not huge looming foreground peaks. At the left edge the skyline is about 38 percent down from the top, rising in rounded shoulders to about 29 percent down at two-thirds of the width, then falling to 35 percent down at the right edge. The highest mountains are about 10 to 21 kilometres away. Keep a continuous broad range across the full width, with subtle crater-rim terrain shapes rather than sharp Alpine spires.\n\nLIGHT AND MATERIALS:\nCloudless midday in very thick clear molecular air: a luminous washed-out pale cyan sky fading to pale cream-grey near the horizon, with atmospheric softening of the distant tan ground. The Sun is high behind the camera and outside the frame, lighting the faces of the mountains; there is no visible solar disk or glitter path. Sky tones near #c8eae9 and #dce2ca, land near #b9a48d, sea near #8ea29d in the distance grading to #505e5b close to the camera. Treat these as visual colour targets, not text to draw. Natural photographic texture and restrained saturation. Do not make the water tropical turquoise or the sky saturated blue. The water is distinctly darker than the sky. Subtle mountain reflections occur only in a narrow band of distant water. The foreground water has broad, low, smooth swells with fine wind ripples, no breaking crests, foam, whitecaps or surf. The deep sea has no visible seabed. No Earth, stars, clouds, vegetation, buildings, people, other boats or science-fiction machinery in frame.\n",
+      "generated_file": "exec-e812fe1d-1a8b-49d3-b257-2c5fbaea829e.png",
+      "disposition": "discarded: free generation drifted in geometry and colour",
+      "pass": 1,
+      "saved_file": "../results/illustrations/passes/01-initial.png",
+      "sha256": "bbe61e70ae13e1e4231a3aa319ef5b210fe412e28af0ccc4aa31fb41f2fe61ee",
+      "reference_images": []
+    },
+    {
+      "stage": "photographic_refinement",
+      "prompt": "Use case: photorealistic-natural. Edit target: the supplied Ingenii coast image.\n\nRefine this into an immersive, high-fidelity photographic seascape. It should feel like a real full-frame camera exposure made by someone sitting just above the water, with exceptionally convincing water, subtle light, natural textures and atmospheric distance. Produce the largest native landscape output available, preferably 3840 \u00d7 2160, 16:9.\n\nPreserve the subject, coast orientation, pale cyan-to-cream cloudless sky, muted tan distant lunar highlands, restrained grey-teal water, and high midday sunlight behind the camera. The Earth and Sun are outside the frame. The land vegetation remains omitted as the optical study's placeholder. Keep this image completely free of text, labels, captions, callouts, legends, borders, diagrams, logos and watermarks.\n\nRefine photographic realism:\n- A 28 mm rectilinear full-frame view from an eye 2 m above the sea, facing the distant coast. Camera pitches 2 degrees down: place the far waterline about 45% down the frame so water occupies approximately 55%. Keep the mountain skyline a modest continuous distant band, its highest rounded shoulder near two-thirds across. The mountains are 10\u201321 km away, softened by the thick clear air.\n- Make the water's microstructure and optical response especially convincing. Broad, gentle swell about 1.2 m high and 33 m between crests comes from the front left, carrying irregular fine wind ripples under a 3.7 m/s breeze. Make the foreground ripples crisp, detailed and non-repeating, with coherent curved reflections, subtle dark troughs and natural variability in roughness. No procedural-looking wave grid, plastic sheen, foamy crests, breaking waves or giant close waves.\n- The sea is a subdued grey-teal slate near the horizon, becoming darker grey-teal in the foreground with a slight olive undertone. Keep realistic tonal variation, warm-grey reflections from the highlands in the narrow distant water band, and pale reflections of the sky on near facets. Avoid saturated tropical blue and emerald water.\n- The highlands have natural irregular rocky relief, weathered surface texture and subtle shading. Avoid repeated triangular facets, sharp Alpine spires and a computer-generated smoothness. Their sunlit faces are muted pale tan, cooled and softened by intervening clear molecular air. Distance must remain palpable.\n- The sky is luminous, pale, almost white cyan at the top, fading into pale cream-grey near the horizon. Preserve the gentle gradient and quiet daylight; no clouds, sunbeams, dramatic golden-hour lighting, lens flare or visible stars.\n- Photographic depth and tonal subtlety, approximately a well-exposed 28 mm f/8 daylight photograph, with a shutter fast enough to resolve the foreground ripples. Fine natural detail rather than crunchy sharpening, excessive clarity, exaggerated HDR or an illustrative painting style.\n\nNo boats or boat parts, people, buildings, plants or other added objects. No visible seabed. Clean, immersive image only.",
+      "generated_file": "exec-b517d007-80cd-4e89-9f62-484798b10f72.png",
+      "disposition": "discarded: sharper but bluer, over-dark water and misplaced shoreline",
+      "pass": 2,
+      "saved_file": "../results/illustrations/passes/02-photographic-detail.png",
+      "sha256": "25d481edf09433724c36309e6f2e56ab8d7b182bb3bcfd9cbc85bdbb7269629c",
+      "reference_images": [
+        "../results/illustrations/passes/01-initial.png"
+      ]
+    },
+    {
+      "stage": "terrain_component",
+      "prompt": "Use case: precise-object-edit with photorealistic-natural treatment.\nInput image 1 is the authoritative calculated geometry and colour guide for the Ingenii coast at lunar midday. It is an edit target, not a mood board.\n\nThis is the TERRAIN COMPONENT pass. Refine only the tan land region into high-fidelity, immersive photographic terrain. Copy the sky and the water colour field without alteration: the flat water is intentional and will be completed in a separate pass. Do not add water texture in this pass.\n\nPreserve the exact outer silhouette of the land, its vertical placement and the sea waterline. Preserve the broad smooth rounded upland shoulders and their subtle steps. Do not invent sharp triangular peaks, cliffs, spires or a distant second mountain wall. This reference comes from actual lunar topographic heights, seen across 5.5 to 7 km of water at an eye height of 2 m through a 28 mm rectilinear lens. The ridge is 10\u201321 km away; its approximately 1,300 m maximum occurs just right of two-thirds of the image width. Waterline remains at 45.4% of image height, maximum ridge at 29.2%, left skyline at 38.2%, right skyline at 34.7%.\n\nGive these gentle highland shapes subtle realistic bare-ground material and low-contrast rocky detail within the existing terrain region. Suggest weathered crater slopes and small rock outcrops at a believable distant scale without changing the large forms. No repeating CG facets or sand-dune texture. The terrain's average appearance stays muted tan, close to RGB #b9a48d; preserve the guide's atmosphere-softened contrast and modest shading. At this distance individual rocks should not be individually sharp.\n\nThe Sun stands 54.2 degrees high behind the viewer, very nearly aligned with the view axis. Faces turned toward us are broadly illuminated, lateral folds have modest shading and far creases are softly filled by the bright sky. Do not light the terrain from a low side Sun and do not introduce deep blue-black shadows. This is bright midday through a very thick clear molecular atmosphere, about 66,000 lux. No clouds, visible Sun, Earth, stars, mist banks, artificial fog, dust, lens flare, glow or dramatic cinematic beams.\n\nNo vegetation or settlement in this optical-study placeholder; no people, boats, buildings, roads or new objects. No labels, letters, numbers, text, diagrams, overlays, watermark or border. Keep the whole 16:9 frame and highest native detail available. This component should be ready for a later water compositing pass, with sky and water unchanged.",
+      "generated_file": "exec-e091614b-48c9-4e20-8111-4ae081c7dff1.png",
+      "disposition": "used as terrain and sky component",
+      "pass": 3,
+      "saved_file": "../results/illustrations/passes/03-terrain-component.png",
+      "sha256": "6accd1ca9e11ee014899f529fff5cd1a5365417adc218d447ad1e33bd20cff47",
+      "reference_images": [
+        "../results/illustrations/ic-1-calculated-guide.png"
+      ]
+    },
+    {
+      "stage": "water_composite",
+      "prompt": "Use case: compositing, high-fidelity photorealistic-natural.\nInput image 1: EDIT TARGET, the completed terrain and sky component with a deliberately untextured water colour field.\nInput image 2: AUTHORITATIVE CALCULATED GUIDE for framing, terrain silhouette and average colour; preserve these constraints.\n\nComplete a clean, immersive photographic composite by replacing ONLY the flat water region below the existing waterline with natural, highly detailed liquid sea. Keep everything above the waterline from image 1: exact terrain silhouette and material, lighting, pale cyan-to-cream sky, atmospheric softness, tonal balance, camera orientation and scale. Keep the waterline fixed at 45.4% of image height and the highest rounded ridge near 29.2%. Do not move, enlarge, sharpen or add mountains. No edits to the sky.\n\nWATER STRUCTURE:\nThis is a 2-metre-high observer using a 28 mm rectilinear lens, pitched 2 degrees down, on a terraformed Moon at 0.165 Earth gravity. The sea fills the lower 55% of the frame. The dominant swell is 1.2 m significant height, 33 m peak crest-to-crest length, 11.3 second period, travelling toward compass 325 degrees while the camera faces 180 degrees. Visually the swell arrives from the front left toward the observer's right, with broad, low, smooth curved crests set obliquely across the image. Convey spacious long undulations beneath the small roughness: do not replace the swell with a tightly crowded field of short triangular waves. There is a directional spread, so the pattern is naturally irregular, never a uniform repeating grid.\n\nA light 3.7 m/s breeze lays fine wind ripples over the long swell. Total mean square slope is 0.0282 (about 9.5 degrees RMS tilt); the shorter-than-1-metre waves contribute 0.0127. Short ripples are important to the reflected-sky texture even though they carry little of the height. The gravity-capillary characteristic scale is 4.2 cm, with smaller ripples continuing below it. Show richly detailed fine irregular ripples and rounded moving facets in the nearby water, progressively finer and unresolved into the distance. Keep the long swell low and nonbreaking. No foam, whitecaps, spray, surf, large curling waves or visible seabed.\n\nWATER LIGHT:\nUse the water colour field of both input images as the average-colour anchor. The distant water is muted grey-teal slate around #8ea29d; mid-water below it around #879994 to #788883; the near lower foreground averages about #505e5b, not black. Individual facets may be darker or brighter while preserving the spatial average. There is a subtle olive undertone from the productive coastal water. The very pale sky is reflected as irregular quiet highlights on the rough surface. Reflections of the tan shore occur only in the narrow distant water below the land, softly broken. Maintain photographic tonal range and colour at one daylight exposure. No oversaturated blue, cyan or emerald.\n\nThe Sun is 54.2 degrees high, almost directly behind the camera. Its specular path is outside this view. There must be no bright solar glitter column on the right edge or anywhere in frame, no starburst glints, no luminous white stripe and no lens flare. The visible fine-scale contrast is reflected sky. Keep highlights soft and comfortably below blown-out white. The bright sky diffusely fills the water and terrain; do not introduce a side light or sunset grading.\n\nQUALITY:\nAn immersive natural full-frame photograph, high fidelity in liquid surface structure, atmospheric depth and quiet midday light. Resolve fine foreground water detail without oversharpening, illustration-like brushwork or procedural CGI repetition. Preserve the subtly hazed distant terrain. Highest native resolution available, wide 16:9 composition. All scientific context stays outside the image: absolutely no text, labels, numbers, captions, callouts, border, diagrams, watermark, or split panels. No boats or boat parts, people, buildings, vegetation, clouds, visible Sun, Earth or stars.",
+      "generated_file": "exec-312bcdd6-4491-403b-a0b9-c0a11a8b321b.png",
+      "disposition": "superseded: corrected framing and palette; wave scale needed numerical guidance",
+      "pass": 4,
+      "saved_file": "../results/illustrations/passes/04-first-composite.png",
+      "sha256": "c34ca0294a0abfe2de79c639bb193ec034ea6d888b100695f74703ad22376cf5",
+      "reference_images": [
+        "../results/illustrations/passes/03-terrain-component.png",
+        "../results/illustrations/ic-1-calculated-guide.png"
+      ]
+    },
+    {
+      "stage": "wave_guided_composite",
+      "prompt": "Use case: compositing, photorealistic-natural.\nCreate the final immersive photographic composite from these three inputs. No text, labels, marks, borders or overlays anywhere.\n\nINPUT ROLES:\nImage 1: primary EDIT TARGET and authoritative WAVE-GEOMETRY reference. Its water was actually drawn from the study's directional wave spectrum and projected from the specified 2 m eye height. Preserve its broad wave structure and perspective. Its terrain is only a simple geometry placeholder.\nImage 2: the completed PHOTOGRAPHIC TERRAIN AND SKY component. Insert its sky and textured tan coast into the same regions of image 1, preserving their exact contours, location, scale and pale colours. Its untextured water is only a palette reference.\nImage 3: authoritative CALCULATED AVERAGE-COLOUR AND FRAMING guide, including the muted sea palette.\n\nCOMPOSITE:\nPreserve the frame geometry of image 1: fixed waterline at 45.4% height, the same low continuous rounded coast across the full width, and its highest shoulder near two-thirds of the width. Use image 2's sky and land above the waterline. The sky is pale almost-white cyan grading to pale cream near the coast, not saturated blue. Keep the tan bare land softly front-lit by a Sun 54 degrees high almost directly behind the camera. No shadows suggesting low side lighting. No sharp distant rock detail, no dark dramatic crevices and no invented peaks. The shore is more than 5 km away and the ridge 10\u201321 km away, seen through a thick clear atmosphere.\n\nWATER:\nKeep the actual large-scale water structure of image 1: the broad, long, gentle undulations and their orientation, including the spacious smooth swell in the foreground. These waves are 1.235 m significant height and 33.11 m dominant wavelength at lunar gravity, with a 3.71 m/s local breeze. The two-metre eye is low among these waves. Do NOT turn the foreground into many tightly packed short chop crests. Retain the difference between the very broad swell form and the much smaller ripples riding on it.\n\nRefine the water's photographic surface detail and optical appearance while preserving those wave shapes. Replace numerical sampling artefacts, straight scanline seams or stretched streaks with natural, delicate irregular wind ripples conforming to the same curved water surface. Fine ripples and near facets should be clean and convincing, without repeated noise patterns, grid texture, plastic gloss or an airbrushed look. Keep the broad crests gently rounded and unbroken, no foam, surf, whitecaps, spray or crashing waves. Preserve convincing distance compression toward the horizon.\n\nMatch the average palette to image 3: far water grey-teal about #8ea29d, mid-water around #788883, the nearest water about #505e5b. Keep realistic facet variation around those means. Avoid black foreground troughs, overly blue water and theatrical contrast. The apparent rough-water contrast is from reflected pale sky; the Sun itself and its glitter path are outside this view. No solar sparkle stripe, no bright glitter on either edge, no blown-out pinpoints, no lens flare. The distant strip may gently reflect the tan coast, with little colour from below the water except a faint olive undertone.\n\nQUALITY AND INVARIANTS:\nHigh-fidelity, immersive documentary seascape photography through a 28 mm full-frame lens, fast enough shutter for detailed ripples, natural tonal transitions and strong physical presence at water level. Avoid painterly treatment, procedural CGI and generic fantasy-landscape features. Preserve the supplied source geometry, the high-Sun front lighting, subtle atmospheric attenuation, low lunar wave steepness and calm clear weather. No vegetation or settlement in this optical-study placeholder, no visible camera or boat, people, clouds, Sun, Earth, stars, buildings or other added objects. Wide 16:9; highest native resolution and detail available. The result is one seamless clean photograph, never a collage or diagram.",
+      "generated_file": "exec-0148d19e-647e-473b-9557-1da13287aff6.png",
+      "disposition": "used as the colour-finishing input",
+      "pass": 5,
+      "saved_file": "../results/illustrations/passes/05-wave-guided-composite.png",
+      "sha256": "763ecf80228a85506610f42a188a65c1cd6f477ec4ffe3af7d7d698c28696150",
+      "reference_images": [
+        "../results/illustrations/ic-1-wave-structure-guide.png",
+        "../results/illustrations/passes/03-terrain-component.png",
+        "../results/illustrations/ic-1-calculated-guide.png"
+      ]
+    },
+    {
+      "stage": "colour_finish",
+      "prompt": "Use case: precise-object-edit / photographic colour finishing.\nImage 1 is the selected immersive composite and EDIT TARGET.\nImage 2 is the calculated average-colour guide.\n\nMake one targeted correction: lighten and gently neutralize ONLY the water's average tones to match image 2, retaining the exact broad swell geometry, fine ripples, low viewpoint and composition of image 1. Keep every pixel of the sky and terrain visually unchanged. Do not move the shoreline, skyline or wave crests, and do not add or remove objects.\n\nThe current composite's middle and foreground water are too dark and slightly too blue compared with the source:\n- Just below the horizon the water is already close; keep its muted grey-teal #8ea29d appearance.\n- At about 65% of image height, the average water should approach #788883, with individual ripples and facets lighter and darker around it.\n- In the low foreground, around 95\u201398% of image height, aim for an average #505e5b, compared with the current too-dark #3a4745. Lift this portion's recorded brightness by roughly a third in sRGB channel values, subtly retaining the olive-grey undertone.\nUse image 2's smooth water gradient as the average tone field for image 1's detailed physical water. Preserve broad wave shading and fine reflected-sky texture; do not flatten the liquid or make the foreground uniformly bright. Reduce excessively dark troughs while preserving natural photographic detail. Do not add contrast, saturation, sharp glitter, bloom or white highlights.\n\nNo solar glitter path: the Sun is high behind the viewer. No breaking waves, foam, spray, plastic sheen, water blur, added clouds or atmosphere effects. Retain the same clear soft midday light, gently hazed distant tan coast and pale cyan-cream sky. This is a careful photographic colour finish, not a new scene.\n\nKeep the clean 16:9 immersive image, highest available native detail. Absolutely no text, labels, numbers, diagrams, captions, marks, watermark, border or other additions.",
+      "generated_file": "exec-2d65cbf0-b4c9-44ce-96a5-96baf0e1be45.png",
+      "disposition": "Retained as the water component for pass 9. Foreground colour improved; terrain still looked sculpted and middle water remained darker than the calculated mean.",
+      "pass": 6,
+      "saved_file": "../results/illustrations/passes/06-water-colour-finish.png",
+      "sha256": "dd0f986bb5f7c79f9cb62e50fdc27940937cdfe4bec8c9d09344f767c2f2f86f",
+      "reference_images": [
+        "../results/illustrations/passes/05-wave-guided-composite.png",
+        "../results/illustrations/ic-1-calculated-guide.png"
+      ]
+    },
+    {
+      "stage": "material-and-middle-water-finish",
+      "prompt": "Use case: precise photographic finishing of a scientifically guided immersive landscape.\nImage 1 is the current COMPOSITE AND EDIT TARGET. Image 2 is a calculated GEOMETRY AND AVERAGE-COLOUR GUIDE, not the desired rendering style.\n\nDeliver one full-frame, deeply convincing, high-fidelity natural photograph of this same sea and coast. Camera, framing, coast silhouette, broad waves, sun direction, sky and foreground water are established. Fix two remaining issues:\n\n1. The LAND in image 1 has an artificial waxy, sculpted, embossed CGI texture. Replace that material appearance with believable distant lunar highland regolith and weathered rock in photographic detail. Keep its exact broad low rounded silhouette, all large terrain forms, warm muted tan average colour and narrow 13% share of the image. These slopes are 5.5\u201321 km away, seen across water: use naturally irregular subdued mineral colour, matte granular regolith, restrained exposed rock and talus on the existing slopes, with atmospheric loss of fine detail. Do not add new craters, jagged peaks, deep canyons, cliffs, foreground objects or invented monumental geology. No smeared plastic, repetitive crescents, engraved noodles, embossed swirls, miniature clay appearance, obvious algorithmic heightfield shading or game-engine material. Preserve the scene's spatial scale. At this distance individual grains and tiny pebbles cannot be resolved: fidelity comes from coherent slopes, natural variation, credible light, subtle texture and depth. Land is an explicitly unplanted optics-study placeholder; no vegetation.\n\nLight is clear midday Sun 54.2 degrees high almost directly behind the camera, shining onto the visible slopes. Shadows from relief point away from camera, are short in horizontal extent and filled by diffuse skylight. No side-lit sunset drama, black crevices, rim light or new light sources. The atmosphere transmits about 86% of green light over the 11 km central ridge, so apply gentle realistic aerial perspective, never heavy fog or harsh crystal-clear distant rock.\n\n2. The MIDDLE WATER, around 62\u201369 percent of total image height, remains too dark. Lift its average from about #647271 toward #788883, a gentle grey-green reflected-sky tone, whilst maintaining light and dark facets and every large swell crest. Use the smooth sea gradient in image 2 to guide ONLY the mean colour, never erase wave texture. Feather smoothly through adjacent water. Leave the near-horizon water and the bottom quarter's average tones alone: the low foreground is already close to its correct #505e5b. No saturation boost, bright cyan, extra contrast or broad milky veil.\n\nKeep the ocean convincingly liquid and photographic, with the established broad 33 m undulations and fine irregular wind ripples. No breaking crests, visible foam, spray, whitecaps, plastic sheen, vertical glitter path or unexplained bright reflections: the Sun is behind the viewer, outside this view. Preserve the low 2 m eye height, 65-degree horizontal view, and 2-degree downward camera pitch. Coast waterline is about 45% down the frame; highest ridge about 29% down. Keep this exact crop without zooming.\n\nPreserve the pale cyan upper sky grading gently to pale cream-green toward the horizon, with no added clouds, Sun, Earth or stars. Keep realistic gentle atmospheric depth, no illustration or painting style, no oversharpening or artificial HDR. This should feel like standing above a real living grey-green sea and looking across kilometres of open water, a clean immersive photograph with accurate large-scale structure.\n\nOutput highest available native fidelity and detail, landscape 16:9. Absolutely no text, labels, numbers, scene IDs, arrows, captions, marks, signature, watermark, borders or inset panels.",
+      "generated_file": "exec-68ffeee8-4a0e-4b45-a45a-33ac4423f478.png",
+      "disposition": "Rejected: water became bluer, terrain remained waxy, and waterline and skyline drifted further from the calculated guide.",
+      "pass": 7,
+      "saved_file": "../results/illustrations/passes/07-rejected-material-finish.png",
+      "sha256": "3d0b5dba4029fdf09780a6f24a0e723d10695bc22a12f21d6625dda48c5e2175",
+      "reference_images": [
+        "../results/illustrations/passes/06-water-colour-finish.png",
+        "../results/illustrations/ic-1-calculated-guide.png"
+      ]
+    },
+    {
+      "stage": "photographic-terrain-rebuild",
+      "prompt": "Create a photographic TERRAIN COMPONENT for an immersive sea panorama.\n\nReference 1 gives the exact composition and average colours. Reference 2 is a LAND MASK: its white band is the only area to turn into detailed photographic land. Keep the outer shape and exact position of this white band. Render a full 16:9 frame: the pale sky and smooth grey-green sea outside the land band remain like reference 1, without new objects. Do not print the mask in the output.\n\nWithin that narrow land band, depict believable sunlit rocky uplands photographed from far across open water. Naturally rounded tan and warm grey hills, subdued mottled stone and fine soil over broad gentle slopes, irregular low rocky outcrops, shallow hollows, subtle slope texture, credible kilometre scale. This is a natural landscape photograph, like an exceptionally clear large-format camera image of distant barren coastal hills. Restrained detail appropriate to distance, gently softened by clear air over 6\u201320 km. Make the terrain MATTE and natural, without regular patterns. The overall apparent land colour is muted warm beige #b9a48d. No dramatic high mountains, fresh crater bowls, embossed swirls, huge rocks, dunes, cliffs or dark gorges; no botanical detail, buildings, roads, people or boats. Avoid the smooth waxy look of a clay model, computer-game texture or synthetic heightfield.\n\nThe visible front slopes receive direct midday light. The Sun is 54 degrees high behind the viewer, just to their left, and outside the image. Bright direct illumination and substantial soft skylight fill; short subtle shadows behind relief. No long shadows, backlit rims or lighting from the side. Atmospheric depth is mild; farther slopes lose some contrast, not their outline. Calm pale cyan-cream clear sky; no clouds or disks.\n\nPreserve the source coast profile precisely: waterline at 45.34% of image height, highest broad ridge at 29.2%, left outline at 38.2%, right outline at 34.7%. Land covers about 13% of the picture. The smooth water is temporary for later component composition, so leave it smooth, without wave detail.\n\nHighest native quality. Clean edge-to-edge immersive landscape, ABSOLUTELY NO TEXT, labels, numbers, caption, watermark, border, swatches, diagrams or panels.",
+      "generated_file": "exec-5a9418f3-346c-4092-983c-b3733b2ed941.png",
+      "disposition": "Retained terrain component: more natural material appearance using the calculated silhouette mask. Local rock forms remain generated illustration.",
+      "pass": 8,
+      "saved_file": "../results/illustrations/passes/08-terrain-rebuild.png",
+      "sha256": "e4dcb08291055ca9cec966ea67bf3c4eb40d9999f729badcd0c56b5f86ec7158",
+      "reference_images": [
+        "../results/illustrations/ic-1-calculated-guide.png",
+        "../results/illustrations/ic-1-land-mask.png"
+      ]
+    },
+    {
+      "stage": "terrain-water-recomposition",
+      "prompt": "Compose one seamless, high-fidelity, immersive photographic seascape from these three references.\n\nIMAGE 1 is the BASE: retain its natural photographic LAND component, rounded silhouette, exact coast position, sky and composition. Its smooth sea is only a temporary placeholder to replace.\nIMAGE 2 supplies ONLY THE WATER GEOMETRY AND TEXTURE: the large broad low swells, fine ripples, perspective and realistic low viewpoint below the shoreline. Do not import any of image 2's terrain.\nIMAGE 3 supplies the target AVERAGE DISPLAY COLOURS, particularly the smooth grey-green sea gradient.\n\nReplace image 1's smooth sea with the richly detailed photographic water from image 2. Keep image 1's land and atmosphere. Fit the water seamlessly to its shoreline at 45.34% of frame height, preserving the near-water low viewpoint and broad undulations. No visible compositing seam, mask edge, halo, smooth strip or blurred transition.\n\nUse image 2's wave layout but adjust its average water colours to image 3: horizon #8ea29d; around 65% image height #788883 (the water in image 2 is too dark in this middle area); bottom foreground #505e5b. Facets and ripples vary naturally about these means. Lighten the middle water modestly without flattening liquid detail, bleaching reflections or adding mist. Avoid blue drift. Muted grey-green water, subtle olive-grey depth, pale sky reflections. Foreground has broad metre-scale undulations with fine irregular ripples, not dense identical chop or repetitive parallel grooves. Crest spacing increases naturally toward the viewer. Wave scale follows a 1.235 m significant wave height and 33.11 m dominant wavelength; gentle broad swells, not surf. Two-metre eye height, horizontal field of view 65 degrees, two-degree downward camera tilt.\n\nThe distant gently hazed warm tan coast stays as in IMAGE 1, covering about 13% of the frame. Preserve the photographic matte rock and regolith, with restrained texture appropriate to 5\u201321 km distance. Keep its outer shape and broad slope forms. Bright clear noon, Sun 54 degrees high behind the camera; front-lit slopes with diffuse sky fill and subdued short relief shadows. No visible Sun, Earth, stars, clouds, direct solar glitter, bright flare or long directional shadows. No whitecaps, foam, spray, waterline surf or bright shore stripe. No vegetation, roads, boats, buildings, people or added objects.\n\nKeep the sky pale cyan at the top, softly grading toward cream-green near the coast as in the colour guide, no oversaturated blue. The whole scene must read as one natural photograph: consistent exposure, atmospheric perspective, optical sharpness and colour. Do not stylize, exaggerate contrast or apply a painterly treatment. Preserve fine water detail without sharpening halos.\n\nHighest available native quality, clean 16:9 full frame. NO text, labels, scene IDs, numbers, captions, diagrams, borders, watermarks or other marks anywhere in the image.",
+      "generated_file": "exec-0beb938f-b8fc-480f-9f87-b805d96b8499.png",
+      "disposition": "Selected first IC-1 illustration after framing, colour and visual review; remaining mid-water colour mismatch recorded.",
+      "pass": 9,
+      "saved_file": "../results/illustrations/passes/09-selected-composite.png",
+      "sha256": "f8ab02295f70b78cb815041903b117f16d18b1bbbf1dc3c0c222b4020686186e",
+      "reference_images": [
+        "../results/illustrations/passes/08-terrain-rebuild.png",
+        "../results/illustrations/passes/06-water-colour-finish.png",
+        "../results/illustrations/ic-1-calculated-guide.png"
+      ]
+    }
+  ],
+  "final_file": "ic-1-ingenii-noon.png",
+  "created_date": "2026-10-04",
+  "selection": "First IC-1 illustration, with outstanding colour and physical-rendering limits recorded in ic-1-final-review.json.",
+  "final_sha256": "f8ab02295f70b78cb815041903b117f16d18b1bbbf1dc3c0c222b4020686186e",
+  "native_dimensions_px": [
+    1672,
+    941
+  ],
+  "resampling": "None; saved original native image bytes.",
+  "reference_records": [
+    "ic-1-calculated-guide.json",
+    "ic-1-wave-structure-guide.json"
+  ],
+  "review_file": "ic-1-final-review.json",
+  "review_script": "../results/illustrations/review_image.py",
+  "review_script_sha256": "6c6c1647692297d9eace02c2e7936c22d2a2d02ccb510a0bbb981a384a9cd4ca",
+  "checks": {
+    "scene_tests": "8 passed in 0.78 s",
+    "layer_check": "436 files checked, 0 violations",
+    "git_diff_check": "passed",
+    "guide_execution": "Completed with one BLAS/OpenMP thread and reduced wave tiles.",
+    "full_make_check": "Not run; no commit made.",
+    "full_spectral_render": "Not run. The guides use approximate display colours and surface shading."
+  },
+  "preservation": "Curated repository copy requested by the author on 2026-10-04. Original image bytes preserved. Intermediate references remain in ignored results/illustrations; hashes and complete prompts are retained here.",
+  "archive_checks": {
+    "make_check": "Completed successfully on 2026-10-04: 646 Python tests passed, 37 skipped; JavaScript suites and workspace validators passed. External protection inputs unavailable."
+  }
+}

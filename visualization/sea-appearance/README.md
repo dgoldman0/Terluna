@@ -43,3 +43,40 @@ panoramas on the research drive:
   above the water, with the sea in every direction. Colours are as calculated on
   a display with Earth-daylight (D65) white, unadapted; each strip has its own
   exposure, printed as the luminance shown white, and brighter highlights clip.
+
+## Image-generation references
+
+[image_guides.py](image_guides.py) prepares the Ingenii midday frame (IC-1) for
+image generation from its stored scene product and LOLA coast grid. It projects
+the terrain and interpolates the scene's display colours. Its terrain lighting
+is a normal-based approximation, without cast shadows or interreflection. The
+optional water guide calls the domain's wave realization on the scene's borrowed
+Nectaris spectrum, projects its height and filtered slopes, and uses approximate
+Fresnel contrast to show the wave structure. These are geometry, colour and
+structure references; the spectral path tracer remains the radiance renderer.
+
+```sh
+OPENBLAS_NUM_THREADS=1 python visualization/sea-appearance/image_guides.py --water-structure
+```
+
+The guides and intermediate component images live in ignored
+`results/illustrations/`. At the author's request, selected final images are also
+preserved in Git under [illustrations/](illustrations/README.md). JSON sidecars
+keep source hashes, prompts, generation passes and review notes. Images themselves contain no text or labels. Generated
+terrain detail and wave texture are illustrative; review their framing, lighting,
+shadows, atmospheric depth and wave scales against the inputs. Vegetation is
+omitted for this optical study; the bare shore is a placeholder for land whose
+ecology remains to be supplied by the domain research.
+
+[wp6_guides.py](wp6_guides.py) prepares WP-6, the earthlit darkest hour at
+western Procellarum. It projects the local LOLA coast, draws Earth's stored phase
+and apparent size, and reconstructs the mean glitter path with the domain's
+uniform-disk reflection model. Its optional wave guide uses the local SWAN
+spectrum, without adding short wind waves. An instantaneous wave realization
+need not show the mean glitter path; use the colour and structure guides together.
+The guide does not solve full spectral transport, cast shadows or long-exposure
+time integration. Its sidecars state these limits and compare the wave moments.
+
+```sh
+OPENBLAS_NUM_THREADS=1 python visualization/sea-appearance/wp6_guides.py --water-structure
+```

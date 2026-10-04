@@ -9,6 +9,12 @@ darkest hour of the night. Each scene is the frame the
 in words and numbers, so that they can be pictured, or illustrated with an image
 generator, before the full renderings are made.
 
+These frames isolate the sea, sky and coastal lighting. **Land vegetation is omitted for this
+optical study; the bare shorelines do not represent the intended mature landscape.** The coasts
+have not been established as naturally barren. The water is modelled as a living, productive
+coast, with phytoplankton and dissolved organic matter supplied as biosphere design guesses.
+Coastal vegetation and habitats remain to be supplied by the domain research.
+
 Every number is filled from [scenes.json](results/scenes.json), which
 [scenes.py](scenes.py) writes from the study's products:
 - **the colours and brightness of sky and sea:** the model of the results by regime (the solved
@@ -27,6 +33,11 @@ calculation. Two kinds of number are approximate:
 
 ## Reading the scenes
 
+- **Generated illustrations** use an immersive, high-fidelity photographic treatment. Keep scene IDs,
+  captions and modelling notes outside the image; the image itself has no text or labels. Use
+  calculated renders or geometry and colour guides as inputs, refining components and composing them
+  across passes when needed. Review framing, lighting, shadows, atmospheric depth and wave structure
+  against the study inputs before selecting a final composite.
 - **The frame** is a photograph 1920 by 1080 pixels through a rectilinear lens with a 65-degree
   horizontal field of view (a 28 mm lens on a full-frame camera; 39.4 degrees vertically), taken from
   a small boat with the eye 2 m above the water, the camera level and pitched as stated. Pixel
@@ -80,8 +91,8 @@ calculation. Two kinds of number are approximate:
     Seen at low angles the sea is mostly reflected sky.
   - The water is unbroken: no foam or whitecaps, which the study does not yet model.
 - **The land is a placeholder:** bare ground with the colour of Apollo soils, dark grey-brown mare soil,
-  and a brighter tan highland soil at the Ingenii coast. There are no plants, buildings, roads, boats or
-  people.
+  and a brighter tan highland soil at the Ingenii coast. Vegetation is omitted to isolate coastal
+  optics. Buildings, roads, boats and people are also omitted from these study frames.
 - **Few stars.** Even the darkest hours are bright. The earthlit or twilit sky is 0.03 to 0.8 cd/m²,
   100 to 3,000 times Earth's moonless night, and the thick air dims stars near the horizon by two to four
   magnitudes. Only one frame records stars.
@@ -121,7 +132,7 @@ low, rounded ridges, so the near water rises and falls in long gentle slopes. Wi
 centimetres to a few decimetres long, coarser than ripples on Earth, cover everything under a
 4.9 m/s breeze from behind the camera. They break the reflected sky into a fine, high-contrast
 mosaic of pale and slate facets; the waves show strongly. Unbroken water, no foam. No boats, no people,
-no plants, no buildings.
+no buildings. Vegetation is omitted for this optical study.
 
 **Frame data.**
 - **View:** 205° (south-southwest), pitched 3° down; horizon at row 463. The frame is 39% sky, 4% land and 57% sea.
@@ -734,7 +745,7 @@ The sea is the roughest of the 24 scenes:
 - grey-teal (#7b9295) below the horizon, darkening to deep slate (#4b5a58) at the
   bottom, with a faint olive cast in the nearest water.
 
-Unbroken water, no foam. No boats, no people, no plants.
+Unbroken water, no foam. No boats, no people. Vegetation is omitted for this optical study.
 
 **Frame data.**
 - **View:** 180° (south), pitched 3° down; horizon at row 463. The frame is 38% sky, 5% land and 57% sea.
@@ -1018,7 +1029,8 @@ A range of bare, sunlit mountains spans the whole width of the frame, 10 to 21 k
 pixels above the horizon at the left edge, climbs in rounded peaks and shoulders to 174 pixels at
 two-thirds of the way across (1,270 m), then falls to 115 pixels at the right edge. The mountains are
 pale tan-beige highland ground (#b9a48d), softened and cooled by haze. Their front faces are
-lit, with gentle shading in the folds and no vegetation.
+lit, with gentle shading in the folds. Vegetation is omitted for this optical study; the bare ground
+is a rendering placeholder.
 
 The sky is a very pale cyan-blue, almost white (#c8eae9 at the top), fading to pale cream-grey at
 the horizon behind the peaks (#dce2ca).
@@ -1027,7 +1039,7 @@ The sea is a grey-teal slate (#8ea29d below the horizon), darkening to deep slat
 (#505e5b) at the bottom. The band of water nearest the horizon mirrors the pale mountains in
 blurred streaks. A swell 1.2 m high and 33 m from crest to crest comes from the front
 left; wind ripples under a 3.7 m/s breeze give it a lively, fine texture. No foam, no boats,
-no people, no plants, no buildings.
+no people, no buildings.
 
 **Frame data.**
 - **View:** 180° (south), pitched 2° down; horizon at row 490. The frame is 32% sky, 13% land and 55% sea.
@@ -1304,7 +1316,9 @@ mountains. No foam, no boats, no people.
 - **The coast** is the LOLA altimetry grid, about 118 m between points, at the moment's tide. Its colour
   is a placeholder: bare Apollo soil, lit by the clear sky and the disks on a slope facing the camera,
   and hazed by extinction at the ground toward the colour of the horizon sky. Beaches, cliffs, surf, wet
-  ground and plants are not modelled. The Smythii frames show no land: the headland is behind the camera.
+  ground and plants are not modelled. The vegetation omission is a boundary of this optical study,
+  not a conclusion about which coasts support life. The Smythii frames show no land: the headland is
+  behind the camera.
 - **Waves:** significant heights, periods and directions come from the wave spectra.
   - At the nearside shores these are the restart files nearest the moment, up to 21 hours away.
   - At Smythii they are the hourly west-face spectra.
