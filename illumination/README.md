@@ -11,8 +11,8 @@ and earthlight.
 | [cloud_light/](cloud_light/) | Regional evening cloud radiance, self-shadowing and multiple scattering on saved CM1 fields, with a fixed-observer history, dark viewing openings and faint-twilight context | Explicit 2-D cloud extrusions and particle optics; regional 3-D structure, terrain, Earth-source spectra and perceptual response remain further inputs |
 | [water_surface/](water_surface/) | Reflection by rough water: the resolved waves' slope covariance from SWAN's spectra (printed spectra and restart files), the short waves from the unified spectrum of Elfouhaily et al. (1997), whose dispersion and capillary scales carry gravity and surface tension, and Fresnel facets with Gaussian slopes and Smith's shadowing for the glitter of the Sun and the Earth and the reflected sky | Linear waves; the short-wave laws are Earth fits, checked at Earth's gravity against Cox and Munk's clean-sea slopes and evaluated at lunar gravity with the lunar seas' u*/c_m inside their fitted range |
 | [water_column/](water_column/) | The colour of seawater: absorption and scattering of pure seawater, phytoplankton (Bricaud et al. 1998), dissolved organic matter and suspended regolith fines (Apollo soils through Hapke's model), the remote-sensing reflectance and the diffuse attenuation of daylight | Earth's ocean optics and its nadir reflectance model (Lee et al. 2002); fetched tables ([fetch_inputs.py](water_column/fetch_inputs.py)); the fines' optics rest on Hapke's isotropic and equivalent-slab approximations |
-| [earthlight/](earthlight/) | The Earth's light at the Moon by wavelength and phase: Glenar et al.'s (2019) model spectrum of the whole Earth at the visual brightness Robinson et al. (2025) fit to observations (geometric albedo 0.242) | Spring-season model spectrum without the Earth's daily turn; observed visual phase curve from 5° to 144°. The shared constant and ephemeris.py still use 0.367 |
-| [ephemeris.py](ephemeris.py) | Sun, Earth and star directions above a site; Earth's phase; earthlight as a fraction of sunlight | Mean-orbit geometry (synchronous rotation, lunar equator in the ecliptic, sinusoidal libration, Lambert-phase Earth of geometric albedo 0.367); good to a few degrees, not an ephemeris for dates |
+| [earthlight/](earthlight/) | The Earth's light at the Moon by wavelength and phase: Glenar et al.'s (2019) model spectrum of the whole Earth at the visual brightness Robinson et al. (2025) fit to observations (geometric albedo 0.242), the curve ephemeris.py and the immersion also follow | Spring-season model spectrum without the Earth's daily turn; observed visual phase curve from 5° to 144°, a Lambert sphere's shape beyond |
+| [ephemeris.py](ephemeris.py) | Sun, Earth and star directions above a site; Earth's phase; earthlight as a fraction of sunlight | Mean-orbit geometry (synchronous rotation, lunar equator in the ecliptic, sinusoidal libration, the Earth's measured visual phase curve with sunlight's colour); good to a few degrees, not an ephemeris for dates |
 | [stars/](stars/) | The Yale Bright Star Catalogue (9,096 stars): J2000 position, V magnitude, B−V | Catalogue data; the build pins the source file's hash |
 | [geometry.py](geometry.py) | Angular sweep with a 29.53-day period, idealized equatorial horizon and a six-degree interval | Simple angular arithmetic |
 
@@ -55,18 +55,17 @@ horizon view. The products retain source hashes, photon-block uncertainty,
 cloud-width and phase-function sensitivities, and a separate Earthlight proxy.
 
 For a near-side equatorial site 65° from the sub-Earth point, full Earth (earthlight
-about 1.0 × 10⁻⁴ of sunlight above the atmosphere) comes near sunset, and the
-midnight Earth is 72% lit. Through the reference Open Moon atmosphere that leaves
-about 2 lux on the ground at midnight.
+about 6.3 × 10⁻⁵ of sunlight above the atmosphere) comes near sunset, and the
+midnight Earth is 71% lit. Through the reference Open Moon atmosphere that leaves
+about 0.7 lux on the ground at midnight.
 
 ## Next work
 
 - A date-accurate ephemeris, the lunar equator's 1.54° tilt, refraction, and
   horizon obstruction.
-- Earthlight's own spectrum in the older products. [earthlight/](earthlight/) gives
-  it, at the Earth's observed brightness; the earthlit sky glow of the atlas and
-  ephemeris.py's grey Lambert Earth of albedo 0.367 still treat earthlight as
-  sunlight-coloured and brighter.
+- Earthlight's own spectrum in the older products. The earthlit sky glow of the
+  atlas and ephemeris.py's earthlight have the Earth's measured brightness with
+  sunlight's colour; [earthlight/](earthlight/) gives the spectrum.
 - Extend the cloud scenes to regional profiles, three-dimensional cloud fields,
   terrain and Earth-source light; update the remaining consumers of the older illumination products.
 - Benchmark low-Sun and night radiance. The libRadtran documentation

@@ -51,8 +51,13 @@ the equator unless stated.
 - **Carbon.** The evergreen stand grows 229 g C per m² per cycle, 7.8 per 24 hours
   against Earth's 5.4 for the same stand, and needs a store of 46 g C per m² for the
   night, or 10 if it idles at a quarter of its daytime upkeep.
-- **Darkness.** Earthlight gives the near side about 2 lux at midnight; far-side nights
-  are dark ([illumination](../../../illumination/README.md)).
+- **Darkness.** The nights are dark for photosynthesis, while eyes keep some light.
+  The Earth lights the near side: where it stands high the darkest hour keeps
+  2–3 lux, where it stands low half a lux and less. The far side's nights are
+  twilit, since the twilight wraps round the Moon: away from the far side's equator
+  the darkest hour keeps tenths of a lux (0.46 lux by Mare Ingenii), and only near
+  that equator does the night grow dark around midnight
+  ([lighting calendar](../sea_appearance/README.md#the-lighting-calendar)).
 - **Air.** 1.2 atm at 1.43 kg/m³. Each m² of ground lies under 74,900 kg of air holding
   14,500 kg of O₂ and 46 kg of CO₂.
 - **Water.** Seas cover 28% of the Moon, and rain-fed lakes a further 11.6%. Rivers
@@ -225,7 +230,8 @@ the equator unless stated.
     come.
   - Artificial light at night harms moths at most stages of their lives (Boyes et al.
     2021), so the lures' catch has to leave the insect populations standing.
-  - Earthlight competes on the near side; far-side nights are dark.
+  - Earthlight competes on the near side, and twilight on most of the far side, whose
+    nights grow dark only near its equator around midnight.
 - **E4. Carnivorous plants.** *Earth evidence · in places.* Carnivory pays in sunny,
   moist, nutrient-poor places (Givnish et al. 1984). Traps cost carbon, while their
   benefit levels off (Ellison and Adamec 2011).
