@@ -1,0 +1,38 @@
+{
+  "schema": "terluna.research.solar-shield-fleet-control-budget/1",
+  "producer": {
+    "source_hashes": {
+      "research/studies/solar_shield_array/fleet_control_budget.py": "57a95fd66b853d4b533440bb8e58b48d67a77d32e98ebaa85a2beb3817d4ca54",
+      "research/studies/solar_shield_array/scenario.json": "a53b784941518b6e36ccdf728252cf6c8e0c46c1126b6c621ed4e28c23128699",
+      "research/studies/solar_shield_array/cycling_search.py": "4789a0185620f6662916462b2715aa9002e6454e74f4f32ef5f7dadf5f732093"
+    },
+    "constants": {
+      "EARTH_GM": 398600441800000.0,
+      "EARTH_MOON_DISTANCE": 384400000.0,
+      "JULIAN_DAY": 86400.0,
+      "MOON_GM": 4902800118000.0,
+      "SOLAR_CONSTANT": 1361.0,
+      "SPEED_OF_LIGHT": 299792458.0
+    }
+  },
+  "evidence": "Analytical 1-AU ideal specular filter limits; no avoidance maneuver or controlled fleet was propagated",
+  "areal_mass_kg_m2": 0.05,
+  "diverted_bolometric_fraction": 0.1379500367376929,
+  "face_on_photon_acceleration_m_s2": 2.5050663549381225e-05,
+  "maximum_transverse_photon_acceleration_m_s2": 9.642004895742664e-06,
+  "maximizing_normal_cone_deg": 35.26438968275466,
+  "rest_to_rest_translation_hours": {
+    "50.0": 1.2651115573813387,
+    "100.0": 1.789137922363637,
+    "10000.0": 17.89137922363637
+  },
+  "lunar_circular_speed_at_15000km_m_s": 571.7108895237172,
+  "along_track_phase_error_for_50m_s": 0.08745679138918303,
+  "reading_rule": "Translation times are the ideal symmetric bang-bang scale for a bounded one-axis acceleration, zero initial/final lateral velocity and no gravitational coupling. Solar availability, Earth-safe beams, spectral/coverage constraints and changing orbits must enter an actual maneuver. The phase-error figure is a state-estimation tolerance, not a commanded update interval.",
+  "excluded_loads": [
+    "collectors",
+    "habitats",
+    "attitude and control hardware beyond the assumed base optical allocation"
+  ],
+  "delivered_electrical_power_W": null
+}

@@ -54,6 +54,15 @@ def test_finite_sun_removes_the_umbra_of_an_isolated_ten_km_tile():
     assert result['all_sampled_sun_coverage'] == 0
 
 
+def test_large_held_square_covers_every_sampled_solar_direction():
+    pytest.importorskip('shapely')
+    state = np.array([[20e6, 0., 0., 0., 0., 0.]])
+    result = coverage_snapshot(state, np.array([[-1., 0., 0.]]), static_sample(),
+                               20e6, 4*K.MOON_RADIUS, sun_count=32)
+    assert result['ray_coverage'] == pytest.approx(1.)
+    assert result['all_sampled_sun_coverage'] == pytest.approx(1.)
+
+
 def test_swept_guard_catches_collision_between_safe_endpoints():
     state = np.zeros((2, 2, 6))
     state[0, :, 0] = [-100., 100.]; state[1, :, 0] = [100., -100.]
@@ -69,3 +78,18 @@ def test_separated_tiles_can_shadow_each_other_without_colliding():
         sun_directions=np.array([[1., 0., 0.], [1., 0., 0.]]))
     assert not conflicts
     assert (0, 1) in shadows
+
+
+def test_vectorized_sweeps_preserve_collision_and_shadow_pair_minima():
+    from .fleet_exclusions import swept_conflicts as vectorized
+    rng = np.random.default_rng(417)
+    states = np.zeros((5, 36, 6))
+    states[..., :3] = rng.normal(size=(5, 36, 3))*50000+np.array([15e6, 0., 0.])
+    sun = np.tile([1., .01, .003], (5, 1))
+    args = (np.arange(5)*600., states, 10000.)
+    reference = swept_conflicts(*args, sun_directions=sun)
+    fast = vectorized(*args, sun_directions=sun)
+    for a, b in zip(reference, fast):
+        assert a.keys() == b.keys()
+        for pair in a:
+            assert a[pair] == pytest.approx(b[pair], abs=1e-9)

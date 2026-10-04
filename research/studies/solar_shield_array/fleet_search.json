@@ -1,0 +1,142 @@
+{
+  "schema": "terluna.research.solar-shield-fleet-search/1",
+  "base_commit": "872f407d56b29ae5a89ae26920d2ebccac6f3201",
+  "checkpoints_pushed": [
+    "218237465f9b2caaf7659a245ee71f0a2896eaef",
+    "93b8ef29a31fb1d9c6ac1a66b9dfbf4a7ade3959"
+  ],
+  "primary_protected_lunar_radii": 4,
+  "comparison_protected_lunar_radii": 3,
+  "areal_mass_kg_m2": 0.05,
+  "cases": [
+    {
+      "config": {
+        "name": "planar_10km",
+        "radii_km": [
+          15000.0
+        ],
+        "planes": 1,
+        "phases": 576,
+        "days": 30.0,
+        "side_km": 10.0,
+        "arrangement": "planar",
+        "phase_offset": 0.0,
+        "output_step": 600.0,
+        "max_step": 1200.0,
+        "rtol": 2e-10
+      },
+      "status": "completed_inherited_centre_force_propagation",
+      "raw_sha256": "b7b992d1e1de4fd8ff43114e8a13dc9920169a9c33c6edba794d4c597da11c08",
+      "initial_state_sha256": "343bb7ee6af1dc2bbd094f3dc798f56dc9d3efd5fac41c3f273e1019554b0ef9",
+      "metadata_sha256": "cc5040c20c8323b559ce09e196c6990551ecf9635e1eb62b57c755c22999c3b9"
+    },
+    {
+      "config": {
+        "name": "planes_10km",
+        "radii_km": [
+          15000.0
+        ],
+        "planes": 12,
+        "phases": 48,
+        "days": 30.0,
+        "side_km": 10.0,
+        "arrangement": "isotropic",
+        "phase_offset": 0.0,
+        "output_step": 600.0,
+        "max_step": 1200.0,
+        "rtol": 2e-10
+      },
+      "status": "completed_inherited_centre_force_propagation",
+      "raw_sha256": "42c3743479642f9d23fb71b8c538319ebf2e95e7458b0e19c036f563c2e7067b",
+      "initial_state_sha256": "f8f76bb3f6c3b781a493a496ce29ed19f0d68983c341b73b51382c4dae222fcf",
+      "metadata_sha256": "17f2e27950a5fc4f311cce371ee18c851320a853afbe8215bc0d5131d9a93dcd"
+    },
+    {
+      "config": {
+        "name": "families_inner_10km",
+        "radii_km": [
+          15000.0,
+          16000.0,
+          17000.0
+        ],
+        "planes": 12,
+        "phases": 48,
+        "days": 30.0,
+        "side_km": 10.0,
+        "arrangement": "isotropic",
+        "phase_offset": 0.0,
+        "output_step": 600.0,
+        "max_step": 1200.0,
+        "rtol": 2e-10
+      },
+      "status": "completed_inherited_centre_force_propagation",
+      "raw_sha256": "e28c19e812bd683d052ec7d8dc67f51723db86f76866faa12f8aed3717dc7e80",
+      "initial_state_sha256": "60fcc1cb274ff7b8de10a2571967b7ba6472228ed7ec3c39cb29324f833b5b81",
+      "metadata_sha256": "2063202bb0e953b20ba333ea6622f6f75184eab7da29423e1353347027802a8b"
+    },
+    {
+      "config": {
+        "name": "dense_1000km",
+        "radii_km": [
+          15000.0
+        ],
+        "planes": 24,
+        "phases": 64,
+        "days": 30.0,
+        "side_km": 1000.0,
+        "arrangement": "isotropic",
+        "phase_offset": 0.0,
+        "output_step": 600.0,
+        "max_step": 1200.0,
+        "rtol": 2e-10
+      },
+      "status": "completed_inherited_centre_force_propagation",
+      "raw_sha256": "8a6bbaeb6493a2d2df4cd0c1deeaecc8ca11e44c500cd1cd9172957806cee478",
+      "initial_state_sha256": "93f4efffb297bd9e58665c3d4cdfcda7121bfd53518f8312944675a337c3c6f9",
+      "metadata_sha256": "af2d5b62f32be2d8bee46a3f12f061ee532a86c8d55a432e2cb2fd13085df0d9"
+    },
+    {
+      "config": {
+        "name": "dense_double_1000km",
+        "radii_km": [
+          15000.0
+        ],
+        "planes": 24,
+        "phases": 128,
+        "days": 30.0,
+        "side_km": 1000.0,
+        "arrangement": "isotropic",
+        "phase_offset": 0.0,
+        "output_step": 600.0,
+        "max_step": 1200.0,
+        "rtol": 2e-10
+      },
+      "status": "completed_inherited_centre_force_propagation",
+      "raw_sha256": "86c20f6014140e001222b6f3743549456c6b4ebbed4dfd5cbe57014c428f49b0",
+      "initial_state_sha256": "f5342b6daa430b9f2018f906670e8a97f40b66c0f6ae88e9320356b293f66f95",
+      "metadata_sha256": "283483dd258218c007e9afa2a8cab6f8777d9209c9ef91aced07a91760a99a89"
+    }
+  ],
+  "rejected_runs": [
+    {
+      "name": "families_10km",
+      "radii_km": [
+        15000,
+        20000,
+        30000
+      ],
+      "planes_per_radius": 12,
+      "phases_per_plane": 48,
+      "member_count": 1728,
+      "side_km": 10,
+      "days": 30,
+      "status": "rejected_radial_guard",
+      "exception": "Member crossed the radial exclusion; do not publish as completed",
+      "guard": "minimum radius <= 4.01 lunar radii OR maximum radius >= 300000 km",
+      "failed_member_and_crossing_time": "not exported by this runner; no attribution to a particular plane or radius is inferred",
+      "log_sha256": "e752ba047df5d5d8e85e1be11746e927940aad73ac107d7feefddd27a9636a67"
+    }
+  ],
+  "search_scope": "Five completed common-epoch populations and one rejected population. Deterministic circular seed planes, two phase densities, several radii and finite tile sizes. No globally optimal fleet or coverage guarantee is inferred.",
+  "large_square_scope": "1000 km squares are explicit finite-geometry stress probes on centre-propagated trajectories. Their finite-extent gravity, flexure and structure require a new dynamics model; subdivision into independently orbiting 10 km tiles was not simulated."
+}

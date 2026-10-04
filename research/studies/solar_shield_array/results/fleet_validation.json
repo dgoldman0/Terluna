@@ -1,0 +1,112 @@
+{
+  "schema": "terluna.research.solar-shield-fleet-validation/1",
+  "producer": {
+    "source_hashes": {
+      "protection/dynamics/cycling.py": "704fbd03c9d4070ea05bdfeba57914ec225941f3560710da2472bd24ca870ed4",
+      "protection/dynamics/ephemeris.py": "9a162c3acf63a844284eb61b444a7d34f1447b5182d254d3e87616516f8748d9",
+      "protection/dynamics/ephemeris.json": "90fde7cb6142e5d4d8082270a978ba2f8f47baaefab0e8d1cf82ec6f07a27222",
+      "protection/dynamics/model.py": "01c9191588037ab4f42bac38dc4d5bd99e57427d37fa75cd672120e32b53733a",
+      "protection/dynamics/optical.py": "06a13ae9f24834876edbc12b513deaa5e3735f02f8249eb57c8996d74ce00b56",
+      "research/studies/solar_shield_array/scenario.json": "a53b784941518b6e36ccdf728252cf6c8e0c46c1126b6c621ed4e28c23128699",
+      "research/studies/solar_shield_array/cycling_search.py": "4789a0185620f6662916462b2715aa9002e6454e74f4f32ef5f7dadf5f732093",
+      "research/studies/solar_shield_array/cycling_feedback.py": "0eb32d26e14472f0a512cdf45d60f00ab8260376cd51ca715e7615bf7df02775",
+      "protection/dynamics/fleet.py": "f3e52653876c2956a4b355dc1290a0a1cadd2b9b601cafc664259827df1cc93c",
+      "research/studies/solar_shield_array/fleet_run.py": "9b8bc9765b9288745ea7d4d69d59e857e76e54d29cc91b37160503e9d9090833",
+      "research/studies/solar_shield_array/fleet_validate.py": "f6f1a08d18ffeedfde3d34617ec91b6f2252b68d449535135a06bd29b0518ff6"
+    },
+    "constants": {
+      "AU": 149597870700.0,
+      "EARTH_GM": 398600441800000.0,
+      "EARTH_MOON_DISTANCE": 384400000.0,
+      "EARTH_OBLIQUITY_DEG": 23.4393,
+      "EARTH_RADIUS": 6371000.0,
+      "JULIAN_DAY": 86400.0,
+      "MOON_GM": 4902800118000.0,
+      "MOON_RADIUS": 1737400.0,
+      "SOLAR_CONSTANT": 1361.0,
+      "SOLAR_SYSTEM_GM": {
+        "mercury": 22031868551000.0,
+        "venus": 324858592000000.0,
+        "mars": 42828375816000.0,
+        "jupiter": 1.267127641e+17,
+        "saturn": 3.79405848418e+16,
+        "uranus": 5794556400000000.0,
+        "neptune": 6836527100580000.0,
+        "pluto": 975500000000.0
+      },
+      "SPEED_OF_LIGHT": 299792458.0,
+      "SUN_GM": 1.3271244004127942e+20,
+      "SUN_RADIUS": 695700000.0
+    }
+  },
+  "evidence": "Numerical centre-model replay and finite-extent gravity residual; operational tracking and material forces remain unvalidated",
+  "cases": {
+    "planes_10km": {
+      "raw_sha256": "42c3743479642f9d23fb71b8c538319ebf2e95e7458b0e19c036f563c2e7067b",
+      "finite_extent_gravity": [
+        {
+          "maximum_m_s2": 2.421448153852294e-09,
+          "mean_m_s2": 1.8464123988254676e-09,
+          "quadrature": "3 by 3 Gauss-Legendre over a uniform rigid square"
+        },
+        {
+          "maximum_m_s2": 2.5030676472316103e-09,
+          "mean_m_s2": 1.9346211699909553e-09,
+          "quadrature": "3 by 3 Gauss-Legendre over a uniform rigid square"
+        },
+        {
+          "maximum_m_s2": 2.6329529408634446e-09,
+          "mean_m_s2": 1.827664798059836e-09,
+          "quadrature": "3 by 3 Gauss-Legendre over a uniform rigid square"
+        }
+      ],
+      "max_sun_direction_rate_rad_s": 2.0799298011858486e-07,
+      "assumed_shadow_guard_rate_rad_s": 3e-07,
+      "finite_extent_forces_in_main_propagation": false,
+      "reading_rule": "These residual forces quantify one omitted term; they do not supply a corrected coupled fleet propagation.",
+      "independent_replay": {
+        "member_ids": [
+          0,
+          82,
+          164,
+          246,
+          328,
+          410,
+          492,
+          575
+        ],
+        "days": 30.0,
+        "max_position_difference_m": 898.2967468438126,
+        "final_position_difference_m": 897.1597869273494,
+        "max_step_s": 300.0,
+        "relative_tolerance": 2e-12,
+        "trajectory_agreement_within_50m": false,
+        "comparison": "Whole month, eight distinct phases, fourfold smaller maximum step and 100-fold tighter relative tolerance"
+      }
+    },
+    "dense_1000km": {
+      "raw_sha256": "8a6bbaeb6493a2d2df4cd0c1deeaecc8ca11e44c500cd1cd9172957806cee478",
+      "finite_extent_gravity": [
+        {
+          "maximum_m_s2": 2.418286387319485e-05,
+          "mean_m_s2": 1.8674547507026852e-05,
+          "quadrature": "3 by 3 Gauss-Legendre over a uniform rigid square"
+        },
+        {
+          "maximum_m_s2": 2.5210391955898365e-05,
+          "mean_m_s2": 1.9546364709270504e-05,
+          "quadrature": "3 by 3 Gauss-Legendre over a uniform rigid square"
+        },
+        {
+          "maximum_m_s2": 2.66418269025883e-05,
+          "mean_m_s2": 1.8422451104968512e-05,
+          "quadrature": "3 by 3 Gauss-Legendre over a uniform rigid square"
+        }
+      ],
+      "max_sun_direction_rate_rad_s": 2.0799298011858486e-07,
+      "assumed_shadow_guard_rate_rad_s": 3e-07,
+      "finite_extent_forces_in_main_propagation": false,
+      "reading_rule": "These residual forces quantify one omitted term; they do not supply a corrected coupled fleet propagation."
+    }
+  }
+}

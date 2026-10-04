@@ -189,3 +189,11 @@ with about 15.7% useful projected area and no electric thrust. A separate
 optimized solar-sail return arc is independently replayed. These results
 support a fleet-inventory alternative; spatial coverage, real spectral and
 attitude response, seams, collision avoidance and payload mass remain open.
+
+The [simultaneous fleet follow-up](../research/studies/solar_shield_array/fleet.md)
+tests finite squares in several planes and radial families over a common month.
+Solar-disk ray unions expose substantial gaps even when summed areas exceed
+the protected aperture. Swept collision and mutual-shadow exclusions reduce
+the candidate populations further. The 50 m placement gate fails on independent
+replay, and large-square probes need extended-body dynamics. Four lunar radii
+is the primary target; continuous coverage and payload power remain unresolved.

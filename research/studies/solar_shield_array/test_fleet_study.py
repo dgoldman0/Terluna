@@ -6,6 +6,7 @@ from shared import constants as K
 from shared.provenance import constants_changed, constants_used
 from protection.dynamics.fleet import initial_fleet
 from .fleet_run import digest, ROOT, HERE
+from .fleet_handover import hermite_state
 
 
 class StaticFrame:
@@ -51,3 +52,42 @@ def test_fleet_products_bind_sources_and_do_not_claim_payload_or_continuous_cove
                     s = result['summary'][key]
                     assert 0 <= s['minimum'] <= s['mean'] <= s['maximum'] <= 1+1e-12
                 assert result['optical_mass_kg'] == pytest.approx(result['physical_area_m2']*.05)
+
+
+def test_handover_interpolation_recovers_a_known_cubic_trajectory():
+    times = np.array([0., 2.])
+    state = np.zeros((2, 1, 6))
+    state[:, 0, 0] = times**3-2*times
+    state[:, 0, 3] = 3*times**2-2
+    for t in [0., .3, 1., 1.7, 2.]:
+        value = hermite_state(t, times, state)[0]
+        assert value[0] == pytest.approx(t**3-2*t)
+        assert value[3] == pytest.approx(3*t*t-2)
+
+
+def test_followup_products_bind_sources_and_preserve_their_evidence_states():
+    for path in (HERE/'results').glob('fleet_*.json'):
+        p = json.loads(path.read_text())
+        if 'producer' not in p:
+            continue
+        for name, expected in p['producer']['source_hashes'].items():
+            assert digest(ROOT/name) == expected, (path.name, name)
+        assert not constants_changed(p['producer']['constants'])
+        for name, expected in p['producer'].get('input_products', {}).items():
+            assert digest(HERE/'results'/name) == expected
+        for key in ('input_product', 'template_product'):
+            if key in p['producer']:
+                assert digest(HERE/'results'/p['producer'][key]) == p['producer'][key+'_sha256']
+        if p['schema'].endswith('fleet-validation/1'):
+            for case in p['cases'].values():
+                assert case['max_sun_direction_rate_rad_s'] < case['assumed_shadow_guard_rate_rad_s']
+                if 'independent_replay' in case:
+                    r = case['independent_replay']
+                    assert r['trajectory_agreement_within_50m'] == (r['max_position_difference_m'] < 50)
+        if p['schema'].endswith('fleet-refinement/1'):
+            assert p['target_radii_m']['3R'] == 3*K.MOON_RADIUS
+            assert p['target_radii_m']['4R'] == 4*K.MOON_RADIUS
+            for case in p['cases'].values():
+                for variant in case['variants'].values():
+                    for r in variant['records']:
+                        assert r['all_sampled_sun_coverage'] <= r['ray_coverage']+1e-12

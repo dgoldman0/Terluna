@@ -17,9 +17,18 @@ candidates at the same 50-g/m² base mass. A 15,000-km retrograde seed with
 filtering during service and feathering between passes stays bounded for
 three years and averages about 15.7% useful projected area. A separate
 optimized 8.9-day solar-sail arc closes within 17 m on independent replay.
-These establish orbital motion and an inventory comparison; continuous fleet
-coverage, finite tiles, handovers, attitude hardware and real optics remain
-open. [tacking.md](tacking.md) retains the initial literature review.
+These establish orbital motion and an inventory comparison.
+[tacking.md](tacking.md) retains the initial literature review.
+
+The [simultaneous fleet study](fleet.md) now tests five common-epoch populations
+with multiple planes and radii, finite square shadows, solar-disk quadrature,
+seams, swept collision and mutual-shadow exclusions, and Earth-safe ideal
+reflections. Continuous coverage remains unachieved. A 3,072-member large-square
+geometry probe averages 61.76% interception before exclusions; its selected
+19-member subset averages 0.78% and reaches zero. Those 1,000 km squares need
+extended-body dynamics; the 10 km replay also fails the 50 m phase-accuracy
+gate. No sufficient inventory or collector/habitat power is demonstrated.
+Four lunar radii remains primary, with three radii as a comparison.
 
 The study couples protection, engineering, illumination and habitation. Its
 runners, compact numerical results and interpretation belong together here;
@@ -30,7 +39,7 @@ protection implementation and its imported results remain byte-pinned.
 ## Reproduce the study
 
 ```sh
-python -m pip install -r research/requirements.txt
+python -m pip install -r research/studies/solar_shield_array/requirements.txt
 python -m protection.dynamics.ephemeris --download
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.run
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.validate
@@ -62,8 +71,9 @@ habitat capacity and long-term resource closure remain open.
 `make check` was run before this design-only commit: 545 Python tests passed,
 55 skipped and 13 failed. The failures concern absent solar-spectrum inputs,
 CM1 build configuration, the ExoPlaSim process lookup and ring-comfort tests.
-No executable model was changed in that initial commit. The combined holding and cycling suite has
-35 passing targeted tests. Repository-wide check status and the numerical
+No executable model was changed in that initial commit. Current targeted
+and repository-wide check status, including the fleet phase-accuracy failure,
+and the numerical
 verification are recorded in [checks.json](checks.json) and
 [validation.json](results/validation.json).
 

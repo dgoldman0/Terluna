@@ -15,7 +15,7 @@ control ball. Passive control has no sunward force component.
 Restore the external input from NASA; its binary stays outside Git:
 
 ```sh
-python -m pip install -r research/requirements.txt
+python -m pip install -r research/studies/solar_shield_array/requirements.txt
 python -m protection.dynamics.ephemeris --download
 python -m pytest protection/dynamics research/studies/solar_shield_array
 ```
@@ -40,3 +40,16 @@ producer. The [cycling study](../../research/studies/solar_shield_array/cycling.
 contains the collocation search and independent full-ephemeris propagation.
 A 50-g/m² candidate remains bounded for three years; continuous fleet coverage
 and practical attitude/formation control are not demonstrated.
+
+## Simultaneous finite tiles
+
+[fleet.py](fleet.py) adds independent common-epoch initial states, ideal safe
+reflection, finite-square perspective shadows over the solar disk, seams and
+swept collision/mutual-shadow guards. [fleet_exclusions.py](fleet_exclusions.py)
+provides a vectorized equivalent of the reference pair scan for larger
+populations. The [fleet study](../../research/studies/solar_shield_array/fleet.md)
+records five 30-day populations, spatial maps, local minute-cadence coverage,
+inventory exclusions and control bounds at 50 g/m². Continuous coverage remains
+unachieved, and an independent replay differs by 898 m against a 50 m placement
+allowance. Large-square stress probes expose significant finite-extent force
+errors; neither practical formation control nor delivered power is established.
