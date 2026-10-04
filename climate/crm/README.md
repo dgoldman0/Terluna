@@ -1239,6 +1239,17 @@ the height that rule stands at on Earth. The 50-MV and 10-kV/m conditions for a
 ground strike, the 0.9 and 0.8 fractions of breakdown, the 200-V/m internal
 field and the nitrogen oxide yield stay as WRF-ELEC calibrates them for Earth.
 
+The breakdown field's bounds also stay WRF-ELEC's, and the upper one reaches
+into the lunar storms. On Earth the 180-kV/m cap applies below about 4.5 km,
+beneath where flashes start. The lunar air is dense enough for it to apply below
+about 36 km: there it sets the breakdown field below the density scaling by 4 %
+at 34 km, 10 % at 30 km, 23 % at 20 km and 44 % at the ground (180 against 322
+kV/m). In `box_0e_elec`'s first lunar day 84 of its 162 flashes started at
+32–34 km, where the cap lowered the field a flash starts at by 4–7 %, and 152
+ran channels below 36 km, where it lowers the field a channel stops at by
+10–19 % at their lower ends (24–30 km). The 50-kV/m floor applies only above
+about 100 km in the lunar air.
+
 Three faults in the first version were found and fixed. It discharged once a
 6-second step, after the step's charging and all its sedimentation; WRF-ELEC
 sub-steps the sedimentation and discharges after each sub-step, and without
@@ -1470,12 +1481,30 @@ ground), under the Sun and the day-night forcing of that hour (`var18`). Its
 nudging, vertical wind, land, CCN and electricity are the coarse box's, its first
 time step a third of the coarse one's, and it writes output every 15 minutes and
 restarts every 3 hours over two model days. It builds its own clouds from that
-air, so its storms start a few hours into the run. The day it starts from is
-chosen once the coarse run has shown its storms, a few hours before a stormy
-window; the case refuses to set up until it is set. A check from day 5 ran its
-first five model minutes cleanly. It runs from 2026-10-04, from the coarse run's
-day 10.75, 41° past local noon and four hours before the coarse run's first
-flash (day 10.92), through days 11–12, when `box_0e`'s storms peaked.
+air. The day it starts from is chosen once the coarse run has shown its storms,
+a few hours before a stormy window; the case refuses to set up until it is set.
+A check from day 5 ran its first five model minutes cleanly. It ran on
+2026-10-04 from the coarse run's day 10.75, 41° past local noon and four hours
+before the coarse run's first flash (day 10.92), through days 11–12, when
+`box_0e`'s storms peaked.
+
+Its two model days ran in 2.8 hours on 4 threads beside the coarse run, and no
+flash struck. Building storms from the averaged air took most of the first
+day: graupel formed at day 11.2 and the storms charged from day 11.5. From day
+11.9 they stood as strong as the coarse box's (updrafts to 21 m/s against 21,
+graupel and hail per unit area within 3 % of the coarse box's on average), with
+cloud tops to 68 km against 86. They held up to 1,505 C of
+positive and 1,603 C of negative charge at day 12.55, more per unit area than
+the coarse box held between its flashes, but the strongest field aloft reached
+131 kV/m at 34 km (day 11.89), 73 % of the breakdown field there, where a flash
+starts at 90 %. Over the same days the coarse box flashed 56 times, in bursts
+from seven or eight storms over nine times the area, four or five of them after
+day 11.9. At that rate per unit area the fine box would expect half a flashing
+storm while its storms were mature and see none about 60 % of the time, so
+these two days leave open whether the finer grid changes the lightning. The box
+is also small for these storms: lunar storms stand four to five times taller
+than Earth's, so 128 km is like a 30-km box on Earth, room for one or two storms
+at a time.
 
 ```sh
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_elec_fine    # after setting fine_from['day']

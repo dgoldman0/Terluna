@@ -218,11 +218,20 @@ Morrison's do.
    from the coarse run's averaged air a few hours before a stormy window and run
    for two model days with output every 15 minutes, to resolve the storm cells
    and draw the flashes on a finer grid. Set up on 2026-10-04 at the author's
-   request and running from the same day at the author's go-ahead, from the
-   coarse run's day 10.75, four hours before its first flash.
+   request and run the same day at the author's go-ahead, from the coarse run's
+   day 10.75, four hours before its first flash. Its storms took most of the
+   first model day to grow from the averaged air, then matched the coarse box's
+   in updrafts and graupel and charged to about 1,500 C of each sign, but no
+   flash struck: the field peaked at 73 % of breakdown. At the coarse box's rate
+   of flashing storms per unit area, a box this size sees none in that time
+   about 60 % of the time, so the effect of the finer grid on the lightning is
+   still open (climate/crm README, "The fine box").
 4. Windows of `box_0e_elec`'s second lunar day run again from its restarts with
    output every few minutes, to follow each storm's life, under Takahashi's law,
-   with leakage, and with the unbounded breakdown field.
+   with leakage, and with the unbounded breakdown field. WRF-ELEC caps the
+   breakdown field at 180 kV/m, a cap that on Earth applies only below about
+   4.5 km; in the lunar air it applies below about 36 km, where half the first
+   lunar day's flashes started (climate/crm README, the lunar settings).
 
 It gives the storms' charge structure, the field by height, flash rates and
 types (within cloud and to ground), flash extent, the charge each flash moves
