@@ -1,0 +1,266 @@
+{
+  "schema": "terluna.research.energy-trial-collection/1",
+  "producer": {
+    "source_hashes": {
+      "protection/dynamics/cycling.py": "704fbd03c9d4070ea05bdfeba57914ec225941f3560710da2472bd24ca870ed4",
+      "protection/dynamics/ephemeris.py": "9a162c3acf63a844284eb61b444a7d34f1447b5182d254d3e87616516f8748d9",
+      "protection/dynamics/ephemeris.json": "90fde7cb6142e5d4d8082270a978ba2f8f47baaefab0e8d1cf82ec6f07a27222",
+      "protection/dynamics/model.py": "01c9191588037ab4f42bac38dc4d5bd99e57427d37fa75cd672120e32b53733a",
+      "protection/dynamics/optical.py": "06a13ae9f24834876edbc12b513deaa5e3735f02f8249eb57c8996d74ce00b56",
+      "research/studies/solar_shield_array/scenario.json": "a53b784941518b6e36ccdf728252cf6c8e0c46c1126b6c621ed4e28c23128699",
+      "research/studies/solar_shield_array/cycling_search.py": "4789a0185620f6662916462b2715aa9002e6454e74f4f32ef5f7dadf5f732093",
+      "research/studies/solar_shield_array/cycling_feedback.py": "0eb32d26e14472f0a512cdf45d60f00ab8260376cd51ca715e7615bf7df02775",
+      "protection/dynamics/fleet.py": "f3e52653876c2956a4b355dc1290a0a1cadd2b9b601cafc664259827df1cc93c",
+      "research/studies/solar_shield_array/fleet_run.py": "9b8bc9765b9288745ea7d4d69d59e857e76e54d29cc91b37160503e9d9090833",
+      "protection/dynamics/active_formation.py": "597c12c6a4a89c0ea70663fddd69b9b5d9e599c88a2bd1742f5009d19e050b7a",
+      "protection/dynamics/active_retime.py": "9ba27a7ec48460a345289ebc7550c502f845487beaec5fe35084a67b2d9d736b",
+      "protection/dynamics/coverage_pilot.py": "fb03381e4387cb17e5276148428a3ffb2cbfb5313c8f59b8ff708ebeb9ce079c",
+      "protection/dynamics/natural_pattern.py": "780c2679f13c097c07b89e9d7cce1c91399f464f01b4bd878fb50cb643e1be29",
+      "research/studies/solar_shield_array/patterns_run.py": "f2e346fd2281632e5bf1c285c61229ba24e26e4ba4c480713194218263888d5c",
+      "protection/dynamics/pattern_departure.py": "24e7bb0653f9ab546b46a9a650ae67e3adb0af154c3e5b9ba83461e9648b828b",
+      "protection/dynamics/departure_control.py": "beafd12acfb4a228c17a329c9e0d278282222e90be7126b20b3e2df551bedfd5",
+      "protection/dynamics/pattern_return.py": "a1a3f85e5f7744d0418574d0fc2a033d4ab69d9d55eba9bfbb85974c7ab64757",
+      "protection/dynamics/energy_coast.py": "df47adb192e3f665e977353844e478f9cd5a30f63ca54ea2f31b59e9cd1b6826",
+      "protection/dynamics/attitude_load.py": "0b977677edc96d33889eb36526c4826c625eea2cb1a4e3b4254e970ac99582e4",
+      "research/studies/solar_shield_array/return_screen.py": "53ec3ecf5165c773142315d97553f9c72ebbe6c045299ec368104c1811f4b526",
+      "research/studies/solar_shield_array/energy_screen.py": "3506f2f1c725299fc98795fb32ed3c0063605f114c3d5cdbc711ee0f5c3bf9bd",
+      "protection/dynamics/parallel_shadow.py": "98d09fc9e5812b3592cbc5e24e0615f9f9aa3a75c7f33afff0fe82d0e40c3c24",
+      "research/studies/solar_shield_array/departure_validate.py": "df457b279e1b69627f65fa528877faa414161e6bfea881387d28243504f9b9b0",
+      "research/studies/solar_shield_array/energy_run.py": "1ddb0b6d2aabac1252ae614369230d286d6db7c79a45b7c863ac1a926ccd1c08",
+      "protection/dynamics/coast_control.py": "315bb9a1456ca1108f93ec1579719f7933acafb3f3c2b79bb2cf875961685c4d",
+      "research/studies/solar_shield_array/energy_correct.py": "5c518a5e0aa17c2e8cd999f46f9ab139c02534f58919ee630f38fbfbd523d9ca",
+      "research/studies/solar_shield_array/energy_replay.py": "b3ce134e8ad2d005d23a367d9d90e832b89c4fd11bbcca7ff448706987ca8d4c",
+      "protection/dynamics/collection.py": "a742f83d832f1afdfc144f0661c5a0dcfe8723bfcd184e2d65db778ca9af7cf9",
+      "research/studies/solar_shield_array/energy_collection.py": "054498bf9b77d72c304c79c4e4d61dcd442f0ae46aa8b28a64ab1210492a2bb1"
+    },
+    "constants": {
+      "AU": 149597870700.0,
+      "EARTH_GM": 398600441800000.0,
+      "EARTH_MOON_DISTANCE": 384400000.0,
+      "EARTH_OBLIQUITY_DEG": 23.4393,
+      "EARTH_RADIUS": 6371000.0,
+      "JULIAN_DAY": 86400.0,
+      "MOON_GM": 4902800118000.0,
+      "MOON_RADIUS": 1737400.0,
+      "SOLAR_CONSTANT": 1361.0,
+      "SOLAR_SYSTEM_GM": {
+        "mercury": 22031868551000.0,
+        "venus": 324858592000000.0,
+        "mars": 42828375816000.0,
+        "jupiter": 1.267127641e+17,
+        "saturn": 3.79405848418e+16,
+        "uranus": 5794556400000000.0,
+        "neptune": 6836527100580000.0,
+        "pluto": 975500000000.0
+      },
+      "SPEED_OF_LIGHT": 299792458.0,
+      "SUN_GM": 1.3271244004127942e+20,
+      "SUN_RADIUS": 695700000.0
+    },
+    "inputs": {
+      "energy_screen.json": "a46fa39e85f956aa2ff9aa4b486aa112254f87f67081525a794baf7c76842559",
+      "energy.json": "63236359ae8e1606b218b06ff8cc6818780411198ff394466b0ab8c83620d965",
+      "energy_replay.json": "f1338e4ec67d03b44848bcfe843d29cb8aa3095de7e7f756ba842fb775e295fe"
+    },
+    "raw_inputs": {
+      "research/runs/solar_shield_array/energy/candidate_24_sun_8.npz": "a4f5653f4a4f9045e617fe88292dc6a6abc487186523577bb002e27b6f3c815e",
+      "research/runs/solar_shield_array/energy/candidate_20_sun_8.npz": "3b0dcc3e7a42032ad723da62e36a9d1d0b41ce3cd4399c723058ed8786ed4f09",
+      "research/runs/solar_shield_array/energy/corrected_sun_8.npz": "fdcba0af55b264bb5cf519b5cdcd7b43f0357d461ba2c7860b824b897847aaa0"
+    }
+  },
+  "evidence": "Collection on every saved coupled trial through its clearance stop; each alternative is a separate local experiment, not a simultaneous fleet. No favorable comparison across unequal durations is inferred.",
+  "accepted_fleet": false,
+  "collection_capacity_W": null,
+  "delivered_power_W": null,
+  "sample_step_s": 60.0,
+  "sources": 16,
+  "trials": [
+    {
+      "case": 24,
+      "schedule": {
+        "angle_deg": 30.0,
+        "delay_s": 3600.0,
+        "duration_s": 14400.0,
+        "axis": 1,
+        "sign": 1
+      },
+      "start_s": 21600.0,
+      "end_s": 41351.75365990467,
+      "duration_s": 19751.753659904673,
+      "accepted_departure": false,
+      "original_force_sources": 8,
+      "optical": {
+        "unshadowed_aperture_W": {
+          "energy_J": 9.016620081799557e+17,
+          "mean_W": 45649719194822.49,
+          "sampled_minimum_W": 41636038360114.47,
+          "sampled_maximum_W": 48065412153618.0,
+          "time_coarsening_relative_energy_change": 1.6021556491173387e-10
+        },
+        "first_intercept_bolometric_equivalent_W": {
+          "energy_J": 5.28134360611092e+17,
+          "mean_W": 26738606085554.07,
+          "sampled_minimum_W": 20181892986112.086,
+          "sampled_maximum_W": 35102382062918.566,
+          "time_coarsening_relative_energy_change": 9.790150364799816e-07
+        },
+        "front_first_intercept_W": {
+          "energy_J": 0.0,
+          "mean_W": 0.0,
+          "sampled_minimum_W": 0.0,
+          "sampled_maximum_W": 0.0,
+          "time_coarsening_relative_energy_change": 0.0
+        },
+        "back_first_intercept_W": {
+          "energy_J": 5.28134360611092e+17,
+          "mean_W": 26738606085554.07,
+          "sampled_minimum_W": 20181892986112.086,
+          "sampled_maximum_W": 35102382062918.566,
+          "time_coarsening_relative_energy_change": 9.790150364799816e-07
+        },
+        "redirected_band_optical_W": {
+          "energy_J": 7.28561544487381e+16,
+          "mean_W": 3688591691816.8833,
+          "sampled_minimum_W": 2784092878870.3496,
+          "sampled_maximum_W": 4842374895160.148,
+          "time_coarsening_relative_energy_change": 9.79015036240846e-07
+        },
+        "mutual_shadow_equivalent_loss_W": {
+          "energy_J": 3.7352764756886355e+17,
+          "mean_W": 18911113109268.41,
+          "sampled_minimum_W": 12959608462698.734,
+          "sampled_maximum_W": 21455128350904.926,
+          "time_coarsening_relative_energy_change": 1.3846255925584458e-06
+        }
+      },
+      "raw_path": "research/runs/solar_shield_array/energy/trial_24_collection.npz",
+      "raw_sha256": "c70e2c72d5f03768f7149f875003d1b3c53c796aecb8cc2c91aae510cdb6fe34"
+    },
+    {
+      "case": 20,
+      "schedule": {
+        "angle_deg": 30.0,
+        "delay_s": 7200.0,
+        "duration_s": 7200.0,
+        "axis": 1,
+        "sign": 1
+      },
+      "start_s": 21600.0,
+      "end_s": 34454.832993380805,
+      "duration_s": 12854.832993380805,
+      "accepted_departure": false,
+      "original_force_sources": 8,
+      "optical": {
+        "unshadowed_aperture_W": {
+          "energy_J": 6.092248048301281e+17,
+          "mean_W": 47392665866902.31,
+          "sampled_minimum_W": 42482815495438.57,
+          "sampled_maximum_W": 48067547815082.49,
+          "time_coarsening_relative_energy_change": 2.0852377960319974e-06
+        },
+        "first_intercept_bolometric_equivalent_W": {
+          "energy_J": 3.7596908191650995e+17,
+          "mean_W": 29247294158555.266,
+          "sampled_minimum_W": 24173073964153.477,
+          "sampled_maximum_W": 35102382062918.566,
+          "time_coarsening_relative_energy_change": 7.618701798665684e-07
+        },
+        "front_first_intercept_W": {
+          "energy_J": 0.0,
+          "mean_W": 0.0,
+          "sampled_minimum_W": 0.0,
+          "sampled_maximum_W": 0.0,
+          "time_coarsening_relative_energy_change": 0.0
+        },
+        "back_first_intercept_W": {
+          "energy_J": 3.7596908191650995e+17,
+          "mean_W": 29247294158555.266,
+          "sampled_minimum_W": 24173073964153.477,
+          "sampled_maximum_W": 35102382062918.566,
+          "time_coarsening_relative_energy_change": 7.618701798665684e-07
+        },
+        "redirected_band_optical_W": {
+          "energy_J": 5.1864948662619224e+16,
+          "mean_W": 4034665303650.8105,
+          "sampled_minimum_W": 3334676441417.9404,
+          "sampled_maximum_W": 4842374895160.148,
+          "time_coarsening_relative_energy_change": 7.618701797439414e-07
+        },
+        "mutual_shadow_equivalent_loss_W": {
+          "energy_J": 2.3325572291361808e+17,
+          "mean_W": 18145371708347.035,
+          "sampled_minimum_W": 12959608462698.734,
+          "sampled_maximum_W": 21093638425094.79,
+          "time_coarsening_relative_energy_change": 6.674298070365196e-06
+        }
+      },
+      "raw_path": "research/runs/solar_shield_array/energy/trial_20_collection.npz",
+      "raw_sha256": "745d6318c23ce35b9d291cbac3724cde3426b3d577aaaaf3038ad28901861b23"
+    },
+    {
+      "case": 41,
+      "schedule": {
+        "angle_deg": 90.0,
+        "delay_s": 3600.0,
+        "duration_s": 14400.0,
+        "axis": 0,
+        "sign": -1
+      },
+      "start_s": 21600.0,
+      "end_s": 37684.46598184776,
+      "duration_s": 16084.46598184776,
+      "accepted_departure": false,
+      "original_force_sources": 8,
+      "optical": {
+        "unshadowed_aperture_W": {
+          "energy_J": 5.796445537076351e+17,
+          "mean_W": 36037537979924.055,
+          "sampled_minimum_W": 1448131286774.088,
+          "sampled_maximum_W": 48065160030102.43,
+          "time_coarsening_relative_energy_change": 3.2611530468816354e-06
+        },
+        "first_intercept_bolometric_equivalent_W": {
+          "energy_J": 3.676280602419803e+17,
+          "mean_W": 22856093615844.605,
+          "sampled_minimum_W": 1186080502708.2358,
+          "sampled_maximum_W": 35102382062918.566,
+          "time_coarsening_relative_energy_change": 5.900142021183807e-07
+        },
+        "front_first_intercept_W": {
+          "energy_J": 0.0,
+          "mean_W": 0.0,
+          "sampled_minimum_W": 0.0,
+          "sampled_maximum_W": 0.0,
+          "time_coarsening_relative_energy_change": 0.0
+        },
+        "back_first_intercept_W": {
+          "energy_J": 3.676280602419803e+17,
+          "mean_W": 22856093615844.605,
+          "sampled_minimum_W": 1186080502708.2358,
+          "sampled_maximum_W": 35102382062918.566,
+          "time_coarsening_relative_energy_change": 5.900142021183807e-07
+        },
+        "redirected_band_optical_W": {
+          "energy_J": 5.071430441618796e+16,
+          "mean_W": 3152998953985.911,
+          "sampled_minimum_W": 163619848922.46237,
+          "sampled_maximum_W": 4842374895160.148,
+          "time_coarsening_relative_energy_change": 5.900142021162943e-07
+        },
+        "mutual_shadow_equivalent_loss_W": {
+          "energy_J": 2.120164934656548e+17,
+          "mean_W": 13181444364079.45,
+          "sampled_minimum_W": 262050784065.8525,
+          "sampled_maximum_W": 20828274526644.26,
+          "time_coarsening_relative_energy_change": 7.892800217144804e-06
+        }
+      },
+      "raw_path": "research/runs/solar_shield_array/energy/trial_41_collection.npz",
+      "raw_sha256": "2ce1d71e1c4b5d6a1e3d76e1ee09f3677acbe07b49812f49a7102ca2739f32f9"
+    }
+  ],
+  "completed": true,
+  "elapsed_s": 115.15449713799899,
+  "max_rss_MiB": 150.1328125,
+  "refinement_scope": "60 versus 120 s integration on the same rejected traces; solar-force dynamics were not independently replayed for rejected candidates."
+}

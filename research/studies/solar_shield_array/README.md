@@ -88,6 +88,13 @@ and control searches must retain collection during every command stage,
 including coast, with spectral allocation, electrical conversion, propulsion
 and delivered power recorded separately.
 
+The [energy-first continuation](energy.md) prioritizes energy at the existing
+100 m clearance constraint. It compares longer Sun-facing passages and smaller
+or slower turns with optimized preparation impulses. Coupled failures and a
+measured-defect correction remain visible beside any accepted result.
+Spatial shadow moments and finite-area gravity now supply an explicit rigid
+attitude-load calculation for comparison with the earlier torque envelopes.
+
 The study couples protection, engineering, illumination and habitation. Its
 runners, compact numerical results and interpretation belong together here;
 dynamics components belong in the protection domain. Computation files and

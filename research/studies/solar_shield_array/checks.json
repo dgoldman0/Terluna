@@ -703,5 +703,178 @@
     "collection_capacity_W": null,
     "delivered_power_W": null,
     "publication_target": "research/solar-shield-habitat-array; main unchanged"
+  },
+  "energy_first": {
+    "checked_at_utc": "2026-10-05T12:16:23.679327+00:00",
+    "status": "LOCAL_CHEAPER_SCHEDULES_REJECTED_EXISTING_TORQUE_ACCOUNT_REFINED",
+    "starting_remote_head": "e65cc9c34a120926d3f5a7c6e590260e78275793",
+    "early_checkpoint": "374039df488132f67b1cb213499032100b5510e5",
+    "report": "energy.md",
+    "products": {
+      "energy_screen.json": "a46fa39e85f956aa2ff9aa4b486aa112254f87f67081525a794baf7c76842559",
+      "energy.json": "63236359ae8e1606b218b06ff8cc6818780411198ff394466b0ab8c83620d965",
+      "energy_correction.json": "851c51b65a527a14729db1bd22ff63e66783e8adb5430055871ed76fdca93170",
+      "energy_replay.json": "f1338e4ec67d03b44848bcfe843d29cb8aa3095de7e7f756ba842fb775e295fe",
+      "energy_budget.json": "ca89f9dc741926f81e8bf5945a43afb7c83508b022517a1902b6b105e110b4bb",
+      "energy_collection.json": "aded09170beab1ee298d4320b639e1a9800c98979b29c69b51233af255cd9b0e"
+    },
+    "study_tests": {
+      "status": "PASS",
+      "passed": 120,
+      "elapsed_s": 7.34,
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m pytest protection/dynamics research/studies/solar_shield_array -q",
+      "solver_test_context": "Fresh process preserves the study runner single-thread HiGHS configuration; other tests initialize a different global scheduler."
+    },
+    "make_check": {
+      "status": "FAIL_EXISTING",
+      "summary": "13 failed, 665 passed, 55 skipped in 28.00s",
+      "same_failed_tests_as_starting_checkpoint": true,
+      "failed_tests": [
+        "atmosphere/tests/test_absorption.py::test_ion_production_falls_with_the_shadow_and_ends_at_the_outer_radius",
+        "atmosphere/tests/test_absorption.py::test_ionization_rate_is_of_the_tabulated_order",
+        "atmosphere/tests/test_absorption.py::test_design_case_needs_a_radius_just_under_the_exobase",
+        "atmosphere/tests/test_exosphere.py::test_dissociation_rates_agree_with_heays",
+        "atmosphere/tests/test_exosphere.py::test_ions_made_match_the_absorption_step",
+        "atmosphere/tests/test_exosphere.py::test_charge_exchange_thin_limit_counts_the_swept_exosphere",
+        "atmosphere/tests/test_exosphere.py::test_magnetosphere_accounts_for_every_ion_and_a_stronger_one_keeps_more",
+        "atmosphere/tests/test_exosphere.py::test_levels_are_ordered_and_wider_shadows_never_lose_more",
+        "climate/tests/test_cm1_run.py::test_the_terrain_build_forces_each_column_at_its_own_height",
+        "climate/tests/test_exoplasim_run.py::RunnerTests::test_process_lookup_finds_this_process",
+        "climate/tests/test_ring_comfort.py::test_hours_are_shares_of_the_lunar_day",
+        "climate/tests/test_ring_comfort.py::test_the_rings_land_is_pooled_by_latitude_and_height_and_counted_in_shares",
+        "research/studies/protection_architecture/test_run.py::test_design_point_holds_together"
+      ],
+      "staged_layer_check": "PASS: 496 tracked files, zero violations",
+      "later_targets": "Not reached after Python failures"
+    },
+    "budget": {
+      "wall_s": 2700,
+      "calculation_processes": 1,
+      "numerical_threads": 1,
+      "address_space_GiB": 2,
+      "raw_limit_MiB": 512,
+      "initial_coupled_candidates": 2,
+      "revised_coupled_candidates": 3,
+      "tighter_replay_limit": 1
+    },
+    "resources": {
+      "completed_producer_wall_s": 1118.689404370998,
+      "initial_correction_wall_s": 4.677566439,
+      "initial_incomplete_accounting_wall_s": 193.1847823219996,
+      "recorded_numerical_wall_s": 1316.5517531319977,
+      "peak_RSS_MiB": 843.4296875,
+      "raw_MiB": 85.41602039337158
+    },
+    "search": {
+      "proposals": 45,
+      "approximate_survivors": 15,
+      "coupled_candidates": 3,
+      "clearance_stops": 3,
+      "tighter_replays": 0,
+      "measured_defect_correction_feasible": false,
+      "signed_LP_status": 2,
+      "largest_measured_proposal_position_defect_m": 3496.982719534487,
+      "accepted_cheaper_departure": false,
+      "departure_stop_elapsed_h": {
+        "24": 5.486598238862409,
+        "20": 3.5707869426057792,
+        "41": 4.467907217179933
+      }
+    },
+    "endpoint_geometry": {
+      "method": "All 64980 pairs of parallel 10 km squares: norm(max(abs(delta_position @ frame) - [10000,10000,0],0)). Endpoint only; no collision or between-sample assertion.",
+      "minimum_surface_distance_m": {
+        "24": 100.00000000052329,
+        "20": 99.99999999959397,
+        "41": 100.00000000077146
+      },
+      "pairs": {
+        "24": [
+          186,
+          187
+        ],
+        "20": [
+          173,
+          174
+        ],
+        "41": [
+          34,
+          35
+        ]
+      }
+    },
+    "verified_existing_prefix_account": {
+      "service_plus_departure_m_s": 4.2398245550123725,
+      "service_plus_departure_energy_J": 231917386820242.53,
+      "peak_propulsion_W": 64010235873.596405,
+      "provisional_power_hardware_kg": 266709316.13998505
+    },
+    "old_nominal_plus_envelope_m_s": 6.702686980149719,
+    "cost_scope": "Revised ideal rigid-actuator accounting for the same verified twelve-hour geometry. No accepted new maneuver, recurring saving, full cycle or hardware-mass feedback.",
+    "conditional_inventory_allowances": {
+      "assumptions": "Same scalar conditional_cost, 20% fixed extra mass, 10% thrust duty, pilot_budget propulsion parameters; no achieved recurrence or sufficient inventory.",
+      "rows": [
+        {
+          "tiles": 17285560.170967527,
+          "at_23_835_TW_m_s_day": 0.6488646258846454,
+          "at_119_175_TW_m_s_day": 3.1231820129806858
+        },
+        {
+          "tiles": 25000000.0,
+          "at_23_835_TW_m_s_day": 0.4499860144657214,
+          "at_119_175_TW_m_s_day": 2.1909941066200007
+        },
+        {
+          "tiles": 35000000.0,
+          "at_23_835_TW_m_s_day": 0.32203733485429,
+          "at_119_175_TW_m_s_day": 1.579774910068562
+        }
+      ]
+    },
+    "torque_checks": {
+      "service": {
+        "agreements": {
+          "maximum_collection_relative_error": 4.493486405537704e-18,
+          "maximum_gravity_quadrature_torque_error_N_m_kg": 2.0418738546206028e-14,
+          "maximum_bound_excess_N_m_kg": 0.0
+        },
+        "time_relative_attitude_change": 4.504486709459591e-06,
+        "source_relative_attitude_change": 5.630738385547179e-05
+      },
+      "previous_departure": {
+        "agreements": {
+          "maximum_collection_relative_error": 1.163145700710552e-17,
+          "maximum_gravity_quadrature_torque_error_N_m_kg": 1.878830290608997e-14,
+          "maximum_bound_excess_N_m_kg": 0.0
+        },
+        "time_relative_attitude_change": 3.792096847274703e-06,
+        "source_relative_attitude_change": 1.0771867515523099e-06
+      },
+      "new_departure": {
+        "agreements": {
+          "maximum_collection_relative_error": 6.866216509203048e-18,
+          "maximum_gravity_quadrature_torque_error_N_m_kg": 1.878830290608997e-14,
+          "maximum_bound_excess_N_m_kg": 0.0
+        },
+        "time_relative_attitude_change": 2.388783368915721e-07,
+        "source_relative_attitude_change": 1.9813925252687433e-06
+      }
+    },
+    "collection": "Every coupled alternative retains per-tile power through its own stop. Unequal prefixes are not compared as complete cycles; 16 sources/60 s, plus 32-source torque/collection refinement for trial 41.",
+    "not_executed": [
+      "Independent tighter replay of rejected candidates",
+      "Full return, repacking and two-pattern handover",
+      "Recurring cadence and recovery",
+      "New global fleet placement or coverage optimization",
+      "Hardware-mass dynamics feedback",
+      "Flexible structures and alternative actuator realization"
+    ],
+    "continuous_coverage_certified": false,
+    "accepted_fleet": false,
+    "measured_recurring_impulse_m_s_day": null,
+    "fleet_propulsion_W": null,
+    "collection_capacity_W": null,
+    "delivered_power_W": null,
+    "publication_target": "research/solar-shield-habitat-array; main unchanged"
   }
 }

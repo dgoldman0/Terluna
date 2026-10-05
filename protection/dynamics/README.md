@@ -121,3 +121,10 @@ applies it to the saved service and departure states and records the required
 collection account for future population/control searches. The uneclipsed
 prefix rejects body occultations; joint body/array visibility and specified
 collector optics are required for broader trajectories and electrical yield.
+
+`energy_coast.py` supplies smooth partial-turn schedules; `coast_control.py`
+permits signed impulses in the existing three pattern modes. `tile_torque.py`
+computes finite-area gravity torque and first moments of the same parallel
+shadow unions used by the force model. The [energy continuation](../../research/studies/solar_shield_array/energy.md)
+retains force-model failures, local control limits and the distinction between
+a partial passage's actuation account and recurring fleet power.
