@@ -47,6 +47,14 @@ fails the position gate. Photon-force cancellation is only one cost component. A
 minimum-intervention controller, its complete recurring budget, continuous
 optical certification and bounded-slew attitudes remain unresolved.
 
+The [coverage-led pilot](pilot.md) adds a bounded, common-epoch search over
+54 near-natural orbital families with the same sail force and 10 km tiles.
+Fractional population and initial-phase-band allocation, followed by a
+coverage-bottleneck refinement, gives a 17.29-million-tile **area-capacity
+estimate**. This supplies conditional fleet impulse budgets. Individual
+placement, consistent mutual illumination, safe attitude histories and
+recurring corrections remain unclosed; no operating fleet is accepted.
+
 The study couples protection, engineering, illumination and habitation. Its
 runners, compact numerical results and interpretation belong together here;
 dynamics components belong in the protection domain. Computation files and

@@ -76,3 +76,12 @@ The seven-day interpolation fails its placement allowance. The checked prefix
 develops optical gaps and independently replayed tile intersections. Gap repair,
 collision-avoidance control, continuous coverage and bounded-slew attitude
 realizability remain separate gates.
+
+`coverage_pilot.py` supplies common-epoch near-natural seeds, finite-square
+cell capacities, fractional covering allocation and conditional propulsion
+accounting. The [bounded pilot](../../research/studies/solar_shield_array/pilot.md)
+varies population across orbital families and initial-phase bands, then refines
+a coverage bottleneck. Its 17.29-million-tile capacity estimate retains
+subcell, mutual-illumination and individual-placement gaps; a selected
+attitude-rate witness fails the pilot cap. It supplies a cost threshold for
+further research and accepts no operating fleet.

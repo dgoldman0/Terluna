@@ -346,5 +346,99 @@
     "collector_habitat_loads": "Separate, not included",
     "delivered_power_W": null,
     "publication_target": "research/solar-shield-habitat-array; no merge to main"
+  },
+  "coverage_pilot": {
+    "checked_at_utc": "2026-10-05T00:47:51.615047+00:00",
+    "status": "CAPACITY_AND_CONDITIONAL_COST_CHECKPOINT_FLEET_UNACCEPTED",
+    "early_remote_checkpoint": "89eca3edeaec8e7fa49a97c191f0e4b9eb97abf3",
+    "starting_remote_head": "fe5aac4cf3d141ee5aa99e65f71c4759b45d5a01",
+    "report": "pilot.md",
+    "products": {
+      "results/pilot_24.json": "5443303152afb1b91d2c0af22a9ad14efbbbfa33eb1076a6f4707f8fee2fa2ff",
+      "results/pilot_48.json": "95437244e82c055aab693c56121ccd86344b6e5d7a63231e757dfc2662584c59",
+      "results/pilot_budget.json": "2449ccb3b550e5a5ec25652040b6bc0307ea38fbd76e617b8841e333ba79e77b",
+      "results/pilot_validation.json": "5d9f09562e541576784f9d21d16f830f589140394a03d57f75fb14e54bf89961"
+    },
+    "study_tests": {
+      "passed": 79,
+      "status": "PASS",
+      "command": "python -m pytest protection/dynamics research/studies/solar_shield_array -q",
+      "final_verification": "All 79 are also included in the final make check after the tile-local optical-roll consistency update"
+    },
+    "make_check": {
+      "status": "FAIL_EXISTING",
+      "summary": "13 failed, 624 passed, 55 skipped in 15.70s",
+      "same_failures_as_starting_head": true,
+      "failed_tests": [
+        "atmosphere/tests/test_absorption.py::test_ion_production_falls_with_the_shadow_and_ends_at_the_outer_radius",
+        "atmosphere/tests/test_absorption.py::test_ionization_rate_is_of_the_tabulated_order",
+        "atmosphere/tests/test_absorption.py::test_design_case_needs_a_radius_just_under_the_exobase",
+        "atmosphere/tests/test_exosphere.py::test_dissociation_rates_agree_with_heays",
+        "atmosphere/tests/test_exosphere.py::test_ions_made_match_the_absorption_step",
+        "atmosphere/tests/test_exosphere.py::test_charge_exchange_thin_limit_counts_the_swept_exosphere",
+        "atmosphere/tests/test_exosphere.py::test_magnetosphere_accounts_for_every_ion_and_a_stronger_one_keeps_more",
+        "atmosphere/tests/test_exosphere.py::test_levels_are_ordered_and_wider_shadows_never_lose_more",
+        "climate/tests/test_cm1_run.py::test_the_terrain_build_forces_each_column_at_its_own_height",
+        "climate/tests/test_exoplasim_run.py::RunnerTests::test_process_lookup_finds_this_process",
+        "climate/tests/test_ring_comfort.py::test_hours_are_shares_of_the_lunar_day",
+        "climate/tests/test_ring_comfort.py::test_the_rings_land_is_pooled_by_latitude_and_height_and_counted_in_shares",
+        "research/studies/protection_architecture/test_run.py::test_design_point_holds_together"
+      ],
+      "layer_check": "check_layers: 450 files checked, 0 violations",
+      "later_targets": "Not reached after Python failures; existing JavaScript/provenance/ensemble entries retain their historical scope"
+    },
+    "runtime": {
+      "python": "3.12.14",
+      "numpy": "2.3.5",
+      "scipy": "1.17.0",
+      "shapely": "2.1.2",
+      "jplephem": "2.24",
+      "calculation_processes": 1,
+      "blas_openmp_threads": 1
+    },
+    "kernel": {
+      "bytes": 32726016,
+      "sha256": "c1c7feeab882263fc493a9d5a5b2ddd71b54826cdf65d8d17a76126b260a49f2",
+      "verified_on_load": true
+    },
+    "executed": {
+      "library_ivps": 3888,
+      "phase_grids": [
+        24,
+        48
+      ],
+      "common_epoch_tdb": "2026-10-04",
+      "days": 3,
+      "families": 54,
+      "phase_population_columns": 216,
+      "refined_capacity_rows": 3432,
+      "fine_library_max_rss_MiB": 600.0859375,
+      "numerical_wall_minutes_approx": 10.3,
+      "final_independent_replay_members": 12,
+      "distinct_members_across_four_replays": 17,
+      "max_replay_position_difference_m": 5.081966693806152,
+      "max_selected_10_second_square_rate_deg_s": 0.12096289615382358,
+      "rate_cap_deg_s": 0.1,
+      "possible_swept_pair_conflicts": 264,
+      "possible_swept_shadow_pairs": 38812
+    },
+    "not_executed": [
+      "Targeted new-plane generation branch",
+      "Individual realization of fractional populations",
+      "Coupled mutual-shadow force propagation",
+      "Constrained electric-thrust optimization",
+      "Recurring handover/return/recovery schedule",
+      "Continuous coverage or attitude certificate",
+      "Collector or 100 TW delivered-power sizing"
+    ],
+    "accepted_operating_fleet": false,
+    "branch": "research/solar-shield-habitat-array",
+    "main_modified": false,
+    "layer_check_after_staging_new_sources": {
+      "status": "PASS",
+      "command": "python shared/check_layers.py",
+      "files": 456,
+      "violations": 0
+    }
   }
 }

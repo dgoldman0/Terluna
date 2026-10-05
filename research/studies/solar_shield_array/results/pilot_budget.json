@@ -1,0 +1,80 @@
+{
+  "schema": "terluna.research.coverage-pilot-budget/1",
+  "producer": {
+    "source_hashes": {
+      "research/studies/solar_shield_array/pilot_budget.py": "2a7fc3e12d4b4aae98ce8d656220e0c10cbe0d5de2099f0406d64662e563c41e",
+      "protection/dynamics/coverage_pilot.py": "fb03381e4387cb17e5276148428a3ffb2cbfb5313c8f59b8ff708ebeb9ce079c",
+      "research/studies/solar_shield_array/scenario.json": "a53b784941518b6e36ccdf728252cf6c8e0c46c1126b6c621ed4e28c23128699"
+    },
+    "constants": {
+      "EARTH_RADIUS": 6371000.0,
+      "JULIAN_DAY": 86400.0,
+      "MOON_GM": 4902800118000.0,
+      "SPEED_OF_LIGHT": 299792458.0,
+      "SUN_RADIUS": 695700000.0
+    },
+    "input_sha256": "5d9f09562e541576784f9d21d16f830f589140394a03d57f75fb14e54bf89961"
+  },
+  "evidence": "Conditional scalar inventory/impulse accounting, with mass feedback; no achieved recurring operation",
+  "fixed_extra_mass_fraction": 0.2,
+  "peak_duty": 0.1,
+  "propulsion": {
+    "exhaust_velocity_m_s": 30000,
+    "efficiency": 0.7,
+    "specific_power_W_kg": 300,
+    "cant_deg": 45,
+    "propellant_buffer_days": 7,
+    "peak_margin_factor": 1.25
+  },
+  "benchmark_TW": 238.35,
+  "rows": [
+    {
+      "tiles": 17285560.170967527,
+      "break_even_dv_m_s_day": 5.967820398753451,
+      "three_m_s_day": {
+        "closed": true,
+        "optical_mass_kg": 86427800854837.64,
+        "total_scenario_mass_kg": 108581433238662.56,
+        "recurring_dv_m_s_per_day": 3.0,
+        "peak_duty": 0.1,
+        "extra_fixed_mass_multiplier": 1.2,
+        "propulsion_TW": 114.25396987204269,
+        "propellant_kg_s": 177728.39757873304,
+        "installed_propulsion_power_TW": 1428.1746234005338
+      }
+    },
+    {
+      "tiles": 25000000.0,
+      "break_even_dv_m_s_day": 4.243056865440571,
+      "three_m_s_day": {
+        "closed": true,
+        "optical_mass_kg": 125000000000000.0,
+        "total_scenario_mass_kg": 157040663080496.66,
+        "recurring_dv_m_s_per_day": 3.0,
+        "peak_duty": 0.1,
+        "extra_fixed_mass_multiplier": 1.2,
+        "propulsion_TW": 165.24481813430222,
+        "propellant_kg_s": 257047.49487558118,
+        "installed_propulsion_power_TW": 2065.5602266787773
+      }
+    },
+    {
+      "tiles": 35000000.0,
+      "break_even_dv_m_s_day": 3.086676834688324,
+      "three_m_s_day": {
+        "closed": true,
+        "optical_mass_kg": 175000000000000.0,
+        "total_scenario_mass_kg": 219856928312695.34,
+        "recurring_dv_m_s_per_day": 3.0,
+        "peak_duty": 0.1,
+        "extra_fixed_mass_multiplier": 1.2,
+        "propulsion_TW": 231.34274538802313,
+        "propellant_kg_s": 359866.49282581365,
+        "installed_propulsion_power_TW": 2891.7843173502883
+      }
+    }
+  ],
+  "collection_capacity_W": null,
+  "delivered_power_W": null,
+  "scope": "The first inventory is the restricted capacity estimate. The larger inventories are sensitivity scenarios with no coverage claim. Added mass has not been fed back into sail trajectories. Peak hardware capacity is a load rating, not electrical collection."
+}
