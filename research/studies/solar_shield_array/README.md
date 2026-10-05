@@ -125,6 +125,17 @@ sensitivities and propellant/replacement trades retain the 23.835 TW target
 beside 50 and 100 TW alternatives. No complete return or revised target is
 accepted.
 
+The [electromagnetic feasibility study](electromagnetic.md) uses the actual
+mass-loaded group, time-resolved loads and extended square coils to compare
+local generation/storage, microwave/laser and inductive transfer, magnetic
+control and solar-wind scales. It favors local Sun-tracking generation and
+short buffers, conditional microwave assistance and a narrow magnetic-trim
+follow-up. A static return allocation improves about 10% after cooling, while
+tested departure states do not improve. No new trajectory, plasma protection,
+three-function architecture or relaxed operating target is accepted.
+Its source register, compact results and `electromagnetic_checks.json` retain
+the assumptions and executed checks separately from proposed follow-up work.
+
 The study couples protection, engineering, illumination and habitation. Its
 runners, compact numerical results and interpretation belong together here;
 dynamics components belong in the protection domain. Computation files and
