@@ -80,6 +80,14 @@ allowances, raises departure to 5.04 m/s equivalent impulse. Its provisional
 power hardware changes the mass and still needs a dynamics replay. Handover,
 full return, recurring cost and continuous global coverage remain open.
 
+The [collection inventory](collection.md) tracks incident optical power and
+integrated energy per tile on the saved service and departure trajectories.
+It includes orientation, solar distance, both faces and finite-Sun mutual
+shadows; the current prefix model rejects body eclipses. Subsequent inventory
+and control searches must retain collection during every command stage,
+including coast, with spectral allocation, electrical conversion, propulsion
+and delivered power recorded separately.
+
 The study couples protection, engineering, illumination and habitation. Its
 runners, compact numerical results and interpretation belong together here;
 dynamics components belong in the protection domain. Computation files and

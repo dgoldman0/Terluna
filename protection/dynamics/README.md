@@ -112,3 +112,12 @@ including coupled shadows, interval refinement and an independent replay.
 force electric couples and gravity/radiation disturbance envelopes. This
 local ideal-actuator result leaves structural realization, hardware-mass
 feedback, handover, return and the fleet budget unclosed.
+
+`collection.py` adds per-tile first-intercept optical power, the redirected
+spectral band and time-integrated energy. It shares the parallel-pattern
+shadow geometry and checks its inferred photon momentum against the force
+model. The [collection ledger](../../research/studies/solar_shield_array/collection.md)
+applies it to the saved service and departure states and records the required
+collection account for future population/control searches. The uneclipsed
+prefix rejects body occultations; joint body/array visibility and specified
+collector optics are required for broader trajectories and electrical yield.

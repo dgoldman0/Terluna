@@ -46,6 +46,15 @@ habitat supply separately. A 100-TW generation target does not establish
 100 TW available to inhabitants. Power itself also cannot specify population,
 floor area, food production or supported industrial throughput.
 
+The author's 5 October instruction makes the [collection inventory](collection.md)
+part of subsequent trajectory and population modeling. Retain per-tile optical
+power and energy through service and every off-service stage, including actual
+orientation, finite-Sun illumination, body and mutual shadows, spectral mode
+and collection hardware. Report collection potential alongside inventory and
+propulsion, then electrical generation and net delivery when their device and
+transfer assumptions are specified. Any change in optical momentum or hardware
+mass must enter the coupled dynamics.
+
 ## Habitats and regional nodes
 
 Investigate toroidal inhabited wheels surrounding an optical disk, with their

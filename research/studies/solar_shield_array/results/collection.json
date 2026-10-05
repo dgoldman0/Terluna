@@ -1,0 +1,797 @@
+{
+  "schema": "terluna.research.solar-collection-inventory/1",
+  "producer": {
+    "source_hashes": {
+      "protection/dynamics/cycling.py": "704fbd03c9d4070ea05bdfeba57914ec225941f3560710da2472bd24ca870ed4",
+      "protection/dynamics/ephemeris.py": "9a162c3acf63a844284eb61b444a7d34f1447b5182d254d3e87616516f8748d9",
+      "protection/dynamics/ephemeris.json": "90fde7cb6142e5d4d8082270a978ba2f8f47baaefab0e8d1cf82ec6f07a27222",
+      "protection/dynamics/model.py": "01c9191588037ab4f42bac38dc4d5bd99e57427d37fa75cd672120e32b53733a",
+      "protection/dynamics/optical.py": "06a13ae9f24834876edbc12b513deaa5e3735f02f8249eb57c8996d74ce00b56",
+      "research/studies/solar_shield_array/scenario.json": "a53b784941518b6e36ccdf728252cf6c8e0c46c1126b6c621ed4e28c23128699",
+      "research/studies/solar_shield_array/cycling_search.py": "4789a0185620f6662916462b2715aa9002e6454e74f4f32ef5f7dadf5f732093",
+      "research/studies/solar_shield_array/cycling_feedback.py": "0eb32d26e14472f0a512cdf45d60f00ab8260376cd51ca715e7615bf7df02775",
+      "protection/dynamics/fleet.py": "f3e52653876c2956a4b355dc1290a0a1cadd2b9b601cafc664259827df1cc93c",
+      "research/studies/solar_shield_array/fleet_run.py": "9b8bc9765b9288745ea7d4d69d59e857e76e54d29cc91b37160503e9d9090833",
+      "protection/dynamics/active_formation.py": "597c12c6a4a89c0ea70663fddd69b9b5d9e599c88a2bd1742f5009d19e050b7a",
+      "protection/dynamics/active_retime.py": "9ba27a7ec48460a345289ebc7550c502f845487beaec5fe35084a67b2d9d736b",
+      "protection/dynamics/coverage_pilot.py": "fb03381e4387cb17e5276148428a3ffb2cbfb5313c8f59b8ff708ebeb9ce079c",
+      "protection/dynamics/natural_pattern.py": "780c2679f13c097c07b89e9d7cce1c91399f464f01b4bd878fb50cb643e1be29",
+      "research/studies/solar_shield_array/patterns_run.py": "f2e346fd2281632e5bf1c285c61229ba24e26e4ba4c480713194218263888d5c",
+      "protection/dynamics/pattern_departure.py": "24e7bb0653f9ab546b46a9a650ae67e3adb0af154c3e5b9ba83461e9648b828b",
+      "protection/dynamics/pattern_return.py": "a1a3f85e5f7744d0418574d0fc2a033d4ab69d9d55eba9bfbb85974c7ab64757",
+      "protection/dynamics/parallel_shadow.py": "98d09fc9e5812b3592cbc5e24e0615f9f9aa3a75c7f33afff0fe82d0e40c3c24",
+      "research/studies/solar_shield_array/return_screen.py": "53ec3ecf5165c773142315d97553f9c72ebbe6c045299ec368104c1811f4b526",
+      "research/studies/solar_shield_array/departure_screen.py": "9e69d5e5db5729191ca6ccae8673d24dfab7606af8bb47f1038913b328750ff4",
+      "protection/dynamics/departure_control.py": "beafd12acfb4a228c17a329c9e0d278282222e90be7126b20b3e2df551bedfd5",
+      "research/studies/solar_shield_array/departure_refine.py": "c206316508235d2e5960dff5a6ab5de90334a632a67e46a54505d7d9909fd72a",
+      "research/studies/solar_shield_array/departure_run.py": "b142372d4b1ed3383bfe4ff5ea8764bbb2c12e8d92c3db8cb81138a18663a2c8",
+      "research/studies/solar_shield_array/departure_validate.py": "df457b279e1b69627f65fa528877faa414161e6bfea881387d28243504f9b9b0",
+      "protection/dynamics/collection.py": "a742f83d832f1afdfc144f0661c5a0dcfe8723bfcd184e2d65db778ca9af7cf9",
+      "research/studies/solar_shield_array/collection_run.py": "873665b84199f642d0c21b5b201697118b84b632f4d174a93be3663f5eeb067f"
+    },
+    "constants": {
+      "AU": 149597870700.0,
+      "EARTH_GM": 398600441800000.0,
+      "EARTH_MOON_DISTANCE": 384400000.0,
+      "EARTH_OBLIQUITY_DEG": 23.4393,
+      "EARTH_RADIUS": 6371000.0,
+      "JULIAN_DAY": 86400.0,
+      "MOON_GM": 4902800118000.0,
+      "MOON_RADIUS": 1737400.0,
+      "SOLAR_CONSTANT": 1361.0,
+      "SOLAR_SYSTEM_GM": {
+        "mercury": 22031868551000.0,
+        "venus": 324858592000000.0,
+        "mars": 42828375816000.0,
+        "jupiter": 1.267127641e+17,
+        "saturn": 3.79405848418e+16,
+        "uranus": 5794556400000000.0,
+        "neptune": 6836527100580000.0,
+        "pluto": 975500000000.0
+      },
+      "SPEED_OF_LIGHT": 299792458.0,
+      "SUN_GM": 1.3271244004127942e+20,
+      "SUN_RADIUS": 695700000.0
+    },
+    "inputs": {
+      "patterns.json": "deb98cc0faee44fc357194d3c554da4aadf6861dc84b95c911314abeb684c1cf",
+      "departure_validation.json": "7da77d5f6b78c94e1f1ab085597101a1ea2ea152ff05cc105f97705faf87e8a5",
+      "departure_refine.json": "2bd314577178f85ab7926863f653478dafe9d24604432d7b955d4880af4a756f"
+    },
+    "raw_inputs": {
+      "research/runs/solar_shield_array/patterns/replay_2.npz": "625b0af2b9fb8746b44ec05856df65e2f42225c449bc61310dde95cbf6fef41f",
+      "research/runs/solar_shield_array/departure/coupled_sun_16.npz": "7eafc853176b1d0e81adbe7cd474d97a08c2957bc069a726d0c46f7e06c16ec6"
+    }
+  },
+  "epoch_tdb": "2026-10-04",
+  "members": 361,
+  "physical_tile_side_m": 10000.0,
+  "clear_tile_side_m": 9890.0,
+  "base_optical_areal_mass_kg_m2": 0.05,
+  "redirected_spectral_fraction": 0.1379500367376929,
+  "budget": {
+    "wall_s": 600,
+    "processes": 1,
+    "numerical_threads": 1,
+    "address_space_GiB": 2,
+    "raw_output_limit_MiB": 128,
+    "source_counts": [
+      16,
+      32
+    ],
+    "time_step_s": 60
+  },
+  "evidence": "Postprocessed actual saved states; sampled finite-Sun optical energy with shared-plane mutual shadows. No collecting hardware, new trajectory or complete fleet has been simulated.",
+  "quantity_scope": "First-intercept bolometric equivalent counts a ray at its first clear aperture; it is not filter absorption. The redirected-band ledger uses the uniform ideal spectral fraction already used for sail force. Transmitted rays receive no collection credit.",
+  "eclipse_scope": "Conservative whole-tile Earth/Moon cone guard; all evaluated dates must be uneclipsed. Partial or total body eclipse rejects this prefix implementation and requires joint source/area visibility for force and collection.",
+  "geometry_scope": "Same centre-ray irradiance/incidence approximation and perspective rectangle unions as the force model. Clear apertures only; supports and edges receive no collection credit. Both faces are tabulated separately.",
+  "assignment_scope": "Phases are command stages, not an assertion that all intercepted rays serve the local receiver. Service assignments and useful coverage remain the separate parent-product measurements.",
+  "interpretation": "Only sum simultaneously instantiated, mutually checked members. Never scale this local patch by a relaxed fleet inventory or sum incompatible trajectory columns as though they were coexisting tiles.",
+  "electrical_conversion_efficiency": null,
+  "outgoing_light_capture_fraction": null,
+  "collection_capacity_W": null,
+  "delivered_power_W": null,
+  "fleet_propulsion_W": null,
+  "hardware_mass_feedback_propagated": false,
+  "continuous_certificate": false,
+  "accepted_fleet": false,
+  "recurring_cycle_measured": false,
+  "stages": [
+    {
+      "sources": 16,
+      "disk_rotation_rad": 0.317,
+      "sample_step_s": 60.0,
+      "phases": {
+        "service": {
+          "start_s": 0.0,
+          "end_s": 21600.0,
+          "duration_s": 21600.0,
+          "unshadowed_aperture_W": {
+            "energy_J": 1.0379343921717087e+18,
+            "mean_W": 48052518156097.625,
+            "sampled_minimum_W": 48041943554334.84,
+            "sampled_maximum_W": 48061990525617.3,
+            "per_member_energy_range_J": [
+              2875164303847074.5,
+              2875164750296643.0
+            ]
+          },
+          "first_intercept_bolometric_equivalent_W": {
+            "energy_J": 8.548098419366228e+17,
+            "mean_W": 39574529719288.09,
+            "sampled_minimum_W": 35102382062918.53,
+            "sampled_maximum_W": 41687106553389.016,
+            "per_member_energy_range_J": [
+              1862098907686000.2,
+              2875164750296643.0
+            ]
+          },
+          "front_first_intercept_W": {
+            "energy_J": 0.0,
+            "mean_W": 0.0,
+            "sampled_minimum_W": 0.0,
+            "sampled_maximum_W": 0.0,
+            "per_member_energy_range_J": [
+              0.0,
+              0.0
+            ]
+          },
+          "back_first_intercept_W": {
+            "energy_J": 8.548098419366228e+17,
+            "mean_W": 39574529719288.09,
+            "sampled_minimum_W": 35102382062918.53,
+            "sampled_maximum_W": 41687106553389.016,
+            "per_member_energy_range_J": [
+              1862098907686000.2,
+              2875164750296643.0
+            ]
+          },
+          "redirected_band_optical_W": {
+            "energy_J": 1.179210490988986e+17,
+            "mean_W": 5459307828652.713,
+            "sampled_minimum_W": 4842374895160.145,
+            "sampled_maximum_W": 5750737880528.133,
+            "per_member_energy_range_J": [
+              256876612724501.5,
+              396629082930342.06
+            ]
+          },
+          "mutual_shadow_equivalent_loss_W": {
+            "energy_J": 1.8312455023508582e+17,
+            "mean_W": 8477988436809.529,
+            "sampled_minimum_W": 6365242404960.24,
+            "sampled_maximum_W": 12959608462698.758,
+            "per_member_energy_range_J": [
+              0.0,
+              1013065410620932.8
+            ]
+          }
+        },
+        "departure_preparation": {
+          "start_s": 21600.0,
+          "end_s": 28800.0,
+          "duration_s": 7200.0,
+          "unshadowed_aperture_W": {
+            "energy_J": 3.460656798210435e+17,
+            "mean_W": 48064677752922.71,
+            "sampled_minimum_W": 48061990525617.3,
+            "sampled_maximum_W": 48067259605499.31,
+            "per_member_energy_range_J": [
+              958630563400286.6,
+              958630817424033.8
+            ]
+          },
+          "first_intercept_bolometric_equivalent_W": {
+            "energy_J": 2.290845274186702e+17,
+            "mean_W": 31817295474815.31,
+            "sampled_minimum_W": 29558258550675.36,
+            "sampled_maximum_W": 35102382062918.53,
+            "per_member_energy_range_J": [
+              352698322556139.3,
+              958630817424033.8
+            ]
+          },
+          "front_first_intercept_W": {
+            "energy_J": 0.0,
+            "mean_W": 0.0,
+            "sampled_minimum_W": 0.0,
+            "sampled_maximum_W": 0.0,
+            "per_member_energy_range_J": [
+              0.0,
+              0.0
+            ]
+          },
+          "back_first_intercept_W": {
+            "energy_J": 2.290845274186702e+17,
+            "mean_W": 31817295474815.31,
+            "sampled_minimum_W": 29558258550675.36,
+            "sampled_maximum_W": 35102382062918.53,
+            "per_member_energy_range_J": [
+              352698322556139.3,
+              958630817424033.8
+            ]
+          },
+          "redirected_band_optical_W": {
+            "energy_J": 3.1602218973442576e+16,
+            "mean_W": 4389197079644.8022,
+            "sampled_minimum_W": 4077562852967.8916,
+            "sampled_maximum_W": 4842374895160.145,
+            "per_member_energy_range_J": [
+              48654746553942.086,
+              132243156481530.06
+            ]
+          },
+          "mutual_shadow_equivalent_loss_W": {
+            "energy_J": 1.1698115240237334e+17,
+            "mean_W": 16247382278107.408,
+            "sampled_minimum_W": 12959608462698.758,
+            "sampled_maximum_W": 18509001054823.953,
+            "per_member_energy_range_J": [
+              0.0,
+              605932309690921.4
+            ]
+          }
+        },
+        "departure_turn": {
+          "start_s": 28800.0,
+          "end_s": 32400.0,
+          "duration_s": 3600.0,
+          "unshadowed_aperture_W": {
+            "energy_J": 1.0182945320476531e+17,
+            "mean_W": 28285959223545.92,
+            "sampled_minimum_W": 92348686180.0104,
+            "sampled_maximum_W": 48067332629980.39,
+            "per_member_energy_range_J": [
+              282075909202368.06,
+              282076177188973.2
+            ]
+          },
+          "first_intercept_bolometric_equivalent_W": {
+            "energy_J": 6.9161273303614136e+16,
+            "mean_W": 19211464806559.48,
+            "sampled_minimum_W": 92348686180.0104,
+            "sampled_maximum_W": 29558258550675.36,
+            "per_member_energy_range_J": [
+              110586559331250.75,
+              282076177188973.2
+            ]
+          },
+          "front_first_intercept_W": {
+            "energy_J": 7353831782625.629,
+            "mean_W": 2042731050.7293413,
+            "sampled_minimum_W": 0.0,
+            "sampled_maximum_W": 48439674899.14116,
+            "per_member_energy_range_J": [
+              20365326323.779297,
+              20376060493.50879
+            ]
+          },
+          "back_first_intercept_W": {
+            "energy_J": 6.91539194718315e+16,
+            "mean_W": 19209422075508.75,
+            "sampled_minimum_W": 43909119339.340225,
+            "sampled_maximum_W": 29558258550675.36,
+            "per_member_energy_range_J": [
+              110566192809802.58,
+              282055811066190.06
+            ]
+          },
+          "redirected_band_optical_W": {
+            "energy_J": 9540800193059188.0,
+            "mean_W": 2650222275849.7744,
+            "sampled_minimum_W": 12739504651.210108,
+            "sampled_maximum_W": 4077562852967.8916,
+            "per_member_energy_range_J": [
+              15255419922441.1,
+              38912419006046.83
+            ]
+          },
+          "mutual_shadow_equivalent_loss_W": {
+            "energy_J": 3.2668179901151176e+16,
+            "mean_W": 9074494416986.438,
+            "sampled_minimum_W": 0.0,
+            "sampled_maximum_W": 18716790617977.48,
+            "per_member_energy_range_J": [
+              0.0,
+              171489512020992.66
+            ]
+          }
+        },
+        "departure_coast": {
+          "start_s": 32400.0,
+          "end_s": 43200.0,
+          "duration_s": 10800.0,
+          "unshadowed_aperture_W": {
+            "energy_J": 997471426598056.0,
+            "mean_W": 92358465425.74593,
+            "sampled_minimum_W": 92348794238.48138,
+            "sampled_maximum_W": 92367734682.7973,
+            "per_member_energy_range_J": [
+              2763075684198.357,
+              2763081663773.936
+            ]
+          },
+          "first_intercept_bolometric_equivalent_W": {
+            "energy_J": 997080014444699.2,
+            "mean_W": 92322223559.69438,
+            "sampled_minimum_W": 90813855487.92119,
+            "sampled_maximum_W": 92367734682.7973,
+            "per_member_energy_range_J": [
+              2756805770484.172,
+              2763081663773.936
+            ]
+          },
+          "front_first_intercept_W": {
+            "energy_J": 525968118821383.5,
+            "mean_W": 48700751742.720695,
+            "sampled_minimum_W": 47413479497.28939,
+            "sampled_maximum_W": 48940953868.51118,
+            "per_member_energy_range_J": [
+              1453828048673.8274,
+              1457903242296.1558
+            ]
+          },
+          "back_first_intercept_W": {
+            "energy_J": 471111895623315.75,
+            "mean_W": 43621471816.97368,
+            "sampled_minimum_W": 42674303697.002,
+            "sampled_maximum_W": 43909119339.340225,
+            "per_member_energy_range_J": [
+              1301862834273.4263,
+              1305883327944.2705
+            ]
+          },
+          "redirected_band_optical_W": {
+            "energy_J": 137547224623065.62,
+            "mean_W": 12735854131.765335,
+            "sampled_minimum_W": 12527774700.850264,
+            "sampled_maximum_W": 12742132392.869358,
+            "per_member_energy_range_J": [
+              380301457316.9753,
+              381167217026.8601
+            ]
+          },
+          "mutual_shadow_equivalent_loss_W": {
+            "energy_J": 391412153356.9185,
+            "mean_W": 36241866.05156653,
+            "sampled_minimum_W": 0.0,
+            "sampled_maximum_W": 1546792510.1733904,
+            "per_member_energy_range_J": [
+              0.0,
+              6272088079.045669
+            ]
+          }
+        },
+        "whole_saved_interval": {
+          "start_s": 0.0,
+          "end_s": 43200.0,
+          "duration_s": 43200.0,
+          "unshadowed_aperture_W": {
+            "energy_J": 1.4868269966241157e+18,
+            "mean_W": 34417291588521.195,
+            "sampled_minimum_W": 92348686180.0104,
+            "sampled_maximum_W": 48067332629980.39,
+            "per_member_energy_range_J": [
+              4118633916955708.5,
+              4118634768238446.5
+            ]
+          },
+          "first_intercept_bolometric_equivalent_W": {
+            "energy_J": 1.154052722673352e+18,
+            "mean_W": 26714183395216.48,
+            "sampled_minimum_W": 90813855487.92119,
+            "sampled_maximum_W": 41687106553389.016,
+            "per_member_energy_range_J": [
+              2328512619734739.0,
+              4118634768238446.5
+            ]
+          },
+          "front_first_intercept_W": {
+            "energy_J": 533321950604009.1,
+            "mean_W": 12345415523.240952,
+            "sampled_minimum_W": 0.0,
+            "sampled_maximum_W": 48940953868.51118,
+            "per_member_energy_range_J": [
+              1474198092635.394,
+              1478279302789.6643
+            ]
+          },
+          "back_first_intercept_W": {
+            "energy_J": 1.153519400722748e+18,
+            "mean_W": 26701837979693.24,
+            "sampled_minimum_W": 42674303697.002,
+            "sampled_maximum_W": 41687106553389.016,
+            "per_member_energy_range_J": [
+              2327036815128994.0,
+              4117157133912328.5
+            ]
+          },
+          "redirected_band_optical_W": {
+            "energy_J": 1.5920161549002342e+17,
+            "mean_W": 3685222580787.579,
+            "sampled_minimum_W": 12527774700.850264,
+            "sampled_maximum_W": 5750737880528.133,
+            "per_member_energy_range_J": [
+              321218401436589.3,
+              568165817587632.8
+            ]
+          },
+          "mutual_shadow_equivalent_loss_W": {
+            "energy_J": 3.3277427395076365e+17,
+            "mean_W": 7703108193304.714,
+            "sampled_minimum_W": 0.0,
+            "sampled_maximum_W": 18716790617977.48,
+            "per_member_energy_range_J": [
+              0.0,
+              1790121343935965.8
+            ]
+          }
+        }
+      }
+    },
+    {
+      "sources": 32,
+      "disk_rotation_rad": 0.41517477042468104,
+      "sample_step_s": 60.0,
+      "phases": {
+        "service": {
+          "start_s": 0.0,
+          "end_s": 21600.0,
+          "duration_s": 21600.0,
+          "unshadowed_aperture_W": {
+            "energy_J": 1.0379343925987729e+18,
+            "mean_W": 48052518175869.12,
+            "sampled_minimum_W": 48041943186180.66,
+            "sampled_maximum_W": 48061990931503.09,
+            "per_member_energy_range_J": [
+              2875164305712156.0,
+              2875164750872850.0
+            ]
+          },
+          "first_intercept_bolometric_equivalent_W": {
+            "energy_J": 8.548101616122019e+17,
+            "mean_W": 39574544519083.42,
+            "sampled_minimum_W": 35102422180947.688,
+            "sampled_maximum_W": 41687126666448.56,
+            "per_member_energy_range_J": [
+              1862100840536778.2,
+              2875164750872850.0
+            ]
+          },
+          "front_first_intercept_W": {
+            "energy_J": 0.0,
+            "mean_W": 0.0,
+            "sampled_minimum_W": 0.0,
+            "sampled_maximum_W": 0.0,
+            "per_member_energy_range_J": [
+              0.0,
+              0.0
+            ]
+          },
+          "back_first_intercept_W": {
+            "energy_J": 8.548101616122019e+17,
+            "mean_W": 39574544519083.42,
+            "sampled_minimum_W": 35102422180947.688,
+            "sampled_maximum_W": 41687126666448.56,
+            "per_member_energy_range_J": [
+              1862100840536778.2,
+              2875164750872850.0
+            ]
+          },
+          "redirected_band_optical_W": {
+            "energy_J": 1.1792109319815645e+17,
+            "mean_W": 5459309870285.0205,
+            "sampled_minimum_W": 4842380429443.74,
+            "sampled_maximum_W": 5750740655125.436,
+            "per_member_energy_range_J": [
+              256876879361337.34,
+              396629083009829.44
+            ]
+          },
+          "mutual_shadow_equivalent_loss_W": {
+            "energy_J": 1.831242309865711e+17,
+            "mean_W": 8477973656785.699,
+            "sampled_minimum_W": 6365222294424.655,
+            "sampled_maximum_W": 12959568750555.402,
+            "per_member_energy_range_J": [
+              0.0,
+              1013063479150737.1
+            ]
+          }
+        },
+        "departure_preparation": {
+          "start_s": 21600.0,
+          "end_s": 28800.0,
+          "duration_s": 7200.0,
+          "unshadowed_aperture_W": {
+            "energy_J": 3.460656835706298e+17,
+            "mean_W": 48064678273698.586,
+            "sampled_minimum_W": 48061990931503.09,
+            "sampled_maximum_W": 48067260234620.08,
+            "per_member_energy_range_J": [
+              958630573804444.1,
+              958630827795132.0
+            ]
+          },
+          "first_intercept_bolometric_equivalent_W": {
+            "energy_J": 2.2908386296605248e+17,
+            "mean_W": 31817203189729.51,
+            "sampled_minimum_W": 29558015828560.06,
+            "sampled_maximum_W": 35102422180947.688,
+            "per_member_energy_range_J": [
+              352697318947102.3,
+              958630827795132.0
+            ]
+          },
+          "front_first_intercept_W": {
+            "energy_J": 0.0,
+            "mean_W": 0.0,
+            "sampled_minimum_W": 0.0,
+            "sampled_maximum_W": 0.0,
+            "per_member_energy_range_J": [
+              0.0,
+              0.0
+            ]
+          },
+          "back_first_intercept_W": {
+            "energy_J": 2.2908386296605248e+17,
+            "mean_W": 31817203189729.51,
+            "sampled_minimum_W": 29558015828560.06,
+            "sampled_maximum_W": 35102422180947.688,
+            "per_member_energy_range_J": [
+              352697318947102.3,
+              958630827795132.0
+            ]
+          },
+          "redirected_band_optical_W": {
+            "energy_J": 3.160212731217955e+16,
+            "mean_W": 4389184348913.8267,
+            "sampled_minimum_W": 4077529369443.1685,
+            "sampled_maximum_W": 4842380429443.74,
+            "per_member_energy_range_J": [
+              48654608106038.55,
+              132243157912223.44
+            ]
+          },
+          "mutual_shadow_equivalent_loss_W": {
+            "energy_J": 1.1698182060457731e+17,
+            "mean_W": 16247475083969.07,
+            "sampled_minimum_W": 12959568750555.402,
+            "sampled_maximum_W": 18509244406060.023,
+            "per_member_energy_range_J": [
+              0.0,
+              605933323745948.0
+            ]
+          }
+        },
+        "departure_turn": {
+          "start_s": 28800.0,
+          "end_s": 32400.0,
+          "duration_s": 3600.0,
+          "unshadowed_aperture_W": {
+            "energy_J": 1.018366380946831e+17,
+            "mean_W": 28287955026300.863,
+            "sampled_minimum_W": 96694634575.91106,
+            "sampled_maximum_W": 48067335033062.03,
+            "per_member_energy_range_J": [
+              282095811435338.8,
+              282096080384000.8
+            ]
+          },
+          "first_intercept_bolometric_equivalent_W": {
+            "energy_J": 6.916468681212139e+16,
+            "mean_W": 19212413003367.055,
+            "sampled_minimum_W": 96694634575.91106,
+            "sampled_maximum_W": 29558015828560.06,
+            "per_member_energy_range_J": [
+              110588519193774.89,
+              282096080384000.8
+            ]
+          },
+          "front_first_intercept_W": {
+            "energy_J": 7554630562854.984,
+            "mean_W": 2098508489.68194,
+            "sampled_minimum_W": 0.0,
+            "sampled_maximum_W": 49011794718.53577,
+            "per_member_energy_range_J": [
+              20921847890.918556,
+              20932000591.240658
+            ]
+          },
+          "back_first_intercept_W": {
+            "energy_J": 6.915713218155853e+16,
+            "mean_W": 19210314494877.367,
+            "sampled_minimum_W": 47682839857.375275,
+            "sampled_maximum_W": 29558015828560.06,
+            "per_member_energy_range_J": [
+              110567596215517.48,
+              282075157781571.5
+            ]
+          },
+          "redirected_band_optical_W": {
+            "energy_J": 9541271086683170.0,
+            "mean_W": 2650353079634.214,
+            "sampled_minimum_W": 13339028392.08472,
+            "sampled_maximum_W": 4077529369443.1685,
+            "per_member_energy_range_J": [
+              15255690285548.299,
+              38915164652532.055
+            ]
+          },
+          "mutual_shadow_equivalent_loss_W": {
+            "energy_J": 3.2671951282561704e+16,
+            "mean_W": 9075542022933.807,
+            "sampled_minimum_W": 0.0,
+            "sampled_maximum_W": 18717192139815.72,
+            "per_member_energy_range_J": [
+              0.0,
+              171507455302569.1
+            ]
+          }
+        },
+        "departure_coast": {
+          "start_s": 32400.0,
+          "end_s": 43200.0,
+          "duration_s": 10800.0,
+          "unshadowed_aperture_W": {
+            "energy_J": 1044039729279162.4,
+            "mean_W": 96670345303.62614,
+            "sampled_minimum_W": 96653049252.1937,
+            "sampled_maximum_W": 96694634575.91106,
+            "per_member_energy_range_J": [
+              2892035441277.782,
+              2892118554653.0513
+            ]
+          },
+          "first_intercept_bolometric_equivalent_W": {
+            "energy_J": 1043598562681989.6,
+            "mean_W": 96629496544.62866,
+            "sampled_minimum_W": 95153176565.05655,
+            "sampled_maximum_W": 96694634575.91106,
+            "per_member_energy_range_J": [
+              2885706908058.7417,
+              2892118554653.0513
+            ]
+          },
+          "front_first_intercept_W": {
+            "energy_J": 531940131317211.06,
+            "mean_W": 49253715862.70473,
+            "sampled_minimum_W": 48064875033.717316,
+            "sampled_maximum_W": 49482481829.36182,
+            "per_member_energy_range_J": [
+              1470728957007.9885,
+              1474484495105.1333
+            ]
+          },
+          "back_first_intercept_W": {
+            "energy_J": 511658431364778.6,
+            "mean_W": 47375780681.92395,
+            "sampled_minimum_W": 46047720100.34046,
+            "sampled_maximum_W": 47682839857.375275,
+            "per_member_energy_range_J": [
+              1414326510923.2034,
+              1418300715672.8987
+            ]
+          },
+          "redirected_band_optical_W": {
+            "energy_J": 143964460061384.0,
+            "mean_W": 13330042598.276297,
+            "sampled_minimum_W": 13126384202.85773,
+            "sampled_maximum_W": 13339028392.08472,
+            "per_member_energy_range_J": [
+              398083373980.9178,
+              398967860864.15186
+            ]
+          },
+          "mutual_shadow_equivalent_loss_W": {
+            "energy_J": 441166597172.726,
+            "mean_W": 40848758.99747463,
+            "sampled_minimum_W": 0.0,
+            "sampled_maximum_W": 1511002533.088172,
+            "per_member_energy_range_J": [
+              0.0,
+              6365867245.26579
+            ]
+          }
+        },
+        "whole_saved_interval": {
+          "start_s": 0.0,
+          "end_s": 43200.0,
+          "duration_s": 43200.0,
+          "unshadowed_aperture_W": {
+            "energy_J": 1.4868807539933647e+18,
+            "mean_W": 34418535972068.63,
+            "sampled_minimum_W": 96653049252.1937,
+            "sampled_maximum_W": 48067335033062.03,
+            "per_member_energy_range_J": [
+              4118782789284028.0,
+              4118783715975208.5
+            ]
+          },
+          "first_intercept_bolometric_equivalent_W": {
+            "energy_J": 1.1541023099530575e+18,
+            "mean_W": 26715331248913.367,
+            "sampled_minimum_W": 95153176565.05655,
+            "sampled_maximum_W": 41687126666448.56,
+            "per_member_energy_range_J": [
+              2328646679062709.0,
+              4118783715975208.5
+            ]
+          },
+          "front_first_intercept_W": {
+            "energy_J": 539494761880066.0,
+            "mean_W": 12488304673.149675,
+            "sampled_minimum_W": 0.0,
+            "sampled_maximum_W": 49482481829.36182,
+            "per_member_energy_range_J": [
+              1491651933073.1775,
+              1495416495696.3738
+            ]
+          },
+          "back_first_intercept_W": {
+            "energy_J": 1.1535628151911775e+18,
+            "mean_W": 26702842944240.22,
+            "sampled_minimum_W": 46047720100.34046,
+            "sampled_maximum_W": 41687126666448.56,
+            "per_member_energy_range_J": [
+              2327154148920818.5,
+              4117288904299545.5
+            ]
+          },
+          "redirected_band_optical_W": {
+            "energy_J": 1.5920845605708054e+17,
+            "mean_W": 3685380927247.235,
+            "sampled_minimum_W": 13126384202.85773,
+            "sampled_maximum_W": 5750740655125.436,
+            "per_member_energy_range_J": [
+              321236894925807.0,
+              568186364933392.0
+            ]
+          },
+          "mutual_shadow_equivalent_loss_W": {
+            "energy_J": 3.327784440403073e+17,
+            "mean_W": 7703204723155.263,
+            "sampled_minimum_W": 0.0,
+            "sampled_maximum_W": 18717192139815.72,
+            "per_member_energy_range_J": [
+              0.0,
+              1790136165612786.5
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "elapsed_s": 300.70794527,
+  "max_rss_MiB": 157.421875,
+  "raw_path": "research/runs/solar_shield_array/collection/service_departure.npz",
+  "raw_sha256": "7943c751ae7a0c1b380ff916aa90635bc388af74191d64db57e58804f13ca9cf",
+  "raw_MiB": 14.117016792297363,
+  "selected_source_count": 32,
+  "validation": {
+    "service": {
+      "source_refinement_relative_energy_change": 3.73972600320919e-07,
+      "time_coarsening_relative_energy_change": 2.1538367334824896e-06
+    },
+    "departure_preparation": {
+      "source_refinement_relative_energy_change": 2.9004776203364476e-06,
+      "time_coarsening_relative_energy_change": 2.351836795715476e-06
+    },
+    "departure_turn": {
+      "source_refinement_relative_energy_change": 4.935334293553718e-05,
+      "time_coarsening_relative_energy_change": 3.418527901352274e-05
+    },
+    "departure_coast": {
+      "source_refinement_relative_energy_change": 0.0445751363606141,
+      "time_coarsening_relative_energy_change": 5.451638000093493e-08
+    },
+    "whole_saved_interval": {
+      "source_refinement_relative_energy_change": 4.296610385234482e-05,
+      "time_coarsening_relative_energy_change": 9.201413679447233e-07
+    }
+  },
+  "maximum_force_ledger_disagreement_m_s2": 3.898866317915555e-17,
+  "force_check_dates": 13,
+  "refinement_scope": "Collection quadrature only on the same saved trajectories; no 32-source dynamics replay. Time coarsening compares 60 and 120 s optical integrals. Extrema remain sampled.",
+  "completed": true
+}

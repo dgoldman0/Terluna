@@ -627,5 +627,81 @@
     "collection_capacity_W": null,
     "delivered_power_W": null,
     "publication_target": "research/solar-shield-habitat-array; main unchanged"
+  },
+  "collection_inventory": {
+    "checked_at_utc": "2026-10-05T11:17:26.493358+00:00",
+    "status": "LOCAL_OPTICAL_INVENTORY_CHECKED_ELECTRICAL_YIELD_UNSPECIFIED",
+    "starting_remote_head": "ce72224326fafb2e94033c31ad98e1e6c54a5965",
+    "report": "collection.md",
+    "product": "results/collection.json",
+    "product_sha256": "b8159269bdd79c79b99770dac90075122f969d23274fac10f5444e547653e32a",
+    "study_tests": {
+      "status": "PASS",
+      "passed": 110,
+      "elapsed_s": 9.66,
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m pytest protection/dynamics research/studies/solar_shield_array -q"
+    },
+    "make_check": {
+      "status": "FAIL_EXISTING",
+      "summary": "13 failed, 655 passed, 55 skipped in 38.22s",
+      "same_failed_tests_as_starting_checkpoint": true,
+      "layer_check": "PASS: 480 tracked files, zero violations; new files checked separately after staging",
+      "later_targets": "Not reached after Python failures",
+      "staged_layer_check": "PASS: 484 files, zero violations"
+    },
+    "resources": {
+      "numerical_wall_s": 300.70794527,
+      "peak_RSS_MiB": 157.421875,
+      "raw_MiB": 14.117016792297363,
+      "budget": {
+        "wall_s": 600,
+        "processes": 1,
+        "numerical_threads": 1,
+        "address_space_GiB": 2,
+        "raw_output_limit_MiB": 128,
+        "source_counts": [
+          16,
+          32
+        ],
+        "time_step_s": 60
+      }
+    },
+    "validation": {
+      "service": {
+        "source_refinement_relative_energy_change": 3.73972600320919e-07,
+        "time_coarsening_relative_energy_change": 2.1538367334824896e-06
+      },
+      "departure_preparation": {
+        "source_refinement_relative_energy_change": 2.9004776203364476e-06,
+        "time_coarsening_relative_energy_change": 2.351836795715476e-06
+      },
+      "departure_turn": {
+        "source_refinement_relative_energy_change": 4.935334293553718e-05,
+        "time_coarsening_relative_energy_change": 3.418527901352274e-05
+      },
+      "departure_coast": {
+        "source_refinement_relative_energy_change": 0.0445751363606141,
+        "time_coarsening_relative_energy_change": 5.451638000093493e-08
+      },
+      "whole_saved_interval": {
+        "source_refinement_relative_energy_change": 4.296610385234482e-05,
+        "time_coarsening_relative_energy_change": 9.201413679447233e-07
+      }
+    },
+    "maximum_force_ledger_disagreement_m_s2": 3.898866317915555e-17,
+    "selected_source_count": 32,
+    "time_step_s": 60,
+    "not_executed": [
+      "New trajectory propagation",
+      "Full return or handover",
+      "Joint body/array eclipse integration",
+      "Fleet placement or inventory scaling",
+      "Electrical conversion and collector routing",
+      "Hardware-mass dynamics feedback"
+    ],
+    "accepted_fleet": false,
+    "collection_capacity_W": null,
+    "delivered_power_W": null,
+    "publication_target": "research/solar-shield-habitat-array; main unchanged"
   }
 }
