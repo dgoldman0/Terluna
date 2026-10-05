@@ -143,8 +143,10 @@ SETTINGS = dict(ipelec=3, isaund=12, lightning=3, leakage=0, radius_m=12000.0, h
 # lift it (lightning 4; the author's decision, 2026-10-04). Charge leaks through stage 1's conductivity (leakage 1; the
 # author's decision, 2026-10-05): without it the charge evaporating cloud leaves on the small ions stays for weeks and
 # held the field at the ground near 20 kV/m all over the box, where leakage clears it within the hour and leaves the
-# lightning as it was.
-LUNAR = dict(substep_s=6.8, ground_m=-1.0, lightning=4, leakage=1)
+# lightning as it was. A ground strike needs the leader to cross the air below the storm (leader_v_m 1000: a 1-kV/m
+# internal field at sea-level density, the literature's central value for a thermalized leader; the author's decision,
+# 2026-10-05), which at that field passes 82-100 % of the strikes WRF-ELEC's rule alone would count.
+LUNAR = dict(substep_s=6.8, ground_m=-1.0, lightning=4, leakage=1, leader_v_m=1000.0)
 
 
 def sources(home: Path) -> dict:

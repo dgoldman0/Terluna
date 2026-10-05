@@ -1936,6 +1936,9 @@ the cloud end holds the channel's potential up through the 0.2–0.4 s the
 crossing takes at Earth's leader speeds, and current cutoff in a long, branched
 channel.
 
+The author made the crossing at 1 kV/m the lunar runs' default on 2026-10-05;
+the runs above keep the settings they ran with.
+
 `supercell_elec_leader_1kv` runs the Earth benchmark with the crossing at 1
 kV/m beside `supercell_elec_ground_rule`: its flash log is the same to the byte,
 7,406 flashes and 85 ground strikes, since the 3–5 km below Earth's −7 °C level

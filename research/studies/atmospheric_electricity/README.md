@@ -318,7 +318,8 @@ Morrison's do.
    rule counts, and about a fifth of the lunar flashes strike the ground (30
    of 150 at 1 kV/m); it takes half of them near 10 kV/m (28 of 229) and
    nearly all at 20 kV/m. On Earth's benchmark storm at 1 kV/m it changes
-   nothing: the same 85 ground strikes among 7,406 flashes. So the ground strikes' number turns on WRF-ELEC's
+   nothing: the same 85 ground strikes among 7,406 flashes. The author made
+   the crossing at 1 kV/m the lunar runs' default the same day. So the ground strikes' number turns on WRF-ELEC's
    Earth-calibrated conditions at the start and on what the scheme leaves out
    (a downward end leaving the cloud, the cloud holding the channel's
    potential through the 0.2–0.4 s crossing, current cutoff), and on the

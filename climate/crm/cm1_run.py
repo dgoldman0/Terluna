@@ -1204,11 +1204,12 @@ CASES['box_highland_own_height'] = dict(
 # sub-steps scaled to the box's layers and fall speeds, a downward channel striking within 5 km of the ground
 # (cm1_elec.LUNAR); its restarts let windows of its storms run again with output every few minutes, other charging
 # laws, leakage or the unbounded breakdown field.
-# It and the windows below that ran before leakage became the lunar default (2026-10-05) keep the settings they ran
-# with: box_0e_elec the cap until day 18, when its namelist took lightning 4 (README), and a channel within 5 km of the
-# ground; none of them leakage.
+# It and the windows below that ran before leakage and the leader's crossing became the lunar defaults (2026-10-05) keep
+# the settings they ran with: box_0e_elec the cap until day 18, when its namelist took lightning 4 (README), and a
+# channel within 5 km of the ground; none of them leakage, until the leakage windows, or the crossing.
 CASES['box_0e_elec'] = dict(
-    CASES['box_0e'], build='moon_omp_elec', elec=dict(cm1_elec.LUNAR, lightning=3, ground_m=5000.0, leakage=0),
+    CASES['box_0e'], build='moon_omp_elec',
+    elec=dict(cm1_elec.LUNAR, lightning=3, ground_m=5000.0, leakage=0, leader_v_m=0.0),
     inputs_from='box_0e',
     purpose=CASES['box_0e']['purpose'] + ', with the NSSL microphysics and WRF-ELEC\'s charging and branched lightning')
 # The fine box (stage 2): box_0e_elec's site at a third of its spacing (2.0 km) over a box a third as wide (128 km, the
@@ -1229,11 +1230,11 @@ CASES['box_0e_elec_fine'] = dict(
 # Standler and Winn's 3 kV/m over dense vegetation scaled by the density at the ground.
 CASES['box_0e_elec_uncapped'] = dict(
     CASES['box_0e_elec'], inputs_from=None, restart_from=dict(case='box_0e_elec', day=10.5), days=14.5,
-    elec=dict(cm1_elec.LUNAR, ground_m=5000.0, leakage=0),
+    elec=dict(cm1_elec.LUNAR, ground_m=5000.0, leakage=0, leader_v_m=0.0),
     purpose=CASES['box_0e_elec']['purpose'] + '; its first lunar day\'s storms again from its day-10.5 restart, with '
             'the breakdown field\'s 180-kV/m cap lifted')
 CASES['box_0e_elec_uncapped_corona'] = dict(
-    CASES['box_0e_elec_uncapped'], elec=dict(cm1_elec.LUNAR, ground_m=5000.0, leakage=0, corona_v_m=3000.0),
+    CASES['box_0e_elec_uncapped'], elec=dict(cm1_elec.LUNAR, ground_m=5000.0, leakage=0, leader_v_m=0.0, corona_v_m=3000.0),
     purpose=CASES['box_0e_elec_uncapped']['purpose'] + ', and point discharge from the ground')
 # Ground strikes by WRF-ELEC's own rule (ground_m -1, its default: a downward channel reaching air warmer than -7 C in
 # charge of the matching sign). The Earth benchmarks ran with ground_m 0, which lightmsz reads as only the two lowest
@@ -1243,7 +1244,7 @@ CASES['box_0e_elec_uncapped_corona'] = dict(
 # reaches -7 C, 34 km up, to bridge the rest of the way to the ground.
 CASES['box_0e_elec_ground_rule'] = dict(
     CASES['box_0e_elec'], inputs_from=None, restart_from=dict(case='box_0e_elec', day=40.5), days=42.0,
-    elec=dict(cm1_elec.LUNAR, ground_m=-1.0, leakage=0),
+    elec=dict(cm1_elec.LUNAR, ground_m=-1.0, leakage=0, leader_v_m=0.0),
     purpose=CASES['box_0e_elec']['purpose'] + '; its busiest storms again from its day-40.5 restart, with WRF-ELEC\'s '
             'own ground-strike rule')
 # The charging law. Saunders and Peck's law, which every run so far uses, nearly stops for slow lunar graupel, which
@@ -1256,12 +1257,12 @@ CASES['box_0e_elec_ground_rule'] = dict(
 # most of, and an inverted dipole, since Takahashi's table charges rimed ice positively at the storms' low cloud water
 # (README, "The charging law").
 CASES['box_0e_elec_takahashi'] = dict(
-    CASES['box_0e_elec_ground_rule'], elec=dict(cm1_elec.LUNAR, isaund=1, leakage=0),
+    CASES['box_0e_elec_ground_rule'], elec=dict(cm1_elec.LUNAR, isaund=1, leakage=0, leader_v_m=0.0),
     purpose=CASES['box_0e_elec']['purpose'] + '; its busiest storms again from its day-40.5 restart, under '
             'Takahashi\'s charging law')
 CASES['box_0e_elec_takahashi_first'] = dict(
     CASES['box_0e_elec_takahashi'], restart_from=dict(case='box_0e_elec', day=10.5), days=12.0,
-    elec=dict(cm1_elec.LUNAR, isaund=1, ground_m=5000.0, leakage=0),
+    elec=dict(cm1_elec.LUNAR, isaund=1, ground_m=5000.0, leakage=0, leader_v_m=0.0),
     purpose=CASES['box_0e_elec']['purpose'] + '; its first lunar day\'s storms again from its day-10.5 restart, under '
             'Takahashi\'s charging law')
 # Leakage. With nothing to conduct it, the charge evaporating cloud leaves on the small ions stays for weeks: 2,000-3,600
@@ -1273,12 +1274,12 @@ CASES['box_0e_elec_takahashi_first'] = dict(
 # Both ran on 2026-10-05: the leftover charge goes within the hour, the field at the ground away from storms falls from
 # about 20 kV/m to a median 0.2-1.6, and the lightning stays as it was (README, "Leakage").
 CASES['box_0e_elec_leakage'] = dict(
-    CASES['box_0e_elec_ground_rule'], elec=dict(cm1_elec.LUNAR, leakage=1),
+    CASES['box_0e_elec_ground_rule'], elec=dict(cm1_elec.LUNAR, leakage=1, leader_v_m=0.0),
     purpose=CASES['box_0e_elec']['purpose'] + '; its busiest storms again from its day-40.5 restart, with the charge '
             'leaking through the air\'s conductivity')
 CASES['box_0e_elec_leakage_first'] = dict(
     CASES['box_0e_elec_leakage'], restart_from=dict(case='box_0e_elec', day=10.5), days=12.0,
-    elec=dict(cm1_elec.LUNAR, leakage=1, ground_m=5000.0),
+    elec=dict(cm1_elec.LUNAR, leakage=1, ground_m=5000.0, leader_v_m=0.0),
     purpose=CASES['box_0e_elec']['purpose'] + '; its first lunar day\'s storms again from its day-10.5 restart, with '
             'the charge leaking through the air\'s conductivity')
 # The leader's crossing (README, "The leader's crossing"). WRF-ELEC's rule counts a downward channel at -7 C, 34 km up in
@@ -1301,9 +1302,11 @@ CASES['supercell_nssl'] = dict(
     kind='sample', sample='supercell', build='earth_g_omp', days=7200.0 / 86400.0, output_s=300.0, restart_s=1800.0,
     segment_s=7200.0, namelist=dict(param2=dict(ptype=27)),
     purpose='CM1\'s supercell at Earth\'s gravity with CM1\'s own NSSL microphysics, the electrified benchmark\'s twin')
+# The benchmarks below ran with ground_m 0 (only the two lowest levels count), before WRF-ELEC's own rule became the
+# default on 2026-10-05, and keep it; supercell_elec_ground_rule runs the storm with the rule.
 CASES['supercell_elec'] = dict(
     kind='sample', sample='supercell', build='earth_g_omp_elec', days=7200.0 / 86400.0, output_s=300.0,
-    restart_s=1800.0, segment_s=7200.0, elec={},
+    restart_s=1800.0, segment_s=7200.0, elec=dict(ground_m=0.0),
     purpose='CM1\'s supercell at Earth\'s gravity with WRF-ELEC\'s NSSL microphysics, charging and branched lightning, '
             'the electrified build\'s benchmark')
 CASES['supercell_elec_ground_rule'] = dict(
@@ -1316,7 +1319,7 @@ CASES['supercell_elec_leader_1kv'] = dict(
             'and its own ground-strike rule, a ground strike needing a leader with a 1-kV/m internal field to cross to '
             'the ground: the leader\'s crossing on Earth')
 CASES['supercell_elec_cylinders'] = dict(
-    CASES['supercell_elec'], elec=dict(lightning=1),
+    CASES['supercell_elec'], elec=dict(ground_m=0.0, lightning=1),
     purpose='CM1\'s supercell at Earth\'s gravity with WRF-ELEC\'s NSSL microphysics, charging and cylindrical '
             'lightning')
 # The benchmark at the fine box's 2-km spacing: supercell_elec on a grid twice as coarse over the same 120 km, and the
@@ -1328,7 +1331,7 @@ CASES['supercell_elec_2km'] = dict(
     purpose='CM1\'s supercell at Earth\'s gravity with WRF-ELEC\'s NSSL microphysics, charging and branched lightning '
             'at 2-km spacing, the benchmark at the fine box\'s spacing')
 CASES['supercell_elec_wrf'] = dict(
-    CASES['supercell_elec'], elec=dict(isaund=11, screen=1),
+    CASES['supercell_elec'], elec=dict(ground_m=0.0, isaund=11, screen=1),
     namelist=dict(param0=dict(nx=42, ny=42), param1=dict(dx=2000.0, dy=2000.0), nssl2mom_params=dict(ccn=0.8e9)),
     purpose='CM1\'s supercell at Earth\'s gravity in WRF-ELEC\'s own test settings: 2-km spacing over 84 km, 800 CCN '
             'per cm3, Saunders and Peck\'s law as isaund 11 sets it, screening layers and branched lightning')
