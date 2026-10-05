@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-04",
+  "updated": "2026-10-05",
   "base_commit": "79a60a1a51b4552ac9ae8e8bb295b567d9254995",
   "next_manuscript": "cef466e6-d9f8",
   "principle": "Each topic spans the open Moon; the root opening scene is one illustration",
@@ -318,7 +318,7 @@
     },
     {
       "topic": "protection",
-      "condition": "historical_component_model; film_short_wave_transmission_computed_0.1_210_nm; module_catalogue_of_the_september_reference; swarm_uv_transmission_screened_for_three_design_levels; de440_full_ephemeris_point_mass_holding; bounded_monthly_trajectory_search; finite_sun_eclipses_with_retarded_body_positions; independent_tile_area_quadrature; 19_year_nodal_span; ideal_feedback_propagation; specular_sail_return_arc_replayed; three_year_point_tile_cycling_at_50_g_m2; boolean_service_time_repaired; simultaneous_3d_finite_tile_fleet_tested; continuous_fleet_coverage_unachieved; 50_m_phase_gate_failed; bounded_active_10km_tile_gap_acquisition; independently_replayed_1400km_orbital_retiming",
+      "condition": "historical_component_model; film_short_wave_transmission_computed_0.1_210_nm; module_catalogue_of_the_september_reference; swarm_uv_transmission_screened_for_three_design_levels; de440_full_ephemeris_point_mass_holding; bounded_monthly_trajectory_search; finite_sun_eclipses_with_retarded_body_positions; independent_tile_area_quadrature; 19_year_nodal_span; ideal_feedback_propagation; specular_sail_return_arc_replayed; three_year_point_tile_cycling_at_50_g_m2; boolean_service_time_repaired; simultaneous_3d_finite_tile_fleet_tested; continuous_fleet_coverage_unachieved; 50_m_phase_gate_failed; bounded_active_10km_tile_gap_acquisition; independently_replayed_1400km_orbital_retiming; prescribed_global_circle_schedule_rejected_high_cost; natural_release_three_day_gaps_and_collision_witnesses; natural_seven_day_interpolation_gate_failed",
       "material": [
         "../protection/model.py",
         "../protection/verify.py",
@@ -346,9 +346,10 @@
         "plume isolation (report.md section 8): under about 94 MW of plume power may reach the upper air for a 10 kg/s allowance; whether the solar wind carries ionized exhaust from the screen into the Moon's upper air",
         "the hub architecture of report.md section 3 (industrial hub, lunar depots, heavy facilities on economical trajectories, Earth-Sun L1/L2 hubs): no design or budget yet",
         "solar-wind subsystem: a 1 kg/s budget needs one against the solar wind's charge exchange (atmosphere/loss_response exosphere step); a dipole of about 3e19 A m^2 suffices for cool upper air, far below the four 100 km regional loops (1.5e21 A m^2, about 2e14 kg); the 2025 plasma-inflated Lunashield-L1 concept (23-40 t, unvalidated; known from a 2026-09-26 reconstruction in reference/historical/) is another candidate",
-        "effects on Earth (report.md section 6): reflections toward Earth near full moon, and the screen crossing the full Moon and the Sun as seen from Earth"
+        "effects on Earth (report.md section 6): reflections toward Earth near full moon, and the screen crossing the full Moon and the Sun as seen from Earth",
+        "Active global fleet: 38.65 million prescribed 10 km tiles cost roughly 1480\u20131520 TW before added control mass and are rejected. Natural release of the same starting geometry loses coverage and intersects; ideal photon-force cancellation is only a cost component. Minimum-intervention repair, collision avoidance, return paths and their recurring total cost remain unmeasured."
       ],
-      "next_session_task": "The author resumed active-choreography work on 2026-10-04. Local 625-tile acquisition closes sampled finite-Sun gaps with electric feedback, and three-/seven-day finite-tile transfers reach a 1400 km phase-shift target with 5.45/6.79 m/s. Next solve a global four-radius coverage assignment with collision-safe transfers, simultaneous handovers and full return schedules; optimize recurring energy/propellant and include propulsion hardware mass, exhaust paths and attitude dynamics. Collector/habitat loads and delivered power remain separate.",
+      "next_session_task": "Continue from the rejected global comparison in solar_shield_array/active_global.md. Do not treat rigid Sun-following circles as a low-energy controller, or the 68.52 TW photon-cancellation component as an operating budget. The natural-release diagnostic passes sampled 50 m replay checks through three days and shows actual optical gaps and independently confirmed intersections; its seven-day interpolation fails. Seek alternative families and minimum-intervention controls against actual coverage/encounter events, with inventory and total recurring costs screened against the roughly 238 TW held benchmark before expansion. Local retiming alone is insufficient. Preserve finite-Sun and Earth-safe beam requirements, bounded-slew and transfer/return gates; keep collector/habitat loads and delivered power separate.",
       "requirements_from_september_reports": [
         "construction within 500 years of 2026; operation for at least 1e9 years",
         "an open atmosphere with no pressure dome; no superconducting planetary ring",

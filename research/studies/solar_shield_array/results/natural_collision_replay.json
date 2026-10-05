@@ -1,0 +1,141 @@
+{
+  "schema": "terluna.research.natural-collision-replay/1",
+  "producer": {
+    "source_hashes": {
+      "protection/dynamics/cycling.py": "704fbd03c9d4070ea05bdfeba57914ec225941f3560710da2472bd24ca870ed4",
+      "protection/dynamics/ephemeris.py": "9a162c3acf63a844284eb61b444a7d34f1447b5182d254d3e87616516f8748d9",
+      "protection/dynamics/ephemeris.json": "90fde7cb6142e5d4d8082270a978ba2f8f47baaefab0e8d1cf82ec6f07a27222",
+      "protection/dynamics/model.py": "01c9191588037ab4f42bac38dc4d5bd99e57427d37fa75cd672120e32b53733a",
+      "protection/dynamics/optical.py": "06a13ae9f24834876edbc12b513deaa5e3735f02f8249eb57c8996d74ce00b56",
+      "research/studies/solar_shield_array/scenario.json": "a53b784941518b6e36ccdf728252cf6c8e0c46c1126b6c621ed4e28c23128699",
+      "research/studies/solar_shield_array/cycling_search.py": "4789a0185620f6662916462b2715aa9002e6454e74f4f32ef5f7dadf5f732093",
+      "research/studies/solar_shield_array/cycling_feedback.py": "0eb32d26e14472f0a512cdf45d60f00ab8260376cd51ca715e7615bf7df02775",
+      "protection/dynamics/fleet.py": "f3e52653876c2956a4b355dc1290a0a1cadd2b9b601cafc664259827df1cc93c",
+      "research/studies/solar_shield_array/fleet_run.py": "9b8bc9765b9288745ea7d4d69d59e857e76e54d29cc91b37160503e9d9090833",
+      "protection/dynamics/active_global.py": "e2c64a5e86f6c4188a42a1aa6f796fe375d6c976670b960013733d008dd8da18",
+      "protection/dynamics/active_formation.py": "597c12c6a4a89c0ea70663fddd69b9b5d9e599c88a2bd1742f5009d19e050b7a",
+      "research/studies/solar_shield_array/active_global_run.py": "daee4303988d4f38eed184e624a43730a488fd78f21b25262951d360cdffa852",
+      "research/studies/solar_shield_array/cycling_analysis.py": "4fe32b4c27af48048db63ae073d99dc10b7897c9f3eaa68c2cd34036618f8fc0",
+      "protection/dynamics/natural_traffic.py": "8921bba9542cc50ccc746f9a885b8b0a6e88427ac553888990fe68c622a6a570",
+      "research/studies/solar_shield_array/natural_traffic_run.py": "4097bb21c2aa033d95e0e5860e6cd332ff19ecc0bb27e48084de005b1d116561",
+      "research/studies/solar_shield_array/natural_collision_replay.py": "b67d5ac53ba2eea4a18715d920a0185ebd22eaf8aad1822fb2b62c0ed780c40d"
+    },
+    "constants": {
+      "AU": 149597870700.0,
+      "EARTH_GM": 398600441800000.0,
+      "EARTH_MOON_DISTANCE": 384400000.0,
+      "EARTH_OBLIQUITY_DEG": 23.4393,
+      "EARTH_RADIUS": 6371000.0,
+      "JULIAN_DAY": 86400.0,
+      "JULIAN_YEAR_DAYS": 365.25,
+      "MOON_GM": 4902800118000.0,
+      "MOON_RADIUS": 1737400.0,
+      "SOLAR_CONSTANT": 1361.0,
+      "SOLAR_SYSTEM_GM": {
+        "mercury": 22031868551000.0,
+        "venus": 324858592000000.0,
+        "mars": 42828375816000.0,
+        "jupiter": 1.267127641e+17,
+        "saturn": 3.79405848418e+16,
+        "uranus": 5794556400000000.0,
+        "neptune": 6836527100580000.0,
+        "pluto": 975500000000.0
+      },
+      "SPEED_OF_LIGHT": 299792458.0,
+      "SUN_GM": 1.3271244004127942e+20,
+      "SUN_RADIUS": 695700000.0
+    },
+    "input_product_sha256": "4f4dc83893540ee41f35f2ae3541f4325b2ff6ec569f973713eb9d9476e38dab"
+  },
+  "max_step_s": 300.0,
+  "rtol": 2e-12,
+  "phase_difference_rad": 2e-06,
+  "series": [
+    {
+      "day": 1.0,
+      "integer_members": 16,
+      "example_ids": [
+        [
+          [446,3385],
+          [1860,11820]
+        ],
+        [
+          [449,3407],
+          [1857,11834]
+        ],
+        [
+          [451,3421],
+          [1855,11844]
+        ],
+        [
+          [452,3429],
+          [1854,11848]
+        ],
+        [
+          [455,3451],
+          [1851,11860]
+        ],
+        [
+          [459,3481],
+          [1847,11878]
+        ],
+        [
+          [460,3489],
+          [1846,11882]
+        ],
+        [
+          [461,3495],
+          [1845,11888]
+        ]
+      ],
+      "maximum_separating_axis_values_m": [-6.806401785870548,-381.3935370460881,-171.95830523878521,-360.7529176498183,-166.51435806133395,-774.7472605630526,-303.13582204225804,-825.5001297348126],
+      "confirmed_square_intersections": 8,
+      "minimum_beam_margins_deg": [2.339350525110125,89.29245914135683],
+      "nfev": 3509
+    },
+    {
+      "day": 3.0,
+      "integer_members": 16,
+      "example_ids": [
+        [
+          [94,1696],
+          [2210,9341]
+        ],
+        [
+          [94,1698],
+          [2210,9339]
+        ],
+        [
+          [95,1720],
+          [2209,9329]
+        ],
+        [
+          [96,1742],
+          [2208,9319]
+        ],
+        [
+          [97,1762],
+          [2207,9311]
+        ],
+        [
+          [95,1718],
+          [2209,9331]
+        ],
+        [
+          [96,1740],
+          [2208,9321]
+        ],
+        [
+          [97,1764],
+          [2207,9309]
+        ]
+      ],
+      "maximum_separating_axis_values_m": [-275.10911925018627,-1557.114286398667,-1250.347558434681,-1189.2562527982957,-481.1302009161341,-576.0596158128319,-213.1395822448785,-461.34100183451665],
+      "confirmed_square_intersections": 8,
+      "minimum_beam_margins_deg": [2.316462956610087,120.16161382411569],
+      "nfev": 10421
+    }
+  ],
+  "evidence": "Independent common-epoch IVPs of actual integer collision witnesses and neighbouring phases. Finite-square intersections use the independently propagated centres and advected tangents.",
+  "scope": "Confirms individual intersections in the point-gravity, ideal-attitude model; no global collision census, avoidance manoeuvre or swept-path certificate is claimed."
+}

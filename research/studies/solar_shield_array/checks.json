@@ -294,5 +294,57 @@
       "generated_image_ignored_by_git": true
     },
     "preceding_checkpoint": "a2574b4609d4d3d9ec12928d5a09f8b7bdf6ba8a"
+  },
+  "active_global_checkpoint": {
+    "date": "2026-10-05",
+    "status": "RIGID_SCHEDULE_REJECTED_NATURAL_RELEASE_FAILS_OPERATING_CONSTRAINTS",
+    "report": "active_global.md",
+    "preceding_checkpoint": "02ab90aad304479796c47e7a2fca97faf06fa08d",
+    "study_tests": {
+      "status": "PASS",
+      "passed": 72,
+      "command": "python -m pytest protection/dynamics research/studies/solar_shield_array -q"
+    },
+    "make_check": {
+      "status": "FAIL_EXISTING",
+      "summary": "13 failed, 617 passed, 55 skipped in 16.14s",
+      "same_failed_tests_as_preceding_checkpoint": true,
+      "layer_check": "PASS: 450 files, zero violations",
+      "later_targets": "Not reached after Python failures; earlier JavaScript/provenance entries retain their historical scope"
+    },
+    "products": {
+      "results/active_global_rejected.json": "bbe327b0f9d068741370e9dbb7105313b52e01513584f411e80f828069b3ccfd",
+      "results/natural_traffic.json": "4f4dc83893540ee41f35f2ae3541f4325b2ff6ec569f973713eb9d9476e38dab",
+      "results/natural_collision_replay.json": "ed53dd9c6d45b4b7f823a8e8cf966485387a43b55bc11d345769bae788be2765"
+    },
+    "prescribed_schedule": {
+      "inventory": 38652166,
+      "tile_side_m": 10000,
+      "mean_power_bounds_TW": [
+        1480.4031759773775,
+        1520.1982683384952
+      ],
+      "accepted_low_energy_solution": false,
+      "completed_global_ray_dates": 26,
+      "last_global_ray_day": 12.5,
+      "completed_focused_handover_windows": 6,
+      "full_month_census_and_feedback": "Not performed"
+    },
+    "natural_release": {
+      "geometry_horizon_days": 3,
+      "independent_members": 143,
+      "maximum_checked_position_difference_through_day3_m": 15.602406327311035,
+      "seven_day_interpolation_gate": "FAIL: 1127.398325575348 m",
+      "day3_ray_coverage": 0.771392822265625,
+      "day3_all_eight_sampled_sun_receiver_fraction": 0.317626953125,
+      "independently_confirmed_intersections": 16,
+      "photon_cancellation_only_mean_upper_TW": 68.52496281987837,
+      "total_operating_power": "Unknown: gap repair, collision avoidance and recovery are not implemented"
+    },
+    "continuous_coverage_certified": false,
+    "bounded_slew_earth_safe_attitudes_demonstrated": false,
+    "collector_habitat_loads": "Separate, not included",
+    "delivered_power_W": null,
+    "publication_target": "research/solar-shield-habitat-array; no merge to main"
   }
 }

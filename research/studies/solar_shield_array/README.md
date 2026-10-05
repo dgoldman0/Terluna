@@ -37,6 +37,16 @@ about 1,400 km with 5.45–6.79 m/s of correction. Power and propellant are
 reported. A collision-safe global assignment, recurring handovers and return
 schedules remain to be solved; delivered power is still unevaluated.
 
+The [global traffic follow-up](active_global.md) rejects a prescribed-circle
+family whose large circulating inventory and continuous holding cost exceed
+the held-screen benchmark. Its completed finite-square geometry tests and
+interrupted checks are distinguished explicitly. A gravitational release
+diagnostic measures three days of coverage loss and independently replayed
+collisions when circle enforcement is removed; its seven-day interpolation
+fails the position gate. Photon-force cancellation is only one cost component. A
+minimum-intervention controller, its complete recurring budget, continuous
+optical certification and bounded-slew attitudes remain unresolved.
+
 The study couples protection, engineering, illumination and habitation. Its
 runners, compact numerical results and interpretation belong together here;
 dynamics components belong in the protection domain. Computation files and

@@ -61,3 +61,18 @@ and smooth thrust arcs for individual phase transfers. The
 [active study](../../research/studies/solar_shield_array/active.md) records local
 gap acquisition and independently replayed 1,400 km orbital retiming. Its local
 coverage and control budgets leave the global fleet assignment unresolved.
+
+[active_global.py](active_global.py) defines every member of a recurring
+meridional-plane population at a common ephemeris date, with finite-square ray
+intersections, return paths, constrained ideal beam normals and a radial
+separation bound. Its inverse-dynamics force bracket permits any mutual
+illumination fraction; it does not replace that missing optical solution with
+full sunlight. The [global study](../../research/studies/solar_shield_array/active_global.md)
+records its rejected high cost and the completed focused handovers; the planned
+rigid-target feedback replay was not run. `natural_traffic.py` releases the
+initial geometry into gravitational IVPs with ideal photon-force cancellation
+and independently checked interpolation to integer members through three days.
+The seven-day interpolation fails its placement allowance. The checked prefix
+develops optical gaps and independently replayed tile intersections. Gap repair,
+collision-avoidance control, continuous coverage and bounded-slew attitude
+realizability remain separate gates.
