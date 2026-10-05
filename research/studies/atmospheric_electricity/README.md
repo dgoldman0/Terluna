@@ -246,7 +246,13 @@ Morrison's do.
    it up. A 30-minute check held the ground's field at the onset where no
    particles reach the lowest level, but not under rain, where WRF-ELEC hands
    the ground's ions to the rain at once and the scheme's ions do not climb in
-   the field.
+   the field. Both ran on 2026-10-04. Without the cap a third of the flashes
+   started below 34.8 km, against half under it, with 123 flashes against 162
+   and a tenth more charge each. Point discharge cut the dry ground's
+   strongest field from a median 11 to 7 kV/m but left the strongest under
+   storms near 34 kV/m (40 without it). On several threads CM1 does not repeat
+   itself bit for bit, so each pair compares realizations, and the counts lie
+   within what the weather alone could change (climate/crm README).
 5. Windows of `box_0e_elec`'s second lunar day run again from its restarts with
    output every few minutes, to follow each storm's life, under Takahashi's law
    and with leakage.

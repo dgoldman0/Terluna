@@ -1607,8 +1607,48 @@ known. On several threads CM1 does not repeat itself bit for bit (above,
 about 50 steps after the restart and flashed first at day 10.842, against
 10.919, so each pair compares two realizations of the same day. The cap's
 effect shows as a shift in the flashes' heights, depths and charge, and point
-discharge's as the field at the ground. Each takes about three hours on 4 threads, after the fine box's
-extension, from 2026-10-04.
+discharge's as the field at the ground. They ran on 2026-10-04 after the fine
+box, 3.5 and 2.6 hours on 4 threads.
+
+Over days 10.5–14.5, all flashes in cloud:
+
+| | First run (capped) | Cap lifted | Cap lifted, point discharge |
+|---|---|---|---|
+| Flashes | 162 | 123 | 86 |
+| First flash | day 10.919 | 10.842 | 10.915 |
+| Starting below 34.8 km | 84 (52 %) | 40 (33 %) | 28 (33 %) |
+| Start height, median (90th percentile) | 33.8 km (37.8) | 35.8 (37.8) | 35.8 (49.8) |
+| Charge per flash, median (90th) | 87 C (174) | 95 (201) | 103 (227) |
+| Channel bottom, median (10th) | 27.8 km (23.9) | 27.8 (20.4) | 29.8 (22.1) |
+| Charge neutralized in all | 16,300 C | 13,900 | 10,100 |
+| Nitrogen oxides | 389 mol | 333 | 237 |
+
+Lifting the cap moved the flashes' starts up, as the higher threshold below
+36 km requires: a third of them started below 34.8 km, against half under the
+cap. Each flash then neutralized about a tenth more charge, and there were a
+quarter fewer. The channels did not stop higher, as a higher stopping field
+would have them do. With one realization each, the weather alone could make
+differences that size in counts, charge and depth; the shift in starting
+height follows from the threshold itself.
+
+Point discharge left the strongest field at the ground much as it was, a
+median over ten-step intervals of 34 kV/m against 40 and at most 181 against
+228, since the ground's ions go into the rain under storms: 58 % of the
+discharging columns were wet. Where no particles reached the lowest level it
+cut the strongest field from a median of 11.0 kV/m to 7.2 and from 17.5 to 12.5
+at the 90th percentile; in 22 % of intervals it still passed 10 kV/m somewhere,
+against 55 % without it. Without point discharge the field at the ground passed
+10 kV/m somewhere in the box in 95 % of intervals and 50 kV/m in 43 %. The
+ground gave off charge from a median of 431 of the 4,096 columns at a time
+(1,022 at most), a median of 3.4 A over the box and up to 34 A, 1.5 million C
+of positive and 0.58 million C of negative charge over the four days. The
+box's own charge stayed at a few thousand coulombs of each sign (at most
+12,600 C positive, against 7,900 without it), so nearly all of that charge
+went back to the ground on the precipitation it attached to; the totals
+measure the model's ion cycle more than charge the storms keep. The run made 86 flashes,
+fewer and starting higher than the run without it (a tenth started at or
+above 49.8 km). The weather alone could make a difference that size between
+realizations, so its effect on the lightning stays unresolved.
 
 ```sh
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_elec_uncapped    # and box_0e_elec_uncapped_corona
