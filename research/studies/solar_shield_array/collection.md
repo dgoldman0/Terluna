@@ -125,3 +125,7 @@ The later JavaScript, provenance and ensemble targets are not reached.
 The layer check and `git diff --check` pass. No full return, new fleet search,
 collector routing, device-yield calculation or hardware-mass replay was run
 for this collection-accounting addition.
+
+## Collection through the failed return corrections
+
+The [encounter-directed report](return_repair.md) retains every tile through three further coupled return trials, with 16/32-source torque accounts and 64/128-source grazing collection comparisons. It reconstructs the original lunar-disk extra dimming, equal-band held-aperture collection and the broader static annular allowance. Full-cycle and actual fleet output remain unfilled; conversion, capture, delivery, heat, propulsion, other loads, storage and material sensitivities stay separate.

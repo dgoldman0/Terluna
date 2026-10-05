@@ -412,3 +412,7 @@ targets are not reached. Checks have their own five-minute allowance;
 The research branch receives the tested code, compact products and this report.
 Main is unchanged. No complete return, two-pattern handover, fleet operating
 cost or continuous global coverage is accepted at this checkpoint.
+
+## Subsequent encounter-directed checkpoint
+
+[return_repair.md](return_repair.md) preserves these results and executes three early return corrections, including smooth +60/-30-degree roll transitions. A local burn delays the clearance stop but produces a deeper overlap and individual power-capacity failures. Its tighter replay, per-tile collection and explicit static/moving electrical/material comparison retain the original operating target.

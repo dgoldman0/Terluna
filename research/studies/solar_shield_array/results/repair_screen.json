@@ -1,0 +1,3356 @@
+{
+  "schema": "terluna.research.return-repair-screen/1",
+  "producer": {
+    "source_hashes": {
+      "protection/dynamics/cycling.py": "704fbd03c9d4070ea05bdfeba57914ec225941f3560710da2472bd24ca870ed4",
+      "protection/dynamics/ephemeris.py": "9a162c3acf63a844284eb61b444a7d34f1447b5182d254d3e87616516f8748d9",
+      "protection/dynamics/ephemeris.json": "90fde7cb6142e5d4d8082270a978ba2f8f47baaefab0e8d1cf82ec6f07a27222",
+      "protection/dynamics/model.py": "01c9191588037ab4f42bac38dc4d5bd99e57427d37fa75cd672120e32b53733a",
+      "protection/dynamics/optical.py": "06a13ae9f24834876edbc12b513deaa5e3735f02f8249eb57c8996d74ce00b56",
+      "research/studies/solar_shield_array/scenario.json": "a53b784941518b6e36ccdf728252cf6c8e0c46c1126b6c621ed4e28c23128699",
+      "research/studies/solar_shield_array/cycling_search.py": "4789a0185620f6662916462b2715aa9002e6454e74f4f32ef5f7dadf5f732093",
+      "research/studies/solar_shield_array/cycling_feedback.py": "0eb32d26e14472f0a512cdf45d60f00ab8260376cd51ca715e7615bf7df02775",
+      "protection/dynamics/fleet.py": "f3e52653876c2956a4b355dc1290a0a1cadd2b9b601cafc664259827df1cc93c",
+      "research/studies/solar_shield_array/fleet_run.py": "9b8bc9765b9288745ea7d4d69d59e857e76e54d29cc91b37160503e9d9090833",
+      "protection/dynamics/active_formation.py": "597c12c6a4a89c0ea70663fddd69b9b5d9e599c88a2bd1742f5009d19e050b7a",
+      "protection/dynamics/active_retime.py": "9ba27a7ec48460a345289ebc7550c502f845487beaec5fe35084a67b2d9d736b",
+      "protection/dynamics/coverage_pilot.py": "fb03381e4387cb17e5276148428a3ffb2cbfb5313c8f59b8ff708ebeb9ce079c",
+      "protection/dynamics/natural_pattern.py": "780c2679f13c097c07b89e9d7cce1c91399f464f01b4bd878fb50cb643e1be29",
+      "research/studies/solar_shield_array/patterns_run.py": "f2e346fd2281632e5bf1c285c61229ba24e26e4ba4c480713194218263888d5c",
+      "protection/dynamics/pattern_departure.py": "24e7bb0653f9ab546b46a9a650ae67e3adb0af154c3e5b9ba83461e9648b828b",
+      "protection/dynamics/departure_control.py": "beafd12acfb4a228c17a329c9e0d278282222e90be7126b20b3e2df551bedfd5",
+      "protection/dynamics/pattern_return.py": "a1a3f85e5f7744d0418574d0fc2a033d4ab69d9d55eba9bfbb85974c7ab64757",
+      "protection/dynamics/energy_coast.py": "df47adb192e3f665e977353844e478f9cd5a30f63ca54ea2f31b59e9cd1b6826",
+      "protection/dynamics/attitude_load.py": "0b977677edc96d33889eb36526c4826c625eea2cb1a4e3b4254e970ac99582e4",
+      "research/studies/solar_shield_array/return_screen.py": "53ec3ecf5165c773142315d97553f9c72ebbe6c045299ec368104c1811f4b526",
+      "research/studies/solar_shield_array/energy_screen.py": "3506f2f1c725299fc98795fb32ed3c0063605f114c3d5cdbc711ee0f5c3bf9bd",
+      "protection/dynamics/parallel_shadow.py": "98d09fc9e5812b3592cbc5e24e0615f9f9aa3a75c7f33afff0fe82d0e40c3c24",
+      "research/studies/solar_shield_array/departure_validate.py": "df457b279e1b69627f65fa528877faa414161e6bfea881387d28243504f9b9b0",
+      "research/studies/solar_shield_array/energy_run.py": "1ddb0b6d2aabac1252ae614369230d286d6db7c79a45b7c863ac1a926ccd1c08",
+      "protection/dynamics/coast_control.py": "315bb9a1456ca1108f93ec1579719f7933acafb3f3c2b79bb2cf875961685c4d",
+      "research/studies/solar_shield_array/energy_correct.py": "5c518a5e0aa17c2e8cd999f46f9ab139c02534f58919ee630f38fbfbd523d9ca",
+      "research/studies/solar_shield_array/energy_replay.py": "b3ce134e8ad2d005d23a367d9d90e832b89c4fd11bbcca7ff448706987ca8d4c",
+      "protection/dynamics/packing_control.py": "2a728856edbc76c79eb59e7ba29532c5fe62671f24e39687cabb0bea7f7272a7",
+      "research/studies/solar_shield_array/packing_screen.py": "1a3b771ed6543810d75dfc54c7ca33a084086a9c9519bdc26959a89c87f8fedb",
+      "research/studies/solar_shield_array/packing_run.py": "d9971a9f1bf6a3d8a9ebad83e9e9fd78af046eb5af7a0c06fe4250ee05c8ec8b",
+      "protection/dynamics/collection.py": "a742f83d832f1afdfc144f0661c5a0dcfe8723bfcd184e2d65db778ca9af7cf9",
+      "research/studies/solar_shield_array/packing_validate.py": "0a6f52de4a2d07d80b137c1a67ac6e6e8ee0aa1d7cb3683684e076fcf776e5f0",
+      "research/studies/solar_shield_array/departure_screen.py": "9e69d5e5db5729191ca6ccae8673d24dfab7606af8bb47f1038913b328750ff4",
+      "research/studies/solar_shield_array/departure_refine.py": "c206316508235d2e5960dff5a6ab5de90334a632a67e46a54505d7d9909fd72a",
+      "research/studies/solar_shield_array/departure_run.py": "b142372d4b1ed3383bfe4ff5ea8764bbb2c12e8d92c3db8cb81138a18663a2c8",
+      "research/studies/solar_shield_array/departure_budget.py": "61434cb29ddf74bdfef79abcfcdd3f9a886caa8e21ba9a76f23faf6167b579a4",
+      "research/studies/solar_shield_array/pilot_budget.py": "2a7fc3e12d4b4aae98ce8d656220e0c10cbe0d5de2099f0406d64662e563c41e",
+      "protection/dynamics/tile_torque.py": "448a9ee6db481c18252196045cc53ad48733aacb9f8fc2620db8eae10acd6cbf",
+      "research/studies/solar_shield_array/energy_budget.py": "1d261c43f9bfebd418875e9b62f00fbc554bb03da6e679c36918e252bb272fab",
+      "research/studies/solar_shield_array/packing_budget.py": "912e8723c4855545cdde6817641159b1d6dbd5e90d5b86c9da5544d8162dd3ca",
+      "protection/dynamics/square_distance.py": "b38c54b6d9a96b161e82b755d407758548a38244c9292d73404ab45cdc1210ba",
+      "protection/dynamics/service_margin.py": "2651d828734f82416fa39bd6a77da31ae070aaa7606f6b80cdb1cbf00090e68f",
+      "research/studies/solar_shield_array/packing_audit.py": "bdb61443a6ded75c9c5c3dfbd6644b947874d710194363ba572f5814a36f5b91",
+      "protection/dynamics/cycle_control.py": "79979d6ec11f8095a9b9d9f20162e0c564a547aa108d0f8aff330c1ba5ceb5ac",
+      "research/studies/solar_shield_array/closure_screen.py": "77943258dd53965b799437d274b25a97fa8b122fc69d36021dce97db10cc0c27",
+      "protection/dynamics/mass_feedback.py": "a7a22f4879f9bf65f4124c4533beab860bb2135b579fd588d0470962ca741abc",
+      "research/studies/solar_shield_array/closure_propagate.py": "94439660cf036cde289ad7fdd8bb17b2efd37680ca189a2057ee64e30c3d51e2",
+      "research/studies/solar_shield_array/closure_hardware.py": "fea296454ae7a7b86091ccf462a0c86dec47250b092395e203a8bd2d501c6349",
+      "research/studies/solar_shield_array/closure_sizing.py": "7b0a85ef346d6d5328f65f0108a82df3dd562866ec69ef3b2f56223cfe5a3f56",
+      "research/studies/solar_shield_array/closure_return.py": "1b2eed766423e99684d5e8084f11709f50915d37185b2556eafdce0823da3464",
+      "research/studies/solar_shield_array/closure_validate.py": "beae9de9f295d8eb7819949119d9315ce462e72e29c3f3b2095642163164baa6",
+      "protection/dynamics/compact_shadow.py": "e4a729b6fa500a8e3e380a17f34009ba846a6eb3d33038679e0495afbe69fac7",
+      "research/studies/solar_shield_array/closure_compact.py": "d702eaf9e7aa9f0c8336a99c6b3608a35dafd504d856edc1e2d624ab00b20f31",
+      "protection/dynamics/return_escape.py": "c76687ce70d82b636535200e63f31a9a93cc5e6fca6ad207779be6850e5cec7b",
+      "research/studies/solar_shield_array/repair_screen.py": "7591e1a0a4de0dad93154397d36a3fc13b02ab6acae7b0af4fc73911d11974f9"
+    },
+    "constants": {
+      "AU": 149597870700.0,
+      "EARTH_GM": 398600441800000.0,
+      "EARTH_MOON_DISTANCE": 384400000.0,
+      "EARTH_OBLIQUITY_DEG": 23.4393,
+      "EARTH_RADIUS": 6371000.0,
+      "JULIAN_DAY": 86400.0,
+      "MOON_GM": 4902800118000.0,
+      "MOON_RADIUS": 1737400.0,
+      "SOLAR_CONSTANT": 1361.0,
+      "SOLAR_SYSTEM_GM": {
+        "mercury": 22031868551000.0,
+        "venus": 324858592000000.0,
+        "mars": 42828375816000.0,
+        "jupiter": 1.267127641e+17,
+        "saturn": 3.79405848418e+16,
+        "uranus": 5794556400000000.0,
+        "neptune": 6836527100580000.0,
+        "pluto": 975500000000.0
+      },
+      "SPEED_OF_LIGHT": 299792458.0,
+      "SUN_GM": 1.3271244004127942e+20,
+      "SUN_RADIUS": 695700000.0
+    },
+    "inputs": {
+      "closure_validation.json": "5032a8f71204508544dbc840c8e33208e1f0a62719c12245806e014e7a03baef",
+      "closure_return.json": "2edc5fc7b823de2fbda33a78116ed9715a8ec47723e1f92a6b2b0e12e3ef283c",
+      "closure_sizing.json": "7bd01de3cd9d917ffc55d5679f3abd70bf519858ee021314a2251ac14e8b2b40"
+    }
+  },
+  "budget": {
+    "total_wall_s": 3600,
+    "stage_wall_s": 600,
+    "threads": 1,
+    "address_space_GiB": 2
+  },
+  "accepted_return": false,
+  "accepted_cycle": false,
+  "accepted_fleet": false,
+  "scope": "Independent unshadowed proposals from actual mass-loaded states. Physical geometry includes smooth attitude transitions. Coupled trials and load accounting decide acceptance.",
+  "actual_encounter": [
+    {
+      "time_s": 43200.0,
+      "pair": [
+        325,
+        347
+      ],
+      "displacement_body_m": [
+        -10616.37525858071,
+        11904.535779044596,
+        2537.497951309605
+      ],
+      "displacement_rate_body_m_s": [
+        0.7107269534999817,
+        -0.3880991492849733,
+        -0.3499843644258262
+      ],
+      "global_geometry": {
+        "minimum_sampled_surface_distance_m": 1719.6269332276129,
+        "witness": {
+          "time_s": 43200.0,
+          "pair": [
+            338,
+            341
+          ],
+          "projection_m": [
+            -11718.07343276567,
+            7184.549028691076,
+            73.07851330310406
+          ],
+          "centre_distance_m": 13745.411241227419
+        }
+      }
+    },
+    {
+      "time_s": 45000.0,
+      "pair": [
+        325,
+        347
+      ],
+      "displacement_body_m": [
+        -9400.729225496589,
+        11166.762268764585,
+        1902.1177576308696
+      ],
+      "displacement_rate_body_m_s": [
+        0.5963869637915973,
+        -0.42870801649729,
+        -0.3556206097938711
+      ],
+      "global_geometry": {
+        "minimum_sampled_surface_distance_m": 750.4347054076467,
+        "witness": {
+          "time_s": 45000.0,
+          "pair": [
+            338,
+            341
+          ],
+          "projection_m": [
+            -10743.663844325329,
+            6112.175024692911,
+            100.57998669484304
+          ],
+          "centre_distance_m": 12361.032022694002
+        }
+      }
+    },
+    {
+      "time_s": 46800.0,
+      "pair": [
+        325,
+        347
+      ],
+      "displacement_body_m": [
+        -8677.450994309404,
+        10374.229670490648,
+        1258.7232819538074
+      ],
+      "displacement_rate_body_m_s": [
+        0.16349861570396748,
+        -0.44891553420904706,
+        -0.3588866022444005
+      ],
+      "global_geometry": {
+        "minimum_sampled_surface_distance_m": 280.7511221744954,
+        "witness": {
+          "time_s": 46800.0,
+          "pair": [
+            338,
+            341
+          ],
+          "projection_m": [
+            -10249.966716867091,
+            5051.941839272629,
+            127.81953317441699
+          ],
+          "centre_distance_m": 11428.047596914239
+        }
+      }
+    },
+    {
+      "time_s": 48600.0,
+      "pair": [
+        325,
+        347
+      ],
+      "displacement_body_m": [
+        -8815.931599451967,
+        9554.09506105076,
+        611.1413296768583
+      ],
+      "displacement_rate_body_m_s": [
+        -0.27572991824847043,
+        -0.46340368623354944,
+        -0.36046090804669223
+      ],
+      "global_geometry": {
+        "minimum_sampled_surface_distance_m": 549.4095939158883,
+        "witness": {
+          "time_s": 48600.0,
+          "pair": [
+            243,
+            246
+          ],
+          "projection_m": [
+            -10535.135147533547,
+            3909.6202739560945,
+            124.42377490283094
+          ],
+          "centre_distance_m": 11237.868327182261
+        }
+      }
+    },
+    {
+      "time_s": 50016.72633817279,
+      "pair": [
+        325,
+        347
+      ],
+      "displacement_body_m": [
+        -9314.919935064512,
+        8885.426649357358,
+        100.00000000037431
+      ],
+      "displacement_rate_body_m_s": [
+        -0.3982424112230717,
+        -0.4813821873708838,
+        -0.3610151849834255
+      ],
+      "global_geometry": {
+        "minimum_sampled_surface_distance_m": 100.00000000037431,
+        "witness": {
+          "time_s": 50016.72633817279,
+          "pair": [
+            325,
+            347
+          ],
+          "projection_m": [
+            -9314.919935064512,
+            8885.426649357358,
+            100.00000000037431
+          ],
+          "centre_distance_m": 12873.559730617333
+        }
+      }
+    }
+  ],
+  "cases": [
+    {
+      "index": 0,
+      "schedule": {
+        "label": "unchanged"
+      },
+      "early_geometry": {
+        "minimum_sampled_surface_distance_m": 0.001589757826641023,
+        "witness": {
+          "time_s": 51240.0,
+          "pair": [
+            42,
+            80
+          ],
+          "projection_m": [
+            204.36248010378063,
+            368.99670617864234,
+            -0.001589757826641023
+          ],
+          "centre_distance_m": 421.8087154711039
+        }
+      },
+      "full_proposal_geometry": {
+        "minimum_sampled_surface_distance_m": 0.001589757826641023,
+        "witness": {
+          "time_s": 51240.0,
+          "pair": [
+            42,
+            80
+          ],
+          "projection_m": [
+            204.36248010378063,
+            368.99670617864234,
+            -0.001589757826641023
+          ],
+          "centre_distance_m": 421.8087154711039
+        }
+      },
+      "early_crossings": {
+        "crossing_near_encounters": 1620,
+        "physical_intersections": 1601,
+        "witnesses": [
+          {
+            "time_s": 51349.87884535752,
+            "i": 166,
+            "j": 204,
+            "coplanarity_residual_m": 8.078193036014754e-09,
+            "in_plane_projections_m": [
+              20.986241687627768,
+              5.887659462175604
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9979.013758312372,
+            "axis": [
+              -0.19323768352012388,
+              0.9001892765010504,
+              0.39027998173143885
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51372.749388394,
+            "i": 168,
+            "j": 206,
+            "coplanarity_residual_m": 8.153211158187191e-08,
+            "in_plane_projections_m": [
+              21.039269492347366,
+              5.932093460652929
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9978.960730507653,
+            "axis": [
+              -0.19324211713215794,
+              0.9001884753471416,
+              0.3902796343885621
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51393.227670416614,
+            "i": 170,
+            "j": 208,
+            "coplanarity_residual_m": 9.187081746834802e-08,
+            "in_plane_projections_m": [
+              21.09724647270852,
+              5.957923234707278
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9978.90275352729,
+            "axis": [
+              -0.19324608697807594,
+              0.90018775797959,
+              0.3902793233715325
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51370.91089350388,
+            "i": 165,
+            "j": 203,
+            "coplanarity_residual_m": 2.6200926490141978e-08,
+            "in_plane_projections_m": [
+              21.523220687251044,
+              6.565277405283944
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9978.476779312748,
+            "axis": [
+              -0.1932417607277111,
+              0.9001885397501485,
+              0.39027966231069466
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51394.27288246547,
+            "i": 167,
+            "j": 205,
+            "coplanarity_residual_m": 1.1378787495653932e-07,
+            "in_plane_projections_m": [
+              23.018086955754693,
+              6.910959505915842
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9976.981913044245,
+            "axis": [
+              -0.1932462895988652,
+              0.9001877213647661,
+              0.39027930749705675
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51417.05748893978,
+            "i": 169,
+            "j": 207,
+            "coplanarity_residual_m": 1.160027930647615e-07,
+            "in_plane_projections_m": [
+              23.02991699920032,
+              6.8979189282278375
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9976.9700830008,
+            "axis": [
+              -0.19325070652903864,
+              0.9001869231883818,
+              0.39027896144509544
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51215.95713074554,
+            "i": 154,
+            "j": 192,
+            "coplanarity_residual_m": 1.2799628419270418e-07,
+            "in_plane_projections_m": [
+              24.112101758579186,
+              7.93482657336011
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9975.88789824142,
+            "axis": [
+              -0.19321172164142436,
+              0.9001939674305165,
+              0.3902820154991298
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51238.245940132365,
+            "i": 156,
+            "j": 194,
+            "coplanarity_residual_m": 8.785970118191723e-08,
+            "in_plane_projections_m": [
+              24.13510534819304,
+              7.917260264376617
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9975.864894651808,
+            "axis": [
+              -0.1932160425469001,
+              0.9001931867518926,
+              0.39028167703337935
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51260.62713046153,
+            "i": 158,
+            "j": 196,
+            "coplanarity_residual_m": 3.806627343129036e-08,
+            "in_plane_projections_m": [
+              24.158384066223775,
+              7.900635368375374
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9975.841615933776,
+            "axis": [
+              -0.19322038135021802,
+              0.9001924028213313,
+              0.3902813371577407
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51189.88464462463,
+            "i": 152,
+            "j": 190,
+            "coplanarity_residual_m": 8.071229600059218e-09,
+            "in_plane_projections_m": [
+              24.178506808123295,
+              7.906269118931971
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9975.821493191877,
+            "axis": [
+              -0.19320666721888835,
+              0.9001948806141554,
+              0.39028241141285946
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51283.10247841198,
+            "i": 160,
+            "j": 198,
+            "coplanarity_residual_m": 1.226914969767978e-07,
+            "in_plane_projections_m": [
+              24.181459986787296,
+              7.8823011500850635
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9975.818540013213,
+            "axis": [
+              -0.19322473839566495,
+              0.9001916155763993,
+              0.3902809958451461
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51305.67099505307,
+            "i": 162,
+            "j": 200,
+            "coplanarity_residual_m": 1.2148709429603646e-07,
+            "in_plane_projections_m": [
+              24.204455503058433,
+              7.862844406799009
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9975.795544496941,
+            "axis": [
+              -0.19322911349138783,
+              0.9001908250515306,
+              0.3902806531105242
+            ],
+            "required_projection_m": 10300.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 44.67729785833377,
+        "maximum_sampled_rate_deg_s": 1.132757705368931e-05,
+        "maximum_sampled_angular_acceleration_deg_s2": 1.2661936246163259e-12
+      },
+      "mean_first_six_hour_translation_m_s": 0.9768595774708625,
+      "nominal_first_six_hour_attitude_m_s": 1.1093037171880188e-06,
+      "nominal_first_six_hour_control_m_s": 0.9768606867745797,
+      "scheduled_translation_m_s": 1.8580066727052453,
+      "endpoint_difference_from_unchanged_m": 0.0,
+      "endpoint_velocity_difference_from_unchanged_m_s": 0.0,
+      "limiting_pair_first_burn_change_body_m_s": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "early_proposal_pass": false,
+      "raw_path": "research/runs/solar_shield_array/return_repair/unchanged_proposal.npz",
+      "raw_sha256": "acf96d02ae4ded6a8ef02be392e09bf42d48b22efeba73c94d76fdfa21cbc5f4"
+    },
+    {
+      "index": 1,
+      "schedule": {
+        "label": "omit_first",
+        "first_scale": 0.0
+      },
+      "early_geometry": {
+        "minimum_sampled_surface_distance_m": 0.007333798600552026,
+        "witness": {
+          "time_s": 51100.0,
+          "pair": [
+            189,
+            224
+          ],
+          "projection_m": [
+            7811.918790808331,
+            -2146.9502715934086,
+            0.007333798600552026
+          ],
+          "centre_distance_m": 8101.572110580333
+        }
+      },
+      "full_proposal_geometry": {
+        "minimum_sampled_surface_distance_m": 0.001632847158262767,
+        "witness": {
+          "time_s": 135720.0,
+          "pair": [
+            44,
+            234
+          ],
+          "projection_m": [
+            -73.70298135635502,
+            -2160.803248415928,
+            0.001632847158262767
+          ],
+          "centre_distance_m": 2162.0598529708445
+        }
+      },
+      "early_crossings": {
+        "crossing_near_encounters": 3555,
+        "physical_intersections": 3555,
+        "witnesses": [
+          {
+            "time_s": 51293.66314871222,
+            "i": 166,
+            "j": 204,
+            "coplanarity_residual_m": 1.0472165248983293e-07,
+            "in_plane_projections_m": [
+              19.726152479473505,
+              6.10108058261279
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9980.273847520526,
+            "axis": [
+              -0.19322678567134582,
+              0.9001912456617016,
+              0.39028083546742864
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51316.62900668739,
+            "i": 168,
+            "j": 206,
+            "coplanarity_residual_m": 1.2240797809335454e-07,
+            "in_plane_projections_m": [
+              19.760331003741744,
+              6.149055401575028
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9980.239668996259,
+            "axis": [
+              -0.19323123778951595,
+              0.900190441210823,
+              0.3902804866951398
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51337.92864548948,
+            "i": 170,
+            "j": 208,
+            "coplanarity_residual_m": 9.744796407019297e-08,
+            "in_plane_projections_m": [
+              19.796445635031517,
+              6.179439987290365
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9980.203554364969,
+            "axis": [
+              -0.1932353668870796,
+              0.9001896951091581,
+              0.3902801632203421
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51158.903449346864,
+            "i": 154,
+            "j": 192,
+            "coplanarity_residual_m": 6.332315490409875e-08,
+            "in_plane_projections_m": [
+              19.871760645251033,
+              6.528307000278965
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9980.128239354748,
+            "axis": [
+              -0.193200661172391,
+              0.9001959656956424,
+              0.39028288185345916
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51181.016199859216,
+            "i": 156,
+            "j": 194,
+            "coplanarity_residual_m": 6.106295261602536e-08,
+            "in_plane_projections_m": [
+              19.87427915874596,
+              6.513113040371688
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9980.125720841253,
+            "axis": [
+              -0.19320494797521154,
+              0.900195191224635,
+              0.3902825460790408
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51203.263675611466,
+            "i": 158,
+            "j": 196,
+            "coplanarity_residual_m": 1.27126215708293e-07,
+            "in_plane_projections_m": [
+              19.87690811748949,
+              6.499161372953841
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9980.123091882511,
+            "axis": [
+              -0.19320926088504825,
+              0.9001944120190156,
+              0.3902822082519162
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51225.64962843611,
+            "i": 160,
+            "j": 198,
+            "coplanarity_residual_m": 1.2262337424059071e-07,
+            "in_plane_projections_m": [
+              19.87922849082684,
+              6.483405467449523
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9980.120771509173,
+            "axis": [
+              -0.19321360062903087,
+              0.9001936279470824,
+              0.39028186831498535
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51248.174155233646,
+            "i": 162,
+            "j": 200,
+            "coplanarity_residual_m": 6.374408946203065e-08,
+            "in_plane_projections_m": [
+              19.881323341364958,
+              6.466567117876789
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9980.118676658634,
+            "axis": [
+              -0.19321796722573786,
+              0.9001928390051387,
+              0.39028152626664575
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51270.837151756066,
+            "i": 164,
+            "j": 202,
+            "coplanarity_residual_m": 2.553197801095571e-08,
+            "in_plane_projections_m": [
+              19.88317199076621,
+              6.449104121104126
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9980.116828009233,
+            "axis": [
+              -0.193222360654751,
+              0.9001920451965324,
+              0.3902811821083487
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51369.78360344338,
+            "i": 167,
+            "j": 205,
+            "coplanarity_residual_m": 9.626402887976752e-09,
+            "in_plane_projections_m": [
+              19.887386542017886,
+              6.280923710844491
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9980.112613457983,
+            "axis": [
+              -0.19324154219500733,
+              0.9001885792393903,
+              0.39027967943138364
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51392.955827687896,
+            "i": 169,
+            "j": 207,
+            "coplanarity_residual_m": 8.78558741362427e-08,
+            "in_plane_projections_m": [
+              19.900358814116213,
+              6.2824306845872595
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9980.099641185883,
+            "axis": [
+              -0.19324603427968562,
+              0.9001877675025072,
+              0.39027932750022404
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51134.85413681063,
+            "i": 152,
+            "j": 190,
+            "coplanarity_residual_m": 1.275654751721398e-07,
+            "in_plane_projections_m": [
+              19.904742595053985,
+              6.53194136597357
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9980.095257404946,
+            "axis": [
+              -0.19319599893312467,
+              0.9001968079742415,
+              0.39028324702607864
+            ],
+            "required_projection_m": 10300.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 44.67729785833377,
+        "maximum_sampled_rate_deg_s": 1.132757705368931e-05,
+        "maximum_sampled_angular_acceleration_deg_s2": 1.2661936246163259e-12
+      },
+      "mean_first_six_hour_translation_m_s": 0.0,
+      "nominal_first_six_hour_attitude_m_s": 1.1093037171880188e-06,
+      "nominal_first_six_hour_control_m_s": 1.1093037171880188e-06,
+      "scheduled_translation_m_s": 0.881147095234383,
+      "endpoint_difference_from_unchanged_m": 315983.6623332451,
+      "endpoint_velocity_difference_from_unchanged_m_s": 10.836294902848088,
+      "limiting_pair_first_burn_change_body_m_s": [
+        0.9876861243705324,
+        -0.0467181250675441,
+        -0.0021555393252171116
+      ],
+      "early_proposal_pass": false,
+      "raw_path": "research/runs/solar_shield_array/return_repair/omit_first_proposal.npz",
+      "raw_sha256": "d552366af3a8d4bad0f1ab544271df03d90bede5c72a0250b12cb9cf957a05e8"
+    },
+    {
+      "index": 2,
+      "schedule": {
+        "label": "half_first",
+        "first_scale": 0.5
+      },
+      "early_geometry": {
+        "minimum_sampled_surface_distance_m": 0.0022237824223266135,
+        "witness": {
+          "time_s": 51460.0,
+          "pair": [
+            184,
+            222
+          ],
+          "projection_m": [
+            -11.247390706569774,
+            -55.947787576491535,
+            -0.0022237824223266135
+          ],
+          "centre_distance_m": 57.06714236192015
+        }
+      },
+      "full_proposal_geometry": {
+        "minimum_sampled_surface_distance_m": 0.025949762954682657,
+        "witness": {
+          "time_s": 51600.0,
+          "pair": [
+            243,
+            297
+          ],
+          "projection_m": [
+            8630.4675944577,
+            -5269.9204727084025,
+            0.025949762954682657
+          ],
+          "centre_distance_m": 10112.221946156491
+        }
+      },
+      "early_crossings": {
+        "crossing_near_encounters": 2389,
+        "physical_intersections": 2349,
+        "witnesses": [
+          {
+            "time_s": 51321.597913490805,
+            "i": 166,
+            "j": 204,
+            "coplanarity_residual_m": 8.344433428168598e-08,
+            "in_plane_projections_m": [
+              20.352189135999545,
+              5.995030965329376
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9979.647810864,
+            "axis": [
+              -0.1932322010509297,
+              0.900190267157094,
+              0.3902804112335808
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51344.517581359985,
+            "i": 168,
+            "j": 206,
+            "coplanarity_residual_m": 1.2867979504737747e-07,
+            "in_plane_projections_m": [
+              20.395758868341908,
+              6.0412416663421284
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9979.604241131658,
+            "axis": [
+              -0.19323664420054926,
+              0.9001894643033849,
+              0.3902800631537503
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51365.41229994886,
+            "i": 170,
+            "j": 208,
+            "coplanarity_residual_m": 1.2284812993613952e-07,
+            "in_plane_projections_m": [
+              20.442814154004715,
+              6.069349628692194
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9979.557185845995,
+            "axis": [
+              -0.19324069478837708,
+              0.9001887323668119,
+              0.39027974582027425
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51358.80070606696,
+            "i": 165,
+            "j": 203,
+            "coplanarity_residual_m": 6.518965108600261e-08,
+            "in_plane_projections_m": [
+              20.8239121712306,
+              6.6929910520292335
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9979.17608782877,
+            "axis": [
+              -0.19323941308555564,
+              0.9001889639707646,
+              0.39027984623291934
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51381.99583982459,
+            "i": 167,
+            "j": 205,
+            "coplanarity_residual_m": 9.650043088968109e-08,
+            "in_plane_projections_m": [
+              21.44846644388716,
+              6.595108890574462
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9978.551533556112,
+            "axis": [
+              -0.1932439096170483,
+              0.9001881514396154,
+              0.390279493957403
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51404.97543327399,
+            "i": 169,
+            "j": 207,
+            "coplanarity_residual_m": 1.2815732133688253e-07,
+            "in_plane_projections_m": [
+              21.460956970548956,
+              6.589378266625273
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9978.539043029452,
+            "axis": [
+              -0.19324836435281822,
+              0.9001873464416592,
+              0.39027914494792715
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51187.24646710623,
+            "i": 154,
+            "j": 192,
+            "coplanarity_residual_m": 9.05313348250979e-08,
+            "in_plane_projections_m": [
+              21.97786943589151,
+              7.227042007642996
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9978.022130564108,
+            "axis": [
+              -0.19320615577990236,
+              0.9001949730145675,
+              0.39028245147335805
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51209.44705576657,
+            "i": 156,
+            "j": 194,
+            "coplanarity_residual_m": 2.2089077216161307e-08,
+            "in_plane_projections_m": [
+              21.990588340777716,
+              7.210678657672232
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9978.009411659223,
+            "axis": [
+              -0.19321045959711391,
+              0.9001941954466662,
+              0.39028211435627125
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51231.76147262858,
+            "i": 158,
+            "j": 196,
+            "coplanarity_residual_m": 5.426494577761559e-08,
+            "in_plane_projections_m": [
+              22.003510243325454,
+              7.195411430370082
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9977.996489756675,
+            "axis": [
+              -0.1932147854700746,
+              0.9001934138758355,
+              0.3902817755037017
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51254.19249252349,
+            "i": 160,
+            "j": 198,
+            "coplanarity_residual_m": 1.1449874871579171e-07,
+            "in_plane_projections_m": [
+              22.016187386605846,
+              7.178390509844532
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9977.983812613395,
+            "axis": [
+              -0.19321913393654194,
+              0.9001926282046357,
+              0.3902814348734037
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51162.1973728459,
+            "i": 152,
+            "j": 190,
+            "coplanarity_residual_m": 1.0741392451000992e-07,
+            "in_plane_projections_m": [
+              22.027880348134225,
+              7.21481595082455
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9977.972119651866,
+            "axis": [
+              -0.19320129973681466,
+              0.9001958503311616,
+              0.390282831836814
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51276.739673327866,
+            "i": 162,
+            "j": 200,
+            "coplanarity_residual_m": 1.2174996233000211e-07,
+            "in_plane_projections_m": [
+              22.028722603646646,
+              7.1602706220767915
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9977.971277396353,
+            "axis": [
+              -0.19322350491063228,
+              0.9001918384482988,
+              0.3902810924719813
+            ],
+            "required_projection_m": 10300.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 44.67729785833377,
+        "maximum_sampled_rate_deg_s": 1.132757705368931e-05,
+        "maximum_sampled_angular_acceleration_deg_s2": 1.2661936246163259e-12
+      },
+      "mean_first_six_hour_translation_m_s": 0.48842978873543125,
+      "nominal_first_six_hour_attitude_m_s": 1.1093037171880188e-06,
+      "nominal_first_six_hour_control_m_s": 0.4884308980391484,
+      "scheduled_translation_m_s": 1.3695768839698141,
+      "endpoint_difference_from_unchanged_m": 157614.1952726371,
+      "endpoint_velocity_difference_from_unchanged_m_s": 5.407748268240168,
+      "limiting_pair_first_burn_change_body_m_s": [
+        0.4938430621852662,
+        -0.02335906253377205,
+        -0.0010777696626085558
+      ],
+      "early_proposal_pass": false,
+      "raw_path": "research/runs/solar_shield_array/return_repair/half_first_proposal.npz",
+      "raw_sha256": "1de4ca6e4def21d87f6037ed24c7506b5aadc330b54c54a681b5f20cf7c6b7a5"
+    },
+    {
+      "index": 3,
+      "schedule": {
+        "label": "three_quarter_first",
+        "first_scale": 0.75
+      },
+      "early_geometry": {
+        "minimum_sampled_surface_distance_m": 0.00879128351441264,
+        "witness": {
+          "time_s": 50900.0,
+          "pair": [
+            61,
+            83
+          ],
+          "projection_m": [
+            -9501.28136346433,
+            5858.721438348993,
+            -0.00879128351441264
+          ],
+          "centre_distance_m": 11162.390623874528
+        }
+      },
+      "full_proposal_geometry": {
+        "minimum_sampled_surface_distance_m": 0.024653933487521217,
+        "witness": {
+          "time_s": 87240.0,
+          "pair": [
+            180,
+            181
+          ],
+          "projection_m": [
+            8368.587557741062,
+            3631.712456447722,
+            -0.024653933487521217
+          ],
+          "centre_distance_m": 9122.641781770448
+        }
+      },
+      "early_crossings": {
+        "crossing_near_encounters": 2126,
+        "physical_intersections": 2079,
+        "witnesses": [
+          {
+            "time_s": 51335.694711546166,
+            "i": 166,
+            "j": 204,
+            "coplanarity_residual_m": 1.2541117737017276e-07,
+            "in_plane_projections_m": [
+              20.66820385231218,
+              5.941511984749665
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9979.331796147688,
+            "axis": [
+              -0.19323493382240658,
+              0.9001897733619671,
+              0.39028019714710144
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51358.590189979535,
+            "i": 168,
+            "j": 206,
+            "coplanarity_residual_m": 7.353719134325482e-08,
+            "in_plane_projections_m": [
+              20.7164942508831,
+              5.986835907801896
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9979.283505749117,
+            "axis": [
+              -0.19323937227555238,
+              0.9001889713451143,
+              0.39027984943009264
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51379.27815031928,
+            "i": 170,
+            "j": 208,
+            "coplanarity_residual_m": 4.152073736570556e-08,
+            "in_plane_projections_m": [
+              20.76901295678224,
+              6.0138049446812385
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9979.230987043218,
+            "axis": [
+              -0.19324338277541742,
+              0.9001882466418404,
+              0.39027953523263675
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51364.84784611689,
+            "i": 165,
+            "j": 203,
+            "coplanarity_residual_m": 1.2997987839691862e-07,
+            "in_plane_projections_m": [
+              21.1730928854413,
+              6.629218305552692
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9978.826907114559,
+            "axis": [
+              -0.19324058536516808,
+              0.9001887521396698,
+              0.39027975439286083
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51388.12622873407,
+            "i": 167,
+            "j": 205,
+            "coplanarity_residual_m": 6.341340277424073e-08,
+            "in_plane_projections_m": [
+              22.232204774747643,
+              6.752825219953866
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9977.767795225252,
+            "axis": [
+              -0.1932450980318568,
+              0.9001879366876876,
+              0.3902794008510081
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51411.00862484467,
+            "i": 169,
+            "j": 207,
+            "coplanarity_residual_m": 3.082461688600329e-08,
+            "in_plane_projections_m": [
+              22.24438759099374,
+              6.743448711053298
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9977.755612409006,
+            "axis": [
+              -0.19324953392222988,
+              0.9001871350901296,
+              0.3902790533157858
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51201.5554020073,
+            "i": 154,
+            "j": 192,
+            "coplanarity_residual_m": 8.45886613018379e-08,
+            "in_plane_projections_m": [
+              23.041435148962485,
+              7.579792347967675
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9976.958564851038,
+            "axis": [
+              -0.1932089297184279,
+              0.9001944718509306,
+              0.39028223419223695
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51223.80005385054,
+            "i": 156,
+            "j": 194,
+            "coplanarity_residual_m": 1.330079801382745e-07,
+            "in_plane_projections_m": [
+              23.059285816067412,
+              7.562831785139949
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9976.940714183933,
+            "axis": [
+              -0.1932132420706622,
+              0.9001936927293743,
+              0.3902818964015583
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51246.14787988373,
+            "i": 158,
+            "j": 196,
+            "coplanarity_residual_m": 1.1435421704028103e-07,
+            "in_plane_projections_m": [
+              23.077378149955802,
+              7.5468910723945175
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9976.922621850044,
+            "axis": [
+              -0.19321757441318488,
+              0.900192909977942,
+              0.39028155703713496
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51268.60115860228,
+            "i": 160,
+            "j": 198,
+            "coplanarity_residual_m": 5.0952134110662825e-08,
+            "in_plane_projections_m": [
+              23.095249506315067,
+              7.529219630477696
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9976.904750493684,
+            "axis": [
+              -0.1932219271875495,
+              0.9001921235166,
+              0.39028121606426824
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51175.99760333804,
+            "i": 152,
+            "j": 190,
+            "coplanarity_residual_m": 1.2948957565033077e-07,
+            "in_plane_projections_m": [
+              23.099724309170075,
+              7.55946033610236
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9976.90027569083,
+            "axis": [
+              -0.19320397506536835,
+              0.9001953669959992,
+              0.39028262228528615
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51291.159175503824,
+            "i": 162,
+            "j": 200,
+            "coplanarity_residual_m": 3.5783647609864326e-08,
+            "in_plane_projections_m": [
+              23.113012495257237,
+              7.510438345880963
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9976.886987504742,
+            "axis": [
+              -0.19322630025508536,
+              0.900191333370145,
+              0.39028087349370877
+            ],
+            "required_projection_m": 10300.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 44.67729785833377,
+        "maximum_sampled_rate_deg_s": 1.132757705368931e-05,
+        "maximum_sampled_angular_acceleration_deg_s2": 1.2661936246163259e-12
+      },
+      "mean_first_six_hour_translation_m_s": 0.7326446831031468,
+      "nominal_first_six_hour_attitude_m_s": 1.1093037171880188e-06,
+      "nominal_first_six_hour_control_m_s": 0.732645792406864,
+      "scheduled_translation_m_s": 1.6137917783375297,
+      "endpoint_difference_from_unchanged_m": 78712.38694321612,
+      "endpoint_velocity_difference_from_unchanged_m_s": 2.7012482275878424,
+      "limiting_pair_first_burn_change_body_m_s": [
+        0.2469215310926331,
+        -0.011679531266886032,
+        -0.0005388848313042528
+      ],
+      "early_proposal_pass": false,
+      "raw_path": "research/runs/solar_shield_array/return_repair/three_quarter_first_proposal.npz",
+      "raw_sha256": "30afc1bd3966b335f28fcc902de7677cd6d547bdc531dbc00a1f8836690d5c84"
+    },
+    {
+      "index": 4,
+      "schedule": {
+        "label": "delay_0.5h",
+        "delay_s": 1800.0
+      },
+      "early_geometry": {
+        "minimum_sampled_surface_distance_m": 0.00027024530356918835,
+        "witness": {
+          "time_s": 51140.0,
+          "pair": [
+            27,
+            49
+          ],
+          "projection_m": [
+            -8757.793229503184,
+            5626.762171325574,
+            -0.00027024530356918835
+          ],
+          "centre_distance_m": 10409.581873610117
+        }
+      },
+      "full_proposal_geometry": {
+        "minimum_sampled_surface_distance_m": 0.0004276899132795466,
+        "witness": {
+          "time_s": 111480.0,
+          "pair": [
+            269,
+            270
+          ],
+          "projection_m": [
+            -4490.455509705171,
+            6431.259210020736,
+            -0.0004276899132795466
+          ],
+          "centre_distance_m": 7843.8055630617355
+        }
+      },
+      "early_crossings": {
+        "crossing_near_encounters": 2252,
+        "physical_intersections": 2231,
+        "witnesses": [
+          {
+            "time_s": 51327.49456723256,
+            "i": 166,
+            "j": 204,
+            "coplanarity_residual_m": 1.5754284259814152e-05,
+            "in_plane_projections_m": [
+              20.477898523951236,
+              5.9718290305903015
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9979.522101476048,
+            "axis": [
+              -0.19323334416262583,
+              0.9001900606046699,
+              0.39028032168210725
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51350.51469235171,
+            "i": 168,
+            "j": 206,
+            "coplanarity_residual_m": 1.5781719241585184e-05,
+            "in_plane_projections_m": [
+              20.525766371204895,
+              6.017213437770673
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9979.474233628795,
+            "axis": [
+              -0.1932378067835931,
+              0.9001892542275934,
+              0.3902799720747092
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51371.41959673784,
+            "i": 170,
+            "j": 208,
+            "coplanarity_residual_m": 1.4476566970372134e-05,
+            "in_plane_projections_m": [
+              20.57728528232188,
+              6.044417643834984
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9979.422714717679,
+            "axis": [
+              -0.1932418593432194,
+              0.9001885219301382,
+              0.3902796545847715
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51361.40372108217,
+            "i": 165,
+            "j": 203,
+            "coplanarity_residual_m": 1.7903026659008393e-06,
+            "in_plane_projections_m": [
+              20.966743579895045,
+              6.664612166564471
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9979.033256420105,
+            "axis": [
+              -0.19323991769798582,
+              0.9001888727873896,
+              0.3902798067000712
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51384.68289769122,
+            "i": 167,
+            "j": 205,
+            "coplanarity_residual_m": 4.648561480599219e-06,
+            "in_plane_projections_m": [
+              21.774097555082214,
+              6.66210298073747
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9978.225902444918,
+            "axis": [
+              -0.19324443052037726,
+              0.9001880573101981,
+              0.39027945314728885
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51407.66670397507,
+            "i": 169,
+            "j": 207,
+            "coplanarity_residual_m": 5.61800933194519e-06,
+            "in_plane_projections_m": [
+              21.792387975468372,
+              6.655942292954822
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9978.207612024531,
+            "axis": [
+              -0.19324888607145696,
+              0.9001872521626543,
+              0.3902791040729586
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51192.55377499085,
+            "i": 154,
+            "j": 192,
+            "coplanarity_residual_m": 2.165717678086296e-05,
+            "in_plane_projections_m": [
+              22.349640142729502,
+              7.355323594334778
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9977.65035985727,
+            "axis": [
+              -0.19320718465825776,
+              0.9001947871294101,
+              0.3902823708822448
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51214.88534054324,
+            "i": 156,
+            "j": 194,
+            "coplanarity_residual_m": 1.68501101593188e-05,
+            "in_plane_projections_m": [
+              22.372525689513427,
+              7.341508423381414
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9977.627474310486,
+            "axis": [
+              -0.19321151386404728,
+              0.9001940049701903,
+              0.39028203177457715
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51167.18983208781,
+            "i": 152,
+            "j": 190,
+            "coplanarity_residual_m": 2.174160791474108e-05,
+            "in_plane_projections_m": [
+              22.393037308212357,
+              7.336967121146653
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9977.606962691787,
+            "axis": [
+              -0.1932022675811932,
+              0.9001956754774701,
+              0.39028275602842877
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51237.327056557886,
+            "i": 158,
+            "j": 196,
+            "coplanarity_residual_m": 9.769520899511002e-06,
+            "in_plane_projections_m": [
+              22.395688591308392,
+              7.328743324166028
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9977.604311408692,
+            "axis": [
+              -0.19321586441247696,
+              0.9001932189366477,
+              0.3902816909871843
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51259.88124517696,
+            "i": 160,
+            "j": 198,
+            "coplanarity_residual_m": 4.735281370619527e-07,
+            "in_plane_projections_m": [
+              22.41867576865529,
+              7.31421588450025
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9977.581324231345,
+            "axis": [
+              -0.1932202367535506,
+              0.9001924289472045,
+              0.39028134848469787
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51282.54709909357,
+            "i": 162,
+            "j": 200,
+            "coplanarity_residual_m": 8.522385012967853e-06,
+            "in_plane_projections_m": [
+              22.44159294846583,
+              7.298567367993327
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9977.558407051534,
+            "axis": [
+              -0.19322463073059587,
+              0.9001916350298912,
+              0.3902810042792706
+            ],
+            "required_projection_m": 10300.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 44.67729785833377,
+        "maximum_sampled_rate_deg_s": 1.132757705368931e-05,
+        "maximum_sampled_angular_acceleration_deg_s2": 1.2661936246163259e-12
+      },
+      "mean_first_six_hour_translation_m_s": 0.9768595774708625,
+      "nominal_first_six_hour_attitude_m_s": 1.1093037171880188e-06,
+      "nominal_first_six_hour_control_m_s": 0.9768606867745797,
+      "scheduled_translation_m_s": 1.8580066727052453,
+      "endpoint_difference_from_unchanged_m": 50811.27466933529,
+      "endpoint_velocity_difference_from_unchanged_m_s": 1.8052480925768033,
+      "limiting_pair_first_burn_change_body_m_s": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "early_proposal_pass": false,
+      "raw_path": "research/runs/solar_shield_array/return_repair/delay_0.5h_proposal.npz",
+      "raw_sha256": "8f8676f87ecc3a2091a3d2d555f8ad76f068644ed44ab3440f4ee8207ec2e7d1"
+    },
+    {
+      "index": 5,
+      "schedule": {
+        "label": "delay_1h",
+        "delay_s": 3600.0
+      },
+      "early_geometry": {
+        "minimum_sampled_surface_distance_m": 0.0023115869512497773,
+        "witness": {
+          "time_s": 51820.0,
+          "pair": [
+            239,
+            255
+          ],
+          "projection_m": [
+            7595.29999494269,
+            -4954.641889762435,
+            -0.0023115869512497773
+          ],
+          "centre_distance_m": 9068.465044811634
+        }
+      },
+      "full_proposal_geometry": {
+        "minimum_sampled_surface_distance_m": 0.004521958839158143,
+        "witness": {
+          "time_s": 51720.0,
+          "pair": [
+            163,
+            179
+          ],
+          "projection_m": [
+            7642.489466871021,
+            -4876.476082913944,
+            0.004521958839158143
+          ],
+          "centre_distance_m": 9065.741240432946
+        }
+      },
+      "early_crossings": {
+        "crossing_near_encounters": 3247,
+        "physical_intersections": 3160,
+        "witnesses": [
+          {
+            "time_s": 51307.321937527064,
+            "i": 166,
+            "j": 204,
+            "coplanarity_residual_m": 9.608379509740516e-05,
+            "in_plane_projections_m": [
+              20.028159140770498,
+              6.048771008872056
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9979.971840859229,
+            "axis": [
+              -0.1932294335399508,
+              0.9001907672220434,
+              0.3902806280383624
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51330.40789301338,
+            "i": 168,
+            "j": 206,
+            "coplanarity_residual_m": 0.0001016274529599074,
+            "in_plane_projections_m": [
+              20.070026508383098,
+              6.095312534026698
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9979.929973491617,
+            "axis": [
+              -0.19323390893295755,
+              0.9001899585540856,
+              0.3902802774377453
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51351.63737824103,
+            "i": 170,
+            "j": 208,
+            "coplanarity_residual_m": 9.628762269610522e-05,
+            "in_plane_projections_m": [
+              20.11445858760462,
+              6.124034421128465
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9979.885541412395,
+            "axis": [
+              -0.19323802442422866,
+              0.9001892149003399,
+              0.39027995502425095
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51352.776640932025,
+            "i": 165,
+            "j": 203,
+            "coplanarity_residual_m": 4.0095297573704225e-05,
+            "in_plane_projections_m": [
+              20.471289333947105,
+              6.755989331073541
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9979.528710666053,
+            "axis": [
+              -0.19323824527836564,
+              0.9001891749923652,
+              0.39027993772201897
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51375.95169809564,
+            "i": 167,
+            "j": 205,
+            "coplanarity_residual_m": 2.796511282379253e-05,
+            "in_plane_projections_m": [
+              20.664295107564975,
+              6.438383774044585
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9979.335704892435,
+            "axis": [
+              -0.19324273792098545,
+              0.9001883631690468,
+              0.3902795857533851
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51399.08861499698,
+            "i": 169,
+            "j": 207,
+            "coplanarity_residual_m": 7.2885698863940704e-06,
+            "in_plane_projections_m": [
+              20.684894650904713,
+              6.437793112512369
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9979.315105349095,
+            "axis": [
+              -0.19324722315794446,
+              0.900187552664378,
+              0.3902792343564561
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51171.91349279439,
+            "i": 154,
+            "j": 192,
+            "coplanarity_residual_m": 0.00010981574836811653,
+            "in_plane_projections_m": [
+              20.824894485264572,
+              6.847682129417043
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9979.175105514736,
+            "axis": [
+              -0.1932031833154425,
+              0.9001955100373149,
+              0.39028268430131263
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51194.205988448884,
+            "i": 156,
+            "j": 194,
+            "coplanarity_residual_m": 9.28704895707223e-05,
+            "in_plane_projections_m": [
+              20.842203762189584,
+              6.8353386966996945
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9979.15779623781,
+            "axis": [
+              -0.193207504957367,
+              0.9001947292614747,
+              0.3902823457934137
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51147.25836904288,
+            "i": 152,
+            "j": 190,
+            "coplanarity_residual_m": 0.00010321968799692412,
+            "in_plane_projections_m": [
+              20.854463617090854,
+              6.840393519321193
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9979.14553638291,
+            "axis": [
+              -0.19319840363958402,
+              0.9001963735434066,
+              0.3902830586771807
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51216.62527953861,
+            "i": 158,
+            "j": 196,
+            "coplanarity_residual_m": 6.260087574164327e-05,
+            "in_plane_projections_m": [
+              20.859837932846876,
+              6.824181718315855
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9979.140162067153,
+            "axis": [
+              -0.1932118511688169,
+              0.9001939440284477,
+              0.39028200535308694
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51239.17435970494,
+            "i": 160,
+            "j": 198,
+            "coplanarity_residual_m": 1.7449433115353957e-05,
+            "in_plane_projections_m": [
+              20.877367420930582,
+              6.8112558027400585
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9979.122632579069,
+            "axis": [
+              -0.19321622252994936,
+              0.9001931542331022,
+              0.3902816629347522
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51261.85284567261,
+            "i": 162,
+            "j": 200,
+            "coplanarity_residual_m": 3.6630083793048726e-05,
+            "in_plane_projections_m": [
+              20.894885875530253,
+              6.797250932351804
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9979.10511412447,
+            "axis": [
+              -0.19322061896626735,
+              0.9001923598885777,
+              0.3902813185441062
+            ],
+            "required_projection_m": 10300.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 44.67729785833377,
+        "maximum_sampled_rate_deg_s": 1.132757705368931e-05,
+        "maximum_sampled_angular_acceleration_deg_s2": 1.2661936246163259e-12
+      },
+      "mean_first_six_hour_translation_m_s": 0.9768595774708625,
+      "nominal_first_six_hour_attitude_m_s": 1.1093037171880188e-06,
+      "nominal_first_six_hour_control_m_s": 0.9768606867745797,
+      "scheduled_translation_m_s": 1.8580066727052453,
+      "endpoint_difference_from_unchanged_m": 101110.06321667955,
+      "endpoint_velocity_difference_from_unchanged_m_s": 3.590011563139513,
+      "limiting_pair_first_burn_change_body_m_s": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "early_proposal_pass": false,
+      "raw_path": "research/runs/solar_shield_array/return_repair/delay_1h_proposal.npz",
+      "raw_sha256": "fa575f1d9abf7d2435f1bd086758c420eeed6728b8d66f4676530340c5d358aa"
+    },
+    {
+      "index": 6,
+      "schedule": {
+        "label": "delay_2h",
+        "delay_s": 7200.0
+      },
+      "early_geometry": {
+        "minimum_sampled_surface_distance_m": 0.003442443508599049,
+        "witness": {
+          "time_s": 51460.0,
+          "pair": [
+            258,
+            296
+          ],
+          "projection_m": [
+            -160.9643831731633,
+            -302.14706983013974,
+            0.003442443508599049
+          ],
+          "centre_distance_m": 342.3483379090757
+        }
+      },
+      "full_proposal_geometry": {
+        "minimum_sampled_surface_distance_m": 0.012047811422733002,
+        "witness": {
+          "time_s": 51240.0,
+          "pair": [
+            59,
+            271
+          ],
+          "projection_m": [
+            -6293.918452748784,
+            5462.12176346127,
+            0.012047811422733002
+          ],
+          "centre_distance_m": 8333.557682579154
+        }
+      },
+      "early_crossings": {
+        "crossing_near_encounters": 3555,
+        "physical_intersections": 3555,
+        "witnesses": [
+          {
+            "time_s": 51293.69740829881,
+            "i": 166,
+            "j": 204,
+            "coplanarity_residual_m": 1.4981470706187033e-05,
+            "in_plane_projections_m": [
+              19.726906985098164,
+              6.100949349894869
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9980.273093014901,
+            "axis": [
+              -0.19322679231285378,
+              0.9001912444616655,
+              0.39028083494714894
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51316.66662491522,
+            "i": 168,
+            "j": 206,
+            "coplanarity_residual_m": 9.945243781606364e-06,
+            "in_plane_projections_m": [
+              19.761173329383666,
+              6.148908604742079
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9980.238826670617,
+            "axis": [
+              -0.1932312450821056,
+              0.9001904398931131,
+              0.3902804861238426
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51337.96905422975,
+            "i": 170,
+            "j": 208,
+            "coplanarity_residual_m": 6.66010398631698e-06,
+            "in_plane_projections_m": [
+              19.79737959080132,
+              6.179276562970373
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9980.202620409198,
+            "axis": [
+              -0.19323537472061286,
+              0.9001896936936725,
+              0.3902801626066539
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51158.92217296178,
+            "i": 154,
+            "j": 192,
+            "coplanarity_residual_m": 2.6549806530846986e-06,
+            "in_plane_projections_m": [
+              19.873127474829552,
+              6.528766372765272
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9980.12687252517,
+            "axis": [
+              -0.19320066480217668,
+              0.9001959650398782,
+              0.39028288156915036
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51181.037144567104,
+            "i": 156,
+            "j": 194,
+            "coplanarity_residual_m": 2.905964556893599e-06,
+            "in_plane_projections_m": [
+              19.875810671395516,
+              6.513624426229687
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9980.124189328604,
+            "axis": [
+              -0.1932049520355712,
+              0.9001951904910658,
+              0.39028254576099947
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51203.28703507575,
+            "i": 158,
+            "j": 196,
+            "coplanarity_residual_m": 8.449221897534438e-06,
+            "in_plane_projections_m": [
+              19.87861979498314,
+              6.499729084511937
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9980.121380205017,
+            "axis": [
+              -0.19320926541352307,
+              0.9001944112008546,
+              0.3902822078971998
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51225.67559483873,
+            "i": 160,
+            "j": 198,
+            "coplanarity_residual_m": 1.2990523245813911e-05,
+            "in_plane_projections_m": [
+              19.881136893396263,
+              6.4840342221969305
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9980.118863106603,
+            "axis": [
+              -0.193213605662875,
+              0.9001936270375951,
+              0.3902818679206742
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51248.20292676442,
+            "i": 162,
+            "j": 200,
+            "coplanarity_residual_m": 1.6037842990405714e-05,
+            "in_plane_projections_m": [
+              19.883446178547114,
+              6.467261841884605
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9980.116553821454,
+            "axis": [
+              -0.19321797280336916,
+              0.9001928379973793,
+              0.3902815258297284
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51270.86893192492,
+            "i": 164,
+            "j": 202,
+            "coplanarity_residual_m": 1.7027248908924015e-05,
+            "in_plane_projections_m": [
+              19.885528167478224,
+              6.449869983112857
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9980.114471832521,
+            "axis": [
+              -0.1932223668156196,
+              0.900192044083368,
+              0.3902811816257328
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51369.80402852151,
+            "i": 167,
+            "j": 205,
+            "coplanarity_residual_m": 8.838991928929082e-06,
+            "in_plane_projections_m": [
+              19.889948237784406,
+              6.281444412236595
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9980.110051762216,
+            "axis": [
+              -0.19324154615454542,
+              0.9001885785238951,
+              0.3902796791211784
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51392.977786066986,
+            "i": 169,
+            "j": 207,
+            "coplanarity_residual_m": 8.11079799065157e-06,
+            "in_plane_projections_m": [
+              19.903155988850123,
+              6.282986219349432
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9980.09684401115,
+            "axis": [
+              -0.19324603853645328,
+              0.9001877667332836,
+              0.39027932716672464
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51134.87013139655,
+            "i": 152,
+            "j": 190,
+            "coplanarity_residual_m": 9.215963031261792e-06,
+            "in_plane_projections_m": [
+              19.905962151492055,
+              6.5323386270246235
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9980.094037848508,
+            "axis": [
+              -0.19319600203386544,
+              0.9001968074140696,
+              0.39028324678321435
+            ],
+            "required_projection_m": 10300.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 44.67729785833377,
+        "maximum_sampled_rate_deg_s": 1.132757705368931e-05,
+        "maximum_sampled_angular_acceleration_deg_s2": 1.2661936246163259e-12
+      },
+      "mean_first_six_hour_translation_m_s": 0.9768595774708625,
+      "nominal_first_six_hour_attitude_m_s": 1.1093037171880188e-06,
+      "nominal_first_six_hour_control_m_s": 0.9768606867745797,
+      "scheduled_translation_m_s": 1.8580066727052453,
+      "endpoint_difference_from_unchanged_m": 198831.71644053163,
+      "endpoint_velocity_difference_from_unchanged_m_s": 7.056009194631286,
+      "limiting_pair_first_burn_change_body_m_s": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "early_proposal_pass": false,
+      "raw_path": "research/runs/solar_shield_array/return_repair/delay_2h_proposal.npz",
+      "raw_sha256": "034117db208784d404384bd5ad2b98b334760e93d1db402e311e7e37ef0b2c97"
+    },
+    {
+      "index": 7,
+      "schedule": {
+        "label": "delay_4h",
+        "delay_s": 14400.0
+      },
+      "early_geometry": {
+        "minimum_sampled_surface_distance_m": 0.007333798600552026,
+        "witness": {
+          "time_s": 51100.0,
+          "pair": [
+            189,
+            224
+          ],
+          "projection_m": [
+            7811.918790808331,
+            -2146.9502715934086,
+            0.007333798600552026
+          ],
+          "centre_distance_m": 8101.572110580333
+        }
+      },
+      "full_proposal_geometry": {
+        "minimum_sampled_surface_distance_m": 0.01269732913720213,
+        "witness": {
+          "time_s": 136080.0,
+          "pair": [
+            87,
+            125
+          ],
+          "projection_m": [
+            -70.97891269660114,
+            -586.9194292164236,
+            -0.01269732913720213
+          ],
+          "centre_distance_m": 591.1957565819856
+        }
+      },
+      "early_crossings": {
+        "crossing_near_encounters": 3555,
+        "physical_intersections": 3555,
+        "witnesses": [
+          {
+            "time_s": 51293.66314871222,
+            "i": 166,
+            "j": 204,
+            "coplanarity_residual_m": 1.0472165248983293e-07,
+            "in_plane_projections_m": [
+              19.726152479473505,
+              6.10108058261279
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9980.273847520526,
+            "axis": [
+              -0.19322678567134582,
+              0.9001912456617016,
+              0.39028083546742864
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51316.62900668739,
+            "i": 168,
+            "j": 206,
+            "coplanarity_residual_m": 1.2240797809335454e-07,
+            "in_plane_projections_m": [
+              19.760331003741744,
+              6.149055401575028
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9980.239668996259,
+            "axis": [
+              -0.19323123778951595,
+              0.900190441210823,
+              0.3902804866951398
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51337.92864548948,
+            "i": 170,
+            "j": 208,
+            "coplanarity_residual_m": 9.744796407019297e-08,
+            "in_plane_projections_m": [
+              19.796445635031517,
+              6.179439987290365
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9980.203554364969,
+            "axis": [
+              -0.1932353668870796,
+              0.9001896951091581,
+              0.3902801632203421
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51158.903449346864,
+            "i": 154,
+            "j": 192,
+            "coplanarity_residual_m": 6.332315490409875e-08,
+            "in_plane_projections_m": [
+              19.871760645251033,
+              6.528307000278965
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9980.128239354748,
+            "axis": [
+              -0.193200661172391,
+              0.9001959656956424,
+              0.39028288185345916
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51181.016199859216,
+            "i": 156,
+            "j": 194,
+            "coplanarity_residual_m": 6.106295261602536e-08,
+            "in_plane_projections_m": [
+              19.87427915874596,
+              6.513113040371688
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9980.125720841253,
+            "axis": [
+              -0.19320494797521154,
+              0.900195191224635,
+              0.3902825460790408
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51203.263675611466,
+            "i": 158,
+            "j": 196,
+            "coplanarity_residual_m": 1.27126215708293e-07,
+            "in_plane_projections_m": [
+              19.87690811748949,
+              6.499161372953841
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9980.123091882511,
+            "axis": [
+              -0.19320926088504825,
+              0.9001944120190156,
+              0.3902822082519162
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51225.64962843611,
+            "i": 160,
+            "j": 198,
+            "coplanarity_residual_m": 1.2262337424059071e-07,
+            "in_plane_projections_m": [
+              19.87922849082684,
+              6.483405467449523
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9980.120771509173,
+            "axis": [
+              -0.19321360062903087,
+              0.9001936279470824,
+              0.39028186831498535
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51248.174155233646,
+            "i": 162,
+            "j": 200,
+            "coplanarity_residual_m": 6.374408946203065e-08,
+            "in_plane_projections_m": [
+              19.881323341364958,
+              6.466567117876789
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9980.118676658634,
+            "axis": [
+              -0.19321796722573786,
+              0.9001928390051387,
+              0.39028152626664575
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51270.837151756066,
+            "i": 164,
+            "j": 202,
+            "coplanarity_residual_m": 2.553197801095571e-08,
+            "in_plane_projections_m": [
+              19.88317199076621,
+              6.449104121104126
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9980.116828009233,
+            "axis": [
+              -0.193222360654751,
+              0.9001920451965324,
+              0.3902811821083487
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51369.78360344338,
+            "i": 167,
+            "j": 205,
+            "coplanarity_residual_m": 9.626402887976752e-09,
+            "in_plane_projections_m": [
+              19.887386542017886,
+              6.280923710844491
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9980.112613457983,
+            "axis": [
+              -0.19324154219500733,
+              0.9001885792393903,
+              0.39027967943138364
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51392.955827687896,
+            "i": 169,
+            "j": 207,
+            "coplanarity_residual_m": 8.78558741362427e-08,
+            "in_plane_projections_m": [
+              19.900358814116213,
+              6.2824306845872595
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9980.099641185883,
+            "axis": [
+              -0.19324603427968562,
+              0.9001877675025072,
+              0.39027932750022404
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51134.85413681063,
+            "i": 152,
+            "j": 190,
+            "coplanarity_residual_m": 1.275654751721398e-07,
+            "in_plane_projections_m": [
+              19.904742595053985,
+              6.53194136597357
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9980.095257404946,
+            "axis": [
+              -0.19319599893312467,
+              0.9001968079742415,
+              0.39028324702607864
+            ],
+            "required_projection_m": 10300.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 44.67729785833377,
+        "maximum_sampled_rate_deg_s": 1.132757705368931e-05,
+        "maximum_sampled_angular_acceleration_deg_s2": 1.2661936246163259e-12
+      },
+      "mean_first_six_hour_translation_m_s": 0.9768595774708625,
+      "nominal_first_six_hour_attitude_m_s": 1.1093037171880188e-06,
+      "nominal_first_six_hour_control_m_s": 0.9768606867745797,
+      "scheduled_translation_m_s": 1.8580066727052453,
+      "endpoint_difference_from_unchanged_m": 374515.19920541387,
+      "endpoint_velocity_difference_from_unchanged_m_s": 13.316766948314793,
+      "limiting_pair_first_burn_change_body_m_s": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "early_proposal_pass": false,
+      "raw_path": "research/runs/solar_shield_array/return_repair/delay_4h_proposal.npz",
+      "raw_sha256": "ee474a80cb87ed142181810b8e767ff58531a60260717faa124d7132d850a7e7"
+    },
+    {
+      "index": 8,
+      "schedule": {
+        "label": "roll_60",
+        "angle_deg": 60.0,
+        "turn_s": 5400.0
+      },
+      "early_geometry": {
+        "minimum_sampled_surface_distance_m": 0.0015897611307868096,
+        "witness": {
+          "time_s": 51240.0,
+          "pair": [
+            42,
+            80
+          ],
+          "projection_m": [
+            421.7417615173329,
+            7.5152537390921745,
+            -0.0015897611307868096
+          ],
+          "centre_distance_m": 421.8087154730604
+        }
+      },
+      "full_proposal_geometry": {
+        "minimum_sampled_surface_distance_m": 0.0015897611307868096,
+        "witness": {
+          "time_s": 51240.0,
+          "pair": [
+            42,
+            80
+          ],
+          "projection_m": [
+            421.7417615173329,
+            7.5152537390921745,
+            -0.0015897611307868096
+          ],
+          "centre_distance_m": 421.8087154730604
+        }
+      },
+      "early_crossings": {
+        "crossing_near_encounters": 1539,
+        "physical_intersections": 1539,
+        "witnesses": [
+          {
+            "time_s": 51349.87884535777,
+            "i": 166,
+            "j": 204,
+            "coplanarity_residual_m": 6.9968073083193396e-09,
+            "in_plane_projections_m": [
+              15.591983507472335,
+              -15.230788704945077
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9984.408016492527,
+            "axis": [
+              -0.9463213720878453,
+              0.296591904026367,
+              0.1284877550422315
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51372.749388395845,
+            "i": 168,
+            "j": 206,
+            "coplanarity_residual_m": 8.067740232716633e-08,
+            "in_plane_projections_m": [
+              15.656978378399677,
+              -15.254495127515227
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9984.3430216216,
+            "axis": [
+              -0.9463228326734275,
+              0.29658797653800856,
+              0.1284860635790123
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51393.2276704152,
+            "i": 170,
+            "j": 208,
+            "coplanarity_residual_m": 9.198427874222779e-08,
+            "in_plane_projections_m": [
+              15.708336111639754,
+              -15.291789780031877
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9984.29166388836,
+            "axis": [
+              -0.9463241404630715,
+              0.296584459865792,
+              0.12848454904363366
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51370.91089350211,
+            "i": 165,
+            "j": 203,
+            "coplanarity_residual_m": 2.6200925625327344e-08,
+            "in_plane_projections_m": [
+              16.447307359493415,
+              -15.357017183776183
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9983.552692640507,
+            "axis": [
+              -0.946322715262107,
+              0.2965882922570888,
+              0.1284861995506796
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51417.05748894066,
+            "i": 169,
+            "j": 207,
+            "coplanarity_residual_m": 1.1674389091451613e-07,
+            "in_plane_projections_m": [
+              17.48873152546057,
+              -16.49553370217195
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9982.51126847454,
+            "axis": [
+              -0.9463256622673979,
+              0.2965803676451175,
+              0.12848278663563512
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51394.272882461126,
+            "i": 167,
+            "j": 205,
+            "coplanarity_residual_m": 1.1281951004577289e-07,
+            "in_plane_projections_m": [
+              17.49410997020895,
+              -16.478768296130507
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9982.505890029792,
+            "axis": [
+              -0.9463242072122189,
+              0.29658428037476303,
+              0.12848447174172442
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51328.331769853095,
+            "i": 164,
+            "j": 202,
+            "coplanarity_residual_m": 5.795982500991045e-08,
+            "in_plane_projections_m": [
+              18.905630313951153,
+              -17.06018731462752
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9981.094369686049,
+            "axis": [
+              -0.9463199960031127,
+              0.29659560424021314,
+              0.1284893486249035
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51305.67099505582,
+            "i": 162,
+            "j": 200,
+            "coplanarity_residual_m": 1.2074589776506238e-07,
+            "in_plane_projections_m": [
+              18.911650755472397,
+              -17.0302511446494
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9981.088349244528,
+            "axis": [
+              -0.9463185487720409,
+              0.2965994957067977,
+              0.12849102457546185
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51283.102478407236,
+            "i": 160,
+            "j": 198,
+            "coplanarity_residual_m": 1.240600848812323e-07,
+            "in_plane_projections_m": [
+              18.917003029661046,
+              -17.000608079916354
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9981.082996970339,
+            "axis": [
+              -0.9463171074117136,
+              0.2966033713307194,
+              0.12849269370348942
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51260.62713046219,
+            "i": 158,
+            "j": 196,
+            "coplanarity_residual_m": 3.926141698922259e-08,
+            "in_plane_projections_m": [
+              18.921342964704703,
+              -16.971456625740927
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9981.078657035296,
+            "axis": [
+              -0.9463156719805464,
+              0.2966072309556045,
+              0.12849435594163433
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51238.245940135814,
+            "i": 156,
+            "j": 194,
+            "coplanarity_residual_m": 8.934151239012303e-08,
+            "in_plane_projections_m": [
+              18.92410118943348,
+              -16.942984219427277
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9981.075898810566,
+            "axis": [
+              -0.9463142425419625,
+              0.29661107441162293,
+              0.12849601121674936
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51215.957130748226,
+            "i": 154,
+            "j": 192,
+            "coplanarity_residual_m": 1.2873718762019275e-07,
+            "in_plane_projections_m": [
+              18.927812265450118,
+              -16.914279373418335
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9981.07218773455,
+            "axis": [
+              -0.9463128189827499,
+              0.2966149020038714,
+              0.12849765966022575
+            ],
+            "required_projection_m": 10300.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 44.67729785833377,
+        "maximum_sampled_rate_deg_s": 0.020844657905989255,
+        "maximum_sampled_angular_acceleration_deg_s2": 1.188402937895804e-05
+      },
+      "mean_first_six_hour_translation_m_s": 0.9768595774708625,
+      "nominal_first_six_hour_attitude_m_s": 2.4240716840281187,
+      "nominal_first_six_hour_control_m_s": 3.400931261498981,
+      "scheduled_translation_m_s": 1.8580066727052453,
+      "endpoint_difference_from_unchanged_m": 1.75165634597361e-06,
+      "endpoint_velocity_difference_from_unchanged_m_s": 6.205179759710465e-11,
+      "limiting_pair_first_burn_change_body_m_s": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "early_proposal_pass": false,
+      "raw_path": "research/runs/solar_shield_array/return_repair/roll_60_proposal.npz",
+      "raw_sha256": "01fcbfaf5ef8cb9f0d7d93418c5fab26291dcdaa9173e6e4cc7c928b5eacfebc"
+    },
+    {
+      "index": 9,
+      "schedule": {
+        "label": "roll_75",
+        "angle_deg": 75.0,
+        "turn_s": 5400.0
+      },
+      "early_geometry": {
+        "minimum_sampled_surface_distance_m": 0.0015897596490366025,
+        "witness": {
+          "time_s": 51240.0,
+          "pair": [
+            42,
+            80
+          ],
+          "projection_m": [
+            409.31635026906804,
+            -101.89562231475064,
+            -0.0015897596490366025
+          ],
+          "centre_distance_m": 421.80871547068335
+        }
+      },
+      "full_proposal_geometry": {
+        "minimum_sampled_surface_distance_m": 0.0015897596490366025,
+        "witness": {
+          "time_s": 51240.0,
+          "pair": [
+            42,
+            80
+          ],
+          "projection_m": [
+            409.31635026906804,
+            -101.89562231475064,
+            -0.0015897596490366025
+          ],
+          "centre_distance_m": 421.80871547068335
+        }
+      },
+      "early_crossings": {
+        "crossing_near_encounters": 1539,
+        "physical_intersections": 1539,
+        "witnesses": [
+          {
+            "time_s": 51349.87884535256,
+            "i": 166,
+            "j": 204,
+            "coplanarity_residual_m": 8.479152221803096e-09,
+            "in_plane_projections_m": [
+              11.118681360217295,
+              -18.747314451208613
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9981.252685548792,
+            "axis": [
+              0.06728754665264731,
+              0.9153916661928729,
+              0.39690110043952265
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51372.7493883941,
+            "i": 168,
+            "j": 206,
+            "coplanarity_residual_m": 8.164547596425789e-08,
+            "in_plane_projections_m": [
+              11.175325916015183,
+              -18.787035006137607
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9981.212964993862,
+            "axis": [
+              0.0672830381093811,
+              0.9153919463850411,
+              0.3969012185370284
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51393.22767041157,
+            "i": 170,
+            "j": 208,
+            "coplanarity_residual_m": 9.198432756708944e-08,
+            "in_plane_projections_m": [
+              11.215281109950316,
+              -18.836351231248734
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9981.163648768752,
+            "axis": [
+              0.06727900116564267,
+              0.915392197252855,
+              0.3969013242743643
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51370.91089350331,
+            "i": 165,
+            "j": 203,
+            "coplanarity_residual_m": 2.705573163694354e-08,
+            "in_plane_projections_m": [
+              11.912190431598061,
+              -19.090615898016505
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9980.909384101984,
+            "axis": [
+              0.06728340053751851,
+              0.9153919238619331,
+              0.3969012090438331
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51394.27288246094,
+            "i": 167,
+            "j": 205,
+            "coplanarity_residual_m": 1.1293316476722533e-07,
+            "in_plane_projections_m": [
+              12.632993554829417,
+              -20.445076722054637
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9979.554923277945,
+            "axis": [
+              0.06727879512006724,
+              0.9153922100567434,
+              0.3969013296710192
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51417.057488938204,
+            "i": 169,
+            "j": 207,
+            "coplanarity_residual_m": 1.1452122708375183e-07,
+            "in_plane_projections_m": [
+              12.623459170429147,
+              -20.459878819813515
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9979.540121180187,
+            "axis": [
+              0.0672743035301909,
+              0.9153924891591414,
+              0.39690144730847154
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51215.95713074486,
+            "i": 154,
+            "j": 192,
+            "coplanarity_residual_m": 1.2811003684766237e-07,
+            "in_plane_projections_m": [
+              13.905125069366584,
+              -21.236817579868493
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9978.76318242013,
+            "axis": [
+              0.06731394719764336,
+              0.9153900251039971,
+              0.39690040873344634
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51238.24594013545,
+            "i": 156,
+            "j": 194,
+            "coplanarity_residual_m": 8.75188752261322e-08,
+            "in_plane_projections_m": [
+              13.894111079274154,
+              -21.263583828536987
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9978.736416171463,
+            "axis": [
+              0.06730955329656398,
+              0.9153902982785771,
+              0.39690052387528435
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51260.627130465575,
+            "i": 158,
+            "j": 196,
+            "coplanarity_residual_m": 3.9488438772931855e-08,
+            "in_plane_projections_m": [
+              13.88407763952822,
+              -21.290372178580693
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9978.70962782142,
+            "axis": [
+              0.06730514119013611,
+              0.9153905725671149,
+              0.3969006394862899
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51189.88464462325,
+            "i": 152,
+            "j": 190,
+            "coplanarity_residual_m": 7.443789280584958e-09,
+            "in_plane_projections_m": [
+              13.894727575396287,
+              -21.308351139607108
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9978.691648860393,
+            "axis": [
+              0.06731908700102629,
+              0.915389705533129,
+              0.39690027403533007
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51283.10247840634,
+            "i": 160,
+            "j": 198,
+            "coplanarity_residual_m": 1.2320532870248767e-07,
+            "in_plane_projections_m": [
+              13.872340635744479,
+              -21.317407067529782
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9978.68259293247,
+            "axis": [
+              0.06730071052819353,
+              0.9153908479911551,
+              0.3969007555755395
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51305.67099505913,
+            "i": 162,
+            "j": 200,
+            "coplanarity_residual_m": 1.2171406830300513e-07,
+            "in_plane_projections_m": [
+              13.859498541332481,
+              -21.344654796330584
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9978.65534520367,
+            "axis": [
+              0.06729626150575992,
+              0.9153911245383491,
+              0.39690087213782393
+            ],
+            "required_projection_m": 10300.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 44.67729785833377,
+        "maximum_sampled_rate_deg_s": 0.02605299106996747,
+        "maximum_sampled_angular_acceleration_deg_s2": 1.4855036508649357e-05
+      },
+      "mean_first_six_hour_translation_m_s": 0.9768595774708625,
+      "nominal_first_six_hour_attitude_m_s": 3.0300893812787058,
+      "nominal_first_six_hour_control_m_s": 4.006948958749568,
+      "scheduled_translation_m_s": 1.8580066727052453,
+      "endpoint_difference_from_unchanged_m": 9.707590497407433e-07,
+      "endpoint_velocity_difference_from_unchanged_m_s": 3.391353114744804e-11,
+      "limiting_pair_first_burn_change_body_m_s": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "early_proposal_pass": false,
+      "raw_path": "research/runs/solar_shield_array/return_repair/roll_75_proposal.npz",
+      "raw_sha256": "f0d6c7d450bb7ba692148b4b7b674149b655cb024457c1038d49030debda79b4"
+    },
+    {
+      "index": 10,
+      "schedule": {
+        "label": "roll_minus30",
+        "angle_deg": -30.0,
+        "turn_s": 5400.0
+      },
+      "early_geometry": {
+        "minimum_sampled_surface_distance_m": 0.0015897612444262048,
+        "witness": {
+          "time_s": 51240.0,
+          "pair": [
+            42,
+            80
+          ],
+          "projection_m": [
+            -7.515253740758686,
+            421.74176151577956,
+            -0.0015897612444262048
+          ],
+          "centre_distance_m": 421.80871547153686
+        }
+      },
+      "full_proposal_geometry": {
+        "minimum_sampled_surface_distance_m": 0.0015897612444262048,
+        "witness": {
+          "time_s": 51240.0,
+          "pair": [
+            42,
+            80
+          ],
+          "projection_m": [
+            -7.515253740758686,
+            421.74176151577956,
+            -0.0015897612444262048
+          ],
+          "centre_distance_m": 421.80871547153686
+        }
+      },
+      "early_crossings": {
+        "crossing_near_encounters": 1539,
+        "physical_intersections": 1539,
+        "witnesses": [
+          {
+            "time_s": 51349.878845359,
+            "i": 166,
+            "j": 204,
+            "coplanarity_residual_m": 6.9967095795360395e-09,
+            "in_plane_projections_m": [
+              15.230788704644052,
+              15.591983508353659
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9984.408016491647,
+            "axis": [
+              -0.9463213720878453,
+              0.29659190402636665,
+              0.12848775504223126
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51372.74938839859,
+            "i": 168,
+            "j": 206,
+            "coplanarity_residual_m": 8.056408762828971e-08,
+            "in_plane_projections_m": [
+              15.254495124945404,
+              15.656978379490226
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9984.34302162051,
+            "axis": [
+              -0.946322832673428,
+              0.29658797653800767,
+              0.1284860635790119
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51393.22767041407,
+            "i": 170,
+            "j": 208,
+            "coplanarity_residual_m": 9.209769205447288e-08,
+            "in_plane_projections_m": [
+              15.291789782300691,
+              15.708336111430507
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9984.291663888569,
+            "axis": [
+              -0.9463241404630711,
+              0.2965844598657919,
+              0.12848454904363354
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51370.91089350869,
+            "i": 165,
+            "j": 203,
+            "coplanarity_residual_m": 2.5860393531384787e-08,
+            "in_plane_projections_m": [
+              15.357017177872834,
+              16.44730735747709
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9983.552692642523,
+            "axis": [
+              -0.9463227152621075,
+              0.2965882922570876,
+              0.12848619955067903
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51417.05748893592,
+            "i": 169,
+            "j": 207,
+            "coplanarity_residual_m": 1.1463420151010689e-07,
+            "in_plane_projections_m": [
+              16.495533710044832,
+              17.488731524705255
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9982.511268475295,
+            "axis": [
+              -0.9463256622673974,
+              0.29658036764511775,
+              0.12848278663563528
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51394.27288245884,
+            "i": 167,
+            "j": 205,
+            "coplanarity_residual_m": 1.1293302009441134e-07,
+            "in_plane_projections_m": [
+              16.478768298098295,
+              17.494109970881052
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9982.505890029119,
+            "axis": [
+              -0.9463242072122188,
+              0.29658428037476336,
+              0.1284844717417245
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51328.331769851866,
+            "i": 164,
+            "j": 202,
+            "coplanarity_residual_m": 5.7959579268221525e-08,
+            "in_plane_projections_m": [
+              17.060187313874938,
+              18.90563031615447
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9981.094369683846,
+            "axis": [
+              -0.9463199960031125,
+              0.296595604240213,
+              0.12848934862490338
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51305.670995056076,
+            "i": 162,
+            "j": 200,
+            "coplanarity_residual_m": 1.209731170961046e-07,
+            "in_plane_projections_m": [
+              17.03025114131592,
+              18.911650752365478
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9981.088349247635,
+            "axis": [
+              -0.946318548772041,
+              0.29659949570679717,
+              0.12849102457546172
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51283.10247840809,
+            "i": 160,
+            "j": 198,
+            "coplanarity_residual_m": 1.2502796470555833e-07,
+            "in_plane_projections_m": [
+              17.000608077296928,
+              18.917003029750564
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9981.08299697025,
+            "axis": [
+              -0.9463171074117139,
+              0.29660337133071896,
+              0.12849269370348926
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51260.627130459616,
+            "i": 158,
+            "j": 196,
+            "coplanarity_residual_m": 3.8520857193389185e-08,
+            "in_plane_projections_m": [
+              16.97145662532795,
+              18.92134296062693
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9981.078657039374,
+            "axis": [
+              -0.9463156719805467,
+              0.2966072309556046,
+              0.1284943559416345
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51238.24594013687,
+            "i": 156,
+            "j": 194,
+            "coplanarity_residual_m": 8.922819280461399e-08,
+            "in_plane_projections_m": [
+              16.942984216857415,
+              18.924101190523952
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9981.075898809477,
+            "axis": [
+              -0.9463142425419624,
+              0.29661107441162204,
+              0.12849601121674903
+            ],
+            "required_projection_m": 10300.0
+          },
+          {
+            "time_s": 51215.957130743365,
+            "i": 154,
+            "j": 192,
+            "coplanarity_residual_m": 1.2907806171437432e-07,
+            "in_plane_projections_m": [
+              16.914279378267963,
+              18.927812270551243
+            ],
+            "physical_square_intersection": true,
+            "separating_projection_m": -9981.072187729449,
+            "axis": [
+              -0.9463128189827499,
+              0.29661490200387186,
+              0.12849765966022603
+            ],
+            "required_projection_m": 10300.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 44.67729785833377,
+        "maximum_sampled_rate_deg_s": 0.010405341077969015,
+        "maximum_sampled_angular_acceleration_deg_s2": 5.942015121519715e-06
+      },
+      "mean_first_six_hour_translation_m_s": 0.9768595774708625,
+      "nominal_first_six_hour_attitude_m_s": 1.2120361215937563,
+      "nominal_first_six_hour_control_m_s": 2.1888956990646187,
+      "scheduled_translation_m_s": 1.8580066727052453,
+      "endpoint_difference_from_unchanged_m": 1.804467230309436e-06,
+      "endpoint_velocity_difference_from_unchanged_m_s": 6.162225124819269e-11,
+      "limiting_pair_first_burn_change_body_m_s": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "early_proposal_pass": false,
+      "raw_path": "research/runs/solar_shield_array/return_repair/roll_minus30_proposal.npz",
+      "raw_sha256": "6bbbc520d432d338953207d6db7ce1a6f2af40099cf1385fb70da589196b8a08"
+    }
+  ],
+  "elapsed_s": 439.5336766600012,
+  "max_rss_MiB": 268.20703125,
+  "completed": true
+}

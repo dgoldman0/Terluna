@@ -42,3 +42,7 @@ specification for the network model listed below.
 The [protection](../protection/) calculations supply component hardware and operating budgets, not a complete atmospheric-retention solution. Sagan K≈1.17 remains an illustrative civilization-allocation scenario pending consistent whole-system energy accounting. Planetary traffic safety is a design requirement; no certified trajectory network has been established.
 
 Run the shared baseline with `python research/baselines/feasibility/model.py --out research/runs/feasibility`. The [core-first plan](../research/plan.md) keeps industry one part of the whole-world argument.
+
+## Shield electricity and material comparisons
+
+`shield_power.py` separates reflected-band capture, optical conversion, bus operations, final delivery, ideal collector heat and electric-propulsion exhaust. The [return investigation](../research/studies/solar_shield_array/return_repair.md) applies these sensitivities to executed prefixes and hypothetical fleet duty, including explicit replacement lifetimes. These are conditional accounts; collector and power-routing hardware remain to design.

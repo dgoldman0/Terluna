@@ -147,3 +147,7 @@ tests return, mass and power constraints before expanding fleet coverage.
 `compact_shadow.py` removes empty projected rectangles before evaluating the
 same exact shadow union. All-pair geometry and original-force comparisons
 check that this compaction preserves the optical and momentum calculation.
+
+## Return correction and collection accounting
+
+`return_escape.py` supplies smooth in-plane roll/recovery commands and exact partial-burn integrals. `compact_collection.py` preserves the original first-intercept and photon-momentum ledger with exact compact shadow unions, allowing denser grazing-source quadrature. The [encounter-directed study](../../research/studies/solar_shield_array/return_repair.md) retains transition failures, the migrated encounter and individual hardware overloads.

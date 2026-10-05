@@ -1341,5 +1341,93 @@
         "process-group lookup does not see the test process in this execution environment"
       ]
     }
+  },
+  "return_repair": {
+    "starting_remote_head": "7e18c29a00342a5bcec143fa3e500147b462b333",
+    "early_checkpoint": "ba2d8d9887e61ab3e40fb79850ac7ba406f6739d",
+    "publication_target": "research/solar-shield-habitat-array; main unchanged",
+    "accepted_return": false,
+    "accepted_cycle": false,
+    "accepted_fleet": false,
+    "new_target_adopted": false,
+    "preserved_twelve_hour_passage": true,
+    "coupled_corrections": 3,
+    "independent_tighter_replays": 1,
+    "source_bound_products": [
+      "repair_audit.json",
+      "repair_budget.json",
+      "repair_local_refined.json",
+      "repair_local_screen.json",
+      "repair_screen.json",
+      "repair_synthesis.json",
+      "repair_trade.json",
+      "repair_trial_local_refined.json",
+      "repair_trial_local_refined_fine.json",
+      "repair_trial_roll_60.json",
+      "repair_trial_roll_minus30.json"
+    ],
+    "numerical_resources": {
+      "initial_inspection_charge_s": 10.0,
+      "interrupted_accounting_charge_s": 540.0,
+      "earlier_summary_charge_s": 0.3852167779987212,
+      "completed_producer_wall_s": 2173.991812545002,
+      "numerical_wall_s_before_this_summary": 2724.377029323001,
+      "ceiling_s": 3600.0,
+      "one_calculation_process": true,
+      "numerical_threads": 1,
+      "address_space_cap_GiB": 2,
+      "maximum_recorded_rss_MiB": 567.125,
+      "raw_output_MiB": 212.88688850402832,
+      "raw_ceiling_MiB": 512,
+      "checks_have_separate_allowance": true,
+      "total_numerical_wall_s": 2724.69951427
+    },
+    "targeted_checks": {
+      "command": "python -m pytest protection/dynamics research/studies/solar_shield_array engineering/test_shield_power.py -q",
+      "passed": 150,
+      "elapsed_s": 11.7,
+      "source_identity_recheck_after_resource_summary_fix": {
+        "passed": 4,
+        "elapsed_s": 0.63
+      }
+    },
+    "repository_checks": {
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 make check",
+      "status": "FAIL_EXISTING",
+      "python_passed": 695,
+      "python_skipped": 55,
+      "python_failed": 13,
+      "python_elapsed_s": 29.66,
+      "same_failed_tests_as_before_changes": true,
+      "failed_tests": [
+        "atmosphere/tests/test_absorption.py::test_ion_production_falls_with_the_shadow_and_ends_at_the_outer_radius",
+        "atmosphere/tests/test_absorption.py::test_ionization_rate_is_of_the_tabulated_order",
+        "atmosphere/tests/test_absorption.py::test_design_case_needs_a_radius_just_under_the_exobase",
+        "atmosphere/tests/test_exosphere.py::test_dissociation_rates_agree_with_heays",
+        "atmosphere/tests/test_exosphere.py::test_ions_made_match_the_absorption_step",
+        "atmosphere/tests/test_exosphere.py::test_charge_exchange_thin_limit_counts_the_swept_exosphere",
+        "atmosphere/tests/test_exosphere.py::test_magnetosphere_accounts_for_every_ion_and_a_stronger_one_keeps_more",
+        "atmosphere/tests/test_exosphere.py::test_levels_are_ordered_and_wider_shadows_never_lose_more",
+        "climate/tests/test_cm1_run.py::test_the_terrain_build_forces_each_column_at_its_own_height",
+        "climate/tests/test_exoplasim_run.py::RunnerTests::test_process_lookup_finds_this_process",
+        "climate/tests/test_ring_comfort.py::test_hours_are_shares_of_the_lunar_day",
+        "climate/tests/test_ring_comfort.py::test_the_rings_land_is_pooled_by_latitude_and_height_and_counted_in_shares",
+        "research/studies/protection_architecture/test_run.py::test_design_point_holds_together"
+      ],
+      "later_make_targets_reached": false,
+      "staged_layer_check": {
+        "command": "python shared/check_layers.py",
+        "files_checked": 539,
+        "violations": 0
+      },
+      "staged_whitespace_check_passed": true
+    },
+    "not_executed": [
+      "Full return, arrival service, attitude recovery and coupled handover",
+      "Repropagation with the additional equipment required by new peak loads",
+      "Repeated cycles, sufficient inventory and global simultaneous coverage",
+      "Collector layout, routing, energy storage and delivered-power realization",
+      "Hardware flexibility, propellant-depletion feedback, recycling and component service lives"
+    ]
   }
 }

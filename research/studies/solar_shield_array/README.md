@@ -115,6 +115,16 @@ restricted return proposals require about 1.85 m/s of translation and fail
 their clearance tests. Per-member propulsion and optical accounts distinguish
 executed stages from proposed recurrence; no full cycle or fleet is accepted.
 
+The [encounter-directed continuation](return_repair.md) tests early burn changes
+and smooth in-plane rotations from the actual hardware-loaded states. A local
+correction delays the 100 m stop by about 90 minutes, independently replayed
+within 10.58 m, but reaches a new deep overlap and exceeds power allocations
+on 160 tiles. Both roll transitions also fail. The original twelve-hour
+passage is preserved. Comparable optical source accounts, explicit conversion
+sensitivities and propellant/replacement trades retain the 23.835 TW target
+beside 50 and 100 TW alternatives. No complete return or revised target is
+accepted.
+
 The study couples protection, engineering, illumination and habitation. Its
 runners, compact numerical results and interpretation belong together here;
 dynamics components belong in the protection domain. Computation files and
