@@ -160,6 +160,18 @@ No operating return, repeatable cycle, supply hardware, handover or fleet
 budget is accepted. Source-bound results, exact initial states and the next
 small local test are preserved; a larger fleet campaign remains paused.
 
+The [service-led natural-return search](natural_return.md) broadens arrival
+dates and frees endpoint states under energy and individual-power caps.
+A slower departure turn preserves the loaded twelve-hour, zero-translation
+prefix at **36.186 TJ**, **30.22% below** 51.859 TJ, with 1.722 km minimum
+sampled clearance. Coupled replay still reaches 100 m at hour **13.799825**.
+The cheap ray-fit candidate loses initial coverage and differs from coupled
+propagation by 5.32 km; grouped sail pulses also fail their reduced screens.
+No new return, next passage, delivered supply, handover or cycle is accepted.
+The sixteen products preserve the failed branches, one duplicated assignment
+variant, measured prefix accounts and the inventory penalty of longer returns.
+The next small test targets early formation compression with coupled shadows.
+
 The study couples protection, engineering, illumination and habitation. Its
 runners, compact numerical results and interpretation belong together here;
 dynamics components belong in the protection domain. Computation files and

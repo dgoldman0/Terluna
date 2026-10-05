@@ -1,0 +1,533 @@
+{
+  "schema": "terluna.research.natural-scout/1",
+  "producer": {
+    "source_hashes": {
+      "protection/dynamics/cycling.py": "704fbd03c9d4070ea05bdfeba57914ec225941f3560710da2472bd24ca870ed4",
+      "protection/dynamics/ephemeris.py": "9a162c3acf63a844284eb61b444a7d34f1447b5182d254d3e87616516f8748d9",
+      "protection/dynamics/ephemeris.json": "90fde7cb6142e5d4d8082270a978ba2f8f47baaefab0e8d1cf82ec6f07a27222",
+      "protection/dynamics/model.py": "01c9191588037ab4f42bac38dc4d5bd99e57427d37fa75cd672120e32b53733a",
+      "protection/dynamics/optical.py": "06a13ae9f24834876edbc12b513deaa5e3735f02f8249eb57c8996d74ce00b56",
+      "research/studies/solar_shield_array/scenario.json": "a53b784941518b6e36ccdf728252cf6c8e0c46c1126b6c621ed4e28c23128699",
+      "research/studies/solar_shield_array/cycling_search.py": "4789a0185620f6662916462b2715aa9002e6454e74f4f32ef5f7dadf5f732093",
+      "research/studies/solar_shield_array/cycling_feedback.py": "0eb32d26e14472f0a512cdf45d60f00ab8260376cd51ca715e7615bf7df02775",
+      "protection/dynamics/fleet.py": "f3e52653876c2956a4b355dc1290a0a1cadd2b9b601cafc664259827df1cc93c",
+      "research/studies/solar_shield_array/fleet_run.py": "9b8bc9765b9288745ea7d4d69d59e857e76e54d29cc91b37160503e9d9090833",
+      "protection/dynamics/active_formation.py": "597c12c6a4a89c0ea70663fddd69b9b5d9e599c88a2bd1742f5009d19e050b7a",
+      "protection/dynamics/active_retime.py": "9ba27a7ec48460a345289ebc7550c502f845487beaec5fe35084a67b2d9d736b",
+      "protection/dynamics/coverage_pilot.py": "fb03381e4387cb17e5276148428a3ffb2cbfb5313c8f59b8ff708ebeb9ce079c",
+      "protection/dynamics/natural_pattern.py": "780c2679f13c097c07b89e9d7cce1c91399f464f01b4bd878fb50cb643e1be29",
+      "research/studies/solar_shield_array/patterns_run.py": "f2e346fd2281632e5bf1c285c61229ba24e26e4ba4c480713194218263888d5c",
+      "protection/dynamics/pattern_departure.py": "24e7bb0653f9ab546b46a9a650ae67e3adb0af154c3e5b9ba83461e9648b828b",
+      "protection/dynamics/departure_control.py": "beafd12acfb4a228c17a329c9e0d278282222e90be7126b20b3e2df551bedfd5",
+      "protection/dynamics/pattern_return.py": "a1a3f85e5f7744d0418574d0fc2a033d4ab69d9d55eba9bfbb85974c7ab64757",
+      "protection/dynamics/energy_coast.py": "df47adb192e3f665e977353844e478f9cd5a30f63ca54ea2f31b59e9cd1b6826",
+      "protection/dynamics/attitude_load.py": "0b977677edc96d33889eb36526c4826c625eea2cb1a4e3b4254e970ac99582e4",
+      "research/studies/solar_shield_array/return_screen.py": "53ec3ecf5165c773142315d97553f9c72ebbe6c045299ec368104c1811f4b526",
+      "research/studies/solar_shield_array/energy_screen.py": "3506f2f1c725299fc98795fb32ed3c0063605f114c3d5cdbc711ee0f5c3bf9bd",
+      "protection/dynamics/parallel_shadow.py": "98d09fc9e5812b3592cbc5e24e0615f9f9aa3a75c7f33afff0fe82d0e40c3c24",
+      "research/studies/solar_shield_array/departure_validate.py": "df457b279e1b69627f65fa528877faa414161e6bfea881387d28243504f9b9b0",
+      "research/studies/solar_shield_array/energy_run.py": "1ddb0b6d2aabac1252ae614369230d286d6db7c79a45b7c863ac1a926ccd1c08",
+      "protection/dynamics/coast_control.py": "315bb9a1456ca1108f93ec1579719f7933acafb3f3c2b79bb2cf875961685c4d",
+      "research/studies/solar_shield_array/energy_correct.py": "5c518a5e0aa17c2e8cd999f46f9ab139c02534f58919ee630f38fbfbd523d9ca",
+      "research/studies/solar_shield_array/energy_replay.py": "b3ce134e8ad2d005d23a367d9d90e832b89c4fd11bbcca7ff448706987ca8d4c",
+      "protection/dynamics/packing_control.py": "2a728856edbc76c79eb59e7ba29532c5fe62671f24e39687cabb0bea7f7272a7",
+      "research/studies/solar_shield_array/packing_screen.py": "1a3b771ed6543810d75dfc54c7ca33a084086a9c9519bdc26959a89c87f8fedb",
+      "research/studies/solar_shield_array/packing_run.py": "d9971a9f1bf6a3d8a9ebad83e9e9fd78af046eb5af7a0c06fe4250ee05c8ec8b",
+      "protection/dynamics/collection.py": "a742f83d832f1afdfc144f0661c5a0dcfe8723bfcd184e2d65db778ca9af7cf9",
+      "research/studies/solar_shield_array/packing_validate.py": "0a6f52de4a2d07d80b137c1a67ac6e6e8ee0aa1d7cb3683684e076fcf776e5f0",
+      "research/studies/solar_shield_array/departure_screen.py": "9e69d5e5db5729191ca6ccae8673d24dfab7606af8bb47f1038913b328750ff4",
+      "research/studies/solar_shield_array/departure_refine.py": "c206316508235d2e5960dff5a6ab5de90334a632a67e46a54505d7d9909fd72a",
+      "research/studies/solar_shield_array/departure_run.py": "b142372d4b1ed3383bfe4ff5ea8764bbb2c12e8d92c3db8cb81138a18663a2c8",
+      "research/studies/solar_shield_array/departure_budget.py": "61434cb29ddf74bdfef79abcfcdd3f9a886caa8e21ba9a76f23faf6167b579a4",
+      "research/studies/solar_shield_array/pilot_budget.py": "2a7fc3e12d4b4aae98ce8d656220e0c10cbe0d5de2099f0406d64662e563c41e",
+      "protection/dynamics/tile_torque.py": "448a9ee6db481c18252196045cc53ad48733aacb9f8fc2620db8eae10acd6cbf",
+      "research/studies/solar_shield_array/energy_budget.py": "1d261c43f9bfebd418875e9b62f00fbc554bb03da6e679c36918e252bb272fab",
+      "research/studies/solar_shield_array/packing_budget.py": "912e8723c4855545cdde6817641159b1d6dbd5e90d5b86c9da5544d8162dd3ca",
+      "protection/dynamics/square_distance.py": "b38c54b6d9a96b161e82b755d407758548a38244c9292d73404ab45cdc1210ba",
+      "protection/dynamics/service_margin.py": "2651d828734f82416fa39bd6a77da31ae070aaa7606f6b80cdb1cbf00090e68f",
+      "research/studies/solar_shield_array/packing_audit.py": "bdb61443a6ded75c9c5c3dfbd6644b947874d710194363ba572f5814a36f5b91",
+      "protection/dynamics/cycle_control.py": "79979d6ec11f8095a9b9d9f20162e0c564a547aa108d0f8aff330c1ba5ceb5ac",
+      "research/studies/solar_shield_array/closure_screen.py": "77943258dd53965b799437d274b25a97fa8b122fc69d36021dce97db10cc0c27",
+      "protection/dynamics/mass_feedback.py": "a7a22f4879f9bf65f4124c4533beab860bb2135b579fd588d0470962ca741abc",
+      "research/studies/solar_shield_array/closure_propagate.py": "94439660cf036cde289ad7fdd8bb17b2efd37680ca189a2057ee64e30c3d51e2",
+      "research/studies/solar_shield_array/closure_hardware.py": "fea296454ae7a7b86091ccf462a0c86dec47250b092395e203a8bd2d501c6349",
+      "research/studies/solar_shield_array/closure_sizing.py": "7b0a85ef346d6d5328f65f0108a82df3dd562866ec69ef3b2f56223cfe5a3f56",
+      "research/studies/solar_shield_array/closure_return.py": "1b2eed766423e99684d5e8084f11709f50915d37185b2556eafdce0823da3464",
+      "research/studies/solar_shield_array/closure_validate.py": "beae9de9f295d8eb7819949119d9315ce462e72e29c3f3b2095642163164baa6",
+      "protection/dynamics/compact_shadow.py": "e4a729b6fa500a8e3e380a17f34009ba846a6eb3d33038679e0495afbe69fac7",
+      "research/studies/solar_shield_array/closure_compact.py": "d702eaf9e7aa9f0c8336a99c6b3608a35dafd504d856edc1e2d624ab00b20f31",
+      "research/studies/solar_shield_array/closure_budget.py": "51398f6224469f508f4391202cc2cfd180eb09bae58cd3dca0fc37be83b7e3a2",
+      "protection/dynamics/return_escape.py": "c76687ce70d82b636535200e63f31a9a93cc5e6fca6ad207779be6850e5cec7b",
+      "research/studies/solar_shield_array/repair_screen.py": "7591e1a0a4de0dad93154397d36a3fc13b02ab6acae7b0af4fc73911d11974f9",
+      "research/studies/solar_shield_array/repair_local_screen.py": "f6e6da179bbd8853a68ebb2f9b865a48cc3e87d11b6d79f8a45258e24bf5d00b",
+      "research/studies/solar_shield_array/repair_refine.py": "e6225e07ad069ddca411a985a99899cace62df8eea0fdfc3f8748ebf360bbff5",
+      "research/studies/solar_shield_array/repair_run.py": "004615fa5272fd171209f339614c6b01eac767626cf6dd4b68c588be3a1a49c2",
+      "protection/dynamics/fast_parallel.py": "5033fef27ed6f0653e9b227da20b4e0fde910449a8231dfa6a03434e1af0d3a7",
+      "protection/dynamics/fast_parallel.cpp": "a7d4268bc37cbfbbe04ecd388cb1926eaddc9c449ec11f153cf88b13c8360c4e",
+      "research/studies/solar_shield_array/joint_common.py": "2b948b0d0f6c7a859be0effa7d3e2d643d3ec2601ed69a51f41e67f32a1ea584",
+      "research/studies/solar_shield_array/joint_seed.py": "0d8be5667975645d5575af591fd9bd5f21895bf399cf8e87d108d4226e0ab24c",
+      "protection/dynamics/service_search.py": "e544ab9e45d5fc03c887ee21472bf8fba1619a43c0ccf6a3b33e1d3ba6b39bb1",
+      "research/studies/solar_shield_array/natural_common.py": "e76619e40915a769dc74915f948cbfe3c2083e929fe0265360d2090c391736ec",
+      "research/studies/solar_shield_array/natural_scout.py": "58489a244075509021ef91738b3d3d0704af35f241afb8ddc22aea7072068a87",
+      "protection/dynamics/service_reduced.py": "9975e4f4b77fcd1a95acc30132edaa99a76a97cf60ea894d4756b368716e388f",
+      "research/studies/solar_shield_array/natural_fast_scout.py": "fdd9b4c5c88e8ac2af0f9e7c92b2237c710e20b4538257e7b5933cf1d771e351"
+    },
+    "constants": {
+      "AU": 149597870700.0,
+      "EARTH_GM": 398600441800000.0,
+      "EARTH_MOON_DISTANCE": 384400000.0,
+      "EARTH_OBLIQUITY_DEG": 23.4393,
+      "EARTH_RADIUS": 6371000.0,
+      "JULIAN_DAY": 86400.0,
+      "MOON_GM": 4902800118000.0,
+      "MOON_RADIUS": 1737400.0,
+      "SOLAR_CONSTANT": 1361.0,
+      "SOLAR_SYSTEM_GM": {
+        "mercury": 22031868551000.0,
+        "venus": 324858592000000.0,
+        "mars": 42828375816000.0,
+        "jupiter": 1.267127641e+17,
+        "saturn": 3.79405848418e+16,
+        "uranus": 5794556400000000.0,
+        "neptune": 6836527100580000.0,
+        "pluto": 975500000000.0
+      },
+      "SPEED_OF_LIGHT": 299792458.0,
+      "SUN_GM": 1.3271244004127942e+20,
+      "SUN_RADIUS": 695700000.0
+    },
+    "inputs": {
+      "joint_seed.json": "53060741b22d7a1768e6661899e98db9f48ceec966e8cc052b3ff2ab0bfedcf8"
+    }
+  },
+  "cases": [
+    {
+      "spec": {
+        "name": "face",
+        "tilt": 0.0,
+        "axis": 0
+      },
+      "first_clearance_failure": {
+        "time_s": 36081.29306961502,
+        "pair": [
+          152,
+          190
+        ],
+        "distance_m": 100.0000019989337,
+        "projection_m": [
+          6.285699600177192,
+          10099.983251958622,
+          -1.8302260968331514
+        ]
+      },
+      "minimum_sampled_distance_m": 0.011368355294018855,
+      "opportunities": [
+        {
+          "arrival_s": 166872.9090473606,
+          "midpass_s": 177672.9090473606,
+          "minimum_transverse_m": 31133.55921904175,
+          "hypothetical_Sun_facing_midpass_coverage": {
+            "all_sampled_sun_coverage": 0.0,
+            "minimum_source_coverage": 0.09011633476231506,
+            "worst_missed_ray": {
+              "source_index": 6,
+              "receiver_xy_m": [
+                -1382.1090821301896,
+                -31070.557141536836
+              ],
+              "missed_area_m2": 285841209.177995
+            },
+            "window_centre_distance_m": 31162.579268762718,
+            "sources": 9
+          },
+          "cadence": {
+            "start_to_start_cadence_s": 166872.9090473606,
+            "credited_service_s": 21600.0,
+            "time_capacity_group_lower_bound": 7.725597641081508,
+            "integer_groups_if_undivided": 8,
+            "time_capacity_tile_lower_bound": 2788.9407484304247,
+            "time_capacity_mass_lower_bound_kg": 17485333452.669746,
+            "spatial_coverage_and_handover_demonstrated": false
+          }
+        },
+        {
+          "arrival_s": 334294.0980004137,
+          "midpass_s": 345094.0980004137,
+          "minimum_transverse_m": 35798.63068024706,
+          "hypothetical_Sun_facing_midpass_coverage": {
+            "all_sampled_sun_coverage": 0.0,
+            "minimum_source_coverage": 1.5543122344752192e-15,
+            "worst_missed_ray": {
+              "source_index": 0,
+              "receiver_xy_m": [
+                -1449.754625510539,
+                -35736.26499020518
+              ],
+              "missed_area_m2": 314151380.11442983
+            },
+            "window_centre_distance_m": 35826.967191360345,
+            "sources": 9
+          },
+          "cadence": {
+            "start_to_start_cadence_s": 334294.0980004137,
+            "credited_service_s": 21600.0,
+            "time_capacity_group_lower_bound": 15.476578611130263,
+            "integer_groups_if_undivided": 16,
+            "time_capacity_tile_lower_bound": 5587.044878618025,
+            "time_capacity_mass_lower_bound_kg": 35028116955.38753,
+            "spatial_coverage_and_handover_demonstrated": false
+          }
+        },
+        {
+          "arrival_s": 501635.1560766663,
+          "midpass_s": 512435.1560766663,
+          "minimum_transverse_m": 30297.047152071144,
+          "hypothetical_Sun_facing_midpass_coverage": {
+            "all_sampled_sun_coverage": 0.0,
+            "minimum_source_coverage": 1.887379141862766e-15,
+            "worst_missed_ray": {
+              "source_index": 0,
+              "receiver_xy_m": [
+                -1523.7682914427241,
+                -30234.922125542766
+              ],
+              "missed_area_m2": 314151380.1144297
+            },
+            "window_centre_distance_m": 30334.575002037407,
+            "sources": 9
+          },
+          "cadence": {
+            "start_to_start_cadence_s": 501635.1560766663,
+            "credited_service_s": 21600.0,
+            "time_capacity_group_lower_bound": 23.223849818364183,
+            "integer_groups_if_undivided": 24,
+            "time_capacity_tile_lower_bound": 8383.80978442947,
+            "time_capacity_mass_lower_bound_kg": 52562504157.539154,
+            "spatial_coverage_and_handover_demonstrated": false
+          }
+        },
+        {
+          "arrival_s": 668817.5401507929,
+          "midpass_s": 679617.5401507929,
+          "minimum_transverse_m": 33787.49575268841,
+          "hypothetical_Sun_facing_midpass_coverage": {
+            "all_sampled_sun_coverage": 0.0,
+            "minimum_source_coverage": 2.1094237467877974e-15,
+            "worst_missed_ray": {
+              "source_index": 0,
+              "receiver_xy_m": [
+                -1591.9725682023145,
+                -33726.97068977705
+              ],
+              "missed_area_m2": 314151380.1144297
+            },
+            "window_centre_distance_m": 33825.81131996831,
+            "sources": 9
+          },
+          "cadence": {
+            "start_to_start_cadence_s": 668817.5401507929,
+            "credited_service_s": 21600.0,
+            "time_capacity_group_lower_bound": 30.963775006981155,
+            "integer_groups_if_undivided": 31,
+            "time_capacity_tile_lower_bound": 11177.922777520196,
+            "time_capacity_mass_lower_bound_kg": 70080265126.86916,
+            "spatial_coverage_and_handover_demonstrated": false
+          }
+        }
+      ],
+      "minimum_lunar_radius_m": 14410449.69262971,
+      "nfev": 29717,
+      "raw_path": "research/runs/solar_shield_array/natural_return/fast_scout_face.npz",
+      "raw_sha256": "2b040138f7bc3421f61bead877b9d7699c3414c7bc27c8541ed6b627c5da13c3"
+    },
+    {
+      "spec": {
+        "name": "edge_a",
+        "tilt": 90.0,
+        "axis": 0
+      },
+      "first_clearance_failure": {
+        "time_s": 45891.683661383606,
+        "pair": [
+          148,
+          151
+        ],
+        "distance_m": 100.0000038018125,
+        "projection_m": [
+          -10099.680810150601,
+          6642.478232217345,
+          -7.983536063819438
+        ]
+      },
+      "minimum_sampled_distance_m": 0.01420410131961748,
+      "opportunities": [
+        {
+          "arrival_s": 166099.3073618387,
+          "midpass_s": 176899.3073618387,
+          "minimum_transverse_m": 31587.929528744848,
+          "hypothetical_Sun_facing_midpass_coverage": {
+            "all_sampled_sun_coverage": 0.0,
+            "minimum_source_coverage": 0.06922382505629099,
+            "worst_missed_ray": {
+              "source_index": 1,
+              "receiver_xy_m": [
+                -1452.4924554710888,
+                -31647.858799102192
+              ],
+              "missed_area_m2": 292404619.9361967
+            },
+            "window_centre_distance_m": 31619.879610116568,
+            "sources": 9
+          },
+          "cadence": {
+            "start_to_start_cadence_s": 166099.3073618387,
+            "credited_service_s": 21600.0,
+            "time_capacity_group_lower_bound": 7.689782748233273,
+            "integer_groups_if_undivided": 8,
+            "time_capacity_tile_lower_bound": 2776.0115721122115,
+            "time_capacity_mass_lower_bound_kg": 17404273659.87223,
+            "spatial_coverage_and_handover_demonstrated": false
+          }
+        },
+        {
+          "arrival_s": 332701.84628122306,
+          "midpass_s": 343501.84628122306,
+          "minimum_transverse_m": 36461.04983438183,
+          "hypothetical_Sun_facing_midpass_coverage": {
+            "all_sampled_sun_coverage": 0.0,
+            "minimum_source_coverage": 1.887379141862766e-15,
+            "worst_missed_ray": {
+              "source_index": 0,
+              "receiver_xy_m": [
+                -1530.2829538337282,
+                -36398.71155923221
+              ],
+              "missed_area_m2": 314151380.1144297
+            },
+            "window_centre_distance_m": 36492.169237821094,
+            "sources": 9
+          },
+          "cadence": {
+            "start_to_start_cadence_s": 332701.84628122306,
+            "credited_service_s": 21600.0,
+            "time_capacity_group_lower_bound": 15.402863253760327,
+            "integer_groups_if_undivided": 16,
+            "time_capacity_tile_lower_bound": 5560.433634607478,
+            "time_capacity_mass_lower_bound_kg": 34861277098.5793,
+            "spatial_coverage_and_handover_demonstrated": false
+          }
+        },
+        {
+          "arrival_s": 499227.1976796433,
+          "midpass_s": 510027.1976796433,
+          "minimum_transverse_m": 31132.301223476366,
+          "hypothetical_Sun_facing_midpass_coverage": {
+            "all_sampled_sun_coverage": 0.0,
+            "minimum_source_coverage": 2.886579864025407e-15,
+            "worst_missed_ray": {
+              "source_index": 0,
+              "receiver_xy_m": [
+                -1458.3629741412224,
+                -31070.30122114427
+              ],
+              "missed_area_m2": 314151380.1144295
+            },
+            "window_centre_distance_m": 31165.79870969335,
+            "sources": 9
+          },
+          "cadence": {
+            "start_to_start_cadence_s": 499227.1976796433,
+            "credited_service_s": 21600.0,
+            "time_capacity_group_lower_bound": 23.11237026294645,
+            "integer_groups_if_undivided": 24,
+            "time_capacity_tile_lower_bound": 8343.565664923668,
+            "time_capacity_mass_lower_bound_kg": 52310192648.42443,
+            "spatial_coverage_and_handover_demonstrated": false
+          }
+        },
+        {
+          "arrival_s": 665679.3960183412,
+          "midpass_s": 676479.3960183412,
+          "minimum_transverse_m": 34241.67297122824,
+          "hypothetical_Sun_facing_midpass_coverage": {
+            "all_sampled_sun_coverage": 0.0,
+            "minimum_source_coverage": 2.1094237467877974e-15,
+            "worst_missed_ray": {
+              "source_index": 0,
+              "receiver_xy_m": [
+                -1559.823619246692,
+                -34181.28624989618
+              ],
+              "missed_area_m2": 314151380.1144297
+            },
+            "window_centre_distance_m": 34278.15213536906,
+            "sources": 9
+          },
+          "cadence": {
+            "start_to_start_cadence_s": 665679.3960183412,
+            "credited_service_s": 21600.0,
+            "time_capacity_group_lower_bound": 30.818490556404683,
+            "integer_groups_if_undivided": 31,
+            "time_capacity_tile_lower_bound": 11125.47509086209,
+            "time_capacity_mass_lower_bound_kg": 69751443049.68654,
+            "spatial_coverage_and_handover_demonstrated": false
+          }
+        }
+      ],
+      "minimum_lunar_radius_m": 14875241.229849236,
+      "nfev": 21122,
+      "raw_path": "research/runs/solar_shield_array/natural_return/fast_scout_edge_a.npz",
+      "raw_sha256": "b7b2d828e583b1655ad8c6d2903344fc7830d6903a42692788a6a335194c8af5"
+    },
+    {
+      "spec": {
+        "name": "edge_b",
+        "tilt": 90.0,
+        "axis": 1
+      },
+      "first_clearance_failure": {
+        "time_s": 36081.61864635995,
+        "pair": [
+          152,
+          190
+        ],
+        "distance_m": 99.9999998834118,
+        "projection_m": [
+          -0.8398545132191966,
+          10099.788729571126,
+          -6.496878270601086
+        ]
+      },
+      "minimum_sampled_distance_m": 0.0038980021208945,
+      "opportunities": [
+        {
+          "arrival_s": 166075.0397071365,
+          "midpass_s": 176875.0397071365,
+          "minimum_transverse_m": 30866.893067960358,
+          "hypothetical_Sun_facing_midpass_coverage": {
+            "all_sampled_sun_coverage": 0.0,
+            "minimum_source_coverage": 0.06644485503021491,
+            "worst_missed_ray": {
+              "source_index": 1,
+              "receiver_xy_m": [
+                -1400.2045817875041,
+                -30803.922525996386
+              ],
+              "missed_area_m2": 293277637.2051851
+            },
+            "window_centre_distance_m": 30897.02406011014,
+            "sources": 9
+          },
+          "cadence": {
+            "start_to_start_cadence_s": 166075.0397071365,
+            "credited_service_s": 21600.0,
+            "time_capacity_group_lower_bound": 7.688659245700763,
+            "integer_groups_if_undivided": 8,
+            "time_capacity_tile_lower_bound": 2775.6059876979757,
+            "time_capacity_mass_lower_bound_kg": 17401730838.2902,
+            "spatial_coverage_and_handover_demonstrated": false
+          }
+        },
+        {
+          "arrival_s": 332654.30466905376,
+          "midpass_s": 343454.30466905376,
+          "minimum_transverse_m": 35723.64087240043,
+          "hypothetical_Sun_facing_midpass_coverage": {
+            "all_sampled_sun_coverage": 0.0,
+            "minimum_source_coverage": 1.887379141862766e-15,
+            "worst_missed_ray": {
+              "source_index": 0,
+              "receiver_xy_m": [
+                -1411.1138488267588,
+                -35661.21502281385
+              ],
+              "missed_area_m2": 314151380.1144297
+            },
+            "window_centre_distance_m": 35750.432775264264,
+            "sources": 9
+          },
+          "cadence": {
+            "start_to_start_cadence_s": 332654.30466905376,
+            "credited_service_s": 21600.0,
+            "time_capacity_group_lower_bound": 15.400662253196934,
+            "integer_groups_if_undivided": 16,
+            "time_capacity_tile_lower_bound": 5559.639073404093,
+            "time_capacity_mass_lower_bound_kg": 34856295577.33416,
+            "spatial_coverage_and_handover_demonstrated": false
+          }
+        },
+        {
+          "arrival_s": 499155.8629763763,
+          "midpass_s": 509955.8629763763,
+          "minimum_transverse_m": 30372.376570206437,
+          "hypothetical_Sun_facing_midpass_coverage": {
+            "all_sampled_sun_coverage": 0.0,
+            "minimum_source_coverage": 1.887379141862766e-15,
+            "worst_missed_ray": {
+              "source_index": 0,
+              "receiver_xy_m": [
+                -1473.9350015118725,
+                -30310.298049781628
+              ],
+              "missed_area_m2": 314151380.1144297
+            },
+            "window_centre_distance_m": 30407.399705520198,
+            "sources": 9
+          },
+          "cadence": {
+            "start_to_start_cadence_s": 499155.8629763763,
+            "credited_service_s": 21600.0,
+            "time_capacity_group_lower_bound": 23.109067730387792,
+            "integer_groups_if_undivided": 24,
+            "time_capacity_tile_lower_bound": 8342.373450669993,
+            "time_capacity_mass_lower_bound_kg": 52302718031.480965,
+            "spatial_coverage_and_handover_demonstrated": false
+          }
+        },
+        {
+          "arrival_s": 665584.5789489645,
+          "midpass_s": 676384.5789489645,
+          "minimum_transverse_m": 33456.41930310884,
+          "hypothetical_Sun_facing_midpass_coverage": {
+            "all_sampled_sun_coverage": 0.0,
+            "minimum_source_coverage": 1.6653345369377348e-15,
+            "worst_missed_ray": {
+              "source_index": 0,
+              "receiver_xy_m": [
+                -1602.853843462235,
+                -33395.79956062736
+              ],
+              "missed_area_m2": 314151380.11442983
+            },
+            "window_centre_distance_m": 33495.52972908926,
+            "sources": 9
+          },
+          "cadence": {
+            "start_to_start_cadence_s": 665584.5789489645,
+            "credited_service_s": 21600.0,
+            "time_capacity_group_lower_bound": 30.814100877266874,
+            "integer_groups_if_undivided": 31,
+            "time_capacity_tile_lower_bound": 11123.89041669334,
+            "time_capacity_mass_lower_bound_kg": 69741507895.53526,
+            "spatial_coverage_and_handover_demonstrated": false
+          }
+        }
+      ],
+      "minimum_lunar_radius_m": 14875191.222555555,
+      "nfev": 21122,
+      "raw_path": "research/runs/solar_shield_array/natural_return/fast_scout_edge_b.npz",
+      "raw_sha256": "6284af888408e38f02ac1f6966c352dd493d93576ef1237f16d3bfd8e084e461"
+    }
+  ],
+  "completed": true,
+  "accepted_return": false,
+  "accepted_cycle": false,
+  "scope": "All 361 members in a centre-gravity/centre-Sun model, with body-visible fraction and no mutual shadows. Contact and service tests are proposal diagnostics. Post-contact mathematical states and unexecuted Sun-facing turns earn no physical service credit.",
+  "resources": {
+    "wall_s": 118.39029097199818,
+    "cpu_s": 118.35686022,
+    "max_rss_MiB": 568.35546875,
+    "numerical_threads": 1,
+    "new_raw_MiB": 36.2376127243042
+  }
+}

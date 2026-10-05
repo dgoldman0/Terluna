@@ -170,3 +170,21 @@ failed actuator/supply and energy gates. Independent replay preserves all
 screen and receives no coupled feasibility credit. Per-member chronological
 storage dispatch lives in `engineering/shield_storage.py`; added collectors
 and storage are priced sensitivities, not accepted loaded trajectories.
+
+## Service-led natural returns
+
+`service_search.py` proposes natural service dates and charges their necessary
+cadence inventory. `service_reduced.py` supplies cheap centre-force proposals,
+explicitly omitting mutual shadows. `service_constraints.py` and
+`service_arrival_controls.py` fit free terminal states to assigned optical
+rays with early/arrival control arcs, individual ratings and energy ceilings;
+the latter charges partial early burns exactly. `service_holes.py` adds
+constraints from full receiver polygon differences. `oriented_clearance.py`
+prunes all-pair contact tests with conservative projection bounds and agrees
+with a brute-force oriented-square scan.
+
+The [bounded continuation](../../research/studies/solar_shield_array/natural_return.md)
+finds a 30.22% saving for the loaded twelve-hour passage with a slower turn,
+but no operating return. Coupled dynamics reject the cheap sparse-ray proposal
+and reproduce compression to the clearance floor in the slower-turn return.
+Omitted shadow response cannot be treated as a small correction in these fits.
