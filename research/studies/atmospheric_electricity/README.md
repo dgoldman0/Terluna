@@ -285,8 +285,20 @@ Morrison's do.
    higher and release one and a half to two times the energy (a median 106–119
    GJ against 54–79), and the second window's ten ground strikes, an upper
    bound by WRF-ELEC's rule, brought down a median 204 C, the largest 1,489 C.
-7. Windows of `box_0e_elec`'s second lunar day run again from its restarts with
-   output every few minutes, to follow each storm's life, and with leakage.
+7. Leakage (climate/crm README, "Leakage"). With nothing to conduct it, the
+   charge evaporating cloud leaves on WRF-ELEC's small ions stayed for weeks:
+   1,600–3,600 C of each sign through each lunar night, and 11.4 kC net at day
+   40.5, which held the field at the ground near 20 kV/m all over the box.
+   Both windows ran again on 2026-10-05 with leakage through stage 1's
+   conductivity, each changing only that. The leftover charge went within the
+   hour, and the field at the ground away from storms fell to a median 0.2–1.6
+   kV/m and under them from 228–243 to 39–48 kV/m at most. The lightning stayed
+   as it was (11 flashes against 6–13, 161 against 144–157), while the busy
+   window's ground strikes rose to 39 against 21, smaller ones (a median 110 C,
+   at most 624 C). The fields at the ground of item 4's point-discharge
+   comparison were the leftover charge's.
+8. Windows of `box_0e_elec`'s second lunar day run again from its restarts with
+   output every few minutes, to follow each storm's life.
 
 It gives the storms' charge structure, the field by height, flash rates and
 types (within cloud and to ground), flash extent, the charge each flash moves

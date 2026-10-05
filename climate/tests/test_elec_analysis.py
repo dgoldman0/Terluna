@@ -127,6 +127,8 @@ def test_a_window_takes_only_its_own_flashes_charging_and_segments(tmp_path, mon
             (6000.0, 1, 10.0, 10.0), (8000.0, 1, 20.0, 20.0), (8100.0, 2, 0.0, 50.0), (12000.0, 1, 5.0, 5.0))))
     (case / 'terluna_field.txt').write_text('# header\n# run from 3600.0\n' + ''.join(
         f'{t:.1f} {int(t // 60)} {e:.1f} 0 0 0 10.0 -8.0 1e9 1e-12 1e-13\n' for t, e in ((7500.0, 1.2e5), (9000.0, 0.9e5))))
+    (case / 'terluna_ground.txt').write_text('# header\n# run from 3600.0\n' + ''.join(
+        f'{t:.1f} {int(t // 60)} 0.0 0.0 {e:.1f} {e:.1f} 0 0\n' for t, e in ((7000.0, 9.0e3), (8000.0, 4.0e3), (9000.0, 2.0e3))))
     assert [s['executable'] for s in ea.window_segments(case, 7200.0, 10800.0)] == ['e2']
     w = ea.window('run', 7200.0, 10800.0)
     assert w['law'] == 'takahashi' and w['executables'] == ['e2'] and w['snapshots'] == []
@@ -137,3 +139,4 @@ def test_a_window_takes_only_its_own_flashes_charging_and_segments(tmp_path, mon
     assert w['charge']['noninductive_c'] == pytest.approx(3.0 * 1800.0)                   # ctghs only, not ctgs again
     assert w['charge']['inductive_c'] == pytest.approx(0.5 * 1800.0)
     assert w['field']['e_max_kv_m'] == pytest.approx(120.0) and w['field']['negative_c_max'] == pytest.approx(8.0)
+    assert w['ground']['rows'] == 2 and w['ground']['e_ground_dry_max_kv_m'] == pytest.approx(4.0)

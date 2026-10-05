@@ -1660,7 +1660,10 @@ went back to the ground on the precipitation it attached to; the totals
 measure the model's ion cycle more than charge the storms keep. The run made 86 flashes,
 fewer and starting higher than the run without it (a tenth started at or
 above 49.8 km). The weather alone could make a difference that size between
-realizations, so its effect on the lightning stays unresolved.
+realizations, so its effect on the lightning stays unresolved. Both runs left
+the ions' charge in place, as nothing conducted it away, and that leftover
+charge made most of the field away from the storms; with leakage it falls to a
+median 0.2 kV/m, below the onset ("Leakage", below).
 
 ```sh
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_elec_uncapped    # and box_0e_elec_uncapped_corona
@@ -1697,7 +1700,9 @@ all in cloud), the first at day 40.79. Each brings down a median 195 C of
 negative charge (72–430 C, at most 889 C) and releases a median 69 GJ (20–190
 GJ, at most 437 GJ), starting 34–38 km up. Earth's ground strikes bring down
 5–30 C; charges of hundreds of coulombs belong on Earth to the rare positive
-strikes that set off sprites.
+strikes that set off sprites. With leakage, which clears the charge the runs
+otherwise leave in the air, the window makes 39 ground strikes among 161
+flashes, a median 110 C each and at most 624 C ("Leakage", below).
 
 The rule makes this an upper bound: it counts a channel that reaches −7 °C as
 reaching the ground, which on Earth leaves 3–5 km to cross and on the Moon about
@@ -1796,6 +1801,76 @@ storms' hail, which carries most of their charging, are still to be read.
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_elec_takahashi      # and box_0e_elec_takahashi_first
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_0e_elec_takahashi --threads 4 --hours 6
 climate/gcm/.venv/bin/python -m climate.crm.elec_analysis laws
+```
+
+### Leakage
+
+None of the runs above conducts charge away, and the charge that evaporating
+and subliming particles hand to WRF-ELEC's small ions stays for weeks. In
+`box_0e_elec` 1,600–3,600 C of each sign stayed on the ions, mostly at 20–40
+km, through each lunar night, and in the second lunar day the box's net charge
+rose to +10.7 kC at day 40 (at day 40.5, 7.0 kC on snow and 4.1 kC on the
+ions), its negative partner having fallen to the ground on precipitation; it
+stood near +2 kC for the rest of the run. WRF-ELEC gives the ions' charge to
+each new cloud at once. The lunar clear air relaxes net charge in 15 minutes
+at 35 km and 35 minutes at the ground (stage 1's conductivity with 100 aerosol
+particles per cm³), cloud in about a day.
+
+On 2026-10-05 both windows ran again with leakage (`var9` 1: each cell's net
+charge relaxing at σ/ε₀, with the cloud's conductivity where cloud water and
+ice reach 0.01 g/kg and the clear air's elsewhere), each changing only that:
+`box_0e_elec_leakage_first` beside `box_0e_elec_uncapped` and
+`box_0e_elec_leakage` beside `box_0e_elec_ground_rule`
+(`climate/results/crm/elec_leakage.json`). Within 33 minutes of day 40.5 the
+box's net charge fell from 11.4 kC to 1.2 kC.
+
+| Days | Run | Leakage | Flashes (to ground) | Charge separated, kC | In-cloud flash: median charge, energy | Net charge at the outputs | Field at the ground, median and largest (kV/m) | Away from particles, median and largest (kV/m) |
+|---|---|---|---|---|---|---|---|---|
+| 10.5–12 | `box_0e_elec_uncapped` | none | 13 (0) | 22.0 + 3.7 | 69 C, 55 GJ | −1.9 to +0.3 kC | 35, 228 | 7.5, 16 |
+| | `box_0e_elec_uncapped_corona` | none; point discharge | 6 (0) | 13.5 + 2.4 | 69 C, 54 GJ | −1.0 to −0.2 kC | 21, 123 | 5.0, 15 |
+| | `box_0e_elec` (cap) | none | 13 (0) | 18.0 + 2.8 | 80 C, 55 GJ | −1.4 to −0.3 kC | | |
+| | `box_0e_elec_leakage_first` | on | 11 (0) | 15.9 + 2.2 | 54 C, 47 GJ | −0.25 to +0.03 kC | 1.4, 39 | 0.23, 3.4 |
+| 40.5–42 | `box_0e_elec_ground_rule` | none | 144 (21) | 116.8 + 21.2 | 106 C, 79 GJ | +8.0 to +14.8 kC | 81, 243 | 21, 36 |
+| | `box_0e_elec` (5-km rule) | none | 157 (0) | 122.1 + 22.4 | 88 C, 70 GJ | +7.8 to +13.3 kC | | |
+| | `box_0e_elec_leakage` | on | 161 (39) | 124.3 + 20.6 | 98 C, 81 GJ | −1.0 to +4.8 kC | 4.7, 48 | 1.6, 19 |
+
+The field at the ground is the largest over land in each ten-step interval
+(the coarse run predates that log); away from particles, over the columns
+whose lowest level no particles reach.
+
+The leftover charge was an artifact of the missing conduction, and in the
+second lunar day it held the field at the ground near 20 kV/m all over the
+box, over a hundred times Earth's fair-weather field. With leakage the ions
+hold at most 175 C of either sign between storms, the field at the ground
+away from storms falls to a median 0.2–1.6 kV/m, below point discharge's
+lunar onset of 3.4 kV/m, and the strongest under the storms falls from
+228–243 kV/m to 39–48 kV/m, since leakage also acts on the charge rain
+carries below cloud base, where the clear air's conductivity applies. The
+storms are left much as they were: as many flashes, as much charge separated,
+flashes of a similar size starting at the same heights, and while active the
+same arrangement of charge (the main negative charge at 38–44 km with
+positive charge above and below it). Between storms the outputs hold less
+charge, some of it in decaying anvils at 54–60 km.
+
+The window with leakage makes 39 negative ground strikes among 161 flashes,
+against 21 among 144 without it: 70 of its flash starts meet WRF-ELEC's
+conditions for a negative ground flash against 54, and more of those reach
+air of −7 °C. They are smaller: a median 110 C (61–278 C, 10th to 90th
+percentile), at most 624 C, and a median 54 GJ. The start potentials do not
+show why there are more; with one realization each, part of the difference
+may be the weather's.
+
+So the lunar storms' lightning stands without leakage, but the field at the
+ground does not, nor the point-discharge comparison of "The first lunar day
+again": their fields away from storms were the leftover charge's. The
+Takahashi windows ran without leakage as well; their arrangement of charge
+follows from the law's sign, while their ground strikes carry the same
+leftover charge as `box_0e_elec_ground_rule`'s.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_elec_leakage      # and box_0e_elec_leakage_first
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_0e_elec_leakage --threads 4 --hours 6
+climate/gcm/.venv/bin/python -m climate.crm.elec_analysis leakage
 ```
 
 ## The gravity pair

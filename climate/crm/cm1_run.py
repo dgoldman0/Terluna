@@ -1259,6 +1259,23 @@ CASES['box_0e_elec_takahashi_first'] = dict(
     elec=dict(cm1_elec.LUNAR, isaund=1, ground_m=5000.0),
     purpose=CASES['box_0e_elec']['purpose'] + '; its first lunar day\'s storms again from its day-10.5 restart, under '
             'Takahashi\'s charging law')
+# Leakage. With nothing to conduct it, the charge evaporating cloud leaves on the small ions stays for weeks: 2,000-3,600
+# C of each sign at 20-40 km through the lunar night, and 11.5 kC net at day 40.5 (7.0 kC on snow, 4.1 kC on the ions),
+# whose negative partner fell to the ground on precipitation; WRF-ELEC hands the ions' charge to each new cloud. The
+# lunar clear air would relax it in about ten minutes (stage 1's conductivity). box_0e_elec_leakage and
+# box_0e_elec_leakage_first run the charging-law windows under Saunders and Peck with leakage (var9 1: net charge relaxing
+# at sigma/eps0, the clear air's and the cloud's conductivity by height), each differing from its twin only in that.
+# Both ran on 2026-10-05: the leftover charge goes within the hour, the field at the ground away from storms falls from
+# about 20 kV/m to a median 0.2-1.6, and the lightning stays as it was (README, "Leakage").
+CASES['box_0e_elec_leakage'] = dict(
+    CASES['box_0e_elec_ground_rule'], elec=dict(cm1_elec.LUNAR, leakage=1),
+    purpose=CASES['box_0e_elec']['purpose'] + '; its busiest storms again from its day-40.5 restart, with the charge '
+            'leaking through the air\'s conductivity')
+CASES['box_0e_elec_leakage_first'] = dict(
+    CASES['box_0e_elec_leakage'], restart_from=dict(case='box_0e_elec', day=10.5), days=12.0,
+    elec=dict(cm1_elec.LUNAR, leakage=1, ground_m=5000.0),
+    purpose=CASES['box_0e_elec']['purpose'] + '; its first lunar day\'s storms again from its day-10.5 restart, with '
+            'the charge leaking through the air\'s conductivity')
 # The same storm with CM1's own copy of the NSSL scheme and no electricity, to check that WRF-ELEC's copy, run through
 # terluna_elec.F, makes the same storm.
 CASES['supercell_nssl'] = dict(

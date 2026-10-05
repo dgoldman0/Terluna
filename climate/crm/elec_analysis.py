@@ -345,16 +345,19 @@ def against(name: str, other: str) -> dict:
     return dict(case=name, other=other, columns='each pair is [this run, the other run]', snapshots=rows)
 
 
-# The charging laws side by side: windows of box_0e_elec's storms run again under Takahashi's law (WRF-ELEC's isaund 1)
-# beside runs of the same days under Saunders and Peck's (isaund 12). CM1's threads make every run of a window a
-# different realization of its storms, so each window has more than one Saunders and Peck run to show how far chance
-# alone moves a number; each case's own settings are recorded with it.
-LAW_WINDOWS = {
-    'first_lunar_day': dict(days=(10.5, 12.0), cases=(
-        'box_0e_elec_uncapped', 'box_0e_elec_uncapped_corona', 'box_0e_elec', 'box_0e_elec_takahashi_first')),
-    'second_lunar_day': dict(days=(40.5, 42.0), cases=(
-        'box_0e_elec_ground_rule', 'box_0e_elec', 'box_0e_elec_takahashi')),
+# Windows of box_0e_elec's storms run again with one setting changed, beside the runs of the same days without the
+# change: Takahashi's charging law (WRF-ELEC's isaund 1) for Saunders and Peck's (isaund 12), and leakage through the
+# air's conductivity. CM1's threads make every run of a window a different realization of its storms, so each window has
+# more than one run without the change to show how far chance alone moves a number; each case's own settings are
+# recorded with it.
+SAUNDERS_PECK_RUNS = {'first_lunar_day': ('box_0e_elec_uncapped', 'box_0e_elec_uncapped_corona', 'box_0e_elec'),
+                      'second_lunar_day': ('box_0e_elec_ground_rule', 'box_0e_elec')}
+WINDOW_DAYS = {'first_lunar_day': (10.5, 12.0), 'second_lunar_day': (40.5, 42.0)}
+COMPARISONS = {
+    'charging_laws': dict(first_lunar_day='box_0e_elec_takahashi_first', second_lunar_day='box_0e_elec_takahashi'),
+    'leakage': dict(first_lunar_day='box_0e_elec_leakage_first', second_lunar_day='box_0e_elec_leakage'),
 }
+COMMANDS = {'laws': 'charging_laws', 'leakage': 'leakage'}
 LAWS = {1: 'takahashi', 11: 'saunders_peck_wrf', 12: 'saunders_peck'}
 # the non-inductive totals over graupel and hail together (ctghi is ctgi and cthi, ctghs ctgs and cths) and snow with
 # cloud ice; the inductive ones, droplets rebounding from graupel and from snow in the field
@@ -426,6 +429,9 @@ def window(name: str, t0: float, t1: float) -> dict:
                  hours_above_100_kv_m=float(np.sum(fl['e_max_v_m'] > 1.0e5) * np.median(np.diff(fl['time_s'])) / 3600.0)
                  if fl['time_s'].size > 1 else None) if fl['time_s'].size else {}
 
+    g = read_log(case / 'terluna_ground.txt', GROUND_COLUMNS)
+    ground = ground_summary({k: v[inside(g['time_s'])] for k, v in g.items()})
+
     output_s = cfg['output_s'] * record.get('time_scale', 1.0)
     snapshots = []
     for n in sorted(int(p.name[8:14]) for p in case.glob('cm1out_t*_s.dat')):
@@ -434,42 +440,50 @@ def window(name: str, t0: float, t1: float) -> dict:
             continue
         s = snapshot_charge(case, n, dx, dy, zw)
         st = structure(s, zh)
+        ions = s['charges']['small_ions'] * s['volume']
         st.update(hour=(t - t0) / 3600.0, graupel_kg=float(np.sum(s['graupel'] * s['volume'])),
-                  w_max_m_s=float(np.nanmax(s['w'])))
+                  w_max_m_s=float(np.nanmax(s['w'])), net_c=float(np.sum(s['net'] * s['volume'])),
+                  ions_positive_c=float(ions[ions > 0].sum()), ions_negative_c=float(ions[ions < 0].sum()))
         snapshots.append(st)
     return dict(case=name, law=LAWS.get(int(record['electricity']['isaund']), record['electricity']['isaund']),
                 electricity={k: record['electricity'].get(k) for k in
                              ('isaund', 'lightning', 'ground_m', 'corona_v_m', 'leakage', 'substep_s')},
                 executables=sorted({seg.get('executable') for seg in segments}),
-                lightning=lightning, charge=charge, field=field, snapshots=snapshots)
+                lightning=lightning, charge=charge, field=field, ground=ground, snapshots=snapshots)
 
 
-def charging_laws() -> dict:
-    """Each window's runs under both laws (LAW_WINDOWS), each run summarized over the window's days."""
+def comparison(name: str) -> dict:
+    """Each window's run with the change (COMPARISONS) and its runs without it, each summarized over the window's
+    days."""
     out = {}
-    for label, w in LAW_WINDOWS.items():
-        t0, t1 = (86400.0 * d for d in w['days'])
-        out[label] = dict(days=list(w['days']), runs=[window(name, t0, t1) for name in w['cases']
-                                                      if (ra.RUNS / name / 'progress.json').exists()])
-    return dict(schema=SCHEMA, kind='charging-laws', windows=out,
+    for label, changed in COMPARISONS[name].items():
+        t0, t1 = (86400.0 * d for d in WINDOW_DAYS[label])
+        runs = SAUNDERS_PECK_RUNS[label] + (changed,)
+        out[label] = dict(days=list(WINDOW_DAYS[label]), changed=changed,
+                          runs=[window(run, t0, t1) for run in runs if (ra.RUNS / run / 'progress.json').exists()])
+    return dict(schema=SCHEMA, kind=name.replace('_', '-'), windows=out,
                 producer=dict(domain='climate', files={'crm/elec_analysis.py': hashlib.sha256(
                     Path(__file__).read_bytes()).hexdigest()[:16]}),
                 evidence=EVIDENCE, reading_rule=READING_RULE + (
                     ' Each window\'s runs start from the same restart of box_0e_elec (or are box_0e_elec itself) and '
-                    'differ in the settings listed with each; hours count from the window\'s start. Separated charge is '
-                    'the domain\'s charging of both signs integrated over the window (C); graupel is graupel and hail '
-                    'together (kg) at each three-hourly output.'))
+                    'differ in the settings listed with each; the run named as changed differs from the first only in '
+                    'the setting compared. Hours count from the window\'s start. Separated charge is the domain\'s '
+                    'charging of both signs integrated over the window (C); graupel is graupel and hail together (kg) '
+                    'at each three-hourly output, where the net charge and the charge on the small ions are also '
+                    'given (C).'))
 
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument('case', help='a run, or "laws" for the charging-law windows (elec_charging_laws.json)')
+    parser.add_argument('case', help='a run, or "laws" or "leakage" for the windows run again under Takahashi\'s law '
+                                     'or with leakage (elec_charging_laws.json, elec_leakage.json)')
     parser.add_argument('--against', help='another run of the same case to set the storm beside')
     args = parser.parse_args(argv)
-    if args.case == 'laws':
+    if args.case in COMMANDS:
         RESULTS.mkdir(parents=True, exist_ok=True)
-        path = RESULTS / 'elec_charging_laws.json'
-        path.write_text(json.dumps(significant(charging_laws()), indent=1, default=float) + '\n')
+        name = COMMANDS[args.case]
+        path = RESULTS / f'elec_{name}.json'
+        path.write_text(json.dumps(significant(comparison(name)), indent=1, default=float) + '\n')
         print(path)
         return 0
     result = analyse(args.case)
