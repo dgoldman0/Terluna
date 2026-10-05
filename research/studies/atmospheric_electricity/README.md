@@ -159,7 +159,9 @@ seconds to minutes. In the lunar storms:
 With Earth's fall speeds (the twin), Saunders and Peck's law brings 55 % of
 storm columns to breakdown, the top tenth in 45 minutes. If Takahashi's law or
 the 1.2 m/s measurements hold, most lunar storms make lightning within minutes,
-as Earth's do. If Saunders and Peck's law or Ávila's small charges hold, only the
+as Earth's do. (Stage 2 overturns this: in the NSSL storms hail does
+most of Saunders and Peck's charging, and Takahashi's law changes the storms'
+polarity and leaves their flash rate as it was; item 6 below.) If Saunders and Peck's law or Ávila's small charges hold, only the
 strongest storm columns do, after one to sixteen hours, which may outlast a
 single convective cell; the three-hourly output cannot tell. The rings' weaker
 updrafts, in two dimensions, put fewer columns over the threshold.
@@ -265,9 +267,26 @@ Morrison's do.
    channel at −7 °C, 34 km up, to reach the ground, so this is an upper bound;
    WRF-ELEC's stopping field, which halts every channel 15–25 km up, gives the
    lower bound of none. A rule for a leader's crossing of that gap comes next.
-6. Windows of `box_0e_elec`'s second lunar day run again from its restarts with
-   output every few minutes, to follow each storm's life, under Takahashi's law
-   and with leakage.
+6. The charging law (climate/crm README, "The charging law"). Both windows,
+   days 10.5–12 and 40.5–42, ran again on 2026-10-05 under Takahashi's law,
+   each changing only the law, with the runs' three-hourly output. The storms
+   make as many flashes as under Saunders and Peck's law (14 against 6–13,
+   and 139 against 144–157), separate as much charge and flash no sooner.
+   Stage 1's two hundred to five hundred times came from the Morrison storms'
+   graupel; in the NSSL storms hail, which falls faster and rimes above
+   Saunders and Peck's threshold, does 82–88 % of that law's charging. The law
+   sets the storms' polarity instead. At the lunar storms' 0.03–0.17 g/m³ of
+   cloud water, Takahashi's table charges rimed ice positively at every
+   temperature, and the storms take an inverted dipole: the main negative
+   charge at 48–58 km (−23 to −35 °C) above positive charge at 32–36 km, where
+   Saunders and Peck's law gives the normal arrangement with the main negative
+   charge at 38–44 km. The laboratory measurements at 1.2–1.8 m/s also charge
+   rimed ice positively ([S12], [S13]). Under Takahashi's law the flashes start
+   higher and release one and a half to two times the energy (a median 106–119
+   GJ against 54–79), and the second window's ten ground strikes, an upper
+   bound by WRF-ELEC's rule, brought down a median 204 C, the largest 1,489 C.
+7. Windows of `box_0e_elec`'s second lunar day run again from its restarts with
+   output every few minutes, to follow each storm's life, and with leakage.
 
 It gives the storms' charge structure, the field by height, flash rates and
 types (within cloud and to ground), flash extent, the charge each flash moves

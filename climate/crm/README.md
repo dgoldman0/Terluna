@@ -1327,16 +1327,18 @@ scaling fault. Restarted from its restart at 30 minutes, on 4 threads and on 2,
 the benchmark storm below repeats its first run's output fields at 35 and 40
 minutes and its 41 flashes in between bit for bit.
 
-A case sets the electricity in CM1's namelist: `var3` the screening layers (0
-none, 1 with WRF-ELEC's Earth conductivity, 2 with the conductivity file),
-`var4` the height a downward
-channel must reach to strike the ground (m; 0 for WRF-ELEC's −7 °C rule),
-`var5` the sub-step (s; 0 for WRF-ELEC's 0.75 s), `var6` the charging (2
-non-inductive, 3 with inductive), `var7` the charging law (12 Saunders and
-Peck, cut off below −32.5 °C; 11 the same law as WRF-ELEC's test case sets it,
-with a smooth critical rime accretion rate and charging below −32.5 °C; 1
-Takahashi), `var8` the lightning (0 none, 1 cylinders, 3 branched; 2
-and 4 the same with the breakdown field's scaling unbounded), `var9` leakage
+A case sets the electricity in CM1's namelist: `var2` the onset of point
+discharge from the ground (V/m at sea-level density; 0 for none), `var3` the
+screening layers (0 none, 1 with WRF-ELEC's Earth conductivity, 2 with the
+conductivity file), `var4` the height a downward channel must reach to strike
+the ground (m; below zero for WRF-ELEC's rule, air warmer than −7 °C, its
+default −1; at zero only the two lowest levels count), `var5` the sub-step (s;
+0 for WRF-ELEC's 0.75 s), `var6` the charging (2 non-inductive, 3 with
+inductive), `var7` the charging law (12 Saunders and Peck, cut off below
+−32.5 °C; 11 the same law as WRF-ELEC's test case sets it, with a smooth
+critical rime accretion rate and charging below −32.5 °C; 1 Takahashi),
+`var8` the lightning (0 none, 1 cylinders, 3 branched; 2 and 4 the same with
+the breakdown field's 180-kV/m cap lifted), `var9` leakage
 through the conductivity of
 [atmosphere/electricity](../../atmosphere/electricity/README.md) and `var10`
 the cylinders' radius. Each run logs every flash or cylinder
@@ -1711,6 +1713,89 @@ realization of these days, but the change from none to 21 is the rule's.
 ```sh
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_elec_ground_rule    # and supercell_elec_ground_rule
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_0e_elec_ground_rule --threads 4 --hours 6
+```
+
+### The charging law
+
+Every run above charges by Saunders and Peck's law. Stage 1's
+one-dimensional estimate, from the Morrison storms' graupel, found that law
+nearly stopped for slow lunar graupel, which rimes below its threshold, and
+Takahashi's law charging two hundred to five hundred times faster. On
+2026-10-05 both windows ran again under Takahashi's law (WRF-ELEC's `isaund`
+1, with its crystal-size and impact-speed factor, on its table, whose 0 to
+−30 °C and 0.01–30 g/m³ of cloud water hold the lunar charging zone), each
+changing only the law: `box_0e_elec_takahashi_first` beside
+`box_0e_elec_uncapped` (days 10.5–12, from before the first flash, with that
+run's 5-km ground rule) and `box_0e_elec_takahashi` beside
+`box_0e_elec_ground_rule` (days 40.5–42, WRF-ELEC's ground rule). The other
+runs of the same days under Saunders and Peck show how far a realization moves
+each number (`elec_analysis laws`, `climate/results/crm/elec_charging_laws.json`):
+
+| Days | Run | Law | Flashes (to ground) | Charge separated, kC (non-inductive + inductive) | Hail's share of the non-inductive | In-cloud flash: median charge, energy, start | Main negative charge |
+|---|---|---|---|---|---|---|---|
+| 10.5–12 | `box_0e_elec` (cap) | Saunders and Peck | 13 (0) | 18.0 + 2.8 | 84 % | 80 C, 55 GJ, 35.8 km | 42–44 km, −15 to −18 °C |
+| | `box_0e_elec_uncapped` | Saunders and Peck | 13 (0) | 22.0 + 3.7 | 86 % | 69 C, 55 GJ, 35.8 km | 34–44 km, −7 to −17 °C |
+| | `box_0e_elec_uncapped_corona` | Saunders and Peck | 6 (0) | 13.5 + 2.4 | 82 % | 69 C, 54 GJ, 35.8 km | 38 km, −10 °C |
+| | `box_0e_elec_takahashi_first` | Takahashi | 14 (0) | 25.1 + 4.8 | 37 % | 95 C, 106 GJ, 37.8 km | 48–56 km, −23 to −33 °C |
+| 40.5–42 | `box_0e_elec` (5-km rule) | Saunders and Peck | 157 (0) | 122.1 + 22.4 | 88 % | 88 C, 70 GJ, 37.8 km | 38–44 km, −11 to −18 °C |
+| | `box_0e_elec_ground_rule` | Saunders and Peck | 144 (21) | 116.8 + 21.2 | 88 % | 106 C, 79 GJ, 35.8 km | 38–44 km, −9 to −17 °C |
+| | `box_0e_elec_takahashi` | Takahashi | 139 (10) | 111.8 + 28.2 | 43 % | 101 C, 119 GJ, 43.8 km | 50–58 km, −24 to −35 °C (8 of 12 outputs) |
+
+The main negative charge is the level holding most negative charge at the
+three-hourly outputs that hold more than 300 C of it, leaving out the decaying
+storms' rain below 0 °C.
+
+**The rate.** Takahashi's law makes as many flashes and separates as much
+charge as Saunders and Peck's, within the spread of the realizations, and its
+storms flash no sooner: 10.0 hours after day 10.5 against 8.2–10.1, and 4.4
+hours after day 40.5 against 4.3. Stage 1's two hundred to five hundred times
+does not appear because NSSL's hail does 82–88 % of the charging under
+Saunders and Peck: it falls faster than graupel and rimes above the 0.1 g m⁻²
+s⁻¹ below which the law gives no charge. The Morrison runs carried no hail
+(their one rimed ice category ran as graupel). Under Takahashi's law graupel
+separates four to six times more charge than under Saunders and Peck's and
+hail half to four-fifths as much, and the totals meet.
+
+**The sign.** At the lunar storms' cloud water, 0.03–0.17 g/m³, Takahashi's
+table gives rimed ice positive charge at every temperature; it turns negative
+only colder than about −25 °C at 0.2 g/m³, −15 °C at 0.5 g/m³ and −12 °C at
+1 g/m³. Every collision in both Takahashi windows charged graupel and hail
+positively (the negative parts come to at most 1 C against 25–111 kC), and
+the ice crystals and snow negatively. The rising ice carries the negative
+charge to 48–58 km (−23 to −35 °C), above positive charge at 32–36 km (−4 to
+−9 °C), with no upper positive layer in most outputs: an inverted dipole.
+Under Saunders and Peck the storms hold the normal arrangement, the main
+negative charge at 38–44 km with positive charge above it at 58–72 km and
+below. The laboratory measurements at lunar impact speeds point the same way
+as Takahashi's table: at 1.8 m/s Ávila et al. (2013) found the rimer charging
+positively at every temperature (−7 to −13 °C) and cloud water they used
+(0.05–0.5 g/m³), and at 1.2 m/s Pradeep Kumar et al. (2024) found it positive
+from −7 to −18 °C. Negative charging appears only at faster impacts: at 1.8
+m/s below −17 °C (Pradeep Kumar et al.) and at 2.4 m/s below −10 °C (Ávila et
+al.).
+
+**The flashes.** Under Takahashi's law the flashes start higher (a median
+37.8–43.8 km against 35.8–37.8), reach higher (channels to a median 48–50 km
+against 40–42) and release one and a half to two times the energy for a similar or
+somewhat larger charge; the largest in-cloud flash released 1,964 GJ against 848 GJ
+under Saunders and Peck, and the second window's flashes made 484 mol of
+nitrogen oxides against 350–389. The window's 10 ground strikes, by WRF-ELEC's
+rule and so an upper bound, brought down a median 204 C (37–839 C, 10th to
+90th percentile), the largest 1,489 C and 2.4 TJ, starting at a median 42 km
+and up to 62 km. Each law here is one realization of the window; the
+difference in structure lies far outside the realizations' spread, the
+difference in ground strikes, 10 against 21, within reach of it.
+
+So the charging law sets the lunar storms' polarity more than their rate. The
+measurement that would decide it is the sign of the charge rimed ice takes at
+impact speeds of 1–3 m/s, cloud water of 0.03–0.2 g/m³ and −10 to −35 °C,
+colder than the slow-impact studies reached; the impact speeds of the NSSL
+storms' hail, which carries most of their charging, are still to be read.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_elec_takahashi      # and box_0e_elec_takahashi_first
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_0e_elec_takahashi --threads 4 --hours 6
+climate/gcm/.venv/bin/python -m climate.crm.elec_analysis laws
 ```
 
 ## The gravity pair

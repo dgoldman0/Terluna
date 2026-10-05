@@ -1241,6 +1241,24 @@ CASES['box_0e_elec_ground_rule'] = dict(
     elec=dict(cm1_elec.LUNAR, ground_m=-1.0),
     purpose=CASES['box_0e_elec']['purpose'] + '; its busiest storms again from its day-40.5 restart, with WRF-ELEC\'s '
             'own ground-strike rule')
+# The charging law. Saunders and Peck's law, which every run so far uses, nearly stops for slow lunar graupel, which
+# rimes below its threshold; Takahashi's grows linearly with impact speed and, in stage 1's column estimate, charged the
+# storms two hundred to five hundred times faster. box_0e_elec_takahashi runs box_0e_elec_ground_rule's window under
+# Takahashi's law (WRF-ELEC's isaund 1, with its size and speed factor, on its table, inside whose 0 to -30 C and cloud
+# water range the lunar charging zone lies), and box_0e_elec_takahashi_first box_0e_elec_uncapped's first 1.5 days
+# (from day 10.5, before the first flash, with that run's 5-km ground rule); each differs from its twin only in the law.
+# Both ran on 2026-10-05: as many flashes and as much charge as under Saunders and Peck, whose charging NSSL's hail does
+# most of, and an inverted dipole, since Takahashi's table charges rimed ice positively at the storms' low cloud water
+# (README, "The charging law").
+CASES['box_0e_elec_takahashi'] = dict(
+    CASES['box_0e_elec_ground_rule'], elec=dict(cm1_elec.LUNAR, isaund=1),
+    purpose=CASES['box_0e_elec']['purpose'] + '; its busiest storms again from its day-40.5 restart, under '
+            'Takahashi\'s charging law')
+CASES['box_0e_elec_takahashi_first'] = dict(
+    CASES['box_0e_elec_takahashi'], restart_from=dict(case='box_0e_elec', day=10.5), days=12.0,
+    elec=dict(cm1_elec.LUNAR, isaund=1, ground_m=5000.0),
+    purpose=CASES['box_0e_elec']['purpose'] + '; its first lunar day\'s storms again from its day-10.5 restart, under '
+            'Takahashi\'s charging law')
 # The same storm with CM1's own copy of the NSSL scheme and no electricity, to check that WRF-ELEC's copy, run through
 # terluna_elec.F, makes the same storm.
 CASES['supercell_nssl'] = dict(

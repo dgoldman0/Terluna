@@ -96,12 +96,13 @@ def segment_logs(case: Path) -> list:
     return logs if logs else [p for p in (case / 'cm1.log',) if p.exists()]
 
 
-def charging(case: Path) -> dict:
-    """WRF-ELEC's charging totals by step from CM1's logs, each assigned to the step whose time line follows it."""
+def charging(case: Path, logs: list | None = None) -> dict:
+    """WRF-ELEC's charging totals by step from CM1's logs (all of a case's, or the ones given), each assigned to the
+    step whose time line follows it."""
     pattern = re.compile(r'^(ct[a-z]+)n,\1p\s*=\s*(\S+),\s*(\S+)')
     step = re.compile(r'^\s+(\d+)\s+([0-9.Ee+-]+)\s+(sec|min|hour|hrs|day)')
     pending, rows = {}, {}
-    for log in segment_logs(case):
+    for log in segment_logs(case) if logs is None else logs:
         for line in log.read_text(errors='replace').splitlines():
             m = pattern.match(line)
             if m:
@@ -145,7 +146,9 @@ def snapshot_charge(case: Path, n: int, dx: float, dy: float, zw: np.ndarray) ->
     charges = {SPECIES[int(k[2:]) - 1]: snap[k] * rho for k in names}
     net = sum(charges.values())
     volume = dx * dy * np.diff(zw)[:, None]
-    return dict(charges=charges, net=net, t=t, rho=rho, volume=volume, w=snap.get('winterp'), dbz=snap.get('dbz'))
+    graupel = sum(snap[q] for q in ('qg', 'qhl') if q in snap) * rho if 'qg' in snap else None
+    return dict(charges=charges, net=net, t=t, rho=rho, volume=volume, w=snap.get('winterp'), dbz=snap.get('dbz'),
+                graupel=graupel)
 
 
 def structure(s: dict, zh: np.ndarray, threshold: float = 0.1e-9) -> dict:
@@ -342,11 +345,133 @@ def against(name: str, other: str) -> dict:
     return dict(case=name, other=other, columns='each pair is [this run, the other run]', snapshots=rows)
 
 
+# The charging laws side by side: windows of box_0e_elec's storms run again under Takahashi's law (WRF-ELEC's isaund 1)
+# beside runs of the same days under Saunders and Peck's (isaund 12). CM1's threads make every run of a window a
+# different realization of its storms, so each window has more than one Saunders and Peck run to show how far chance
+# alone moves a number; each case's own settings are recorded with it.
+LAW_WINDOWS = {
+    'first_lunar_day': dict(days=(10.5, 12.0), cases=(
+        'box_0e_elec_uncapped', 'box_0e_elec_uncapped_corona', 'box_0e_elec', 'box_0e_elec_takahashi_first')),
+    'second_lunar_day': dict(days=(40.5, 42.0), cases=(
+        'box_0e_elec_ground_rule', 'box_0e_elec', 'box_0e_elec_takahashi')),
+}
+LAWS = {1: 'takahashi', 11: 'saunders_peck_wrf', 12: 'saunders_peck'}
+# the non-inductive totals over graupel and hail together (ctghi is ctgi and cthi, ctghs ctgs and cths) and snow with
+# cloud ice; the inductive ones, droplets rebounding from graupel and from snow in the field
+NONINDUCTIVE, INDUCTIVE = ('ctghi', 'ctghs', 'ctswi'), ('ctghw', 'ctsww')
+
+
+def window_segments(case: Path, t0: float, t1: float) -> list:
+    """The runner's records of the segments whose model time overlaps (t0, t1]."""
+    progress = json.loads((case / 'progress.json').read_text())
+    start, out = progress.get('start_s', 0.0), []
+    for seg in progress['segments']:
+        if seg['model_s'] > t0 and start < t1:
+            out.append(seg)
+        start = seg['model_s']
+    return out
+
+
+def window(name: str, t0: float, t1: float) -> dict:
+    """One run's storms over model seconds (t0, t1]: its flashes (all, by hour and by kind), the charge each collision
+    type separated, the largest field and charge, and at each output time the graupel aloft, the strongest updraft and
+    where the charge sits."""
+    case = ra.RUNS / name
+    record = json.loads((case / 'case.json').read_text())
+    cfg = record['configuration']
+    grid = record['grid']
+    dx, dy = grid['dx_m'], grid.get('dy_m', grid['dx_m'])
+    zh = heights_km(case / 'cm1out_s.ctl')
+    zw = np.loadtxt(case / 'input_grid_z')
+    inside = lambda t: (t > t0) & (t <= t1)
+
+    f = read_log(case / 'terluna_flashes.txt', FLASH_COLUMNS)
+    f = {k: v[inside(f['time_s'])] for k, v in f.items()}
+    edges = np.array([t0, t1])
+    lightning = dict(count=int(f['time_s'].size))
+    if f['time_s'].size:
+        hours = ((f['time_s'] - t0) // 3600.0).astype(int)
+        per_hour = np.bincount(hours)
+        lightning.update(first_h=float((f['time_s'].min() - t0) / 3600.0),
+                         last_h=float((f['time_s'].max() - t0) / 3600.0),
+                         hours_with_flashes=int(np.count_nonzero(per_hour)), most_in_an_hour=int(per_hour.max()),
+                         nox_total_mol=float(f['nox_mol'].sum()))
+        for code, label in KINDS.items():
+            sel = f['kind'] == code
+            if sel.any():
+                lightning[label] = flash_summary({k: v[sel] for k, v in f.items()}, edges)
+                del lightning[label]['per_5_min']
+
+    segments = window_segments(case, t0, t1)
+    rates = charging(case, [case / seg['log'] for seg in segments if (case / seg['log']).exists()])
+    sel = inside(rates['time_s'])
+    times = rates['time_s'][sel]
+    dt = np.diff(times, prepend=times[0]) if times.size else times
+    separated = {}
+    for key, label in CHARGING.items():
+        r = rates[key][sel]
+        if r.size and not np.all(np.isnan(r)):
+            separated[key] = dict(collisions=label, positive_c=float(np.nansum(r[:, 1] * dt)),
+                                  negative_c=float(np.nansum(r[:, 0] * dt)), peak_c_s=float(np.nanmax(np.abs(r))))
+    total = lambda keys: float(sum(separated[k]['positive_c'] - separated[k]['negative_c'] for k in keys
+                                   if k in separated))
+    charge = dict(by_collisions=separated, noninductive_c=total(NONINDUCTIVE), inductive_c=total(INDUCTIVE),
+                  logged_hours=float(dt.sum() / 3600.0))
+
+    fl = read_log(case / 'terluna_field.txt', FIELD_COLUMNS)
+    fl = {k: v[inside(fl['time_s'])] for k, v in fl.items()}
+    field = dict(e_max_kv_m=float(fl['e_max_v_m'].max() / 1e3), positive_c_max=float(fl['positive_c'].max()),
+                 negative_c_max=float(-fl['negative_c'].min()), energy_j_max=float(fl['energy_j'].max()),
+                 noninductive_max_pc_m3_s=float(fl['noninductive_max_c_m3_s'].max() * 1e12),
+                 hours_above_100_kv_m=float(np.sum(fl['e_max_v_m'] > 1.0e5) * np.median(np.diff(fl['time_s'])) / 3600.0)
+                 if fl['time_s'].size > 1 else None) if fl['time_s'].size else {}
+
+    output_s = cfg['output_s'] * record.get('time_scale', 1.0)
+    snapshots = []
+    for n in sorted(int(p.name[8:14]) for p in case.glob('cm1out_t*_s.dat')):
+        t = (n - 1) * output_s
+        if not t0 < t <= t1:
+            continue
+        s = snapshot_charge(case, n, dx, dy, zw)
+        st = structure(s, zh)
+        st.update(hour=(t - t0) / 3600.0, graupel_kg=float(np.sum(s['graupel'] * s['volume'])),
+                  w_max_m_s=float(np.nanmax(s['w'])))
+        snapshots.append(st)
+    return dict(case=name, law=LAWS.get(int(record['electricity']['isaund']), record['electricity']['isaund']),
+                electricity={k: record['electricity'].get(k) for k in
+                             ('isaund', 'lightning', 'ground_m', 'corona_v_m', 'leakage', 'substep_s')},
+                executables=sorted({seg.get('executable') for seg in segments}),
+                lightning=lightning, charge=charge, field=field, snapshots=snapshots)
+
+
+def charging_laws() -> dict:
+    """Each window's runs under both laws (LAW_WINDOWS), each run summarized over the window's days."""
+    out = {}
+    for label, w in LAW_WINDOWS.items():
+        t0, t1 = (86400.0 * d for d in w['days'])
+        out[label] = dict(days=list(w['days']), runs=[window(name, t0, t1) for name in w['cases']
+                                                      if (ra.RUNS / name / 'progress.json').exists()])
+    return dict(schema=SCHEMA, kind='charging-laws', windows=out,
+                producer=dict(domain='climate', files={'crm/elec_analysis.py': hashlib.sha256(
+                    Path(__file__).read_bytes()).hexdigest()[:16]}),
+                evidence=EVIDENCE, reading_rule=READING_RULE + (
+                    ' Each window\'s runs start from the same restart of box_0e_elec (or are box_0e_elec itself) and '
+                    'differ in the settings listed with each; hours count from the window\'s start. Separated charge is '
+                    'the domain\'s charging of both signs integrated over the window (C); graupel is graupel and hail '
+                    'together (kg) at each three-hourly output.'))
+
+
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument('case')
+    parser.add_argument('case', help='a run, or "laws" for the charging-law windows (elec_charging_laws.json)')
     parser.add_argument('--against', help='another run of the same case to set the storm beside')
     args = parser.parse_args(argv)
+    if args.case == 'laws':
+        RESULTS.mkdir(parents=True, exist_ok=True)
+        path = RESULTS / 'elec_charging_laws.json'
+        path.write_text(json.dumps(significant(charging_laws()), indent=1, default=float) + '\n')
+        print(path)
+        return 0
     result = analyse(args.case)
     if args.against:
         result['against'] = against(args.case, args.against)

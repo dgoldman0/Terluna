@@ -1,6 +1,8 @@
 """Checks of the electrified storms' analysis: logs taken up again after a restart, flashes summed by kind and
-sub-step, WRF-ELEC's charging totals read from CM1's log by step, and the charge regions found in height and
-temperature."""
+sub-step, WRF-ELEC's charging totals read from CM1's log by step, the charge regions found in height and temperature,
+and a run summarized over a window of its days."""
+import json
+
 import numpy as np
 import pytest
 
@@ -96,3 +98,42 @@ def test_the_main_negative_region_and_the_positive_ones_around_it():
     assert out['upper_positive']['z_km'] == 10.5 and out['lower_positive']['z_km'] == 3.5
     assert out['positive_c'] == pytest.approx(1.5) and out['min_nc_m3'] == pytest.approx(-2.0)
     assert ea.structure(dict(s, net=np.abs(net)), zh).get('main_negative') is None
+
+
+def test_a_window_takes_only_its_own_flashes_charging_and_segments(tmp_path, monkeypatch):
+    """A run summarized over a window of its days: the segments overlapping it, its flashes by hour and kind, and the
+    charge each collision type separated over it, the non-inductive pairs counted once."""
+    case = tmp_path / 'run'
+    case.mkdir()
+    monkeypatch.setattr(ea.ra, 'RUNS', tmp_path)
+    (case / 'case.json').write_text(json.dumps(dict(
+        configuration=dict(output_s=10800.0), grid=dict(dx_m=1000.0), build=dict(executable_sha256='ab' * 32),
+        electricity=dict(isaund=1, lightning=4, ground_m=-1.0, corona_v_m=0.0, leakage=0, substep_s=6.8))))
+    (case / 'cm1out_s.ctl').write_text('zdef 2 linear 0.5 1.0\n')
+    (case / 'input_grid_z').write_text('0.0\n1000.0\n2000.0\n')
+    (case / 'progress.json').write_text(json.dumps(dict(start_s=3600.0, segments=[
+        dict(model_s=7200.0, log='cm1_segment_001.log', executable='e1'),
+        dict(model_s=10800.0, log='cm1_segment_002.log', executable='e2'),
+        dict(model_s=14400.0, log='cm1_segment_003.log', executable='e2')])))
+    block = ('ctghsn,ctghsp = -1.00000E+00,  2.00000E+00\n'
+             'ctgsn,ctgsp = -1.00000E+00,  2.00000E+00\n'
+             'ctghwn,ctghwp = -5.00000E-01,  0.00000E+00\n')
+    for k, steps in ((1, (1, 2)), (2, (3, 4)), (3, (5, 6))):
+        (case / f'cm1_segment_00{k}.log').write_text(''.join(
+            block + f'             {s}              {3600.0 + 1800.0 * s:.6f} sec \n' for s in steps))
+    row = '{t:.1f} {s} 1 {kind} 0 0 8000.0 1e5 1e5 1.1 1e7 1 {qp} {qn} 2e9 1e9 5000.0 9000.0 4 1.0\n'
+    (case / 'terluna_flashes.txt').write_text('# header\n# run from 3600.0\n' + ''.join(
+        row.format(t=t, s=int(t // 60), kind=kind, qp=qp, qn=qn) for t, kind, qp, qn in (
+            (6000.0, 1, 10.0, 10.0), (8000.0, 1, 20.0, 20.0), (8100.0, 2, 0.0, 50.0), (12000.0, 1, 5.0, 5.0))))
+    (case / 'terluna_field.txt').write_text('# header\n# run from 3600.0\n' + ''.join(
+        f'{t:.1f} {int(t // 60)} {e:.1f} 0 0 0 10.0 -8.0 1e9 1e-12 1e-13\n' for t, e in ((7500.0, 1.2e5), (9000.0, 0.9e5))))
+    assert [s['executable'] for s in ea.window_segments(case, 7200.0, 10800.0)] == ['e2']
+    w = ea.window('run', 7200.0, 10800.0)
+    assert w['law'] == 'takahashi' and w['executables'] == ['e2'] and w['snapshots'] == []
+    assert w['lightning']['count'] == 2 and w['lightning']['hours_with_flashes'] == 1
+    assert w['lightning']['first_h'] == pytest.approx(800.0 / 3600.0)
+    assert w['lightning']['in_cloud']['count'] == 1 and w['lightning']['negative_to_ground']['negative_c']['max'] == 50.0
+    # steps 3 and 4 (9000 and 10800 s) are inside: the first counts no time, the second 1800 s
+    assert w['charge']['noninductive_c'] == pytest.approx(3.0 * 1800.0)                   # ctghs only, not ctgs again
+    assert w['charge']['inductive_c'] == pytest.approx(0.5 * 1800.0)
+    assert w['field']['e_max_kv_m'] == pytest.approx(120.0) and w['field']['negative_c_max'] == pytest.approx(8.0)
