@@ -31,6 +31,11 @@ calculation. Two kinds of number are approximate:
 - **Sea colours:** they assume open water in every direction. Where land rises behind the sea,
   the water just below the horizon also mirrors the land, as each scene notes.
 
+The supplemental [Nubium local-midnight view](README.md#nubium-at-local-midnight)
+uses a taller frame to include a nearly full Earth high above the sea. Its
+[human-vision display study](../../../visualization/sea-appearance/README.md#nubium-midnight-and-human-vision)
+is separate from the photographic colour convention used by the 24 frames below.
+
 ## Reading the scenes
 
 - **Generated illustrations** use an immersive, high-fidelity photographic treatment. Keep scene IDs,

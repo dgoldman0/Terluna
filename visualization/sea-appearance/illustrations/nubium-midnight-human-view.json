@@ -1,0 +1,495 @@
+{
+  "schema": "terluna.visualization.nubium-human-view/1",
+  "producer": {
+    "script": "visualization/sea-appearance/nubium_human_view.py",
+    "sha256": "1469a26393bdc6ab067f4240b1d1be32271e33161e10abe6e2eb24ab99e79cd5"
+  },
+  "inputs": {
+    "/tmp/nubium-reference-large/s_nubium__midnight.npz": "a45481a2b0f388b2810e6e74d11a9a206424570517be5f980a9a994b988e9bcc",
+    "/tmp/nubium-reference-large/scene-build.npz": "62bf53f6d8120f206d5be7ff2259bd41067d4ae23c832aa87fab373ca4c3f9f9",
+    "/home/kir/Documents/Projects/terluna-sea-appearance/research/studies/sea_appearance/results/nubium-midnight.json": "461d5db662fb82d40ba455d044bbc7e65bc968ca83b66f28b6871d3261eba405",
+    "/home/kir/Documents/Projects/terluna-sea-appearance/visualization/sea-appearance/nubium-earth-inputs.json": "a7c2ec2df36b2072f9f15950e27201fa50b6e1710d2d151b00af8784a191d0e1"
+  },
+  "evidence": "Existing sea path tracer XYZ with explicit lunar-gravity wave geometry, filtered facets, terrain shadows, water colour and aerial transport. Direct Earth is a geometrically projected historical NASA texture calibrated to the domain beam. Official Radiance pcond applies contrast sensitivity, acuity, veiling glare and mesopic colour response to the common physical-radiance input.",
+  "reading_rule": "One documented human-vision display approximation, not empirical validation of an Open Moon or a guarantee of a particular observer/device. The main wide view loses bright Earth detail in display clipping; this is not evidence that a person cannot resolve Earth. The Earth-fixation sensitivity retains more disk detail while darkening the sea. No single frame reproduces looking around and adapting. Fixed 2-m eye camera represents an offshore observer, not a solved standing platform. Clear molecular atmosphere and productive-water design guess; no lunar clouds or mature terrestrial ecology supplied. Spatial Earth spectra are a normalized RGB approximation; reflected Earth still uses the original uniform-disk model. User display luminance, surround, ocular characteristics and adaptation history are unknown.",
+  "sources": {
+    "method": "https://graphics.cs.yale.edu/sites/default/files/1997tvcg_hdr_tonemapping.pdf",
+    "manual": "https://radsite.lbl.gov/radiance/man_html/pcond.1.html",
+    "implementation": "https://github.com/LBNL-ETA/Radiance",
+    "implementation_commit": "bcffc2b52d99b908adfdc2543e4cddf83268a125"
+  },
+  "display": {
+    "command": [
+      "/tmp/nubium-radiance-build/bin/pcond",
+      "-h+",
+      "-u",
+      "100",
+      "-d",
+      "1000",
+      "-p",
+      ".64",
+      ".33",
+      ".30",
+      ".60",
+      ".15",
+      ".06",
+      ".3127",
+      ".3290",
+      "-x",
+      "/tmp/nubium-human-large/nubium-midnight-human-guide.curve.txt",
+      "/tmp/nubium-human-large/nubium-midnight-human-guide.xyze"
+    ],
+    "stderr": "",
+    "display_peak_cd_m2": 100,
+    "fixation_input": null,
+    "adaptation": "Uniform image sampling",
+    "operator_chose_linear_mapping": true,
+    "display_dynamic_range": 1000,
+    "display_primaries": "sRGB/D65",
+    "transfer_function": "exact piecewise sRGB",
+    "input_xyz_luminance_roundtrip_max_relative": 0.006035221429455267,
+    "input_xyz_roundtrip_error_per_largest_component": 0.003902570008953789,
+    "display_linear_rgb_range": [
+      0.0007801055908203125,
+      1.00390625
+    ],
+    "radiance_binaries": {
+      "pvalue": "12af1dfdd84a1b30f2ec6ce6f40e6bc707e4549c7fa258bb372bf484cf433b69",
+      "pcond": "bfb018b8045859422d2b55623be115158a56806dcd31c67f8fcfdfc2be309f8f",
+      "pfilt": "1678bbf8b677d03443ab7b06d818b603e18bba6962a1d95a04631f52b33fb4f4"
+    },
+    "output_sha256": "ed30c4eea57f0fdbb54308a96d5dc64595ed1cc23f818a1f45561c50244e907a"
+  },
+  "contrast100_sensitivity": {
+    "command": [
+      "/tmp/nubium-radiance-build/bin/pcond",
+      "-h+",
+      "-u",
+      "100",
+      "-d",
+      "100",
+      "-p",
+      ".64",
+      ".33",
+      ".30",
+      ".60",
+      ".15",
+      ".06",
+      ".3127",
+      ".3290",
+      "-x",
+      "/tmp/nubium-human-large/nubium-midnight-human-contrast100.curve.txt",
+      "/tmp/nubium-human-large/nubium-midnight-human-contrast100.xyze"
+    ],
+    "stderr": "",
+    "display_peak_cd_m2": 100,
+    "fixation_input": null,
+    "adaptation": "Uniform image sampling",
+    "operator_chose_linear_mapping": true,
+    "display_dynamic_range": 100,
+    "display_primaries": "sRGB/D65",
+    "transfer_function": "exact piecewise sRGB",
+    "input_xyz_luminance_roundtrip_max_relative": 0.006035221429455267,
+    "input_xyz_roundtrip_error_per_largest_component": 0.003902570008953789,
+    "display_linear_rgb_range": [
+      0.001384735107421875,
+      1.00390625
+    ],
+    "radiance_binaries": {
+      "pvalue": "12af1dfdd84a1b30f2ec6ce6f40e6bc707e4549c7fa258bb372bf484cf433b69",
+      "pcond": "bfb018b8045859422d2b55623be115158a56806dcd31c67f8fcfdfc2be309f8f",
+      "pfilt": "1678bbf8b677d03443ab7b06d818b603e18bba6962a1d95a04631f52b33fb4f4"
+    },
+    "output_sha256": "fe7f6e4bdfd3109b9dbde31ff48fdc582b0334897c71b7365be08700e4fa70ed"
+  },
+  "earth_fixation_sensitivity": {
+    "command": [
+      "/tmp/nubium-radiance-build/bin/pcond",
+      "-i",
+      "1",
+      "-h+",
+      "-u",
+      "100",
+      "-d",
+      "1000",
+      "-p",
+      ".64",
+      ".33",
+      ".30",
+      ".60",
+      ".15",
+      ".06",
+      ".3127",
+      ".3290",
+      "-x",
+      "/tmp/nubium-human-large/nubium-midnight-earth-fixation.curve.txt",
+      "/tmp/nubium-human-large/nubium-midnight-earth-fixation.xyze"
+    ],
+    "stderr": "",
+    "display_peak_cd_m2": 100,
+    "fixation_input": "1026 2757\n",
+    "adaptation": "Earth-centred fixation only; sensitivity case, not a measured gaze history",
+    "operator_chose_linear_mapping": true,
+    "display_dynamic_range": 1000,
+    "display_primaries": "sRGB/D65",
+    "transfer_function": "exact piecewise sRGB",
+    "input_xyz_luminance_roundtrip_max_relative": 0.006035221429455267,
+    "input_xyz_roundtrip_error_per_largest_component": 0.003902570008953789,
+    "display_linear_rgb_range": [
+      9.685754776000977e-06,
+      1.00390625
+    ],
+    "radiance_binaries": {
+      "pvalue": "12af1dfdd84a1b30f2ec6ce6f40e6bc707e4549c7fa258bb372bf484cf433b69",
+      "pcond": "bfb018b8045859422d2b55623be115158a56806dcd31c67f8fcfdfc2be309f8f",
+      "pfilt": "1678bbf8b677d03443ab7b06d818b603e18bba6962a1d95a04631f52b33fb4f4"
+    },
+    "output_sha256": "ef26a2dc7ca97f70f7d5afa60c71d864cce6b2aba6c5fed81265a4e3b42e8ee3"
+  },
+  "earth_focused_view": {
+    "camera": {
+      "lon_lat_deg": [
+        -11.93108,
+        -28.1085
+      ],
+      "note": "1.5 km off the west shore of the island on which the wave grid's shore point falls",
+      "eye_height_m": 2.0,
+      "view_azimuth_deg": 22.084568440477096,
+      "pitch_deg": 53.24812780241986,
+      "horizontal_fov_deg": 10.0,
+      "vertical_fov_deg": 10.0,
+      "frame": [
+        1024,
+        1024
+      ],
+      "horizon_row_at_centre": 8373.33641543374,
+      "horizon_dip_deg": 0.0869
+    },
+    "display": {
+      "command": [
+        "/tmp/nubium-radiance-build/bin/pcond",
+        "-i",
+        "1",
+        "-h+",
+        "-u",
+        "100",
+        "-d",
+        "1000",
+        "-p",
+        ".64",
+        ".33",
+        ".30",
+        ".60",
+        ".15",
+        ".06",
+        ".3127",
+        ".3290",
+        "-x",
+        "/tmp/nubium-human-large/nubium-midnight-earth-focused.curve.txt",
+        "/tmp/nubium-human-large/nubium-midnight-earth-focused.xyze"
+      ],
+      "stderr": "",
+      "display_peak_cd_m2": 100,
+      "fixation_input": "512 511\n",
+      "adaptation": "Earth-centred fixation only; sensitivity case, not a measured gaze history",
+      "operator_chose_linear_mapping": true,
+      "display_dynamic_range": 1000,
+      "display_primaries": "sRGB/D65",
+      "transfer_function": "exact piecewise sRGB",
+      "input_xyz_luminance_roundtrip_max_relative": 0.010543658808039426,
+      "input_xyz_roundtrip_error_per_largest_component": 0.003840686039360101,
+      "display_linear_rgb_range": [
+        0.00151824951171875,
+        1.00390625
+      ],
+      "radiance_binaries": {
+        "pvalue": "12af1dfdd84a1b30f2ec6ce6f40e6bc707e4549c7fa258bb372bf484cf433b69",
+        "pcond": "bfb018b8045859422d2b55623be115158a56806dcd31c67f8fcfdfc2be309f8f",
+        "pfilt": "1678bbf8b677d03443ab7b06d818b603e18bba6962a1d95a04631f52b33fb4f4"
+      },
+      "output_sha256": "33e9687cd57ecf76c52f10d3bab65a006051b78139cde2e6b1ee529903873a7e"
+    },
+    "earth_diameter_deg": 1.8037750248690034,
+    "earth_disk_dimensions_px": [
+      184.25266874755357,
+      184.25266874755414
+    ],
+    "matched_viewing_distance_per_image_width": 5.7150261513806715,
+    "reading_rule": "10-degree square angular crop centred on Earth, with Earth-centred display adaptation. Not a telescope or a larger physical Earth. The sea horizon is 53 degrees below Earth and must not appear in this view. Historical clouds are illustrative; resolving all rendered detail with an unaided eye is not established."
+  },
+  "camera": {
+    "lon_lat_deg": [
+      -11.93108,
+      -28.1085
+    ],
+    "note": "1.5 km off the west shore of the island on which the wave grid's shore point falls",
+    "eye_height_m": 2.0,
+    "view_azimuth_deg": 22.0,
+    "pitch_deg": 16.0,
+    "horizontal_fov_deg": 65.0,
+    "vertical_fov_deg": 87.4,
+    "frame": [
+      2048,
+      3072
+    ],
+    "horizon_row_at_centre": 1999.5306666666665,
+    "horizon_dip_deg": 0.0869
+  },
+  "matched_viewing_distance_per_image_width": 0.7848427885587451,
+  "earth_normal_illuminance_xyz": [
+    2.5061856772625233,
+    2.5640533065907154,
+    1.1863927985477627
+  ],
+  "integrated_texture_xyz": [
+    2.506185677262518,
+    2.564053306590709,
+    1.1863927985477554
+  ],
+  "earth_integral_max_relative_error": 6.1762613288747456e-15,
+  "sea_luminance_percentiles": [
+    0.05334349572658539,
+    0.13043445348739624,
+    0.3105468481779098
+  ],
+  "sea_standard_error_percentiles": [
+    0.011931166984140873,
+    0.037434899061918256,
+    0.07637207597494143
+  ],
+  "render": {
+    "coast": "S Nubium",
+    "moment": "midnight",
+    "hour": 1381.0,
+    "date_tt": 2465489.6162088793,
+    "camera_lon_lat": [
+      -11.93108,
+      -28.1085
+    ],
+    "camera_note": "1.5 km off the west shore of the island on which the wave grid's shore point falls",
+    "eye_height_m": 2.0,
+    "view_azimuth_deg": 22.0,
+    "view_pitch_deg": 16.0,
+    "horizontal_fov_deg": 65.0,
+    "width": 2048,
+    "height": 3072,
+    "sun": {
+      "elevation_deg": -60.566,
+      "azimuth_deg": 180.85
+    },
+    "earth": {
+      "elevation_deg": 53.248,
+      "azimuth_deg": 22.08,
+      "phase_angle_deg": 13.49,
+      "lit_fraction": 0.986
+    },
+    "sea": {
+      "spectrum": "nearside wave run, restart file at hour 1392 (+11 h)",
+      "spectrum_file": "research/runs/waves/nearside/dt300/s1344_1392/end.hot",
+      "depth_m": 101.45,
+      "friction_velocity_m_s": 0.1325,
+      "wind_toward_deg": 130.3,
+      "wind_10m_m_s": 3.59,
+      "peak_period_s": 10.28,
+      "significant_height_m": 0.604,
+      "seed": 20380307,
+      "tiles": [
+        {
+          "size_m": 2048.0,
+          "cells": 2048,
+          "wavelengths_m": [
+            4.0,
+            null
+          ],
+          "choppy": true,
+          "slope_covariance_expected": [
+            [
+              0.002827,
+              -0.00103
+            ],
+            [
+              -0.00103,
+              0.002988
+            ]
+          ],
+          "slope_covariance_drawn": [
+            [
+              0.002633,
+              -0.000959
+            ],
+            [
+              -0.000959,
+              0.002776
+            ]
+          ]
+        },
+        {
+          "size_m": 131.0,
+          "cells": 1024,
+          "wavelengths_m": [
+            0.5117,
+            4.0
+          ],
+          "choppy": true,
+          "slope_covariance_expected": [
+            [
+              0.004535,
+              -0.001095
+            ],
+            [
+              -0.001095,
+              0.004737
+            ]
+          ],
+          "slope_covariance_drawn": [
+            [
+              0.004386,
+              -0.001069
+            ],
+            [
+              -0.001069,
+              0.004632
+            ]
+          ]
+        },
+        {
+          "size_m": 13.7,
+          "cells": 1024,
+          "wavelengths_m": [
+            0.0535,
+            0.512
+          ],
+          "choppy": false,
+          "slope_covariance_expected": [
+            [
+              0.003086,
+              -0.000372
+            ],
+            [
+              -0.000372,
+              0.003208
+            ]
+          ],
+          "slope_covariance_drawn": [
+            [
+              0.003098,
+              -0.000379
+            ],
+            [
+              -0.000379,
+              0.003223
+            ]
+          ]
+        },
+        {
+          "size_m": 1.43,
+          "cells": 1024,
+          "wavelengths_m": [
+            0.0056,
+            0.054
+          ],
+          "choppy": false,
+          "slope_covariance_expected": [
+            [
+              0.002477,
+              -0.000339
+            ],
+            [
+              -0.000339,
+              0.002588
+            ]
+          ],
+          "slope_covariance_drawn": [
+            [
+              0.002517,
+              -0.000289
+            ],
+            [
+              -0.000289,
+              0.002613
+            ]
+          ]
+        }
+      ],
+      "residual_covariance": [
+        [
+          0.0,
+          -0.0
+        ],
+        [
+          -0.0,
+          0.0
+        ]
+      ],
+      "mean_square_slope": 0.02588
+    },
+    "land": {
+      "source": "Archived LOLA altimetry raster (256 pixels per degree, about 118 m spacing, with interpolation where coverage is incomplete) above the degree-200 GRAIL geoid, relative to the atlas's common sea level at its selected water share. Static flooded rock: beaches, sediment, erosion and vegetation are not modelled.",
+      "terrain_sha256": "a7f856e24b142978e3b2464838b7f7fefafca9f3d21df2e56f51d305c88a5dfb",
+      "tide_m": -3.094,
+      "land_soil": "Apollo 12 mare soil, Oceanus Procellarum",
+      "land_albedo_by_band": [
+        0.0571,
+        0.064,
+        0.071,
+        0.0768,
+        0.0824,
+        0.088,
+        0.0936,
+        0.1011
+      ]
+    },
+    "water": "productive_coast",
+    "water_leaving_nadir_cd_m2": 0.01013,
+    "identity": "2ae1a6e5bdd38b8adf12a878c1bc340c5562eb4f7a9cb529928c882ae056d94d",
+    "spp": 4,
+    "seconds": 262.1,
+    "stars": {
+      "catalogue": "Yale Bright Star Catalogue, 5th Revised Ed. (Hoffleit & Warren 1991)",
+      "faintest_v": 6.5,
+      "drawn": 492,
+      "above_terrain_and_sea": 4301,
+      "brightest_v_and_lux": [
+        [
+          -0.04,
+          4.05e-07
+        ],
+        [
+          0.98,
+          3.36e-07
+        ],
+        [
+          1.77,
+          1.5e-08
+        ],
+        [
+          1.86,
+          1.2e-08
+        ],
+        [
+          2.14,
+          1.24e-07
+        ]
+      ],
+      "note": "point images of 0.6-pixel Gaussian spots; no reflections in the water"
+    },
+    "renderer_sources": {
+      "kernels.py": "56d2fed7b3ee79091601e560a8188dcb500a1b47d7908a7941889a8a636f63df",
+      "scene.py": "0f528772eb2ae4254fe17673f93f3f84fc0c02a973dfca0e33de4985e70cd08c",
+      "render.py": "941cde839c92fa9752a55566b02c19b962f7605fea43197307aad4a72fcedefd",
+      "stars.py": "c7d010a9e657068157c9472abbe10192de495f5b9b0b714ef3706e9b5029f914"
+    },
+    "inputs": {
+      "research/studies/sea_appearance/results/regimes.json": "1b6b778e5a4d9f330373e91fa7c21c4e4cff421b69f0db9a43b92d920a8a983d",
+      "research/studies/sea_appearance/results/sea_slopes.npz": "aef6bcd9c97c668488fb23af58004b70bd4ec0974e9a190922be1a7a654bda2a",
+      "climate/waves/results/shore_month.json": "3146512489646be0c0868697d2eafbd9998e1c0c390f49207c0fbb4a024efc75",
+      "geography/products/tides_28pct_4ppd.npz": "56529233b8ce20685691174381ab5c32d35e9092819e61fc5cdb42293a536777",
+      "biosphere/living_water/waters.json": "bdf2a5dede623718921e367db11cd6eef95f8d67e944a6cbf277bddd2f962734",
+      "illumination/stars/bright_stars.json": "85b33855fa6e06db6eb3d2447460d4bc6349990cbd033f4848a69d4dc1765d7d",
+      "research/studies/sea_appearance/results/lighting_calendar.json": "b76f394595eb0c89487c4208eedc4e9a6d1eff3af72bf63bdb79883920b2f674",
+      "research/runs/optical_comfort/spherical/moon_1.2atm_standard.npz": "d6d7fef07d99fedf32d1a54f63e345ff245bf3ee8ec29a33d498fd621bf41273",
+      "research/studies/sea_appearance/results/nubium-midnight.json": "461d5db662fb82d40ba455d044bbc7e65bc968ca83b66f28b6871d3261eba405",
+      "visualization/sea-appearance/nubium_reference.py": "a6e7c7eb172ee8feaf2e5b87a726de047cfc8e83e3148855836b40dd85fd8f9a"
+    }
+  }
+}

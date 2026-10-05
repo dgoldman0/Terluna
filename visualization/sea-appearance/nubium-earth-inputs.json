@@ -1,0 +1,59 @@
+{
+  "schema": "terluna.visualization.external-earth-inputs/1",
+  "evidence": "Historical NASA texture maps and one saved NASA/JPL Horizons geometry record.",
+  "reading_rule": "Hash check all bytes before use. Texture is a photographic prior with Lambert shading and a display RGB atmospheric transfer. No spatial spectral radiance or future weather is supplied. External raw maps stay in ignored build storage.",
+  "rights_review": {
+    "source": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+    "checked": "2026-10-04",
+    "basis": "NASA media guidelines generally permit educational/informational use including computer graphical simulations; source pages identify NASA/GSFC credits and no separate copyright restriction on these assets. Credits retained in this manifest and the illustration record, not baked into the image."
+  },
+  "files": [
+    {
+      "filename": "nubium-earth-bluemarble-2048.png",
+      "url": "https://svs.gsfc.nasa.gov/vis/a000000/a002900/a002915/bluemarble-2048.png",
+      "source_page": "https://svs.gsfc.nasa.gov/2915/",
+      "credit": "NASA/Goddard Space Flight Center Scientific Visualization Studio; Reto Stockli (NASA/GSFC) and NASA Earth Observatory",
+      "reading_rule": "Historical cloud-free map, surface observations June\u2013September 2001 according to the source page. Not a March 2038 surface or climate prediction.",
+      "sha256": "ae6214b078ed0864c96f74bcb10ae3021f6eb116f8059797efe0fa9ea8b89d35",
+      "bytes": 1511379
+    },
+    {
+      "filename": "nubium-earth-clouds-2048.jpg",
+      "url": "https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57747/cloud_combined_2048.jpg",
+      "source_page": "https://visibleearth.nasa.gov/images/57747/blue-marble-clouds/77558l",
+      "credit": "NASA Goddard Space Flight Center; Reto Stoeckli (clouds)",
+      "reading_rule": "Historical Blue Marble composite: two days of visible observations and a third day of thermal infrared imagery over the poles. Illustrative cloud prior, not weather predicted for 2038.",
+      "sha256": "daddaad84d7a33bbbc86cdda3f591099f57cee8607b7bcf3b67eb7e4f7a1c793",
+      "bytes": 829367
+    },
+    {
+      "filename": "nubium-horizons.txt",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27399%27&OBJ_DATA=%27YES%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%27-11.9310812185%2C-28.1084996468%2C0.002%27&TLIST=%272465489.6162088793%27&TIME_TYPE=%27TT%27&QUANTITIES=%271%2C4%2C10%2C13%2C14%2C15%2C16%2C17%2C24%2C32%2C34%27&CSV_FORMAT=%27YES%27&ANG_FORMAT=%27DEG%27&EXTRA_PREC=%27YES%27",
+      "source_page": "https://ssd.jpl.nasa.gov/horizons/manual.html",
+      "credit": "NASA/JPL Horizons",
+      "reading_rule": "DE441, ITRF93 Earth, MEAN_ME lunar observer. TT date, airless directions; future Earth orientation is an extrapolation beyond the reported EOP interval.",
+      "sha256": "8a868647ed147675c6de504b506c74993935237957fa1c810ec51fa143e2b1c6",
+      "bytes": 14298
+    }
+  ],
+  "horizons": {
+    "jd_tt": 2465489.6162088793,
+    "time_tt": "2038-03-07 02:47:20.447",
+    "observer_moon_lon_lat_height_km": [
+      -11.9310812185,
+      -28.1084996468,
+      0.002
+    ],
+    "subobserver_lon_east_deg": 154.851171,
+    "subobserver_lat_deg": -4.836515,
+    "subsolar_lon_east_deg": 141.218777,
+    "subsolar_lat_deg": -5.31529,
+    "north_pole_ra_deg": 359.60959,
+    "north_pole_dec_deg": 89.78922,
+    "elevation_deg": 53.217154305,
+    "azimuth_deg": 22.031997685,
+    "lit_fraction": 0.9860058,
+    "phase_angle_deg": 13.5927,
+    "angular_equatorial_diameter_arcsec": 6523.441
+  }
+}

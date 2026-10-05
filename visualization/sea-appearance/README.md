@@ -80,3 +80,84 @@ time integration. Its sidecars state these limits and compare the wave moments.
 ```sh
 OPENBLAS_NUM_THREADS=1 python visualization/sea-appearance/wp6_guides.py --water-structure
 ```
+
+
+## Nubium midnight and human vision
+
+The supplemental [scene product](../../research/studies/sea_appearance/results/nubium-midnight.json)
+puts nearly full Earth 53.25° above southern Nubium at the hourly minimum of the
+Sun's elevation. A 65° by 87.4° portrait includes both Earth and the sea. Earth's
+1.804° diameter becomes about 64 by 80 pixels in a 2048 by 3072 rectilinear frame;
+the off-axis projection stretches its vertical dimension. A thumbnail compresses
+this entire angular window. At matched scale Earth is about 3.67 times the Moon's
+diameter at equal distance, regardless of the canvas resolution.
+
+[nubium_reference.py](nubium_reference.py) supplies this supplemental scene to
+the existing [sea reference tracer](../reference-renderer/seas/README.md). It uses
+the full wave cascades, filtered facets, wave occlusion and interreflection,
+terrain lighting and spherical-atmosphere transport. It saves XYZ radiance,
+sampling errors, material masks and source hashes. The camera is offshore, 2 m
+above the instantaneous long-wave surface; a standing platform is not modelled.
+
+[nubium_human_view.py](nubium_human_view.py) projects the NASA maps with JPL
+Horizons orientation and normalizes their integrated RGB-derived XYZ to the
+calculated direct Earth illuminance. This replaces only the direct uniform disk;
+water reflection still uses the tracer's uniform-Earth approximation. The
+[external-input manifest](nubium-earth-inputs.json) records exact URLs, hashes,
+credits, rights review and the saved Horizons query. Maps are historical texture
+priors, not predicted March 2038 weather or spatially resolved spectral radiance.
+Raw inputs stay in ignored `results/earth-inputs/`; mismatched hashes fail.
+
+The common physical-radiance image is passed through the official Radiance
+`pcond -h+` implementation: contrast sensitivity, mesopic colour loss, acuity and
+veiling glare. The declared display is sRGB/D65, 100 cd/m² peak, 1000:1 contrast;
+a 100:1 sensitivity view is also saved. A separate Earth-fixation sensitivity and
+10° Earth-centred window show why one screen frame cannot represent looking
+around and adapting. The main wide-view operator chooses a linear mapping and
+clips the disk's bright detail. **That clipping does not establish that a person
+would see a featureless Earth.** Display, gaze, observer and adaptation history
+remain uncertain. The narrower view cannot include a horizon 53° below Earth.
+
+The method is Ward Larson, Rushmeier and Piatko (1997),
+[A Visibility Matching Tone Reproduction Operator for High Dynamic Range Scenes](https://graphics.cs.yale.edu/sites/default/files/1997tvcg_hdr_tonemapping.pdf),
+implemented by [Radiance](https://github.com/LBNL-ETA/Radiance) at commit
+`bcffc2b52d99b908adfdc2543e4cddf83268a125`; see the
+[pcond manual](https://radsite.lbl.gov/radiance/man_html/pcond.1.html).
+These are display-model assumptions, not a new domain model or empirical
+validation of an Open Moon. Source reading and numerical checks do not replace
+perceptual validation.
+
+```sh
+# Use an environment with numpy, scipy, Pillow and numba; restrict worker threads.
+NUMBA_NUM_THREADS=2 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 <environment>/bin/python visualization/sea-appearance/nubium_reference.py --out visualization/sea-appearance/results/nubium-reference --width 2048 --spp-side 2
+NUMBA_NUM_THREADS=2 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 <environment>/bin/python visualization/sea-appearance/nubium_human_view.py --render visualization/sea-appearance/results/nubium-reference/s_nubium__midnight.npz --build visualization/sea-appearance/results/nubium-reference/scene-build.npz --assets visualization/sea-appearance/results/earth-inputs --radiance-bin <Radiance-build>/bin --out visualization/sea-appearance/results/nubium-human
+python visualization/sea-appearance/nubium_scale.py --out visualization/sea-appearance/results/nubium-human/nubium-scale.html
+```
+
+Build the official Radiance `pvalue`, `pfilt` and `pcond` executables from that
+revision with a headless CMake build. Restore the three manifest inputs to the
+named asset directory before running. The wrapper caches a completed scene build
+and resumes rendering by row blocks. Keep a separate output directory for each
+resolution/sample configuration, and never change sampling while partial row
+blocks exist: the upstream tracer's partial-block reader does not enforce that
+identity itself.
+
+[nubium_scale.py](nubium_scale.py) writes a standalone interactive size comparison.
+Its equal-field panels show geometric disks only, without labels inside them or
+claims about the supplied Moon photograph's unknown lens, crop and glare.
+[nubium_guides.py](nubium_guides.py) retains the earlier quick composition/wave
+references and separately exposed Earth experiment. Those photographic guides
+are preparatory work, not the accepted naked-eye treatment.
+
+Selected images and their evidence/review records live in
+[illustrations/](illustrations/README.md). The AI passes were reviewed for
+composition, size, lighting, reflection distribution and waves. The generator
+changed the geometry and returned 1024 by 1536 even when 2048 by 3072 was
+requested; those outputs are retained as illustration candidates, not certified
+physical views. The larger calculated rendering preserves the specified geometry.
+
+The three focused view checks run with
+`TERLUNA_RADIANCE_BIN=<Radiance-build>/bin python -m pytest visualization/sea-appearance/test_nubium_view.py`.
+Without that environment variable the external Radiance conversion check skips;
+geometry and midnight selection still run. The existing sea-kernel tests require
+numba and were run separately from `make check`.

@@ -1,0 +1,199 @@
+{
+  "schema": "terluna.visualization.nubium-rendering/1",
+  "created_date": "2026-10-04",
+  "scene": "Southern Mare Nubium, supplemental local midnight",
+  "scene_product": "../../../research/studies/sea_appearance/results/nubium-midnight.json",
+  "scene_product_sha256": "461d5db662fb82d40ba455d044bbc7e65bc968ca83b66f28b6871d3261eba405",
+  "method": "Existing numerical sea tracer, historically textured Earth calibrated to physical direct illuminance, and official Radiance human-vision display conditioning. Nine built-in image_gen passes were inspected separately. Generated PNG bytes are preserved without programmatic image editing; the primary larger image is a fresh numerical render, not an upscaled AI file.",
+  "primary": {
+    "file": "nubium-midnight-human-view.png",
+    "sha256": "ed30c4eea57f0fdbb54308a96d5dc64595ed1cc23f818a1f45561c50244e907a",
+    "native_dimensions_px": [
+      2048,
+      3072
+    ],
+    "renderer_record": "nubium-midnight-human-view.json"
+  },
+  "generated_candidate": {
+    "file": "nubium-midnight-generated-candidate.png",
+    "sha256": "8bc3d0c25c5b38fcd4b0e248da65895e11469a19205f9a6c0921d1c74d238e5f",
+    "pass": 9,
+    "native_dimensions_px": [
+      1024,
+      1536
+    ]
+  },
+  "first_attempt": {
+    "file": "nubium-midnight-first-attempt.png",
+    "sha256": "dfabc66828d70125c9d695e8b9584bf17c1f442267a03b8c7753a47d7f0a7535",
+    "pass": 2,
+    "disposition": "Rejected photographic treatment, preserved so it is not lost."
+  },
+  "external_inputs": {
+    "schema": "terluna.visualization.external-earth-inputs/1",
+    "evidence": "Historical NASA texture maps and one saved NASA/JPL Horizons geometry record.",
+    "reading_rule": "Hash check all bytes before use. Texture is a photographic prior with Lambert shading and a display RGB atmospheric transfer. No spatial spectral radiance or future weather is supplied. External raw maps stay in ignored build storage.",
+    "rights_review": {
+      "source": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "checked": "2026-10-04",
+      "basis": "NASA media guidelines generally permit educational/informational use including computer graphical simulations; source pages identify NASA/GSFC credits and no separate copyright restriction on these assets. Credits retained in this manifest and the illustration record, not baked into the image."
+    },
+    "files": [
+      {
+        "filename": "nubium-earth-bluemarble-2048.png",
+        "url": "https://svs.gsfc.nasa.gov/vis/a000000/a002900/a002915/bluemarble-2048.png",
+        "source_page": "https://svs.gsfc.nasa.gov/2915/",
+        "credit": "NASA/Goddard Space Flight Center Scientific Visualization Studio; Reto Stockli (NASA/GSFC) and NASA Earth Observatory",
+        "reading_rule": "Historical cloud-free map, surface observations June\u2013September 2001 according to the source page. Not a March 2038 surface or climate prediction.",
+        "sha256": "ae6214b078ed0864c96f74bcb10ae3021f6eb116f8059797efe0fa9ea8b89d35",
+        "bytes": 1511379
+      },
+      {
+        "filename": "nubium-earth-clouds-2048.jpg",
+        "url": "https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57747/cloud_combined_2048.jpg",
+        "source_page": "https://visibleearth.nasa.gov/images/57747/blue-marble-clouds/77558l",
+        "credit": "NASA Goddard Space Flight Center; Reto Stoeckli (clouds)",
+        "reading_rule": "Historical Blue Marble composite: two days of visible observations and a third day of thermal infrared imagery over the poles. Illustrative cloud prior, not weather predicted for 2038.",
+        "sha256": "daddaad84d7a33bbbc86cdda3f591099f57cee8607b7bcf3b67eb7e4f7a1c793",
+        "bytes": 829367
+      },
+      {
+        "filename": "nubium-horizons.txt",
+        "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27399%27&OBJ_DATA=%27YES%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%27-11.9310812185%2C-28.1084996468%2C0.002%27&TLIST=%272465489.6162088793%27&TIME_TYPE=%27TT%27&QUANTITIES=%271%2C4%2C10%2C13%2C14%2C15%2C16%2C17%2C24%2C32%2C34%27&CSV_FORMAT=%27YES%27&ANG_FORMAT=%27DEG%27&EXTRA_PREC=%27YES%27",
+        "source_page": "https://ssd.jpl.nasa.gov/horizons/manual.html",
+        "credit": "NASA/JPL Horizons",
+        "reading_rule": "DE441, ITRF93 Earth, MEAN_ME lunar observer. TT date, airless directions; future Earth orientation is an extrapolation beyond the reported EOP interval.",
+        "sha256": "8a868647ed147675c6de504b506c74993935237957fa1c810ec51fa143e2b1c6",
+        "bytes": 14298
+      }
+    ],
+    "horizons": {
+      "jd_tt": 2465489.6162088793,
+      "time_tt": "2038-03-07 02:47:20.447",
+      "observer_moon_lon_lat_height_km": [
+        -11.9310812185,
+        -28.1084996468,
+        0.002
+      ],
+      "subobserver_lon_east_deg": 154.851171,
+      "subobserver_lat_deg": -4.836515,
+      "subsolar_lon_east_deg": 141.218777,
+      "subsolar_lat_deg": -5.31529,
+      "north_pole_ra_deg": 359.60959,
+      "north_pole_dec_deg": 89.78922,
+      "elevation_deg": 53.217154305,
+      "azimuth_deg": 22.031997685,
+      "lit_fraction": 0.9860058,
+      "phase_angle_deg": 13.5927,
+      "angular_equatorial_diameter_arcsec": 6523.441
+    }
+  },
+  "review": "nubium-midnight-review.json",
+  "passes": [
+    {
+      "pass": 1,
+      "prompt": "Create an unlabelled high fidelity photographic Earth component for a carefully constrained scientific landscape composite. Use the attached calculated globe as the exact geographical and orientation reference: visible western Pacific, Australia at right above centre with its current rotation, Southeast Asia toward lower right, north direction toward lower left. Keep this face, rotation, sphere diameter and centre. Earth is 98.6 percent illuminated: virtually full, with only a very narrow unlit upper-left limb. The supplied reference is a deliberately simple map projection with historical NASA cloud textures, approximate Lambert shading, and the warm atmospheric filter of a 1.2-atm lunar atmosphere. Give it a natural photographic finish: softly luminous warm ivory/golden cloud fields with delicate swirling weather structure over muted dark blue-green ocean and warm brown/green Australian land. Preserve the geographic shapes and broad cloud structures. Increase its photographic exposure enough to make it look like a bright Earth in the sky, while retaining cloud and land/ocean differentiation everywhere; detailed highlights, no featureless yellow ball, no scorched or volcanic texture. A restrained HDR treatment is intended, not a prediction of a single camera exposure. Keep the plain slate-blue background and square composition. Crisp fine detail without oversharpened grit; a barely perceptible atmospheric limb, no giant halo, no flare rays. No stars, labels, text, watermark, borders, inset panels or extra objects. This will be placed much smaller into the finished landscape in a later pass; do not add a landscape now.",
+      "file": "../results/illustrations/nubium-passes/01.png",
+      "sha256": "55d4f2cbcdce84ed75a9edce4d15414580c297601747bcfbd623426fadec3129",
+      "native_dimensions_px": [
+        1254,
+        1254
+      ],
+      "disposition": "Historical-map Earth component; separately exposed photographic experiment."
+    },
+    {
+      "pass": 2,
+      "prompt": "Generate one immersive, exceptionally high fidelity photographic landscape, a TALL PORTRAIT 2:3 image, no text anywhere. This is the southern Mare Nubium sea on an atmosphere-bearing Moon at local midnight, with almost full Earth high overhead. Use reference 1 as the authoritative composition AND wave-shape plate. Reference 2 is the calculated average colour/framing plate. Reference 3 is a separately rendered detailed Earth component to composite at the SMALL calculated position, NOT its large reference scale.\n\nPrecise layout normalized to the full output: perfectly level sea horizon at y=65.09% of image height. Earth centre x=50.08%, y=10.22%; visible full disk width=3.108% of total image width, height=2.600% of total image height. These width/height differences follow a wide-angle rectilinear lens, no reframing or zoom. Earth angular diameter is only 1.804 degrees. It is 98.6% illuminated with a tiny upper-left dark limb. Preserve Australia/western Pacific face and the unusual rotation from reference 3, and visible cloud/ocean/continent patterns. The finished disk should be luminous warm cream/ivory with subdued teal and earthy patches, highlights protected by deliberate exposure blending. A tiny soft optical edge is sufficient, no Sun-like white blank disk and no broad corona.\n\nThe sky is CLEAR, smooth slate blue above, gradually muted blue-grey toward the horizon, following the calculated plate exactly in brightness and hue: approximate upper RGB 78,106,133 and near-horizon RGB 91,104,106. This is earthlit night rendered as an exposed photograph, not a daylight scene. No clouds in the lunar sky, no Milky Way, no star field, no pink sunset glow or rim illumination from the Sun. Sun is 60.5 degrees below the horizon. The very slight coast is only a narrow low sliver touching the extreme right horizon, starting around x=89% and rising less than 0.5% of image height at the right edge. It is distant low land, about 1.3 km away, faintly lit from high ahead. Keep the rest of the horizon open sea. No imposing mountains, shore foreground, buildings, boats, figures, vegetation close to camera or artificial objects.\n\nEye is 2 metres above water; camera bearing 22 degrees, pitched up 16 degrees, horizontal field of view 65 degrees. Water occupies the lower 34.9%. Build convincing non-repeating irregular waves following the geometry plate: significant height 0.626 m, dominant wavelength 27.33 m and period 10.28 seconds at lunar gravity, broad smooth rounded swells with finer short ripples driven by 3.59 m/s wind; wave travel toward NW, 63 degrees left of camera forward. Keep coherent fine ripple trains draped over larger smooth wave bodies, correct shrinking scale toward the horizon, subtle Fresnel brightening at grazing angles, deep grey-blue troughs, restrained reflected sky, naturally soft depth and no storm foam or white surf. It is textured liquid, never wrinkled foil, gritty gravel, or repetitive parallel sculpted ribbons. Actual Earth glitter is mostly toward the very bottom foreground because Earth is high; just a few isolated warm glints there. No bright vertical road from Earth to the horizon, no reflection of a low Sun. Match the sea's subdued grey-blue brightness from reference 1; subtle photographic contrast and rich resolved surface texture. No labels, captions, watermark, borders, collage seams, thumbnails or explanatory graphic elements. Final image is a single clean immersive photograph, with careful physical scale and a polished natural photographic finish.",
+      "file": "../results/illustrations/nubium-passes/02.png",
+      "sha256": "dfabc66828d70125c9d695e8b9584bf17c1f442267a03b8c7753a47d7f0a7535",
+      "native_dimensions_px": [
+        1024,
+        1536
+      ],
+      "disposition": "First Nubium composite preserved; rejected for naked-eye use."
+    },
+    {
+      "pass": 3,
+      "prompt": "Refine reference 1, keeping its beautiful photographic sea, precise horizon, portrait 2:3 framing, small right-hand coast, camera position, and clear smooth sky. Reference 2 is the calculated geometric and tonal target. Make these specific corrections only, as a clean high fidelity final composite:\n\n1. Earth is too large. At the 1024 x 1536 output size its current disk is about 48 x 49 pixels centred (514,157). REPLACE it with a SMALLER disk exactly about 32 pixels wide and 40 pixels high, centred (513,157). This mild vertical elongation is the correct off-axis rectilinear-lens projection. Width is 3.108% of full image width; height is 2.60% of full image height. Keep the same 98.6%-lit phase, tiny upper-left dark edge, western-Pacific/Australia geography, unusual rotation, finely visible ivory cloud detail, subdued ocean and warm land patches. Blend the cleared border back into the surrounding sky with no rectangular patch. Keep Earth visibly luminous and textured. Do not turn it into a white light, enlarge it, move it or add a corona.\n\n2. The water is somewhat too dark and contrasty versus the calculation. Lift the sea's broad midtone brightness gently, maintaining dark troughs and all natural wave detail: middle sea roughly RGB 50,62,68 on average, and near foreground approximately RGB 40,49,52, with brighter reflected-sky facets. Keep broad 0.6-m smooth swells and fine coherent ripples. No plastic sheen, stippling, whitecaps or foamy crests.\n\n3. Remove about 85 percent of the warm sparkles. Retain only a few isolated tiny warm glints in the lowest 8 percent of the frame, mostly within x=30\u201358 percent, fading elsewhere. Earth is 53 degrees high: its primary mirror reflection is outside this upward-looking frame. No glimmering path reaching toward the horizon. All other water highlights are subdued blue-grey reflections of sky.\n\nKeep horizon y=65.09% and the extreme-right coast no higher than 0.5% of the total image height. Preserve the quiet atmospheric slate-blue gradient. No clouds, star field, structures, text, labels, captions, borders, watermark or montage divisions. Natural exposure-blended photographic finish, maximum available image quality.",
+      "file": "../results/illustrations/nubium-passes/03.png",
+      "sha256": "6ad2e79389c933b96306578776c36dc771fe46626841e99ebaf96643341b8a84",
+      "native_dimensions_px": [
+        1024,
+        1536
+      ],
+      "disposition": "Photographic refinement rejected after user size and midnight objections."
+    },
+    {
+      "pass": 4,
+      "prompt": "Use case: compositing.\nAsset: one unlabeled, immersive, exceptionally high-fidelity naturalistic view of the modeled Open Moon sea at southern Mare Nubium, local midnight. This is a human-vision display approximation, not a long-exposure night photograph.\n\nImage 1 is the authoritative PHYSICALLY RENDERED AND HUMAN-VISION-CONDITIONED REFERENCE. Preserve its composition, average luminances, almost neutral colours, atmospheric gradient, wave shapes, shadowing, water reflection distribution and small coast. Refine the numerical water into seamless, convincing real liquid while removing only sampling grain.\nImage 2 is the exact ANGULAR EARTH SILHOUETTE MASK. White indicates the disk, black is not scenery. Never print this mask. Use it to keep the disk precisely located and sized.\n\nFull-frame portrait 2:3, ideally 1024 by 1536 or higher native resolution. Rectilinear 65-degree horizontal field, 87.4-degree vertical field. Eye two metres above the water, looking 16 degrees upward. Horizon at 65.09% down; sea occupies the bottom 34.91%. Preserve the broad empty sky. Do not crop or reframe.\n\nEarth's bright disk centre is 50.08% across, 10.217% down. The ACTUAL DISK, excluding its soft glare, spans only 3.108% of frame width and 2.60% of frame height: at 1024 by 1536 this is 31.8 by 39.9 pixels. Preserve the slight vertical elongation caused by off-axis rectilinear projection. Earth is 98.6% illuminated, very nearly full, a brilliant warm ivory light with a muted yellow surrounding glare exactly as in image 1. This common adaptation view clips most internal geography: do not invent sharp blue continents or moon craters. Keep the limb small and smooth; the soft light halo is larger than the solid disk, not an enlarged planet. This source is reflected sunlight from Earth, not a visible Sun.\n\nSky: smooth clear faintly cool charcoal grey, slightly lighter high in the frame, darkening gently toward the horizon as in image 1. Colour is greatly weakened at these light levels. Preserve the reference values: no vivid blue, dusk orange band, purple, black outer space, Milky Way, visible stars, lunar clouds, god rays or second light source. Do not brighten the sky to photographic daylight.\n\nSea: detailed yet dim dark graphite water with soft nearly neutral blue-grey reflection. Broad low swells about 0.6 m significant height, 27 m peak wavelength, 10.3-second period; NW-going, 63 degrees left of the gaze. Wind 3.6 m/s gives fine irregular ripples over the broader continuous wave shapes. Keep the reference's depth and grazing-angle foreshortening. Real water has curved connected surfaces, subtle overlapping ridges and dark troughs, never pebbles, scales, a repeating grid, metallic foil or oily plastic. No exaggerated steep waves, breaking crests, foam, spray or added bioluminescence. Low light reduces fine contrast, so do not artificially sharpen every ripple.\n\nKeep the exact sparse pale-warm specular flecks visible mainly in the bottom 10% and slightly left of centre, following the calculated geometry. They should be short interrupted liquid highlights, never a continuous bright path from the horizon. The main mirror direction of high Earth lies BELOW the frame. Keep the near-horizon sea quiet and dark.\n\nLand is only the almost invisible low sliver at the extreme right horizon, beginning about 89% across; maximum height less than 0.5% of the image height. No mountain range, foreground shore, buildings, boats, people or invented terrain.\n\nFinishing: rich physical presence through coherent liquid geometry and restrained light, no camera noise, compositing seams or sharpening halos. Preserve the reference's darkness and limited colour. Absolutely NO text, labels, numbers, symbols, scene ID, legend, captions, watermarks, border or inset.",
+      "file": "../results/illustrations/nubium-passes/04.png",
+      "sha256": "531297a66c4b47b21ccaacb0ec3c7004f033338e73f73a4024fda72e0306a012",
+      "native_dimensions_px": [
+        1024,
+        1536
+      ],
+      "disposition": "Human-model-guided first pass; horizon and Earth placement drifted."
+    },
+    {
+      "pass": 5,
+      "prompt": "Use case: precise-object-edit.\nImage 1 is the EDIT TARGET, an immersive high-fidelity midnight sea rendering.\nImage 2 is the authoritative calculated COMPOSITION AND LIGHT reference.\nImage 3 is the exact Earth-disk mask, never to be printed.\n\nCorrect ONLY the composition geometry of image 1 to match images 2 and 3. Keep the full 2:3 portrait image; do not crop.\n\n1. Move the water horizon DOWN by 51 pixels at 1024 by 1536 resolution: from its current row 949 to row 1000. The correct horizon is 65.1% down the image. Extend the existing smooth dark sky to fill the vacated strip. Reproject the low liquid swells naturally into the remaining bottom 34.9% of the frame; preserve their fine physical texture, darkness and the foreground reflection patches. Keep the extremely low coast confined to the extreme right horizon; move it down together with the horizon.\n\n2. Move the solid Earth disk DOWN by 30 pixels: its centre must be at x=513,y=157 in a 1024 by 1536 image, or 50.08% across and 10.217% down at any higher native size. Reduce its solid luminous core to exactly 32 pixels wide by 40 pixels high (3.108% image width by 2.60% image height), matching image 3. Keep it slightly vertically elongated by the rectilinear perspective. Scale the existing soft halo down with it. Do not add surface detail or change its warm ivory light.\n\nEverything else remains as in image 1: the smooth nearly neutral charcoal sky, dim continuous undulating graphite sea with subtle blue-grey reflection, sparse muted warm glints mainly at the bottom left of centre, high physical fidelity and quiet midnight atmosphere. Never add a bright reflection path from the horizon. No stars, clouds, mountains, boats, shore foreground, foam, rays, other celestial bodies or objects. No dramatic colour grading, exposure lift or artificial sharpening.\n\nThis is a precise geometry repair, with seamless natural edges and no alteration of the image's lighting treatment. Highest available native quality. Absolutely no labels, text, numbers, captions, watermarks, borders or inset panels.",
+      "file": "../results/illustrations/nubium-passes/05.png",
+      "sha256": "29be5918610bf7e33bb7d1dbad814494799358e7ee8945ab21bfff4250a008aa",
+      "native_dimensions_px": [
+        1024,
+        1536
+      ],
+      "disposition": "Partial geometry repair; Earth remained displaced."
+    },
+    {
+      "pass": 6,
+      "prompt": "Use case: precise-object-edit.\nEdit image 1. Make ONE localized correction: move the bright Earth AND its entire surrounding halo straight DOWN by 31 pixels, and make the Earth disk 20% SMALLER in both dimensions. Cleanly replace the old position with the surrounding charcoal sky.\n\nThe disk is currently centred about (513,126) in this 1024\u00d71536 portrait. Its new centre must be (513,157). Its new solid luminous core must be 32 pixels wide and 40 pixels high. Image 2 shows its EXACT desired position and silhouette; the white spot is a placement mask only, never content to print. Compare the old and new positions carefully: the disk must visibly move lower and get smaller.\n\nPreserve the same warm ivory disk colour, near-full phase, slight vertical elongation, and restrained soft halo scaled and moved along with the disk. No Earth surface detail.\n\nKeep ALL other pixels and visual content unchanged: the sea waves and their subtle near-foreground glints, the dark clear sky gradient outside the repair, the horizon and extremely low far-right coast, portrait crop, overall darkness and muted colours. Do not reframe, change exposure or add anything. No text, labels, captions, borders or watermark.",
+      "file": "../results/illustrations/nubium-passes/06.png",
+      "sha256": "67532ccdbfeab3de07c51e0e49560189742bdfa62ee8a1327baf4fb007a093dc",
+      "native_dimensions_px": [
+        1024,
+        1536
+      ],
+      "disposition": "Earth movement overshot."
+    },
+    {
+      "pass": 7,
+      "prompt": "Use case: precise-object-edit.\nImage 1 is the midnight sea image to edit. Image 2 is an exact placement stencil of the same 1024\u00d71536 canvas.\n\nRelocate the Earth in image 1 onto the white oval in image 2, matching that oval's exact size and position. This moves the Earth UP from its current position. The new centre is one tenth of the image height below the top edge, directly above the centre of the water. The new disk is slightly smaller. The white oval's bounding box is x=497..528 and y=137..176. Keep the original warm ivory light and a soft subdued halo immediately around the relocated oval.\n\nErase the old lower Earth and its old halo cleanly. There is only one Earth. Preserve the complete rest of image 1 unchanged, including sky gradient, horizon, water texture, reflections, darkness, very low rightmost coast and full portrait composition. Never display the black stencil background. No lettering, labels, border or watermark.",
+      "file": "../results/illustrations/nubium-passes/07.png",
+      "sha256": "2ab8c53962b140a792901be2abb001fd77b63bb303670a7e2223e6c55cbf24ad",
+      "native_dimensions_px": [
+        1024,
+        1536
+      ],
+      "disposition": "Earth position remained wrong and unconstrained internal detail appeared."
+    },
+    {
+      "pass": 8,
+      "prompt": "Use case: compositing.\nIMAGE 1 IS THE EDIT TARGET. It is a calculated human-vision rendering of a midnight sea. Preserve its complete sky, Earth and horizon exactly.\nIMAGE 2 supplies only the more lifelike LIQUID SURFACE TEXTURE.\n\nReplace only the water below the horizon in image 1 with a natural, high-fidelity version of its existing wave geometry, using image 2 for the appearance of real water. Keep image 1's broad swells, dim grey values, small scattered near-bottom glints, and perspective. Fit the water to image 1's horizon. Use the first image's quieter, dimmer highlights, not the stronger gold in the second.\n\nEverything at or above the horizon MUST remain visually identical to image 1: the entire smooth neutral charcoal sky, the EXACT small Earth position and apparent size, its ivory glare, and the tiny rightmost coastal sliver. Do not use the Earth or sky from image 2. Do not reposition or resize Earth. Do not move the horizon. No exposure change, extra detail on the disk, stars, clouds or added objects.\n\nThe result is one seamless full-frame 2:3 portrait. Only the liquid water gains natural surface fidelity; no labels, text, numbers, captions, border or watermark.",
+      "file": "../results/illustrations/nubium-passes/08.png",
+      "sha256": "a00db26213c4bc5500b42931dd824e70f47b1cc185ef4a0626e92eabb5d43f26",
+      "native_dimensions_px": [
+        1024,
+        1536
+      ],
+      "disposition": "Water composition attempt still shifted sky geometry."
+    },
+    {
+      "pass": 9,
+      "prompt": "Use case: compositing.\nCreate the final at NATIVE 2048 \u00d7 3072 pixels, full-frame 2:3 portrait. The user explicitly wants a much larger image with immersive fine fidelity. Increase the entire canvas and scene together; do not merely enlarge the planet inside the existing composition.\n\nImage 1 is the authoritative calculated reference: an offshore, two-metre-eye view of southern Mare Nubium at local midnight under nearly full Earth. Preserve its complete composition and dark human-vision lighting treatment. Enlarge the whole reference proportionally from 768\u00d71152 to 2048\u00d73072, preserving all angular relationships.\n\nEarth centre must stay at 50.08% across and 10.217% down, approximately (1026,314) on the new canvas. Its physical solid disk is about 64 pixels wide and 80 high, excluding glare, a slightly vertical oval due to off-axis rectilinear projection. Keep the existing warm ivory overbright disk and the reference's soft surrounding optical glare. Preserve its small disk relative to the broad sky, no separate Earth exposure or invented sharp surface features.\nHorizon stays exactly 65.09% down, approximately row 2000. Land remains only the very low far-right sliver. Sky remains the reference's smooth nearly neutral charcoal grey with its slight vertical gradient; no stars, cloud bands, purple, saturated blue, sunset glow or added lights.\n\nGive the water immersive natural liquid fidelity at the larger resolution. Preserve the computed broad low wave forms, curved surfaces, subtle dark troughs, thin irregular wind ripples, grazing perspective and near-bottom reflection distribution. Swells have about 0.6 m significant height and 27 m peak wavelength in lunar gravity. Keep the dim water nearly neutral blue-grey graphite, with small pale warm flecks chiefly near the bottom, slightly left of centre. Respect low-light contrast: no artificial sharpening, brightness lift or sparkling gold path from the horizon. No foam, breaking surf, dramatic steep waves, metallic tessellation, tiled texture or pebbles.\n\nOne seamless clean high-fidelity immersive image. Geometry and lighting from the reference take precedence over dramatic embellishment. Do not crop or reframe. No labels, text, numbers, scene identifiers, diagrams, captions, watermarks or borders. Output 2048\u00d73072.",
+      "file": "../results/illustrations/nubium-passes/09.png",
+      "sha256": "8bc3d0c25c5b38fcd4b0e248da65895e11469a19205f9a6c0921d1c74d238e5f",
+      "native_dimensions_px": [
+        1024,
+        1536
+      ],
+      "disposition": "Selected generated candidate, with residual differences and insufficient output resolution."
+    }
+  ],
+  "preservation": "Selected PNGs and these sidecars are tracked at the author\u2019s request. Raw numerical builds, external source maps and intermediate generation passes remain in ignored results/. No labels are baked into the images.",
+  "large_render_files": {
+    "../results/nubium-reference/s_nubium__midnight.npz": "a45481a2b0f388b2810e6e74d11a9a206424570517be5f980a9a994b988e9bcc",
+    "../results/nubium-reference/scene-build.npz": "62bf53f6d8120f206d5be7ff2259bd41067d4ae23c832aa87fab373ca4c3f9f9"
+  },
+  "reading_rule": "Calculated view conditioned for one stated display/adaptation model, not a literal validated human percept. The generator\u2019s native-resolution and geometry limits are explicit in the review. First requested Ingenii image and prior Procellarum selection remain preserved."
+}

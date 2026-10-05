@@ -447,3 +447,29 @@ python -m research.studies.sea_appearance.scenes --text     # rewrite scenes.md 
 ```
 
 The runner needs numba for the solved sky, as the results by regime do.
+
+
+## Nubium at local midnight
+
+[nubium_midnight.py](nubium_midnight.py) adds a separate
+[Nubium midnight product](results/nubium-midnight.json). It selects the lowest
+Sun on the hourly calendar, rather than SN-6's minimum total illuminance. At
+2038-03-07 02:47 TT, the Sun is 60.6° below the horizon and Earth is 53.25° up,
+98.6% illuminated and 1.804° across. The study station receives 3.59 lux.
+The offshore viewpoint keeps the original Nubium location, with a portrait view
+toward Earth: 65° horizontally, 87.4° vertically, pitched 16° upward.
+
+The nearest SWAN restart is eleven hours later; its significant wave height is
+0.626 m and peak wavelength 27.3 m. The scene retains the productive-water design
+guess, clear molecular atmosphere and unsolved land ecology. This adds no new
+climate, atmospheric or wave simulation and does not modify the original 24 frames.
+
+The [visualization workflow](../../../visualization/sea-appearance/README.md#nubium-midnight-and-human-vision)
+traces the sea in physical radiance, projects a historical NASA Earth texture,
+and applies a documented human-vision display approximation. The wide view and
+an Earth-centred view have different fields of view and adaptation assumptions.
+Neither is an empirical validation of what an individual person would see.
+
+```sh
+OPENBLAS_NUM_THREADS=1 NUMBA_NUM_THREADS=2 <environment>/bin/python -m research.studies.sea_appearance.nubium_midnight
+```
