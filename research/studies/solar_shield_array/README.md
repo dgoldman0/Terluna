@@ -145,6 +145,21 @@ sources retain power/mass failures near the array and substantial propellant
 and wake-width penalties farther away. The bounded calculations are executed;
 larger plasma and fleet campaigns remain paused for review.
 
+The [joint departure and next-service investigation](joint_cycle.md) returns
+to ordinary photogravitational/electric control, with the primary magnetic
+shield set aside. Twelve bounded proposals test earlier velocity changes,
+packing/assignment, staggered arrivals and grouped sail normals. A full
+361-tile separated corridor returns at hour 45.77978 and completes another
+six-hour optical passage on independent replay, with a 900.28 m conditional
+clearance bound after numerical allowance. It is an ideal-force diagnostic:
+145 tiles overload installed actuators, the executed sequence costs 1.53538 PJ,
+and the early preparation loses the low-energy departure advantage. A cheaper
+actuator-compliant execution stops at 100 m at hour 12.75076. Optimistic local
+collectors with short buffers leave 27.067 TJ unserved in lunar eclipse.
+No operating return, repeatable cycle, supply hardware, handover or fleet
+budget is accepted. Source-bound results, exact initial states and the next
+small local test are preserved; a larger fleet campaign remains paused.
+
 The study couples protection, engineering, illumination and habitation. Its
 runners, compact numerical results and interpretation belong together here;
 dynamics components belong in the protection domain. Computation files and

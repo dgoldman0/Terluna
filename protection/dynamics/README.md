@@ -151,3 +151,22 @@ check that this compaction preserves the optical and momentum calculation.
 ## Return correction and collection accounting
 
 `return_escape.py` supplies smooth in-plane roll/recovery commands and exact partial-burn integrals. `compact_collection.py` preserves the original first-intercept and photon-momentum ledger with exact compact shadow unions, allowing denser grazing-source quadrature. The [encounter-directed study](../../research/studies/solar_shield_array/return_repair.md) retains transition failures, the migrated encounter and individual hardware overloads.
+
+## Joint departure and arrival
+
+`fast_parallel.py` and its compiled backend evaluate all-blocker rectangle
+unions and first moments, cross-checked against the historical implementation.
+`eclipse_parallel.py` adds joint body/array visibility on the same incoming
+rays, with refined area quadrature in partial eclipse. `oriented_tiles.py`
+provides independently oriented shadow cones, force/moment accounting and
+finite-square contact, tested against parallel limits and independent ray
+intersections. `joint_transfer.py` permits individual endpoint times and
+power-capped electric control arcs in a reduced linear proposal model.
+
+The [joint study](../../research/studies/solar_shield_array/joint_cycle.md)
+distinguishes a full geometric return plus another service passage from its
+failed actuator/supply and energy gates. Independent replay preserves all
+361 physical tiles. A grouped-attitude proposal fails its reduced geometry
+screen and receives no coupled feasibility credit. Per-member chronological
+storage dispatch lives in `engineering/shield_storage.py`; added collectors
+and storage are priced sensitivities, not accepted loaded trajectories.
