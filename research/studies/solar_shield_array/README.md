@@ -136,6 +136,15 @@ three-function architecture or relaxed operating target is accepted.
 Its source register, compact results and `electromagnetic_checks.json` retain
 the assumptions and executed checks separately from proposed follow-up work.
 
+The [primary magnetic architecture comparison](magnetic_architecture.md)
+reopens the four lunar stations. Finite regional loops of 500–1,000 km radius
+greatly reduce the screened conductor/support mass at matched field requirements.
+Stored atmospheric cases motivate testing a weaker moment, which also reduces
+tile torque; storm compression and ion escape remain unresolved. Held upstream
+sources retain power/mass failures near the array and substantial propellant
+and wake-width penalties farther away. The bounded calculations are executed;
+larger plasma and fleet campaigns remain paused for review.
+
 The study couples protection, engineering, illumination and habitation. Its
 runners, compact numerical results and interpretation belong together here;
 dynamics components belong in the protection domain. Computation files and
@@ -147,6 +156,7 @@ protection implementation and its imported results remain byte-pinned.
 ```sh
 python -m pip install -r research/studies/solar_shield_array/requirements.txt
 python -m protection.dynamics.ephemeris --download
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m research.studies.solar_shield_array.magnetic_architecture_run
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.run
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.validate
 python -m research.studies.solar_shield_array.publish

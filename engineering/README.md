@@ -45,4 +45,9 @@ Run the shared baseline with `python research/baselines/feasibility/model.py --o
 
 ## Shield electricity and material comparisons
 
+`large_coils.py` supplies explicit conductor, tensile-support, self-field,
+refrigeration, joint-loss, storage-interface and renewal assumptions for the
+[primary magnetic architecture comparison](../research/studies/solar_shield_array/magnetic_architecture.md).
+Civil structure and plasma response remain outside that hardware screen.
+
 `shield_power.py` separates reflected-band capture, optical conversion, bus operations, final delivery, ideal collector heat and electric-propulsion exhaust. The [return investigation](../research/studies/solar_shield_array/return_repair.md) applies these sensitivities to executed prefixes and hypothetical fleet duty, including explicit replacement lifetimes. These are conditional accounts; collector and power-routing hardware remain to design.

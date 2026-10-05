@@ -1,5 +1,11 @@
 # Atmospheric protection
 
+The [primary magnetic architecture comparison](../research/studies/solar_shield_array/magnetic_architecture.md)
+adds exact finite-loop fields in `magnetic_fields.py` and compares larger
+regional circuits, conditional weaker moments and upstream sources. It finds
+a strong regional material advantage while leaving plasma transport and final
+hardware selection open. The imported September implementation remains intact.
+
 `model.py`, `verify.py` and the compact result tables are verbatim imports from the September 2026 protection package. `results/results.json` retains selected original constants, optical summaries, reference/storage cases and input hashes for the verifier; duplicate table arrays and unrelated summaries are omitted, with values unchanged. They calculate candidate optics, aperture geometry, lunar-phase holding forces, propulsion/power/storage feedback, magnetic structures, particle-rigidity diagnostics and renewal budgets.
 
 The protected atmosphere and transport comparison are inherited from the [September feasibility baseline](../research/baselines/feasibility/), with fixed inventory constants in the original code. Their use is not an independent atmospheric validation.

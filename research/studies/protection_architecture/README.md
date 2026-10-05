@@ -73,6 +73,13 @@ reasons, stated.
 
 ## Next
 
+The [2026-10-05 primary magnetic comparison](../solar_shield_array/magnetic_architecture.md)
+now carries this study's stored atmospheric requirements into finite regional
+coil and upstream-source budgets. Larger regional paths merit development;
+the quiet-wind lower-moment cases need a plasma/storm check before installation
+is sized. The four-radius optical footprint and magnetic requirement are kept
+separate. No loss budget or primary architecture has been selected.
+
 The loss budget is designed across 1–100 kg/s, atmospheric cycle times of
 about 100 billion to 1 billion years, until the designs show which rate works
 best (the author's decision of 2026-09-26); requirements.md shows what each
