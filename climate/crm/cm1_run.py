@@ -1204,8 +1204,12 @@ CASES['box_highland_own_height'] = dict(
 # sub-steps scaled to the box's layers and fall speeds, a downward channel striking within 5 km of the ground
 # (cm1_elec.LUNAR); its restarts let windows of its storms run again with output every few minutes, other charging
 # laws, leakage or the unbounded breakdown field.
+# It and the windows below that ran before leakage became the lunar default (2026-10-05) keep the settings they ran
+# with: box_0e_elec the cap until day 18, when its namelist took lightning 4 (README), and a channel within 5 km of the
+# ground; none of them leakage.
 CASES['box_0e_elec'] = dict(
-    CASES['box_0e'], build='moon_omp_elec', elec=dict(cm1_elec.LUNAR), inputs_from='box_0e',
+    CASES['box_0e'], build='moon_omp_elec', elec=dict(cm1_elec.LUNAR, lightning=3, ground_m=5000.0, leakage=0),
+    inputs_from='box_0e',
     purpose=CASES['box_0e']['purpose'] + ', with the NSSL microphysics and WRF-ELEC\'s charging and branched lightning')
 # The fine box (stage 2): box_0e_elec's site at a third of its spacing (2.0 km) over a box a third as wide (128 km, the
 # same 64 by 64 columns), started from box_0e_elec's air averaged over its columns and its mean skin temperature at a
@@ -1225,10 +1229,11 @@ CASES['box_0e_elec_fine'] = dict(
 # Standler and Winn's 3 kV/m over dense vegetation scaled by the density at the ground.
 CASES['box_0e_elec_uncapped'] = dict(
     CASES['box_0e_elec'], inputs_from=None, restart_from=dict(case='box_0e_elec', day=10.5), days=14.5,
+    elec=dict(cm1_elec.LUNAR, ground_m=5000.0, leakage=0),
     purpose=CASES['box_0e_elec']['purpose'] + '; its first lunar day\'s storms again from its day-10.5 restart, with '
             'the breakdown field\'s 180-kV/m cap lifted')
 CASES['box_0e_elec_uncapped_corona'] = dict(
-    CASES['box_0e_elec_uncapped'], elec=dict(cm1_elec.LUNAR, corona_v_m=3000.0),
+    CASES['box_0e_elec_uncapped'], elec=dict(cm1_elec.LUNAR, ground_m=5000.0, leakage=0, corona_v_m=3000.0),
     purpose=CASES['box_0e_elec_uncapped']['purpose'] + ', and point discharge from the ground')
 # Ground strikes by WRF-ELEC's own rule (ground_m -1, its default: a downward channel reaching air warmer than -7 C in
 # charge of the matching sign). The Earth benchmarks ran with ground_m 0, which lightmsz reads as only the two lowest
@@ -1238,7 +1243,7 @@ CASES['box_0e_elec_uncapped_corona'] = dict(
 # reaches -7 C, 34 km up, to bridge the rest of the way to the ground.
 CASES['box_0e_elec_ground_rule'] = dict(
     CASES['box_0e_elec'], inputs_from=None, restart_from=dict(case='box_0e_elec', day=40.5), days=42.0,
-    elec=dict(cm1_elec.LUNAR, ground_m=-1.0),
+    elec=dict(cm1_elec.LUNAR, ground_m=-1.0, leakage=0),
     purpose=CASES['box_0e_elec']['purpose'] + '; its busiest storms again from its day-40.5 restart, with WRF-ELEC\'s '
             'own ground-strike rule')
 # The charging law. Saunders and Peck's law, which every run so far uses, nearly stops for slow lunar graupel, which
@@ -1251,12 +1256,12 @@ CASES['box_0e_elec_ground_rule'] = dict(
 # most of, and an inverted dipole, since Takahashi's table charges rimed ice positively at the storms' low cloud water
 # (README, "The charging law").
 CASES['box_0e_elec_takahashi'] = dict(
-    CASES['box_0e_elec_ground_rule'], elec=dict(cm1_elec.LUNAR, isaund=1),
+    CASES['box_0e_elec_ground_rule'], elec=dict(cm1_elec.LUNAR, isaund=1, leakage=0),
     purpose=CASES['box_0e_elec']['purpose'] + '; its busiest storms again from its day-40.5 restart, under '
             'Takahashi\'s charging law')
 CASES['box_0e_elec_takahashi_first'] = dict(
     CASES['box_0e_elec_takahashi'], restart_from=dict(case='box_0e_elec', day=10.5), days=12.0,
-    elec=dict(cm1_elec.LUNAR, isaund=1, ground_m=5000.0),
+    elec=dict(cm1_elec.LUNAR, isaund=1, ground_m=5000.0, leakage=0),
     purpose=CASES['box_0e_elec']['purpose'] + '; its first lunar day\'s storms again from its day-10.5 restart, under '
             'Takahashi\'s charging law')
 # Leakage. With nothing to conduct it, the charge evaporating cloud leaves on the small ions stays for weeks: 2,000-3,600

@@ -138,8 +138,11 @@ SETTINGS = dict(ipelec=3, isaund=12, lightning=3, leakage=0, radius_m=12000.0, h
 # channel within 5 km of the ground, kept the demand for matching charge where the storms have none and allowed no
 # ground strike. WRF-ELEC caps the breakdown field at 180 kV/m, which on Earth applies only below about 4.5 km, beneath
 # where flashes start; the denser lunar air would put it below about 36 km, where lunar flashes start, so the boxes
-# lift it (lightning 4; the author's decision, 2026-10-04).
-LUNAR = dict(substep_s=6.8, ground_m=-1.0, lightning=4)
+# lift it (lightning 4; the author's decision, 2026-10-04). Charge leaks through stage 1's conductivity (leakage 1; the
+# author's decision, 2026-10-05): without it the charge evaporating cloud leaves on the small ions stays for weeks and
+# held the field at the ground near 20 kV/m all over the box, where leakage clears it within the hour and leaves the
+# lightning as it was.
+LUNAR = dict(substep_s=6.8, ground_m=-1.0, lightning=4, leakage=1)
 
 
 def sources(home: Path) -> dict:

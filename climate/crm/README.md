@@ -1862,8 +1862,9 @@ may be the weather's.
 
 So the lunar storms' lightning stands without leakage, but the field at the
 ground does not, nor the point-discharge comparison of "The first lunar day
-again": their fields away from storms were the leftover charge's. The
-Takahashi windows ran without leakage as well; their arrangement of charge
+again": their fields away from storms were the leftover charge's. The author
+made leakage the lunar runs' default on 2026-10-05; the runs above keep the
+settings they ran with. The Takahashi windows ran without leakage as well; their arrangement of charge
 follows from the law's sign, while their ground strikes carry the same
 leftover charge as `box_0e_elec_ground_rule`'s.
 

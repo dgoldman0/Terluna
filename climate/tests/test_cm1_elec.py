@@ -137,6 +137,7 @@ def test_an_electrified_case_takes_nssl_and_the_charge_tracers():
     moon = e.namelist_settings(e.LUNAR)
     assert moon['param8']['var4'] == -1.0 and moon['param8']['var5'] == 6.8           # WRF-ELEC's own ground rule
     assert moon['param8']['var8'] == 4.0                     # branched lightning without the 180-kV/m cap
+    assert moon['param8']['var9'] == 1.0                     # leakage through the air's conductivity
 
 
 def test_lightning_2_and_4_lift_only_the_breakdown_field_s_cap():

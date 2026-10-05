@@ -296,7 +296,8 @@ Morrison's do.
    as it was (11 flashes against 6–13, 161 against 144–157), while the busy
    window's ground strikes rose to 39 against 21, smaller ones (a median 110 C,
    at most 624 C). The fields at the ground of item 4's point-discharge
-   comparison were the leftover charge's.
+   comparison were the leftover charge's. The author made leakage the lunar
+   runs' default the same day.
 8. Windows of `box_0e_elec`'s second lunar day run again from its restarts with
    output every few minutes, to follow each storm's life.
 
