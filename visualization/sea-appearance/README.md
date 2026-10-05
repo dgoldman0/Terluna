@@ -161,3 +161,68 @@ The three focused view checks run with
 Without that environment variable the external Radiance conversion check skips;
 geometry and midnight selection still run. The existing sea-kernel tests require
 numba and were run separately from `make check`.
+
+
+## Visibility-informed Nubium reference
+
+The revised [wide view](illustrations/nubium-midnight-visibility-view.png) and
+[Earth-centred view](illustrations/nubium-earth-visibility-view.png) retain
+planetary structure supported by the [visibility screening](../../research/studies/sea_appearance/README.md#can-an-observer-resolve-earth).
+The old `nubium-midnight-human-view.png` is retained for provenance and is
+**superseded as an appearance reference**: its linear display mapping clipped
+the bright disk and its coarse glare grid produced an angular halo.
+
+[nubium_visibility_view.py](nubium_visibility_view.py) consumes the same
+2048 × 3072 sea-tracer XYZ, replaces the direct Earth using observed EPIC
+structure, and retains the solved beam's integrated XYZ. The historical Earth
+is geographically reprojected using the saved Horizons orientation. Its fit to
+EPIC geolocation has 0.47 native-pixel RMS and 0.90-pixel 99th-percentile error.
+About 2.2% of target disk samples lie beyond the measured view and explicitly use
+the nearest observed surface direction. A Lambert incidence ratio approximates
+the phase change. Three narrow bands supply spatial RGB structure, normalized
+to the solved integrated XYZ; this is **not spatial spectral colour validation**
+or predicted weather. The sea still reflects the tracer's uniform Earth disk.
+
+[nubium_eye_optics.m](nubium_eye_optics.m) calls the external model's CIE99
+optical transfer function on direct Earth XYZ for age 24. It applies the same
+achromatic kernel to each channel. The tiny FFT undershoot removed is recorded
+(5.3e-14 of summed XYZ energy). [nubium_visibility_display.py](nubium_visibility_display.py)
+projects that optical result into the wide camera by angular rays. It tapers the
+halo from 4 to 5 degrees; the maximum computed halo there is 0.01191 cd/m²,
+about 2.3% of the local sky. Background and water remain unblurred. This is an
+explicit optical/display approximation, not a whole-retina simulation.
+
+One monotone log-power luminance curve is used for both views and every pixel.
+It maps the local 0.529 cd/m² sky to 3.5% of display white and uses a world-white
+anchor 20% above the brightest source pixel. Gamut compression moves colours
+toward neutral at fixed display luminance. **Those anchors are display choices,
+not measured colour appearance.** There is no separate exposure for Earth.
+The images contain no text or labels. The 10-degree square shows an angular
+window toward Earth; the sea horizon is 53 degrees away and cannot appear in it.
+
+[nubium_display_visibility.py](nubium_display_visibility.py) tests the revised
+physical Earth and the displayed PNG against interior-texture removal. For the
+PNG it assumes sRGB/D65, 100 cd/m² peak, 0.1 cd/m² black and a viewing distance
+that preserves the stated angular field. A detectable difference establishes
+retained detail, not equality of appearance, neural colour response or a match
+to an arbitrary user's screen. The
+[display record](illustrations/nubium-visibility-display.json) carries its
+input hashes, constraints and check results.
+
+```sh
+# Reuse the existing physical sea build; restore the pinned EPIC input.
+python visualization/sea-appearance/nubium_visibility_view.py --root "$PWD" --epic research/runs/sea_appearance/visibility-inputs/epic_1b_20151117002712_00.h5 --render visualization/sea-appearance/results/nubium-reference/s_nubium__midnight.npz --build visualization/sea-appearance/results/nubium-reference/scene-build.npz --assets visualization/sea-appearance/results/earth-inputs --out visualization/sea-appearance/results/nubium-visibility
+# Supply optics-config.json with hdrvdp, image_package_list, compat, input,
+# output and age=24. compat points to the study's octave_compat directory;
+# input/output are nubium-earth-optics-input.mat / nubium-earth-optics.mat.
+octave-cli --no-history --no-init-file --quiet visualization/sea-appearance/nubium_eye_optics.m optics-config.json
+python visualization/sea-appearance/nubium_visibility_display.py --root "$PWD" --directory visualization/sea-appearance/results/nubium-visibility --build visualization/sea-appearance/results/nubium-reference/scene-build.npz
+python visualization/sea-appearance/nubium_display_visibility.py --root "$PWD" --directory visualization/sea-appearance/results/nubium-visibility --backend-template research/runs/sea_appearance/visibility/backend.json --out visualization/sea-appearance/results/nubium-display-visibility
+octave-cli --no-history --no-init-file --quiet research/studies/sea_appearance/visibility_backend.m visualization/sea-appearance/results/nubium-display-visibility/backend.json
+```
+
+The source and display checks run with
+`python -m pytest research/studies/sea_appearance/test_visibility.py visualization/sea-appearance/test_visibility_view.py`.
+External data and software are optional at test collection and required only for
+the full study/display runs. The renderer still needs the existing solved sky,
+numba, SciPy and Pillow, with h5py added for EPIC.

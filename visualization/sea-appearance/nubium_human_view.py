@@ -72,7 +72,7 @@ def condition(xyz, camera, out, bins, *, dynamic_range=1000, fixation=None):
                 output_sha256=digest(out.with_suffix('.png')))
 
 
-def texture_earth(base, spec, product, h, assets, sky_map, sky_el, az_step, earth_source, geometry, *, ss=8):
+def texture_earth(base, spec, product, h, assets, sky_map, sky_el, az_step, earth_source, geometry, *, ss=8, sampler=None):
     """Project a historical Earth in physical XYZ units into a supplied camera."""
     from nubium_guides import Camera
     from image_guides import linear
@@ -111,12 +111,15 @@ def texture_earth(base, spec, product, h, assets, sky_map, sky_el, az_step, eart
     rb=nu*ge+nr*gn;ub=-nr*ge+nu*gn
     body=(normal@tr)[:,None]*rb+(normal@tu)[:,None]*ub+(normal@(-ed))[:,None]*c
     glon=np.arctan2(body[:,1],body[:,0]);glat=np.arcsin(np.clip(body[:,2],-1,1))
-    surface=linear(np.asarray(Image.open(assets/'nubium-earth-bluemarble-2048.png').convert('RGB'))/255)
-    clouds=np.asarray(Image.open(assets/'nubium-earth-clouds-2048.jpg').convert('L'))/255
-    tx=(glon+math.pi)/(2*math.pi)*surface.shape[1]-.5;ty=(math.pi/2-glat)/math.pi*surface.shape[0]-.5
-    texture=np.stack([map_coordinates(surface[...,ch],[ty,tx],order=1,mode='grid-wrap') for ch in range(3)],-1)
-    alpha=map_coordinates(clouds,[ty,tx],order=1,mode='nearest')[:,None]*.96
-    texture=texture*(1-alpha)+.9*alpha
+    if sampler is None:
+        surface=linear(np.asarray(Image.open(assets/'nubium-earth-bluemarble-2048.png').convert('RGB'))/255)
+        clouds=np.asarray(Image.open(assets/'nubium-earth-clouds-2048.jpg').convert('L'))/255
+        tx=(glon+math.pi)/(2*math.pi)*surface.shape[1]-.5;ty=(math.pi/2-glat)/math.pi*surface.shape[0]-.5
+        texture=np.stack([map_coordinates(surface[...,ch],[ty,tx],order=1,mode='grid-wrap') for ch in range(3)],-1)
+        alpha=map_coordinates(clouds,[ty,tx],order=1,mode='nearest')[:,None]*.96
+        texture=texture*(1-alpha)+.9*alpha
+    else:
+        texture=sampler(body,inside)
     slon,slat=np.radians([h['subsolar_lon_east_deg'],h['subsolar_lat_deg']])
     sun=np.array([math.cos(slat)*math.cos(slon),math.cos(slat)*math.sin(slon),math.sin(slat)])
     incident=np.maximum(body@sun,0); texture*=incident[:,None]*inside[:,None]

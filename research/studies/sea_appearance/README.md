@@ -473,3 +473,89 @@ Neither is an empirical validation of what an individual person would see.
 ```sh
 OPENBLAS_NUM_THREADS=1 NUMBA_NUM_THREADS=2 <environment>/bin/python -m research.studies.sea_appearance.nubium_midnight
 ```
+
+
+## Can an observer resolve Earth?
+
+The [visibility screening](visibility.py) tests the Nubium midnight question with
+observed spatial structure and the external [HDR-VDP-3 model](https://www.cl.cam.ac.uk/~rkm38/pdfs/mantiuk2023hdrvdp3.pdf),
+including its age-dependent CIE99 ocular scatter, local adaptation and neural
+contrast response. The [result](results/earth-visibility.json) is a conditional
+prediction of **detectable interior structure**, not a reconstruction of one
+person's entire visual experience. The previous display's clipped white disk
+is not supported as a visibility conclusion.
+
+The clear 1.2-atm molecular atmosphere transmits **37.9%** of direct photopic
+Earthlight at this elevation: normal illuminance falls from **6.762 to 2.564 lux**.
+Earth remains **1.804 degrees** across, with a disk-mean luminance of
+**3,294 cd/m²** before ocular scatter. Thus substantial atmospheric extinction
+and visible planetary detail are compatible. The Earth-centred sky is
+0.529 cd/m². Aerosols, local lunar clouds and refraction are not included.
+
+The spatial input is a public NASA EPIC observation from 17 November 2015.
+Its 443, 551 and 680 nm bands are tested separately as **relative achromatic
+patterns**, each normalized to the study's photopic illuminance. The early test
+product has inconsistent L1A/L1B metadata and unspecified absolute units; those
+units are not used as an absolute calibration. Historical clouds and viewing
+geometry do not predict the 2038 scene's weather. The
+[input manifest](visibility_inputs.json) pins every downloaded file and credits
+its provider. Raw external inputs and software remain in ignored run storage.
+
+Each textured stimulus is compared with a counterfactual that removes only
+interior texture. It preserves the limb, angular size and integrated normal
+illuminance; the latter agrees within 2.7e-8 relative. The comparison therefore
+cannot pass merely by distinguishing a disk from an empty sky.
+
+| Test | Predicted detection of interior-texture removal |
+|---|---|
+| Earth, 551 nm pattern, observer ages 24, 50 and 70 | Saturated model prediction in all three cases |
+| Earth, 443 and 680 nm patterns, age 24 | Saturated in both cases |
+| Earth, interior contrast reduced to one quarter, age 70 | Saturated |
+| Earth, 60 versus 120 pixels per degree; 6 versus 12 degree surround | Same qualitative conclusion; statistic not numerically converged |
+| Terrestrial Moon control, ages 24 and 70 | Greater than 0.9999999999 |
+| Moon control, quarter contrast, age 70 | 0.156 |
+| Identical-image control | Exactly zero |
+
+`P_det` is the model's probability of detecting the difference in its specified
+task; it is **not** a fraction of observers who recognize Earth. The large
+`C_max` values are nonlinear detection statistics, not literal multipliers of
+physical contrast. Saturation does not establish precise confidence or resolve
+individual coastlines. This is static, attended, achromatic detection; gaze
+history, colour recognition and individual eye conditions remain open.
+
+The Moon control uses quantitative LROC WAC 566-nm Hapke-normalized reflectance,
+not a cosmetically enhanced lunar texture. Its mean is anchored at 5,000 cd/m²
+within [Schmidt's measured bright near-full-Moon range](https://spaceweather.com/swpod2009/13jan09/Perigee_moon_2009_01_11_corr.pdf).
+Its diameter is 0.518 degrees and prescribed surround 0.01 cd/m². The map's
+reference geometry is g=i=60 degrees, e=0; opposition-dependent spatial contrast
+is not solved. Unmapped polar caps use an explicit boundary extension outside
+the tested interior. **This is a measurement-anchored consistency control, not
+a calibrated coastal photograph or a new human observation experiment.**
+
+Reproduction requires the existing solved sky and earthlight inputs, Python with
+NumPy/SciPy/h5py/numba, GNU Octave 10.3.0, the image 2.16.1 and statistics 1.6.0
+packages, and the external HDR-VDP-3.0.7 archive. Download the manifest URLs to an
+ignored input directory and extract HDR-VDP there. The runner checks source
+hashes and every extracted model file against the archive before running it.
+The small [Octave compatibility function](octave_compat/dirac.m) supplies only
+the numeric singular placeholders used by the published CIE Fourier expression;
+the official function replaces its DC bin with one. No model parameters change.
+DC, monotonicity and finite optical values are separately checked by the display
+runner. CPU runs use one BLAS thread, no GPU and at most two numba threads.
+
+```sh
+# Activate the environment containing the Python and Octave dependencies first.
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 NUMBA_NUM_THREADS=2 python -m research.studies.sea_appearance.visibility --root "$PWD" --inputs research/runs/sea_appearance/visibility-inputs --out research/runs/sea_appearance/visibility --octave /path/to/octave-cli --hdrvdp research/runs/sea_appearance/visibility-inputs/hdrvdp-3.0.7
+```
+
+For isolated Octave installs, set `OCTAVE_HOME` to that installation and provide
+`--image-package-list` and `--statistics-package-list` if the packages use
+separate local lists. `stimuli.json`, `external-model.json`, `predictions.json`
+and the MAT stimuli/maps retain the run's inputs and evidence. The compact
+committed result includes source hashes, software versions and prediction
+interpretation. Focused checks exercise light conservation, unchanged limbs,
+angular integration, PDS sample decoding and rejection of modified model files.
+
+The [revised display workflow](../../../visualization/sea-appearance/README.md#visibility-informed-nubium-reference)
+uses these constraints while keeping display colour, tone mapping and image
+generation distinct from the visibility finding.

@@ -1,0 +1,577 @@
+{
+  "schema": "terluna.research.earth-visibility/1",
+  "producer": {
+    "script": "research/studies/sea_appearance/visibility.py",
+    "sha256": "f2933d3ded0773a4469ce9d2edbd0636944f80fe2aa9080bdbb8632c252a3795",
+    "backend_sha256": "7e0193b2771ca952d0b101a6f589789d37edac9d6c11618b66e7a54202fb6c8a",
+    "octave_compat_sha256": "19de6669c5401ab9719f75273bb463d22f2d4a614caaf364afb8d682ef6ac8b6"
+  },
+  "model_sha256": "06d6b624776e4664eb4736f84e6ff742344ee7a8917ca4b165d279aab89bb0e5",
+  "external_model": {
+    "file_count": 178,
+    "tree_sha256": "4c3691a4f06c643b23144f8f12140abe9d35106cfad7bbcb0710cb277a0b2402"
+  },
+  "evidence": "Numerical screening of achromatic interior-detail detection, with measured spatial inputs and a measurement-anchored Moon control. Not human validation or exact colour appearance.",
+  "reading_rule": "P_det is detection of the counterfactual texture removal at fixed limb and illuminance. It is not recognition probability, a population fraction or confidence that the entire picture is accurate. C_max is a nonlinear statistic, not a physical contrast multiplier.",
+  "stimuli": {
+    "schema": "terluna.research.earth-visibility-inputs/1",
+    "producer_sha256": "f2933d3ded0773a4469ce9d2edbd0636944f80fe2aa9080bdbb8632c252a3795",
+    "model_sha256": "06d6b624776e4664eb4736f84e6ff742344ee7a8917ca4b165d279aab89bb0e5",
+    "model_inputs": {
+      "research/studies/sea_appearance/results/nubium-midnight.json": "461d5db662fb82d40ba455d044bbc7e65bc968ca83b66f28b6871d3261eba405",
+      "research/studies/sea_appearance/lighting.py": "c07a8b5db4782baee24b8dd7fb1a2c89708649513dea61a2161cd3534a6ccf23",
+      "research/studies/sea_appearance/regimes.py": "ae7a83f72a54d517ba4d8dd500b79d6c42efad08a41365c767455fd72030917b",
+      "illumination/earthlight/model.py": "c18de649cd0eee3c1b9ce74eae32e68d753d27a4080083567617228e531737af",
+      "illumination/earthlight/fetch_inputs.py": "6c5ec9bcfa93dac00d999c87e5f36395b2170ea46490bf8256dc073bfaf416db",
+      "geography/lunar_ephemeris.py": "a3821628690cf9b920d8afc19d255de5e5112997249eb3cf9d30917fc971f258",
+      "shared/constants.json": "1a73c712dcd6e550275cc3abe85e2a8ac3c0c5f39570e19841c0091e617c8cae",
+      "illumination/sky/results/solved_sky.json": "a94333cd71a83169df57796cf199b06ec4efff12b1d1f2f9f9ac07bec01f7c6a",
+      "research/runs/optical_comfort/spherical/moon_1.2atm_standard.npz": "d6d7fef07d99fedf32d1a54f63e345ff245bf3ee8ec29a33d498fd621bf41273"
+    },
+    "reading_rule": "Absolute photopic luminance stimuli; compare interior structure at unchanged limb and normal illuminance. HDR-VDP detects differences, not scene recognition or exact appearance.",
+    "physical_light": {
+      "earth_diameter_deg": 1.8037750248690034,
+      "earth_normal_xyz": [
+        2.5061856792333055,
+        2.5640533088051014,
+        1.186392800686499
+      ],
+      "earth_above_air_xyz": [
+        6.584369360750603,
+        6.76208238287172,
+        8.98730179507277
+      ],
+      "earth_direct_transmission": 0.3791810220028996,
+      "earth_mean_full_disk_cd_m2": 3294.227319633044,
+      "sky_xyz": [
+        0.4873439338611977,
+        0.529172806432091,
+        0.946498447134219
+      ],
+      "moon_diameter_deg": 0.51792937697457,
+      "atmosphere": "Study clear molecular 1.2-atm case; aerosols, lunar clouds and refraction omitted",
+      "units": "Y of XYZ is photopic cd/m2 for radiance or lux for irradiance"
+    },
+    "cases": [
+      {
+        "name": "earth_551_age24",
+        "file": "earth_551_age24.mat",
+        "age": 24,
+        "ppd": 120,
+        "field_deg": 6,
+        "identical": false,
+        "contrast_fraction": 1,
+        "source": "earth551",
+        "normal_lux": 2.5640533088051014,
+        "direct_integral_relative_error": 2.63430151026256e-08,
+        "counter_integral_relative_error": 2.6343014880580995e-08,
+        "interior_luminance_p10_p50_p90": [
+          1091.9761474609375,
+          2086.1458740234375,
+          6718.432421874998
+        ]
+      },
+      {
+        "name": "earth_551_age50",
+        "file": "earth_551_age50.mat",
+        "age": 50,
+        "ppd": 120,
+        "field_deg": 6,
+        "identical": false,
+        "contrast_fraction": 1,
+        "source": "earth551",
+        "normal_lux": 2.5640533088051014,
+        "direct_integral_relative_error": 2.63430151026256e-08,
+        "counter_integral_relative_error": 2.6343014880580995e-08,
+        "interior_luminance_p10_p50_p90": [
+          1091.9761474609375,
+          2086.1458740234375,
+          6718.432421874998
+        ]
+      },
+      {
+        "name": "earth_551_age70",
+        "file": "earth_551_age70.mat",
+        "age": 70,
+        "ppd": 120,
+        "field_deg": 6,
+        "identical": false,
+        "contrast_fraction": 1,
+        "source": "earth551",
+        "normal_lux": 2.5640533088051014,
+        "direct_integral_relative_error": 2.63430151026256e-08,
+        "counter_integral_relative_error": 2.6343014880580995e-08,
+        "interior_luminance_p10_p50_p90": [
+          1091.9761474609375,
+          2086.1458740234375,
+          6718.432421874998
+        ]
+      },
+      {
+        "name": "earth_quarter_contrast_age70",
+        "file": "earth_quarter_contrast_age70.mat",
+        "age": 70,
+        "ppd": 120,
+        "field_deg": 6,
+        "identical": false,
+        "contrast_fraction": 0.25,
+        "source": "earth551",
+        "normal_lux": 2.5640533088051014,
+        "direct_integral_relative_error": 2.6343014880580995e-08,
+        "counter_integral_relative_error": 2.6343014880580995e-08,
+        "interior_luminance_p10_p50_p90": [
+          2359.2136930557535,
+          2784.4998762640253,
+          4192.42804013226
+        ]
+      },
+      {
+        "name": "earth_443_age24",
+        "file": "earth_443_age24.mat",
+        "age": 24,
+        "ppd": 120,
+        "field_deg": 6,
+        "identical": false,
+        "contrast_fraction": 1,
+        "source": "earth443",
+        "normal_lux": 2.5640533088051014,
+        "direct_integral_relative_error": 1.9145700025369194e-08,
+        "counter_integral_relative_error": 1.9145700025369194e-08,
+        "interior_luminance_p10_p50_p90": [
+          1792.0284301757813,
+          2308.1549072265625,
+          5631.1828125
+        ]
+      },
+      {
+        "name": "earth_680_age24",
+        "file": "earth_680_age24.mat",
+        "age": 24,
+        "ppd": 120,
+        "field_deg": 6,
+        "identical": false,
+        "contrast_fraction": 1,
+        "source": "earth680",
+        "normal_lux": 2.5640533088051014,
+        "direct_integral_relative_error": 2.5369823797305457e-08,
+        "counter_integral_relative_error": 2.5369823797305457e-08,
+        "interior_luminance_p10_p50_p90": [
+          749.6762878417969,
+          1993.3491821289062,
+          7040.788281249998
+        ]
+      },
+      {
+        "name": "earth_60ppd",
+        "file": "earth_60ppd.mat",
+        "age": 24,
+        "ppd": 60,
+        "field_deg": 6,
+        "identical": false,
+        "contrast_fraction": 1,
+        "source": "earth551",
+        "normal_lux": 2.5640533088051014,
+        "direct_integral_relative_error": 2.368256080131914e-08,
+        "counter_integral_relative_error": 2.368256080131914e-08,
+        "interior_luminance_p10_p50_p90": [
+          1093.25126953125,
+          2080.4830322265625,
+          6741.666308593752
+        ]
+      },
+      {
+        "name": "earth_wider_surround",
+        "file": "earth_wider_surround.mat",
+        "age": 24,
+        "ppd": 60,
+        "field_deg": 12,
+        "identical": false,
+        "contrast_fraction": 1,
+        "source": "earth551",
+        "normal_lux": 2.5640533088051014,
+        "direct_integral_relative_error": 2.3325950726515998e-08,
+        "counter_integral_relative_error": 2.3325950726515998e-08,
+        "interior_luminance_p10_p50_p90": [
+          1093.25126953125,
+          2080.4830322265625,
+          6741.666308593752
+        ]
+      },
+      {
+        "name": "moon_age24",
+        "file": "moon_age24.mat",
+        "age": 24,
+        "ppd": 120,
+        "field_deg": 6,
+        "identical": false,
+        "contrast_fraction": 1,
+        "source": "moon566",
+        "normal_lux": 0.32088746577111926,
+        "direct_integral_relative_error": 2.220446049250313e-16,
+        "counter_integral_relative_error": 3.3306690738754696e-16,
+        "interior_luminance_p10_p50_p90": [
+          2952.628259579315,
+          4238.604252803285,
+          6672.720594167966
+        ]
+      },
+      {
+        "name": "moon_age70",
+        "file": "moon_age70.mat",
+        "age": 70,
+        "ppd": 120,
+        "field_deg": 6,
+        "identical": false,
+        "contrast_fraction": 1,
+        "source": "moon566",
+        "normal_lux": 0.32088746577111926,
+        "direct_integral_relative_error": 2.220446049250313e-16,
+        "counter_integral_relative_error": 3.3306690738754696e-16,
+        "interior_luminance_p10_p50_p90": [
+          2952.628259579315,
+          4238.604252803285,
+          6672.720594167966
+        ]
+      },
+      {
+        "name": "moon_quarter_contrast_age70",
+        "file": "moon_quarter_contrast_age70.mat",
+        "age": 70,
+        "ppd": 120,
+        "field_deg": 6,
+        "identical": false,
+        "contrast_fraction": 0.25,
+        "source": "moon566",
+        "normal_lux": 0.32088746577111926,
+        "direct_integral_relative_error": 0.0,
+        "counter_integral_relative_error": 3.3306690738754696e-16,
+        "interior_luminance_p10_p50_p90": [
+          4095.0687445093154,
+          4489.607758979018,
+          5115.684086974322
+        ]
+      },
+      {
+        "name": "identical_control",
+        "file": "earth_551_age24.mat",
+        "age": 24,
+        "ppd": 120,
+        "field_deg": 6,
+        "identical": true,
+        "contrast_fraction": 1,
+        "source": "earth551",
+        "normal_lux": 2.5640533088051014,
+        "direct_integral_relative_error": 2.63430151026256e-08,
+        "counter_integral_relative_error": 2.6343014880580995e-08,
+        "interior_luminance_p10_p50_p90": [
+          1091.9761474609375,
+          2086.1458740234375,
+          6718.432421874998
+        ]
+      }
+    ],
+    "sources": {
+      "earth551": {
+        "filename": "epic_1b_20151117002712_00.h5",
+        "band_nm": 551,
+        "time": "2015-11-17 00:25:25",
+        "centre_lon_lat_deg": [
+          166.398110848729,
+          -11.178105029174773
+        ],
+        "source_disk_bbox": [
+          169,
+          166,
+          1878,
+          1881
+        ],
+        "interpretation": "Early public EPIC test product; use observed relative within-band structure only. Absolute scale is supplied by the sea study. Historical viewing geometry/clouds, not the 2038 surface map."
+      },
+      "earth443": {
+        "filename": "epic_1b_20151117002712_00.h5",
+        "band_nm": 443,
+        "time": "2015-11-17 00:22:24",
+        "centre_lon_lat_deg": [
+          166.398110848729,
+          -11.178105029174773
+        ],
+        "source_disk_bbox": [
+          169,
+          166,
+          1878,
+          1881
+        ],
+        "interpretation": "Early public EPIC test product; use observed relative within-band structure only. Absolute scale is supplied by the sea study. Historical viewing geometry/clouds, not the 2038 surface map."
+      },
+      "earth680": {
+        "filename": "epic_1b_20151117002712_00.h5",
+        "band_nm": 680,
+        "time": "2015-11-17 00:26:18",
+        "centre_lon_lat_deg": [
+          166.398110848729,
+          -11.178105029174773
+        ],
+        "source_disk_bbox": [
+          169,
+          166,
+          1878,
+          1881
+        ],
+        "interpretation": "Early public EPIC test product; use observed relative within-band structure only. Absolute scale is supplied by the sea study. Historical viewing geometry/clouds, not the 2038 surface map."
+      },
+      "moon566": {
+        "tiles": [
+          {
+            "filename": "WAC_HAPKE_566NM_E350N0450.IMG",
+            "ppd": 76.000000000064,
+            "line_offset": 5320.4999999999,
+            "sample_offset": -0.5,
+            "west": 0.0,
+            "product_version": "\"v1.2\""
+          },
+          {
+            "filename": "WAC_HAPKE_566NM_E350N3150.IMG",
+            "ppd": 76.000000000064,
+            "line_offset": 5320.4999999999,
+            "sample_offset": -20520.5,
+            "west": 270.0,
+            "product_version": "\"v1.2\""
+          },
+          {
+            "filename": "WAC_HAPKE_566NM_E350S0450.IMG",
+            "ppd": 76.000000000064,
+            "line_offset": -0.5,
+            "sample_offset": -0.5,
+            "west": 0.0,
+            "product_version": "\"v1.2\""
+          },
+          {
+            "filename": "WAC_HAPKE_566NM_E350S3150.IMG",
+            "ppd": 76.000000000064,
+            "line_offset": -0.5,
+            "sample_offset": -20520.5,
+            "west": 270.0,
+            "product_version": "\"v1.2\""
+          }
+        ],
+        "polar_extension_pixel_fraction": 0.021164021164021163,
+        "interpretation": "LROC 566-nm relative spatial pattern at its reference g=i=60 degrees, e=0; not a full-phase photometric prediction. Disk mean independently anchored to the measured bright full-Moon range."
+      }
+    },
+    "inputs": {
+      "WAC_HAPKE_566NM_E350N0450.IMG": "84517fb17f897edfa2c587ad5eccbf9cd2a5181882ae244a2aae2c23aac225bd",
+      "WAC_HAPKE_566NM_E350N3150.IMG": "4a676801e8ee8c6ab8ba96e6c3e286db29ea6988b7bcfa16e7a903522db1b60a",
+      "WAC_HAPKE_566NM_E350S0450.IMG": "524dec9b183d10b7a7c78965bab3194baf12e7372f79fb4cbecb182dccd518ee",
+      "WAC_HAPKE_566NM_E350S3150.IMG": "0aabaf2dfa0d84b2d73330b4e073fc8145294bc4cfe41b2faa6c20c676782d97",
+      "epic_1b_20151117002712_00.h5": "3341907e439947636321227ab27badc398f9186001c37562bbec918d96770f94",
+      "hdrvdp-3.0.7.zip": "baa5c25cca2e38176345a2a5423793459fbf571282396640c5e4ac85bf8381b3"
+    },
+    "evidence": "Computed stimuli and external vision-model screening; no new observer experiment.",
+    "limitations": [
+      "Within-band Earth contrast used as an achromatic luminance proxy; three observed bands tested separately.",
+      "Early EPIC public test granule has inconsistent L1A/L1B metadata and unspecified radiance unit scale. No absolute EPIC calibration claimed.",
+      "Earth historical phase/view and clouds differ from the 2038 scene; the test concerns plausible observed spatial structure.",
+      "Moon map phase dependence and opposition contrast are not solved; mean luminance anchor is empirical, spatial pattern is a control.",
+      "Moon surround 0.01 cd/m2 is prescribed; there is no calibrated full coastal photograph or human field validation.",
+      "Static attended achromatic detection; colour recognition, gaze dynamics, eye disease and individual perception are not certified."
+    ]
+  },
+  "predictions": [
+    {
+      "name": "earth_551_age24",
+      "task": "detection",
+      "model": "HDR-VDP-3.0.7",
+      "mtf": "CIE99",
+      "age": 24,
+      "pixels_per_degree": 120,
+      "P_det": 1,
+      "C_max": 415033.2502542463,
+      "interior_C_max": 415033.2502542463,
+      "interior_P_max": 1,
+      "interior_P_median": 1,
+      "seconds": 14.767776012420654
+    },
+    {
+      "name": "earth_551_age50",
+      "task": "detection",
+      "model": "HDR-VDP-3.0.7",
+      "mtf": "CIE99",
+      "age": 50,
+      "pixels_per_degree": 120,
+      "P_det": 1,
+      "C_max": 325268.4298172798,
+      "interior_C_max": 325268.4298172798,
+      "interior_P_max": 1,
+      "interior_P_median": 1,
+      "seconds": 14.5089271068573
+    },
+    {
+      "name": "earth_551_age70",
+      "task": "detection",
+      "model": "HDR-VDP-3.0.7",
+      "mtf": "CIE99",
+      "age": 70,
+      "pixels_per_degree": 120,
+      "P_det": 1,
+      "C_max": 258720.830406928,
+      "interior_C_max": 258720.830406928,
+      "interior_P_max": 1,
+      "interior_P_median": 1,
+      "seconds": 13.93028211593628
+    },
+    {
+      "name": "earth_quarter_contrast_age70",
+      "task": "detection",
+      "model": "HDR-VDP-3.0.7",
+      "mtf": "CIE99",
+      "age": 70,
+      "pixels_per_degree": 120,
+      "P_det": 1,
+      "C_max": 3941.457651573429,
+      "interior_C_max": 3941.457651573429,
+      "interior_P_max": 1,
+      "interior_P_median": 1,
+      "seconds": 14.918515920639038
+    },
+    {
+      "name": "earth_443_age24",
+      "task": "detection",
+      "model": "HDR-VDP-3.0.7",
+      "mtf": "CIE99",
+      "age": 24,
+      "pixels_per_degree": 120,
+      "P_det": 1,
+      "C_max": 259384.3051629113,
+      "interior_C_max": 259384.3051629113,
+      "interior_P_max": 1,
+      "interior_P_median": 1,
+      "seconds": 15.22887897491455
+    },
+    {
+      "name": "earth_680_age24",
+      "task": "detection",
+      "model": "HDR-VDP-3.0.7",
+      "mtf": "CIE99",
+      "age": 24,
+      "pixels_per_degree": 120,
+      "P_det": 1,
+      "C_max": 620033.8655183725,
+      "interior_C_max": 620033.8655183725,
+      "interior_P_max": 1,
+      "interior_P_median": 1,
+      "seconds": 15.446178913116455
+    },
+    {
+      "name": "earth_60ppd",
+      "task": "detection",
+      "model": "HDR-VDP-3.0.7",
+      "mtf": "CIE99",
+      "age": 24,
+      "pixels_per_degree": 60,
+      "P_det": 1,
+      "C_max": 145115.3055326292,
+      "interior_C_max": 145115.3055326292,
+      "interior_P_max": 1,
+      "interior_P_median": 1,
+      "seconds": 3.925027847290039
+    },
+    {
+      "name": "earth_wider_surround",
+      "task": "detection",
+      "model": "HDR-VDP-3.0.7",
+      "mtf": "CIE99",
+      "age": 24,
+      "pixels_per_degree": 60,
+      "P_det": 1,
+      "C_max": 145118.58934040263,
+      "interior_C_max": 145118.58934040263,
+      "interior_P_max": 1,
+      "interior_P_median": 1,
+      "seconds": 15.745223045349121
+    },
+    {
+      "name": "moon_age24",
+      "task": "detection",
+      "model": "HDR-VDP-3.0.7",
+      "mtf": "CIE99",
+      "age": 24,
+      "pixels_per_degree": 120,
+      "P_det": 1,
+      "C_max": 134.47508085988204,
+      "interior_C_max": 134.47508085988204,
+      "interior_P_max": 1,
+      "interior_P_median": 0.9978399717462116,
+      "seconds": 15.061391830444336
+    },
+    {
+      "name": "moon_age70",
+      "task": "detection",
+      "model": "HDR-VDP-3.0.7",
+      "mtf": "CIE99",
+      "age": 70,
+      "pixels_per_degree": 120,
+      "P_det": 0.9999999999823291,
+      "C_max": 35.71983508476011,
+      "interior_C_max": 35.71983508476011,
+      "interior_P_max": 0.9999999999823291,
+      "interior_P_median": 0.8868346199047505,
+      "seconds": 13.149909973144531
+    },
+    {
+      "name": "moon_quarter_contrast_age70",
+      "task": "detection",
+      "model": "HDR-VDP-3.0.7",
+      "mtf": "CIE99",
+      "age": 70,
+      "pixels_per_degree": 120,
+      "P_det": 0.15619671870809004,
+      "C_max": 0.2450213971210893,
+      "interior_C_max": 0.2450213971210893,
+      "interior_P_max": 0.15619671870809004,
+      "interior_P_median": 0.015587258154577177,
+      "seconds": 15.180598974227905
+    },
+    {
+      "name": "identical_control",
+      "task": "detection",
+      "model": "HDR-VDP-3.0.7",
+      "mtf": "CIE99",
+      "age": 24,
+      "pixels_per_degree": 120,
+      "P_det": 0,
+      "C_max": 0,
+      "interior_C_max": 0,
+      "interior_P_max": 0,
+      "interior_P_median": 0,
+      "seconds": 14.063323020935059
+    }
+  ],
+  "software": {
+    "python": "3.13.7",
+    "numpy": "2.3.3",
+    "scipy": "1.16.2",
+    "numba": "0.68.0",
+    "h5py": "3.16.0",
+    "pillow": "11.3.0",
+    "octave": "10.3.0",
+    "octave_image": "2.16.1",
+    "octave_statistics": "1.6.0",
+    "hdrvdp": "3.0.7",
+    "threads": {
+      "BLAS": 1,
+      "OpenMP": 1,
+      "numba": 2
+    },
+    "gpu": false
+  },
+  "checks": {
+    "focused_pytest": "13 passed, including official Radiance unit round-trip",
+    "make_check": "exit 0; 654 Python passed, 37 skipped; JavaScript 129 + 48 passed; layers 444 files / 0 violations; ensemble PASS",
+    "research_provenance": "PASS_WITH_BLOCKED_INPUTS: existing protection spectral inputs unavailable",
+    "empirical_validation": "No new observer study or calibrated coastal Moon photograph",
+    "source_reading": "HDR-VDP-3 paper and two-page Schmidt Moon report read; EPIC and LROC documentation and metadata inspected. CIE implemented through official model code; full CIE publication not independently reviewed."
+  },
+  "qualitative_result": "Visible Earth interior structure is supported throughout the tested wavelength, age and contrast cases. A featureless clipped disk is a display failure, not the model prediction.",
+  "numerical_limit": "Detection saturates; 60/120 ppd agree qualitatively but C_max has not converged. No precise probability or recognizability of particular geographic features is inferred.",
+  "source_manifest_sha256": "b026717856fa2b3c4a8889d8cc595314c48427a9305492b2235b9fcc3a383e50"
+}
