@@ -1158,5 +1158,188 @@
         "process-group lookup does not see the test process in this execution environment"
       ]
     }
+  },
+  "cycle_closure": {
+    "checked_at_utc": "2026-10-05T15:09:14.737405+00:00",
+    "starting_remote_head": "85b9851fae79fb3304047481902f9086a8091b60",
+    "early_plan_commit": "ffb8721696bcf93386871546b046e19a76edc551",
+    "objective": "Test full-cycle preparation from actual terminal states, propagate return-capable hardware mass, and gate handover/fleet expansion on local geometry and cost.",
+    "products": {
+      "closure_screen.json": "9a83f5623a90f23a7216e828463f998adfd79f1f030a79e93ba311ce749a24bb",
+      "closure_hardware.json": "6a03c63e52112f3e0564199175cf0796c9975691181a0f58f03d37bf7e54e552",
+      "closure_sizing.json": "7bd01de3cd9d917ffc55d5679f3abd70bf519858ee021314a2251ac14e8b2b40",
+      "closure_return.json": "2edc5fc7b823de2fbda33a78116ed9715a8ec47723e1f92a6b2b0e12e3ef283c",
+      "closure_validation.json": "5032a8f71204508544dbc840c8e33208e1f0a62719c12245806e014e7a03baef",
+      "closure_budget.json": "7c09e5a7a25b733bce63b54cf8ce2051c978b789e5ba981d4a503a38d36749cf",
+      "closure_audit.json": "9728da411e49d710dab8301451a35262c5f23c2eb93aa7b5232e55b4486148e4"
+    },
+    "study_tests": {
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m pytest protection/dynamics research/studies/solar_shield_array -q",
+      "status": "PASS",
+      "passed": 141,
+      "elapsed_s": 12.32
+    },
+    "resources": {
+      "numerical_wall_limit_s": 4800,
+      "producer_wall_s": {
+        "closure_screen": 390.72729380700184,
+        "closure_hardware": 525.596301652,
+        "closure_sizing": 509.1656642050002,
+        "closure_return": 589.6777360980013,
+        "closure_validation": 1990.4532675279988,
+        "closure_budget": 362.29894222800067,
+        "closure_audit": 21.418864027997188
+      },
+      "numerical_wall_s": 4389.338069546,
+      "address_space_limit_GiB": 2,
+      "maximum_rss_MiB": 644.0703125,
+      "new_raw_MiB": 202.84809494018555,
+      "new_raw_limit_MiB": 768,
+      "numerical_threads": 1,
+      "maximum_concurrent_producers": 1,
+      "numerical_restarts": 0,
+      "repository_check_allowance_s": 300
+    },
+    "executed": [
+      "Twelve endpoint/arrival/assignment proposals and three selected infeasible encounter-cut refinements",
+      "Two distinct hardware-loaded twelve-hour passages, including return-capable power allocation",
+      "One coupled return from actual mass-loaded terminal states, stopped at 100 m",
+      "One complete tighter sequence from the epoch through the same return event",
+      "Per-member actual load, partial burn and optical accounts for all executed stages and the preliminary mass experiment",
+      "891 additional local source/date probes and frozen-event orientation diagnostics"
+    ],
+    "hardware_mass": {
+      "optical_mass_kg": 1805000000.0,
+      "total_allocated_mass_kg": 2263298487.05685,
+      "power_hardware_kg": 97298487.05684994,
+      "mean_total_to_optical_mass_ratio": 1.2539049789788643,
+      "distribution": "All fixed and power hardware mass uniformly distributed over each rigid square. Optical mass and area unchanged. Constant carried mass; propellant depletion and detailed hardware layout remain outside this passage."
+    },
+    "accepted_local_service_departure": true,
+    "accepted_return": false,
+    "accepted_fleet": false,
+    "continuous_coverage_certified": false,
+    "local_return": {
+      "end_s": 50016.72633817279,
+      "pair": [
+        325,
+        347
+      ],
+      "surface_m": 99.99999999963353,
+      "replay": {
+        "maximum_position_difference_m": 9.041876045842931,
+        "position_difference_plus_reconstruction_m": 9.041876964828507,
+        "maximum_velocity_difference_m_s": 0.00034732137661206287,
+        "event_time_difference_s": 0.6522837154261651,
+        "same_witness_pair": true
+      },
+      "mean_applied_translation_m_s": 0.975895436540377,
+      "scheduled_burns": 1171,
+      "started_burns": 361,
+      "cause": "100 m clearance event; no impact simulated. Restricted return family and encounter-cut choices do not exclude other designs."
+    },
+    "hardware_account": {
+      "executed_energy_J": 51859076442835.18,
+      "complete_twelve_hour_passage": true,
+      "previous_optical_only_energy_J": 41454960647678.85,
+      "optical_mass_equivalent_m_s": 0.9480677094426669,
+      "total_mass_weighted_equivalent_m_s": 0.7560921483976718,
+      "allocated_installed_power_W": 29189546117.054985,
+      "sum_required_member_peak_W": 18762355296.890327,
+      "minimum_individual_capacity_to_peak": 1.3911087676688614,
+      "maximum_25_percent_margin_allocation_ratio": 0.8985638140248924,
+      "all_members_fit_installed_capacity": true,
+      "full_margin_target_met": true,
+      "peak_sampling": "Maximum over both 16-source/120-second and rotated 32-source/240-second load evaluations; nominal attitude and smooth burn power sampled every two seconds.",
+      "scope": "Sampled individual peaks through the executed return prefix. Complete return, structural mass layout, deployment and repeated-cycle hardware still unclosed."
+    },
+    "executed_prefix_conditional_cost": {
+      "assumed_cycle_days": 2.0,
+      "energy_through_stop_J": 119337920979695.84,
+      "scope": "Repeat only the measured expenditure through the failed-return stop once per two days, with the propagated mass allocation. No return completion, handover, recovery or global coverage is supplied by this arithmetic. Inventory remains hypothetical.",
+      "rows": [
+        {
+          "tiles": 17285560.170967527,
+          "mean_propulsion_TW": 33.06823275387139,
+          "installed_propulsion_capacity_TW": 1397.6666364808461,
+          "propellant_kg_s": 51439.47317268881
+        },
+        {
+          "tiles": 25000000.0,
+          "mean_propulsion_TW": 47.82638286928664,
+          "installed_propulsion_capacity_TW": 2021.436711707409,
+          "propellant_kg_s": 74396.59557444586
+        },
+        {
+          "tiles": 35000000.0,
+          "mean_propulsion_TW": 66.95693601700128,
+          "installed_propulsion_capacity_TW": 2830.0113963903723,
+          "propellant_kg_s": 104155.23380422422
+        }
+      ]
+    },
+    "coverage_adversary": {
+      "grid_probes": 533,
+      "total_probes": 891,
+      "worst": {
+        "time_s": 745.027436313537,
+        "angle_rad": 3.1415905367304884,
+        "solar_radius_fraction": 1.0,
+        "margin_m": 6977.412392785093,
+        "missed_area_m2": 0.0,
+        "covered_fraction": 1.0,
+        "circle_sagitta_allowance_m": 0.1882471739889091
+      },
+      "passed": true,
+      "continuous_certificate": false
+    },
+    "frozen_orientation_scope": "Same terminal centres and velocities with hypothetical common square orientations. No instantaneous slew, alternative force history, safe transition or operating saving is implied.",
+    "collection": "Per-member first-interception, two-face, redirected-band and mutual-shadow records on every executed stage. Service/departure source refinement changes optical energy by less than 9.72e-5 relative; feathered return retains a 3.14% 16/32-source discrepancy. Optical potential only.",
+    "recurring_cost_measured": false,
+    "fleet_propulsion_W": null,
+    "collection_capacity_W": null,
+    "delivered_power_W": null,
+    "not_executed": [
+      "Full return and next service",
+      "Two-pattern handover, acquisition and recovery",
+      "Safe trajectories using the frozen-event alternative orientations",
+      "Repeated cycles, operational maneuver frequency and simultaneous full-target placement",
+      "Detailed hardware layout, flexibility, propellant depletion feedback and energy supply/storage",
+      "Collector momentum, spectral/angular conversion and net delivered power",
+      "Exhaustive continuous coverage and encounter certification"
+    ],
+    "publication_target": "research/solar-shield-habitat-array; main unchanged",
+    "repository_checks": {
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 make check",
+      "status": "FAIL_EXISTING",
+      "layer_files": 524,
+      "layer_violations": 0,
+      "python_passed": 686,
+      "python_skipped": 55,
+      "python_failed": 13,
+      "python_elapsed_s": 30.6,
+      "same_failed_tests_as_before_changes": true,
+      "failed_tests": [
+        "atmosphere/tests/test_absorption.py::test_ion_production_falls_with_the_shadow_and_ends_at_the_outer_radius",
+        "atmosphere/tests/test_absorption.py::test_ionization_rate_is_of_the_tabulated_order",
+        "atmosphere/tests/test_absorption.py::test_design_case_needs_a_radius_just_under_the_exobase",
+        "atmosphere/tests/test_exosphere.py::test_dissociation_rates_agree_with_heays",
+        "atmosphere/tests/test_exosphere.py::test_ions_made_match_the_absorption_step",
+        "atmosphere/tests/test_exosphere.py::test_charge_exchange_thin_limit_counts_the_swept_exosphere",
+        "atmosphere/tests/test_exosphere.py::test_magnetosphere_accounts_for_every_ion_and_a_stronger_one_keeps_more",
+        "atmosphere/tests/test_exosphere.py::test_levels_are_ordered_and_wider_shadows_never_lose_more",
+        "climate/tests/test_cm1_run.py::test_the_terrain_build_forces_each_column_at_its_own_height",
+        "climate/tests/test_exoplasim_run.py::RunnerTests::test_process_lookup_finds_this_process",
+        "climate/tests/test_ring_comfort.py::test_hours_are_shares_of_the_lunar_day",
+        "climate/tests/test_ring_comfort.py::test_the_rings_land_is_pooled_by_latitude_and_height_and_counted_in_shares",
+        "research/studies/protection_architecture/test_run.py::test_design_point_holds_together"
+      ],
+      "later_make_targets_reached": false,
+      "causes": [
+        "missing pinned WHI solar spectrum",
+        "missing generated moon_gcm_configuration.json",
+        "process-group lookup does not see the test process in this execution environment"
+      ]
+    }
   }
 }

@@ -1,0 +1,751 @@
+{
+  "schema": "terluna.research.cycle-closure-validation/1",
+  "producer": {
+    "source_hashes": {
+      "protection/dynamics/cycling.py": "704fbd03c9d4070ea05bdfeba57914ec225941f3560710da2472bd24ca870ed4",
+      "protection/dynamics/ephemeris.py": "9a162c3acf63a844284eb61b444a7d34f1447b5182d254d3e87616516f8748d9",
+      "protection/dynamics/ephemeris.json": "90fde7cb6142e5d4d8082270a978ba2f8f47baaefab0e8d1cf82ec6f07a27222",
+      "protection/dynamics/model.py": "01c9191588037ab4f42bac38dc4d5bd99e57427d37fa75cd672120e32b53733a",
+      "protection/dynamics/optical.py": "06a13ae9f24834876edbc12b513deaa5e3735f02f8249eb57c8996d74ce00b56",
+      "research/studies/solar_shield_array/scenario.json": "a53b784941518b6e36ccdf728252cf6c8e0c46c1126b6c621ed4e28c23128699",
+      "research/studies/solar_shield_array/cycling_search.py": "4789a0185620f6662916462b2715aa9002e6454e74f4f32ef5f7dadf5f732093",
+      "research/studies/solar_shield_array/cycling_feedback.py": "0eb32d26e14472f0a512cdf45d60f00ab8260376cd51ca715e7615bf7df02775",
+      "protection/dynamics/fleet.py": "f3e52653876c2956a4b355dc1290a0a1cadd2b9b601cafc664259827df1cc93c",
+      "research/studies/solar_shield_array/fleet_run.py": "9b8bc9765b9288745ea7d4d69d59e857e76e54d29cc91b37160503e9d9090833",
+      "protection/dynamics/active_formation.py": "597c12c6a4a89c0ea70663fddd69b9b5d9e599c88a2bd1742f5009d19e050b7a",
+      "protection/dynamics/active_retime.py": "9ba27a7ec48460a345289ebc7550c502f845487beaec5fe35084a67b2d9d736b",
+      "protection/dynamics/coverage_pilot.py": "fb03381e4387cb17e5276148428a3ffb2cbfb5313c8f59b8ff708ebeb9ce079c",
+      "protection/dynamics/natural_pattern.py": "780c2679f13c097c07b89e9d7cce1c91399f464f01b4bd878fb50cb643e1be29",
+      "research/studies/solar_shield_array/patterns_run.py": "f2e346fd2281632e5bf1c285c61229ba24e26e4ba4c480713194218263888d5c",
+      "protection/dynamics/pattern_departure.py": "24e7bb0653f9ab546b46a9a650ae67e3adb0af154c3e5b9ba83461e9648b828b",
+      "protection/dynamics/departure_control.py": "beafd12acfb4a228c17a329c9e0d278282222e90be7126b20b3e2df551bedfd5",
+      "protection/dynamics/pattern_return.py": "a1a3f85e5f7744d0418574d0fc2a033d4ab69d9d55eba9bfbb85974c7ab64757",
+      "protection/dynamics/energy_coast.py": "df47adb192e3f665e977353844e478f9cd5a30f63ca54ea2f31b59e9cd1b6826",
+      "protection/dynamics/attitude_load.py": "0b977677edc96d33889eb36526c4826c625eea2cb1a4e3b4254e970ac99582e4",
+      "research/studies/solar_shield_array/return_screen.py": "53ec3ecf5165c773142315d97553f9c72ebbe6c045299ec368104c1811f4b526",
+      "research/studies/solar_shield_array/energy_screen.py": "3506f2f1c725299fc98795fb32ed3c0063605f114c3d5cdbc711ee0f5c3bf9bd",
+      "protection/dynamics/parallel_shadow.py": "98d09fc9e5812b3592cbc5e24e0615f9f9aa3a75c7f33afff0fe82d0e40c3c24",
+      "research/studies/solar_shield_array/departure_validate.py": "df457b279e1b69627f65fa528877faa414161e6bfea881387d28243504f9b9b0",
+      "research/studies/solar_shield_array/energy_run.py": "1ddb0b6d2aabac1252ae614369230d286d6db7c79a45b7c863ac1a926ccd1c08",
+      "protection/dynamics/coast_control.py": "315bb9a1456ca1108f93ec1579719f7933acafb3f3c2b79bb2cf875961685c4d",
+      "research/studies/solar_shield_array/energy_correct.py": "5c518a5e0aa17c2e8cd999f46f9ab139c02534f58919ee630f38fbfbd523d9ca",
+      "research/studies/solar_shield_array/energy_replay.py": "b3ce134e8ad2d005d23a367d9d90e832b89c4fd11bbcca7ff448706987ca8d4c",
+      "protection/dynamics/packing_control.py": "2a728856edbc76c79eb59e7ba29532c5fe62671f24e39687cabb0bea7f7272a7",
+      "research/studies/solar_shield_array/packing_screen.py": "1a3b771ed6543810d75dfc54c7ca33a084086a9c9519bdc26959a89c87f8fedb",
+      "research/studies/solar_shield_array/packing_run.py": "d9971a9f1bf6a3d8a9ebad83e9e9fd78af046eb5af7a0c06fe4250ee05c8ec8b",
+      "protection/dynamics/collection.py": "a742f83d832f1afdfc144f0661c5a0dcfe8723bfcd184e2d65db778ca9af7cf9",
+      "research/studies/solar_shield_array/packing_validate.py": "0a6f52de4a2d07d80b137c1a67ac6e6e8ee0aa1d7cb3683684e076fcf776e5f0",
+      "research/studies/solar_shield_array/departure_screen.py": "9e69d5e5db5729191ca6ccae8673d24dfab7606af8bb47f1038913b328750ff4",
+      "research/studies/solar_shield_array/departure_refine.py": "c206316508235d2e5960dff5a6ab5de90334a632a67e46a54505d7d9909fd72a",
+      "research/studies/solar_shield_array/departure_run.py": "b142372d4b1ed3383bfe4ff5ea8764bbb2c12e8d92c3db8cb81138a18663a2c8",
+      "research/studies/solar_shield_array/departure_budget.py": "61434cb29ddf74bdfef79abcfcdd3f9a886caa8e21ba9a76f23faf6167b579a4",
+      "research/studies/solar_shield_array/pilot_budget.py": "2a7fc3e12d4b4aae98ce8d656220e0c10cbe0d5de2099f0406d64662e563c41e",
+      "protection/dynamics/tile_torque.py": "448a9ee6db481c18252196045cc53ad48733aacb9f8fc2620db8eae10acd6cbf",
+      "research/studies/solar_shield_array/energy_budget.py": "1d261c43f9bfebd418875e9b62f00fbc554bb03da6e679c36918e252bb272fab",
+      "research/studies/solar_shield_array/packing_budget.py": "912e8723c4855545cdde6817641159b1d6dbd5e90d5b86c9da5544d8162dd3ca",
+      "protection/dynamics/square_distance.py": "b38c54b6d9a96b161e82b755d407758548a38244c9292d73404ab45cdc1210ba",
+      "protection/dynamics/service_margin.py": "2651d828734f82416fa39bd6a77da31ae070aaa7606f6b80cdb1cbf00090e68f",
+      "research/studies/solar_shield_array/packing_audit.py": "bdb61443a6ded75c9c5c3dfbd6644b947874d710194363ba572f5814a36f5b91",
+      "protection/dynamics/cycle_control.py": "79979d6ec11f8095a9b9d9f20162e0c564a547aa108d0f8aff330c1ba5ceb5ac",
+      "research/studies/solar_shield_array/closure_screen.py": "77943258dd53965b799437d274b25a97fa8b122fc69d36021dce97db10cc0c27",
+      "protection/dynamics/mass_feedback.py": "a7a22f4879f9bf65f4124c4533beab860bb2135b579fd588d0470962ca741abc",
+      "research/studies/solar_shield_array/closure_propagate.py": "94439660cf036cde289ad7fdd8bb17b2efd37680ca189a2057ee64e30c3d51e2",
+      "research/studies/solar_shield_array/closure_hardware.py": "fea296454ae7a7b86091ccf462a0c86dec47250b092395e203a8bd2d501c6349",
+      "research/studies/solar_shield_array/closure_sizing.py": "7b0a85ef346d6d5328f65f0108a82df3dd562866ec69ef3b2f56223cfe5a3f56",
+      "research/studies/solar_shield_array/closure_return.py": "1b2eed766423e99684d5e8084f11709f50915d37185b2556eafdce0823da3464",
+      "research/studies/solar_shield_array/closure_validate.py": "beae9de9f295d8eb7819949119d9315ce462e72e29c3f3b2095642163164baa6",
+      "protection/dynamics/compact_shadow.py": "e4a729b6fa500a8e3e380a17f34009ba846a6eb3d33038679e0495afbe69fac7",
+      "research/studies/solar_shield_array/closure_compact.py": "d702eaf9e7aa9f0c8336a99c6b3608a35dafd504d856edc1e2d624ab00b20f31"
+    },
+    "constants": {
+      "AU": 149597870700.0,
+      "EARTH_GM": 398600441800000.0,
+      "EARTH_MOON_DISTANCE": 384400000.0,
+      "EARTH_OBLIQUITY_DEG": 23.4393,
+      "EARTH_RADIUS": 6371000.0,
+      "JULIAN_DAY": 86400.0,
+      "MOON_GM": 4902800118000.0,
+      "MOON_RADIUS": 1737400.0,
+      "SOLAR_CONSTANT": 1361.0,
+      "SOLAR_SYSTEM_GM": {
+        "mercury": 22031868551000.0,
+        "venus": 324858592000000.0,
+        "mars": 42828375816000.0,
+        "jupiter": 1.267127641e+17,
+        "saturn": 3.79405848418e+16,
+        "uranus": 5794556400000000.0,
+        "neptune": 6836527100580000.0,
+        "pluto": 975500000000.0
+      },
+      "SPEED_OF_LIGHT": 299792458.0,
+      "SUN_GM": 1.3271244004127942e+20,
+      "SUN_RADIUS": 695700000.0
+    },
+    "inputs": {
+      "packing_validation.json": "497807b12f604fc0e869cb47e407a52423fc8069f1a02b3b84cbbfc75e4815bd",
+      "closure_screen.json": "9a83f5623a90f23a7216e828463f998adfd79f1f030a79e93ba311ce749a24bb",
+      "closure_hardware.json": "6a03c63e52112f3e0564199175cf0796c9975691181a0f58f03d37bf7e54e552",
+      "closure_sizing.json": "7bd01de3cd9d917ffc55d5679f3abd70bf519858ee021314a2251ac14e8b2b40",
+      "closure_return.json": "2edc5fc7b823de2fbda33a78116ed9715a8ec47723e1f92a6b2b0e12e3ef283c"
+    }
+  },
+  "budget": {
+    "prior_wall_s": 2015.1669957620034,
+    "this_stage_wall_s": 2184,
+    "threads": 1,
+    "address_space_GiB": 2
+  },
+  "scope": "Same hardware masses, initial epoch state and controls; complete sequential replay with twice the solar force sources, half the integration step and tighter tolerance. Exact shadow-union compaction is checked against the original backend. No coarse terminal state is substituted between legs.",
+  "accepted_hardware_passage": true,
+  "accepted_return": false,
+  "accepted_fleet": false,
+  "continuous_certificate": false,
+  "runs": [
+    {
+      "start_s": 0.0,
+      "end_s": 21600.0,
+      "intended_end_s": 21600.0,
+      "completed": true,
+      "clearance_event": false,
+      "suns": 16,
+      "max_step_s": 60.0,
+      "rtol": 2e-12,
+      "minimum_sampled_surface_distance_m": 6698.744073005048,
+      "sampled_witness": {
+        "time_s": 21600.0,
+        "pair": [
+          170,
+          208
+        ],
+        "projection_m": [
+          0.242208692812063,
+          16698.744071836234,
+          -0.12513662640764717
+        ]
+      },
+      "minimum_conditional_surface_distance_m": 6669.9500093478955,
+      "flagged_intervals": 0,
+      "acceleration_guard_m_s2": 0.15,
+      "rate_guard_deg_s": 0.1,
+      "beam_margin_deg": 96.46791863574543,
+      "rate_deg_s": 1.1365323644512105e-05,
+      "angular_acceleration_deg_s2": 1.2951510041654665e-12,
+      "maximum_evaluated_acceleration_m_s2": 0.02202949027238464,
+      "maximum_command_acceleration_m_s2": 0.0,
+      "scheduled_translation_m_s": 0.0,
+      "mean_applied_translation_m_s": 0.0,
+      "maximum_applied_translation_m_s": 0.0,
+      "scheduled_burn_count": 0,
+      "started_burn_count": 0,
+      "reconstruction_error_m": 8.485806596245493e-08,
+      "crossings": {
+        "crossing_near_encounters": 0,
+        "physical_intersections": 0,
+        "witnesses": []
+      },
+      "raw_path": "research/runs/solar_shield_array/closure/closure_fine_0.npz",
+      "raw_sha256": "e44fe36ff011b4efcb1190a8fca0d51630b451ddffaa3aeba62372d34b8470de",
+      "elapsed_s": 627.5884549260008,
+      "nfev": 5447,
+      "geometry_pass": true,
+      "comparison": {
+        "maximum_position_difference_m": 1.5550246495091677,
+        "position_difference_plus_reconstruction_m": 1.5550249282714117,
+        "maximum_velocity_difference_m_s": 0.00015440067211634087,
+        "event_time_difference_s": 0.0,
+        "same_witness_pair": true
+      },
+      "coverage": {
+        "samples": [
+          {
+            "all_sampled_sun_coverage": 1.0000000000000004,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 5742179.881491593,
+            "sources": 25,
+            "time_s": 0.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 1.0,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 5502411.403357047,
+            "sources": 25,
+            "time_s": 450.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 1.0000000000000002,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 5261016.276147611,
+            "sources": 25,
+            "time_s": 900.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 1.0000000000000007,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 5018065.353429322,
+            "sources": 25,
+            "time_s": 1350.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 1.0000000000000007,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 4773629.9447624255,
+            "sources": 25,
+            "time_s": 1800.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 1.0000000000000004,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 4527781.795700857,
+            "sources": 25,
+            "time_s": 2250.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 1.0000000000000007,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 4280593.067615609,
+            "sources": 25,
+            "time_s": 2700.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 0.9999999999999998,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 4032136.317616405,
+            "sources": 25,
+            "time_s": 3150.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 0.9999999999999998,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 3782484.478395788,
+            "sources": 25,
+            "time_s": 3600.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 1.0000000000000002,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 3531710.8380290596,
+            "sources": 25,
+            "time_s": 4050.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 0.9999999999999998,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 3279889.019774999,
+            "sources": 25,
+            "time_s": 4500.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 1.0000000000000002,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 3027092.961786465,
+            "sources": 25,
+            "time_s": 4950.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 1.0000000000000002,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 2773396.8968581,
+            "sources": 25,
+            "time_s": 5400.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 1.0000000000000002,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 2518875.332067685,
+            "sources": 25,
+            "time_s": 5850.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 1.0,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 2263603.0284147365,
+            "sources": 25,
+            "time_s": 6300.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 0.9999999999999987,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 2007654.9804019332,
+            "sources": 25,
+            "time_s": 6750.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 0.9999999999999989,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 1751106.3955465276,
+            "sources": 25,
+            "time_s": 7200.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 0.9999999999999984,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 1494032.6739345286,
+            "sources": 25,
+            "time_s": 7650.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 0.9999999999999989,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 1236509.3876641558,
+            "sources": 25,
+            "time_s": 8100.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 0.9999999999999983,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 978612.2604546604,
+            "sources": 25,
+            "time_s": 8550.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 0.9999999999999981,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 720417.147615511,
+            "sources": 25,
+            "time_s": 9000.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 0.999999999999999,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 462000.0184043842,
+            "sources": 25,
+            "time_s": 9450.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 1.0000000000000002,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 203436.96208354746,
+            "sources": 25,
+            "time_s": 9900.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 1.0000000000000004,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 55196.563588947785,
+            "sources": 25,
+            "time_s": 10350.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 0.9999999999999989,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 313822.8713766892,
+            "sources": 25,
+            "time_s": 10800.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 0.9999999999999983,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 572366.9960427944,
+            "sources": 25,
+            "time_s": 11250.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 0.9999999999999981,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 830752.4400426497,
+            "sources": 25,
+            "time_s": 11700.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 0.9999999999999989,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 1088903.0076816888,
+            "sources": 25,
+            "time_s": 12150.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 0.9999999999999992,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 1346742.5529532516,
+            "sources": 25,
+            "time_s": 12600.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 0.9999999999999989,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 1604194.9915971945,
+            "sources": 25,
+            "time_s": 13050.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 0.999999999999999,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 1861184.3210300975,
+            "sources": 25,
+            "time_s": 13500.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 1.0000000000000004,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 2117634.6415640037,
+            "sources": 25,
+            "time_s": 13950.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 1.0000000000000002,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 2373470.1780090732,
+            "sources": 25,
+            "time_s": 14400.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 1.0000000000000004,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 2628615.3013509787,
+            "sources": 25,
+            "time_s": 14850.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 1.0000000000000004,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 2882994.5507140136,
+            "sources": 25,
+            "time_s": 15300.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 1.0000000000000004,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 3136532.6552948016,
+            "sources": 25,
+            "time_s": 15750.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 1.0000000000000004,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 3389154.556501994,
+            "sources": 25,
+            "time_s": 16200.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 1.0000000000000004,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 3640785.430060635,
+            "sources": 25,
+            "time_s": 16650.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 1.0000000000000004,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 3891350.70835678,
+            "sources": 25,
+            "time_s": 17100.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 0.9999999999999998,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 4140776.102739287,
+            "sources": 25,
+            "time_s": 17550.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 1.0000000000000002,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 4388987.625995345,
+            "sources": 25,
+            "time_s": 18000.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 1.0000000000000004,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 4635911.614872458,
+            "sources": 25,
+            "time_s": 18450.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 1.0000000000000007,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 4881474.7526202565,
+            "sources": 25,
+            "time_s": 18900.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 1.0000000000000007,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 5125604.091708599,
+            "sources": 25,
+            "time_s": 19350.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 1.0000000000000007,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 5368227.076522191,
+            "sources": 25,
+            "time_s": 19800.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 1.0000000000000007,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 5609271.566160308,
+            "sources": 25,
+            "time_s": 20250.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 1.0000000000000004,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 5848665.857249387,
+            "sources": 25,
+            "time_s": 20700.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 1.0000000000000004,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 6086338.70683022,
+            "sources": 25,
+            "time_s": 21150.0,
+            "window_inside_target": true
+          },
+          {
+            "all_sampled_sun_coverage": 1.0000000000000004,
+            "minimum_source_coverage": 1.0,
+            "worst_missed_ray": null,
+            "window_centre_distance_m": 6322219.355279506,
+            "sources": 25,
+            "time_s": 21600.0,
+            "window_inside_target": true
+          }
+        ],
+        "minimum_coverage": 1.0,
+        "passed": true,
+        "sources_per_date": 25,
+        "spatial_scope": "Complete polygonal receiver disk at each sampled solar source; continuous source/time certificate open."
+      }
+    },
+    {
+      "start_s": 21600.0,
+      "end_s": 43200.0,
+      "intended_end_s": 43200.0,
+      "completed": true,
+      "clearance_event": false,
+      "suns": 16,
+      "max_step_s": 60.0,
+      "rtol": 2e-12,
+      "minimum_sampled_surface_distance_m": 1719.626933227615,
+      "sampled_witness": {
+        "time_s": 43200.0,
+        "pair": [
+          338,
+          341
+        ],
+        "projection_m": [
+          -11718.073432765672,
+          7184.5490286910735,
+          73.0785133031044
+        ]
+      },
+      "minimum_conditional_surface_distance_m": 1683.8446199856428,
+      "flagged_intervals": 0,
+      "acceleration_guard_m_s2": 0.15,
+      "rate_guard_deg_s": 0.1,
+      "beam_margin_deg": 30.41788644981769,
+      "rate_deg_s": 0.011718726574761447,
+      "angular_acceleration_deg_s2": 2.5059285976958607e-06,
+      "maximum_evaluated_acceleration_m_s2": 0.022027944018056154,
+      "maximum_command_acceleration_m_s2": 0.0,
+      "scheduled_translation_m_s": 0.0,
+      "mean_applied_translation_m_s": 0.0,
+      "maximum_applied_translation_m_s": 0.0,
+      "scheduled_burn_count": 0,
+      "started_burn_count": 0,
+      "reconstruction_error_m": 1.3908650211910895e-06,
+      "crossings": {
+        "crossing_near_encounters": 0,
+        "physical_intersections": 0,
+        "witnesses": []
+      },
+      "raw_path": "research/runs/solar_shield_array/closure/closure_fine_1.npz",
+      "raw_sha256": "46b7ffafdbf4a0822fbfc0d3d9c54310de6c8446e3c3da5e5b72f83a5a0ff326",
+      "elapsed_s": 800.5125638159989,
+      "nfev": 5462,
+      "geometry_pass": true,
+      "comparison": {
+        "maximum_position_difference_m": 6.9936239552236,
+        "position_difference_plus_reconstruction_m": 6.993634701282433,
+        "maximum_velocity_difference_m_s": 0.00032607581719442134,
+        "event_time_difference_s": 0.0,
+        "same_witness_pair": true
+      }
+    },
+    {
+      "start_s": 43200.0,
+      "end_s": 50016.72633817279,
+      "intended_end_s": 166607.20903269577,
+      "completed": false,
+      "clearance_event": true,
+      "suns": 16,
+      "max_step_s": 60.0,
+      "rtol": 2e-12,
+      "minimum_sampled_surface_distance_m": 99.99999999963353,
+      "sampled_witness": {
+        "time_s": 50016.72633817279,
+        "pair": [
+          325,
+          347
+        ],
+        "projection_m": [
+          -9314.919935062835,
+          8885.426649357029,
+          99.99999999963353
+        ]
+      },
+      "minimum_conditional_surface_distance_m": 64.23890439578128,
+      "flagged_intervals": 50,
+      "acceleration_guard_m_s2": 0.15,
+      "rate_guard_deg_s": 0.1,
+      "beam_margin_deg": 44.67729785833377,
+      "rate_deg_s": 1.132757705368931e-05,
+      "angular_acceleration_deg_s2": 1.2661936246163259e-12,
+      "maximum_evaluated_acceleration_m_s2": 0.02197152500882112,
+      "maximum_command_acceleration_m_s2": 0.0005027114304474779,
+      "scheduled_translation_m_s": 1.8580066727052453,
+      "mean_applied_translation_m_s": 0.975895436540377,
+      "maximum_applied_translation_m_s": 1.807974951431588,
+      "scheduled_burn_count": 1171,
+      "started_burn_count": 361,
+      "reconstruction_error_m": 4.5942058592214833e-07,
+      "crossings": {
+        "crossing_near_encounters": 0,
+        "physical_intersections": 0,
+        "witnesses": []
+      },
+      "raw_path": "research/runs/solar_shield_array/closure/closure_fine_2.npz",
+      "raw_sha256": "f17eb89143f6943b4f4ff704c8c0b095b521744e9bc416aa6a3f4a6f4f710237",
+      "elapsed_s": 532.0669746710009,
+      "nfev": 1757,
+      "geometry_pass": false,
+      "comparison": {
+        "maximum_position_difference_m": 9.041876045842931,
+        "position_difference_plus_reconstruction_m": 9.041876964828507,
+        "maximum_velocity_difference_m_s": 0.00034732137661206287,
+        "event_time_difference_s": 0.6522837154261651,
+        "same_witness_pair": true
+      }
+    }
+  ],
+  "force_backend_comparison": [
+    {
+      "leg": 0,
+      "time_s": 21600.0,
+      "maximum_acceleration_difference_m_s2": 3.469446951953614e-18,
+      "maximum_visibility_difference": 0.0,
+      "maximum_sail_difference_m_s2": 3.3881317890172014e-21,
+      "original_force_wall_s": 0.049141989002237096,
+      "compact_force_wall_s": 0.062075017998722615
+    },
+    {
+      "leg": 1,
+      "time_s": 43200.0,
+      "maximum_acceleration_difference_m_s2": 0.0,
+      "maximum_visibility_difference": 1.1102230246251565e-16,
+      "maximum_sail_difference_m_s2": 1.9387045606711586e-26,
+      "original_force_wall_s": 0.2628259880002588,
+      "compact_force_wall_s": 0.0960162470000796
+    },
+    {
+      "leg": 2,
+      "time_s": 50016.074054457364,
+      "maximum_acceleration_difference_m_s2": 0.0,
+      "maximum_visibility_difference": 1.1102230246251565e-16,
+      "maximum_sail_difference_m_s2": 8.077935669463161e-27,
+      "original_force_wall_s": 0.9920443529990735,
+      "compact_force_wall_s": 0.2175747549990774
+    }
+  ],
+  "elapsed_s": 1990.4532675279988,
+  "max_rss_MiB": 350.76171875,
+  "completed": true
+}

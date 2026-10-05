@@ -136,3 +136,14 @@ separation and conditional interval bounds; `service_margin.py` evaluates
 arbitrary solar-disk source positions against a complete receiver window.
 The [packing pilot](../../research/studies/solar_shield_array/packing.md) tests
 these geometry and energy freedoms while retaining collection accounting.
+
+`cycle_control.py` continues the measured states into a smooth return-to-service
+attitude and permits four independent acceleration arcs per tile. Its endpoint
+LP provides a restricted-model lower bound and explicit failed encounter
+branches. `mass_feedback.py` propagates additional uniformly distributed mass
+with unchanged optical area and a per-member power allocation. The
+[cycle-closure study](../../research/studies/solar_shield_array/closure.md)
+tests return, mass and power constraints before expanding fleet coverage.
+`compact_shadow.py` removes empty projected rectangles before evaluating the
+same exact shadow union. All-pair geometry and original-force comparisons
+check that this compaction preserves the optical and momentum calculation.

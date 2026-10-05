@@ -103,7 +103,17 @@ checks and a search for poorly covered solar-source/date combinations.
 A 36 km total starting depth permits the full twelve-hour service/departure
 with zero electric translation. Calculated control energy falls 82.13% from
 the previous verified passage, with 1.76 km closest sampled surface separation.
-Return, handover and a recurring fleet cost remain unexecuted.
+Full return, handover and a recurring fleet cost remain unexecuted.
+
+The [cycle-closure continuation](closure.md) uses those actual terminal states
+to test four independent burn arcs, arrival timing and service reassignment.
+It sizes proposed return power, propagates the resulting added hardware mass
+from the initial epoch, and independently replays the decisive return event.
+The twelve-hour passage survives a 25.4% additional-mass allocation with zero
+electric translation and 1.72 km closest sampled surface separation. The
+restricted return proposals require about 1.85 m/s of translation and fail
+their clearance tests. Per-member propulsion and optical accounts distinguish
+executed stages from proposed recurrence; no full cycle or fleet is accepted.
 
 The study couples protection, engineering, illumination and habitation. Its
 runners, compact numerical results and interpretation belong together here;
