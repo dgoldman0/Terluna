@@ -128,3 +128,11 @@ computes finite-area gravity torque and first moments of the same parallel
 shadow unions used by the force model. The [energy continuation](../../research/studies/solar_shield_array/energy.md)
 retains force-model failures, local control limits and the distinction between
 a partial passage's actuation account and recurring fleet power.
+
+`packing_control.py` varies the four starting depth levels and provides sparse
+individual two-burn corrections, with measured force defects and explicit
+nonlinear replay gates. `square_distance.py` checks global physical surface
+separation and conditional interval bounds; `service_margin.py` evaluates
+arbitrary solar-disk source positions against a complete receiver window.
+The [packing pilot](../../research/studies/solar_shield_array/packing.md) tests
+these geometry and energy freedoms while retaining collection accounting.

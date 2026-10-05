@@ -876,5 +876,287 @@
     "collection_capacity_W": null,
     "delivered_power_W": null,
     "publication_target": "research/solar-shield-habitat-array; main unchanged"
+  },
+  "starting_arrangement_pilot": {
+    "checked_at_utc": "2026-10-05T13:30:14.131204+00:00",
+    "starting_remote_head": "8bb69c204ffb0ff39b9ec3c39da848a22fc13156",
+    "early_plan_commit": "2b54ebbfa56d379b4ccf35aa759653182496c6f8",
+    "objective": "Lower actual local service/departure control energy by varying starting depth/order and individual smooth burns; retain 100 m physical clearance, finite-Sun coverage and optical inventory.",
+    "products": {
+      "packing_screen.json": "3d6556471ace2933a97a4aac51ebb0c275a285358f756fa3a771ae8e8e8c2f7c",
+      "packing.json": "0403f45e0e38fb272242c5d14557d1f98b309a5be34d59f557aa0a7d57cf963f",
+      "packing_validation.json": "497807b12f604fc0e869cb47e407a52423fc8069f1a02b3b84cbbfc75e4815bd",
+      "packing_budget.json": "818300962907c69078e259bd149eb8fc27376ce7974a4cac9326b866094c82e3",
+      "packing_audit.json": "83eb7401864639a1e4d83b2785ed525f92d8a4c61fdd262e5f9c7a98949e25e6"
+    },
+    "study_tests": {
+      "status": "PASS",
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m pytest protection/dynamics research/studies/solar_shield_array -q",
+      "passed": 130,
+      "elapsed_s": 8.7
+    },
+    "resources": {
+      "numerical_wall_limit_s": 3600,
+      "producer_elapsed_s": {
+        "packing_screen": 138.57362582399946,
+        "packing": 483.2973513329998,
+        "packing_validation": 1862.4908759080008,
+        "packing_budget": 259.31297925000035,
+        "packing_audit": 34.53000730600252
+      },
+      "interrupted_partial_replay_charged_s": 120,
+      "total_charged_numerical_s": 2898.204839621003,
+      "maximum_rss_MiB": 685.11328125,
+      "raw_MiB": 136.034893989563,
+      "address_space_limit_GiB": 2,
+      "raw_limit_MiB": 512,
+      "numerical_threads_per_process": 1,
+      "brief_replay_restart_overlap_upper_bound_s": 30,
+      "process_plan_deviation": "Restart briefly overlapped an interrupted partial replay after a shell PID signal failed; both used one numerical thread, subsequent numerical stages sequential. Conservative 120 s partial-run charge replaces provisional 87 s validation metadata."
+    },
+    "executed": {
+      "arrangements": 6,
+      "cheap_proposals": 12,
+      "new_service_passages": 1,
+      "coupled_departures": 1,
+      "complete_tighter_twelve_hour_replays": 1
+    },
+    "selected": {
+      "depth_step_m": 12000,
+      "depth_extent_m": 36000,
+      "pitch_m": 8500,
+      "tiles": 361,
+      "independent_control_coefficients": 2166,
+      "nonzero_translation_coefficients": 0,
+      "full_six_hour_service": true,
+      "full_six_hour_departure": true
+    },
+    "replay_position_difference_with_reconstruction_m": [
+      1.9946964585564197,
+      8.987461012714428
+    ],
+    "physical_surface_distance": [
+      {
+        "start_s": 0.0,
+        "end_s": 21600.0,
+        "minimum_sampled_surface_distance_m": 6698.570859523941,
+        "sampled_witness": {
+          "time_s": 21600.0,
+          "pair": [
+            170,
+            208
+          ],
+          "projection_m": [
+            0.24043572861504947,
+            16698.57085942215,
+            -0.036928328957931564
+          ]
+        },
+        "minimum_conditional_all_pair_clearance_m": 6669.769854840065,
+        "intervals_below_100m": 0
+      },
+      {
+        "start_s": 21600.0,
+        "end_s": 43200.0,
+        "minimum_sampled_surface_distance_m": 1760.4271403569517,
+        "sampled_witness": {
+          "time_s": 43200.0,
+          "pair": [
+            319,
+            322
+          ],
+          "projection_m": [
+            -11759.15603488059,
+            6873.533931199737,
+            66.88618279250964
+          ]
+        },
+        "minimum_conditional_all_pair_clearance_m": 1724.6104257284323,
+        "intervals_below_100m": 0
+      }
+    ],
+    "coverage_adversary": {
+      "grid_probes": 533,
+      "total_probes": 887,
+      "optimizations": [
+        {
+          "success": true,
+          "message": "Optimization terminated successfully.",
+          "nfev": 80,
+          "minimum_margin_m": 6986.527269908704,
+          "parameters": [
+            0.0,
+            6.283181740905869,
+            1.0
+          ]
+        },
+        {
+          "success": true,
+          "message": "Optimization terminated successfully.",
+          "nfev": 112,
+          "minimum_margin_m": 6977.417362000991,
+          "parameters": [
+            0.2067802562434332,
+            3.1415933046374604,
+            1.0
+          ]
+        },
+        {
+          "success": true,
+          "message": "Optimization terminated successfully.",
+          "nfev": 81,
+          "minimum_margin_m": 7043.148492427605,
+          "parameters": [
+            0.0,
+            1.5707923398155552,
+            1.0
+          ]
+        },
+        {
+          "success": true,
+          "message": "Optimization terminated successfully.",
+          "nfev": 81,
+          "minimum_margin_m": 7043.151301601061,
+          "parameters": [
+            0.0,
+            4.712386068384814,
+            1.0
+          ]
+        }
+      ],
+      "worst": {
+        "time_s": 744.4089224763595,
+        "angle_rad": 3.1415933046374604,
+        "solar_radius_fraction": 1.0,
+        "margin_m": 6977.417362000991,
+        "missed_area_m2": 0.0,
+        "covered_fraction": 1.0,
+        "circle_sagitta_allowance_m": 0.1882471739889091
+      },
+      "minimum_fraction": 1.0,
+      "passed": true,
+      "scope": "Rotated 32-direction limb grid, interior/centre sources and four bounded local searches over date and solar-disk coordinates. Positive margin covers the exact circular receiver for each tested source; unsampled global source/time certification remains open."
+    },
+    "actual_control_account": {
+      "service_plus_departure_m_s": 0.7578636621036615,
+      "propulsion_energy_J": 41454960647678.85,
+      "same_model_fractional_energy_reduction": 0.8212511738940458,
+      "baseline_service_plus_departure_m_s": 4.2398245550123725,
+      "sum_member_peak_power_W": 4131726616.1667852,
+      "maximum_member_peak_power_W": 12515338.996809082,
+      "provisional_individual_power_hardware_kg": 17215527.567361604,
+      "provisional_power_hardware_fraction": 0.009537688402970418,
+      "total_burn_count": 0
+    },
+    "initial_preparation_reference": {
+      "mean_velocity_difference_m_s": 0.9983658060220314,
+      "maximum_velocity_difference_m_s": 1.745476488829699,
+      "maneuver_executed": false,
+      "scope": "Velocity difference from an initially Sun-tracking lattice translating with the reference. Positions are specified initial conditions; this is no acquisition trajectory or recurring impulse measurement."
+    },
+    "conditional_inventory_trade": [
+      {
+        "tiles": 17285560.170967527,
+        "assumed_two_day_full_cycle_allowance_m_s": 1.2977292517699583,
+        "measured_partial_impulse_m_s": 0.7578636621036615,
+        "remaining_for_return_handover_recovery_m_s": 0.5398655896662968,
+        "prefix_only_repeated_every_two_days": {
+          "closed": true,
+          "optical_mass_kg": 86427800854837.64,
+          "total_scenario_mass_kg": 104304027544617.58,
+          "recurring_dv_m_s_per_day": 0.37893183105183076,
+          "peak_duty": 0.1,
+          "extra_fixed_mass_multiplier": 1.2,
+          "propulsion_TW": 13.86298142138778,
+          "propellant_kg_s": 21564.63776660321,
+          "installed_propulsion_power_TW": 173.28726776734723
+        }
+      },
+      {
+        "tiles": 25000000.0,
+        "assumed_two_day_full_cycle_allowance_m_s": 0.8999720289315585,
+        "measured_partial_impulse_m_s": 0.7578636621036615,
+        "remaining_for_return_handover_recovery_m_s": 0.14210836682789696,
+        "prefix_only_repeated_every_two_days": {
+          "closed": true,
+          "optical_mass_kg": 125000000000000.0,
+          "total_scenario_mass_kg": 150854277375118.7,
+          "recurring_dv_m_s_per_day": 0.37893183105183076,
+          "peak_duty": 0.1,
+          "extra_fixed_mass_multiplier": 1.2,
+          "propulsion_TW": 20.049945278417646,
+          "propellant_kg_s": 31188.803766427445,
+          "installed_propulsion_power_TW": 250.62431598022056
+        }
+      },
+      {
+        "tiles": 35000000.0,
+        "assumed_two_day_full_cycle_allowance_m_s": 0.6440746697086028,
+        "measured_partial_impulse_m_s": 0.7578636621036615,
+        "remaining_for_return_handover_recovery_m_s": -0.11378899239505869,
+        "prefix_only_repeated_every_two_days": {
+          "closed": true,
+          "optical_mass_kg": 175000000000000.0,
+          "total_scenario_mass_kg": 211195988325166.16,
+          "recurring_dv_m_s_per_day": 0.37893183105183076,
+          "peak_duty": 0.1,
+          "extra_fixed_mass_multiplier": 1.2,
+          "propulsion_TW": 28.0699233897847,
+          "propellant_kg_s": 43664.32527299842,
+          "installed_propulsion_power_TW": 350.87404237230874
+        }
+      }
+    ],
+    "collection": "Per-tile 16-source/60 s and 32-source/120 s first-interception optical inventories for both executed legs. Twelve-hour interception is 6.00459% above the previous verified twelve-hour passage; optical potential only.",
+    "cost_scope": "Tighter replay of the same 361 members through six-hour service and six-hour departure. Uniform rigid 50 g/m2 optical mass, ideal electric edge couples, finite-area gravity and reflected-band shadow moments. Acquisition, full return, handover, storage, flexibility, recovery and recurrence remain unpaid.",
+    "continuous_coverage_certified": false,
+    "accepted_local_service_departure": true,
+    "accepted_fleet": false,
+    "measured_recurring_impulse_m_s_day": null,
+    "fleet_propulsion_W": null,
+    "collection_capacity_W": null,
+    "delivered_power_W": null,
+    "not_executed": [
+      "Acquisition of the specified initial state",
+      "Full return, repacking, recovery and two-pattern handover",
+      "A repeatable cycle and maneuver frequency",
+      "Global placement and simultaneous full-target coverage",
+      "Added hardware-mass and collection-momentum feedback",
+      "Multiple reflections, flexibility and alternative actuator engineering",
+      "A continuous certificate over all source directions and times"
+    ],
+    "publication_target": "research/solar-shield-habitat-array; main unchanged",
+    "repository_checks": {
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 make check",
+      "status": "FAIL_EXISTING",
+      "layer_files": 508,
+      "layer_violations": 0,
+      "python_passed": 675,
+      "python_skipped": 55,
+      "python_failed": 13,
+      "python_elapsed_s": 29.06,
+      "same_failed_tests_as_before_changes": true,
+      "failed_tests": [
+        "atmosphere/tests/test_absorption.py::test_ion_production_falls_with_the_shadow_and_ends_at_the_outer_radius",
+        "atmosphere/tests/test_absorption.py::test_ionization_rate_is_of_the_tabulated_order",
+        "atmosphere/tests/test_absorption.py::test_design_case_needs_a_radius_just_under_the_exobase",
+        "atmosphere/tests/test_exosphere.py::test_dissociation_rates_agree_with_heays",
+        "atmosphere/tests/test_exosphere.py::test_ions_made_match_the_absorption_step",
+        "atmosphere/tests/test_exosphere.py::test_charge_exchange_thin_limit_counts_the_swept_exosphere",
+        "atmosphere/tests/test_exosphere.py::test_magnetosphere_accounts_for_every_ion_and_a_stronger_one_keeps_more",
+        "atmosphere/tests/test_exosphere.py::test_levels_are_ordered_and_wider_shadows_never_lose_more",
+        "climate/tests/test_cm1_run.py::test_the_terrain_build_forces_each_column_at_its_own_height",
+        "climate/tests/test_exoplasim_run.py::RunnerTests::test_process_lookup_finds_this_process",
+        "climate/tests/test_ring_comfort.py::test_hours_are_shares_of_the_lunar_day",
+        "climate/tests/test_ring_comfort.py::test_the_rings_land_is_pooled_by_latitude_and_height_and_counted_in_shares",
+        "research/studies/protection_architecture/test_run.py::test_design_point_holds_together"
+      ],
+      "later_make_targets_reached": false,
+      "causes": [
+        "missing pinned WHI solar spectrum",
+        "missing generated moon_gcm_configuration.json",
+        "process-group lookup does not see the test process in this execution environment"
+      ]
+    }
   }
 }

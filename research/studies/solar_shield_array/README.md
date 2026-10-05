@@ -95,6 +95,16 @@ measured-defect correction remain visible beside any accepted result.
 Spatial shadow moments and finite-area gravity now supply an explicit rigid
 attitude-load calculation for comparison with the earlier torque envelopes.
 
+The [starting-arrangement pilot](packing.md) varies four-level depth spacing
+and order, and offers two independent smooth burn vectors to every member.
+It preserves the six-hour local service obligation before testing departure
+cost, with coupled shadow forces, tighter replay, actual surface-distance
+checks and a search for poorly covered solar-source/date combinations.
+A 36 km total starting depth permits the full twelve-hour service/departure
+with zero electric translation. Calculated control energy falls 82.13% from
+the previous verified passage, with 1.76 km closest sampled surface separation.
+Return, handover and a recurring fleet cost remain unexecuted.
+
 The study couples protection, engineering, illumination and habitation. Its
 runners, compact numerical results and interpretation belong together here;
 dynamics components belong in the protection domain. Computation files and
