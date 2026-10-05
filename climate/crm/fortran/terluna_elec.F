@@ -18,8 +18,8 @@
 !         and 5 kV/m on a barren ridge
 !   var3  screening layers at cloud edges (WRF-ELEC's iscreen, terluna_screen.F): 0 none; 1 with WRF-ELEC's Earth
 !         clear-air conductivity and a tenth of it in cloud; 2 with both by height from terluna_conductivity.txt
-!   var4  for branched lightning, the height (m) below which a downward channel counts as reaching the ground; zero or
-!         less for WRF-ELEC's rule, air warmer than 266.16 K
+!   var4  for branched lightning, the height (m) below which a downward channel counts as reaching the ground; below
+!         zero for WRF-ELEC's rule (its default, -1), air warmer than 266.16 K; at zero only the two lowest levels count
 !   var5  the sub-step (s) for sedimentation and lightning; WRF-ELEC's 0.75 s if zero
 !   var6  ipelec: 0 off, 2 non-inductive charging, 3 with inductive charging
 !   var7  isaund, the non-inductive charging law: 12 Saunders and Peck with Brooks's critical rime accretion rate, as

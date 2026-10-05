@@ -127,11 +127,11 @@ def test_fall_speeds_scale_only_where_each_particle_is_present_and_not_at_earth_
 def test_an_electrified_case_takes_nssl_and_the_charge_tracers():
     hail = e.namelist_settings({})
     assert hail['param2'] == dict(ptype=27, iptra=1, npt=7, pdtra=0)
-    assert hail['param8'] == dict(var2=0.0, var3=0.0, var4=0.0, var5=0.0, var6=3.0, var7=12.0, var8=3.0, var9=0.0,
+    assert hail['param8'] == dict(var2=0.0, var3=0.0, var4=-1.0, var5=0.0, var6=3.0, var7=12.0, var8=3.0, var9=0.0,
                                   var10=12000.0)
     graupel = e.namelist_settings(dict(hail=False, ipelec=2, lightning=2, leakage=1, radius_m=6000.0, corona_v_m=3000.0))
     assert graupel['param2'] == dict(ptype=26, iptra=1, npt=6, pdtra=0)
-    assert graupel['param8'] == dict(var2=3000.0, var3=0.0, var4=0.0, var5=0.0, var6=2.0, var7=12.0, var8=2.0, var9=1.0,
+    assert graupel['param8'] == dict(var2=3000.0, var3=0.0, var4=-1.0, var5=0.0, var6=2.0, var7=12.0, var8=2.0, var9=1.0,
                                      var10=6000.0)
     assert e.namelist_settings(dict(screen=1, isaund=11))['param8']['var3'] == 1.0
     moon = e.namelist_settings(e.LUNAR)

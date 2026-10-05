@@ -118,13 +118,15 @@ TAKAHASHI = REPO / 'atmosphere' / 'electricity' / 'inputs' / 'takahashi.txt'
 # A case's electricity (its 'elec' entry overrides these): WRF-ELEC's defaults of non-inductive (Saunders and Peck with
 # Brooks's critical rime accretion rate) and inductive charging, its branched lightning (lightning 3; 1 for its
 # cylinders, 2 and 4 for those two without the breakdown field's 180-kV/m cap), its breakdown field and its 0.75-s sub-step
-# (substep_s 0), its ground-strike rule (ground_m 0: a downward channel reaching air warmer than -7 C), no leakage, and
+# (substep_s 0), its ground-strike rule (ground_m -1, WRF-ELEC's nssl_zgrnd default: a downward channel reaching air
+# warmer than -7 C in charge of the matching sign; lightmsz takes it only below zero, and at zero counts only a channel
+# reaching the two lowest levels, as the Earth benchmarks of 2026-10-03/04 ran), no leakage, and
 # the NSSL scheme with hail, and no screening layers (screen 1 for WRF-ELEC's, with Earth's conductivity; 2 with the
 # conductivity below). Leakage and screening take the Moon's conductivity at solar minimum, for 100 aerosol particles
 # per cm3 in clear air and 0.1 g/m3 of cloud water in cloud (atmosphere/electricity/conductivity.py). Point discharge
 # from the ground, which WRF-ELEC does not have, is off (corona_v_m 0); otherwise it is its onset field at 1.225 kg/m3
 # (Standler and Winn 1979: 3000 over dense vegetation, 5000 on a barren ridge).
-SETTINGS = dict(ipelec=3, isaund=12, lightning=3, leakage=0, radius_m=12000.0, hail=True, substep_s=0.0, ground_m=0.0,
+SETTINGS = dict(ipelec=3, isaund=12, lightning=3, leakage=0, radius_m=12000.0, hail=True, substep_s=0.0, ground_m=-1.0,
                 screen=0, conductivity=dict(sun='solar_minimum', clear_air='100_per_cm3', cloud='0.1_g_m3'),
                 corona_v_m=0.0)
 # The lunar boxes. WRF-ELEC's 0.75-s sub-step lets graupel settle through about 1 % of the 500-m layers of its supercell

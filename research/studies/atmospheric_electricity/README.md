@@ -253,7 +253,19 @@ Morrison's do.
    storms near 34 kV/m (40 without it). On several threads CM1 does not repeat
    itself bit for bit, so each pair compares realizations, and the counts lie
    within what the weather alone could change (climate/crm README).
-5. Windows of `box_0e_elec`'s second lunar day run again from its restarts with
+5. Ground strikes (climate/crm README, "Ground strikes"). No lunar flash struck
+   the ground until 2026-10-05, an artifact: the lunar ground rule kept
+   WRF-ELEC's demand for matching charge 5 km up, where the storms have none,
+   and the Earth benchmarks ran with WRF-ELEC's rule switched off. The storms
+   hold their charge as Earth's do, with −7 °C just beneath the main negative
+   charge, so WRF-ELEC's own rule fits them. Under it the busiest lunar storms
+   (days 40.5–42) make 21 negative ground strikes among 144 flashes, a median
+   195 C and 69 GJ each (up to 889 C and 437 GJ), and the Earth benchmark makes
+   1.1 % ground strikes from 36.8 min, as published runs do. The rule takes a
+   channel at −7 °C, 34 km up, to reach the ground, so this is an upper bound;
+   WRF-ELEC's stopping field, which halts every channel 15–25 km up, gives the
+   lower bound of none. A rule for a leader's crossing of that gap comes next.
+6. Windows of `box_0e_elec`'s second lunar day run again from its restarts with
    output every few minutes, to follow each storm's life, under Takahashi's law
    and with leakage.
 

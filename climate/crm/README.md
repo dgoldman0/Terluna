@@ -1197,8 +1197,12 @@ files in [fortran/](fortran/) and two of WRF-ELEC's complete it:
   (about 5 km above Earth's ground), if the flash started where the potential
   lies beyond 50 MV of either sign with a vertical field above 10 kV/m in the
   matching direction, and the channel's end lies in charge of the matching
-  sign. A ground flash neutralizes charge of one sign in the cloud, the ground
-  supplying the opposite charge. Each flash makes nitrogen oxides
+  sign. WRF-ELEC applies this rule by default (its ground height of −1); a
+  height above zero replaces the temperature with that height, and a height of
+  exactly zero leaves only a channel reaching the two lowest levels, as the Earth
+  benchmarks below first ran (found 2026-10-05). A ground flash neutralizes
+  charge of one sign in the cloud, the ground supplying the opposite charge.
+  Each flash makes nitrogen oxides
   along its channel at Wang et al.'s (1998) yield per metre at the channel's
   pressure, times WRF-ELEC's factor of 0.1, reduced in proportion where the
   flash changes the charge by less than 1 nC/kg. After each flash the field is
@@ -1282,11 +1286,14 @@ The lunar boxes change two of WRF-ELEC's Earth settings (`cm1_elec.LUNAR`).
 WRF-ELEC's 0.75-s sub-step lets graupel settle through about 1 % of the 500-m
 layers of its storms in each; in the boxes' charging zone, 25–35 km up, the
 layers are 2 km deep and graupel falls at 0.44 of Earth's speed, so a 6.8-s
-sub-step keeps that share. On the Moon air warmer than −7 °C lies about 27 km
-up, so a downward channel strikes the ground when it comes within 5 km of it,
+sub-step keeps that share. On the Moon air warmer than −7 °C lies about 27–34
+km up, so a downward channel strikes the ground when it comes within 5 km of it,
 the height that rule stands at on Earth. The 50-MV and 10-kV/m conditions for a
 ground strike, the 0.9 and 0.8 fractions of breakdown, the 200-V/m internal
 field and the nitrogen oxide yield stay as WRF-ELEC calibrates them for Earth.
+That height rule keeps WRF-ELEC's demand that the channel's end lie in charge of
+the matching sign, and the lunar storms hold no charge 5 km up, so under it no
+lunar flash could strike the ground; see "Ground strikes" below.
 
 WRF-ELEC also caps the breakdown field at 180 kV/m. On Earth the cap applies
 below about 4.5 km, beneath where flashes start. The lunar air is dense enough
@@ -1406,7 +1413,7 @@ lightning schemes on similar storms (notes and pages in the study's
 |---|---|---|
 | First flash | 28.5 min | 32.5 min (MacGorman et al. 2001, the same branched scheme), 27–28 min (Kuhlman et al. 2006), about 30 min (Ziegler et al. 2014), 30–40 min (Sun et al. 2023) |
 | Flash rate | rising to 153 a minute at 75–80 min, about 110 a minute through the second hour | 34 a minute at the peak (Mansell 2014), 75 (Brothers et al. 2018, 1 km), 100–200 with peaks of 400–500 (Ziegler et al. 2014), 300–600 in a mature storm (Calhoun et al. 2014) |
-| Kinds | all 7,134 in cloud | 99.67 % in cloud (Salinas et al. 2021, of Brothers et al.'s storm); a first ground flash at 34 min (Ziegler et al. 2014) |
+| Kinds | all 7,134 in cloud, with the ground rule off (above); with it, 7,321 in cloud and 85 negative to ground (1.1 %), the first at 36.8 min | 99.67 % in cloud (Salinas et al. 2021, of Brothers et al.'s storm); a first ground flash at 34 min (Ziegler et al. 2014) |
 | Charge per flash | median 9.4 C; 2.8–67 C from the 10th to the 90th percentile | 2.7–39.6 C (MacGorman et al. 2001) |
 | Flash area | median 27 km², mean 79 km² | mean 160 km² at 1 km (Brothers et al. 2018, with a different branched scheme) |
 | Net charge density | up to +4.7 and −4.8 nC/m³ | about 1 nC/m³ (Ziegler and MacGorman 1994), up to 4 (Sun et al. 2021) |
@@ -1480,7 +1487,7 @@ runs one) the storm flashes about twice as often, up to 298 a minute, a median 1
 C per flash; its net charge reaches −19.6 nC/m³ and its field 620 kV/m. The
 screening layers add 2–20 C a step at cloud edges. No output of WRF-ELEC's own
 run of this case is at hand to set beside it. Neither 2-km storm strikes the
-ground in two hours.
+ground in two hours, but both ran with the ground rule off (above).
 
 ```sh
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run build earth_g_omp_elec moon_omp_elec earth_g_omp
@@ -1653,6 +1660,54 @@ realizations, so its effect on the lightning stays unresolved.
 ```sh
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_elec_uncapped    # and box_0e_elec_uncapped_corona
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_0e_elec_uncapped --threads 4 --hours 8
+```
+
+### Ground strikes
+
+No lunar flash struck the ground in any run until 2026-10-05, and the zero was
+an artifact. About a third of the lunar flashes start where a ground strike
+can: lightmsz's reports give a potential beyond 50 MV at the start (a mean of
+250–460 MV, at most 1.2 GV, against Earth storms' tens to about a hundred MV)
+with the field pointing toward the ground, nearly all at negative potential.
+Two things then stopped them. WRF-ELEC's Earth-calibrated stopping field, 0.15
+of breakdown, halts every downward channel 15–25 km up (none got lower than
+15 km). And the lunar rule, a channel within 5 km of the ground, kept WRF-ELEC's
+demand that the channel's end lie in charge of the matching sign, which the
+storms do not have that low. The lunar storms hold their charge as Earth's do:
+in the flashing storms of days 40.75–41.9 the main negative charge lies at
+36–56 km (−8 to −32 °C, strongest at 40–42 km), weak positive charge spreads
+through the warm rain below the 0 °C level at 27.8 km, a weak positive layer
+sits at 62–70 km, and air of −7 °C lies at 33.8 km, just beneath the main
+negative charge as on Earth. So WRF-ELEC's own temperature rule fits them.
+
+`box_0e_elec_ground_rule` runs the coarse run's busiest storms again, days
+40.5–42 from its day-40.5 restart with the cap lifted, under that rule, and
+`supercell_elec_ground_rule` runs the Earth benchmark under it. The Earth storm
+makes 85 negative ground strikes among 7,406 flashes (1.1 %), the first at 36.8
+min against the 34 min of a published run of this kind of storm (Ziegler et al.
+2014), rising to 1.5–1.9 a minute in the second hour, a median 30 C each (6–122
+C, 10th to 90th percentile) and 2 GJ. The lunar window makes 21 negative ground
+strikes among 144 flashes (15 %; the first run made 157 flashes over these days,
+all in cloud), the first at day 40.79. Each brings down a median 195 C of
+negative charge (72–430 C, at most 889 C) and releases a median 69 GJ (20–190
+GJ, at most 437 GJ), starting 34–38 km up. Earth's ground strikes bring down
+5–30 C; charges of hundreds of coulombs belong on Earth to the rare positive
+strikes that set off sprites.
+
+The rule makes this an upper bound: it counts a channel that reaches −7 °C as
+reaching the ground, which on Earth leaves 3–5 km to cross and on the Moon about
+34 km. WRF-ELEC's stopping field, which halted every channel 15–25 km up, makes
+the lower bound of none. Between them lies the physics of a leader crossing 34
+km of clear air from a cloud at hundreds of megavolts: its channel's internal
+field of a few kV/m costs about 50–125 MV over that distance, leaving most of
+the potential at its tip, and Earth's leaders cross 10–15 km of clear air (bolts
+from the blue) or climb 70 km (gigantic jets) on far less. A rule for that
+crossing is the next step. On several threads the window is a separate
+realization of these days, but the change from none to 21 is the rule's.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_elec_ground_rule    # and supercell_elec_ground_rule
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_0e_elec_ground_rule --threads 4 --hours 6
 ```
 
 ## The gravity pair

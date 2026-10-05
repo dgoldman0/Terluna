@@ -5,8 +5,8 @@
 ! flash at a point where the field reaches 0.9 of the breakdown field, runs a channel up and down from it until the
 ! field falls below 0.8 of breakdown, and spreads each end through the connected cells whose potential differs from the
 ! channel's by more than its 200 V/m internal field allows. It neutralizes the charge there, handing the opposite charge
-! to the small ions; it counts a ground strike when a downward channel reaches below zgrnd (or, with zgrnd <= 0, air
-! warmer than tgrnd); and it makes nitrogen oxides along the channel at Wang et al.'s yield per metre for the channel's
+! to the small ions; it counts a ground strike when a downward channel reaches below zgrnd (or, with zgrnd < 0, air
+! warmer than tgrnd; with zgrnd = 0, only the two lowest levels); and it makes nitrogen oxides along the channel at Wang et al.'s yield per metre for the channel's
 ! pressure.
 !
 ! Its channels stop at the edge of its arrays, so here each flash's arrays are recentred on the flash's starting point

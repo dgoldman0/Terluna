@@ -1230,6 +1230,17 @@ CASES['box_0e_elec_uncapped'] = dict(
 CASES['box_0e_elec_uncapped_corona'] = dict(
     CASES['box_0e_elec_uncapped'], elec=dict(cm1_elec.LUNAR, corona_v_m=3000.0),
     purpose=CASES['box_0e_elec_uncapped']['purpose'] + ', and point discharge from the ground')
+# Ground strikes by WRF-ELEC's own rule (ground_m -1, its default: a downward channel reaching air warmer than -7 C in
+# charge of the matching sign). The Earth benchmarks ran with ground_m 0, which lightmsz reads as only the two lowest
+# levels, so supercell_elec_ground_rule runs the benchmark storm again with the rule. In the lunar storms the main
+# negative charge sits at -8 to -32 C with -7 C just beneath it, as on Earth, and box_0e_elec_ground_rule runs the coarse
+# run's busiest storms (days 40.5-42, the cap lifted) under the same rule: an upper bound, since it takes a channel that
+# reaches -7 C, 34 km up, to bridge the rest of the way to the ground.
+CASES['box_0e_elec_ground_rule'] = dict(
+    CASES['box_0e_elec'], inputs_from=None, restart_from=dict(case='box_0e_elec', day=40.5), days=42.0,
+    elec=dict(cm1_elec.LUNAR, ground_m=-1.0),
+    purpose=CASES['box_0e_elec']['purpose'] + '; its busiest storms again from its day-40.5 restart, with WRF-ELEC\'s '
+            'own ground-strike rule')
 # The same storm with CM1's own copy of the NSSL scheme and no electricity, to check that WRF-ELEC's copy, run through
 # terluna_elec.F, makes the same storm.
 CASES['supercell_nssl'] = dict(
@@ -1241,6 +1252,10 @@ CASES['supercell_elec'] = dict(
     restart_s=1800.0, segment_s=7200.0, elec={},
     purpose='CM1\'s supercell at Earth\'s gravity with WRF-ELEC\'s NSSL microphysics, charging and branched lightning, '
             'the electrified build\'s benchmark')
+CASES['supercell_elec_ground_rule'] = dict(
+    CASES['supercell_elec'], elec=dict(ground_m=-1.0),
+    purpose='CM1\'s supercell at Earth\'s gravity with WRF-ELEC\'s NSSL microphysics, charging and branched lightning '
+            'and its own ground-strike rule, the benchmark again with ground strikes possible')
 CASES['supercell_elec_cylinders'] = dict(
     CASES['supercell_elec'], elec=dict(lightning=1),
     purpose='CM1\'s supercell at Earth\'s gravity with WRF-ELEC\'s NSSL microphysics, charging and cylindrical '
