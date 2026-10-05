@@ -63,6 +63,14 @@ kilometre-scale endpoint mismatch leaves acquisition, handovers, return and
 recurring cost unresolved. This local result does not establish global
 coverage or a sufficient fleet inventory.
 
+The [bounded return search](returns.md) starts from those actual terminal
+states. Its low-impulse endpoint proposals develop finite-square conflicts
+during coast. Coupled propagation and a tighter replay reach the 100 m
+clearance limit 47.69 minutes after service, as the common attitude changes
+toward feathering. The full return and two-pattern handover were not executed;
+transition timing, intermediate spacing and attitude choices remain coupled
+design variables.
+
 The study couples protection, engineering, illumination and habitation. Its
 runners, compact numerical results and interpretation belong together here;
 dynamics components belong in the protection domain. Computation files and

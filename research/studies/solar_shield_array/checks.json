@@ -492,5 +492,65 @@
     "accepted_operating_fleet": false,
     "branch": "research/solar-shield-habitat-array",
     "main_modified": false
+  },
+  "local_return": {
+    "status": "FINITE_SQUARE_CLEARANCE_OBSTRUCTION_VERIFIED_RETURN_AND_HANDOVER_UNACCEPTED",
+    "checked_at_utc": "2026-10-05T09:56:12.463221+00:00",
+    "report": "returns.md",
+    "starting_remote_head": "4e8a7fd99039ffddcfeef6a52685af578edb1bb4",
+    "early_plan_checkpoint": "ed1b05d231092972f62be13741a8b44392f8bac4",
+    "early_check": "make check reached Python tests, then stopped because pytest was absent in the refreshed runtime; pinned test/geometry/ephemeris dependencies were restored before numerical execution.",
+    "study_tests": {
+      "status": "PASS",
+      "passed": 94,
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m pytest protection/dynamics research/studies/solar_shield_array -q",
+      "launch_contract": "The analytic HiGHS test runs in a fresh one-thread process, matching the standalone return runner and avoiding incompatible process-global worker pools initialized by the older capacity LP."
+    },
+    "make_check": {
+      "status": "FAIL_EXISTING",
+      "summary": "13 failed, 639 passed, 55 skipped in 24.73s",
+      "same_failed_tests_as_previous_checkpoint": true,
+      "layer_check": "PASS: 469 files, 0 violations",
+      "later_targets": "Not reached after Python failures: JavaScript, historical-provenance and ensemble targets."
+    },
+    "products": {
+      "results/return_screen.json": "f0278c63a032753c4d20ec1fcf7fe65d23a68b56a33ef9eb04b475b9bdac5504",
+      "results/return_prefix.json": "2ff6fe2b757ded5fe8f6a66e34867b3c12cd3500edfbd19159b3d10d6dc2e637",
+      "results/return_budget.json": "644f449b920cac577212015a301a9e411cabca1c6f775d3be576f5350f4fd1bb"
+    },
+    "executed": {
+      "geometry_cases": 24,
+      "distinct_endpoint_LPs": 12,
+      "encounter_correction_attempts": 1,
+      "encounter_cuts": 512,
+      "correction_status": "INFEASIBLE_SELECTED_HALF_SPACES",
+      "linear_crossing_intersections": 1848,
+      "coupled_prefixes": 2,
+      "individual_members_per_prefix": 361,
+      "clearance_stop_after_service_s": 2861.411095731266,
+      "clearance_stop_pair": [
+        338,
+        339
+      ],
+      "maximum_replay_position_difference_m": 0.009896891626973133,
+      "between_sample_prefix_audit_intersections": 0,
+      "numerical_wall_s": 227.06512707099955,
+      "max_rss_MiB": 252.69921875,
+      "raw_MiB": 21.754940032958984
+    },
+    "not_executed": [
+      "Full nonlinear orbital return",
+      "Second service passage",
+      "Two-pattern handover",
+      "Joint body/array partial-eclipse return dynamics",
+      "Optimized intermediate spacing and transition timing",
+      "Recovery and repeated maneuver frequency",
+      "Continuous coverage or separation certificate",
+      "Full actuator/hardware and plume realization",
+      "Fleet recurring propulsion, collection and delivered-power closure"
+    ],
+    "accepted_operating_fleet": false,
+    "branch": "research/solar-shield-habitat-array",
+    "main_modified": false
   }
 }

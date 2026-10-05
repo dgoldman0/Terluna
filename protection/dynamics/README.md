@@ -93,3 +93,12 @@ reduction, finite-area gravity and moving-window ray unions. The
 tests initial velocity gradients and freely deforming arrays. Its six-hour
 361-tile passage preserves sampled local coverage without electric translation;
 fleet placement, interfaces, return closure and attitude engineering remain open.
+
+`pattern_return.py` supplies gravity variational shooting maps, capped smooth
+arcs, sparse endpoint/encounter programs and between-sample coplanarity
+witnesses. `parallel_shadow.py` supports dynamic blocker lists and two-sided
+finite-Sun momentum for arbitrary shared planes in uneclipsed local prefixes.
+The [return checkpoint](../../research/studies/solar_shield_array/returns.md)
+retains geometrically rejected endpoint proposals and independently repeats
+an early clearance failure during the coast attitude transition. It does not
+accept a complete handover, orbital return or recurring fleet budget.
