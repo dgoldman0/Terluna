@@ -242,6 +242,36 @@
       "citation": "Stolzenburg and Marshall (2021), The role of grounded conducting pointy objects during Thunderstorm Ground Enhancements (TGEs), preprint, arXiv:2108.04138",
       "use": "Its review of point discharge beneath storms: the onsets S34 measured and why they differ, surface fields saturating near the corona threshold (Florida rarely above 8 kV/m, Langmuir Laboratory below 12 kV/m), 65 kV/m at 603 m over a surface field of at most 5 kV/m (Soula and Chauzy 1991), and a corona layer of 2.8 nC/m3 in the lowest 60 m.",
       "access": "Read (pages 1-5), 2026-10-04."
+    },
+    {
+      "id": "S36",
+      "citation": "Holmes, Brook, Krehbiel and McCrory (1971), On the power spectrum and mechanism of thunder, J. Geophys. Res. 76, 2106-2115",
+      "use": "The share of a lightning flash's energy that becomes sound, 0.18 %, the thunder calculation's central value.",
+      "access": "Not read; the value as Bestard et al. (S40) and a search summary cite it, with values up to 20 % claimed elsewhere."
+    },
+    {
+      "id": "S37",
+      "citation": "Few (1969), Power spectrum of thunder, J. Geophys. Res. 74, 6926-6934",
+      "use": "The peak frequency of thunder from a channel of energy E_l per metre, f_m = 0.63 c0 (p0 / E_l)^(1/2).",
+      "access": "Not read; the relation as search results quote it, checked against the 50-100 Hz peak of Earth's thunder."
+    },
+    {
+      "id": "S38",
+      "citation": "ISO 9613-1:1993, Acoustics - Attenuation of sound during propagation outdoors - Part 1: Calculation of the absorption of sound by the atmosphere; ISO 9613-2:1996, table 2",
+      "use": "Atmospheric absorption by frequency, temperature, pressure and humidity, its oxygen and nitrogen relaxation scaled to the design air; checked against ISO 9613-2's table at 20 C and 70 %.",
+      "access": "Not read; the standard's equations and table as widely reproduced."
+    },
+    {
+      "id": "S39",
+      "citation": "ISO 226:2003, Acoustics - Normal equal-loudness-level contours",
+      "use": "The threshold of hearing at the octave-band centres, for the range at which thunder is audible.",
+      "access": "Not read; the threshold values as widely reproduced."
+    },
+    {
+      "id": "S40",
+      "citation": "Bestard et al. (2023), Acoustical power of lightning flashes, J. Geophys. Res. Atmos. 128, e2023JD038714",
+      "use": "Thunder's acoustical power spans four orders of magnitude between flashes (10.6 kW to 165 MW), which bounds how far a single acoustic share can be trusted.",
+      "access": "Not read; its abstract through a search summary."
     }
   ],
   "notes": "Stage 1's literature notes, with every value's location in its source, are kept on the data drive at /media/projectspace/terluna-research/atmospheric-electricity/ (charging_laws.md, ionization_conductivity.md). Stage 2's benchmark notes, with each value's place in its source, are in benchmark_literature.md in the same folder."
