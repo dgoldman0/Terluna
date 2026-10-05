@@ -324,7 +324,13 @@ Morrison's do.
    (a downward end leaving the cloud, the cloud holding the channel's
    potential through the 0.2–0.4 s crossing, current cutoff), and on the
    internal field above about 5 kV/m.
-9. Windows of `box_0e_elec`'s second lunar day run again from its restarts with
+9. The aerosol near the ground ([open_moon_aerosol](../open_moon_aerosol/README.md),
+   2026-10-05), built from the ecology register's landscapes and organisms and the
+   climate runs: the seas, forests, fog-desert plains and polar lands give the
+   ground a conductivity of about 2.2–2.7 × 10⁻¹⁵ S/m (0.6–4.7 across its cases),
+   charge relaxing in about an hour, 2–4 % of that in fog, and 80–160 cloud nuclei
+   per cm³ at 0.3 % supersaturation by day, about the storm runs' 100.
+10. Windows of `box_0e_elec`'s second lunar day run again from its restarts with
    output every few minutes, to follow each storm's life.
 
 It gives the storms' charge structure, the field by height, flash rates and

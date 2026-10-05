@@ -51,7 +51,11 @@ field and laboratory results disagree on any further effect at 1–3 mol % of
 water, and recombination at 53–85 % relative humidity lies within its
 measurement uncertainty of the value used (Franchin et al. 2015). Without
 aerosol, and in cloud, the column is as it was. The literature behind these
-choices is in `humid_conductivity.md` on the data drive.
+choices is in `humid_conductivity.md` on the data drive. The column's aerosol is
+one assumed state; the [aerosol study](../../research/studies/open_moon_aerosol/README.md)
+builds the particles each region would hold from the project's designs and puts
+the ground's conductivity at 2.2–2.7 × 10⁻¹⁵ S/m over the Moon (0.6–4.7 across its
+cases), and at 2–4 % of that in fog.
 
 MCEq runs in its own environment on the data drive, outside the repository:
 
