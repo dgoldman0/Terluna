@@ -23,16 +23,18 @@ program check
   implicit none
   integer :: ni, nj, nk, seed, u, nflash, k
   real :: dx, dy, zgrnd
-  real, allocatable :: zh1(:), zf1(:), dz(:), q(:,:,:), rho(:,:,:), prs(:,:,:), tk(:,:,:), cloud(:,:,:)
+  real, allocatable :: zh1(:), zf1(:), dz(:), q(:,:,:), rho(:,:,:), prs(:,:,:), tk(:,:,:), cloud(:,:,:), vap(:,:,:)
   real, allocatable :: phi(:,:,:), ex(:,:,:), ey(:,:,:), ez(:,:,:), emag(:,:,:), ebrk(:,:,:), dep(:,:,:), total(:,:,:)
   integer, allocatable :: used(:,:,:)
   type(flash_record) :: rec
   open(newunit=u, file='in.bin', access='stream', form='unformatted', status='old')
-  read(u) ni, nj, nk, nflash, dx, dy, zgrnd
+  read(u) ni, nj, nk, nflash, dx, dy, zgrnd, terluna_leader_ei
   allocate( zh1(nk), zf1(nk+1), dz(nk), q(ni,nj,nk), rho(ni,nj,nk), prs(ni,nj,nk), tk(ni,nj,nk), cloud(ni,nj,nk) )
+  allocate( vap(ni,nj,nk) )
   allocate( phi(ni,nj,nk), ex(ni,nj,nk), ey(ni,nj,nk), ez(ni,nj,nk), emag(ni,nj,nk), ebrk(ni,nj,nk), dep(ni,nj,nk) )
   allocate( total(ni,nj,nk), used(ni,nj,nk) )
   read(u) zh1, zf1, q, rho, prs, tk, cloud
+  vap = 0.0
   close(u)
   dz = zf1(2:nk+1) - zf1(1:nk)
   used = 0
@@ -43,7 +45,7 @@ program check
   call breakdown_field(ni, nj, nk, rho, ebrk)
   open(newunit=u, file='out.txt', status='replace')
   do k = 1,nflash
-    call branched_flash(ni, nj, nk, dx, dy, dz, rho, prs, tk, cloud, phi, ex, ey, ez, emag, q, ebrk, used, seed,  &
+    call branched_flash(ni, nj, nk, dx, dy, dz, rho, prs, tk, cloud, vap, phi, ex, ey, ez, emag, q, ebrk, used, seed,  &
                         1, 1.0, 200.0, 266.16, zgrnd, 12000.0, 90, dep, rec)
     write(u,*) rec%kind, rec%i0, rec%j0, rec%k0, rec%e0, rec%ebrk0, rec%qpos, rec%qneg, rec%nox, rec%npos, rec%nneg,  &
                rec%area, rec%zlo, rec%zhi
@@ -108,12 +110,12 @@ def blob(q, i, j, zh1, zc, strength, dx, width=2000.0, depth=1500.0):
     q += strength * np.exp(-r2 / width ** 2)[:, :, None] * np.exp(-((zh1 - zc) / depth) ** 2)[None, None, :]
 
 
-def run(folder, q, zh1, zf1, dx, nflash=1, zgrnd=-1.0):
+def run(folder, q, zh1, zf1, dx, nflash=1, zgrnd=-1.0, leader=0.0):
     ni, nj, nk = q.shape
     rho, prs, tk, cloud = air(q.shape, zh1)
     with open(folder / 'in.bin', 'wb') as out:
         np.array([ni, nj, nk, nflash], np.int32).tofile(out)
-        np.array([dx, dx, zgrnd], np.float32).tofile(out)
+        np.array([dx, dx, zgrnd, leader], np.float32).tofile(out)
         for a in (zh1, zf1, q, rho, prs, tk, cloud):
             np.asarray(a, np.float32).ravel(order='F').tofile(out)
     done = subprocess.run([str(folder / 'check')], cwd=folder, capture_output=True, text=True)
@@ -193,3 +195,10 @@ def test_the_ground_height_decides_whether_the_same_channel_strikes(program):
     high, _ = run(program, q, zh1, zf1, 1000.0, zgrnd=5000.0)          # the lunar setting
     low, _ = run(program, q, zh1, zf1, 1000.0, zgrnd=3000.0)
     assert high[0]['kind'] == 2 and low[0]['kind'] == 1
+
+
+def test_a_ground_strike_needs_the_leader_to_cross_where_its_internal_field_is_set(program):
+    q, zh1, zf1 = layout(LOWER)
+    for leader, kind in ((0.0, 2), (1.0, 2), (1.0e6, 1)):      # none, a negligible field, one no leader could cross
+        f, _ = run(program, q, zh1, zf1, 1000.0, leader=leader)
+        assert f[0]['kind'] == kind, leader

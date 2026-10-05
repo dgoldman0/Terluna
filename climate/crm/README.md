@@ -1711,8 +1711,9 @@ the lower bound of none. Between them lies the physics of a leader crossing 34
 km of clear air from a cloud at hundreds of megavolts: its channel's internal
 field of a few kV/m costs about 50–125 MV over that distance, leaving most of
 the potential at its tip, and Earth's leaders cross 10–15 km of clear air (bolts
-from the blue) or climb 70 km (gigantic jets) on far less. A rule for that
-crossing is the next step. On several threads the window is a separate
+from the blue) or climb 70 km (gigantic jets) on far less. "The leader's
+crossing" below adds a rule for that crossing: at the literature's internal
+field it removes up to a fifth of the strikes this rule counts. On several threads the window is a separate
 realization of these days, but the change from none to 21 is the rule's.
 
 ```sh
@@ -1872,6 +1873,94 @@ leftover charge as `box_0e_elec_ground_rule`'s.
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_elec_leakage      # and box_0e_elec_leakage_first
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_0e_elec_leakage --threads 4 --hours 6
 climate/gcm/.venv/bin/python -m climate.crm.elec_analysis leakage
+```
+
+### The leader's crossing
+
+WRF-ELEC's ground-strike rule counts a downward channel that reaches air of
+−7 °C in charge of the matching sign as reaching the ground: 3–5 km short of it
+on Earth, 34 km in the lunar air. Its stopping field, 0.15 of breakdown, would
+halt every lunar channel 15–25 km up. The literature on leaders (notes on the
+data drive, `leader_crossing.md`) stops a leader by neither: a leader carries on
+while the potential difference between its tip and the air ahead lasts
+(Lalande et al. 2002, their potential budget, Eq. 9; Mazur and Ruhnke's model,
+Mazur 2002), and thermalized leaders cross fields of a few hundred V/m
+(Gallimberti et al. 2002). What a long crossing costs is the drop along the
+channel, its internal field times its length: about 1 kV/m for a thermalized
+lightning leader at sea-level density (Mansell 2000; Boggs et al. 2018, who
+scale it with density as an assumption they say has not been well studied),
+1–10 kV/m in Lalande et al.'s range, near 100 kV/m in a channel that does not
+heat. The streamer zone at the tip needs only 0.2–0.4 MV.
+
+`var1` sets that internal field (V/m at 1.225 kg/m³, scaled by the air's
+density; `leader_v_m` in a case, 0 for none). Where it is set, a downward
+channel that meets WRF-ELEC's rule strikes only if the leader can carry on to
+the ground (`terluna_crosses` in `terluna_lightning.F`): the channel holds the
+potential where the flash started, as Mansell's model takes it, less the drop
+along it from the starting height, and at every level below the tip and at the
+ground's zero the tip must stay beyond the air's potential, on the channel's
+side, by what its streamer zone needs, 0.225 MV for a positive leader
+(Lalande et al.) and 0.4 MV for a negative one, raised 1.3 % per g/m³ of water
+vapour as the positive streamer field is (Allen and Boutlendj 1991). Humidity
+thus enters, as the streamer field's density scaling cancels in a potential,
+but it moves a fraction of a megavolt against drops and potentials of tens to
+hundreds. The path lightmsz draws is vertical, so the crossing is the column
+below the channel's start.
+
+`box_0e_elec_leader_1kv` and `box_0e_elec_leader_10kv` run
+`box_0e_elec_leakage`'s window (days 40.5–42, leakage on) with the crossing at
+1 and 10 kV/m, each changing only that (2026-10-05;
+`climate/results/crm/elec_leader_crossing.json`):
+
+| Internal field | Flashes (to ground) | Ground strikes' charge: median (10th–90th), largest | Energy: median, largest |
+|---|---|---|---|
+| none (WRF-ELEC's rule alone) | 161 (39, 24 %) | 110 C (61–278), 624 C | 54 GJ, 302 GJ |
+| 1 kV/m | 150 (30, 20 %) | 200 C (69–547), 927 C | 80 GJ, 306 GJ |
+| 10 kV/m | 229 (28, 12 %) | 81 C (59–289), 350 C | 47 GJ, 332 GJ |
+
+Each run is a separate realization of the window. Applied to the same
+strikes, the 39 of `box_0e_elec_leakage` (from lightmsz's report of each
+flash's starting potential, a median 307 MV, and the 32 km of sea-level-density
+path below its start, so 32 MV per kV/m), the crossing passes 35 at 1 kV/m, 32
+at 3 kV/m, 30 at 5 kV/m, 17 at 10 kV/m and 1 at 20 kV/m; for the 21 of
+`box_0e_elec_ground_rule`, 21, 19, 18, 12 and 2. That test leaves out the air's
+potential on the way down, which the model's test includes. At the literature's
+1–3 kV/m, then, the 34 km of clear air removes up to a fifth of the ground
+strikes WRF-ELEC's rule counts, and about a fifth of the lunar flashes
+strike the ground; the crossing takes half of them only near 10 kV/m. The
+crossing does not decide whether a lunar storm strikes the ground; WRF-ELEC's
+Earth-calibrated conditions at the start still do (a potential beyond 50 MV, a
+field above 10 kV/m, charge of the matching sign at −7 °C), as do processes the
+scheme leaves out: whether a downward end forms and leaves the cloud, whether
+the cloud end holds the channel's potential up through the 0.2–0.4 s the
+crossing takes at Earth's leader speeds, and current cutoff in a long, branched
+channel.
+
+`supercell_elec_leader_1kv` runs the Earth benchmark with the crossing at 1
+kV/m beside `supercell_elec_ground_rule`: its flash log is the same to the byte,
+7,406 flashes and 85 ground strikes, since the 3–5 km below Earth's −7 °C level
+cost a few megavolts against starting potentials beyond 50 MV. (The benchmark
+on 4 threads thus repeated itself bit for bit, where the lunar box does not;
+"Threads and reproducibility".)
+
+Humidity elsewhere (notes `humidity_corona_breakdown.md`). Point discharge's
+onset takes no humidity term: corona inception's threshold moves under 0.15 %
+per g/m³ (Ortéga et al. 2007), other measurements disagree in sign, and
+vegetation sets the onset more (3 kV/m over dense bushes, 5 kV/m on a barren
+ridge). Its linear scaling with density is likely too strong, the square root
+of the density ratio being better supported, a difference of at most 0.35
+kV/m at the lunar ground, inside the vegetation's range. The breakdown field
+takes none either: the runaway threshold follows the air's electron density
+(Dwyer 2007), which water vapour at the charging zone's 0.2–0.6 mol % changes
+by under 0.1 %, and the humidity-sensitive processes of initiation in cloud are
+in WRF-ELEC's Earth calibration already, the lunar charging zone holding
+slightly less vapour than Earth's at the same temperature (0.63 against 0.68
+mol % at −6 °C).
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_elec_leader_1kv   # and _10kv, supercell_elec_leader_1kv
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_0e_elec_leader_1kv --threads 4 --hours 6
+climate/gcm/.venv/bin/python -m climate.crm.elec_analysis leader
 ```
 
 ## The gravity pair

@@ -101,7 +101,9 @@ def test_branched_lightning_runs_on_one_process_and_reports_to_its_unit():
     assert not re.search(r'(?i)\bwrite *\( *(6|0|\*) *,', routine[routine.index('       iunit = iunit0'):])
     assert 'mpitotoutdp(1:2) = mpitotindp(1:2) ! Terluna: one process' in routine     # outside its MPI blocks
     assert 'CALL TASK_PROC_MAP()' not in routine and 'ndebug = 0 ! Terluna' in msz
-    assert msz.count('use module_boxmgsetup, only: igslg0, jgslg0, kgslg0, terluna_ebrk_lo, terluna_ebrk_hi') == 2
+    assert msz.count('use module_boxmgsetup, only: igslg0, jgslg0, kgslg0, terluna_ebrk_lo, terluna_ebrk_hi, &') == 2
+    # a ground strike by the rule needs the leader's crossing where a case sets its internal field
+    assert routine.index('tcross = terluna_crosses(trje(in,1,lpot)') < routine.index('if (  idownward == 1 .and. tcross')
     assert 'Max( terluna_ebrk_lo, Min( ebrkdp(ix,jy,kz), terluna_ebrk_hi ) )' in routine
     assert routine.index('deallocate( ebrkd, ebrkdp, zlev, cghgt, t2, t4 )') < routine.index('allocate( ebrkd(')
     boxmg = c.CM1_HOME / 'wrf4-elec' / e.ELEC_SOURCE['commit'][:12] / 'module_boxmgsetup.F'
@@ -127,11 +129,12 @@ def test_fall_speeds_scale_only_where_each_particle_is_present_and_not_at_earth_
 def test_an_electrified_case_takes_nssl_and_the_charge_tracers():
     hail = e.namelist_settings({})
     assert hail['param2'] == dict(ptype=27, iptra=1, npt=7, pdtra=0)
-    assert hail['param8'] == dict(var2=0.0, var3=0.0, var4=-1.0, var5=0.0, var6=3.0, var7=12.0, var8=3.0, var9=0.0,
+    assert hail['param8'] == dict(var1=0.0, var2=0.0, var3=0.0, var4=-1.0, var5=0.0, var6=3.0, var7=12.0, var8=3.0, var9=0.0,
                                   var10=12000.0)
-    graupel = e.namelist_settings(dict(hail=False, ipelec=2, lightning=2, leakage=1, radius_m=6000.0, corona_v_m=3000.0))
+    graupel = e.namelist_settings(dict(hail=False, ipelec=2, lightning=2, leakage=1, radius_m=6000.0, corona_v_m=3000.0,
+                                       leader_v_m=1000.0))
     assert graupel['param2'] == dict(ptype=26, iptra=1, npt=6, pdtra=0)
-    assert graupel['param8'] == dict(var2=3000.0, var3=0.0, var4=-1.0, var5=0.0, var6=2.0, var7=12.0, var8=2.0, var9=1.0,
+    assert graupel['param8'] == dict(var1=1000.0, var2=3000.0, var3=0.0, var4=-1.0, var5=0.0, var6=2.0, var7=12.0, var8=2.0, var9=1.0,
                                      var10=6000.0)
     assert e.namelist_settings(dict(screen=1, isaund=11))['param8']['var3'] == 1.0
     moon = e.namelist_settings(e.LUNAR)

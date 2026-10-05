@@ -238,6 +238,7 @@ def analyse(name: str, from_day: float, to_day: float = np.inf, laws: dict | Non
     w_zone, zone_columns, widths, depths_m = [], 0, [], []
     tops, z0c, z40c = [], [], []
     p_sum, t_sum, rho_sum = np.zeros(len(zh)), np.zeros(len(zh)), np.zeros(len(zh))
+    qv_sum, rh_clear_sum, clear_count = np.zeros(len(zh)), np.zeros(len(zh)), np.zeros(len(zh))
     mass_aloft, flux_melt, present = [], [], 0
     if laws is None:
         from atmosphere.electricity.charging import laws as published
@@ -264,6 +265,12 @@ def analyse(name: str, from_day: float, to_day: float = np.inf, laws: dict | Non
         p_sum += prs.mean(axis=1)
         t_sum += mean_t
         rho_sum += rho.mean(axis=1)
+        qv_sum += qv.mean(axis=1)
+        # relative humidity over liquid water (Bolton 1980) where no condensate is: what clear air's aerosol takes up
+        e_sat = 611.2 * np.exp(17.67 * t_c / (t_c + 243.5))
+        rh = np.minimum(prs * qv / (0.622 + qv) / e_sat, 1.0)
+        rh_clear_sum += np.where(cloudy, 0.0, rh).sum(axis=1)
+        clear_count += (~cloudy).sum(axis=1)
         z0c.append(crossing_height(zh, mean_t, 0.0))
         z40c.append(crossing_height(zh, mean_t, -40.0))
         t_s = (n - 1) * output_s
@@ -399,7 +406,10 @@ def analyse(name: str, from_day: float, to_day: float = np.inf, laws: dict | Non
         snapshots=len(numbers), columns=ncol, dx_m=grid['dx_m'], kind=record['configuration'].get('kind', 'ring'),
         fall_speed_factor={k: gravity_factor(sp, g_fall) for k, sp in SPECIES.items()},
         mean_profile=dict(z_km=(zh / 1000.0).tolist(), pressure_hpa=(p_sum / count / 100.0).tolist(),
-                          temperature_c=(t_sum / count).tolist(), air_density_kg_m3=(rho_sum / count).tolist()),
+                          temperature_c=(t_sum / count).tolist(), air_density_kg_m3=(rho_sum / count).tolist(),
+                          vapour_g_kg=(qv_sum / count * 1000.0).tolist(),
+                          relative_humidity_clear=[float(a / b) if b > 0 else None
+                                                   for a, b in zip(rh_clear_sum, clear_count)]),
         storm_depth=dict(cloud_top_km=stats(np.array(tops) / 1000.0), zero_c_km=float(np.nanmean(z0c) / 1000.0),
                          minus_40_c_km=float(np.nanmean(z40c) / 1000.0)),
         zone=dict(threshold_kg_kg=MAIN, share_of_snapshots=present / count,

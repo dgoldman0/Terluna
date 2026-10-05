@@ -46,7 +46,17 @@ W_EV = 35.0                                  # eV per ion pair, as CRAC:CRII
 MOBILITY_STANDARD = (1.36e-4, 1.53e-4)       # m2/(V s), positive and negative small ions (Hirsikko et al. 2011, Horrak)
 P0, T0 = 101325.0, 273.15
 DETACHMENT_FREE = 0.0
-DUST_RADIUS_UM = 0.05                        # aerosol radius for the attachment bracket
+DUST_RADIUS_UM = 0.05                        # aerosol radius (dry) for the attachment bracket
+# Humidity (literature note humid_conductivity.md). The reference mobilities are the means of a year of hourly spectra
+# in humid boreal air (Horrak 2001), their overall means at its 80-85 % relative humidity class, so they already carry
+# what hydration humid air brings; field and laboratory results disagree on any further effect at 1-3 mol % of water,
+# so the mobility takes none. Recombination takes none either: at the column's 53-85 % relative humidity Franchin et
+# al. (2015) measured 2.0-2.3e-6 cm3/s, within their uncertainty of each other and of the value used. The aerosol
+# takes up water (kappa-Koehler theory, Petters and Kreidenweis 2007), which raises its attachment of ions.
+KAPPA = 0.3                                  # hygroscopicity: continental mean (Andreae and Rosenfeld 2008)
+KAPPA_BRACKET = (0.1, 1.0)                   # organic-rich (Gunthe et al. 2009) to marine (Pringle et al. 2010)
+SURFACE_TENSION = 0.072                      # J/m2, Petters and Kreidenweis's convention for kappa
+WATER_MOLAR_MASS, WATER_DENSITY, GAS_CONSTANT = 0.018015, 1000.0, 8.314462618
 DROPLETS_M3 = 1.0e8                          # cloud droplets, as the CM1 runs set them (100 per cm3)
 NONMUON_ATTENUATION_G_CM2 = 140.0            # the nucleonic and electromagnetic cascade below Earth's sea-level depth
 
@@ -65,11 +75,39 @@ def mobility_air(mu_standard, p_pa, t_k):
     return mu_standard * (P0 / np.asarray(p_pa, float)) * (np.asarray(t_k, float) / T0) ** 0.6
 
 
-def aerosol_attachment(radius_um, number_m3):
-    """Attachment rate (1/s) of small ions to aerosol of one radius (um), with the coefficient of Tinsley and Zhou
-    (2006) as printed by Baumgaertner et al. (2013): 4.36e-5 r - 9.2e-8 cm3/s above 0.01 um."""
-    beta_cm3 = 4.36e-5 * radius_um - 9.2e-8
-    return beta_cm3 * 1e-6 * np.asarray(number_m3, float)
+def growth_factor(rh, kappa, d_dry_m, t_k):
+    """Hygroscopic growth factor D/D_dry of a particle at relative humidity rh (a fraction below 1) by kappa-Koehler
+    theory with its Kelvin term (Petters and Kreidenweis 2007, Eq. 11): rh exp(-A/(D_dry gf)) = (gf^3 - 1)/(gf^3 -
+    (1 - kappa)), A = 4 sigma M_w/(R T rho_w); the particle is taken as aqueous at every humidity (their metastable
+    branch). Solved by bisection."""
+    rh, d, t = (np.asarray(a, float) for a in (rh, d_dry_m, t_k))
+    a = 4.0 * SURFACE_TENSION * WATER_MOLAR_MASS / (GAS_CONSTANT * t * WATER_DENSITY)
+    lo, hi = np.ones(np.broadcast(rh, d, t).shape), np.full(np.broadcast(rh, d, t).shape, 50.0)
+    for _ in range(80):
+        mid = 0.5 * (lo + hi)
+        excess = (mid ** 3 - 1.0) / (mid ** 3 - (1.0 - kappa)) - rh * np.exp(-a / (d * mid))
+        lo, hi = np.where(excess < 0.0, mid, lo), np.where(excess < 0.0, hi, mid)
+    return np.where(rh > 0.0, 0.5 * (lo + hi), 1.0)
+
+
+def attachment_coefficient(d_m, p_pa, t_k):
+    """The equivalent attachment coefficient (m3/s) of small ions to particles of diameter d_m, averaged over the
+    particles' charges: Horrak et al. (2008) Eq. 7, sqrt((d - 1 nm)/(d + 5 nm)) (d/40 nm) 1e-6 cm3/s, made for ions of
+    mean mobility 1.45 cm2/(V s) at 20 C and 1013 hPa and approximating Hoppel and Frick's (1990) tables; scaled as k T
+    Z (the prefactor of their Eq. 4) with the ions' mean mobility at p and T."""
+    d_nm = np.asarray(d_m, float) * 1e9
+    w_ref = np.sqrt(np.maximum(d_nm - 1.0, 0.0) / (d_nm + 5.0)) * (d_nm / 40.0) * 1e-12
+    z = sum(mobility_air(m, p_pa, t_k) for m in MOBILITY_STANDARD)
+    z_ref = sum(mobility_air(m, 101325.0, 293.15) for m in MOBILITY_STANDARD)
+    return w_ref * np.asarray(t_k, float) / 293.15 * z / z_ref
+
+
+def aerosol_attachment(radius_um, number_m3, p_pa=101325.0, t_k=293.15, rh=0.0, kappa=KAPPA):
+    """Attachment rate (1/s) of small ions to aerosol of one dry radius (um), grown at relative humidity rh with
+    hygroscopicity kappa."""
+    d_dry = 2.0 * radius_um * 1e-6
+    d_wet = d_dry * growth_factor(rh, kappa, d_dry, t_k)
+    return attachment_coefficient(d_wet, p_pa, t_k) * np.asarray(number_m3, float)
 
 
 def droplet_attachment(t_k, mobility, number_m3, radius_m):
@@ -147,7 +185,10 @@ CLOUD_WATER_G_M3 = (0.05, 0.1, 0.2)          # the charging zone's cloud water s
 EVIDENCE = ('Ion production from the CRAC:CRII v2 tables at zero cutoff above Earth\'s sea-level depth, with their '
             'muon part replaced by MCEq\'s muons for the Open Moon\'s column, and MCEq\'s muons and their decay electrons '
             'alone below it; recombination (Brasseur and Chatel 1983), small-ion mobility scaled with pressure and '
-            'temperature (Tammet), attachment to aerosol (Tinsley and Zhou 2006) and to cloud droplets by diffusion. The '
+            'temperature (Tammet), attachment to aerosol (Horrak et al. 2008, scaled with the ions\' mobility) grown '
+            'by the clear air\'s relative humidity (kappa-Koehler, Petters and Kreidenweis 2007; kappa 0.3, with 0.1 '
+            'and 1.0 as a bracket), and to cloud droplets by diffusion; neither the mobility nor the recombination '
+            'takes a humidity term, which the literature does not support at these humidities. The '
             'same chain reproduces Earth\'s measured fair-weather conductivity (Gringel 1978) within 2-8 % from 5 to 30 km. '
             'Ground radioactivity, absent over the sea and confined to the lowest kilometres over land, is left out.')
 
@@ -183,20 +224,28 @@ def moon_column(phi_mv: float = 400.0) -> dict:
     p = np.array(prof['pressure_hpa']) * 100.0
     t = np.array(prof['temperature_c']) + 273.15
     rho = np.array(prof['air_density_kg_m3'])
+    rh = np.array([0.0 if v is None else v for v in prof['relative_humidity_clear']])
     depth = p / MOON_SURFACE_GRAVITY / 10.0                                  # g/cm2
     y, cascade = moon_ion_production(depth, phi_mv, RESULTS / 'muon_ionization_moon.json',
                                      RESULTS / 'muon_ionization_earth.json')
     q = y * rho * 1e-3                                                       # ion pairs per cm3 per s
     q_m3 = q * 1e6
     mu_pos = mobility_air(MOBILITY_STANDARD[0], p, t)
-    clear = {f'{z_cm3 / 1e6:g}_per_cm3': conductivity_of(q_m3, p, t, aerosol_attachment(DUST_RADIUS_UM, z_cm3))[0]
-             for z_cm3 in AEROSOL_M3}
+    sink = lambda z_cm3, **kw: aerosol_attachment(DUST_RADIUS_UM, z_cm3, p, t, **kw)
+    clear = {f'{z_cm3 / 1e6:g}_per_cm3': conductivity_of(q_m3, p, t, sink(z_cm3, rh=rh))[0] for z_cm3 in AEROSOL_M3}
+    for z_cm3 in AEROSOL_M3[1:]:
+        clear[f'{z_cm3 / 1e6:g}_per_cm3_dry'] = conductivity_of(q_m3, p, t, sink(z_cm3))[0]
+        for kappa in KAPPA_BRACKET:
+            clear[f'{z_cm3 / 1e6:g}_per_cm3_kappa_{kappa:g}'] = conductivity_of(q_m3, p, t,
+                                                                         sink(z_cm3, rh=rh, kappa=kappa))[0]
     cloud = {}
     for lwc in CLOUD_WATER_G_M3:
         radius = (3.0 * lwc * 1e-3 / (4.0 * np.pi * 1000.0 * DROPLETS_M3)) ** (1.0 / 3.0)
         sink = droplet_attachment(t, mu_pos, DROPLETS_M3, radius)
         cloud[f'{lwc:g}_g_m3'] = conductivity_of(q_m3, p, t, sink)[0]
     return dict(z_km=z.tolist(), pressure_hpa=(p / 100.0).tolist(), temperature_k=t.tolist(), depth_g_cm2=depth.tolist(),
+                relative_humidity_clear=rh.tolist(),
+                aerosol_growth_factor=growth_factor(rh, KAPPA, 2.0 * DUST_RADIUS_UM * 1e-6, t).tolist(),
                 ion_pairs_per_g_s=y.tolist(), cascade_share=(cascade / np.maximum(y, 1e-30)).tolist(),
                 ion_pairs_per_cm3_s=q.tolist(),
                 clear_air_s_m={k: v.tolist() for k, v in clear.items()},
@@ -210,7 +259,9 @@ def main(argv=None) -> int:
     result = dict(schema=SCHEMA, evidence=EVIDENCE,
                   reading_rule=('Columns are the CM1 equatorial box\'s mean profile (second lunar day). Conductivity is '
                                 'the total of both signs. Clear air is given without aerosol and with 100 and 1000 per cm3 '
-                                'of 0.05-um particles; cloud with 100 droplets per cm3 holding the stated cloud water. '
+                                'of particles of 0.05-um dry radius, grown at the clear air\'s mean relative humidity with '
+                                'kappa 0.3 (the plain keys), dry (_dry) and with kappa 0.1 and 1.0 (_kappa_); cloud with '
+                                '100 droplets per cm3 holding the stated cloud water. '
                                 'Solar minimum and maximum are modulation potentials of 400 and 1000 MV.'),
                   solar_minimum=moon_column(400.0), solar_maximum=moon_column(1000.0))
     result['producer'] = dict(domain='atmosphere', files={f'electricity/{Path(__file__).name}':

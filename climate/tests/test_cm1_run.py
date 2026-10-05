@@ -574,7 +574,7 @@ FINE_TEMPLATE = (' &param1\n dx     =  6000.0,\n dy     =  6000.0,\n dtl    =  4
                  ' run_time =  -999.9,\n tapfrq =   10800.0,\n rstfrq =  43200.0,\n /\n'
                  ' &param2\n irst      =  0,\n rstnum    =  1,\n ptype     =  27,\n iptra     =  1,\n npt       =  7,\n'
                  ' pdtra     =  0,\n /\n'
-                 ' &param8\n var2      =   0.0,\n var3      =   0.0,\n var4      =   5000.0,\n var5      =   6.8,\n var6      =   3.0,\n var7      =   12.0,\n'
+                 ' &param8\n var1      =   0.0,\n var2      =   0.0,\n var3      =   0.0,\n var4      =   5000.0,\n var5      =   6.8,\n var6      =   3.0,\n var7      =   12.0,\n'
                  ' var8      =   3.0,\n var9      =   0.0,\n var10     =   12000.0,\n var18     =   -90.0,\n'
                  ' var19     =   2551443.0,\n /\n'
                  ' &param14\n diagfrq        =     10800.0,\n /\n')

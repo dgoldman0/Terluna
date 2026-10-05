@@ -19,12 +19,51 @@
 ! module_boxmgsetup stands in for WRF-ELEC's multigrid set-up, which the branched scheme (module_discharge_msz.F) reads
 ! for its tile's offsets in the domain: zero on one process. It also holds the bounds of the breakdown field both
 ! lightning schemes use (WRF-ELEC's nssl_ibrkd = 4: 284 kV/m times air density over 1.225 kg/m3, held within 50-180
-! kV/m; 0 and 1e30 for the unbounded scaling).
+! kV/m; 0 and 1e30 for the unbounded scaling), and the test of a downward leader's crossing to the ground
+! (terluna_crosses), which the branched scheme applies where its ground-strike rule would count a strike.
 !-----------------------------------------------------------------------------------------------------------------------
 module module_boxmgsetup
   implicit none
   integer :: igslg0 = 0, jgslg0 = 0, kgslg0 = 0
   real :: terluna_ebrk_lo = 50.0e3, terluna_ebrk_hi = 180.0e3
+  real :: terluna_leader_ei = 0.0                 ! leader channel's internal field at 1.225 kg/m3 (V/m); 0: no test
+  real, allocatable :: terluna_vapour(:,:,:)      ! water vapour (kg/m3) on the branched scheme's recentred arrays
+
+contains
+
+  logical function terluna_crosses(phich, z0, ztip, nz, pot, rho, dz, vap)
+    ! Whether a downward leader can carry on from ztip (m) to the ground. A leader stops when the potential difference
+    ! between its tip and the air ahead runs out (Lalande et al. 2002, Eq. 9; Mazur and Ruhnke's model), not when the
+    ! air's field falls. The channel holds the potential where the flash started, phich (V), as Mansell's model takes
+    ! it, less the drop along it: terluna_leader_ei times the air density over 1.225 kg/m3 per metre of channel from
+    ! the starting height z0 (m), the path lightmsz draws being vertical. At every level below the tip, and at the
+    ! ground's zero, the tip must stay beyond the air's potential, on the channel's side, by at least what its streamer
+    ! zone needs: 0.225 MV for a positive leader (Lalande et al. 2002), 0.4 MV for a negative one (from their
+    ! streamer-zone fields), raised 1.3 % per g/m3 of water vapour as the positive streamer field is (Allen and
+    ! Boutlendj 1991), with the streamer fields' density scaling cancelling in the potential.
+    integer, intent(in) :: nz
+    real, intent(in) :: phich, z0, ztip
+    real, dimension(nz), intent(in) :: pot, rho, dz, vap    ! V, kg/m3, m, kg/m3 of the column below the tip
+    real :: s, du0, zb, zt, zc, drop, dropc, need
+    integer :: k
+    s = sign(1.0, phich)
+    du0 = merge(0.225e6, 0.4e6, s .gt. 0.0)
+    terluna_crosses = .false.
+    drop = 0.0                                             ! the drop from z0 down to the top of layer k
+    do k = nz,1,-1
+      zb = sum(dz(1:k-1))
+      zt = zb + dz(k)
+      zc = zb + 0.5*dz(k)
+      dropc = drop + terluna_leader_ei*rho(k)/1.225*max(0.0, min(zt, z0) - max(zc, 0.0))
+      drop = drop + terluna_leader_ei*rho(k)/1.225*max(0.0, min(zt, z0) - zb)
+      if( zc .ge. ztip ) cycle
+      need = du0*(1.0 + 0.013*1000.0*vap(k))
+      if( s*(phich - s*dropc - pot(k)) .lt. need ) return
+    enddo
+    need = du0*(1.0 + 0.013*1000.0*vap(1))
+    terluna_crosses = s*(phich - s*drop) .ge. need        ! at the ground, whose potential is zero
+  end function terluna_crosses
+
 end module module_boxmgsetup
 
 module terluna_lightning

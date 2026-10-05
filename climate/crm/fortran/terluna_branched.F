@@ -6,8 +6,9 @@
 ! field falls below 0.8 of breakdown, and spreads each end through the connected cells whose potential differs from the
 ! channel's by more than its 200 V/m internal field allows. It neutralizes the charge there, handing the opposite charge
 ! to the small ions; it counts a ground strike when a downward channel reaches below zgrnd (or, with zgrnd < 0, air
-! warmer than tgrnd; with zgrnd = 0, only the two lowest levels); and it makes nitrogen oxides along the channel at Wang et al.'s yield per metre for the channel's
-! pressure.
+! warmer than tgrnd; with zgrnd = 0, only the two lowest levels), and, where module_boxmgsetup sets a leader's internal
+! field, only if the leader can cross the rest of the way (terluna_crosses, on the water vapour handed here); and it
+! makes nitrogen oxides along the channel at Wang et al.'s yield per metre for the channel's pressure.
 !
 ! Its channels stop at the edge of its arrays, so here each flash's arrays are recentred on the flash's starting point
 ! across the wrapping domain. The starting point is drawn as lightmsz draws it, uniformly among the points of levels 2
@@ -54,13 +55,15 @@ contains
     seed = ieor(seed, mask)
   end function park_miller
 
-  subroutine branched_flash(ni, nj, nk, dx, dy, dz, rho, prs, tk, cloud, phi, ex, ey, ez, emag, q, ebrk, used, seed,  &
-                            nstep, dtp, eint, tgrnd, zgrnd, lightrad, iunit, dep, rec)
+  subroutine branched_flash(ni, nj, nk, dx, dy, dz, rho, prs, tk, cloud, vap, phi, ex, ey, ez, emag, q, ebrk, used,   &
+                            seed, nstep, dtp, eint, tgrnd, zgrnd, lightrad, iunit, dep, rec)
     use module_discharge_msz, only : lightmsz
+    use module_boxmgsetup, only : terluna_vapour
     integer, intent(in) :: ni, nj, nk, nstep, iunit
     real, intent(in) :: dx, dy, dtp, eint, tgrnd, zgrnd, lightrad
     real, dimension(nk), intent(in) :: dz                        ! layer depths (m)
     real, dimension(ni,nj,nk), intent(in) :: rho, prs, tk, cloud ! kg/m3, Pa, K, kg/kg
+    real, dimension(ni,nj,nk), intent(in) :: vap                 ! water vapour (kg/m3)
     real, dimension(ni,nj,nk), intent(in) :: phi, ex, ey, ez, emag, q, ebrk   ! V, V/m, C/m3, V/m
     integer, dimension(ni,nj,nk), intent(inout) :: used          ! starting points used in this step
     integer, intent(inout) :: seed
@@ -120,7 +123,7 @@ contains
       allocate( light(0:ni+1,0:nj+1), lightdens(0:ni+1,0:nj+1), lightdis(0:ni+1,0:nj+1), fic(0:ni+1,0:nj+1),      &
                 ficp(0:ni+1,0:nj+1), ficn(0:ni+1,0:nj+1), fcg(0:ni+1,0:nj+1), fcgp(0:ni+1,0:nj+1),                 &
                 fcgn(0:ni+1,0:nj+1), lightmask(0:ni+1,0:nj+1), lightinit(0:ni+1,0:nj+1), kcldtop(0:ni+1,0:nj+1),    &
-                initmask(0:ni+1,0:nj+1,nk) )
+                initmask(0:ni+1,0:nj+1,nk), terluna_vapour(0:ni+1,nk,0:nj+1) )
     endif
     si = max(1, ni/2) - i0
     sj = max(1, nj/2) - j0
@@ -140,6 +143,7 @@ contains
           db(ir,k,jr) = rho(i,j,k)
           pn(ir,k,jr) = prs(i,j,k)
           temg(ir,k,jr) = tk(i,j,k)
+          terluna_vapour(ir,k,jr) = vap(i,j,k)
           if( cloud(i,j,k) .ge. cloud_min ) kcldtop(ir,jr) = max(k, kcldtop(ir,jr))
         enddo
       enddo

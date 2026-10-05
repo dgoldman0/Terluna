@@ -1,7 +1,7 @@
 """Checks of the electrified CM1's field solver and lightning (climate/crm/fortran/terluna_lightning.F), compiled with
 CM1's FFT and run on small grids: the potential against a direct solve of the same difference equations, against the
-exact potential of a charged layer between grounded plates, and the cylindrical discharge against WRF-ELEC's rule.
-Skipped where gfortran or the CM1 source is missing."""
+exact potential of a charged layer between grounded plates, the cylindrical discharge against WRF-ELEC's rule, and the
+test of a downward leader's crossing to the ground. Skipped where gfortran or the CM1 source is missing."""
 import os
 import shutil
 import subprocess
@@ -225,3 +225,53 @@ def test_a_discharge_removes_charge_as_light1d_does_and_counts_separate_regions(
     dipole(q, 23, 10, zh1)
     out = run(program, q, zh1, zf1, dx, dx, radius=4000.0)
     assert out['nregion'] == 1 and np.any(out['dep'][23, 10] != 0.0) and np.any(out['dep'][0, 10] != 0.0)
+
+
+CROSSING = """
+program crossing
+  use module_boxmgsetup
+  implicit none
+  integer, parameter :: nz = 30
+  real :: pot(nz), rho(nz), dz(nz), vap(nz), dry(nz)
+  dz = 1000.0
+  rho = 1.225
+  pot = 0.0
+  dry = 0.0
+  vap = 0.01                                            ! 10 g/m3
+  terluna_leader_ei = 1.0e4
+  ! a negative leader from 30 km: 300 MV lost on the way down, against 350 and 250 MV at the start
+  print *, terluna_crosses(-350.0e6, 30000.0, 20000.0, nz, pot, rho, dz, dry)
+  print *, terluna_crosses(-250.0e6, 30000.0, 20000.0, nz, pot, rho, dz, dry)
+  ! 0.45 MV left at the ground: enough for a negative leader's 0.4 MV in dry air, short of it with 10 g/m3 of vapour
+  print *, terluna_crosses(-300.45e6, 30000.0, 20000.0, nz, pot, rho, dz, dry)
+  print *, terluna_crosses(-300.45e6, 30000.0, 20000.0, nz, pot, rho, dz, vap)
+  ! a positive leader needs 0.225 MV: 0.3 MV left passes
+  print *, terluna_crosses(300.3e6, 30000.0, 20000.0, nz, pot, rho, dz, dry)
+  ! air more negative than the tip below it stops a negative leader; above the tip it does not matter
+  terluna_leader_ei = 1.0e3
+  pot(10) = -400.0e6
+  print *, terluna_crosses(-350.0e6, 30000.0, 20000.0, nz, pot, rho, dz, dry)
+  pot(10) = 0.0
+  pot(25) = -400.0e6
+  print *, terluna_crosses(-350.0e6, 30000.0, 20000.0, nz, pot, rho, dz, dry)
+  ! half the density halves the drop: 150 MV lost, so 200 MV crosses
+  pot = 0.0
+  terluna_leader_ei = 1.0e4
+  rho = 0.6125
+  print *, terluna_crosses(-200.0e6, 30000.0, 20000.0, nz, pot, rho, dz, dry)
+end program crossing
+"""
+
+
+def test_a_downward_leader_crosses_while_its_tip_keeps_its_streamer_zone_s_potential(tmp_path):
+    if shutil.which('gfortran') is None:
+        pytest.skip('gfortran is missing')
+    (tmp_path / 'crossing.f90').write_text(CROSSING)
+    # module_boxmgsetup alone, out of the file, without CM1's FFT
+    text = (HERE / 'terluna_lightning.F').read_text()
+    module = text[text.index('module module_boxmgsetup'):text.index('end module module_boxmgsetup')]
+    (tmp_path / 'boxmg.f90').write_text(module + 'end module module_boxmgsetup\n')
+    subprocess.run(['gfortran', '-O2', '-ffree-form', '-ffree-line-length-none', 'boxmg.f90', 'crossing.f90', '-o',
+                    'crossing'], cwd=tmp_path, check=True, capture_output=True)
+    out = subprocess.run(['./crossing'], cwd=tmp_path, check=True, capture_output=True, text=True).stdout.split()
+    assert out == ['T', 'F', 'T', 'F', 'T', 'F', 'T', 'T']

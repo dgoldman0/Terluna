@@ -125,10 +125,12 @@ TAKAHASHI = REPO / 'atmosphere' / 'electricity' / 'inputs' / 'takahashi.txt'
 # conductivity below). Leakage and screening take the Moon's conductivity at solar minimum, for 100 aerosol particles
 # per cm3 in clear air and 0.1 g/m3 of cloud water in cloud (atmosphere/electricity/conductivity.py). Point discharge
 # from the ground, which WRF-ELEC does not have, is off (corona_v_m 0); otherwise it is its onset field at 1.225 kg/m3
-# (Standler and Winn 1979: 3000 over dense vegetation, 5000 on a barren ridge).
+# (Standler and Winn 1979: 3000 over dense vegetation, 5000 on a barren ridge). A downward channel that meets the
+# ground-strike rule strikes as WRF-ELEC has it (leader_v_m 0), or only if a leader with that internal field (V/m at
+# 1.225 kg/m3, scaled by density) keeps the potential its streamer zone needs all the way to the ground.
 SETTINGS = dict(ipelec=3, isaund=12, lightning=3, leakage=0, radius_m=12000.0, hail=True, substep_s=0.0, ground_m=-1.0,
                 screen=0, conductivity=dict(sun='solar_minimum', clear_air='100_per_cm3', cloud='0.1_g_m3'),
-                corona_v_m=0.0)
+                corona_v_m=0.0, leader_v_m=0.0)
 # The lunar boxes. WRF-ELEC's 0.75-s sub-step lets graupel settle through about 1 % of the 500-m layers of its supercell
 # in each; in the boxes' charging zone (25-35 km) the layers are 2 km deep and graupel falls at 0.44 of Earth's speed,
 # so 0.75 x 4 / 0.44 = 6.8 s keeps that share. The boxes take WRF-ELEC's own ground-strike rule (ground_m -1: a downward
@@ -161,7 +163,7 @@ def namelist_settings(elec: dict) -> dict:
     CM1's passive tracers without its positivity limiter, and the settings terluna_elec.F reads."""
     e = dict(SETTINGS, **elec)
     return {'param2': dict(ptype=27 if e['hail'] else 26, iptra=1, npt=7 if e['hail'] else 6, pdtra=0),
-            'param8': dict(var2=float(e['corona_v_m']), var3=float(e['screen']), var4=float(e['ground_m']),
+            'param8': dict(var1=float(e['leader_v_m']), var2=float(e['corona_v_m']), var3=float(e['screen']), var4=float(e['ground_m']),
                            var5=float(e['substep_s']), var6=float(e['ipelec']),
                            var7=float(e['isaund']), var8=float(e['lightning']), var9=float(e['leakage']),
                            var10=float(e['radius_m']))}
@@ -294,12 +296,26 @@ MODULE_PATCH = ('module_mp_nssl_2mom.F', 'Terluna: WRF-ELEC NSSL module in CM1',
 
 # WRF-ELEC's branched lightning on one process: WRF-ELEC runs it only under MPI, where a few lines outside its MPI
 # blocks read the tile count. Its breakdown field takes the bounds the build sets (module_boxmgsetup) and is computed
-# afresh at each call, since terluna_branched.F recentres the arrays on each flash; its debugging output is off.
+# afresh at each call, since terluna_branched.F recentres the arrays on each flash; its debugging output is off. Where a
+# case sets a leader's internal field (var1), a downward channel that meets the ground-strike rule strikes only if the
+# leader can cross the rest of the way (module_boxmgsetup's terluna_crosses).
 MSZ_PATCH = ('module_discharge_msz.F', 'Terluna: branched lightning on one process', [
     ('', '! Terluna: branched lightning on one process (MicroTed/wrf4-elec e43041b), patched by climate/crm/cm1_elec.py\n',
      1),
     ('      use module_boxmgsetup, only: igslg0, jgslg0, kgslg0\n',
-     '      use module_boxmgsetup, only: igslg0, jgslg0, kgslg0, terluna_ebrk_lo, terluna_ebrk_hi\n', 2),
+     '      use module_boxmgsetup, only: igslg0, jgslg0, kgslg0, terluna_ebrk_lo, terluna_ebrk_hi, &\n'
+     '     &   terluna_leader_ei, terluna_vapour, terluna_crosses ! Terluna\n', 2),
+    ('      integer :: idownward\n', '      integer :: idownward\n      logical :: tcross ! Terluna\n', 1),
+    ('      if (  idownward == 1 .and. &\n'
+     '          (trje(in,it,llz) .lt. zgrnd',
+     '      tcross = .true. ! Terluna: a downward leader\'s crossing to the ground (module_boxmgsetup)\n'
+     '      IF ( terluna_leader_ei > 0.0 .and. idownward == 1 .and. &\n'
+     '          (trje(in,it,llz) .lt. zgrnd .or. (zgrnd < 0. .and. trje(in,it,ltemg) > tgrnd) .or. kc <= 2 ) ) THEN\n'
+     '        tcross = terluna_crosses(trje(in,1,lpot), trje(in,1,llz), trje(in,it,llz), nz, pot(ic,1:nz,jc), &\n'
+     '                                 db(ic,1:nz,jc), dzz(ic,1:nz,jc), terluna_vapour(ic,1:nz,jc))\n'
+     '      ENDIF\n'
+     '      if (  idownward == 1 .and. tcross .and. &\n'
+     '          (trje(in,it,llz) .lt. zgrnd', 1),
     ('      CALL MPI_AllReduce(mpitotindp, mpitotoutdp, 2, MPI_DOUBLE_PRECISION, MPI_SUM, local_communicator, '
      'mpi_error_code)\n',
      '      mpitotoutdp(1:2) = mpitotindp(1:2) ! Terluna: one process\n', 1),

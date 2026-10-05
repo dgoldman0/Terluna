@@ -134,8 +134,10 @@ depth only muons and their decay electrons ionize the air. Traced with MCEq
 through the Open Moon's column, they make 0.05–0.06 ion pairs per cm³ per second
 at the charging zone (2,700–4,100 g/cm², 30–50 km), against 12 in an Earth storm's
 charging zone at 6 km, and 0.04 at the ground, against 2 over Earth's seas. Clear
-air there conducts 1.2–1.9 × 10⁻¹⁴ S/m without aerosol and 0.2–0.3 × 10⁻¹⁴ S/m with
-1000 particles per cm³. Inside cloud, where droplets take up the scarce ions, it
+air there conducts 1.2–1.9 × 10⁻¹⁴ S/m without aerosol and 0.10–0.13 × 10⁻¹⁴ S/m with
+1000 particles per cm³ swollen by the air's humidity (0.2–0.3 × 10⁻¹⁴ S/m before
+the swelling and the attachment's pressure scaling were added on 2026-10-05;
+atmosphere/electricity README, "Humidity"). Inside cloud, where droplets take up the scarce ions, it
 conducts 1 × 10⁻¹⁶ S/m, so separated charge leaks away over about a day; in an
 Earth storm, over half an hour. The solar cycle leaves this unchanged below about
 90 km, since the muons' parent cosmic rays lie far above the energies it
@@ -295,10 +297,33 @@ Morrison's do.
    kV/m and under them from 228–243 to 39–48 kV/m at most. The lightning stayed
    as it was (11 flashes against 6–13, 161 against 144–157), while the busy
    window's ground strikes rose to 39 against 21, smaller ones (a median 110 C,
-   at most 624 C). The fields at the ground of item 4's point-discharge
+   at most 624 C; item 8 adds the leader's crossing). The fields at the ground of item 4's point-discharge
    comparison were the leftover charge's. The author made leakage the lunar
    runs' default the same day.
-8. Windows of `box_0e_elec`'s second lunar day run again from its restarts with
+8. Humidity and the leader's crossing (2026-10-05; climate/crm README, "The
+   leader's crossing"; atmosphere/electricity README, "Humidity"). The lunar
+   air is humid, 84 % relative humidity in clear air at the ground and 52–64 %
+   from 10 to 50 km. Its aerosol now swells with that humidity (κ-Köhler,
+   [S41], with κ 0.3 and 0.1–1.0 as a bracket, [S45]) and takes up ions by a coefficient that scales with pressure ([S42]),
+   which lowers clear air's conductivity by 12 % at the ground and 22 % at 34
+   km; the ions' mobility and recombination take no humidity term ([S43],
+   [S44]), nor do point discharge's onset ([S51]) or the breakdown field
+   ([S52]). A ground strike can now need the leader to cross the 34 km below
+   the −7 °C level: it carries on while its tip keeps the potential its
+   streamer zone needs beyond the air's ([S46], [S47]), the channel losing its
+   internal field times its length, about 1 kV/m at sea-level density for a
+   thermalized leader ([S48], [S49]; 1–10 kV/m), and humidity raising the
+   streamer zone's need by 1.3 % per g/m³ ([S50]), a fraction of a megavolt.
+   At 1–3 kV/m the crossing passes 82–100 % of the ground strikes WRF-ELEC's
+   rule counts, and about a fifth of the lunar flashes strike the ground (30
+   of 150 at 1 kV/m); it takes half of them near 10 kV/m (28 of 229) and
+   nearly all at 20 kV/m. On Earth's benchmark storm at 1 kV/m it changes
+   nothing: the same 85 ground strikes among 7,406 flashes. So the ground strikes' number turns on WRF-ELEC's
+   Earth-calibrated conditions at the start and on what the scheme leaves out
+   (a downward end leaving the cloud, the cloud holding the channel's
+   potential through the 0.2–0.4 s crossing, current cutoff), and on the
+   internal field above about 5 kV/m.
+9. Windows of `box_0e_elec`'s second lunar day run again from its restarts with
    output every few minutes, to follow each storm's life.
 
 It gives the storms' charge structure, the field by height, flash rates and

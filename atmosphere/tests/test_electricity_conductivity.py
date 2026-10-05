@@ -44,8 +44,26 @@ def test_the_crac_crii_reader_returns_the_published_values():
 
 
 def test_droplets_and_aerosol_take_up_ions_as_their_coefficients_say():
-    assert cd.aerosol_attachment(0.1, 1.0e9) == pytest.approx((4.36e-6 - 9.2e-8) * 1e-6 * 1e9)
+    # Horrak et al. (2008) Eq. 7 at its own conditions (20 C, 1013 hPa), and scaled as k T Z elsewhere
+    w = cd.attachment_coefficient(100e-9, 101325.0, 293.15)
+    assert w == pytest.approx(np.sqrt(99.0 / 105.0) * 2.5 * 1e-12)
+    assert cd.attachment_coefficient(100e-9, 50662.5, 293.15) == pytest.approx(2.0 * w)
+    assert cd.aerosol_attachment(0.05, 1.0e9, 101325.0, 293.15) == pytest.approx(w * 1e9)
     mu = 2.0e-4
     d = mu * cd.BOLTZMANN * 270.0 / cd.ELEMENTARY_CHARGE
     assert cd.droplet_attachment(270.0, mu, 1e8, 7e-6) == pytest.approx(4 * np.pi * d * 1e8 * 7e-6)
     assert cd.recombination(300.0, 2.5e25) == pytest.approx((6e-8 + 6e-26 * 2.5e19) * 1e-6)
+
+
+def test_aerosol_grows_with_humidity_as_kappa_koehler_theory_gives():
+    # without the Kelvin term (a large particle) gf = (1 + kappa RH / (1 - RH))^(1/3)
+    assert cd.growth_factor(0.75, 0.3, 1e-3, 293.15) == pytest.approx((1 + 0.3 * 3.0) ** (1 / 3), rel=1e-4)
+    # with it, Petters and Kreidenweis's Eq. 11 holds at the root, and the small particle grows less
+    gf = float(cd.growth_factor(0.75, 0.3, 100e-9, 302.0))
+    a = 4 * cd.SURFACE_TENSION * cd.WATER_MOLAR_MASS / (cd.GAS_CONSTANT * 302.0 * cd.WATER_DENSITY)
+    assert 0.75 * np.exp(-a / (100e-9 * gf)) == pytest.approx((gf ** 3 - 1) / (gf ** 3 - 0.7), rel=1e-6)
+    assert 1.0 < gf < (1 + 0.3 * 3.0) ** (1 / 3)
+    assert cd.growth_factor(0.0, 0.3, 100e-9, 302.0) == 1.0
+    # wetter air takes more ions onto its aerosol
+    assert cd.aerosol_attachment(0.05, 1e8, rh=0.85) > cd.aerosol_attachment(0.05, 1e8, rh=0.5) > \
+        cd.aerosol_attachment(0.05, 1e8)

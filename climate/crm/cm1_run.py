@@ -1281,6 +1281,20 @@ CASES['box_0e_elec_leakage_first'] = dict(
     elec=dict(cm1_elec.LUNAR, leakage=1, ground_m=5000.0),
     purpose=CASES['box_0e_elec']['purpose'] + '; its first lunar day\'s storms again from its day-10.5 restart, with '
             'the charge leaking through the air\'s conductivity')
+# The leader's crossing (README, "The leader's crossing"). WRF-ELEC's rule counts a downward channel at -7 C, 34 km up in
+# the lunar air, as reaching the ground; a leader stops when the potential difference between its tip and the air ahead
+# runs out (Lalande et al. 2002; Mazur and Ruhnke), which over that path turns on the channel's internal field: about 1
+# kV/m at Earth's sea-level density for a thermalized leader (Mansell 2000; Boggs et al. 2018), 1-10 kV/m in Lalande et
+# al.'s range. box_0e_elec_leader_1kv and box_0e_elec_leader_10kv run box_0e_elec_leakage's window with a ground strike
+# needing the crossing at those fields (scaled by density), each differing from it only in that.
+CASES['box_0e_elec_leader_1kv'] = dict(
+    CASES['box_0e_elec_leakage'], elec=dict(cm1_elec.LUNAR, leakage=1, leader_v_m=1000.0),
+    purpose=CASES['box_0e_elec']['purpose'] + '; its busiest storms again from its day-40.5 restart, a ground strike '
+            'needing a leader with a 1-kV/m internal field to cross to the ground')
+CASES['box_0e_elec_leader_10kv'] = dict(
+    CASES['box_0e_elec_leader_1kv'], elec=dict(cm1_elec.LUNAR, leakage=1, leader_v_m=10000.0),
+    purpose=CASES['box_0e_elec']['purpose'] + '; its busiest storms again from its day-40.5 restart, a ground strike '
+            'needing a leader with a 10-kV/m internal field to cross to the ground')
 # The same storm with CM1's own copy of the NSSL scheme and no electricity, to check that WRF-ELEC's copy, run through
 # terluna_elec.F, makes the same storm.
 CASES['supercell_nssl'] = dict(
@@ -1296,6 +1310,11 @@ CASES['supercell_elec_ground_rule'] = dict(
     CASES['supercell_elec'], elec=dict(ground_m=-1.0),
     purpose='CM1\'s supercell at Earth\'s gravity with WRF-ELEC\'s NSSL microphysics, charging and branched lightning '
             'and its own ground-strike rule, the benchmark again with ground strikes possible')
+CASES['supercell_elec_leader_1kv'] = dict(
+    CASES['supercell_elec_ground_rule'], elec=dict(ground_m=-1.0, leader_v_m=1000.0),
+    purpose='CM1\'s supercell at Earth\'s gravity with WRF-ELEC\'s NSSL microphysics, charging and branched lightning '
+            'and its own ground-strike rule, a ground strike needing a leader with a 1-kV/m internal field to cross to '
+            'the ground: the leader\'s crossing on Earth')
 CASES['supercell_elec_cylinders'] = dict(
     CASES['supercell_elec'], elec=dict(lightning=1),
     purpose='CM1\'s supercell at Earth\'s gravity with WRF-ELEC\'s NSSL microphysics, charging and cylindrical '

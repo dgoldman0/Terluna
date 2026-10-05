@@ -353,11 +353,16 @@ def against(name: str, other: str) -> dict:
 SAUNDERS_PECK_RUNS = {'first_lunar_day': ('box_0e_elec_uncapped', 'box_0e_elec_uncapped_corona', 'box_0e_elec'),
                       'second_lunar_day': ('box_0e_elec_ground_rule', 'box_0e_elec')}
 WINDOW_DAYS = {'first_lunar_day': (10.5, 12.0), 'second_lunar_day': (40.5, 42.0)}
+# each comparison's runs by window, those without the change first; the leader's crossing is compared with leakage on,
+# beside the leakage window with WRF-ELEC's rule alone
 COMPARISONS = {
-    'charging_laws': dict(first_lunar_day='box_0e_elec_takahashi_first', second_lunar_day='box_0e_elec_takahashi'),
-    'leakage': dict(first_lunar_day='box_0e_elec_leakage_first', second_lunar_day='box_0e_elec_leakage'),
+    'charging_laws': dict(first_lunar_day=SAUNDERS_PECK_RUNS['first_lunar_day'] + ('box_0e_elec_takahashi_first',),
+                          second_lunar_day=SAUNDERS_PECK_RUNS['second_lunar_day'] + ('box_0e_elec_takahashi',)),
+    'leakage': dict(first_lunar_day=SAUNDERS_PECK_RUNS['first_lunar_day'] + ('box_0e_elec_leakage_first',),
+                    second_lunar_day=SAUNDERS_PECK_RUNS['second_lunar_day'] + ('box_0e_elec_leakage',)),
+    'leader_crossing': dict(second_lunar_day=('box_0e_elec_leakage', 'box_0e_elec_leader_1kv', 'box_0e_elec_leader_10kv')),
 }
-COMMANDS = {'laws': 'charging_laws', 'leakage': 'leakage'}
+COMMANDS = {'laws': 'charging_laws', 'leakage': 'leakage', 'leader': 'leader_crossing'}
 LAWS = {1: 'takahashi', 11: 'saunders_peck_wrf', 12: 'saunders_peck'}
 # the non-inductive totals over graupel and hail together (ctghi is ctgi and cthi, ctghs ctgs and cths) and snow with
 # cloud ice; the inductive ones, droplets rebounding from graupel and from snow in the field
@@ -447,7 +452,7 @@ def window(name: str, t0: float, t1: float) -> dict:
         snapshots.append(st)
     return dict(case=name, law=LAWS.get(int(record['electricity']['isaund']), record['electricity']['isaund']),
                 electricity={k: record['electricity'].get(k) for k in
-                             ('isaund', 'lightning', 'ground_m', 'corona_v_m', 'leakage', 'substep_s')},
+                             ('isaund', 'lightning', 'ground_m', 'corona_v_m', 'leakage', 'substep_s', 'leader_v_m')},
                 executables=sorted({seg.get('executable') for seg in segments}),
                 lightning=lightning, charge=charge, field=field, ground=ground, snapshots=snapshots)
 
@@ -456,18 +461,17 @@ def comparison(name: str) -> dict:
     """Each window's run with the change (COMPARISONS) and its runs without it, each summarized over the window's
     days."""
     out = {}
-    for label, changed in COMPARISONS[name].items():
+    for label, runs in COMPARISONS[name].items():
         t0, t1 = (86400.0 * d for d in WINDOW_DAYS[label])
-        runs = SAUNDERS_PECK_RUNS[label] + (changed,)
-        out[label] = dict(days=list(WINDOW_DAYS[label]), changed=changed,
+        out[label] = dict(days=list(WINDOW_DAYS[label]),
                           runs=[window(run, t0, t1) for run in runs if (ra.RUNS / run / 'progress.json').exists()])
     return dict(schema=SCHEMA, kind=name.replace('_', '-'), windows=out,
                 producer=dict(domain='climate', files={'crm/elec_analysis.py': hashlib.sha256(
                     Path(__file__).read_bytes()).hexdigest()[:16]}),
                 evidence=EVIDENCE, reading_rule=READING_RULE + (
                     ' Each window\'s runs start from the same restart of box_0e_elec (or are box_0e_elec itself) and '
-                    'differ in the settings listed with each; the run named as changed differs from the first only in '
-                    'the setting compared. Hours count from the window\'s start. Separated charge is the domain\'s '
+                    'differ in the settings listed with each; the runs with the change compared come last. Hours count '
+                    'from the window\'s start. Separated charge is the domain\'s '
                     'charging of both signs integrated over the window (C); graupel is graupel and hail together (kg) '
                     'at each three-hourly output, where the net charge and the charge on the small ions are also '
                     'given (C).'))
@@ -475,8 +479,9 @@ def comparison(name: str) -> dict:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument('case', help='a run, or "laws" or "leakage" for the windows run again under Takahashi\'s law '
-                                     'or with leakage (elec_charging_laws.json, elec_leakage.json)')
+    parser.add_argument('case', help='a run, or "laws", "leakage" or "leader" for the windows run again under '
+                                     'Takahashi\'s law, with leakage or with the leader\'s crossing '
+                                     '(elec_charging_laws.json, elec_leakage.json, elec_leader_crossing.json)')
     parser.add_argument('--against', help='another run of the same case to set the storm beside')
     args = parser.parse_args(argv)
     if args.case in COMMANDS:

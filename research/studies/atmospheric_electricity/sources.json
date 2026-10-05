@@ -1,5 +1,5 @@
 {
-  "checked": "2026-10-04",
+  "checked": "2026-10-05",
   "source_admission": "Sources for the plan of 2026-10-02, each with what was read of it. None is imported or installed; source admission for the manuscripts is separate.",
   "sources": [
     {
@@ -272,6 +272,78 @@
       "citation": "Bestard et al. (2023), Acoustical power of lightning flashes, J. Geophys. Res. Atmos. 128, e2023JD038714",
       "use": "Thunder's acoustical power spans four orders of magnitude between flashes (10.6 kW to 165 MW), which bounds how far a single acoustic share can be trusted.",
       "access": "Not read; its abstract through a search summary."
+    },
+    {
+      "id": "S41",
+      "citation": "Petters and Kreidenweis (2007), A single parameter representation of hygroscopic growth and cloud condensation nucleus activity, Atmos. Chem. Phys. 7, 1961-1971, doi:10.5194/acp-7-1961-2007",
+      "use": "kappa-Köhler growth of aerosol with relative humidity (Eq. 11, with the Kelvin term; surface tension 0.072 J/m2), and the metastable aqueous branch taken at every humidity.",
+      "access": "Full text (literature note humid_conductivity.md on the data drive)."
+    },
+    {
+      "id": "S42",
+      "citation": "Hõrrak, Aalto, Salm, Komsaare, Tammet, Mäkelä, Laakso and Kulmala (2008), Variation and balance of positive air ion concentrations in a boreal forest, Atmos. Chem. Phys. 8, 655-675, doi:10.5194/acp-8-655-2008",
+      "use": "The ions' attachment coefficient to particles of a given diameter, averaged over their charges (Eq. 7, for mean mobility 1.45 cm2/(V s) at 20 C and 1013 hPa, approximating Hoppel and Frick's tables), and the growth of the ion sink with humidity in boreal aerosol.",
+      "access": "Abstract, Sect. 3.2 (Eqs. 3-7, Fig. 1) and Sect. 4.6."
+    },
+    {
+      "id": "S43",
+      "citation": "Hõrrak (2001), Air ion mobility spectrum at a rural area, Dissertationes Geophysicales Universitatis Tartuensis 15, Tartu University Press",
+      "use": "The reference small-ion mobilities are ambient means of a year of hourly spectra at Tahkuse, at its 80-85 % relative humidity class on average; their variation with relative humidity.",
+      "access": "Chapters 1 and 7 (Tables 10, 11 and 13; Fig. 30 read by eye)."
+    },
+    {
+      "id": "S44",
+      "citation": "Franchin et al. (2015), Experimental investigation of ion-ion recombination under atmospheric conditions, Atmos. Chem. Phys. 15, 7203-7216, doi:10.5194/acp-15-7203-2015",
+      "use": "Ion-ion recombination against relative humidity (Table A2): 2.0-2.3e-6 cm3/s at 40-70 %, so no humidity term at the lunar column's humidities.",
+      "access": "Full text."
+    },
+    {
+      "id": "S45",
+      "citation": "Pringle, Tost, Pozzer, Pöschl and Lelieveld (2010), Global distribution of the effective aerosol hygroscopicity parameter for CCN activation, Atmos. Chem. Phys. 10, 5241-5255, doi:10.5194/acp-10-5241-2010",
+      "use": "Hygroscopicity of continental (about 0.3) and marine (0.7-1.0) aerosol, with Andreae and Rosenfeld's (2008) values, for the kappa bracket.",
+      "access": "Abstract and Sects. 1, 2.1, 3.1 and conclusions."
+    },
+    {
+      "id": "S46",
+      "citation": "Lalande, Bondiou-Clergerie, Bacchiega and Gallimberti (2002), Observations and modeling of lightning leaders, C. R. Physique 3, 1375-1392, doi:10.1016/S1631-0705(02)01413-5",
+      "use": "A leader's potential budget (Eq. 9) and its propagation while the potential difference at its tip stays above about 225 kV (positive leader at sea level); thermalized channels' internal fields of 1-10 kV/m.",
+      "access": "Full text (literature note leader_crossing.md)."
+    },
+    {
+      "id": "S47",
+      "citation": "Mazur (2002), Physical processes during development of lightning flashes, C. R. Physique 3, 1393-1409, doi:10.1016/S1631-0705(02)01412-3",
+      "use": "Mazur and Ruhnke's leader model: a leader stops when its tip potential approaches the ambient potential.",
+      "access": "Full text."
+    },
+    {
+      "id": "S48",
+      "citation": "Mansell (2000), Electrification and lightning in simulated supercell and non-supercell thunderstorms, PhD dissertation, University of Oklahoma",
+      "use": "The channel taking the ambient potential at the flash's start, a 1 kV/m internal field, and the author's own judgement that a raised clear-air threshold has no experimental or observational basis.",
+      "access": "Chapter 4 (Sects. 4.1-4.3)."
+    },
+    {
+      "id": "S49",
+      "citation": "Boggs, Liu, Riousset, Shi, Lazarus, Splitt and Rassoul (2018), Thunderstorm charge structures producing gigantic jets, Sci. Rep. 8, 18085, doi:10.1038/s41598-018-36309-z",
+      "use": "A leader channel's internal field of 1 kV/m, scaled with air density as an assumption the authors say has not been well studied.",
+      "access": "Full text (CC BY)."
+    },
+    {
+      "id": "S50",
+      "citation": "Allen and Boutlendj (1991), Study of the electric fields required for streamer propagation in humid air, IEE Proc. A 138, 37, doi:10.1049/ip-a-3.1991.0005",
+      "use": "The positive streamer's propagation field rising about 1.3 % per g/m3 of water vapour, applied to the potential a leader's streamer zone needs.",
+      "access": "Abstract; the coefficient through Guo et al. (2024)."
+    },
+    {
+      "id": "S51",
+      "citation": "Ortéga, Díaz, Heilbronner and Rühling (2007), Influence of negative ions on the humidity effect on the first corona inception, J. Phys. D 40, 7000-7007, doi:10.1088/0022-3727/40/22/021",
+      "use": "Corona inception's threshold moving by under 0.15 % per g/m3 of water vapour, so point discharge's onset takes no humidity term.",
+      "access": "Full text (literature note humidity_corona_breakdown.md)."
+    },
+    {
+      "id": "S52",
+      "citation": "Dwyer (2007), Relativistic breakdown in planetary atmospheres, Phys. Plasmas 14, 042901, doi:10.1063/1.2709652",
+      "use": "The runaway breakdown threshold set by the gas's electron density, so water vapour at the lunar charging zone's 0.2-0.6 mol % changes WRF-ELEC's density-scaled breakdown field by under 0.1 %.",
+      "access": "Sects. II.C, II.G, III.A and IV."
     }
   ],
   "notes": "Stage 1's literature notes, with every value's location in its source, are kept on the data drive at /media/projectspace/terluna-research/atmospheric-electricity/ (charging_laws.md, ionization_conductivity.md). Stage 2's benchmark notes, with each value's place in its source, are in benchmark_literature.md in the same folder."

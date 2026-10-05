@@ -13,6 +13,9 @@
 ! last field's vertical component is kept for the next step's inductive charging.
 !
 ! Settings from CM1's namelist (param8):
+!   var1  for branched lightning, a leader's internal field (V/m at 1.225 kg/m3, scaled by density): where it is set, a
+!         downward channel that meets the ground-strike rule (var4) strikes only if the leader can carry on to the
+!         ground with the potential its streamer zone needs (module_boxmgsetup's terluna_crosses); 0 for none
 !   var2  point discharge from the ground (WRF-ELEC has none): its onset field (V/m) at 1.225 kg/m3, scaled by the
 !         air's density at the ground; 0 none. Standler and Winn (1979) measured onsets of 3 kV/m over dense vegetation
 !         and 5 kV/m on a barren ridge
@@ -74,10 +77,11 @@ contains
                                dx, dy, re_cloud, re_ice, re_snow, has_reqc, has_reqi, has_reqs, diagflag,               &
                                ids, ide, jds, jde, kds, kde, ims, ime, jms, jme, kms, kme, its, ite, jts, jte, kts, kte,  &
                                pt3d, mtime)
-    use input, only : ibp, iep, jbp, jep, kbp, kep, npt, var2, var3, var4, var5, var6, var8, var9, var10, nssl_3moment
+    use input, only : ibp, iep, jbp, jep, kbp, kep, npt, var1, var2, var3, var4, var5, var6, var8, var9, var10,      &
+                      nssl_3moment
     use index_module, only : lhl, lvh, lvhl, lccna, lcina
     use module_mp_nssl_2mom, only : nssl_2mom_driver, nssl_2mom_sed_driver
-    use module_boxmgsetup, only : terluna_ebrk_lo, terluna_ebrk_hi
+    use module_boxmgsetup, only : terluna_ebrk_lo, terluna_ebrk_hi, terluna_leader_ei
     use terluna_lightning, only : potential, field, energy, breakdown_field, discharge, eps0
     use terluna_branched, only : branched_flash, flash_record
     use terluna_screen, only : screen, earth_air_conductivity, ground_discharge
@@ -99,7 +103,7 @@ contains
                                                  wcsw, wchw, wchl, wvhw, wvhl, wpii, wp, ww, wdn, wdz, wdbz, wrec,     &
                                                  wrei, wres, wscw, wscr, wsci, wscs, wsch, wsciona, wschl, wsctot
     ! the field on CM1's (i,j,k) order, for the solver and the lightning schemes
-    real, allocatable, dimension(:,:,:), save :: q, phi, ex, ey, ez, emag, ebrk, dep, rho3, prs3, tk3, cld3
+    real, allocatable, dimension(:,:,:), save :: q, phi, ex, ey, ez, emag, ebrk, dep, rho3, prs3, tk3, cld3, vap3
     integer, allocatable, dimension(:,:,:), save :: used
     real, allocatable, dimension(:), save :: zh1, zf1, dz1
     integer :: ipelec, nchg, ilight, ileak, iscreen, nsub, isub, ni, nj, nk, seed, k
@@ -133,6 +137,10 @@ contains
       if( elec .and. ( ilight .lt. 0 .or. ilight .gt. 4 ) ) stop 'Terluna: var8 (lightning) takes 0 to 4'
       if( elec .and. ( iscreen .lt. 0 .or. iscreen .gt. 2 ) ) stop 'Terluna: var3 (screening layers) takes 0 to 2'
       if( ilight .eq. 2 .or. ilight .eq. 4 ) terluna_ebrk_hi = 1.0e30
+      if( var1 .lt. 0.0 ) stop 'Terluna: var1 (a leader''s internal field) takes 0 or more'
+      terluna_leader_ei = var1
+      if( var1 .gt. 0.0 ) print *,'Terluna: a ground strike needs the leader to cross; internal field (V/m at '//     &
+                                   '1.225 kg/m3) = ',var1
       print *,'Terluna: WRF-ELEC NSSL driver, ipelec = ',ipelec,', charge tracers = ',nchg,', lightning = ',ilight,  &
               ', screening = ',iscreen,', point discharge onset (V/m at 1.225 kg/m3) = ',var2
     endif
@@ -208,7 +216,7 @@ contains
       if( .not. allocated(q) )then
         allocate( q(ni,nj,nk), phi(ni,nj,nk), ex(ni,nj,nk), ey(ni,nj,nk), ez(ni,nj,nk), emag(ni,nj,nk),           &
                   ebrk(ni,nj,nk), dep(ni,nj,nk), rho3(ni,nj,nk), prs3(ni,nj,nk), tk3(ni,nj,nk), cld3(ni,nj,nk),      &
-                  used(ni,nj,nk), zh1(nk), zf1(nk+1), dz1(nk) )
+                  vap3(ni,nj,nk), used(ni,nj,nk), zh1(nk), zf1(nk+1), dz1(nk) )
       endif
       ! the levels: CM1's scalar levels lie midway between its w levels, the ground flat at zero
       zf1(1) = 0.0
@@ -377,6 +385,7 @@ contains
             prs3(i,j,k) = wp(ii,k,jj)
             tk3(i,j,k) = wth(ii,k,jj)*wpii(ii,k,jj)
             cld3(i,j,k) = wqc(ii,k,jj) + wqi(ii,k,jj)
+            vap3(i,j,k) = wqv(ii,k,jj)*wdn(ii,k,jj)
           enddo
         enddo
       enddo
@@ -507,8 +516,8 @@ contains
           endif
           w0 = energy(ni, nj, nk, dx, dy, zf1, q, phi)
           over = maxval( emag/ebrk )
-          call branched_flash(ni, nj, nk, dx, dy, dz1, rho3, prs3, tk3, cld3, phi, ex, ey, ez, emag, q, ebrk, used,     &
-                              seed, itimestep, dts, eint, tgrnd, var4, radius, mszunit, dep, rec)
+          call branched_flash(ni, nj, nk, dx, dy, dz1, rho3, prs3, tk3, cld3, vap3, phi, ex, ey, ez, emag, q, ebrk,    &
+                              used, seed, itimestep, dts, eint, tgrnd, var4, radius, mszunit, dep, rec)
           if( rec%kind .ge. 0 .and. mszcount .lt. mszmax ) mszcount = mszcount + 1
           if( rec%kind .le. 0 ) exit                      ! no starting point left, or no flash from the one chosen
           call to_ions(dep)
