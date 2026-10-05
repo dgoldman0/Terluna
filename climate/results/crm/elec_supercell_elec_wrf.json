@@ -1,5 +1,5 @@
 {
- "schema": "terluna.climate.crm-electricity/1",
+ "schema": "terluna.climate.crm-electricity/2",
  "case": "supercell_elec_wrf",
  "purpose": "CM1's supercell at Earth's gravity in WRF-ELEC's own test settings: 2-km spacing over 84 km, 800 CCN per cm3, Saunders and Peck's law as isaund 11 sets it, screening layers and branched lightning",
  "electricity": {
@@ -27,18 +27,19 @@
  "producer": {
   "domain": "climate",
   "files": {
-   "crm/elec_analysis.py": "f939da2762e5b533"
+   "crm/elec_analysis.py": "165a6ba2909d89d2"
   }
  },
- "evidence": "CM1 r22.0 with WRF-ELEC's NSSL two-moment microphysics (MicroTed/wrf4-elec e43041b) and its charging (non-inductive by collisions of graupel and hail with ice and snow, inductive by droplets rebounding from graupel in the field), the small ions' net charge attaching to particles, an FFT field solver, and WRF-ELEC's lightning on its own sub-steps of the sedimentation: the branched scheme (lightmsz, MacGorman, Straka and Ziegler 2001) or the cylindrical one. Charge is carried by bulk particle populations; branched channels run on the model grid and neutralize the charge where they reach; the ground-strike rule, the 50-MV potential and 10-kV/m field a ground flash needs at its start and the nitrogen oxide yield are WRF-ELEC's calibrations for Earth; nothing conducts charge away except where a case turns on leakage.",
- "reading_rule": "Times are model seconds from the start. Kinds: 1 in cloud, 2 negative and 3 positive charge to ground (branched flashes), 9 a call of the cylindrical scheme, whose regions are the separate areas one call takes. A flash's positive and negative charge are what it neutralized; a ground flash neutralizes one sign only, the ground supplying the other. Nitrogen oxides are lightmsz's: Wang et al.'s yield per metre of channel at its pressure, times 0.1 where the flash changes the charge by 1 nC/kg or more. Charging rates are the domain's totals of each sign (C/s). Charge densities are nC/m3; heights are above the ground; temperatures are the air's at the level, weighted by the charge there.",
+ "evidence": "CM1 r22.0 with WRF-ELEC's NSSL two-moment microphysics (MicroTed/wrf4-elec e43041b) and its charging (non-inductive by collisions of graupel and hail with ice and snow, inductive by droplets rebounding from graupel in the field), the small ions' net charge attaching to particles, an FFT field solver, and WRF-ELEC's lightning on its own sub-steps of the sedimentation: the branched scheme (lightmsz, MacGorman, Straka and Ziegler 2001) or the cylindrical one. Charge is carried by bulk particle populations; branched channels run on the model grid and neutralize the charge where they reach; the ground-strike rule, the 50-MV potential and 10-kV/m field a ground flash needs at its start and the nitrogen oxide yield are WRF-ELEC's calibrations for Earth; nothing conducts charge away except where a case turns on leakage, and the ground gives off ions only where a case turns on point discharge (Standler and Winn's 1 nA/m2 at 8 kV/m over Earth's vegetation, its onset scaled by density).",
+ "reading_rule": "Times are model seconds from the start. Series are per bin of bin_s seconds from start_s: 5 minutes, or the output interval for runs longer than two days. Kinds: 1 in cloud, 2 negative and 3 positive charge to ground (branched flashes), 9 a call of the cylindrical scheme, whose regions are the separate areas one call takes. A flash's positive and negative charge are what it neutralized; a ground flash neutralizes one sign only, the ground supplying the other. Nitrogen oxides are lightmsz's: Wang et al.'s yield per metre of channel at its pressure, times 0.1 where the flash changes the charge by 1 nC/kg or more. Charging rates are the domain's totals of each sign (C/s). Charge densities are nC/m3; heights are above the ground; temperatures are the air's at the level, weighted by the charge there.",
+ "start_s": 0.0,
  "end_s": 7200.0,
  "bin_s": 300.0,
  "lightning": {
   "in_cloud": {
    "count": 14620,
    "first_s": 1776.0,
-   "per_5_min": [
+   "per_bin": [
     0.0,
     0.0,
     0.0,
@@ -157,7 +158,7 @@
   "all": {
    "count": 14620,
    "first_s": 1776.0,
-   "per_5_min": [
+   "per_bin": [
     0.0,
     0.0,
     0.0,
@@ -204,7 +205,7 @@
  },
  "field": {
   "e_max_kv_m": 622.5,
-  "e_max_per_5_min_kv_m": [
+  "e_max_per_bin_kv_m": [
    0.0,
    0.0,
    0.0,
@@ -230,7 +231,7 @@
    319.2,
    194.3
   ],
-  "positive_c_per_5_min": [
+  "positive_c_per_bin": [
    0.0,
    0.0,
    0.0,
@@ -256,7 +257,7 @@
    3015.0,
    2572.0
   ],
-  "negative_c_per_5_min": [
+  "negative_c_per_bin": [
    -0.0,
    -0.0,
    -0.0,
@@ -282,7 +283,7 @@
    3112.0,
    2734.0
   ],
-  "energy_j_per_5_min": [
+  "energy_j_per_bin": [
    0.0,
    0.0,
    0.0,
@@ -310,7 +311,7 @@
   ],
   "noninductive_max_pc_m3_s": 3520.0,
   "inductive_max_pc_m3_s": 128.7,
-  "noninductive_max_per_5_min_pc_m3_s": [
+  "noninductive_max_per_bin_pc_m3_s": [
    0.0,
    0.0,
    0.0,
@@ -336,7 +337,7 @@
    3335.0,
    3115.0
   ],
-  "inductive_max_per_5_min_pc_m3_s": [
+  "inductive_max_per_bin_pc_m3_s": [
    0.0,
    0.0,
    0.0,
@@ -369,7 +370,7 @@
    "positive_c": 477200.0,
    "negative_c": -195600.0,
    "peak_c_s": 178.2,
-   "per_5_min_c": [
+   "per_bin_c": [
     0.0,
     0.0,
     0.0,
@@ -401,7 +402,7 @@
    "positive_c": 57180.0,
    "negative_c": -44870.0,
    "peak_c_s": 29.02,
-   "per_5_min_c": [
+   "per_bin_c": [
     0.0,
     0.0,
     0.0,
@@ -433,7 +434,7 @@
    "positive_c": 0.0001334,
    "negative_c": -0.06481,
    "peak_c_s": 0.0001565,
-   "per_5_min_c": [
+   "per_bin_c": [
     0.0,
     0.0,
     0.0,
@@ -465,7 +466,7 @@
    "positive_c": 2079.0,
    "negative_c": -87740.0,
    "peak_c_s": 34.99,
-   "per_5_min_c": [
+   "per_bin_c": [
     0.0,
     0.0,
     0.0,
@@ -497,7 +498,7 @@
    "positive_c": 80160.0,
    "negative_c": -57870.0,
    "peak_c_s": 39.02,
-   "per_5_min_c": [
+   "per_bin_c": [
     0.0,
     0.0,
     0.0,
@@ -529,7 +530,7 @@
    "positive_c": 32430.0,
    "negative_c": -41490.0,
    "peak_c_s": 25.82,
-   "per_5_min_c": [
+   "per_bin_c": [
     0.0,
     0.0,
     0.0,
@@ -561,7 +562,7 @@
    "positive_c": 419900.0,
    "negative_c": -160600.0,
    "peak_c_s": 165.6,
-   "per_5_min_c": [
+   "per_bin_c": [
     0.0,
     0.0,
     0.0,
@@ -593,7 +594,7 @@
    "positive_c": 33680.0,
    "negative_c": -12310.0,
    "peak_c_s": 13.16,
-   "per_5_min_c": [
+   "per_bin_c": [
     0.0,
     0.0,
     0.0,
@@ -625,7 +626,7 @@
    "positive_c": 1725.0,
    "negative_c": -532.2,
    "peak_c_s": 1.185,
-   "per_5_min_c": [
+   "per_bin_c": [
     0.0,
     0.0,
     0.0,
@@ -1618,5 +1619,6 @@
    "dbz_max": 70.64
   }
  ],
- "ice_cap": null
+ "ice_cap": null,
+ "ground": null
 }

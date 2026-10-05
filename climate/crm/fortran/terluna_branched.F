@@ -30,8 +30,8 @@ module terluna_branched
     double precision :: nox = 0.0d0         ! nitrogen oxides made (mol)
     integer :: npos = 0, nneg = 0           ! channel points of the positive leader (in negative charge) and of the
                                             ! negative leader (in positive charge): lightmsz's flshp and -flshn
-    real :: area = 0.0                      ! area of the columns the channels reach (m2)
-    real :: zlo = -1.0, zhi = -1.0          ! lowest and highest level the channels reach (m)
+    real :: area = 0.0                      ! area of the columns where the flash neutralizes charge (m2)
+    real :: zlo = -1.0, zhi = -1.0          ! lowest and highest level where it neutralizes charge (m)
   end type flash_record
 
   real, parameter :: start_frac = 0.9      ! lightmsz's elgtfdel
@@ -195,10 +195,12 @@ contains
             dep(i,j,k) = dep(i,j,k) + sciona(ir,k,jr)*rho(i,j,k)
           endif
           if( ir .ge. 1 .and. ir .le. ni .and. jr .ge. 1 .and. jr .le. nj )then
-            if( flshn(ir,k,jr) .ne. 0.0 .or. flshp(ir,k,jr) .ne. 0.0 )then
+            rec%nneg = rec%nneg + nint(abs(flshn(ir,k,jr)))       ! lightmsz counts these down from zero
+            rec%npos = rec%npos + nint(flshp(ir,k,jr))
+            ! where the flash neutralizes charge: lightmsz marks a channel point only where it takes more than its
+            ! threshold (scth), which a weak flash high in thin air can miss everywhere
+            if( sciona(ir,k,jr) .ne. 0.0 .or. flshn(ir,k,jr) .ne. 0.0 .or. flshp(ir,k,jr) .ne. 0.0 )then
               reached(i,j) = .true.
-              rec%nneg = rec%nneg + nint(abs(flshn(ir,k,jr)))   ! lightmsz counts these down from zero
-              rec%npos = rec%npos + nint(flshp(ir,k,jr))
               z = sum(dz(1:k)) - 0.5*dz(k)
               if( rec%zlo .lt. 0.0 .or. z .lt. rec%zlo ) rec%zlo = z
               rec%zhi = max(rec%zhi, z)

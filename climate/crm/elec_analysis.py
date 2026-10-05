@@ -32,7 +32,7 @@ from climate.crm import ring_analysis as ra
 from climate.crm.mixed_phase_analysis import significant, stats
 
 RESULTS = ra.RESULTS
-SCHEMA = 'terluna.climate.crm-electricity/1'
+SCHEMA = 'terluna.climate.crm-electricity/2'                 # 2: series per bin of bin_s (2026-10-05)
 RD, CP, P00 = 287.04, 1005.7, 1.0e5
 SPECIES = ('cloud_water', 'rain', 'cloud_ice', 'snow', 'graupel', 'small_ions', 'hail')   # passive tracers 1-7
 FLASH_COLUMNS = ('time_s', 'step', 'substep', 'kind', 'x_m', 'y_m', 'z_m', 'e_v_m', 'e_break_v_m', 'e_over_break_max',
@@ -56,6 +56,7 @@ CHARGING = {'ctghi': 'graupel and hail with cloud ice', 'ctghs': 'graupel and ha
             'cths': 'hail with snow', 'ctsww': 'snow with cloud droplets'}
 TIME_UNITS = {'sec': 1.0, 'min': 60.0, 'hour': 3600.0, 'hrs': 3600.0, 'day': 86400.0}
 BIN_S = 300.0
+LONG_RUN_S = 2 * 86400.0          # longer runs are binned by their output interval, so the summary stays small
 EVIDENCE = ('CM1 r22.0 with WRF-ELEC\'s NSSL two-moment microphysics (MicroTed/wrf4-elec e43041b) and its charging '
             '(non-inductive by collisions of graupel and hail with ice and snow, inductive by droplets rebounding from '
             'graupel in the field), the small ions\' net charge attaching to particles, an FFT field solver, and '
@@ -66,7 +67,7 @@ EVIDENCE = ('CM1 r22.0 with WRF-ELEC\'s NSSL two-moment microphysics (MicroTed/w
             'nitrogen oxide yield are WRF-ELEC\'s calibrations for Earth; nothing conducts charge away except where a '
             'case turns on leakage, and the ground gives off ions only where a case turns on point discharge '
             '(Standler and Winn\'s 1 nA/m2 at 8 kV/m over Earth\'s vegetation, its onset scaled by density).')
-READING_RULE = ('Times are model seconds from the start. Kinds: 1 in cloud, 2 negative and 3 positive charge to ground '
+READING_RULE = ('Times are model seconds from the start. Series are per bin of bin_s seconds from start_s: 5 minutes, or the output interval for runs longer than two days. Kinds: 1 in cloud, 2 negative and 3 positive charge to ground '
                 '(branched flashes), 9 a call of the cylindrical scheme, whose regions are the separate areas one call '
                 'takes. A flash\'s positive and negative charge are what it neutralized; a ground flash neutralizes '
                 'one sign only, the ground supplying the other. Nitrogen oxides are lightmsz\'s: Wang et al.\'s yield '
@@ -236,7 +237,7 @@ def flash_summary(f: dict, edges: np.ndarray) -> dict:
     and how far its channels reached, and the nitrogen oxides it made."""
     n = f['time_s'].size
     dissipated = f['energy_before_j'] - f['energy_after_j']
-    out = dict(count=int(n), first_s=float(f['time_s'].min()), per_5_min=binned(f['time_s'], np.ones(n), edges),
+    out = dict(count=int(n), first_s=float(f['time_s'].min()), per_bin=binned(f['time_s'], np.ones(n), edges),
                positive_c=stats(f['positive_c']), negative_c=stats(f['negative_c']),
                energy_dissipated_j=stats(dissipated), initiation_z_km=stats(f['z_m'] / 1000.0),
                e_at_initiation_kv_m=stats(f['e_v_m'] / 1000.0),
@@ -266,7 +267,10 @@ def analyse(name: str) -> dict:
     rates = charging(case)
     end = float(max(field['time_s'].max() if field['time_s'].size else 0.0,
                     rates['time_s'].max() if rates['time_s'].size else 0.0))
-    edges = np.arange(0.0, end + BIN_S, BIN_S)
+    start = float(json.loads((case / 'progress.json').read_text()).get('start_s', 0.0)) \
+        if (case / 'progress.json').exists() else 0.0
+    bin_s = BIN_S if end - start <= LONG_RUN_S else cfg['output_s'] * record.get('time_scale', 1.0)
+    edges = np.arange(start, end + bin_s, bin_s)
 
     lightning = {}
     first = np.r_[True, (np.diff(flashes['step']) != 0) | (np.diff(flashes['substep']) != 0)] if flashes['step'].size \
@@ -280,21 +284,21 @@ def analyse(name: str) -> dict:
         over = flashes['e_over_break_max']
         lightning['all'] = dict(
             count=int(flashes['step'].size), first_s=float(flashes['time_s'].min()),
-            per_5_min=binned(flashes['time_s'], np.ones_like(flashes['time_s']), edges),
+            per_bin=binned(flashes['time_s'], np.ones_like(flashes['time_s']), edges),
             # the field over breakdown before a sub-step's first flash (what charging and transport built since the
             # last) and before its later ones (what the flashes before them left)
             over_breakdown_first=stats(over[first]), over_breakdown_later=stats(over[~first]),
             per_substep_max=int(np.bincount(groups).max()))
     fields = dict(
         e_max_kv_m=float(field['e_max_v_m'].max() / 1000.0) if field['time_s'].size else None,
-        e_max_per_5_min_kv_m=binned(field['time_s'], field['e_max_v_m'] / 1000.0, edges, 'max'),
-        positive_c_per_5_min=binned(field['time_s'], field['positive_c'], edges, 'max'),
-        negative_c_per_5_min=binned(field['time_s'], -field['negative_c'], edges, 'max'),
-        energy_j_per_5_min=binned(field['time_s'], field['energy_j'], edges, 'max'),
+        e_max_per_bin_kv_m=binned(field['time_s'], field['e_max_v_m'] / 1000.0, edges, 'max'),
+        positive_c_per_bin=binned(field['time_s'], field['positive_c'], edges, 'max'),
+        negative_c_per_bin=binned(field['time_s'], -field['negative_c'], edges, 'max'),
+        energy_j_per_bin=binned(field['time_s'], field['energy_j'], edges, 'max'),
         noninductive_max_pc_m3_s=float(field['noninductive_max_c_m3_s'].max() * 1e12) if field['time_s'].size else None,
         inductive_max_pc_m3_s=float(field['inductive_max_c_m3_s'].max() * 1e12) if field['time_s'].size else None,
-        noninductive_max_per_5_min_pc_m3_s=binned(field['time_s'], field['noninductive_max_c_m3_s'] * 1e12, edges, 'max'),
-        inductive_max_per_5_min_pc_m3_s=binned(field['time_s'], field['inductive_max_c_m3_s'] * 1e12, edges, 'max'))
+        noninductive_max_per_bin_pc_m3_s=binned(field['time_s'], field['noninductive_max_c_m3_s'] * 1e12, edges, 'max'),
+        inductive_max_per_bin_pc_m3_s=binned(field['time_s'], field['inductive_max_c_m3_s'] * 1e12, edges, 'max'))
     dt = np.diff(np.concatenate([[0.0], rates['time_s']])) if rates['time_s'].size else np.array([])
     separated = {}
     for key, label in CHARGING.items():
@@ -304,7 +308,7 @@ def analyse(name: str) -> dict:
         separated[key] = dict(collisions=label, positive_c=float(np.nansum(r[:, 1] * dt)),
                               negative_c=float(np.nansum(r[:, 0] * dt)),
                               peak_c_s=float(np.nanmax(np.abs(r))),
-                              per_5_min_c=binned(rates['time_s'], (r[:, 1] - r[:, 0]) * dt, edges))
+                              per_bin_c=binned(rates['time_s'], (r[:, 1] - r[:, 0]) * dt, edges))
     snaps = sorted(int(p.name[8:14]) for p in case.glob('cm1out_t*_s.dat'))
     structures = []
     for n in snaps:
@@ -319,7 +323,7 @@ def analyse(name: str) -> dict:
                    executable_sha256=record['build']['executable_sha256']),
         producer=dict(domain='climate', files={'crm/elec_analysis.py': hashlib.sha256(
             Path(__file__).read_bytes()).hexdigest()[:16]}),
-        evidence=EVIDENCE, reading_rule=READING_RULE, end_s=end, bin_s=BIN_S,
+        evidence=EVIDENCE, reading_rule=READING_RULE, start_s=start, end_s=end, bin_s=bin_s,
         lightning=lightning, field=fields, charging=separated, structure=structures, ice_cap=ice_cap_summary(ice),
         ground=ground_summary(ground))
 
@@ -408,7 +412,7 @@ def window(name: str, t0: float, t1: float) -> dict:
             sel = f['kind'] == code
             if sel.any():
                 lightning[label] = flash_summary({k: v[sel] for k, v in f.items()}, edges)
-                del lightning[label]['per_5_min']
+                del lightning[label]['per_bin']
 
     segments = window_segments(case, t0, t1)
     rates = charging(case, [case / seg['log'] for seg in segments if (case / seg['log']).exists()])

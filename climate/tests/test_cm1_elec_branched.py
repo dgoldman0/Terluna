@@ -167,6 +167,8 @@ def test_flashes_continue_until_no_starting_point_is_left(program):
     flashes, dep = run(program, q, zh1, zf1, 1000.0, nflash=60)
     assert flashes[-1]['kind'] <= 0 and len(flashes) > 1
     assert all(f['kind'] in (1, 2, 3) for f in flashes[:-1])
+    # every flash logs where it neutralized charge, the later, weaker ones included
+    assert all(0.0 <= f['zlo'] <= f['zhi'] and f['area'] > 0.0 for f in flashes[:-1])
 
 
 def test_a_channel_down_through_a_lower_positive_region_strikes_the_ground_with_negative_charge(program):

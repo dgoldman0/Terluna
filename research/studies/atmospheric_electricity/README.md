@@ -283,7 +283,10 @@ Morrison's do.
    charge at 48–58 km (−23 to −35 °C) above positive charge at 32–36 km, where
    Saunders and Peck's law gives the normal arrangement with the main negative
    charge at 38–44 km. The laboratory measurements at 1.2–1.8 m/s also charge
-   rimed ice positively ([S12], [S13]). Under Takahashi's law the flashes start
+   rimed ice positively ([S12], [S13]), but they bear only on the graupel: the
+   storms' hail, which does most of the charging, falls at 5.6–7.8 m/s and
+   strikes ice at about 6 m/s, where the polarity rests on how Earth's two laws
+   disagree for fast rimed ice in little cloud water. Under Takahashi's law the flashes start
    higher and release one and a half to two times the energy (a median 106–119
    GJ against 54–79), and the second window's ten ground strikes, an upper
    bound by WRF-ELEC's rule, brought down a median 204 C, the largest 1,489 C.

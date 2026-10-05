@@ -35,7 +35,7 @@ def test_flashes_are_summed_by_kind_and_the_field_is_read_before_each_sub_step_s
     assert list(f['kind']) == [1, 2, 1, 3] and list(f['nox_mol']) == [5, 8, 6, 0]
     edges = np.arange(0.0, 400.0, 300.0)
     ic = ea.flash_summary({k: v[f['kind'] == 1] for k, v in f.items()}, edges)
-    assert ic['count'] == 2 and ic['per_5_min'] == [2.0] and ic['nox_total_mol'] == 11.0
+    assert ic['count'] == 2 and ic['per_bin'] == [2.0] and ic['nox_total_mol'] == 11.0
     assert ic['positive_c']['mean'] == 11.0 and ic['energy_dissipated_j']['max'] == 1.0e9 and 'regions' not in ic
     first = np.r_[True, (np.diff(f['step']) != 0) | (np.diff(f['substep']) != 0)]
     assert list(first) == [True, False, True, True]

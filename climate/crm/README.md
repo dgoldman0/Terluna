@@ -1346,7 +1346,11 @@ call (`terluna_flashes.txt`: its kind, start, the field and breakdown field
 there and the domain's largest field over breakdown before it, the area and the
 levels where it neutralizes charge, the positive and negative charge it
 neutralizes, the electrostatic energy before and after, its channel points and
-nitrogen oxides),
+nitrogen oxides), the area and levels being those where the flash hands
+charge to the small ions (before 2026-10-05, only `lightmsz`'s channel points,
+which it marks where a flash takes more than its threshold `scth` and which a
+weak flash high in thin air could miss everywhere: 13 of `box_0e_elec`'s
+flashes, of 5–72 C starting at 50–68 km, logged no reach),
 `lightmsz`'s own report on the first 2,000 flashes of each run
 (`terluna_msz.log`), and, every ten steps, the largest field, the domain's
 charge and energy and the largest charging rates (`terluna_field.txt`);
@@ -1792,11 +1796,28 @@ and up to 62 km. Each law here is one realization of the window; the
 difference in structure lies far outside the realizations' spread, the
 difference in ground strikes, 10 against 21, within reach of it.
 
-So the charging law sets the lunar storms' polarity more than their rate. The
-measurement that would decide it is the sign of the charge rimed ice takes at
-impact speeds of 1–3 m/s, cloud water of 0.03–0.2 g/m³ and −10 to −35 °C,
-colder than the slow-impact studies reached; the impact speeds of the NSSL
-storms' hail, which carries most of their charging, are still to be read.
+So the charging law sets the lunar storms' polarity more than their rate.
+
+**Impact speeds.** In the charging zone (−5 to −30 °C) of `box_0e_elec`'s days
+40.5–42, NSSL's graupel falls at a mass-weighted 1.4–3.9 m/s (10th to 90th
+percentile; median 1.9), 3.7 mm across at 420 kg/m³, and its hail at 5.6–7.8
+m/s (median 6.7), 13 mm across at 750 kg/m³: under lunar gravity hail stays
+aloft long enough to grow large. (Fall speeds from the output's mixing ratios,
+numbers and particle volumes, with CM1's shape parameters, 0 for graupel and 0.5
+for hail, and Milbrandt and Morrison's density-dependent law approximated as
+157.7 (ρ/550)^½ D^0.6 m/s, which gives Ferrier's hail law within 3 % at 900
+kg/m³, scaled by the air's density and by lunar gravity as `cm1_elec.py`
+scales it.) Ice crystals and snow fall at a few tenths of a metre per second,
+so hail, which does 82–88 % of the charging under Saunders and Peck, strikes
+them at about 6 m/s, within the speeds of Earth's laboratories, and only
+graupel's smaller share strikes at the 1–2 m/s of the slow-impact studies. The
+polarity therefore rests on where Earth's two laws disagree for fast rimed ice
+in little cloud water: at 6 m/s in 0.03–0.17 g/m³ hail rimes at about 0.2–1
+g m⁻² s⁻¹, below Saunders and Peck's critical rate, and charges negatively,
+the normal arrangement, where Takahashi's table charges it positively, the
+inverted one. The measurement that would decide it is the sign of the charge
+rimed ice takes at 5–8 m/s in 0.03–0.2 g/m³ of cloud water between −10 and
+−30 °C, conditions Earth's laboratories can reach.
 
 ```sh
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_elec_takahashi      # and box_0e_elec_takahashi_first
