@@ -135,7 +135,7 @@ def test_an_electrified_case_takes_nssl_and_the_charge_tracers():
                                      var10=6000.0)
     assert e.namelist_settings(dict(screen=1, isaund=11))['param8']['var3'] == 1.0
     moon = e.namelist_settings(e.LUNAR)
-    assert moon['param8']['var4'] == 5000.0 and moon['param8']['var5'] == 6.8
+    assert moon['param8']['var4'] == -1.0 and moon['param8']['var5'] == 6.8           # WRF-ELEC's own ground rule
     assert moon['param8']['var8'] == 4.0                     # branched lightning without the 180-kV/m cap
 
 

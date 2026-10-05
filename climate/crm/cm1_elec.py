@@ -131,12 +131,15 @@ SETTINGS = dict(ipelec=3, isaund=12, lightning=3, leakage=0, radius_m=12000.0, h
                 corona_v_m=0.0)
 # The lunar boxes. WRF-ELEC's 0.75-s sub-step lets graupel settle through about 1 % of the 500-m layers of its supercell
 # in each; in the boxes' charging zone (25-35 km) the layers are 2 km deep and graupel falls at 0.44 of Earth's speed,
-# so 0.75 x 4 / 0.44 = 6.8 s keeps that share. WRF-ELEC's ground-strike rule stands about 5 km above Earth's ground; on
-# the Moon air warmer than -7 C lies about 27 km up, so the boxes count a downward channel that comes within 5 km of
-# the ground. WRF-ELEC caps the breakdown field at 180 kV/m, which on Earth applies only below about 4.5 km, beneath
+# so 0.75 x 4 / 0.44 = 6.8 s keeps that share. The boxes take WRF-ELEC's own ground-strike rule (ground_m -1: a downward
+# channel reaching air warmer than -7 C in matching charge), since the lunar storms hold their charge as Earth's do, with
+# -7 C just beneath the main negative charge (the author's decision, 2026-10-05). It counts a channel at -7 C, about
+# 34 km up, as reaching the ground, so its ground strikes are an upper bound. The height rule the boxes first took, a
+# channel within 5 km of the ground, kept the demand for matching charge where the storms have none and allowed no
+# ground strike. WRF-ELEC caps the breakdown field at 180 kV/m, which on Earth applies only below about 4.5 km, beneath
 # where flashes start; the denser lunar air would put it below about 36 km, where lunar flashes start, so the boxes
 # lift it (lightning 4; the author's decision, 2026-10-04).
-LUNAR = dict(substep_s=6.8, ground_m=5000.0, lightning=4)
+LUNAR = dict(substep_s=6.8, ground_m=-1.0, lightning=4)
 
 
 def sources(home: Path) -> dict:

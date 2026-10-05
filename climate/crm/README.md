@@ -1293,7 +1293,10 @@ ground strike, the 0.9 and 0.8 fractions of breakdown, the 200-V/m internal
 field and the nitrogen oxide yield stay as WRF-ELEC calibrates them for Earth.
 That height rule keeps WRF-ELEC's demand that the channel's end lie in charge of
 the matching sign, and the lunar storms hold no charge 5 km up, so under it no
-lunar flash could strike the ground; see "Ground strikes" below.
+lunar flash could strike the ground; see "Ground strikes" below. From
+2026-10-05 the lunar boxes take WRF-ELEC's own rule (the author's decision), an
+upper bound on their ground strikes until a rule for a leader's crossing of the
+air below the storm replaces it; every run before then used the height rule.
 
 WRF-ELEC also caps the breakdown field at 180 kV/m. On Earth the cap applies
 below about 4.5 km, beneath where flashes start. The lunar air is dense enough
