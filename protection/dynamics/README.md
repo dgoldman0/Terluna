@@ -85,3 +85,11 @@ a coverage bottleneck. Its 17.29-million-tile capacity estimate retains
 subcell, mutual-illumination and individual-placement gaps; a selected
 attitude-rate witness fails the pilot cap. It supplies a cost threshold for
 further research and accepts no operating fleet.
+
+`natural_pattern.py` adds smooth transported roll, exact sampled-source
+rectangle-union mutual illumination, an all-pairs guard on the neighbour
+reduction, finite-area gravity and moving-window ray unions. The
+[local-pattern study](../../research/studies/solar_shield_array/patterns.md)
+tests initial velocity gradients and freely deforming arrays. Its six-hour
+361-tile passage preserves sampled local coverage without electric translation;
+fleet placement, interfaces, return closure and attitude engineering remain open.

@@ -440,5 +440,57 @@
       "files": 456,
       "violations": 0
     }
+  },
+  "natural_patterns": {
+    "status": "SAMPLED_LOCAL_ZERO_SERVICE_THRUST_RETURN_AND_FLEET_UNRESOLVED",
+    "checked_at_utc": "2026-10-05T01:17:51.825756+00:00",
+    "report": "patterns.md",
+    "starting_remote_head": "19f0eee92ca5b5ed61dd26b3943d40bee5274cbb",
+    "early_plan_checkpoint": "4b222b227d95cd93aa357676b23091388ef39dab",
+    "study_tests": {
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m pytest protection/dynamics research/studies/solar_shield_array -q",
+      "passed": 85,
+      "status": "PASS"
+    },
+    "make_check": {
+      "status": "FAIL_EXISTING",
+      "summary": "13 failed, 630 passed, 55 skipped",
+      "same_failed_tests_as_starting_head": true,
+      "layer_check": "PASS: 461 files, 0 violations",
+      "later_targets": "Not reached: JavaScript, historical-provenance and ensemble targets; previous entries retain their historical scope."
+    },
+    "products": {
+      "results/patterns.json": "deb98cc0faee44fc357194d3c554da4aadf6861dc84b95c911314abeb684c1cf",
+      "results/patterns_budget.json": "bc97165ace20063a0d1ad591ed1a9b6c280dff800fd5c8e48867ccdc2ce6bb16"
+    },
+    "executed": {
+      "affine_proposals": 24,
+      "coupled_candidates": 1,
+      "independent_replays": 1,
+      "simultaneous_tiles": 361,
+      "duration_s": 21600.0,
+      "numerical_wall_s": 423.2978463219988,
+      "max_rss_MiB": 217.25390625,
+      "raw_MiB": 12.77028751373291,
+      "service_electric_delta_v_m_s": 0.0,
+      "minimum_sampled_coverage": 0.9999999999999981,
+      "minimum_guarded_tile_separation_m": 2685.3623587916713,
+      "max_replay_position_difference_m": 0.660642121553994,
+      "transported_witness_rate_deg_s": 0.06467175411853113,
+      "max_terminal_reference_position_defect_m": 2976.163961064972
+    },
+    "not_executed": [
+      "Continuous time/source optical certificate",
+      "Formal enclosure of derivative bounds for swept exclusions",
+      "Full angular dynamics, flexible response and attitude-actuator mass/energy",
+      "Acquisition and terminal position-closure maneuvers",
+      "Handover, coast/return, recovery and recurring maneuver frequency",
+      "Adjacent-pattern interfaces or placement of the capacity inventory",
+      "Fleet-wide recurring cost optimization",
+      "Collector and 100 TW delivered-power sizing"
+    ],
+    "accepted_operating_fleet": false,
+    "branch": "research/solar-shield-habitat-array",
+    "main_modified": false
   }
 }

@@ -55,6 +55,14 @@ estimate**. This supplies conditional fleet impulse budgets. Individual
 placement, consistent mutual illumination, safe attitude histories and
 recurring corrections remain unclosed; no operating fleet is accepted.
 
+The [natural-pattern continuation](patterns.md) resolves one prescribed-roll
+rate witness and propagates a 361-tile, naturally deforming local pattern
+with mutual shadow force. It retains sampled finite-Sun coverage of a moving
+20 km window for six hours with zero electric translational thrust. Its
+kilometre-scale endpoint mismatch leaves acquisition, handovers, return and
+recurring cost unresolved. This local result does not establish global
+coverage or a sufficient fleet inventory.
+
 The study couples protection, engineering, illumination and habitation. Its
 runners, compact numerical results and interpretation belong together here;
 dynamics components belong in the protection domain. Computation files and
