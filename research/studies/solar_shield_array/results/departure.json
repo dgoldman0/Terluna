@@ -1,0 +1,188 @@
+{
+  "schema": "terluna.research.coupled-departure/1",
+  "producer": {
+    "source_hashes": {
+      "protection/dynamics/cycling.py": "704fbd03c9d4070ea05bdfeba57914ec225941f3560710da2472bd24ca870ed4",
+      "protection/dynamics/ephemeris.py": "9a162c3acf63a844284eb61b444a7d34f1447b5182d254d3e87616516f8748d9",
+      "protection/dynamics/ephemeris.json": "90fde7cb6142e5d4d8082270a978ba2f8f47baaefab0e8d1cf82ec6f07a27222",
+      "protection/dynamics/model.py": "01c9191588037ab4f42bac38dc4d5bd99e57427d37fa75cd672120e32b53733a",
+      "protection/dynamics/optical.py": "06a13ae9f24834876edbc12b513deaa5e3735f02f8249eb57c8996d74ce00b56",
+      "research/studies/solar_shield_array/scenario.json": "a53b784941518b6e36ccdf728252cf6c8e0c46c1126b6c621ed4e28c23128699",
+      "research/studies/solar_shield_array/cycling_search.py": "4789a0185620f6662916462b2715aa9002e6454e74f4f32ef5f7dadf5f732093",
+      "research/studies/solar_shield_array/cycling_feedback.py": "0eb32d26e14472f0a512cdf45d60f00ab8260376cd51ca715e7615bf7df02775",
+      "protection/dynamics/fleet.py": "f3e52653876c2956a4b355dc1290a0a1cadd2b9b601cafc664259827df1cc93c",
+      "research/studies/solar_shield_array/fleet_run.py": "9b8bc9765b9288745ea7d4d69d59e857e76e54d29cc91b37160503e9d9090833",
+      "protection/dynamics/active_formation.py": "597c12c6a4a89c0ea70663fddd69b9b5d9e599c88a2bd1742f5009d19e050b7a",
+      "protection/dynamics/active_retime.py": "9ba27a7ec48460a345289ebc7550c502f845487beaec5fe35084a67b2d9d736b",
+      "protection/dynamics/coverage_pilot.py": "fb03381e4387cb17e5276148428a3ffb2cbfb5313c8f59b8ff708ebeb9ce079c",
+      "protection/dynamics/natural_pattern.py": "780c2679f13c097c07b89e9d7cce1c91399f464f01b4bd878fb50cb643e1be29",
+      "research/studies/solar_shield_array/patterns_run.py": "f2e346fd2281632e5bf1c285c61229ba24e26e4ba4c480713194218263888d5c",
+      "protection/dynamics/pattern_departure.py": "24e7bb0653f9ab546b46a9a650ae67e3adb0af154c3e5b9ba83461e9648b828b",
+      "protection/dynamics/pattern_return.py": "a1a3f85e5f7744d0418574d0fc2a033d4ab69d9d55eba9bfbb85974c7ab64757",
+      "protection/dynamics/parallel_shadow.py": "98d09fc9e5812b3592cbc5e24e0615f9f9aa3a75c7f33afff0fe82d0e40c3c24",
+      "research/studies/solar_shield_array/return_screen.py": "53ec3ecf5165c773142315d97553f9c72ebbe6c045299ec368104c1811f4b526",
+      "research/studies/solar_shield_array/departure_screen.py": "9e69d5e5db5729191ca6ccae8673d24dfab7606af8bb47f1038913b328750ff4",
+      "protection/dynamics/departure_control.py": "beafd12acfb4a228c17a329c9e0d278282222e90be7126b20b3e2df551bedfd5",
+      "research/studies/solar_shield_array/departure_refine.py": "c206316508235d2e5960dff5a6ab5de90334a632a67e46a54505d7d9909fd72a",
+      "research/studies/solar_shield_array/departure_run.py": "b142372d4b1ed3383bfe4ff5ea8764bbb2c12e8d92c3db8cb81138a18663a2c8"
+    },
+    "constants": {
+      "AU": 149597870700.0,
+      "EARTH_GM": 398600441800000.0,
+      "EARTH_MOON_DISTANCE": 384400000.0,
+      "EARTH_OBLIQUITY_DEG": 23.4393,
+      "EARTH_RADIUS": 6371000.0,
+      "JULIAN_DAY": 86400.0,
+      "MOON_GM": 4902800118000.0,
+      "MOON_RADIUS": 1737400.0,
+      "SOLAR_CONSTANT": 1361.0,
+      "SOLAR_SYSTEM_GM": {
+        "mercury": 22031868551000.0,
+        "venus": 324858592000000.0,
+        "mars": 42828375816000.0,
+        "jupiter": 1.267127641e+17,
+        "saturn": 3.79405848418e+16,
+        "uranus": 5794556400000000.0,
+        "neptune": 6836527100580000.0,
+        "pluto": 975500000000.0
+      },
+      "SPEED_OF_LIGHT": 299792458.0,
+      "SUN_GM": 1.3271244004127942e+20,
+      "SUN_RADIUS": 695700000.0
+    },
+    "inputs": {
+      "departure_refine.json": "2bd314577178f85ab7926863f653478dafe9d24604432d7b955d4880af4a756f"
+    }
+  },
+  "start_s": 21600.0,
+  "intended_end_s": 43200.0,
+  "count": 361,
+  "force_scope": "Every individual state; finite-area gravity, two-sided finite-Sun sail, dynamic exact parallel-square shadow unions; partial body eclipse rejects this prefix model.",
+  "accepted_fleet": false,
+  "accepted_return": false,
+  "accepted_handover": false,
+  "accepted_departure": false,
+  "continuous_certificate": false,
+  "recurring_cost_measured": false,
+  "measured_recurring_delta_v_m_s_per_day": null,
+  "fleet_propulsion_W": null,
+  "collection_capacity_W": null,
+  "delivered_power_W": null,
+  "handovers_executed": 0,
+  "full_return_executed": false,
+  "recovery_executed": false,
+  "runs": [
+    {
+      "solar_sources": 8,
+      "max_step_s": 120.0,
+      "rtol": 2e-10,
+      "nfev": 2786,
+      "end_s": 43200.0,
+      "duration_s": 21600.0,
+      "clearance_event": false,
+      "completed_prefix": true,
+      "transition_completed": true,
+      "coast_after_transition_s": 10800.0,
+      "minimum_sampled_clearance_m": 133.5618939430733,
+      "limiting_pair": [
+        186,
+        187
+      ],
+      "worst_clearance_time_s": 30570.0,
+      "pair_axis_projections_m": [
+        -10133.561893943073,
+        -1.5945407460243979,
+        -115.8943700988341
+      ],
+      "geometry_step_s": 5.0,
+      "swept_separation": {
+        "possible_conflict_pairs": 27,
+        "minimum_proven_axis_clearance_m": 70.62717998344633,
+        "acceleration_bound_m_s2": 0.15,
+        "normal_rate_bound_rad_s": 0.0017453292519943296,
+        "required_clearance_m": 100.0
+      },
+      "between_sample_crossings": {
+        "crossing_near_encounters": 0,
+        "physical_intersections": 0,
+        "witnesses": []
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 20.3097293051688,
+        "maximum_sampled_rate_deg_s": 0.04686365378976085,
+        "maximum_sampled_angular_acceleration_deg_s2": 4.0106096550362735e-05
+      },
+      "mean_delta_v_m_s": 1.405838431954434,
+      "maximum_delta_v_m_s": 2.116688796541016,
+      "maximum_thrust_acceleration_m_s2": 0.0005879691101502823,
+      "sampled_maximum_total_acceleration_m_s2": 0.022458883681464824,
+      "illumination_diagnostics_step_s": 120.0,
+      "minimum_sampled_illumination": 0.24795189761483605,
+      "minimum_sampled_mean_illumination": 0.6100963105075476,
+      "extra_moving_window_samples": [
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 6322215.669547397,
+          "sources": 25,
+          "time_s": 21600.0,
+          "window_inside_target": true
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 6478441.363471222,
+          "sources": 25,
+          "time_s": 21900.0,
+          "window_inside_target": true
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000004,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 6633818.793238315,
+          "sources": 25,
+          "time_s": 22200.0,
+          "window_inside_target": true
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 6788327.388869681,
+          "sources": 25,
+          "time_s": 22500.0,
+          "window_inside_target": true
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000002,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 6941946.691174784,
+          "sources": 25,
+          "time_s": 22800.0,
+          "window_inside_target": false
+        }
+      ],
+      "service_scope": "Moving local disk only while entirely inside four lunar radii; no replacement pattern or continuous handover is claimed.",
+      "thrust_arcs_started": 1,
+      "thrust_arcs_completed": 1,
+      "elapsed_s": 248.50731898899994,
+      "raw_path": "research/runs/solar_shield_array/departure/coupled_sun_8.npz",
+      "raw_sha256": "082df6325ded16aebd4ba88c5afff6de8e1ec4c8dfef743ca6a5e2c80ecd2054",
+      "passed_prefix_constraints": false
+    }
+  ],
+  "elapsed_s": 249.90681094499996,
+  "max_rss_MiB": 320.66796875,
+  "executed_optical_mass_budget": {
+    "mass_kg": 1805000000.0,
+    "impulse_N_s": 2537538369.6777534,
+    "propulsion_energy_J": 76899025230865.53,
+    "propellant_kg": 119620.70591467971,
+    "mass_scope": "Base optical inventory only; hardware, attitude actuation and propellant feedback remain unclosed."
+  },
+  "stop_reason": "Candidate failed a coupled or replay constraint; inspect the retained witness."
+}

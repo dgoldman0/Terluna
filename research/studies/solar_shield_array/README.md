@@ -71,6 +71,15 @@ toward feathering. The full return and two-pattern handover were not executed;
 transition timing, intermediate spacing and attitude choices remain coupled
 design variables.
 
+The [prepared-departure search](departure.md) resolves that early obstruction
+in the ideal local model. A single smooth layer/row/column preparation burn
+lets all 361 tiles turn and coast for three hours, with a 107.7 m conditional
+swept clearance bound and 0.59 m independent replay disagreement. Translation
+costs 1.41 m/s; an explicit electric torque-couple option, with disturbance
+allowances, raises departure to 5.04 m/s equivalent impulse. Its provisional
+power hardware changes the mass and still needs a dynamics replay. Handover,
+full return, recurring cost and continuous global coverage remain open.
+
 The study couples protection, engineering, illumination and habitation. Its
 runners, compact numerical results and interpretation belong together here;
 dynamics components belong in the protection domain. Computation files and

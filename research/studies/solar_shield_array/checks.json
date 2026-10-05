@@ -552,5 +552,80 @@
     "accepted_operating_fleet": false,
     "branch": "research/solar-shield-habitat-array",
     "main_modified": false
+  },
+  "prepared_departure": {
+    "checked_at_utc": "2026-10-05T10:40:09.852192+00:00",
+    "status": "NOMINAL_LOCAL_DEPARTURE_VERIFIED_ATTITUDE_COST_AND_FLEET_CLOSURE_OPEN",
+    "starting_remote_head": "4b82a8386a1d4b207630f0181bdbbd83f6469bd7",
+    "early_remote_checkpoint": "cc7446118a8f3e1dc59d47274db128548daa2b3e",
+    "report": "departure.md",
+    "products": {
+      "results/departure_screen.json": "ac42d70eeabac4ea49544ebcb443eb138c3c5cded137f5c2d1a75ebb9bcb1a87",
+      "results/departure_refine.json": "2bd314577178f85ab7926863f653478dafe9d24604432d7b955d4880af4a756f",
+      "results/departure.json": "482f4869ba114b591a537a6bee65842ecb0e9acccc3a42ce9e0775277e782a7d",
+      "results/departure_validation.json": "7da77d5f6b78c94e1f1ab085597101a1ea2ea152ff05cc105f97705faf87e8a5",
+      "results/departure_budget.json": "909dbb89c49e158e7c14a059f7c00bf7b7d418a2b8d356f9092ed30b65d620de"
+    },
+    "study_tests": {
+      "status": "PASS",
+      "passed": 103,
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m pytest protection/dynamics research/studies/solar_shield_array -q",
+      "elapsed_s": 6.62
+    },
+    "make_check": {
+      "status": "FAIL_EXISTING",
+      "summary": "13 failed, 648 passed, 55 skipped in 34.04s",
+      "same_failed_tests_as_starting_checkpoint": true,
+      "layer_check": "PASS: 480 files, zero violations",
+      "later_targets": "Not reached after Python failures; historical JavaScript/provenance/ensemble entries keep their original scope."
+    },
+    "search": {
+      "static_angle_spacing_samples": 1820,
+      "depth_only_cases": 96,
+      "acceleration_rejections": 24,
+      "remaining_clearance_rejections": 72,
+      "local_correction_iterations": 1,
+      "independent_coupled_candidates": 1,
+      "tighter_replays": 1,
+      "new_full_return_or_handover_runs": 0
+    },
+    "numerical": {
+      "members": 361,
+      "departure_duration_s": 21600,
+      "translation_burn_s": 7200,
+      "attitude_transition_s": 3600,
+      "coast_after_transition_s": 10800,
+      "mean_translation_delta_v_m_s": 1.405838431954434,
+      "coarse_five_second_possible_pairs": 27,
+      "refined_two_second_possible_pairs": 0,
+      "minimum_conditional_swept_clearance_m": 107.71067265310558,
+      "maximum_independent_replay_difference_m": 0.5883833550394967,
+      "maximum_rate_deg_s": 0.04686365378976085,
+      "minimum_beam_margin_deg": 20.309729222008155
+    },
+    "actuation_option": {
+      "nominal_turn_equivalent_delta_v_m_s": 2.7271077323875237,
+      "departure_with_disturbance_allowance_m_s": 5.040847501245453,
+      "service_plus_departure_with_allowance_m_s": 6.702686980149719,
+      "provisional_power_hardware_fraction": 0.15701363730955956,
+      "hardware_mass_feedback_propagated": false,
+      "structural_realizability_demonstrated": false,
+      "recurring_fleet_cost_measured": false
+    },
+    "resources": {
+      "recorded_numerical_wall_s": 1012.769139050999,
+      "peak_RSS_MiB": 723.875,
+      "raw_MiB": 32.28056716918945,
+      "calculation_processes": 1,
+      "BLAS_OpenMP_threads": 1,
+      "total_budget_s": 3600,
+      "address_space_limit_GiB": 2
+    },
+    "scope": "Verified ideal local departure from actual service states, with conditional swept bounds and independent replay; no full return, two-pattern handover, perturbed/structural certificate or recurring fleet acceptance.",
+    "continuous_coverage_certified": false,
+    "accepted_fleet": false,
+    "collection_capacity_W": null,
+    "delivered_power_W": null,
+    "publication_target": "research/solar-shield-habitat-array; main unchanged"
   }
 }

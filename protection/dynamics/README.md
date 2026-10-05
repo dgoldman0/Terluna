@@ -102,3 +102,13 @@ The [return checkpoint](../../research/studies/solar_shield_array/returns.md)
 retains geometrically rejected endpoint proposals and independently repeats
 an early clearance failure during the coast attitude transition. It does not
 accept a complete handover, orbital return or recurring fleet budget.
+
+`pattern_departure.py` and `departure_control.py` add temporary layer and
+transverse preparation, smooth edge turns and convex impulse corrections in
+a small reusable control family. The [departure study](../../research/studies/solar_shield_array/departure.md)
+verifies a six-hour departure/coast from the actual service terminal states,
+including coupled shadows, interval refinement and an independent replay.
+`attitude_load.py` accounts for rigid-square Euler torque, explicit zero-net-
+force electric couples and gravity/radiation disturbance envelopes. This
+local ideal-actuator result leaves structural realization, hardware-mass
+feedback, handover, return and the fleet budget unclosed.
