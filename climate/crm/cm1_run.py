@@ -1212,9 +1212,10 @@ CASES['box_0e_elec'] = dict(
     elec=dict(cm1_elec.LUNAR, lightning=3, ground_m=5000.0, leakage=0, leader_v_m=0.0),
     inputs_from='box_0e',
     purpose=CASES['box_0e']['purpose'] + ', with the NSSL microphysics and WRF-ELEC\'s charging and branched lightning')
-# The electrified box again with every correction of 2026-10-04 and 2026-10-05, stage 2's main run: box_0e_elec's inputs
+# The electrified box again with every correction of 2026-10-04 to 2026-10-06, stage 2's main run: box_0e_elec's inputs
 # and two lunar days with the lunar defaults from the start (cm1_elec.LUNAR: the breakdown field's cap lifted,
-# WRF-ELEC's ground rule with the leader's crossing at 1 kV/m, leakage), three-hourly output and twelve-hourly restarts,
+# WRF-ELEC's ground rule with the leader's crossing at 1 kV/m, leakage) and the build's rain and cloud-ice ventilation at
+# lunar fall speeds (2026-10-06), three-hourly output and twelve-hourly restarts,
 # from whose restarts windows of its stormy days run again with output every few minutes.
 CASES['box_0e_elec_corrected'] = dict(
     CASES['box_0e_elec'], elec=dict(cm1_elec.LUNAR),

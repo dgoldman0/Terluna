@@ -133,8 +133,10 @@ SETTINGS = dict(ipelec=3, isaund=12, lightning=3, leakage=0, radius_m=12000.0, h
                 corona_v_m=0.0, leader_v_m=0.0)
 # The lunar boxes. WRF-ELEC's 0.75-s sub-step lets graupel settle through about 1 % of the 500-m layers of its supercell
 # in each; in the boxes' charging zone (25-35 km) the layers are 2 km deep and graupel falls at 0.44 of Earth's speed,
-# so 0.75 x 4 / 0.44 = 6.8 s keeps that share. The boxes take WRF-ELEC's own ground-strike rule (ground_m -1: a downward
-# channel reaching air warmer than -7 C in matching charge), since the lunar storms hold their charge as Earth's do, with
+# so 0.75 x 4 / 0.44 = 6.8 s keeps that share; the driver rounds it to a whole number of sub-steps per model step, so
+# at the boxes' 8-s step it runs one sub-step of 8 s (about 1.2 % of a layer). The boxes take WRF-ELEC's own
+# ground-strike rule (ground_m -1: a downward channel reaching air warmer than -7 C in matching charge), since the
+# lunar storms hold their charge as Earth's do, with
 # -7 C just beneath the main negative charge (the author's decision, 2026-10-05). It counts a channel at -7 C, about
 # 34 km up, as reaching the ground, so its ground strikes are an upper bound. The height rule the boxes first took, a
 # channel within 5 km of the ground, kept the demand for matching charge where the storms have none and allowed no
@@ -465,6 +467,11 @@ GRAVITY_TEXT = (
     '        ENDIF\n'
     '      ENDDO\n'
     '      ENDIF\n\n')
+# Ventilation follows the same speeds (added 2026-10-06). Rain's ventilation, in its evaporation (NUCOND) and in the
+# gather-scatter routine, takes rain's power law from its fixed coefficients (ar, or ax(lr) on the unused Ferrier
+# branch) rather than from vtxbar, and cloud ice's takes a fitted Reynolds number; both now scale as the fall speeds
+# do. Before, lunar rain evaporated 1.3-1.5 times too fast for its drop sizes and the larger ice deposited up to 15 %
+# too fast. Snow, graupel and hail ventilate from vtxbar and axx, already scaled.
 GRAVITY_PATCH = ('module_mp_nssl_2mom.F', 'Terluna: fall speeds at the host gravity', [
     ('', '#ifndef TERLUNA_G\n#define TERLUNA_G 9.81\n#endif\n', 1),
     ('      real, parameter :: gr = 9.8\n', '      real, parameter :: gr = TERLUNA_G ! Terluna: host gravity\n', 1),
@@ -472,6 +479,12 @@ GRAVITY_PATCH = ('module_mp_nssl_2mom.F', 'Terluna: fall speeds at the host grav
     ('      gr = 9.8\n', '      gr = TERLUNA_G ! Terluna: host gravity\n', 1),
     ("      if ( ndebug1 .gt. 0 ) write(0,*) 'SETVTZ: END OF ROUTINE'\n",
      GRAVITY_TEXT + "      if ( ndebug1 .gt. 0 ) write(0,*) 'SETVTZ: END OF ROUTINE'\n", 1),
+    ('Sqrt((ar*rhovt(mgs)))', 'Sqrt((ar*rhovt(mgs)*(TERLUNA_G/9.81)**((1.0+br)/3.0)))', 5),
+    ('Sqrt(ax(lr)*rhovt(mgs))', 'Sqrt(ax(lr)*rhovt(mgs)*(TERLUNA_G/9.81)**((1.0+br)/3.0))', 4),
+    ('      xcivent = (fschm(mgs)**(1./3.))*((cireyn/fakvisc(mgs))**0.5)\n',
+     '      cireyn = cireyn*(TERLUNA_G/9.81)**((merge(1.415, merge(0.6635, 0.55, icefallopt == 2), icefallopt == 1) &\n'
+     '     &  + 1.0)/3.0) ! Terluna: cloud ice ventilates at its fall speed under the host gravity\n'
+     '      xcivent = (fschm(mgs)**(1./3.))*((cireyn/fakvisc(mgs))**0.5)\n', 1),
 ])
 
 PATCHES = [MODULE_PATCH, GRAVITY_PATCH, MSZ_PATCH, DRIVER_PATCH, CM1_PATCH, PARAM_PATCH, INIT3D_PATCH,

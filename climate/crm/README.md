@@ -1290,7 +1290,17 @@ ice with 0.55, and graupel and hail with each particle's exponent in WRF-ELEC's
 default table (Milbrandt and Morrison 2013), whose coefficient also sets their
 collection and ventilation. The scheme sets a particle's fall speeds and
 coefficients only where that particle is present, and the scaling acts only
-there; at Earth's 9.81 m/s² it leaves them as they are. WRF-ELEC's driver and
+there; at Earth's 9.81 m/s² it leaves them as they are. Until 2026-10-06 rain
+and cloud ice ventilated at Earth's speeds: rain's ventilation, where it
+evaporates (NUCOND) and in the gather-scatter routine, takes rain's fall-speed
+coefficient from the module's constants rather than from the scaled speeds, and
+cloud ice's takes a Reynolds number fitted on Earth. A review found it, and both
+now scale as the fall speeds do; before, lunar rain evaporated 1.3–1.5 times too
+fast for its drop sizes (a slope diameter of 0.1–0.5 mm) and the larger ice
+crystals deposited up to 15 % too fast, in every NSSL run before
+`box_0e_elec_corrected`'s restart from day 0. Snow, graupel and hail ventilate
+from their scaled speeds, and Morrison's scheme scales its coefficients
+themselves, so neither changed. WRF-ELEC's driver and
 its sedimentation driver run in one thread, since WRF divides its work outside
 the microphysics; the build gives each slab loop the OpenMP directive CM1's
 copy has, with every per-slab array private, the charge totals summed across
@@ -1300,7 +1310,8 @@ The lunar boxes change two of WRF-ELEC's Earth settings (`cm1_elec.LUNAR`).
 WRF-ELEC's 0.75-s sub-step lets graupel settle through about 1 % of the 500-m
 layers of its storms in each; in the boxes' charging zone, 25–35 km up, the
 layers are 2 km deep and graupel falls at 0.44 of Earth's speed, so a 6.8-s
-sub-step keeps that share. On the Moon air warmer than −7 °C lies about 27–34
+sub-step keeps that share; the driver rounds it to whole sub-steps of the model
+step, which in the boxes is one sub-step of 8 s. On the Moon air warmer than −7 °C lies about 27–34
 km up, so a downward channel strikes the ground when it comes within 5 km of it,
 the height that rule stands at on Earth. The 50-MV and 10-kV/m conditions for a
 ground strike, the 0.9 and 0.8 fractions of breakdown, the 200-V/m internal

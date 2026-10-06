@@ -124,6 +124,15 @@ def test_fall_speeds_scale_only_where_each_particle_is_present_and_not_at_earth_
     module = patched('module_mp_nssl_2mom.F')
     setvtz = module[module.index('SUBROUTINE setvtz'):]
     assert setvtz.index("      if ( qx(mgs,lh) .gt. qxmin(lh) ) then") < setvtz.index('bxx(mgs,lh) = mmgraupvt(indxr,3)')
+    # rain ventilates at its lunar speed wherever it evaporates (NUCOND and the gather-scatter routine), and cloud ice
+    # at its own; no rain ventilation is left on Earth's coefficients
+    rain = 'rhovt(mgs)*(TERLUNA_G/9.81)**((1.0+br)/3.0)'
+    assert module.count(f'Sqrt((ar*{rain}))') == 5 and module.count(f'Sqrt(ax(lr)*{rain})') == 4
+    assert 'Sqrt((ar*rhovt(mgs)))' not in module and 'Sqrt(ax(lr)*rhovt(mgs))' not in module
+    nucond = module[module.index('SUBROUTINE NUCOND'):module.index('END SUBROUTINE NUCOND')]
+    assert f'Sqrt((ar*{rain}))' in nucond
+    gs = module[module.index('subroutine nssl_2mom_gs'):]
+    assert gs.index('cireyn = cireyn*(TERLUNA_G/9.81)') < gs.index('xcivent = (fschm(mgs)**(1./3.))*((cireyn/fakvisc')
 
 
 def test_an_electrified_case_takes_nssl_and_the_charge_tracers():
