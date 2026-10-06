@@ -1,0 +1,206 @@
+# Relative-orbit redesign of the shield formation
+
+On 6 October 2026 the author reviewed the expanded coupled-cycle checkpoint
+(`abbaf739`) and adopted a change of method for the formation work. This
+document records the diagnosis behind the change, the plan, its decision gate
+and the choices that remain open. The shield's protection governs every stage:
+each candidate passes the same finite-Sun coverage, overlap and UV-transmission
+tests as before, and a formation counts only when it protects.
+
+The diagnosis numbers below come from gravity-only replays (Moon, Earth and
+Sun as point masses) of the committed seed states in
+[results/joint_seed.json](results/joint_seed.json), using the compact DE440
+samples in [local_continuation/ephemeris.npz](local_continuation/ephemeris.npz).
+They were run as scratch checks on 6 October; stage 1 commits the runner that
+reproduces them as a data product. Sail force, mutual shadows, finite-square
+contact and attitude are absent from these replays and present in the coupled
+model that verifies every design.
+
+## Findings
+
+### The return error is orbital-energy spread from the depth stack
+
+The 361 loaded tiles have osculating semi-major axes about the Moon that span
+59.0 km at the epoch, 58.1 km at the end of first service and 64.7 km at
+hour 12, with standard deviations of 21–23 km. Depth along the Sun direction
+explains the spread almost completely: a linear fit gives 1.57 km of
+semi-major axis per kilometre of depth across the 36 km four-level stack, with
+R² = 0.9999 at the epoch. The tiles' periods therefore differ by up to
+18 minutes. Tiles whose semi-major axes differ by Δa separate along-track by
+about 3πΔa per revolution, which predicts up to 290–323 km here.
+
+Replaying the hour-12 states through one 46.48-hour revolution of the centroid
+gives a maximum along-track repeat error of 345.1 km (rms 222.9 km). The coupled
+replay in [coupled_optimization.md](coupled_optimization.md) reports 344.5 km
+at the following departure endpoint, the same point in the cycle. The position
+debt that the expanded search worked to remove is this secular drift.
+
+One along-track burn per tile that equalizes the semi-major axes costs 0.42 m/s
+rms and 0.64 m/s at most, sized by vis-viva and refined twice from the replayed
+drift. It reduces the one-revolution along-track error from 345.1 km to 0.07 km.
+The 3-D rms error falls to 2.58 km, mostly a radial residual of up to 5.3 km
+from unequal eccentricities, which a second small burn addresses. The expanded
+basis reached this direction only indirectly: its early patterns were probed at
+0.02 m/s, and its acquisition arcs act in the last eight hours before arrival,
+after the drift has grown to about 300 km.
+
+Closing the cycle with energy management means equalizing energy after service,
+restoring the service velocity field before the next passage and offsetting the
+coast energy for the drift the service itself accumulates. At the present depth
+that costs roughly 1.1 m/s rms per tile per cycle. The 23.835 TW operating
+target allows 0.6489 m/s per day for the 17.286-million-tile inventory
+([energy.md](energy.md)), about 1.26 m/s per 46.5-hour cycle. The burn scales
+in proportion to stack depth.
+
+### The hour-13.8 clearance failures are the pattern folding through its orbital plane
+
+Each tile's cross-track offset oscillates once per orbit, so the service
+pattern flattens about a quarter orbit after mid-service. Replayed from the
+hour-12 state, the pattern's thickness normal to its orbit falls to a minimum
+of 1.7 km at hour 14.25. Replayed from the end of first service, it falls from
+150.6 km at hour 6 to 6.3 km at hour 14, and the number of tile-centre pairs
+closer than 10 km rises from zero to 3,669 at hour 14.5 before falling again.
+The coupled runs' first 100 m clearance events, at 13.795–13.800 h, fall in
+this window.
+
+In linear relative motion the in-plane and cross-track motions are independent.
+Tiles that share depth and along-track position follow the same in-plane path
+and meet at the fold for any optimizer setting. Formation flying keeps such
+patterns apart with relative orbital elements. Equal semi-major axes make the
+pattern repeat, and relative eccentricity vectors parallel to the relative
+inclination vectors put the largest radial separation where the cross-track
+separation vanishes. This is the e/i-vector separation of D'Amico and
+Montenbruck (2006), flown on PRISMA and TanDEM-X. The minimum separations of
+such relative orbits have closed forms, which turns the layout into a small
+geometric design problem.
+
+### Hardware headroom and attitude energy
+
+In the expanded run's executed prefix the installed actuators carry 6.15 times
+peak demand, doubling their ratings leaves the solution unchanged, and the
+active limit is the 100 TJ next-service energy cap. Attitude used 36.19 TJ
+against 0.43 TJ for translation. Two 90° turns per cycle at that cost scale to
+roughly 20 TW across 17.29 million tiles, most of the 23.835 TW target.
+
+### Plane tracking for full-disk coverage
+
+The test patch orbits in the ecliptic: its mean orbit normal is antiparallel to
+the ecliptic pole, so its plane always contains the Sun. Covering the full disk
+takes inclined rings whose lines of nodes turn with the Sun at 0.9856° per day.
+A simplified model places Earth and the Sun on circular coplanar orbits about
+the Moon, with point gravity and no sail force, and propagates retrograde
+circular orbits inclined 10–20° to that plane for 120 days. Earth's tide turns
+their nodes as follows.
+
+| Orbit radius | Node rate, inclination 10–20° | Node minus Sun after 120 days |
+|---|---:|---:|
+| 12,000 km | 0.494–0.470° per day | −61 to −64° |
+| 15,000 km | 0.698–0.663° per day | −38 to −42° |
+| 17,000 km | 0.848–0.805° per day | −19 to −25° |
+| 19,000 km | 1.008–0.957° per day | +1 to −6° |
+| 21,000 km | 1.177–1.116° per day | +22 to +15° |
+
+Near 19,000 km the rings follow the Sun without steering. The useful service
+fraction there is about 12%, against 15.4% at 15,000 km (arcsin(7,000 km/r)/π),
+so about 28% more tiles. Steering inclined rings at 15,000 km would cost roughly
+0.5–1.5 m/s per day. The pilot's three-day propagations were too short to see
+the drift.
+
+### Areal mass and collection
+
+The September optical cell's 50 g/m² is 22 g/m² of silica substrate (10 µm),
+3.9 g/m² of titania absorber and 24.1 g/m² of framing, coatings and metrology
+([module catalogue](../../../protection/modules/catalogue.json)). The
+[September report](../../../protection/report.md) calls the allocation a target
+for a structural bill of materials still to be completed. Power and propulsion
+sit in a separate holding pack of about 10.9 g/m² at 300 W/kg, with collectors
+on about 1.09% of the aperture.
+
+The annulus carries the same UV job as the climate window, because its rays
+cross the upper air and exosphere above the limb out to four lunar radii. It
+carries no climate job, since those rays leave the Moon. They continue to Earth
+near new moons in eclipse season. A disk about 7,000 km in radius that blocked
+visible light would cast a total eclipse some 10,000 km across on Earth for
+hours, a few times a year. The annulus is therefore a thin UV absorber that
+passes visible light. Titania on a thin support fits; the stack's 1 µm titania
+layer is 3.9 g/m² of its 26.
+
+The aperture intercepts about 240 PW. Collection sized to demand is small: the
+100 TW civilization case at 300 W/m² needs about 0.2% of the aperture, and
+holding about 1%. The 5% dimmer removes about 586 TW across the Moon's disk
+([design.md](design.md)). Built as a band-selective semitransparent PV layer,
+it would yield roughly 120–180 TW at 20–30% conversion, covering the
+civilization case with light the climate design already removes.
+
+### The coverage requirement
+
+The atmosphere's [loss response](../../../atmosphere/loss_response/README.md)
+allows a UV transmission of a few tenths of a percent, averaged over time and
+area, depending on the loss budget. Tiles must therefore overlap. Because the
+budget is an average, it can also carry scheduled gaps such as handovers or a
+failed tile awaiting cover.
+
+## Plan
+
+**Stage 1, tools and diagnosis.** Relative-orbit tools go in
+`protection/dynamics`, with tests: osculating and quasi-nonsingular relative
+orbital elements, linear relative motion, the closed-form minimum separation,
+and energy-matching burns. A study runner reproduces the findings above and
+publishes them as a data product.
+
+**Stage 2, the local redesign.** Redesign the 361-tile patch in relative-orbit
+space with the same tiles: 10 km physical squares with 9.89 km clear apertures.
+It keeps the six-hour finite-Sun coverage of the moving 20 km receiver window
+inside four lunar radii and the 100 m clearance with numerical allowance. The
+coast runs at equal energy, with burns that manage it each cycle. E/i-vector
+separation carries the pattern through the fold. Attitude schemes are compared:
+the present 90° turns, synchronized turns, and a steady rotation that keeps each
+tile facing radially. The latter is face-on to the Sun at mid-service and
+edge-on at the fold, and meets the Sun at up to about 25° at the ends of
+service. Designs are built in the linear model and verified in the coupled
+finite-square model with mutual shadows and sail force. Verification follows
+the full sequence of service, departure, return, next service and subsequent
+departure, with the existing recurrence gates of 50 m, 0.01 m/s and 1e-4 rad.
+
+**Decision gate.** Suppose the cycle closes every coverage, clearance and
+recurrence gate within about 1.3 m/s per tile per cycle, with attitude energy
+inside the 23.835 TW target. Then the orbiting fleet proceeds to stage 3.
+Otherwise the held screen with a zoned aperture from stage 4 becomes the
+baseline.
+
+**Stage 3, the global ring screen.** Inclined rings near the Sun-synchronous
+radius are screened with the full DE440 ephemeris over a year. The screen
+covers nested rings that never cross, the service fraction and inventory, the
+recurring corrections, and handovers within the averaged UV budget.
+
+**Stage 4, the zoned aperture and collection, in parallel.** Recompute the held
+screen's holding power with the climate stack in the central window and a light
+annulus that blocks the UV and passes visible light. The protection domain
+supplies the annulus film's UV transmission. Map the shield's shadow on Earth
+at eclipse-season new moons. Size collection to demand, including the dimmer
+as semitransparent PV and small local collectors for holding.
+
+The expanded-cycle continuation package stays preserved as the record of the
+black-box approach, and this plan replaces its SQP campaign.
+
+## Open choices
+
+These choices are the author's. The recommendations come from the findings
+above.
+
+| Choice | Recommendation |
+|---|---|
+| Ring radius, about 15,000 km or near the Sun-synchronous radius | Screen 15,000–21,000 km with the full ephemeris in stage 3, leaning toward about 19,000 km |
+| Attitude scheme | Radial-facing steady rotation for annulus tiles if their coverage holds; Sun-facing service for climate-window tiles, whose transmitted spectrum changes with incidence |
+| Architecture: orbiting fleet or held screen with a zoned aperture | Set by the stage 2 gate |
+| Areal-mass targets | Estimates of 10–25 g/m² for the climate window and 7–13 g/m² for the annulus, to be fixed by the annulus film's UV transmission and a structural design |
+| Collection | The dimmer as semitransparent PV, if the climate model accepts a band-selective 5% in place of a flat one |
+| Scheduled gaps | Spend part of the averaged UV-transmission budget on handovers once stage 3 sizes them |
+
+## Sources
+
+D'Amico, S. and Montenbruck, O. (2006). Proximity operations of formation-flying
+spacecraft using an eccentricity/inclination vector separation. *Journal of
+Guidance, Control, and Dynamics* 29(3), 554–563,
+[doi:10.2514/1.15114](https://doi.org/10.2514/1.15114). Cited for the method;
+stage 1 derives and tests the formulas it uses.

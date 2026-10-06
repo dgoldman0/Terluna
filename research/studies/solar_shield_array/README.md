@@ -1,6 +1,19 @@
 # Solar shield and habitat array
 
-The latest [expanded coupled-cycle investigation](expanded_cycle.md) adds
+The [relative-orbit plan](relative_orbits.md) of 6 October 2026 sets the
+current direction. Gravity-only replays of the committed seed show that the
+depth stack spreads the 361 tiles' semi-major axes over 59–65 km. That spread
+drifts them up to 345 km apart along-track each revolution, which is the
+expanded search's return error. One energy-matching burn of 0.42 m/s rms per
+tile cuts that drift to 70 m. The hour-13.8 clearance failures come from the
+pattern folding through its orbital plane a quarter orbit after mid-service.
+The plan redesigns the formation in relative orbital elements, with equal-energy
+coasts and e/i-vector separation, and verifies it in the coupled model against
+the full protection gates. A zoned-aperture and collection study runs alongside.
+Its decision gate chooses between the orbiting fleet and a held screen with a
+zoned aperture.
+
+The [expanded coupled-cycle investigation](expanded_cycle.md) adds
 in-plane and arrival-acquisition controls and measures nine full-cycle response
 columns. The local terminal matrix is full rank in those columns, with 34.2%
 of the normalized residual outside its span. Exact replay exposes 27.6 km
