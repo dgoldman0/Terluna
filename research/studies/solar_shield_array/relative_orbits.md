@@ -242,13 +242,20 @@ departure, with the existing recurrence gates of 50 m, 0.01 m/s and 1e-4 rad.
 
 **Stage 2a, the layout screen (complete, 6 October).** The screen above shows
 that the 361-tile patch, as a unit that reassembles each orbit, cannot stay
-clear on equal-energy relative orbits. A bundle of ring segments can. The
-author is asked to choose stage 2's local unit (see the open choices). If the
-choice is the ring bundle, the coupled verification runs a segment of about 19
-rings with per-tile radial-facing attitudes, sail force and mutual shadows. It
-checks clearance and strip overlap through service and recurrence over
-consecutive orbits. The radius steps are ordered as a staircase, so that every
-ring has one shadowed edge and the shadow's push on the rings is alike.
+clear on equal-energy relative orbits. A bundle of ring segments can. On
+6 October the author chose the ring bundle as stage 2's local unit, after
+confirming that it differs from the rejected prescribed circular family of
+[active_global.md](active_global.md). That family enforced Sun-following circles
+with continuous thrust, about 22 m/s per tile per day and 1,500 TW in total.
+The ring bundle flies natural orbits, and its 93-hour replay uses no thrust.
+
+**Stage 2b, the coupled ring bundle.** The coupled verification runs a segment
+of about 19 rings with per-tile radial-facing attitudes, sail force and mutual
+shadows. It checks clearance and strip overlap through service and recurrence
+over consecutive orbits. The radius steps are ordered as a staircase, so that
+every ring has one shadowed edge and the shadow's push on the rings is alike.
+Runs longer than the six days of compact samples use the pinned DE440s kernel,
+which needs jplephem; the author approved installing both.
 
 **Decision gate.** Suppose the cycle closes every coverage, clearance and
 recurrence gate within about 1.3 m/s per tile per cycle, with attitude energy
@@ -278,7 +285,6 @@ above.
 
 | Choice | Recommendation |
 |---|---|
-| Stage 2's local unit: the 361-tile patch or a bundle of ring segments | The ring bundle, verified in the coupled model with per-tile attitudes; the decision gate then applies to the bundle's recurrence cost per tile per cycle. Global coverage becomes nested rings whose band strips overlap, with the ring screen of stage 3 following directly |
 | Ring radius, about 15,000 km or near the Sun-synchronous radius | Screen 15,000–21,000 km with the full ephemeris in stage 3, leaning toward about 19,000 km |
 | Attitude scheme | Radial-facing steady rotation for annulus tiles if their coverage holds; Sun-facing service for climate-window tiles, whose transmitted spectrum changes with incidence |
 | Architecture: orbiting fleet or held screen with a zoned aperture | Set by the stage 2 gate |
