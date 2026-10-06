@@ -85,6 +85,18 @@ write only their own slabs (checked by compiling them with no default
 sharing). Each run is a valid realization; runs that differ in one setting
 compare as realizations, not as the same storms. The one-thread checks above
 and the supercell's restart check stand.
+A search on 2026-10-06 ran `box_0e_elec` from its day-10.5 restart for
+8,000 s on 4 threads, three times with each of several parts switched off.
+The runs parted at random times 3,000–7,400 s in, always first in the
+domain's total vertical momentum, and the plain Morrison box parts the same
+way, so the race lies outside the electrification. With mass conservation off,
+two or three of three runs parted; with radiation off, all three agreed, and
+with the large-scale forcing off, the two that finished agreed. With the race
+striking about half the runs, agreement among three runs has about one chance
+in eight of being luck, so neither part is pinned down. The surface and
+boundary-layer schemes cannot be switched off alone (`cm1setup` 2 requires the
+boundary layer). The search stopped there; the scripts are in
+`atmospheric-electricity/smoke/race_bisect.py` on the data drive.
 A case's executable changes only when its build is rebuilt (`build moon_omp`
 replaces the one every such case links to), so the runner records the executable
 and thread count of every segment.
