@@ -1,0 +1,8 @@
+Use case: compositing.
+Repair ONLY the sea in image 1, the bottom approximately 23 percent of the frame. Image 2 supplies the physically calculated large wave forms, lighting distribution and darker water brightness.
+
+LOCK all sky pixels above the horizon. Keep the exact clouds, colours, exposure, straight horizon and 4:3 framing from image 1.
+Rebuild the sea below that horizon as a natural continuous water surface. Remove the repeating wormlike, outlined ripple pattern and hard metallic-looking flecks. Preserve broad rounded gravity-wave slopes with small irregular ripples on them; reflections should form smooth patches that stretch and break along the changing surface normals. Small-scale detail must look physically attached to the larger wave surfaces, not like an embossed texture overlaid everywhere.
+Use the broad wave scale in image 2: significant wave height about 1.15 m, peak wavelength about 33 m, viewed from an eye two metres above the water. Keep the nearest rolling surface broad and continuous. Progressively finer ripples merge naturally toward the distance. Retain natural optical clarity; no blur filter, foam, surf or enlarged threatening waves.
+Match image 2's lower water brightness, about 20 percent dimmer than image 1's water. Reflect the dark central cloud bank and the softly warm lateral sky. Use subdued grey-brown water with soft amber reflections, without outlines or a bright vertical reflection column. There is no visible Sun.
+No change to the sky. No text, labels, border, watermark, objects, land, boats or people. One clean natural photograph at the same aspect ratio and highest native resolution.

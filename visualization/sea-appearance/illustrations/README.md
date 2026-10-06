@@ -2,8 +2,9 @@
 
 These selected sea images are preserved in Git at the author's
 request. Routine rendered outputs and intermediate generation passes remain in
-the ignored `../results/illustrations/` directory. The final images contain no
-labels; scene identity, prompts, source hashes and reviews live in these sidecars.
+the ignored `../results/illustrations/` or study `research/runs/` directories.
+The final images contain no labels; scene identity, prompts, source hashes and
+reviews live in these sidecars.
 
 
 The current Nubium references are the
@@ -96,8 +97,10 @@ image comparison.
 - [Fecunditatis: nearly full Earth and high clouds](fecunditatis-earth-clouds.png),
   with the [2048 × 2560 calculated reference](fecunditatis-earth-clouds-reference.png)
   and [Earth detail reference](fecunditatis-earth-clouds-earth-reference.png).
-- [Eastern Smythii: high clouds at twilight, Earth below the horizon](smythii-twilight-clouds.png),
-  with the [2560 × 1920 calculated reference](smythii-twilight-clouds-reference.png).
+- [Eastern Smythii: high clouds at twilight, Earth below the horizon](smythii-twilight-clean.png),
+  with the [2560 × 1920 calculated reference](smythii-twilight-clouds-reference.png)
+  and [current texture-repair review](smythii-twilight-clean-review.json).
+  The [original illustration](smythii-twilight-clouds.png) is preserved.
 
 Both are natural photographic illustrations without text inside the images.
 The built-in imagegen tool supplies cloud microtexture and water detail;
@@ -107,8 +110,8 @@ not been artificially upscaled. Their first generated images are saved as
 `fecunditatis-earth-clouds-first-generated.png` and
 `smythii-twilight-clouds-first-generated.png`.
 
-[Generation history and full prompt files](cloud-scenes-generation.json),
-[review and remaining differences](cloud-scenes-review.json),
+[Initial generation history and full prompt files](cloud-scenes-generation.json),
+[initial review and remaining differences](cloud-scenes-review.json),
 [reference-copy hashes](cloud-scenes-reference-copies.json), and the per-scene
 `*-image-checks.json` files keep the evidence outside the pictures. The two
 `*-cloud-opacity.png` guides show upper-cloud opacity, not visible cloud colour.
@@ -140,3 +143,28 @@ pass is saved without further image processing. The [complete prompt](smythii-tw
 [image-space comparisons](smythii-twilight-depth-image-checks.json) record the
 inputs, measured brightness differences and remaining limits. No text or labels
 appear inside the image.
+
+## Smythii texture repair
+
+The [current illustration](smythii-twilight-clean.png) reduces the repeated
+cloud curls, embossed edges and harsh water outlines in the earlier images.
+Three targeted edits retained too much of that texture; the selected fourth
+attempt reconstructs the cloud and water detail directly from the calculated
+lighting reference. The broad central shadow, warm flanks and offshore framing
+remain. Fine cloud forms and wave detail are illustrative.
+
+The built-in imagegen tool produced a native 1448 × 1086 image, saved without
+post-processing or upscaling. The [first repair pass](smythii-twilight-clean-first-generated.png)
+is also preserved in Git; the original and depth-cue images remain intact.
+The complete prompt set is [initial cleanup](smythii-twilight-clean-prompt.txt),
+[cloud repair](smythii-twilight-clean-cloud-prompt.txt),
+[water repair](smythii-twilight-clean-water-prompt.txt), and
+[selected reconstruction](smythii-twilight-clean-rebuild-prompt.txt).
+
+The [review and provenance](smythii-twilight-clean-review.json) and
+[image-space comparisons](smythii-twilight-clean-image-checks.json) record the
+selection and its limits. The horizon is about two generated pixels above the
+reference; upper-sky, middle-cloud and water median display luminances are about
+27%, 14% and 25% lower. Colour also differs. This is a texture repair, not a
+new physical solution or a radiometrically equivalent image. No labels appear
+inside it.
