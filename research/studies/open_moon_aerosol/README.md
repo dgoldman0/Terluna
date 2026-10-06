@@ -101,24 +101,29 @@ At the ground, central case with the clean-to-loaded range; conductivity in unit
 
 - The ground's conductivity is about 2.2–2.7 × 10⁻¹⁵ S/m over the Moon, 0.6–0.7 of the
   column's single assumed aerosol (3.7 × 10⁻¹⁵), and charge near the ground relaxes in about
-  an hour (55–67 minutes) against the column's 40. The loaded case reaches 3–10 hours over
-  the forests and the fog desert, the clean case half an hour.
+  an hour (55–67 minutes) against the column's 40. The loaded case reaches 5.5–10 hours over
+  the forests, the lakes and the fog desert, the clean case half an hour.
 - In fog the small ions go to the droplets: the conductivity falls to 8–9 × 10⁻¹⁷ S/m, 2–4 %
   of clear air's, for the 6–9 % of night hours fog covers the land; the literature's derived
   range is 1–30 % (aerosol_dust_fog.md Sect. 8.8).
 - Cloud nuclei at 0.3 % supersaturation run 80–160 per cm³ by day, about the 100 droplets per
-  cm³ the storm runs assume, and fall by half or more through the night.
+  cm³ the storm runs assume. Through the night the area mean halves (110 to 53 per cm³): by
+  half or more over the seas, the fog desert and the polar land, by 39 % over the wet land and
+  10 % over the lakes, whose deep night air loses little to the ground.
 - Each design lever moves the area-mean conductivity by 15 % or less: no isoprene-emitting
   trees ×1.15 by day, every tree emitting ×0.87; seas at 1 or 10 nM of dimethyl sulfide ×1.10
   or ×0.93; fully crusted or bare, grazed plains ×1.01 or ×0.96; no night fungal bursts or
   twice as many ×1.05 or ×0.95 by night. The case spread, how many particles the air above
   supplies, is the larger uncertainty.
 
-**Checks.** The same machinery with the clean Amazon's measured particles gives 766 small
-ions per cm³ at an ionization of 2.5 per cm³ per second, against 549 and 856 measured inside
-the rainforest at 97 % humidity (Wimmer et al. 2018). With the remote ocean's particles it
-gives 2.6 × 10⁻¹⁴ S/m at 1.5 ion pairs per cm³ per second, against 1.0–2.3 × 10⁻¹⁴ measured
-over the Indian Ocean and the Arabian Sea (Kamra et al. 1997; Siingh et al. 2005).
+**Checks.** The same machinery with the clean Amazon's measured particles gives 770, 1,250
+and 1,950 small ions per cm³ at an ionization of 2.5, 5 and 10 per cm³ per second, against
+549 and 856 measured inside the rainforest at 97 % humidity (Wimmer et al. 2018, who give no
+ionization rate; air over land usually takes 5–10). With the remote ocean's particles it gives
+2.6–3.2 × 10⁻¹⁴ S/m at 1.5–2 ion pairs per cm³ per second, against 1.0–2.3 × 10⁻¹⁴ measured
+over the Indian Ocean and the Arabian Sea (Kamra et al. 1997; Siingh et al. 2005). Both lean
+high, by up to two to three times: the machinery may take up too few ions (inside a forest the
+leaves take up ions it leaves out), so the conductivities above are more likely high than low.
 
 ## Open questions
 

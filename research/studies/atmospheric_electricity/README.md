@@ -336,8 +336,9 @@ Morrison's do.
 9. The aerosol near the ground ([open_moon_aerosol](../open_moon_aerosol/README.md),
    2026-10-05), built from the ecology register's landscapes and organisms and the
    climate runs: the seas, forests, fog-desert plains and polar lands give the
-   ground a conductivity of about 2.2–2.7 × 10⁻¹⁵ S/m (0.6–4.7 across its cases),
-   charge relaxing in about an hour, 2–4 % of that in fog, and 80–160 cloud nuclei
+   ground a conductivity of about 2.2–2.7 × 10⁻¹⁵ S/m (0.6–4.7 across its cases;
+   its Earth checks lean high, by up to two to three times), charge relaxing in
+   about an hour, 2–4 % of that in fog, and 80–160 cloud nuclei
    per cm³ at 0.3 % supersaturation by day, about the storm runs' 100.
 10. Windows of `box_0e_elec`'s second lunar day run again from its restarts with
    output every few minutes, to follow each storm's life.
