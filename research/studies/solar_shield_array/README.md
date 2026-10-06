@@ -1,5 +1,14 @@
 # Solar shield and habitat array
 
+The latest [coupled optimization benchmark](coupled_optimization.md) replaces
+gravity-only control responses with all-member shadow-coupled sensitivities.
+A held-out modal perturbation is predicted within 0.050 m instead of 3.65 m.
+The eight-parameter trust-region search retains cycle boundary conditions and
+rejects new contact conflicts; no feasible repair or return is found. Its final
+power-feasible rejected trial stops at hour 12.814874, independently replayed
+within 7.86 m, and uses 37.217 TJ. The 36.186 TJ slower-turn baseline remains
+the selected prefix. Failed cases and a portable optimizer checkpoint are saved.
+
 The author directed this work on 4 October 2026: develop the combined solar
 shield, power system and habitat fleet, and investigate the holding problem
 with a full Sun–Earth–Moon ephemeris. The branch starts at main commit
