@@ -218,6 +218,7 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield
 python -m research.studies.solar_shield_array.publish
 python -m research.studies.solar_shield_array.tacking_screen
 python -m research.studies.solar_shield_array.cycling_replay
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.relative_diagnosis
 python -m pytest protection/dynamics research/studies/solar_shield_array
 python visualization/solar-shield-array/plot.py
 python visualization/solar-shield-array/cycling_plot.py

@@ -188,3 +188,18 @@ finds a 30.22% saving for the loaded twelve-hour passage with a slower turn,
 but no operating return. Coupled dynamics reject the cheap sparse-ray proposal
 and reproduce compression to the clearance floor in the slower-turn return.
 Omitted shadow response cannot be treated as a small correction in these fits.
+
+## Relative orbits
+
+[relative_orbit.py](relative_orbit.py) describes tiles relative to a reference
+orbit about the Moon. It gives osculating semi-major axes and periods, the
+along-track drift per revolution of unequal orbits (about 3πΔa), and the burns
+along the velocity that equalize energy. It also gives the quasi-nonsingular
+relative orbital elements and the linear relative motion they define. The
+closed-form minimum radial-normal separation of energy-matched relative orbits
+follows D'Amico and Montenbruck (2006). The tests compare the linear solution
+with Hill's equations and two-body propagation, and the separation with brute
+force and the published form. The
+[relative-orbit plan](../../research/studies/solar_shield_array/relative_orbits.md)
+uses these tools to design formations whose relative orbits repeat and stay
+separated, and verifies them in the coupled model.

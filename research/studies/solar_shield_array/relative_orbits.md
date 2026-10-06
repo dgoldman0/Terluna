@@ -7,14 +7,15 @@ and the choices that remain open. The shield's protection governs every stage:
 each candidate passes the same finite-Sun coverage, overlap and UV-transmission
 tests as before, and a formation counts only when it protects.
 
-The diagnosis numbers below come from gravity-only replays (Moon, Earth and
-Sun as point masses) of the committed seed states in
-[results/joint_seed.json](results/joint_seed.json), using the compact DE440
-samples in [local_continuation/ephemeris.npz](local_continuation/ephemeris.npz).
-They were run as scratch checks on 6 October; stage 1 commits the runner that
-reproduces them as a data product. Sail force, mutual shadows, finite-square
-contact and attitude are absent from these replays and present in the coupled
-model that verifies every design.
+The diagnosis numbers below come from gravity-only replays of the committed
+seed states in [results/joint_seed.json](results/joint_seed.json). The Moon,
+Earth, Sun and planets act as point masses, taken from the compact DE440 samples
+in [local_continuation/ephemeris.npz](local_continuation/ephemeris.npz), with
+the coupled model's own environment. [relative_diagnosis.py](relative_diagnosis.py)
+reproduces them in about four CPU seconds and writes
+[results/relative_diagnosis.json](results/relative_diagnosis.json). Sail force,
+mutual shadows, finite-square contact and attitude are absent from these replays;
+the coupled model that verifies every design includes them.
 
 ## Findings
 
@@ -55,13 +56,22 @@ in proportion to stack depth.
 ### The hour-13.8 clearance failures are the pattern folding through its orbital plane
 
 Each tile's cross-track offset oscillates once per orbit, so the service
-pattern flattens about a quarter orbit after mid-service. Replayed from the
-hour-12 state, the pattern's thickness normal to its orbit falls to a minimum
-of 1.7 km at hour 14.25. Replayed from the end of first service, it falls from
-150.6 km at hour 6 to 6.3 km at hour 14, and the number of tile-centre pairs
-closer than 10 km rises from zero to 3,669 at hour 14.5 before falling again.
-The coupled runs' first 100 m clearance events, at 13.795–13.800 h, fall in
-this window.
+pattern flattens about a quarter orbit after mid-service. Replayed from the end
+of first service, the pattern's thickness normal to its orbit falls from
+150.6 km at hour 6 to 1.4 km at hour 14.25. Over the same span the number of
+tile-centre pairs closer than 10 km rises from zero to 3,707 at hour 14.17
+before falling again. Replayed from the hour-12 state, the thickness reaches
+1.7 km at hour 14.27. The coupled runs' first 100 m clearance events, at
+13.795–13.800 h, come as the pattern closes, about half an hour before its
+flattest point.
+
+Relative to the centroid at hour 12, the tiles' relative eccentricity and
+inclination vectors have median magnitudes of 45 and 47 km. The median phase
+gap between them is 91°, the perpendicular arrangement in which radial and
+cross-track separations vanish together. In the linear model, 1,170 of the
+64,980 tile pairs have radial-normal minima below 100 m, and 4,947 below 1 km.
+Energy matching leaves those counts about the same (1,231 and 5,866), so the
+fold calls for a redesign of the e/i geometry itself.
 
 In linear relative motion the in-plane and cross-track motions are independent.
 Tiles that share depth and along-track position follow the same in-plane path
@@ -142,11 +152,16 @@ failed tile awaiting cover.
 
 ## Plan
 
-**Stage 1, tools and diagnosis.** Relative-orbit tools go in
-`protection/dynamics`, with tests: osculating and quasi-nonsingular relative
-orbital elements, linear relative motion, the closed-form minimum separation,
-and energy-matching burns. A study runner reproduces the findings above and
-publishes them as a data product.
+**Stage 1, tools and diagnosis (complete, 6 October).**
+[protection/dynamics/relative_orbit.py](../../../protection/dynamics/relative_orbit.py)
+supplies osculating semi-major axes, quasi-nonsingular relative orbital
+elements, the linear relative motion, the closed-form minimum radial-normal
+separation and energy-matching burns. Its tests check the linear solution
+against Hill's equations and two-body propagation, and the separation against
+brute force and the published form. [relative_diagnosis.py](relative_diagnosis.py)
+reproduces the findings above as a data product, and
+[test_relative_diagnosis.py](test_relative_diagnosis.py) binds that product to
+its code, inputs and constants.
 
 **Stage 2, the local redesign.** Redesign the 361-tile patch in relative-orbit
 space with the same tiles: 10 km physical squares with 9.89 km clear apertures.
