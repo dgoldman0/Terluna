@@ -216,9 +216,9 @@ centroid's frame. Incidence and force direction use each tile's own normal.
 `ContinuousRings` stands for complete rings with one propagated representative
 per ring. Its neighbours on the ring and on the adjacent rings enter as copies
 shifted by whole tile lags with an exact universal-variable two-body solution
-(`kepler_shift`). Every tile is then shadowed as on a ring without ends. Over a
-few orbits the tide moves real neighbours along their shared path by tens of
-metres per lag relative to those copies.
+(`kepler_shift`). Every tile is then shadowed as on a ring without ends. In
+120 hours the tide moves real neighbours along their shared path by up to about
+150 m per lag relative to those copies.
 
 [ring_keeping.py](ring_keeping.py) holds rings to designed relative elements.
 `geometric_elements` measures them exactly from vis-viva, eccentricity vectors
@@ -226,3 +226,8 @@ and unit normals. `plan` gives the near-circular impulsive two-burn and normal
 correction. `ContinuousKeeping` applies low-thrust feedback that holds each
 ring to its neighbour toward a free reference ring. The neighbour is compared at
 the same phase after `gravity_shift` carries it along its orbit under the tide.
+Its eccentricity and plane targets lie on axes fixed by an origin direction.
+Under Earth's tide a whole stack of rings regresses together, so on those axes
+every pair's plane difference turns with the stack, and holding it there works
+against the common regression (see the solar shield array study's relative-orbit
+plan).

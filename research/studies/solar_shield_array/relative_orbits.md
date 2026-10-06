@@ -147,6 +147,117 @@ Adjacent-ring radius steps vary by about ±150 m over that time as the rings
 slide along their slightly eccentric common orbit. Sail force and mutual
 shadows are absent from this replay. The coupled model adds both.
 
+### Coupled ring bundles, free and kept
+
+[ring_bundle_run.py](ring_bundle_run.py) and [ring_keeping_run.py](ring_keeping_run.py)
+fly 19 nested rings from the seed epoch. Both use DE440s point-mass gravity,
+finite-square quadrature, and the filter's sail force on each tile's own
+radial-facing normal. They also include finite-Sun mutual shadows and Moon and
+Earth eclipses ([ring_bundle.py](../../../protection/dynamics/ring_bundle.py)).
+Their products are [results/ring_bundle.json](results/ring_bundle.json),
+[results/ring_keeping.json](results/ring_keeping.json) and
+[results/ring_keeping_steps.json](results/ring_keeping_steps.json). Elements of
+adjacent rings are compared at the same phase: each ring's inner neighbour is
+carried along its orbit under the tide to the ring's own position.
+
+**Finite segments.** A segment of 19 rings by 31 tiles, with 0.6 km radius
+steps, has end tiles with no neighbour on one side. The top ring's end tile
+comes within 150 m of its neighbour at hour 2.2, and tiles six or more places
+from the ends, on the top two rings, at hour 5.5. A finite segment therefore
+cannot stand for a ring. The remaining runs follow one representative per ring,
+with its own ring and the adjacent rings present as copies shifted by whole
+tile lags. Every tile is then shadowed as on a complete ring. At the start the
+interior rings lose 24.4% of their light to shadow, and the bundle's top ring,
+with no ring above it, 13.1%.
+
+**Along a ring.** Under gravity alone, seven consecutive tiles keep their
+shingle offset between 215 and 245 m for 120 hours. The tide moves neighbours
+along their shared path, so their spacing breathes between 8.34 and 8.65 km.
+By hour 120 an adjacent tile stands 147 m, and a tile three places along
+444 m, from an exact time-shifted copy of the middle tile. The continuous rings
+place their copies that way, so they leave this breathing out.
+
+**What the tide does to the stack.** The continuous representatives also fly
+a month, 16 orbits, under gravity alone:
+
+- **Common regression.** All ring planes regress together about the pole of
+  Earth's orbit, by 20.1° in the month, at an inclination of 5.2° to that
+  orbit. Measured on fixed axes, every adjacent pair's plane difference turns
+  with them, by 3.3 km in the month, the same for every pair within 11 m.
+- **Breathing.** Measured from each pair's node on Earth's orbital plane, the
+  stack only breathes. The relative tilts set the 9.29 km height step between
+  rings. They grow by up to 5.6% and shrink back each half month, and end the
+  month within 117 m of where they started.
+- **In the orbit plane.** Within each orbit the matched semi-major-axis steps
+  swing by about 60 m, the eccentricity separations by 85 m and the plane
+  separations by 170 m (interior medians), and these swings average out. Over
+  the month the eccentricity vectors of adjacent rings separate by up to about
+  150 m, and their semi-major-axis steps vary by ±75 m.
+
+Every pair moves alike, so differences across the bundle grow in proportion to
+the rings' separation, while each adjacent pair keeps its geometry within
+these bounds.
+
+**What the light adds.** With sail force and mutual shadows, free continuous
+rings with 0.6 km steps lose clearance in the first orbit. The top edge pair
+comes within 150 m at hour 5.4 and the next pair inward at hour 12.3, and by
+hour 229 rings near the bottom edge touch as well. In the first orbit the four
+outermost pairs on each side separate in eccentricity by 0.2–1.8 km. The pairs
+between them drift at the tide's rate, about 20 m. The disturbance then
+spreads inward: over six orbits the median interior pair separates by 1.5 km
+per orbit. At the ends of the service arc the Sun stands 25° off radial. Tiles
+on adjacent rings more than about 1.3 km apart along-track then swap their
+order along the Sun line as the rings slide. Each ring's lit fraction at
+mid-service changes by 6–8% from orbit to orbit.
+
+**Kept.** Continuous low-thrust keeping holds each ring's semi-major-axis step,
+eccentricity vector and plane relative to its neighbour toward the middle ring,
+which flies free. The time constant is 30 minutes under the 0.001 m/s² actuator
+limit. The elements have to be measured with care:
+
+- **Linearised elements** about the eccentric reference orbit turn the outer
+  rings' 84 km cross-track offsets into about 1.7 km of apparent eccentricity.
+- **Osculating elements compared at different phases** carry the tide's
+  short-period swing.
+- **What the keeping uses**: exact geometric elements, with each ring compared
+  against its neighbour carried along its orbit to the same phase under the
+  tide. Its eccentricity and plane targets are held on axes fixed by the
+  starting Sun direction.
+
+In an exploratory kept run with the layout screen's 0.6 km radius step, not
+kept as a product, the keeping errors of 150–250 m exceeded the inter-ring
+margin of about 190 m, so the step was widened. With 1.0 km steps, over
+twelve orbits (23 days), the results are these:
+
+- **Clearance.** Interior rings never come within 150 m of each other. Their
+  closest approach is 213 m, the shingle along a ring, and their matched-phase
+  radius steps stay between 898 and 1,112 m. Every sample below 150 m involves
+  an edge ring. The top edge pair is first, at hour 194.7, and the edge steps
+  shrink to 206 m at the bottom and 62 m at the top by orbits 7–9.
+- **Overlap.** Inside the service arc, tiles on a ring overlap by at least
+  1,118 m and adjacent rings by at least 574 m.
+- **Cost.** Keeping costs the interior rings 0.100 m/s per ring per orbit on
+  average and the edge rings 0.25 m/s. The interior cost grows in proportion to
+  each ring's distance from the free middle ring: 0.009 m/s per orbit per ring
+  step in the first orbit, 0.043 by the twelfth.
+- **Where the cost comes from.** The same keeping under gravity alone costs
+  the interior rings the same, ring by ring within 3%: 0.0705 against
+  0.0709 m/s per ring per orbit over three orbits. The light adds cost only at
+  the edges, 0.21–0.22 against 0.14 m/s per orbit. Split into radial,
+  along-track and normal parts, the normal part is the largest, 60% of the
+  summed parts. The interior cost therefore comes mostly from the keeping law
+  itself. Holding each pair's plane difference on fixed axes works against the
+  whole stack's common regression, and the 30-minute time constant also
+  follows the short-period swings that average out. The formation needs
+  neither, and both grow with the bundle's height, so the 0.10 m/s average
+  cannot be carried to a full disk.
+- **Edge rings.** The two edge rings have no neighbour on one side, and with it
+  a persistent difference in shadow and sail force. A proportional law holds a
+  persistent difference only with a persistent error. The edges need integral
+  action, feedforward of the modelled shadow difference, or edge tiles whose
+  sail force per unit mass matches the interior's (slightly less reflective or
+  heavier). A full disk of rings has only two such edges.
+
 ### Hardware headroom and attitude energy
 
 In the expanded run's executed prefix the installed actuators carry 6.15 times
@@ -323,11 +434,28 @@ shadows. It checks clearance and strip overlap through service and recurrence
 over consecutive orbits. The radius steps are ordered as a staircase, so that
 every ring has one shadowed edge and the shadow's push on the rings is alike.
 [ring_bundle_run.py](ring_bundle_run.py) flies a finite segment, continuous rings
-and a lone ring free. [ring_keeping_run.py](ring_keeping_run.py) (stage 2c)
-flies continuous rings under low-thrust keeping. Their results are recorded with
-the stage 2b and 2c findings.
+and a lone ring free, and the continuous rings for a month under gravity alone.
+[ring_keeping_run.py](ring_keeping_run.py) (stage 2c) flies continuous rings
+under low-thrust keeping, with and without light. Their results are recorded
+with the stage 2b and 2c findings.
 Runs longer than the six days of compact samples use the pinned DE440s kernel,
 which needs jplephem; the author approved installing both.
+
+**Gate status, 6 October.** The interior of a kept ring bundle passes on
+clearance and service overlap for 23 days. Its measured keeping cost,
+0.100 m/s per ring per orbit, is mostly the keeping law's fixed frame and its
+following of short-period swings. That cost grows with the bundle's height, so
+it does not yet judge a full disk. Four items keep the gate open:
+
+- a keeping law that holds the relative tilts in the regressing node frame and
+  leaves the short-period swings, with height steps that absorb the
+  half-monthly breathing or keeping that holds it;
+- the bundle's edge rings;
+- the attitude energy of the steady radial-facing rotation;
+- stage 3's common motion of the strip pattern, which now includes the stack's
+  20° monthly regression.
+
+The zoned held screen, at 32.8–66.5 TW, is the fallback the gate names.
 
 **Decision gate.** Suppose the cycle closes every coverage, clearance and
 recurrence gate within about 1.3 m/s per tile per cycle, with attitude energy
@@ -360,6 +488,11 @@ above.
 
 | Choice | Recommendation |
 |---|---|
+| Keeping actuator | Reflectivity trim, as IKAROS flew, pushes along each tile's normal, close to radial, so it reaches only the eccentricity vector. The semi-major-axis step and the relative tilts need along-track and normal force, from small attitude offsets that tilt the sail force or from electric thrust |
+| Keeping frame | Hold the relative tilts in the frame of the node on Earth's orbital plane and act on orbit-averaged elements; leave the stack's common regression to stage 3's common steering |
+| Height step between rings | Leave room in the row overlap for the stack's half-monthly breathing, up to 5.6% of the step, or hold the breathing by keeping; the choice trades tiles against keeping |
+| Radius step between rings | 1.0 km, which holds clearance under keeping; smaller steps need tighter keeping, and larger ones spread a full disk's rings over more radius |
+| The bundle's edge rings | First, edge tiles whose sail force per unit mass matches the interior's; integral keeping or feedforward of the modelled shadow difference as the fallback |
 | Ring radius, about 15,000 km or near the Sun-synchronous radius | Screen 15,000–21,000 km with the full ephemeris in stage 3, leaning toward about 19,000 km |
 | Attitude scheme | Radial-facing steady rotation for annulus tiles if their coverage holds; Sun-facing service for climate-window tiles, whose transmitted spectrum changes with incidence |
 | Architecture: orbiting fleet or held screen with a zoned aperture | Set by the stage 2 gate |

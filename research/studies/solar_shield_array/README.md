@@ -14,8 +14,23 @@ Its decision gate chooses between the orbiting fleet and a held screen with a
 zoned aperture. The [layout screen](relative_orbits.md#layout-screen-finite-patches-meet-ring-bundles-stay-clear)
 finds that every finite 2D patch meets a neighbour somewhere in its orbit. A
 bundle of nested ring segments, each ring one orbit of shingled tiles, stays
-clear for two orbits of ephemeris gravity (minimum 215 m). Choosing stage 2's
-local unit is the author's call.
+clear for two orbits of ephemeris gravity (minimum 215 m). The author chose
+the ring bundle as stage 2's local unit.
+
+Under sail force and mutual shadows, free rings come into contact within the
+first orbit, starting at the bundle's edges. Continuous low-thrust keeping,
+with rings 1.0 km apart in radius, keeps the interior rings clear for 23 days.
+Its interior cost, 0.10 m/s per ring per orbit, is the same under gravity alone.
+Most of it is the keeping law's fixed frame working against the stack's common
+regression under Earth's tide, 20° a month, and it grows with the bundle's
+height. A rerun that holds the rings in the regressing frame comes next, and
+the bundle's two edge rings still need their own treatment.
+
+A year-long screen finds that the sail force on radial-facing tiles moves
+every ring's sunward crossing by thousands of kilometres. The common orbit
+therefore needs a frozen family, with the steady drift smallest near
+20,000 km. A held screen with a zoned aperture needs 32.8–66.5 TW, against
+the published 238 TW.
 
 The [expanded coupled-cycle investigation](expanded_cycle.md) adds
 in-plane and arrival-acquisition controls and measures nine full-cycle response
