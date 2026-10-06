@@ -124,3 +124,19 @@ review. The Nobili hill-framed night image remains a separate selected scene.
 Credits: NASA LRO/LOLA, GRAIL and JPL provide the admitted terrain/datum and dated
 Earth geometry; NASA/GSFC Blue Marble supplies historical Earth texture. Source
 URLs, rights notes and hashes remain in the study and Earth-input manifests.
+
+## Smythii depth-cue study
+
+The [separate depth-cue illustration](smythii-twilight-depth.png) revises the
+Smythii photograph with more legible overlapping veils and gradual recession.
+The improvement is modest; the image remains a single view, with unresolved
+cloud morphology supplied by image generation. It does not establish a 3-D
+cloud reconstruction or supersede the calculated reference. The original
+selected illustration is unchanged.
+
+The built-in imagegen tool produced one native 1448 × 1086 edit. That first
+pass is saved without further image processing. The [complete prompt](smythii-twilight-depth-prompt.txt),
+[review and provenance](smythii-twilight-depth-review.json), and
+[image-space comparisons](smythii-twilight-depth-image-checks.json) record the
+inputs, measured brightness differences and remaining limits. No text or labels
+appear inside the image.

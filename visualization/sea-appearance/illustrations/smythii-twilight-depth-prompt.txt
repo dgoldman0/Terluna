@@ -1,0 +1,17 @@
+Use case: compositing.
+Asset type: a high fidelity, unlabelled natural seascape illustration for the Terluna sea study.
+
+Input 1 is the EDIT TARGET: the existing eastern Smythii twilight photograph.
+Input 2 is the AUTHORITATIVE calculated composition and broad radiance reference.
+Input 3 is a SUPPORTING upper-cloud OPACITY guide: white means opaque material, black means transparent air. It is not visible brightness and is not a depth map.
+
+Revise input 1 so the vast atmosphere and the space between its cloud layers are easier to perceive in a single photograph. The current image reads as uniformly detailed texture pasted across the sky. Convey natural spatial recession using restrained overlap, translucency and atmospheric contrast gradients within the same broad cloud footprint. This is a physically restrained depth-cue study, not a new weather scene.
+
+LOCK the 4:3 composition, 90-degree horizontal field, westward gaze, 22-degree upward camera pitch and eye height two metres over the sea. Keep the straight sea horizon at 76.98% of image height, and the large-scale dark central cloud bank with brighter warmer flanks. The Sun is 3.34 degrees below the horizon, Earth 7.67 degrees below; neither appears. Keep the broad exposure and muted warm-grey/olive, amber and peach palette close to input 2.
+
+CLOUD DEPTH: within the existing cloud-bearing region, replace the uniform embossed cotton pattern with a few naturally overlapping thin fibrous ice layers, irregular translucent edges and softly shaded folds. Let partially transparent veils reveal subtly more distant cloud structure behind them. Vary texture scale coherently with perspective; let distant low-angle details progressively merge into the already calculated atmospheric haze. Preserve diffuse fill light and soft low-contrast shading. Give the clouds an extensive layered structure reaching beyond the frame, without turning the whole sky into a nearby low ceiling.
+The selected cloud top is near 60 km altitude, about 176 km along the sightline; the high layer itself is only about 2 km thick. These are distant ice layers, not 60-km-tall storm towers. Their exact fine morphology is illustrative. Do not invent obvious nearby low cloud shelves, separated cartoon slabs, clear hollow tunnels, giant cumulus, dramatic shafts of light or clouds with black undersides.
+
+SEA DEPTH: retain the approximately 1.15-m significant height and 33-m peak wavelength represented by the calculated water. Give the closest broad rounded wave slopes a convincing continuous curved form with fine capillary ripples. Their texture spacing and visible occlusion should recede smoothly into fine distant surface detail. The foreground is more legible than the horizon because of distance, not because of an artificial shallow-depth-of-field blur. Reflect the dark central sky and warmer flanks on appropriate wave facets. Keep the diffuse twilight illumination; no fabricated solar glitter column, breaking surf, enlarged threatening foreground waves or added foam.
+
+Natural photographic realism and high fidelity throughout. Preserve the physical scale and sky/water proportions. Do not merely increase saturation, sharpening or dramatic contrast. No visible Earth or Sun, stars, mountains, beach, boats, structures, people, vegetation, extra light sources or invented landmarks. No text, labels, symbols, border, watermark, split panels or stereoscopic duplicate. One clean full-frame image, preferably native 2560 by 1920 or the highest supported native 4:3 resolution.
