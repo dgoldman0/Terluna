@@ -72,7 +72,23 @@ def condition(xyz, camera, out, bins, *, dynamic_range=1000, fixation=None):
                 output_sha256=digest(out.with_suffix('.png')))
 
 
-def texture_earth(base, spec, product, h, assets, sky_map, sky_el, az_step, earth_source, geometry, *, ss=8, sampler=None):
+def normalize_positive_xyz(texture_rgb,solid_angle_cosine,target_xyz):
+    """Normalize nonnegative spatial XYZ shapes without clipping the beam colour.
+
+    Relative spatial colour is a declared display approximation. Unlike RGB
+    scaling this remains physically nonnegative for an out-of-gamut spectrum.
+    """
+    from research.studies.sea_appearance.scenes import XYZ_TO_SRGB
+    texture=np.asarray(texture_rgb,float)@np.linalg.inv(XYZ_TO_SRGB).T
+    target=np.asarray(target_xyz,float)
+    integral=np.sum(texture*np.asarray(solid_angle_cosine)[:,None],axis=0)
+    if (not np.isfinite(texture).all() or np.any(texture<0) or np.any(integral<=0)
+            or not np.isfinite(target).all() or np.any(target<0)):
+        raise ValueError('Positive spatial XYZ and finite nonnegative target required')
+    return texture*(target/integral)
+
+
+def texture_earth(base, spec, product, h, assets, sky_map, sky_el, az_step, earth_source, geometry, *, ss=8, sampler=None, normalize_xyz=False):
     """Project a historical Earth in physical XYZ units into a supplied camera."""
     from nubium_guides import Camera
     from image_guides import linear
@@ -128,10 +144,16 @@ def texture_earth(base, spec, product, h, assets, sky_map, sky_el, az_step, eart
     # This constrains the integrated colour and illuminance but does not validate
     # spatially resolved spectra, cloud BRDF, or historical cloud forecasts.
     target_xyz=earth_source[7:10]*earth_source[10]*geometry['earth_lit_fraction']
-    target_rgb=target_xyz@scenes.XYZ_TO_SRGB.T
-    integral=np.sum(texture*(omega*ct)[:,None],axis=0)
-    texture*=target_rgb/integral
-    direct_xyz=texture@np.linalg.inv(scenes.XYZ_TO_SRGB).T
+    if normalize_xyz:
+        # Low-elevation Earth can lie outside the sRGB gamut. Normalizing a
+        # negative RGB primary would create negative physical XYZ in some
+        # textured pixels. Positive XYZ shapes retain the same integrated beam.
+        direct_xyz=normalize_positive_xyz(texture,omega*ct,target_xyz)
+    else:
+        target_rgb=target_xyz@scenes.XYZ_TO_SRGB.T
+        integral=np.sum(texture*(omega*ct)[:,None],axis=0)
+        texture*=target_rgb/integral
+        direct_xyz=texture@np.linalg.inv(scenes.XYZ_TO_SRGB).T
     foreground=np.stack([kernels.sky_xyz(sky_map,sky_el,az_step,d) for d in directions])
     patch=(direct_xyz+foreground).reshape(shape+(3,)).reshape(y1-y0,ss,x1-x0,ss,3).mean(axis=(1,3))
     base[y0:y1,x0:x1]=patch

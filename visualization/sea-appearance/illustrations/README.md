@@ -56,3 +56,37 @@ These are illustrations guided by the study, with explicit remaining differences
 recorded in their reviews. They are not measured landscapes or validated spectral
 renderings. Visible land detail is illustrative; the omission of vegetation is
 the optical study's placeholder, not a mature ecosystem design.
+
+## Nobili lake: thin-cloud night
+
+The Nobili view looks west from 0 N, 75.6278 E in the selected flooded atlas.
+Earth's geometry, the native terrain silhouette and the night phase are
+constrained by the [scene product](../../../research/studies/sea_appearance/results/nobili-night.json).
+Cloud weather and lake wave age remain conditional, with their evidence limits
+recorded beside the renderings. The generated image is a photographic
+illustration; the calculated reference is retained separately.
+
+- `nobili-night-first-generated.png`: first built-in imagegen pass, preserved
+  immediately as requested; native output 1448 by 1086.
+- `nobili-night-first-prompt.txt`: its complete prompt.
+- `nobili-night.png`: selected thin-cloud illustration after three built-in passes; native 1448 by 1086, without artificial upscaling.
+- `nobili-night-prompt.txt`: the selected pass's complete prompt.
+- `nobili-night-reference.png`: 2560 by 1920 calculated cloud-conditioned guide.
+- `nobili-night-clear-reference.png`: calculated clear-sky control.
+- `nobili-earth-reference.png`: the separately calculated Earth detail.
+- `nobili-night-display.json` and `nobili-night-clear-display.json`: radiance/display records.
+- `nobili-night-image-checks.json`: reproducible image-space geometry and texture screens.
+- `nobili-night-review.json`: quantitative image checks, visual review,
+  source hashes, generation history and remaining limits.
+
+NASA LRO/LOLA and GRAIL supply terrain; NASA/JPL supplies orientation;
+NASA/GSFC Blue Marble supplies historical Earth texture. Credits and modelling
+notes stay outside the images.
+
+The generated image preserves the broad geometry, while changing fine wave and
+Earth texture. Its lower-limb radius fit is 1.4% above nominal, with a small
+placement shift. These checks do not validate exact naked-eye appearance. The
+cloud field produces a diffuse glow; distinct high clouds require a different
+weather sample. Run `python visualization/sea-appearance/nobili_review.py --out
+/tmp/nobili-image-checks.json` from the repository root to repeat the selected
+image comparison.

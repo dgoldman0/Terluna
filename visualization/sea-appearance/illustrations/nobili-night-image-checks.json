@@ -1,0 +1,72 @@
+{
+  "schema": "terluna.visualization.nobili-image-checks/1",
+  "reference": {
+    "frame": [
+      2560,
+      1920
+    ],
+    "sha256": "d6e517c90654f1442673e1684eecedef17ff5932304e029d39922bd979fe8b67",
+    "fitted_lower_limb": {
+      "centre_shift_px": [
+        -0.3967974545534739,
+        -0.9586895681533624
+      ],
+      "radius_scale": 1.005457409851783,
+      "edge_rms_radial_fraction": 0.010014666208016547
+    },
+    "fixed_centre_radial_screen_p10_median_p90": [
+      0.9744444444444444,
+      0.9924999999999999,
+      1.0069444444444444
+    ],
+    "rim_minmax": [
+      0.2890625,
+      0.34479166666666666
+    ],
+    "median_linear_display_Y": {
+      "sky": 0.014649574844121063,
+      "rim": 0.002970718175195775,
+      "water": 0.005233532148360239
+    }
+  },
+  "images": {
+    "nobili-night.png": {
+      "frame": [
+        1448,
+        1086
+      ],
+      "sha256": "fe5bab69b4c2e65fde084e2bf60c74ac2f10cea0d5f5f9efaaf46efa4bfe1850",
+      "fitted_lower_limb": {
+        "centre_shift_px": [
+          -1.0230750236867272,
+          -3.3284432284886707
+        ],
+        "radius_scale": 1.0139211592621213,
+        "edge_rms_radial_fraction": 0.011780268499915897
+      },
+      "fixed_centre_radial_screen_p10_median_p90": [
+        0.8913888888888889,
+        0.9166666666666666,
+        0.9924999999999999
+      ],
+      "rim_minmax": [
+        0.287292817679558,
+        0.3434622467771639
+      ],
+      "median_linear_display_Y": {
+        "sky": 0.014310598537904505,
+        "rim": 0.0015395421295453164,
+        "water": 0.0040471275219212365
+      },
+      "skyline_rms_fraction_of_height": 0.002346077971821561,
+      "registered_earth_interior_rank_correlation": 0.8821468835221971
+    }
+  },
+  "method": "Lower illuminated limb: gradient samples with joint robust centre/radius fit. Skyline: strongest vertical edge in its known band. Earth texture: rank correlation in the registered lower illuminated interior.",
+  "limits": [
+    "Image-space comparison only; no recovered radiometry, wave-height measurement, human-vision validation or proof of accurate geography.",
+    "A fixed-centre radial screen confounds disk size with placement; the fitted radius is the size estimate.",
+    "The partial-limb fit is approximate and exposure-dependent; it is not an astrometric measurement."
+  ],
+  "producer_sha256": "31b9031e04e05d54be991704b7b97dc50144d329b3a7a69b2e72180ea7948d47"
+}

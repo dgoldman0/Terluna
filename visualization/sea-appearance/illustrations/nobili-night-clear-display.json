@@ -1,0 +1,251 @@
+{
+  "schema": "terluna.visualization.nobili-view/1",
+  "scene_sha256": "7422c7fcdd3a4ab095d9020c5061670226fb8e24ba591c9548a88f86ed318ac9",
+  "camera": {
+    "frame": [
+      2560,
+      1920
+    ],
+    "horizontal_fov_deg": 50.0,
+    "view_azimuth_deg": 270.0,
+    "pitch_deg": 3.0,
+    "eye_height_m": 2.0,
+    "lon_lat_deg": [
+      75.6278,
+      0.0
+    ],
+    "note": "A water-level offshore viewpoint; no boat is visible. No solid standing platform is claimed."
+  },
+  "earth_projection": {
+    "centre": [
+      1282.9139467571133,
+      391.1777598060489
+    ],
+    "target_xyz": [
+      0.3366789247242434,
+      0.28747888393828297,
+      0.031143900719366468
+    ],
+    "integrated_xyz": [
+      0.3366789247242442,
+      0.2874788839382826,
+      0.031143900719366895
+    ],
+    "diameter_deg": 1.9800941666666667,
+    "disk_dimensions_px": [
+      96.8907078365678,
+      99.30294545513948
+    ]
+  },
+  "display_curve": {
+    "white_world_cd_m2": 3005.4008113114674,
+    "knee_world_cd_m2": 0.005,
+    "power": 2.70532711360229,
+    "sky_world_cd_m2": 0.1452874094247818,
+    "sky_display_fraction": 0.025,
+    "equation": "[log(1+Y/knee)/log(1+white/knee)]^power",
+    "scope": "Same curve at every pixel; monotone display approximation with retained detail, not calibrated colour appearance."
+  },
+  "cloud": null,
+  "eye_optics": "CIE99 age 24, direct Earth only; halo taper 4\u20135 degrees",
+  "fft_negative_energy_fraction_zeroed": 1.1978796384430749e-08,
+  "fft_negative_energy_tolerance": 1e-07,
+  "earth_texture": "Historical NASA global Blue Marble surface and cloud composite with JPL geography and Lambert illumination, normalized to the calculated Earth beam. Spatial spectra and future weather are unvalidated.",
+  "caveats": [
+    "Clear molecular atmosphere; terrain reflectance and equilibrium lake wave age are scenario inputs."
+  ],
+  "render_record": {
+    "coast": "Nobili",
+    "moment": "night",
+    "hour": 0.0,
+    "date_tt": 2463769.879982721,
+    "camera_lon_lat": [
+      75.6278,
+      0.0
+    ],
+    "camera_note": "A water-level offshore viewpoint; no boat is visible. No solid standing platform is claimed.",
+    "eye_height_m": 2.0,
+    "view_azimuth_deg": 270.0,
+    "view_pitch_deg": 3.0,
+    "horizontal_fov_deg": 50.0,
+    "width": 2560,
+    "height": 1920,
+    "sun": {
+      "elevation_deg": -86.337,
+      "azimuth_deg": 113.73
+    },
+    "earth": {
+      "elevation_deg": 14.707,
+      "azimuth_deg": 270.06,
+      "phase_angle_deg": 71.79,
+      "lit_fraction": 0.656
+    },
+    "sea": {
+      "spectrum": "Conditional full-range ECKV equilibrium spectrum at saved CM1 wind/stress; corrected equation 41.",
+      "inverse_wave_age": 0.84,
+      "depth_m": 239.6528777517658,
+      "wind_10m_m_s": 1.0737043619155884,
+      "friction_velocity_m_s": 0.07382676750421524,
+      "wind_toward_deg": 180.0,
+      "significant_height_m": 0.17731298506259918,
+      "expected_significant_height_m": 0.18167687008075104,
+      "mean_square_slope": 0.02415248230391103,
+      "seed": 20330621,
+      "tiles": [
+        {
+          "size_m": 256.0,
+          "cells": 1024,
+          "height_variance_expected": 0.0019978124374781456,
+          "slope_covariance_expected": [
+            [
+              0.005446209495761214,
+              -4.0240434285295924e-19
+            ],
+            [
+              -4.0240434285295924e-19,
+              0.002283490297075391
+            ]
+          ],
+          "slope_covariance_drawn": [
+            [
+              0.005050856004159493,
+              7.624933110951732e-06
+            ],
+            [
+              7.624933110951732e-06,
+              0.002141262015080602
+            ]
+          ]
+        },
+        {
+          "size_m": 17.3,
+          "cells": 512,
+          "height_variance_expected": 6.415881563490353e-05,
+          "slope_covariance_expected": [
+            [
+              0.006113085631852063,
+              -2.286724259790594e-19
+            ],
+            [
+              -2.286724259790594e-19,
+              0.004436186159919326
+            ]
+          ],
+          "slope_covariance_drawn": [
+            [
+              0.006086831898358196,
+              -6.83970517276148e-05
+            ],
+            [
+              -6.83970517276148e-05,
+              0.004424568600344328
+            ]
+          ]
+        },
+        {
+          "size_m": 1.43,
+          "cells": 512,
+          "height_variance_expected": 9.340670330816336e-07,
+          "slope_covariance_expected": [
+            [
+              0.0036084275084904034,
+              -8.412054598388643e-20
+            ],
+            [
+              -8.412054598388643e-20,
+              0.0028281489814837284
+            ]
+          ],
+          "slope_covariance_drawn": [
+            [
+              0.003598900898764057,
+              -6.340957436207366e-05
+            ],
+            [
+              -6.340957436207366e-05,
+              0.0028267142337317546
+            ]
+          ]
+        }
+      ]
+    },
+    "land": {
+      "source": "NASA LOLA 256 pixels/degree, sampled onto a local metre grid above the degree-200 GRAIL geoid and the selected atlas water level.",
+      "terrain_sha256": "653b67a8ce679bea1a201cb61b7041a8df7aaef6202ae7b77330a1851d8efa7f",
+      "tide_m": 0.0,
+      "land_soil": "Apollo 16 highland soil, Descartes",
+      "land_albedo_by_band": [
+        0.1343,
+        0.1497,
+        0.1634,
+        0.1768,
+        0.1887,
+        0.2004,
+        0.2109,
+        0.2231
+      ]
+    },
+    "water": "productive_coast",
+    "water_leaving_nadir_cd_m2": 0.00105,
+    "scenario_source_sha256": "7422c7fcdd3a4ab095d9020c5061670226fb8e24ba591c9548a88f86ed318ac9",
+    "sky": "Clear molecular reference; lunar cloud optics are separate.",
+    "identity": "e0fd1ba62219c6b842a278076c7dfe47fa3e35773875911b797a762a085530ef",
+    "spp": 4,
+    "seconds": 130.2,
+    "stars": {
+      "catalogue": "Yale Bright Star Catalogue, 5th Revised Ed. (Hoffleit & Warren 1991)",
+      "faintest_v": 6.5,
+      "drawn": 69,
+      "above_terrain_and_sea": 3750,
+      "brightest_v_and_lux": [
+        [
+          0.98,
+          1.5e-07
+        ],
+        [
+          2.65,
+          2.1e-08
+        ],
+        [
+          3.37,
+          1.5e-08
+        ],
+        [
+          4.38,
+          4e-09
+        ],
+        [
+          4.69,
+          6e-09
+        ]
+      ],
+      "note": "point images of 0.6-pixel Gaussian spots; no reflections in the water"
+    },
+    "renderer_sources": {
+      "kernels.py": "56d2fed7b3ee79091601e560a8188dcb500a1b47d7908a7941889a8a636f63df",
+      "scene.py": "0f528772eb2ae4254fe17673f93f3f84fc0c02a973dfca0e33de4985e70cd08c",
+      "render.py": "941cde839c92fa9752a55566b02c19b962f7605fea43197307aad4a72fcedefd",
+      "stars.py": "c7d010a9e657068157c9472abbe10192de495f5b9b0b714ef3706e9b5029f914"
+    },
+    "inputs": {
+      "research/studies/sea_appearance/results/regimes.json": "1b6b778e5a4d9f330373e91fa7c21c4e4cff421b69f0db9a43b92d920a8a983d",
+      "research/studies/sea_appearance/results/sea_slopes.npz": "aef6bcd9c97c668488fb23af58004b70bd4ec0974e9a190922be1a7a654bda2a",
+      "climate/waves/results/shore_month.json": "3146512489646be0c0868697d2eafbd9998e1c0c390f49207c0fbb4a024efc75",
+      "geography/products/tides_28pct_4ppd.npz": "56529233b8ce20685691174381ab5c32d35e9092819e61fc5cdb42293a536777",
+      "biosphere/living_water/waters.json": "bdf2a5dede623718921e367db11cd6eef95f8d67e944a6cbf277bddd2f962734",
+      "illumination/stars/bright_stars.json": "85b33855fa6e06db6eb3d2447460d4bc6349990cbd033f4848a69d4dc1765d7d",
+      "research/studies/sea_appearance/results/lighting_calendar.json": "b76f394595eb0c89487c4208eedc4e9a6d1eff3af72bf63bdb79883920b2f674",
+      "research/runs/optical_comfort/spherical/moon_1.2atm_standard.npz": "d6d7fef07d99fedf32d1a54f63e345ff245bf3ee8ec29a33d498fd621bf41273",
+      "research/studies/sea_appearance/results/nobili-night.json": "7422c7fcdd3a4ab095d9020c5061670226fb8e24ba591c9548a88f86ed318ac9",
+      "visualization/sea-appearance/nobili_reference.py": "26f1ef8892fafefcd501faca66701165daf389a2cdacd44c3d3c082c26636a47",
+      "research/studies/sea_appearance/nobili.py": "2f1a8479ac8b99f428184e9d403850b5e3efa2b79d5f8f39c70639be8b8135d7",
+      "illumination/water_surface/short_waves.py": "7c99fe8dafcb3db3486f208ebaa544488820cda96af36ec4dacd4c0ee3976746",
+      "illumination/water_surface/realization.py": "bb4bd7a5de73ae106a1602e389d8e4b8f7655e4a57603db37d3e4df09653c50b"
+    }
+  },
+  "producer_sha256": "53050eae0d3933d095b0f3228b8c71973c0e8b9f1f3cd085454e9adcce240a40",
+  "outputs": {
+    "nobili-night-view.png": "ebb066de760af65b3dbdf8900c1693b574028cf177f7372d249cc2d16a05907f",
+    "nobili-earth-view.png": "f80058e9978bd9c41667e94a9de15103d75f86bba995e43aab714a14bfeaba4b"
+  }
+}

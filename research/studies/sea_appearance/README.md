@@ -559,3 +559,52 @@ angular integration, PDS sample decoding and rejection of modified model files.
 The [revised display workflow](../../../visualization/sea-appearance/README.md#visibility-informed-nubium-reference)
 uses these constraints while keeping display colour, tone mapping and image
 generation distinct from the visibility finding.
+
+## Nobili lake at night
+
+The supplemental [Nobili scene](results/nobili-night.json) is a westward view from
+0 N, 75.6278 E, with the eye 2 m above the lake in the selected 28% water atlas.
+Native LOLA rows at 256 pixels/degree are joined across the equator, converted
+to the degree-200 GRAIL geoid and sampled at 100 m. The west rim reaches 10.7
+degrees at 9.3 km; the first land along that bearing is 2.35 km away. Sub-grid
+terrain detail, land reflectance and mature vegetation remain placeholders.
+
+NASA/JPL geometry for 21 June 2033, 09:07 TT puts Earth 14.707 degrees high,
+1.980 degrees across and 65.62% illuminated. The Sun is 86.34 degrees below
+the horizon. The molecular-atmosphere calculation gives 0.374 lux total on
+a horizontal surface. This is an astronomical example, not a weather forecast
+for that date. [nobili.py](nobili.py) and [its admission manifest](nobili_inputs.json)
+record the exact sources and the match to the cloud experiment's solar longitude.
+
+CM1 equatorial-ring snapshot 367, model day 45.75, column 381 supplies a
+conditional cloud and wind state. The ring has flat terrain and no resolved
+cross-ring dimension. A 20-km extrusion is a stated optical scenario. The
+[cloud calculation](nobili_clouds.py) carries the measured-phase-curve Earth
+irradiance through molecular air and all five condensate species. It uses a
+uniform finite Earth disk for scattered light. [Results](results/nobili-cloud-light.json):
+Earth-derived horizontal light is 0.320 lux, with 0.0097 lux standard error in
+the diffuse part; the direct disk's sampled cloud transmission is 0.459–0.482.
+Median per-direction Monte Carlo standard error is 7.1%; no paths truncated.
+Local cloud shadows on the rim and terrain-coupled weather are not solved.
+
+The recorded 10-m wind is 1.074 m/s and friction velocity 0.0738 m/s. Lake
+water uses a conditional equilibrium spectrum: about 0.182 m significant
+height and a 6.32-m peak wavelength at inverse wave age 0.84. A wave-age
+1.5 sensitivity gives 0.068 m and 1.98 m. These are assumptions about wave
+development, not a lake wave-history calculation. The new full-range spectrum
+uses the correction to Elfouhaily equation 41 documented by
+[Mobley's Light & Water supplement](https://misclab.umeoce.maine.edu/education/Light&Water/D:/PAPER/supp6.pdf):
+the short-wave term includes the low-wavenumber suppression and peak factor.
+The older short-wave-only calculations retain their existing baseline.
+
+Run the study with the admitted NASA row slices and CM1 run available:
+
+```sh
+python -m research.studies.sea_appearance.nobili --crm-case <CM1-ring-equator-directory>
+NUMBA_NUM_THREADS=1 python -m research.studies.sea_appearance.nobili_clouds --photons 1024
+```
+
+Raw large arrays stay in ignored `research/runs/sea_appearance/nobili/`. The
+[visualization](../../../visualization/sea-appearance/README.md#nobili-lake) consumes
+these results; its final photographic illustration is not a validated human-vision
+prediction.

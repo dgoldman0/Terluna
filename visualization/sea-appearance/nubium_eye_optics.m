@@ -16,7 +16,10 @@ for ch=1:3
   optical(:,:,ch)=fast_conv_fft(d.direct(:,:,ch),mtf,0);
 end
 negative_fraction=-sum(min(optical(:),0))/sum(optical(:));
-assert(negative_fraction<1e-8);
+tolerance=1e-8;
+if isfield(cfg,'negative_energy_tolerance'), tolerance=cfg.negative_energy_tolerance; end
+assert(tolerance>0 && tolerance<=1e-7);
+assert(negative_fraction<tolerance);
 % Bound and report tiny FFT undershoot before zeroing it.
 optical=max(optical,0);
 fprintf('FFT negative-energy fraction zeroed: %.12g\n',negative_fraction);

@@ -226,3 +226,46 @@ The source and display checks run with
 External data and software are optional at test collection and required only for
 the full study/display runs. The renderer still needs the existing solved sky,
 numba, SciPy and Pillow, with h5py added for EPIC.
+
+## Nobili lake
+
+[nobili_reference.py](nobili_reference.py) supplies the admitted
+[Nobili scene](../../research/studies/sea_appearance/results/nobili-night.json)
+to the existing spectral terrain/water tracer. Its 50-degree, 4:3 view preserves
+Earth above the measured western rim. The clear reference is 2560 by 1920 at
+four samples/pixel; its lake realization has 0.177 m significant height. The
+conditional cloud reference reflects the calculated angular cloud sky and
+attenuated Earth, so sharp glints receive the beam attenuation separately from
+diffuse light. Terrain diffuse band shapes, observer-based cloud attenuation
+and clear-reference aerial perspective remain approximations. It is not a
+fully coupled terrain/cloud transport solution.
+
+[nobili_view.py](nobili_view.py) projects the existing NASA Blue Marble maps
+with the new JPL Earth orientation. Historical cloud texture is illustrative.
+Low-elevation Earth lies outside sRGB: the new positive-XYZ normalization
+preserves its integrated physical beam without creating negative spatial
+radiance. The existing RGB path remains available for earlier scenes. A global
+monotone display curve and the CIE99 age-24 ocular kernel retain disk structure;
+neural colour adaptation and exact naked-eye appearance are not validated.
+The measured FFT negative-energy fraction is recorded and bounded below 1e-7;
+this numerical undershoot is zeroed before display. No image contains labels.
+
+```sh
+# An environment with numba, scipy and Pillow; limit worker threads.
+python visualization/sea-appearance/nobili_reference.py --out research/runs/sea_appearance/nobili/reference-full --width 2560 --spp-side 2
+python visualization/sea-appearance/nobili_reference.py --out research/runs/sea_appearance/nobili/cloud-reference-full --width 2560 --spp-side 2 --cloud research/runs/sea_appearance/nobili/cloud-light.npz
+python visualization/sea-appearance/nobili_view.py --reference research/runs/sea_appearance/nobili/reference-full --out research/runs/sea_appearance/nobili/clear-view
+# Run nubium_eye_optics.m with the emitted optics-config.json, then repeat with --finish.
+```
+
+The optical pass needs the previously admitted HDR-VDP 3.0.7 environment.
+For the cloud display pass, supply `--cloud` and use `--display-reference`
+pointing to the clear display JSON to keep the same exposure convention.
+Selected references, the first generated image, generation prompts and the
+review record are preserved in [illustrations](illustrations/README.md).
+
+Nobili uses the new `illumination/cloud_light/finite_source.py` source drivers
+and `illumination/water_surface/full_spectrum.py` equilibrium spectrum. The
+older solar-cloud driver and short-wave modules remain byte-for-byte intact
+for existing published products. The Nobili run records retain their original
+producer hashes from before this function-preserving packaging change.

@@ -1,0 +1,34 @@
+{
+  "schema": "terluna.research.nobili-cloud-light/1",
+  "input_scene_sha256": "7422c7fcdd3a4ab095d9020c5061670226fb8e24ba591c9548a88f86ed318ac9",
+  "cloud_section_sha256": "a5eba2e83f0be822dad52b0e87e55de30674ae8948e8630393ebb80b374e736d",
+  "photons_per_pixel": 1024,
+  "groups": 16,
+  "source_radius_deg": 0.9900470833333334,
+  "source": "Uniform finite Earth disk, normalized to observed phase-curve irradiance. Surface spatial texture is not used for cloud lighting.",
+  "cross_ring_width_m": 20000.0,
+  "earth_diffuse_horizontal_lux": 0.2851218993047225,
+  "earth_diffuse_standard_error_lux": 0.009691801788703724,
+  "earth_direct_horizontal_lux": 0.03462530515424582,
+  "earth_total_horizontal_lux": 0.3197472044589683,
+  "truncated_paths": 0,
+  "disk_cloud_transmission_centre": 0.4756131093661314,
+  "disk_cloud_transmission_minmax": [
+    0.45937332726125507,
+    0.48240871696564613
+  ],
+  "median_pixel_relative_standard_error": 0.07148213760889843,
+  "evidence": "Monte Carlo radiative transfer through one extruded experimental cloud field; no crater terrain, cross-ring dynamics, or cloud forecast.",
+  "limits": [
+    "Local cloud shadows on the crater rim are not solved.",
+    "Solar diffuse light is only 0.0012 lux in the clear reference and is not included in this Earth-only cloud calculation.",
+    "The uniform source disk approximates the gibbous Earth in scattering; the direct visual Earth retains its phase and geographic texture.",
+    "The 20-km cross-ring extent is an assumed geometry."
+  ],
+  "seconds": 1089.8692522119964,
+  "producer": {
+    "research/studies/sea_appearance/nobili_clouds.py": "a5f63875a5fda473138032cb44430f2c191df4a1a0846fc5fe55af96cab98c33",
+    "illumination/cloud_light/volume.py": "160f043693b04ed858dcaa2564d0f160b8181cf5cfef00aba151989297f70167",
+    "illumination/cloud_light/microphysics.py": "61a9600b4ab6ea1cdf69d6ce20db9b290815551a1709508e697508670fbee8ff"
+  }
+}
