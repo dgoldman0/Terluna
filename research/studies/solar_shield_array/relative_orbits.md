@@ -522,23 +522,33 @@ this order:
 
 1. Fix the start-up defect (done above).
 2. Set up the pass criteria and the ledger
-   ([integrated_ledger.py](integrated_ledger.py)).
+   ([integrated_ledger.py](integrated_ledger.py); done).
 3. Test whether the held screen's exhaust stays out of the escape region
-   ([exhaust_isolation.py](exhaust_isolation.py)).
-4. Check photon keeping for the ring fleet against the kept run's demand.
+   ([exhaust_isolation.py](exhaust_isolation.py); done, with and without the
+   magnets).
+4. Check photon keeping for the ring fleet against the kept run's demand
+   ([photon_control.py](photon_control.py); done: it holds on translation and
+   not on attitude), and find the frozen common orbit
+   ([frozen_rings.py](frozen_rings.py); done). The attitude scheme comes next.
 5. Compute the annulus film's UV transmission in the protection domain.
 6. Validate the bundle with independently propagated tiles, finite squares and
    receiver rays.
-7. Redo the keeping in the regressing frame, treat the edge rings and find the
-   frozen common orbit, as far as the ledger keeps the fleet in contention.
+7. Redo the keeping in the regressing frame and treat the edge rings, as far as
+   the ledger keeps the fleet in contention.
 
 **Stage 3, the global ring screen.** The year-long screen of single rings
-(above, 6 October) shows the common annual motion of the strip pattern. Next
-come the frozen family of the common orbit under tide and sail force, then
-bundles on it. Inclined rings near the Sun-synchronous radius are screened with
-the full DE440 ephemeris over a year. The screen
-covers nested rings that never cross, the service fraction and inventory, the
-recurring corrections, and handovers within the averaged UV budget.
+(above, 6 October) shows the common annual motion of the strip pattern. The
+frozen family of the common orbit is a Sun-tracking eccentricity, found on
+6 October ([integrated_comparison.md](integrated_comparison.md#what-holds-the-ring-fleet-the-frozen-orbit)):
+apolune points at the Sun, with e of 0.04–0.07 for 62.7 g/m² tiles, 0.08–0.15
+for 26 g/m² and about 0.4 for 5 g/m², and starting on it cuts the crossing
+radius's yearly swing two to three times. The planes still move the pattern
+2,400–3,400 km at 19,000–20,000 km. Next come the attitude scheme (photon
+control found that shingle shadows put a steady pitch torque on every
+radial-facing tile, beyond reflectivity trim), the planes' oversizing or
+steering, then bundles on the frozen orbit. The screen covers nested rings that
+never cross, the service fraction and inventory, the recurring corrections, and
+handovers within the averaged UV budget.
 
 **Stage 4, the zoned aperture and collection, in parallel.** The held
 screen's holding power with a zoned aperture is computed above (6 October).
@@ -562,10 +572,10 @@ above.
 | Height step between rings | Leave room in the row overlap for the stack's half-monthly breathing, up to 5.6% of the step, or hold the breathing by keeping; the choice trades tiles against keeping |
 | Radius step between rings | 1.0 km, which holds clearance under keeping; smaller steps need tighter keeping, and larger ones spread a full disk's rings over more radius |
 | The bundle's edge rings | First, edge tiles whose sail force per unit mass matches the interior's; integral keeping or feedforward of the modelled shadow difference as the fallback |
-| Ring radius, about 15,000 km or near the Sun-synchronous radius | Screen 15,000–21,000 km with the full ephemeris in stage 3, leaning toward about 19,000 km |
-| Attitude scheme | Radial-facing steady rotation for annulus tiles if their coverage holds; Sun-facing service for climate-window tiles, whose transmitted spectrum changes with incidence |
+| Ring radius, about 15,000 km or near the Sun-synchronous radius | About 19,000–20,000 km: on the frozen eccentricity the strip pattern there moves 2,400–3,400 km over a year, while tilted rings at 15,000 km lag the Sun by 23–28 km a day |
+| Attitude scheme | Compare tiles turned edge-on to the Sun outside service with radial-facing tiles carrying a moving mass. Radial-facing shingled tiles meet a steady shadow torque of about 28,000 N·m that reflectivity trim cannot hold (centre of pressure 1.25 km off centre), and their round-the-orbit push forces large eccentricities on light tiles; edge-on tiles outside service avoid both at the cost of two turns each orbit. Climate-window tiles keep Sun-facing service, whose transmitted spectrum changes with incidence |
 | Architecture: orbiting fleet or held screen with a zoned aperture | Set by the integrated comparison ([integrated_comparison.md](integrated_comparison.md)) |
-| Areal-mass targets | Estimates of 10–25 g/m² for the climate window and 7–13 g/m² for the annulus, to be fixed by the annulus film's UV transmission and a structural design |
+| Areal-mass targets | Estimates of 10–25 g/m² for the climate window and 7–13 g/m² for the annulus, to be fixed by the annulus film's UV transmission and a structural design. For an orbiting fleet with radial-facing tiles the sail force sets a floor: 5 g/m² tiles are forced to e ≈ 0.4, while tiles near 26 g/m² stay at 0.08–0.15 |
 | Collection | The dimmer as semitransparent PV, if the climate model accepts a band-selective 5% in place of a flat one |
 | Scheduled gaps | Spend part of the averaged UV-transmission budget on handovers once stage 3 sizes them |
 

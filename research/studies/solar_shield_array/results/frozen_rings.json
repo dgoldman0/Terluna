@@ -1,0 +1,2381 @@
+{
+ "schema": "terluna.research.frozen-rings/1",
+ "producer": {
+  "files": {
+   "research/studies/solar_shield_array/frozen_rings.py": "594f800c86e000a33db1f9e19eb9afc4ca83dda598e7db78d78e51ffe8769813",
+   "research/studies/solar_shield_array/ring_screen.py": "90c03e83e7b245acd11cc8f01ca6e5a9810984d0c88099395e3686e8c62de2de",
+   "protection/dynamics/ring_bundle.py": "05543a75524dd0d3c9cbbb6aa0dc0b02d8d5a0d156c943b6d794184f3ecfb98d",
+   "protection/dynamics/cycling.py": "704fbd03c9d4070ea05bdfeba57914ec225941f3560710da2472bd24ca870ed4",
+   "protection/dynamics/ephemeris.py": "9a162c3acf63a844284eb61b444a7d34f1447b5182d254d3e87616516f8748d9",
+   "protection/dynamics/optical.py": "06a13ae9f24834876edbc12b513deaa5e3735f02f8249eb57c8996d74ce00b56"
+  },
+  "constants": {
+   "AU": 149597870700.0,
+   "EARTH_GM": 398600441800000.0,
+   "EARTH_MOON_DISTANCE": 384400000.0,
+   "EARTH_OBLIQUITY_DEG": 23.4393,
+   "EARTH_RADIUS": 6371000.0,
+   "JULIAN_DAY": 86400.0,
+   "MOON_GM": 4902800118000.0,
+   "MOON_RADIUS": 1737400.0,
+   "SOLAR_CONSTANT": 1361.0,
+   "SOLAR_SYSTEM_GM": {
+    "mercury": 22031868551000.0,
+    "venus": 324858592000000.0,
+    "mars": 42828375816000.0,
+    "jupiter": 1.267127641e+17,
+    "saturn": 3.79405848418e+16,
+    "uranus": 5794556400000000.0,
+    "neptune": 6836527100580000.0,
+    "pluto": 975500000000.0
+   },
+   "SPEED_OF_LIGHT": 299792458.0,
+   "SUN_GM": 1.3271244004127942e+20,
+   "SUN_RADIUS": 695700000.0
+  },
+  "inputs": {
+   "de440s.bsp": "c1c7feeab882263fc493a9d5a5b2ddd71b54826cdf65d8d17a76126b260a49f2"
+  }
+ },
+ "evidence": "Single tiles on retrograde rings about the Moon, one year from 2026-10-04 TDB in DE440s point-mass gravity, with ring_screen's sail force (radial-facing normal tilted 1.5 degrees, interior shadow factor, Moon and Earth eclipses) at each areal mass. The eccentricity vector is averaged over one orbit and expressed in the frame of the Sun's direction projected into the ring plane (x toward the Sun, y along the motion at the sub-solar point); the least-squares circle through it gives the forced eccentricity. Each pass starts on the previous pass's centre with the sunward crossing at the design radius.",
+ "reading_rule": "A ring is frozen when its averaged eccentricity stays near its centre (small spread) and its sunward crossing radius and height stay put. The plane's drift against the Sun, which eccentricity cannot hold, remains in the height drift and its steering.",
+ "design": {
+  "days": 365.0,
+  "radii_km": [
+   15000.0,
+   19000.0,
+   20000.0
+  ],
+  "tilts_deg": [
+   0.0,
+   20.0
+  ],
+  "planes": [
+   "ecliptic",
+   "moon_orbit"
+  ],
+  "areal_masses_kg_m2": [
+   0.0627,
+   0.026,
+   0.005
+  ],
+  "passes": 3,
+  "sample_s": 600.0,
+  "rtol": 1e-10,
+  "atol": 0.001,
+  "max_step_s": 1800.0,
+  "tile_tilt_deg": 1.5,
+  "interior_light": 0.77
+ },
+ "passes": [
+  [
+   {
+    "plane": "ecliptic",
+    "radius_km": 15000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.0627,
+    "e0": [
+     0.0,
+     0.0
+    ],
+    "design_height_km": 1.278572247171841e-13,
+    "centre": [
+     -0.04169541157969623,
+     0.0022969288736331217
+    ],
+    "circle_radius": 0.04955733958963319,
+    "averaged_spread": 0.07086166996027385,
+    "e_mean": 0.05534789031334744,
+    "e_max": 0.11547176990298236,
+    "periapsis_min_km": 13711.271869222217,
+    "crossings": 190,
+    "crossing_radius_km": [
+     14940.84126886573,
+     16730.09134510067
+    ],
+    "crossing_height_error_max_km": 2561.420751313584,
+    "height_drift_km_per_day": 2.825752777006373,
+    "steering_m_s_per_day": 0.10770090891442852
+   },
+   {
+    "plane": "ecliptic",
+    "radius_km": 15000.0,
+    "tilt_deg": 20.0,
+    "sigma_kg_m2": 0.0627,
+    "e0": [
+     0.0,
+     0.0
+    ],
+    "design_height_km": 5130.302149885029,
+    "centre": [
+     -0.042635096182121385,
+     -0.01712996876644702
+    ],
+    "circle_radius": 0.07539818988551049,
+    "averaged_spread": 0.10702728449557042,
+    "e_mean": 0.07613808661936791,
+    "e_max": 0.1506545485382552,
+    "periapsis_min_km": 13125.874800289117,
+    "crossings": 190,
+    "crossing_radius_km": [
+     14650.185541857007,
+     17139.38886687432
+    ],
+    "crossing_height_error_max_km": 8540.833793671323,
+    "height_drift_km_per_day": -22.03176968095145,
+    "steering_m_s_per_day": 0.8397201761385611
+   },
+   {
+    "plane": "ecliptic",
+    "radius_km": 19000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.0627,
+    "e0": [
+     0.0,
+     0.0
+    ],
+    "design_height_km": 7.778616269941498e-14,
+    "centre": [
+     -0.0484432148725811,
+     0.00420546170248664
+    ],
+    "circle_radius": 0.06672534357297785,
+    "averaged_spread": 0.09804606828848708,
+    "e_mean": 0.07166087388321414,
+    "e_max": 0.1588494761689945,
+    "periapsis_min_km": 17072.332551339197,
+    "crossings": 131,
+    "crossing_radius_km": [
+     18862.676582071745,
+     21982.799323018022
+    ],
+    "crossing_height_error_max_km": 2910.052907093713,
+    "height_drift_km_per_day": 3.5407218188940615,
+    "steering_m_s_per_day": 0.09466370535205122
+   },
+   {
+    "plane": "ecliptic",
+    "radius_km": 19000.0,
+    "tilt_deg": 20.0,
+    "sigma_kg_m2": 0.0627,
+    "e0": [
+     0.0,
+     0.0
+    ],
+    "design_height_km": 6498.382723187706,
+    "centre": [
+     -0.07143902612621206,
+     0.0002655136583981383
+    ],
+    "circle_radius": 0.09327790209337872,
+    "averaged_spread": 0.1468910414093874,
+    "e_mean": 0.09696451293565507,
+    "e_max": 0.22980453045187488,
+    "periapsis_min_km": 15680.774771297623,
+    "crossings": 131,
+    "crossing_radius_km": [
+     18546.321596174064,
+     23262.47018122433
+    ],
+    "crossing_height_error_max_km": 4171.437085417416,
+    "height_drift_km_per_day": 3.1242859578618547,
+    "steering_m_s_per_day": 0.08352999768927477
+   },
+   {
+    "plane": "ecliptic",
+    "radius_km": 20000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.0627,
+    "e0": [
+     0.0,
+     0.0
+    ],
+    "design_height_km": 1.7688053927948093e-13,
+    "centre": [
+     -0.05045397791773136,
+     0.004259220830636299
+    ],
+    "circle_radius": 0.07193353959083042,
+    "averaged_spread": 0.1073353895001008,
+    "e_mean": 0.07619067125349509,
+    "e_max": 0.17194449791850938,
+    "periapsis_min_km": 17877.247342227744,
+    "crossings": 121,
+    "crossing_radius_km": [
+     19854.39387672623,
+     23402.18481300929
+    ],
+    "crossing_height_error_max_km": 2643.066590394574,
+    "height_drift_km_per_day": 0.9757387558470503,
+    "steering_m_s_per_day": 0.024155201002637114
+   },
+   {
+    "plane": "ecliptic",
+    "radius_km": 20000.0,
+    "tilt_deg": 20.0,
+    "sigma_kg_m2": 0.0627,
+    "e0": [
+     0.0,
+     0.0
+    ],
+    "design_height_km": 6840.402866513374,
+    "centre": [
+     -0.07374930039996117,
+     0.009045113941870846
+    ],
+    "circle_radius": 0.09712462077824353,
+    "averaged_spread": 0.15462415860330636,
+    "e_mean": 0.10188903951223581,
+    "e_max": 0.25052021692227155,
+    "periapsis_min_km": 16337.810187847397,
+    "crossings": 122,
+    "crossing_radius_km": [
+     19558.16559440406,
+     24911.756426097338
+    ],
+    "crossing_height_error_max_km": 4316.389411500218,
+    "height_drift_km_per_day": 0.9747649675606438,
+    "steering_m_s_per_day": 0.024131094087080866
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 15000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.0627,
+    "e0": [
+     0.0,
+     0.0
+    ],
+    "design_height_km": -899.8666631869129,
+    "centre": [
+     -0.040223438646160375,
+     0.0020249745741634786
+    ],
+    "circle_radius": 0.05158436824154764,
+    "averaged_spread": 0.07337722171102214,
+    "e_mean": 0.056480667711950885,
+    "e_max": 0.11504483951955459,
+    "periapsis_min_km": 13714.773947753272,
+    "crossings": 189,
+    "crossing_radius_km": [
+     14924.365018450952,
+     16722.75156448353
+    ],
+    "crossing_height_error_max_km": 2078.053810962669,
+    "height_drift_km_per_day": 3.0671578952819796,
+    "steering_m_s_per_day": 0.1169018379080902
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 15000.0,
+    "tilt_deg": 20.0,
+    "sigma_kg_m2": 0.0627,
+    "e0": [
+     0.0,
+     0.0
+    ],
+    "design_height_km": 4263.861298000219,
+    "centre": [
+     -0.04145986518519181,
+     -0.007334645346778341
+    ],
+    "circle_radius": 0.0673982734458519,
+    "averaged_spread": 0.09465799021577045,
+    "e_mean": 0.06794455150918823,
+    "e_max": 0.1335579483030851,
+    "periapsis_min_km": 13386.3976996348,
+    "crossings": 190,
+    "crossing_radius_km": [
+     14742.786241501475,
+     16952.617081299337
+    ],
+    "crossing_height_error_max_km": 7725.907746156807,
+    "height_drift_km_per_day": -19.330179931827143,
+    "steering_m_s_per_day": 0.7367516242318937
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 19000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.0627,
+    "e0": [
+     0.0,
+     0.0
+    ],
+    "design_height_km": -1139.831106703423,
+    "centre": [
+     -0.04789054905469556,
+     0.0031491104000125367
+    ],
+    "circle_radius": 0.06939915700435205,
+    "averaged_spread": 0.10284403544798972,
+    "e_mean": 0.07380728831840895,
+    "e_max": 0.15994664908963394,
+    "periapsis_min_km": 17037.635414058,
+    "crossings": 130,
+    "crossing_radius_km": [
+     18834.07363994365,
+     22001.990997067525
+    ],
+    "crossing_height_error_max_km": 2887.599186895035,
+    "height_drift_km_per_day": 4.686946193028658,
+    "steering_m_s_per_day": 0.12530882574569693
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 19000.0,
+    "tilt_deg": 20.0,
+    "sigma_kg_m2": 0.0627,
+    "e0": [
+     0.0,
+     0.0
+    ],
+    "design_height_km": 5400.890977466944,
+    "centre": [
+     -0.06118817221167913,
+     -0.0015205040313835392
+    ],
+    "circle_radius": 0.08532439312454601,
+    "averaged_spread": 0.13120516313342437,
+    "e_mean": 0.08634127233829388,
+    "e_max": 0.20435298410271294,
+    "periapsis_min_km": 16199.406282901004,
+    "crossings": 132,
+    "crossing_radius_km": [
+     18608.02459188018,
+     22794.013995328132
+    ],
+    "crossing_height_error_max_km": 3688.586913282073,
+    "height_drift_km_per_day": 3.203617731996871,
+    "steering_m_s_per_day": 0.08565098885319467
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 20000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.0627,
+    "e0": [
+     0.0,
+     0.0
+    ],
+    "design_height_km": -1199.8222175825506,
+    "centre": [
+     -0.05036656355911601,
+     0.0034619519271219565
+    ],
+    "circle_radius": 0.07488827271887029,
+    "averaged_spread": 0.11139976893428799,
+    "e_mean": 0.0789294859538802,
+    "e_max": 0.17460635173462843,
+    "periapsis_min_km": 17824.965804286272,
+    "crossings": 120,
+    "crossing_radius_km": [
+     19813.57317704937,
+     23448.039477887967
+    ],
+    "crossing_height_error_max_km": 3128.296740255529,
+    "height_drift_km_per_day": 5.119553568543084,
+    "steering_m_s_per_day": 0.12673868363932342
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 20000.0,
+    "tilt_deg": 20.0,
+    "sigma_kg_m2": 0.0627,
+    "e0": [
+     0.0,
+     0.0
+    ],
+    "design_height_km": 5685.148397333625,
+    "centre": [
+     -0.06389712108680487,
+     0.003921074814664904
+    ],
+    "circle_radius": 0.08954181088096619,
+    "averaged_spread": 0.14001367562253603,
+    "e_mean": 0.09084537573183259,
+    "e_max": 0.22031201593767305,
+    "periapsis_min_km": 16914.223443761264,
+    "crossings": 121,
+    "crossing_radius_km": [
+     19617.21408390955,
+     24323.357808154393
+    ],
+    "crossing_height_error_max_km": 3974.9248168242684,
+    "height_drift_km_per_day": 1.4226723589284227,
+    "steering_m_s_per_day": 0.03521940333401981
+   }
+  ],
+  [
+   {
+    "plane": "ecliptic",
+    "radius_km": 15000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.0627,
+    "e0": [
+     -0.04169541157969623,
+     0.0022969288736331217
+    ],
+    "design_height_km": 1.278572247171841e-13,
+    "centre": [
+     -0.0398763553137267,
+     0.002539529277778133
+    ],
+    "circle_radius": 0.011067684238395622,
+    "averaged_spread": 0.019113581781604952,
+    "e_mean": 0.04015145517019482,
+    "e_max": 0.06827902253309069,
+    "periapsis_min_km": 13781.894670948031,
+    "crossings": 202,
+    "crossing_radius_km": [
+     14809.251373904179,
+     15383.273161655949
+    ],
+    "crossing_height_error_max_km": 2391.0592248157855,
+    "height_drift_km_per_day": 1.856735528474511,
+    "steering_m_s_per_day": 0.07076772803963013
+   },
+   {
+    "plane": "ecliptic",
+    "radius_km": 15000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.026,
+    "e0": [
+     -0.10055008869411362,
+     0.0055391323221844905
+    ],
+    "design_height_km": 1.278572247171841e-13,
+    "centre": [
+     -0.09246357397296912,
+     0.0037596298525935067
+    ],
+    "circle_radius": 0.012512158977114593,
+    "averaged_spread": 0.022850985798353787,
+    "e_mean": 0.09270100659174262,
+    "e_max": 0.12169625848086543,
+    "periapsis_min_km": 12290.880220781713,
+    "crossings": 219,
+    "crossing_radius_km": [
+     14694.956951750868,
+     15309.166253937397
+    ],
+    "crossing_height_error_max_km": 2277.502236225479,
+    "height_drift_km_per_day": 0.8411339672716559,
+    "steering_m_s_per_day": 0.03205902990916611
+   },
+   {
+    "plane": "ecliptic",
+    "radius_km": 15000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.005,
+    "e0": [
+     -0.5228604612093908,
+     0.02880348807535935
+    ],
+    "design_height_km": 1.278572247171841e-13,
+    "centre": [
+     -0.3652209148825435,
+     0.004537470970156263
+    ],
+    "circle_radius": 0.13087734732119988,
+    "averaged_spread": 0.18336302394709608,
+    "e_mean": 0.36950459712238215,
+    "e_max": 0.5236532276434515,
+    "periapsis_min_km": 4768.709592334076,
+    "crossings": 353,
+    "crossing_radius_km": [
+     12153.942783937502,
+     15184.392765067558
+    ],
+    "crossing_height_error_max_km": 2000.1269574670318,
+    "height_drift_km_per_day": -3.9618959697812812,
+    "steering_m_s_per_day": 0.1510039379389391
+   },
+   {
+    "plane": "ecliptic",
+    "radius_km": 15000.0,
+    "tilt_deg": 20.0,
+    "sigma_kg_m2": 0.0627,
+    "e0": [
+     -0.042635096182121385,
+     -0.01712996876644702
+    ],
+    "design_height_km": 5130.302149885029,
+    "centre": [
+     -0.03689302697654409,
+     -0.011004440384121966
+    ],
+    "circle_radius": 0.03696013111934237,
+    "averaged_spread": 0.056875315756944836,
+    "e_mean": 0.045113731328469193,
+    "e_max": 0.09600322642840155,
+    "periapsis_min_km": 13329.350366958577,
+    "crossings": 202,
+    "crossing_radius_km": [
+     14405.240348092317,
+     15734.418694673232
+    ],
+    "crossing_height_error_max_km": 10117.903177617442,
+    "height_drift_km_per_day": -27.391215001252558,
+    "steering_m_s_per_day": 1.043990392900099
+   },
+   {
+    "plane": "ecliptic",
+    "radius_km": 15000.0,
+    "tilt_deg": 20.0,
+    "sigma_kg_m2": 0.026,
+    "e0": [
+     -0.10281617425457736,
+     -0.04130957852523955
+    ],
+    "design_height_km": 5130.302149885029,
+    "centre": [
+     -0.08225475937728423,
+     -0.008617275402760818
+    ],
+    "circle_radius": 0.06370899858732164,
+    "averaged_spread": 0.10628137887749876,
+    "e_mean": 0.09212222592149512,
+    "e_max": 0.172393175776016,
+    "periapsis_min_km": 11511.88454764559,
+    "crossings": 220,
+    "crossing_radius_km": [
+     13842.401712288378,
+     15971.102959305254
+    ],
+    "crossing_height_error_max_km": 10866.962207861412,
+    "height_drift_km_per_day": -30.96953987070528,
+    "steering_m_s_per_day": 1.1803748791747428
+   },
+   {
+    "plane": "ecliptic",
+    "radius_km": 15000.0,
+    "tilt_deg": 20.0,
+    "sigma_kg_m2": 0.005,
+    "e0": [
+     -0.5346441061238022,
+     -0.21480980833124566
+    ],
+    "design_height_km": 5130.302149885029,
+    "centre": [
+     -0.36076295988823065,
+     -0.017995610952143484
+    ],
+    "circle_radius": 0.168354970289365,
+    "averaged_spread": 0.30237646414393454,
+    "e_mean": 0.3718938804944951,
+    "e_max": 0.5761836286881347,
+    "periapsis_min_km": 4637.9184087453295,
+    "crossings": 327,
+    "crossing_radius_km": [
+     12162.143453698365,
+     16188.58388156717
+    ],
+    "crossing_height_error_max_km": 13751.652105775154,
+    "height_drift_km_per_day": -47.80621968558463,
+    "steering_m_s_per_day": 1.8220890920807886
+   },
+   {
+    "plane": "ecliptic",
+    "radius_km": 19000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.0627,
+    "e0": [
+     -0.0484432148725811,
+     0.00420546170248664
+    ],
+    "design_height_km": 7.778616269941498e-14,
+    "centre": [
+     -0.04638994014508783,
+     0.00435551780693192
+    ],
+    "circle_radius": 0.02211245738740108,
+    "averaged_spread": 0.03687827190683797,
+    "e_mean": 0.04748917143648735,
+    "e_max": 0.10037693652545553,
+    "periapsis_min_km": 17196.53413437667,
+    "crossings": 141,
+    "crossing_radius_km": [
+     18651.84892616635,
+     19920.77174651813
+    ],
+    "crossing_height_error_max_km": 3076.5900417167572,
+    "height_drift_km_per_day": 5.146139306119749,
+    "steering_m_s_per_day": 0.13758567882276912
+   },
+   {
+    "plane": "ecliptic",
+    "radius_km": 19000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.026,
+    "e0": [
+     -0.11682267586580136,
+     0.010141632644073553
+    ],
+    "design_height_km": 7.778616269941498e-14,
+    "centre": [
+     -0.10592807380889953,
+     0.007197748659465659
+    ],
+    "circle_radius": 0.0220175024829834,
+    "averaged_spread": 0.03837574674560969,
+    "e_mean": 0.10592990913026018,
+    "e_max": 0.16018859512756028,
+    "periapsis_min_km": 15078.131106752944,
+    "crossings": 156,
+    "crossing_radius_km": [
+     18466.003809067435,
+     19756.255783106746
+    ],
+    "crossing_height_error_max_km": 3255.896960711384,
+    "height_drift_km_per_day": 5.914127272227695,
+    "steering_m_s_per_day": 0.1581183809824298
+   },
+   {
+    "plane": "ecliptic",
+    "radius_km": 19000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.005,
+    "e0": [
+     -0.607477914502167,
+     0.052736489749182464
+    ],
+    "design_height_km": 7.778616269941498e-14,
+    "centre": [
+     -0.3847586951885426,
+     0.00484273384821593
+    ],
+    "circle_radius": 0.19765706230943023,
+    "averaged_spread": 0.270804807910523,
+    "e_mean": 0.3920075358541759,
+    "e_max": 0.6207916302510296,
+    "periapsis_min_km": 4670.975530224806,
+    "crossings": 268,
+    "crossing_radius_km": [
+     14143.693460095847,
+     19455.19125072341
+    ],
+    "crossing_height_error_max_km": 3134.655061956576,
+    "height_drift_km_per_day": 2.25344799149773,
+    "steering_m_s_per_day": 0.06024752793483866
+   },
+   {
+    "plane": "ecliptic",
+    "radius_km": 19000.0,
+    "tilt_deg": 20.0,
+    "sigma_kg_m2": 0.0627,
+    "e0": [
+     -0.07143902612621206,
+     0.0002655136583981383
+    ],
+    "design_height_km": 6498.382723187706,
+    "centre": [
+     -0.06562823074351772,
+     -0.013405961084006605
+    ],
+    "circle_radius": 0.038547241365519555,
+    "averaged_spread": 0.060209062354506036,
+    "e_mean": 0.06684531660909271,
+    "e_max": 0.14350985207898745,
+    "periapsis_min_km": 16007.046971052008,
+    "crossings": 146,
+    "crossing_radius_km": [
+     18208.334637826836,
+     20233.65310556126
+    ],
+    "crossing_height_error_max_km": 2586.6701055724325,
+    "height_drift_km_per_day": -0.7490704156053197,
+    "steering_m_s_per_day": 0.02002692804964528
+   },
+   {
+    "plane": "ecliptic",
+    "radius_km": 19000.0,
+    "tilt_deg": 20.0,
+    "sigma_kg_m2": 0.026,
+    "e0": [
+     -0.17227795915821142,
+     0.0006402963992908952
+    ],
+    "design_height_km": 6498.382723187706,
+    "centre": [
+     -0.11715490411127162,
+     -0.02694517223841065
+    ],
+    "circle_radius": 0.05058352493100449,
+    "averaged_spread": 0.07625243221853766,
+    "e_mean": 0.1280465480849502,
+    "e_max": 0.20955837469307878,
+    "periapsis_min_km": 13387.451273311077,
+    "crossings": 167,
+    "crossing_radius_km": [
+     17263.719188192892,
+     19546.4923041011
+    ],
+    "crossing_height_error_max_km": 4950.744834170001,
+    "height_drift_km_per_day": -9.453896548303792,
+    "steering_m_s_per_day": 0.25275661942765604
+   },
+   {
+    "plane": "ecliptic",
+    "radius_km": 19000.0,
+    "tilt_deg": 20.0,
+    "sigma_kg_m2": 0.005,
+    "e0": [
+     -0.8958453876226994,
+     0.0033295412763126547
+    ],
+    "design_height_km": 6498.382723187706,
+    "centre": [
+     -0.2915221350919603,
+     0.15253033001113686
+    ],
+    "circle_radius": 0.6586928683553634,
+    "averaged_spread": 1.2892022509724235,
+    "e_mean": 0.6781063475947562,
+    "e_max": 0.9999999993706338,
+    "periapsis_min_km": 133.5806894835886,
+    "crossings": 339,
+    "crossing_radius_km": [
+     401.8795420886561,
+     18947.29721529438
+    ],
+    "crossing_height_error_max_km": 21589.091966137552,
+    "height_drift_km_per_day": -26.2048717396375,
+    "steering_m_s_per_day": 0.7006058041363343
+   },
+   {
+    "plane": "ecliptic",
+    "radius_km": 20000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.0627,
+    "e0": [
+     -0.05045397791773136,
+     0.004259220830636299
+    ],
+    "design_height_km": 1.7688053927948093e-13,
+    "centre": [
+     -0.047885850245955645,
+     0.004474256476524325
+    ],
+    "circle_radius": 0.02515981958409202,
+    "averaged_spread": 0.04232710105235643,
+    "e_mean": 0.04924887435551887,
+    "e_max": 0.10951743367555584,
+    "periapsis_min_km": 18026.120721687603,
+    "crossings": 131,
+    "crossing_radius_km": [
+     19570.119589212056,
+     21086.090849645734
+    ],
+    "crossing_height_error_max_km": 2951.1449140501572,
+    "height_drift_km_per_day": 3.624597145584684,
+    "steering_m_s_per_day": 0.08972982991659187
+   },
+   {
+    "plane": "ecliptic",
+    "radius_km": 20000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.026,
+    "e0": [
+     -0.12167170828622141,
+     0.01027127484926523
+    ],
+    "design_height_km": 1.7688053927948093e-13,
+    "centre": [
+     -0.10865749307692707,
+     0.007848611457073527
+    ],
+    "circle_radius": 0.024244889676092885,
+    "averaged_spread": 0.04222789453882276,
+    "e_mean": 0.10853423698614481,
+    "e_max": 0.16679094153203533,
+    "periapsis_min_km": 15746.358542750804,
+    "crossings": 145,
+    "crossing_radius_km": [
+     19348.913541184185,
+     20833.121598715967
+    ],
+    "crossing_height_error_max_km": 3304.421561766063,
+    "height_drift_km_per_day": 5.7416684198476595,
+    "steering_m_s_per_day": 0.1421396392639079
+   },
+   {
+    "plane": "ecliptic",
+    "radius_km": 20000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.005,
+    "e0": [
+     -0.6326928830883513,
+     0.053410629216179194
+    ],
+    "design_height_km": 1.7688053927948093e-13,
+    "centre": [
+     -0.3888611189842016,
+     0.0058128623960276155
+    ],
+    "circle_radius": 0.2188875852742999,
+    "averaged_spread": 0.29690847055384034,
+    "e_mean": 0.3981904452585055,
+    "e_max": 0.6473432176903317,
+    "periapsis_min_km": 4523.738403240494,
+    "crossings": 254,
+    "crossing_radius_km": [
+     14457.391553171654,
+     20420.459924219213
+    ],
+    "crossing_height_error_max_km": 3449.2087647377293,
+    "height_drift_km_per_day": 4.215042836872016,
+    "steering_m_s_per_day": 0.10434678990585174
+   },
+   {
+    "plane": "ecliptic",
+    "radius_km": 20000.0,
+    "tilt_deg": 20.0,
+    "sigma_kg_m2": 0.0627,
+    "e0": [
+     -0.07374930039996117,
+     0.009045113941870846
+    ],
+    "design_height_km": 6840.402866513374,
+    "centre": [
+     -0.07280331721737172,
+     -0.004433863979284139
+    ],
+    "circle_radius": 0.04225704477448667,
+    "averaged_spread": 0.06822622503475836,
+    "e_mean": 0.07270278346491593,
+    "e_max": 0.16274973724341918,
+    "periapsis_min_km": 16643.486414474166,
+    "crossings": 136,
+    "crossing_radius_km": [
+     19175.985806229197,
+     21596.500866784943
+    ],
+    "crossing_height_error_max_km": 3269.7916238179673,
+    "height_drift_km_per_day": 3.1807068589867473,
+    "steering_m_s_per_day": 0.0787409673428354
+   },
+   {
+    "plane": "ecliptic",
+    "radius_km": 20000.0,
+    "tilt_deg": 20.0,
+    "sigma_kg_m2": 0.026,
+    "e0": [
+     -0.17784927442606024,
+     0.021812640159819312
+    ],
+    "design_height_km": 6840.402866513374,
+    "centre": [
+     -0.1400762914708861,
+     -0.016864537054480225
+    ],
+    "circle_radius": 0.05376556340755064,
+    "averaged_spread": 0.08110598036957421,
+    "e_mean": 0.14285371347590897,
+    "e_max": 0.23769783982589374,
+    "periapsis_min_km": 13666.401763045038,
+    "crossings": 157,
+    "crossing_radius_km": [
+     18343.030738686757,
+     20996.253961494713
+    ],
+    "crossing_height_error_max_km": 2369.3866157306516,
+    "height_drift_km_per_day": -2.0623969384374963,
+    "steering_m_s_per_day": 0.05105630200363813
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 15000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.0627,
+    "e0": [
+     -0.040223438646160375,
+     0.0020249745741634786
+    ],
+    "design_height_km": -899.8666631869129,
+    "centre": [
+     -0.03904189459335432,
+     0.0020385199838117317
+    ],
+    "circle_radius": 0.01416893127534647,
+    "averaged_spread": 0.023296628261608075,
+    "e_mean": 0.0391051111042795,
+    "e_max": 0.07032467681115849,
+    "periapsis_min_km": 13779.49527906167,
+    "crossings": 200,
+    "crossing_radius_km": [
+     14813.23779616589,
+     15426.902196055471
+    ],
+    "crossing_height_error_max_km": 2031.9459015553427,
+    "height_drift_km_per_day": 3.2131025653559715,
+    "steering_m_s_per_day": 0.12246438171804001
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 15000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.026,
+    "e0": [
+     -0.0970003693505483,
+     0.004883304069232697
+    ],
+    "design_height_km": -899.8666631869129,
+    "centre": [
+     -0.09070330662097846,
+     0.003638874470560917
+    ],
+    "circle_radius": 0.01629770368942213,
+    "averaged_spread": 0.02795055609502085,
+    "e_mean": 0.0900588881485429,
+    "e_max": 0.1237334475977569,
+    "periapsis_min_km": 12289.126700241995,
+    "crossings": 217,
+    "crossing_radius_km": [
+     14702.718707626545,
+     15397.897019609643
+    ],
+    "crossing_height_error_max_km": 2012.7190833861582,
+    "height_drift_km_per_day": 3.2296560385173545,
+    "steering_m_s_per_day": 0.1230953017757601
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 15000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.005,
+    "e0": [
+     -0.504401920622851,
+     0.02539318116001002
+    ],
+    "design_height_km": -899.8666631869129,
+    "centre": [
+     -0.3647261855201085,
+     0.005159181953611702
+    ],
+    "circle_radius": 0.1216282635857857,
+    "averaged_spread": 0.17495795179759524,
+    "e_mean": 0.3679767648912566,
+    "e_max": 0.5126303078393849,
+    "periapsis_min_km": 5003.736670400058,
+    "crossings": 346,
+    "crossing_radius_km": [
+     12408.970058829145,
+     15316.562858428613
+    ],
+    "crossing_height_error_max_km": 2020.238164641126,
+    "height_drift_km_per_day": 3.686553125644966,
+    "steering_m_s_per_day": 0.14050950444926158
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 15000.0,
+    "tilt_deg": 20.0,
+    "sigma_kg_m2": 0.0627,
+    "e0": [
+     -0.04145986518519181,
+     -0.007334645346778341
+    ],
+    "design_height_km": 4263.861298000219,
+    "centre": [
+     -0.037283468038132775,
+     -0.0018860297796446275
+    ],
+    "circle_radius": 0.030251541554835417,
+    "averaged_spread": 0.05214663741187191,
+    "e_mean": 0.04227830147965795,
+    "e_max": 0.08646974859067745,
+    "periapsis_min_km": 13481.583075584747,
+    "crossings": 202,
+    "crossing_radius_km": [
+     14558.124857918245,
+     15640.605132706905
+    ],
+    "crossing_height_error_max_km": 8919.814600796122,
+    "height_drift_km_per_day": -23.371263903507288,
+    "steering_m_s_per_day": 0.8907737383711797
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 15000.0,
+    "tilt_deg": 20.0,
+    "sigma_kg_m2": 0.026,
+    "e0": [
+     -0.0999820595042895,
+     -0.017687779355500078
+    ],
+    "design_height_km": 4263.861298000219,
+    "centre": [
+     -0.08417643875069505,
+     0.006199784810208946
+    ],
+    "circle_radius": 0.05252718466055587,
+    "averaged_spread": 0.09983531435446465,
+    "e_mean": 0.09339860047655749,
+    "e_max": 0.15821195390979415,
+    "periapsis_min_km": 11736.436930503725,
+    "crossings": 219,
+    "crossing_radius_km": [
+     14092.994409655454,
+     15800.953112229985
+    ],
+    "crossing_height_error_max_km": 9565.526118563088,
+    "height_drift_km_per_day": -26.135510844393654,
+    "steering_m_s_per_day": 0.996130410200337
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 15000.0,
+    "tilt_deg": 20.0,
+    "sigma_kg_m2": 0.005,
+    "e0": [
+     -0.5199067094223053,
+     -0.09197645264860041
+    ],
+    "design_height_km": 4263.861298000219,
+    "centre": [
+     -0.38757289359060193,
+     -0.023949858666771157
+    ],
+    "circle_radius": 0.09197575253139124,
+    "averaged_spread": 0.1799273282546762,
+    "e_mean": 0.37871665816504324,
+    "e_max": 0.5279797859238076,
+    "periapsis_min_km": 4837.307438944184,
+    "crossings": 349,
+    "crossing_radius_km": [
+     12725.75977882777,
+     15051.556791795982
+    ],
+    "crossing_height_error_max_km": 11012.048609979513,
+    "height_drift_km_per_day": -34.68429452174721,
+    "steering_m_s_per_day": 1.3219592582353796
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 19000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.0627,
+    "e0": [
+     -0.04789054905469556,
+     0.0031491104000125367
+    ],
+    "design_height_km": -1139.831106703423,
+    "centre": [
+     -0.0456269721833702,
+     0.0030438680798847025
+    ],
+    "circle_radius": 0.024824639127126135,
+    "averaged_spread": 0.04129337465578879,
+    "e_mean": 0.0469156986854717,
+    "e_max": 0.10413292729608542,
+    "periapsis_min_km": 17180.401007710887,
+    "crossings": 140,
+    "crossing_radius_km": [
+     18646.66001618064,
+     19985.77654298076
+    ],
+    "crossing_height_error_max_km": 2763.840212243546,
+    "height_drift_km_per_day": 4.363550357336733,
+    "steering_m_s_per_day": 0.11666260905093752
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 19000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.026,
+    "e0": [
+     -0.11548990098959278,
+     0.007594200849261003
+    ],
+    "design_height_km": -1139.831106703423,
+    "centre": [
+     -0.10315284753071848,
+     0.005066113758381488
+    ],
+    "circle_radius": 0.025194632430840757,
+    "averaged_spread": 0.0438324425495458,
+    "e_mean": 0.10240834651004878,
+    "e_max": 0.16159270306698575,
+    "periapsis_min_km": 15074.450517137622,
+    "crossings": 154,
+    "crossing_radius_km": [
+     18410.46594345285,
+     19783.210955766295
+    ],
+    "crossing_height_error_max_km": 2676.3981052784034,
+    "height_drift_km_per_day": 4.112574424139359,
+    "steering_m_s_per_day": 0.10995258973683246
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 19000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.005,
+    "e0": [
+     -0.6005474851458824,
+     0.03948984441615721
+    ],
+    "design_height_km": -1139.831106703423,
+    "centre": [
+     -0.3825253090639167,
+     0.005808612122499834
+    ],
+    "circle_radius": 0.1952223177498756,
+    "averaged_spread": 0.2708025886085004,
+    "e_mean": 0.3880691355251948,
+    "e_max": 0.6177077936037153,
+    "periapsis_min_km": 4728.945525099089,
+    "crossings": 265,
+    "crossing_radius_km": [
+     14176.330501713986,
+     19479.928184702974
+    ],
+    "crossing_height_error_max_km": 2555.926503727286,
+    "height_drift_km_per_day": 3.6086274119869257,
+    "steering_m_s_per_day": 0.09647920947383706
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 19000.0,
+    "tilt_deg": 20.0,
+    "sigma_kg_m2": 0.0627,
+    "e0": [
+     -0.06118817221167913,
+     -0.0015205040313835392
+    ],
+    "design_height_km": 5400.890977466944,
+    "centre": [
+     -0.05708900250317014,
+     -0.007433650352771559
+    ],
+    "circle_radius": 0.034529863659132014,
+    "averaged_spread": 0.055893170366146244,
+    "e_mean": 0.05657601182364354,
+    "e_max": 0.1288997868655805,
+    "periapsis_min_km": 16451.59730082118,
+    "crossings": 144,
+    "crossing_radius_km": [
+     18346.88372801707,
+     20175.922004718865
+    ],
+    "crossing_height_error_max_km": 2452.0742636426594,
+    "height_drift_km_per_day": 0.595853129238252,
+    "steering_m_s_per_day": 0.015930555390800454
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 19000.0,
+    "tilt_deg": 20.0,
+    "sigma_kg_m2": 0.026,
+    "e0": [
+     -0.14755763067970315,
+     -0.0036667539526056892
+    ],
+    "design_height_km": 5400.890977466944,
+    "centre": [
+     -0.11324397766223136,
+     -0.015741656148444597
+    ],
+    "circle_radius": 0.044169094848456415,
+    "averaged_spread": 0.06909397780697596,
+    "e_mean": 0.11706884376553482,
+    "e_max": 0.19609111681965152,
+    "periapsis_min_km": 13913.115813514298,
+    "crossings": 163,
+    "crossing_radius_km": [
+     17674.29286161255,
+     19761.562890160458
+    ],
+    "crossing_height_error_max_km": 3976.1617564536423,
+    "height_drift_km_per_day": -6.471752517538863,
+    "steering_m_s_per_day": 0.17302688682361714
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 19000.0,
+    "tilt_deg": 20.0,
+    "sigma_kg_m2": 0.005,
+    "e0": [
+     -0.7672996795344564,
+     -0.01906712055354958
+    ],
+    "design_height_km": 5400.890977466944,
+    "centre": [
+     -0.3867448444836111,
+     -0.049996043954149194
+    ],
+    "circle_radius": 0.24367910420792246,
+    "averaged_spread": 0.39276763862822,
+    "e_mean": 0.4143327906177191,
+    "e_max": 0.7675365485108074,
+    "periapsis_min_km": 2597.6844554118197,
+    "crossings": 314,
+    "crossing_radius_km": [
+     11833.024816556459,
+     19017.436131807768
+    ],
+    "crossing_height_error_max_km": 16960.95441234617,
+    "height_drift_km_per_day": -56.71871830862923,
+    "steering_m_s_per_day": 1.5164151019328402
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 20000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.0627,
+    "e0": [
+     -0.05036656355911601,
+     0.0034619519271219565
+    ],
+    "design_height_km": -1199.8222175825506,
+    "centre": [
+     -0.04757773247504927,
+     0.0033066406536672683
+    ],
+    "circle_radius": 0.027778550291141745,
+    "averaged_spread": 0.046519154769612305,
+    "e_mean": 0.049251870924064155,
+    "e_max": 0.1146272050091628,
+    "periapsis_min_km": 17994.715773859163,
+    "crossings": 130,
+    "crossing_radius_km": [
+     19565.04067697759,
+     21140.251445212696
+    ],
+    "crossing_height_error_max_km": 2980.1762417453842,
+    "height_drift_km_per_day": 4.707119985293399,
+    "steering_m_s_per_day": 0.11652855716445001
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 20000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.026,
+    "e0": [
+     -0.12146090519832978,
+     0.008348630224251795
+    ],
+    "design_height_km": -1199.8222175825506,
+    "centre": [
+     -0.1064589746615791,
+     0.0054402042345464375
+    ],
+    "circle_radius": 0.027122533050833147,
+    "averaged_spread": 0.04725388554639561,
+    "e_mean": 0.10568748777792329,
+    "e_max": 0.1703111413638518,
+    "periapsis_min_km": 15721.032197928978,
+    "crossings": 144,
+    "crossing_radius_km": [
+     19331.678876941372,
+     20914.527396529516
+    ],
+    "crossing_height_error_max_km": 2869.359856536069,
+    "height_drift_km_per_day": 4.306622179388058,
+    "steering_m_s_per_day": 0.10661391049823198
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 20000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.005,
+    "e0": [
+     -0.6315967070313148,
+     0.04341287716610934
+    ],
+    "design_height_km": -1199.8222175825506,
+    "centre": [
+     -0.3853559172948911,
+     0.006212156096679272
+    ],
+    "circle_radius": 0.2233233748556002,
+    "averaged_spread": 0.30539868348362686,
+    "e_mean": 0.394617015537529,
+    "e_max": 0.6495521994063207,
+    "periapsis_min_km": 4489.7447084131745,
+    "crossings": 253,
+    "crossing_radius_km": [
+     14371.91220219642,
+     20452.274764144822
+    ],
+    "crossing_height_error_max_km": 2694.346063238061,
+    "height_drift_km_per_day": 3.4783335716152806,
+    "steering_m_s_per_day": 0.0861089570062728
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 20000.0,
+    "tilt_deg": 20.0,
+    "sigma_kg_m2": 0.0627,
+    "e0": [
+     -0.06389712108680487,
+     0.003921074814664904
+    ],
+    "design_height_km": 5685.148397333625,
+    "centre": [
+     -0.06178976852922722,
+     -0.0025924409055434745
+    ],
+    "circle_radius": 0.03757363101937166,
+    "averaged_spread": 0.06199042489110901,
+    "e_mean": 0.06112908753599756,
+    "e_max": 0.14283346872758373,
+    "periapsis_min_km": 17160.238214157464,
+    "crossings": 134,
+    "crossing_radius_km": [
+     19298.295619186432,
+     21418.397652808417
+    ],
+    "crossing_height_error_max_km": 3107.422653717738,
+    "height_drift_km_per_day": 3.488845519935903,
+    "steering_m_s_per_day": 0.086369188777423
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 20000.0,
+    "tilt_deg": 20.0,
+    "sigma_kg_m2": 0.026,
+    "e0": [
+     -0.15409036508241022,
+     0.009455822726134213
+    ],
+    "design_height_km": 5685.148397333625,
+    "centre": [
+     -0.12605156338287815,
+     -0.011757870746314018
+    ],
+    "circle_radius": 0.04694235477922391,
+    "averaged_spread": 0.07432822522859034,
+    "e_mean": 0.127674742875201,
+    "e_max": 0.21601126239504514,
+    "periapsis_min_km": 14361.719312369454,
+    "crossings": 152,
+    "crossing_radius_km": [
+     18618.93264534903,
+     21036.15666153815
+    ],
+    "crossing_height_error_max_km": 2097.614340389978,
+    "height_drift_km_per_day": -0.7017898293488081,
+    "steering_m_s_per_day": 0.017373374059341057
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 20000.0,
+    "tilt_deg": 20.0,
+    "sigma_kg_m2": 0.005,
+    "e0": [
+     -0.801269898428533,
+     0.049170278175897905
+    ],
+    "design_height_km": 5685.148397333625,
+    "centre": [
+     -0.3917900693095733,
+     -0.023348797611324655
+    ],
+    "circle_radius": 0.31130811348703263,
+    "averaged_spread": 0.4685123585788516,
+    "e_mean": 0.4410925099061982,
+    "e_max": 0.8027771586085186,
+    "periapsis_min_km": 2272.780708441968,
+    "crossings": 297,
+    "crossing_radius_km": [
+     11655.714128790529,
+     19892.24709047376
+    ],
+    "crossing_height_error_max_km": 19883.714898845865,
+    "height_drift_km_per_day": -64.36085632581218,
+    "steering_m_s_per_day": 1.5933049824409529
+   }
+  ],
+  [
+   {
+    "plane": "ecliptic",
+    "radius_km": 15000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.0627,
+    "e0": [
+     -0.0398763553137267,
+     0.002539529277778133
+    ],
+    "design_height_km": 1.278572247171841e-13,
+    "centre": [
+     -0.04006071088757634,
+     0.0024645125310426372
+    ],
+    "circle_radius": 0.012669644288924692,
+    "averaged_spread": 0.021478895239150194,
+    "e_mean": 0.04034502486844935,
+    "e_max": 0.07020997855110404,
+    "periapsis_min_km": 13777.272390159736,
+    "crossings": 201,
+    "crossing_radius_km": [
+     14817.147242426434,
+     15444.756023832933
+    ],
+    "crossing_height_error_max_km": 2397.020741248787,
+    "height_drift_km_per_day": 1.977393957202578,
+    "steering_m_s_per_day": 0.07536651054740728
+   },
+   {
+    "plane": "ecliptic",
+    "radius_km": 15000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.026,
+    "e0": [
+     -0.09246357397296912,
+     0.0037596298525935067
+    ],
+    "design_height_km": 1.278572247171841e-13,
+    "centre": [
+     -0.0935710729326775,
+     0.00426390632076918
+    ],
+    "circle_radius": 0.017392966472279215,
+    "averaged_spread": 0.030635657538674487,
+    "e_mean": 0.09248353027960965,
+    "e_max": 0.13111247341056997,
+    "periapsis_min_km": 12266.30255671043,
+    "crossings": 217,
+    "crossing_radius_km": [
+     14705.986536382863,
+     15550.80808044569
+    ],
+    "crossing_height_error_max_km": 2314.8819227941017,
+    "height_drift_km_per_day": 0.971392477711677,
+    "steering_m_s_per_day": 0.0370237105006127
+   },
+   {
+    "plane": "ecliptic",
+    "radius_km": 15000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.005,
+    "e0": [
+     -0.3652209148825435,
+     0.004537470970156263
+    ],
+    "design_height_km": 1.278572247171841e-13,
+    "centre": [
+     -0.37944490406185183,
+     0.008613043510569435
+    ],
+    "circle_radius": 0.05545514478962711,
+    "averaged_spread": 0.08904826427329196,
+    "e_mean": 0.37968042662192686,
+    "e_max": 0.46019589810870143,
+    "periapsis_min_km": 6107.543801693156,
+    "crossings": 300,
+    "crossing_radius_km": [
+     14461.674443057023,
+     16356.462729831008
+    ],
+    "crossing_height_error_max_km": 2595.439730566414,
+    "height_drift_km_per_day": 1.3016020521324325,
+    "steering_m_s_per_day": 0.049609337802035254
+   },
+   {
+    "plane": "ecliptic",
+    "radius_km": 15000.0,
+    "tilt_deg": 20.0,
+    "sigma_kg_m2": 0.0627,
+    "e0": [
+     -0.03689302697654409,
+     -0.011004440384121966
+    ],
+    "design_height_km": 5130.302149885029,
+    "centre": [
+     -0.03686766957430006,
+     -0.012058284627360557
+    ],
+    "circle_radius": 0.04155682213869892,
+    "averaged_spread": 0.0659640912276963,
+    "e_mean": 0.04881377710937623,
+    "e_max": 0.10266318811135713,
+    "periapsis_min_km": 13303.810839097037,
+    "crossings": 201,
+    "crossing_radius_km": [
+     14439.191221031628,
+     15912.970106532124
+    ],
+    "crossing_height_error_max_km": 9979.211763028406,
+    "height_drift_km_per_day": -26.905264096720767,
+    "steering_m_s_per_day": 1.0254688313071174
+   },
+   {
+    "plane": "ecliptic",
+    "radius_km": 15000.0,
+    "tilt_deg": 20.0,
+    "sigma_kg_m2": 0.026,
+    "e0": [
+     -0.08225475937728423,
+     -0.008617275402760818
+    ],
+    "design_height_km": 5130.302149885029,
+    "centre": [
+     -0.08388631646490056,
+     -0.010237465937864022
+    ],
+    "circle_radius": 0.08555019982411556,
+    "averaged_spread": 0.14583099651812315,
+    "e_mean": 0.10903091456879645,
+    "e_max": 0.20307278101938292,
+    "periapsis_min_km": 11328.059529119873,
+    "crossings": 214,
+    "crossing_radius_km": [
+     13909.42651943178,
+     16631.78215183455
+    ],
+    "crossing_height_error_max_km": 10170.140833162845,
+    "height_drift_km_per_day": -28.169130557040575,
+    "steering_m_s_per_day": 1.0736399125250262
+   },
+   {
+    "plane": "ecliptic",
+    "radius_km": 15000.0,
+    "tilt_deg": 20.0,
+    "sigma_kg_m2": 0.005,
+    "e0": [
+     -0.36076295988823065,
+     -0.017995610952143484
+    ],
+    "design_height_km": 5130.302149885029,
+    "centre": [
+     -0.3884805124636496,
+     -0.009864719127011229
+    ],
+    "circle_radius": 0.14680978190799315,
+    "averaged_spread": 0.2196321530492633,
+    "e_mean": 0.4062168138011398,
+    "e_max": 0.5708046017325068,
+    "periapsis_min_km": 4817.466278921495,
+    "crossings": 302,
+    "crossing_radius_km": [
+     13497.462043271378,
+     17312.300210487545
+    ],
+    "crossing_height_error_max_km": 9913.101814732723,
+    "height_drift_km_per_day": -23.729502025275277,
+    "steering_m_s_per_day": 0.9044276473883318
+   },
+   {
+    "plane": "ecliptic",
+    "radius_km": 19000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.0627,
+    "e0": [
+     -0.04638994014508783,
+     0.00435551780693192
+    ],
+    "design_height_km": 7.778616269941498e-14,
+    "centre": [
+     -0.046523065480438136,
+     0.004306968572456246
+    ],
+    "circle_radius": 0.024014603347494782,
+    "averaged_spread": 0.039885532737965246,
+    "e_mean": 0.04796820433024153,
+    "e_max": 0.10417304140753551,
+    "periapsis_min_km": 17195.280370010158,
+    "crossings": 141,
+    "crossing_radius_km": [
+     18666.17354249137,
+     19998.1942202496
+    ],
+    "crossing_height_error_max_km": 3070.141053475936,
+    "height_drift_km_per_day": 4.989118221786762,
+    "steering_m_s_per_day": 0.13338760893147214
+   },
+   {
+    "plane": "ecliptic",
+    "radius_km": 19000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.026,
+    "e0": [
+     -0.10592807380889953,
+     0.007197748659465659
+    ],
+    "design_height_km": 7.778616269941498e-14,
+    "centre": [
+     -0.1066675820733665,
+     0.00747389671320138
+    ],
+    "circle_radius": 0.02939095690824256,
+    "averaged_spread": 0.04992381310723627,
+    "e_mean": 0.10605428647812484,
+    "e_max": 0.16939492874437043,
+    "periapsis_min_km": 15026.918558069217,
+    "crossings": 153,
+    "crossing_radius_km": [
+     18476.545715252996,
+     20106.066197358137
+    ],
+    "crossing_height_error_max_km": 3265.3067079278135,
+    "height_drift_km_per_day": 6.064006272737927,
+    "steering_m_s_per_day": 0.16212550220473246
+   },
+   {
+    "plane": "ecliptic",
+    "radius_km": 19000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.005,
+    "e0": [
+     -0.3847586951885426,
+     0.00484273384821593
+    ],
+    "design_height_km": 7.778616269941498e-14,
+    "centre": [
+     -0.4144162186993869,
+     0.02304605576563487
+    ],
+    "circle_radius": 0.0759717234851485,
+    "averaged_spread": 0.12333859592879365,
+    "e_mean": 0.41684935098147513,
+    "e_max": 0.5298262444812077,
+    "periapsis_min_km": 6726.708487897079,
+    "crossings": 216,
+    "crossing_radius_km": [
+     18056.677231414793,
+     21162.980676773852
+    ],
+    "crossing_height_error_max_km": 5021.131336678717,
+    "height_drift_km_per_day": 15.976286822200507,
+    "steering_m_s_per_day": 0.427137342528941
+   },
+   {
+    "plane": "ecliptic",
+    "radius_km": 19000.0,
+    "tilt_deg": 20.0,
+    "sigma_kg_m2": 0.0627,
+    "e0": [
+     -0.06562823074351772,
+     -0.013405961084006605
+    ],
+    "design_height_km": 6498.382723187706,
+    "centre": [
+     -0.06813254223116873,
+     -0.013239787950616116
+    ],
+    "circle_radius": 0.046138471438777036,
+    "averaged_spread": 0.07179596448184905,
+    "e_mean": 0.06821702887563742,
+    "e_max": 0.15608618562018642,
+    "periapsis_min_km": 15905.904590817785,
+    "crossings": 144,
+    "crossing_radius_km": [
+     18216.65989587068,
+     20567.077103791467
+    ],
+    "crossing_height_error_max_km": 2760.160267763788,
+    "height_drift_km_per_day": 0.4939988059668034,
+    "steering_m_s_per_day": 0.013207407925345907
+   },
+   {
+    "plane": "ecliptic",
+    "radius_km": 19000.0,
+    "tilt_deg": 20.0,
+    "sigma_kg_m2": 0.026,
+    "e0": [
+     -0.11715490411127162,
+     -0.02694517223841065
+    ],
+    "design_height_km": 6498.382723187706,
+    "centre": [
+     -0.13543845082880132,
+     -0.02297029478598149
+    ],
+    "circle_radius": 0.09286823718596147,
+    "averaged_spread": 0.1466030350803052,
+    "e_mean": 0.1338600892021229,
+    "e_max": 0.2820055531520355,
+    "periapsis_min_km": 12891.36212498824,
+    "crossings": 155,
+    "crossing_radius_km": [
+     17563.31905327246,
+     21705.798484900894
+    ],
+    "crossing_height_error_max_km": 2457.1361715576313,
+    "height_drift_km_per_day": -2.0766328721947014,
+    "steering_m_s_per_day": 0.05552025050056744
+   },
+   {
+    "plane": "ecliptic",
+    "radius_km": 19000.0,
+    "tilt_deg": 20.0,
+    "sigma_kg_m2": 0.005,
+    "e0": [
+     -0.2915221350919603,
+     0.15253033001113686
+    ],
+    "design_height_km": 6498.382723187706,
+    "centre": [
+     -0.44366320281503413,
+     0.08698190277283359
+    ],
+    "circle_radius": 0.24422882194031295,
+    "averaged_spread": 0.3553386312737871,
+    "e_mean": 0.4964081174999497,
+    "e_max": 0.8293729944119524,
+    "periapsis_min_km": 2768.7456751467357,
+    "crossings": 188,
+    "crossing_radius_km": [
+     16961.296928907715,
+     26951.36103136837
+    ],
+    "crossing_height_error_max_km": 8364.24876284253,
+    "height_drift_km_per_day": 24.351258645494898,
+    "steering_m_s_per_day": 0.6510481453436345
+   },
+   {
+    "plane": "ecliptic",
+    "radius_km": 20000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.0627,
+    "e0": [
+     -0.047885850245955645,
+     0.004474256476524325
+    ],
+    "design_height_km": 1.7688053927948093e-13,
+    "centre": [
+     -0.04807624682484025,
+     0.0044214330583487
+    ],
+    "circle_radius": 0.027546927786806827,
+    "averaged_spread": 0.04609249071394369,
+    "e_mean": 0.049942947769761985,
+    "e_max": 0.11229955749236299,
+    "periapsis_min_km": 18016.00300395425,
+    "crossings": 130,
+    "crossing_radius_km": [
+     19586.46917438424,
+     21194.4962031793
+    ],
+    "crossing_height_error_max_km": 2945.521457256187,
+    "height_drift_km_per_day": 3.666878032928524,
+    "steering_m_s_per_day": 0.09077652743295085
+   },
+   {
+    "plane": "ecliptic",
+    "radius_km": 20000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.026,
+    "e0": [
+     -0.10865749307692707,
+     0.007848611457073527
+    ],
+    "design_height_km": 1.7688053927948093e-13,
+    "centre": [
+     -0.10998430862159297,
+     0.008070212130085234
+    ],
+    "circle_radius": 0.033690960736182704,
+    "averaged_spread": 0.058216877760948665,
+    "e_mean": 0.10918281614268593,
+    "e_max": 0.18141389805837646,
+    "periapsis_min_km": 15689.157822225994,
+    "crossings": 142,
+    "crossing_radius_km": [
+     19408.47365345196,
+     21319.58129032342
+    ],
+    "crossing_height_error_max_km": 3279.6427855918114,
+    "height_drift_km_per_day": 5.599907826324973,
+    "steering_m_s_per_day": 0.13863024127159287
+   },
+   {
+    "plane": "ecliptic",
+    "radius_km": 20000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.005,
+    "e0": [
+     -0.3888611189842016,
+     0.0058128623960276155
+    ],
+    "design_height_km": 1.7688053927948093e-13,
+    "centre": [
+     -0.4192335466823302,
+     0.029850153219793757
+    ],
+    "circle_radius": 0.080453017355154,
+    "averaged_spread": 0.14010911001877635,
+    "e_mean": 0.42281204563662794,
+    "e_max": 0.5400283462292369,
+    "periapsis_min_km": 6928.8831621526315,
+    "crossings": 201,
+    "crossing_radius_km": [
+     18945.995871064053,
+     22240.994597167257
+    ],
+    "crossing_height_error_max_km": 5927.529890573,
+    "height_drift_km_per_day": 19.988282963456,
+    "steering_m_s_per_day": 0.49482608924427135
+   },
+   {
+    "plane": "ecliptic",
+    "radius_km": 20000.0,
+    "tilt_deg": 20.0,
+    "sigma_kg_m2": 0.0627,
+    "e0": [
+     -0.07280331721737172,
+     -0.004433863979284139
+    ],
+    "design_height_km": 6840.402866513374,
+    "centre": [
+     -0.07448946621617335,
+     -0.004964990415986679
+    ],
+    "circle_radius": 0.04216818658915458,
+    "averaged_spread": 0.0707818348019158,
+    "e_mean": 0.07211374159893684,
+    "e_max": 0.163839971390061,
+    "periapsis_min_km": 16627.757065321093,
+    "crossings": 136,
+    "crossing_radius_km": [
+     19205.202051544245,
+     21649.690672214932
+    ],
+    "crossing_height_error_max_km": 3365.8307348155677,
+    "height_drift_km_per_day": 3.6294442037895434,
+    "steering_m_s_per_day": 0.08984982275740941
+   },
+   {
+    "plane": "ecliptic",
+    "radius_km": 20000.0,
+    "tilt_deg": 20.0,
+    "sigma_kg_m2": 0.026,
+    "e0": [
+     -0.1400762914708861,
+     -0.016864537054480225
+    ],
+    "design_height_km": 6840.402866513374,
+    "centre": [
+     -0.14571041025132134,
+     -0.014941419612136441
+    ],
+    "circle_radius": 0.07893641259728643,
+    "averaged_spread": 0.12934063508666685,
+    "e_mean": 0.14010695382917546,
+    "e_max": 0.2806427082764573,
+    "periapsis_min_km": 13432.168791106042,
+    "crossings": 149,
+    "crossing_radius_km": [
+     18474.888882084695,
+     22432.182456827275
+    ],
+    "crossing_height_error_max_km": 2935.5004136981906,
+    "height_drift_km_per_day": 1.2535002422071497,
+    "steering_m_s_per_day": 0.03103141094470809
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 15000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.0627,
+    "e0": [
+     -0.03904189459335432,
+     0.0020385199838117317
+    ],
+    "design_height_km": -899.8666631869129,
+    "centre": [
+     -0.039093592459011416,
+     0.002015743264036857
+    ],
+    "circle_radius": 0.015229232911349661,
+    "averaged_spread": 0.02469999759685152,
+    "e_mean": 0.03925943626732885,
+    "e_max": 0.07092110259768827,
+    "periapsis_min_km": 13777.662687374785,
+    "crossings": 200,
+    "crossing_radius_km": [
+     14817.457721668196,
+     15466.458525609543
+    ],
+    "crossing_height_error_max_km": 2032.90036892705,
+    "height_drift_km_per_day": 3.163611262994492,
+    "steering_m_s_per_day": 0.1205780672849221
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 15000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.026,
+    "e0": [
+     -0.09070330662097846,
+     0.003638874470560917
+    ],
+    "design_height_km": -899.8666631869129,
+    "centre": [
+     -0.09126233719226698,
+     0.0034718092346775918
+    ],
+    "circle_radius": 0.021310601560669842,
+    "averaged_spread": 0.03550613063193711,
+    "e_mean": 0.09007318080512079,
+    "e_max": 0.13162017881527893,
+    "periapsis_min_km": 12273.654747205435,
+    "crossings": 215,
+    "crossing_radius_km": [
+     14712.84928757436,
+     15579.298325797168
+    ],
+    "crossing_height_error_max_km": 2018.1935810926996,
+    "height_drift_km_per_day": 3.2285238457179775,
+    "steering_m_s_per_day": 0.12305214931226383
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 15000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.005,
+    "e0": [
+     -0.3647261855201085,
+     0.005159181953611702
+    ],
+    "design_height_km": -899.8666631869129,
+    "centre": [
+     -0.3770127340837895,
+     0.009649317301201471
+    ],
+    "circle_radius": 0.04992747945217462,
+    "averaged_spread": 0.08022820507484948,
+    "e_mean": 0.3772398753153698,
+    "e_max": 0.44987180228911056,
+    "periapsis_min_km": 6212.601121958755,
+    "crossings": 299,
+    "crossing_radius_km": [
+     14465.022780585952,
+     16276.37877753277
+    ],
+    "crossing_height_error_max_km": 1900.8159350150577,
+    "height_drift_km_per_day": 3.2105734222942344,
+    "steering_m_s_per_day": 0.1223679858094028
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 15000.0,
+    "tilt_deg": 20.0,
+    "sigma_kg_m2": 0.0627,
+    "e0": [
+     -0.037283468038132775,
+     -0.0018860297796446275
+    ],
+    "design_height_km": 4263.861298000219,
+    "centre": [
+     -0.03794043453268551,
+     -0.0020982256851538516
+    ],
+    "circle_radius": 0.03524676364039212,
+    "averaged_spread": 0.058940883699057194,
+    "e_mean": 0.04535249406082295,
+    "e_max": 0.09197221736793285,
+    "periapsis_min_km": 13446.575851239933,
+    "crossings": 201,
+    "crossing_radius_km": [
+     14561.373004420648,
+     15780.452789791776
+    ],
+    "crossing_height_error_max_km": 8836.827036264018,
+    "height_drift_km_per_day": -23.066787066734022,
+    "steering_m_s_per_day": 0.8791688901584457
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 15000.0,
+    "tilt_deg": 20.0,
+    "sigma_kg_m2": 0.026,
+    "e0": [
+     -0.08417643875069505,
+     0.006199784810208946
+    ],
+    "design_height_km": 4263.861298000219,
+    "centre": [
+     -0.08905388006333412,
+     0.003218673745237005
+    ],
+    "circle_radius": 0.07345705802278592,
+    "averaged_spread": 0.12301302508942039,
+    "e_mean": 0.1053658355553631,
+    "e_max": 0.18572856094053897,
+    "periapsis_min_km": 11561.952101451901,
+    "crossings": 215,
+    "crossing_radius_km": [
+     14121.68271288643,
+     16381.938363911635
+    ],
+    "crossing_height_error_max_km": 9235.142623517428,
+    "height_drift_km_per_day": -24.685633022556516,
+    "steering_m_s_per_day": 0.9408696809187889
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 15000.0,
+    "tilt_deg": 20.0,
+    "sigma_kg_m2": 0.005,
+    "e0": [
+     -0.38757289359060193,
+     -0.023949858666771157
+    ],
+    "design_height_km": 4263.861298000219,
+    "centre": [
+     -0.38151178636229544,
+     0.018880052742033512
+    ],
+    "circle_radius": 0.10704589834983269,
+    "averaged_spread": 0.1568879957724948,
+    "e_mean": 0.39310174258613645,
+    "e_max": 0.538199290868114,
+    "periapsis_min_km": 5162.4170315747715,
+    "crossings": 309,
+    "crossing_radius_km": [
+     13629.49864643137,
+     16880.948062064697
+    ],
+    "crossing_height_error_max_km": 9716.619884616479,
+    "height_drift_km_per_day": -25.13375351956502,
+    "steering_m_s_per_day": 0.957949372116025
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 19000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.0627,
+    "e0": [
+     -0.0456269721833702,
+     0.0030438680798847025
+    ],
+    "design_height_km": -1139.831106703423,
+    "centre": [
+     -0.04574238839837118,
+     0.003019459886010746
+    ],
+    "circle_radius": 0.02684261344302843,
+    "averaged_spread": 0.04419263393474661,
+    "e_mean": 0.04746525679065432,
+    "e_max": 0.10727265761190936,
+    "periapsis_min_km": 17173.74019022789,
+    "crossings": 140,
+    "crossing_radius_km": [
+     18648.151482535723,
+     20048.20330080701
+    ],
+    "crossing_height_error_max_km": 2769.9249217318493,
+    "height_drift_km_per_day": 4.248242508604809,
+    "steering_m_s_per_day": 0.11357977205456847
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 19000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.026,
+    "e0": [
+     -0.10315284753071848,
+     0.005066113758381488
+    ],
+    "design_height_km": -1139.831106703423,
+    "centre": [
+     -0.10450495354469146,
+     0.0048657042295382905
+    ],
+    "circle_radius": 0.035108951863285734,
+    "averaged_spread": 0.0590624184716543,
+    "e_mean": 0.10333103846353671,
+    "e_max": 0.1718574364265695,
+    "periapsis_min_km": 15003.6303395121,
+    "crossings": 152,
+    "crossing_radius_km": [
+     18462.582906506286,
+     20194.963078970075
+    ],
+    "crossing_height_error_max_km": 2701.8456519203346,
+    "height_drift_km_per_day": 3.9903225222511876,
+    "steering_m_s_per_day": 0.10668409856158265
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 19000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.005,
+    "e0": [
+     -0.3825253090639167,
+     0.005808612122499834
+    ],
+    "design_height_km": -1139.831106703423,
+    "centre": [
+     -0.403428878786275,
+     0.008558255335534032
+    ],
+    "circle_radius": 0.0763709958914412,
+    "averaged_spread": 0.11716916437472252,
+    "e_mean": 0.40563454835711216,
+    "e_max": 0.5113132131344259,
+    "periapsis_min_km": 6982.284770818666,
+    "crossings": 213,
+    "crossing_radius_km": [
+     18062.592095174125,
+     21100.02582695673
+    ],
+    "crossing_height_error_max_km": 2354.7054131817313,
+    "height_drift_km_per_day": 2.8061410124962367,
+    "steering_m_s_per_day": 0.07502416726604706
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 19000.0,
+    "tilt_deg": 20.0,
+    "sigma_kg_m2": 0.0627,
+    "e0": [
+     -0.05708900250317014,
+     -0.007433650352771559
+    ],
+    "design_height_km": 5400.890977466944,
+    "centre": [
+     -0.05793478632073311,
+     -0.007469812602603768
+    ],
+    "circle_radius": 0.038619789407952194,
+    "averaged_spread": 0.06256187700479592,
+    "e_mean": 0.0567281802803967,
+    "e_max": 0.13296180140159047,
+    "periapsis_min_km": 16418.95545023934,
+    "crossings": 143,
+    "crossing_radius_km": [
+     18353.007150253707,
+     20346.21352782
+    ],
+    "crossing_height_error_max_km": 2562.196546903719,
+    "height_drift_km_per_day": 1.0573326171447663,
+    "steering_m_s_per_day": 0.028268536317763764
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 19000.0,
+    "tilt_deg": 20.0,
+    "sigma_kg_m2": 0.026,
+    "e0": [
+     -0.11324397766223136,
+     -0.015741656148444597
+    ],
+    "design_height_km": 5400.890977466944,
+    "centre": [
+     -0.12218754283072829,
+     -0.015167557999960574
+    ],
+    "circle_radius": 0.07249215713799603,
+    "averaged_spread": 0.11475769157689121,
+    "e_mean": 0.12097447969467624,
+    "e_max": 0.24141888268146544,
+    "periapsis_min_km": 13671.137072981795,
+    "crossings": 155,
+    "crossing_radius_km": [
+     17860.175297572812,
+     21133.62508263619
+    ],
+    "crossing_height_error_max_km": 2364.524755330957,
+    "height_drift_km_per_day": -2.3353055364052784,
+    "steering_m_s_per_day": 0.06243604736910216
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 19000.0,
+    "tilt_deg": 20.0,
+    "sigma_kg_m2": 0.005,
+    "e0": [
+     -0.3867448444836111,
+     -0.049996043954149194
+    ],
+    "design_height_km": 5400.890977466944,
+    "centre": [
+     -0.44208783627907383,
+     0.024061072603991873
+    ],
+    "circle_radius": 0.14575569408570996,
+    "averaged_spread": 0.20895725396169665,
+    "e_mean": 0.4482785617643055,
+    "e_max": 0.6469916813205748,
+    "periapsis_min_km": 5018.289111674082,
+    "crossings": 217,
+    "crossing_radius_km": [
+     17304.921499612483,
+     22601.56266379792
+    ],
+    "crossing_height_error_max_km": 2928.986408071803,
+    "height_drift_km_per_day": 7.527578046681509,
+    "steering_m_s_per_day": 0.201255130076331
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 20000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.0627,
+    "e0": [
+     -0.04757773247504927,
+     0.0033066406536672683
+    ],
+    "design_height_km": -1199.8222175825506,
+    "centre": [
+     -0.047744069487969464,
+     0.0032801539847835217
+    ],
+    "circle_radius": 0.030251455038811048,
+    "averaged_spread": 0.05017011090691783,
+    "e_mean": 0.050007529295930254,
+    "e_max": 0.1165938308797246,
+    "periapsis_min_km": 17986.62914115081,
+    "crossings": 129,
+    "crossing_radius_km": [
+     19579.62289565244,
+     21233.9495230736
+    ],
+    "crossing_height_error_max_km": 2988.036237373215,
+    "height_drift_km_per_day": 4.865976518218661,
+    "steering_m_s_per_day": 0.1204611789450214
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 20000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.026,
+    "e0": [
+     -0.1064589746615791,
+     0.0054402042345464375
+    ],
+    "design_height_km": -1199.8222175825506,
+    "centre": [
+     -0.10826185127997368,
+     0.005256445021903749
+    ],
+    "circle_radius": 0.039203241263341154,
+    "averaged_spread": 0.06500802268223589,
+    "e_mean": 0.10709042525641314,
+    "e_max": 0.1838041812380578,
+    "periapsis_min_km": 15644.143368865201,
+    "crossings": 141,
+    "crossing_radius_km": [
+     19380.00596628042,
+     21383.554199126385
+    ],
+    "crossing_height_error_max_km": 2901.5414543271163,
+    "height_drift_km_per_day": 4.369453171514206,
+    "steering_m_s_per_day": 0.10816934245674296
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 20000.0,
+    "tilt_deg": 0.0,
+    "sigma_kg_m2": 0.005,
+    "e0": [
+     -0.3853559172948911,
+     0.006212156096679272
+    ],
+    "design_height_km": -1199.8222175825506,
+    "centre": [
+     -0.40906255975968986,
+     0.00798354938205953
+    ],
+    "circle_radius": 0.08456611983790593,
+    "averaged_spread": 0.12869367578171229,
+    "e_mean": 0.41176803263817546,
+    "e_max": 0.5271658824874507,
+    "periapsis_min_km": 7146.4570797614415,
+    "crossings": 198,
+    "crossing_radius_km": [
+     18961.87796913006,
+     22385.918946783793
+    ],
+    "crossing_height_error_max_km": 2494.110814191971,
+    "height_drift_km_per_day": 2.7176971894178177,
+    "steering_m_s_per_day": 0.06727878900095632
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 20000.0,
+    "tilt_deg": 20.0,
+    "sigma_kg_m2": 0.0627,
+    "e0": [
+     -0.06178976852922722,
+     -0.0025924409055434745
+    ],
+    "design_height_km": 5685.148397333625,
+    "centre": [
+     -0.06239406147724235,
+     -0.0026641474017776276
+    ],
+    "circle_radius": 0.03868859072299824,
+    "averaged_spread": 0.06429986085020813,
+    "e_mean": 0.06035687686305695,
+    "e_max": 0.14650116890044396,
+    "periapsis_min_km": 17174.32707033192,
+    "crossings": 133,
+    "crossing_radius_km": [
+     19323.986856670344,
+     21550.378131026217
+    ],
+    "crossing_height_error_max_km": 3190.7304441437273,
+    "height_drift_km_per_day": 3.814315196282308,
+    "steering_m_s_per_day": 0.09442645349638536
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 20000.0,
+    "tilt_deg": 20.0,
+    "sigma_kg_m2": 0.026,
+    "e0": [
+     -0.12605156338287815,
+     -0.011757870746314018
+    ],
+    "design_height_km": 5685.148397333625,
+    "centre": [
+     -0.1309328808589432,
+     -0.009746173252923578
+    ],
+    "circle_radius": 0.06753232849967951,
+    "averaged_spread": 0.11199181540428717,
+    "e_mean": 0.12696935528087724,
+    "e_max": 0.2483255894210856,
+    "periapsis_min_km": 14182.649005497446,
+    "crossings": 146,
+    "crossing_radius_km": [
+     18788.03433334934,
+     22131.72454174125
+    ],
+    "crossing_height_error_max_km": 2632.6685039659515,
+    "height_drift_km_per_day": 1.5102533485459484,
+    "steering_m_s_per_day": 0.03738754147093812
+   },
+   {
+    "plane": "moon_orbit",
+    "radius_km": 20000.0,
+    "tilt_deg": 20.0,
+    "sigma_kg_m2": 0.005,
+    "e0": [
+     -0.3917900693095733,
+     -0.023348797611324655
+    ],
+    "design_height_km": 5685.148397333625,
+    "centre": [
+     -0.46786211544968737,
+     0.08730103959140753
+    ],
+    "circle_radius": 0.1530823170112821,
+    "averaged_spread": 0.24681350158521567,
+    "e_mean": 0.4732392019074207,
+    "e_max": 0.6899018213774075,
+    "periapsis_min_km": 4665.64931135212,
+    "crossings": 203,
+    "crossing_radius_km": [
+     18418.924740429684,
+     23533.094750662363
+    ],
+    "crossing_height_error_max_km": 5580.645854198415,
+    "height_drift_km_per_day": 17.18931266739309,
+    "steering_m_s_per_day": 0.4255353188442398
+   }
+  ]
+ ],
+ "resources": {
+  "cpu_s": 922.658801628,
+  "wall_s": 923.9345238810056,
+  "nfev": 2150487,
+  "max_rss_MiB": 1025.80859375,
+  "numerical_threads": 1
+ }
+}

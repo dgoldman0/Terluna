@@ -49,11 +49,11 @@ or not met. The ledger product carries the evidence behind each.
 | Gate | Held screen, zoned | Ring fleet |
 |---|---|---|
 | UV transmission (O1, O8) | Open: the 5 g/m² annulus film is unproven, because the 24.8–120 nm opacity proof rests on 22 g/m² of silica; continuous area with no seams | Open: projected overlaps stay positive in the kept bundle; receiver-ray coverage, handovers and the annulus film are unproven |
-| Protected radius (O2) | Met: the 7,454 km aperture covers four lunar radii with the finite Sun | Open: the strip pattern's sunward crossing drifts 2,000–8,500 km over a year at 15,000 km until the frozen common orbit is found |
+| Protected radius (O2) | Met: the 7,454 km aperture covers four lunar radii with the finite Sun | Open: on a Sun-tracking eccentricity the sunward crossing radius holds within 600–4,100 km over a year, but the ring planes move the strip pattern 2,400–3,400 km at 19,000–20,000 km and let tilted rings at 15,000 km drift 23–28 km a day; 5 g/m² tiles are forced to e ≈ 0.4 (below) |
 | Window spectrum (E2, O4) | Conditional on the 26 g/m² window and the dimmer's form | The same, on the rings that cross the window |
 | Earth's shadow and rejected light (O5, O7) | Open: the optical bound lets redirected light leave toward the Moon; the shadow on Earth is unmapped | Open: night-side tiles reflect back past the Moon, with light the screen has already filtered (to check); the shadow on Earth is unmapped |
-| Stability | Conditional on continuous thrust (75.7 TW installed); an unpowered tile drifts about 2,700 km in its first day | Open: the kept bundle's edges first come within 150 m at day 8.1; the interior stays clear for 23 days in a one-tile-per-ring model |
-| Outflows (S7, proposed) | Not met as designed: without the magnets by the direct plumes and by the slow gas alone; with them by the slow gas and, for 1 kg/s at a 45° cant, the fast atoms (below) | Open: photon keeping releases nothing, pending its check; electric keeping would release 0.4 t/s or more at or inside the planned magnetosphere |
+| Stability | Conditional on continuous thrust (75.7 TW installed); an unpowered tile drifts about 2,700 km in its first day | Open: the kept bundle's edges first come within 150 m at day 8.1; the interior stays clear for 23 days in a one-tile-per-ring model; shadows within each shingled ring put a steady pitch torque of about 28,000 N·m on every tile, beyond reflectivity trim (below) |
+| Outflows (S7, proposed) | Not met as designed: without the magnets by the direct plumes and by the slow gas alone; with them by the slow gas and, for 1 kg/s at a 45° cant, the fast atoms (below) | Conditional: photon keeping releases nothing, and with 2° tilts and 25% trim it reaches 1.6 times the keeping demand over each orbit (below); met if a phase-scheduled law delivers it and the attitude actuator releases nothing. Electric keeping would release 0.4 t/s or more at or inside the planned magnetosphere |
 | Holding cheaper than the atmosphere it saves (S6) | Not met: 51,000 kg/s against 300–80,000 kg/s of unshielded loss | Conditional on photon keeping |
 | Net-positive electricity for habitat | Open: its own load is 32.8 TW mean | Open: its own load is the attitude energy, not yet computed |
 
@@ -169,6 +169,84 @@ a plasma estimate of what leaks past the magnetosphere. The held screen also
 fails S6: its 51,000 kg/s of propellant exceeds the atmosphere's unshielded
 loss of 300–80,000 kg/s everywhere but the top of that range.
 
+## What holds the ring fleet: photon control
+
+[photon_control.py](photon_control.py) replays the twelve kept orbits from
+their checkpoints and writes [results/photon_control.json](results/photon_control.json)
+in about two CPU minutes. The kept run's tiles carry 62.7 g/m² (the seed's
+50 g/m² and its holding pack); lighter tiles gain sail reach and lose gravity
+torque in proportion.
+
+**Translation.** The filter's redirected band reflects specularly along each
+tile's normal, so tilting the normal and trimming the band's reflectivity move
+the sail force within a bounded set. Against the keeping law's demand on each
+ring, with each tile's lit fraction behind the bundle's shadows:
+
+| Tilt and trim | Interior: reach over demand per orbit | Interior: share met at the instant | Edges: reach over demand |
+|---|---:|---:|---:|
+| 1°, 10% | 0.67 | 44% | 0.38 |
+| 2°, 25% | 1.58 | 63% | 0.89 |
+| 5°, 25% | 2.13 | 70% | 1.13 |
+
+The demand is the inflated one of the fixed keeping frame. A law that moves
+its work to the lit phases of each orbit can deliver it with tilts of about 2°
+for interior rings and 5° for the edges; 5 g/m² tiles have 12.5 times the
+reach. Photon keeping holds on translation.
+
+**Attitude.** It does not hold on attitude as built. Within a shingled ring each
+tile lies under its neighbour along one edge, so the lit part of its redirected
+band sits off centre: the centre of pressure lies 1.25 km from the tile's centre
+(median; 3.1 km at the 95th percentile). That puts a radiation torque of about
+52,000 N·m on every tile (median), whose pitch part averages 27,600 N·m over
+each orbit, while the 1.5° shingle tilt holds each tile off
+gravity gradient's equilibrium with a further 6,000 N·m (490 N·m at 5 g/m²).
+Trimming reflectivity across a tile's halves would need more than the whole
+band (128% at the median), and a momentum store would have to hold about
+10¹⁰ N·m·s per tile. Holding the attitude takes one of:
+- a moving mass that carries the tile's centre of mass to its centre of
+  pressure, a shift of 1–3 km;
+- an overlap whose shadows fall evenly on both edges of a tile;
+- an attitude that turns tiles edge-on to the Sun outside service, where they
+  cast and receive no shadows, at the cost of two turns each orbit.
+
+## What holds the ring fleet: the frozen orbit
+
+A radial-facing tile is pushed toward the Moon on the day side and away from it
+on the night side. Averaged over an orbit, that drives the eccentricity vector
+at a steady rate across the Sun line, while Earth's tide turns the apse line
+against the Sun; in the frame that follows the Sun the push balances at a forced
+eccentricity along the Sun line, the balance that gives high area-to-mass
+satellites their Sun-tracking (heliotropic) orbits (Colombo, Lücking and
+McInnes, 2012). A ring started on a circle traces a circle about that
+equilibrium, which is the swing the year-long screen found.
+[frozen_rings.py](frozen_rings.py) finds the equilibrium by iteration over a
+year of DE440s gravity with the sail force and shadows of the year-long screen,
+starting each pass on the centre the previous pass found, and writes
+[results/frozen_rings.json](results/frozen_rings.json) in about 15 CPU minutes.
+Across ring radii of 15,000–20,000 km, tilts of 0–20° and both reference
+planes:
+
+| Tile areal mass | Forced eccentricity (apolune toward the Sun) | Sunward crossing radius spread over a year | Lowest perilune |
+|---|---:|---:|---:|
+| 62.7 g/m² | 0.04–0.07 | 600–2,400 km | 13,300 km |
+| 26 g/m² | 0.08–0.15 | 800–4,100 km | 11,300 km |
+| 5 g/m² | 0.38–0.48 | 1,800–10,000 km | 2,800 km |
+
+Started on its circle, a 62.7 g/m² ring swings its crossing radius by
+1,800–5,400 km; started on the forced eccentricity, by 600–2,400 km. What
+remains of the eccentricity swing is the kind of correction reflectivity trim
+supplies. Two things remain beyond it:
+- **The planes.** Eccentricity cannot hold a ring's plane. At 19,000–20,000 km,
+  near the radius where Earth's tide turns the planes with the Sun, the strip
+  pattern still moves 2,400–3,400 km over the year; at 15,000 km tilted rings
+  lag the Sun by 23–28 km a day. The pattern needs oversizing by roughly that
+  much, or steering of its planes.
+- **Light tiles.** At 5 g/m² the forced eccentricity reaches about 0.4, and
+  the night-side perilune falls inside four lunar radii, as low as 2,800 km.
+  Annulus tiles near the window's 26 g/m² keep the eccentricity at 0.08–0.15.
+  By the averaged forcing, tiles turned edge-on outside a ±25° service arc
+  would cut the push, and with it the forced eccentricity, about 3.4 times.
+
 ## Resources
 
 Optical masses use 26 g/m² wherever a tile serves the window and 5 g/m²
@@ -190,11 +268,8 @@ whether collector or habitat, burns the same. The ring fleet has about ten to
 thirteen times the held screen's tiles to make and replace, as recycled
 throughput. Done by 30 km/s electric thrust, its keeping and steering would
 release 0.4 t/s and 0.06–5.7 t/s of exhaust in lunar orbit, which is why
-photon keeping was adopted. The kept run's keeping demand peaks at 4.6% of the
-sail acceleration that the filter's redirected band gives a 5 g/m² tile and
-24% of a 26 g/m² tile's; the steering of the steady drift needs 10⁻⁷–10⁻⁵ m/s².
-Whether a sail force that always points away from the Sun can follow that
-demand around each orbit is the next check.
+photon keeping was adopted. The two sections above give what photon control and
+the frozen orbit change in these figures.
 
 ## Electricity
 
@@ -231,38 +306,53 @@ its exhaust breaks the proposed outflow requirement, and its propellant fails
 S6. With the September magnets it could meet the outflow requirement only
 with gridded ion thrusters and capture of most of its unionized gas, pending a
 plasma estimate of the magnetosphere's leak. The ring fleet passes no gate yet
-and fails none: its open items are photon keeping, receiver-ray coverage with
-independently propagated tiles, the edge rings, the frozen common orbit and its
-oversizing, and the attitude energy. Both share the annulus film's unproven UV
-transmission and the unmapped shadow on Earth.
+and fails none. Photon keeping holds on translation, and a Sun-tracking
+eccentricity holds its rings' sunward crossings. Its radial-facing, shingled
+design as built does not hold its attitude, and its lightest tiles are pushed to
+eccentricities near 0.4. Both point to the same change: an attitude that turns
+tiles edge-on outside service, or heavier annulus tiles with a moving mass. Its
+remaining items are that attitude scheme, the planes' motion (oversizing or
+steering), receiver-ray coverage with independently propagated tiles, and the
+edge rings. Both candidates share the annulus film's unproven UV transmission
+and the unmapped shadow on Earth.
 
 ## Next steps
 
-These follow the order in the [plan](relative_orbits.md#plan):
+Photon keeping and the frozen orbit are done (above). Next, in order:
 
-4. Check photon keeping for the ring fleet against the kept run's demand.
-5. Compute the annulus film's UV transmission in the protection domain.
-6. Validate the bundle with independently propagated tiles, finite squares and
-   receiver rays.
-7. Redo the keeping in the regressing frame, treat the edge rings and find the
-   frozen common orbit, as far as the ledger keeps the fleet in contention.
+1. An attitude scheme for the fleet: tiles edge-on to the Sun outside service,
+   measured for their push, shadows, torques and the turns' torque and time,
+   against radial-facing tiles with a moving mass.
+2. The planes' motion: oversizing the strip pattern against steering its planes
+   with tilted sail force.
+3. The annulus film's UV transmission in the protection domain, and with it the
+   annulus tiles' areal mass.
+4. The bundle validated with independently propagated tiles, finite squares
+   and receiver rays, then the keeping in the regressing frame with the edge
+   rings treated.
 
-The held screen's plasma path, with and without the magnets, needs a model
-this repository lacks; a bound from published comet, ion-release and
-mini-magnetosphere studies comes first.
+For the held screen, the literature can settle two conditions first: how close
+thrusters come to ionizing all their propellant, neutralizer flow included,
+and, from published comet, ion-release and mini-magnetosphere studies, a bound
+on its plasma path with and without the magnets, which needs a model this
+repository lacks.
 
 ## Running
 
 ```sh
 OPENBLAS_NUM_THREADS=1 python -m research.studies.solar_shield_array.exhaust_isolation
+OPENBLAS_NUM_THREADS=1 python -m research.studies.solar_shield_array.photon_control
+OPENBLAS_NUM_THREADS=1 python -m research.studies.solar_shield_array.frozen_rings
 python -m research.studies.solar_shield_array.integrated_ledger
-python -m pytest research/studies/solar_shield_array/test_exhaust_isolation.py research/studies/solar_shield_array/test_integrated_ledger.py
+python -m pytest research/studies/solar_shield_array/test_exhaust_isolation.py research/studies/solar_shield_array/test_photon_control.py research/studies/solar_shield_array/test_frozen_rings.py research/studies/solar_shield_array/test_integrated_ledger.py
 ```
 
 The exhaust study takes about 27 CPU minutes, almost all of it the slow-gas
 particles, and keeps one checkpoint per launch date in
-`research/runs/solar_shield_array/exhaust_isolation/`. The ledger takes a
-second.
+`research/runs/solar_shield_array/exhaust_isolation/`. Photon control reads the
+kept run's checkpoints (about two CPU minutes; without them it reflies the
+twelve orbits, about an hour). The frozen orbits take about 15 CPU minutes and
+the ledger a second.
 
 ## Sources
 
@@ -280,3 +370,7 @@ second.
 - A. N. Heays, A. D. Bosman and E. F. van Dishoeck, *Photodissociation and
   photoionisation of atoms and molecules of astrophysical interest*, A&A 602,
   A105 (2017), tables 18–19.
+- C. Colombo, C. Lücking and C. R. McInnes, *Orbital dynamics of high
+  area-to-mass ratio spacecraft with J2 and solar radiation pressure for novel
+  Earth observation and communication services*, Acta Astronautica 81, 137–150
+  (2012): heliotropic orbits.

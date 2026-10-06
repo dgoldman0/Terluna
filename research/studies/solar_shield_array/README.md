@@ -31,14 +31,23 @@ in a model with one propagated tile per ring; the edge rings first come within
 under gravity alone. Most of it is the keeping law's fixed frame working
 against the stack's common regression under Earth's tide, 20° a month, and it
 grows with the bundle's height. The ring fleet keeps station with photon
-forces, so it releases no exhaust; whether the sail force can follow the
-keeping demand is the next check.
+forces, so it releases no exhaust: along the kept run, tilts of about 2° with
+25% reflectivity trim reach 1.6 times the keeping demand over each orbit
+([photon_control.py](photon_control.py)). Shingle shadows, though, put a steady
+pitch torque of about 28,000 N·m on every radial-facing tile, which reflectivity
+trim cannot hold; the attitude needs a moving mass, a balanced overlap or tiles
+turned edge-on outside service.
 
 A year-long screen finds that the sail force on radial-facing tiles moves
 every ring's sunward crossing by thousands of kilometres. The common orbit
 therefore needs a frozen family, with the steady drift smallest near
-20,000 km. A full ring screen needs about 17–22 million tiles, ten to thirteen
-times the held screen's.
+20,000 km. That family is a Sun-tracking eccentricity with apolune at the Sun
+([frozen_rings.py](frozen_rings.py)): e of 0.04–0.07 for 62.7 g/m² tiles and
+about 0.4 for 5 g/m² tiles, whose perilune then falls inside four lunar radii.
+Starting on it cuts the yearly swing of a ring's sunward crossing two to three
+times, while the planes still move the pattern 2,400–3,400 km near 20,000 km. A
+full ring screen needs about 17–22 million tiles, ten to thirteen times the held
+screen's.
 
 A held screen with a zoned aperture needs 32.8–66.5 TW, against the published
 238 TW. Its reaction mass, 51 t/s at the lightest design point, leaves into
@@ -262,6 +271,8 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.ring_screen
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.zoned_aperture
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.exhaust_isolation
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.photon_control
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.frozen_rings
 python -m research.studies.solar_shield_array.integrated_ledger
 python -m pytest protection/dynamics research/studies/solar_shield_array
 python visualization/solar-shield-array/plot.py

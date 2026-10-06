@@ -2,7 +2,7 @@
  "schema": "terluna.research.integrated-ledger/1",
  "producer": {
   "files": {
-   "research/studies/solar_shield_array/integrated_ledger.py": "164ba4b00a849e1febb01196a1205f195493ae9b7987249db586464c8a4c9db2",
+   "research/studies/solar_shield_array/integrated_ledger.py": "d1ca475a8ea6ff011eeeb7aca4cac434fa79597ff30633bde8991dbe4d4874be",
    "research/studies/solar_shield_array/run.py": "69e01bf90ca29987f9251f7d1aff5be0c57e909815847cf0cf7a4e94cf3ff9cd",
    "protection/dynamics/optical.py": "06a13ae9f24834876edbc12b513deaa5e3735f02f8249eb57c8996d74ce00b56"
   },
@@ -23,7 +23,9 @@
    "results/exhaust_isolation.json": "91b3045d1d8157172e478abcb81cdc712d26da4345da83cf5f002b4c77710e50",
    "results/ring_bundle.json": "d51b6e19f0f3698faf44dffe4c2e1d4631c5ec629258d82966e48c51764955c9",
    "results/ring_keeping.json": "28bb4c2c662c644dba015d24ecef5747589ce1758078c455124db0d3b3cdfb37",
-   "results/ring_screen.json": "7aea0d5a13af058333d6ee4d5e1ab522491e83d2321a6bd5a3143e14245302e1"
+   "results/ring_screen.json": "7aea0d5a13af058333d6ee4d5e1ab522491e83d2321a6bd5a3143e14245302e1",
+   "results/photon_control.json": "1ea808e2fa722bdd0e38fde277fe0f2719641f7f16dfe987ffaa1a47d772d14a",
+   "results/frozen_rings.json": "8473d60712ab692344741814853594f6ee2e0896a6777d211778af1bf7ae75aa"
   }
  },
  "evidence": "Arithmetic on the named products and on stated requirements and assumptions; no new dynamics. The ring fleet's inventory is an estimate from the bundle's height step, pitch and the covering radius at the ring radius, before any oversizing for the strip pattern's annual motion.",
@@ -224,6 +226,98 @@
     ]
    },
    "note": "The redirected band gives the sail acceleration shown; tilting the tile turns part of it along-track or normal. Whether its direction can follow the demand around each orbit is the open check."
+  },
+  "frozen_orbit": {
+   "by_areal_mass": {
+    "5_g_m2": {
+     "eccentricity": [
+      0.37713619686489047,
+      0.475937422973648
+     ],
+     "crossing_radius_spread_km": [
+      1811.355996946817,
+      9990.064102460656
+     ],
+     "periapsis_min_km": 2768.7456751467357
+    },
+    "26_g_m2": {
+     "eccentricity": [
+      0.08450869658726476,
+      0.14647446765779457
+     ],
+     "crossing_radius_spread_km": [
+      844.8215440628264,
+      4142.479431628435
+     ],
+     "periapsis_min_km": 11328.059529119873
+    },
+    "62.7_g_m2": {
+     "eccentricity": [
+      0.03799840948717241,
+      0.07465475006321613
+     ],
+     "crossing_radius_spread_km": [
+      627.6087814064995,
+      2444.488620670687
+     ],
+     "periapsis_min_km": 13303.810839097037
+    }
+   },
+   "height_error_19000_20000_km": [
+    2364.524755330957,
+    3365.8307348155677
+   ],
+   "height_drift_15000_tilted_km_per_day": [
+    23.066787066734022,
+    28.169130557040575
+   ]
+  },
+  "photon_control": {
+   "translation": {
+    "1_deg_0.1": {
+     "interior": {
+      "demand_m_s": 19.285440107375944,
+      "instant_share": 0.4365032873920938,
+      "reach_over_demand": 0.6701824542011107
+     },
+     "edges": {
+      "demand_m_s": 6.093964288675952,
+      "instant_share": 0.3462012295171719,
+      "reach_over_demand": 0.3798300412342725
+     }
+    },
+    "2_deg_0.25": {
+     "interior": {
+      "demand_m_s": 19.285440107375944,
+      "instant_share": 0.6250426707233531,
+      "reach_over_demand": 1.5828633078401702
+     },
+     "edges": {
+      "demand_m_s": 6.093964288675952,
+      "instant_share": 0.6333244541289706,
+      "reach_over_demand": 0.8890498700181277
+     }
+    },
+    "5_deg_0.25": {
+     "interior": {
+      "demand_m_s": 19.285440107375944,
+      "instant_share": 0.7022388175967771,
+      "reach_over_demand": 2.128942302594364
+     },
+     "edges": {
+      "demand_m_s": 6.093964288675952,
+      "instant_share": 0.7270118253820868,
+      "reach_over_demand": 1.1253272030835948
+     }
+    }
+   },
+   "pitch_torque_orbit_mean_N_m": 27559.56112294445,
+   "pressure_centre_offset_m": {
+    "median": 1251.7093936532888,
+    "p95": 3119.8105736099765,
+    "max": 4942.883555138665
+   },
+   "trim_needed_lit_median": 1.281848344231757
   }
  },
  "electricity": {
@@ -815,7 +909,7 @@
    },
    "ring_fleet": {
     "state": "open",
-    "evidence": "The strip pattern's crossing height drifts by 1,982-8,541 km over a year at 15,000 km; the frozen common orbit is not yet found."
+    "evidence": "On a Sun-tracking eccentricity (apolune toward the Sun, e 0.08-0.15 for 26 g/m2 tiles) the sunward crossing radius stays within 845-4,142 km over a year, but the ring planes still move the strip pattern 2,365-3,366 km at 19,000-20,000 km and let tilted rings at 15,000 km drift 23-28 km a day: the pattern needs oversizing or plane steering. 5 g/m2 tiles are forced to e 0.38-0.48, with perilune as low as 2,769 km."
    }
   },
   {
@@ -848,7 +942,7 @@
    },
    "ring_fleet": {
     "state": "open",
-    "evidence": "The kept bundle's edges first come within 150 m at day 8.1; interior rings stay at least 213 m apart for 23 days in the one-tile-per-ring model; independently propagated tiles and the frozen common orbit are pending."
+    "evidence": "The kept bundle's edges first come within 150 m at day 8.1; interior rings stay at least 213 m apart for 23 days in the one-tile-per-ring model; independently propagated tiles are pending. Shadows within each shingled ring put a steady pitch torque of about 27,560 N m on every tile, its centre of pressure 1.3 km off centre (medians); reflectivity trim cannot hold it, so the attitude needs a moving mass or an overlap whose shadows balance."
    }
   },
   {
@@ -858,8 +952,8 @@
     "evidence": "At the 45 degree cant the measured plumes send 6.2e-06 (gridded ion) to 1.6e-04 (Hall) of their fast ions straight into the protected sphere, against an allowance of 4.1e-06 of the jet power for 10 kg/s and 4.1e-07 for 1 kg/s. The slow unionized gas alone deposits 30-291 MW against 9.4 MW for 1 kg/s and 94 MW for 10 kg/s. Without the magnets the solar wind's pickup of the charged exhaust adds to both. The September magnets hold off the exhaust ions but pass the charge-exchanged fast atoms and the slow gas: for 1 kg/s, gridded ion thrusters canted 60 degrees leave room only if 81%-98% of the unionized gas is captured, and Hall thrusters exceed the allowance at every cant."
    },
    "ring_fleet": {
-    "state": "open",
-    "evidence": "Photon keeping releases nothing; its feasibility check is pending. The same control by electric thrust would release 414 kg/s at 15,000 km, at or inside the planned magnetosphere."
+    "state": "conditional",
+    "evidence": "Photon keeping releases nothing. Along the kept run, tilts up to 2 degrees with 25% reflectivity trim reach 1.6 times the keeping demand over each orbit, 63% of it at the instant asked, and the edge rings need 5 degrees; met if a phase-scheduled law delivers it and the attitude actuator releases nothing. The same control by electric thrust would release 414 kg/s at 15,000 km, at or inside the planned magnetosphere."
    }
   },
   {

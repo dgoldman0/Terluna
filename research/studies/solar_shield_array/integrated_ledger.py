@@ -33,7 +33,8 @@ OUT = HERE/'results/integrated_ledger.json'
 FILES = ['research/studies/solar_shield_array/integrated_ledger.py', 'research/studies/solar_shield_array/run.py',
          'protection/dynamics/optical.py']
 PRODUCTS = {name: HERE/f'results/{name}.json' for name in
-            ('zoned_aperture', 'exhaust_isolation', 'ring_bundle', 'ring_keeping', 'ring_screen')}
+            ('zoned_aperture', 'exhaust_isolation', 'ring_bundle', 'ring_keeping', 'ring_screen', 'photon_control',
+             'frozen_rings')}
 # Values fixed by the requirements (research/studies/protection_architecture/requirements.md: R1, S6, O8, E2)
 # and the tiles of every study (10 km squares with 9.89 km clear sides).
 REQUIREMENTS = dict(loss_budgets_kg_s=[1., 10., 100.], unshielded_loss_kg_s=[300., 80000.],
@@ -158,8 +159,33 @@ def electricity(held_row, zoned):
                                    'power to habitat and industry follows once they are modelled.'))
 
 
-def gates(h, fleet, exhaust, keeping):
+def frozen_summary(frozen):
+    """Ranges from the last pass of the frozen-orbit iteration."""
+    rows = frozen['passes'][-1]
+
+    def span(values):
+        return [float(min(values)), float(max(values))]
+    by_mass = {}
+    for sigma in sorted({r['sigma_kg_m2'] for r in rows}):
+        group = [r for r in rows if r['sigma_kg_m2'] == sigma]
+        by_mass[f'{sigma*1e3:g}_g_m2'] = dict(
+            eccentricity=span([np.hypot(*r['centre']) for r in group]),
+            crossing_radius_spread_km=span([r['crossing_radius_km'][1]-r['crossing_radius_km'][0] for r in group]),
+            periapsis_min_km=float(min(r['periapsis_min_km'] for r in group)))
+    settled = [r for r in rows if r['radius_km'] >= 19000. and r['sigma_kg_m2'] >= .026]
+    lagging = [r for r in rows if r['radius_km'] == 15000. and r['tilt_deg'] > 0]
+    return dict(by_areal_mass=by_mass,
+                height_error_19000_20000_km=span([r['crossing_height_error_max_km'] for r in settled]),
+                height_drift_15000_tilted_km_per_day=span([abs(r['height_drift_km_per_day']) for r in lagging]))
+
+
+def gates(h, fleet, exhaust, keeping, photon, frozen):
     allow = {row['budget_kg_s']: row['share_of_jet_power'] for row in exhaust['allowance']['per_budget']}
+    held_window = frozen['by_areal_mass']['26_g_m2']
+    light = frozen['by_areal_mass']['5_g_m2']
+    move = photon['translation']
+    pitch = photon['attitude']['by_axis']['pitch_about_orbit_normal']['radiation_orbit_mean_N_m_median']
+    centre = photon['attitude']['pressure_centre_offset_m']['median']/1e3
     clear = {row['cant_deg']: row for row in exhaust['direct_path']['clear']}
     first = fleet['by_radius'][0]
     slow = [mw for species in exhaust['slow_gas_implied']['by_species'].values() for mw in species['30_days']['deposited_MW']]
@@ -180,9 +206,18 @@ def gates(h, fleet, exhaust, keeping):
         dict(gate='Protected radius (O2)',
              held_zoned=dict(state='met', evidence=f"The {h['aperture_radius_km']:,.0f} km aperture covers four lunar "
                              'radii with the finite Sun on the selected trajectory.'),
-             ring_fleet=dict(state='open', evidence='The strip pattern\'s crossing height drifts by '
-                             f"{first['crossing_height_error_max_km'][0]:,.0f}-{first['crossing_height_error_max_km'][1]:,.0f}"
-                             ' km over a year at 15,000 km; the frozen common orbit is not yet found.')),
+             ring_fleet=dict(state='open', evidence='On a Sun-tracking eccentricity (apolune toward the Sun, e '
+                             f"{held_window['eccentricity'][0]:.2f}-{held_window['eccentricity'][1]:.2f} for 26 g/m2 tiles) "
+                             'the sunward crossing radius stays within '
+                             f"{held_window['crossing_radius_spread_km'][0]:,.0f}-{held_window['crossing_radius_spread_km'][1]:,.0f}"
+                             ' km over a year, but the ring planes still move the strip pattern '
+                             f"{frozen['height_error_19000_20000_km'][0]:,.0f}-{frozen['height_error_19000_20000_km'][1]:,.0f}"
+                             ' km at 19,000-20,000 km and let tilted rings at 15,000 km drift '
+                             f"{frozen['height_drift_15000_tilted_km_per_day'][0]:.0f}-"
+                             f"{frozen['height_drift_15000_tilted_km_per_day'][1]:.0f} km a day: the pattern needs "
+                             'oversizing or plane steering. 5 g/m2 tiles are forced to e '
+                             f"{light['eccentricity'][0]:.2f}-{light['eccentricity'][1]:.2f}, with perilune as low as "
+                             f"{light['periapsis_min_km']:,.0f} km.")),
         dict(gate='Window spectrum (E2, O4)',
              held_zoned=dict(state='conditional', evidence='The titania stack in the window at 26 g/m2; the dimmer\'s '
                              'form is open, and a band-selective dimmer needs the climate model.'),
@@ -198,8 +233,10 @@ def gates(h, fleet, exhaust, keeping):
                              f"{h['unpowered_drift_first_day_km']:,.0f} km in its first day."),
              ring_fleet=dict(state='open', evidence=f"The kept bundle's edges first come within 150 m at day {breach:.1f}; "
                              f"interior rings stay at least {interior:.0f} m apart for {days:.0f} days in the "
-                             'one-tile-per-ring model; independently propagated tiles and the frozen common orbit are '
-                             'pending.')),
+                             'one-tile-per-ring model; independently propagated tiles are pending. Shadows within '
+                             f"each shingled ring put a steady pitch torque of about {pitch:,.0f} N m on every tile, its "
+                             f"centre of pressure {centre:.1f} km off centre (medians); reflectivity trim cannot hold "
+                             'it, so the attitude needs a moving mass or an overlap whose shadows balance.')),
         dict(gate='Outflows (S7, proposed)',
              held_zoned=dict(state='not met', evidence='At the 45 degree cant the measured plumes send '
                              f"{clear[45.]['gridded_ion_NEXT_share']:.1e} (gridded ion) to "
@@ -213,10 +250,14 @@ def gates(h, fleet, exhaust, keeping):
                              f"canted 60 degrees leave room only if {capture[0]:.0%}-{capture[1]:.0%} of the unionized "
                              'gas is captured' + (', and Hall thrusters exceed the allowance at every cant.'
                                                   if hall_fails else '.')),
-             ring_fleet=dict(state='open', evidence='Photon keeping releases nothing; its feasibility check is pending. '
-                             'The same control by electric thrust would release '
-                             f"{first['electric_alternative_kg_s']['keeping']:,.0f} kg/s at 15,000 km, at or inside "
-                             'the planned magnetosphere.')),
+             ring_fleet=dict(state='conditional', evidence='Photon keeping releases nothing. Along the kept run, tilts '
+                             'up to 2 degrees with 25% reflectivity trim reach '
+                             f"{move['2_deg_0.25']['interior']['reach_over_demand']:.1f} times the keeping demand over "
+                             f"each orbit, {move['2_deg_0.25']['interior']['instant_share']:.0%} of it at the instant "
+                             'asked, and the edge rings need 5 degrees; met if a phase-scheduled law delivers it and '
+                             'the attitude actuator releases nothing. The same control by electric thrust would '
+                             f"release {first['electric_alternative_kg_s']['keeping']:,.0f} kg/s at 15,000 km, at or "
+                             'inside the planned magnetosphere.')),
         dict(gate='Holding costs less than the atmosphere it saves (S6)',
              held_zoned=dict(state='not met', evidence=f"{h['propellant_kg_s']:,.0f} kg/s of propellant against "
                              f"{REQUIREMENTS['unshielded_loss_kg_s'][0]:,.0f}-{REQUIREMENTS['unshielded_loss_kg_s'][1]:,.0f}"
@@ -237,6 +278,14 @@ def main():
     zoned = {c['label']: c for c in data['zoned_aperture']['cases']}[exhaust['design']['case']]
     h = held(zoned)
     fleet = ring_fleet(data['ring_bundle'], data['ring_keeping'], data['ring_screen'], zoned)
+    frozen = frozen_summary(data['frozen_rings'])
+    fleet['frozen_orbit'] = frozen
+    photon = data['photon_control']
+    fleet['photon_control'] = dict(translation=photon['translation'],
+                                   pitch_torque_orbit_mean_N_m=photon['attitude']['by_axis']['pitch_about_orbit_normal']
+                                   ['radiation_orbit_mean_N_m_median'],
+                                   pressure_centre_offset_m=photon['attitude']['pressure_centre_offset_m'],
+                                   trim_needed_lit_median=photon['attitude']['trim_needed_lit_median'])
     out = dict(schema='terluna.research.integrated-ledger/1',
                producer=dict(files={f: digest(ROOT/f) for f in FILES},
                              constants=constants_used([f for f in FILES if f.endswith('.py')]),
@@ -258,7 +307,7 @@ def main():
                              ring_fleet=dict(photon_keeping='no exhaust',
                                              electric_alternative_kg_s=[r['electric_alternative_kg_s']
                                                                         for r in fleet['by_radius']])),
-               gates=gates(h, fleet, exhaust, data['ring_keeping']))
+               gates=gates(h, fleet, exhaust, data['ring_keeping'], photon, frozen))
     OUT.write_text(json.dumps(out, indent=1)+'\n')
     print(json.dumps(dict(held=h, fleet=fleet, electricity={k: v for k, v in out['electricity'].items() if k != 'cases'},
                           gates=[(g['gate'], g['held_zoned']['state'], g['ring_fleet']['state']) for g in out['gates']]),
