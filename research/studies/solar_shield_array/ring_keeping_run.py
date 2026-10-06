@@ -143,8 +143,11 @@ def main():
                          'magnitude.'),
                reading_rule=('A kept bundle passes when no sample falls below 150 m and the service overlaps stay '
                              'positive; the velocity spent per ring per orbit is the per-tile keeping cost of that '
-                             'ring. Ring 18 is the bundle\'s unshadowed top edge.'),
-               design=DESIGN, bundle=BUNDLE, run_key=key, period_h=period/HOUR,
+                             'ring. Ring 18 is the bundle\'s unshadowed top edge. Samples after the first one below '
+                             '150 m are diagnostic. Clearance pairs include two-body copies out to three lags, whose '
+                             'error by axis is in ring_bundle.json (lone_ring_gravity); independently propagated '
+                             'tiles and receiver-ray coverage confirm a passing bundle.'),
+               design=DESIGN, bundle=BUNDLE, built=built, run_key=key, period_h=period/HOUR,
                keeping=dict(mean_m_s_per_orbit_by_ring=per_orbit.tolist(),
                             rings_mean_m_s_per_orbit=float(np.mean(np.delete(per_orbit, len(reps)//2))),
                             ring_orbit_max_m_s=float(spent.max()), peak_acceleration_m_s2=float(peak.max()),

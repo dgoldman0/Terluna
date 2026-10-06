@@ -2,7 +2,7 @@
  "schema": "terluna.research.zoned-aperture/1",
  "producer": {
   "files": {
-   "research/studies/solar_shield_array/zoned_aperture.py": "e802f2e88a1d0df2e859d6dbe1528b5549bf34e59ade80e951c3bef8fdd3fc66",
+   "research/studies/solar_shield_array/zoned_aperture.py": "c26cf7bcdb66a6098872c08bde394c3810bf2ef7b5b3314b11ada98ef54a6a0c",
    "research/studies/solar_shield_array/aperture.py": "213f744f5203b54c39601ad0aed32352c75215e6f43d284ad91d156b413fc9b7",
    "research/studies/solar_shield_array/run.py": "69e01bf90ca29987f9251f7d1aff5be0c57e909815847cf0cf7a4e94cf3ff9cd",
    "protection/dynamics/model.py": "01c9191588037ab4f42bac38dc4d5bd99e57427d37fa75cd672120e32b53733a",
@@ -165,7 +165,7 @@
   }
  ],
  "resources": {
-  "cpu_s": 9.49848315,
-  "wall_s": 9.519535475003067
+  "cpu_s": 6.475372754,
+  "wall_s": 6.5187354950467125
  }
 }

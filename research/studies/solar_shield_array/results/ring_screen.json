@@ -3,7 +3,7 @@
  "producer": {
   "files": {
    "research/studies/solar_shield_array/ring_screen.py": "90c03e83e7b245acd11cc8f01ca6e5a9810984d0c88099395e3686e8c62de2de",
-   "protection/dynamics/ring_bundle.py": "39a8520dde4c3af34fddf319e08ffcf86ac537d6d6f8a1bb5c205388ddce5396",
+   "protection/dynamics/ring_bundle.py": "05543a75524dd0d3c9cbbb6aa0dc0b02d8d5a0d156c943b6d794184f3ecfb98d",
    "protection/dynamics/cycling.py": "704fbd03c9d4070ea05bdfeba57914ec225941f3560710da2472bd24ca870ed4",
    "protection/dynamics/ephemeris.py": "9a162c3acf63a844284eb61b444a7d34f1447b5182d254d3e87616516f8748d9",
    "protection/dynamics/optical.py": "06a13ae9f24834876edbc12b513deaa5e3735f02f8249eb57c8996d74ce00b56"
@@ -6238,10 +6238,10 @@
   ]
  },
  "resources": {
-  "cpu_s": 247.948444708,
-  "wall_s": 248.09191850601928,
+  "cpu_s": 230.738899019,
+  "wall_s": 231.09938954398967,
   "nfev": 546719,
-  "max_rss_MiB": 1238.4765625,
+  "max_rss_MiB": 1238.8046875,
   "numerical_threads": 1
  }
 }

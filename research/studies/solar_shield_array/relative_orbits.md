@@ -7,6 +7,13 @@ and the choices that remain open. The shield's protection governs every stage:
 each candidate passes the same finite-Sun coverage, overlap and UV-transmission
 tests as before, and a formation counts only when it protects.
 
+Later on 6 October the author widened the acceptance to the whole system. It
+has to meet the shield requirements, give reasonable net-positive electricity
+for habitat, balance its overall resource requirements, and be stable and
+safe, with every mass flow judged by its direction as well as its size. The
+decision gate below gave way to an integrated comparison of the held screen
+and the ring fleet ([integrated_comparison.md](integrated_comparison.md)).
+
 The diagnosis numbers below come from gravity-only replays of the committed
 seed states in [results/joint_seed.json](results/joint_seed.json). The Moon,
 Earth, Sun and planets act as point masses, taken from the compact DE440 samples
@@ -160,22 +167,38 @@ Their products are [results/ring_bundle.json](results/ring_bundle.json),
 adjacent rings are compared at the same phase: each ring's inner neighbour is
 carried along its orbit under the tide to the ring's own position.
 
+Each ring's tiles are its centre trajectory shifted in time, both ways from the
+epoch (`time_track` in ring_bundle.py). Until 6 October the runners handed the
+centre state to the integrator 224 s before the epoch. That advanced every ring
+128 km (0.489°) along its orbit, the same for every ring within 0.3 m, so the
+bundle's internal geometry was unchanged; the products have been regenerated
+with the correct start, and every number below comes from them.
+
 **Finite segments.** A segment of 19 rings by 31 tiles, with 0.6 km radius
 steps, has end tiles with no neighbour on one side. The top ring's end tile
 comes within 150 m of its neighbour at hour 2.2, and tiles six or more places
-from the ends, on the top two rings, at hour 5.5. A finite segment therefore
+from the ends, on the top two rings, at hour 5.4. A finite segment therefore
 cannot stand for a ring. The remaining runs follow one representative per ring,
 with its own ring and the adjacent rings present as copies shifted by whole
 tile lags. Every tile is then shadowed as on a complete ring. At the start the
-interior rings lose 24.4% of their light to shadow, and the bundle's top ring,
+interior rings lose 24.6% of their light to shadow, and the bundle's top ring,
 with no ring above it, 13.1%.
 
 **Along a ring.** Under gravity alone, seven consecutive tiles keep their
-shingle offset between 215 and 245 m for 120 hours. The tide moves neighbours
-along their shared path, so their spacing breathes between 8.34 and 8.65 km.
-By hour 120 an adjacent tile stands 147 m, and a tile three places along
-444 m, from an exact time-shifted copy of the middle tile. The continuous rings
-place their copies that way, so they leave this breathing out.
+shingle offset between 216 and 245 m for 120 hours. The tide moves neighbours
+along their shared path, so their spacing breathes between 8.34 and 8.66 km.
+By hour 120 an adjacent tile stands 151 m, and a tile three places along
+455 m, from an exact time-shifted copy of the middle tile. The continuous rings
+place their copies that way, so they leave this breathing out. Almost all of
+the difference lies along the ring: within the five days its radial part
+reaches 22 m at one lag and 67 m at three, and its normal part 5 and 16 m.
+Error along the ring leaves the rings' radial and normal geometry nearly
+untouched. The clearance check, though, uses copies out to three lags, whose
+radial error is as large as the interior's margin over 150 m (below), so
+independently propagated tiles have to confirm the kept bundle's clearance.
+The along-ring part means that real tiles drift in spacing by about 150 m in
+five days, so each tile needs its own phase keeping. Stopping such a drift
+takes a semi-major-axis trim of about 6 m, of order 10⁻⁴ m/s.
 
 **What the tide does to the stack.** The continuous representatives also fly
 a month, 16 orbits, under gravity alone:
@@ -229,17 +252,26 @@ kept as a product, the keeping errors of 150–250 m exceeded the inter-ring
 margin of about 190 m, so the step was widened. With 1.0 km steps, over
 twelve orbits (23 days), the results are these:
 
-- **Clearance.** Interior rings never come within 150 m of each other. Their
-  closest approach is 213 m, the shingle along a ring, and their matched-phase
-  radius steps stay between 898 and 1,112 m. Every sample below 150 m involves
-  an edge ring. The top edge pair is first, at hour 194.7, and the edge steps
-  shrink to 206 m at the bottom and 62 m at the top by orbits 7–9.
+- **Clearance.** The bundle as a whole first comes within 150 m at hour 194.7
+  (day 8.1), at its top edge pair, and that pair touches at hour 376
+  (day 15.7); samples after the first breach are diagnostic. Every sample below
+  150 m involves an edge ring. Interior rings never come within 150 m of each
+  other in this model. Their closest approach is 213 m, the shingle along a
+  ring, and their matched-phase radius steps stay between 897 and 1,110 m. The
+  edge pairs' steps shrink to 205 m at the bottom and 62 m at the top by orbits
+  7–9; these are radius steps at matched phase, and tiles tilted 1.5° span
+  about 260 m in radius, so the surfaces meet before the steps close. The
+  interior's 63 m margin over 150 m is about the radial error of the three-lag
+  copies the check uses (67 m in five days), so independently propagated tiles
+  have to confirm it.
 - **Overlap.** Inside the service arc, tiles on a ring overlap by at least
-  1,118 m and adjacent rings by at least 574 m.
+  1,123 m and adjacent rings by at least 574 m. These are overlaps projected
+  along the Sun's centre direction; receiver-ray coverage over the finite Sun
+  is still to check.
 - **Cost.** Keeping costs the interior rings 0.100 m/s per ring per orbit on
   average and the edge rings 0.25 m/s. The interior cost grows in proportion to
   each ring's distance from the free middle ring: 0.009 m/s per orbit per ring
-  step in the first orbit, 0.043 by the twelfth.
+  step in the first orbit, 0.042 by the twelfth.
 - **Where the cost comes from.** The same keeping under gravity alone costs
   the interior rings the same, ring by ring within 3%: 0.0705 against
   0.0709 m/s per ring per orbit over three orbits. The light adds cost only at
@@ -264,7 +296,9 @@ In the expanded run's executed prefix the installed actuators carry 6.15 times
 peak demand, doubling their ratings leaves the solution unchanged, and the
 active limit is the 100 TJ next-service energy cap. Attitude used 36.19 TJ
 against 0.43 TJ for translation. Two 90° turns per cycle at that cost scale to
-roughly 20 TW across 17.29 million tiles, most of the 23.835 TW target.
+roughly 20 TW across 17.29 million tiles, most of the 23.835 TW target. That
+count belongs to the cycling capacity relaxation; the ring screen's own
+inventory is estimated in [integrated_comparison.md](integrated_comparison.md).
 
 ### Plane tracking for full-disk coverage
 
@@ -309,12 +343,20 @@ hours, a few times a year. The annulus is therefore a thin UV absorber that
 passes visible light. Titania on a thin support fits; the stack's 1 µm titania
 layer is 3.9 g/m² of its 26.
 
-The aperture intercepts about 240 PW. Collection sized to demand is small: the
-100 TW civilization case at 300 W/m² needs about 0.2% of the aperture, and
-holding about 1%. The 5% dimmer removes about 586 TW across the Moon's disk
-([design.md](design.md)). Built as a band-selective semitransparent PV layer,
-it would yield roughly 120–180 TW at 20–30% conversion, covering the
-civilization case with light the climate design already removes.
+The aperture intercepts about 240 PW. Collection sized to demand is small: at
+300 W/m² the 100 TW civilization case needs about 0.2% of the aperture, and
+holding the zoned screen's 32.8 TW about 0.06%. The 5% dimmer removes about
+586 TW across the Moon's disk ([design.md](design.md)). Built as a
+band-selective semitransparent PV layer, it would yield roughly 120–180 TW at
+20–30% conversion, from light the climate design already removes; the climate
+requirement asks for 5% at every wavelength, so a band-selective dimmer needs
+the climate model first. The dimmer is one source among several. Opaque
+collectors on 1% of the visible-passing annulus would catch 2.2 PW, dimming
+Earth by about 1% for a few hours at eclipse-season new moons unless they turn
+edge-on then, and collectors can also fly free on natural orbits. Where a
+collector rides decides what it costs: on a held screen every kilogram burns
+about its own mass in propellant each year
+([integrated_comparison.md](integrated_comparison.md)).
 
 ### A year of ring planes under sail force
 
@@ -384,6 +426,17 @@ which comes from the protection domain, and a structural design for each zone.
 The propulsion closure is the published one (30 km/s, 70%, a 45° cant,
 300 W/kg and a seven-day buffer).
 
+These figures have limits of their own. The 32.8 TW is mean electrical holding
+demand, with 75.7 TW installed, for continuous area under an idealized optical
+bound that lets redirected light leave in any direction, including toward the
+Moon; at 10 km tiles the area is about 1.75 million panel-equivalents, with no
+packing layout or seams. The propellant also has a direction. Holding a screen
+upstream of the Moon needs a sunward push that sunlight cannot give, so all
+51 t/s of exhaust leaves into the Moon's hemisphere, and it exceeds the 300 kg/s
+low end of the atmosphere's unshielded loss (requirement S6).
+[exhaust_isolation.py](exhaust_isolation.py) measures how much of it reaches the
+escape region ([integrated_comparison.md](integrated_comparison.md)).
+
 ### The coverage requirement
 
 The atmosphere's [loss response](../../../atmosphere/loss_response/README.md)
@@ -441,11 +494,12 @@ with the stage 2b and 2c findings.
 Runs longer than the six days of compact samples use the pinned DE440s kernel,
 which needs jplephem; the author approved installing both.
 
-**Gate status, 6 October.** The interior of a kept ring bundle passes on
-clearance and service overlap for 23 days. Its measured keeping cost,
-0.100 m/s per ring per orbit, is mostly the keeping law's fixed frame and its
-following of short-period swings. That cost grows with the bundle's height, so
-it does not yet judge a full disk. Four items keep the gate open:
+**Stage 2 status, 6 October.** The interior of a kept ring bundle stays clear
+and overlapping for 23 days in the one-tile-per-ring model; its edges do not.
+Its measured keeping cost, 0.100 m/s per ring per orbit, is mostly the keeping
+law's fixed frame and its following of short-period swings. That cost grows
+with the bundle's height, so it does not yet judge a full disk. Four items stay
+open for the ring fleet:
 
 - a keeping law that holds the relative tilts in the regressing node frame and
   leaves the short-period swings, with height steps that absorb the
@@ -455,13 +509,28 @@ it does not yet judge a full disk. Four items keep the gate open:
 - stage 3's common motion of the strip pattern, which now includes the stack's
   20° monthly regression.
 
-The zoned held screen, at 32.8–66.5 TW, is the fallback the gate names.
+**The integrated comparison (6 October).** The decision gate of the morning
+compared the ring fleet's recurrence cost with a 23.835 TW target and named the
+zoned held screen as the fallback. The author replaced it the same day with an
+integrated comparison ([integrated_comparison.md](integrated_comparison.md)).
+Each candidate has to meet the shield requirements, stability, safety (every
+outflow kept out of the escape region, failed parts traced) and net-positive
+electricity for habitat after its own loads; candidates that do are weighed on
+resources. The 23.835 TW figure and the 100 TW civilization case serve as
+comparison references, with higher demand as sensitivities. The work runs in
+this order:
 
-**Decision gate.** Suppose the cycle closes every coverage, clearance and
-recurrence gate within about 1.3 m/s per tile per cycle, with attitude energy
-inside the 23.835 TW target. Then the orbiting fleet proceeds to stage 3.
-Otherwise the held screen with a zoned aperture from stage 4 becomes the
-baseline.
+1. Fix the start-up defect (done above).
+2. Set up the pass criteria and the ledger
+   ([integrated_ledger.py](integrated_ledger.py)).
+3. Test whether the held screen's exhaust stays out of the escape region
+   ([exhaust_isolation.py](exhaust_isolation.py)).
+4. Check photon keeping for the ring fleet against the kept run's demand.
+5. Compute the annulus film's UV transmission in the protection domain.
+6. Validate the bundle with independently propagated tiles, finite squares and
+   receiver rays.
+7. Redo the keeping in the regressing frame, treat the edge rings and find the
+   frozen common orbit, as far as the ledger keeps the fleet in contention.
 
 **Stage 3, the global ring screen.** The year-long screen of single rings
 (above, 6 October) shows the common annual motion of the strip pattern. Next
@@ -488,14 +557,14 @@ above.
 
 | Choice | Recommendation |
 |---|---|
-| Keeping actuator | Reflectivity trim, as IKAROS flew, pushes along each tile's normal, close to radial, so it reaches only the eccentricity vector. The semi-major-axis step and the relative tilts need along-track and normal force, from small attitude offsets that tilt the sail force or from electric thrust |
+| Keeping actuator | Photon forces, adopted 6 October: small attitude offsets that tilt the sail force, with reflectivity trim. Reflectivity trim, as IKAROS flew, pushes along each tile's normal, close to radial, so it reaches only the eccentricity vector; the semi-major-axis step and the relative tilts need the tilted sail force. Electric thrust in lunar orbit would release its exhaust at or inside the planned magnetosphere |
 | Keeping frame | Hold the relative tilts in the frame of the node on Earth's orbital plane and act on orbit-averaged elements; leave the stack's common regression to stage 3's common steering |
 | Height step between rings | Leave room in the row overlap for the stack's half-monthly breathing, up to 5.6% of the step, or hold the breathing by keeping; the choice trades tiles against keeping |
 | Radius step between rings | 1.0 km, which holds clearance under keeping; smaller steps need tighter keeping, and larger ones spread a full disk's rings over more radius |
 | The bundle's edge rings | First, edge tiles whose sail force per unit mass matches the interior's; integral keeping or feedforward of the modelled shadow difference as the fallback |
 | Ring radius, about 15,000 km or near the Sun-synchronous radius | Screen 15,000–21,000 km with the full ephemeris in stage 3, leaning toward about 19,000 km |
 | Attitude scheme | Radial-facing steady rotation for annulus tiles if their coverage holds; Sun-facing service for climate-window tiles, whose transmitted spectrum changes with incidence |
-| Architecture: orbiting fleet or held screen with a zoned aperture | Set by the stage 2 gate |
+| Architecture: orbiting fleet or held screen with a zoned aperture | Set by the integrated comparison ([integrated_comparison.md](integrated_comparison.md)) |
 | Areal-mass targets | Estimates of 10–25 g/m² for the climate window and 7–13 g/m² for the annulus, to be fixed by the annulus film's UV transmission and a structural design |
 | Collection | The dimmer as semitransparent PV, if the climate model accepts a band-selective 5% in place of a flat one |
 | Scheduled gaps | Spend part of the averaged UV-transmission budget on handovers once stage 3 sizes them |

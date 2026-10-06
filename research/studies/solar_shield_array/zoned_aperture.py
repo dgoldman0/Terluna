@@ -48,8 +48,12 @@ def digest(path):
 
 
 def zoned_aperture(samples, geo, coefficients, core_sigma, annulus_sigma, annulus_fraction, rings=4, angles=12,
-                   protected_radii=4):
-    """evaluate_aperture of aperture.py with a base areal mass per zone and a chosen annulus redirected fraction."""
+                   protected_radii=4, fields=False):
+    """evaluate_aperture of aperture.py with a base areal mass per zone and a chosen annulus redirected fraction.
+
+    With fields, also returns each node's position and velocity relative to the Moon, the propulsive
+    acceleration it needs (the residual after the optical bound), its closed areal mass and its weight.
+    """
     trajectory = target(geo, coefficients)
     distance = trajectory['coords'][:, 0]
     offset = length(trajectory['coords'][:, 1:])
@@ -96,15 +100,20 @@ def zoned_aperture(samples, geo, coefficients, core_sigma, annulus_sigma, annulu
         raise RuntimeError('Per-tile mass closure did not converge')
     area = np.pi*radius*radius
     core_weight = float(weights[in_core].sum())
-    return dict(core_sigma_kg_m2=core_sigma, annulus_sigma_kg_m2=annulus_sigma, annulus_redirected_fraction=annulus_fraction,
-                aperture_radius_km=radius/1e3, core_radius_km=core_radius/1e3, core_area_fraction=core_weight,
-                mean_power_TW=float(area*(power_area@weights)/1e12),
-                installed_design_peak_power_TW=float(area*(peak_area@weights)/1e12),
-                propellant_kg_s=float(area*(mdot_area@weights)),
-                base_optical_mass_kg=float(area*(base@weights)), total_mass_kg=float(area*(sigma@weights)),
-                power_hardware_mass_kg=float(area*(peak_area@weights)/kappa),
-                mean_power_core_TW=float(area*(power_area[in_core]@weights[in_core])/1e12),
-                mean_power_annulus_TW=float(area*(power_area[~in_core]@weights[~in_core])/1e12))
+    result = dict(core_sigma_kg_m2=core_sigma, annulus_sigma_kg_m2=annulus_sigma, annulus_redirected_fraction=annulus_fraction,
+                  aperture_radius_km=radius/1e3, core_radius_km=core_radius/1e3, core_area_fraction=core_weight,
+                  mean_power_TW=float(area*(power_area@weights)/1e12),
+                  installed_design_peak_power_TW=float(area*(peak_area@weights)/1e12),
+                  propellant_kg_s=float(area*(mdot_area@weights)),
+                  base_optical_mass_kg=float(area*(base@weights)), total_mass_kg=float(area*(sigma@weights)),
+                  power_hardware_mass_kg=float(area*(peak_area@weights)/kappa),
+                  mean_power_core_TW=float(area*(power_area[in_core]@weights[in_core])/1e12),
+                  mean_power_annulus_TW=float(area*(power_area[~in_core]@weights[~in_core])/1e12))
+    if not fields:
+        return result
+    velocity = trajectory['v'][:, None, :]+np.einsum('pi,nij->npj', nodes, geo['frame_d'][:, 1:])
+    return result, dict(t=t, nodes=nodes, weights=weights, in_core=in_core, q=q, v=velocity, residual=residual,
+                        sigma=sigma, aperture_radius_m=radius)
 
 
 def main():

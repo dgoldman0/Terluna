@@ -102,15 +102,19 @@ def initial(env, step=None):
     w = np.cross(N, sp)
     u0 = np.arctan2(np.dot(R, w), np.dot(R, sp))
 
+    centres = []
+
     def track(centre, lags):
-        at, _ = rb.propagate(lambda t, s: env.gravity(t, s[:, :3]), centre[None], lags.min()-1., lags.max()+1.,
-                             max_step=60.)
-        return [at(lag)[0] for lag in lags]
+        centres.append(centre)
+        return rb.time_track(lambda t, s: env.gravity(t, s[:, :3]), centre, lags, max_step=60.)
     height = DESIGN['pitch_m']/np.cos(np.radians(23.75))
     states, ring, slot = rb.build(np.linalg.norm(ref[:3]), track, DESIGN['rings'], DESIGN['per_ring'],
                                   DESIGN['pitch_m'], step, height, sp, N, u0)
+    middle = states[slot == (DESIGN['per_ring']-1)//2]
+    offset = float(np.linalg.norm(middle-np.array(centres), axis=1).max())
     return states, ring, slot, ratio, dict(start_u_deg=float(np.degrees(u0)), height_pitch_m=height,
-                                           reference_radius_m=float(np.linalg.norm(ref[:3])))
+                                           reference_radius_m=float(np.linalg.norm(ref[:3])),
+                                           centre_slot_offset_m=offset)
 
 
 def sun_angle(env, t, states):
@@ -434,14 +438,21 @@ def lone_ring(env, states, ring, slot, tilt, hours=120.):
             m /= np.linalg.norm(m, axis=0)
             d = (s[i+1, :3]-s[i, :3])@m
             normal.append(abs(d[2])); along.append(d[0])
-        copy = [float(np.linalg.norm(rb.kepler_shift(s[3][None], np.array([j*lag]))[0][:3]-s[3+j, :3]))
-                for j in (-3, -1, 1, 3)]
+        # Copy minus the independently propagated tile, in that tile's radial, along-track and normal axes.
+        error = [rb.kepler_shift(s[3][None], np.array([j*lag]))[0][:3]-s[3+j, :3] for j in (-3, -1, 1, 3)]
+        rtn = [[float(e@axis) for axis in rtn_frame(s[3+j])] for e, j in zip(error, (-3, -1, 1, 3))]
         rows.append(dict(hour=float(t/HOUR), shingle_normal_m=[float(min(normal)), float(max(normal))],
-                         along_spacing_m=[float(min(along)), float(max(along))], copy_error_m=copy))
-    return dict(hours=hours, samples=rows,
+                         along_spacing_m=[float(min(along)), float(max(along))],
+                         copy_error_m=[float(np.linalg.norm(e)) for e in error], copy_error_rtn_m=rtn))
+    parts = np.abs([r['copy_error_rtn_m'] for r in rows])
+    return dict(hours=hours, lags=[-3, -1, 1, 3], samples=rows,
                 shingle_normal_range_m=[min(r['shingle_normal_m'][0] for r in rows), max(r['shingle_normal_m'][1] for r in rows)],
                 along_spacing_range_m=[min(r['along_spacing_m'][0] for r in rows), max(r['along_spacing_m'][1] for r in rows)],
-                copy_error_max_m=max(max(r['copy_error_m']) for r in rows))
+                copy_error_max_m=max(max(r['copy_error_m']) for r in rows),
+                copy_error_part_max_m={f'{j:+d}_lag': dict(radial=float(parts[:, i, 0].max()),
+                                                           along=float(parts[:, i, 1].max()),
+                                                           normal=float(parts[:, i, 2].max()))
+                                       for i, j in enumerate((-3, -1, 1, 3))})
 
 
 def main():
@@ -489,9 +500,12 @@ def main():
                evidence=('Coupled propagation of 19 nested rings from 2026-10-04 TDB: DE440s point-mass gravity with '
                          'finite-square quadrature, the filter sail force on per-tile radial-facing normals, finite-Sun '
                          '(8 points) mutual shadows in the bundle centroid frame and Moon/Earth eclipses. The finite '
-                         'segment has 31 tiles per ring for two orbits; continuous rings use one representative per '
+                         'segment has 31 tiles per ring for two orbits; each ring\'s tiles are its centre trajectory '
+                         'shifted in time both ways from the epoch, so the middle tile starts on the designed centre. '
+                         'Continuous rings use one representative per '
                          'ring with two-body shifted copies of its ring and the adjacent rings for six orbits; the '
-                         'lone ring is seven tiles under gravity alone. Clearance and overlaps are sampled every five '
+                         'lone ring is seven tiles under gravity alone, with each copy\'s error split into radial, '
+                         'along-track and normal parts. Clearance and overlaps are sampled every five '
                          'minutes; the interior clearance leaves out six tiles at each segment end, or the two edge '
                          'rings of the continuous rings. The continuous representatives also fly a month under gravity '
                          'alone. Element drift compares each ring with its inner neighbour carried to the same phase '

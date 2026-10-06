@@ -26,6 +26,7 @@ def test_kept_bundle_record_is_complete():
     assert len(keeping['mean_m_s_per_orbit_by_ring']) == PRODUCT['bundle']['rings']
     checks = PRODUCT['checks']
     assert checks['clearance']['samples'] > 0 and checks['service']['samples'] > 0
+    assert PRODUCT['built']['centre_slot_offset_m'] == 0.
 
 
 def test_interior_rings_stay_clear_and_every_contact_involves_an_edge_ring():

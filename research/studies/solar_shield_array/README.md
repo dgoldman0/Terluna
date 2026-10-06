@@ -1,7 +1,14 @@
 # Solar shield and habitat array
 
 The [relative-orbit plan](relative_orbits.md) of 6 October 2026 sets the
-current direction. Gravity-only replays of the committed seed show that the
+current direction for the formation, and the
+[integrated comparison](integrated_comparison.md) of the same day sets how
+candidates are judged. The author's acceptance covers the whole system: the
+shield requirements, reasonable net-positive electricity for habitat, balanced
+resources, stability and safety, with every mass flow judged by its direction
+as well as its size.
+
+Gravity-only replays of the committed seed show that the
 depth stack spreads the 361 tiles' semi-major axes over 59–65 km. That spread
 drifts them up to 345 km apart along-track each revolution, which is the
 expanded search's return error. One energy-matching burn of 0.42 m/s rms per
@@ -10,8 +17,7 @@ pattern folding through its orbital plane a quarter orbit after mid-service.
 The plan redesigns the formation in relative orbital elements, with equal-energy
 coasts and e/i-vector separation, and verifies it in the coupled model against
 the full protection gates. A zoned-aperture and collection study runs alongside.
-Its decision gate chooses between the orbiting fleet and a held screen with a
-zoned aperture. The [layout screen](relative_orbits.md#layout-screen-finite-patches-meet-ring-bundles-stay-clear)
+The [layout screen](relative_orbits.md#layout-screen-finite-patches-meet-ring-bundles-stay-clear)
 finds that every finite 2D patch meets a neighbour somewhere in its orbit. A
 bundle of nested ring segments, each ring one orbit of shingled tiles, stays
 clear for two orbits of ephemeris gravity (minimum 215 m). The author chose
@@ -19,18 +25,27 @@ the ring bundle as stage 2's local unit.
 
 Under sail force and mutual shadows, free rings come into contact within the
 first orbit, starting at the bundle's edges. Continuous low-thrust keeping,
-with rings 1.0 km apart in radius, keeps the interior rings clear for 23 days.
-Its interior cost, 0.10 m/s per ring per orbit, is the same under gravity alone.
-Most of it is the keeping law's fixed frame working against the stack's common
-regression under Earth's tide, 20° a month, and it grows with the bundle's
-height. A rerun that holds the rings in the regressing frame comes next, and
-the bundle's two edge rings still need their own treatment.
+with rings 1.0 km apart in radius, keeps the interior rings clear for 23 days
+in a model with one propagated tile per ring; the edge rings first come within
+150 m at day 8.1. Its interior cost, 0.10 m/s per ring per orbit, is the same
+under gravity alone. Most of it is the keeping law's fixed frame working
+against the stack's common regression under Earth's tide, 20° a month, and it
+grows with the bundle's height. The ring fleet keeps station with photon
+forces, so it releases no exhaust; whether the sail force can follow the
+keeping demand is the next check.
 
 A year-long screen finds that the sail force on radial-facing tiles moves
 every ring's sunward crossing by thousands of kilometres. The common orbit
 therefore needs a frozen family, with the steady drift smallest near
-20,000 km. A held screen with a zoned aperture needs 32.8–66.5 TW, against
-the published 238 TW.
+20,000 km. A full ring screen needs about 17–22 million tiles, ten to thirteen
+times the held screen's.
+
+A held screen with a zoned aperture needs 32.8–66.5 TW, against the published
+238 TW. Its reaction mass, 51 t/s at the lightest design point, leaves into
+the Moon's hemisphere: [exhaust_isolation.py](exhaust_isolation.py) finds that
+its direct plumes at a 45° cant and its slow unionized gas each exceed the
+proposed outflow allowance (requirement S7), before the solar wind's pickup of
+the charged exhaust is counted, and its propellant fails requirement S6.
 
 The [expanded coupled-cycle investigation](expanded_cycle.md) adds
 in-plane and arrival-acquisition controls and measures nine full-cycle response
@@ -241,8 +256,11 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.relative_design
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.ring_bundle_run
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.ring_keeping_run
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.ring_keeping_steps
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.ring_screen
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.zoned_aperture
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.exhaust_isolation
+python -m research.studies.solar_shield_array.integrated_ledger
 python -m pytest protection/dynamics research/studies/solar_shield_array
 python visualization/solar-shield-array/plot.py
 python visualization/solar-shield-array/cycling_plot.py

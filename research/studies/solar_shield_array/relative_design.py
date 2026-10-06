@@ -31,14 +31,15 @@ import numpy as np
 
 from shared import constants as K
 from protection.dynamics.relative_orbit import hcw_state, rtn_frame
+from protection.dynamics.ring_bundle import time_track
 from protection.dynamics.square_distance import closest_squares
 from shared.provenance import constants_used
-from .relative_diagnosis import PACKAGE, ROOT, SEED, digest, environment, propagate
+from .relative_diagnosis import ATOL, PACKAGE, ROOT, RTOL, SEED, digest, environment, propagate
 
 HERE = Path(__file__).resolve().parent
 OUT = HERE/'results/relative_design.json'
 FILES = ['research/studies/solar_shield_array/relative_design.py', 'research/studies/solar_shield_array/relative_diagnosis.py',
-         'protection/dynamics/relative_orbit.py', 'protection/dynamics/square_distance.py',
+         'protection/dynamics/relative_orbit.py', 'protection/dynamics/ring_bundle.py', 'protection/dynamics/square_distance.py',
          'protection/dynamics/cycling.py', 'protection/dynamics/ephemeris.py']
 SIDE, CLEAR, CLEARANCE = 10e3, 9.89e3, 150.
 A_REF = 15.0e6
@@ -171,7 +172,7 @@ def ephemeris_ring_bundle(rings=19, per_ring=21, pitch=8.5e3, step=450., tilt_de
     u0 = np.arctan2(np.dot(R, w), np.dot(R, sp))
     r0 = np.linalg.norm(ref[:3])
     half = np.mean(np.abs(SERVICE))
-    states, ring_of = [], []
+    states, ring_of, offset = [], [], 0.
     for k in range(rings):
         radius = r0+(k-(rings-1)/2)*step
         height = (k-(rings-1)/2)*pitch/np.cos(half)
@@ -183,8 +184,10 @@ def ephemeris_ring_bundle(rings=19, per_ring=21, pitch=8.5e3, step=450., tilt_de
         # perturbs them alike; two-body circles diverge by hundreds of metres within a day.
         lags = (np.arange(per_ring)-(per_ring-1)/2)*pitch/speed
         if time_shift:
-            track = propagate(env, centre[None], lags.min()-1., lags.max()+1.)
-            states.extend(track(lag)[0] for lag in lags)
+            track = time_track(lambda t, s: env.gravity(t, s[:, :3]), centre, lags, rtol=RTOL, atol=ATOL,
+                               max_step=np.inf)
+            offset = max(offset, float(np.linalg.norm(track[(per_ring-1)//2]-centre)))
+            states.extend(track)
         else:
             for lag in lags:
                 phi = u0+lag*speed/radius
@@ -208,7 +211,7 @@ def ephemeris_ring_bundle(rings=19, per_ring=21, pitch=8.5e3, step=450., tilt_de
     radii = np.linalg.norm(at(times[-1])[:, :3], axis=1)
     return dict(rings=rings, per_ring=per_ring, pitch_m=pitch, radius_step_m=step, tilt_deg=tilt_deg,
                 time_shifted_rings=time_shift, attitude=attitude,
-                hours=hours, samples=len(times), start_u_deg=float(np.degrees(u0)),
+                hours=hours, samples=len(times), start_u_deg=float(np.degrees(u0)), centre_slot_offset_m=offset,
                 min_surface_distance_m=float(distances[k]), at_hour=float(times[k]/3600.),
                 samples_below_clearance=int(np.count_nonzero(distances < CLEARANCE)),
                 final_radius_range_km=[float(radii.min()/1e3), float(radii.max()/1e3)])
@@ -241,7 +244,8 @@ def main():
                clearance_m=CLEARANCE, cases=cases, ephemeris_ring_bundle=replay,
                ephemeris_evidence=('Gravity-only replay with the compact DE440 samples from the seed epoch, 93 hours '
                                    'sampled every 3.75 minutes. Rings start on circles about the Moon; with '
-                                   'time_shifted_rings each ring is time-shifted copies of its centre trajectory. '
+                                   'time_shifted_rings each ring is time-shifted copies of its centre trajectory, '
+                                   'shifted both ways from the epoch so the middle tile starts on the centre. '
                                    'attitude common uses the bundle centroid frame; own gives each tile its own '
                                    'velocity-referenced radial-facing frame, with pair distances in the pair mean '
                                    'frame. Sail force and mutual shadows are absent.'),

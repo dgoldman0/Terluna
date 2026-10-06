@@ -25,6 +25,29 @@ def circular(radius, phase, normal=np.array([0., 0., 1.])):
     return np.r_[r, v]
 
 
+def test_a_time_track_starts_on_its_centre_and_follows_its_trajectory_both_ways():
+    centre = circular(15e6, .3)
+    lags = np.array([-223., -15., 0., 15., 223.])
+    states = rb.time_track(lambda t, s: Env().gravity(t, s[:, :3]), centre, lags)
+    assert np.array_equal(states[2], centre)
+    expected = rb.kepler_shift(np.repeat(centre[None], len(lags), axis=0), lags)
+    assert np.allclose(states[:, :3], expected[:, :3], rtol=0., atol=1e-2)
+    one_sided = rb.time_track(lambda t, s: Env().gravity(t, s[:, :3]), centre, lags[lags >= 0])
+    assert np.array_equal(one_sided[0], centre)
+
+
+def test_built_rings_put_their_middle_tile_on_the_designed_centre():
+    centres = []
+
+    def track(centre, lags):
+        centres.append(centre)
+        return rb.time_track(lambda t, s: Env().gravity(t, s[:, :3]), centre, lags)
+    states, ring, slot = rb.build(15e6, track, 3, 5, 8.5e3, 600., 9.3e3, np.array([1., 0., 0.]),
+                                  np.array([0., 0., 1.]), -.2)
+    for k, centre in enumerate(centres):
+        assert np.array_equal(states[(ring == k) & (slot == 2)][0], centre)
+
+
 def test_tile_frames_are_right_handed_radial_facing_and_tilted_about_the_normal():
     s = np.array([circular(15e6, .3), circular(15.2e6, -1.)])
     tilt = np.radians(1.5)

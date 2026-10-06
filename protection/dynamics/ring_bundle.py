@@ -112,6 +112,23 @@ def propagate(acceleration, states, t0, t1, rtol=1e-10, atol=1e-3, max_step=600.
     return (lambda t: sol.sol(t).reshape(n, 6)), sol
 
 
+def time_track(acceleration, centre, lags, rtol=1e-10, atol=1e-3, max_step=600.):
+    """States one trajectory reaches after each lag (s); the centre is its state at epoch zero.
+
+    Positive lags integrate forward from zero and negative lags backward, so a zero lag returns the
+    centre itself and every lag keeps its time relative to the epoch.
+    """
+    centre = np.asarray(centre, float)
+    lags = np.asarray(lags, float)
+    states = np.repeat(centre[None], len(lags), axis=0)
+    for side in (lags > 0, lags < 0):
+        if side.any():
+            end = lags[side][np.argmax(np.abs(lags[side]))]
+            at, _ = propagate(acceleration, centre[None], 0., end+np.sign(end), rtol, atol, max_step)
+            states[side] = [at(lag)[0] for lag in lags[side]]
+    return states
+
+
 def build(r0, centre_track, rings, per_ring, pitch, step, height_pitch, sun_plane, normal, start_u):
     """Initial states of a ring bundle about a reference orbit plane.
 

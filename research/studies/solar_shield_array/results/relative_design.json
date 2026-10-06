@@ -2,9 +2,10 @@
  "schema": "terluna.research.relative-design/1",
  "producer": {
   "files": {
-   "research/studies/solar_shield_array/relative_design.py": "bb639f9d2be3eb77366ec963244084c97868d41c6155a46dc5b919245b448c3a",
+   "research/studies/solar_shield_array/relative_design.py": "7a773b8838ef6a2ad0c35b4521b877aedfa5e89d016ddf04c9653ada7f3f0495",
    "research/studies/solar_shield_array/relative_diagnosis.py": "dafc941e0db427d5c89847401e87a955becccb1c4c2d0882fbabe89e7316c307",
    "protection/dynamics/relative_orbit.py": "b73a50b4b5137ef0d69b65e44097e32f26abb1372d89104fb979a7f876034565",
+   "protection/dynamics/ring_bundle.py": "05543a75524dd0d3c9cbbb6aa0dc0b02d8d5a0d156c943b6d794184f3ecfb98d",
    "protection/dynamics/square_distance.py": "b38c54b6d9a96b161e82b755d407758548a38244c9292d73404ab45cdc1210ba",
    "protection/dynamics/cycling.py": "704fbd03c9d4070ea05bdfeba57914ec225941f3560710da2472bd24ca870ed4",
    "protection/dynamics/ephemeris.py": "9a162c3acf63a844284eb61b444a7d34f1447b5182d254d3e87616516f8748d9"
@@ -410,6 +411,7 @@
    "hours": 93.0,
    "samples": 1489,
    "start_u_deg": -22.501385345822694,
+   "centre_slot_offset_m": 0.0,
    "min_surface_distance_m": 0.0015974886255821098,
    "at_hour": 13.3125,
    "samples_below_clearance": 979,
@@ -429,12 +431,13 @@
    "hours": 93.0,
    "samples": 1489,
    "start_u_deg": -22.501385345822694,
-   "min_surface_distance_m": 0.34753828819536287,
-   "at_hour": 61.125,
-   "samples_below_clearance": 879,
+   "centre_slot_offset_m": 0.0,
+   "min_surface_distance_m": 0.43456947782439653,
+   "at_hour": 61.1875,
+   "samples_below_clearance": 878,
    "final_radius_range_km": [
-    15006.669048731384,
-    15018.82837932831
+    15007.682400020502,
+    15019.851285605913
    ]
   },
   {
@@ -448,12 +451,13 @@
    "hours": 93.0,
    "samples": 1489,
    "start_u_deg": -22.501385345822694,
-   "min_surface_distance_m": 64.95866334300466,
+   "centre_slot_offset_m": 0.0,
+   "min_surface_distance_m": 65.05292463086785,
    "at_hour": 61.1875,
-   "samples_below_clearance": 307,
+   "samples_below_clearance": 308,
    "final_radius_range_km": [
-    15004.985979850895,
-    15020.516180871262
+    15005.99844614522,
+    15021.539850438574
    ]
   },
   {
@@ -467,12 +471,13 @@
    "hours": 93.0,
    "samples": 1489,
    "start_u_deg": -22.501385345822694,
-   "min_surface_distance_m": 215.37321409634626,
-   "at_hour": 90.4375,
+   "centre_slot_offset_m": 0.0,
+   "min_surface_distance_m": 215.44689267891806,
+   "at_hour": 90.5,
    "samples_below_clearance": 0,
    "final_radius_range_km": [
-    15004.985979850895,
-    15020.516180871262
+    15005.99844614522,
+    15021.539850438574
    ]
   },
   {
@@ -486,12 +491,13 @@
    "hours": 93.0,
    "samples": 1489,
    "start_u_deg": -22.501385345822694,
-   "min_surface_distance_m": 170.60403559856832,
-   "at_hour": 90.5625,
+   "centre_slot_offset_m": 0.0,
+   "min_surface_distance_m": 170.66635455456628,
+   "at_hour": 90.625,
    "samples_below_clearance": 0,
    "final_radius_range_km": [
-    15002.742524275098,
-    15022.76715404634
+    15003.75379614201,
+    15023.791826959405
    ]
   },
   {
@@ -505,12 +511,13 @@
    "hours": 93.0,
    "samples": 1489,
    "start_u_deg": -22.501385345822694,
-   "min_surface_distance_m": 215.36850020478244,
-   "at_hour": 90.4375,
+   "centre_slot_offset_m": 0.0,
+   "min_surface_distance_m": 215.44211900508344,
+   "at_hour": 90.5,
    "samples_below_clearance": 0,
    "final_radius_range_km": [
-    15002.742524275098,
-    15022.76715404634
+    15003.75379614201,
+    15023.791826959405
    ]
   },
   {
@@ -524,15 +531,16 @@
    "hours": 93.0,
    "samples": 1489,
    "start_u_deg": -22.501385345822694,
-   "min_surface_distance_m": 215.36392393608298,
-   "at_hour": 90.4375,
+   "centre_slot_offset_m": 0.0,
+   "min_surface_distance_m": 215.4374837711713,
+   "at_hour": 90.5,
    "samples_below_clearance": 0,
    "final_radius_range_km": [
-    15000.499802119944,
-    15025.018773689038
+    15001.509863059644,
+    15026.044433528306
    ]
   }
  ],
- "ephemeris_evidence": "Gravity-only replay with the compact DE440 samples from the seed epoch, 93 hours sampled every 3.75 minutes. Rings start on circles about the Moon; with time_shifted_rings each ring is time-shifted copies of its centre trajectory. attitude common uses the bundle centroid frame; own gives each tile its own velocity-referenced radial-facing frame, with pair distances in the pair mean frame. Sail force and mutual shadows are absent.",
- "cpu_s": 43.161225651
+ "ephemeris_evidence": "Gravity-only replay with the compact DE440 samples from the seed epoch, 93 hours sampled every 3.75 minutes. Rings start on circles about the Moon; with time_shifted_rings each ring is time-shifted copies of its centre trajectory, shifted both ways from the epoch so the middle tile starts on the centre. attitude common uses the bundle centroid frame; own gives each tile its own velocity-referenced radial-facing frame, with pair distances in the pair mean frame. Sail force and mutual shadows are absent.",
+ "cpu_s": 24.086724481
 }

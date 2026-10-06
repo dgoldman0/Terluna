@@ -19,6 +19,17 @@ def test_product_is_current_with_its_code_inputs_and_constants():
     assert not constants_changed(producer['constants'])
 
 
+def test_every_ring_starts_with_its_middle_tile_on_the_designed_centre():
+    assert PRODUCT['built']['centre_slot_offset_m'] == 0.
+
+
+def test_two_body_copies_err_mostly_along_their_ring():
+    lone = PRODUCT['lone_ring_gravity']
+    assert lone['lags'] == [-3, -1, 1, 3]
+    for parts in lone['copy_error_part_max_m'].values():
+        assert parts['radial'] < .2*parts['along'] and parts['normal'] < .05*parts['along']
+
+
 def test_free_rings_need_keeping_and_a_lone_ring_keeps_its_shingle():
     assert PRODUCT['segment']['clearance']['min_m'] < 150.
     assert PRODUCT['continuous']['clearance']['min_m'] < 150.

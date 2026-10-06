@@ -212,13 +212,17 @@ its velocity and tilted about the orbit normal, so that neighbours on a ring
 overlap like shingles. The sail force uses the compiled finite-Sun shadow and
 eclipse geometry of `eclipse_parallel` and `fast_parallel` in the bundle
 centroid's frame. Incidence and force direction use each tile's own normal.
+`build` lays out the rings, and `time_track` gives each ring's tiles as its
+centre trajectory shifted in time, integrated forward and backward from the
+epoch so that a zero lag returns the centre itself.
 
 `ContinuousRings` stands for complete rings with one propagated representative
 per ring. Its neighbours on the ring and on the adjacent rings enter as copies
 shifted by whole tile lags with an exact universal-variable two-body solution
 (`kepler_shift`). Every tile is then shadowed as on a ring without ends. In
 120 hours the tide moves real neighbours along their shared path by up to about
-150 m per lag relative to those copies.
+150 m per lag relative to those copies; the radial part of that error reaches
+about 22 m per lag and the normal part about 5 m.
 
 [ring_keeping.py](ring_keeping.py) holds rings to designed relative elements.
 `geometric_elements` measures them exactly from vis-viva, eccentricity vectors
