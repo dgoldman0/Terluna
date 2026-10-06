@@ -1,0 +1,63 @@
+{
+  "schema": "terluna.expanded-cycle-inputs/1",
+  "seed": 20261006,
+  "initial_commit": "762ce4d810e07ddc0788f315212c5a6f6bdca5fe",
+  "epoch_tdb": "2026-10-04",
+  "scenario_sha256": "a53b784941518b6e36ccdf728252cf6c8e0c46c1126b6c621ed4e28c23128699",
+  "ephemeris_manifest": {
+    "schema": "terluna.protection.ephemeris-input/1",
+    "name": "de440s.bsp",
+    "url": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/spk/planets/de440s.bsp",
+    "bytes": 32726016,
+    "sha256": "c1c7feeab882263fc493a9d5a5b2ddd71b54826cdf65d8d17a76126b260a49f2",
+    "published_md5": "3917ee56769db332790c751e2168843d",
+    "checksum_source": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/spk/planets/aa_checksums.txt",
+    "reference": "Park, Folkner, Williams and Boggs (2021), The JPL Planetary and Lunar Ephemerides DE440 and DE441, Astronomical Journal 161, 105, doi:10.3847/1538-3881/abd414",
+    "credit": "NASA/JPL Solar System Dynamics and NAIF",
+    "coverage": "1849-12-26 to 2150-01-22; geometric ICRF states, TDB",
+    "storage": "research/runs/solar_shield_array/inputs; external binary is not committed"
+  },
+  "compact_ephemeris_sha256": "0b479a7c3fc66cedf927fbafa337fea3e0ffaec799a9b0aba6a462ba4a7e1c22",
+  "basis_sha256": "d765031f8820a77cbc3c200d2afd46734c7489b4596fe4b14ba9473143f98fdb",
+  "names": [
+    "row_parity_normal",
+    "column_parity_normal",
+    "parity_product_normal",
+    "row_gradient_normal",
+    "pair_325_347_normal",
+    "pair_338_341_normal",
+    "row_gradient_in_plane_u",
+    "column_gradient_in_plane_v",
+    "pair_325_347_in_plane_v",
+    "pair_338_341_in_plane_u",
+    "acquire_position_u",
+    "acquire_position_v",
+    "acquire_position_n",
+    "acquire_velocity_u",
+    "acquire_velocity_v",
+    "acquire_velocity_n",
+    "arrival_time",
+    "arrival_turn_duration"
+  ],
+  "initial_service_energy_J": 2648159445197.687,
+  "limits": {
+    "prefix_energy_J": 51859000000000.0,
+    "through_service_energy_J": 100000000000000.0,
+    "clearance_m": 100.0,
+    "numerical_reserve_m": 50.0,
+    "translation_m_s2": 0.001,
+    "attitude_rate_deg_s": 0.1,
+    "recurrence_position_m": 50.0,
+    "recurrence_velocity_m_s": 0.01,
+    "recurrence_attitude_rad": 0.0001
+  },
+  "supply": {
+    "generation": null,
+    "storage": null,
+    "unmet_demand": null
+  },
+  "recurrence": "Two subsequent actual-date cycles without state resets are required in addition to the finite sequence; not a proof of indefinite recurrence.",
+  "hardware_mass_kg": 2263298487.05685,
+  "hardware_resized": false,
+  "reference": "Same epoch and loaded seed; acquisition patterns follow baseline arrival component errors, normalized to 1 m/s per coefficient."
+}

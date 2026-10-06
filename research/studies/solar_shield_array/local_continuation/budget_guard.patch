@@ -1,0 +1,154 @@
+--- a/research/studies/solar_shield_array/expanded_model.py
++++ b/research/studies/solar_shield_array/expanded_model.py
+@@ -38,6 +38,11 @@
+          'acquire_velocity_u', 'acquire_velocity_v', 'acquire_velocity_n',
+          'arrival_time', 'arrival_turn_duration']
+ DIM = len(NAMES)
++
++
++def check_budget():
++    """The runner installs an explicit process-clock guard, also usable in tests."""
++    return None
+ 
+ 
+ def environment_from_compact(path=PACKAGE/'ephemeris.npz'):
+@@ -113,6 +118,7 @@
+ 
+     def evaluate(self, x, initial=None, start=21600., end=None, fine=False,
+                  stop=False, max_step=480., output_step=300., account=True):
++        check_budget()
+         cpu = time.process_time(); x = np.asarray(x)
+         cmd = self.command(x); end = self.dates(x)[-1] if end is None else end
+         suns, grid = (16, 32) if fine else (8, 16)
+@@ -121,9 +127,11 @@
+         u, windows = self.controls(x)
+         def thrust(t): return np.einsum('k,nki->ni', smooth_arc(t, windows), u)
+         def rhs(t, flat):
++            check_budget()
+             y = flat.reshape(361, 6)
+             return np.c_[y[:, 3:], model.acceleration(t, y)+thrust(t)].ravel()
+         def event(t, flat):
++            check_budget()
+             return closest_squares(flat.reshape(361, 6)[:, :3], cmd(t).as_matrix())[0]-100.
+         event.terminal = stop; event.direction = -1
+         y0 = self.initial if initial is None else initial
+@@ -154,6 +162,7 @@
+             nominal = rigid_square_load(cmd, times)['torque_per_mass']
+             attitude = []; optical = []; torques = []
+             for k, t in enumerate(times):
++                check_budget()
+                 light = load(self.env, t, states[k], frames[k], suns=suns, grid=grid, torque=True)
+                 torque = nominal[k]-light['gravity_torque_per_mass']-light['radiation_torque_N_m']/self.mass[:, None]
+                 attitude.append(2*abs(torque).sum(axis=1)/10000.)
+--- a/research/studies/solar_shield_array/expanded_run.py
++++ b/research/studies/solar_shield_array/expanded_run.py
+@@ -32,6 +32,11 @@
+ SERVICE_J = 2.64802552665676e12  # replaced from source-bound account in prepare
+ 
+ 
++def check_budget():
++    from . import expanded_model
++    return expanded_model.check_budget()
++
++
+ def native(x):
+     if isinstance(x, dict): return {k: native(v) for k, v in x.items()}
+     if isinstance(x, (list, tuple)): return [native(v) for v in x]
+@@ -50,7 +55,9 @@
+     with np.load(path, allow_pickle=False) as z: return {k: z[k] for k in z.files}
+ 
+ 
+-def save_case(name, row, raw, folder=RUN):
++def save_case(name, row, raw, folder=None):
++    check_budget()
++    if folder is None: folder = RUN
+     folder.mkdir(parents=True, exist_ok=True)
+     np.savez_compressed(folder/(name+'.npz'), **raw)
+     row['raw_sha256'] = digest(folder/(name+'.npz'))
+@@ -123,6 +130,7 @@
+     y, f = aligned(ex, raw, x, base['t'])
+     service = []
+     for t in np.linspace(ex.dates(x)[0], ex.dates(x)[1], 13):
++        check_budget()
+         state = state_at(spline(raw), t)
+         cover = local_coverage(state, ex.env.at(t), state.mean(axis=0),
+                                limb_count=16, interior=8, rotation=.137)
+@@ -247,6 +255,7 @@
+         x = x0.copy(); x[j] += h; translation_jac.append(control_cost(x)/h)
+     att_jac = model['energy_jac']-np.array(translation_jac).T
+     def quantities(d):
++        check_budget()
+         x = x0.copy(); x[cols] += d
+         energy = model['energy']+att_jac@d+control_cost(x)
+         u, windows = ex.controls(x)
+@@ -298,7 +307,7 @@
+ 
+ 
+ def main():
+-    global RUN
++    global RUN, check_budget
+     ap = argparse.ArgumentParser(description=__doc__)
+     ap.add_argument('stage', choices=['prepare', 'benchmark', 'sensitivity', 'solve', 'replay', 'assess', 'validate', 'inspect'])
+     ap.add_argument('--run-dir', type=Path, default=RUN)
+@@ -328,6 +337,14 @@
+         prior = json.loads((RUN/'benchmark.json').read_text())
+         ledger['charged_cpu_s'] = prior['total_cpu_s']+10.  # compilation and failed dependency probe allowance
+     remaining = args.cpu_budget-ledger['charged_cpu_s']; deadline = cpu+remaining
++    def explicit_guard():
++        children = resource.getrusage(resource.RUSAGE_CHILDREN)
++        consumed = time.process_time()+children.ru_utime+children.ru_stime-child.ru_utime-child.ru_stime
++        if consumed >= deadline-5.:
++            raise TimeoutError('Explicit cumulative CPU limit reached; completed checkpoints retained')
++    check_budget = explicit_guard
++    from . import expanded_model
++    expanded_model.check_budget = explicit_guard
+     def expired(signum, frame): raise TimeoutError('Numerical CPU budget reached; completed products retained')
+     signal.signal(signal.SIGPROF, expired)
+     if remaining <= 0: raise RuntimeError('Budget exhausted; set an explicitly larger local budget to continue')
+@@ -337,6 +354,7 @@
+     record['args']['candidate'] = str(args.candidate) if args.candidate else None
+     record['args']['resume_model'] = str(args.resume_model) if args.resume_model else None
+     try:
++        check_budget()
+         if args.stage == 'prepare': prepare()
+         elif args.stage == 'inspect':
+             ex = ExpandedExperiment(); print('Loaded', len(ex.mass), 'tiles;', DIM, 'controls; mass', ex.mass.sum())
+@@ -380,6 +398,8 @@
+         record['error'] = repr(exc); raise
+     finally:
+         signal.setitimer(signal.ITIMER_PROF, 0.)
++        expanded_model.check_budget = lambda: None
++        check_budget = lambda: None
+         endchild = resource.getrusage(resource.RUSAGE_CHILDREN)
+         charge = time.process_time()-cpu+endchild.ru_utime+endchild.ru_stime-child.ru_utime-child.ru_stime
+         record.update(cpu_s=charge, peak_rss_MiB=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/1024)
+--- a/research/studies/solar_shield_array/expanded_validation.py
++++ b/research/studies/solar_shield_array/expanded_validation.py
+@@ -74,6 +74,7 @@
+ 
+ def validate(ex, folder, case):
+     from .expanded_run import raw_read, write, save_case
++    from .expanded_model import check_budget
+     proposal = json.loads((folder/(case+'_proposal.json')).read_text()); x = np.array(proposal['x'])
+     cmd = ex.command(x); coarse = raw_read(folder/(case+'_replay.npz'))
+     coarse_row = json.loads((folder/(case+'_replay.json')).read_text())
+@@ -81,6 +82,11 @@
+     row, fine, sol = ex.evaluate(x, ex.arrays['initial_epoch_state'], 0., fine=True,
+                                  stop=True, output_step=60.)
+     save_case(case+'_validated', row, fine, folder)
++    original_dense = sol.sol
++    def checked_dense(t):
++        check_budget()
++        return original_dense(t)
++    sol.sol = checked_dense
+     finish = row['end_s']; end = min(finish, coarse['t'][-1])
+     times = np.r_[np.arange(21600., end, 30.), end]
+     delta = sol.sol(times).T.reshape(-1, 361, 6)-state_at(spline(coarse), times)
+@@ -91,6 +97,7 @@
+     stop_guard = audit_clearance(sol, cmd, max(21600., finish-120.), finish, error)
+     coverage = []
+     for t in np.linspace(0., 21600., 49):
++        check_budget()
+         state = sol.sol(t).reshape(361, 6)
+         coverage.append(local_coverage(state, ex.env.at(t), state.mean(axis=0),
+                                        limb_count=16, interior=8, rotation=.137))

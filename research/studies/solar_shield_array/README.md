@@ -1,13 +1,20 @@
 # Solar shield and habitat array
 
-The latest [coupled optimization benchmark](coupled_optimization.md) replaces
-gravity-only control responses with all-member shadow-coupled sensitivities.
-A held-out modal perturbation is predicted within 0.050 m instead of 3.65 m.
-The eight-parameter trust-region search retains cycle boundary conditions and
-rejects new contact conflicts; no feasible repair or return is found. Its final
-power-feasible rejected trial stops at hour 12.814874, independently replayed
-within 7.86 m, and uses 37.217 TJ. The 36.186 TJ slower-turn baseline remains
-the selected prefix. Failed cases and a portable optimizer checkpoint are saved.
+The latest [expanded coupled-cycle investigation](expanded_cycle.md) adds
+in-plane and arrival-acquisition controls and measures nine full-cycle response
+columns. The local terminal matrix is full rank in those columns, with 34.2%
+of the normalized residual outside its span. Exact replay exposes 27.6 km
+terminal prediction error and fails clearance at hour 13.795 with ample
+installed actuator headroom. A tenfold smaller step still mispredicts by
+2.86 km. The 100 TJ next-service cutoff binds the local solve; relaxing it
+leaves clearance unresolved. No cycle or physical resource bottleneck is
+established. The [portable continuation package](local_continuation/README.md)
+includes compact ephemeris inputs, saved optimizer state and verified replay
+commands. The 36.186 TJ slower-turn baseline remains selected.
+
+The preceding [coupled benchmark](coupled_optimization.md) and its eight-mode
+failed search remain preserved. The current result calls for smaller signed
+coupled stencils, localized separation freedom and exact trust-region replay.
 
 The author directed this work on 4 October 2026: develop the combined solar
 shield, power system and habitat fleet, and investigate the holding problem
