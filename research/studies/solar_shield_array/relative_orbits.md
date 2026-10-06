@@ -205,6 +205,74 @@ holding about 1%. The 5% dimmer removes about 586 TW across the Moon's disk
 it would yield roughly 120–180 TW at 20–30% conversion, covering the
 civilization case with light the climate design already removes.
 
+### A year of ring planes under sail force
+
+[ring_screen.py](ring_screen.py) follows single tiles on 70 rings for one year
+from 4 October 2026 and writes
+[results/ring_screen.json](results/ring_screen.json) in about four CPU minutes.
+The rings are retrograde at radii of 15,000–21,000 km, tilted 0–20° from either
+the ecliptic or the Moon's orbit plane. The model uses DE440s point-mass
+gravity, the filter's sail force on radial-facing normals with the bundle
+interior's 24% shadow loss, and finite-Sun eclipses. At every crossing of the
+Sun meridian it records the ring's radius and its height off the Sun–Moon axis.
+
+A radial-facing tile is lit on one face or the other around almost the whole
+orbit, so the sail force keeps pumping the ring's eccentricity:
+
+- **Crossing radius.** Over the year it ranges over 14,650–17,140 km for
+  15,000 km rings and 18,546–23,263 km for 19,000 km rings, an eccentricity
+  near 0.06–0.08.
+- **Crossing height.** At every tilt it swings by 2,500–8,900 km at 15,000 km
+  and by 3,500–5,200 km at 19,000–20,000 km. That is a common motion of the
+  whole strip pattern against the Sun–Moon axis, together with the Moon
+  orbit's 5.1° tilt to the ecliptic.
+- **Steady drift.** Steering it away costs 0.06–0.84 m/s per day at 15,000 km,
+  0.08–0.13 at 19,000 km, and 0.006–0.024 at 20,000 km for rings referenced to
+  the ecliptic. With sail force, the radius where Earth's tide turns the planes
+  with the Sun moves out from about 19,000 km to about 20,000 km.
+- **Spread between rings.** Rings 5° apart in tilt separate by 224–2,528 km
+  over the year. Adjacent rings in a bundle differ by about 0.035°, which scales
+  this roughly to 2–18 km over the year. That is tens of metres per orbit,
+  within the reach of continuous keeping.
+
+A full-disk ring system therefore needs its common orbit placed on a frozen
+solution, with eccentricity and node fixed relative to the Sun under tide and
+sail force together. Alternatives are steering the whole pattern or oversizing
+it by thousands of kilometres. These runs start from circular orbits, which are
+not that frozen solution. Finding the frozen family is the next step of stage 3.
+
+### A zoned aperture for the held screen
+
+[zoned_aperture.py](zoned_aperture.py) repeats the published area quadrature
+on the selected moving trajectory, with a base areal mass for each zone and a
+chosen redirected fraction for annulus tiles. It writes
+[results/zoned_aperture.json](results/zoned_aperture.json) in about ten CPU
+seconds, and its 50 g/m² case reproduces the published 238.41 TW. The central
+window covers 9.1% of the aperture (a radius of 2,246 km out of 7,454 km).
+Even so, at 50 g/m² its tiles take 22.6 TW of holding power on their own.
+
+A visible-passing annulus redirects about as much light as the climate stack,
+13.8%, where the published optics let it redirect everything. Each annulus
+tile then has less optical help against gravity.
+
+| Central window / annulus | Mean holding power | Propellant | Held mass |
+|---|---:|---:|---:|
+| 50 / 50 g/m², published optics | 238.4 TW | 370,854 kg/s | 1.08×10¹³ kg |
+| 50 / 50 g/m², visible-passing annulus | 249.7 TW | 388,388 kg/s | 1.09×10¹³ kg |
+| 50 / 20 g/m² | 112.3 TW | 174,647 kg/s | 4.93×10¹² kg |
+| 50 / 10 g/m² | 66.5 TW | 103,464 kg/s | 2.95×10¹² kg |
+| 50 / 5 g/m² | 43.7 TW | 67,991 kg/s | 1.96×10¹² kg |
+| 26 / 10 g/m² | 55.6 TW | 86,476 kg/s | 2.48×10¹² kg |
+| 26 / 5 g/m² | 32.8 TW | 51,002 kg/s | 1.49×10¹² kg |
+
+At the bare stack's 26 g/m² in the window and 5 g/m² in the annulus, the held
+screen needs 32.8 TW, within 40% of the 23.835 TW target with no formation
+flying, and about 1.6 Gt of propellant a year. Which of these areal masses can
+be reached depends on two things: the UV transmission of the annulus film,
+which comes from the protection domain, and a structural design for each zone.
+The propulsion closure is the published one (30 km/s, 70%, a 45° cant,
+300 W/kg and a seven-day buffer).
+
 ### The coverage requirement
 
 The atmosphere's [loss response](../../../atmosphere/loss_response/README.md)
@@ -254,6 +322,10 @@ of about 19 rings with per-tile radial-facing attitudes, sail force and mutual
 shadows. It checks clearance and strip overlap through service and recurrence
 over consecutive orbits. The radius steps are ordered as a staircase, so that
 every ring has one shadowed edge and the shadow's push on the rings is alike.
+[ring_bundle_run.py](ring_bundle_run.py) flies a finite segment, continuous rings
+and a lone ring free. [ring_keeping_run.py](ring_keeping_run.py) (stage 2c)
+flies continuous rings under low-thrust keeping. Their results are recorded with
+the stage 2b and 2c findings.
 Runs longer than the six days of compact samples use the pinned DE440s kernel,
 which needs jplephem; the author approved installing both.
 
@@ -263,16 +335,19 @@ inside the 23.835 TW target. Then the orbiting fleet proceeds to stage 3.
 Otherwise the held screen with a zoned aperture from stage 4 becomes the
 baseline.
 
-**Stage 3, the global ring screen.** Inclined rings near the Sun-synchronous
-radius are screened with the full DE440 ephemeris over a year. The screen
+**Stage 3, the global ring screen.** The year-long screen of single rings
+(above, 6 October) shows the common annual motion of the strip pattern. Next
+come the frozen family of the common orbit under tide and sail force, then
+bundles on it. Inclined rings near the Sun-synchronous radius are screened with
+the full DE440 ephemeris over a year. The screen
 covers nested rings that never cross, the service fraction and inventory, the
 recurring corrections, and handovers within the averaged UV budget.
 
-**Stage 4, the zoned aperture and collection, in parallel.** Recompute the held
-screen's holding power with the climate stack in the central window and a light
-annulus that blocks the UV and passes visible light. The protection domain
-supplies the annulus film's UV transmission. Map the shield's shadow on Earth
-at eclipse-season new moons. Size collection to demand, including the dimmer
+**Stage 4, the zoned aperture and collection, in parallel.** The held
+screen's holding power with a zoned aperture is computed above (6 October).
+The remaining parts are these. The protection domain supplies the annulus
+film's UV transmission. The shield's shadow on Earth is mapped at
+eclipse-season new moons. Collection is sized to demand, including the dimmer
 as semitransparent PV and small local collectors for holding.
 
 The expanded-cycle continuation package stays preserved as the record of the
