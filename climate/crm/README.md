@@ -89,14 +89,16 @@ A search on 2026-10-06 ran `box_0e_elec` from its day-10.5 restart for
 8,000 s on 4 threads, three times with each of several parts switched off.
 The runs parted at random times 3,000–7,400 s in, always first in the
 domain's total vertical momentum, and the plain Morrison box parts the same
-way, so the race lies outside the electrification. With mass conservation off,
-two or three of three runs parted; with radiation off, all three agreed, and
-with the large-scale forcing off, the two that finished agreed. With the race
-striking about half the runs, agreement among three runs has about one chance
-in eight of being luck, so neither part is pinned down. The surface and
-boundary-layer schemes cannot be switched off alone (`cm1setup` 2 requires the
-boundary layer). The search stopped there; the scripts are in
-`atmospheric-electricity/smoke/race_bisect.py` on the data drive.
+way, so at least one race lies outside the electrification. With mass
+conservation off, all three runs differed from one another; with radiation
+off, all three agreed, and with the large-scale forcing off, the two that
+finished agreed. With the race striking about half the runs, three runs agree
+by luck about one time in eight and two runs one time in four, so neither part
+is pinned down. The boundary-layer scheme cannot be switched off under the
+box's turbulence setting (`cm1setup` 2 requires it), so the test without the
+surface and boundary-layer schemes did not run. The search stopped there; the
+scripts are in `atmospheric-electricity/smoke/race_bisect.py` on the data
+drive.
 A case's executable changes only when its build is rebuilt (`build moon_omp`
 replaces the one every such case links to), so the runner records the executable
 and thread count of every segment.
@@ -1788,8 +1790,8 @@ charge to 48–58 km (−23 to −35 °C), above positive charge at 32–36 km (
 −9 °C), with no upper positive layer in most outputs: an inverted dipole.
 Under Saunders and Peck the storms hold the normal arrangement, the main
 negative charge at 38–44 km with positive charge above it at 58–72 km and
-below. The laboratory measurements at lunar impact speeds point the same way
-as Takahashi's table: at 1.8 m/s Ávila et al. (2013) found the rimer charging
+below. The laboratory measurements at the graupel's impact speeds point the same
+way as Takahashi's table: at 1.8 m/s Ávila et al. (2013) found the rimer charging
 positively at every temperature (−7 to −13 °C) and cloud water they used
 (0.05–0.5 g/m³), and at 1.2 m/s Pradeep Kumar et al. (2024) found it positive
 from −7 to −18 °C. Negative charging appears only at faster impacts: at 1.8
@@ -1810,31 +1812,41 @@ difference in ground strikes, 10 against 21, within reach of it.
 
 So the charging law sets the lunar storms' polarity more than their rate.
 
-**Impact speeds.** In the charging zone (−5 to −30 °C) of `box_0e_elec`'s days
-40.5–42, NSSL's graupel falls at a mass-weighted 1.4–3.9 m/s (10th to 90th
-percentile; median 1.9), 3.7 mm across at 420 kg/m³, and its hail at 5.6–7.8
-m/s (median 6.7), 13 mm across at 750 kg/m³: under lunar gravity hail stays
-aloft long enough to grow large. (Fall speeds from the output's mixing ratios,
-numbers and particle volumes, with CM1's shape parameters, 0 for graupel and 0.5
-for hail, and Milbrandt and Morrison's density-dependent law approximated as
-157.7 (ρ/550)^½ D^0.6 m/s, which gives Ferrier's hail law within 3 % at 900
-kg/m³, scaled by the air's density and by lunar gravity as `cm1_elec.py`
-scales it.) Ice crystals and snow fall at a few tenths of a metre per second,
-so hail, which does 82–88 % of the charging under Saunders and Peck, strikes
-them at about 6 m/s, within the speeds of Earth's laboratories, and only
-graupel's smaller share strikes at the 1–2 m/s of the slow-impact studies. The
-polarity therefore rests on where Earth's two laws disagree for fast rimed ice
-in little cloud water: at 6 m/s in 0.03–0.17 g/m³ hail rimes at about 0.2–1
-g m⁻² s⁻¹, below Saunders and Peck's critical rate, and charges negatively,
-the normal arrangement, where Takahashi's table charges it positively, the
-inverted one. The measurement that would decide it is the sign of the charge
-rimed ice takes at 5–8 m/s in 0.03–0.2 g/m³ of cloud water between −10 and
-−30 °C, conditions Earth's laboratories can reach.
+**Impact speeds.** In the charging zone (−5 to −30 °C) of `box_0e_elec`'s
+stormy windows (days 10.5–12 and 40.5–42, three-hourly output), NSSL's graupel
+falls at a mass-weighted 1.4–3.9 m/s (10th to 90th percentile; median 1.9–2.4),
+3.7–4.4 mm across at 410–450 kg/m³, and its hail at 4.8–7.7 m/s (median
+5.9–6.6), 12–13 mm across at 710–740 kg/m³: under lunar gravity hail stays
+aloft long enough to grow large. Cloud ice and snow fall at 0.25–0.49 m/s, so
+hail, which does 82–88 % of the charging under Saunders and Peck, strikes them
+at 4.4–7.6 m/s (median 5.4–6.5), within the 1.2–11 m/s Earth's laboratories
+have measured, and graupel at 0.95–3.6 m/s, where the slow-impact studies'
+1.2–1.8 m/s lie.
+(`elec_analysis.py impact` applies NSSL's own laws to the output: Milbrandt and
+Morrison's coefficients at each particle's density for graupel and hail, the
+adjusted Ferrier law for cloud ice and Ferrier's for snow, with CM1's shape
+parameters, 0 for graupel and 0.5 for hail, and the build's gravity factors.)
+
+Most of the hail in the charging zone, 80–82 % of its mass, meets too little
+cloud water to charge at all: its rime accretion rate stays under the 0.1
+g m⁻² s⁻¹ below which WRF-ELEC separates no charge. The hail that charges sits
+at −5 to −16 °C in 0.02–0.18 g/m³ of cloud water, and Saunders and Peck's law
+charges it both ways: positively where it rimes faster than the critical rate,
+which above −15 °C is Brooks et al.'s (0.1–1.5 g m⁻² s⁻¹), and negatively
+where it rimes slower. The model's charging totals show the split. In the
+second lunar day's window hail took +49 and −45 kC in collisions with snow
+and +6 and −8 kC with cloud ice; in the first lunar day's, +8 and −5 kC and
++1.2 and −0.9 kC. Takahashi's table charges all of it positively at that
+cloud water, and that turns the storms' polarity over. The measurement that
+would decide between the laws is the sign of the charge rimed ice takes at
+4–8 m/s in 0.02–0.2 g/m³ of cloud water between −5 and −16 °C, conditions
+Earth's laboratories can reach.
 
 ```sh
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_elec_takahashi      # and box_0e_elec_takahashi_first
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_0e_elec_takahashi --threads 4 --hours 6
 climate/gcm/.venv/bin/python -m climate.crm.elec_analysis laws
+climate/gcm/.venv/bin/python -m climate.crm.elec_analysis impact    # elec_impact_speeds.json
 ```
 
 ### Leakage

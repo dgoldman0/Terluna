@@ -67,8 +67,10 @@ EVIDENCE = ('CM1 r22.0 with WRF-ELEC\'s NSSL two-moment microphysics (MicroTed/w
             'nitrogen oxide yield are WRF-ELEC\'s calibrations for Earth; nothing conducts charge away except where a '
             'case turns on leakage, and the ground gives off ions only where a case turns on point discharge '
             '(Standler and Winn\'s 1 nA/m2 at 8 kV/m over Earth\'s vegetation, its onset scaled by density).')
-READING_RULE = ('Times are model seconds from the start. Series are per bin of bin_s seconds from start_s: 5 minutes, or the output interval for runs longer than two days. Kinds: 1 in cloud, 2 negative and 3 positive charge to ground '
-                '(branched flashes), 9 a call of the cylindrical scheme, whose regions are the separate areas one call '
+READING_RULE = ('Times are model seconds from the start. Series are per bin of bin_s seconds from start_s: 5 minutes, '
+                'or the output interval for runs longer than two days. Kinds: 1 in cloud, 2 negative and 3 positive '
+                'charge to ground (branched flashes), 9 a call of the cylindrical scheme, whose regions are the '
+                'separate areas one call '
                 'takes. A flash\'s positive and negative charge are what it neutralized; a ground flash neutralizes '
                 'one sign only, the ground supplying the other. Nitrogen oxides are lightmsz\'s: Wang et al.\'s yield '
                 'per metre of channel at its pressure, times 0.1 where the flash changes the charge by 1 nC/kg or '
@@ -481,13 +483,189 @@ def comparison(name: str) -> dict:
                     'given (C).'))
 
 
+# The speeds of the charging collisions. WRF-ELEC charges graupel and hail by their collisions with cloud ice and snow at
+# the difference of the two mass-weighted fall speeds, and under Saunders and Peck's law (isaund 12) the rimer's rime
+# accretion rate sets the sign: positive above a critical rate (Brooks et al.'s above -15 C, Saunders and Peck's below),
+# negative under it, none under 0.1 g/m2/s or colder than -32.47 C (module_mp_nssl_2mom.F, saund6). The fall speeds are
+# NSSL's as the electrified build computes them: graupel and hail by Milbrandt and Morrison's (2013) coefficients at the
+# particles' density (icdx = icdxhl = 6), cloud ice by NSSL's adjusted Ferrier law at 900 kg/m3 (icefallopt 3, volume
+# shape 0), snow by Ferrier's law at 100 kg/m3 (isnowfall 2, isnowdens 1), each times sqrt(1.225/rho) for the air's
+# density and (g/9.81)^((b+1)/3) for the build's gravity, b being the law's exponent on diameter (cm1_elec.py).
+MM13 = np.array([[50., 150., 250., 350., 450., 550., 650., 750., 850.],                       # density (kg/m3)
+                 [62.923, 94.122, 114.74, 131.21, 145.26, 157.71, 168.98, 179.36, 189.02],     # a
+                 [0.67819, 0.63789, 0.62197, 0.61240, 0.60572, 0.60066, 0.59663, 0.59330, 0.59048]])   # b
+# output names of mixing ratio, number and volume, NSSL's density bounds (kg/m3) and mean-volume bounds (diameters, m)
+RIMERS = {'graupel': ('qg', 'chw', 'vhw', 'alphah', (170.0, 900.0), (0.3e-3, 20.0e-3)),
+          'hail': ('qhl', 'chl', 'vhl', 'alphahl', (500.0, 900.0), (0.3e-3, 40.0e-3))}
+TARGETS = {'cloud_ice': ('qi', 'cci'), 'snow': ('qs', 'csw')}
+CHARGING_ZONE_C = (-30.0, -5.0)
+DROPLET_EFFICIENCY_MAX = 0.9          # NSSL's ehw0 and ehlw0, the most of the droplets in their path it lets them collect
+
+
+def mm13(density):
+    """Milbrandt and Morrison's a and b (v = a D^b, SI units) for rimed ice of a density (kg/m3), interpolated between
+    the 100-kg/m3 steps as NSSL does: the first step's below it, the last step's above it."""
+    rho, a, b = MM13
+    density = np.asarray(density, dtype=float)
+    i = np.clip(np.trunc((density - 50.0) / 100.0).astype(int) + 1, 1, rho.size) - 1
+    d = np.maximum(0.0, 0.01 * (density - rho[i]))
+    j = np.minimum(i + 1, rho.size - 1)
+    inner = i < rho.size - 1
+    return np.where(inner, a[i] + d * (a[j] - a[i]), a[i]), np.where(inner, b[i] + d * (b[j] - b[i]), b[i])
+
+
+def rimer_fall_speed(q, n, vol, rho_air, alpha: float, densities: tuple, diameters: tuple, g_ratio: float):
+    """Graupel's or hail's mass-weighted fall speed (m/s), mass-weighted diameter (m) and density (kg/m3) from the
+    output's mixing ratio (kg/kg), number (per kg) and particle volume (m3/kg), NaN where there is none. NSSL's gamma
+    distribution in diameter has shape alpha and slope diameter D_n; it holds the density and the mean particle volume
+    to its bounds."""
+    from scipy.special import gamma
+    ok = (q > 0.0) & (n > 0.0) & (vol > 0.0)
+    q, n, vol = (np.where(ok, x, 1.0) for x in (q, n, vol))
+    density = np.clip(q / vol, *densities)
+    mean_volume = np.clip(q / (n * density), *(np.pi / 6.0 * np.asarray(diameters) ** 3))
+    dn = (6.0 * gamma(1.0 + alpha) / (np.pi * gamma(4.0 + alpha)) * mean_volume) ** (1.0 / 3.0)
+    a, b = mm13(density)
+    v = np.sqrt(1.225 / rho_air) * a * dn ** b * gamma(4.0 + alpha + b) / gamma(4.0 + alpha) * g_ratio ** ((b + 1) / 3)
+    return np.where(ok, v, np.nan), np.where(ok, (4.0 + alpha) * dn, np.nan), np.where(ok, density, np.nan)
+
+
+def target_fall_speed(kind: str, q, n, rho_air, g_ratio: float):
+    """Cloud ice's or snow's mass-weighted fall speed (m/s), NaN where there is none."""
+    from scipy.special import gamma
+    ok = (q > 0.0) & (n > 0.0)
+    if kind == 'cloud_ice':
+        coefficient, density, power, b = 47.6273 * gamma(2.18333), 900.0, 0.18333, 0.55
+    else:
+        coefficient, density, power, b = 11.9495, 100.0, 0.14, 0.42
+    mean_volume = np.where(ok, q, 1.0) / (np.where(ok, n, 1.0) * density)
+    if kind == 'snow':
+        mean_volume = np.clip(mean_volume, np.pi / 6.0 * 1.0e-15, np.pi / 6.0 * 1.0e-6)   # 0.01-10 mm
+    v = coefficient * np.sqrt(1.225 / rho_air) * mean_volume ** power * g_ratio ** ((b + 1.0) / 3.0)
+    return np.where(ok, v, np.nan)
+
+
+def critical_rar(t_c):
+    """The critical rime accretion rate (g/m2/s) of WRF-ELEC's isaund 12: Brooks et al.'s above -15 C, Saunders and
+    Peck's polynomial below (at least 0.1 down to -23.7 C, at least 0 below), 0.1 below -33 C."""
+    t = np.asarray(t_c, dtype=float)
+    sp = 1.0 + t * (7.9262e-2 + t * (4.4847e-2 + t * (7.4754e-3 + t * (5.4686e-4 + t * (1.6737e-5 + t * 1.7613e-7)))))
+    rarc = np.maximum(np.where(t > -15.0, np.clip(-1.47 - 0.2 * t, 0.0, 3.29), sp), 0.1)
+    rarc = np.where(t <= -23.7, np.maximum(sp, 0.0), rarc)
+    return np.where(t < -33.0, 0.1, rarc)
+
+
+def weighted_percentiles(values, weights, ps=(0.1, 0.5, 0.9)) -> list:
+    o = np.argsort(values)
+    c = np.cumsum(weights[o]) / weights.sum()
+    return [float(values[o][min(np.searchsorted(c, p), values.size - 1)]) for p in ps]
+
+
+def impact_speeds(name: str, t0: float, t1: float) -> dict:
+    """Over model seconds (t0, t1], in the charging zone (CHARGING_ZONE_C) at each output time: the fall speeds of
+    graupel, hail, cloud ice and snow, the speeds at which graupel and hail strike ice and snow, the cloud water they
+    rime, and the share of their mass whose rime accretion rate would charge them negatively, positively or not at all
+    under Saunders and Peck's law. Percentiles (10th, 50th, 90th) are weighted by the rimer's mass, or the target's."""
+    case = ra.RUNS / name
+    record = json.loads((case / 'case.json').read_text())
+    output_s = record['configuration']['output_s'] * record.get('time_scale', 1.0)
+    g_ratio = record['build']['gravity_m_s2'] / 9.81
+    namelist = (case / 'namelist.template').read_text()
+    rows = {k: [] for k in ('graupel', 'hail', 'cloud_ice', 'snow')}
+    used = []
+    for n in sorted(int(p.name[8:14]) for p in case.glob('cm1out_t*_s.dat')):
+        if not t0 < (n - 1) * output_s <= t1:
+            continue
+        s = ra.read_snapshot(case, n)
+        used.append(n)
+        t = s['th'] * (s['prs'] / P00) ** (RD / CP)
+        tc = t - 273.15
+        rho = s['prs'] / (RD * t * (1.0 + 0.608 * s['qv']))
+        zone = (tc > CHARGING_ZONE_C[0]) & (tc < CHARGING_ZONE_C[1])
+        targets = {k: target_fall_speed(k, s[qn], s[nn], rho, g_ratio) for k, (qn, nn) in TARGETS.items()}
+        for k, (qn, nn) in TARGETS.items():
+            sel = zone & np.isfinite(targets[k]) & (s[qn] > 1.0e-7)
+            rows[k].append(dict(v=targets[k][sel], w=(s[qn] * rho)[sel]))
+        for k, (qn, nn, vn, alpha_key, densities, diameters) in RIMERS.items():
+            alpha = float(re.search(rf'^\s*{alpha_key}\s*=\s*([-0-9.eE+]+)', namelist, re.M).group(1))
+            v, d, dens = rimer_fall_speed(s[qn], s[nn], s[vn], rho, alpha, densities, diameters, g_ratio)
+            sel = zone & np.isfinite(v) & (s[qn] > 1.0e-5)
+            lwc = s['qc'] * rho * 1.0e3                                              # g/m3
+            rar = DROPLET_EFFICIENCY_MAX * lwc * v                                   # g/m2/s, an upper bound
+            rows[k].append(dict(v=v[sel], d=d[sel], dens=dens[sel], w=(s[qn] * rho)[sel], lwc=lwc[sel], rar=rar[sel],
+                                tc=tc[sel],
+                                rarc=critical_rar(tc)[sel],
+                                **{f'on_{tg}': np.abs(v - targets[tg])[sel] for tg in TARGETS},
+                                **{f'with_{tg}': (np.isfinite(targets[tg]) & (s[TARGETS[tg][0]] > 1.0e-7))[sel]
+                                   for tg in TARGETS}))
+    out = dict(case=name, days=[t0 / 86400.0, t1 / 86400.0], snapshots=len(used), charging_zone_c=list(CHARGING_ZONE_C),
+               gravity_ratio=g_ratio)
+    for k in TARGETS:
+        v, w = (np.concatenate([r[x] for r in rows[k]]) for x in ('v', 'w'))
+        out[k] = dict(fall_speed_m_s=weighted_percentiles(v, w), mass_kg_per_m3_summed=float(w.sum())) if v.size else None
+    for k in RIMERS:
+        r = {x: np.concatenate([row[x] for row in rows[k]]) for x in rows[k][0]} if rows[k] else {}
+        if not r or not r['v'].size:
+            out[k] = None
+            continue
+        w = r['w']
+        rar, rarc = r['rar'], r['rarc']
+        out[k] = dict(fall_speed_m_s=weighted_percentiles(r['v'], w),
+                      diameter_mm=float(np.average(r['d'], weights=w) * 1e3),
+                      density_kg_m3=float(np.average(r['dens'], weights=w)),
+                      cloud_water_g_m3=weighted_percentiles(r['lwc'], w),
+                      rime_accretion_upper_g_m2_s=weighted_percentiles(rar, w),
+                      share_negative=float(w[(rar > 0.1) & (rar <= rarc)].sum() / w.sum()),
+                      share_positive=float(w[rar > rarc].sum() / w.sum()),
+                      share_uncharged=float(w[rar <= 0.1].sum() / w.sum()))
+        charging = rar > 0.1                                       # where it rimes fast enough to charge at all
+        if charging.any():
+            out[k].update(charging_cloud_water_g_m3=weighted_percentiles(r['lwc'][charging], w[charging]),
+                          charging_temperature_c=weighted_percentiles(r['tc'][charging], w[charging]))
+        for t in TARGETS:
+            m = r[f'with_{t}']
+            out[k][f'impact_on_{t}_m_s'] = weighted_percentiles(r[f'on_{t}'][m], w[m]) if m.any() else None
+    return out
+
+
+IMPACT_RUNS = {'first_lunar_day': 'box_0e_elec', 'second_lunar_day': 'box_0e_elec'}
+
+
+def impacts() -> dict:
+    """The charging collisions' speeds and rime accretion in box_0e_elec's stormy windows (WINDOW_DAYS)."""
+    return dict(schema='terluna.climate.crm-impact-speeds/1',
+                windows={label: impact_speeds(run, *(86400.0 * d for d in WINDOW_DAYS[label]))
+                         for label, run in IMPACT_RUNS.items()},
+                producer=dict(domain='climate', files={'crm/elec_analysis.py': hashlib.sha256(
+                    Path(__file__).read_bytes()).hexdigest()[:16]}),
+                evidence=('NSSL\'s fall-speed laws and WRF-ELEC\'s rule for the sign of the charge rimed ice takes '
+                          '(isaund 12), applied after the run to the three-hourly output of box_0e_elec\'s stormy '
+                          'windows; the model applies them every step in every cell.'),
+                reading_rule=('Speeds are mass-weighted fall speeds and their differences (m/s), as WRF-ELEC uses them; '
+                              'each list is the 10th, 50th and 90th percentile over the cells of the charging zone at '
+                              'each output time, weighted by the mass of the particle named (for impacts, the rimer\'s, '
+                              'where the target is present). Diameters are mass-weighted means, densities mass-weighted. '
+                              'Charging cloud water and temperature are taken where the rime accretion exceeds the '
+                              '0.1 g/m2/s under which WRF-ELEC charges nothing. '
+                              'Rime accretion takes NSSL\'s largest collection efficiency of droplets (0.9) and neglects '
+                              'the droplets\' own fall, so it is an upper bound; the shares that would charge '
+                              'positively are upper bounds and those charging negatively or not at all lower bounds.'))
+
+
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument('case', help='a run, or "laws", "leakage" or "leader" for the windows run again under '
                                      'Takahashi\'s law, with leakage or with the leader\'s crossing '
-                                     '(elec_charging_laws.json, elec_leakage.json, elec_leader_crossing.json)')
+                                     '(elec_charging_laws.json, elec_leakage.json, elec_leader_crossing.json), or '
+                                     '"impact" for the charging collisions\' speeds (elec_impact_speeds.json)')
     parser.add_argument('--against', help='another run of the same case to set the storm beside')
     args = parser.parse_args(argv)
+    if args.case == 'impact':
+        RESULTS.mkdir(parents=True, exist_ok=True)
+        path = RESULTS / 'elec_impact_speeds.json'
+        path.write_text(json.dumps(significant(impacts()), indent=1, default=float) + '\n')
+        print(path)
+        return 0
     if args.case in COMMANDS:
         RESULTS.mkdir(parents=True, exist_ok=True)
         name = COMMANDS[args.case]

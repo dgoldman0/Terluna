@@ -140,3 +140,38 @@ def test_a_window_takes_only_its_own_flashes_charging_and_segments(tmp_path, mon
     assert w['charge']['inductive_c'] == pytest.approx(0.5 * 1800.0)
     assert w['field']['e_max_kv_m'] == pytest.approx(120.0) and w['field']['negative_c_max'] == pytest.approx(8.0)
     assert w['ground']['rows'] == 2 and w['ground']['e_ground_dry_max_kv_m'] == pytest.approx(4.0)
+
+
+def test_fall_speeds_follow_nssl_s_laws_at_the_build_s_gravity():
+    # Milbrandt and Morrison's coefficients as NSSL interpolates them: its table at the steps, linear between, the
+    # first step below and the last above
+    a, b = ea.mm13(np.array([550.0, 420.0, 20.0, 900.0]))
+    assert a[0] == pytest.approx(157.71) and b[0] == pytest.approx(0.60066)
+    assert a[1] == pytest.approx(131.21 + 0.7 * (145.26 - 131.21)) and b[1] == pytest.approx(0.61240 + 0.7 * (0.60572 - 0.61240))
+    assert a[2] == pytest.approx(62.923) and a[3] == pytest.approx(189.02) and b[3] == pytest.approx(0.59048)
+    # hail of 550 kg/m3, exponential sizes with a 2-mm slope diameter, in sea-level air on Earth: a D_n^b G(4+b)/G(4)
+    dn, alpha = 2.0e-3, 0.0
+    mean_volume = np.pi / 6.0 * 6.0 * dn ** 3                              # pi/6 D_n^3 G(4)/G(1)
+    q, n = np.array([550.0 * mean_volume * 1.0e3]), np.array([1.0e3])         # per kg of air
+    v, d, dens = ea.rimer_fall_speed(q, n, q / 550.0, 1.225, alpha, (500.0, 900.0), (0.3e-3, 40.0e-3), 1.0)
+    from math import gamma
+    assert dens[0] == pytest.approx(550.0) and d[0] == pytest.approx(4.0 * dn)
+    assert v[0] == pytest.approx(157.71 * dn ** 0.60066 * gamma(4.60066) / gamma(4.0), rel=1e-6)
+    # lunar gravity scales a law in D^b by (g/9.81)^((b+1)/3); thinner air speeds every particle by sqrt(1.225/rho)
+    v_moon, _, _ = ea.rimer_fall_speed(q, n, q / 550.0, 0.5, alpha, (500.0, 900.0), (0.3e-3, 40.0e-3), 0.1656)
+    assert v_moon[0] == pytest.approx(v[0] * np.sqrt(1.225 / 0.5) * 0.1656 ** (1.60066 / 3.0), rel=1e-6)
+    # snow (Ferrier's law at 100 kg/m3) and cloud ice (NSSL's adjusted Ferrier law at 900) by mean particle volume
+    x = np.pi / 6.0 * 1.0e-9                                                  # a 1-mm sphere
+    assert ea.target_fall_speed('snow', np.array([100.0 * x]), np.array([1.0]), 1.225, 1.0)[0] == \
+        pytest.approx(11.9495 * x ** 0.14)
+    ice = ea.target_fall_speed('cloud_ice', np.array([900.0 * x * 1e-3]), np.array([1.0]), 1.225, 1.0)[0]
+    assert ice == pytest.approx(47.6273 * gamma(2.18333) * (x * 1e-3) ** 0.18333)
+    assert np.isnan(ea.target_fall_speed('snow', np.array([0.0]), np.array([0.0]), 1.225, 1.0)[0])
+
+
+def test_the_critical_rime_accretion_rate_is_brooks_s_above_minus_15_and_saunders_and_peck_s_below():
+    sp = lambda t: 1.0 + t * (7.9262e-2 + t * (4.4847e-2 + t * (7.4754e-3 + t * (5.4686e-4 + t * (1.6737e-5 + t * 1.7613e-7)))))
+    rarc = ea.critical_rar(np.array([-5.0, -10.0, -14.0, -20.0, -28.0, -35.0]))
+    assert rarc[0] == pytest.approx(0.1) and rarc[1] == pytest.approx(0.53) and rarc[2] == pytest.approx(1.33)
+    assert rarc[3] == pytest.approx(max(sp(-20.0), 0.1)) and rarc[4] == pytest.approx(max(sp(-28.0), 0.0))
+    assert rarc[5] == pytest.approx(0.1)
