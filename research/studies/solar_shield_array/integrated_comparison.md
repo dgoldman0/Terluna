@@ -53,7 +53,7 @@ or not met. The ledger product carries the evidence behind each.
 | Window spectrum (E2, O4) | Conditional on the 26 g/m² window and the dimmer's form | The same, on the rings that cross the window |
 | Earth's shadow and rejected light (O5, O7) | Open: the optical bound lets redirected light leave toward the Moon; the shadow on Earth is unmapped | Open: night-side tiles reflect back past the Moon, with light the screen has already filtered (to check); the shadow on Earth is unmapped |
 | Stability | Conditional on continuous thrust (75.7 TW installed); an unpowered tile drifts about 2,700 km in its first day | Open: the kept bundle's edges first come within 150 m at day 8.1; the interior stays clear for 23 days in a one-tile-per-ring model |
-| Outflows (S7, proposed) | Not met at the 45° cant, by the direct plumes and by the slow gas alone (below) | Open: photon keeping releases nothing, pending its check; electric keeping would release 0.4 t/s or more at or inside the planned magnetosphere |
+| Outflows (S7, proposed) | Not met as designed: without the magnets by the direct plumes and by the slow gas alone; with them by the slow gas and, for 1 kg/s at a 45° cant, the fast atoms (below) | Open: photon keeping releases nothing, pending its check; electric keeping would release 0.4 t/s or more at or inside the planned magnetosphere |
 | Holding cheaper than the atmosphere it saves (S6) | Not met: 51,000 kg/s against 300–80,000 kg/s of unshielded loss | Conditional on photon keeping |
 | Net-positive electricity for habitat | Open: its own load is 32.8 TW mean | Open: its own load is the attitude energy, not yet computed |
 
@@ -91,7 +91,8 @@ by 6–40 times at every cant. A gridded ion plume meets it from about 60° and
 comes to the 1 kg/s allowance at 75°, at 1.4 and 2.7 times the 45° design's
 propellant and power. The plume profiles are read from published figures
 (Young and others, 2019, for NEXT; Goebel and Katz, 2008, for the BPT-4000) to
-about ±30%, and these shares count only fast ions on straight lines.
+about ±30%. These shares count fast particles on straight lines: the ions, and
+the fast atoms that charge exchange makes from them on the same paths.
 
 **The slow gas.** Flight-class Hall thrusters reach about 95% mass
 utilization, so at least about 5% of the propellant leaves unionized, at
@@ -117,24 +118,56 @@ first launch's 2,304 particles. Neutral lifetimes of 10 to 100 days give
 delivered shares of 1.0–1.9% for oxygen and 3.5–7.1% for xenon. The slow gas
 alone deposits 3–30 times the 1 kg/s allowance, and at
 the upper end three times the 10 kg/s allowance. The September report
-proposed capturing the neutral gas locally; it would have to stop nearly all of
-it. A further 4–12% of the gas passes near Earth, which S7 also asks to trace.
+proposed capturing the neutral gas locally; it would have to stop most of it
+(below). A further 4–12% of the gas passes near Earth, which S7 also asks to
+trace.
 
 **The charged exhaust.** The other 85–95% of the flow is ions. 51 t/s is about
 10⁵ times the solar wind's own mass flux through the aperture, so the screen
-acts as a comet upstream of the Moon. The wind loads, slows and carries the
-ions downstream over the Moon, energising picked-up oxygen to tens of keV, and
-the [loss response](../../../atmosphere/loss_response/README.md) credits each
+acts as a comet upstream of the Moon. Without a magnetosphere the wind loads,
+slows and carries the ions downstream over the Moon, energising picked-up
+oxygen to tens of keV, and the
+[loss response](../../../atmosphere/loss_response/README.md) credits each
 returning pickup ion with 1–10 sputtered molecules. No model here follows that
-plasma. It stays open, and it adds to both paths above.
+plasma, and it adds to both paths above.
 
-**What follows.** On present evidence the held screen's exhaust breaks the
-proposed S7 on both paths computed here, before the plasma path is counted.
-Meeting it would take gridded ion thrusters canted 60–75°, capture of nearly
-all unionized propellant, and a demonstration that the solar wind returns
-almost none of the charged exhaust. The held screen also fails S6: its
-51,000 kg/s of propellant exceeds the atmosphere's unshielded loss of
-300–80,000 kg/s everywhere but the top of that range.
+**With the September magnets.** The charged-particle protection of the
+requirements (C1), a lunar dipole of 1.5×10²¹ A·m², stands the solar wind off
+at 10 lunar radii, 17,400 km. At its magnetopause, where about 71 nT balances
+the wind ([protection/report.md](../../../protection/report.md), section 10),
+exhaust ions gyrate on 140 km (oxygen molecules) to 575 km (xenon), and
+picked-up oxygen on 1,900 km, so the magnetosphere holds them off. Xenon picked
+up at the wind's speed gyrates on 7,700 km, a diameter close to the stand-off,
+and is held poorly. What passes is neutral: the fast atoms that charge
+exchange makes in each plume, which keep the beam's paths, and the slow gas.
+Goebel and Katz's space-condition model of a 3 kW Hall thruster makes
+charge-exchange ions at about a tenth of its beam; taking that tenth for both
+thrusters, the capture of unionized gas each case needs is:
+
+| Loss budget (allowance) | Thrusters | Cant | Fast atoms | Unionized gas to capture |
+|---|---|---|---:|---:|
+| 1 kg/s (9.4 MW) | Gridded ion | 45° | 14 MW | none suffices |
+| | | 60° | 3.7 MW | 81–98% |
+| | | 75° | 1.1 MW | 73–97% |
+| | Hall | 45–75° | 58–359 MW | none suffices |
+| 10 kg/s (94 MW) | Gridded ion | 45° | 14 MW | up to 73% |
+| | | 60–75° | 1.1–3.7 MW | up to 68–69% |
+| | Hall | 45–60° | 153–359 MW | none suffices |
+| | | 75° | 58 MW | up to 88% |
+
+The capture ranges span oxygen and xenon at 5–15% unionized, with a 30-day
+neutral lifetime. Entry through the magnetosphere's cusps and by
+reconnection, and the poorly held xenon, need a plasma model.
+
+**What follows.** As designed, at a 45° cant and with no capture, the held
+screen's exhaust breaks the proposed S7: without the magnets on both paths
+computed here, before the plasma path is counted, and with them through the
+fast atoms and the slow gas. With the magnets, meeting S7 takes gridded ion
+thrusters, canted about 60° for a 1 kg/s budget or 45° for 10 kg/s, capture of
+most of the unionized gas (81–98% for 1 kg/s, up to about 70% for 10 kg/s), and
+a plasma estimate of what leaks past the magnetosphere. The held screen also
+fails S6: its 51,000 kg/s of propellant exceeds the atmosphere's unshielded
+loss of 300–80,000 kg/s everywhere but the top of that range.
 
 ## Resources
 
@@ -193,9 +226,11 @@ screen a habitat would burn about its own mass in propellant every year.
 
 ## What the comparison shows so far
 
-The held screen meets the protected radius on its geometry, but on present
-evidence its exhaust breaks the proposed outflow requirement on both paths
-computed here, and its propellant fails S6. The ring fleet passes no gate yet
+The held screen meets the protected radius on its geometry, but as designed
+its exhaust breaks the proposed outflow requirement, and its propellant fails
+S6. With the September magnets it could meet the outflow requirement only
+with gridded ion thrusters and capture of most of its unionized gas, pending a
+plasma estimate of the magnetosphere's leak. The ring fleet passes no gate yet
 and fails none: its open items are photon keeping, receiver-ray coverage with
 independently propagated tiles, the edge rings, the frozen common orbit and its
 oversizing, and the attitude energy. Both share the annulus film's unproven UV
@@ -212,8 +247,9 @@ These follow the order in the [plan](relative_orbits.md#plan):
 7. Redo the keeping in the regressing frame, treat the edge rings and find the
    frozen common orbit, as far as the ledger keeps the fleet in contention.
 
-The held screen's plasma path needs a model this repository lacks; a bound
-from published comet and ion-release studies comes first.
+The held screen's plasma path, with and without the magnets, needs a model
+this repository lacks; a bound from published comet, ion-release and
+mini-magnetosphere studies comes first.
 
 ## Running
 

@@ -19,14 +19,21 @@ requirement S7 of research/studies/protection_architecture/requirements.md.
    distribution of oxygen molecules or xenon atoms at 500 K, and fly under DE440s point-mass gravity for
    60 days with a fixed-step fourth-order Runge-Kutta integrator. The share that enters the protected
    sphere, by day, gives the share delivered for any neutral lifetime.
+4. The magnetosphere. The September magnets hold off charged particles whose gyroradius at the magnetopause is
+   small against their stand-off; they cannot hold the fast atoms that charge exchange makes in each plume, about
+   a tenth of the beam on the same paths, or the slow gas. With the magnets, the direct path therefore leaves its
+   fast-neutral share, and the runner gives the share of the slow gas that must be captured at the thrusters for
+   each loss budget.
 
-The solar wind's pickup of the charged exhaust lies outside every model here and stays open.
+The solar wind's pickup of the charged exhaust, and the magnetosphere's leak, lie outside every model here and stay
+open.
 
     OPENBLAS_NUM_THREADS=1 python -m research.studies.solar_shield_array.exhaust_isolation
 """
 from __future__ import annotations
 
 import hashlib
+import inspect
 import json
 import resource
 import time
@@ -56,7 +63,16 @@ DESIGN = dict(case='core_26g_annulus_5g', core_sigma_kg_m2=.026, annulus_sigma_k
               unionized_share=[.05, .15], gas_temperature_K=500., molar_mass_kg_mol=dict(O2=.031998, Xe=.131293),
               launch_days=30., launch_every_days=2., flight_days=60., particles_per_thruster=6, step_s=300.,
               check_step_s=150., lifetimes_days=[10., 30., 100.], near_earth_radii=10., escape_m=3e9,
-              direct_every_h=24., seed=20261006)
+              direct_every_h=24., seed=20261006,
+              # Charge exchange in the plume turns about a tenth of the beam into fast atoms that keep the beam's
+              # direction (Goebel and Katz, figure 8-11: 0.74 A of charge-exchange ions in space for a 3 kW, 300 V
+              # Hall thruster, whose discharge carries 10 A).
+              fast_neutral_share_of_beam=.1,
+              # The September magnets: stand-off 10 lunar radii (atmosphere/loss_response), and the field that
+              # balances 2 nPa of solar-wind pressure at the magnetopause (protection/report.md, section 10).
+              standoff_radii=10., magnetopause_field_T=71e-9,
+              # The loss response's typical solar wind at 1 au (atmosphere/loss_response/model.py, SOLAR_WIND).
+              solar_wind_speed_m_s=4.0e5, budgets_with_magnets_kg_s=[1., 10.])
 # Relative energetic-ion intensity per steradian against angle from the thruster axis, read from the published
 # figures to about +-30% in each value.
 PLUMES = {
@@ -85,6 +101,11 @@ SOURCES = [
     'Heays, Bosman and van Dishoeck, A&A 602, A105 (2017), tables 18-19 scaled to 1 au: O2 photodissociation '
     'about 2.4e-6 per s; photoionisation of O, N2 and O2 about 0.5-1.3e-7 per s. Lifetimes of 10-100 days span '
     'photoionisation with charge exchange and electron impact in the solar wind.',
+    'Goebel and Katz (2008), figure 8-11: a space-condition plume model of the BPT-4000 at 3 kW makes 0.74 A of '
+    'charge-exchange ions, about a tenth of its beam; each exchange leaves a fast atom on the beam ion\'s path.',
+    'protection/report.md, section 10: 71 nT balances 2 nPa of solar-wind pressure; the September magnets '
+    '(1.5e21 A m2) stand off at 10 lunar radii (atmosphere/loss_response/README.md; requirements C1). Magnetic '
+    'protection may divert charged exhaust and cannot be credited with removing fast neutrals (section 8).',
 ]
 
 
@@ -178,12 +199,46 @@ def direct_path(fields):
                 share = .5*(chunked_share(profile, a, unit(moon), half)+chunked_share(profile, b, unit(moon), half))
                 row[f'{name}_share'] = float(np.sum(flow*share)/np.sum(flow))
                 row[f'{name}_share_max'] = float(share.max())
+                # Fast atoms from charge exchange keep the beam's directions and pass any magnetosphere.
+                row[f'{name}_fast_neutral_share'] = DESIGN['fast_neutral_share_of_beam']*row[f'{name}_share']
             rows.append(row)
         out[plane] = rows
     out['protected_half_angle_deg'] = [float(np.degrees(half.min())), float(np.degrees(half.max()))]
     out['samples'] = dict(dates=int(len(q)), nodes=int(q.shape[1]))
     out['profile_totals'] = {name: total_intensity(p) for name, p in PLUMES.items()}
     return out
+
+
+def magnetosphere(direct, implied, allowance_rows, jet_power_W):
+    """What the September magnets hold back, and the unionized-gas capture each loss budget then needs.
+
+    Exhaust ions and picked-up ions are held off where their gyroradius at the magnetopause is small against the
+    stand-off. Fast neutrals (the charge-exchanged share of each direct-path plume) and the slow gas pass. The
+    capture is the share of the slow gas that must be stopped at the thrusters so that fast neutrals and slow gas
+    together stay within the allowance, with a 30-day neutral lifetime.
+    """
+    standoff = DESIGN['standoff_radii']*K.MOON_RADIUS
+    gyro = {}
+    for name, molar in DESIGN['molar_mass_kg_mol'].items():
+        def radius(speed):
+            return molar/K.AVOGADRO*speed/(K.ELEMENTARY_CHARGE*DESIGN['magnetopause_field_T'])
+        gyro[name] = dict(exhaust_ion_km=radius(SCENARIO['propulsion']['exhaust_velocity_m_s'])/1e3,
+                          pickup_ion_km=radius(DESIGN['solar_wind_speed_m_s'])/1e3,
+                          pickup_diameter_over_standoff=2*radius(DESIGN['solar_wind_speed_m_s'])/standoff)
+    allowed = {row['budget_kg_s']: row['deposited_power_MW'] for row in allowance_rows}
+    slow = [mw for species in implied.values() for mw in species['30_days']['deposited_MW']]
+    rows = []
+    for budget in DESIGN['budgets_with_magnets_kg_s']:
+        for row in direct['clear']:
+            for name in PLUMES:
+                fast = row[f'{name}_fast_neutral_share']*jet_power_W/1e6
+                left = allowed[budget]-fast
+                capture = [max(0., 1-left/mw) for mw in slow] if left > 0 else None
+                rows.append(dict(budget_kg_s=budget, thruster=name, cant_deg=row['cant_deg'], fast_neutral_MW=fast,
+                                 allowance_MW=allowed[budget],
+                                 slow_gas_capture_needed=[min(capture), max(capture)] if capture else None))
+    return dict(standoff_km=standoff/1e3, magnetopause_field_nT=DESIGN['magnetopause_field_T']*1e9,
+                gyroradius=gyro, slow_gas_30_day_MW=[min(slow), max(slow)], with_magnets=rows)
 
 
 def effusive(rng, n, axis, molar_mass):
@@ -304,12 +359,15 @@ def slow_gas(fields, env, run_key):
 
 
 def run_key():
+    """Checkpoint key of the slow gas: its settings, the code that launches and flies it, and its inputs."""
     settings = {k: DESIGN[k] for k in ('core_sigma_kg_m2', 'annulus_sigma_kg_m2', 'protected_radii', 'cants_deg',
                                        'gas_temperature_K', 'molar_mass_kg_mol', 'launch_days', 'launch_every_days',
                                        'flight_days', 'particles_per_thruster', 'step_s', 'check_step_s',
                                        'near_earth_radii', 'escape_m', 'seed')}
-    files = ''.join(digest(ROOT/f) for f in FILES)
-    return hashlib.sha256((json.dumps(settings, sort_keys=True)+files+digest(HOLDING)).encode()).hexdigest()[:16]
+    files = ''.join(digest(ROOT/f) for f in FILES if f != 'research/studies/solar_shield_array/exhaust_isolation.py')
+    # This runner's analysis can change without touching the flights, so only its flight code enters the key.
+    code = ''.join(inspect.getsource(f) for f in (unit, perpendicular, plume_axes, effusive, fly, slow_gas))
+    return hashlib.sha256((json.dumps(settings, sort_keys=True)+files+code+digest(HOLDING)).encode()).hexdigest()[:16]
 
 
 def main():
@@ -341,6 +399,8 @@ def main():
                                         deposited_MW=[u*g['delivered_by_lifetime'][tau]*(g['entry_energy_mean_MJ_kg'] or 0.)
                                                       for u in unionized])
                          for tau in g['delivered_by_lifetime']}
+    allowed = allowance(zoned['propellant_kg_s'], jet)
+    magnets = magnetosphere(direct, implied, allowed['per_budget'], jet)
     out = dict(schema='terluna.research.exhaust-isolation/1',
                producer=dict(files={f: digest(ROOT/f) for f in FILES},
                              constants=constants_used([f for f in FILES if f.endswith('.py')]),
@@ -349,20 +409,28 @@ def main():
                evidence=('The zoned held screen of zoned_aperture.json (26 g/m2 window, 5 g/m2 annulus) on the selected '
                          'moving trajectory, with DE440s geometry. The direct path samples every node daily over the '
                          'primary year and integrates two measured plume profiles over the cone of the protected sphere; '
-                         'the plumes leave straight, with no fields. The slow gas flies test particles from every node '
-                         'every two days for a month, each for 60 days under point-mass gravity, without radiation '
-                         'pressure, collisions or ionisation; lifetimes enter afterward as weights.'),
-               reading_rule=('Compare each delivered share with the allowance share for the same loss budget. The direct '
-                             'path counts only energetic ions on straight lines from the thruster; charge-exchange ions, '
-                             'the solar wind\'s pickup of the charged exhaust and the magnetosphere\'s response are open, '
-                             'and add to what is shown. Plume values are read from published figures to about +-30%.'),
+                         'the plumes leave straight, with no fields, and a tenth of each plume is charge-exchanged fast '
+                         'atoms on the same paths. The slow gas flies test particles from every node every two days '
+                         'for a month, each for 60 days under point-mass gravity, without radiation pressure, '
+                         'collisions or ionisation; lifetimes enter afterward as weights. The magnetosphere case '
+                         'compares ion gyroradii at the September magnets\' magnetopause with their stand-off.'),
+               reading_rule=('Compare each delivered share with the allowance share for the same loss budget. Without '
+                             'the magnets the whole straight-line share counts and the solar wind\'s pickup of the '
+                             'charged exhaust adds to it. With the September magnets the exhaust ions are held off, '
+                             'leaving the fast-neutral share, the slow gas and the magnetosphere\'s leak, which is open; '
+                             'with_magnets gives the share of the slow gas that must then be captured. Plume values are '
+                             'read from published figures to about +-30%; the fast-neutral tenth comes from one Hall '
+                             'thruster model.'),
                design=DESIGN, run_key=key, plumes=PLUMES, sources=SOURCES,
-               allowance=allowance(zoned['propellant_kg_s'], jet), direct_path=direct, slow_gas=gas,
-               slow_gas_implied=dict(unionized_kg_s=unionized, by_species=implied),
+               allowance=allowed, direct_path=direct, slow_gas=gas,
+               slow_gas_implied=dict(unionized_kg_s=unionized, by_species=implied), magnetosphere=magnets,
                open=('The charged exhaust, 85-95% of the flow, is a heavy-ion source about 10^5 times the solar wind\'s '
-                     'own mass flux through the aperture. The wind loads, slows and carries it downstream over the Moon, '
-                     'energising picked-up oxygen to tens of keV; the loss response credits each returning pickup ion '
-                     'with 1-10 sputtered molecules. No model here follows that plasma.'),
+                     'own mass flux through the aperture. Without magnets the wind loads, slows and carries it '
+                     'downstream over the Moon, energising picked-up oxygen to tens of keV; the loss response credits '
+                     'each returning pickup ion with 1-10 sputtered molecules. The September magnets hold off exhaust '
+                     'ions and picked-up oxygen, whose gyroradii at the magnetopause are small against the stand-off; '
+                     'xenon picked up at solar-wind speed gyrates on a scale near the stand-off, and entry through '
+                     'the cusps and by reconnection is open. No model here follows that plasma.'),
                resources=dict(cpu_s=time.process_time()-cpu0, wall_s=time.monotonic()-wall,
                               max_rss_MiB=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/1024, numerical_threads=1))
     OUT.write_text(json.dumps(out, indent=1)+'\n')
@@ -370,7 +438,7 @@ def main():
                                                                                   if kk != 'cumulative_by_day'}
                                                                               if isinstance(v, dict) else v
                                                                               for k, v in gas.items()},
-                          implied=out['slow_gas_implied'], resources=out['resources']), indent=1))
+                          implied=out['slow_gas_implied'], magnetosphere=magnets, resources=out['resources']), indent=1))
 
 
 if __name__ == '__main__':

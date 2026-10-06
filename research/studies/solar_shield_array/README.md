@@ -42,10 +42,12 @@ times the held screen's.
 
 A held screen with a zoned aperture needs 32.8–66.5 TW, against the published
 238 TW. Its reaction mass, 51 t/s at the lightest design point, leaves into
-the Moon's hemisphere: [exhaust_isolation.py](exhaust_isolation.py) finds that
-its direct plumes at a 45° cant and its slow unionized gas each exceed the
-proposed outflow allowance (requirement S7), before the solar wind's pickup of
-the charged exhaust is counted, and its propellant fails requirement S6.
+the Moon's hemisphere: [exhaust_isolation.py](exhaust_isolation.py) finds that,
+as designed, its direct plumes and its slow unionized gas each exceed the
+proposed outflow allowance (requirement S7). The planned magnetosphere would
+hold off the exhaust ions, while the fast atoms of charge exchange and the
+unionized gas still pass, so a 1 kg/s budget would need gridded ion thrusters
+and capture of most of that gas. Its propellant fails requirement S6.
 
 The [expanded coupled-cycle investigation](expanded_cycle.md) adds
 in-plane and arrival-acquisition controls and measures nine full-cycle response

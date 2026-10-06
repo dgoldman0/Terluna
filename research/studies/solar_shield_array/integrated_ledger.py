@@ -164,6 +164,10 @@ def gates(h, fleet, exhaust, keeping):
     first = fleet['by_radius'][0]
     slow = [mw for species in exhaust['slow_gas_implied']['by_species'].values() for mw in species['30_days']['deposited_MW']]
     budget_mw = {row['budget_kg_s']: row['deposited_power_MW'] for row in exhaust['allowance']['per_budget']}
+    magnets = {(r['budget_kg_s'], r['thruster'], r['cant_deg']): r['slow_gas_capture_needed']
+               for r in exhaust['magnetosphere']['with_magnets']}
+    capture = magnets[(1., 'gridded_ion_NEXT', 60.)]
+    hall_fails = all(v is None for (b, t, _), v in magnets.items() if b == 1. and t == 'hall_BPT4000')
     breach = keeping['checks']['clearance']['first_below_150_m_h']/24.
     interior = keeping['checks']['interior_clearance']['min_m']
     days = keeping['design']['orbits']*keeping['period_h']/24.
@@ -203,8 +207,12 @@ def gates(h, fleet, exhaust, keeping):
                              f"protected sphere, against an allowance of {allow[10.]:.1e} of the jet power for "
                              f"10 kg/s and {allow[1.]:.1e} for 1 kg/s. The slow unionized gas alone deposits "
                              f"{min(slow):.0f}-{max(slow):.0f} MW against {budget_mw[1.]:.1f} MW for 1 kg/s and "
-                             f"{budget_mw[10.]:.0f} MW for 10 kg/s; the solar wind's pickup of the charged exhaust is "
-                             'open and adds to both.'),
+                             f"{budget_mw[10.]:.0f} MW for 10 kg/s. Without the magnets the solar wind's pickup of "
+                             'the charged exhaust adds to both. The September magnets hold off the exhaust ions but '
+                             'pass the charge-exchanged fast atoms and the slow gas: for 1 kg/s, gridded ion thrusters '
+                             f"canted 60 degrees leave room only if {capture[0]:.0%}-{capture[1]:.0%} of the unionized "
+                             'gas is captured' + (', and Hall thrusters exceed the allowance at every cant.'
+                                                  if hall_fails else '.')),
              ring_fleet=dict(state='open', evidence='Photon keeping releases nothing; its feasibility check is pending. '
                              'The same control by electric thrust would release '
                              f"{first['electric_alternative_kg_s']['keeping']:,.0f} kg/s at 15,000 km, at or inside "
@@ -245,7 +253,8 @@ def main():
                outflows=dict(held_zoned=dict(allowance=exhaust['allowance'], direct_path=exhaust['direct_path']['clear'],
                                              slow_gas={k: v for k, v in exhaust['slow_gas'].items() if isinstance(v, dict)
                                                        and 'delivered_by_lifetime' in v},
-                                             slow_gas_implied=exhaust['slow_gas_implied'], open=exhaust['open']),
+                                             slow_gas_implied=exhaust['slow_gas_implied'],
+                                             magnetosphere=exhaust['magnetosphere'], open=exhaust['open']),
                              ring_fleet=dict(photon_keeping='no exhaust',
                                              electric_alternative_kg_s=[r['electric_alternative_kg_s']
                                                                         for r in fleet['by_radius']])),

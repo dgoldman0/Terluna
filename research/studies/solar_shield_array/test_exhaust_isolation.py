@@ -86,6 +86,31 @@ def test_halving_the_integrator_step_keeps_the_slow_gas_fates():
     assert check['fate_changed'] <= .01*check['particles']
 
 
+def test_the_magnets_hold_exhaust_ions_and_picked_up_oxygen_and_hardly_picked_up_xenon():
+    magnets = PRODUCT['magnetosphere']
+    for species in magnets['gyroradius'].values():
+        assert species['exhaust_ion_km'] < .05*magnets['standoff_km']
+    assert magnets['gyroradius']['O2']['pickup_diameter_over_standoff'] < .3
+    assert magnets['gyroradius']['Xe']['pickup_diameter_over_standoff'] > .5
+
+
+def test_a_tenth_of_every_direct_share_is_fast_atoms_that_pass_the_magnets():
+    for row in PRODUCT['direct_path']['clear']:
+        for name in ex.PLUMES:
+            assert np.isclose(row[f'{name}_fast_neutral_share'],
+                              ex.DESIGN['fast_neutral_share_of_beam']*row[f'{name}_share'])
+
+
+def test_with_the_magnets_one_kg_per_second_needs_gridded_ion_thrusters_and_most_of_the_slow_gas_captured():
+    rows = [r for r in PRODUCT['magnetosphere']['with_magnets'] if r['budget_kg_s'] == 1.]
+    possible = [r for r in rows if r['slow_gas_capture_needed']]
+    assert possible and all(r['thruster'] == 'gridded_ion_NEXT' for r in possible)
+    assert all(r['slow_gas_capture_needed'][0] > .5 for r in possible)
+    for r in PRODUCT['magnetosphere']['with_magnets']:
+        if r['slow_gas_capture_needed']:
+            assert 0. <= r['slow_gas_capture_needed'][0] <= r['slow_gas_capture_needed'][1] < 1.
+
+
 def test_the_slow_gas_alone_brings_more_than_the_allowance_for_one_kg_per_second():
     allowance = {row['budget_kg_s']: row['deposited_power_MW'] for row in PRODUCT['allowance']['per_budget']}
     for species in PRODUCT['slow_gas_implied']['by_species'].values():

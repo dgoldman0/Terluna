@@ -2,7 +2,7 @@
  "schema": "terluna.research.integrated-ledger/1",
  "producer": {
   "files": {
-   "research/studies/solar_shield_array/integrated_ledger.py": "4f8dd42e252b714db16881e99778e2ee27970f798381e0795ed8898f3a4c6002",
+   "research/studies/solar_shield_array/integrated_ledger.py": "164ba4b00a849e1febb01196a1205f195493ae9b7987249db586464c8a4c9db2",
    "research/studies/solar_shield_array/run.py": "69e01bf90ca29987f9251f7d1aff5be0c57e909815847cf0cf7a4e94cf3ff9cd",
    "protection/dynamics/optical.py": "06a13ae9f24834876edbc12b513deaa5e3735f02f8249eb57c8996d74ce00b56"
   },
@@ -20,7 +20,7 @@
   },
   "inputs": {
    "results/zoned_aperture.json": "15e510f64240015776919dd2018b38d94dbc44ae65f5cf23ad28935d0fd4eea2",
-   "results/exhaust_isolation.json": "6806dbf8378cf7baba07f8c471eac6319eb87d67b5e02dff6b6ef2700d51b377",
+   "results/exhaust_isolation.json": "91b3045d1d8157172e478abcb81cdc712d26da4345da83cf5f002b4c77710e50",
    "results/ring_bundle.json": "d51b6e19f0f3698faf44dffe4c2e1d4631c5ec629258d82966e48c51764955c9",
    "results/ring_keeping.json": "28bb4c2c662c644dba015d24ecef5747589ce1758078c455124db0d3b3cdfb37",
    "results/ring_screen.json": "7aea0d5a13af058333d6ee4d5e1ab522491e83d2321a6bd5a3143e14245302e1"
@@ -372,8 +372,10 @@
      "clearance_flow_median_deg": 64.46342053180561,
      "gridded_ion_NEXT_share": 6.19844410494806e-06,
      "gridded_ion_NEXT_share_max": 6.694642554774994e-05,
+     "gridded_ion_NEXT_fast_neutral_share": 6.198444104948061e-07,
      "hall_BPT4000_share": 0.00015637438002237748,
-     "hall_BPT4000_share_max": 0.001256081273913162
+     "hall_BPT4000_share_max": 0.001256081273913162,
+     "hall_BPT4000_fast_neutral_share": 1.5637438002237747e-05
     },
     {
      "cant_deg": 60.0,
@@ -382,8 +384,10 @@
      "clearance_flow_median_deg": 70.77115409725218,
      "gridded_ion_NEXT_share": 1.5943950695087845e-06,
      "gridded_ion_NEXT_share_max": 1.0925781004652556e-05,
+     "gridded_ion_NEXT_fast_neutral_share": 1.5943950695087846e-07,
      "hall_BPT4000_share": 6.65498984510057e-05,
-     "hall_BPT4000_share_max": 0.0002865625085397795
+     "hall_BPT4000_share_max": 0.0002865625085397795,
+     "hall_BPT4000_fast_neutral_share": 6.65498984510057e-06
     },
     {
      "cant_deg": 75.0,
@@ -392,8 +396,10 @@
      "clearance_flow_median_deg": 77.94432910792483,
      "gridded_ion_NEXT_share": 4.6019904368314046e-07,
      "gridded_ion_NEXT_share_max": 1.807351008561345e-06,
+     "gridded_ion_NEXT_fast_neutral_share": 4.6019904368314046e-08,
      "hall_BPT4000_share": 2.547288401630584e-05,
-     "hall_BPT4000_share_max": 0.00011228607656016567
+     "hall_BPT4000_share_max": 0.00011228607656016567,
+     "hall_BPT4000_fast_neutral_share": 2.547288401630584e-06
     }
    ],
    "slow_gas": {
@@ -624,7 +630,143 @@
      }
     }
    },
-   "open": "The charged exhaust, 85-95% of the flow, is a heavy-ion source about 10^5 times the solar wind's own mass flux through the aperture. The wind loads, slows and carries it downstream over the Moon, energising picked-up oxygen to tens of keV; the loss response credits each returning pickup ion with 1-10 sputtered molecules. No model here follows that plasma."
+   "magnetosphere": {
+    "standoff_km": 17374.0,
+    "magnetopause_field_nT": 71.0,
+    "gyroradius": {
+     "O2": {
+      "exhaust_ion_km": 140.12784526524385,
+      "pickup_ion_km": 1868.3712702032512,
+      "pickup_diameter_over_standoff": 0.21507669738727422
+     },
+     "Xe": {
+      "exhaust_ion_km": 574.9673475970266,
+      "pickup_ion_km": 7666.231301293688,
+      "pickup_diameter_over_standoff": 0.8824946818572221
+     }
+    },
+    "slow_gas_30_day_MW": [
+     30.345575815968193,
+     291.2357346880516
+    ],
+    "with_magnets": [
+     {
+      "budget_kg_s": 1.0,
+      "thruster": "gridded_ion_NEXT",
+      "cant_deg": 45.0,
+      "fast_neutral_MW": 14.226078595911982,
+      "allowance_MW": 9.406392920455852,
+      "slow_gas_capture_needed": null
+     },
+     {
+      "budget_kg_s": 1.0,
+      "thruster": "hall_BPT4000",
+      "cant_deg": 45.0,
+      "fast_neutral_MW": 358.89558458864104,
+      "allowance_MW": 9.406392920455852,
+      "slow_gas_capture_needed": null
+     },
+     {
+      "budget_kg_s": 1.0,
+      "thruster": "gridded_ion_NEXT",
+      "cant_deg": 60.0,
+      "fast_neutral_MW": 3.6593037200513043,
+      "allowance_MW": 9.406392920455852,
+      "slow_gas_capture_needed": [
+       0.8106119575631726,
+       0.9802665383540232
+      ]
+     },
+     {
+      "budget_kg_s": 1.0,
+      "thruster": "hall_BPT4000",
+      "cant_deg": 60.0,
+      "fast_neutral_MW": 152.73898899212568,
+      "allowance_MW": 9.406392920455852,
+      "slow_gas_capture_needed": null
+     },
+     {
+      "budget_kg_s": 1.0,
+      "thruster": "gridded_ion_NEXT",
+      "cant_deg": 75.0,
+      "fast_neutral_MW": 1.056205017638817,
+      "allowance_MW": 9.406392920455852,
+      "slow_gas_capture_needed": [
+       0.7248301382232112,
+       0.9713284226203865
+      ]
+     },
+     {
+      "budget_kg_s": 1.0,
+      "thruster": "hall_BPT4000",
+      "cant_deg": 75.0,
+      "fast_neutral_MW": 58.4629374638127,
+      "allowance_MW": 9.406392920455852,
+      "slow_gas_capture_needed": null
+     },
+     {
+      "budget_kg_s": 10.0,
+      "thruster": "gridded_ion_NEXT",
+      "cant_deg": 45.0,
+      "fast_neutral_MW": 14.226078595911982,
+      "allowance_MW": 94.06392920455853,
+      "slow_gas_capture_needed": [
+       0.0,
+       0.7258651975034505
+      ]
+     },
+     {
+      "budget_kg_s": 10.0,
+      "thruster": "hall_BPT4000",
+      "cant_deg": 45.0,
+      "fast_neutral_MW": 358.89558458864104,
+      "allowance_MW": 94.06392920455853,
+      "slow_gas_capture_needed": null
+     },
+     {
+      "budget_kg_s": 10.0,
+      "thruster": "gridded_ion_NEXT",
+      "cant_deg": 60.0,
+      "fast_neutral_MW": 3.6593037200513043,
+      "allowance_MW": 94.06392920455853,
+      "slow_gas_capture_needed": [
+       0.0,
+       0.689582648292314
+      ]
+     },
+     {
+      "budget_kg_s": 10.0,
+      "thruster": "hall_BPT4000",
+      "cant_deg": 60.0,
+      "fast_neutral_MW": 152.73898899212568,
+      "allowance_MW": 94.06392920455853,
+      "slow_gas_capture_needed": null
+     },
+     {
+      "budget_kg_s": 10.0,
+      "thruster": "gridded_ion_NEXT",
+      "cant_deg": 75.0,
+      "fast_neutral_MW": 1.056205017638817,
+      "allowance_MW": 94.06392920455853,
+      "slow_gas_capture_needed": [
+       0.0,
+       0.6806445325586774
+      ]
+     },
+     {
+      "budget_kg_s": 10.0,
+      "thruster": "hall_BPT4000",
+      "cant_deg": 75.0,
+      "fast_neutral_MW": 58.4629374638127,
+      "allowance_MW": 94.06392920455853,
+      "slow_gas_capture_needed": [
+       0.0,
+       0.8777588479007263
+      ]
+     }
+    ]
+   },
+   "open": "The charged exhaust, 85-95% of the flow, is a heavy-ion source about 10^5 times the solar wind's own mass flux through the aperture. Without magnets the wind loads, slows and carries it downstream over the Moon, energising picked-up oxygen to tens of keV; the loss response credits each returning pickup ion with 1-10 sputtered molecules. The September magnets hold off exhaust ions and picked-up oxygen, whose gyroradii at the magnetopause are small against the stand-off; xenon picked up at solar-wind speed gyrates on a scale near the stand-off, and entry through the cusps and by reconnection is open. No model here follows that plasma."
   },
   "ring_fleet": {
    "photon_keeping": "no exhaust",
@@ -713,7 +855,7 @@
    "gate": "Outflows (S7, proposed)",
    "held_zoned": {
     "state": "not met",
-    "evidence": "At the 45 degree cant the measured plumes send 6.2e-06 (gridded ion) to 1.6e-04 (Hall) of their fast ions straight into the protected sphere, against an allowance of 4.1e-06 of the jet power for 10 kg/s and 4.1e-07 for 1 kg/s. The slow unionized gas alone deposits 30-291 MW against 9.4 MW for 1 kg/s and 94 MW for 10 kg/s; the solar wind's pickup of the charged exhaust is open and adds to both."
+    "evidence": "At the 45 degree cant the measured plumes send 6.2e-06 (gridded ion) to 1.6e-04 (Hall) of their fast ions straight into the protected sphere, against an allowance of 4.1e-06 of the jet power for 10 kg/s and 4.1e-07 for 1 kg/s. The slow unionized gas alone deposits 30-291 MW against 9.4 MW for 1 kg/s and 94 MW for 10 kg/s. Without the magnets the solar wind's pickup of the charged exhaust adds to both. The September magnets hold off the exhaust ions but pass the charge-exchanged fast atoms and the slow gas: for 1 kg/s, gridded ion thrusters canted 60 degrees leave room only if 81%-98% of the unionized gas is captured, and Hall thrusters exceed the allowance at every cant."
    },
    "ring_fleet": {
     "state": "open",

@@ -2,7 +2,7 @@
  "schema": "terluna.research.exhaust-isolation/1",
  "producer": {
   "files": {
-   "research/studies/solar_shield_array/exhaust_isolation.py": "a5d6548fdce183c0d2f9cfcb35364b102a70905642a8a9cbbfc1a514312ffaa3",
+   "research/studies/solar_shield_array/exhaust_isolation.py": "6f782aa7609ae8af61ec80b2b5e3d9d3c669b900a42aedde91b553bffd1b33a5",
    "research/studies/solar_shield_array/zoned_aperture.py": "c26cf7bcdb66a6098872c08bde394c3810bf2ef7b5b3314b11ada98ef54a6a0c",
    "research/studies/solar_shield_array/aperture.py": "213f744f5203b54c39601ad0aed32352c75215e6f43d284ad91d156b413fc9b7",
    "research/studies/solar_shield_array/run.py": "69e01bf90ca29987f9251f7d1aff5be0c57e909815847cf0cf7a4e94cf3ff9cd",
@@ -19,6 +19,7 @@
    "EARTH_MOON_DISTANCE": 384400000.0,
    "EARTH_OBLIQUITY_DEG": 23.4393,
    "EARTH_RADIUS": 6371000.0,
+   "ELEMENTARY_CHARGE": 1.602176634e-19,
    "JULIAN_DAY": 86400.0,
    "JULIAN_YEAR_DAYS": 365.25,
    "MOON_GM": 4902800118000.0,
@@ -45,8 +46,8 @@
    "scenario.json": "a53b784941518b6e36ccdf728252cf6c8e0c46c1126b6c621ed4e28c23128699"
   }
  },
- "evidence": "The zoned held screen of zoned_aperture.json (26 g/m2 window, 5 g/m2 annulus) on the selected moving trajectory, with DE440s geometry. The direct path samples every node daily over the primary year and integrates two measured plume profiles over the cone of the protected sphere; the plumes leave straight, with no fields. The slow gas flies test particles from every node every two days for a month, each for 60 days under point-mass gravity, without radiation pressure, collisions or ionisation; lifetimes enter afterward as weights.",
- "reading_rule": "Compare each delivered share with the allowance share for the same loss budget. The direct path counts only energetic ions on straight lines from the thruster; charge-exchange ions, the solar wind's pickup of the charged exhaust and the magnetosphere's response are open, and add to what is shown. Plume values are read from published figures to about +-30%.",
+ "evidence": "The zoned held screen of zoned_aperture.json (26 g/m2 window, 5 g/m2 annulus) on the selected moving trajectory, with DE440s geometry. The direct path samples every node daily over the primary year and integrates two measured plume profiles over the cone of the protected sphere; the plumes leave straight, with no fields, and a tenth of each plume is charge-exchanged fast atoms on the same paths. The slow gas flies test particles from every node every two days for a month, each for 60 days under point-mass gravity, without radiation pressure, collisions or ionisation; lifetimes enter afterward as weights. The magnetosphere case compares ion gyroradii at the September magnets' magnetopause with their stand-off.",
+ "reading_rule": "Compare each delivered share with the allowance share for the same loss budget. Without the magnets the whole straight-line share counts and the solar wind's pickup of the charged exhaust adds to it. With the September magnets the exhaust ions are held off, leaving the fast-neutral share, the slow gas and the magnetosphere's leak, which is open; with_magnets gives the share of the slow gas that must then be captured. Plume values are read from published figures to about +-30%; the fast-neutral tenth comes from one Hall thruster model.",
  "design": {
   "case": "core_26g_annulus_5g",
   "core_sigma_kg_m2": 0.026,
@@ -87,9 +88,17 @@
   "near_earth_radii": 10.0,
   "escape_m": 3000000000.0,
   "direct_every_h": 24.0,
-  "seed": 20261006
+  "seed": 20261006,
+  "fast_neutral_share_of_beam": 0.1,
+  "standoff_radii": 10.0,
+  "magnetopause_field_T": 7.1e-08,
+  "solar_wind_speed_m_s": 400000.0,
+  "budgets_with_magnets_kg_s": [
+   1.0,
+   10.0
+  ]
  },
- "run_key": "1b295895bc2eda59",
+ "run_key": "9dec127b6e58620f",
  "plumes": {
   "gridded_ion_NEXT": {
    "source": "Young, Matlock, Nakles and Crofton, Far Field Plume Distribution and Divergence for NEXT: DART Mission, AIAA SciTech Forum 2019, figure 5 (retarding potential analyzer above 35 V, grid-edge angle). Beyond 50 degrees the last decade is extended at its own slope; the paper reports a fall of over five decades at high angles.",
@@ -174,7 +183,9 @@
   "Young, Matlock, Nakles and Crofton, Far Field Plume Distribution and Divergence for NEXT: DART Mission, AIAA SciTech Forum 2019, figure 5 (retarding potential analyzer above 35 V, grid-edge angle). Beyond 50 degrees the last decade is extended at its own slope; the paper reports a fall of over five decades at high angles.",
   "Goebel and Katz, Fundamentals of Electric Propulsion: Ion and Hall Thrusters (JPL, 2008), figure 8-12 (BPT-4000 ion flux above 50 V at 1 m, laboratory); the flight data of figure 8-6 (SPT-100 on Express-A) fall alike to about 5% of the axial value at 40 degrees.",
   "Goebel and Katz (2008), chapter 7: a mass utilization efficiency of 95% reported for SPT thrusters, so at least about 5% of the propellant leaves unionized; 15% is the range assumed for less efficient thrusters.",
-  "Heays, Bosman and van Dishoeck, A&A 602, A105 (2017), tables 18-19 scaled to 1 au: O2 photodissociation about 2.4e-6 per s; photoionisation of O, N2 and O2 about 0.5-1.3e-7 per s. Lifetimes of 10-100 days span photoionisation with charge exchange and electron impact in the solar wind."
+  "Heays, Bosman and van Dishoeck, A&A 602, A105 (2017), tables 18-19 scaled to 1 au: O2 photodissociation about 2.4e-6 per s; photoionisation of O, N2 and O2 about 0.5-1.3e-7 per s. Lifetimes of 10-100 days span photoionisation with charge exchange and electron impact in the solar wind.",
+  "Goebel and Katz (2008), figure 8-11: a space-condition plume model of the BPT-4000 at 3 kW makes 0.74 A of charge-exchange ions, about a tenth of its beam; each exchange leaves a fast atom on the beam ion's path.",
+  "protection/report.md, section 10: 71 nT balances 2 nPa of solar-wind pressure; the September magnets (1.5e21 A m2) stand off at 10 lunar radii (atmosphere/loss_response/README.md; requirements C1). Magnetic protection may divert charged exhaust and cannot be credited with removing fast neutrals (section 8)."
  ],
  "allowance": {
   "binding_energy_MJ_kg": 0.9406392920455854,
@@ -210,8 +221,10 @@
     "clearance_flow_median_deg": 64.46342053180561,
     "gridded_ion_NEXT_share": 6.19844410494806e-06,
     "gridded_ion_NEXT_share_max": 6.694642554774994e-05,
+    "gridded_ion_NEXT_fast_neutral_share": 6.198444104948061e-07,
     "hall_BPT4000_share": 0.00015637438002237748,
-    "hall_BPT4000_share_max": 0.001256081273913162
+    "hall_BPT4000_share_max": 0.001256081273913162,
+    "hall_BPT4000_fast_neutral_share": 1.5637438002237747e-05
    },
    {
     "cant_deg": 60.0,
@@ -220,8 +233,10 @@
     "clearance_flow_median_deg": 70.77115409725218,
     "gridded_ion_NEXT_share": 1.5943950695087845e-06,
     "gridded_ion_NEXT_share_max": 1.0925781004652556e-05,
+    "gridded_ion_NEXT_fast_neutral_share": 1.5943950695087846e-07,
     "hall_BPT4000_share": 6.65498984510057e-05,
-    "hall_BPT4000_share_max": 0.0002865625085397795
+    "hall_BPT4000_share_max": 0.0002865625085397795,
+    "hall_BPT4000_fast_neutral_share": 6.65498984510057e-06
    },
    {
     "cant_deg": 75.0,
@@ -230,8 +245,10 @@
     "clearance_flow_median_deg": 77.94432910792483,
     "gridded_ion_NEXT_share": 4.6019904368314046e-07,
     "gridded_ion_NEXT_share_max": 1.807351008561345e-06,
+    "gridded_ion_NEXT_fast_neutral_share": 4.6019904368314046e-08,
     "hall_BPT4000_share": 2.547288401630584e-05,
-    "hall_BPT4000_share_max": 0.00011228607656016567
+    "hall_BPT4000_share_max": 0.00011228607656016567,
+    "hall_BPT4000_fast_neutral_share": 2.547288401630584e-06
    }
   ],
   "through_moon": [
@@ -242,8 +259,10 @@
     "clearance_flow_median_deg": 16.225998209944642,
     "gridded_ion_NEXT_share": 0.014475088045924164,
     "gridded_ion_NEXT_share_max": 0.08725143653731283,
+    "gridded_ion_NEXT_fast_neutral_share": 0.0014475088045924165,
     "hall_BPT4000_share": 0.012063091231218752,
-    "hall_BPT4000_share_max": 0.06964830667232697
+    "hall_BPT4000_share_max": 0.06964830667232697,
+    "hall_BPT4000_fast_neutral_share": 0.0012063091231218754
    },
    {
     "cant_deg": 60.0,
@@ -252,8 +271,10 @@
     "clearance_flow_median_deg": 9.53262691413564,
     "gridded_ion_NEXT_share": 0.02406247918726509,
     "gridded_ion_NEXT_share_max": 0.08740957932265914,
+    "gridded_ion_NEXT_fast_neutral_share": 0.002406247918726509,
     "hall_BPT4000_share": 0.018908071831281244,
-    "hall_BPT4000_share_max": 0.06978414743681588
+    "hall_BPT4000_share_max": 0.06978414743681588,
+    "hall_BPT4000_fast_neutral_share": 0.0018908071831281244
    },
    {
     "cant_deg": 75.0,
@@ -262,8 +283,10 @@
     "clearance_flow_median_deg": 11.893220389983185,
     "gridded_ion_NEXT_share": 0.02098274338934793,
     "gridded_ion_NEXT_share_max": 0.0861508623361674,
+    "gridded_ion_NEXT_fast_neutral_share": 0.0020982743389347932,
     "hall_BPT4000_share": 0.0165046884018064,
-    "hall_BPT4000_share_max": 0.06870783473023591
+    "hall_BPT4000_share_max": 0.06870783473023591,
+    "hall_BPT4000_fast_neutral_share": 0.00165046884018064
    }
   ],
   "protected_half_angle_deg": [
@@ -444,7 +467,7 @@
    ],
    "fate_changed": 0
   },
-  "propagation_cpu_s": 1433.9942778620002
+  "propagation_cpu_s": 1308.238732422
  },
  "slow_gas_implied": {
   "unionized_kg_s": [
@@ -518,11 +541,147 @@
    }
   }
  },
- "open": "The charged exhaust, 85-95% of the flow, is a heavy-ion source about 10^5 times the solar wind's own mass flux through the aperture. The wind loads, slows and carries it downstream over the Moon, energising picked-up oxygen to tens of keV; the loss response credits each returning pickup ion with 1-10 sputtered molecules. No model here follows that plasma.",
+ "magnetosphere": {
+  "standoff_km": 17374.0,
+  "magnetopause_field_nT": 71.0,
+  "gyroradius": {
+   "O2": {
+    "exhaust_ion_km": 140.12784526524385,
+    "pickup_ion_km": 1868.3712702032512,
+    "pickup_diameter_over_standoff": 0.21507669738727422
+   },
+   "Xe": {
+    "exhaust_ion_km": 574.9673475970266,
+    "pickup_ion_km": 7666.231301293688,
+    "pickup_diameter_over_standoff": 0.8824946818572221
+   }
+  },
+  "slow_gas_30_day_MW": [
+   30.345575815968193,
+   291.2357346880516
+  ],
+  "with_magnets": [
+   {
+    "budget_kg_s": 1.0,
+    "thruster": "gridded_ion_NEXT",
+    "cant_deg": 45.0,
+    "fast_neutral_MW": 14.226078595911982,
+    "allowance_MW": 9.406392920455852,
+    "slow_gas_capture_needed": null
+   },
+   {
+    "budget_kg_s": 1.0,
+    "thruster": "hall_BPT4000",
+    "cant_deg": 45.0,
+    "fast_neutral_MW": 358.89558458864104,
+    "allowance_MW": 9.406392920455852,
+    "slow_gas_capture_needed": null
+   },
+   {
+    "budget_kg_s": 1.0,
+    "thruster": "gridded_ion_NEXT",
+    "cant_deg": 60.0,
+    "fast_neutral_MW": 3.6593037200513043,
+    "allowance_MW": 9.406392920455852,
+    "slow_gas_capture_needed": [
+     0.8106119575631726,
+     0.9802665383540232
+    ]
+   },
+   {
+    "budget_kg_s": 1.0,
+    "thruster": "hall_BPT4000",
+    "cant_deg": 60.0,
+    "fast_neutral_MW": 152.73898899212568,
+    "allowance_MW": 9.406392920455852,
+    "slow_gas_capture_needed": null
+   },
+   {
+    "budget_kg_s": 1.0,
+    "thruster": "gridded_ion_NEXT",
+    "cant_deg": 75.0,
+    "fast_neutral_MW": 1.056205017638817,
+    "allowance_MW": 9.406392920455852,
+    "slow_gas_capture_needed": [
+     0.7248301382232112,
+     0.9713284226203865
+    ]
+   },
+   {
+    "budget_kg_s": 1.0,
+    "thruster": "hall_BPT4000",
+    "cant_deg": 75.0,
+    "fast_neutral_MW": 58.4629374638127,
+    "allowance_MW": 9.406392920455852,
+    "slow_gas_capture_needed": null
+   },
+   {
+    "budget_kg_s": 10.0,
+    "thruster": "gridded_ion_NEXT",
+    "cant_deg": 45.0,
+    "fast_neutral_MW": 14.226078595911982,
+    "allowance_MW": 94.06392920455853,
+    "slow_gas_capture_needed": [
+     0.0,
+     0.7258651975034505
+    ]
+   },
+   {
+    "budget_kg_s": 10.0,
+    "thruster": "hall_BPT4000",
+    "cant_deg": 45.0,
+    "fast_neutral_MW": 358.89558458864104,
+    "allowance_MW": 94.06392920455853,
+    "slow_gas_capture_needed": null
+   },
+   {
+    "budget_kg_s": 10.0,
+    "thruster": "gridded_ion_NEXT",
+    "cant_deg": 60.0,
+    "fast_neutral_MW": 3.6593037200513043,
+    "allowance_MW": 94.06392920455853,
+    "slow_gas_capture_needed": [
+     0.0,
+     0.689582648292314
+    ]
+   },
+   {
+    "budget_kg_s": 10.0,
+    "thruster": "hall_BPT4000",
+    "cant_deg": 60.0,
+    "fast_neutral_MW": 152.73898899212568,
+    "allowance_MW": 94.06392920455853,
+    "slow_gas_capture_needed": null
+   },
+   {
+    "budget_kg_s": 10.0,
+    "thruster": "gridded_ion_NEXT",
+    "cant_deg": 75.0,
+    "fast_neutral_MW": 1.056205017638817,
+    "allowance_MW": 94.06392920455853,
+    "slow_gas_capture_needed": [
+     0.0,
+     0.6806445325586774
+    ]
+   },
+   {
+    "budget_kg_s": 10.0,
+    "thruster": "hall_BPT4000",
+    "cant_deg": 75.0,
+    "fast_neutral_MW": 58.4629374638127,
+    "allowance_MW": 94.06392920455853,
+    "slow_gas_capture_needed": [
+     0.0,
+     0.8777588479007263
+    ]
+   }
+  ]
+ },
+ "open": "The charged exhaust, 85-95% of the flow, is a heavy-ion source about 10^5 times the solar wind's own mass flux through the aperture. Without magnets the wind loads, slows and carries it downstream over the Moon, energising picked-up oxygen to tens of keV; the loss response credits each returning pickup ion with 1-10 sputtered molecules. The September magnets hold off exhaust ions and picked-up oxygen, whose gyroradii at the magnetopause are small against the stand-off; xenon picked up at solar-wind speed gyrates on a scale near the stand-off, and entry through the cusps and by reconnection is open. No model here follows that plasma.",
  "resources": {
-  "cpu_s": 1642.251210315,
-  "wall_s": 1644.3296129549854,
-  "max_rss_MiB": 267.19140625,
+  "cpu_s": 1493.859405107,
+  "wall_s": 1496.111916902999,
+  "max_rss_MiB": 267.203125,
   "numerical_threads": 1
  }
 }
