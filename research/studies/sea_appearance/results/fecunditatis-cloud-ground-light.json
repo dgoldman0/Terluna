@@ -1,0 +1,45 @@
+{
+  "schema": "terluna.research.coastal-ground-light/1",
+  "input_scene_sha256": "01a594be2a25137fdeb68bdbf89dbd96e9c76099cdee95e4ad5c5c40a4646164",
+  "cloud_map_sha256": "9c9957ec6aec7c3e3c5d94ba69e03e315b7134dbe03c8ae9c343f8947d156bc0",
+  "photons_per_source": 65536,
+  "groups": 16,
+  "seed": 203306261,
+  "truncated_paths": 0,
+  "components": {
+    "earth": {
+      "diffuse_horizontal_lux": 1.8688324317309866,
+      "diffuse_standard_error_lux": 0.018748976807459773,
+      "direct_horizontal_lux": 0.8889003028202057,
+      "total_horizontal_lux": 2.757732734551192,
+      "photon_groups": [
+        1.8031701937090356,
+        1.8240450649726199,
+        1.9133968627864957,
+        2.008599363872011,
+        1.9536679360235327,
+        1.9257539544945628,
+        1.8863753574255344,
+        1.9170997731707111,
+        1.8819002846089634,
+        1.8097671049531248,
+        1.8007529067253403,
+        1.9353341191886673,
+        1.919167824352971,
+        1.7829082873188014,
+        1.745595328602524,
+        1.7937845454908918
+      ]
+    }
+  },
+  "retained_formal_sources": {
+    "sun": 0.48233014397594176
+  },
+  "total_horizontal_lux": 3.2400628785271337,
+  "evidence": "A larger independent Monte Carlo ground-flux estimate for the same saved cloud field and source; angular sky radiance is unchanged.",
+  "producer": {
+    "research/studies/sea_appearance/coastal_flux.py": "304e00de1db621720db6db0d7f2e0c69d6ef47e239e9d1d617d52397c6bee218",
+    "illumination/cloud_light/finite_source.py": "2ce6c404872f14b9023a8c39bf28322a07093828462b48b48b0fb35e5620c41b",
+    "illumination/cloud_light/volume.py": "a771a90400582433c91cc6a709cf15a57d28d5d985aa3eaf449d7e2414bcf5df"
+  }
+}

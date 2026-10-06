@@ -1,0 +1,278 @@
+{
+  "schema": "terluna.visualization.cloud-scenes-review/1",
+  "status": "Selected photographic illustrations with measured residual differences; calculated references remain authoritative for composition and display values.",
+  "image_labels": false,
+  "scenes": {
+    "fecunditatis-earth-clouds": {
+      "selected": {
+        "path": "visualization/sea-appearance/illustrations/fecunditatis-earth-clouds.png",
+        "sha256": "2b777daebb11e329317a3553b7eac793dc734f237facb67ff0cbdda87fdc77fb",
+        "native_frame": [
+          1122,
+          1402
+        ]
+      },
+      "first_pass": {
+        "path": "visualization/sea-appearance/illustrations/fecunditatis-earth-clouds-first-generated.png",
+        "sha256": "64973dab5efda100c9d2fdf7e47ad88f41b6ebfc9bcebc9282eb2c5974a6cc1c",
+        "native_frame": [
+          1122,
+          1402
+        ]
+      },
+      "reference": {
+        "path": "visualization/sea-appearance/illustrations/fecunditatis-earth-clouds-reference.png",
+        "sha256": "8fa39f98a4380e56b52677368b0b61148f84307e8a4dd3403e654d798ead57f5",
+        "native_frame": [
+          2048,
+          2560
+        ]
+      },
+      "display_record": {
+        "path": "visualization/sea-appearance/illustrations/fecunditatis-earth-clouds-display.json",
+        "sha256": "592fa7f36b80995dffd1b6fe12dc1c07e591f60dc5b897574536ec86154a2fef"
+      },
+      "scene_product": {
+        "path": "research/studies/sea_appearance/results/fecunditatis-earth-clouds.json",
+        "sha256": "01a594be2a25137fdeb68bdbf89dbd96e9c76099cdee95e4ad5c5c40a4646164"
+      },
+      "input_manifest": {
+        "path": "research/studies/sea_appearance/fecunditatis_earth_clouds_inputs.json",
+        "sha256": "fec51777dfcbf91a2e0aefd7f343fd2f392e81abc08ec3e344daee5022640639"
+      },
+      "checks": {
+        "path": "visualization/sea-appearance/illustrations/fecunditatis-earth-clouds-image-checks.json",
+        "sha256": "70eaa0dc30b0d984d0881e92231552fdfbc99099b349174d364974b6708092b1"
+      },
+      "physical_constraints": {
+        "site_lon_lat_deg": [
+          51.4427,
+          0.0
+        ],
+        "jd_tt": 2463774.733331726,
+        "eye_height_m": 2.0,
+        "horizontal_fov_deg": 50.0,
+        "earth_elevation_deg": 42.645121001,
+        "earth_diameter_deg": 1.9366975,
+        "earth_lit_fraction": 0.9930019,
+        "sun_elevation_deg": -51.376242881246164,
+        "selected_cloud_top_altitude_km": 53.794122,
+        "vertical_cloud_optical_depth": 0.28915367366205824,
+        "horizontal_lux": 3.2400628785271337
+      },
+      "measured_image_screen": {
+        "frame": [
+          1122,
+          1402
+        ],
+        "sha256": "2b777daebb11e329317a3553b7eac793dc734f237facb67ff0cbdda87fdc77fb",
+        "expected_geometric_horizon_fraction": 0.8466984150963252,
+        "fitted_horizon_coherent_fraction": 0.8794579172610556,
+        "median_linear_display_Y": {
+          "upper_sky": 0.07506642824534723,
+          "middle_cloud_field": 0.10437709650225956,
+          "water": 0.03507761850787876
+        },
+        "median_linear_display_RGB": {
+          "upper_sky": [
+            0.07618538148130784,
+            0.07421356838014963,
+            0.08021982031446832
+          ],
+          "middle_cloud_field": [
+            0.12213877222960187,
+            0.09989872824711389,
+            0.09084171118340768
+          ],
+          "water": [
+            0.033104766570885055,
+            0.03560131487502034,
+            0.03954623527673283
+          ]
+        },
+        "earth_limb_fit": {
+          "centre_shift_px": [
+            -1.996642590283977,
+            -3.1980305289239124
+          ],
+          "radius_scale": 0.994210459776942,
+          "radial_rms_fraction": 0.10831853068212374
+        },
+        "horizon_rms_fraction_of_height": 0.0318016672610556,
+        "region_display_luminance_ratios": {
+          "upper_sky": 0.7909297122050002,
+          "middle_cloud_field": 1.3192095443492151,
+          "water": 1.0308405066089696
+        },
+        "registered_earth_interior_rank_correlation": 0.7250757288336872
+      },
+      "visual_review": [
+        "Nearly full Earth remains a small extended source above the main cloud bank, with no visible Sun or extra light source. Fitted radius is 0.994 of nominal; the fit is only a screen, with 0.108 radial residual from glare/low pixel count.",
+        "Registered Earth interior rank correlation is 0.725: structure remains visible but the generated geography and cloud detail are not exact copies of the NASA-derived reference.",
+        "The final horizon is visually near row 1188 in a 1402-pixel image, matching the intended roughly 84.8% placement. Distant water fades smoothly into haze; there is no land or implied shore platform.",
+        "High clouds are layered and fibrous rather than vertically solid towers. Broad placement follows the opacity guide, while the detail, folds and some local contrast are invented.",
+        "Water has small ripples and a fragmented reflection below Earth, without surf or whitecaps. Highlight placement is plausible; absolute wave heights and individual facet normals cannot be verified from the generated photograph.",
+        "No text, labels, border, visible craft, buildings, people, extra planets or decorative stars were found."
+      ],
+      "horizon_review": {
+        "automatic_coherent_edge_rejected": true,
+        "reason": "The automatic strongest row-colour edge at 87.95% selects a water/glitter feature, not the horizon. It also misidentified crests in some earlier passes. Do not interpret its RMS as camera error.",
+        "visually_inspected_horizon_row_range": [
+          1185,
+          1195
+        ],
+        "image_height_px": 1402,
+        "reference_fraction": 0.84765625
+      },
+      "remaining_differences": [
+        "Fixed-region median linear display luminance is 21% lower than the reference in the upper sky, 32% higher in the middle cloud field and 3% higher over water. The image is selected for illustration, not radiometric equivalence.",
+        "Cloud microtexture is more contrasted than the angularly filtered reference and cannot be validated by the 2-D experiment.",
+        "The Earth scene retains 0.482 lux of formal solar twilight without solving its cloud modulation, about 15% of the total.",
+        "The final Earth disk has a roughly 2-pixel horizontal and 3-pixel vertical placement shift; its detailed texture changed across editing passes."
+      ]
+    },
+    "smythii-twilight-clouds": {
+      "selected": {
+        "path": "visualization/sea-appearance/illustrations/smythii-twilight-clouds.png",
+        "sha256": "5bed1f7a7cd2beab8f29bae213657cd7561602d1733decf7bdfc1f1f46f70098",
+        "native_frame": [
+          1448,
+          1086
+        ]
+      },
+      "first_pass": {
+        "path": "visualization/sea-appearance/illustrations/smythii-twilight-clouds-first-generated.png",
+        "sha256": "0d27e743cde9206f6b6d2243d38691479f1583162201616f902dddae4c5957af",
+        "native_frame": [
+          1448,
+          1086
+        ]
+      },
+      "reference": {
+        "path": "visualization/sea-appearance/illustrations/smythii-twilight-clouds-reference.png",
+        "sha256": "0d56e15df0bbf0f7c59f64cb69e26b449537f56988f367420294110e9526abd6",
+        "native_frame": [
+          2560,
+          1920
+        ]
+      },
+      "display_record": {
+        "path": "visualization/sea-appearance/illustrations/smythii-twilight-clouds-display.json",
+        "sha256": "f2f481f627435be406a16fa4255226e884e73c984aac82653096a51b935bee26"
+      },
+      "scene_product": {
+        "path": "research/studies/sea_appearance/results/smythii-twilight-clouds.json",
+        "sha256": "83cd9fdfa605a74a2960bd5f46ca4ffa02f5676015a47af2d9518f0963c3ce85"
+      },
+      "input_manifest": {
+        "path": "research/studies/sea_appearance/smythii_twilight_clouds_inputs.json",
+        "sha256": "8022a902c4e9fd183a2671085b8c967e0111b766a923b2104d92cc70c203528a"
+      },
+      "checks": {
+        "path": "visualization/sea-appearance/illustrations/smythii-twilight-clouds-image-checks.json",
+        "sha256": "1635a063ca775dcef0db2ba3cdc272eda44b4ec191f05f84e9521606d6609abd"
+      },
+      "physical_constraints": {
+        "site_lon_lat_deg": [
+          92.2797,
+          0.0
+        ],
+        "jd_tt": 2463761.1401282586,
+        "eye_height_m": 2.0,
+        "horizontal_fov_deg": 90.0,
+        "earth_elevation_deg": -7.667389569,
+        "earth_diameter_deg": 1.8858774999999999,
+        "earth_lit_fraction": 0.0028177999999999996,
+        "sun_elevation_deg": -3.3364093845136105,
+        "selected_cloud_top_altitude_km": 59.794122,
+        "vertical_cloud_optical_depth": 0.5421042033020226,
+        "horizontal_lux": 2555.177404780848
+      },
+      "measured_image_screen": {
+        "frame": [
+          1448,
+          1086
+        ],
+        "sha256": "5bed1f7a7cd2beab8f29bae213657cd7561602d1733decf7bdfc1f1f46f70098",
+        "expected_geometric_horizon_fraction": 0.7693508172234379,
+        "fitted_horizon_coherent_fraction": 0.7661141804788214,
+        "median_linear_display_Y": {
+          "upper_sky": 0.1397822953768349,
+          "middle_cloud_field": 0.09714643057900281,
+          "water": 0.030326654949613896
+        },
+        "median_linear_display_RGB": {
+          "upper_sky": [
+            0.17464740365558504,
+            0.13286832155381798,
+            0.10461648409110419
+          ],
+          "middle_cloud_field": [
+            0.12213877222960187,
+            0.09305896284668745,
+            0.07036009569659588
+          ],
+          "water": [
+            0.0382043715953465,
+            0.028426039504420793,
+            0.019382360956935723
+          ]
+        },
+        "horizon_rms_fraction_of_height": 0.003677486187845247,
+        "region_display_luminance_ratios": {
+          "upper_sky": 0.8211585829531306,
+          "middle_cloud_field": 0.7738878689667966,
+          "water": 1.1240809829475913
+        }
+      },
+      "visual_review": [
+        "Neither Sun nor Earth is visible; the reference puts their centres 3.34 and 7.67 degrees below the horizon. The sky is bright twilight, not midnight.",
+        "A subdued central high-cloud bank and warmer brighter flanks agree with the transport contrast. Fibrous ice layers, folds and their cross-ring texture remain illustrative.",
+        "The sea reflects the dark centre and warm lateral sky without a fabricated direct-Sun reflection column. Long rounded waves carry finer ripples, without breaking surf or extensive foam.",
+        "The straight horizon is at about 76.61% of image height versus 76.98% in the calculated reference, roughly four generated pixels high.",
+        "No labels, text, borders, celestial disks, stars, added land, craft, people or buildings were found."
+      ],
+      "horizon_review": {
+        "automatic_coherent_edge_rejected": false,
+        "confirmed_by_visual_inspection": true,
+        "fractional_height_difference": -0.003677486187845247
+      },
+      "remaining_differences": [
+        "Fixed-region median linear display luminance is 18% lower than the reference in the upper sky, 23% lower in the middle clouds and 12% higher over water.",
+        "The colour correction warms the scene toward the computed palette but leaves a somewhat redder cloud bank. It is not calibrated human colour appearance.",
+        "Fine cloud self-shadowing and wave facets are generated, not solved at that resolution."
+      ]
+    }
+  },
+  "shared_limits": [
+    "One solar-phase-matched 2-D equatorial weather experiment, with a 100-km cross-ring extrusion; neither dated weather nor fine 3-D ice-cloud structure is predicted.",
+    "The cloud top values are model cell-centre altitudes, not atmospheric scale heights or solid tower thickness.",
+    "NASA Earth texture is historical and uses band-normalized colour, not a forecast or spatial spectral measurement. Generated detail further alters that texture.",
+    "Display exposure, colour adaptation and direct-Earth ocular optics are explicit approximations. These images are not validated naked-eye appearance predictions.",
+    "Waves use native fetch and experimental wind through an Earth empirical law at lunar gravity. Generated surface detail is not a reconstructed metric sea state.",
+    "No local terrain-cloud shadow solve, wave history, breaking simulation or atmospheric refraction is supplied.",
+    "Atmospheric smoothing suppresses photon noise and angular cloud detail; generated fine texture cannot restore information absent from the transport model."
+  ],
+  "validation": {
+    "make_check": {
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 NUMBA_NUM_THREADS=2 NUMBA_CACHE_DIR=/tmp/nubium-numba-cache make check PYTHON=/media/projectspace/terluna-research/optical-comfort-runs/environment/venv/bin/python",
+      "exit_code": 0,
+      "python_passed": 713,
+      "python_skipped": 42,
+      "javascript_tests": "passed",
+      "layer_check": "passed",
+      "research_check": "PASS_WITH_BLOCKED_INPUTS: pre-existing absent protection inputs",
+      "ensemble_check": "PASS; five paper workspaces; planning/workspace integrity only",
+      "log_sha256": "9a4f57a9fd4551655963b172a976cc5918a8f8f4cb407b3fc975f2bc77ff7c76",
+      "scope": "Code/numerical checks do not establish empirical optical accuracy, regional weather, scholarly editorial approval or exact human perception."
+    },
+    "independent_transport_audits": [
+      "research/studies/sea_appearance/results/fecunditatis-cloud-transport-audit.json",
+      "research/studies/sea_appearance/results/smythii-cloud-transport-audit.json"
+    ],
+    "image_check_method": "coastal_image_review.py: limb/texture/region comparison plus visual review. Automatic horizon candidates can be water crests and are explicitly qualified below.",
+    "selected_asset_hashes": "Reference-copy, generation and review asset hashes checked against local bytes; all match.",
+    "documentation_links": "All relative links in the added README sections resolve.",
+    "historical_baselines": "volume.py, short_waves.py and realization.py remain unchanged."
+  }
+}

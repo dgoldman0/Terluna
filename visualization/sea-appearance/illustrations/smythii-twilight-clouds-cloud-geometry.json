@@ -1,0 +1,26 @@
+{
+  "schema": "terluna.visualization.cloud-geometry/1",
+  "scene_sha256": "83cd9fdfa605a74a2960bd5f46ca4ffa02f5676015a47af2d9518f0963c3ce85",
+  "camera": {
+    "frame": [
+      768,
+      576
+    ],
+    "horizontal_fov_deg": 90.0,
+    "view_azimuth_deg": 270.0,
+    "pitch_deg": 22.0,
+    "eye_height_m": 2.0,
+    "lon_lat_deg": [
+      92.2797,
+      0.0
+    ],
+    "note": "An offshore eye-level view from a native-terrain-confirmed water point; no visible boat or solid standing platform is claimed."
+  },
+  "reading_rule": "Greyscale optical opacity: black is transparent, white is opaque. Upper-clouds retains cells centred above 20 km. Neither guide represents radiance or photographic appearance.",
+  "evidence": "Exact piecewise-constant rays through the saved cloud extrusion; native 6-km cells, unresolved cross-ring shape.",
+  "producer_sha256": "b960a5a0f99dd4f594df8bd8e75ce28ab22d0685a8f33d081e440fa33dc84fdc",
+  "outputs": {
+    "all-condensates.png": "6bc442fb7c665a3028497294399d3482f1fb515d2073ff79f94c1a9131c7c9cb",
+    "upper-clouds.png": "02c2191672150a02189577b3b8e486438ab3a1fab1c6cfbe9337d6aa5290d15c"
+  }
+}

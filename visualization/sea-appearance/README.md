@@ -269,3 +269,74 @@ and `illumination/water_surface/full_spectrum.py` equilibrium spectrum. The
 older solar-cloud driver and short-wave modules remain byte-for-byte intact
 for existing published products. The Nobili run records retain their original
 producer hashes from before this function-preserving packaging change.
+
+## Additional cloud views
+
+The [two cloud scenes](../../research/studies/sea_appearance/README.md#two-additional-cloud-views)
+reuse the Nobili adapters with explicit scene, wave and ground-light products.
+Fecunditatis uses a 50° portrait camera, Earth 42.645° high and a 1.937° disk.
+Eastern Smythii uses a 90° landscape camera, with both Sun and Earth below the
+horizon. Its legacy `__night` output suffix is a renderer identifier: the
+selected scene is bright twilight. The offshore cameras have eyes 2 m above
+water; no standing platform is established.
+
+[nobili_reference.py](nobili_reference.py) reflects the conditional cloudy sky,
+attenuates the direct Earth separately and uses the refined ground flux for
+water-leaving light. The outer wave tile expands to at least eight peak
+wavelengths, preventing the 33-m Smythii sea from losing its long-wave energy.
+Its sampled 1.169-m significant height is close to the spectrum's 1.150-m value.
+[coastal_cloud_guide.py](coastal_cloud_guide.py) traces the saved cloud geometry
+independently; its grayscale is opacity, not brightness. Upper-cloud guides
+exclude material below 20 km. They constrain the generated cloud footprint,
+not resolved filaments or three-dimensional towers.
+
+[cloud_display.py](cloud_display.py) filters the cloudy-minus-clear XYZ field on
+a regular angular grid with a declared 4° Gaussian sigma. This suppresses photon
+colour noise and sacrifices angular detail; it is a display approximation, not
+an extra transport result. Raw groups remain in ignored research storage.
+The independent flux checks use those raw groups, before smoothing.
+
+The night image keeps the earlier Nobili global log-power display convention.
+The twilight image uses one linear photographic exposure, mapping the clear
+upper sky to 20% of display white, with a highlight shoulder beginning at 80%.
+The earlier steep log-power daylight treatment was rejected. These operators
+are not human colour-adaptation models and the two pictures cannot be used to
+compare absolute brightness. The reference products carry the lux values.
+The CIE99 age-24 kernel acts on the direct Earth only. An explicit horizon test
+prevents painting a below-horizon Earth onto Smythii's sea; its zero direct
+field bypasses the optics calculation.
+
+Rebuild the scene/light/wave products using the study instructions, then:
+
+```sh
+STUDY=research/studies/sea_appearance
+RUN=research/runs/sea_appearance/fecunditatis-earth-clouds
+python visualization/sea-appearance/nobili_reference.py --scene "$STUDY/results/fecunditatis-earth-clouds.json" --waves "$STUDY/results/fecunditatis-cloud-waves.json" --ground "$STUDY/results/fecunditatis-cloud-ground-light.json" --cloud "$RUN/light/cloud-light.npz" --cloud-smoothing-deg 4 --width 2048 --spp-side 2 --out "$RUN/filtered-reference"
+python visualization/sea-appearance/coastal_cloud_guide.py --scene "$STUDY/results/fecunditatis-earth-clouds.json" --width 768 --out "$RUN/structure"
+python visualization/sea-appearance/nobili_view.py --scene "$STUDY/results/fecunditatis-earth-clouds.json" --prefix fecunditatis --reference "$RUN/filtered-reference" --cloud "$RUN/light/cloud-light.npz" --display-reference visualization/sea-appearance/illustrations/fecunditatis-earth-clouds-clear-display.json --out "$RUN/filtered-view"
+# Run the existing HDR-VDP/Octave environment on the emitted optics-config.json:
+octave-cli --no-history --no-init-file --quiet visualization/sea-appearance/nubium_eye_optics.m "$RUN/filtered-view/optics-config.json"
+# Repeat the nobili_view command with --finish.
+```
+
+For Smythii, substitute its scene/wave/ground filenames, prefix `smythii`, width
+2560 and the saved `smythii-twilight-clouds-clear-display.json`. That record
+selects the linear exposure automatically. A first view pass writes its zero
+optics product, so the Octave call is unnecessary. To recreate the clear
+controls, omit cloud/ground arguments, render at width 1024 (Fecunditatis) or
+1280 (Smythii), then use `--sky-reference` with Nobili's clear display for the
+night view, or `--linear-display --sky-display .2` for twilight. External
+NASA texture maps and the previously admitted optics environment are required.
+
+Repeat the image-space checks from saved, committed references:
+
+```sh
+python visualization/sea-appearance/coastal_image_review.py --reference visualization/sea-appearance/illustrations/fecunditatis-earth-clouds-reference.png --display visualization/sea-appearance/illustrations/fecunditatis-earth-clouds-display.json --image visualization/sea-appearance/illustrations/fecunditatis-earth-clouds.png --out /tmp/fecunditatis-image-checks.json
+```
+
+Substitute the Smythii prefix for the other picture. These checks cover image
+geometry, Earth detail ranks and broad displayed light levels, not radiometric
+or perceptual validation. Horizon edges must also be inspected: bright wave
+crests fooled the automatic detector in some early Earth passes. Selected
+pictures, first passes, prompts and the remaining discrepancies are in the
+[illustration record](illustrations/README.md#two-cloud-illustrations).

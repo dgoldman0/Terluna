@@ -1,0 +1,81 @@
+{
+  "schema": "terluna.visualization.selected-reference-copies/1",
+  "reading_rule": "Byte-identical copies of selected products; internal original filenames and hashes remain unchanged. Large raw arrays stay in ignored research storage.",
+  "copies": [
+    {
+      "source": "research/runs/sea_appearance/fecunditatis-earth-clouds/light/cloud-light.json",
+      "saved": "research/studies/sea_appearance/results/fecunditatis-cloud-light.json",
+      "sha256": "577233bc2a1391bb00248f6ffe6acb7f45ab6b95bf3bdfa5d6e79b5e4da1e177"
+    },
+    {
+      "source": "research/runs/sea_appearance/fecunditatis-earth-clouds/filtered-view/fecunditatis-night-view.png",
+      "saved": "visualization/sea-appearance/illustrations/fecunditatis-earth-clouds-reference.png",
+      "sha256": "8fa39f98a4380e56b52677368b0b61148f84307e8a4dd3403e654d798ead57f5"
+    },
+    {
+      "source": "research/runs/sea_appearance/fecunditatis-earth-clouds/filtered-view/display.json",
+      "saved": "visualization/sea-appearance/illustrations/fecunditatis-earth-clouds-display.json",
+      "sha256": "592fa7f36b80995dffd1b6fe12dc1c07e591f60dc5b897574536ec86154a2fef"
+    },
+    {
+      "source": "research/runs/sea_appearance/fecunditatis-earth-clouds/clear-view/fecunditatis-night-view.png",
+      "saved": "visualization/sea-appearance/illustrations/fecunditatis-earth-clouds-clear-reference.png",
+      "sha256": "0bc44a36b3388200ca2fe2fa79f379a2d63ec7aae4e3817016d2808964891b8f"
+    },
+    {
+      "source": "research/runs/sea_appearance/fecunditatis-earth-clouds/clear-view/display.json",
+      "saved": "visualization/sea-appearance/illustrations/fecunditatis-earth-clouds-clear-display.json",
+      "sha256": "d8b0ae3032384f6cd7c04e1c95542e3bdbbfa60da42a44e7b39fb2ac17d12e2c"
+    },
+    {
+      "source": "research/runs/sea_appearance/fecunditatis-earth-clouds/structure/upper-clouds.png",
+      "saved": "visualization/sea-appearance/illustrations/fecunditatis-earth-clouds-cloud-opacity.png",
+      "sha256": "6d1ac14e5c8bb505d00f85708c8f4e70dd363ebbfa94919def18f4b89bfae2f1"
+    },
+    {
+      "source": "research/runs/sea_appearance/fecunditatis-earth-clouds/structure/geometry.json",
+      "saved": "visualization/sea-appearance/illustrations/fecunditatis-earth-clouds-cloud-geometry.json",
+      "sha256": "2597f111045ff21bc9651ea6e8f592b7d4a4561c66f34351361cd4be44a1e292"
+    },
+    {
+      "source": "research/runs/sea_appearance/fecunditatis-earth-clouds/filtered-view/fecunditatis-earth-view.png",
+      "saved": "visualization/sea-appearance/illustrations/fecunditatis-earth-clouds-earth-reference.png",
+      "sha256": "8d737b58a0b1b59fe4387e88cae65d1ce32c30cd2d6118db2783918ef4bb8a87"
+    },
+    {
+      "source": "research/runs/sea_appearance/smythii-twilight-clouds/light/cloud-light.json",
+      "saved": "research/studies/sea_appearance/results/smythii-cloud-light.json",
+      "sha256": "4aff519d2012aef11a993663a70cf188c74b057bc788bc9649b3fe7ba73121d8"
+    },
+    {
+      "source": "research/runs/sea_appearance/smythii-twilight-clouds/filtered-view/smythii-night-view.png",
+      "saved": "visualization/sea-appearance/illustrations/smythii-twilight-clouds-reference.png",
+      "sha256": "0d56e15df0bbf0f7c59f64cb69e26b449537f56988f367420294110e9526abd6"
+    },
+    {
+      "source": "research/runs/sea_appearance/smythii-twilight-clouds/filtered-view/display.json",
+      "saved": "visualization/sea-appearance/illustrations/smythii-twilight-clouds-display.json",
+      "sha256": "f2f481f627435be406a16fa4255226e884e73c984aac82653096a51b935bee26"
+    },
+    {
+      "source": "research/runs/sea_appearance/smythii-twilight-clouds/clear-view/smythii-night-view.png",
+      "saved": "visualization/sea-appearance/illustrations/smythii-twilight-clouds-clear-reference.png",
+      "sha256": "3557d7c2a0a5aeef806264e7cf19ee725894dd188657d67fff6ff6db768ccc38"
+    },
+    {
+      "source": "research/runs/sea_appearance/smythii-twilight-clouds/clear-view/display.json",
+      "saved": "visualization/sea-appearance/illustrations/smythii-twilight-clouds-clear-display.json",
+      "sha256": "18fe375b78619898ce7560dab8cff1bee1a2492ff553b2ddacb1cd9ac692b401"
+    },
+    {
+      "source": "research/runs/sea_appearance/smythii-twilight-clouds/structure/upper-clouds.png",
+      "saved": "visualization/sea-appearance/illustrations/smythii-twilight-clouds-cloud-opacity.png",
+      "sha256": "02c2191672150a02189577b3b8e486438ab3a1fab1c6cfbe9337d6aa5290d15c"
+    },
+    {
+      "source": "research/runs/sea_appearance/smythii-twilight-clouds/structure/geometry.json",
+      "saved": "visualization/sea-appearance/illustrations/smythii-twilight-clouds-cloud-geometry.json",
+      "sha256": "d1908afe886c46a0cb3fc72121f441bdaa6e97ace7e8d15598890107f9ebae50"
+    }
+  ]
+}

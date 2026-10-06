@@ -608,3 +608,88 @@ Raw large arrays stay in ignored `research/runs/sea_appearance/nobili/`. The
 [visualization](../../../visualization/sea-appearance/README.md#nobili-lake) consumes
 these results; its final photographic illustration is not a validated human-vision
 prediction.
+
+## Two additional cloud views
+
+The selected scenes add an Earth-visible night and a twilight cloud view to the
+Nobili lake image. [Selection and rejected candidates](results/cloud-scene-selection.json)
+record why each is admitted. These are conditional examples from saved weather
+experiments, not forecasts for the attached astronomical dates.
+
+| Quantity | Fecunditatis: Earth and clouds | Eastern Smythii: twilight clouds |
+|---|---|---|
+| Observer | 0 N, 51.4427 E | 0 N, 92.2797 E |
+| Example time, TT | 26 June 2033, 05:36 | 12 June 2033, 15:22 |
+| Native water depth | 303 m | 1878 m |
+| Earth centre / diameter | 42.645° / 1.937°; 99.30% lit | −7.667° / 1.886°; completely below the horizon |
+| Sun elevation | −51.376°; deep night, not local midnight | −3.336°; bright twilight |
+| Selected cloud-top altitude | 53.79 km | 59.79 km |
+| Overhead all-condensate optical depth | 0.289 | 0.542 |
+| Horizontal illumination | 3.240 lux | 2555 lux |
+| 10-m wind / native upwind fetch | 1.10 m/s / 250.4 km | 4.43 m/s / 45.0 km |
+| Conditional significant wave height / peak wavelength | 0.187 m / 6.56 m | 1.151 m / 33.04 m |
+
+The cloud heights are model cell-centre **altitudes**, not atmospheric scale
+heights or solid cloud-tower heights. The selected columns contain about 6 km
+and 2 km of qualifying cloud layers in total. The broader saved sections supply
+the optical calculation. Fine ice filaments in the photographs are generated
+texture; the experiment does not resolve their three-dimensional shape.
+
+[cloud_candidates.py](cloud_candidates.py) screens the equatorial experiment's
+second cycle. Native LOLA/GRAIL heights reject a far-side camera that the coarse
+climate mask placed over water. All five hydrometeors enter the opacity screen:
+cloud top and a clear-looking Earth ray alone had admitted overcast candidates.
+The final Earth screen retained 293 observer/cloud pairs at overhead optical
+depth below 0.3. A strict twilight screen retained none; widening the solar
+window and admitting optical depth below 1 retained 392 pairs. These counts
+are neither independent weather events nor occurrence probabilities. The final
+native-terrain search covers the available equatorial eastern strip, not the
+whole world's possible weather.
+
+The [Fecunditatis](results/fecunditatis-earth-clouds.json) and
+[Smythii](results/smythii-twilight-clouds.json) scene products bind the source
+terrain, dated geometry and solar-phase-matched CM1 snapshots. Both assume a
+100-km cross-ring cloud extent. The finite-source transport uses 512 photons
+per angular direction and 16 groups, with median raw pixel sampling errors of
+10.8% and 19.0%. No photon paths truncated. A separate 65,536-photon ground run
+refines each flux. Independent angular integration agrees within 0.77 and
+0.90 combined standard errors; the reproducible
+[Fecunditatis](results/fecunditatis-cloud-transport-audit.json) and
+[Smythii](results/smythii-cloud-transport-audit.json) audits do not establish
+empirical accuracy or angular convergence.
+
+The Earth scene transmits 0.485–0.541 of the direct disk through clouds, in
+addition to molecular extinction. Its unresolved solar cloud modulation is a
+remaining material approximation: 0.482 lux of formal clear-sky twilight is
+retained, about 15% of the total. The Smythii calculation transports sunlight;
+its retained formal Earth contribution is only 0.000074 lux. The faint source
+is never silently set to zero after a low-photon run finds no paths.
+
+[coastal_waves.py](coastal_waves.py) measures the native upwind shore and applies
+[Elfouhaily et al. (1997), equation 37](https://doi.org/10.1029/97JC00467), with
+lunar gravity, through the domain's [fetch closure](../../../illumination/water_surface/fetch.py).
+It supplies wave age to the existing full-range spectrum. This remains an
+Earth empirical law, conditional on steady wind; duration, inherited swell,
+coastal circulation and breaking are not forecasts. The spectral sources
+already pinned for earlier studies remain unchanged.
+
+To rebuild, restore the admitted external inputs from the two `*_inputs.json`
+manifests and the existing sky/CM1 products. Fail on hash mismatch. The
+following is the Earth case; substitute the Smythii manifest, scene and wave
+filenames and use `--photons 0 --sun-photons 512` for its angular light run.
+
+```sh
+STUDY=research/studies/sea_appearance
+RUN=research/runs/sea_appearance/fecunditatis-earth-clouds
+python -m research.studies.sea_appearance.nobili --inputs "$STUDY/fecunditatis_earth_clouds_inputs.json" --crm-case <CM1-ring-equator-directory> --build-dir "$RUN" --out "$STUDY/results/fecunditatis-earth-clouds.json"
+python -m research.studies.sea_appearance.coastal_waves --scene "$STUDY/results/fecunditatis-earth-clouds.json" --terrain-manifest "$STUDY/fecunditatis_earth_clouds_inputs.json" --out "$STUDY/results/fecunditatis-cloud-waves.json"
+NUMBA_NUM_THREADS=1 python -m research.studies.sea_appearance.coastal_clouds --scene "$STUDY/results/fecunditatis-earth-clouds.json" --out "$RUN/light" --photons 512 --sun-photons 0 --fine
+NUMBA_NUM_THREADS=1 python -m research.studies.sea_appearance.coastal_flux --scene "$STUDY/results/fecunditatis-earth-clouds.json" --cloud "$RUN/light/cloud-light.npz" --photons 65536 --out "$STUDY/results/fecunditatis-cloud-ground-light.json"
+python -m research.studies.sea_appearance.coastal_transport_audit --cloud "$RUN/light/cloud-light.npz" --ground "$STUDY/results/fecunditatis-cloud-ground-light.json" --out "$STUDY/results/fecunditatis-cloud-transport-audit.json"
+```
+
+The [rendering workflow](../../../visualization/sea-appearance/README.md#additional-cloud-views)
+retains calculated references, first generated passes, full prompts and image
+reviews. The photographic illustrations have explicit residual differences;
+they are not exact naked-eye predictions. Nobili remains the admitted hill-framed
+night scene, with its thinner and lower clouds.

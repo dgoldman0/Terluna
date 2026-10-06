@@ -90,3 +90,37 @@ cloud field produces a diffuse glow; distinct high clouds require a different
 weather sample. Run `python visualization/sea-appearance/nobili_review.py --out
 /tmp/nobili-image-checks.json` from the repository root to repeat the selected
 image comparison.
+
+## Two cloud illustrations
+
+- [Fecunditatis: nearly full Earth and high clouds](fecunditatis-earth-clouds.png),
+  with the [2048 × 2560 calculated reference](fecunditatis-earth-clouds-reference.png)
+  and [Earth detail reference](fecunditatis-earth-clouds-earth-reference.png).
+- [Eastern Smythii: high clouds at twilight, Earth below the horizon](smythii-twilight-clouds.png),
+  with the [2560 × 1920 calculated reference](smythii-twilight-clouds-reference.png).
+
+Both are natural photographic illustrations without text inside the images.
+The built-in imagegen tool supplies cloud microtexture and water detail;
+calculated references constrain geometry, cloud opacity, illumination and waves.
+Native generated sizes are 1122 × 1402 and 1448 × 1086, respectively. They have
+not been artificially upscaled. Their first generated images are saved as
+`fecunditatis-earth-clouds-first-generated.png` and
+`smythii-twilight-clouds-first-generated.png`.
+
+[Generation history and full prompt files](cloud-scenes-generation.json),
+[review and remaining differences](cloud-scenes-review.json),
+[reference-copy hashes](cloud-scenes-reference-copies.json), and the per-scene
+`*-image-checks.json` files keep the evidence outside the pictures. The two
+`*-cloud-opacity.png` guides show upper-cloud opacity, not visible cloud colour.
+The clear references and display records are also retained.
+
+These are conditional scenes from the saved equatorial experiment. The cloud
+altitudes near 54 and 60 km are not cloud-tower thicknesses or atmospheric scale
+heights. Future weather, cross-ring structure, fine cloud forms and exact human
+colour appearance are not predicted. The generated images retain residual
+composition and brightness differences from the references, itemized in the
+review. The Nobili hill-framed night image remains a separate selected scene.
+
+Credits: NASA LRO/LOLA, GRAIL and JPL provide the admitted terrain/datum and dated
+Earth geometry; NASA/GSFC Blue Marble supplies historical Earth texture. Source
+URLs, rights notes and hashes remain in the study and Earth-input manifests.

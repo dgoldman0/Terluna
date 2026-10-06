@@ -1,0 +1,4 @@
+Use case: precise-object-edit.
+Edit this photograph with ONE geometric correction. Lower the straight sea horizon by 39 pixels on this 1122 by 1402 image: it is currently at y=1150; it must be at y=1189, leaving 213 pixels of sea at the bottom.
+Replace the 39-pixel band immediately below the current horizon with a seamless extension of the distant grey atmospheric sky above it. Refit the water into the reduced bottom band with the same tiny ripples and soft broken reflection, preserving natural perspective.
+Everything above y=1150 is LOCKED: do not redraw, recolour or shift the sky, clouds or Earth. Keep the Earth exactly the same small size, location and internal detail. Keep the current exposure, cloud brightness and colours. No zoom, crop, border, letters, labels, annotations or new objects. Return only the clean full portrait photograph, same aspect ratio and native resolution.

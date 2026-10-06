@@ -1,0 +1,242 @@
+{
+  "schema": "terluna.visualization.cloud-scenes-generation/1",
+  "tool": "Built-in image_gen; no API/CLI fallback",
+  "image_processing": "Generated output bytes copied without image editing or artificial upscaling. Scientific references were calculated separately.",
+  "scenes": {
+    "fecunditatis-earth-clouds": {
+      "selected": {
+        "path": "visualization/sea-appearance/illustrations/fecunditatis-earth-clouds.png",
+        "sha256": "2b777daebb11e329317a3553b7eac793dc734f237facb67ff0cbdda87fdc77fb",
+        "native_frame": [
+          1122,
+          1402
+        ]
+      },
+      "passes": [
+        {
+          "pass": 1,
+          "original_generated_file": "/home/kir/.codex/generated_images/01a108bc-550e-7eb2-afc2-22dfcd93f81c/exec-7cfa446e-746c-4a40-b34d-247d5b490159.png",
+          "saved": {
+            "path": "visualization/sea-appearance/illustrations/fecunditatis-earth-clouds-first-generated.png",
+            "sha256": "64973dab5efda100c9d2fdf7e47ad88f41b6ebfc9bcebc9282eb2c5974a6cc1c",
+            "native_frame": [
+              1122,
+              1402
+            ]
+          },
+          "prompt": {
+            "path": "visualization/sea-appearance/illustrations/fecunditatis-earth-clouds-first-prompt.txt",
+            "sha256": "8f75f9ea0715889a80bd321035b0dc9bd4220b90484e083b9aed34755f1078cf"
+          },
+          "inputs_in_order": [
+            {
+              "path": "visualization/sea-appearance/illustrations/fecunditatis-earth-clouds-reference.png",
+              "sha256": "8fa39f98a4380e56b52677368b0b61148f84307e8a4dd3403e654d798ead57f5",
+              "native_frame": [
+                2048,
+                2560
+              ]
+            },
+            {
+              "path": "visualization/sea-appearance/illustrations/fecunditatis-earth-clouds-earth-reference.png",
+              "sha256": "8d737b58a0b1b59fe4387e88cae65d1ce32c30cd2d6118db2783918ef4bb8a87",
+              "native_frame": [
+                1024,
+                1024
+              ]
+            },
+            {
+              "path": "visualization/sea-appearance/illustrations/fecunditatis-earth-clouds-cloud-opacity.png",
+              "sha256": "6d1ac14e5c8bb505d00f85708c8f4e70dd363ebbfa94919def18f4b89bfae2f1",
+              "native_frame": [
+                768,
+                960
+              ]
+            }
+          ],
+          "note": "First textured composite; Earth size good, diffuse sky too dark and horizon too high."
+        },
+        {
+          "pass": 2,
+          "original_generated_file": "/home/kir/.codex/generated_images/01a108bc-550e-7eb2-afc2-22dfcd93f81c/exec-7d8dba63-f6cf-456e-a6db-b6761e66930b.png",
+          "saved": {
+            "path": "research/runs/sea_appearance/fecunditatis-earth-clouds/second-generated.png",
+            "sha256": "3b3ac98f3ccd2af4ab98afc765b0b7f0b87e1872e072e3338ca6a839b2e188b0",
+            "native_frame": [
+              1122,
+              1402
+            ]
+          },
+          "prompt": {
+            "path": "visualization/sea-appearance/illustrations/fecunditatis-earth-clouds-prompt.txt",
+            "sha256": "5bcfb933adf5a57c83c1e2979d83bac40475ce7f0c543d2308f4487e359b6cd6"
+          },
+          "inputs_in_order": [
+            {
+              "path": "visualization/sea-appearance/illustrations/fecunditatis-earth-clouds-first-generated.png",
+              "sha256": "64973dab5efda100c9d2fdf7e47ad88f41b6ebfc9bcebc9282eb2c5974a6cc1c",
+              "native_frame": [
+                1122,
+                1402
+              ]
+            },
+            {
+              "path": "visualization/sea-appearance/illustrations/fecunditatis-earth-clouds-reference.png",
+              "sha256": "8fa39f98a4380e56b52677368b0b61148f84307e8a4dd3403e654d798ead57f5",
+              "native_frame": [
+                2048,
+                2560
+              ]
+            }
+          ],
+          "note": "Exposure correction overshot the middle cloud band; horizon remained too high."
+        },
+        {
+          "pass": 3,
+          "original_generated_file": "/home/kir/.codex/generated_images/01a108bc-550e-7eb2-afc2-22dfcd93f81c/exec-0224ba03-637b-4c81-b8cf-7f5e8c816692.png",
+          "saved": {
+            "path": "research/runs/sea_appearance/fecunditatis-earth-clouds/third-generated.png",
+            "sha256": "50e8da9cd5f075318c14b9684bdccc61a5d6ec4d3a5682197490df39fc89bf6c",
+            "native_frame": [
+              1122,
+              1402
+            ]
+          },
+          "prompt": {
+            "path": "visualization/sea-appearance/illustrations/fecunditatis-earth-clouds-final-prompt.txt",
+            "sha256": "a0f72acba82605fd79d94b8e22bb270d0058841840615601327be05ed9058872"
+          },
+          "inputs_in_order": [
+            {
+              "path": "visualization/sea-appearance/illustrations/fecunditatis-earth-clouds-reference.png",
+              "sha256": "8fa39f98a4380e56b52677368b0b61148f84307e8a4dd3403e654d798ead57f5",
+              "native_frame": [
+                2048,
+                2560
+              ]
+            },
+            {
+              "path": "research/runs/sea_appearance/fecunditatis-earth-clouds/second-generated.png",
+              "sha256": "3b3ac98f3ccd2af4ab98afc765b0b7f0b87e1872e072e3338ca6a839b2e188b0",
+              "native_frame": [
+                1122,
+                1402
+              ]
+            }
+          ],
+          "note": "Reduced excessive middle-cloud and water brightness; geometry correction still needed."
+        },
+        {
+          "pass": 4,
+          "original_generated_file": "/home/kir/.codex/generated_images/01a108bc-550e-7eb2-afc2-22dfcd93f81c/exec-48bfd7d8-3baa-4e03-83f1-7f8d6bae8e28.png",
+          "saved": {
+            "path": "visualization/sea-appearance/illustrations/fecunditatis-earth-clouds.png",
+            "sha256": "2b777daebb11e329317a3553b7eac793dc734f237facb67ff0cbdda87fdc77fb",
+            "native_frame": [
+              1122,
+              1402
+            ]
+          },
+          "prompt": {
+            "path": "visualization/sea-appearance/illustrations/fecunditatis-earth-clouds-horizon-prompt.txt",
+            "sha256": "09849037934dd41328671a2e9fa0231f4bdac5922bc2548deeae145eb06a7b29"
+          },
+          "inputs_in_order": [
+            {
+              "path": "research/runs/sea_appearance/fecunditatis-earth-clouds/third-generated.png",
+              "sha256": "50e8da9cd5f075318c14b9684bdccc61a5d6ec4d3a5682197490df39fc89bf6c",
+              "native_frame": [
+                1122,
+                1402
+              ]
+            }
+          ],
+          "note": "Selected: targeted horizon correction; remaining tone and texture differences recorded in review."
+        }
+      ]
+    },
+    "smythii-twilight-clouds": {
+      "selected": {
+        "path": "visualization/sea-appearance/illustrations/smythii-twilight-clouds.png",
+        "sha256": "5bed1f7a7cd2beab8f29bae213657cd7561602d1733decf7bdfc1f1f46f70098",
+        "native_frame": [
+          1448,
+          1086
+        ]
+      },
+      "passes": [
+        {
+          "pass": 1,
+          "original_generated_file": "/home/kir/.codex/generated_images/01a108bc-550e-7eb2-afc2-22dfcd93f81c/exec-70222a8f-f880-478c-8f62-400b4ef2ac6c.png",
+          "saved": {
+            "path": "visualization/sea-appearance/illustrations/smythii-twilight-clouds-first-generated.png",
+            "sha256": "0d27e743cde9206f6b6d2243d38691479f1583162201616f902dddae4c5957af",
+            "native_frame": [
+              1448,
+              1086
+            ]
+          },
+          "prompt": {
+            "path": "visualization/sea-appearance/illustrations/smythii-twilight-clouds-first-prompt.txt",
+            "sha256": "8d6c4910550de41864a7ef02bd0edf21831af106501bafd684bfad50d672a9c6"
+          },
+          "inputs_in_order": [
+            {
+              "path": "visualization/sea-appearance/illustrations/smythii-twilight-clouds-reference.png",
+              "sha256": "0d56e15df0bbf0f7c59f64cb69e26b449537f56988f367420294110e9526abd6",
+              "native_frame": [
+                2560,
+                1920
+              ]
+            },
+            {
+              "path": "visualization/sea-appearance/illustrations/smythii-twilight-clouds-cloud-opacity.png",
+              "sha256": "02c2191672150a02189577b3b8e486438ab3a1fab1c6cfbe9337d6aa5290d15c",
+              "native_frame": [
+                768,
+                576
+              ]
+            }
+          ],
+          "note": "First textured composite; broad cloud bank and waves retained, upper-sky palette too blue."
+        },
+        {
+          "pass": 2,
+          "original_generated_file": "/home/kir/.codex/generated_images/01a108bc-550e-7eb2-afc2-22dfcd93f81c/exec-1ac4a46e-8139-4f58-a598-81cb3d68532b.png",
+          "saved": {
+            "path": "visualization/sea-appearance/illustrations/smythii-twilight-clouds.png",
+            "sha256": "5bed1f7a7cd2beab8f29bae213657cd7561602d1733decf7bdfc1f1f46f70098",
+            "native_frame": [
+              1448,
+              1086
+            ]
+          },
+          "prompt": {
+            "path": "visualization/sea-appearance/illustrations/smythii-twilight-clouds-prompt.txt",
+            "sha256": "192e8f67c7f455d8a1dca289b8fcac2daba9a1848cb7048e9cc6d5197e55523b"
+          },
+          "inputs_in_order": [
+            {
+              "path": "visualization/sea-appearance/illustrations/smythii-twilight-clouds-first-generated.png",
+              "sha256": "0d27e743cde9206f6b6d2243d38691479f1583162201616f902dddae4c5957af",
+              "native_frame": [
+                1448,
+                1086
+              ]
+            },
+            {
+              "path": "visualization/sea-appearance/illustrations/smythii-twilight-clouds-reference.png",
+              "sha256": "0d56e15df0bbf0f7c59f64cb69e26b449537f56988f367420294110e9526abd6",
+              "native_frame": [
+                2560,
+                1920
+              ]
+            }
+          ],
+          "note": "Selected: warmer sky and sea palette; modest remaining broad exposure differences recorded in review."
+        }
+      ]
+    }
+  },
+  "reference_path_rule": "Input records name preserved byte-identical project copies when initial calls used their research/runs originals; see cloud-scenes-reference-copies.json. A third-pass prompt filename containing final records an attempted final, followed by the targeted horizon correction."
+}

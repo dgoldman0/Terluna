@@ -1,0 +1,33 @@
+{
+  "schema": "terluna.research.coastal-waves/1",
+  "scene_sha256": "83cd9fdfa605a74a2960bd5f46ca4ffa02f5676015a47af2d9518f0963c3ce85",
+  "selected_inverse_wave_age": 1.5149771770496483,
+  "upwind_azimuth_deg": 90.0,
+  "sampled_azimuth_deg": 90.0,
+  "fetch_m": 45000.0,
+  "fetch_sampling_m": 100.0,
+  "fetch_source": {
+    "terrain_manifest_sha256": "8022a902c4e9fd183a2671085b8c967e0111b766a923b2104d92cc70c203528a",
+    "method": "100-m equatorial samples of admitted native LOLA rows above the GRAIL geoid and atlas water level",
+    "first_land_lon_deg": 93.76370487975638,
+    "first_land_height_m": 11.331309000256624
+  },
+  "significant_height_m": 1.1505375926268526,
+  "peak_wavelength_m": 33.04153748902811,
+  "model": "Elfouhaily et al. (1997), eq. 37 with X=g*fetch/U10^2; full ECKV spectrum with corrected eq. 41.",
+  "source_url": "https://archimer.ifremer.fr/doc/00091/20226/17877.pdf",
+  "evidence": "Native shoreline fetch and saved experimental wind, evaluated with an Earth empirical development law at lunar gravity.",
+  "limits": [
+    "Steady wind over a straight unobstructed fetch is conditional; no duration/history, inherited swell, refraction or directional-fetch integration.",
+    "The flat-ring wind does not resolve local terrain circulation. No validated lunar sea-state prediction is claimed."
+  ],
+  "producer": {
+    "research/studies/sea_appearance/coastal_waves.py": "30c167ffde1cd27f9ffb95653852ad34110ba4f98d77b656b0aa1f3ea5977c58",
+    "illumination/water_surface/fetch.py": "ef08ef217f11e937b315cc5c06734499adb8a357b52b9c2445f999aaa9450712",
+    "illumination/water_surface/full_spectrum.py": "612663de352f3f5822c72298a993ade6afdf04ff53e3228f8cad4a30a194a503",
+    "research/studies/sea_appearance/cloud_candidates.py": "615a86e8321630f804d292928ba952409f1805bed47cbb69786cbe78238baac6",
+    "geography/topography.py": "228e08f79efca868b49bcae0687c7f80a239b18234629c4390c147075b3f5c29",
+    "geography/results/atlas.json": "78cfbf2f469eb339b686e34385c3ed72fc83752da59bb24167e2260a765e537e",
+    "shared/constants.json": "1a73c712dcd6e550275cc3abe85e2a8ac3c0c5f39570e19841c0091e617c8cae"
+  }
+}
