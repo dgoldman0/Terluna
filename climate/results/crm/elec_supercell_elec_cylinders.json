@@ -26,7 +26,7 @@
  "producer": {
   "domain": "climate",
   "files": {
-   "crm/elec_analysis.py": "165a6ba2909d89d2"
+   "crm/elec_analysis.py": "1ef57ed83efda60f"
   }
  },
  "evidence": "CM1 r22.0 with WRF-ELEC's NSSL two-moment microphysics (MicroTed/wrf4-elec e43041b) and its charging (non-inductive by collisions of graupel and hail with ice and snow, inductive by droplets rebounding from graupel in the field), the small ions' net charge attaching to particles, an FFT field solver, and WRF-ELEC's lightning on its own sub-steps of the sedimentation: the branched scheme (lightmsz, MacGorman, Straka and Ziegler 2001) or the cylindrical one. Charge is carried by bulk particle populations; branched channels run on the model grid and neutralize the charge where they reach; the ground-strike rule, the 50-MV potential and 10-kV/m field a ground flash needs at its start and the nitrogen oxide yield are WRF-ELEC's calibrations for Earth; nothing conducts charge away except where a case turns on leakage, and the ground gives off ions only where a case turns on point discharge (Standler and Winn's 1 nA/m2 at 8 kV/m over Earth's vegetation, its onset scaled by density).",
@@ -662,7 +662,10 @@
    },
    "time_s": 0.0,
    "w_max_m_s": 0.0,
-   "dbz_max": 0.0
+   "dbz_max": 0.0,
+   "net_c": 0.0,
+   "ions_positive_c": 0.0,
+   "ions_negative_c": 0.0
   },
   {
    "positive_c": 0.0,
@@ -680,7 +683,10 @@
    },
    "time_s": 300.0,
    "w_max_m_s": 0.7598,
-   "dbz_max": 0.0
+   "dbz_max": 0.0,
+   "net_c": 0.0,
+   "ions_positive_c": 0.0,
+   "ions_negative_c": 0.0
   },
   {
    "positive_c": 0.0,
@@ -698,7 +704,10 @@
    },
    "time_s": 600.0,
    "w_max_m_s": 1.142,
-   "dbz_max": 0.0
+   "dbz_max": 0.0,
+   "net_c": 0.0,
+   "ions_positive_c": 0.0,
+   "ions_negative_c": 0.0
   },
   {
    "positive_c": 0.0,
@@ -716,7 +725,10 @@
    },
    "time_s": 900.0,
    "w_max_m_s": 3.767,
-   "dbz_max": 0.0
+   "dbz_max": 0.0,
+   "net_c": 0.0,
+   "ions_positive_c": 0.0,
+   "ions_negative_c": 0.0
   },
   {
    "positive_c": 0.0,
@@ -734,7 +746,15 @@
    },
    "time_s": 1200.0,
    "w_max_m_s": 14.0,
-   "dbz_max": 3.151
+   "dbz_max": 3.151,
+   "net_c": 5.36e-15,
+   "ions_positive_c": 1.739e-17,
+   "ions_negative_c": -2.889e-16,
+   "ions_z_km": [
+    4.75,
+    4.75,
+    5.25
+   ]
   },
   {
    "positive_c": 0.0,
@@ -752,7 +772,15 @@
    },
    "time_s": 1500.0,
    "w_max_m_s": 20.93,
-   "dbz_max": 22.83
+   "dbz_max": 22.83,
+   "net_c": -3.528e-06,
+   "ions_positive_c": 9.076e-08,
+   "ions_negative_c": -3.01e-07,
+   "ions_z_km": [
+    5.75,
+    7.75,
+    7.75
+   ]
   },
   {
    "positive_c": 39.3,
@@ -797,7 +825,15 @@
    },
    "time_s": 1800.0,
    "w_max_m_s": 28.14,
-   "dbz_max": 47.51
+   "dbz_max": 47.51,
+   "net_c": 0.4291,
+   "ions_positive_c": 0.000524,
+   "ions_negative_c": -0.0006442,
+   "ions_z_km": [
+    5.25,
+    8.75,
+    10.25
+   ]
   },
   {
    "positive_c": 155.0,
@@ -838,11 +874,19 @@
     "z_km": 6.25,
     "t_c": -15.74,
     "charge_c": 15.64,
-    "density_nc_m3": -2.912
+    "density_nc_m3": 1.147
    },
    "time_s": 2100.0,
    "w_max_m_s": 35.61,
-   "dbz_max": 54.78
+   "dbz_max": 54.78,
+   "net_c": -1.629,
+   "ions_positive_c": 0.02326,
+   "ions_negative_c": -0.03052,
+   "ions_z_km": [
+    3.75,
+    6.75,
+    10.25
+   ]
   },
   {
    "positive_c": 162.7,
@@ -887,7 +931,15 @@
    },
    "time_s": 2400.0,
    "w_max_m_s": 51.92,
-   "dbz_max": 60.58
+   "dbz_max": 60.58,
+   "net_c": -12.28,
+   "ions_positive_c": 28.94,
+   "ions_negative_c": -29.01,
+   "ions_z_km": [
+    4.25,
+    7.25,
+    11.75
+   ]
   },
   {
    "positive_c": 300.5,
@@ -922,7 +974,7 @@
     "z_km": 13.25,
     "t_c": -45.58,
     "charge_c": 0.1019,
-    "density_nc_m3": -0.4767
+    "density_nc_m3": 0.1026
    },
    "lower_positive": {
     "z_km": 8.75,
@@ -932,7 +984,15 @@
    },
    "time_s": 2700.0,
    "w_max_m_s": 52.77,
-   "dbz_max": 64.72
+   "dbz_max": 64.72,
+   "net_c": -23.81,
+   "ions_positive_c": 0.3329,
+   "ions_negative_c": -0.3414,
+   "ions_z_km": [
+    5.75,
+    9.75,
+    13.75
+   ]
   },
   {
    "positive_c": 439.1,
@@ -967,7 +1027,7 @@
     "z_km": 13.75,
     "t_c": -46.81,
     "charge_c": 0.05073,
-    "density_nc_m3": -0.1851
+    "density_nc_m3": 0.1015
    },
    "lower_positive": {
     "z_km": 8.75,
@@ -977,7 +1037,15 @@
    },
    "time_s": 3000.0,
    "w_max_m_s": 50.81,
-   "dbz_max": 67.98
+   "dbz_max": 67.98,
+   "net_c": -38.46,
+   "ions_positive_c": 0.3757,
+   "ions_negative_c": -0.3693,
+   "ions_z_km": [
+    5.75,
+    9.75,
+    12.75
+   ]
   },
   {
    "positive_c": 495.4,
@@ -1012,17 +1080,25 @@
     "z_km": 11.25,
     "t_c": -50.38,
     "charge_c": 6.656,
-    "density_nc_m3": -0.5638
+    "density_nc_m3": 0.2588
    },
    "lower_positive": {
     "z_km": 8.25,
     "t_c": -28.57,
     "charge_c": 58.6,
-    "density_nc_m3": -1.201
+    "density_nc_m3": 1.052
    },
    "time_s": 3300.0,
    "w_max_m_s": 48.03,
-   "dbz_max": 69.9
+   "dbz_max": 69.9,
+   "net_c": -30.24,
+   "ions_positive_c": 0.2735,
+   "ions_negative_c": -0.2648,
+   "ions_z_km": [
+    3.25,
+    7.75,
+    12.25
+   ]
   },
   {
    "positive_c": 642.5,
@@ -1057,7 +1133,7 @@
     "z_km": 11.75,
     "t_c": -53.5,
     "charge_c": 0.1007,
-    "density_nc_m3": -0.6105
+    "density_nc_m3": 0.1009
    },
    "lower_positive": {
     "z_km": 8.25,
@@ -1067,7 +1143,15 @@
    },
    "time_s": 3600.0,
    "w_max_m_s": 45.85,
-   "dbz_max": 70.77
+   "dbz_max": 70.77,
+   "net_c": -62.52,
+   "ions_positive_c": 0.2277,
+   "ions_negative_c": -0.2395,
+   "ions_z_km": [
+    3.75,
+    7.25,
+    14.25
+   ]
   },
   {
    "positive_c": 788.3,
@@ -1102,7 +1186,7 @@
     "z_km": 12.25,
     "t_c": -54.34,
     "charge_c": 1.845,
-    "density_nc_m3": -0.47
+    "density_nc_m3": 0.1434
    },
    "lower_positive": {
     "z_km": 8.25,
@@ -1112,7 +1196,15 @@
    },
    "time_s": 3900.0,
    "w_max_m_s": 49.67,
-   "dbz_max": 72.72
+   "dbz_max": 72.72,
+   "net_c": -119.3,
+   "ions_positive_c": 45.06,
+   "ions_negative_c": -45.32,
+   "ions_z_km": [
+    4.25,
+    8.25,
+    12.25
+   ]
   },
   {
    "positive_c": 1036.0,
@@ -1147,7 +1239,7 @@
     "z_km": 12.25,
     "t_c": -54.98,
     "charge_c": 6.127,
-    "density_nc_m3": -0.7744
+    "density_nc_m3": 0.2487
    },
    "lower_positive": {
     "z_km": 8.25,
@@ -1157,7 +1249,15 @@
    },
    "time_s": 4200.0,
    "w_max_m_s": 49.1,
-   "dbz_max": 73.71
+   "dbz_max": 73.71,
+   "net_c": -180.9,
+   "ions_positive_c": 41.79,
+   "ions_negative_c": -41.88,
+   "ions_z_km": [
+    4.25,
+    8.25,
+    11.75
+   ]
   },
   {
    "positive_c": 1319.0,
@@ -1192,17 +1292,25 @@
     "z_km": 10.75,
     "t_c": -45.55,
     "charge_c": 15.13,
-    "density_nc_m3": -0.9705
+    "density_nc_m3": 0.431
    },
    "lower_positive": {
     "z_km": 7.25,
     "t_c": -22.56,
     "charge_c": 127.0,
-    "density_nc_m3": -1.644
+    "density_nc_m3": 0.8116
    },
    "time_s": 4500.0,
    "w_max_m_s": 50.16,
-   "dbz_max": 72.95
+   "dbz_max": 72.95,
+   "net_c": -235.1,
+   "ions_positive_c": 13.99,
+   "ions_negative_c": -14.05,
+   "ions_z_km": [
+    4.25,
+    8.25,
+    11.25
+   ]
   },
   {
    "positive_c": 1409.0,
@@ -1237,17 +1345,25 @@
     "z_km": 11.75,
     "t_c": -52.69,
     "charge_c": 34.94,
-    "density_nc_m3": -0.6966
+    "density_nc_m3": 0.4161
    },
    "lower_positive": {
     "z_km": 6.75,
     "t_c": -19.39,
     "charge_c": 119.0,
-    "density_nc_m3": -1.824
+    "density_nc_m3": 0.6814
    },
    "time_s": 4800.0,
    "w_max_m_s": 49.54,
-   "dbz_max": 75.14
+   "dbz_max": 75.14,
+   "net_c": -328.4,
+   "ions_positive_c": 16.97,
+   "ions_negative_c": -17.02,
+   "ions_z_km": [
+    4.25,
+    7.75,
+    10.75
+   ]
   },
   {
    "positive_c": 1692.0,
@@ -1282,7 +1398,7 @@
     "z_km": 11.75,
     "t_c": -52.87,
     "charge_c": 75.91,
-    "density_nc_m3": -0.7879
+    "density_nc_m3": 0.4113
    },
    "lower_positive": {
     "z_km": 6.75,
@@ -1292,7 +1408,15 @@
    },
    "time_s": 5100.0,
    "w_max_m_s": 52.76,
-   "dbz_max": 73.85
+   "dbz_max": 73.85,
+   "net_c": -369.4,
+   "ions_positive_c": 0.1972,
+   "ions_negative_c": -0.2449,
+   "ions_z_km": [
+    3.25,
+    5.75,
+    15.25
+   ]
   },
   {
    "positive_c": 2002.0,
@@ -1327,17 +1451,25 @@
     "z_km": 11.75,
     "t_c": -52.78,
     "charge_c": 107.0,
-    "density_nc_m3": -0.8895
+    "density_nc_m3": 0.4746
    },
    "lower_positive": {
     "z_km": 6.25,
     "t_c": -16.36,
     "charge_c": 134.0,
-    "density_nc_m3": -1.128
+    "density_nc_m3": 0.8149
    },
    "time_s": 5400.0,
    "w_max_m_s": 53.44,
-   "dbz_max": 72.06
+   "dbz_max": 72.06,
+   "net_c": -526.0,
+   "ions_positive_c": 164.3,
+   "ions_negative_c": -164.8,
+   "ions_z_km": [
+    4.25,
+    7.75,
+    10.75
+   ]
   },
   {
    "positive_c": 2406.0,
@@ -1372,7 +1504,7 @@
     "z_km": 11.75,
     "t_c": -52.89,
     "charge_c": 112.3,
-    "density_nc_m3": -0.8206
+    "density_nc_m3": 0.4241
    },
    "lower_positive": {
     "z_km": 4.75,
@@ -1382,7 +1514,15 @@
    },
    "time_s": 5700.0,
    "w_max_m_s": 54.91,
-   "dbz_max": 70.94
+   "dbz_max": 70.94,
+   "net_c": -584.9,
+   "ions_positive_c": 18.95,
+   "ions_negative_c": -19.04,
+   "ions_z_km": [
+    4.75,
+    8.75,
+    12.25
+   ]
   },
   {
    "positive_c": 2995.0,
@@ -1417,7 +1557,7 @@
     "z_km": 11.75,
     "t_c": -53.13,
     "charge_c": 165.6,
-    "density_nc_m3": -0.793
+    "density_nc_m3": 0.5158
    },
    "lower_positive": {
     "z_km": 4.75,
@@ -1427,7 +1567,15 @@
    },
    "time_s": 6000.0,
    "w_max_m_s": 55.43,
-   "dbz_max": 71.33
+   "dbz_max": 71.33,
+   "net_c": -709.7,
+   "ions_positive_c": 60.72,
+   "ions_negative_c": -60.75,
+   "ions_z_km": [
+    8.75,
+    10.75,
+    12.75
+   ]
   },
   {
    "positive_c": 3101.0,
@@ -1462,17 +1610,25 @@
     "z_km": 11.75,
     "t_c": -53.22,
     "charge_c": 177.3,
-    "density_nc_m3": -0.7783
+    "density_nc_m3": 0.4614
    },
    "lower_positive": {
     "z_km": 6.75,
     "t_c": -19.43,
     "charge_c": 178.8,
-    "density_nc_m3": -2.531
+    "density_nc_m3": 1.268
    },
    "time_s": 6300.0,
    "w_max_m_s": 57.56,
-   "dbz_max": 69.76
+   "dbz_max": 69.76,
+   "net_c": -828.8,
+   "ions_positive_c": 16.88,
+   "ions_negative_c": -16.95,
+   "ions_z_km": [
+    4.75,
+    8.75,
+    11.75
+   ]
   },
   {
    "positive_c": 3301.0,
@@ -1507,7 +1663,7 @@
     "z_km": 12.25,
     "t_c": -53.81,
     "charge_c": 87.11,
-    "density_nc_m3": -0.6229
+    "density_nc_m3": 0.3191
    },
    "lower_positive": {
     "z_km": 4.25,
@@ -1517,7 +1673,15 @@
    },
    "time_s": 6600.0,
    "w_max_m_s": 57.28,
-   "dbz_max": 71.99
+   "dbz_max": 71.99,
+   "net_c": -1005.0,
+   "ions_positive_c": 61.58,
+   "ions_negative_c": -61.66,
+   "ions_z_km": [
+    5.75,
+    8.25,
+    10.75
+   ]
   },
   {
    "positive_c": 3395.0,
@@ -1552,17 +1716,25 @@
     "z_km": 12.25,
     "t_c": -53.8,
     "charge_c": 81.84,
-    "density_nc_m3": -0.9224
+    "density_nc_m3": 0.3088
    },
    "lower_positive": {
     "z_km": 7.75,
     "t_c": -25.69,
     "charge_c": 167.8,
-    "density_nc_m3": -1.071
+    "density_nc_m3": 0.9312
    },
    "time_s": 6900.0,
    "w_max_m_s": 52.26,
-   "dbz_max": 71.0
+   "dbz_max": 71.0,
+   "net_c": -959.3,
+   "ions_positive_c": 79.38,
+   "ions_negative_c": -72.19,
+   "ions_z_km": [
+    4.25,
+    6.75,
+    11.25
+   ]
   },
   {
    "positive_c": 3836.0,
@@ -1597,17 +1769,25 @@
     "z_km": 12.25,
     "t_c": -53.76,
     "charge_c": 69.67,
-    "density_nc_m3": -0.8616
+    "density_nc_m3": 0.2944
    },
    "lower_positive": {
     "z_km": 4.25,
     "t_c": -3.204,
     "charge_c": 198.4,
-    "density_nc_m3": -1.593
+    "density_nc_m3": 0.9906
    },
    "time_s": 7200.0,
    "w_max_m_s": 55.54,
-   "dbz_max": 75.45
+   "dbz_max": 75.45,
+   "net_c": -1141.0,
+   "ions_positive_c": 41.84,
+   "ions_negative_c": -41.98,
+   "ions_z_km": [
+    3.75,
+    7.25,
+    10.75
+   ]
   }
  ],
  "ice_cap": null,

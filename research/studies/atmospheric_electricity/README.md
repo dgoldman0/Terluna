@@ -294,7 +294,8 @@ Morrison's do.
    bound by WRF-ELEC's rule, brought down a median 204 C, the largest 1,489 C.
 7. Leakage (climate/crm README, "Leakage"). With nothing to conduct it, the
    charge evaporating cloud leaves on WRF-ELEC's small ions stayed for weeks:
-   1,600–3,600 C of each sign through each lunar night, and 11.4 kC net at day
+   1.9–3.7 kC of each sign through the first lunar night and 0.7–5.2 kC
+   through the second, and 11.4 kC net at day
    40.5, which held the field at the ground near 20 kV/m all over the box.
    Both windows ran again on 2026-10-05 with leakage through stage 1's
    conductivity, each changing only that. The leftover charge went within the
@@ -360,9 +361,10 @@ A typical flash (78 GJ, its channel 30–42 km up) peaks at 27 Hz, a
 large one (the top tenth by energy, 232 GJ, 30–54 km) at 19 Hz. Directly
 below, its thunder arrives 87 s after the flash and lasts about 35 s (69 s for
 the large flash): 89 dB at 31.5 Hz and 85 dB at 63 Hz in its loudest second,
-62 dBA, a deep rumble with almost nothing above 250 Hz. Across all 465 flashes it
-reaches 56–68 dBA there (10th to 90th percentile). It falls to 57 dBA at
-25 km, 50 at 50 km, 42 at 100 km and 31 at 200 km. The air cools only 1.0 K per
+62–64 dBA, a deep rumble with almost nothing above 250 Hz. Across all 465 flashes it
+reaches 56–68 dBA there (10th to 90th percentile). Eastward it falls to 57 dBA
+at 25 km, 50 at 50 km, 42 at 100 km and 31 at 200 km; in the other directions
+the silent zone begins before 200 km. The air cools only 1.0 K per
 km over the lowest 30 km, so sound bends upward gently, and the silent zone
 beyond the ray that grazes the ground starts 175–225 km out; the box's weak
 eastward wind (up to 7 m/s aloft) carries it about 30 km farther east than

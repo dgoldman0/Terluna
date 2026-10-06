@@ -1778,19 +1778,21 @@ Saunders and Peck: it falls faster than graupel and rimes above the 0.1 g m⁻²
 s⁻¹ below which the law gives no charge. The Morrison runs carried no hail
 (their one rimed ice category ran as graupel). Under Takahashi's law graupel
 separates four to six times more charge than under Saunders and Peck's and
-hail half to four-fifths as much, and the totals meet.
+hail two-fifths to four-fifths as much, and the totals meet.
 
 **The sign.** At the lunar storms' cloud water, 0.03–0.17 g/m³, Takahashi's
 table gives rimed ice positive charge at every temperature; it turns negative
-only colder than about −25 °C at 0.2 g/m³, −15 °C at 0.5 g/m³ and −12 °C at
-1 g/m³. Every collision in both Takahashi windows charged graupel and hail
+only colder than about −25 °C at 0.2 g/m³, −15 °C at 0.5 g/m³ and −10.5 °C
+at 1 g/m³. Every collision in both Takahashi windows charged graupel and hail
 positively (the negative parts come to at most 1 C against 25–111 kC), and
-the ice crystals and snow negatively. The rising ice carries the negative
-charge to 48–58 km (−23 to −35 °C), above positive charge at 32–36 km (−4 to
-−9 °C), with no upper positive layer in most outputs: an inverted dipole.
-Under Saunders and Peck the storms hold the normal arrangement, the main
-negative charge at 38–44 km with positive charge above it at 58–72 km and
-below. The laboratory measurements at the graupel's impact speeds point the same
+the ice crystals and snow negatively. The rising ice carries the main
+negative charge to 48–58 km (−23 to −35 °C) in 15 of the 23 three-hourly
+outputs, above positive charge at 32–36 km (−3 to −9 °C) in about half of
+them and lower elsewhere, and 19 of the outputs have no upper positive layer:
+an inverted dipole. Under Saunders and Peck the storms hold the normal
+arrangement: in 18 of the second window's 23 outputs the main negative charge
+sits at 36–44 km (−8 to −18 °C), with positive charge above it at 48–72 km
+and below. The laboratory measurements at the graupel's impact speeds point the same
 way as Takahashi's table: at 1.8 m/s Ávila et al. (2013) found the rimer charging
 positively at every temperature (−7 to −13 °C) and cloud water they used
 (0.05–0.5 g/m³), and at 1.2 m/s Pradeep Kumar et al. (2024) found it positive
@@ -1853,8 +1855,10 @@ climate/gcm/.venv/bin/python -m climate.crm.elec_analysis impact    # elec_impac
 
 None of the runs above conducts charge away, and the charge that evaporating
 and subliming particles hand to WRF-ELEC's small ions stays for weeks. In
-`box_0e_elec` 1,600–3,600 C of each sign stayed on the ions, mostly at 20–40
-km, through each lunar night, and in the second lunar day the box's net charge
+`box_0e_elec` the ions held 1.9–3.1 kC of positive and 2.0–3.7 kC of negative
+charge through the first lunar night and 2.6–5.2 and 0.7–3.0 kC through the
+second, half of it below about 30 km and nine-tenths below about 40 km
+(`climate/results/crm/elec_box_0e_elec.json`), and in the second lunar day the box's net charge
 rose to +10.7 kC at day 40 (at day 40.5, 7.0 kC on snow and 4.1 kC on the
 ions), its negative partner having fallen to the ground on precipitation; it
 stood near +2 kC for the rest of the run. WRF-ELEC gives the ions' charge to

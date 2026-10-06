@@ -1,5 +1,5 @@
 {
- "schema": "terluna.climate.crm-electricity/1",
+ "schema": "terluna.climate.crm-electricity/2",
  "kind": "charging-laws",
  "windows": {
   "first_lunar_day": {
@@ -531,7 +531,7 @@
         "z_km": 25.79,
         "t_c": 1.412,
         "charge_c": 14.76,
-        "density_nc_m3": -0.2099
+        "density_nc_m3": 0.2042
        },
        "hour": 24.0,
        "graupel_kg": 27660000000.0,
@@ -927,7 +927,7 @@
         "z_km": 0.05,
         "t_c": 27.1,
         "charge_c": -1.573,
-        "density_nc_m3": 1.348,
+        "density_nc_m3": -0.2799,
         "carried_c": {
          "cloud_water": 0.0,
          "rain": -0.2544,
@@ -1011,7 +1011,7 @@
         "z_km": 0.05,
         "t_c": 25.83,
         "charge_c": -6.751,
-        "density_nc_m3": 1.829,
+        "density_nc_m3": -0.4458,
         "carried_c": {
          "cloud_water": 0.0,
          "rain": -1.499,
@@ -1152,7 +1152,7 @@
         "z_km": 0.05,
         "t_c": 27.45,
         "charge_c": -0.6446,
-        "density_nc_m3": 0.7062,
+        "density_nc_m3": -0.1784,
         "carried_c": {
          "cloud_water": 0.0,
          "rain": -0.1771,
@@ -1314,7 +1314,7 @@
         "z_km": 0.05,
         "t_c": 29.06,
         "charge_c": -1.086,
-        "density_nc_m3": 0.5718,
+        "density_nc_m3": -0.1965,
         "carried_c": {
          "cloud_water": 0.0,
          "rain": 0.0,
@@ -1740,7 +1740,7 @@
         "z_km": 55.79,
         "t_c": -32.77,
         "charge_c": -33.37,
-        "density_nc_m3": 0.1439,
+        "density_nc_m3": -0.1288,
         "carried_c": {
          "cloud_water": 0.0,
          "rain": 0.0,
@@ -1761,7 +1761,7 @@
         "z_km": 53.79,
         "t_c": -30.34,
         "charge_c": 31.78,
-        "density_nc_m3": -0.1325
+        "density_nc_m3": 0.116
        },
        "hour": 15.0,
        "graupel_kg": 10460000000.0,
@@ -3386,7 +3386,7 @@
         "z_km": 7.283,
         "t_c": 19.31,
         "charge_c": 7.733,
-        "density_nc_m3": -0.3736
+        "density_nc_m3": 0.138
        },
        "hour": 24.0,
        "graupel_kg": 51510000000.0,
@@ -3470,7 +3470,7 @@
         "z_km": 59.79,
         "t_c": -37.87,
         "charge_c": 59.48,
-        "density_nc_m3": -0.1944
+        "density_nc_m3": 0.157
        },
        "lower_positive": {
         "z_km": 29.79,
@@ -3851,7 +3851,7 @@
         "z_km": 57.79,
         "t_c": -34.97,
         "charge_c": 34.41,
-        "density_nc_m3": -0.1428
+        "density_nc_m3": 0.1397
        },
        "lower_positive": {
         "z_km": 14.91,
@@ -3947,7 +3947,7 @@
         "z_km": 59.79,
         "t_c": -37.52,
         "charge_c": 8.07,
-        "density_nc_m3": -0.118
+        "density_nc_m3": 0.1117
        },
        "lower_positive": {
         "z_km": 29.79,
@@ -4049,7 +4049,7 @@
         "z_km": 35.79,
         "t_c": -8.466,
         "charge_c": 23.94,
-        "density_nc_m3": -0.3508
+        "density_nc_m3": 0.3313
        },
        "hour": 18.0,
        "graupel_kg": 69010000000.0,
@@ -4091,7 +4091,7 @@
         "z_km": 57.79,
         "t_c": -34.75,
         "charge_c": 102.4,
-        "density_nc_m3": -0.2059
+        "density_nc_m3": 0.1279
        },
        "lower_positive": {
         "z_km": 25.79,
@@ -4145,7 +4145,7 @@
         "z_km": 1.878,
         "t_c": 24.82,
         "charge_c": 3.139,
-        "density_nc_m3": -0.1851
+        "density_nc_m3": 0.1821
        },
        "hour": 24.0,
        "graupel_kg": 45160000000.0,
@@ -4304,7 +4304,7 @@
         "z_km": 57.79,
         "t_c": -34.69,
         "charge_c": 42.05,
-        "density_nc_m3": -0.1587
+        "density_nc_m3": 0.1398
        },
        "lower_positive": {
         "z_km": 31.79,
@@ -4814,7 +4814,7 @@
         "z_km": 43.79,
         "t_c": -17.43,
         "charge_c": 18.97,
-        "density_nc_m3": -0.1653
+        "density_nc_m3": 0.1492
        },
        "lower_positive": {
         "z_km": 33.79,
@@ -4862,7 +4862,7 @@
         "z_km": 51.79,
         "t_c": -26.19,
         "charge_c": 65.9,
-        "density_nc_m3": -0.2662
+        "density_nc_m3": 0.2486
        },
        "lower_positive": {
         "z_km": 35.79,
@@ -5042,7 +5042,7 @@
         "z_km": 31.79,
         "t_c": -3.897,
         "charge_c": 56.16,
-        "density_nc_m3": -0.2346
+        "density_nc_m3": 0.1938
        },
        "hour": 30.0,
        "graupel_kg": 13460000000.0,
@@ -5111,7 +5111,7 @@
         "z_km": 27.79,
         "t_c": -0.1225,
         "charge_c": -671.1,
-        "density_nc_m3": 0.2687,
+        "density_nc_m3": -0.2263,
         "carried_c": {
          "cloud_water": 0.0,
          "rain": -12.18,
@@ -5149,9 +5149,9 @@
  "producer": {
   "domain": "climate",
   "files": {
-   "crm/elec_analysis.py": "f8d920698e7656bc"
+   "crm/elec_analysis.py": "1ef57ed83efda60f"
   }
  },
  "evidence": "CM1 r22.0 with WRF-ELEC's NSSL two-moment microphysics (MicroTed/wrf4-elec e43041b) and its charging (non-inductive by collisions of graupel and hail with ice and snow, inductive by droplets rebounding from graupel in the field), the small ions' net charge attaching to particles, an FFT field solver, and WRF-ELEC's lightning on its own sub-steps of the sedimentation: the branched scheme (lightmsz, MacGorman, Straka and Ziegler 2001) or the cylindrical one. Charge is carried by bulk particle populations; branched channels run on the model grid and neutralize the charge where they reach; the ground-strike rule, the 50-MV potential and 10-kV/m field a ground flash needs at its start and the nitrogen oxide yield are WRF-ELEC's calibrations for Earth; nothing conducts charge away except where a case turns on leakage, and the ground gives off ions only where a case turns on point discharge (Standler and Winn's 1 nA/m2 at 8 kV/m over Earth's vegetation, its onset scaled by density).",
- "reading_rule": "Times are model seconds from the start. Kinds: 1 in cloud, 2 negative and 3 positive charge to ground (branched flashes), 9 a call of the cylindrical scheme, whose regions are the separate areas one call takes. A flash's positive and negative charge are what it neutralized; a ground flash neutralizes one sign only, the ground supplying the other. Nitrogen oxides are lightmsz's: Wang et al.'s yield per metre of channel at its pressure, times 0.1 where the flash changes the charge by 1 nC/kg or more. Charging rates are the domain's totals of each sign (C/s). Charge densities are nC/m3; heights are above the ground; temperatures are the air's at the level, weighted by the charge there. Each window's runs start from the same restart of box_0e_elec (or are box_0e_elec itself) and differ in the settings listed with each; the runs with the change compared come last. Hours count from the window's start. Separated charge is the domain's charging of both signs integrated over the window (C); graupel is graupel and hail together (kg) at each three-hourly output, where the net charge and the charge on the small ions are also given (C)."
+ "reading_rule": "Times are model seconds from the start. Series are per bin of bin_s seconds from start_s: 5 minutes, or the output interval for runs longer than two days. Kinds: 1 in cloud, 2 negative and 3 positive charge to ground (branched flashes), 9 a call of the cylindrical scheme, whose regions are the separate areas one call takes. A flash's positive and negative charge are what it neutralized; a ground flash neutralizes one sign only, the ground supplying the other. Nitrogen oxides are lightmsz's: Wang et al.'s yield per metre of channel at its pressure, times 0.1 where the flash changes the charge by 1 nC/kg or more. Charging rates are the domain's totals of each sign (C/s). Charge densities are nC/m3; heights are above the ground; temperatures are the air's at the level, weighted by the charge there. Each window's runs start from the same restart of box_0e_elec (or are box_0e_elec itself) and differ in the settings listed with each; the runs with the change compared come last. Hours count from the window's start. Separated charge is the domain's charging of both signs integrated over the window (C); graupel is graupel and hail together (kg) at each three-hourly output, where the net charge and the charge on the small ions are also given (C)."
 }

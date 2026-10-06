@@ -169,23 +169,37 @@ def structure(s: dict, zh: np.ndarray, threshold: float = 0.1e-9) -> dict:
         return out
     k = int(np.argmin(neg_z))
 
-    def region(level, weights):
+    def region(level, weights, sign):
+        # the largest density of the region's own sign at its level (until 2026-10-06 the largest of either sign)
         w = np.abs(weights[level])
         return dict(z_km=float(zh[level]), t_c=float(np.sum(s['t'][level] * w) / w.sum() - 273.15),
                     charge_c=float(weights[level].sum()),
-                    density_nc_m3=float(net[level][np.argmax(np.abs(net[level]))] * 1e9))
+                    density_nc_m3=float((net[level].max() if sign > 0 else net[level].min()) * 1e9))
 
-    out['main_negative'] = region(k, neg)
+    out['main_negative'] = region(k, neg, -1)
     above = np.arange(k + 1, len(zh))
     below = np.arange(0, k)
     if above.size and pos_z[above].max() > 0.0:
-        out['upper_positive'] = region(int(above[np.argmax(pos_z[above])]), pos)
+        out['upper_positive'] = region(int(above[np.argmax(pos_z[above])]), pos, 1)
     if below.size and pos_z[below].max() > 0.0:
-        out['lower_positive'] = region(int(below[np.argmax(pos_z[below])]), pos)
+        out['lower_positive'] = region(int(below[np.argmax(pos_z[below])]), pos, 1)
     # who carries the main negative region's charge
     carried = {name: float((np.where(net[k] < -threshold, q[k], 0.0) * vol[k]).sum())
                for name, q in s['charges'].items()}
     out['main_negative']['carried_c'] = carried
+    return out
+
+
+def ion_charge(s: dict, zh: np.ndarray) -> dict:
+    """The domain's net charge and the charge of each sign the small ions carry (C), and the heights (km) below which
+    10, 50 and 90 % of the ions' charge of either sign lies."""
+    ions = s['charges']['small_ions'] * s['volume']
+    out = dict(net_c=float(np.sum(s['net'] * s['volume'])), ions_positive_c=float(ions[ions > 0].sum()),
+               ions_negative_c=float(ions[ions < 0].sum()))
+    by_level = np.abs(ions).sum(axis=1)
+    if by_level.sum() > 0.0:
+        c = np.cumsum(by_level) / by_level.sum()
+        out['ions_z_km'] = [float(zh[min(np.searchsorted(c, p), zh.size - 1)]) for p in (0.1, 0.5, 0.9)]
     return out
 
 
@@ -317,7 +331,7 @@ def analyse(name: str) -> dict:
         s = snapshot_charge(case, n, dx, dy, zw)
         st = structure(s, zh)
         st.update(time_s=(n - 1) * cfg['output_s'], w_max_m_s=float(np.nanmax(s['w'])) if s['w'] is not None else None,
-                  dbz_max=float(np.nanmax(s['dbz'])) if s['dbz'] is not None else None)
+                  dbz_max=float(np.nanmax(s['dbz'])) if s['dbz'] is not None else None, **ion_charge(s, zh))
         structures.append(st)
     return dict(
         schema=SCHEMA, case=name, purpose=cfg.get('purpose'), electricity=record.get('electricity'),

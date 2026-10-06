@@ -98,6 +98,15 @@ def test_the_main_negative_region_and_the_positive_ones_around_it():
     assert out['upper_positive']['z_km'] == 10.5 and out['lower_positive']['z_km'] == 3.5
     assert out['positive_c'] == pytest.approx(1.5) and out['min_nc_m3'] == pytest.approx(-2.0)
     assert ea.structure(dict(s, net=np.abs(net)), zh).get('main_negative') is None
+    # a positive region at a level that also holds stronger negative charge reports its own, positive, density
+    net[3, 3] = -0.8e-9
+    mixed = ea.structure(dict(s, net=net), zh)
+    assert mixed['lower_positive']['density_nc_m3'] == pytest.approx(0.5)
+    assert mixed['main_negative']['density_nc_m3'] == pytest.approx(-2.0)
+    ions = np.where(np.arange(zh.size)[:, None] == 2, 1.0e-9, 0.0) * np.array([1.0, -1.0, 0.0, 0.0])
+    summary = ea.ion_charge(dict(s, charges=dict(small_ions=ions)), zh)
+    assert summary['ions_positive_c'] == pytest.approx(1.0) and summary['ions_negative_c'] == pytest.approx(-1.0)
+    assert summary['ions_z_km'] == [2.5, 2.5, 2.5]
 
 
 def test_a_window_takes_only_its_own_flashes_charging_and_segments(tmp_path, monkeypatch):

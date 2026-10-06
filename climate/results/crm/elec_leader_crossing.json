@@ -1,5 +1,5 @@
 {
- "schema": "terluna.climate.crm-electricity/1",
+ "schema": "terluna.climate.crm-electricity/2",
  "kind": "leader-crossing",
  "windows": {
   "second_lunar_day": {
@@ -381,13 +381,13 @@
         "z_km": 63.79,
         "t_c": -43.4,
         "charge_c": 28.81,
-        "density_nc_m3": -0.1726
+        "density_nc_m3": 0.1559
        },
        "lower_positive": {
         "z_km": 55.79,
         "t_c": -31.89,
         "charge_c": 66.9,
-        "density_nc_m3": -0.184
+        "density_nc_m3": 0.1658
        },
        "hour": 6.0,
        "graupel_kg": 53230000000.0,
@@ -567,7 +567,7 @@
         "z_km": 55.79,
         "t_c": -32.28,
         "charge_c": -43.47,
-        "density_nc_m3": 0.222,
+        "density_nc_m3": -0.1638,
         "carried_c": {
          "cloud_water": 0.0,
          "rain": 0.0,
@@ -582,7 +582,7 @@
         "z_km": 59.79,
         "t_c": -37.05,
         "charge_c": 315.9,
-        "density_nc_m3": -0.1915
+        "density_nc_m3": 0.1779
        },
        "lower_positive": {
         "z_km": 53.79,
@@ -777,13 +777,13 @@
         "z_km": 59.79,
         "t_c": -37.12,
         "charge_c": 290.5,
-        "density_nc_m3": -0.1956
+        "density_nc_m3": 0.1729
        },
        "lower_positive": {
         "z_km": 51.79,
         "t_c": -26.9,
         "charge_c": 33.31,
-        "density_nc_m3": -0.2563
+        "density_nc_m3": 0.186
        },
        "hour": 36.0,
        "graupel_kg": 53690000000.0,
@@ -1167,7 +1167,7 @@
         "z_km": 49.79,
         "t_c": -24.73,
         "charge_c": 10.73,
-        "density_nc_m3": -0.2049
+        "density_nc_m3": 0.1485
        },
        "lower_positive": {
         "z_km": 20.41,
@@ -1911,7 +1911,7 @@
         "z_km": 59.79,
         "t_c": -37.64,
         "charge_c": 47.89,
-        "density_nc_m3": -0.1997
+        "density_nc_m3": 0.1638
        },
        "lower_positive": {
         "z_km": 18.87,
@@ -2034,7 +2034,7 @@
         "z_km": 57.79,
         "t_c": -34.34,
         "charge_c": -151.3,
-        "density_nc_m3": 0.3991,
+        "density_nc_m3": -0.2242,
         "carried_c": {
          "cloud_water": 0.0,
          "rain": 0.0,
@@ -2327,9 +2327,9 @@
  "producer": {
   "domain": "climate",
   "files": {
-   "crm/elec_analysis.py": "f8d920698e7656bc"
+   "crm/elec_analysis.py": "1ef57ed83efda60f"
   }
  },
  "evidence": "CM1 r22.0 with WRF-ELEC's NSSL two-moment microphysics (MicroTed/wrf4-elec e43041b) and its charging (non-inductive by collisions of graupel and hail with ice and snow, inductive by droplets rebounding from graupel in the field), the small ions' net charge attaching to particles, an FFT field solver, and WRF-ELEC's lightning on its own sub-steps of the sedimentation: the branched scheme (lightmsz, MacGorman, Straka and Ziegler 2001) or the cylindrical one. Charge is carried by bulk particle populations; branched channels run on the model grid and neutralize the charge where they reach; the ground-strike rule, the 50-MV potential and 10-kV/m field a ground flash needs at its start and the nitrogen oxide yield are WRF-ELEC's calibrations for Earth; nothing conducts charge away except where a case turns on leakage, and the ground gives off ions only where a case turns on point discharge (Standler and Winn's 1 nA/m2 at 8 kV/m over Earth's vegetation, its onset scaled by density).",
- "reading_rule": "Times are model seconds from the start. Kinds: 1 in cloud, 2 negative and 3 positive charge to ground (branched flashes), 9 a call of the cylindrical scheme, whose regions are the separate areas one call takes. A flash's positive and negative charge are what it neutralized; a ground flash neutralizes one sign only, the ground supplying the other. Nitrogen oxides are lightmsz's: Wang et al.'s yield per metre of channel at its pressure, times 0.1 where the flash changes the charge by 1 nC/kg or more. Charging rates are the domain's totals of each sign (C/s). Charge densities are nC/m3; heights are above the ground; temperatures are the air's at the level, weighted by the charge there. Each window's runs start from the same restart of box_0e_elec (or are box_0e_elec itself) and differ in the settings listed with each; the runs with the change compared come last. Hours count from the window's start. Separated charge is the domain's charging of both signs integrated over the window (C); graupel is graupel and hail together (kg) at each three-hourly output, where the net charge and the charge on the small ions are also given (C)."
+ "reading_rule": "Times are model seconds from the start. Series are per bin of bin_s seconds from start_s: 5 minutes, or the output interval for runs longer than two days. Kinds: 1 in cloud, 2 negative and 3 positive charge to ground (branched flashes), 9 a call of the cylindrical scheme, whose regions are the separate areas one call takes. A flash's positive and negative charge are what it neutralized; a ground flash neutralizes one sign only, the ground supplying the other. Nitrogen oxides are lightmsz's: Wang et al.'s yield per metre of channel at its pressure, times 0.1 where the flash changes the charge by 1 nC/kg or more. Charging rates are the domain's totals of each sign (C/s). Charge densities are nC/m3; heights are above the ground; temperatures are the air's at the level, weighted by the charge there. Each window's runs start from the same restart of box_0e_elec (or are box_0e_elec itself) and differ in the settings listed with each; the runs with the change compared come last. Hours count from the window's start. Separated charge is the domain's charging of both signs integrated over the window (C); graupel is graupel and hail together (kg) at each three-hourly output, where the net charge and the charge on the small ions are also given (C)."
 }

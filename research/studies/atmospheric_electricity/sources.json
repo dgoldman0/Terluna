@@ -253,7 +253,7 @@
       "id": "S37",
       "citation": "Few (1969), Power spectrum of thunder, J. Geophys. Res. 74, 6926-6934",
       "use": "The peak frequency of thunder from a channel of energy E_l per metre, f_m = 0.63 c0 (p0 / E_l)^(1/2).",
-      "access": "Not read; the relation as search results quote it, checked against the 50-100 Hz peak of Earth's thunder."
+      "access": "Not read in full; its abstract, as the publisher's and ADS records render it in search results (2026-10-06), gives f_m = (0.63) C0 (P0/E_l)^(1/2), the relation used. Few's relaxation radius (E_l/(pi p0))^(1/2), quoted elsewhere, is a separate definition."
     },
     {
       "id": "S38",
