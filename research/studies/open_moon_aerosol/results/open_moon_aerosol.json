@@ -17,7 +17,7 @@
   "climate/gcm/products/climatology_A28_dim5_moon.npz": "3fb185c8087ea9b5",
   "geography/results/drainage.json": "18494e3d3656ead7",
   "geography/results/atlas.json": "78cfbf2f469eb339",
-  "atmosphere/electricity/results/conductivity_moon.json": "74e825ce47ff927f"
+  "atmosphere/electricity/results/conductivity_moon.json": "2430b917a16b08fa"
  },
  "ground": {
   "ion_pairs_per_cm3_s": 0.04104904229626947,

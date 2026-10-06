@@ -102,12 +102,35 @@ def attachment_coefficient(d_m, p_pa, t_k):
     return w_ref * np.asarray(t_k, float) / 293.15 * z / z_ref
 
 
-def aerosol_attachment(radius_um, number_m3, p_pa=101325.0, t_k=293.15, rh=0.0, kappa=KAPPA):
+# The coefficient's scaling with the ions' mobility is the continuum regime's, which holds while the particles are much
+# larger than the ions' mean free path (humid_conductivity.md); as the air thins, attachment grows more slowly toward
+# the kinetic limit, so the scaling overstates it aloft and the column's conductivity there is the lower end of what
+# its particles allow. The bracket of that correction takes Fuchs and Sutugin's transition factor relative to the
+# coefficient's calibration, for an ion mean free path at 1013 hPa and 293 K of 15 nm (Tammet et al.'s transition
+# length d_H) to 50 nm (3D/v for ions of 1.45 cm2/(V s) and 150 u, derived here). The column keeps the continuum
+# scaling until stage 3 rebuilds it with the regional aerosol (the author's decision, 2026-10-06).
+ION_FREE_PATH_BRACKET_M = (15.0e-9, 50.0e-9)
+
+
+def transition_factor(d_m, p_pa, t_k, free_path_m):
+    """The share of the continuum-scaled attachment to particles of diameter d_m that ions achieve at p and T: Fuchs and
+    Sutugin's factor (1 + Kn)/(1 + 1.71 Kn + 1.33 Kn^2), Kn the ions' mean free path (free_path_m at 1013 hPa and
+    293.15 K, scaled as T/p) over the particle radius, divided by its value where the coefficient was calibrated."""
+    fs = lambda kn: (1.0 + kn) / (1.0 + 1.71 * kn + 1.33 * kn ** 2)
+    r = 0.5 * np.asarray(d_m, float)
+    free_path = free_path_m * (101325.0 / np.asarray(p_pa, float)) * (np.asarray(t_k, float) / 293.15)
+    return fs(free_path / r) / fs(free_path_m / r)
+
+
+def aerosol_attachment(radius_um, number_m3, p_pa=101325.0, t_k=293.15, rh=0.0, kappa=KAPPA, free_path_m=None):
     """Attachment rate (1/s) of small ions to aerosol of one dry radius (um), grown at relative humidity rh with
-    hygroscopicity kappa."""
+    hygroscopicity kappa; with free_path_m, corrected for the transition regime (transition_factor)."""
     d_dry = 2.0 * radius_um * 1e-6
     d_wet = d_dry * growth_factor(rh, kappa, d_dry, t_k)
-    return attachment_coefficient(d_wet, p_pa, t_k) * np.asarray(number_m3, float)
+    beta = attachment_coefficient(d_wet, p_pa, t_k)
+    if free_path_m is not None:
+        beta = beta * transition_factor(d_wet, p_pa, t_k, free_path_m)
+    return beta * np.asarray(number_m3, float)
 
 
 def droplet_attachment(t_k, mobility, number_m3, radius_m):
@@ -238,6 +261,9 @@ def moon_column(phi_mv: float = 400.0) -> dict:
         for kappa in KAPPA_BRACKET:
             clear[f'{z_cm3 / 1e6:g}_per_cm3_kappa_{kappa:g}'] = conductivity_of(q_m3, p, t,
                                                                          sink(z_cm3, rh=rh, kappa=kappa))[0]
+        for free_path in ION_FREE_PATH_BRACKET_M:
+            clear[f'{z_cm3 / 1e6:g}_per_cm3_transition_{free_path * 1e9:g}nm'] = conductivity_of(
+                q_m3, p, t, sink(z_cm3, rh=rh, free_path_m=free_path))[0]
     cloud = {}
     for lwc in CLOUD_WATER_G_M3:
         radius = (3.0 * lwc * 1e-3 / (4.0 * np.pi * 1000.0 * DROPLETS_M3)) ** (1.0 / 3.0)
@@ -260,7 +286,10 @@ def main(argv=None) -> int:
                   reading_rule=('Columns are the CM1 equatorial box\'s mean profile (second lunar day). Conductivity is '
                                 'the total of both signs. Clear air is given without aerosol and with 100 and 1000 per cm3 '
                                 'of particles of 0.05-um dry radius, grown at the clear air\'s mean relative humidity with '
-                                'kappa 0.3 (the plain keys), dry (_dry) and with kappa 0.1 and 1.0 (_kappa_); cloud with '
+                                'kappa 0.3 (the plain keys), dry (_dry) and with kappa 0.1 and 1.0 (_kappa_); the plain '
+                                'keys scale the ions\' attachment with their mobility, the continuum regime\'s scaling, '
+                                'and _transition_ corrects it for an ion mean free path of 15 or 50 nm at sea level, a '
+                                'bracket of the conductivity aloft. Cloud has '
                                 '100 droplets per cm3 holding the stated cloud water. '
                                 'Solar minimum and maximum are modulation potentials of 400 and 1000 MV.'),
                   solar_minimum=moon_column(400.0), solar_maximum=moon_column(1000.0))

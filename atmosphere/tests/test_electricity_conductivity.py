@@ -67,3 +67,14 @@ def test_aerosol_grows_with_humidity_as_kappa_koehler_theory_gives():
     # wetter air takes more ions onto its aerosol
     assert cd.aerosol_attachment(0.05, 1e8, rh=0.85) > cd.aerosol_attachment(0.05, 1e8, rh=0.5) > \
         cd.aerosol_attachment(0.05, 1e8)
+
+
+def test_the_transition_correction_leaves_the_calibration_alone_and_slows_attachment_in_thin_air():
+    d = np.array([20e-9, 100e-9, 10e-6])
+    assert cd.transition_factor(d, 101325.0, 293.15, 50e-9) == pytest.approx(np.ones(3))
+    # 50 nm against a 50-nm radius is Kn 1; at half the pressure Kn 2: Fuchs and Sutugin's factors 2/4.04 and 3/9.74
+    assert cd.transition_factor(100e-9, 101325.0 / 2, 293.15, 50e-9) == pytest.approx((3 / 9.74) / (2 / 4.04))
+    thin = cd.transition_factor(d, 30000.0, 230.0, 15e-9)
+    assert np.all(thin < 1.0) and thin[2] == pytest.approx(1.0, abs=0.01)          # large particles stay continuum
+    plain = cd.aerosol_attachment(0.05, 1e8, 30000.0, 230.0, rh=0.6)
+    assert cd.aerosol_attachment(0.05, 1e8, 30000.0, 230.0, rh=0.6, free_path_m=15e-9) < plain

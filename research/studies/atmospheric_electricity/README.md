@@ -311,7 +311,10 @@ Morrison's do.
    from 10 to 50 km. Its aerosol now swells with that humidity (κ-Köhler,
    [S41], with κ 0.3 and 0.1–1.0 as a bracket, [S45]) and takes up ions by a coefficient that scales with pressure ([S42]),
    which lowers clear air's conductivity by 12 % at the ground and 22 % at 34
-   km; the ions' mobility and recombination take no humidity term ([S43],
+   km. That scaling is the continuum regime's and makes the values aloft the
+   low end, 5–12 % low at 34 km and 23–45 % at 70 km; they stand until stage 3
+   rebuilds the column (author, 2026-10-06). The ions' mobility and
+   recombination take no humidity term ([S43],
    [S44]), nor do point discharge's onset ([S51]) or the breakdown field
    ([S52]). A ground strike can now need the leader to cross the 34 km below
    the −7 °C level: it carries on while its tip keeps the potential its

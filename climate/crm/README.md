@@ -1914,6 +1914,16 @@ settings they ran with. The Takahashi windows ran without leakage as well; their
 follows from the law's sign, while their ground strikes carry the same
 leftover charge as `box_0e_elec_ground_rule`'s.
 
+Since 2026-10-05 the leakage takes the conductivity column with the aerosol
+grown by the air's humidity (atmosphere/electricity README, "Humidity"). Its
+ions attach to the particles as in the continuum regime, which overstates the
+attachment as the air thins, so the clear air's conductivity aloft is the low
+end of what the particles allow: corrected for the transition regime it is
+5–12 % higher at 34 km, 12–25 % at 50 km and 23–45 % at 70 km, and the ground
+and cloud are hardly changed. `box_0e_elec_corrected` takes the column as it
+stands; the correction waits for stage 3's rebuild of the column with the
+regional aerosol (the author's decision, 2026-10-06).
+
 ```sh
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_elec_leakage      # and box_0e_elec_leakage_first
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_0e_elec_leakage --threads 4 --hours 6

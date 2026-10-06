@@ -44,7 +44,17 @@ particles per cm³ the clear air then conducts 3.7 × 10⁻¹⁵ S/m at the grou
 7.4 × 10⁻¹⁵ S/m at 34 km, against 4.2 and 9.4 × 10⁻¹⁵ before: the humidity
 takes 12 % at the ground (5–24 % across the κ bracket) and 5 % aloft, the
 pressure scaling 18–30 % from 30 to 50 km. Charge in that air relaxes in 40
-minutes at the ground and 20 at 34 km. The small ions' mobility and
+minutes at the ground and 20 at 34 km. The scaling with mobility is the
+continuum regime's: it holds while the particles are much larger than the
+ions' mean free path, and as the air thins the attachment grows more slowly
+toward its kinetic limit. With Fuchs and Sutugin's transition factor relative
+to the coefficient's sea-level calibration, for an ion mean free path of 15 nm
+(Tammet et al.'s transition length) to 50 nm (derived from the ions' mobility
+and mass) at sea level, the clear air conducts 5–12 % more at 34 km, 12–25 %
+more at 50 km, 23–45 % more at 70 km and 64–71 % more at the column's top
+(the `_transition_` keys), and 1–3 % less at the ground. The column's values
+aloft are therefore the low end, and they stand until stage 3 rebuilds the
+column with the regional aerosol (the author's decision, 2026-10-06). The small ions' mobility and
 recombination take no humidity term: the reference mobilities were measured in
 humid boreal air, at its 80–85 % relative humidity on average (Hõrrak 2001),
 field and laboratory results disagree on any further effect at 1–3 mol % of
