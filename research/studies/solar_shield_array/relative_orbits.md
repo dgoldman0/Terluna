@@ -84,6 +84,69 @@ Montenbruck (2006), flown on PRISMA and TanDEM-X. The minimum separations of
 such relative orbits have closed forms, which turns the layout into a small
 geometric design problem.
 
+### Layout screen: finite patches meet, ring bundles stay clear
+
+[relative_design.py](relative_design.py) screens layouts of parallel 10 km
+squares and writes [results/relative_design.json](results/relative_design.json)
+in about 40 CPU seconds. The screen runs in two steps: first linear relative
+motion over one to three orbits, then ephemeris gravity over two orbits.
+
+Every finite 2D patch with overlapping rows meets a neighbour somewhere in its
+orbit. The geometry behind this is general. Tiles whose projections overlap
+need a normal separation that keeps its sign around the whole orbit.
+
+- **Radial-facing patches** (19 rows by 21 columns). For a common radial-facing
+  attitude, the normal separation of two equal-energy relative orbits averages
+  zero over an orbit. So it changes sign, and at that moment the pair's
+  projections still overlap. Rows layered by relative eccentricity, at 2–10 km
+  in depth with fold steps of 0.2–0.5 km, come within 0.3–2.4 m. Rows layered
+  by semi-major axis come within 0 m, because rows of the same parity converge
+  at the fold.
+- **Sun-facing patches** keep a mean depth separation through the relative
+  eccentricity. Neighbours along a row, though, become coplanar side by side
+  near mid-service and meet at u = −2°.
+
+A ring bundle avoids both problems. Each row is one orbit carrying a string of
+tiles at equal energy, and the rows step outward in radius, so they slide past
+one another and never reassemble. Two conditions keep it clear:
+
+- **Along a ring**, a small shared tilt about the orbit normal makes
+  neighbours overlap like shingles. Their normal separation is p sin α, at
+  pitch p.
+- **Between rings**, the radius step Δr has to beat the tilt across a full
+  tile: Δr cos α − 10 km × sin α ≥ 150 m.
+
+Bundles that meet both conditions stay clear for three linear orbits:
+
+| Radius step, tilt | Minimum surface distance |
+|---|---:|
+| 0.40 km, 1.2° | 178 m |
+| 0.45 km, 1.5° | 188 m |
+| 0.60 km, 2.0° | 251 m |
+
+During service these bundles overlap in projection by at least 0.60 km between
+adjacent rings and 1.15 km along each ring. In projection the 19 by 21 segment
+spans 163 km across-track at the service ends and 163–180 km along-track over
+the service arc. Continuous rings therefore cover their band as long as they
+keep passing.
+
+In ephemeris gravity two further conditions appear:
+
+- **Each ring has to start as time-shifted copies of one trajectory.** Started
+  as two-body circular states, tiles on one ring take up different tidal
+  responses by phase and diverge by up to 290 m in radius within 16 hours.
+- **Each tile has to hold its own attitude**, radial-facing and referenced to
+  its velocity. A shared frame loses the shingle offset to the perturbed
+  orbit's flight-path angle and to the outer rings' slide away from the
+  bundle centre.
+
+With both, a bundle of 19 rings by 21 tiles stays clear for 93 hours of
+ephemeris gravity. The minimum is 170.6 m at a 1.2° tilt and 215.4 m at 1.5°,
+for radius steps of 0.6–1.0 km. The binding pair is the shingle along a ring.
+Adjacent-ring radius steps vary by about ±150 m over that time as the rings
+slide along their slightly eccentric common orbit. Sail force and mutual
+shadows are absent from this replay. The coupled model adds both.
+
 ### Hardware headroom and attitude energy
 
 In the expanded run's executed prefix the installed actuators carry 6.15 times
@@ -177,6 +240,16 @@ finite-square model with mutual shadows and sail force. Verification follows
 the full sequence of service, departure, return, next service and subsequent
 departure, with the existing recurrence gates of 50 m, 0.01 m/s and 1e-4 rad.
 
+**Stage 2a, the layout screen (complete, 6 October).** The screen above shows
+that the 361-tile patch, as a unit that reassembles each orbit, cannot stay
+clear on equal-energy relative orbits. A bundle of ring segments can. The
+author is asked to choose stage 2's local unit (see the open choices). If the
+choice is the ring bundle, the coupled verification runs a segment of about 19
+rings with per-tile radial-facing attitudes, sail force and mutual shadows. It
+checks clearance and strip overlap through service and recurrence over
+consecutive orbits. The radius steps are ordered as a staircase, so that every
+ring has one shadowed edge and the shadow's push on the rings is alike.
+
 **Decision gate.** Suppose the cycle closes every coverage, clearance and
 recurrence gate within about 1.3 m/s per tile per cycle, with attitude energy
 inside the 23.835 TW target. Then the orbiting fleet proceeds to stage 3.
@@ -205,6 +278,7 @@ above.
 
 | Choice | Recommendation |
 |---|---|
+| Stage 2's local unit: the 361-tile patch or a bundle of ring segments | The ring bundle, verified in the coupled model with per-tile attitudes; the decision gate then applies to the bundle's recurrence cost per tile per cycle. Global coverage becomes nested rings whose band strips overlap, with the ring screen of stage 3 following directly |
 | Ring radius, about 15,000 km or near the Sun-synchronous radius | Screen 15,000–21,000 km with the full ephemeris in stage 3, leaning toward about 19,000 km |
 | Attitude scheme | Radial-facing steady rotation for annulus tiles if their coverage holds; Sun-facing service for climate-window tiles, whose transmitted spectrum changes with incidence |
 | Architecture: orbiting fleet or held screen with a zoned aperture | Set by the stage 2 gate |

@@ -11,7 +11,11 @@ The plan redesigns the formation in relative orbital elements, with equal-energy
 coasts and e/i-vector separation, and verifies it in the coupled model against
 the full protection gates. A zoned-aperture and collection study runs alongside.
 Its decision gate chooses between the orbiting fleet and a held screen with a
-zoned aperture.
+zoned aperture. The [layout screen](relative_orbits.md#layout-screen-finite-patches-meet-ring-bundles-stay-clear)
+finds that every finite 2D patch meets a neighbour somewhere in its orbit. A
+bundle of nested ring segments, each ring one orbit of shingled tiles, stays
+clear for two orbits of ephemeris gravity (minimum 215 m). Choosing stage 2's
+local unit is the author's call.
 
 The [expanded coupled-cycle investigation](expanded_cycle.md) adds
 in-plane and arrival-acquisition controls and measures nine full-cycle response
@@ -219,6 +223,7 @@ python -m research.studies.solar_shield_array.publish
 python -m research.studies.solar_shield_array.tacking_screen
 python -m research.studies.solar_shield_array.cycling_replay
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.relative_diagnosis
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.relative_design
 python -m pytest protection/dynamics research/studies/solar_shield_array
 python visualization/solar-shield-array/plot.py
 python visualization/solar-shield-array/cycling_plot.py
