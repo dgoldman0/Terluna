@@ -529,10 +529,17 @@ this order:
 4. Check photon keeping for the ring fleet against the kept run's demand
    ([photon_control.py](photon_control.py); done: it holds on translation and
    not on attitude), and find the frozen common orbit
-   ([frozen_rings.py](frozen_rings.py); done). The attitude scheme comes next.
-5. Compute the annulus film's UV transmission in the protection domain.
+   ([frozen_rings.py](frozen_rings.py); done). Compare the attitude schemes
+   ([attitude_schemes.py](attitude_schemes.py); done: clearance rules out
+   edge-on turns, and a filter centred on each tile holds the attitude with
+   trim). Split the planes' motion into its common and differential parts
+   ([plane_motion.py](plane_motion.py); done).
+5. Compute the annulus film's UV transmission in the protection domain
+   ([annulus_film.py](../../../protection/spectra/annulus_film.py); done:
+   X-rays set the silica).
 6. Validate the bundle with independently propagated tiles, finite squares and
-   receiver rays.
+   receiver rays ([bundle_validation.py](bundle_validation.py); done for a
+   589-tile patch over four orbits).
 7. Redo the keeping in the regressing frame and treat the edge rings, as far as
    the ledger keeps the fleet in contention.
 
@@ -573,9 +580,9 @@ above.
 | Radius step between rings | 1.0 km, which holds clearance under keeping; smaller steps need tighter keeping, and larger ones spread a full disk's rings over more radius |
 | The bundle's edge rings | First, edge tiles whose sail force per unit mass matches the interior's; integral keeping or feedforward of the modelled shadow difference as the fallback |
 | Ring radius, about 15,000 km or near the Sun-synchronous radius | About 19,000–20,000 km: on the frozen eccentricity the strip pattern there moves 2,400–3,400 km over a year, while tilted rings at 15,000 km lag the Sun by 23–28 km a day |
-| Attitude scheme | Compare tiles turned edge-on to the Sun outside service with radial-facing tiles carrying a moving mass. Radial-facing shingled tiles meet a steady shadow torque of about 28,000 N·m that reflectivity trim cannot hold (centre of pressure 1.25 km off centre), and their round-the-orbit push forces large eccentricities on light tiles; edge-on tiles outside service avoid both at the cost of two turns each orbit. Climate-window tiles keep Sun-facing service, whose transmitted spectrum changes with incidence |
+| Attitude scheme | Radial-facing tiles whose redirecting filter covers only the middle of each tile along the ring (the pitch plus about 400 m), with 25% reflectivity trim and a momentum store near 2×10⁹ N·m·s per tile ([integrated comparison](integrated_comparison.md#what-holds-the-ring-fleet-the-attitude)). Edge-on turns collide with the next ring; rolls fit the clearance but halve the push at most for torques of millions of N·m; a moving mass works with 12.5–29% ballast. Climate-window tiles keep Sun-facing service, whose transmitted spectrum changes with incidence |
 | Architecture: orbiting fleet or held screen with a zoned aperture | Set by the integrated comparison ([integrated_comparison.md](integrated_comparison.md)) |
-| Areal-mass targets | Estimates of 10–25 g/m² for the climate window and 7–13 g/m² for the annulus, to be fixed by the annulus film's UV transmission and a structural design. For an orbiting fleet with radial-facing tiles the sail force sets a floor: 5 g/m² tiles are forced to e ≈ 0.4, while tiles near 26 g/m² stay at 0.08–0.15 |
+| Areal-mass targets | Annulus film of 0.1 µm titania on 2–4 µm of silica with the stack's coating layers, 5.8–10.2 g/m², the silica set by the soft X-rays ([integrated comparison](integrated_comparison.md#the-annulus-film)). In a nested ring bundle every ring needs the window rings' sail loading, so annulus tiles come to about 13–15.5 g/m², film and structure; 5 g/m² tiles would be forced to e ≈ 0.4 and cross the window rings |
 | Collection | The dimmer as semitransparent PV, if the climate model accepts a band-selective 5% in place of a flat one |
 | Scheduled gaps | Spend part of the averaged UV-transmission budget on handovers once stage 3 sizes them |
 

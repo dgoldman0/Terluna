@@ -79,6 +79,44 @@ domain's [middle-atmosphere README](../atmosphere/middle_atmosphere/README.md)).
 Regenerate the product with `python -m protection.spectra.short_wave` after
 restoring the inputs.
 
+## Annulus films (2026-10-07)
+
+[spectra/annulus_film.py](spectra/annulus_film.py) writes
+[spectra/annulus_film.json](spectra/annulus_film.json) (schema
+`terluna.protection.annulus-film/1`). Beyond the climate window, the shield's
+aperture out to four lunar radii has to stop the ultraviolet and pass visible
+light. These films use the same two oxides: titania 0.02–1 µm thick on silica
+0.5–10 µm thick, bare and with the stored stack's anti-reflection and matching
+layers. Each is evaluated from 0.1 to 2,500 nm with `model.py`'s thin-film code
+and short_wave's optical constants below 210 nm. It is weighted by the
+quiet-Sun WHI 2008 spectrum below 202 nm and by TSIS-1 above.
+
+| Coated film | Areal mass | Worst, 10–175 nm | Sunlight below 175 nm | Visible passed |
+|---|---:|---:|---:|---:|
+| 0.1 µm titania on 1 µm silica | 3.6 g/m² | 4×10⁻⁷ | 1.1×10⁻⁴ | 98.6% |
+| 0.1 µm titania on 2 µm silica | 5.8 g/m² | 1.4×10⁻⁷ | 3.7×10⁻⁵ | 98.6% |
+| 0.1 µm titania on 4 µm silica | 10.2 g/m² | 1.3×10⁻⁷ | 1.0×10⁻⁵ | 98.7% |
+| Stored stack, 1 µm on 10 µm | 26.9 g/m² | 2×10⁻⁴³ | 6.7×10⁻⁷ | 97.8% |
+
+- **Ultraviolet.** A tenth of a micrometre of titania stops the extreme and far
+  ultraviolet.
+- **Soft X-rays.** Between 2.5 and 10 nm, soft X-rays set the silica.
+- **Hard X-rays.** Below 2.5 nm, hard X-rays pass every film lighter than the
+  stored stack, so they decide each light film's share of the sunlight below
+  175 nm.
+- **Upper-air heat.** The product also gives each film's heat of the upper air.
+  It uses the atmosphere domain's film-heat count, with every transmitted X-ray
+  absorbed above the base, at quiet Sun and at solar maximum. Beside it is the
+  same model's heat for light that passes gaps at O1's swarm levels.
+- **Light pressure.** The reflected and absorbed shares give the light pressure,
+  (2R + A) times S/c: 0.12–0.16 for coated films and about 0.5 for bare ones.
+- **Not modelled.** Normal incidence only. Gaps, pinholes, the support's
+  strength and ageing are not included.
+
+Regenerate it with `python -m protection.spectra.annulus_film` after restoring
+both this domain's inputs and the WHI spectrum
+(`python -m atmosphere.middle_atmosphere.fetch_inputs --download`).
+
 ## The September design report (imported 2026-09-26)
 
 [report.md](report.md) is the package's full design report of 9 September 2026,

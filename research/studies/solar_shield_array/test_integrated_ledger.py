@@ -54,3 +54,20 @@ def test_collector_areas_follow_from_demand_and_conversion():
         area = case['held']['generation_TW']*1e12/(case['conversion']*K.SOLAR_CONSTANT)
         assert np.isclose(case['held']['collector_km2'], area/1e6)
     assert np.isclose(electricity['dimmer_optical_TW'], 586., rtol=.01)
+
+
+def test_nesting_puts_annulus_tiles_at_the_window_tiles_sail_loading():
+    annulus = PRODUCT['annulus']
+    assert PRODUCT['producer']['inputs']['protection/spectra/annulus_film.json'] == il.digest(il.ANNULUS)
+    for film in annulus['films'].values():
+        assert np.isclose(film['matched_tile_g_m2'], 26*film['pressure_coefficient']/annulus['window_pressure_coefficient'])
+        assert film['areal_mass_g_m2'] < film['matched_tile_g_m2'] < 16.
+
+
+def test_the_nestable_fleet_carries_the_planes_oversizing():
+    row = {r['radius_km']: r for r in PRODUCT['ring_fleet']['by_radius']}[20000.]
+    motion = row['plane_motion']
+    assert 1.15 < motion['ring_factor'] < 1.35 < motion['ring_factor_without_steering']
+    for mass in row['matched_annulus'].values():
+        assert mass['oversized_without_steering_Gt'] > mass['oversized_optical_mass_Gt'] > mass['optical_mass_Gt'] > \
+            row['optical_mass_Gt']

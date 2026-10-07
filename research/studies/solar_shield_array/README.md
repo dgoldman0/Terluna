@@ -35,8 +35,16 @@ forces, so it releases no exhaust: along the kept run, tilts of about 2° with
 25% reflectivity trim reach 1.6 times the keeping demand over each orbit
 ([photon_control.py](photon_control.py)). Shingle shadows, though, put a steady
 pitch torque of about 28,000 N·m on every radial-facing tile, which reflectivity
-trim cannot hold; the attitude needs a moving mass, a balanced overlap or tiles
-turned edge-on outside service.
+trim cannot hold. Tiles cannot turn edge-on to the Sun outside service, because
+rings slide past one another 1 km apart and a tile pitched more than a few
+degrees meets the next ring's tiles
+([attitude_schemes.py](attitude_schemes.py)). A redirecting filter centred on
+each tile, covering the 8.5 km pitch plus about 400 m, cuts the steady torque to
+a third. Reflectivity trim then holds it with a momentum store near
+2×10⁹ N·m·s per tile; a moving mass would need 12.5–29% ballast. With every
+tile of a 589-tile patch propagated under its own forces and kept, the patch
+stayed clear and covered every receiver ray through its interior for four
+orbits ([bundle_validation.py](bundle_validation.py)).
 
 A year-long screen finds that the sail force on radial-facing tiles moves
 every ring's sunward crossing by thousands of kilometres. The common orbit
@@ -45,9 +53,21 @@ therefore needs a frozen family, with the steady drift smallest near
 ([frozen_rings.py](frozen_rings.py)): e of 0.04–0.07 for 62.7 g/m² tiles and
 about 0.4 for 5 g/m² tiles, whose perilune then falls inside four lunar radii.
 Starting on it cuts the yearly swing of a ring's sunward crossing two to three
-times, while the planes still move the pattern 2,400–3,400 km near 20,000 km. A
-full ring screen needs about 17–22 million tiles, ten to thirteen times the held
-screen's.
+times. The planes move the pattern in two ways ([plane_motion.py](plane_motion.py)).
+- **A common shift.** The whole pattern moves about 1,600 km each way over a
+  year near 20,000 km, as the Sun swings 5.1° about the Moon's orbit plane that
+  the tide holds the rings to. About 23% more rings cover it.
+- **Tilt differences.** The outer rings precess more slowly. At 15,000 km this
+  tears the strips apart within weeks. Near 20,000 km the interior holds, while
+  the edge strips recede up to 1,600 km a year, beyond photon steering for the
+  outermost rings.
+
+Nested rings need one sail loading, so annulus tiles come to about 13 g/m².
+The protection domain's annulus films stop the extreme and far ultraviolet from
+3.5 g/m², but pass solar X-rays
+([annulus_film.py](../../../protection/spectra/annulus_film.py)). A nestable
+ring screen near 20,000 km needs about 27–33 million tiles and 45–53 Gt, 16–19
+times the held screen's tiles.
 
 A held screen with a zoned aperture needs 32.8–66.5 TW, against the published
 238 TW. Its reaction mass, 51 t/s at the lightest design point, leaves into
@@ -273,6 +293,10 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.exhaust_isolation
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.photon_control
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.frozen_rings
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.attitude_schemes
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.plane_motion
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.bundle_validation
+python -m protection.spectra.annulus_film
 python -m research.studies.solar_shield_array.integrated_ledger
 python -m pytest protection/dynamics research/studies/solar_shield_array
 python visualization/solar-shield-array/plot.py

@@ -361,7 +361,11 @@
         "studies/solar_shield_array/results/integrated_ledger.json",
         "studies/solar_shield_array/results/exhaust_isolation.json",
         "studies/solar_shield_array/results/photon_control.json",
-        "studies/solar_shield_array/results/frozen_rings.json"
+        "studies/solar_shield_array/results/frozen_rings.json",
+        "studies/solar_shield_array/results/attitude_schemes.json",
+        "studies/solar_shield_array/results/plane_motion.json",
+        "studies/solar_shield_array/results/bundle_validation.json",
+        "../protection/spectra/annulus_film.json"
       ],
       "unresolved": [
         "the swarm's UV transmission (3e-5 to 2.6e-3 by design level) rests on untested choices: neighbours held within 1-10 m, cell failures of 1-3% a year covered within a day to a month, holes in the oxide film 1-4 times the particle size",

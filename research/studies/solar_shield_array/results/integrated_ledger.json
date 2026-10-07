@@ -2,7 +2,7 @@
  "schema": "terluna.research.integrated-ledger/1",
  "producer": {
   "files": {
-   "research/studies/solar_shield_array/integrated_ledger.py": "d1ca475a8ea6ff011eeeb7aca4cac434fa79597ff30633bde8991dbe4d4874be",
+   "research/studies/solar_shield_array/integrated_ledger.py": "8bad5ce88ace2d47ad8ce784a4746be97408305ac9dd896684b06ed0c46fbd8c",
    "research/studies/solar_shield_array/run.py": "69e01bf90ca29987f9251f7d1aff5be0c57e909815847cf0cf7a4e94cf3ff9cd",
    "protection/dynamics/optical.py": "06a13ae9f24834876edbc12b513deaa5e3735f02f8249eb57c8996d74ce00b56"
   },
@@ -25,7 +25,11 @@
    "results/ring_keeping.json": "28bb4c2c662c644dba015d24ecef5747589ce1758078c455124db0d3b3cdfb37",
    "results/ring_screen.json": "7aea0d5a13af058333d6ee4d5e1ab522491e83d2321a6bd5a3143e14245302e1",
    "results/photon_control.json": "1ea808e2fa722bdd0e38fde277fe0f2719641f7f16dfe987ffaa1a47d772d14a",
-   "results/frozen_rings.json": "8473d60712ab692344741814853594f6ee2e0896a6777d211778af1bf7ae75aa"
+   "results/frozen_rings.json": "8473d60712ab692344741814853594f6ee2e0896a6777d211778af1bf7ae75aa",
+   "results/attitude_schemes.json": "485cb1ca84437b320cfb2e2555a70d961ab271ebbc1d028cea9641861d839ac8",
+   "results/plane_motion.json": "a601f5be57d38950327199dc2039947add5febb0f50ebe2685f7d11f7010718f",
+   "results/bundle_validation.json": "571aa1ad0c36c0474f160b6bce7fdebfc0e3a21ebf4d48e4517871afc817eade",
+   "protection/spectra/annulus_film.json": "d79e937a2e839352ab093666fff88cbee3d448a2df16025ada933d3cbbd7be24"
   }
  },
  "evidence": "Arithmetic on the named products and on stated requirements and assumptions; no new dynamics. The ring fleet's inventory is an estimate from the bundle's height step, pitch and the covering radius at the ring radius, before any oversizing for the strip pattern's annual motion.",
@@ -133,6 +137,32 @@
       398.3465582625613,
       5652.025956668347
      ]
+    },
+    "plane_motion": {
+     "reference_plane": "moon_orbit",
+     "centred_oversizing_share": 0.19872540706316746,
+     "edge_recession_share": 1.7511682141709781,
+     "overlap_opening_m": 868.7960964812595,
+     "narrower_step_factor": 1.0294032085740026,
+     "ring_factor": 1.2339717802300019,
+     "ring_factor_without_steering": 3.036629958650413,
+     "steering_needed_over_available_max": 21.27
+    },
+    "matched_annulus": {
+     "silica_2_um": {
+      "annulus_tile_g_m2": 12.906445287259556,
+      "mean_sigma_g_m2": 16.277410546117828,
+      "optical_mass_Gt": 27.289169934065594,
+      "oversized_optical_mass_Gt": 33.67406560453797,
+      "oversized_without_steering_Gt": 82.8671109684857
+     },
+     "silica_4_um": {
+      "annulus_tile_g_m2": 13.067817119327248,
+      "mean_sigma_g_m2": 16.397236835237646,
+      "optical_mass_Gt": 27.49005937880219,
+      "oversized_optical_mass_Gt": 33.921957510289,
+      "oversized_without_steering_Gt": 83.4771378747495
+     }
     }
    },
    {
@@ -165,6 +195,32 @@
       716.8626308597424,
       1075.4452975856389
      ]
+    },
+    "plane_motion": {
+     "reference_plane": "moon_orbit",
+     "centred_oversizing_share": 0.22177015043484102,
+     "edge_recession_share": 0.49350649938232594,
+     "overlap_opening_m": 554.8443378232195,
+     "narrower_step_factor": 1.0,
+     "ring_factor": 1.221770150434841,
+     "ring_factor_without_steering": 1.715276649817167,
+     "steering_needed_over_available_max": 6.38
+    },
+    "matched_annulus": {
+     "silica_2_um": {
+      "annulus_tile_g_m2": 12.906445287259556,
+      "mean_sigma_g_m2": 16.303113718359203,
+      "optical_mass_Gt": 34.71294839763222,
+      "oversized_optical_mass_Gt": 42.411244185811995,
+      "oversized_without_steering_Gt": 59.54230983276679
+     },
+     "silica_4_um": {
+      "annulus_tile_g_m2": 13.067817119327248,
+      "mean_sigma_g_m2": 16.422623228110428,
+      "optical_mass_Gt": 34.96741067500375,
+      "oversized_optical_mass_Gt": 42.72213860071619,
+      "oversized_without_steering_Gt": 59.97878303540147
+     }
     }
    },
    {
@@ -197,6 +253,32 @@
       55.90248239152263,
       1146.8358375477249
      ]
+    },
+    "plane_motion": {
+     "reference_plane": "moon_orbit",
+     "centred_oversizing_share": 0.22551537727948742,
+     "edge_recession_share": 0.2298712499491261,
+     "overlap_opening_m": 615.3797525960148,
+     "narrower_step_factor": 1.0012761704266906,
+     "ring_factor": 1.227079343761426,
+     "ring_factor_without_steering": 1.4572439486016835,
+     "steering_needed_over_available_max": 3.26
+    },
+    "matched_annulus": {
+     "silica_2_um": {
+      "annulus_tile_g_m2": 12.906445287259556,
+      "mean_sigma_g_m2": 16.30951850491426,
+      "optical_mass_Gt": 36.57789210317817,
+      "oversized_optical_mass_Gt": 44.88397583814412,
+      "oversized_without_steering_Gt": 53.30291191996169
+     },
+     "silica_4_um": {
+      "annulus_tile_g_m2": 13.067817119327248,
+      "mean_sigma_g_m2": 16.428949078718517,
+      "optical_mass_Gt": 36.8457429683718,
+      "oversized_optical_mass_Gt": 45.21265010203185,
+      "oversized_without_steering_Gt": 53.69323597239284
+     }
     }
    }
   ],
@@ -318,7 +400,219 @@
     "max": 4942.883555138665
    },
    "trim_needed_lit_median": 1.281848344231757
+  },
+  "attitude": {
+   "pitch_allowed_deg": [
+    -3.0,
+    6.0
+   ],
+   "edge_on_pitch": {
+    "clearance": {
+     "min_gap_m": 0.03129010539942145,
+     "at_phase_deg": -142.0,
+     "share_of_orbit_below_clearance": 0.8194444444444444
+    },
+    "eccentricity_drive_over_as_built": 0.3565873335430153
+   },
+   "as_built": {
+    "radiation_pitch_orbit_mean_N_m": 27511.707117013473,
+    "store_trim_25_N_m_s": 15119442515.463774,
+    "store_by_areal_mass_trim_25_N_m_s": {
+     "5_g_m2": 29908499942.891422,
+     "26_g_m2": 23905407084.693645
+    },
+    "eccentricity_drive_over_as_built": 1.0
+   },
+   "centred_filter": {
+    "balanced_240_m": {
+     "radiation_pitch_orbit_mean_N_m": 6297.526222151575,
+     "store_trim_25_N_m_s": 1862048616.8238187,
+     "store_by_areal_mass_trim_25_N_m_s": {
+      "5_g_m2": 1854641557.8283358,
+      "26_g_m2": 1854798835.6768498
+     },
+     "eccentricity_drive_over_as_built": 0.999745081869526
+    },
+    "balanced_400_m": {
+     "radiation_pitch_orbit_mean_N_m": 9230.196931083578,
+     "store_trim_25_N_m_s": 1862269442.7309687,
+     "store_by_areal_mass_trim_25_N_m_s": {
+      "5_g_m2": 1854889117.6042805,
+      "26_g_m2": 1856973063.5295312
+     },
+     "eccentricity_drive_over_as_built": 0.9997994083257735
+    },
+    "balanced_560_m": {
+     "radiation_pitch_orbit_mean_N_m": 12179.349013456143,
+     "store_trim_25_N_m_s": 1862954896.263579,
+     "store_by_areal_mass_trim_25_N_m_s": {
+      "5_g_m2": 2472552374.740305,
+      "26_g_m2": 1866833143.5300756
+     },
+     "eccentricity_drive_over_as_built": 0.9997956380375072
+    }
+   },
+   "rolled": {
+    "rolled_30_deg": {
+     "radiation_pitch_orbit_mean_N_m": 24699.750351947125,
+     "store_trim_25_N_m_s": 57712173290.61236,
+     "store_by_areal_mass_trim_25_N_m_s": {
+      "5_g_m2": 26230741409.469345,
+      "26_g_m2": 29813670816.16182
+     },
+     "eccentricity_drive_over_as_built": 0.8575945163836439,
+     "attitude_torque_p95_N_m": 708002.443478199
+    },
+    "rolled_60_deg": {
+     "radiation_pitch_orbit_mean_N_m": 16813.77652214831,
+     "store_trim_25_N_m_s": 61702594993.52856,
+     "store_by_areal_mass_trim_25_N_m_s": {
+      "5_g_m2": 20423286013.182648,
+      "26_g_m2": 31599920535.398064
+     },
+     "eccentricity_drive_over_as_built": 0.5669578000781735,
+     "attitude_torque_p95_N_m": 1397588.9108243072
+    },
+    "rolled_80_deg": {
+     "radiation_pitch_orbit_mean_N_m": 12555.57964529179,
+     "store_trim_25_N_m_s": 22873986236.88886,
+     "store_by_areal_mass_trim_25_N_m_s": {
+      "5_g_m2": 15609790699.020672,
+      "26_g_m2": 15667179560.638582
+     },
+     "eccentricity_drive_over_as_built": 0.4813133276306677,
+     "attitude_torque_p95_N_m": 1847654.4091681438
+    }
+   },
+   "moving_mass": {
+    "250_m": {
+     "ballast_over_tile_mass": 0.058823529411764705,
+     "store_trim_25_N_m_s": 2187062467.010818
+    },
+    "500_m": {
+     "ballast_over_tile_mass": 0.125,
+     "store_trim_25_N_m_s": 776794755.72193
+    },
+    "1000_m": {
+     "ballast_over_tile_mass": 0.2857142857142857,
+     "store_trim_25_N_m_s": 518352638.03778726
+    },
+    "1500_m": {
+     "ballast_over_tile_mass": 0.5,
+     "store_trim_25_N_m_s": 285819741.4109229
+    },
+    "2000_m": {
+     "ballast_over_tile_mass": 0.8,
+     "store_trim_25_N_m_s": 142866695.3554399
+    },
+    "3000_m": {
+     "ballast_over_tile_mass": 2.0,
+     "store_trim_25_N_m_s": 122930763.80634135
+    }
+   },
+   "steering_crossing_height_km_per_day": 0.7684559436117545,
+   "steering_strip_turn_deg_per_day": 0.0022110960602032006,
+   "tile_areal_mass_kg_m2": 0.06269524894894321,
+   "forced_eccentricity": {
+    "62.7_g_m2": [
+     0.03799840948717241,
+     0.07465475006321613
+    ],
+    "26_g_m2": [
+     0.08450869658726476,
+     0.14647446765779457
+    ],
+    "5_g_m2": [
+     0.37713619686489047,
+     0.475937422973648
+    ]
+   }
+  },
+  "validation": {
+   "orbits": 4,
+   "tiles": 589,
+   "interior_clearance_min_m": 210.8188464681774,
+   "patch_clearance_min_m": 153.19683466063043,
+   "patch_first_below_150_m_h": null,
+   "service_overlaps_min_m": {
+    "along": 1152.0899695895387,
+    "across": 578.688916983916
+   },
+   "rays": {
+    "tested": 819200,
+    "uncovered": 0,
+    "margin_min_m": 293.8906720568093
+   },
+   "keeping_m_s2": {
+    "interior_p95": 1.3024318603157952e-06,
+    "ends_and_edges_p95": 2.860175101979405e-06,
+    "sail": 1.954101825286502e-05
+   }
   }
+ },
+ "annulus": {
+  "films": {
+   "silica_2_um": {
+    "titania_um": 0.1,
+    "silica_um": 2.0,
+    "areal_mass_g_m2": 5.811188096789172,
+    "uv_transmission": {
+     "below_175": 3.744864895109362e-05,
+     "from_2_5_to_175": 3.955414102036821e-06,
+     "max_2_5_to_175": 0.023525988471587586,
+     "max_10_to_175": 1.433689625180112e-07
+    },
+    "upper_air_heat_W_m2": {
+     "quiet": 6.82998764680589e-08,
+     "maximum": 6.826251944760456e-06
+    },
+    "visible_transmission": 0.9864413795720565,
+    "pressure_coefficient": 0.1369572770408061,
+    "matched_tile_g_m2": 12.906445287259556
+   },
+   "silica_4_um": {
+    "titania_um": 0.1,
+    "silica_um": 4.0,
+    "areal_mass_g_m2": 10.211188096789174,
+    "uv_transmission": {
+     "below_175": 1.0185846973654963e-05,
+     "from_2_5_to_175": 1.5566077814658365e-07,
+     "max_2_5_to_175": 0.0017992693701572762,
+     "max_10_to_175": 1.2588215291749742e-07
+    },
+    "upper_air_heat_W_m2": {
+     "quiet": 1.8577228004452996e-08,
+     "maximum": 1.8539705838238072e-06
+    },
+    "visible_transmission": 0.9866826327428855,
+    "pressure_coefficient": 0.13866968089943432,
+    "matched_tile_g_m2": 13.067817119327248
+   }
+  },
+  "window_pressure_coefficient": 0.2759000734753858,
+  "window_stack": {
+   "uv_transmission": {
+    "below_175": 6.706814896792701e-07,
+    "from_2_5_to_175": 1.506993122216272e-12,
+    "max_2_5_to_175": 4.289777226124565e-08,
+    "max_10_to_175": 1.6286598547546137e-43
+   },
+   "upper_air_heat_W_m2": {
+    "quiet": 1.2232073566747498e-09,
+    "maximum": 1.2232073566747498e-07
+   }
+  },
+  "gap_heat_W_m2": {
+   "3e-05": {
+    "quiet": 5.0253147129287394e-08,
+    "maximum": 1.256328678232185e-07
+   },
+   "0.0002": {
+    "quiet": 3.35020980861916e-07,
+    "maximum": 8.375524521547899e-07
+   }
+  },
+  "lightest_euv_fuv": 3.5331880967891722
  },
  "electricity": {
   "dimmer_optical_TW": 585.580315034186,
@@ -894,11 +1188,11 @@
    "gate": "UV transmission (O1, O8)",
    "held_zoned": {
     "state": "open",
-    "evidence": "The 5 g/m2 annulus film is unproven: the 24.8-120 nm opacity proof rests on 22 g/m2 of silica. Continuous area; no panel seams or packing."
+    "evidence": "A tenth of a micrometre of titania with the stack's coating layers stops every wavelength from 10 to 175 nm below 1e-6 from 3.5 g/m2, but light films pass solar X-rays: on 2 um of silica (5.8 g/m2, the 5 g/m2 annulus's class) the film passes 3.7e-05 of the sunlight below 175 nm, on 4 um 1.0e-05, against 6.7e-07 for the window stack and 3e-5 for O1's tight swarm level. Counting every transmitted X-ray as heating the upper air, the thinner film adds 6.8e-06 W/m2 at solar maximum, against 8.4e-07 W/m2 for gaps at the standard level; slant paths above the limb and X-ray depths are the atmosphere domain's to settle. Continuous area; no panel seams or packing."
    },
    "ring_fleet": {
     "state": "open",
-    "evidence": "Projected overlaps stay positive in the kept bundle; receiver-ray coverage, handovers and the annulus film are unproven."
+    "evidence": "With every tile of a 589-tile patch propagated and kept for 4 orbits, none of 819,200 receiver rays through its interior toward the finite Sun went uncovered (least margin 294 m). The annulus film as for the held screen; coverage of a full fleet, its handovers and its edges are unchecked."
    }
   },
   {
@@ -909,7 +1203,7 @@
    },
    "ring_fleet": {
     "state": "open",
-    "evidence": "On a Sun-tracking eccentricity (apolune toward the Sun, e 0.08-0.15 for 26 g/m2 tiles) the sunward crossing radius stays within 845-4,142 km over a year, but the ring planes still move the strip pattern 2,365-3,366 km at 19,000-20,000 km and let tilted rings at 15,000 km drift 23-28 km a day: the pattern needs oversizing or plane steering. 5 g/m2 tiles are forced to e 0.38-0.48, with perilune as low as 2,769 km."
+    "evidence": "On a Sun-tracking eccentricity (apolune toward the Sun, e 0.08-0.15 for 26 g/m2 tiles) the sunward crossing radius stays within 845-4,142 km over a year. The tide holds the ring planes near the Moon's orbit about Earth while the Sun moves 5.1 degrees above and below it, so the whole strip pattern shifts each way about its mean by 1,588 km at 20,000 km, which oversizing covers with 23% more rings. The planes also differ by tilt: at 15,000 km the strips cross within weeks, beyond photon steering by up to 21 times; at 20,000 km, with rings set from the Moon's orbit plane, the interior overlaps hold (the year's largest opening is 615 m per height step against a 604 m overlap), while the edge strips recede by up to 1,619 km over the year, beyond photon steering by 3.3 times for the outermost rings. 5 g/m2 tiles are forced to e 0.38-0.48, with perilune as low as 2,769 km."
    }
   },
   {
@@ -941,8 +1235,8 @@
     "evidence": "Held by continuous thrust, 75.7 TW installed; a tile that loses thrust drifts about 2,713 km in its first day."
    },
    "ring_fleet": {
-    "state": "open",
-    "evidence": "The kept bundle's edges first come within 150 m at day 8.1; interior rings stay at least 213 m apart for 23 days in the one-tile-per-ring model; independently propagated tiles are pending. Shadows within each shingled ring put a steady pitch torque of about 27,560 N m on every tile, its centre of pressure 1.3 km off centre (medians); reflectivity trim cannot hold it, so the attitude needs a moving mass or an overlap whose shadows balance."
+    "state": "conditional",
+    "evidence": "The kept bundle's edges first come within 150 m at day 8.1; interior rings stay at least 213 m apart for 23 days in the one-tile-per-ring model, and with every tile of a 589-tile patch propagated the interior keeps 211 m for 4 orbits. In a bundle of sliding rings a tile may pitch only -3 to +6 degrees from radial-facing, so edge-on turns are ruled out. A filter centred on each tile (the pitch plus 400 m) cuts the steady pitch torque from 27,512 to 9,230 N m, and 25% reflectivity trim then holds it with a momentum store of 1.9e+09 N m s per tile: met if the centred filter, the trim and the store are built and the along-track keeping holds each tile within its overlap."
    }
   },
   {
@@ -953,7 +1247,7 @@
    },
    "ring_fleet": {
     "state": "conditional",
-    "evidence": "Photon keeping releases nothing. Along the kept run, tilts up to 2 degrees with 25% reflectivity trim reach 1.6 times the keeping demand over each orbit, 63% of it at the instant asked, and the edge rings need 5 degrees; met if a phase-scheduled law delivers it and the attitude actuator releases nothing. The same control by electric thrust would release 414 kg/s at 15,000 km, at or inside the planned magnetosphere."
+    "evidence": "Photon keeping releases nothing. Along the kept run, tilts up to 2 degrees with 25% reflectivity trim reach 1.6 times the keeping demand over each orbit, 63% of it at the instant asked, and the edge rings need 5 degrees; met if a phase-scheduled law delivers it. The attitude is held by trim and a momentum store, which release nothing. The same control by electric thrust would release 414 kg/s at 15,000 km, at or inside the planned magnetosphere."
    }
   },
   {
@@ -975,7 +1269,7 @@
    },
    "ring_fleet": {
     "state": "open",
-    "evidence": "Its own load is the attitude energy, still open; collectors on tiles or free-flying carry no holding cost."
+    "evidence": "Its own loads are reflectivity trim and a momentum store near 2e+09 N m s per tile, neither sized for power yet; collectors on tiles or free-flying carry no holding cost."
    }
   }
  ]

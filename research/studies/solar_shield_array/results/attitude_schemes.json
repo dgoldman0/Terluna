@@ -1,0 +1,1418 @@
+{
+ "schema": "terluna.research.attitude-schemes/1",
+ "producer": {
+  "files": {
+   "research/studies/solar_shield_array/attitude_schemes.py": "49755642d47a251fb60af26f3d8280a079c1847f874cc73c5fa49f693a0411e8",
+   "protection/dynamics/tile_torque.py": "448a9ee6db481c18252196045cc53ad48733aacb9f8fc2620db8eae10acd6cbf",
+   "research/studies/solar_shield_array/frozen_rings.py": "594f800c86e000a33db1f9e19eb9afc4ca83dda598e7db78d78e51ffe8769813",
+   "research/studies/solar_shield_array/ring_keeping_run.py": "b9f3809148de21769bde3b7ab72fe7dff62ac9f6635aed3a2a51fc6639a7546c",
+   "protection/dynamics/ring_keeping.py": "896efabc6f6dae22f450885f83d7ae1a79317b00b1fa0c842fe79eb687bf3089",
+   "research/studies/solar_shield_array/ring_bundle_run.py": "f6b7e6a11513d852ab46d84123a3ca702feb9cf6e060da7b381bc997808b984d",
+   "protection/dynamics/ring_bundle.py": "05543a75524dd0d3c9cbbb6aa0dc0b02d8d5a0d156c943b6d794184f3ecfb98d",
+   "protection/dynamics/eclipse_parallel.py": "ff258fe914b92e8e954b2728739b4994c4c2ba0962a18fbee42b5b1600331557",
+   "protection/dynamics/eclipse_parallel.cpp": "dd5c9a7ee554e434e7c617daf35d89b186528e903fe208f2f71c97a53f5e5ebe",
+   "protection/dynamics/fast_parallel.py": "5033fef27ed6f0653e9b227da20b4e0fde910449a8231dfa6a03434e1af0d3a7",
+   "protection/dynamics/fast_parallel.cpp": "a7d4268bc37cbfbbe04ecd388cb1926eaddc9c449ec11f153cf88b13c8360c4e",
+   "protection/dynamics/natural_pattern.py": "780c2679f13c097c07b89e9d7cce1c91399f464f01b4bd878fb50cb643e1be29",
+   "protection/dynamics/cycling.py": "704fbd03c9d4070ea05bdfeba57914ec225941f3560710da2472bd24ca870ed4",
+   "protection/dynamics/ephemeris.py": "9a162c3acf63a844284eb61b444a7d34f1447b5182d254d3e87616516f8748d9",
+   "protection/dynamics/relative_orbit.py": "b73a50b4b5137ef0d69b65e44097e32f26abb1372d89104fb979a7f876034565"
+  },
+  "constants": {
+   "AU": 149597870700.0,
+   "EARTH_GM": 398600441800000.0,
+   "EARTH_MOON_DISTANCE": 384400000.0,
+   "EARTH_OBLIQUITY_DEG": 23.4393,
+   "EARTH_RADIUS": 6371000.0,
+   "JULIAN_DAY": 86400.0,
+   "MOON_GM": 4902800118000.0,
+   "MOON_RADIUS": 1737400.0,
+   "SOLAR_CONSTANT": 1361.0,
+   "SOLAR_SYSTEM_GM": {
+    "mercury": 22031868551000.0,
+    "venus": 324858592000000.0,
+    "mars": 42828375816000.0,
+    "jupiter": 1.267127641e+17,
+    "saturn": 3.79405848418e+16,
+    "uranus": 5794556400000000.0,
+    "neptune": 6836527100580000.0,
+    "pluto": 975500000000.0
+   },
+   "SPEED_OF_LIGHT": 299792458.0,
+   "SUN_GM": 1.3271244004127942e+20,
+   "SUN_RADIUS": 695700000.0
+  },
+  "inputs": {
+   "results/ring_keeping.json": "28bb4c2c662c644dba015d24ecef5747589ce1758078c455124db0d3b3cdfb37",
+   "results/joint_seed.json": "53060741b22d7a1768e6661899e98db9f48ceec966e8cc052b3ff2ab0bfedcf8",
+   "results/ring_bundle.json": "d51b6e19f0f3698faf44dffe4c2e1d4631c5ec629258d82966e48c51764955c9",
+   "results/frozen_rings.json": "8473d60712ab692344741814853594f6ee2e0896a6777d211778af1bf7ae75aa",
+   "de440s.bsp": "c1c7feeab882263fc493a9d5a5b2ddd71b54826cdf65d8d17a76126b260a49f2"
+  }
+ },
+ "evidence": "Clearance: parallel 10 km squares sharing each attitude, the tile's own ring at 8.5 km pitch with the 1.5 degree shingle, and the three nearest rings on each side at 1 km radius steps and the bundle's height step times the cosine of the phase, at every along-track offset in 10 m steps. Schemes: the twelve kept orbits of ring_keeping_run (run key in kept_run_key), every second five-minute sample, with the bundle's copies, 8 solar points and Moon and Earth eclipses; filter rectangles by exact in-plane scaling of the parallel shadow union (full squares inside body eclipses); gravity torque by tile_torque's 3x3 quadrature in the common frame; the attitude's own torque from finite differences of each tile's commanded frames at every sample. Push: orbit-averaged Gauss rates in the Sun frame.",
+ "reading_rule": "A scheme holds attitude where the orbit-mean required torque is within trim and the store stays small; it is safe only where its law keeps the clearance. The forced eccentricity of a scheme is frozen_rings' value times its drive over the as-built drive. Gravity and the attitude's own torque scale with areal mass; radiation torque and trim do not.",
+ "design": {
+  "every": 2,
+  "suns": 8,
+  "rotation": 0.317,
+  "clearance_m": 150.0,
+  "neighbour_rings": 3,
+  "slip_step_m": 10.0,
+  "envelope_phases_deg": [
+   0.0,
+   25.0,
+   45.0,
+   60.0,
+   80.0,
+   90.0,
+   100.0,
+   135.0,
+   180.0
+  ],
+  "service_half_angle_deg": 25.0,
+  "filter_overlaps_m": [
+   200.0,
+   400.0,
+   800.0
+  ],
+  "design_overlap_m": 400.0,
+  "roll_deg": [
+   30.0,
+   60.0,
+   80.0
+  ],
+  "roll_ramp_deg": 30.0,
+  "steer_roll_deg": 35.26,
+  "ballast_reach_m": [
+   250.0,
+   500.0,
+   1000.0,
+   1500.0,
+   2000.0,
+   3000.0
+  ],
+  "ballast_travel_m": 4500.0,
+  "trim_levels": [
+   0.1,
+   0.25
+  ],
+  "unload_s": 3600.0,
+  "areal_masses_kg_m2": [
+   0.005,
+   0.026
+  ],
+  "turn_deg": 65.0,
+  "turn_torques_N_m": [
+   30000.0,
+   100000.0,
+   1000000.0
+  ]
+ },
+ "kept_run_key": "e48af25669c9186f",
+ "period_h": 45.78826097966512,
+ "tile_areal_mass_kg_m2": 0.06269524894894321,
+ "radius_km": 14999.12475008752,
+ "height_step_m": 9286.45624348251,
+ "tide_spacing_range_m": [
+  8340.246672255593,
+  8656.145142137491
+ ],
+ "clearance": {
+  "envelope": [
+   {
+    "phase_deg": 0.0,
+    "pitch_allowed_deg": [
+     [
+      -3.0,
+      0.0
+     ],
+     [
+      3.0,
+      6.0
+     ]
+    ],
+    "roll_allowed_deg": [
+     [
+      -90.0,
+      3.0
+     ],
+     [
+      9.0,
+      90.0
+     ]
+    ]
+   },
+   {
+    "phase_deg": 25.0,
+    "pitch_allowed_deg": [
+     [
+      -3.0,
+      0.0
+     ],
+     [
+      3.0,
+      6.0
+     ]
+    ],
+    "roll_allowed_deg": [
+     [
+      -90.0,
+      3.0
+     ],
+     [
+      10.0,
+      90.0
+     ]
+    ]
+   },
+   {
+    "phase_deg": 45.0,
+    "pitch_allowed_deg": [
+     [
+      -3.0,
+      0.0
+     ],
+     [
+      3.0,
+      6.0
+     ]
+    ],
+    "roll_allowed_deg": [
+     [
+      -90.0,
+      5.0
+     ],
+     [
+      13.0,
+      90.0
+     ]
+    ]
+   },
+   {
+    "phase_deg": 60.0,
+    "pitch_allowed_deg": [
+     [
+      -3.0,
+      0.0
+     ],
+     [
+      3.0,
+      6.0
+     ]
+    ],
+    "roll_allowed_deg": [
+     [
+      -90.0,
+      7.0
+     ],
+     [
+      18.0,
+      90.0
+     ]
+    ]
+   },
+   {
+    "phase_deg": 80.0,
+    "pitch_allowed_deg": [
+     [
+      -3.0,
+      0.0
+     ],
+     [
+      3.0,
+      6.0
+     ]
+    ],
+    "roll_allowed_deg": [
+     [
+      -90.0,
+      19.0
+     ],
+     [
+      45.0,
+      90.0
+     ]
+    ]
+   },
+   {
+    "phase_deg": 90.0,
+    "pitch_allowed_deg": [
+     [
+      -3.0,
+      0.0
+     ],
+     [
+      3.0,
+      6.0
+     ]
+    ],
+    "roll_allowed_deg": [
+     [
+      -65.0,
+      65.0
+     ]
+    ]
+   },
+   {
+    "phase_deg": 100.0,
+    "pitch_allowed_deg": [
+     [
+      -3.0,
+      0.0
+     ],
+     [
+      3.0,
+      6.0
+     ]
+    ],
+    "roll_allowed_deg": [
+     [
+      -90.0,
+      -45.0
+     ],
+     [
+      -19.0,
+      90.0
+     ]
+    ]
+   },
+   {
+    "phase_deg": 135.0,
+    "pitch_allowed_deg": [
+     [
+      -3.0,
+      0.0
+     ],
+     [
+      3.0,
+      6.0
+     ]
+    ],
+    "roll_allowed_deg": [
+     [
+      -90.0,
+      -13.0
+     ],
+     [
+      -5.0,
+      90.0
+     ]
+    ]
+   },
+   {
+    "phase_deg": 180.0,
+    "pitch_allowed_deg": [
+     [
+      -3.0,
+      0.0
+     ],
+     [
+      3.0,
+      6.0
+     ]
+    ],
+    "roll_allowed_deg": [
+     [
+      -90.0,
+      -9.0
+     ],
+     [
+      -3.0,
+      90.0
+     ]
+    ]
+   }
+  ],
+  "laws": {
+   "as_built": {
+    "min_gap_m": 222.5040606169218,
+    "at_phase_deg": -180.0,
+    "share_of_orbit_below_clearance": 0.0
+   },
+   "rolled_30_deg": {
+    "min_gap_m": 222.5040606169218,
+    "at_phase_deg": -180.0,
+    "share_of_orbit_below_clearance": 0.0
+   },
+   "rolled_60_deg": {
+    "min_gap_m": 222.50406061692178,
+    "at_phase_deg": -111.0,
+    "share_of_orbit_below_clearance": 0.0
+   },
+   "rolled_80_deg": {
+    "min_gap_m": 222.50406061692178,
+    "at_phase_deg": -118.00000000000001,
+    "share_of_orbit_below_clearance": 0.0
+   },
+   "steering": {
+    "min_gap_m": 222.50406061692178,
+    "at_phase_deg": 45.0,
+    "share_of_orbit_below_clearance": 0.0
+   },
+   "edge_on_pitch": {
+    "min_gap_m": 0.03129010539942145,
+    "at_phase_deg": -142.0,
+    "share_of_orbit_below_clearance": 0.8194444444444444
+   }
+  },
+  "day_roll_sign": -1.0
+ },
+ "schemes": {
+  "as_built": {
+   "sail_force_N": {
+    "median": 28.469366518952267,
+    "p95": 96.26586110265065,
+    "max": 114.47176254246907
+   },
+   "radiation_torque_N_m": {
+    "median": 52759.66384082281,
+    "p95": 89487.23696894324,
+    "max": 105553.8151160417
+   },
+   "radiation_orbit_mean_N_m": {
+    "roll": 2413.788836053167,
+    "pitch": 27511.707117013473
+   },
+   "gravity_torque_N_m": {
+    "median": 6006.369275662791,
+    "p95": 15832.312106347734,
+    "max": 24728.36101283168
+   },
+   "attitude_torque_N_m": {
+    "median": 931.5886958439181,
+    "p95": 2330.196885936058,
+    "max": 4956.8683482954975
+   },
+   "required_torque_N_m": {
+    "median": 49720.59902560726,
+    "p95": 87213.4128606703,
+    "max": 108236.89057139326
+   },
+   "required_orbit_mean_N_m": {
+    "roll": 2409.568480432822,
+    "pitch": 21658.932983052844,
+    "normal": 7.032547866532507
+   },
+   "pressure_centre_offset_m": {
+    "median": 1252.8355701117673,
+    "p95": 3126.7838664483484
+   },
+   "trim_needed_lit": {
+    "median": 1.3806552997153523,
+    "p95": 48.26670381232706
+   },
+   "store_N_m_s": {
+    "trim_0.1": {
+     "median": 27328004930.83904,
+     "max": 38234184217.30092
+    },
+    "trim_0.25": {
+     "median": 15119442515.463774,
+     "max": 24278776908.341713
+    }
+   },
+   "eccentricity_drive": {
+    "per_s": 9.343432880508204e-09,
+    "over_as_built": 1.0
+   },
+   "crossing_height_rate_km_per_day": {
+    "median": 2.2207789902199517e-18,
+    "min": -6.912457759157942e-17,
+    "max": 4.8960961535596944e-17
+   },
+   "strip_turn_deg_per_day": {
+    "median": 4.002736670987131e-21,
+    "min": -3.999360729794665e-19,
+    "max": 3.114421092415391e-19
+   },
+   "by_areal_mass": {
+    "5_g_m2": {
+     "store_N_m_s": {
+      "trim_0.1": 43807356246.84511,
+      "trim_0.25": 29908499942.891422
+     },
+     "required_orbit_mean_N_m": 27092.02468096643
+    },
+    "26_g_m2": {
+     "store_N_m_s": {
+      "trim_0.1": 37146590356.41524,
+      "trim_0.25": 23905407084.693645
+     },
+     "required_orbit_mean_N_m": 25202.774444325987
+    }
+   }
+  },
+  "balanced_200_m": {
+   "sail_force_N": {
+    "median": 28.450086543454045,
+    "p95": 96.2440315655311,
+    "max": 101.24702293695667
+   },
+   "radiation_torque_N_m": {
+    "median": 33431.44061690167,
+    "p95": 79938.04893675639,
+    "max": 99811.06502969885
+   },
+   "radiation_orbit_mean_N_m": {
+    "roll": 2486.9204796522463,
+    "pitch": 5578.1407756970075
+   },
+   "gravity_torque_N_m": {
+    "median": 6006.369275662791,
+    "p95": 15832.312106347734,
+    "max": 24728.36101283168
+   },
+   "attitude_torque_N_m": {
+    "median": 931.5886958439181,
+    "p95": 2330.196885936058,
+    "max": 4956.8683482954975
+   },
+   "required_torque_N_m": {
+    "median": 32473.083246154336,
+    "p95": 79559.14428421464,
+    "max": 99665.51882168971
+   },
+   "required_orbit_mean_N_m": {
+    "roll": 2482.4461634401914,
+    "pitch": 2232.8226425650428,
+    "normal": 7.032547866532507
+   },
+   "pressure_centre_offset_m": {
+    "median": 1029.4017352223348,
+    "p95": 2941.7421389351953
+   },
+   "trim_needed_lit": {
+    "median": 1.3765542847825651,
+    "p95": 45.14054771277972
+   },
+   "store_N_m_s": {
+    "trim_0.1": {
+     "median": 2357138908.79752,
+     "max": 5031617979.050208
+    },
+    "trim_0.25": {
+     "median": 1862065475.4509408,
+     "max": 1911622574.9722157
+    }
+   },
+   "eccentricity_drive": {
+    "per_s": 9.340487041377584e-09,
+    "over_as_built": 0.9996847155463849
+   },
+   "crossing_height_rate_km_per_day": {
+    "median": 2.58273243082079e-18,
+    "min": -5.4658978225464674e-17,
+    "max": 4.951527182910615e-17
+   },
+   "strip_turn_deg_per_day": {
+    "median": 3.963277044474461e-21,
+    "min": -3.7616941337879683e-19,
+    "max": 4.297646684909247e-19
+   },
+   "by_areal_mass": {
+    "5_g_m2": {
+     "store_N_m_s": {
+      "trim_0.1": 3062852917.0391455,
+      "trim_0.25": 1850921858.3590152
+     },
+     "required_orbit_mean_N_m": 5935.544540952287
+    },
+    "26_g_m2": {
+     "store_N_m_s": {
+      "trim_0.1": 2365986594.685175,
+      "trim_0.25": 1853047811.6165564
+     },
+     "required_orbit_mean_N_m": 3899.9221542043083
+    }
+   }
+  },
+  "balanced_240_m": {
+   "sail_force_N": {
+    "median": 28.453643850779724,
+    "p95": 96.24400350745294,
+    "max": 101.24736450527026
+   },
+   "radiation_torque_N_m": {
+    "median": 33918.53337276482,
+    "p95": 80100.80341710632,
+    "max": 99811.06502969885
+   },
+   "radiation_orbit_mean_N_m": {
+    "roll": 2487.3438741143946,
+    "pitch": 6297.526222151575
+   },
+   "gravity_torque_N_m": {
+    "median": 6006.369275662791,
+    "p95": 15832.312106347734,
+    "max": 24728.36101283168
+   },
+   "attitude_torque_N_m": {
+    "median": 931.5886958439181,
+    "p95": 2330.196885936058,
+    "max": 4956.8683482954975
+   },
+   "required_torque_N_m": {
+    "median": 32698.397008385786,
+    "p95": 79729.60781192713,
+    "max": 99665.51882168971
+   },
+   "required_orbit_mean_N_m": {
+    "roll": 2483.5932019996226,
+    "pitch": 2260.1256936713003,
+    "normal": 7.032547866532507
+   },
+   "pressure_centre_offset_m": {
+    "median": 1032.3345522111342,
+    "p95": 2956.8017215458653
+   },
+   "trim_needed_lit": {
+    "median": 1.3774092275828198,
+    "p95": 45.33884575595425
+   },
+   "store_N_m_s": {
+    "trim_0.1": {
+     "median": 2366060404.244396,
+     "max": 4333666491.868986
+    },
+    "trim_0.25": {
+     "median": 1862048616.8238187,
+     "max": 1878952596.2659845
+    }
+   },
+   "eccentricity_drive": {
+    "per_s": 9.341051070066096e-09,
+    "over_as_built": 0.999745081869526
+   },
+   "crossing_height_rate_km_per_day": {
+    "median": 3.660262132804822e-18,
+    "min": -4.8217162077037364e-17,
+    "max": 4.4509021525954366e-17
+   },
+   "strip_turn_deg_per_day": {
+    "median": 8.798857000185018e-21,
+    "min": -3.610691285409474e-19,
+    "max": 4.74658552004614e-19
+   },
+   "by_areal_mass": {
+    "5_g_m2": {
+     "store_N_m_s": {
+      "trim_0.1": 4011317313.2145348,
+      "trim_0.25": 1854641557.8283358
+     },
+     "required_orbit_mean_N_m": 6566.455027261942
+    },
+    "26_g_m2": {
+     "store_N_m_s": {
+      "trim_0.1": 2368863742.314671,
+      "trim_0.25": 1854798835.6768498
+     },
+     "required_orbit_mean_N_m": 4475.762270471601
+    }
+   }
+  },
+  "balanced_400_m": {
+   "sail_force_N": {
+    "median": 28.45723798776992,
+    "p95": 96.25461022886734,
+    "max": 103.01552207269654
+   },
+   "radiation_torque_N_m": {
+    "median": 36591.93921615949,
+    "p95": 80623.70523516757,
+    "max": 99811.06502969885
+   },
+   "radiation_orbit_mean_N_m": {
+    "roll": 2455.0031044737884,
+    "pitch": 9230.196931083578
+   },
+   "gravity_torque_N_m": {
+    "median": 6006.369275662791,
+    "p95": 15832.312106347734,
+    "max": 24728.36101283168
+   },
+   "attitude_torque_N_m": {
+    "median": 931.5886958439181,
+    "p95": 2330.196885936058,
+    "max": 4956.8683482954975
+   },
+   "required_torque_N_m": {
+    "median": 34337.6342657761,
+    "p95": 79994.29719453436,
+    "max": 99665.51882168971
+   },
+   "required_orbit_mean_N_m": {
+    "roll": 2451.49802148403,
+    "pitch": 3654.831490125588,
+    "normal": 7.032547866532507
+   },
+   "pressure_centre_offset_m": {
+    "median": 1047.3316289036793,
+    "p95": 3018.430866310427
+   },
+   "trim_needed_lit": {
+    "median": 1.3796248892285723,
+    "p95": 45.190940997822054
+   },
+   "store_N_m_s": {
+    "trim_0.1": {
+     "median": 2547152068.225083,
+     "max": 4063005262.6415906
+    },
+    "trim_0.25": {
+     "median": 1862269442.7309687,
+     "max": 1879199418.272209
+    }
+   },
+   "eccentricity_drive": {
+    "per_s": 9.34155866566368e-09,
+    "over_as_built": 0.9997994083257735
+   },
+   "crossing_height_rate_km_per_day": {
+    "median": 1.5812521445453725e-18,
+    "min": -4.553119483593234e-17,
+    "max": 4.8581069488351877e-17
+   },
+   "strip_turn_deg_per_day": {
+    "median": 2.104057744449575e-21,
+    "min": -4.3189972645094517e-19,
+    "max": 4.803344920926728e-19
+   },
+   "by_areal_mass": {
+    "5_g_m2": {
+     "store_N_m_s": {
+      "trim_0.1": 9052285659.30495,
+      "trim_0.25": 1854889117.6042805
+     },
+     "required_orbit_mean_N_m": 9236.699843556133
+    },
+    "26_g_m2": {
+     "store_N_m_s": {
+      "trim_0.1": 4649796422.756472,
+      "trim_0.25": 1856973063.5295312
+     },
+     "required_orbit_mean_N_m": 7087.874817045609
+    }
+   }
+  },
+  "balanced_560_m": {
+   "sail_force_N": {
+    "median": 28.467784878176563,
+    "p95": 96.2577841378697,
+    "max": 104.8670356839729
+   },
+   "radiation_torque_N_m": {
+    "median": 40363.1441416199,
+    "p95": 81185.73352496809,
+    "max": 99811.06502969885
+   },
+   "radiation_orbit_mean_N_m": {
+    "roll": 2436.7257109478123,
+    "pitch": 12179.349013456143
+   },
+   "gravity_torque_N_m": {
+    "median": 6006.369275662791,
+    "p95": 15832.312106347734,
+    "max": 24728.36101283168
+   },
+   "attitude_torque_N_m": {
+    "median": 931.5886958439181,
+    "p95": 2330.196885936058,
+    "max": 4956.8683482954975
+   },
+   "required_torque_N_m": {
+    "median": 36988.117247340066,
+    "p95": 80365.43943229687,
+    "max": 99702.90316189194
+   },
+   "required_orbit_mean_N_m": {
+    "roll": 2438.345217509297,
+    "pitch": 6291.47372093609,
+    "normal": 7.032547866532507
+   },
+   "pressure_centre_offset_m": {
+    "median": 1068.966917462353,
+    "p95": 3071.773962356455
+   },
+   "trim_needed_lit": {
+    "median": 1.38017112971445,
+    "p95": 45.33246958496729
+   },
+   "store_N_m_s": {
+    "trim_0.1": {
+     "median": 4552340205.363877,
+     "max": 8751424495.049965
+    },
+    "trim_0.25": {
+     "median": 1862954896.263579,
+     "max": 1886682248.6257424
+    }
+   },
+   "eccentricity_drive": {
+    "per_s": 9.341523438228323e-09,
+    "over_as_built": 0.9997956380375072
+   },
+   "crossing_height_rate_km_per_day": {
+    "median": 1.4149201329583542e-18,
+    "min": -4.677455182886062e-17,
+    "max": 4.850903650606455e-17
+   },
+   "strip_turn_deg_per_day": {
+    "median": 1.3288016743489414e-20,
+    "min": -3.834090621931943e-19,
+    "max": 5.048807481302305e-19
+   },
+   "by_areal_mass": {
+    "5_g_m2": {
+     "store_N_m_s": {
+      "trim_0.1": 14586161317.9093,
+      "trim_0.25": 2472552374.740305
+     },
+     "required_orbit_mean_N_m": 12009.366306601754
+    },
+    "26_g_m2": {
+     "store_N_m_s": {
+      "trim_0.1": 8604268585.557568,
+      "trim_0.25": 1866833143.5300756
+     },
+     "required_orbit_mean_N_m": 9938.488693896168
+    }
+   }
+  },
+  "balanced_800_m": {
+   "sail_force_N": {
+    "median": 28.467091508336786,
+    "p95": 96.26159245057755,
+    "max": 107.64430610088745
+   },
+   "radiation_torque_N_m": {
+    "median": 45144.25077825219,
+    "p95": 82566.05591617494,
+    "max": 100407.06534334613
+   },
+   "radiation_orbit_mean_N_m": {
+    "roll": 2423.927905808976,
+    "pitch": 16657.052632883133
+   },
+   "gravity_torque_N_m": {
+    "median": 6006.369275662791,
+    "p95": 15832.312106347734,
+    "max": 24728.36101283168
+   },
+   "attitude_torque_N_m": {
+    "median": 931.5886958439181,
+    "p95": 2330.196885936058,
+    "max": 4956.8683482954975
+   },
+   "required_torque_N_m": {
+    "median": 41638.7773559925,
+    "p95": 81332.91056392265,
+    "max": 101013.41557766157
+   },
+   "required_orbit_mean_N_m": {
+    "roll": 2421.219486910879,
+    "pitch": 10687.88094050635,
+    "normal": 7.032547866532507
+   },
+   "pressure_centre_offset_m": {
+    "median": 1111.0271167025155,
+    "p95": 3109.054747702161
+   },
+   "trim_needed_lit": {
+    "median": 1.3803793935021555,
+    "p95": 46.010176360989846
+   },
+   "store_N_m_s": {
+    "trim_0.1": {
+     "median": 9904840502.515955,
+     "max": 17273694964.492992
+    },
+    "trim_0.25": {
+     "median": 1907663074.455424,
+     "max": 4612928977.984181
+    }
+   },
+   "eccentricity_drive": {
+    "per_s": 9.341748793558749e-09,
+    "over_as_built": 0.9998197571523237
+   },
+   "crossing_height_rate_km_per_day": {
+    "median": 2.3337368514936133e-18,
+    "min": -6.160798266498802e-17,
+    "max": 4.2219942679042265e-17
+   },
+   "strip_turn_deg_per_day": {
+    "median": 1.1882836222490971e-20,
+    "min": -3.330910232565377e-19,
+    "max": 3.759428797350571e-19
+   },
+   "by_areal_mass": {
+    "5_g_m2": {
+     "store_N_m_s": {
+      "trim_0.1": 22992176499.189533,
+      "trim_0.25": 9877051188.18723
+     },
+     "required_orbit_mean_N_m": 16316.562304574232
+    },
+    "26_g_m2": {
+     "store_N_m_s": {
+      "trim_0.1": 16992623743.971733,
+      "trim_0.25": 5369829385.410281
+     },
+     "required_orbit_mean_N_m": 14342.447368522577
+    }
+   }
+  },
+  "rolled_30_deg": {
+   "sail_force_N": {
+    "median": 24.950486555119948,
+    "p95": 94.64426104454698,
+    "max": 114.47176254246907
+   },
+   "radiation_torque_N_m": {
+    "median": 37428.05822553893,
+    "p95": 82963.54991260487,
+    "max": 105553.8151160417
+   },
+   "radiation_orbit_mean_N_m": {
+    "roll": 9307.876373704068,
+    "pitch": 24699.750351947125
+   },
+   "gravity_torque_N_m": {
+    "median": 85166.29129683677,
+    "p95": 99782.25739055859,
+    "max": 105698.69990363979
+   },
+   "attitude_torque_N_m": {
+    "median": 209256.32778306605,
+    "p95": 708002.443478199,
+    "max": 811189.7771713554
+   },
+   "required_torque_N_m": {
+    "median": 216738.0886652448,
+    "p95": 762965.2174886562,
+    "max": 899608.8499396305
+   },
+   "required_orbit_mean_N_m": {
+    "roll": 38719.573279783115,
+    "pitch": 18681.09521106733,
+    "normal": 982.6920575395369
+   },
+   "pressure_centre_offset_m": {
+    "median": 1018.5661008263007,
+    "p95": 2788.1394998515766
+   },
+   "trim_needed_lit": {
+    "median": 6.4665284098321045,
+    "p95": 4782.523578635666
+   },
+   "store_N_m_s": {
+    "trim_0.1": {
+     "median": 72831211638.8997,
+     "max": 76946679002.10991
+    },
+    "trim_0.25": {
+     "median": 57712173290.61236,
+     "max": 60390866037.935036
+    }
+   },
+   "eccentricity_drive": {
+    "per_s": 8.01287680252247e-09,
+    "over_as_built": 0.8575945163836439
+   },
+   "crossing_height_rate_km_per_day": {
+    "median": -0.12111103229625311,
+    "min": -0.2849294921084418,
+    "max": -0.01504859522810279
+   },
+   "strip_turn_deg_per_day": {
+    "median": 0.0073904401227262604,
+    "min": 0.006533091755602806,
+    "max": 0.007595611925139571
+   },
+   "by_areal_mass": {
+    "5_g_m2": {
+     "store_N_m_s": {
+      "trim_0.1": 41528655776.575066,
+      "trim_0.25": 26230741409.469345
+     },
+     "required_orbit_mean_N_m": 26722.460465178734
+    },
+    "26_g_m2": {
+     "store_N_m_s": {
+      "trim_0.1": 47484001190.5098,
+      "trim_0.25": 29813670816.16182
+     },
+     "required_orbit_mean_N_m": 30099.358017525803
+    }
+   }
+  },
+  "rolled_60_deg": {
+   "sail_force_N": {
+    "median": 11.83324957828453,
+    "p95": 94.64426104454698,
+    "max": 114.47176254246907
+   },
+   "radiation_torque_N_m": {
+    "median": 9530.535412915626,
+    "p95": 82009.53713147467,
+    "max": 105553.8151160417
+   },
+   "radiation_orbit_mean_N_m": {
+    "roll": 11187.18413514509,
+    "pitch": 16813.77652214831
+   },
+   "gravity_torque_N_m": {
+    "median": 92591.95517604488,
+    "p95": 111610.94789769828,
+    "max": 120600.0692900479
+   },
+   "attitude_torque_N_m": {
+    "median": 380247.67608918285,
+    "p95": 1397588.9108243072,
+    "max": 1588559.460454195
+   },
+   "required_torque_N_m": {
+    "median": 392269.9454615703,
+    "p95": 1463629.8264158631,
+    "max": 1692857.8486619368
+   },
+   "required_orbit_mean_N_m": {
+    "roll": 37664.86823684938,
+    "pitch": 9239.68370334556,
+    "normal": 1551.9180113050056
+   },
+   "pressure_centre_offset_m": {
+    "median": 828.3664226336623,
+    "p95": 1566.788709881853
+   },
+   "trim_needed_lit": {
+    "median": 14.050999235571627,
+    "p95": 9661.679341039928
+   },
+   "store_N_m_s": {
+    "trim_0.1": {
+     "median": 71136850773.89566,
+     "max": 72727907842.9622
+    },
+    "trim_0.25": {
+     "median": 61702594993.52856,
+     "max": 62614741497.6628
+    }
+   },
+   "eccentricity_drive": {
+    "per_s": 5.297332151111004e-09,
+    "over_as_built": 0.5669578000781735
+   },
+   "crossing_height_rate_km_per_day": {
+    "median": 0.0012476810408538215,
+    "min": -0.07690613746243455,
+    "max": 0.057460600352412655
+   },
+   "strip_turn_deg_per_day": {
+    "median": 0.003448831287099046,
+    "min": 0.003159409416329451,
+    "max": 0.0036988773370625508
+   },
+   "by_areal_mass": {
+    "5_g_m2": {
+     "store_N_m_s": {
+      "trim_0.1": 32915272543.324104,
+      "trim_0.25": 20423286013.182648
+     },
+     "required_orbit_mean_N_m": 20682.80216890604
+    },
+    "26_g_m2": {
+     "store_N_m_s": {
+      "trim_0.1": 43259714563.48228,
+      "trim_0.25": 31599920535.398064
+     },
+     "required_orbit_mean_N_m": 25765.854866441005
+    }
+   }
+  },
+  "rolled_80_deg": {
+   "sail_force_N": {
+    "median": 1.962830405526987,
+    "p95": 94.64426104454698,
+    "max": 114.47176254246907
+   },
+   "radiation_torque_N_m": {
+    "median": 2058.8159565217925,
+    "p95": 81498.41490539804,
+    "max": 105553.8151160417
+   },
+   "radiation_orbit_mean_N_m": {
+    "roll": 10342.496502534137,
+    "pitch": 12555.57964529179
+   },
+   "gravity_torque_N_m": {
+    "median": 37754.264041277485,
+    "p95": 108412.70548660295,
+    "max": 120467.46620563896
+   },
+   "attitude_torque_N_m": {
+    "median": 453477.9794920604,
+    "p95": 1847654.4091681438,
+    "max": 2086192.7036830676
+   },
+   "required_torque_N_m": {
+    "median": 466002.5669445481,
+    "p95": 1878710.3900952116,
+    "max": 2134451.194916417
+   },
+   "required_orbit_mean_N_m": {
+    "roll": 15588.848409402472,
+    "pitch": 2786.4221096855754,
+    "normal": 1580.158291079042
+   },
+   "pressure_centre_offset_m": {
+    "median": 845.6568836492106,
+    "p95": 1688.280682824208
+   },
+   "trim_needed_lit": {
+    "median": 32.63370441826831,
+    "p95": 13389.995980271415
+   },
+   "store_N_m_s": {
+    "trim_0.1": {
+     "median": 28985031547.234222,
+     "max": 32055667922.49515
+    },
+    "trim_0.25": {
+     "median": 22873986236.88886,
+     "max": 25745994383.49457
+    }
+   },
+   "eccentricity_drive": {
+    "per_s": 4.497118771211198e-09,
+    "over_as_built": 0.4813133276306677
+   },
+   "crossing_height_rate_km_per_day": {
+    "median": 0.029076859163648966,
+    "min": -0.01167973453073655,
+    "max": 0.06246976263611433
+   },
+   "strip_turn_deg_per_day": {
+    "median": -0.0009664601679177286,
+    "min": -0.001052187586154657,
+    "max": -0.0008234470109315373
+   },
+   "by_areal_mass": {
+    "5_g_m2": {
+     "store_N_m_s": {
+      "trim_0.1": 25138544378.77387,
+      "trim_0.25": 15609790699.020672
+     },
+     "required_orbit_mean_N_m": 16003.366106581381
+    },
+    "26_g_m2": {
+     "store_N_m_s": {
+      "trim_0.1": 23885258024.313644,
+      "trim_0.25": 15667179560.638582
+     },
+     "required_orbit_mean_N_m": 15337.617843450687
+    }
+   }
+  },
+  "steering": {
+   "sail_force_N": {
+    "median": 25.704528534364986,
+    "p95": 96.23723192247414,
+    "max": 114.47176254246907
+   },
+   "radiation_torque_N_m": {
+    "median": 38964.9545503838,
+    "p95": 84677.766618921,
+    "max": 105553.8151160417
+   },
+   "radiation_orbit_mean_N_m": {
+    "roll": 5103.4159192825155,
+    "pitch": 26453.283189369562
+   },
+   "gravity_torque_N_m": {
+    "median": 9045.482996939852,
+    "p95": 108629.17902110761,
+    "max": 114550.90696692749
+   },
+   "attitude_torque_N_m": {
+    "median": 1996.1672010278248,
+    "p95": 830086.854357218,
+    "max": 950491.0784883905
+   },
+   "required_torque_N_m": {
+    "median": 77612.36070192193,
+    "p95": 885450.962083267,
+    "max": 1052908.6964302368
+   },
+   "required_orbit_mean_N_m": {
+    "roll": 14755.714869352258,
+    "pitch": 20140.3557721002,
+    "normal": 7.032526641228612
+   },
+   "pressure_centre_offset_m": {
+    "median": 1078.3874264922317,
+    "p95": 2914.384212709902
+   },
+   "trim_needed_lit": {
+    "median": 2.733972414131335,
+    "p95": 1224.8000762067306
+   },
+   "store_N_m_s": {
+    "trim_0.1": {
+     "median": 35055347488.20215,
+     "max": 42182013560.88658
+    },
+    "trim_0.25": {
+     "median": 17552618338.984604,
+     "max": 24279506240.095596
+    }
+   },
+   "eccentricity_drive": {
+    "per_s": 8.890627858006072e-09,
+    "over_as_built": 0.9515376170308077
+   },
+   "crossing_height_rate_km_per_day": {
+    "median": 0.7684559436117545,
+    "min": 0.6698462622738699,
+    "max": 0.8526228666509481
+   },
+   "strip_turn_deg_per_day": {
+    "median": 0.0022110960602032006,
+    "min": 0.0005691477134384384,
+    "max": 0.0029149628850353958
+   },
+   "by_areal_mass": {
+    "5_g_m2": {
+     "store_N_m_s": {
+      "trim_0.1": 42102048928.78488,
+      "trim_0.25": 28452479297.140594
+     },
+     "required_orbit_mean_N_m": 26553.45787480905
+    },
+    "26_g_m2": {
+     "store_N_m_s": {
+      "trim_0.1": 36484401037.84383,
+      "trim_0.25": 22313963474.83979
+     },
+     "required_orbit_mean_N_m": 25470.694376606025
+    }
+   }
+  }
+ },
+ "edge_on_pitch": {
+  "eccentricity_drive_over_as_built": 0.3565873335430153,
+  "turn_hours_by_torque": {
+   "62.7_g_m2": {
+    "30000_N_m": 24.693856623525228,
+    "100000_N_m": 13.525382304503124,
+    "1e+06_N_m": 4.2771014306766935
+   },
+   "5_g_m2": {
+    "30000_N_m": 6.973593188819369,
+    "100000_N_m": 3.8195942963807514,
+    "1e+06_N_m": 1.207861771435141
+   },
+   "26_g_m2": {
+    "30000_N_m": 15.902239157061157,
+    "100000_N_m": 8.710015101164334,
+    "1e+06_N_m": 2.7543486174141196
+   }
+  },
+  "clearance": {
+   "min_gap_m": 0.03129010539942145,
+   "at_phase_deg": -142.0,
+   "share_of_orbit_below_clearance": 0.8194444444444444
+  }
+ },
+ "moving_mass": {
+  "62.7_g_m2": {
+   "target_offset_m": {
+    "median": 1177.4691664911475,
+    "p95": 3112.664709940814
+   },
+   "by_reach": {
+    "250_m": {
+     "ballast_over_tile_mass": 0.058823529411764705,
+     "store_N_m_s": {
+      "trim_0.1": 12000525891.124825,
+      "trim_0.25": 2187062467.010818
+     },
+     "residual_orbit_mean_N_m": 12680.536180591982
+    },
+    "500_m": {
+     "ballast_over_tile_mass": 0.125,
+     "store_N_m_s": {
+      "trim_0.1": 1127419208.4054315,
+      "trim_0.25": 776794755.72193
+     },
+     "residual_orbit_mean_N_m": 3891.802392779842
+    },
+    "1000_m": {
+     "ballast_over_tile_mass": 0.2857142857142857,
+     "store_N_m_s": {
+      "trim_0.1": 532282357.99982995,
+      "trim_0.25": 518352638.03778726
+     },
+     "residual_orbit_mean_N_m": 1485.9627155975409
+    },
+    "1500_m": {
+     "ballast_over_tile_mass": 0.5,
+     "store_N_m_s": {
+      "trim_0.1": 342604842.2065399,
+      "trim_0.25": 285819741.4109229
+     },
+     "residual_orbit_mean_N_m": 1338.1081127893326
+    },
+    "2000_m": {
+     "ballast_over_tile_mass": 0.8,
+     "store_N_m_s": {
+      "trim_0.1": 190394419.22868857,
+      "trim_0.25": 142866695.3554399
+     },
+     "residual_orbit_mean_N_m": 1246.1678218088737
+    },
+    "3000_m": {
+     "ballast_over_tile_mass": 2.0,
+     "store_N_m_s": {
+      "trim_0.1": 124521599.60437241,
+      "trim_0.25": 122930763.80634135
+     },
+     "residual_orbit_mean_N_m": 1135.8736385855889
+    }
+   }
+  },
+  "5_g_m2": {
+   "target_offset_m": {
+    "median": 1245.844569068009,
+    "p95": 3118.5004929720117
+   },
+   "by_reach": {
+    "250_m": {
+     "ballast_over_tile_mass": 0.058823529411764705,
+     "store_N_m_s": {
+      "trim_0.1": 25189887162.997818,
+      "trim_0.25": 11295768671.259037
+     },
+     "residual_orbit_mean_N_m": 17591.887088001284
+    },
+    "500_m": {
+     "ballast_over_tile_mass": 0.125,
+     "store_N_m_s": {
+      "trim_0.1": 6819276060.643524,
+      "trim_0.25": 776552593.6026613
+     },
+     "residual_orbit_mean_N_m": 8180.078022967231
+    },
+    "1000_m": {
+     "ballast_over_tile_mass": 0.2857142857142857,
+     "store_N_m_s": {
+      "trim_0.1": 534993695.5968059,
+      "trim_0.25": 515379425.57446533
+     },
+     "residual_orbit_mean_N_m": 221.38448878595185
+    },
+    "1500_m": {
+     "ballast_over_tile_mass": 0.5,
+     "store_N_m_s": {
+      "trim_0.1": 342069143.5028325,
+      "trim_0.25": 284700449.74623054
+     },
+     "residual_orbit_mean_N_m": 165.27304408102373
+    },
+    "2000_m": {
+     "ballast_over_tile_mass": 0.8,
+     "store_N_m_s": {
+      "trim_0.1": 184316045.5029976,
+      "trim_0.25": 140742441.51166484
+     },
+     "residual_orbit_mean_N_m": 159.72422153320133
+    },
+    "3000_m": {
+     "ballast_over_tile_mass": 2.0,
+     "store_N_m_s": {
+      "trim_0.1": 32068620.354240336,
+      "trim_0.25": 20975703.929017924
+     },
+     "residual_orbit_mean_N_m": 56.12649596315383
+    }
+   }
+  },
+  "26_g_m2": {
+   "target_offset_m": {
+    "median": 1215.6595390062164,
+    "p95": 3095.544877727594
+   },
+   "by_reach": {
+    "250_m": {
+     "ballast_over_tile_mass": 0.058823529411764705,
+     "store_N_m_s": {
+      "trim_0.1": 19579930567.554844,
+      "trim_0.25": 6591878640.038957
+     },
+     "residual_orbit_mean_N_m": 15771.856575033518
+    },
+    "500_m": {
+     "ballast_over_tile_mass": 0.125,
+     "store_N_m_s": {
+      "trim_0.1": 2895786003.7387633,
+      "trim_0.25": 776524150.9881358
+     },
+     "residual_orbit_mean_N_m": 6393.796861383989
+    },
+    "1000_m": {
+     "ballast_over_tile_mass": 0.2857142857142857,
+     "store_N_m_s": {
+      "trim_0.1": 533150114.2595856,
+      "trim_0.25": 515836217.77358896
+     },
+     "residual_orbit_mean_N_m": 608.4593302483872
+    },
+    "1500_m": {
+     "ballast_over_tile_mass": 0.5,
+     "store_N_m_s": {
+      "trim_0.1": 342160622.4470117,
+      "trim_0.25": 285412016.71048427
+     },
+     "residual_orbit_mean_N_m": 518.0963566634542
+    },
+    "2000_m": {
+     "ballast_over_tile_mass": 0.8,
+     "store_N_m_s": {
+      "trim_0.1": 186615194.60521224,
+      "trim_0.25": 142298789.60375735
+     },
+     "residual_orbit_mean_N_m": 434.48037572900046
+    },
+    "3000_m": {
+     "ballast_over_tile_mass": 2.0,
+     "store_N_m_s": {
+      "trim_0.1": 42370558.44517045,
+      "trim_0.25": 39056310.94497916
+     },
+     "residual_orbit_mean_N_m": 369.0300305304621
+    }
+   }
+  }
+ },
+ "forced_eccentricity_as_built": {
+  "62.7_g_m2": [
+   0.03799840948717241,
+   0.07465475006321613
+  ],
+  "26_g_m2": [
+   0.08450869658726476,
+   0.14647446765779457
+  ],
+  "5_g_m2": [
+   0.37713619686489047,
+   0.475937422973648
+  ]
+ },
+ "resources": {
+  "cpu_s": 282.854585435,
+  "wall_s": 284.19959672004916,
+  "max_rss_MiB": 1015.2890625,
+  "numerical_threads": 1
+ }
+}
