@@ -675,9 +675,25 @@ tide, behind the titania stack at O1's standard level and averaged over the
 cycle unless stated; cycle times are the atmosphere's mass over the loss.
 
 - **The ultraviolet rises far less over the cycle than the escape model took.**
-  At the last three maxima the light from 10 to 175 nm is 1.25–1.41 times the
+  At the maxima since 1957 the light from 10 to 175 nm is 1.25–1.64 times the
   quiet week, weighted by energy, where the escape model takes 2.5; the far
-  ultraviolet from 122 to 175 nm, most of the energy, rises only 1.07–1.18.
+  ultraviolet from 122 to 175 nm, most of the energy, rises only 1.07–1.59.
+  The glow's Lyman-α and the shortest light rise more than it took: 1.31–1.88
+  against 1.5, and below 10 nm 4.6–9.6 against 6.0.
+- **The measured solar maximum is harsher than the escape model's for the
+  warmest air.** On 7 October the author had the solar-maximum columns take
+  FISM2's measured maxima, the record taken back to 1947: the year around cycle
+  19's maximum of 1958, the strongest on record, whole, with the escape model's
+  2.5 kept as a stress case. Its weaker far ultraviolet leaves the cooler
+  titania cases losing about what the stress case gives, 0.78–1.3 kg/s at the
+  standard level without magnets. Its stronger glow, light below 50 nm and
+  X-rays run the warmest case away at the standard level, its heating reaching
+  past the 4-radius shadow (at 6 lunar radii it loses 7.7 kg/s, 3.6 with the
+  magnets), and the 200-nm edge at the tight level. Before 1978 FISM2 rests on
+  the 10.7 cm radio flux alone, so that year's spectrum is the least certain;
+  the satellite era's strongest maxima, cycles 21 and 22, rise 1.42–1.43 in the
+  ultraviolet and 1.55 in the glow. R1's cycle mean, over cycles 23 and 24, is
+  unchanged.
 - **Placed where the tracing puts it, the heat warms the upper air far less.**
   The sky's glow, half or more of the heat at the swarm's levels, is absorbed
   within a few e-folds of pressure above the base, and the far ultraviolet
@@ -687,13 +703,14 @@ cycle unless stated; cycle times are the atmosphere's mass over the loss.
   collisional upper air and in LTE the loss is 0.68–0.97 kg/s with no
   magnetosphere (144 to 101 billion years), almost all of it the solar wind's
   charge exchange and sputtering; with all near-infrared heating it is
-  3.1–3.5 kg/s (32 to 28 billion years), 7.9 kg/s in its worst year. The escape
-  model's solar maximum gives that case 26 kg/s, and with larger holes a runaway.
+  3.1–3.5 kg/s (32 to 28 billion years), 7.9 kg/s in its worst year. At solar
+  maximum that case runs away; the stress case gives it 26 kg/s, and with larger
+  holes a runaway.
 - **For 1 kg/s the solar wind decides.** The September magnets bring every case
   under 1 kg/s: 10⁻⁵–0.003 kg/s in the cooler cases and 0.75–0.95 kg/s with all
   near-infrared heating (131 to 104 billion years). A dipole of about
-  3×10¹⁹ A·m² holds the exosphere of all but the warmest at the escape model's
-  solar maximum to 1 kg/s, and the three coolest need none for that.
+  3×10¹⁹ A·m² holds the exosphere of all but the warmest at solar maximum,
+  which runs away, to 1 kg/s, and the three coolest need none for that.
 - **The ring fleet's screen may shelter the Moon from part of the solar
   wind.** The screen absorbs the wind that strikes it, and the wind closes in
   behind an absorbing screen over about eight of its radii. The ring fleet's
@@ -712,11 +729,14 @@ cycle unless stated; cycle times are the atmosphere's mass over the loss.
   0.002–0.006 kg/s in the cooler cases and 0.12 kg/s with all near-infrared
   heating (0.06 with the September magnets, which brings that case to
   0.81–1.0 kg/s, 121 to 97 billion years). The atoms made near the exobase
-  leave hot and are 0.001–0.002 kg/s of this. With Earth's weaker mixing, a
-  bound, the warm case's atoms add 2.1 kg/s (1.0 with the magnets, for
-  1.7–1.9 kg/s in all, 56 to 51 billion years), past a 1 kg/s budget; how
-  strongly the Moon's upper air mixes decides this. Hydrogen adds
-  0.001–0.003 kg/s.
+  leave hot and are 0.001–0.002 kg/s of this. How strongly the Moon's upper air
+  mixes decides the rest. An estimate from breaking gravity waves, calibrated on
+  Earth's measured mixing, finds it about as strong as the Moon-scaled profile:
+  the warm case's atoms add 0.10 kg/s (0.05 with the magnets). Titan's measured
+  mixing, carried to the Moon, gives 0.77 kg/s (0.37 with the magnets, for
+  1.1–1.3 kg/s in all, 88 to 74 billion years); Titan's waves are driven by a
+  hundredth of the sunlight, so that end may understate the mixing. Earth's own
+  unscaled mixing, 2.1 kg/s, lies outside both. Hydrogen adds 0.001–0.003 kg/s.
 - **The relaxed level still runs away.** With a 4-radius shadow the air runs
   away once its exobase nears the shadow's edge, from a transmission of
   0.021–0.26% by case and activity, below the relaxed level's 0.25% in most

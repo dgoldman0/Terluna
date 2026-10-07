@@ -14,23 +14,27 @@ finds what that exosphere loses, as ions and as the fragments of broken
 molecules, with and without a lunar magnetosphere, and the UV transmission each
 budget then allows. [fate.py](fate.py) follows the escaping air into the space
 around Earth and the Moon. [cycle.py](cycle.py) reads FISM2's daily record band by
-band and gives each calendar year's measured sunlight, for the solar-cycle mean
-that R1 reads. [oxygen.py](oxygen.py) follows the oxygen atoms and hydrogen the
-glow and the traced light make above the base through the whole column, from the
-ground to the exobase, and finds what of them escapes. All eight are screening
-models; their methods and
-limits are in their docstrings.
+band from 1947 and gives each calendar year's measured sunlight, for the
+solar-cycle mean that R1 reads, and the year around each solar maximum since
+cycle 19, the strongest of which is the loss response's solar maximum.
+[oxygen.py](oxygen.py) follows the oxygen atoms and hydrogen the glow and the
+traced light make above the base through the whole column, from the ground to the
+exobase, and finds what of them escapes. [gravity_waves.py](gravity_waves.py)
+estimates how strongly breaking gravity waves mix the upper air, on Earth and on
+the Moon, which decides how much of that oxygen reaches the exobase. All nine are
+screening models; their methods and limits are in their docstrings.
 
 ```sh
 OPENBLAS_NUM_THREADS=1 python -m atmosphere.loss_response.tides   # about 4 minutes; resumes if stopped
+python -m atmosphere.loss_response.cycle        # FISM2's daily record by band, a few seconds
 OPENBLAS_NUM_THREADS=1 python -m atmosphere.middle_atmosphere.limb_heat   # then the limb tracing, about 30 CPU minutes (cached)
-python -m atmosphere.loss_response.cycle        # then FISM2's daily record by band, a few seconds
 python -m atmosphere.loss_response.model        # then the loss response, about a minute
 python -m atmosphere.loss_response.absorption   # then the protected radius, a few minutes
 OPENBLAS_NUM_THREADS=1 python -m atmosphere.loss_response.exosphere   # then the exosphere's losses, about 20 minutes
 OPENBLAS_NUM_THREADS=1 python -m atmosphere.loss_response.fate    # where the escaping air goes, about 15 s
-OPENBLAS_NUM_THREADS=1 python -m atmosphere.loss_response.oxygen  # atomic oxygen and hydrogen, about 15 minutes in three processes
-python -m pytest atmosphere/tests/test_tides.py atmosphere/tests/test_loss_response.py atmosphere/tests/test_absorption.py atmosphere/tests/test_exosphere.py atmosphere/tests/test_fate.py
+OPENBLAS_NUM_THREADS=1 python -m atmosphere.loss_response.oxygen  # atomic oxygen and hydrogen, about 40 minutes in three processes
+OPENBLAS_NUM_THREADS=1 python -m atmosphere.loss_response.gravity_waves   # the waves' mixing, a minute
+python -m pytest atmosphere/tests/test_tides.py atmosphere/tests/test_loss_response.py atmosphere/tests/test_absorption.py atmosphere/tests/test_exosphere.py atmosphere/tests/test_fate.py atmosphere/tests/test_cycle.py atmosphere/tests/test_oxygen.py atmosphere/tests/test_gravity_waves.py
 ```
 
 It needs the middle atmosphere's stored results, its limb tracing
@@ -54,9 +58,11 @@ exosphere's ion production in
 [results/escape_fate.json](results/escape_fate.json) (schema
 `terluna.atmosphere.escape-fate/1`), and each year's measured sunlight in
 [results/solar_cycle.json](results/solar_cycle.json) (schema
-`terluna.atmosphere.solar-cycle/1`). The oxygen atoms and hydrogen are in
+`terluna.atmosphere.solar-cycle/2`). The oxygen atoms and hydrogen are in
 [results/oxygen_escape.json](results/oxygen_escape.json) (schema
-`terluna.atmosphere.oxygen-escape/1`); that step needs the radiative inputs
+`terluna.atmosphere.oxygen-escape/1`), and the waves' mixing in
+[results/gravity_waves.json](results/gravity_waves.json) (schema
+`terluna.atmosphere.gravity-wave-mixing/1`); the oxygen step needs the radiative inputs
 (`python -m atmosphere.radiative_convective.fetch_inputs --download`) for the
 middle atmosphere's photolysis.
 
@@ -75,9 +81,11 @@ reaches the upper air from every direction. The state is the first heat,
 counting up from zero, that the swollen air returns; where none lies in the
 tables, the air runs away. The author adopted this count on 7 October
 ([decisions](../../research/decisions.md)) in place of a quarter of the light
-reaching the disk. Solar maximum takes 2.5 on the ultraviolet and FISM2's
-measured rise of the X-rays below 10 nm by band
-([escape.py](../middle_atmosphere/escape.py)). The films are the design's behind
+reaching the disk. Solar maximum is FISM2's year around the strongest maximum on
+record, cycle 19's of 1957–58, every band at its own measured rise and the glow
+at Lyman-α's ([cycle.py](cycle.py)); the stress case keeps the escape model's 2.5
+on the ultraviolet with FISM2's mean rise of the X-rays over the last three
+maxima ([escape.py](../middle_atmosphere/escape.py)). The films are the design's behind
 both shields, and the protected radius is the ring fleet's 4 lunar radii unless
 stated. The thermal column turns the heat into an exobase and a
 molecular Jeans loss, over base temperatures from the middle atmosphere behind
@@ -162,19 +170,28 @@ coolest air.
 **The sky's glow heats the air just above the base.** O2 takes the glow's
 Lyman-α within a few e-folds of pressure above the 0.3 Pa base, where its heat
 is conducted away: with the UV transmission at 10⁻⁶ it raises the exobase by
-6–9 K at quiet Sun and 10–14 K at solar maximum. Behind the titania stack, with
-the films' traced X-rays, the floor loss is 5×10⁻¹⁰–0.002 kg/s at quiet Sun and
-5×10⁻⁹–0.01 kg/s at solar maximum. Behind the 200-nm edge, whose upper air starts
-warmer, it is 0.01–0.3 kg/s at quiet Sun and 0.09 kg/s at solar maximum, and with
-all near-infrared heating at solar maximum the air runs away with no gaps at all.
+6–9 K at quiet Sun, 12–18 K at solar maximum and 10–14 K in the stress case.
+Behind the titania stack, with the films' traced X-rays, the floor loss is
+5×10⁻¹⁰–0.002 kg/s at quiet Sun, 3×10⁻⁸–0.04 kg/s at solar maximum and
+5×10⁻⁹–0.01 kg/s in the stress case. Behind the 200-nm edge, whose upper air
+starts warmer, it is 0.01–0.3 kg/s at quiet Sun, 0.3 kg/s at solar maximum and
+0.09 kg/s in the stress case, and with all near-infrared heating at solar
+maximum the air runs away with no gaps at all.
 
-**Over the solar cycle the ultraviolet rises far less than the escape model's
-2.5.** FISM2's daily record ([cycle.py](cycle.py)) puts the light from 10 to
-175 nm at 1.25–1.41 times the WHI 2008 quiet week at the last three maxima and at
-1.14 over solar cycles 23 and 24, weighted by energy; the far ultraviolet from 122
-to 175 nm, most of the energy, rises 1.07–1.18 at maximum. The tables here keep
-the escape model's solar maximum. The protection design point gives each state's
-mean over the measured years, which R1, a long-term average, reads.
+**At solar maximum the ultraviolet rises far less than the escape model's 2.5,
+the glow and the shortest light more.** FISM2's daily record from 1947
+([cycle.py](cycle.py)) puts the light from 10 to 175 nm, weighted by energy, at
+1.25–1.43 times the WHI 2008 quiet week in the year around each maximum of
+cycles 20 to 25, at 1.64 around cycle 19's of 1958, the strongest on record, and
+at 1.14 over solar cycles 23 and 24; the far ultraviolet from 122 to 175 nm, most
+of the energy, rises 1.07–1.59 at maximum. Lyman-α, which sets the sky's glow,
+rises 1.31–1.88 at maximum against the stress case's 1.5, the X-rays below 10 nm
+4.6–9.6 against its 6.0, and the light from 10 to 30 nm up to 3.8 against its
+2.5. The tables here take cycle 19's year as solar maximum, whole, and the escape
+model's factors as the stress case. Before 1978 FISM2 rests on the 10.7 cm radio
+flux alone, so cycle 19's spectrum is the least certain of the maxima. The
+protection design point gives each state's mean over the measured years of
+cycles 23 to 25, which R1, a long-term average, reads.
 
 **Ultraviolet-driven escape alone lets the gaps pass about a tenth of a
 percent.** Largest allowed UV transmission from ultraviolet-driven escape
@@ -184,23 +201,27 @@ atmosphere's mass (3.1×10¹⁸ kg, the feasibility baseline's hydrostatic colum
 over the loss rate, the time the loss and its resupply take to replace the
 whole atmosphere:
 
-| Budget (cycle time) | Titania, quiet Sun | Titania, solar maximum | 200-nm edge, quiet Sun | 200-nm edge, solar maximum |
-|---|---|---|---|---|
-| 1 kg/s (100 billion years) | 0.058–0.18% | 0.016–0.062% | 0.0092–0.035% | 0.0078–0.0081% (none for the warmest upper air) |
-| 10 kg/s (10 billion years) | 0.081–0.22% | 0.021–0.071% | 0.014–0.049% | 0.0087–0.0088% (none for the warmest) |
-| 100 kg/s (1 billion years) | 0.081–0.26% | 0.021–0.079% | 0.014–0.049% | 0.0087–0.0088% (none for the warmest) |
+| Budget (cycle time) | Titania, quiet Sun | Titania, solar maximum | Titania, stress case | 200-nm edge, quiet Sun | 200-nm edge, solar maximum | 200-nm edge, stress case |
+|---|---|---|---|---|---|---|
+| 1 kg/s (100 billion years) | 0.058–0.18% | 0.018–0.086% | 0.016–0.062% | 0.0092–0.035% | 0.0012–0.0013% (none for the warmest upper air) | 0.0078–0.0081% (none for the warmest) |
+| 10 kg/s (10 billion years) | 0.081–0.22% | 0.018–0.10% | 0.021–0.071% | 0.014–0.049% | 0.0012–0.0013% (none for the warmest) | 0.0087–0.0088% (none for the warmest) |
+| 100 kg/s (1 billion years) | 0.081–0.26% | 0.018–0.11% | 0.021–0.079% | 0.014–0.049% | 0.0012–0.0013% (none for the warmest) | 0.0087–0.0088% (none for the warmest) |
 
 From 10 to 100 kg/s the allowed transmission rises little, and for the warmest
-upper air not at all: the runaway caps it before the loss does.
+upper air not at all: the runaway caps it before the loss does. Against the
+stress case, the measured maximum allows the cooler titania cases a quarter to
+two-fifths more, its far ultraviolet being weaker, and the 200-nm edge a sixth as
+much, its glow and shortest light being stronger.
 
 **With a 4-radius shadow the air runs away near the shadow's edge.** As the heat
 swells the air, its exobase approaches the aperture's edge and the unfiltered
 light beyond it heats the thermosphere more, until the heat outgrows itself.
-Behind the titania stack that begins at a transmission of 0.08–0.26% with
-collisional upper air (solar maximum to quiet Sun), 0.06–0.19% in LTE and
-0.021–0.081% with all near-infrared heating, and behind the 200-nm edge at
-0.009–0.049%. The loss just short of it is 61–85 kg/s, 32–47 kg/s and 2–7 kg/s
-behind the titania stack and 1–4 kg/s behind the edge. These onsets come from
+Behind the titania stack that begins at a transmission of 0.11–0.26% with
+collisional upper air (solar maximum to quiet Sun; 0.079% in the stress case),
+0.076–0.19% in LTE (0.060%) and 0.018–0.081% with all near-infrared heating
+(0.021%), and behind the 200-nm edge at 0.0012–0.049% (0.0087%). The loss just
+short of it is 57–85 kg/s, 26–47 kg/s and 1–7 kg/s behind the titania stack and
+0.4–4 kg/s behind the edge. These onsets come from
 tables traced through air the column heats with its middle shape, which swells
 more than the traced shape's: at each onset the traced column's own exobase
 still lies at 3.2–3.9 lunar radii, so the onsets lean early.
@@ -276,9 +297,10 @@ charge exchange, off the exosphere inside the stand-off. For most upper air a
 much weaker dipole does that: at the design point's standard level the three
 coolest cases lose under 1 kg/s from their exosphere without one, LTE at solar
 maximum and all near-infrared heating at quiet Sun need about 3×10¹⁹ A·m² (a
-stand-off near 2.7 lunar radii, a fiftieth of the September moment), and no
-moment up to 10²³ A·m² holds the warmest at the escape model's solar maximum to
-1 kg/s. Dipoles that hold the wind off only just above the exobase fall in the
+stand-off near 2.7 lunar radii, a fiftieth of the September moment), and the
+warmest at solar maximum finds no state within the 4-radius shadow at that
+level, which no magnet changes; in the stress case no moment up to 10²³ A·m²
+holds it to 1 kg/s. Dipoles that hold the wind off only just above the exobase fall in the
 range where hybrid simulations find a weak field can raise ion escape (Egan et
 al. 2019), which this step leaves out.
 
@@ -290,57 +312,81 @@ removes them.
 
 **Atomic oxygen made above the base matters only for warm upper air with weak
 mixing.** Behind the titania stack nothing splits O2 below the base, but above it
-the glow makes 7–12 kg/s of oxygen atoms and the light through gaps 3–11 kg/s
-more at the standard level, quiet Sun to solar maximum ([oxygen.py](oxygen.py)).
-With the middle atmosphere's eddy mixing, scaled for the Moon, almost all of it
-goes back down as odd oxygen and builds 1.6–2.9 DU of ozone in the middle
-atmosphere. The homopause then lies at 3–6×10⁻⁵ Pa and the atoms are 0.1–1.3%
-of the gas at the exobase. They lose 0.002–0.006 kg/s with collisional upper air
-and in LTE at the solar cycle's mean spectrum, and 0.12 kg/s averaged over the
-cycle's years with all near-infrared heating (0.06 kg/s with the September
-magnets), 0.34 kg/s in its worst year. Most of it leaves as ions the solar wind
-makes from the sunlit exosphere's atoms. Atoms made within a collision length or
-so of the exobase leave hot, since photolysis and recombination give them more
-than the escape energy there; they add 0.001–0.002 kg/s over the cycle (at most
-0.011 kg/s at the escape model's solar maximum, letting them through two
-collisions), half the loss of the coolest case. Earth's weaker eddy mixing, a
-bound, puts the homopause at 1–3×10⁻³ Pa: the atoms are then 2–11% of the
-exobase gas and lose 0.035–0.12 kg/s in the cooler cases and 2.1 kg/s with all
-near-infrared heating (1.0 kg/s with the magnets), which would carry that case
-past 1 kg/s even with them. Behind the 200-nm edge, whose middle
-atmosphere already holds atomic oxygen under about 300 DU of ozone, the atoms add
-2–4 kg/s. Hydrogen from water and H2 escapes at 0.001–0.003 kg/s.
+the glow makes 7–14 kg/s of oxygen atoms and the light through gaps 3–11 kg/s
+more at the standard level, from quiet Sun to the solar maxima
+([oxygen.py](oxygen.py)). With the middle atmosphere's eddy mixing, scaled for
+the Moon, almost all of it goes back down as odd oxygen and builds 1.6–2.9 DU of
+ozone in the middle atmosphere. The homopause then lies at 3–6×10⁻⁵ Pa and the
+atoms are 0.1–1.3% of the gas at the exobase. They lose 0.002–0.006 kg/s with
+collisional upper air and in LTE at the solar cycle's mean spectrum, and
+0.12 kg/s averaged over the cycle's years with all near-infrared heating
+(0.06 kg/s with the September magnets), 0.34 kg/s in its worst year. Most of it
+leaves as ions the solar wind makes from the sunlit exosphere's atoms. Atoms made
+within a collision length or so of the exobase leave hot, since photolysis and
+recombination give them more than the escape energy there; they add
+0.001–0.002 kg/s over the cycle (at most 0.011 kg/s in the stress case, letting
+them through two collisions), half the loss of the coolest case. Earth's own
+mixing, unscaled, puts the homopause at 1–3×10⁻³ Pa: the atoms are then 2–11%
+of the exobase gas and lose 0.035–0.12 kg/s in the cooler cases and 2.1 kg/s
+with all near-infrared heating (1.0 kg/s with the magnets). Behind the 200-nm
+edge, whose middle atmosphere already holds atomic oxygen under about 300 DU of
+ozone, the atoms add 2–4 kg/s. Hydrogen from water and H2 escapes at
+0.001–0.003 kg/s.
+
+**Breaking gravity waves mix the upper air about as strongly as the Moon-scaled
+profile.** How strongly the air above the base mixes decides the atoms
+([gravity_waves.py](gravity_waves.py)). Gravity waves launched from half the
+tropopause pressure with Earth's 4 mPa, the calculation calibrated so that it
+gives Earth's measured eddy diffusion of 1.1×10⁶ cm²/s at 96 km (Swenson et al.
+2021) and its homopause at 110 km, put the Moon's homopause for atomic oxygen at
+1–2×10⁻⁵ Pa, a little above the Moon-scaled profile's. The lunar thermosphere's
+buoyancy frequency falls to about 10⁻³ per second, so short, fast waves turn back
+there, while waves a few hundred kilometres long, which a troposphere six times
+deeper than Earth's favours, rise almost undamped and break near the exobase.
+With the waves' mixing above the base the warmest case's atoms lose 0.10 kg/s
+over the cycle (0.05 kg/s with the magnets; a trillion years) and the cooler
+cases 0.002–0.006 kg/s; with Earth's wavelengths and a third of the calibration,
+the low end of Earth's measured mixing, the warmest case's atoms lose 0.45 kg/s
+(0.22). Titan, the nearest analogue, a 1.5-bar nitrogen atmosphere at
+1.35 m/s², mixes less: its measured homopause eddy diffusion, 2×10⁷–10⁸ cm²/s
+(Yelle et al. 2008; Bell et al. 2014), carried to the Moon is about a tenth of
+the Moon-scaled mixing, and with it the atoms lose 0.77 kg/s (0.37 with the
+magnets; 130 billion years). Titan's troposphere is driven by about a hundredth
+of the sunlight, so its waves may be the weaker. Both put the Moon's mixing well
+above Earth's own, so for the warmest air the atoms lose 0.1–0.8 kg/s.
 
 **With the exosphere counted, the shield has to reach beyond the exobase.**
 Largest allowed UV transmission for the titania stack with the sunlit
 exosphere's central loss added, by protected radius, with no magnetosphere,
 with no magnetosphere but the ring fleet's wake, and with the September
 magnets. The ranges span the three treatments of the upper air and quiet Sun to
-the escape model's solar maximum; each radius carries its own traced state, and
+solar maximum; each radius carries its own traced state, and
 a radius counts only where it covers the thermosphere's heating, light beyond its
 aperture giving at most a tenth of the heat. Cases that cannot meet the budget at
 any transmission are counted out of six:
 
 | Budget (cycle time) | Magnetosphere | 3 lunar radii | 4 lunar radii | 6 lunar radii | 10 lunar radii |
 |---|---|---|---|---|---|
-| 1 kg/s (100 billion years) | none | 0.004–0.099% (2 cannot) | 0.008–0.10% (2 cannot) | 0.009–0.10% (2 cannot) | 0.009–0.10% (2 cannot) |
-| | none, the ring fleet's wake | 0.010–0.11% (2 cannot) | 0.017–0.14% (1 cannot) | 0.010–0.15% | 0.015–0.16% |
-| | September | 0.012–0.15% (1 cannot) | 0.005–0.17% | 0.011–0.18% | 0.016–0.18% |
-| 10 kg/s (10 billion years) | none | 0.024–0.15% (1 cannot) | 0.012–0.19% | 0.019–0.21% | 0.024–0.21% |
-| | none, the ring fleet's wake | 0.024–0.15% (1 cannot) | 0.013–0.19% | 0.021–0.22% | 0.027–0.23% |
-| | September | 0.024–0.15% (1 cannot) | 0.017–0.21% | 0.023–0.22% | 0.027–0.23% |
-| 100 kg/s (1 billion years) | none | 0.024–0.15% (1 cannot) | 0.021–0.25% | 0.040–0.28% | 0.049–0.30% |
-| | none, the ring fleet's wake | 0.024–0.15% (1 cannot) | 0.021–0.25% | 0.040–0.29% | 0.051–0.30% |
-| | September | 0.024–0.15% (1 cannot) | 0.021–0.25% | 0.043–0.29% | 0.051–0.30% |
+| 1 kg/s (100 billion years) | none | 0.031–0.099% (3 cannot) | 0.0053–0.10% (2 cannot) | 0.006–0.10% (2 cannot) | 0.006–0.10% (2 cannot) |
+| | none, the ring fleet's wake | 0.009–0.11% (2 cannot) | 0.017–0.14% (1 cannot) | 0.008–0.15% | 0.015–0.16% |
+| | September | 0.012–0.15% (1 cannot) | 0.0026–0.17% | 0.011–0.18% | 0.016–0.18% |
+| 10 kg/s (10 billion years) | none | 0.024–0.15% (1 cannot) | 0.012–0.19% | 0.022–0.21% | 0.028–0.21% |
+| | none, the ring fleet's wake | 0.024–0.15% (1 cannot) | 0.013–0.19% | 0.024–0.22% | 0.032–0.23% |
+| | September | 0.024–0.15% (1 cannot) | 0.018–0.21% | 0.027–0.22% | 0.033–0.23% |
+| 100 kg/s (1 billion years) | none | 0.024–0.15% (1 cannot) | 0.018–0.25% | 0.049–0.28% | 0.065–0.30% |
+| | none, the ring fleet's wake | 0.024–0.15% (1 cannot) | 0.018–0.25% | 0.050–0.29% | 0.068–0.30% |
+| | September | 0.024–0.15% (1 cannot) | 0.018–0.25% | 0.055–0.29% | 0.069–0.30% |
 
 Without a magnetosphere the two cases with all near-infrared heating cannot meet
 1 kg/s at any radius up to 10 lunar radii; the ring fleet's wake, as the
 sensitivity takes it, leaves only the one at solar maximum at 4 lunar radii, and
 none from 6. With the September magnets every case meets 1 kg/s at 4 lunar
-radii, the warmest at solar maximum only below 0.0054%. Behind the 200-nm edge
-no case meets 1 kg/s without a magnetosphere at any radius, and with the
-September magnets two of six do at 4 lunar radii and five from 6; five of six
-meet 10 kg/s from 4 lunar radii with or without the magnets.
+radii, the warmest at solar maximum only below 0.0026%. The stress case alone
+allows 0.0078–0.032% for 1 kg/s at 4 lunar radii without a magnetosphere (one of
+its three cases cannot) and 0.0054–0.055% with the September magnets. Behind the
+200-nm edge no case meets 1 kg/s without a magnetosphere at any radius; with the
+September magnets two of six do at 4 lunar radii, three at 6 and five at 10, and
+five of six meet 10 kg/s from 4 lunar radii with or without the magnets.
 
 ## Limits
 
@@ -364,12 +410,15 @@ the runaway onsets lean conservative; a retrace through air heated with the
 traced shape would refine them. The absorption step's band-mean limb deposit is a
 cross-check. The ring fleet's wake takes the wind to close linearly over eight
 screen radii, an assumed length. The totals here leave out atomic oxygen and
-hydrogen, which the oxygen step gives apart; its eddy mixing above the base,
-scaled from Earth's, sets how much oxygen reaches the exobase, and Earth's
-weaker mixing bounds it. The base temperatures come from a global-mean,
-radiative-only middle atmosphere. The glow's brightness and its solar-cycle
-factor (1.5 at the escape model's solar maximum; Lyman-α's measured rise in the
-solar-cycle mean) are assumptions. The solar-wind branch is a set of scalings with
+hydrogen, which the oxygen step gives apart; its eddy mixing above the base sets
+how much oxygen reaches the exobase, and the breaking gravity waves and Titan's
+measured mixing bracket it. The waves leave out mean winds, tides and the day-night
+circulation, and take Earth's wave sources for the lunar troposphere's, which no
+model here has yet supplied. The base temperatures come from a global-mean,
+radiative-only middle atmosphere. The glow's brightness is an assumption, and
+it is taken to follow solar Lyman-α over the cycle (1.88 at solar maximum, 1.5 in
+the stress case); the interplanetary hydrogen that scatters it is ionized faster
+at solar maximum, so the glow may rise less, which this leaves out. The solar-wind branch is a set of scalings with
 assumed ranges; for comparison, Venus and Mars lose ions to the solar wind at
 roughly a tenth of a kilogram a second, and scaling Titan's plasma-driven losses
 to the solar wind at 1 AU gives a few kilograms a second (literature magnitudes,

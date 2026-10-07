@@ -96,6 +96,10 @@ class ProductTests(unittest.TestCase):
                 continue
             moon = runs[('moon_mixing', treatment, activity)]
             self.assertGreater(r['oxygen_share_at_exobase'], moon['oxygen_share_at_exobase'])
+            titan = runs.get(('titan_analogue', treatment, activity))
+            if titan:
+                self.assertTrue(moon['oxygen_share_at_exobase'] < titan['oxygen_share_at_exobase']
+                                < r['oxygen_share_at_exobase'], (treatment, activity))
 
 
 if __name__ == '__main__':

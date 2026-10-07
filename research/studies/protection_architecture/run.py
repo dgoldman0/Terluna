@@ -100,6 +100,8 @@ def at_radius(shield, treatment, activity, transmission, radius, wind, sweep=Fal
     return dict(uv=uv, exo=exo, totals=totals, covers=row['beyond_share'] <= traced.HEATING_SHARE), row
 
 
+STRESS = 'solar_maximum_stress'      # the escape model's convention, summarised apart
+
 def point(shield, treatment, activity, transmission, wind, mass_kg):
     states = {x: at_radius(shield, treatment, activity, transmission, x, wind, sweep=(x == DESIGN_RADIUS_R))
               for x in PROTECTED_RADII}
@@ -295,7 +297,8 @@ def main(argv=None) -> int:
                     for activity in lr.ACTIVITY:
                         points.append(dict(point(shield, treatment, activity, t, wind, mass),
                                            level=level, hole_factor=float(k)))
-    summary = summarise(points)
+    summary = summarise([p for p in points if p['activity'] != STRESS])
+    stress_summary = summarise([p for p in points if p['activity'] == STRESS])
     tasks, keys = [], []
     for level, lv in product['levels'].items():
         for k in HOLE_FACTORS:
@@ -338,9 +341,11 @@ def main(argv=None) -> int:
                   'where the tracing puts it. Screening models '
                   'throughout: Earth\'s tide is included; the exosphere\'s ion fates are bounds and timescale '
                   'comparisons, and the ring fleet\'s wake rests on an assumed refill length; no plasma is modelled.'),
-        reading_rule=('summary[level][shield] gives ranges over the upper-air treatments, quiet Sun and solar maximum, '
-                      'and holes 1 and 4 times the particle diameter, at the ring fleet\'s protected radius of 4 lunar '
-                      'radii; cases_running_away_at_4_R counts those whose air outgrows the limb tables there. '
+        reading_rule=('summary[level][shield] gives ranges over the upper-air treatments, quiet Sun and solar maximum '
+                      '(FISM2\'s year around cycle 19\'s maximum), and holes 1 and 4 times the particle diameter, at the '
+                      'ring fleet\'s protected radius of 4 lunar radii; stress_summary gives the same at the stress case '
+                      'alone (the escape model\'s 2.5 on the ultraviolet), and points every state. '
+                      'cases_running_away_at_4_R counts those whose air outgrows the limb tables there. '
                       'total_loss_kg_s[scenario][low|central|high] is the ultraviolet-driven loss plus the sunlit '
                       'exosphere\'s loss outside the protected radius, with no magnetosphere (plus proton sputtering), '
                       'with no magnetosphere but the wind held off within the ring fleet\'s unrefilled wake (a '
@@ -352,7 +357,8 @@ def main(argv=None) -> int:
                       'over the solar cycle: the mean of the measured years\' steady states (null if any year has none), '
                       'which leans high, the largest yearly total, and the state of the span\'s mean spectrum, which gives '
                       'the low end; R1, a long-term average, reads the cycle mean.'),
-        atmosphere_mass_kg=mass, summary=summary, points=points, cycle_summary=cycle_summary, cycle=cycles)
+        atmosphere_mass_kg=mass, summary=summary, stress_summary=stress_summary, points=points,
+        cycle_summary=cycle_summary, cycle=cycles)
     args.out.mkdir(parents=True, exist_ok=True)
     (args.out / 'design_point.json').write_text(json.dumps(out, indent=2) + '\n')
     return 0

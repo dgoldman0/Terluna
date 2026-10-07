@@ -16,7 +16,8 @@ loss response:
   glow (isotropic Lyman-alpha absorbed by O2) and by the light the limb tables trace above the base (the far
   ultraviolet and Lyman-alpha one photon to one O2, the extreme ultraviolet and X-rays one ion pair per 35 eV, each
   ending as two oxygen atoms through O2+ recombining);
-- species move by eddy diffusion (the middle atmosphere's mixing, scaled for the Moon) and by molecular diffusion,
+- species move by eddy diffusion (the middle atmosphere's mixing scaled for the Moon, or above the base that of
+  breaking gravity waves, gravity_waves.py, among the setups bounding it) and by molecular diffusion,
   which carries each species toward its own scale height above the homopause (binary diffusion in N2: Banks and
   Kockarts 1973 for O, H and H2, a hard-sphere scaling for the rest), in spherical shells, with the middle
   atmosphere's conditions at the ground;
@@ -62,6 +63,7 @@ from atmosphere.thermal_column import solve_column
 from atmosphere.radiative_convective import thermodynamics as th, climate as cl
 from atmosphere.middle_atmosphere import chemistry as ch, photolysis as ph, escape, run as middle_run
 from atmosphere.loss_response import model as lr, traced, tides, absorption as ab, exosphere as ex, cycle
+from atmosphere.loss_response import gravity_waves as gw
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
@@ -95,9 +97,15 @@ J = dict(O2='O2 -> O + O')
 
 @dataclasses.dataclass(frozen=True)
 class Setup:
-    """A run's choices: the eddy mixing's scale over the middle atmosphere's (1 keeps it), the water above the base
-    ('middle': the middle atmosphere's top value; 'dry': none) and the levels per e-fold above the base."""
+    """A run's choices: the eddy mixing's scale over the middle atmosphere's (1 keeps it); above the base, the
+    middle atmosphere's mixing ('middle') or the breaking gravity waves' (gravity_waves.py, 'gravity_waves', with
+    the waves' horizontal wavelengths stretched by wave_stretch and the calibration times wave_factor_scale); the
+    water above the base ('middle': the middle atmosphere's top value; 'dry': none) and the levels per e-fold above
+    the base."""
     mixing_scale: float = 1.0
+    mixing_above_base: str = 'middle'
+    wave_stretch: float = gw.STRETCH
+    wave_factor_scale: float = 1.0
     water_above_base: str = 'middle'
     layers_per_efold: int = LAYERS_PER_EFOLD
 
@@ -287,6 +295,11 @@ class Transport:
         p_lev, t_lev = col['p_pa'], col['t_k']
         n_lev = p_lev / (BOLTZMANN * t_lev) * 1e-6
         k_lev = case.mixing().profile(p_lev, col['tropopause_pa']) * setup.mixing_scale
+        if setup.mixing_above_base == 'gravity_waves':
+            waves = gw.eddy_diffusion(gw.lunar_column(col, MOON_GM, col['planet'].radius_m, case.air().molar_mass),
+                                      col['tropopause_pa'], setup.wave_stretch,
+                                      gw.calibration()[0] * setup.wave_factor_scale)
+            k_lev = np.where(p_lev < lr.BASE_PA, waves, k_lev)
         molar = case.air().molar_mass * (1 - col['x_h2o']) + 0.018015 * col['x_h2o']        # kg/mol at levels
         g = MOON_GM * 1e6 / r ** 2                                                           # cm s^-2
         h_air = BOLTZMANN * 1e7 * t_lev / (molar * 1e3 / AVOGADRO * g)                      # cm
@@ -557,17 +570,28 @@ def run(shield, treatment, activity, transmission, setup=Setup(), protected_R=MA
         oxygen_share_at_exobase=float(n[i_o, top] / (m_tot[top] + n[i_o, top])),
         homopause_pa=float(col['p_pa'][homopause[0]]) if homopause.size else None,
         ozone_column_du=float(np.sum(n[i_o3] * col['layer_dz_cm']) / ch.DU),
-        profile=dict(p_pa=col['layer_p_pa'].tolist(), o=x_o.tolist(), o3=(n[i_o3] / m_tot).tolist(),
+        profile=dict(p_levels_pa=col['p_pa'].tolist(), eddy_cm2_s=geo.eddy.tolist(),
+                     p_pa=col['layer_p_pa'].tolist(), o=x_o.tolist(), o3=(n[i_o3] / m_tot).tolist(),
                      h=(n[i_h] / m_tot).tolist(), h2=(n[i_h2] / m_tot).tolist(),
                      oh=(n[ch.INDEX['OH']] / m_tot).tolist(), ho2=(n[ch.INDEX['HO2']] / m_tot).tolist()))
     return out
 
 
-ACTIVITIES = ('quiet', 'solar_maximum', 'cycles_23_24_mean')
-SETUPS = {'moon_mixing': Setup(), 'earth_mixing': Setup(mixing_scale=1.0 / middle_run.MOON_KZZ)}
+ACTIVITIES = ('quiet', 'solar_maximum', 'solar_maximum_stress', 'cycles_23_24_mean')
+# Titan's measured homopause eddy diffusion, 2e7-1e8 cm^2/s since Cassini (argon: Yelle et al. 2008, JGR 113,
+# E10003; Bell et al. 2014, doi:10.1002/2014JA019781), carried to the Moon as Lindzen's mixing scales with the same waves,
+# T^(1/2) g^-2: about 0.8 for the Moon's warmer, slightly stronger-pulled thermosphere, so 1.5e7-8e7 against the
+# middle atmosphere's Moon-scaled 3.6e8. The analogue takes the middle of that range, a tenth of the Moon-scaled
+# mixing; Titan's troposphere is driven by about a hundredth of the Moon's sunlight, so its waves may be the weaker.
+TITAN_ANALOGUE = 0.1
+SETUPS = {'moon_mixing': Setup(), 'earth_mixing': Setup(mixing_scale=1.0 / middle_run.MOON_KZZ),
+          'gravity_waves': Setup(mixing_above_base='gravity_waves'),
+          'gravity_waves_weak': Setup(mixing_above_base='gravity_waves', wave_stretch=1.0, wave_factor_scale=1.0 / 3.0),
+          'titan_analogue': Setup(mixing_scale=TITAN_ANALOGUE)}
 YEARLY = (('titania_stack', 'all_heats'),)          # the case whose oxygen matters, followed year by year
 WORKERS = 3                                          # single-threaded processes; the machine is shared
-FILES = ('atmosphere/loss_response/oxygen.py', 'atmosphere/loss_response/model.py', 'atmosphere/loss_response/traced.py',
+FILES = ('atmosphere/loss_response/oxygen.py', 'atmosphere/loss_response/gravity_waves.py',
+         'atmosphere/loss_response/model.py', 'atmosphere/loss_response/traced.py',
          'atmosphere/loss_response/absorption.py', 'atmosphere/loss_response/exosphere.py',
          'atmosphere/loss_response/tides.py', 'atmosphere/thermal_column.py', 'atmosphere/middle_atmosphere/chemistry.py',
          'atmosphere/middle_atmosphere/photolysis.py', 'atmosphere/middle_atmosphere/escape.py',
@@ -680,7 +704,10 @@ def main(argv=None) -> int:
                       'hydrogen. oxygen_made_kg_s counts the atoms the glow and the traced light make above the 0.3 Pa base '
                       '(and the glow below it); oxygen_carried_down_kg_s the odd oxygen going down through the base. Runs '
                       'are at the swarm\'s standard level and the ring fleet\'s 4 lunar radii, the column\'s heat placed '
-                      'where the tracing puts it; earth_mixing divides the middle atmosphere\'s eddy mixing by its 36-fold '
+                      'where the tracing puts it; gravity_waves takes the breaking waves\' mixing above the base '
+                      '(gravity_waves.py; gravity_waves_weak with Earth\'s wavelengths and a third of the calibration), '
+                      'titan_analogue a tenth of the Moon-scaled mixing, as Titan\'s measured mixing would give, and '
+                      'earth_mixing divides the middle atmosphere\'s eddy mixing by its 36-fold '
                       'scaling for the Moon, a bound on weak mixing. cycles_23_24_mean is the state of the two cycles\' '
                       'mean spectrum; cycle_mean averages the yearly states of the warmest case over 1997-2019, which '
                       'leans high.'),

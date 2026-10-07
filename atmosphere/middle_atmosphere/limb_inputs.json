@@ -86,12 +86,28 @@
    "use": "Solar cycle of each band of the light below 175 nm, for the cycle-mean loss (atmosphere/loss_response/cycle.py)"
   },
   {
+   "name": "fism2_band_0-0.5nm_1947-02_1996-07.csv",
+   "url": "https://lasp.colorado.edu/lisird/latis/dap/fism_daily_hr.csv?&time%3E=1947-01-01&time%3C1996-08-01&wavelength%3E=0&wavelength%3C0.5&integrate()",
+   "sha256": "2ee4f37ec10a183ee44196027a16618aea9d8ad3a93bfe70458a9ebe3f89faeb",
+   "bytes": 501457,
+   "credit": "FISM2 daily solar spectral irradiance integrated over 0-0.5 nm, 14 February 1947 (the start of the record) to 31 July 1996 (solar cycles 18 to 22): the Flare Irradiance Spectral Model, version 2 (Chamberlin et al. 2020, Space Weather 18, e2020SW002588), via LASP's LISIRD data centre (lasp.colorado.edu/lisird), integrated over wavelength by the LaTiS server. Before 1978 FISM2 rests on the 10.7 cm radio flux alone. A LaTiS query; its bytes are those of the model version current when retrieved.",
+   "use": "Solar maxima of each band of the light below 175 nm since 1947 (atmosphere/loss_response/cycle.py)"
+  },
+  {
    "name": "fism2_band_0.5-1nm_1996-08_2025-12.csv",
    "url": "https://lasp.colorado.edu/lisird/latis/dap/fism_daily_hr.csv?&time%3E=1996-08-01&time%3C2026-01-01&wavelength%3E=0.5&wavelength%3C1&integrate()",
    "sha256": "4cc67a6044b87866f83536c2081c900c9a724d617a39d7ed1700315451e9afad",
    "bytes": 316752,
    "credit": "FISM2 daily solar spectral irradiance integrated over 0.5-1 nm, 1 August 1996 to 31 December 2025 (solar cycles 23 and 24 and most of 25): the Flare Irradiance Spectral Model, version 2 (Chamberlin et al. 2020, Space Weather 18, e2020SW002588), via LASP's LISIRD data centre (lasp.colorado.edu/lisird), integrated over wavelength by the LaTiS server. A LaTiS query; its bytes are those of the model version current when retrieved.",
    "use": "Solar cycle of each band of the light below 175 nm, for the cycle-mean loss (atmosphere/loss_response/cycle.py)"
+  },
+  {
+   "name": "fism2_band_0.5-1nm_1947-02_1996-07.csv",
+   "url": "https://lasp.colorado.edu/lisird/latis/dap/fism_daily_hr.csv?&time%3E=1947-01-01&time%3C1996-08-01&wavelength%3E=0.5&wavelength%3C1&integrate()",
+   "sha256": "821d4fba343a7a59255ec109943e3c9f1e4a70751d03c849626b3b4d35711bf8",
+   "bytes": 531238,
+   "credit": "FISM2 daily solar spectral irradiance integrated over 0.5-1 nm, 14 February 1947 (the start of the record) to 31 July 1996 (solar cycles 18 to 22): the Flare Irradiance Spectral Model, version 2 (Chamberlin et al. 2020, Space Weather 18, e2020SW002588), via LASP's LISIRD data centre (lasp.colorado.edu/lisird), integrated over wavelength by the LaTiS server. Before 1978 FISM2 rests on the 10.7 cm radio flux alone. A LaTiS query; its bytes are those of the model version current when retrieved.",
+   "use": "Solar maxima of each band of the light below 175 nm since 1947 (atmosphere/loss_response/cycle.py)"
   },
   {
    "name": "fism2_band_1-2nm_1996-08_2025-12.csv",
@@ -102,12 +118,28 @@
    "use": "Solar cycle of each band of the light below 175 nm, for the cycle-mean loss (atmosphere/loss_response/cycle.py)"
   },
   {
+   "name": "fism2_band_1-2nm_1947-02_1996-07.csv",
+   "url": "https://lasp.colorado.edu/lisird/latis/dap/fism_daily_hr.csv?&time%3E=1947-01-01&time%3C1996-08-01&wavelength%3E=1&wavelength%3C2&integrate()",
+   "sha256": "1bd70a856185475b448b719bf12276bf2c1f6eeccd3708a5e87ac1f258ca19dc",
+   "bytes": 531118,
+   "credit": "FISM2 daily solar spectral irradiance integrated over 1-2 nm, 14 February 1947 (the start of the record) to 31 July 1996 (solar cycles 18 to 22): the Flare Irradiance Spectral Model, version 2 (Chamberlin et al. 2020, Space Weather 18, e2020SW002588), via LASP's LISIRD data centre (lasp.colorado.edu/lisird), integrated over wavelength by the LaTiS server. Before 1978 FISM2 rests on the 10.7 cm radio flux alone. A LaTiS query; its bytes are those of the model version current when retrieved.",
+   "use": "Solar maxima of each band of the light below 175 nm since 1947 (atmosphere/loss_response/cycle.py)"
+  },
+  {
    "name": "fism2_band_2-5nm_1996-08_2025-12.csv",
    "url": "https://lasp.colorado.edu/lisird/latis/dap/fism_daily_hr.csv?&time%3E=1996-08-01&time%3C2026-01-01&wavelength%3E=2&wavelength%3C5&integrate()",
    "sha256": "b62f814313f3bf8c0a5d82973ce6bd99a341c69ef0cd9bfd00d4704a0d695896",
    "bytes": 316397,
    "credit": "FISM2 daily solar spectral irradiance integrated over 2-5 nm, 1 August 1996 to 31 December 2025 (solar cycles 23 and 24 and most of 25): the Flare Irradiance Spectral Model, version 2 (Chamberlin et al. 2020, Space Weather 18, e2020SW002588), via LASP's LISIRD data centre (lasp.colorado.edu/lisird), integrated over wavelength by the LaTiS server. A LaTiS query; its bytes are those of the model version current when retrieved.",
    "use": "Solar cycle of each band of the light below 175 nm, for the cycle-mean loss (atmosphere/loss_response/cycle.py)"
+  },
+  {
+   "name": "fism2_band_2-5nm_1947-02_1996-07.csv",
+   "url": "https://lasp.colorado.edu/lisird/latis/dap/fism_daily_hr.csv?&time%3E=1947-01-01&time%3C1996-08-01&wavelength%3E=2&wavelength%3C5&integrate()",
+   "sha256": "e5f6f39b0ca818f24acd5e113d66d0d0a933320ee578730b373e072e855aa33b",
+   "bytes": 531177,
+   "credit": "FISM2 daily solar spectral irradiance integrated over 2-5 nm, 14 February 1947 (the start of the record) to 31 July 1996 (solar cycles 18 to 22): the Flare Irradiance Spectral Model, version 2 (Chamberlin et al. 2020, Space Weather 18, e2020SW002588), via LASP's LISIRD data centre (lasp.colorado.edu/lisird), integrated over wavelength by the LaTiS server. Before 1978 FISM2 rests on the 10.7 cm radio flux alone. A LaTiS query; its bytes are those of the model version current when retrieved.",
+   "use": "Solar maxima of each band of the light below 175 nm since 1947 (atmosphere/loss_response/cycle.py)"
   },
   {
    "name": "fism2_band_5-10nm_1996-08_2025-12.csv",
@@ -118,12 +150,28 @@
    "use": "Solar cycle of each band of the light below 175 nm, for the cycle-mean loss (atmosphere/loss_response/cycle.py)"
   },
   {
+   "name": "fism2_band_5-10nm_1947-02_1996-07.csv",
+   "url": "https://lasp.colorado.edu/lisird/latis/dap/fism_daily_hr.csv?&time%3E=1947-01-01&time%3C1996-08-01&wavelength%3E=5&wavelength%3C10&integrate()",
+   "sha256": "93d66ba26b7b035e4397eedb1684fb2f6036d3fee97f99aa0c1bae631382b424",
+   "bytes": 531374,
+   "credit": "FISM2 daily solar spectral irradiance integrated over 5-10 nm, 14 February 1947 (the start of the record) to 31 July 1996 (solar cycles 18 to 22): the Flare Irradiance Spectral Model, version 2 (Chamberlin et al. 2020, Space Weather 18, e2020SW002588), via LASP's LISIRD data centre (lasp.colorado.edu/lisird), integrated over wavelength by the LaTiS server. Before 1978 FISM2 rests on the 10.7 cm radio flux alone. A LaTiS query; its bytes are those of the model version current when retrieved.",
+   "use": "Solar maxima of each band of the light below 175 nm since 1947 (atmosphere/loss_response/cycle.py)"
+  },
+  {
    "name": "fism2_band_10-30nm_1996-08_2025-12.csv",
    "url": "https://lasp.colorado.edu/lisird/latis/dap/fism_daily_hr.csv?&time%3E=1996-08-01&time%3C2026-01-01&wavelength%3E=10&wavelength%3C30&integrate()",
    "sha256": "7bace74a3de0c909e6930cfffaad3e376b3e5102af2a7da28cb963ed58b6c786",
    "bytes": 315857,
    "credit": "FISM2 daily solar spectral irradiance integrated over 10-30 nm, 1 August 1996 to 31 December 2025 (solar cycles 23 and 24 and most of 25): the Flare Irradiance Spectral Model, version 2 (Chamberlin et al. 2020, Space Weather 18, e2020SW002588), via LASP's LISIRD data centre (lasp.colorado.edu/lisird), integrated over wavelength by the LaTiS server. A LaTiS query; its bytes are those of the model version current when retrieved.",
    "use": "Solar cycle of each band of the light below 175 nm, for the cycle-mean loss (atmosphere/loss_response/cycle.py)"
+  },
+  {
+   "name": "fism2_band_10-30nm_1947-02_1996-07.csv",
+   "url": "https://lasp.colorado.edu/lisird/latis/dap/fism_daily_hr.csv?&time%3E=1947-01-01&time%3C1996-08-01&wavelength%3E=10&wavelength%3C30&integrate()",
+   "sha256": "77bfbc673b1512413b6999d583f16e9ff7e957623b1238a8a85ed515f633f5c6",
+   "bytes": 532223,
+   "credit": "FISM2 daily solar spectral irradiance integrated over 10-30 nm, 14 February 1947 (the start of the record) to 31 July 1996 (solar cycles 18 to 22): the Flare Irradiance Spectral Model, version 2 (Chamberlin et al. 2020, Space Weather 18, e2020SW002588), via LASP's LISIRD data centre (lasp.colorado.edu/lisird), integrated over wavelength by the LaTiS server. Before 1978 FISM2 rests on the 10.7 cm radio flux alone. A LaTiS query; its bytes are those of the model version current when retrieved.",
+   "use": "Solar maxima of each band of the light below 175 nm since 1947 (atmosphere/loss_response/cycle.py)"
   },
   {
    "name": "fism2_band_30-50nm_1996-08_2025-12.csv",
@@ -134,12 +182,28 @@
    "use": "Solar cycle of each band of the light below 175 nm, for the cycle-mean loss (atmosphere/loss_response/cycle.py)"
   },
   {
+   "name": "fism2_band_30-50nm_1947-02_1996-07.csv",
+   "url": "https://lasp.colorado.edu/lisird/latis/dap/fism_daily_hr.csv?&time%3E=1947-01-01&time%3C1996-08-01&wavelength%3E=30&wavelength%3C50&integrate()",
+   "sha256": "1cdafee67ebac181cb390c7a0e7f62654592ab112e8d33b6085fac23024e1de6",
+   "bytes": 531479,
+   "credit": "FISM2 daily solar spectral irradiance integrated over 30-50 nm, 14 February 1947 (the start of the record) to 31 July 1996 (solar cycles 18 to 22): the Flare Irradiance Spectral Model, version 2 (Chamberlin et al. 2020, Space Weather 18, e2020SW002588), via LASP's LISIRD data centre (lasp.colorado.edu/lisird), integrated over wavelength by the LaTiS server. Before 1978 FISM2 rests on the 10.7 cm radio flux alone. A LaTiS query; its bytes are those of the model version current when retrieved.",
+   "use": "Solar maxima of each band of the light below 175 nm since 1947 (atmosphere/loss_response/cycle.py)"
+  },
+  {
    "name": "fism2_band_50-80nm_1996-08_2025-12.csv",
    "url": "https://lasp.colorado.edu/lisird/latis/dap/fism_daily_hr.csv?&time%3E=1996-08-01&time%3C2026-01-01&wavelength%3E=50&wavelength%3C80&integrate()",
    "sha256": "3322b8dd517a8a5e027a69c5931f6ca68f2c20f83581107b79ba89719c18f5f8",
    "bytes": 315732,
    "credit": "FISM2 daily solar spectral irradiance integrated over 50-80 nm, 1 August 1996 to 31 December 2025 (solar cycles 23 and 24 and most of 25): the Flare Irradiance Spectral Model, version 2 (Chamberlin et al. 2020, Space Weather 18, e2020SW002588), via LASP's LISIRD data centre (lasp.colorado.edu/lisird), integrated over wavelength by the LaTiS server. A LaTiS query; its bytes are those of the model version current when retrieved.",
    "use": "Solar cycle of each band of the light below 175 nm, for the cycle-mean loss (atmosphere/loss_response/cycle.py)"
+  },
+  {
+   "name": "fism2_band_50-80nm_1947-02_1996-07.csv",
+   "url": "https://lasp.colorado.edu/lisird/latis/dap/fism_daily_hr.csv?&time%3E=1947-01-01&time%3C1996-08-01&wavelength%3E=50&wavelength%3C80&integrate()",
+   "sha256": "199ae4dbb70da793e179f2c449077ff12f71fef5c8f9f71e7badd3eb4bf316af",
+   "bytes": 529613,
+   "credit": "FISM2 daily solar spectral irradiance integrated over 50-80 nm, 14 February 1947 (the start of the record) to 31 July 1996 (solar cycles 18 to 22): the Flare Irradiance Spectral Model, version 2 (Chamberlin et al. 2020, Space Weather 18, e2020SW002588), via LASP's LISIRD data centre (lasp.colorado.edu/lisird), integrated over wavelength by the LaTiS server. Before 1978 FISM2 rests on the 10.7 cm radio flux alone. A LaTiS query; its bytes are those of the model version current when retrieved.",
+   "use": "Solar maxima of each band of the light below 175 nm since 1947 (atmosphere/loss_response/cycle.py)"
   },
   {
    "name": "fism2_band_80-102.7nm_1996-08_2025-12.csv",
@@ -150,12 +214,28 @@
    "use": "Solar cycle of each band of the light below 175 nm, for the cycle-mean loss (atmosphere/loss_response/cycle.py)"
   },
   {
+   "name": "fism2_band_80-102.7nm_1947-02_1996-07.csv",
+   "url": "https://lasp.colorado.edu/lisird/latis/dap/fism_daily_hr.csv?&time%3E=1947-01-01&time%3C1996-08-01&wavelength%3E=80&wavelength%3C102.7&integrate()",
+   "sha256": "0bee92e31a41a6b2991aed85bfcec558f60585746534c49231292c7dd9036e83",
+   "bytes": 522706,
+   "credit": "FISM2 daily solar spectral irradiance integrated over 80-102.7 nm, 14 February 1947 (the start of the record) to 31 July 1996 (solar cycles 18 to 22): the Flare Irradiance Spectral Model, version 2 (Chamberlin et al. 2020, Space Weather 18, e2020SW002588), via LASP's LISIRD data centre (lasp.colorado.edu/lisird), integrated over wavelength by the LaTiS server. Before 1978 FISM2 rests on the 10.7 cm radio flux alone. A LaTiS query; its bytes are those of the model version current when retrieved.",
+   "use": "Solar maxima of each band of the light below 175 nm since 1947 (atmosphere/loss_response/cycle.py)"
+  },
+  {
    "name": "fism2_band_102.7-121nm_1996-08_2025-12.csv",
    "url": "https://lasp.colorado.edu/lisird/latis/dap/fism_daily_hr.csv?&time%3E=1996-08-01&time%3C2026-01-01&wavelength%3E=102.7&wavelength%3C121&integrate()",
    "sha256": "6c0a56e0f2f883dc75a82e157320582022aad21099a25719f3c7a6d3962d613f",
    "bytes": 310418,
    "credit": "FISM2 daily solar spectral irradiance integrated over 102.7-121 nm, 1 August 1996 to 31 December 2025 (solar cycles 23 and 24 and most of 25): the Flare Irradiance Spectral Model, version 2 (Chamberlin et al. 2020, Space Weather 18, e2020SW002588), via LASP's LISIRD data centre (lasp.colorado.edu/lisird), integrated over wavelength by the LaTiS server. A LaTiS query; its bytes are those of the model version current when retrieved.",
    "use": "Solar cycle of each band of the light below 175 nm, for the cycle-mean loss (atmosphere/loss_response/cycle.py)"
+  },
+  {
+   "name": "fism2_band_102.7-121nm_1947-02_1996-07.csv",
+   "url": "https://lasp.colorado.edu/lisird/latis/dap/fism_daily_hr.csv?&time%3E=1947-01-01&time%3C1996-08-01&wavelength%3E=102.7&wavelength%3C121&integrate()",
+   "sha256": "d76d1f959cd2fa2cf9c8108d0bf2ecd4e578c63d60f73d43173e193d1ca81195",
+   "bytes": 521864,
+   "credit": "FISM2 daily solar spectral irradiance integrated over 102.7-121 nm, 14 February 1947 (the start of the record) to 31 July 1996 (solar cycles 18 to 22): the Flare Irradiance Spectral Model, version 2 (Chamberlin et al. 2020, Space Weather 18, e2020SW002588), via LASP's LISIRD data centre (lasp.colorado.edu/lisird), integrated over wavelength by the LaTiS server. Before 1978 FISM2 rests on the 10.7 cm radio flux alone. A LaTiS query; its bytes are those of the model version current when retrieved.",
+   "use": "Solar maxima of each band of the light below 175 nm since 1947 (atmosphere/loss_response/cycle.py)"
   },
   {
    "name": "fism2_band_121-122nm_1996-08_2025-12.csv",
@@ -166,12 +246,28 @@
    "use": "Solar cycle of each band of the light below 175 nm, for the cycle-mean loss (atmosphere/loss_response/cycle.py)"
   },
   {
+   "name": "fism2_band_121-122nm_1947-02_1996-07.csv",
+   "url": "https://lasp.colorado.edu/lisird/latis/dap/fism_daily_hr.csv?&time%3E=1947-01-01&time%3C1996-08-01&wavelength%3E=121&wavelength%3C122&integrate()",
+   "sha256": "64c292eaca88d62b9ae3602930ddaedbdfe8553dc7df3d259d12a49e3e25a514",
+   "bytes": 522637,
+   "credit": "FISM2 daily solar spectral irradiance integrated over 121-122 nm, 14 February 1947 (the start of the record) to 31 July 1996 (solar cycles 18 to 22): the Flare Irradiance Spectral Model, version 2 (Chamberlin et al. 2020, Space Weather 18, e2020SW002588), via LASP's LISIRD data centre (lasp.colorado.edu/lisird), integrated over wavelength by the LaTiS server. Before 1978 FISM2 rests on the 10.7 cm radio flux alone. A LaTiS query; its bytes are those of the model version current when retrieved.",
+   "use": "Solar maxima of each band of the light below 175 nm since 1947 (atmosphere/loss_response/cycle.py)"
+  },
+  {
    "name": "fism2_band_122-130nm_1996-08_2025-12.csv",
    "url": "https://lasp.colorado.edu/lisird/latis/dap/fism_daily_hr.csv?&time%3E=1996-08-01&time%3C2026-01-01&wavelength%3E=122&wavelength%3C130&integrate()",
    "sha256": "ce66fe7042ff4ac243bb49bb7789df12965f1d4df6fc3ff6356dd44b11bb9f4e",
    "bytes": 316904,
    "credit": "FISM2 daily solar spectral irradiance integrated over 122-130 nm, 1 August 1996 to 31 December 2025 (solar cycles 23 and 24 and most of 25): the Flare Irradiance Spectral Model, version 2 (Chamberlin et al. 2020, Space Weather 18, e2020SW002588), via LASP's LISIRD data centre (lasp.colorado.edu/lisird), integrated over wavelength by the LaTiS server. A LaTiS query; its bytes are those of the model version current when retrieved.",
    "use": "Solar cycle of each band of the light below 175 nm, for the cycle-mean loss (atmosphere/loss_response/cycle.py)"
+  },
+  {
+   "name": "fism2_band_122-130nm_1947-02_1996-07.csv",
+   "url": "https://lasp.colorado.edu/lisird/latis/dap/fism_daily_hr.csv?&time%3E=1947-01-01&time%3C1996-08-01&wavelength%3E=122&wavelength%3C130&integrate()",
+   "sha256": "7d725748a290642473f78835fc8c436ee1a1466252fa4cf3902711d1788183f9",
+   "bytes": 532267,
+   "credit": "FISM2 daily solar spectral irradiance integrated over 122-130 nm, 14 February 1947 (the start of the record) to 31 July 1996 (solar cycles 18 to 22): the Flare Irradiance Spectral Model, version 2 (Chamberlin et al. 2020, Space Weather 18, e2020SW002588), via LASP's LISIRD data centre (lasp.colorado.edu/lisird), integrated over wavelength by the LaTiS server. Before 1978 FISM2 rests on the 10.7 cm radio flux alone. A LaTiS query; its bytes are those of the model version current when retrieved.",
+   "use": "Solar maxima of each band of the light below 175 nm since 1947 (atmosphere/loss_response/cycle.py)"
   },
   {
    "name": "fism2_band_130-150nm_1996-08_2025-12.csv",
@@ -182,6 +278,14 @@
    "use": "Solar cycle of each band of the light below 175 nm, for the cycle-mean loss (atmosphere/loss_response/cycle.py)"
   },
   {
+   "name": "fism2_band_130-150nm_1947-02_1996-07.csv",
+   "url": "https://lasp.colorado.edu/lisird/latis/dap/fism_daily_hr.csv?&time%3E=1947-01-01&time%3C1996-08-01&wavelength%3E=130&wavelength%3C150&integrate()",
+   "sha256": "99fbc26d476090cc5981e4755961c9de22e3e4598e1cd27584e4314eda7eaf17",
+   "bytes": 537718,
+   "credit": "FISM2 daily solar spectral irradiance integrated over 130-150 nm, 14 February 1947 (the start of the record) to 31 July 1996 (solar cycles 18 to 22): the Flare Irradiance Spectral Model, version 2 (Chamberlin et al. 2020, Space Weather 18, e2020SW002588), via LASP's LISIRD data centre (lasp.colorado.edu/lisird), integrated over wavelength by the LaTiS server. Before 1978 FISM2 rests on the 10.7 cm radio flux alone. A LaTiS query; its bytes are those of the model version current when retrieved.",
+   "use": "Solar maxima of each band of the light below 175 nm since 1947 (atmosphere/loss_response/cycle.py)"
+  },
+  {
    "name": "fism2_band_150-160nm_1996-08_2025-12.csv",
    "url": "https://lasp.colorado.edu/lisird/latis/dap/fism_daily_hr.csv?&time%3E=1996-08-01&time%3C2026-01-01&wavelength%3E=150&wavelength%3C160&integrate()",
    "sha256": "7e928551bf0d69153d80194b7dc506e01bdcd6be37f549f82b35f6399bf1ceb3",
@@ -190,12 +294,28 @@
    "use": "Solar cycle of each band of the light below 175 nm, for the cycle-mean loss (atmosphere/loss_response/cycle.py)"
   },
   {
+   "name": "fism2_band_150-160nm_1947-02_1996-07.csv",
+   "url": "https://lasp.colorado.edu/lisird/latis/dap/fism_daily_hr.csv?&time%3E=1947-01-01&time%3C1996-08-01&wavelength%3E=150&wavelength%3C160&integrate()",
+   "sha256": "7d601ff0bdf46af510d89b13b27dde68205af98b276e64b7d5fc8c9b3ee927a4",
+   "bytes": 537644,
+   "credit": "FISM2 daily solar spectral irradiance integrated over 150-160 nm, 14 February 1947 (the start of the record) to 31 July 1996 (solar cycles 18 to 22): the Flare Irradiance Spectral Model, version 2 (Chamberlin et al. 2020, Space Weather 18, e2020SW002588), via LASP's LISIRD data centre (lasp.colorado.edu/lisird), integrated over wavelength by the LaTiS server. Before 1978 FISM2 rests on the 10.7 cm radio flux alone. A LaTiS query; its bytes are those of the model version current when retrieved.",
+   "use": "Solar maxima of each band of the light below 175 nm since 1947 (atmosphere/loss_response/cycle.py)"
+  },
+  {
    "name": "fism2_band_160-175nm_1996-08_2025-12.csv",
    "url": "https://lasp.colorado.edu/lisird/latis/dap/fism_daily_hr.csv?&time%3E=1996-08-01&time%3C2026-01-01&wavelength%3E=160&wavelength%3C175&integrate()",
    "sha256": "f1c041182535ced34b4df3052b5198054e5808ac57a4e902265de3409b66b924",
    "bytes": 311948,
    "credit": "FISM2 daily solar spectral irradiance integrated over 160-175 nm, 1 August 1996 to 31 December 2025 (solar cycles 23 and 24 and most of 25): the Flare Irradiance Spectral Model, version 2 (Chamberlin et al. 2020, Space Weather 18, e2020SW002588), via LASP's LISIRD data centre (lasp.colorado.edu/lisird), integrated over wavelength by the LaTiS server. A LaTiS query; its bytes are those of the model version current when retrieved.",
    "use": "Solar cycle of each band of the light below 175 nm, for the cycle-mean loss (atmosphere/loss_response/cycle.py)"
+  },
+  {
+   "name": "fism2_band_160-175nm_1947-02_1996-07.csv",
+   "url": "https://lasp.colorado.edu/lisird/latis/dap/fism_daily_hr.csv?&time%3E=1947-01-01&time%3C1996-08-01&wavelength%3E=160&wavelength%3C175&integrate()",
+   "sha256": "3fb6814d8e3558ed51e4b31cbf69646ff0561ec5f1689ecd0eb60d237aeea45c",
+   "bytes": 524266,
+   "credit": "FISM2 daily solar spectral irradiance integrated over 160-175 nm, 14 February 1947 (the start of the record) to 31 July 1996 (solar cycles 18 to 22): the Flare Irradiance Spectral Model, version 2 (Chamberlin et al. 2020, Space Weather 18, e2020SW002588), via LASP's LISIRD data centre (lasp.colorado.edu/lisird), integrated over wavelength by the LaTiS server. Before 1978 FISM2 rests on the 10.7 cm radio flux alone. A LaTiS query; its bytes are those of the model version current when retrieved.",
+   "use": "Solar maxima of each band of the light below 175 nm since 1947 (atmosphere/loss_response/cycle.py)"
   }
  ]
 }

@@ -153,7 +153,8 @@ class ProductTests(unittest.TestCase):
         counts = self.product['escape_count']
         for case in self.product['cases'].values():
             table = case['by_profile_heat'][0]['table']
-            for activity in ('quiet', 'solar_maximum'):
+            # The count takes single factors on the ultraviolet and X-rays, as the stress case does.
+            for activity in ('quiet', 'solar_maximum_stress'):
                 window = table['window']['disk'][activity]['above_base_W_m2']
                 self.assertAlmostEqual(window / counts['window_film_heat'][activity], 1., delta=.01)
                 # The escape model absorbs Lyman-alpha along a mean slant path; the rays find it within 10 per cent.
@@ -234,7 +235,9 @@ class ProductTests(unittest.TestCase):
 
     def test_measured_x_rays_leave_the_4_um_film_well_under_the_glow(self):
         for name in ('titania_stack_collisional', 'titania_stack_lte', 'titania_stack_all_heats'):
-            for activity in ('solar_maximum', *lh.MAXIMA):
+            for activity in ('solar_maximum', 'solar_maximum_stress', *lh.ACTIVITIES):
+                if activity == 'quiet':
+                    continue
                 row = self.product['cases'][name]['scenarios'][f'annulus_4_um_{activity}_gaps_0']
                 parts = row['traced']['parts_W_m2']
                 self.assertLess(parts['annulus'], .3 * parts['glow'])
@@ -242,7 +245,7 @@ class ProductTests(unittest.TestCase):
     def test_tracing_cuts_the_gaps_allowed_to_a_quarter_or_a_third_in_the_cooler_cases(self):
         for name in ('titania_stack_collisional', 'titania_stack_lte'):
             for row in self.product['cases'][name]['budgets']:
-                if row['film'] != 'annulus_4_um' or row['activity'] not in ('quiet', 'solar_maximum'):
+                if row['film'] != 'annulus_4_um' or row['activity'] not in ('quiet', 'solar_maximum_stress'):
                     continue
                 self.assertTrue(.2 < row['traced'] / row['disk_count'] < .4, (name, row['activity'], row['budget_kg_s']))
 

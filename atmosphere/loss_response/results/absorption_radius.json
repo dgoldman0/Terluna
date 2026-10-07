@@ -4,10 +4,10 @@
     "domain": "atmosphere",
     "files": {
       "atmosphere/loss_response/absorption.py": "c0836c3a8eacb295",
-      "atmosphere/loss_response/model.py": "84e19131df711e6a",
+      "atmosphere/loss_response/model.py": "634bb37ff7381bfd",
       "atmosphere/loss_response/traced.py": "a3d523f256771daf",
       "atmosphere/thermal_column.py": "072ed84f38aad0eb",
-      "atmosphere/middle_atmosphere/results/limb_heat.json": "18ede4030c452c07"
+      "atmosphere/middle_atmosphere/results/limb_heat.json": "84489a09d02d2161"
     }
   },
   "evidence": "The protected radius that covers the heating from the middle atmosphere's limb tracing at each budget's allowed UV transmission, with the band-averaged limb curve of the thermal-column profile as a cross-check; and the photoionization of the ballistic part of a two-body Chamberlain exosphere outside the shadow cylinder. The ion production bounds the pickup loss from above: the plasma interaction that decides how many ions escape is not modelled, and Earth's tides are not included.",
@@ -24,7 +24,8 @@
   },
   "ionization_rate_s": {
     "quiet": 5.989578432199441e-07,
-    "solar_maximum": 1.4973946080498604e-06
+    "solar_maximum": 1.499533187329199e-06,
+    "solar_maximum_stress": 1.4973946080498604e-06
   },
   "outer_radii_R": {
     "third_hill": 11.799240244042823,
@@ -253,6 +254,222 @@
       "treatment": "collisional",
       "activity": "solar_maximum",
       "budget_kg_s": 1.0,
+      "allowed_leak_fraction": 0.0008567873147774838,
+      "deposited_heat_w_m2": 1.3247838236802022e-05,
+      "exobase_radius_R": 2.674066822958883,
+      "exobase_temperature_k": 286.50391172232736,
+      "exobase_density_m3": 4978500270401.105,
+      "jeans_lambda_N2": 12.410040434935093,
+      "molecular_jeans_loss_kg_s": 0.34368988603966905,
+      "tau_one_radius_R": {
+        "xuv": 2.0655489535124016,
+        "lyman_alpha": 1.3459618030407372,
+        "schumann_runge": 1.6756248818282486
+      },
+      "limb_heating_leak_at_3R": 0.0,
+      "heating": {
+        "0.1": {
+          "radius_R": 3.5,
+          "aperture": {
+            "aperture_radius_km": 6173.909345219243,
+            "area_over_ring_fleet": 0.7685166820633214
+          }
+        },
+        "0.5": {
+          "radius_R": 3.5,
+          "aperture": {
+            "aperture_radius_km": 6173.909345219243,
+            "area_over_ring_fleet": 0.7685166820633214
+          }
+        }
+      },
+      "exosphere_ion_production_kg_s": {
+        "third_hill": {
+          "3": 10.781719326560104,
+          "4": 2.611644031535029,
+          "5": 1.1619968973496433,
+          "6": 0.6354967339538233,
+          "8": 0.2174367023606866,
+          "10": 0.05420936578923305,
+          "12": 0.0,
+          "heating_radius": 4.681588310308513
+        },
+        "half_hill": {
+          "3": 11.040904803507267,
+          "4": 2.8660113918703285,
+          "5": 1.4099655976220427,
+          "6": 0.8753958546220955,
+          "8": 0.4353279446584311,
+          "10": 0.23942801954206766,
+          "12": 0.12793852965481767,
+          "heating_radius": 4.938571097224408
+        },
+        "hill": {
+          "3": 11.358581640088953,
+          "4": 3.181622324183963,
+          "5": 1.722955168238248,
+          "6": 1.1851499697695393,
+          "8": 0.7366640038724319,
+          "10": 0.5295057774408747,
+          "12": 0.4034774256070749,
+          "heating_radius": 5.255258681287329
+        }
+      },
+      "radius_for_production_of_a_tenth_of_budget_R": {
+        "third_hill": 9.248108448154307,
+        "half_hill": 12.699595791595376,
+        "hill": 23.178692321183007
+      }
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "collisional",
+      "activity": "solar_maximum",
+      "budget_kg_s": 10.0,
+      "allowed_leak_fraction": 0.0010180898418747433,
+      "deposited_heat_w_m2": 1.621050447856295e-05,
+      "exobase_radius_R": 3.1532663182031624,
+      "exobase_temperature_k": 324.51677204004704,
+      "exobase_density_m3": 3160931986594.1094,
+      "jeans_lambda_N2": 9.291336925523693,
+      "molecular_jeans_loss_kg_s": 5.736965709660816,
+      "tau_one_radius_R": {
+        "xuv": 2.218745166562836,
+        "lyman_alpha": 1.3474741774700785,
+        "schumann_runge": 1.723812644628112
+      },
+      "limb_heating_leak_at_3R": 0.003091697856141558,
+      "heating": {
+        "0.1": {
+          "radius_R": 4.0,
+          "aperture": {
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
+          }
+        },
+        "0.5": {
+          "radius_R": 4.0,
+          "aperture": {
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
+          }
+        }
+      },
+      "exosphere_ion_production_kg_s": {
+        "third_hill": {
+          "3": 57.0341184439462,
+          "4": 20.489478482539734,
+          "5": 10.483269200572508,
+          "6": 6.192751117860566,
+          "8": 2.2996322220255063,
+          "10": 0.598680194352498,
+          "12": 0.0,
+          "heating_radius": 20.489478482539734
+        },
+        "half_hill": {
+          "3": 60.14093280542954,
+          "4": 23.53849372003011,
+          "5": 13.456210074420472,
+          "6": 9.069781067508403,
+          "8": 4.915235294116593,
+          "10": 2.8267428750414982,
+          "12": 1.552819834182709,
+          "heating_radius": 23.53849372003011
+        },
+        "hill": {
+          "3": 64.40464887364634,
+          "4": 27.775400983011316,
+          "5": 17.658452794488493,
+          "6": 13.22914145619038,
+          "8": 8.963009379577088,
+          "10": 6.725372539265131,
+          "12": 5.258966337998721,
+          "heating_radius": 27.775400983011316
+        }
+      },
+      "radius_for_production_of_a_tenth_of_budget_R": {
+        "third_hill": 9.372087782809809,
+        "half_hill": 13.235899686978081,
+        "hill": 25.25959521327677
+      }
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "collisional",
+      "activity": "solar_maximum",
+      "budget_kg_s": 100.0,
+      "allowed_leak_fraction": 0.0010872421120354783,
+      "deposited_heat_w_m2": 1.999999999998992e-05,
+      "exobase_radius_R": 3.6783336910744606,
+      "exobase_temperature_k": 348.4728626510893,
+      "exobase_density_m3": 2163228467012.8726,
+      "jeans_lambda_N2": 7.417472077775454,
+      "molecular_jeans_loss_kg_s": 30.06782902606252,
+      "tau_one_radius_R": {
+        "xuv": 2.3557739730772074,
+        "lyman_alpha": 1.3502247523708981,
+        "schumann_runge": 1.7621364813349283
+      },
+      "limb_heating_leak_at_3R": 0.036058040191033765,
+      "heating": {
+        "0.1": {
+          "radius_R": 4.38300555430173,
+          "aperture": {
+            "aperture_radius_km": 7708.043195263068,
+            "area_over_ring_fleet": 1.1979014266648147
+          }
+        },
+        "0.5": {
+          "radius_R": 4.0,
+          "aperture": {
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
+          }
+        }
+      },
+      "exosphere_ion_production_kg_s": {
+        "third_hill": {
+          "3": 115.67673074436286,
+          "4": 69.37089993848298,
+          "5": 38.08735985146404,
+          "6": 23.42206858470509,
+          "8": 9.09319522212926,
+          "10": 2.4261089951043524,
+          "12": 0.0,
+          "heating_radius": 53.893308258698674
+        },
+        "half_hill": {
+          "3": 128.89409741148265,
+          "4": 82.34347659386292,
+          "5": 50.73790323859725,
+          "6": 35.66658291298347,
+          "8": 20.23135110327542,
+          "10": 11.925676820884307,
+          "12": 6.654894056451434,
+          "heating_radius": 66.75198212153498
+        },
+        "hill": {
+          "3": 148.29749291688978,
+          "4": 101.62600524387216,
+          "5": 69.86358277423298,
+          "6": 54.59856785943324,
+          "8": 38.659390033865044,
+          "10": 29.680343502654416,
+          "12": 23.540818226453197,
+          "heating_radius": 85.97866198232376
+        }
+      },
+      "radius_for_production_of_a_tenth_of_budget_R": {
+        "third_hill": 7.815203680463571,
+        "half_hill": 10.63998275863341,
+        "hill": 19.715219183341755
+      }
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "collisional",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 1.0,
       "allowed_leak_fraction": 0.0006225000592937312,
       "deposited_heat_w_m2": 1.2356406696208574e-05,
       "exobase_radius_R": 2.6042655224070463,
@@ -323,7 +540,7 @@
     {
       "shield": "titania_stack",
       "treatment": "collisional",
-      "activity": "solar_maximum",
+      "activity": "solar_maximum_stress",
       "budget_kg_s": 10.0,
       "allowed_leak_fraction": 0.0007118924126894719,
       "deposited_heat_w_m2": 1.3948876727233914e-05,
@@ -395,7 +612,7 @@
     {
       "shield": "titania_stack",
       "treatment": "collisional",
-      "activity": "solar_maximum",
+      "activity": "solar_maximum_stress",
       "budget_kg_s": 100.0,
       "allowed_leak_fraction": 0.0007901760742894927,
       "deposited_heat_w_m2": 1.999999999996822e-05,
@@ -685,6 +902,222 @@
       "treatment": "lte",
       "activity": "solar_maximum",
       "budget_kg_s": 1.0,
+      "allowed_leak_fraction": 0.0005391054144225899,
+      "deposited_heat_w_m2": 1.0947216374927782e-05,
+      "exobase_radius_R": 2.8223150937596175,
+      "exobase_temperature_k": 272.52912654860415,
+      "exobase_density_m3": 4698396684851.505,
+      "jeans_lambda_N2": 12.361113254035079,
+      "molecular_jeans_loss_kg_s": 0.36882045655248696,
+      "tau_one_radius_R": {
+        "xuv": 2.1778520616793413,
+        "lyman_alpha": 1.3996565822306282,
+        "schumann_runge": 1.7613710113033525
+      },
+      "limb_heating_leak_at_3R": 0.0,
+      "heating": {
+        "0.1": {
+          "radius_R": 4.0,
+          "aperture": {
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
+          }
+        },
+        "0.5": {
+          "radius_R": 4.0,
+          "aperture": {
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
+          }
+        }
+      },
+      "exosphere_ion_production_kg_s": {
+        "third_hill": {
+          "3": 17.07693115355358,
+          "4": 3.6609247075660196,
+          "5": 1.5466402638920909,
+          "6": 0.8239604291051098,
+          "8": 0.2747675551456068,
+          "10": 0.06763724694452487,
+          "12": 0.0,
+          "heating_radius": 3.6609247075660196
+        },
+        "half_hill": {
+          "3": 17.39297436282792,
+          "4": 3.971103167779999,
+          "5": 1.848998377070855,
+          "6": 1.1164554919057514,
+          "8": 0.5403571187384958,
+          "10": 0.2932669608743063,
+          "12": 0.15545458179870025,
+          "heating_radius": 3.971103167779999
+        },
+        "hill": {
+          "3": 17.76807963021158,
+          "4": 4.343717699515885,
+          "5": 2.2185057747939587,
+          "6": 1.482132148673382,
+          "8": 0.8960578135951944,
+          "10": 0.6356252900545308,
+          "12": 0.4805777076320964,
+          "heating_radius": 4.343717699515885
+        }
+      },
+      "radius_for_production_of_a_tenth_of_budget_R": {
+        "third_hill": 9.549132095179287,
+        "half_hill": 13.199523454498816,
+        "hill": 24.217128512657734
+      }
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "lte",
+      "activity": "solar_maximum",
+      "budget_kg_s": 10.0,
+      "allowed_leak_fraction": 0.0006899364670088575,
+      "deposited_heat_w_m2": 1.3218406515681241e-05,
+      "exobase_radius_R": 3.2381990037763586,
+      "exobase_temperature_k": 302.99932194961485,
+      "exobase_density_m3": 3210146674373.174,
+      "jeans_lambda_N2": 9.690157070556634,
+      "molecular_jeans_loss_kg_s": 4.12432592609928,
+      "tau_one_radius_R": {
+        "xuv": 2.312892744318404,
+        "lyman_alpha": 1.4021709968308897,
+        "schumann_runge": 1.8040553266830313
+      },
+      "limb_heating_leak_at_3R": 0.0070034748085451145,
+      "heating": {
+        "0.1": {
+          "radius_R": 4.0,
+          "aperture": {
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
+          }
+        },
+        "0.5": {
+          "radius_R": 4.0,
+          "aperture": {
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
+          }
+        }
+      },
+      "exosphere_ion_production_kg_s": {
+        "third_hill": {
+          "3": 59.76268219486246,
+          "4": 20.602850112537908,
+          "5": 9.931116686892132,
+          "6": 5.68652933186659,
+          "8": 2.045333397756291,
+          "10": 0.5237479160760289,
+          "12": 0.0,
+          "heating_radius": 20.602850112537908
+        },
+        "half_hill": {
+          "3": 62.397277524088594,
+          "4": 23.188290066863757,
+          "5": 12.451840710726499,
+          "6": 8.125674288853782,
+          "8": 4.262029470857844,
+          "10": 2.410514709499432,
+          "12": 1.31055348588974,
+          "heating_radius": 23.188290066863757
+        },
+        "hill": {
+          "3": 65.85969401994143,
+          "4": 26.62887409546069,
+          "5": 15.86410922240987,
+          "6": 11.502931553532193,
+          "8": 7.54823001684791,
+          "10": 5.574981706612507,
+          "12": 4.317867293200236,
+          "heating_radius": 26.62887409546069
+        }
+      },
+      "radius_for_production_of_a_tenth_of_budget_R": {
+        "third_hill": 9.188655335317911,
+        "half_hill": 12.777757775871976,
+        "hill": 23.87488335640183
+      }
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "lte",
+      "activity": "solar_maximum",
+      "budget_kg_s": 100.0,
+      "allowed_leak_fraction": 0.0007635216920648723,
+      "deposited_heat_w_m2": 1.4999999999993993e-05,
+      "exobase_radius_R": 3.5465241312896043,
+      "exobase_temperature_k": 318.6085932295444,
+      "exobase_density_m3": 2545131810159.6187,
+      "jeans_lambda_N2": 8.414253730071142,
+      "molecular_jeans_loss_kg_s": 12.840005008643894,
+      "tau_one_radius_R": {
+        "xuv": 2.401155661258256,
+        "lyman_alpha": 1.4041217963621146,
+        "schumann_runge": 1.830349079472141
+      },
+      "limb_heating_leak_at_3R": 0.028309081887986046,
+      "heating": {
+        "0.1": {
+          "radius_R": 4.0,
+          "aperture": {
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
+          }
+        },
+        "0.5": {
+          "radius_R": 4.0,
+          "aperture": {
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
+          }
+        }
+      },
+      "exosphere_ion_production_kg_s": {
+        "third_hill": {
+          "3": 93.07722193025018,
+          "4": 46.56662359277928,
+          "5": 23.734241574233167,
+          "6": 14.019682904809098,
+          "8": 5.214911357213847,
+          "10": 1.3597859905644496,
+          "12": 0.0,
+          "heating_radius": 46.56662359277928
+        },
+        "half_hill": {
+          "3": 100.16100881381175,
+          "4": 53.51865472033295,
+          "5": 30.51288505462669,
+          "6": 20.57975640320563,
+          "8": 11.179165660341452,
+          "10": 6.440867939001701,
+          "12": 3.5427168914063696,
+          "heating_radius": 53.51865472033295
+        },
+        "hill": {
+          "3": 109.93496818290065,
+          "4": 63.231277422380906,
+          "5": 40.14603009330821,
+          "6": 30.114624640780402,
+          "8": 20.45837286253584,
+          "10": 15.378390730778989,
+          "12": 12.039262438865554,
+          "heating_radius": 63.231277422380906
+        }
+      },
+      "radius_for_production_of_a_tenth_of_budget_R": {
+        "third_hill": 6.6973512942407964,
+        "half_hill": 8.404136583008075,
+        "hill": 13.625413896907581
+      }
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "lte",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 1.0,
       "allowed_leak_fraction": 0.00042839989003776846,
       "deposited_heat_w_m2": 1.0473254008566118e-05,
       "exobase_radius_R": 2.8289967203167046,
@@ -755,7 +1188,7 @@
     {
       "shield": "titania_stack",
       "treatment": "lte",
-      "activity": "solar_maximum",
+      "activity": "solar_maximum_stress",
       "budget_kg_s": 10.0,
       "allowed_leak_fraction": 0.0005413560964931798,
       "deposited_heat_w_m2": 1.2671512737090608e-05,
@@ -827,7 +1260,7 @@
     {
       "shield": "titania_stack",
       "treatment": "lte",
-      "activity": "solar_maximum",
+      "activity": "solar_maximum_stress",
       "budget_kg_s": 100.0,
       "allowed_leak_fraction": 0.000596829724693339,
       "deposited_heat_w_m2": 1.499999999999209e-05,
@@ -1117,6 +1550,222 @@
       "treatment": "all_heats",
       "activity": "solar_maximum",
       "budget_kg_s": 1.0,
+      "allowed_leak_fraction": 0.00017570826200393648,
+      "deposited_heat_w_m2": 7.933709822671917e-06,
+      "exobase_radius_R": 3.04442380782757,
+      "exobase_temperature_k": 251.89734995215446,
+      "exobase_density_m3": 4368574886440.863,
+      "jeans_lambda_N2": 12.397876334702664,
+      "molecular_jeans_loss_kg_s": 0.37071543746597796,
+      "tau_one_radius_R": {
+        "xuv": 2.350067212841325,
+        "lyman_alpha": 1.4835327630007675,
+        "schumann_runge": 1.8970418734295678
+      },
+      "limb_heating_leak_at_3R": 0.0005766928280904859,
+      "heating": {
+        "0.1": {
+          "radius_R": 4.0,
+          "aperture": {
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
+          }
+        },
+        "0.5": {
+          "radius_R": 4.0,
+          "aperture": {
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
+          }
+        }
+      },
+      "exosphere_ion_production_kg_s": {
+        "third_hill": {
+          "3": 32.88804050641225,
+          "4": 5.840896994355221,
+          "5": 2.243518879786711,
+          "6": 1.1392071583768126,
+          "8": 0.3627037562084758,
+          "10": 0.08729922678316807,
+          "12": 0.0,
+          "heating_radius": 5.840896994355221
+        },
+        "half_hill": {
+          "3": 33.28021985292218,
+          "4": 6.2256824926857215,
+          "5": 2.6185632987521954,
+          "6": 1.5019637267498858,
+          "8": 0.6919372757747828,
+          "10": 0.36670933924654825,
+          "12": 0.1916494874721399,
+          "heating_radius": 6.2256824926857215
+        },
+        "hill": {
+          "3": 33.72016260455143,
+          "4": 6.662793860421789,
+          "5": 3.052021199551924,
+          "6": 1.9308987127768855,
+          "8": 1.1090937621978196,
+          "10": 0.7681091207801232,
+          "12": 0.5726894194106179,
+          "heating_radius": 6.662793860421789
+        }
+      },
+      "radius_for_production_of_a_tenth_of_budget_R": {
+        "third_hill": 9.857028695636465,
+        "half_hill": 13.681116953662947,
+        "hill": 25.100058372089606
+      }
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "all_heats",
+      "activity": "solar_maximum",
+      "budget_kg_s": 10.0,
+      "allowed_leak_fraction": 0.00018084651150604617,
+      "deposited_heat_w_m2": 7.999999999998805e-06,
+      "exobase_radius_R": 3.057816012267877,
+      "exobase_temperature_k": 252.89271760722056,
+      "exobase_density_m3": 4313348791327.7695,
+      "jeans_lambda_N2": 12.294994371517225,
+      "molecular_jeans_loss_kg_s": 0.40718174384514333,
+      "tau_one_radius_R": {
+        "xuv": 2.3551191072339894,
+        "lyman_alpha": 1.483149061108943,
+        "schumann_runge": 1.898508365299014
+      },
+      "limb_heating_leak_at_3R": 0.0008668569304183425,
+      "heating": {
+        "0.1": {
+          "radius_R": 4.0,
+          "aperture": {
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
+          }
+        },
+        "0.5": {
+          "radius_R": 4.0,
+          "aperture": {
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
+          }
+        }
+      },
+      "exosphere_ion_production_kg_s": {
+        "third_hill": {
+          "3": 34.17426774986631,
+          "4": 6.231154685275741,
+          "5": 2.408130118084216,
+          "6": 1.22684210434581,
+          "8": 0.391923167535662,
+          "10": 0.09449197657688052,
+          "12": 0.0,
+          "heating_radius": 6.231154685275741
+        },
+        "half_hill": {
+          "3": 34.600045642191475,
+          "4": 6.648907243555046,
+          "5": 2.8153020907006123,
+          "6": 1.6206878911220113,
+          "8": 0.7493848163294261,
+          "10": 0.39788165178022505,
+          "12": 0.2081694619456549,
+          "heating_radius": 6.648907243555046
+        },
+        "hill": {
+          "3": 35.079718458865884,
+          "4": 7.125508488781416,
+          "5": 3.2879157202808162,
+          "6": 2.088363605451974,
+          "8": 1.2042234090490127,
+          "10": 0.8355501381056785,
+          "12": 0.6236508725291878,
+          "heating_radius": 7.125508488781416
+        }
+      },
+      "radius_for_production_of_a_tenth_of_budget_R": {
+        "third_hill": 6.349662298136024,
+        "half_hill": 7.176926642327649,
+        "hill": 8.945726929390387
+      }
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "all_heats",
+      "activity": "solar_maximum",
+      "budget_kg_s": 100.0,
+      "allowed_leak_fraction": 0.00018084651150604617,
+      "deposited_heat_w_m2": 7.999999999998805e-06,
+      "exobase_radius_R": 3.057816012267877,
+      "exobase_temperature_k": 252.89271760722056,
+      "exobase_density_m3": 4313348791327.7695,
+      "jeans_lambda_N2": 12.294994371517225,
+      "molecular_jeans_loss_kg_s": 0.40718174384514333,
+      "tau_one_radius_R": {
+        "xuv": 2.3551191072339894,
+        "lyman_alpha": 1.483149061108943,
+        "schumann_runge": 1.898508365299014
+      },
+      "limb_heating_leak_at_3R": 0.0008668569304183425,
+      "heating": {
+        "0.1": {
+          "radius_R": 4.0,
+          "aperture": {
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
+          }
+        },
+        "0.5": {
+          "radius_R": 4.0,
+          "aperture": {
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
+          }
+        }
+      },
+      "exosphere_ion_production_kg_s": {
+        "third_hill": {
+          "3": 34.17426774986631,
+          "4": 6.231154685275741,
+          "5": 2.408130118084216,
+          "6": 1.22684210434581,
+          "8": 0.391923167535662,
+          "10": 0.09449197657688052,
+          "12": 0.0,
+          "heating_radius": 6.231154685275741
+        },
+        "half_hill": {
+          "3": 34.600045642191475,
+          "4": 6.648907243555046,
+          "5": 2.8153020907006123,
+          "6": 1.6206878911220113,
+          "8": 0.7493848163294261,
+          "10": 0.39788165178022505,
+          "12": 0.2081694619456549,
+          "heating_radius": 6.648907243555046
+        },
+        "hill": {
+          "3": 35.079718458865884,
+          "4": 7.125508488781416,
+          "5": 3.2879157202808162,
+          "6": 2.088363605451974,
+          "8": 1.2042234090490127,
+          "10": 0.8355501381056785,
+          "12": 0.6236508725291878,
+          "heating_radius": 7.125508488781416
+        }
+      },
+      "radius_for_production_of_a_tenth_of_budget_R": {
+        "third_hill": 3.665911423183746,
+        "half_hill": 3.6918065605894923,
+        "hill": 3.721201496485642
+      }
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "all_heats",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 1.0,
       "allowed_leak_fraction": 0.0001629334917517308,
       "deposited_heat_w_m2": 7.1562310389671705e-06,
       "exobase_radius_R": 3.022393899994862,
@@ -1187,7 +1836,7 @@
     {
       "shield": "titania_stack",
       "treatment": "all_heats",
-      "activity": "solar_maximum",
+      "activity": "solar_maximum_stress",
       "budget_kg_s": 10.0,
       "allowed_leak_fraction": 0.00020815918534957705,
       "deposited_heat_w_m2": 7.99999999999995e-06,
@@ -1259,7 +1908,7 @@
     {
       "shield": "titania_stack",
       "treatment": "all_heats",
-      "activity": "solar_maximum",
+      "activity": "solar_maximum_stress",
       "budget_kg_s": 100.0,
       "allowed_leak_fraction": 0.00020815918534957705,
       "deposited_heat_w_m2": 7.99999999999995e-06,
@@ -1549,6 +2198,222 @@
       "treatment": "collisional",
       "activity": "solar_maximum",
       "budget_kg_s": 1.0,
+      "allowed_leak_fraction": 1.3142983299094016e-05,
+      "deposited_heat_w_m2": 6.499999999999886e-06,
+      "exobase_radius_R": 2.9924020627320354,
+      "exobase_temperature_k": 235.8052196251036,
+      "exobase_density_m3": 4830368877300.811,
+      "jeans_lambda_N2": 13.47418942841791,
+      "molecular_jeans_loss_kg_s": 0.14024246946601002,
+      "tau_one_radius_R": {
+        "xuv": 2.362048092665048,
+        "lyman_alpha": 1.5098528112440128,
+        "schumann_runge": 1.927834306417187
+      },
+      "limb_heating_leak_at_3R": 0.0,
+      "heating": {
+        "0.1": {
+          "radius_R": 4.0,
+          "aperture": {
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
+          }
+        },
+        "0.5": {
+          "radius_R": 4.0,
+          "aperture": {
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
+          }
+        }
+      },
+      "exosphere_ion_production_kg_s": {
+        "third_hill": {
+          "3": 25.648584238497772,
+          "4": 3.5534223715073088,
+          "5": 1.231751340307675,
+          "6": 0.5925452278966601,
+          "8": 0.1788371230503566,
+          "10": 0.04193141680591053,
+          "12": 0.0,
+          "heating_radius": 3.5534223715073088
+        },
+        "half_hill": {
+          "3": 25.82860876901696,
+          "4": 3.729964961133035,
+          "5": 1.4038037344043142,
+          "6": 0.7589356145954961,
+          "8": 0.32976822633794933,
+          "10": 0.16986692877364518,
+          "12": 0.08728999126486078,
+          "heating_radius": 3.729964961133035
+        },
+        "hill": {
+          "3": 26.01786547111501,
+          "4": 3.917963975568634,
+          "5": 1.5902242139322178,
+          "6": 0.9433932561020166,
+          "8": 0.5091224481238622,
+          "10": 0.3423937801816336,
+          "12": 0.250990457335412,
+          "heating_radius": 3.917963975568634
+        }
+      },
+      "radius_for_production_of_a_tenth_of_budget_R": {
+        "third_hill": 8.917483872170278,
+        "half_hill": 11.61181679288559,
+        "hill": 19.129881393132308
+      }
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "collisional",
+      "activity": "solar_maximum",
+      "budget_kg_s": 10.0,
+      "allowed_leak_fraction": 1.3142983299094016e-05,
+      "deposited_heat_w_m2": 6.499999999999886e-06,
+      "exobase_radius_R": 2.9924020627320354,
+      "exobase_temperature_k": 235.8052196251036,
+      "exobase_density_m3": 4830368877300.811,
+      "jeans_lambda_N2": 13.47418942841791,
+      "molecular_jeans_loss_kg_s": 0.14024246946601002,
+      "tau_one_radius_R": {
+        "xuv": 2.362048092665048,
+        "lyman_alpha": 1.5098528112440128,
+        "schumann_runge": 1.927834306417187
+      },
+      "limb_heating_leak_at_3R": 0.0,
+      "heating": {
+        "0.1": {
+          "radius_R": 4.0,
+          "aperture": {
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
+          }
+        },
+        "0.5": {
+          "radius_R": 4.0,
+          "aperture": {
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
+          }
+        }
+      },
+      "exosphere_ion_production_kg_s": {
+        "third_hill": {
+          "3": 25.648584238497772,
+          "4": 3.5534223715073088,
+          "5": 1.231751340307675,
+          "6": 0.5925452278966601,
+          "8": 0.1788371230503566,
+          "10": 0.04193141680591053,
+          "12": 0.0,
+          "heating_radius": 3.5534223715073088
+        },
+        "half_hill": {
+          "3": 25.82860876901696,
+          "4": 3.729964961133035,
+          "5": 1.4038037344043142,
+          "6": 0.7589356145954961,
+          "8": 0.32976822633794933,
+          "10": 0.16986692877364518,
+          "12": 0.08728999126486078,
+          "heating_radius": 3.729964961133035
+        },
+        "hill": {
+          "3": 26.01786547111501,
+          "4": 3.917963975568634,
+          "5": 1.5902242139322178,
+          "6": 0.9433932561020166,
+          "8": 0.5091224481238622,
+          "10": 0.3423937801816336,
+          "12": 0.250990457335412,
+          "heating_radius": 3.917963975568634
+        }
+      },
+      "radius_for_production_of_a_tenth_of_budget_R": {
+        "third_hill": 5.258904069042749,
+        "half_hill": 5.506571763336499,
+        "hill": 5.870574336258288
+      }
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "collisional",
+      "activity": "solar_maximum",
+      "budget_kg_s": 100.0,
+      "allowed_leak_fraction": 1.3142983299094016e-05,
+      "deposited_heat_w_m2": 6.499999999999886e-06,
+      "exobase_radius_R": 2.9924020627320354,
+      "exobase_temperature_k": 235.8052196251036,
+      "exobase_density_m3": 4830368877300.811,
+      "jeans_lambda_N2": 13.47418942841791,
+      "molecular_jeans_loss_kg_s": 0.14024246946601002,
+      "tau_one_radius_R": {
+        "xuv": 2.362048092665048,
+        "lyman_alpha": 1.5098528112440128,
+        "schumann_runge": 1.927834306417187
+      },
+      "limb_heating_leak_at_3R": 0.0,
+      "heating": {
+        "0.1": {
+          "radius_R": 4.0,
+          "aperture": {
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
+          }
+        },
+        "0.5": {
+          "radius_R": 4.0,
+          "aperture": {
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
+          }
+        }
+      },
+      "exosphere_ion_production_kg_s": {
+        "third_hill": {
+          "3": 25.648584238497772,
+          "4": 3.5534223715073088,
+          "5": 1.231751340307675,
+          "6": 0.5925452278966601,
+          "8": 0.1788371230503566,
+          "10": 0.04193141680591053,
+          "12": 0.0,
+          "heating_radius": 3.5534223715073088
+        },
+        "half_hill": {
+          "3": 25.82860876901696,
+          "4": 3.729964961133035,
+          "5": 1.4038037344043142,
+          "6": 0.7589356145954961,
+          "8": 0.32976822633794933,
+          "10": 0.16986692877364518,
+          "12": 0.08728999126486078,
+          "heating_radius": 3.729964961133035
+        },
+        "hill": {
+          "3": 26.01786547111501,
+          "4": 3.917963975568634,
+          "5": 1.5902242139322178,
+          "6": 0.9433932561020166,
+          "8": 0.5091224481238622,
+          "10": 0.3423937801816336,
+          "12": 0.250990457335412,
+          "heating_radius": 3.917963975568634
+        }
+      },
+      "radius_for_production_of_a_tenth_of_budget_R": {
+        "third_hill": 3.4066080983837668,
+        "half_hill": 3.41472504287225,
+        "hill": 3.423301421183312
+      }
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "collisional",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 1.0,
       "allowed_leak_fraction": 8.125770636345807e-05,
       "deposited_heat_w_m2": 6.354372453593598e-06,
       "exobase_radius_R": 3.107772687827131,
@@ -1619,7 +2484,7 @@
     {
       "shield": "edge_200nm",
       "treatment": "collisional",
-      "activity": "solar_maximum",
+      "activity": "solar_maximum_stress",
       "budget_kg_s": 10.0,
       "allowed_leak_fraction": 8.81666874584218e-05,
       "deposited_heat_w_m2": 6.499999999999789e-06,
@@ -1691,7 +2556,7 @@
     {
       "shield": "edge_200nm",
       "treatment": "collisional",
-      "activity": "solar_maximum",
+      "activity": "solar_maximum_stress",
       "budget_kg_s": 100.0,
       "allowed_leak_fraction": 8.81666874584218e-05,
       "deposited_heat_w_m2": 6.499999999999789e-06,
@@ -1981,6 +2846,222 @@
       "treatment": "lte",
       "activity": "solar_maximum",
       "budget_kg_s": 1.0,
+      "allowed_leak_fraction": 1.2067747809189958e-05,
+      "deposited_heat_w_m2": 6.499999999999949e-06,
+      "exobase_radius_R": 3.003183881094374,
+      "exobase_temperature_k": 236.0889062503777,
+      "exobase_density_m3": 4789985223453.041,
+      "jeans_lambda_N2": 13.40968276195259,
+      "molecular_jeans_loss_kg_s": 0.14888120888129053,
+      "tau_one_radius_R": {
+        "xuv": 2.36761808734799,
+        "lyman_alpha": 1.5102166953560805,
+        "schumann_runge": 1.9307516638092552
+      },
+      "limb_heating_leak_at_3R": 1.0590068006096565e-05,
+      "heating": {
+        "0.1": {
+          "radius_R": 4.0,
+          "aperture": {
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
+          }
+        },
+        "0.5": {
+          "radius_R": 4.0,
+          "aperture": {
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
+          }
+        }
+      },
+      "exosphere_ion_production_kg_s": {
+        "third_hill": {
+          "3": 26.792580101838066,
+          "4": 3.7314247407024546,
+          "5": 1.296526504294873,
+          "6": 0.6245449444144671,
+          "8": 0.18876042466427553,
+          "10": 0.04428972418554382,
+          "12": 0.0,
+          "heating_radius": 3.7314247407024546
+        },
+        "half_hill": {
+          "3": 26.982889219122264,
+          "4": 3.91814139547418,
+          "5": 1.4784859584731398,
+          "6": 0.8005166833617112,
+          "8": 0.3483848378092367,
+          "10": 0.17959861676951844,
+          "12": 0.092334481150943,
+          "heating_radius": 3.91814139547418
+        },
+        "hill": {
+          "3": 27.18335929001631,
+          "4": 4.117327141893797,
+          "5": 1.675989886987713,
+          "6": 0.9959436307783679,
+          "8": 0.5384059992154263,
+          "10": 0.36238742434460314,
+          "12": 0.2657741306945574,
+          "heating_radius": 4.117327141893797
+        }
+      },
+      "radius_for_production_of_a_tenth_of_budget_R": {
+        "third_hill": 8.993271771256154,
+        "half_hill": 11.773132205984993,
+        "hill": 19.579002289973445
+      }
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "lte",
+      "activity": "solar_maximum",
+      "budget_kg_s": 10.0,
+      "allowed_leak_fraction": 1.2067747809189958e-05,
+      "deposited_heat_w_m2": 6.499999999999949e-06,
+      "exobase_radius_R": 3.003183881094374,
+      "exobase_temperature_k": 236.0889062503777,
+      "exobase_density_m3": 4789985223453.041,
+      "jeans_lambda_N2": 13.40968276195259,
+      "molecular_jeans_loss_kg_s": 0.14888120888129053,
+      "tau_one_radius_R": {
+        "xuv": 2.36761808734799,
+        "lyman_alpha": 1.5102166953560805,
+        "schumann_runge": 1.9307516638092552
+      },
+      "limb_heating_leak_at_3R": 1.0590068006096565e-05,
+      "heating": {
+        "0.1": {
+          "radius_R": 4.0,
+          "aperture": {
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
+          }
+        },
+        "0.5": {
+          "radius_R": 4.0,
+          "aperture": {
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
+          }
+        }
+      },
+      "exosphere_ion_production_kg_s": {
+        "third_hill": {
+          "3": 26.792580101838066,
+          "4": 3.7314247407024546,
+          "5": 1.296526504294873,
+          "6": 0.6245449444144671,
+          "8": 0.18876042466427553,
+          "10": 0.04428972418554382,
+          "12": 0.0,
+          "heating_radius": 3.7314247407024546
+        },
+        "half_hill": {
+          "3": 26.982889219122264,
+          "4": 3.91814139547418,
+          "5": 1.4784859584731398,
+          "6": 0.8005166833617112,
+          "8": 0.3483848378092367,
+          "10": 0.17959861676951844,
+          "12": 0.092334481150943,
+          "heating_radius": 3.91814139547418
+        },
+        "hill": {
+          "3": 27.18335929001631,
+          "4": 4.117327141893797,
+          "5": 1.675989886987713,
+          "6": 0.9959436307783679,
+          "8": 0.5384059992154263,
+          "10": 0.36238742434460314,
+          "12": 0.2657741306945574,
+          "heating_radius": 4.117327141893797
+        }
+      },
+      "radius_for_production_of_a_tenth_of_budget_R": {
+        "third_hill": 5.332250925828533,
+        "half_hill": 5.601258346416491,
+        "hill": 5.99118587330404
+      }
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "lte",
+      "activity": "solar_maximum",
+      "budget_kg_s": 100.0,
+      "allowed_leak_fraction": 1.2067747809189958e-05,
+      "deposited_heat_w_m2": 6.499999999999949e-06,
+      "exobase_radius_R": 3.003183881094374,
+      "exobase_temperature_k": 236.0889062503777,
+      "exobase_density_m3": 4789985223453.041,
+      "jeans_lambda_N2": 13.40968276195259,
+      "molecular_jeans_loss_kg_s": 0.14888120888129053,
+      "tau_one_radius_R": {
+        "xuv": 2.36761808734799,
+        "lyman_alpha": 1.5102166953560805,
+        "schumann_runge": 1.9307516638092552
+      },
+      "limb_heating_leak_at_3R": 1.0590068006096565e-05,
+      "heating": {
+        "0.1": {
+          "radius_R": 4.0,
+          "aperture": {
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
+          }
+        },
+        "0.5": {
+          "radius_R": 4.0,
+          "aperture": {
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
+          }
+        }
+      },
+      "exosphere_ion_production_kg_s": {
+        "third_hill": {
+          "3": 26.792580101838066,
+          "4": 3.7314247407024546,
+          "5": 1.296526504294873,
+          "6": 0.6245449444144671,
+          "8": 0.18876042466427553,
+          "10": 0.04428972418554382,
+          "12": 0.0,
+          "heating_radius": 3.7314247407024546
+        },
+        "half_hill": {
+          "3": 26.982889219122264,
+          "4": 3.91814139547418,
+          "5": 1.4784859584731398,
+          "6": 0.8005166833617112,
+          "8": 0.3483848378092367,
+          "10": 0.17959861676951844,
+          "12": 0.092334481150943,
+          "heating_radius": 3.91814139547418
+        },
+        "hill": {
+          "3": 27.18335929001631,
+          "4": 4.117327141893797,
+          "5": 1.675989886987713,
+          "6": 0.9959436307783679,
+          "8": 0.5384059992154263,
+          "10": 0.36238742434460314,
+          "12": 0.2657741306945574,
+          "heating_radius": 4.117327141893797
+        }
+      },
+      "radius_for_production_of_a_tenth_of_budget_R": {
+        "third_hill": 3.4272561097179133,
+        "half_hill": 3.435466934576745,
+        "hill": 3.4441581833891717
+      }
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "lte",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 1.0,
       "allowed_leak_fraction": 7.812475786592307e-05,
       "deposited_heat_w_m2": 6.305263017879033e-06,
       "exobase_radius_R": 3.109792181089106,
@@ -2051,7 +3132,7 @@
     {
       "shield": "edge_200nm",
       "treatment": "lte",
-      "activity": "solar_maximum",
+      "activity": "solar_maximum_stress",
       "budget_kg_s": 10.0,
       "allowed_leak_fraction": 8.734898411999324e-05,
       "deposited_heat_w_m2": 6.499999999999622e-06,
@@ -2123,7 +3204,7 @@
     {
       "shield": "edge_200nm",
       "treatment": "lte",
-      "activity": "solar_maximum",
+      "activity": "solar_maximum_stress",
       "budget_kg_s": 100.0,
       "allowed_leak_fraction": 8.734898411999324e-05,
       "deposited_heat_w_m2": 6.499999999999622e-06,

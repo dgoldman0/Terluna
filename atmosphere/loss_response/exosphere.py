@@ -136,7 +136,7 @@ OUTER_R = ab.OUTER['third_hill']
 N2_PREDISSOCIATION_M2 = 2e-21                    # 80-100 nm
 O2_CONTINUUM_M2 = 3e-22                          # Schumann-Runge continuum, 122.5-175 nm, flux-weighted
 O2_LYMAN_ALPHA_M2 = 1e-24
-FAR_UV_ACTIVITY = dict(quiet=1.0, solar_maximum=1.3)
+FAR_UV_ACTIVITY = dict(quiet=1.0, solar_maximum_stress=1.3)
 HEAYS_1AU_S = dict(N2=1.1e-11 * 37700, O2=6.4e-11 * 37700)   # Heays et al. 2017, solar field scaled to 1 AU
 
 FRAGMENT_EV = dict(N2=0.8, O2=0.5)
@@ -169,7 +169,9 @@ EVIDENCE = ('Screening step. Chamberlain exospheres for N2 and O2 from the therm
 READING_RULE = ('Loss rates are kg/s of atmosphere. allowed_summary[magnetosphere][shield][protected radius][budget] '
                 'is the largest UV transmission through gaps whose ultraviolet-driven loss at the traced state for '
                 'that radius plus the sunlit exosphere\'s central loss stays within the budget, as a range over the '
-                'upper-air treatments and solar activity, with the number of those cases that cannot meet it; '
+                'upper-air treatments, quiet Sun and solar maximum, with the number of those cases that cannot meet '
+                'it; stress_summary gives the same at the stress case alone (the escape model\'s 2.5 on the '
+                'ultraviolet); '
                 'magnetosphere is none, none_wake (no magnetosphere, the wind absent within the ring fleet\'s '
                 'unrefilled wake, a sensitivity) or september (1.5e21 A m^2). These replace the loss response\'s '
                 'allowed transmissions, its capped pickup and its ion sputtering. cases evaluates the loss response\'s '
@@ -560,14 +562,15 @@ def _largest_within(f, loss, share, limit, budget):
     return float(f[-1])
 
 
-def summarise(allowed):
+def summarise(allowed, activities=('quiet', 'solar_maximum')):
     """Allowed transmissions per magnetosphere, shield, protected radius and budget: the range over the upper-air
-    treatments and solar activity, and how many of those cases cannot meet the budget at any transmission."""
+    treatments and the given solar activities, and how many of those cases cannot meet the budget at any
+    transmission."""
     out = {}
     for key in MAGNETOSPHERE_KEYS:
         out[key] = {}
         for shield in lr.SHIELDS:
-            rows = [a for a in allowed if a['shield'] == shield]
+            rows = [a for a in allowed if a['shield'] == shield and a['activity'] in activities]
             out[key][shield] = {}
             for x in SHADOWS_R:
                 out[key][shield][f'{x:g}'] = {}
@@ -610,6 +613,7 @@ def main(argv=None) -> int:
     allowed = [allowed_with_exosphere(shield, treatment, activity)
                for shield in lr.SHIELDS for treatment in lr.TREATMENTS for activity in lr.ACTIVITY]
     summary = summarise(allowed)
+    stress = summarise(allowed, ('solar_maximum_stress',))
     for key, by_shield in summary.items():
         for shield, by_radius in by_shield.items():
             for x, by_budget in by_radius.items():
@@ -637,7 +641,7 @@ def main(argv=None) -> int:
             protected_radii_R=SHADOWS_R, ring_fleet_distance_km=RING_FLEET_DISTANCE_KM,
             wake_refill_screen_radii=WAKE_REFILL_SCREEN_RADII,
             wake_core_R={f'{x:g}': wake_core_R(x) for x in SHADOWS_R}, heating_share=traced.HEATING_SHARE),
-        cases=rows, allowed_summary=summary, allowed=allowed)
+        cases=rows, allowed_summary=summary, stress_summary=stress, allowed=allowed)
     (args.out / 'exosphere_loss.json').write_text(json.dumps(product, indent=2) + '\n')
     return 0
 

@@ -3,24 +3,24 @@
   "producer": {
     "study": "protection_architecture",
     "files": {
-      "research/studies/protection_architecture/run.py": "bebbef86789d8a84",
-      "atmosphere/loss_response/model.py": "84e19131df711e6a",
+      "research/studies/protection_architecture/run.py": "0574c2bd7bec3cf7",
+      "atmosphere/loss_response/model.py": "634bb37ff7381bfd",
       "atmosphere/loss_response/absorption.py": "c0836c3a8eacb295",
-      "atmosphere/loss_response/exosphere.py": "48f9b0cec6c8f7b6",
+      "atmosphere/loss_response/exosphere.py": "79281d65eb5ad883",
       "atmosphere/loss_response/traced.py": "a3d523f256771daf",
-      "atmosphere/loss_response/cycle.py": "dcfeed7f5725e462",
+      "atmosphere/loss_response/cycle.py": "33337681c0799517",
       "atmosphere/thermal_column.py": "072ed84f38aad0eb"
     },
     "inputs": {
       "protection/transmission/results/uv_transmission.json": "6589385e2665ade4",
       "research/baselines/feasibility/reference.json": "5878ad8ff00e42bf",
       "atmosphere/loss_response/results/tidal_escape.json": "566dda3ee632f6af",
-      "atmosphere/middle_atmosphere/results/limb_heat.json": "18ede4030c452c07",
-      "atmosphere/loss_response/results/solar_cycle.json": "eed7f86d6dcfc490"
+      "atmosphere/middle_atmosphere/results/limb_heat.json": "84489a09d02d2161",
+      "atmosphere/loss_response/results/solar_cycle.json": "0febbebffc8214f4"
     }
   },
   "evidence": "The loss response, its absorption step and its exosphere step evaluated at the ultraviolet transmission the swarm model gives for three levels of design choices, with the heat the middle atmosphere's limb tracing finds along slant paths for each protected radius, placed in height where the tracing puts it. Screening models throughout: Earth's tide is included; the exosphere's ion fates are bounds and timescale comparisons, and the ring fleet's wake rests on an assumed refill length; no plasma is modelled.",
-  "reading_rule": "summary[level][shield] gives ranges over the upper-air treatments, quiet Sun and solar maximum, and holes 1 and 4 times the particle diameter, at the ring fleet's protected radius of 4 lunar radii; cases_running_away_at_4_R counts those whose air outgrows the limb tables there. total_loss_kg_s[scenario][low|central|high] is the ultraviolet-driven loss plus the sunlit exosphere's loss outside the protected radius, with no magnetosphere (plus proton sputtering), with no magnetosphere but the wind held off within the ring fleet's unrefilled wake (a sensitivity), or with the September magnets; cycle_time_years is the atmosphere's mass over that loss. total_at_protected_radius_kg_s gives the central total at each protected radius with its own traced state, null where the air runs away or that radius does not cover the heating. heating_radius_R is the smallest protected radius covering the heating; radii are in lunar radii from the Moon's centre. cycle_summary[span][level][shield][radius] gives the same central totals over the solar cycle: the mean of the measured years' steady states (null if any year has none), which leans high, the largest yearly total, and the state of the span's mean spectrum, which gives the low end; R1, a long-term average, reads the cycle mean.",
+  "reading_rule": "summary[level][shield] gives ranges over the upper-air treatments, quiet Sun and solar maximum (FISM2's year around cycle 19's maximum), and holes 1 and 4 times the particle diameter, at the ring fleet's protected radius of 4 lunar radii; stress_summary gives the same at the stress case alone (the escape model's 2.5 on the ultraviolet), and points every state. cases_running_away_at_4_R counts those whose air outgrows the limb tables there. total_loss_kg_s[scenario][low|central|high] is the ultraviolet-driven loss plus the sunlit exosphere's loss outside the protected radius, with no magnetosphere (plus proton sputtering), with no magnetosphere but the wind held off within the ring fleet's unrefilled wake (a sensitivity), or with the September magnets; cycle_time_years is the atmosphere's mass over that loss. total_at_protected_radius_kg_s gives the central total at each protected radius with its own traced state, null where the air runs away or that radius does not cover the heating. heating_radius_R is the smallest protected radius covering the heating; radii are in lunar radii from the Moon's centre. cycle_summary[span][level][shield][radius] gives the same central totals over the solar cycle: the mean of the measured years' steady states (null if any year has none), which leans high, the largest yearly total, and the state of the span's mean spectrum, which gives the low end; R1, a long-term average, reads the cycle mean.",
   "atmosphere_mass_kg": 3.1413494805269903e+18,
   "summary": {
     "relaxed": {
@@ -530,21 +530,21 @@
     "standard": {
       "titania_stack": {
         "cases": 12,
-        "cases_running_away_at_4_R": 1,
+        "cases_running_away_at_4_R": 2,
         "transmission": [
           0.0001941163707541026,
           0.00021611860557693518
         ],
         "heat_w_m2": [
           2.935864969058439e-06,
-          7.734115193715729e-06
+          7.177237042964714e-06
         ],
         "uv_driven_loss_kg_s": [
           9.530038199024933e-09,
-          1.759773486452309
+          0.022954404793311237
         ],
         "glow_share_of_heating": [
-          0.4862359800147829,
+          0.5850405291110822,
           0.703018095855516
         ],
         "beyond_share": [
@@ -553,11 +553,11 @@
         ],
         "exobase_radius_R": [
           1.8413051853907543,
-          3.139116665837599
+          2.627193727175307
         ],
         "exobase_temperature_k": [
           158.85802746887668,
-          259.1951775983721
+          217.40136203820117
         ],
         "heating_radius_R": [
           2.0,
@@ -566,104 +566,104 @@
         "cases_without_heating_radius": 0,
         "exosphere_ions_made_kg_s": [
           1.6761611829650998e-06,
-          9.758655634605308
+          0.17383327682224298
         ],
         "exosphere_fragments_kg_s": [
           1.1607878597479753e-06,
-          6.75843300497075
+          0.13101385288413875
         ],
         "exosphere_charge_exchange_upper_bound_kg_s": [
           1.5751751224392228,
-          8.219994477376684
+          4.272280495483146
         ],
         "exosphere_charge_exchange_in_wake_upper_bound_kg_s": [
           0.0002706774486006257,
-          6.163695900902099
+          2.001864852597554
         ],
         "total_loss_kg_s": {
           "no_magnetosphere": {
             "low": [
               0.12402215793197872,
-              18.588830044852806
+              0.649650132737984
             ],
             "central": [
               0.653407947922597,
-              26.13749557613858
+              2.0754965250152084
             ],
             "high": [
               8.038878995389608,
-              100.36602406855468
+              21.730511036187877
             ]
           },
           "no_magnetosphere_wake": {
             "low": [
               0.005980989796917998,
-              18.43476183986471
+              0.479939865438304
             ],
             "central": [
               0.06350325780087292,
-              25.367277307715185
+              1.2250774151295187
             ],
             "high": [
               0.6762007150584504,
-              90.75282822353603
+              11.116317905697734
             ]
           },
           "september_magnetosphere": {
             "low": [
               1.681918339949107e-06,
-              12.537426843516437
+              0.2013534654586396
             ],
             "central": [
               1.882181358521763e-06,
-              14.557412619698319
+              0.24028960172875632
             ],
             "high": [
               2.2061772281838537e-06,
-              16.84619169470213
+              0.2904477608141813
             ]
           }
         },
         "cycle_time_years": {
           "no_magnetosphere": {
             "low": [
-              5355009322.980861,
+              153226103062.52518,
               802625594114.3123
             ],
             "central": [
-              3808450503.7417793,
+              47961226142.14644,
               152344884248.76865
             ],
             "high": [
-              991803342.986873,
+              4580810733.246157,
               12382741206.899965
             ]
           },
           "no_magnetosphere_wake": {
             "low": [
-              5399763721.288413,
+              207407980378.09537,
               16643291758295.283
             ],
             "central": [
-              3924085229.407669,
+              81254749262.49414,
               1567531519495.1333
             ],
             "high": [
-              1096862325.30743,
+              8954705959.108273,
               147209779547.31833
             ]
           },
           "september_magnetosphere": {
             "low": [
-              7939696034.59509,
+              494371219123.32263,
               5.918441807139434e+16
             ],
             "central": [
-              6837984248.574276,
+              414264110795.18964,
               5.288722988504856e+16
             ],
             "high": [
-              5908953192.358505,
+              342723792789.6369,
               4.512029084600722e+16
             ]
           }
@@ -696,44 +696,44 @@
             "no_magnetosphere": {
               "range": [
                 0.653407947922597,
-                26.13749557613858
+                2.0754965250152084
               ],
-              "cases_not_covering_the_heating": 1
+              "cases_not_covering_the_heating": 2
             },
             "no_magnetosphere_wake": {
               "range": [
                 0.06350325780087292,
-                25.367277307715185
+                1.2250774151295187
               ],
-              "cases_not_covering_the_heating": 1
+              "cases_not_covering_the_heating": 2
             },
             "september_magnetosphere": {
               "range": [
                 1.882181358521763e-06,
-                14.557412619698319
+                0.24028960172875632
               ],
-              "cases_not_covering_the_heating": 1
+              "cases_not_covering_the_heating": 2
             }
           },
           "6": {
             "no_magnetosphere": {
               "range": [
                 0.6534044562552501,
-                13.333617198857908
+                9.586082278676678
               ],
               "cases_not_covering_the_heating": 0
             },
             "no_magnetosphere_wake": {
               "range": [
                 0.06339845864273894,
-                10.457567129335386
+                6.868296400244965
               ],
               "cases_not_covering_the_heating": 0
             },
             "september_magnetosphere": {
               "range": [
                 1.1165345245309774e-07,
-                7.737168547836086
+                4.9012743863922035
               ],
               "cases_not_covering_the_heating": 0
             }
@@ -743,12 +743,12 @@
           "0.1": {
             "no_magnetosphere": {
               "range": null,
-              "cases_beyond_11_5_R": 11
+              "cases_beyond_11_5_R": 10
             },
             "september_magnetosphere": {
               "range": [
                 2.1119415693895207,
-                10.879503897804017
+                4.706049412161218
               ],
               "cases_beyond_11_5_R": 0
             }
@@ -759,12 +759,12 @@
                 1.9999756435362919,
                 2.6396162974611115
               ],
-              "cases_beyond_11_5_R": 5
+              "cases_beyond_11_5_R": 4
             },
             "september_magnetosphere": {
               "range": [
                 1.9090993876980131,
-                8.248796915746716
+                3.208170146267517
               ],
               "cases_beyond_11_5_R": 0
             }
@@ -773,14 +773,14 @@
             "no_magnetosphere": {
               "range": [
                 1.5261725320127348,
-                5.371070785667501
+                2.7480253203438774
               ],
               "cases_beyond_11_5_R": 0
             },
             "september_magnetosphere": {
               "range": [
                 1.5,
-                4.265511499075667
+                2.2800823987140832
               ],
               "cases_beyond_11_5_R": 0
             }
@@ -813,71 +813,71 @@
           "loss": [
             [
               0.033578062717108524,
-              24.31432387519119
+              1.9891439057268148
             ],
             [
               0.0003292671643256439,
-              24.31432387519119
+              1.9891439057268148
             ],
             [
               1.1726704275291185e-05,
-              24.31432387519119
+              0.4803687685478479
             ],
             [
               3.2868298317533205e-06,
-              16.783608544446654
+              0.32927738297607523
             ],
             [
               2.740361364127875e-06,
-              16.24623552634383
+              0.30208525208544945
             ],
             [
               2.5943401091392946e-06,
-              15.758083132212626
+              0.28871722110371184
             ],
             [
               2.4383915119500623e-06,
-              15.131590312893415
+              0.2740165119648309
             ],
             [
               2.237285342724187e-06,
-              14.335608223126995
+              0.2548246377893956
             ],
             [
               2.008937927357467e-06,
-              13.427674874539903
+              0.23239809371015308
             ],
             [
               1.8241719159625993e-06,
-              12.548760894639098
+              0.21160185546272647
             ],
             [
               1.6758881365332556e-06,
-              11.757804406127624
+              0.19386782973062655
             ],
             [
               1.5505358208567405e-06,
-              11.049684857965374
+              0.17867012424557727
             ],
             [
               1.4807622577865002e-06,
-              10.529364949969658
+              0.16861816498969417
             ],
             [
               1.4229377965957183e-06,
-              10.135700483374901
+              0.16107425677439496
             ],
             [
               1.3585748753389585e-06,
-              9.811366137051277
+              0.15427758437048555
             ],
             [
               1.3279412608050455e-06,
-              9.601760055362952
+              0.1502487986501072
             ],
             [
               1.305945398135059e-06,
-              9.461700095415642
+              0.14756169899841004
             ]
           ]
         },
@@ -885,21 +885,21 @@
           "0.1": {
             "range": [
               1e+19,
-              1.7782794100389228e+21
+              5.6234132519034905e+19
             ],
-            "cases_beyond_1e23": 3
+            "cases_beyond_1e23": 2
           },
           "1": {
             "range": [
               1e+19,
               3.162277660168379e+19
             ],
-            "cases_beyond_1e23": 1
+            "cases_beyond_1e23": 0
           },
           "10": {
             "range": [
               1e+19,
-              3.1622776601683792e+22
+              1e+19
             ],
             "cases_beyond_1e23": 0
           }
@@ -1087,21 +1087,21 @@
             "no_magnetosphere": {
               "range": [
                 2.5762771621281164,
-                195.106215422634
+                160.00859157020057
               ],
               "cases_not_covering_the_heating": 0
             },
             "no_magnetosphere_wake": {
               "range": [
                 0.55391537845443,
-                192.18719903950907
+                156.958323936902
               ],
               "cases_not_covering_the_heating": 0
             },
             "september_magnetosphere": {
               "range": [
                 0.34039503072131333,
-                153.22611483568176
+                122.87941449609043
               ],
               "cases_not_covering_the_heating": 0
             }
@@ -1278,14 +1278,14 @@
         ],
         "heat_w_m2": [
           2.2117093632143473e-06,
-          5.024603405576943e-06
+          6.264452572219143e-06
         ],
         "uv_driven_loss_kg_s": [
           7.33468139760838e-10,
-          0.03397306332779944
+          0.07845245796643217
         ],
         "glow_share_of_heating": [
-          0.7484381904827738,
+          0.7514852986376548,
           0.933199558027258
         ],
         "beyond_share": [
@@ -1294,11 +1294,11 @@
         ],
         "exobase_radius_R": [
           1.8037255266070564,
-          2.666883958103864
+          2.747599685357112
         ],
         "exobase_temperature_k": [
           149.99784505109045,
-          219.95760138720118
+          226.73695338703243
         ],
         "heating_radius_R": [
           2.0,
@@ -1307,104 +1307,104 @@
         "cases_without_heating_radius": 0,
         "exosphere_ions_made_kg_s": [
           2.844229228500355e-07,
-          0.5863978061269116
+          1.0802413773106974
         ],
         "exosphere_fragments_kg_s": [
           1.9567589188028337e-07,
-          0.40460194236332525
+          0.566935469086984
         ],
         "exosphere_charge_exchange_upper_bound_kg_s": [
           1.4798748480666442,
-          4.481343431892303
+          4.964991786471846
         ],
         "exosphere_charge_exchange_in_wake_upper_bound_kg_s": [
           8.067119623828234e-05,
-          2.23562915176112
+          2.8066515539871406
         ],
         "total_loss_kg_s": {
           "no_magnetosphere": {
             "low": [
               0.11683722037034638,
-              1.3730645808057593
+              2.1040120308688266
             ],
             "central": [
               0.6177087253884899,
-              3.050450484730078
+              4.171038268007608
             ],
             "high": [
               7.5933420992021805,
-              25.169612736311556
+              30.278046400807256
             ]
           },
           "no_magnetosphere_wake": {
             "low": [
               0.005962560922394165,
-              1.2051454094370688
+              1.9425265215699727
             ],
             "central": [
               0.06342904948353896,
-              2.2092836502999393
+              3.362598727392353
             ],
             "high": [
               0.6753043223330325,
-              14.670898476698273
+              20.18780581394126
             ]
           },
           "september_magnetosphere": {
             "low": [
               2.8347647724696577e-07,
-              0.6331481895410813
+              1.0126097476242075
             ],
             "central": [
               3.1528802418387327e-07,
-              0.7391549856997549
+              1.2166769680646194
             ],
             "high": [
               3.6833842688784155e-07,
-              0.8760316146552269
+              1.4743857419201867
             ]
           }
         },
         "cycle_time_years": {
           "no_magnetosphere": {
             "low": [
-              72497215050.93242,
+              47311211501.19482,
               851983279625.8296
             ],
             "central": [
-              32632346826.079258,
+              23865366797.7596,
               161149347746.20288
             ],
             "high": [
-              3954902256.0003414,
+              3287641378.039487,
               13109294549.491238
             ]
           },
           "no_magnetosphere_wake": {
             "low": [
-              82598628691.61227,
+              51244272388.64228,
               16694732261708.037
             ],
             "central": [
-              45056848259.37999,
+              29603103511.160828,
               1569365440661.804
             ],
             "high": [
-              6785089430.725582,
+              4930865647.853171,
               147405184450.16376
             ]
           },
           "september_magnetosphere": {
             "low": [
-              157219683855.75665,
+              98303772432.61075,
               3.511520926188558e+17
             ],
             "central": [
-              134671834891.64485,
+              81815766063.06448,
               3.1572197659953197e+17
             ],
             "high": [
-              113629869662.4893,
+              67515138924.12702,
               2.702497239686705e+17
             ]
           }
@@ -1437,21 +1437,21 @@
             "no_magnetosphere": {
               "range": [
                 0.6177087253884899,
-                3.050450484730078
+                4.171038268007608
               ],
               "cases_not_covering_the_heating": 0
             },
             "no_magnetosphere_wake": {
               "range": [
                 0.06342904948353896,
-                2.2092836502999393
+                3.362598727392353
               ],
               "cases_not_covering_the_heating": 0
             },
             "september_magnetosphere": {
               "range": [
                 3.1528802418387327e-07,
-                0.7391549856997549
+                1.2166769680646194
               ],
               "cases_not_covering_the_heating": 0
             }
@@ -1460,21 +1460,21 @@
             "no_magnetosphere": {
               "range": [
                 0.6177081278649869,
-                1.9629546015570984
+                2.346615594524223
               ],
               "cases_not_covering_the_heating": 0
             },
             "no_magnetosphere_wake": {
               "range": [
                 0.06339824687545877,
-                0.3040859912910613
+                0.5233885310217712
               ],
               "cases_not_covering_the_heating": 0
             },
             "september_magnetosphere": {
               "range": [
                 1.382202596553707e-08,
-                0.16136657680317917
+                0.30476035469553786
               ],
               "cases_not_covering_the_heating": 0
             }
@@ -1489,7 +1489,7 @@
             "september_magnetosphere": {
               "range": [
                 1.996073932545778,
-                6.399566381193554
+                7.432388620751695
               ],
               "cases_beyond_11_5_R": 0
             }
@@ -1498,14 +1498,14 @@
             "no_magnetosphere": {
               "range": [
                 1.9858023640278377,
-                2.8839570651343713
+                3.0993113369125456
               ],
               "cases_beyond_11_5_R": 4
             },
             "september_magnetosphere": {
               "range": [
                 1.8798953080373006,
-                3.761832994066732
+                4.1211703169442115
               ],
               "cases_beyond_11_5_R": 0
             }
@@ -1514,6 +1514,1589 @@
             "no_magnetosphere": {
               "range": [
                 1.5,
+                3.2753644211376725
+              ],
+              "cases_beyond_11_5_R": 0
+            },
+            "september_magnetosphere": {
+              "range": [
+                1.5,
+                2.9388994732859417
+              ],
+              "cases_beyond_11_5_R": 0
+            }
+          }
+        },
+        "loss_against_moment_kg_s": {
+          "shadow_radius_R": [
+            4.0,
+            4.0
+          ],
+          "moment_A_m2": [
+            1e+19,
+            1.7782794100389229e+19,
+            3.162277660168379e+19,
+            5.6234132519034905e+19,
+            1e+20,
+            1.778279410038923e+20,
+            3.1622776601683794e+20,
+            5.6234132519034906e+20,
+            1e+21,
+            1.7782794100389228e+21,
+            3.1622776601683794e+21,
+            5.623413251903491e+21,
+            1e+22,
+            1.7782794100389228e+22,
+            3.1622776601683792e+22,
+            5.623413251903491e+22,
+            1e+23
+          ],
+          "loss": [
+            [
+              0.015240036817895737,
+              4.029187595546094
+            ],
+            [
+              0.000106576864265145,
+              4.029187595546094
+            ],
+            [
+              2.674073249437159e-06,
+              1.9835746616463554
+            ],
+            [
+              5.711223887849349e-07,
+              1.6731213287460487
+            ],
+            [
+              4.6250030846600484e-07,
+              1.5990865583272114
+            ],
+            [
+              4.373064841088999e-07,
+              1.5403235536604774
+            ],
+            [
+              4.1041516045660233e-07,
+              1.4604155276411164
+            ],
+            [
+              3.760847081991407e-07,
+              1.3520081681324383
+            ],
+            [
+              3.371736082992952e-07,
+              1.2247270278834563
+            ],
+            [
+              3.066101668941808e-07,
+              1.1049453587413636
+            ],
+            [
+              2.820982242866994e-07,
+              1.000875399597434
+            ],
+            [
+              2.613507859876358e-07,
+              0.9105188500273595
+            ],
+            [
+              2.501411239683907e-07,
+              0.8489226417114063
+            ],
+            [
+              2.4053572249313814e-07,
+              0.8025947838124862
+            ],
+            [
+              2.2954764892975824e-07,
+              0.7619138301056791
+            ],
+            [
+              2.2450930596682308e-07,
+              0.737046594637391
+            ],
+            [
+              2.20871109376001e-07,
+              0.720574882608794
+            ]
+          ]
+        },
+        "moment_for_exosphere_loss_A_m2": {
+          "0.1": {
+            "range": [
+              1e+19,
+              5.6234132519034905e+19
+            ],
+            "cases_beyond_1e23": 2
+          },
+          "1": {
+            "range": [
+              1e+19,
+              5.623413251903491e+21
+            ],
+            "cases_beyond_1e23": 0
+          },
+          "10": {
+            "range": [
+              1e+19,
+              1e+19
+            ],
+            "cases_beyond_1e23": 0
+          }
+        }
+      },
+      "edge_200nm": {
+        "cases": 12,
+        "cases_running_away_at_4_R": 6,
+        "transmission": [
+          2.9111915698748763e-05,
+          4.0113033110165035e-05
+        ],
+        "heat_w_m2": [
+          2.8443274126028002e-06,
+          3.1452726126777457e-06
+        ],
+        "uv_driven_loss_kg_s": [
+          0.02038644673234379,
+          0.5205063203240985
+        ],
+        "glow_share_of_heating": [
+          0.8828387831448546,
+          0.9128605521710593
+        ],
+        "beyond_share": [
+          0.0,
+          0.0
+        ],
+        "exobase_radius_R": [
+          2.6757294474293314,
+          3.1435501010465012
+        ],
+        "exobase_temperature_k": [
+          211.2197011617561,
+          229.05573384246594
+        ],
+        "heating_radius_R": [
+          3.5,
+          5.0
+        ],
+        "cases_without_heating_radius": 0,
+        "exosphere_ions_made_kg_s": [
+          0.18739790898052414,
+          2.431993905731006
+        ],
+        "exosphere_fragments_kg_s": [
+          0.14088297156653173,
+          1.8703447287374395
+        ],
+        "exosphere_charge_exchange_upper_bound_kg_s": [
+          4.401186815813204,
+          7.313777881304061
+        ],
+        "exosphere_charge_exchange_in_wake_upper_bound_kg_s": [
+          2.175583469803647,
+          5.30727372725253
+        ],
+        "total_loss_kg_s": {
+          "no_magnetosphere": {
+            "low": [
+              0.6793101267226606,
+              5.164796489679864
+            ],
+            "central": [
+              2.1512046627504158,
+              8.801600211946495
+            ],
+            "high": [
+              22.413817651482958,
+              50.55970938231514
+            ]
+          },
+          "no_magnetosphere_wake": {
+            "low": [
+              0.5128921234743411,
+              5.014482612016083
+            ],
+            "central": [
+              1.3175706881066667,
+              8.050033210539773
+            ],
+            "high": [
+              12.009122008888282,
+              41.17930246212424
+            ]
+          },
+          "september_magnetosphere": {
+            "low": [
+              0.21129134953532025,
+              3.065182763342342
+            ],
+            "central": [
+              0.25355253056836574,
+              3.727993023516565
+            ],
+            "high": [
+              0.30807786583042435,
+              4.532474082229296
+            ]
+          }
+        },
+        "cycle_time_years": {
+          "no_magnetosphere": {
+            "low": [
+              19273432824.003414,
+              146535955048.60434
+            ],
+            "central": [
+              11309688669.837828,
+              46273309051.972145
+            ],
+            "high": [
+              1968827736.7415395,
+              4441160347.662034
+            ]
+          },
+          "no_magnetosphere_wake": {
+            "low": [
+              19851172273.478455,
+              194082446654.0544
+            ],
+            "central": [
+              12365583543.576323,
+              75550677540.14482
+            ],
+            "high": [
+              2417315307.4909697,
+              8288978837.904946
+            ]
+          },
+          "september_magnetosphere": {
+            "low": [
+              32475505011.958652,
+              471118947426.91986
+            ],
+            "central": [
+              26701594548.477886,
+              392594615286.8447
+            ],
+            "high": [
+              21962256460.280327,
+              323111035338.98553
+            ]
+          }
+        },
+        "total_at_protected_radius_kg_s": {
+          "3": {
+            "no_magnetosphere": {
+              "range": null,
+              "cases_not_covering_the_heating": 12
+            },
+            "no_magnetosphere_wake": {
+              "range": null,
+              "cases_not_covering_the_heating": 12
+            },
+            "september_magnetosphere": {
+              "range": null,
+              "cases_not_covering_the_heating": 12
+            }
+          },
+          "4": {
+            "no_magnetosphere": {
+              "range": [
+                2.1512046627504158,
+                8.801600211946495
+              ],
+              "cases_not_covering_the_heating": 6
+            },
+            "no_magnetosphere_wake": {
+              "range": [
+                1.3175706881066667,
+                8.050033210539773
+              ],
+              "cases_not_covering_the_heating": 6
+            },
+            "september_magnetosphere": {
+              "range": [
+                0.25355253056836574,
+                3.727993023516565
+              ],
+              "cases_not_covering_the_heating": 6
+            }
+          },
+          "6": {
+            "no_magnetosphere": {
+              "range": [
+                1.7868661935683756,
+                36.13982736824971
+              ],
+              "cases_not_covering_the_heating": 0
+            },
+            "no_magnetosphere_wake": {
+              "range": [
+                0.15317337726942554,
+                32.744757210787924
+              ],
+              "cases_not_covering_the_heating": 0
+            },
+            "september_magnetosphere": {
+              "range": [
+                0.057816674599101975,
+                24.019448291360984
+              ],
+              "cases_not_covering_the_heating": 0
+            }
+          }
+        },
+        "protected_radius_for_exosphere_loss_R": {
+          "0.1": {
+            "no_magnetosphere": {
+              "range": null,
+              "cases_beyond_11_5_R": 6
+            },
+            "september_magnetosphere": {
+              "range": [
+                4.735978611721406,
+                9.148123175473225
+              ],
+              "cases_beyond_11_5_R": 0
+            }
+          },
+          "1": {
+            "no_magnetosphere": {
+              "range": null,
+              "cases_beyond_11_5_R": 6
+            },
+            "september_magnetosphere": {
+              "range": [
+                3.2487501721488843,
+                5.305010789144117
+              ],
+              "cases_beyond_11_5_R": 0
+            }
+          },
+          "10": {
+            "no_magnetosphere": {
+              "range": [
+                2.8305519137702224,
+                3.8169227451076577
+              ],
+              "cases_beyond_11_5_R": 0
+            },
+            "september_magnetosphere": {
+              "range": [
+                2.3662601715566756,
+                3.309497326198705
+              ],
+              "cases_beyond_11_5_R": 0
+            }
+          }
+        },
+        "loss_against_moment_kg_s": {
+          "shadow_radius_R": [
+            4.0,
+            4.0
+          ],
+          "moment_A_m2": [
+            1e+19,
+            1.7782794100389229e+19,
+            3.162277660168379e+19,
+            5.6234132519034905e+19,
+            1e+20,
+            1.778279410038923e+20,
+            3.1622776601683794e+20,
+            5.6234132519034906e+20,
+            1e+21,
+            1.7782794100389228e+21,
+            3.1622776601683794e+21,
+            5.623413251903491e+21,
+            1e+22,
+            1.7782794100389228e+22,
+            3.1622776601683792e+22,
+            5.623413251903491e+22,
+            1e+23
+          ],
+          "loss": [
+            [
+              2.0674200015229895,
+              8.217695677127313
+            ],
+            [
+              2.0674200015229895,
+              8.217695677127313
+            ],
+            [
+              0.5458585410608037,
+              8.217695677127313
+            ],
+            [
+              0.356614382944042,
+              4.6516416809722045
+            ],
+            [
+              0.32535119724752715,
+              4.303979035970813
+            ],
+            [
+              0.3106322599328868,
+              4.115919370016936
+            ],
+            [
+              0.29452215755093203,
+              3.9153708999096803
+            ],
+            [
+              0.2736443265524915,
+              3.6690830757251094
+            ],
+            [
+              0.24931722889552482,
+              3.3926485255001686
+            ],
+            [
+              0.22707668481357268,
+              3.136496897845113
+            ],
+            [
+              0.2081898970205403,
+              2.9142827750401854
+            ],
+            [
+              0.19207281009475546,
+              2.719048608814931
+            ],
+            [
+              0.18153667805613938,
+              2.5835975480626776
+            ],
+            [
+              0.17356571273169127,
+              2.480872316666623
+            ],
+            [
+              0.16627865858952473,
+              2.3910989920408943
+            ],
+            [
+              0.1620164483896631,
+              2.3359919075229008
+            ],
+            [
+              0.15916466857923342,
+              2.2992697897544194
+            ]
+          ]
+        },
+        "moment_for_exosphere_loss_A_m2": {
+          "0.1": {
+            "range": null,
+            "cases_beyond_1e23": 6
+          },
+          "1": {
+            "range": [
+              3.162277660168379e+19,
+              3.162277660168379e+19
+            ],
+            "cases_beyond_1e23": 2
+          },
+          "10": {
+            "range": [
+              1e+19,
+              1e+19
+            ],
+            "cases_beyond_1e23": 0
+          }
+        }
+      }
+    }
+  },
+  "stress_summary": {
+    "relaxed": {
+      "titania_stack": {
+        "cases": 6,
+        "cases_running_away_at_4_R": 6,
+        "transmission": [
+          0.0025006173956685965,
+          0.002610628569782759
+        ],
+        "heat_w_m2": null,
+        "uv_driven_loss_kg_s": null,
+        "glow_share_of_heating": null,
+        "beyond_share": null,
+        "exobase_radius_R": null,
+        "exobase_temperature_k": null,
+        "heating_radius_R": null,
+        "cases_without_heating_radius": 6,
+        "exosphere_ions_made_kg_s": null,
+        "exosphere_fragments_kg_s": null,
+        "exosphere_charge_exchange_upper_bound_kg_s": null,
+        "exosphere_charge_exchange_in_wake_upper_bound_kg_s": null,
+        "total_loss_kg_s": {
+          "no_magnetosphere": {
+            "low": null,
+            "central": null,
+            "high": null
+          },
+          "no_magnetosphere_wake": {
+            "low": null,
+            "central": null,
+            "high": null
+          },
+          "september_magnetosphere": {
+            "low": null,
+            "central": null,
+            "high": null
+          }
+        },
+        "cycle_time_years": {
+          "no_magnetosphere": {
+            "low": null,
+            "central": null,
+            "high": null
+          },
+          "no_magnetosphere_wake": {
+            "low": null,
+            "central": null,
+            "high": null
+          },
+          "september_magnetosphere": {
+            "low": null,
+            "central": null,
+            "high": null
+          }
+        },
+        "total_at_protected_radius_kg_s": {
+          "3": {
+            "no_magnetosphere": {
+              "range": null,
+              "cases_not_covering_the_heating": 6
+            },
+            "no_magnetosphere_wake": {
+              "range": null,
+              "cases_not_covering_the_heating": 6
+            },
+            "september_magnetosphere": {
+              "range": null,
+              "cases_not_covering_the_heating": 6
+            }
+          },
+          "4": {
+            "no_magnetosphere": {
+              "range": null,
+              "cases_not_covering_the_heating": 6
+            },
+            "no_magnetosphere_wake": {
+              "range": null,
+              "cases_not_covering_the_heating": 6
+            },
+            "september_magnetosphere": {
+              "range": null,
+              "cases_not_covering_the_heating": 6
+            }
+          },
+          "6": {
+            "no_magnetosphere": {
+              "range": null,
+              "cases_not_covering_the_heating": 6
+            },
+            "no_magnetosphere_wake": {
+              "range": null,
+              "cases_not_covering_the_heating": 6
+            },
+            "september_magnetosphere": {
+              "range": null,
+              "cases_not_covering_the_heating": 6
+            }
+          }
+        },
+        "protected_radius_for_exosphere_loss_R": {
+          "0.1": {
+            "no_magnetosphere": {
+              "range": null,
+              "cases_beyond_11_5_R": 0
+            },
+            "september_magnetosphere": {
+              "range": null,
+              "cases_beyond_11_5_R": 0
+            }
+          },
+          "1": {
+            "no_magnetosphere": {
+              "range": null,
+              "cases_beyond_11_5_R": 0
+            },
+            "september_magnetosphere": {
+              "range": null,
+              "cases_beyond_11_5_R": 0
+            }
+          },
+          "10": {
+            "no_magnetosphere": {
+              "range": null,
+              "cases_beyond_11_5_R": 0
+            },
+            "september_magnetosphere": {
+              "range": null,
+              "cases_beyond_11_5_R": 0
+            }
+          }
+        },
+        "loss_against_moment_kg_s": {
+          "shadow_radius_R": null,
+          "moment_A_m2": [],
+          "loss": []
+        },
+        "moment_for_exosphere_loss_A_m2": {
+          "0.1": {
+            "range": null,
+            "cases_beyond_1e23": 0
+          },
+          "1": {
+            "range": null,
+            "cases_beyond_1e23": 0
+          },
+          "10": {
+            "range": null,
+            "cases_beyond_1e23": 0
+          }
+        }
+      },
+      "edge_200nm": {
+        "cases": 6,
+        "cases_running_away_at_4_R": 6,
+        "transmission": [
+          0.0025006173956685965,
+          0.002610628569782759
+        ],
+        "heat_w_m2": null,
+        "uv_driven_loss_kg_s": null,
+        "glow_share_of_heating": null,
+        "beyond_share": null,
+        "exobase_radius_R": null,
+        "exobase_temperature_k": null,
+        "heating_radius_R": null,
+        "cases_without_heating_radius": 6,
+        "exosphere_ions_made_kg_s": null,
+        "exosphere_fragments_kg_s": null,
+        "exosphere_charge_exchange_upper_bound_kg_s": null,
+        "exosphere_charge_exchange_in_wake_upper_bound_kg_s": null,
+        "total_loss_kg_s": {
+          "no_magnetosphere": {
+            "low": null,
+            "central": null,
+            "high": null
+          },
+          "no_magnetosphere_wake": {
+            "low": null,
+            "central": null,
+            "high": null
+          },
+          "september_magnetosphere": {
+            "low": null,
+            "central": null,
+            "high": null
+          }
+        },
+        "cycle_time_years": {
+          "no_magnetosphere": {
+            "low": null,
+            "central": null,
+            "high": null
+          },
+          "no_magnetosphere_wake": {
+            "low": null,
+            "central": null,
+            "high": null
+          },
+          "september_magnetosphere": {
+            "low": null,
+            "central": null,
+            "high": null
+          }
+        },
+        "total_at_protected_radius_kg_s": {
+          "3": {
+            "no_magnetosphere": {
+              "range": null,
+              "cases_not_covering_the_heating": 6
+            },
+            "no_magnetosphere_wake": {
+              "range": null,
+              "cases_not_covering_the_heating": 6
+            },
+            "september_magnetosphere": {
+              "range": null,
+              "cases_not_covering_the_heating": 6
+            }
+          },
+          "4": {
+            "no_magnetosphere": {
+              "range": null,
+              "cases_not_covering_the_heating": 6
+            },
+            "no_magnetosphere_wake": {
+              "range": null,
+              "cases_not_covering_the_heating": 6
+            },
+            "september_magnetosphere": {
+              "range": null,
+              "cases_not_covering_the_heating": 6
+            }
+          },
+          "6": {
+            "no_magnetosphere": {
+              "range": null,
+              "cases_not_covering_the_heating": 6
+            },
+            "no_magnetosphere_wake": {
+              "range": null,
+              "cases_not_covering_the_heating": 6
+            },
+            "september_magnetosphere": {
+              "range": null,
+              "cases_not_covering_the_heating": 6
+            }
+          }
+        },
+        "protected_radius_for_exosphere_loss_R": {
+          "0.1": {
+            "no_magnetosphere": {
+              "range": null,
+              "cases_beyond_11_5_R": 0
+            },
+            "september_magnetosphere": {
+              "range": null,
+              "cases_beyond_11_5_R": 0
+            }
+          },
+          "1": {
+            "no_magnetosphere": {
+              "range": null,
+              "cases_beyond_11_5_R": 0
+            },
+            "september_magnetosphere": {
+              "range": null,
+              "cases_beyond_11_5_R": 0
+            }
+          },
+          "10": {
+            "no_magnetosphere": {
+              "range": null,
+              "cases_beyond_11_5_R": 0
+            },
+            "september_magnetosphere": {
+              "range": null,
+              "cases_beyond_11_5_R": 0
+            }
+          }
+        },
+        "loss_against_moment_kg_s": {
+          "shadow_radius_R": null,
+          "moment_A_m2": [],
+          "loss": []
+        },
+        "moment_for_exosphere_loss_A_m2": {
+          "0.1": {
+            "range": null,
+            "cases_beyond_1e23": 0
+          },
+          "1": {
+            "range": null,
+            "cases_beyond_1e23": 0
+          },
+          "10": {
+            "range": null,
+            "cases_beyond_1e23": 0
+          }
+        }
+      }
+    },
+    "standard": {
+      "titania_stack": {
+        "cases": 6,
+        "cases_running_away_at_4_R": 1,
+        "transmission": [
+          0.0001941163707541026,
+          0.00021611860557693518
+        ],
+        "heat_w_m2": [
+          5.832965015022465e-06,
+          7.734115193715729e-06
+        ],
+        "uv_driven_loss_kg_s": [
+          4.155698411843283e-06,
+          1.759773486452309
+        ],
+        "glow_share_of_heating": [
+          0.4862359800147829,
+          0.5307676785958988
+        ],
+        "beyond_share": [
+          0.0,
+          0.0
+        ],
+        "exobase_radius_R": [
+          1.9703750724278426,
+          3.139116665837599
+        ],
+        "exobase_temperature_k": [
+          185.52017580858308,
+          259.1951775983721
+        ],
+        "heating_radius_R": [
+          2.25,
+          5.0
+        ],
+        "cases_without_heating_radius": 0,
+        "exosphere_ions_made_kg_s": [
+          0.00033728783298544773,
+          9.758655634605308
+        ],
+        "exosphere_fragments_kg_s": [
+          0.00023069294111587163,
+          6.75843300497075
+        ],
+        "exosphere_charge_exchange_upper_bound_kg_s": [
+          1.9363306233262934,
+          8.219994477376684
+        ],
+        "exosphere_charge_exchange_in_wake_upper_bound_kg_s": [
+          0.0071880674714840925,
+          6.163695900902099
+        ],
+        "total_loss_kg_s": {
+          "no_magnetosphere": {
+            "low": [
+              0.15186974500323655,
+              18.588830044852806
+            ],
+            "central": [
+              0.7894158554676731,
+              26.13749557613858
+            ],
+            "high": [
+              9.729243497328692,
+              100.36602406855468
+            ]
+          },
+          "no_magnetosphere_wake": {
+            "low": [
+              0.007142169295104054,
+              18.43476183986471
+            ],
+            "central": [
+              0.06682583089069727,
+              25.367277307715185
+            ],
+            "high": [
+              0.7105020487074607,
+              90.75282822353603
+            ]
+          },
+          "september_magnetosphere": {
+            "low": [
+              0.00034375538263717916,
+              12.537426843516437
+            ],
+            "central": [
+              0.0003862607080414059,
+              14.557412619698319
+            ],
+            "high": [
+              0.0004522980422690294,
+              16.84619169470213
+            ]
+          }
+        },
+        "cycle_time_years": {
+          "no_magnetosphere": {
+            "low": [
+              5355009322.980861,
+              655452198141.0588
+            ],
+            "central": [
+              3808450503.7417793,
+              126097490320.2585
+            ],
+            "high": [
+              991803342.986873,
+              10231356448.301926
+            ]
+          },
+          "no_magnetosphere_wake": {
+            "low": [
+              5399763721.288413,
+              13937412301572.06
+            ],
+            "central": [
+              3924085229.407669,
+              1489594021753.507
+            ],
+            "high": [
+              1096862325.30743,
+              140102844706.1932
+            ]
+          },
+          "september_magnetosphere": {
+            "low": [
+              7939696034.59509,
+              289576144029598.4
+            ],
+            "central": [
+              6837984248.574276,
+              257710287692070.3
+            ],
+            "high": [
+              5908953192.358505,
+              220083548657689.2
+            ]
+          }
+        },
+        "total_at_protected_radius_kg_s": {
+          "3": {
+            "no_magnetosphere": {
+              "range": [
+                0.8010869100365365,
+                2.747556384670445
+              ],
+              "cases_not_covering_the_heating": 2
+            },
+            "no_magnetosphere_wake": {
+              "range": [
+                0.532222891500043,
+                2.486040373016579
+              ],
+              "cases_not_covering_the_heating": 2
+            },
+            "september_magnetosphere": {
+              "range": [
+                0.005442958922745296,
+                0.697583091818295
+              ],
+              "cases_not_covering_the_heating": 2
+            }
+          },
+          "4": {
+            "no_magnetosphere": {
+              "range": [
+                0.7894158554676731,
+                26.13749557613858
+              ],
+              "cases_not_covering_the_heating": 1
+            },
+            "no_magnetosphere_wake": {
+              "range": [
+                0.06682583089069727,
+                25.367277307715185
+              ],
+              "cases_not_covering_the_heating": 1
+            },
+            "september_magnetosphere": {
+              "range": [
+                0.0003862607080414059,
+                14.557412619698319
+              ],
+              "cases_not_covering_the_heating": 1
+            }
+          },
+          "6": {
+            "no_magnetosphere": {
+              "range": [
+                0.7887439827680466,
+                13.333617198857908
+              ],
+              "cases_not_covering_the_heating": 0
+            },
+            "no_magnetosphere_wake": {
+              "range": [
+                0.06346985053034358,
+                10.457567129335386
+              ],
+              "cases_not_covering_the_heating": 0
+            },
+            "september_magnetosphere": {
+              "range": [
+                4.340165597562686e-05,
+                7.737168547836086
+              ],
+              "cases_not_covering_the_heating": 0
+            }
+          }
+        },
+        "protected_radius_for_exosphere_loss_R": {
+          "0.1": {
+            "no_magnetosphere": {
+              "range": null,
+              "cases_beyond_11_5_R": 5
+            },
+            "september_magnetosphere": {
+              "range": [
+                2.470633297589921,
+                10.879503897804017
+              ],
+              "cases_beyond_11_5_R": 0
+            }
+          },
+          "1": {
+            "no_magnetosphere": {
+              "range": [
+                2.459345494168102,
+                2.491025884209703
+              ],
+              "cases_beyond_11_5_R": 3
+            },
+            "september_magnetosphere": {
+              "range": [
+                2.2046335921854854,
+                8.248796915746716
+              ],
+              "cases_beyond_11_5_R": 0
+            }
+          },
+          "10": {
+            "no_magnetosphere": {
+              "range": [
+                1.9921998892136614,
+                5.371070785667501
+              ],
+              "cases_beyond_11_5_R": 0
+            },
+            "september_magnetosphere": {
+              "range": [
+                1.6477510720880526,
+                4.265511499075667
+              ],
+              "cases_beyond_11_5_R": 0
+            }
+          }
+        },
+        "loss_against_moment_kg_s": {
+          "shadow_radius_R": [
+            4.0,
+            4.0
+          ],
+          "moment_A_m2": [
+            1e+19,
+            1.7782794100389229e+19,
+            3.162277660168379e+19,
+            5.6234132519034905e+19,
+            1e+20,
+            1.778279410038923e+20,
+            3.1622776601683794e+20,
+            5.6234132519034906e+20,
+            1e+21,
+            1.7782794100389228e+21,
+            3.1622776601683794e+21,
+            5.623413251903491e+21,
+            1e+22,
+            1.7782794100389228e+22,
+            3.1622776601683792e+22,
+            5.623413251903491e+22,
+            1e+23
+          ],
+          "loss": [
+            [
+              0.7260134852741787,
+              24.31432387519119
+            ],
+            [
+              0.0060668347417184,
+              24.31432387519119
+            ],
+            [
+              0.0008436263070134995,
+              24.31432387519119
+            ],
+            [
+              0.000577703655213912,
+              16.783608544446654
+            ],
+            [
+              0.0005434053117913771,
+              16.24623552634383
+            ],
+            [
+              0.0005227465851751645,
+              15.758083132212626
+            ],
+            [
+              0.0004945667720940693,
+              15.131590312893415
+            ],
+            [
+              0.0004559754371237832,
+              14.335608223126995
+            ],
+            [
+              0.0004108590138572415,
+              13.427674874539903
+            ],
+            [
+              0.00037155030920461174,
+              12.548760894639098
+            ],
+            [
+              0.0003392683088097522,
+              11.757804406127624
+            ],
+            [
+              0.00031213135410938656,
+              11.049684857965374
+            ],
+            [
+              0.00029578638081615837,
+              10.529364949969658
+            ],
+            [
+              0.00028304183019510997,
+              10.135700483374901
+            ],
+            [
+              0.0002702316278816792,
+              9.811366137051277
+            ],
+            [
+              0.0002633521630375437,
+              9.601760055362952
+            ],
+            [
+              0.0002586786654835624,
+              9.461700095415642
+            ]
+          ]
+        },
+        "moment_for_exosphere_loss_A_m2": {
+          "0.1": {
+            "range": [
+              1.7782794100389229e+19,
+              1.7782794100389228e+21
+            ],
+            "cases_beyond_1e23": 1
+          },
+          "1": {
+            "range": [
+              1e+19,
+              3.162277660168379e+19
+            ],
+            "cases_beyond_1e23": 1
+          },
+          "10": {
+            "range": [
+              1e+19,
+              3.1622776601683792e+22
+            ],
+            "cases_beyond_1e23": 0
+          }
+        }
+      },
+      "edge_200nm": {
+        "cases": 6,
+        "cases_running_away_at_4_R": 6,
+        "transmission": [
+          0.0001941163707541026,
+          0.00021611860557693518
+        ],
+        "heat_w_m2": null,
+        "uv_driven_loss_kg_s": null,
+        "glow_share_of_heating": null,
+        "beyond_share": null,
+        "exobase_radius_R": null,
+        "exobase_temperature_k": null,
+        "heating_radius_R": [
+          5.0,
+          6.0
+        ],
+        "cases_without_heating_radius": 0,
+        "exosphere_ions_made_kg_s": null,
+        "exosphere_fragments_kg_s": null,
+        "exosphere_charge_exchange_upper_bound_kg_s": null,
+        "exosphere_charge_exchange_in_wake_upper_bound_kg_s": null,
+        "total_loss_kg_s": {
+          "no_magnetosphere": {
+            "low": null,
+            "central": null,
+            "high": null
+          },
+          "no_magnetosphere_wake": {
+            "low": null,
+            "central": null,
+            "high": null
+          },
+          "september_magnetosphere": {
+            "low": null,
+            "central": null,
+            "high": null
+          }
+        },
+        "cycle_time_years": {
+          "no_magnetosphere": {
+            "low": null,
+            "central": null,
+            "high": null
+          },
+          "no_magnetosphere_wake": {
+            "low": null,
+            "central": null,
+            "high": null
+          },
+          "september_magnetosphere": {
+            "low": null,
+            "central": null,
+            "high": null
+          }
+        },
+        "total_at_protected_radius_kg_s": {
+          "3": {
+            "no_magnetosphere": {
+              "range": null,
+              "cases_not_covering_the_heating": 6
+            },
+            "no_magnetosphere_wake": {
+              "range": null,
+              "cases_not_covering_the_heating": 6
+            },
+            "september_magnetosphere": {
+              "range": null,
+              "cases_not_covering_the_heating": 6
+            }
+          },
+          "4": {
+            "no_magnetosphere": {
+              "range": null,
+              "cases_not_covering_the_heating": 6
+            },
+            "no_magnetosphere_wake": {
+              "range": null,
+              "cases_not_covering_the_heating": 6
+            },
+            "september_magnetosphere": {
+              "range": null,
+              "cases_not_covering_the_heating": 6
+            }
+          },
+          "6": {
+            "no_magnetosphere": {
+              "range": [
+                43.59300746376318,
+                195.106215422634
+              ],
+              "cases_not_covering_the_heating": 0
+            },
+            "no_magnetosphere_wake": {
+              "range": [
+                40.171405227387,
+                192.18719903950907
+              ],
+              "cases_not_covering_the_heating": 0
+            },
+            "september_magnetosphere": {
+              "range": [
+                30.851408783399506,
+                153.22611483568176
+              ],
+              "cases_not_covering_the_heating": 0
+            }
+          }
+        },
+        "protected_radius_for_exosphere_loss_R": {
+          "0.1": {
+            "no_magnetosphere": {
+              "range": null,
+              "cases_beyond_11_5_R": 0
+            },
+            "september_magnetosphere": {
+              "range": null,
+              "cases_beyond_11_5_R": 0
+            }
+          },
+          "1": {
+            "no_magnetosphere": {
+              "range": null,
+              "cases_beyond_11_5_R": 0
+            },
+            "september_magnetosphere": {
+              "range": null,
+              "cases_beyond_11_5_R": 0
+            }
+          },
+          "10": {
+            "no_magnetosphere": {
+              "range": null,
+              "cases_beyond_11_5_R": 0
+            },
+            "september_magnetosphere": {
+              "range": null,
+              "cases_beyond_11_5_R": 0
+            }
+          }
+        },
+        "loss_against_moment_kg_s": {
+          "shadow_radius_R": null,
+          "moment_A_m2": [],
+          "loss": []
+        },
+        "moment_for_exosphere_loss_A_m2": {
+          "0.1": {
+            "range": null,
+            "cases_beyond_1e23": 0
+          },
+          "1": {
+            "range": null,
+            "cases_beyond_1e23": 0
+          },
+          "10": {
+            "range": null,
+            "cases_beyond_1e23": 0
+          }
+        }
+      }
+    },
+    "tight": {
+      "titania_stack": {
+        "cases": 6,
+        "cases_running_away_at_4_R": 0,
+        "transmission": [
+          2.9111915698748763e-05,
+          4.0113033110165035e-05
+        ],
+        "heat_w_m2": [
+          3.840354682173515e-06,
+          5.024603405576943e-06
+        ],
+        "uv_driven_loss_kg_s": [
+          1.4711528643361871e-08,
+          0.03397306332779944
+        ],
+        "glow_share_of_heating": [
+          0.7484381904827738,
+          0.8061623356627986
+        ],
+        "beyond_share": [
+          0.0,
+          0.0
+        ],
+        "exobase_radius_R": [
+          1.8513450823971198,
+          2.666883958103864
+        ],
+        "exobase_temperature_k": [
+          160.18076171734842,
+          219.95760138720118
+        ],
+        "heating_radius_R": [
+          2.25,
+          3.5
+        ],
+        "cases_without_heating_radius": 0,
+        "exosphere_ions_made_kg_s": [
+          5.760279218251813e-06,
+          0.5863978061269116
+        ],
+        "exosphere_fragments_kg_s": [
+          3.90790714383802e-06,
+          0.40460194236332525
+        ],
+        "exosphere_charge_exchange_upper_bound_kg_s": [
+          1.5986243341882518,
+          4.481343431892303
+        ],
+        "exosphere_charge_exchange_in_wake_upper_bound_kg_s": [
+          0.00038078845550190563,
+          2.23562915176112
+        ],
+        "total_loss_kg_s": {
+          "no_magnetosphere": {
+            "low": [
+              0.12579492746014725,
+              1.3730645808057593
+            ],
+            "central": [
+              0.6622000220442765,
+              3.050450484730078
+            ],
+            "high": [
+              8.148527705430157,
+              25.169612736311556
+            ]
+          },
+          "no_magnetosphere_wake": {
+            "low": [
+              0.005997374819183819,
+              1.2051454094370688
+            ],
+            "central": [
+              0.06355331266240204,
+              2.2092836502999393
+            ],
+            "high": [
+              0.676739129129552,
+              14.670898476698273
+            ]
+          },
+          "september_magnetosphere": {
+            "low": [
+              5.7283456604446685e-06,
+              0.6331481895410813
+            ],
+            "central": [
+              6.357217046865152e-06,
+              0.7391549856997549
+            ],
+            "high": [
+              7.4078009848043025e-06,
+              0.8760316146552269
+            ]
+          }
+        },
+        "cycle_time_years": {
+          "no_magnetosphere": {
+            "low": [
+              72497215050.93242,
+              791314564134.7864
+            ],
+            "central": [
+              32632346826.079258,
+              150322190999.31976
+            ],
+            "high": [
+              3954902256.0003414,
+              12216115817.72718
+            ]
+          },
+          "no_magnetosphere_wake": {
+            "low": [
+              82598628691.61227,
+              16597821746121.969
+            ],
+            "central": [
+              45056848259.37999,
+              1566296924949.8
+            ],
+            "high": [
+              6785089430.725582,
+              147092659355.35602
+            ]
+          },
+          "september_magnetosphere": {
+            "low": [
+              157219683855.75665,
+              1.7377330924853152e+16
+            ],
+            "central": [
+              134671834891.64485,
+              1.5658323046022152e+16
+            ],
+            "high": [
+              113629869662.4893,
+              1.3437639374719678e+16
+            ]
+          }
+        },
+        "total_at_protected_radius_kg_s": {
+          "3": {
+            "no_magnetosphere": {
+              "range": [
+                0.6626083841543089,
+                0.99719718571647
+              ],
+              "cases_not_covering_the_heating": 2
+            },
+            "no_magnetosphere_wake": {
+              "range": [
+                0.3835423260542601,
+                0.7339886426962097
+              ],
+              "cases_not_covering_the_heating": 2
+            },
+            "september_magnetosphere": {
+              "range": [
+                0.00018202630555267047,
+                0.030628410551157885
+              ],
+              "cases_not_covering_the_heating": 2
+            }
+          },
+          "4": {
+            "no_magnetosphere": {
+              "range": [
+                0.6622000220442765,
+                3.050450484730078
+              ],
+              "cases_not_covering_the_heating": 0
+            },
+            "no_magnetosphere_wake": {
+              "range": [
+                0.06355331266240204,
+                2.2092836502999393
+              ],
+              "cases_not_covering_the_heating": 0
+            },
+            "september_magnetosphere": {
+              "range": [
+                6.357217046865152e-06,
+                0.7391549856997549
+              ],
+              "cases_not_covering_the_heating": 0
+            }
+          },
+          "6": {
+            "no_magnetosphere": {
+              "range": [
+                0.662188122772382,
+                1.9629546015570984
+              ],
+              "cases_not_covering_the_heating": 0
+            },
+            "no_magnetosphere_wake": {
+              "range": [
+                0.063398892110772,
+                0.3040859912910613
+              ],
+              "cases_not_covering_the_heating": 0
+            },
+            "september_magnetosphere": {
+              "range": [
+                3.771565785334602e-07,
+                0.16136657680317917
+              ],
+              "cases_not_covering_the_heating": 0
+            }
+          }
+        },
+        "protected_radius_for_exosphere_loss_R": {
+          "0.1": {
+            "no_magnetosphere": {
+              "range": null,
+              "cases_beyond_11_5_R": 6
+            },
+            "september_magnetosphere": {
+              "range": [
+                2.212597153738529,
+                6.399566381193554
+              ],
+              "cases_beyond_11_5_R": 0
+            }
+          },
+          "1": {
+            "no_magnetosphere": {
+              "range": [
+                2.177426233824957,
+                2.8839570651343713
+              ],
+              "cases_beyond_11_5_R": 2
+            },
+            "september_magnetosphere": {
+              "range": [
+                1.9769821908435483,
+                3.761832994066732
+              ],
+              "cases_beyond_11_5_R": 0
+            }
+          },
+          "10": {
+            "no_magnetosphere": {
+              "range": [
+                1.8568996711421706,
                 3.111296483499716
               ],
               "cases_beyond_11_5_R": 0
@@ -1553,71 +3136,71 @@
           ],
           "loss": [
             [
-              0.015240036817895737,
+              0.04036297133194008,
               2.953079206907196
             ],
             [
-              0.000106576864265145,
+              0.00041842962321418767,
               2.953079206907196
             ],
             [
-              2.674073249437159e-06,
+              2.1003055037171288e-05,
               1.2010334628320087
             ],
             [
-              5.711223887849349e-07,
+              9.966561367012471e-06,
               1.00669902674783
             ],
             [
-              4.6250030846600484e-07,
+              9.147622569092235e-06,
               0.9641206452938191
             ],
             [
-              4.373064841088999e-07,
+              8.770309689262704e-06,
               0.9314853736217974
             ],
             [
-              4.1041516045660233e-07,
+              8.263682203029702e-06,
               0.8868369466100763
             ],
             [
-              3.760847081991407e-07,
+              7.5860069969009104e-06,
               0.8257703240646579
             ],
             [
-              3.371736082992952e-07,
+              6.809706609602713e-06,
               0.7537683380205145
             ],
             [
-              3.066101668941808e-07,
+              6.176751516614669e-06,
               0.6866378862823739
             ],
             [
-              2.820982242866994e-07,
+              5.6668901198671315e-06,
               0.6288830546284498
             ],
             [
-              2.613507859876358e-07,
+              5.238607321570874e-06,
               0.5791295957619015
             ],
             [
-              2.501411239683907e-07,
+              4.998231781452522e-06,
               0.5459151741788871
             ],
             [
-              2.4053572249313814e-07,
+              4.797756738842325e-06,
               0.5208467683067124
             ],
             [
-              2.2954764892975824e-07,
+              4.582145559722886e-06,
               0.49839259586118256
             ],
             [
-              2.2450930596682308e-07,
+              4.474632309756105e-06,
               0.48499559455136076
             ],
             [
-              2.20871109376001e-07,
+              4.400536423746547e-06,
               0.4760791735650695
             ]
           ]
@@ -1626,7 +3209,7 @@
           "0.1": {
             "range": [
               1e+19,
-              5.6234132519034905e+19
+              1.7782794100389229e+19
             ],
             "cases_beyond_1e23": 2
           },
@@ -1647,97 +3230,97 @@
         }
       },
       "edge_200nm": {
-        "cases": 12,
+        "cases": 6,
         "cases_running_away_at_4_R": 2,
         "transmission": [
           2.9111915698748763e-05,
           4.0113033110165035e-05
         ],
         "heat_w_m2": [
-          2.8443274126028002e-06,
+          5.290653055740846e-06,
           5.523537507362113e-06
         ],
         "uv_driven_loss_kg_s": [
-          0.02038644673234379,
-          0.5205063203240985
+          0.20550754600753546,
+          0.30971476925039165
         ],
         "glow_share_of_heating": [
           0.7062835677315044,
-          0.9128605521710593
+          0.7361494691869254
         ],
         "beyond_share": [
           0.0,
           0.0
         ],
         "exobase_radius_R": [
-          2.6757294474293314,
-          3.1435501010465012
+          2.9066034643395042,
+          2.958665857009121
         ],
         "exobase_temperature_k": [
-          211.2197011617561,
+          230.35488708281235,
           234.01913913923943
         ],
         "heating_radius_R": [
-          3.5,
+          4.0,
           5.0
         ],
         "cases_without_heating_radius": 0,
         "exosphere_ions_made_kg_s": [
-          0.18739790898052414,
+          2.4465739569735643,
           3.2894971614983253
         ],
         "exosphere_fragments_kg_s": [
-          0.14088297156653173,
+          1.6863830604045618,
           2.267537897380036
         ],
         "exosphere_charge_exchange_upper_bound_kg_s": [
-          4.401186815813204,
-          7.313777881304061
+          5.8783295575235295,
+          6.265193561872176
         ],
         "exosphere_charge_exchange_in_wake_upper_bound_kg_s": [
-          2.175583469803647,
-          5.30727372725253
+          3.8000563195852264,
+          4.203755558470784
         ],
         "total_loss_kg_s": {
           "no_magnetosphere": {
             "low": [
-              0.6793101267226606,
+              4.7596911018304064,
               6.29354766945665
             ],
             "central": [
-              2.1512046627504158,
+              7.786600020714436,
               9.867344505699934
             ],
             "high": [
-              22.413817651482958,
-              50.55970938231514
+              43.13112703790318,
+              50.171078659771126
             ]
           },
           "no_magnetosphere_wake": {
             "low": [
-              0.5128921234743411,
+              4.60409315866742,
               6.139181312763494
             ],
             "central": [
-              1.3175706881066667,
+              7.008150804754818,
               9.095201185849895
             ],
             "high": [
-              12.009122008888282,
-              41.17930246212424
+              33.41519965054161,
+              40.53385599386961
             ]
           },
           "september_magnetosphere": {
             "low": [
-              0.21129134953532025,
+              2.7687243092234546,
               3.786742218627335
             ],
             "central": [
-              0.25355253056836574,
+              3.2483782388555222,
               4.4410972422453705
             ],
             "high": [
-              0.30807786583042435,
+              3.8305476770579507,
               5.223425470212699
             ]
           }
@@ -1746,43 +3329,43 @@
           "no_magnetosphere": {
             "low": [
               15816732218.711788,
-              146535955048.60434
+              20913827402.625496
             ],
             "central": [
               10088160815.3026,
-              46273309051.972145
+              12783931103.264784
             ],
             "high": [
-              1968827736.7415395,
-              4441160347.662034
+              1984078494.076922,
+              2307923883.046595
             ]
           },
           "no_magnetosphere_wake": {
             "low": [
               16214435300.443178,
-              194082446654.0544
+              21620622077.574272
             ],
             "central": [
               10944602121.430887,
-              75550677540.14482
+              14203940663.770582
             ],
             "high": [
-              2417315307.4909697,
-              8288978837.904946
+              2455807762.492386,
+              2978984391.3705316
             ]
           },
           "september_magnetosphere": {
             "low": [
               26287334190.27852,
-              471118947426.91986
+              35952788026.55959
             ],
             "central": [
               22414136138.83524,
-              392594615286.8447
+              30644017067.59521
             ],
             "high": [
               19057103190.45484,
-              323111035338.98553
+              25986716935.98334
             ]
           }
         },
@@ -1790,35 +3373,35 @@
           "3": {
             "no_magnetosphere": {
               "range": null,
-              "cases_not_covering_the_heating": 12
+              "cases_not_covering_the_heating": 6
             },
             "no_magnetosphere_wake": {
               "range": null,
-              "cases_not_covering_the_heating": 12
+              "cases_not_covering_the_heating": 6
             },
             "september_magnetosphere": {
               "range": null,
-              "cases_not_covering_the_heating": 12
+              "cases_not_covering_the_heating": 6
             }
           },
           "4": {
             "no_magnetosphere": {
               "range": [
-                2.1512046627504158,
+                7.786600020714436,
                 9.867344505699934
               ],
               "cases_not_covering_the_heating": 2
             },
             "no_magnetosphere_wake": {
               "range": [
-                1.3175706881066667,
+                7.008150804754818,
                 9.095201185849895
               ],
               "cases_not_covering_the_heating": 2
             },
             "september_magnetosphere": {
               "range": [
-                0.25355253056836574,
+                3.2483782388555222,
                 4.4410972422453705
               ],
               "cases_not_covering_the_heating": 2
@@ -1827,21 +3410,21 @@
           "6": {
             "no_magnetosphere": {
               "range": [
-                1.7868661935683756,
+                3.364880000063256,
                 22.860491403631027
               ],
               "cases_not_covering_the_heating": 0
             },
             "no_magnetosphere_wake": {
               "range": [
-                0.15317337726942554,
+                1.247895112613193,
                 19.616834991996328
               ],
               "cases_not_covering_the_heating": 0
             },
             "september_magnetosphere": {
               "range": [
-                0.057816674599101975,
+                0.8190519898157187,
                 14.371544418321903
               ],
               "cases_not_covering_the_heating": 0
@@ -1852,11 +3435,11 @@
           "0.1": {
             "no_magnetosphere": {
               "range": null,
-              "cases_beyond_11_5_R": 10
+              "cases_beyond_11_5_R": 4
             },
             "september_magnetosphere": {
               "range": [
-                4.735978611721406,
+                9.082632658814537,
                 9.563742417945813
               ],
               "cases_beyond_11_5_R": 0
@@ -1865,11 +3448,11 @@
           "1": {
             "no_magnetosphere": {
               "range": null,
-              "cases_beyond_11_5_R": 10
+              "cases_beyond_11_5_R": 4
             },
             "september_magnetosphere": {
               "range": [
-                3.2487501721488843,
+                5.2377704156749925,
                 5.750932797667062
               ],
               "cases_beyond_11_5_R": 0
@@ -1878,14 +3461,14 @@
           "10": {
             "no_magnetosphere": {
               "range": [
-                2.8305519137702224,
+                3.7415213034890202,
                 3.958444582411005
               ],
               "cases_beyond_11_5_R": 0
             },
             "september_magnetosphere": {
               "range": [
-                2.3662601715566756,
+                3.2881472307768638,
                 3.433141958482543
               ],
               "cases_beyond_11_5_R": 0
@@ -1918,71 +3501,71 @@
           ],
           "loss": [
             [
-              2.0674200015229895,
+              7.517694260211818,
               9.494231521954461
             ],
             [
-              2.0674200015229895,
+              7.517694260211818,
               9.494231521954461
             ],
             [
-              0.5458585410608037,
+              7.517694260211818,
               9.494231521954461
             ],
             [
-              0.356614382944042,
+              4.204073032872858,
               5.65444262643485
             ],
             [
-              0.32535119724752715,
+              4.03969356790415,
               5.439066162580765
             ],
             [
-              0.3106322599328868,
+              3.906702502990413,
               5.261842011869367
             ],
             [
-              0.29452215755093203,
+              3.7298823318170653,
               5.028149317737168
             ],
             [
-              0.2736443265524915,
+              3.496074588178907,
               4.722100804358621
             ],
             [
-              0.24931722889552482,
+              3.2262416479589557,
               4.370726184867678
             ],
             [
-              0.22707668481357268,
+              2.9723014288180334,
               4.038743841167796
             ],
             [
-              0.2081898970205403,
+              2.750870569595481,
               3.74808957805451
             ],
             [
-              0.19207281009475546,
+              2.5560965487825085,
               3.4906852622523883
             ],
             [
-              0.18153667805613938,
+              2.421226269916266,
               3.3111949548700266
             ],
             [
-              0.17356571273169127,
+              2.3191961679816133,
               3.1749896446294974
             ],
             [
-              0.16627865858952473,
+              2.230674299632568,
               3.0576968167215446
             ],
             [
-              0.1620164483896631,
+              2.176070360472766,
               2.9848566329918516
             ],
             [
-              0.15916466857923342,
+              2.139604033537523,
               2.9362884144836676
             ]
           ]
@@ -1990,14 +3573,11 @@
         "moment_for_exosphere_loss_A_m2": {
           "0.1": {
             "range": null,
-            "cases_beyond_1e23": 10
+            "cases_beyond_1e23": 4
           },
           "1": {
-            "range": [
-              3.162277660168379e+19,
-              3.162277660168379e+19
-            ],
-            "cases_beyond_1e23": 6
+            "range": null,
+            "cases_beyond_1e23": 4
           },
           "10": {
             "range": [
@@ -2199,6 +3779,190 @@
       "shield": "titania_stack",
       "treatment": "collisional",
       "activity": "solar_maximum",
+      "transmission": 2.9111915698748763e-05,
+      "status": "thermal_column",
+      "protected_radius_R": 4.0,
+      "heating_radius_R": 2.25,
+      "wake_core_R": 2.614601902393947,
+      "total_at_protected_radius_kg_s": {
+        "3": {
+          "no_magnetosphere": 0.6864863097277538,
+          "no_magnetosphere_wake": 0.4099695230413183,
+          "september_magnetosphere": 0.0003213144846435183
+        },
+        "4": {
+          "no_magnetosphere": 0.6856831066885505,
+          "no_magnetosphere_wake": 0.06370525329456965,
+          "september_magnetosphere": 1.3336475728961452e-05
+        },
+        "6": {
+          "no_magnetosphere": 0.6856561949464164,
+          "no_magnetosphere_wake": 0.0633999973370494,
+          "september_magnetosphere": 9.483302685160012e-07
+        }
+      },
+      "heat_w_m2": 4.822901292831968e-06,
+      "heat_parts_w_m2": {
+        "gaps": 2.2941148715754687e-07,
+        "films": 7.17882856161823e-07,
+        "glow": 3.8756069495125976e-06,
+        "beyond_aperture": 0.0
+      },
+      "heating_as_disk_count_transmission": 0.0016738547809988966,
+      "glow_share_of_heating": 0.8035841320809768,
+      "beyond_share": 0.0,
+      "covers_heating": true,
+      "uv_driven_loss_kg_s": 5.3537152441106926e-08,
+      "proton_sputtering_kg_s": {
+        "low": 0.005955225289237094,
+        "central": 0.0633982144950825,
+        "high": 0.674925532780204
+      },
+      "exobase_radius_R": 1.8756442838561505,
+      "exobase_temperature_k": 164.93092428308026,
+      "exosphere": {
+        "ions_made_kg_s": 1.4275374762258339e-05,
+        "fragments_escaping_kg_s": 7.166169174019292e-06,
+        "charge_exchange_upper_bound_kg_s": 1.661276026892779,
+        "charge_exchange_in_wake_upper_bound_kg_s": 0.0007439063670394282,
+        "loss_kg_s": {
+          "no_magnetosphere": {
+            "low": 0.12457504091229704,
+            "central": 0.6222848386563156,
+            "high": 7.766545806984085
+          },
+          "no_magnetosphere_wake": {
+            "low": 8.47805919194809e-05,
+            "central": 0.0003069852623346995,
+            "high": 0.0035581435262518643
+          },
+          "september_magnetosphere": {
+            "low": 1.1616178617073547e-05,
+            "central": 1.3282938576520345e-05,
+            "high": 1.5987046032182902e-05
+          }
+        }
+      },
+      "total_loss_kg_s": {
+        "no_magnetosphere": {
+          "low": 0.1305303197386866,
+          "central": 0.6856831066885505,
+          "high": 8.441471393301441
+        },
+        "no_magnetosphere_wake": {
+          "low": 0.006040059418309016,
+          "central": 0.06370525329456965,
+          "high": 0.6784837298436083
+        },
+        "september_magnetosphere": {
+          "low": 1.1669715769514654e-05,
+          "central": 1.3336475728961452e-05,
+          "high": 1.6040583184624008e-05
+        }
+      },
+      "cycle_time_years": {
+        "no_magnetosphere": {
+          "low": 762607173511.6636,
+          "central": 145173998341.93066,
+          "high": 11792180954.671494
+        },
+        "no_magnetosphere_wake": {
+          "low": 16480526315974.852,
+          "central": 1562561218196.7222,
+          "high": 146714436640.12167
+        },
+        "september_magnetosphere": {
+          "low": 8530058500099486.0,
+          "central": 7463992753147327.0,
+          "high": 6205719396094812.0
+        }
+      },
+      "protected_radius_for_exosphere_loss_R": {
+        "0.1": {
+          "no_magnetosphere": null,
+          "september_magnetosphere": 2.228963760237626
+        },
+        "1": {
+          "no_magnetosphere": 2.21232121908942,
+          "september_magnetosphere": 1.9846034878037255
+        },
+        "10": {
+          "no_magnetosphere": 1.869371454677998,
+          "september_magnetosphere": 1.5
+        }
+      },
+      "moment_sweep": {
+        "shadow_radius_R": 4.0,
+        "moment_A_m2": [
+          1e+19,
+          1.7782794100389229e+19,
+          3.162277660168379e+19,
+          5.6234132519034905e+19,
+          1e+20,
+          1.778279410038923e+20,
+          3.1622776601683794e+20,
+          5.6234132519034906e+20,
+          1e+21,
+          1.7782794100389228e+21,
+          3.1622776601683794e+21,
+          5.623413251903491e+21,
+          1e+22,
+          1.7782794100389228e+22,
+          3.1622776601683792e+22,
+          5.623413251903491e+22,
+          1e+23
+        ],
+        "standoff_R": [
+          1.8735081052872828,
+          2.269806888220385,
+          2.749933824824685,
+          3.331620888173409,
+          4.0363508540868285,
+          4.890150699655319,
+          5.924552827494362,
+          7.177759615515628,
+          8.696054301184486,
+          10.535510306821106,
+          12.764062134480335,
+          15.464014312376785,
+          18.735081052872825,
+          22.69806888220384,
+          27.499338248246847,
+          33.316208881734084,
+          40.36350854086828
+        ],
+        "loss_kg_s": [
+          0.6222848386563156,
+          0.0007654273726465183,
+          4.4808453900780746e-05,
+          2.212797613988793e-05,
+          2.0235462748382902e-05,
+          1.9309215748377457e-05,
+          1.8060640254483924e-05,
+          1.638287617355544e-05,
+          1.445273097278794e-05,
+          1.2864560502715463e-05,
+          1.1574420949498526e-05,
+          1.0497937560047122e-05,
+          9.87928238232733e-06,
+          9.37691538174389e-06,
+          8.838891190041364e-06,
+          8.569833371509902e-06,
+          8.382064276067703e-06
+        ]
+      },
+      "moment_for_exosphere_loss_A_m2": {
+        "0.1": 1.7782794100389229e+19,
+        "1": 1e+19,
+        "10": 1e+19
+      },
+      "level": "tight",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "collisional",
+      "activity": "solar_maximum_stress",
       "transmission": 2.9111915698748763e-05,
       "status": "thermal_column",
       "protected_radius_R": 4.0,
@@ -2567,6 +4331,190 @@
       "shield": "titania_stack",
       "treatment": "lte",
       "activity": "solar_maximum",
+      "transmission": 2.9111915698748763e-05,
+      "status": "thermal_column",
+      "protected_radius_R": 4.0,
+      "heating_radius_R": 2.75,
+      "wake_core_R": 2.614601902393947,
+      "total_at_protected_radius_kg_s": {
+        "3": {
+          "no_magnetosphere": 1.0636989448775391,
+          "no_magnetosphere_wake": 0.8028482658148943,
+          "september_magnetosphere": 0.040083087347047
+        },
+        "4": {
+          "no_magnetosphere": 0.969314430225335,
+          "no_magnetosphere_wake": 0.09217681931379293,
+          "september_magnetosphere": 0.003238424932666658
+        },
+        "6": {
+          "no_magnetosphere": 0.9633295697621844,
+          "no_magnetosphere_wake": 0.06412541208407213,
+          "september_magnetosphere": 0.0004256584392851313
+        }
+      },
+      "heat_w_m2": 5.323029836395215e-06,
+      "heat_parts_w_m2": {
+        "gaps": 2.6292287540545644e-07,
+        "films": 8.611324038180237e-07,
+        "glow": 4.198974557171735e-06,
+        "beyond_aperture": 0.0
+      },
+      "heating_as_disk_count_transmission": 0.0018474313281701105,
+      "glow_share_of_heating": 0.7888316778654961,
+      "beyond_share": 0.0,
+      "covers_heating": true,
+      "uv_driven_loss_kg_s": 5.265849685543533e-05,
+      "proton_sputtering_kg_s": {
+        "low": 0.005955225289237094,
+        "central": 0.0633982144950825,
+        "high": 0.674925532780204
+      },
+      "exobase_radius_R": 2.148516449725095,
+      "exobase_temperature_k": 189.84276414540102,
+      "exosphere": {
+        "ions_made_kg_s": 0.0032957054059995516,
+        "fragments_escaping_kg_s": 0.0016821080895763672,
+        "charge_exchange_upper_bound_kg_s": 2.400895292825179,
+        "charge_exchange_in_wake_upper_bound_kg_s": 0.05914764201739306,
+        "loss_kg_s": {
+          "no_magnetosphere": {
+            "low": 0.18547711074002637,
+            "central": 0.9058635572333971,
+            "high": 11.242952900416054
+          },
+          "no_magnetosphere_wake": {
+            "low": 0.009915094674500868,
+            "central": 0.02872594632185501,
+            "high": 0.29528263288965345
+          },
+          "september_magnetosphere": {
+            "low": 0.0027214148782893615,
+            "central": 0.0031857664358112226,
+            "high": 0.0038708188070972374
+          }
+        }
+      },
+      "total_loss_kg_s": {
+        "no_magnetosphere": {
+          "low": 0.1914849945261189,
+          "central": 0.969314430225335,
+          "high": 11.917931091693113
+        },
+        "no_magnetosphere_wake": {
+          "low": 0.015922978460593398,
+          "central": 0.09217681931379293,
+          "high": 0.9702608241667128
+        },
+        "september_magnetosphere": {
+          "low": 0.002774073375144797,
+          "central": 0.003238424932666658,
+          "high": 0.003923477303952673
+        }
+      },
+      "cycle_time_years": {
+        "no_magnetosphere": {
+          "low": 519849393106.9654,
+          "central": 102694600523.3336,
+          "high": 8352402562.7968235
+        },
+        "no_magnetosphere_wake": {
+          "low": 6251553906189.474,
+          "central": 1079917477458.4381,
+          "high": 102594432047.67557
+        },
+        "september_magnetosphere": {
+          "low": 35883462595252.26,
+          "central": 30738201521788.934,
+          "high": 25371207855136.418
+        }
+      },
+      "protected_radius_for_exosphere_loss_R": {
+        "0.1": {
+          "no_magnetosphere": null,
+          "september_magnetosphere": 2.8004613140781776
+        },
+        "1": {
+          "no_magnetosphere": 3.001047558216744,
+          "september_magnetosphere": 2.4384493864709484
+        },
+        "10": {
+          "no_magnetosphere": 2.2129529739703067,
+          "september_magnetosphere": 1.8963779795305373
+        }
+      },
+      "moment_sweep": {
+        "shadow_radius_R": 4.0,
+        "moment_A_m2": [
+          1e+19,
+          1.7782794100389229e+19,
+          3.162277660168379e+19,
+          5.6234132519034905e+19,
+          1e+20,
+          1.778279410038923e+20,
+          3.1622776601683794e+20,
+          5.6234132519034906e+20,
+          1e+21,
+          1.7782794100389228e+21,
+          3.1622776601683794e+21,
+          5.623413251903491e+21,
+          1e+22,
+          1.7782794100389228e+22,
+          3.1622776601683792e+22,
+          5.623413251903491e+22,
+          1e+23
+        ],
+        "standoff_R": [
+          1.8735081052872828,
+          2.269806888220385,
+          2.749933824824685,
+          3.331620888173409,
+          4.0363508540868285,
+          4.890150699655319,
+          5.924552827494362,
+          7.177759615515628,
+          8.696054301184486,
+          10.535510306821106,
+          12.764062134480335,
+          15.464014312376785,
+          18.735081052872825,
+          22.69806888220384,
+          27.499338248246847,
+          33.316208881734084,
+          40.36350854086828
+        ],
+        "loss_kg_s": [
+          0.9058635572333971,
+          0.04898108477663286,
+          0.007381067194030064,
+          0.00507007638306328,
+          0.00475118654545439,
+          0.004552726464211817,
+          0.004280902965708218,
+          0.003907422815723007,
+          0.0034687311228107087,
+          0.003081023422659349,
+          0.0027607691538731726,
+          0.0024903538331690605,
+          0.002324368075505178,
+          0.002196874110554828,
+          0.0020706378141839557,
+          0.002002103666388245,
+          0.0019556803380401644
+        ]
+      },
+      "moment_for_exosphere_loss_A_m2": {
+        "0.1": 1.7782794100389229e+19,
+        "1": 1e+19,
+        "10": 1e+19
+      },
+      "level": "tight",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "lte",
+      "activity": "solar_maximum_stress",
       "transmission": 2.9111915698748763e-05,
       "status": "thermal_column",
       "protected_radius_R": 4.0,
@@ -2943,6 +4891,186 @@
       "total_at_protected_radius_kg_s": {
         "3": null,
         "4": {
+          "no_magnetosphere": 3.800917578971994,
+          "no_magnetosphere_wake": 2.9849763526295905,
+          "september_magnetosphere": 1.0366031045089488
+        },
+        "6": {
+          "no_magnetosphere": 2.2275600599740892,
+          "no_magnetosphere_wake": 0.44765819087324865,
+          "september_magnetosphere": 0.252980951485586
+        }
+      },
+      "heat_w_m2": 6.134865489046092e-06,
+      "heat_parts_w_m2": {
+        "gaps": 3.2701210424838804e-07,
+        "films": 1.1002093727621765e-06,
+        "glow": 4.7076440120355276e-06,
+        "beyond_aperture": 0.0
+      },
+      "heating_as_disk_count_transmission": 0.0021291901505193648,
+      "glow_share_of_heating": 0.7673589617312893,
+      "beyond_share": 0.0,
+      "covers_heating": true,
+      "uv_driven_loss_kg_s": 0.06329758071023346,
+      "proton_sputtering_kg_s": {
+        "low": 0.005955225289237094,
+        "central": 0.0633982144950825,
+        "high": 0.674925532780204
+      },
+      "exobase_radius_R": 2.727578741953889,
+      "exobase_temperature_k": 224.80332811196743,
+      "exosphere": {
+        "ions_made_kg_s": 0.9278035542456399,
+        "fragments_escaping_kg_s": 0.48641516561990766,
+        "charge_exchange_upper_bound_kg_s": 4.836031657676388,
+        "charge_exchange_in_wake_upper_bound_kg_s": 2.657663718352851,
+        "loss_kg_s": {
+          "no_magnetosphere": {
+            "low": 1.7788682834031244,
+            "central": 3.674221783766678,
+            "high": 28.02565038111052
+          },
+          "no_magnetosphere_wake": {
+            "low": 1.6159064713259665,
+            "central": 2.8582805574242744,
+            "high": 17.84178026477298
+          },
+          "september_magnetosphere": {
+            "low": 0.7991413960018592,
+            "central": 0.9733055237987154,
+            "high": 1.1946822563514232
+          }
+        }
+      },
+      "total_loss_kg_s": {
+        "no_magnetosphere": {
+          "low": 1.848121089402595,
+          "central": 3.800917578971994,
+          "high": 28.763873494600958
+        },
+        "no_magnetosphere_wake": {
+          "low": 1.6851592773254371,
+          "central": 2.9849763526295905,
+          "high": 18.580003378263417
+        },
+        "september_magnetosphere": {
+          "low": 0.8624389767120927,
+          "central": 1.0366031045089488,
+          "high": 1.2579798370616566
+        }
+      },
+      "cycle_time_years": {
+        "no_magnetosphere": {
+          "low": 53861924288.559944,
+          "central": 26189296696.198353,
+          "high": 3460707689.8797374
+        },
+        "no_magnetosphere_wake": {
+          "low": 59070593226.939064,
+          "central": 33348122877.355995,
+          "high": 5357553288.173694
+        },
+        "september_magnetosphere": {
+          "low": 115420755417.37021,
+          "central": 96028419903.92105,
+          "high": 79129533924.80696
+        }
+      },
+      "protected_radius_for_exosphere_loss_R": {
+        "0.1": {
+          "no_magnetosphere": null,
+          "september_magnetosphere": 7.11136540833384
+        },
+        "1": {
+          "no_magnetosphere": null,
+          "september_magnetosphere": 3.9836281588341085
+        },
+        "10": {
+          "no_magnetosphere": 3.2240955922613326,
+          "september_magnetosphere": 2.9051662967480336
+        }
+      },
+      "moment_sweep": {
+        "shadow_radius_R": 4.0,
+        "moment_A_m2": [
+          1e+19,
+          1.7782794100389229e+19,
+          3.162277660168379e+19,
+          5.6234132519034905e+19,
+          1e+20,
+          1.778279410038923e+20,
+          3.1622776601683794e+20,
+          5.6234132519034906e+20,
+          1e+21,
+          1.7782794100389228e+21,
+          3.1622776601683794e+21,
+          5.623413251903491e+21,
+          1e+22,
+          1.7782794100389228e+22,
+          3.1622776601683792e+22,
+          5.623413251903491e+22,
+          1e+23
+        ],
+        "standoff_R": [
+          1.8735081052872828,
+          2.269806888220385,
+          2.749933824824685,
+          3.331620888173409,
+          4.0363508540868285,
+          4.890150699655319,
+          5.924552827494362,
+          7.177759615515628,
+          8.696054301184486,
+          10.535510306821106,
+          12.764062134480335,
+          15.464014312376785,
+          18.735081052872825,
+          22.69806888220384,
+          27.499338248246847,
+          33.316208881734084,
+          40.36350854086828
+        ],
+        "loss_kg_s": [
+          3.674221783766678,
+          3.674221783766678,
+          1.7156296668278894,
+          1.4385024384845304,
+          1.3738276454183052,
+          1.3229470883446641,
+          1.2535686013326306,
+          1.1592849950547863,
+          1.0484471374338509,
+          0.9444347425380204,
+          0.8544362177017841,
+          0.7764616987600257,
+          0.7234940000908742,
+          0.6837054450922311,
+          0.6486124870864767,
+          0.6273410817507594,
+          0.6132037373783945
+        ]
+      },
+      "moment_for_exosphere_loss_A_m2": {
+        "0.1": null,
+        "1": 1.7782794100389228e+21,
+        "10": 1e+19
+      },
+      "level": "tight",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "all_heats",
+      "activity": "solar_maximum_stress",
+      "transmission": 2.9111915698748763e-05,
+      "status": "thermal_column",
+      "protected_radius_R": 4.0,
+      "heating_radius_R": 3.5,
+      "wake_core_R": 2.614601902393947,
+      "total_at_protected_radius_kg_s": {
+        "3": null,
+        "4": {
           "no_magnetosphere": 2.7394976246560248,
           "no_magnetosphere_wake": 1.8916408109312546,
           "september_magnetosphere": 0.5903722487513373
@@ -3295,6 +5423,27 @@
       "shield": "edge_200nm",
       "treatment": "collisional",
       "activity": "solar_maximum",
+      "transmission": 2.9111915698748763e-05,
+      "status": "runaway",
+      "protected_radius_R": 4.0,
+      "heating_radius_R": 5.0,
+      "wake_core_R": 2.614601902393947,
+      "total_at_protected_radius_kg_s": {
+        "3": null,
+        "4": null,
+        "6": {
+          "no_magnetosphere": 5.010437250960817,
+          "no_magnetosphere_wake": 2.613753600884899,
+          "september_magnetosphere": 1.753163299736174
+        }
+      },
+      "level": "tight",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "collisional",
+      "activity": "solar_maximum_stress",
       "transmission": 2.9111915698748763e-05,
       "status": "thermal_column",
       "protected_radius_R": 4.0,
@@ -3655,6 +5804,27 @@
       "shield": "edge_200nm",
       "treatment": "lte",
       "activity": "solar_maximum",
+      "transmission": 2.9111915698748763e-05,
+      "status": "runaway",
+      "protected_radius_R": 4.0,
+      "heating_radius_R": 5.0,
+      "wake_core_R": 2.614601902393947,
+      "total_at_protected_radius_kg_s": {
+        "3": null,
+        "4": null,
+        "6": {
+          "no_magnetosphere": 5.226279415403889,
+          "no_magnetosphere_wake": 2.7989509742673797,
+          "september_magnetosphere": 1.8855073344050324
+        }
+      },
+      "level": "tight",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "lte",
+      "activity": "solar_maximum_stress",
       "transmission": 2.9111915698748763e-05,
       "status": "thermal_column",
       "protected_radius_R": 4.0,
@@ -4024,6 +6194,27 @@
         "3": null,
         "4": null,
         "6": {
+          "no_magnetosphere": 31.674721309260583,
+          "no_magnetosphere_wake": 28.307233537681263,
+          "september_magnetosphere": 20.639701834052648
+        }
+      },
+      "level": "tight",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "all_heats",
+      "activity": "solar_maximum_stress",
+      "transmission": 2.9111915698748763e-05,
+      "status": "runaway",
+      "protected_radius_R": 4.0,
+      "heating_radius_R": 5.0,
+      "wake_core_R": 2.614601902393947,
+      "total_at_protected_radius_kg_s": {
+        "3": null,
+        "4": null,
+        "6": {
           "no_magnetosphere": 18.70200573975507,
           "no_magnetosphere_wake": 15.524388584824623,
           "september_magnetosphere": 11.284591841772194
@@ -4220,6 +6411,190 @@
       "shield": "titania_stack",
       "treatment": "collisional",
       "activity": "solar_maximum",
+      "transmission": 4.0113033110165035e-05,
+      "status": "thermal_column",
+      "protected_radius_R": 4.0,
+      "heating_radius_R": 2.25,
+      "wake_core_R": 2.614601902393947,
+      "total_at_protected_radius_kg_s": {
+        "3": {
+          "no_magnetosphere": 0.6918641396523486,
+          "no_magnetosphere_wake": 0.41711262742751076,
+          "september_magnetosphere": 0.00038042570411638433
+        },
+        "4": {
+          "no_magnetosphere": 0.6909180868436654,
+          "no_magnetosphere_wake": 0.06374484894909026,
+          "september_magnetosphere": 1.6288911782422686e-05
+        },
+        "6": {
+          "no_magnetosphere": 0.690885312078781,
+          "no_magnetosphere_wake": 0.0634004508986273,
+          "september_magnetosphere": 1.1973644755645466e-06
+        }
+      },
+      "heat_w_m2": 4.912050815349987e-06,
+      "heat_parts_w_m2": {
+        "gaps": 3.1677077242384183e-07,
+        "films": 7.196730934135471e-07,
+        "glow": 3.8756069495125976e-06,
+        "beyond_aperture": 0.0
+      },
+      "heating_as_disk_count_transmission": 0.0017047953591758415,
+      "glow_share_of_heating": 0.7889997671443995,
+      "beyond_share": 0.0,
+      "covers_heating": true,
+      "uv_driven_loss_kg_s": 7.137204822496499e-08,
+      "proton_sputtering_kg_s": {
+        "low": 0.005955225289237094,
+        "central": 0.0633982144950825,
+        "high": 0.674925532780204
+      },
+      "exobase_radius_R": 1.8807710463691774,
+      "exobase_temperature_k": 166.08097838562105,
+      "exosphere": {
+        "ions_made_kg_s": 1.741111299124265e-05,
+        "fragments_escaping_kg_s": 8.745327661472755e-06,
+        "charge_exchange_upper_bound_kg_s": 1.6752354889799062,
+        "charge_exchange_in_wake_upper_bound_kg_s": 0.0008329343307608576,
+        "loss_kg_s": {
+          "no_magnetosphere": {
+            "low": 0.1256330009971513,
+            "central": 0.6275198009765347,
+            "high": 7.831823977021064
+          },
+          "no_magnetosphere_wake": {
+            "low": 9.712716173233902e-05,
+            "central": 0.00034656308195953235,
+            "high": 0.003992034036311006
+          },
+          "september_magnetosphere": {
+            "low": 1.4177445160744133e-05,
+            "central": 1.6217539734197722e-05,
+            "high": 1.9523348704366457e-05
+          }
+        }
+      },
+      "total_loss_kg_s": {
+        "no_magnetosphere": {
+          "low": 0.13158829765843663,
+          "central": 0.6909180868436654,
+          "high": 8.506749581173317
+        },
+        "no_magnetosphere_wake": {
+          "low": 0.006052423823017658,
+          "central": 0.06374484894909026,
+          "high": 0.6789176381885632
+        },
+        "september_magnetosphere": {
+          "low": 1.4248817208969098e-05,
+          "central": 1.6288911782422686e-05,
+          "high": 1.9594720752591422e-05
+        }
+      },
+      "cycle_time_years": {
+        "no_magnetosphere": {
+          "low": 756475765435.2966,
+          "central": 144074037268.6426,
+          "high": 11701691373.84713
+        },
+        "no_magnetosphere_wake": {
+          "low": 16446858499057.078,
+          "central": 1561590620020.0376,
+          "high": 146620668832.65482
+        },
+        "september_magnetosphere": {
+          "low": 6986078685242356.0,
+          "central": 6111111627537355.0,
+          "high": 5080111089632588.0
+        }
+      },
+      "protected_radius_for_exosphere_loss_R": {
+        "0.1": {
+          "no_magnetosphere": null,
+          "september_magnetosphere": 2.2328580642148625
+        },
+        "1": {
+          "no_magnetosphere": 2.218642920709165,
+          "september_magnetosphere": 1.988246203656754
+        },
+        "10": {
+          "no_magnetosphere": 1.8739880195845382,
+          "september_magnetosphere": 1.5
+        }
+      },
+      "moment_sweep": {
+        "shadow_radius_R": 4.0,
+        "moment_A_m2": [
+          1e+19,
+          1.7782794100389229e+19,
+          3.162277660168379e+19,
+          5.6234132519034905e+19,
+          1e+20,
+          1.778279410038923e+20,
+          3.1622776601683794e+20,
+          5.6234132519034906e+20,
+          1e+21,
+          1.7782794100389228e+21,
+          3.1622776601683794e+21,
+          5.623413251903491e+21,
+          1e+22,
+          1.7782794100389228e+22,
+          3.1622776601683792e+22,
+          5.623413251903491e+22,
+          1e+23
+        ],
+        "standoff_R": [
+          1.8735081052872828,
+          2.269806888220385,
+          2.749933824824685,
+          3.331620888173409,
+          4.0363508540868285,
+          4.890150699655319,
+          5.924552827494362,
+          7.177759615515628,
+          8.696054301184486,
+          10.535510306821106,
+          12.764062134480335,
+          15.464014312376785,
+          18.735081052872825,
+          22.69806888220384,
+          27.499338248246847,
+          33.316208881734084,
+          40.36350854086828
+        ],
+        "loss_kg_s": [
+          0.6275198009765347,
+          0.000868315100562187,
+          5.3310609351738504e-05,
+          2.6955047493740794e-05,
+          2.4681984504346227e-05,
+          2.3556757088063048e-05,
+          2.2037511017520298e-05,
+          1.9998220358898677e-05,
+          1.7652254592541554e-05,
+          1.57085286733361e-05,
+          1.4129802509324962e-05,
+          1.2811869472578247e-05,
+          1.2056019434966367e-05,
+          1.1435493795357437e-05,
+          1.078386304993214e-05,
+          1.0452817217342728e-05,
+          1.0221534511736774e-05
+        ]
+      },
+      "moment_for_exosphere_loss_A_m2": {
+        "0.1": 1.7782794100389229e+19,
+        "1": 1e+19,
+        "10": 1e+19
+      },
+      "level": "tight",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "collisional",
+      "activity": "solar_maximum_stress",
       "transmission": 4.0113033110165035e-05,
       "status": "thermal_column",
       "protected_radius_R": 4.0,
@@ -4588,6 +6963,190 @@
       "shield": "titania_stack",
       "treatment": "lte",
       "activity": "solar_maximum",
+      "transmission": 4.0113033110165035e-05,
+      "status": "thermal_column",
+      "protected_radius_R": 4.0,
+      "heating_radius_R": 2.75,
+      "wake_core_R": 2.614601902393947,
+      "total_at_protected_radius_kg_s": {
+        "3": {
+          "no_magnetosphere": 1.0903542391127232,
+          "no_magnetosphere_wake": 0.8272317087757459,
+          "september_magnetosphere": 0.046274973969510434
+        },
+        "4": {
+          "no_magnetosphere": 0.9819260495805724,
+          "no_magnetosphere_wake": 0.09520741429377078,
+          "september_magnetosphere": 0.003861278667648444
+        },
+        "6": {
+          "no_magnetosphere": 0.9748339276034413,
+          "no_magnetosphere_wake": 0.06428502455248764,
+          "september_magnetosphere": 0.0005225400715817751
+        }
+      },
+      "heat_w_m2": 5.426258758308506e-06,
+      "heat_parts_w_m2": {
+        "gaps": 3.634277331642737e-07,
+        "films": 8.638564679724969e-07,
+        "glow": 4.198974557171735e-06,
+        "beyond_aperture": 0.0
+      },
+      "heating_as_disk_count_transmission": 0.0018832583571700059,
+      "glow_share_of_heating": 0.7738249766917963,
+      "beyond_share": 0.0,
+      "covers_heating": true,
+      "uv_driven_loss_kg_s": 6.675336013348703e-05,
+      "proton_sputtering_kg_s": {
+        "low": 0.005955225289237094,
+        "central": 0.0633982144950825,
+        "high": 0.674925532780204
+      },
+      "exobase_radius_R": 2.157009525455454,
+      "exobase_temperature_k": 191.25135659603953,
+      "exosphere": {
+        "ions_made_kg_s": 0.003914617623258008,
+        "fragments_escaping_kg_s": 0.001999871806106085,
+        "charge_exchange_upper_bound_kg_s": 2.431228059705712,
+        "charge_exchange_in_wake_upper_bound_kg_s": 0.0639013651492711,
+        "loss_kg_s": {
+          "no_magnetosphere": {
+            "low": 0.18873629022836666,
+            "central": 0.9184610817253565,
+            "high": 11.388294725195113
+          },
+          "no_magnetosphere_wake": {
+            "low": 0.011258625029610853,
+            "central": 0.0317424464385548,
+            "high": 0.3210424281437529
+          },
+          "september_magnetosphere": {
+            "low": 0.0032383032712049687,
+            "central": 0.003794525307514957,
+            "high": 0.004613246870438134
+          }
+        }
+      },
+      "total_loss_kg_s": {
+        "no_magnetosphere": {
+          "low": 0.19475826887773723,
+          "central": 0.9819260495805724,
+          "high": 12.06328701133545
+        },
+        "no_magnetosphere_wake": {
+          "low": 0.017280603678981436,
+          "central": 0.09520741429377078,
+          "high": 0.9960347142840904
+        },
+        "september_magnetosphere": {
+          "low": 0.0033050566313384557,
+          "central": 0.003861278667648444,
+          "high": 0.004680000230571622
+        }
+      },
+      "cycle_time_years": {
+        "no_magnetosphere": {
+          "low": 511112358756.81104,
+          "central": 101375616051.75179,
+          "high": 8251760743.15036
+        },
+        "no_magnetosphere_wake": {
+          "low": 5760409765925.541,
+          "central": 1045542082325.057,
+          "high": 99939647449.97993
+        },
+        "september_magnetosphere": {
+          "low": 30118503038533.78,
+          "central": 25779894890133.99,
+          "high": 21269947284027.19
+        }
+      },
+      "protected_radius_for_exosphere_loss_R": {
+        "0.1": {
+          "no_magnetosphere": null,
+          "september_magnetosphere": 2.841495342736939
+        },
+        "1": {
+          "no_magnetosphere": 3.0993113369125456,
+          "september_magnetosphere": 2.4499357109589814
+        },
+        "10": {
+          "no_magnetosphere": 2.222527734333926,
+          "september_magnetosphere": 1.91974388876387
+        }
+      },
+      "moment_sweep": {
+        "shadow_radius_R": 4.0,
+        "moment_A_m2": [
+          1e+19,
+          1.7782794100389229e+19,
+          3.162277660168379e+19,
+          5.6234132519034905e+19,
+          1e+20,
+          1.778279410038923e+20,
+          3.1622776601683794e+20,
+          5.6234132519034906e+20,
+          1e+21,
+          1.7782794100389228e+21,
+          3.1622776601683794e+21,
+          5.623413251903491e+21,
+          1e+22,
+          1.7782794100389228e+22,
+          3.1622776601683792e+22,
+          5.623413251903491e+22,
+          1e+23
+        ],
+        "standoff_R": [
+          1.8735081052872828,
+          2.269806888220385,
+          2.749933824824685,
+          3.331620888173409,
+          4.0363508540868285,
+          4.890150699655319,
+          5.924552827494362,
+          7.177759615515628,
+          8.696054301184486,
+          10.535510306821106,
+          12.764062134480335,
+          15.464014312376785,
+          18.735081052872825,
+          22.69806888220384,
+          27.499338248246847,
+          33.316208881734084,
+          40.36350854086828
+        ],
+        "loss_kg_s": [
+          0.9184610817253565,
+          0.05435478748811165,
+          0.008652557344744044,
+          0.00602821925866278,
+          0.005655933617570185,
+          0.005420428635545237,
+          0.005097800379999906,
+          0.004654241382624652,
+          0.004131684344792398,
+          0.0036700084053104373,
+          0.003287450244134314,
+          0.002964327161937454,
+          0.0027667645985700352,
+          0.0026133946329777707,
+          0.002463458580077172,
+          0.0023812631650550636,
+          0.0023255589297613184
+        ]
+      },
+      "moment_for_exosphere_loss_A_m2": {
+        "0.1": 1.7782794100389229e+19,
+        "1": 1e+19,
+        "10": 1e+19
+      },
+      "level": "tight",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "lte",
+      "activity": "solar_maximum_stress",
       "transmission": 4.0113033110165035e-05,
       "status": "thermal_column",
       "protected_radius_R": 4.0,
@@ -4964,6 +7523,186 @@
       "total_at_protected_radius_kg_s": {
         "3": null,
         "4": {
+          "no_magnetosphere": 4.171038268007608,
+          "no_magnetosphere_wake": 3.362598727392353,
+          "september_magnetosphere": 1.2166769680646194
+        },
+        "6": {
+          "no_magnetosphere": 2.346615594524223,
+          "no_magnetosphere_wake": 0.5233885310217712,
+          "september_magnetosphere": 0.30476035469553786
+        }
+      },
+      "heat_w_m2": 6.264452572219143e-06,
+      "heat_parts_w_m2": {
+        "gaps": 4.5256820396471825e-07,
+        "films": 1.1042403562188977e-06,
+        "glow": 4.7076440120355276e-06,
+        "beyond_aperture": 0.0
+      },
+      "heating_as_disk_count_transmission": 0.0021741651449376197,
+      "glow_share_of_heating": 0.7514852986376548,
+      "beyond_share": 0.0,
+      "covers_heating": true,
+      "uv_driven_loss_kg_s": 0.07845245796643217,
+      "proton_sputtering_kg_s": {
+        "low": 0.005955225289237094,
+        "central": 0.0633982144950825,
+        "high": 0.674925532780204
+      },
+      "exobase_radius_R": 2.747599685357112,
+      "exobase_temperature_k": 226.73695338703243,
+      "exosphere": {
+        "ions_made_kg_s": 1.0802413773106974,
+        "fragments_escaping_kg_s": 0.566935469086984,
+        "charge_exchange_upper_bound_kg_s": 4.964991786471846,
+        "charge_exchange_in_wake_upper_bound_kg_s": 2.8066515539871406,
+        "loss_kg_s": {
+          "no_magnetosphere": {
+            "low": 2.019604347613157,
+            "central": 4.029187595546094,
+            "high": 29.52466841006062
+          },
+          "no_magnetosphere_wake": {
+            "low": 1.8581188383143035,
+            "central": 3.2207480549308385,
+            "high": 19.434427823194625
+          },
+          "september_magnetosphere": {
+            "low": 0.9341572896577754,
+            "central": 1.1382245100981874,
+            "high": 1.3959332839537546
+          }
+        }
+      },
+      "total_loss_kg_s": {
+        "no_magnetosphere": {
+          "low": 2.1040120308688266,
+          "central": 4.171038268007608,
+          "high": 30.278046400807256
+        },
+        "no_magnetosphere_wake": {
+          "low": 1.9425265215699727,
+          "central": 3.362598727392353,
+          "high": 20.18780581394126
+        },
+        "september_magnetosphere": {
+          "low": 1.0126097476242075,
+          "central": 1.2166769680646194,
+          "high": 1.4743857419201867
+        }
+      },
+      "cycle_time_years": {
+        "no_magnetosphere": {
+          "low": 47311211501.19482,
+          "central": 23865366797.7596,
+          "high": 3287641378.039487
+        },
+        "no_magnetosphere_wake": {
+          "low": 51244272388.64228,
+          "central": 29603103511.160828,
+          "high": 4930865647.853171
+        },
+        "september_magnetosphere": {
+          "low": 98303772432.61075,
+          "central": 81815766063.06448,
+          "high": 67515138924.12702
+        }
+      },
+      "protected_radius_for_exosphere_loss_R": {
+        "0.1": {
+          "no_magnetosphere": null,
+          "september_magnetosphere": 7.432388620751695
+        },
+        "1": {
+          "no_magnetosphere": null,
+          "september_magnetosphere": 4.1211703169442115
+        },
+        "10": {
+          "no_magnetosphere": 3.2753644211376725,
+          "september_magnetosphere": 2.9388994732859417
+        }
+      },
+      "moment_sweep": {
+        "shadow_radius_R": 4.0,
+        "moment_A_m2": [
+          1e+19,
+          1.7782794100389229e+19,
+          3.162277660168379e+19,
+          5.6234132519034905e+19,
+          1e+20,
+          1.778279410038923e+20,
+          3.1622776601683794e+20,
+          5.6234132519034906e+20,
+          1e+21,
+          1.7782794100389228e+21,
+          3.1622776601683794e+21,
+          5.623413251903491e+21,
+          1e+22,
+          1.7782794100389228e+22,
+          3.1622776601683792e+22,
+          5.623413251903491e+22,
+          1e+23
+        ],
+        "standoff_R": [
+          1.8735081052872828,
+          2.269806888220385,
+          2.749933824824685,
+          3.331620888173409,
+          4.0363508540868285,
+          4.890150699655319,
+          5.924552827494362,
+          7.177759615515628,
+          8.696054301184486,
+          10.535510306821106,
+          12.764062134480335,
+          15.464014312376785,
+          18.735081052872825,
+          22.69806888220384,
+          27.499338248246847,
+          33.316208881734084,
+          40.36350854086828
+        ],
+        "loss_kg_s": [
+          4.029187595546094,
+          4.029187595546094,
+          1.9835746616463554,
+          1.6731213287460487,
+          1.5990865583272114,
+          1.5403235536604774,
+          1.4604155276411164,
+          1.3520081681324383,
+          1.2247270278834563,
+          1.1049453587413636,
+          1.000875399597434,
+          0.9105188500273595,
+          0.8489226417114063,
+          0.8025947838124862,
+          0.7619138301056791,
+          0.737046594637391,
+          0.720574882608794
+        ]
+      },
+      "moment_for_exosphere_loss_A_m2": {
+        "0.1": null,
+        "1": 5.623413251903491e+21,
+        "10": 1e+19
+      },
+      "level": "tight",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "all_heats",
+      "activity": "solar_maximum_stress",
+      "transmission": 4.0113033110165035e-05,
+      "status": "thermal_column",
+      "protected_radius_R": 4.0,
+      "heating_radius_R": 3.5,
+      "wake_core_R": 2.614601902393947,
+      "total_at_protected_radius_kg_s": {
+        "3": null,
+        "4": {
           "no_magnetosphere": 3.050450484730078,
           "no_magnetosphere_wake": 2.2092836502999393,
           "september_magnetosphere": 0.7391549856997549
@@ -5316,6 +8055,27 @@
       "shield": "edge_200nm",
       "treatment": "collisional",
       "activity": "solar_maximum",
+      "transmission": 4.0113033110165035e-05,
+      "status": "runaway",
+      "protected_radius_R": 4.0,
+      "heating_radius_R": 5.0,
+      "wake_core_R": 2.614601902393947,
+      "total_at_protected_radius_kg_s": {
+        "3": null,
+        "4": null,
+        "6": {
+          "no_magnetosphere": 5.612368603483639,
+          "no_magnetosphere_wake": 3.1472201620638183,
+          "september_magnetosphere": 2.132948246057362
+        }
+      },
+      "level": "tight",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "collisional",
+      "activity": "solar_maximum_stress",
       "transmission": 4.0113033110165035e-05,
       "status": "thermal_column",
       "protected_radius_R": 4.0,
@@ -5676,6 +8436,27 @@
       "shield": "edge_200nm",
       "treatment": "lte",
       "activity": "solar_maximum",
+      "transmission": 4.0113033110165035e-05,
+      "status": "runaway",
+      "protected_radius_R": 4.0,
+      "heating_radius_R": 5.0,
+      "wake_core_R": 2.614601902393947,
+      "total_at_protected_radius_kg_s": {
+        "3": null,
+        "4": null,
+        "6": {
+          "no_magnetosphere": 5.8665094856079225,
+          "no_magnetosphere_wake": 3.3696578385617233,
+          "september_magnetosphere": 2.2922644779739447
+        }
+      },
+      "level": "tight",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "lte",
+      "activity": "solar_maximum_stress",
       "transmission": 4.0113033110165035e-05,
       "status": "thermal_column",
       "protected_radius_R": 4.0,
@@ -6045,6 +8826,27 @@
         "3": null,
         "4": null,
         "6": {
+          "no_magnetosphere": 36.13982736824971,
+          "no_magnetosphere_wake": 32.744757210787924,
+          "september_magnetosphere": 24.019448291360984
+        }
+      },
+      "level": "tight",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "all_heats",
+      "activity": "solar_maximum_stress",
+      "transmission": 4.0113033110165035e-05,
+      "status": "runaway",
+      "protected_radius_R": 4.0,
+      "heating_radius_R": 5.0,
+      "wake_core_R": 2.614601902393947,
+      "total_at_protected_radius_kg_s": {
+        "3": null,
+        "4": null,
+        "6": {
           "no_magnetosphere": 22.860491403631027,
           "no_magnetosphere_wake": 19.616834991996328,
           "september_magnetosphere": 14.371544418321903
@@ -6241,6 +9043,190 @@
       "shield": "titania_stack",
       "treatment": "collisional",
       "activity": "solar_maximum",
+      "transmission": 0.0001941163707541026,
+      "status": "thermal_column",
+      "protected_radius_R": 4.0,
+      "heating_radius_R": 2.25,
+      "wake_core_R": 2.614601902393947,
+      "total_at_protected_radius_kg_s": {
+        "3": {
+          "no_magnetosphere": 0.7853802481177639,
+          "no_magnetosphere_wake": 0.5162737503715061,
+          "september_magnetosphere": 0.0034581620743622107
+        },
+        "4": {
+          "no_magnetosphere": 0.777036191286899,
+          "no_magnetosphere_wake": 0.06590838843418032,
+          "september_magnetosphere": 0.0002364085161887303
+        },
+        "6": {
+          "no_magnetosphere": 0.7765847664525667,
+          "no_magnetosphere_wake": 0.06344446428342516,
+          "september_magnetosphere": 2.6443270728815316e-05
+        }
+      },
+      "heat_w_m2": 6.205904442508281e-06,
+      "heat_parts_w_m2": {
+        "gaps": 1.583565467091152e-06,
+        "films": 7.46732025904531e-07,
+        "glow": 3.8756069495125976e-06,
+        "beyond_aperture": 0.0
+      },
+      "heating_as_disk_count_transmission": 0.0021538452045356204,
+      "glow_share_of_heating": 0.6245031623377959,
+      "beyond_share": 0.0,
+      "covers_heating": true,
+      "uv_driven_loss_kg_s": 2.678851196142084e-06,
+      "proton_sputtering_kg_s": {
+        "low": 0.005955225289237094,
+        "central": 0.0633982144950825,
+        "high": 0.674925532780204
+      },
+      "exobase_radius_R": 1.9602247885561217,
+      "exobase_temperature_k": 183.0741843014212,
+      "exosphere": {
+        "ions_made_kg_s": 0.00024568958440884505,
+        "fragments_escaping_kg_s": 0.000124552011088236,
+        "charge_exchange_upper_bound_kg_s": 1.9039299774519436,
+        "charge_exchange_in_wake_upper_bound_kg_s": 0.005388812373118365,
+        "loss_kg_s": {
+          "no_magnetosphere": {
+            "low": 0.14325655405152757,
+            "central": 0.7136352979406204,
+            "high": 8.902262957955877
+          },
+          "no_magnetosphere_wake": {
+            "low": 0.000831164683920279,
+            "central": 0.0025074950879016714,
+            "high": 0.02658301121236891
+          },
+          "september_magnetosphere": {
+            "low": 0.00020222179467929008,
+            "central": 0.00023372966499258824,
+            "high": 0.0002823275458835203
+          }
+        }
+      },
+      "total_loss_kg_s": {
+        "no_magnetosphere": {
+          "low": 0.1492144581919608,
+          "central": 0.777036191286899,
+          "high": 9.577191169587277
+        },
+        "no_magnetosphere_wake": {
+          "low": 0.006789068824353515,
+          "central": 0.06590838843418032,
+          "high": 0.701511222843769
+        },
+        "september_magnetosphere": {
+          "low": 0.00020490064587543215,
+          "central": 0.0002364085161887303,
+          "high": 0.0002850063970796624
+        }
+      },
+      "cycle_time_years": {
+        "no_magnetosphere": {
+          "low": 667116038215.5017,
+          "central": 128106463134.79095,
+          "high": 10393794634.652077
+        },
+        "no_magnetosphere_wake": {
+          "low": 14662299170751.514,
+          "central": 1510329118317.0542,
+          "high": 141898454296.9492
+        },
+        "september_magnetosphere": {
+          "low": 485812808291537.3,
+          "central": 421065026752360.1,
+          "high": 349267101417622.0
+        }
+      },
+      "protected_radius_for_exosphere_loss_R": {
+        "0.1": {
+          "no_magnetosphere": null,
+          "september_magnetosphere": 2.434689338873562
+        },
+        "1": {
+          "no_magnetosphere": 2.4265839260820172,
+          "september_magnetosphere": 2.1789917826702108
+        },
+        "10": {
+          "no_magnetosphere": 1.9643244894872407,
+          "september_magnetosphere": 1.5
+        }
+      },
+      "moment_sweep": {
+        "shadow_radius_R": 4.0,
+        "moment_A_m2": [
+          1e+19,
+          1.7782794100389229e+19,
+          3.162277660168379e+19,
+          5.6234132519034905e+19,
+          1e+20,
+          1.778279410038923e+20,
+          3.1622776601683794e+20,
+          5.6234132519034906e+20,
+          1e+21,
+          1.7782794100389228e+21,
+          3.1622776601683794e+21,
+          5.623413251903491e+21,
+          1e+22,
+          1.7782794100389228e+22,
+          3.1622776601683792e+22,
+          5.623413251903491e+22,
+          1e+23
+        ],
+        "standoff_R": [
+          1.8735081052872828,
+          2.269806888220385,
+          2.749933824824685,
+          3.331620888173409,
+          4.0363508540868285,
+          4.890150699655319,
+          5.924552827494362,
+          7.177759615515628,
+          8.696054301184486,
+          10.535510306821106,
+          12.764062134480335,
+          15.464014312376785,
+          18.735081052872825,
+          22.69806888220384,
+          27.499338248246847,
+          33.316208881734084,
+          40.36350854086828
+        ],
+        "loss_kg_s": [
+          0.7136352979406204,
+          0.004883219498988294,
+          0.0005867010814129211,
+          0.0003765387774490903,
+          0.00035085642728085114,
+          0.00033583003360550994,
+          0.000315331748716498,
+          0.0002872776272974002,
+          0.0002545160363786993,
+          0.00022610145261010096,
+          0.00020282265489608578,
+          0.0001832698200321016,
+          0.00017148923185684515,
+          0.00016228919010701382,
+          0.00015307979061366002,
+          0.00014813190744336142,
+          0.0001447592428744564
+        ]
+      },
+      "moment_for_exosphere_loss_A_m2": {
+        "0.1": 1.7782794100389229e+19,
+        "1": 1e+19,
+        "10": 1e+19
+      },
+      "level": "standard",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "collisional",
+      "activity": "solar_maximum_stress",
       "transmission": 0.0001941163707541026,
       "status": "thermal_column",
       "protected_radius_R": 4.0,
@@ -6616,6 +9602,190 @@
       "wake_core_R": 2.614601902393947,
       "total_at_protected_radius_kg_s": {
         "3": {
+          "no_magnetosphere": 1.9596725246887479,
+          "no_magnetosphere_wake": 1.700712265767474,
+          "september_magnetosphere": 0.32731870396114826
+        },
+        "4": {
+          "no_magnetosphere": 1.258766158410375,
+          "no_magnetosphere_wake": 0.26775526521357995,
+          "september_magnetosphere": 0.04158456506637552
+        },
+        "6": {
+          "no_magnetosphere": 1.1890816344435513,
+          "no_magnetosphere_wake": 0.07653264008494756,
+          "september_magnetosphere": 0.008274816403147542
+        }
+      },
+      "heat_w_m2": 6.946643886916512e-06,
+      "heat_parts_w_m2": {
+        "gaps": 1.843256447499379e-06,
+        "films": 9.044128822453985e-07,
+        "glow": 4.198974557171735e-06,
+        "beyond_aperture": 0.0
+      },
+      "heating_as_disk_count_transmission": 0.0024109291018030122,
+      "glow_share_of_heating": 0.6044608915508382,
+      "beyond_share": 0.0,
+      "covers_heating": true,
+      "uv_driven_loss_kg_s": 0.0016247429865119936,
+      "proton_sputtering_kg_s": {
+        "low": 0.005955225289237094,
+        "central": 0.0633982144950825,
+        "high": 0.674925532780204
+      },
+      "exobase_radius_R": 2.2948227684864895,
+      "exobase_temperature_k": 212.5177781218354,
+      "exosphere": {
+        "ions_made_kg_s": 0.039955318239011633,
+        "fragments_escaping_kg_s": 0.020707525683809052,
+        "charge_exchange_upper_bound_kg_s": 2.9734780768561633,
+        "charge_exchange_in_wake_upper_bound_kg_s": 0.32771599551433483,
+        "loss_kg_s": {
+          "no_magnetosphere": {
+            "low": 0.2856921139087213,
+            "central": 1.1937432009287805,
+            "high": 14.130579795295898
+          },
+          "no_magnetosphere_wake": {
+            "low": 0.0878118977100095,
+            "central": 0.20273230773198544,
+            "high": 1.7616420650228517
+          },
+          "september_magnetosphere": {
+            "low": 0.033642327134253386,
+            "central": 0.039959822079863525,
+            "high": 0.0487634164127316
+          }
+        }
+      },
+      "total_loss_kg_s": {
+        "no_magnetosphere": {
+          "low": 0.2932720821844704,
+          "central": 1.258766158410375,
+          "high": 14.807130071062613
+        },
+        "no_magnetosphere_wake": {
+          "low": 0.09539186598575858,
+          "central": 0.26775526521357995,
+          "high": 2.4381923407895676
+        },
+        "september_magnetosphere": {
+          "low": 0.03526707012076538,
+          "central": 0.04158456506637552,
+          "high": 0.0503881593992436
+        }
+      },
+      "cycle_time_years": {
+        "no_magnetosphere": {
+          "low": 339423232692.4319,
+          "central": 79080103582.70291,
+          "high": 6722663859.624617
+        },
+        "no_magnetosphere_wake": {
+          "low": 1043520400453.7946,
+          "central": 371769937424.3524,
+          "high": 40826704492.58242
+        },
+        "september_magnetosphere": {
+          "low": 2822558206639.4,
+          "central": 2393757348059.4688,
+          "high": 1975530747308.6184
+        }
+      },
+      "protected_radius_for_exosphere_loss_R": {
+        "0.1": {
+          "no_magnetosphere": null,
+          "september_magnetosphere": 3.471858353822456
+        },
+        "1": {
+          "no_magnetosphere": null,
+          "september_magnetosphere": 2.723056934844429
+        },
+        "10": {
+          "no_magnetosphere": 2.4615093493052793,
+          "september_magnetosphere": 2.2211874217296654
+        }
+      },
+      "moment_sweep": {
+        "shadow_radius_R": 4.0,
+        "moment_A_m2": [
+          1e+19,
+          1.7782794100389229e+19,
+          3.162277660168379e+19,
+          5.6234132519034905e+19,
+          1e+20,
+          1.778279410038923e+20,
+          3.1622776601683794e+20,
+          5.6234132519034906e+20,
+          1e+21,
+          1.7782794100389228e+21,
+          3.1622776601683794e+21,
+          5.623413251903491e+21,
+          1e+22,
+          1.7782794100389228e+22,
+          3.1622776601683792e+22,
+          5.623413251903491e+22,
+          1e+23
+        ],
+        "standoff_R": [
+          1.8735081052872828,
+          2.269806888220385,
+          2.749933824824685,
+          3.331620888173409,
+          4.0363508540868285,
+          4.890150699655319,
+          5.924552827494362,
+          7.177759615515628,
+          8.696054301184486,
+          10.535510306821106,
+          12.764062134480335,
+          15.464014312376785,
+          18.735081052872825,
+          22.69806888220384,
+          27.499338248246847,
+          33.316208881734084,
+          40.36350854086828
+        ],
+        "loss_kg_s": [
+          1.1937432009287805,
+          1.1937432009287805,
+          0.07690399818116478,
+          0.0614210654768613,
+          0.05835865413905422,
+          0.05611236405389705,
+          0.053001425622389436,
+          0.04864965984467249,
+          0.043449860425133865,
+          0.03863375474662496,
+          0.034556681018876344,
+          0.031088505652439667,
+          0.028840585382098292,
+          0.027147263968196427,
+          0.025596646132803796,
+          0.024695171684938733,
+          0.02409099068316043
+        ]
+      },
+      "moment_for_exosphere_loss_A_m2": {
+        "0.1": 3.162277660168379e+19,
+        "1": 3.162277660168379e+19,
+        "10": 1e+19
+      },
+      "level": "standard",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "lte",
+      "activity": "solar_maximum_stress",
+      "transmission": 0.0001941163707541026,
+      "status": "thermal_column",
+      "protected_radius_R": 4.0,
+      "heating_radius_R": 3.0,
+      "wake_core_R": 2.614601902393947,
+      "total_at_protected_radius_kg_s": {
+        "3": {
           "no_magnetosphere": 2.2322850388667765,
           "no_magnetosphere_wake": 1.9725479428913444,
           "september_magnetosphere": 0.47548606101884644
@@ -6977,6 +10147,27 @@
       "shield": "titania_stack",
       "treatment": "all_heats",
       "activity": "solar_maximum",
+      "transmission": 0.0001941163707541026,
+      "status": "runaway",
+      "protected_radius_R": 4.0,
+      "heating_radius_R": 5.0,
+      "wake_core_R": 2.614601902393947,
+      "total_at_protected_radius_kg_s": {
+        "3": null,
+        "4": null,
+        "6": {
+          "no_magnetosphere": 7.663968642647589,
+          "no_magnetosphere_wake": 5.07004513201314,
+          "september_magnetosphere": 3.570768511887805
+        }
+      },
+      "level": "standard",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "all_heats",
+      "activity": "solar_maximum_stress",
       "transmission": 0.0001941163707541026,
       "status": "thermal_column",
       "protected_radius_R": 4.0,
@@ -7346,6 +10537,27 @@
         "3": null,
         "4": null,
         "6": {
+          "no_magnetosphere": 33.842487116933555,
+          "no_magnetosphere_wake": 30.498139855157888,
+          "september_magnetosphere": 22.829490818739096
+        }
+      },
+      "level": "standard",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "collisional",
+      "activity": "solar_maximum_stress",
+      "transmission": 0.0001941163707541026,
+      "status": "runaway",
+      "protected_radius_R": 4.0,
+      "heating_radius_R": 5.0,
+      "wake_core_R": 2.614601902393947,
+      "total_at_protected_radius_kg_s": {
+        "3": null,
+        "4": null,
+        "6": {
           "no_magnetosphere": 43.59300746376318,
           "no_magnetosphere_wake": 40.171405227387,
           "september_magnetosphere": 30.851408783399506
@@ -7547,6 +10759,27 @@
         "3": null,
         "4": null,
         "6": {
+          "no_magnetosphere": 35.53533776115225,
+          "no_magnetosphere_wake": 32.15616489215818,
+          "september_magnetosphere": 24.119283070319966
+        }
+      },
+      "level": "standard",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "lte",
+      "activity": "solar_maximum_stress",
+      "transmission": 0.0001941163707541026,
+      "status": "runaway",
+      "protected_radius_R": 4.0,
+      "heating_radius_R": 5.0,
+      "wake_core_R": 2.614601902393947,
+      "total_at_protected_radius_kg_s": {
+        "3": null,
+        "4": null,
+        "6": {
           "no_magnetosphere": 45.67772840891025,
           "no_magnetosphere_wake": 42.24911744746122,
           "september_magnetosphere": 32.485696019442855
@@ -7580,6 +10813,27 @@
       "shield": "edge_200nm",
       "treatment": "all_heats",
       "activity": "solar_maximum",
+      "transmission": 0.0001941163707541026,
+      "status": "runaway",
+      "protected_radius_R": 4.0,
+      "heating_radius_R": 6.0,
+      "wake_core_R": 2.614601902393947,
+      "total_at_protected_radius_kg_s": {
+        "3": null,
+        "4": null,
+        "6": {
+          "no_magnetosphere": 140.50238822596188,
+          "no_magnetosphere_wake": 137.33857666799432,
+          "september_magnetosphere": 106.97263279148098
+        }
+      },
+      "level": "standard",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "all_heats",
+      "activity": "solar_maximum_stress",
       "transmission": 0.0001941163707541026,
       "status": "runaway",
       "protected_radius_R": 4.0,
@@ -7785,6 +11039,190 @@
       "shield": "titania_stack",
       "treatment": "collisional",
       "activity": "solar_maximum",
+      "transmission": 0.00021611860557693518,
+      "status": "thermal_column",
+      "protected_radius_R": 4.0,
+      "heating_radius_R": 2.5,
+      "wake_core_R": 2.614601902393947,
+      "total_at_protected_radius_kg_s": {
+        "3": {
+          "no_magnetosphere": 0.802918529410535,
+          "no_magnetosphere_wake": 0.5333454439230432,
+          "september_magnetosphere": 0.004669803225219078
+        },
+        "4": {
+          "no_magnetosphere": 0.7917222625451366,
+          "no_magnetosphere_wake": 0.06685513340122606,
+          "september_magnetosphere": 0.000340663408600776
+        },
+        "6": {
+          "no_magnetosphere": 0.7910790026179038,
+          "no_magnetosphere_wake": 0.06346784883817912,
+          "september_magnetosphere": 4.017883281630918e-05
+        }
+      },
+      "heat_w_m2": 6.397828533349105e-06,
+      "heat_parts_w_m2": {
+        "gaps": 1.7714641166190864e-06,
+        "films": 7.507574672174202e-07,
+        "glow": 3.8756069495125976e-06,
+        "beyond_aperture": 0.0
+      },
+      "heating_as_disk_count_transmission": 0.0022204551219975935,
+      "glow_share_of_heating": 0.6057691182736048,
+      "beyond_share": 0.0,
+      "covers_heating": true,
+      "uv_driven_loss_kg_s": 4.353124932732657e-06,
+      "proton_sputtering_kg_s": {
+        "low": 0.005955225289237094,
+        "central": 0.0633982144950825,
+        "high": 0.674925532780204
+      },
+      "exobase_radius_R": 1.9728699770609,
+      "exobase_temperature_k": 185.640241179929,
+      "exosphere": {
+        "ions_made_kg_s": 0.0003515060454124544,
+        "fragments_escaping_kg_s": 0.00017846307391538238,
+        "charge_exchange_upper_bound_kg_s": 1.9425707802988172,
+        "charge_exchange_in_wake_upper_bound_kg_s": 0.007348899827290683,
+        "loss_kg_s": {
+          "no_magnetosphere": {
+            "low": 0.1463421536084264,
+            "central": 0.7283196949251213,
+            "high": 9.083509047423448
+          },
+          "no_magnetosphere_wake": {
+            "low": 0.0011575023403905943,
+            "central": 0.003452565781210839,
+            "high": 0.03634675621906049
+          },
+          "september_magnetosphere": {
+            "low": 0.0002906180846265052,
+            "central": 0.00033631028366804336,
+            "high": 0.00040647222669190197
+          }
+        }
+      },
+      "total_loss_kg_s": {
+        "no_magnetosphere": {
+          "low": 0.15230173202259623,
+          "central": 0.7917222625451366,
+          "high": 9.758438933328584
+        },
+        "no_magnetosphere_wake": {
+          "low": 0.0071170807545604215,
+          "central": 0.06685513340122606,
+          "high": 0.7112766421241972
+        },
+        "september_magnetosphere": {
+          "low": 0.00029497120955923785,
+          "central": 0.000340663408600776,
+          "high": 0.0004108253516246346
+        }
+      },
+      "cycle_time_years": {
+        "no_magnetosphere": {
+          "low": 653593080469.5298,
+          "central": 125730149198.3983,
+          "high": 10200746130.97358
+        },
+        "no_magnetosphere_wake": {
+          "low": 13986543307058.723,
+          "central": 1488941134798.0042,
+          "high": 139950270117.42087
+        },
+        "september_magnetosphere": {
+          "low": 337468047618059.56,
+          "central": 292204433115822.3,
+          "high": 242300914001151.72
+        }
+      },
+      "protected_radius_for_exosphere_loss_R": {
+        "0.1": {
+          "no_magnetosphere": null,
+          "september_magnetosphere": 2.4579907390889866
+        },
+        "1": {
+          "no_magnetosphere": 2.4567169169543215,
+          "september_magnetosphere": 2.1953887660811042
+        },
+        "10": {
+          "no_magnetosphere": 1.9873729768187784,
+          "september_magnetosphere": 1.5
+        }
+      },
+      "moment_sweep": {
+        "shadow_radius_R": 4.0,
+        "moment_A_m2": [
+          1e+19,
+          1.7782794100389229e+19,
+          3.162277660168379e+19,
+          5.6234132519034905e+19,
+          1e+20,
+          1.778279410038923e+20,
+          3.1622776601683794e+20,
+          5.6234132519034906e+20,
+          1e+21,
+          1.7782794100389228e+21,
+          3.1622776601683794e+21,
+          5.623413251903491e+21,
+          1e+22,
+          1.7782794100389228e+22,
+          3.1622776601683792e+22,
+          5.623413251903491e+22,
+          1e+23
+        ],
+        "standoff_R": [
+          1.8735081052872828,
+          2.269806888220385,
+          2.749933824824685,
+          3.331620888173409,
+          4.0363508540868285,
+          4.890150699655319,
+          5.924552827494362,
+          7.177759615515628,
+          8.696054301184486,
+          10.535510306821106,
+          12.764062134480335,
+          15.464014312376785,
+          18.735081052872825,
+          22.69806888220384,
+          27.499338248246847,
+          33.316208881734084,
+          40.36350854086828
+        ],
+        "loss_kg_s": [
+          0.7283196949251213,
+          0.006194986224932616,
+          0.0008183050132299024,
+          0.0005398977711597666,
+          0.0005043271231876125,
+          0.0004828131759767741,
+          0.0004534627733241794,
+          0.00041324214818207254,
+          0.0003662519396648861,
+          0.0003253204983054496,
+          0.00029164848170839044,
+          0.00026336342547959477,
+          0.0002462935496449833,
+          0.00023299205821460494,
+          0.00021965302419915239,
+          0.00021246407623715544,
+          0.0002075613450253893
+        ]
+      },
+      "moment_for_exosphere_loss_A_m2": {
+        "0.1": 1.7782794100389229e+19,
+        "1": 1e+19,
+        "10": 1e+19
+      },
+      "level": "standard",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "collisional",
+      "activity": "solar_maximum_stress",
       "transmission": 0.00021611860557693518,
       "status": "thermal_column",
       "protected_radius_R": 4.0,
@@ -8153,6 +11591,190 @@
       "shield": "titania_stack",
       "treatment": "lte",
       "activity": "solar_maximum",
+      "transmission": 0.00021611860557693518,
+      "status": "thermal_column",
+      "protected_radius_R": 4.0,
+      "heating_radius_R": 3.0,
+      "wake_core_R": 2.614601902393947,
+      "total_at_protected_radius_kg_s": {
+        "3": {
+          "no_magnetosphere": 2.234469462322751,
+          "no_magnetosphere_wake": 1.9730334992773961,
+          "september_magnetosphere": 0.4308834299934658
+        },
+        "4": {
+          "no_magnetosphere": 1.328150213770573,
+          "no_magnetosphere_wake": 0.32287879762793437,
+          "september_magnetosphere": 0.05792792784024195
+        },
+        "6": {
+          "no_magnetosphere": 1.232670087190653,
+          "no_magnetosphere_wake": 0.08253525144562177,
+          "september_magnetosphere": 0.012135170358721206
+        }
+      },
+      "heat_w_m2": 7.177237042964714e-06,
+      "heat_parts_w_m2": {
+        "gaps": 2.067539678447093e-06,
+        "films": 9.107228073458856e-07,
+        "glow": 4.198974557171735e-06,
+        "beyond_aperture": 0.0
+      },
+      "heating_as_disk_count_transmission": 0.002490959654634473,
+      "glow_share_of_heating": 0.5850405291110822,
+      "beyond_share": 0.0,
+      "covers_heating": true,
+      "uv_driven_loss_kg_s": 0.002523132413275824,
+      "proton_sputtering_kg_s": {
+        "low": 0.005955225289237094,
+        "central": 0.0633982144950825,
+        "high": 0.674925532780204
+      },
+      "exobase_radius_R": 2.3180860242489842,
+      "exobase_temperature_k": 215.8351542552085,
+      "exosphere": {
+        "ions_made_kg_s": 0.055092574843575284,
+        "fragments_escaping_kg_s": 0.028616621100016466,
+        "charge_exchange_upper_bound_kg_s": 3.075250563314698,
+        "charge_exchange_in_wake_upper_bound_kg_s": 0.3914162961581314,
+        "loss_kg_s": {
+          "no_magnetosphere": {
+            "low": 0.3168096856205236,
+            "central": 1.2622288668622146,
+            "high": 14.693777163603809
+          },
+          "no_magnetosphere_wake": {
+            "low": 0.1161518540301914,
+            "central": 0.25695745071957604,
+            "high": 2.1468519646468622
+          },
+          "september_magnetosphere": {
+            "low": 0.046544437644642084,
+            "central": 0.05540479542696613,
+            "high": 0.06763371385427605
+          }
+        }
+      },
+      "total_loss_kg_s": {
+        "no_magnetosphere": {
+          "low": 0.3252880433230365,
+          "central": 1.328150213770573,
+          "high": 15.371225828797288
+        },
+        "no_magnetosphere_wake": {
+          "low": 0.12463021173270432,
+          "central": 0.32287879762793437,
+          "high": 2.824300629840342
+        },
+        "september_magnetosphere": {
+          "low": 0.04906757005791791,
+          "central": 0.05792792784024195,
+          "high": 0.07015684626755188
+        }
+      },
+      "cycle_time_years": {
+        "no_magnetosphere": {
+          "low": 306016037898.56836,
+          "central": 74948870362.25618,
+          "high": 6475954442.553538
+        },
+        "no_magnetosphere_wake": {
+          "low": 798709693336.5173,
+          "central": 308299457644.16876,
+          "high": 35245312464.88469
+        },
+        "september_magnetosphere": {
+          "low": 2028699568289.1052,
+          "central": 1718400120715.8962,
+          "high": 1418868770324.6023
+        }
+      },
+      "protected_radius_for_exosphere_loss_R": {
+        "0.1": {
+          "no_magnetosphere": null,
+          "september_magnetosphere": 3.638820609619475
+        },
+        "1": {
+          "no_magnetosphere": null,
+          "september_magnetosphere": 2.7653503670068424
+        },
+        "10": {
+          "no_magnetosphere": 2.483984604229068,
+          "september_magnetosphere": 2.268721699812406
+        }
+      },
+      "moment_sweep": {
+        "shadow_radius_R": 4.0,
+        "moment_A_m2": [
+          1e+19,
+          1.7782794100389229e+19,
+          3.162277660168379e+19,
+          5.6234132519034905e+19,
+          1e+20,
+          1.778279410038923e+20,
+          3.1622776601683794e+20,
+          5.6234132519034906e+20,
+          1e+21,
+          1.7782794100389228e+21,
+          3.1622776601683794e+21,
+          5.623413251903491e+21,
+          1e+22,
+          1.7782794100389228e+22,
+          3.1622776601683792e+22,
+          5.623413251903491e+22,
+          1e+23
+        ],
+        "standoff_R": [
+          1.8735081052872828,
+          2.269806888220385,
+          2.749933824824685,
+          3.331620888173409,
+          4.0363508540868285,
+          4.890150699655319,
+          5.924552827494362,
+          7.177759615515628,
+          8.696054301184486,
+          10.535510306821106,
+          12.764062134480335,
+          15.464014312376785,
+          18.735081052872825,
+          22.69806888220384,
+          27.499338248246847,
+          33.316208881734084,
+          40.36350854086828
+        ],
+        "loss_kg_s": [
+          1.2622288668622146,
+          1.2622288668622146,
+          0.10459715138522926,
+          0.08475113613593134,
+          0.08064794380428408,
+          0.07757917775211359,
+          0.07332067419555684,
+          0.06735705483537223,
+          0.06022126396216271,
+          0.05357367395748827,
+          0.0479138217188714,
+          0.04309540109289787,
+          0.03994872533434915,
+          0.03758074194912153,
+          0.03543563572603783,
+          0.03418067374677076,
+          0.033342005787982666
+        ]
+      },
+      "moment_for_exosphere_loss_A_m2": {
+        "0.1": 5.6234132519034905e+19,
+        "1": 3.162277660168379e+19,
+        "10": 1e+19
+      },
+      "level": "standard",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "lte",
+      "activity": "solar_maximum_stress",
       "transmission": 0.00021611860557693518,
       "status": "thermal_column",
       "protected_radius_R": 4.0,
@@ -8530,6 +12152,27 @@
         "3": null,
         "4": null,
         "6": {
+          "no_magnetosphere": 9.586082278676678,
+          "no_magnetosphere_wake": 6.868296400244965,
+          "september_magnetosphere": 4.9012743863922035
+        }
+      },
+      "level": "standard",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "all_heats",
+      "activity": "solar_maximum_stress",
+      "transmission": 0.00021611860557693518,
+      "status": "runaway",
+      "protected_radius_R": 4.0,
+      "heating_radius_R": 5.0,
+      "wake_core_R": 2.614601902393947,
+      "total_at_protected_radius_kg_s": {
+        "3": null,
+        "4": null,
+        "6": {
           "no_magnetosphere": 13.333617198857908,
           "no_magnetosphere_wake": 10.457567129335386,
           "september_magnetosphere": 7.737168547836086
@@ -8722,6 +12365,27 @@
       "shield": "edge_200nm",
       "treatment": "collisional",
       "activity": "solar_maximum",
+      "transmission": 0.00021611860557693518,
+      "status": "runaway",
+      "protected_radius_R": 4.0,
+      "heating_radius_R": 5.0,
+      "wake_core_R": 2.614601902393947,
+      "total_at_protected_radius_kg_s": {
+        "3": null,
+        "4": null,
+        "6": {
+          "no_magnetosphere": 42.5739731667139,
+          "no_magnetosphere_wake": 39.16135859380172,
+          "september_magnetosphere": 29.601737707533523
+        }
+      },
+      "level": "standard",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "collisional",
+      "activity": "solar_maximum_stress",
       "transmission": 0.00021611860557693518,
       "status": "runaway",
       "protected_radius_R": 4.0,
@@ -8932,6 +12596,27 @@
         "3": null,
         "4": null,
         "6": {
+          "no_magnetosphere": 44.587519998585876,
+          "no_magnetosphere_wake": 41.16883943489316,
+          "september_magnetosphere": 31.163229523488226
+        }
+      },
+      "level": "standard",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "lte",
+      "activity": "solar_maximum_stress",
+      "transmission": 0.00021611860557693518,
+      "status": "runaway",
+      "protected_radius_R": 4.0,
+      "heating_radius_R": 5.0,
+      "wake_core_R": 2.614601902393947,
+      "total_at_protected_radius_kg_s": {
+        "3": null,
+        "4": null,
+        "6": {
           "no_magnetosphere": 61.03658113248899,
           "no_magnetosphere_wake": 57.56649297848317,
           "september_magnetosphere": 44.744947988957335
@@ -8965,6 +12650,27 @@
       "shield": "edge_200nm",
       "treatment": "all_heats",
       "activity": "solar_maximum",
+      "transmission": 0.00021611860557693518,
+      "status": "runaway",
+      "protected_radius_R": 4.0,
+      "heating_radius_R": 6.0,
+      "wake_core_R": 2.614601902393947,
+      "total_at_protected_radius_kg_s": {
+        "3": null,
+        "4": null,
+        "6": {
+          "no_magnetosphere": 160.00859157020057,
+          "no_magnetosphere_wake": 156.958323936902,
+          "september_magnetosphere": 122.87941449609043
+        }
+      },
+      "level": "standard",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "all_heats",
+      "activity": "solar_maximum_stress",
       "transmission": 0.00021611860557693518,
       "status": "runaway",
       "protected_radius_R": 4.0,
@@ -9181,6 +12887,23 @@
     },
     {
       "shield": "titania_stack",
+      "treatment": "collisional",
+      "activity": "solar_maximum_stress",
+      "transmission": 0.0025006173956685965,
+      "status": "runaway",
+      "protected_radius_R": 4.0,
+      "heating_radius_R": null,
+      "wake_core_R": 2.614601902393947,
+      "total_at_protected_radius_kg_s": {
+        "3": null,
+        "4": null,
+        "6": null
+      },
+      "level": "relaxed",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "titania_stack",
       "treatment": "lte",
       "activity": "quiet",
       "transmission": 0.0025006173956685965,
@@ -9204,6 +12927,23 @@
       "shield": "titania_stack",
       "treatment": "lte",
       "activity": "solar_maximum",
+      "transmission": 0.0025006173956685965,
+      "status": "runaway",
+      "protected_radius_R": 4.0,
+      "heating_radius_R": null,
+      "wake_core_R": 2.614601902393947,
+      "total_at_protected_radius_kg_s": {
+        "3": null,
+        "4": null,
+        "6": null
+      },
+      "level": "relaxed",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "lte",
+      "activity": "solar_maximum_stress",
       "transmission": 0.0025006173956685965,
       "status": "runaway",
       "protected_radius_R": 4.0,
@@ -9256,6 +12996,23 @@
       "hole_factor": 1.0
     },
     {
+      "shield": "titania_stack",
+      "treatment": "all_heats",
+      "activity": "solar_maximum_stress",
+      "transmission": 0.0025006173956685965,
+      "status": "runaway",
+      "protected_radius_R": 4.0,
+      "heating_radius_R": null,
+      "wake_core_R": 2.614601902393947,
+      "total_at_protected_radius_kg_s": {
+        "3": null,
+        "4": null,
+        "6": null
+      },
+      "level": "relaxed",
+      "hole_factor": 1.0
+    },
+    {
       "shield": "edge_200nm",
       "treatment": "collisional",
       "activity": "quiet",
@@ -9276,6 +13033,23 @@
       "shield": "edge_200nm",
       "treatment": "collisional",
       "activity": "solar_maximum",
+      "transmission": 0.0025006173956685965,
+      "status": "runaway",
+      "protected_radius_R": 4.0,
+      "heating_radius_R": null,
+      "wake_core_R": 2.614601902393947,
+      "total_at_protected_radius_kg_s": {
+        "3": null,
+        "4": null,
+        "6": null
+      },
+      "level": "relaxed",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "collisional",
+      "activity": "solar_maximum_stress",
       "transmission": 0.0025006173956685965,
       "status": "runaway",
       "protected_radius_R": 4.0,
@@ -9325,6 +13099,23 @@
     },
     {
       "shield": "edge_200nm",
+      "treatment": "lte",
+      "activity": "solar_maximum_stress",
+      "transmission": 0.0025006173956685965,
+      "status": "runaway",
+      "protected_radius_R": 4.0,
+      "heating_radius_R": null,
+      "wake_core_R": 2.614601902393947,
+      "total_at_protected_radius_kg_s": {
+        "3": null,
+        "4": null,
+        "6": null
+      },
+      "level": "relaxed",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "edge_200nm",
       "treatment": "all_heats",
       "activity": "quiet",
       "transmission": 0.0025006173956685965,
@@ -9344,6 +13135,23 @@
       "shield": "edge_200nm",
       "treatment": "all_heats",
       "activity": "solar_maximum",
+      "transmission": 0.0025006173956685965,
+      "status": "runaway",
+      "protected_radius_R": 4.0,
+      "heating_radius_R": null,
+      "wake_core_R": 2.614601902393947,
+      "total_at_protected_radius_kg_s": {
+        "3": null,
+        "4": null,
+        "6": null
+      },
+      "level": "relaxed",
+      "hole_factor": 1.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "all_heats",
+      "activity": "solar_maximum_stress",
       "transmission": 0.0025006173956685965,
       "status": "runaway",
       "protected_radius_R": 4.0,
@@ -9556,6 +13364,23 @@
     },
     {
       "shield": "titania_stack",
+      "treatment": "collisional",
+      "activity": "solar_maximum_stress",
+      "transmission": 0.002610628569782759,
+      "status": "runaway",
+      "protected_radius_R": 4.0,
+      "heating_radius_R": null,
+      "wake_core_R": 2.614601902393947,
+      "total_at_protected_radius_kg_s": {
+        "3": null,
+        "4": null,
+        "6": null
+      },
+      "level": "relaxed",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "titania_stack",
       "treatment": "lte",
       "activity": "quiet",
       "transmission": 0.002610628569782759,
@@ -9579,6 +13404,23 @@
       "shield": "titania_stack",
       "treatment": "lte",
       "activity": "solar_maximum",
+      "transmission": 0.002610628569782759,
+      "status": "runaway",
+      "protected_radius_R": 4.0,
+      "heating_radius_R": null,
+      "wake_core_R": 2.614601902393947,
+      "total_at_protected_radius_kg_s": {
+        "3": null,
+        "4": null,
+        "6": null
+      },
+      "level": "relaxed",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "lte",
+      "activity": "solar_maximum_stress",
       "transmission": 0.002610628569782759,
       "status": "runaway",
       "protected_radius_R": 4.0,
@@ -9631,6 +13473,23 @@
       "hole_factor": 4.0
     },
     {
+      "shield": "titania_stack",
+      "treatment": "all_heats",
+      "activity": "solar_maximum_stress",
+      "transmission": 0.002610628569782759,
+      "status": "runaway",
+      "protected_radius_R": 4.0,
+      "heating_radius_R": null,
+      "wake_core_R": 2.614601902393947,
+      "total_at_protected_radius_kg_s": {
+        "3": null,
+        "4": null,
+        "6": null
+      },
+      "level": "relaxed",
+      "hole_factor": 4.0
+    },
+    {
       "shield": "edge_200nm",
       "treatment": "collisional",
       "activity": "quiet",
@@ -9651,6 +13510,23 @@
       "shield": "edge_200nm",
       "treatment": "collisional",
       "activity": "solar_maximum",
+      "transmission": 0.002610628569782759,
+      "status": "runaway",
+      "protected_radius_R": 4.0,
+      "heating_radius_R": null,
+      "wake_core_R": 2.614601902393947,
+      "total_at_protected_radius_kg_s": {
+        "3": null,
+        "4": null,
+        "6": null
+      },
+      "level": "relaxed",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "collisional",
+      "activity": "solar_maximum_stress",
       "transmission": 0.002610628569782759,
       "status": "runaway",
       "protected_radius_R": 4.0,
@@ -9700,6 +13576,23 @@
     },
     {
       "shield": "edge_200nm",
+      "treatment": "lte",
+      "activity": "solar_maximum_stress",
+      "transmission": 0.002610628569782759,
+      "status": "runaway",
+      "protected_radius_R": 4.0,
+      "heating_radius_R": null,
+      "wake_core_R": 2.614601902393947,
+      "total_at_protected_radius_kg_s": {
+        "3": null,
+        "4": null,
+        "6": null
+      },
+      "level": "relaxed",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "edge_200nm",
       "treatment": "all_heats",
       "activity": "quiet",
       "transmission": 0.002610628569782759,
@@ -9719,6 +13612,23 @@
       "shield": "edge_200nm",
       "treatment": "all_heats",
       "activity": "solar_maximum",
+      "transmission": 0.002610628569782759,
+      "status": "runaway",
+      "protected_radius_R": 4.0,
+      "heating_radius_R": null,
+      "wake_core_R": 2.614601902393947,
+      "total_at_protected_radius_kg_s": {
+        "3": null,
+        "4": null,
+        "6": null
+      },
+      "level": "relaxed",
+      "hole_factor": 4.0
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "all_heats",
+      "activity": "solar_maximum_stress",
       "transmission": 0.002610628569782759,
       "status": "runaway",
       "protected_radius_R": 4.0,

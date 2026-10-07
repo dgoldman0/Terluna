@@ -7,7 +7,7 @@ import pytest
 
 from shared.constants import BOLTZMANN, MOON_GM, MOON_RADIUS
 from atmosphere.loss_response import absorption as ab
-from atmosphere.loss_response import exosphere as ex
+from atmosphere.loss_response import exosphere as ex, model as lr
 
 PARTS = ('outside', 'open', 'convected', 'recombined_escaping', 'recombined_staying', 'drained')
 
@@ -24,8 +24,13 @@ def test_dissociation_rates_agree_with_heays():
     quiet = ex.rates('quiet')
     for species in ('N2', 'O2'):
         assert quiet[species]['dissociation'] == pytest.approx(ex.HEAYS_1AU_S[species], rel=0.1)
-    ratio = ex.rates('solar_maximum')['O2']['dissociation'] / quiet['O2']['dissociation']
-    assert ratio == pytest.approx(ex.FAR_UV_ACTIVITY['solar_maximum'])
+    ratio = ex.rates('solar_maximum_stress')['O2']['dissociation'] / quiet['O2']['dissociation']
+    assert ratio == pytest.approx(ex.FAR_UV_ACTIVITY['solar_maximum_stress'])
+    # The measured maximum takes each band's own rise: the Schumann-Runge continuum's bands and Lyman-alpha's.
+    measured = ex.rates('solar_maximum')['O2']['dissociation'] / quiet['O2']['dissociation']
+    far = [f for f, lo in zip(lr.activity_of('solar_maximum')['bands'], lr.traced.limb_product()['design']['bands_nm'])
+           if lo >= 121.0]
+    assert min(far) < measured < max(far)
 
 
 def test_escaping_share_limits():

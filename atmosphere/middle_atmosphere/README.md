@@ -359,11 +359,15 @@ the range across them.
 - **The tables keep the light by band and by height.** Fifteen bands of the
   light below 175 nm are traced apart, so any solar spectrum weights them, and
   each part of the light's heat is followed in log pressure above the base. At
-  the last three maxima FISM2's daily record puts the light from 10 to 175 nm at
-  1.25-1.41 times the quiet week, weighted by energy, where the escape model
-  takes 2.5: the extreme ultraviolet below 121 nm rises 1.6-1.9, Lyman-α 1.3-1.6
+  the maxima since 1957 FISM2's daily record puts the light from 10 to 175 nm at
+  1.25-1.64 times the quiet week, weighted by energy, where the escape model
+  takes 2.5: the extreme ultraviolet below 121 nm rises 1.6-2.4, Lyman-α 1.3-1.9
   and the far ultraviolet from 122 to 175 nm, which carries most of the energy,
-  1.07-1.18 ([loss_response/cycle.py](../loss_response/cycle.py)). Through gaps
+  1.10-1.27 ([loss_response/cycle.py](../loss_response/cycle.py)). Cycle 19's
+  year of 1957-58, the strongest, gives the top of each range and is the loss
+  response's solar maximum and the solar maximum of this product's scenarios; the
+  escape model here keeps its 2.5, which the loss response carries as its stress
+  case. Through gaps
   the far ultraviolet and Lyman-α heat the lower thermosphere and the extreme
   ultraviolet its upper half.
 - **Where the heat lies matters as much as how much.** The thermal column
