@@ -62,7 +62,10 @@ export function fromNow(ms) {
   else if (hours >= 20) text = "a day";
   else if (hours >= 1.5) text = `${Math.round(hours)} hours`;
   else if (hours >= 0.75) text = "an hour";
-  else text = `${Math.max(1, Math.round(hours * 60))} minutes`;
+  else {
+    const minutes = Math.max(1, Math.round(hours * 60));
+    text = `${minutes} minute${minutes === 1 ? "" : "s"}`;
+  }
   return ms >= 0 ? `in ${text}` : `${text} ago`;
 }
 const away = (ms) => fromNow(ms).replace(/^in /, "");

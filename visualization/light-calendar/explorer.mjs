@@ -17,7 +17,9 @@ const wrap = (d) => ((((d + 180) % 360) + 360) % 360) - 180;
 // The foreground: open sea at coasts and seas, level land inland.
 const SEA = new Uint8Array(72).fill(1),
   LAND = new Uint8Array(72);
-const app = { now: Date.now(), ms: Date.now(), place: null, span: null, playing: false, userLooked: false };
+// `ms` is the moment shown, `base` the start of the month bar, and `live` marks
+// the real present moment.
+const app = { base: Date.now(), ms: Date.now(), live: true, place: null, span: null, playing: false, userLooked: false };
 let astronomy, transfer, assets, places, earthTexture, skyView, worker;
 
 // ---------- Loading ----------
@@ -71,21 +73,41 @@ function ask(payload) {
   worker.postMessage({ id, type: "span", ...payload });
   return new Promise((resolve, reject) => pending.set(id, { resolve, reject }));
 }
-async function loadSpan() {
+// Events come from a window around the month bar and the moment shown, and are
+// recomputed whenever the moment moves near the window's edges.
+let spanLoading = false;
+function ensureSpan() {
   const p = app.place;
-  const result = await ask({
+  if (!p || spanLoading) return;
+  const from = Math.min(app.base, app.ms),
+    to = Math.max(app.base + MONTH, app.ms);
+  const needStart = Math.max(minMs, from - 15 * DAY_MS),
+    needEnd = Math.min(maxMs, to + 35 * DAY_MS);
+  const sp = app.span;
+  if (sp && sp.placeId === p.id && sp.start <= needStart && sp.end >= needEnd) return;
+  spanLoading = true;
+  ask({
     settings: { longitude: p.longitude, latitude: p.latitude, earth: true, scale: "UTC" },
-    start: Math.max(minMs, app.now - 20 * DAY_MS),
-    end: Math.min(maxMs, app.now + MONTH + 16 * DAY_MS),
+    // Whole-hour samples give the same events however the page was reached.
+    start: Math.ceil(Math.max(minMs, from - 25 * DAY_MS) / HOUR) * HOUR,
+    end: Math.min(maxMs, to + 45 * DAY_MS),
     step: HOUR,
     order: 8,
-  });
-  if (p !== app.place) return;
-  app.span = result;
-  const el = result.samples.earthEl;
-  app.reach = Math.min(...el) > 0.5 ? "always" : Math.max(...el) < -1 ? "never" : "sometimes";
-  drawTrack();
-  refresh(true);
+  })
+    .then((result) => {
+      if (p !== app.place) return;
+      result.placeId = p.id;
+      app.span = result;
+      const el = result.samples.earthEl;
+      app.reach = Math.min(...el) > 0.5 ? "always" : Math.max(...el) < -1 ? "never" : "sometimes";
+      drawTrack();
+      refresh(true);
+    })
+    .catch(fail)
+    .finally(() => {
+      spanLoading = false;
+      ensureSpan();
+    });
 }
 const events = () => app.span?.events ?? [];
 const last = (type) => events().filter((e) => e.type === type && e.ms <= app.ms).at(-1)?.ms;
@@ -156,8 +178,12 @@ function draw(force) {
     adaptInk();
   }
   if (app.playing) {
-    $("scrub").value = String(Math.round(((app.ms - app.now) / MONTH) * 1000));
+    $("scrub").value = String(Math.round(((app.ms - app.base) / MONTH) * 1000));
     $("when").textContent = when(app.ms);
+    if (t - lastUrlWrite > 1000) {
+      ensureSpan();
+      writeUrl();
+    }
   }
 }
 
@@ -211,9 +237,8 @@ function words() {
   $("brightness").textContent = brightness(s.total, c, assets.earth_control);
   paintEarth();
   moments();
-  const atNow = Math.abs(app.ms - app.now) < 60000;
-  $("back").hidden = atNow;
-  $("when").textContent = atNow ? `Now · ${when(app.ms)}` : when(app.ms);
+  $("back").hidden = app.live;
+  $("when").textContent = app.live ? `Now · ${when(app.ms)}` : when(app.ms);
   document.title = `${CONDITIONS[c].name} · ${app.place.name} · Open Moon Skies`;
 }
 const earthTone = new ToneCurve(1);
@@ -268,10 +293,10 @@ function moments() {
     b.setAttribute("aria-label", `${MOMENTS[e.type]}, ${when(e.ms)}, ${fromNow(e.ms - app.ms)}. Show this moment.`);
     b.addEventListener("click", () => {
       stop();
-      app.userLooked = false;
-      // Show sunrise and sunset just after and before the Sun crosses the horizon.
-      const shift = e.type === "sunrise" ? 2 * HOUR : e.type === "sunset" ? -2 * HOUR : 0;
-      setTime(e.ms + shift, true);
+      // Show each crossing from inside the brighter side: sunrise and sunset two
+      // hours into the day, first light and fading twilight an hour into the twilight.
+      const shift = { sunrise: 2 * HOUR, sunset: -2 * HOUR, dawn: HOUR, dusk: -HOUR }[e.type] ?? 0;
+      setTime(e.ms + shift, { reaim: true });
     });
     li.append(b);
     ol.append(li);
@@ -281,18 +306,28 @@ function moments() {
 // ---------- The month bar ----------
 function drawTrack() {
   const sp = app.span;
-  if (!sp) return;
+  if (!sp) {
+    $("track-colours").style.background = "";
+    return;
+  }
   const stops = [];
   for (let k = 0; k <= 60; k++) {
-    const t = app.now + (k / 60) * MONTH;
-    const i = clamp(Math.round((t - sp.start) / sp.step), 0, sp.samples.ms.length - 1);
-    stops.push(`${CONDITIONS[sp.samples.regime[i]].colour} ${((k / 60) * 100).toFixed(1)}%`);
+    const i = Math.round((app.base + (k / 60) * MONTH - sp.start) / sp.step);
+    const colour = i >= 0 && i < sp.samples.ms.length ? CONDITIONS[sp.samples.regime[i]].colour : "rgba(255,255,255,0.3)";
+    stops.push(`${colour} ${((k / 60) * 100).toFixed(1)}%`);
   }
   $("track-colours").style.background = `linear-gradient(90deg, ${stops.join(",")})`;
 }
-function setTime(ms, reaim = false) {
-  app.ms = clamp(ms, minMs, maxMs);
-  $("scrub").value = String(Math.round(((app.ms - app.now) / MONTH) * 1000));
+// Show a moment. A moment outside the month bar moves the bar to start two days before it.
+function setTime(ms, { reaim = false, live = false } = {}) {
+  // Whole minutes, as the address records them.
+  app.ms = clamp(live ? ms : Math.round(ms / 60000) * 60000, minMs, maxMs);
+  app.live = live;
+  if (app.ms < app.base || app.ms > app.base + MONTH) {
+    app.base = clamp(app.ms - 2 * DAY_MS, minMs, maxMs - MONTH);
+    drawTrack();
+  }
+  $("scrub").value = String(Math.round(((app.ms - app.base) / MONTH) * 1000));
   if (reaim) {
     app.userLooked = false;
     const p = app.place;
@@ -300,6 +335,26 @@ function setTime(ms, reaim = false) {
     aim(false);
   }
   refresh(true);
+  ensureSpan();
+  writeUrl();
+}
+
+// The address records the place, the moment unless it is the present, and the
+// view once the sky has been dragged; opening the address restores them.
+let lastUrlWrite = 0;
+function writeUrl() {
+  if (!app.place) return;
+  const parts = [`place=${app.place.id}`];
+  const iso = new Date(Math.round(app.ms / 60000) * 60000).toISOString().replace(":00.000Z", "Z");
+  if (!app.live) parts.push(`at=${iso}`);
+  if (app.userLooked) {
+    const c = skyView.camera;
+    parts.push(`view=${Math.round((((c.yaw % 360) + 360) % 360))},${Math.round(c.pitch)}`);
+  }
+  const url = `${location.pathname}?${parts.join("&")}`;
+  if (url !== location.pathname + location.search) history.replaceState(null, "", url);
+  lastUrlWrite = performance.now();
+  $("almanac-link").href = `almanac.html?lat=${app.place.latitude}&lon=${app.place.longitude}&at=${iso}`;
 }
 
 // ---------- Play ----------
@@ -309,13 +364,14 @@ function tick(t) {
   const dt = lastTick ? Math.min(t - lastTick, 80) : 16;
   lastTick = t;
   let ms = app.ms + (dt / 1000) * PLAY_HOURS_PER_SECOND * HOUR;
-  if (ms > app.now + MONTH) ms = app.now;
+  if (ms > app.base + MONTH) ms = app.base;
   app.ms = ms;
   draw(false);
   requestAnimationFrame(tick);
 }
 function play() {
   app.playing = true;
+  app.live = false;
   app.userLooked = false;
   lastTick = 0;
   $("play").classList.add("playing");
@@ -325,25 +381,33 @@ function play() {
 function stop() {
   if (!app.playing) return;
   app.playing = false;
+  app.ms = Math.round(app.ms / 60000) * 60000;
   $("play").classList.remove("playing");
   $("play").setAttribute("aria-label", "Play the coming month");
   refresh(true);
+  writeUrl();
 }
 
 // ---------- Places ----------
-function choosePlace(p) {
+function choosePlace(p, { view = null } = {}) {
   app.place = p;
   app.span = null;
   app.reach = null;
   momentsKey = "";
+  drawTrack();
   $("place-name").textContent = p.name;
   $("place-latin").textContent = `${p.latin} · ${p.line}`;
-  const q = new URLSearchParams(location.search);
-  q.set("place", p.id);
-  history.replaceState(null, "", `${location.pathname}?${q}`);
-  $("almanac-link").href = `almanac.html?lat=${p.latitude}&lon=${p.longitude}`;
-  setTime(app.ms, true);
-  loadSpan().catch(fail);
+  if (!view) {
+    setTime(app.ms, { reaim: true, live: app.live });
+    return;
+  }
+  app.userLooked = false;
+  app.state = stateAt(app.ms, p.longitude, p.latitude, astronomy, transfer, true, "UTC");
+  aim(false);
+  skyView.camera.yaw = view.yaw;
+  skyView.camera.pitch = view.pitch;
+  app.userLooked = true;
+  setTime(app.ms, { live: app.live });
 }
 function placeList() {
   const ul = $("place-list");
@@ -388,6 +452,7 @@ function bindSky() {
     refresh();
   });
   const end = () => {
+    if (drag && app.userLooked) writeUrl();
     drag = null;
     c.classList.remove("dragging");
   };
@@ -411,8 +476,15 @@ function fail(error) {
 async function start() {
   if (location.protocol === "file:") return;
   try {
-    const at = Date.parse(new URLSearchParams(location.search).get("at") ?? "");
-    if (Number.isFinite(at)) app.now = app.ms = clamp(at, minMs, maxMs);
+    const query = new URLSearchParams(location.search);
+    const at = Date.parse(query.get("at") ?? "");
+    if (Number.isFinite(at)) {
+      app.ms = clamp(at, minMs, maxMs);
+      app.live = false;
+      app.base = clamp(app.ms - 2 * DAY_MS, minMs, maxMs - MONTH);
+    }
+    const look = (query.get("view") ?? "").split(",").map(Number);
+    const view = look.length === 2 && look.every(Number.isFinite) ? { yaw: look[0], pitch: clamp(look[1], -15, 89) } : null;
     let stars, sky, placeData;
     [astronomy, transfer, assets, stars, placeData, sky, earthTexture] = await Promise.all([
       json("data/astronomy.json"),
@@ -442,21 +514,23 @@ async function start() {
     $("play").addEventListener("click", () => (app.playing ? stop() : play()));
     $("scrub").addEventListener("input", () => {
       stop();
-      setTime(app.now + (Number($("scrub").value) / 1000) * MONTH);
+      setTime(app.base + (Number($("scrub").value) / 1000) * MONTH);
     });
     $("back").addEventListener("click", () => {
       stop();
-      app.now = Date.now();
-      setTime(app.now, true);
-      loadSpan().catch(fail);
+      app.base = Date.now();
+      setTime(Date.now(), { reaim: true, live: true });
     });
+    // The present moment moves on while the page is open.
+    setInterval(() => {
+      if (app.live && !app.playing && document.visibilityState === "visible") setTime(Date.now(), { live: true });
+    }, 60000);
     $("place").addEventListener("click", () => {
       placeList();
       $("places").showModal();
     });
-    const wanted = new URLSearchParams(location.search).get("place");
     document.body.classList.remove("loading");
-    choosePlace(places.find((p) => p.id === wanted) ?? places[0]);
+    choosePlace(places.find((p) => p.id === query.get("place")) ?? places[0], { view });
   } catch (error) {
     fail(error);
   }

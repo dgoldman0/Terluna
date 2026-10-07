@@ -46,6 +46,10 @@ The page opens on the Ocean of Storms at the present moment, in the visitor's
 own time zone. Choosing a place changes the whole page. Play runs through the
 coming month at eight hours a second, the bar beside it shows the month's
 conditions in colour, and each upcoming moment can be tapped to see its sky.
+The address records the place, the moment when it is not the present, and the
+viewing direction once the sky has been dragged, for example
+`?place=showers&at=2026-11-12T17:21Z&view=135,40`; opening it restores that sky,
+and an address without `at` follows the present.
 
 **Computed.** Every light level, Sun and Earth position, phase and event comes
 from the calendar products through [evaluator.mjs](../../illumination/calendar/evaluator.mjs);
