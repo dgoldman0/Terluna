@@ -223,72 +223,227 @@ function drawEarth() {
   );
 }
 
+// Map: the water mask is resampled at the canvas's own pixel resolution
+// (bilinear between 1° cells, 2×2 supersampled) and cached per canvas size;
+// only the day/night shading is recomputed when the moment changes.
+const mapCache = { field: null, key: "", base: null };
+const smooth = (a, b, x) => {
+  const t = clamp((x - a) / (b - a), 0, 1);
+  return t * t * (3 - 2 * t);
+};
+function waterField() {
+  if (mapCache.field) return mapCache.field;
+  const lat = astronomy.map_grid.latitude_centres,
+    lon = astronomy.map_grid.longitude_centres,
+    rows = lat.length,
+    cols = lon.length,
+    water = new Float32Array(rows * cols);
+  for (const [row, a, b] of astronomy.water_spans)
+    water.fill(1, row * cols + a, row * cols + Math.min(b, cols));
+  mapCache.field = {
+    water,
+    rows,
+    cols,
+    lat0: lat[0],
+    dlat: lat[0] - lat[1],
+    lon0: lon[0],
+    dlon: lon[1] - lon[0],
+  };
+  return mapCache.field;
+}
+function waterAt(F, latDeg, lonDeg) {
+  const fr = clamp((F.lat0 - latDeg) / F.dlat, 0, F.rows - 1),
+    fc = ((((lonDeg - F.lon0) / F.dlon) % F.cols) + F.cols) % F.cols,
+    r0 = Math.min(F.rows - 2, Math.floor(fr)),
+    tr = fr - r0,
+    c0 = Math.floor(fc) % F.cols,
+    tc = fc - Math.floor(fc),
+    c1 = (c0 + 1) % F.cols,
+    w = F.water,
+    a = r0 * F.cols,
+    b = a + F.cols;
+  return (
+    (w[a + c0] * (1 - tc) + w[a + c1] * tc) * (1 - tr) +
+    (w[b + c0] * (1 - tc) + w[b + c1] * tc) * tr
+  );
+}
+function mapBase(w, h) {
+  const key = `${w}x${h}`;
+  if (mapCache.key === key) return mapCache.base;
+  const F = waterField(),
+    base = new Float32Array(w * h * 3),
+    sea = [52, 121, 168],
+    land = [116, 126, 96],
+    coast = [150, 196, 222],
+    // Half a pixel of transition in field units keeps coastlines smooth.
+    e = clamp((0.5 * 360) / w, 0.08, 0.5);
+  for (let y = 0; y < h; y++)
+    for (let x = 0; x < w; x++) {
+      let t = 0,
+        edge = 0;
+      for (const [sx, sy] of [
+        [0.25, 0.25],
+        [0.75, 0.25],
+        [0.25, 0.75],
+        [0.75, 0.75],
+      ]) {
+        const v = waterAt(
+          F,
+          90 - ((y + sy) / h) * 180,
+          ((x + sx) / w) * 360 - 180,
+        );
+        t += smooth(0.5 - e, 0.5 + e, v) / 4;
+        edge += Math.max(0, 1 - Math.abs(v - 0.5) / (2 * e)) / 4;
+      }
+      const i = 3 * (y * w + x),
+        k = 0.3 * edge;
+      for (let c = 0; c < 3; c++)
+        base[i + c] =
+          (land[c] * (1 - t) + sea[c] * t) * (1 - k) + coast[c] * k;
+    }
+  mapCache.key = key;
+  mapCache.base = base;
+  return base;
+}
 function drawMap() {
   const c = $("world-map"),
-    ctx = c.getContext("2d"),
-    w = c.width,
-    h = c.height;
-  ctx.fillStyle = "#263443";
-  ctx.fillRect(0, 0, w, h);
-  ctx.fillStyle = "#416471";
-  for (const [row, a, b] of astronomy.water_spans) {
-    for (let col = a; col < b; col++) {
-      const lon = astronomy.map_grid.longitude_centres[col] - 0.5,
-        shift = (lon + 180) % 360,
-        top = 90 - astronomy.map_grid.latitude_centres[row] - 0.5;
-      ctx.fillRect(shift * 2, top * 2, 2, 2);
+    cssWidth = c.getBoundingClientRect().width,
+    dpr = Math.min(window.devicePixelRatio || 1, 2),
+    w = cssWidth ? clamp(Math.round(cssWidth * dpr), 360, 1200) : c.width,
+    h = Math.round(w / 2),
+    s = cssWidth ? w / cssWidth : 1;
+  if (c.width !== w || c.height !== h) {
+    c.width = w;
+    c.height = h;
+  }
+  const ctx = c.getContext("2d"),
+    base = mapBase(w, h),
+    image = ctx.createImageData(w, h),
+    out = image.data,
+    sun = ephemeris(julianDate(ms, settings.scale), astronomy).sun,
+    night = [5, 10, 24],
+    px = (2 * Math.PI) / w,
+    cosLon = new Float32Array(w),
+    sinLon = new Float32Array(w);
+  for (let x = 0; x < w; x++) {
+    const lon = (((x + 0.5) / w) * 360 - 180) * (Math.PI / 180);
+    cosLon[x] = Math.cos(lon);
+    sinLon[x] = Math.sin(lon);
+  }
+  for (let y = 0; y < h; y++) {
+    const lat = (90 - ((y + 0.5) / h) * 180) * (Math.PI / 180),
+      cl = Math.cos(lat),
+      sl = Math.sin(lat) * sun[2];
+    for (let x = 0; x < w; x++) {
+      const mu = cl * (cosLon[x] * sun[0] + sinLon[x] * sun[1]) + sl,
+        a =
+          (0.25 + 0.45 * Math.min(1, Math.max(0, -mu) * 3)) *
+          clamp(0.5 - mu / px, 0, 1),
+        i = y * w + x;
+      for (let k = 0; k < 3; k++)
+        out[4 * i + k] = base[3 * i + k] * (1 - a) + night[k] * a;
+      out[4 * i + 3] = 255;
     }
   }
-  const g = ephemeris(julianDate(ms, settings.scale), astronomy);
-  for (let row = 0; row < 90; row++)
-    for (let col = 0; col < 180; col++) {
-      const lat = ((89 - row * 2) * Math.PI) / 180,
-        lon = ((-179 + col * 2) * Math.PI) / 180,
-        n = [
-          Math.cos(lat) * Math.cos(lon),
-          Math.cos(lat) * Math.sin(lon),
-          Math.sin(lat),
-        ];
-      const mu = n.reduce((s, v, i) => s + v * g.sun[i], 0);
-      if (mu < 0) {
-        ctx.fillStyle = `rgba(4,10,19,${0.25 + 0.45 * Math.min(1, -mu * 3)})`;
-        ctx.fillRect(col * 4, row * 4, 4, 4);
-      }
-    }
-  ctx.strokeStyle = "#b5c9d318";
-  ctx.lineWidth = 1;
-  for (let x = 0; x <= w; x += 120) {
+  ctx.putImageData(image, 0, 0);
+  ctx.lineWidth = Math.max(1, s * 0.75);
+  for (let deg = -150; deg <= 150; deg += 30) {
+    const x = ((deg + 180) / 360) * w;
+    ctx.strokeStyle = deg === 0 ? "#dce8f040" : "#dce8f01c";
     ctx.beginPath();
     ctx.moveTo(x, 0);
     ctx.lineTo(x, h);
     ctx.stroke();
   }
-  for (let y = 60; y < h; y += 60) {
+  for (let deg = -60; deg <= 60; deg += 30) {
+    const y = ((90 - deg) / 180) * h;
+    ctx.strokeStyle = deg === 0 ? "#dce8f040" : "#dce8f01c";
     ctx.beginPath();
     ctx.moveTo(0, y);
     ctx.lineTo(w, y);
     ctx.stroke();
   }
   const x = ((settings.longitude + 180) / 360) * w,
-    y = ((90 - settings.latitude) / 180) * h;
-  ctx.strokeStyle = "#dfdcd0";
-  ctx.lineWidth = 2;
+    y = ((90 - settings.latitude) / 180) * h,
+    gap = 11 * s;
+  ctx.save();
+  ctx.strokeStyle = "#ffffff70";
+  ctx.lineWidth = s;
+  ctx.setLineDash([3 * s, 3 * s]);
   ctx.beginPath();
-  ctx.arc(x, y, 10, 0, Math.PI * 2);
+  ctx.moveTo(0, y);
+  ctx.lineTo(Math.max(0, x - gap), y);
+  ctx.moveTo(Math.min(w, x + gap), y);
+  ctx.lineTo(w, y);
+  ctx.moveTo(x, 0);
+  ctx.lineTo(x, Math.max(0, y - gap));
+  ctx.moveTo(x, Math.min(h, y + gap));
+  ctx.lineTo(x, h);
   ctx.stroke();
-  ctx.fillStyle = "#eecc95";
+  ctx.restore();
   ctx.beginPath();
-  ctx.arc(x, y, 4, 0, Math.PI * 2);
+  ctx.arc(x, y, 7 * s, 0, Math.PI * 2);
+  ctx.lineWidth = 5 * s;
+  ctx.strokeStyle = "#050a10c0";
+  ctx.stroke();
+  ctx.lineWidth = 2.2 * s;
+  ctx.strokeStyle = "#ffffff";
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(x, y, 2.8 * s, 0, Math.PI * 2);
+  ctx.fillStyle = "#ffcf7a";
   ctx.fill();
 }
 
+// Sky compass: a view looking up, north at the top, east on the left.
+// Labels are placed by testing candidate positions around each marker
+// against every drawn element, so no two texts or markers overlap.
+function boxOverlap(a, b) {
+  const w = Math.min(a.x + a.w, b.x + b.w) - Math.max(a.x, b.x),
+    h = Math.min(a.y + a.h, b.y + b.h) - Math.max(a.y, b.y);
+  return w > 0 && h > 0 ? w * h : 0;
+}
+function textBox(node, fallbackWidth, size) {
+  let b;
+  try {
+    b = node.getBBox();
+  } catch {
+    b = null;
+  }
+  return b && b.width
+    ? { w: b.width, h: b.height }
+    : { w: fallbackWidth, h: size * 1.2 };
+}
 function drawSky() {
   const s = $("sky-plot");
   s.replaceChildren();
-  const cx = 160,
-    cy = 105,
-    R = 73;
-  s.append(el("circle", { cx, cy, r: R, fill: "#131d29", stroke: "#3c5062" }));
+  const VW = 320,
+    VH = 244,
+    cx = 160,
+    cy = 122,
+    R = 78,
+    ring = R + 14,
+    cardinal = ring + 18,
+    obstacles = [];
+  s.setAttribute("viewBox", `0 0 ${VW} ${VH}`);
+  s.append(
+    el("circle", {
+      cx,
+      cy,
+      r: ring,
+      fill: "none",
+      stroke: "#5b6e82",
+      "stroke-dasharray": "2 4",
+    }),
+    el("circle", {
+      cx,
+      cy,
+      r: R,
+      fill: "#101a26",
+      stroke: "#6b8095",
+      "stroke-width": 1.2,
+    }),
+  );
   for (const r of [R / 3, (2 * R) / 3])
     s.append(
       el("circle", {
@@ -296,88 +451,168 @@ function drawSky() {
         cy,
         r,
         fill: "none",
-        stroke: "#304457",
+        stroke: "#3a4e63",
         "stroke-dasharray": "2 4",
       }),
     );
-  for (const a of [0, 90, 180, 270]) {
-    const r = (a * Math.PI) / 180;
-    s.append(
-      el("line", {
-        x1: cx,
-        y1: cy,
-        x2: cx + R * Math.sin(r),
-        y2: cy - R * Math.cos(r),
-        stroke: "#2b3e50",
-      }),
-    );
-  }
-  for (const [text, x, y] of [
-    ["N", cx, cy - R - 12],
-    ["S", cx, cy + R + 19],
-    ["E", cx - R - 18, cy + 4],
-    ["W", cx + R + 18, cy + 4],
-  ])
-    s.append(
-      el(
-        "text",
-        { x, y, fill: "#8ca1b2", "font-size": 10, "text-anchor": "middle" },
-        text,
-      ),
-    );
   s.append(
-    el(
+    el("line", { x1: cx - R, y1: cy, x2: cx + R, y2: cy, stroke: "#2b3d50" }),
+    el("line", { x1: cx, y1: cy - R, x2: cx, y2: cy + R, stroke: "#2b3d50" }),
+    el("circle", { cx, cy, r: 2.2, fill: "#b4c3d0" }),
+  );
+  obstacles.push({ x: cx - 4, y: cy - 4, w: 8, h: 8 });
+  for (const [text, x, y] of [
+    ["N", cx, cy - cardinal],
+    ["S", cx, cy + cardinal],
+    ["E", cx - cardinal, cy],
+    ["W", cx + cardinal, cy],
+  ]) {
+    const t = el(
       "text",
       {
-        x: cx,
-        y: cy + 4,
-        fill: "#5e768a",
-        "font-size": 8,
+        x,
+        y,
+        fill: "#b4c3d0",
+        "font-size": 12,
+        "font-weight": 600,
         "text-anchor": "middle",
+        "dominant-baseline": "central",
       },
-      "ZENITH",
-    ),
-  );
-  for (const name of ["sun", "earth"]) {
-    const a = (selected[name + "_azimuth_deg"] * Math.PI) / 180,
+      text,
+    );
+    s.append(t);
+    const b = textBox(t, 9, 12);
+    obstacles.push({
+      x: x - b.w / 2 - 5,
+      y: y - b.h / 2 - 4,
+      w: b.w + 10,
+      h: b.h + 8,
+    });
+  }
+  const bodies = ["sun", "earth"].map((name) => {
+    const az = (selected[name + "_azimuth_deg"] * Math.PI) / 180,
       e = selected[name + "_elevation_deg"],
-      r = e >= 0 ? (R * (90 - e)) / 90 : R + 10;
-    const x = cx - r * Math.sin(a),
-      y = cy - r * Math.cos(a),
-      color = name === "sun" ? "#efb778" : "#73c7bb";
+      above = e >= 0,
+      r = above ? (R * (90 - e)) / 90 : ring;
+    return {
+      name,
+      label: name === "sun" ? "Sun" : "Earth",
+      color: name === "sun" ? "#efb778" : "#73c7bb",
+      above,
+      x: cx - r * Math.sin(az),
+      y: cy - r * Math.cos(az),
+      size: above ? 6 : 5.5,
+    };
+  });
+  for (const b of bodies) {
+    if (b.above && b.name === "sun")
+      s.append(
+        el("circle", { cx: b.x, cy: b.y, r: 11, fill: b.color, opacity: 0.18 }),
+      );
     s.append(
       el("circle", {
-        cx: x,
-        cy: y,
-        r: 5,
-        fill: e >= 0 ? color : "#17222e",
-        stroke: color,
-        "stroke-width": 1.5,
+        cx: b.x,
+        cy: b.y,
+        r: b.size,
+        fill: b.above ? b.color : "#172130",
+        stroke: b.above ? "#0f1822" : b.color,
+        "stroke-width": b.above ? 1.5 : 2,
+        "data-body": b.name,
       }),
     );
-    s.append(
-      el(
-        "text",
-        {
-          x: x + (x > cx ? -9 : 9),
-          y: y - 9,
-          fill: color,
-          "font-size": 9,
-          "text-anchor": x > cx ? "end" : "start",
-        },
-        `${name === "sun" ? "Sun" : "Earth"}${e < 0 ? " ↓" : ""}`,
-      ),
+    const m = b.size + 3;
+    obstacles.push({ x: b.x - m, y: b.y - m, w: 2 * m, h: 2 * m });
+  }
+  const straddles = (box, radius) => {
+    const nx = clamp(cx, box.x, box.x + box.w) - cx,
+      ny = clamp(cy, box.y, box.y + box.h) - cy,
+      far = Math.max(
+        ...[
+          [box.x, box.y],
+          [box.x + box.w, box.y],
+          [box.x, box.y + box.h],
+          [box.x + box.w, box.y + box.h],
+        ].map(([x, y]) => Math.hypot(x - cx, y - cy)),
+      );
+    return Math.hypot(nx, ny) < radius && far > radius;
+  };
+  for (const b of bodies) {
+    const t = el(
+      "text",
+      {
+        fill: b.color,
+        "font-size": 12,
+        "font-weight": 600,
+        "text-anchor": "middle",
+        "dominant-baseline": "central",
+        stroke: "#172130",
+        "stroke-width": 3,
+        "stroke-linejoin": "round",
+        "paint-order": "stroke",
+      },
+      b.label,
     );
+    s.append(t);
+    const size = textBox(t, b.label.length * 7, 12),
+      outward =
+        Math.hypot(b.x - cx, b.y - cy) > 1
+          ? Math.atan2(b.y - cy, b.x - cx)
+          : -Math.PI / 2;
+    let best;
+    [0, 30, -30, 60, -60, 90, -90, 120, -120, 150, -150, 180].forEach(
+      (offset, rank) => {
+        for (const [step, gap] of [3, 10].entries()) {
+          const a = outward + (offset * Math.PI) / 180,
+            ux = Math.cos(a),
+            uy = Math.sin(a),
+            d =
+              b.size +
+              gap +
+              Math.abs(ux) * (size.w / 2) +
+              Math.abs(uy) * (size.h / 2),
+            box = {
+              x: b.x + ux * d - size.w / 2,
+              y: b.y + uy * d - size.h / 2,
+              w: size.w,
+              h: size.h,
+            };
+          let score = rank * 0.6 + step * 2;
+          for (const o of obstacles) score += 40 * boxOverlap(box, o);
+          const inside = boxOverlap(box, { x: 2, y: 2, w: VW - 4, h: VH - 4 });
+          score += 60 * (box.w * box.h - inside);
+          if (straddles(box, R)) score += 6;
+          if (straddles(box, ring)) score += 6;
+          if (!best || score < best.score) best = { score, box };
+        }
+      },
+    );
+    t.setAttribute("x", best.box.x + best.box.w / 2);
+    t.setAttribute("y", best.box.y + best.box.h / 2);
+    obstacles.push(best.box);
   }
 }
 
+// The month chart is drawn at the container's CSS pixel width, so axis text
+// keeps its size on every screen.
+const chartSize = { W: 900, H: 280 };
+function sizeChart() {
+  const W = Math.round($("chart-container").clientWidth);
+  if (!W) return false;
+  const H = clamp(Math.round(W * 0.32), 210, 300);
+  if (W === chartSize.W && H === chartSize.H) return false;
+  chartSize.W = W;
+  chartSize.H = H;
+  $("light-chart").setAttribute("viewBox", `0 0 ${W} ${H}`);
+  return true;
+}
 function plotCoordinates() {
-  const W = 900,
-    H = 280,
-    left = 61,
-    right = 16,
-    top = 18,
-    bottom = 33;
+  const { W, H } = chartSize,
+    left = W < 520 ? 46 : 56,
+    right = 14,
+    top = 12,
+    bottom = 30,
+    plotW = W - left - right,
+    plotH = H - top - bottom;
   return {
     W,
     H,
@@ -385,24 +620,26 @@ function plotCoordinates() {
     right,
     top,
     bottom,
-    x: (ms) =>
-      left +
-      ((ms - calendar.start) / (calendar.end - calendar.start)) *
-        (W - left - right),
+    plotW,
+    plotH,
+    x: (t) =>
+      left + ((t - calendar.start) / (calendar.end - calendar.start)) * plotW,
     y: (v) =>
-      top +
-      ((5 - Math.log10(Math.max(v, Number.MIN_VALUE))) / 9) *
-        (H - top - bottom),
+      top + ((5 - Math.log10(Math.max(v, Number.MIN_VALUE))) / 9) * plotH,
+    fraction: (svgX) => clamp((svgX - left) / plotW, 0, 1),
   };
 }
 function drawChart() {
   if (!calendar) return;
+  sizeChart();
   const s = $("light-chart");
   s.replaceChildren();
   const p = plotCoordinates();
   const defs = el("defs"),
     clip = el("clipPath", { id: "plot-area" });
-  clip.append(el("rect", { x: p.left, y: p.top, width: 823, height: 229 }));
+  clip.append(
+    el("rect", { x: p.left, y: p.top, width: p.plotW, height: p.plotH }),
+  );
   defs.append(clip);
   s.append(defs);
   for (const exponent of [-4, -3, -2, -1, 0, 1, 2, 3, 4, 5]) {
@@ -412,40 +649,47 @@ function drawChart() {
       el("line", {
         x1: p.left,
         y1: y,
-        x2: 884,
+        x2: p.W - p.right,
         y2: y,
-        stroke: "#354452",
-        "stroke-opacity": 0.55,
+        stroke: exponent === 0 ? "#4a5d71" : "#2f3f51",
       }),
     );
-    const label =
-      exponent >= 3 ? `${v / 1000}k` : exponent < 0 ? String(v) : String(v);
+    const label = exponent >= 3 ? `${v / 1000}k` : String(v);
     s.append(
       el(
         "text",
         {
-          x: p.left - 10,
-          y: y + 3,
-          fill: "#90a4b6",
-          "font-size": 10,
+          x: p.left - 8,
+          y: y,
+          fill: "#a3b4c4",
+          "font-size": 11,
           "text-anchor": "end",
+          "dominant-baseline": "central",
         },
         label,
       ),
     );
   }
-  const days = Math.round((calendar.end - calendar.start) / DAY_MS);
-  for (let d = 0; d <= days; d += 5) {
+  const days = Math.round((calendar.end - calendar.start) / DAY_MS),
+    step = [5, 10, 15].find((d) => (p.plotW / days) * d >= 48) ?? 15;
+  for (let d = 0; d <= days; d += step) {
     const x = p.x(calendar.start + d * DAY_MS);
     s.append(
+      el("line", {
+        x1: x,
+        x2: x,
+        y1: p.top + p.plotH,
+        y2: p.top + p.plotH + 4,
+        stroke: "#4a5d71",
+      }),
       el(
         "text",
         {
           x,
-          y: 270,
-          fill: "#8fa4b5",
-          "font-size": 10,
-          "text-anchor": d === 0 ? "start" : "middle",
+          y: p.H - 8,
+          fill: "#a3b4c4",
+          "font-size": 11,
+          "text-anchor": d === 0 ? "start" : x + 22 > p.W ? "end" : "middle",
         },
         formatDate(calendar.start + d * DAY_MS, {
           month: "short",
@@ -486,13 +730,14 @@ function drawChart() {
           x1: p.x(r.ms),
           x2: p.x(r.ms),
           y1: p.top,
-          y2: 247,
+          y2: p.top + p.plotH,
           stroke: "#d79bb6",
           "stroke-opacity": 0.25,
           "stroke-width": 1.2,
         }),
       );
   s.append(el("g", { id: "chart-marker", "clip-path": "url(#plot-area)" }));
+  s.append(el("g", { id: "chart-hover", "pointer-events": "none" }));
   drawMarker();
   $("range-start").textContent = formatDate(calendar.start, {
     month: "short",
@@ -525,9 +770,9 @@ function drawMarker() {
       x1: x,
       x2: x,
       y1: p.top,
-      y2: 247,
+      y2: p.top + p.plotH,
       stroke: "#dbe7ee",
-      "stroke-opacity": 0.5,
+      "stroke-opacity": 0.55,
       "stroke-dasharray": "3 4",
     }),
   );
@@ -535,12 +780,77 @@ function drawMarker() {
     el("circle", {
       cx: x,
       cy: p.y(selected.total),
-      r: 4,
+      r: 4.5,
       fill: "#eaf0f3",
       stroke: "#142130",
       "stroke-width": 2,
     }),
   );
+}
+function chartRow(event) {
+  const p = plotCoordinates(),
+    rect = $("light-chart").getBoundingClientRect(),
+    f = p.fraction(((event.clientX - rect.left) / rect.width) * p.W);
+  return { p, rect, f };
+}
+function showHover(event) {
+  if (!calendar) return;
+  const { p, rect, f } = chartRow(event),
+    i = Math.min(
+      calendar.series.length - 1,
+      Math.round(f * (calendar.series.length - 1)),
+    ),
+    r = calendar.series[i],
+    tip = $("chart-tooltip"),
+    hover = $("chart-hover"),
+    hx = p.x(r.ms),
+    hy = clamp(p.y(r.total), p.top, p.top + p.plotH);
+  if (hover) {
+    hover.replaceChildren(
+      el("line", {
+        x1: hx,
+        x2: hx,
+        y1: p.top,
+        y2: p.top + p.plotH,
+        stroke: "#dbe7ee",
+        "stroke-opacity": 0.3,
+      }),
+      el("circle", {
+        cx: hx,
+        cy: hy,
+        r: 4,
+        fill: "#10161f",
+        stroke: "#eaf0f3",
+        "stroke-width": 2,
+      }),
+    );
+  }
+  tip.replaceChildren();
+  const strong = document.createElement("strong");
+  strong.textContent = lux(r.total);
+  tip.append(
+    strong,
+    `${formatDate(r.ms, { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit", hour12: false })} ${settings.scale}`,
+  );
+  tip.hidden = false;
+  // Keep the tooltip beside the point and inside the chart on every side.
+  const scale = rect.width / p.W,
+    px = hx * scale,
+    py = hy * scale,
+    tw = tip.offsetWidth,
+    th = tip.offsetHeight,
+    cw = $("chart-container").clientWidth,
+    ch = rect.height;
+  let left = px + 14,
+    top = py - th - 12;
+  if (left + tw > cw) left = px - 14 - tw;
+  if (top < 0) top = py + 12;
+  tip.style.left = `${clamp(left, 0, Math.max(0, cw - tw))}px`;
+  tip.style.top = `${clamp(top, 0, Math.max(0, ch - th))}px`;
+}
+function hideHover() {
+  $("chart-tooltip").hidden = true;
+  $("chart-hover")?.replaceChildren();
 }
 
 function colour(v) {
@@ -772,36 +1082,12 @@ function bind() {
       );
     }
   });
-  $("light-chart").addEventListener("pointermove", (e) => {
-    if (!calendar) return;
-    const rect = e.currentTarget.getBoundingClientRect(),
-      x = ((e.clientX - rect.left) / rect.width) * 900;
-    const f = clamp((x - 61) / (900 - 61 - 16), 0, 1);
-    const i = Math.min(
-        calendar.series.length - 1,
-        Math.round(f * (calendar.series.length - 1)),
-      ),
-      r = calendar.series[i];
-    $("chart-tooltip").hidden = false;
-    $("chart-tooltip").replaceChildren();
-    const strong = document.createElement("strong");
-    strong.textContent = lux(r.total);
-    $("chart-tooltip").append(
-      strong,
-      `${formatDate(r.ms, { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit", hour12: false })} ${settings.scale}`,
-    );
-  });
-  $("light-chart").addEventListener(
-    "pointerleave",
-    () => ($("chart-tooltip").hidden = true),
-  );
+  $("light-chart").addEventListener("pointermove", showHover);
+  $("light-chart").addEventListener("pointerleave", hideHover);
   $("light-chart").addEventListener("click", (e) => {
     if (!calendar) return;
-    const rect = e.currentTarget.getBoundingClientRect(),
-      x = ((e.clientX - rect.left) / rect.width) * 900;
     setMoment(
-      calendar.start +
-        clamp((x - 61) / 823, 0, 1) * (calendar.end - calendar.start - 60000),
+      calendar.start + chartRow(e).f * (calendar.end - calendar.start - 60000),
       false,
     );
   });
@@ -980,6 +1266,19 @@ async function start() {
     sync();
     updateSnapshot();
     calculate();
+    if ("ResizeObserver" in window) {
+      let mapWidth = 0;
+      new ResizeObserver(() => {
+        if (sizeChart() && calendar) drawChart();
+      }).observe($("chart-container"));
+      new ResizeObserver(([entry]) => {
+        const width = Math.round(entry.contentRect.width);
+        if (width && width !== mapWidth && selected) {
+          mapWidth = width;
+          drawMap();
+        }
+      }).observe($("world-map"));
+    }
   } catch (error) {
     $("load-status").hidden = true;
     $("error").hidden = false;

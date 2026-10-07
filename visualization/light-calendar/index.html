@@ -3,416 +3,319 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="theme-color" content="#121923" />
+    <meta name="theme-color" content="#070a18" />
     <meta
       name="description"
-      content="Explore sunlight, twilight and Earthlight across the Open Moon. A clear-sky lighting calendar for Terluna."
+      content="See the sky over the Open Moon at any place and moment from 2000 to 2500: days that last two weeks, golden twilight that lasts for days, and Earth hanging in the sky."
     />
-    <title>Terluna · Light calendar</title>
-    <link rel="stylesheet" href="style.css" />
-    <script type="module" src="app.mjs"></script>
+    <title>Open Moon Skies · Terluna</title>
+    <link rel="stylesheet" href="explorer.css" />
+    <script type="module" src="explorer.mjs"></script>
   </head>
   <body>
-    <a class="skip" href="#main">Skip to calendar</a>
-    <header class="masthead">
-      <a
-        class="brand"
-        href="https://github.com/dgoldman0/Terluna"
-        aria-label="Terluna project"
-        ><span class="brand-mark" aria-hidden="true">◒</span> TERLUNA</a
-      ><span class="mast-label">THE OPEN MOON</span
-      ><span class="live-label"><i></i> Clear-sky model</span>
+    <a class="skip" href="#main">Skip to the calendar</a>
+    <header class="topbar">
+      <a class="brand" href="https://github.com/dgoldman0/Terluna" aria-label="Terluna project">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 3a13 13 0 0 1 0 26z" fill="currentColor"/></svg>
+        <span>TERLUNA</span>
+      </a>
+      <span class="product">Open Moon Skies</span>
+      <nav class="topnav">
+        <a href="#places" class="navlink">Places</a>
+        <a href="#twilight" class="navlink">Long twilight</a>
+        <a href="almanac.html" id="almanac-link" class="navlink">Technical almanac</a>
+        <button id="share" class="pill-button" type="button">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 10h6M11 6l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 4H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          Share
+        </button>
+      </nav>
     </header>
-    <main id="main">
-      <div class="page-heading">
-        <div>
-          <p class="eyebrow">AN ALMANAC FOR ANOTHER WORLD</p>
-          <h1>Light calendar<span>.</span></h1>
-          <p class="lede">
-            Follow the Sun, the long twilight, and the light of Earth.
-          </p>
-        </div>
-        <div class="heading-actions">
-          <button id="share" class="button subtle" disabled>
-            ↗ Share this view</button
-          ><button id="download" class="button subtle" disabled>
-            ↓ Download data
+
+    <section class="hero" id="hero" aria-label="The sky now">
+      <canvas id="sky" role="img" aria-label="The sky from the chosen place"></canvas>
+      <div class="hero-shade" aria-hidden="true"></div>
+      <div id="sky-labels" class="sky-labels" aria-hidden="true"></div>
+      <svg id="lens-line" class="lens-line" aria-hidden="true" hidden></svg>
+      <canvas id="earth-lens" class="earth-lens" aria-hidden="true" hidden></canvas>
+      <div class="hero-content">
+        <div class="hero-top">
+          <button id="place-button" class="place-chip" type="button" aria-haspopup="dialog">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 18s6-5.2 6-10a6 6 0 1 0-12 0c0 4.8 6 10 6 10z" fill="currentColor"/><circle cx="10" cy="8" r="2.2" fill="#0b1026"/></svg>
+            <span class="place-text"><strong id="place-name">Loading…</strong><small id="place-kind"></small></span>
+            <svg class="chev" viewBox="0 0 20 20" aria-hidden="true"><path d="M6 8l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
           </button>
+          <p class="hero-date" id="hero-date"></p>
+        </div>
+        <div class="hero-main">
+          <p class="regime-pill" id="regime-pill"><i></i><span id="regime-name"></span></p>
+          <h1 id="headline">Loading the sky…</h1>
+          <p id="subline" class="hero-sub"></p>
+          <div class="hero-stats">
+            <div class="stat">
+              <span class="stat-label">Light on the ground</span>
+              <span class="stat-value"><span id="lux-now">—</span><small>lux</small></span>
+              <span class="stat-note" id="lux-compare"></span>
+            </div>
+            <div class="stat">
+              <span class="stat-label" id="next-label">Next</span>
+              <span class="stat-value" id="next-value">—</span>
+              <span class="stat-note" id="next-note"></span>
+            </div>
+            <div class="stat">
+              <span class="stat-label">Earth</span>
+              <span class="stat-value" id="earth-stat">—</span>
+              <span class="stat-note" id="earth-note"></span>
+            </div>
+          </div>
         </div>
       </div>
-      <div id="load-status" class="status" role="status">
-        Loading the lighting model…
+      <div class="view-controls" role="group" aria-label="View">
+        <button type="button" id="look-earth" class="glass-button">
+          <i class="dot earth"></i>Earth
+        </button>
+        <button type="button" id="look-sun" class="glass-button"><i class="dot sun"></i>Sun</button>
+        <button type="button" id="zoom-in" class="glass-button icon" aria-label="Zoom in">+</button>
+        <button type="button" id="zoom-out" class="glass-button icon" aria-label="Zoom out">−</button>
       </div>
-      <div id="error" class="error" role="alert" hidden></div>
-      <div id="application" class="app-grid" hidden>
-        <aside class="controls panel" aria-label="Location and time">
-          <div class="section-heading">
-            <span class="section-number">01</span>
-            <h2>Your viewpoint</h2>
+      <p class="drag-hint" id="drag-hint">Drag the sky to look around</p>
+      <div id="sky-chips" class="sky-chips"></div>
+      <div class="dock" role="group" aria-label="Time">
+        <div class="dock-row">
+          <div class="transport">
+            <button type="button" id="now-button" class="glass-button">Now</button>
+            <button type="button" id="step-back" class="glass-button icon" aria-label="Back one day">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12 5l-5 5 5 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <button type="button" id="play" class="play-button" aria-label="Play">
+              <svg class="icon-play" viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4l10 6-10 6z" fill="currentColor"/></svg>
+              <svg class="icon-pause" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 4h3.5v12H5zM11.5 4H15v12h-3.5z" fill="currentColor"/></svg>
+            </button>
+            <button type="button" id="step-forward" class="glass-button icon" aria-label="Forward one day">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M8 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
           </div>
-          <label for="place">Location</label
-          ><select id="place"></select>
-          <div class="map-wrap">
-            <canvas
-              id="world-map"
-              width="720"
-              height="360"
-              tabindex="0"
-              role="img"
-              aria-label="Map of the lunar seas. Click or use arrow keys to choose a location; use latitude and longitude fields for precise coordinates."
-            ></canvas
-            ><span class="map-hint">Click the map to explore</span>
+          <div class="speeds" role="radiogroup" aria-label="Playback speed">
+            <button type="button" role="radio" data-speed="1" aria-checked="false">1 h/s</button>
+            <button type="button" role="radio" data-speed="6" aria-checked="true">6 h/s</button>
+            <button type="button" role="radio" data-speed="24" aria-checked="false">1 day/s</button>
           </div>
-          <div class="input-pair">
-            <div>
-              <label for="latitude">Latitude <span>° N</span></label
-              ><input
-                id="latitude"
-                type="number"
-                min="-90"
-                max="90"
-                step="any"
-                required
-              />
-            </div>
-            <div>
-              <label for="longitude">Longitude <span>° E</span></label
-              ><input
-                id="longitude"
-                type="number"
-                min="-180"
-                max="180"
-                step="any"
-                required
-              />
-            </div>
-          </div>
-          <p id="place-description" class="muted compact"></p>
-          <div class="control-divider"></div>
-          <div class="section-heading">
-            <span class="section-number">02</span>
-            <h2>Choose a moment</h2>
-            <button id="now" class="text-button">Now</button>
-          </div>
-          <label for="date">Date</label
-          ><input
-            id="date"
-            type="date"
-            min="2000-01-01"
-            max="2500-12-31"
-            required
-          />
-          <div class="input-pair time-pair">
-            <div>
-              <label for="time">Time</label
-              ><input id="time" type="time" step="60" required />
-            </div>
-            <div>
-              <label for="timescale">Time scale</label
-              ><select id="timescale">
-                <option value="UTC">UTC</option>
-                <option value="TT">TT</option>
-              </select>
-            </div>
-          </div>
-          <div class="toggle-row">
-            <div>
-              <label for="earth-toggle">Include Earthlight</label>
-              <p class="muted compact">Direct light and scattered glow</p>
-            </div>
-            <input id="earth-toggle" class="switch" type="checkbox" checked />
-          </div>
-          <div class="control-divider"></div>
-          <div class="model-mini">
-            <span class="small-orbit" aria-hidden="true">◌</span>
-            <div>
-              <strong>The design atmosphere</strong>
-              <p>
-                1.2 atm · clear molecular air<br />Titania solar shield · open
-                horizon
-              </p>
-            </div>
-          </div>
-          <a href="#about" class="method-link"
-            >How the calculation works <span>↘</span></a
-          >
-        </aside>
-        <div class="results">
-          <section class="snapshot panel" aria-labelledby="snapshot-title">
-            <div class="snapshot-top">
-              <div>
-                <p id="moment-label" class="eyebrow"></p>
-                <h2 id="snapshot-title"></h2>
-              </div>
-              <span id="regime" class="regime"></span>
-            </div>
-            <div class="snapshot-body">
-              <div class="brightness">
-                <p class="metric-label">Light reaching the ground</p>
-                <div class="lux-value">
-                  <span id="total-lux">—</span><span id="lux-unit">lux</span>
-                </div>
-                <p id="light-description" class="muted"></p>
-                <div class="component-bar" aria-hidden="true">
-                  <i id="solar-bar"></i><i id="earth-bar"></i>
-                </div>
-              </div>
-              <div class="source-summary">
-                <div>
-                  <span class="source-dot sun"></span
-                  ><span>Sunlight & twilight</span
-                  ><strong id="sun-lux"></strong>
-                </div>
-                <div>
-                  <span class="source-dot earth"></span><span>Earthlight</span
-                  ><strong id="earth-lux"></strong>
-                </div>
-                <details class="breakdown">
-                  <summary>Direct & scattered light</summary>
-                  <dl>
-                    <dt>Direct sunlight</dt>
-                    <dd id="sun-direct"></dd>
-                    <dt>Scattered sunlight</dt>
-                    <dd id="sun-diffuse"></dd>
-                    <dt>Direct Earthlight</dt>
-                    <dd id="earth-direct"></dd>
-                    <dt>Scattered Earthlight</dt>
-                    <dd id="earth-diffuse"></dd>
-                  </dl>
-                </details>
-              </div>
-            </div>
-            <div id="eclipse-notice" class="notice" hidden>
-              Earth overlaps the Sun at this moment. The displayed light is the
-              unobscured reference; eclipse shadow transport is outside this
-              model.
-            </div>
-            <div class="body-cards">
-              <div>
-                <div class="body-icon sun-icon" aria-hidden="true">☀</div>
-                <div>
-                  <span class="metric-label">Sun</span
-                  ><strong id="sun-position"></strong
-                  ><span id="sun-bearing" class="muted compact"></span>
-                </div>
-              </div>
-              <div>
-                <canvas
-                  id="earth-phase"
-                  width="80"
-                  height="80"
-                  aria-label="Illuminated phase of Earth"
-                ></canvas>
-                <div>
-                  <span class="metric-label">Earth</span
-                  ><strong id="earth-position"></strong
-                  ><span id="earth-bearing" class="muted compact"></span>
-                </div>
-              </div>
-              <div class="earth-detail">
-                <span class="metric-label">Earth’s illuminated face</span
-                ><strong id="earth-fraction"></strong
-                ><span id="earth-diameter" class="muted compact"></span>
-              </div>
-            </div>
-          </section>
-          <section class="timeline panel" aria-labelledby="timeline-title">
-            <div class="panel-heading">
-              <div>
-                <p class="eyebrow">THE LONG LUNAR DAY</p>
-                <h2 id="timeline-title">A month of light</h2>
-              </div>
-              <div class="month-nav">
-                <button
-                  id="previous-month"
-                  class="icon-button"
-                  aria-label="Previous month"
-                >
-                  ‹</button
-                ><input
-                  id="month"
-                  type="month"
-                  min="2000-01"
-                  max="2500-12"
-                  aria-label="Calendar month"
-                /><button
-                  id="next-month"
-                  class="icon-button"
-                  aria-label="Next month"
-                >
-                  ›
-                </button>
-              </div>
-            </div>
-            <div class="chart-legend">
-              <span><i class="total"></i>Total light</span
-              ><span><i class="sun"></i>Sunlight</span
-              ><span id="earth-legend"><i class="earth"></i>Earthlight</span
-              ><span class="chart-scale">Logarithmic · lux</span>
-            </div>
-            <div id="chart-container" class="chart-container">
-              <svg
-                id="light-chart"
-                viewBox="0 0 900 280"
-                role="img"
-                aria-label="Brightness through the selected month"
-                tabindex="0"
-              ></svg>
-              <div id="chart-tooltip" class="chart-tooltip" hidden></div>
-            </div>
-            <label class="visually-hidden" for="scrubber"
-              >Move through the month</label
-            ><input
-              id="scrubber"
-              class="scrubber"
-              type="range"
-              min="0"
-              max="1000"
-              value="0"
-            />
-            <div class="timeline-footer">
-              <span id="range-start"></span
-              ><span id="chart-status" role="status">Calculating…</span
-              ><span id="range-end"></span>
-            </div>
-          </section>
-          <div class="lower-grid">
-            <section class="panel events" aria-labelledby="events-title">
-              <div class="panel-heading">
-                <div>
-                  <p class="eyebrow">WHAT COMES NEXT</p>
-                  <h2 id="events-title">Changes in the light</h2>
-                </div>
-                <span id="event-scale" class="small-tag">UTC</span>
-              </div>
-              <div id="events-list"></div>
-              <p class="footnote">
-                Rise and set mark the edge of the disk crossing the open
-                horizon. Brightness crossings follow the Earthlight setting.
-              </p>
-            </section>
-            <section class="panel sky-panel" aria-labelledby="sky-title">
-              <div class="panel-heading">
-                <div>
-                  <p class="eyebrow">ABOVE THE HORIZON</p>
-                  <h2 id="sky-title">Sky positions</h2>
-                </div>
-              </div>
-              <svg
-                id="sky-plot"
-                viewBox="0 0 320 210"
-                role="img"
-                aria-label="Sun and Earth positions on a sky compass"
-              ></svg>
-              <p class="footnote">
-                View looking up. Distance from the centre indicates elevation.
-                Bodies below the horizon appear in the outer ring.
-              </p>
-            </section>
+          <div class="when">
+            <label class="visually-hidden" for="date">Date</label>
+            <input id="date" type="date" min="2000-01-01" max="2500-12-31" />
+            <label class="visually-hidden" for="time">Time (UTC)</label>
+            <input id="time" type="time" step="60" />
+            <span class="utc">UTC</span>
           </div>
         </div>
-        <section class="panel daily full-width" aria-labelledby="daily-title">
-          <div class="panel-heading">
-            <div>
-              <p class="eyebrow">THE CALENDAR</p>
-              <h2 id="daily-title">Daily light at a glance</h2>
-            </div>
-            <span class="muted compact"
-              >Earth calendar days · <span id="daily-scale">UTC</span></span
-            >
-          </div>
-          <div class="table-scroll">
-            <table>
-              <thead>
-                <tr>
-                  <th scope="col">Date</th>
-                  <th scope="col">Light through the day</th>
-                  <th scope="col">Minimum</th>
-                  <th scope="col">Maximum</th>
-                  <th scope="col">Sun above horizon</th>
-                  <th scope="col">Earthlight at 00:00</th>
-                </tr>
-              </thead>
-              <tbody id="daily-table"></tbody>
-            </table>
-          </div>
-          <p class="footnote">
-            Brightness extrema are sampled every 30 minutes. Sun-above-horizon
-            duration uses geometric disk-edge crossings. Select a day to move
-            the viewpoint. * Includes an eclipse; brightness remains the
-            unobscured reference.
-          </p>
-        </section>
-        <section id="about" class="about full-width">
-          <div>
-            <p class="eyebrow">READING THIS WORLD</p>
-            <h2>Twilight has room to travel.</h2>
-            <p>
-              Terluna’s deep atmosphere carries scattered sunlight far beyond
-              the horizon. Sunrise and sunset describe the Sun’s position; lux
-              describes the light available at the surface. Earth adds its own
-              changing light across the near side and the lunar limb.
-            </p>
-          </div>
-          <div>
-            <details>
-              <summary>The atmosphere and light sources</summary>
-              <p>
-                The calculator uses the solved, horizontally uniform 1.2-atm
-                molecular atmosphere and the selected solar shield. It
-                integrates the Sun and a phase-dependent Earth disk through a
-                spectral scattering model. Earth’s spectrum and total phase
-                brightness come from published models and observations.
-              </p>
-              <p>
-                The horizon is open and level. Local terrain, clouds, aerosols,
-                refraction, starlight and airglow are additional inputs. An
-                eclipse flag identifies times when the unobscured reference is
-                affected by Earth crossing the Sun.
-              </p>
-            </details>
-            <details>
-              <summary>Calendar accuracy and time</summary>
-              <div id="accuracy-text"></div>
-              <p>
-                TT is the uniform time scale used by the orbital calculation.
-                UTC uses historical leap seconds through 2017 and assumes a
-                69.184-second TT−UTC offset thereafter. Future changes to civil
-                time can be updated separately.
-              </p>
-            </details>
-            <details>
-              <summary>Lux, colour and visual appearance</summary>
-              <p>
-                Lux measures light falling on a horizontal surface, weighted for
-                daytime human vision. Surface brightness also depends on
-                reflectance and viewing direction. The chart spans many orders
-                of magnitude, so each major step is ten times brighter. The sky
-                compass and Earth icon show geometry.
-              </p>
-              <p>
-                Earthlight is a mean model. Earth’s rotating continents, seasons
-                and changing clouds cause variation that this calendar does not
-                forecast. Displayed values are rounded to useful precision.
-              </p>
-            </details>
-            <details>
-              <summary>Model provenance and sources</summary>
-              <div id="sources"></div>
-              <p id="build-info" class="mono compact"></p>
-            </details>
-          </div>
-        </section>
+        <div class="timeline" id="timeline">
+          <canvas id="timeline-canvas" tabindex="0" role="slider" aria-label="Move through a month around the selected moment" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"></canvas>
+        </div>
       </div>
+    </section>
+
+    <div id="error" class="error" role="alert" hidden></div>
+
+    <main id="main">
+      <section class="now-grid" aria-label="Conditions">
+        <article class="card light-card">
+          <h2 class="card-title"><span class="glyph sun-glyph" aria-hidden="true"></span>Light right now</h2>
+          <p class="big-number"><span id="card-lux">—</span><small>lux</small></p>
+          <div class="mix-bar" aria-hidden="true"><i id="mix-sun"></i><i id="mix-earth"></i></div>
+          <dl class="mix-legend">
+            <div><dt><i class="dot sun"></i>Sunlight and twilight</dt><dd id="card-sun-lux"></dd></div>
+            <div><dt><i class="dot earth"></i>Earthlight</dt><dd id="card-earth-lux"></dd></div>
+          </dl>
+          <p class="note" id="card-compare"></p>
+          <p class="note subtle" id="card-moonlight"></p>
+        </article>
+        <article class="card sun-card">
+          <h2 class="card-title"><span class="glyph sun-glyph" aria-hidden="true"></span>The Sun</h2>
+          <p class="lead" id="sun-where"></p>
+          <div class="countdowns" id="sun-countdowns"></div>
+          <p class="note" id="sun-day-length"></p>
+        </article>
+        <article class="card earth-card">
+          <h2 class="card-title"><span class="glyph earth-glyph" aria-hidden="true"></span>Earth in the sky</h2>
+          <div class="earth-portrait">
+            <canvas id="earth-big" width="220" height="220" role="img" aria-label="Earth as seen from here"></canvas>
+          </div>
+          <p class="lead" id="earth-phase"></p>
+          <p class="note" id="earth-where"></p>
+          <p class="note subtle" id="earth-size"></p>
+        </article>
+        <article class="card events-card">
+          <h2 class="card-title"><span class="glyph spark-glyph" aria-hidden="true"></span>Coming up</h2>
+          <ol class="upcoming" id="upcoming"></ol>
+          <button type="button" id="ics" class="pill-button wide">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="4.5" width="14" height="12.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3 8.5h14M7 2.5v4M13 2.5v4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+            Add a year of sunrises to my calendar
+          </button>
+        </article>
+      </section>
+
+      <section class="band cycle" aria-labelledby="cycle-title">
+        <div class="section-head">
+          <p class="kicker">One lunar day</p>
+          <h2 id="cycle-title">A day here lasts a month</h2>
+          <p class="section-lede" id="cycle-lede">The Moon turns once for every trip around Earth, so each day and night lasts about two weeks.</p>
+        </div>
+        <div class="cycle-layout">
+          <div class="dial-wrap">
+            <svg id="dial" viewBox="0 0 400 400" role="img" aria-label="The lunar day at this place"></svg>
+          </div>
+          <div class="cycle-facts" id="cycle-facts"></div>
+        </div>
+      </section>
+
+      <section class="band month" aria-labelledby="month-title">
+        <div class="section-head row">
+          <div>
+            <p class="kicker">The calendar</p>
+            <h2 id="month-title">This month</h2>
+          </div>
+          <div class="month-nav">
+            <button type="button" id="month-prev" class="glass-button icon" aria-label="Previous month">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12 5l-5 5 5 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <span id="month-label" class="month-label"></span>
+            <button type="button" id="month-next" class="glass-button icon" aria-label="Next month">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M8 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="legend" id="regime-legend"></div>
+        <div class="month-grid" id="month-grid" role="grid" aria-label="Days of the month"></div>
+        <p class="footnote">Each day's colour band runs from midnight to midnight UTC. Choose a day to see its sky at midday.</p>
+      </section>
+
+      <section class="band places" id="places" aria-labelledby="places-title">
+        <div class="section-head">
+          <p class="kicker">Places</p>
+          <h2 id="places-title">Pick a place on the Open Moon</h2>
+          <p class="section-lede">Seas fill the old lava plains and deep basins. Spin the globe, choose a pin or tap anywhere. The gold line is sunset; past the violet dashes, twilight has faded below civil twilight's end.</p>
+        </div>
+        <div class="places-layout">
+          <div class="globe-wrap">
+            <canvas id="globe" tabindex="0" role="img" aria-label="Globe of the Open Moon. Drag to turn it; select a pin or a point to choose a place."></canvas>
+            <div id="globe-tip" class="globe-tip" hidden></div>
+            <div class="globe-key">
+              <span><i class="swatch day"></i>Day</span>
+              <span><i class="swatch twilight"></i>Twilight</span>
+              <span><i class="swatch earthlit"></i>Earthlit night</span>
+              <span><i class="swatch night"></i>Night</span>
+            </div>
+          </div>
+          <div class="place-browser">
+            <div class="tabs" role="tablist" id="place-tabs"></div>
+            <ul class="place-list" id="place-list"></ul>
+            <article class="place-card" id="place-card"></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="band twilight" id="twilight" aria-labelledby="twilight-title">
+        <div class="section-head">
+          <p class="kicker">Why the light lingers</p>
+          <h2 id="twilight-title">Twilight that lasts for days</h2>
+          <p class="section-lede">The Open Moon's air presses down at 1.2 atmospheres and stretches more than six times taller than Earth's, holding about seven times as much air above each spot. Sunlight scattered high in that deep air keeps lighting the ground long after sunset, while the Sun itself sinks thirty times more slowly than on Earth.</p>
+        </div>
+        <div class="compare-controls">
+          <label for="sun-angle">Sun <strong id="sun-angle-value">6° below the horizon</strong></label>
+          <input type="range" id="sun-angle" min="-30" max="10" step="0.5" value="-6" />
+        </div>
+        <div class="compare-layout">
+          <figure class="dome-figure">
+            <canvas id="dome-moon" width="260" height="260"></canvas>
+            <figcaption><strong>Open Moon</strong><span id="dome-moon-text"></span></figcaption>
+          </figure>
+          <figure class="dome-figure">
+            <canvas id="dome-earth" width="260" height="260"></canvas>
+            <figcaption><strong>Earth</strong><span id="dome-earth-text"></span></figcaption>
+          </figure>
+          <figure class="fade-chart">
+            <svg id="fade-chart" viewBox="0 0 520 300" role="img" aria-label="Light after sunset on the Open Moon and on Earth"></svg>
+            <figcaption>Light on the ground after sunset at the equator, both skies clear. Both skies above share one camera exposure, looking up with the Sun's side at the bottom.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="band year" aria-labelledby="year-title">
+        <div class="section-head row">
+          <div>
+            <p class="kicker">The year</p>
+            <h2 id="year-title">A year of light</h2>
+            <p class="section-lede">Every column is one Earth day, every row one hour. Each lunar day drifts across the Earth calendar in a long slanted band.</p>
+          </div>
+          <div class="month-nav">
+            <button type="button" id="year-prev" class="glass-button icon" aria-label="Previous year">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12 5l-5 5 5 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <span id="year-label" class="month-label"></span>
+            <button type="button" id="year-next" class="glass-button icon" aria-label="Next year">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M8 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="year-wrap">
+          <div class="year-hours" aria-hidden="true"><span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>24:00</span></div>
+          <div class="year-plot">
+            <canvas id="year-canvas" role="img" aria-label="Light through the year"></canvas>
+            <div id="year-tip" class="globe-tip" hidden></div>
+            <div class="year-months" id="year-months" aria-hidden="true"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="band about" aria-labelledby="about-title">
+        <div class="section-head">
+          <p class="kicker">How this works</p>
+          <h2 id="about-title">Computed from the Terluna research</h2>
+        </div>
+        <div class="about-grid">
+          <div>
+            <h3>The sky and its light</h3>
+            <p>Every number on this page comes from Terluna's lighting model of the Open Moon: a deep, clear air of 1.2 atmospheres under the titania solar shield, with sunlight and Earthlight traced through it colour by colour. The Sun and Earth move on a lunar ephemeris checked against NASA JPL Horizons for 2000–2500.</p>
+            <p>The sky picture takes its colour and brightness from the solved sky atlas of the same air. The ground is open and level, and the sky is clear. Clouds, hills and weather are further layers of the research.</p>
+          </div>
+          <div>
+            <h3>Reading the picture</h3>
+            <p>A screen cannot show a hundred-thousand-fold range of light, so the picture follows an eye that adapts: bright days, glowing twilights, and nights where colour fades and stars appear. The sea's glitter, the ground's colour and the glare around the Sun are drawn to match the light, as illustrations.</p>
+            <p>Earth shows its real continents turning beneath a cloud picture from NASA's Blue Marble. Earth's actual weather on a given day will differ.</p>
+          </div>
+          <div>
+            <h3>Words and thresholds</h3>
+            <p><strong>Golden twilight</strong> lasts while the ground gets at least 2.98 lux, the light at the end of Earth's civil twilight in the same model, enough to work outside without lamps. <strong>Earthlit night</strong> is when Earth gives more light than the Sun's twilight. A full Moon on Earth gives at most about 0.3 lux.</p>
+            <p>For every value, unit and check, see the <a href="almanac.html" id="almanac-link-2">technical almanac</a>.</p>
+          </div>
+        </div>
+        <details class="credits">
+          <summary>Sources and credits</summary>
+          <ul id="credits-list"></ul>
+          <p class="mono" id="build-line"></p>
+        </details>
+      </section>
     </main>
-    <footer>
-      <a class="brand" href="https://github.com/dgoldman0/Terluna"
-        ><span class="brand-mark" aria-hidden="true">◒</span> TERLUNA</a
-      ><span>A clear-sky view of the Open Moon.</span
-      ><a href="https://github.com/dgoldman0/Terluna/tree/study/sea-appearance"
-        >Research & source ↗</a
-      >
+
+    <footer class="footer">
+      <span class="brand small">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 3a13 13 0 0 1 0 26z" fill="currentColor"/></svg>
+        TERLUNA
+      </span>
+      <span>Open Moon Skies · a calendar for another world</span>
+      <a href="https://github.com/dgoldman0/Terluna">Research and source</a>
     </footer>
+
+    <dialog id="place-dialog" class="place-dialog" aria-labelledby="place-dialog-title">
+      <form method="dialog" class="dialog-inner">
+        <div class="dialog-head">
+          <h2 id="place-dialog-title">Choose a place</h2>
+          <button class="glass-button icon" value="close" aria-label="Close">×</button>
+        </div>
+        <label class="visually-hidden" for="place-search">Search places</label>
+        <input id="place-search" type="search" placeholder="Search seas, coasts, landing sites…" autocomplete="off" />
+        <ul id="dialog-list" class="place-list dialog-list"></ul>
+      </form>
+    </dialog>
     <div id="toast" class="toast" role="status" hidden></div>
   </body>
 </html>
