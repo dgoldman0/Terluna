@@ -25,6 +25,7 @@ climate-coupled shorelines are the next layer.
 | [drainage.py](drainage.py) | Rivers and rain-fed lakes above sea level: runoff from the climate run routed over the 16 px/deg terrain, with fill-and-spill lakes set by each depression's water balance ([results/drainage.json](results/drainage.json); grid product in `products/`). `--climatology` takes another run's climate product, `--out` writes elsewhere |
 | [groundwater.py](groundwater.py) | A first estimate of the water the porous crust takes up, from GRAIL's porosity, beside the seas and lakes ([results/groundwater.json](results/groundwater.json)) |
 | [lunar_ephemeris.py](lunar_ephemeris.py) | The Earth's and the Sun's directions over the Moon and their distances: the truncated ELP-2000/82 lunar theory with the optical librations, checked against JPL Horizons ([tides_ephemeris_check.csv](tides_ephemeris_check.csv)) |
+| [Calendar ephemeris check](CALENDAR_EPHEMERIS.md) | Independent pinned JPL comparisons across 2000–2500 TT, with horizon timing and conditional clear-sky brightness error propagation |
 | [tides.py](tides.py) | The monthly tide of every sea, 2026–2045: equilibrium height with each sea's volume held and the water's self-attraction, constituents, ranges and stations ([results/tides.json](results/tides.json); grid product in `products/`) |
 | [tide_dynamics.py](tide_dynamics.py) | Linear shallow-water response of a sea to one tidal line, with the Moon's rotation and bed friction, and the sea's seiches |
 

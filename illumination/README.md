@@ -6,6 +6,7 @@ and earthlight.
 
 | Material | What it computes | Condition |
 |---|---|---|
+| [calendar/](calendar/) | Date-based topocentric Sun/Earth directions, a finite phase-dependent spectral Earth disk, and horizontal surface light through the full day and night | The static [light calendar](../visualization/light-calendar/) reads its versioned products; the date geometry is sampled against JPL across 2000–2500 |
 | [surface_light/](surface_light/) | Clear-sky direct and diffuse sunlight at the ground by wavelength (202–1000 nm): photosynthetic photons, colour, red:far-red, ultraviolet and ground brightness, for the design Moon, a 1.0-atm Moon and the Earth control | The atmosphere domain's radiation (1-nm ultraviolet-visible below 500 nm, line-by-line above) on its solved columns; two-stream, so light at Sun heights below about 20° is understated against the sky solver |
 | [sky/](sky/) | Spherical spectral sky radiance: established exponential-profile atlases, plus current solved-column skies for the shielded design Moon and Earth | The new product includes spectral and spatial checks, independent Monte Carlo and a global-energy ledger. [aerial.py](sky/aerial.py) runs the same integration from an observer's height and stops it at chosen distances: the light the air adds in front of a surface and the transmittance to it. Clouds, aerosols, polarization and refraction remain additional inputs |
 | [cloud_light/](cloud_light/) | Regional evening cloud radiance, self-shadowing and multiple scattering on saved CM1 fields, with a fixed-observer history, dark viewing openings and faint-twilight context | Explicit 2-D cloud extrusions and particle optics; regional 3-D structure, terrain, Earth-source spectra and perceptual response remain further inputs |
@@ -61,8 +62,8 @@ about 0.7 lux on the ground at midnight.
 
 ## Next work
 
-- A date-accurate ephemeris, the lunar equator's 1.54° tilt, refraction, and
-  horizon obstruction.
+- Move remaining mean-orbit consumers to the [date calendar](calendar/) geometry;
+  add refraction and horizon obstruction as distinct inputs.
 - Earthlight's own spectrum in the older products. The earthlit sky glow of the
   atlas and ephemeris.py's earthlight have the Earth's measured brightness with
   sunlight's colour; [earthlight/](earthlight/) gives the spectrum.

@@ -2,9 +2,9 @@
 PYTHON ?= python3
 export OPENBLAS_NUM_THREADS ?= 1
 
-.PHONY: check check-layers test-python test-js check-provenance check-ensemble build-immersion
+.PHONY: check check-layers test-python test-js test-calendar check-provenance check-ensemble build-immersion
 
-check: check-layers test-python test-js check-provenance check-ensemble
+check: check-layers test-python test-js test-calendar check-provenance check-ensemble
 
 # Imports respect the lanes (shared, domains, research, visualization, immersion).
 check-layers:
@@ -19,6 +19,10 @@ test-python:
 test-js:
 	cd immersion && npm test
 	node --test atmosphere/column/tests/ illumination/references/tests/ visualization/atmospheric-columns/tests/
+
+test-calendar:
+	$(PYTHON) visualization/light-calendar/build.py
+	node --test illumination/calendar/tests/*.test.mjs visualization/light-calendar/tests/*.test.mjs
 
 # Byte-pinned historical imports and the reproduced feasibility baseline.
 check-provenance:
