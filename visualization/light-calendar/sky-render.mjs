@@ -11,7 +11,7 @@ const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
 const STAR_PSF_SR = (1.5 * rad / 60) ** 2; // a point source spread over ~1.5 arcmin
 export const RAYLEIGH_TAU_550 = 0.757; // solved 1.2-atm column (illumination/sky)
 const GROUND_ALBEDO = 0.1; // the atlas and calendar ground albedo
-const SEA_SLOPE_VARIANCE = 0.02; // Cox–Munk mean square slope for a light breeze (display)
+const SEA_SLOPE_VARIANCE = 0.006; // Cox–Munk mean square slope for a light breeze (display)
 
 function bracket(a, x) {
   if (x <= a[0]) return [0, 0];
@@ -116,13 +116,24 @@ export const ENCODE = new Uint8ClampedArray(4097);
 for (let i = 0; i <= 4096; i++) ENCODE[i] = Math.round(255 * encode(i / 4096));
 
 export class ToneCurve {
-  // adaptLux: horizontal illuminance the eye is adapted to; boost: exposure factor.
-  constructor(adaptLux, boost = 1) {
-    const key = Math.max(adaptLux, 1e-7) / Math.PI;
-    this.sigma = Math.max(1.12 * Math.pow(key, 0.78) / boost, 0.004);
-    // Colour fades as the light falls toward rod vision.
-    this.saturation = clamp((Math.log10(key) + 1.7) / 2.4, 0.18, 1);
-    this.night = 1 - this.saturation;
+  // An eye-like exposure (display approximation): the average sky luminance in
+  // view maps to a display level that rises with the absolute light level, so
+  // days look bright, twilights glow and nights stay dark. Colour fades and
+  // shifts blue toward rod vision.
+  constructor(averageLuminance = 1) {
+    this.setAverage(averageLuminance);
+  }
+  setAverage(L) {
+    const Lavg = Math.max(L, 1e-7);
+    const target =
+      Lavg >= 1
+        ? clamp(0.5 + 0.1 * Math.log10(Lavg / 100), 0.3, 0.6)
+        : clamp(0.3 + 0.14 * Math.log10(Lavg), 0.06, 0.3);
+    this.contrast = 1.35;
+    this.sigma = Lavg * ((1 - target) / target) ** (1 / this.contrast);
+    this.saturation = clamp((Math.log10(Lavg) + 1.6) / 2.4, 0.25, 1);
+    this.night = clamp(1 - this.saturation, 0, 1);
+    return this;
   }
   // XYZ -> sRGB bytes into out[o..o+2].
   write(X, Y, Z, out, o) {
@@ -130,7 +141,7 @@ export class ToneCurve {
       out[o] = out[o + 1] = out[o + 2] = 0;
       return;
     }
-    const v = Y / (Y + this.sigma);
+    const v = 1 / (1 + (this.sigma / Y) ** (this.contrast ?? 1));
     let r = (M[0][0] * X + M[0][1] * Y + M[0][2] * Z) / Y,
       g = (M[1][0] * X + M[1][1] * Y + M[1][2] * Z) / Y,
       b = (M[2][0] * X + M[2][1] * Y + M[2][2] * Z) / Y;
@@ -138,17 +149,16 @@ export class ToneCurve {
     r = 1 + (r - 1) * s;
     g = 1 + (g - 1) * s;
     b = 1 + (b - 1) * s;
-    // Rod vision reads as a cool grey-blue on screen.
-    const n = this.night * 0.55;
-    r *= 1 - 0.28 * n;
-    g *= 1 - 0.08 * n;
-    b *= 1 + 0.32 * n;
+    // Rod vision: toward a moonlit blue.
+    const n = this.night * 0.8;
+    r = r * (1 - n) + 0.42 * n;
+    g = g * (1 - n) + 0.64 * n;
+    b = b * (1 - n) + 1.6 * n;
     r = Math.max(r, 0) * v;
     g = Math.max(g, 0) * v;
     b = Math.max(b, 0) * v;
     const m = Math.max(r, g, b);
     if (m > 1) {
-      // Soft shoulder: blend toward white instead of hue-shifting clips.
       const t = clamp((m - 1) / m, 0, 1);
       r = r / m + (1 - r / m) * t;
       g = g / m + (1 - g / m) * t;
@@ -159,7 +169,7 @@ export class ToneCurve {
     out[o + 2] = ENCODE[(clamp(b, 0, 1) * 4096) | 0];
   }
   value(Y) {
-    return Y / (Y + this.sigma);
+    return Y > 0 ? 1 / (1 + (this.sigma / Y) ** (this.contrast ?? 1)) : 0;
   }
 }
 
@@ -198,11 +208,10 @@ export function sceneFrom(state, frame, atlas, sectors) {
     sunBeamXY: atlas.beamXY(sunEl),
     earthBeamXY: atlas.beamXY(earthEl),
     zenithBeamXY: atlas.beamXY(90),
-    tone: new ToneCurve(Math.max(state.total, 1e-6), 1.35),
+    tone: new ToneCurve(Math.max(state.total, 1e-6) / Math.PI),
   };
 }
 
-const tmp = new Float64Array(3);
 // Sky XYZ for a view direction above the horizon.
 export function skyXYZ(scene, el, az, out) {
   out[0] = out[1] = out[2] = 0;
@@ -219,7 +228,7 @@ function fresnel(cosI) {
 }
 
 // Cox–Munk sun/Earth glint luminance for a downward view direction v.
-function glint(v, source, normalLux) {
+export function glint(v, source, normalLux) {
   if (source[2] <= 0 || normalLux <= 0) return 0;
   let hx = source[0] - v[0],
     hy = source[1] - v[1],
@@ -247,39 +256,43 @@ const toXYZ = (r, g, b, out) => {
 const horizonTmp = new Float64Array(3),
   skyTmp = new Float64Array(3);
 
+// Sea (1) to land (0) toward an azimuth, eased across about a degree at each
+// change between the 5° bins.
+function wetness(scene, az) {
+  const s = scene.sectors;
+  if (!s) return 0;
+  const f = (((az % 360) + 360) % 360) / 5 + 0.5,
+    i = Math.floor(f),
+    t = f - i;
+  const a = s[(((i - 1) % 72) + 72) % 72],
+    b = s[i % 72];
+  if (a === b) return a;
+  const e = clamp((t - 0.4) / 0.2, 0, 1);
+  return a + (b - a) * e * e * (3 - 2 * e);
+}
+const landTmp = new Float64Array(3);
+
 // Foreground XYZ for a view direction below the horizon.
 export function groundXYZ(scene, el, az, v, out) {
-  const sector = scene.sectors ? scene.sectors[((Math.round(az / 5) % 72) + 72) % 72] : 0;
+  const wet = wetness(scene, az);
   const horizon = skyXYZ(scene, 0.3, az, horizonTmp);
-  const fade = Math.exp(-Math.abs(el) / 0.45);
   const E = scene.state.total;
-  if (sector) {
+  out[0] = out[1] = out[2] = 0;
+  if (wet > 0) {
     // Sea: wave facets tilted by about 7° (display) reflect higher, dimmer sky
-    // with less than mirror reflectance; then the water body and glints.
+    // with less than mirror reflectance; then the water body.
     skyXYZ(scene, Math.min(90, -el + 12), az, out);
     const R = fresnel(Math.sin((-el + 7) * rad));
-    out[0] *= R;
-    out[1] *= R;
-    out[2] *= R;
     const body = (0.015 * E) / Math.PI;
-    out[0] += body * 0.8;
-    out[1] += body;
-    out[2] += body * 1.5;
-    const gs = glint(v, scene.sunDir, scene.sunNormalLux);
-    if (gs > 0) {
-      const c = xyToXYZ(scene.sunBeamXY[0], scene.sunBeamXY[1], gs);
-      out[0] += c[0];
-      out[1] += c[1];
-      out[2] += c[2];
-    }
-    const ge = glint(v, scene.earthDir, scene.earthNormalLux);
-    if (ge > 0) {
-      out[0] += ge * 0.92;
-      out[1] += ge;
-      out[2] += ge * 1.18;
-    }
-  } else {
-    // Level land with the model's ground albedo under the sky's light colour.
+    out[0] = out[0] * R + body * 0.8;
+    out[1] = out[1] * R + body;
+    out[2] = out[2] * R + body * 1.5;
+    const fade = Math.exp(-Math.abs(el) / 0.45);
+    for (let k = 0; k < 3; k++) out[k] = (out[k] * (1 - fade) + horizon[k] * fade) * wet;
+  }
+  if (wet < 1) {
+    // Level land with the model's ground albedo under the sky's light colour;
+    // distant land fades into the deep air.
     const sky = skyXYZ(scene, 60, az, skyTmp);
     const Ys = Math.max(sky[1], 1e-30);
     const X = sky[0] / Ys,
@@ -287,16 +300,11 @@ export function groundXYZ(scene, el, az, v, out) {
     const r = Math.max(0, M[0][0] * X + M[0][1] + M[0][2] * Z) * (SOIL[0] / SOIL_Y),
       g = Math.max(0, M[1][0] * X + M[1][1] + M[1][2] * Z) * (SOIL[1] / SOIL_Y),
       b = Math.max(0, M[2][0] * X + M[2][1] + M[2][2] * Z) * (SOIL[2] / SOIL_Y);
-    toXYZ(r, g, b, out);
-    const k = (GROUND_ALBEDO * E) / Math.PI / Math.max(out[1], 1e-30);
-    out[0] *= k;
-    out[1] *= k;
-    out[2] *= k;
+    toXYZ(r, g, b, landTmp);
+    const k = (GROUND_ALBEDO * E) / Math.PI / Math.max(landTmp[1], 1e-30);
+    const fade = Math.exp(-Math.abs(el) / 1.6);
+    for (let c = 0; c < 3; c++) out[c] += (landTmp[c] * k * (1 - fade) + horizon[c] * fade) * (1 - wet);
   }
-  // The distant ground fades into the horizon sky.
-  out[0] = out[0] * (1 - fade) + horizon[0] * fade;
-  out[1] = out[1] * (1 - fade) + horizon[1] * fade;
-  out[2] = out[2] * (1 - fade) + horizon[2] * fade;
   return out;
 }
 
@@ -362,10 +370,14 @@ export function earthImage(scene, texture, n, tone, options = {}) {
   const s = scene.sunDir;
   const L = frame.localToEarth;
   const pixels = new Float32Array(n * n * 4);
+  const litMask = new Float32Array(n * n);
   let sum = 0;
-  const tw = texture.width,
-    th = texture.height,
-    td = texture.data;
+  // Use the texture level whose resolution suits the disk (about two texels per pixel).
+  const levels = Array.isArray(texture) ? texture : [texture];
+  const level = levels.find((l) => l.width <= 4 * n) ?? levels[levels.length - 1];
+  const tw = level.width,
+    th = level.height,
+    td = level.data;
   for (let py = 0; py < n; py++)
     for (let px = 0; px < n; px++) {
       const x = ((px + 0.5) / n) * 2 - 1,
@@ -386,17 +398,29 @@ export function earthImage(scene, texture, n, tone, options = {}) {
       if (illum <= 0) continue;
       const ef = apply(L, nl);
       const [lon, lat] = lonLat(ef);
-      const tx = Math.min(tw - 1, Math.floor(((lon + 180) / 360) * tw)),
-        ty = Math.min(th - 1, Math.floor(((90 - lat) / 180) * th));
-      const t = (ty * tw + tx) * 4;
-      const cr = (td[t] / 255) ** 2.2,
-        cg = (td[t + 1] / 255) ** 2.2,
-        cb = (td[t + 2] / 255) ** 2.2;
+      const fx = ((lon + 180) / 360) * tw - 0.5,
+        fy = ((90 - lat) / 180) * th - 0.5;
+      const x0 = Math.floor(fx),
+        y0 = clamp(Math.floor(fy), 0, th - 2),
+        ax = fx - x0,
+        ay = clamp(fy - y0, 0, 1);
+      const xa = ((x0 % tw) + tw) % tw,
+        xb = (xa + 1) % tw;
+      const t00 = (y0 * tw + xa) * 4,
+        t01 = (y0 * tw + xb) * 4,
+        t10 = ((y0 + 1) * tw + xa) * 4,
+        t11 = ((y0 + 1) * tw + xb) * 4;
+      const texel = (o) =>
+        ((td[t00 + o] * (1 - ax) + td[t01 + o] * ax) * (1 - ay) + (td[t10 + o] * (1 - ax) + td[t11 + o] * ax) * ay) / 255;
+      const cr = texel(0) ** 2.2,
+        cg = texel(1) ** 2.2,
+        cb = texel(2) ** 2.2;
       // Soft terminator: the day side brightens over a few degrees.
       const lit = illum < 0.06 ? illum * (illum / 0.06) : illum;
       pixels[k] = cr * lit;
       pixels[k + 1] = cg * lit;
       pixels[k + 2] = cb * lit;
+      litMask[py * n + px] = Math.min(1, illum * 14);
       sum += (0.2126 * cr + 0.7152 * cg + 0.0722 * cb) * lit;
     }
   // Scale to the calendar's direct Earthlight: sum(L dOmega) = E_normal.
@@ -418,7 +442,7 @@ export function earthImage(scene, texture, n, tone, options = {}) {
     for (let i = 0; i < n * n; i++) if (pixels[i * 4] + pixels[i * 4 + 1] + pixels[i * 4 + 2] > 0) lit++;
     const meanLit = lit ? (K * sum) / lit : 0;
     const local = new ToneCurve(1);
-    local.sigma = Math.max(0.6 * meanLit, 1e-9);
+    local.sigma = Math.max(0.85 * meanLit, 1e-9);
     local.saturation = 1;
     local.night = 0;
     const contrast = meanLit / Math.max(behind[1], 1e-12);
@@ -442,7 +466,7 @@ export function earthImage(scene, texture, n, tone, options = {}) {
     out[i * 4] = tmpOut[0];
     out[i * 4 + 1] = tmpOut[1];
     out[i * 4 + 2] = tmpOut[2];
-    out[i * 4 + 3] = Math.round(a * 255);
+    out[i * 4 + 3] = Math.round(a * (options.local ? litMask[i] : 1) * 255);
   }
   return { data: out, size: n, luminanceScale: K, up, right, visibility };
 }
@@ -462,6 +486,31 @@ function beamTint(xy, ref) {
   const t = a.map((v, i) => Math.max(v, 0) / Math.max(b[i], 1e-6));
   const y = 0.2126 * t[0] + 0.7152 * t[1] + 0.0722 * t[2];
   return t.map((v) => v / y);
+}
+
+function hash2(x, y) {
+  let h = (x * 374761393 + y * 668265263) | 0;
+  h = Math.imul(h ^ (h >>> 13), 1274126177);
+  return ((h ^ (h >>> 16)) >>> 0) / 4294967295;
+}
+function valueNoise(x, y) {
+  const xi = Math.floor(x),
+    yi = Math.floor(y),
+    fx = x - xi,
+    fy = y - yi;
+  const u = fx * fx * (3 - 2 * fx),
+    w = fy * fy * (3 - 2 * fy);
+  const a = hash2(xi, yi),
+    b = hash2(xi + 1, yi),
+    c = hash2(xi, yi + 1),
+    d = hash2(xi + 1, yi + 1);
+  return a + (b - a) * u + (c - a) * w + (a - b - c + d) * u * w;
+}
+// Two rotated octaves give wave-like, unblocky ripples.
+function ripple(x, y) {
+  const a = valueNoise(0.8 * x + 0.6 * y, -0.6 * x + 0.8 * y);
+  const b = valueNoise(1.9 * x - 0.5 * y + 7.3, 0.5 * x + 1.9 * y + 3.1);
+  return 0.62 * a + 0.38 * b;
 }
 
 // ---------- Stars ----------
@@ -525,40 +574,129 @@ export class SkyView {
     const { canvas, ctx, low, camera } = this;
     const W = canvas.width,
       H = canvas.height;
-    const b = camera.basis();
     const img = this.lowImage,
       data = img.data,
       w = low.width,
       h = low.height;
-    const xyz = new Float64Array(3),
-      tone = scene.tone;
-    const v = [0, 0, 0];
     const sx = W / w,
       sy = H / h;
-    for (let j = 0; j < h; j++) {
+    if (!this.xyz || this.xyz.length !== w * h * 3) this.xyz = new Float32Array(w * h * 3);
+    const buf = this.xyz,
+      xyz = new Float64Array(3),
+      v = [0, 0, 0];
+    let logSum = 0,
+      count = 0,
+      logAll = 0;
+    for (let j = 0; j < h; j++)
       for (let i = 0; i < w; i++) {
-        camera.ray((i + 0.5) * sx, (j + 0.5) * sy, W, H, b, v);
+        camera.ray((i + 0.5) * sx, (j + 0.5) * sy, W, H, null, v);
         const el = Math.asin(v[2]) / rad;
         const az = ((Math.atan2(v[0], v[1]) / rad) + 360) % 360;
         if (el >= 0) skyXYZ(scene, el, az, xyz);
         else groundXYZ(scene, el, az, v, xyz);
-        tone.write(xyz[0], xyz[1], xyz[2], data, (j * w + i) * 4);
-        data[(j * w + i) * 4 + 3] = 255;
+        const k = (j * w + i) * 3;
+        buf[k] = xyz[0];
+        buf[k + 1] = xyz[1];
+        buf[k + 2] = xyz[2];
+        const l = Math.log(Math.max(xyz[1], 1e-9));
+        logAll += l;
+        if (el >= 0) {
+          logSum += l;
+          count++;
+        }
       }
+    // Exposure from the sky in view (display approximation).
+    const tone = scene.tone;
+    tone.setAverage(Math.exp(count ? logSum / count : logAll / (w * h)));
+    for (let k = 0, n = w * h; k < n; k++) {
+      tone.write(buf[k * 3], buf[k * 3 + 1], buf[k * 3 + 2], data, k * 4);
+      data[k * 4 + 3] = 255;
     }
     this.lowCtx.putImageData(img, 0, 0);
     ctx.imageSmoothingEnabled = true;
     ctx.imageSmoothingQuality = "high";
     ctx.drawImage(low, 0, 0, W, H);
-    this.drawStars(scene, b, W, H);
-    this.clipAboveHorizon(b, W, H, () => {
-      this.drawSun(scene, b, W, H);
-      this.drawEarth(scene, b, W, H);
+    this.drawGlints(scene, W, H);
+    this.drawStars(scene, null, W, H);
+    this.clipAboveHorizon(null, W, H, () => {
+      this.drawSun(scene, null, W, H);
+      this.drawEarth(scene, null, W, H);
     });
     this.positions = {
-      sun: camera.project(scene.sunDir, W, H, b),
-      earth: camera.project(scene.earthDir, W, H, b),
+      sun: camera.project(scene.sunDir, W, H),
+      earth: camera.project(scene.earthDir, W, H),
     };
+  }
+  // Sun and Earth glitter on the sea, at full resolution with a ripple texture
+  // (display: Cox–Munk facets with a hash-noise sparkle).
+  drawGlints(scene, W, H) {
+    if (!scene.sectors || !scene.sectors.some((x) => x)) return;
+    const cam = this.camera,
+      s = cam.scale(W),
+      hy = Math.ceil(cam.horizonY(H, W));
+    if (hy >= H) return;
+    const sources = [
+      [scene.sunDir, scene.sunNormalLux, scene.sunEl, scene.sunAz, xyToRGB(scene.sunBeamXY)],
+      [scene.earthDir, scene.earthNormalLux, scene.earthEl, scene.earthAz, [0.8, 0.9, 1.1]],
+    ].filter((g) => g[1] > 0 && g[2] > 0.2);
+    if (!sources.length) return;
+    const y0 = Math.max(0, hy),
+      rows = H - y0;
+    const out = this.ctx.createImageData(W, rows);
+    const d = out.data,
+      buf = this.xyz,
+      lw = this.low.width,
+      lh = this.low.height;
+    const tone = scene.tone,
+      v = [0, 0, 0],
+      step = this.fast ? 3 : 1;
+    for (const [dir, lux, , az, colour] of sources) {
+      const m = Math.max(...colour);
+      const c = colour.map((x) => Math.round(255 * (0.45 + 0.55 * Math.min(1, Math.max(0, x / m)))));
+      const cx = W / 2 + ((((az - cam.yaw) % 360) + 540) % 360 - 180) * s;
+      const half = Math.min(W, 16 * s);
+      const xa = Math.max(0, Math.floor(cx - half)),
+        xb = Math.min(W, Math.ceil(cx + half));
+      for (let y = y0; y < H; y += step) {
+        for (let x = xa; x < xb; x += step) {
+          cam.ray(x + 0.5, y + 0.5, W, H, null, v);
+          if (v[2] >= 0) continue;
+          const g = glint(v, dir, lux);
+          if (g <= 0) continue;
+          const wet = wetness(scene, Math.atan2(v[0], v[1]) / rad);
+          if (wet < 0.05) continue;
+          // Ripples on the sea plane seen from 2 m: sparse bright facets.
+          const el = -Math.asin(v[2]);
+          const dist = 2 / Math.tan(el);
+          const lateral = dist * Math.atan2(v[0] * dir[1] - v[1] * dir[0], v[0] * dir[0] + v[1] * dir[1]);
+          const n = ripple(lateral / 0.3, dist / 0.4);
+          const footprint = (dist * dist) / 2 / (s / rad);
+          const mix = clamp(footprint / 1.5, 0, 1);
+          const n3 = n * n * n;
+          const sparkle = (0.04 + 6 * n3 * n3) * (1 - mix) + mix;
+          const li = Math.min(lw - 1, Math.floor((x / W) * lw)),
+            lj = Math.min(lh - 1, Math.floor((y / H) * lh));
+          const base = buf[(lj * lw + li) * 3 + 1];
+          const a = clamp(tone.value(base + g * sparkle) - tone.value(base), 0, 1) * wet;
+          if (a < 0.01) continue;
+          for (let yy = y; yy < Math.min(H, y + step); yy++)
+            for (let xx = x; xx < Math.min(xb, x + step); xx++) {
+              const k = ((yy - y0) * W + xx) * 4;
+              const alpha = 1 - (1 - d[k + 3] / 255) * (1 - a);
+              d[k] = c[0];
+              d[k + 1] = c[1];
+              d[k + 2] = c[2];
+              d[k + 3] = Math.round(alpha * 255);
+            }
+        }
+      }
+    }
+    if (!this.glintCanvas) this.glintCanvas = document.createElement("canvas");
+    const gc = this.glintCanvas;
+    gc.width = W;
+    gc.height = rows;
+    gc.getContext("2d").putImageData(out, 0, 0);
+    this.ctx.drawImage(gc, 0, y0);
   }
   clipAboveHorizon(b, W, H, draw) {
     const { ctx } = this;
@@ -611,17 +749,19 @@ export class SkyView {
     const rgb = xyToRGB([x, y]).map((v) => Math.max(v, 0));
     const m = Math.max(...rgb);
     const c = rgb.map((v) => Math.round(255 * Math.pow(v / m, 0.45)));
-    // Glare (display): a soft bloom scaled with the beam against the sky.
-    const glare = clamp(Math.log10(1 + scene.sunNormalLux / Math.max(scene.state.total, 1)) / 1.2, 0.15, 1);
-    const g = ctx.createRadialGradient(p[0], p[1], r * 0.5, p[0], p[1], r * 2 + ppd * 7 * glare);
-    g.addColorStop(0, `rgba(${c[0]},${c[1]},${c[2]},${0.75 * glare})`);
-    g.addColorStop(0.25, `rgba(${c[0]},${c[1]},${c[2]},${0.22 * glare})`);
+    // Glare (display): a bloom that grows with the beam's strength against the sky.
+    const glare = clamp(Math.log10(1 + scene.sunNormalLux / Math.max(scene.state.total, 1)) / 0.9, 0.3, 1);
+    const R = r * 2 + ppd * 9 * glare;
+    const g = ctx.createRadialGradient(p[0], p[1], r * 0.6, p[0], p[1], R);
+    g.addColorStop(0, `rgba(255,${Math.min(255, c[1] + 50)},${Math.min(255, c[2] + 90)},${0.95 * glare})`);
+    g.addColorStop(0.12, `rgba(${c[0]},${c[1]},${c[2]},${0.55 * glare})`);
+    g.addColorStop(0.4, `rgba(${c[0]},${c[1]},${c[2]},${0.16 * glare})`);
     g.addColorStop(1, `rgba(${c[0]},${c[1]},${c[2]},0)`);
     ctx.save();
     ctx.globalCompositeOperation = "lighter";
     ctx.fillStyle = g;
     ctx.beginPath();
-    ctx.arc(p[0], p[1], r * 2 + ppd * 7 * glare, 0, Math.PI * 2);
+    ctx.arc(p[0], p[1], R, 0, Math.PI * 2);
     ctx.fill();
     ctx.restore();
     ctx.fillStyle = `rgb(${255},${Math.min(255, c[1] + 40)},${Math.min(255, c[2] + 60)})`;
@@ -657,37 +797,10 @@ export class SkyView {
     ctx.translate(p[0], p[1]);
     ctx.rotate(angle);
     ctx.imageSmoothingEnabled = true;
-    // The lit face is added onto the sky as light.
-    ctx.globalCompositeOperation = "lighter";
+    // The lit face, exposed on its own; the night side shows the sky.
     ctx.globalAlpha = img.visibility;
     ctx.drawImage(ec, -D / 2, -D / 2, D, D);
     ctx.restore();
     this.earthScreen = { x: p[0], y: p[1], d: D, angle };
   }
-}
-
-// ---------- Fisheye dome for the twilight comparison ----------
-export function renderDome(canvas, atlas, sunEl, tone) {
-  const ctx = canvas.getContext("2d");
-  const n = canvas.width;
-  const img = ctx.createImageData(n, n);
-  const slice = atlas.slice(sunEl);
-  const xyz = new Float64Array(3);
-  const R = n / 2;
-  for (let j = 0; j < n; j++)
-    for (let i = 0; i < n; i++) {
-      const x = (i + 0.5 - R) / R,
-        y = (j + 0.5 - R) / R,
-        r = Math.hypot(x, y);
-      const k = (j * n + i) * 4;
-      if (r > 1) continue;
-      const el = 90 * (1 - r);
-      // Sun's azimuth at the bottom of the dome.
-      const az = (Math.atan2(x, y) / rad + 360) % 360;
-      xyz[0] = xyz[1] = xyz[2] = 0;
-      atlas.sample(slice, el, az, 1, xyz);
-      tone.write(xyz[0], xyz[1], xyz[2], img.data, k);
-      img.data[k + 3] = Math.round(255 * clamp((1 - r) * R, 0, 1));
-    }
-  ctx.putImageData(img, 0, 0);
 }

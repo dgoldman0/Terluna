@@ -39,7 +39,7 @@ def check_product(path,schema):
 
 
 PAGES=['index.html','explorer.css','explorer.mjs','explorer-worker.mjs','sky-frame.mjs','sky-render.mjs',
-       'globe.mjs','words.mjs','almanac.html','almanac.css','almanac.mjs','worker.mjs']
+       'words.mjs','almanac.html','almanac.css','almanac.mjs','worker.mjs']
 
 
 def build(destination=None,require_assets=False):
@@ -59,10 +59,10 @@ def build(destination=None,require_assets=False):
         record=explorer_assets.build(destination)
         metadata['explorer_assets']=record
     except explorer_assets.MissingSource as missing:
-        # The almanac still builds; the explorer page needs these display assets.
+        # The almanac still builds; the public sky page needs these display assets.
         if require_assets:raise
         metadata['explorer_assets']=dict(missing=str(missing))
-        print('Explorer assets not built; missing',missing)
+        print('Sky page assets not built; missing',missing)
     (destination/'build.json').write_text(json.dumps(metadata,indent=2)+'\n')
     print('Built static calendar:',destination)
 

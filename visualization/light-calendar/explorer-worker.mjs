@@ -1,14 +1,14 @@
-// Calculations for the explorer page: spans of samples with their events,
-// month calendars and a year of hourly light. All light comes from the shared
-// evaluator; this module samples it and finds crossings and turning points.
+// Calculations for the public sky page: a span of hourly samples with its
+// sunrises, sunsets, twilight thresholds, Earth phases and eclipses. All light
+// comes from the shared evaluator; this module samples it and finds crossings
+// and turning points.
 import {
   stateAt,
   geometry,
   julianDate,
   crossing,
-  DAY_MS,
 } from "./model/evaluator.mjs";
-import { calculate, findCrossings } from "./worker.mjs";
+import { findCrossings } from "./worker.mjs";
 
 export const PRACTICAL_DUSK_LUX = 2.98;
 const HOUR = 3600000;
@@ -166,45 +166,6 @@ export function span(settings, start, end, step = HOUR, order = 8) {
   return { start, end, step, samples, events };
 }
 
-// The Earth calendar month with the explorer's day markers.
-export function month(settings) {
-  const result = calculate(settings, astronomy, transfer);
-  const extra = span(
-    settings,
-    result.start - 2 * HOUR,
-    result.end + 2 * HOUR,
-    HOUR,
-    6,
-  );
-  const events = extra.events.filter(
-    (e) => e.ms >= result.start && e.ms < result.end,
-  );
-  for (const day of result.daily) {
-    day.events = events.filter((e) => e.ms >= day.ms && e.ms < day.ms + DAY_MS);
-    day.regimes = result.series
-      .filter((r) => r.ms >= day.ms && r.ms < day.ms + DAY_MS)
-      .filter((_, i) => i % 2 === 0)
-      .map(regimeCode);
-  }
-  return { ...result, markers: events };
-}
-
-// Hourly light for one Earth year.
-export function year(settings) {
-  const start = Date.UTC(settings.year, 0, 1),
-    end = Date.UTC(settings.year + 1, 0, 1);
-  const days = Math.round((end - start) / DAY_MS);
-  const total = new Float32Array(days * 24),
-    regime = new Uint8Array(days * 24);
-  for (let d = 0; d < days; d++)
-    for (let h = 0; h < 24; h++) {
-      const s = state(start + d * DAY_MS + (h + 0.5) * HOUR, settings, 4);
-      total[d * 24 + h] = s.total;
-      regime[d * 24 + h] = regimeCode(s);
-    }
-  return { start, days, total, regime };
-}
-
 export function setProducts(a, t) {
   astronomy = a;
   transfer = t;
@@ -217,12 +178,8 @@ if (typeof self !== "undefined" && typeof self.postMessage === "function")
         setProducts(data.astronomy, data.transfer);
         return;
       }
-      let result;
-      if (data.type === "span")
-        result = span(data.settings, data.start, data.end, data.step, data.order);
-      else if (data.type === "month") result = month(data.settings);
-      else if (data.type === "year") result = year(data.settings);
-      else throw Error(`Unknown request ${data.type}`);
+      if (data.type !== "span") throw Error(`Unknown request ${data.type}`);
+      const result = span(data.settings, data.start, data.end, data.step, data.order);
       self.postMessage({ id: data.id, type: data.type, result });
     } catch (error) {
       self.postMessage({ id: data.id, type: data.type, error: error.message });
