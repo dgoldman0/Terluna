@@ -72,7 +72,7 @@ CACHE = HERE / 'cache' / 'limb_heat'
 SCHEMA = 'terluna.atmosphere.limb-heat/1'
 CASES = {f'{shield}_{treatment}': (shield, treatment) for shield in loss.SHIELDS for treatment in loss.TREATMENTS}
 DESIGN = dict(shield_distance_m=20.0e6, protected_radii=4, formation_margin_m=50.0, base_pa=loss.BASE_PA,
-              band_nm=175.0, crossover_nm=25.0, leaks=[3e-5, 2e-4],
+              band_nm=175.0, crossover_nm=25.0, gap_transmissions=[3e-5, 2e-4],
               films=dict(window=[1.0, 10.0], annulus_2_um=[0.1, 2.0], annulus_4_um=[0.1, 4.0]),
               disk_rays=64, limb_rays=360, edge_rays=48, limb_first_km=0.5, exosphere_points=240, outer_radii=7.0,
               profile_heats_W_m2=[0., 1e-6, 2e-6, 3e-6, 4e-6, 5e-6, 6.5e-6, 8e-6, 1e-5, 1.25e-5, 1.5e-5, 2e-5,
@@ -91,7 +91,7 @@ CYCLE_MAXIMA = {'cycle_23': 'fism2_xray_2001-05_2002-04.csv', 'cycle_24': 'fism2
                 'cycle_25': 'fism2_xray_2024-04_2025-03.csv'}
 WHI = 'whi2008_ref_solar_irradiance_ver2.dat'
 # 'open_flat' is the open band with its X-rays at the ultraviolet's solar-maximum factor, as escape.leakage_heat
-# scales a leak; 'open' gives them their own factor, as escape.film_heat does.
+# scales the band a filter passes; 'open' gives them their own factor, as escape.film_heat does.
 SOURCES = ('window', 'annulus_2_um', 'annulus_4_um', 'open', 'open_flat')
 # The films an annulus could carry: the two light films and the climate window's own stack.
 FILMS = {'annulus_2_um': 'annulus_2_um', 'annulus_4_um': 'annulus_4_um', 'window_stack': 'window'}
@@ -359,14 +359,16 @@ def summarise(profile, shells, ground, incident, names, zone_names):
 
 def escape_count(w, f, films):
     """The escape model's count: a quarter of the band's light through each film, all of it above the base
-    (escape.film_heat's rule); escape.film_heat itself for the window; and escape.leakage_heat for a leak."""
+    (escape.film_heat's rule); escape.film_heat itself for the window; and escape.leakage_heat for the whole band
+    over the disk."""
     step = np.gradient(w)
     eff = escape.HEATING_EFFICIENCY
     out = {name: {activity: float(.25 * eff * np.sum(f * t * step * np.where(w < 10.0, act['xray'], act['uv'])))
                   for activity, act in loss.ACTIVITY.items()} for name, t in films.items()}
     out['window_film_heat'] = {activity: escape.film_heat(act['uv'], act['xray'])
                                for activity, act in loss.ACTIVITY.items()}
-    out['leak'] = {activity: escape.leakage_heat(1.0, activity=act['uv']) for activity, act in loss.ACTIVITY.items()}
+    out['band_over_disk'] = {activity: escape.leakage_heat(1.0, activity=act['uv'])
+                             for activity, act in loss.ACTIVITY.items()}
     return out
 
 
@@ -426,8 +428,8 @@ def tables(case, rays, sigma, names, weights, key):
 
 def parts(entries, film, activity, glow, gap_source='open', xray=None):
     """Heat (W/m^2) each part of the light leaves in the thermosphere against the heat that swells the air: the
-    window stack, the annulus film, sunlight beyond the aperture, the sky's glow, and a leak of the whole band
-    through gaps over the aperture, per unit of leak.
+    window stack, the annulus film, sunlight beyond the aperture, the sky's glow, and the whole band through gaps
+    over the aperture, per unit of transmission.
 
     xray: at solar maximum, a factor on the X-rays below 10 nm in place of the convention's, or one for each source
     (window, the films, open). Each table is linear in the spectrum, so the X-rays' part of a solar-maximum value is
@@ -469,12 +471,12 @@ def cycle_factors():
     return out
 
 
-def first_state(q, p, leak):
+def first_state(q, p, gaps):
     """The first heat, counting up from zero, at which the heat the swollen air takes equals the heat that swells it;
     None if the heat runs past the largest profile heat."""
     fine = np.linspace(0., q[-1], 4001)
     taken = sum(np.interp(fine, q, p[k]) for k in ('window', 'annulus', 'beyond_aperture', 'glow'))
-    gap = leak * np.interp(fine, q, p['gap_unit'])
+    gap = gaps * np.interp(fine, q, p['gap_unit'])
     excess = taken + gap - fine
     settled = np.nonzero(excess <= 0)[0]
     if not len(settled):
@@ -512,7 +514,8 @@ def heat_for_loss(cfg, budget, ceiling):
 
 
 def allowed_traced(q, p, heat):
-    """Largest leak whose state stays at or below the heat; None if the films, beyond-aperture light and glow alone
+    """Largest transmission through gaps whose state stays at or below the heat; None if the films, beyond-aperture
+    light and glow alone
     pass it."""
     state = first_state(q, p, 0.)
     if state is None or state > heat:
@@ -537,26 +540,27 @@ def counted_heats(case, film, activity, counts, glow):
     return dict(o1_count=o1, escape_rule=rule)
 
 
-def state_row(cfg, low, q, p, leak):
+def state_row(cfg, low, q, p, gaps):
     """A scenario's traced state, its parts and its loss, with the loss if the heat lay as low as the column's 'low'
     shape puts it."""
-    state = first_state(q, p, leak)
+    state = first_state(q, p, gaps)
     if state is None:
         return dict(status='runaway_beyond_profile_heats', beyond_W_m2=float(q[-1]))
     shares = {k: float(np.interp(state, q, v)) for k, v in p.items() if k != 'gap_unit'}
-    shares['gaps'] = float(leak * np.interp(state, q, p['gap_unit']))
+    shares['gaps'] = float(gaps * np.interp(state, q, p['gap_unit']))
     bound = molecular_loss(low, state)
     kept = ('status', 'exobase_temperature_k', 'molecular_loss_kg_s')
     return dict(molecular_loss(cfg, state), parts_W_m2=shares, low_shape={k: bound[k] for k in kept if k in bound})
 
 
 def analyse(case, entries, counts, cycle):
-    """Scenario states, their losses, and the leak each budget allows, traced and counted; at solar maximum also with
+    """Scenario states, their losses, and the gap transmission each budget allows, traced and counted; at solar
+    maximum also with
     each source's X-rays at FISM2's factor for each of the last three maxima."""
     cfg = case_config(case)
     low = dataclasses.replace(cfg, heating_shape='low')
     glow = glow_heat(case)
-    unit = counts['leak']
+    unit = counts['band_over_disk']
     scenarios, budgets = {}, []
     for film in FILMS:
         for activity in loss.ACTIVITY:
@@ -564,15 +568,15 @@ def analyse(case, entries, counts, cycle):
             fixed = counted_heats(case, film, activity, counts, glow)
             periods = list(cycle) if activity == 'solar_maximum' else []
             scaled = {k: parts(entries, film, activity, glow, xray=cycle[k]['sources'])[1] for k in periods}
-            for leak in [0.] + DESIGN['leaks']:
-                row = dict(film=film, activity=activity, leak=leak, traced=state_row(cfg, low, q, p, leak))
+            for gaps in [0.] + DESIGN['gap_transmissions']:
+                row = dict(film=film, activity=activity, gap_transmission=gaps, traced=state_row(cfg, low, q, p, gaps))
                 for count, heat in fixed.items():
-                    row[count] = molecular_loss(cfg, heat + leak * unit[activity])
-                scenarios[f'{film}_{activity}_gaps_{leak:g}'] = row
+                    row[count] = molecular_loss(cfg, heat + gaps * unit[activity])
+                scenarios[f'{film}_{activity}_gaps_{gaps:g}'] = row
                 for period, scaled_parts in scaled.items():
-                    scenarios[f'{film}_{activity}_fism2_{period}_gaps_{leak:g}'] = dict(
-                        film=film, activity=activity, leak=leak, xrays='fism2_' + period,
-                        traced=state_row(cfg, low, q, scaled_parts, leak))
+                    scenarios[f'{film}_{activity}_fism2_{period}_gaps_{gaps:g}'] = dict(
+                        film=film, activity=activity, gap_transmission=gaps, xrays='fism2_' + period,
+                        traced=state_row(cfg, low, q, scaled_parts, gaps))
             flat = parts(entries, film, activity, glow, gap_source='open_flat')[1]
             for budget in DESIGN['budgets_kg_s']:
                 heat = heat_for_loss(cfg, budget, float(q[-1]))
@@ -585,8 +589,8 @@ def analyse(case, entries, counts, cycle):
                     if row['traced'] and row['o1_count']:
                         row['traced_over_o1_count'] = row['traced'] / row['o1_count']
                     row['traced_fism2'] = {k: allowed_traced(q, scaled[k], heat) for k in periods}
-                    row['gap_heat_over_leak_count'] = float(np.interp(heat, q, p['gap_unit']) / unit[activity])
-                    row['gap_heat_over_leak_count_xrays_at_uv_factor'] = float(np.interp(heat, q, flat['gap_unit'])
+                    row['gap_heat_over_disk_count'] = float(np.interp(heat, q, p['gap_unit']) / unit[activity])
+                    row['gap_heat_over_disk_count_xrays_at_uv_factor'] = float(np.interp(heat, q, flat['gap_unit'])
                                                                                / unit[activity])
                 budgets.append(row)
     return dict(glow_heat_quiet_W_m2=glow, scenarios=scenarios, budgets=budgets)
@@ -650,17 +654,19 @@ def main(argv=None) -> int:
         reading_rule=(
             'Heats are W per m^2 of lunar surface, global means at the escape model\'s heating efficiency, as the '
             'thermal column takes them; "thermosphere" is the heat between the 0.3 Pa base and the exobase, which the '
-            'column takes, and "exosphere_absorbed" the light absorbed above the exobase, which it does not. Leaks '
-            'are grey shares of the band below 175 nm. A traced state puts the window stack on the window, a film '
-            'on the annulus, the leak over the whole aperture, unfiltered sunlight beyond it and the sky\'s glow on '
+            'column takes, and "exosphere_absorbed" the light absorbed above the exobase, which it does not. '
+            'Transmissions through gaps are grey shares of the band below 175 nm. A traced state puts the window '
+            'stack on the window, a film on the annulus, the gaps\' light over the whole aperture, unfiltered sunlight '
+            'beyond it and the sky\'s glow on '
             'the air, and is the first heat from zero that the air it swells returns. "o1_count" is the loss '
             'response\'s count, from which O1\'s allowed transmissions were derived; "escape_rule" applies that '
-            'count to this module\'s films; "gap_heat_over_leak_count_xrays_at_uv_factor" scales the leak\'s X-rays '
+            'count to this module\'s films; "gap_heat_over_disk_count_xrays_at_uv_factor" scales the gaps\' X-rays '
             'as the loss response does. "fism2" rows and "traced_fism2" give each source\'s X-rays below 10 nm '
             'the factor FISM2 finds between the WHI quiet week and the year around each of the last three solar '
             'maxima ("xray_cycle"), in place of the convention\'s 100. "low_shape" is the loss at the same heat with '
             'the column\'s low heating shape. "window_stack" puts the climate window\'s stack on the annulus too. A '
-            'budget row\'s leaks are the largest grey leaks whose molecular loss with Earth\'s tide stays within '
+            'budget row\'s transmissions are the largest grey transmissions through gaps whose molecular loss with '
+            'Earth\'s tide stays within '
             'the budget, the solar wind and the exosphere step\'s losses not deducted.'),
         design=DESIGN, escape_count=counts, xray_cycle=cycle, cases=cases)
     OUT.write_text(json.dumps(product, indent=1) + '\n')

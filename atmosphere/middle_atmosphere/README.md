@@ -285,8 +285,8 @@ settles to and the gap transmission each budget allows, and writes
 [METHODS.md](METHODS.md).
 
 - **Gaps heat the thermosphere 2.5–4.2 times the escape model's count.** A
-  grey leak over the aperture lights the air above the limb as well as the
-  disk, and the tall air takes the extreme ultraviolet along slant paths out
+  grey transmission through gaps over the aperture lights the air above the
+  limb as well as the disk, and the tall air takes the extreme ultraviolet along slant paths out
   to near the exobase. Around the quiescent air the factor is 2.5 behind the
   titania stack with collisional upper air, 2.7 in LTE, 3.2 with all
   near-infrared heating and 3.8–4.2 behind the 200-nm edge. As the heat

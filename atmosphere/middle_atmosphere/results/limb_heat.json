@@ -3,7 +3,7 @@
  "producer": {
   "domain": "atmosphere",
   "files": {
-   "atmosphere/middle_atmosphere/limb_heat.py": "46e780610be47c0a",
+   "atmosphere/middle_atmosphere/limb_heat.py": "277f52db9a38d187",
    "atmosphere/middle_atmosphere/escape.py": "a0e8bf6b30c2cb13",
    "atmosphere/thermal_column.py": "ca108980727d63d9",
    "atmosphere/loss_response/model.py": "92de5c5cb029ac30",
@@ -52,7 +52,7 @@
   }
  },
  "evidence": "    python -m atmosphere.middle_atmosphere.limb_heat      # writes results/limb_heat.json The escape model counts the heat of sunlight below 175 nm as a global mean: a quarter of what reaches the lunar disk, all of it absorbed above the base (escape.film_heat and escape.leakage_heat), and the loss response derives O1's allowed transmissions with that count. The shield's aperture is wider than the disk. Its climate window covers the disk; its annulus, out to four lunar radii, covers rays that pass the limb at tangent altitudes up to about 5,200 km, and the Open Moon's air is tall, its exobase two to four lunar radii from the centre. Those rays cross long slant paths through the upper air and give up their energy where the column along them reaches the inverse of the absorption cross section. This module traces parallel sunlight through a spherically symmetric atmosphere and tallies the energy each ray leaves in every shell, below the base (0.3 Pa), in the thermosphere between the base and the exobase and in the exosphere above it, for the light that passes each zone of the aperture: - the climate window, 1 um of titania on 10 um of silica with its coating layers, over the disk and its margin; - the annulus films, 0.1 um of titania on 2 or 4 um of silica with the same coating layers, or the window stack; - light that bypasses the films through gaps, a grey share of the band over the whole protected region; - unfiltered sunlight beyond the aperture. A ray's zone follows from where it crosses the shield (a ring screen near 20,000 km): the solar disk's angular radius smears that crossing by the shield's distance times that radius, the margin the window is sized for. The atmosphere and its heat follow the loss response (atmosphere/loss_response/model.py): its six cases (the titania-stack and 200-nm-edge middle atmospheres at 1.2 atm under three treatments of the upper air), its column configuration, the sky's Lyman-alpha glow, solar maximum as 2.5 times the quiet Sun's ultraviolet and 100 times its X-rays below 10 nm, and Earth's tide on the molecular loss. The films are the design's in all six; the 200-nm-edge atmospheres stand for a warmer middle atmosphere. The films pass only X-rays near 1 nm, so their heat at solar maximum follows the X-rays' solar-cycle factor. FISM2's daily spectra (Chamberlin et al. 2020) give that factor for each film's band and for the whole band below 10 nm, as the year around each of the last three solar maxima over the WHI 2008 quiet week, and the states are also given with those factors. The middle atmosphere's profile (temperature, pressure and atomic oxygen, with the dry air of radiative_convective.thermodynamics) runs from the surface to the base, the thermal column's solution (molecular N2 and O2 at their fixed ratio) from there to the exobase, shifted to start at the profile's base height, and the loss response's exosphere (Chamberlain's ballistic and escaping populations, absorption.exosphere_density) beyond it, out past the aperture. Absorption cross sections: CXRO atomic scattering factors below 25 nm (independent atoms), and the Leiden database's photoabsorption continua from 25 nm (Heays, Bosman and van Dishoeck 2017); argon, CO2 and the discrete N2 bands are left out. The spectrum is the WHI 2008 quiet Sun. The thermal column takes the heat deposited between the base and the exobase, at the escape model's heating efficiency, as a global mean and with its own heating shape. Light absorbed in the exosphere makes ions and photoelectrons in collisionless gas, which the exosphere step counts, and does not heat the column. The heat and the atmosphere it swells are solved together: a scenario's state is the first heat, counting up from zero, at which the heat the swollen atmosphere takes equals the heat that swells it. The traced light lands between the column's 'low' and 'middle' heating shapes in mean log-pressure depth, at about the depth of the disk's own light, so each state's loss is also given with the 'low' shape as a lower bound. The limb's light heats a ring of upper air over the terminator, which the one-dimensional column spreads over the globe; the circulation that would carry it is not modelled. ",
- "reading_rule": "Heats are W per m^2 of lunar surface, global means at the escape model's heating efficiency, as the thermal column takes them; \"thermosphere\" is the heat between the 0.3 Pa base and the exobase, which the column takes, and \"exosphere_absorbed\" the light absorbed above the exobase, which it does not. Leaks are grey shares of the band below 175 nm. A traced state puts the window stack on the window, a film on the annulus, the leak over the whole aperture, unfiltered sunlight beyond it and the sky's glow on the air, and is the first heat from zero that the air it swells returns. \"o1_count\" is the loss response's count, from which O1's allowed transmissions were derived; \"escape_rule\" applies that count to this module's films; \"gap_heat_over_leak_count_xrays_at_uv_factor\" scales the leak's X-rays as the loss response does. \"fism2\" rows and \"traced_fism2\" give each source's X-rays below 10 nm the factor FISM2 finds between the WHI quiet week and the year around each of the last three solar maxima (\"xray_cycle\"), in place of the convention's 100. \"low_shape\" is the loss at the same heat with the column's low heating shape. \"window_stack\" puts the climate window's stack on the annulus too. A budget row's leaks are the largest grey leaks whose molecular loss with Earth's tide stays within the budget, the solar wind and the exosphere step's losses not deducted.",
+ "reading_rule": "Heats are W per m^2 of lunar surface, global means at the escape model's heating efficiency, as the thermal column takes them; \"thermosphere\" is the heat between the 0.3 Pa base and the exobase, which the column takes, and \"exosphere_absorbed\" the light absorbed above the exobase, which it does not. Transmissions through gaps are grey shares of the band below 175 nm. A traced state puts the window stack on the window, a film on the annulus, the gaps' light over the whole aperture, unfiltered sunlight beyond it and the sky's glow on the air, and is the first heat from zero that the air it swells returns. \"o1_count\" is the loss response's count, from which O1's allowed transmissions were derived; \"escape_rule\" applies that count to this module's films; \"gap_heat_over_disk_count_xrays_at_uv_factor\" scales the gaps' X-rays as the loss response does. \"fism2\" rows and \"traced_fism2\" give each source's X-rays below 10 nm the factor FISM2 finds between the WHI quiet week and the year around each of the last three solar maxima (\"xray_cycle\"), in place of the convention's 100. \"low_shape\" is the loss at the same heat with the column's low heating shape. \"window_stack\" puts the climate window's stack on the annulus too. A budget row's transmissions are the largest grey transmissions through gaps whose molecular loss with Earth's tide stays within the budget, the solar wind and the exosphere step's losses not deducted.",
  "design": {
   "shield_distance_m": 20000000.0,
   "protected_radii": 4,
@@ -60,7 +60,7 @@
   "base_pa": 0.3,
   "band_nm": 175.0,
   "crossover_nm": 25.0,
-  "leaks": [
+  "gap_transmissions": [
    3e-05,
    0.0002
   ],
@@ -124,7 +124,7 @@
    "quiet": 9.635751896369723e-10,
    "solar_maximum": 9.635751896369722e-08
   },
-  "leak": {
+  "band_over_disk": {
    "quiet": 0.0016751049043095799,
    "solar_maximum": 0.0041877622607739496
   }
@@ -9700,7 +9700,7 @@
     "annulus_2_um_quiet_gaps_0": {
      "film": "annulus_2_um",
      "activity": "quiet",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "traced": {
       "heat_W_m2": 2.1504687735689932e-06,
       "status": "thermal_column",
@@ -9744,7 +9744,7 @@
     "annulus_2_um_quiet_gaps_3e-05": {
      "film": "annulus_2_um",
      "activity": "quiet",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "traced": {
       "heat_W_m2": 2.28028406893894e-06,
       "status": "thermal_column",
@@ -9788,7 +9788,7 @@
     "annulus_2_um_quiet_gaps_0.0002": {
      "film": "annulus_2_um",
      "activity": "quiet",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "traced": {
       "heat_W_m2": 3.0297016774996855e-06,
       "status": "thermal_column",
@@ -9832,7 +9832,7 @@
     "annulus_2_um_solar_maximum_gaps_0": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "traced": {
       "status": "runaway_beyond_profile_heats",
       "beyond_W_m2": 2.5e-05
@@ -9859,7 +9859,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_23_gaps_0": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_23",
      "traced": {
       "heat_W_m2": 4.871540973925684e-06,
@@ -9886,7 +9886,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_24_gaps_0": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_24",
      "traced": {
       "heat_W_m2": 4.163025506995314e-06,
@@ -9913,7 +9913,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_25_gaps_0": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_25",
      "traced": {
       "heat_W_m2": 4.896304886700041e-06,
@@ -9940,7 +9940,7 @@
     "annulus_2_um_solar_maximum_gaps_3e-05": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "traced": {
       "status": "runaway_beyond_profile_heats",
       "beyond_W_m2": 2.5e-05
@@ -9967,7 +9967,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_23_gaps_3e-05": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_23",
      "traced": {
       "heat_W_m2": 5.245076148751872e-06,
@@ -9994,7 +9994,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_24_gaps_3e-05": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_24",
      "traced": {
       "heat_W_m2": 4.518031303020962e-06,
@@ -10021,7 +10021,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_25_gaps_3e-05": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_25",
      "traced": {
       "heat_W_m2": 5.269903266185043e-06,
@@ -10048,7 +10048,7 @@
     "annulus_2_um_solar_maximum_gaps_0.0002": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "traced": {
       "status": "runaway_beyond_profile_heats",
       "beyond_W_m2": 2.5e-05
@@ -10075,7 +10075,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_23_gaps_0.0002": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_23",
      "traced": {
       "heat_W_m2": 7.511796751735916e-06,
@@ -10102,7 +10102,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_24_gaps_0.0002": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_24",
      "traced": {
       "heat_W_m2": 6.6564667732860415e-06,
@@ -10129,7 +10129,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_25_gaps_0.0002": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_25",
      "traced": {
       "heat_W_m2": 7.536754639541177e-06,
@@ -10156,7 +10156,7 @@
     "annulus_4_um_quiet_gaps_0": {
      "film": "annulus_4_um",
      "activity": "quiet",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "traced": {
       "heat_W_m2": 2.0862177395490117e-06,
       "status": "thermal_column",
@@ -10200,7 +10200,7 @@
     "annulus_4_um_quiet_gaps_3e-05": {
      "film": "annulus_4_um",
      "activity": "quiet",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "traced": {
       "heat_W_m2": 2.21554814405459e-06,
       "status": "thermal_column",
@@ -10244,7 +10244,7 @@
     "annulus_4_um_quiet_gaps_0.0002": {
      "film": "annulus_4_um",
      "activity": "quiet",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "traced": {
       "heat_W_m2": 2.962098239307341e-06,
       "status": "thermal_column",
@@ -10288,7 +10288,7 @@
     "annulus_4_um_solar_maximum_gaps_0": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "traced": {
       "heat_W_m2": 5.55362110919081e-06,
       "status": "thermal_column",
@@ -10332,7 +10332,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_23_gaps_0": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_23",
      "traced": {
       "heat_W_m2": 3.5814684426350088e-06,
@@ -10359,7 +10359,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_24_gaps_0": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_24",
      "traced": {
       "heat_W_m2": 3.3933414858988614e-06,
@@ -10386,7 +10386,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_25_gaps_0": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_25",
      "traced": {
       "heat_W_m2": 3.5887891620877036e-06,
@@ -10413,7 +10413,7 @@
     "annulus_4_um_solar_maximum_gaps_3e-05": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "traced": {
       "heat_W_m2": 6.07701851614498e-06,
       "status": "thermal_column",
@@ -10457,7 +10457,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_23_gaps_3e-05": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_23",
      "traced": {
       "heat_W_m2": 3.925903503434951e-06,
@@ -10484,7 +10484,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_24_gaps_3e-05": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_24",
      "traced": {
       "heat_W_m2": 3.7320172601263912e-06,
@@ -10511,7 +10511,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_25_gaps_3e-05": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_25",
      "traced": {
       "heat_W_m2": 3.932818657748546e-06,
@@ -10538,7 +10538,7 @@
     "annulus_4_um_solar_maximum_gaps_0.0002": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "traced": {
       "heat_W_m2": 9.381374575121317e-06,
       "status": "thermal_column",
@@ -10582,7 +10582,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_23_gaps_0.0002": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_23",
      "traced": {
       "heat_W_m2": 5.99234347297787e-06,
@@ -10609,7 +10609,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_24_gaps_0.0002": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_24",
      "traced": {
       "heat_W_m2": 5.759962110350185e-06,
@@ -10636,7 +10636,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_25_gaps_0.0002": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_25",
      "traced": {
       "heat_W_m2": 5.996727002717309e-06,
@@ -10663,7 +10663,7 @@
     "window_stack_quiet_gaps_0": {
      "film": "window_stack",
      "activity": "quiet",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "traced": {
       "heat_W_m2": 2.0661085651573813e-06,
       "status": "thermal_column",
@@ -10707,7 +10707,7 @@
     "window_stack_quiet_gaps_3e-05": {
      "film": "window_stack",
      "activity": "quiet",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "traced": {
       "heat_W_m2": 2.1953022856908173e-06,
       "status": "thermal_column",
@@ -10751,7 +10751,7 @@
     "window_stack_quiet_gaps_0.0002": {
      "film": "window_stack",
      "activity": "quiet",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "traced": {
       "heat_W_m2": 2.941054657410789e-06,
       "status": "thermal_column",
@@ -10795,7 +10795,7 @@
     "window_stack_solar_maximum_gaps_0": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "traced": {
       "heat_W_m2": 3.31367292325471e-06,
       "status": "thermal_column",
@@ -10839,7 +10839,7 @@
     "window_stack_solar_maximum_fism2_cycle_23_gaps_0": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_23",
      "traced": {
       "heat_W_m2": 3.1464983645048446e-06,
@@ -10866,7 +10866,7 @@
     "window_stack_solar_maximum_fism2_cycle_24_gaps_0": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_24",
      "traced": {
       "heat_W_m2": 3.1273321970755277e-06,
@@ -10893,7 +10893,7 @@
     "window_stack_solar_maximum_fism2_cycle_25_gaps_0": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_25",
      "traced": {
       "heat_W_m2": 3.1475365657976525e-06,
@@ -10920,7 +10920,7 @@
     "window_stack_solar_maximum_gaps_3e-05": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "traced": {
       "heat_W_m2": 3.7743066375443252e-06,
       "status": "thermal_column",
@@ -10964,7 +10964,7 @@
     "window_stack_solar_maximum_fism2_cycle_23_gaps_3e-05": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_23",
      "traced": {
       "heat_W_m2": 3.4830574728238565e-06,
@@ -10991,7 +10991,7 @@
     "window_stack_solar_maximum_fism2_cycle_24_gaps_3e-05": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_24",
      "traced": {
       "heat_W_m2": 3.461238984693487e-06,
@@ -11018,7 +11018,7 @@
     "window_stack_solar_maximum_fism2_cycle_25_gaps_3e-05": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_25",
      "traced": {
       "heat_W_m2": 3.4835883839992154e-06,
@@ -11045,7 +11045,7 @@
     "window_stack_solar_maximum_gaps_0.0002": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "traced": {
       "heat_W_m2": 6.599832274854328e-06,
       "status": "thermal_column",
@@ -11089,7 +11089,7 @@
     "window_stack_solar_maximum_fism2_cycle_23_gaps_0.0002": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_23",
      "traced": {
       "heat_W_m2": 5.495560513257483e-06,
@@ -11116,7 +11116,7 @@
     "window_stack_solar_maximum_fism2_cycle_24_gaps_0.0002": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_24",
      "traced": {
       "heat_W_m2": 5.4567269094095505e-06,
@@ -11143,7 +11143,7 @@
     "window_stack_solar_maximum_fism2_cycle_25_gaps_0.0002": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_25",
      "traced": {
       "heat_W_m2": 5.492861539458832e-06,
@@ -11179,8 +11179,8 @@
      "traced": 0.0014504762360061539,
      "traced_over_o1_count": 0.3199630921896037,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 3.0793714213594092,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.0793714213594092
+     "gap_heat_over_disk_count": 3.0793714213594092,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.0793714213594092
     },
     {
      "film": "annulus_2_um",
@@ -11192,8 +11192,8 @@
      "traced": 0.0017855067365429831,
      "traced_over_o1_count": 0.30165476096230964,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 3.2747298278617945,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.2747298278617945
+     "gap_heat_over_disk_count": 3.2747298278617945,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.2747298278617945
     },
     {
      "film": "annulus_2_um",
@@ -11205,8 +11205,8 @@
      "traced": 0.002435437762428122,
      "traced_over_o1_count": 0.2599260202512636,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 3.6027891142414723,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.6027891142414723
+     "gap_heat_over_disk_count": 3.6027891142414723,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.6027891142414723
     },
     {
      "film": "annulus_2_um",
@@ -11221,8 +11221,8 @@
       "cycle_24": 0.0004060130186487698,
       "cycle_25": 0.00033962612909607925
      },
-     "gap_heat_over_leak_count": 4.246532874939669,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.0793714213594092
+     "gap_heat_over_disk_count": 4.246532874939669,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.0793714213594092
     },
     {
      "film": "annulus_2_um",
@@ -11237,8 +11237,8 @@
       "cycle_24": 0.000542714502006233,
       "cycle_25": 0.0004746506481742418
      },
-     "gap_heat_over_leak_count": 4.516417476672478,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.2747298278617945
+     "gap_heat_over_disk_count": 4.516417476672478,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.2747298278617945
     },
     {
      "film": "annulus_2_um",
@@ -11253,8 +11253,8 @@
       "cycle_24": 0.000721464069623469,
       "cycle_25": 0.0006514621322918603
      },
-     "gap_heat_over_leak_count": 4.9629546664565884,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.6027891142414723
+     "gap_heat_over_disk_count": 4.9629546664565884,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.6027891142414723
     },
     {
      "film": "annulus_4_um",
@@ -11266,8 +11266,8 @@
      "traced": 0.0014669276514298535,
      "traced_over_o1_count": 0.323592138718733,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 3.0793714213594092,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.0793714213594092
+     "gap_heat_over_disk_count": 3.0793714213594092,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.0793714213594092
     },
     {
      "film": "annulus_4_um",
@@ -11279,8 +11279,8 @@
      "traced": 0.001802260293164452,
      "traced_over_o1_count": 0.3044852124047403,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 3.2747298278617945,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.2747298278617945
+     "gap_heat_over_disk_count": 3.2747298278617945,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.2747298278617945
     },
     {
      "film": "annulus_4_um",
@@ -11292,8 +11292,8 @@
      "traced": 0.0024524756994671036,
      "traced_over_o1_count": 0.26174442154082017,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 3.6027891142414723,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.6027891142414723
+     "gap_heat_over_disk_count": 3.6027891142414723,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.6027891142414723
     },
     {
      "film": "annulus_4_um",
@@ -11309,8 +11309,8 @@
       "cycle_24": 0.00047835363966614383,
       "cycle_25": 0.0004578556032988192
      },
-     "gap_heat_over_leak_count": 4.246532874939669,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.0793714213594092
+     "gap_heat_over_disk_count": 4.246532874939669,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.0793714213594092
     },
     {
      "film": "annulus_4_um",
@@ -11326,8 +11326,8 @@
       "cycle_24": 0.0006164235619399056,
       "cycle_25": 0.0005951177132165371
      },
-     "gap_heat_over_leak_count": 4.516417476672478,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.2747298278617945
+     "gap_heat_over_disk_count": 4.516417476672478,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.2747298278617945
     },
     {
      "film": "annulus_4_um",
@@ -11343,8 +11343,8 @@
       "cycle_24": 0.0007964845177992624,
       "cycle_25": 0.0007740774601981791
      },
-     "gap_heat_over_leak_count": 4.9629546664565884,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.6027891142414723
+     "gap_heat_over_disk_count": 4.9629546664565884,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.6027891142414723
     },
     {
      "film": "window_stack",
@@ -11356,8 +11356,8 @@
      "traced": 0.0014718650163000684,
      "traced_over_o1_count": 0.3246812806790951,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 3.0793714213594092,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.0793714213594092
+     "gap_heat_over_disk_count": 3.0793714213594092,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.0793714213594092
     },
     {
      "film": "window_stack",
@@ -11369,8 +11369,8 @@
      "traced": 0.0018072194877202725,
      "traced_over_o1_count": 0.3053230499875869,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 3.2747298278617945,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.2747298278617945
+     "gap_heat_over_disk_count": 3.2747298278617945,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.2747298278617945
     },
     {
      "film": "window_stack",
@@ -11382,8 +11382,8 @@
      "traced": 0.0024574185395103863,
      "traced_over_o1_count": 0.2622719541105329,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 3.6027891142414723,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.6027891142414723
+     "gap_heat_over_disk_count": 3.6027891142414723,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.6027891142414723
     },
     {
      "film": "window_stack",
@@ -11399,8 +11399,8 @@
       "cycle_24": 0.0005032951565654863,
       "cycle_25": 0.000498733654622824
      },
-     "gap_heat_over_leak_count": 4.246532874939669,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.0793714213594092
+     "gap_heat_over_disk_count": 4.246532874939669,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.0793714213594092
     },
     {
      "film": "window_stack",
@@ -11416,8 +11416,8 @@
       "cycle_24": 0.0006414770262097142,
       "cycle_25": 0.0006361790154021534
      },
-     "gap_heat_over_leak_count": 4.516417476672478,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.2747298278617945
+     "gap_heat_over_disk_count": 4.516417476672478,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.2747298278617945
     },
     {
      "film": "window_stack",
@@ -11433,8 +11433,8 @@
       "cycle_24": 0.0008214584461396835,
       "cycle_25": 0.000815009219803692
      },
-     "gap_heat_over_leak_count": 4.9629546664565884,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.6027891142414723
+     "gap_heat_over_disk_count": 4.9629546664565884,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.6027891142414723
     }
    ]
   },
@@ -20970,7 +20970,7 @@
     "annulus_2_um_quiet_gaps_0": {
      "film": "annulus_2_um",
      "activity": "quiet",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "traced": {
       "heat_W_m2": 2.340498276752324e-06,
       "status": "thermal_column",
@@ -21014,7 +21014,7 @@
     "annulus_2_um_quiet_gaps_3e-05": {
      "film": "annulus_2_um",
      "activity": "quiet",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "traced": {
       "heat_W_m2": 2.4859692545369266e-06,
       "status": "thermal_column",
@@ -21058,7 +21058,7 @@
     "annulus_2_um_quiet_gaps_0.0002": {
      "film": "annulus_2_um",
      "activity": "quiet",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "traced": {
       "heat_W_m2": 3.3311231262264496e-06,
       "status": "thermal_column",
@@ -21102,7 +21102,7 @@
     "annulus_2_um_solar_maximum_gaps_0": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "traced": {
       "status": "runaway_beyond_profile_heats",
       "beyond_W_m2": 2.5e-05
@@ -21129,7 +21129,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_23_gaps_0": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_23",
      "traced": {
       "heat_W_m2": 5.54558788291173e-06,
@@ -21156,7 +21156,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_24_gaps_0": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_24",
      "traced": {
       "heat_W_m2": 4.65998875145101e-06,
@@ -21183,7 +21183,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_25_gaps_0": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_25",
      "traced": {
       "heat_W_m2": 5.57682970685855e-06,
@@ -21210,7 +21210,7 @@
     "annulus_2_um_solar_maximum_gaps_3e-05": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "traced": {
       "status": "runaway_beyond_profile_heats",
       "beyond_W_m2": 2.5e-05
@@ -21237,7 +21237,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_23_gaps_3e-05": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_23",
      "traced": {
       "heat_W_m2": 5.984809349545454e-06,
@@ -21264,7 +21264,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_24_gaps_3e-05": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_24",
      "traced": {
       "heat_W_m2": 5.069513329772361e-06,
@@ -21291,7 +21291,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_25_gaps_3e-05": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_25",
      "traced": {
       "heat_W_m2": 6.01627200228104e-06,
@@ -21318,7 +21318,7 @@
     "annulus_2_um_solar_maximum_gaps_0.0002": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "traced": {
       "status": "runaway_beyond_profile_heats",
       "beyond_W_m2": 2.5e-05
@@ -21345,7 +21345,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_23_gaps_0.0002": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_23",
      "traced": {
       "heat_W_m2": 8.724816487548207e-06,
@@ -21372,7 +21372,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_24_gaps_0.0002": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_24",
      "traced": {
       "heat_W_m2": 7.610407489122791e-06,
@@ -21399,7 +21399,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_25_gaps_0.0002": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_25",
      "traced": {
       "heat_W_m2": 8.757826042902414e-06,
@@ -21426,7 +21426,7 @@
     "annulus_4_um_quiet_gaps_0": {
      "film": "annulus_4_um",
      "activity": "quiet",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "traced": {
       "heat_W_m2": 2.262581078709522e-06,
       "status": "thermal_column",
@@ -21470,7 +21470,7 @@
     "annulus_4_um_quiet_gaps_3e-05": {
      "film": "annulus_4_um",
      "activity": "quiet",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "traced": {
       "heat_W_m2": 2.407337093994139e-06,
       "status": "thermal_column",
@@ -21514,7 +21514,7 @@
     "annulus_4_um_quiet_gaps_0.0002": {
      "film": "annulus_4_um",
      "activity": "quiet",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "traced": {
       "heat_W_m2": 3.248084769989922e-06,
       "status": "thermal_column",
@@ -21558,7 +21558,7 @@
     "annulus_4_um_solar_maximum_gaps_0": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "traced": {
       "heat_W_m2": 6.344131237697184e-06,
       "status": "thermal_column",
@@ -21602,7 +21602,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_23_gaps_0": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_23",
      "traced": {
       "heat_W_m2": 3.9342462881541995e-06,
@@ -21629,7 +21629,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_24_gaps_0": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_24",
      "traced": {
       "heat_W_m2": 3.7090065794116117e-06,
@@ -21656,7 +21656,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_25_gaps_0": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_25",
      "traced": {
       "heat_W_m2": 3.942993240028961e-06,
@@ -21683,7 +21683,7 @@
     "annulus_4_um_solar_maximum_gaps_3e-05": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "traced": {
       "heat_W_m2": 6.968222537711903e-06,
       "status": "thermal_column",
@@ -21727,7 +21727,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_23_gaps_3e-05": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_23",
      "traced": {
       "heat_W_m2": 4.326140295446739e-06,
@@ -21754,7 +21754,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_24_gaps_3e-05": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_24",
      "traced": {
       "heat_W_m2": 4.092787135802664e-06,
@@ -21781,7 +21781,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_25_gaps_3e-05": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_25",
      "traced": {
       "heat_W_m2": 4.3344807046679906e-06,
@@ -21808,7 +21808,7 @@
     "annulus_4_um_solar_maximum_gaps_0.0002": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "traced": {
       "heat_W_m2": 1.0926974035638528e-05,
       "status": "thermal_column",
@@ -21852,7 +21852,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_23_gaps_0.0002": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_23",
      "traced": {
       "heat_W_m2": 6.732786183873967e-06,
@@ -21879,7 +21879,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_24_gaps_0.0002": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_24",
      "traced": {
       "heat_W_m2": 6.442507070345611e-06,
@@ -21906,7 +21906,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_25_gaps_0.0002": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_25",
      "traced": {
       "heat_W_m2": 6.738469655374199e-06,
@@ -21933,7 +21933,7 @@
     "window_stack_quiet_gaps_0": {
      "film": "window_stack",
      "activity": "quiet",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "traced": {
       "heat_W_m2": 2.23851465800018e-06,
       "status": "thermal_column",
@@ -21977,7 +21977,7 @@
     "window_stack_quiet_gaps_3e-05": {
      "film": "window_stack",
      "activity": "quiet",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "traced": {
       "heat_W_m2": 2.383071419364125e-06,
       "status": "thermal_column",
@@ -22021,7 +22021,7 @@
     "window_stack_quiet_gaps_0.0002": {
      "film": "window_stack",
      "activity": "quiet",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "traced": {
       "heat_W_m2": 3.222595235372671e-06,
       "status": "thermal_column",
@@ -22065,7 +22065,7 @@
     "window_stack_solar_maximum_gaps_0": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "traced": {
       "heat_W_m2": 3.5927239250685315e-06,
       "status": "thermal_column",
@@ -22109,7 +22109,7 @@
     "window_stack_solar_maximum_fism2_cycle_23_gaps_0": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_23",
      "traced": {
       "heat_W_m2": 3.409600560899053e-06,
@@ -22136,7 +22136,7 @@
     "window_stack_solar_maximum_fism2_cycle_24_gaps_0": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_24",
      "traced": {
       "heat_W_m2": 3.3886175473061654e-06,
@@ -22163,7 +22163,7 @@
     "window_stack_solar_maximum_fism2_cycle_25_gaps_0": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_25",
      "traced": {
       "heat_W_m2": 3.4107372462755445e-06,
@@ -22190,7 +22190,7 @@
     "window_stack_solar_maximum_gaps_3e-05": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "traced": {
       "heat_W_m2": 4.1149279705029044e-06,
       "status": "thermal_column",
@@ -22234,7 +22234,7 @@
     "window_stack_solar_maximum_fism2_cycle_23_gaps_3e-05": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_23",
      "traced": {
       "heat_W_m2": 3.789265226556078e-06,
@@ -22261,7 +22261,7 @@
     "window_stack_solar_maximum_fism2_cycle_24_gaps_3e-05": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_24",
      "traced": {
       "heat_W_m2": 3.7651934825957782e-06,
@@ -22288,7 +22288,7 @@
     "window_stack_solar_maximum_fism2_cycle_25_gaps_3e-05": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_25",
      "traced": {
       "heat_W_m2": 3.789826802005669e-06,
@@ -22315,7 +22315,7 @@
     "window_stack_solar_maximum_gaps_0.0002": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "traced": {
       "heat_W_m2": 7.425729554930584e-06,
       "status": "thermal_column",
@@ -22359,7 +22359,7 @@
     "window_stack_solar_maximum_fism2_cycle_23_gaps_0.0002": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_23",
      "traced": {
       "heat_W_m2": 6.108310707496118e-06,
@@ -22386,7 +22386,7 @@
     "window_stack_solar_maximum_fism2_cycle_24_gaps_0.0002": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_24",
      "traced": {
       "heat_W_m2": 6.06350779484824e-06,
@@ -22413,7 +22413,7 @@
     "window_stack_solar_maximum_fism2_cycle_25_gaps_0.0002": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_25",
      "traced": {
       "heat_W_m2": 6.105056267726092e-06,
@@ -22449,8 +22449,8 @@
      "traced": 0.0008910251043275696,
      "traced_over_o1_count": 0.29658418236927153,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 3.288511775461664,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.288511775461664
+     "gap_heat_over_disk_count": 3.288511775461664,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.288511775461664
     },
     {
      "film": "annulus_2_um",
@@ -22462,8 +22462,8 @@
      "traced": 0.0012083077994385024,
      "traced_over_o1_count": 0.2801750055742012,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 3.5030179891482307,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.5030179891482307
+     "gap_heat_over_disk_count": 3.5030179891482307,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.5030179891482307
     },
     {
      "film": "annulus_2_um",
@@ -22475,8 +22475,8 @@
      "traced": 0.0018530124285221774,
      "traced_over_o1_count": 0.2459552119486379,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 3.8743858223014835,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.8743858223014835
+     "gap_heat_over_disk_count": 3.8743858223014835,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.8743858223014835
     },
     {
      "film": "annulus_2_um",
@@ -22491,8 +22491,8 @@
       "cycle_24": 0.00017876024107826532,
       "cycle_25": 0.00011112659053970217
      },
-     "gap_heat_over_leak_count": 4.5379977507048315,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.288511775461664
+     "gap_heat_over_disk_count": 4.5379977507048315,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.288511775461664
     },
     {
      "film": "annulus_2_um",
@@ -22507,8 +22507,8 @@
       "cycle_24": 0.00030876130884347066,
       "cycle_25": 0.0002396017062129954
      },
-     "gap_heat_over_leak_count": 4.83458527578165,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.5030179891482303
+     "gap_heat_over_disk_count": 4.83458527578165,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.5030179891482303
     },
     {
      "film": "annulus_2_um",
@@ -22523,8 +22523,8 @@
       "cycle_24": 0.0005306743255706189,
       "cycle_25": 0.00045960907603651295
      },
-     "gap_heat_over_leak_count": 5.340558789214459,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.874385822301484
+     "gap_heat_over_disk_count": 5.340558789214459,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.874385822301484
     },
     {
      "film": "annulus_4_um",
@@ -22536,8 +22536,8 @@
      "traced": 0.0009081465539104403,
      "traced_over_o1_count": 0.3022831813097611,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 3.288511775461664,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.288511775461664
+     "gap_heat_over_disk_count": 3.288511775461664,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.288511775461664
     },
     {
      "film": "annulus_4_um",
@@ -22549,8 +22549,8 @@
      "traced": 0.0012257031322641867,
      "traced_over_o1_count": 0.28420852871595864,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 3.5030179891482307,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.5030179891482307
+     "gap_heat_over_disk_count": 3.5030179891482307,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.5030179891482307
     },
     {
      "film": "annulus_4_um",
@@ -22562,8 +22562,8 @@
      "traced": 0.0018706534203497274,
      "traced_over_o1_count": 0.2482967471791326,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 3.8743858223014835,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.8743858223014835
+     "gap_heat_over_disk_count": 3.8743858223014835,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.8743858223014835
     },
     {
      "film": "annulus_4_um",
@@ -22579,8 +22579,8 @@
       "cycle_24": 0.00025404393251788335,
       "cycle_25": 0.00023416427269642014
      },
-     "gap_heat_over_leak_count": 4.5379977507048315,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.288511775461664
+     "gap_heat_over_disk_count": 4.5379977507048315,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.288511775461664
     },
     {
      "film": "annulus_4_um",
@@ -22596,8 +22596,8 @@
       "cycle_24": 0.00038529042808324923,
       "cycle_25": 0.0003646759073857497
      },
-     "gap_heat_over_leak_count": 4.83458527578165,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.5030179891482303
+     "gap_heat_over_disk_count": 4.83458527578165,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.5030179891482303
     },
     {
      "film": "annulus_4_um",
@@ -22613,8 +22613,8 @@
       "cycle_24": 0.0006083481109541962,
       "cycle_25": 0.0005865593531775685
      },
-     "gap_heat_over_leak_count": 5.340558789214459,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.874385822301484
+     "gap_heat_over_disk_count": 5.340558789214459,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.874385822301484
     },
     {
      "film": "window_stack",
@@ -22626,8 +22626,8 @@
      "traced": 0.0009132888081365107,
      "traced_over_o1_count": 0.30399481800525574,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 3.288511775461664,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.288511775461664
+     "gap_heat_over_disk_count": 3.288511775461664,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.288511775461664
     },
     {
      "film": "window_stack",
@@ -22639,8 +22639,8 @@
      "traced": 0.0012308565148290828,
      "traced_over_o1_count": 0.2854034634747318,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 3.5030179891482307,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.5030179891482307
+     "gap_heat_over_disk_count": 3.5030179891482307,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.5030179891482307
     },
     {
      "film": "window_stack",
@@ -22652,8 +22652,8 @@
      "traced": 0.001875772911938816,
      "traced_over_o1_count": 0.24897627075894357,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 3.8743858223014835,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.8743858223014835
+     "gap_heat_over_disk_count": 3.8743858223014835,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.8743858223014835
     },
     {
      "film": "window_stack",
@@ -22669,8 +22669,8 @@
       "cycle_24": 0.00028002006303864984,
       "cycle_25": 0.0002767374215585923
      },
-     "gap_heat_over_leak_count": 4.5379977507048315,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.288511775461664
+     "gap_heat_over_disk_count": 4.5379977507048315,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.288511775461664
     },
     {
      "film": "window_stack",
@@ -22686,8 +22686,8 @@
       "cycle_24": 0.0004113244929033457,
       "cycle_25": 0.0004073437609410341
      },
-     "gap_heat_over_leak_count": 4.83458527578165,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.5030179891482303
+     "gap_heat_over_disk_count": 4.83458527578165,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.5030179891482303
     },
     {
      "film": "window_stack",
@@ -22703,8 +22703,8 @@
       "cycle_24": 0.0006342142407209686,
       "cycle_25": 0.0006289528433944257
      },
-     "gap_heat_over_leak_count": 5.340558789214459,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.874385822301484
+     "gap_heat_over_disk_count": 5.340558789214459,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.874385822301484
     }
    ]
   },
@@ -32240,7 +32240,7 @@
     "annulus_2_um_quiet_gaps_0": {
      "film": "annulus_2_um",
      "activity": "quiet",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "traced": {
       "heat_W_m2": 2.641441648642586e-06,
       "status": "thermal_column",
@@ -32284,7 +32284,7 @@
     "annulus_2_um_quiet_gaps_3e-05": {
      "film": "annulus_2_um",
      "activity": "quiet",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "traced": {
       "heat_W_m2": 2.8146749748411676e-06,
       "status": "thermal_column",
@@ -32328,7 +32328,7 @@
     "annulus_2_um_quiet_gaps_0.0002": {
      "film": "annulus_2_um",
      "activity": "quiet",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "traced": {
       "heat_W_m2": 3.83655510015702e-06,
       "status": "thermal_column",
@@ -32372,7 +32372,7 @@
     "annulus_2_um_solar_maximum_gaps_0": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "traced": {
       "status": "runaway_beyond_profile_heats",
       "beyond_W_m2": 2.5e-05
@@ -32399,7 +32399,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_23_gaps_0": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_23",
      "traced": {
       "heat_W_m2": 6.683675406023101e-06,
@@ -32426,7 +32426,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_24_gaps_0": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_24",
      "traced": {
       "heat_W_m2": 5.489254274645654e-06,
@@ -32453,7 +32453,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_25_gaps_0": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_25",
      "traced": {
       "heat_W_m2": 6.7251977589442725e-06,
@@ -32480,7 +32480,7 @@
     "annulus_2_um_solar_maximum_gaps_3e-05": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "traced": {
       "status": "runaway_beyond_profile_heats",
       "beyond_W_m2": 2.5e-05
@@ -32507,7 +32507,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_23_gaps_3e-05": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_23",
      "traced": {
       "heat_W_m2": 7.2300782025420705e-06,
@@ -32534,7 +32534,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_24_gaps_3e-05": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_24",
      "traced": {
       "heat_W_m2": 6.002800277802086e-06,
@@ -32561,7 +32561,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_25_gaps_3e-05": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_25",
      "traced": {
       "heat_W_m2": 7.271955520588507e-06,
@@ -32588,7 +32588,7 @@
     "annulus_2_um_solar_maximum_gaps_0.0002": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "traced": {
       "status": "runaway_beyond_profile_heats",
       "beyond_W_m2": 2.5e-05
@@ -32615,7 +32615,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_23_gaps_0.0002": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_23",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -32625,7 +32625,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_24_gaps_0.0002": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_24",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -32635,7 +32635,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_25_gaps_0.0002": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_25",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -32645,7 +32645,7 @@
     "annulus_4_um_quiet_gaps_0": {
      "film": "annulus_4_um",
      "activity": "quiet",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "traced": {
       "heat_W_m2": 2.5402417299190866e-06,
       "status": "thermal_column",
@@ -32689,7 +32689,7 @@
     "annulus_4_um_quiet_gaps_3e-05": {
      "film": "annulus_4_um",
      "activity": "quiet",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "traced": {
       "heat_W_m2": 2.7121741202781154e-06,
       "status": "thermal_column",
@@ -32733,7 +32733,7 @@
     "annulus_4_um_quiet_gaps_0.0002": {
      "film": "annulus_4_um",
      "activity": "quiet",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "traced": {
       "heat_W_m2": 3.7256693346305505e-06,
       "status": "thermal_column",
@@ -32777,7 +32777,7 @@
     "annulus_4_um_solar_maximum_gaps_0": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "traced": {
       "heat_W_m2": 7.618183007171896e-06,
       "status": "thermal_column",
@@ -32821,7 +32821,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_23_gaps_0": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_23",
      "traced": {
       "heat_W_m2": 4.499860127161584e-06,
@@ -32848,7 +32848,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_24_gaps_0": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_24",
      "traced": {
       "heat_W_m2": 4.211446456410276e-06,
@@ -32875,7 +32875,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_25_gaps_0": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_25",
      "traced": {
       "heat_W_m2": 4.51105022762237e-06,
@@ -32902,7 +32902,7 @@
     "annulus_4_um_solar_maximum_gaps_3e-05": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "traced": {
       "status": "runaway_beyond_profile_heats",
       "beyond_W_m2": 2.5e-05
@@ -32929,7 +32929,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_23_gaps_3e-05": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_23",
      "traced": {
       "heat_W_m2": 4.981320261131927e-06,
@@ -32956,7 +32956,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_24_gaps_3e-05": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_24",
      "traced": {
       "heat_W_m2": 4.679979628791867e-06,
@@ -32983,7 +32983,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_25_gaps_3e-05": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_25",
      "traced": {
       "heat_W_m2": 4.992109607285479e-06,
@@ -33010,7 +33010,7 @@
     "annulus_4_um_solar_maximum_gaps_0.0002": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "traced": {
       "status": "runaway_beyond_profile_heats",
       "beyond_W_m2": 2.5e-05
@@ -33037,7 +33037,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_23_gaps_0.0002": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_23",
      "traced": {
       "heat_W_m2": 7.98760617105128e-06,
@@ -33064,7 +33064,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_24_gaps_0.0002": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_24",
      "traced": {
       "heat_W_m2": 7.61453600189758e-06,
@@ -33091,7 +33091,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_25_gaps_0.0002": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_25",
      "traced": {
       "heat_W_m2": 7.995026110266248e-06,
@@ -33118,7 +33118,7 @@
     "window_stack_quiet_gaps_0": {
      "film": "window_stack",
      "activity": "quiet",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "traced": {
       "heat_W_m2": 2.5097145752747016e-06,
       "status": "thermal_column",
@@ -33162,7 +33162,7 @@
     "window_stack_quiet_gaps_3e-05": {
      "film": "window_stack",
      "activity": "quiet",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "traced": {
       "heat_W_m2": 2.681292137426918e-06,
       "status": "thermal_column",
@@ -33206,7 +33206,7 @@
     "window_stack_quiet_gaps_0.0002": {
      "film": "window_stack",
      "activity": "quiet",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "traced": {
       "heat_W_m2": 3.6925172942676417e-06,
       "status": "thermal_column",
@@ -33250,7 +33250,7 @@
     "window_stack_solar_maximum_gaps_0": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "traced": {
       "heat_W_m2": 4.0321943040531325e-06,
       "status": "thermal_column",
@@ -33294,7 +33294,7 @@
     "window_stack_solar_maximum_fism2_cycle_23_gaps_0": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_23",
      "traced": {
       "heat_W_m2": 3.823568676479742e-06,
@@ -33321,7 +33321,7 @@
     "window_stack_solar_maximum_fism2_cycle_24_gaps_0": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_24",
      "traced": {
       "heat_W_m2": 3.7996889199112198e-06,
@@ -33348,7 +33348,7 @@
     "window_stack_solar_maximum_fism2_cycle_25_gaps_0": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_25",
      "traced": {
       "heat_W_m2": 3.8248624322723995e-06,
@@ -33375,7 +33375,7 @@
     "window_stack_solar_maximum_gaps_3e-05": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "traced": {
       "heat_W_m2": 4.66892133754809e-06,
       "status": "thermal_column",
@@ -33419,7 +33419,7 @@
     "window_stack_solar_maximum_fism2_cycle_23_gaps_3e-05": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_23",
      "traced": {
       "heat_W_m2": 4.282593509804571e-06,
@@ -33446,7 +33446,7 @@
     "window_stack_solar_maximum_fism2_cycle_24_gaps_3e-05": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_24",
      "traced": {
       "heat_W_m2": 4.254734524480181e-06,
@@ -33473,7 +33473,7 @@
     "window_stack_solar_maximum_fism2_cycle_25_gaps_3e-05": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_25",
      "traced": {
       "heat_W_m2": 4.283189690844344e-06,
@@ -33500,7 +33500,7 @@
     "window_stack_solar_maximum_gaps_0.0002": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "traced": {
       "status": "runaway_beyond_profile_heats",
       "beyond_W_m2": 2.5e-05
@@ -33527,7 +33527,7 @@
     "window_stack_solar_maximum_fism2_cycle_23_gaps_0.0002": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_23",
      "traced": {
       "heat_W_m2": 7.1712040040175325e-06,
@@ -33554,7 +33554,7 @@
     "window_stack_solar_maximum_fism2_cycle_24_gaps_0.0002": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_24",
      "traced": {
       "heat_W_m2": 7.117031075562873e-06,
@@ -33581,7 +33581,7 @@
     "window_stack_solar_maximum_fism2_cycle_25_gaps_0.0002": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_25",
      "traced": {
       "heat_W_m2": 7.16697480249668e-06,
@@ -33617,8 +33617,8 @@
      "traced": 0.00023796069566223873,
      "traced_over_o1_count": 0.2544027966212537,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 3.575925057304274,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.575925057304274
+     "gap_heat_over_disk_count": 3.575925057304274,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.575925057304274
     },
     {
      "film": "annulus_2_um",
@@ -33630,8 +33630,8 @@
      "traced": 0.000535329104197337,
      "traced_over_o1_count": 0.25043853518222264,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 3.822747443722057,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.822747443722057
+     "gap_heat_over_disk_count": 3.822747443722057,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.822747443722057
     },
     {
      "film": "annulus_2_um",
@@ -33643,8 +33643,8 @@
      "traced": 0.0007906983945792217,
      "traced_over_o1_count": 0.15682437127771753,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 4.236848481703012,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.236848481703012
+     "gap_heat_over_disk_count": 4.236848481703012,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.236848481703012
     },
     {
      "film": "annulus_2_um",
@@ -33659,8 +33659,8 @@
       "cycle_24": null,
       "cycle_25": null
      },
-     "gap_heat_over_leak_count": 4.941525172257432,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.575925057304274
+     "gap_heat_over_disk_count": 4.941525172257432,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.575925057304274
     },
     {
      "film": "annulus_2_um",
@@ -33675,8 +33675,8 @@
       "cycle_24": 3.492181697910282e-05,
       "cycle_25": null
      },
-     "gap_heat_over_leak_count": 5.282926675470026,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.822747443722058
+     "gap_heat_over_disk_count": 5.282926675470026,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.822747443722058
     },
     {
      "film": "annulus_2_um",
@@ -33691,8 +33691,8 @@
       "cycle_24": 0.00014002173205305066,
       "cycle_25": 6.86645927492907e-05
      },
-     "gap_heat_over_leak_count": 5.848425226758332,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.236848481703013
+     "gap_heat_over_disk_count": 5.848425226758332,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.236848481703013
     },
     {
      "film": "annulus_4_um",
@@ -33704,8 +33704,8 @@
      "traced": 0.00025589976854389484,
      "traced_over_o1_count": 0.2735813853255143,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 3.575925057304274,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.575925057304274
+     "gap_heat_over_disk_count": 3.575925057304274,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.575925057304274
     },
     {
      "film": "annulus_4_um",
@@ -33717,8 +33717,8 @@
      "traced": 0.0005535046970695715,
      "traced_over_o1_count": 0.25894147070226287,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 3.822747443722057,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.822747443722057
+     "gap_heat_over_disk_count": 3.822747443722057,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.822747443722057
     },
     {
      "film": "annulus_4_um",
@@ -33730,8 +33730,8 @@
      "traced": 0.0008089931426789069,
      "traced_over_o1_count": 0.1604528880270707,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 4.236848481703012,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.236848481703012
+     "gap_heat_over_disk_count": 4.236848481703012,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.236848481703012
     },
     {
      "film": "annulus_4_um",
@@ -33746,8 +33746,8 @@
       "cycle_24": null,
       "cycle_25": null
      },
-     "gap_heat_over_leak_count": 4.941525172257432,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.575925057304274
+     "gap_heat_over_disk_count": 4.941525172257432,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.575925057304274
     },
     {
      "film": "annulus_4_um",
@@ -33762,8 +33762,8 @@
       "cycle_24": 0.00011488560811433284,
       "cycle_25": 9.51018025731573e-05
      },
-     "gap_heat_over_leak_count": 5.282926675470026,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.822747443722058
+     "gap_heat_over_disk_count": 5.282926675470026,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.822747443722058
     },
     {
      "film": "annulus_4_um",
@@ -33779,8 +33779,8 @@
       "cycle_24": 0.00022054256579877993,
       "cycle_25": 0.0002002613173645858
      },
-     "gap_heat_over_leak_count": 5.848425226758332,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.236848481703013
+     "gap_heat_over_disk_count": 5.848425226758332,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.236848481703013
     },
     {
      "film": "window_stack",
@@ -33792,8 +33792,8 @@
      "traced": 0.0002612813453255696,
      "traced_over_o1_count": 0.2793348068293468,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 3.575925057304274,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.575925057304274
+     "gap_heat_over_disk_count": 3.575925057304274,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.575925057304274
     },
     {
      "film": "window_stack",
@@ -33805,8 +33805,8 @@
      "traced": 0.0005588821558766773,
      "traced_over_o1_count": 0.2614571622574111,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 3.822747443722057,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.822747443722057
+     "gap_heat_over_disk_count": 3.822747443722057,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.822747443722057
     },
     {
      "film": "window_stack",
@@ -33818,8 +33818,8 @@
      "traced": 0.0008143505452223102,
      "traced_over_o1_count": 0.1615154566263126,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 4.236848481703012,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.236848481703012
+     "gap_heat_over_disk_count": 4.236848481703012,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.236848481703012
     },
     {
      "film": "window_stack",
@@ -33835,8 +33835,8 @@
       "cycle_24": 1.825593554579584e-05,
       "cycle_25": 1.6483383828063596e-05
      },
-     "gap_heat_over_leak_count": 4.941525172257432,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.575925057304274
+     "gap_heat_over_disk_count": 4.941525172257432,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.575925057304274
     },
     {
      "film": "window_stack",
@@ -33852,8 +33852,8 @@
       "cycle_24": 0.00014205123484435024,
       "cycle_25": 0.00013962294123923106
      },
-     "gap_heat_over_leak_count": 5.282926675470026,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 3.822747443722058
+     "gap_heat_over_disk_count": 5.282926675470026,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 3.822747443722058
     },
     {
      "film": "window_stack",
@@ -33869,8 +33869,8 @@
       "cycle_24": 0.0002476084773351935,
       "cycle_25": 0.00024461931133833376
      },
-     "gap_heat_over_leak_count": 5.848425226758332,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.236848481703013
+     "gap_heat_over_disk_count": 5.848425226758332,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.236848481703013
     }
    ]
   },
@@ -43406,7 +43406,7 @@
     "annulus_2_um_quiet_gaps_0": {
      "film": "annulus_2_um",
      "activity": "quiet",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "traced": {
       "heat_W_m2": 2.7754936282507397e-06,
       "status": "thermal_column",
@@ -43450,7 +43450,7 @@
     "annulus_2_um_quiet_gaps_3e-05": {
      "film": "annulus_2_um",
      "activity": "quiet",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "traced": {
       "heat_W_m2": 2.9874765475372865e-06,
       "status": "thermal_column",
@@ -43494,7 +43494,7 @@
     "annulus_2_um_quiet_gaps_0.0002": {
      "film": "annulus_2_um",
      "activity": "quiet",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "traced": {
       "heat_W_m2": 4.2491047299914235e-06,
       "status": "thermal_column",
@@ -43538,7 +43538,7 @@
     "annulus_2_um_solar_maximum_gaps_0": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "traced": {
       "status": "runaway_beyond_profile_heats",
       "beyond_W_m2": 2.5e-05
@@ -43565,7 +43565,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_23_gaps_0": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_23",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -43575,7 +43575,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_24_gaps_0": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_24",
      "traced": {
       "heat_W_m2": 6.192717925270432e-06,
@@ -43602,7 +43602,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_25_gaps_0": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_25",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -43612,7 +43612,7 @@
     "annulus_2_um_solar_maximum_gaps_3e-05": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "traced": {
       "status": "runaway_beyond_profile_heats",
       "beyond_W_m2": 2.5e-05
@@ -43639,7 +43639,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_23_gaps_3e-05": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_23",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -43649,7 +43649,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_24_gaps_3e-05": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_24",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -43659,7 +43659,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_25_gaps_3e-05": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_25",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -43669,7 +43669,7 @@
     "annulus_2_um_solar_maximum_gaps_0.0002": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "traced": {
       "status": "runaway_beyond_profile_heats",
       "beyond_W_m2": 2.5e-05
@@ -43696,7 +43696,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_23_gaps_0.0002": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_23",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -43706,7 +43706,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_24_gaps_0.0002": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_24",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -43716,7 +43716,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_25_gaps_0.0002": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_25",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -43726,7 +43726,7 @@
     "annulus_4_um_quiet_gaps_0": {
      "film": "annulus_4_um",
      "activity": "quiet",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "traced": {
       "heat_W_m2": 2.6406247675811746e-06,
       "status": "thermal_column",
@@ -43770,7 +43770,7 @@
     "annulus_4_um_quiet_gaps_3e-05": {
      "film": "annulus_4_um",
      "activity": "quiet",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "traced": {
       "heat_W_m2": 2.8505890473553825e-06,
       "status": "thermal_column",
@@ -43814,7 +43814,7 @@
     "annulus_4_um_quiet_gaps_0.0002": {
      "film": "annulus_4_um",
      "activity": "quiet",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "traced": {
       "heat_W_m2": 4.099413797212887e-06,
       "status": "thermal_column",
@@ -43858,7 +43858,7 @@
     "annulus_4_um_solar_maximum_gaps_0": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "traced": {
       "status": "runaway_beyond_profile_heats",
       "beyond_W_m2": 2.5e-05
@@ -43885,7 +43885,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_23_gaps_0": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_23",
      "traced": {
       "heat_W_m2": 4.876983738438184e-06,
@@ -43912,7 +43912,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_24_gaps_0": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_24",
      "traced": {
       "heat_W_m2": 4.493116969322021e-06,
@@ -43939,7 +43939,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_25_gaps_0": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_25",
      "traced": {
       "heat_W_m2": 4.891840801029955e-06,
@@ -43966,7 +43966,7 @@
     "annulus_4_um_solar_maximum_gaps_3e-05": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "traced": {
       "status": "runaway_beyond_profile_heats",
       "beyond_W_m2": 2.5e-05
@@ -43993,7 +43993,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_23_gaps_3e-05": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_23",
      "traced": {
       "heat_W_m2": 5.468140471033988e-06,
@@ -44020,7 +44020,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_24_gaps_3e-05": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_24",
      "traced": {
       "heat_W_m2": 5.069244743560693e-06,
@@ -44047,7 +44047,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_25_gaps_3e-05": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_25",
      "traced": {
       "heat_W_m2": 5.482449126022144e-06,
@@ -44074,7 +44074,7 @@
     "annulus_4_um_solar_maximum_gaps_0.0002": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "traced": {
       "status": "runaway_beyond_profile_heats",
       "beyond_W_m2": 2.5e-05
@@ -44101,7 +44101,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_23_gaps_0.0002": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_23",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -44111,7 +44111,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_24_gaps_0.0002": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_24",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -44121,7 +44121,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_25_gaps_0.0002": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_25",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -44131,7 +44131,7 @@
     "window_stack_quiet_gaps_0": {
      "film": "window_stack",
      "activity": "quiet",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "traced": {
       "heat_W_m2": 2.599675582956702e-06,
       "status": "thermal_column",
@@ -44175,7 +44175,7 @@
     "window_stack_quiet_gaps_3e-05": {
      "film": "window_stack",
      "activity": "quiet",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "traced": {
       "heat_W_m2": 2.8090874266250187e-06,
       "status": "thermal_column",
@@ -44219,7 +44219,7 @@
     "window_stack_quiet_gaps_0.0002": {
      "film": "window_stack",
      "activity": "quiet",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "traced": {
       "heat_W_m2": 4.054425147004164e-06,
       "status": "thermal_column",
@@ -44263,7 +44263,7 @@
     "window_stack_solar_maximum_gaps_0": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "traced": {
       "heat_W_m2": 4.223693797360054e-06,
       "status": "thermal_column",
@@ -44307,7 +44307,7 @@
     "window_stack_solar_maximum_fism2_cycle_23_gaps_0": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_23",
      "traced": {
       "heat_W_m2": 3.970952011513648e-06,
@@ -44334,7 +44334,7 @@
     "window_stack_solar_maximum_fism2_cycle_24_gaps_0": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_24",
      "traced": {
       "heat_W_m2": 3.942033577594566e-06,
@@ -44361,7 +44361,7 @@
     "window_stack_solar_maximum_fism2_cycle_25_gaps_0": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_25",
      "traced": {
       "heat_W_m2": 3.972518864534713e-06,
@@ -44388,7 +44388,7 @@
     "window_stack_solar_maximum_gaps_3e-05": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "traced": {
       "heat_W_m2": 5.004374931576223e-06,
       "status": "thermal_column",
@@ -44432,7 +44432,7 @@
     "window_stack_solar_maximum_fism2_cycle_23_gaps_3e-05": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_23",
      "traced": {
       "heat_W_m2": 4.532979137852068e-06,
@@ -44459,7 +44459,7 @@
     "window_stack_solar_maximum_fism2_cycle_24_gaps_3e-05": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_24",
      "traced": {
       "heat_W_m2": 4.499108039254777e-06,
@@ -44486,7 +44486,7 @@
     "window_stack_solar_maximum_fism2_cycle_25_gaps_3e-05": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_25",
      "traced": {
       "heat_W_m2": 4.533696412990338e-06,
@@ -44513,7 +44513,7 @@
     "window_stack_solar_maximum_gaps_0.0002": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "traced": {
       "status": "runaway_beyond_profile_heats",
       "beyond_W_m2": 2.5e-05
@@ -44540,7 +44540,7 @@
     "window_stack_solar_maximum_fism2_cycle_23_gaps_0.0002": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_23",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -44550,7 +44550,7 @@
     "window_stack_solar_maximum_fism2_cycle_24_gaps_0.0002": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_24",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -44560,7 +44560,7 @@
     "window_stack_solar_maximum_fism2_cycle_25_gaps_0.0002": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_25",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -44579,8 +44579,8 @@
      "traced": 5.127714314326919e-05,
      "traced_over_o1_count": 0.15811862994134068,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 4.212323752741241,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.212323752741241
+     "gap_heat_over_disk_count": 4.212323752741241,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.212323752741241
     },
     {
      "film": "annulus_2_um",
@@ -44592,8 +44592,8 @@
      "traced": 0.00030723628054144696,
      "traced_over_o1_count": 0.20553879260584307,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 4.488112670688648,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.488112670688648
+     "gap_heat_over_disk_count": 4.488112670688648,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.488112670688648
     },
     {
      "film": "annulus_2_um",
@@ -44605,8 +44605,8 @@
      "traced": 0.0004740039291389737,
      "traced_over_o1_count": 0.11011051735114136,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 4.943124158145805,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.943124158145805
+     "gap_heat_over_disk_count": 4.943124158145805,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.943124158145805
     },
     {
      "film": "annulus_2_um",
@@ -44621,8 +44621,8 @@
       "cycle_24": null,
       "cycle_25": null
      },
-     "gap_heat_over_leak_count": 5.816033713014888,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.212323752741241
+     "gap_heat_over_disk_count": 5.816033713014888,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.212323752741241
     },
     {
      "film": "annulus_2_um",
@@ -44637,8 +44637,8 @@
       "cycle_24": null,
       "cycle_25": null
      },
-     "gap_heat_over_leak_count": 6.1982045114120545,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.488112670688648
+     "gap_heat_over_disk_count": 6.1982045114120545,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.488112670688648
     },
     {
      "film": "annulus_2_um",
@@ -44653,8 +44653,8 @@
       "cycle_24": 1.46724322866064e-05,
       "cycle_25": null
      },
-     "gap_heat_over_leak_count": 6.821878740839817,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.943124158145804
+     "gap_heat_over_disk_count": 6.821878740839817,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.943124158145804
     },
     {
      "film": "annulus_4_um",
@@ -44666,8 +44666,8 @@
      "traced": 7.063407160805757e-05,
      "traced_over_o1_count": 0.2178078173863833,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 4.212323752741241,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.212323752741241
+     "gap_heat_over_disk_count": 4.212323752741241,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.212323752741241
     },
     {
      "film": "annulus_4_um",
@@ -44679,8 +44679,8 @@
      "traced": 0.0003267457656907035,
      "traced_over_o1_count": 0.21859049344948372,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 4.488112670688648,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.488112670688648
+     "gap_heat_over_disk_count": 4.488112670688648,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.488112670688648
     },
     {
      "film": "annulus_4_um",
@@ -44692,8 +44692,8 @@
      "traced": 0.0004935607167828609,
      "traced_over_o1_count": 0.11465353455588581,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 4.943124158145805,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.943124158145805
+     "gap_heat_over_disk_count": 4.943124158145805,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.943124158145805
     },
     {
      "film": "annulus_4_um",
@@ -44708,8 +44708,8 @@
       "cycle_24": null,
       "cycle_25": null
      },
-     "gap_heat_over_leak_count": 5.816033713014888,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.212323752741241
+     "gap_heat_over_disk_count": 5.816033713014888,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.212323752741241
     },
     {
      "film": "annulus_4_um",
@@ -44724,8 +44724,8 @@
       "cycle_24": 3.159869728155763e-05,
       "cycle_25": 1.0689378043807087e-05
      },
-     "gap_heat_over_leak_count": 6.1982045114120545,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.488112670688648
+     "gap_heat_over_disk_count": 6.1982045114120545,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.488112670688648
     },
     {
      "film": "annulus_4_um",
@@ -44740,8 +44740,8 @@
       "cycle_24": 0.00010068579137534548,
       "cycle_25": 7.95112005373085e-05
      },
-     "gap_heat_over_leak_count": 6.821878740839817,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.943124158145804
+     "gap_heat_over_disk_count": 6.821878740839817,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.943124158145804
     },
     {
      "film": "window_stack",
@@ -44753,8 +44753,8 @@
      "traced": 7.652940114062145e-05,
      "traced_over_o1_count": 0.23598670512467346,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 4.212323752741241,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.212323752741241
+     "gap_heat_over_disk_count": 4.212323752741241,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.212323752741241
     },
     {
      "film": "window_stack",
@@ -44766,8 +44766,8 @@
      "traced": 0.00033261070752700096,
      "traced_over_o1_count": 0.22251409603187292,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 4.488112670688648,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.488112670688648
+     "gap_heat_over_disk_count": 4.488112670688648,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.488112670688648
     },
     {
      "film": "window_stack",
@@ -44779,8 +44779,8 @@
      "traced": 0.0004993953961242778,
      "traced_over_o1_count": 0.1160089232380608,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 4.943124158145805,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.943124158145805
+     "gap_heat_over_disk_count": 4.943124158145805,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.943124158145805
     },
     {
      "film": "window_stack",
@@ -44795,8 +44795,8 @@
       "cycle_24": null,
       "cycle_25": null
      },
-     "gap_heat_over_leak_count": 5.816033713014888,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.212323752741241
+     "gap_heat_over_disk_count": 5.816033713014888,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.212323752741241
     },
     {
      "film": "window_stack",
@@ -44812,8 +44812,8 @@
       "cycle_24": 6.122461217915598e-05,
       "cycle_25": 5.924353373992233e-05
      },
-     "gap_heat_over_leak_count": 6.1982045114120545,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.488112670688648
+     "gap_heat_over_disk_count": 6.1982045114120545,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.488112670688648
     },
     {
      "film": "window_stack",
@@ -44829,8 +44829,8 @@
       "cycle_24": 0.00013016007839704923,
       "cycle_25": 0.00012781698363745634
      },
-     "gap_heat_over_leak_count": 6.821878740839817,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.943124158145804
+     "gap_heat_over_disk_count": 6.821878740839817,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.943124158145804
     }
    ]
   },
@@ -54366,7 +54366,7 @@
     "annulus_2_um_quiet_gaps_0": {
      "film": "annulus_2_um",
      "activity": "quiet",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "traced": {
       "heat_W_m2": 2.7807294125649226e-06,
       "status": "thermal_column",
@@ -54410,7 +54410,7 @@
     "annulus_2_um_quiet_gaps_3e-05": {
      "film": "annulus_2_um",
      "activity": "quiet",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "traced": {
       "heat_W_m2": 2.993568098058774e-06,
       "status": "thermal_column",
@@ -54454,7 +54454,7 @@
     "annulus_2_um_quiet_gaps_0.0002": {
      "film": "annulus_2_um",
      "activity": "quiet",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "traced": {
       "heat_W_m2": 4.260608041202387e-06,
       "status": "thermal_column",
@@ -54498,7 +54498,7 @@
     "annulus_2_um_solar_maximum_gaps_0": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "traced": {
       "status": "runaway_beyond_profile_heats",
       "beyond_W_m2": 2.5e-05
@@ -54525,7 +54525,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_23_gaps_0": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_23",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -54535,7 +54535,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_24_gaps_0": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_24",
      "traced": {
       "heat_W_m2": 6.21054730916378e-06,
@@ -54562,7 +54562,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_25_gaps_0": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_25",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -54572,7 +54572,7 @@
     "annulus_2_um_solar_maximum_gaps_3e-05": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "traced": {
       "status": "runaway_beyond_profile_heats",
       "beyond_W_m2": 2.5e-05
@@ -54599,7 +54599,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_23_gaps_3e-05": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_23",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -54609,7 +54609,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_24_gaps_3e-05": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_24",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -54619,7 +54619,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_25_gaps_3e-05": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_25",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -54629,7 +54629,7 @@
     "annulus_2_um_solar_maximum_gaps_0.0002": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "traced": {
       "status": "runaway_beyond_profile_heats",
       "beyond_W_m2": 2.5e-05
@@ -54656,7 +54656,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_23_gaps_0.0002": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_23",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -54666,7 +54666,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_24_gaps_0.0002": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_24",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -54676,7 +54676,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_25_gaps_0.0002": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_25",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -54686,7 +54686,7 @@
     "annulus_4_um_quiet_gaps_0": {
      "film": "annulus_4_um",
      "activity": "quiet",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "traced": {
       "heat_W_m2": 2.645152725095971e-06,
       "status": "thermal_column",
@@ -54730,7 +54730,7 @@
     "annulus_4_um_quiet_gaps_3e-05": {
      "film": "annulus_4_um",
      "activity": "quiet",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "traced": {
       "heat_W_m2": 2.8559522089812924e-06,
       "status": "thermal_column",
@@ -54774,7 +54774,7 @@
     "annulus_4_um_quiet_gaps_0.0002": {
      "film": "annulus_4_um",
      "activity": "quiet",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "traced": {
       "heat_W_m2": 4.110113798758702e-06,
       "status": "thermal_column",
@@ -54818,7 +54818,7 @@
     "annulus_4_um_solar_maximum_gaps_0": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "traced": {
       "status": "runaway_beyond_profile_heats",
       "beyond_W_m2": 2.5e-05
@@ -54845,7 +54845,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_23_gaps_0": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_23",
      "traced": {
       "heat_W_m2": 4.888198258157022e-06,
@@ -54872,7 +54872,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_24_gaps_0": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_24",
      "traced": {
       "heat_W_m2": 4.502480242291788e-06,
@@ -54899,7 +54899,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_25_gaps_0": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_25",
      "traced": {
       "heat_W_m2": 4.903126140909615e-06,
@@ -54926,7 +54926,7 @@
     "annulus_4_um_solar_maximum_gaps_3e-05": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "traced": {
       "status": "runaway_beyond_profile_heats",
       "beyond_W_m2": 2.5e-05
@@ -54953,7 +54953,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_23_gaps_3e-05": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_23",
      "traced": {
       "heat_W_m2": 5.481652333286342e-06,
@@ -54980,7 +54980,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_24_gaps_3e-05": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_24",
      "traced": {
       "heat_W_m2": 5.080917961480995e-06,
@@ -55007,7 +55007,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_25_gaps_3e-05": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_25",
      "traced": {
       "heat_W_m2": 5.4960262564469775e-06,
@@ -55034,7 +55034,7 @@
     "annulus_4_um_solar_maximum_gaps_0.0002": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "traced": {
       "status": "runaway_beyond_profile_heats",
       "beyond_W_m2": 2.5e-05
@@ -55061,7 +55061,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_23_gaps_0.0002": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_23",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -55071,7 +55071,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_24_gaps_0.0002": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_24",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -55081,7 +55081,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_25_gaps_0.0002": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_25",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -55091,7 +55091,7 @@
     "window_stack_quiet_gaps_0": {
      "film": "window_stack",
      "activity": "quiet",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "traced": {
       "heat_W_m2": 2.604000550277697e-06,
       "status": "thermal_column",
@@ -55135,7 +55135,7 @@
     "window_stack_quiet_gaps_3e-05": {
      "film": "window_stack",
      "activity": "quiet",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "traced": {
       "heat_W_m2": 2.814242148317327e-06,
       "status": "thermal_column",
@@ -55179,7 +55179,7 @@
     "window_stack_quiet_gaps_0.0002": {
      "film": "window_stack",
      "activity": "quiet",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "traced": {
       "heat_W_m2": 4.064897150234949e-06,
       "status": "thermal_column",
@@ -55223,7 +55223,7 @@
     "window_stack_solar_maximum_gaps_0": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "traced": {
       "heat_W_m2": 4.231214982551879e-06,
       "status": "thermal_column",
@@ -55267,7 +55267,7 @@
     "window_stack_solar_maximum_fism2_cycle_23_gaps_0": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_23",
      "traced": {
       "heat_W_m2": 3.977668019241655e-06,
@@ -55294,7 +55294,7 @@
     "window_stack_solar_maximum_fism2_cycle_24_gaps_0": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_24",
      "traced": {
       "heat_W_m2": 3.948657089836224e-06,
@@ -55321,7 +55321,7 @@
     "window_stack_solar_maximum_fism2_cycle_25_gaps_0": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_25",
      "traced": {
       "heat_W_m2": 3.979239886297615e-06,
@@ -55348,7 +55348,7 @@
     "window_stack_solar_maximum_gaps_3e-05": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "traced": {
       "heat_W_m2": 5.015062231595995e-06,
       "status": "thermal_column",
@@ -55392,7 +55392,7 @@
     "window_stack_solar_maximum_fism2_cycle_23_gaps_3e-05": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_23",
      "traced": {
       "heat_W_m2": 4.542006228828087e-06,
@@ -55419,7 +55419,7 @@
     "window_stack_solar_maximum_fism2_cycle_24_gaps_3e-05": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_24",
      "traced": {
       "heat_W_m2": 4.508023036723877e-06,
@@ -55446,7 +55446,7 @@
     "window_stack_solar_maximum_fism2_cycle_25_gaps_3e-05": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_25",
      "traced": {
       "heat_W_m2": 4.542724933641067e-06,
@@ -55473,7 +55473,7 @@
     "window_stack_solar_maximum_gaps_0.0002": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "traced": {
       "status": "runaway_beyond_profile_heats",
       "beyond_W_m2": 2.5e-05
@@ -55500,7 +55500,7 @@
     "window_stack_solar_maximum_fism2_cycle_23_gaps_0.0002": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_23",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -55510,7 +55510,7 @@
     "window_stack_solar_maximum_fism2_cycle_24_gaps_0.0002": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_24",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -55520,7 +55520,7 @@
     "window_stack_solar_maximum_fism2_cycle_25_gaps_0.0002": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_25",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -55539,8 +55539,8 @@
      "traced": 4.426439793780921e-05,
      "traced_over_o1_count": 0.14976883538336636,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 4.222152139946096,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.222152139946096
+     "gap_heat_over_disk_count": 4.222152139946096,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.222152139946096
     },
     {
      "film": "annulus_2_um",
@@ -55552,8 +55552,8 @@
      "traced": 0.00029966892320368104,
      "traced_over_o1_count": 0.20461656651417834,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 4.499189284161454,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.499189284161454
+     "gap_heat_over_disk_count": 4.499189284161454,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.499189284161454
     },
     {
      "film": "annulus_2_um",
@@ -55565,8 +55565,8 @@
      "traced": 0.0004716714102399314,
      "traced_over_o1_count": 0.11045860258482569,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 4.954347462174272,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.954347462174272
+     "gap_heat_over_disk_count": 4.954347462174272,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.954347462174272
     },
     {
      "film": "annulus_2_um",
@@ -55581,8 +55581,8 @@
       "cycle_24": null,
       "cycle_25": null
      },
-     "gap_heat_over_leak_count": 5.829692766469452,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.222152139946094
+     "gap_heat_over_disk_count": 5.829692766469452,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.222152139946094
     },
     {
      "film": "annulus_2_um",
@@ -55597,8 +55597,8 @@
       "cycle_24": null,
       "cycle_25": null
      },
-     "gap_heat_over_leak_count": 6.21361684071418,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.499189284161455
+     "gap_heat_over_disk_count": 6.21361684071418,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.499189284161455
     },
     {
      "film": "annulus_2_um",
@@ -55613,8 +55613,8 @@
       "cycle_24": 1.3776042129573105e-05,
       "cycle_25": null
      },
-     "gap_heat_over_leak_count": 6.837503840483072,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.9543474621742725
+     "gap_heat_over_disk_count": 6.837503840483072,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.9543474621742725
     },
     {
      "film": "annulus_4_um",
@@ -55626,8 +55626,8 @@
      "traced": 6.364060801448162e-05,
      "traced_over_o1_count": 0.2153283494064391,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 4.222152139946096,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.222152139946096
+     "gap_heat_over_disk_count": 4.222152139946096,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.222152139946096
     },
     {
      "film": "annulus_4_um",
@@ -55639,8 +55639,8 @@
      "traced": 0.00031919724563341076,
      "traced_over_o1_count": 0.2179506761797215,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 4.499189284161454,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.499189284161454
+     "gap_heat_over_disk_count": 4.499189284161454,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.499189284161454
     },
     {
      "film": "annulus_4_um",
@@ -55652,8 +55652,8 @@
      "traced": 0.0004912462059669473,
      "traced_over_o1_count": 0.11504273580754892,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 4.954347462174272,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.954347462174272
+     "gap_heat_over_disk_count": 4.954347462174272,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.954347462174272
     },
     {
      "film": "annulus_4_um",
@@ -55668,8 +55668,8 @@
       "cycle_24": null,
       "cycle_25": null
      },
-     "gap_heat_over_leak_count": 5.829692766469452,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.222152139946094
+     "gap_heat_over_disk_count": 5.829692766469452,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.222152139946094
     },
     {
      "film": "annulus_4_um",
@@ -55684,8 +55684,8 @@
       "cycle_24": 2.8624143899093554e-05,
       "cycle_25": 7.712256921434124e-06
      },
-     "gap_heat_over_leak_count": 6.21361684071418,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.499189284161455
+     "gap_heat_over_disk_count": 6.21361684071418,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.499189284161455
     },
     {
      "film": "annulus_4_um",
@@ -55700,8 +55700,8 @@
       "cycle_24": 9.98690909125387e-05,
       "cycle_25": 7.868546437299323e-05
      },
-     "gap_heat_over_leak_count": 6.837503840483072,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.9543474621742725
+     "gap_heat_over_disk_count": 6.837503840483072,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.9543474621742725
     },
     {
      "film": "window_stack",
@@ -55713,8 +55713,8 @@
      "traced": 6.954230180433117e-05,
      "traced_over_o1_count": 0.23529676300458321,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 4.222152139946096,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.222152139946096
+     "gap_heat_over_disk_count": 4.222152139946096,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.222152139946096
     },
     {
      "film": "window_stack",
@@ -55726,8 +55726,8 @@
      "traced": 0.0003250682395462176,
      "traced_over_o1_count": 0.22195944226604558,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 4.499189284161454,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.499189284161454
+     "gap_heat_over_disk_count": 4.499189284161454,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.499189284161454
     },
     {
      "film": "window_stack",
@@ -55739,8 +55739,8 @@
      "traced": 0.0004970854157768679,
      "traced_over_o1_count": 0.1164101940460615,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 4.954347462174272,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.954347462174272
+     "gap_heat_over_disk_count": 4.954347462174272,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.954347462174272
     },
     {
      "film": "window_stack",
@@ -55755,8 +55755,8 @@
       "cycle_24": null,
       "cycle_25": null
      },
-     "gap_heat_over_leak_count": 5.829692766469452,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.222152139946094
+     "gap_heat_over_disk_count": 5.829692766469452,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.222152139946094
     },
     {
      "film": "window_stack",
@@ -55772,8 +55772,8 @@
       "cycle_24": 5.8280608693034024e-05,
       "cycle_25": 5.6316463243899045e-05
      },
-     "gap_heat_over_leak_count": 6.21361684071418,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.499189284161455
+     "gap_heat_over_disk_count": 6.21361684071418,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.499189284161455
     },
     {
      "film": "window_stack",
@@ -55789,8 +55789,8 @@
       "cycle_24": 0.00012936628355394035,
       "cycle_25": 0.00012702878616110963
      },
-     "gap_heat_over_leak_count": 6.837503840483072,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.9543474621742725
+     "gap_heat_over_disk_count": 6.837503840483072,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.9543474621742725
     }
    ]
   },
@@ -64605,7 +64605,7 @@
     "annulus_2_um_quiet_gaps_0": {
      "film": "annulus_2_um",
      "activity": "quiet",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "traced": {
       "heat_W_m2": 2.9841616377857143e-06,
       "status": "thermal_column",
@@ -64649,7 +64649,7 @@
     "annulus_2_um_quiet_gaps_3e-05": {
      "film": "annulus_2_um",
      "activity": "quiet",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "traced": {
       "heat_W_m2": 3.2239336852854165e-06,
       "status": "thermal_column",
@@ -64693,7 +64693,7 @@
     "annulus_2_um_quiet_gaps_0.0002": {
      "film": "annulus_2_um",
      "activity": "quiet",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "traced": {
       "status": "runaway_beyond_profile_heats",
       "beyond_W_m2": 2e-05
@@ -64720,7 +64720,7 @@
     "annulus_2_um_solar_maximum_gaps_0": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "traced": {
       "status": "runaway_beyond_profile_heats",
       "beyond_W_m2": 2e-05
@@ -64747,7 +64747,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_23_gaps_0": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_23",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -64757,7 +64757,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_24_gaps_0": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_24",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -64767,7 +64767,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_25_gaps_0": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_25",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -64777,7 +64777,7 @@
     "annulus_2_um_solar_maximum_gaps_3e-05": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "traced": {
       "status": "runaway_beyond_profile_heats",
       "beyond_W_m2": 2e-05
@@ -64804,7 +64804,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_23_gaps_3e-05": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_23",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -64814,7 +64814,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_24_gaps_3e-05": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_24",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -64824,7 +64824,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_25_gaps_3e-05": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_25",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -64834,7 +64834,7 @@
     "annulus_2_um_solar_maximum_gaps_0.0002": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "traced": {
       "status": "runaway_beyond_profile_heats",
       "beyond_W_m2": 2e-05
@@ -64861,7 +64861,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_23_gaps_0.0002": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_23",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -64871,7 +64871,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_24_gaps_0.0002": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_24",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -64881,7 +64881,7 @@
     "annulus_2_um_solar_maximum_fism2_cycle_25_gaps_0.0002": {
      "film": "annulus_2_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_25",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -64891,7 +64891,7 @@
     "annulus_4_um_quiet_gaps_0": {
      "film": "annulus_4_um",
      "activity": "quiet",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "traced": {
       "heat_W_m2": 2.827164173892996e-06,
       "status": "thermal_column",
@@ -64935,7 +64935,7 @@
     "annulus_4_um_quiet_gaps_3e-05": {
      "film": "annulus_4_um",
      "activity": "quiet",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "traced": {
       "heat_W_m2": 3.0644716477402736e-06,
       "status": "thermal_column",
@@ -64979,7 +64979,7 @@
     "annulus_4_um_quiet_gaps_0.0002": {
      "film": "annulus_4_um",
      "activity": "quiet",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "traced": {
       "status": "runaway_beyond_profile_heats",
       "beyond_W_m2": 2e-05
@@ -65006,7 +65006,7 @@
     "annulus_4_um_solar_maximum_gaps_0": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "traced": {
       "status": "runaway_beyond_profile_heats",
       "beyond_W_m2": 2e-05
@@ -65033,7 +65033,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_23_gaps_0": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_23",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -65043,7 +65043,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_24_gaps_0": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_24",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -65053,7 +65053,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_25_gaps_0": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_25",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -65063,7 +65063,7 @@
     "annulus_4_um_solar_maximum_gaps_3e-05": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "traced": {
       "status": "runaway_beyond_profile_heats",
       "beyond_W_m2": 2e-05
@@ -65090,7 +65090,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_23_gaps_3e-05": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_23",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -65100,7 +65100,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_24_gaps_3e-05": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_24",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -65110,7 +65110,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_25_gaps_3e-05": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_25",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -65120,7 +65120,7 @@
     "annulus_4_um_solar_maximum_gaps_0.0002": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "traced": {
       "status": "runaway_beyond_profile_heats",
       "beyond_W_m2": 2e-05
@@ -65147,7 +65147,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_23_gaps_0.0002": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_23",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -65157,7 +65157,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_24_gaps_0.0002": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_24",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -65167,7 +65167,7 @@
     "annulus_4_um_solar_maximum_fism2_cycle_25_gaps_0.0002": {
      "film": "annulus_4_um",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_25",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -65177,7 +65177,7 @@
     "window_stack_quiet_gaps_0": {
      "film": "window_stack",
      "activity": "quiet",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "traced": {
       "heat_W_m2": 2.7802467235148057e-06,
       "status": "thermal_column",
@@ -65221,7 +65221,7 @@
     "window_stack_quiet_gaps_3e-05": {
      "film": "window_stack",
      "activity": "quiet",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "traced": {
       "heat_W_m2": 3.0168582819093013e-06,
       "status": "thermal_column",
@@ -65265,7 +65265,7 @@
     "window_stack_quiet_gaps_0.0002": {
      "film": "window_stack",
      "activity": "quiet",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "traced": {
       "status": "runaway_beyond_profile_heats",
       "beyond_W_m2": 2e-05
@@ -65292,7 +65292,7 @@
     "window_stack_solar_maximum_gaps_0": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "traced": {
       "status": "runaway_beyond_profile_heats",
       "beyond_W_m2": 2e-05
@@ -65319,7 +65319,7 @@
     "window_stack_solar_maximum_fism2_cycle_23_gaps_0": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_23",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -65329,7 +65329,7 @@
     "window_stack_solar_maximum_fism2_cycle_24_gaps_0": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_24",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -65339,7 +65339,7 @@
     "window_stack_solar_maximum_fism2_cycle_25_gaps_0": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0,
+     "gap_transmission": 0.0,
      "xrays": "fism2_cycle_25",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -65349,7 +65349,7 @@
     "window_stack_solar_maximum_gaps_3e-05": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "traced": {
       "status": "runaway_beyond_profile_heats",
       "beyond_W_m2": 2e-05
@@ -65376,7 +65376,7 @@
     "window_stack_solar_maximum_fism2_cycle_23_gaps_3e-05": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_23",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -65386,7 +65386,7 @@
     "window_stack_solar_maximum_fism2_cycle_24_gaps_3e-05": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_24",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -65396,7 +65396,7 @@
     "window_stack_solar_maximum_fism2_cycle_25_gaps_3e-05": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 3e-05,
+     "gap_transmission": 3e-05,
      "xrays": "fism2_cycle_25",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -65406,7 +65406,7 @@
     "window_stack_solar_maximum_gaps_0.0002": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "traced": {
       "status": "runaway_beyond_profile_heats",
       "beyond_W_m2": 2e-05
@@ -65433,7 +65433,7 @@
     "window_stack_solar_maximum_fism2_cycle_23_gaps_0.0002": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_23",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -65443,7 +65443,7 @@
     "window_stack_solar_maximum_fism2_cycle_24_gaps_0.0002": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_24",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -65453,7 +65453,7 @@
     "window_stack_solar_maximum_fism2_cycle_25_gaps_0.0002": {
      "film": "window_stack",
      "activity": "solar_maximum",
-     "leak": 0.0002,
+     "gap_transmission": 0.0002,
      "xrays": "fism2_cycle_25",
      "traced": {
       "status": "runaway_beyond_profile_heats",
@@ -65471,8 +65471,8 @@
      "escape_rule": null,
      "traced": null,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 4.446859325487677,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.446859325487677
+     "gap_heat_over_disk_count": 4.446859325487677,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.446859325487677
     },
     {
      "film": "annulus_2_um",
@@ -65484,8 +65484,8 @@
      "traced": 3.451380309024212e-05,
      "traced_over_o1_count": 0.11956002845880272,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 4.744778974855874,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.744778974855874
+     "gap_heat_over_disk_count": 4.744778974855874,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.744778974855874
     },
     {
      "film": "annulus_2_um",
@@ -65497,8 +65497,8 @@
      "traced": 0.00012404638958045462,
      "traced_over_o1_count": 0.04244986599184463,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 5.231671814327887,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 5.231671814327887
+     "gap_heat_over_disk_count": 5.231671814327887,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 5.231671814327887
     },
     {
      "film": "annulus_2_um",
@@ -65513,8 +65513,8 @@
       "cycle_24": null,
       "cycle_25": null
      },
-     "gap_heat_over_leak_count": 6.144984024839943,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.4468593254876785
+     "gap_heat_over_disk_count": 6.144984024839943,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.4468593254876785
     },
     {
      "film": "annulus_2_um",
@@ -65529,8 +65529,8 @@
       "cycle_24": null,
       "cycle_25": null
      },
-     "gap_heat_over_leak_count": 6.5580263209185095,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.744778974855874
+     "gap_heat_over_disk_count": 6.5580263209185095,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.744778974855874
     },
     {
      "film": "annulus_2_um",
@@ -65545,8 +65545,8 @@
       "cycle_24": null,
       "cycle_25": null
      },
-     "gap_heat_over_leak_count": 7.227457543758099,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 5.231671814327886
+     "gap_heat_over_disk_count": 7.227457543758099,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 5.231671814327886
     },
     {
      "film": "annulus_4_um",
@@ -65557,8 +65557,8 @@
      "escape_rule": null,
      "traced": null,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 4.446859325487677,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.446859325487677
+     "gap_heat_over_disk_count": 4.446859325487677,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.446859325487677
     },
     {
      "film": "annulus_4_um",
@@ -65570,8 +65570,8 @@
      "traced": 5.4422376049378934e-05,
      "traced_over_o1_count": 0.18852575626761398,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 4.744778974855874,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.744778974855874
+     "gap_heat_over_disk_count": 4.744778974855874,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.744778974855874
     },
     {
      "film": "annulus_4_um",
@@ -65583,8 +65583,8 @@
      "traced": 0.00014398059777313417,
      "traced_over_o1_count": 0.04927154350535213,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 5.231671814327887,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 5.231671814327887
+     "gap_heat_over_disk_count": 5.231671814327887,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 5.231671814327887
     },
     {
      "film": "annulus_4_um",
@@ -65599,8 +65599,8 @@
       "cycle_24": null,
       "cycle_25": null
      },
-     "gap_heat_over_leak_count": 6.144984024839943,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.4468593254876785
+     "gap_heat_over_disk_count": 6.144984024839943,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.4468593254876785
     },
     {
      "film": "annulus_4_um",
@@ -65615,8 +65615,8 @@
       "cycle_24": null,
       "cycle_25": null
      },
-     "gap_heat_over_leak_count": 6.5580263209185095,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.744778974855874
+     "gap_heat_over_disk_count": 6.5580263209185095,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.744778974855874
     },
     {
      "film": "annulus_4_um",
@@ -65631,8 +65631,8 @@
       "cycle_24": null,
       "cycle_25": null
      },
-     "gap_heat_over_leak_count": 7.227457543758099,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 5.231671814327886
+     "gap_heat_over_disk_count": 7.227457543758099,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 5.231671814327886
     },
     {
      "film": "window_stack",
@@ -65643,8 +65643,8 @@
      "escape_rule": null,
      "traced": null,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 4.446859325487677,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.446859325487677
+     "gap_heat_over_disk_count": 4.446859325487677,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.446859325487677
     },
     {
      "film": "window_stack",
@@ -65656,8 +65656,8 @@
      "traced": 6.0399217056776506e-05,
      "traced_over_o1_count": 0.2092302633620589,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 4.744778974855874,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.744778974855874
+     "gap_heat_over_disk_count": 4.744778974855874,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.744778974855874
     },
     {
      "film": "window_stack",
@@ -65669,8 +65669,8 @@
      "traced": 0.00014993800637317023,
      "traced_over_o1_count": 0.05131022594976275,
      "traced_fism2": {},
-     "gap_heat_over_leak_count": 5.231671814327887,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 5.231671814327887
+     "gap_heat_over_disk_count": 5.231671814327887,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 5.231671814327887
     },
     {
      "film": "window_stack",
@@ -65685,8 +65685,8 @@
       "cycle_24": null,
       "cycle_25": null
      },
-     "gap_heat_over_leak_count": 6.144984024839943,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.4468593254876785
+     "gap_heat_over_disk_count": 6.144984024839943,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.4468593254876785
     },
     {
      "film": "window_stack",
@@ -65701,8 +65701,8 @@
       "cycle_24": null,
       "cycle_25": null
      },
-     "gap_heat_over_leak_count": 6.5580263209185095,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 4.744778974855874
+     "gap_heat_over_disk_count": 6.5580263209185095,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 4.744778974855874
     },
     {
      "film": "window_stack",
@@ -65717,8 +65717,8 @@
       "cycle_24": null,
       "cycle_25": null
      },
-     "gap_heat_over_leak_count": 7.227457543758099,
-     "gap_heat_over_leak_count_xrays_at_uv_factor": 5.231671814327886
+     "gap_heat_over_disk_count": 7.227457543758099,
+     "gap_heat_over_disk_count_xrays_at_uv_factor": 5.231671814327886
     }
    ]
   }

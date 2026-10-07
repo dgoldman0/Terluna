@@ -247,9 +247,9 @@ out. Both tables are restored by `fetch_limb_inputs.py` against
 
 **Spectrum and activity.** WHI 2008 below 175 nm. Solar maximum multiplies the
 X-rays below 10 nm by 100 and the rest by 2.5, as `escape.film_heat` and the
-loss response do. A second open spectrum scales its X-rays by 2.5 as
-`escape.leakage_heat` scales a leak, which separates the X-rays' share of a
-gap's heat from the geometry's.
+loss response do. A second open spectrum scales its X-rays by 2.5, as
+`escape.leakage_heat` scales the band a filter passes, which separates the
+X-rays' share of a gap's heat from the geometry's.
 
 **The X-rays' solar cycle.** The films pass only X-rays near 1 nm, so their heat
 at solar maximum is their quiet heat times the X-rays' cycle factor. FISM2's
@@ -276,12 +276,13 @@ swells it, with the tables interpolated linearly between heats. Where no such
 heat lies in the tables the air runs away past their top. The molecular loss
 at the state is the thermal column's with Earth's tide.
 
-**Allowed leaks.** For each budget, the heat at which the loss with Earth's tide
-reaches it is found by bisection on the thermal column. The traced allowed
-leak is the largest grey leak through gaps over the aperture whose state stays
-at or below that heat. The loss response's count gives O1's leak at the same
-heat: the heat less the window film's (behind the titania stack) and the glow,
-over `escape.leakage_heat` of the whole band. Neither deducts the solar wind or
+**Allowed transmissions.** For each budget, the heat at which the loss with
+Earth's tide reaches it is found by bisection on the thermal column. The traced
+allowed transmission is the largest grey transmission through gaps over the
+aperture whose state stays at or below that heat. The loss response's count
+gives O1's transmission at the same heat: the heat less the window film's
+(behind the titania stack) and the glow, over `escape.leakage_heat` of the whole
+band. Neither deducts the solar wind or
 the exosphere step's losses, so the two compare directly.
 
 **Checks.** The disk's rays reproduce `escape.film_heat` within 0.1% for the
@@ -289,7 +290,8 @@ window stack, and `escape.leakage_heat` within 7% for an open band, where the
 escape model takes Lyman-α along a mean slant path. Every ray conserves
 energy. Tests compare the ray integration with direct quadrature through an
 exponential atmosphere. For unfiltered light on rays tangent between the base
-and the exobase, the traced thermospheric heat is 0.92 of the leak count, and
+and the exobase, the traced thermospheric heat is 0.92 of the escape model's
+count of the whole band over the disk, and
 `loss_response/absorption.py`, with three band-mean cross sections, gives 0.97.
 
 **Limits.** The air is spherically symmetric. The limb's light heats a ring of

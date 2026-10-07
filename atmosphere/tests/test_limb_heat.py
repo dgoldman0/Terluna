@@ -100,7 +100,7 @@ class StateTests(unittest.TestCase):
         self.parts['window'] = .2 + 1.1 * self.q
         self.assertIsNone(lh.first_state(self.q, self.parts, 0.))
 
-    def test_the_allowed_leak_inverts_the_state(self):
+    def test_the_allowed_transmission_inverts_the_state(self):
         self.assertAlmostEqual(lh.allowed_traced(self.q, self.parts, .6), .1, places=6)
         self.assertIsNone(lh.allowed_traced(self.q, self.parts, .3))
 
@@ -144,7 +144,7 @@ class ProductTests(unittest.TestCase):
                 self.assertAlmostEqual(window / counts['window_film_heat'][activity], 1., delta=.01)
                 # The escape model absorbs Lyman-alpha along a mean slant path; the rays find it within 10 per cent.
                 open_band = table['open_flat']['disk'][activity]['above_base_W_m2']
-                self.assertAlmostEqual(open_band / counts['leak'][activity], 1., delta=.1)
+                self.assertAlmostEqual(open_band / counts['band_over_disk'][activity], 1., delta=.1)
 
     def test_every_zone_accounts_for_the_light_arriving(self):
         for case in self.product['cases'].values():
@@ -155,11 +155,11 @@ class ProductTests(unittest.TestCase):
                             self.assertAlmostEqual(sum(row['shares'].values()), 1., places=9)
                             self.assertGreater(row['shares']['passing'], -1e-6)
 
-    def test_a_leak_over_the_aperture_heats_more_than_the_escape_model_counts(self):
+    def test_light_through_gaps_heats_more_than_the_escape_model_counts(self):
         counts = self.product['escape_count']
         for case in self.product['cases'].values():
             table = case['by_profile_heat'][0]['table']
-            ratio = table['open_flat']['aperture']['quiet']['thermosphere_W_m2'] / counts['leak']['quiet']
+            ratio = table['open_flat']['aperture']['quiet']['thermosphere_W_m2'] / counts['band_over_disk']['quiet']
             self.assertGreater(ratio, 2.)
 
     def test_the_thicker_film_settles_cooler(self):
@@ -191,7 +191,7 @@ class ProductTests(unittest.TestCase):
                 traced = row['traced'] if row['activity'] == 'quiet' else row['traced_fism2']['cycle_25']
                 self.assertTrue(.2 < traced / row['o1_count'] < .4, (name, row['activity'], row['budget_kg_s']))
 
-    def test_tracing_never_allows_more_leak_than_the_count(self):
+    def test_tracing_never_allows_more_transmission_than_the_count(self):
         for case in self.product['cases'].values():
             for row in case['budgets']:
                 if row.get('traced') and row.get('escape_rule'):

@@ -639,21 +639,22 @@ The tracing uses the ring fleet's aperture at 20,000 km. The held screen's,
 farther out, has wider zones and a solar smear of about 420 km at its edges,
 and the same physics.
 
-**For the author.** The check leaves the 4 µm film in place. The window stack
+**The author's decisions.** The check leaves the 4 µm film in place. The window stack
 over the annulus would lower the losses by a factor of 1.4–3. Behind the
 titania stack, at the swarm's tight and standard levels, no case would change
 its standing against a 1, 10 or 100 kg/s budget; the glow and the gaps set the
 loss. Behind the 200-nm edge it would take the tight level at solar maximum
-from 10–15 to about 6 kg/s. Two choices follow:
-1. O1's count of gaps. I recommend the traced heat per unit transmission in
-   place of the disk count, because it is the heat the air takes. The loss
-   response would take it from `limb_heat.json` and O1's levels and the design
-   point would be rederived; the allowed transmissions fall to about a quarter
-   to a third in the cooler titania cases.
-2. The X-rays' solar-maximum factors. I recommend FISM2's measured factors (4–6
-   below 10 nm, 13–24 for the films' bands) in place of the escape model's 2.5
-   for gaps and 100 for films. The escape model's convention reaches other
-   atmosphere products, which would be rerun.
+from 10–15 to about 6 kg/s. On 7 October the author accepted the two
+recommendations that followed ([decisions.md](../../decisions.md)):
+1. O1 counts gaps by the traced heat per unit transmission in place of the disk
+   count, because it is the heat the air takes. The loss response takes it from
+   `limb_heat.json`, and O1's levels and the design point are rederived; the
+   allowed transmissions fall to about a quarter to a third in the cooler
+   titania cases.
+2. The X-rays' solar-maximum factors are FISM2's measured ones (4–6 below
+   10 nm, 13–24 for the films' bands) in place of the escape model's 2.5 for the
+   band a filter passes and 100 for films. The atmosphere products that use the
+   convention are rerun with them.
 
 Giving the thermal column the traced heating shape would settle the remaining
 spread.
@@ -665,7 +666,9 @@ The author set this order on 7 October:
 1. The X-ray question, in the atmosphere domain: where solar X-rays that pass
    a light annulus deposit their energy along slant paths above the limb. It
    tells whether the chosen 4 µm film suffices and how O1 should count
-   X-rays. Done on 7 October ([the X-ray check](#the-x-ray-check)).
+   X-rays. Done on 7 October ([the X-ray check](#the-x-ray-check)). Its two
+   decisions call for the loss response, O1's levels and the design point to be
+   rederived.
 2. The outer rings: a radius profile that keeps each tilt turning with the
    Sun, with radius steps that grow toward the edges, flown for a year against
    steering by roll with the larger store.

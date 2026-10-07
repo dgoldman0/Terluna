@@ -63,7 +63,8 @@ all of it above the base. The middle atmosphere's slant-path tracing
 the thermosphere 2.5–5 times as much, as it reaches the air above the limb.
 It also finds the X-rays' solar-maximum factor from FISM2: 4–6 below 10 nm and
 13–24 for the light the titania films pass, where this branch takes 2.5 and 100.
-Whether this branch takes either is the author's choice.
+The author adopted both on 7 October ([decisions](../../research/decisions.md));
+this branch does not take them yet.
 
 Earth's tide lowers the barrier a molecule must climb to leave the Moon: in the
 frame turning with the Moon's orbit, a molecule can slip out of the Moon's Hill
