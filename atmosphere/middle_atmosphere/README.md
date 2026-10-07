@@ -350,6 +350,16 @@ the range across them.
   exceed 1 kg/s, and 10 kg/s allows 1.0×10⁻⁴. These
   allowances leave out the solar wind and the exosphere step's losses, so they
   compare the two counts at the same allowance.
+- **The tables keep the light by band and by height.** Fifteen bands of the
+  light below 175 nm are traced apart, so any solar spectrum weights them, and
+  each part of the light's heat is followed in log pressure above the base. At
+  the last three maxima FISM2's daily record puts the light from 10 to 175 nm at
+  1.25-1.41 times the quiet week, weighted by energy, where the escape model
+  takes 2.5: the extreme ultraviolet below 121 nm rises 1.6-1.9, Lyman-α 1.3-1.6
+  and the far ultraviolet from 122 to 175 nm, which carries most of the energy,
+  1.07-1.18 ([loss_response/cycle.py](../loss_response/cycle.py)). Through gaps
+  the far ultraviolet and Lyman-α heat the lower thermosphere and the extreme
+  ultraviolet its upper half.
 - **Where the heat lies matters as much as how much.** The thermal column
   spreads the heat with a fixed shape in log pressure. The traced light lands
   at a mean depth 0.38–0.43 of the way from the base to the exobase, at about

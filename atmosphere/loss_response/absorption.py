@@ -111,11 +111,16 @@ def band_weights():
 
 
 def ionization_rate(activity='quiet'):
-    """Photoionization rate per molecule (s^-1) from WHI photons below 80 nm."""
+    """Photoionization rate per molecule (s^-1) from WHI photons below 80 nm, at an activity: the escape model's
+    factor on the ultraviolet for a named one, each band's own factor for a measured one (cycle.py)."""
     w, f = escape.whi_quiet_sun()
     sel = w < IONIZING_NM
+    act = lr.activity_of(activity)
+    if 'bands' in act:
+        photons = f[sel] * 0.1 * w[sel] * 1e-9 / (lr.PLANCK * lr.LIGHT)
+        return IONIZATION_CROSS_SECTION_M2 * float((photons * traced.band_factors(w[sel], act)).sum())
     photons = float((f[sel] * 0.1 * w[sel] * 1e-9 / (lr.PLANCK * lr.LIGHT)).sum())
-    return IONIZATION_CROSS_SECTION_M2 * photons * lr.ACTIVITY[activity]['uv']
+    return IONIZATION_CROSS_SECTION_M2 * photons * act['uv']
 
 
 def _lower_gamma(a, x):
@@ -212,7 +217,7 @@ def column(shield, treatment, activity, leak, protected_R=None):
     q = traced.first_state(grid, parts, leak)
     if q is None:
         raise ValueError(f'the air runs away at a transmission of {leak:g} with {protected_R:g} lunar radii')
-    summary, profile, _ = solve_column(q, lr.column_config(shield, treatment))
+    summary, profile, _ = solve_column(q, lr.state_config(shield, treatment, activity, protected_R, leak, q))
     return summary, profile, q
 
 

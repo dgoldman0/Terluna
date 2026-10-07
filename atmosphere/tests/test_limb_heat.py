@@ -58,20 +58,26 @@ class DepositTests(unittest.TestCase):
     def setUp(self):
         self.air = exponential_air()
         self.sigma = dict(N2=np.array([1e-26, 1e-24, 1e-22]), O2=np.zeros(3), O=np.zeros(3))
-        self.weights = np.eye(3)
+
+    def deposit(self, b):
+        """Each wavelength's share left in each profile shell, and on the ground."""
+        shares, shell, ground = lh.deposit(b, self.air, self.sigma)
+        shells = np.zeros((shares.shape[0], len(self.air['radius_m']) - 1))
+        np.add.at(shells.T, shell, shares.T)
+        return shells, ground
 
     def test_a_ray_onto_the_disk_leaves_its_energy_in_the_air_or_on_the_ground(self):
-        shells, ground = lh.deposit(.3 * R, self.air, self.sigma, self.weights)
+        shells, ground = self.deposit(.3 * R)
         np.testing.assert_allclose(shells.sum(axis=1) + ground, 1., rtol=1e-10)
 
     def test_a_vertical_ray_sees_the_vertical_column(self):
-        _, ground = lh.deposit(0., self.air, self.sigma, self.weights)
+        _, ground = self.deposit(0.)
         column = 1e20 * 50e3 * -math.expm1(-R / 50e3)
         np.testing.assert_allclose(ground, np.exp(-self.sigma['N2'] * column), rtol=1e-6)
 
     def test_a_ray_past_the_limb_crosses_the_air_twice(self):
         b = R + 200e3
-        shells, ground = lh.deposit(b, self.air, self.sigma, self.weights)
+        shells, ground = self.deposit(b)
         self.assertTrue(np.all(ground == 0.))
         # Half the grazing column, by direct quadrature along the ray from its closest approach outward. Near the
         # tangent point the density falls as a Gaussian in path length, which exponential segments follow to 2e-4.
@@ -81,7 +87,7 @@ class DepositTests(unittest.TestCase):
 
     def test_each_shell_is_credited_where_the_ray_crosses_it(self):
         b = R + 200e3
-        shells, _ = lh.deposit(b, self.air, self.sigma, self.weights)
+        shells, _ = self.deposit(b)
         r = self.air['radius_m']
         self.assertTrue(np.all(shells[:, r[:-1] < b - 1e3] == 0.))
         self.assertGreater(shells[0, np.searchsorted(r, b) - 1], 0.)
@@ -170,23 +176,45 @@ class ProductTests(unittest.TestCase):
             ratio = table['open']['aperture']['quiet']['thermosphere_W_m2'] / counts['band_over_disk']['quiet']
             self.assertGreater(ratio, 2.)
 
-    def test_the_compact_summaries_agree_with_the_detailed_table(self):
+    def test_the_bands_weighted_by_activity_give_the_detailed_table(self):
+        bands = self.product['design']['bands_nm']
         for case in self.product['cases'].values():
             for entry in case['by_profile_heat']:
                 if 'table' not in entry:
                     continue
-                for source, zones in entry['table'].items():
-                    for zone, rows in zones.items():
-                        for activity, row in rows.items():
-                            self.assertTrue(math.isclose(entry['radii']['4'][source][zone][activity],
-                                                         row['thermosphere_W_m2'], rel_tol=1e-9, abs_tol=1e-300))
+                for source, zone in lh.COMPACT:
+                    for activity, row in entry['table'][source][zone].items():
+                        heat = float(np.dot(entry['radii']['4'][source][zone], traced.scales(activity, bands)))
+                        self.assertTrue(math.isclose(heat, row['thermosphere_W_m2'], rel_tol=1e-9, abs_tol=1e-300))
+
+    def test_each_parts_heat_lies_between_the_base_and_the_exobase(self):
+        step = self.product['design']['log_pressure_step']
+        for case in self.product['cases'].values():
+            for entry in case['by_profile_heat']:
+                for zone in entry.get('shapes', {}).values():
+                    for groups in zone.values():
+                        for quantiles in groups:
+                            if quantiles is None:
+                                continue
+                            self.assertTrue(all(b >= a for a, b in zip(quantiles, quantiles[1:])))
+                            self.assertGreaterEqual(quantiles[0], 0.)
+                            self.assertLessEqual(quantiles[-1], entry['exobase_log_pressure'] + 2 * step)
+
+    def test_lyman_alpha_through_gaps_heats_low_and_the_extreme_ultraviolet_high(self):
+        groups = self.product['design']['shape_groups_nm']
+        euv, lyman = groups.index(10.0), groups.index(121.0)
+        middle = self.product['design']['shape_quantiles'].index(0.5)
+        for case in self.product['cases'].values():
+            entry = case['by_profile_heat'][0]
+            gaps = entry['shapes']['aperture_4']['open']
+            self.assertLess(gaps[lyman][middle], .5 * gaps[euv][middle])
 
     def test_a_wider_aperture_never_lets_more_unfiltered_light_reach_the_thermosphere(self):
         for case in self.product['cases'].values():
             for entry in case['by_profile_heat']:
                 if 'radii' not in entry:
                     continue
-                beyond = [entry['radii'][f'{x:g}']['open']['outside']['quiet'] for x in lh.DESIGN['summary_radii_R']]
+                beyond = [sum(entry['radii'][f'{x:g}']['open']['outside']) for x in lh.DESIGN['summary_radii_R']]
                 self.assertTrue(all(b <= a * (1 + 1e-9) + 1e-30 for a, b in zip(beyond, beyond[1:])))
 
     def test_the_thicker_film_settles_cooler(self):

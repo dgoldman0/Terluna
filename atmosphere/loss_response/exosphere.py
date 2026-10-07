@@ -190,19 +190,29 @@ def pick(pair, level):
     return math.sqrt(pair[0] * pair[1])
 
 
-def photon_flux(lo_nm, hi_nm):
-    """WHI 2008 photons per m^2 per s between two wavelengths."""
+def photon_flux(lo_nm, hi_nm, measured=None):
+    """WHI 2008 photons per m^2 per s between two wavelengths; with a measured activity, each band weighted by its
+    own factor (cycle.py)."""
     w, f = escape.whi_quiet_sun()
     sel = (w >= lo_nm) & (w < hi_nm)
-    return float((f[sel] * 0.1 * w[sel] * 1e-9 / (lr.PLANCK * lr.LIGHT)).sum())
+    photons = f[sel] * 0.1 * w[sel] * 1e-9 / (lr.PLANCK * lr.LIGHT)
+    if measured is not None:
+        photons = photons * traced.band_factors(w[sel], measured)
+    return float(photons.sum())
 
 
 def rates(activity='quiet'):
-    """Per-molecule ionization and dissociation rates (s^-1) in full sunlight at 1 AU."""
+    """Per-molecule ionization and dissociation rates (s^-1) in full sunlight at 1 AU: for a named activity the escape
+    model's factor on the ultraviolet up to 100 nm and FAR_UV_ACTIVITY above, for a measured one each band's own."""
     ion = ab.ionization_rate(activity)
-    n2 = N2_PREDISSOCIATION_M2 * photon_flux(80.0, 100.0) * lr.ACTIVITY[activity]['uv']
-    o2 = (O2_CONTINUUM_M2 * photon_flux(122.5, 175.0)
-          + O2_LYMAN_ALPHA_M2 * photon_flux(121.0, 122.5)) * FAR_UV_ACTIVITY[activity]
+    act = lr.activity_of(activity)
+    if 'bands' in act:
+        n2 = N2_PREDISSOCIATION_M2 * photon_flux(80.0, 100.0, act)
+        o2 = O2_CONTINUUM_M2 * photon_flux(122.5, 175.0, act) + O2_LYMAN_ALPHA_M2 * photon_flux(121.0, 122.5, act)
+    else:
+        n2 = N2_PREDISSOCIATION_M2 * photon_flux(80.0, 100.0) * act['uv']
+        o2 = (O2_CONTINUUM_M2 * photon_flux(122.5, 175.0)
+              + O2_LYMAN_ALPHA_M2 * photon_flux(121.0, 122.5)) * FAR_UV_ACTIVITY[activity]
     return dict(N2=dict(ionization=ion, dissociation=n2), O2=dict(ionization=ion, dissociation=o2))
 
 
@@ -503,7 +513,6 @@ def allowed_with_exosphere(shield, treatment, activity, shadows=SHADOWS_R, budge
     sputtering. A protected radius holds only where it covers the thermosphere's heating, light beyond its aperture
     giving at most a tenth of the heat (traced.HEATING_SHARE); beyond that the transmission is not allowed."""
     protons = lr.solar_wind_losses()['central']['proton_sputtering_kg_s']
-    cfg = lr.column_config(shield, treatment)
     out = {key: {} for key in MAGNETOSPHERE_KEYS}
     sweep = {}
     for x in shadows:
@@ -514,7 +523,8 @@ def allowed_with_exosphere(shield, treatment, activity, shadows=SHADOWS_R, budge
                          exosphere_kg_s={})
             if row['status'] == 'thermal_column':
                 try:
-                    _, profile, _ = solve_column(row['deposited_heat_w_m2'], cfg)
+                    q = row['deposited_heat_w_m2']
+                    _, profile, _ = solve_column(q, lr.state_config(shield, treatment, activity, x, row['leak_fraction'], q))
                     entry['exosphere_kg_s'] = {k: v[0] for k, v in central_losses(profile, activity, [x]).items()}
                 except (ValueError, RuntimeError, FloatingPointError):
                     entry['exosphere_kg_s'] = {}

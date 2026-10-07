@@ -36,6 +36,15 @@ class ClosedForms(unittest.TestCase):
         self.assertGreater(heat, 0.5 * upper)
         self.assertLess(heat, upper)
 
+    def test_the_glow_heats_just_above_the_base(self):
+        import numpy as np
+        x = np.linspace(0.0, 10.0, 201)
+        below = lr.lyman_glow_shape(1.3, x)
+        self.assertEqual(below[0], 0.0)
+        self.assertTrue(np.all(np.diff(below) >= 0))
+        self.assertGreater(below[-1], 0.999)
+        self.assertLess(float(np.interp(0.5, below, x)), 2.0)      # half of it within two e-folds of pressure
+
     def test_mass_loading_cap(self):
         # 5 protons per cm^3 at 400 km/s through a disc three lunar radii across.
         cap = lr.solar_wind_losses(3.0)['mass_loading_cap_kg_s']
@@ -82,6 +91,29 @@ class Sweep(unittest.TestCase):
         losses = [r['molecular_loss_kg_s'] for r in rows]
         self.assertGreater(len(losses), 5)
         self.assertTrue(all(b > a for a, b in zip(losses, losses[1:])))
+
+    def test_a_measured_activity_at_the_quiet_sun_gives_the_quiet_state(self):
+        unit = dict(label='unit', bands=[1.0] * (len(lr.traced.limb_product()['design']['bands_nm']) - 1),
+                    glow=1.0, uv=1.0, xray=1.0)
+        measured = lr.euv_sweep('titania_stack', 'lte', unit, leaks=(2e-4,))[0]
+        quiet = lr.euv_sweep('titania_stack', 'lte', 'quiet', leaks=(2e-4,))[0]
+        for key in ('deposited_heat_w_m2', 'molecular_loss_kg_s', 'disk_count_heat_w_m2', 'energy_limited_eta0.1_R3_kg_s'):
+            self.assertAlmostEqual(measured[key] / quiet[key], 1.0, places=9, msg=key)
+        self.assertEqual(measured['activity'], 'unit')
+
+    def test_the_state_config_carries_the_traced_shape(self):
+        import numpy as np
+        saved = lr.HEATING_SHAPE
+        try:
+            lr.HEATING_SHAPE = 'traced'
+            cfg = lr.state_config('titania_stack', 'lte', 'quiet', 4.0, 2e-4, 3e-6)
+        finally:
+            lr.HEATING_SHAPE = saved
+        below = np.asarray(cfg.heating_fraction)
+        self.assertEqual(cfg.heating_shape, 'traced')
+        self.assertEqual((below[0], below[-1]), (0.0, 1.0))
+        self.assertTrue(np.all(np.diff(below) >= 0))
+        self.assertEqual(lr.state_config('titania_stack', 'lte', 'quiet', 4.0, 2e-4, 3e-6), lr.column_config('titania_stack', 'lte'))
 
     def test_glow_raises_the_floor(self):
         with_glow = lr.euv_sweep('titania_stack', 'lte', 'quiet', glow=True, leaks=(1e-6,))[0]

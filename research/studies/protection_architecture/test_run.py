@@ -39,3 +39,16 @@ def test_results_cover_every_level_and_shield():
     assert set(out['summary']) == {'tight', 'standard', 'relaxed'}
     for level in out['summary'].values():
         assert set(level) == set(lr.SHIELDS)
+    assert set(out['cycle_summary']) == set(run.cycle.SPANS)
+    for span in out['cycle_summary'].values():
+        assert set(span) == {'tight', 'standard', 'relaxed'}
+
+
+def test_a_measured_year_matches_its_point():
+    wind = lr.solar_wind_losses()
+    year = run.cycle.product()['spans']['cycles_23_24']['years'][5]
+    state = run.cycle_state('titania_stack', 'lte', year, 2e-4, 4.0, wind)
+    p = run.point('titania_stack', 'lte', year, 2e-4, wind, run.atmosphere_mass_kg())
+    for scenario in run.SCENARIOS:
+        assert state['total_kg_s'][scenario] == pytest.approx(p['total_loss_kg_s'][scenario]['central'], rel=1e-9)
+    assert p['activity'] == year['label']

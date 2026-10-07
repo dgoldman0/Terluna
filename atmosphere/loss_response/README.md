@@ -13,12 +13,15 @@ and what the sunlit exosphere beyond it produces. [exosphere.py](exosphere.py)
 finds what that exosphere loses, as ions and as the fragments of broken
 molecules, with and without a lunar magnetosphere, and the UV transmission each
 budget then allows. [fate.py](fate.py) follows the escaping air into the space
-around Earth and the Moon. All six are screening models; their methods and
+around Earth and the Moon. [cycle.py](cycle.py) reads FISM2's daily record band by
+band and gives each calendar year's measured sunlight, for the solar-cycle mean
+that R1 reads. All seven are screening models; their methods and
 limits are in their docstrings.
 
 ```sh
 OPENBLAS_NUM_THREADS=1 python -m atmosphere.loss_response.tides   # about 4 minutes; resumes if stopped
-OPENBLAS_NUM_THREADS=1 python -m atmosphere.middle_atmosphere.limb_heat   # then the limb tracing, about 2 CPU hours (cached)
+OPENBLAS_NUM_THREADS=1 python -m atmosphere.middle_atmosphere.limb_heat   # then the limb tracing, about 30 CPU minutes (cached)
+python -m atmosphere.loss_response.cycle        # then FISM2's daily record by band, a few seconds
 python -m atmosphere.loss_response.model        # then the loss response, about a minute
 python -m atmosphere.loss_response.absorption   # then the protected radius, a few minutes
 OPENBLAS_NUM_THREADS=1 python -m atmosphere.loss_response.exosphere   # then the exosphere's losses, about 20 minutes
@@ -45,7 +48,9 @@ exosphere's ion production in
 [results/absorption_radius.json](results/absorption_radius.json) (schema
 `terluna.atmosphere.absorption-radius/2`). The cloud the escaping air forms is in
 [results/escape_fate.json](results/escape_fate.json) (schema
-`terluna.atmosphere.escape-fate/1`).
+`terluna.atmosphere.escape-fate/1`), and each year's measured sunlight in
+[results/solar_cycle.json](results/solar_cycle.json) (schema
+`terluna.atmosphere.solar-cycle/1`).
 
 ## How it works
 
@@ -136,6 +141,14 @@ floor loss is 3×10⁻⁷–0.1 kg/s at quiet Sun and 2×10⁻⁵–1.5 kg/s at 
 maximum. Behind the 200-nm edge, whose upper air starts warmer, it is
 0.5–6.4 kg/s at quiet Sun and 7–8 kg/s at solar maximum, and with all
 near-infrared heating at solar maximum the air runs away with no gaps at all.
+
+**Over the solar cycle the ultraviolet rises far less than the escape model's
+2.5.** FISM2's daily record ([cycle.py](cycle.py)) puts the light from 10 to
+175 nm at 1.25–1.41 times the WHI 2008 quiet week at the last three maxima and at
+1.14 over solar cycles 23 and 24, weighted by energy; the far ultraviolet from 122
+to 175 nm, most of the energy, rises 1.07–1.18 at maximum. The tables here keep
+the escape model's solar maximum. The protection design point gives each state's
+mean over the measured years, which R1, a long-term average, reads.
 
 **Traced, ultraviolet-driven escape alone lets the gaps pass a few hundredths
 of a percent.** Largest allowed UV transmission from ultraviolet-driven escape

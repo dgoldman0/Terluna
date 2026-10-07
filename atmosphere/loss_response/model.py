@@ -55,6 +55,7 @@ beyond the scalings above.
 from __future__ import annotations
 import argparse
 import csv
+import dataclasses
 import hashlib
 import json
 import math
@@ -91,6 +92,7 @@ ACTIVITY = {'quiet': dict(uv=1.0, xray=1.0, glow=1.0),
 LEAKS = (1e-6, 3e-6, 1e-5, 2e-5, 3e-5, 5e-5, 1e-4, 2e-4, 3e-4, 5e-4, 1e-3, 2e-3, 3e-3, 5e-3,
          1e-2, 2e-2, 3e-2, 5e-2, 0.1, 0.3, 1.0)
 PROTECTED_R = 4.0               # the ring fleet's protected radius in lunar radii (decisions.md, 2026-10-07)
+HEATING_SHAPE = 'middle'        # the thermal column's heating shape at a traced state ('traced': from the limb tables)
 GLOW_RAYLEIGH = 1000.0          # interplanetary hydrogen glow at 1 AU (protection/report.md, section 9)
 BUDGETS_KG_S = (1.0, 10.0, 100.0)
 ETAS = (0.01, 0.1, 0.3)
@@ -115,6 +117,13 @@ def lyman_glow_flux(rayleigh=GLOW_RAYLEIGH):
     return rayleigh * 1e10 / (4 * math.pi) * math.pi * PLANCK * LIGHT / LYMAN_ALPHA_M
 
 
+def lyman_glow_tau(base_radius_R, base_pa=BASE_PA):
+    """O2's vertical optical depth to Lyman-alpha above the base, with gravity at the base radius."""
+    g_base = MOON_GM / (base_radius_R * MOON_RADIUS) ** 2
+    o2_column_cm2 = 0.175 * base_pa / (0.0289 / AVOGADRO * g_base) * 1e-4
+    return escape.O2_LYMAN_ALPHA_CM2 * o2_column_cm2
+
+
 def lyman_glow_heat(base_radius_R, rayleigh=GLOW_RAYLEIGH, base_pa=BASE_PA):
     """Heat (W/m^2 of lunar surface) the all-sky glow deposits above the base.
 
@@ -122,17 +131,39 @@ def lyman_glow_heat(base_radius_R, rayleigh=GLOW_RAYLEIGH, base_pa=BASE_PA):
     with escape.py's cross-section, over the column above the base taken with gravity at
     the base radius, for isotropic light from above (absorbed share 1 - 2 E3(tau)).
     escape.py's heating efficiency converts it to heat."""
-    g_base = MOON_GM / (base_radius_R * MOON_RADIUS) ** 2
-    o2_column_cm2 = 0.175 * base_pa / (0.0289 / AVOGADRO * g_base) * 1e-4
-    tau = escape.O2_LYMAN_ALPHA_CM2 * o2_column_cm2
+    tau = lyman_glow_tau(base_radius_R, base_pa)
     absorbed = 1.0 - 2.0 * float(expn(3, tau))
     return lyman_glow_flux(rayleigh) * base_radius_R ** 2 * absorbed * escape.HEATING_EFFICIENCY
 
 
+def lyman_glow_shape(base_radius_R, x, base_pa=BASE_PA):
+    """Cumulative share of the glow's heat below each log pressure x above the base: isotropic light from above,
+    absorbed by O2 whose column falls with pressure (transmitted share 2 E3(tau))."""
+    tau = lyman_glow_tau(base_radius_R, base_pa)
+    floor = 2.0 * float(expn(3, tau))
+    return (2.0 * expn(3, tau * np.exp(-np.asarray(x, float))) - floor) / (1.0 - floor)
+
+
+def activity_of(activity):
+    """An activity as a dict: quiet Sun or the escape model's solar maximum by name, or a measured one as given (with
+    a factor on each band of the limb tables, 'bands', a 'label', and 'glow', 'uv' and 'xray' factors; see
+    cycle.py)."""
+    return ACTIVITY[activity] if isinstance(activity, str) else activity
+
+
+def activity_label(activity):
+    return activity if isinstance(activity, str) else activity['label']
+
+
 def xuv_flux(activity='quiet'):
-    """Solar flux below 121 nm at 1 AU (W/m^2), from the WHI 2008 spectrum escape.py uses."""
+    """Solar flux below 121 nm at 1 AU (W/m^2), from the WHI 2008 spectrum escape.py uses, at an activity (a
+    measured one weights each band)."""
     w, f = escape.whi_quiet_sun()
-    return float(f[w < 121.0].sum() * 0.1) * ACTIVITY[activity]['uv']
+    sel = w < 121.0
+    act = activity_of(activity)
+    if 'bands' in act:
+        return float((f[sel] * traced.band_factors(w[sel], act)).sum() * 0.1)
+    return float(f[sel].sum() * 0.1) * act['uv']
 
 
 def energy_limited_loss(flux_w_m2, absorption_radius_R, eta):
@@ -186,17 +217,38 @@ def column_config(shield, treatment):
                         oxygen_mole_fraction=base['oxygen_mole_fraction'])
 
 
+_BASE_RADIUS = {}
+
+
+def base_radius_R(shield, treatment):
+    """The column's base radius (lunar radii) for a case, with no heat."""
+    if (shield, treatment) not in _BASE_RADIUS:
+        _BASE_RADIUS[shield, treatment] = solve_column(0.0, column_config(shield, treatment))[0]['lower_radius_R']
+    return _BASE_RADIUS[shield, treatment]
+
+
+def state_config(shield, treatment, activity, protected_R, gaps, heat, glow=True):
+    """The thermal column's configuration at a traced state: the case's, with the heating shape HEATING_SHAPE names;
+    'traced' takes each part of the light's heat where the limb tables put it and the glow's where O2 absorbs it."""
+    cfg = column_config(shield, treatment)
+    if HEATING_SHAPE != 'traced':
+        return dataclasses.replace(cfg, heating_shape=HEATING_SHAPE)
+    glow_w = glow_heat(shield, treatment, activity) if glow else 0.0
+    below = traced.shape(traced.entries(f'{shield}_{treatment}'), traced.FILM, activity, glow_w,
+                         lyman_glow_shape(base_radius_R(shield, treatment), traced.SHAPE_X), protected_R, gaps, heat)
+    return dataclasses.replace(cfg, heating_shape='traced', heating_log_pressure=tuple(float(x) for x in traced.SHAPE_X),
+                               heating_fraction=tuple(float(v) for v in below))
+
+
 def glow_heat(shield, treatment, activity):
     """The sky's Lyman-alpha glow heat (W/m^2) for a case at an activity, at the column's base radius."""
-    cfg = column_config(shield, treatment)
-    return lyman_glow_heat(solve_column(0.0, cfg)[0]['lower_radius_R']) * ACTIVITY[activity]['glow']
+    return lyman_glow_heat(base_radius_R(shield, treatment)) * activity_of(activity)['glow']
 
 
 def euv_sweep(shield, treatment, activity='quiet', glow=True, leaks=LEAKS, protected_R=PROTECTED_R):
     """Rows of the traced state, exobase and molecular loss against the UV transmission f through gaps."""
     base = base_conditions(shield, treatment)
-    cfg = column_config(shield, treatment)
-    act = ACTIVITY[activity]
+    act = activity_of(activity)
     unit = escape.leakage_heat(transmission=1.0, activity=act['uv'], xray_activity=act['xray'])
     glow_w = glow_heat(shield, treatment, activity) if glow else 0.0
     grid, parts = traced.parts(traced.entries(f'{shield}_{treatment}'), traced.FILM, activity, glow_w, protected_R)
@@ -212,7 +264,7 @@ def euv_sweep(shield, treatment, activity='quiet', glow=True, leaks=LEAKS, prote
         fs = sorted(fs + [lo])
     rows, previous, in_domain = [], None, True
     for f in fs:
-        row = dict(shield=shield, treatment=treatment, activity=activity, lyman_glow=glow,
+        row = dict(shield=shield, treatment=treatment, activity=activity_label(activity), lyman_glow=glow,
                    protected_radius_R=protected_R, leak_fraction=f,
                    base_temperature_k=round(base['base_temperature_k'], 2), disk_count_heat_w_m2=f * unit)
         for eta in ETAS:
@@ -229,7 +281,8 @@ def euv_sweep(shield, treatment, activity='quiet', glow=True, leaks=LEAKS, prote
                    beyond_share=share['beyond_share'])
         if in_domain:
             try:
-                summary, _, previous = solve_column(q, cfg, previous)
+                summary, _, previous = solve_column(q, state_config(shield, treatment, activity, protected_R, f, q, glow),
+                                                    previous)
                 flags = summary['domain_flags']
                 if 'HYDROSTATIC_OUTFLOW_LIMIT_EXCEEDED' in flags:
                     in_domain = False

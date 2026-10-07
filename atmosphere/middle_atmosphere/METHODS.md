@@ -260,6 +260,22 @@ passes, 18 for the 4 µm film (13-21 across the three maxima), 16 for the 2 µm
 film and 20 for the window stack; the whole band below 10 nm, which sets a
 gap's X-rays, rises 6.0 (4.6-6.9).
 
+**Bands and heights.** Each ray's deposit is kept for fifteen bands of the
+quiet Sun's light through each source: escape.py's five bands of the X-rays
+below 10 nm, then 10-30, 30-50, 50-80, 80-102.7 and 102.7-121 nm, Lyman-α
+(121-122 nm), and 122-130, 130-150, 150-160 and 160-175 nm. A spectrum that
+scales each band uniformly is a weighting of them: the escape model's quiet
+Sun, solar maximum and three maxima rebuild the earlier tables to 5×10⁻¹⁵, and
+a measured year of FISM2's daily record weights each band by its own rise
+(`loss_response/cycle.py`). The tables also follow where each part of the light
+heats the thermosphere. For the window stack over the window, each annulus
+source over the annulus, and open sky beyond the aperture and over the whole
+aperture of protected radii of 3, 4, 5, 6, 8 and 10 lunar radii, the heat is
+binned at 0.05 in log pressure above the base for five groups of bands (the
+X-rays, 10-102.7 nm, 102.7-121 nm, Lyman-α and 122-175 nm) and kept as the log
+pressures below which 1, 5, 10, ..., 95 and 99% of it lies. The product is
+written compactly, about 5 MB.
+
 **Heat and state.** The thermal column's heat is the light absorbed between the
 base and the exobase, times the heating efficiency of 0.4, over the Moon's
 surface area. Light absorbed above the exobase ionizes and dissociates
@@ -295,12 +311,14 @@ count of the whole band over the disk, and
 upper air above the terminator, and the one-dimensional column spreads it over
 the globe with its own heating shape. Where the traced light lands, in mean
 log-pressure depth between the base and the exobase, lies between the column's
-'low' and 'middle' shapes, so each state's loss is also given with the 'low'
-shape. Photoelectron transport, the day–night circulation and the exosphere's
+'low' and 'middle' shapes; each state's loss is also given with the 'low'
+shape and with the traced shape (`loss_response/traced.py`). Photoelectron transport, the day–night circulation and the exosphere's
 response to the light it absorbs are not modelled. FISM2's yearly means include
 the flares within each year; single days at maximum run up to about twice the
 yearly mean in the films' band. The 2.5 on the ultraviolet above 10 nm stays
-the escape model's convention.
+the escape model's convention for its solar maximum; FISM2's daily record
+measures 1.25-1.41 at the last three maxima, weighted by energy
+(`loss_response/cycle.py`).
 
 ## Radiation benchmarks
 

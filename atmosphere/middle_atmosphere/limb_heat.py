@@ -18,9 +18,10 @@ between the base and the exobase and in the exosphere above it, for the light th
 
 A ray's zone follows from where it crosses the shield, the ring fleet's screen near 20,000 km: the solar disk's
 angular radius smears that crossing by the shield's distance times that radius, the margin the window is sized for.
-Each ray's deposits are kept, so the zones of any protected radius can be summed; the product gives them for protected
-radii of 2 to 10 lunar radii, which the loss response reads (atmosphere/loss_response/traced.py), and works through
-the ring fleet's 4 lunar radii itself. Rays are packed across the smeared edges of 3-6 lunar radii; nearer the limb the
+Each ray's deposits are kept for each band of the light (escape.py's bands of the X-rays, then bands of the
+ultraviolet whose solar cycles differ), so any solar spectrum weights them and the zones of any protected radius can be
+summed; the product gives them for protected radii of 2 to 10 lunar radii, which the loss response reads
+(atmosphere/loss_response/traced.py), and works through the ring fleet's 4 lunar radii itself. Rays are packed across the smeared edges of 3-6 lunar radii; nearer the limb the
 logarithmic spacing is already finer than the smear.
 
 The atmosphere and its heat follow the loss response (atmosphere/loss_response/model.py): its six cases (the
@@ -28,7 +29,8 @@ titania-stack and 200-nm-edge middle atmospheres at 1.2 atm under three treatmen
 configuration, the sky's Lyman-alpha glow and Earth's tide on the molecular loss. Solar maximum is 2.5 times the quiet
 Sun's ultraviolet and, below 10 nm, FISM2's measured rise of the X-rays by band (escape.xray_cycle), the mean over the
 year around each of the last three solar maxima against the WHI 2008 quiet week, as the author chose on 2026-10-07;
-each of the three maxima is also traced. The films are the design's in all six cases; the 200-nm-edge atmospheres
+each of the three maxima is also traced, and a measured year of FISM2's daily record weights each band by its own
+rise (atmosphere/loss_response/cycle.py). The films are the design's in all six cases; the 200-nm-edge atmospheres
 stand for a warmer middle atmosphere. The middle atmosphere's profile (temperature, pressure and atomic oxygen, with
 the dry air of radiative_convective.thermodynamics) runs from the surface to the base, the thermal column's solution
 (molecular N2 and O2 at their fixed ratio) from there to the exobase, shifted to start at the profile's base height,
@@ -41,11 +43,13 @@ The thermal column takes the heat deposited between the base and the exobase, at
 efficiency, as a global mean and with its own heating shape. Light absorbed in the exosphere makes ions and
 photoelectrons in collisionless gas, which the exosphere step counts, and does not heat the column. The heat and the
 atmosphere it swells are solved together: a scenario's state is the first heat, counting up from zero, at which the
-heat the swollen atmosphere takes equals the heat that swells it. The traced light lands between the column's 'low'
-and 'middle' heating shapes in mean log-pressure depth, at about the depth of the disk's own light, so each state's
-loss is also given with the 'low' shape as a lower bound. The limb's light heats a ring of upper air over the
-terminator, which the one-dimensional column spreads over the globe; the circulation that would carry it is not
-modelled.
+heat the swollen atmosphere takes equals the heat that swells it. The tables also follow where each part of the light
+heats the thermosphere, by log pressure above the base, for groups of bands (the X-rays, the extreme ultraviolet, its
+long end, Lyman-alpha and the far ultraviolet) and for protected radii of 3 to 10 lunar radii. A state's heating shape
+mixes them by their heat at its activity, with the sky's glow where O2 absorbs it just above the base
+(atmosphere/loss_response/traced.py), and each state's loss is given with the column's 'middle' shape, its 'low' shape
+and the traced shape. The limb's light heats a ring of upper air over the terminator, which the one-dimensional column
+spreads over the globe; the circulation that would carry it is not modelled.
 """
 from __future__ import annotations
 import csv
@@ -80,11 +84,21 @@ DESIGN = dict(shield_distance_m=20.0e6, protected_radii=4, radii_R=[3, 4, 5, 6, 
               disk_rays=64, limb_rays=360, edge_rays=32, limb_first_km=0.5, exosphere_points=240, outer_radii=7.0,
               profile_heats_W_m2=[0., 1e-6, 2e-6, 3e-6, 4e-6, 5e-6, 6.5e-6, 8e-6, 1e-5, 1.25e-5, 1.5e-5, 2e-5,
                                   2.5e-5],
-              largest_exobase_radii=6.0, co2_ppm=400.0, budgets_kg_s=list(loss.BUDGETS_KG_S))
+              largest_exobase_radii=6.0, co2_ppm=400.0, budgets_kg_s=list(loss.BUDGETS_KG_S),
+              # Bands kept apart so any solar spectrum can weight them: escape.py's bands of the X-rays, then bands of
+              # the ultraviolet whose solar cycles differ (FISM2's daily record is read in the same bands).
+              bands_nm=list(escape.XRAY_BANDS_NM) + [30.0, 50.0, 80.0, 102.7, 121.0, 122.0, 130.0, 150.0, 160.0,
+                                                     175.0],
+              # Groups of bands whose heat is followed in height for the heating shape: X-rays, the extreme
+              # ultraviolet, its long end, Lyman-alpha and the far ultraviolet; the protected radii they are followed
+              # for; and the log-pressure bins and quantiles that describe each part's heat.
+              shape_groups_nm=[0.0, 10.0, 102.7, 121.0, 122.0, 175.0], shape_radii_R=[3, 4, 5, 6, 8, 10],
+              log_pressure_step=0.05, shape_quantiles=[0.01] + [round(.05 * k, 2) for k in range(1, 20)] + [0.99])
 # The heat tables depend on these settings only; the rest steer the analysis of the tables.
 TABLE_SETTINGS = ('shield_distance_m', 'protected_radii', 'radii_R', 'formation_margin_m', 'base_pa', 'band_nm',
                   'crossover_nm', 'films', 'disk_rays', 'limb_rays', 'edge_rays', 'limb_first_km', 'exosphere_points',
-                  'outer_radii', 'profile_heats_W_m2', 'largest_exobase_radii', 'co2_ppm')
+                  'outer_radii', 'profile_heats_W_m2', 'largest_exobase_radii', 'co2_ppm', 'bands_nm',
+                  'shape_groups_nm', 'shape_radii_R', 'log_pressure_step', 'shape_quantiles')
 # The loss response's quiet Sun and solar maximum, and each of the three solar maxima FISM2's mean is taken over.
 ACTIVITIES = dict(loss.ACTIVITY, **{period: dict(loss.ACTIVITY['solar_maximum'], xray=period)
                                     for period in escape.FISM2_MAXIMA})
@@ -98,6 +112,13 @@ SOURCES = ('window', 'annulus_2_um', 'annulus_4_um', 'open')
 # The films an annulus could carry: the two light films and the climate window's own stack.
 FILMS = {'annulus_2_um': 'annulus_2_um', 'annulus_4_um': 'annulus_4_um', 'window_stack': 'window'}
 ZONES = ('window', 'annulus', 'outside', 'aperture', 'disk')
+REGIONS = ('thermosphere', 'exosphere', 'below_base', 'ground')
+# The parts of the light a state counts, summarised by band for every protected radius.
+COMPACT = (('window', 'window'), ('window', 'annulus'), ('annulus_2_um', 'annulus'), ('annulus_4_um', 'annulus'),
+           ('open', 'aperture'), ('open', 'outside'), ('open', 'disk'))
+# The sources whose heat is followed in height in each zone.
+SHAPE_SOURCES = dict(window=('window',), annulus=('window', 'annulus_2_um', 'annulus_4_um'), outside=('open',),
+                     aperture=('open',))
 FILES = {name: ROOT / name for name in (
     'atmosphere/middle_atmosphere/limb_heat.py', 'atmosphere/middle_atmosphere/escape.py',
     'atmosphere/thermal_column.py', 'atmosphere/loss_response/model.py', 'atmosphere/loss_response/absorption.py',
@@ -274,12 +295,12 @@ def log_mean(a, b):
     return np.where(close, (a + b) / 2, (a - b) / np.log(np.where(close, 2., ratio)))
 
 
-def deposit(b, profile, sigma, weights):
-    """Energy a ray of impact parameter b leaves in each shell (between consecutive profile radii), on its way in and,
-    above the limb, on its way out; the rest reaches the ground (b below the radius) or leaves.
+def deposit(b, profile, sigma):
+    """Share of the light arriving at each wavelength that a ray of impact parameter b leaves in each segment of its
+    path, on its way in and, above the limb, on its way out, with the profile shell each segment lies in (between
+    consecutive profile radii); and the share that reaches the ground (b below the radius). The rest leaves.
 
-    weights: (sources, wavelengths) spectral power per wavelength step (W/m^2 at normal incidence). Returns
-    (sources, shells) deposited power per unit aperture area and (sources,) power reaching the ground."""
+    Returns (wavelengths, segments) absorbed shares, (segments,) shell indices and (wavelengths,) ground shares."""
     r = profile['radius_m']
     start = max(b, MOON_RADIUS)
     inside = r > start
@@ -295,95 +316,150 @@ def deposit(b, profile, sigma, weights):
     inward = np.exp(-tau)                      # intensity on the way in at each node
     gained = inward[:, 1:] - inward[:, :-1]    # absorbed between consecutive nodes going in
     if b < MOON_RADIUS:
-        shells = gained
+        shares = gained
         ground = inward[:, 0]
     else:
         half = tau[:, :1]
         outward = np.exp(-(2 * half - tau))    # intensity on the way out at each node
-        shells = gained + (outward[:, :-1] - outward[:, 1:])
+        shares = gained + (outward[:, :-1] - outward[:, 1:])
         ground = np.zeros(sigma['N2'].size)
     # Each segment of the ray goes to the profile shell that holds its middle; a ray that starts below the profile's
     # first layer gives that stretch to the first shell.
-    power = weights @ shells
     shell = np.clip(np.searchsorted(r, .5 * (rr[:-1] + rr[1:]), side='right') - 1, 0, len(r) - 2)
-    full = np.zeros((len(r) - 1, weights.shape[0]))
-    np.add.at(full, shell, power.T)
-    return full.T, weights @ ground
+    return shares, shell, ground
 
 
 def spectra(w, f, films):
-    """Spectral power per wavelength step (W/m^2) of each source at each activity: quiet Sun, the solar maximum the
-    escape model takes, and each of the three maxima behind it."""
+    """Spectral power per wavelength step (W/m^2) of the quiet Sun's light through each source, in each band of
+    DESIGN['bands_nm'] (rows (source, band)) and in each group of bands whose heat is followed in height
+    (rows (source, group)). Any solar spectrum is a weighting of the bands."""
     step = np.gradient(w)
     transmission = dict(films, open=np.ones_like(w))
-    names, rows = [], []
+    band = np.searchsorted(DESIGN['bands_nm'], w, side='right') - 1
+    group = np.searchsorted(DESIGN['shape_groups_nm'], w, side='right') - 1
+    names, rows, shape_names, shape_rows = [], [], [], []
     for name in SOURCES:
-        for activity, act in ACTIVITIES.items():
-            names.append((name, activity))
-            rows.append(f * step * transmission[name] *
-                        np.where(w < 10.0, escape.xray_scale(w, act['xray']), act['uv']))
+        light = f * step * transmission[name]
+        for i in range(len(DESIGN['bands_nm']) - 1):
+            names.append((name, i))
+            rows.append(np.where(band == i, light, 0.))
+        for g in range(len(DESIGN['shape_groups_nm']) - 1):
+            shape_names.append((name, g))
+            shape_rows.append(np.where(group == g, light, 0.))
+    return names, np.array(rows), shape_names, np.array(shape_rows)
+
+
+def shape_zones(b):
+    """The zones whose heat is followed in height, with each ray's area in each (m^2): the window, and the annulus, the
+    sky beyond the aperture and the whole aperture of each protected radius in DESIGN['shape_radii_R']."""
+    areas = ring_areas(b)
+    names, rows = [('window', None)], [zone_weights(b)['window'] * areas]
+    for x in DESIGN['shape_radii_R']:
+        zones = zone_weights(b, x)
+        for zone in ('annulus', 'outside', 'aperture'):
+            names.append((zone, x))
+            rows.append(zones[zone] * areas)
     return names, np.array(rows)
 
 
-def ray_table(profile, b, weights, sigma, shell_weights=None):
-    """Each ray's deposit per unit aperture area (W/m^2 at normal incidence): in the thermosphere between the base and
-    the exobase, in the exosphere, below the base and on the ground. With shell_weights (zones, rays: each ray's area
-    in each zone) also the power each zone leaves in every shell (W), for the pressure profile."""
+def ray_table(profile, b, weights, sigma, shape_weights=None, shape_areas=None):
+    """Each ray's deposit per unit aperture area (W/m^2 at normal incidence) for each row of weights: in the
+    thermosphere between the base and the exobase, in the exosphere, below the base and on the ground. With
+    shape_weights (rows of light) and shape_areas (zones, rays: each ray's area in each zone), also the heat each zone
+    leaves in the thermosphere per bin of log pressure above the base (W), for the heating shape."""
     r = profile['radius_m'][:-1]
     thermo = (r >= profile['base_radius_m']) & (r < profile['exobase_radius_m'])
     exo = r >= profile['exobase_radius_m']
+    region = np.where(thermo, 0, np.where(exo, 1, 2))      # thermosphere, exosphere, below the base
     out = {k: np.zeros((weights.shape[0], len(b))) for k in ('thermosphere', 'exosphere', 'below_base', 'ground')}
-    shells = None if shell_weights is None else np.zeros((weights.shape[0], len(shell_weights), len(r)))
+    shapes = None
+    if shape_weights is not None:
+        log_p = np.log(np.maximum(profile['pressure_pa'], 1e-300))
+        above = math.log(DESIGN['base_pa']) - .5 * (log_p[:-1] + log_p[1:])    # at each shell's middle
+        bins = np.clip(above / DESIGN['log_pressure_step'], 0, 1e6).astype(int)
+        n_bins = int(bins[thermo].max()) + 1 if thermo.any() else 1
+        shapes = np.zeros((len(shape_areas), shape_weights.shape[0], n_bins))
     for i, bi in enumerate(b):
-        power, floor = deposit(bi, profile, sigma, weights)
-        out['thermosphere'][:, i] = power[:, thermo].sum(axis=1)
-        out['exosphere'][:, i] = power[:, exo].sum(axis=1)
-        out['below_base'][:, i] = power[:, ~(thermo | exo)].sum(axis=1)
-        out['ground'][:, i] = floor
-        if shells is not None:
-            shells += power[:, None, :] * shell_weights[None, :, i, None]
-    return out, shells
+        shares, shell, ground = deposit(bi, profile, sigma)
+        where = region[shell]
+        by_region = np.stack([shares[:, where == k].sum(axis=1) for k in range(3)], axis=1)
+        power = weights @ by_region
+        out['thermosphere'][:, i], out['exosphere'][:, i], out['below_base'][:, i] = power.T
+        out['ground'][:, i] = weights @ ground
+        if shapes is not None and (where == 0).any():
+            heated = where == 0
+            light = shape_weights @ shares[:, heated]
+            k = bins[shell[heated]]
+            hist = np.stack([np.bincount(k, weights=row, minlength=n_bins) for row in light])
+            shapes += shape_areas[:, i, None, None] * hist[None]
+    return out, shapes
 
 
-def profile_by_pressure(profile, shells, names, zone_names, picks):
-    """Heat between the base and the exobase per decade of pressure (W), where each part of the light heats."""
-    r = profile['radius_m']
-    p = profile['pressure_pa']
-    mid = np.sqrt(np.maximum(p[:-1], 1e-30) * np.maximum(p[1:], 1e-30))
-    edges = 10.0**np.arange(-16, 0)
-    rows = {}
-    for source, activity, zone in picks:
-        s = names.index((source, activity))
-        z = zone_names.index(zone)
-        hist = [float(shells[s, z][(mid >= lo) & (mid < hi) & (r[:-1] >= profile['base_radius_m'])].sum())
-                for lo, hi in zip(edges[:-1], edges[1:])]
-        rows[f'{source}_{zone}_{activity}'] = hist
-    return dict(pressure_decades_pa=[[float(lo), float(hi)] for lo, hi in zip(edges[:-1], edges[1:])], watts=rows)
+def quantiles(hist):
+    """The log pressures above the base below which each share in DESIGN['shape_quantiles'] of a profile's heat lies,
+    interpolated within its bins of DESIGN['log_pressure_step']; None for a profile with no heat."""
+    total = float(hist.sum())
+    if total <= 0:
+        return None
+    cdf = np.r_[0., np.cumsum(hist)] / total
+    step = DESIGN['log_pressure_step']
+    out = []
+    for level in DESIGN['shape_quantiles']:
+        j = min(max(int(np.searchsorted(cdf, level, side='left')), 1), len(cdf) - 1)
+        out.append(round(float(step * (j - 1 + (level - cdf[j - 1]) / (cdf[j] - cdf[j - 1]))), 4))
+    return out
 
 
-def tables(case, b, sigma, names, weights, key):
+def shape_summary(shapes, zone_names, shape_names):
+    """Where each part of the light heats the thermosphere, by group of bands: the window stack over the window, each
+    annulus source over the annulus, and open sky beyond the aperture and over the whole aperture, for each protected
+    radius followed (quantiles of log pressure above the base)."""
+    groups = range(len(DESIGN['shape_groups_nm']) - 1)
+    out = {}
+    for z, (zone, x) in enumerate(zone_names):
+        key = zone if x is None else f'{zone}_{x:g}'
+        for source in SHAPE_SOURCES[zone]:
+            out.setdefault(key, {})[source] = [quantiles(shapes[z, shape_names.index((source, g))]) for g in groups]
+    return out
+
+
+def save_tables(meta_path, ray_path, key, entries, arrays, complete):
+    CACHE.mkdir(parents=True, exist_ok=True)
+    np.savez_compressed(ray_path, **{k: np.array(v) for k, v in arrays.items()})
+    meta_path.write_text(json.dumps(dict(key=key, complete=bool(complete), entries=entries)))
+
+
+def tables(case, b, sigma, names, weights, shape_names, shape_weights, key):
     """The heat tables at the profile heats, from the quiescent air up until the exobase passes the largest radius
-    or the column leaves its domain: each heat's state and each ray's deposits, kept in the cache under the key of the
-    code, settings, inputs and products they come from."""
+    or the column leaves its domain: each heat's state, each ray's deposits by band and where each part of the light
+    heats, kept in the cache under the key of the code, settings, inputs and products they come from. Each heat is
+    kept as it is traced, so a stopped run resumes at the next."""
     meta_path, ray_path = CACHE / f'{case}.json', CACHE / f'{case}.npz'
+    entries, arrays = [], {k: [] for k in REGIONS}
     if meta_path.is_file() and ray_path.is_file():
         saved = json.loads(meta_path.read_text())
-        if saved.get('key') == key and saved.get('complete'):
+        if saved.get('key') == key:
             with np.load(ray_path) as data:
-                return saved['entries'], {k: data[k] for k in data.files}
-    areas = ring_areas(b)
-    design = zone_weights(b)
-    shell_weights = np.array([design[z] * areas for z in ZONES])
-    entries, previous = [], None
-    arrays = {k: [] for k in ('thermosphere', 'exosphere', 'below_base', 'ground')}
-    for q in DESIGN['profile_heats_W_m2']:
+                stacked = {k: data[k] for k in data.files}
+            if saved.get('complete'):
+                return saved['entries'], stacked
+            entries = saved['entries']
+            traced_heats = sum('failed' not in e for e in entries)     # rays saved beyond the entries are traced again
+            arrays = {k: list(stacked.get(k, []))[:traced_heats] for k in REGIONS}
+    zone_names, shape_areas = shape_zones(b)
+    done, previous = len(entries), None
+    heats = DESIGN['profile_heats_W_m2']
+    for n, q in enumerate(heats):
         try:
             profile, previous = atmosphere(case, q, previous)
         except (ValueError, RuntimeError, FloatingPointError) as exc:
-            entries.append(dict(heat_W_m2=q, failed=str(exc)))
+            if n >= done:
+                entries.append(dict(heat_W_m2=q, failed=str(exc)))
             break
+        if n < done:
+            continue        # traced before a restart; solved again only to warm-start the next heat
         summary = profile['summary']
-        rays, shells = ray_table(profile, b, weights, sigma, shell_weights if q == 0. else None)
+        rays, shapes = ray_table(profile, b, weights, sigma, shape_weights, shape_areas)
         for k, v in rays.items():
             arrays[k].append(v)
         entry = dict(heat_W_m2=q, exobase_radius_R=profile['exobase_radius_m'] / MOON_RADIUS,
@@ -391,56 +467,67 @@ def tables(case, b, sigma, names, weights, key):
                      exobase_temperature_k=summary['exobase_temperature_k'],
                      base_radius_km=profile['base_radius_m'] / 1e3,
                      column_base_shift_km=(profile['base_radius_m'] - profile['column_base_radius_m']) / 1e3,
-                     outflow_limit='HYDROSTATIC_OUTFLOW_LIMIT_EXCEEDED' in summary['domain_flags'])
-        if q == 0.:
-            entry['by_pressure'] = profile_by_pressure(
-                profile, shells, names, list(ZONES),
-                [('annulus_4_um', 'solar_maximum', 'annulus'), ('annulus_2_um', 'solar_maximum', 'annulus'),
-                 ('window', 'solar_maximum', 'window'), ('open', 'quiet', 'aperture'), ('open', 'quiet', 'disk')])
+                     exobase_log_pressure=float(math.log(DESIGN['base_pa'] / summary['exobase_pressure_pa'])),
+                     outflow_limit='HYDROSTATIC_OUTFLOW_LIMIT_EXCEEDED' in summary['domain_flags'],
+                     shapes=shape_summary(shapes, zone_names, shape_names))
         entries.append(entry)
         print(f"  {case} heat {q:.2e}: exobase {entry['exobase_radius_R']:.2f} R", flush=True)
-        if entry['outflow_limit'] or entry['exobase_radius_R'] > DESIGN['largest_exobase_radii']:
+        stop = bool(entry['outflow_limit'] or entry['exobase_radius_R'] > DESIGN['largest_exobase_radii'])
+        save_tables(meta_path, ray_path, key, entries, arrays, stop or n == len(heats) - 1)
+        if stop:
             break
-    CACHE.mkdir(parents=True, exist_ok=True)
-    stacked = {k: np.array(v) for k, v in arrays.items()}
-    np.savez_compressed(ray_path, **stacked)
-    meta_path.write_text(json.dumps(dict(key=key, complete=True, entries=entries)))
-    return entries, stacked
+    save_tables(meta_path, ray_path, key, entries, arrays, True)
+    return entries, {k: np.array(v) for k, v in arrays.items()}
 
 
-def zone_summary(rays, areas, zones, incident, names, detailed):
-    """Heat in the thermosphere for each source and zone, as a global mean at the escape model's heating efficiency
-    (W/m^2 of lunar surface). In detail, for quiet Sun and solar maximum, also the heat above the base, the light
-    absorbed in the exosphere and the fate of the light arriving."""
+def band_heats(rays, weight, rows, region='thermosphere'):
+    """Heat (W/m^2 of lunar surface, at the escape model's heating efficiency) a zone's rays leave in a region, per
+    band, for the rows of one source."""
+    return [float(escape.HEATING_EFFICIENCY * rays[region][j] @ weight / (4 * math.pi * MOON_RADIUS**2)) for j in rows]
+
+
+def zone_summary(rays, areas, zones, names):
+    """Heat in the thermosphere per band of the quiet Sun's light, as a global mean at the escape model's heating
+    efficiency (W/m^2 of lunar surface), for the parts of the light a state counts: the window stack over the window
+    and the annulus, each film over the annulus, and open sky over the whole aperture, beyond it and over the disk."""
+    n = len(DESIGN['bands_nm']) - 1
+    out = {}
+    for source, zone in COMPACT:
+        rows = [names.index((source, i)) for i in range(n)]
+        out.setdefault(source, {})[zone] = band_heats(rays, areas * zones[zone], rows)
+    return out
+
+
+def zone_detail(rays, areas, zones, incident, names):
+    """For quiet Sun and solar maximum, each source and zone: the heat in the thermosphere and above the base, the
+    light absorbed in the exosphere and the fate of the light arriving."""
     area = 4 * math.pi * MOON_RADIUS**2
-    eff = escape.HEATING_EFFICIENCY
+    n = len(DESIGN['bands_nm']) - 1
     out = {}
     for zone in ZONES:
         weight = areas * zones[zone]
         parts = {k: v @ weight for k, v in rays.items()}
         arriving = incident * weight.sum()
-        for s, (source, activity) in enumerate(names):
-            thermo = float(eff * parts['thermosphere'][s] / area)
-            if not detailed:
-                out.setdefault(source, {}).setdefault(zone, {})[activity] = thermo
-                continue
-            if activity not in loss.ACTIVITY:
-                continue
-            a = arriving[s]
-            share = (lambda x: float(x / a)) if a > 0 else (lambda x: 0.)
-            deposited = parts['thermosphere'][s] + parts['exosphere'][s] + parts['below_base'][s]
-            out.setdefault(source, {}).setdefault(zone, {})[activity] = dict(
-                thermosphere_W_m2=thermo,
-                above_base_W_m2=float(eff * (parts['thermosphere'][s] + parts['exosphere'][s]) / area),
-                exosphere_absorbed_W_m2=float(parts['exosphere'][s] / area), arriving_W_m2=float(a / area),
-                shares=dict(thermosphere=share(parts['thermosphere'][s]), exosphere=share(parts['exosphere'][s]),
-                            below_base=share(parts['below_base'][s]), ground=share(parts['ground'][s]),
-                            passing=share(a - deposited - parts['ground'][s])))
+        for source in SOURCES:
+            rows = [names.index((source, i)) for i in range(n)]
+            for activity, act in loss.ACTIVITY.items():
+                s = traced.scales(act, DESIGN['bands_nm'])
+                get = lambda k: float(s @ parts[k][rows])
+                a = float(s @ arriving[rows])
+                share = (lambda x: x / a) if a > 0 else (lambda x: 0.)
+                deposited = get('thermosphere') + get('exosphere') + get('below_base')
+                out.setdefault(source, {}).setdefault(zone, {})[activity] = dict(
+                    thermosphere_W_m2=escape.HEATING_EFFICIENCY * get('thermosphere') / area,
+                    above_base_W_m2=escape.HEATING_EFFICIENCY * (get('thermosphere') + get('exosphere')) / area,
+                    exosphere_absorbed_W_m2=get('exosphere') / area, arriving_W_m2=a / area,
+                    shares=dict(thermosphere=share(get('thermosphere')), exosphere=share(get('exosphere')),
+                                below_base=share(get('below_base')), ground=share(get('ground')),
+                                passing=share(a - deposited - get('ground'))))
     return out
 
 
 def build_entries(meta, arrays, b, incident, names):
-    """Each heat's state with its zone summaries: compact for every protected radius, in detail for the ring
+    """Each heat's state with its heat by band for every protected radius summarised, and in detail for the ring
     fleet's."""
     areas = ring_areas(b)
     zones = {x: zone_weights(b, x) for x in DESIGN['summary_radii_R']}
@@ -449,9 +536,8 @@ def build_entries(meta, arrays, b, incident, names):
         entry = dict(entry)
         if 'failed' not in entry:
             rays = {k: v[i] for k, v in arrays.items()}
-            entry['radii'] = {f'{x:g}': zone_summary(rays, areas, zones[x], incident, names, False)
-                              for x in DESIGN['summary_radii_R']}
-            entry['table'] = zone_summary(rays, areas, zones[DESIGN['protected_radii']], incident, names, True)
+            entry['radii'] = {f'{x:g}': zone_summary(rays, areas, zones[x], names) for x in DESIGN['summary_radii_R']}
+            entry['table'] = zone_detail(rays, areas, zones[DESIGN['protected_radii']], incident, names)
             i += 1
         entries.append(entry)
     return entries
@@ -524,16 +610,22 @@ def disk_count(case, activity, counts, glow):
     return film + glow * loss.ACTIVITY[activity]['glow']
 
 
-def state_row(cfg, low, q, p, gaps):
+def state_row(cfg, low, q, p, gaps, shape_at=None):
     """A scenario's traced state, its parts and its loss, with the loss if the heat lay as low as the column's 'low'
-    shape puts it."""
+    shape puts it and, with shape_at (the cumulative share of heat below each log pressure, at a heat), where the
+    tracing puts it."""
     state = traced.first_state(q, p, gaps)
     if state is None:
         return dict(status='runaway_beyond_profile_heats', beyond_W_m2=float(q[-1]))
     bound = molecular_loss(low, state)
     kept = ('status', 'exobase_temperature_k', 'molecular_loss_kg_s')
-    return dict(molecular_loss(cfg, state), parts_W_m2=traced.shares(q, p, gaps, state),
-                low_shape={k: bound[k] for k in kept if k in bound})
+    out = dict(molecular_loss(cfg, state), parts_W_m2=traced.shares(q, p, gaps, state),
+               low_shape={k: bound[k] for k in kept if k in bound})
+    if shape_at is not None:
+        shaped = molecular_loss(dataclasses.replace(cfg, heating_shape='traced', heating_log_pressure=tuple(
+            float(x) for x in traced.SHAPE_X), heating_fraction=tuple(float(v) for v in shape_at(state))), state)
+        out['traced_shape'] = {k: shaped[k] for k in kept if k in shaped}
+    return out
 
 
 def analyse(case, entries, counts):
@@ -542,17 +634,21 @@ def analyse(case, entries, counts):
     cfg = case_config(case)
     low = dataclasses.replace(cfg, heating_shape='low')
     glow = glow_heat(case)
+    glow_shape = loss.lyman_glow_shape(loss.base_radius_R(*CASES[case]), traced.SHAPE_X)
     unit = counts['band_over_disk']
     ceiling = max(e['heat_W_m2'] for e in entries if 'radii' in e and not e['outflow_limit'])
     heats = {budget: heat_for_loss(cfg, budget, ceiling) for budget in DESIGN['budgets_kg_s']}
     scenarios, budgets = {}, []
     for film, source in FILMS.items():
         for activity, act in ACTIVITIES.items():
-            q, p = traced.parts(entries, source, activity, glow * act['glow'], DESIGN['protected_radii'])
+            q, p = traced.parts(entries, source, act, glow * act['glow'], DESIGN['protected_radii'], DESIGN['bands_nm'])
             counted = activity in loss.ACTIVITY
             for gaps in [0.] + DESIGN['gap_transmissions']:
+                shape_at = (lambda heat, gaps=gaps, source=source, act=act: traced.shape(
+                    entries, source, act, glow * act['glow'], glow_shape, DESIGN['protected_radii'], gaps, heat,
+                    design=DESIGN))
                 row = dict(film=film, activity=activity, gap_transmission=gaps,
-                           traced=state_row(cfg, low, q, p, gaps))
+                           traced=state_row(cfg, low, q, p, gaps, shape_at))
                 if counted:
                     row['disk_count'] = molecular_loss(cfg, disk_count(case, activity, counts, glow)
                                                        + gaps * unit[activity])
@@ -573,7 +669,7 @@ def analyse(case, entries, counts):
 
 TABLE_CODE = (cross_sections, transmissions, case_row, profile_path, middle_profile, case_config, atmosphere,
               escape_covering, aperture_edge, impact_parameters, ring_areas, zone_weights, log_mean, deposit, spectra,
-              ray_table, profile_by_pressure, tables)
+              shape_zones, ray_table, quantiles, shape_summary, save_tables, tables)
 
 
 def table_key(inputs, products, constants):
@@ -611,14 +707,14 @@ def main(argv=None) -> int:
     w, f = whi_w[sel], whi_f[sel]
     films = transmissions(w)
     sigma = cross_sections(w)
-    names, weights = spectra(w, f, films)
+    names, weights, shape_names, shape_weights = spectra(w, f, films)
     b = impact_parameters()
     incident = weights.sum(axis=1)
     counts = escape_count(w, f, films)
     code, inputs, products, constants, key = provenance()
     cases = {}
     for case in CASES:
-        meta, arrays = tables(case, b, sigma, names, weights, key)
+        meta, arrays = tables(case, b, sigma, names, weights, shape_names, shape_weights, key)
         entries = build_entries(meta, arrays, b, incident, names)
         result = analyse(case, entries, counts)
         cases[case] = dict(by_profile_heat=entries, **result)
@@ -632,22 +728,26 @@ def main(argv=None) -> int:
         evidence=' '.join(part.replace('\n', ' ') for part in __doc__.split('\n\n')[1:]),
         reading_rule=(
             'Heats are W per m^2 of lunar surface, global means at the escape model\'s heating efficiency, as the '
-            'thermal column takes them. In each case\'s by_profile_heat, "radii"[R][source][zone][activity] is the '
-            'heat in the thermosphere, between the 0.3 Pa base and the exobase, at a protected radius of R lunar '
-            'radii; "table" gives it in detail at the ring fleet\'s 4 lunar radii, with the light absorbed in the '
-            'exosphere ("exosphere_absorbed", which the column does not take) and the fate of the light arriving. '
-            'Activities: quiet, solar_maximum (2.5 on the ultraviolet and FISM2\'s mean rise below 10 nm) and each '
-            'maximum behind that mean (cycle_23, cycle_24, cycle_25). Transmissions through gaps are grey shares of '
+            'thermal column takes them. In each case\'s by_profile_heat, "radii"[R][source][zone] lists the heat in '
+            'the thermosphere, between the 0.3 Pa base and the exobase, at a protected radius of R lunar radii, per '
+            'band of design.bands_nm of the quiet Sun\'s light; an activity weights the bands (traced.scales). '
+            '"shapes"[zone_R][source] lists for each group of design.shape_groups_nm the log pressures above the base '
+            'below which each share in design.shape_quantiles of that part\'s heat in the thermosphere lies. "table" '
+            'gives the heat in detail at the ring fleet\'s 4 lunar radii, with the light absorbed in the exosphere '
+            '("exosphere_absorbed", which the column does not take) and the fate of the light arriving. Activities: '
+            'quiet, solar_maximum (2.5 on the ultraviolet and FISM2\'s mean rise below 10 nm) and each maximum behind '
+            'that mean (cycle_23, cycle_24, cycle_25). Transmissions through gaps are grey shares of '
             'the band below 175 nm. A traced state puts the window stack on the window, a film on the annulus, the '
             'gaps\' light over the whole aperture, unfiltered sunlight beyond it and the sky\'s glow on the air, and '
             'is the first heat from zero that the air it swells returns. "disk_count" is the escape model\'s count '
             'before tracing (a quarter of the light that reaches the disk, all of it above the base). "low_shape" '
-            'is the loss at the same heat with the column\'s low heating shape. "window_stack" puts the climate '
+            'is the loss at the same heat with the column\'s low heating shape and "traced_shape" with the heat where '
+            'the tracing puts it, the glow\'s where O2 absorbs it. "window_stack" puts the climate '
             'window\'s stack on the annulus too. A budget row\'s transmissions are the largest grey transmissions '
             'through gaps whose molecular loss with Earth\'s tide stays within the budget at the ring fleet\'s 4 '
             'lunar radii, the solar wind and the exosphere step\'s losses not deducted.'),
         design=DESIGN, activities=ACTIVITIES, escape_count=counts, xray_cycle=cycle_factors(), cases=cases)
-    OUT.write_text(json.dumps(product, indent=1) + '\n')
+    OUT.write_text(json.dumps(product, separators=(',', ':')) + '\n')     # compact: read by code, about 5 MB
     return 0
 
 

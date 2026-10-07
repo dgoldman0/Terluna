@@ -130,6 +130,18 @@ with all near-infrared heating at quiet Sun (117 to 107 billion years) and
 radii, and the rest lose 12–15 kg/s with the September magnets (8 to 6.5 billion
 years).
 
+R1 is a long-term average, and the design point now also gives each state's mean
+over solar cycles 23 and 24 (1997–2019), each calendar year's sunlight measured
+band by band in FISM2's daily record, as the author chose on 7 October
+([atmosphere/loss_response/cycle.py](../../../atmosphere/loss_response/cycle.py)).
+The ultraviolet from 10 to 175 nm rises only 1.25–1.41 times at the last three
+maxima, weighted by energy, where the escape model takes 2.5. With the column's
+middle heating shape, the standard level at 4 lunar radii averages 0.84–1.6 kg/s
+with no magnetosphere in the collisional and LTE cases (117 to 61 billion years)
+and 0.0016–0.15 kg/s with the September magnets. With all near-infrared heating it
+averages 24–27 kg/s with no magnetosphere and 13–16 kg/s with the magnets (4.1 to
+3.6 and 7.5 to 6.3 billion years); its largest year, 2000, reaches 84 and 53 kg/s.
+
 ## Optical shield
 
 | ID | Requirement | Source | Status |

@@ -34,6 +34,11 @@ class ColumnConfig:
     conductivity_coefficient: float = 9.37e-5  # kappa=c*T W/(m K); N2 proxy
     conductivity_multiplier: float = 1.0
     heating_shape: str = 'middle'  # deposited power distribution in log-pressure coordinate
+    # With heating_shape 'traced': the share of the heat deposited below each log pressure above the base,
+    # ln(lower_pressure_pa/p), rising from 0 at the base to 1 (a traced deposition profile, renormalised to the heat
+    # that lies below the exobase).
+    heating_log_pressure: tuple = ()
+    heating_fraction: tuple = ()
     mesh_points: int = 81
     tolerance: float = 1e-6
     max_nodes: int = 5000
@@ -51,8 +56,14 @@ class ColumnConfig:
             raise ValueError('Column base must be above surface')
         if self.lower_temperature_k > self.surface_temperature_k:
             raise ValueError('This lower-profile prescription requires Tb <= Ts')
-        if self.heating_shape not in ('middle', 'low', 'high'):
+        if self.heating_shape not in ('middle', 'low', 'high', 'traced'):
             raise ValueError('Unknown deposition shape')
+        if self.heating_shape == 'traced':
+            x = np.asarray(self.heating_log_pressure, float)
+            f = np.asarray(self.heating_fraction, float)
+            if (x.size < 2 or x.size != f.size or x[0] != 0 or np.any(np.diff(x) <= 0) or f[0] != 0
+                    or np.any(np.diff(f) < 0) or abs(f[-1] - 1) > 1e-9):
+                raise ValueError('A traced heating shape needs log pressures rising from 0 and shares from 0 to 1')
         if self.mesh_points < 21 or self.max_nodes < self.mesh_points:
             raise ValueError('Invalid BVP grid')
 
@@ -63,6 +74,18 @@ def heating_cdf(s, shape):
     if shape == 'low': return 1-(1-s)**3
     if shape == 'high': return s**3
     raise ValueError('Unknown heating shape')
+
+
+def deposited_share(s, cfg: ColumnConfig, length):
+    """Share of the heat deposited below each normalised log pressure s of a column whose exobase lies `length`
+    e-folds of pressure above its base."""
+    if cfg.heating_shape != 'traced':
+        return heating_cdf(s, cfg.heating_shape)
+    x, f = np.asarray(cfg.heating_log_pressure), np.asarray(cfg.heating_fraction)
+    top = float(np.interp(length, x, f))
+    if top <= 0:
+        raise ValueError('The traced heat lies above the exobase')
+    return np.interp(np.asarray(s) * length, x, f) / top
 
 
 def lower_boundary(cfg: ColumnConfig):
@@ -128,7 +151,7 @@ def solve_column(deposited_heat_w_m2: float, cfg: ColumnConfig = ColumnConfig(),
         t = np.maximum(y[1]*tb,20.)
         length = np.exp(np.clip(p[2],-10,6))
         j = np.exp(np.clip(p[:2],-250,0))
-        energy = p[3]*scale+q*heating_cdf(s,cfg.heating_shape)
+        energy = p[3]*scale+q*deposited_share(s,cfg,length)
         advected = np.sum(j[:,None]*(3.5*RS_SPECIES[:,None]*t-GM*u/R),axis=0)
         kappa = cfg.conductivity_coefficient*cfg.conductivity_multiplier*t
         return np.vstack([-R*rs*t*length/GM,
@@ -149,7 +172,7 @@ def solve_column(deposited_heat_w_m2: float, cfg: ColumnConfig = ColumnConfig(),
     u,tn=sol.sol(grid); t=tn*tb; length=math.exp(sol.p[2]); j=np.exp(sol.p[:2])
     p=pb*np.exp(-length*grid); r=R/u
     lje,ei,lam=jeans_boundary(u[-1],t[-1],math.log(p[-1]),fractions)
-    energy=sol.p[3]*scale+q*heating_cdf(grid,cfg.heating_shape)
+    energy=sol.p[3]*scale+q*deposited_share(grid,cfg,length)
     adv=np.sum(j[:,None]*(3.5*RS_SPECIES[:,None]*t-GM*u/R),axis=0)
     conductive=energy-adv
     density=p/(rs*t)

@@ -6,7 +6,7 @@
       "engineering/network/ledger.py": "f06f0df62a7943c8",
       "engineering/network/model.py": "78f7ab129144d567",
       "protection/modules/catalogue.json": "6f77f73bcb47a2e3",
-      "atmosphere/loss_response/results/loss_response.json": "989ce32e72b0cb24"
+      "atmosphere/loss_response/results/loss_response.json": "c60c25296217d7b3"
     }
   },
   "evidence": "Arithmetic on the protection module catalogue: replacement flows for the lifetime scenarios, fresh material after recovery, irreversible propellant and power. Inherits every assumption of the September reference design the catalogue records.",

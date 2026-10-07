@@ -57,5 +57,34 @@ class ColumnTests(unittest.TestCase):
         self.assertAlmostEqual(r['molecular_loss_kg_s'],r['N2_loss_kg_s']+r['O2_loss_kg_s'])
 
 
+class TracedShapeTests(unittest.TestCase):
+    """A heating shape given as the share of the heat below each log pressure above the base."""
+    cfg = ColumnConfig(lower_pressure_pa=0.3, lower_temperature_k=160.)
+
+    def traced(self, x, f):
+        import dataclasses
+        return dataclasses.replace(self.cfg, heating_shape='traced', heating_log_pressure=tuple(x),
+                                   heating_fraction=tuple(f))
+
+    def test_the_middle_shape_traced_reproduces_it(self):
+        middle = solve_column(1e-5, self.cfg)[0]
+        length = math.log(.3 / middle['exobase_pressure_pa'])
+        x = np.linspace(0, length, 400)
+        shaped = solve_column(1e-5, self.traced(x, heating_cdf(x / length, 'middle')))[0]
+        self.assertAlmostEqual(shaped['exobase_temperature_k'], middle['exobase_temperature_k'], delta=.01)
+        self.assertLess(abs(shaped['molecular_loss_kg_s'] / middle['molecular_loss_kg_s'] - 1), 1e-3)
+
+    def test_heat_laid_at_the_base_barely_warms_the_exobase(self):
+        cold = solve_column(0., self.cfg)[0]['exobase_temperature_k']
+        based = solve_column(1e-5, self.traced([0., .5, 30.], [0., 1., 1.]))[0]['exobase_temperature_k']
+        middle = solve_column(1e-5, self.cfg)[0]['exobase_temperature_k']
+        self.assertLess(based - cold, .1 * (middle - cold))
+
+    def test_a_traced_shape_must_be_a_cumulative_share_from_the_base(self):
+        for x, f in (([0., 1.], [0., .5]), ([.5, 1.], [0., 1.]), ([0., 1., 2.], [0., .7, .6]), ([0.], [0.])):
+            with self.assertRaises(ValueError):
+                solve_column(1e-6, self.traced(x, f))
+
+
 if __name__ == "__main__":
     unittest.main()

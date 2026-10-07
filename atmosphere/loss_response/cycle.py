@@ -1,0 +1,161 @@
+"""The solar cycle of the light below 175 nm, band by band, from FISM2's daily record.
+
+    python -m atmosphere.loss_response.cycle      # writes results/solar_cycle.json in a few seconds
+
+R1 is a long-term average. The loss response gives each state at quiet Sun and at the escape model's solar maximum,
+which takes 2.5 on all the ultraviolet above 10 nm and FISM2's measured rise of the X-rays below it. FISM2's daily
+record, integrated over each band of the limb tables (atmosphere/middle_atmosphere/limb_inputs.json), measures each
+band's own cycle. Every calendar year's mean over the WHI 2008 quiet week is a measured activity: a factor on each
+band; Lyman-alpha's factor for the sky's glow, which is solar Lyman-alpha scattered by interplanetary hydrogen; and the
+energy-weighted factors on the X-rays below 10 nm and on the ultraviolet from 10 to 175 nm, which the escape model's
+count over the disk takes, the energy-limited bound weighting each band itself. Solar cycles 23 and 24 run from the
+minimum of August 1996 to that of December 2019, which the calendar years 1997-2019 span; 2020-2025 give cycle 25 as
+far as the record is taken. The author accepted the measured ultraviolet for the cycle average on 2026-10-07.
+
+Each year is taken as a steady state. The upper air's slowest layers take years to respond and its highest days, so
+the mean of the yearly states' losses leans high against a column that follows the cycle, and the state of the whole
+span's mean spectrum, with no swing at all, gives the low end. FISM2 is a model of the measured irradiance (Chamberlin
+et al. 2020); before 2002 it rests on proxies of solar activity, as the record's own documentation describes.
+"""
+from __future__ import annotations
+import datetime as dt
+import hashlib
+import json
+import sys
+from pathlib import Path
+
+import numpy as np
+
+from shared.provenance import constants_used
+from atmosphere.middle_atmosphere import escape, fetch_inputs, fetch_limb_inputs
+from atmosphere.loss_response import traced
+
+HERE = Path(__file__).resolve().parent
+OUT = HERE / 'results' / 'solar_cycle.json'
+SCHEMA = 'terluna.atmosphere.solar-cycle/1'
+QUIET_WEEK = (dt.date(2008, 4, 10), dt.date(2008, 4, 16))        # the WHI 2008 quiet-Sun campaign
+SPANS = dict(cycles_23_24=(1997, 2019), cycle_25_to_2025=(2020, 2025))
+MAXIMA = dict(cycle_23=(dt.date(2001, 5, 1), dt.date(2002, 4, 30)), cycle_24=(dt.date(2013, 10, 1), dt.date(2014, 9, 30)),
+              cycle_25=(dt.date(2024, 4, 1), dt.date(2025, 3, 31)))
+LYMAN_ALPHA_NM = 121.567
+WHI = 'whi2008_ref_solar_irradiance_ver2.dat'
+_RECORD = {}
+
+
+def digest(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()[:16]
+
+
+def band_edges():
+    return traced.limb_product()['design']['bands_nm']
+
+
+def file_name(lo, hi):
+    return f'fism2_band_{lo:g}-{hi:g}nm_1996-08_2025-12.csv'
+
+
+def record():
+    """FISM2's daily irradiance integrated over each band (W/m^2): the dates and an array (bands, days)."""
+    if 'data' not in _RECORD:
+        edges = band_edges()
+        dates, values = None, []
+        for lo, hi in zip(edges[:-1], edges[1:]):
+            rows = fetch_limb_inputs.path(file_name(lo, hi)).read_text().strip().splitlines()[1:]
+            days = [dt.datetime.strptime(r.split(',')[0], '%Y%j').date() for r in rows]
+            if dates is None:
+                dates = np.array(days)
+            elif list(dates) != days:
+                raise ValueError(f'band {lo:g}-{hi:g} nm covers other days')
+            values.append([float(r.split(',')[1]) for r in rows])
+        _RECORD['data'] = dates, np.array(values)
+    return _RECORD['data']
+
+
+def whi_energy():
+    """The WHI 2008 quiet Sun's energy in each band (W/m^2), which weights the bands' factors."""
+    w, f = escape.whi_quiet_sun()
+    edges = band_edges()
+    return np.array([float(f[(w >= lo) & (w < hi)].sum() * 0.1) for lo, hi in zip(edges[:-1], edges[1:])])
+
+
+def factors(start, end):
+    """Each band's mean irradiance from start to end (inclusive) over its mean in the quiet week."""
+    dates, values = record()
+    span = (dates >= start) & (dates <= end)
+    quiet = (dates >= QUIET_WEEK[0]) & (dates <= QUIET_WEEK[1])
+    if not span.any():
+        raise ValueError(f'no record from {start} to {end}')
+    return values[:, span].mean(axis=1) / values[:, quiet].mean(axis=1), int(span.sum())
+
+
+def activity(label, start, end):
+    """A measured activity: each band's factor, the glow's (Lyman-alpha's), and the energy-weighted factors on the
+    X-rays and on the ultraviolet from 10 to 175 nm."""
+    edges = band_edges()
+    bands, days = factors(start, end)
+    energy = whi_energy()
+    xray = np.array([hi <= 10.0 for hi in edges[1:]])
+    glow = bands[int(np.searchsorted(edges, LYMAN_ALPHA_NM, side='right') - 1)]
+    return dict(label=label, start=start.isoformat(), end=end.isoformat(), days=days, bands=[float(x) for x in bands],
+                glow=float(glow), xray=float(bands[xray] @ energy[xray] / energy[xray].sum()),
+                uv=float(bands[~xray] @ energy[~xray] / energy[~xray].sum()))
+
+
+def years(first, last):
+    """The measured activity of each calendar year."""
+    return [activity(str(y), dt.date(y, 1, 1), dt.date(y, 12, 31)) for y in range(first, last + 1)]
+
+
+def span_mean(name):
+    """The measured activity of a whole span's mean spectrum."""
+    first, last = SPANS[name]
+    return activity(f'{name}_mean_spectrum', dt.date(first, 1, 1), dt.date(last, 12, 31))
+
+
+def periods():
+    """Every year of each span with its span, and each span's mean spectrum."""
+    return {name: dict(years=years(*bounds), mean_spectrum=span_mean(name)) for name, bounds in SPANS.items()}
+
+
+def product():
+    """The written solar-cycle product, checked against this schema."""
+    data = json.loads(OUT.read_text())
+    if data['schema'] != SCHEMA:
+        raise ValueError(f"unexpected solar-cycle schema {data['schema']}")
+    return data
+
+
+def main(argv=None) -> int:
+    edges = band_edges()
+    energy = whi_energy()
+    spans = periods()
+    maxima = {name: activity(name, *bounds) for name, bounds in MAXIMA.items()}
+    files = [HERE / 'cycle.py', HERE / 'traced.py', HERE.parents[1] / 'atmosphere/middle_atmosphere/escape.py']
+    code = {str(p.relative_to(HERE.parents[1])): digest(p) for p in files}
+    inputs = {file_name(lo, hi): digest(fetch_limb_inputs.path(file_name(lo, hi)))
+              for lo, hi in zip(edges[:-1], edges[1:])}
+    inputs[WHI] = digest(fetch_inputs.path(WHI))
+    product = dict(
+        schema=SCHEMA,
+        producer=dict(domain='atmosphere', files=code, constants=constants_used(files), inputs=inputs,
+                      products={'atmosphere/middle_atmosphere/results/limb_heat.json': digest(traced.LIMB)}),
+        evidence=' '.join(part.replace('\n', ' ') for part in __doc__.split('\n\n')[1:]),
+        reading_rule=('Factors are irradiance over the mean of the WHI 2008 quiet week (10-16 April 2008), per band of '
+                      'bands_nm. An activity\'s "bands" weight the limb tables\' band heats and the photon fluxes of the '
+                      'exosphere step; "glow" scales the sky\'s Lyman-alpha glow; "xray" and "uv" are energy-weighted '
+                      'over the bands below and above 10 nm. A span\'s years are steady states whose mean loss leans '
+                      'high; its mean spectrum gives the low end.'),
+        bands_nm=list(edges), whi_quiet_energy_W_m2=[float(x) for x in energy], quiet_week=[d.isoformat() for d in QUIET_WEEK],
+        convention=dict(solar_maximum_ultraviolet=escape.SOLAR_MAXIMUM, solar_maximum_xray=escape.XRAY_SOLAR_MAXIMUM),
+        maxima=maxima, spans=spans)
+    OUT.write_text(json.dumps(product, indent=1) + '\n')
+    for name, span in spans.items():
+        m = span['mean_spectrum']
+        print(f"{name}: mean spectrum ultraviolet {m['uv']:.3f}, X-rays {m['xray']:.2f}, glow {m['glow']:.3f}")
+    for name, m in maxima.items():
+        print(f"{name} maximum: ultraviolet {m['uv']:.3f}, X-rays {m['xray']:.2f}, glow {m['glow']:.3f}")
+    return 0
+
+
+if __name__ == '__main__':
+    sys.exit(main())
