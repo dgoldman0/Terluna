@@ -10,7 +10,7 @@ const HOUR = 3600000;
 const MONTH = 30 * DAY_MS;
 const PLAY_HOURS_PER_SECOND = 8;
 const minMs = Date.UTC(2000, 0, 1),
-  maxMs = Date.UTC(2500, 11, 1);
+  maxMs = Date.UTC(2501, 0, 1) - 60000;
 const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
 const wrap = (d) => ((((d + 180) % 360) + 360) % 360) - 180;
 
@@ -177,6 +177,7 @@ function draw(force) {
     words();
     adaptInk();
   }
+  drawCompass();
   if (app.playing) {
     $("scrub").value = String(Math.round(((app.ms - app.base) / MONTH) * 1000));
     $("when").textContent = when(app.ms);
@@ -267,11 +268,17 @@ function paintEarth() {
 let momentsKey = "";
 function moments() {
   const list = events().filter((e) => SHOWN.includes(e.type) && e.ms > app.ms).slice(0, 6);
-  const key = list.map((e) => e.ms).join() + Math.floor(app.ms / HOUR);
+  const key = `${list.map((e) => e.ms).join()}|${Math.floor(app.ms / HOUR)}|${app.span?.end ?? 0}`;
   if (key === momentsKey) return;
   momentsKey = key;
   const ol = $("moments");
   ol.replaceChildren();
+  if (!list.length && app.span && app.span.end >= maxMs - HOUR) {
+    const li = document.createElement("li");
+    li.className = "end-note";
+    li.textContent = "The calendar ends with the year 2500.";
+    ol.append(li);
+  }
   for (const e of list) {
     const li = document.createElement("li"),
       b = document.createElement("button");
@@ -355,6 +362,73 @@ function writeUrl() {
   if (url !== location.pathname + location.search) history.replaceState(null, "", url);
   lastUrlWrite = performance.now();
   $("almanac-link").href = `almanac.html?lat=${app.place.latitude}&lon=${app.place.longitude}&at=${iso}`;
+}
+
+// ---------- Directions ----------
+// Compass letters along a strip just above the controls, each under the part
+// of the sky it names; narrow views add the points between them.
+const COMPASS = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
+let compassChips = null;
+function drawCompass() {
+  const box = $("compass");
+  if (!compassChips)
+    compassChips = COMPASS.map((text) => {
+      const chip = document.createElement("span");
+      chip.textContent = text;
+      box.append(chip);
+      return chip;
+    });
+  const c = skyView.canvas,
+    W = c.width,
+    H = c.height,
+    d = skyView.dpr,
+    cam = skyView.camera;
+  const fine = cam.hfov < 60;
+  const y = document.querySelector(".dock").getBoundingClientRect().top - 26;
+  const text = document.querySelector(".now").getBoundingClientRect();
+  COMPASS.forEach((_, k) => {
+    const az = (k * 22.5 * Math.PI) / 180;
+    const p = cam.project([Math.sin(az), Math.cos(az), 0], W, H);
+    const x = p ? p[0] / d : -1;
+    const clear = !(x > text.left - 24 && x < text.right + 24 && y - 12 < text.bottom && y + 12 > text.top);
+    const show = (fine || k % 2 === 0) && p && x > 20 && x < W / d - 20 && clear;
+    compassChips[k].style.display = show ? "" : "none";
+    if (show) {
+      compassChips[k].style.left = `${x}px`;
+      compassChips[k].style.top = `${y}px`;
+    }
+  });
+}
+
+// ---------- Choosing a date ----------
+const pad = (n) => String(n).padStart(2, "0");
+// A datetime-local value in the visitor's time zone.
+function localValue(ms) {
+  const d = new Date(ms);
+  return `${String(d.getFullYear()).padStart(4, "0")}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+function openPicker() {
+  const input = $("when-input");
+  input.min = localValue(minMs);
+  input.max = localValue(maxMs);
+  input.value = localValue(app.ms);
+  $("picker").hidden = false;
+  $("when-button").setAttribute("aria-expanded", "true");
+  input.focus();
+  try {
+    input.showPicker?.();
+  } catch {
+    // The field stays open for typing where the browser has no picker to show.
+  }
+}
+function closePicker() {
+  $("picker").hidden = true;
+  $("when-button").setAttribute("aria-expanded", "false");
+}
+function backToNow() {
+  stop();
+  app.base = Date.now();
+  setTime(Date.now(), { reaim: true, live: true });
 }
 
 // ---------- Play ----------
@@ -516,10 +590,32 @@ async function start() {
       stop();
       setTime(app.base + (Number($("scrub").value) / 1000) * MONTH);
     });
-    $("back").addEventListener("click", () => {
+    $("back").addEventListener("click", backToNow);
+    $("when-button").addEventListener("click", () => ($("picker").hidden ? openPicker() : closePicker()));
+    $("when-input").addEventListener("change", () => {
+      const t = new Date($("when-input").value).getTime();
+      if (!Number.isFinite(t)) return;
       stop();
-      app.base = Date.now();
-      setTime(Date.now(), { reaim: true, live: true });
+      setTime(clamp(t, minMs, maxMs), { reaim: true });
+    });
+    $("picker-now").addEventListener("click", () => {
+      closePicker();
+      backToNow();
+    });
+    $("picker-done").addEventListener("click", closePicker);
+    // Captured first: the browser's own date field keeps Escape for itself.
+    document.addEventListener(
+      "keydown",
+      (e) => {
+        if (e.key === "Escape" && !$("picker").hidden) {
+          closePicker();
+          $("when-button").focus();
+        }
+      },
+      true,
+    );
+    document.addEventListener("pointerdown", (e) => {
+      if (!$("picker").hidden && !e.target.closest(".when")) closePicker();
     });
     // The present moment moves on while the page is open.
     setInterval(() => {

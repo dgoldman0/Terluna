@@ -276,18 +276,133 @@ h1 {
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
 }
 .when {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
   margin: 0;
-  padding: 6px 12px;
+  padding: 4px;
   border-radius: 99px;
   background: var(--glass);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  min-width: 13em;
+  white-space: nowrap;
+}
+.when-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px;
+  border: 0;
+  border-radius: 99px;
+  background: none;
   font-size: 15px;
   font-weight: 600;
-  text-align: right;
   text-shadow: var(--shadow);
-  white-space: nowrap;
+  cursor: pointer;
+}
+.when-button:hover,
+.when-button[aria-expanded="true"] {
+  background: rgba(255, 255, 255, 0.14);
+}
+.when-button svg {
+  width: 16px;
+  height: 16px;
+  opacity: 0.85;
+}
+.picker {
+  position: absolute;
+  z-index: 5;
+  right: 0;
+  bottom: calc(100% + 10px);
+  width: 300px;
+  padding: 14px 16px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 18px;
+  background: rgba(14, 18, 36, 0.95);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  white-space: normal;
+  text-shadow: none;
+}
+.picker[hidden] {
+  display: none;
+}
+.picker label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.8);
+}
+.picker input {
+  width: 100%;
+  height: 44px;
+  padding: 0 10px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font: 600 16px var(--font);
+  color-scheme: dark;
+}
+.picker-note {
+  margin: 8px 0 12px;
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.7);
+}
+.picker-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+.picker-actions button {
+  padding: 7px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.picker-actions .primary {
+  background: #fff;
+  color: #10132b;
+  border-color: #fff;
+}
+.compass {
+  position: fixed;
+  z-index: 1;
+  inset: 0;
+  pointer-events: none;
+}
+.compass span {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  min-width: 26px;
+  height: 22px;
+  padding: 0 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 99px;
+  background: rgba(12, 16, 32, 0.38);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  transform: translate(-50%, -50%);
+}
+.moments .end-note {
+  flex: 0 1 auto;
+  max-width: none;
+  padding: 14px 16px;
+  border: 1px solid var(--glass-line);
+  border-radius: 18px;
+  background: var(--glass);
+  font-size: 14.5px;
+  font-weight: 600;
 }
 .back {
   margin-left: 6px;
@@ -511,7 +626,11 @@ body.loading .foot {
     grid-column: 1 / -1;
     justify-self: start;
     min-width: 0;
-    text-align: left;
+  }
+  .picker {
+    left: 0;
+    right: auto;
+    width: min(320px, calc(100vw - 2 * var(--side)));
   }
   .moments {
     padding: 0 var(--side);
