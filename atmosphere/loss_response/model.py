@@ -22,7 +22,13 @@ shields. The protected radius is the ring fleet's 4 lunar radii unless given.
 The thermal column (atmosphere/thermal_column.py) turns that heat into an
 exobase and a molecular Jeans loss, with the base temperature the middle
 atmosphere finds behind each shield under each treatment of the upper air
-(collisional, LTE, all near-infrared heats). Earth's tide raises each species'
+(collisional, LTE, all near-infrared heats). The column takes each state's heat
+where the tracing puts it in height (state_config, traced.shape): each part of
+the light by the limb tables' record of where it heats, and the glow where O2
+absorbs it, mostly within a few e-folds of pressure above the base. The states
+themselves come from tables traced through air the column heats with its
+'middle' shape, which swells more, so they and the runaway onsets lean
+conservative. Earth's tide raises each species'
 escape by the multiplier tides.py finds for its exobase radius and Jeans
 parameter (results/tidal_escape.json); the two-body loss is kept beside it. Where the column leaves its domain
 (no convergence, or a Jeans parameter below 3), escape is bounded above by the
@@ -92,7 +98,7 @@ ACTIVITY = {'quiet': dict(uv=1.0, xray=1.0, glow=1.0),
 LEAKS = (1e-6, 3e-6, 1e-5, 2e-5, 3e-5, 5e-5, 1e-4, 2e-4, 3e-4, 5e-4, 1e-3, 2e-3, 3e-3, 5e-3,
          1e-2, 2e-2, 3e-2, 5e-2, 0.1, 0.3, 1.0)
 PROTECTED_R = 4.0               # the ring fleet's protected radius in lunar radii (decisions.md, 2026-10-07)
-HEATING_SHAPE = 'middle'        # the thermal column's heating shape at a traced state ('traced': from the limb tables)
+HEATING_SHAPE = 'traced'        # the thermal column's heating shape at a traced state: from the limb tables (2026-10-07)
 GLOW_RAYLEIGH = 1000.0          # interplanetary hydrogen glow at 1 AU (protection/report.md, section 9)
 BUDGETS_KG_S = (1.0, 10.0, 100.0)
 ETAS = (0.01, 0.1, 0.3)
@@ -408,7 +414,8 @@ def main(argv=None) -> int:
             'atmosphere/middle_atmosphere/results/limb_heat.json')}),
         evidence=('Screening model. The ultraviolet branch is the molecular thermal column (no infrared cooling, '
                   'no atomic oxygen) above middle-atmosphere base temperatures, taking the heat the limb tracing '
-                  'finds along slant paths at the ring fleet\'s protected radius, with its Jeans escape raised by '
+                  'finds along slant paths at the ring fleet\'s protected radius where the tracing puts it in height, '
+                  'with its Jeans escape raised by '
                   'the tidal multiplier of test molecules in the Earth-Moon three-body problem, and energy-limited '
                   'upper bounds beyond its domain; the solar-wind branch is a range from mass-loading and '
                   'sputtering scalings with assumed parameter ranges. Neither is a coupled aeronomy or plasma model.'),

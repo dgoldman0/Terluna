@@ -113,12 +113,19 @@ class Sweep(unittest.TestCase):
         self.assertEqual(cfg.heating_shape, 'traced')
         self.assertEqual((below[0], below[-1]), (0.0, 1.0))
         self.assertTrue(np.all(np.diff(below) >= 0))
-        self.assertEqual(lr.state_config('titania_stack', 'lte', 'quiet', 4.0, 2e-4, 3e-6), lr.column_config('titania_stack', 'lte'))
+        try:
+            lr.HEATING_SHAPE = 'middle'
+            self.assertEqual(lr.state_config('titania_stack', 'lte', 'quiet', 4.0, 2e-4, 3e-6),
+                             lr.column_config('titania_stack', 'lte'))
+        finally:
+            lr.HEATING_SHAPE = saved
 
-    def test_glow_raises_the_floor(self):
+    def test_the_glow_absorbed_just_above_the_base_barely_raises_the_floor(self):
         with_glow = lr.euv_sweep('titania_stack', 'lte', 'quiet', glow=True, leaks=(1e-6,))[0]
         without = lr.euv_sweep('titania_stack', 'lte', 'quiet', glow=False, leaks=(1e-6,))[0]
-        self.assertGreater(with_glow['exobase_temperature_k'], without['exobase_temperature_k'] + 20)
+        rise = with_glow['exobase_temperature_k'] - without['exobase_temperature_k']
+        self.assertGreater(rise, 1.0)
+        self.assertLess(rise, 15.0)
 
 
 if __name__ == '__main__':

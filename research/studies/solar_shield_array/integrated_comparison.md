@@ -665,50 +665,58 @@ The loss response, its absorption and exosphere steps and the design point now
 read the traced heat with FISM2's X-ray factors, at the ring fleet's protected
 radius of 4 lunar radii
 ([requirements.md](../protection_architecture/requirements.md#retention),
-[the loss response](../../../atmosphere/loss_response/README.md)). The totals
-below are central estimates with Earth's tide, behind the titania stack at
-O1's standard level unless stated; cycle times are the atmosphere's mass over
-the loss.
+[the loss response](../../../atmosphere/loss_response/README.md)). On the
+author's order of 7 October two questions of how warm the upper air gets
+followed the same day. The design point averages each state over solar cycles 23
+and 24, year by year from FISM2's daily record measured band by band. The
+thermal column takes the heat where the tracing puts it in height in place of
+its fixed 'middle' shape. The totals below are central estimates with Earth's
+tide, behind the titania stack at O1's standard level and averaged over the
+cycle unless stated; cycle times are the atmosphere's mass over the loss.
 
-- **The swollen air can reach the shadow's edge.** As the upper air warms its
-  exobase rises, and once it reaches the shadow's edge the unfiltered sunlight
-  beyond the aperture heats it further and it runs away. With a 4-radius shadow
-  that happens above 147 kg/s with collisional upper air, 103 kg/s in LTE and
-  36 kg/s with all near-infrared heating (19–29 kg/s behind the 200-nm edge),
-  so a looser budget asks a wider shadow, and the heating alone needs the
-  shadow to reach just beyond the exobase. At the relaxed level (2.5×10⁻³) the
-  air runs away in ten of the twelve titania cases.
-- **At the standard level the cooler cases hold and the warmest does not.**
-  With the September magnets the total is 0.0001–0.08 kg/s with collisional
-  upper air and in LTE at quiet Sun (over a trillion years), 2.9–4.2 kg/s in
-  LTE at solar maximum (34 to 23 billion years), 2.8–3.3 kg/s with all
-  near-infrared heating at quiet Sun (35 to 30 billion years) and 129 kg/s with
-  it at solar maximum (0.8 billion years). In that last case
-  ultraviolet-driven escape gives 32 kg/s and the sunlit exosphere just outside
-  the shadow the rest, as ions the magnets do not keep and as neutral fragments,
-  which only a wider shadow removes; at 6 lunar radii the total falls to
-  64 kg/s (1.5 billion years). The tight level (3–4×10⁻⁵) brings
-  that last case to 19–23 kg/s (5.2 to 4.3 billion years). Behind the 200-nm
-  edge the standard level runs away in eight of twelve cases.
+- **The ultraviolet rises far less over the cycle than the escape model took.**
+  At the last three maxima the light from 10 to 175 nm is 1.25–1.41 times the
+  quiet week, weighted by energy, where the escape model takes 2.5; the far
+  ultraviolet from 122 to 175 nm, most of the energy, rises only 1.07–1.18.
+- **Placed where the tracing puts it, the heat warms the upper air far less.**
+  The sky's glow, half or more of the heat at the swarm's levels, is absorbed
+  within a few e-folds of pressure above the base, and the far ultraviolet
+  through gaps in the lower thermosphere; heat laid low is conducted away.
+  The same heat leaves the exobase 26–51 K cooler than the 'middle' shape gives.
+- **Every titania case stays within 10 kg/s without magnets.** With
+  collisional upper air and in LTE the loss is 0.68–0.97 kg/s with no
+  magnetosphere (144 to 101 billion years), almost all of it the solar wind's
+  charge exchange and sputtering; with all near-infrared heating it is
+  3.1–3.5 kg/s (32 to 28 billion years), 7.9 kg/s in its worst year. The escape
+  model's solar maximum gives that case 26 kg/s, and with larger holes a runaway.
+- **For 1 kg/s the solar wind decides.** The September magnets bring every case
+  under 1 kg/s: 10⁻⁵–0.003 kg/s in the cooler cases and 0.75–0.95 kg/s with all
+  near-infrared heating (131 to 104 billion years). A dipole of about
+  3×10¹⁹ A·m² holds the exosphere of all but the warmest at the escape model's
+  solar maximum to 1 kg/s, and the three coolest need none for that.
 - **The ring fleet's screen may shelter the Moon from part of the solar
   wind.** The screen absorbs the wind that strikes it, and the wind closes in
   behind an absorbing screen over about eight of its radii. The ring fleet's
   screen, about 20,000 km out, lies under three screen radii from the Moon, so
   its wake may still have an empty core there, about 2.6 lunar radii in radius
-  behind a 4-radius screen. Within it the wind's charge exchange with the
-  dense exosphere near the exobase falls away: without a magnetosphere the
-  coolest three cases lose 0.07–0.31 kg/s in place of 0.77–1.3 kg/s. Where the
-  exobase lies outside the core, with warmer upper air, the wake changes
-  little. The refill length is an assumption a plasma model has to test. The
+  behind a 4-radius screen. Within it the wind's charge exchange falls away: the
+  cooler cases lose 0.064–0.093 kg/s with no magnetosphere, and with all
+  near-infrared heating 2.3–2.7 kg/s, or 0.38–0.47 kg/s behind a 6-radius
+  screen. The refill length is an assumption a plasma model has to test. The
   held screen, 68,000–106,000 km out, lies too far for its wake to reach the
   Moon.
-- **A weak dipole serves the cooler upper air, and no moment holds the warmer
-  to 1 kg/s.** The coolest case needs no magnetosphere for 1 kg/s from its
-  exosphere, and the next two need about 2×10¹⁹ A·m², a seventy-fifth of the
-  September moment. No moment up to 10²³ A·m² holds the warmer three to
-  1 kg/s, and the warmest at solar maximum cannot meet 1 kg/s at any shadow up
-  to 10 lunar radii. With the September magnets it meets 10 kg/s from
-  5 lunar radii if gaps pass under 2.6×10⁻⁵, and from 6 at the tight level.
+- **The relaxed level still runs away.** With a 4-radius shadow the air runs
+  away once its exobase nears the shadow's edge, from a transmission of
+  0.021–0.26% by case and activity, below the relaxed level's 0.25% in most
+  cases and years. The tables find those onsets in air that swells more than
+  air heated where the tracing puts it, so they lean early; a retrace through
+  air heated with the traced shape would show how far the relaxed level is from
+  holding. Behind the 200-nm edge the standard level runs away in the years
+  around maximum.
+
+The CO2 question this order left for third now moves the choices little: the
+cases it separates all stay within 10 kg/s, and at 1 kg/s the solar wind sets
+the outcome. The outer rings come next.
 
 The [primary magnetic architecture comparison](magnetic_architecture.md) still
 reads the design point from before the traced count. Its rerun needs the
@@ -725,6 +733,10 @@ The author set this order on 7 October:
    X-rays. Done on 7 October ([the X-ray check](#the-x-ray-check)), and its two
    decisions carried through the loss response, O1's levels and the design
    point the same day ([the rederived design point](#the-rederived-design-point)).
+   Before the outer rings, the author then had the upper air's warmth settled
+   further: the solar-cycle mean and the heat placed where the tracing puts it
+   were carried through the loss chain the same day, and they leave the near-
+   infrared heating of CO2 little to decide (above).
 2. The outer rings: a radius profile that keeps each tilt turning with the
    Sun, with radius steps that grow toward the edges, flown for a year against
    steering by roll with the larger store.

@@ -334,7 +334,8 @@ def main(argv=None) -> int:
                                            'atmosphere/loss_response/results/solar_cycle.json')}),
         evidence=('The loss response, its absorption step and its exosphere step evaluated at the ultraviolet '
                   'transmission the swarm model gives for three levels of design choices, with the heat the middle '
-                  'atmosphere\'s limb tracing finds along slant paths for each protected radius. Screening models '
+                  'atmosphere\'s limb tracing finds along slant paths for each protected radius, placed in height '
+                  'where the tracing puts it. Screening models '
                   'throughout: Earth\'s tide is included; the exosphere\'s ion fates are bounds and timescale '
                   'comparisons, and the ring fleet\'s wake rests on an assumed refill length; no plasma is modelled.'),
         reading_rule=('summary[level][shield] gives ranges over the upper-air treatments, quiet Sun and solar maximum, '

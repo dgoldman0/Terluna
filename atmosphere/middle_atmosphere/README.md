@@ -233,8 +233,11 @@ aperture.
   shield blocks it. [atmosphere/loss_response](../loss_response/README.md)
   deposits it above the base (O2 absorption over the column above 0.3 Pa, taken
   with gravity at the base radius, for light from the whole sky): 2.1–2.8×10⁻⁶
-  W/m² at quiet Sun. That raises the exobase by 31–42 K at quiet Sun and 47–61 K
-  at solar maximum (a solar-cycle factor of 1.5 assumed), for every shield.
+  W/m² at quiet Sun. Spread with the column's 'middle' shape that raises the
+  exobase by 31–42 K at quiet Sun and 47–61 K at solar maximum (a solar-cycle
+  factor of 1.5 assumed), for every shield; placed where O2 absorbs it, within a
+  few e-folds of pressure above the base, by 6–9 K and 10–14 K, as the loss
+  response takes it since 7 October.
 - **Some loss channels are handled downstream or not yet included.** Earth's
   tide lowering the escape barrier is in the
   [loss response](../loss_response/README.md): test molecules in the Earth–Moon
@@ -361,9 +364,13 @@ the range across them.
   the far ultraviolet and Lyman-α heat the lower thermosphere and the extreme
   ultraviolet its upper half.
 - **Where the heat lies matters as much as how much.** The thermal column
-  spreads the heat with a fixed shape in log pressure. The traced light lands
-  at a mean depth 0.38–0.43 of the way from the base to the exobase, at about
-  the depth of the disk's own light, between the column's 'low' shape (0.25)
-  and its 'middle' shape (0.5), which the loss response uses and the table
-  above follows. With 'low' the losses fall 14–550 times. Both counts pass
-  through the same column, so the shape moves their losses together.
+  spread the heat with a fixed shape in log pressure, its 'middle' one, which
+  the table above follows. The traced light lands at a mean depth 0.38–0.43 of
+  the way from the base to the exobase, at about the depth of the disk's own
+  light, and the sky's glow within a few e-folds of pressure above the base,
+  where its heat is conducted away. Given that shape (the scenarios'
+  `traced_shape`), the same heat leaves the exobase 26–51 K cooler and the
+  ultraviolet-driven loss 16–3,600 times smaller: behind the titania stack at a
+  transmission of 2×10⁻⁴ and solar maximum, 2.0 kg/s against 33 with all
+  near-infrared heating and 0.003 against 0.42 in LTE. The loss response takes
+  the traced shape since 7 October.
