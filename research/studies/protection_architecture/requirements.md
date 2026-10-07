@@ -33,7 +33,7 @@ outside this design.
 | ID | Requirement | Source | Status |
 |---|---|---|---|
 | R1 | A total loss budget: the long-term average rate at which the atmosphere escapes, which resupply must match. Each budget has an atmospheric cycle time, the atmosphere's mass (3.1×10¹⁸ kg) over the loss rate: the time the loss and its resupply take to replace the whole atmosphere. 1 kg/s is a cycle of about 100 billion years and a resupply of about 32,000 tonnes a year; 10 kg/s, 10 billion years; 100 kg/s, 1 billion years | September feasibility report, section 5; decisions.md (the author, 2026-09-26); the mass from the feasibility baseline's hydrostatic column (`research/baselines/feasibility/reference.json`) | Designed across 1–100 kg/s until the designs show which rate works best |
-| R2 | The budget is shared among ultraviolet-driven escape (with Earth's tide), the sunlit exosphere's losses (the ions it makes, the fragments of broken molecules and the solar wind's charge exchange), sputtering, and the channels not yet in the loss response: atomic oxygen, photochemistry below the exobase and hydrogen from water | [atmosphere/loss_response](../../../atmosphere/loss_response/README.md), with its exosphere step | Allocation open |
+| R2 | The budget is shared among ultraviolet-driven escape (with Earth's tide), the sunlit exosphere's losses (the ions it makes, the fragments of broken molecules and the solar wind's charge exchange), sputtering, and the oxygen atoms and hydrogen the upper air's photochemistry makes, which leave by Jeans escape, as ions from the sunlit exosphere and hot from near the exobase | [atmosphere/loss_response](../../../atmosphere/loss_response/README.md), with its exosphere and oxygen steps | Allocation open. Behind the titania stack at the standard level, with the middle atmosphere's eddy mixing scaled for the Moon, the oxygen atoms add 0.002–0.006 kg/s with collisional upper air and in LTE at the solar cycle's mean spectrum and 0.12 kg/s with all near-infrared heating over the cycle's years (0.06 with the September magnets), of which hot atoms are 0.001–0.002 kg/s; Earth's weaker mixing, a bound, gives 0.035–0.12 and 2.1 kg/s (1.0 with the magnets). Hydrogen adds 0.001–0.003 kg/s; behind the 200-nm edge the atoms add 2–4 kg/s |
 
 What each budget asks of the protection, from the loss response with its
 exosphere step. The allowed UV transmission is the largest share of sunlight
@@ -134,7 +134,12 @@ no magnetosphere in the cooler cases and 1.7–1.8 kg/s with all near-infrared
 heating, which the wake brings to 0.79–0.85 and the magnets to 0.13–0.15 kg/s.
 At the escape model's solar maximum the warmest case loses 26 kg/s at the
 standard level (15 kg/s with the magnets), and with holes four times the particle
-size its air runs away; FISM2's measured years reach at most 7.9 kg/s. At the
+size its air runs away; FISM2's measured years reach at most 7.9 kg/s. The oxygen
+atoms the upper air's photochemistry makes add little to the cooler cases
+(R2), and to the warmest 0.12 kg/s over the cycle (0.06 with the magnets, which
+brings that case to 0.81–1.0 kg/s) with the Moon's mixing, or 2.1 kg/s (1.0)
+with Earth's weaker mixing, which would carry it past 1 kg/s even with the
+magnets. At the
 relaxed level the air runs away in most cases and years. Behind the 200-nm edge
 the standard level runs away in the years around maximum (in every year with all
 near-infrared heating), and the tight level

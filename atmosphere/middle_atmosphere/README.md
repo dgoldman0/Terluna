@@ -265,7 +265,10 @@ aperture.
   bounds at solar maximum are wide: 0.02 kg/s if eddy mixing reached the
   exobase, 33 kg/s if the oxygen separated from the base up. The escaping oxygen's 63-µm cooling, which
   would lower the exobase, is not included. Behind the titania stack there is
-  no atomic oxygen.
+  none below the base; above it the glow and the light through gaps make it,
+  which the loss response's oxygen step follows
+  ([oxygen.py](../loss_response/oxygen.py)), and their odd oxygen builds
+  1.6–2.9 DU of ozone below the base.
 - **At these leaks the base carries through almost one for one.** Across the
   three treatments the base spans 142–215 K and the exobase at the
   solar-maximum leak 207–274 K, so the upper air matters about as much as the

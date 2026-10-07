@@ -15,7 +15,10 @@ molecules, with and without a lunar magnetosphere, and the UV transmission each
 budget then allows. [fate.py](fate.py) follows the escaping air into the space
 around Earth and the Moon. [cycle.py](cycle.py) reads FISM2's daily record band by
 band and gives each calendar year's measured sunlight, for the solar-cycle mean
-that R1 reads. All seven are screening models; their methods and
+that R1 reads. [oxygen.py](oxygen.py) follows the oxygen atoms and hydrogen the
+glow and the traced light make above the base through the whole column, from the
+ground to the exobase, and finds what of them escapes. All eight are screening
+models; their methods and
 limits are in their docstrings.
 
 ```sh
@@ -26,6 +29,7 @@ python -m atmosphere.loss_response.model        # then the loss response, about 
 python -m atmosphere.loss_response.absorption   # then the protected radius, a few minutes
 OPENBLAS_NUM_THREADS=1 python -m atmosphere.loss_response.exosphere   # then the exosphere's losses, about 20 minutes
 OPENBLAS_NUM_THREADS=1 python -m atmosphere.loss_response.fate    # where the escaping air goes, about 15 s
+OPENBLAS_NUM_THREADS=1 python -m atmosphere.loss_response.oxygen  # atomic oxygen and hydrogen, about 15 minutes in three processes
 python -m pytest atmosphere/tests/test_tides.py atmosphere/tests/test_loss_response.py atmosphere/tests/test_absorption.py atmosphere/tests/test_exosphere.py atmosphere/tests/test_fate.py
 ```
 
@@ -50,7 +54,11 @@ exosphere's ion production in
 [results/escape_fate.json](results/escape_fate.json) (schema
 `terluna.atmosphere.escape-fate/1`), and each year's measured sunlight in
 [results/solar_cycle.json](results/solar_cycle.json) (schema
-`terluna.atmosphere.solar-cycle/1`).
+`terluna.atmosphere.solar-cycle/1`). The oxygen atoms and hydrogen are in
+[results/oxygen_escape.json](results/oxygen_escape.json) (schema
+`terluna.atmosphere.oxygen-escape/1`); that step needs the radiative inputs
+(`python -m atmosphere.radiative_convective.fetch_inputs --download`) for the
+middle atmosphere's photolysis.
 
 ## How it works
 
@@ -280,6 +288,29 @@ escaping fragments are 69–81% as much as the ions made, and with a
 magnetosphere they are most of what the sunlit exosphere loses. Only the shadow
 removes them.
 
+**Atomic oxygen made above the base matters only for warm upper air with weak
+mixing.** Behind the titania stack nothing splits O2 below the base, but above it
+the glow makes 7–12 kg/s of oxygen atoms and the light through gaps 3–11 kg/s
+more at the standard level, quiet Sun to solar maximum ([oxygen.py](oxygen.py)).
+With the middle atmosphere's eddy mixing, scaled for the Moon, almost all of it
+goes back down as odd oxygen and builds 1.6–2.9 DU of ozone in the middle
+atmosphere. The homopause then lies at 3–6×10⁻⁵ Pa and the atoms are 0.1–1.3%
+of the gas at the exobase. They lose 0.002–0.006 kg/s with collisional upper air
+and in LTE at the solar cycle's mean spectrum, and 0.12 kg/s averaged over the
+cycle's years with all near-infrared heating (0.06 kg/s with the September
+magnets), 0.34 kg/s in its worst year. Most of it leaves as ions the solar wind
+makes from the sunlit exosphere's atoms. Atoms made within a collision length or
+so of the exobase leave hot, since photolysis and recombination give them more
+than the escape energy there; they add 0.001–0.002 kg/s over the cycle (at most
+0.011 kg/s at the escape model's solar maximum, letting them through two
+collisions), half the loss of the coolest case. Earth's weaker eddy mixing, a
+bound, puts the homopause at 1–3×10⁻³ Pa: the atoms are then 2–11% of the
+exobase gas and lose 0.035–0.12 kg/s in the cooler cases and 2.1 kg/s with all
+near-infrared heating (1.0 kg/s with the magnets), which would carry that case
+past 1 kg/s even with them. Behind the 200-nm edge, whose middle
+atmosphere already holds atomic oxygen under about 300 DU of ozone, the atoms add
+2–4 kg/s. Hydrogen from water and H2 escapes at 0.001–0.003 kg/s.
+
 **With the exosphere counted, the shield has to reach beyond the exobase.**
 Largest allowed UV transmission for the titania stack with the sunlit
 exosphere's central loss added, by protected radius, with no magnetosphere,
@@ -332,8 +363,10 @@ air heated where the tracing puts it, so the states, the heating radius and
 the runaway onsets lean conservative; a retrace through air heated with the
 traced shape would refine them. The absorption step's band-mean limb deposit is a
 cross-check. The ring fleet's wake takes the wind to close linearly over eight
-screen radii, an assumed length. Atomic-oxygen escape, photochemical escape and hydrogen
-from water are left out. The base temperatures come from a global-mean,
+screen radii, an assumed length. The totals here leave out atomic oxygen and
+hydrogen, which the oxygen step gives apart; its eddy mixing above the base,
+scaled from Earth's, sets how much oxygen reaches the exobase, and Earth's
+weaker mixing bounds it. The base temperatures come from a global-mean,
 radiative-only middle atmosphere. The glow's brightness and its solar-cycle
 factor (1.5 at the escape model's solar maximum; Lyman-α's measured rise in the
 solar-cycle mean) are assumptions. The solar-wind branch is a set of scalings with

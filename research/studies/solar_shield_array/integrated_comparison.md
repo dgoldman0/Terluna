@@ -705,6 +705,18 @@ cycle unless stated; cycle times are the atmosphere's mass over the loss.
   screen. The refill length is an assumption a plasma model has to test. The
   held screen, 68,000–106,000 km out, lies too far for its wake to reach the
   Moon.
+- **Atomic oxygen adds little unless the upper air is warm and weakly
+  mixed.** The glow and the light through gaps break enough O2 above the base to
+  make 10–23 kg/s of oxygen atoms, and with the middle atmosphere's mixing scaled
+  for the Moon almost all of it goes back down as odd oxygen: the atoms add
+  0.002–0.006 kg/s in the cooler cases and 0.12 kg/s with all near-infrared
+  heating (0.06 with the September magnets, which brings that case to
+  0.81–1.0 kg/s, 121 to 97 billion years). The atoms made near the exobase
+  leave hot and are 0.001–0.002 kg/s of this. With Earth's weaker mixing, a
+  bound, the warm case's atoms add 2.1 kg/s (1.0 with the magnets, for
+  1.7–1.9 kg/s in all, 56 to 51 billion years), past a 1 kg/s budget; how
+  strongly the Moon's upper air mixes decides this. Hydrogen adds
+  0.001–0.003 kg/s.
 - **The relaxed level still runs away.** With a 4-radius shadow the air runs
   away once its exobase nears the shadow's edge, from a transmission of
   0.021–0.26% by case and activity, below the relaxed level's 0.25% in most
