@@ -43,10 +43,15 @@ compile the measurements; the value was not re-read for this step). Along
 straight paths parallel to the Sun-Moon line, down to the exobase, each
 exchange puts an ion into the flowing wind, inside the optical shadow as well:
 the swarm stops the wind that meets it, but the wake behind it refills over
-about eight shield radii, within the 78,000 km to the Moon. A loaded wind is
-deflected before it reaches the dense exosphere, so this is an upper bound;
-the range takes 0.1-1 of it, times the share of the orbit outside Earth's
-magnetotail.
+about eight shield radii, within the 78,000 km from the September screen to the
+Moon. A loaded wind is deflected before it reaches the dense exosphere, so this
+is an upper bound; the range takes 0.1-1 of it, times the share of the orbit
+outside Earth's magnetotail. The ring fleet's screen, about 20,000 km out, lies
+under three screen radii from the Moon, so the Moon may sit in its unrefilled
+wake. A sensitivity takes the wake to close linearly over eight screen radii
+and the wind to be absent on paths within its core at the Moon (2.6 lunar radii
+behind a 4-radius screen): the "wake" rows, which rest on that refill length
+and are no plasma calculation.
 
 No magnetosphere. In the flowing wind the motional electric field (2 mV/m)
 pulls an N2+ ion about 40,000 times harder than lunar gravity at three lunar
@@ -90,14 +95,17 @@ drive (Egan et al. 2019; Gunell et al. 2018) are left out.
 
 Outputs. The largest UV transmission each budget allows once the sunlit
 exosphere's central loss is added to the loss response's ultraviolet-driven
-loss, for protected radii of 3-10 lunar radii, with no magnetosphere and with
-the September moment; a radius counts only where it covers the thermosphere's
-heating as the design study asks (a tenth of the whole heating). And, at the
-loss response's own allowed transmissions and heating-sized shadows, the ions,
-fragments and charge exchange, the losses low, central and high, and the shadow
-radius at which the loss falls to a tenth of the budget. assess() also gives
-the loss against the shadow radius and against the dipole moment (1e19-1e23
-A m^2) for any column.
+loss, for protected radii of 3-10 lunar radii, with no magnetosphere (and with
+the ring fleet's wake) and with the September moment. The ultraviolet-driven
+state at each radius is the limb tracing's (traced.py): the UV transmission
+passes gaps over that radius's aperture and unfiltered light falls beyond it.
+A radius counts only where it covers the thermosphere's heating as the design
+study asks: light beyond the aperture gives at most a tenth of the heat. And,
+at the loss response's own allowed transmissions with the ring fleet's 4-radius
+shadow, the ions, fragments and charge exchange, the losses low, central and
+high, and the shadow radius at which the loss falls to a tenth of the budget.
+assess() also gives the loss against the shadow radius and against the dipole
+moment (1e19-1e23 A m^2) for any column.
 """
 from __future__ import annotations
 import argparse
@@ -110,12 +118,14 @@ import sys
 import numpy as np
 
 from shared.constants import AVOGADRO, BOLTZMANN, ELEMENTARY_CHARGE, MOON_GM, MOON_RADIUS, VACUUM_PERMEABILITY
+from atmosphere.thermal_column import solve_column
 from atmosphere.middle_atmosphere import escape
 from atmosphere.loss_response import absorption as ab
 from atmosphere.loss_response import model as lr
+from atmosphere.loss_response import traced
 
 HERE = Path(__file__).resolve().parent
-SCHEMA = 'terluna.atmosphere.exosphere-loss/1'
+SCHEMA = 'terluna.atmosphere.exosphere-loss/2'
 LEVELS = ('low', 'central', 'high')
 
 MOLECULE_KG = dict(N2=0.0280134 / AVOGADRO, O2=0.0319988 / AVOGADRO)
@@ -146,6 +156,9 @@ ELECTRON_K = 1000.0
 MOMENTS = tuple(float(m) for m in np.geomspace(1e19, 1e23, 17))
 RADII = tuple(float(x) for x in np.round(np.arange(1.5, 11.51, 0.25), 2))
 SHADOWS_R = (3.0, 4.0, 5.0, 6.0, 8.0, 10.0)
+RING_FLEET_DISTANCE_KM = 20000.0                 # the ring fleet's screen (decisions.md, 2026-10-07)
+WAKE_REFILL_SCREEN_RADII = 8.0                   # the wind closes in behind an absorbing screen over about this many radii
+MAGNETOSPHERE_KEYS = ('none', 'september', 'none_wake')
 
 EVIDENCE = ('Screening step. Chamberlain exospheres for N2 and O2 from the thermal column\'s exobase; photoionization '
             'and photodissociation rates on the WHI 2008 spectrum, the latter checked against Heays et al. (2017); '
@@ -154,13 +167,16 @@ EVIDENCE = ('Screening step. Chamberlain exospheres for N2 and O2 from the therm
             'and with a lunar dipole from pressure balance, dipole field-line geometry and a comparison of draining, '
             'convection and recombination timescales. No plasma is simulated.')
 READING_RULE = ('Loss rates are kg/s of atmosphere. allowed_summary[magnetosphere][shield][protected radius][budget] '
-                'is the largest UV transmission whose ultraviolet-driven loss plus the sunlit exosphere\'s central loss '
-                'stays within the budget, as a range over the upper-air treatments and solar activity, with the '
-                'number of those cases that cannot meet it; magnetosphere is none or september (1.5e21 A m^2). '
-                'These replace the loss response\'s allowed transmissions, its capped pickup and its ion sputtering. '
-                'cases evaluates the loss response\'s own allowed transmissions with its heating-sized shadow: '
-                'sunlit carries the ions made, the fragments escaping and the charge-exchange upper bound; '
-                'no_magnetosphere and september_magnetosphere the low, central and high loss; '
+                'is the largest UV transmission through gaps whose ultraviolet-driven loss at the traced state for '
+                'that radius plus the sunlit exosphere\'s central loss stays within the budget, as a range over the '
+                'upper-air treatments and solar activity, with the number of those cases that cannot meet it; '
+                'magnetosphere is none, none_wake (no magnetosphere, the wind absent within the ring fleet\'s '
+                'unrefilled wake, a sensitivity) or september (1.5e21 A m^2). These replace the loss response\'s '
+                'allowed transmissions, its capped pickup and its ion sputtering. cases evaluates the loss response\'s '
+                'own allowed transmissions with the ring fleet\'s 4-radius shadow: sunlit carries the ions made, the '
+                'fragments escaping and the charge-exchange upper bound, with and without the wake; '
+                'no_magnetosphere, no_magnetosphere_wake and september_magnetosphere the low, central and high loss; '
+                'heating_radius_R the smallest protected radius that covers the heating; '
                 'radius_for_a_tenth_of_budget_R the smallest shadow radius at which the central loss is a tenth of '
                 'the budget (null if none up to 11.5 lunar radii).')
 
@@ -228,8 +244,17 @@ def sunlit(profile, activity, shadows_R, homopause_pa=None, outer_R=OUTER_R, poi
     return out
 
 
-def charge_exchange(profile, homopause_pa=None, outer_R=OUTER_R, b_points=500, z_points=600, wind=lr.SOLAR_WIND):
-    """Ions (kg/s) the solar wind makes by charge exchange with ballistic molecules on straight paths, at full exposure."""
+def wake_core_R(protected_R, distance_km=RING_FLEET_DISTANCE_KM, refill=WAKE_REFILL_SCREEN_RADII):
+    """Radius (lunar radii) of the screen's wake that the solar wind has not refilled at the Moon: the aperture of the
+    protected radius at the screen's distance, closing linearly over `refill` aperture radii."""
+    screen = protected_R + ab.SUN_ANGULAR_RADIUS * distance_km * 1e3 / MOON_RADIUS
+    return max(0.0, screen * (1.0 - distance_km * 1e3 / MOON_RADIUS / (refill * screen)))
+
+
+def charge_exchange(profile, homopause_pa=None, outer_R=OUTER_R, b_points=500, z_points=600, wind=lr.SOLAR_WIND,
+                    sheltered_R=0.0):
+    """Ions (kg/s) the solar wind makes by charge exchange with ballistic molecules on straight paths, at full exposure;
+    paths within sheltered_R (lunar radii) of the Sun-Moon line, in a screen's unrefilled wake, carry no wind."""
     n_c, t_c, r_c = ab.exobase_state(profile)
     shares = exobase_shares(profile, homopause_pa)
     table = np.geomspace(r_c, outer_R, 4000)
@@ -255,7 +280,7 @@ def charge_exchange(profile, homopause_pa=None, outer_R=OUTER_R, b_points=500, z
         ballistic_mass += col_bal * kg
     flux = wind['density_m3'] * wind['speed_m_s']
     exchanged = -np.expm1(-CHARGE_EXCHANGE_M2 * total)
-    per_path = np.where(total > 0, exchanged * ballistic_mass / np.maximum(total, 1e-300), 0.0)
+    per_path = np.where((total > 0) & (b >= sheltered_R), exchanged * ballistic_mass / np.maximum(total, 1e-300), 0.0)
     return float(flux * np.trapezoid(per_path * 2 * math.pi * b, b) * MOON_RADIUS ** 2)
 
 
@@ -383,8 +408,10 @@ def smallest(radii, values, target):
     return ab.smallest_radius(np.asarray(radii), np.asarray(values), target) if target > 0 else None
 
 
-def assess(profile, activity, shadow_R, budget=None, september=SEPTEMBER_MOMENT, sweep=True, sweep_shadow_R=None):
-    """The sunlit exosphere's losses at one shadow radius, with and without a magnetosphere, and what reduces them.
+def assess(profile, activity, shadow_R, budget=None, september=SEPTEMBER_MOMENT, sweep=True, sweep_shadow_R=None,
+           wake_R=None):
+    """The sunlit exosphere's losses at one shadow radius, with and without a magnetosphere, and what reduces them;
+    with wake_R, also without a magnetosphere with the wind absent within that radius of the Sun-Moon line.
 
     The moment sweep is taken at sweep_shadow_R (default: shadow_R)."""
     radii = np.array(RADII)
@@ -411,6 +438,16 @@ def assess(profile, activity, shadow_R, budget=None, september=SEPTEMBER_MOMENT,
         mag = with_magnetosphere(exo[share(lv)].fates(shadow_R, september, lv), lv)
         sept[lv] = dict(mag, fragments_kg_s=frag, total_kg_s=mag['plasma_kg_s'] + frag)
     result.update(no_magnetosphere=none_, september_magnetosphere=sept)
+    if wake_R is not None:
+        sheltered = {'mixed': charge_exchange(profile, sheltered_R=wake_R),
+                     'separated': charge_exchange(profile, HOMOPAUSE_PA, sheltered_R=wake_R)}
+        wake = {}
+        for lv in LEVELS:
+            frag = float(fragments(first(mixed), first(separated), lv))
+            loss = no_magnetosphere(float(ions_made(first(mixed), first(separated), lv)), sheltered[share(lv)], lv)
+            wake[lv] = dict(loss, fragments_kg_s=frag, total_kg_s=loss['plasma_kg_s'] + frag)
+        result['sunlit']['charge_exchange_in_wake_upper_bound_kg_s'] = sheltered
+        result.update(wake_core_R=wake_R, no_magnetosphere_wake=wake)
     # the central loss against the shadow radius, without and with the September moment
     ions_r = np.sqrt(sum(separated[s]['ions'] for s in MOLECULE_KG) * sum(mixed[s]['ions'] for s in MOLECULE_KG))[1:]
     frag_low = sum(ENERGETIC_SHARE[s][0] * separated[s]['fragments'] for s in MOLECULE_KG)[1:]
@@ -439,77 +476,76 @@ def assess(profile, activity, shadow_R, budget=None, september=SEPTEMBER_MOMENT,
 
 
 def central_losses(profile, activity, shadows_R):
-    """The central loss (kg/s) of the sunlit exosphere outside each shadow, without and with the September moment."""
+    """The central loss (kg/s) of the sunlit exosphere outside each shadow: without a magnetosphere, with the ring
+    fleet's wake sheltering the paths near the Sun-Moon line, and with the September moment."""
     mixed = sunlit(profile, activity, shadows_R)
     separated = sunlit(profile, activity, shadows_R, homopause_pa=HOMOPAUSE_PA)
     exchange = charge_exchange(profile)
     exo = Exosphere(profile, activity)
-    out = dict(none=[], september=[])
+    out = dict(none=[], september=[], none_wake=[])
     for j, x in enumerate(shadows_R):
         at = lambda d: {s: {k: float(v[j]) for k, v in d[s].items()} for s in d}
         frag = float(fragments(at(mixed), at(separated), 'central'))
         ions = float(ions_made(at(mixed), at(separated), 'central'))
         out['none'].append(no_magnetosphere(ions, exchange, 'central')['plasma_kg_s'] + frag)
+        sheltered = charge_exchange(profile, sheltered_R=wake_core_R(x))
+        out['none_wake'].append(no_magnetosphere(ions, sheltered, 'central')['plasma_kg_s'] + frag)
         out['september'].append(with_magnetosphere(exo.fates(x, SEPTEMBER_MOMENT, 'central'), 'central')['plasma_kg_s']
                                 + frag)
     return out
 
 
-def allowed_with_exosphere(shield, treatment, activity, weights, shadows=SHADOWS_R, budgets=lr.BUDGETS_KG_S):
+def allowed_with_exosphere(shield, treatment, activity, shadows=SHADOWS_R, budgets=lr.BUDGETS_KG_S):
     """Largest UV transmission per budget with the sunlit exosphere's central loss added, for each protected radius.
 
-    The loss at each transmission is the loss response's ultraviolet-driven loss (with Earth's tide) plus the
-    exosphere's, and without a magnetosphere also the solar wind's central proton sputtering. A protected radius
-    holds only where it is at least the radius the thermosphere's heating asks for (a tenth of the whole heating,
-    as in the design study); beyond that the transmission is not allowed."""
-    rows = lr.euv_sweep(shield, treatment, activity, glow=True)
+    The loss at each transmission is the loss response's ultraviolet-driven loss (with Earth's tide) at the traced
+    state for that radius, plus the exosphere's, and without a magnetosphere also the solar wind's central proton
+    sputtering. A protected radius holds only where it covers the thermosphere's heating, light beyond its aperture
+    giving at most a tenth of the heat (traced.HEATING_SHARE); beyond that the transmission is not allowed."""
     protons = lr.solar_wind_losses()['central']['proton_sputtering_kg_s']
-    unit = escape.leakage_heat(transmission=1.0, activity=lr.ACTIVITY[activity]['uv'])
-    table = []
-    for row in rows:
-        entry = dict(transmission=row['leak_fraction'], uv_kg_s=lr.loss_estimate(row), heating_radius_R=None,
-                     exobase_radius_R=row.get('exobase_radius_R'), exosphere_kg_s={})
-        if row['status'] == 'thermal_column':
-            try:
-                _, profile, q = ab.column(shield, treatment, activity, row['leak_fraction'])
-                b, heat, _ = ab.limb_heating_curve(profile, weights)
-                entry['heating_radius_R'] = ab.smallest_radius(b, heat, 0.1 * q / unit)
-                entry['exosphere_kg_s'] = central_losses(profile, activity, list(shadows))
-            except (ValueError, RuntimeError, FloatingPointError):
-                entry['exosphere_kg_s'] = {}
-        table.append(entry)
-    out = {}
-    for key in ('none', 'september'):
-        out[key] = {}
-        for j, x in enumerate(shadows):
-            f = [e['transmission'] for e in table]
-            loss = [e['uv_kg_s'] + e['exosphere_kg_s'][key][j] + (protons if key == 'none' else 0.0)
+    cfg = lr.column_config(shield, treatment)
+    out = {key: {} for key in MAGNETOSPHERE_KEYS}
+    sweep = {}
+    for x in shadows:
+        table = []
+        for row in lr.euv_sweep(shield, treatment, activity, glow=True, protected_R=x):
+            entry = dict(transmission=row['leak_fraction'], uv_kg_s=lr.loss_estimate(row),
+                         beyond_share=row.get('beyond_share', math.inf), exobase_radius_R=row.get('exobase_radius_R'),
+                         exosphere_kg_s={})
+            if row['status'] == 'thermal_column':
+                try:
+                    _, profile, _ = solve_column(row['deposited_heat_w_m2'], cfg)
+                    entry['exosphere_kg_s'] = {k: v[0] for k, v in central_losses(profile, activity, [x]).items()}
+                except (ValueError, RuntimeError, FloatingPointError):
+                    entry['exosphere_kg_s'] = {}
+            table.append(entry)
+        sweep[f'{x:g}'] = table
+        f = [e['transmission'] for e in table]
+        share = [e['beyond_share'] for e in table]
+        for key in MAGNETOSPHERE_KEYS:
+            loss = [e['uv_kg_s'] + e['exosphere_kg_s'][key] + (protons if key != 'september' else 0.0)
                     if key in e['exosphere_kg_s'] else math.inf for e in table]
-            heating = [e['heating_radius_R'] if key in e['exosphere_kg_s'] and e['heating_radius_R'] is not None
-                       else math.inf for e in table]
-            out[key][f'{x:g}'] = {f'{b:g}': _largest_within(f, loss, heating, x, b) for b in budgets}
-    return dict(shield=shield, treatment=treatment, activity=activity, allowed=out,
-                sweep=[dict(e, exosphere_kg_s={k: dict(zip([f'{x:g}' for x in shadows], v))
-                                               for k, v in e['exosphere_kg_s'].items()}) for e in table])
+            out[key][f'{x:g}'] = {f'{b:g}': _largest_within(f, loss, share, traced.HEATING_SHARE, b) for b in budgets}
+    return dict(shield=shield, treatment=treatment, activity=activity, allowed=out, sweep=sweep)
 
 
-def _largest_within(f, loss, heating, radius, budget):
-    """Largest transmission whose loss stays within the budget and whose heating radius within the protected
-    radius, interpolating the loss log-log and the heating radius against log transmission; None if none."""
-    if not (loss[0] <= budget and heating[0] <= radius):
+def _largest_within(f, loss, share, limit, budget):
+    """Largest transmission whose loss stays within the budget and whose heat from beyond the aperture within its
+    share, interpolating the loss log-log and the share against log transmission; None if none."""
+    if not (loss[0] <= budget and share[0] <= limit):
         return None
     for i in range(1, len(f)):
-        over_loss, over_heat = loss[i] > budget, heating[i] > radius
-        if not (over_loss or over_heat):
+        over_loss, over_share = loss[i] > budget, share[i] > limit
+        if not (over_loss or over_share):
             continue
         x0, x1 = math.log(f[i - 1]), math.log(f[i])
         ends = []
         if over_loss:
             y0, y1 = math.log(max(loss[i - 1], 1e-30)), math.log(loss[i])
             ends.append(x0 + (math.log(budget) - y0) * (x1 - x0) / (y1 - y0) if math.isfinite(y1) else x0)
-        if over_heat:
-            h0, h1 = heating[i - 1], heating[i]
-            ends.append(x0 + (radius - h0) * (x1 - x0) / (h1 - h0) if math.isfinite(h1) else x0)
+        if over_share:
+            h0, h1 = share[i - 1], share[i]
+            ends.append(x0 + (limit - h0) * (x1 - x0) / (h1 - h0) if math.isfinite(h1) else x0)
         return float(math.exp(min(ends)))
     return float(f[-1])
 
@@ -518,7 +554,7 @@ def summarise(allowed):
     """Allowed transmissions per magnetosphere, shield, protected radius and budget: the range over the upper-air
     treatments and solar activity, and how many of those cases cannot meet the budget at any transmission."""
     out = {}
-    for key in ('none', 'september'):
+    for key in MAGNETOSPHERE_KEYS:
         out[key] = {}
         for shield in lr.SHIELDS:
             rows = [a for a in allowed if a['shield'] == shield]
@@ -543,15 +579,14 @@ def main(argv=None) -> int:
         raise SystemExit(f"unexpected absorption schema {absorption['schema']}")
     fmt = lambda v: f'{v:5.2f}' if v is not None else '  -  '
     rows = []
+    shadow = lr.PROTECTED_R
     for c in absorption['cases']:
-        shadow = c['heating']['0.1']['radius_R']
-        if shadow is None:
-            continue
         _, profile, _ = ab.column(c['shield'], c['treatment'], c['activity'], c['allowed_leak_fraction'])
         row = dict(shield=c['shield'], treatment=c['treatment'], activity=c['activity'], budget_kg_s=c['budget_kg_s'],
                    allowed_leak_fraction=c['allowed_leak_fraction'], exobase_radius_R=c['exobase_radius_R'],
-                   exobase_temperature_k=c['exobase_temperature_k'])
-        row.update(assess(profile, c['activity'], shadow, c['budget_kg_s'], sweep=False))
+                   exobase_temperature_k=c['exobase_temperature_k'],
+                   heating_radius_R=c['heating']['0.1']['radius_R'])
+        row.update(assess(profile, c['activity'], shadow, c['budget_kg_s'], sweep=False, wake_R=wake_core_R(shadow)))
         rows.append(row)
         n, m = row['no_magnetosphere'], row['september_magnetosphere']
         tenth = row['radius_for_a_tenth_of_budget_R']
@@ -562,8 +597,7 @@ def main(argv=None) -> int:
               f"{n['low']['total_kg_s']:6.2f}/{n['central']['total_kg_s']:6.2f}/{n['high']['total_kg_s']:6.2f}; "
               f"September {m['low']['total_kg_s']:6.2f}/{m['central']['total_kg_s']:6.2f}/{m['high']['total_kg_s']:6.2f}; "
               f"tenth at {fmt(tenth['no_magnetosphere'])} / {fmt(tenth['september_magnetosphere'])} R")
-    weights = ab.band_weights()
-    allowed = [allowed_with_exosphere(shield, treatment, activity, weights)
+    allowed = [allowed_with_exosphere(shield, treatment, activity)
                for shield in lr.SHIELDS for treatment in lr.TREATMENTS for activity in lr.ACTIVITY]
     summary = summarise(allowed)
     for key, by_shield in summary.items():
@@ -579,7 +613,8 @@ def main(argv=None) -> int:
         schema=SCHEMA,
         producer=dict(domain='atmosphere', files={p: digest(p) for p in (
             'atmosphere/loss_response/exosphere.py', 'atmosphere/loss_response/absorption.py',
-            'atmosphere/loss_response/model.py', 'atmosphere/thermal_column.py')}),
+            'atmosphere/loss_response/model.py', 'atmosphere/loss_response/traced.py', 'atmosphere/thermal_column.py',
+            'atmosphere/middle_atmosphere/results/limb_heat.json')}),
         evidence=EVIDENCE, reading_rule=READING_RULE,
         assumptions=dict(
             rates_s={a: rates(a) for a in lr.ACTIVITY}, heays_2017_quiet_1au_s=HEAYS_1AU_S,
@@ -589,7 +624,9 @@ def main(argv=None) -> int:
             solar_wind_ranges=lr.SW_RANGES, magnetosphere=MAGNETOSPHERE, flaring=FLARING,
             electron_temperature_k=ELECTRON_K, september_moment_A_m2=SEPTEMBER_MOMENT,
             september_standoff_R=standoff_R(SEPTEMBER_MOMENT), outer_radius_R=OUTER_R,
-            protected_radii_R=SHADOWS_R),
+            protected_radii_R=SHADOWS_R, ring_fleet_distance_km=RING_FLEET_DISTANCE_KM,
+            wake_refill_screen_radii=WAKE_REFILL_SCREEN_RADII,
+            wake_core_R={f'{x:g}': wake_core_R(x) for x in SHADOWS_R}, heating_share=traced.HEATING_SHARE),
         cases=rows, allowed_summary=summary, allowed=allowed)
     (args.out / 'exosphere_loss.json').write_text(json.dumps(product, indent=2) + '\n')
     return 0

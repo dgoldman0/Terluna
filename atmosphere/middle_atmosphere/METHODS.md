@@ -177,10 +177,16 @@ stored design evaluated from 0.1 to 210 nm with published optical constants.
 The same spectrum and efficiency apply, and the transmitted light is all
 counted as absorbed above the base. That is an upper bound, because the film
 passes only hard X-rays, and the hardest of them reach below the base. At
-solar maximum the irradiance below 10 nm is scaled by 100 and the rest by 2.5.
-X-rays vary far more over the solar cycle: within WHI 2008 itself, the
-moderately active week is about 80 times the quiet week at 0.25 nm. Flares are
-not included.
+solar maximum the irradiance from 10 to 175 nm is scaled by 2.5 and the X-rays
+below 10 nm by FISM2's measured rise in each of five bands (0-0.5, 0.5-1, 1-2,
+2-5 and 5-10 nm): the mean over the year around each of the last three solar
+maxima divided by the mean over the WHI 2008 quiet week, 53, 19, 17, 8.8 and
+3.6 (`escape.xray_cycle`; the author's choice of 7 October 2026, in place of the
+earlier factor of 100 on every X-ray of a film and 2.5 on those of a leak).
+FISM2's daily spectra (Chamberlin et al. 2020) come from LASP's LISIRD in 0.1 nm
+bins and are pinned by hash in `limb_inputs.json`; FISM2 and WHI agree within
+1% on the quiet week's power below 10 nm. Flares within each year are in its
+mean; single days at maximum run up to about twice it in the films' band.
 
 Atomic oxygen, which the thermal column does not hold, is carried on each
 solution as a trace gas starting from the chemistry's fraction at the base.
@@ -245,23 +251,14 @@ N2, 9% for O2 and 0.2% for O. Argon, CO2 and the discrete N2 bands are left
 out. Both tables are restored by `fetch_limb_inputs.py` against
 `limb_inputs.json` and are not redistributed.
 
-**Spectrum and activity.** WHI 2008 below 175 nm. Solar maximum multiplies the
-X-rays below 10 nm by 100 and the rest by 2.5, as `escape.film_heat` and the
-loss response do. A second open spectrum scales its X-rays by 2.5, as
-`escape.leakage_heat` scales the band a filter passes, which separates the
-X-rays' share of a gap's heat from the geometry's.
-
-**The X-rays' solar cycle.** The films pass only X-rays near 1 nm, so their heat
-at solar maximum is their quiet heat times the X-rays' cycle factor. FISM2's
-daily spectra (Chamberlin et al. 2020), queried from LASP's LISIRD in 0.1 nm
-bins below 10 nm and pinned by hash in `limb_inputs.json`, give that factor:
-the mean over the year around each of the last three solar maxima (cycles 23,
-24 and 25) divided by the mean over the WHI 2008 quiet week, for the light each
-film passes (weighted by its transmission) and for the whole band below 10 nm
-(a gap's X-rays). FISM2 and WHI agree within 1% on the quiet week's power below
-10 nm. Each table is linear in the spectrum, so a source's solar-maximum value
-splits into its X-rays' part, (maximum − 2.5 × quiet)/97.5, and the rest, and
-the X-rays' part takes the measured factor in place of 100.
+**Spectrum and activity.** WHI 2008 below 175 nm. Solar maximum is the escape
+model's: 2.5 on the ultraviolet and FISM2's measured rise of the X-rays below
+10 nm by band (above). Each of the three maxima behind that mean is traced as
+well, for its spread. The films pass only X-rays near 1 nm, so their heat at
+solar maximum follows the X-rays' rise in that band: weighted by the light each
+passes, 18 for the 4 µm film (13-21 across the three maxima), 16 for the 2 µm
+film and 20 for the window stack; the whole band below 10 nm, which sets a
+gap's X-rays, rises 6.0 (4.6-6.9).
 
 **Heat and state.** The thermal column's heat is the light absorbed between the
 base and the exobase, times the heating efficiency of 0.4, over the Moon's

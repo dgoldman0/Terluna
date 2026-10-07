@@ -1,15 +1,17 @@
 {
-  "schema": "terluna.atmosphere.absorption-radius/1",
+  "schema": "terluna.atmosphere.absorption-radius/2",
   "producer": {
     "domain": "atmosphere",
     "files": {
-      "atmosphere/loss_response/absorption.py": "80214e3046199561",
-      "atmosphere/loss_response/model.py": "92de5c5cb029ac30",
-      "atmosphere/thermal_column.py": "ca108980727d63d9"
+      "atmosphere/loss_response/absorption.py": "41d26ac0cb88e90d",
+      "atmosphere/loss_response/model.py": "e5ef512142124102",
+      "atmosphere/loss_response/traced.py": "518b345c68be89ae",
+      "atmosphere/thermal_column.py": "ca108980727d63d9",
+      "atmosphere/middle_atmosphere/results/limb_heat.json": "3d6975fb2c1cf146"
     }
   },
-  "evidence": "Ultraviolet deposited in the collisional upper air along rays outside the protected radius, through the thermal-column profile at each budget's allowed leak, with band-averaged cross-sections; and the photoionization of the ballistic part of a two-body Chamberlain exosphere outside the shadow cylinder. The ion production bounds the pickup loss from above: the plasma interaction that decides how many ions escape is not modelled, and Earth's tides are not included.",
-  "reading_rule": "heating[\"0.1\"].radius_R is the protected radius (lunar radii) at which ultraviolet deposited in the thermosphere outside the shadow equals a tenth of the allowed leak. Its aperture adds the Sun's angular radius times the shield distance; area_over_september compares it with the September aperture (3 R at 78,000 km). exosphere_ion_production_kg_s gives the ions produced outside shadows of several radii, counted to a third, half or all of the Hill radius, as an upper bound on pickup loss to set beside the budget; the share that escapes awaits a plasma model.",
+  "evidence": "The protected radius that covers the heating from the middle atmosphere's limb tracing at each budget's allowed UV transmission, with the band-averaged limb curve of the thermal-column profile as a cross-check; and the photoionization of the ballistic part of a two-body Chamberlain exosphere outside the shadow cylinder. The ion production bounds the pickup loss from above: the plasma interaction that decides how many ions escape is not modelled, and Earth's tides are not included.",
+  "reading_rule": "heating[\"0.1\"].radius_R is the smallest protected radius (lunar radii) at which unfiltered light beyond the aperture gives at most a tenth of the heat of the traced state at the allowed UV transmission; null where no radius up to 10 does. Its aperture adds the Sun's angular radius times the ring fleet's distance; area_over_ring_fleet compares it with the ring fleet's aperture (4 R at 20,000 km). The state, exobase and loss are at the ring fleet's 4 R. exosphere_ion_production_kg_s gives the ions produced outside shadows of several radii, counted to a third, half or all of the Hill radius, as an upper bound on pickup loss to set beside the budget; the share that escapes awaits a plasma model.",
   "band_weights": {
     "xuv": 0.17642466822043923,
     "lyman_alpha": 0.35131526896374005,
@@ -35,71 +37,71 @@
       "treatment": "collisional",
       "activity": "quiet",
       "budget_kg_s": 1.0,
-      "allowed_leak_fraction": 0.004505518922308643,
-      "deposited_heat_w_m2": 9.612146618644834e-06,
-      "exobase_radius_R": 2.664629235671311,
-      "exobase_temperature_k": 292.7349675662581,
-      "exobase_density_m3": 4907105812272.805,
-      "jeans_lambda_N2": 12.188902892012743,
-      "molecular_jeans_loss_kg_s": 0.4177319994387082,
+      "allowed_leak_fraction": 0.0014624178544940622,
+      "deposited_heat_w_m2": 9.629446257999673e-06,
+      "exobase_radius_R": 2.6673692015134303,
+      "exobase_temperature_k": 293.0133737242115,
+      "exobase_density_m3": 4892376764959.3955,
+      "jeans_lambda_N2": 12.164812880138065,
+      "molecular_jeans_loss_kg_s": 0.4269965425949152,
       "tau_one_radius_R": {
-        "xuv": 2.049601590240356,
-        "lyman_alpha": 1.3430240281231134,
-        "schumann_runge": 1.6622750196445253
+        "xuv": 2.0499681043669256,
+        "lyman_alpha": 1.3431908483954025,
+        "schumann_runge": 1.6630634168217822
       },
       "limb_heating_leak_at_3R": 0.0,
       "heating": {
         "0.1": {
-          "radius_R": 2.6247958612574616,
+          "radius_R": 2.75,
           "aperture": {
-            "aperture_radius_km": 4923.0567757037625,
-            "area_over_september": 0.7798118797931776
+            "aperture_radius_km": 4870.859345219244,
+            "area_over_ring_fleet": 0.47834801940079913
           }
         },
         "0.5": {
-          "radius_R": 2.556723957382868,
+          "radius_R": 2.75,
           "aperture": {
-            "aperture_radius_km": 4804.788649912043,
-            "area_over_september": 0.7427945972374804
+            "aperture_radius_km": 4870.859345219244,
+            "area_over_ring_fleet": 0.47834801940079913
           }
         }
       },
       "exosphere_ion_production_kg_s": {
         "third_hill": {
-          "3": 4.40847010807904,
-          "4": 1.124732589291196,
-          "5": 0.5120302146357699,
-          "6": 0.2834370831608205,
-          "8": 0.09817954657711613,
-          "10": 0.02463143086607679,
+          "3": 4.46923262130964,
+          "4": 1.143006222881505,
+          "5": 0.520937621105527,
+          "6": 0.288546080328892,
+          "8": 0.10001422832603421,
+          "10": 0.025100203689342494,
           "12": 0.0,
-          "heating_radius": 10.35327918248382
+          "heating_radius": 7.757975982851903
         },
         "half_hill": {
-          "3": 4.527613482957165,
-          "4": 1.2416541701983177,
-          "5": 0.6260139635796008,
-          "6": 0.39371547831760967,
-          "8": 0.19835494689584782,
-          "10": 0.10981082698178132,
-          "12": 0.05891233933729233,
-          "heating_radius": 10.473095752142243
+          "3": 4.5907219130565,
+          "4": 1.2622250533949586,
+          "5": 0.6371630251446966,
+          "6": 0.4009937841503046,
+          "8": 0.20216089464482834,
+          "10": 0.11195722551578693,
+          "12": 0.060076777908013024,
+          "heating_radius": 7.879939526939257
         },
         "hill": {
-          "3": 4.67600475643361,
-          "4": 1.3890836971368588,
-          "5": 0.7722223903509249,
-          "6": 0.5384165561955789,
-          "8": 0.3391301605121994,
-          "10": 0.2453373739875172,
-          "12": 0.18766053776289215,
-          "heating_radius": 10.62174913136562
+          "3": 4.742117748356069,
+          "4": 1.4126847350535128,
+          "5": 0.7863769253107221,
+          "6": 0.5486694386642413,
+          "8": 0.34583045123482087,
+          "10": 0.25027054826328504,
+          "12": 0.19147330650567546,
+          "heating_radius": 8.031530685850548
         }
       },
       "radius_for_production_of_a_tenth_of_budget_R": {
-        "third_hill": 7.9684029556221585,
-        "half_hill": 10.317231275780209,
-        "hill": 17.294758839092324
+        "third_hill": 8.00027044946122,
+        "half_hill": 10.38267487741795,
+        "hill": 17.467379214137086
       }
     },
     {
@@ -107,71 +109,71 @@
       "treatment": "collisional",
       "activity": "quiet",
       "budget_kg_s": 10.0,
-      "allowed_leak_fraction": 0.0064190063662115816,
-      "deposited_heat_w_m2": 1.2817438820261449e-05,
-      "exobase_radius_R": 3.2218781409056167,
-      "exobase_temperature_k": 336.3890722515986,
-      "exobase_density_m3": 2920878564211.59,
-      "jeans_lambda_N2": 8.772533164620528,
-      "molecular_jeans_loss_kg_s": 9.033317230394983,
+      "allowed_leak_fraction": 0.001831664054860444,
+      "deposited_heat_w_m2": 1.2197886840247306e-05,
+      "exobase_radius_R": 3.1143551339794104,
+      "exobase_temperature_k": 329.7852466682651,
+      "exobase_density_m3": 3188644575905.6733,
+      "jeans_lambda_N2": 9.257136143810222,
+      "molecular_jeans_loss_kg_s": 5.8712161853470715,
       "tau_one_radius_R": {
-        "xuv": 2.219129440004629,
-        "lyman_alpha": 1.3458205223898805,
-        "schumann_runge": 1.7144781330152434
+        "xuv": 2.1897209174912105,
+        "lyman_alpha": 1.3456243547004756,
+        "schumann_runge": 1.7064949953064228
       },
-      "limb_heating_leak_at_3R": 0.005428094676934627,
+      "limb_heating_leak_at_3R": 0.0018954057092600062,
       "heating": {
         "0.1": {
-          "radius_R": 3.162537570834507,
+          "radius_R": 3.5,
           "aperture": {
-            "aperture_radius_km": 5857.329221922921,
-            "area_over_september": 1.1038738069153404
+            "aperture_radius_km": 6173.909345219243,
+            "area_over_ring_fleet": 0.7685166820633214
           }
         },
         "0.5": {
-          "radius_R": 3.0592408185744397,
+          "radius_R": 3.5,
           "aperture": {
-            "aperture_radius_km": 5677.86144454628,
-            "area_over_september": 1.0372650359921547
+            "aperture_radius_km": 6173.909345219243,
+            "area_over_ring_fleet": 0.7685166820633214
           }
         }
       },
       "exosphere_ion_production_kg_s": {
         "third_hill": {
-          "3": 26.51729770758149,
-          "4": 10.692486983668928,
-          "5": 5.645473821845325,
-          "6": 3.392701683315481,
-          "8": 1.283151684767876,
-          "10": 0.3373493081632687,
+          "3": 21.787863718571487,
+          "4": 7.801318236589886,
+          "5": 4.040130086212819,
+          "6": 2.401668798404241,
+          "8": 0.8975908794603865,
+          "10": 0.23445651055718125,
           "12": 0.0,
-          "heating_radius": 23.852636394970567
+          "heating_radius": 12.277492591397774
         },
         "half_hill": {
-          "3": 28.30157015260437,
-          "4": 12.443630593316595,
-          "5": 7.353001674762337,
-          "6": 5.045258211769689,
-          "8": 2.7858743567855595,
-          "10": 1.6180393378884472,
-          "12": 0.8943713761341373,
-          "heating_radius": 25.63220739378322
+          "3": 23.012283446187315,
+          "4": 9.00297401718601,
+          "5": 5.211819846973573,
+          "6": 3.5355884774532322,
+          "8": 1.928546458835272,
+          "10": 1.112802848028579,
+          "12": 0.6125646974886596,
+          "heating_radius": 13.491402182899083
         },
         "hill": {
-          "3": 30.81560840729651,
-          "4": 14.941912919099888,
-          "5": 9.830891517289334,
-          "6": 7.49794132786153,
-          "8": 5.172957794715403,
-          "10": 3.917454972945715,
-          "12": 3.0806622783611957,
-          "heating_radius": 28.14400012678426
+          "3": 24.707489149059448,
+          "4": 10.687536893126396,
+          "5": 6.882606451689227,
+          "6": 5.1893417021176695,
+          "8": 3.5379816889390785,
+          "10": 2.66300198388154,
+          "12": 2.0863182839441468,
+          "heating_radius": 15.18168355976739
         }
       },
       "radius_for_production_of_a_tenth_of_budget_R": {
-        "third_hill": 8.459519582230504,
-        "half_hill": 11.650967308720038,
-        "hill": 21.72177111681788
+        "third_hill": 7.794656463509968,
+        "half_hill": 10.381255325609285,
+        "hill": 18.509055338925233
       }
     },
     {
@@ -179,71 +181,71 @@
       "treatment": "collisional",
       "activity": "quiet",
       "budget_kg_s": 100.0,
-      "allowed_leak_fraction": 0.009656518344398408,
-      "deposited_heat_w_m2": 1.824061101268321e-05,
-      "exobase_radius_R": 3.9567344268782847,
-      "exobase_temperature_k": 364.18176016530987,
-      "exobase_density_m3": 1788881646833.6184,
-      "jeans_lambda_N2": 6.5981307271313945,
-      "molecular_jeans_loss_kg_s": 60.84411048101604,
+      "allowed_leak_fraction": 0.0024828287385037263,
+      "deposited_heat_w_m2": 1.8122124100377788e-05,
+      "exobase_radius_R": 3.9436857339026035,
+      "exobase_temperature_k": 363.89942725104595,
+      "exobase_density_m3": 1802136287352.278,
+      "jeans_lambda_N2": 6.625098456182571,
+      "molecular_jeans_loss_kg_s": 59.437982370761226,
       "tau_one_radius_R": {
-        "xuv": 2.3920327979610603,
-        "lyman_alpha": 1.3473974658494177,
-        "schumann_runge": 1.7616494078936897
+        "xuv": 2.3887882623299674,
+        "lyman_alpha": 1.3469621466508963,
+        "schumann_runge": 1.7614521066522473
       },
-      "limb_heating_leak_at_3R": 0.06213049189849963,
+      "limb_heating_leak_at_3R": 0.06069461000542981,
       "heating": {
         "0.1": {
-          "radius_R": 3.8682905212645946,
+          "radius_R": 4.0,
           "aperture": {
-            "aperture_radius_km": 7083.504398000156,
-            "area_over_september": 1.6144198697820962
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
           }
         },
         "0.5": {
-          "radius_R": 3.711969079037451,
+          "radius_R": 4.0,
           "aperture": {
-            "aperture_radius_km": 6811.911524274716,
-            "area_over_september": 1.4929943197358817
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
           }
         }
       },
       "exosphere_ion_production_kg_s": {
         "third_hill": {
-          "3": 59.84570060308131,
-          "4": 43.85285063019772,
-          "5": 24.96493066575656,
-          "6": 15.673224584336452,
-          "8": 6.2270076812190815,
-          "10": 1.6830187476256948,
+          "3": 59.26104828780876,
+          "4": 43.084140304072115,
+          "5": 24.50852729772412,
+          "6": 15.379477867061267,
+          "8": 6.10695215251772,
+          "10": 1.6500436084791983,
           "12": 0.0,
-          "heating_radius": 47.28796329717079
+          "heating_radius": 43.084140304072115
         },
         "half_hill": {
-          "3": 69.25799809133713,
-          "4": 53.09129584184545,
-          "5": 33.97457912774714,
-          "6": 24.394512354587754,
-          "8": 14.162694115591727,
-          "10": 8.455700439248961,
-          "12": 4.757599493988192,
-          "heating_radius": 56.55236248355155
+          "3": 68.48279725651673,
+          "4": 52.13554227048475,
+          "5": 33.33575740692895,
+          "6": 23.924178240645205,
+          "8": 13.881880098022995,
+          "10": 8.285414690283195,
+          "12": 4.660822620394888,
+          "heating_radius": 52.13554227048475
         },
         "hill": {
-          "3": 83.5877860657558,
-          "4": 67.33213544419378,
-          "5": 48.100115587141524,
-          "6": 38.37757558355611,
-          "8": 27.775113493387316,
-          "10": 21.572943279889447,
-          "12": 17.236159007263538,
-          "heating_radius": 70.80640959341194
+          "3": 82.50939533948265,
+          "4": 66.07503115525594,
+          "5": 47.1624027961402,
+          "6": 37.6113286995597,
+          "8": 27.206209893784827,
+          "10": 21.12500745201678,
+          "12": 16.87516072586841,
+          "heating_radius": 66.07503115525594
         }
       },
       "radius_for_production_of_a_tenth_of_budget_R": {
-        "third_hill": 7.005968299600293,
-        "half_hill": 9.361408894130367,
-        "hill": 17.092432830500236
+        "third_hill": 6.964835511851145,
+        "half_hill": 9.282076627118405,
+        "hill": 16.896244462742523
       }
     },
     {
@@ -251,71 +253,71 @@
       "treatment": "collisional",
       "activity": "solar_maximum",
       "budget_kg_s": 1.0,
-      "allowed_leak_fraction": 0.0015260516832194962,
-      "deposited_heat_w_m2": 9.583048466295431e-06,
-      "exobase_radius_R": 2.660033336886642,
-      "exobase_temperature_k": 292.2663411170295,
-      "exobase_density_m3": 4931972437759.997,
-      "jeans_lambda_N2": 12.229540118311919,
-      "molecular_jeans_loss_kg_s": 0.4025541153623713,
+      "allowed_leak_fraction": 0.00045843426598426567,
+      "deposited_heat_w_m2": 9.560417351695402e-06,
+      "exobase_radius_R": 2.656469961841459,
+      "exobase_temperature_k": 291.9015778679095,
+      "exobase_density_m3": 4951392345900.005,
+      "jeans_lambda_N2": 12.261247420071273,
+      "molecular_jeans_loss_kg_s": 0.3910931386632337,
       "tau_one_radius_R": {
-        "xuv": 2.047014241049654,
-        "lyman_alpha": 1.3427442110995265,
-        "schumann_runge": 1.6621224804955144
+        "xuv": 2.0461750826764287,
+        "lyman_alpha": 1.3425272583236312,
+        "schumann_runge": 1.6610941837768878
       },
       "limb_heating_leak_at_3R": 0.0,
       "heating": {
         "0.1": {
-          "radius_R": 2.6402711984252756,
+          "radius_R": 2.75,
           "aperture": {
-            "aperture_radius_km": 4949.943626499122,
-            "area_over_september": 0.7883528901827582
+            "aperture_radius_km": 4870.859345219244,
+            "area_over_ring_fleet": 0.47834801940079913
           }
         },
         "0.5": {
-          "radius_R": 2.604513736262592,
+          "radius_R": 2.75,
           "aperture": {
-            "aperture_radius_km": 4887.818611737675,
-            "area_over_september": 0.7686883866886082
+            "aperture_radius_km": 4870.859345219244,
+            "area_over_ring_fleet": 0.47834801940079913
           }
         }
       },
       "exosphere_ion_production_kg_s": {
         "third_hill": {
-          "3": 10.769600303832531,
-          "4": 2.7364004573514316,
-          "5": 1.2433606489401134,
-          "6": 0.6875488271639877,
-          "8": 0.23789937595136926,
-          "10": 0.0596506852049691,
+          "3": 10.577247447651814,
+          "4": 2.6789365730114687,
+          "5": 1.2154362879007496,
+          "6": 0.6715592029862025,
+          "8": 0.23216844370987275,
+          "10": 0.05818781326928252,
           "12": 0.0,
-          "heating_radius": 24.76548954485224
+          "heating_radius": 18.43493155715875
         },
         "half_hill": {
-          "3": 11.05782421332619,
-          "4": 3.019244285272333,
-          "5": 1.5191044773491318,
-          "6": 0.954330345141692,
-          "8": 0.4802361043098269,
-          "10": 0.26570429330238304,
-          "12": 0.14249558393408218,
-          "heating_radius": 25.055284490307997
+          "3": 10.858217181931835,
+          "4": 2.954618500190742,
+          "5": 1.484193797379357,
+          "6": 0.9315820073401002,
+          "8": 0.46836356411572805,
+          "10": 0.25901543420474055,
+          "12": 0.13886878154104754,
+          "heating_radius": 18.71700133813713
         },
         "hill": {
-          "3": 11.416244252380027,
-          "4": 3.3753805869140088,
-          "5": 1.8722900312529633,
-          "6": 1.3038711029709724,
-          "8": 0.8202944688078028,
-          "10": 0.593080804243705,
-          "12": 0.4534961242799438,
-          "heating_radius": 25.41434907828342
+          "3": 11.207116767457057,
+          "4": 3.3013440391809024,
+          "5": 1.8280404697967145,
+          "6": 1.2718804015970528,
+          "8": 0.7994286344598196,
+          "10": 0.5777321654151246,
+          "12": 0.4416399685736162,
+          "heating_radius": 19.06633229524426
         }
       },
       "radius_for_production_of_a_tenth_of_budget_R": {
-        "third_hill": 9.38071834491808,
-        "half_hill": 12.988455610185804,
-        "hill": 24.007900965289306
+        "third_hill": 9.346954071319331,
+        "half_hill": 12.921847745792595,
+        "hill": 23.83146977245663
       }
     },
     {
@@ -323,71 +325,71 @@
       "treatment": "collisional",
       "activity": "solar_maximum",
       "budget_kg_s": 10.0,
-      "allowed_leak_fraction": 0.0021280136156189007,
-      "deposited_heat_w_m2": 1.2103921929220217e-05,
-      "exobase_radius_R": 3.097710692177415,
-      "exobase_temperature_k": 328.692642750692,
-      "exobase_density_m3": 3233716259247.9634,
-      "jeans_lambda_N2": 9.337812951303619,
-      "molecular_jeans_loss_kg_s": 5.463809417078391,
+      "allowed_leak_fraction": 0.0005946019251842469,
+      "deposited_heat_w_m2": 1.1850724399688514e-05,
+      "exobase_radius_R": 3.0525535420849117,
+      "exobase_temperature_k": 325.6298581445869,
+      "exobase_density_m3": 3361420171819.841,
+      "jeans_lambda_N2": 9.5650776037907,
+      "molecular_jeans_loss_kg_s": 4.46060861857457,
       "tau_one_radius_R": {
-        "xuv": 2.184433829941481,
-        "lyman_alpha": 1.3448330843228995,
-        "schumann_runge": 1.7040041528324938
+        "xuv": 2.1721665716160796,
+        "lyman_alpha": 1.3456808442371762,
+        "schumann_runge": 1.7005306945792054
       },
-      "limb_heating_leak_at_3R": 0.00148260581017018,
+      "limb_heating_leak_at_3R": 0.0005688529678770034,
       "heating": {
         "0.1": {
-          "radius_R": 3.0695976016851336,
+          "radius_R": 3.5,
           "aperture": {
-            "aperture_radius_km": 5695.8553195228,
-            "area_over_september": 1.0438499069088858
+            "aperture_radius_km": 6173.909345219243,
+            "area_over_ring_fleet": 0.7685166820633214
           }
         },
         "0.5": {
-          "radius_R": 3.0183820103448404,
+          "radius_R": 3.5,
           "aperture": {
-            "aperture_radius_km": 5606.873351128173,
-            "area_over_september": 1.0114901337029627
+            "aperture_radius_km": 6173.909345219243,
+            "area_over_ring_fleet": 0.7685166820633214
           }
         }
       },
       "exosphere_ion_production_kg_s": {
         "third_hill": {
-          "3": 52.637549173740055,
-          "4": 18.50388493284352,
-          "5": 9.551350454172285,
-          "6": 5.667381448323895,
-          "8": 2.1138671227217105,
-          "10": 0.5515567519497518,
+          "3": 47.62459408152549,
+          "4": 15.952238815364133,
+          "5": 8.157684807845374,
+          "6": 4.815201954032835,
+          "8": 1.7858500983229102,
+          "10": 0.4645413031751113,
           "12": 0.0,
-          "heating_radius": 49.405655125415706
+          "heating_radius": 25.375856507753202
         },
         "half_hill": {
-          "3": 55.51189854668659,
-          "4": 21.324773551330583,
-          "5": 12.301892319538123,
-          "6": 8.329232121109417,
-          "8": 4.533958931088952,
-          "10": 2.6132961155317913,
-          "12": 1.4375471726922218,
-          "heating_radius": 52.27680802763741
+          "3": 50.031094315532,
+          "4": 18.313956673218428,
+          "5": 10.460471466028388,
+          "6": 7.04368848031717,
+          "8": 3.811796724200353,
+          "10": 2.1902351197646404,
+          "12": 1.2024708178551724,
+          "heating_radius": 27.761696959589944
         },
         "hill": {
-          "3": 59.47981434049001,
-          "4": 25.26781275937534,
-          "5": 16.212640927953107,
-          "6": 12.200100425145667,
-          "8": 8.301047160986208,
-          "10": 6.241685712119221,
-          "12": 4.886935499485649,
-          "heating_radius": 56.24322526454655
+          "3": 53.32592432050052,
+          "4": 21.58809569046934,
+          "5": 13.707788726495085,
+          "6": 10.257855861951704,
+          "8": 6.939714276877112,
+          "10": 5.202871976820134,
+          "12": 4.066321693204776,
+          "heating_radius": 31.04690991524935
         }
       },
       "radius_for_production_of_a_tenth_of_budget_R": {
-        "third_hill": 9.252297196620054,
-        "half_hill": 13.03725330499562,
-        "hill": 24.832018973166083
+        "third_hill": 8.997596652452579,
+        "half_hill": 12.545106730756215,
+        "hill": 23.61378015526048
       }
     },
     {
@@ -395,71 +397,71 @@
       "treatment": "collisional",
       "activity": "solar_maximum",
       "budget_kg_s": 100.0,
-      "allowed_leak_fraction": 0.0035984844812201066,
-      "deposited_heat_w_m2": 1.8261904325752547e-05,
-      "exobase_radius_R": 3.9590699595077687,
-      "exobase_temperature_k": 364.23165628275717,
-      "exobase_density_m3": 1786526907034.0754,
-      "jeans_lambda_N2": 6.593335015927578,
-      "molecular_jeans_loss_kg_s": 61.097580668624516,
+      "allowed_leak_fraction": 0.0007585684933056468,
+      "deposited_heat_w_m2": 1.4815455782427257e-05,
+      "exobase_radius_R": 3.53287274974374,
+      "exobase_temperature_k": 351.46376361516604,
+      "exobase_density_m3": 2325075446115.2993,
+      "jeans_lambda_N2": 7.657155345254868,
+      "molecular_jeans_loss_kg_s": 24.16359649234203,
       "tau_one_radius_R": {
-        "xuv": 2.3930145397836293,
-        "lyman_alpha": 1.347475381867082,
-        "schumann_runge": 1.7620857375926096
+        "xuv": 2.2973681082996453,
+        "lyman_alpha": 1.3465419556675544,
+        "schumann_runge": 1.7375004136360388
       },
-      "limb_heating_leak_at_3R": 0.06238911688793784,
+      "limb_heating_leak_at_3R": 0.023011348409355505,
       "heating": {
         "0.1": {
-          "radius_R": 3.912576364296178,
+          "radius_R": 4.0,
           "aperture": {
-            "aperture_radius_km": 7160.446621683229,
-            "area_over_september": 1.6496825536341286
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
           }
         },
         "0.5": {
-          "radius_R": 3.8270831900773827,
+          "radius_R": 4.0,
           "aperture": {
-            "aperture_radius_km": 7011.910780795493,
-            "area_over_september": 1.581950613871494
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
           }
         }
       },
       "exosphere_ion_production_kg_s": {
         "third_hill": {
-          "3": 149.87556321742986,
-          "4": 109.97765713865623,
-          "5": 62.61748050297985,
-          "6": 39.3151223794,
-          "8": 15.621514706644113,
-          "10": 4.222365705855756,
+          "3": 101.31005389004106,
+          "4": 55.05604954861121,
+          "5": 30.299778715343155,
+          "6": 18.64557047806715,
+          "8": 7.239998894193783,
+          "10": 1.9313955536568457,
           "12": 0.0,
-          "heating_radius": 116.02476062519784
+          "heating_radius": 55.05604954861121
         },
         "half_hill": {
-          "3": 173.4920430485031,
-          "4": 133.15792087379518,
-          "5": 85.22372808480958,
-          "6": 61.19783571713258,
-          "8": 35.533052380722964,
-          "10": 21.21586430574115,
-          "12": 11.937544732141836,
-          "heating_radius": 139.2485174925966
+          "3": 111.82608374161475,
+          "4": 65.37731237601778,
+          "5": 40.36480905887454,
+          "6": 28.38752130003011,
+          "8": 16.101646221697322,
+          "10": 9.489240923758548,
+          "12": 5.294261011045832,
+          "heating_radius": 65.37731237601778
         },
         "hill": {
-          "3": 209.45300208159628,
-          "4": 168.8956861925474,
-          "5": 120.67198831776415,
-          "6": 96.28867385408782,
-          "8": 69.69379701559693,
-          "10": 54.13397083306978,
-          "12": 43.25291062025543,
-          "heating_radius": 175.00838761277794
+          "3": 127.25010174673666,
+          "4": 80.70525413143139,
+          "5": 55.56801121197863,
+          "6": 43.43677096619423,
+          "8": 30.7502746653644,
+          "10": 23.602540490147028,
+          "12": 18.716929823977488,
+          "heating_radius": 80.70525413143139
         }
       },
       "radius_for_production_of_a_tenth_of_budget_R": {
-        "third_hill": 8.816177435037227,
-        "half_hill": 12.539041300977106,
-        "hill": 24.373181029313674
+        "third_hill": 7.349191540907468,
+        "half_hill": 9.806900435251707,
+        "hill": 17.732684961129966
       }
     },
     {
@@ -467,71 +469,71 @@
       "treatment": "lte",
       "activity": "quiet",
       "budget_kg_s": 1.0,
-      "allowed_leak_fraction": 0.002989376076075769,
-      "deposited_heat_w_m2": 7.244658698561893e-06,
-      "exobase_radius_R": 2.8009154107439302,
-      "exobase_temperature_k": 277.37315137497296,
-      "exobase_density_m3": 4687153705359.981,
-      "jeans_lambda_N2": 12.238032278343855,
-      "molecular_jeans_loss_kg_s": 0.4099674374222401,
+      "allowed_leak_fraction": 0.0008852951272692403,
+      "deposited_heat_w_m2": 7.122003155524465e-06,
+      "exobase_radius_R": 2.7795652536428492,
+      "exobase_temperature_k": 275.40983506558314,
+      "exobase_density_m3": 4793363992631.62,
+      "jeans_lambda_N2": 12.419945467363682,
+      "molecular_jeans_loss_kg_s": 0.3473245211902841,
       "tau_one_radius_R": {
-        "xuv": 2.15543708224361,
-        "lyman_alpha": 1.396937256535063,
-        "schumann_runge": 1.7460481034671427
+        "xuv": 2.148191487384678,
+        "lyman_alpha": 1.3967329067597567,
+        "schumann_runge": 1.7433694843132623
       },
       "limb_heating_leak_at_3R": 0.0,
       "heating": {
         "0.1": {
-          "radius_R": 2.770825976139642,
+          "radius_R": 3.0,
           "aperture": {
-            "aperture_radius_km": 5176.7694973000625,
-            "area_over_september": 0.8622591547462253
+            "aperture_radius_km": 5305.209345219243,
+            "area_over_ring_fleet": 0.567463398389307
           }
         },
         "0.5": {
-          "radius_R": 2.717734297339893,
+          "radius_R": 3.0,
           "aperture": {
-            "aperture_radius_km": 5084.528014553378,
-            "area_over_september": 0.8318048483125062
+            "aperture_radius_km": 5305.209345219243,
+            "area_over_ring_fleet": 0.567463398389307
           }
         }
       },
       "exosphere_ion_production_kg_s": {
         "third_hill": {
-          "3": 6.537507993864255,
-          "4": 1.4676127778085786,
-          "5": 0.6327229045507995,
-          "6": 0.34063687612088456,
-          "8": 0.11478755898316055,
-          "10": 0.028404413222756275,
+          "3": 5.920024216952025,
+          "4": 1.3027491472934325,
+          "5": 0.5564089172049023,
+          "6": 0.2980300059974108,
+          "8": 0.09990171218409337,
+          "10": 0.024654025871378247,
           "12": 0.0,
-          "heating_radius": 11.137091423262447
+          "heating_radius": 5.920024216952025
         },
         "half_hill": {
-          "3": 6.671524313976306,
-          "4": 1.5991104389847928,
-          "5": 0.7609074892815584,
-          "6": 0.4646445109666324,
-          "8": 0.2274010040861981,
-          "10": 0.1240982047223948,
-          "12": 0.06600084429959778,
-          "heating_radius": 11.27157426575962
+          "3": 6.035767102679111,
+          "4": 1.416319866833068,
+          "5": 0.6671161769285852,
+          "6": 0.4051288004546501,
+          "8": 0.19715387050876937,
+          "10": 0.10728361171277714,
+          "12": 0.05695881421043706,
+          "heating_radius": 6.035767102679111
         },
         "hill": {
-          "3": 6.832620899883025,
-          "4": 1.7591839189076324,
-          "5": 0.9196518985830585,
-          "6": 0.621743517282004,
-          "8": 0.3802209436145035,
-          "10": 0.2711953159761479,
-          "12": 0.20570613127250137,
-          "heating_radius": 11.432867132407665
+          "3": 6.173951026114756,
+          "4": 1.5536157552829724,
+          "5": 0.8032728887818084,
+          "6": 0.5398740547231196,
+          "8": 0.32822620755244664,
+          "10": 0.23344344958261343,
+          "12": 0.17677305387587816,
+          "heating_radius": 6.173951026114756
         }
       },
       "radius_for_production_of_a_tenth_of_budget_R": {
-        "third_hill": 8.241326918405218,
-        "half_hill": 10.711686239259059,
-        "hill": 17.961441153711192
+        "third_hill": 7.99836002760268,
+        "half_hill": 10.233070874556226,
+        "hill": 16.67636619708447
       }
     },
     {
@@ -539,71 +541,71 @@
       "treatment": "lte",
       "activity": "quiet",
       "budget_kg_s": 10.0,
-      "allowed_leak_fraction": 0.004384108416689576,
-      "deposited_heat_w_m2": 9.580981682523262e-06,
-      "exobase_radius_R": 3.2508191364436816,
-      "exobase_temperature_k": 310.87279424096096,
-      "exobase_density_m3": 3104597316076.428,
-      "jeans_lambda_N2": 9.408068779936787,
-      "molecular_jeans_loss_kg_s": 5.269320645821,
+      "allowed_leak_fraction": 0.0012890781471225786,
+      "deposited_heat_w_m2": 9.932810788307768e-06,
+      "exobase_radius_R": 3.319476743119136,
+      "exobase_temperature_k": 314.8201304690883,
+      "exobase_density_m3": 2940165976000.185,
+      "jeans_lambda_N2": 9.09795707347562,
+      "molecular_jeans_loss_kg_s": 6.946852802104027,
       "tau_one_radius_R": {
-        "xuv": 2.298299439363383,
-        "lyman_alpha": 1.3996036292756364,
-        "schumann_runge": 1.7910500801305536
+        "xuv": 2.318321206334827,
+        "lyman_alpha": 1.3998918437536065,
+        "schumann_runge": 1.796639822074538
       },
-      "limb_heating_leak_at_3R": 0.007390477271815047,
+      "limb_heating_leak_at_3R": 0.011016635915452556,
       "heating": {
         "0.1": {
-          "radius_R": 3.2067006991402622,
+          "radius_R": 3.5,
           "aperture": {
-            "aperture_radius_km": 5934.05824104134,
-            "area_over_september": 1.132983975134279
+            "aperture_radius_km": 6173.909345219243,
+            "area_over_ring_fleet": 0.7685166820633214
           }
         },
         "0.5": {
-          "radius_R": 3.128388509011679,
+          "radius_R": 3.5,
           "aperture": {
-            "aperture_radius_km": 5797.99864191194,
-            "area_over_september": 1.081624153669668
+            "aperture_radius_km": 6173.909345219243,
+            "area_over_ring_fleet": 0.7685166820633214
           }
         }
       },
       "exosphere_ion_production_kg_s": {
         "third_hill": {
-          "3": 25.093127455699552,
-          "4": 9.163292599699025,
-          "5": 4.527878509803753,
-          "6": 2.6270348335891733,
-          "8": 0.9578684762512609,
-          "10": 0.24703251985290356,
+          "3": 28.03017314584901,
+          "4": 11.171164277677082,
+          "5": 5.596130089947067,
+          "6": 3.271653733545613,
+          "8": 1.202742750595939,
+          "10": 0.3115580076515474,
           "12": 0.0,
-          "heating_radius": 21.664283835023905
+          "heating_radius": 18.139330674091834
         },
         "half_hill": {
-          "3": 26.352570964595778,
-          "4": 10.39926984483655,
-          "5": 5.732959905920133,
-          "6": 3.7931679980180024,
-          "8": 2.0178190027937672,
-          "10": 1.1495292428771393,
-          "12": 0.6277891481151998,
-          "heating_radius": 22.91946018460112
+          "3": 29.63217742583789,
+          "4": 12.743333447786592,
+          "5": 7.129043740229587,
+          "6": 4.755065391858631,
+          "8": 2.5512193159861765,
+          "10": 1.4599694399530578,
+          "12": 0.7995869211075327,
+          "heating_radius": 19.727589068862898
         },
         "hill": {
-          "3": 28.038943113312943,
-          "4": 12.0749993041388,
-          "5": 7.394944748362484,
-          "6": 5.438145395666267,
-          "8": 3.6185438463217676,
-          "10": 2.6910948512544413,
-          "12": 2.092989374332146,
-          "heating_radius": 24.603891688302106
+          "3": 31.802750195124098,
+          "4": 14.900270681745063,
+          "5": 9.268268850966802,
+          "6": 6.872436713821214,
+          "8": 4.611698267968886,
+          "10": 3.4444062684355092,
+          "12": 2.685875648215883,
+          "heating_radius": 21.891836612786065
         }
       },
       "radius_for_production_of_a_tenth_of_budget_R": {
-        "third_hill": 7.922226285418523,
-        "half_hill": 10.485863872970851,
-        "hill": 18.434169185685217
+        "third_hill": 8.339674510652003,
+        "half_hill": 11.294641718342707,
+        "hill": 20.523862519903194
       }
     },
     {
@@ -611,71 +613,71 @@
       "treatment": "lte",
       "activity": "quiet",
       "budget_kg_s": 100.0,
-      "allowed_leak_fraction": 0.0080696505922774,
-      "deposited_heat_w_m2": 1.575465145589022e-05,
-      "exobase_radius_R": 4.19710312337837,
-      "exobase_temperature_k": 345.1255278372121,
-      "exobase_density_m3": 1677634074610.261,
-      "jeans_lambda_N2": 6.563708483425847,
-      "molecular_jeans_loss_kg_s": 64.4255681029613,
+      "allowed_leak_fraction": 0.0018750646275184607,
+      "deposited_heat_w_m2": 1.4903334061156463e-05,
+      "exobase_radius_R": 4.093150646077558,
+      "exobase_temperature_k": 343.11569717702895,
+      "exobase_density_m3": 1774261219415.49,
+      "jeans_lambda_N2": 6.769828896350215,
+      "molecular_jeans_loss_kg_s": 53.87038831759297,
       "tau_one_radius_R": {
-        "xuv": 2.5295477333251086,
-        "lyman_alpha": 1.4017091095735563,
-        "schumann_runge": 1.8567169663660281
+        "xuv": 2.5063330804559305,
+        "lyman_alpha": 1.4025614502514745,
+        "schumann_runge": 1.8506040570152282
       },
-      "limb_heating_leak_at_3R": 0.10484534315327022,
+      "limb_heating_leak_at_3R": 0.08972555697695277,
       "heating": {
         "0.1": {
-          "radius_R": 4.11947146533605,
+          "radius_R": 4.0,
           "aperture": {
-            "aperture_radius_km": 7519.906170229901,
-            "area_over_september": 1.8194704295864041
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
           }
         },
         "0.5": {
-          "radius_R": 3.9801649719283394,
+          "radius_R": 4.0,
           "aperture": {
-            "aperture_radius_km": 7277.875068583345,
-            "area_over_september": 1.7042344922929573
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
           }
         }
       },
       "exosphere_ion_production_kg_s": {
         "third_hill": {
-          "3": 67.74380209198637,
-          "4": 53.947181960378465,
-          "5": 31.107675486092468,
-          "6": 19.216891395707528,
-          "8": 7.511589007923368,
-          "10": 2.013227654784254,
+          "3": 63.08828880403516,
+          "4": 48.58466736370049,
+          "5": 27.047607919855764,
+          "6": 16.645369331016564,
+          "8": 6.477726209175822,
+          "10": 1.731714488540564,
           "12": 0.0,
-          "heating_radius": 51.375234092082486
+          "heating_radius": 48.58466736370049
         },
         "half_hill": {
-          "3": 78.82418843647453,
-          "4": 64.82259276154898,
-          "5": 41.71334872245444,
-          "6": 29.482552510638683,
-          "8": 16.850822642434473,
-          "10": 9.980623215005835,
-          "12": 5.587675976436179,
-          "heating_radius": 62.22191501350366
+          "3": 72.56900356347059,
+          "4": 57.88990875141027,
+          "5": 36.12193689348678,
+          "6": 25.42862220914455,
+          "8": 14.467830503129614,
+          "10": 8.547240016753749,
+          "12": 4.777176188091336,
+          "heating_radius": 57.88990875141027
         },
         "hill": {
-          "3": 95.33176082340891,
-          "4": 81.22745047503864,
-          "5": 57.98504326428155,
-          "6": 45.589731705582025,
-          "8": 32.52996206333812,
-          "10": 25.087868837086084,
-          "12": 19.957172792939563,
-          "heating_radius": 78.61247932649427
+          "3": 86.58830546731618,
+          "4": 71.82190635739401,
+          "5": 49.94072394360715,
+          "6": 39.10758524473439,
+          "8": 27.782985789001895,
+          "10": 21.37628310050806,
+          "12": 16.97908289831749,
+          "heating_radius": 71.82190635739401
         }
       },
       "radius_for_production_of_a_tenth_of_budget_R": {
-        "third_hill": 7.422336640785041,
-        "half_hill": 9.992978640232304,
-        "hill": 18.345465889426837
+        "third_hill": 7.111542145695557,
+        "half_hill": 9.412845027100785,
+        "hill": 16.87961892335842
       }
     },
     {
@@ -683,71 +685,71 @@
       "treatment": "lte",
       "activity": "solar_maximum",
       "budget_kg_s": 1.0,
-      "allowed_leak_fraction": 0.0008727008789290044,
-      "deposited_heat_w_m2": 7.105286220954848e-06,
-      "exobase_radius_R": 2.776681289769801,
-      "exobase_temperature_k": 275.141692347356,
-      "exobase_density_m3": 4808007434449.848,
-      "jeans_lambda_N2": 12.444961864222751,
-      "molecular_jeans_loss_kg_s": 0.3394894142134041,
+      "allowed_leak_fraction": 0.00023694267227620142,
+      "deposited_heat_w_m2": 7.196252607347751e-06,
+      "exobase_radius_R": 2.7924497662998604,
+      "exobase_temperature_k": 276.599233287244,
+      "exobase_density_m3": 4728810296312.639,
+      "jeans_lambda_N2": 12.309478864112668,
+      "molecular_jeans_loss_kg_s": 0.384127136965243,
       "tau_one_radius_R": {
-        "xuv": 2.147769812882753,
-        "lyman_alpha": 1.3965356715324089,
-        "schumann_runge": 1.7437343454130778
+        "xuv": 2.1530980474398707,
+        "lyman_alpha": 1.3963653489454304,
+        "schumann_runge": 1.746010820196987
       },
       "limb_heating_leak_at_3R": 0.0,
       "heating": {
         "0.1": {
-          "radius_R": 2.76329272198671,
+          "radius_R": 3.0,
           "aperture": {
-            "aperture_radius_km": 5163.681221534758,
-            "area_over_september": 0.8579046169512383
+            "aperture_radius_km": 5305.209345219243,
+            "area_over_ring_fleet": 0.567463398389307
           }
         },
         "0.5": {
-          "radius_R": 2.73864715511851,
+          "radius_R": 3.0,
           "aperture": {
-            "aperture_radius_km": 5120.8620136579475,
-            "area_over_september": 0.8437354670311176
+            "aperture_radius_km": 5305.209345219243,
+            "area_over_ring_fleet": 0.567463398389307
           }
         }
       },
       "exosphere_ion_production_kg_s": {
         "third_hill": {
-          "3": 14.599420740795757,
-          "4": 3.2039010561988706,
-          "5": 1.3666299891995917,
-          "6": 0.7314956587419259,
-          "8": 0.24502373141191394,
-          "10": 0.06044508160849695,
+          "3": 15.719234195463313,
+          "4": 3.5013373643935197,
+          "5": 1.5039791441091388,
+          "6": 0.8080764084984746,
+          "8": 0.27174244791602103,
+          "10": 0.06717178658411094,
           "12": 0.0,
-          "heating_radius": 25.9384133238381
+          "heating_radius": 15.719234195463313
         },
         "half_hill": {
-          "3": 14.882987600952525,
-          "4": 3.4821562060913154,
-          "5": 1.6378711008269629,
-          "6": 0.9938916348044047,
-          "8": 0.48329467260874104,
-          "10": 0.26288693353663023,
-          "12": 0.13953782861204328,
-          "heating_radius": 26.22301885700883
+          "3": 16.035548265307817,
+          "4": 3.811698441182031,
+          "5": 1.806523769774272,
+          "6": 1.1007608659760795,
+          "8": 0.5375268960720951,
+          "10": 0.29301183978307543,
+          "12": 0.1557299745127055,
+          "heating_radius": 16.035548265307817
         },
         "hill": {
-          "3": 15.221275732426678,
-          "4": 3.818219887835628,
-          "5": 1.9711466033321965,
-          "6": 1.3237145001687542,
-          "8": 0.8041232944387995,
-          "10": 0.5716899620580209,
-          "12": 0.43280697551627517,
-          "heating_radius": 26.561663417870108
+          "3": 16.41477536335099,
+          "4": 4.188494069444054,
+          "5": 2.1801749510056156,
+          "6": 1.4705459492865793,
+          "8": 0.8972345728669094,
+          "10": 0.6392446506581004,
+          "12": 0.48455796577097254,
+          "heating_radius": 16.41477536335099
         }
       },
       "radius_for_production_of_a_tenth_of_budget_R": {
-        "third_hill": 9.40384094117776,
-        "half_hill": 12.925440249611011,
-        "hill": 23.555707482962955
+        "third_hill": 9.539030558517624,
+        "half_hill": 13.206668298239336,
+        "hill": 24.30637544321148
       }
     },
     {
@@ -755,71 +757,71 @@
       "treatment": "lte",
       "activity": "solar_maximum",
       "budget_kg_s": 10.0,
-      "allowed_leak_fraction": 0.0014830315914484548,
-      "deposited_heat_w_m2": 9.661206145435077e-06,
-      "exobase_radius_R": 3.2665871446690034,
-      "exobase_temperature_k": 311.80398614143866,
-      "exobase_density_m3": 3065514979782.467,
-      "jeans_lambda_N2": 9.334694229563679,
-      "molecular_jeans_loss_kg_s": 5.625813602286111,
+      "allowed_leak_fraction": 0.00037946182910213253,
+      "deposited_heat_w_m2": 9.595540818697738e-06,
+      "exobase_radius_R": 3.253684998721493,
+      "exobase_temperature_k": 311.0431472604869,
+      "exobase_density_m3": 3097433290056.1123,
+      "jeans_lambda_N2": 9.394634005033568,
+      "molecular_jeans_loss_kg_s": 5.332877797450189,
       "tau_one_radius_R": {
-        "xuv": 2.303098927759822,
-        "lyman_alpha": 1.3988011132546183,
-        "schumann_runge": 1.7917596181032434
+        "xuv": 2.299769418763595,
+        "lyman_alpha": 1.3997566027416748,
+        "schumann_runge": 1.7917767040942354
       },
-      "limb_heating_leak_at_3R": 0.008168286354483736,
+      "limb_heating_leak_at_3R": 0.007529392290710599,
       "heating": {
         "0.1": {
-          "radius_R": 3.244739658062115,
+          "radius_R": 3.5,
           "aperture": {
-            "aperture_radius_km": 6000.147128272168,
-            "area_over_september": 1.1583610817897803
+            "aperture_radius_km": 6173.909345219243,
+            "area_over_ring_fleet": 0.7685166820633214
           }
         },
         "0.5": {
-          "radius_R": 3.2044442653854497,
+          "radius_R": 3.5,
           "aperture": {
-            "aperture_radius_km": 5930.137913035729,
-            "area_over_september": 1.1314874607975969
+            "aperture_radius_km": 6173.909345219243,
+            "area_over_ring_fleet": 0.7685166820633214
           }
         }
       },
       "exosphere_ion_production_kg_s": {
         "third_hill": {
-          "3": 64.40868498313584,
-          "4": 24.008645804725976,
-          "5": 11.902276023509776,
-          "6": 6.918127608055327,
-          "8": 2.527416288625306,
-          "10": 0.6525002433397293,
+          "3": 63.03696365904785,
+          "4": 23.105929119255283,
+          "5": 11.42422953440444,
+          "6": 6.630439004334316,
+          "8": 2.4184534580582895,
+          "10": 0.6238354187702166,
           "12": 0.0,
-          "heating_radius": 54.03332501324978
+          "heating_radius": 37.93889843159391
         },
         "half_hill": {
-          "3": 67.7420297026997,
-          "4": 27.279890664903782,
-          "5": 15.091763290096189,
-          "6": 10.004557423068587,
-          "8": 5.332875257198586,
-          "10": 3.041337292042096,
-          "12": 1.6620721176480204,
-          "heating_radius": 57.35321331832039
+          "3": 66.21862788252076,
+          "4": 26.228297481659578,
+          "5": 14.468562498777334,
+          "6": 9.576378473083311,
+          "8": 5.096167992371665,
+          "10": 2.9038031063012943,
+          "12": 1.5860407491063349,
+          "heating_radius": 41.0932021122671
         },
         "hill": {
-          "3": 72.21782791400238,
-          "4": 31.727528575762015,
-          "5": 19.502882140329334,
-          "6": 14.370544659399439,
-          "8": 9.581426944305255,
-          "10": 7.132921653430774,
-          "12": 5.5510463687764595,
-          "heating_radius": 61.82287618635739
+          "3": 70.48100281409435,
+          "4": 30.46382746724248,
+          "5": 18.669316876593456,
+          "6": 13.734156706709467,
+          "8": 9.142070588614414,
+          "10": 6.800193342379997,
+          "12": 5.289425079188631,
+          "heating_radius": 45.34313479248236
         }
       },
       "radius_for_production_of_a_tenth_of_budget_R": {
-        "third_hill": 9.488938871454552,
-        "half_hill": 13.401746048367329,
-        "hill": 25.50946704163137
+        "third_hill": 9.431048280414712,
+        "half_hill": 13.283349229195705,
+        "hill": 25.216429370108482
       }
     },
     {
@@ -827,71 +829,71 @@
       "treatment": "lte",
       "activity": "solar_maximum",
       "budget_kg_s": 100.0,
-      "allowed_leak_fraction": 0.0027638675399308163,
-      "deposited_heat_w_m2": 1.5025042592732117e-05,
-      "exobase_radius_R": 4.108355588302326,
-      "exobase_temperature_k": 343.43062176601427,
-      "exobase_density_m3": 1759537543691.7058,
-      "jeans_lambda_N2": 6.738588962105609,
-      "molecular_jeans_loss_kg_s": 55.35271001695791,
+      "allowed_leak_fraction": 0.0005934025759875139,
+      "deposited_heat_w_m2": 1.4851547162422513e-05,
+      "exobase_radius_R": 4.086643850719344,
+      "exobase_temperature_k": 342.97865958984573,
+      "exobase_density_m3": 1780626876697.4585,
+      "jeans_lambda_N2": 6.783317086919077,
+      "molecular_jeans_loss_kg_s": 53.24255991843949,
       "tau_one_radius_R": {
-        "xuv": 2.510568466056765,
-        "lyman_alpha": 1.400798555892079,
-        "schumann_runge": 1.8512759824282727
+        "xuv": 2.5058446727418007,
+        "lyman_alpha": 1.4023118150667557,
+        "schumann_runge": 1.8493124662769005
       },
-      "limb_heating_leak_at_3R": 0.09187884627512162,
+      "limb_heating_leak_at_3R": 0.08881022783360225,
       "heating": {
         "0.1": {
-          "radius_R": 4.0702595697672335,
+          "radius_R": 4.0,
           "aperture": {
-            "aperture_radius_km": 7434.40542286864,
-            "area_over_september": 1.7783311677617186
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
           }
         },
         "0.5": {
-          "radius_R": 3.9996965032225287,
+          "radius_R": 4.0,
           "aperture": {
-            "aperture_radius_km": 7311.80915105387,
-            "area_over_september": 1.720163992921613
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
           }
         }
       },
       "exosphere_ion_production_kg_s": {
         "third_hill": {
-          "3": 159.43486542216553,
-          "4": 123.4728527533293,
-          "5": 69.06579494098061,
-          "6": 42.52875384747268,
-          "8": 16.561771758380413,
-          "10": 4.42924786183331,
+          "3": 156.9860581510722,
+          "4": 120.59452598444875,
+          "5": 67.00395533369482,
+          "6": 41.22440099249272,
+          "8": 16.038200345040096,
+          "10": 4.286823733708284,
           "12": 0.0,
-          "heating_radius": 119.34541695028976
+          "heating_radius": 120.59452598444875
         },
         "half_hill": {
-          "3": 183.70348133960846,
-          "4": 147.29232927653936,
-          "5": 92.29424334019825,
-          "6": 65.01212952755535,
-          "8": 37.01508253537606,
-          "10": 21.876179765734207,
-          "12": 12.230048040359305,
-          "heating_radius": 143.12811740789064
+          "3": 180.4472095893838,
+          "4": 143.62143308221533,
+          "5": 89.45937268211497,
+          "6": 62.95953299772444,
+          "8": 35.81053966210004,
+          "10": 21.15239887065902,
+          "12": 11.821058843809517,
+          "heating_radius": 143.62143308221533
         },
         "hill": {
-          "3": 219.63072636543615,
-          "4": 182.99586796261627,
-          "5": 127.70770997069738,
-          "6": 100.06726923853944,
-          "8": 71.13804330462688,
-          "10": 54.75354946194204,
-          "12": 43.50050405444897,
-          "heating_radius": 178.8134629272637
+          "3": 215.12259476564694,
+          "4": 178.08086773615238,
+          "5": 123.63887901877132,
+          "6": 96.7930910421177,
+          "8": 68.74418751604664,
+          "10": 52.88361453614035,
+          "12": 42.00105996135788,
+          "heating_radius": 178.08086773615238
         }
       },
       "radius_for_production_of_a_tenth_of_budget_R": {
-        "third_hill": 8.904308974729444,
-        "half_hill": 12.605847482179108,
-        "hill": 24.31884944714585
+        "third_hill": 8.851496966975022,
+        "half_hill": 12.505630160543923,
+        "hill": 24.08352838292097
       }
     },
     {
@@ -899,71 +901,71 @@
       "treatment": "all_heats",
       "activity": "quiet",
       "budget_kg_s": 1.0,
-      "allowed_leak_fraction": 0.0008835445166441639,
-      "deposited_heat_w_m2": 3.988063382038506e-06,
-      "exobase_radius_R": 2.9957731099240488,
-      "exobase_temperature_k": 254.72472211369612,
-      "exobase_density_m3": 4461538745384.284,
-      "jeans_lambda_N2": 12.459367411683719,
-      "molecular_jeans_loss_kg_s": 0.3481291132971369,
+      "allowed_leak_fraction": 0.0002480067810411305,
+      "deposited_heat_w_m2": 4.024957662957528e-06,
+      "exobase_radius_R": 3.0032298091190013,
+      "exobase_temperature_k": 255.30868845727286,
+      "exobase_density_m3": 4429256956279.25,
+      "jeans_lambda_N2": 12.400004638269333,
+      "molecular_jeans_loss_kg_s": 0.36750122058953777,
       "tau_one_radius_R": {
-        "xuv": 2.317267783771687,
-        "lyman_alpha": 1.4797591892684678,
-        "schumann_runge": 1.8758966423149985
+        "xuv": 2.3188921553121804,
+        "lyman_alpha": 1.4789606285070276,
+        "schumann_runge": 1.8768954010425838
       },
-      "limb_heating_leak_at_3R": 0.0,
+      "limb_heating_leak_at_3R": 1.0005875142739805e-05,
       "heating": {
         "0.1": {
-          "radius_R": 2.982597750628751,
+          "radius_R": 3.5,
           "aperture": {
-            "aperture_radius_km": 5544.70177829744,
-            "area_over_september": 0.9891827710691754
+            "aperture_radius_km": 6173.909345219243,
+            "area_over_ring_fleet": 0.7685166820633214
           }
         },
         "0.5": {
-          "radius_R": 2.958280213607475,
+          "radius_R": 3.5,
           "aperture": {
-            "aperture_radius_km": 5502.4524894766755,
-            "area_over_september": 0.9741655359651069
+            "aperture_radius_km": 6173.909345219243,
+            "area_over_ring_fleet": 0.7685166820633214
           }
         }
       },
       "exosphere_ion_production_kg_s": {
         "third_hill": {
-          "3": 11.540422607092843,
-          "4": 2.052339965495235,
-          "5": 0.7993352398087136,
-          "6": 0.4086628089828044,
-          "8": 0.13094474987208332,
-          "10": 0.03161216237763322,
+          "3": 11.88698510206582,
+          "4": 2.1307644450976078,
+          "5": 0.8327783371327946,
+          "6": 0.4265633219271767,
+          "8": 0.1369431664974168,
+          "10": 0.033092332826033674,
           "12": 0.0,
-          "heating_radius": 11.996332008643297
+          "heating_radius": 4.2955733640797575
         },
         "half_hill": {
-          "3": 11.683173548446202,
-          "4": 2.192400800774837,
-          "5": 0.9358516538459478,
-          "6": 0.540710303252785,
-          "8": 0.2507970910019296,
-          "10": 0.13334060246536145,
-          "12": 0.06981739082136995,
-          "heating_radius": 12.139122994896717
+          "3": 12.036678562804752,
+          "4": 2.277636528747057,
+          "5": 0.9759356132151384,
+          "6": 0.5650351674605621,
+          "8": 0.2626288301427038,
+          "10": 0.139776877274966,
+          "12": 0.0732333560220042,
+          "heating_radius": 4.44397122266325
         },
         "hill": {
-          "3": 11.844491402798395,
-          "4": 2.3526792130412013,
-          "5": 1.0947934928841865,
-          "6": 0.6979934316124364,
-          "8": 0.4037649794817624,
-          "10": 0.2805362090425738,
-          "12": 0.20955433813488045,
-          "heating_radius": 12.300453960367431
+          "3": 12.206250907307025,
+          "4": 2.4461261255694455,
+          "5": 1.1430147259224488,
+          "6": 0.7303713049302287,
+          "8": 0.4234300680825825,
+          "10": 0.2945120049198511,
+          "12": 0.22013027178385677,
+          "heating_radius": 4.613038107712604
         }
       },
       "radius_for_production_of_a_tenth_of_budget_R": {
-        "third_hill": 8.454171506071894,
-        "half_hill": 10.918366376693493,
-        "hill": 17.92621214929805
+        "third_hill": 8.526152242739236,
+        "half_hill": 11.066130956800967,
+        "hill": 18.332746473832973
       }
     },
     {
@@ -971,71 +973,71 @@
       "treatment": "all_heats",
       "activity": "quiet",
       "budget_kg_s": 10.0,
-      "allowed_leak_fraction": 0.002140168666100043,
-      "deposited_heat_w_m2": 6.093040657665905e-06,
-      "exobase_radius_R": 3.4644630076926655,
-      "exobase_temperature_k": 285.021308889484,
-      "exobase_density_m3": 2981428626778.779,
-      "jeans_lambda_N2": 9.628591228749173,
-      "molecular_jeans_loss_kg_s": 4.498793886750455,
+      "allowed_leak_fraction": 0.0005548242851185051,
+      "deposited_heat_w_m2": 6.098197991780764e-06,
+      "exobase_radius_R": 3.465650943712082,
+      "exobase_temperature_k": 285.0831727867552,
+      "exobase_density_m3": 2978738516254.586,
+      "jeans_lambda_N2": 9.623202078528823,
+      "molecular_jeans_loss_kg_s": 4.520531705723793,
       "tau_one_radius_R": {
-        "xuv": 2.4691485574682135,
-        "lyman_alpha": 1.482642199723624,
-        "schumann_runge": 1.924808442212717
+        "xuv": 2.4697767071231844,
+        "lyman_alpha": 1.4809529076074825,
+        "schumann_runge": 1.9251304432188139
       },
-      "limb_heating_leak_at_3R": 0.025206700441629575,
+      "limb_heating_leak_at_3R": 0.025318635896302694,
       "heating": {
         "0.1": {
-          "radius_R": 3.437748023440009,
+          "radius_R": 3.5,
           "aperture": {
-            "aperture_radius_km": 6335.479862279721,
-            "area_over_september": 1.2914547321633536
+            "aperture_radius_km": 6173.909345219243,
+            "area_over_ring_fleet": 0.7685166820633214
           }
         },
         "0.5": {
-          "radius_R": 3.3888182064172296,
+          "radius_R": 3.5,
           "aperture": {
-            "aperture_radius_km": 6250.4691981843425,
-            "area_over_september": 1.25702928922496
+            "aperture_radius_km": 6173.909345219243,
+            "area_over_ring_fleet": 0.7685166820633214
           }
         }
       },
       "exosphere_ion_production_kg_s": {
         "third_hill": {
-          "3": 30.102699894089895,
-          "4": 12.061906320658684,
-          "5": 5.494870223696381,
-          "6": 3.058770690751024,
-          "8": 1.0702958893722094,
-          "10": 0.2703523725107285,
+          "3": 30.152539972701113,
+          "4": 12.102239595610948,
+          "5": 5.514771449107786,
+          "6": 3.070313791990474,
+          "8": 1.07450714942162,
+          "10": 0.2714387672406376,
           "12": 0.0,
-          "heating_radius": 23.100861535497252
+          "heating_radius": 21.414066586922672
         },
         "half_hill": {
-          "3": 31.429255312277682,
-          "4": 13.363650065479757,
-          "5": 6.763956802971251,
-          "6": 4.286670867308592,
-          "8": 2.185890694376268,
-          "10": 1.2193015178375228,
-          "12": 0.6573665334880572,
-          "heating_radius": 24.41748678871309
+          "3": 31.484637887205434,
+          "4": 13.40942503037948,
+          "5": 6.789159671010065,
+          "6": 4.30334690234163,
+          "8": 2.194765951881409,
+          "10": 1.2243602034668477,
+          "12": 0.6601294124362862,
+          "heating_radius": 22.734669493091403
         },
         "hill": {
-          "3": 33.11340454994911,
-          "4": 15.037136275781203,
-          "5": 8.423599041516763,
-          "6": 5.929238949943631,
-          "8": 3.783992446211327,
-          "10": 2.757948116620368,
-          "12": 2.1192432682770836,
-          "heating_radius": 26.09735058891864
+          "3": 33.17619887428385,
+          "4": 15.09024162431688,
+          "5": 8.456121700069177,
+          "6": 5.95314651821763,
+          "8": 3.79990359935928,
+          "10": 2.769778865523036,
+          "12": 2.128444219298486,
+          "heating_radius": 24.421293816668847
         }
       },
       "radius_for_production_of_a_tenth_of_budget_R": {
-        "third_hill": 8.125656112213642,
-        "half_hill": 10.671988210792199,
-        "hill": 18.37535089685377
+        "third_hill": 8.132672860521748,
+        "half_hill": 10.685654473269256,
+        "hill": 18.412170052774645
       }
     },
     {
@@ -1043,143 +1045,71 @@
       "treatment": "all_heats",
       "activity": "quiet",
       "budget_kg_s": 100.0,
-      "allowed_leak_fraction": 0.005049131344071954,
-      "deposited_heat_w_m2": 1.096585830599018e-05,
-      "exobase_radius_R": 4.374560376089646,
-      "exobase_temperature_k": 315.5142775608221,
-      "exobase_density_m3": 1689218423225.5122,
-      "jeans_lambda_N2": 6.888466912886607,
-      "molecular_jeans_loss_kg_s": 50.579834281384635,
+      "allowed_leak_fraction": 0.0008090003517386374,
+      "deposited_heat_w_m2": 7.999999999999781e-06,
+      "exobase_radius_R": 3.874116208982477,
+      "exobase_temperature_k": 302.5899472407499,
+      "exobase_density_m3": 2245814198565.386,
+      "jeans_lambda_N2": 8.110523159901314,
+      "molecular_jeans_loss_kg_s": 17.33014191838993,
       "tau_one_radius_R": {
-        "xuv": 2.7008384782371504,
-        "lyman_alpha": 1.4858777029888024,
-        "schumann_runge": 1.9900108047516025
+        "xuv": 2.5827017472077136,
+        "lyman_alpha": 1.4826858457285583,
+        "schumann_runge": 1.958027325144025
       },
-      "limb_heating_leak_at_3R": 0.16791376432036478,
+      "limb_heating_leak_at_3R": 0.07636707421237579,
       "heating": {
         "0.1": {
-          "radius_R": 4.319927014327453,
+          "radius_R": 4.0,
           "aperture": {
-            "aperture_radius_km": 7868.177641047565,
-            "area_over_september": 1.991904309920553
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
           }
         },
         "0.5": {
-          "radius_R": 4.220018369559341,
+          "radius_R": 4.0,
           "aperture": {
-            "aperture_radius_km": 7694.596361627448,
-            "area_over_september": 1.904986243938535
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
           }
         }
       },
       "exosphere_ion_production_kg_s": {
         "third_hill": {
-          "3": 71.37249608650545,
-          "4": 58.324542706434336,
-          "5": 34.00958358701794,
-          "6": 20.282987776025344,
-          "8": 7.648572022140031,
-          "10": 2.0119816280464042,
+          "3": 48.27419597535254,
+          "4": 30.81827214563078,
+          "5": 15.108404458989995,
+          "6": 8.758812772246426,
+          "8": 3.2007687330592285,
+          "10": 0.8274626374177836,
           "12": 0.0,
-          "heating_radius": 51.58941708869131
+          "heating_radius": 30.81827214563078
         },
         "half_hill": {
-          "3": 82.05744980400495,
-          "4": 68.81116440230052,
-          "5": 44.23516521631993,
-          "6": 30.179553868802778,
-          "8": 16.64833260119494,
-          "10": 9.68292997488701,
-          "12": 5.359752762407272,
-          "heating_radius": 61.99956836738316
+          "3": 52.51895059587416,
+          "4": 34.98397504197363,
+          "5": 19.170062112771046,
+          "6": 12.689287702117635,
+          "8": 6.773624957164835,
+          "10": 3.8700839055348846,
+          "12": 2.1179773549038896,
+          "heating_radius": 34.98397504197363
         },
         "hill": {
-          "3": 97.2164887559397,
-          "4": 83.87536970737409,
-          "5": 59.176412203568916,
-          "6": 44.96886641337926,
-          "8": 31.04242075981803,
-          "10": 23.548788727368997,
-          "12": 18.54399371335224,
-          "heating_radius": 77.02752945521874
+          "3": 58.2539092453663,
+          "4": 40.68281190659201,
+          "5": 24.82216874660618,
+          "6": 18.28361846373104,
+          "8": 12.217586522441898,
+          "10": 9.113057499077485,
+          "12": 7.101522490765258,
+          "heating_radius": 40.68281190659201
         }
       },
       "radius_for_production_of_a_tenth_of_budget_R": {
-        "third_hill": 7.473504756797668,
-        "half_hill": 9.884772668689678,
-        "hill": 17.55687041891272
-      }
-    },
-    {
-      "shield": "titania_stack",
-      "treatment": "all_heats",
-      "activity": "solar_maximum",
-      "budget_kg_s": 1.0,
-      "allowed_leak_fraction": 4.0288487295982365e-05,
-      "deposited_heat_w_m2": 4.025681206369073e-06,
-      "exobase_radius_R": 3.0033764218843246,
-      "exobase_temperature_k": 255.32013333490423,
-      "exobase_density_m3": 4428626005082.871,
-      "jeans_lambda_N2": 12.398843509394686,
-      "molecular_jeans_loss_kg_s": 0.3678906273509999,
-      "tau_one_radius_R": {
-        "xuv": 2.3189779953132286,
-        "lyman_alpha": 1.4789718781937746,
-        "schumann_runge": 1.8769419894192207
-      },
-      "limb_heating_leak_at_3R": 1.0751468234579103e-05,
-      "heating": {
-        "0.1": {
-          "radius_R": 3.0015346787895143,
-          "aperture": {
-            "aperture_radius_km": 5577.60279728395,
-            "area_over_september": 1.000956778100927
-          }
-        },
-        "0.5": {
-          "radius_R": 2.998328823991465,
-          "aperture": {
-            "aperture_radius_km": 5572.03294515782,
-            "area_over_september": 0.998958644592956
-          }
-        }
-      },
-      "exosphere_ion_production_kg_s": {
-        "third_hill": {
-          "3": 29.73373912468358,
-          "4": 5.33081628291374,
-          "5": 2.083617011788064,
-          "6": 1.0673030516616855,
-          "8": 0.3426577226228864,
-          "10": 0.08280493129370245,
-          "12": 0.0,
-          "heating_radius": 29.631991659840097
-        },
-        "half_hill": {
-          "3": 30.108320530392245,
-          "4": 5.698341697203048,
-          "5": 2.441843388730577,
-          "6": 1.4138037990954366,
-          "8": 0.657163710128078,
-          "10": 0.3497644206102769,
-          "12": 0.18325448104442693,
-          "heating_radius": 30.006562715607174
-        },
-        "hill": {
-          "3": 30.532665636637834,
-          "4": 6.119956244306052,
-          "5": 2.859941699795367,
-          "6": 1.82754619674943,
-          "8": 1.0595596469383537,
-          "10": 0.736980095749737,
-          "12": 0.5508556677470964,
-          "heating_radius": 30.430901602933233
-        }
-      },
-      "radius_for_production_of_a_tenth_of_budget_R": {
-        "third_hill": 9.795544171254187,
-        "half_hill": 13.58185307078356,
-        "hill": 24.90182071407233
+        "third_hill": 5.743160166395626,
+        "half_hill": 6.703129597856467,
+        "hill": 9.321156953052657
       }
     },
     {
@@ -1187,71 +1117,71 @@
       "treatment": "all_heats",
       "activity": "solar_maximum",
       "budget_kg_s": 10.0,
-      "allowed_leak_fraction": 0.0005034456592386045,
-      "deposited_heat_w_m2": 5.965273331837177e-06,
-      "exobase_radius_R": 3.4349710578626116,
-      "exobase_temperature_k": 283.46334328489775,
-      "exobase_density_m3": 3049513310307.6323,
-      "jeans_lambda_N2": 9.76463515447249,
-      "molecular_jeans_loss_kg_s": 3.9830657516522088,
+      "allowed_leak_fraction": 0.00010257643696016766,
+      "deposited_heat_w_m2": 6.078848626037381e-06,
+      "exobase_radius_R": 3.461192679289807,
+      "exobase_temperature_k": 284.85064240836346,
+      "exobase_density_m3": 2988855008614.744,
+      "jeans_lambda_N2": 9.643463221212027,
+      "molecular_jeans_loss_kg_s": 4.439340647692638,
       "tau_one_radius_R": {
-        "xuv": 2.46050206732235,
-        "lyman_alpha": 1.4808220126615523,
-        "schumann_runge": 1.9220254415336138
+        "xuv": 2.4691781838575846,
+        "lyman_alpha": 1.4824403612734058,
+        "schumann_runge": 1.923921989559732
       },
-      "limb_heating_leak_at_3R": 0.022499092851895944,
+      "limb_heating_leak_at_3R": 0.024899553046968222,
       "heating": {
         "0.1": {
-          "radius_R": 3.4246641097396453,
+          "radius_R": 3.5,
           "aperture": {
-            "aperture_radius_km": 6312.747870616708,
-            "area_over_september": 1.2822037610908315
+            "aperture_radius_km": 6173.909345219243,
+            "area_over_ring_fleet": 0.7685166820633214
           }
         },
         "0.5": {
-          "radius_R": 3.4054689571419616,
+          "radius_R": 3.5,
           "aperture": {
-            "aperture_radius_km": 6279.398212493492,
-            "area_over_september": 1.2686920205261945
+            "aperture_radius_km": 6173.909345219243,
+            "area_over_ring_fleet": 0.7685166820633214
           }
         }
       },
       "exosphere_ion_production_kg_s": {
         "third_hill": {
-          "3": 72.1799194184909,
-          "4": 27.716674771137118,
-          "5": 12.538183129650069,
-          "6": 6.952714921229921,
-          "8": 2.4230009876301213,
-          "10": 0.6107407555493048,
+          "3": 74.91399431011658,
+          "4": 29.878208485302572,
+          "5": 13.600790431752102,
+          "6": 7.567834974634549,
+          "8": 2.646897282448873,
+          "10": 0.6684391928275806,
           "12": 0.0,
-          "heating_radius": 54.72953757057198
+          "heating_radius": 52.914387105602394
         },
         "half_hill": {
-          "3": 75.16469772413942,
-          "4": 30.64564027020818,
-          "5": 15.393602845208932,
-          "6": 9.715436366569296,
-          "8": 4.932919081914015,
-          "10": 2.7455068932384727,
-          "12": 1.4781672085631774,
-          "heating_radius": 57.692678143670825
+          "3": 78.1924382752681,
+          "4": 33.09529675114544,
+          "5": 16.737207527715903,
+          "6": 10.602450952156332,
+          "8": 5.4039559051326975,
+          "10": 3.013623154408373,
+          "12": 1.624503977780557,
+          "heating_radius": 56.16453433730054
         },
         "hill": {
-          "3": 78.93290719175438,
-          "4": 34.38998680864387,
-          "5": 19.106979889851118,
-          "6": 13.390552358478581,
-          "8": 8.508475804378635,
-          "10": 6.187952080877249,
-          "12": 4.748726195282935,
-          "heating_radius": 61.4515971822056
+          "3": 82.3520910622685,
+          "4": 37.228665880638175,
+          "5": 20.83635837869103,
+          "6": 14.65939473645959,
+          "8": 9.351063358844106,
+          "10": 6.813870162498705,
+          "12": 5.235127214712393,
+          "heating_radius": 60.31195509453742
         }
       },
       "radius_for_production_of_a_tenth_of_budget_R": {
-        "third_hill": 9.410355924768853,
-        "half_hill": 13.088707809949618,
-        "hill": 24.353384632083607
+        "third_hill": 9.52697764788889,
+        "half_hill": 13.328408434613829,
+        "hill": 24.975296175249674
       }
     },
     {
@@ -1259,71 +1189,71 @@
       "treatment": "all_heats",
       "activity": "solar_maximum",
       "budget_kg_s": 100.0,
-      "allowed_leak_fraction": 0.0017194090574939402,
-      "deposited_heat_w_m2": 1.1057438961533317e-05,
-      "exobase_radius_R": 4.3880318927069215,
-      "exobase_temperature_k": 315.7581257895284,
-      "exobase_density_m3": 1677565840498.5059,
-      "jeans_lambda_N2": 6.8620155389634965,
-      "molecular_jeans_loss_kg_s": 51.75838464154362,
+      "allowed_leak_fraction": 0.00020815918534957705,
+      "deposited_heat_w_m2": 7.99999999999995e-06,
+      "exobase_radius_R": 3.874116208982478,
+      "exobase_temperature_k": 302.5899472407504,
+      "exobase_density_m3": 2245814198565.4146,
+      "jeans_lambda_N2": 8.1105231599013,
+      "molecular_jeans_loss_kg_s": 17.33014191839248,
       "tau_one_radius_R": {
-        "xuv": 2.704317637476981,
-        "lyman_alpha": 1.4839412900772346,
-        "schumann_runge": 1.992853418349743
+        "xuv": 2.582701747207714,
+        "lyman_alpha": 1.4826858457285583,
+        "schumann_runge": 1.9580273251440252
       },
-      "limb_heating_leak_at_3R": 0.17074273927928915,
+      "limb_heating_leak_at_3R": 0.0763670742123768,
       "heating": {
         "0.1": {
-          "radius_R": 4.361038081358068,
+          "radius_R": 4.0,
           "aperture": {
-            "aperture_radius_km": 7939.6040089065555,
-            "area_over_september": 2.0282329928335536
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
           }
         },
         "0.5": {
-          "radius_R": 4.310597197665571,
+          "radius_R": 4.0,
           "aperture": {
-            "aperture_radius_km": 7851.968017579211,
-            "area_over_september": 1.9837055220322228
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
           }
         }
       },
       "exosphere_ion_production_kg_s": {
         "third_hill": {
-          "3": 179.9537040029565,
-          "4": 147.46679888326543,
-          "5": 86.53924896433236,
-          "6": 51.63953809852707,
-          "8": 19.4850968319601,
-          "10": 5.127445044768179,
+          "3": 120.68548993838355,
+          "4": 77.04568036407849,
+          "5": 37.771011147475804,
+          "6": 21.89703193061656,
+          "8": 8.00192183264826,
+          "10": 2.068656593544509,
           "12": 0.0,
-          "heating_radius": 128.09949610461203
+          "heating_radius": 77.04568036407849
         },
         "half_hill": {
-          "3": 207.20356920613327,
-          "4": 174.21089313739668,
-          "5": 112.61767609272988,
-          "6": 76.87891503856706,
-          "8": 42.4375415573018,
-          "10": 24.69132331993906,
-          "12": 13.670504837085513,
-          "heating_radius": 154.62231891391679
+          "3": 131.29737648968785,
+          "4": 87.45993760493587,
+          "5": 47.92515528192869,
+          "6": 31.723219255294836,
+          "8": 16.9340623929125,
+          "10": 9.675209763837453,
+          "12": 5.294943387259858,
+          "heating_radius": 87.45993760493587
         },
         "hill": {
-          "3": 245.90364336596105,
-          "4": 212.66889061853905,
-          "5": 150.76188059640162,
-          "6": 114.63520420531506,
-          "8": 79.18497184351813,
-          "10": 60.09039723266524,
-          "12": 47.3296847333212,
-          "heating_radius": 192.97537253850334
+          "3": 145.6347731134186,
+          "4": 101.70702976648221,
+          "5": 62.055421866516895,
+          "6": 45.70904615932871,
+          "8": 30.543966306105517,
+          "10": 22.78264374769429,
+          "12": 17.753806226913603,
+          "heating_radius": 101.70702976648221
         }
       },
       "radius_for_production_of_a_tenth_of_budget_R": {
-        "third_hill": 9.143342672629164,
-        "half_hill": 12.909561895964377,
-        "hill": 24.722522622593953
+        "third_hill": 7.576232460639485,
+        "half_hill": 9.88495818662983,
+        "hill": 17.039670016244877
       }
     },
     {
@@ -1331,71 +1261,71 @@
       "treatment": "collisional",
       "activity": "quiet",
       "budget_kg_s": 1.0,
-      "allowed_leak_fraction": 0.0003067208264434962,
-      "deposited_heat_w_m2": 3.1102638530532603e-06,
-      "exobase_radius_R": 3.075673767207529,
-      "exobase_temperature_k": 249.14717951249443,
-      "exobase_density_m3": 4327499638193.5977,
-      "jeans_lambda_N2": 12.407370888420514,
-      "molecular_jeans_loss_kg_s": 0.3694712146648596,
+      "allowed_leak_fraction": 6.405700417781962e-05,
+      "deposited_heat_w_m2": 3.0924993424382337e-06,
+      "exobase_radius_R": 3.0718980009515433,
+      "exobase_temperature_k": 248.86729571804477,
+      "exobase_density_m3": 4343023193689.3,
+      "jeans_lambda_N2": 12.436592038255363,
+      "molecular_jeans_loss_kg_s": 0.3597526145095139,
       "tau_one_radius_R": {
-        "xuv": 2.3759799594156608,
-        "lyman_alpha": 1.505629125333092,
-        "schumann_runge": 1.9208945559737947
+        "xuv": 2.3737535484540406,
+        "lyman_alpha": 1.5067489539906789,
+        "schumann_runge": 1.9196758557727382
       },
-      "limb_heating_leak_at_3R": 0.0013489858444343922,
+      "limb_heating_leak_at_3R": 0.0012450551760517365,
       "heating": {
         "0.1": {
-          "radius_R": 3.069097958503692,
+          "radius_R": 3.5,
           "aperture": {
-            "aperture_radius_km": 5694.987239459364,
-            "area_over_september": 1.0435317540795794
+            "aperture_radius_km": 6173.909345219243,
+            "area_over_ring_fleet": 0.7685166820633214
           }
         },
         "0.5": {
-          "radius_R": 3.0568824148268523,
+          "radius_R": 3.5,
           "aperture": {
-            "aperture_radius_km": 5673.763953875221,
-            "area_over_september": 1.0357684689293174
+            "aperture_radius_km": 6173.909345219243,
+            "area_over_ring_fleet": 0.7685166820633214
           }
         }
       },
       "exosphere_ion_production_kg_s": {
         "third_hill": {
-          "3": 13.980740891253014,
-          "4": 2.4901733985434396,
-          "5": 0.9425658287527622,
-          "6": 0.475097827184205,
-          "8": 0.15020328204107897,
-          "10": 0.03603088410590931,
+          "3": 13.840095871900925,
+          "4": 2.445199920563806,
+          "5": 0.9238923009873881,
+          "6": 0.4652370734674101,
+          "8": 0.14694194088312773,
+          "10": 0.035231413063045745,
           "12": 0.0,
-          "heating_radius": 12.530837156323656
+          "heating_radius": 5.080898266641338
         },
         "half_hill": {
-          "3": 14.141665149030782,
-          "4": 2.6480559433254225,
-          "5": 1.0964520913718099,
-          "6": 0.623941999386975,
-          "8": 0.28528322245937,
-          "10": 0.15065146052590103,
-          "12": 0.07856665444639394,
-          "heating_radius": 12.691580343641844
+          "3": 13.99731206267763,
+          "4": 2.599450083528916,
+          "5": 1.0742330822716695,
+          "6": 0.6106503514533805,
+          "8": 0.2789073147080021,
+          "10": 0.14720608593114903,
+          "12": 0.07674556931604055,
+          "heating_radius": 5.2367386692118085
         },
         "hill": {
-          "3": 14.32070911075409,
-          "4": 2.8259455348193923,
-          "5": 1.2728569843602604,
-          "6": 0.7985001467431916,
-          "8": 0.4550443238247323,
-          "10": 0.313994490633536,
-          "12": 0.23361541319787418,
-          "heating_radius": 12.870553769885763
+          "3": 14.172015662765189,
+          "4": 2.773028362415461,
+          "5": 1.2463607100689977,
+          "6": 0.7809776223266068,
+          "8": 0.44455166187424294,
+          "10": 0.30658746000893516,
+          "12": 0.22803254075254523,
+          "heating_radius": 5.410931018403203
         }
       },
       "radius_for_production_of_a_tenth_of_budget_R": {
-        "third_hill": 8.670166953052084,
-        "half_hill": 11.286817744958723,
-        "hill": 18.751339451154514
+        "third_hill": 8.635959723317404,
+        "half_hill": 11.215605706898337,
+        "hill": 18.5547728035747
       }
     },
     {
@@ -1403,71 +1333,71 @@
       "treatment": "collisional",
       "activity": "quiet",
       "budget_kg_s": 10.0,
-      "allowed_leak_fraction": 0.0014679775236321492,
-      "deposited_heat_w_m2": 5.055490641676318e-06,
-      "exobase_radius_R": 3.5303413970947997,
-      "exobase_temperature_k": 277.1044507577999,
-      "exobase_density_m3": 2953226049534.639,
-      "jeans_lambda_N2": 9.718870638597066,
-      "molecular_jeans_loss_kg_s": 4.200872265353643,
+      "allowed_leak_fraction": 0.00032519822429144936,
+      "deposited_heat_w_m2": 5.087873647425175e-06,
+      "exobase_radius_R": 3.5381768904961906,
+      "exobase_temperature_k": 277.49603333527824,
+      "exobase_density_m3": 2936011415615.32,
+      "jeans_lambda_N2": 9.683663444128376,
+      "molecular_jeans_loss_kg_s": 4.335368479587059,
       "tau_one_radius_R": {
-        "xuv": 2.525189446296677,
-        "lyman_alpha": 1.5092294100061008,
-        "schumann_runge": 1.9685730434353506
+        "xuv": 2.527570513874643,
+        "lyman_alpha": 1.5079247242242801,
+        "schumann_runge": 1.968934788693859
       },
-      "limb_heating_leak_at_3R": 0.034058359423712395,
+      "limb_heating_leak_at_3R": 0.03494948381287262,
       "heating": {
         "0.1": {
-          "radius_R": 3.5097187467180966,
+          "radius_R": 4.0,
           "aperture": {
-            "aperture_radius_km": 6460.521796903069,
-            "area_over_september": 1.3429361062860716
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
           }
         },
         "0.5": {
-          "radius_R": 3.4715941348176433,
+          "radius_R": 4.0,
           "aperture": {
-            "aperture_radius_km": 6394.284096187222,
-            "area_over_september": 1.3155398683080906
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
           }
         }
       },
       "exosphere_ion_production_kg_s": {
         "third_hill": {
-          "3": 31.55792870513791,
-          "4": 13.11848004488838,
-          "5": 5.798627212354415,
-          "6": 3.178969585056346,
-          "8": 1.0958288657920596,
-          "10": 0.27475241743323836,
+          "3": 31.886788006354298,
+          "4": 13.404462915168814,
+          "5": 5.936249186738285,
+          "6": 3.2577810568495025,
+          "8": 1.1242112979523415,
+          "10": 0.28202800590485017,
           "12": 0.0,
-          "heating_radius": 23.436171206245593
+          "heating_radius": 13.404462915168814
         },
         "half_hill": {
-          "3": 32.88804472369185,
-          "4": 14.423699396760192,
-          "5": 7.07104269884113,
-          "6": 4.4100352920088275,
-          "8": 2.21412369305727,
-          "10": 1.2256689279846227,
-          "12": 0.65775826519197,
-          "heating_radius": 24.754540384166166
+          "3": 33.253572303359434,
+          "4": 14.745641374754745,
+          "5": 7.24374082858746,
+          "6": 4.522792160180881,
+          "8": 2.273359819271306,
+          "10": 1.2592065647618451,
+          "12": 0.6760037100005972,
+          "heating_radius": 14.745641374754745
         },
         "hill": {
-          "3": 34.54539112887576,
-          "4": 16.070538446014783,
-          "5": 8.704233840507248,
-          "6": 6.02637342330674,
-          "8": 3.786612650239888,
-          "10": 2.739520676903118,
-          "12": 2.0958869511199594,
-          "heating_radius": 26.40690971812529
+          "3": 34.959137527790446,
+          "4": 16.440406149973505,
+          "5": 8.92444957419968,
+          "6": 6.186167951663307,
+          "8": 3.891612318491654,
+          "10": 2.8171253789966877,
+          "12": 2.1560117242428385,
+          "heating_radius": 16.440406149973505
         }
       },
       "radius_for_production_of_a_tenth_of_budget_R": {
-        "third_hill": 8.165995591357339,
-        "half_hill": 10.683209446793198,
-        "hill": 18.224758267549422
+        "third_hill": 8.209850944372109,
+        "half_hill": 10.77163426247498,
+        "hill": 18.46465433911588
       }
     },
     {
@@ -1475,71 +1405,71 @@
       "treatment": "collisional",
       "activity": "quiet",
       "budget_kg_s": 100.0,
-      "allowed_leak_fraction": 0.004353199370327654,
-      "deposited_heat_w_m2": 9.8885399070971e-06,
-      "exobase_radius_R": 4.478995247052137,
-      "exobase_temperature_k": 307.48368788193125,
-      "exobase_density_m3": 1653447150663.7412,
-      "jeans_lambda_N2": 6.903563523026973,
-      "molecular_jeans_loss_kg_s": 50.55554971927081,
+      "allowed_leak_fraction": 0.000493567138355516,
+      "deposited_heat_w_m2": 6.499999999999861e-06,
+      "exobase_radius_R": 3.8639663547312892,
+      "exobase_temperature_k": 291.4524222523066,
+      "exobase_density_m3": 2343900982431.757,
+      "jeans_lambda_N2": 8.442576468667841,
+      "molecular_jeans_loss_kg_s": 13.085469171160376,
       "tau_one_radius_R": {
-        "xuv": 2.7679110630892847,
-        "lyman_alpha": 1.5131159948498591,
-        "schumann_runge": 2.0394040090081305
+        "xuv": 2.618285800587456,
+        "lyman_alpha": 1.5098588634277519,
+        "schumann_runge": 1.9964853236442073
       },
-      "limb_heating_leak_at_3R": 0.20620831359731454,
+      "limb_heating_leak_at_3R": 0.0807810677111877,
       "heating": {
         "0.1": {
-          "radius_R": 4.42984171087202,
+          "radius_R": 4.0,
           "aperture": {
-            "aperture_radius_km": 8059.143434824095,
-            "area_over_september": 2.08976729882669
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
           }
         },
         "0.5": {
-          "radius_R": 4.339475034742723,
+          "radius_R": 4.0,
           "aperture": {
-            "aperture_radius_km": 7902.140371717055,
-            "area_over_september": 2.0091374020780632
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
           }
         }
       },
       "exosphere_ion_production_kg_s": {
         "third_hill": {
-          "3": 74.66995235267703,
-          "4": 61.98289736562832,
-          "5": 37.29588947317505,
-          "6": 22.00716432004745,
-          "8": 8.212590149550655,
-          "10": 2.149097618458047,
+          "3": 46.252408650383515,
+          "4": 28.62321407450539,
+          "5": 13.506612979018582,
+          "6": 7.675708446324906,
+          "8": 2.748582084263015,
+          "10": 0.7031596025941877,
           "12": 0.0,
-          "heating_radius": 53.07201974071218
+          "heating_radius": 28.62321407450539
         },
         "half_hill": {
-          "3": 85.97393861889981,
-          "4": 73.07687097812247,
-          "5": 48.11347779912667,
-          "6": 32.47629118591341,
-          "8": 17.731999672608012,
-          "10": 10.261040309466829,
-          "12": 5.66216910674883,
-          "heating_radius": 64.05560481836677
+          "3": 49.78924207626203,
+          "4": 32.09406300709223,
+          "5": 16.890579433342005,
+          "6": 10.950156440931277,
+          "8": 5.724426962960731,
+          "10": 3.2361019040556043,
+          "12": 1.759449515846356,
+          "heating_radius": 32.09406300709223
         },
         "hill": {
-          "3": 101.80420153401676,
-          "4": 88.80795972353833,
-          "5": 63.71598695724549,
-          "6": 47.91993766948268,
-          "8": 32.76227239573848,
-          "10": 24.73884057539304,
-          "12": 19.427032168888886,
-          "heating_radius": 79.73506918530924
+          "3": 54.43906729624047,
+          "4": 36.71454579382895,
+          "5": 21.473032587979276,
+          "6": 15.485623820947758,
+          "8": 10.137594494001881,
+          "10": 7.4857889128868775,
+          "12": 5.7980820592911595,
+          "heating_radius": 36.71454579382895
         }
       },
       "radius_for_production_of_a_tenth_of_budget_R": {
-        "third_hill": 7.6213506542349165,
-        "half_hill": 10.094260377957479,
-        "hill": 17.92765726448858
+        "third_hill": 5.510536728468547,
+        "half_hill": 6.246766035848366,
+        "hill": 8.082164192335805
       }
     },
     {
@@ -1547,71 +1477,71 @@
       "treatment": "collisional",
       "activity": "solar_maximum",
       "budget_kg_s": 10.0,
-      "allowed_leak_fraction": 0.0002816218109681364,
-      "deposited_heat_w_m2": 5.074076630418985e-06,
-      "exobase_radius_R": 3.5348394719749594,
-      "exobase_temperature_k": 277.32958492031855,
-      "exobase_density_m3": 2943323575097.137,
-      "jeans_lambda_N2": 9.698623729010604,
-      "molecular_jeans_loss_kg_s": 4.277704750062701,
+      "allowed_leak_fraction": 1.9070427976901187e-05,
+      "deposited_heat_w_m2": 5.092728483138766e-06,
+      "exobase_radius_R": 3.5393508984625726,
+      "exobase_temperature_k": 277.55446510306075,
+      "exobase_density_m3": 2933446290214.4863,
+      "jeans_lambda_N2": 9.678413394975982,
+      "molecular_jeans_loss_kg_s": 4.355786543969328,
       "tau_one_radius_R": {
-        "xuv": 2.525789072795754,
-        "lyman_alpha": 1.5095182772002393,
-        "schumann_runge": 1.9680134496358712
+        "xuv": 2.526388311911514,
+        "lyman_alpha": 1.5079991400753603,
+        "schumann_runge": 1.9692588893084317
       },
-      "limb_heating_leak_at_3R": 0.034568627327785234,
+      "limb_heating_leak_at_3R": 0.035083850162043496,
       "heating": {
         "0.1": {
-          "radius_R": 3.5277918391476852,
+          "radius_R": 4.0,
           "aperture": {
-            "aperture_radius_km": 6491.921987690237,
-            "area_over_september": 1.3560220232818543
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
           }
         },
         "0.5": {
-          "radius_R": 3.5147455427047176,
+          "radius_R": 4.0,
           "aperture": {
-            "aperture_radius_km": 6469.255352250225,
-            "area_over_september": 1.3465694147858307
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
           }
         }
       },
       "exosphere_ion_production_kg_s": {
         "third_hill": {
-          "3": 79.36650502921691,
-          "4": 33.20549567802371,
-          "5": 14.693457266820838,
-          "6": 8.060151603617726,
-          "8": 2.7801601807985223,
-          "10": 0.6972835096600214,
+          "3": 79.84035287457337,
+          "4": 33.61909234167895,
+          "5": 14.892614829552075,
+          "6": 8.174240852351717,
+          "8": 2.8212626012387267,
+          "10": 0.7078199153716088,
           "12": 0.0,
-          "heating_radius": 58.006048243796194
+          "heating_radius": 33.61909234167895
         },
         "half_hill": {
-          "3": 82.74421333074487,
-          "4": 36.51998148525527,
-          "5": 17.92463750561931,
-          "6": 11.186345050739302,
-          "8": 5.620003205148679,
-          "10": 3.1121165527864987,
-          "12": 1.6704772094899472,
-          "heating_radius": 61.35277833808317
+          "3": 83.27119458602965,
+          "4": 36.985689208825285,
+          "5": 18.17464497709252,
+          "6": 11.349619240241308,
+          "8": 5.705813451044182,
+          "10": 3.160709167631243,
+          "12": 1.696916664390578,
+          "heating_radius": 36.985689208825285
         },
         "hill": {
-          "3": 86.9564872036911,
-          "4": 40.70544574433917,
-          "5": 22.07550309030261,
-          "6": 15.294418185453683,
-          "8": 9.616625694022147,
-          "10": 6.9597234965240355,
-          "12": 5.3256454098549915,
-          "heating_radius": 65.55191580499373
+          "3": 87.55337685994479,
+          "4": 41.240762286982935,
+          "5": 22.394438204392586,
+          "6": 15.52586931668738,
+          "8": 9.768785314480995,
+          "10": 7.072208767441787,
+          "12": 5.412800957799772,
+          "heating_radius": 41.240762286982935
         }
       },
       "radius_for_production_of_a_tenth_of_budget_R": {
-        "third_hill": 9.584249402750046,
-        "half_hill": 13.392160969538013,
-        "hill": 25.021403769590297
+        "third_hill": 9.60333219869372,
+        "half_hill": 13.43028702883901,
+        "hill": 25.1222926749383
       }
     },
     {
@@ -1619,71 +1549,71 @@
       "treatment": "collisional",
       "activity": "solar_maximum",
       "budget_kg_s": 100.0,
-      "allowed_leak_fraction": 0.001425367084735773,
-      "deposited_heat_w_m2": 9.863809923841663e-06,
-      "exobase_radius_R": 4.475171046926118,
-      "exobase_temperature_k": 307.41766042197094,
-      "exobase_density_m3": 1656629958402.9343,
-      "jeans_lambda_N2": 6.910946895917991,
-      "molecular_jeans_loss_kg_s": 50.23135944696585,
+      "allowed_leak_fraction": 8.81666874584218e-05,
+      "deposited_heat_w_m2": 6.499999999999789e-06,
+      "exobase_radius_R": 3.8639663547312595,
+      "exobase_temperature_k": 291.45242225230555,
+      "exobase_density_m3": 2343900982431.8066,
+      "jeans_lambda_N2": 8.442576468667937,
+      "molecular_jeans_loss_kg_s": 13.085469171159774,
       "tau_one_radius_R": {
-        "xuv": 2.766191927252817,
-        "lyman_alpha": 1.5129405728257297,
-        "schumann_runge": 2.0385811202403965
+        "xuv": 2.618285800587442,
+        "lyman_alpha": 1.50985886342775,
+        "schumann_runge": 1.9964853236442002
       },
-      "limb_heating_leak_at_3R": 0.20530099523407702,
+      "limb_heating_leak_at_3R": 0.08078106771118265,
       "heating": {
         "0.1": {
-          "radius_R": 4.451554039882386,
+          "radius_R": 4.0,
           "aperture": {
-            "aperture_radius_km": 8096.866435246706,
-            "area_over_september": 2.1093765268467166
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
           }
         },
         "0.5": {
-          "radius_R": 4.40736887874174,
+          "radius_R": 4.0,
           "aperture": {
-            "aperture_radius_km": 8020.099136280947,
-            "area_over_september": 2.0695676708869004
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
           }
         }
       },
       "exosphere_ion_production_kg_s": {
         "third_hill": {
-          "3": 186.24281836376048,
-          "4": 154.49302603997432,
-          "5": 92.78334844794976,
-          "6": 54.73997327624683,
-          "8": 20.424079241400964,
-          "10": 5.344100044234499,
+          "3": 115.63102162595575,
+          "4": 71.55803518625947,
+          "5": 33.76653244754442,
+          "6": 19.189271115811064,
+          "8": 6.871455210657088,
+          "10": 1.7578990064853455,
           "12": 0.0,
-          "heating_radius": 130.5925887102325
+          "heating_radius": 71.55803518625947
         },
         "half_hill": {
-          "3": 214.34632221324142,
-          "4": 182.0743946048031,
-          "5": 119.67750718230343,
-          "6": 80.76786716220627,
-          "8": 44.09076208713647,
-          "10": 25.511481062978774,
-          "12": 14.076611045509255,
-          "heating_radius": 157.8848197766948
+          "3": 124.47310519065141,
+          "4": 80.23515751772598,
+          "5": 42.22644858335239,
+          "6": 27.37539110232642,
+          "8": 14.311067407400856,
+          "10": 8.09025476013845,
+          "12": 4.398623789615581,
+          "heating_radius": 80.23515751772598
         },
         "hill": {
-          "3": 253.6912778037808,
-          "4": 221.17285204584368,
-          "5": 158.45637944921782,
-          "6": 119.15185742956973,
-          "8": 81.44731810122654,
-          "10": 61.49488663823461,
-          "12": 48.288005948038155,
-          "heating_radius": 196.84812093668913
+          "3": 136.09766824059662,
+          "4": 91.78636448456695,
+          "5": 53.68258146994473,
+          "6": 38.71405955236679,
+          "8": 25.343986235002923,
+          "10": 18.71447228221585,
+          "12": 14.495205148226848,
+          "heating_radius": 91.78636448456695
         }
       },
       "radius_for_production_of_a_tenth_of_budget_R": {
-        "third_hill": 9.206464256943692,
-        "half_hill": 12.984207512636726,
-        "hill": 24.801488889604975
+        "third_hill": 7.284781590533318,
+        "half_hill": 9.254918127926532,
+        "hill": 15.19313855554261
       }
     },
     {
@@ -1691,71 +1621,71 @@
       "treatment": "lte",
       "activity": "quiet",
       "budget_kg_s": 1.0,
-      "allowed_leak_fraction": 0.0002737363708056746,
-      "deposited_heat_w_m2": 3.0593263220234866e-06,
-      "exobase_radius_R": 3.0774581808496566,
-      "exobase_temperature_k": 248.72981660454099,
-      "exobase_density_m3": 4329735741816.032,
-      "jeans_lambda_N2": 12.420983889032966,
-      "molecular_jeans_loss_kg_s": 0.36512234133066673,
+      "allowed_leak_fraction": 5.810565682788211e-05,
+      "deposited_heat_w_m2": 3.0561086627314436e-06,
+      "exobase_radius_R": 3.0767727540445025,
+      "exobase_temperature_k": 248.67913057147524,
+      "exobase_density_m3": 4332547963659.34,
+      "jeans_lambda_N2": 12.426283190237944,
+      "molecular_jeans_loss_kg_s": 0.3633615153551607,
       "tau_one_radius_R": {
-        "xuv": 2.3773906612244255,
-        "lyman_alpha": 1.5079978675434982,
-        "schumann_runge": 1.9220621931754946
+        "xuv": 2.376986493792195,
+        "lyman_alpha": 1.5079429876658546,
+        "schumann_runge": 1.9218409586687435
       },
-      "limb_heating_leak_at_3R": 0.0014027291918950568,
+      "limb_heating_leak_at_3R": 0.0013832376958190526,
       "heating": {
         "0.1": {
-          "radius_R": 3.0713523830802325,
+          "radius_R": 3.5,
           "aperture": {
-            "aperture_radius_km": 5698.904076718644,
-            "area_over_september": 1.044967665859021
+            "aperture_radius_km": 6173.909345219243,
+            "area_over_ring_fleet": 0.7685166820633214
           }
         },
         "0.5": {
-          "radius_R": 3.0600276352303775,
+          "radius_R": 3.5,
           "aperture": {
-            "aperture_radius_km": 5679.228459804307,
-            "area_over_september": 1.0377645648517486
+            "aperture_radius_km": 6173.909345219243,
+            "area_over_ring_fleet": 0.7685166820633214
           }
         }
       },
       "exosphere_ion_production_kg_s": {
         "third_hill": {
-          "3": 14.00995167335103,
-          "4": 2.48843349760232,
-          "5": 0.9396634594589575,
-          "6": 0.47305455597646023,
-          "8": 0.14937889406857927,
-          "10": 0.035812476195103644,
+          "3": 13.984505151323788,
+          "4": 2.4802255348784565,
+          "5": 0.9362613992342774,
+          "6": 0.47125871185795515,
+          "8": 0.14878552070255324,
+          "10": 0.03566705839554967,
           "12": 0.0,
-          "heating_radius": 12.514137965073061
+          "heating_radius": 5.158120509646609
         },
         "half_hill": {
-          "3": 14.169738137243003,
-          "4": 2.645201879130333,
-          "5": 1.0924627906164568,
-          "6": 0.62084530989859,
-          "8": 0.28350110435551074,
-          "10": 0.14961714882277605,
-          "12": 0.07799860699135068,
-          "heating_radius": 12.673738657630793
+          "3": 14.143617595640256,
+          "4": 2.636336740692651,
+          "5": 1.088415007168737,
+          "6": 0.6184257018710182,
+          "8": 0.28234164557866837,
+          "10": 0.1489907594096617,
+          "12": 0.07766750868312644,
+          "heating_radius": 5.315833994536853
         },
         "hill": {
-          "3": 14.347262277909591,
-          "4": 2.821590278939196,
-          "5": 1.2673687546962054,
-          "6": 0.7939225180813885,
-          "8": 0.45181957578696696,
-          "10": 0.3115708888812701,
-          "12": 0.23172726750903658,
-          "heating_radius": 12.851190481393763
+          "3": 14.320353466570992,
+          "4": 2.8119362676394006,
+          "5": 1.2625434200327619,
+          "6": 0.7907343608402984,
+          "8": 0.44991258321812233,
+          "10": 0.3102250105505242,
+          "12": 0.23071316100186387,
+          "heating_radius": 5.492037091478598
         }
       },
       "radius_for_production_of_a_tenth_of_budget_R": {
-        "third_hill": 8.66138313756434,
-        "half_hill": 11.264500516608686,
-        "hill": 18.682599808645953
+        "third_hill": 8.655203256413019,
+        "half_hill": 11.251199002849457,
+        "hill": 18.647031513028438
       }
     },
     {
@@ -1763,71 +1693,71 @@
       "treatment": "lte",
       "activity": "quiet",
       "budget_kg_s": 10.0,
-      "allowed_leak_fraction": 0.0014379578672359184,
-      "deposited_heat_w_m2": 5.009519460396426e-06,
-      "exobase_radius_R": 3.5341590663740763,
-      "exobase_temperature_k": 276.7639751388337,
-      "exobase_density_m3": 2950474447977.422,
-      "jeans_lambda_N2": 9.720315379844852,
-      "molecular_jeans_loss_kg_s": 4.19790053367381,
+      "allowed_leak_fraction": 0.00031797787620115,
+      "deposited_heat_w_m2": 5.0441662972113686e-06,
+      "exobase_radius_R": 3.542561151788453,
+      "exobase_temperature_k": 277.18275722695097,
+      "exobase_density_m3": 2932058833303.384,
+      "jeans_lambda_N2": 9.682610052713077,
+      "molecular_jeans_loss_kg_s": 4.34200090622906,
       "tau_one_radius_R": {
-        "xuv": 2.5276370192524302,
-        "lyman_alpha": 1.5102921544197987,
-        "schumann_runge": 1.97026190713668
+        "xuv": 2.5303180658962634,
+        "lyman_alpha": 1.510831737886777,
+        "schumann_runge": 1.9707776123351066
       },
-      "limb_heating_leak_at_3R": 0.03460940073803563,
+      "limb_heating_leak_at_3R": 0.03557464585259791,
       "heating": {
         "0.1": {
-          "radius_R": 3.5138202507317864,
+          "radius_R": 4.0,
           "aperture": {
-            "aperture_radius_km": 6467.647749976454,
-            "area_over_september": 1.3459002561372742
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
           }
         },
         "0.5": {
-          "radius_R": 3.4762087293250605,
+          "radius_R": 4.0,
           "aperture": {
-            "aperture_radius_km": 6402.301492684409,
-            "area_over_september": 1.3188408842831283
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
           }
         }
       },
       "exosphere_ion_production_kg_s": {
         "third_hill": {
-          "3": 31.654992825433308,
-          "4": 13.196107919150379,
-          "5": 5.825173067927696,
-          "6": 3.1913939788189807,
-          "8": 1.0994026741669687,
-          "10": 0.27556094081017113,
+          "3": 32.00774640675876,
+          "4": 13.50427504628049,
+          "5": 5.973305192994731,
+          "6": 3.2761751862877837,
+          "8": 1.1299190395929792,
+          "10": 0.28338156176244056,
           "12": 0.0,
-          "heating_radius": 23.469946028829273
+          "heating_radius": 13.50427504628049
         },
         "half_hill": {
-          "3": 32.98826837637905,
-          "4": 14.504407236374586,
-          "5": 7.100599749180439,
-          "6": 4.425378664285326,
-          "8": 2.2203420576941806,
-          "10": 1.2287121960347682,
-          "12": 0.6592621771667444,
-          "heating_radius": 24.791343484703688
+          "3": 33.38041853919739,
+          "4": 14.851242522788702,
+          "5": 7.286427656795313,
+          "6": 4.546635902169928,
+          "8": 2.284005289837439,
+          "10": 1.264747557282754,
+          "12": 0.678863847805897,
+          "heating_radius": 14.851242522788702
         },
         "hill": {
-          "3": 34.648244054084756,
-          "4": 16.15388420584938,
-          "5": 8.736388059133311,
-          "6": 6.044281939880863,
-          "8": 3.7953175693392462,
-          "10": 2.7449524109930112,
-          "12": 2.0996510753718733,
-          "heating_radius": 26.446290407975805
+          "3": 35.092166149937384,
+          "4": 16.552100540716594,
+          "5": 8.973233494641017,
+          "6": 6.216029596862429,
+          "8": 3.908118969846508,
+          "10": 2.828303136004913,
+          "12": 2.164218756669744,
+          "heating_radius": 16.552100540716594
         }
       },
       "radius_for_production_of_a_tenth_of_budget_R": {
-        "third_hill": 8.171567755698709,
-        "half_hill": 10.691014910597103,
-        "hill": 18.237162574906776
+        "third_hill": 8.218321511892782,
+        "half_hill": 10.786149141963573,
+        "hill": 18.49373660299872
       }
     },
     {
@@ -1835,71 +1765,71 @@
       "treatment": "lte",
       "activity": "quiet",
       "budget_kg_s": 100.0,
-      "allowed_leak_fraction": 0.004318496503949785,
-      "deposited_heat_w_m2": 9.834723857809055e-06,
-      "exobase_radius_R": 4.483536848203522,
-      "exobase_temperature_k": 307.0966572217388,
-      "exobase_density_m3": 1652178729196.2717,
-      "jeans_lambda_N2": 6.905262229233869,
-      "molecular_jeans_loss_kg_s": 50.51133365235737,
+      "allowed_leak_fraction": 0.0004912526812786888,
+      "deposited_heat_w_m2": 6.49999999999829e-06,
+      "exobase_radius_R": 3.8784482586442715,
+      "exobase_temperature_k": 291.4637910670642,
+      "exobase_density_m3": 2326338932978.239,
+      "jeans_lambda_N2": 8.41072429025349,
+      "molecular_jeans_loss_kg_s": 13.46750692049969,
       "tau_one_radius_R": {
-        "xuv": 2.770433625593594,
-        "lyman_alpha": 1.5141579290129796,
-        "schumann_runge": 2.0410669505127004
+        "xuv": 2.6238783179359553,
+        "lyman_alpha": 1.5114929705079143,
+        "schumann_runge": 1.9986842974829773
       },
-      "limb_heating_leak_at_3R": 0.208099655037936,
+      "limb_heating_leak_at_3R": 0.08350450965629974,
       "heating": {
         "0.1": {
-          "radius_R": 4.434667553562146,
+          "radius_R": 4.0,
           "aperture": {
-            "aperture_radius_km": 8067.52785391392,
-            "area_over_september": 2.094117785776254
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
           }
         },
         "0.5": {
-          "radius_R": 4.344791174080594,
+          "radius_R": 4.0,
           "aperture": {
-            "aperture_radius_km": 7911.376632202672,
-            "area_over_september": 2.013836827921168
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
           }
         }
       },
       "exosphere_ion_production_kg_s": {
         "third_hill": {
-          "3": 74.8069863887144,
-          "4": 62.134198223664356,
-          "5": 37.438542795430976,
-          "6": 22.07930384689673,
-          "8": 8.235101389241013,
-          "10": 2.1544152936810814,
+          "3": 46.84070193729109,
+          "4": 29.371994673157822,
+          "5": 13.865520565766012,
+          "6": 7.881965755790184,
+          "8": 2.823488170880429,
+          "10": 0.7224845739731313,
           "12": 0.0,
-          "heating_radius": 53.127723147459676
+          "heating_radius": 29.371994673157822
         },
         "half_hill": {
-          "3": 86.13332654654252,
-          "4": 73.25010060946323,
-          "5": 48.277484550857544,
-          "6": 32.569102947437884,
-          "8": 17.773255216770874,
-          "10": 10.28221808653948,
-          "12": 5.672945825027639,
-          "heating_radius": 64.13170052218054
+          "3": 50.476422555136615,
+          "4": 32.93988052892357,
+          "5": 17.344107479992523,
+          "6": 11.2479790747417,
+          "8": 5.882561989009824,
+          "10": 3.3263037091406726,
+          "12": 1.8087757234841568,
+          "heating_radius": 32.93988052892357
         },
         "hill": {
-          "3": 101.98428940929716,
-          "4": 89.00175232969802,
-          "5": 63.900362547209355,
-          "6": 48.032896947871606,
-          "8": 32.82310980336155,
-          "10": 24.778846030082597,
-          "12": 19.45565977222344,
-          "heating_radius": 79.83104504939567
+          "3": 55.25943874156352,
+          "4": 37.692661827579535,
+          "5": 22.057831285855226,
+          "6": 15.913367473497411,
+          "8": 10.4221599818016,
+          "10": 7.6977474378051385,
+          "12": 5.963138453748672,
+          "heating_radius": 37.692661827579535
         }
       },
       "radius_for_production_of_a_tenth_of_budget_R": {
-        "third_hill": 7.626922579163996,
-        "half_hill": 10.10166433508364,
-        "hill": 17.938468592940556
+        "third_hill": 5.561037142038357,
+        "half_hill": 6.325486881418589,
+        "hill": 8.245422268972469
       }
     },
     {
@@ -1907,71 +1837,71 @@
       "treatment": "lte",
       "activity": "solar_maximum",
       "budget_kg_s": 10.0,
-      "allowed_leak_fraction": 0.00026448823351911985,
-      "deposited_heat_w_m2": 5.008797619948631e-06,
-      "exobase_radius_R": 3.533983922117259,
-      "exobase_temperature_k": 276.7552114864124,
-      "exobase_density_m3": 2950860344424.989,
-      "jeans_lambda_N2": 9.72110493473075,
-      "molecular_jeans_loss_kg_s": 4.194934258353888,
+      "allowed_leak_fraction": 1.5577005520749863e-05,
+      "deposited_heat_w_m2": 5.035998995283818e-06,
+      "exobase_radius_R": 3.5405813397145365,
+      "exobase_temperature_k": 277.08436560645566,
+      "exobase_density_m3": 2936381158315.7744,
+      "jeans_lambda_N2": 9.691464527871009,
+      "molecular_jeans_loss_kg_s": 4.307727171090882,
       "tau_one_radius_R": {
-        "xuv": 2.527543385000037,
-        "lyman_alpha": 1.5102809066234895,
-        "schumann_runge": 1.9702134101448006
+        "xuv": 2.5292612854731553,
+        "lyman_alpha": 1.510704593992122,
+        "schumann_runge": 1.9702310587100302
       },
-      "limb_heating_leak_at_3R": 0.03458936502845628,
+      "limb_heating_leak_at_3R": 0.035346078112968936,
       "heating": {
         "0.1": {
-          "radius_R": 3.5272378452629582,
+          "radius_R": 4.0,
           "aperture": {
-            "aperture_radius_km": 6490.959478714912,
-            "area_over_september": 1.3556199584955837
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
           }
         },
         "0.5": {
-          "radius_R": 3.514731895908536,
+          "radius_R": 4.0,
           "aperture": {
-            "aperture_radius_km": 6469.2316423065395,
-            "area_over_september": 1.3465595443989788
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
           }
         }
       },
       "exosphere_ion_production_kg_s": {
         "third_hill": {
-          "3": 79.1191272307024,
-          "4": 32.974375954165204,
-          "5": 14.555269944392807,
-          "6": 7.97410827441287,
-          "8": 2.7469302230345165,
-          "10": 0.6884990477258476,
+          "3": 79.8113254588765,
+          "4": 33.57816802583272,
+          "5": 14.845464960092544,
+          "6": 8.140175665675368,
+          "8": 2.806697100604012,
+          "10": 0.7038135837164439,
           "12": 0.0,
-          "heating_radius": 57.76704659803309
+          "heating_radius": 33.57816802583272
         },
         "half_hill": {
-          "3": 82.45028367403575,
-          "4": 36.24314997374323,
-          "5": 17.741915842251846,
-          "6": 11.057185418867075,
-          "8": 5.547565201274441,
-          "10": 3.0699192365221215,
-          "12": 1.647145313927953,
-          "heating_radius": 61.06768300038878
+          "3": 83.21962275808049,
+          "4": 36.92262748342023,
+          "5": 18.10591552849965,
+          "6": 11.294670105220519,
+          "8": 5.672242160362179,
+          "10": 3.1404837590495776,
+          "12": 1.6855260762907327,
+          "heating_radius": 36.92262748342023
         },
         "hill": {
-          "3": 86.59755421046165,
-          "4": 40.3640055383057,
-          "5": 21.82874302628028,
-          "6": 15.101833709361154,
-          "8": 9.482468316850424,
-          "10": 6.858082399730774,
-          "12": 5.245801021715504,
-          "heating_radius": 65.20203193840351
+          "3": 87.46824476021257,
+          "4": 41.144348793316894,
+          "5": 22.29259170018144,
+          "6": 15.438191481940114,
+          "8": 9.703341245106213,
+          "10": 7.0212704361688045,
+          "12": 5.3722087798079805,
+          "heating_radius": 41.144348793316894
         }
       },
       "radius_for_production_of_a_tenth_of_budget_R": {
-        "third_hill": 9.567987723064853,
-        "half_hill": 13.357233795899976,
-        "hill": 24.924686316096626
+        "third_hill": 9.596221171414951,
+        "half_hill": 13.413734609230836,
+        "hill": 25.072761978974277
       }
     },
     {
@@ -1979,71 +1909,71 @@
       "treatment": "lte",
       "activity": "solar_maximum",
       "budget_kg_s": 100.0,
-      "allowed_leak_fraction": 0.0014100675637860865,
-      "deposited_heat_w_m2": 9.806211505963331e-06,
-      "exobase_radius_R": 4.479116424704868,
-      "exobase_temperature_k": 307.02046704549747,
-      "exobase_density_m3": 1655852215513.0205,
-      "jeans_lambda_N2": 6.913792307604593,
-      "molecular_jeans_loss_kg_s": 50.13729516558238,
+      "allowed_leak_fraction": 8.734898411999324e-05,
+      "deposited_heat_w_m2": 6.499999999999622e-06,
+      "exobase_radius_R": 3.87844825864458,
+      "exobase_temperature_k": 291.4637910670757,
+      "exobase_density_m3": 2326338932977.7676,
+      "jeans_lambda_N2": 8.410724290252487,
+      "molecular_jeans_loss_kg_s": 13.46750692050923,
       "tau_one_radius_R": {
-        "xuv": 2.771038386921201,
-        "lyman_alpha": 1.513955157292858,
-        "schumann_runge": 2.0401157668074017
+        "xuv": 2.623878317936109,
+        "lyman_alpha": 1.5114929705079316,
+        "schumann_runge": 1.9986842974830545
       },
-      "limb_heating_leak_at_3R": 0.20704506818323898,
+      "limb_heating_leak_at_3R": 0.08350450965635117,
       "heating": {
         "0.1": {
-          "radius_R": 4.455674129278247,
+          "radius_R": 4.0,
           "aperture": {
-            "aperture_radius_km": 8104.024678563075,
-            "area_over_september": 2.1131078728102453
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
           }
         },
         "0.5": {
-          "radius_R": 4.411823321128442,
+          "radius_R": 4.0,
           "aperture": {
-            "aperture_radius_km": 8027.838284483604,
-            "area_over_september": 2.0735637358866956
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
           }
         }
       },
       "exosphere_ion_production_kg_s": {
         "third_hill": {
-          "3": 186.51802224645255,
-          "4": 154.79913122662293,
-          "5": 93.06740841368575,
-          "6": 54.876270806234814,
-          "8": 20.463413042508915,
-          "10": 5.352878869009993,
+          "3": 117.1017548432628,
+          "4": 73.42998668293879,
+          "5": 34.66380141443762,
+          "6": 19.7049143894889,
+          "8": 7.05872042720606,
+          "10": 1.8062114349341318,
           "12": 0.0,
-          "heating_radius": 130.6922820092706
+          "heating_radius": 73.42998668293879
         },
         "half_hill": {
-          "3": 214.65284511835486,
-          "4": 182.41121091588775,
-          "5": 119.99146896938763,
-          "6": 80.93307205623614,
-          "8": 44.1562348057521,
-          "10": 25.542262778241763,
-          "12": 14.09118127952855,
-          "heating_radius": 158.01208786569353
+          "3": 126.19105638788349,
+          "4": 82.34970132235976,
+          "5": 43.360268700010366,
+          "6": 28.11994768687392,
+          "8": 14.706404972535308,
+          "10": 8.315759272857905,
+          "12": 4.52193930871382,
+          "heating_radius": 82.34970132235976
         },
         "hill": {
-          "3": 254.01349779601884,
-          "4": 221.52524773738818,
-          "5": 158.7857618400565,
-          "6": 119.33223179630872,
-          "8": 81.52751073681041,
-          "10": 61.539722935591676,
-          "12": 48.315808598657,
-          "heating_radius": 196.98960086013506
+          "3": 138.1485968539603,
+          "4": 94.23165456900884,
+          "5": 55.144578214676486,
+          "6": 39.78341868377248,
+          "8": 26.05539995452378,
+          "10": 19.244368594527764,
+          "12": 14.907846134383377,
+          "heating_radius": 94.23165456900884
         }
       },
       "radius_for_production_of_a_tenth_of_budget_R": {
-        "third_hill": 9.208925656157152,
-        "half_hill": 12.98675314922842,
-        "hill": 24.80275381791986
+        "third_hill": 7.338867319339188,
+        "half_hill": 9.353746317199246,
+        "hill": 15.440917488623048
       }
     },
     {
@@ -2051,71 +1981,71 @@
       "treatment": "all_heats",
       "activity": "quiet",
       "budget_kg_s": 10.0,
-      "allowed_leak_fraction": 0.0002800386990773995,
-      "deposited_heat_w_m2": 3.2458628442562855e-06,
-      "exobase_radius_R": 3.69423122483109,
-      "exobase_temperature_k": 263.658520297946,
-      "exobase_density_m3": 2834546861512.7983,
-      "jeans_lambda_N2": 9.761355349770719,
-      "molecular_jeans_loss_kg_s": 4.142373248448286,
+      "allowed_leak_fraction": 5.302623044383454e-05,
+      "deposited_heat_w_m2": 3.249058670693268e-06,
+      "exobase_radius_R": 3.695080157189453,
+      "exobase_temperature_k": 263.6969439568773,
+      "exobase_density_m3": 2832831718514.552,
+      "jeans_lambda_N2": 9.75769069661886,
+      "molecular_jeans_loss_kg_s": 4.155993005924192,
       "tau_one_radius_R": {
-        "xuv": 2.6448271100183525,
-        "lyman_alpha": 1.562986868020494,
-        "schumann_runge": 2.0590688132046973
+        "xuv": 2.6452866238637043,
+        "lyman_alpha": 1.5630449267806155,
+        "schumann_runge": 2.0593109607164237
       },
-      "limb_heating_leak_at_3R": 0.06395601989430094,
+      "limb_heating_leak_at_3R": 0.06409699686810574,
       "heating": {
         "0.1": {
-          "radius_R": 3.6873430974718,
+          "radius_R": 4.0,
           "aperture": {
-            "aperture_radius_km": 6769.126343902553,
-            "area_over_september": 1.4742984150329892
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
           }
         },
         "0.5": {
-          "radius_R": 3.6745699527555953,
+          "radius_R": 4.0,
           "aperture": {
-            "aperture_radius_km": 6746.93428227262,
-            "area_over_september": 1.4646475122849258
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
           }
         }
       },
       "exosphere_ion_production_kg_s": {
         "third_hill": {
-          "3": 35.81541103496853,
-          "4": 17.03132075057644,
-          "5": 7.112156946550771,
-          "6": 3.790301641630812,
-          "8": 1.2715827065035046,
-          "10": 0.3146454782904498,
+          "3": 35.85145608013538,
+          "4": 17.06868368062283,
+          "5": 7.129281088187741,
+          "6": 3.799865140677271,
+          "8": 1.2749447407633052,
+          "10": 0.3154961800437179,
           "12": 0.0,
-          "heating_radius": 24.902852118471557
+          "heating_radius": 17.06868368062283
         },
         "half_hill": {
-          "3": 37.303481195092296,
-          "4": 18.49142944231239,
-          "5": 8.535527563158244,
-          "6": 5.167304992400178,
-          "8": 2.5221030124063626,
-          "10": 1.3773595148062967,
-          "12": 0.7332002588218347,
-          "heating_radius": 26.372643313704227
+          "3": 37.34372511558919,
+          "4": 18.532931472624753,
+          "5": 8.556659382010773,
+          "6": 5.180757882045256,
+          "8": 2.5289982906275417,
+          "10": 1.3812151995039064,
+          "12": 0.7352819940525097,
+          "heating_radius": 18.532931472624753
         },
         "hill": {
-          "3": 39.09848425994686,
-          "4": 20.27504912626212,
-          "5": 10.304278578006098,
-          "6": 6.9177364426077075,
-          "8": 4.22486671844396,
-          "10": 3.0163720557208915,
-          "12": 2.2898685905015776,
-          "heating_radius": 28.160147008713302
+          "3": 39.14408445171173,
+          "4": 20.321852299164977,
+          "5": 10.330700806293926,
+          "6": 6.936413826992494,
+          "8": 4.236842923764062,
+          "10": 3.025121138685987,
+          "12": 2.29660054259098,
+          "heating_radius": 20.321852299164977
         }
       },
       "radius_for_production_of_a_tenth_of_budget_R": {
-        "third_hill": 8.417377179916661,
-        "half_hill": 11.048480245165953,
-        "hill": 18.852270037808065
+        "third_hill": 8.421740242135474,
+        "half_hill": 11.057621278235295,
+        "hill": 18.87669632916548
       }
     },
     {
@@ -2123,143 +2053,71 @@
       "treatment": "all_heats",
       "activity": "quiet",
       "budget_kg_s": 100.0,
-      "allowed_leak_fraction": 0.002921471815304051,
-      "deposited_heat_w_m2": 7.670540411653286e-06,
-      "exobase_radius_R": 4.655033771570114,
-      "exobase_temperature_k": 291.781707566271,
-      "exobase_density_m3": 1613131861356.51,
-      "jeans_lambda_N2": 6.99995278331934,
-      "molecular_jeans_loss_kg_s": 47.647612736488774,
+      "allowed_leak_fraction": 0.0001439827657018462,
+      "deposited_heat_w_m2": 3.9999999999994755e-06,
+      "exobase_radius_R": 3.890527579455464,
+      "exobase_temperature_k": 271.81274026038517,
+      "exobase_density_m3": 2479058626769.1807,
+      "jeans_lambda_N2": 8.990786835002245,
+      "molecular_jeans_loss_kg_s": 8.24196736987543,
       "tau_one_radius_R": {
-        "xuv": 2.8966694825350983,
-        "lyman_alpha": 1.5663815535425054,
-        "schumann_runge": 2.1326344601809004
+        "xuv": 2.701357884291273,
+        "lyman_alpha": 1.5639812943171594,
+        "schumann_runge": 2.07569717359513
       },
-      "limb_heating_leak_at_3R": 0.2941732989085467,
+      "limb_heating_leak_at_3R": 0.10006434813654427,
       "heating": {
         "0.1": {
-          "radius_R": 4.617995691144123,
+          "radius_R": 4.0,
           "aperture": {
-            "aperture_radius_km": 8386.042160148847,
-            "area_over_september": 2.262737848130669
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
           }
         },
         "0.5": {
-          "radius_R": 4.549206905901553,
+          "radius_R": 4.0,
           "aperture": {
-            "aperture_radius_km": 8266.528524668405,
-            "area_over_september": 2.198702628786876
+            "aperture_radius_km": 7042.609345219244,
+            "area_over_ring_fleet": 1.0
           }
         }
       },
       "exosphere_ion_production_kg_s": {
         "third_hill": {
-          "3": 79.80622751866164,
-          "4": 67.6083556641656,
-          "5": 43.08027305315059,
-          "6": 24.810980144534135,
-          "8": 9.041994901133936,
-          "10": 2.338351188742702,
+          "3": 44.41160291981028,
+          "4": 26.987025607911235,
+          "5": 11.772323887707945,
+          "6": 6.424906896772242,
+          "8": 2.20960308171101,
+          "10": 0.5538610420785984,
           "12": 0.0,
-          "heating_radius": 54.95671822781679
+          "heating_radius": 26.987025607911235
         },
         "half_hill": {
-          "3": 91.84231121771927,
-          "4": 79.4203674034921,
-          "5": 54.59739255253338,
-          "6": 35.956275693701976,
-          "8": 19.173721775870213,
-          "10": 10.967388387829816,
-          "12": 6.009364000900255,
-          "heating_radius": 66.59517341850542
+          "3": 47.09492429168098,
+          "4": 29.620105728975446,
+          "5": 14.339237801504954,
+          "6": 8.908428066053823,
+          "8": 4.465654414646267,
+          "10": 2.472293448528363,
+          "12": 1.327151274321528,
+          "heating_radius": 29.620105728975446
         },
         "hill": {
-          "3": 108.21054698071595,
-          "4": 95.68572839469951,
-          "5": 70.72938273278052,
-          "6": 51.92340624892806,
-          "8": 34.712024635646245,
-          "10": 25.93251024442252,
-          "12": 20.234639443518024,
-          "heating_radius": 82.78175221779337
+          "3": 50.443576863650236,
+          "4": 32.94751174340084,
+          "5": 17.639107549403064,
+          "6": 12.17424896243202,
+          "8": 7.642873773071019,
+          "10": 5.531057399585399,
+          "12": 4.232944180779327,
+          "heating_radius": 32.94751174340084
         }
       },
       "radius_for_production_of_a_tenth_of_budget_R": {
-        "third_hill": 7.812255730371555,
-        "half_hill": 10.326533633532666,
-        "hill": 18.192946800476022
-      }
-    },
-    {
-      "shield": "edge_200nm",
-      "treatment": "all_heats",
-      "activity": "solar_maximum",
-      "budget_kg_s": 100.0,
-      "allowed_leak_fraction": 0.0008090456575383985,
-      "deposited_heat_w_m2": 7.5532438409352385e-06,
-      "exobase_radius_R": 4.6347762014032305,
-      "exobase_temperature_k": 291.45146649026196,
-      "exobase_density_m3": 1629107792444.7727,
-      "jeans_lambda_N2": 7.0385142630320425,
-      "molecular_jeans_loss_kg_s": 46.07071179205652,
-      "tau_one_radius_R": {
-        "xuv": 2.890069467818733,
-        "lyman_alpha": 1.5653847256527254,
-        "schumann_runge": 2.130798944869924
-      },
-      "limb_heating_leak_at_3R": 0.28818213668418885,
-      "heating": {
-        "0.1": {
-          "radius_R": 4.618836856389675,
-          "aperture": {
-            "aperture_radius_km": 8387.503600646469,
-            "area_over_september": 2.263526574160788
-          }
-        },
-        "0.5": {
-          "radius_R": 4.589021633664841,
-          "aperture": {
-            "aperture_radius_km": 8335.702632684342,
-            "area_over_september": 2.2356539679510354
-          }
-        }
-      },
-      "exosphere_ion_production_kg_s": {
-        "third_hill": {
-          "3": 197.2204643131044,
-          "4": 166.59221513571418,
-          "5": 105.00550299784979,
-          "6": 60.421642540482466,
-          "8": 21.997866743663778,
-          "10": 5.685697841095029,
-          "12": 0.0,
-          "heating_radius": 134.30041865129536
-        },
-        "half_hill": {
-          "3": 226.4534835509255,
-          "4": 195.28095293485444,
-          "5": 132.97782618622205,
-          "6": 87.49087615113658,
-          "8": 46.60505523109382,
-          "10": 26.642687602764354,
-          "12": 14.592897826031924,
-          "heating_radius": 162.5669579344799
-        },
-        "hill": {
-          "3": 266.14443200448636,
-          "4": 234.722398343816,
-          "5": 172.09571961604746,
-          "6": 126.20914234424838,
-          "8": 84.28321910170635,
-          "10": 62.93062016943798,
-          "12": 49.08643371968886,
-          "heating_radius": 201.81705071049643
-        }
-      },
-      "radius_for_production_of_a_tenth_of_budget_R": {
-        "third_hill": 9.301310317776814,
-        "half_hill": 13.073217535754406,
-        "hill": 24.803430064709204
+        "third_hill": 5.248679927273732,
+        "half_hill": 5.729397305591965,
+        "hill": 6.728017174821407
       }
     }
   ]

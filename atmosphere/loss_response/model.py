@@ -7,10 +7,18 @@ extreme and far ultraviolet the optical shield lets through and how much of the
 solar wind reaches the air. It sizes the two protection functions against a
 total loss budget (research/studies/protection_architecture/requirements.md).
 
-Ultraviolet branch. Heat deposited above the 0.3 Pa base comes from light below
-175 nm leaking past the shield (a fraction f of the WHI 2008 spectrum, through
-escape.leakage_heat), the titania film's own hard X-rays (escape.film_heat), and
-the sky's interplanetary Lyman-alpha glow, which no Sun-facing shield blocks.
+Ultraviolet branch. The heat deposited between the 0.3 Pa base and the
+exobase comes from the middle atmosphere's limb tracing (traced.py, reading
+atmosphere/middle_atmosphere/results/limb_heat.json): the light below 175 nm
+that passes the shield's window stack and its 4 um annulus film, a UV
+transmission f through gaps over the whole aperture of the protected radius,
+and unfiltered sunlight beyond it, each followed along its slant paths through
+air swollen by the heat it takes, and the sky's interplanetary Lyman-alpha
+glow, which no Sun-facing shield blocks. The author adopted this traced count
+on 2026-10-07 in place of a quarter of the light reaching the disk; solar
+maximum takes 2.5 on the ultraviolet and FISM2's measured rise of the X-rays
+below 10 nm (escape.xray_cycle). The films are the design's behind both
+shields. The protected radius is the ring fleet's 4 lunar radii unless given.
 The thermal column (atmosphere/thermal_column.py) turns that heat into an
 exobase and a molecular Jeans loss, with the base temperature the middle
 atmosphere finds behind each shield under each treatment of the upper air
@@ -60,12 +68,12 @@ from shared.constants import AVOGADRO, MOON_GM, MOON_RADIUS
 from atmosphere.thermal_column import ColumnConfig, solve_column
 from atmosphere.radiative_convective import thermodynamics as th
 from atmosphere.middle_atmosphere import escape
-from atmosphere.loss_response import tides
+from atmosphere.loss_response import tides, traced
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 MIDDLE = ROOT / 'atmosphere' / 'middle_atmosphere' / 'results'
-SCHEMA = 'terluna.atmosphere.loss-response/2'
+SCHEMA = 'terluna.atmosphere.loss-response/3'
 TIDES = HERE / 'results' / 'tidal_escape.json'
 TIDES_SCHEMA = 'terluna.atmosphere.tidal-escape/1'
 
@@ -80,8 +88,9 @@ ACTIVITY = {'quiet': dict(uv=1.0, xray=1.0, glow=1.0),
             # escape.py's rough solar-maximum ratios; the glow is resonantly scattered solar
             # Lyman-alpha, whose line strengthens by roughly 1.5-2 over the cycle (1.5 assumed).
             'solar_maximum': dict(uv=escape.SOLAR_MAXIMUM, xray=escape.XRAY_SOLAR_MAXIMUM, glow=1.5)}
-LEAKS = (1e-6, 3e-6, 1e-5, 3e-5, 1e-4, 3e-4, 1e-3, 2e-3, 3e-3, 5e-3,
+LEAKS = (1e-6, 3e-6, 1e-5, 2e-5, 3e-5, 5e-5, 1e-4, 2e-4, 3e-4, 5e-4, 1e-3, 2e-3, 3e-3, 5e-3,
          1e-2, 2e-2, 3e-2, 5e-2, 0.1, 0.3, 1.0)
+PROTECTED_R = 4.0               # the ring fleet's protected radius in lunar radii (decisions.md, 2026-10-07)
 GLOW_RAYLEIGH = 1000.0          # interplanetary hydrogen glow at 1 AU (protection/report.md, section 9)
 BUDGETS_KG_S = (1.0, 10.0, 100.0)
 ETAS = (0.01, 0.1, 0.3)
@@ -168,29 +177,56 @@ def base_conditions(shield, treatment):
                 oxygen_mole_fraction=air['O2'] / (air['O2'] + air['N2']))
 
 
-def euv_sweep(shield, treatment, activity='quiet', glow=True, leaks=LEAKS):
-    """Rows of deposited heat, exobase and molecular loss against the leak fraction f."""
+def column_config(shield, treatment):
+    """The thermal column's configuration for one middle-atmosphere case."""
     base = base_conditions(shield, treatment)
-    cfg = ColumnConfig(surface_pressure_pa=base['surface_pressure_pa'],
-                       surface_temperature_k=base['surface_temperature_k'],
-                       lower_temperature_k=base['base_temperature_k'], lower_pressure_pa=BASE_PA,
-                       oxygen_mole_fraction=base['oxygen_mole_fraction'])
+    return ColumnConfig(surface_pressure_pa=base['surface_pressure_pa'],
+                        surface_temperature_k=base['surface_temperature_k'],
+                        lower_temperature_k=base['base_temperature_k'], lower_pressure_pa=BASE_PA,
+                        oxygen_mole_fraction=base['oxygen_mole_fraction'])
+
+
+def glow_heat(shield, treatment, activity):
+    """The sky's Lyman-alpha glow heat (W/m^2) for a case at an activity, at the column's base radius."""
+    cfg = column_config(shield, treatment)
+    return lyman_glow_heat(solve_column(0.0, cfg)[0]['lower_radius_R']) * ACTIVITY[activity]['glow']
+
+
+def euv_sweep(shield, treatment, activity='quiet', glow=True, leaks=LEAKS, protected_R=PROTECTED_R):
+    """Rows of the traced state, exobase and molecular loss against the UV transmission f through gaps."""
+    base = base_conditions(shield, treatment)
+    cfg = column_config(shield, treatment)
     act = ACTIVITY[activity]
-    film = escape.film_heat(act['uv'], act['xray']) if shield == 'titania_stack' else 0.0
-    unit = escape.leakage_heat(transmission=1.0, activity=act['uv'])
-    base_radius = solve_column(0.0, cfg)[0]['lower_radius_R']
-    glow_heat = lyman_glow_heat(base_radius) * act['glow'] if glow else 0.0
+    unit = escape.leakage_heat(transmission=1.0, activity=act['uv'], xray_activity=act['xray'])
+    glow_w = glow_heat(shield, treatment, activity) if glow else 0.0
+    grid, parts = traced.parts(traced.entries(f'{shield}_{treatment}'), traced.FILM, activity, glow_w, protected_R)
     flux = xuv_flux(activity)
+    # Where the air runs away inside the sweep, add the transmission at which it starts.
+    stable = [f for f in leaks if traced.first_state(grid, parts, f) is not None]
+    fs = list(leaks)
+    if stable and len(stable) < len(leaks):
+        lo, hi = max(stable), min(f for f in leaks if f not in stable)
+        for _ in range(40):
+            mid = math.sqrt(lo * hi)
+            lo, hi = (mid, hi) if traced.first_state(grid, parts, mid) is not None else (lo, mid)
+        fs = sorted(fs + [lo])
     rows, previous, in_domain = [], None, True
-    for f in leaks:
-        q = f * unit + film + glow_heat
+    for f in fs:
         row = dict(shield=shield, treatment=treatment, activity=activity, lyman_glow=glow,
-                   leak_fraction=f, base_temperature_k=round(base['base_temperature_k'], 2),
-                   deposited_heat_w_m2=q, leak_heat_w_m2=f * unit, film_heat_w_m2=film,
-                   glow_heat_w_m2=glow_heat)
+                   protected_radius_R=protected_R, leak_fraction=f,
+                   base_temperature_k=round(base['base_temperature_k'], 2), disk_count_heat_w_m2=f * unit)
         for eta in ETAS:
             for r_abs in ABSORPTION_RADII:
                 row[f'energy_limited_eta{eta:g}_R{r_abs:g}_kg_s'] = energy_limited_loss(f * flux, r_abs, eta)
+        q = traced.first_state(grid, parts, f)
+        if q is None:
+            row.update(status='runaway', note='the heat the swollen air takes outgrows the limb tables')
+            rows.append(row)
+            continue
+        share = traced.shares(grid, parts, f, q)
+        row.update(deposited_heat_w_m2=q, leak_heat_w_m2=share['gaps'], film_heat_w_m2=share['window'] + share['annulus'],
+                   glow_heat_w_m2=share['glow'], beyond_aperture_heat_w_m2=share['beyond_aperture'],
+                   beyond_share=share['beyond_share'])
         if in_domain:
             try:
                 summary, _, previous = solve_column(q, cfg, previous)
@@ -214,9 +250,12 @@ def euv_sweep(shield, treatment, activity='quiet', glow=True, leaks=LEAKS):
 
 
 def loss_estimate(row):
-    """The thermal column's loss where it holds; otherwise the central energy-limited bound (eta 0.1, 3 R)."""
+    """The thermal column's loss where it holds; none bounded where the air runs away; otherwise the central
+    energy-limited bound (eta 0.1, 3 R)."""
     if row['status'] == 'thermal_column':
         return row['molecular_loss_kg_s']
+    if row['status'] == 'runaway':
+        return math.inf
     return row['energy_limited_eta0.1_R3_kg_s']
 
 
@@ -310,23 +349,28 @@ def main(argv=None) -> int:
     product = dict(
         schema=SCHEMA,
         producer=dict(domain='atmosphere', files={p: _digest(ROOT / p) for p in (
-            'atmosphere/loss_response/model.py', 'atmosphere/thermal_column.py',
+            'atmosphere/loss_response/model.py', 'atmosphere/loss_response/traced.py', 'atmosphere/thermal_column.py',
             'atmosphere/middle_atmosphere/escape.py', 'atmosphere/loss_response/tides.py',
-            'atmosphere/loss_response/results/tidal_escape.json')}),
+            'atmosphere/loss_response/results/tidal_escape.json',
+            'atmosphere/middle_atmosphere/results/limb_heat.json')}),
         evidence=('Screening model. The ultraviolet branch is the molecular thermal column (no infrared cooling, '
-                  'no atomic oxygen) above middle-atmosphere base temperatures, with its Jeans escape raised by '
+                  'no atomic oxygen) above middle-atmosphere base temperatures, taking the heat the limb tracing '
+                  'finds along slant paths at the ring fleet\'s protected radius, with its Jeans escape raised by '
                   'the tidal multiplier of test molecules in the Earth-Moon three-body problem, and energy-limited '
                   'upper bounds beyond its domain; the solar-wind branch is a range from mass-loading and '
                   'sputtering scalings with assumed parameter ranges. Neither is a coupled aeronomy or plasma model.'),
         reading_rule=('Loss rates are global-mean kg/s for the finished 1.2 atm atmosphere. Use the thermal-column '
                       'loss where status is thermal_column (molecular_loss_kg_s includes Earth\'s tide; '
-                      'molecular_loss_two_body_kg_s leaves it out) and the energy-limited range beyond it. A budget row\'s '
-                      'allowed_leak_fraction is the largest fraction of sunlight below 175 nm the optical shield may '
-                      'let through while ultraviolet-driven loss plus the stated solar-wind loss stays within the budget. '
+                      'molecular_loss_two_body_kg_s leaves it out) and the energy-limited range beyond it; a runaway '
+                      'row is one whose air outgrows the limb tables. A budget row\'s allowed_leak_fraction is the '
+                      'largest UV transmission through gaps, the share of sunlight below 175 nm that passes over the '
+                      'whole aperture of the 4 lunar-radius protected region, while ultraviolet-driven loss plus the '
+                      'stated solar-wind loss stays within the budget. '
                       'It leaves out the sunlit exosphere\'s loss; exosphere_loss.json (schema '
-                      'terluna.atmosphere.exosphere-loss/1) gives the allowed transmissions with it.'),
+                      'terluna.atmosphere.exosphere-loss/2) gives the allowed transmissions with it.'),
         assumptions=dict(base_pressure_pa=BASE_PA, lyman_glow_rayleigh_quiet=GLOW_RAYLEIGH,
-                         activity=ACTIVITY, solar_wind=SOLAR_WIND, solar_wind_ranges=SW_RANGES,
+                         activity=ACTIVITY, xray_cycle=escape.xray_cycle(), protected_radius_R=PROTECTED_R,
+                         annulus_film=traced.FILM, solar_wind=SOLAR_WIND, solar_wind_ranges=SW_RANGES,
                          energy_limited_eta=ETAS, absorption_radii_R=ABSORPTION_RADII,
                          xuv_flux_below_121nm_w_m2={a: xuv_flux(a) for a in ACTIVITY},
                          lyman_glow_flux_w_m2=lyman_glow_flux()),

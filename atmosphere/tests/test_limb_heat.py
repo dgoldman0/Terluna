@@ -11,6 +11,7 @@ import unittest
 import numpy as np
 
 from shared.provenance import constants_changed
+from atmosphere.loss_response import traced
 from atmosphere.middle_atmosphere import fetch_limb_inputs
 from atmosphere.middle_atmosphere import limb_heat as lh
 
@@ -44,12 +45,13 @@ class ZoneTests(unittest.TestCase):
         self.assertAlmostEqual(float(zones['annulus'][np.argmin(abs(b - 2.5 * R))]), 1.)
         self.assertEqual(zones['outside'][-1], 1.)
 
-    def test_the_rays_cover_the_disk_and_the_aperture(self):
+    def test_the_rays_cover_the_disk_and_every_aperture_they_reach(self):
         b = lh.impact_parameters()
         areas = lh.ring_areas(b)
-        zones = lh.zone_weights(b)
         self.assertAlmostEqual(areas[:lh.DESIGN['disk_rays']].sum() / (math.pi * R**2), 1., places=12)
-        self.assertAlmostEqual((areas * zones['aperture']).sum() / (math.pi * lh.aperture_edge()**2), 1., places=3)
+        for x in (2, 2.5, 3, 4, 5, 6):
+            zones = lh.zone_weights(b, x)
+            self.assertAlmostEqual((areas * zones['aperture']).sum() / (math.pi * lh.aperture_edge(x)**2), 1., places=2)
 
 
 class DepositTests(unittest.TestCase):
@@ -93,16 +95,22 @@ class StateTests(unittest.TestCase):
                           gap_unit=np.ones(11))
 
     def test_the_state_is_the_first_heat_the_air_returns(self):
-        self.assertAlmostEqual(lh.first_state(self.q, self.parts, 0.), .4, places=9)
-        self.assertAlmostEqual(lh.first_state(self.q, self.parts, .1), .6, places=9)
+        self.assertAlmostEqual(traced.first_state(self.q, self.parts, 0.), .4, places=9)
+        self.assertAlmostEqual(traced.first_state(self.q, self.parts, .1), .6, places=9)
 
     def test_a_heat_that_outgrows_itself_runs_away(self):
         self.parts['window'] = .2 + 1.1 * self.q
-        self.assertIsNone(lh.first_state(self.q, self.parts, 0.))
+        self.assertIsNone(traced.first_state(self.q, self.parts, 0.))
 
     def test_the_allowed_transmission_inverts_the_state(self):
-        self.assertAlmostEqual(lh.allowed_traced(self.q, self.parts, .6), .1, places=6)
-        self.assertIsNone(lh.allowed_traced(self.q, self.parts, .3))
+        self.assertAlmostEqual(traced.allowed(self.q, self.parts, .6), .1, places=6)
+        self.assertIsNone(traced.allowed(self.q, self.parts, .3))
+
+    def test_the_share_from_beyond_the_aperture_is_read_at_the_state(self):
+        self.parts['beyond_aperture'] = .1 * self.q
+        state = traced.first_state(self.q, self.parts, 0.)
+        self.assertAlmostEqual(state, .2 / .4, places=9)
+        self.assertAlmostEqual(traced.shares(self.q, self.parts, 0., state)['beyond_share'], .1, places=9)
 
 
 @NEEDS_TABLES
@@ -143,7 +151,7 @@ class ProductTests(unittest.TestCase):
                 window = table['window']['disk'][activity]['above_base_W_m2']
                 self.assertAlmostEqual(window / counts['window_film_heat'][activity], 1., delta=.01)
                 # The escape model absorbs Lyman-alpha along a mean slant path; the rays find it within 10 per cent.
-                open_band = table['open_flat']['disk'][activity]['above_base_W_m2']
+                open_band = table['open']['disk'][activity]['above_base_W_m2']
                 self.assertAlmostEqual(open_band / counts['band_over_disk'][activity], 1., delta=.1)
 
     def test_every_zone_accounts_for_the_light_arriving(self):
@@ -159,8 +167,27 @@ class ProductTests(unittest.TestCase):
         counts = self.product['escape_count']
         for case in self.product['cases'].values():
             table = case['by_profile_heat'][0]['table']
-            ratio = table['open_flat']['aperture']['quiet']['thermosphere_W_m2'] / counts['band_over_disk']['quiet']
+            ratio = table['open']['aperture']['quiet']['thermosphere_W_m2'] / counts['band_over_disk']['quiet']
             self.assertGreater(ratio, 2.)
+
+    def test_the_compact_summaries_agree_with_the_detailed_table(self):
+        for case in self.product['cases'].values():
+            for entry in case['by_profile_heat']:
+                if 'table' not in entry:
+                    continue
+                for source, zones in entry['table'].items():
+                    for zone, rows in zones.items():
+                        for activity, row in rows.items():
+                            self.assertTrue(math.isclose(entry['radii']['4'][source][zone][activity],
+                                                         row['thermosphere_W_m2'], rel_tol=1e-9, abs_tol=1e-300))
+
+    def test_a_wider_aperture_never_lets_more_unfiltered_light_reach_the_thermosphere(self):
+        for case in self.product['cases'].values():
+            for entry in case['by_profile_heat']:
+                if 'radii' not in entry:
+                    continue
+                beyond = [entry['radii'][f'{x:g}']['open']['outside']['quiet'] for x in lh.DESIGN['summary_radii_R']]
+                self.assertTrue(all(b <= a * (1 + 1e-9) + 1e-30 for a, b in zip(beyond, beyond[1:])))
 
     def test_the_thicker_film_settles_cooler(self):
         for case in self.product['cases'].values():
@@ -171,31 +198,31 @@ class ProductTests(unittest.TestCase):
                     self.assertLess(thick['heat_W_m2'], thin['heat_W_m2'])
 
     def test_fism2_puts_the_films_x_rays_near_twenty_times_quiet_at_maximum(self):
-        for period in self.product['xray_cycle'].values():
+        sources = self.product['xray_cycle']['sources']
+        for period in ('fism2', *lh.MAXIMA):
             for film in ('window', 'annulus_2_um', 'annulus_4_um'):
-                self.assertTrue(10. < period['sources'][film] < 30., film)
-            self.assertTrue(3. < period['sources']['open'] < 7.)
+                self.assertTrue(10. < sources[period][film] < 30., (period, film))
+            self.assertTrue(3. < sources[period]['open'] < 8., period)
 
     def test_measured_x_rays_leave_the_4_um_film_well_under_the_glow(self):
         for name in ('titania_stack_collisional', 'titania_stack_lte', 'titania_stack_all_heats'):
-            for period in self.product['xray_cycle']:
-                row = self.product['cases'][name]['scenarios'][f'annulus_4_um_solar_maximum_fism2_{period}_gaps_0']
+            for activity in ('solar_maximum', *lh.MAXIMA):
+                row = self.product['cases'][name]['scenarios'][f'annulus_4_um_{activity}_gaps_0']
                 parts = row['traced']['parts_W_m2']
                 self.assertLess(parts['annulus'], .3 * parts['glow'])
 
     def test_tracing_cuts_the_gaps_allowed_to_a_quarter_or_a_third_in_the_cooler_cases(self):
         for name in ('titania_stack_collisional', 'titania_stack_lte'):
             for row in self.product['cases'][name]['budgets']:
-                if row['film'] != 'annulus_4_um':
+                if row['film'] != 'annulus_4_um' or row['activity'] not in ('quiet', 'solar_maximum'):
                     continue
-                traced = row['traced'] if row['activity'] == 'quiet' else row['traced_fism2']['cycle_25']
-                self.assertTrue(.2 < traced / row['o1_count'] < .4, (name, row['activity'], row['budget_kg_s']))
+                self.assertTrue(.2 < row['traced'] / row['disk_count'] < .4, (name, row['activity'], row['budget_kg_s']))
 
     def test_tracing_never_allows_more_transmission_than_the_count(self):
         for case in self.product['cases'].values():
             for row in case['budgets']:
-                if row.get('traced') and row.get('escape_rule'):
-                    self.assertLess(row['traced'], row['escape_rule'])
+                if row.get('traced') and row.get('disk_count'):
+                    self.assertLess(row['traced'], row['disk_count'])
 
 
 if __name__ == '__main__':

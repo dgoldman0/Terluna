@@ -57,7 +57,7 @@ or not met. The ledger product carries the evidence behind each.
 
 | Gate | Held screen, zoned | Ring fleet |
 |---|---|---|
-| UV transmission (O1, O8) | Open: a 0.1 µm titania film on silica stops the extreme and far ultraviolet from 3.5 g/m², but films of this kind pass solar X-rays: 3.7×10⁻⁵ of the sunlight below 175 nm at 5.8 g/m² and 1.0×10⁻⁵ at 10.2 g/m², against the window stack's 6.7×10⁻⁷. Traced along slant paths, the 4 µm film's X-rays add a tenth to a fifth of the sky glow's heat at solar maximum, and a gap heats the air 2.5–5 times O1's count (below); continuous area with no seams | Open: with every tile of a 589-tile patch propagated, no receiver ray through its interior goes uncovered in four orbits (below); the annulus film as for the held screen; a full fleet's coverage, handovers and edges are unchecked |
+| UV transmission (O1, O8) | Open: a 0.1 µm titania film on silica stops the extreme and far ultraviolet from 3.5 g/m², but films of this kind pass solar X-rays: 3.7×10⁻⁵ of the sunlight below 175 nm at 5.8 g/m² and 1.0×10⁻⁵ at 10.2 g/m², against the window stack's 6.7×10⁻⁷. Traced along slant paths, the 4 µm film's X-rays add a tenth to a fifth of the sky glow's heat at solar maximum, and a gap heats the air 2.5–5 times the disk count, which O1 now replaces with the traced heat (below); continuous area with no seams | Open: with every tile of a 589-tile patch propagated, no receiver ray through its interior goes uncovered in four orbits (below); the annulus film as for the held screen; a full fleet's coverage, handovers and edges are unchecked |
 | Protected radius (O2) | Met: the 7,454 km aperture covers four lunar radii with the finite Sun | Open: on a Sun-tracking eccentricity the sunward crossing radius holds within 800–4,100 km over a year. The planes shift the whole pattern about 1,600 km each way at 20,000 km, which 23% more rings cover; there the interior overlaps hold, while the edge strips recede by up to 1,600 km a year, beyond photon steering for the outermost rings. At 15,000 km the strips cross within weeks (below) |
 | Window spectrum (E2, O4) | Conditional on the 26 g/m² window and the dimmer's form | The same, on the rings that cross the window |
 | Earth's shadow and rejected light (O5, O7) | Open: the optical bound lets redirected light leave toward the Moon; the shadow on Earth is unmapped | Open: night-side tiles reflect back past the Moon, with light the screen has already filtered (to check); the shadow on Earth is unmapped |
@@ -627,8 +627,8 @@ exosphere step's losses are left out.
   (3×10⁻⁵) gives 2.2–3.2 kg/s there.
 - **The loss response's X-ray factors differ for gaps and films.** At solar
   maximum it multiplies a gap's X-rays by the ultraviolet's 2.5 and the titania
-  film's by 100. FISM2 gives 4–6 for the whole band below 10 nm, which sets a
-  gap's X-rays, and 13–24 for the films' bands.
+  film's by 100. FISM2 gives 4.6–6.9 for the whole band below 10 nm, which
+  sets a gap's X-rays, and 11–24 for the films' bands.
 - **Where the heat lies is the largest uncertainty left.** The traced light
   lands between the thermal column's 'low' and 'middle' heating shapes in
   depth. The losses above use 'middle', as the loss response does; with 'low'
@@ -648,16 +648,72 @@ from 10–15 to about 6 kg/s. On 7 October the author accepted the two
 recommendations that followed ([decisions.md](../../decisions.md)):
 1. O1 counts gaps by the traced heat per unit transmission in place of the disk
    count, because it is the heat the air takes. The loss response takes it from
-   `limb_heat.json`, and O1's levels and the design point are rederived; the
-   allowed transmissions fall to about a quarter to a third in the cooler
-   titania cases.
-2. The X-rays' solar-maximum factors are FISM2's measured ones (4–6 below
-   10 nm, 13–24 for the films' bands) in place of the escape model's 2.5 for the
+   `limb_heat.json`, and O1's levels and the design point were rederived on
+   7 October ([below](#the-rederived-design-point)); the allowed transmissions
+   fall to about a quarter to a third in the cooler titania cases.
+2. The X-rays' solar-maximum factors are FISM2's measured ones (4.6–6.9 for
+   the whole band below 10 nm, 11–24 for the films' bands) in place of the escape model's 2.5 for the
    band a filter passes and 100 for films. The atmosphere products that use the
-   convention are rerun with them.
+   convention were rerun with them on 7 October.
 
 Giving the thermal column the traced heating shape would settle the remaining
 spread.
+
+## The rederived design point
+
+The loss response, its absorption and exosphere steps and the design point now
+read the traced heat with FISM2's X-ray factors, at the ring fleet's protected
+radius of 4 lunar radii
+([requirements.md](../protection_architecture/requirements.md#retention),
+[the loss response](../../../atmosphere/loss_response/README.md)). The totals
+below are central estimates with Earth's tide, behind the titania stack at
+O1's standard level unless stated; cycle times are the atmosphere's mass over
+the loss.
+
+- **The swollen air can reach the shadow's edge.** As the upper air warms its
+  exobase rises, and once it reaches the shadow's edge the unfiltered sunlight
+  beyond the aperture heats it further and it runs away. With a 4-radius shadow
+  that happens above 147 kg/s with collisional upper air, 103 kg/s in LTE and
+  36 kg/s with all near-infrared heating (19–29 kg/s behind the 200-nm edge),
+  so a looser budget asks a wider shadow, and the heating alone needs the
+  shadow to reach just beyond the exobase. At the relaxed level (2.5×10⁻³) the
+  air runs away in ten of the twelve titania cases.
+- **At the standard level the cooler cases hold and the warmest does not.**
+  With the September magnets the total is 0.0001–0.08 kg/s with collisional
+  upper air and in LTE at quiet Sun (over a trillion years), 2.9–4.2 kg/s in
+  LTE at solar maximum (34 to 23 billion years), 2.8–3.3 kg/s with all
+  near-infrared heating at quiet Sun (35 to 30 billion years) and 129 kg/s with
+  it at solar maximum (0.8 billion years). In that last case
+  ultraviolet-driven escape gives 32 kg/s and the sunlit exosphere just outside
+  the shadow the rest, as ions the magnets do not keep and as neutral fragments,
+  which only a wider shadow removes; at 6 lunar radii the total falls to
+  64 kg/s (1.5 billion years). The tight level (3–4×10⁻⁵) brings
+  that last case to 19–23 kg/s (5.2 to 4.3 billion years). Behind the 200-nm
+  edge the standard level runs away in eight of twelve cases.
+- **The ring fleet's screen may shelter the Moon from part of the solar
+  wind.** The screen absorbs the wind that strikes it, and the wind closes in
+  behind an absorbing screen over about eight of its radii. The ring fleet's
+  screen, about 20,000 km out, lies under three screen radii from the Moon, so
+  its wake may still have an empty core there, about 2.6 lunar radii in radius
+  behind a 4-radius screen. Within it the wind's charge exchange with the
+  dense exosphere near the exobase falls away: without a magnetosphere the
+  coolest three cases lose 0.07–0.31 kg/s in place of 0.77–1.3 kg/s. Where the
+  exobase lies outside the core, with warmer upper air, the wake changes
+  little. The refill length is an assumption a plasma model has to test. The
+  held screen, 68,000–106,000 km out, lies too far for its wake to reach the
+  Moon.
+- **A weak dipole serves the cooler upper air, and no moment holds the warmer
+  to 1 kg/s.** The coolest case needs no magnetosphere for 1 kg/s from its
+  exosphere, and the next two need about 2×10¹⁹ A·m², a seventy-fifth of the
+  September moment. No moment up to 10²³ A·m² holds the warmer three to
+  1 kg/s, and the warmest at solar maximum cannot meet 1 kg/s at any shadow up
+  to 10 lunar radii. With the September magnets it meets 10 kg/s from
+  5 lunar radii if gaps pass under 2.6×10⁻⁵, and from 6 at the tight level.
+
+The [primary magnetic architecture comparison](magnetic_architecture.md) still
+reads the design point from before the traced count. Its rerun needs the
+closure trajectories in `research/runs/solar_shield_array/closure/`, which this
+machine lacks, and its pinned-input test fails until then.
 
 ## Next steps
 
@@ -666,9 +722,9 @@ The author set this order on 7 October:
 1. The X-ray question, in the atmosphere domain: where solar X-rays that pass
    a light annulus deposit their energy along slant paths above the limb. It
    tells whether the chosen 4 µm film suffices and how O1 should count
-   X-rays. Done on 7 October ([the X-ray check](#the-x-ray-check)). Its two
-   decisions call for the loss response, O1's levels and the design point to be
-   rederived.
+   X-rays. Done on 7 October ([the X-ray check](#the-x-ray-check)), and its two
+   decisions carried through the loss response, O1's levels and the design
+   point the same day ([the rederived design point](#the-rederived-design-point)).
 2. The outer rings: a radius profile that keeps each tilt turning with the
    Sun, with radius steps that grow toward the edges, flown for a year against
    steering by roll with the larger store.

@@ -40,25 +40,28 @@ with sources and status, and what each loss budget asks of it.
 
 ## Design point
 
-`python -m research.studies.protection_architecture.run` (about 4 minutes, with
+`python -m research.studies.protection_architecture.run` (about 7 minutes, with
 `OPENBLAS_NUM_THREADS=1`) takes the UV transmission a swarm can hold at three
 levels of design choices and evaluates the loss response and its absorption and
-exosphere steps there. The swarm holds 3–4×10⁻⁵ with tight choices, about
-2×10⁻⁴ with standard ones and 2.5×10⁻³ with relaxed ones, most of it from failed
-cells waiting to be covered. At the tight and standard levels the sky's
-Lyman-alpha glow supplies 76–98% of the upper air's heat. Behind the titania
-stack at the standard level the ultraviolet-driven loss is 7×10⁻⁷–2.5 kg/s with
-Earth's tide, and the sunlit exosphere just outside a shield sized for heating
-(1.9–3.1 lunar radii) loses more: the central total is 5.7–89 kg/s with no
-magnetosphere and 2.1–47 kg/s with the September magnets, cycle times of 1.1–17
-and 2.1–48 billion years. A shield reaching 4 lunar radii, with the September
-magnets, brings the total to 0.00004–0.2 kg/s in the four cooler upper-air cases
-(500 billion years or longer), about 1 kg/s with all near-infrared heating at
-quiet Sun (100 billion years) and 16–18 kg/s with it at solar maximum (about 6
-billion years). Without magnets the solar wind's charge exchange leaves
-0.7–1.7 kg/s in the cooler cases (60–140 billion years). Behind the 200-nm edge
-the total at 4 lunar radii with the magnets is 3.7–49 kg/s (27 to 2 billion
-years). The requirements hold the details.
+exosphere steps there, at the ring fleet's protected radius of 4 lunar radii and
+on the traced count the author adopted on 7 October. The swarm holds 3–4×10⁻⁵
+with tight choices, about 2×10⁻⁴ with standard ones and 2.5×10⁻³ with relaxed
+ones, most of it from failed cells waiting to be covered. Traced along its slant
+paths, light through gaps heats the upper air 2.5–5 times a count over the disk:
+at the tight level the sky's Lyman-alpha glow supplies 75–93% of the heat, at
+the standard level 49–70%, and at the relaxed level the air runs away in ten of
+the twelve titania cases. Behind the titania stack at the standard level the
+ultraviolet-driven loss is 4×10⁻⁶–32 kg/s with Earth's tide. With the September
+magnets the central total at 4 lunar radii is 0.0001–0.08 kg/s with
+collisional upper air and in LTE at quiet Sun (cycle times over a trillion
+years), 2.8–4.2 kg/s in LTE at solar maximum and with all near-infrared heating
+at quiet Sun (35 to 23 billion years), and 129 kg/s with that heating at solar
+maximum (0.8 billion years). Without magnets the solar wind's charge exchange
+leaves 0.77–1.3 kg/s in the coolest three cases (130 to 76 billion years); if
+the ring fleet's own wake holds the wind off the inner exosphere, a sensitivity,
+that falls to 0.07–0.31 kg/s. Behind the 200-nm edge the standard level runs
+away in eight of twelve cases at 4 lunar radii. The requirements hold the
+details.
 
 ## Working rules
 
@@ -75,7 +78,9 @@ reasons, stated.
 
 The [2026-10-05 primary magnetic comparison](../solar_shield_array/magnetic_architecture.md)
 now carries this study's stored atmospheric requirements into finite regional
-coil and upstream-source budgets. Larger regional paths merit development;
+coil and upstream-source budgets. It read the design point from before the
+traced count of 7 October, and its rerun waits on the closure trajectories it
+needs, which this machine lacks. Larger regional paths merit development;
 the quiet-wind lower-moment cases need a plasma/storm check before installation
 is sized. The four-radius optical footprint and magnetic requirement are kept
 separate. No loss budget or primary architecture has been selected.

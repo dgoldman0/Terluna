@@ -41,71 +41,101 @@ below 175 nm that may reach the protected region once the sunlit exosphere's
 losses (the ions it makes, the fragments of broken molecules and the solar
 wind's charge exchange, central estimate) are added to ultraviolet-driven
 escape. It depends on how far the protected region reaches and on whether a
-magnetosphere holds the solar wind off. For the titania stack, with the ranges
-spanning the three treatments of the upper air and quiet Sun to solar maximum,
-and counting the cases of those six that cannot meet the budget at any
-transmission:
+magnetosphere holds the solar wind off. The ultraviolet-driven escape is the
+traced count the author adopted on 7 October: the transmission passes gaps over
+the whole aperture of the protected radius, and its light, the films' X-rays
+(with FISM2's measured solar cycle) and the unfiltered light beyond the
+aperture follow their slant paths through air swollen by the heat it takes
+([the X-ray check](../solar_shield_array/integrated_comparison.md#the-x-ray-check)).
+For the titania stack, with the ranges spanning the three treatments of the
+upper air and quiet Sun to solar maximum, and counting the cases of those six
+that cannot meet the budget at any transmission:
 
 | Budget (cycle time) | Magnetosphere | Protected radius 3 lunar radii | 4 lunar radii | 6 lunar radii | 10 lunar radii |
 |---|---|---|---|---|---|
-| 1 kg/s (100 billion years) | none | 0.025–0.14% (4 cannot) | 0.0008–0.17% (3 cannot) | 0.003–0.17% (3 cannot) | 0.003–0.17% (3 cannot) |
-| | September magnets | 0.016–0.33% (2 cannot) | 0.017–0.39% (1 cannot) | 0.057–0.43% (1 cannot) | 0.002–0.45% |
-| 10 kg/s (10 billion years) | none | 0.006–0.41% (1 cannot) | 0.074–0.49% (1 cannot) | 0.015–0.54% | 0.035–0.57% |
-| | September magnets | 0.055–0.48% (1 cannot) | 0.007–0.55% | 0.031–0.60% | 0.047–0.64% |
-| 100 kg/s (1 billion years) | none | 0.004–0.58% | 0.057–0.82% | 0.10–0.89% | 0.15–0.94% |
-| | September magnets | 0.004–0.58% | 0.077–0.88% | 0.12–0.93% | 0.16–0.96% |
+| 1 kg/s (100 billion years) | none | 0.007–0.052% (4 cannot) | 0.011–0.057% (4 cannot) | 0.0005–0.059% (3 cannot) | 0.0006–0.060% (3 cannot) |
+| | none, the ring fleet's wake | 0.012–0.065% (3 cannot) | 0.006–0.11% (2 cannot) | 0.013–0.13% (1 cannot) | 0.023–0.13% (1 cannot) |
+| | September magnets | 0.003–0.11% (2 cannot) | 0.005–0.13% (1 cannot) | 0.018–0.14% (1 cannot) | 0.023–0.15% (1 cannot) |
+| 10 kg/s (10 billion years) | none | 0.0015–0.14% (1 cannot) | 0.022–0.14% (1 cannot) | 0.0012–0.15% | 0.006–0.16% |
+| | none, the ring fleet's wake | 0.002–0.14% (1 cannot) | 0.023–0.15% (1 cannot) | 0.003–0.17% | 0.009–0.18% |
+| | September magnets | 0.017–0.15% (1 cannot) | 0.027–0.17% (1 cannot) | 0.005–0.18% | 0.009–0.18% |
+| 100 kg/s (1 billion years) | none | 0.024–0.15% (1 cannot) | 0.012–0.22% | 0.022–0.25% | 0.032–0.26% |
+| | none, the ring fleet's wake | 0.024–0.15% (1 cannot) | 0.012–0.22% | 0.022–0.25% | 0.034–0.27% |
+| | September magnets | 0.024–0.15% (1 cannot) | 0.016–0.23% | 0.025–0.26% | 0.034–0.27% |
 
-Solar maximum with the warmest upper air is the binding case: its exobase sits
-near three lunar radii even with a perfect shield, and it meets 1 kg/s only with
-the September magnets and a protected radius of 10 lunar radii. Without a
-magnetosphere the solar wind's charge exchange keeps three or four of the six
-cases above 1 kg/s at any radius. The ozone-forming edge makes every budget
-harder: without a magnetosphere it cannot meet 1 kg/s, and with the September
-magnets two of six cases do, from 6 lunar radii; 10 kg/s needs the magnets and
-6–8 lunar radii for most cases, and 100 kg/s holds from 4–5 lunar radii.
-Without the optical shield the loss is 300–80,000 kg/s.
+Solar maximum with the warmest upper air is the binding case: it cannot meet
+1 kg/s at any protected radius up to 10 lunar radii, even with the September
+magnets, and it meets 10 kg/s from 5 lunar radii with them and 6 without.
+Without a magnetosphere the solar wind's charge exchange keeps three or four of
+the six cases above 1 kg/s at any radius. The ring fleet's screen, about
+20,000 km out, may leave the Moon in its unrefilled wake; if the wind is absent
+within that wake's core (2.6 lunar radii behind a 4-radius screen, a
+sensitivity resting on an assumed refill length), one to three cases are left.
+The ozone-forming edge makes every budget harder: without a magnetosphere it
+cannot meet 1 kg/s at any radius, and with the September magnets two of six
+cases do, from 8 lunar radii; 10 kg/s holds for most cases only from 10 lunar
+radii, and 100 kg/s from 6. Without the optical shield the loss is
+300–80,000 kg/s.
 
-The protected radius has to reach beyond the exobase. At the transmissions
-ultraviolet-driven escape alone would allow (0.004–0.97% for the titania stack),
-where that escape already fills the budget, a shadow sized only for the
-thermosphere's heating, just under the exobase, leaves a sunlit exosphere that
-adds 25–303 kg/s with no magnetosphere and 11–193 kg/s with the September
-magnets; most of that comes from its first few scale heights above the exobase.
-Earth's tide is included throughout and multiplies molecular escape by 1.8–2.6.
+The protected radius has to reach beyond the exobase. With its edge inside the
+exobase, unfiltered sunlight beyond the aperture heats the thermosphere along
+slant paths, and the air swells into that light until it runs away; the heating
+alone needs the shadow to reach just beyond the exobase, to 2.75–4 lunar radii
+at the transmissions ultraviolet-driven escape alone allows (0.010–0.25% for
+the titania stack with a 4-radius shadow). At those transmissions, where that
+escape already fills the budget, the sunlit exosphere outside the ring fleet's
+4-radius shadow adds 5–273 kg/s with no magnetosphere and 1.7–168 kg/s with the
+September magnets; most of that comes from its first few scale heights above
+the exobase. With a 4-radius shadow the air runs away above 147 kg/s with
+collisional upper air, 103 kg/s in LTE and 36 kg/s with all near-infrared
+heating (19–29 kg/s behind the 200-nm edge), its exobase then at the shadow's
+edge, so a looser budget asks a wider shadow. Earth's tide is included
+throughout and multiplies molecular escape by 1.8–2.6.
 
 **The design point.** A formation of replaceable cells can hold a UV
 transmission of 3–4×10⁻⁵ with tight design choices, about 2×10⁻⁴ with standard
 ones and 2.5×10⁻³ with relaxed ones
 ([protection/transmission](../../../protection/transmission/README.md)); covering
-failed cells quickly is the main lever (O8). The sky's Lyman-alpha glow heats
-the upper air as much as a transmission of about 10⁻³, so at the tight and
-standard levels it supplies 76–98% of the heat and the transmission barely
-moves the loss. Behind the titania stack at the standard level the
-ultraviolet-driven loss, with Earth's tide, is 7×10⁻⁷–2.5 kg/s, and the exobase
-sits at 1.9–3.2 lunar radii (179–267 K). With the protected radius covering only
-the heating (1.9–3.1 lunar radii), the sunlit exosphere beyond it raises the
-central total to 5.7–89 kg/s with no magnetosphere and 2.1–47 kg/s with the
-September magnets, cycle times of 1.1–17 and 2.1–48 billion years. With the
-protected radius at 4 lunar radii and the September magnets the central total
-falls to 0.00004–0.2 kg/s in the four cooler cases (cycle times of 500 billion
-years or longer), about 1 kg/s with all near-infrared heating at quiet Sun (100
-billion years) and 16–18 kg/s with it at solar maximum (about 6 billion years).
-Without a magnetosphere the same radius leaves 0.7–1.7 kg/s in the cooler cases
-(60–140 billion years). Behind the 200-nm edge the central total at 4 lunar
-radii with the September magnets is 3.7–49 kg/s (27 to 2 billion years), where
-that radius covers the heating
-([results/design_point.json](results/design_point.json), from
-[run.py](run.py)). These figures count a gap's light over the disk; traced
-along its slant paths it heats the air 2.5–5 times as much (O1). The author
-adopted the traced count and FISM2's X-ray factors on 7 October, and these
-figures are to be rederived with them.
+failed cells quickly is the main lever (O8). Traced along its slant paths, light
+through gaps heats the upper air 2.5–5 times what a count over the disk gives
+it, and the sky's Lyman-alpha glow heats it as much as a transmission of about
+5×10⁻⁴: at the tight level the glow supplies 75–93% of the heat, at the
+standard level 49–70%. These are the figures at the ring fleet's protected
+radius of 4 lunar radii, rederived on 7 October with the traced count and
+FISM2's X-ray cycle ([results/design_point.json](results/design_point.json),
+from [run.py](run.py)).
+
+At the relaxed level the air runs away in ten of the twelve titania cases, its
+exobase reaching the shadow's edge. At the standard level behind the titania
+stack the ultraviolet-driven loss, with Earth's tide, is 4×10⁻⁶–32 kg/s, with
+the exobase at 1.95–3.8 lunar radii (187–301 K), and the heating needs a shadow
+reaching 2.0–4.0 lunar radii; with all near-infrared heating at solar maximum
+and holes four times the particle size the air runs away at 4 and needs 5. With the September
+magnets the central total at 4 lunar radii is 0.0001–0.08 kg/s with
+collisional upper air and in LTE at quiet Sun (cycle times over a trillion
+years), 2.9–4.2 kg/s in LTE at solar maximum (34 to 23 billion years), 2.8–3.3
+kg/s with all near-infrared heating at quiet Sun (35 to 30 billion years) and
+129 kg/s with it at solar maximum (0.8 billion years). Without a magnetosphere
+the same radius leaves 0.77–1.3 kg/s in the coolest three cases (130 to 76
+billion years), 6.8–9.0 kg/s in the next two (14 to 11 billion years) and
+193 kg/s in the warmest (0.5 billion years). If the ring fleet's wake holds the wind off its
+2.6-radius core, the coolest three lose 0.07–0.31 kg/s without a magnetosphere
+(1.4 trillion to 320 billion years); where the exobase lies outside that core
+the wake changes little. At the tight level the central totals with the
+September magnets are 3×10⁻⁵–0.2 kg/s in the four cooler cases (490 billion
+years or longer), 0.84–0.92 kg/s
+with all near-infrared heating at quiet Sun (117 to 107 billion years) and
+19–23 kg/s with it at solar maximum (5.2 to 4.3 billion years). Behind the
+200-nm edge the standard level runs away in eight of twelve cases at 4 lunar
+radii, and the rest lose 12–15 kg/s with the September magnets (8 to 6.5 billion
+years).
 
 ## Optical shield
 
 | ID | Requirement | Source | Status |
 |---|---|---|---|
-| O1 | The UV transmission, the share of sunlight below 175 nm that reaches the protected region, averaged over time and over that region, stays within the allowed fraction for R1. Gaps, pinholes, edges, off-normal light and outages all count | loss response with its exosphere step; [protection/transmission](../../../protection/transmission/README.md) | Derived. A swarm can hold 3×10⁻⁵–2×10⁻⁴ (O8). With a protected radius of 4 lunar radii and the September magnets the standard level meets 1 kg/s in the four cooler titania cases and sits at about 1 kg/s with all near-infrared heating at quiet Sun. With that heating at solar maximum the standard level meets 10 kg/s from about 6 lunar radii, and 1 kg/s would take 10 lunar radii and 2×10⁻⁵, below even the tight level. Below about 10⁻³ the sky's glow heats the upper air more than the transmission does. These levels count a gap's light over the disk. Traced along its slant paths above the limb ([limb heat](../../../atmosphere/middle_atmosphere/README.md#slant-paths-above-the-limb-2026-10-07), 7 October) it heats the air 2.5–5 times as much, the glow's crossover falls to about 5×10⁻⁴, and at the standard level and solar maximum the molecular loss alone is 30–36 kg/s with all near-infrared heating while the cooler titania cases stay under 1 kg/s ([the X-ray check](../solar_shield_array/integrated_comparison.md#the-x-ray-check)). On 7 October the author decided that O1 counts gaps by the traced heat and that the X-rays take FISM2's measured solar-cycle factors ([decisions.md](../../decisions.md)); the levels above are to be rederived with both |
-| O2 | The protected radius covers the thermosphere's heating, which takes it to just under the exobase, and reaches far enough beyond the exobase that the sunlit exosphere's losses stay within their share of R1. At the design point, with the September magnets, the exosphere's central loss falls to 1 kg/s at 2.0–3.1 lunar radii in the four cooler cases, 3.9 with all near-infrared heating at quiet Sun and 8.5–8.7 at solar maximum; to 0.1 kg/s at 2.2–4.6, 7.0–7.1 and 11 lunar radii. At 78,000 km apertures of 4, 6 and 10 lunar radii have 1.7, 3.7 and 10 times the September design's area | [atmosphere/loss_response](../../../atmosphere/loss_response/README.md), absorption and exosphere steps; [protection/report.md](../../../protection/report.md), section 2 | Derived |
+| O1 | The UV transmission, the share of sunlight below 175 nm that reaches the protected region, averaged over time and over that region, stays within the allowed fraction for R1. Gaps, pinholes, edges, off-normal light and outages all count | loss response with its exosphere step; [protection/transmission](../../../protection/transmission/README.md) | Derived on the traced count, which the author adopted on 7 October with FISM2's measured X-ray cycle ([decisions.md](../../decisions.md); [the X-ray check](../solar_shield_array/integrated_comparison.md#the-x-ray-check)): light through gaps over the whole aperture follows its slant paths and heats the air 2.5–5 times a count over the disk. A swarm can hold 3×10⁻⁵–2×10⁻⁴ (O8). With the ring fleet's 4-radius shadow and the September magnets the standard level meets 1 kg/s with collisional upper air and in LTE at quiet Sun, gives 2.9–4.2 kg/s in LTE at solar maximum and 2.8–3.3 kg/s with all near-infrared heating at quiet Sun, and 129 kg/s or a runaway with that heating at solar maximum, where even 6 lunar radii leave 64–77 kg/s. The tight level meets 1 kg/s in every case but that one (19–23 kg/s). Below about 5×10⁻⁴ the sky's glow heats the upper air more than the transmission does |
+| O2 | The protected radius covers the thermosphere's heating, which takes it just beyond the exobase (with its edge inside the exobase the unfiltered light beyond the aperture runs the air away), and reaches far enough beyond the exobase that the sunlit exosphere's losses stay within their share of R1. At the design point's standard level, with the September magnets, the exosphere's central loss falls to 1 kg/s at 2.1–2.7 lunar radii in the three coolest cases, 4.9–5.3 in LTE at solar maximum and with all near-infrared heating at quiet Sun, and 11 with that heating at solar maximum; to 0.1 kg/s at 2.3–3.5 and 9.0–9.4 lunar radii, and beyond 11.5 in the warmest. At 20,000 km apertures of 6 and 10 lunar radii have 2.2 and 6.2 times the ring fleet's 4-radius area | [atmosphere/loss_response](../../../atmosphere/loss_response/README.md), absorption and exosphere steps; [protection/report.md](../../../protection/report.md), section 2 | Derived |
 | O3 | The ultraviolet cut-off: the titania stack (no ozone, surface UV index 0.1) or an ozone-forming edge near 200 nm | [atmosphere/middle_atmosphere](../../../atmosphere/middle_atmosphere/README.md) | Open: the author's choice |
 | O4 | The window passes the climate's sunlight (E2), evenly unless a pattern is chosen and run through the climate model. At 78,000 km an even cut needs the dimmer to reach 2,100 km from the axis, or 2,400 km to include the twilight band | E2; this study | Derived |
 | O5 | Light the shield rejects never reaches Earth's night side: specular reflections are steered at least about 5° off the plane in which Earth moves as seen from the shield, and Sun-facing surfaces keep diffuse reflectance near 0.1% | this study | Derived; to confirm in illumination |
@@ -117,7 +147,7 @@ figures are to be rederived with them.
 
 | ID | Requirement | Source | Status |
 |---|---|---|---|
-| C1 | Solar-wind loss stays within its share of R1 | loss response, with its absorption and exosphere steps | Derived from screening, to confirm with a plasma model. Without a magnetosphere the solar wind carries off the ions the sunlit exosphere makes, and its charge exchange with the dense exosphere near the exobase adds 0.7–3 kg/s (central) at the design point that no optical shadow removes, so 1 kg/s needs charged-particle protection. A lunar dipole whose stand-off clears the dense exosphere removes the charge exchange and keeps a quarter to three quarters of the ions it encloses: about 3×10¹⁹ A·m² does it for the design point's cooler upper air, and the September magnets (1.5×10²¹ A·m², stand-off 10 lunar radii) with margin. Stand-offs just above the exobase fall where simulations find a weak field can raise escape. Magnets do not hold the neutral fragments, which set the protected radius (O2) |
+| C1 | Solar-wind loss stays within its share of R1 | loss response, with its absorption and exosphere steps | Derived from screening, to confirm with a plasma model. Without a magnetosphere the solar wind carries off the ions the sunlit exosphere makes, and its charge exchange with the dense exosphere near the exobase costs 0.7–6 kg/s (central) at the design point's standard level, so 1 kg/s needs charged-particle protection. The ring fleet's screen may hold the wind off the inner exosphere in its unrefilled wake: as a sensitivity, the three coolest cases then lose 0.07–0.31 kg/s with no magnetosphere, a plasma question still to test. A lunar dipole whose stand-off clears the dense exosphere removes the charge exchange and keeps a quarter to two fifths of the ions it encloses at these exobases: at the standard level the coolest case loses under 1 kg/s without one, the next two need about 2×10¹⁹ A·m² (a stand-off of 2.3 lunar radii, just above their exobase), and no moment up to 10²³ A·m² holds the warmer three to 1 kg/s, where the September magnets (1.5×10²¹ A·m², stand-off 10 lunar radii) leave 2.8–129 kg/s in all. Stand-offs just above the exobase fall where simulations find a weak field can raise escape. Magnets do not hold the neutral fragments, which set the protected radius (O2) |
 | C2 | If needed, it grows in stages with the atmosphere: seed stations with local cavities, then more nodes whose cavities merge into a protected volume | the 2025 Lunashield staging, known from a 2026-09-26 reconstruction | Concept |
 | C3 | No superconducting planetary ring | decisions.md (Sep 4) | Fixed |
 

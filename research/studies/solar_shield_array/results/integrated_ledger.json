@@ -29,7 +29,7 @@
    "results/attitude_schemes.json": "485cb1ca84437b320cfb2e2555a70d961ab271ebbc1d028cea9641861d839ac8",
    "results/plane_motion.json": "a601f5be57d38950327199dc2039947add5febb0f50ebe2685f7d11f7010718f",
    "results/bundle_validation.json": "571aa1ad0c36c0474f160b6bce7fdebfc0e3a21ebf4d48e4517871afc817eade",
-   "protection/spectra/annulus_film.json": "d79e937a2e839352ab093666fff88cbee3d448a2df16025ada933d3cbbd7be24"
+   "protection/spectra/annulus_film.json": "328f6698a2f021cf81e55e1c4b7b2a3e64280f3b6d9ec8fac67f4d8008eba630"
   }
  },
  "evidence": "Arithmetic on the named products and on stated requirements and assumptions; no new dynamics. The ring fleet's inventory is an estimate from the bundle's height step, pitch and the covering radius at the ring radius, before any oversizing for the strip pattern's annual motion.",
@@ -564,7 +564,7 @@
     },
     "upper_air_heat_W_m2": {
      "quiet": 6.82998764680589e-08,
-     "maximum": 6.826251944760456e-06
+     "maximum": 1.0941281097531286e-06
     },
     "visible_transmission": 0.9864413795720565,
     "pressure_coefficient": 0.1369572770408061,
@@ -582,7 +582,7 @@
     },
     "upper_air_heat_W_m2": {
      "quiet": 1.8577228004452996e-08,
-     "maximum": 1.8539705838238072e-06
+     "maximum": 3.2795814853941974e-07
     },
     "visible_transmission": 0.9866826327428855,
     "pressure_coefficient": 0.13866968089943432,
@@ -599,17 +599,17 @@
    },
    "upper_air_heat_W_m2": {
     "quiet": 1.2232073566747498e-09,
-    "maximum": 1.2232073566747498e-07
+    "maximum": 2.434542916272941e-08
    }
   },
   "gap_heat_W_m2": {
    "3e-05": {
     "quiet": 5.0253147129287394e-08,
-    "maximum": 1.256328678232185e-07
+    "maximum": 1.273641274449102e-07
    },
    "0.0002": {
     "quiet": 3.35020980861916e-07,
-    "maximum": 8.375524521547899e-07
+    "maximum": 8.490941829660682e-07
    }
   },
   "lightest_euv_fuv": 3.5331880967891722
@@ -1188,7 +1188,7 @@
    "gate": "UV transmission (O1, O8)",
    "held_zoned": {
     "state": "open",
-    "evidence": "A tenth of a micrometre of titania with the stack's coating layers stops every wavelength from 10 to 175 nm below 1e-6 from 3.5 g/m2, but light films pass solar X-rays: on 2 um of silica (5.8 g/m2, the 5 g/m2 annulus's class) the film passes 3.7e-05 of the sunlight below 175 nm, on 4 um 1.0e-05, against 6.7e-07 for the window stack and 3e-5 for O1's tight swarm level. Counting every transmitted X-ray as heating the upper air, the thinner film adds 6.8e-06 W/m2 at solar maximum, against 8.4e-07 W/m2 for gaps at the standard level; slant paths above the limb and X-ray depths are the atmosphere domain's to settle. Continuous area; no panel seams or packing."
+    "evidence": "A tenth of a micrometre of titania with the stack's coating layers stops every wavelength from 10 to 175 nm below 1e-6 from 3.5 g/m2, but light films pass solar X-rays: on 2 um of silica (5.8 g/m2, the 5 g/m2 annulus's class) the film passes 3.7e-05 of the sunlight below 175 nm, on 4 um 1.0e-05, against 6.7e-07 for the window stack and 3e-5 for O1's tight swarm level. Counting every transmitted X-ray as heating the upper air, the thinner film adds 1.1e-06 W/m2 at solar maximum, against 8.5e-07 W/m2 for gaps at the standard level; slant paths above the limb and X-ray depths are the atmosphere domain's to settle. Continuous area; no panel seams or packing."
    },
    "ring_fleet": {
     "state": "open",

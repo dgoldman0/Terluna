@@ -48,8 +48,9 @@ class ProductTests(unittest.TestCase):
 
     def test_product_is_current_with_its_code(self):
         self.assertEqual(self.product['schema'], af.SCHEMA)
+        from atmosphere.middle_atmosphere import escape
         paths = {'annulus_film.py': af.HERE / 'annulus_film.py', 'short_wave.py': af.HERE / 'short_wave.py',
-                 'model.py': af.PROTECTION / 'model.py'}
+                 'model.py': af.PROTECTION / 'model.py', 'escape.py': Path(escape.__file__)}
         for name, path in paths.items():
             self.assertEqual(self.product['producer']['files'][name],
                              hashlib.sha256(path.read_bytes()).hexdigest()[:16], name)

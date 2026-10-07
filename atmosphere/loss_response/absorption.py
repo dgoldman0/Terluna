@@ -20,11 +20,16 @@ with 2e-21 m^2 per molecule (N2, O2 and O photoabsorption is 1-3e-21 m^2 over
 30-100 nm); Lyman-alpha with O2's 1e-24 m^2; and the Schumann-Runge continuum,
 122.5-175 nm, with 3e-22 m^2 per O2 molecule, a flux-weighted middle of a
 cross-section that falls from about 1.5e-21 m^2 at 140 nm to 1e-23 m^2 at
-175 nm; the last two act on O2, 17.5% of the air. The protected radius is the
-smallest R at which f_limb is a tenth of the allowed leak (half is also
-reported); a caller may hold it to shares of another reference, such as the
-whole heating expressed as an equivalent transmission. The aperture adds the Sun's angular radius times the shield's
-distance (78,000 km in the September design).
+175 nm; the last two act on O2, 17.5% of the air. This band-mean curve is
+kept as a cross-check of the middle atmosphere's limb tracing, which follows
+the whole spectrum ray by ray and finds the same heating within 5% on rays
+tangent between the base and the exobase. Since 2026-10-07 the protected radius
+that covers the heating comes from that tracing (traced.heating_radius): the
+smallest radius at which unfiltered light beyond the aperture gives at most a
+tenth of the heat of the state the air settles to (half is also reported), the
+state itself traced with the UV transmission over that radius's aperture. The
+aperture adds the Sun's angular radius times the shield's distance, 20,000 km
+for the ring fleet.
 
 Ionization of the exosphere. Above the exobase the air is collisionless, and
 its density is Chamberlain's exosphere with the column's exobase density,
@@ -61,32 +66,37 @@ import numpy as np
 from scipy.special import gamma, gammainc
 
 from shared.constants import AVOGADRO, BOLTZMANN, MOON_GM, MOON_RADIUS
-from atmosphere.thermal_column import ColumnConfig, solve_column
+from atmosphere.thermal_column import solve_column
 from atmosphere.middle_atmosphere import escape
 from atmosphere.loss_response import model as lr
+from atmosphere.loss_response import traced
 
 HERE = Path(__file__).resolve().parent
-SCHEMA = 'terluna.atmosphere.absorption-radius/1'
+SCHEMA = 'terluna.atmosphere.absorption-radius/2'
 AIR_KG = 0.0289 / AVOGADRO
 O2_SHARE = 0.175
 HILL_R = 61500e3 / MOON_RADIUS      # the Moon's Hill radius in the Earth's field, lunar radii
 SHARES = (0.1, 0.5)
 SUN_ANGULAR_RADIUS = 695700.0 / 149597870.7
 SEPTEMBER = dict(distance_km=78000.0, protected_radius_R=3.0)
+RING_FLEET = dict(distance_km=20000.0, protected_radius_R=4.0)       # decisions.md, 2026-10-07
 CROSS_SECTIONS_M2 = dict(xuv=2e-21, lyman_alpha=1e-24 * O2_SHARE, schumann_runge=3e-22 * O2_SHARE)
 IONIZATION_CROSS_SECTION_M2 = 2e-21
 IONIZING_NM = 80.0
 OUTER = dict(third_hill=HILL_R / 3, half_hill=HILL_R / 2, hill=HILL_R)
 REPORT_RADII = (3.0, 4.0, 5.0, 6.0, 8.0, 10.0, 12.0)
-EVIDENCE = ('Ultraviolet deposited in the collisional upper air along rays outside the protected radius, through '
-            "the thermal-column profile at each budget's allowed leak, with band-averaged cross-sections; and the "
-            'photoionization of the ballistic part of a two-body Chamberlain exosphere outside the shadow cylinder. '
+EVIDENCE = ('The protected radius that covers the heating from the middle atmosphere\'s limb tracing at each budget\'s '
+            'allowed UV transmission, with the band-averaged limb curve of the thermal-column profile as a '
+            'cross-check; and the photoionization of the ballistic part of a two-body Chamberlain exosphere outside '
+            'the shadow cylinder. '
             'The ion production bounds the pickup loss from above: the plasma interaction that decides how many ions '
             "escape is not modelled, and Earth's tides are not included.")
-READING_RULE = ('heating["0.1"].radius_R is the protected radius (lunar radii) at which ultraviolet deposited in the '
-                'thermosphere outside the shadow equals a tenth of the allowed leak. Its aperture adds the Sun\'s angular '
-                'radius times the shield distance; area_over_september compares it with the September aperture (3 R at '
-                '78,000 km). exosphere_ion_production_kg_s gives the ions produced outside shadows of several radii, '
+READING_RULE = ('heating["0.1"].radius_R is the smallest protected radius (lunar radii) at which unfiltered light beyond '
+                'the aperture gives at most a tenth of the heat of the traced state at the allowed UV transmission; '
+                'null where no radius up to 10 does. Its aperture adds the Sun\'s angular radius times the ring fleet\'s '
+                'distance; area_over_ring_fleet compares it with the ring fleet\'s aperture (4 R at 20,000 km). The '
+                'state, exobase and loss are at the ring fleet\'s 4 R. exosphere_ion_production_kg_s gives the ions '
+                'produced outside shadows of several radii, '
                 'counted to a third, half or all of the Hill radius, as an upper bound on pickup loss to set beside '
                 'the budget; the share that escapes awaits a plasma model.')
 
@@ -186,35 +196,40 @@ def smallest_radius(radii, values, target):
     return float(radii[i - 1] + (target - values[i - 1]) * (radii[i] - radii[i - 1]) / (values[i] - values[i - 1]))
 
 
-def aperture(radius_R, distance_km=SEPTEMBER['distance_km']):
+def aperture(radius_R, distance_km=RING_FLEET['distance_km']):
     r = radius_R * MOON_RADIUS / 1000 + SUN_ANGULAR_RADIUS * distance_km
-    september = SEPTEMBER['protected_radius_R'] * MOON_RADIUS / 1000 + SUN_ANGULAR_RADIUS * distance_km
-    return dict(aperture_radius_km=r, area_over_september=(r / september) ** 2)
+    design = RING_FLEET['protected_radius_R'] * MOON_RADIUS / 1000 + SUN_ANGULAR_RADIUS * distance_km
+    return dict(aperture_radius_km=r, area_over_ring_fleet=(r / design) ** 2)
 
 
-def column(shield, treatment, activity, leak):
-    """The thermal column at a UV transmission: its summary, its profile and the heat deposited above the base (W/m^2)."""
-    base = lr.base_conditions(shield, treatment)
-    cfg = ColumnConfig(surface_pressure_pa=base['surface_pressure_pa'],
-                       surface_temperature_k=base['surface_temperature_k'],
-                       lower_temperature_k=base['base_temperature_k'], lower_pressure_pa=lr.BASE_PA,
-                       oxygen_mole_fraction=base['oxygen_mole_fraction'])
-    act = lr.ACTIVITY[activity]
-    film = escape.film_heat(act['uv'], act['xray']) if shield == 'titania_stack' else 0.0
-    base_radius = solve_column(0.0, cfg)[0]['lower_radius_R']
-    q = leak * escape.leakage_heat(transmission=1.0, activity=act['uv']) + film + lr.lyman_glow_heat(base_radius) * act['glow']
-    summary, profile, _ = solve_column(q, cfg)
+def column(shield, treatment, activity, leak, protected_R=None):
+    """The thermal column at a UV transmission through gaps: its summary, its profile and the traced heat deposited
+    above the base (W/m^2), at a protected radius (default the ring fleet's). Raises ValueError where the air runs
+    away."""
+    protected_R = lr.PROTECTED_R if protected_R is None else protected_R
+    grid, parts = traced.parts(traced.entries(f'{shield}_{treatment}'), traced.FILM, activity,
+                               lr.glow_heat(shield, treatment, activity), protected_R)
+    q = traced.first_state(grid, parts, leak)
+    if q is None:
+        raise ValueError(f'the air runs away at a transmission of {leak:g} with {protected_R:g} lunar radii')
+    summary, profile, _ = solve_column(q, lr.column_config(shield, treatment))
     return summary, profile, q
 
 
-def case(shield, treatment, activity, leak, budget, weights, reference=None):
-    """One column at the given leak. The limb deposit is held to shares of reference (default: the leak)."""
+def heating_radius(shield, treatment, activity, leak, share=traced.HEATING_SHARE):
+    """The smallest protected radius at which light beyond the aperture gives at most `share` of the heat."""
+    return traced.heating_radius(traced.entries(f'{shield}_{treatment}'), traced.FILM, activity,
+                                 lr.glow_heat(shield, treatment, activity), leak, share)
+
+
+def case(shield, treatment, activity, leak, budget, weights):
+    """One column at the given UV transmission, at the ring fleet's protected radius; the protected radius that
+    covers the heating, for each share, from the traced state at each tabulated radius."""
     summary, profile, q = column(shield, treatment, activity, leak)
     b, heat, tau1 = limb_heating_curve(profile, weights)
     heating = {}
-    ref = leak if reference is None else reference
     for share in SHARES:
-        r = smallest_radius(b, heat, share * ref)
+        r = heating_radius(shield, treatment, activity, leak, share)
         heating[f'{share:g}'] = dict(radius_R=r, aperture=aperture(r) if r is not None else None)
     r_heat = heating[f'{SHARES[0]:g}']['radius_R']
     grid = np.linspace(1.5, 30.0, 115)
@@ -250,14 +265,16 @@ def main(argv=None) -> int:
         heat = row['heating']['0.1']
         print(f"{row['shield']:13s} {row['treatment']:11s} {row['activity']:13s} {row['budget_kg_s']:4g} kg/s: "
               f"exobase {row['exobase_radius_R']:.2f} R, Jeans {row['molecular_jeans_loss_kg_s']:6.2f} kg/s; "
-              f"heating radius {fmt(heat['radius_R'])} R (area x{heat['aperture']['area_over_september']:.2f}); "
+              f"heating radius {fmt(heat['radius_R'])} R; "
               f"ions there {ion['third_hill']['heating_radius']:6.1f} / {ion['half_hill']['heating_radius']:6.1f} / "
               f"{ion['hill']['heating_radius']:6.1f} kg/s, at 6 R {ion['third_hill']['6']:5.1f}; "
               f"tenth of budget at {fmt(tenth['half_hill'])} / {fmt(tenth['hill'])} R")
     product = dict(
         schema=SCHEMA,
         producer=dict(domain='atmosphere', files={p: hashlib.sha256((lr.ROOT / p).read_bytes()).hexdigest()[:16] for p in (
-            'atmosphere/loss_response/absorption.py', 'atmosphere/loss_response/model.py', 'atmosphere/thermal_column.py')}),
+            'atmosphere/loss_response/absorption.py', 'atmosphere/loss_response/model.py',
+            'atmosphere/loss_response/traced.py', 'atmosphere/thermal_column.py',
+            'atmosphere/middle_atmosphere/results/limb_heat.json')}),
         evidence=EVIDENCE, reading_rule=READING_RULE,
         band_weights=weights, cross_sections_m2=CROSS_SECTIONS_M2,
         ionization_rate_s={a: ionization_rate(a) for a in lr.ACTIVITY},

@@ -4,7 +4,6 @@ Tests that need the WHI solar spectrum and the stored middle-atmosphere results
 skip with that reason when the spectrum has not been restored.
 """
 from __future__ import annotations
-import csv
 import math
 import unittest
 
@@ -61,13 +60,22 @@ class ClosedForms(unittest.TestCase):
 
 @NEEDS_UV
 class Sweep(unittest.TestCase):
-    def test_sweep_reproduces_escape_coupling_at_the_0p1_percent_leak(self):
-        rows = lr.euv_sweep('titania_stack', 'lte', 'quiet', glow=False, leaks=(1e-3,))
-        stored = [r for r in csv.DictReader(open(lr.MIDDLE / 'escape_coupling.csv', newline=''))
-                  if r['case'] == 'moon_1.2atm_titania_stack' and r['base_pressure_pa'] == '0.3'
-                  and r['heat_source'] == 'leak 0.1%, quiet Sun']
-        self.assertEqual(len(stored), 1)
-        self.assertAlmostEqual(rows[0]['exobase_temperature_k'], float(stored[0]['exobase_temperature_k']), delta=0.5)
+    def test_sweep_takes_the_traced_state(self):
+        row = lr.euv_sweep('titania_stack', 'lte', 'quiet', glow=False, leaks=(1e-3,))[0]
+        # Light through gaps reaches the air above the limb as well as the disk: several times a quarter of the
+        # light that reaches the disk, the escape model's count.
+        self.assertTrue(2.0 < row['leak_heat_w_m2'] / row['disk_count_heat_w_m2'] < 6.0)
+        parts = row['leak_heat_w_m2'] + row['film_heat_w_m2'] + row['beyond_aperture_heat_w_m2'] + row['glow_heat_w_m2']
+        self.assertAlmostEqual(parts / row['deposited_heat_w_m2'], 1.0, delta=1e-3)
+
+    def test_the_sweep_marks_where_the_air_runs_away(self):
+        rows = lr.euv_sweep('titania_stack', 'all_heats', 'solar_maximum')
+        status = [r['status'] for r in rows]
+        self.assertIn('runaway', status)
+        first = status.index('runaway')
+        self.assertTrue(all(s == 'runaway' for s in status[first:]))
+        self.assertLess(rows[first - 1]['leak_fraction'], rows[first]['leak_fraction'])
+        self.assertEqual(lr.loss_estimate(rows[first]), math.inf)
 
     def test_loss_rises_with_leak_inside_the_column_domain(self):
         rows = [r for r in lr.euv_sweep('titania_stack', 'lte', 'quiet') if r['status'] == 'thermal_column']

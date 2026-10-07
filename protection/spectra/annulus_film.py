@@ -110,11 +110,12 @@ def weighted(w, f, x, lo, hi):
 def heat(w, f, t):
     """Heat of the upper air (W/m^2 of lunar surface, global mean) from the film's transmission below 175 nm, by the
     escape model's film_heat: all of it absorbed above the base with its heating efficiency, quiet Sun and solar
-    maximum (its factors for X-rays below 10 nm and for the rest)."""
+    maximum (FISM2's measured rise by band below 10 nm and 2.5 for the rest). The middle atmosphere's limb tracing
+    gives the heat along the annulus's slant paths."""
     from atmosphere.middle_atmosphere import escape
     sel = w < 175.0
     passed = t[sel]*f[sel]
-    scale = np.where(w[sel] < 10.0, escape.XRAY_SOLAR_MAXIMUM, escape.SOLAR_MAXIMUM)
+    scale = np.where(w[sel] < 10.0, escape.xray_scale(w[sel], escape.XRAY_SOLAR_MAXIMUM), escape.SOLAR_MAXIMUM)
     factor = 0.25*escape.HEATING_EFFICIENCY
     return dict(quiet=float(factor*np.trapezoid(passed, w[sel])), maximum=float(factor*np.trapezoid(passed*scale, w[sel])))
 
@@ -137,7 +138,9 @@ def evaluate(w, f, r, t, mass):
 def gap_heat():
     """The escape model's heat from light that bypasses the film at the swarm levels of O1 (O8), for comparison."""
     from atmosphere.middle_atmosphere import escape
-    return {f'{level:g}': dict(quiet=escape.leakage_heat(level), maximum=escape.leakage_heat(level, activity=escape.SOLAR_MAXIMUM))
+    return {f'{level:g}': dict(quiet=escape.leakage_heat(level),
+                               maximum=escape.leakage_heat(level, activity=escape.SOLAR_MAXIMUM,
+                                                           xray_activity=escape.XRAY_SOLAR_MAXIMUM))
             for level in (3e-5, 2e-4)}
 
 
@@ -167,12 +170,13 @@ def compute():
 
 def main():
     w, f, rows, window, lightest = compute()
+    from atmosphere.middle_atmosphere import escape, fetch_inputs, fetch_limb_inputs
     code = {p.name: hashlib.sha256(p.read_bytes()).hexdigest()[:16]
-            for p in (HERE/'annulus_film.py', HERE/'short_wave.py', PROTECTION/'model.py')}
+            for p in (HERE/'annulus_film.py', HERE/'short_wave.py', PROTECTION/'model.py', Path(escape.__file__))}
     inputs = {n: hashlib.sha256((sw.SOURCES/n).read_bytes()).hexdigest()[:16] for n in INPUTS}
-    from atmosphere.middle_atmosphere import fetch_inputs
-    whi = fetch_inputs.path('whi2008_ref_solar_irradiance_ver2.dat')
-    inputs[whi.name] = hashlib.sha256(whi.read_bytes()).hexdigest()[:16]
+    for path in (fetch_inputs.path('whi2008_ref_solar_irradiance_ver2.dat'),
+                 *(fetch_limb_inputs.path(n) for n in (escape.FISM2_QUIET, *escape.FISM2_MAXIMA.values()))):
+        inputs[path.name] = hashlib.sha256(path.read_bytes()).hexdigest()[:16]
     product = dict(
         schema=SCHEMA,
         producer=dict(domain='protection', files=code, inputs=inputs,

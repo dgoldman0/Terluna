@@ -200,14 +200,14 @@ aperture.
 
 | 1.2 atm, upper air | Base | Exobase at 0 / 10⁻⁶ / 3×10⁻⁶ / 10⁻⁵ W/m² | 0.1% leak: quiet Sun / solar maximum | Film alone: quiet Sun / solar maximum | Loss at solar maximum: N2 and O2 + atomic O |
 |---|---|---|---|---|---|
-| Titania stack, collisional | 142 K | 142 / 157 / 188 / 299 K | 167 / 206 K | 142 / 144 K | 3×10⁻⁵ kg/s + none |
-| Titania stack, LTE | 163 K | 163 / 179 / 209 / 316 K | 189 / 228 K | 163 / 165 K | 3×10⁻³ kg/s + none |
-| Titania stack, all heats | 192 K | 192 / 207 / 239 / 313 K | 218 / 258 K | 192 / 193 K | 0.5 kg/s + none |
-| Titania stack, all heats, 280 ppm CO2 | 197 K | 197 / 212 / 244 / 310 K | 223 / 263 K | 197 / 198 K | 1.0 kg/s + none |
-| Titania stack, all heats, 150 ppm CO2 | 206 K | 206 / 222 / 253 / 304 K | 233 / 270 K | 206 / 208 K | 3.6 kg/s + none |
-| 200-nm edge, collisional | 200 K | 200 / 216 / 247 / 308 K | 226 / 266 K | | 1.6 + 0.8 kg/s |
-| 200-nm edge, LTE | 200 K | 200 / 216 / 248 / 308 K | 227 / 266 K | | 1.7 + 0.8 kg/s |
-| 200-nm edge, all heats | 215 K | 215 / 231 / 261 / 296 K | 242 / 274 K | | 9.5 + 2.7 kg/s |
+| Titania stack, collisional | 142 K | 142 / 157 / 188 / 299 K | 167 / 207 K | 142 / 142 K | 3×10⁻⁵ kg/s + none |
+| Titania stack, LTE | 163 K | 163 / 179 / 209 / 316 K | 189 / 229 K | 163 / 164 K | 3×10⁻³ kg/s + none |
+| Titania stack, all heats | 192 K | 192 / 207 / 239 / 313 K | 218 / 259 K | 192 / 192 K | 0.5 kg/s + none |
+| Titania stack, all heats, 280 ppm CO2 | 197 K | 197 / 212 / 244 / 310 K | 223 / 264 K | 197 / 197 K | 1.1 kg/s + none |
+| Titania stack, all heats, 150 ppm CO2 | 206 K | 206 / 222 / 253 / 304 K | 233 / 271 K | 206 / 206 K | 3.9 kg/s + none |
+| 200-nm edge, collisional | 200 K | 200 / 216 / 247 / 308 K | 226 / 266 K | | 1.7 + 0.8 kg/s |
+| 200-nm edge, LTE | 200 K | 200 / 216 / 248 / 308 K | 227 / 267 K | | 1.8 + 0.8 kg/s |
+| 200-nm edge, all heats | 215 K | 215 / 231 / 261 / 296 K | 242 / 274 K | | 10 + 2.8 kg/s |
 | Earlier assumption, 180 K at 0.1 Pa | 180 K | 180 / 194 / 224 / 317 K | | | |
 
 - **Blocking 99.9% below 175 nm keeps the exobase near the 250 K target, but
@@ -215,14 +215,15 @@ aperture.
   exobase is 226 K for the quiet Sun and 266 K near solar maximum.
   Interpolating, blocking 99.95% would hold it near 233 K at solar maximum
   (248 K for the upper bound). Behind the titania stack the same 0.1% leak
-  gives 167–206 K.
+  gives 167–207 K.
 - **The titania stack's film lets almost no heat through.**
   Its 10 µm of silica and 1 µm of titania pass only hard X-rays shorter than
   about 1.5 nm. From 5 nm to 200 nm they transmit less than 10⁻²⁰. The
   heat that reaches the upper air is at most 1×10⁻⁹ W/m² for the quiet Sun
-  and 1×10⁻⁷ W/m² at solar maximum, with X-rays counted a hundred times
-  stronger there. That is 1,700 and 40 times less than a 0.1% leak, so the
-  film alone holds the exobase within 1.5 K of its base, at 142–193 K. Beyond
+  and 2×10⁻⁸ W/m² at solar maximum, where FISM2's measured spectra raise
+  these X-rays about twentyfold (`escape.xray_cycle`). That is 1,700 and 220
+  times less than a 0.1% leak, so the film alone holds the exobase within half
+  a kelvin of its base, at 142–192 K. Beyond
   that, light passing gaps, pinholes and edges of the aperture warms it (a
   design number, not a material one), and so does the sky's own Lyman-alpha.
 - **The sky's Lyman-alpha is not in these tables; the loss response adds it.**
@@ -248,23 +249,23 @@ aperture.
   air's main coolant. In the warmest treatment (all absorbed near-infrared
   heats), cutting it from 400 to 280 ppm raises the base by 5 K and to 150 ppm
   by 15 K, and the exobase follows one for one: behind the film alone it stays
-  at 197–208 K. Only the 0.1% leak at solar maximum passes 250 K, as it already
+  at 197–206 K. Only the 0.1% leak at solar maximum passes 250 K, as it already
   does at 400 ppm. 150 ppm (18 Pa) lies below the plant-growth floor
   ([research/studies/atmospheric_co2](../../research/studies/atmospheric_co2/)), so any CO2 level
   biology accepts is safe here.
-- **The losses stay small either way.** At 266 K, 2.4 kg/s removes about 0.3% of
+- **The losses stay small either way.** At 267 K, 2.6 kg/s removes about 0.3% of
   an atmosphere of 2.8×10¹⁸ kg in 100 million years.
 - **Atomic oxygen adds about half again behind the 200-nm edge.** O2 photolysis
   there leaves 200 ppm of O at the base. With the chemistry's eddy mixing
   continued upward, the homopause is at 4–9×10⁻⁵ Pa, O makes up about 1% of
   the gas at the exobase, and its escape is about half the molecular loss. The
   bounds at solar maximum are wide: 0.02 kg/s if eddy mixing reached the
-  exobase, 31 kg/s if the oxygen separated from the base up. The escaping oxygen's 63-µm cooling, which
+  exobase, 33 kg/s if the oxygen separated from the base up. The escaping oxygen's 63-µm cooling, which
   would lower the exobase, is not included. Behind the titania stack there is
   no atomic oxygen.
 - **At these leaks the base carries through almost one for one.** Across the
   three treatments the base spans 142–215 K and the exobase at the
-  solar-maximum leak 206–274 K, so the upper air matters about as much as the
+  solar-maximum leak 207–274 K, so the upper air matters about as much as the
   leak. Only at 10⁻⁵ W/m² does the deposited heat dominate (296–316 K).
 - All of these are global means with no infrared cooling in the thermal column.
   The day–night swing of the upper air (above) is tens of kelvin, and the
@@ -273,16 +274,19 @@ aperture.
 ### Slant paths above the limb (2026-10-07)
 
 The heat counts above put a quarter of the light that reaches the disk above
-the base, and the loss response derives O1's allowed transmissions with them.
-[limb_heat.py](limb_heat.py) traces the sunlight that passes the solar shield
-along its actual paths through the air, for the ring fleet's aperture: a
-screen at 20,000 km covering four lunar radii, with the window stack over the
-disk, a light film over the annulus, gaps that pass a grey share of the band
-over the whole aperture, and open sky beyond it. It takes the loss response's
-six cases, Lyman-α glow and Earth's tide, finds the state the heated air
-settles to and the gap transmission each budget allows, and writes
-[results/limb_heat.json](results/limb_heat.json). Methods and limits are in
-[METHODS.md](METHODS.md).
+the base. [limb_heat.py](limb_heat.py) traces the sunlight that passes the
+solar shield along its actual paths through the air, for the ring fleet's
+aperture: a screen at 20,000 km covering four lunar radii, with the window
+stack over the disk, a light film over the annulus, gaps that pass a grey share
+of the band over the whole aperture, and open sky beyond it. It takes the loss
+response's six cases, Lyman-α glow and Earth's tide, finds the state the heated
+air settles to and the gap transmission each budget allows, and writes
+[results/limb_heat.json](results/limb_heat.json). It keeps each ray's deposit,
+so the product also gives the heat for protected radii of 2 to 10 lunar radii,
+which the loss response reads ([traced.py](../loss_response/traced.py)): on
+7 October the author made this traced count O1's and took FISM2's measured rise
+of the X-rays at solar maximum, which these tables use. Methods and limits are
+in [METHODS.md](METHODS.md).
 
 - **Gaps heat the thermosphere 2.5–4.2 times the escape model's count.** A
   grey transmission through gaps over the aperture lights the air above the
@@ -302,45 +306,48 @@ settles to and the gap transmission each budget allows, and writes
   the base. Over the annulus the 4 µm film heats the thermosphere 1.1–2.5 times
   what the escape model's film count gives it over the disk.
 - **The films' X-rays rise about twentyfold from quiet Sun to solar maximum.**
-  The escape model multiplies the X-rays below 10 nm by 100 at solar maximum.
-  FISM2's daily spectra, the year around each of the last three maxima over
-  the WHI 2008 quiet week, give 13–21 for the 4 µm film's band, 11–19 for the
-  2 µm film's, 14–24 for the window stack's and 4–6 for the whole band below
-  10 nm, which sets a gap's X-rays. Single days at maximum run up to about
-  twice the yearly mean.
+  The escape model used to multiply every X-ray below 10 nm by 100 at solar
+  maximum. FISM2's daily spectra, the year around each of the last three maxima
+  over the WHI 2008 quiet week, give by band 53 below 0.5 nm falling to 3.6 at
+  5–10 nm. Weighted by the light each passes, the mean of the three maxima is 18
+  for the 4 µm film (13–21 across them), 16 for the 2 µm film, 20 for the window
+  stack and 6.0 for the whole band below 10 nm (4.6–6.9), which sets a gap's
+  X-rays. Single days at maximum run up to about twice the yearly mean.
 - **With those factors the 4 µm film adds a tenth to a fifth of the glow's
-  heat.** At solar maximum it heats the thermosphere by 2.5–6.2×10⁻⁷ W/m²
-  behind the titania stack, 8–16% of the 3.1–3.8×10⁻⁶ W/m² the glow gives
-  there (5–9×10⁻⁷ W/m² behind the 200-nm edge). With the factor of 100 it
-  would add 2.0–2.9×10⁻⁶ W/m², about as much as the glow. The 2 µm film adds
-  0.9–2.3×10⁻⁶ W/m², and the window stack over the annulus 1.5–3.5×10⁻⁸ W/m².
+  heat.** At solar maximum it heats the thermosphere by 3.5–5.2×10⁻⁷ W/m²
+  behind the titania stack (2.5–6.0×10⁻⁷ across the three maxima), 11–14% of
+  the 3.1–3.8×10⁻⁶ W/m² the glow gives there, and 7–8×10⁻⁷ W/m² behind the
+  200-nm edge. With a factor of 100 it would add 2.0–2.9×10⁻⁶ W/m², about as
+  much as the glow. The 2 µm film adds 1.3–1.9×10⁻⁶ W/m², and the window stack
+  over the annulus 2–3×10⁻⁸ W/m².
 
-The states with the 4 µm film, as molecular loss with Earth's tide (kg/s),
-against the loss response's count at the same transmission. Solar maximum
-uses FISM2's factors; the range spans the three maxima.
+The states with the 4 µm film and the ring fleet's 4-radius shadow, as
+molecular loss with Earth's tide (kg/s), against the escape model's disk count
+at the same transmission. Solar maximum is the mean of the three maxima, with
+the range across them.
 
-| 1.2 atm, titania stack | Quiet Sun, standard level (2×10⁻⁴): traced / O1's count | Solar maximum, no gaps | Tight level (3×10⁻⁵) | Standard level | O1's count, standard level |
+| 1.2 atm, titania stack | Quiet Sun, standard level (2×10⁻⁴): traced / disk count | Solar maximum, no gaps | Tight level (3×10⁻⁵) | Standard level | Disk count, standard level |
 |---|---|---|---|---|---|
-| Collisional upper air | 4×10⁻⁶ / 8×10⁻⁷ | 1–2×10⁻⁵ | 3–5×10⁻⁵ | 0.003–0.004 | 6×10⁻⁵ |
-| LTE | 0.0013 / 0.0003 | 0.003–0.005 | 0.007–0.011 | 0.33–0.50 | 0.010 |
-| All near-infrared heats | 0.61 / 0.16 | 1.2–1.8 | 2.2–3.2 | 30–36 | 2.3 |
+| Collisional upper air | 4×10⁻⁶ / 8×10⁻⁷ | 2×10⁻⁵ (1–2×10⁻⁵) | 4×10⁻⁵ (3–5×10⁻⁵) | 0.003 (0.0025–0.004) | 6×10⁻⁵ |
+| LTE | 0.0013 / 0.0003 | 0.004 (0.003–0.005) | 0.009 (0.007–0.011) | 0.42 (0.32–0.49) | 0.009 |
+| All near-infrared heats | 0.61 / 0.16 | 1.5 (1.2–1.7) | 2.8 (2.2–3.1) | 33 (29–36) | 2.1 |
 
 - **The cooler titania cases stay small; the warmest swells.** At the
   standard level and solar maximum the exobase sits at 2.2 lunar radii
-  (collisional, 231–234 K) and 2.7 (LTE, 264–269 K), and with all
-  near-infrared heating at 3.8–3.9 (300–303 K). Behind the 200-nm edge the
+  (collisional, 230–234 K) and 2.7 (LTE, 264–269 K), and with all
+  near-infrared heating at 3.8–3.9 (300–302 K). Behind the 200-nm edge the
   standard level gives 3.5–3.7 kg/s at quiet Sun with collisional or LTE upper
   air. At solar maximum there, and with all near-infrared heating at quiet Sun
   as well, the heat the swollen air takes stays above the heat that swells it
   up to the tables' top, where the exobase passes six lunar radii. Beyond four
   lunar radii the thermosphere reaches unfiltered light outside the aperture.
 - **The gaps a budget allows fall to a quarter or a third.** For the same
-  allowance of molecular loss, traced gaps may pass 0.22–0.32 of what the loss
-  response's count allows in the cooler titania cases, at quiet Sun and at
-  solar maximum alike, and 0.12–0.27 with all near-infrared heating. For
-  1 kg/s at solar maximum: 4.6–4.8×10⁻⁴ (collisional) and 2.3–2.5×10⁻⁴ (LTE),
-  against 1.5×10⁻³ and 9×10⁻⁴; with all near-infrared heating, the film and
-  glow alone exceed 1 kg/s, and 10 kg/s allows 0.95–1.1×10⁻⁴. These
+  allowance of molecular loss, traced gaps may pass 0.22–0.32 of what the disk
+  count allows in the cooler titania cases, at quiet Sun and at solar maximum
+  alike, and 0.12–0.27 with all near-infrared heating. For 1 kg/s at solar
+  maximum: 4.7×10⁻⁴ (collisional) and 2.4×10⁻⁴ (LTE), against the disk count's
+  1.5×10⁻³ and 9×10⁻⁴; with all near-infrared heating, the film and glow alone
+  exceed 1 kg/s, and 10 kg/s allows 1.0×10⁻⁴. These
   allowances leave out the solar wind and the exosphere step's losses, so they
   compare the two counts at the same allowance.
 - **Where the heat lies matters as much as how much.** The thermal column
