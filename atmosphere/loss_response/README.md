@@ -56,6 +56,15 @@ capped by mass loading at the solar wind's own mass flux through a disc three
 lunar radii across (0.29 kg/s), with sputtering by returning pickup ions and by
 precipitating protons, over stated parameter ranges.
 
+The transmitted share counts as a quarter of the light that reaches the disk,
+all of it above the base. The middle atmosphere's slant-path tracing
+([limb_heat](../middle_atmosphere/README.md#slant-paths-above-the-limb-2026-10-07),
+7 October) follows light through gaps over the whole aperture and finds it heats
+the thermosphere 2.5–5 times as much, as it reaches the air above the limb.
+It also finds the X-rays' solar-maximum factor from FISM2: 4–6 below 10 nm and
+13–24 for the light the titania films pass, where this branch takes 2.5 and 100.
+Whether this branch takes either is the author's choice.
+
 Earth's tide lowers the barrier a molecule must climb to leave the Moon: in the
 frame turning with the Moon's orbit, a molecule can slip out of the Moon's Hill
 sphere through the necks around the L1 and L2 points, 58,000 km from the Moon,

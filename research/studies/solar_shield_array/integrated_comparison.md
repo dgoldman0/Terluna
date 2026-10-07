@@ -21,6 +21,15 @@ marks what no model yet supplies and writes
 [exhaust_isolation.py](exhaust_isolation.py) follows the held screen's exhaust
 and writes [results/exhaust_isolation.json](results/exhaust_isolation.json).
 
+On 7 October the author made the ring fleet the lead candidate and adopted S7
+([decisions.md](../../decisions.md)). The held screen stays a documented
+fallback, for which two literature checks continue. The ring fleet's form is
+set:
+- radial-facing tiles with centred filters, 25% trim and a momentum store;
+- rings near 20,000 km, tilted from the Moon's orbital plane;
+- one nested bundle, with annulus tiles near 13 g/m² that carry the 4 µm
+  silica film.
+
 ## The candidates
 
 **The held screen with a zoned aperture** holds independent tiles on the
@@ -48,7 +57,7 @@ or not met. The ledger product carries the evidence behind each.
 
 | Gate | Held screen, zoned | Ring fleet |
 |---|---|---|
-| UV transmission (O1, O8) | Open: a 0.1 µm titania film on silica stops the extreme and far ultraviolet from 3.5 g/m², but films of this kind pass solar X-rays: 3.7×10⁻⁵ of the sunlight below 175 nm at 5.8 g/m² and 1.0×10⁻⁵ at 10.2 g/m², against the window stack's 6.7×10⁻⁷ (below); continuous area with no seams | Open: with every tile of a 589-tile patch propagated, no receiver ray through its interior goes uncovered in four orbits (below); the annulus film as for the held screen; a full fleet's coverage, handovers and edges are unchecked |
+| UV transmission (O1, O8) | Open: a 0.1 µm titania film on silica stops the extreme and far ultraviolet from 3.5 g/m², but films of this kind pass solar X-rays: 3.7×10⁻⁵ of the sunlight below 175 nm at 5.8 g/m² and 1.0×10⁻⁵ at 10.2 g/m², against the window stack's 6.7×10⁻⁷. Traced along slant paths, the 4 µm film's X-rays add a tenth to a fifth of the sky glow's heat at solar maximum, and a gap heats the air 2.5–5 times O1's count (below); continuous area with no seams | Open: with every tile of a 589-tile patch propagated, no receiver ray through its interior goes uncovered in four orbits (below); the annulus film as for the held screen; a full fleet's coverage, handovers and edges are unchecked |
 | Protected radius (O2) | Met: the 7,454 km aperture covers four lunar radii with the finite Sun | Open: on a Sun-tracking eccentricity the sunward crossing radius holds within 800–4,100 km over a year. The planes shift the whole pattern about 1,600 km each way at 20,000 km, which 23% more rings cover; there the interior overlaps hold, while the edge strips recede by up to 1,600 km a year, beyond photon steering for the outermost rings. At 15,000 km the strips cross within weeks (below) |
 | Window spectrum (E2, O4) | Conditional on the 26 g/m² window and the dimmer's form | The same, on the rings that cross the window |
 | Earth's shadow and rejected light (O5, O7) | Open: the optical bound lets redirected light leave toward the Moon; the shadow on Earth is unmapped | Open: night-side tiles reflect back past the Moon, with light the screen has already filtered (to check); the shadow on Earth is unmapped |
@@ -350,14 +359,15 @@ air's heat at solar maximum, from the escape model's film heat.
   passes 1.0–3.7×10⁻⁵ of the sunlight below 175 nm. That is at or above the
   tight level of O1's swarm budget (3×10⁻⁵), against the window stack's
   6.7×10⁻⁷.
-- **The upper-air heat is an upper bound.** The escape model's film heat counts
-  every transmitted X-ray as heating the air above the base. By that count the
-  5.8 g/m² film adds 6.8×10⁻⁶ W/m² at solar maximum, against 8.4×10⁻⁷ W/m² for
-  gaps at O1's standard level and 1.2×10⁻⁷ W/m² for the window stack.
-  - The hardest X-rays deposit below the base.
-  - The annulus's light reaches the air only along slant paths above the limb,
-    which the escape model does not yet treat.
-  - Whether the X-rays decide the silica is the atmosphere domain's question.
+- **Traced, the films' X-rays add a fraction of the glow's heat.** The escape
+  model's film heat counts every transmitted X-ray as heating the air above
+  the base. By that count the 5.8 g/m² film adds 6.8×10⁻⁶ W/m² at solar
+  maximum, against 8.4×10⁻⁷ W/m² for gaps at O1's standard level and
+  1.2×10⁻⁷ W/m² for the window stack. Traced along their slant paths with the
+  X-rays' measured solar cycle ([the X-ray check](#the-x-ray-check)), the
+  4 µm film adds 2.5–6.2×10⁻⁷ W/m² at solar maximum and the 2 µm film
+  0.9–2.3×10⁻⁶ W/m², a tenth to a fifth and a third to three fifths of the
+  sky glow's heat.
 - **Pressure.** Coated films have a pressure coefficient (2R + A) of 0.12–0.16,
   and bare ones about 0.5. The dynamics models carry the window's redirected
   13.8% as reflected, 0.276. An annulus tile therefore matches the window
@@ -552,8 +562,10 @@ The held screen meets the protected radius on its geometry, but as designed
 its exhaust breaks the proposed outflow requirement, and its propellant fails
 S6. With the September magnets it could meet the outflow requirement only
 with gridded ion thrusters and capture of most of its unionized gas, pending a
-plasma estimate of the magnetosphere's leak. A heavier annulus, if the X-rays
-call for one, raises its propellant by 70%.
+plasma estimate of the magnetosphere's leak. Its 5 g/m² annulus, the 2 µm
+film, adds a third to three fifths of the glow's heat at solar maximum; the
+10 g/m² annulus of the 4 µm film adds a tenth to a fifth and raises its
+propellant by 70%.
 
 The ring fleet passes no gate yet and fails none, and the four checks of this
 round narrow it to one form:
@@ -575,15 +587,85 @@ for four orbits. Its remaining items:
 - a full fleet's coverage and handovers;
 - the hardware of the momentum store.
 
-Both candidates share the annulus film's X-ray leak and the unmapped shadow on
-Earth.
+Both candidates share O1's count of gaps, which the X-ray check tightens, and
+the unmapped shadow on Earth.
+
+## The X-ray check
+
+The first of the author's next steps asked where solar X-rays that pass a light
+annulus leave their energy, to settle whether the 4 µm film suffices and how O1
+should count X-rays. [limb_heat.py](../../../atmosphere/middle_atmosphere/limb_heat.py)
+in the atmosphere domain traces the sunlight that passes the ring fleet's
+aperture through the Open Moon's tall air along slant paths, for the loss
+response's six cases, and finds the state the heated air settles to
+([its results](../../../atmosphere/middle_atmosphere/README.md#slant-paths-above-the-limb-2026-10-07)).
+The losses below are molecular escape with Earth's tide; the solar wind and the
+exosphere step's losses are left out.
+
+- **The 4 µm film's X-rays add a tenth to a fifth of the glow's heat.** The film
+  passes X-rays near 1 nm, which the thermosphere takes only on rays tangent
+  within about half a lunar radius of the limb. FISM2's daily spectra put that
+  band's rise from quiet Sun to solar maximum at 13–21, where the escape model
+  takes 100. At solar maximum the film then adds 2.5–6.2×10⁻⁷ W/m² behind the
+  titania stack, against 3.1–3.8×10⁻⁶ W/m² from the sky's Lyman-α glow. With
+  no gaps the cooler titania cases lose 1–2×10⁻⁵ kg/s (collisional upper air)
+  and 0.003–0.005 kg/s (LTE); the window stack over the annulus would lower
+  that to 6×10⁻⁶ and 0.002 kg/s. With all near-infrared heating the glow
+  brings the loss to 0.7 kg/s, and the film raises it to 1.2–1.8 kg/s.
+- **A gap heats the air 2.5–5 times what O1's count gives it.** Light through a
+  gap reaches the air above the limb as well as the disk. Behind the titania
+  stack its heat per unit transmission is 2.5–3.2 times the loss response's
+  count around the quiescent air, and 3.1–3.9 at the heats where the cooler
+  cases lose 1–100 kg/s; behind the 200-nm edge, 3.8–5.2. For the same
+  allowance, gaps may pass 0.22–0.32 of what the count allows in the cooler
+  titania cases and 0.12–0.27 with all near-infrared heating.
+- **At the standard level the cooler titania cases stay under 1 kg/s, and the
+  warmest passes 10 kg/s.** At O1's standard level of 2×10⁻⁴ and solar maximum
+  the traced loss is 0.003–0.004 kg/s with collisional upper air and
+  0.33–0.50 kg/s in LTE. With all near-infrared heating it is 30–36 kg/s, the
+  exobase at 3.8–3.9 lunar radii, against the count's 2.3 kg/s; the tight level
+  (3×10⁻⁵) gives 2.2–3.2 kg/s there.
+- **The loss response's X-ray factors differ for gaps and films.** At solar
+  maximum it multiplies a gap's X-rays by the ultraviolet's 2.5 and the titania
+  film's by 100. FISM2 gives 4–6 for the whole band below 10 nm, which sets a
+  gap's X-rays, and 13–24 for the films' bands.
+- **Where the heat lies is the largest uncertainty left.** The traced light
+  lands between the thermal column's 'low' and 'middle' heating shapes in
+  depth. The losses above use 'middle', as the loss response does; with 'low'
+  they fall 14–550 times. Both counts pass through the same column, so the
+  shape moves their losses together.
+
+The tracing uses the ring fleet's aperture at 20,000 km. The held screen's,
+farther out, has wider zones and a solar smear of about 420 km at its edges,
+and the same physics.
+
+**For the author.** The check leaves the 4 µm film in place. The window stack
+over the annulus would lower the losses by a factor of 1.4–3. Behind the
+titania stack, at the swarm's tight and standard levels, no case would change
+its standing against a 1, 10 or 100 kg/s budget; the glow and the gaps set the
+loss. Behind the 200-nm edge it would take the tight level at solar maximum
+from 10–15 to about 6 kg/s. Two choices follow:
+1. O1's count of gaps. I recommend the traced heat per unit transmission in
+   place of the disk count, because it is the heat the air takes. The loss
+   response would take it from `limb_heat.json` and O1's levels and the design
+   point would be rederived; the allowed transmissions fall to about a quarter
+   to a third in the cooler titania cases.
+2. The X-rays' solar-maximum factors. I recommend FISM2's measured factors (4–6
+   below 10 nm, 13–24 for the films' bands) in place of the escape model's 2.5
+   for gaps and 100 for films. The escape model's convention reaches other
+   atmosphere products, which would be rerun.
+
+Giving the thermal column the traced heating shape would settle the remaining
+spread.
 
 ## Next steps
 
+The author set this order on 7 October:
+
 1. The X-ray question, in the atmosphere domain: where solar X-rays that pass
-   a light annulus deposit their energy along slant paths above the limb. That
-   decides the annulus silica (2 or 4 µm) and with it the held screen's
-   annulus mass.
+   a light annulus deposit their energy along slant paths above the limb. It
+   tells whether the chosen 4 µm film suffices and how O1 should count
+   X-rays. Done on 7 October ([the X-ray check](#the-x-ray-check)).
 2. The outer rings: a radius profile that keeps each tilt turning with the
    Sun, with radius steps that grow toward the edges, flown for a year against
    steering by roll with the larger store.
@@ -608,8 +690,10 @@ OPENBLAS_NUM_THREADS=1 python -m research.studies.solar_shield_array.attitude_sc
 OPENBLAS_NUM_THREADS=1 python -m research.studies.solar_shield_array.plane_motion
 OPENBLAS_NUM_THREADS=1 python -m research.studies.solar_shield_array.bundle_validation
 python -m protection.spectra.annulus_film
+python -m atmosphere.middle_atmosphere.fetch_limb_inputs --download
+OPENBLAS_NUM_THREADS=1 python -m atmosphere.middle_atmosphere.limb_heat
 python -m research.studies.solar_shield_array.integrated_ledger
-python -m pytest research/studies/solar_shield_array/test_exhaust_isolation.py research/studies/solar_shield_array/test_photon_control.py research/studies/solar_shield_array/test_frozen_rings.py research/studies/solar_shield_array/test_attitude_schemes.py research/studies/solar_shield_array/test_plane_motion.py research/studies/solar_shield_array/test_bundle_validation.py research/studies/solar_shield_array/test_integrated_ledger.py protection/tests/test_annulus_film.py
+python -m pytest research/studies/solar_shield_array/test_exhaust_isolation.py research/studies/solar_shield_array/test_photon_control.py research/studies/solar_shield_array/test_frozen_rings.py research/studies/solar_shield_array/test_attitude_schemes.py research/studies/solar_shield_array/test_plane_motion.py research/studies/solar_shield_array/test_bundle_validation.py research/studies/solar_shield_array/test_integrated_ledger.py protection/tests/test_annulus_film.py atmosphere/tests/test_limb_heat.py
 ```
 
 The exhaust study takes about 27 CPU minutes, almost all of it the slow-gas
@@ -621,6 +705,8 @@ orbits take about 15 CPU minutes. The planes take about 24 CPU minutes, with a
 checkpoint after each pass. The patch validation takes about 15 CPU minutes,
 with a checkpoint for each orbit. The annulus films and the ledger take
 seconds; the films need the protection inputs and the WHI spectrum restored.
+The limb tracing takes about 50 CPU minutes and keeps each case's heat tables
+in the ignored `atmosphere/middle_atmosphere/cache/limb_heat/`.
 
 ## Sources
 
@@ -646,6 +732,9 @@ seconds; the films need the protection inputs and the WHI spectrum restored.
   reference solar spectrum, quiet-Sun period, below 202 nm.
 - O. Coddington and others (2021), *The TSIS-1 Hybrid Solar Reference
   Spectrum*, Geophys. Res. Lett. 48, e2020GL091709: the spectrum above 202 nm.
+- P. C. Chamberlin and others (2020), *The Flare Irradiance Spectral
+  Model-Version 2 (FISM2)*, Space Weather 18, e2020SW002588: daily spectra
+  below 10 nm from LASP's LISIRD, for the X-rays' solar cycle.
 - The films' optical constants as in
   [protection/README.md](../../../protection/README.md#short-wave-transmission-2026-09-25):
   CXRO atomic scattering factors (Henke, Gullikson and Davis 1993), fused

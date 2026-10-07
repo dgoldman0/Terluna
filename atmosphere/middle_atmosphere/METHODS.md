@@ -205,6 +205,104 @@ where oxygen is abundant. Where the separated fraction at the exobase is large
 (tens of percent), oxygen would change the column itself, and the trace-gas
 treatment no longer holds.
 
+## Slant paths above the limb
+
+`limb_heat.py` follows sunlight below 175 nm that passes the solar shield along
+its actual paths through the air. The escape count above puts a quarter of the
+light that reaches the disk above the base. The shield's aperture reaches four
+lunar radii and the exobase lies two to four lunar radii from the centre, so
+rays that pass the limb cross long slant paths through the thermosphere.
+
+**Rays.** Parallel sunlight: 64 equal-area rings over the disk, 360 rays above
+the limb spaced logarithmically from 0.5 km to six lunar radii in altitude, and
+48 more across the aperture's edge. Along each ray the column of N2, O2 and O
+from the Sun to each radial node is integrated by exponential segments. The
+energy absorbed between two nodes, on the way in and past the limb on the way
+out, goes to the shell between them. Rays onto the disk leave the rest on the
+ground; the others carry it away.
+
+**Zones.** A ray's light passes the window stack, an annulus film or open sky
+according to where it crosses the shield, a ring screen at 20,000 km. The
+zone edges are the covering radii of `protection/dynamics/optical` (the disk
+and four lunar radii, narrowed by the shield's distance over the astronomical
+unit and widened by the Sun's disk) with the 50 m formation margin. The solar
+disk smears each crossing radially over the shield's distance times the Sun's
+angular radius, 93 km, by the semicircle law.
+
+**Air.** The middle atmosphere's profile up to 0.3 Pa. Above it, the thermal
+column's solution with the loss response's configuration of each case, shifted
+in radius to begin at the profile's base height, which lies from 97 km below to
+97 km above the column's own base, by case. Beyond the exobase,
+Chamberlain's exosphere (`loss_response/absorption.py`). Above the base N2 and
+O2 keep their fixed ratio and the base's atomic-oxygen fraction is carried well
+mixed; behind the titania stack there is none.
+
+**Cross sections.** Below 25 nm, independent atoms with the CXRO atomic
+scattering factors, σ = 2 r_e λ f2 per atom (Henke, Gullikson and Davis 1993).
+From 25 nm, the photoabsorption cross sections of the Leiden database at 0.1 nm
+(Heays, Bosman and van Dishoeck 2017). The two meet at 25 nm within 27% for
+N2, 9% for O2 and 0.2% for O. Argon, CO2 and the discrete N2 bands are left
+out. Both tables are restored by `fetch_limb_inputs.py` against
+`limb_inputs.json` and are not redistributed.
+
+**Spectrum and activity.** WHI 2008 below 175 nm. Solar maximum multiplies the
+X-rays below 10 nm by 100 and the rest by 2.5, as `escape.film_heat` and the
+loss response do. A second open spectrum scales its X-rays by 2.5 as
+`escape.leakage_heat` scales a leak, which separates the X-rays' share of a
+gap's heat from the geometry's.
+
+**The X-rays' solar cycle.** The films pass only X-rays near 1 nm, so their heat
+at solar maximum is their quiet heat times the X-rays' cycle factor. FISM2's
+daily spectra (Chamberlin et al. 2020), queried from LASP's LISIRD in 0.1 nm
+bins below 10 nm and pinned by hash in `limb_inputs.json`, give that factor:
+the mean over the year around each of the last three solar maxima (cycles 23,
+24 and 25) divided by the mean over the WHI 2008 quiet week, for the light each
+film passes (weighted by its transmission) and for the whole band below 10 nm
+(a gap's X-rays). FISM2 and WHI agree within 1% on the quiet week's power below
+10 nm. Each table is linear in the spectrum, so a source's solar-maximum value
+splits into its X-rays' part, (maximum − 2.5 × quiet)/97.5, and the rest, and
+the X-rays' part takes the measured factor in place of 100.
+
+**Heat and state.** The thermal column's heat is the light absorbed between the
+base and the exobase, times the heating efficiency of 0.4, over the Moon's
+surface area. Light absorbed above the exobase ionizes and dissociates
+collisionless gas; it is reported apart and left to the exosphere step. The heat
+swells the air, which then intercepts more of the limb's light, so the heat
+tables are computed at thirteen heats from 0 to 2.5×10⁻⁵ W/m² (stopping once
+the exobase passes six lunar radii). A scenario's state is the first heat,
+counting up from zero, at which the heat the swollen air takes from the light
+and from the sky's Lyman-α glow (the loss response's) equals the heat that
+swells it, with the tables interpolated linearly between heats. Where no such
+heat lies in the tables the air runs away past their top. The molecular loss
+at the state is the thermal column's with Earth's tide.
+
+**Allowed leaks.** For each budget, the heat at which the loss with Earth's tide
+reaches it is found by bisection on the thermal column. The traced allowed
+leak is the largest grey leak through gaps over the aperture whose state stays
+at or below that heat. The loss response's count gives O1's leak at the same
+heat: the heat less the window film's (behind the titania stack) and the glow,
+over `escape.leakage_heat` of the whole band. Neither deducts the solar wind or
+the exosphere step's losses, so the two compare directly.
+
+**Checks.** The disk's rays reproduce `escape.film_heat` within 0.1% for the
+window stack, and `escape.leakage_heat` within 7% for an open band, where the
+escape model takes Lyman-α along a mean slant path. Every ray conserves
+energy. Tests compare the ray integration with direct quadrature through an
+exponential atmosphere. For unfiltered light on rays tangent between the base
+and the exobase, the traced thermospheric heat is 0.92 of the leak count, and
+`loss_response/absorption.py`, with three band-mean cross sections, gives 0.97.
+
+**Limits.** The air is spherically symmetric. The limb's light heats a ring of
+upper air above the terminator, and the one-dimensional column spreads it over
+the globe with its own heating shape. Where the traced light lands, in mean
+log-pressure depth between the base and the exobase, lies between the column's
+'low' and 'middle' shapes, so each state's loss is also given with the 'low'
+shape. Photoelectron transport, the day–night circulation and the exosphere's
+response to the light it absorbs are not modelled. FISM2's yearly means include
+the flares within each year; single days at maximum run up to about twice the
+yearly mean in the films' band. The 2.5 on the ultraviolet above 10 nm stays
+the escape model's convention.
+
 ## Radiation benchmarks
 
 `benchmarks.py` recomputes, on four final profiles:
@@ -243,8 +341,12 @@ A 3-D model's radiation code can be checked against them on identical columns.
 - Bodhaine B. A. et al. (1999) J. Atmos. Oceanic Technol. 16, 1854 (Rayleigh scattering).
 - Burkholder J. B. et al. (2019) Chemical Kinetics and Photochemical Data for Use in Atmospheric Studies, Evaluation No. 19, JPL Publication 19-5.
 - Campbell I. M. & Gray C. N. (1973) Chem. Phys. Lett. 18, 607 (O + O + M).
+- Chamberlain J. W. (1963) Planet. Space Sci. 11, 901 (planetary coronae and exospheres).
+- Chamberlin P. C. et al. (2020) Space Weather 18, e2020SW002588 (the Flare Irradiance Spectral Model, version 2).
 - Coddington O. M. et al. (2021) Geophys. Res. Lett. 48, e2020GL091709 (TSIS-1 HSRS).
 - Ding F. & Pierrehumbert R. T. (2016) Astrophys. J. 822, 24 (non-dilute moist adiabat).
+- Heays A. N., Bosman A. D. & van Dishoeck E. F. (2017) Astron. Astrophys. 602, A105 (Leiden photodissociation and photoionization database).
+- Henke B. L., Gullikson E. M. & Davis J. C. (1993) At. Data Nucl. Data Tables 54, 181 (X-ray atomic scattering factors).
 - Johnston H. S. et al. (1996) J. Phys. Chem. 100, 4713 (NO3 photolysis yields).
 - Keller-Rudek H. et al. (2013) Earth Syst. Sci. Data 5, 365 (MPI-Mainz UV/VIS Spectral Atlas).
 - López-Puertas M. & Taylor F. W. (2001) Non-LTE Radiative Transfer in the Atmosphere, World Scientific.

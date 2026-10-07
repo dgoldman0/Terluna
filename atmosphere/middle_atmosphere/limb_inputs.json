@@ -1,0 +1,81 @@
+{
+ "schema": "terluna.external-inputs/1",
+ "status": "external inputs; fetched and hash-checked by fetch_limb_inputs.py; ignored by Git",
+ "input_directory": "inputs",
+ "retrieved": "2026-10-07",
+ "publication_note": "X-ray and extreme-ultraviolet absorption of air, and the solar cycle of the X-rays, for limb_heat.py: the CXRO atomic scattering factor tables (Henke, Gullikson and Davis 1993), the Leiden photodissociation and photoionization database, which asks users to cite Heays, Bosman and van Dishoeck (2017) and the measurements behind each cross section, and FISM2 daily spectra from LASP (Chamberlin et al. 2020). The files are not redistributed by this repository. A hash mismatch means the upstream bytes changed and must be reviewed, never silently accepted.",
+ "files": [
+  {
+   "name": "n.nff",
+   "url": "https://henke.lbl.gov/optical_constants/sf/n.nff",
+   "sha256": "06024c69974137e7ed06fbe6c00e6ab1a88d86789f0cd16edfd5a765b6414c41",
+   "bytes": 13720,
+   "credit": "Nitrogen atomic scattering factors, 10 eV-30 keV: Henke, Gullikson and Davis (1993), At. Data Nucl. Data Tables 54, 181-342, via the CXRO tables at henke.lbl.gov.",
+   "use": "X-ray photoabsorption of air along slant paths (limb_heat)"
+  },
+  {
+   "name": "o.nff",
+   "url": "https://henke.lbl.gov/optical_constants/sf/o.nff",
+   "sha256": "adb1540b11008383aaef0b8c4f5fb1a2bc5df14f3717ac4d58fc54fff92ba6cb",
+   "bytes": 13625,
+   "credit": "Oxygen atomic scattering factors, 10 eV-30 keV: Henke, Gullikson and Davis (1993), via the CXRO tables; the same bytes as the protection domain's copy.",
+   "use": "X-ray photoabsorption of air along slant paths (limb_heat)"
+  },
+  {
+   "name": "N2_0.1nm.txt",
+   "url": "https://home.strw.leidenuniv.nl/~ewine/photo/data/photo_data/cross_sections/N2/N2_0.1nm.txt",
+   "sha256": "075651a0beeb895f3492f7ad2ff0d2d2fdebafac5480e924c11358ab1c349e44",
+   "bytes": 46865,
+   "credit": "N2 photoabsorption continuum, 11.6-100 nm, resampled to 0.1 nm: Leiden database for photodissociation and photoionization (Heays, Bosman and van Dishoeck 2017, A&A 602, A105), with the measurements it cites.",
+   "use": "Extreme-ultraviolet absorption of air along slant paths (limb_heat)"
+  },
+  {
+   "name": "O2_0.1nm.txt",
+   "url": "https://home.strw.leidenuniv.nl/~ewine/photo/data/photo_data/cross_sections/O2/O2_0.1nm.txt",
+   "sha256": "fd18778356059ff8748442f05ecf955593286178e7ac29470cf0d23962c0e9db",
+   "bytes": 159602,
+   "credit": "O2 photoabsorption, 4.2-240 nm, resampled to 0.1 nm: Leiden database for photodissociation and photoionization (Heays, Bosman and van Dishoeck 2017, A&A 602, A105), with the measurements it cites.",
+   "use": "Extreme- and far-ultraviolet absorption of air along slant paths (limb_heat)"
+  },
+  {
+   "name": "O_0.1nm.txt",
+   "url": "https://home.strw.leidenuniv.nl/~ewine/photo/data/photo_data/cross_sections/O/O_0.1nm.txt",
+   "sha256": "2f92e3ec7be740d9703aac2d726b63be89fc8baed5fc7dfb50720a9ac995a4fc",
+   "bytes": 43475,
+   "credit": "O photoabsorption, 4.9-91 nm, resampled to 0.1 nm: Leiden database for photodissociation and photoionization (Heays, Bosman and van Dishoeck 2017, A&A 602, A105), with the measurements it cites.",
+   "use": "Extreme-ultraviolet absorption of atomic oxygen along slant paths (limb_heat)"
+  },
+  {
+   "name": "fism2_xray_2008-04-10_2008-04-16.csv",
+   "url": "https://lasp.colorado.edu/lisird/latis/dap/fism_daily_hr.csv?&time%3E=2008-04-10&time%3C2008-04-17&wavelength%3C10",
+   "sha256": "96967d52bf98aedb1adae5055b2d5cb64a680c9bebb20970b484f8d223a2578b",
+   "bytes": 37898,
+   "credit": "FISM2 daily solar spectral irradiance, 0.1 nm bins below 10 nm, the WHI 2008 quiet-Sun campaign, 10-16 April 2008: the Flare Irradiance Spectral Model, version 2 (Chamberlin et al. 2020, Space Weather 18, e2020SW002588), via LASP's LISIRD data centre (lasp.colorado.edu/lisird). A LaTiS query; its bytes are those of the model version current when retrieved.",
+   "use": "Solar-cycle factor of the X-rays the films and gaps pass (limb_heat): the quiet week the solar-cycle factors divide by"
+  },
+  {
+   "name": "fism2_xray_2001-05_2002-04.csv",
+   "url": "https://lasp.colorado.edu/lisird/latis/dap/fism_daily_hr.csv?&time%3E=2001-05-01&time%3C2002-05-01&wavelength%3C10",
+   "sha256": "dc924e1a1f10af0b5ce4c0b6b126b3db3c47e8b22197ceda99634c212e74bb0b",
+   "bytes": 1965954,
+   "credit": "FISM2 daily solar spectral irradiance, 0.1 nm bins below 10 nm, May 2001 to April 2002, the year around solar cycle 23's maximum: the Flare Irradiance Spectral Model, version 2 (Chamberlin et al. 2020, Space Weather 18, e2020SW002588), via LASP's LISIRD data centre (lasp.colorado.edu/lisird). A LaTiS query; its bytes are those of the model version current when retrieved.",
+   "use": "Solar-cycle factor of the X-rays the films and gaps pass (limb_heat): a solar maximum"
+  },
+  {
+   "name": "fism2_xray_2013-10_2014-09.csv",
+   "url": "https://lasp.colorado.edu/lisird/latis/dap/fism_daily_hr.csv?&time%3E=2013-10-01&time%3C2014-10-01&wavelength%3C10",
+   "sha256": "83045e70177d59623c3630646530ea0f9d5200c681198b183647d574d14e70f8",
+   "bytes": 1967751,
+   "credit": "FISM2 daily solar spectral irradiance, 0.1 nm bins below 10 nm, October 2013 to September 2014, the year around solar cycle 24's maximum: the Flare Irradiance Spectral Model, version 2 (Chamberlin et al. 2020, Space Weather 18, e2020SW002588), via LASP's LISIRD data centre (lasp.colorado.edu/lisird). A LaTiS query; its bytes are those of the model version current when retrieved.",
+   "use": "Solar-cycle factor of the X-rays the films and gaps pass (limb_heat): a solar maximum"
+  },
+  {
+   "name": "fism2_xray_2024-04_2025-03.csv",
+   "url": "https://lasp.colorado.edu/lisird/latis/dap/fism_daily_hr.csv?&time%3E=2024-04-01&time%3C2025-04-01&wavelength%3C10",
+   "sha256": "e02f8e7a70f3c32cc77113ef62fbae235b5e831e40b8b2ff138cc0974a285f93",
+   "bytes": 1967712,
+   "credit": "FISM2 daily solar spectral irradiance, 0.1 nm bins below 10 nm, April 2024 to March 2025, the year around solar cycle 25's maximum: the Flare Irradiance Spectral Model, version 2 (Chamberlin et al. 2020, Space Weather 18, e2020SW002588), via LASP's LISIRD data centre (lasp.colorado.edu/lisird). A LaTiS query; its bytes are those of the model version current when retrieved.",
+   "use": "Solar-cycle factor of the X-rays the films and gaps pass (limb_heat): a solar maximum"
+  }
+ ]
+}

@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-06",
+  "updated": "2026-10-07",
   "base_commit": "79a60a1a51b4552ac9ae8e8bb295b567d9254995",
   "next_manuscript": "cef466e6-d9f8",
   "principle": "Each topic spans the open Moon; the root opening scene is one illustration",
@@ -9,7 +9,7 @@
   "topics": [
     {
       "topic": "atmosphere",
-      "condition": "solved_molecular_thermal_limit; clear_sky_line_by_line_radiation_for_prescribed_columns; shield_filtered_sunlight; correlated_k_thermal_scheme_validated_to_5_30_pa; global_mean_radiative_photochemical_equilibrium_per_shield; balance_temperatures_solved_for_every_case; two_level_non_lte_co2_cooling_with_nir_thermalisation_bounds; idealised_filter_and_titania_film_leakage_heating_and_atomic_oxygen_escape_bounds; line_by_line_radiation_benchmarks_for_gcm; fluorinated_trace_gas_forcing_from_measured_bands; exobase_coupling_conditional; exobase_co2_sensitivity_150_280ppm; loss_response_screening_uv_leak_glow_and_solar_wind; shield_radius_for_thermospheric_heating; exospheric_ion_production_upper_bound; earth_tide_in_escape_from_three_body_test_molecules; escaped_air_cloud_in_earth_moon_space; exosphere_losses_ions_fragments_charge_exchange_with_and_without_a_lunar_magnetosphere",
+      "condition": "solved_molecular_thermal_limit; clear_sky_line_by_line_radiation_for_prescribed_columns; shield_filtered_sunlight; correlated_k_thermal_scheme_validated_to_5_30_pa; global_mean_radiative_photochemical_equilibrium_per_shield; balance_temperatures_solved_for_every_case; two_level_non_lte_co2_cooling_with_nir_thermalisation_bounds; idealised_filter_and_titania_film_leakage_heating_and_atomic_oxygen_escape_bounds; line_by_line_radiation_benchmarks_for_gcm; fluorinated_trace_gas_forcing_from_measured_bands; exobase_coupling_conditional; exobase_co2_sensitivity_150_280ppm; loss_response_screening_uv_leak_glow_and_solar_wind; shield_radius_for_thermospheric_heating; exospheric_ion_production_upper_bound; earth_tide_in_escape_from_three_body_test_molecules; escaped_air_cloud_in_earth_moon_space; exosphere_losses_ions_fragments_charge_exchange_with_and_without_a_lunar_magnetosphere; slant_path_tracing_of_light_passing_the_shield_with_fism2_x_ray_cycle",
       "material": [
         "../atmosphere/sim/sim1.py",
         "baselines/feasibility/model.py",
@@ -25,7 +25,9 @@
       "unresolved": [
         "upper-air temperature above ~1 Pa bounded by how near-infrared heating thermalises, not solved; atomic-oxygen 63-um cooling omitted",
         "day-night and 3-D transport of the middle atmosphere and its effect on the exobase",
-        "light bypassing the shield film through gaps, pinholes and edges of the aperture (0.1% scenario bounded; the titania film itself passes only hard X-rays)",
+        "light bypassing the shield film through gaps, pinholes and edges of the aperture: traced along slant paths above the limb it heats the thermosphere 2.5-5 times the escape model's disk count (middle_atmosphere/results/limb_heat.json); how O1 counts it is the author's choice",
+        "where the deposited heat lies in the thermal column: the traced light lands between the column's low and middle heating shapes, and the losses differ 14-550 times between them; the column could take the traced shape",
+        "the X-rays' solar-maximum factor: FISM2 gives 4-6 below 10 nm and 13-24 for the light the annulus films pass, against the escape model's 2.5 for leaks and 100 for films; adopting it is the author's choice and would rerun the products that use the convention",
         "correlated-k top layer (0.1 Pa) 30-40 K off and unused (the escape base is 0.3 Pa); fix only if later work needs correlated-k above 0.3 Pa",
         "water supply to escape",
         "the sky's interplanetary Lyman-alpha glow: in the loss response it raises the exobase 31-42 K (quiet Sun) and 47-61 K (solar maximum); its brightness, solar-cycle factor and absorption height are assumptions to firm up",
@@ -365,7 +367,8 @@
         "studies/solar_shield_array/results/attitude_schemes.json",
         "studies/solar_shield_array/results/plane_motion.json",
         "studies/solar_shield_array/results/bundle_validation.json",
-        "../protection/spectra/annulus_film.json"
+        "../protection/spectra/annulus_film.json",
+        "../atmosphere/middle_atmosphere/results/limb_heat.json"
       ],
       "unresolved": [
         "the swarm's UV transmission (3e-5 to 2.6e-3 by design level) rests on untested choices: neighbours held within 1-10 m, cell failures of 1-3% a year covered within a day to a month, holes in the oxide film 1-4 times the particle size",
@@ -396,7 +399,7 @@
         "Coupled optimization: held-out twelve-hour response error falls from 2.158 m with a corrected gravity response to 0.0272 m with coupled sensitivities. Eight-mode constrained restoration still exposes earlier contact; final power-feasible trial stops at 12.814874 h on 338/341, costs 37.217 TJ, and replays within 7.86 m. Post-contact full-cycle diagnostic retains 319-345 km boundary debt and 6.996% minimum centred next-service coverage; terminal proxy drifts by 1.10 km after the following departure. No improved safe prefix, return, next service, recurrence or fleet demand is accepted. Preserve 238.35 TW held comparison, 23.835 TW target, and unvalidated 17.29-million capacity estimate; magnetic integration stays outside this study.",
         "Expanded coupled cycle: nine of eighteen control columns measured; full-step and tenth-step terminal prediction errors 27.6 and 2.86 km. Independent constrained replay stops at 13.794996 h with no actuator overloads. Local 100 TJ energy ceiling is active, but relaxing energy or actuator capacity does not resolve contact slack. No general physical bottleneck or accepted cycle; rebuild smaller signed derivatives and enrich localized separation modes before a larger local search."
       ],
-      "next_session_task": "Integrated comparison (studies/solar_shield_array/integrated_comparison.md): an attitude scheme for the ring fleet, comparing tiles turned edge-on to the Sun outside service (push, shadows, torques, turn torque and time) with radial-facing tiles carrying a moving mass; then the planes' motion (oversizing against steering by tilted sail force); the annulus film's wavelength-resolved UV transmission and the annulus tiles' areal mass; independent-tile and receiver-ray validation; node-frame keeping with the edge rings. For the held screen, literature bounds on thruster ionization (neutralizer flow included) and on the plasma path. Proposed requirement S7 awaits the author's review.",
+      "next_session_task": "Integrated comparison (studies/solar_shield_array/integrated_comparison.md), in the author's order of 7 October: the outer rings, a radius profile that keeps each tilt turning with the Sun, with radius steps that grow toward the edges, flown for a year against steering by roll with the larger store; the keeping in the regressing frame with the edge rings treated, on a bundle with centred filters, and the along-track keeping that holds each tile within its overlap; the momentum store and the trim as hardware, and their power. The X-ray check (done 7 October) puts two choices to the author: O1's count of gaps and the X-rays' solar-cycle factors. For the held screen, literature bounds on thruster ionization (neutralizer flow included) and on the plasma path.",
       "requirements_from_september_reports": [
         "construction within 500 years of 2026; operation for at least 1e9 years",
         "an open atmosphere with no pressure dome; no superconducting planetary ring",
@@ -458,7 +461,8 @@
         "studies/protection_architecture/results/design_point.json",
         "studies/solar_shield_array/magnetic_architecture.md",
         "studies/solar_shield_array/results/magnetic_architecture.json",
-        "studies/solar_shield_array/magnetic_architecture_checks.json"
+        "studies/solar_shield_array/magnetic_architecture_checks.json",
+        "../atmosphere/middle_atmosphere/results/limb_heat.json"
       ],
       "unresolved": [
         "which loss budget in 1-100 kg/s (atmospheric cycle times of about 100 billion to 1 billion years) works best (designed across the range for now)",
@@ -470,7 +474,8 @@
         "when charged-particle protection is built, and its form: a 1 kg/s budget needs it against the solar wind's charge exchange; about 3e19 A m^2 suffices for the cooler upper air, 1.5e21 (September) gives margin",
         "effects on Earth (illumination)",
         "the catalogue and supply ledger hold only the September reference design",
-        "Bounded 2026-10-05 comparison: regional 500-1000 km circuits strongly reduce screened mass at matched vacuum-field requirements; weaker moments fit four inherited cold-atmosphere loss cases but compress inside the exobase in storm screens. Actual ion transport, terrain/support, quench and current reserve remain open. Continuously held upstream sources fail near-array hardware closure and retain substantial propellant/wake penalties farther away. No primary architecture, new trajectory, target or loss budget is accepted; larger plasma campaigns await review."
+        "Bounded 2026-10-05 comparison: regional 500-1000 km circuits strongly reduce screened mass at matched vacuum-field requirements; weaker moments fit four inherited cold-atmosphere loss cases but compress inside the exobase in storm screens. Actual ion transport, terrain/support, quench and current reserve remain open. Continuously held upstream sources fail near-array hardware closure and retain substantial propellant/wake penalties farther away. No primary architecture, new trajectory, target or loss budget is accepted; larger plasma campaigns await review.",
+        "O1's count of gaps: traced along slant paths a gap heats the air 2.5-5 times the loss response's count, which cuts the allowed transmissions to about a quarter to a third in the cooler titania cases; with all near-infrared heating the standard level loses 30-36 kg/s at solar maximum (the author's choice; studies/solar_shield_array/integrated_comparison.md, the X-ray check)"
       ],
       "next_session_task": "Review the primary magnetic comparison before a larger plasma campaign; cost regional routes, mutual loads and current reserve, and define a cold-atmosphere ion-transport comparison of 3.162e19 versus 1.5e21 A m2. Trade how the optical shield is held against requirement S6 across protected radii of 3-10 lunar radii, with the magnets' mass and power, in the module catalogue and supply ledger."
     }

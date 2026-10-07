@@ -16,7 +16,9 @@ exobase. Equations, data and limits are in [METHODS.md](METHODS.md).
 | [escape.py](escape.py) | Exobase temperature and molecular loss with each case's upper temperature as the thermal column's base; heating by ultraviolet leaking through a filter; bounds on atomic-oxygen loss |
 | [lbl_check.py](lbl_check.py) | Re-solves a finished case's upper air with line-by-line CO2 cooling, to measure the correlated-k error there |
 | [benchmarks.py](benchmarks.py) | Line-by-line thermal and solar fluxes on the equilibrium profiles, for checking a 3-D model's radiation; writes `results/radiation_benchmarks.json` |
+| [limb_heat.py](limb_heat.py) | Short-wave sunlight that passes the solar shield's window, annulus films and gaps, traced through the air along slant paths above the limb: where it heats, the state the heated air settles to, its loss, and the gap transmission each budget allows; writes `results/limb_heat.json` |
 | [inputs.json](inputs.json), [fetch_inputs.py](fetch_inputs.py) | Ultraviolet cross-sections and quantum yields (JPL recommendations via the MPI-Mainz atlas), hash-checked, not redistributed |
+| [limb_inputs.json](limb_inputs.json), [fetch_limb_inputs.py](fetch_limb_inputs.py) | X-ray and extreme-ultraviolet absorption of N2, O2 and O (CXRO atomic scattering factors, Leiden photoabsorption database) and FISM2 daily X-ray spectra for the solar cycle, hash-checked, not redistributed |
 
 ## Run
 
@@ -31,13 +33,16 @@ python -m atmosphere.middle_atmosphere.balance
 python -m atmosphere.middle_atmosphere.lbl_check moon_1.2atm_edge_200nm moon_1.2atm_titania_stack
 python -m atmosphere.middle_atmosphere.escape
 python -m atmosphere.middle_atmosphere.benchmarks
+python -m atmosphere.middle_atmosphere.fetch_limb_inputs --download
+OPENBLAS_NUM_THREADS=1 python -m atmosphere.middle_atmosphere.limb_heat   # after atmosphere.loss_response.tides
 ```
 
 Results are written in [results/](results/): `middle_atmosphere.csv` (one row per
 case) with `middle_atmosphere.json` (schema, producer hashes, evidence),
-`profiles/<case>.csv`, `balance.json`, `lbl_check.json`, `escape_coupling.csv`
-and `radiation_benchmarks.json`. A case takes 7–15 minutes on four cores, and
-10–20 minutes on three with non-equilibrium CO2 cooling.
+`profiles/<case>.csv`, `balance.json`, `lbl_check.json`, `escape_coupling.csv`,
+`radiation_benchmarks.json` and `limb_heat.json`. A case takes 7–15 minutes on four cores, and
+10–20 minutes on three with non-equilibrium CO2 cooling. The limb tracing takes
+about 50 CPU minutes and keeps each case's heat tables in the ignored `cache/limb_heat/`.
 
 ## Results (2026-09-24)
 
@@ -264,3 +269,84 @@ aperture.
 - All of these are global means with no infrared cooling in the thermal column.
   The day–night swing of the upper air (above) is tens of kelvin, and the
   circulation it drives is not included.
+
+### Slant paths above the limb (2026-10-07)
+
+The heat counts above put a quarter of the light that reaches the disk above
+the base, and the loss response derives O1's allowed transmissions with them.
+[limb_heat.py](limb_heat.py) traces the sunlight that passes the solar shield
+along its actual paths through the air, for the ring fleet's aperture: a
+screen at 20,000 km covering four lunar radii, with the window stack over the
+disk, a light film over the annulus, gaps that pass a grey share of the band
+over the whole aperture, and open sky beyond it. It takes the loss response's
+six cases, Lyman-α glow and Earth's tide, finds the state the heated air
+settles to and the gap transmission each budget allows, and writes
+[results/limb_heat.json](results/limb_heat.json). Methods and limits are in
+[METHODS.md](METHODS.md).
+
+- **Gaps heat the thermosphere 2.5–4.2 times the escape model's count.** A
+  grey leak over the aperture lights the air above the limb as well as the
+  disk, and the tall air takes the extreme ultraviolet along slant paths out
+  to near the exobase. Around the quiescent air the factor is 2.5 behind the
+  titania stack with collisional upper air, 2.7 in LTE, 3.2 with all
+  near-infrared heating and 3.8–4.2 behind the 200-nm edge. As the heat
+  swells the air it grows, to 3.1–3.9 at the heats where the cooler titania
+  cases lose 1–100 kg/s. On rays tangent between the base and the exobase,
+  [absorption.py](../loss_response/absorption.py), with band-mean cross
+  sections, finds the same heating within 5%.
+- **The films pass X-rays near 1 nm, which the thermosphere stops in a ring
+  just above the limb.** The 4 µm film passes 0.75–1.35 nm, the 2 µm film
+  0.85–2.55 nm and the window stack 0.55–0.95 nm. Absorbing them takes a
+  column near 10²³ m⁻², so only rays tangent between the limb and about 1.5
+  lunar radii give them up: 7–17% of what passes the annulus, none of it below
+  the base. Over the annulus the 4 µm film heats the thermosphere 1.1–2.5 times
+  what the escape model's film count gives it over the disk.
+- **The films' X-rays rise about twentyfold from quiet Sun to solar maximum.**
+  The escape model multiplies the X-rays below 10 nm by 100 at solar maximum.
+  FISM2's daily spectra, the year around each of the last three maxima over
+  the WHI 2008 quiet week, give 13–21 for the 4 µm film's band, 11–19 for the
+  2 µm film's, 14–24 for the window stack's and 4–6 for the whole band below
+  10 nm, which sets a gap's X-rays. Single days at maximum run up to about
+  twice the yearly mean.
+- **With those factors the 4 µm film adds a tenth to a fifth of the glow's
+  heat.** At solar maximum it heats the thermosphere by 2.5–6.2×10⁻⁷ W/m²
+  behind the titania stack, 8–16% of the 3.1–3.8×10⁻⁶ W/m² the glow gives
+  there (5–9×10⁻⁷ W/m² behind the 200-nm edge). With the factor of 100 it
+  would add 2.0–2.9×10⁻⁶ W/m², about as much as the glow. The 2 µm film adds
+  0.9–2.3×10⁻⁶ W/m², and the window stack over the annulus 1.5–3.5×10⁻⁸ W/m².
+
+The states with the 4 µm film, as molecular loss with Earth's tide (kg/s),
+against the loss response's count at the same transmission. Solar maximum
+uses FISM2's factors; the range spans the three maxima.
+
+| 1.2 atm, titania stack | Quiet Sun, standard level (2×10⁻⁴): traced / O1's count | Solar maximum, no gaps | Tight level (3×10⁻⁵) | Standard level | O1's count, standard level |
+|---|---|---|---|---|---|
+| Collisional upper air | 4×10⁻⁶ / 8×10⁻⁷ | 1–2×10⁻⁵ | 3–5×10⁻⁵ | 0.003–0.004 | 6×10⁻⁵ |
+| LTE | 0.0013 / 0.0003 | 0.003–0.005 | 0.007–0.011 | 0.33–0.50 | 0.010 |
+| All near-infrared heats | 0.61 / 0.16 | 1.2–1.8 | 2.2–3.2 | 30–36 | 2.3 |
+
+- **The cooler titania cases stay small; the warmest swells.** At the
+  standard level and solar maximum the exobase sits at 2.2 lunar radii
+  (collisional, 231–234 K) and 2.7 (LTE, 264–269 K), and with all
+  near-infrared heating at 3.8–3.9 (300–303 K). Behind the 200-nm edge the
+  standard level gives 3.5–3.7 kg/s at quiet Sun with collisional or LTE upper
+  air. At solar maximum there, and with all near-infrared heating at quiet Sun
+  as well, the heat the swollen air takes stays above the heat that swells it
+  up to the tables' top, where the exobase passes six lunar radii. Beyond four
+  lunar radii the thermosphere reaches unfiltered light outside the aperture.
+- **The gaps a budget allows fall to a quarter or a third.** For the same
+  allowance of molecular loss, traced gaps may pass 0.22–0.32 of what the loss
+  response's count allows in the cooler titania cases, at quiet Sun and at
+  solar maximum alike, and 0.12–0.27 with all near-infrared heating. For
+  1 kg/s at solar maximum: 4.6–4.8×10⁻⁴ (collisional) and 2.3–2.5×10⁻⁴ (LTE),
+  against 1.5×10⁻³ and 9×10⁻⁴; with all near-infrared heating, the film and
+  glow alone exceed 1 kg/s, and 10 kg/s allows 0.95–1.1×10⁻⁴. These
+  allowances leave out the solar wind and the exosphere step's losses, so they
+  compare the two counts at the same allowance.
+- **Where the heat lies matters as much as how much.** The thermal column
+  spreads the heat with a fixed shape in log pressure. The traced light lands
+  at a mean depth 0.38–0.43 of the way from the base to the exobase, at about
+  the depth of the disk's own light, between the column's 'low' shape (0.25)
+  and its 'middle' shape (0.5), which the loss response uses and the table
+  above follows. With 'low' the losses fall 14–550 times. Both counts pass
+  through the same column, so the shape moves their losses together.
