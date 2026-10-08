@@ -10,6 +10,16 @@ those choices, and the design notes still open. The port itself is sized in the
 The density, ring and heat figures below are first estimates worked by hand from those studies' products. No
 model of the metropolis exists yet.
 
+**Since 28 September.** The [infrastructure review](../../research/studies/infrastructure_review/README.md) of
+8 October reads this brief against later work. The figures below are the September ones. The review gives what
+changes:
+- the climate figures with main's corrected climate run: the summit's rain at 9–17 mm a day in place of 20–24, and
+  winds aloft about twice as strong;
+- the storm heights with the corrected ring and the electrified storms;
+- storm protection, with lightning that is rare and very large, and flashes that start at the crown's height;
+- the night, with about 82 hours of practical dusk after sunset and about 190 dark hours;
+- the coasts, and the infrastructure off the Moon.
+
 ## The site
 
 - **The summit.** The atlas's highest cell, at 5.4° N, 158.6° W, stands 11.6 km above sea level on a gently
@@ -190,4 +200,13 @@ it reaches milestones:
   crown's wake comes before the berths are fixed.
 - The sky boats' share of trips, their ownership and their traffic system.
 - The land per person for food, and the power and heat plan for the chosen population.
-- The metropolis through the 354-hour night.
+- The metropolis through the 354-hour night: about 82 hours of usable twilight at each end and about 190 hours that
+  need lamps, by the sea-appearance branch's definition of dusk.
+- From the [infrastructure review](../../research/studies/infrastructure_review/README.md):
+  - storm protection: the tower as a lightning conductor reaching to the height where flashes start, the crown's
+    hydrogen berths, lightning protection for charges beyond Earth's highest level, the backbone's ferries in storms,
+    and a storm warning service;
+  - the frame and the crown resized with the corrected winds, with a design gust that varies with height;
+  - wind devices in the upper frame, which give the port more than its own use in the corrected winds;
+  - the high platforms' height or drift in the stronger winds near 70 km;
+  - the link between the summit and orbit, and what launches release into the upper air.

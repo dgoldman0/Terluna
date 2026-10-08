@@ -24,6 +24,14 @@ from the [summit tower study](../summit_tower/README.md#the-central-port).
 **Status.** The author adopted these findings on 2026-09-28 as the planning basis for the Open Moon's sky ships
 ([decisions register](../../decisions.md#sky-ships-and-flyers)).
 
+**Since 28 September.** The [infrastructure review](../infrastructure_review/README.md) of 8 October reruns this
+study with main's corrected climate, whose winds in the band are about twice as strong:
+- the moored ships' design wind becomes 38.6 m/s and their service wind 24.4 m/s;
+- the hulls barely change.
+
+It also brings in the electrified storms. Their flashes start inside the band, and the storms that flash have
+updrafts of 12–36 m/s against the 14.3 m/s design gust below, so ships keep out of them.
+
 **Evidence.** First-order sizing of the kind used to compare concepts.
 - **What is tested.** The models reproduce Lamb's apparent-mass coefficients, Woodward's gust moment for the
   Shenandoah and the elliptic wing's bending. Fitted to the weight statements of four rigid airships, the hull model

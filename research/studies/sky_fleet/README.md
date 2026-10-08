@@ -28,6 +28,15 @@ mixed layer and storms ([climate/crm](../../../climate/crm/README.md)). The draw
 ([decisions register](../../decisions.md#sky-ships-and-flyers)); the long-haul class for the crown, whether winged
 liners join it, and the sky boats' share of trips, ownership and traffic system stay open.
 
+**Since 28 September.** The [infrastructure review](../infrastructure_review/README.md) of 8 October reruns this
+study with main's corrected climate:
+- the high platforms near 70 km meet winds of 25–29 m/s and need about seven times the power to hold station;
+- the day's thermals reach about 10 km;
+- liners in the band meet a steady westerly of about 11 m/s.
+
+It also finds lightning starting at the flight band's height, which bears on the crown's berths and on the hydrogen
+ferries in storms.
+
 **Evidence.** First-order sizing of the kind used to compare concepts.
 - **What is tested.** The drag polar reproduces a search for least power and least drag, keeps the glide ratio
   under any gravity and scales speed, sink and power with it as theory says; the canopy model gives the summit tower

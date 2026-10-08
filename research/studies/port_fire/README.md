@@ -16,6 +16,11 @@ OPENBLAS_NUM_THREADS=1 python -m research.studies.port_fire.run   # results/port
 The models are in [engineering/fire](../../../engineering/fire/README.md), the runner is [run.py](run.py), the numbers
 are in [results/port_fire.json](results/port_fire.json) and the sources in [sources.json](sources.json).
 
+**Since 28 September.** The [infrastructure review](../infrastructure_review/README.md) of 8 October reruns this
+study with main's corrected climate, whose winds aloft are about twice as strong. The wind-fed fires in the upper
+zones grow: a stores compartment burning out in the sealed zone at the median wind releases 818 MW for 1.2 h in place
+of 484 MW for 2.1 h. Smoke, sprinklers and getting out stay as below.
+
 **Evidence.** This is first-order fire-engineering arithmetic.
 - **What is tested.** The correlations are Earth's, and the model reproduces them in Earth air (its tests).
 - **What is extrapolated.** Froude scaling carries them to lunar gravity. That scaling is sound for buoyant flow, and

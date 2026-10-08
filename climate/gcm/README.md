@@ -20,7 +20,11 @@ ExoPlaSim, the first model installed (2026-09-25).
 climatology, `climate/gcm/.venv/bin/python -m climate.gcm.climatology A:30-39`. It
 is not committed. The site winds come from
 `climate/gcm/.venv/bin/python -m climate.gcm.site_winds A28_dim5:15-24 summit 5.375 201.375`, and the winds over the whole Moon from
-`climate/gcm/.venv/bin/python -m climate.gcm.global_winds A28_dim5:15-24`.
+`climate/gcm/.venv/bin/python -m climate.gcm.global_winds A28_dim5:15-24`. Main corrected the GCM's Sun, tilt and
+sunlight split on 2026-09-29, and its design run is now `A28_dim5_moon`, years 20–29. The same two products for that
+run, `site_winds_A28_dim5_moon_summit.json` and `global_winds_A28_dim5_moon.json`, were made on 2026-10-08 for the
+[infrastructure review](../../research/studies/infrastructure_review/README.md) with the same commands, the run given
+as `A28_dim5_moon:20-29`.
 
 ## What only 3-D can answer
 

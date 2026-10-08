@@ -15,6 +15,16 @@ models are in [engineering/towers](../../../engineering/towers/README.md). Every
 integrals over wind distributions; the whole study runs in about a second. Sources are in
 [sources.json](sources.json).
 
+**Since 28 September.** The [infrastructure review](../infrastructure_review/README.md) of 8 October reruns this
+study on a copy with main's corrected inputs. The design run `A28_dim5` had Earth's tilt and too much sunlight at the
+summit, and its corrected successor's winds aloft are about twice as strong. With it:
+- the design gust becomes 32.4 m/s;
+- the port's chosen form takes 98 Mt of steel;
+- screened slow rotors over the whole face give 140% of the port's use.
+
+The review also finds the crown at the height where the electrified storms' flashes start. The figures below keep
+the September inputs until the joint integration reruns the study.
+
 ## The site
 
 - **The summit.** The atlas's highest cell, at 5.375°N, 158.625°W, stands 11,589 m above sea level (9,935 m above the
