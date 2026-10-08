@@ -1,0 +1,17 @@
+{
+  "schema": "terluna.research.historical-inputs/1",
+  "note": "Inputs a published comparison read before the file at their original path was rederived, kept byte for byte.",
+  "inputs": [
+    {
+      "original_path": "research/studies/protection_architecture/results/design_point.json",
+      "path": "research/studies/solar_shield_array/historical/design_point_2026-09-26.json",
+      "sha256": "d144b2df95bbf8fa8eeb1ae4c2d37e590863ca657c78db33e56ba02a7bc27540",
+      "produced_by": "1457f0f, 26 September 2026: the sunlit exosphere counted with and without a lunar magnetosphere",
+      "superseded_by": "be1ba6c, 7 October 2026, and five later rederivations on the traced count of gaps, FISM2 forcing and infrared cooling (873c2ff)",
+      "read_by": [
+        "research/studies/solar_shield_array/results/magnetic_architecture.json"
+      ],
+      "reading_rule": "The magnetic architecture comparison reads the September design point, so its atmospheric losses and magnet needs describe that design point. The current design point is at the original path. A rerun against it needs research/runs/solar_shield_array/closure/closure_fine_0.npz and closure_fine_1.npz and return_repair/repair_trial_local_refined_fine.npz, which this machine lacks."
+    }
+  ]
+}

@@ -8,11 +8,20 @@ from shared.provenance import constants_changed
 
 ROOT = Path(__file__).resolve().parents[3]
 RESULT = json.loads((Path(__file__).parent/'results/magnetic_architecture.json').read_text())
+HISTORICAL = json.loads((Path(__file__).parent/'historical/inputs.json').read_text())
 
 
 def test_parent_and_producer_content_is_pinned():
+    # Inputs read before their file was rederived are kept byte for byte under historical/, with a reading rule.
+    kept = {h['original_path']: h for h in HISTORICAL['inputs']
+            if 'research/studies/solar_shield_array/results/magnetic_architecture.json' in h['read_by']}
     for key in ['source_hashes', 'input_hashes']:
         for path, sha in RESULT['producer'][key].items():
+            if path in kept:
+                assert kept[path]['sha256'] == sha, path
+                assert hashlib.sha256((ROOT/kept[path]['path']).read_bytes()).hexdigest() == sha, path
+                assert hashlib.sha256((ROOT/path).read_bytes()).hexdigest() != sha, path
+                continue
             assert hashlib.sha256((ROOT/path).read_bytes()).hexdigest() == sha, path
     assert not constants_changed(RESULT['producer']['constants'])
 

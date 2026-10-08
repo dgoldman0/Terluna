@@ -860,10 +860,11 @@ absorption heats the air, now moves the choices little: the cases it separates
 all stay within 2 kg/s, and at 1 kg/s the solar wind sets the outcome. The outer
 rings come next.
 
-The [primary magnetic architecture comparison](magnetic_architecture.md) still
-reads the design point from before the traced count. Its rerun needs the
-closure trajectories in `research/runs/solar_shield_array/closure/`, which this
-machine lacks, and its pinned-input test fails until then.
+The [primary magnetic architecture comparison](magnetic_architecture.md)
+describes the 26 September design point, from before the traced count, which
+is kept in [historical/](historical/inputs.json) with its reading rule. Its
+rerun needs the closure trajectories in `research/runs/solar_shield_array/closure/`,
+which this machine lacks.
 
 ## Next steps
 

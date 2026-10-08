@@ -18,9 +18,11 @@ hardware or accepting a new magnetosphere.
 On 7 October 2026 the design point this comparison reads was rederived on the
 traced count of gaps at the ring fleet's 4-radius shadow
 ([requirements](../protection_architecture/requirements.md#retention)). The
-comparison has not been rerun: it needs the closure trajectories in
-`research/runs/solar_shield_array/closure/`, which this machine lacks, and its
-pinned-input test fails until then.
+comparison describes the 26 September design point, which is kept byte for byte
+in [historical/](historical/inputs.json) with its reading rule, and the test
+checks the comparison against that copy. A rerun on the current design point
+needs the closure trajectories in `research/runs/solar_shield_array/closure/`,
+which this machine lacks.
 
 ## Scope checkpoint — 2026-10-05
 
