@@ -2110,6 +2110,87 @@ climate/gcm/.venv/bin/python -m climate.crm.elec_analysis box_0e_elec_corrected
 climate/gcm/.venv/bin/python -m climate.crm.box_analysis box_0e_elec_corrected --from-day 29.5
 ```
 
+### Storm lives
+
+[storm_lives.py](storm_lives.py) follows each storm through two windows of the
+main run written every ten minutes, `box_0e_elec_corrected_storms_first` (days
+11.5–13.0) and `box_0e_elec_corrected_storms_second` (days 40.5–42.0), each run
+on 2026-10-08 from the main run's restart under its settings and executable
+(0.7 and 0.8 hours on 6 threads;
+`climate/results/crm/storms_box_0e_elec_corrected_storms_first.json` and
+`_second.json`). A storm's core is the columns holding at least 1 kg/m² of
+graupel and hail, joined across the box's periodic edges and followed from
+output to output by its overlap. CM1's threads make each window a new
+realization of its days. The windows' flashes follow the main run's for the
+first hours and then part from them: 68 against the main run's 129 on the
+first window's days, 125 against 174 on the second's. The windows therefore
+give the storms' lives, and the main run their numbers.
+
+| | Days 11.5–13.0 | Days 40.5–42.0 |
+|---|---|---|
+| Storm cores followed (whole lives within the window) | 68 (41) | 71 (31) |
+| Storms that flashed; their flashes (to ground) | 6; 68 (18) | 8; 125 (31) |
+| First flash after the core appeared, median (range) | 1.05 h (0.73–1.30) | 0.83 h (0.67–1.54) |
+| First flash after the core held 10 C, median (range) | 0.38 h (0.23–0.56) | 0.50 h (0.19–1.13) |
+| Time from first to last flash, median (range) | 0.57 h (0.13–1.44) | 0.37 h (one flash to 7.2) |
+| Flashes a minute in its busiest ten minutes, median (range) | 0.25 (0.1–0.6) | 0.35 (0.1–0.8) |
+| Life of a storm that flashed, median (range) | 7.2 h (5.7–8.8) | 7.7 h (5.0–12.2) |
+| Life of a storm that did not, median (90th percentile) | 1.7 h (5.0) | 1.7 h (5.8) |
+| Its core after the last flash, median (range) | 5.1 h (4.5–6.5) | 5.9 h (3.9–8.6) |
+
+Every flash started inside a core. The first window's track 14 shows the
+sequence. Its core appeared at hour 3.3 of the window with an updraft of 7 m/s.
+Charge appeared at hour 4.2, and by the first flash, at 4.55, the updraft had
+strengthened to 19 m/s, the graupel and hail in the charging zone (−5 to
+−30 °C) had grown from 0.07 to 12.5 million tonnes and the top had risen from
+40 to 64 km. The storm flashed 26 times in 1.2 hours, 7 of them to ground and at
+most five in ten minutes, while the updraft held at 17–21 m/s. The flashes
+stopped as the updraft weakened, from 17 m/s at hour 5.8 to 8 m/s twenty
+minutes later. The heaviest rain beneath it, 46 mm/h, came 40 minutes after
+the last flash. Its charge, at most 1,410 C positive and 1,210 C negative,
+drained over the next three hours, and its graupel fell out over five and a
+half, the core ending at hour 11.3 with its anvil still at 66 km.
+
+Most storms that flashed had their updraft, their graupel and hail in the
+charging zone and their flashes peak together, within half an hour of one
+another (medians of 10 minutes or less). Storms that met other cells flashed in
+bursts: the second window's longest-flashing storm (its track 48) took in seven
+other cores, two of which had flashed, and flashed at hours 25.2–26.2,
+28.8–29.7 and 32.5. The heaviest rain beneath a storm follows its most frequent
+flashes by a median 0.75–0.9 hours. The lives in the table count the storms
+each window holds whole, 4 and 3 of those that flashed.
+
+The storms that flashed were the strongest and deepest: updrafts of 12–36 m/s
+at their peak (medians 19 and 21 m/s) against a median 6 m/s for the rest, 3–49
+million tonnes of graupel and hail in the charging zone (medians 10 and 19)
+against 0.2, and tops at 66–98 km against medians of 54–56 km. The ranges
+overlap: some storms without a flash reached 18–23 m/s, 11–18 million tonnes
+and 78–88 km. Output by output, a storm's flashes follow its updraft
+(Spearman's ρ 0.50–0.54 with the volume rising faster than 5 m/s and with the
+strongest updraft) more closely than its graupel and hail (0.29–0.45), and
+hardly at all its cloud ice and snow, its top or its area (−0.13 to 0.09). With
+cores at 0.5 or 2 kg/m² the medians of the first flash's delay stay at
+0.83–1.05 hours and of the charge's at 0.38–0.50, while the flashing storms'
+median lives run 5.8–11 hours, longest at the lower threshold, which joins more
+of a storm's cells and its trailing precipitation.
+
+Earth's benchmark supercell (`supercell_elec`, output every five minutes, open
+edges; `climate/results/crm/storms_supercell_elec.json`), tracked the same way,
+flashed within the five minutes in which its core appeared and up to 151
+times a minute. At its peak it held 16 million tonnes of graupel and hail in
+its charging zone, within the lunar flashing storms' range. The lunar storms
+take about an hour from core to first flash and flash 190–1,500 times less
+often at their busiest. Both comparisons cross grids, 6 km against 1 km: on
+the benchmark a coarser grid gives fewer, larger flashes, and the lunar box at
+2 km charged its storms to 73 % of breakdown without a flash ("The fine box"),
+so how much of the delay and of the rate the grid sets is open.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_elec_corrected_storms_first   # and _second
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_0e_elec_corrected_storms_first --threads 6 --hours 8
+climate/gcm/.venv/bin/python -m climate.crm.storm_lives box_0e_elec_corrected_storms_first box_0e_elec_corrected_storms_second supercell_elec
+```
+
 ## The gravity pair
 
 If lunar convection were Earth's stretched six times in size and duration, a

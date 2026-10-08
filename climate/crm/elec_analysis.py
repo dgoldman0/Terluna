@@ -157,10 +157,10 @@ def heights_km(ctl: Path) -> np.ndarray:
     return np.array(values[:n])
 
 
-def snapshot_charge(case: Path, n: int, dx: float, dy: float, zw: np.ndarray) -> dict:
+def snapshot_charge(case: Path, n: int, dx: float, dy: float, zw: np.ndarray, snap: dict | None = None) -> dict:
     """One output time's charge (C/m3 by tracer, net), air temperature (K) and density (kg/m3), the vertical wind and
-    the reflectivity, as (nz, ncol) arrays."""
-    snap = ra.read_snapshot(case, n)
+    the reflectivity, as (nz, ncol) arrays (from the snapshot given, or read)."""
+    snap = ra.read_snapshot(case, n) if snap is None else snap
     p, th, qv = snap['prs'], snap['th'], snap['qv']
     t = th * (p / P00) ** (RD / CP)
     rho = p / (RD * t * (1.0 + 0.608 * qv))

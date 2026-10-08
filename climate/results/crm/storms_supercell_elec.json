@@ -1,0 +1,1204 @@
+{
+ "schema": "terluna.climate.crm-storm-lives/1",
+ "case": "supercell_elec",
+ "purpose": "CM1's supercell at Earth's gravity with WRF-ELEC's NSSL microphysics, charging and branched lightning, the electrified build's benchmark",
+ "producer": {
+  "domain": "climate",
+  "files": {
+   "crm/storm_lives.py": "78167afb5aebdae4"
+  }
+ },
+ "evidence": "CM1 r22.0 with WRF-ELEC (climate/crm/cm1_elec.py) at the case's outputs. The lunar windows run the main run's busiest days again from its restarts with output every ten minutes; CM1 on several threads does not repeat itself bit for bit, so a window is a fresh realization of its days, whose storms part from the main run's within hours, and its flash counts stand beside the main run's without adding to them. Cores, tracks and the flashes' assignment follow the rules in the module's description; times resolve to the outputs.",
+ "reading_rule": "Hours count from the window's start (start_s). A track is one core followed through the outputs; whole marks the tracks that begin after the window's first output and end before its last and neither split from another track nor merged into one: storms whose own lives the window holds entire. Each output stands for the output_s around it, so a life is its outputs times output_s, and flashes per output are those nearest it in time. lead_h is from a new core's first output to its first flash, charge_lead_h from its first output holding 10 C of either sign, each counted from half an output before; the lags are between the outputs where its updraft, its graupel and hail in the charging zone, its flashes and the rain beneath it peak. The correlations are Spearman's, over every output of every track that flashed, of its flashes against each quantity there. sensitivity repeats the summary with cores at other graupel and hail paths.",
+ "start_s": 0.0,
+ "output_s": 300.0,
+ "periodic": false,
+ "settings": {
+  "core_kg_m2": 1.0,
+  "match_km": 20.0,
+  "updraft_m_s": 5.0,
+  "condensate_kg_kg": 1e-05,
+  "charge_c_m3": 1e-10,
+  "charging_zone_c": [
+   -30.0,
+   -5.0
+  ]
+ },
+ "executables": [
+  "311b5a1877f27ae6"
+ ],
+ "summary": {
+  "tracks": 1,
+  "whole_tracks": 0,
+  "flashing_tracks": 1,
+  "flashes": 7134,
+  "flashes_in_cores": 7128,
+  "ground_strikes_in_cores": 0,
+  "life_h": {
+   "flashing": {
+    "n": 0
+   },
+   "without_flashes": {
+    "n": 0
+   }
+  },
+  "lead_h": {
+   "n": 1,
+   "mean": 0.01667,
+   "p10": 0.01667,
+   "median": 0.01667,
+   "p90": 0.01667,
+   "max": 0.01667,
+   "min": 0.01667
+  },
+  "charge_lead_h": {
+   "n": 1,
+   "mean": 0.01667,
+   "p10": 0.01667,
+   "median": 0.01667,
+   "p90": 0.01667,
+   "max": 0.01667,
+   "min": 0.01667
+  },
+  "flash_hours": {
+   "n": 1,
+   "mean": 1.525,
+   "p10": 1.525,
+   "median": 1.525,
+   "p90": 1.525,
+   "max": 1.525,
+   "min": 1.525
+  },
+  "after_last_flash_h": {
+   "n": 0
+  },
+  "flashes_per_track": {
+   "n": 1,
+   "mean": 7128.0,
+   "p10": 7128.0,
+   "median": 7128.0,
+   "p90": 7128.0,
+   "max": 7128.0,
+   "min": 7128.0
+  },
+  "peak_flashes_per_min": {
+   "n": 1,
+   "mean": 151.0,
+   "p10": 151.0,
+   "median": 151.0,
+   "p90": 151.0,
+   "max": 151.0,
+   "min": 151.0
+  },
+  "graupel_after_updraft_h": {
+   "n": 1,
+   "mean": 0.25,
+   "p10": 0.25,
+   "median": 0.25,
+   "p90": 0.25,
+   "max": 0.25,
+   "min": 0.25
+  },
+  "flashes_after_graupel_h": {
+   "n": 1,
+   "mean": -0.6667,
+   "p10": -0.6667,
+   "median": -0.6667,
+   "p90": -0.6667,
+   "max": -0.6667,
+   "min": -0.6667
+  },
+  "rain_after_flashes_h": {
+   "n": 1,
+   "mean": 0.0,
+   "p10": 0.0,
+   "median": 0.0,
+   "p90": 0.0,
+   "max": 0.0,
+   "min": 0.0
+  },
+  "peaks": {
+   "flashing": {
+    "w_max_m_s": {
+     "n": 1,
+     "mean": 57.56,
+     "p10": 57.56,
+     "median": 57.56,
+     "p90": 57.56,
+     "max": 57.56,
+     "min": 57.56
+    },
+    "gh_zone_kg": {
+     "n": 1,
+     "mean": 15940000000.0,
+     "p10": 15940000000.0,
+     "median": 15940000000.0,
+     "p90": 15940000000.0,
+     "max": 15940000000.0,
+     "min": 15940000000.0
+    },
+    "top_km": {
+     "n": 1,
+     "mean": 17.25,
+     "p10": 17.25,
+     "median": 17.25,
+     "p90": 17.25,
+     "max": 17.25,
+     "min": 17.25
+    },
+    "area_km2": {
+     "n": 1,
+     "mean": 4572.0,
+     "p10": 4572.0,
+     "median": 4572.0,
+     "p90": 4572.0,
+     "max": 4572.0,
+     "min": 4572.0
+    },
+    "positive_c": {
+     "n": 1,
+     "mean": 2139.0,
+     "p10": 2139.0,
+     "median": 2139.0,
+     "p90": 2139.0,
+     "max": 2139.0,
+     "min": 2139.0
+    }
+   },
+   "without_flashes": {
+    "w_max_m_s": {
+     "n": 0
+    },
+    "gh_zone_kg": {
+     "n": 0
+    },
+    "top_km": {
+     "n": 0
+    },
+    "area_km2": {
+     "n": 0
+    },
+    "positive_c": {
+     "n": 0
+    }
+   }
+  },
+  "flashes_spearman": {
+   "gh_zone_kg": 0.7614,
+   "gh_kg": 0.7614,
+   "ice_snow_zone_kg": 0.7614,
+   "ice_product_kg2": 0.7614,
+   "updraft_km3": 0.7614,
+   "w_max_m_s": 0.4474,
+   "top_km": 0.7827,
+   "area_km2": 0.7614,
+   "outputs": 19
+  }
+ },
+ "sensitivity": {
+  "core_0.5_kg_m2": {
+   "tracks": 1,
+   "whole_tracks": 0,
+   "flashing_tracks": 1,
+   "flashes": 7134,
+   "flashes_in_cores": 7129,
+   "ground_strikes_in_cores": 0,
+   "life_h": {
+    "flashing": {
+     "n": 0
+    },
+    "without_flashes": {
+     "n": 0
+    }
+   },
+   "lead_h": {
+    "n": 1,
+    "mean": 0.01667,
+    "p10": 0.01667,
+    "median": 0.01667,
+    "p90": 0.01667,
+    "max": 0.01667,
+    "min": 0.01667
+   },
+   "charge_lead_h": {
+    "n": 1,
+    "mean": 0.01667,
+    "p10": 0.01667,
+    "median": 0.01667,
+    "p90": 0.01667,
+    "max": 0.01667,
+    "min": 0.01667
+   },
+   "flash_hours": {
+    "n": 1,
+    "mean": 1.525,
+    "p10": 1.525,
+    "median": 1.525,
+    "p90": 1.525,
+    "max": 1.525,
+    "min": 1.525
+   },
+   "after_last_flash_h": {
+    "n": 0
+   },
+   "flashes_per_track": {
+    "n": 1,
+    "mean": 7129.0,
+    "p10": 7129.0,
+    "median": 7129.0,
+    "p90": 7129.0,
+    "max": 7129.0,
+    "min": 7129.0
+   },
+   "peak_flashes_per_min": {
+    "n": 1,
+    "mean": 151.0,
+    "p10": 151.0,
+    "median": 151.0,
+    "p90": 151.0,
+    "max": 151.0,
+    "min": 151.0
+   },
+   "graupel_after_updraft_h": {
+    "n": 1,
+    "mean": 0.25,
+    "p10": 0.25,
+    "median": 0.25,
+    "p90": 0.25,
+    "max": 0.25,
+    "min": 0.25
+   },
+   "flashes_after_graupel_h": {
+    "n": 1,
+    "mean": -0.6667,
+    "p10": -0.6667,
+    "median": -0.6667,
+    "p90": -0.6667,
+    "max": -0.6667,
+    "min": -0.6667
+   },
+   "rain_after_flashes_h": {
+    "n": 1,
+    "mean": 0.0,
+    "p10": 0.0,
+    "median": 0.0,
+    "p90": 0.0,
+    "max": 0.0,
+    "min": 0.0
+   },
+   "peaks": {
+    "flashing": {
+     "w_max_m_s": {
+      "n": 1,
+      "mean": 57.56,
+      "p10": 57.56,
+      "median": 57.56,
+      "p90": 57.56,
+      "max": 57.56,
+      "min": 57.56
+     },
+     "gh_zone_kg": {
+      "n": 1,
+      "mean": 16090000000.0,
+      "p10": 16090000000.0,
+      "median": 16090000000.0,
+      "p90": 16090000000.0,
+      "max": 16090000000.0,
+      "min": 16090000000.0
+     },
+     "top_km": {
+      "n": 1,
+      "mean": 17.25,
+      "p10": 17.25,
+      "median": 17.25,
+      "p90": 17.25,
+      "max": 17.25,
+      "min": 17.25
+     },
+     "area_km2": {
+      "n": 1,
+      "mean": 5277.0,
+      "p10": 5277.0,
+      "median": 5277.0,
+      "p90": 5277.0,
+      "max": 5277.0,
+      "min": 5277.0
+     },
+     "positive_c": {
+      "n": 1,
+      "mean": 2290.0,
+      "p10": 2290.0,
+      "median": 2290.0,
+      "p90": 2290.0,
+      "max": 2290.0,
+      "min": 2290.0
+     }
+    },
+    "without_flashes": {
+     "w_max_m_s": {
+      "n": 0
+     },
+     "gh_zone_kg": {
+      "n": 0
+     },
+     "top_km": {
+      "n": 0
+     },
+     "area_km2": {
+      "n": 0
+     },
+     "positive_c": {
+      "n": 0
+     }
+    }
+   },
+   "flashes_spearman": {
+    "gh_zone_kg": 0.7614,
+    "gh_kg": 0.7614,
+    "ice_snow_zone_kg": 0.7614,
+    "ice_product_kg2": 0.7614,
+    "updraft_km3": 0.7614,
+    "w_max_m_s": 0.4474,
+    "top_km": 0.7827,
+    "area_km2": 0.7614,
+    "outputs": 19
+   }
+  },
+  "core_2_kg_m2": {
+   "tracks": 2,
+   "whole_tracks": 1,
+   "flashing_tracks": 1,
+   "flashes": 7134,
+   "flashes_in_cores": 7124,
+   "ground_strikes_in_cores": 0,
+   "life_h": {
+    "flashing": {
+     "n": 0
+    },
+    "without_flashes": {
+     "n": 1,
+     "mean": 0.08333,
+     "p10": 0.08333,
+     "median": 0.08333,
+     "p90": 0.08333,
+     "max": 0.08333,
+     "min": 0.08333
+    }
+   },
+   "lead_h": {
+    "n": 1,
+    "mean": 0.01667,
+    "p10": 0.01667,
+    "median": 0.01667,
+    "p90": 0.01667,
+    "max": 0.01667,
+    "min": 0.01667
+   },
+   "charge_lead_h": {
+    "n": 1,
+    "mean": 0.01667,
+    "p10": 0.01667,
+    "median": 0.01667,
+    "p90": 0.01667,
+    "max": 0.01667,
+    "min": 0.01667
+   },
+   "flash_hours": {
+    "n": 1,
+    "mean": 1.525,
+    "p10": 1.525,
+    "median": 1.525,
+    "p90": 1.525,
+    "max": 1.525,
+    "min": 1.525
+   },
+   "after_last_flash_h": {
+    "n": 0
+   },
+   "flashes_per_track": {
+    "n": 1,
+    "mean": 7124.0,
+    "p10": 7124.0,
+    "median": 7124.0,
+    "p90": 7124.0,
+    "max": 7124.0,
+    "min": 7124.0
+   },
+   "peak_flashes_per_min": {
+    "n": 1,
+    "mean": 151.0,
+    "p10": 151.0,
+    "median": 151.0,
+    "p90": 151.0,
+    "max": 151.0,
+    "min": 151.0
+   },
+   "graupel_after_updraft_h": {
+    "n": 1,
+    "mean": 0.25,
+    "p10": 0.25,
+    "median": 0.25,
+    "p90": 0.25,
+    "max": 0.25,
+    "min": 0.25
+   },
+   "flashes_after_graupel_h": {
+    "n": 1,
+    "mean": -0.6667,
+    "p10": -0.6667,
+    "median": -0.6667,
+    "p90": -0.6667,
+    "max": -0.6667,
+    "min": -0.6667
+   },
+   "rain_after_flashes_h": {
+    "n": 1,
+    "mean": 0.0,
+    "p10": 0.0,
+    "median": 0.0,
+    "p90": 0.0,
+    "max": 0.0,
+    "min": 0.0
+   },
+   "peaks": {
+    "flashing": {
+     "w_max_m_s": {
+      "n": 1,
+      "mean": 57.56,
+      "p10": 57.56,
+      "median": 57.56,
+      "p90": 57.56,
+      "max": 57.56,
+      "min": 57.56
+     },
+     "gh_zone_kg": {
+      "n": 1,
+      "mean": 15420000000.0,
+      "p10": 15420000000.0,
+      "median": 15420000000.0,
+      "p90": 15420000000.0,
+      "max": 15420000000.0,
+      "min": 15420000000.0
+     },
+     "top_km": {
+      "n": 1,
+      "mean": 17.25,
+      "p10": 17.25,
+      "median": 17.25,
+      "p90": 17.25,
+      "max": 17.25,
+      "min": 17.25
+     },
+     "area_km2": {
+      "n": 1,
+      "mean": 3708.0,
+      "p10": 3708.0,
+      "median": 3708.0,
+      "p90": 3708.0,
+      "max": 3708.0,
+      "min": 3708.0
+     },
+     "positive_c": {
+      "n": 1,
+      "mean": 1956.0,
+      "p10": 1956.0,
+      "median": 1956.0,
+      "p90": 1956.0,
+      "max": 1956.0,
+      "min": 1956.0
+     }
+    },
+    "without_flashes": {
+     "w_max_m_s": {
+      "n": 1,
+      "mean": 2.175,
+      "p10": 2.175,
+      "median": 2.175,
+      "p90": 2.175,
+      "max": 2.175,
+      "min": 2.175
+     },
+     "gh_zone_kg": {
+      "n": 1,
+      "mean": 38300000.0,
+      "p10": 38300000.0,
+      "median": 38300000.0,
+      "p90": 38300000.0,
+      "max": 38300000.0,
+      "min": 38300000.0
+     },
+     "top_km": {
+      "n": 1,
+      "mean": 14.25,
+      "p10": 14.25,
+      "median": 14.25,
+      "p90": 14.25,
+      "max": 14.25,
+      "min": 14.25
+     },
+     "area_km2": {
+      "n": 1,
+      "mean": 23.0,
+      "p10": 23.0,
+      "median": 23.0,
+      "p90": 23.0,
+      "max": 23.0,
+      "min": 23.0
+     },
+     "positive_c": {
+      "n": 1,
+      "mean": 23.42,
+      "p10": 23.42,
+      "median": 23.42,
+      "p90": 23.42,
+      "max": 23.42,
+      "min": 23.42
+     }
+    }
+   },
+   "flashes_spearman": {
+    "gh_zone_kg": 0.7614,
+    "gh_kg": 0.7614,
+    "ice_snow_zone_kg": 0.7614,
+    "ice_product_kg2": 0.7614,
+    "updraft_km3": 0.7614,
+    "w_max_m_s": 0.4474,
+    "top_km": 0.7827,
+    "area_km2": 0.7614,
+    "outputs": 19
+   }
+  }
+ },
+ "domain": [
+  {
+   "hour": 0.0,
+   "w_max_m_s": 0.0,
+   "gh_kg": 0.0,
+   "gh_zone_kg": 0.0,
+   "positive_c": 0.0,
+   "negative_c": 0.0,
+   "cores": 0,
+   "flashes": 0,
+   "flashing_cores": 0
+  },
+  {
+   "hour": 0.08333,
+   "w_max_m_s": 0.7598,
+   "gh_kg": 0.0,
+   "gh_zone_kg": 0.0,
+   "positive_c": 0.0,
+   "negative_c": 0.0,
+   "cores": 0,
+   "flashes": 0,
+   "flashing_cores": 0
+  },
+  {
+   "hour": 0.1667,
+   "w_max_m_s": 1.142,
+   "gh_kg": 0.0,
+   "gh_zone_kg": 0.0,
+   "positive_c": 0.0,
+   "negative_c": 0.0,
+   "cores": 0,
+   "flashes": 0,
+   "flashing_cores": 0
+  },
+  {
+   "hour": 0.25,
+   "w_max_m_s": 3.767,
+   "gh_kg": 0.0,
+   "gh_zone_kg": 0.0,
+   "positive_c": 0.0,
+   "negative_c": 0.0,
+   "cores": 0,
+   "flashes": 0,
+   "flashing_cores": 0
+  },
+  {
+   "hour": 0.3333,
+   "w_max_m_s": 14.0,
+   "gh_kg": 2.141,
+   "gh_zone_kg": 0.2585,
+   "positive_c": 0.0,
+   "negative_c": 0.0,
+   "cores": 0,
+   "flashes": 0,
+   "flashing_cores": 0
+  },
+  {
+   "hour": 0.4167,
+   "w_max_m_s": 20.93,
+   "gh_kg": 1457000.0,
+   "gh_zone_kg": 1302000.0,
+   "positive_c": 0.0,
+   "negative_c": 0.0,
+   "cores": 0,
+   "flashes": 0,
+   "flashing_cores": 0
+  },
+  {
+   "hour": 0.5,
+   "w_max_m_s": 28.14,
+   "gh_kg": 403600000.0,
+   "gh_zone_kg": 321800000.0,
+   "positive_c": 53.43,
+   "negative_c": -54.93,
+   "cores": 1,
+   "flashes": 5,
+   "flashing_cores": 1
+  },
+  {
+   "hour": 0.5833,
+   "w_max_m_s": 35.61,
+   "gh_kg": 1573000000.0,
+   "gh_zone_kg": 1007000000.0,
+   "positive_c": 197.5,
+   "negative_c": -205.9,
+   "cores": 1,
+   "flashes": 15,
+   "flashing_cores": 1
+  },
+  {
+   "hour": 0.6667,
+   "w_max_m_s": 51.92,
+   "gh_kg": 2757000000.0,
+   "gh_zone_kg": 1278000000.0,
+   "positive_c": 294.6,
+   "negative_c": -310.1,
+   "cores": 1,
+   "flashes": 63,
+   "flashing_cores": 1
+  },
+  {
+   "hour": 0.75,
+   "w_max_m_s": 52.77,
+   "gh_kg": 3802000000.0,
+   "gh_zone_kg": 1717000000.0,
+   "positive_c": 457.4,
+   "negative_c": -482.5,
+   "cores": 1,
+   "flashes": 75,
+   "flashing_cores": 1
+  },
+  {
+   "hour": 0.8333,
+   "w_max_m_s": 50.81,
+   "gh_kg": 5068000000.0,
+   "gh_zone_kg": 2321000000.0,
+   "positive_c": 513.1,
+   "negative_c": -572.9,
+   "cores": 1,
+   "flashes": 112,
+   "flashing_cores": 1
+  },
+  {
+   "hour": 0.9167,
+   "w_max_m_s": 48.03,
+   "gh_kg": 6582000000.0,
+   "gh_zone_kg": 3131000000.0,
+   "positive_c": 535.1,
+   "negative_c": -650.7,
+   "cores": 1,
+   "flashes": 126,
+   "flashing_cores": 1
+  },
+  {
+   "hour": 1.0,
+   "w_max_m_s": 45.85,
+   "gh_kg": 8416000000.0,
+   "gh_zone_kg": 4017000000.0,
+   "positive_c": 576.8,
+   "negative_c": -690.1,
+   "cores": 1,
+   "flashes": 215,
+   "flashing_cores": 1
+  },
+  {
+   "hour": 1.083,
+   "w_max_m_s": 49.67,
+   "gh_kg": 10930000000.0,
+   "gh_zone_kg": 5282000000.0,
+   "positive_c": 797.9,
+   "negative_c": -962.6,
+   "cores": 1,
+   "flashes": 250,
+   "flashing_cores": 1
+  },
+  {
+   "hour": 1.167,
+   "w_max_m_s": 49.1,
+   "gh_kg": 13390000000.0,
+   "gh_zone_kg": 6214000000.0,
+   "positive_c": 643.5,
+   "negative_c": -876.3,
+   "cores": 1,
+   "flashes": 360,
+   "flashing_cores": 1
+  },
+  {
+   "hour": 1.25,
+   "w_max_m_s": 50.16,
+   "gh_kg": 15420000000.0,
+   "gh_zone_kg": 7105000000.0,
+   "positive_c": 1096.0,
+   "negative_c": -1410.0,
+   "cores": 1,
+   "flashes": 700,
+   "flashing_cores": 1
+  },
+  {
+   "hour": 1.333,
+   "w_max_m_s": 49.54,
+   "gh_kg": 17200000000.0,
+   "gh_zone_kg": 7966000000.0,
+   "positive_c": 1444.0,
+   "negative_c": -1863.0,
+   "cores": 1,
+   "flashes": 755,
+   "flashing_cores": 1
+  },
+  {
+   "hour": 1.417,
+   "w_max_m_s": 52.76,
+   "gh_kg": 18850000000.0,
+   "gh_zone_kg": 8565000000.0,
+   "positive_c": 1208.0,
+   "negative_c": -1734.0,
+   "cores": 1,
+   "flashes": 630,
+   "flashing_cores": 1
+  },
+  {
+   "hour": 1.5,
+   "w_max_m_s": 53.44,
+   "gh_kg": 20260000000.0,
+   "gh_zone_kg": 9014000000.0,
+   "positive_c": 1760.0,
+   "negative_c": -2420.0,
+   "cores": 1,
+   "flashes": 628,
+   "flashing_cores": 1
+  },
+  {
+   "hour": 1.583,
+   "w_max_m_s": 54.91,
+   "gh_kg": 22470000000.0,
+   "gh_zone_kg": 9786000000.0,
+   "positive_c": 1967.0,
+   "negative_c": -2839.0,
+   "cores": 1,
+   "flashes": 513,
+   "flashing_cores": 1
+  },
+  {
+   "hour": 1.667,
+   "w_max_m_s": 55.43,
+   "gh_kg": 24710000000.0,
+   "gh_zone_kg": 10480000000.0,
+   "positive_c": 1822.0,
+   "negative_c": -2657.0,
+   "cores": 1,
+   "flashes": 490,
+   "flashing_cores": 1
+  },
+  {
+   "hour": 1.75,
+   "w_max_m_s": 57.56,
+   "gh_kg": 27150000000.0,
+   "gh_zone_kg": 11510000000.0,
+   "positive_c": 2265.0,
+   "negative_c": -3191.0,
+   "cores": 1,
+   "flashes": 548,
+   "flashing_cores": 1
+  },
+  {
+   "hour": 1.833,
+   "w_max_m_s": 57.28,
+   "gh_kg": 29720000000.0,
+   "gh_zone_kg": 12930000000.0,
+   "positive_c": 2725.0,
+   "negative_c": -3748.0,
+   "cores": 1,
+   "flashes": 690,
+   "flashing_cores": 1
+  },
+  {
+   "hour": 1.917,
+   "w_max_m_s": 52.26,
+   "gh_kg": 32540000000.0,
+   "gh_zone_kg": 14690000000.0,
+   "positive_c": 2406.0,
+   "negative_c": -3331.0,
+   "cores": 1,
+   "flashes": 653,
+   "flashing_cores": 1
+  },
+  {
+   "hour": 2.0,
+   "w_max_m_s": 55.54,
+   "gh_kg": 35080000000.0,
+   "gh_zone_kg": 16190000000.0,
+   "positive_c": 2417.0,
+   "negative_c": -3278.0,
+   "cores": 1,
+   "flashes": 306,
+   "flashing_cores": 1
+  }
+ ],
+ "tracks": [
+  {
+   "first_h": 0.5,
+   "last_h": 2.0,
+   "life_h": 1.583,
+   "whole": false,
+   "split_from": null,
+   "merged_into": null,
+   "flashes": 7128,
+   "ground_strikes": 0,
+   "peak_w_max_m_s": 57.56,
+   "peak_w_max_m_s_h": 1.75,
+   "peak_gh_zone_kg": 15940000000.0,
+   "peak_gh_zone_kg_h": 2.0,
+   "peak_gh_kg": 34200000000.0,
+   "peak_gh_kg_h": 2.0,
+   "peak_top_km": 17.25,
+   "peak_top_km_h": 1.5,
+   "peak_area_km2": 4572.0,
+   "peak_area_km2_h": 2.0,
+   "peak_positive_c": 2139.0,
+   "peak_positive_c_h": 1.833,
+   "peak_rain_mm_h": 362.7,
+   "peak_rain_mm_h_h": 1.333,
+   "peak_negative_c": -2723.0,
+   "first_flash_h": 0.475,
+   "last_flash_h": 2.0,
+   "flash_hours": 1.525,
+   "peak_flashes_per_min": 151.0,
+   "peak_flashes_h": 1.333,
+   "after_last_flash_h": 0.04208,
+   "lead_h": 0.01667,
+   "charge_lead_h": 0.01667,
+   "graupel_after_updraft_h": 0.25,
+   "flashes_after_graupel_h": -0.6667,
+   "rain_after_flashes_h": 0.0,
+   "series": {
+    "area_km2": [
+     90.0,
+     198.0,
+     319.0,
+     430.0,
+     565.0,
+     739.0,
+     973.0,
+     1172.0,
+     1420.0,
+     1709.0,
+     1914.0,
+     2148.0,
+     2483.0,
+     2816.0,
+     3101.0,
+     3467.0,
+     3778.0,
+     4214.0,
+     4572.0
+    ],
+    "x_km": [
+     58.04,
+     58.03,
+     58.62,
+     59.58,
+     60.35,
+     60.72,
+     61.14,
+     60.88,
+     60.87,
+     61.18,
+     61.54,
+     61.86,
+     62.04,
+     61.59,
+     61.24,
+     60.94,
+     61.15,
+     61.35,
+     61.52
+    ],
+    "y_km": [
+     66.04,
+     67.04,
+     67.91,
+     68.64,
+     69.22,
+     69.65,
+     70.21,
+     71.16,
+     71.79,
+     72.07,
+     72.23,
+     72.31,
+     72.25,
+     72.58,
+     72.8,
+     73.23,
+     73.8,
+     74.31,
+     74.87
+    ],
+    "gh_kg": [
+     390600000.0,
+     1545000000.0,
+     2715000000.0,
+     3738000000.0,
+     4982000000.0,
+     6466000000.0,
+     8251000000.0,
+     10700000000.0,
+     13130000000.0,
+     15100000000.0,
+     16780000000.0,
+     18360000000.0,
+     19730000000.0,
+     21880000000.0,
+     24040000000.0,
+     26420000000.0,
+     28900000000.0,
+     31750000000.0,
+     34200000000.0
+    ],
+    "gh_zone_kg": [
+     309800000.0,
+     985000000.0,
+     1258000000.0,
+     1689000000.0,
+     2285000000.0,
+     3083000000.0,
+     3955000000.0,
+     5210000000.0,
+     6123000000.0,
+     6994000000.0,
+     7813000000.0,
+     8367000000.0,
+     8789000000.0,
+     9553000000.0,
+     10220000000.0,
+     11210000000.0,
+     12660000000.0,
+     14450000000.0,
+     15940000000.0
+    ],
+    "ice_snow_zone_kg": [
+     50920000.0,
+     80510000.0,
+     112800000.0,
+     136600000.0,
+     155500000.0,
+     199700000.0,
+     221700000.0,
+     277800000.0,
+     352900000.0,
+     434800000.0,
+     503200000.0,
+     634500000.0,
+     782800000.0,
+     919900000.0,
+     1089000000.0,
+     1176000000.0,
+     1350000000.0,
+     1577000000.0,
+     1753000000.0
+    ],
+    "w_max_m_s": [
+     26.08,
+     35.61,
+     51.92,
+     52.77,
+     50.81,
+     48.03,
+     45.85,
+     49.67,
+     49.1,
+     50.16,
+     49.54,
+     52.76,
+     53.44,
+     54.91,
+     55.43,
+     57.56,
+     57.28,
+     52.26,
+     55.54
+    ],
+    "updraft_km3": [
+     337.5,
+     539.5,
+     601.5,
+     703.5,
+     948.0,
+     1264.0,
+     1632.0,
+     2072.0,
+     2294.0,
+     2482.0,
+     2601.0,
+     3041.0,
+     3504.0,
+     3574.0,
+     3889.0,
+     4083.0,
+     4482.0,
+     4824.0,
+     4968.0
+    ],
+    "top_km": [
+     11.25,
+     12.75,
+     14.25,
+     14.75,
+     15.75,
+     16.25,
+     16.75,
+     15.75,
+     16.75,
+     16.75,
+     16.75,
+     16.75,
+     17.25,
+     17.25,
+     17.25,
+     17.25,
+     17.25,
+     17.25,
+     16.75
+    ],
+    "rain_mm_h": [
+     4.351e-05,
+     0.2109,
+     6.858,
+     44.78,
+     114.2,
+     129.4,
+     147.3,
+     178.2,
+     248.2,
+     347.2,
+     362.7,
+     356.3,
+     347.4,
+     244.3,
+     244.2,
+     249.0,
+     217.4,
+     201.5,
+     212.9
+    ],
+    "positive_c": [
+     53.43,
+     197.5,
+     293.2,
+     445.8,
+     502.9,
+     518.1,
+     548.5,
+     759.8,
+     595.3,
+     1025.0,
+     1310.0,
+     1017.0,
+     1436.0,
+     1531.0,
+     1270.0,
+     1663.0,
+     2139.0,
+     1878.0,
+     1787.0
+    ],
+    "negative_c": [
+     -54.87,
+     -197.5,
+     -303.2,
+     -470.7,
+     -552.9,
+     -610.2,
+     -630.4,
+     -851.0,
+     -752.7,
+     -1183.0,
+     -1507.0,
+     -1272.0,
+     -1783.0,
+     -1956.0,
+     -1759.0,
+     -2074.0,
+     -2723.0,
+     -2347.0,
+     -2161.0
+    ],
+    "hour": [
+     0.5,
+     0.5833,
+     0.6667,
+     0.75,
+     0.8333,
+     0.9167,
+     1.0,
+     1.083,
+     1.167,
+     1.25,
+     1.333,
+     1.417,
+     1.5,
+     1.583,
+     1.667,
+     1.75,
+     1.833,
+     1.917,
+     2.0
+    ],
+    "flashes": [
+     5,
+     15,
+     63,
+     75,
+     112,
+     126,
+     215,
+     250,
+     360,
+     700,
+     755,
+     630,
+     628,
+     513,
+     490,
+     547,
+     688,
+     652,
+     304
+    ],
+    "ground_strikes": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ]
+   }
+  }
+ ]
+}

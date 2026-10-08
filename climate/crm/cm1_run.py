@@ -1223,7 +1223,7 @@ CASES['box_0e_elec_corrected'] = dict(
             'under the lunar rules of 2026-10-05: the breakdown field\'s cap lifted, the leader\'s crossing to the '
             'ground and leakage')
 # Windows of the main run's stormy days with output every ten minutes, to follow each storm's life: the first lunar
-# day's busiest storms (days 11.5-13.0, 130 of its 199 flashes) and the second's (days 40.5-42.0, the days the earlier
+# day's busiest storms (days 11.5-13.0, 129 of its 199 flashes) and the second's (days 40.5-42.0, the days the earlier
 # windows ran), from box_0e_elec_corrected's twelve-hourly restarts under its own settings. CM1 on several threads
 # makes each a new realization of those days.
 CASES['box_0e_elec_corrected_storms_first'] = dict(
