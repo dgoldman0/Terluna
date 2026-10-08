@@ -3,7 +3,7 @@
  "producer": {
   "study": "sky_ships",
   "files": {
-   "research/studies/sky_ships/run.py": "9aec21f476f9e818",
+   "research/studies/sky_ships/run.py": "1e8ad5763e46ee68",
    "engineering/flight/buoyant.py": "7561d73490cdb16f",
    "engineering/flight/winged.py": "596dc1a5a34552d9",
    "research/studies/summit_tower/run.py": "07c359ad1665134d",
@@ -4692,6 +4692,7 @@
    ]
   }
  },
+ "wing_gust_m_s": 21.7,
  "hybrid_hull_lift": {
   "flight_band": [
    {

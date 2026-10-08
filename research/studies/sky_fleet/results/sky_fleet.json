@@ -1877,7 +1877,7 @@
   "study": "sky_fleet",
   "files": {
    "research/studies/sky_fleet/run.py": "db0cf91a4268e661",
-   "research/studies/sky_ships/run.py": "9aec21f476f9e818",
+   "research/studies/sky_ships/run.py": "1e8ad5763e46ee68",
    "engineering/flight/buoyant.py": "7561d73490cdb16f",
    "engineering/flight/winged.py": "596dc1a5a34552d9",
    "research/studies/summit_tower/run.py": "07c359ad1665134d",
@@ -1895,7 +1895,7 @@
    "SYNODIC_MONTH_DAYS": 29.53059
   },
   "inputs": {
-   "research/studies/sky_ships/results/sky_ships.json": "32ee066c3b36f3dc",
+   "research/studies/sky_ships/results/sky_ships.json": "1e214bf6e64b0bb8",
    "research/studies/summit_tower/results/summit_tower.json": "53954bbe96931efa",
    "research/studies/summit_tower/results/summit_tower_form.json": "20d1201ad13a8348",
    "climate/results/gcm/global_winds_A28_dim5_moon.json": "4055b824d45c54b1",

@@ -236,7 +236,6 @@ TRANSPORTS = {name: dict(wing_kg=w * LB, mass_kg=g * LB, area_m2=s * FT2, span_m
 EARTH_CRUISE_DENSITY = 0.38                # about 10.5 km
 EARTH_GUST_EAS = 15.24                     # 50 ft/s derived gust at cruise (the older FAR 25.341), equivalent airspeed
 REFERENCE_FLYER = dict(name='An-225', span_m=88.4, area_m2=905.0, mass_kg=640e3)
-WING_GUST_BAND_M_S = 20.0                  # Earth's 50 ft/s at the band's density (19.7 m/s true) and the ring's 14.3 m/s x 1.4
 
 
 def calibrate_wings(transports=TRANSPORTS) -> tuple:
@@ -525,6 +524,9 @@ def results() -> dict:
     factors, checks = calibrate()
     reference = 1.0 - SHIPS[REFERENCE_SHIP]['empty_lb'] / SHIPS[REFERENCE_SHIP]['gross_lb']
     moon_gust = bw['updraft_max_m_s']
+    # Wings take the larger of Earth's 50 ft/s derived gust at the band's density and the ring's storms' updraft as a
+    # 3-second gust.
+    wing_gust = max(EARTH_GUST_EAS * (1.225 / band_air.density_kg_m3) ** 0.5, moon_gust * GUST_FACTOR)
     base = dict(DESIGN_1930, **factors, speed_m_s=SPEED_M_S)
     d1930, d1930_moon = bu.Design(**base), bu.Design(**{**base, 'gust_m_s': moon_gust})
     modern_earth = bu.Design(**{**base, **MODERN})
@@ -561,7 +563,7 @@ def results() -> dict:
                       inputs={str(Path(f).relative_to(ROOT)): digest(f) for f in (GLOBAL_WINDS, RING, PORT)}),
         evidence=EVIDENCE, reading_rule=READING_RULE,
         air=air_table(winds, ring), band=bw, storms=storms(ring), similarity=similarity(winds), buoyant=buoyant,
-        pressure_hulls=pressure, winged=winged_results(band_air.density_kg_m3, WING_GUST_BAND_M_S),
+        pressure_hulls=pressure, winged=winged_results(band_air.density_kg_m3, wing_gust), wing_gust_m_s=round(wing_gust, 1),
         hybrid_hull_lift=dict(flight_band=hull_lift_ratio(band_air, float(bu.net_lift_kg_m3(band_top, bu.HYDROGEN, PURITY)),
                                                           CRUISE_M_S, (40.0, 83.0, 167.0, 250.0)),
                               earth_sea_level=hull_lift_ratio(EARTH_SEA, float(bu.net_lift_kg_m3(EARTH_SEA, bu.HYDROGEN, PURITY)),
