@@ -1,0 +1,166 @@
+{
+ "source_admission": "Published values used as constants, quoted ranges or cited findings; no external dataset files are admitted. 'access' records how far each source was checked: a literature-gathering agent fetched and read each one (or, for the TIA standard, its clause text) and quoted it; nothing was re-read here. Model products of this repository are cited by path in the README and hashed in the results.",
+ "sources": [
+  {
+   "citation": "Robinson (LROC team) 2010, Lunar Reconnaissance Orbiter Camera image post 249",
+   "title": "Highest Point on the Moon!",
+   "url": "https://lroc.im-ldi.com/images/249",
+   "use": "the highest point, 10,786 m above the mean radius at 5.4125 N, 201.3665 E, near Engel'gardt crater",
+   "access": "web page, read by the literature agent"
+  },
+  {
+   "citation": "NOAA and NASA 1976, NOAA-S/T 76-1562; NASA-TM-X-74335",
+   "title": "U.S. Standard Atmosphere, 1976",
+   "url": "https://ntrs.nasa.gov/citations/19770009539",
+   "use": "Earth air for the comparison towers: 1.2250 kg/m3 at sea level, -6.5 K/km to 11 km, isothermal 216.65 K to 20 km, +1 K/km to 32 km",
+   "access": "full text (scanned tables), read by the literature agent"
+  },
+  {
+   "citation": "Telecommunications Industry Association 2005, TIA-222-G, section 2.6.9.1.1 and Table 2-6",
+   "title": "Structural Standard for Antenna Supporting Structures and Antennas",
+   "url": "",
+   "use": "lattice-tower force coefficient Cf = 4.0e^2 - 5.9e + 4.0 (square), round-member factor 0.57 - 0.14e + 0.86e^2 - 0.24e^3 (subcritical; 0.36 + 0.26e + 0.97e^2 - 0.63e^3 supercritical), and 1 + 0.75e (at most 1.2) for wind along a diagonal",
+   "access": "standard, paywalled; clause text read by the literature agent in a copy not cited here"
+  },
+  {
+   "citation": "Dagli, Tuskan and Uncu 2019, Eurasian Journal of Civil Engineering and Architecture 3(2), 41-47",
+   "title": "Investigation of fluid-structure interaction by using solidity ratio",
+   "url": "https://dergipark.org.tr/tr/download/article-file/835399",
+   "use": "an open paper quoting the TIA-222-G square-tower coefficient",
+   "access": "full text, read by the literature agent"
+  },
+  {
+   "citation": "Burton, Kwok and Abdelrazaq 2015, International Journal of High-Rise Buildings 4(1), 1-8",
+   "title": "Wind-Induced Motion of Tall Buildings: Designing for Occupant Comfort",
+   "url": "https://koreascience.or.kr/article/JAKO201508160154217.page",
+   "use": "comfort guidance: 5 milli-g perception; once-a-year peaks of 5-7 milli-g residential and 9-12 office (Isyumov 1993); ISO 10137",
+   "access": "full text, read by the literature agent"
+  },
+  {
+   "citation": "Weidman and Pinelis 2004, Comptes Rendus Mecanique 332(7), 571-584, doi:10.1016/j.crme.2004.02.021",
+   "title": "Model equations for the Eiffel Tower profile: historical perspective and new results",
+   "url": "https://digitalcommons.mtu.edu/michigantech-p/6271/",
+   "use": "Eiffel's wind-load reasoning gives an exponential tower profile",
+   "access": "abstract, read by the literature agent"
+  },
+  {
+   "citation": "Irwin 2008, Journal of Wind Engineering and Industrial Aerodynamics 96(6-7), 701-712, doi:10.1016/j.jweia.2007.06.008",
+   "title": "Bluff body aerodynamics in wind engineering",
+   "url": "https://ihrc.fiu.edu/wp-content/uploads/2014/03/Irwin2008_BluffBodyAerodynamics.pdf",
+   "use": "setbacks that vary the cross-section with height \"confuse the vortices\"; the Burj Dubai's spiral setbacks",
+   "access": "full text (article in press), read by the literature agent"
+  },
+  {
+   "citation": "Wikipedia, Warsaw radio mast; Kohlstedt 2016, 99% Invisible",
+   "title": "Warsaw radio mast",
+   "url": "https://en.wikipedia.org/wiki/Warsaw_radio_mast",
+   "use": "a 646 m guyed lattice mast, 1974-1991, held by three guy arrays at five levels",
+   "access": "web pages, read by the literature agent"
+  },
+  {
+   "citation": "TAIPEI 101, observatory features",
+   "title": "Wind damper",
+   "url": "https://www.taipei-101.com.tw/en/observatory/feature",
+   "use": "a 660-tonne tuned mass damper",
+   "access": "web page, read by the literature agent"
+  },
+  {
+   "citation": "Elliott, Holladay, Barchet, Foote and Sandusky 1986, DOE/CH 10093-4, Table 1-1",
+   "title": "Wind Energy Resource Atlas of the United States",
+   "url": "https://www.nrc.gov/docs/ML0720/ML072040340.pdf",
+   "use": "wind power classes at 50 m: class 3 300-400 W/m2, \"suitable for most wind turbine applications\"; class 2 from 200 W/m2",
+   "access": "full text (archived table), read by the literature agent"
+  },
+  {
+   "citation": "Jonkman, Butterfield, Musial and Scott 2009, NREL/TP-500-38060",
+   "title": "Definition of a 5-MW Reference Wind Turbine for Offshore System Development",
+   "url": "https://docs.nlr.gov/docs/fy09osti/38060.pdf",
+   "use": "fast rotor: peak power coefficient 0.482 at tip-speed ratio 7.55; cut-in, rated and cut-out 3, 11.4 and 25 m/s",
+   "access": "full text, read by the literature agent"
+  },
+  {
+   "citation": "Fraenkel 1986, FAO Irrigation and Drainage Paper 43, section 4.7 and Table 18",
+   "title": "Water lifting",
+   "url": "https://www.fao.org/4/ah810e/ah810e10.htm",
+   "use": "rotor types: American many-blade Cp 0.15-0.30 at tip-speed ratio 1-1.5; Savonius 0.15 at 0.8-1; high-speed 0.30-0.45 at 5-10; windpumps run down to 3 m/s once turning",
+   "access": "full text, read by the literature agent"
+  },
+  {
+   "citation": "Ragheb and Ragheb 2011, in Carriveau (ed.), Fundamental and Advanced Topics in Wind Power, doi:10.5772/21398",
+   "title": "Wind Turbines Theory - The Betz Equation and Optimal Rotor Tip Speed Ratio",
+   "url": "https://www.intechopen.com/chapters/16242",
+   "use": "the Betz limit 16/27; American many-blade rotors peak near 15% (against FAO's 0.15-0.30)",
+   "access": "full text, read by the literature agent"
+  },
+  {
+   "citation": "Breen, Mallik and Adhikari 2025, Renewable Energy 254, 123549, doi:10.1016/j.renene.2025.123549",
+   "title": "Performance analysis and geometric optimization of bladeless wind turbines using wake oscillator model",
+   "url": "https://eprints.gla.ac.uk/357207/2/357207.pdf",
+   "use": "bladeless masts: modelled peak efficiency 6% on the mast's frontal area; industrial devices so far 1-100 W",
+   "access": "full text, read by the literature agent"
+  },
+  {
+   "citation": "Griffin 1985, Naval Research Laboratory Memorandum Report 5600",
+   "title": "Vortex-Induced Vibrations of Marine Cables and Structures",
+   "url": "https://www.bsee.gov/sites/bsee.gov/files/tap-technical-assessment-program//074af.pdf",
+   "use": "mean drag of oscillating cylinders: amplification to about 2.5 at the largest swings (mostly in water; smaller in air)",
+   "access": "full text (scanned), read by the literature agent"
+  },
+  {
+   "citation": "Norwin A/S, Atkins and Bahrain World Trade Center 2008, press release of 8 April",
+   "title": "World's first integrated wind turbines inaugurated in Bahrain",
+   "url": "https://norwin.dk/Resources/080408%20BWTC%20Press%20release%20Turbine%20Inauguration.pdf",
+   "use": "three 29 m turbines forecast to give 11-15% of the towers' power and to run about half the time (a forecast)",
+   "access": "full text, read by the literature agent"
+  },
+  {
+   "citation": "NBS 2011 (17 July); Wikipedia, Strata SE1",
+   "title": "Strata SE1: the wind turbines",
+   "url": "https://www.thenbs.com/knowledge/strata-se1-the-wind-turbines",
+   "use": "built-in turbines predicted not to turn for much of the time; residents reported they barely moved and they were switched off after vibration and noise complaints",
+   "access": "web pages, read by the literature agent"
+  },
+  {
+   "citation": "Epstein 2008, High Performing Buildings (ASHRAE), Winter 2008, 22-29",
+   "title": "How Far Can You Go? (Pearl River Tower)",
+   "url": "https://www.hpbmagazine.org/content/uploads/2020/04/08W-Pearl-River-Tower-Guangzhou-China.pdf",
+   "use": "turbines in the tower's openings estimated at 1% of the building's energy (design stage)",
+   "access": "full text, read by the literature agent"
+  },
+  {
+   "citation": "Encraft 2009",
+   "title": "Warwick Wind Trials Project: final report",
+   "url": "https://s1.solacity.com/docs/Warwick%20Wind%20Trials%20Report.pdf",
+   "use": "26 building-mounted micro-turbines: capacity factor 0.85% with downtime; wind maps and power curves overestimated output 15-17 times; high-rise units switched off after noise complaints",
+   "access": "full text (mirror), read by the literature agent"
+  },
+  {
+   "citation": "Shen, Zhu, Xu and Zhu 2018, Structural Control and Health Monitoring 25(2), e2072, doi:10.1002/stc.2072",
+   "title": "Energy regenerative tuned mass dampers in high-rise buildings",
+   "url": "https://api.openalex.org/works/doi:10.1002/stc.2072",
+   "use": "a simulated 76-storey building: hundreds of watts to kilowatts harvested at mean winds of 8-25 m/s, with control comparable to a passive damper",
+   "access": "abstract, read by the literature agent"
+  },
+  {
+   "citation": "Band 2012, report for The Crown Estate, SOSS-02",
+   "title": "Using a collision risk model to assess bird collision risks for offshore windfarms",
+   "url": "https://www.bto.org/sites/default/files/u28/downloads/Projects/Final_Report_SOSS02_Band1ModelGuidance.pdf",
+   "use": "the single-crossing collision probability and its disc average; avoidance of 98% or more for many species",
+   "access": "full text, read by the literature agent"
+  },
+  {
+   "citation": "May, Nygard, Falkdalen, Astrom, Hamre and Stokke 2020, Ecology and Evolution 10(16), 8927-8935, doi:10.1002/ece3.6592",
+   "title": "Paint it black: Efficacy of increased wind turbine rotor blade visibility to reduce avian fatalities",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7452767/",
+   "use": "one black blade cut the annual fatality rate by over 70% (four turbine pairs, Smola)",
+   "access": "full text, read by the literature agent"
+  },
+  {
+   "citation": "US EPA ENERGY STAR Portfolio Manager 2024",
+   "title": "U.S. Energy Use Intensity by Property Type",
+   "url": "https://portfoliomanager.energystar.gov/pdf/reference/US%20National%20Median%20Table.pdf",
+   "use": "median office site energy 52.9 kBtu/ft2, about 167 kWh/m2 a year",
+   "access": "full text, read by the literature agent"
+  }
+ ]
+}

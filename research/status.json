@@ -273,7 +273,7 @@
     },
     {
       "topic": "habitation",
-      "condition": "design_concepts; no complete sizing or service model; optical_comfort_clear_sky_surface_and_eye_screen_with_earth_controls; optical_comfort_packed_angular_sky_transfer_and_finite_matte_scene_transport; optical_comfort_local_native_sky_and_resolved_wave_slopes; solved_column_shielded_spherical_sky_and_updated_gaze_and_finite_scenes",
+      "condition": "design_concepts; no complete sizing or service model; optical_comfort_clear_sky_surface_and_eye_screen_with_earth_controls; optical_comfort_packed_angular_sky_transfer_and_finite_matte_scene_transport; optical_comfort_local_native_sky_and_resolved_wave_slopes; solved_column_shielded_spherical_sky_and_updated_gaze_and_finite_scenes; summit_sky_tower_concept_sizing_for_gravity_and_wind; wind_devices_screened; central_port_chosen_24km_to_the_flight_band_35km2_about_1.5_million_present; port_fire_safety_first_order_at_0.16g; sky_ship_size_first_order_rigid_hulls_fitted_to_four_airships_wings_to_ten_transports; flyer_classes_from_canopies_to_long_haul_liners_sized_with_numbers_and_height_bands; long_haul_classes_drawn_at_the_crown_for_the_authors_choice; sky_ship_and_flyer_findings_adopted_by_the_author_2026-09-28; reviewed_against_main_and_the_other_branches_2026-10-08; branch_closed_merge_waits_for_the_joint_integration",
       "material": [
         "../habitation/README.md",
         "../ensemble/papers/babdd5f6-4920/seed-02.md",
@@ -285,23 +285,48 @@
         "../illumination/sky/SOLVED_COLUMN.md",
         "../illumination/sky/results/solved_sky.json",
         "studies/optical_comfort/results/spherical_sky.json",
-        "studies/solar_shield_array/"
+        "studies/solar_shield_array/",
+        "studies/summit_tower/README.md",
+        "../engineering/towers/",
+        "studies/port_fire/README.md",
+        "../engineering/fire/",
+        "../visualization/summit-port/",
+        "studies/sky_ships/README.md",
+        "../engineering/flight/",
+        "studies/sky_fleet/README.md",
+        "../visualization/sky-fleet/",
+        "../habitation/summit_metropolis/README.md",
+        "studies/infrastructure_review/README.md",
+        "../climate/results/gcm/site_winds_A28_dim5_moon_summit.json",
+        "../climate/results/gcm/global_winds_A28_dim5_moon.json"
       ],
       "unresolved": [
         "supported floor area and mass",
-        "wind/services/rescue",
         "biological constraints and plural social uptake",
         "health at 0.16 g: artificial gravity as a public utility (rotating residences; 1 g clinics, maternity centres and schools) until 0.16 g is shown safe (July 2026 bundle, archive/july_2026_knowledge_bundle/)",
         "civil time: 24-hour civil days inside the 29.53-day month, with named light phases (July 2026 bundle, archive/july_2026_knowledge_bundle/)",
         "fire safety in settlements at 0.16 g (July 2026 bundle, archive/july_2026_knowledge_bundle/)",
         "optical comfort: a spherical angular sky with the current shield and solved columns; site-specific surface BRDFs and geometry, water slopes, clouds and human-factors validation. Native sky archives verify the packed-input scene results; local coastal spectra supply resolved slope covariance. Shorter-wave roughness and actual reflection remain open.",
-        "counterrotating toroidal nodes: complete floor-area, pressure-vessel, radiation-shielding and service budgets; compare attached wheels with economical trajectories"
+        "counterrotating toroidal nodes: complete floor-area, pressure-vessel, radiation-shielding and service budgets; compare attached wheels with economical trajectories",
+        "services and rescue for tall structures; fire and evacuation from great height",
+        "the summit sky tower: winds over the real summit (the study raises the models' winds by 1.4 for gusts, 1.2 for the summit's rise and 1.2 for rarity), member and joint design, the dynamic gust response with dampers, stays, construction and footings in porous highland crust; sky-ship docking loads",
+        "comfort in sway at 0.16 g, where a sideways acceleration tilts the apparent vertical six times more than on Earth",
+        "the central port's power: about 400 MW for its floors; screened slow rotors over its whole open face give 74% in the modelled winds (132% with the summit speed-up) for 43 Mt more steel, and 140% in main's corrected climate for 65 Mt more (studies/infrastructure_review); louvered panels on the face, level panels on the highland around the base and pumped storage with the Korolev lake are the other parts",
+        "the central port's occupancy figures (areas per person, busy-hour shares) are rough planning figures to check against published standards",
+        "fire at 0.16 g: the port has a first-order study (studies/port_fire: Earth correlations carried by Froude scaling, design fires bracketed, a materials test at 23.5% oxygen, compartments with sprinklers, shafts broken every three bands, 33 water pressure zones); open are full-scale fire data at partial gravity (NASA's FM2 is planned as the first fire on the Moon), sprinkler sprays at 0.16 g, crowd flows, wind-driven fire and smoke through a band (CFD of a band section), and the city",
+        "the port's architecture is a first proposal (visualization/summit-port): six leg towers with lift cores, a four-storey wing every 200 m wrapped round two opposite legs, berths every 60 m, gate interchanges and a crown terminal; the building fills about 1/2,000 of the space inside the frame, so it reads as a lattice with shelves; the crown's docking arms as drawn are not credible structure; long-haul berths depend on the long-haul class, the author's to choose (studies/sky_fleet compares and draws four classes at the crown on the sized form: 27 berths of 500 m liners on three levels with arms of 772 m, 8 of 750 m on two with arms of 424 m, 4 of 1 km, or one of 1.5 km; it recommends the 750 m liner and adding winged liners on landing pads); only the hexagonal frame is modelled",
+        "sky ships and the other flyers (studies/sky_ships, studies/sky_fleet): the classes from canopies, micro gliders and pedalled wings to long-haul liners, freighters and high platforms are sized with their numbers for the metropolis and height bands; open are the author's choice of long-haul class and whether winged liners join it, a wind study of the crown's wake before the berths are fixed (berths in the lee sit in the tower's wake; the Empire State Building's mast failed on its eddies), an automated traffic system for sky boats (at a car-like 10% of trips they are denser than NASA's urban air mobility spacing allows; about 7-8% fit), shared rather than owned sky boats (owned at Tokyo's rate for cars their berths would cover three-fifths of the city), designs of a sky boat, a personal wing and a ferry, hydrogen safety at scale or a helium supply, buoyancy over the lunar day and night, and sheds or open-air yards for kilometre-long ships",
+        "the corrected climate (main's A28_dim5_moon; studies/infrastructure_review): winds aloft about twice as strong; with main's corrected inputs the design gust is 32.4 m/s, the port's chosen form takes 98 Mt of steel, the moored ships' design and service winds are 38.6 and 24.4 m/s, and the high platforms near 70 km need about seven times the power to hold station; the summit's model cells rain 9-17 mm a day; the four studies rerun with the corrected inputs at the joint integration",
+        "storm protection (studies/infrastructure_review, from the atmospheric electricity branch): lightning is rare (0.022 flashes per km2 a year at the electrified equatorial box) and very large (ground strikes lower a median 149 C, up to 1,025 C, against 300 C at Earth's highest protection level); flashes start at a median 35.8 km above sea level, at the port's crown; open are the tower as a grounded conductor reaching into the storms' charge, the crown's hydrogen berths, the ships' and the backbone's ferries' rules in storms (flashing storms have updrafts of 12-36 m/s against the 14.3 m/s design gust), hail and icing aloft, a storm warning service, and solar storms on long conductors",
+        "the night at the summit (sea-appearance branch's photometric dusk): about 82 hours of practical dusk after sunset and again before sunrise, about 190 hours that need lamps and about 116 below a tenth of a lux; lighting, activity and rhythm through it",
+        "infrastructure off the Moon and the link to it (solar-shield branch): power delivered to the surface, transport and launch between the surface and orbit and what launches release into the upper air (S7 covers the protection systems only), the lit ring stack in the night sky, where failed tiles go, and the regional magnets' routes, field corridors and night load beside polar settlements",
+        "coastal settlements and lakes (main's waves and tides): monthly tides of 3.7-6 m over the nearside sea, gentle waves, water levels governing coastal works; the highland lakes' waves and seiches, the Korolev lake first"
       ],
-      "next_session_task": "Size representative structures/vehicles, then compare networks and daily/monthly uses."
+      "next_session_task": "The branch is closed (2026-10-08) and waits for the joint integration. At the integration, rerun the four studies with the corrected climate products, ring_equator and main's drainage and sunlight, and bring their READMEs and the metropolis brief to the new numbers. Then, in an order for the author to choose (studies/infrastructure_review, section 7): the tower in the storms' charge (an electrostatic calculation with the electrified box's charge fields) and lightning protection for the crown's berths; the frame resized with a design gust that varies with height; the long-haul class and the crown's wind and wake; the sky boats' traffic system with storms and the night."
     },
     {
       "topic": "engineering",
-      "condition": "conditional_analytical_accounts; network_vocabulary_with_passive_failure_check; protection_supply_ledger; heat_recovery_and_radiator_screen; array_heat_screen_in_closed_form",
+      "condition": "conditional_analytical_accounts; network_vocabulary_with_passive_failure_check; protection_supply_ledger; heat_recovery_and_radiator_screen; array_heat_screen_in_closed_form; tall_lattice_tower_sizing_and_wind_devices; fire_engineering_at_any_gravity; flyers_sized_for_any_gravity_and_air",
       "material": [
         "../engineering/reference/",
         "baselines/feasibility/model.py",
@@ -312,7 +337,10 @@
         "../engineering/heat_recovery.py",
         "studies/solar_shield_array/array_industry.md",
         "studies/solar_shield_array/array_industry_sources.json",
-        "studies/solar_shield_array/results/array_heat.json"
+        "studies/solar_shield_array/results/array_heat.json",
+        "../engineering/towers/",
+        "../engineering/fire/",
+        "../engineering/flight/"
       ],
       "unresolved": [
         "complete source-to-use pathways",
@@ -325,7 +353,8 @@
         "the cislunar terminal layer: remote braking, capture, inspection and quarantine, repacking, buffering, metered delivery and kinetic-energy recovery; where its catchers sit so that Earth never lies behind them",
         "three power ledgers kept apart (civilization-wide power, the Open Moon's allocation, and where heat is released), and the power sequence from fission bootstrap through fusion to near-Sun collection with power beaming",
         "solar shield/habitat power network: gross collection, holding load, delivered 100-TW case, conversion and transfer losses, thermal paths and returned momentum carriers",
-        "heat reuse, computing and industry of the solar shield and habitat array, for the planned branch research/array-industry (the author, 2026-10-08; studies/solar_shield_array/array_industry.md): the shield's reflectivity trim and momentum store as hardware and their power; the film plant that remakes 2.3-4.6 Gt of film a year; the array's power and heat ledgers with where heat is released; computing for the fleet and for services, compared by useful results per joule on matched tasks"
+        "heat reuse, computing and industry of the solar shield and habitat array, for the planned branch research/array-industry (the author, 2026-10-08; studies/solar_shield_array/array_industry.md): the shield's reflectivity trim and momentum store as hardware and their power; the film plant that remakes 2.3-4.6 Gt of film a year; the array's power and heat ledgers with where heat is released; computing for the fleet and for services, compared by useful results per joule on matched tasks",
+        "lightning protection for charges beyond Earth's highest protection level (lunar ground strikes lower a median 149 C and up to 1,025 C, against IEC 62305's 300 C), earthing in highland soils, and a 24 km steel frame as a conductor into the storms' charge (studies/infrastructure_review)"
       ],
       "next_session_task": "Add source, transport and capture nodes with capacities and the delivery routes to the network model, then score the protection holding options in the supply ledger. Heat reuse, computing and industry of the shield and habitat array wait for the planned branch research/array-industry (studies/solar_shield_array/array_industry.md)."
     },

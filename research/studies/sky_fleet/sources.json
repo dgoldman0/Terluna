@@ -1,0 +1,429 @@
+{
+ "source_admission": "Published values used as constants, fitted data or cited findings; no external dataset files are admitted. Three literature-gathering agents fetched and quoted the sources on 28 September 2026, reading scanned reports and figures where noted; values read from a published figure say so. Secondary sources are marked. Model products of this repository are cited by path in the README and hashed in the results.",
+ "sources": [
+  {
+   "citation": "Webb 1973, in Parker and West (eds.), Bioastronautics Data Book, 2nd ed., NASA SP-3006, chapter 18 (NTRS 19730006364)",
+   "title": "Work, Heat, and Oxygen Cost (figure 18-15, after Fletcher 1964 and Wilkie 1957)",
+   "url": "https://ntrs.nasa.gov/api/citations/19730006364/downloads/19730006364.pdf",
+   "use": "sustained power of young, fit men: about 215 W for an hour, 160 W for two and 135 W for three (read from the figure)",
+   "access": "fetched and quoted by a literature-gathering agent (values read from the figure)"
+  },
+  {
+   "citation": "Matomaki et al. 2023, Frontiers in Physiology 14: 1128111",
+   "title": "",
+   "url": "https://doi.org/10.3389/fphys.2023.1128111",
+   "use": "sedentary and recreational adults: power at the first lactate threshold 79-83 W (women) and 115-121 W (men); three-hour rides at 87% of it",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Kavaliauskas, Steer and Babraj 2017, Sport Sciences for Health 13: 17-23",
+   "title": "",
+   "url": "https://doi.org/10.1007/s11332-016-0313-x",
+   "use": "untrained women's critical power 1.8 W/kg",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Lei et al. 2026, Medicine and Science in Sports and Exercise 58(8): 1687-1702",
+   "title": "",
+   "url": "https://doi.org/10.1249/MSS.0000000000003991",
+   "use": "untrained, recreationally active men's critical power 155 W",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Zinner et al. 2016, Frontiers in Physiology 7: 426",
+   "title": "",
+   "url": "https://doi.org/10.3389/fphys.2016.00426",
+   "use": "arm cranking gives 0.53-0.59 of leg cycling's sustained power in untrained men",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Burke 1980, AeroVironment AV-R-80/540 (AIAA Professional Study Series)",
+   "title": "The Gossamer Condor and Albatross: A Case Study in Aircraft Design",
+   "url": "https://digital.archives.caltech.edu/collections/MacCreadyPB/MacCreadyPB_01_03_005_19/",
+   "use": "the Albatross's crossing at a gross weight of 215 lb, two hours and 49 minutes aloft",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Jex and Mitchell 1982, NASA CR-3627 (NTRS 19830002792)",
+   "title": "Stability and Control of the Gossamer Human Powered Aircraft by Analysis and Flight Test",
+   "url": "https://ntrs.nasa.gov/api/citations/19830002792/downloads/19830002792.pdf",
+   "use": "the Albatross: 28.6 m span, 44 m2, 97.7 kg gross; trimmed at 6.1 m/s with a lift-to-drag ratio of 28",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Drela 1988, MIT",
+   "title": "Daedalus 88 three-view",
+   "url": "https://web.mit.edu/drela/Public/web/hpa/daedalus.pdf",
+   "use": "Daedalus 88: 34.1 m span, 30.8 m2, 104 kg gross, 6.3-7.6 m/s, about 200 W from the pilot",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Bussolari and Nadel 1989, Human Power 7(4)",
+   "title": "The Physiological Limits of Long-Duration Human Power Production: Lessons Learned from the Daedalus Project",
+   "url": "https://geosci.uchicago.edu/~moyer/GEOS24705/Readings/HumanPower_Daedalus.pdf",
+   "use": "Daedalus needed 3.0-3.5 W per kg of pilot; 3.1 W/kg can be held for six hours by the project's athletes",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Sullivan and Zerweckh 1988, NASA CR-183305 (NTRS 19890001519)",
+   "title": "Flight Test Results for the Daedalus and Light Eagle Human Powered Aircraft",
+   "url": "https://ntrs.nasa.gov/api/citations/19890001519/downloads/19890001519.pdf",
+   "use": "the Light Eagle: 34.7 m span, 31 m2, lift-to-drag ratio 36 at 7.8 m/s, about 200 W at 110 kg; the Albatross's design power 246 W",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Schoberl 1986, Human Power 5(2)",
+   "title": "The Musculair 1 & 2 Human-Powered Aircraft and Their Optimization",
+   "url": "https://www.humanpoweredflight.co.uk/hpfMedia/media/7/musculair-paper.pdf",
+   "use": "Musculair 2: 19.5 m span, 11.7 m2, 78 kg flying; 250 W at 10 m/s; least sink 0.27 m/s; best glide 37",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Fédération Aéronautique Internationale",
+   "title": "Human-powered aeroplane records 384, 385 and 389",
+   "url": "https://www.fai.org/",
+   "use": "Daedalus 88: 115.11 km and 3 h 55 min (1988); Musculair 2: 44.32 km/h (1985)",
+   "access": "fetched and quoted by a literature-gathering agent (Wayback Machine copies)"
+  },
+  {
+   "citation": "MAC PARA",
+   "title": "Eden 7 paraglider (LTF/EN-B) specifications",
+   "url": "https://www.macpara.com/en/previous-products/eden-7/",
+   "use": "size 22: 21.92 m2 flat, 19.26 m2 projected, 11.53 m flat span, 55-80 kg; trim 37-39 km/h, glide more than 10, least sink 1.05 m/s",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Ozone Paragliders",
+   "title": "Rush 6 specifications",
+   "url": "https://www.flyozone.com/paragliders/products/gliders/rush-6",
+   "use": "aspect ratio 5.7 flat and 4.18 projected: a projected span 0.79 of the flat one",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Moyes Delta Gliders",
+   "title": "Litespeed RX and Litesport specifications",
+   "url": "https://www.moyes.com.au/products/hang-gliders/litespeed-rx/specifications",
+   "use": "hang gliders of 12.8-14.8 m2 and 9.4-10.4 m span, 30-37 kg; best glide 14-15 at 40-48 km/h",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Wills Wing",
+   "title": "U2 and T3 hang gliders",
+   "url": "https://www.willswing.com/hang-gliders/u2/",
+   "use": "sail areas 12.6-14.9 m2, spans 9.6-10.4 m, gliders of 29-33 kg",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "HpH",
+   "title": "304S Shark, 18 m",
+   "url": "https://hph.cz/products/hph-304s-shark/",
+   "use": "18 m span, 11.74 m2, 600 kg maximum; best glide more than 50 at 125 km/h; least sink 0.47 m/s at 68 km/h at minimum weight",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Knacke 1991, Naval Weapons Center NWC TP 6575",
+   "title": "Parachute Recovery Systems Design Manual",
+   "url": "http://ftp.demec.ufpr.br/CFD/bibliografia/aerodinamica/PARACHUTE%20Recovery%20Systems%20Desgin%20Manual.pdf",
+   "use": "flat circular canopies: drag coefficient 0.75-0.80 on the cloth area, inflated to 0.67-0.70 of the flat diameter; parafoils glide 2.8-3.5",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Airborne Systems 2025",
+   "title": "RA-Series and PS-2 personnel ram-air parachutes",
+   "url": "https://airborne-sys.com/wp-content/uploads/2025/04/RA-Series_English-01172025.pdf",
+   "use": "military ram-air canopies glide 4 to more than 5",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Berry, Las Fargeas and Blair 2010, Procedia Engineering 2(2): 2735-2740",
+   "title": "",
+   "url": "https://doi.org/10.1016/j.proeng.2010.04.059",
+   "use": "a wingsuit's lift-to-drag ratio 1.6 at 22 m/s",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Tokyo Metropolitan Region Transportation Planning Council 2020, Kotsu Dayori vol. 35",
+   "title": "人の動きから見た東京都市圏 〜調査結果の概要〜 (6th Tokyo Metropolitan Region Person Trip Survey, 2018)",
+   "url": "https://www.tokyo-pt.jp/static/hp/file/publicity/vol35.pdf",
+   "use": "73.73 million trips a day by 36.9 million people aged 5 and over (2.0 a person; 2.61 a person who went out); the 23-ward area's shares by main mode: rail 51%, car 8%, bicycle 13%, walking 24%",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Île-de-France Mobilités, OMNIL and DRIEAT 2023",
+   "title": "Présentation des résultats de l'EGT H2020",
+   "url": "https://omnil.fr/medias/omnil/fdbd2e66-2ea9-47e6-a3a6-1d5d5de409a3_resultats_egt_h2020.pdf",
+   "use": "3.7 trips a resident a day (walking counted); mean trip 4.5 km in a straight line, public transport trips 9 km; shares walk 40.9%, car 33.5%, public transport 21.7%",
+   "access": "fetched and quoted by a literature-gathering agent (Wayback Machine copy of the official PDF)"
+  },
+  {
+   "citation": "DRIEA 2013",
+   "title": "Motorisation et usage de la voiture en Île-de-France (EGT 2010)",
+   "url": "https://omnil.fr/medias/omnil/0b30640d-6def-49fa-9077-bd4c1a278664_driea_egt_motorisation_et_usage_de_la_voiture_en_ile-de-france_cle17ce43.pdf",
+   "use": "cars per person: Île-de-France 0.43, Paris 0.26; 1.28 occupants a car",
+   "access": "fetched and quoted by a literature-gathering agent (Wayback Machine copy)"
+  },
+  {
+   "citation": "Transport for London 2025",
+   "title": "Travel in London 2025: the travel behaviour of London residents based on the LTDS",
+   "url": "https://content.tfl.gov.uk/travel-in-london-2025-the-travel-behaviour-of-london-residents-based-on-the-ltds-acc.pdf",
+   "use": "London residents make exactly two trips a person a day (2024/25); 6.0 km a trip",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Hong Kong Transport Department 2025",
+   "title": "Travel Characteristics Survey 2022, Final Report",
+   "url": "https://www.td.gov.hk/filemanager/en/content_5349/tcs2022_eng.pdf",
+   "use": "the two peak hours carried about 13% and 14% of the day's mechanised trips; 1.69 mechanised trips a person a weekday",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Texas Department of Transportation",
+   "title": "Roadway Design Manual, section 4.3.1 Traffic Volume",
+   "url": "https://www.txdot.gov/manuals/des/rdw/chapter-4--basic-design-criteria/4-3-traffic-characteristics/4-3-1-traffic-volume.html",
+   "use": "the design hour's share of daily traffic (K-factor) on urban facilities, typically 8-12%",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Automobile Inspection and Registration Information Association (AIRIA) 2025",
+   "title": "都道府県別の自家用乗用車の普及状況 (end of March 2025)",
+   "url": "https://www.airia.or.jp/publish/file/kenbetsufukyuu_2025.pdf",
+   "use": "Tokyo-to: 0.222 private passenger cars a person (222 per 1,000)",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Ministry of Land, Infrastructure, Transport and Tourism, road traffic census FY2021",
+   "title": "平均乗車人数の推移 (e-Stat table 000031927554)",
+   "url": "https://www.e-stat.go.jp/",
+   "use": "weekday private cars carry 1.40 people a trip in the Kanto coastal block, which holds Tokyo",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Hong Kong Legislative Council paper CB(4)854/15-16(08), 2016, Appendix I",
+   "title": "Railway capacity (2014 morning peak)",
+   "url": "https://www.legco.gov.hk/yr15-16/english/panels/tp/tp_rdp/papers/tp_rdp20160419cb4-854-8-e.pdf",
+   "use": "busiest MTR links carried 45,200-58,700 passengers an hour in one direction",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Ministry of Land, Infrastructure, Transport and Tourism 2025",
+   "title": "最混雑区間における混雑率 (FY2024)",
+   "url": "https://www.mlit.go.jp/report/press/content/001904497.pdf",
+   "use": "Tokyo's busiest sections carried 58,950-71,153 passengers in the busiest hour",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Givoni and Rietveld 2009, Transportation Research Part A 43: 500-510",
+   "title": "Airline's choice of aircraft size - explanations and implications",
+   "url": "",
+   "use": "airlines answer growing demand more with frequency than with larger aircraft; at many of the largest airports there are fewer than 100 passengers a movement",
+   "access": "fetched and quoted by a literature-gathering agent (abstract)"
+  },
+  {
+   "citation": "Wei and Hansen 2005, Transportation Research Part E 41(4): 315-327",
+   "title": "Impact of aircraft size and seat availability on airlines' demand and market share in duopoly markets",
+   "url": "",
+   "use": "airlines gain more market share from frequency than from aircraft size (an S-curve in frequency)",
+   "access": "fetched and quoted by a literature-gathering agent (abstract)"
+  },
+  {
+   "citation": "Airbus 2025",
+   "title": "Global Market Forecast 2025-2044 (presentation, slide 15)",
+   "url": "https://www.airbus.com/en/products-services/commercial-aircraft/market/global-market-forecast",
+   "use": "185 seats a flight in 2024 (aircraft of more than 100 seats)",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Walker 1975, Interagency Workshop on Lighter Than Air Vehicles (NTRS 19760007954)",
+   "title": "Mooring and ground handling rigid airships",
+   "url": "https://ntrs.nasa.gov/citations/19760007954",
+   "use": "a ship moored to a high mast must be flown continually; the Los Angeles stood on her nose at Lakehurst's high mast in 1927; low masts carry the stern on a car round a circular track",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Wikipedia, Empire State Building",
+   "title": "Empire State Building: mooring mast",
+   "url": "https://en.wikipedia.org/wiki/Empire_State_Building",
+   "use": "the 1931 attempt by a Navy airship to dock at the building's mast failed in eddies round the building, and the terminal was abandoned",
+   "access": "fetched and quoted by a literature-gathering agent",
+   "secondary": true
+  },
+  {
+   "citation": "Royal Caribbean International",
+   "title": "Icon of the Seas fast facts (2023 and 2025 sheets)",
+   "url": "https://www.royalcaribbeanpresscenter.com/",
+   "use": "Icon of the Seas: 364 m, 248,663 GT, 5,610 guests at double occupancy, 7,600 at most, 2,350 crew",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Federal Aviation Administration",
+   "title": "Aeronautical Information Manual 7-7-3, Near Midair Collision Reporting",
+   "url": "https://www.faa.gov/air_traffic/publications/atpubs/aim_html/chap7_section_7.html",
+   "use": "a near mid-air collision: closer than 500 ft (152 m) to another aircraft",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Lee, Abramson, Phillips and Tang 2022, 41st Digital Avionics Systems Conference (NTRS 20220009678)",
+   "title": "Preliminary Analysis of Separation Standards for Urban Air Mobility using Unmitigated Fast-Time Simulation",
+   "url": "https://ntrs.nasa.gov/citations/20220009678",
+   "use": "urban air mobility tracks 1,500 ft apart; for an unmitigated collision risk under 10%, more than 1,800 ft horizontally with more than 200 ft vertically",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Federal Aviation Administration 2024, 89 FR 17230",
+   "title": "Special Class Airworthiness Criteria for the Joby Aero, Inc. Model JAS4-1 Powered-Lift",
+   "url": "https://www.govinfo.gov/content/pkg/FR-2024-03-08/html/2024-04690.htm",
+   "use": "maximum gross take-off weight 4,800 lb, a pilot and four passengers, six tilting propellers",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Joby Aviation 2026, Form 10-K for 2025",
+   "title": "Annual report",
+   "url": "https://www.sec.gov/Archives/edgar/data/1819848/000181984826000160/joby-20251231.htm",
+   "use": "a targeted payload of up to 1,000 lb, speeds up to 200 mph, a target range of up to 100 miles",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Stoll 2015, NASA Transformative Vertical Flight Workshop",
+   "title": "Analysis and Full Scale Testing of the Joby S4 Propulsion System",
+   "url": "https://nari.arc.nasa.gov/sites/default/files/attachments/Stoll-TVFW-Aug2015.pdf",
+   "use": "the 2015 design: 4,000 lb, six rotors 9.5 ft across (9.4 lb/ft2), estimated hover shaft power 560 hp, cruise 113 hp at 200 mph",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Joby Aviation 2023 (company post)",
+   "title": "Battery specific energy",
+   "url": "https://www.linkedin.com/company/jobyaviation/",
+   "use": "288 Wh/kg at the cell and 235 Wh/kg at the pack",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Federal Aviation Administration 2024, FR Doc. 2024-11192",
+   "title": "Special Class Airworthiness Criteria for the Archer Aviation Inc. Model M001 Powered-Lift",
+   "url": "https://www.govinfo.gov/content/pkg/FR-2024-05-24/html/2024-11192.htm",
+   "use": "maximum gross take-off weight 6,500 lb, a pilot and four passengers",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Vertical Flight Society 2020",
+   "title": "Archer Aviation eVTOL concept (evtol.news)",
+   "url": "https://evtol.news/",
+   "use": "Archer's concept: lift-to-drag ratio 11, about 1,000 kg of battery in 3,000 kg; the Maker demonstrator 11.3",
+   "access": "fetched and quoted by a literature-gathering agent",
+   "secondary": true
+  },
+  {
+   "citation": "Sripad and Viswanathan 2021, PNAS 118(45) e2111164118",
+   "title": "The promise of energy-efficient battery-powered urban aircraft",
+   "url": "https://doi.org/10.1073/pnas.2111164118",
+   "use": "a full Joby five-seater uses about 156 Wh a passenger-mile; lift-to-drag ratios of 16-18 assumed for Beta's and Joby's aircraft",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Nathen 2021, Lilium GmbH",
+   "title": "Architectural performance assessment of an electric vertical take-off and landing (e-VTOL) aircraft based on a ducted vectored thrust concept",
+   "url": "https://lilium.com/files/redaktion/refresh_feb2021/investors/Lilium_7-Seater_Paper.pdf",
+   "use": "3,175 kg, 700 kg payload, 953 kg battery, empty-mass ratio 0.48, cruise lift-to-drag ratio 18.26",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Russell, Jung, Willink and Glasner 2016 (NTRS 20160007399)",
+   "title": "Wind Tunnel and Hover Performance Test Results for Multicopter UAS Vehicles",
+   "url": "https://ntrs.nasa.gov/citations/20160007399",
+   "use": "measured rotor figures of merit 0.58-0.72",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Johnson, Silva and Solis 2018 (NTRS 20180003381)",
+   "title": "Concept Vehicles for VTOL Air Taxi Operations",
+   "url": "https://ntrs.nasa.gov/citations/20180003381",
+   "use": "design figures of merit 0.77-0.82 for rotors, 0.67-0.72 for whole aircraft",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "magniX, H3X and EMRAX data sheets (2026)",
+   "title": "Electric aviation motors",
+   "url": "https://www.magnix.aero/",
+   "use": "motors of 3.6-13 kW per kg continuous (magni650 515 kW on 144 kg; H3X HPDM-180D 180 kW on 13.7 kg with inverter; EMRAX 228 48-75 kW on 13 kg)",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Viswanathan et al. 2022, Nature 601: 519-525",
+   "title": "The challenges and opportunities of battery-powered flight",
+   "url": "https://doi.org/10.1038/s41586-021-04139-1",
+   "use": "packs approaching 600 Wh/kg may be achievable in the next decade",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Federal Aviation Administration 2025",
+   "title": "Final Environmental Assessment, Zipline operations at Dallas-Fort Worth",
+   "url": "https://www.faa.gov/uas/advanced_operations/nepa_and_drones/20251223_Zipline_Final_DFW_EA_508_signed.pdf",
+   "use": "the P2 Zip: 63 lb with an 8 lb payload, about 47 mph, a 10-mile service radius",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Federal Aviation Administration 2024",
+   "title": "Final Environmental Assessment, Amazon Prime Air MK30 at Tolleson, Arizona",
+   "url": "https://www.faa.gov/uas/advanced_operations/nepa_and_drones",
+   "use": "the MK30: 35.5 kg, 37.8 kg at most with a 5 lb payload, 7.5 miles, 73 mph",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "DJI",
+   "title": "FlyCart 30 specifications",
+   "url": "https://www.dji.com/flycart-30/specs",
+   "use": "95 kg at take-off with 30 kg of cargo, eight rotors of 54 in, 16 km with 30 kg",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Stolaroff et al. 2018, Nature Communications 9: 409",
+   "title": "Energy use and life cycle greenhouse gas emissions of drones for commercial package delivery",
+   "url": "https://doi.org/10.1038/s41467-017-02411-5",
+   "use": "a small quadcopter delivering parcels uses about 32 J per metre",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "EASA 2025",
+   "title": "Type-Certificate Data Sheet EASA.AS.001, Zeppelin NT, issue 10",
+   "url": "https://www.easa.europa.eu/en/downloads/7533/en",
+   "use": "envelope 8,425 m3, 75.1 m long, 14.2 m across",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Deutsche Zeppelin-Reederei",
+   "title": "Zeppelin NT FAQ",
+   "url": "https://www.zeppelinflug.de/",
+   "use": "maximum take-off mass 8,050 kg, payload 1,900 kg",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Airship Industries 1983, specification ASI/L/21 issue 3",
+   "title": "Skyship 600",
+   "url": "",
+   "use": "6,666 m3, 59 m long; empty 3,664 kg, maximum 6,630 kg; disposable load of at least 2,590 kg at 4,000 ft",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Thompson and Kirschbaum 1932, NACA Report 397 (NTRS 19930091470)",
+   "title": "The Drag Characteristics of Several Airships Determined by Deceleration Tests",
+   "url": "https://ntrs.nasa.gov/citations/19930091470",
+   "use": "drag coefficients on volume to the two-thirds: the rigid Los Angeles 0.023, non-rigid ships of fineness 3.5-4.4 0.035-0.049",
+   "access": "fetched and quoted by a literature-gathering agent"
+  },
+  {
+   "citation": "Gazeta Metro 2025, quoting the Moscow transport complex",
+   "title": "Moscow metro commercial speed",
+   "url": "",
+   "use": "the Moscow metro's commercial speed, 41 km/h with its stops",
+   "access": "fetched and quoted by a literature-gathering agent",
+   "secondary": true
+  },
+  {
+   "citation": "Wikipedia, London Underground",
+   "title": "London Underground",
+   "url": "https://en.wikipedia.org/wiki/London_Underground",
+   "use": "the Underground's average speed, 33 km/h (20.5 mph)",
+   "access": "fetched and quoted by a literature-gathering agent",
+   "secondary": true
+  }
+ ]
+}

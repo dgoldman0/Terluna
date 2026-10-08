@@ -1,0 +1,1937 @@
+{
+ "schema": "terluna.research.port-fire/1",
+ "producer": {
+  "study": "port_fire",
+  "files": {
+   "research/studies/port_fire/run.py": "4250dd89b10cb64f",
+   "engineering/fire/smoke.py": "3cd2f9884a073ae4",
+   "engineering/fire/design_fires.py": "ba35deab66216f3b",
+   "engineering/fire/egress.py": "5140c59813f89adb"
+  },
+  "inputs": {
+   "research/studies/summit_tower/results/summit_tower.json": "3c3af92ebdab9444"
+  }
+ },
+ "evidence": "First-order fire-engineering arithmetic. Earth correlations (plumes, ceiling jets, detector and sprinkler response, smoke filling, flashover, ventilation limits) are carried to lunar gravity and the port's air by Froude scaling; none has been tested at partial gravity beyond small samples. Design fires are EN 1991-1-2's, with a slower lunar bracket built from Earth oxygen data and short low-gravity tests. Crowd flows at lunar gravity, pre-movement times and the aerial evacuation figures are assumptions. Nothing here is a fire strategy or a certified design.",
+ "reading_rule": "Times in seconds from ignition. untenable_* is when smoke reaches 2 m above the floor or the layer reaches 200 C; null or absent where a sensor never answers. air.*.acts_as_earth_fire_times: in the same space, a fire of Q behaves as an Earth fire of that many times Q, slowed by time_factor. earth_fire is EN 1991-1-2's design fire; lunar_estimate its slower bracket.",
+ "port": {
+  "height_km": 24.0,
+  "floor_km2": 34.9,
+  "floors": {
+   "storeys_per_band": 4,
+   "band_spacing_m": 200.0,
+   "storey_height_m": 4.0,
+   "plate_depth_m": 40.0,
+   "compartment_m2": 2000.0
+  }
+ },
+ "air": {
+  "earth": {
+   "label": "Earth: 1 g, 1 atm, 20 C, 20.95% oxygen (the correlations' own air)",
+   "gravity_m_s2": 9.8066,
+   "pressure_atm": 1.0,
+   "temperature_c": 20.0,
+   "density_kg_m3": 1.204,
+   "oxygen_percent": 20.95,
+   "heat_per_kg_air_mj": 3.03,
+   "acts_as_earth_fire_times": 1.0,
+   "time_factor": 1.0,
+   "velocity_factor": 1.0,
+   "flame_height_1mw_on_1m_m": 2.67,
+   "flame_height_vs_earth": 1.0,
+   "plume_at_2m_700kw_kg_s": 3.26,
+   "plume_vs_earth": 1.0,
+   "room_flashover_vs_earth": 1.0,
+   "ventilation_limit_vs_earth": 1.0
+  },
+  "open_0_3km": {
+   "label": "open floors, 0-3 km: the outside air, 0.92 atm and 10 C",
+   "gravity_m_s2": 1.6242,
+   "pressure_atm": 0.92,
+   "temperature_c": 10.4,
+   "density_kg_m3": 1.14,
+   "oxygen_percent": 17.46,
+   "heat_per_kg_air_mj": 2.54,
+   "acts_as_earth_fire_times": 2.67,
+   "time_factor": 2.46,
+   "velocity_factor": 0.407,
+   "flame_height_1mw_on_1m_m": 4.96,
+   "flame_height_vs_earth": 1.86,
+   "plume_at_2m_700kw_kg_s": 2.26,
+   "plume_vs_earth": 0.69,
+   "room_flashover_vs_earth": 0.63,
+   "ventilation_limit_vs_earth": 0.32
+  },
+  "enclosed_3_10km": {
+   "label": "enclosed floors, 3-10 km: 0.83 atm, 20 C",
+   "gravity_m_s2": 1.6242,
+   "pressure_atm": 0.833,
+   "temperature_c": 20.0,
+   "density_kg_m3": 0.998,
+   "oxygen_percent": 17.46,
+   "heat_per_kg_air_mj": 2.54,
+   "acts_as_earth_fire_times": 2.95,
+   "time_factor": 2.46,
+   "velocity_factor": 0.407,
+   "flame_height_1mw_on_1m_m": 5.33,
+   "flame_height_vs_earth": 1.99,
+   "plume_at_2m_700kw_kg_s": 2.11,
+   "plume_vs_earth": 0.65,
+   "room_flashover_vs_earth": 0.58,
+   "ventilation_limit_vs_earth": 0.28
+  },
+  "enclosed_10_15km": {
+   "label": "enclosed floors, 10-15 km: 0.74 atm, 20 C",
+   "gravity_m_s2": 1.6242,
+   "pressure_atm": 0.739,
+   "temperature_c": 20.0,
+   "density_kg_m3": 0.885,
+   "oxygen_percent": 17.46,
+   "heat_per_kg_air_mj": 2.54,
+   "acts_as_earth_fire_times": 3.33,
+   "time_factor": 2.46,
+   "velocity_factor": 0.407,
+   "flame_height_1mw_on_1m_m": 5.64,
+   "flame_height_vs_earth": 2.11,
+   "plume_at_2m_700kw_kg_s": 2.01,
+   "plume_vs_earth": 0.62,
+   "room_flashover_vs_earth": 0.55,
+   "ventilation_limit_vs_earth": 0.25
+  },
+  "sealed_15_24km": {
+   "label": "sealed zone, 15-24 km, pressurised with ordinary air to the summit's 0.95 atm, 20 C",
+   "gravity_m_s2": 1.6242,
+   "pressure_atm": 0.947,
+   "temperature_c": 20.0,
+   "density_kg_m3": 1.135,
+   "oxygen_percent": 17.46,
+   "heat_per_kg_air_mj": 2.54,
+   "acts_as_earth_fire_times": 2.6,
+   "time_factor": 2.46,
+   "velocity_factor": 0.407,
+   "flame_height_1mw_on_1m_m": 5.01,
+   "flame_height_vs_earth": 1.88,
+   "plume_at_2m_700kw_kg_s": 2.22,
+   "plume_vs_earth": 0.68,
+   "room_flashover_vs_earth": 0.62,
+   "ventilation_limit_vs_earth": 0.32
+  }
+ },
+ "design_fires": {
+  "travel": {
+   "port_use": "travel: terminals, docks, customs, lounges, ship servicing",
+   "occupancy": "transport (public space)",
+   "growth": "slow",
+   "earth": {
+    "growth_time_s": 600.0,
+    "alpha_kw_s2": 0.00278,
+    "peak_kw_m2": 250,
+    "fire_load_mj_m2": 122
+   },
+   "lunar_estimate": {
+    "growth_time_s": 1200.0,
+    "alpha_kw_s2": 0.00069,
+    "peak_kw_m2": 162,
+    "fire_load_mj_m2": 122
+   }
+  },
+  "hotels": {
+   "port_use": "hotels",
+   "occupancy": "hotel (room)",
+   "growth": "medium",
+   "earth": {
+    "growth_time_s": 300.0,
+    "alpha_kw_s2": 0.01111,
+    "peak_kw_m2": 250,
+    "fire_load_mj_m2": 377
+   },
+   "lunar_estimate": {
+    "growth_time_s": 600.0,
+    "alpha_kw_s2": 0.00278,
+    "peak_kw_m2": 162,
+    "fire_load_mj_m2": 377
+   }
+  },
+  "short_stay": {
+   "port_use": "short stay: compact and transit rooms",
+   "occupancy": "hotel (room)",
+   "growth": "medium",
+   "earth": {
+    "growth_time_s": 300.0,
+    "alpha_kw_s2": 0.01111,
+    "peak_kw_m2": 250,
+    "fire_load_mj_m2": 377
+   },
+   "lunar_estimate": {
+    "growth_time_s": 600.0,
+    "alpha_kw_s2": 0.00278,
+    "peak_kw_m2": 162,
+    "fire_load_mj_m2": 377
+   }
+  },
+  "commerce": {
+   "port_use": "commerce and trade",
+   "occupancy": "office",
+   "growth": "medium",
+   "earth": {
+    "growth_time_s": 300.0,
+    "alpha_kw_s2": 0.01111,
+    "peak_kw_m2": 250,
+    "fire_load_mj_m2": 511
+   },
+   "lunar_estimate": {
+    "growth_time_s": 600.0,
+    "alpha_kw_s2": 0.00278,
+    "peak_kw_m2": 162,
+    "fire_load_mj_m2": 511
+   }
+  },
+  "shops": {
+   "port_use": "shops, markets, food and drink",
+   "occupancy": "shopping centre",
+   "growth": "fast",
+   "earth": {
+    "growth_time_s": 150.0,
+    "alpha_kw_s2": 0.04444,
+    "peak_kw_m2": 250,
+    "fire_load_mj_m2": 730
+   },
+   "lunar_estimate": {
+    "growth_time_s": 300.0,
+    "alpha_kw_s2": 0.01111,
+    "peak_kw_m2": 162,
+    "fire_load_mj_m2": 730
+   }
+  },
+  "events": {
+   "port_use": "events, conferences, leisure, observation",
+   "occupancy": "theatre (cinema)",
+   "growth": "fast",
+   "earth": {
+    "growth_time_s": 150.0,
+    "alpha_kw_s2": 0.04444,
+    "peak_kw_m2": 500,
+    "fire_load_mj_m2": 365
+   },
+   "lunar_estimate": {
+    "growth_time_s": 300.0,
+    "alpha_kw_s2": 0.01111,
+    "peak_kw_m2": 325,
+    "fire_load_mj_m2": 365
+   }
+  },
+  "services": {
+   "port_use": "services and back of house",
+   "occupancy": "library",
+   "growth": "fast",
+   "earth": {
+    "growth_time_s": 150.0,
+    "alpha_kw_s2": 0.04444,
+    "peak_kw_m2": 500,
+    "fire_load_mj_m2": 1824
+   },
+   "lunar_estimate": {
+    "growth_time_s": 300.0,
+    "alpha_kw_s2": 0.01111,
+    "peak_kw_m2": 325,
+    "fire_load_mj_m2": 1824
+   }
+  }
+ },
+ "materials": {
+  "limits_mole_percent": {
+   "Mylar G film (70 kPa)": {
+    "uloi_1g": 21.2,
+    "moc_1g": 20.0,
+    "uloi_lunar": 15.6,
+    "moc_lunar": 14.1
+   },
+   "Ultem 1000 (70 kPa)": {
+    "uloi_1g": 23.5,
+    "moc_1g": 23.0,
+    "uloi_lunar": 21.0,
+    "moc_lunar": 19.9
+   },
+   "Nomex HT90-40 fabric (101 kPa)": {
+    "uloi_1g": 23.5,
+    "moc_1g": 22.1,
+    "uloi_lunar": 21.0,
+    "moc_lunar": 19.9
+   }
+  },
+  "shifts_points": {
+   "Mylar G film (70 kPa)": {
+    "uloi": 5.6,
+    "moc": 5.9
+   },
+   "Ultem 1000 (70 kPa)": {
+    "uloi": 2.5,
+    "moc": 3.1
+   },
+   "Nomex HT90-40 fabric (101 kPa)": {
+    "uloi": 2.5,
+    "moc": 2.2
+   }
+  },
+  "margin_points": 5.9,
+  "design_oxygen_percent": 17.46,
+  "test_oxygen_percent": 23.5,
+  "burning_rate_factor": 0.649
+ },
+ "spaces": {
+  "room": {
+   "label": "hotel or short-stay room, 30 m2 under a 3.0 m ceiling",
+   "fires": {
+    "hotel (room)": {
+     "earth": {
+      "earth_fire": {
+       "smoke_detector_s": 54.4,
+       "fire_at_detection_kw": 33.0,
+       "jet_at_detector_m_s": 0.87,
+       "sprinkler_s": 168.2,
+       "fire_at_sprinkler_kw": 315.0,
+       "untenable_unsprinklered_s": 59.0,
+       "unsprinklered_governed_by": "smoke at head height",
+       "untenable_sprinklered_s": 59.0,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": null,
+       "natural_vents_m2": null,
+       "flame_height_at_sprinkler_m": 1.03
+      }
+     },
+     "open_0_3km": {
+      "earth_fire": {
+       "smoke_detector_s": 47.8,
+       "fire_at_detection_kw": 25.0,
+       "jet_at_detector_m_s": 0.36,
+       "sprinkler_s": 154.8,
+       "fire_at_sprinkler_kw": 266.0,
+       "untenable_unsprinklered_s": 77.5,
+       "unsprinklered_governed_by": "smoke at head height",
+       "untenable_sprinklered_s": 77.5,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": null,
+       "natural_vents_m2": null,
+       "flame_height_at_sprinkler_m": 2.34
+      },
+      "lunar_estimate": {
+       "smoke_detector_s": 78.8,
+       "fire_at_detection_kw": 17.0,
+       "jet_at_detector_m_s": 0.36,
+       "sprinkler_s": 251.2,
+       "fire_at_sprinkler_kw": 175.0,
+       "untenable_unsprinklered_s": 106.5,
+       "unsprinklered_governed_by": "smoke at head height",
+       "untenable_sprinklered_s": 106.5,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": null,
+       "natural_vents_m2": null,
+       "flame_height_at_sprinkler_m": 1.79
+      }
+     },
+     "enclosed_3_10km": {
+      "earth_fire": {
+       "smoke_detector_s": 45.6,
+       "fire_at_detection_kw": 23.0,
+       "jet_at_detector_m_s": 0.35,
+       "sprinkler_s": 137.5,
+       "fire_at_sprinkler_kw": 210.0,
+       "untenable_unsprinklered_s": 75.8,
+       "unsprinklered_governed_by": "smoke at head height",
+       "untenable_sprinklered_s": 75.8,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": null,
+       "natural_vents_m2": null,
+       "flame_height_at_sprinkler_m": 2.35
+      },
+      "lunar_estimate": {
+       "smoke_detector_s": 74.9,
+       "fire_at_detection_kw": 16.0,
+       "jet_at_detector_m_s": 0.35,
+       "sprinkler_s": 220.5,
+       "fire_at_sprinkler_kw": 135.0,
+       "untenable_unsprinklered_s": 104.2,
+       "unsprinklered_governed_by": "smoke at head height",
+       "untenable_sprinklered_s": 104.2,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": null,
+       "natural_vents_m2": null,
+       "flame_height_at_sprinkler_m": 1.8
+      }
+     },
+     "enclosed_10_15km": {
+      "earth_fire": {
+       "smoke_detector_s": 43.8,
+       "fire_at_detection_kw": 21.0,
+       "jet_at_detector_m_s": 0.35,
+       "sprinkler_s": 132.2,
+       "fire_at_sprinkler_kw": 194.0,
+       "untenable_unsprinklered_s": 73.8,
+       "unsprinklered_governed_by": "smoke at head height",
+       "untenable_sprinklered_s": 73.8,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": null,
+       "natural_vents_m2": null,
+       "flame_height_at_sprinkler_m": 2.45
+      },
+      "lunar_estimate": {
+       "smoke_detector_s": 71.6,
+       "fire_at_detection_kw": 14.0,
+       "jet_at_detector_m_s": 0.35,
+       "sprinkler_s": 211.2,
+       "fire_at_sprinkler_kw": 124.0,
+       "untenable_unsprinklered_s": 101.5,
+       "unsprinklered_governed_by": "smoke at head height",
+       "untenable_sprinklered_s": 101.5,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": null,
+       "natural_vents_m2": null,
+       "flame_height_at_sprinkler_m": 1.88
+      }
+     },
+     "sealed_15_24km": {
+      "earth_fire": {
+       "smoke_detector_s": 47.7,
+       "fire_at_detection_kw": 25.0,
+       "jet_at_detector_m_s": 0.35,
+       "sprinkler_s": 143.5,
+       "fire_at_sprinkler_kw": 229.0,
+       "untenable_unsprinklered_s": 78.2,
+       "unsprinklered_governed_by": "smoke at head height",
+       "untenable_sprinklered_s": 78.2,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": null,
+       "natural_vents_m2": null,
+       "flame_height_at_sprinkler_m": 2.24
+      },
+      "lunar_estimate": {
+       "smoke_detector_s": 78.5,
+       "fire_at_detection_kw": 17.0,
+       "jet_at_detector_m_s": 0.35,
+       "sprinkler_s": 230.5,
+       "fire_at_sprinkler_kw": 148.0,
+       "untenable_unsprinklered_s": 107.2,
+       "unsprinklered_governed_by": "smoke at head height",
+       "untenable_sprinklered_s": 107.2,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": null,
+       "natural_vents_m2": null,
+       "flame_height_at_sprinkler_m": 1.71
+      }
+     }
+    }
+   }
+  },
+  "compartment": {
+   "label": "floor compartment, 2,000 m2 under a 3.5 m ceiling",
+   "fires": {
+    "library": {
+     "earth": {
+      "earth_fire": {
+       "smoke_detector_s": 68.4,
+       "fire_at_detection_kw": 208.0,
+       "jet_at_detector_m_s": 0.5,
+       "sprinkler_s": 122.8,
+       "fire_at_sprinkler_kw": 670.0,
+       "untenable_unsprinklered_s": 371.0,
+       "unsprinklered_governed_by": "smoke at head height",
+       "untenable_sprinklered_s": 804.0,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": 3.1,
+       "natural_vents_m2": 1.4,
+       "flame_height_at_sprinkler_m": 1.81
+      }
+     },
+     "open_0_3km": {
+      "earth_fire": {
+       "smoke_detector_s": 62.7,
+       "fire_at_detection_kw": 175.0,
+       "jet_at_detector_m_s": 0.21,
+       "sprinkler_s": 116.5,
+       "fire_at_sprinkler_kw": 603.0,
+       "untenable_unsprinklered_s": 315.0,
+       "unsprinklered_governed_by": "hot layer overhead",
+       "untenable_sprinklered_s": 1090.0,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": 2.4,
+       "natural_vents_m2": 2.3,
+       "flame_height_at_sprinkler_m": 3.62
+      },
+      "lunar_estimate": {
+       "smoke_detector_s": 101.1,
+       "fire_at_detection_kw": 114.0,
+       "jet_at_detector_m_s": 0.21,
+       "sprinkler_s": 184.8,
+       "fire_at_sprinkler_kw": 379.0,
+       "untenable_unsprinklered_s": 574.0,
+       "unsprinklered_governed_by": "hot layer overhead",
+       "untenable_sprinklered_s": 1501.0,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": 1.7,
+       "natural_vents_m2": 1.8,
+       "flame_height_at_sprinkler_m": 2.82
+      }
+     },
+     "enclosed_3_10km": {
+      "earth_fire": {
+       "smoke_detector_s": 60.1,
+       "fire_at_detection_kw": 160.0,
+       "jet_at_detector_m_s": 0.2,
+       "sprinkler_s": 104.5,
+       "fire_at_sprinkler_kw": 485.0,
+       "untenable_unsprinklered_s": 293.0,
+       "unsprinklered_governed_by": "hot layer overhead",
+       "untenable_sprinklered_s": 1171.0,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": 2.2,
+       "natural_vents_m2": 2.1,
+       "flame_height_at_sprinkler_m": 3.62
+      },
+      "lunar_estimate": {
+       "smoke_detector_s": 96.3,
+       "fire_at_detection_kw": 103.0,
+       "jet_at_detector_m_s": 0.2,
+       "sprinkler_s": 164.0,
+       "fire_at_sprinkler_kw": 299.0,
+       "untenable_unsprinklered_s": 537.0,
+       "unsprinklered_governed_by": "hot layer overhead",
+       "untenable_sprinklered_s": 1622.0,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": 1.5,
+       "natural_vents_m2": 1.6,
+       "flame_height_at_sprinkler_m": 2.81
+      }
+     },
+     "enclosed_10_15km": {
+      "earth_fire": {
+       "smoke_detector_s": 57.8,
+       "fire_at_detection_kw": 148.0,
+       "jet_at_detector_m_s": 0.2,
+       "sprinkler_s": 100.8,
+       "fire_at_sprinkler_kw": 451.0,
+       "untenable_unsprinklered_s": 277.0,
+       "unsprinklered_governed_by": "hot layer overhead",
+       "untenable_sprinklered_s": 1134.0,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": 2.3,
+       "natural_vents_m2": 2.2,
+       "flame_height_at_sprinkler_m": 3.75
+      },
+      "lunar_estimate": {
+       "smoke_detector_s": 92.3,
+       "fire_at_detection_kw": 95.0,
+       "jet_at_detector_m_s": 0.2,
+       "sprinkler_s": 157.5,
+       "fire_at_sprinkler_kw": 276.0,
+       "untenable_unsprinklered_s": 510.0,
+       "unsprinklered_governed_by": "hot layer overhead",
+       "untenable_sprinklered_s": 1581.0,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": 1.6,
+       "natural_vents_m2": 1.7,
+       "flame_height_at_sprinkler_m": 2.92
+      }
+     },
+     "sealed_15_24km": {
+      "earth_fire": {
+       "smoke_detector_s": 62.6,
+       "fire_at_detection_kw": 174.0,
+       "jet_at_detector_m_s": 0.2,
+       "sprinkler_s": 109.0,
+       "fire_at_sprinkler_kw": 528.0,
+       "untenable_unsprinklered_s": 310.0,
+       "unsprinklered_governed_by": "hot layer overhead",
+       "untenable_sprinklered_s": 1207.0,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": 2.1,
+       "natural_vents_m2": 2.1,
+       "flame_height_at_sprinkler_m": 3.49
+      },
+      "lunar_estimate": {
+       "smoke_detector_s": 100.8,
+       "fire_at_detection_kw": 113.0,
+       "jet_at_detector_m_s": 0.2,
+       "sprinkler_s": 171.2,
+       "fire_at_sprinkler_kw": 326.0,
+       "untenable_unsprinklered_s": 567.0,
+       "unsprinklered_governed_by": "hot layer overhead",
+       "untenable_sprinklered_s": 1667.0,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": 1.5,
+       "natural_vents_m2": 1.6,
+       "flame_height_at_sprinkler_m": 2.7
+      }
+     }
+    },
+    "office": {
+     "earth": {
+      "earth_fire": {
+       "smoke_detector_s": 119.5,
+       "fire_at_detection_kw": 159.0,
+       "jet_at_detector_m_s": 0.5,
+       "sprinkler_s": 204.0,
+       "fire_at_sprinkler_kw": 462.0,
+       "untenable_unsprinklered_s": 555.0,
+       "unsprinklered_governed_by": "smoke at head height",
+       "untenable_sprinklered_s": 1022.0,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": 2.4,
+       "natural_vents_m2": 1.2,
+       "flame_height_at_sprinkler_m": 1.15
+      }
+     },
+     "open_0_3km": {
+      "earth_fire": {
+       "smoke_detector_s": 101.1,
+       "fire_at_detection_kw": 114.0,
+       "jet_at_detector_m_s": 0.21,
+       "sprinkler_s": 184.8,
+       "fire_at_sprinkler_kw": 379.0,
+       "untenable_unsprinklered_s": 574.0,
+       "unsprinklered_governed_by": "hot layer overhead",
+       "untenable_sprinklered_s": 1501.0,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": 1.7,
+       "natural_vents_m2": 1.8,
+       "flame_height_at_sprinkler_m": 2.64
+      },
+      "lunar_estimate": {
+       "smoke_detector_s": 170.1,
+       "fire_at_detection_kw": 80.0,
+       "jet_at_detector_m_s": 0.21,
+       "sprinkler_s": 304.2,
+       "fire_at_sprinkler_kw": 257.0,
+       "untenable_unsprinklered_s": 909.0,
+       "unsprinklered_governed_by": "smoke at head height",
+       "untenable_sprinklered_s": 1947.0,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": 1.3,
+       "natural_vents_m2": 1.5,
+       "flame_height_at_sprinkler_m": 2.03
+      }
+     },
+     "enclosed_3_10km": {
+      "earth_fire": {
+       "smoke_detector_s": 96.3,
+       "fire_at_detection_kw": 103.0,
+       "jet_at_detector_m_s": 0.2,
+       "sprinkler_s": 164.0,
+       "fire_at_sprinkler_kw": 299.0,
+       "untenable_unsprinklered_s": 537.0,
+       "unsprinklered_governed_by": "hot layer overhead",
+       "untenable_sprinklered_s": 1622.0,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": 1.5,
+       "natural_vents_m2": 1.6,
+       "flame_height_at_sprinkler_m": 2.66
+      },
+      "lunar_estimate": {
+       "smoke_detector_s": 161.1,
+       "fire_at_detection_kw": 72.0,
+       "jet_at_detector_m_s": 0.2,
+       "sprinkler_s": 265.5,
+       "fire_at_sprinkler_kw": 196.0,
+       "untenable_unsprinklered_s": 883.0,
+       "unsprinklered_governed_by": "smoke at head height",
+       "untenable_sprinklered_s": 2125.0,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": 1.1,
+       "natural_vents_m2": 1.4,
+       "flame_height_at_sprinkler_m": 2.04
+      }
+     },
+     "enclosed_10_15km": {
+      "earth_fire": {
+       "smoke_detector_s": 92.3,
+       "fire_at_detection_kw": 95.0,
+       "jet_at_detector_m_s": 0.2,
+       "sprinkler_s": 157.5,
+       "fire_at_sprinkler_kw": 276.0,
+       "untenable_unsprinklered_s": 510.0,
+       "unsprinklered_governed_by": "hot layer overhead",
+       "untenable_sprinklered_s": 1581.0,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": 1.6,
+       "natural_vents_m2": 1.7,
+       "flame_height_at_sprinkler_m": 2.77
+      },
+      "lunar_estimate": {
+       "smoke_detector_s": 153.8,
+       "fire_at_detection_kw": 66.0,
+       "jet_at_detector_m_s": 0.2,
+       "sprinkler_s": 254.0,
+       "fire_at_sprinkler_kw": 179.0,
+       "untenable_unsprinklered_s": 853.0,
+       "unsprinklered_governed_by": "smoke at head height",
+       "untenable_sprinklered_s": 2083.0,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": 1.2,
+       "natural_vents_m2": 1.4,
+       "flame_height_at_sprinkler_m": 2.14
+      }
+     },
+     "sealed_15_24km": {
+      "earth_fire": {
+       "smoke_detector_s": 100.8,
+       "fire_at_detection_kw": 113.0,
+       "jet_at_detector_m_s": 0.2,
+       "sprinkler_s": 171.2,
+       "fire_at_sprinkler_kw": 326.0,
+       "untenable_unsprinklered_s": 567.0,
+       "unsprinklered_governed_by": "hot layer overhead",
+       "untenable_sprinklered_s": 1667.0,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": 1.5,
+       "natural_vents_m2": 1.6,
+       "flame_height_at_sprinkler_m": 2.54
+      },
+      "lunar_estimate": {
+       "smoke_detector_s": 169.4,
+       "fire_at_detection_kw": 80.0,
+       "jet_at_detector_m_s": 0.2,
+       "sprinkler_s": 278.0,
+       "fire_at_sprinkler_kw": 215.0,
+       "untenable_unsprinklered_s": 917.0,
+       "unsprinklered_governed_by": "smoke at head height",
+       "untenable_sprinklered_s": 2174.0,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": 1.1,
+       "natural_vents_m2": 1.3,
+       "flame_height_at_sprinkler_m": 1.94
+      }
+     }
+    },
+    "shopping centre": {
+     "earth": {
+      "earth_fire": {
+       "smoke_detector_s": 68.4,
+       "fire_at_detection_kw": 208.0,
+       "jet_at_detector_m_s": 0.5,
+       "sprinkler_s": 122.8,
+       "fire_at_sprinkler_kw": 670.0,
+       "untenable_unsprinklered_s": 371.0,
+       "unsprinklered_governed_by": "smoke at head height",
+       "untenable_sprinklered_s": 804.0,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": 3.1,
+       "natural_vents_m2": 1.4,
+       "flame_height_at_sprinkler_m": 1.26
+      }
+     },
+     "open_0_3km": {
+      "earth_fire": {
+       "smoke_detector_s": 62.7,
+       "fire_at_detection_kw": 175.0,
+       "jet_at_detector_m_s": 0.21,
+       "sprinkler_s": 116.5,
+       "fire_at_sprinkler_kw": 603.0,
+       "untenable_unsprinklered_s": 315.0,
+       "unsprinklered_governed_by": "hot layer overhead",
+       "untenable_sprinklered_s": 1090.0,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": 2.4,
+       "natural_vents_m2": 2.3,
+       "flame_height_at_sprinkler_m": 3.1
+      },
+      "lunar_estimate": {
+       "smoke_detector_s": 101.1,
+       "fire_at_detection_kw": 114.0,
+       "jet_at_detector_m_s": 0.21,
+       "sprinkler_s": 184.8,
+       "fire_at_sprinkler_kw": 379.0,
+       "untenable_unsprinklered_s": 574.0,
+       "unsprinklered_governed_by": "hot layer overhead",
+       "untenable_sprinklered_s": 1501.0,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": 1.7,
+       "natural_vents_m2": 1.8,
+       "flame_height_at_sprinkler_m": 2.3
+      }
+     },
+     "enclosed_3_10km": {
+      "earth_fire": {
+       "smoke_detector_s": 60.1,
+       "fire_at_detection_kw": 160.0,
+       "jet_at_detector_m_s": 0.2,
+       "sprinkler_s": 104.5,
+       "fire_at_sprinkler_kw": 485.0,
+       "untenable_unsprinklered_s": 293.0,
+       "unsprinklered_governed_by": "hot layer overhead",
+       "untenable_sprinklered_s": 1171.0,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": 2.2,
+       "natural_vents_m2": 2.1,
+       "flame_height_at_sprinkler_m": 3.15
+      },
+      "lunar_estimate": {
+       "smoke_detector_s": 96.3,
+       "fire_at_detection_kw": 103.0,
+       "jet_at_detector_m_s": 0.2,
+       "sprinkler_s": 164.0,
+       "fire_at_sprinkler_kw": 299.0,
+       "untenable_unsprinklered_s": 537.0,
+       "unsprinklered_governed_by": "hot layer overhead",
+       "untenable_sprinklered_s": 1622.0,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": 1.5,
+       "natural_vents_m2": 1.6,
+       "flame_height_at_sprinkler_m": 2.35
+      }
+     },
+     "enclosed_10_15km": {
+      "earth_fire": {
+       "smoke_detector_s": 57.8,
+       "fire_at_detection_kw": 148.0,
+       "jet_at_detector_m_s": 0.2,
+       "sprinkler_s": 100.8,
+       "fire_at_sprinkler_kw": 451.0,
+       "untenable_unsprinklered_s": 277.0,
+       "unsprinklered_governed_by": "hot layer overhead",
+       "untenable_sprinklered_s": 1134.0,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": 2.3,
+       "natural_vents_m2": 2.2,
+       "flame_height_at_sprinkler_m": 3.3
+      },
+      "lunar_estimate": {
+       "smoke_detector_s": 92.3,
+       "fire_at_detection_kw": 95.0,
+       "jet_at_detector_m_s": 0.2,
+       "sprinkler_s": 157.5,
+       "fire_at_sprinkler_kw": 276.0,
+       "untenable_unsprinklered_s": 510.0,
+       "unsprinklered_governed_by": "hot layer overhead",
+       "untenable_sprinklered_s": 1581.0,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": 1.6,
+       "natural_vents_m2": 1.7,
+       "flame_height_at_sprinkler_m": 2.48
+      }
+     },
+     "sealed_15_24km": {
+      "earth_fire": {
+       "smoke_detector_s": 62.6,
+       "fire_at_detection_kw": 174.0,
+       "jet_at_detector_m_s": 0.2,
+       "sprinkler_s": 109.0,
+       "fire_at_sprinkler_kw": 528.0,
+       "untenable_unsprinklered_s": 310.0,
+       "unsprinklered_governed_by": "hot layer overhead",
+       "untenable_sprinklered_s": 1207.0,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": 2.1,
+       "natural_vents_m2": 2.1,
+       "flame_height_at_sprinkler_m": 3.0
+      },
+      "lunar_estimate": {
+       "smoke_detector_s": 100.8,
+       "fire_at_detection_kw": 113.0,
+       "jet_at_detector_m_s": 0.2,
+       "sprinkler_s": 171.2,
+       "fire_at_sprinkler_kw": 326.0,
+       "untenable_unsprinklered_s": 567.0,
+       "unsprinklered_governed_by": "hot layer overhead",
+       "untenable_sprinklered_s": 1667.0,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": 1.5,
+       "natural_vents_m2": 1.6,
+       "flame_height_at_sprinkler_m": 2.22
+      }
+     }
+    }
+   }
+  },
+  "hall": {
+   "label": "hall through three storeys, 5,000 m2 under a 12 m ceiling",
+   "fires": {
+    "theatre (cinema)": {
+     "earth": {
+      "earth_fire": {
+       "smoke_detector_s": 130.5,
+       "fire_at_detection_kw": 757.0,
+       "jet_at_detector_m_s": 2.0,
+       "sprinkler_s": 241.5,
+       "fire_at_sprinkler_kw": 2592.0,
+       "untenable_unsprinklered_s": 908.0,
+       "unsprinklered_governed_by": "smoke at head height",
+       "untenable_sprinklered_s": 2567.0,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": 8.4,
+       "natural_vents_m2": 1.2,
+       "flame_height_at_sprinkler_m": 2.78
+      }
+     },
+     "open_0_3km": {
+      "earth_fire": {
+       "smoke_detector_s": 110.6,
+       "fire_at_detection_kw": 544.0,
+       "jet_at_detector_m_s": 0.83,
+       "sprinkler_s": 209.2,
+       "fire_at_sprinkler_kw": 1946.0,
+       "untenable_unsprinklered_s": 930.0,
+       "unsprinklered_governed_by": "hot layer overhead",
+       "untenable_sprinklered_s": 4026.0,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": 5.9,
+       "natural_vents_m2": 1.7,
+       "flame_height_at_sprinkler_m": 5.54
+      },
+      "lunar_estimate": {
+       "smoke_detector_s": 186.0,
+       "fire_at_detection_kw": 384.0,
+       "jet_at_detector_m_s": 0.83,
+       "sprinkler_s": 361.0,
+       "fire_at_sprinkler_kw": 1448.0,
+       "untenable_unsprinklered_s": 1480.0,
+       "unsprinklered_governed_by": "smoke at head height",
+       "untenable_sprinklered_s": 4900.0,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": 4.7,
+       "natural_vents_m2": 1.5,
+       "flame_height_at_sprinkler_m": 4.51
+      }
+     },
+     "enclosed_3_10km": {
+      "earth_fire": {
+       "smoke_detector_s": 105.4,
+       "fire_at_detection_kw": 494.0,
+       "jet_at_detector_m_s": 0.82,
+       "sprinkler_s": 183.0,
+       "fire_at_sprinkler_kw": 1488.0,
+       "untenable_unsprinklered_s": 882.0,
+       "unsprinklered_governed_by": "hot layer overhead",
+       "untenable_sprinklered_s": 4460.0,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": 5.1,
+       "natural_vents_m2": 1.6,
+       "flame_height_at_sprinkler_m": 5.46
+      },
+      "lunar_estimate": {
+       "smoke_detector_s": 176.2,
+       "fire_at_detection_kw": 345.0,
+       "jet_at_detector_m_s": 0.82,
+       "sprinkler_s": 309.0,
+       "fire_at_sprinkler_kw": 1061.0,
+       "untenable_unsprinklered_s": 1437.0,
+       "unsprinklered_governed_by": "smoke at head height",
+       "untenable_sprinklered_s": null,
+       "sprinklered_governed_by": null,
+       "exhaust_to_hold_m3_s": 3.9,
+       "natural_vents_m2": 1.3,
+       "flame_height_at_sprinkler_m": 4.42
+      }
+     },
+     "enclosed_10_15km": {
+      "earth_fire": {
+       "smoke_detector_s": 101.0,
+       "fire_at_detection_kw": 453.0,
+       "jet_at_detector_m_s": 0.82,
+       "sprinkler_s": 175.5,
+       "fire_at_sprinkler_kw": 1369.0,
+       "untenable_unsprinklered_s": 843.0,
+       "unsprinklered_governed_by": "hot layer overhead",
+       "untenable_sprinklered_s": 4357.0,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": 5.3,
+       "natural_vents_m2": 1.6,
+       "flame_height_at_sprinkler_m": 5.65
+      },
+      "lunar_estimate": {
+       "smoke_detector_s": 168.2,
+       "fire_at_detection_kw": 314.0,
+       "jet_at_detector_m_s": 0.82,
+       "sprinkler_s": 294.8,
+       "fire_at_sprinkler_kw": 965.0,
+       "untenable_unsprinklered_s": 1387.0,
+       "unsprinklered_governed_by": "smoke at head height",
+       "untenable_sprinklered_s": null,
+       "sprinklered_governed_by": null,
+       "exhaust_to_hold_m3_s": 4.0,
+       "natural_vents_m2": 1.3,
+       "flame_height_at_sprinkler_m": 4.58
+      }
+     },
+     "sealed_15_24km": {
+      "earth_fire": {
+       "smoke_detector_s": 110.3,
+       "fire_at_detection_kw": 541.0,
+       "jet_at_detector_m_s": 0.82,
+       "sprinkler_s": 191.8,
+       "fire_at_sprinkler_kw": 1634.0,
+       "untenable_unsprinklered_s": 926.0,
+       "unsprinklered_governed_by": "hot layer overhead",
+       "untenable_sprinklered_s": 4561.0,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": 5.0,
+       "natural_vents_m2": 1.5,
+       "flame_height_at_sprinkler_m": 5.26
+      },
+      "lunar_estimate": {
+       "smoke_detector_s": 185.2,
+       "fire_at_detection_kw": 381.0,
+       "jet_at_detector_m_s": 0.82,
+       "sprinkler_s": 325.2,
+       "fire_at_sprinkler_kw": 1175.0,
+       "untenable_unsprinklered_s": 1493.0,
+       "unsprinklered_governed_by": "smoke at head height",
+       "untenable_sprinklered_s": null,
+       "sprinklered_governed_by": null,
+       "exhaust_to_hold_m3_s": 3.9,
+       "natural_vents_m2": 1.3,
+       "flame_height_at_sprinkler_m": 4.24
+      }
+     }
+    },
+    "transport (public space)": {
+     "earth": {
+      "earth_fire": {
+       "smoke_detector_s": 438.9,
+       "fire_at_detection_kw": 535.0,
+       "jet_at_detector_m_s": 2.0,
+       "sprinkler_s": 837.0,
+       "fire_at_sprinkler_kw": 1946.0,
+       "untenable_unsprinklered_s": 2000.0,
+       "unsprinklered_governed_by": "smoke at head height",
+       "untenable_sprinklered_s": 3274.0,
+       "sprinklered_governed_by": "smoke at head height",
+       "exhaust_to_hold_m3_s": 6.7,
+       "natural_vents_m2": 1.0,
+       "flame_height_at_sprinkler_m": 1.61
+      }
+     },
+     "open_0_3km": {
+      "earth_fire": {
+       "smoke_detector_s": 325.4,
+       "fire_at_detection_kw": 294.0,
+       "jet_at_detector_m_s": 0.83,
+       "sprinkler_s": 653.8,
+       "fire_at_sprinkler_kw": 1187.0,
+       "untenable_unsprinklered_s": 2224.0,
+       "unsprinklered_governed_by": "smoke at head height",
+       "untenable_sprinklered_s": null,
+       "sprinklered_governed_by": null,
+       "exhaust_to_hold_m3_s": 4.0,
+       "natural_vents_m2": 1.3,
+       "flame_height_at_sprinkler_m": 3.9
+      },
+      "lunar_estimate": {
+       "smoke_detector_s": 589.3,
+       "fire_at_detection_kw": 241.0,
+       "jet_at_detector_m_s": 0.83,
+       "sprinkler_s": 1226.8,
+       "fire_at_sprinkler_kw": 1045.0,
+       "untenable_unsprinklered_s": 3317.0,
+       "unsprinklered_governed_by": "smoke at head height",
+       "untenable_sprinklered_s": null,
+       "sprinklered_governed_by": null,
+       "exhaust_to_hold_m3_s": 3.6,
+       "natural_vents_m2": 1.2,
+       "flame_height_at_sprinkler_m": 3.17
+      }
+     },
+     "enclosed_3_10km": {
+      "earth_fire": {
+       "smoke_detector_s": 306.7,
+       "fire_at_detection_kw": 261.0,
+       "jet_at_detector_m_s": 0.82,
+       "sprinkler_s": 549.5,
+       "fire_at_sprinkler_kw": 839.0,
+       "untenable_unsprinklered_s": 2161.0,
+       "unsprinklered_governed_by": "smoke at head height",
+       "untenable_sprinklered_s": null,
+       "sprinklered_governed_by": null,
+       "exhaust_to_hold_m3_s": 3.3,
+       "natural_vents_m2": 1.1,
+       "flame_height_at_sprinkler_m": 3.81
+      },
+      "lunar_estimate": {
+       "smoke_detector_s": 553.2,
+       "fire_at_detection_kw": 213.0,
+       "jet_at_detector_m_s": 0.82,
+       "sprinkler_s": 1017.5,
+       "fire_at_sprinkler_kw": 719.0,
+       "untenable_unsprinklered_s": 3224.0,
+       "unsprinklered_governed_by": "smoke at head height",
+       "untenable_sprinklered_s": null,
+       "sprinklered_governed_by": null,
+       "exhaust_to_hold_m3_s": 2.9,
+       "natural_vents_m2": 1.0,
+       "flame_height_at_sprinkler_m": 3.14
+      }
+     },
+     "enclosed_10_15km": {
+      "earth_fire": {
+       "smoke_detector_s": 291.9,
+       "fire_at_detection_kw": 237.0,
+       "jet_at_detector_m_s": 0.82,
+       "sprinkler_s": 521.8,
+       "fire_at_sprinkler_kw": 756.0,
+       "untenable_unsprinklered_s": 2087.0,
+       "unsprinklered_governed_by": "smoke at head height",
+       "untenable_sprinklered_s": null,
+       "sprinklered_governed_by": null,
+       "exhaust_to_hold_m3_s": 3.3,
+       "natural_vents_m2": 1.1,
+       "flame_height_at_sprinkler_m": 3.96
+      },
+      "lunar_estimate": {
+       "smoke_detector_s": 525.0,
+       "fire_at_detection_kw": 191.0,
+       "jet_at_detector_m_s": 0.82,
+       "sprinkler_s": 963.2,
+       "fire_at_sprinkler_kw": 644.0,
+       "untenable_unsprinklered_s": 3115.0,
+       "unsprinklered_governed_by": "smoke at head height",
+       "untenable_sprinklered_s": null,
+       "sprinklered_governed_by": null,
+       "exhaust_to_hold_m3_s": 2.9,
+       "natural_vents_m2": 1.0,
+       "flame_height_at_sprinkler_m": 3.29
+      }
+     },
+     "sealed_15_24km": {
+      "earth_fire": {
+       "smoke_detector_s": 323.5,
+       "fire_at_detection_kw": 291.0,
+       "jet_at_detector_m_s": 0.82,
+       "sprinkler_s": 580.8,
+       "fire_at_sprinkler_kw": 937.0,
+       "untenable_unsprinklered_s": 2243.0,
+       "unsprinklered_governed_by": "smoke at head height",
+       "untenable_sprinklered_s": null,
+       "sprinklered_governed_by": null,
+       "exhaust_to_hold_m3_s": 3.2,
+       "natural_vents_m2": 1.1,
+       "flame_height_at_sprinkler_m": 3.65
+      },
+      "lunar_estimate": {
+       "smoke_detector_s": 585.2,
+       "fire_at_detection_kw": 238.0,
+       "jet_at_detector_m_s": 0.82,
+       "sprinkler_s": 1078.8,
+       "fire_at_sprinkler_kw": 808.0,
+       "untenable_unsprinklered_s": 3345.0,
+       "unsprinklered_governed_by": "smoke at head height",
+       "untenable_sprinklered_s": null,
+       "sprinklered_governed_by": null,
+       "exhaust_to_hold_m3_s": 2.9,
+       "natural_vents_m2": 1.0,
+       "flame_height_at_sprinkler_m": 2.97
+      }
+     }
+    }
+   }
+  }
+ },
+ "room_fire": {
+  "earth": {
+   "earth_fire": {
+    "smoke_detector_s": 54.4,
+    "sprinkler_s": 168.2,
+    "fire_at_sprinkler_kw": 315.0,
+    "smoke_at_heads_s": 59.0,
+    "flashover_kw": 2932,
+    "flashover_s": 513.6,
+    "sprinkler_fire_share_of_flashover": 0.11,
+    "fuel_limit_kw": 7500,
+    "ventilation_limit_kw": 8494,
+    "controlled_by": "fuel",
+    "fire_kw": 7500,
+    "burning_min": 25
+   }
+  },
+  "open_0_3km": {
+   "earth_fire": {
+    "smoke_detector_s": 47.8,
+    "sprinkler_s": 154.8,
+    "fire_at_sprinkler_kw": 266.0,
+    "smoke_at_heads_s": 77.5,
+    "flashover_kw": 1854,
+    "flashover_s": 408.5,
+    "sprinkler_fire_share_of_flashover": 0.14,
+    "fuel_limit_kw": 7500,
+    "ventilation_limit_kw": 2739,
+    "controlled_by": "ventilation",
+    "fire_kw": 2739,
+    "burning_min": 69
+   },
+   "lunar_estimate": {
+    "smoke_detector_s": 78.8,
+    "sprinkler_s": 251.2,
+    "fire_at_sprinkler_kw": 175.0,
+    "smoke_at_heads_s": 106.5,
+    "flashover_kw": 1854,
+    "flashover_s": 816.9,
+    "sprinkler_fire_share_of_flashover": 0.09,
+    "fuel_limit_kw": 4868,
+    "ventilation_limit_kw": 2739,
+    "controlled_by": "ventilation",
+    "fire_kw": 2739,
+    "burning_min": 69
+   }
+  },
+  "enclosed_3_10km": {
+   "earth_fire": {
+    "smoke_detector_s": 45.6,
+    "sprinkler_s": 137.5,
+    "fire_at_sprinkler_kw": 210.0,
+    "smoke_at_heads_s": 75.8,
+    "flashover_kw": 1706,
+    "flashover_s": 391.9,
+    "sprinkler_fire_share_of_flashover": 0.12,
+    "fuel_limit_kw": 7500,
+    "ventilation_limit_kw": 2399,
+    "controlled_by": "ventilation",
+    "fire_kw": 2399,
+    "burning_min": 79
+   },
+   "lunar_estimate": {
+    "smoke_detector_s": 74.9,
+    "sprinkler_s": 220.5,
+    "fire_at_sprinkler_kw": 135.0,
+    "smoke_at_heads_s": 104.2,
+    "flashover_kw": 1706,
+    "flashover_s": 783.8,
+    "sprinkler_fire_share_of_flashover": 0.08,
+    "fuel_limit_kw": 4868,
+    "ventilation_limit_kw": 2399,
+    "controlled_by": "ventilation",
+    "fire_kw": 2399,
+    "burning_min": 79
+   }
+  },
+  "enclosed_10_15km": {
+   "earth_fire": {
+    "smoke_detector_s": 43.8,
+    "sprinkler_s": 132.2,
+    "fire_at_sprinkler_kw": 194.0,
+    "smoke_at_heads_s": 73.8,
+    "flashover_kw": 1607,
+    "flashover_s": 380.3,
+    "sprinkler_fire_share_of_flashover": 0.12,
+    "fuel_limit_kw": 7500,
+    "ventilation_limit_kw": 2127,
+    "controlled_by": "ventilation",
+    "fire_kw": 2127,
+    "burning_min": 89
+   },
+   "lunar_estimate": {
+    "smoke_detector_s": 71.6,
+    "sprinkler_s": 211.2,
+    "fire_at_sprinkler_kw": 124.0,
+    "smoke_at_heads_s": 101.5,
+    "flashover_kw": 1607,
+    "flashover_s": 760.6,
+    "sprinkler_fire_share_of_flashover": 0.08,
+    "fuel_limit_kw": 4868,
+    "ventilation_limit_kw": 2127,
+    "controlled_by": "ventilation",
+    "fire_kw": 2127,
+    "burning_min": 89
+   }
+  },
+  "sealed_15_24km": {
+   "earth_fire": {
+    "smoke_detector_s": 47.7,
+    "sprinkler_s": 143.5,
+    "fire_at_sprinkler_kw": 229.0,
+    "smoke_at_heads_s": 78.2,
+    "flashover_kw": 1820,
+    "flashover_s": 404.7,
+    "sprinkler_fire_share_of_flashover": 0.13,
+    "fuel_limit_kw": 7500,
+    "ventilation_limit_kw": 2728,
+    "controlled_by": "ventilation",
+    "fire_kw": 2728,
+    "burning_min": 69
+   },
+   "lunar_estimate": {
+    "smoke_detector_s": 78.5,
+    "sprinkler_s": 230.5,
+    "fire_at_sprinkler_kw": 148.0,
+    "smoke_at_heads_s": 107.2,
+    "flashover_kw": 1820,
+    "flashover_s": 809.3,
+    "sprinkler_fire_share_of_flashover": 0.08,
+    "fuel_limit_kw": 4868,
+    "ventilation_limit_kw": 2728,
+    "controlled_by": "ventilation",
+    "fire_kw": 2728,
+    "burning_min": 69
+   }
+  }
+ },
+ "egress": {
+  "travel": {
+   "space": "hall",
+   "people": 167,
+   "premovement_s": [
+    120.0,
+    300.0
+   ],
+   "earth": {
+    "detection_s": 438.9,
+    "movement_s": [
+     50,
+     50
+    ],
+    "rset_s": [
+     639,
+     819
+    ],
+    "untenable_sprinklered_s": 3274.0,
+    "untenable_unsprinklered_s": 2000.0,
+    "margin_sprinklered_s": 2455,
+    "margin_unsprinklered_s": 1181
+   },
+   "enclosed_3_10km": {
+    "detection_s": 306.7,
+    "movement_s": [
+     50,
+     84
+    ],
+    "rset_s": [
+     507,
+     721
+    ],
+    "untenable_sprinklered_s": null,
+    "untenable_unsprinklered_s": 2161.0,
+    "margin_sprinklered_s": null,
+    "margin_unsprinklered_s": 1440
+   }
+  },
+  "commerce": {
+   "space": "compartment",
+   "people": 167,
+   "premovement_s": [
+    60.0,
+    180.0
+   ],
+   "earth": {
+    "detection_s": 119.5,
+    "movement_s": [
+     38,
+     38
+    ],
+    "rset_s": [
+     247,
+     367
+    ],
+    "untenable_sprinklered_s": 1022.0,
+    "untenable_unsprinklered_s": 555.0,
+    "margin_sprinklered_s": 655,
+    "margin_unsprinklered_s": 188
+   },
+   "enclosed_3_10km": {
+    "detection_s": 96.3,
+    "movement_s": [
+     38,
+     63
+    ],
+    "rset_s": [
+     224,
+     369
+    ],
+    "untenable_sprinklered_s": 1622.0,
+    "untenable_unsprinklered_s": 537.0,
+    "margin_sprinklered_s": 1253,
+    "margin_unsprinklered_s": 168
+   }
+  },
+  "shops": {
+   "space": "compartment",
+   "people": 500,
+   "premovement_s": [
+    120.0,
+    300.0
+   ],
+   "earth": {
+    "detection_s": 68.4,
+    "movement_s": [
+     92,
+     92
+    ],
+    "rset_s": [
+     310,
+     490
+    ],
+    "untenable_sprinklered_s": 804.0,
+    "untenable_unsprinklered_s": 371.0,
+    "margin_sprinklered_s": 314,
+    "margin_unsprinklered_s": -119
+   },
+   "enclosed_3_10km": {
+    "detection_s": 60.1,
+    "movement_s": [
+     92,
+     153
+    ],
+    "rset_s": [
+     302,
+     543
+    ],
+    "untenable_sprinklered_s": 1171.0,
+    "untenable_unsprinklered_s": 293.0,
+    "margin_sprinklered_s": 628,
+    "margin_unsprinklered_s": -250
+   }
+  },
+  "events": {
+   "space": "hall",
+   "people": 1667,
+   "premovement_s": [
+    120.0,
+    300.0
+   ],
+   "earth": {
+    "detection_s": 130.5,
+    "movement_s": [
+     102,
+     102
+    ],
+    "rset_s": [
+     382,
+     562
+    ],
+    "untenable_sprinklered_s": 2567.0,
+    "untenable_unsprinklered_s": 908.0,
+    "margin_sprinklered_s": 2005,
+    "margin_unsprinklered_s": 346
+   },
+   "enclosed_3_10km": {
+    "detection_s": 105.4,
+    "movement_s": [
+     102,
+     170
+    ],
+    "rset_s": [
+     357,
+     605
+    ],
+    "untenable_sprinklered_s": 4460.0,
+    "untenable_unsprinklered_s": 882.0,
+    "margin_sprinklered_s": 3855,
+    "margin_unsprinklered_s": 277
+   }
+  },
+  "services": {
+   "space": "compartment",
+   "people": 40,
+   "premovement_s": [
+    60.0,
+    180.0
+   ],
+   "earth": {
+    "detection_s": 68.4,
+    "movement_s": [
+     38,
+     38
+    ],
+    "rset_s": [
+     196,
+     316
+    ],
+    "untenable_sprinklered_s": 804.0,
+    "untenable_unsprinklered_s": 371.0,
+    "margin_sprinklered_s": 488,
+    "margin_unsprinklered_s": 55
+   },
+   "enclosed_3_10km": {
+    "detection_s": 60.1,
+    "movement_s": [
+     38,
+     63
+    ],
+    "rset_s": [
+     188,
+     333
+    ],
+    "untenable_sprinklered_s": 1171.0,
+    "untenable_unsprinklered_s": 293.0,
+    "margin_sprinklered_s": 838,
+    "margin_unsprinklered_s": -40
+   }
+  }
+ },
+ "band_clearing": {
+  "0_3km": {
+   "storey_m2": 100000,
+   "band_m2": 400000,
+   "rim_m": 10000,
+   "people_when_full": {
+    "travel": 13333,
+    "hotels": 13333,
+    "short_stay": 33333,
+    "commerce": 33333,
+    "shops": 100000,
+    "events": 133333,
+    "services": 8000
+   },
+   "berths": 166,
+   "persons_per_s": 55.3,
+   "fullest_band_clear_min": 40,
+   "clear_min_by_use": {
+    "travel": 4.0,
+    "hotels": 4.0,
+    "short_stay": 10.0,
+    "commerce": 10.0,
+    "shops": 30.1,
+    "events": 40.2,
+    "services": 2.4
+   }
+  },
+  "3_10km": {
+   "storey_m2": 100000,
+   "band_m2": 400000,
+   "rim_m": 10000,
+   "people_when_full": {
+    "travel": 13333,
+    "hotels": 13333,
+    "short_stay": 33333,
+    "commerce": 33333,
+    "shops": 100000,
+    "events": 133333,
+    "services": 8000
+   },
+   "berths": 166,
+   "persons_per_s": 55.3,
+   "fullest_band_clear_min": 40,
+   "clear_min_by_use": {
+    "travel": 4.0,
+    "hotels": 4.0,
+    "short_stay": 10.0,
+    "commerce": 10.0,
+    "shops": 30.1,
+    "events": 40.2,
+    "services": 2.4
+   }
+  },
+  "10_15km": {
+   "storey_m2": 100000,
+   "band_m2": 400000,
+   "rim_m": 10000,
+   "people_when_full": {
+    "travel": 13333,
+    "hotels": 13333,
+    "short_stay": 33333,
+    "commerce": 33333,
+    "shops": 100000,
+    "events": 133333,
+    "services": 8000
+   },
+   "berths": 166,
+   "persons_per_s": 55.3,
+   "fullest_band_clear_min": 40,
+   "clear_min_by_use": {
+    "travel": 4.0,
+    "hotels": 4.0,
+    "short_stay": 10.0,
+    "commerce": 10.0,
+    "shops": 30.1,
+    "events": 40.2,
+    "services": 2.4
+   }
+  },
+  "15_24km": {
+   "storey_m2": 18402,
+   "band_m2": 73606,
+   "rim_m": 1840,
+   "people_when_full": {
+    "travel": 2454,
+    "hotels": 2454,
+    "short_stay": 6134,
+    "commerce": 6134,
+    "shops": 18402,
+    "events": 24535,
+    "services": 1472
+   },
+   "berths": 30,
+   "persons_per_s": 10.0,
+   "fullest_band_clear_min": 41,
+   "clear_min_by_use": {
+    "travel": 4.1,
+    "hotels": 4.1,
+    "short_stay": 10.2,
+    "commerce": 10.2,
+    "shops": 30.7,
+    "events": 40.9,
+    "services": 2.5
+   }
+  }
+ },
+ "winds_m_s": {
+  "0_3km": {
+   "median": 1.98,
+   "p90": 3.82
+  },
+  "3_10km": {
+   "median": 2.45,
+   "p90": 4.28
+  },
+  "10_15km": {
+   "median": 3.12,
+   "p90": 4.82
+  },
+  "15_24km": {
+   "median": 3.96,
+   "p90": 5.52
+  }
+ },
+ "systems": {
+  "shafts": {
+   "door_limit_pa": 85,
+   "stair_minimum_pa": 12.5,
+   "earth_comparison": {
+    "shaft_m": 400.0,
+    "outside_c": -10.0,
+    "stack_pa": 538,
+    "unbroken_shaft_within_door_window_m": 54
+   },
+   "zones": {
+    "0_3km": {
+     "outside_c": 10.4,
+     "stack_pa_per_100m": 6.06,
+     "stack_pa_per_band_spacing": 12.1,
+     "stack_pa_whole_zone": 182,
+     "unbroken_shaft_within_door_window_m": 1200.0
+    },
+    "3_10km": {
+     "outside_c": 6.0,
+     "stack_pa_per_100m": 8.13,
+     "stack_pa_per_band_spacing": 16.3,
+     "stack_pa_whole_zone": 569,
+     "unbroken_shaft_within_door_window_m": 900.0
+    },
+    "10_15km": {
+     "outside_c": 0.9,
+     "stack_pa_per_100m": 10.02,
+     "stack_pa_per_band_spacing": 20.0,
+     "stack_pa_whole_zone": 501,
+     "unbroken_shaft_within_door_window_m": 730.0
+    },
+    "15_24km": {
+     "outside_c": -5.4,
+     "stack_pa_per_100m": 11.81,
+     "stack_pa_per_band_spacing": 23.6,
+     "stack_pa_whole_zone": 1063,
+     "unbroken_shaft_within_door_window_m": 620.0
+    }
+   }
+  },
+  "water": {
+   "pressure_kpa_per_100m": {
+    "moon": 162.4,
+    "earth": 980.7
+   },
+   "pressure_zone_m": {
+    "standard_175_psi": {
+     "moon": 745,
+     "earth": 123
+    },
+    "high_pressure_300_psi": {
+     "moon": 1274,
+     "earth": 211
+    }
+   },
+   "zones_over_tower": {
+    "standard_175_psi": {
+     "moon": 33,
+     "earth_gravity": 195
+    },
+    "high_pressure_300_psi": {
+     "moon": 19,
+     "earth_gravity": 114
+    }
+   },
+   "demand_l_min": 2072,
+   "tank_per_band_m3": 186,
+   "lift_kwh_per_m3_to_top": 10.8
+  },
+  "sealed_zone": {
+   "pressurised_to_atm": 0.947,
+   "envelope_kpa": [
+    24.8,
+    36.7
+   ],
+   "outside_oxygen_like_earth_at_m": [
+    4290.0,
+    5670.0
+   ],
+   "faa_effective_performance_min_at_18000_ft": [
+    20,
+    30
+   ]
+  },
+  "enrichment_instead": {
+   "3_10km": {
+    "pressure_atm": 0.777,
+    "oxygen_percent_for_summit_breathing": 21.3,
+    "oxygen_percent_for_earth_sea_level": 27.0
+   },
+   "10_15km": {
+    "pressure_atm": 0.702,
+    "oxygen_percent_for_summit_breathing": 23.6,
+    "oxygen_percent_for_earth_sea_level": 29.8
+   },
+   "15_24km": {
+    "pressure_atm": 0.585,
+    "oxygen_percent_for_summit_breathing": 28.3,
+    "oxygen_percent_for_earth_sea_level": 35.8
+   }
+  },
+  "firefighting": {
+   "stations": 8,
+   "farthest_m": 1500.0,
+   "arrival_s": 135,
+   "nfpa1710_first_engine_travel_s": 240.0
+  },
+  "compartment_burnout": {
+   "commerce": {
+    "occupancy": "office",
+    "fire_load_gj": 1022,
+    "fuel_controlled_mw": 500,
+    "by_air": {
+     "earth": {
+      "still_air": {
+       "fire_mw": 198,
+       "burning_h": 1.4,
+       "controlled_by": "ventilation"
+      }
+     },
+     "open_0_3km": {
+      "still_air": {
+       "fire_mw": 64,
+       "burning_h": 4.4,
+       "controlled_by": "ventilation"
+      },
+      "median_wind": {
+       "fire_mw": 243,
+       "burning_h": 1.2,
+       "controlled_by": "ventilation"
+      },
+      "p90_wind": {
+       "fire_mw": 469,
+       "burning_h": 0.6,
+       "controlled_by": "ventilation"
+      }
+     },
+     "enclosed_3_10km": {
+      "still_air": {
+       "fire_mw": 56,
+       "burning_h": 5.1,
+       "controlled_by": "ventilation"
+      },
+      "median_wind": {
+       "fire_mw": 263,
+       "burning_h": 1.1,
+       "controlled_by": "ventilation"
+      },
+      "p90_wind": {
+       "fire_mw": 460,
+       "burning_h": 0.6,
+       "controlled_by": "ventilation"
+      }
+     },
+     "enclosed_10_15km": {
+      "still_air": {
+       "fire_mw": 50,
+       "burning_h": 5.7,
+       "controlled_by": "ventilation"
+      },
+      "median_wind": {
+       "fire_mw": 297,
+       "burning_h": 1.0,
+       "controlled_by": "ventilation"
+      },
+      "p90_wind": {
+       "fire_mw": 459,
+       "burning_h": 0.6,
+       "controlled_by": "ventilation"
+      }
+     },
+     "sealed_15_24km": {
+      "still_air": {
+       "fire_mw": 64,
+       "burning_h": 4.5,
+       "controlled_by": "ventilation"
+      },
+      "median_wind": {
+       "fire_mw": 484,
+       "burning_h": 0.6,
+       "controlled_by": "ventilation"
+      },
+      "p90_wind": {
+       "fire_mw": 500,
+       "burning_h": 0.6,
+       "controlled_by": "fuel"
+      }
+     }
+    }
+   },
+   "shops": {
+    "occupancy": "shopping centre",
+    "fire_load_gj": 1460,
+    "fuel_controlled_mw": 500,
+    "by_air": {
+     "earth": {
+      "still_air": {
+       "fire_mw": 198,
+       "burning_h": 2.0,
+       "controlled_by": "ventilation"
+      }
+     },
+     "open_0_3km": {
+      "still_air": {
+       "fire_mw": 64,
+       "burning_h": 6.4,
+       "controlled_by": "ventilation"
+      },
+      "median_wind": {
+       "fire_mw": 243,
+       "burning_h": 1.7,
+       "controlled_by": "ventilation"
+      },
+      "p90_wind": {
+       "fire_mw": 469,
+       "burning_h": 0.9,
+       "controlled_by": "ventilation"
+      }
+     },
+     "enclosed_3_10km": {
+      "still_air": {
+       "fire_mw": 56,
+       "burning_h": 7.3,
+       "controlled_by": "ventilation"
+      },
+      "median_wind": {
+       "fire_mw": 263,
+       "burning_h": 1.5,
+       "controlled_by": "ventilation"
+      },
+      "p90_wind": {
+       "fire_mw": 460,
+       "burning_h": 0.9,
+       "controlled_by": "ventilation"
+      }
+     },
+     "enclosed_10_15km": {
+      "still_air": {
+       "fire_mw": 50,
+       "burning_h": 8.2,
+       "controlled_by": "ventilation"
+      },
+      "median_wind": {
+       "fire_mw": 297,
+       "burning_h": 1.4,
+       "controlled_by": "ventilation"
+      },
+      "p90_wind": {
+       "fire_mw": 459,
+       "burning_h": 0.9,
+       "controlled_by": "ventilation"
+      }
+     },
+     "sealed_15_24km": {
+      "still_air": {
+       "fire_mw": 64,
+       "burning_h": 6.4,
+       "controlled_by": "ventilation"
+      },
+      "median_wind": {
+       "fire_mw": 484,
+       "burning_h": 0.8,
+       "controlled_by": "ventilation"
+      },
+      "p90_wind": {
+       "fire_mw": 500,
+       "burning_h": 0.8,
+       "controlled_by": "fuel"
+      }
+     }
+    }
+   },
+   "services": {
+    "occupancy": "library",
+    "fire_load_gj": 3648,
+    "fuel_controlled_mw": 1000,
+    "by_air": {
+     "earth": {
+      "still_air": {
+       "fire_mw": 198,
+       "burning_h": 5.1,
+       "controlled_by": "ventilation"
+      }
+     },
+     "open_0_3km": {
+      "still_air": {
+       "fire_mw": 64,
+       "burning_h": 15.9,
+       "controlled_by": "ventilation"
+      },
+      "median_wind": {
+       "fire_mw": 243,
+       "burning_h": 4.2,
+       "controlled_by": "ventilation"
+      },
+      "p90_wind": {
+       "fire_mw": 469,
+       "burning_h": 2.2,
+       "controlled_by": "ventilation"
+      }
+     },
+     "enclosed_3_10km": {
+      "still_air": {
+       "fire_mw": 56,
+       "burning_h": 18.1,
+       "controlled_by": "ventilation"
+      },
+      "median_wind": {
+       "fire_mw": 263,
+       "burning_h": 3.8,
+       "controlled_by": "ventilation"
+      },
+      "p90_wind": {
+       "fire_mw": 460,
+       "burning_h": 2.2,
+       "controlled_by": "ventilation"
+      }
+     },
+     "enclosed_10_15km": {
+      "still_air": {
+       "fire_mw": 50,
+       "burning_h": 20.4,
+       "controlled_by": "ventilation"
+      },
+      "median_wind": {
+       "fire_mw": 297,
+       "burning_h": 3.4,
+       "controlled_by": "ventilation"
+      },
+      "p90_wind": {
+       "fire_mw": 459,
+       "burning_h": 2.2,
+       "controlled_by": "ventilation"
+      }
+     },
+     "sealed_15_24km": {
+      "still_air": {
+       "fire_mw": 64,
+       "burning_h": 15.9,
+       "controlled_by": "ventilation"
+      },
+      "median_wind": {
+       "fire_mw": 484,
+       "burning_h": 2.1,
+       "controlled_by": "ventilation"
+      },
+      "p90_wind": {
+       "fire_mw": 675,
+       "burning_h": 1.5,
+       "controlled_by": "ventilation"
+      }
+     }
+    }
+   }
+  }
+ }
+}

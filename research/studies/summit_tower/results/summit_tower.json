@@ -1,0 +1,2038 @@
+{
+ "schema": "terluna.research.summit-tower/1",
+ "producer": {
+  "study": "summit_tower",
+  "files": {
+   "research/studies/summit_tower/run.py": "db7811ceecf27c31",
+   "engineering/towers/lattice.py": "111fd23770eabeb1",
+   "engineering/towers/wind_energy.py": "f7eb7dfc23790597"
+  },
+  "inputs": {
+   "climate/results/gcm/site_winds_A28_dim5_summit.json": "2f21bfb40aa4188b",
+   "climate/results/crm/ring_ring.json": "871905df2041cc2f",
+   "geography/results/drainage.json": "1ea4c936c50f31c8",
+   "illumination/surface_light/results/surface_light.json": "7e13ba63ee445a91",
+   "research/studies/lunar_cycle_ecology/results/lunar_cycle_ecology.json": "1f35337c24ecf867",
+   "geography/products/atlas_28pct_4ppd.npz": "dc283827f349fdc1",
+   "geography/products/drainage_28pct_16ppd.npz": "c816483f7ce97f83"
+  }
+ },
+ "evidence": "First-order concept sizing and screening arithmetic. The winds are two models' (3-day GCM means with T21 terrain and a two-dimensional cloud-resolving ring over two lunar days), raised by stated factors for gusts, the summit and rarity; the frames are sized by closed-form statics with one member-buckling factor and one gust factor; device coefficients come from Earth devices. Nothing here is a structural design.",
+ "reading_rule": "Heights of the tower are above the summit ground; wind heights also above sea level. Masses in megatonnes (Mt = 1e9 kg). moon[height][design gust] is the lightest frame meeting the checks (sway within 1/500 of the height under the service gust, whole-frame buckling factor at least 3, base no wider than half the height), or null if none does. Energy in MW is a mean over all winds.",
+ "site": {
+  "lat_deg": 5.375,
+  "lon_deg": 201.375,
+  "ground_above_geoid_m": 9935,
+  "ground_above_sea_m": 11589,
+  "sea_level_m": -1654.2,
+  "grid": "atlas 4 px/deg (7.6 km)",
+  "lola_peak": {
+   "lat_deg": 5.4125,
+   "lon_deg": -158.6335,
+   "height_above_mean_radius_m": 10786.0
+  },
+  "median_ground_within_100_km_above_sea_m": 8613,
+  "median_ground_within_300_km_above_sea_m": 6466,
+  "nearest_lake_shore_km": 9,
+  "lakes": [
+   {
+    "centre": [
+     14.68,
+     -160.4
+    ],
+    "area_km2": 32179,
+    "level_above_sea_m": 5464,
+    "max_depth_m": 4400,
+    "centre_km": 287,
+    "shore_km": 156,
+    "summit_above_lake_m": 6125
+   },
+   {
+    "centre": [
+     -4.33,
+     -157.69
+    ],
+    "area_km2": 140652,
+    "level_above_sea_m": 7849,
+    "max_depth_m": 6670,
+    "centre_km": 296,
+    "shore_km": 84,
+    "summit_above_lake_m": 3740
+   },
+   {
+    "centre": [
+     13.57,
+     -170.91
+    ],
+    "area_km2": 22554,
+    "level_above_sea_m": 5285,
+    "max_depth_m": 4661,
+    "centre_km": 443,
+    "shore_km": 344,
+    "summit_above_lake_m": 6304
+   },
+   {
+    "centre": [
+     18.61,
+     -148.77
+    ],
+    "area_km2": 29584,
+    "level_above_sea_m": 7303,
+    "max_depth_m": 4969,
+    "centre_km": 496,
+    "shore_km": 392,
+    "summit_above_lake_m": 4286
+   },
+   {
+    "centre": [
+     5.91,
+     -176.51
+    ],
+    "area_km2": 20870,
+    "level_above_sea_m": 4535,
+    "max_depth_m": 3926,
+    "centre_km": 540,
+    "shore_km": 469,
+    "summit_above_lake_m": 7054
+   },
+   {
+    "centre": [
+     15.05,
+     -142.01
+    ],
+    "area_km2": 26504,
+    "level_above_sea_m": 6368,
+    "max_depth_m": 5307,
+    "centre_km": 576,
+    "shore_km": 377,
+    "summit_above_lake_m": 5221
+   },
+   {
+    "centre": [
+     -14.5,
+     -152.71
+    ],
+    "area_km2": 29279,
+    "level_above_sea_m": 6070,
+    "max_depth_m": 5348,
+    "centre_km": 628,
+    "shore_km": 508,
+    "summit_above_lake_m": 5519
+   },
+   {
+    "centre": [
+     -8.8,
+     -142.26
+    ],
+    "area_km2": 21172,
+    "level_above_sea_m": 6519,
+    "max_depth_m": 3215,
+    "centre_km": 655,
+    "shore_km": 340,
+    "summit_above_lake_m": 5070
+   },
+   {
+    "centre": [
+     24.61,
+     -169.45
+    ],
+    "area_km2": 81796,
+    "level_above_sea_m": 5065,
+    "max_depth_m": 5054,
+    "centre_km": 663,
+    "shore_km": 471,
+    "summit_above_lake_m": 6524
+   },
+   {
+    "centre": [
+     31.53,
+     -165.42
+    ],
+    "area_km2": 22046,
+    "level_above_sea_m": 5571,
+    "max_depth_m": 5338,
+    "centre_km": 816,
+    "shore_km": 316,
+    "summit_above_lake_m": 6018
+   },
+   {
+    "centre": [
+     1.39,
+     -127.74
+    ],
+    "area_km2": 200051,
+    "level_above_sea_m": 5052,
+    "max_depth_m": 4723,
+    "centre_km": 942,
+    "shore_km": 674,
+    "summit_above_lake_m": 6537
+   },
+   {
+    "centre": [
+     37.37,
+     -138.92
+    ],
+    "area_km2": 29825,
+    "level_above_sea_m": 5333,
+    "max_depth_m": 4541,
+    "centre_km": 1113,
+    "shore_km": 960,
+    "summit_above_lake_m": 6256
+   }
+  ]
+ },
+ "air_at_reference": {
+  "density_kg_m3": 0.986,
+  "ground_density_kg_m3": 1.163
+ },
+ "wind": [
+  {
+   "height_above_ground_km": 0.0,
+   "height_above_sea_km": 11.59,
+   "density_kg_m3": 1.163,
+   "gcm_3day": {
+    "median": 1.97,
+    "p99": 4.85,
+    "max": 5.5,
+    "return_50yr": 6.04,
+    "steadiness": 0.59,
+    "resource_w_m2": 10.1
+   },
+   "ring_3hourly": {
+    "median": 1.85,
+    "p90": 3.68,
+    "p99": 6.14,
+    "max": 12.78
+   },
+   "weibull": {
+    "shape": 1.741,
+    "scale_east_west": 2.277,
+    "scale_with_north_south": 2.613,
+    "p99_check": 5.48
+   },
+   "resource_w_m2": 16.3
+  },
+  {
+   "height_above_ground_km": 2.5,
+   "height_above_sea_km": 14.09,
+   "density_kg_m3": 1.117,
+   "gcm_3day": {
+    "median": 1.82,
+    "p99": 4.41,
+    "max": 4.96,
+    "return_50yr": 5.38,
+    "steadiness": 0.5,
+    "resource_w_m2": 7.5
+   },
+   "ring_3hourly": {
+    "median": 2.07,
+    "p90": 3.91,
+    "p99": 6.21,
+    "max": 12.98
+   },
+   "weibull": {
+    "shape": 1.895,
+    "scale_east_west": 2.517,
+    "scale_with_north_south": 2.948,
+    "p99_check": 5.63
+   },
+   "resource_w_m2": 20.2
+  },
+  {
+   "height_above_ground_km": 5.0,
+   "height_above_sea_km": 16.59,
+   "density_kg_m3": 1.072,
+   "gcm_3day": {
+    "median": 1.66,
+    "p99": 3.97,
+    "max": 4.41,
+    "return_50yr": 4.73,
+    "steadiness": 0.42,
+    "resource_w_m2": 5.1
+   },
+   "ring_3hourly": {
+    "median": 2.3,
+    "p90": 4.14,
+    "p99": 6.27,
+    "max": 13.17
+   },
+   "weibull": {
+    "shape": 2.047,
+    "scale_east_west": 2.754,
+    "scale_with_north_south": 3.363,
+    "p99_check": 5.81
+   },
+   "resource_w_m2": 26.5
+  },
+  {
+   "height_above_ground_km": 10.0,
+   "height_above_sea_km": 21.59,
+   "density_kg_m3": 0.986,
+   "gcm_3day": {
+    "median": 1.91,
+    "p99": 4.48,
+    "max": 5.26,
+    "return_50yr": 5.69,
+    "steadiness": 0.63,
+    "resource_w_m2": 7.3
+   },
+   "ring_3hourly": {
+    "median": 2.81,
+    "p90": 4.6,
+    "p99": 6.49,
+    "max": 13.56
+   },
+   "weibull": {
+    "shape": 2.436,
+    "scale_east_west": 3.264,
+    "scale_with_north_south": 3.659,
+    "p99_check": 6.11
+   },
+   "resource_w_m2": 27.1
+  },
+  {
+   "height_above_ground_km": 15.0,
+   "height_above_sea_km": 26.59,
+   "density_kg_m3": 0.906,
+   "gcm_3day": {
+    "median": 2.4,
+    "p99": 5.21,
+    "max": 6.29,
+    "return_50yr": 6.84,
+    "steadiness": 0.81,
+    "resource_w_m2": 13.1
+   },
+   "ring_3hourly": {
+    "median": 3.42,
+    "p90": 5.04,
+    "p99": 6.94,
+    "max": 13.96
+   },
+   "weibull": {
+    "shape": 3.081,
+    "scale_east_west": 3.847,
+    "scale_with_north_south": 4.106,
+    "p99_check": 6.32
+   },
+   "resource_w_m2": 31.0
+  },
+  {
+   "height_above_ground_km": 20.0,
+   "height_above_sea_km": 31.59,
+   "density_kg_m3": 0.833,
+   "gcm_3day": {
+    "median": 3.35,
+    "p99": 6.26,
+    "max": 7.45,
+    "return_50yr": 8.1,
+    "steadiness": 0.89,
+    "resource_w_m2": 25.7
+   },
+   "ring_3hourly": {
+    "median": 4.02,
+    "p90": 5.57,
+    "p99": 7.5,
+    "max": 15.25
+   },
+   "weibull": {
+    "shape": 3.689,
+    "scale_east_west": 4.441,
+    "scale_with_north_south": 4.645,
+    "p99_check": 6.72
+   },
+   "resource_w_m2": 39.0
+  },
+  {
+   "height_above_ground_km": 30.0,
+   "height_above_sea_km": 41.59,
+   "density_kg_m3": 0.704,
+   "gcm_3day": {
+    "median": 4.74,
+    "p99": 7.62,
+    "max": 8.74,
+    "return_50yr": 9.31,
+    "steadiness": 0.96,
+    "resource_w_m2": 46.6
+   },
+   "ring_3hourly": {
+    "median": 5.21,
+    "p90": 6.9,
+    "p99": 9.0,
+    "max": 20.17
+   },
+   "weibull": {
+    "shape": 4.274,
+    "scale_east_west": 5.68,
+    "scale_with_north_south": 5.85,
+    "p99_check": 8.12
+   },
+   "resource_w_m2": 64.0
+  }
+ ],
+ "design_winds": {
+  "models_highest_m_s": 13.6,
+  "service_gust_m_s": 19.0,
+  "model_based_design_gust_m_s": 27.3,
+  "factors": {
+   "gust": 1.4,
+   "summit_speedup": 1.2,
+   "rarity": 1.2
+  },
+  "scenarios_m_s": [
+   0.0,
+   13.6,
+   27.3,
+   50.0
+  ]
+ },
+ "materials": {
+  "steel": {
+   "name": "high-strength structural steel (S690)",
+   "allowable_mpa": 323,
+   "self_weight_length_km_moon": 25.4,
+   "self_weight_length_km_earth": 4.2
+  },
+  "carbon": {
+   "name": "carbon-fibre composite (unidirectional, in compression)",
+   "allowable_mpa": 469,
+   "self_weight_length_km_moon": 180.4,
+   "self_weight_length_km_earth": 29.8
+  }
+ },
+ "frame": {
+  "solidity": 0.12,
+  "force_coefficient": 2.063,
+  "top_width_m": 320.0,
+  "floors": {
+   "spacing_m": 200.0,
+   "storeys": 4,
+   "area_per_storey_m2": 50000.0,
+   "floor_area_km2_per_km": 1.0,
+   "mass_per_area_kg_m2": 500.0
+  }
+ },
+ "moon": {
+  "1_km": {
+   "0": {
+    "height_km": 1.0,
+    "design_gust_m_s": 0.0,
+    "base_width_m": 341,
+    "flare_exponent": 1.0,
+    "frame_mass_mt": 0.014,
+    "floor_mass_mt": 0.5,
+    "floor_area_km2": 1.0,
+    "frequency_hz": 0.0853,
+    "period_s": 11.7,
+    "sway_at_service_m": 0.32,
+    "buckling_factor": 110.6,
+    "footing_area_m2_at_1mpa": 209
+   },
+   "13.6": {
+    "height_km": 1.0,
+    "design_gust_m_s": 13.6,
+    "base_width_m": 440,
+    "flare_exponent": 1.0,
+    "frame_mass_mt": 0.014,
+    "floor_mass_mt": 0.5,
+    "floor_area_km2": 1.0,
+    "frequency_hz": 0.1068,
+    "period_s": 9.4,
+    "sway_at_service_m": 0.22,
+    "buckling_factor": 171.4,
+    "footing_area_m2_at_1mpa": 222
+   },
+   "27.3": {
+    "height_km": 1.0,
+    "design_gust_m_s": 27.3,
+    "base_width_m": 440,
+    "flare_exponent": 1.5,
+    "frame_mass_mt": 0.016,
+    "floor_mass_mt": 0.5,
+    "floor_area_km2": 1.0,
+    "frequency_hz": 0.1109,
+    "period_s": 9.0,
+    "sway_at_service_m": 0.2,
+    "buckling_factor": 183.2,
+    "footing_area_m2_at_1mpa": 261
+   },
+   "50": {
+    "height_km": 1.0,
+    "design_gust_m_s": 50.0,
+    "base_width_m": 440,
+    "flare_exponent": 3.0,
+    "frame_mass_mt": 0.03,
+    "floor_mass_mt": 0.5,
+    "floor_area_km2": 1.0,
+    "frequency_hz": 0.1232,
+    "period_s": 8.1,
+    "sway_at_service_m": 0.16,
+    "buckling_factor": 222.1,
+    "footing_area_m2_at_1mpa": 381
+   },
+   "bare_frame": {
+    "height_km": 1.0,
+    "design_gust_m_s": 27.3,
+    "base_width_m": 500,
+    "flare_exponent": 3.0,
+    "frame_mass_mt": 0.004,
+    "floor_mass_mt": 0.0,
+    "floor_area_km2": 0.0,
+    "frequency_hz": 0.736,
+    "period_s": 1.4,
+    "sway_at_service_m": 1.26,
+    "buckling_factor": 6545.2,
+    "footing_area_m2_at_1mpa": 32
+   },
+   "carbon_frame": {
+    "height_km": 1.0,
+    "design_gust_m_s": 27.3,
+    "base_width_m": 440,
+    "flare_exponent": 1.5,
+    "frame_mass_mt": 0.002,
+    "floor_mass_mt": 0.5,
+    "floor_area_km2": 1.0,
+    "frequency_hz": 0.0722,
+    "period_s": 13.8,
+    "sway_at_service_m": 0.47,
+    "buckling_factor": 77.9,
+    "footing_area_m2_at_1mpa": 256
+   }
+  },
+  "2_km": {
+   "0": {
+    "height_km": 2.0,
+    "design_gust_m_s": 0.0,
+    "base_width_m": 361,
+    "flare_exponent": 1.0,
+    "frame_mass_mt": 0.055,
+    "floor_mass_mt": 1.0,
+    "floor_area_km2": 2.0,
+    "frequency_hz": 0.0317,
+    "period_s": 31.5,
+    "sway_at_service_m": 2.31,
+    "buckling_factor": 30.4,
+    "footing_area_m2_at_1mpa": 429
+   },
+   "13.6": {
+    "height_km": 2.0,
+    "design_gust_m_s": 13.6,
+    "base_width_m": 683,
+    "flare_exponent": 1.0,
+    "frame_mass_mt": 0.06,
+    "floor_mass_mt": 1.0,
+    "floor_area_km2": 2.0,
+    "frequency_hz": 0.0551,
+    "period_s": 18.2,
+    "sway_at_service_m": 0.97,
+    "buckling_factor": 89.6,
+    "footing_area_m2_at_1mpa": 472
+   },
+   "27.3": {
+    "height_km": 2.0,
+    "design_gust_m_s": 27.3,
+    "base_width_m": 683,
+    "flare_exponent": 1.5,
+    "frame_mass_mt": 0.072,
+    "floor_mass_mt": 1.0,
+    "floor_area_km2": 2.0,
+    "frequency_hz": 0.0564,
+    "period_s": 17.7,
+    "sway_at_service_m": 0.85,
+    "buckling_factor": 92.0,
+    "footing_area_m2_at_1mpa": 588
+   },
+   "50": {
+    "height_km": 2.0,
+    "design_gust_m_s": 50.0,
+    "base_width_m": 683,
+    "flare_exponent": 3.0,
+    "frame_mass_mt": 0.14,
+    "floor_mass_mt": 1.0,
+    "floor_area_km2": 2.0,
+    "frequency_hz": 0.0604,
+    "period_s": 16.5,
+    "sway_at_service_m": 0.66,
+    "buckling_factor": 101.6,
+    "footing_area_m2_at_1mpa": 916
+   },
+   "bare_frame": {
+    "height_km": 2.0,
+    "design_gust_m_s": 27.3,
+    "base_width_m": 881,
+    "flare_exponent": 3.0,
+    "frame_mass_mt": 0.02,
+    "floor_mass_mt": 0.0,
+    "floor_area_km2": 0.0,
+    "frequency_hz": 0.3132,
+    "period_s": 3.2,
+    "sway_at_service_m": 3.98,
+    "buckling_factor": 2198.8,
+    "footing_area_m2_at_1mpa": 84
+   },
+   "carbon_frame": {
+    "height_km": 2.0,
+    "design_gust_m_s": 27.3,
+    "base_width_m": 683,
+    "flare_exponent": 2.0,
+    "frame_mass_mt": 0.01,
+    "floor_mass_mt": 1.0,
+    "floor_area_km2": 2.0,
+    "frequency_hz": 0.0346,
+    "period_s": 28.9,
+    "sway_at_service_m": 2.18,
+    "buckling_factor": 34.3,
+    "footing_area_m2_at_1mpa": 554
+   }
+  },
+  "3_km": {
+   "0": {
+    "height_km": 3.0,
+    "design_gust_m_s": 0.0,
+    "base_width_m": 477,
+    "flare_exponent": 1.0,
+    "frame_mass_mt": 0.127,
+    "floor_mass_mt": 1.5,
+    "floor_area_km2": 3.0,
+    "frequency_hz": 0.0216,
+    "period_s": 46.2,
+    "sway_at_service_m": 5.34,
+    "buckling_factor": 21.0,
+    "footing_area_m2_at_1mpa": 661
+   },
+   "13.6": {
+    "height_km": 3.0,
+    "design_gust_m_s": 13.6,
+    "base_width_m": 902,
+    "flare_exponent": 1.0,
+    "frame_mass_mt": 0.14,
+    "floor_mass_mt": 1.5,
+    "floor_area_km2": 3.0,
+    "frequency_hz": 0.0386,
+    "period_s": 25.9,
+    "sway_at_service_m": 2.21,
+    "buckling_factor": 65.2,
+    "footing_area_m2_at_1mpa": 748
+   },
+   "27.3": {
+    "height_km": 3.0,
+    "design_gust_m_s": 27.3,
+    "base_width_m": 1024,
+    "flare_exponent": 2.0,
+    "frame_mass_mt": 0.177,
+    "floor_mass_mt": 1.5,
+    "floor_area_km2": 3.0,
+    "frequency_hz": 0.039,
+    "period_s": 25.7,
+    "sway_at_service_m": 1.81,
+    "buckling_factor": 62.6,
+    "footing_area_m2_at_1mpa": 928
+   },
+   "50": {
+    "height_km": 3.0,
+    "design_gust_m_s": 50.0,
+    "base_width_m": 1024,
+    "flare_exponent": 3.0,
+    "frame_mass_mt": 0.354,
+    "floor_mass_mt": 1.5,
+    "floor_area_km2": 3.0,
+    "frequency_hz": 0.0428,
+    "period_s": 23.3,
+    "sway_at_service_m": 1.34,
+    "buckling_factor": 72.8,
+    "footing_area_m2_at_1mpa": 1492
+   },
+   "bare_frame": {
+    "height_km": 3.0,
+    "design_gust_m_s": 27.3,
+    "base_width_m": 1500,
+    "flare_exponent": 2.0,
+    "frame_mass_mt": 0.058,
+    "floor_mass_mt": 0.0,
+    "floor_area_km2": 0.0,
+    "frequency_hz": 0.2375,
+    "period_s": 4.2,
+    "sway_at_service_m": 5.67,
+    "buckling_factor": 1830.9,
+    "footing_area_m2_at_1mpa": 161
+   },
+   "carbon_frame": {
+    "height_km": 3.0,
+    "design_gust_m_s": 27.3,
+    "base_width_m": 902,
+    "flare_exponent": 2.0,
+    "frame_mass_mt": 0.024,
+    "floor_mass_mt": 1.5,
+    "floor_area_km2": 3.0,
+    "frequency_hz": 0.0234,
+    "period_s": 42.8,
+    "sway_at_service_m": 5.02,
+    "buckling_factor": 23.0,
+    "footing_area_m2_at_1mpa": 886
+   }
+  },
+  "5_km": {
+   "0": {
+    "height_km": 5.0,
+    "design_gust_m_s": 0.0,
+    "base_width_m": 1026,
+    "flare_exponent": 1.0,
+    "frame_mass_mt": 0.367,
+    "floor_mass_mt": 2.5,
+    "floor_area_km2": 5.0,
+    "frequency_hz": 0.0193,
+    "period_s": 51.7,
+    "sway_at_service_m": 9.03,
+    "buckling_factor": 27.2,
+    "footing_area_m2_at_1mpa": 1164
+   },
+   "13.6": {
+    "height_km": 5.0,
+    "design_gust_m_s": 13.6,
+    "base_width_m": 1323,
+    "flare_exponent": 1.5,
+    "frame_mass_mt": 0.418,
+    "floor_mass_mt": 2.5,
+    "floor_area_km2": 5.0,
+    "frequency_hz": 0.0226,
+    "period_s": 44.3,
+    "sway_at_service_m": 6.33,
+    "buckling_factor": 35.4,
+    "footing_area_m2_at_1mpa": 1347
+   },
+   "27.3": {
+    "height_km": 5.0,
+    "design_gust_m_s": 27.3,
+    "base_width_m": 1323,
+    "flare_exponent": 2.0,
+    "frame_mass_mt": 0.563,
+    "floor_mass_mt": 2.5,
+    "floor_area_km2": 5.0,
+    "frequency_hz": 0.0229,
+    "period_s": 43.7,
+    "sway_at_service_m": 5.4,
+    "buckling_factor": 34.9,
+    "footing_area_m2_at_1mpa": 1825
+   },
+   "50": {
+    "height_km": 5.0,
+    "design_gust_m_s": 50.0,
+    "base_width_m": 1503,
+    "flare_exponent": 3.0,
+    "frame_mass_mt": 1.167,
+    "floor_mass_mt": 2.5,
+    "floor_area_km2": 5.0,
+    "frequency_hz": 0.0267,
+    "period_s": 37.5,
+    "sway_at_service_m": 3.44,
+    "buckling_factor": 44.3,
+    "footing_area_m2_at_1mpa": 3032
+   },
+   "bare_frame": {
+    "height_km": 5.0,
+    "design_gust_m_s": 27.3,
+    "base_width_m": 2500,
+    "flare_exponent": 1.5,
+    "frame_mass_mt": 0.247,
+    "floor_mass_mt": 0.0,
+    "floor_area_km2": 0.0,
+    "frequency_hz": 0.1613,
+    "period_s": 6.2,
+    "sway_at_service_m": 9.13,
+    "buckling_factor": 1365.6,
+    "footing_area_m2_at_1mpa": 457
+   },
+   "carbon_frame": {
+    "height_km": 5.0,
+    "design_gust_m_s": 27.3,
+    "base_width_m": 1938,
+    "flare_exponent": 2.0,
+    "frame_mass_mt": 0.076,
+    "floor_mass_mt": 2.5,
+    "floor_area_km2": 5.0,
+    "frequency_hz": 0.019,
+    "period_s": 52.7,
+    "sway_at_service_m": 9.35,
+    "buckling_factor": 23.7,
+    "footing_area_m2_at_1mpa": 1527
+   }
+  },
+  "7.5_km": {
+   "0": {
+    "height_km": 7.5,
+    "design_gust_m_s": 0.0,
+    "base_width_m": 1748,
+    "flare_exponent": 1.0,
+    "frame_mass_mt": 0.87,
+    "floor_mass_mt": 3.75,
+    "floor_area_km2": 7.5,
+    "frequency_hz": 0.0172,
+    "period_s": 58.1,
+    "sway_at_service_m": 14.89,
+    "buckling_factor": 31.8,
+    "footing_area_m2_at_1mpa": 1876
+   },
+   "13.6": {
+    "height_km": 7.5,
+    "design_gust_m_s": 13.6,
+    "base_width_m": 1985,
+    "flare_exponent": 1.5,
+    "frame_mass_mt": 1.014,
+    "floor_mass_mt": 3.75,
+    "floor_area_km2": 7.5,
+    "frequency_hz": 0.0176,
+    "period_s": 56.9,
+    "sway_at_service_m": 12.04,
+    "buckling_factor": 31.3,
+    "footing_area_m2_at_1mpa": 2239
+   },
+   "27.3": {
+    "height_km": 7.5,
+    "design_gust_m_s": 27.3,
+    "base_width_m": 1985,
+    "flare_exponent": 2.0,
+    "frame_mass_mt": 1.447,
+    "floor_mass_mt": 3.75,
+    "floor_area_km2": 7.5,
+    "frequency_hz": 0.0173,
+    "period_s": 57.7,
+    "sway_at_service_m": 10.22,
+    "buckling_factor": 28.6,
+    "footing_area_m2_at_1mpa": 3159
+   },
+   "50": {
+    "height_km": 7.5,
+    "design_gust_m_s": 50.0,
+    "base_width_m": 1985,
+    "flare_exponent": 3.0,
+    "frame_mass_mt": 3.075,
+    "floor_mass_mt": 3.75,
+    "floor_area_km2": 7.5,
+    "frequency_hz": 0.0182,
+    "period_s": 55.0,
+    "sway_at_service_m": 7.17,
+    "buckling_factor": 29.4,
+    "footing_area_m2_at_1mpa": 5630
+   },
+   "bare_frame": {
+    "height_km": 7.5,
+    "design_gust_m_s": 27.3,
+    "base_width_m": 3750,
+    "flare_exponent": 1.5,
+    "frame_mass_mt": 0.749,
+    "floor_mass_mt": 0.0,
+    "floor_area_km2": 0.0,
+    "frequency_hz": 0.1117,
+    "period_s": 8.9,
+    "sway_at_service_m": 14.4,
+    "buckling_factor": 953.4,
+    "footing_area_m2_at_1mpa": 1013
+   },
+   "carbon_frame": {
+    "height_km": 7.5,
+    "design_gust_m_s": 27.3,
+    "base_width_m": 3750,
+    "flare_exponent": 2.0,
+    "frame_mass_mt": 0.208,
+    "floor_mass_mt": 3.75,
+    "floor_area_km2": 7.5,
+    "frequency_hz": 0.0176,
+    "period_s": 57.0,
+    "sway_at_service_m": 14.23,
+    "buckling_factor": 28.7,
+    "footing_area_m2_at_1mpa": 2440
+   }
+  },
+  "10_km": {
+   "0": {
+    "height_km": 10.0,
+    "design_gust_m_s": 0.0,
+    "base_width_m": 3006,
+    "flare_exponent": 1.0,
+    "frame_mass_mt": 1.642,
+    "floor_mass_mt": 5.0,
+    "floor_area_km2": 10.0,
+    "frequency_hz": 0.0189,
+    "period_s": 53.0,
+    "sway_at_service_m": 17.38,
+    "buckling_factor": 50.3,
+    "footing_area_m2_at_1mpa": 2697
+   },
+   "13.6": {
+    "height_km": 10.0,
+    "design_gust_m_s": 13.6,
+    "base_width_m": 2647,
+    "flare_exponent": 1.5,
+    "frame_mass_mt": 1.938,
+    "floor_mass_mt": 5.0,
+    "floor_area_km2": 10.0,
+    "frequency_hz": 0.0149,
+    "period_s": 67.0,
+    "sway_at_service_m": 18.62,
+    "buckling_factor": 29.5,
+    "footing_area_m2_at_1mpa": 3302
+   },
+   "27.3": {
+    "height_km": 10.0,
+    "design_gust_m_s": 27.3,
+    "base_width_m": 2331,
+    "flare_exponent": 2.0,
+    "frame_mass_mt": 2.877,
+    "floor_mass_mt": 5.0,
+    "floor_area_km2": 10.0,
+    "frequency_hz": 0.0132,
+    "period_s": 75.8,
+    "sway_at_service_m": 17.71,
+    "buckling_factor": 21.5,
+    "footing_area_m2_at_1mpa": 4904
+   },
+   "50": {
+    "height_km": 10.0,
+    "design_gust_m_s": 50.0,
+    "base_width_m": 2647,
+    "flare_exponent": 3.0,
+    "frame_mass_mt": 6.24,
+    "floor_mass_mt": 5.0,
+    "floor_area_km2": 10.0,
+    "frequency_hz": 0.0144,
+    "period_s": 69.4,
+    "sway_at_service_m": 11.17,
+    "buckling_factor": 23.4,
+    "footing_area_m2_at_1mpa": 8817
+   },
+   "bare_frame": {
+    "height_km": 10.0,
+    "design_gust_m_s": 27.3,
+    "base_width_m": 5000,
+    "flare_exponent": 1.5,
+    "frame_mass_mt": 1.679,
+    "floor_mass_mt": 0.0,
+    "floor_area_km2": 0.0,
+    "frequency_hz": 0.0872,
+    "period_s": 11.5,
+    "sway_at_service_m": 19.57,
+    "buckling_factor": 755.5,
+    "footing_area_m2_at_1mpa": 1850
+   },
+   "carbon_frame": {
+    "height_km": 10.0,
+    "design_gust_m_s": 27.3,
+    "base_width_m": 5000,
+    "flare_exponent": 1.5,
+    "frame_mass_mt": 0.464,
+    "floor_mass_mt": 5.0,
+    "floor_area_km2": 10.0,
+    "frequency_hz": 0.0194,
+    "period_s": 51.5,
+    "sway_at_service_m": 18.08,
+    "buckling_factor": 49.8,
+    "footing_area_m2_at_1mpa": 3915
+   }
+  },
+  "15_km": {
+   "0": {
+    "height_km": 15.0,
+    "design_gust_m_s": 0.0,
+    "base_width_m": 5121,
+    "flare_exponent": 1.0,
+    "frame_mass_mt": 4.128,
+    "floor_mass_mt": 7.5,
+    "floor_area_km2": 15.0,
+    "frequency_hz": 0.0176,
+    "period_s": 56.7,
+    "sway_at_service_m": 27.6,
+    "buckling_factor": 65.0,
+    "footing_area_m2_at_1mpa": 4721
+   },
+   "13.6": {
+    "height_km": 15.0,
+    "design_gust_m_s": 13.6,
+    "base_width_m": 4509,
+    "flare_exponent": 1.5,
+    "frame_mass_mt": 5.019,
+    "floor_mass_mt": 7.5,
+    "floor_area_km2": 15.0,
+    "frequency_hz": 0.0136,
+    "period_s": 73.7,
+    "sway_at_service_m": 28.82,
+    "buckling_factor": 35.5,
+    "footing_area_m2_at_1mpa": 6009
+   },
+   "27.3": {
+    "height_km": 15.0,
+    "design_gust_m_s": 27.3,
+    "base_width_m": 3970,
+    "flare_exponent": 2.0,
+    "frame_mass_mt": 7.925,
+    "floor_mass_mt": 7.5,
+    "floor_area_km2": 15.0,
+    "frequency_hz": 0.0113,
+    "period_s": 88.9,
+    "sway_at_service_m": 27.83,
+    "buckling_factor": 22.0,
+    "footing_area_m2_at_1mpa": 9350
+   },
+   "50": {
+    "height_km": 15.0,
+    "design_gust_m_s": 50.0,
+    "base_width_m": 3970,
+    "flare_exponent": 3.0,
+    "frame_mass_mt": 17.52,
+    "floor_mass_mt": 7.5,
+    "floor_area_km2": 15.0,
+    "frequency_hz": 0.0104,
+    "period_s": 96.4,
+    "sway_at_service_m": 20.2,
+    "buckling_factor": 16.7,
+    "footing_area_m2_at_1mpa": 17806
+   },
+   "bare_frame": {
+    "height_km": 15.0,
+    "design_gust_m_s": 27.3,
+    "base_width_m": 7500,
+    "flare_exponent": 1.5,
+    "frame_mass_mt": 5.365,
+    "floor_mass_mt": 0.0,
+    "floor_area_km2": 0.0,
+    "frequency_hz": 0.0625,
+    "period_s": 16.0,
+    "sway_at_service_m": 29.45,
+    "buckling_factor": 562.2,
+    "footing_area_m2_at_1mpa": 4561
+   },
+   "carbon_frame": {
+    "height_km": 15.0,
+    "design_gust_m_s": 27.3,
+    "base_width_m": 7500,
+    "flare_exponent": 1.0,
+    "frame_mass_mt": 1.608,
+    "floor_mass_mt": 7.5,
+    "floor_area_km2": 15.0,
+    "frequency_hz": 0.022,
+    "period_s": 45.4,
+    "sway_at_service_m": 27.31,
+    "buckling_factor": 100.5,
+    "footing_area_m2_at_1mpa": 8440
+   }
+  },
+  "20_km": {
+   "0": {
+    "height_km": 20.0,
+    "design_gust_m_s": 0.0,
+    "base_width_m": 7754,
+    "flare_exponent": 1.0,
+    "frame_mass_mt": 8.267,
+    "floor_mass_mt": 10.0,
+    "floor_area_km2": 20.0,
+    "frequency_hz": 0.0177,
+    "period_s": 56.5,
+    "sway_at_service_m": 35.48,
+    "buckling_factor": 85.8,
+    "footing_area_m2_at_1mpa": 7417
+   },
+   "13.6": {
+    "height_km": 20.0,
+    "design_gust_m_s": 13.6,
+    "base_width_m": 6828,
+    "flare_exponent": 1.5,
+    "frame_mass_mt": 10.281,
+    "floor_mass_mt": 10.0,
+    "floor_area_km2": 20.0,
+    "frequency_hz": 0.0134,
+    "period_s": 74.5,
+    "sway_at_service_m": 36.45,
+    "buckling_factor": 45.1,
+    "footing_area_m2_at_1mpa": 9720
+   },
+   "27.3": {
+    "height_km": 20.0,
+    "design_gust_m_s": 27.3,
+    "base_width_m": 6012,
+    "flare_exponent": 2.0,
+    "frame_mass_mt": 17.109,
+    "floor_mass_mt": 10.0,
+    "floor_area_km2": 20.0,
+    "frequency_hz": 0.0106,
+    "period_s": 94.7,
+    "sway_at_service_m": 35.89,
+    "buckling_factor": 24.4,
+    "footing_area_m2_at_1mpa": 15805
+   },
+   "50": {
+    "height_km": 20.0,
+    "design_gust_m_s": 50.0,
+    "base_width_m": 4662,
+    "flare_exponent": 3.0,
+    "frame_mass_mt": 37.302,
+    "floor_mass_mt": 10.0,
+    "floor_area_km2": 20.0,
+    "frequency_hz": 0.0077,
+    "period_s": 130.2,
+    "sway_at_service_m": 32.46,
+    "buckling_factor": 11.6,
+    "footing_area_m2_at_1mpa": 31521
+   },
+   "bare_frame": {
+    "height_km": 20.0,
+    "design_gust_m_s": 27.3,
+    "base_width_m": 10000,
+    "flare_exponent": 1.5,
+    "frame_mass_mt": 12.433,
+    "floor_mass_mt": 0.0,
+    "floor_area_km2": 0.0,
+    "frequency_hz": 0.05,
+    "period_s": 20.0,
+    "sway_at_service_m": 38.66,
+    "buckling_factor": 466.9,
+    "footing_area_m2_at_1mpa": 9005
+   },
+   "carbon_frame": {
+    "height_km": 20.0,
+    "design_gust_m_s": 27.3,
+    "base_width_m": 10000,
+    "flare_exponent": 1.0,
+    "frame_mass_mt": 3.448,
+    "floor_mass_mt": 10.0,
+    "floor_area_km2": 20.0,
+    "frequency_hz": 0.02,
+    "period_s": 50.0,
+    "sway_at_service_m": 39.88,
+    "buckling_factor": 109.5,
+    "footing_area_m2_at_1mpa": 13394
+   }
+  },
+  "30_km": {
+   "0": {
+    "height_km": 30.0,
+    "design_gust_m_s": 0.0,
+    "base_width_m": 11631,
+    "flare_exponent": 1.0,
+    "frame_mass_mt": 23.463,
+    "floor_mass_mt": 15.0,
+    "floor_area_km2": 30.0,
+    "frequency_hz": 0.0152,
+    "period_s": 65.7,
+    "sway_at_service_m": 56.46,
+    "buckling_factor": 92.0,
+    "footing_area_m2_at_1mpa": 15618
+   },
+   "13.6": {
+    "height_km": 30.0,
+    "design_gust_m_s": 13.6,
+    "base_width_m": 10241,
+    "flare_exponent": 1.5,
+    "frame_mass_mt": 30.25,
+    "floor_mass_mt": 15.0,
+    "floor_area_km2": 30.0,
+    "frequency_hz": 0.0114,
+    "period_s": 87.6,
+    "sway_at_service_m": 57.34,
+    "buckling_factor": 46.9,
+    "footing_area_m2_at_1mpa": 21342
+   },
+   "27.3": {
+    "height_km": 30.0,
+    "design_gust_m_s": 27.3,
+    "base_width_m": 9018,
+    "flare_exponent": 2.0,
+    "frame_mass_mt": 51.744,
+    "floor_mass_mt": 15.0,
+    "floor_area_km2": 30.0,
+    "frequency_hz": 0.0086,
+    "period_s": 116.9,
+    "sway_at_service_m": 57.44,
+    "buckling_factor": 22.3,
+    "footing_area_m2_at_1mpa": 36503
+   },
+   "50": {
+    "height_km": 30.0,
+    "design_gust_m_s": 50.0,
+    "base_width_m": 6992,
+    "flare_exponent": 3.0,
+    "frame_mass_mt": 113.55,
+    "floor_mass_mt": 15.0,
+    "floor_area_km2": 30.0,
+    "frequency_hz": 0.0054,
+    "period_s": 183.9,
+    "sway_at_service_m": 54.54,
+    "buckling_factor": 7.9,
+    "footing_area_m2_at_1mpa": 74994
+   },
+   "bare_frame": {
+    "height_km": 30.0,
+    "design_gust_m_s": 27.3,
+    "base_width_m": 9018,
+    "flare_exponent": 1.0,
+    "frame_mass_mt": 40.677,
+    "floor_mass_mt": 0.0,
+    "floor_area_km2": 0.0,
+    "frequency_hz": 0.0285,
+    "period_s": 35.1,
+    "sway_at_service_m": 58.84,
+    "buckling_factor": 237.1,
+    "footing_area_m2_at_1mpa": 27894
+   },
+   "carbon_frame": null
+  }
+ },
+ "earth": {
+  "1_km": {
+   "0": {
+    "height_km": 1.0,
+    "design_gust_m_s": 0.0,
+    "base_width_m": 341,
+    "flare_exponent": 1.0,
+    "frame_mass_mt": 0.09,
+    "floor_mass_mt": 0.5,
+    "floor_area_km2": 1.0,
+    "frequency_hz": 0.2156,
+    "period_s": 4.6,
+    "sway_at_service_m": 0.05,
+    "buckling_factor": 115.2,
+    "footing_area_m2_at_1mpa": 1449
+   },
+   "50": {
+    "height_km": 1.0,
+    "design_gust_m_s": 50.0,
+    "base_width_m": 500,
+    "flare_exponent": 1.0,
+    "frame_mass_mt": 0.099,
+    "floor_mass_mt": 0.5,
+    "floor_area_km2": 1.0,
+    "frequency_hz": 0.3055,
+    "period_s": 3.3,
+    "sway_at_service_m": 0.03,
+    "buckling_factor": 227.2,
+    "footing_area_m2_at_1mpa": 1638
+   }
+  },
+  "2_km": {
+   "0": {
+    "height_km": 2.0,
+    "design_gust_m_s": 0.0,
+    "base_width_m": 361,
+    "flare_exponent": 1.0,
+    "frame_mass_mt": 0.405,
+    "floor_mass_mt": 1.0,
+    "floor_area_km2": 2.0,
+    "frequency_hz": 0.0825,
+    "period_s": 12.1,
+    "sway_at_service_m": 0.29,
+    "buckling_factor": 33.0,
+    "footing_area_m2_at_1mpa": 3450
+   },
+   "50": {
+    "height_km": 2.0,
+    "design_gust_m_s": 50.0,
+    "base_width_m": 775,
+    "flare_exponent": 1.0,
+    "frame_mass_mt": 0.469,
+    "floor_mass_mt": 1.0,
+    "floor_area_km2": 2.0,
+    "frequency_hz": 0.1633,
+    "period_s": 6.1,
+    "sway_at_service_m": 0.1,
+    "buckling_factor": 125.5,
+    "footing_area_m2_at_1mpa": 4111
+   }
+  },
+  "3_km": {
+   "0": {
+    "height_km": 3.0,
+    "design_gust_m_s": 0.0,
+    "base_width_m": 326,
+    "flare_exponent": 1.0,
+    "frame_mass_mt": 1.031,
+    "floor_mass_mt": 1.5,
+    "floor_area_km2": 3.0,
+    "frequency_hz": 0.043,
+    "period_s": 23.3,
+    "sway_at_service_m": 0.9,
+    "buckling_factor": 13.2,
+    "footing_area_m2_at_1mpa": 6213
+   },
+   "50": {
+    "height_km": 3.0,
+    "design_gust_m_s": 50.0,
+    "base_width_m": 1024,
+    "flare_exponent": 1.0,
+    "frame_mass_mt": 1.229,
+    "floor_mass_mt": 1.5,
+    "floor_area_km2": 3.0,
+    "frequency_hz": 0.1178,
+    "period_s": 8.5,
+    "sway_at_service_m": 0.19,
+    "buckling_factor": 95.2,
+    "footing_area_m2_at_1mpa": 7657
+   }
+  },
+  "5_km": {
+   "0": {
+    "height_km": 5.0,
+    "design_gust_m_s": 0.0,
+    "base_width_m": 327,
+    "flare_exponent": 1.0,
+    "frame_mass_mt": 3.736,
+    "floor_mass_mt": 2.5,
+    "floor_area_km2": 5.0,
+    "frequency_hz": 0.0216,
+    "period_s": 46.4,
+    "sway_at_service_m": 2.71,
+    "buckling_factor": 5.3,
+    "footing_area_m2_at_1mpa": 15310
+   },
+   "50": {
+    "height_km": 5.0,
+    "design_gust_m_s": 50.0,
+    "base_width_m": 1323,
+    "flare_exponent": 1.5,
+    "frame_mass_mt": 4.587,
+    "floor_mass_mt": 2.5,
+    "floor_area_km2": 5.0,
+    "frequency_hz": 0.0643,
+    "period_s": 15.5,
+    "sway_at_service_m": 0.48,
+    "buckling_factor": 43.6,
+    "footing_area_m2_at_1mpa": 19233
+   }
+  },
+  "7.5_km": {
+   "0": {
+    "height_km": 7.5,
+    "design_gust_m_s": 0.0,
+    "base_width_m": 380,
+    "flare_exponent": 1.0,
+    "frame_mass_mt": 12.181,
+    "floor_mass_mt": 3.75,
+    "floor_area_km2": 7.5,
+    "frequency_hz": 0.0145,
+    "period_s": 68.8,
+    "sway_at_service_m": 4.4,
+    "buckling_factor": 3.4,
+    "footing_area_m2_at_1mpa": 39112
+   },
+   "50": {
+    "height_km": 7.5,
+    "design_gust_m_s": 50.0,
+    "base_width_m": 1748,
+    "flare_exponent": 1.5,
+    "frame_mass_mt": 15.077,
+    "floor_mass_mt": 3.75,
+    "floor_area_km2": 7.5,
+    "frequency_hz": 0.0474,
+    "period_s": 21.1,
+    "sway_at_service_m": 0.72,
+    "buckling_factor": 33.2,
+    "footing_area_m2_at_1mpa": 49464
+   }
+  },
+  "10_km": {
+   "0": {
+    "height_km": 10.0,
+    "design_gust_m_s": 0.0,
+    "base_width_m": 507,
+    "flare_exponent": 1.0,
+    "frame_mass_mt": 32.762,
+    "floor_mass_mt": 5.0,
+    "floor_area_km2": 10.0,
+    "frequency_hz": 0.0131,
+    "period_s": 76.6,
+    "sway_at_service_m": 4.27,
+    "buckling_factor": 3.5,
+    "footing_area_m2_at_1mpa": 92708
+   },
+   "50": {
+    "height_km": 10.0,
+    "design_gust_m_s": 50.0,
+    "base_width_m": 2052,
+    "flare_exponent": 1.5,
+    "frame_mass_mt": 40.162,
+    "floor_mass_mt": 5.0,
+    "floor_area_km2": 10.0,
+    "frequency_hz": 0.0379,
+    "period_s": 26.4,
+    "sway_at_service_m": 0.88,
+    "buckling_factor": 26.5,
+    "footing_area_m2_at_1mpa": 115677
+   }
+  }
+ },
+ "reference": {
+  "summary": {
+   "height_km": 10.0,
+   "design_gust_m_s": 27.3,
+   "base_width_m": 2331,
+   "flare_exponent": 2.0,
+   "frame_mass_mt": 2.877,
+   "floor_mass_mt": 5.0,
+   "floor_area_km2": 10.0,
+   "frequency_hz": 0.0132,
+   "period_s": 75.8,
+   "sway_at_service_m": 17.71,
+   "buckling_factor": 21.5,
+   "footing_area_m2_at_1mpa": 4904
+  },
+  "frontal_area_km2": 9.9,
+  "vortex_lock_in_wind_m_s": 59.7,
+  "top_acceleration_rough_m_s2": 0.0365,
+  "base_leg_force_from_wind_share": 0.348
+ },
+ "energy": {
+  "device_area_km2": 4.555,
+  "resource_mw": 98.12,
+  "betz_limit_mw": 58.1,
+  "tower_demand_mw": 114,
+  "city_demand_mw": 2000,
+  "devices": {
+   "fast_rotor": {
+    "name": "fast three-blade rotor (not safe for fliers)",
+    "screened": false,
+    "mean_mw": 30.68,
+    "w_per_m2": 6.74,
+    "share_of_tower_use": 0.269,
+    "share_of_city_use": 0.01534,
+    "turning_share_mid_height": 0.454
+   },
+   "slow_rotor": {
+    "name": "slow many-blade rotor",
+    "screened": true,
+    "mean_mw": 14.23,
+    "w_per_m2": 3.12,
+    "share_of_tower_use": 0.1248,
+    "share_of_city_use": 0.00712,
+    "turning_share_mid_height": 0.454
+   },
+   "savonius": {
+    "name": "Savonius drag rotor on a vertical axis",
+    "screened": true,
+    "mean_mw": 7.16,
+    "w_per_m2": 1.57,
+    "share_of_tower_use": 0.0627,
+    "share_of_city_use": 0.00358,
+    "turning_share_mid_height": 0.454
+   },
+   "bladeless": {
+    "name": "bladeless oscillating mast (vortex-induced vibration)",
+    "screened": false,
+    "mean_mw": 3.39,
+    "w_per_m2": 0.74,
+    "share_of_tower_use": 0.0297,
+    "share_of_city_use": 0.00169,
+    "turning_share_mid_height": 0.454
+   }
+  }
+ },
+ "sunlight": {
+  "band_nm": [
+   202,
+   1000
+  ],
+  "horizontal_mean_w_m2": 150.0,
+  "east_wall_mean_w_m2": 68.8,
+  "panel_efficiency": 0.22,
+  "horizontal_panel_w_m2": 33.0,
+  "east_wall_panel_w_m2": 15.1,
+  "noon_global_w_m2": 515.8
+ },
+ "loads": {
+  "open_frame": {
+   "drag_per_width": 0.36,
+   "base_moment_ratio_same_outline": 1.0,
+   "lightest_frame": {
+    "height_km": 10.0,
+    "design_gust_m_s": 27.3,
+    "base_width_m": 2331,
+    "flare_exponent": 2.0,
+    "frame_mass_mt": 2.877,
+    "floor_mass_mt": 5.0,
+    "floor_area_km2": 10.0,
+    "frequency_hz": 0.0132,
+    "period_s": 75.8,
+    "sway_at_service_m": 17.71,
+    "buckling_factor": 21.5,
+    "footing_area_m2_at_1mpa": 4904
+   }
+  },
+  "slow_rotor_stopped": {
+   "drag_per_width": 0.636,
+   "base_moment_ratio_same_outline": 1.77,
+   "lightest_frame": {
+    "height_km": 10.0,
+    "design_gust_m_s": 27.3,
+    "base_width_m": 3006,
+    "flare_exponent": 2.0,
+    "frame_mass_mt": 4.176,
+    "floor_mass_mt": 5.0,
+    "floor_area_km2": 10.0,
+    "frequency_hz": 0.0177,
+    "period_s": 56.7,
+    "sway_at_service_m": 19.12,
+    "buckling_factor": 37.3,
+    "footing_area_m2_at_1mpa": 6474
+   }
+  },
+  "bladeless_stopped": {
+   "drag_per_width": 0.912,
+   "base_moment_ratio_same_outline": 2.53,
+   "lightest_frame": {
+    "height_km": 10.0,
+    "design_gust_m_s": 27.3,
+    "base_width_m": 3414,
+    "flare_exponent": 2.0,
+    "frame_mass_mt": 5.633,
+    "floor_mass_mt": 5.0,
+    "floor_area_km2": 10.0,
+    "frequency_hz": 0.021,
+    "period_s": 47.6,
+    "sway_at_service_m": 19.99,
+    "buckling_factor": 51.6,
+    "footing_area_m2_at_1mpa": 8100
+   }
+  },
+  "closed_tower": {
+   "drag_per_width": 1.3,
+   "base_moment_ratio_same_outline": 3.61,
+   "lightest_frame": {
+    "height_km": 10.0,
+    "design_gust_m_s": 27.3,
+    "base_width_m": 4403,
+    "flare_exponent": 2.0,
+    "frame_mass_mt": 8.161,
+    "floor_mass_mt": 5.0,
+    "floor_area_km2": 10.0,
+    "frequency_hz": 0.0276,
+    "period_s": 36.3,
+    "sway_at_service_m": 18.23,
+    "buckling_factor": 85.5,
+    "footing_area_m2_at_1mpa": 10365
+   }
+  },
+  "slow_rotor_turning_in_service_gust": {
+   "drag_per_width": 0.774,
+   "base_moment_ratio_same_outline": 1.04
+  },
+  "bladeless_turning_in_service_gust": {
+   "drag_per_width": 1.28,
+   "base_moment_ratio_same_outline": 1.72
+  }
+ },
+ "tower_panels": {
+  "area_km2": 9.9,
+  "mean_mw": 149.5,
+  "note": "panels on half of the east and west faces; all of it by day",
+  "city_horizontal_panels_km2": 60.6
+ },
+ "collisions": {
+  "wind_m_s": 4.0,
+  "fliers": {
+   "moth_0.33g": {
+    "length_m": 0.02,
+    "span_m": 0.04,
+    "speed_m_s": 1.504
+   },
+   "bird_100g": {
+    "length_m": 0.2,
+    "span_m": 0.35,
+    "speed_m_s": 4.702
+   },
+   "person_with_wings": {
+    "length_m": 2.0,
+    "span_m": 6.0,
+    "speed_m_s": 6.0
+   }
+  },
+  "rotor_radius_m": {
+   "fast_rotor": 40.0,
+   "slow_rotor": 10.0
+  },
+  "tip_speed_m_s": {
+   "slow_rotor": 4.0,
+   "fast_rotor": 28.0
+  },
+  "probability_per_crossing": {
+   "slow_rotor": {
+    "moth_0.33g": 0.444,
+    "bird_100g": 0.501,
+    "person_with_wings": 1.0
+   },
+   "fast_rotor": {
+    "moth_0.33g": 0.07,
+    "bird_100g": 0.074,
+    "person_with_wings": 0.197
+   }
+  }
+ },
+ "night_storage": {
+  "lake_centre": [
+   -4.33,
+   -157.69
+  ],
+  "head_m": 3740,
+  "shore_km": 84,
+  "round_trip": 0.8,
+  "delivered_kwh_per_m3": 1.35,
+  "night_hours": 354.4,
+  "water_mm3": {
+   "tower": 29.9,
+   "city": 525.1
+  }
+ },
+ "port": {
+  "height_km": 24.0,
+  "top_above_sea_km": 35.6,
+  "flight_band_km": [
+   35.0,
+   45.0
+  ],
+  "design": {
+   "height_km": 24.0,
+   "design_gust_m_s": 27.3,
+   "base_width_m": 8193,
+   "flare_exponent": 1.5,
+   "frame_mass_mt": 32.797,
+   "floor_mass_mt": 17.471,
+   "floor_area_km2": 34.94,
+   "frequency_hz": 0.0222,
+   "period_s": 45.0,
+   "sway_at_service_m": 43.81,
+   "buckling_factor": 111.6,
+   "footing_area_m2_at_1mpa": 28592
+  },
+  "width_profile": "width = 320 m + (base - 320 m) x (1 - z/H)^p",
+  "zones": [
+   {
+    "from_km": 0.0,
+    "to_km": 3.0,
+    "use": "open public floors and terraces",
+    "floor_km2": 6.0,
+    "width_km": [
+     8.16,
+     6.76
+    ],
+    "air_at_bottom": {
+     "pressure_atm": 0.947,
+     "temperature_c": 11.8,
+     "density_kg_m3": 1.163,
+     "oxygen_like_earth_at_m": 1950.0
+    },
+    "air_at_top": {
+     "pressure_atm": 0.893,
+     "temperature_c": 9.0,
+     "density_kg_m3": 1.108,
+     "oxygen_like_earth_at_m": 2430.0
+    },
+    "uses_km2": {
+     "travel: terminals, docks, customs, lounges, ship servicing": 0.6,
+     "hotels": 1.0,
+     "short stay: compact and transit rooms": 0.0,
+     "commerce and trade": 0.5,
+     "shops, markets, food and drink": 2.0,
+     "events, conferences, leisure, observation": 1.4,
+     "services and back of house": 0.5
+    },
+    "present_at_busy_hour": [
+     267000.0,
+     516000.0
+    ]
+   },
+   {
+    "from_km": 3.0,
+    "to_km": 10.0,
+    "use": "enclosed floors, air topped up",
+    "floor_km2": 13.9,
+    "width_km": [
+     6.76,
+     3.83
+    ],
+    "air_at_bottom": {
+     "pressure_atm": 0.893,
+     "temperature_c": 9.0,
+     "density_kg_m3": 1.108,
+     "oxygen_like_earth_at_m": 2430.0
+    },
+    "air_at_top": {
+     "pressure_atm": 0.777,
+     "temperature_c": 3.0,
+     "density_kg_m3": 0.986,
+     "oxygen_like_earth_at_m": 3520.0
+    },
+    "uses_km2": {
+     "travel: terminals, docks, customs, lounges, ship servicing": 0.4,
+     "hotels": 5.2,
+     "short stay: compact and transit rooms": 1.0,
+     "commerce and trade": 3.51,
+     "shops, markets, food and drink": 1.4,
+     "events, conferences, leisure, observation": 1.4,
+     "services and back of house": 1.0
+    },
+    "present_at_busy_hour": [
+     451000.0,
+     799000.0
+    ]
+   },
+   {
+    "from_km": 10.0,
+    "to_km": 15.0,
+    "use": "enclosed floors, air topped up",
+    "floor_km2": 10.0,
+    "width_km": [
+     3.83,
+     2.13
+    ],
+    "air_at_bottom": {
+     "pressure_atm": 0.777,
+     "temperature_c": 3.0,
+     "density_kg_m3": 0.986,
+     "oxygen_like_earth_at_m": 3520.0
+    },
+    "air_at_top": {
+     "pressure_atm": 0.702,
+     "temperature_c": -1.2,
+     "density_kg_m3": 0.906,
+     "oxygen_like_earth_at_m": 4290.0
+    },
+    "uses_km2": {
+     "travel: terminals, docks, customs, lounges, ship servicing": 2.5,
+     "hotels": 0.79,
+     "short stay: compact and transit rooms": 1.59,
+     "commerce and trade": 2.98,
+     "shops, markets, food and drink": 0.4,
+     "events, conferences, leisure, observation": 0.69,
+     "services and back of house": 1.09
+    },
+    "present_at_busy_hour": [
+     302000.0,
+     527000.0
+    ]
+   },
+   {
+    "from_km": 15.0,
+    "to_km": 24.0,
+    "use": "sealed, pressurised terminals and docks",
+    "floor_km2": 5.0,
+    "width_km": [
+     2.13,
+     0.32
+    ],
+    "air_at_bottom": {
+     "pressure_atm": 0.702,
+     "temperature_c": -1.2,
+     "density_kg_m3": 0.906,
+     "oxygen_like_earth_at_m": 4290.0
+    },
+    "air_at_top": {
+     "pressure_atm": 0.585,
+     "temperature_c": -9.5,
+     "density_kg_m3": 0.778,
+     "oxygen_like_earth_at_m": 5670.0
+    },
+    "uses_km2": {
+     "travel: terminals, docks, customs, lounges, ship servicing": 3.98,
+     "hotels": 0.0,
+     "short stay: compact and transit rooms": 0.4,
+     "commerce and trade": 0.0,
+     "shops, markets, food and drink": 0.2,
+     "events, conferences, leisure, observation": 0.0,
+     "services and back of house": 0.4
+    },
+    "present_at_busy_hour": [
+     95000.0,
+     164000.0
+    ]
+   }
+  ],
+  "floor_km2": 34.9,
+  "occupancy": {
+   "regular_present": 1500000.0,
+   "busy_hour_range": [
+    1110000.0,
+    2010000.0
+   ],
+   "all_full_range": [
+    1920000.0,
+    3540000.0
+   ],
+   "uses": {
+    "travel: terminals, docks, customs, lounges, ship servicing": {
+     "floor_km2": 7.49,
+     "m2_per_person": [
+      30.0,
+      50.0
+     ],
+     "present_at_busy_hour": [
+      120000.0,
+      200000.0
+     ]
+    },
+    "hotels": {
+     "floor_km2": 6.99,
+     "m2_per_person": [
+      30.0,
+      45.0
+     ],
+     "present_at_busy_hour": [
+      124000.0,
+      186000.0
+     ]
+    },
+    "short stay: compact and transit rooms": {
+     "floor_km2": 3.0,
+     "m2_per_person": [
+      12.0,
+      20.0
+     ],
+     "present_at_busy_hour": [
+      120000.0,
+      200000.0
+     ]
+    },
+    "commerce and trade": {
+     "floor_km2": 6.99,
+     "m2_per_person": [
+      12.0,
+      20.0
+     ],
+     "present_at_busy_hour": [
+      245000.0,
+      408000.0
+     ]
+    },
+    "shops, markets, food and drink": {
+     "floor_km2": 3.99,
+     "m2_per_person": [
+      4.0,
+      8.0
+     ],
+     "present_at_busy_hour": [
+      250000.0,
+      499000.0
+     ]
+    },
+    "events, conferences, leisure, observation": {
+     "floor_km2": 3.49,
+     "m2_per_person": [
+      3.0,
+      6.0
+     ],
+     "present_at_busy_hour": [
+      233000.0,
+      466000.0
+     ]
+    },
+    "services and back of house": {
+     "floor_km2": 3.0,
+     "m2_per_person": [
+      50.0,
+      100.0
+     ],
+     "present_at_busy_hour": [
+      24000.0,
+      48000.0
+     ]
+    }
+   },
+   "hotel_rooms": 116000.0,
+   "hotel_guests": 186000.0,
+   "short_stay_beds": 200000.0,
+   "travellers_present": [
+    120000.0,
+    200000.0
+   ],
+   "travel_by_trip": {
+    "local_km2": 1.01,
+    "regional_km2": 2.5,
+    "long_haul_km2": 3.98
+   },
+   "passengers_per_hour": [
+    60000.0,
+    100000.0
+   ]
+  },
+  "power": {
+   "tower_use_mw": 399,
+   "wind": {
+    "half_face": {
+     "device_area_km2": 38.3,
+     "resource_mw": 975.64,
+     "betz_limit_mw": 578.2,
+     "tower_demand_mw": 399,
+     "city_demand_mw": 2000,
+     "devices": {
+      "fast_rotor": {
+       "name": "fast three-blade rotor (not safe for fliers)",
+       "screened": false,
+       "mean_mw": 316.76,
+       "w_per_m2": 8.27,
+       "share_of_tower_use": 0.7946,
+       "share_of_city_use": 0.15838,
+       "turning_share_mid_height": 0.599
+      },
+      "slow_rotor": {
+       "name": "slow many-blade rotor",
+       "screened": true,
+       "mean_mw": 147.25,
+       "w_per_m2": 3.84,
+       "share_of_tower_use": 0.3694,
+       "share_of_city_use": 0.07362,
+       "turning_share_mid_height": 0.599
+      },
+      "savonius": {
+       "name": "Savonius drag rotor on a vertical axis",
+       "screened": true,
+       "mean_mw": 73.9,
+       "w_per_m2": 1.93,
+       "share_of_tower_use": 0.1854,
+       "share_of_city_use": 0.03695,
+       "turning_share_mid_height": 0.599
+      },
+      "bladeless": {
+       "name": "bladeless oscillating mast (vortex-induced vibration)",
+       "screened": false,
+       "mean_mw": 35.06,
+       "w_per_m2": 0.92,
+       "share_of_tower_use": 0.0879,
+       "share_of_city_use": 0.01753,
+       "turning_share_mid_height": 0.599
+      }
+     }
+    },
+    "whole_face": {
+     "device_area_km2": 76.601,
+     "resource_mw": 1951.27,
+     "betz_limit_mw": 1156.3,
+     "tower_demand_mw": 399,
+     "city_demand_mw": 2000,
+     "devices": {
+      "fast_rotor": {
+       "name": "fast three-blade rotor (not safe for fliers)",
+       "screened": false,
+       "mean_mw": 633.52,
+       "w_per_m2": 8.27,
+       "share_of_tower_use": 1.5893,
+       "share_of_city_use": 0.31676,
+       "turning_share_mid_height": 0.599
+      },
+      "slow_rotor": {
+       "name": "slow many-blade rotor",
+       "screened": true,
+       "mean_mw": 294.5,
+       "w_per_m2": 3.84,
+       "share_of_tower_use": 0.7388,
+       "share_of_city_use": 0.14725,
+       "turning_share_mid_height": 0.599
+      },
+      "savonius": {
+       "name": "Savonius drag rotor on a vertical axis",
+       "screened": true,
+       "mean_mw": 147.81,
+       "w_per_m2": 1.93,
+       "share_of_tower_use": 0.3708,
+       "share_of_city_use": 0.0739,
+       "turning_share_mid_height": 0.599
+      },
+      "bladeless": {
+       "name": "bladeless oscillating mast (vortex-induced vibration)",
+       "screened": false,
+       "mean_mw": 70.11,
+       "w_per_m2": 0.92,
+       "share_of_tower_use": 0.1759,
+       "share_of_city_use": 0.03506,
+       "turning_share_mid_height": 0.599
+      }
+     }
+    },
+    "whole_face_summit_speedup": {
+     "device_area_km2": 76.601,
+     "resource_mw": 3371.8,
+     "betz_limit_mw": 1998.1,
+     "tower_demand_mw": 399,
+     "city_demand_mw": 2000,
+     "devices": {
+      "fast_rotor": {
+       "name": "fast three-blade rotor (not safe for fliers)",
+       "screened": false,
+       "mean_mw": 1158.11,
+       "w_per_m2": 15.12,
+       "share_of_tower_use": 2.9053,
+       "share_of_city_use": 0.57906,
+       "turning_share_mid_height": 0.731
+      },
+      "slow_rotor": {
+       "name": "slow many-blade rotor",
+       "screened": true,
+       "mean_mw": 526.55,
+       "w_per_m2": 6.87,
+       "share_of_tower_use": 1.3209,
+       "share_of_city_use": 0.26328,
+       "turning_share_mid_height": 0.731
+      },
+      "savonius": {
+       "name": "Savonius drag rotor on a vertical axis",
+       "screened": true,
+       "mean_mw": 269.8,
+       "w_per_m2": 3.52,
+       "share_of_tower_use": 0.6768,
+       "share_of_city_use": 0.1349,
+       "turning_share_mid_height": 0.731
+      },
+      "bladeless": {
+       "name": "bladeless oscillating mast (vortex-induced vibration)",
+       "screened": false,
+       "mean_mw": 125.36,
+       "w_per_m2": 1.64,
+       "share_of_tower_use": 0.3145,
+       "share_of_city_use": 0.06268,
+       "turning_share_mid_height": 0.731
+      }
+     }
+    }
+   },
+   "ground_panels_km2_for_tower": 12.1,
+   "frame_steel_mt": {
+    "open_frame": 32.8,
+    "louvers_edge_on_half_face": 37.5,
+    "solid_panels_half_face": 85.5,
+    "slow_rotors_stopped_half_face": 55.5,
+    "slow_rotors_stopped_whole_face": 75.6
+   },
+   "night_storage": {
+    "lake_centre": [
+     -4.33,
+     -157.69
+    ],
+    "head_m": 3740,
+    "shore_km": 84,
+    "round_trip": 0.8,
+    "delivered_kwh_per_m3": 1.35,
+    "night_hours": 354.4,
+    "water_mm3": {
+     "tower": 104.8
+    }
+   }
+  },
+  "evacuation": {
+   "person": {
+    "mass_kg": 80.0,
+    "drag_area_m2": 0.7,
+    "canopy_drag_coefficient": 1.3,
+    "landing_m_s": 4.0
+   },
+   "canopy": {
+    "base": {
+     "density_kg_m3": 1.163,
+     "free_fall_m_s": 17.9,
+     "canopy_across_m": 3.7
+    },
+    "top": {
+     "density_kg_m3": 0.778,
+     "free_fall_m_s": 21.8,
+     "canopy_across_m": 4.5
+    }
+   },
+   "descent_minutes": {
+    "from_3_km": 12,
+    "from_10_km": 42,
+    "from_24_km": 100
+   }
+  }
+ }
+}
