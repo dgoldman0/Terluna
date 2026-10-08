@@ -37,7 +37,7 @@
  "producer": {
   "domain": "climate",
   "files": {
-   "crm/elec_analysis.py": "6f158af5afeaa644"
+   "crm/elec_analysis.py": "7eef6eaf777860d2"
   }
  },
  "evidence": "CM1 r22.0 with WRF-ELEC's NSSL two-moment microphysics (MicroTed/wrf4-elec e43041b) and its charging (non-inductive by collisions of graupel and hail with ice and snow, inductive by droplets rebounding from graupel in the field), the small ions' net charge attaching to particles, an FFT field solver, and WRF-ELEC's lightning on its own sub-steps of the sedimentation: the branched scheme (lightmsz, MacGorman, Straka and Ziegler 2001) or the cylindrical one. Charge is carried by bulk particle populations; branched channels run on the model grid and neutralize the charge where they reach; the ground-strike rule, the 50-MV potential and 10-kV/m field a ground flash needs at its start and the nitrogen oxide yield are WRF-ELEC's calibrations for Earth; nothing conducts charge away except where a case turns on leakage, and the ground gives off ions only where a case turns on point discharge (Standler and Winn's 1 nA/m2 at 8 kV/m over Earth's vegetation, its onset scaled by density).",
