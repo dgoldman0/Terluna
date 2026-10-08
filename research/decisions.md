@@ -184,3 +184,10 @@ the sky boats' share of trips, ownership and traffic system stay open.
 | Decision | Source | Status |
 |---|---|---|
 | Close the infrastructure branch (`habitation/infrastructure`) with an investigation of what the other lines of work mean for its topics: main's later climate and sea work, the atmospheric electricity branch's lightning, which brings storm protection into the infrastructure, the sea-appearance branch's atmospherics, and the solar-shield branch's infrastructure off the Moon, which also informs the Moon's own. The merge into main waits for the joint integration of the open branches. | Author, 2026-10-08 ("We'll cap this branch with that investigation I think") | Done on 2026-10-08: the [infrastructure review](studies/infrastructure_review/README.md). Its findings and recommendations await the author's review; none is adopted here |
+
+## The joint integration
+
+| Decision | Source | Status |
+|---|---|---|
+| Finished topic branches wait for a proper integration and joint merger with the other open branches before they reach main. | Author, 2026-10-08 | Done on 2026-10-08: sea appearance, the solar shield, atmospheric electricity and infrastructure merged in that order ([integration record](integration/README.md)) |
+| The joint integration includes a synthesis: taking the branches' pieces, seeing where they fit together, what they say about the whole and what comes next, with joint computation where it is warranted. | Author, 2026-10-08 | Done: [studies/joint_synthesis](studies/joint_synthesis/README.md); its calculations took about an hour of machine time, and the decisions it lists await the author |

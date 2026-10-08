@@ -2,57 +2,44 @@
 
 The next full manuscript is **Constructing and Sustaining an Open Moon**, paper `cef466e6-d9f8`. Develop its supporting studies alongside the writing; the four companions subsequently deepen their distinct arguments. Use several planetary/regional/vertical possibilities rather than treating the opening forest-and-lake scene as the whole Moon.
 
-## First: a shared physical scenario family
+## Where the work stands (8 October 2026)
 
-Reconcile pressure, composition, collision treatment, water inventory and transmitted spectrum across the April and September atmosphere models. Preserve literal Earthlike proportions and the 17.5% O2 design as separate cases. Treat an approximately 250 K exobase as a target output to test. Retention, useful surface climate and biological function are separate outcomes.
+The scenario family is set: an open 1.2-atm atmosphere, standing water over 28% of the surface, the titania-stack
+spectrum dimmed a further 5%, and water, nitrogen and oxygen delivered by the Solar-System-wide resource operation
+([decisions.md](decisions.md)). The corrected GCM and the CM1 rings and boxes give the climate as a range: they
+disagree on the warmth and humidity of the air over land, and the climate programme is paused. Two seas' waves and
+every sea's monthly tide are computed. The light is computed from the solved spherical sky, dated for 2000–2500, with
+the Earth's measured brightness and a photometric dusk 82 hours after an equatorial sunset. The storms are
+electrified and their lightning measured at one site. The solar shield's lead design is the ring fleet, with its
+retention screen, heat and industry. The summit port and its metropolis are sized as concepts with their flyers.
 
-Develop a reduced time-dependent climate calculation with explicit land/water storage and heat transport, beginning with analytic limits checked against the current scalar diagnostic. Add a vertical radiation treatment as its code and inputs become available. Acquire measured topography for basin capacities and static inundation before describing simulated hydrology.
+On 8 October these lines were merged in a joint integration ([integration/](integration/README.md)), and a
+[synthesis](studies/joint_synthesis/README.md) set each line's assumptions about the others against their answers.
+Its main findings: the ring fleet as designed lights the Moon's night at 25–66 lux; the air under the shield holds
+no OH or ozone, so released gases leave only through soils, rain and escape; lightning over the Moon is a third of
+the electrified box's rate and supplies at most 0.2% of the biosphere's nitrogen; the summit port's crown would start
+its own lightning; haze barely touches the light; the regional magnets reach the south pole's heritage.
 
-## Light, geography and appearance
+## Next work, in order
 
-Compute location-dependent Sun/Earth geometry and terrain horizons, then test spherical transmission/scattering with stated optical profiles. Angular twilight duration alone gives no sky-brightness/color prediction. Couple different water distributions to the climate screens. Persistent fog, rainfall and storm claims require appropriate circulation modelling.
+1. **The Moon's night with the ring fleet.** The biosphere and human work set the light the night may take; the
+   shield's night-side attitude (rolls within the bundle's clearance), its films' scatter and switched states are
+   tested against it in the shield's dynamics. Flights of the kept orbits take about an hour of CPU each set. This
+   joins the planned branch research/array-industry, with the trim and store hardware and power, heat reuse,
+   computing and industry ([array_industry.md](studies/solar_shield_array/array_industry.md)).
+2. **The crown as a lightning conductor.** The tower's induced charge and upward leaders in the saved storm fields,
+   a protection concept for its triggered flashes and the hydrogen berths beside it. A terrain-aware electrified
+   storm needs CM1's field solver over terrain, which touches the paused climate programme and waits for the author.
+3. **The air's chemistry under the shield.** NO's deposition and the lunar night's chemistry in the middle
+   atmosphere, then the biomes' and cities' emissions in an air with no OH; about an hour of runs once added.
+4. **The biomes' nitrogen and the dark night** as biological requirements: biological fixation, and the light that
+   dark-night organisms tolerate (biosphere, lunar-cycle ecology).
+5. **The chosen port form's programme**, so the crown's traffic and berths follow the building the author chose.
+6. **The regional magnets' design and turn**, weighed with the heritage register's written evaluations.
+7. **Atmospheric electricity's stage 3**, the global circuit and the conducting upper air, at the author's go-ahead.
+8. **Sea appearance's open items**: the full renderings of the four coasts on a quieter machine.
 
-Candidate external resources, recorded as leads rather than installed tools or admitted sources:
-- NASA/PDS LOLA: https://pds-geosciences.wustl.edu/missions/lro/lola.htm
-- ExoPlaSim: https://exoplasim.readthedocs.io/en/latest/
-- libRadtran: https://www.libradtran.org/doku.php?id=basic_usage
-
-Installation, input acquisition, applicability checks and benchmarks precede any promise of full GCM or spectral runs. The current workspace supplies no installed specialist climate/ephemeris/radiative-transfer dependency.
-
-## Atmospheric electricity
-
-The [atmospheric-electricity plan](studies/atmospheric_electricity/README.md) of
-2026-10-02 aims to understand the Open Moon's atmospheric electricity as well as
-its other subjects of similar importance. Stage 1 reads the CM1 storms already
-run for graupel, ice and supercooled water, applies laboratory charging laws to
-them, isolates slower settling with the fall-speed pair, and builds an
-ionization and conductivity column, so that storm generator currents can be set
-against what the air conducts at breakdown. Stage 2 electrifies CM1, with the
-NSSL microphysics patched for lunar gravity and the electrical physics following
-WRF-ELEC. Stage 3 takes the global circuit and transient luminous events.
-ROCKE-3D stays a separate background-climate check. Stage 1 (2026-10-03) found
-lunar cloud conducting about 10⁻¹⁶ S/m and some storm columns reaching breakdown
-under every charging law tried; the charge slow graupel separates sets how often.
-Stage 2's electrified CM1 (2026-10-03; WRF-ELEC's sub-steps and branched
-lightning from 2026-10-04) runs WRF-ELEC's NSSL microphysics with its charging
-and lightning; on an Earth supercell it electrifies and flashes when published
-runs of the scheme do, with their net charge densities, flash rates and charge
-per flash, while charging several times faster. The electrified lunar box runs
-from 2026-10-04.
-
-## Biology in parallel
-
-Extract literature parameters with actual experimental boundaries, then implement long-night reserve/respiration, aquatic oxygen, nutrient/detrital and vegetation-mechanics models. Compare several communities and architectures. Literature-calibrated traits, engineered-trait proposals and unmeasured gravity responses remain distinct. Complete reproduction and lifelong human health require empirical work; simulations can identify conditions and discriminating experiments.
-
-## Practical human uses
-
-Quantify supported aerial capacity and travel/service demands through complete mass budgets. Compare grounded, elevated and airborne forms across several environments. Develop spatial/time-use cases that preserve mobility, access and different community choices. Cultural adoption remains an open human outcome.
-
-## Protection and continuing construction
-
-Connect actual wavelength-dependent filtering to a reduced heating/chemistry/escape model. Reconcile the April cooling floor, photochemical scales and outflow interpolation before interpreting its temperature as a prediction. Keep plasma response and radiation dose separate from magnetic component estimates.
-
-Reuse the existing industrial accounts, add water/nutrients/sinks and build a small manufacturing dependency network. Compare complete source-to-use paths with capture, heat, momentum, return/reuse and accumulated consumables. Assess the construction-to-renewal relationship under consistent assumptions rather than fixing a civilization energy index first.
+The climate programme stays paused, and no rented compute is commissioned.
 
 ## Conservation through the transformation
 
@@ -76,7 +63,7 @@ Water, nitrogen and oxygen come from the Solar-System-wide resource operation (s
 
 ## Research threshold for the core
 
-Seek several coherent environmental possibilities, a credible account of light, functional biological requirements for a varied biome portfolio, quantified representative spatial opportunities, and compatible construction/renewal cases. Some features can remain explicit design hypotheses. The root should derive expressive detail from this range while retaining its scientifically grounded dream purpose.
+Seek several coherent environmental possibilities, a credible account of light, functional biological requirements for a varied biome portfolio, quantified representative spatial opportunities, and compatible construction/renewal cases. Some features can remain explicit design hypotheses. The root should derive expressive detail from this range while retaining its scientifically grounded dream purpose. The [synthesis](studies/joint_synthesis/README.md#against-the-research-threshold-for-the-core) sets the work of 8 October against it.
 
 Current sessions support ordinary numerical models, parameter sweeps, moderate rasters, geometry, optimization and evidence synthesis. Specialist model installation and runtime need direct tests. Full plasma/dose performance, material durability, complete factories and multigenerational biological outcomes are additional validation programs. No long-running service or outside compute has been commissioned by this plan.
 
