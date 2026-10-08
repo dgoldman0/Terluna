@@ -1,0 +1,60 @@
+{
+  "scope": "Only clean temporary sea+shield tree producer files; no full build, no all-four tree, no external input validation",
+  "products": [
+    {
+      "product": "illumination/calendar/results/astronomy.json",
+      "producer_files_checked": 3,
+      "mismatches": [],
+      "recorded_constants": {
+        "producer": {
+          "AU": 149597870700.0,
+          "EARTH_RADIUS": 6371000.0,
+          "MOON_RADIUS": 1737400.0,
+          "SUN_RADIUS": 695700000.0
+        },
+        "optical_producer": {}
+      }
+    },
+    {
+      "product": "illumination/calendar/results/transfer.json",
+      "producer_files_checked": 37,
+      "mismatches": [],
+      "recorded_constants": {
+        "producer": {
+          "AU": 149597870700.0,
+          "EARTH_MOON_DISTANCE": 384400000.0,
+          "EARTH_RADIUS": 6371000.0,
+          "EARTH_VISUAL_PHASE_ASYMMETRY": -0.33,
+          "EARTH_VISUAL_PHASE_NORMALISATION": 0.23,
+          "EARTH_VISUAL_PHASE_OBSERVED_LIMIT_DEG": 144.0,
+          "MOON_RADIUS": 1737400.0,
+          "SUN_RADIUS": 695700000.0
+        },
+        "optical_producer": {
+          "AU": 149597870700.0,
+          "AVOGADRO": 6.02214076e+23,
+          "BOLTZMANN": 1.380649e-23,
+          "EARTH_GM": 398600441800000.0,
+          "EARTH_RADIUS": 6371000.0,
+          "GAS_CONSTANT": 8.31446261815324,
+          "MOON_GM": 4902800118000.0,
+          "MOON_RADIUS": 1737400.0,
+          "PLANCK": 6.62607015e-34,
+          "SOLAR_CONSTANT": 1361.0,
+          "SPEED_OF_LIGHT": 299792458.0,
+          "SUN_RADIUS": 695700000.0,
+          "SYNODIC_MONTH_DAYS": 29.53059
+        }
+      }
+    },
+    {
+      "product": "illumination/calendar/results/validation.json",
+      "producer_files_checked": 5,
+      "mismatches": [],
+      "recorded_constants": {
+        "producer": {},
+        "optical_producer": {}
+      }
+    }
+  ]
+}

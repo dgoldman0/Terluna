@@ -1,0 +1,125 @@
+{
+  "schema": "terluna.research.integration-checks/1",
+  "review_date": "2026-10-08",
+  "scope": "Analysis only; no cumulative unified tree, scientific campaign, or commit",
+  "actual": [
+    {
+      "check": "pairwise Git merge-tree",
+      "result": "10 pairs inventoried; expected conflict exit codes 0 or 1",
+      "isolation": "Temporary object store; source object store read as alternate; no refs/index/worktree mutation"
+    },
+    {
+      "check": "fresh analysis worktree layer checker",
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 shared/check_layers.py",
+      "result": "396 files; 0 violations"
+    },
+    {
+      "check": "fresh analysis worktree ensemble validator",
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 ensemble/tools/validate_setup.py",
+      "result": "PASS; 14 snapshot files; 5 paper workspaces; integrity only"
+    },
+    {
+      "check": "infrastructure focused tests",
+      "ref": "625f60e83313cadd21a7999a772d93dff07cee17",
+      "result": {
+        "passed": 89,
+        "failed": 0,
+        "seconds": 0.66
+      },
+      "command_location": "../infrastructure.md"
+    },
+    {
+      "check": "infrastructure five-product dependencies",
+      "result": "33 checked available dependencies; 1 stale sky_ships winged.py producer hash"
+    },
+    {
+      "check": "shield focused tests",
+      "ref": "eeaecbc4c014f99366ae965286c63191da9b3183",
+      "result": {
+        "passed": 34,
+        "failed": 1,
+        "seconds": 0.59
+      },
+      "failure": "magnetic_architecture historical design_point parent differs from current product",
+      "command_location": "../solar-shield.md"
+    },
+    {
+      "check": "shield layer checker",
+      "result": "676 files; 0 violations"
+    },
+    {
+      "check": "sea focused Python tests",
+      "ref": "46681f458a8c21eb9e4589e784965fcc1acc2b48",
+      "command": "PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 NUMBA_NUM_THREADS=1 python3 -m pytest -p no:cacheprovider -q illumination/calendar geography/tests/test_calendar_ephemeris.py illumination/earthlight/test_model.py illumination/water_surface/test_reflection.py",
+      "result": {
+        "passed": 32,
+        "skipped": 1,
+        "failed": 0,
+        "seconds": 2.61
+      },
+      "skip": "Optional Numba-dependent test"
+    },
+    {
+      "check": "sea calendar JavaScript tests",
+      "command": "node --test illumination/calendar/tests/*.test.mjs",
+      "result": "2 test files passed; 0 failed"
+    },
+    {
+      "check": "electricity source and input integrity",
+      "result": "6 product families inspected; 3 external tables hash/size matched; corrected diagnostic traced to historical producer; no new pytest run"
+    },
+    {
+      "check": "locked tree/provenance identity",
+      "result": "Identical across 5 heads for ensemble/planning, ensemble/papers, ensemble/seed_records, research/provenance.json"
+    },
+    {
+      "check": "sea plus shield calendar producer compatibility",
+      "result": "45 recorded file entries matched; recorded used constants unaffected by shield changes",
+      "details": "calendar-compatibility.json",
+      "limit": "No cumulative four-branch build or external input validation"
+    }
+  ],
+  "historical_only": [
+    {
+      "check": "electricity last make check log",
+      "path": "/media/projectspace/terluna-research/atmospheric-electricity/make_check_2026-10-08_status_date.log",
+      "result": {
+        "python_passed": 486,
+        "python_skipped": 29,
+        "javascript_passed": 176,
+        "exit_code": 0
+      },
+      "provenance": "PASS_WITH_BLOCKED_INPUTS; protection verifier not executed",
+      "not_run_again": true
+    },
+    {
+      "check": "infrastructure cap temporary corrected-input reruns",
+      "details": "../infrastructure.md",
+      "not_run_again": true
+    },
+    {
+      "check": "older shield checks",
+      "details": "../solar-shield.md",
+      "limit": "Earlier snapshots; known prior environment/input failures; not tip check evidence"
+    }
+  ],
+  "deferred": [
+    "fresh full make check",
+    "cumulative branch integration and tests",
+    "model and full artifact regeneration",
+    "browser or visual image review",
+    "all external raw archive hashes",
+    "outside scholarly source reading/admission",
+    "substantive manuscript review",
+    "exact-build PDF review"
+  ],
+  "package_audit": "audit-result.json records final audit.py run; see file for exact outcome",
+  "execution_state": {
+    "new_branch_created": true,
+    "isolated_worktree_created": true,
+    "commits_created": false,
+    "source_refs_changed": false,
+    "merges_executed": false,
+    "analysis_uncommitted": true
+  }
+}

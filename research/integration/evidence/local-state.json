@@ -1,0 +1,151 @@
+{
+  "preserved_trees": {
+    "ensemble/planning": {
+      "bb255ca79456ee461b752726917cc0a927fda5b3": [
+        "main",
+        "habitation/infrastructure",
+        "research/atmospheric-electricity-plan",
+        "research/solar-shield-habitat-array",
+        "study/sea-appearance"
+      ]
+    },
+    "ensemble/papers": {
+      "ae91eb0f106ff09a5a735e5ef1e3df7b4cbd164b": [
+        "main",
+        "habitation/infrastructure",
+        "research/atmospheric-electricity-plan",
+        "research/solar-shield-habitat-array",
+        "study/sea-appearance"
+      ]
+    },
+    "ensemble/seed_records": {
+      "0bf1809faf30fa96c032be55ae506ccc63248309": [
+        "main",
+        "habitation/infrastructure",
+        "research/atmospheric-electricity-plan",
+        "research/solar-shield-habitat-array",
+        "study/sea-appearance"
+      ]
+    },
+    "research/provenance.json": {
+      "ab02fd5192fc2aba55ec54e64518a2f07f1fce76": [
+        "main",
+        "habitation/infrastructure",
+        "research/atmospheric-electricity-plan",
+        "research/solar-shield-habitat-array",
+        "study/sea-appearance"
+      ]
+    },
+    "shared/provenance.py": {
+      "bcce60608d7ee582002bef99592b1f205139c8f9": [
+        "main",
+        "research/solar-shield-habitat-array",
+        "study/sea-appearance"
+      ],
+      "absent": [
+        "habitation/infrastructure",
+        "research/atmospheric-electricity-plan"
+      ]
+    }
+  },
+  "ignored_storage": [
+    {
+      "branch": "refs/heads/main",
+      "paths": {
+        "research/runs": "directory",
+        "climate/crm/products": "directory",
+        "climate/gcm/products": "directory",
+        "illumination/sky/data": "directory",
+        "illumination/sky/work": "missing",
+        "atmosphere/radiative_convective/inputs": "directory",
+        "atmosphere/middle_atmosphere/inputs": "directory",
+        "protection/sources": "directory",
+        "immersion/node_modules": "directory"
+      },
+      "run_links": {
+        "research/runs/waves": "/media/projectspace/terluna-research/wave-runs",
+        "research/runs/optical_comfort": "/media/projectspace/terluna-research/optical-comfort-runs"
+      }
+    },
+    {
+      "branch": "refs/heads/research/atmospheric-electricity-plan",
+      "paths": {
+        "research/runs": "directory",
+        "climate/crm/products": "missing",
+        "climate/gcm/products": "directory",
+        "illumination/sky/data": "missing",
+        "illumination/sky/work": "missing",
+        "atmosphere/radiative_convective/inputs": "missing",
+        "atmosphere/middle_atmosphere/inputs": "directory",
+        "protection/sources": "missing",
+        "immersion/node_modules": "missing"
+      },
+      "run_links": {}
+    },
+    {
+      "branch": "refs/heads/habitation/infrastructure",
+      "paths": {
+        "research/runs": "directory",
+        "climate/crm/products": "missing",
+        "climate/gcm/products": "directory",
+        "illumination/sky/data": "directory",
+        "illumination/sky/work": "missing",
+        "atmosphere/radiative_convective/inputs": "missing",
+        "atmosphere/middle_atmosphere/inputs": "directory",
+        "protection/sources": "directory",
+        "immersion/node_modules": "directory"
+      },
+      "run_links": {}
+    },
+    {
+      "branch": "refs/heads/research/branch-integration-analysis",
+      "paths": {
+        "research/runs": "missing",
+        "climate/crm/products": "missing",
+        "climate/gcm/products": "missing",
+        "illumination/sky/data": "missing",
+        "illumination/sky/work": "missing",
+        "atmosphere/radiative_convective/inputs": "missing",
+        "atmosphere/middle_atmosphere/inputs": "missing",
+        "protection/sources": "missing",
+        "immersion/node_modules": "missing"
+      }
+    },
+    {
+      "branch": "refs/heads/study/sea-appearance",
+      "paths": {
+        "research/runs": "directory",
+        "climate/crm/products": "missing",
+        "climate/gcm/products": "directory",
+        "illumination/sky/data": "missing",
+        "illumination/sky/work": "missing",
+        "atmosphere/radiative_convective/inputs": "missing",
+        "atmosphere/middle_atmosphere/inputs": "directory",
+        "protection/sources": "missing",
+        "immersion/node_modules": "link /home/kir/Documents/Projects/terluna/immersion/node_modules"
+      },
+      "run_links": {
+        "research/runs/sea_appearance": "/media/projectspace/terluna-research/sea-appearance-runs",
+        "research/runs/waves": "/media/projectspace/terluna-research/wave-runs",
+        "research/runs/optical_comfort": "/media/projectspace/terluna-research/optical-comfort-runs"
+      }
+    },
+    {
+      "branch": "refs/heads/research/solar-shield-habitat-array",
+      "paths": {
+        "research/runs": "directory",
+        "climate/crm/products": "missing",
+        "climate/gcm/products": "missing",
+        "illumination/sky/data": "missing",
+        "illumination/sky/work": "missing",
+        "atmosphere/radiative_convective/inputs": "link /home/kir/Documents/Projects/terluna/atmosphere/radiative_convective/inputs",
+        "atmosphere/middle_atmosphere/inputs": "directory",
+        "protection/sources": "directory",
+        "immersion/node_modules": "missing"
+      },
+      "run_links": {
+        "research/runs/solar_shield_array": "/media/projectspace/terluna-research/solar-shield-runs"
+      }
+    }
+  ]
+}

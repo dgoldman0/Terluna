@@ -1,0 +1,471 @@
+{
+  "schema": "terluna.research.integration-audit/1",
+  "checked_at": "2026-10-08T19:42:32.413543+00:00",
+  "scope": "Pinned sources and review artifacts only; no cumulative integration or scientific validation",
+  "checks": [
+    {
+      "check": "ref main",
+      "passed": true,
+      "detail": {
+        "expected": "2f2e0a104a3a1ea962a6dead4179f522762f997e",
+        "actual": "2f2e0a104a3a1ea962a6dead4179f522762f997e"
+      }
+    },
+    {
+      "check": "ancestry main",
+      "passed": true,
+      "detail": {
+        "base": "2f2e0a104a3a1ea962a6dead4179f522762f997e",
+        "counts": [
+          0,
+          0
+        ],
+        "changed_paths": 0
+      }
+    },
+    {
+      "check": "ref habitation/infrastructure",
+      "passed": true,
+      "detail": {
+        "expected": "625f60e83313cadd21a7999a772d93dff07cee17",
+        "actual": "625f60e83313cadd21a7999a772d93dff07cee17"
+      }
+    },
+    {
+      "check": "ancestry habitation/infrastructure",
+      "passed": true,
+      "detail": {
+        "base": "70eed7cba7c101f6bb802439483c968f46b5fdb4",
+        "counts": [
+          64,
+          15
+        ],
+        "changed_paths": 71
+      }
+    },
+    {
+      "check": "ref research/atmospheric-electricity-plan",
+      "passed": true,
+      "detail": {
+        "expected": "24d236b03c760171de8bbd98282c8902cd72b158",
+        "actual": "24d236b03c760171de8bbd98282c8902cd72b158"
+      }
+    },
+    {
+      "check": "ancestry research/atmospheric-electricity-plan",
+      "passed": true,
+      "detail": {
+        "base": "88bb4f5e967804f6c0da01ba0ad2c89d95453516",
+        "counts": [
+          27,
+          39
+        ],
+        "changed_paths": 78
+      }
+    },
+    {
+      "check": "ref research/solar-shield-habitat-array",
+      "passed": true,
+      "detail": {
+        "expected": "eeaecbc4c014f99366ae965286c63191da9b3183",
+        "actual": "eeaecbc4c014f99366ae965286c63191da9b3183"
+      }
+    },
+    {
+      "check": "ancestry research/solar-shield-habitat-array",
+      "passed": true,
+      "detail": {
+        "base": "2f2e0a104a3a1ea962a6dead4179f522762f997e",
+        "counts": [
+          0,
+          62
+        ],
+        "changed_paths": 500
+      }
+    },
+    {
+      "check": "ref study/sea-appearance",
+      "passed": true,
+      "detail": {
+        "expected": "46681f458a8c21eb9e4589e784965fcc1acc2b48",
+        "actual": "46681f458a8c21eb9e4589e784965fcc1acc2b48"
+      }
+    },
+    {
+      "check": "ancestry study/sea-appearance",
+      "passed": true,
+      "detail": {
+        "base": "2f2e0a104a3a1ea962a6dead4179f522762f997e",
+        "counts": [
+          0,
+          25
+        ],
+        "changed_paths": 255
+      }
+    },
+    {
+      "check": "preserved main:ensemble/planning",
+      "passed": true,
+      "detail": "bb255ca79456ee461b752726917cc0a927fda5b3"
+    },
+    {
+      "check": "preserved habitation/infrastructure:ensemble/planning",
+      "passed": true,
+      "detail": "bb255ca79456ee461b752726917cc0a927fda5b3"
+    },
+    {
+      "check": "preserved research/atmospheric-electricity-plan:ensemble/planning",
+      "passed": true,
+      "detail": "bb255ca79456ee461b752726917cc0a927fda5b3"
+    },
+    {
+      "check": "preserved research/solar-shield-habitat-array:ensemble/planning",
+      "passed": true,
+      "detail": "bb255ca79456ee461b752726917cc0a927fda5b3"
+    },
+    {
+      "check": "preserved study/sea-appearance:ensemble/planning",
+      "passed": true,
+      "detail": "bb255ca79456ee461b752726917cc0a927fda5b3"
+    },
+    {
+      "check": "preserved main:ensemble/papers",
+      "passed": true,
+      "detail": "ae91eb0f106ff09a5a735e5ef1e3df7b4cbd164b"
+    },
+    {
+      "check": "preserved habitation/infrastructure:ensemble/papers",
+      "passed": true,
+      "detail": "ae91eb0f106ff09a5a735e5ef1e3df7b4cbd164b"
+    },
+    {
+      "check": "preserved research/atmospheric-electricity-plan:ensemble/papers",
+      "passed": true,
+      "detail": "ae91eb0f106ff09a5a735e5ef1e3df7b4cbd164b"
+    },
+    {
+      "check": "preserved research/solar-shield-habitat-array:ensemble/papers",
+      "passed": true,
+      "detail": "ae91eb0f106ff09a5a735e5ef1e3df7b4cbd164b"
+    },
+    {
+      "check": "preserved study/sea-appearance:ensemble/papers",
+      "passed": true,
+      "detail": "ae91eb0f106ff09a5a735e5ef1e3df7b4cbd164b"
+    },
+    {
+      "check": "preserved main:ensemble/seed_records",
+      "passed": true,
+      "detail": "0bf1809faf30fa96c032be55ae506ccc63248309"
+    },
+    {
+      "check": "preserved habitation/infrastructure:ensemble/seed_records",
+      "passed": true,
+      "detail": "0bf1809faf30fa96c032be55ae506ccc63248309"
+    },
+    {
+      "check": "preserved research/atmospheric-electricity-plan:ensemble/seed_records",
+      "passed": true,
+      "detail": "0bf1809faf30fa96c032be55ae506ccc63248309"
+    },
+    {
+      "check": "preserved research/solar-shield-habitat-array:ensemble/seed_records",
+      "passed": true,
+      "detail": "0bf1809faf30fa96c032be55ae506ccc63248309"
+    },
+    {
+      "check": "preserved study/sea-appearance:ensemble/seed_records",
+      "passed": true,
+      "detail": "0bf1809faf30fa96c032be55ae506ccc63248309"
+    },
+    {
+      "check": "preserved main:research/provenance.json",
+      "passed": true,
+      "detail": "ab02fd5192fc2aba55ec54e64518a2f07f1fce76"
+    },
+    {
+      "check": "preserved habitation/infrastructure:research/provenance.json",
+      "passed": true,
+      "detail": "ab02fd5192fc2aba55ec54e64518a2f07f1fce76"
+    },
+    {
+      "check": "preserved research/atmospheric-electricity-plan:research/provenance.json",
+      "passed": true,
+      "detail": "ab02fd5192fc2aba55ec54e64518a2f07f1fce76"
+    },
+    {
+      "check": "preserved research/solar-shield-habitat-array:research/provenance.json",
+      "passed": true,
+      "detail": "ab02fd5192fc2aba55ec54e64518a2f07f1fce76"
+    },
+    {
+      "check": "preserved study/sea-appearance:research/provenance.json",
+      "passed": true,
+      "detail": "ab02fd5192fc2aba55ec54e64518a2f07f1fce76"
+    },
+    {
+      "check": "excluded branch contained in main",
+      "passed": true,
+      "detail": "restructure/lanes"
+    },
+    {
+      "check": "source worktree refs/heads/main",
+      "passed": true,
+      "detail": "clean"
+    },
+    {
+      "check": "source worktree refs/heads/research/atmospheric-electricity-plan",
+      "passed": true,
+      "detail": "clean"
+    },
+    {
+      "check": "source worktree refs/heads/habitation/infrastructure",
+      "passed": true,
+      "detail": "clean"
+    },
+    {
+      "check": "source worktree refs/heads/study/sea-appearance",
+      "passed": true,
+      "detail": "clean"
+    },
+    {
+      "check": "source worktree refs/heads/research/solar-shield-habitat-array",
+      "passed": true,
+      "detail": "clean"
+    },
+    {
+      "check": "pair main + habitation/infrastructure",
+      "passed": true,
+      "detail": {
+        "exit_code": 1,
+        "conflicts": [
+          "climate/gcm/README.md",
+          "habitation/README.md",
+          "research/README.md",
+          "research/status.json"
+        ],
+        "overlaps": 6,
+        "stderr": ""
+      }
+    },
+    {
+      "check": "pair main + research/atmospheric-electricity-plan",
+      "passed": true,
+      "detail": {
+        "exit_code": 1,
+        "conflicts": [
+          "climate/crm/README.md",
+          "research/README.md",
+          "research/decisions.md",
+          "research/status.json"
+        ],
+        "overlaps": 4,
+        "stderr": ""
+      }
+    },
+    {
+      "check": "pair main + research/solar-shield-habitat-array",
+      "passed": true,
+      "detail": {
+        "exit_code": 0,
+        "conflicts": [],
+        "overlaps": 0,
+        "stderr": ""
+      }
+    },
+    {
+      "check": "pair main + study/sea-appearance",
+      "passed": true,
+      "detail": {
+        "exit_code": 0,
+        "conflicts": [],
+        "overlaps": 0,
+        "stderr": ""
+      }
+    },
+    {
+      "check": "pair habitation/infrastructure + research/atmospheric-electricity-plan",
+      "passed": true,
+      "detail": {
+        "exit_code": 1,
+        "conflicts": [
+          "climate/gcm/README.md",
+          "research/README.md",
+          "research/status.json"
+        ],
+        "overlaps": 4,
+        "stderr": ""
+      }
+    },
+    {
+      "check": "pair habitation/infrastructure + research/solar-shield-habitat-array",
+      "passed": true,
+      "detail": {
+        "exit_code": 1,
+        "conflicts": [
+          "climate/gcm/README.md",
+          "habitation/README.md",
+          "research/README.md",
+          "research/status.json"
+        ],
+        "overlaps": 7,
+        "stderr": ""
+      }
+    },
+    {
+      "check": "pair habitation/infrastructure + study/sea-appearance",
+      "passed": true,
+      "detail": {
+        "exit_code": 1,
+        "conflicts": [
+          "climate/gcm/README.md",
+          "habitation/README.md",
+          "research/README.md",
+          "research/decisions.md",
+          "research/status.json",
+          "visualization/README.md"
+        ],
+        "overlaps": 6,
+        "stderr": ""
+      }
+    },
+    {
+      "check": "pair research/atmospheric-electricity-plan + research/solar-shield-habitat-array",
+      "passed": true,
+      "detail": {
+        "exit_code": 1,
+        "conflicts": [
+          "atmosphere/README.md",
+          "climate/crm/README.md",
+          "research/README.md",
+          "research/decisions.md",
+          "research/status.json"
+        ],
+        "overlaps": 5,
+        "stderr": ""
+      }
+    },
+    {
+      "check": "pair research/atmospheric-electricity-plan + study/sea-appearance",
+      "passed": true,
+      "detail": {
+        "exit_code": 1,
+        "conflicts": [
+          "climate/crm/README.md",
+          "research/README.md",
+          "research/decisions.md",
+          "research/status.json"
+        ],
+        "overlaps": 4,
+        "stderr": ""
+      }
+    },
+    {
+      "check": "pair research/solar-shield-habitat-array + study/sea-appearance",
+      "passed": true,
+      "detail": {
+        "exit_code": 0,
+        "conflicts": [],
+        "overlaps": 4,
+        "stderr": ""
+      }
+    },
+    {
+      "check": "JSON calendar-compatibility.json",
+      "passed": true,
+      "detail": "parsed"
+    },
+    {
+      "check": "JSON checks.json",
+      "passed": true,
+      "detail": "parsed"
+    },
+    {
+      "check": "JSON local-state.json",
+      "passed": true,
+      "detail": "parsed"
+    },
+    {
+      "check": "JSON snapshot.json",
+      "passed": true,
+      "detail": "parsed"
+    },
+    {
+      "check": "link README.md -> main-and-sea.md",
+      "passed": true,
+      "detail": "main-and-sea.md"
+    },
+    {
+      "check": "link README.md -> infrastructure.md",
+      "passed": true,
+      "detail": "infrastructure.md"
+    },
+    {
+      "check": "link README.md -> electricity.md",
+      "passed": true,
+      "detail": "electricity.md"
+    },
+    {
+      "check": "link README.md -> solar-shield.md",
+      "passed": true,
+      "detail": "solar-shield.md"
+    },
+    {
+      "check": "link README.md -> merge-plan.md",
+      "passed": true,
+      "detail": "merge-plan.md"
+    },
+    {
+      "check": "link README.md -> evidence/snapshot.json",
+      "passed": true,
+      "detail": "evidence/snapshot.json"
+    },
+    {
+      "check": "link README.md -> evidence/local-state.json",
+      "passed": true,
+      "detail": "evidence/local-state.json"
+    },
+    {
+      "check": "link README.md -> evidence/calendar-compatibility.json",
+      "passed": true,
+      "detail": "evidence/calendar-compatibility.json"
+    },
+    {
+      "check": "link README.md -> evidence/checks.json",
+      "passed": true,
+      "detail": "evidence/checks.json"
+    },
+    {
+      "check": "link README.md -> merge-plan.md",
+      "passed": true,
+      "detail": "merge-plan.md"
+    },
+    {
+      "check": "link README.md -> evidence/checks.json",
+      "passed": true,
+      "detail": "evidence/checks.json"
+    },
+    {
+      "check": "link merge-plan.md -> evidence/snapshot.json",
+      "passed": true,
+      "detail": "evidence/snapshot.json"
+    },
+    {
+      "check": "link merge-plan.md -> evidence/local-state.json",
+      "passed": true,
+      "detail": "evidence/local-state.json"
+    },
+    {
+      "check": "link merge-plan.md -> evidence/checks.json",
+      "passed": true,
+      "detail": "evidence/checks.json"
+    },
+    {
+      "check": "link merge-plan.md -> audit.py",
+      "passed": true,
+      "detail": "audit.py"
+    }
+  ],
+  "failures": [],
+  "local_links_checked": 15
+}
