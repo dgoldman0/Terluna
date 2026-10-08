@@ -1,0 +1,842 @@
+{
+ "schema": "terluna.research.joint-synthesis-magnets-map/1",
+ "producer": {
+  "study": "joint_synthesis",
+  "files": {
+   "research/studies/joint_synthesis/magnets_map.py": "921268aec6215746"
+  },
+  "inputs": {
+   "research/studies/solar_shield_array/results/magnetic_architecture.json": "38dcfdb36be94b9f",
+   "geography/products/atlas_28pct_4ppd.npz": "dc283827f349fdc1",
+   "research/studies/conservation/sites.json": "cdfa3fcd37a32edc",
+   "research/studies/conservation/results/science_targets.csv": "a0ac4331c2882404"
+  }
+ },
+ "evidence": "Geometry of the shield branch's screened loop designs laid on the geography atlas, with the straight-wire field near the cables. No route has been engineered: terrain, crossings and the cables' depth are open.",
+ "reading_rule": "For each loop design and pattern turn: cable_km and cable_over_water_share; corridor_km is the 0.5 mT line's distance from the cable; sites_in_corridor and targets_in_corridor name what lies within it; cap_water_share is the water inside the loops. Longitudes are east, latitudes north.",
+ "field_t": 0.0005,
+ "designs": {
+  "regional_four_500": {
+   "loop_radius_km": 500.0,
+   "current_a": 513973338.6646348,
+   "corridor_km": 205.6,
+   "turns": [
+    {
+     "turn_deg": 0.0,
+     "cable_km": 12566.0,
+     "cable_over_water_share": 0.272,
+     "sites_in_corridor": [
+      "Chandrayaan-3, Shiv Shakti point",
+      "LCROSS impact, Cabeus",
+      "Luna 25 crash site",
+      "Lunar Prospector impact, Shoemaker's ashes"
+     ],
+     "targets_in_corridor": [
+      "Cabeus",
+      "Faustini",
+      "Haworth",
+      "Hermite",
+      "Nobile",
+      "Peary",
+      "Rozhdestvenskiy",
+      "Schrodinger",
+      "Shackleton",
+      "Shoemaker",
+      "Sverdrup",
+      "Whipple",
+      "de Gerlache"
+     ],
+     "cap_water_share": 0.232
+    },
+    {
+     "turn_deg": 5.0,
+     "cable_km": 12566.0,
+     "cable_over_water_share": 0.263,
+     "sites_in_corridor": [
+      "Chandrayaan-3, Shiv Shakti point",
+      "IM-1 Odysseus",
+      "LCROSS impact, Cabeus",
+      "Luna 25 crash site",
+      "Lunar Prospector impact, Shoemaker's ashes"
+     ],
+     "targets_in_corridor": [
+      "Cabeus",
+      "Faustini",
+      "Haworth",
+      "Hermite",
+      "Nobile",
+      "Peary",
+      "Rozhdestvenskiy",
+      "Schrodinger",
+      "Shackleton",
+      "Shoemaker",
+      "Sverdrup",
+      "Whipple",
+      "de Gerlache"
+     ],
+     "cap_water_share": 0.229
+    },
+    {
+     "turn_deg": 10.0,
+     "cable_km": 12566.0,
+     "cable_over_water_share": 0.284,
+     "sites_in_corridor": [
+      "Chandrayaan-3, Shiv Shakti point",
+      "IM-1 Odysseus",
+      "LCROSS impact, Cabeus",
+      "Luna 25 crash site",
+      "Lunar Prospector impact, Shoemaker's ashes",
+      "Resilience crash site"
+     ],
+     "targets_in_corridor": [
+      "Cabeus",
+      "Faustini",
+      "Haworth",
+      "Hermite",
+      "Nobile",
+      "Peary",
+      "Rozhdestvenskiy",
+      "Schrodinger",
+      "Shackleton",
+      "Shoemaker",
+      "Sverdrup",
+      "Whipple",
+      "de Gerlache"
+     ],
+     "cap_water_share": 0.226
+    },
+    {
+     "turn_deg": 15.0,
+     "cable_km": 12566.0,
+     "cable_over_water_share": 0.284,
+     "sites_in_corridor": [
+      "IM-1 Odysseus",
+      "LCROSS impact, Cabeus",
+      "Luna 25 crash site",
+      "Lunar Prospector impact, Shoemaker's ashes",
+      "Resilience crash site"
+     ],
+     "targets_in_corridor": [
+      "Cabeus",
+      "Faustini",
+      "Haworth",
+      "Hermite",
+      "Nobile",
+      "Peary",
+      "Rozhdestvenskiy",
+      "Schrodinger",
+      "Shackleton",
+      "Shoemaker",
+      "Sverdrup",
+      "Whipple",
+      "de Gerlache"
+     ],
+     "cap_water_share": 0.224
+    },
+    {
+     "turn_deg": 20.0,
+     "cable_km": 12566.0,
+     "cable_over_water_share": 0.317,
+     "sites_in_corridor": [
+      "IM-1 Odysseus",
+      "LCROSS impact, Cabeus",
+      "Lunar Prospector impact, Shoemaker's ashes",
+      "Resilience crash site"
+     ],
+     "targets_in_corridor": [
+      "Cabeus",
+      "Faustini",
+      "Haworth",
+      "Hermite",
+      "Nobile",
+      "Peary",
+      "Rozhdestvenskiy",
+      "Shackleton",
+      "Shoemaker",
+      "Sverdrup",
+      "Whipple",
+      "de Gerlache"
+     ],
+     "cap_water_share": 0.221
+    },
+    {
+     "turn_deg": 25.0,
+     "cable_km": 12566.0,
+     "cable_over_water_share": 0.327,
+     "sites_in_corridor": [
+      "Hakuto-R Mission 1 crash site",
+      "IM-1 Odysseus",
+      "LCROSS impact, Cabeus",
+      "Lunar Prospector impact, Shoemaker's ashes",
+      "Resilience crash site"
+     ],
+     "targets_in_corridor": [
+      "Cabeus",
+      "Faustini",
+      "Haworth",
+      "Hermite",
+      "Nobile",
+      "Peary",
+      "Rozhdestvenskiy",
+      "Shackleton",
+      "Shoemaker",
+      "Sverdrup",
+      "Whipple",
+      "de Gerlache"
+     ],
+     "cap_water_share": 0.222
+    },
+    {
+     "turn_deg": 30.0,
+     "cable_km": 12566.0,
+     "cable_over_water_share": 0.287,
+     "sites_in_corridor": [
+      "Hakuto-R Mission 1 crash site",
+      "IM-1 Odysseus",
+      "LCROSS impact, Cabeus",
+      "Lunar Prospector impact, Shoemaker's ashes",
+      "Resilience crash site"
+     ],
+     "targets_in_corridor": [
+      "Cabeus",
+      "Faustini",
+      "Haworth",
+      "Hermite",
+      "Nobile",
+      "Peary",
+      "Poincare",
+      "Rozhdestvenskiy",
+      "Shackleton",
+      "Shoemaker",
+      "Sverdrup",
+      "Whipple",
+      "de Gerlache"
+     ],
+     "cap_water_share": 0.225
+    },
+    {
+     "turn_deg": 35.0,
+     "cable_km": 12566.0,
+     "cable_over_water_share": 0.287,
+     "sites_in_corridor": [
+      "Hakuto-R Mission 1 crash site",
+      "IM-1 Odysseus",
+      "LCROSS impact, Cabeus",
+      "Lunar Prospector impact, Shoemaker's ashes",
+      "Resilience crash site"
+     ],
+     "targets_in_corridor": [
+      "Cabeus",
+      "Faustini",
+      "Haworth",
+      "Hermite",
+      "Nobile",
+      "Peary",
+      "Poincare",
+      "Rozhdestvenskiy",
+      "Shackleton",
+      "Shoemaker",
+      "Sverdrup",
+      "Whipple",
+      "de Gerlache"
+     ],
+     "cap_water_share": 0.232
+    },
+    {
+     "turn_deg": 40.0,
+     "cable_km": 12566.0,
+     "cable_over_water_share": 0.319,
+     "sites_in_corridor": [
+      "Hakuto-R Mission 1 crash site",
+      "IM-1 Odysseus",
+      "LCROSS impact, Cabeus",
+      "Lunar Prospector impact, Shoemaker's ashes",
+      "Resilience crash site"
+     ],
+     "targets_in_corridor": [
+      "Cabeus",
+      "Faustini",
+      "Haworth",
+      "Hermite",
+      "Nobile",
+      "Peary",
+      "Poincare",
+      "Rozhdestvenskiy",
+      "Shackleton",
+      "Shoemaker",
+      "Sverdrup",
+      "Whipple",
+      "de Gerlache"
+     ],
+     "cap_water_share": 0.243
+    },
+    {
+     "turn_deg": 45.0,
+     "cable_km": 12566.0,
+     "cable_over_water_share": 0.323,
+     "sites_in_corridor": [
+      "Hakuto-R Mission 1 crash site",
+      "IM-1 Odysseus",
+      "LCROSS impact, Cabeus",
+      "Lunar Prospector impact, Shoemaker's ashes",
+      "Resilience crash site"
+     ],
+     "targets_in_corridor": [
+      "Cabeus",
+      "Faustini",
+      "Haworth",
+      "Hermite",
+      "Nobile",
+      "Peary",
+      "Poincare",
+      "Rozhdestvenskiy",
+      "Shackleton",
+      "Shoemaker",
+      "Sverdrup",
+      "Whipple",
+      "de Gerlache"
+     ],
+     "cap_water_share": 0.257
+    },
+    {
+     "turn_deg": 50.0,
+     "cable_km": 12566.0,
+     "cable_over_water_share": 0.309,
+     "sites_in_corridor": [
+      "Hakuto-R Mission 1 crash site",
+      "IM-1 Odysseus",
+      "LCROSS impact, Cabeus",
+      "Lunar Prospector impact, Shoemaker's ashes"
+     ],
+     "targets_in_corridor": [
+      "Cabeus",
+      "Faustini",
+      "Haworth",
+      "Hermite",
+      "Nobile",
+      "Peary",
+      "Poincare",
+      "Rozhdestvenskiy",
+      "Shackleton",
+      "Shoemaker",
+      "Sverdrup",
+      "Whipple",
+      "de Gerlache"
+     ],
+     "cap_water_share": 0.272
+    },
+    {
+     "turn_deg": 55.0,
+     "cable_km": 12566.0,
+     "cable_over_water_share": 0.327,
+     "sites_in_corridor": [
+      "Chandrayaan-3, Shiv Shakti point",
+      "Hakuto-R Mission 1 crash site",
+      "IM-1 Odysseus",
+      "LCROSS impact, Cabeus",
+      "Lunar Prospector impact, Shoemaker's ashes"
+     ],
+     "targets_in_corridor": [
+      "Cabeus",
+      "Faustini",
+      "Haworth",
+      "Hermite",
+      "Nobile",
+      "Peary",
+      "Poincare",
+      "Rozhdestvenskiy",
+      "Shackleton",
+      "Shoemaker",
+      "Sverdrup",
+      "Whipple",
+      "de Gerlache"
+     ],
+     "cap_water_share": 0.286
+    },
+    {
+     "turn_deg": 60.0,
+     "cable_km": 12566.0,
+     "cable_over_water_share": 0.329,
+     "sites_in_corridor": [
+      "Chandrayaan-3, Shiv Shakti point",
+      "Hakuto-R Mission 1 crash site",
+      "IM-1 Odysseus",
+      "LCROSS impact, Cabeus",
+      "Lunar Prospector impact, Shoemaker's ashes"
+     ],
+     "targets_in_corridor": [
+      "Cabeus",
+      "Faustini",
+      "Haworth",
+      "Hermite",
+      "Nobile",
+      "Peary",
+      "Poincare",
+      "Rozhdestvenskiy",
+      "Shackleton",
+      "Shoemaker",
+      "Sverdrup",
+      "Whipple",
+      "de Gerlache"
+     ],
+     "cap_water_share": 0.299
+    },
+    {
+     "turn_deg": 65.0,
+     "cable_km": 12566.0,
+     "cable_over_water_share": 0.321,
+     "sites_in_corridor": [
+      "Chandrayaan-3, Shiv Shakti point",
+      "Hakuto-R Mission 1 crash site",
+      "IM-1 Odysseus",
+      "LCROSS impact, Cabeus",
+      "Lunar Prospector impact, Shoemaker's ashes"
+     ],
+     "targets_in_corridor": [
+      "Cabeus",
+      "Faustini",
+      "Haworth",
+      "Hermite",
+      "Nobile",
+      "Peary",
+      "Poincare",
+      "Rozhdestvenskiy",
+      "Shackleton",
+      "Shoemaker",
+      "Sverdrup",
+      "Whipple",
+      "de Gerlache"
+     ],
+     "cap_water_share": 0.312
+    },
+    {
+     "turn_deg": 70.0,
+     "cable_km": 12566.0,
+     "cable_over_water_share": 0.328,
+     "sites_in_corridor": [
+      "Chandrayaan-3, Shiv Shakti point",
+      "IM-1 Odysseus",
+      "LCROSS impact, Cabeus",
+      "Lunar Prospector impact, Shoemaker's ashes"
+     ],
+     "targets_in_corridor": [
+      "Cabeus",
+      "Faustini",
+      "Haworth",
+      "Hermite",
+      "Nobile",
+      "Peary",
+      "Poincare",
+      "Rozhdestvenskiy",
+      "Schrodinger",
+      "Shackleton",
+      "Shoemaker",
+      "Sverdrup",
+      "Whipple",
+      "de Gerlache"
+     ],
+     "cap_water_share": 0.327
+    },
+    {
+     "turn_deg": 75.0,
+     "cable_km": 12566.0,
+     "cable_over_water_share": 0.348,
+     "sites_in_corridor": [
+      "Chandrayaan-3, Shiv Shakti point",
+      "IM-1 Odysseus",
+      "LCROSS impact, Cabeus",
+      "Lunar Prospector impact, Shoemaker's ashes"
+     ],
+     "targets_in_corridor": [
+      "Cabeus",
+      "Faustini",
+      "Haworth",
+      "Hermite",
+      "Nobile",
+      "Peary",
+      "Poincare",
+      "Rozhdestvenskiy",
+      "Schrodinger",
+      "Shackleton",
+      "Shoemaker",
+      "Sverdrup",
+      "Whipple",
+      "de Gerlache"
+     ],
+     "cap_water_share": 0.341
+    },
+    {
+     "turn_deg": 80.0,
+     "cable_km": 12566.0,
+     "cable_over_water_share": 0.362,
+     "sites_in_corridor": [
+      "Chandrayaan-3, Shiv Shakti point",
+      "Chang'e 4 and Yutu-2",
+      "IM-1 Odysseus",
+      "LCROSS impact, Cabeus",
+      "Lunar Prospector impact, Shoemaker's ashes"
+     ],
+     "targets_in_corridor": [
+      "Cabeus",
+      "Faustini",
+      "Haworth",
+      "Hermite",
+      "Nobile",
+      "Peary",
+      "Poincare",
+      "Rozhdestvenskiy",
+      "Schrodinger",
+      "Shackleton",
+      "Shoemaker",
+      "Sverdrup",
+      "Whipple",
+      "de Gerlache"
+     ],
+     "cap_water_share": 0.352
+    },
+    {
+     "turn_deg": 85.0,
+     "cable_km": 12566.0,
+     "cable_over_water_share": 0.328,
+     "sites_in_corridor": [
+      "Chandrayaan-3, Shiv Shakti point",
+      "Chang'e 4 and Yutu-2",
+      "IM-1 Odysseus",
+      "LCROSS impact, Cabeus",
+      "Lunar Prospector impact, Shoemaker's ashes"
+     ],
+     "targets_in_corridor": [
+      "Cabeus",
+      "Faustini",
+      "Haworth",
+      "Hermite",
+      "Nobile",
+      "Peary",
+      "Poincare",
+      "Rozhdestvenskiy",
+      "Schrodinger",
+      "Shackleton",
+      "Shoemaker",
+      "Sverdrup",
+      "Whipple",
+      "de Gerlache"
+     ],
+     "cap_water_share": 0.355
+    }
+   ],
+   "fewest_sites_and_targets": 20.0
+  },
+  "regional_four_1000": {
+   "loop_radius_km": 1000.0,
+   "current_a": 156141543.68144026,
+   "corridor_km": 62.5,
+   "turns": [
+    {
+     "turn_deg": 0.0,
+     "cable_km": 25133.0,
+     "cable_over_water_share": 0.281,
+     "sites_in_corridor": [
+      "Chandrayaan-3, Shiv Shakti point",
+      "Chang'e 5",
+      "LCROSS impact, Cabeus",
+      "Lunokhod 2 and Luna 21"
+     ],
+     "targets_in_corridor": [
+      "Cabeus",
+      "Mare Moscoviense",
+      "Nobile",
+      "Rozhdestvenskiy"
+     ],
+     "cap_water_share": 0.277
+    },
+    {
+     "turn_deg": 5.0,
+     "cable_km": 25133.0,
+     "cable_over_water_share": 0.278,
+     "sites_in_corridor": [
+      "Apollo 17, Taurus-Littrow",
+      "Chandrayaan-3, Shiv Shakti point",
+      "LCROSS impact, Cabeus"
+     ],
+     "targets_in_corridor": [
+      "Cabeus",
+      "Mare Moscoviense",
+      "Nobile",
+      "Rozhdestvenskiy"
+     ],
+     "cap_water_share": 0.267
+    },
+    {
+     "turn_deg": 10.0,
+     "cable_km": 25133.0,
+     "cable_over_water_share": 0.278,
+     "sites_in_corridor": [
+      "Apollo 17, Taurus-Littrow",
+      "Chandrayaan-3, Shiv Shakti point",
+      "LCROSS impact, Cabeus",
+      "Lunokhod 1 and Luna 17"
+     ],
+     "targets_in_corridor": [
+      "Cabeus",
+      "Nobile",
+      "Rozhdestvenskiy"
+     ],
+     "cap_water_share": 0.261
+    },
+    {
+     "turn_deg": 15.0,
+     "cable_km": 25133.0,
+     "cable_over_water_share": 0.288,
+     "sites_in_corridor": [
+      "LCROSS impact, Cabeus",
+      "Lunokhod 1 and Luna 17"
+     ],
+     "targets_in_corridor": [
+      "Cabeus",
+      "Mare Orientale",
+      "Poincare",
+      "Rozhdestvenskiy",
+      "Tsiolkovskiy"
+     ],
+     "cap_water_share": 0.26
+    },
+    {
+     "turn_deg": 20.0,
+     "cable_km": 25133.0,
+     "cable_over_water_share": 0.3,
+     "sites_in_corridor": [
+      "LCROSS impact, Cabeus"
+     ],
+     "targets_in_corridor": [
+      "Cabeus",
+      "Ina",
+      "Mare Orientale",
+      "Rozhdestvenskiy",
+      "Tsiolkovskiy"
+     ],
+     "cap_water_share": 0.259
+    },
+    {
+     "turn_deg": 25.0,
+     "cable_km": 25133.0,
+     "cable_over_water_share": 0.298,
+     "sites_in_corridor": [
+      "IM-1 Odysseus",
+      "LCROSS impact, Cabeus"
+     ],
+     "targets_in_corridor": [
+      "Cabeus",
+      "Ina",
+      "Rozhdestvenskiy",
+      "Tycho"
+     ],
+     "cap_water_share": 0.259
+    },
+    {
+     "turn_deg": 30.0,
+     "cable_km": 25133.0,
+     "cable_over_water_share": 0.297,
+     "sites_in_corridor": [
+      "Chang'e 3 and Yutu",
+      "IM-1 Odysseus",
+      "LCROSS impact, Cabeus",
+      "Luna 25 crash site"
+     ],
+     "targets_in_corridor": [
+      "Cabeus",
+      "Ina",
+      "Mare Ingenii",
+      "Rozhdestvenskiy",
+      "Sulpicius Gallus",
+      "Tycho"
+     ],
+     "cap_water_share": 0.261
+    },
+    {
+     "turn_deg": 35.0,
+     "cable_km": 25133.0,
+     "cable_over_water_share": 0.323,
+     "sites_in_corridor": [
+      "Apollo 15, Hadley-Apennine",
+      "Chang'e 3 and Yutu",
+      "Chang'e 4 and Yutu-2",
+      "IM-1 Odysseus",
+      "LCROSS impact, Cabeus",
+      "Luna 2 impact",
+      "Luna 25 crash site"
+     ],
+     "targets_in_corridor": [
+      "Cabeus",
+      "Mare Ingenii",
+      "Rozhdestvenskiy",
+      "Sulpicius Gallus",
+      "Von Karman"
+     ],
+     "cap_water_share": 0.266
+    },
+    {
+     "turn_deg": 40.0,
+     "cable_km": 25133.0,
+     "cable_over_water_share": 0.334,
+     "sites_in_corridor": [
+      "Apollo 15, Hadley-Apennine",
+      "Blue Ghost 1",
+      "IM-1 Odysseus",
+      "LCROSS impact, Cabeus",
+      "Luna 2 impact"
+     ],
+     "targets_in_corridor": [
+      "Cabeus",
+      "Rozhdestvenskiy"
+     ],
+     "cap_water_share": 0.27
+    },
+    {
+     "turn_deg": 45.0,
+     "cable_km": 25133.0,
+     "cable_over_water_share": 0.331,
+     "sites_in_corridor": [
+      "Blue Ghost 1",
+      "IM-1 Odysseus",
+      "LCROSS impact, Cabeus"
+     ],
+     "targets_in_corridor": [
+      "Cabeus",
+      "Rozhdestvenskiy"
+     ],
+     "cap_water_share": 0.275
+    },
+    {
+     "turn_deg": 50.0,
+     "cable_km": 25133.0,
+     "cable_over_water_share": 0.344,
+     "sites_in_corridor": [
+      "Apollo 17, Taurus-Littrow",
+      "IM-1 Odysseus",
+      "LCROSS impact, Cabeus"
+     ],
+     "targets_in_corridor": [
+      "Cabeus",
+      "Hermite",
+      "Rozhdestvenskiy"
+     ],
+     "cap_water_share": 0.283
+    },
+    {
+     "turn_deg": 55.0,
+     "cable_km": 25133.0,
+     "cable_over_water_share": 0.338,
+     "sites_in_corridor": [
+      "Apollo 17, Taurus-Littrow",
+      "Chandrayaan-3, Shiv Shakti point",
+      "LCROSS impact, Cabeus",
+      "Resilience crash site"
+     ],
+     "targets_in_corridor": [
+      "Cabeus",
+      "Hermite",
+      "Rozhdestvenskiy"
+     ],
+     "cap_water_share": 0.293
+    },
+    {
+     "turn_deg": 60.0,
+     "cable_km": 25133.0,
+     "cable_over_water_share": 0.319,
+     "sites_in_corridor": [
+      "Beresheet crash site",
+      "Chandrayaan-3, Shiv Shakti point",
+      "LCROSS impact, Cabeus",
+      "Luna 24",
+      "Resilience crash site"
+     ],
+     "targets_in_corridor": [
+      "Cabeus",
+      "Hermite",
+      "Rozhdestvenskiy",
+      "Tsiolkovskiy"
+     ],
+     "cap_water_share": 0.304
+    },
+    {
+     "turn_deg": 65.0,
+     "cable_km": 25133.0,
+     "cable_over_water_share": 0.331,
+     "sites_in_corridor": [
+      "Chang'e 6",
+      "LCROSS impact, Cabeus",
+      "Lunokhod 2 and Luna 21"
+     ],
+     "targets_in_corridor": [
+      "Cabeus",
+      "Hermite",
+      "Rozhdestvenskiy",
+      "Tsiolkovskiy"
+     ],
+     "cap_water_share": 0.312
+    },
+    {
+     "turn_deg": 70.0,
+     "cable_km": 25133.0,
+     "cable_over_water_share": 0.307,
+     "sites_in_corridor": [
+      "LCROSS impact, Cabeus"
+     ],
+     "targets_in_corridor": [
+      "Cabeus",
+      "Hermite",
+      "Mons Rumker",
+      "Rozhdestvenskiy"
+     ],
+     "cap_water_share": 0.323
+    },
+    {
+     "turn_deg": 75.0,
+     "cable_km": 25133.0,
+     "cable_over_water_share": 0.305,
+     "sites_in_corridor": [
+      "Chang'e 5",
+      "LCROSS impact, Cabeus"
+     ],
+     "targets_in_corridor": [
+      "Apollo",
+      "Cabeus",
+      "Hermite",
+      "Mons Rumker"
+     ],
+     "cap_water_share": 0.334
+    },
+    {
+     "turn_deg": 80.0,
+     "cable_km": 25133.0,
+     "cable_over_water_share": 0.309,
+     "sites_in_corridor": [
+      "Blue Ghost 1",
+      "Chang'e 5",
+      "LCROSS impact, Cabeus"
+     ],
+     "targets_in_corridor": [
+      "Cabeus",
+      "Hermite"
+     ],
+     "cap_water_share": 0.343
+    },
+    {
+     "turn_deg": 85.0,
+     "cable_km": 25133.0,
+     "cable_over_water_share": 0.27,
+     "sites_in_corridor": [
+      "Blue Ghost 1",
+      "LCROSS impact, Cabeus"
+     ],
+     "targets_in_corridor": [
+      "Cabeus",
+      "Hermite"
+     ],
+     "cap_water_share": 0.349
+    }
+   ],
+   "fewest_sites_and_targets": 70.0
+  }
+ }
+}

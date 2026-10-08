@@ -1,0 +1,663 @@
+{
+ "schema": "terluna.research.joint-synthesis-night-sky/1",
+ "producer": {
+  "study": "joint_synthesis",
+  "files": {
+   "research/studies/joint_synthesis/night_sky.py": "ed484e44541eef6c"
+  },
+  "inputs": {
+   "illumination/calendar/results/transfer.json": "68ea6e820a8d7603",
+   "illumination/fleet_light/results/night_light.json": "c58f6afe2f342d80"
+  }
+ },
+ "evidence": "Clear-sky light from the calendar's solved column (molecular air, no refraction or haze) beside a geometric model of the lead ring fleet; the Moon's orbit plane stands for its equator, the nearside's Earthlight is held at a high Earth's darkest level, and the fleet's night-side attitude is a tilt case, not a flown law.",
+ "reading_rule": "Lux on level ground. hours_below[threshold] count the night's hours (dusk to dawn, 354 h) below each level. rho_d_for_a_tenth is the diffuse reflectance of the fleet's Moon-facing faces that keeps its glow at a tenth of the night's own light at local midnight. resource gives the light the night half intercepts and mirrors, in lumens and as watts of sunlight.",
+ "thresholds_lux": {
+  "dusk": 2.98,
+  "dark": 0.1
+ },
+ "places": {
+  "far side, 0 deg": {
+   "diffuse_rho_0.001": {
+    "natural_midnight_lux": 0.001,
+    "fleet_midnight_lux": 65.583,
+    "hours_below_dusk": {
+     "natural": 190.2,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 119.4,
+     "with_fleet": 0.0
+    }
+   },
+   "diffuse_rho_0.0001": {
+    "natural_midnight_lux": 0.001,
+    "fleet_midnight_lux": 6.5583,
+    "hours_below_dusk": {
+     "natural": 190.2,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 119.4,
+     "with_fleet": 0.0
+    }
+   },
+   "diffuse_rho_1e-05": {
+    "natural_midnight_lux": 0.001,
+    "fleet_midnight_lux": 0.6558,
+    "hours_below_dusk": {
+     "natural": 190.2,
+     "with_fleet": 186.3
+    },
+    "hours_below_dark": {
+     "natural": 119.4,
+     "with_fleet": 0.0
+    }
+   },
+   "diffuse_rho_1e-05_with_specular_random_1.5": {
+    "natural_midnight_lux": 0.001,
+    "fleet_midnight_lux": 0.6558,
+    "hours_below_dusk": {
+     "natural": 190.2,
+     "with_fleet": 38.8
+    },
+    "hours_below_dark": {
+     "natural": 119.4,
+     "with_fleet": 0.0
+    }
+   },
+   "diffuse_rho_1e-05_with_specular_random_3": {
+    "natural_midnight_lux": 0.001,
+    "fleet_midnight_lux": 5862.3848,
+    "hours_below_dusk": {
+     "natural": 190.2,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 119.4,
+     "with_fleet": 0.0
+    }
+   },
+   "rho_d_for_a_tenth": 1.5e-09
+  },
+  "far side, 15 deg": {
+   "diffuse_rho_0.001": {
+    "natural_midnight_lux": 0.0056,
+    "fleet_midnight_lux": 64.602,
+    "hours_below_dusk": {
+     "natural": 183.3,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 105.7,
+     "with_fleet": 0.0
+    }
+   },
+   "diffuse_rho_0.0001": {
+    "natural_midnight_lux": 0.0056,
+    "fleet_midnight_lux": 6.4602,
+    "hours_below_dusk": {
+     "natural": 183.3,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 105.7,
+     "with_fleet": 0.0
+    }
+   },
+   "diffuse_rho_1e-05": {
+    "natural_midnight_lux": 0.0056,
+    "fleet_midnight_lux": 0.646,
+    "hours_below_dusk": {
+     "natural": 183.3,
+     "with_fleet": 178.4
+    },
+    "hours_below_dark": {
+     "natural": 105.7,
+     "with_fleet": 0.0
+    }
+   },
+   "diffuse_rho_1e-05_with_specular_random_1.5": {
+    "natural_midnight_lux": 0.0056,
+    "fleet_midnight_lux": 74.599,
+    "hours_below_dusk": {
+     "natural": 183.3,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 105.7,
+     "with_fleet": 0.0
+    }
+   },
+   "diffuse_rho_1e-05_with_specular_random_3": {
+    "natural_midnight_lux": 0.0056,
+    "fleet_midnight_lux": 3662.036,
+    "hours_below_dusk": {
+     "natural": 183.3,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 105.7,
+     "with_fleet": 0.0
+    }
+   },
+   "rho_d_for_a_tenth": 8.7e-09
+  },
+  "far side, 30 deg": {
+   "diffuse_rho_0.001": {
+    "natural_midnight_lux": 0.0889,
+    "fleet_midnight_lux": 58.218,
+    "hours_below_dusk": {
+     "natural": 157.8,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 20.2,
+     "with_fleet": 0.0
+    }
+   },
+   "diffuse_rho_0.0001": {
+    "natural_midnight_lux": 0.0889,
+    "fleet_midnight_lux": 5.8218,
+    "hours_below_dusk": {
+     "natural": 157.8,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 20.2,
+     "with_fleet": 0.0
+    }
+   },
+   "diffuse_rho_1e-05": {
+    "natural_midnight_lux": 0.0889,
+    "fleet_midnight_lux": 0.5822,
+    "hours_below_dusk": {
+     "natural": 157.8,
+     "with_fleet": 151.9
+    },
+    "hours_below_dark": {
+     "natural": 20.2,
+     "with_fleet": 0.0
+    }
+   },
+   "diffuse_rho_1e-05_with_specular_random_1.5": {
+    "natural_midnight_lux": 0.0889,
+    "fleet_midnight_lux": 1208.2902,
+    "hours_below_dusk": {
+     "natural": 157.8,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 20.2,
+     "with_fleet": 0.0
+    }
+   },
+   "diffuse_rho_1e-05_with_specular_random_3": {
+    "natural_midnight_lux": 0.0889,
+    "fleet_midnight_lux": 2737.6372,
+    "hours_below_dusk": {
+     "natural": 157.8,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 20.2,
+     "with_fleet": 0.0
+    }
+   },
+   "rho_d_for_a_tenth": 1.5e-07
+  },
+  "far side, 45 deg": {
+   "diffuse_rho_0.001": {
+    "natural_midnight_lux": 1.4869,
+    "fleet_midnight_lux": 46.351,
+    "hours_below_dusk": {
+     "natural": 80.1,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    }
+   },
+   "diffuse_rho_0.0001": {
+    "natural_midnight_lux": 1.4869,
+    "fleet_midnight_lux": 4.6351,
+    "hours_below_dusk": {
+     "natural": 80.1,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    }
+   },
+   "diffuse_rho_1e-05": {
+    "natural_midnight_lux": 1.4869,
+    "fleet_midnight_lux": 0.4635,
+    "hours_below_dusk": {
+     "natural": 80.1,
+     "with_fleet": 66.4
+    },
+    "hours_below_dark": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    }
+   },
+   "diffuse_rho_1e-05_with_specular_random_1.5": {
+    "natural_midnight_lux": 1.4869,
+    "fleet_midnight_lux": 1139.2825,
+    "hours_below_dusk": {
+     "natural": 80.1,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    }
+   },
+   "diffuse_rho_1e-05_with_specular_random_3": {
+    "natural_midnight_lux": 1.4869,
+    "fleet_midnight_lux": 1598.7695,
+    "hours_below_dusk": {
+     "natural": 80.1,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    }
+   },
+   "rho_d_for_a_tenth": 3.2e-06
+  },
+  "far side, 60 deg": {
+   "diffuse_rho_0.001": {
+    "natural_midnight_lux": 24.5991,
+    "fleet_midnight_lux": 31.641,
+    "hours_below_dusk": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    }
+   },
+   "diffuse_rho_0.0001": {
+    "natural_midnight_lux": 24.5991,
+    "fleet_midnight_lux": 3.1641,
+    "hours_below_dusk": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    }
+   },
+   "diffuse_rho_1e-05": {
+    "natural_midnight_lux": 24.5991,
+    "fleet_midnight_lux": 0.3164,
+    "hours_below_dusk": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    }
+   },
+   "diffuse_rho_1e-05_with_specular_random_1.5": {
+    "natural_midnight_lux": 24.5991,
+    "fleet_midnight_lux": 780.4874,
+    "hours_below_dusk": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    }
+   },
+   "diffuse_rho_1e-05_with_specular_random_3": {
+    "natural_midnight_lux": 24.5991,
+    "fleet_midnight_lux": 980.0064,
+    "hours_below_dusk": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    }
+   },
+   "rho_d_for_a_tenth": 7.8e-05
+  },
+  "nearside, 0 deg": {
+   "diffuse_rho_0.001": {
+    "natural_midnight_lux": 2.301,
+    "fleet_midnight_lux": 65.583,
+    "hours_below_dusk": {
+     "natural": 159.7,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    }
+   },
+   "diffuse_rho_0.0001": {
+    "natural_midnight_lux": 2.301,
+    "fleet_midnight_lux": 6.5583,
+    "hours_below_dusk": {
+     "natural": 159.7,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    }
+   },
+   "diffuse_rho_1e-05": {
+    "natural_midnight_lux": 2.301,
+    "fleet_midnight_lux": 0.6558,
+    "hours_below_dusk": {
+     "natural": 159.7,
+     "with_fleet": 121.4
+    },
+    "hours_below_dark": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    }
+   },
+   "diffuse_rho_1e-05_with_specular_random_1.5": {
+    "natural_midnight_lux": 2.301,
+    "fleet_midnight_lux": 0.6558,
+    "hours_below_dusk": {
+     "natural": 159.7,
+     "with_fleet": 38.8
+    },
+    "hours_below_dark": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    }
+   },
+   "diffuse_rho_1e-05_with_specular_random_3": {
+    "natural_midnight_lux": 2.301,
+    "fleet_midnight_lux": 5862.3848,
+    "hours_below_dusk": {
+     "natural": 159.7,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    }
+   },
+   "rho_d_for_a_tenth": 3.5e-06
+  },
+  "nearside, 15 deg": {
+   "diffuse_rho_0.001": {
+    "natural_midnight_lux": 2.3056,
+    "fleet_midnight_lux": 64.602,
+    "hours_below_dusk": {
+     "natural": 149.9,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    }
+   },
+   "diffuse_rho_0.0001": {
+    "natural_midnight_lux": 2.3056,
+    "fleet_midnight_lux": 6.4602,
+    "hours_below_dusk": {
+     "natural": 149.9,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    }
+   },
+   "diffuse_rho_1e-05": {
+    "natural_midnight_lux": 2.3056,
+    "fleet_midnight_lux": 0.646,
+    "hours_below_dusk": {
+     "natural": 149.9,
+     "with_fleet": 104.7
+    },
+    "hours_below_dark": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    }
+   },
+   "diffuse_rho_1e-05_with_specular_random_1.5": {
+    "natural_midnight_lux": 2.3056,
+    "fleet_midnight_lux": 74.599,
+    "hours_below_dusk": {
+     "natural": 149.9,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    }
+   },
+   "diffuse_rho_1e-05_with_specular_random_3": {
+    "natural_midnight_lux": 2.3056,
+    "fleet_midnight_lux": 3662.036,
+    "hours_below_dusk": {
+     "natural": 149.9,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    }
+   },
+   "rho_d_for_a_tenth": 3.6e-06
+  },
+  "nearside, 30 deg": {
+   "diffuse_rho_0.001": {
+    "natural_midnight_lux": 2.3889,
+    "fleet_midnight_lux": 58.218,
+    "hours_below_dusk": {
+     "natural": 112.6,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    }
+   },
+   "diffuse_rho_0.0001": {
+    "natural_midnight_lux": 2.3889,
+    "fleet_midnight_lux": 5.8218,
+    "hours_below_dusk": {
+     "natural": 112.6,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    }
+   },
+   "diffuse_rho_1e-05": {
+    "natural_midnight_lux": 2.3889,
+    "fleet_midnight_lux": 0.5822,
+    "hours_below_dusk": {
+     "natural": 112.6,
+     "with_fleet": 20.2
+    },
+    "hours_below_dark": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    }
+   },
+   "diffuse_rho_1e-05_with_specular_random_1.5": {
+    "natural_midnight_lux": 2.3889,
+    "fleet_midnight_lux": 1208.2902,
+    "hours_below_dusk": {
+     "natural": 112.6,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    }
+   },
+   "diffuse_rho_1e-05_with_specular_random_3": {
+    "natural_midnight_lux": 2.3889,
+    "fleet_midnight_lux": 2737.6372,
+    "hours_below_dusk": {
+     "natural": 112.6,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    }
+   },
+   "rho_d_for_a_tenth": 4.1e-06
+  },
+  "nearside, 45 deg": {
+   "diffuse_rho_0.001": {
+    "natural_midnight_lux": 3.7869,
+    "fleet_midnight_lux": 46.351,
+    "hours_below_dusk": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    }
+   },
+   "diffuse_rho_0.0001": {
+    "natural_midnight_lux": 3.7869,
+    "fleet_midnight_lux": 4.6351,
+    "hours_below_dusk": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    }
+   },
+   "diffuse_rho_1e-05": {
+    "natural_midnight_lux": 3.7869,
+    "fleet_midnight_lux": 0.4635,
+    "hours_below_dusk": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    }
+   },
+   "diffuse_rho_1e-05_with_specular_random_1.5": {
+    "natural_midnight_lux": 3.7869,
+    "fleet_midnight_lux": 1139.2825,
+    "hours_below_dusk": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    }
+   },
+   "diffuse_rho_1e-05_with_specular_random_3": {
+    "natural_midnight_lux": 3.7869,
+    "fleet_midnight_lux": 1598.7695,
+    "hours_below_dusk": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    }
+   },
+   "rho_d_for_a_tenth": 8.2e-06
+  },
+  "nearside, 60 deg": {
+   "diffuse_rho_0.001": {
+    "natural_midnight_lux": 26.8991,
+    "fleet_midnight_lux": 31.641,
+    "hours_below_dusk": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    }
+   },
+   "diffuse_rho_0.0001": {
+    "natural_midnight_lux": 26.8991,
+    "fleet_midnight_lux": 3.1641,
+    "hours_below_dusk": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    }
+   },
+   "diffuse_rho_1e-05": {
+    "natural_midnight_lux": 26.8991,
+    "fleet_midnight_lux": 0.3164,
+    "hours_below_dusk": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    }
+   },
+   "diffuse_rho_1e-05_with_specular_random_1.5": {
+    "natural_midnight_lux": 26.8991,
+    "fleet_midnight_lux": 780.4874,
+    "hours_below_dusk": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    }
+   },
+   "diffuse_rho_1e-05_with_specular_random_3": {
+    "natural_midnight_lux": 26.8991,
+    "fleet_midnight_lux": 980.0064,
+    "hours_below_dusk": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    },
+    "hours_below_dark": {
+     "natural": 0.0,
+     "with_fleet": 0.0
+    }
+   },
+   "rho_d_for_a_tenth": 8.5e-05
+  }
+ },
+ "resource": {
+  "night_half_intercepted_lm": 8.002433932626973e+19,
+  "night_half_intercepted_w": 8.513227587901036e+17,
+  "mirrored_visible_lm": 1.2206029030155423e+18,
+  "note": "sunlight on the night half of the fleet, which the Moon never receives; the mirrored part is the films' visible reflection, and steering it is the same act as keeping it off the Moon"
+ },
+ "specular_tilt_away_share": {
+  "random_0": 0.0147,
+  "random_1.5": 0.035,
+  "random_3": 0.0643,
+  "random_6": 0.1369
+ }
+}

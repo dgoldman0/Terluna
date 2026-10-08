@@ -1,0 +1,348 @@
+{
+ "schema": "terluna.research.joint-synthesis-upper-air-no/1",
+ "producer": {
+  "study": "joint_synthesis",
+  "files": {
+   "research/studies/joint_synthesis/upper_air_no.py": "5e52149fb10ca6bb",
+   "atmosphere/loss_response/model.py": "289dd85b04b9132d",
+   "atmosphere/loss_response/infrared.py": "cd6e8fb72e0f764e"
+  }
+ },
+ "evidence": "The domain's thermal column and limb tables at traced states, with NO at the 0.3 Pa base set by hand; the solar-wind and exosphere steps that follow in the full chain are not rerun.",
+ "reading_rule": "exobase_temperature_k and molecular_loss_kg_s at each gap level (UV transmission f) for each NO level; \"case\" is the middle-atmosphere case's own NO. Loss in kg/s of the thermal column's molecular escape.",
+ "no_levels": [
+  1e-09,
+  1e-08,
+  1e-07
+ ],
+ "sweeps": {
+  "case": {
+   "collisional/quiet": [
+    {
+     "gap": 0.0001,
+     "status": "thermal_column",
+     "exobase_temperature_k": 145.0,
+     "molecular_loss_kg_s": 1.28137993691936e-10
+    },
+    {
+     "gap": 0.0002,
+     "status": "thermal_column",
+     "exobase_temperature_k": 147.4,
+     "molecular_loss_kg_s": 2.709673732626587e-10
+    },
+    {
+     "gap": 0.0003,
+     "status": "thermal_column",
+     "exobase_temperature_k": 149.9,
+     "molecular_loss_kg_s": 5.625667863389432e-10
+    }
+   ],
+   "collisional/solar_maximum": [
+    {
+     "gap": 0.0001,
+     "status": "thermal_column",
+     "exobase_temperature_k": 148.8,
+     "molecular_loss_kg_s": 4.144904655787575e-10
+    },
+    {
+     "gap": 0.0002,
+     "status": "thermal_column",
+     "exobase_temperature_k": 152.8,
+     "molecular_loss_kg_s": 1.3109973027011245e-09
+    },
+    {
+     "gap": 0.0003,
+     "status": "thermal_column",
+     "exobase_temperature_k": 156.9,
+     "molecular_loss_kg_s": 3.9700473578978985e-09
+    }
+   ],
+   "all_heats/quiet": [
+    {
+     "gap": 0.0001,
+     "status": "thermal_column",
+     "exobase_temperature_k": 194.8,
+     "molecular_loss_kg_s": 0.000905536508622102
+    },
+    {
+     "gap": 0.0002,
+     "status": "thermal_column",
+     "exobase_temperature_k": 197.9,
+     "molecular_loss_kg_s": 0.0013659343757664053
+    },
+    {
+     "gap": 0.0003,
+     "status": "thermal_column",
+     "exobase_temperature_k": 201.0,
+     "molecular_loss_kg_s": 0.0020467452120219807
+    }
+   ],
+   "all_heats/solar_maximum": [
+    {
+     "gap": 0.0001,
+     "status": "thermal_column",
+     "exobase_temperature_k": 199.5,
+     "molecular_loss_kg_s": 0.0017200192810991396
+    },
+    {
+     "gap": 0.0002,
+     "status": "thermal_column",
+     "exobase_temperature_k": 204.8,
+     "molecular_loss_kg_s": 0.003328033252894057
+    },
+    {
+     "gap": 0.0003,
+     "status": "thermal_column",
+     "exobase_temperature_k": 210.1,
+     "molecular_loss_kg_s": 0.006330153657019856
+    }
+   ]
+  },
+  "1e-09": {
+   "collisional/quiet": [
+    {
+     "gap": 0.0001,
+     "status": "thermal_column",
+     "exobase_temperature_k": 145.0,
+     "molecular_loss_kg_s": 1.2813799371328886e-10
+    },
+    {
+     "gap": 0.0002,
+     "status": "thermal_column",
+     "exobase_temperature_k": 147.4,
+     "molecular_loss_kg_s": 2.709673733336065e-10
+    },
+    {
+     "gap": 0.0003,
+     "status": "thermal_column",
+     "exobase_temperature_k": 149.9,
+     "molecular_loss_kg_s": 5.625667865366043e-10
+    }
+   ],
+   "collisional/solar_maximum": [
+    {
+     "gap": 0.0001,
+     "status": "thermal_column",
+     "exobase_temperature_k": 148.8,
+     "molecular_loss_kg_s": 4.1449046572823424e-10
+    },
+    {
+     "gap": 0.0002,
+     "status": "thermal_column",
+     "exobase_temperature_k": 152.8,
+     "molecular_loss_kg_s": 1.3109973033356043e-09
+    },
+    {
+     "gap": 0.0003,
+     "status": "thermal_column",
+     "exobase_temperature_k": 156.9,
+     "molecular_loss_kg_s": 3.9700473602625605e-09
+    }
+   ],
+   "all_heats/quiet": [
+    {
+     "gap": 0.0001,
+     "status": "thermal_column",
+     "exobase_temperature_k": 194.8,
+     "molecular_loss_kg_s": 0.0009055365086949278
+    },
+    {
+     "gap": 0.0002,
+     "status": "thermal_column",
+     "exobase_temperature_k": 197.9,
+     "molecular_loss_kg_s": 0.0013659343759544248
+    },
+    {
+     "gap": 0.0003,
+     "status": "thermal_column",
+     "exobase_temperature_k": 201.0,
+     "molecular_loss_kg_s": 0.0020467452124149094
+    }
+   ],
+   "all_heats/solar_maximum": [
+    {
+     "gap": 0.0001,
+     "status": "thermal_column",
+     "exobase_temperature_k": 199.5,
+     "molecular_loss_kg_s": 0.0017200192814314996
+    },
+    {
+     "gap": 0.0002,
+     "status": "thermal_column",
+     "exobase_temperature_k": 204.8,
+     "molecular_loss_kg_s": 0.0033280332537945177
+    },
+    {
+     "gap": 0.0003,
+     "status": "thermal_column",
+     "exobase_temperature_k": 210.1,
+     "molecular_loss_kg_s": 0.006330153659181367
+    }
+   ]
+  },
+  "1e-08": {
+   "collisional/quiet": [
+    {
+     "gap": 0.0001,
+     "status": "thermal_column",
+     "exobase_temperature_k": 145.0,
+     "molecular_loss_kg_s": 1.2813799390545502e-10
+    },
+    {
+     "gap": 0.0002,
+     "status": "thermal_column",
+     "exobase_temperature_k": 147.4,
+     "molecular_loss_kg_s": 2.7096737397211134e-10
+    },
+    {
+     "gap": 0.0003,
+     "status": "thermal_column",
+     "exobase_temperature_k": 149.9,
+     "molecular_loss_kg_s": 5.625667883155284e-10
+    }
+   ],
+   "collisional/solar_maximum": [
+    {
+     "gap": 0.0001,
+     "status": "thermal_column",
+     "exobase_temperature_k": 148.8,
+     "molecular_loss_kg_s": 4.1449046707358115e-10
+    },
+    {
+     "gap": 0.0002,
+     "status": "thermal_column",
+     "exobase_temperature_k": 152.8,
+     "molecular_loss_kg_s": 1.3109973090459573e-09
+    },
+    {
+     "gap": 0.0003,
+     "status": "thermal_column",
+     "exobase_temperature_k": 156.9,
+     "molecular_loss_kg_s": 3.970047381544605e-09
+    }
+   ],
+   "all_heats/quiet": [
+    {
+     "gap": 0.0001,
+     "status": "thermal_column",
+     "exobase_temperature_k": 194.8,
+     "molecular_loss_kg_s": 0.0009055365093503524
+    },
+    {
+     "gap": 0.0002,
+     "status": "thermal_column",
+     "exobase_temperature_k": 197.9,
+     "molecular_loss_kg_s": 0.0013659343776465018
+    },
+    {
+     "gap": 0.0003,
+     "status": "thermal_column",
+     "exobase_temperature_k": 201.0,
+     "molecular_loss_kg_s": 0.0020467452159512226
+    }
+   ],
+   "all_heats/solar_maximum": [
+    {
+     "gap": 0.0001,
+     "status": "thermal_column",
+     "exobase_temperature_k": 199.5,
+     "molecular_loss_kg_s": 0.0017200192844225807
+    },
+    {
+     "gap": 0.0002,
+     "status": "thermal_column",
+     "exobase_temperature_k": 204.8,
+     "molecular_loss_kg_s": 0.003328033261898238
+    },
+    {
+     "gap": 0.0003,
+     "status": "thermal_column",
+     "exobase_temperature_k": 210.1,
+     "molecular_loss_kg_s": 0.0063301536786347775
+    }
+   ]
+  },
+  "1e-07": {
+   "collisional/quiet": [
+    {
+     "gap": 0.0001,
+     "status": "thermal_column",
+     "exobase_temperature_k": 145.0,
+     "molecular_loss_kg_s": 1.281379958271163e-10
+    },
+    {
+     "gap": 0.0002,
+     "status": "thermal_column",
+     "exobase_temperature_k": 147.4,
+     "molecular_loss_kg_s": 2.7096738035719345e-10
+    },
+    {
+     "gap": 0.0003,
+     "status": "thermal_column",
+     "exobase_temperature_k": 149.9,
+     "molecular_loss_kg_s": 5.625668061048165e-10
+    }
+   ],
+   "collisional/solar_maximum": [
+    {
+     "gap": 0.0001,
+     "status": "thermal_column",
+     "exobase_temperature_k": 148.8,
+     "molecular_loss_kg_s": 4.1449048052708207e-10
+    },
+    {
+     "gap": 0.0002,
+     "status": "thermal_column",
+     "exobase_temperature_k": 152.8,
+     "molecular_loss_kg_s": 1.3109973661495474e-09
+    },
+    {
+     "gap": 0.0003,
+     "status": "thermal_column",
+     "exobase_temperature_k": 156.9,
+     "molecular_loss_kg_s": 3.970047594365107e-09
+    }
+   ],
+   "all_heats/quiet": [
+    {
+     "gap": 0.0001,
+     "status": "thermal_column",
+     "exobase_temperature_k": 194.8,
+     "molecular_loss_kg_s": 0.0009055365159045173
+    },
+    {
+     "gap": 0.0002,
+     "status": "thermal_column",
+     "exobase_temperature_k": 197.9,
+     "molecular_loss_kg_s": 0.0013659343945672865
+    },
+    {
+     "gap": 0.0003,
+     "status": "thermal_column",
+     "exobase_temperature_k": 201.0,
+     "molecular_loss_kg_s": 0.002046745251314376
+    }
+   ],
+   "all_heats/solar_maximum": [
+    {
+     "gap": 0.0001,
+     "status": "thermal_column",
+     "exobase_temperature_k": 199.5,
+     "molecular_loss_kg_s": 0.0017200193143334422
+    },
+    {
+     "gap": 0.0002,
+     "status": "thermal_column",
+     "exobase_temperature_k": 204.8,
+     "molecular_loss_kg_s": 0.0033280333429357087
+    },
+    {
+     "gap": 0.0003,
+     "status": "thermal_column",
+     "exobase_temperature_k": 210.1,
+     "molecular_loss_kg_s": 0.00633015387316917
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,302 @@
+{
+ "schema": "terluna.research.joint-synthesis-places/1",
+ "producer": {
+  "study": "joint_synthesis",
+  "files": {
+   "research/studies/joint_synthesis/places.py": "a2d215984f2ec8e2"
+  },
+  "inputs": {
+   "research/studies/joint_synthesis/results/night_sky.json": "f831860e0cef3dc3",
+   "research/studies/joint_synthesis/results/magnets_map.json": "fecc71b909175739",
+   "illumination/fleet_light/results/night_light.json": "c58f6afe2f342d80",
+   "atmosphere/electricity/results/occurrence_A28_dim5_moon.json": "64867b5026983e32",
+   "illumination/aerosol/results/haze.json": "42d3739417a67c18",
+   "geography/results/tides.json": "5006911ecaadbcf8",
+   "geography/products/atlas_28pct_4ppd.npz": "dc283827f349fdc1"
+  }
+ },
+ "evidence": "A compilation of the joint products at seven places; each value carries its source product's boundaries.",
+ "reading_rule": "Light in lux on level ground at local midnight; flashes per km2 a year (central, with the bracket of scalings and sea factors); visibility in km by day in the central haze case; tides as the nearest sea's median monthly range; cable distances in km.",
+ "places": {
+  "summit port": {
+   "lat": 5.4125,
+   "lon": 201.3665,
+   "side": "far side",
+   "region_read": "wet_land",
+   "night": {
+    "natural_midnight_lux": 0.001,
+    "fleet_midnight_lux_rho_0_1pct": 65.73,
+    "fleet_midnight_lux_rolled_80": 2.176,
+    "hours_below_0_1_lux_natural": 119.4
+   },
+   "lightning": {
+    "central": 0.04614,
+    "bracket": [
+     0.01119,
+     0.0827
+    ]
+   },
+   "haze": {
+    "visibility_km": 198.0,
+    "aod": 0.0296
+   },
+   "tide": {
+    "nearest_sea": "Mare Ingenii",
+    "distance_km": 879.0,
+    "monthly_range_m": 2.08
+   },
+   "magnets": {
+    "regional_four_500": {
+     "turn_deg": 20.0,
+     "nearest_cable_km": 1399.0,
+     "inside_0_5_mT_line": false
+    },
+    "regional_four_1000": {
+     "turn_deg": 70.0,
+     "nearest_cable_km": 761.0,
+     "inside_0_5_mT_line": false
+    }
+   }
+  },
+  "Oceanus Procellarum by Russell": {
+   "lat": 32.9,
+   "lon": 284.6,
+   "side": "nearside",
+   "region_read": "seas",
+   "night": {
+    "natural_midnight_lux": 2.3889,
+    "fleet_midnight_lux_rho_0_1pct": 56.09,
+    "fleet_midnight_lux_rolled_80": 1.856,
+    "hours_below_0_1_lux_natural": 0.0
+   },
+   "lightning": {
+    "central": 0.00234,
+    "bracket": [
+     0.00018,
+     0.00234
+    ]
+   },
+   "haze": {
+    "visibility_km": 145.8,
+    "aod": 0.022
+   },
+   "tide": {
+    "nearest_sea": "Oceanus Procellarum",
+    "distance_km": 1.0,
+    "monthly_range_m": 3.68
+   },
+   "magnets": {
+    "regional_four_500": {
+     "turn_deg": 20.0,
+     "nearest_cable_km": 1244.0,
+     "inside_0_5_mT_line": false
+    },
+    "regional_four_1000": {
+     "turn_deg": 70.0,
+     "nearest_cable_km": 138.0,
+     "inside_0_5_mT_line": false
+    }
+   }
+  },
+  "eastern Smythii headland": {
+   "lat": -1.5,
+   "lon": 90.0,
+   "side": "far side",
+   "region_read": "seas",
+   "night": {
+    "natural_midnight_lux": 0.001,
+    "fleet_midnight_lux_rho_0_1pct": 65.12,
+    "fleet_midnight_lux_rolled_80": 2.155,
+    "hours_below_0_1_lux_natural": 119.4
+   },
+   "lightning": {
+    "central": 0.00672,
+    "bracket": [
+     0.00036,
+     0.00672
+    ]
+   },
+   "haze": {
+    "visibility_km": 145.8,
+    "aod": 0.022
+   },
+   "tide": {
+    "nearest_sea": "Mare Smythii",
+    "distance_km": 5.0,
+    "monthly_range_m": 0.55
+   },
+   "magnets": {
+    "regional_four_500": {
+     "turn_deg": 20.0,
+     "nearest_cable_km": 1560.0,
+     "inside_0_5_mT_line": false
+    },
+    "regional_four_1000": {
+     "turn_deg": 70.0,
+     "nearest_cable_km": 577.0,
+     "inside_0_5_mT_line": false
+    }
+   }
+  },
+  "southern Mare Nubium": {
+   "lat": -25.0,
+   "lon": 345.0,
+   "side": "nearside",
+   "region_read": "seas",
+   "night": {
+    "natural_midnight_lux": 2.3889,
+    "fleet_midnight_lux_rho_0_1pct": 53.06,
+    "fleet_midnight_lux_rolled_80": 1.756,
+    "hours_below_0_1_lux_natural": 0.0
+   },
+   "lightning": {
+    "central": 0.00338,
+    "bracket": [
+     0.00014,
+     0.00338
+    ]
+   },
+   "haze": {
+    "visibility_km": 145.8,
+    "aod": 0.022
+   },
+   "tide": {
+    "nearest_sea": "Oceanus Procellarum",
+    "distance_km": 5.0,
+    "monthly_range_m": 3.68
+   },
+   "magnets": {
+    "regional_four_500": {
+     "turn_deg": 20.0,
+     "nearest_cable_km": 1136.0,
+     "inside_0_5_mT_line": false
+    },
+    "regional_four_1000": {
+     "turn_deg": 70.0,
+     "nearest_cable_km": 303.0,
+     "inside_0_5_mT_line": false
+    }
+   }
+  },
+  "South Pole-Aitken coast by Mare Ingenii": {
+   "lat": -34.0,
+   "lon": 163.0,
+   "side": "far side",
+   "region_read": "seas",
+   "night": {
+    "natural_midnight_lux": 0.0889,
+    "fleet_midnight_lux_rho_0_1pct": 45.46,
+    "fleet_midnight_lux_rolled_80": 1.505,
+    "hours_below_0_1_lux_natural": 20.2
+   },
+   "lightning": {
+    "central": 0.0056,
+    "bracket": [
+     0.00014,
+     0.0056
+    ]
+   },
+   "haze": {
+    "visibility_km": 145.8,
+    "aod": 0.022
+   },
+   "tide": {
+    "nearest_sea": "Mare Ingenii",
+    "distance_km": 5.0,
+    "monthly_range_m": 2.08
+   },
+   "magnets": {
+    "regional_four_500": {
+     "turn_deg": 20.0,
+     "nearest_cable_km": 865.0,
+     "inside_0_5_mT_line": false
+    },
+    "regional_four_1000": {
+     "turn_deg": 70.0,
+     "nearest_cable_km": 580.0,
+     "inside_0_5_mT_line": false
+    }
+   }
+  },
+  "highland box": {
+   "lat": -44.7,
+   "lon": 246.1,
+   "side": "far side",
+   "region_read": "fog_desert",
+   "night": {
+    "natural_midnight_lux": 1.4869,
+    "fleet_midnight_lux_rho_0_1pct": 35.0,
+    "fleet_midnight_lux_rolled_80": 1.159,
+    "hours_below_0_1_lux_natural": 0.0
+   },
+   "lightning": {
+    "central": 0.00193,
+    "bracket": [
+     0.00078,
+     0.00193
+    ]
+   },
+   "haze": {
+    "visibility_km": 189.2,
+    "aod": 0.0347
+   },
+   "tide": {
+    "nearest_sea": "Mare Ingenii",
+    "distance_km": 226.0,
+    "monthly_range_m": 2.08
+   },
+   "magnets": {
+    "regional_four_500": {
+     "turn_deg": 20.0,
+     "nearest_cable_km": 480.0,
+     "inside_0_5_mT_line": false
+    },
+    "regional_four_1000": {
+     "turn_deg": 70.0,
+     "nearest_cable_km": 612.0,
+     "inside_0_5_mT_line": false
+    }
+   }
+  },
+  "polar plain": {
+   "lat": 75.0,
+   "lon": 0.0,
+   "side": "nearside",
+   "region_read": "polar_dry_land",
+   "night": {
+    "natural_midnight_lux": 26.8991,
+    "fleet_midnight_lux_rho_0_1pct": 16.14,
+    "fleet_midnight_lux_rolled_80": 0.534,
+    "hours_below_0_1_lux_natural": 0.0
+   },
+   "lightning": {
+    "central": 0.0001,
+    "bracket": [
+     1e-05,
+     0.0001
+    ]
+   },
+   "haze": {
+    "visibility_km": 177.3,
+    "aod": 0.0054
+   },
+   "tide": {
+    "nearest_sea": "Oceanus Procellarum",
+    "distance_km": 211.0,
+    "monthly_range_m": 3.68
+   },
+   "magnets": {
+    "regional_four_500": {
+     "turn_deg": 20.0,
+     "nearest_cable_km": 230.0,
+     "inside_0_5_mT_line": false
+    },
+    "regional_four_1000": {
+     "turn_deg": 70.0,
+     "nearest_cable_km": 66.0,
+     "inside_0_5_mT_line": false
+    }
+   }
+  }
+ }
+}

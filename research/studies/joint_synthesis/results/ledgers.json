@@ -1,0 +1,102 @@
+{
+ "schema": "terluna.research.joint-synthesis-ledgers/1",
+ "producer": {
+  "study": "joint_synthesis",
+  "files": {
+   "research/studies/joint_synthesis/ledgers.py": "5b85e51558503400"
+  },
+  "inputs": {
+   "atmosphere/loss_response/results/oxygen_escape.json": "94421fe229a148da",
+   "atmosphere/electricity/results/occurrence_A28_dim5_moon.json": "64867b5026983e32",
+   "research/studies/atmospheric_electricity/results/nitrogen_oxides.json": "d48c3d326d9b498e",
+   "biosphere/canopy/results/canopy.json": "bedb8ce2502316d4",
+   "research/studies/solar_shield_array/results/array_heat.json": "d964f1a5e1dec2e9",
+   "illumination/fleet_light/results/night_light.json": "c58f6afe2f342d80"
+  }
+ },
+ "evidence": "Arithmetic on committed products of the five lines, with the brackets stated where a quantity has no product (the fleet's gas losses, an ecosystem's new nitrogen).",
+ "reading_rule": "Rates per year unless labelled; cycle_years is the atmosphere's mass over the loss rate. Nitrogen in kg N per km2 a year. Power in W.",
+ "air": {
+  "mass_kg": 3.1e+18,
+  "losses": {
+   "warm_case_no_magnets_kg_s": {
+    "kg_s": 1.4,
+    "cycle_years": 70200000000.0
+   },
+   "warm_case_september_magnets_kg_s": {
+    "kg_s": 0.044,
+    "cycle_years": 2232600000000.0
+   },
+   "cooler_cases_kg_s": {
+    "kg_s": [
+     0.61,
+     0.8
+    ],
+    "cycle_years": [
+     161000000000.0,
+     122800000000.0
+    ]
+   }
+  },
+  "hydrogen_escape_kg_s": [
+   0.00244,
+   0.00271
+  ]
+ },
+ "hydrogen": {
+  "air_inventory_t": 114300000.0,
+  "escape_t_per_year": [
+   77.0,
+   86.0
+  ],
+  "fleet_inventory_t": "31,000-54,000 in liners and about 17,000 in ferries (infrastructure review)",
+  "release_bracket_per_year": [
+   0.01,
+   0.1
+  ],
+  "release_t_per_year": [
+   480.0,
+   7100.0
+  ],
+  "ppm_rise_per_mt_held": 0.00464,
+  "note": "Sinks: under the titania stack the design column has essentially no OH (atmosphere/middle_atmosphere profiles), so released hydrogen leaves only through soils that take it up, as Earth's do within about two years, or through escape, which is diffusion-limited and slow."
+ },
+ "nitrogen": {
+  "lightning_moon_mean_kg_n_km2_yr": {
+   "per_flash": 0.0256,
+   "per_joule": 1.6234,
+   "per_metre": 0.0066
+  },
+  "lightning_moon_total_kt_n_yr": {
+   "per_flash": 0.97,
+   "per_joule": 61.58,
+   "per_metre": 0.25
+  },
+  "ecosystem_new_nitrogen_kg_n_km2_yr": [
+   1000.0,
+   5000.0
+  ],
+  "lightning_share_of_need": [
+   1.3e-06,
+   0.00162
+  ],
+  "canopy_gpp_g_c_m2_day_equator": 12.4743
+ },
+ "energy": {
+  "moon_absorbed_sunlight_w": 8010000000000000.0,
+  "summit_metropolis_w": 200000000000.0,
+  "summit_metropolis_local_w_m2": 80.0,
+  "summit_metropolis_share_of_absorbed": 2.5e-05,
+  "magnets_refrigeration_w": [
+   9250000000.0,
+   14800000000.0
+  ],
+  "film_plant_w": [
+   0.14631972627556622,
+   2.9396409496549385
+  ],
+  "tiles_absorb_w": "65-83 PW (array_heat.json)",
+  "fleet_night_half_intercepts_w": 8.51e+17,
+  "heat_on_moon_per_tw_used_w_m2": 0.026362737277291787
+ }
+}
