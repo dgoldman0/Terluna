@@ -2036,6 +2036,80 @@ climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_0e_elec_leader_1kv -
 climate/gcm/.venv/bin/python -m climate.crm.elec_analysis leader
 ```
 
+### The main run
+
+`box_0e_elec_corrected` is stage 2's main run: `box_0e_elec`'s two lunar days
+again from day 0 under the lunar rules from the start (the breakdown field's
+cap lifted, WRF-ELEC's ground rule with the leader's crossing at 1 kV/m,
+leakage through the humidity-corrected conductivity column) and with NSSL's
+rain and cloud ice ventilating at their lunar fall speeds. It ran on
+2026-10-07 and 08, 27.2 hours on 6 threads with one executable throughout
+(`climate/results/crm/elec_box_0e_elec_corrected.json`). Its first attempt,
+with the old ventilation, ran to day 7 and is kept as
+`box_0e_elec_corrected_before_ventilation_fix`; the two runs' strongest
+updrafts agree within about 1 m/s day by day.
+
+The storms charged from day 7, the field reached 100 kV/m on day 9, and the
+first flash came at day 10.66. The box flashed 530 times on 12 model days,
+199 times in the first lunar day and 331 in the second, the last at day 43.8,
+none in the lunar nights. The busiest hour held 45 flashes and the median
+hour with any 4. Over the box's 148,000 km² that is 0.022 flashes per km² per
+year, about a hundredth of Earth's average (2.7).
+
+| | In cloud | Negative to ground |
+|---|---|---|
+| Flashes | 424 | 106 (20 %) |
+| Start height, median (10th–90th percentile) | 35.8 km (33.8–39.8) | 35.8 km (33.8–37.8) |
+| Charge neutralized or lowered, median (10th–90th), largest | 108 C (48–218), 703 C | 149 C (63–434), 1,025 C |
+| Energy released, median (10th–90th), largest | 86 GJ (42–185), 758 GJ | 66 GJ (23–162), 325 GJ |
+| Channels in cloud, median | 29.8–41.8 km over 144 km² | 37.8–43.8 km over 72 km² |
+
+No positive ground strike occurred. The storms held at most 7.1 kC of
+positive and 5.4 kC of negative charge and 4.2 TJ of electrostatic energy,
+and the strongest field was 226 kV/m. The original run (`box_0e_elec`, under
+its own rules) made 504 flashes, all in cloud under its 5-km rule, with a
+median 90 C and 76 GJ. Runs of the same days that differ only by chance moved
+flash counts and median charges by 10–20 % (the windows above), so differences
+of that size between the two runs say nothing of the changed rules.
+
+Hail did 87 % of the non-inductive charging. In collisions with snow it took
++221 kC and −135 kC, with cloud ice +26 and −23 kC; graupel took +34 and −18
+kC with snow and +5.5 and −4.7 kC with ice; inductive charging added +60 and
+−7 kC on graupel and +17 and −6 kC on snow. Both lunar days held the normal
+arrangement. In the outputs where the main negative region held at least 20 C
+(21 in the first lunar day, 27 in the second) it sat at a median 40–42 km
+(−13 to −14 °C), carried 90–96 % by snow, with positive charge beneath it at
+about 32 km (−4 °C) in most outputs and above it at 58–64 km (−35 to −44 °C)
+in 5 of the first lunar day's outputs and 19 of the second's.
+
+With leakage the ions held at most 24 C of positive and 34 C of negative
+charge through the lunar nights, against 1.9–5.2 kC in the original run, and
+the box ended its two lunar days with no net charge. Within six hours of a
+flash the field at the ground over land reached a median of 4.9 kV/m at its
+strongest point in each ten-step interval (25.5 kV/m at the 90th percentile,
+61.5 at most), and 0.95 kV/m where no particles reached the lowest level (9.1
+at most). The cloud ice the radiation reads was cut at 140 µm in a third of
+its mass, at a mean radius of 150 µm above the cap, so the radiation sees that
+ice 7 % optically thicker than its size gives.
+
+Beside Morrison's storms at the same site and forcing (`box_0e`, the second
+lunar day; `climate/results/crm/box_box_0e_elec_corrected.json` against
+`box_box_0e.json`), the NSSL run's air at 2 m was 1.0 °C warmer and its dew
+point 0.8 °C higher at the same humidity, and it rained 55 % more by day (0.16
+against 0.11 mm/h). Its nights were much clearer near the ground: cloud at the
+ground covered 29 % of the box's columns through the night against 56 %, and
+cloud filled 7 % of the lowest kilometre against 23 %. Above the lowest
+kilometre the two schemes' cloud agrees within a few hundredths of cover. The
+Open Moon's night fog, which the aerosol study takes from the Morrison rings,
+therefore depends on the microphysics scheme by about a factor of two.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_elec_corrected
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_0e_elec_corrected --threads 6 --hours 36
+climate/gcm/.venv/bin/python -m climate.crm.elec_analysis box_0e_elec_corrected
+climate/gcm/.venv/bin/python -m climate.crm.box_analysis box_0e_elec_corrected --from-day 29.5
+```
+
 ## The gravity pair
 
 If lunar convection were Earth's stretched six times in size and duration, a

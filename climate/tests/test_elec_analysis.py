@@ -184,3 +184,13 @@ def test_the_critical_rime_accretion_rate_is_brooks_s_above_minus_15_and_saunder
     assert rarc[0] == pytest.approx(0.1) and rarc[1] == pytest.approx(0.53) and rarc[2] == pytest.approx(1.33)
     assert rarc[3] == pytest.approx(max(sp(-20.0), 0.1)) and rarc[4] == pytest.approx(max(sp(-28.0), 0.0))
     assert rarc[5] == pytest.approx(0.1)
+
+
+def test_output_times_come_from_the_step_line_before_each_output(tmp_path):
+    log = tmp_path / 'cm1_segment_001.log'
+    log.write_text('  Terluna: something\n'
+                   '         59221            975.000000 hour\n   Entering writeout ...\n   nwrite =          326\n'
+                   '   Opening cm1out_t000326_s.dat\n'
+                   '         59296            975.166667 hour\n   Entering writeout ...\n'
+                   '   Opening cm1out_t000327_s.dat\n')
+    assert ea.output_times(tmp_path) == {326: 975.0 * 3600.0, 327: pytest.approx(975.166667 * 3600.0)}

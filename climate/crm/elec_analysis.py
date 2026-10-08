@@ -122,6 +122,25 @@ def charging(case: Path, logs: list | None = None) -> dict:
     return out
 
 
+def output_times(case: Path, logs: list | None = None) -> dict:
+    """The model time (s) of each output number, from the step line CM1 prints just before it opens that output, so
+    that a window written more often than the run it restarts from, whose numbering carries on from that run's, keeps
+    its true times."""
+    step = re.compile(r'^\s+(\d+)\s+([0-9.Ee+-]+)\s+(sec|min|hour|hrs|day)')
+    opened = re.compile(r'Opening cm1out_t(\d{6})_s\.dat')
+    out, last = {}, None
+    for log in segment_logs(case) if logs is None else logs:
+        for line in log.read_text(errors='replace').splitlines():
+            m = step.match(line)
+            if m:
+                last = float(m.group(2)) * TIME_UNITS[m.group(3)]
+                continue
+            m = opened.search(line)
+            if m and last is not None:
+                out[int(m.group(1))] = last
+    return out
+
+
 def heights_km(ctl: Path) -> np.ndarray:
     """The scalar levels of a GrADS description (km)."""
     lines = ctl.read_text().splitlines()
@@ -326,11 +345,12 @@ def analyse(name: str) -> dict:
                               peak_c_s=float(np.nanmax(np.abs(r))),
                               per_bin_c=binned(rates['time_s'], (r[:, 1] - r[:, 0]) * dt, edges))
     snaps = sorted(int(p.name[8:14]) for p in case.glob('cm1out_t*_s.dat'))
+    times = output_times(case)
     structures = []
     for n in snaps:
         s = snapshot_charge(case, n, dx, dy, zw)
         st = structure(s, zh)
-        st.update(time_s=(n - 1) * cfg['output_s'], w_max_m_s=float(np.nanmax(s['w'])) if s['w'] is not None else None,
+        st.update(time_s=times.get(n, (n - 1) * cfg['output_s']), w_max_m_s=float(np.nanmax(s['w'])) if s['w'] is not None else None,
                   dbz_max=float(np.nanmax(s['dbz'])) if s['dbz'] is not None else None, **ion_charge(s, zh))
         structures.append(st)
     return dict(
@@ -458,9 +478,10 @@ def window(name: str, t0: float, t1: float) -> dict:
     ground = ground_summary({k: v[inside(g['time_s'])] for k, v in g.items()})
 
     output_s = cfg['output_s'] * record.get('time_scale', 1.0)
+    times = output_times(case, [case / seg['log'] for seg in segments if (case / seg['log']).exists()])
     snapshots = []
     for n in sorted(int(p.name[8:14]) for p in case.glob('cm1out_t*_s.dat')):
-        t = (n - 1) * output_s
+        t = times.get(n, (n - 1) * output_s)
         if not t0 < t <= t1:
             continue
         s = snapshot_charge(case, n, dx, dy, zw)

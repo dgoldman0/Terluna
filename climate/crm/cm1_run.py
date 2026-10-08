@@ -1222,6 +1222,20 @@ CASES['box_0e_elec_corrected'] = dict(
     purpose=CASES['box_0e']['purpose'] + ', with the NSSL microphysics and WRF-ELEC\'s charging and branched lightning '
             'under the lunar rules of 2026-10-05: the breakdown field\'s cap lifted, the leader\'s crossing to the '
             'ground and leakage')
+# Windows of the main run's stormy days with output every ten minutes, to follow each storm's life: the first lunar
+# day's busiest storms (days 11.5-13.0, 130 of its 199 flashes) and the second's (days 40.5-42.0, the days the earlier
+# windows ran), from box_0e_elec_corrected's twelve-hourly restarts under its own settings. CM1 on several threads
+# makes each a new realization of those days.
+CASES['box_0e_elec_corrected_storms_first'] = dict(
+    CASES['box_0e_elec_corrected'], inputs_from=None, restart_from=dict(case='box_0e_elec_corrected', day=11.5),
+    days=13.0, output_s=600.0,
+    purpose=CASES['box_0e_elec_corrected']['purpose'] + '; its first lunar day\'s busiest storms again from its day-11.5 '
+            'restart with output every ten minutes')
+CASES['box_0e_elec_corrected_storms_second'] = dict(
+    CASES['box_0e_elec_corrected'], inputs_from=None, restart_from=dict(case='box_0e_elec_corrected', day=40.5),
+    days=42.0, output_s=600.0,
+    purpose=CASES['box_0e_elec_corrected']['purpose'] + '; its second lunar day\'s busiest storms again from its '
+            'day-40.5 restart with output every ten minutes')
 # The fine box (stage 2): box_0e_elec's site at a third of its spacing (2.0 km) over a box a third as wide (128 km, the
 # same 64 by 64 columns), started from box_0e_elec's air averaged over its columns and its mean skin temperature at a
 # day of its run a few hours before a stormy window (day 10.75, four hours before box_0e_elec's first flash), under
@@ -2068,6 +2082,8 @@ def setup_restart(name: str, cfg: dict) -> Path:
     for f in files + ([ez] if ez.exists() else []):
         shutil.copy2(f, case / f.name)
     text = (source / 'namelist.template').read_text()
+    if abs(cfg['output_s'] - src['configuration']['output_s']) > 0.5:   # a window may write output more often;
+        text = set_namelist(text, 'param1', 'tapfrq', cfg['output_s'] * scale)   # CM1 resets its schedule on restart
     electricity = None
     if cfg.get('elec') is not None:
         for section, entries in cm1_elec.namelist_settings(cfg['elec']).items():

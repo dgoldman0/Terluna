@@ -340,8 +340,23 @@ Morrison's do.
    its Earth checks lean high, by up to two to three times), charge relaxing in
    about an hour, 2–4 % of that in fog, and 80–160 cloud nuclei
    per cm³ at 0.3 % supersaturation by day, about the storm runs' 100.
-10. Windows of `box_0e_elec`'s second lunar day run again from its restarts with
-   output every few minutes, to follow each storm's life.
+10. The main run (`box_0e_elec_corrected`; climate/crm README, "The main run";
+   2026-10-07 and 08): the two lunar days again from day 0 under every lunar rule
+   and with NSSL's rain and cloud ice ventilating at their lunar fall speeds. The
+   storms flashed 530 times on 12 model days, none in the lunar nights, 0.022
+   flashes per km² per year, about a hundredth of Earth's average; 106 of them
+   (20 %) were negative ground strikes and none positive. In-cloud flashes
+   started at a median 35.8 km and neutralized 108 C (48–218 C, 10th to 90th
+   percentile) and released 86 GJ; ground strikes lowered 149 C (63–434 C, up
+   to 1,025 C) and released 66 GJ. Hail did 87 % of the charging, and the storms
+   held the normal arrangement: the main negative charge at 40–42 km (−13 to
+   −14 °C), carried 90–96 % by snow, with positive charge beneath at about 32 km
+   (−4 °C) and above at 58–64 km. Leakage kept the leftover charge under 35 C
+   through the nights. Beside Morrison's storms at the same site the NSSL run was
+   1 °C warmer at 2 m, rained 55 % more by day and had half the night fog.
+11. Windows of the main run's busiest days, run again from its restarts with
+   output every ten minutes to follow each storm's life (days 11.5–13.0 and
+   40.5–42.0; run on 2026-10-08).
 
 It gives the storms' charge structure, the field by height, flash rates and
 types (within cloud and to ground), flash extent, the charge each flash moves
@@ -350,43 +365,56 @@ and the nitrogen oxides it makes.
 ### Thunder
 
 [thunder.py](thunder.py) ([results/thunder.json](results/thunder.json),
-2026-10-05) traces thunder from the 465 flashes the box made with the cap lifted
-(its second lunar day and the first lunar day's rerun) to the ground, through the
-box's own air at the hours that flashed and in the design air's composition, in
-eight directions ([atmosphere/electricity/thunder.py](../../../atmosphere/electricity/thunder.py)).
+2026-10-08) traces thunder from the main run's 530 flashes to the ground,
+through the box's own air at the hours that flashed and in the design air's
+composition, in eight directions
+([atmosphere/electricity/thunder.py](../../../atmosphere/electricity/thunder.py)).
 A flash's sound is 0.18 % of the electrostatic energy it releases (Holmes et
 al. 1971; tried at a tenth and ten times that), spread along its channel, in a
-spectrum peaked at Few's (1969) frequency.
+spectrum peaked at Few's (1969) frequency. A ground strike's channel runs on
+from its lowest point in cloud down to the ground, which the flash log does not
+draw, and takes its share of the energy there. (The thunder first traced on
+2026-10-05 took the original run's flashes, all in cloud; its typical flash
+matches the typical flash in cloud here within a decibel.)
 
-A typical flash (78 GJ, its channel 30–42 km up) peaks at 27 Hz, a
-large one (the top tenth by energy, 232 GJ, 30–54 km) at 19 Hz. Directly
-below, its thunder arrives 87 s after the flash and lasts about 35 s (69 s for
-the large flash): 89 dB at 31.5 Hz and 85 dB at 63 Hz in its loudest second,
-62–64 dBA, a deep rumble with almost nothing above 250 Hz. Across all 465 flashes it
-reaches 56–68 dBA there (10th to 90th percentile). Eastward it falls to 57 dBA
-at 25 km, 50 at 50 km, 42 at 100 km and 31 at 200 km; in the other directions
-the silent zone begins before 200 km. The air cools only 1.0 K per
-km over the lowest 30 km, so sound bends upward gently, and the silent zone
-beyond the ray that grazes the ground starts 175–225 km out; the box's weak
-eastward wind (up to 7 m/s aloft) carries it about 30 km farther east than
-west. Within that edge the thunder stays above the threshold of hearing; the
-edge, not the flash's strength, sets the range. It stays above an ordinary
-daytime background of 45 dBA to 54–113 km (median 80 km), and at a tenth or ten
-times the acoustic share to about 30 or about 180 km.
+A typical flash in cloud (86 GJ, its channel 30–42 km up) peaks at 27 Hz, a
+large one (the top tenth by energy, 185 GJ, 26–48 km) at 23 Hz. Directly
+below, its thunder arrives 87 s after the flash and lasts about 35 s (62 s for
+the large flash): 89–91 dB at 31.5 Hz and 86–87 dB at 63 Hz in its loudest
+second, 63–64 dBA, a deep rumble with almost nothing above 250 Hz. Across the
+424 flashes in cloud it reaches 60–68 dBA there (10th to 90th percentile). It
+falls to 57 dBA at 25 km, 51 at 50 km and 43 at 100 km.
+
+A ground strike is far louder near it. The typical one (66 GJ, the channel from
+44 km to the ground) peaks at 53 Hz; at the strike its thunder begins within 2
+s and lasts 27 s, at 103 dB at 31.5 Hz and 107 dB at 63 Hz in its loudest
+second, 95 dBA (93–97 dBA across the 106 strikes), the large one (162 GJ)
+97 dBA. It falls to 75 dBA at 11 km, 66 at 25 km, 56 at 50 km and 43 at
+100 km.
+
+The air cools only 1.0 K per km over the lowest 30 km, so sound bends upward
+gently, and the silent zone beyond the ray that grazes the ground starts
+175–220 km out; the box's weak eastward wind (up to 7 m/s aloft) carries it
+about 30 km farther east than west. Within that edge the thunder stays above
+the threshold of hearing; the edge, not the flash's strength, sets the range.
+It stays above an ordinary daytime background of 45 dBA to 65–110 km for
+flashes in cloud (median 82 km) and 69–113 km for ground strikes (median 93
+km), and at a tenth or ten times the acoustic share the typical flash in cloud
+to 31 or 193 km.
 
 The same calculation for Earth's benchmark flash (1.2 GJ over 4.75–10.75 km)
 in the US standard atmosphere puts its thunder at 76.5 dBA directly below,
-arriving after 15 s and lasting 17 s, audible to 41 km and above 45 dBA to
-31 km, where thunder on Earth is seldom heard beyond 15–25 km. The calculation
-leaves out wind gusts and turbulence near the ground, soft ground and the
-storm's own noise, so its ranges run long by a similar factor on the Moon,
-which would put lunar thunder above a daytime background to roughly 50 km and
-audible in quiet to 100–150 km. Under the storm itself lunar thunder is about
-14 dB quieter on the A-weighted scale than Earth's, being four to five times
-farther overhead, but it is far deeper and longer, and it carries several times
-as far. Thirteen of the flashes, starting at 50–68 km on the second lunar day,
-logged no channel though they neutralized 5–72 C; they are placed at their
-starting points, and why the log missed their channels is not yet traced.
+arriving after 15 s and lasting 17 s, and the same flash as a ground strike at
+88 dBA, both audible to 41 km and above 45 dBA to 27–31 km, where thunder on
+Earth is seldom heard beyond 15–25 km. The calculation leaves out wind gusts
+and turbulence near the ground, soft ground and the storm's own noise, so its
+ranges run long by a similar factor on the Moon, which would put lunar thunder
+above a daytime background to roughly 40–50 km and audible in quiet to 100–150
+km. Under a storm, lunar thunder from flashes in cloud is about 13 dB quieter
+on the A-weighted scale than Earth's, being four to five times farther
+overhead, and far deeper and longer; near a lunar ground strike it is about 7
+dB louder than near Earth's benchmark strike, its channel carrying some 17
+times the energy per metre, at a third of the pitch.
 
 ## Stage 3: the global circuit and transient luminous events
 

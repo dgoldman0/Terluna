@@ -4,17 +4,18 @@
 
 writes results/thunder.json beside this file.
 
-The flashes are box_0e_elec's with the breakdown field's cap lifted: its second lunar day (after day 18) and the first
-lunar day run again without the cap (box_0e_elec_uncapped). Each releases the electrostatic energy its log gives, a
-share of which becomes sound (Holmes et al. 1971: 0.18 %, with a tenth and ten times that as bounds), spread evenly
-over its channel from its lowest to its highest point (at its starting point where the log gives no channel), as
-point sources a kilometre apart, in a spectrum peaked at
+The flashes are stage 2's main run's (box_0e_elec_corrected, two lunar days under the lunar rules). Each releases the
+electrostatic energy its log gives, a share of which becomes sound (Holmes et al. 1971: 0.18 %, with a tenth and ten
+times that as bounds), spread evenly over its channel from its lowest to its highest point (at its starting point where
+the log gives no channel), as point sources a kilometre apart; a ground strike's channel runs on from its lowest point
+in cloud down to the ground, which the log does not draw, and takes its share of the energy there. The spectrum peaks
+at
 Few's frequency for the energy per metre of a channel as long as its height span plus the square root of its area.
 The air is the box's own, averaged over the box and over its three-hourly outputs at the hours that flashed:
 temperature, pressure, vapour and wind by height, in the design air's composition. atmosphere/electricity/thunder.py
 traces the rays in eight directions and gathers the sound at the ground. Earth's benchmark flash (supercell_elec's
-median: 1.2 GJ over 4.75-10.75 km and 27 km2) in the US standard atmosphere checks the method against the 15-25 km
-over which thunder is heard on Earth.
+median: 1.2 GJ over 4.75-10.75 km and 27 km2), in cloud and as a ground strike, in the US standard atmosphere checks
+the method against the 15-25 km over which thunder is heard on Earth.
 """
 from __future__ import annotations
 
@@ -35,7 +36,7 @@ RESULTS = HERE / 'results'
 SCHEMA = 'terluna.research.atmospheric-electricity-thunder/1'
 RUNS = ra.RUNS
 GCM_PROGRESS = ROOT / 'climate' / 'gcm' / 'runs' / 'A28_dim5_moon' / 'progress.json'
-FLASH_SETS = (('box_0e_elec', 18.0 * 86400.0, None), ('box_0e_elec_uncapped', 10.5 * 86400.0, 14.5 * 86400.0))
+FLASH_SETS = (('box_0e_elec_corrected', 0.0, None),)
 EFFICIENCY = (th.HOLMES_EFFICIENCY, 0.1 * th.HOLMES_EFFICIENCY, 10.0 * th.HOLMES_EFFICIENCY)
 AZIMUTHS = tuple(range(0, 360, 45))
 DZ = 250.0
@@ -44,24 +45,27 @@ N_RAYS = 7201
 X_EDGES = np.arange(0.0, 400001.0, 2000.0)
 QUIET_DBA = (30.0, 45.0)                    # a quiet countryside night, an ordinary daytime background
 EARTH_FLASH = dict(energy_j=1.2e9, z_low_m=4750.0, z_high_m=10750.0, extent_m2=27.0e6)
+EARTH_GROUND_FLASH = dict(EARTH_FLASH, z_low_m=0.0)       # the same flash, its channel run down to the ground
 
 
 def flashes() -> dict:
-    """The cap-lifted flashes: energy released (J), channel bottom and top (m), extent (m2) and start height (m)."""
+    """The flashes: energy released (J), channel bottom and top (m), extent (m2), start height (m) and whether they
+    strike the ground, whose channel then reaches it."""
     rows = []
     for case, t0, t1 in FLASH_SETS:
         f = ea.read_log(RUNS / case / 'terluna_flashes.txt', ea.FLASH_COLUMNS)
         sel = (f['time_s'] >= t0) & ((f['time_s'] <= t1) if t1 else True)
         for k in np.nonzero(sel)[0]:
             rows.append((case, f['time_s'][k], f['energy_before_j'][k] - f['energy_after_j'][k], f['z_low_m'][k],
-                         f['z_high_m'][k], f['extent_m2'][k], f['z_m'][k]))
-    cases, t, e, lo, hi, ext, z0 = zip(*rows)
-    lo, hi, z0 = np.array(lo), np.array(hi), np.array(z0)
+                         f['z_high_m'][k], f['extent_m2'][k], f['z_m'][k], f['kind'][k] in (2, 3)))
+    cases, t, e, lo, hi, ext, z0, ground = zip(*rows)
+    lo, hi, z0, ground = np.array(lo), np.array(hi), np.array(z0), np.array(ground)
     unrecorded = lo < 0.0                                     # a flash whose channel the log does not give (-1)
     lo = np.where(unrecorded, z0, lo)
     hi = np.where(unrecorded, z0, hi)
+    lo = np.where(ground, 0.0, lo)                            # a ground strike's channel reaches the ground
     return dict(case=np.array(cases), time_s=np.array(t), energy_j=np.array(e), z_low_m=lo, z_high_m=hi,
-                extent_m2=np.array(ext), z_start_m=z0, unrecorded=unrecorded)
+                extent_m2=np.array(ext), z_start_m=z0, unrecorded=unrecorded, ground=ground)
 
 
 def air_composition() -> dict:
@@ -163,18 +167,26 @@ def main(argv=None) -> int:
     air = air_composition()
     atm, used, spread = box_air(f, air)
     q = lambda a, p: float(np.percentile(a, p))
-    typical = dict(energy_j=q(f['energy_j'], 50), z_low_m=q(f['z_low_m'], 50), z_high_m=q(f['z_high_m'], 50),
-                   extent_m2=q(f['extent_m2'], 50))
-    big = f['energy_j'] >= q(f['energy_j'], 90)
-    large = dict(energy_j=q(f['energy_j'], 90), z_low_m=q(f['z_low_m'][big], 50), z_high_m=q(f['z_high_m'][big], 50),
-                 extent_m2=q(f['extent_m2'][big], 50))
+
+    def kinds(sel):
+        """The typical flash of a kind (its medians) and its large one (the top tenth by energy)."""
+        typical = dict(energy_j=q(f['energy_j'][sel], 50), z_low_m=q(f['z_low_m'][sel], 50),
+                       z_high_m=q(f['z_high_m'][sel], 50), extent_m2=q(f['extent_m2'][sel], 50))
+        big = sel & (f['energy_j'] >= q(f['energy_j'][sel], 90))
+        large = dict(energy_j=q(f['energy_j'][sel], 90), z_low_m=q(f['z_low_m'][big], 50),
+                     z_high_m=q(f['z_high_m'][big], 50), extent_m2=q(f['extent_m2'][big], 50))
+        return typical, large
+    typical, large = kinds(~f['ground'])
+    named = {'typical': typical, 'large': large}
+    if f['ground'].any():
+        named['ground_typical'], named['ground_large'] = kinds(f['ground'])
     heights = sorted({float(z) for lo, hi in zip(f['z_low_m'], f['z_high_m']) for z in sources(atm, lo, hi)})
     out = {}
     per_flash = {}
     for az in AZIMUTHS:
         traces = {z: th.trace(atm, z, azimuth_deg=az, n_rays=N_RAYS) for z in heights}
         print(f'azimuth {az}: {len(heights)} source heights traced', flush=True)
-        for name, fl in (('typical', typical), ('large', large)):
+        for name, fl in named.items():
             for eff in EFFICIENCY:
                 key = f'{name}_eff{eff:g}'
                 lv = hear(atm, traces, fl['energy_j'], fl['z_low_m'], fl['z_high_m'], fl['extent_m2'], eff)
@@ -188,18 +200,26 @@ def main(argv=None) -> int:
                            float(lv['peak_dba'][0])))
         per_flash[str(az)] = np.array(ranges)
     stack = np.array([per_flash[str(az)] for az in AZIMUTHS])           # azimuth, flash, measure
-    flash_ranges = {name: {p: round(float(np.percentile(stack[:, :, i].mean(axis=0), p)) / 1e3, 1) for p in (10, 50, 90)}
-                    for i, name in enumerate(('audible_km', 'above_30_dba_km', 'above_45_dba_km'))}
-    flash_ranges['below_peak_dba'] = {p: round(float(np.percentile(stack[:, :, 3].mean(axis=0), p)), 1) for p in (10, 50, 90)}
+    def ranges(sel):
+        mean = stack[:, sel, :].mean(axis=0)
+        out = {name: {p: round(float(np.percentile(mean[:, i], p)) / 1e3, 1) for p in (10, 50, 90)}
+               for i, name in enumerate(('audible_km', 'above_30_dba_km', 'above_45_dba_km'))}
+        out['below_peak_dba'] = {p: round(float(np.percentile(mean[:, 3], p)), 1) for p in (10, 50, 90)}
+        return out
+    flash_ranges = ranges(~f['ground'])
+    ground_ranges = ranges(f['ground']) if f['ground'].any() else None
 
     earth = earth_air()
-    e_heights = [float(z) for z in sources(earth, EARTH_FLASH['z_low_m'], EARTH_FLASH['z_high_m'])]
+    e_heights = [float(z) for z in sources(earth, EARTH_GROUND_FLASH['z_low_m'], EARTH_GROUND_FLASH['z_high_m'])]
     e_traces = {z: th.trace(earth, z, n_rays=N_RAYS) for z in e_heights}
-    earth_out = {str(eff): summary(hear(earth, e_traces, EARTH_FLASH['energy_j'], EARTH_FLASH['z_low_m'],
-                                        EARTH_FLASH['z_high_m'], EARTH_FLASH['extent_m2'], eff),
-                                   peak_frequency(earth, EARTH_FLASH['energy_j'], EARTH_FLASH['z_low_m'],
-                                                  EARTH_FLASH['z_high_m'], EARTH_FLASH['extent_m2']))
-                 for eff in EFFICIENCY}
+    earth_runs = {}
+    for name, fl in (('in_cloud', EARTH_FLASH), ('ground', EARTH_GROUND_FLASH)):
+        earth_runs[name] = {str(eff): summary(hear(earth, e_traces, fl['energy_j'], fl['z_low_m'], fl['z_high_m'],
+                                                   fl['extent_m2'], eff),
+                                              peak_frequency(earth, fl['energy_j'], fl['z_low_m'], fl['z_high_m'],
+                                                             fl['extent_m2']))
+                            for eff in EFFICIENCY}
+    earth_out = earth_runs['in_cloud']
 
     digest = lambda p: hashlib.sha256(Path(p).read_bytes()).hexdigest()[:16]
     result = dict(
@@ -208,7 +228,8 @@ def main(argv=None) -> int:
             'thunder.py': digest(__file__), 'atmosphere/electricity/thunder.py': digest(th.__file__)}),
         evidence=('Geometric acoustics through the lunar box\'s mean air at the hours that flashed (horizontally '
                   'uniform, with its mean wind), ISO 9613-1 absorption, a hard flat ground, and flashes whose sound is '
-                  'a fixed share of their electrostatic energy spread evenly along a vertical channel. Not a model of '
+                  'a fixed share of their electrostatic energy spread evenly along a vertical channel, a ground strike\'s '
+                  'run down to the ground. Not a model of '
                   'thunder\'s generation: the acoustic share is uncertain by at least ten times either way, storms\' '
                   'own winds and cold pools near the ground are left out, and geometric acoustics fails near caustics '
                   'and at grazing angles.'),
@@ -219,11 +240,15 @@ def main(argv=None) -> int:
                       'quiet countryside night and an ordinary daytime background. first_s is the delay after the flash; '
                       'span_s holds 90 % of the audible sound energy. Directions are azimuths clockwise from north.'),
         inputs=dict(flashes={case: int((f['case'] == case).sum()) for case in np.unique(f['case'])},
+                    ground_strikes=int(f['ground'].sum()),
                     flashes_without_a_channel_placed_at_their_start=int(f['unrecorded'].sum()),
                     profile_outputs=used, profile_spread=spread, air=air,
                     acoustic_efficiency=dict(central=th.HOLMES_EFFICIENCY, bounds=EFFICIENCY[1:])),
         typical_flash=typical, large_flash=large, lunar=out, flash_ranges_mean_over_directions=flash_ranges,
+        ground_strikes=dict(typical=named.get('ground_typical'), large=named.get('ground_large'),
+                            ranges_mean_over_directions=ground_ranges),
         earth_benchmark_flash=dict(flash=EARTH_FLASH, results=earth_out),
+        earth_benchmark_ground_strike=dict(flash=EARTH_GROUND_FLASH, results=earth_runs['ground']),
         lapse_k_per_km=dict(lunar_0_30_km=round(float((atm.t[0] - np.interp(30000.0, atm.z, atm.t)) / 30.0), 2)))
     RESULTS.mkdir(exist_ok=True)
     (RESULTS / 'thunder.json').write_text(json.dumps(finite(result), indent=1, allow_nan=False) + '\n')
