@@ -557,6 +557,13 @@ steering, then bundles on the frozen orbit. The screen covers nested rings that
 never cross, the service fraction and inventory, the recurring corrections, and
 handovers within the averaged UV budget.
 
+**Closing (8 October).** The author made the outer rings' radius profile, the
+second of the integrated comparison's next steps, the closing step of this
+work. The keeping in the regressing frame with the edge rings treated, the
+along-track keeping and the momentum store and trim as hardware are parked
+after it, and the branch's merge into main waits on a joint integration with
+the other branches ([integrated_comparison.md](integrated_comparison.md#next-steps)).
+
 **Stage 4, the zoned aperture and collection, in parallel.** The held
 screen's holding power with a zoned aperture is computed above (6 October).
 The remaining parts are these. The protection domain supplies the annulus

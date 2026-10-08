@@ -798,6 +798,16 @@ The author set this order on 7 October:
    tile within its overlap.
 4. The momentum store and the trim as hardware, and their power.
 
+**Closing this work (8 October).** The author made the outer rings, item 2, the
+closing step: once their radius profile has flown a year against steering by
+roll, every gate has a first answer for the ring fleet. One consolidated summary
+then goes into this comparison and the research status, and the rest is parked:
+items 3 and 4, and the items that wait on what this machine lacks, namely a
+plasma model of the ring fleet's wake and of a weak dipole, the closure
+trajectories the magnetic comparison needs for its rerun, and the held screen's
+two literature checks below. The branch's merge into main waits until the other
+branches are ready for a joint integration.
+
 Noted by the author for later study (7 October): the ring fleet could extend its
 protected radius by more active control as the solar weather requires,
 spending more energy and propellant while it does; it need not hold its
@@ -818,10 +828,11 @@ electric thrust a few hundred megatonnes of exhaust a year, which S7 counts.
 
 For solar maxima the author keeps one dynamic option in view (8 October):
 covering failed cells faster through the maximum years, the swarm's tight level,
-with spare tiles and servicing ready across the fleet. At cycle 21's maximum it
-brings the warmest titania case from 8.4 to 2.5 kg/s, and it keeps cycle 19's
-year below the heat at which, in the screening model, that case's air passes the
-shadow's edge and holds itself swollen after the Sun quiets
+with spare tiles and servicing ready across the fleet. With the thermal
+column's infrared cooling the standard level already keeps every maximum on
+record below the heat at which, in the screening model, the air passes the
+shadow's edge and holds itself swollen after the Sun quiets, and at cycle 21's
+maximum the tight level brings the warmest titania case from 1.5 to 1.4 kg/s
 ([the loss response](../../../atmosphere/loss_response/README.md)).
 
 For the held screen, the literature can settle two conditions first: how close
