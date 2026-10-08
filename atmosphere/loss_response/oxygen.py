@@ -577,7 +577,7 @@ def run(shield, treatment, activity, transmission, setup=Setup(), protected_R=MA
     return out
 
 
-ACTIVITIES = ('quiet', 'solar_maximum', 'solar_maximum_stress', 'cycles_23_24_mean')
+ACTIVITIES = ('quiet', 'solar_maximum', 'solar_maximum_cycle_19', 'solar_maximum_stress', 'cycles_23_24_mean')
 # Titan's measured homopause eddy diffusion, 2e7-1e8 cm^2/s since Cassini (argon: Yelle et al. 2008, JGR 113,
 # E10003; Bell et al. 2014, doi:10.1002/2014JA019781), carried to the Moon as Lindzen's mixing scales with the same waves,
 # T^(1/2) g^-2: about 0.8 for the Moon's warmer, slightly stronger-pulled thermosphere, so 1.5e7-8e7 against the

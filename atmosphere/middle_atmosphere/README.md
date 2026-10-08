@@ -364,10 +364,11 @@ the range across them.
   takes 2.5: the extreme ultraviolet below 121 nm rises 1.6-2.4, Lyman-α 1.3-1.9
   and the far ultraviolet from 122 to 175 nm, which carries most of the energy,
   1.10-1.27 ([loss_response/cycle.py](../loss_response/cycle.py)). Cycle 19's
-  year of 1957-58, the strongest, gives the top of each range and is the loss
-  response's solar maximum and the solar maximum of this product's scenarios; the
-  escape model here keeps its 2.5, which the loss response carries as its stress
-  case. Through gaps
+  year of 1957-58, the strongest, gives the top of each range and is a stress
+  case. The loss response's solar maximum, and that of this product's scenarios,
+  is cycle 21's year of 1979-80, the strongest since FISM2 added the MgII and
+  Lyman-α proxies in 1978; the escape model here keeps its 2.5, which the loss
+  response carries as a second stress case. Through gaps
   the far ultraviolet and Lyman-α heat the lower thermosphere and the extreme
   ultraviolet its upper half.
 - **Where the heat lies matters as much as how much.** The thermal column

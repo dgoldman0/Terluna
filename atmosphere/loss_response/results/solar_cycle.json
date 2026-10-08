@@ -3,7 +3,7 @@
  "producer": {
   "domain": "atmosphere",
   "files": {
-   "atmosphere/loss_response/cycle.py": "33337681c0799517",
+   "atmosphere/loss_response/cycle.py": "7813588455f257c9",
    "atmosphere/loss_response/traced.py": "a3d523f256771daf",
    "atmosphere/middle_atmosphere/escape.py": "5571aa6a55a04bb3"
   },
@@ -47,8 +47,8 @@
    "whi2008_ref_solar_irradiance_ver2.dat": "270869df7761805c"
   }
  },
- "evidence": "    python -m atmosphere.loss_response.cycle      # writes results/solar_cycle.json in a few seconds R1 is a long-term average, and the loss response gives each state at quiet Sun and at solar maximum. FISM2's daily record from February 1947, integrated over each band of the limb tables (atmosphere/middle_atmosphere/ limb_inputs.json), measures each band's own cycle. Every calendar year's mean over the WHI 2008 quiet week is a measured activity: a factor on each band; Lyman-alpha's factor for the sky's glow, which is solar Lyman-alpha scattered by interplanetary hydrogen; and the energy-weighted factors on the X-rays below 10 nm and on the ultraviolet from 10 to 175 nm, which the escape model's count over the disk takes, the energy-limited bound weighting each band itself. Solar cycles 23 and 24 run from the minimum of August 1996 to that of December 2019, which the calendar years 1997-2019 span; 2020-2025 give cycle 25 as far as the record is taken. The author accepted the measured ultraviolet for the cycle average on 2026-10-07. Each solar maximum is the year around the month of its smoothed sunspot maximum (SILSO, version 2), from six months before it to five after, for cycles 19 to 25; cycle 18's year begins before the record. The loss response's solar maximum is the strongest of them, by the energy-weighted ultraviolet, taken whole: every band, the X-rays and the glow from the same year. The author chose the measured maxima, with the record taken back to 1947, on 2026-10-07, in place of the escape model's 2.5 on the ultraviolet, FISM2's mean rise of the X-rays over the last three maxima and 1.5 on the glow, which the loss response keeps as its stress case. The strongest 27 days, a solar rotation, and the mean spectrum of cycles 19 to 24 are kept for reference. Each year is taken as a steady state. The upper air's slowest layers take years to respond and its highest days, so the mean of the yearly states' losses leans high against a column that follows the cycle, and the state of the whole span's mean spectrum, with no swing at all, gives the low end. FISM2 is a model of the measured irradiance (Chamberlin et al. 2020); before 2002 it rests on proxies of solar activity, and before 1978 on the 10.7 cm radio flux alone, so the spectra of cycles 19 to 21 are the least certain. ",
- "reading_rule": "Factors are irradiance over the mean of the WHI 2008 quiet week (10-16 April 2008), per band of bands_nm. An activity's \"bands\" weight the limb tables' band heats and the photon fluxes of the exosphere step; \"glow\" scales the sky's Lyman-alpha glow; \"xray\" and \"uv\" are energy-weighted over the bands below and above 10 nm. A span's years are steady states whose mean loss leans high; its mean spectrum gives the low end. maxima are the years around each cycle's sunspot maximum; solar_maximum, the strongest of them whole, is the loss response's solar maximum. convention holds the escape model's factors, the loss response's stress case.",
+ "evidence": "    python -m atmosphere.loss_response.cycle      # writes results/solar_cycle.json in a few seconds R1 is a long-term average, and the loss response gives each state at quiet Sun and at solar maximum. FISM2's daily record from February 1947, integrated over each band of the limb tables (atmosphere/middle_atmosphere/ limb_inputs.json), measures each band's own cycle. Every calendar year's mean over the WHI 2008 quiet week is a measured activity: a factor on each band; Lyman-alpha's factor for the sky's glow, which is solar Lyman-alpha scattered by interplanetary hydrogen; and the energy-weighted factors on the X-rays below 10 nm and on the ultraviolet from 10 to 175 nm, which the escape model's count over the disk takes, the energy-limited bound weighting each band itself. Solar cycles 23 and 24 run from the minimum of August 1996 to that of December 2019, which the calendar years 1997-2019 span; 2020-2025 give cycle 25 as far as the record is taken. The author accepted the measured ultraviolet for the cycle average on 2026-10-07. Each solar maximum is the year around the month of its smoothed sunspot maximum (SILSO, version 2), from six months before it to five after, for cycles 19 to 25; cycle 18's year begins before the record. The loss response's solar maximum is the strongest of those from 1978 on, when FISM2 adds the MgII core-to-wing ratio and Lyman-alpha to the 10.7 cm radio flux, by the energy-weighted ultraviolet and taken whole: every band, the X-rays and the glow from the same year, cycle 21's of 1979-80. The strongest of the whole record, cycle 19's of 1957-58, is a stress case, beside the escape model's 2.5 on the ultraviolet, FISM2's mean rise of the X-rays over the last three maxima and 1.5 on the glow. The author chose the measured maxima, with the record taken back to 1947, and cycle 19 as a further stress case on 2026-10-07. The strongest 27 days, a solar rotation, and the mean spectrum of cycles 19 to 24 are kept for reference. Each year is taken as a steady state. The upper air's slowest layers take years to respond and its highest days, so the mean of the yearly states' losses leans high against a column that follows the cycle, and the state of the whole span's mean spectrum, with no swing at all, gives the low end. FISM2 is a model of the measured irradiance (Chamberlin et al. 2020); before 2002 it rests on proxies of solar activity, and before 1978 on the 10.7 cm radio flux alone, so the spectra of cycles 19 to 21 are the least certain. ",
+ "reading_rule": "Factors are irradiance over the mean of the WHI 2008 quiet week (10-16 April 2008), per band of bands_nm. An activity's \"bands\" weight the limb tables' band heats and the photon fluxes of the exosphere step; \"glow\" scales the sky's Lyman-alpha glow; \"xray\" and \"uv\" are energy-weighted over the bands below and above 10 nm. A span's years are steady states whose mean loss leans high; its mean spectrum gives the low end. maxima are the years around each cycle's sunspot maximum; solar_maximum, the strongest of them from 1978 on and whole, is the loss response's solar maximum, and record_maximum, the strongest of the record, a stress case. convention holds the escape model's factors, the loss response's stress case.",
  "bands_nm": [
   0.0,
   0.5,
@@ -287,6 +287,33 @@
  },
  "solar_maximum": {
   "label": "solar_maximum",
+  "start": "1979-06-01",
+  "end": "1980-05-31",
+  "days": 366,
+  "bands": [
+   82.10898364691218,
+   23.484835180802396,
+   19.95515688218379,
+   10.523386191201192,
+   4.433154666380095,
+   3.1112019776584265,
+   1.9208149828879522,
+   1.5444904338432068,
+   1.6344834597334326,
+   1.4813000015229485,
+   1.5460597773648068,
+   1.368327967905308,
+   1.3059772277068709,
+   1.2202253939541177,
+   1.1297925122380073
+  ],
+  "glow": 1.5460597773648068,
+  "xray": 7.324192895945584,
+  "uv": 1.4257099021926245,
+  "cycle": "cycle_21"
+ },
+ "record_maximum": {
+  "label": "solar_maximum_cycle_19",
   "start": "1957-09-01",
   "end": "1958-08-31",
   "days": 365,

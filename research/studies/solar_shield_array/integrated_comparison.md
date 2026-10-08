@@ -680,20 +680,21 @@ cycle unless stated; cycle times are the atmosphere's mass over the loss.
   ultraviolet from 122 to 175 nm, most of the energy, rises only 1.07–1.59.
   The glow's Lyman-α and the shortest light rise more than it took: 1.31–1.88
   against 1.5, and below 10 nm 4.6–9.6 against 6.0.
-- **The measured solar maximum is harsher than the escape model's for the
-  warmest air.** On 7 October the author had the solar-maximum columns take
-  FISM2's measured maxima, the record taken back to 1947: the year around cycle
-  19's maximum of 1958, the strongest on record, whole, with the escape model's
-  2.5 kept as a stress case. Its weaker far ultraviolet leaves the cooler
-  titania cases losing about what the stress case gives, 0.78–1.3 kg/s at the
-  standard level without magnets. Its stronger glow, light below 50 nm and
-  X-rays run the warmest case away at the standard level, its heating reaching
-  past the 4-radius shadow (at 6 lunar radii it loses 7.7 kg/s, 3.6 with the
-  magnets), and the 200-nm edge at the tight level. Before 1978 FISM2 rests on
-  the 10.7 cm radio flux alone, so that year's spectrum is the least certain;
-  the satellite era's strongest maxima, cycles 21 and 22, rise 1.42–1.43 in the
-  ultraviolet and 1.55 in the glow. R1's cycle mean, over cycles 23 and 24, is
-  unchanged.
+- **The measured solar maximum is milder than the escape model's, and cycle
+  19's year harsher.** On 7 October the author had the solar-maximum columns
+  take FISM2's measured maxima, the record taken back to 1947: the year around
+  cycle 21's maximum of 1979–80, the strongest since FISM2 gained its MgII and
+  Lyman-α proxies in 1978, with cycle 19's year, the strongest on record, and
+  the escape model's 2.5 as stress cases. At cycle 21's maximum the warmest
+  titania case loses 8.4 kg/s at the standard level without magnets (12 billion
+  years) and 3.5 kg/s with them (28 billion), against the 2.5's 26 and 15; the
+  cooler cases lose 0.73–1.1 kg/s. Cycle 19's stronger glow, light below 50 nm
+  and X-rays run the warmest case away at the standard level, its heating
+  reaching past the 4-radius shadow (at 6 lunar radii it loses 7.7 kg/s, 3.6
+  with the magnets); before 1978 FISM2 rests on the 10.7 cm radio flux alone.
+  The 200-nm edge runs away at the standard level at every maximum, and in
+  cycle 19's year at the tight level too. R1's cycle mean, over cycles 23 and
+  24, is unchanged.
 - **Placed where the tracing puts it, the heat warms the upper air far less.**
   The sky's glow, half or more of the heat at the swarm's levels, is absorbed
   within a few e-folds of pressure above the base, and the far ultraviolet
@@ -704,13 +705,13 @@ cycle unless stated; cycle times are the atmosphere's mass over the loss.
   magnetosphere (144 to 101 billion years), almost all of it the solar wind's
   charge exchange and sputtering; with all near-infrared heating it is
   3.1–3.5 kg/s (32 to 28 billion years), 7.9 kg/s in its worst year. At solar
-  maximum that case runs away; the stress case gives it 26 kg/s, and with larger
-  holes a runaway.
+  maximum it loses 8.4 kg/s; in cycle 19's year it runs away, and the escape
+  model's 2.5 gives it 26 kg/s.
 - **For 1 kg/s the solar wind decides.** The September magnets bring every case
   under 1 kg/s: 10⁻⁵–0.003 kg/s in the cooler cases and 0.75–0.95 kg/s with all
   near-infrared heating (131 to 104 billion years). A dipole of about
-  3×10¹⁹ A·m² holds the exosphere of all but the warmest at solar maximum,
-  which runs away, to 1 kg/s, and the three coolest need none for that.
+  2–3×10¹⁹ A·m² holds the exosphere of all but the warmest at solar maximum to
+  1 kg/s, and the three coolest need none for that.
 - **The ring fleet's screen may shelter the Moon from part of the solar
   wind.** The screen absorbs the wind that strikes it, and the wind closes in
   behind an absorbing screen over about eight of its radii. The ring fleet's
@@ -768,7 +769,9 @@ The author set this order on 7 October:
    Before the outer rings, the author then had the upper air's warmth settled
    further: the solar-cycle mean and the heat placed where the tracing puts it
    were carried through the loss chain the same day, and they leave the near-
-   infrared heating of CO2 little to decide (above).
+   infrared heating of CO2 little to decide (above). Atomic oxygen's escape, the
+   measured solar maxima from 1947 and the upper air's mixing by gravity waves
+   followed the same day.
 2. The outer rings: a radius profile that keeps each tilt turning with the
    Sun, with radius steps that grow toward the edges, flown for a year against
    steering by roll with the larger store.
@@ -776,6 +779,14 @@ The author set this order on 7 October:
    bundle with centred filters, and the along-track keeping that holds each
    tile within its overlap.
 4. The momentum store and the trim as hardware, and their power.
+
+Noted by the author for later study (7 October): the ring fleet can widen its
+protected radius with the solar weather, spending more energy and propellant
+while it does, since its formation is already dynamic; it need not hold its
+widest radius all the time. At cycle 21's maximum 5.4 lunar radii hold the
+warmest titania case's exosphere to 1 kg/s with the September magnets; in cycle
+19's year that case needs about 5 lunar radii to cover its heating, and at 6 it
+keeps a state.
 
 For the held screen, the literature can settle two conditions first: how close
 thrusters come to ionizing all their propellant, neutralizer flow included,

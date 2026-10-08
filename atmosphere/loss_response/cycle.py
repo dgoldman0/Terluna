@@ -13,11 +13,13 @@ far as the record is taken. The author accepted the measured ultraviolet for the
 
 Each solar maximum is the year around the month of its smoothed sunspot maximum (SILSO, version 2), from six months
 before it to five after, for cycles 19 to 25; cycle 18's year begins before the record. The loss response's solar
-maximum is the strongest of them, by the energy-weighted ultraviolet, taken whole: every band, the X-rays and the glow
-from the same year. The author chose the measured maxima, with the record taken back to 1947, on 2026-10-07, in place
-of the escape model's 2.5 on the ultraviolet, FISM2's mean rise of the X-rays over the last three maxima and 1.5 on the
-glow, which the loss response keeps as its stress case. The strongest 27 days, a solar rotation, and the mean spectrum
-of cycles 19 to 24 are kept for reference.
+maximum is the strongest of those from 1978 on, when FISM2 adds the MgII core-to-wing ratio and Lyman-alpha to the
+10.7 cm radio flux, by the energy-weighted ultraviolet and taken whole: every band, the X-rays and the glow from the
+same year, cycle 21's of 1979-80. The strongest of the whole record, cycle 19's of 1957-58, is a stress case, beside
+the escape model's 2.5 on the ultraviolet, FISM2's mean rise of the X-rays over the last three maxima and 1.5 on the
+glow. The author chose the measured maxima, with the record taken back to 1947, and cycle 19 as a further stress case
+on 2026-10-07. The strongest 27 days, a solar rotation, and the mean spectrum of cycles 19 to 24 are kept for
+reference.
 
 Each year is taken as a steady state. The upper air's slowest layers take years to respond and its highest days, so
 the mean of the yearly states' losses leans high against a column that follows the cycle, and the state of the whole
@@ -49,6 +51,7 @@ SUNSPOT_MAXIMA = dict(cycle_19=(1958, 3), cycle_20=(1968, 11), cycle_21=(1979, 1
 # Cycles 19 to 24, from the minimum of April 1954 to that of December 2019 (SILSO).
 LONG_MEAN = ('cycles_19_24_mean_spectrum', dt.date(1954, 4, 1), dt.date(2019, 11, 30))
 ROTATION_DAYS = 27
+SATELLITE_ERA = dt.date(1978, 1, 1)      # FISM2 adds MgII and Lyman-alpha to the radio flux (Chamberlin et al. 2020)
 PARTS = ('1947-02_1996-07', '1996-08_2025-12')       # the record's files of each band, joined in this order
 LYMAN_ALPHA_NM = 121.567
 WHI = 'whi2008_ref_solar_irradiance_ver2.dat'
@@ -155,10 +158,12 @@ def maxima():
     return {name: activity(name, *bounds) for name, bounds in MAXIMA.items()}
 
 
-def strongest(measured):
-    """The loss response's solar maximum: the year around the maximum with the most ultraviolet, whole."""
-    name = max(measured, key=lambda k: measured[k]['uv'])
-    return dict(measured[name], label='solar_maximum', cycle=name)
+def strongest(measured, since=SATELLITE_ERA, label='solar_maximum'):
+    """The year around the maximum with the most ultraviolet, whole, among those starting on or after `since` (all
+    if None): from 1978 on, the loss response's solar maximum."""
+    names = [k for k in measured if since is None or dt.date.fromisoformat(measured[k]['start']) >= since]
+    name = max(names, key=lambda k: measured[k]['uv'])
+    return dict(measured[name], label=label, cycle=name)
 
 
 def strongest_rotation():
@@ -200,12 +205,14 @@ def main(argv=None) -> int:
                       'exosphere step; "glow" scales the sky\'s Lyman-alpha glow; "xray" and "uv" are energy-weighted '
                       'over the bands below and above 10 nm. A span\'s years are steady states whose mean loss leans '
                       'high; its mean spectrum gives the low end. maxima are the years around each cycle\'s sunspot '
-                      'maximum; solar_maximum, the strongest of them whole, is the loss response\'s solar maximum. '
+                      'maximum; solar_maximum, the strongest of them from 1978 on and whole, is the loss response\'s '
+                      'solar maximum, and record_maximum, the strongest of the record, a stress case. '
                       'convention holds the escape model\'s factors, the loss response\'s stress case.'),
         bands_nm=list(edges), whi_quiet_energy_W_m2=[float(x) for x in energy], quiet_week=[d.isoformat() for d in QUIET_WEEK],
         convention=dict(solar_maximum_ultraviolet=escape.SOLAR_MAXIMUM, solar_maximum_xray=escape.XRAY_SOLAR_MAXIMUM),
         sunspot_maxima={name: f'{y}-{m:02d}' for name, (y, m) in SUNSPOT_MAXIMA.items()},
-        maxima=measured, solar_maximum=strongest(measured), strongest_rotation=strongest_rotation(),
+        maxima=measured, solar_maximum=strongest(measured),
+        record_maximum=strongest(measured, None, 'solar_maximum_cycle_19'), strongest_rotation=strongest_rotation(),
         long_mean=activity(*LONG_MEAN), spans=spans)
     OUT.write_text(json.dumps(product, indent=1) + '\n')
     for name, span in spans.items():
@@ -214,7 +221,7 @@ def main(argv=None) -> int:
     for name, m in dict(measured, long_mean=product['long_mean'], rotation=product['strongest_rotation']).items():
         print(f"{name}: {m['start']} to {m['end']}, ultraviolet {m['uv']:.3f}, X-rays {m['xray']:.2f}, "
               f"glow {m['glow']:.3f}")
-    print(f"solar maximum: {product['solar_maximum']['cycle']}")
+    print(f"solar maximum: {product['solar_maximum']['cycle']}; the record's: {product['record_maximum']['cycle']}")
     return 0
 
 

@@ -170,9 +170,9 @@ ring fleet's screen holds the wind off the inner exosphere in its unrefilled
 wake, a sensitivity a plasma model has to test. The three coolest cases lose
 under 1 kg/s from their exosphere without a dipole, and about 3×10¹⁹ A·m², whose
 stand-off just clears the dense exosphere, holds the next two to 1 kg/s in the
-screening; the warmest at solar maximum runs away within the 4-radius shadow,
-which no dipole changes, and in the stress case (the escape model's 2.5) no
-moment up to 10²³ A·m² holds it to 1 kg/s. The four regional installations give
+screening; no moment up to 10²³ A·m² holds the warmest at solar maximum to
+1 kg/s, and in cycle 19's year, a stress case, it runs away within the 4-radius
+shadow. The four regional installations give
 1.5×10²¹ A·m² and a stand-off near 10 lunar radii, which keeps every case within
 1 kg/s at the swarm's standard level, averaged over the solar cycle. Neither
 holds the neutral

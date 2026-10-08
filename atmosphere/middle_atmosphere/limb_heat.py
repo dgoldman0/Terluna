@@ -27,11 +27,11 @@ logarithmic spacing is already finer than the smear.
 The atmosphere and its heat follow the loss response (atmosphere/loss_response/model.py): its six cases (the
 titania-stack and 200-nm-edge middle atmospheres at 1.2 atm under three treatments of the upper air), its column
 configuration, the sky's Lyman-alpha glow and Earth's tide on the molecular loss. Solar maximum is FISM2's year
-around the strongest maximum on record, cycle 19's, which weights each band by its own measured rise
+around the strongest maximum since 1978, cycle 21's, which weights each band by its own measured rise
 (atmosphere/loss_response/cycle.py), as the author chose on 2026-10-07; the year around each maximum from cycle 19 to
-25 is traced as well. The stress case is the escape model's: 2.5 times the quiet Sun's ultraviolet and, below 10 nm,
-FISM2's measured rise of the X-rays by band (escape.xray_cycle), the mean over the year around each of the last three
-maxima against the WHI 2008 quiet week. The films are the design's in all six cases; the 200-nm-edge atmospheres
+25 is traced as well. The stress cases are cycle 19's year, the strongest on record, and the escape model's: 2.5
+times the quiet Sun's ultraviolet and, below 10 nm, FISM2's measured rise of the X-rays by band (escape.xray_cycle),
+the mean over the year around each of the last three maxima against the WHI 2008 quiet week. The films are the design's in all six cases; the 200-nm-edge atmospheres
 stand for a warmer middle atmosphere. The middle atmosphere's profile (temperature, pressure and atomic oxygen, with
 the dry air of radiative_convective.thermodynamics) runs from the surface to the base, the thermal column's solution
 (molecular N2 and O2 at their fixed ratio) from there to the exobase, shifted to start at the profile's base height,
@@ -100,7 +100,7 @@ TABLE_SETTINGS = ('shield_distance_m', 'protected_radii', 'radii_R', 'formation_
                   'crossover_nm', 'films', 'disk_rays', 'limb_rays', 'edge_rays', 'limb_first_km', 'exosphere_points',
                   'outer_radii', 'profile_heats_W_m2', 'largest_exobase_radii', 'co2_ppm', 'bands_nm',
                   'shape_groups_nm', 'shape_radii_R', 'log_pressure_step', 'shape_quantiles')
-# The loss response's quiet Sun, solar maximum and stress case, and the year around each solar maximum since cycle 19.
+# The loss response's quiet Sun, solar maximum and stress cases, and the year around each solar maximum since cycle 19.
 ACTIVITIES = dict(loss.ACTIVITY, **json.loads(loss.CYCLE.read_text())['maxima'])
 MAXIMA = tuple(escape.FISM2_MAXIMA)
 MOLECULE = dict(N2=(2, 'n'), O2=(2, 'o'), O=(1, 'o'))

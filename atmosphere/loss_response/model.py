@@ -93,13 +93,16 @@ BASE_PA = 0.3
 SHIELDS = {'titania_stack': 'moon_1.2atm_titania_stack', 'edge_200nm': 'moon_1.2atm_edge_200nm'}
 TREATMENTS = {'collisional': '_nonlte_nir_collisional', 'lte': '', 'all_heats': '_nonlte'}
 ACTIVITY = {'quiet': dict(uv=1.0, xray=1.0, glow=1.0),
-            # FISM2's year around the strongest solar maximum on record, cycle 19's of 1957-58, every band and the
-            # glow (Lyman-alpha) from the same year (cycle.py; the author's choice of 2026-10-07).
+            # FISM2's year around the strongest solar maximum from 1978 on, cycle 21's of 1979-80, every band and
+            # the glow (Lyman-alpha) from the same year (cycle.py; the author's choice of 2026-10-07).
             'solar_maximum': json.loads(CYCLE.read_text())['solar_maximum'],
-            # The stress case: escape.py's rough ratios, 2.5 on the ultraviolet above 10 nm and FISM2's mean rise of
-            # the X-rays over the last three maxima, with 1.5 on the glow. Cycle 19's year passes it in the X-rays
-            # and the glow, so it is harsher in the ultraviolet above 10 nm only.
+            # Two stress cases. The strongest maximum on record, cycle 19's of 1957-58, whose spectrum FISM2 builds
+            # from the 10.7 cm radio flux alone; and escape.py's rough ratios, 2.5 on the ultraviolet above 10 nm and
+            # FISM2's mean rise of the X-rays over the last three maxima, with 1.5 on the glow, which cycle 19's year
+            # passes in the X-rays and the glow.
+            'solar_maximum_cycle_19': json.loads(CYCLE.read_text())['record_maximum'],
             'solar_maximum_stress': dict(uv=escape.SOLAR_MAXIMUM, xray=escape.XRAY_SOLAR_MAXIMUM, glow=1.5)}
+STRESS_CASES = ('solar_maximum_cycle_19', 'solar_maximum_stress')     # summarised apart from quiet Sun and maximum
 LEAKS = (1e-6, 3e-6, 1e-5, 2e-5, 3e-5, 5e-5, 1e-4, 2e-4, 3e-4, 5e-4, 1e-3, 2e-3, 3e-3, 5e-3,
          1e-2, 2e-2, 3e-2, 5e-2, 0.1, 0.3, 1.0)
 PROTECTED_R = 4.0               # the ring fleet's protected radius in lunar radii (decisions.md, 2026-10-07)
@@ -156,7 +159,7 @@ def lyman_glow_shape(base_radius_R, x, base_pa=BASE_PA):
 
 
 def activity_of(activity):
-    """An activity as a dict: quiet Sun, the measured solar maximum or the stress case by name, or a measured one as
+    """An activity as a dict: quiet Sun, the measured solar maximum or a stress case by name, or a measured one as
     given (with a factor on each band of the limb tables, 'bands', a 'label', and 'glow', 'uv' and 'xray' factors;
     see cycle.py)."""
     return ACTIVITY[activity] if isinstance(activity, str) else activity

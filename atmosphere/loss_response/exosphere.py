@@ -170,8 +170,8 @@ READING_RULE = ('Loss rates are kg/s of atmosphere. allowed_summary[magnetospher
                 'is the largest UV transmission through gaps whose ultraviolet-driven loss at the traced state for '
                 'that radius plus the sunlit exosphere\'s central loss stays within the budget, as a range over the '
                 'upper-air treatments, quiet Sun and solar maximum, with the number of those cases that cannot meet '
-                'it; stress_summary gives the same at the stress case alone (the escape model\'s 2.5 on the '
-                'ultraviolet); '
+                'it; stress_summary[case] gives the same at each stress case alone (cycle 19\'s year, the strongest '
+                'on record, and the escape model\'s 2.5 on the ultraviolet); '
                 'magnetosphere is none, none_wake (no magnetosphere, the wind absent within the ring fleet\'s '
                 'unrefilled wake, a sensitivity) or september (1.5e21 A m^2). These replace the loss response\'s '
                 'allowed transmissions, its capped pickup and its ion sputtering. cases evaluates the loss response\'s '
@@ -613,7 +613,7 @@ def main(argv=None) -> int:
     allowed = [allowed_with_exosphere(shield, treatment, activity)
                for shield in lr.SHIELDS for treatment in lr.TREATMENTS for activity in lr.ACTIVITY]
     summary = summarise(allowed)
-    stress = summarise(allowed, ('solar_maximum_stress',))
+    stress = {name: summarise(allowed, (name,)) for name in lr.STRESS_CASES}
     for key, by_shield in summary.items():
         for shield, by_radius in by_shield.items():
             for x, by_budget in by_radius.items():

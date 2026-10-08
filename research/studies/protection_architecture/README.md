@@ -46,9 +46,9 @@ cycle) takes the UV transmission a swarm can hold at three levels of design
 choices and evaluates the loss response and its absorption and exosphere steps
 there, at the ring fleet's protected radius of 4 lunar radii. It uses the traced
 count and the heat placed where the tracing puts it, both as the author approved
-on 7 October, at quiet Sun, at solar maximum (FISM2's year around cycle 19's
-maximum, with the escape model's 2.5 as a stress case) and over solar cycles 23
-and 24 year by year from FISM2's daily record. The swarm holds
+on 7 October, at quiet Sun, at solar maximum (FISM2's year around cycle 21's
+maximum, with cycle 19's year and the escape model's 2.5 as stress cases) and
+over solar cycles 23 and 24 year by year from FISM2's daily record. The swarm holds
 3–4×10⁻⁵ with tight choices, about 2×10⁻⁴ with standard ones and 2.5×10⁻³ with
 relaxed ones, most of it from failed cells waiting to be covered. Traced along
 its slant paths, light through gaps heats the upper air 2.5–5 times a count over

@@ -58,14 +58,16 @@ class CycleTests(unittest.TestCase):
             self.assertLess(max(far), 1.65, name)
             self.assertGreater(min(far), 1.0, name)
 
-    def test_the_solar_maximum_is_the_strongest_year_taken_whole(self):
+    def test_the_solar_maximum_is_the_strongest_year_since_1978_taken_whole(self):
         measured = cycle.maxima()
-        top = cycle.strongest(measured)
-        self.assertEqual(top['cycle'], 'cycle_19')
-        self.assertEqual(top['label'], 'solar_maximum')
-        self.assertTrue(all(top['uv'] >= m['uv'] for m in measured.values()))
+        top, record = cycle.strongest(measured), cycle.strongest(measured, None, 'solar_maximum_cycle_19')
+        self.assertEqual((top['cycle'], record['cycle']), ('cycle_21', 'cycle_19'))
+        self.assertEqual((top['label'], record['label']), ('solar_maximum', 'solar_maximum_cycle_19'))
+        recent = [m for m in measured.values() if dt.date.fromisoformat(m['start']) >= cycle.SATELLITE_ERA]
+        self.assertTrue(all(top['uv'] >= m['uv'] for m in recent))
+        self.assertTrue(all(record['uv'] >= m['uv'] for m in measured.values()))
         for key in ('bands', 'glow', 'xray', 'uv', 'start', 'end'):
-            self.assertEqual(top[key], measured['cycle_19'][key])
+            self.assertEqual(top[key], measured['cycle_21'][key])
 
     def test_a_measured_activity_weights_the_bands_it_names(self):
         a = cycle.activity('2001', dt.date(2001, 1, 1), dt.date(2001, 12, 31))
@@ -98,6 +100,7 @@ class ProductTests(unittest.TestCase):
         from atmosphere.middle_atmosphere import limb_heat
         self.assertEqual(product['bands_nm'], limb_heat.DESIGN['bands_nm'])
         self.assertEqual(product['solar_maximum'], cycle.strongest(product['maxima']))
+        self.assertEqual(product['record_maximum'], cycle.strongest(product['maxima'], None, 'solar_maximum_cycle_19'))
         self.assertFalse(constants_changed(product['producer']['constants']))
 
 

@@ -100,7 +100,6 @@ def at_radius(shield, treatment, activity, transmission, radius, wind, sweep=Fal
     return dict(uv=uv, exo=exo, totals=totals, covers=row['beyond_share'] <= traced.HEATING_SHARE), row
 
 
-STRESS = 'solar_maximum_stress'      # the escape model's convention, summarised apart
 
 def point(shield, treatment, activity, transmission, wind, mass_kg):
     states = {x: at_radius(shield, treatment, activity, transmission, x, wind, sweep=(x == DESIGN_RADIUS_R))
@@ -297,8 +296,8 @@ def main(argv=None) -> int:
                     for activity in lr.ACTIVITY:
                         points.append(dict(point(shield, treatment, activity, t, wind, mass),
                                            level=level, hole_factor=float(k)))
-    summary = summarise([p for p in points if p['activity'] != STRESS])
-    stress_summary = summarise([p for p in points if p['activity'] == STRESS])
+    summary = summarise([p for p in points if p['activity'] not in lr.STRESS_CASES])
+    stress_summary = {name: summarise([p for p in points if p['activity'] == name]) for name in lr.STRESS_CASES}
     tasks, keys = [], []
     for level, lv in product['levels'].items():
         for k in HOLE_FACTORS:
@@ -342,9 +341,10 @@ def main(argv=None) -> int:
                   'throughout: Earth\'s tide is included; the exosphere\'s ion fates are bounds and timescale '
                   'comparisons, and the ring fleet\'s wake rests on an assumed refill length; no plasma is modelled.'),
         reading_rule=('summary[level][shield] gives ranges over the upper-air treatments, quiet Sun and solar maximum '
-                      '(FISM2\'s year around cycle 19\'s maximum), and holes 1 and 4 times the particle diameter, at the '
-                      'ring fleet\'s protected radius of 4 lunar radii; stress_summary gives the same at the stress case '
-                      'alone (the escape model\'s 2.5 on the ultraviolet), and points every state. '
+                      '(FISM2\'s year around cycle 21\'s maximum), and holes 1 and 4 times the particle diameter, at the '
+                      'ring fleet\'s protected radius of 4 lunar radii; stress_summary[case] gives the same at each stress '
+                      'case alone (cycle 19\'s year, the strongest on record, and the escape model\'s 2.5 on the '
+                      'ultraviolet), and points every state. '
                       'cases_running_away_at_4_R counts those whose air outgrows the limb tables there. '
                       'total_loss_kg_s[scenario][low|central|high] is the ultraviolet-driven loss plus the sunlit '
                       'exosphere\'s loss outside the protected radius, with no magnetosphere (plus proton sputtering), '

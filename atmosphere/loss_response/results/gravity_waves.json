@@ -4,7 +4,7 @@
   "domain": "atmosphere",
   "files": {
    "atmosphere/loss_response/gravity_waves.py": "8f496f5eb8515bdc",
-   "atmosphere/loss_response/oxygen.py": "a6563083809f9846"
+   "atmosphere/loss_response/oxygen.py": "344a57958ea626f1"
   },
   "constants": {
    "AVOGADRO": 6.02214076e+23,
@@ -15,9 +15,9 @@
    "STANDARD_GRAVITY": 9.80665
   },
   "products": {
-   "atmosphere/middle_atmosphere/results/limb_heat.json": "84489a09d02d2161",
+   "atmosphere/middle_atmosphere/results/limb_heat.json": "1882e4c208eb4ffa",
    "atmosphere/loss_response/results/tidal_escape.json": "566dda3ee632f6af",
-   "atmosphere/loss_response/results/solar_cycle.json": "0febbebffc8214f4",
+   "atmosphere/loss_response/results/solar_cycle.json": "6d01acfe35cd4cc9",
    "protection/transmission/results/uv_transmission.json": "6589385e2665ade4"
   }
  },
