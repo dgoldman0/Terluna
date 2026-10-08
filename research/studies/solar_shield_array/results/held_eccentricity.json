@@ -1,0 +1,103 @@
+{
+ "schema": "terluna.research.held-eccentricity/1",
+ "producer": {
+  "files": {
+   "research/studies/solar_shield_array/held_eccentricity.py": "2320d5049c168201d4a4a1804489acf448cae621cdffe4211a094f28ec69bbb1",
+   "research/studies/solar_shield_array/ring_layout.py": "11d528cb3efcffab1ab2c74874d8fe0a14f3057ac003b38ec671cb6b570c4684"
+  }
+ },
+ "inputs": {
+  "results/ring_layout.json": "456338e771bbc4aa384b70a0cffda0ed8f62ec5737eea53e264e7f4e9acab4d6"
+ },
+ "evidence": "The coupled matched layouts of ring_layout.py rebuilt from its product's calibration; the share is the averaged balance's estimate of the steady drive that holding takes, with no flight of held rings.",
+ "reading_rule": "share = (forced - held)/forced eccentricity, the steady part of a ring's eccentricity drive that keeping has to cancel, as a fraction of the drive its sail gives; the trim reaches 25% of the redirected band's push, which also holds attitude.",
+ "by_clearance": {
+  "600": {
+   "clearance_m": 600.0,
+   "rings": 1859,
+   "largest_departure": 0.033387266774193236,
+   "layout_largest_departure": 0.03338776726429746,
+   "share": {
+    "max": 0.1949226867662768,
+    "mean": 0.050838086233866264,
+    "rings_over": {
+     "0.05": 746,
+     "0.1": 334,
+     "0.15": 106,
+     "0.2": 0,
+     "0.25": 0
+    },
+    "mean_by_height_tenth": [
+     0.15574835373497942,
+     0.10600163520213784,
+     0.07206844891873578,
+     0.03206892913950616,
+     0.008874354325512545,
+     0.0,
+     0.003139829886292698,
+     0.01603745342551625,
+     0.037603474628172075,
+     0.07697892522291223
+    ],
+    "below_orbit_plane_max": 0.1949226867662768,
+    "above_orbit_plane_max": 0.10523721853559274
+   },
+   "worst": {
+    "height_km": -8629.640410450826,
+    "tilt_deg": -23.226447936207805,
+    "radius_km": 21882.305433822658,
+    "forced": 0.1712846633097482,
+    "held": 0.13789739653555497
+   },
+   "forced_range": [
+    0.10778693339688691,
+    0.1712846633097482
+   ]
+  },
+  "1000": {
+   "clearance_m": 1000.0,
+   "rings": 1859,
+   "largest_departure": 0.04398180257010387,
+   "layout_largest_departure": 0.04398210258207791,
+   "share": {
+    "max": 0.2589779144465646,
+    "mean": 0.05409824654089511,
+    "rings_over": {
+     "0.05": 703,
+     "0.1": 410,
+     "0.15": 203,
+     "0.2": 108,
+     "0.25": 24
+    },
+    "mean_by_height_tenth": [
+     0.2050095597844317,
+     0.12633438828444093,
+     0.07132797638886056,
+     0.029017001034149684,
+     0.007365281235468776,
+     0.0,
+     3.221392965648888e-05,
+     0.0017833764116924784,
+     0.01877890346032308,
+     0.08148098389797613
+    ],
+    "below_orbit_plane_max": 0.2589779144465646,
+    "above_orbit_plane_max": 0.12900306499250896
+   },
+   "worst": {
+    "height_km": -8583.208130450825,
+    "tilt_deg": -23.180141207632154,
+    "radius_km": 21805.639705844467,
+    "forced": 0.16982839121279092,
+    "held": 0.12584658864268705
+   },
+   "forced_range": [
+    0.10770676605721559,
+    0.1703697320847348
+   ]
+  }
+ },
+ "checks": {
+  "reproduces_layout": true
+ }
+}

@@ -51,3 +51,13 @@ refrigeration, joint-loss, storage-interface and renewal assumptions for the
 Civil structure and plasma response remain outside that hardware screen.
 
 `shield_power.py` separates reflected-band capture, optical conversion, bus operations, final delivery, ideal collector heat and electric-propulsion exhaust. The [return investigation](../research/studies/solar_shield_array/return_repair.md) applies these sensitivities to executed prefixes and hypothetical fleet duty, including explicit replacement lifetimes. These are conditional accounts; collector and power-routing hardware remain to design.
+
+## Heat recovery and radiators
+
+[heat_recovery.py](heat_recovery.py) splits the heat of a steady source into
+recovered work and what an engine rejects, and gives the area that radiates
+heat away at a temperature against a uniform background. Recovered work used
+inside the boundary ends as heat there, so recovery leaves the heat to reject
+unchanged and lowers the temperature it leaves at; the radiator area grows as
+the fourth power of that drop. The solar shield and habitat array's
+[heat screen](../research/studies/solar_shield_array/array_industry.md) uses it.

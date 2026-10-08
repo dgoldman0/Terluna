@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-07",
+  "updated": "2026-10-08",
   "base_commit": "79a60a1a51b4552ac9ae8e8bb295b567d9254995",
   "next_manuscript": "cef466e6-d9f8",
   "principle": "Each topic spans the open Moon; the root opening scene is one illustration",
@@ -295,14 +295,18 @@
     },
     {
       "topic": "engineering",
-      "condition": "conditional_analytical_accounts; network_vocabulary_with_passive_failure_check; protection_supply_ledger",
+      "condition": "conditional_analytical_accounts; network_vocabulary_with_passive_failure_check; protection_supply_ledger; heat_recovery_and_radiator_screen; array_heat_screen_in_closed_form",
       "material": [
         "../engineering/reference/",
         "baselines/feasibility/model.py",
         "../engineering/reference/industrial_architecture/",
         "../engineering/network/",
         "../engineering/network/results/protection_supply_ledger.json",
-        "studies/solar_shield_array/"
+        "studies/solar_shield_array/",
+        "../engineering/heat_recovery.py",
+        "studies/solar_shield_array/array_industry.md",
+        "studies/solar_shield_array/array_industry_sources.json",
+        "studies/solar_shield_array/results/array_heat.json"
       ],
       "unresolved": [
         "complete source-to-use pathways",
@@ -314,9 +318,10 @@
         "the packet matter stream (about 2.7e8 kg/s, about 5e16 kg in transit) and its geometry under the six traffic-safety rules (research/decisions.md)",
         "the cislunar terminal layer: remote braking, capture, inspection and quarantine, repacking, buffering, metered delivery and kinetic-energy recovery; where its catchers sit so that Earth never lies behind them",
         "three power ledgers kept apart (civilization-wide power, the Open Moon's allocation, and where heat is released), and the power sequence from fission bootstrap through fusion to near-Sun collection with power beaming",
-        "solar shield/habitat power network: gross collection, holding load, delivered 100-TW case, conversion and transfer losses, thermal paths and returned momentum carriers"
+        "solar shield/habitat power network: gross collection, holding load, delivered 100-TW case, conversion and transfer losses, thermal paths and returned momentum carriers",
+        "heat reuse, computing and industry of the solar shield and habitat array, for the planned branch research/array-industry (the author, 2026-10-08; studies/solar_shield_array/array_industry.md): the shield's reflectivity trim and momentum store as hardware and their power; the film plant that remakes 2.3-4.6 Gt of film a year; the array's power and heat ledgers with where heat is released; computing for the fleet and for services, compared by useful results per joule on matched tasks"
       ],
-      "next_session_task": "Add source, transport and capture nodes with capacities and the delivery routes to the network model, then score the protection holding options in the supply ledger."
+      "next_session_task": "Add source, transport and capture nodes with capacities and the delivery routes to the network model, then score the protection holding options in the supply ledger. Heat reuse, computing and industry of the shield and habitat array wait for the planned branch research/array-industry (studies/solar_shield_array/array_industry.md)."
     },
     {
       "topic": "protection",
@@ -367,6 +372,7 @@
         "studies/solar_shield_array/results/attitude_schemes.json",
         "studies/solar_shield_array/results/plane_motion.json",
         "studies/solar_shield_array/results/ring_layout.json",
+        "studies/solar_shield_array/results/held_eccentricity.json",
         "studies/solar_shield_array/results/bundle_validation.json",
         "../protection/spectra/annulus_film.json",
         "../atmosphere/middle_atmosphere/results/limb_heat.json"
@@ -400,9 +406,9 @@
         "Coupled optimization: held-out twelve-hour response error falls from 2.158 m with a corrected gravity response to 0.0272 m with coupled sensitivities. Eight-mode constrained restoration still exposes earlier contact; final power-feasible trial stops at 12.814874 h on 338/341, costs 37.217 TJ, and replays within 7.86 m. Post-contact full-cycle diagnostic retains 319-345 km boundary debt and 6.996% minimum centred next-service coverage; terminal proxy drifts by 1.10 km after the following departure. No improved safe prefix, return, next service, recurrence or fleet demand is accepted. Preserve 238.35 TW held comparison, 23.835 TW target, and unvalidated 17.29-million capacity estimate; magnetic integration stays outside this study.",
         "Expanded coupled cycle: nine of eighteen control columns measured; full-step and tenth-step terminal prediction errors 27.6 and 2.86 km. Independent constrained replay stops at 13.794996 h with no actuator overloads. Local 100 TJ energy ceiling is active, but relaxing energy or actuator capacity does not resolve contact slack. No general physical bottleneck or accepted cycle; rebuild smaller signed derivatives and enrich localized separation modes before a larger local search.",
         "the magnetic architecture comparison (results/magnetic_architecture.json) rests on the design point before the traced count; its rerun needs the closure trajectories in research/runs/solar_shield_array/closure/, which this machine lacks, and its pinned-input test fails until then",
-        "ring stack radii (ring_layout.json, 2026-10-08): the full disk's 1,859 rings share one line of nodes and need a radius each; set near the radius at which each plane turns with the Sun (19,600-21,900 km) every plane stays within photon roll's reach only if keeping holds close rings' eccentricity vectors together, by 0.03-0.05 at the edges; counting the slower turning that brings (secular tidal theory, not yet flown), 0.6 km clearance closes and 1 km leaves 22 edge rings beyond the reach; left on their forced eccentricities the rings cannot be nested"
+        "ring stack radii (ring_layout.json, 2026-10-08): the full disk's 1,859 rings share one line of nodes and need a radius each; set near the radius at which each plane turns with the Sun (19,600-21,900 km) every plane stays within photon roll's reach only if keeping holds close rings' eccentricity vectors together, by 0.03-0.05 at the edges; counting the slower turning that brings (secular tidal theory, not yet flown), 0.6 km clearance closes and 1 km leaves 22 edge rings beyond the reach; left on their forced eccentricities the rings cannot be nested; holding takes a steady 5% of the stack's eccentricity drive and up to 19.5% at the outermost rings below the Moon's orbit plane at 0.6 km (26% at 1 km), against reflectivity trim that reaches about a fifth of the push and also holds attitude (held_eccentricity.json)"
       ],
-      "next_session_task": "The solar-shield work is closed for a while (the author's plan of 2026-10-08); the consolidated summary is in studies/solar_shield_array/integrated_comparison.md (Where the comparison stands) and here. The outer rings were done as the stack's radius layout: every ring set near the radius at which its plane turns with the Sun, with keeping that holds close rings' eccentricity vectors together (ring_layout.json). Parked, for when the work resumes: the keeping in the regressing frame with the edge rings, now with the eccentricity keeping across the stack and the accuracy 0.6 km steps need, and the along-track keeping that holds each tile within its overlap; the momentum store and the trim as hardware, and their power; the oxygen atoms' part in the thermal column's cooling and composition; a retrace through air heated with the traced shape; a plasma model of the ring fleet's wake and of a weak dipole; the magnetic architecture comparison's rerun on the closure trajectories; for the held screen, literature bounds on thruster ionization and on the plasma path; a full fleet's coverage, handovers and the shadow on Earth. The branch's merge into main waits until the other branches are ready for a joint integration.",
+      "next_session_task": "The solar-shield work is closed for a while (the author's plan of 2026-10-08); the consolidated summary is in studies/solar_shield_array/integrated_comparison.md (Where the comparison stands) and here. The outer rings were done as the stack's radius layout: every ring set near the radius at which its plane turns with the Sun, with keeping that holds close rings' eccentricity vectors together (ring_layout.json). The branch ends with the investigation of heat, computing and industry (studies/solar_shield_array/array_industry.md, array_heat.json), and one planned branch, research/array-industry, takes those up together with the momentum store and the trim as hardware and their power. Parked here, for when the work resumes: the keeping in the regressing frame with the edge rings, now with the eccentricity keeping across the stack (holding takes a steady 5% of the stack's eccentricity drive and up to 19.5% at the outermost rings at 0.6 km clearance, 26% at 1 km, against a trim that reaches about a fifth of the push; held_eccentricity.json) and the accuracy 0.6 km steps need, and the along-track keeping that holds each tile within its overlap; the oxygen atoms' part in the thermal column's cooling and composition; a retrace through air heated with the traced shape; a plasma model of the ring fleet's wake and of a weak dipole; the magnetic architecture comparison's rerun on the closure trajectories; for the held screen, literature bounds on thruster ionization and on the plasma path; a full fleet's coverage, handovers and the shadow on Earth. The branch's merge into main waits until the other branches are ready for a joint integration.",
       "requirements_from_september_reports": [
         "construction within 500 years of 2026; operation for at least 1e9 years",
         "an open atmosphere with no pressure dome; no superconducting planetary ring",

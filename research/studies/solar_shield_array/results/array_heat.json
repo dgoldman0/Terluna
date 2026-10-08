@@ -1,0 +1,436 @@
+{
+ "schema": "terluna.research.array-heat/1",
+ "producer": {
+  "files": {
+   "research/studies/solar_shield_array/array_heat.py": "3c3ff513bb89d80ba87e0d0c8ac5d09f023480169798a0cac0c37384fb180a50",
+   "engineering/heat_recovery.py": "34bb06737a0c936618fcabfe0c1c023ff48275117d0205867cf365b058ef1782"
+  },
+  "constants": {
+   "BOLTZMANN": 1.380649e-23,
+   "JULIAN_DAY": 86400.0,
+   "JULIAN_YEAR_DAYS": 365.25,
+   "MOON_GM": 4902800118000.0,
+   "MOON_RADIUS": 1737400.0,
+   "PLANCK": 6.62607015e-34,
+   "SOLAR_CONSTANT": 1361.0,
+   "SPEED_OF_LIGHT": 299792458.0,
+   "STEFAN_BOLTZMANN": 5.670374419e-08
+  }
+ },
+ "inputs": {
+  "research/studies/solar_shield_array/results/integrated_ledger.json": "68ad477ab2cc80c4dbe850a4fda9f6d9595094f323bbf07b3b7be8c8b117cc7a",
+  "research/studies/solar_shield_array/results/attitude_schemes.json": "485cb1ca84437b320cfb2e2555a70d961ab271ebbc1d028cea9641861d839ac8",
+  "protection/spectra/annulus_film.json": "328f6698a2f021cf81e55e1c4b7b2a3e64280f3b6d9ec8fac67f4d8008eba630",
+  "research/studies/solar_shield_array/results/held_eccentricity.json": "361d5131826f92902df502fa6eab8aba1422e4e8e36384e3d822d1f7848935ce",
+  "research/studies/solar_shield_array/array_industry_sources.json": "043bdba873275674a2f00c1b72a9f48505158b690c8b441899143386ca7eb195"
+ },
+ "evidence": "Closed-form screen on the named products and the assumptions in design, each sourced in array_industry_sources.json; the films' thermal emissivity comes from the protection domain's optical tables (normal incidence, 2-125 um). No dynamics, device or plant model.",
+ "reading_rule": "Powers in W, TW or PW as named; areas km2 of panel footprint where named panel, else of tile or collector; temperatures K. Ranges pair the low ends and the high ends of the assumptions. Tiles are taken facing the Sun at the sunward crossing for their temperature and over the orbit for the fleet totals. The trim and store rows bound device classes and rotor sizes for the planned branch to choose between.",
+ "design": {
+  "orbit_radius_km": 20000.0,
+  "films": {
+   "annulus": [
+    0.1,
+    4.0
+   ],
+   "window": [
+    1.0,
+    10.0
+   ]
+  },
+  "infrared_um": [
+   2.0,
+   125.0
+  ],
+  "lit_factor": [
+   0.5,
+   0.6366197723675814
+  ],
+  "silica_conductivity_W_m_K": 1.0,
+  "thermoradiative_measured_W_m2": 0.00941,
+  "collector_absorptance": 0.88,
+  "collector_emissivity": [
+   0.85,
+   0.85
+  ],
+  "film_specific_energy_MJ_kg": [
+   2.0,
+   20.0
+  ],
+  "film_hot_K": 2000.0,
+  "tpv_captured_share": [
+   0.3,
+   0.6
+  ],
+  "tpv_efficiency": [
+   0.3,
+   0.4
+  ],
+  "cell_K": 330.0,
+  "radiator_K": 330.0,
+  "radiator_emissivity": 0.9,
+  "radiator_kg_m2": [
+   3.0,
+   14.0
+  ],
+  "collector_conversion": [
+   0.2,
+   0.3
+  ],
+  "accelerator_flop_per_J": 1400000000000.0,
+  "trim_fraction": 0.25,
+  "trim_device_share": [
+   0.25,
+   0.89
+  ],
+  "trim_held_W_m2": [
+   1.0,
+   5.0
+  ],
+  "trim_electrochromic_J_m2": [
+   10.0,
+   80.0
+  ],
+  "trim_bistable_J_m2": [
+   1.0,
+   5.0
+  ],
+  "trim_switches_per_orbit": [
+   2.0,
+   20.0
+  ],
+  "photovoltaic_on_tile": 0.25,
+  "store_rotor_radius_m": [
+   100.0,
+   400.0
+  ],
+  "store_rim_speed_m_s": [
+   300.0,
+   1000.0
+  ],
+  "store_round_trip": [
+   0.85,
+   0.95
+  ]
+ },
+ "fleet": {
+  "tiles": [
+   28105871.9689816,
+   28233094.15238224
+  ],
+  "area_km2": [
+   2810587196.89816,
+   2823309415.238224
+  ],
+  "optical_mass_Gt": [
+   46.17499393913809,
+   46.38400661641534
+  ],
+  "tile_mass_kg": 1642894.907871852,
+  "film_upkeep_Gt_per_year": [
+   2.3087496969569044,
+   4.638400661641534
+  ],
+  "window_ring_share": 0.2599044562240539
+ },
+ "tiles": {
+  "films": {
+   "annulus": {
+    "solar_absorptance": 0.030246047547967763,
+    "absorbed_W_m2": 41.16487071278412,
+    "emissivity_sunward": 0.3702125628015666,
+    "emissivity_shaded": 0.4422631637531618,
+    "thickness_um": 4.633042985805464,
+    "temperature_K": 172.89250074665193,
+    "across_film_K": 0.00010381580092619549,
+    "carnot_across_film": 6.004644532172161e-07,
+    "carnot_work_W_m2": 1.3455022612447832e-05
+   },
+   "window": {
+    "solar_absorptance": 0.044873004939909034,
+    "absorbed_W_m2": 61.072159723216195,
+    "emissivity_sunward": 0.44361698841660624,
+    "emissivity_shaded": 0.6847920553897304,
+    "thickness_um": 11.533042985805464,
+    "temperature_K": 175.76858070218972,
+    "across_film_K": 0.00042744411699506833,
+    "carnot_across_film": 2.4318573620350296e-06,
+    "carnot_work_W_m2": 9.013086347223237e-05
+   }
+  },
+  "mean_solar_absorptance": 0.03404765895513266,
+  "intercepted_PW": [
+   1912.604587489198,
+   2446.2268268602547
+  ],
+  "absorbed_PW": [
+   65.1197087108544,
+   83.28829672783431
+  ],
+  "carnot_across_all_films_TW": 0.2544673154447046,
+  "thermoradiative_measured_everywhere_TW": 26.56734159739169
+ },
+ "collectors": [
+  {
+   "demand_TW": 100.0,
+   "conversion": 0.2,
+   "collector_km2": 367376.9287288759,
+   "heat_TW": 339.99999999999994,
+   "heat_per_electric": 3.3999999999999995,
+   "temperature_K": 313.02324908807054,
+   "thermoradiative_measured_GW": 3.4570168993387216
+  },
+  {
+   "demand_TW": 100.0,
+   "conversion": 0.3,
+   "collector_km2": 244917.9524859172,
+   "heat_TW": 193.33333333333337,
+   "heat_per_electric": 1.9333333333333336,
+   "temperature_K": 300.8197632950088,
+   "thermoradiative_measured_GW": 2.304677932892481
+  },
+  {
+   "demand_TW": 300.0,
+   "conversion": 0.2,
+   "collector_km2": 1102130.7861866273,
+   "heat_TW": 1019.9999999999999,
+   "heat_per_electric": 3.3999999999999995,
+   "temperature_K": 313.02324908807054,
+   "thermoradiative_measured_GW": 10.371050698016164
+  },
+  {
+   "demand_TW": 300.0,
+   "conversion": 0.3,
+   "collector_km2": 734753.8574577516,
+   "heat_TW": 580.0000000000001,
+   "heat_per_electric": 1.9333333333333336,
+   "temperature_K": 300.8197632950088,
+   "thermoradiative_measured_GW": 6.914033798677442
+  },
+  {
+   "demand_TW": 1000.0,
+   "conversion": 0.2,
+   "collector_km2": 3673769.2872887584,
+   "heat_TW": 3399.9999999999995,
+   "heat_per_electric": 3.3999999999999995,
+   "temperature_K": 313.02324908807054,
+   "thermoradiative_measured_GW": 34.57016899338721
+  },
+  {
+   "demand_TW": 1000.0,
+   "conversion": 0.3,
+   "collector_km2": 2449179.524859172,
+   "heat_TW": 1933.3333333333335,
+   "heat_per_electric": 1.9333333333333336,
+   "temperature_K": 300.8197632950088,
+   "thermoradiative_measured_GW": 23.04677932892481
+  }
+ ],
+ "film_plant": {
+  "upkeep_kg_s": [
+   73159.8631377831,
+   146982.04748274692
+  ],
+  "power_TW": [
+   0.14631972627556622,
+   2.9396409496549385
+  ],
+  "recovered_TW": [
+   0.013168775364800961,
+   0.7055138279171853
+  ],
+  "recovered_share": [
+   0.09,
+   0.24
+  ],
+  "cell_heat_TW": [
+   0.026337550729601922,
+   1.2346491988550743
+  ],
+  "cell_panel_km2": [
+   21.758822224228567,
+   1020.0079993383587
+  ],
+  "melt_radiation_W_m2": 907259.90704
+ },
+ "computing": {
+  "radiator_panel_km2_per_TW": 826.1520764636964,
+  "radiator_net_flux_W_m2": 605.2154491219409,
+  "radiator_Mt_per_TW": [
+   2.478456229391089,
+   11.56612907049175
+  ],
+  "collector_km2_per_TW": [
+   2449.1795248591725,
+   3673.7692872887583
+  ],
+  "accelerator_flop_per_s_per_TW": 1.4e+24
+ },
+ "trim": {
+  "held": {
+   "W_m2": [
+    1.0,
+    5.0
+   ],
+   "fleet_TW": [
+    702.64679922454,
+    12563.726897810098
+   ],
+   "photovoltaic_share_of_tile": [
+    0.0012928753754252536,
+    0.023013181682569515
+   ]
+  },
+  "electrochromic": {
+   "W_m2": [
+    7.88001833054303e-05,
+    0.006304014664434424
+   ],
+   "fleet_TW": [
+    0.05536869657786763,
+    15.840383720748815
+   ],
+   "photovoltaic_share_of_tile": [
+    1.01878816574587e-07,
+    2.901508696044238e-05
+   ]
+  },
+  "bistable": {
+   "W_m2": [
+    7.88001833054303e-06,
+    0.0003940009165271515
+   ],
+   "fleet_TW": [
+    0.005536869657786763,
+    0.9900239825468009
+   ],
+   "photovoltaic_share_of_tile": [
+    1.01878816574587e-08,
+    1.8134429350276487e-06
+   ]
+  },
+  "device_km2": [
+   702646799.22454,
+   2512745379.5620193
+  ],
+  "reach_share_of_push": {
+   "annulus": 0.19547105150926483,
+   "window": 0.16907532267948383
+  },
+  "eccentricity_holding_share": {
+   "600": {
+    "max": 0.1949226867662768,
+    "mean": 0.050838086233866264,
+    "rings_over_a_tenth": 334
+   },
+   "1000": {
+    "max": 0.2589779144465646,
+    "mean": 0.05409824654089511,
+    "rings_over_a_tenth": 410
+   }
+  },
+  "each_mW_m2_TW": [
+   0.70264679922454,
+   2.5127453795620194
+  ]
+ },
+ "store": {
+  "momentum_N_m_s": 1862269442.7309687,
+  "required_orbit_mean_N_m": {
+   "roll": 2451.49802148403,
+   "pitch": 3654.831490125588,
+   "normal": 7.032547866532507
+  },
+  "orbit_period_days": 2.9375754188826813,
+  "rotors": [
+   {
+    "rotor_radius_m": 100.0,
+    "rim_speed_m_s": 300.0,
+    "energy_GJ": 2.793404164096453,
+    "rotor_t": 62.07564809103229,
+    "share_of_tile_mass": 0.037784308535865445,
+    "fleet_rotor_Gt": [
+     1.744690217638111,
+     1.7525876171242614
+    ],
+    "tile_W": [
+     550.3019004423825,
+     1650.9057013271463
+    ],
+    "fleet_GW": [
+     15.466714758120862,
+     46.610176102273954
+    ]
+   },
+   {
+    "rotor_radius_m": 100.0,
+    "rim_speed_m_s": 1000.0,
+    "energy_GJ": 9.311347213654845,
+    "rotor_t": 18.62269442730969,
+    "share_of_tile_mass": 0.011335292560759635,
+    "fleet_rotor_Gt": [
+     0.5234070652914332,
+     0.5257762851372785
+    ],
+    "tile_W": [
+     1834.3396681412753,
+     5503.019004423822
+    ],
+    "fleet_GW": [
+     51.555715860402884,
+     155.3672536742465
+    ]
+   },
+   {
+    "rotor_radius_m": 400.0,
+    "rim_speed_m_s": 300.0,
+    "energy_GJ": 0.6983510410241133,
+    "rotor_t": 15.518912022758073,
+    "share_of_tile_mass": 0.009446077133966361,
+    "fleet_rotor_Gt": [
+     0.43617255440952774,
+     0.43814690428106534
+    ],
+    "tile_W": [
+     137.57547511059562,
+     412.7264253317866
+    ],
+    "fleet_GW": [
+     3.8666786895302154,
+     11.652544025568488
+    ]
+   },
+   {
+    "rotor_radius_m": 400.0,
+    "rim_speed_m_s": 1000.0,
+    "energy_GJ": 2.327836803413711,
+    "rotor_t": 4.655673606827422,
+    "share_of_tile_mass": 0.002833823140189909,
+    "fleet_rotor_Gt": [
+     0.1308517663228583,
+     0.13144407128431962
+    ],
+    "tile_W": [
+     458.5849170353188,
+     1375.7547511059554
+    ],
+    "fleet_GW": [
+     12.888928965100721,
+     38.84181341856163
+    ]
+   }
+  ]
+ },
+ "placement": {
+  "moon_share_of_isotropic_heat": 0.0018901719750954449,
+  "moon_W_m2_per_TW_used_on_moon": 0.026362737277291787,
+  "moon_W_m2_per_TW_released_in_orbit": 4.983010718834093e-05,
+  "design_sunlight_global_mean_W_m2": 293.3125,
+  "share_of_sunlight_per_TW_used_on_moon": 8.987935146743417e-05
+ },
+ "checks": {
+  "collector_area_matches_ledger": true,
+  "rotor_energy_is_half_m_v2": true,
+  "tiles_colder_than_collectors": true
+ }
+}

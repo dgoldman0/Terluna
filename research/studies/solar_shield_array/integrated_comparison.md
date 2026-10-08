@@ -494,7 +494,14 @@ beyond the reach, up to 2.2 times. The outer rings therefore come down to the
 eccentricity keeping across the stack and its accuracy, which the keeping study
 (the third of the next steps, parked) has to fly: the 0.6 km steps need keeping
 tighter than the 150–250 m errors that made the bundle's exploratory kept run
-widen its steps to 1 km. Steering by roll at
+widen its steps to 1 km. Holding also takes force. In the balance that sets
+the forced eccentricity, holding a ring below it takes a steady share of its
+sail's eccentricity drive equal to the departure over the forced value
+([held_eccentricity.py](held_eccentricity.py)): 5% over the stack, and up to
+19.5% at the outermost rings below the Moon's orbit plane at 0.6 km, 26% at
+1 km, with 334 rings above a tenth. Reflectivity trim, which also holds
+attitude, reaches about a fifth of the push, so at the stack's edges the tilts
+have to carry part of the holding. Steering by roll at
 full reach needs a store of about 2×10¹⁰ N·m·s per tile, ten times the chosen
 one; if the store scales with the roll used, a tenth of the reach fits the
 chosen store, while 0.7 of it needs most of the larger one.
@@ -594,8 +601,15 @@ At 30 g/m² of collector that is 0.4–0.6 t/s more propellant at 100 TW and
 3.1–4.7 t/s at 1,000 TW, all of it into the Moon's hemisphere. The ring fleet
 needs the demand's collectors alone, 0.24–0.37 million km² for 100 TW, on its
 tiles or flying free, with no holding cost. Its own loads are reflectivity
-trim and the momentum store, not yet sized for power. Device yield, transfer losses, storage through eclipses and reserves
-decide the power delivered to habitat and industry, and none is modelled yet.
+trim and the momentum store, which depend on hardware not yet chosen. A first
+screen ([array_industry.md](array_industry.md#the-shields-own-loads)) bounds
+them. Trim devices that need power to hold their state would draw
+0.7–13 PW across the fleet's 0.7–2.5 billion km² of devices, and
+devices switched and left 0.006–16 TW. The store's rotors, held
+to a few hundred metres by the clearance, would lose 4–155 GW cycling and
+weigh 0.1–1.7 Gt. Device yield, transfer losses, storage through eclipses and
+reserves decide the power delivered to habitat and industry, and none is
+modelled yet.
 
 ## Inhabited infrastructure
 
@@ -650,10 +664,11 @@ Both candidates share O1's count of gaps and the unmapped shadow on Earth.
 
 Parked, for when the work resumes:
 1. The keeping in the regressing frame with the edge rings, now with the
-   eccentricity keeping across the stack and the accuracy that 0.6 km steps
-   need, and the along-track keeping that holds each tile within its overlap.
+   eccentricity keeping across the stack, its share of the trim and the tilts,
+   and the accuracy that 0.6 km steps need, and the along-track keeping that
+   holds each tile within its overlap.
 2. The momentum store and the trim as hardware, and their power, which the
-   electricity gate waits on.
+   electricity gate waits on. These move to the planned branch below.
 3. In the atmosphere domain: the oxygen atoms' part in the thermal column's
    cooling and composition, and a retrace through air heated with the traced
    shape.
@@ -662,8 +677,11 @@ Parked, for when the work resumes:
    comparison's rerun, and the held screen's two literature checks.
 5. A full fleet's coverage, its handovers and the shadow on Earth.
 
-The branch's merge into main waits until the other branches are ready for a
-joint integration.
+The branch ends with the investigation of heat, computing and industry the
+author asked for on 8 October ([array_industry.md](array_industry.md)). One
+later branch, `research/array-industry`, is planned to take it up together
+with item 2. The branch's merge into main waits until the other branches are
+ready for a joint integration.
 
 ## The X-ray check
 
@@ -874,16 +892,19 @@ The author set this order on 7 October:
 3. The keeping in the regressing frame with the edge rings treated, on a
    bundle with centred filters, and the along-track keeping that holds each
    tile within its overlap.
-4. The momentum store and the trim as hardware, and their power.
+4. The momentum store and the trim as hardware, and their power. Moved on
+   8 October to the plan of the branch `research/array-industry`
+   ([array_industry.md](array_industry.md#the-planned-branch)).
 
 **Closing this work (8 October).** The author made the outer rings, item 2, the
 closing step. With them done, the consolidated summary stands
 [above](#where-the-comparison-stands-8-october) and in the research status.
-Parked there: items 3 and 4, and the items that wait on what this machine
-lacks, namely a plasma model of the ring fleet's wake and of a weak dipole, the
+Parked there: item 3, and the items that wait on what this machine lacks,
+namely a plasma model of the ring fleet's wake and of a weak dipole, the
 closure trajectories the magnetic comparison needs for its rerun, and the held
-screen's two literature checks below. The branch's merge into main waits until
-the other branches are ready for a joint integration.
+screen's two literature checks below. Item 4 goes to the planned branch. The
+branch's merge into main waits until the other branches are ready for a joint
+integration.
 
 Noted by the author for later study (7 October): the ring fleet could extend its
 protected radius by more active control as the solar weather requires,
@@ -932,7 +953,9 @@ python -m protection.spectra.annulus_film
 python -m atmosphere.middle_atmosphere.fetch_limb_inputs --download
 OPENBLAS_NUM_THREADS=1 python -m atmosphere.middle_atmosphere.limb_heat
 python -m research.studies.solar_shield_array.integrated_ledger
-python -m pytest research/studies/solar_shield_array/test_exhaust_isolation.py research/studies/solar_shield_array/test_photon_control.py research/studies/solar_shield_array/test_frozen_rings.py research/studies/solar_shield_array/test_attitude_schemes.py research/studies/solar_shield_array/test_plane_motion.py research/studies/solar_shield_array/test_ring_layout.py research/studies/solar_shield_array/test_bundle_validation.py research/studies/solar_shield_array/test_integrated_ledger.py protection/tests/test_annulus_film.py atmosphere/tests/test_limb_heat.py
+OPENBLAS_NUM_THREADS=1 python -m research.studies.solar_shield_array.held_eccentricity
+python -m research.studies.solar_shield_array.array_heat
+python -m pytest research/studies/solar_shield_array/test_exhaust_isolation.py research/studies/solar_shield_array/test_photon_control.py research/studies/solar_shield_array/test_frozen_rings.py research/studies/solar_shield_array/test_attitude_schemes.py research/studies/solar_shield_array/test_plane_motion.py research/studies/solar_shield_array/test_ring_layout.py research/studies/solar_shield_array/test_bundle_validation.py research/studies/solar_shield_array/test_integrated_ledger.py research/studies/solar_shield_array/test_held_eccentricity.py research/studies/solar_shield_array/test_array_heat.py protection/tests/test_annulus_film.py atmosphere/tests/test_limb_heat.py
 ```
 
 The exhaust study takes about 27 CPU minutes, almost all of it the slow-gas
@@ -943,7 +966,9 @@ minutes; without them they refly the twelve orbits, about an hour). The frozen
 orbits take about 15 CPU minutes. The planes take about 24 CPU minutes, with a
 checkpoint after each pass. The stack's radius layout takes about 50 CPU
 minutes: 14 for its calibration flights and 8 for its sample's, each pass
-checkpointed under the flight code's version, and the rest for the layouts. The patch validation takes about 15 CPU minutes,
+checkpointed under the flight code's version, and the rest for the layouts. The
+holding share rebuilds the coupled layouts in about six minutes on two workers,
+and the heat screen takes seconds. The patch validation takes about 15 CPU minutes,
 with a checkpoint for each orbit. The annulus films and the ledger take
 seconds; the films need the protection inputs and the WHI spectrum restored.
 The limb tracing takes about 50 CPU minutes and keeps each case's heat tables

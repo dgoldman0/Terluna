@@ -86,6 +86,20 @@ hold off the exhaust ions, while the fast atoms of charge exchange and the
 unionized gas still pass, so a 1 kg/s budget would need gridded ion thrusters
 and capture of most of that gas. Its propellant fails requirement S6.
 
+The branch ends with [heat, computing and industry](array_industry.md), the
+direction the author kept on 8 October, and one planned branch,
+`research/array-industry`, to take it up. [array_heat.py](array_heat.py) screens
+where the array's heat arises:
+- the tiles absorb 65–83 PW but run near 175 K, with well under a millikelvin
+  across a film, so the light they pass is the resource and their heat repays
+  no device;
+- the film plant's heat near 2,000 K is the best grade in the system;
+- industry and computing in orbit keep their heat out of the Moon's climate.
+
+The shield's trim and store depend on hardware the planned branch chooses.
+Holding the stack's eccentricities takes up to a fifth of the outermost rings'
+eccentricity drive ([held_eccentricity.py](held_eccentricity.py)).
+
 The [expanded coupled-cycle investigation](expanded_cycle.md) adds
 in-plane and arrival-acquisition controls and measures nine full-cycle response
 columns. The local terminal matrix is full rank in those columns, with 34.2%
@@ -307,6 +321,8 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.bundle_validation
 python -m protection.spectra.annulus_film
 python -m research.studies.solar_shield_array.integrated_ledger
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.held_eccentricity
+python -m research.studies.solar_shield_array.array_heat
 python -m pytest protection/dynamics research/studies/solar_shield_array
 python visualization/solar-shield-array/plot.py
 python visualization/solar-shield-array/cycling_plot.py
