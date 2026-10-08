@@ -21,6 +21,7 @@ from engineering.flight import buoyant as bu
 from engineering.flight import winged as wi
 from research.studies.sky_ships import run as ships
 from shared.constants import MOON_RADIUS, SYNODIC_MONTH_DAYS
+from shared.provenance import constants_used
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
@@ -703,11 +704,11 @@ def results() -> dict:
 
     band_air, band_top = air(winds, ships.BAND_KM), air(winds, ships.FLIGHT_BAND_KM[1])
     gust = band['updraft_max_m_s']
-    tower = port['port']['design']
-    top_width = 320.0                    # the tower model's width at the top (summit tower study's width profile)
-    width = lambda z: top_width + (tower['base_width_m'] - top_width) * max(0.0, 1.0 - z / (tower['height_km'] * 1e3)) ** tower['flare_exponent']
+    shape = form['width_profile']       # the chosen form's frame, which also carries the terminal and disks
+    top_width = shape['top_width_m']
+    width = lambda z: top_width + (shape['base_width_m'] - top_width) * max(0.0, 1.0 - z / shape['height_m']) ** shape['flare_exponent']
     band_bottom = (ships.FLIGHT_BAND_KM[0] - summit_km) * 1e3
-    top = tower['height_km'] * 1e3
+    top = shape['height_m']
     in_band = top - band_bottom
     terminal = form['terminal']
     terminal_roof = terminal['z_m'] + terminal['storeys'] * terminal['storey_m']
@@ -746,8 +747,8 @@ def results() -> dict:
                          for L in FREIGHT_LENGTHS_M]
     out['platforms'] = [platform(air(winds, PLATFORM_KM), winds, PLATFORM_KM, L, ships.FABRICS[0]) for L in PLATFORM_LENGTHS_M]
 
-    out['producer'] = dict(study='sky_fleet', files={str(Path(f).relative_to(ROOT)): digest(f) for f in
-                                                     (__file__, bu.__file__, wi.__file__, ships.__file__)},
+    files = {str(Path(f).relative_to(ROOT)): digest(f) for f in (__file__, *ships.PRODUCER_FILES)}
+    out['producer'] = dict(study='sky_fleet', files=files, constants=constants_used(files),
                            inputs={str(Path(f).relative_to(ROOT)): digest(f) for f in (SKY_SHIPS, PORT, FORM, GLOBAL_WINDS,
                                                                                             RING)})
     return out

@@ -19,17 +19,22 @@ import numpy as np
 from atmosphere.radiative_convective.thermodynamics import MOON, earthlike_air
 from engineering.flight import buoyant as bu
 from engineering.flight import winged as wi
+from research.studies.summit_tower import run as tower
 from research.studies.summit_tower.run import earth_air
+from shared.constants import STANDARD_GRAVITY
+from shared.provenance import constants_used
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
 SCHEMA = 'terluna.research.sky-ships/1'
-GLOBAL_WINDS = ROOT / 'climate' / 'results' / 'gcm' / 'global_winds_A28_dim5.json'
-RING = ROOT / 'climate' / 'results' / 'crm' / 'ring_ring.json'
+GLOBAL_WINDS = ROOT / 'climate' / 'results' / 'gcm' / 'global_winds_A28_dim5_moon.json'
+RING = ROOT / 'climate' / 'results' / 'crm' / 'ring_ring_equator.json'
 PORT = ROOT / 'research' / 'studies' / 'summit_tower' / 'results' / 'summit_tower.json'
 
+PRODUCER_FILES = (__file__, bu.__file__, wi.__file__, tower.__file__,
+                  ROOT / 'atmosphere' / 'radiative_convective' / 'thermodynamics.py')
 G_MOON = MOON.surface_gravity                       # GM/R^2, 1.6242 m/s2
-G_EARTH = 9.80665
+G_EARTH = STANDARD_GRAVITY
 AIR = earthlike_air(121590.0, 400.0)                 # the design air's composition (research/decisions.md: 1.2 atm)
 AIR_MOLAR_MASS = AIR.molar_mass
 EARTH_MOLAR_MASS = 0.0289644
@@ -551,8 +556,8 @@ def results() -> dict:
                          for v in (25.0, 30.0, 36.0)} for f in FABRICS}
     return dict(
         schema=SCHEMA,
-        producer=dict(study='sky_ships', files={str(Path(f).relative_to(ROOT)): digest(f) for f in
-                                                (__file__, bu.__file__, wi.__file__)},
+        producer=dict(study='sky_ships', files={str(Path(f).relative_to(ROOT)): digest(f) for f in PRODUCER_FILES},
+                      constants=constants_used(PRODUCER_FILES),
                       inputs={str(Path(f).relative_to(ROOT)): digest(f) for f in (GLOBAL_WINDS, RING, PORT)}),
         evidence=EVIDENCE, reading_rule=READING_RULE,
         air=air_table(winds, ring), band=bw, storms=storms(ring), similarity=similarity(winds), buoyant=buoyant,

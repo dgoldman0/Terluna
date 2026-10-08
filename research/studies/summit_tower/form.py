@@ -30,11 +30,12 @@ import numpy as np
 
 from atmosphere.radiative_convective.thermodynamics import MOON
 from engineering.towers import lattice as lt
+from shared.provenance import constants_used
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
 STUDY = HERE / 'results' / 'summit_tower.json'
-GCM_WINDS = ROOT / 'climate' / 'results' / 'gcm' / 'site_winds_A28_dim5_summit.json'
+GCM_WINDS = ROOT / 'climate' / 'results' / 'gcm' / 'site_winds_A28_dim5_moon_summit.json'
 SCHEMA = 'terluna.research.summit-tower-form/1'
 
 G = MOON.surface_gravity
@@ -433,6 +434,8 @@ def results() -> dict:
                    ground_above_sea_m=ground, node_spacing_m=NODE_DZ, transfer_ring_m=Z_T,
                    masses_kg_m2=dict(floor=FLOOR_KG_M2, roof_slab=ROOF_SLAB_KG_M2, park=PARK_KG_M2,
                                      sealed_halls=HALLS_KG_M2)),
+        width_profile=dict(height_m=H, base_width_m=B0, top_width_m=BT, flare_exponent=P,
+                           rule='width(z) = top + (base - top) * (1 - z / height) ** flare'),
         frame=dict(members_each_way=N, member_breadth_rule=f'max({MIN_MEMBER} m, {MEMBER_SHARE} x spacing)',
                    slenderness_limit_breadths=SLENDER,
                    samples=[dict(z_m=r['z_m'], radius_m=r['radius_m'], breadth_m=r['breadth_m'],
@@ -458,9 +461,10 @@ def digest(path) -> str:
 
 def main() -> int:
     product = results()
-    product['producer'] = dict(study='summit_tower', files={'research/studies/summit_tower/form.py': digest(__file__)},
-                               inputs={'research/studies/summit_tower/results/summit_tower.json': digest(STUDY),
-                                       'climate/results/gcm/site_winds_A28_dim5_summit.json': digest(GCM_WINDS)})
+    files = {p: digest(ROOT / p) for p in ('research/studies/summit_tower/form.py', 'engineering/towers/lattice.py',
+                                           'atmosphere/radiative_convective/thermodynamics.py')}
+    product['producer'] = dict(study='summit_tower', files=files, constants=constants_used(files),
+                               inputs={str(p.relative_to(ROOT)): digest(p) for p in (STUDY, GCM_WINDS)})
     out = HERE / 'results' / 'summit_tower_form.json'
     out.write_text(json.dumps(product, indent=1) + '\n')
     s = product['steel_kg']

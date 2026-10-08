@@ -5,6 +5,7 @@ import unittest
 import numpy as np
 
 from research.studies.sky_ships import run as sk
+from shared.provenance import constants_changed
 
 
 class SkyShipTests(unittest.TestCase):
@@ -53,6 +54,9 @@ class SkyShipTests(unittest.TestCase):
             self.skipTest('results have not been generated')
         r = json.loads(path.read_text())
         self.assertEqual(r['schema'], sk.SCHEMA)
+        for name, h in {**r['producer']['files'], **r['producer']['inputs']}.items():
+            self.assertEqual(sk.digest(sk.ROOT / name), h, name)
+        self.assertFalse(constants_changed(r['producer']['constants']))
         rho = [row['density_kg_m3'] for row in r['air']]
         self.assertEqual(rho, sorted(rho, reverse=True))
         band = [row for row in r['air'] if 35.0 <= row['height_km'] <= 45.0]

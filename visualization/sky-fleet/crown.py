@@ -26,12 +26,11 @@ ONLY = {a for a in ARGS[1:] if not a.startswith('--')}
 OUT.mkdir(parents=True, exist_ok=True)
 ROOT = Path(__file__).resolve().parents[2]
 FLEET = json.loads((ROOT / 'research' / 'studies' / 'sky_fleet' / 'results' / 'sky_fleet.json').read_text())
-TOWER = json.loads((ROOT / 'research' / 'studies' / 'summit_tower' / 'results' / 'summit_tower.json').read_text())
 FORM = json.loads((ROOT / 'research' / 'studies' / 'summit_tower' / 'results' / 'summit_tower_form.json').read_text())
-D = TOWER['port']['design']
+SHAPE = FORM['width_profile']        # the chosen form's frame
 CROWN = FLEET['long_haul']['crown']
-H = D['height_km'] * 1e3
-B0, BT, P = D['base_width_m'], CROWN['top_width_m'], D['flare_exponent']
+H = SHAPE['height_m']
+B0, BT, P = SHAPE['base_width_m'], CROWN['top_width_m'], SHAPE['flare_exponent']
 BAND = CROWN['band_bottom_above_summit_m']
 Z0 = H - 5300.0                      # the lowest height drawn
 LIFT = H - 400.0                     # the scene's origin, 400 m below the top, keeps coordinates small

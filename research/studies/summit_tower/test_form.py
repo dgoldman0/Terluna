@@ -3,6 +3,7 @@ import json
 import unittest
 
 from research.studies.summit_tower import form
+from shared.provenance import constants_changed
 
 
 class FormTests(unittest.TestCase):
@@ -38,6 +39,10 @@ class FormTests(unittest.TestCase):
             self.skipTest('results have not been generated')
         stored = json.loads(path.read_text())
         self.assertEqual(stored['schema'], form.SCHEMA)
+        for name, h in {**stored['producer']['files'], **stored['producer']['inputs']}.items():
+            self.assertEqual(form.digest(form.ROOT / name), h, name)
+        self.assertFalse(constants_changed(stored['producer']['constants']))
+        self.assertEqual(stored['width_profile']['base_width_m'], form.B0)
         self.assertAlmostEqual(stored['steel_total_kg'], self.r['steel_total_kg'], delta=1e6)
 
 

@@ -5,6 +5,7 @@ import unittest
 import numpy as np
 
 from research.studies.summit_tower import run as st
+from shared.provenance import constants_changed
 
 
 class SummitTowerTests(unittest.TestCase):
@@ -31,6 +32,9 @@ class SummitTowerTests(unittest.TestCase):
             self.skipTest('results have not been generated')
         r = json.loads(path.read_text())
         self.assertEqual(r['schema'], st.SCHEMA)
+        for name, h in {**r['producer']['files'], **r['producer']['inputs']}.items():
+            self.assertEqual(st.digest(st.ROOT / name), h, name)
+        self.assertFalse(constants_changed(r['producer']['constants']))
         self.assertTrue(11000 < r['site']['ground_above_sea_m'] < 13000)
         gusts = [f'{v:g}' for v in r['design_winds']['scenarios_m_s']]
         for height, row in r['moon'].items():

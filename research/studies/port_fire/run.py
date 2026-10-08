@@ -23,6 +23,7 @@ from engineering.fire import design_fires as df
 from engineering.fire import egress as eg
 from engineering.fire import smoke as sm
 from research.studies.summit_tower import run as tower
+from shared.provenance import constants_used
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
@@ -455,8 +456,10 @@ def results() -> dict:
 def main() -> int:
     r = results()
     files = {p: digest(ROOT / p) for p in ('research/studies/port_fire/run.py', 'engineering/fire/smoke.py',
-                                           'engineering/fire/design_fires.py', 'engineering/fire/egress.py')}
-    product = dict(schema=SCHEMA, producer=dict(study='port_fire', files=files,
+                                           'engineering/fire/design_fires.py', 'engineering/fire/egress.py',
+                                           'research/studies/summit_tower/run.py',
+                                           'atmosphere/radiative_convective/thermodynamics.py')}
+    product = dict(schema=SCHEMA, producer=dict(study='port_fire', files=files, constants=constants_used(files),
                                                 inputs={str(PORT.relative_to(ROOT)): digest(PORT)}),
                    evidence=('First-order fire-engineering arithmetic. Earth correlations (plumes, ceiling jets, '
                              'detector and sprinkler response, smoke filling, flashover, ventilation limits) are '

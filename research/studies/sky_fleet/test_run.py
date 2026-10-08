@@ -9,6 +9,7 @@ import numpy as np
 from engineering.flight import winged as wi
 from research.studies.sky_fleet import run
 from research.studies.sky_ships import run as ships
+from shared.provenance import constants_changed
 
 
 class Ships(unittest.TestCase):
@@ -93,6 +94,7 @@ class Product(unittest.TestCase):
             self.assertEqual(run.digest(run.ROOT / name), h, name)
         for name, h in r['producer']['inputs'].items():
             self.assertEqual(run.digest(run.ROOT / name), h, name)
+        self.assertFalse(constants_changed(r['producer']['constants']))
         sizes = [o['length_m'] for o in r['long_haul']['options']]
         self.assertEqual(sizes, sorted(sizes))
         berths = [o['crown']['berths'] for o in r['long_haul']['options']]

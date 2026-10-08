@@ -5,38 +5,38 @@
  "air": {
   "city_low": {
    "height_km": 7.6,
-   "density_kg_m3": 1.253,
-   "temperature_c": 15.8
+   "density_kg_m3": 1.252,
+   "temperature_c": 16.3
   },
   "summit": {
    "height_km": 11.6,
-   "density_kg_m3": 1.175,
-   "temperature_c": 12.5
+   "density_kg_m3": 1.174,
+   "temperature_c": 12.7
   },
   "city_flight": {
    "height_km": 12.6,
-   "density_kg_m3": 1.156,
-   "temperature_c": 11.6
+   "density_kg_m3": 1.155,
+   "temperature_c": 11.8
   },
   "regional_docks": {
    "height_km": 24.1,
-   "density_kg_m3": 0.956,
+   "density_kg_m3": 0.957,
    "temperature_c": 1.5
   },
   "flight_band": {
    "height_km": 40.0,
-   "density_kg_m3": 0.733,
-   "temperature_c": -13.5
+   "density_kg_m3": 0.734,
+   "temperature_c": -13.9
   },
   "fast_cruise": {
    "height_km": 55.0,
-   "density_kg_m3": 0.57,
-   "temperature_c": -30.5
+   "density_kg_m3": 0.569,
+   "temperature_c": -30.3
   },
   "platforms": {
    "height_km": 70.0,
-   "density_kg_m3": 0.438,
-   "temperature_c": -48.1
+   "density_kg_m3": 0.436,
+   "temperature_c": -47.1
   }
  },
  "people_on_wings": {
@@ -103,7 +103,7 @@
      "span_m": 3.7,
      "area_m2": 3.2,
      "mass_kg": 68.0,
-     "stall_m_s": 7.6,
+     "stall_m_s": 7.7,
      "least_sink_m_s": 0.97,
      "least_sink_speed_m_s": 9.2,
      "best_glide": 10.0,
@@ -139,7 +139,7 @@
      "mass_kg": 600.0,
      "stall_m_s": 9.7,
      "least_sink_m_s": 0.25,
-     "least_sink_speed_m_s": 11.6,
+     "least_sink_speed_m_s": 11.7,
      "best_glide": 50.0,
      "best_glide_speed_m_s": 14.4,
      "least_power_w": 248.0
@@ -310,7 +310,7 @@
      "a fit young man for an hour": {
       "power_w": 215.0,
       "top_level_speed_m_s": 11.7,
-      "climb_m_s": 0.74
+      "climb_m_s": 0.73
      }
     },
     "earth_sea_level": {
@@ -359,19 +359,19 @@
    "a fit young man for an hour": 215.0
   },
   "soaring": {
-   "mixed_layer_max_km": 11.7,
-   "at_hour_angle_deg": 5.0,
-   "cloud_base_at_max_km": 9.9,
-   "hours_mixed_layer_over_2_km": 295.0,
-   "hours_dry_and_over_2_km": 157.0,
-   "night_mixed_layer_km": 0.2,
-   "storm_hours_rain_over_0_1_mm_h": 157.0,
-   "land_wet_share": 0.033,
-   "rain_spells_per_lunar_day": 1.76,
+   "mixed_layer_max_km": 9.9,
+   "at_hour_angle_deg": -5.0,
+   "cloud_base_at_max_km": 7.3,
+   "hours_mixed_layer_over_2_km": 335.0,
+   "hours_dry_and_over_2_km": 138.0,
+   "night_mixed_layer_km": 0.3,
+   "storm_hours_rain_over_0_1_mm_h": 217.0,
+   "land_wet_share": 0.057,
+   "rain_spells_per_lunar_day": 3.21,
    "rain_spell_hours": {
     "median": 3.0,
     "p90": 12.0,
-    "max": 27.0
+    "max": 24.0
    },
    "hour_angle_deg": [
     -175.0,
@@ -412,80 +412,80 @@
     175.0
    ],
    "mixed_layer_km": [
+    0.3,
+    0.2,
+    0.2,
+    0.2,
     0.2,
     0.1,
     0.1,
-    0.1,
-    0.1,
-    0.1,
-    0.1,
-    0.1,
-    0.3,
-    0.3,
-    1.4,
-    2.8,
-    4.1,
-    5.4,
-    6.8,
-    8.3,
-    9.8,
-    11.0,
-    11.7,
-    10.2,
-    8.2,
-    6.8,
-    6.0,
+    0.2,
+    0.2,
+    0.4,
+    2.0,
+    3.6,
+    4.7,
+    5.8,
+    6.9,
+    7.9,
+    9.2,
+    9.9,
+    9.4,
+    7.5,
+    6.1,
+    5.2,
+    4.9,
     4.5,
-    3.2,
-    2.4,
-    1.6,
-    0.9,
+    3.4,
+    2.6,
+    2.0,
+    1.3,
+    1.0,
+    0.7,
     0.6,
     0.5,
     0.5,
+    0.5,
     0.4,
-    0.3,
-    0.3,
-    0.2,
-    0.2
+    0.3
    ],
    "rain_mm_h": [
-    0.0,
-    0.0,
-    0.001,
-    0.001,
-    0.001,
-    0.001,
-    0.001,
+    0.005,
+    0.005,
+    0.002,
     0.001,
     0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
+    0.002,
     0.001,
     0.002,
-    0.005,
-    0.185,
-    0.537,
-    0.308,
-    0.295,
-    0.408,
-    0.624,
-    0.497,
-    0.163,
-    0.041,
-    0.012,
+    0.001,
     0.001,
     0.0,
     0.0,
     0.0,
-    0.0,
-    0.0,
-    0.0
+    0.001,
+    0.001,
+    0.001,
+    0.001,
+    0.016,
+    0.124,
+    0.478,
+    1.119,
+    0.719,
+    0.472,
+    0.499,
+    0.596,
+    0.471,
+    0.554,
+    0.39,
+    0.168,
+    0.094,
+    0.026,
+    0.032,
+    0.038,
+    0.008,
+    0.019,
+    0.04
    ]
   }
  },
@@ -559,7 +559,7 @@
     "range_km": 200.0,
     "city_trip_km": 10.0,
     "city_trip_kwh": 2.65,
-    "city_trip_wh_per_km": 264.5,
+    "city_trip_wh_per_km": 264.6,
     "wh_per_seat_km": 22.0
    },
    {
@@ -741,7 +741,7 @@
    "fuel_t": 0.2,
    "passengers": 250.0,
    "payload_t": 37.6,
-   "cruise_mw": 0.41,
+   "cruise_mw": 0.4,
    "wh_per_passenger_km": 19.1,
    "hydrogen_t": 3.4,
    "commercial_speed_km_h": 42.0,
@@ -780,15 +780,15 @@
    "diameter_m": 41.7,
    "fin_span_m": 10.4,
    "volume_m3": 206000.0,
-   "gross_lift_t": 210.3,
+   "gross_lift_t": 210.2,
    "useful_share": 0.865,
    "route_km": 180.0,
    "cruise_m_s": 25.0,
    "fuel_t": 0.5,
    "passengers": 1210.0,
    "payload_t": 181.4,
-   "cruise_mw": 1.13,
-   "wh_per_passenger_km": 11.5,
+   "cruise_mw": 1.12,
+   "wh_per_passenger_km": 11.4,
    "hydrogen_t": 15.8,
    "commercial_speed_km_h": 42.0,
    "line_per_hour_per_direction": {
@@ -803,13 +803,13 @@
    "diameter_m": 50.0,
    "fin_span_m": 12.5,
    "volume_m3": 356000.0,
-   "gross_lift_t": 363.3,
+   "gross_lift_t": 363.2,
    "useful_share": 0.873,
    "route_km": 180.0,
    "cruise_m_s": 25.0,
    "fuel_t": 0.7,
    "passengers": 2110.0,
-   "payload_t": 316.4,
+   "payload_t": 316.3,
    "cruise_mw": 1.62,
    "wh_per_passenger_km": 9.6,
    "hydrogen_t": 27.3,
@@ -881,15 +881,15 @@
   "per_flight": {
    "sky ferries": {
     "minutes": 12.857,
-    "kwh": 0.148
+    "kwh": 0.147
    },
    "sky boats": {
     "minutes": 8.167,
-    "kwh": 0.687
+    "kwh": 0.688
    },
    "air taxis": {
     "minutes": 10.537,
-    "kwh": 2.645
+    "kwh": 2.646
    },
    "personal wings and gliders": {
     "minutes": 11.95,
@@ -915,7 +915,7 @@
      "fleet_in_service": 581.89,
      "per_km2_busy_hour": 0.16,
      "minutes_aloft": 12.86,
-     "energy_gwh_day": 3.7
+     "energy_gwh_day": 3.66
     },
     "sky boats": {
      "trips_per_day": 20000000.0,
@@ -975,7 +975,7 @@
      "fleet_in_service": 1018.3,
      "per_km2_busy_hour": 0.28,
      "minutes_aloft": 12.86,
-     "energy_gwh_day": 5.17
+     "energy_gwh_day": 5.13
     },
     "sky boats": {
      "trips_per_day": 28000000.0,
@@ -1035,7 +1035,7 @@
      "fleet_in_service": 1749.29,
      "per_km2_busy_hour": 0.47,
      "minutes_aloft": 12.86,
-     "energy_gwh_day": 6.84
+     "energy_gwh_day": 6.78
     },
     "sky boats": {
      "trips_per_day": 37000000.0,
@@ -1131,8 +1131,8 @@
  },
  "regional": {
   "passengers_per_hour": [
-   20000.0,
-   33400.0
+   17600.0,
+   29200.0
   ],
   "ships": [
    {
@@ -1140,41 +1140,41 @@
     "diameter_m": 40.8,
     "fin_span_m": 10.2,
     "volume_m3": 194000.0,
-    "gross_lift_t": 151.7,
-    "useful_share": 0.806,
+    "gross_lift_t": 151.8,
+    "useful_share": 0.801,
     "route_km": 1500.0,
     "cruise_m_s": 35.0,
     "fuel_t": 5.9,
     "passengers": 580.0,
-    "payload_t": 116.3,
+    "payload_t": 115.7,
     "cruise_mw": 2.37,
-    "wh_per_passenger_km": 34.0,
+    "wh_per_passenger_km": 34.2,
     "hydrogen_t": 11.4,
     "network": {
      "calls_per_hour": [
-      17.26,
-      28.77
+      15.16,
+      25.19
      ],
      "destinations_hourly": [
-      17.3,
-      28.8
+      15.2,
+      25.2
      ],
      "destinations_every_4_hours": [
-      69.0,
-      115.0
+      61.0,
+      101.0
      ],
      "destinations_daily": [
-      414.0,
-      691.0
+      364.0,
+      605.0
      ],
      "berths": [
-      17.3,
-      28.8
+      15.2,
+      25.2
      ],
      "mean_trip_hours": 4.0,
      "fleet": [
-      170.0,
-      290.0
+      150.0,
+      250.0
      ]
     }
    },
@@ -1183,41 +1183,41 @@
     "diameter_m": 58.3,
     "fin_span_m": 14.6,
     "volume_m3": 566000.0,
-    "gross_lift_t": 442.2,
-    "useful_share": 0.833,
+    "gross_lift_t": 442.7,
+    "useful_share": 0.828,
     "route_km": 1500.0,
     "cruise_m_s": 35.0,
     "fuel_t": 12.4,
-    "passengers": 1780.0,
-    "payload_t": 356.0,
-    "cruise_mw": 4.84,
-    "wh_per_passenger_km": 23.2,
-    "hydrogen_t": 33.2,
+    "passengers": 1770.0,
+    "payload_t": 354.3,
+    "cruise_mw": 4.85,
+    "wh_per_passenger_km": 23.3,
+    "hydrogen_t": 33.3,
     "network": {
      "calls_per_hour": [
-      5.63,
-      9.38
+      4.97,
+      8.25
      ],
      "destinations_hourly": [
-      5.6,
-      9.4
+      5.0,
+      8.3
      ],
      "destinations_every_4_hours": [
-      23.0,
-      38.0
+      20.0,
+      33.0
      ],
      "destinations_daily": [
-      135.0,
-      225.0
+      119.0,
+      198.0
      ],
      "berths": [
-      5.6,
-      9.4
+      5.0,
+      8.3
      ],
      "mean_trip_hours": 4.0,
      "fleet": [
-      60.0,
-      90.0
+      50.0,
+      80.0
      ]
     }
    },
@@ -1226,36 +1226,36 @@
     "diameter_m": 83.3,
     "fin_span_m": 20.9,
     "volume_m3": 1650000.0,
-    "gross_lift_t": 1289.1,
-    "useful_share": 0.85,
+    "gross_lift_t": 1290.5,
+    "useful_share": 0.845,
     "route_km": 1500.0,
     "cruise_m_s": 35.0,
     "fuel_t": 26.1,
-    "passengers": 5350.0,
-    "payload_t": 1069.6,
-    "cruise_mw": 9.88,
+    "passengers": 5320.0,
+    "payload_t": 1064.8,
+    "cruise_mw": 9.89,
     "wh_per_passenger_km": 16.3,
-    "hydrogen_t": 96.9,
+    "hydrogen_t": 97.0,
     "network": {
      "calls_per_hour": [
-      1.87,
-      3.12
+      1.65,
+      2.75
      ],
      "destinations_hourly": [
-      1.9,
-      3.1
+      1.7,
+      2.7
      ],
      "destinations_every_4_hours": [
       7.0,
-      12.0
+      11.0
      ],
      "destinations_daily": [
-      45.0,
-      75.0
+      40.0,
+      66.0
      ],
      "berths": [
-      1.9,
-      3.1
+      1.7,
+      2.7
      ],
      "mean_trip_hours": 4.0,
      "fleet": [
@@ -1269,8 +1269,8 @@
  },
  "long_haul": {
   "passengers_per_hour": [
-   31900.0,
-   53100.0
+   37700.0,
+   62600.0
   ],
   "route_km": 5184.0,
   "mean_trip_km": 2729.0,
@@ -1306,64 +1306,64 @@
     "diameter_m": 83.3,
     "fin_span_m": 20.9,
     "volume_m3": 1650000.0,
-    "gross_lift_t": 1012.9,
-    "useful_share": 0.853,
+    "gross_lift_t": 1014.4,
+    "useful_share": 0.85,
     "route_km": 5184.0,
     "cruise_m_s": 30.0,
-    "fuel_t": 57.0,
-    "passengers": 2020.0,
-    "payload_t": 806.8,
-    "cruise_mw": 4.93,
+    "fuel_t": 57.1,
+    "passengers": 2010.0,
+    "payload_t": 805.4,
+    "cruise_mw": 4.94,
     "wh_per_passenger_km": 27.3,
-    "hydrogen_t": 76.1,
+    "hydrogen_t": 76.3,
     "network": {
      "calls_per_hour": [
-      7.9,
-      13.14
+      9.38,
+      15.57
      ],
      "destinations_hourly": [
-      7.9,
-      13.1
+      9.4,
+      15.6
      ],
      "destinations_every_4_hours": [
-      32.0,
-      53.0
+      38.0,
+      62.0
      ],
      "destinations_daily": [
-      190.0,
-      315.0
+      225.0,
+      374.0
      ],
      "berths": [
-      15.8,
-      26.3
+      18.8,
+      31.1
      ],
      "mean_trip_hours": 25.3,
      "fleet": [
-      430.0,
-      720.0
+      510.0,
+      850.0
      ]
     },
     "mooring": {
-     "nose_on_design_mn": 0.15,
-     "side_on_service_mn": 1.35
+     "nose_on_design_mn": 0.19,
+     "side_on_service_mn": 4.37
     },
     "crown": {
-     "berths": 27,
+     "berths": 32,
      "pitch_m": 163.0,
      "level_spacing_m": 165.0,
      "levels": 3,
      "arms": 6,
-     "ships_per_arm": 5,
-     "arm_length_m": 772.0,
+     "ships_per_arm": 6,
+     "arm_length_m": 936.0,
      "levels_above_summit_m": [
       23584.0,
       23749.0,
       23914.0
      ],
-     "reach_from_axis_m": 948.0,
+     "reach_from_axis_m": 1111.0,
      "footprint_east_m": 500.0
     },
-    "hydrogen_at_crown_t": 2055.0,
+    "hydrogen_at_crown_t": 2442.0,
     "trip_hours": {
      "mean": 25.3,
      "longest": 50.5
@@ -1374,63 +1374,63 @@
     "diameter_m": 125.0,
     "fin_span_m": 31.3,
     "volume_m3": 5570000.0,
-    "gross_lift_t": 3418.6,
-    "useful_share": 0.861,
+    "gross_lift_t": 3423.7,
+    "useful_share": 0.858,
     "route_km": 5184.0,
     "cruise_m_s": 30.0,
-    "fuel_t": 140.1,
-    "passengers": 7010.0,
-    "payload_t": 2802.1,
-    "cruise_mw": 11.09,
+    "fuel_t": 140.3,
+    "passengers": 6990.0,
+    "payload_t": 2797.8,
+    "cruise_mw": 11.11,
     "wh_per_passenger_km": 19.3,
-    "hydrogen_t": 257.0,
+    "hydrogen_t": 257.4,
     "network": {
      "calls_per_hour": [
-      2.28,
-      3.79
+      2.7,
+      4.48
      ],
      "destinations_hourly": [
-      2.3,
-      3.8
+      2.7,
+      4.5
      ],
      "destinations_every_4_hours": [
-      9.0,
-      15.0
+      11.0,
+      18.0
      ],
      "destinations_daily": [
-      55.0,
-      91.0
+      65.0,
+      107.0
      ],
      "berths": [
-      4.6,
-      7.6
+      5.4,
+      9.0
      ],
      "mean_trip_hours": 25.3,
      "fleet": [
-      120.0,
-      210.0
+      150.0,
+      240.0
      ]
     },
     "mooring": {
-     "nose_on_design_mn": 0.34,
-     "side_on_service_mn": 3.05
+     "nose_on_design_mn": 0.43,
+     "side_on_service_mn": 9.83
     },
     "crown": {
-     "berths": 8,
+     "berths": 9,
      "pitch_m": 245.0,
      "level_spacing_m": 228.0,
      "levels": 2,
      "arms": 4,
-     "ships_per_arm": 2,
-     "arm_length_m": 424.0,
+     "ships_per_arm": 3,
+     "arm_length_m": 669.0,
      "levels_above_summit_m": [
       23615.0,
       23842.0
      ],
-     "reach_from_axis_m": 599.0,
+     "reach_from_axis_m": 844.0,
      "footprint_east_m": 750.0
     },
-    "hydrogen_at_crown_t": 2056.0,
+    "hydrogen_at_crown_t": 2317.0,
     "trip_hours": {
      "mean": 25.3,
      "longest": 50.5
@@ -1441,46 +1441,46 @@
     "diameter_m": 166.7,
     "fin_span_m": 41.8,
     "volume_m3": 13200000.0,
-    "gross_lift_t": 8103.4,
-    "useful_share": 0.861,
+    "gross_lift_t": 8115.5,
+    "useful_share": 0.858,
     "route_km": 5184.0,
     "cruise_m_s": 30.0,
-    "fuel_t": 269.8,
-    "passengers": 16760.0,
-    "payload_t": 6705.2,
-    "cruise_mw": 19.72,
-    "wh_per_passenger_km": 15.5,
-    "hydrogen_t": 609.2,
+    "fuel_t": 270.0,
+    "passengers": 16740.0,
+    "payload_t": 6695.0,
+    "cruise_mw": 19.76,
+    "wh_per_passenger_km": 15.6,
+    "hydrogen_t": 610.1,
     "network": {
      "calls_per_hour": [
-      0.95,
-      1.58
+      1.13,
+      1.87
      ],
      "destinations_hourly": [
-      1.0,
-      1.6
+      1.1,
+      1.9
      ],
      "destinations_every_4_hours": [
-      4.0,
-      6.0
+      5.0,
+      7.0
      ],
      "destinations_daily": [
-      23.0,
-      38.0
+      27.0,
+      45.0
      ],
      "berths": [
-      1.9,
-      3.2
+      2.3,
+      3.7
      ],
      "mean_trip_hours": 25.3,
      "fleet": [
-      50.0,
-      90.0
+      60.0,
+      100.0
      ]
     },
     "mooring": {
-     "nose_on_design_mn": 0.61,
-     "side_on_service_mn": 5.42
+     "nose_on_design_mn": 0.76,
+     "side_on_service_mn": 17.48
     },
     "crown": {
      "berths": 4,
@@ -1497,7 +1497,7 @@
      "reach_from_axis_m": 414.0,
      "footprint_east_m": 1000.0
     },
-    "hydrogen_at_crown_t": 2437.0,
+    "hydrogen_at_crown_t": 2440.0,
     "trip_hours": {
      "mean": 25.3,
      "longest": 50.5
@@ -1508,36 +1508,36 @@
     "diameter_m": 250.0,
     "fin_span_m": 62.7,
     "volume_m3": 44500000.0,
-    "gross_lift_t": 27349.1,
-    "useful_share": 0.853,
+    "gross_lift_t": 27389.7,
+    "useful_share": 0.851,
     "route_km": 5184.0,
     "cruise_m_s": 30.0,
-    "fuel_t": 697.6,
-    "passengers": 56590.0,
-    "payload_t": 22634.5,
-    "cruise_mw": 44.37,
+    "fuel_t": 697.9,
+    "passengers": 56500.0,
+    "payload_t": 22599.8,
+    "cruise_mw": 44.45,
     "wh_per_passenger_km": 11.9,
-    "hydrogen_t": 2056.0,
+    "hydrogen_t": 2059.0,
     "network": {
      "calls_per_hour": [
-      0.28,
-      0.47
+      0.33,
+      0.55
      ],
      "destinations_hourly": [
       0.3,
-      0.5
+      0.6
      ],
      "destinations_every_4_hours": [
       1.0,
       2.0
      ],
      "destinations_daily": [
-      7.0,
-      11.0
+      8.0,
+      13.0
      ],
      "berths": [
-      0.6,
-      0.9
+      0.7,
+      1.1
      ],
      "mean_trip_hours": 25.3,
      "fleet": [
@@ -1546,15 +1546,15 @@
      ]
     },
     "mooring": {
-     "nose_on_design_mn": 1.38,
-     "side_on_service_mn": 12.19
+     "nose_on_design_mn": 1.72,
+     "side_on_service_mn": 39.32
     },
     "crown": {
-     "berths": 1,
+     "berths": 2,
      "pitch_m": 490.0,
      "level_spacing_m": 415.0,
      "levels": 1,
-     "arms": 1,
+     "arms": 2,
      "ships_per_arm": 1,
      "arm_length_m": 358.0,
      "levels_above_summit_m": [
@@ -1563,7 +1563,7 @@
      "reach_from_axis_m": 533.0,
      "footprint_east_m": 1500.0
     },
-    "hydrogen_at_crown_t": 2056.0,
+    "hydrogen_at_crown_t": 4118.0,
     "trip_hours": {
      "mean": 25.3,
      "longest": 50.5
@@ -1576,16 +1576,16 @@
     "diameter_m": 83.3,
     "fin_span_m": 20.9,
     "volume_m3": 1650000.0,
-    "gross_lift_t": 1012.9,
-    "useful_share": 0.853,
+    "gross_lift_t": 1014.4,
+    "useful_share": 0.85,
     "route_km": 5184.0,
     "cruise_m_s": 30.0,
-    "fuel_t": 57.0,
-    "passengers": 2020.0,
-    "payload_t": 806.8,
-    "cruise_mw": 4.93,
+    "fuel_t": 57.1,
+    "passengers": 2010.0,
+    "payload_t": 805.4,
+    "cruise_mw": 4.94,
     "wh_per_passenger_km": 27.3,
-    "hydrogen_t": 76.1,
+    "hydrogen_t": 76.3,
     "mean_trip_hours": 25.3
    },
    {
@@ -1593,16 +1593,16 @@
     "diameter_m": 83.3,
     "fin_span_m": 20.9,
     "volume_m3": 1650000.0,
-    "gross_lift_t": 1012.9,
-    "useful_share": 0.819,
+    "gross_lift_t": 1014.4,
+    "useful_share": 0.816,
     "route_km": 5184.0,
     "cruise_m_s": 40.0,
-    "fuel_t": 90.8,
-    "passengers": 1850.0,
-    "payload_t": 738.9,
-    "cruise_mw": 11.69,
-    "wh_per_passenger_km": 47.4,
-    "hydrogen_t": 76.1,
+    "fuel_t": 90.9,
+    "passengers": 1840.0,
+    "payload_t": 736.6,
+    "cruise_mw": 11.71,
+    "wh_per_passenger_km": 47.6,
+    "hydrogen_t": 76.3,
     "mean_trip_hours": 19.0
    },
    {
@@ -1610,16 +1610,16 @@
     "diameter_m": 83.3,
     "fin_span_m": 20.9,
     "volume_m3": 1650000.0,
-    "gross_lift_t": 1012.9,
-    "useful_share": 0.771,
+    "gross_lift_t": 1014.4,
+    "useful_share": 0.766,
     "route_km": 5184.0,
     "cruise_m_s": 50.0,
-    "fuel_t": 136.1,
-    "passengers": 1610.0,
-    "payload_t": 644.5,
-    "cruise_mw": 22.82,
-    "wh_per_passenger_km": 81.5,
-    "hydrogen_t": 76.1,
+    "fuel_t": 136.3,
+    "passengers": 1600.0,
+    "payload_t": 641.1,
+    "cruise_mw": 22.86,
+    "wh_per_passenger_km": 82.0,
+    "hydrogen_t": 76.3,
     "mean_trip_hours": 15.2
    },
    {
@@ -1627,16 +1627,16 @@
     "diameter_m": 125.0,
     "fin_span_m": 31.3,
     "volume_m3": 5570000.0,
-    "gross_lift_t": 3418.6,
-    "useful_share": 0.861,
+    "gross_lift_t": 3423.7,
+    "useful_share": 0.858,
     "route_km": 5184.0,
     "cruise_m_s": 30.0,
-    "fuel_t": 140.1,
-    "passengers": 7010.0,
-    "payload_t": 2802.1,
-    "cruise_mw": 11.09,
+    "fuel_t": 140.3,
+    "passengers": 6990.0,
+    "payload_t": 2797.8,
+    "cruise_mw": 11.11,
     "wh_per_passenger_km": 19.3,
-    "hydrogen_t": 257.0,
+    "hydrogen_t": 257.4,
     "mean_trip_hours": 25.3
    },
    {
@@ -1644,16 +1644,16 @@
     "diameter_m": 125.0,
     "fin_span_m": 31.3,
     "volume_m3": 5570000.0,
-    "gross_lift_t": 3418.6,
-    "useful_share": 0.835,
+    "gross_lift_t": 3423.7,
+    "useful_share": 0.831,
     "route_km": 5184.0,
     "cruise_m_s": 40.0,
-    "fuel_t": 213.1,
-    "passengers": 6600.0,
-    "payload_t": 2640.6,
-    "cruise_mw": 26.29,
-    "wh_per_passenger_km": 31.1,
-    "hydrogen_t": 257.0,
+    "fuel_t": 213.3,
+    "passengers": 6580.0,
+    "payload_t": 2632.9,
+    "cruise_mw": 26.34,
+    "wh_per_passenger_km": 31.3,
+    "hydrogen_t": 257.4,
     "mean_trip_hours": 19.0
    },
    {
@@ -1661,16 +1661,16 @@
     "diameter_m": 125.0,
     "fin_span_m": 31.3,
     "volume_m3": 5570000.0,
-    "gross_lift_t": 3418.6,
-    "useful_share": 0.799,
+    "gross_lift_t": 3423.7,
+    "useful_share": 0.795,
     "route_km": 5184.0,
     "cruise_m_s": 50.0,
-    "fuel_t": 313.2,
-    "passengers": 6040.0,
-    "payload_t": 2417.9,
-    "cruise_mw": 51.35,
-    "wh_per_passenger_km": 50.0,
-    "hydrogen_t": 257.0,
+    "fuel_t": 313.7,
+    "passengers": 6020.0,
+    "payload_t": 2406.7,
+    "cruise_mw": 51.45,
+    "wh_per_passenger_km": 50.3,
+    "hydrogen_t": 257.4,
     "mean_trip_hours": 15.2
    },
    {
@@ -1678,16 +1678,16 @@
     "diameter_m": 166.7,
     "fin_span_m": 41.8,
     "volume_m3": 13200000.0,
-    "gross_lift_t": 8103.4,
-    "useful_share": 0.861,
+    "gross_lift_t": 8115.5,
+    "useful_share": 0.858,
     "route_km": 5184.0,
     "cruise_m_s": 30.0,
-    "fuel_t": 269.8,
-    "passengers": 16760.0,
-    "payload_t": 6705.2,
-    "cruise_mw": 19.72,
-    "wh_per_passenger_km": 15.5,
-    "hydrogen_t": 609.2,
+    "fuel_t": 270.0,
+    "passengers": 16740.0,
+    "payload_t": 6695.0,
+    "cruise_mw": 19.76,
+    "wh_per_passenger_km": 15.6,
+    "hydrogen_t": 610.1,
     "mean_trip_hours": 25.3
    },
    {
@@ -1695,16 +1695,16 @@
     "diameter_m": 166.7,
     "fin_span_m": 41.8,
     "volume_m3": 13200000.0,
-    "gross_lift_t": 8103.4,
-    "useful_share": 0.839,
+    "gross_lift_t": 8115.5,
+    "useful_share": 0.835,
     "route_km": 5184.0,
     "cruise_m_s": 40.0,
-    "fuel_t": 394.2,
-    "passengers": 16000.0,
-    "payload_t": 6402.0,
-    "cruise_mw": 46.74,
+    "fuel_t": 394.6,
+    "passengers": 15960.0,
+    "payload_t": 6383.9,
+    "cruise_mw": 46.83,
     "wh_per_passenger_km": 23.8,
-    "hydrogen_t": 609.2,
+    "hydrogen_t": 610.1,
     "mean_trip_hours": 19.0
    },
    {
@@ -1712,16 +1712,16 @@
     "diameter_m": 166.7,
     "fin_span_m": 41.8,
     "volume_m3": 13200000.0,
-    "gross_lift_t": 8103.4,
-    "useful_share": 0.809,
+    "gross_lift_t": 8115.5,
+    "useful_share": 0.805,
     "route_km": 5184.0,
     "cruise_m_s": 50.0,
-    "fuel_t": 569.0,
-    "passengers": 14970.0,
-    "payload_t": 5988.0,
-    "cruise_mw": 91.3,
-    "wh_per_passenger_km": 36.7,
-    "hydrogen_t": 609.2,
+    "fuel_t": 569.7,
+    "passengers": 14900.0,
+    "payload_t": 5961.9,
+    "cruise_mw": 91.46,
+    "wh_per_passenger_km": 36.9,
+    "hydrogen_t": 610.1,
     "mean_trip_hours": 15.2
    },
    {
@@ -1729,16 +1729,16 @@
     "diameter_m": 250.0,
     "fin_span_m": 62.7,
     "volume_m3": 44500000.0,
-    "gross_lift_t": 27349.1,
-    "useful_share": 0.853,
+    "gross_lift_t": 27389.7,
+    "useful_share": 0.851,
     "route_km": 5184.0,
     "cruise_m_s": 30.0,
-    "fuel_t": 697.6,
-    "passengers": 56590.0,
-    "payload_t": 22634.5,
-    "cruise_mw": 44.37,
+    "fuel_t": 697.9,
+    "passengers": 56500.0,
+    "payload_t": 22599.8,
+    "cruise_mw": 44.45,
     "wh_per_passenger_km": 11.9,
-    "hydrogen_t": 2056.0,
+    "hydrogen_t": 2059.0,
     "mean_trip_hours": 25.3
    },
    {
@@ -1746,16 +1746,16 @@
     "diameter_m": 250.0,
     "fin_span_m": 62.7,
     "volume_m3": 44500000.0,
-    "gross_lift_t": 27349.1,
-    "useful_share": 0.835,
+    "gross_lift_t": 27389.7,
+    "useful_share": 0.831,
     "route_km": 5184.0,
     "cruise_m_s": 40.0,
-    "fuel_t": 954.2,
-    "passengers": 54700.0,
-    "payload_t": 21879.3,
-    "cruise_mw": 105.17,
-    "wh_per_passenger_km": 16.8,
-    "hydrogen_t": 2056.0,
+    "fuel_t": 955.0,
+    "passengers": 54550.0,
+    "payload_t": 21818.6,
+    "cruise_mw": 105.36,
+    "wh_per_passenger_km": 16.9,
+    "hydrogen_t": 2059.0,
     "mean_trip_hours": 19.0
    },
    {
@@ -1763,16 +1763,16 @@
     "diameter_m": 250.0,
     "fin_span_m": 62.7,
     "volume_m3": 44500000.0,
-    "gross_lift_t": 27349.1,
-    "useful_share": 0.812,
+    "gross_lift_t": 27389.7,
+    "useful_share": 0.807,
     "route_km": 5184.0,
     "cruise_m_s": 50.0,
-    "fuel_t": 1333.4,
-    "passengers": 52160.0,
-    "payload_t": 20866.0,
-    "cruise_mw": 205.42,
-    "wh_per_passenger_km": 24.7,
-    "hydrogen_t": 2056.0,
+    "fuel_t": 1334.9,
+    "passengers": 51950.0,
+    "payload_t": 20779.0,
+    "cruise_mw": 205.78,
+    "wh_per_passenger_km": 24.8,
+    "hydrogen_t": 2059.0,
     "mean_trip_hours": 15.2
    }
   ],
@@ -1788,61 +1788,61 @@
    "longest_trip_hours": 10.4,
    "network": {
     "calls_per_hour": [
-     53.17,
-     88.5
+     62.83,
+     104.33
     ],
     "destinations_hourly": [
-     53.2,
-     88.5
+     62.8,
+     104.3
     ],
     "destinations_every_4_hours": [
-     213.0,
-     354.0
+     251.0,
+     417.0
     ],
     "destinations_daily": [
-     1276.0,
-     2124.0
+     1508.0,
+     2504.0
     ],
     "berths": [
-     53.2,
-     88.5
+     62.8,
+     104.3
     ],
     "mean_trip_hours": 5.2,
     "fleet": [
-     660.0,
-     1100.0
+     780.0,
+     1300.0
     ]
    }
   },
   "wind": {
-   "design_m_s": 34.6,
-   "service_m_s": 13.6
+   "design_m_s": 38.6,
+   "service_m_s": 24.4
   }
  },
  "freighters": [
   {
    "length_m": 500.0,
    "cruise_m_s": 25.0,
-   "gross_lift_t": 1012.9,
-   "cargo_t": 843.4,
-   "wh_per_tonne_km": 37.5,
-   "hydrogen_t": 76.1
+   "gross_lift_t": 1014.4,
+   "cargo_t": 842.6,
+   "wh_per_tonne_km": 37.7,
+   "hydrogen_t": 76.3
   },
   {
    "length_m": 1000.0,
    "cruise_m_s": 25.0,
-   "gross_lift_t": 8103.4,
-   "cargo_t": 6915.1,
-   "wh_per_tonne_km": 18.3,
-   "hydrogen_t": 609.2
+   "gross_lift_t": 8115.5,
+   "cargo_t": 6908.7,
+   "wh_per_tonne_km": 18.4,
+   "hydrogen_t": 610.1
   },
   {
    "length_m": 1500.0,
    "cruise_m_s": 25.0,
-   "gross_lift_t": 27349.1,
-   "cargo_t": 23245.7,
+   "gross_lift_t": 27389.7,
+   "cargo_t": 23223.5,
    "wh_per_tonne_km": 12.3,
-   "hydrogen_t": 2056.0
+   "hydrogen_t": 2059.0
   }
  ],
  "platforms": [
@@ -1850,43 +1850,56 @@
    "height_km": 70.0,
    "length_m": 100.0,
    "volume_m3": 29700.0,
-   "gross_lift_t": 11.9,
+   "gross_lift_t": 11.8,
    "envelope_t": 1.1,
-   "fabric_use": 0.18,
-   "payload_t_at_share": 3.6,
-   "wind_p99_m_s": 12.7,
-   "wind_highest_m_s": 15.9,
-   "hold_p99_kw": 15.0,
-   "hold_highest_kw": 30.0
+   "fabric_use": 0.59,
+   "payload_t_at_share": 3.5,
+   "wind_p99_m_s": 24.9,
+   "wind_highest_m_s": 29.3,
+   "hold_p99_kw": 115.0,
+   "hold_highest_kw": 187.0
   },
   {
    "height_km": 70.0,
    "length_m": 200.0,
    "volume_m3": 238000.0,
-   "gross_lift_t": 94.8,
-   "envelope_t": 4.4,
-   "fabric_use": 0.39,
-   "payload_t_at_share": 28.5,
-   "wind_p99_m_s": 12.7,
-   "wind_highest_m_s": 15.9,
-   "hold_p99_kw": 62.0,
-   "hold_highest_kw": 121.0
+   "gross_lift_t": 94.5,
+   "envelope_t": 5.3,
+   "fabric_use": 1.2,
+   "payload_t_at_share": 28.3,
+   "wind_p99_m_s": 24.9,
+   "wind_highest_m_s": 29.3,
+   "hold_p99_kw": 460.0,
+   "hold_highest_kw": 749.0
   }
  ],
  "producer": {
   "study": "sky_fleet",
   "files": {
-   "research/studies/sky_fleet/run.py": "5edc0eccaa920d07",
+   "research/studies/sky_fleet/run.py": "db0cf91a4268e661",
+   "research/studies/sky_ships/run.py": "9aec21f476f9e818",
    "engineering/flight/buoyant.py": "7561d73490cdb16f",
    "engineering/flight/winged.py": "596dc1a5a34552d9",
-   "research/studies/sky_ships/run.py": "23d85214db3b24bf"
+   "research/studies/summit_tower/run.py": "07c359ad1665134d",
+   "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cf"
+  },
+  "constants": {
+   "AVOGADRO": 6.02214076e+23,
+   "BOLTZMANN": 1.380649e-23,
+   "EARTH_GM": 398600441800000.0,
+   "EARTH_RADIUS": 6371000.0,
+   "GAS_CONSTANT": 8.31446261815324,
+   "MOON_GM": 4902800118000.0,
+   "MOON_RADIUS": 1737400.0,
+   "STANDARD_GRAVITY": 9.80665,
+   "SYNODIC_MONTH_DAYS": 29.53059
   },
   "inputs": {
-   "research/studies/sky_ships/results/sky_ships.json": "913fb1401da5279a",
-   "research/studies/summit_tower/results/summit_tower.json": "3c3af92ebdab9444",
-   "research/studies/summit_tower/results/summit_tower_form.json": "519126862cfe1b8f",
-   "climate/results/gcm/global_winds_A28_dim5.json": "b3e0cc35058740eb",
-   "climate/results/crm/ring_ring.json": "871905df2041cc2f"
+   "research/studies/sky_ships/results/sky_ships.json": "32ee066c3b36f3dc",
+   "research/studies/summit_tower/results/summit_tower.json": "53954bbe96931efa",
+   "research/studies/summit_tower/results/summit_tower_form.json": "20d1201ad13a8348",
+   "climate/results/gcm/global_winds_A28_dim5_moon.json": "4055b824d45c54b1",
+   "climate/results/crm/ring_ring_equator.json": "7da8c01d24121e32"
   }
  }
 }

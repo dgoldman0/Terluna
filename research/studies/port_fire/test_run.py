@@ -3,6 +3,7 @@ import json
 import unittest
 
 from research.studies.port_fire import run as pf
+from shared.provenance import constants_changed
 
 
 def stored():
@@ -36,6 +37,9 @@ class StoredResults(unittest.TestCase):
 
     def test_schema_and_air(self):
         self.assertEqual(self.r['schema'], pf.SCHEMA)
+        for name, h in {**self.r['producer']['files'], **self.r['producer']['inputs']}.items():
+            self.assertEqual(pf.digest(pf.ROOT / name), h, name)
+        self.assertFalse(constants_changed(self.r['producer']['constants']))
         for key, a in self.r['air'].items():
             if key == 'earth':
                 continue

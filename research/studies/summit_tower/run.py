@@ -20,6 +20,8 @@ import numpy as np
 from atmosphere.radiative_convective.thermodynamics import EARTH, MOON
 from engineering.towers import lattice as lt
 from engineering.towers import wind_energy as we
+from shared.constants import SYNODIC_MONTH_DAYS
+from shared.provenance import constants_used
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
@@ -27,8 +29,8 @@ SCHEMA = 'terluna.research.summit-tower/1'
 ATLAS = ROOT / 'geography' / 'products' / 'atlas_28pct_4ppd.npz'
 DRAINAGE_GRID = ROOT / 'geography' / 'products' / 'drainage_28pct_16ppd.npz'
 DRAINAGE = ROOT / 'geography' / 'results' / 'drainage.json'
-GCM_WINDS = ROOT / 'climate' / 'results' / 'gcm' / 'site_winds_A28_dim5_summit.json'
-RING = ROOT / 'climate' / 'results' / 'crm' / 'ring_ring.json'
+GCM_WINDS = ROOT / 'climate' / 'results' / 'gcm' / 'site_winds_A28_dim5_moon_summit.json'
+RING = ROOT / 'climate' / 'results' / 'crm' / 'ring_ring_equator.json'
 LIGHT = ROOT / 'illumination' / 'surface_light' / 'results' / 'surface_light.json'
 ECOLOGY = ROOT / 'research' / 'studies' / 'lunar_cycle_ecology' / 'results' / 'lunar_cycle_ecology.json'
 
@@ -110,7 +112,7 @@ PORT_ZONE_USES = {
 }
 HOTEL_ROOM_M2, GUESTS_PER_ROOM, SHORT_STAY_BED_M2, HOURS_IN_PORT = 60.0, 1.6, 15.0, 2.0
 PERSON = dict(mass_kg=80.0, drag_area_m2=0.7, canopy_drag_coefficient=1.3, landing_m_s=4.0)
-NIGHT_HOURS = 354.4        # half a synodic month
+NIGHT_HOURS = 12.0 * SYNODIC_MONTH_DAYS   # half a synodic month, in hours
 FLUCTUATING_SWAY = 0.3     # gusts sway the top by about this share of the steady sway, roughly
 
 
@@ -537,11 +539,12 @@ def results() -> dict:
 def main() -> int:
     r = results()
     files = {p: digest(ROOT / p) for p in ('research/studies/summit_tower/run.py', 'engineering/towers/lattice.py',
-                                           'engineering/towers/wind_energy.py')}
+                                           'engineering/towers/wind_energy.py',
+                                           'atmosphere/radiative_convective/thermodynamics.py')}
     inputs = {str(p.relative_to(ROOT)): digest(p) for p in (GCM_WINDS, RING, DRAINAGE, LIGHT, ECOLOGY)}
     inputs['geography/products/atlas_28pct_4ppd.npz'] = digest(ATLAS)
     inputs['geography/products/drainage_28pct_16ppd.npz'] = digest(DRAINAGE_GRID)
-    product = dict(schema=SCHEMA, producer=dict(study='summit_tower', files=files, inputs=inputs),
+    product = dict(schema=SCHEMA, producer=dict(study='summit_tower', files=files, inputs=inputs, constants=constants_used(files)),
                    evidence=('First-order concept sizing and screening arithmetic. The winds are two models\' '
                              '(3-day GCM means with T21 terrain and a two-dimensional cloud-resolving ring over two '
                              'lunar days), raised by stated factors for gusts, the summit and rarity; the frames are '
