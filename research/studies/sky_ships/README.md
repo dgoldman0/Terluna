@@ -17,20 +17,21 @@ OPENBLAS_NUM_THREADS=1 python -m research.studies.sky_ships.run   # results/sky_
 The models are in [engineering/flight](../../../engineering/flight/README.md), the runner is [run.py](run.py), the
 numbers are in [results/sky_ships.json](results/sky_ships.json) and the sources in [sources.json](sources.json). The air
 and winds over the whole Moon come from a new climate product,
-[climate/gcm/global_winds.py](../../../climate/gcm/global_winds.py) (the design run A28_dim5, years 15–24); the storms
-and gusts from the cloud-resolving equatorial ring ([climate/crm](../../../climate/crm/README.md)); the port's traffic
-from the [summit tower study](../summit_tower/README.md#the-central-port).
+[climate/gcm/global_winds.py](../../../climate/gcm/global_winds.py) (the design run A28_dim5_moon, years 20–29); the
+storms and gusts from the cloud-resolving equatorial ring ([climate/crm](../../../climate/crm/README.md)); the port's
+traffic from the [summit tower study](../summit_tower/README.md#the-central-port).
 
 **Status.** The author adopted these findings on 2026-09-28 as the planning basis for the Open Moon's sky ships
 ([decisions register](../../decisions.md#sky-ships-and-flyers)).
 
-**Since 28 September.** The [infrastructure review](../infrastructure_review/README.md) of 8 October reruns this
-study with main's corrected climate, whose winds in the band are about twice as strong:
-- the moored ships' design wind becomes 38.6 m/s and their service wind 24.4 m/s;
-- the hulls barely change.
+**Since 28 September.** The study reads main's corrected design run, A28_dim5_moon, and the corrected equatorial ring,
+`ring_equator`, and was rerun on them on 8 October 2026 in the joint integration; the
+[infrastructure review](../infrastructure_review/README.md) records the September figures. The corrected winds aloft
+are about twice as strong: the moored ships' loads grow, the rigid hulls barely change and the largest pressure hulls
+are 10–20 m shorter.
 
-It also brings in the electrified storms. Their flashes start inside the band, and the storms that flash have
-updrafts of 12–36 m/s against the 14.3 m/s design gust below, so ships keep out of them.
+The review also brings in the electrified storms. Their flashes start inside the band, and the storms that flash have
+updrafts of 12–36 m/s against the 15.5 m/s design gust below, so ships keep out of them.
 
 **Evidence.** First-order sizing of the kind used to compare concepts.
 - **What is tested.** The models reproduce Lamb's apparent-mass coefficients, Woodward's gust moment for the
@@ -48,26 +49,26 @@ updrafts of 12–36 m/s against the 14.3 m/s design gust below, so ships keep ou
 
 - **The Moon's sky is Earth's, six times larger.** Lunar gravity is a sixth of Earth's. From 9 km up, the Moon's air
   has at each height the density of Earth's at a sixth of the height above 9 km, so the flight band (35–45 km) holds
-  the air of Earth's 4.3–5.8 km. Convection stretches the same way: the ring's storms are 30 km wide at the median,
-  with updrafts of 12–14 m/s. A flyer scaled up six times in every length, flying at the same speed through air of the
-  same density, carries the same stresses from its own weight and from the same gusts: the same ship, six times
+  the air of Earth's 4.3–5.8 km. Convection stretches the same way: the ring's storms are 24 km wide at the median,
+  with updrafts of up to 16 m/s. A flyer scaled up six times in every length, flying at the same speed through air of
+  the same density, carries the same stresses from its own weight and from the same gusts: the same ship, six times
   longer and 220 times heavier.
 - **Rigid ships of up to about 3 km are reasonable.** Calibrated against the weight statements of four rigid airships
   (it gives each one's empty weight within 7%), the model puts the best size for the Hindenburg's own 1930s
   technology at about 270 m on Earth, beside the great rigid airships' 239–245 m. In the flight band the same
   technology is at its best near 750 m and keeps the Hindenburg's share of lift for payload, fuel and crew (45%) out
-  to 3.0 km, where a ship's turning circle is as wide as a median storm. With a carbon-fibre frame and modern fabrics
-  a ship keeps 81–86% of its lift for them from 245 m to 3 km, at its best near 870 m.
+  to 2.9 km (3.0 km in September); at 2.6 km a ship's turning circle is as wide as a median storm. With a carbon-fibre
+  frame and modern fabrics a ship keeps 81–86% of its lift for them from 245 m to 3 km, at its best near 870 m.
 - **The air's hard limit is far larger.** The structure would take the whole lift at 7 km with the Hindenburg's
   materials and 30 km with modern ones; on Earth, at 1.2 km and 4.9 km.
 - **Non-rigid ships are held by their fabric.** With today's strongest hull laminates, the largest envelope that
-  flies at 25–36 m/s in the flight band is 280–350 m long, twice Earth's 140–160 m.
+  flies at 25–36 m/s in the flight band is 260–330 m long (280–350 m in September), twice Earth's 140–160 m.
 - **Winged ships.** A wing carries its weight with the An-225's share at a span of about 710 m on the Moon, eight
-  times the An-225's: about 250,000 t at the An-225's wing loading, cruising at 195 m/s in the band.
+  times the An-225's: about 250,000 t at the An-225's wing loading, cruising at 194 m/s in the band.
 - **Within that, a ship's size is set by what it carries.** A rigid ship in the band carries about 2,000 people at
-  500 m, 7,000 at 750 m, 17,000 at 1 km and 57,000 at 1.5 km (at 400 kg each with their cabins and services), and
-  holds 5, 15, 37 and 123 times the Hindenburg's hydrogen. The central port's long-haul traffic, 32,000–53,000
-  passengers an hour, fills 16–26 berths of 500 m ships, 5–8 of 750 m ships, or one of 1.5 km ships.
+  500 m, 7,000 at 750 m, 17,000 at 1 km and 56,500 at 1.5 km (at 400 kg each with their cabins and services), and
+  holds 5, 15, 37 and 123 times the Hindenburg's hydrogen. The central port's long-haul traffic, 38,000–63,000
+  passengers an hour, fills 19–31 berths of 500 m ships, 5–9 of 750 m ships, or one of 1.5 km ships.
 
 ## The air ships fly in
 
@@ -75,18 +76,18 @@ The air over the whole Moon, from the design run (area-weighted over ten model y
 
 | Height | Air (kg/m³): mean, 1st–99th percentile | Pressure | Temperature | Lift of hydrogen / helium (kg per m³, 98% pure) | Earth's height with this air |
 |---|---|---|---|---|---|
-| 0 km | 1.406 (1.382–1.433) | 1.18 atm | 20 °C | 1.28 / 1.19 | 1.5 km below sea level |
-| 10 km | 1.205 (1.192–1.216) | 0.99 atm | 14 °C | 1.10 / 1.02 | 0.2 km |
-| 20 km | 1.024 (1.013–1.034) | 0.81 atm | 5 °C | 0.93 / 0.86 | 1.8 km |
-| 25 km | 0.942 (0.931–0.952) | 0.73 atm | 1 °C | 0.86 / 0.80 | 2.7 km |
-| 30 km | 0.866 (0.856–0.872) | 0.67 atm | −4 °C | 0.79 / 0.73 | 3.5 km |
-| 35 km | 0.796 (0.787–0.802) | 0.60 atm | −8 °C | 0.73 / 0.67 | 4.3 km |
-| 40 km | 0.733 (0.722–0.738) | 0.54 atm | −14 °C | 0.67 / 0.62 | 5.0 km |
-| 45 km | 0.674 (0.663–0.679) | 0.49 atm | −19 °C | 0.61 / 0.57 | 5.8 km |
-| 55 km | 0.570 (0.560–0.574) | 0.39 atm | −30 °C | 0.52 / 0.48 | 7.3 km |
-| 70 km | 0.438 (0.429–0.442) | 0.28 atm | −48 °C | 0.40 / 0.37 | 9.5 km |
+| 0 km | 1.404 (1.380–1.424) | 1.18 atm | 21 °C | 1.28 / 1.18 | 1.4 km below sea level |
+| 10 km | 1.204 (1.192–1.211) | 0.99 atm | 14 °C | 1.10 / 1.02 | 0.2 km |
+| 20 km | 1.024 (1.013–1.031) | 0.81 atm | 5 °C | 0.93 / 0.86 | 1.8 km |
+| 25 km | 0.942 (0.931–0.948) | 0.73 atm | 1 °C | 0.86 / 0.80 | 2.7 km |
+| 30 km | 0.867 (0.856–0.874) | 0.67 atm | −4 °C | 0.79 / 0.73 | 3.5 km |
+| 35 km | 0.797 (0.787–0.805) | 0.60 atm | −9 °C | 0.73 / 0.67 | 4.3 km |
+| 40 km | 0.734 (0.724–0.742) | 0.54 atm | −14 °C | 0.67 / 0.62 | 5.0 km |
+| 45 km | 0.675 (0.665–0.683) | 0.49 atm | −19 °C | 0.62 / 0.57 | 5.8 km |
+| 55 km | 0.569 (0.560–0.577) | 0.39 atm | −30 °C | 0.52 / 0.48 | 7.3 km |
+| 70 km | 0.436 (0.429–0.441) | 0.28 atm | −47 °C | 0.40 / 0.37 | 9.5 km |
 
-- **Lift.** A cubic metre of hydrogen lifts 1.28 kg at sea level and 0.61–0.73 kg in the flight band (35–45 km), where
+- **Lift.** A cubic metre of hydrogen lifts 1.28 kg at sea level and 0.62–0.73 kg in the flight band (35–45 km), where
   the air is Earth's at 4.3–5.8 km. A ship that must keep its lift to the top of the band carries 1.6 m³ of gas for
   every kilogram it lifts.
 - **Steady air.** At any height the density varies by about 2% across the whole Moon, over the lunar day and over the
@@ -97,23 +98,23 @@ snapshots, which hold its storms:
 
 | Height | 3-day means: median / 99th percentile / highest / 50-year | 3-hourly, with storms: median / 99th percentile / highest | Highest updraft |
 |---|---|---|---|
-| 1 km (ring), sea level (GCM) | 3.8 / 7.9 / 11.5 / 11.8 m/s | 2.4 / 8.4 / 14.1 m/s | 1.8 m/s |
-| 10 km | 2.6 / 5.6 / 9.1 / 9.5 m/s | 1.7 / 6.1 / 12.7 m/s | 7.6 m/s |
-| 20 km | 2.9 / 6.3 / 9.6 / 10.1 m/s | 2.6 / 6.4 / 13.4 m/s | 10.2 m/s |
-| 30 km | 3.5 / 7.3 / 10.8 / 11.0 m/s | 3.8 / 7.2 / 14.2 m/s | 12.1 m/s |
-| 40 km | 4.7 / 8.7 / 11.8 / 12.1 m/s | 5.0 / 8.9 / 20.6 m/s | 14.3 m/s |
-| 55 km | 6.5 / 11.6 / 16.2 / 16.3 m/s | 6.7 / 10.0 / 16.4 m/s | 13.0 m/s |
-| 70 km | 7.8 / 12.7 / 15.9 / 16.1 m/s | 7.9 / 12.4 / 17.9 m/s | 2.6 m/s |
+| 1 km (ring), sea level (GCM) | 3.5 / 7.3 / 9.8 / 10.1 m/s | 2.8 / 8.3 / 15.6 m/s | 1.9 m/s |
+| 10 km | 2.6 / 5.5 / 8.4 / 8.7 m/s | 1.6 / 6.7 / 11.9 m/s | 9.8 m/s |
+| 20 km | 3.9 / 7.2 / 10.3 / 10.6 m/s | 3.4 / 6.9 / 15.6 m/s | 11.3 m/s |
+| 30 km | 6.8 / 10.5 / 14.0 / 14.3 m/s | 6.2 / 11.7 / 18.8 m/s | 14.0 m/s |
+| 40 km | 10.8 / 15.1 / 18.4 / 18.6 m/s | 10.1 / 15.0 / 23.0 m/s | 15.5 m/s |
+| 55 km | 16.9 / 21.7 / 25.3 / 25.9 m/s | 16.9 / 19.9 / 27.3 m/s | 11.1 m/s |
+| 70 km | 20.9 / 24.9 / 29.3 / 29.8 m/s | 22.7 / 24.9 / 29.2 m/s | 3.2 m/s |
 
-- **Light winds.** In the flight band the wind's median is 4–5 m/s and its 99th percentile 8–10 m/s; the highest
-  anywhere in the band in ten model years of 3-day means is 13.4 m/s, and the ring's highest 3-hourly wind at 40 km,
-  in a storm, is 20.6 m/s. A ship cruising at 30 m/s makes headway against all of them.
-- **Quiet air.** In the band the vertical wind stays under 0.6 m/s 99% of the time. Storm cloud reaches it in 0.4% of
-  the ring's land columns and 0.2% of its sea columns, in the afternoon and evening, with updrafts up to 14.3 m/s
-  inside.
+- **Moderate winds.** In the flight band the wind's median is 9–13 m/s and its 99th percentile 13–17 m/s; the
+  highest anywhere in the band in ten model years of 3-day means is 20.5 m/s, and the ring's highest 3-hourly wind at
+  40 km is 23.0 m/s. A ship cruising at 30 m/s makes headway against all of them.
+- **Quiet air.** In the band the vertical wind stays under 0.7 m/s 99% of the time. Storm cloud reaches it in 0.7% of
+  the ring's land columns and 0.6% of its sea columns, from the afternoon into the night, with updrafts up to
+  15.5 m/s inside.
 - **Design winds for a moored ship.** Raised as the summit tower study raises its winds (1.4 for a 3-second gust,
-  1.2 for decades), the band's highest modelled wind gives a design wind of 34.6 m/s and its 99th percentile a
-  service wind of 13.6 m/s.
+  1.2 for decades), the band's highest modelled wind gives a design wind of 38.6 m/s and its 99th percentile a
+  service wind of 24.4 m/s.
 
 ## Six times larger: the rule of similarity
 
@@ -125,14 +126,14 @@ of Earth's air at a sixth of the height above 9 km:
 | Earth's height | 0 km | 1 km | 2 km | 3 km | 4 km | 5 km | 6 km | 8 km | 10 km |
 |---|---|---|---|---|---|---|---|---|---|
 | Air (kg/m³) | 1.225 | 1.112 | 1.006 | 0.909 | 0.819 | 0.736 | 0.660 | 0.525 | 0.413 |
-| The Moon's height with that air | 9.0 km | 15.0 km | 21.0 km | 27.1 km | 33.3 km | 39.7 km | 46.3 km | 59.8 km | 73.4 km |
+| The Moon's height with that air | 8.9 km | 15.0 km | 21.1 km | 27.1 km | 33.4 km | 39.8 km | 46.3 km | 59.7 km | 73.1 km |
 | 9 km + 6.04 × Earth's height | 9.0 km | 15.0 km | 21.1 km | 27.1 km | 33.2 km | 39.2 km | 45.2 km | 57.3 km | 69.4 km |
 
 The temperature falls about 1.04 °C per km through the flight band, Earth's 6.5 °C per km stretched six times.
 
 **The weather.** Convection at lunar gravity is Earth's stretched six times in size and time with the same speeds
 (the premise of the [gravity pair](../../../climate/crm/README.md#the-gravity-pair)): the ring's storms rain over
-30 km at the median and reach 28 km, with updrafts of 12–14 m/s.
+24 km at the median and reach 22 km, with updrafts of up to 16 m/s.
 
 **The flyer.** Scale a flyer up 6.04 times in every length and fly it at the same speed through air of the same
 density. Its mass grows 220 times; its weight and its lift both grow 36 times. The stresses its weight puts in it stay
@@ -206,22 +207,22 @@ one factor per group to all four:
 |---|---|---|---|---|---|---|---|---|---|---|
 | Earth, 1930s technology, sea level | 28% | 48% | 40% | 9% | none | none | none | none | none | none |
 | Moon, 1930s technology, air of Earth's sea-level density (9 km) | 34% | 62% | 70% | 69% | 65% | 60% | 49% | 26% | none | none |
-| Moon, 1930s technology, flight band | 16% | 53% | 64% | 64% | 61% | 56% | 45% | 22% | none | none |
-| Moon, modern, flight band | 68% | 81% | 85% | 86% | 85% | 84% | 82% | 76% | 60% | 30% |
+| Moon, 1930s technology, flight band | 15% | 52% | 63% | 63% | 60% | 55% | 44% | 21% | none | none |
+| Moon, modern, flight band | 68% | 81% | 85% | 86% | 85% | 84% | 81% | 75% | 60% | 29% |
 | Earth, modern, sea level | 73% | 81% | 80% | 72% | 63% | 54% | 36% | none | none | none |
 
 | | Weight-driven structure overtakes gust structure | Best length (useful share) | Back to the Hindenburg's 45% | Structure takes all the lift |
 |---|---|---|---|---|
 | Earth, 1930s | 120 m | 270 m (48%) | 380 m | 1.2 km |
 | Moon, 1930s, in air of Earth's sea-level density | 750 m | 650 m (70%) | 3.3 km | 7.2 km |
-| Moon, 1930s, flight band | 1.0 km | 750 m (65%) | 3.0 km | 7.0 km |
-| Moon, modern, flight band | 1.0 km | 870 m (86%) | 14.9 km | 30 km |
+| Moon, 1930s, flight band | 1.1 km | 750 m (64%) | 2.9 km | 6.9 km |
+| Moon, modern, flight band | 1.1 km | 870 m (86%) | 14.8 km | 30 km |
 | Earth, modern, sea level | 120 m | 300 m (81%) | 2.5 km | 4.9 km |
 
 - **The ships of the 1930s were built at their best size.** In the model the Hindenburg's technology does best near
   270 m on Earth; the Hindenburg was 245 m and the Akron and Macon 239 m.
-- **The flight band.** The band's air lifts 0.61 kg per m³ of hydrogen (cells full at 45 km), 59% of Earth's at sea
-  level, and its design gust (14.3 m/s) is a third above Earth's, so small ships do worse there than on Earth. From
+- **The flight band.** The band's air lifts 0.62 kg per m³ of hydrogen (cells full at 45 km), 59% of Earth's at sea
+  level, and its design gust (15.5 m/s) is 45% above Earth's, so small ships do worse there than on Earth. From
   about 200 m up the Moon's weak gravity outweighs both.
 - **Modern materials.** The modern case keeps the fitted factors and changes the materials: a carbon-fibre truss
   (300 MPa at 1.57 g/cm³ against the duralumin girders' 140 MPa at 2.79), the cover and film gas cells Goodyear
@@ -231,15 +232,15 @@ one factor per group to all four:
 
 A non-rigid ship holds its shape by pressure. Its envelope must stay taut under the gust's bending (FAA-P-8110-2,
 §4.43) and hold the pressure at its crown with a fabric four times as strong as the limit load (§4.43(b)). The
-largest hull of fineness 4 each fabric holds, with hydrogen, in the flight band's design gust (14.3 m/s) and Earth's
+largest hull of fineness 4 each fabric holds, with hydrogen, in the flight band's design gust (15.5 m/s) and Earth's
 (10.7 m/s):
 
 | Fabric | Top speed | Flight band | Moon at sea level | Earth at sea level |
 |---|---|---|---|---|
-| Today's strongest hull laminates (Vectran, Zylon), about 1,000 N/cm | 25 m/s | 350 m, 1.3 million m³, 870 t | 210 m, 260,000 m³, 340 t | 160 m, 125,000 m³, 140 t |
-| | 30 m/s | 310 m, 0.92 million m³, 620 t | 180 m, 180,000 m³, 230 t | 150 m, 105,000 m³, 120 t |
-| | 36 m/s | 280 m, 0.62 million m³, 410 t | 160 m, 110,000 m³, 140 t | 140 m, 84,000 m³, 90 t |
-| A laminate twice as strong | 30 m/s | 540 m, 4.6 million m³, 3,100 t | 330 m, 1.0 million m³, 1,300 t | 240 m, 390,000 m³, 440 t |
+| Today's strongest hull laminates (Vectran, Zylon), about 1,000 N/cm | 25 m/s | 330 m, 1.1 million m³, 730 t | 200 m, 220,000 m³, 280 t | 160 m, 125,000 m³, 140 t |
+| | 30 m/s | 300 m, 0.78 million m³, 520 t | 170 m, 150,000 m³, 190 t | 150 m, 105,000 m³, 120 t |
+| | 36 m/s | 260 m, 0.52 million m³, 350 t | 150 m, 94,000 m³, 120 t | 140 m, 84,000 m³, 90 t |
+| A laminate twice as strong | 30 m/s | 520 m, 4.1 million m³, 2,700 t | 310 m, 870,000 m³, 1,100 t | 240 m, 390,000 m³, 440 t |
 
 - **The dynamic pressure sets it.** The envelope's tension is its pressure times its radius, and the pressure must
   exceed the dynamic pressure, which gravity leaves alone. The band's thinner air lowers the dynamic pressure at a
@@ -259,12 +260,12 @@ plus 31.5 kg per m² of wing. It gives the ten within 12%, except the A300 B2 (2
 - **Wings grow eight times.** At the An-225's wing loading (6,935 Pa) and a manoeuvre load factor of 2.5, a wing
   carries its weight with the An-225's share (16% in the model) at a span of about 710 m on the Moon, eight times
   the An-225's 88.4 m, both in the flight band and in air of Earth's cruise density. The ship then has a mass of about
-  250,000 t and cruises at 195 m/s in the band. The factor is more than six because the areal part of the wing is a
+  250,000 t and cruises at 194 m/s in the band. The factor is more than six because the areal part of the wing is a
   sixth of the share at the same loading.
 - **Lighter and slower.** At a quarter of that wing loading, a ship of the same span has a quarter of the mass
   (62,000 t), cruises at half the speed (97 m/s) and gives 18% of its mass to its wing.
-- **Gusts.** A gust of 20 m/s (Earth's 50 ft/s design gust at the band's density, and the ring's 14.3 m/s updraft
-  with the gust factor) adds less than the manoeuvre factor at this loading.
+- **Gusts.** A gust of 20 m/s (Earth's 50 ft/s design gust at the band's density) adds less than the manoeuvre
+  factor at this loading, and so does 21.7 m/s, the ring's 15.5 m/s updraft with the gust factor.
 - **Hybrids.** A hull's own lift at a few degrees' pitch carries, at 30 m/s in the band, 3.7 times its buoyant lift
   at 40 m across, 1.8 times at 83 m and 0.9 times at 167 m; at Earth's sea level, 0.56, 0.27 and 0.13 times. A hybrid
   ship on the Moon can carry as much on its hull's lift as on its gas.
@@ -277,22 +278,23 @@ The storms are the air's largest structures a ship meets. On the ring, over its 
 
 | | Median | Tenth largest | Largest |
 |---|---|---|---|
-| Width of a storm's rain | 30 km | 96 km | 246 km |
-| Top of its cloud | 28 km | 68 km | 82 km |
-| Its strongest updraft | 1.3 m/s | 5.2 m/s | 12.4 m/s |
-| Its life | 6 hours | 12 hours | 36 hours |
+| Width of a storm's rain | 24 km | 90 km | 264 km |
+| Top of its cloud | 22 km | 38 km | 84 km |
+| Its strongest updraft | 1.2 m/s | 4.5 m/s | 15.6 m/s |
+| Its life | 6 hours | 15 hours | 57 hours |
 
-- **Storms drift slowly**, between 2.7 m/s westward and 3.1 m/s eastward, and about three rain somewhere on the
-  10,900 km ring at any time. The largest feed anvils about 1,000 km wide between 20 and 75 km.
-- **Ships up to about 3 km are small against them.** A rigid airship turns on a radius of about 4.6 of its lengths
+- **Storms drift slowly**, between 3.4 m/s westward and 2.7 m/s eastward, and about seven rain somewhere on the
+  10,900 km ring at any time.
+- **Ships up to about 2.5 km are small against them.** A rigid airship turns on a radius of about 4.6 of its lengths
   (the Los Angeles, NACA Report 333), and the radius does not depend on speed. A 1.5 km ship turns on about 7 km and
-  reverses course in 12 minutes at 30 m/s; a median storm is 30 km wide and moves at a tenth of the ship's speed. At
-  3 km a ship's turning circle, 28 km across, is as wide as a median storm.
+  reverses course in 12 minutes at 30 m/s; a median storm is 24 km wide and moves at a tenth of the ship's speed. At
+  2.6 km a ship's turning circle, 24 km across, is as wide as a median storm (at 3 km in September, when the median
+  storm was 30 km wide).
 - **The worst gust is measured in ship lengths.** In Calligeros and McDavitt's theory a ship's bending peaks when a
   gust builds up over half its length, and changes little between a quarter and three-quarters of it; Woodward's
   envelope takes that worst case. The ring resolves updrafts only over its 6-km columns, so the sharper gusts inside
   them are unknown, and every ship here is sized for the worst case. The design gust for ships in the band is
-  14.3 m/s, the ring's strongest updraft at 40 km, a third above the Guggenheim Airship Institute's 35 ft/s
+  15.5 m/s, the ring's strongest updraft at 40 km, 45% above the Guggenheim Airship Institute's 35 ft/s
   (10.7 m/s).
 
 ## What grows with a ship
@@ -303,34 +305,32 @@ carried per passenger with a cabin, services and a share of the crew:
 
 | Length | Across | Gas | Gross lift | Useful | Passengers (400 kg; 600–250 kg) | Hydrogen aboard | Cruise power | Energy per passenger-km | Moored in the design wind: nose-on / side-on | Turning radius, half-turn | Long-haul berths at the port |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| 245 m | 41 m | 194,000 m³ | 119 t | 81% | 210 (140–340) | 9 t | 1.2 MW | 52 Wh | 0.04 / 2.1 MN | 1.1 km, 2 min | 150–250 |
-| 500 m | 83 m | 1.65 million m³ | 1,010 t | 85% | 2,020 (1,350–3,200) | 76 t | 4.9 MW | 23 Wh | 0.15 / 8.8 MN | 2.3 km, 4 min | 16–26 |
-| 750 m | 125 m | 5.6 million m³ | 3,420 t | 86% | 7,010 (4,690–11,100) | 257 t | 11 MW | 15 Wh | 0.34 / 20 MN | 3.4 km, 6 min | 5–8 |
-| 1 km | 167 m | 13 million m³ | 8,100 t | 86% | 16,800 (11,200–26,600) | 609 t | 20 MW | 11 Wh | 0.61 / 35 MN | 4.6 km, 8 min | 2–3 |
-| 1.5 km | 250 m | 44.5 million m³ | 27,300 t | 85% | 56,600 (37,900–89,900) | 2,060 t | 44 MW | 7 Wh | 1.4 / 79 MN | 6.9 km, 12 min | 1 |
-| 2 km | 333 m | 106 million m³ | 64,800 t | 84% | 133,000 | 4,870 t | 79 MW | 5.5 Wh | 2.4 / 140 MN | 9.2 km, 16 min | under 1 |
-| 3 km | 500 m | 356 million m³ | 219,000 t | 82% | 436,000 | 16,400 t | 177 MW | 3.8 Wh | 5.5 / 320 MN | 13.8 km, 24 min | under 1 |
+| 245 m | 41 m | 194,000 m³ | 119 t | 81% | 210 (140–330) | 9 t | 1.2 MW | 52 Wh | 0.05 / 2.6 MN | 1.1 km, 2 min | 180–300 |
+| 500 m | 83 m | 1.65 million m³ | 1,010 t | 85% | 2,010 (1,350–3,200) | 76 t | 4.9 MW | 23 Wh | 0.19 / 11 MN | 2.3 km, 4 min | 19–31 |
+| 750 m | 125 m | 5.6 million m³ | 3,420 t | 86% | 6,990 (4,680–11,100) | 257 t | 11 MW | 15 Wh | 0.43 / 25 MN | 3.4 km, 6 min | 5–9 |
+| 1 km | 167 m | 13 million m³ | 8,120 t | 86% | 16,700 (11,200–26,600) | 610 t | 20 MW | 11 Wh | 0.76 / 44 MN | 4.6 km, 8 min | 2–4 |
+| 1.5 km | 250 m | 44.5 million m³ | 27,400 t | 85% | 56,500 (37,800–89,800) | 2,060 t | 44 MW | 7 Wh | 1.7 / 98 MN | 6.9 km, 12 min | 1 |
+| 2 km | 333 m | 106 million m³ | 64,900 t | 84% | 133,000 | 4,880 t | 79 MW | 5.5 Wh | 3.1 / 170 MN | 9.2 km, 16 min | under 1 |
+| 3 km | 500 m | 356 million m³ | 219,000 t | 81% | 435,000 | 16,500 t | 178 MW | 3.8 Wh | 6.9 / 390 MN | 13.8 km, 24 min | under 1 |
 
 - **People.** With the Hindenburg's own materials the numbers are a quarter to 30% lower from 750 m up (5,200 at
-  750 m, 12,400 at 1 km, 40,000 at 1.5 km).
+  750 m, 12,300 at 1 km, 39,400 at 1.5 km).
 - **Hydrogen.** A 500 m ship holds 76 t of hydrogen, 4.6 times the Hindenburg's; a 1.5 km ship 2,060 t, 123 times.
   Helium would need about twice the mass and lift about 7% less.
-- **Mooring.** Held at the nose, a ship turns into the wind, taking 0.15–1.4 MN from 500 m to 1.5 km in the band's
-  design wind of 34.6 m/s; caught side-on before it turns, 9–79 MN. Those are the loads the crown's docking arms
+- **Mooring.** Held at the nose, a ship turns into the wind, taking 0.19–1.7 MN from 500 m to 1.5 km in the band's
+  design wind of 38.6 m/s; caught side-on before it turns, 11–98 MN. Those are the loads the crown's docking arms
   answer for.
-- **Berths.** The port's long-haul traffic, 32,000–53,000 passengers an hour, with each call unloading and loading a
+- **Berths.** The port's long-haul traffic, 38,000–63,000 passengers an hour, with each call unloading and loading a
   full ship in two hours.
 - **Energy.** Drag alone at 30 m/s; hotel loads of 500 W per passenger are in the fuel.
 
 ## What this leaves out, and what comes next
 
-- **The distribution of flyers.** The next step: the classes from personal wings, canopies and micro gliders through
-  air taxis, regional and long-haul ships and freighters to aerial platforms; for each its size, speed, energy,
-  height band and capacity from these models; how many of each the Moon's trips and freight need; and how they share
-  the air by height. It starts from the author's decisions for the summit metropolis
-  ([research/decisions.md](../../decisions.md)): about 100 million people within about 32 km of the tower, small sky
-  boats serving much as cars do, gliders throughout with glider and parkour zones, and large sky ferries on a
-  backbone with metro and rail.
+- **The distribution of flyers.** The [sky-fleet study](../sky_fleet/README.md) takes the next step from the
+  author's decisions for the summit metropolis ([research/decisions.md](../../decisions.md)): what flies at each size,
+  from canopies, micro gliders and personal wings through sky boats, ferries, regional and long-haul ships and
+  freighters to high platforms; how many of each the metropolis and its port need; and how they share the air by
+  height.
 - **The long-haul class and the crown's port.** The chosen class sets the berths, the docking arms and their loads in
   the flight band.
 - **Hydrogen.** The hydrogen aboard grows with a ship's volume. A hydrogen ship needs cells kept apart from the air and

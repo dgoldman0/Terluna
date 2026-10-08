@@ -16,10 +16,15 @@ OPENBLAS_NUM_THREADS=1 python -m research.studies.port_fire.run   # results/port
 The models are in [engineering/fire](../../../engineering/fire/README.md), the runner is [run.py](run.py), the numbers
 are in [results/port_fire.json](results/port_fire.json) and the sources in [sources.json](sources.json).
 
-**Since 28 September.** The [infrastructure review](../infrastructure_review/README.md) of 8 October reruns this
-study with main's corrected climate, whose winds aloft are about twice as strong. The wind-fed fires in the upper
-zones grow: a stores compartment burning out in the sealed zone at the median wind releases 818 MW for 1.2 h in place
-of 484 MW for 2.1 h. Smoke, sprinklers and getting out stay as below.
+**The layout.** The study screens the port's earlier layout: the summit tower study's square lattice, with
+four-storey bands every 200 m and floor plates about 40 m deep, divided into this study's own rooms, compartments and
+halls. The author's chosen form, a round diagrid on six legs with wide lower rings and upper disks, awaits a fire
+study of its own.
+
+**Inputs.** The study reads the summit tower product, [summit_tower.json](../summit_tower/results/summit_tower.json),
+which the joint integration reran on 8 October 2026 with main's corrected design run (`A28_dim5_moon`) and the
+equatorial ring it forces. The [infrastructure review](../infrastructure_review/README.md) records the September
+figures.
 
 **Evidence.** This is first-order fire-engineering arithmetic.
 - **What is tested.** The correlations are Earth's, and the model reproduces them in Earth air (its tests).
@@ -38,7 +43,7 @@ fire at lunar gravity behaves as an Earth fire several times larger, played abou
 
 | | Earth | Open floors, 0–3 km | Enclosed, 3–10 km | Enclosed, 10–15 km | Sealed, 15–24 km |
 |---|---|---|---|---|---|
-| Air | 1 atm, 20 °C, 20.95% O₂ | 0.92 atm, 10 °C (outside air) | 0.83 atm, 20 °C | 0.74 atm, 20 °C | 0.95 atm, 20 °C (pressurised) |
+| Air | 1 atm, 20 °C, 20.95% O₂ | 0.92 atm, 11 °C (outside air) | 0.83 atm, 20 °C | 0.74 atm, 20 °C | 0.95 atm, 20 °C (pressurised) |
 | A fire acts as an Earth fire of | 1× | 2.7× | 3.0× | 3.3× | 2.6× |
 | Slowed by | 1 | 2.46 | 2.46 | 2.46 | 2.46 |
 | Flame height, same fire | 1 | 1.9 | 2.0 | 2.1 | 1.9 |
@@ -64,7 +69,8 @@ The spaces:
 
 The sensors are smoke detectors, judged by the usual 13 K rise of the ceiling jet, and quick-response sprinklers (RTI
 50 (m s)^½, 68 °C). The table compares Earth with the enclosed floors at 3–10 km for EN 1991-1-2's design fire, with
-the slower lunar estimate (section 2) in brackets. The other zones differ by less than a tenth.
+the slower lunar estimate (section 2) in brackets. The enclosed zones above 10 km differ from it by under 6%; on the
+open floors below 3 km some times run up to a fifth longer, the transport hall's sprinklers the most.
 
 | Space and fire | | Smoke detector | Sprinkler opens | Smoke at head height, no sprinklers | Smoke at head height, sprinklers | Flame height at sprinkler |
 |---|---|---|---|---|---|---|
@@ -142,7 +148,7 @@ centrifuge tests (Ferkul and Olson 2011), tabled by Miller et al.:
   limit rises as pressure falls (NASA White Sands tests).
 - **Everywhere else.** Rooms, shops and halls follow Earth practice for linings and furnishings, with sprinklers.
 - **Top up by pressure.** Topping up the middle zones' air should raise its pressure and keep the 17.5%. Enriching
-  it instead to match the summit's breathing would take 21.3% oxygen at the top of the 3–10 km zone, 23.6% at 10–15
+  it instead to match the summit's breathing would take 21.3% oxygen at the top of the 3–10 km zone, 23.5% at 10–15
   km and 28.3% at 24 km, and 27–36% to match Earth's sea level. Those fractions reach or pass the 23.5% at which
   critical materials must stop burning, and NASA's planned lunar habitat air (34% at 56.5 kPa) is the condition the
   fire literature flags.
@@ -186,7 +192,7 @@ every 60 m of rim, ships of 100 people, and a ship at each berth every 5 minutes
   second.
 - **Clearing times.** A full band clears in 4 minutes for hotels, 10 for commerce or short stays, 30 for shops and 40
   for events packed to capacity.
-- **The sealed zone.** Its bands are smaller: 74,000 m² at 19.5 km, with 30 berths. They clear in the same times.
+- **The sealed zone.** Its bands are smaller: 88,000 m² at 19.5 km, with 36 berths. They clear in the same times.
 - **Canopies and wings.** These are the backup for people able to use them.
 
 ## 4. The tower's systems
@@ -195,10 +201,10 @@ every 60 m of rim, ships of 100 people, and a ship at each berth every 5 minutes
 Earth tower in winter.
 - **Stairs and lift lobbies.** They are held at least 12.5 Pa above the fire floor (NFPA 92), and a person can open a
   door against at most about 85 Pa (NFPA 101's 133 N).
-- **How far a shaft can run.** An unbroken shaft can run 620–1,200 m before the stack pressure alone fills that
+- **How far a shaft can run.** An unbroken shaft can run 620–1,240 m before the stack pressure alone fills that
   window, against 54 m on Earth. Stairs and lift shafts can therefore run through about three bands between breaks.
 
-**Water.** At lunar gravity a water column's pressure grows 16 kPa per 100 m, against 98 kPa on Earth.
+**Water.** At lunar gravity a water column's pressure grows 162 kPa per 100 m, against 981 kPa on Earth.
 - **Pressure zones.** Standard sprinkler pipework (1.21 MPa) serves 745 m of height per pressure zone, against 123 m
   on Earth, so 33 zones cover the tower.
 - **Tanks.** Each band's tank holds 186 m³, NFPA 13's ordinary-hazard sprinkler and hose demand for 90 minutes.
@@ -215,19 +221,21 @@ including a minute to launch. NFPA 1710 allows 240 seconds of travel for the fir
 rim, and the water comes from the band's own tank.
 
 **Fully developed fires and the frame.** A floor compartment can burn out behind failed windows along both faces.
-Here, at 3–10 km, EN 1991-1-2's fire load burns as follows:
+Its fuel caps the fire at EN 1991-1-2's peak heat release: 500 MW for offices and shops, 1,000 MW for stores. Here,
+at 3–10 km, EN 1991-1-2's fire load burns as follows:
 
-| Compartment | Fire load | Earth, still air | Moon, still air | Moon, median wind (2.5 m/s) | Moon, 90th-percentile wind (4.3 m/s) |
+| Compartment | Fire load | Earth, still air | Moon, still air | Moon, median wind (3.1 m/s) | Moon, 90th-percentile wind (4.9 m/s) |
 |---|---|---|---|---|---|
-| Offices | 1.0 TJ | 198 MW, 1.4 h | 56 MW, 5.1 h | 263 MW, 1.1 h | 460 MW, 0.6 h |
-| Shops | 1.5 TJ | 198 MW, 2.0 h | 56 MW, 7.3 h | 263 MW, 1.5 h | 460 MW, 0.9 h |
-| Stores | 3.6 TJ | 198 MW, 5.1 h | 56 MW, 18 h | 263 MW, 3.8 h | 460 MW, 2.2 h |
+| Offices | 1.0 TJ | 198 MW, 1.4 h | 56 MW, 5.1 h | 334 MW, 0.8 h | 500 MW, 0.6 h |
+| Shops | 1.5 TJ | 198 MW, 2.0 h | 56 MW, 7.3 h | 334 MW, 1.2 h | 500 MW, 0.8 h |
+| Stores | 3.6 TJ | 198 MW, 5.1 h | 56 MW, 18 h | 334 MW, 3.0 h | 525 MW, 1.9 h |
 
 - **Still air.** The fire burns a third as hard for three to four times as long.
-- **Wind.** It feeds a fire at any gravity. The port's modest winds, with medians of 2–4 m/s in the ring model, drive
-  through a floor whose faces have failed and give it more air than Earth's buoyancy would. This is the wind-driven
-  fire of Earth's tall buildings. In NIST's tests, a 9–11 m/s wind drove gases above 400 °C through the corridor and
-  stairs of a seven-storey building.
+- **Wind.** It feeds a fire at any gravity. The port's modest winds, with medians of 2–7 m/s in the ring model, drive
+  through a floor whose faces have failed and give it more air than Earth's buoyancy would. The winds strengthen with
+  height, and in the sealed zone's median wind a stores compartment burns out at 818 MW for 1.2 h. This is the
+  wind-driven fire of Earth's tall buildings. In NIST's tests, a 9–11 m/s wind drove gases above 400 °C through the
+  corridor and stairs of a seven-storey building.
 - **So the frame's steel within a band** needs protection rated for both cases: the large wind-fed fire, and the long
   fire in calm air.
 - **Windows stay whole** in the fire compartment as long as possible, and there are cross-walls that stop the wind

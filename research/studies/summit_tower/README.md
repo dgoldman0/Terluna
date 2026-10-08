@@ -15,15 +15,10 @@ models are in [engineering/towers](../../../engineering/towers/README.md). Every
 integrals over wind distributions; the whole study runs in about a second. Sources are in
 [sources.json](sources.json).
 
-**Since 28 September.** The [infrastructure review](../infrastructure_review/README.md) of 8 October reruns this
-study on a copy with main's corrected inputs. The design run `A28_dim5` had Earth's tilt and too much sunlight at the
-summit, and its corrected successor's winds aloft are about twice as strong. With it:
-- the design gust becomes 32.4 m/s;
-- the port's chosen form takes 98 Mt of steel;
-- screened slow rotors over the whole face give 140% of the port's use.
-
-The review also finds the crown at the height where the electrified storms' flashes start. The figures below keep
-the September inputs until the joint integration reruns the study.
+The study reads the corrected design run `A28_dim5_moon` and the corrected equatorial CM1 ring (`ring_equator`),
+and was rerun on them on 8 October 2026 in the joint integration. The
+[infrastructure review](../infrastructure_review/README.md) records the September figures from `A28_dim5`, and finds
+the port's crown at the height where the electrified storms' flashes start.
 
 ## The site
 
@@ -47,38 +42,38 @@ the September inputs until the joint integration reruns the study.
 
 Two models give the wind, matched by height above sea level:
 
-- **The design GCM.** Run A28_dim5, model years 15–24, from 3-day means of both wind components at T21. Its ground
-  at the site is the 170-km cell's mean, 6.9 km above sea level.
+- **The design GCM.** Run A28_dim5_moon, model years 20–29, from 3-day means of both wind components at T21. Its
+  ground at the site is the 170-km cell's mean, 6.9 km above sea level.
   [climate/gcm/site_winds.py](../../../climate/gcm/site_winds.py) exports it as a product.
 - **The cloud-resolving ring.** CM1 in two dimensions along the equator, flat at sea level, over two lunar days,
   sampled every 3 hours. It holds storms, but only the east–west wind.
 
 The ring's distribution is fitted with a Weibull law, and its scale is raised for the north–south wind it lacks.
-The factor is the cube root of the GCM's ratio of the speed's mean cube to the east–west component's, 1.03–1.22 at
-these heights. The fitted law puts the 99th percentile about 10% below the ring's own, so its wind power is on
+The factor is the cube root of the GCM's ratio of the speed's mean cube to the east–west component's, 1.00–1.15 at
+these heights. The fitted law puts the 99th percentile 8–21% below the ring's own, so its wind power is on
 the low side.
 
 | Above the summit | Above sea level | Air (kg/m³) | GCM 3-day: median / highest / 50-year | Ring 3-hourly: median / 99th pct / highest | Wind power (W/m²) |
 |---|---|---|---|---|---|
-| 0 km | 11.6 km | 1.16 | 2.0 / 5.5 / 6.0 m/s | 1.9 / 6.1 / 12.8 m/s | 16 |
-| 5 km | 16.6 km | 1.07 | 1.7 / 4.4 / 4.7 m/s | 2.3 / 6.3 / 13.2 m/s | 27 |
-| 10 km | 21.6 km | 0.99 | 1.9 / 5.3 / 5.7 m/s | 2.8 / 6.5 / 13.6 m/s | 27 |
-| 20 km | 31.6 km | 0.83 | 3.4 / 7.5 / 8.1 m/s | 4.0 / 7.5 / 15.3 m/s | 39 |
-| 30 km | 41.6 km | 0.70 | 4.7 / 8.7 / 9.3 m/s | 5.2 / 9.0 / 20.2 m/s | 64 |
+| 0 km | 11.6 km | 1.16 | 2.0 / 5.5 / 5.8 m/s | 1.9 / 6.7 / 12.5 m/s | 16 |
+| 5 km | 16.6 km | 1.07 | 1.9 / 6.1 / 6.7 m/s | 2.8 / 6.8 / 14.3 m/s | 26 |
+| 10 km | 21.6 km | 0.99 | 2.8 / 6.9 / 7.3 m/s | 3.8 / 7.7 / 16.1 m/s | 43 |
+| 20 km | 31.6 km | 0.83 | 6.2 / 9.8 / 10.3 m/s | 6.9 / 12.2 / 19.5 m/s | 158 |
+| 30 km | 41.6 km | 0.70 | 10.4 / 13.8 / 14.1 m/s | 10.8 / 15.6 / 23.5 m/s | 469 |
 
-**What the models show.** The wind is light: medians of 2–3 m/s, a 99th percentile of 6–7.5 m/s, and the highest
-wind in either model 13–15 m/s over the first 20 km. Aloft the day and night differ little. Low down the wind
-turns often: the GCM's mean vector is 40–60% of its mean speed below 5 km, rising to 90% at 20 km, where the
-eastward flow dominates.
+**What the models show.** The wind is light near the summit and stronger aloft: medians of 2–3 m/s up to 5 km and
+6–7 m/s at 20 km, a 99th percentile of 7–12 m/s, and the highest wind in either model 12.5–19.5 m/s over the first
+20 km. Aloft the day and night differ little. Low down the wind turns often: the GCM's mean vector is 60–70% of its
+mean speed below 5 km, rising to 97% at 20 km, where the eastward flow dominates.
 
-**The design gust.** The highest modelled wind over a 10 km tower is 13.6 m/s. The study raises it by three
+**The design gust.** The highest modelled wind over a 10 km tower is 16.1 m/s. The study raises it by three
 factors for what the models cannot show:
 
 - 1.4 for a three-second gust against a 3-hourly snapshot of 6-km columns;
 - 1.2 for the flow speeding up over the summit's rise;
 - 1.2 for going from two lunar days to a return period of decades.
 
-That gives a design gust of 27.3 m/s. The service gust for sway is 19.0 m/s. A 50 m/s gust, an Earth-like design
+That gives a design gust of 32.4 m/s. The service gust for sway is 22.5 m/s. A 50 m/s gust, an Earth-like design
 value, is also run.
 
 ## How the wind bears on height
@@ -98,16 +93,16 @@ frame that:
 
 Frame mass in megatonnes (the floors add 0.5 Mt per km of height):
 
-| Height above the summit | No wind (sway check only) | 13.6 m/s | 27.3 m/s (design) | 50 m/s | Base at 27.3 m/s | Carbon composite at 27.3 m/s |
+| Height above the summit | No wind (sway check only) | 16.1 m/s | 32.4 m/s (design) | 50 m/s | Base at 32.4 m/s | Carbon composite at 32.4 m/s |
 |---|---|---|---|---|---|---|
-| 1 km | 0.014 | 0.014 | 0.016 | 0.030 | 0.44 km | 0.002 |
-| 5 km | 0.37 | 0.42 | 0.56 | 1.2 | 1.3 km | 0.076 |
-| 10 km | 1.6 | 1.9 | 2.9 | 6.2 | 2.3 km | 0.46 |
-| 15 km | 4.1 | 5.0 | 7.9 | 17 | 4.0 km | 1.6 |
-| 20 km | 8.3 | 10 | 17 | 37 | 6.0 km | 3.4 |
-| 30 km | 24 | 30 | 52 | 114 | 9.0 km | none within the checks |
+| 1 km | 0.014 | 0.014 | 0.018 | 0.030 | 0.39 km | 0.003 |
+| 5 km | 0.37 | 0.44 | 0.66 | 1.2 | 1.5 km | 0.097 |
+| 10 km | 1.7 | 2.1 | 3.5 | 6.2 | 2.6 km | 0.72 |
+| 15 km | 4.2 | 5.5 | 10 | 18 | 4.5 km | none within the checks |
+| 20 km | 8.5 | 12 | 22 | 38 | 6.8 km | none within the checks |
+| 30 km | 24 | 36 | 73 | 119 | 7.9 km | none within the checks |
 
-The same floors on Earth, with the U.S. Standard Atmosphere (NOAA/NASA 1976) and the same 19 m/s service gust for
+The same floors on Earth, with the U.S. Standard Atmosphere (NOAA/NASA 1976) and the same 22.5 m/s service gust for
 sway:
 
 | Height | No wind | 50 m/s |
@@ -116,33 +111,33 @@ sway:
 | 5 km | 3.7 Mt | 4.6 Mt |
 | 10 km | 33 Mt | 40 Mt |
 
-**The wind raises the frame's mass but sets no height limit up to 30 km.** At the design gust it adds 76% to a
-10 km frame, 107% to a 20 km frame and 120% to a 30 km frame, over gravity alone. At 50 m/s the frames of 10–30 km
-weigh 3.8–4.9 times the gravity-only ones. The effect grows with height because the air stays dense aloft and the
+**The wind raises the frame's mass but sets no height limit up to 30 km.** At the design gust it adds 111% to a
+10 km frame, 162% to a 20 km frame and 198% to a 30 km frame, over gravity alone. At 50 m/s the frames of 10–30 km
+weigh 3.7–4.9 times the gravity-only ones. The effect grows with height because the air stays dense aloft and the
 wind's moment grows with the square of the height.
 
-**Wind sets the base width.** At the base of the 10 km tower, the design gust makes up 35% of each leg's force;
+**Wind sets the base width.** At the base of the 10 km tower, the design gust makes up 40% of each leg's force;
 gravity makes up the rest. The service gust's sway is what decides how wide the base must be. Without wind, Earth's
 frames of 7.5 km and more sit at the buckling minimum (factors of 3.4–3.5), where self-weight governs; the Moon's
-gravity-only frames keep factors of 21–111.
+gravity-only frames keep factors of 30–153.
 
-**The Moon allows about 2.5 to 3 times the height for the same steel.** The 20 km frame at the design gust (17 Mt)
-weighs about what Earth's 7.5 km frame does at 50 m/s (15 Mt). Earth's 10 km frame (40 Mt) weighs between the
-Moon's 20 km and 30 km frames. Steel's self-weight length, the height of a column that its allowable stress can
-hold up, is 25 km on the Moon and 4 km on Earth.
+**The Moon allows about 2 to 2.5 times the height for the same steel.** Earth's 7.5 km frame at 50 m/s (15 Mt)
+weighs between the Moon's 15 km and 20 km frames at the design gust (10 and 22 Mt), and Earth's 10 km frame (40 Mt)
+between the Moon's 20 km and 30 km frames (22 and 73 Mt). Steel's self-weight length, the height of a column that
+its allowable stress can hold up, is 25 km on the Moon and 4 km on Earth.
 
-**Carbon-fibre composite frames** are five to eight times lighter. At 30 km, though, the lighter frame would need
-a base wider than half its height to keep its sway within the limit.
+**Carbon-fibre composite frames** are five to eight times lighter. From 15 km up, though, the lighter frame would
+need a base wider than half its height to keep its sway within the limit.
 
 ## How to build it for the wind
 
 **The reference tower** rises 10 km above the summit, with its top 21.6 km above sea level:
-- base 2.3 km wide, flaring toward the ground (width 320 m + 2.0 km × (1 − z/H)²);
-- 2.9 Mt of steel in the frame, and 5 Mt of floors carrying 10 km² of floor space in 50 layers;
-- a first natural period of 76 s, and 17.7 m of sway in the service gust (1/565 of its height);
-- a peak acceleration at the top of roughly 0.04 m/s² in that gust, about 4 thousandths of Earth's gravity;
-- a whole-frame buckling factor of 21.5;
-- footings of about 4,900 m² under each leg at 1 MPa.
+- base 2.6 km wide, flaring toward the ground (width 320 m + 2.3 km × (1 − z/H)²);
+- 3.5 Mt of steel in the frame, and 5 Mt of floors carrying 10 km² of floor space in 50 layers;
+- a first natural period of 65 s, and 19.1 m of sway in the service gust (1/525 of its height);
+- a peak acceleration at the top of roughly 0.05 m/s² in that gust, about 5 thousandths of Earth's gravity;
+- a whole-frame buckling factor of 28.8;
+- footings of about 5,700 m² under each leg at 1 MPa.
 
 For comparison, the usual guidance on tall buildings takes 5 thousandths of Earth's gravity as the threshold of
 perception, and limits once-a-year peaks to 5–7 thousandths in homes and 9–12 in offices (Burton, Kwok and
@@ -151,10 +146,10 @@ moment, and its idealised form is exponential (Weidman and Pinelis 2004).
 
 **An open frame is the largest saving.** The open lattice with its floor bands has a drag of 0.36 per unit of
 outline area. A closed tower of the same outline has 1.3: 3.6 times the overturning moment. The lightest closed
-tower of this height needs 8.2 Mt of steel, 2.8 times the open frame's.
+tower of this height needs 11.5 Mt of steel, 3.3 times the open frame's.
 
-**Vortex shedding.** The floor bands would shed vortices in step with the frame's first mode only at about 60 m/s,
-4.4 times the highest modelled wind and well above the design gust. Setbacks that vary the cross-section with
+**Vortex shedding.** The floor bands would shed vortices in step with the frame's first mode only at about 74 m/s,
+4.6 times the highest modelled wind and well above the design gust. Setbacks that vary the cross-section with
 height "confuse the vortices" a tower sheds (Irwin 2008), as on the Burj Khalifa; varied and perforated band edges
 would do the same here.
 
@@ -163,16 +158,16 @@ guyed masts, such as the Warsaw radio mast (646 m, 1974–1991; Wikipedia), carr
 as Taipei 101's 660-tonne pendulum (the tower's operator) add to the frame's own damping.
 
 **Cold, ice and lightning.** The top's air averages 3 °C, so rime will form in cloud at night. Storm cloud on the
-ring tops out at 28 km at the median and 82 km at most, so the tower will be struck by lightning and needs the
+ring tops out at 22 km at the median and 84 km at most, so the tower will be struck by lightning and needs the
 protection Earth's tall towers have.
 
 ## Wind devices in the frame
 
-**The resource.** The wind carries 16–39 W/m² over the first 20 km above the summit. The U.S. wind atlas counts
+**The resource.** The wind carries 16–158 W/m² over the first 20 km above the summit. The U.S. wind atlas counts
 300–400 W/m² at 50 m as class 3, which it calls suitable for most turbine applications, and its lowest class ends
 at 200 W/m² (Elliott et al. 1986).
 
-**The layout.** For the reference tower, devices fill half of the frame's open face, 4.6 km², facing the wind.
+**The layout.** For the reference tower, devices fill half of the frame's open face, 5.0 km², facing the wind.
 Their output is reduced by two factors:
 - 0.8 for the wind that goes around a porous tower;
 - 0.7 for the mesh that keeps fliers out of the slow rotors.
@@ -190,15 +185,15 @@ Their output is reduced by two factors:
 
 | Device | Output per m² | Mean output | Share of the tower's use (114 MW) | Share of a city of a million at 2 kW each (2 GW) |
 |---|---|---|---|---|
-| Fast three-blade rotors (not safe for fliers) | 6.7 W | 31 MW | 27% | 1.5% |
-| Slow many-blade rotors, screened | 3.1 W | 14 MW | 12% | 0.7% |
-| Savonius rotors on vertical axes, screened | 1.6 W | 7.2 MW | 6% | 0.4% |
-| Bladeless oscillating masts | 0.7 W | 3.4 MW | 3% | 0.2% |
+| Fast three-blade rotors (not safe for fliers) | 7.2 W | 36 MW | 32% | 1.8% |
+| Slow many-blade rotors, screened | 3.4 W | 17 MW | 15% | 0.8% |
+| Savonius rotors on vertical axes, screened | 1.7 W | 8.5 MW | 7% | 0.4% |
+| Bladeless oscillating masts | 0.8 W | 4.0 MW | 4% | 0.2% |
 
 **The tower's own use.** This assumes 100 kWh per m² of floor a year. That is 60% of the median US office's
 167 kWh (ENERGY STAR 2024).
 
-**Turning time.** Every device turns 45% of the time; the rest of the time the wind is below 3 m/s.
+**Turning time.** Every device turns 52% of the time; the rest of the time the wind is below 3 m/s.
 
 **Earth's towers with turbines.**
 - **The Bahrain World Trade Center's** three 29-m turbines were forecast to supply 11–15% of its two towers'
@@ -210,8 +205,8 @@ Their output is reduced by two factors:
 
 **The devices add load.** A device that takes energy from the wind takes momentum from it too, and pushes that
 load onto whatever holds it:
-- **Stopped for the storm.** Slow rotors raise the lightest frame's steel by 45% (4.2 Mt against 2.9). Bladeless
-  masts nearly double it (5.6 Mt).
+- **Stopped for the storm.** Slow rotors raise the lightest frame's steel by 58% (5.6 Mt against 3.5). Bladeless
+  masts more than double it (8.1 Mt).
 - **Turning in the service gust.** The masts oscillate across the wind, which raises their drag coefficient from
   about 1.2 to about 2 (oscillating cylinders reach 2.5 at their largest swings; Griffin 1985). They then put 1.7
   times the open frame's design-gust moment on the tower.
@@ -243,9 +238,9 @@ farm (May et al. 2020). Screens make either kind of rotor safe.
 
 **Panels.** Averaged over the lunar cycle, the design's clear-sky sunlight at sea level (202–1000 nm, from the
 illumination product) gives 33 W per m² of level panel and 15 W per m² of east- or west-facing wall, at 22%
-efficiency. The summit, with less air above it, gets more. On a square metre, then, panels give 5–11 times what
-the best flier-safe wind device gives. Panels on half of the reference tower's east and west faces (9.9 km²)
-would give about 150 MW, more than the tower's own use, all of it by day. A city of a million would need about
+efficiency. The summit, with less air above it, gets more. On a square metre, then, panels give 4.5–10 times what
+the best flier-safe wind device gives. Panels on half of the reference tower's east and west faces (11.0 km²)
+would give about 160 MW, more than the tower's own use, all of it by day. A city of a million would need about
 61 km² of level panels on the highland around the tower.
 
 **Storage through the night.** The night lasts 354 hours. The summit stands 3.74 km above the Korolev lake, so
@@ -283,21 +278,25 @@ stands 35.6 km above sea level.
 
 **Frame.** The floors follow the frame: up to 100,000 m² a storey, and 2% of the frame's plan where that is less, in
 four storeys every 200 m. At the design gust the lightest steel frame for them has:
-- a base 8.2 km wide, narrowing as (1 − z/H)^1.5 to 320 m at the crown;
-- 33 Mt of steel in the frame and 17 Mt in the floors;
-- a first period of 45 s, and 44 m of sway at the top in the service gust (1/550 of its height);
-- footings of about 28,600 m² under each of its four legs at 1 MPa.
+- a base 9.3 km wide, narrowing as (1 − z/H)^1.5 to 320 m at the crown;
+- 46 Mt of steel in the frame and 18 Mt in the floors;
+- a first period of 39 s, and 42 m of sway at the top in the service gust (1/580 of its height);
+- footings of about 37,400 m² under each of its four legs at 1 MPa.
 
-The industrial architecture moves bulk material at about 2.7×10⁸ kg a second, so the frame is two minutes of that
-stream.
+The industrial architecture moves bulk material at about 2.7×10⁸ kg a second, so the frame is about three minutes
+of that stream.
 
 | Height above the summit | Width | Floor | Air at the top of the band | Oxygen like Earth at | Use |
 |---|---|---|---|---|---|
-| 0–3 km | 8.2–6.8 km | 6.0 km² | 0.89 atm, 9 °C | 2,430 m | Open public floors and terraces: markets, food, big event halls, the ground interchange, some hotels |
-| 3–10 km | 6.8–3.8 km | 13.9 km² | 0.78 atm, 3 °C | 3,520 m | Enclosed floors with topped-up air: most hotels (pressurised above about 6 km), commerce, conferences, short stays |
-| 10–15 km | 3.8–2.1 km | 10.0 km² | 0.70 atm, −1 °C | 4,290 m | Enclosed floors: regional docks and terminals, commerce, short stays |
-| 15–24 km | 2.1–0.32 km | 5.0 km² | 0.59 atm, −10 °C | 5,670 m | Sealed, pressurised long-haul terminals, customs, lounges and transit rooms, under the crown's docking arms |
-| Total | | 34.9 km² | | | |
+| 0–3 km | 9.3–7.7 km | 6.0 km² | 0.89 atm, 9 °C | 2,420 m | Open public floors and terraces: markets, food, big event halls, the ground interchange, some hotels |
+| 3–10 km | 7.7–4.3 km | 13.9 km² | 0.78 atm, 3 °C | 3,520 m | Enclosed floors with topped-up air: most hotels (pressurised above about 6 km), commerce, conferences, short stays |
+| 10–15 km | 4.3–2.4 km | 10.1 km² | 0.70 atm, −1 °C | 4,290 m | Enclosed floors: regional docks and terminals, commerce, short stays |
+| 15–24 km | 2.4–0.32 km | 6.0 km² | 0.59 atm, −9 °C | 5,670 m | Sealed, pressurised long-haul terminals, customs, lounges and transit rooms, under the crown's docking arms |
+| Total | | 36.0 km² | | | |
+
+The programme below takes 34.9 km² of this floor and leaves about 1 km² of the sealed zone spare.
+[results/summit_tower.json](results/summit_tower.json) fits the same mix to all 36.0 km², which adds 3% to every use
+and gives the sealed zone 4.7 km² of long-haul terminals.
 
 **Programme and occupancy.** These are the areas per person assumed for each use:
 
@@ -337,29 +336,28 @@ use and each zone adds up (`fit_programme`, iterative proportional fitting). The
 - **Travel by trip.** Long-haul terminals (4.0 km²) fill the sealed zone under the crown's docking arms in the flight
   band. Regional docks and terminals (2.5 km²) sit at 10–15 km. Local interchange (1.0 km²) is at the base and in the
   hub bands.
-- **Sleep.** Hotels sit low, where the air is best: like 1,950–2,430 m on Earth at the base, and about 3,000 m at
+- **Sleep.** Hotels sit low, where the air is best: like 1,950–2,420 m on Earth at the base, and about 3,000 m at
   6 km. Hotel floors above about 6 km are pressurised.
 - **Crowds.** Markets, food and the big event halls fill the open floors at the base, next to the ground interchange.
 
 The areas per person are rough planning figures from Earth practice, still to be checked against published
 standards. Terminals take the most, because their docks, baggage and servicing are counted in.
 
-**Power.** The floors use about 400 MW at 100 kWh per m² a year. The port's face is large: its open face is 77 km²,
-and the wind carries about 1.95 GW through it. The Betz limit on that is 1.16 GW.
+**Power.** The floors use about 410 MW at 100 kWh per m² a year. The port's face is large: its open face is 86 km²,
+and the wind carries about 3.78 GW through it. The Betz limit on that is 2.24 GW.
 
 | Devices | Half the open face | The whole open face | The whole face, with the summit speed-up of 1.2 | Frame steel, devices stopped for storms |
 |---|---|---|---|---|
-| Screened slow rotors | 147 MW (37% of the tower's use) | 295 MW (74%) | 527 MW (132%) | 55.5 Mt (half face), 75.6 Mt (whole face) |
-| Fast rotors (not safe for fliers) | 317 MW (79%) | 634 MW (159%) | 1,158 MW (291%) | |
-| Bladeless masts | 35 MW (9%) | 70 MW (18%) | 125 MW (31%) | |
+| Screened slow rotors | 287 MW (70% of the tower's use) | 575 MW (140%) | 927 MW (225%) | 74.4 Mt (half face), 111.3 Mt (whole face) |
+| Fast rotors (not safe for fliers) | 646 MW (157%) | 1,292 MW (314%) | 2,268 MW (552%) | |
+| Bladeless masts | 68 MW (17%) | 137 MW (33%) | 221 MW (54%) | |
 
-- **Wind.** Screened slow rotors over the whole face cover three-quarters of the tower's use in the modelled winds,
-  and all of it if the summit's winds run a fifth stronger. The price is 43 Mt more steel, 2.3 times the open
-  frame.
-- **Panels on the tower.** Louvers over half the face that turn edge-on for storms add 14% to the steel (37.5 Mt).
-  Solid panels there would add 160% (85.5 Mt).
-- **Panels on the ground.** Level panels on the highland around the base need 12 km² for the tower's average use.
-- **Storage.** Carrying the tower through the 354-hour night takes 105 million m³ of water pumped between the
+- **Wind.** Screened slow rotors over the whole face give 140% of the tower's use in the modelled winds, and 225%
+  if the summit's winds run a fifth stronger. The price is 65 Mt more steel, 2.4 times the open frame.
+- **Panels on the tower.** Louvers over half the face that turn edge-on for storms add 15% to the steel (53.1 Mt).
+  Solid panels there would add 150% (116.4 Mt).
+- **Panels on the ground.** Level panels on the highland around the base need 12.5 km² for the tower's average use.
+- **Storage.** Carrying the tower through the 354-hour night takes 108 million m³ of water pumped between the
   summit and the Korolev lake.
 
 **A sky-ship world.** On the Open Moon lift is cheap, and the third dimension is ordinary access.
@@ -410,25 +408,25 @@ along its helix:
 
 | Height | Member breadth | Lean from vertical | Force | Steel |
 |---|---|---|---|---|
-| 3.1 km | 48 m | 30° | 4.7 GN | 14.4 m² |
-| 12 km | 22 m | 15° | 2.1 GN | 6.4 m² |
-| 18 km | 9.4 m | 6° | 0.41 GN | 1.3 m² |
-| 23 km | 6 m | 2° | 0.07 GN | 0.22 m² |
+| 3.1 km | 48 m | 30° | 5.0 GN | 15.5 m² |
+| 12 km | 22 m | 15° | 2.2 GN | 6.7 m² |
+| 18 km | 9.4 m | 6° | 0.47 GN | 1.4 m² |
+| 23 km | 6 m | 2° | 0.08 GN | 0.25 m² |
 
 Rings brace the members at every node level. Above 5.7 km the node levels are more than 20 member breadths apart,
-so 70 further rings brace the members between them. Near the top they are about 120 m apart, as on Shukhov's
+so 70 further rings brace the members between them. Near the top they are about 110 m apart, as on Shukhov's
 towers. Members keep a 6 m minimum breadth near the top.
 
 **The base.** The diagrid lands on the transfer ring's 24 nodes: six on the legs, and three between each pair of
 legs, which the arch below takes at its crown and its two posts. So the arches carry three-quarters of the tower's
 weight to the feet, and the legs one quarter with the wind's overturning:
-- **Legs:** 3.6 km long, leaning 17.5°, carrying 14.7 GN each. Their 45 m² of steel is in four chords, each chord
+- **Legs:** 3.6 km long, leaning 17.5°, carrying 17.8 GN each. Their 55 m² of steel is in four chords, each chord
   a lattice box about 12 m across.
-- **Arches:** 8.0 km long over a 4.4 km span, carrying 11.8 GN at the springing on 36 m² of steel. Their ribs are
+- **Arches:** 8.0 km long over a 4.4 km span, carrying 12.2 GN at the springing on 38 m² of steel. Their ribs are
   about 100 m deep and wide, twice the 55 m first drawn.
-- **Transfer ring:** 4.5 GN of hoop compression from the legs' tops, on 14 m² of steel.
-- **Feet:** 37 GN each, on 37,000 m² at 1 MPa. They push outward with 8.5 GN, held by a buried tie between them
-  along the hexagon's edges: 26 m² of steel, or prestressed rock anchors.
+- **Transfer ring:** 5.4 GN of hoop compression from the legs' tops, on 17 m² of steel.
+- **Feet:** 40 GN each, on 40,000 m² at 1 MPa. They push outward with 9.4 GN, held by a buried tie between them
+  along the hexagon's edges: 29 m² of steel, or prestressed rock anchors.
 
 **The rings.** Radial trusses every 15 m cantilever from the frame. At the frame they are a sixth of the ring's width
 deep, tapering to 2 m at the inner edge, and they are pre-cambered for their dead load. Ring 0's trusses are 25 m
@@ -445,7 +443,7 @@ chord. The cables hang from the rim down to a tension hub on the core a fifth of
 eight posts each up to the deck. The chords' horizontal forces balance at the rim and at the hubs, so the frame
 takes only the deck's weight.
 - **Disk 1** (3.0 km across): the cables hang 298 m below the deck at the core. They are 0.72 m thick, the hub
-  rings have 21 m² of steel, and the structure weighs 490 kg/m².
+  rings have 21 m² of steel, and the structure weighs 464 kg/m².
 - **Disk 7** (0.6 km across): 58 m deep, with 0.13 m cables.
 
 The lowest hub, 300 m under disk 1, can serve as the station for air shuttles in the hollow below.
@@ -461,23 +459,23 @@ held 37 km² and weighed as much as a disk.
 
 | Part | Mass |
 |---|---|
-| Frame members | 44.9 Mt |
-| Node rings and the rings between them | 2.6 Mt |
+| Frame members | 48.6 Mt |
+| Node rings and the rings between them | 2.8 Mt |
 | Frame strengthening at the rings | 1.5 Mt |
-| Legs | 10.3 Mt |
-| Arches | 12.5 Mt |
-| Transfer ring | 3.0 Mt |
-| Buried tie | 5.4 Mt |
+| Legs | 12.5 Mt |
+| Arches | 13.0 Mt |
+| Transfer ring | 3.6 Mt |
+| Buried tie | 6.1 Mt |
 | Ring structures | 2.7 Mt |
 | Disk structures | 6.8 Mt |
 | Core | 0.5 Mt |
-| **Steel** | **90 Mt** |
+| **Steel** | **98 Mt** |
 | Floors, parks and buildings | 57.8 Mt |
 
-The parks drive the cost: 28 km² of decks carry 1.3 t/m² of soil and slab. The steel comes to nearly three times the
-square lattice's 33 Mt, which carried 17.5 Mt of light floors. The frame's first period is 104 s (the square
-lattice's is 45 s), its sway in the service gust is 30 m (1/800 of its height), and its whole-frame buckling
-factor is 18.
+The parks drive the cost: 28 km² of decks carry 1.3 t/m² of soil and slab. The steel comes to about twice the
+square lattice's 46 Mt, which carried 18.0 Mt of light floors. The frame's first period is 99 s (the square
+lattice's is 39 s), its sway in the service gust is 37 m (1/650 of its height), and its whole-frame buckling
+factor is 21.
 
 **What this changes in the drawn tower:**
 - the arches need ribs about 100 m deep and wide;

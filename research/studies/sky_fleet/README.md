@@ -18,24 +18,32 @@ The runner is [run.py](run.py), the numbers are in [results/sky_fleet.json](resu
 buoyant hull fitted to four airships' weight statements, and, new here, a flyer's drag polar (power, sink and glide
 against speed), a canopy's descent, and the energy and mass of an electric flyer that takes off vertically. The study
 reads the sky-ship study's product (the fitted hull, the flight band's winds, the crown's long-haul traffic), the
-summit tower study's (the port's traffic, its canopies, its site, and the terminal and disks of its sized form),
-the design run's air over the whole Moon
+summit tower study's (the port's traffic, its canopies, its site, and the frame, terminal and disks of its chosen
+form), the design run's air over the whole Moon
 ([climate/gcm/global_winds.py](../../../climate/gcm/global_winds.py)) and the cloud-resolving equatorial ring's daytime
-mixed layer and storms ([climate/crm](../../../climate/crm/README.md)). The drawings are made in
+mixed layer and storms ([climate/crm](../../../climate/crm/README.md)). The design run is main's corrected
+`A28_dim5_moon`, the ring is main's corrected equatorial ring (`ring_ring_equator.json`) and the crown takes the
+chosen form's frame; the study was rerun on these inputs on 8 October 2026 in the joint integration, and the
+[infrastructure review](../infrastructure_review/README.md) records the September figures. The drawings are made in
 [visualization/sky-fleet](../../../visualization/sky-fleet/README.md).
 
 **Status.** The author adopted these findings on 2026-09-28 as the planning basis for the Open Moon's flyers
 ([decisions register](../../decisions.md#sky-ships-and-flyers)); the long-haul class for the crown, whether winged
 liners join it, and the sky boats' share of trips, ownership and traffic system stay open.
 
-**Since 28 September.** The [infrastructure review](../infrastructure_review/README.md) of 8 October reruns this
-study with main's corrected climate:
-- the high platforms near 70 km meet winds of 25–29 m/s and need about seven times the power to hold station;
-- the day's thermals reach about 10 km;
-- liners in the band meet a steady westerly of about 11 m/s.
+**Since 28 September.** Against the September figures:
+- the high platforms near 70 km meet winds of 25–29 m/s and need about seven times the power to hold station, and
+  the 200 m platform's envelope needs 1.2 times today's laminates' strength;
+- the day's thermals reach about 10 km, with cloud base near 7 km;
+- liners in the band meet a steady westerly of about 11 m/s;
+- the crown's long-haul traffic is about a fifth higher in the summit tower study's port programme, so the 750 m
+  liner needs nine berths (eight before) and the crown holds 2,300–4,100 t of hydrogen at berth (about 2,100 t
+  before). That traffic follows the square-lattice port's programme by height, whose wider corrected base gives
+  long-haul travel 61% of the travel floor (53% before); the chosen form's programme, and the crown's berths with
+  it, are still to reconcile.
 
-It also finds lightning starting at the flight band's height, which bears on the crown's berths and on the hydrogen
-ferries in storms.
+The infrastructure review finds lightning starting at the flight band's height, which bears on the crown's berths
+and on the hydrogen ferries in storms.
 
 **Evidence.** First-order sizing of the kind used to compare concepts.
 - **What is tested.** The drag polar reproduces a search for least power and least drag, keeps the glide ratio
@@ -63,7 +71,7 @@ ferries in storms.
 - **Sky boats used as cars are light and frugal.** A four-seat electric sky boat weighs 684 kg, hovers on 11 kW,
   cruises at 40 m/s on 4 kW and flies 10 km on 0.74 kWh, a twenty-fourth of what the same trip takes on Earth. A
   buoyant sky boat would be a hull 33–39 m long using three to seven times the energy.
-- **Large sky ferries carry a metro's load.** A 250 m hydrogen ferry carries 1,210 people at 25 m/s on 11.5 Wh a
+- **Large sky ferries carry a metro's load.** A 250 m hydrogen ferry carries 1,210 people at 25 m/s on 11.4 Wh a
   passenger-km; a line every two to three minutes carries 24,000–36,000 people an hour each way at 42 km/h with its
   stops.
 - **The metropolis's sky at the busy hour.** With a Tokyo-like split and sky boats in cars' place, about 290,000 sky
@@ -76,10 +84,10 @@ ferries in storms.
   to 2.5 km above the ground; gliders soaring to about 10 km by day; regional ships at 22–27 km; long-haul liners and
   freighters in the flight band at 35–45 km; winged liners near 55 km; high platforms near 70 km.
 - **The long-haul ship for the crown.** Four liner sizes, 500 m to 1.5 km, all sound, are drawn at the crown to
-  scale. The 750 m liner is the recommendation: eight berths on two levels above the terminal, arms of 424 m, a
-  ship every 16–26 minutes, 7,010 passengers each (about as many as the largest cruise ship), 19 Wh a passenger-km
-  and 257 t of hydrogen a ship. The 500 m liner serves three and a half times the destinations at the cost of 27
-  berths and arms of 772 m.
+  scale. The 750 m liner is the recommendation: nine berths on two levels above the terminal, arms of 669 m, a
+  ship every 13–22 minutes, 6,990 passengers each (about as many as the largest cruise ship), 19 Wh a passenger-km
+  and 257 t of hydrogen a ship. The 500 m liner serves three and a half times the destinations at the cost of 32
+  berths and arms of 936 m.
   Winged liners that take off on tilting rotors cross to a mean destination in 5.2 hours for 14 Wh a passenger-km,
   about the largest airships' energy at five times their speed, and are worth adding. Berths in the tower's lee sit in
   its wake, which needs a wind study before the layout is fixed.
@@ -124,12 +132,12 @@ are above the metropolis's ground unless given above sea level.
 | Sky boat | rotors and wing, electric | six 1.7 m rotors | 684 kg | four people | 40 m/s | 11 kW hover, 4 kW cruise; 0.74 kWh for 10 km | 0.3–1.5 km |
 | Air taxi or sky van | rotors and wing, electric | eight 2.6 m rotors | 2.1 t | 12 people or 1.2 t | 45 m/s | 34 kW hover, 14 kW cruise | 0.3–1.5 km |
 | Parcel and cargo drones | rotors | 0.2–0.8 m rotors | 8–162 kg | 5–100 kg | 20–25 m/s | 0.1–2.6 kW hover | low, in their own lanes |
-| Sky ferry | buoyant, hydrogen | 250 m, 42 m across | 210 t lift | 1,210 people | 25 m/s | 1.1 MW; 11.5 Wh a passenger-km | 1.5–2.5 km |
-| Regional ship | buoyant, hydrogen | 350 m, 58 m across | 440 t lift | 1,780 seated | 35 m/s | 23 Wh a passenger-km | 20–30 km above sea level; docks 10–15 km above the summit |
-| Long-haul liner | buoyant, hydrogen | 500 m – 1.5 km | 1,000–27,000 t lift | 2,000–57,000 in cabins | 30 m/s | 12–27 Wh a passenger-km | flight band, 35–45 km; berths at the crown |
+| Sky ferry | buoyant, hydrogen | 250 m, 42 m across | 210 t lift | 1,210 people | 25 m/s | 1.1 MW; 11.4 Wh a passenger-km | 1.5–2.5 km |
+| Regional ship | buoyant, hydrogen | 350 m, 58 m across | 440 t lift | 1,770 seated | 35 m/s | 23 Wh a passenger-km | 20–30 km above sea level; docks 10–15 km above the summit |
+| Long-haul liner | buoyant, hydrogen | 500 m – 1.5 km | 1,000–27,000 t lift | 2,000–56,500 in cabins | 30 m/s | 12–27 Wh a passenger-km | flight band, 35–45 km; berths at the crown |
 | Winged liner | wing, rotors tilting | 25 m span | 120 t | 300 seated | 145 m/s | 14 Wh a passenger-km; 5.6 MW to hover | cruise near 55 km |
 | Freighter | buoyant, hydrogen | 500 m – 1.5 km | 1,000–27,000 t lift | 840–23,000 t | 25 m/s | 12–38 Wh a tonne-km | flight band |
-| High platform | pressure hull | 100–200 m | 12–95 t lift | 4–28 t | holds station | 15–120 kW against the wind | near 70 km |
+| High platform | pressure hull | 100–200 m | 12–94 t lift | 4–28 t | holds station | 115–750 kW against the wind | near 70 km |
 
 ### People on wings: canopies, micro gliders and personal wings
 
@@ -152,7 +160,7 @@ speed and spend the gain on a smaller wing:
 - **The personal wing:** 11 m span, 7 m², 22 kg, pedalled through a propeller. It flies level at 6.7 m/s on 63 W at
   the pedals and glides 22 to 1. Sedentary and recreational adults hold about 70 W for three hours, enough for
   7.2 m/s; an untrained man's critical power (155 W) gives 10.4 m/s or a climb of 0.45 m/s, and a fit young man's hour
-  (215 W) 11.7 m/s or 0.74 m/s. On Earth the same wing would need 912 W.
+  (215 W) 11.7 m/s or 0.73 m/s. On Earth the same wing would need 912 W.
 - **The micro glider:** 9 m span, 4.5 m², 18 kg, foot-launched. It glides 15 to 1 at 7.9 m/s and sinks 0.53 m/s; on
   Earth it would need to fly at 19 m/s. A glider launched from the port's rings, 3 km up, reaches 45 km: the whole
   metropolis.
@@ -163,8 +171,8 @@ speed and spend the gain on a smaller wing:
   Steerable ram-air canopies glide 3 to 5 (Knacke; Airborne Systems), descend 2.46 times more slowly than on Earth
   at the same loading, and can be a sixth of the area for Earth's speeds.
 - **Thermals.** Soaring is a daytime activity. On the ring's land the mixed layer, which thermals fill, deepens from
-  0.2 km at night to 11.7 km in the early afternoon, with its cloud base near 10 km; it is deeper than 2 km for
-  295 hours of the lunar day, 157 of them dry, before the afternoon's storms. The climate work takes the Moon's
+  0.3 km at night to 9.9 km in the late morning, with its cloud base near 7 km; it is deeper than 2 km for
+  335 hours of the lunar day, 138 of them dry, before the afternoon's storms. The climate work takes the Moon's
   convection as Earth's stretched six times in size with the same speeds, so its thermals are six times wider, and
   a lunar glider's turns are six times wider too: 52 m at 7 m/s banked 30°.
 
@@ -205,7 +213,7 @@ each.
 |---|---|---|---|---|---|---|
 | 150 m | 25 m | 45 t | 250 | 19 Wh | 7,500 / 5,000 / 3,000 an hour each way | 690 m |
 | 200 m | 33 m | 108 t | 610 | 14 Wh | 18,300 / 12,200 / 7,300 | 920 m |
-| 250 m | 42 m | 210 t | 1,210 | 11.5 Wh | 36,300 / 24,200 / 14,500 | 1.2 km |
+| 250 m | 42 m | 210 t | 1,210 | 11.4 Wh | 36,300 / 24,200 / 14,500 | 1.2 km |
 | 300 m | 50 m | 363 t | 2,110 | 9.6 Wh | 63,300 / 42,200 / 25,300 | 1.4 km |
 
 - **Metro capacity at metro speed.** With its stops a ferry averages 42 km/h, about Moscow's metro (41 km/h) and
@@ -215,17 +223,17 @@ each.
 
 ### Regional ships
 
-The port's regional docks, 10–15 km above the summit, handle 20,000–33,400 passengers an hour (the summit tower
+The port's regional docks, 10–15 km above the summit, handle 17,600–29,200 passengers an hour (the summit tower
 study's travel floor split by trip). Rigid ships seated at 200 kg a passenger for trips of a few hours, cruising at
 35 m/s on routes of up to 1,500 km, with a planning mean of 500 km (four hours):
 
 | Length | Passengers | Energy a passenger-km | Departures an hour | Destinations with a ship every 4 hours / daily | Ships cycling through the port |
 |---|---|---|---|---|---|
-| 245 m | 580 | 34 Wh | 17–29 | 69–115 / 410–690 | 170–290 |
-| 350 m | 1,780 | 23 Wh | 5.6–9.4 | 23–38 / 135–225 | 60–90 |
-| 500 m | 5,350 | 16 Wh | 1.9–3.1 | 7–12 / 45–75 | 20–30 |
+| 245 m | 580 | 34 Wh | 15–25 | 61–101 / 364–605 | 150–250 |
+| 350 m | 1,770 | 23 Wh | 5.0–8.3 | 20–33 / 119–198 | 50–80 |
+| 500 m | 5,320 | 16 Wh | 1.7–2.7 | 7–11 / 40–66 | 20–30 |
 
-The 350 m class gives each of 23–38 destinations a ship every four hours, from six to ten docks busy at once.
+The 350 m class gives each of 20–33 destinations a ship every four hours, from five to nine docks busy at once.
 
 ### Freighters and high platforms
 
@@ -233,9 +241,9 @@ The 350 m class gives each of 23–38 destinations a ship every four hours, from
   tonne-km), 6,900 t at 1 km (18 Wh) and 23,000 t at 1.5 km (12 Wh). They can set the tower's frame segments
   anywhere up it.
 - **High platforms.** Pressure hulls near 70 km, in air of 0.44 kg/m³, for the astronomy and photometry platforms
-  of the decisions register: a 100 m hull lifts 12 t, a 200 m hull 95 t, their envelopes using a fifth to two-fifths
-  of today's laminates' strength. Holding station takes 15–30 kW and 60–120 kW against the 99th-percentile and
-  highest winds at that height (13 and 16 m/s).
+  of the decisions register: a 100 m hull lifts 12 t and its envelope uses three-fifths of today's laminates'
+  strength; a 200 m hull lifts 94 t and its envelope needs 1.2 times that strength. Holding station takes
+  115–190 kW and 460–750 kW against the 99th-percentile and highest winds at that height (25 and 29 m/s).
 
 ## How many: the metropolis at the busy hour
 
@@ -248,7 +256,7 @@ Tokyo's 23 wards (rail 51%, car 8%, bicycle 13%, walking 24%), with sky boats in
 |---|---|---|---|---|---|---|---|
 | Walking and cycling | 30% | 84 million | – | – | – | – | – |
 | Metro and rail | 37.5% | 105 million | – | – | – | – | – |
-| Sky ferries | 12.5% | 35 million | 9 km, 13 min | 890 ferries | 0.3 | about 1,000 in service | 5.2 GWh |
+| Sky ferries | 12.5% | 35 million | 9 km, 13 min | 890 ferries | 0.3 | about 1,000 in service | 5.1 GWh |
 | Sky boats | 10% | 28 million | 8 km, 8 min; 1.3 people a flight | 293,000 | 91 | 1.1 million shared, or 25 million owned | 14.8 GWh |
 | Air taxis | 2% | 5.6 million | 10 km, 11 min; 3 a flight | 33,000 | 10 | 62,000 | 4.9 GWh |
 | Personal wings and gliders | 5% | 14 million | 4 km, 12 min | 279,000 | 87 | 10 million owned | on people's own power |
@@ -282,14 +290,14 @@ storm tops. The Moon's tall air stacks the classes over 80 km:
 | 30–300 m above the ground | Personal wings, micro gliders, canopies, drones in their own lanes | Short climbs on a person's power; slow flyers kept below the powered traffic; glider and parkour zones designed in |
 | 0.3–1.5 km above the ground | Sky boats, air taxis | Climbs of a minute or two; many layers |
 | 1.5–2.5 km above the ground | Sky ferries | Their own corridors, descending to stations |
-| Up to about 10 km above the ground, by day | Soaring gliders | The cloud-resolving ring's daytime mixed layer over land reaches 11.7 km, with cloud base near 10 km; it is deeper than 2 km for 295 hours of the lunar day, 157 of them before the afternoon's storms; at night it is 0.2 km deep |
+| Up to about 10 km above the ground, by day | Soaring gliders | The cloud-resolving ring's daytime mixed layer over land reaches 9.9 km, with cloud base near 7 km; it is deeper than 2 km for 335 hours of the lunar day, 138 of them before the afternoon's storms; at night it is 0.3 km deep |
 | 10–15 km above the summit (22–27 km above sea level) | Regional ships at the port's regional docks | The regional docks the author placed |
-| 35–45 km above sea level | Long-haul liners and freighters; the crown's berths | The flight band: above the median storm top (28 km), in air like Earth's at 4.3–5.8 km |
+| 35–45 km above sea level | Long-haul liners and freighters; the crown's berths | The flight band: above the median storm top (22 km), in air like Earth's at 4.3–5.8 km |
 | Near 55 km | Winged liners in cruise | Faster in air of 0.57 kg/m³ |
-| Near 70 km | High platforms | Above most storms: the tallest tenth reach 68 km |
+| Near 70 km | High platforms | Above most storms: the tallest tenth reach 38 km |
 
-- **Storms.** On the ring, storms form over land through about 157 hours of each lunar day's afternoon and evening,
-  any place is under rain 3.3% of the time, and a rain spell lasts three hours at the median and twelve at the
+- **Storms.** On the ring, storms form over land through about 217 hours of each lunar day's afternoon and evening,
+  any place is under rain 5.7% of the time, and a rain spell lasts three hours at the median and twelve at the
   90th percentile. The summit, the rainiest ground in the climate run, sees more. Small flyers land for storms and
   the backbone carries on.
 - **Turning.** A lunar glider at 7 m/s banked 30° turns on 52 m, against 18 m for an Earth glider at 10 m/s; the
@@ -297,7 +305,7 @@ storm tops. The Moon's tall air stacks the classes over 80 km:
 
 ## The long-haul ship for the crown
 
-The crown's long-haul traffic is 31,900–53,100 passengers an hour (the sky-ship study, from the port's travellers).
+The crown's long-haul traffic is 37,700–62,600 passengers an hour (the sky-ship study, from the port's travellers).
 Four sizes of rigid hydrogen liner, all within the sizes the air carries reasonably, cruising at 30 m/s in the flight
 band on trips of up to 48 hours with a cabin, services and a share of the crew for each passenger (400 kg). The mean
 trip between random points on the Moon is a quarter of its circumference, 2,730 km: 25 hours at 30 m/s.
@@ -305,16 +313,16 @@ trip between random points on the Moon is a quarter of its circumference, 2,730 
 | | 500 m | 750 m | 1 km | 1.5 km |
 |---|---|---|---|---|
 | Across | 83 m | 125 m | 167 m | 250 m |
-| Passengers | 2,020 | 7,010 | 16,760 | 56,590 |
-| Departures an hour | 7.9–13.1 | 2.3–3.8 | 1.0–1.6 | 0.3–0.5 |
-| Destinations with a ship every 4 hours / daily | 32–53 / 190–315 | 9–15 / 55–91 | 4–6 / 23–38 | 1–2 / 7–11 |
-| Berths at the crown, at the busy end | 27 on 3 levels | 8 on 2 levels | 4 on 2 levels | 1 |
-| Longest arm | 772 m | 424 m | 238 m | 358 m |
-| Hydrogen in one ship | 76 t | 257 t | 609 t | 2,056 t |
-| Hydrogen berthed at the crown | 2,060 t | 2,060 t | 2,440 t | 2,060 t |
+| Passengers | 2,010 | 6,990 | 16,740 | 56,500 |
+| Departures an hour | 9.4–15.6 | 2.7–4.5 | 1.1–1.9 | 0.3–0.6 |
+| Destinations with a ship every 4 hours / daily | 38–62 / 225–374 | 11–18 / 65–107 | 5–7 / 27–45 | 1–2 / 8–13 |
+| Berths at the crown, at the busy end | 32 on 3 levels | 9 on 2 levels | 4 on 2 levels | 2 on 1 level |
+| Longest arm | 936 m | 669 m | 238 m | 358 m |
+| Hydrogen in one ship | 76 t | 257 t | 610 t | 2,059 t |
+| Hydrogen berthed at the crown | 2,440 t | 2,320 t | 2,440 t | 4,120 t |
 | Energy a passenger-km, with the hotel load | 27 Wh | 19 Wh | 16 Wh | 12 Wh |
-| Load at the nose, weathervaned in the design wind (34.6 m/s) | 0.15 MN | 0.34 MN | 0.61 MN | 1.4 MN |
-| Ships cycling through the port | 430–720 | 120–210 | 50–90 | 20–30 |
+| Load at the nose, weathervaned in the design wind (38.6 m/s) | 0.19 MN | 0.43 MN | 0.76 MN | 1.7 MN |
+| Ships cycling through the port | 510–850 | 150–240 | 60–100 | 20–30 |
 
 **The drawings.** [visualization/sky-fleet](../../../visualization/sky-fleet/README.md) draws each class berthed at
 the crown from one camera, its berth plan to scale, and all four in elevation beside the Hindenburg
@@ -322,7 +330,7 @@ the crown from one camera, its berth plan to scale, and all four in elevation be
 its form: 48 diagrid members leaning 2–3° from vertical near the top, the sealed disks as spoked wheels, the 120 m
 core, and the eight-storey terminal at the flight band's lower edge (23.4 km above the summit). The berths are a first
 arrangement for comparing sizes: ships lie nose-in on the lee side of arms running north and south from the frame
-above the terminal, noses into the west wind, which blows there with a steadiness of 0.89–0.96 (the mean vector over
+above the terminal, noses into the west wind, which blows there with a steadiness of 0.97–1.00 (the mean vector over
 the mean speed, 20–30 km above the summit, in the design run's 3-day means). Side by side they are spaced so that,
 swinging together with the wind, their fins meet only past 40°; levels are stacked a hull, its fins and 40 m apart,
 from just above the terminal's roof up to the frame's top at 24 km, and lifts would continue up the frame from the
@@ -332,15 +340,15 @@ first drawn, which the metropolis brief found too slender.
 **What separates the classes.**
 - **Frequency.** Airlines answer growing demand more with frequency than with larger aircraft, and gain more market
   share from frequency than from size (Givoni and Rietveld 2009; Wei and Hansen 2005); airliners of more than 100
-  seats averaged 185 seats a flight in 2024. A 500 m liner leaves every five to eight minutes and serves a destination
-  every four hours for 32–53 of them; a 1.5 km liner leaves every two to four hours.
-- **Hydrogen in one ship.** The crown holds about 2,100 t of hydrogen at berth whichever class it serves; one ship
-  holds 76 t at 500 m and 2,056 t at 1.5 km, 4.6 and 123 times the Hindenburg's. The transport rules the author set
-  for space traffic cap each packet's energy so that each failure stays bounded; the same reasoning favours smaller
-  ships.
+  seats averaged 185 seats a flight in 2024. A 500 m liner leaves every four to six minutes and serves a destination
+  every four hours for 38–62 of them; a 1.5 km liner leaves every two to three hours.
+- **Hydrogen in one ship.** The crown holds 2,300–2,400 t of hydrogen at berth with any class up to 1 km and 4,100 t
+  with two 1.5 km liners; one ship holds 76 t at 500 m and 2,059 t at 1.5 km, 4.6 and 123 times the Hindenburg's.
+  The transport rules the author set for space traffic cap each packet's energy so that each failure stays bounded;
+  the same reasoning favours smaller ships.
 - **Energy.** Larger ships use less per passenger: 27 Wh a passenger-km at 500 m, 12 Wh at 1.5 km.
-- **The crown.** Larger ships need fewer and shorter arms: 27 berths on arms of up to 772 m at 500 m, 8 on arms of
-  424 m at 750 m.
+- **The crown.** Larger ships need fewer and shorter arms: 32 berths on arms of up to 936 m at 500 m, 9 on arms of
+  669 m at 750 m.
 - **Structure.** The hull's share for payload barely changes over these sizes (0.85–0.86); the sky-ship study's best
   length is 750–900 m.
 
@@ -348,17 +356,17 @@ first drawn, which the metropolis brief found too slender.
 
 | Cruise | Mean trip | 500 m: passengers, energy | 750 m | 1 km | 1.5 km |
 |---|---|---|---|---|---|
-| 30 m/s | 25 hours | 2,020, 27 Wh | 7,010, 19 Wh | 16,760, 16 Wh | 56,590, 12 Wh |
-| 40 m/s | 19 hours | 1,850, 47 Wh | 6,600, 31 Wh | 16,000, 24 Wh | 54,700, 17 Wh |
-| 50 m/s | 15 hours | 1,610, 82 Wh | 6,040, 50 Wh | 14,970, 37 Wh | 52,160, 25 Wh |
+| 30 m/s | 25 hours | 2,010, 27 Wh | 6,990, 19 Wh | 16,740, 16 Wh | 56,500, 12 Wh |
+| 40 m/s | 19 hours | 1,840, 48 Wh | 6,580, 31 Wh | 15,960, 24 Wh | 54,550, 17 Wh |
+| 50 m/s | 15 hours | 1,600, 82 Wh | 6,020, 50 Wh | 14,900, 37 Wh | 51,950, 25 Wh |
 
 **Winged liners.** Under a sixth of the gravity a winged liner that takes off and lands on tilting rotors is cheap to
 fly. With 300 seats at 400 kg each (the liners' mass per passenger), a lift-to-drag ratio of 17 and a wing loading of
 3,000 Pa, it weighs 120 t on a 25 m span, cruises at 145 m/s near 55 km and crosses to a mean destination in
 5.2 hours (10.4 at most), for 14 Wh a passenger-km with the same hotel load: about the energy of the 1–1.5 km
 airships at five times their speed. It hovers on 5.6 MW for the minute or so of each landing. Carrying half the
-crown's long-haul passengers would take 27–44 landing pads with an hour's turn; at 70 m square each, about 0.2 km² of
-deck.
+crown's long-haul passengers would take 31–52 landing pads with an hour's turn; at 70 m square each, about 0.25 km²
+of deck.
 
 **The wake.** Berths in the lee sit in the tower's wake. Above the terminal the frame is an open lattice about
 350 m across, its 48 members of 6 m covering about a quarter of its circumference, and the terminal below it is a
@@ -369,14 +377,14 @@ fixed, the crown needs a study of its wind, in a computational model or a tunnel
 of the wake.
 
 **Recommendation.** All four classes are sound structure, well within the sizes the air carries. The 750 m liner is
-the one the drawings favour: eight ships on two levels at the crown read as a composition, at the hull's best size,
-each carrying about as many people as the largest cruise ship (Icon of the Seas: 7,600 at most, 364 m long). It leaves
-every 16–26 minutes and serves 55–91 destinations daily from arms of 424 m. What it costs against the 500 m liner:
-under a third of the departures and of the destinations served every four hours, and 257 t of hydrogen in each ship
-instead of 76 t. The 500 m liner is the choice if the long-haul network must reach many cities often; 27 of them berth
-on arms of up to 772 m, a busy harbour in the sky. Winged liners are worth adding for fast trips whichever class the
-arms serve; they would take most of the travellers in a hurry, and leave the airships the overnight and leisure trips
-they serve best.
+the one the drawings favour: in the September drawings its eight ships on two levels at the crown read as a
+composition, at the hull's best size, each carrying about as many people as the largest cruise ship (Icon of the Seas:
+7,600 at most, 364 m long); the corrected traffic needs nine at the busy end. It leaves every 13–22 minutes and serves
+65–107 destinations daily from arms of 669 m. What it costs against the 500 m liner: under a third of the departures
+and of the destinations served every four hours, and 257 t of hydrogen in each ship instead of 76 t. The 500 m liner
+is the choice if the long-haul network must reach many cities often; 32 of them berth on arms of up to 936 m, a busy
+harbour in the sky. Winged liners are worth adding for fast trips whichever class the arms serve; they would take most
+of the travellers in a hurry, and leave the airships the overnight and leisure trips they serve best.
 
 ## What this leaves out, and what comes next
 

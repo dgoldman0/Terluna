@@ -10,12 +10,11 @@ those choices, and the design notes still open. The port itself is sized in the
 The density, ring and heat figures below are first estimates worked by hand from those studies' products. No
 model of the metropolis exists yet.
 
-**Since 28 September.** The [infrastructure review](../../research/studies/infrastructure_review/README.md) of
-8 October reads this brief against later work. The figures below are the September ones. The review gives what
-changes:
-- the climate figures with main's corrected climate run: the summit's rain at 9–17 mm a day in place of 20–24, and
-  winds aloft about twice as strong;
-- the storm heights with the corrected ring and the electrified storms;
+**Since 28 September.** The figures below rest on main's corrected design run, A28_dim5_moon, and on the summit
+tower, port fire, sky-ship and sky-fleet studies as rerun on it on 8 October 2026 in the joint integration. The
+[infrastructure review](../../research/studies/infrastructure_review/README.md) of 8 October records the September
+figures and reads this brief against later work:
+- the electrified storms and their heights;
 - storm protection, with lightning that is rare and very large, and flashes that start at the crown's height;
 - the night, with about 82 hours of practical dusk after sunset and about 190 dark hours;
 - the coasts, and the infrastructure off the Moon.
@@ -24,14 +23,18 @@ changes:
 
 - **The summit.** The atlas's highest cell, at 5.4° N, 158.6° W, stands 11.6 km above sea level on a gently
   rounded rise several hundred kilometres across. The ground falls about 3 km within 100 km.
-- **Water.** The drainage estimate fills the craters and basins with rain-fed lakes. They cover 22% of the ground
-  within 25 km of the summit, 40% within 100 km and 56% within 300 km, against 17–19% for the equatorial belt.
+- **Water.** The drainage estimate fills the craters and basins with rain-fed lakes. They cover 24% of the ground
+  within 25 km of the summit, 41% within 100 km and 57% within 300 km, against 10.3% of the whole Moon.
   The Korolev lake (141,000 km², up to 6.7 km deep) has its shore 84 km away and 3.7 km below the summit.
-- **Rain.** The cells round the summit are the rainiest in climate run A28_dim5: 20–24 mm a day, 7–9 m a year,
-  against 4.6 mm a day for equatorial land. Rain follows ground height across the equatorial belt (correlation
-  0.82). The magnitude is uncertain: the run's cells are 170 km across, and the CM1 ring, which is flat and at
-  sea level, rains about half as much as the GCM over equatorial land. Afternoon storms reach 28 km at the median.
-- **Air.** At the summit the free air averages 12 °C and 0.95 atm (1.16 kg/m³).
+- **Rain.** The summit's highland is the rainiest ground in the corrected design run: the four cells round the
+  summit rain 9–17 mm a day, 3–6 m a year, and the rainiest cells nearby 19–20, against 4.8 mm a day for
+  equatorial land. Rain follows ground height across the equatorial belt (correlation about 0.7). The magnitude is
+  uncertain: the run's cells are 170 km across, and the CM1 ring along the equator, which is flat and at sea level,
+  rains about four-fifths as much as the GCM over equatorial land. Afternoon storms reach 22 km at the median.
+- **Air.** At the summit the free air averages 12 °C and 0.95 atm (1.16 kg/m³). The air temperatures in this brief
+  are the GCM's. CM1 and the GCM disagree on how warm and humid the air over land is near the ground, and the
+  climate work is paused, with comfort carried as the range between them
+  ([decisions register](../../research/decisions.md#research-practice)).
 - **Heritage.** No site in the conservation register lies within 1,400 km; the nearest is Chang'e 6.
 - **Sky.** Earth never rises on the far side, and the 354-hour night has no earthshine.
 
@@ -44,8 +47,8 @@ floors has berths.
 
 - **Frame.** A round diagrid gathers into six splayed legs, as on the Eiffel Tower, through a deep transfer ring a
   kilometre or two up. The six lift spines run down the legs. The flared legs carry the wind's overturning, as
-  Eiffel's profile does, and the ground between them stays open for the city. Sharing the study's footing area six
-  ways gives each leg about 19,000 m² at 1 MPa.
+  Eiffel's profile does, and the ground between them stays open for the city. In the hand-sized form (below) each
+  of the six feet stands on about 40,000 m² at 1 MPa.
 - **Floors.** Rings run round the frame in the lower tower, and disks round a central core from about 12 km up, as
   in the author's picture of the port (chosen on 2026-09-28, replacing full rings). Each is a block of a few
   storeys with a park and open-air shops on its roof. On the first estimate's levels, the eight below 12 km
@@ -56,22 +59,27 @@ floors has berths.
   about 3 km², close to Central Park's size. Their decks cantilever from the frame. In lunar gravity a 150 m
   cantilever carrying 3 t/m² (a park, two storeys and structure) bends like a 61 m one on Earth, about the 67 m
   the Marina Bay Sands SkyPark cantilevers; its trusses taper, deep at the frame and thin at the inner edge. The
-  bending at the root, 21 km round each ring, goes into the frame, whose members need stiffening for a node level
-  above and below: roughly 2 Mt of steel for three wide rings, about 6% of the frame. Cables from the frame above
-  would need about a tenth of that.
+  bending at the root, 21 km round ring 0, goes into the frame, whose members need stiffening for a node level
+  above and below: 1.5 Mt of steel for the six rings in the hand-sized form, under 2% of its 98 Mt. Cables from
+  the frame above would need about a tenth of that.
 - **Crown.** The sealed long-haul terminal sits in the flight band; the summit tower study's sized form makes it
   eight storeys round the frame's top at 23.4 km. Its docking arms, as first drawn, cantilever 0.9–1.3 km at about
   90 times their depth, which is not credible structure. The
   [sky-fleet study](../../research/studies/sky_fleet/README.md#the-long-haul-ship-for-the-crown) sizes the arms for
   each long-haul class instead: deep trusses running north and south from the frame above the
-  terminal, with ships nose-in on their lee side. For the crown's 31,900–53,100 long-haul passengers an hour it
-  compares 27 berths of 500 m liners on three levels (arms up to 772 m), 8 of 750 m on two (424 m), 4 of 1 km
-  (238 m) and one of 1.5 km, drawn to scale in visualization/sky-fleet. It recommends the 750 m liner, with winged
+  terminal, with ships nose-in on their lee side. For the crown's 37,700–62,600 long-haul passengers an hour it
+  compares 32 berths of 500 m liners on three levels (arms up to 936 m), 9 of 750 m on two (669 m), 4 of 1 km
+  (238 m) and two of 1.5 km, drawn to scale in visualization/sky-fleet. It recommends the 750 m liner, with winged
   liners added for fast trips; the choice is open. Berths in the lee sit in the tower's wake, which needs a wind
   study before they are fixed.
 
-The tower model still sizes a square lattice with a band every 200 m. The legs, the transfer ring, the rings and
-their cantilevers, and the disks and their core are yet to be sized in it.
+The summit tower study sizes this form by hand in [form.py](../../research/studies/summit_tower/form.py)
+(commit aac8c64): the diagrid's members, the legs and arches, the transfer ring and a buried tie between the feet,
+six rings of cantilevered trusses from 3.1 to 10.7 km, seven disks from 12.3 to 21.4 km as spoked wheels round the
+core, and the terminal. At the corrected design gust of 32.4 m/s it takes 98 Mt of steel, with a first period of
+99 s and 37 m of sway at the top in the service gust. It is concept sizing by hand calculation, and a structural
+analysis has yet to check it. The study's square lattice, with a band every 200 m, stays as a comparison: 46 Mt of
+frame steel on a 9.3 km base.
 
 ## Parks and air by height
 
@@ -82,25 +90,25 @@ With the design's oxygen (17.5%), the air at the top of each zone compares with 
 | 0–3 km | 1,900–2,400 m (Mexico City) | 12 to 9 °C | Parks and open-air shops for everyone |
 | 3–10 km | up to 3,500 m (La Paz) | down to 3 °C | Parks for residents and acclimatised visitors: cool alpine gardens |
 | 10–15 km | up to 4,300 m (El Alto) | down to −1 °C | A few high gardens for short visits, each beside a pressurised refuge; winter parks on the disks from about 13.5 km |
-| 15–24 km | up to 5,700 m | down to −10 °C | None: the blocks are sealed |
+| 15–24 km | up to 5,700 m | down to −9 °C | None: the blocks are sealed |
 
 The summit is the Moon's highest ground, and the air cools about 0.9 °C per kilometre of height, a seventh of
 Earth's rate, since that rate scales with gravity. So the tower's foot averages about 12 °C against the lowlands'
-21–23 °C, and the metropolis runs from there to about 16 °C on its lowest ground, 4 km lower. The disks begin at
+21–24 °C, and the metropolis runs from there to about 16 °C on its lowest ground, 4 km lower. The disks begin at
 12.3 km, where the air averages about 1 °C, so none of their open decks is temperate. The mild open-air parks are
 the ground and the lower rings: about 9 °C on ring 0 and 6–8 °C on rings 1 and 2.
 
 Every interior is kept at a comfortable pressure and temperature, so enclosed floors take topped-up air from
 about 3 km up. High parks close for the afternoon storms and their lightning.
 
-**Winter.** The climate run keeps ground-level air near 21 °C from the equator to the poles, so the tower's
-upper levels hold about the only winter on the Moon, and it lasts all year, since the Moon has no seasons. Each
-height also keeps its temperature through the lunar day: in the climate run the air at the tower's heights changes
-by only 0.1–0.2 °C between noon and midnight (run A28_dim5, model years 15–24, read at the site; the site product
-does not yet carry temperature by hour angle). The mean air falls through freezing at about 13.6 km above the
-summit, so the open winter parks sit on the disks from about 13.5 to 15 km, just below freezing, and the high
-gardens below them, from 10 km, are raw and near freezing. Above 15 km, in the sealed blocks, the air is −2 to
-−10 °C. The storms bring wet snow, sleet and graupel, and night cloud leaves rime.
+**Winter.** The corrected design run keeps ground-level air at about 19–22 °C from the equator to the poles, so
+the tower's upper levels hold about the only winter on the Moon, and it lasts all year, since the Moon has no
+seasons. Each height also keeps its temperature through the lunar day: in the run the air at the tower's heights
+changes by only 0.1–0.4 °C between its warmest and coolest hours (run A28_dim5_moon, model years 20–29, read at the
+site; the site product does not yet carry temperature by hour angle). The mean air falls through freezing at about 13.9 km above
+the summit, so the open winter parks sit on the disks from about 13.5 to 15 km, at about 0 to −1 °C, and the high
+gardens below them, from 10 km, are raw and near freezing. Above 15 km, in the sealed blocks, the air is −1 to
+−9 °C. The storms bring wet snow, sleet and graupel, and night cloud leaves rime.
 Snowmaking and chilled rinks give reliable snow and ice. At a sixth of Earth's gravity snowflakes fall at under
 half Earth's speed and snow lies fluffier; skiing works on Earth's slope angles, more slowly.
 
@@ -137,11 +145,12 @@ hour.
 sequence (fission to start, then deuterium–tritium, then deuterium–deuterium or advanced fusion). It is a
 conditional technology here: no reactor has been designed or validated. Its steady output suits the 354-hour
 night. Solar supplements it by day: level panels give about 33 W/m² averaged over the lunar cycle, so local
-sunlight alone could carry about 10–20 million people at 2 kW each. The summit's wind is weak (16–39 W/m²) and
-adds little.
+sunlight alone could carry about 10–20 million people at 2 kW each. The summit's wind is weak near the ground
+(16 W/m²) and stronger aloft (about 160 W/m² 20 km up): screened slow rotors over the port's whole face would give
+about 575 MW, 140% of the port's own use and about 0.3% of the metropolis's 200 GW.
 
 **Food.** Regional agriculture and foraging feed the metropolis, drawing on the biosphere work: the canopy model's
-crop stand fixes about 10.6 g of carbon per m² per day under the Moon's sky. The land each person needs has not
+crop stand fixes about 12.5 g of carbon per m² per day under the Moon's sky at the equator. The land each person needs has not
 been computed.
 
 **Design notes, proposed and not yet decided.** Architecture for a very wet, stormy climate: arcades, deep eaves,
@@ -158,8 +167,8 @@ The author adopted the flyer findings of the [sky-ship](../../research/studies/s
   three hours. A foot-launched micro glider of 9 m and 4.5 m² glides 15 to 1, so one launched from ring 0, 3 km up,
   reaches anywhere in the metropolis. Canopies about 4.8 m across laid flat land a person at 4 m/s from any rim of
   the port; the summit tower study's canopies, 3.7–4.5 m across with a coefficient of 1.3, are about a tenth larger
-  than Knacke's coefficients need. Thermals rise through a daytime mixed layer up to about 12 km deep on the
-  equatorial ring's land, and there are none at night.
+  than Knacke's coefficients need. Thermals rise through a daytime mixed layer up to about 10 km deep on the
+  equatorial ring's land, with cloud base near 7 km, and there are none at night.
 - **Sky boats.** Four-seat electric sky boats of about 700 kg hover on 11 kW and fly 10 km on 0.74 kWh. In a
   planning case after Tokyo's 23 wards, with sky boats taking cars' tenth of 280 million trips a day, about 290,000
   are aloft at the busy hour, 91 over each km². NASA's urban air mobility spacing, in lanes stacked every 61 m from
@@ -192,8 +201,9 @@ it reaches milestones:
 
 ## Open
 
-- Sizing the legs, the transfer ring, the rings and their cantilevers, the disks and their core, and the crown's
-  docking arms in the tower model.
+- A structural analysis of the hand-sized form, taking up what the hand sizing leaves out (joints and nodes,
+  fatigue, construction stages, gust dynamics, ice, the ground under the feet and the tie), and the crown's docking
+  arms for the chosen long-haul class.
 - The number and spacing of the disks, and the width of the wide lower rings (150 m is an example).
 - The long-haul ship class: four sizes compared and drawn on the sized form (sky-fleet study, visualization/sky-fleet).
   The study recommends the 750 m liner, with winged liners on landing pads for fast trips. A wind study of the
@@ -206,7 +216,8 @@ it reaches milestones:
   - storm protection: the tower as a lightning conductor reaching to the height where flashes start, the crown's
     hydrogen berths, lightning protection for charges beyond Earth's highest level, the backbone's ferries in storms,
     and a storm warning service;
-  - the frame and the crown resized with the corrected winds, with a design gust that varies with height;
+  - the frame and the crown sized with a design gust that varies with height: over the port's upper third the
+    corrected winds would give 36–39 m/s, against the single 32.4 m/s;
   - wind devices in the upper frame, which give the port more than its own use in the corrected winds;
   - the high platforms' height or drift in the stronger winds near 70 km;
   - the link between the summit and orbit, and what launches release into the upper air.
