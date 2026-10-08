@@ -467,7 +467,7 @@
       ],
       "unresolved": [
         "which loss budget in 1-100 kg/s (atmospheric cycle times of about 100 billion to 1 billion years) works best (designed across the range for now)",
-        "the protected radius: 3-4 lunar radii hold the sunlit exosphere's loss under 1 kg/s at the design point's cooler upper air with the September magnets; at solar maximum with all near-infrared heating 5.4 lunar radii hold that case's exosphere to 1 kg/s with the September magnets; in cycle 19's year its heating alone needs 5, and the escape model's 2.5 needs 8.2 (the author's choice with the budget)",
+        "the protected radius is the ring fleet's 4 lunar radii (decisions.md, 2026-10-07): there, with the September magnets, the cooler upper air loses under 0.02 kg/s and the warmest 0.2 kg/s at quiet Sun and 3.5 kg/s at solar maximum; open, noted by the author for later study: extending the radius by more active control at solar maxima",
         "the ion fates with and without a magnetosphere rest on bounds and timescales; check against published plasma simulations of small magnetospheres and loaded exospheres",
         "the ultraviolet cut-off: titania stack or an ozone-forming edge",
         "how the optical shield is held so that it costs less material than the air it saves (requirement S6)",

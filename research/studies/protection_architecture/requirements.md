@@ -53,7 +53,9 @@ titania stack, with the ranges spanning the three treatments of the upper air an
 quiet Sun to solar maximum (FISM2's year around cycle 21's maximum; the stress
 cases, cycle 19's year and the escape model's 2.5, are given apart), and
 counting the cases of those six
-that cannot meet the budget at any transmission:
+that cannot meet the budget at any transmission. The ring fleet's tiles cover 4
+lunar radii; the other radii are sensitivities, and each lunar radius beyond 4
+would need about 23% more rings:
 
 | Budget (cycle time) | Magnetosphere | Protected radius 3 lunar radii | 4 lunar radii | 6 lunar radii | 10 lunar radii |
 |---|---|---|---|---|---|
@@ -133,19 +135,16 @@ solar wind's charge exchange and sputtering; 0.064–0.093 kg/s in the ring flee
 wake; and 10⁻⁵–0.003 kg/s with the September magnets. With all near-infrared
 heating it is 3.1–3.5 kg/s with no magnetosphere (32 to 28 billion years),
 2.3–2.7 kg/s in the wake and 0.75–0.95 kg/s with the magnets (131 to 104 billion
-years); its largest year, 2000, reaches 6.6–7.9, 5.8–7.2 and 2.5–3.2 kg/s. A
-6-radius shadow brings that case's mean to 2.1–2.3 kg/s with no magnetosphere and
-0.38–0.47 kg/s in the wake. At the tight level the means are 0.63–0.86 kg/s with
+years); its largest year, 2000, reaches 6.6–7.9, 5.8–7.2 and 2.5–3.2 kg/s. At
+the tight level the means are 0.63–0.86 kg/s with
 no magnetosphere in the cooler cases and 1.7–1.8 kg/s with all near-infrared
 heating, which the wake brings to 0.79–0.85 and the magnets to 0.13–0.15 kg/s.
 At solar maximum, FISM2's year around cycle 21's maximum of 1979–80, the
 warmest case loses 8.4 kg/s at the standard level (12 billion years) and
-3.5 kg/s with the magnets (28 billion years); a 6-radius shadow brings it to 3.8
-and 1.1 kg/s. The cooler cases lose 0.73–1.1 kg/s there with no magnetosphere
+3.5 kg/s with the magnets (28 billion years). The cooler cases lose 0.73–1.1 kg/s there with no magnetosphere
 and 6×10⁻⁵–0.012 kg/s with the magnets. In cycle 19's year, a stress case, the
-warmest case's air runs away at the standard level, its heating needing a
-5-radius shadow (at 6 lunar radii it loses 7.7 kg/s, 3.6 with the magnets); the
-escape model's 2.5 gives it 26 kg/s (15 with the magnets) and a runaway with
+warmest case's air runs away at the standard level, its heating reaching beyond
+the 4-radius shadow; the escape model's 2.5 gives it 26 kg/s (15 with the magnets) and a runaway with
 holes four times the particle size. At the tight level the warmest at solar
 maximum loses 2.5 kg/s (0.45 with the magnets; 3.8 and 1.0 in cycle 19's year).
 The measured years of cycles 23 to 25 reach at most 7.9 kg/s. The oxygen
@@ -165,7 +164,7 @@ with the magnets), its warmest case running away in eleven of the 23 years.
 | ID | Requirement | Source | Status |
 |---|---|---|---|
 | O1 | The UV transmission, the share of sunlight below 175 nm that reaches the protected region, averaged over time and over that region, stays within the allowed fraction for R1. Gaps, pinholes, edges, off-normal light and outages all count | loss response with its exosphere step; [protection/transmission](../../../protection/transmission/README.md) | Derived on the traced count, which the author adopted on 7 October with FISM2's measured X-ray cycle ([decisions.md](../../decisions.md); [the X-ray check](../solar_shield_array/integrated_comparison.md#the-x-ray-check)), the heat placed where the tracing puts it: light through gaps over the whole aperture follows its slant paths and heats the air 2.5–5 times a count over the disk. A swarm can hold 3×10⁻⁵–2×10⁻⁴ (O8). With the ring fleet's 4-radius shadow and averaged over the solar cycle, the standard level keeps every titania case within 10 kg/s with no magnetosphere (at most 3.5 kg/s, 7.9 in the worst year) and within 1 kg/s with the September magnets (at most 0.95 kg/s). At solar maximum, FISM2's year around cycle 21's maximum, the warmest case loses 8.4 kg/s at the standard level (3.5 with the September magnets) and the cooler ones 0.73–1.1 kg/s with no magnetosphere; in cycle 19's year, a stress case, the warmest runs away, and the escape model's 2.5 gives it 26 kg/s and a runaway with larger holes. The relaxed level runs away in most cases. Below about 5×10⁻⁴ the sky's glow heats the upper air more than the transmission does, so low that it raises the exobase only 6–18 K |
-| O2 | The protected radius covers the thermosphere's heating, which takes it just beyond the exobase (with its edge inside the exobase the unfiltered light beyond the aperture runs the air away), and reaches far enough beyond the exobase that the sunlit exosphere's losses stay within their share of R1. At the design point's standard level, with the September magnets, the exosphere's central loss falls to 1 kg/s at 1.9–2.2 lunar radii in the three coolest cases, 2.5–3.2 in LTE at solar maximum and with all near-infrared heating at quiet Sun, and 5.4 with that heating at solar maximum; to 0.1 kg/s at 2.1–2.5, 3.1–4.5 and 9.4 lunar radii. In cycle 19's year that case's heating alone needs 5 lunar radii, and at 6 it loses 7.7 kg/s (3.6 with the magnets); the escape model's 2.5 needs 8.2 and 10.9. At 20,000 km apertures of 6 and 10 lunar radii have 2.2 and 6.2 times the ring fleet's 4-radius area, though the ring fleet's tile mass grows with the aperture's width, about a fifth for each added lunar radius | [atmosphere/loss_response](../../../atmosphere/loss_response/README.md), absorption and exosphere steps; [protection/report.md](../../../protection/report.md), section 2 | Derived |
+| O2 | The protected radius covers the thermosphere's heating, which takes it just beyond the exobase (with its edge inside the exobase the unfiltered light beyond the aperture runs the air away), and reaches far enough beyond the exobase that the sunlit exosphere's losses stay within their share of R1. The ring fleet's tiles cover 4 lunar radii. There, at the design point's standard level with the September magnets, the central loss is 2×10⁻⁶–0.012 kg/s in the cooler cases, 0.2 kg/s with all near-infrared heating at quiet Sun and 3.5 kg/s with that heating at solar maximum, and the exosphere's share of it falls to 1 kg/s within 1.9–3.2 lunar radii in all but that last case. In cycle 19's year, a stress case, the warmest case's heating reaches beyond the 4-radius shadow. Each lunar radius beyond the fleet's 4 would need about 23% more rings | [atmosphere/loss_response](../../../atmosphere/loss_response/README.md), absorption and exosphere steps; [protection/report.md](../../../protection/report.md), section 2 | Derived |
 | O3 | The ultraviolet cut-off: the titania stack (no ozone, surface UV index 0.1) or an ozone-forming edge near 200 nm | [atmosphere/middle_atmosphere](../../../atmosphere/middle_atmosphere/README.md) | Open: the author's choice |
 | O4 | The window passes the climate's sunlight (E2), evenly unless a pattern is chosen and run through the climate model. At 78,000 km an even cut needs the dimmer to reach 2,100 km from the axis, or 2,400 km to include the twilight band | E2; this study | Derived |
 | O5 | Light the shield rejects never reaches Earth's night side: specular reflections are steered at least about 5° off the plane in which Earth moves as seen from the shield, and Sun-facing surfaces keep diffuse reflectance near 0.1% | this study | Derived; to confirm in illumination |

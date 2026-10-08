@@ -374,7 +374,9 @@ magnets. The ranges span the three treatments of the upper air and quiet Sun to
 solar maximum; each radius carries its own traced state, and
 a radius counts only where it covers the thermosphere's heating, light beyond its
 aperture giving at most a tenth of the heat. Cases that cannot meet the budget at
-any transmission are counted out of six:
+any transmission are counted out of six. The ring fleet's tiles cover 4 lunar
+radii; the other radii are sensitivities, and each lunar radius beyond 4 would
+need about 23% more rings:
 
 | Budget (cycle time) | Magnetosphere | 3 lunar radii | 4 lunar radii | 6 lunar radii | 10 lunar radii |
 |---|---|---|---|---|---|

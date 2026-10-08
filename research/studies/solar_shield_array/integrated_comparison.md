@@ -690,8 +690,8 @@ cycle unless stated; cycle times are the atmosphere's mass over the loss.
   years) and 3.5 kg/s with them (28 billion), against the 2.5's 26 and 15; the
   cooler cases lose 0.73–1.1 kg/s. Cycle 19's stronger glow, light below 50 nm
   and X-rays run the warmest case away at the standard level, its heating
-  reaching past the 4-radius shadow (at 6 lunar radii it loses 7.7 kg/s, 3.6
-  with the magnets); before 1978 FISM2 rests on the 10.7 cm radio flux alone.
+  reaching past the 4-radius shadow; before 1978 FISM2 rests on the 10.7 cm
+  radio flux alone.
   The 200-nm edge runs away at the standard level at every maximum, and in
   cycle 19's year at the tight level too. R1's cycle mean, over cycles 23 and
   24, is unchanged.
@@ -719,8 +719,7 @@ cycle unless stated; cycle times are the atmosphere's mass over the loss.
   its wake may still have an empty core there, about 2.6 lunar radii in radius
   behind a 4-radius screen. Within it the wind's charge exchange falls away: the
   cooler cases lose 0.064–0.093 kg/s with no magnetosphere, and with all
-  near-infrared heating 2.3–2.7 kg/s, or 0.38–0.47 kg/s behind a 6-radius
-  screen. The refill length is an assumption a plasma model has to test. The
+  near-infrared heating 2.3–2.7 kg/s. The refill length is an assumption a plasma model has to test. The
   held screen, 68,000–106,000 km out, lies too far for its wake to reach the
   Moon.
 - **Atomic oxygen adds little unless the upper air is warm and weakly
@@ -780,13 +779,23 @@ The author set this order on 7 October:
    tile within its overlap.
 4. The momentum store and the trim as hardware, and their power.
 
-Noted by the author for later study (7 October): the ring fleet can widen its
-protected radius with the solar weather, spending more energy and propellant
-while it does, since its formation is already dynamic; it need not hold its
-widest radius all the time. At cycle 21's maximum 5.4 lunar radii hold the
-warmest titania case's exosphere to 1 kg/s with the September magnets; in cycle
-19's year that case needs about 5 lunar radii to cover its heating, and at 6 it
-keeps a state.
+Noted by the author for later study (7 October): the ring fleet could extend its
+protected radius by more active control as the solar weather requires,
+spending more energy and propellant while it does; it need not hold its
+maximum extent all the time, and its formation is already dynamic. A first
+look at the same tiles finds little room. Each strip overlaps its neighbour by
+about 615 m of the 9.29 km height step, most of it room for the stack's
+half-monthly breathing, up to 5.6% of the step. Holding the breathing by
+keeping, which the plan lists as the alternative, would take by estimate about
+10⁻⁷ m/s² of out-of-plane sail force per tile, a few percent of the photon
+reach; spreading the strips into the freed overlap, less a keeping margin,
+would extend the shadow to about 4.1–4.2 lunar radii. The 23% of spare rings
+covers the pattern's annual shift of about 1,590 km each way: near the two
+times a year the shift passes zero the stack reaches about 4.9 lunar radii on
+both sides, and otherwise its extra reach lies on one side. Holding that reach
+on demand would mean turning every ring plane with the Sun's 5.1° yearly swing,
+about 90 m/s per tile each half year, more than photon forces supply, and with
+electric thrust a few hundred megatonnes of exhaust a year, which S7 counts.
 
 For the held screen, the literature can settle two conditions first: how close
 thrusters come to ionizing all their propellant, neutralizer flow included,
