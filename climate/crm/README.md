@@ -10,7 +10,8 @@ flight band, and the air near the ground by day and by night.
 The [atmospheric-electricity study](../../research/studies/atmospheric_electricity/README.md)
 (2026-10-02) reads these runs' storms: their graupel, cloud ice and snow, the air
 where they meet supercooled water, and what slower settling at lunar gravity does
-to them.
+to them. Its "Where the study stands" gathers what the runs show about the
+storms and what stays open.
 
 ## How CM1 is set up for the Moon
 

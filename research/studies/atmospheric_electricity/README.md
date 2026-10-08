@@ -512,29 +512,8 @@ km and audible in quiet to 100–150 km. The nitrogen the lightning fixes per
 unit area comes to 0.2–47 % of Earth's lightning's, depending on how Earth's
 yields carry over to flashes this large.
 
-**What stays open.**
-- The charge a collision transfers at lunar impact speeds and cloud water,
-  which sets the storms' polarity (item 6; stage 1's decisive laboratory
-  quantity).
-- The grid. The lightning is measured at 6 km only: at 2 km the fine box's
-  storms charged to 73 % of breakdown without a flash, and Earth's benchmark
-  makes fewer, larger flashes on a coarser grid. Flash counts, sizes and delays
-  and the nitrogen estimate carry that uncertainty until a 2-km box wide enough
-  for several storms runs.
-- The site. One equatorial lowland box; the highlands, the poles and the seas
-  await their own boxes.
-- The microphysics. NSSL's storms have half the night fog of Morrison's, from
-  whose rings the aerosol study takes its fog.
-- The conducting air aloft, whose attachment scales with pressure as in the
-  continuum regime until stage 3 rebuilds the column (author, 2026-10-06).
-- Chance. CM1 on several threads repeats a run only as a new realization, so
-  differences of 10–20 % between runs of a setting carry no meaning.
-
-**What stage 3 takes from it.** The global circuit needs the current each
-storm drives to the upper atmosphere, which follows from the charge, field and
-conductivity above the storms that the runs hold and have not yet diagnosed.
-The transient luminous events need the largest flashes' charge moments, which
-follow from the charge and heights in the flash log ([S4]).
+What stays open, for the storms, their electricity, the global circuit and the
+plasma above it, is gathered under "Where the study stands" below.
 
 ## Stage 3: the global circuit and transient luminous events
 
@@ -546,6 +525,142 @@ follow from the charge that large flashes move: a quasi-electrostatic
 calculation for sprites and halos [S4], an electromagnetic-pulse calculation for
 elves, and a discharge-propagation treatment for jets [S5], with thresholds set
 by the gas density at the Open Moon's heights.
+
+## Where the study stands
+
+On 2026-10-08 stages 1 and 2 are done and stage 3 is planned. This section
+gathers what the runs show about the Open Moon's storms and what stays open,
+the global circuit and the plasma above it included.
+
+**The storms.** Storms follow the month-long day. At the equator the mornings
+are clear, the land warms for about a week, and storms fill the afternoon, from
+about one to seven Earth days after noon, where the two low-level streams of
+the day–night circulation meet. The nights are calm, saturated and often foggy,
+and no run has flashed at night ([climate/crm](../../../climate/crm/README.md),
+"What the ring shows" and "A three-dimensional box at a crossing"). A place on
+equatorial land gets about two rainy spells per lunar day, 38–61 mm in all. The
+freezing level stands near 25 km and −40 °C near 60 km. Typical storm clouds
+reach 28 km, the tallest tenth 68 km or more and the strongest storms in the
+box nearly 100 km, and the largest systems spread anvils about a thousand
+kilometres wide. Updrafts reach 10–20 m/s, 36 m/s in the strongest. Every
+particle falls slowly, so graupel stays aloft four to five hours and most of
+the falling water evaporates before it lands, which keeps the lower air cooler
+and drier and the rain at the ground lighter ("The rain test"). Elsewhere the
+runs rain less. Under the GCM's sinking air the rings circling 45° rain 9–12 mm
+per lunar day over land and those circling 80° almost none
+(`climate/results/crm/ring_ring_45n_lsw.json` and its kin); the steep rings,
+which reach 70°, rain 3–6 mm per lunar day over land along their paths; and a
+box over dry highlands at 44.7° S stays sunny, with 1 % cloud and 0.1–0.2 mm of
+rain per lunar day ("Tilted rings", "A box over the highlands").
+
+**Their lives and lightning.** Most storm cores live under two hours, the
+strongest five to twelve. A strong storm grows for about an hour as graupel
+and hail build to millions of tonnes between 31 and 53 km, where the air is −5
+to −30 °C, holds its peak for an hour or so, and then rains for four to nine
+hours more from its decaying anvil ("Storm lives"). About a tenth of the storms
+flash, the strongest and deepest, an hour after their cores form, for a median
+half hour and at under one flash a minute. The flashes are large, a median
+110–150 C and 65–85 GJ; they start about 36 km up, inside the 35–45 km flight
+band, and a fifth strike the ground. Hail does most of the charging (stage 2,
+above).
+
+**How well it is known.** The storms come from one cloud-resolving model, CM1,
+on 6-km columns over placeholder land, and the electricity from one
+equatorial lowland box. Their broad pattern holds across the runs. Their
+amounts differ from the GCM's: CM1 rains a fifth to a half as much over
+equatorial land and runs about 3 °C warmer and more humid near the ground, and
+the climate work stays paused with comfort carried as the range between the
+two (decisions register, 2026-09-30).
+
+### Open questions
+
+**The storms**
+- Storms over wetter highlands, at high latitudes and over the seas in three
+  dimensions. The rings carry those places only as slices, and the climate
+  README has yet to report the rings circling 45° and 80°, whose products
+  stand in `climate/results/crm/`.
+- Whether lunar convection is Earth's stretched sixfold in size and time. The
+  gravity pair has yet to convect; its next design prescribes the ring's
+  radiative cooling over the seas ("The gravity pair").
+- Which model holds near the ground. CM1 and the GCM differ on the warmth,
+  humidity and rain over land; an independent model would decide (ROCKE-3D is
+  open).
+- The microphysics. NSSL's storms have half the night fog of Morrison's, from
+  whose rings the aerosol study takes its fog.
+
+**Charging and lightning**
+- The charge a collision transfers at lunar impact speeds and in thin cloud
+  water, which sets the storms' polarity (item 6; stage 1's decisive
+  laboratory quantity).
+- The lightning on a finer grid. The fine box at 2 km charged its storms to
+  73 % of breakdown without a flash. Flash counts, sizes and delays and the
+  nitrogen estimate carry the 6-km grid's uncertainty until a 2-km box wide
+  enough for several storms runs.
+- The nitrogen yield of flashes that release tens to hundreds of gigajoules,
+  which no measurement covers ("Nitrogen fixed by lightning").
+- Craft in the flight band. Flashes start inside the 35–45 km band, where the
+  field reaches 150–240 kV/m before a flash. How craft keep clear of storms,
+  and whether they would trigger flashes, is open.
+- Runaway electrons. The breakdown field the storms reach is the runaway
+  threshold ([S14]), so their strongest fields may drive electron avalanches,
+  with gamma-ray glows and flashes whose dose in the flight band is unknown.
+- Chance. CM1 on several threads repeats a run only as a new realization, so
+  differences of 10–20 % between runs of a setting carry no meaning.
+
+**The global circuit (stage 3)**
+- The generator. Each storm's conduction current to the upper atmosphere
+  follows from the charge, field and conductivity above the main run's storms,
+  which the runs hold and nothing has yet diagnosed; beside it stand the
+  currents lightning, precipitation and point discharge carry to the ground.
+- Its rhythm. Storms grow only in the afternoon, so the generator travels
+  with the Sun around the Moon once a month and waxes and wanes with the land
+  under the afternoon, a monthly counterpart of Earth's daily Carnegie curve.
+- The load. The fair-weather columns' resistance is set mostly in the lowest
+  kilometres: by the regional aerosol with a profile aloft (the aerosol study
+  gives 2.2–2.7 × 10⁻¹⁵ S/m at the ground), by night fog, which conducts 2–4 %
+  of that, by the highlands' shorter columns, and aloft by the ions' attachment,
+  whose transition regime stage 3's rebuilt column takes up (author,
+  2026-10-06).
+- The closure. Generator and load together set the upper boundary's
+  potential, the fair-weather field at the ground and the air–earth current.
+
+**The plasma above**
+- Where the circuit's upper boundary forms. The conductivity column ends at 149
+  km (22 hPa), where cosmic rays alone make the air conduct 2–4 × 10⁻¹² S/m,
+  with and without aerosol, and charge relaxes in 2–4 seconds. Above it the air
+  is ionized by cosmic rays, by the ultraviolet the shield lets through (3 ×
+  10⁻⁵ to 2.5 × 10⁻³ of sunlight below 175 nm,
+  [protection](../../../protection/README.md)), by the sky's Lyman-α glow and
+  by particles from the magnetosphere. No model yet gives that air's electron
+  densities and conductivity, or the height where it closes the circuit.
+- The night side. Through two-week nights the upper air loses its direct
+  sunlight; how the upper boundary holds there is open.
+- The magnetosphere's potentials. The four regional magnets give the Moon a
+  magnetosphere of 1.5 × 10²¹ A·m² standing off the solar wind near 10 lunar
+  radii. The wind would drive potentials across its open field lines over the
+  poles and currents along the field into the upper air, which may set their
+  own potentials on the circuit's upper boundary there. The protection work
+  leaves the global plasma unmodelled.
+- The plasma beyond the shadow. The sunlit exosphere's ions and the solar
+  wind's charge exchange, which the loss response counts as mass lost to space
+  ([atmosphere/loss_response](../../../atmosphere/loss_response/README.md)),
+  also feed the magnetosphere's plasma, whose currents and potentials no model
+  yet gives.
+- Lightning's reach into the plasma. Whether the flashes' radio waves travel
+  between the ground and the upper boundary, and leave as whistlers along the
+  magnets' field lines, depends on that plasma. The cavity between the ground
+  and the upper boundary may resonate as Earth's does; an ideal cavity the
+  Moon's size would ring near 39 Hz (c√2/2πR).
+
+**Transient luminous events (stage 3)**
+- Sprites and halos. The ground strikes lower a median 149 C, up to 1,025 C,
+  from 36–44 km. The breakdown field scales with the gas density, so any
+  sprites form far above the column, where the upper air's conductivity
+  decides how long the field above a storm lasts ([S4]).
+- Elves. They need the flashes' peak currents, which the branched scheme does
+  not give.
+- Jets. They would rise from storm tops at 60–100 km toward the upper boundary
+  ([S5]).
 
 ## How the work is done
 
