@@ -1,0 +1,162 @@
+{
+  "checked": "2026-10-05",
+  "source_admission": "Sources for the aerosol study, each with what was read of it; the four literature notes on the data drive (aerosol_marine.md, aerosol_biogenic.md, aerosol_dust_fog.md, aerosol_budget.md) hold the quotes, the derivations and the full lists.",
+  "sources": [
+    {
+      "id": "A1",
+      "citation": "Pöhlker et al. (2016), Long-term observations of cloud condensation nuclei in the Amazon rain forest - Part 1, Atmos. Chem. Phys. 16, 15709-15740, doi:10.5194/acp-16-15709-2016",
+      "use": "The clean wet-season forest's particle modes (Table 2) and κ: the central forest analogue.",
+      "access": "Full text (aerosol_biogenic.md Sect. 3)."
+    },
+    {
+      "id": "A2",
+      "citation": "Pöhlker et al. (2018), Long-term observations of CCN in the Amazon rain forest - Part 2, Atmos. Chem. Phys. 18, 10289-10331, doi:10.5194/acp-18-10289-2018",
+      "use": "The pristine forest's modes (Table 2): the clean case.",
+      "access": "Full text (aerosol_biogenic.md Sect. 3)."
+    },
+    {
+      "id": "A3",
+      "citation": "Rizzo et al. (2018), Multi-year statistics of Amazon aerosol size distributions, Atmos. Chem. Phys. 18, 10255-10274, doi:10.5194/acp-18-10255-2018",
+      "use": "Wet-season medians and 90th percentiles (Table 1): the loaded case.",
+      "access": "Full text (aerosol_biogenic.md Sect. 3)."
+    },
+    {
+      "id": "A4",
+      "citation": "Martin et al. (2010), Sources and properties of Amazonian aerosol particles, Rev. Geophys. 48, RG2002, doi:10.1029/2008RG000280; and Martin et al. (2010), Atmos. Chem. Phys. 10, 11415, doi:10.5194/acp-10-11415-2010",
+      "use": "Day and night number in the Amazon (Table 2), the night like the afternoon.",
+      "access": "Sections (aerosol_biogenic.md Sect. 3)."
+    },
+    {
+      "id": "A5",
+      "citation": "Wang et al. (2016), Amazon boundary layer aerosol concentration sustained by vertical transport during rainfall, Nature 539, 416-419, doi:10.1038/nature19819; Andreae et al. (2018), Atmos. Chem. Phys. 18, 921, doi:10.5194/acp-18-921-2018",
+      "use": "Over clean forest the particles form high in the troposphere and storms bring them down: number is not set by surface emission.",
+      "access": "Abstracts and sections (aerosol_biogenic.md Sect. 3)."
+    },
+    {
+      "id": "A6",
+      "citation": "Wimmer et al. (2018), Ground-based observation of clusters and nucleation-mode particles in the Amazon, Atmos. Chem. Phys. 18, 13245-13264, doi:10.5194/acp-18-13245-2018",
+      "use": "Small ions inside the rainforest at 97 % relative humidity (549 and 856 per cm3): the check of the ion balance.",
+      "access": "Abstract and sections (aerosol_biogenic.md Sect. 3)."
+    },
+    {
+      "id": "A7",
+      "citation": "Guenther et al. (2012), The Model of Emissions of Gases and Aerosols from Nature version 2.1 (MEGAN2.1), Geosci. Model Dev. 5, 1471-1492, doi:10.5194/gmd-5-1471-2012",
+      "use": "Isoprene and monoterpene emission factors and their light and temperature responses at the lunar forests' 21-33 C and light.",
+      "access": "Full text of the model section (aerosol_biogenic.md Sect. 1)."
+    },
+    {
+      "id": "A8",
+      "citation": "Carlton, Wiedinmyer and Kroll (2009), A review of secondary organic aerosol formation from isoprene, Atmos. Chem. Phys. 9, 4987-5005, doi:10.5194/acp-9-4987-2009; Saathoff et al. (2009), Atmos. Chem. Phys. 9, 1551-1577, doi:10.5194/acp-9-1551-2009",
+      "use": "Secondary organic aerosol yields and their temperature dependence: the lunar forests make about half an Amazon day's.",
+      "access": "Full texts (aerosol_biogenic.md Sect. 2, from its sub-search)."
+    },
+    {
+      "id": "A9",
+      "citation": "Kirkby et al. (2016), Ion-induced nucleation of pure biogenic particles, Nature 533, 521-526, doi:10.1038/nature17953; Gordon et al. (2017), J. Geophys. Res. Atmos. 122, 8739, doi:10.1002/2017JD026844",
+      "use": "Ion-induced nucleation and its share of cloud nuclei, and its rate at the Open Moon's low ionization (7-19 times lower).",
+      "access": "Kirkby full text; Gordon via aerosol_budget.md Sect. 4."
+    },
+    {
+      "id": "A10",
+      "citation": "Lawler, Draper and Smith (2020), Atmospheric fungal nanoparticle bursts, Sci. Adv. 6, eaax9051, doi:10.1126/sciadv.aax9051; Elbert et al. (2007), Atmos. Chem. Phys. 7, 4569, doi:10.5194/acp-7-4569-2007",
+      "use": "Humid-night fungal nanoparticle bursts and spores, for the warm decomposing lunar nights.",
+      "access": "Full text of Lawler et al.; Elbert et al. sections (aerosol_biogenic.md Sect. 4)."
+    },
+    {
+      "id": "A11",
+      "citation": "Vakkari et al. (2013), Long-term observations of aerosol size distributions in semi-clean and polluted savannah in South Africa, Atmos. Chem. Phys. 13, 1751-1770, doi:10.5194/acp-13-1751-2013",
+      "use": "The sulfur-fed savanna branch the plains are not in (0.7 ppb sulfur dioxide, particle formation most days).",
+      "access": "Abstract, Sects. 3-4 passages and Tables 1, 2 and 4 (aerosol_biogenic.md Sect. 3.4)."
+    },
+    {
+      "id": "A12",
+      "citation": "Heintzenberg, Covert and Van Dingenen (2000), Size distribution and chemical composition of marine aerosols, Tellus B 52, 1104-1122, doi:10.3402/tellusb.v52i4.17090",
+      "use": "Remote marine Aitken and accumulation modes: the seas' day analogue.",
+      "access": "Via aerosol_marine.md Sect. 2."
+    },
+    {
+      "id": "A13",
+      "citation": "Lana et al. (2011), An updated climatology of surface dimethylsulfide concentrations and emission fluxes in the global ocean, Global Biogeochem. Cycles 25, GB1004, doi:10.1029/2010GB003850",
+      "use": "Dimethyl sulfide emission at the lunar seas' calm winds and designed seawater concentrations (1, 3, 10 nM).",
+      "access": "Sections (aerosol_marine.md Sect. 3)."
+    },
+    {
+      "id": "A14",
+      "citation": "Gong (2003), A parameterization of sea-salt aerosol source function for sub- and super-micron particles, Global Biogeochem. Cycles 17, 1097, doi:10.1029/2003GB002079; Jaeglé et al. (2011), Atmos. Chem. Phys. 11, 3137, doi:10.5194/acp-11-3137-2011; Hayes et al. (2013), Icarus 225, 403, doi:10.1016/j.icarus.2013.04.004",
+      "use": "Sea spray at the lunar seas' winds, with roughness and whitecapping scaled to lunar gravity (Titan's relation).",
+      "access": "Gong via Jaeglé's transcription; Jaeglé and Hayes sections (aerosol_marine.md Sect. 1)."
+    },
+    {
+      "id": "A15",
+      "citation": "O'Dowd et al. (2002), Marine aerosol formation from biogenic iodine emissions, Nature 417, 632-636, doi:10.1038/nature00775",
+      "use": "Iodine bursts at seaweed coasts in daylight, 10^4-10^6 per cm3 near the shore.",
+      "access": "Abstract and sections (aerosol_marine.md Sect. 4)."
+    },
+    {
+      "id": "A16",
+      "citation": "Fiebig et al. (2014), Annual cycle of Antarctic baseline aerosol, Atmos. Chem. Phys. 14, 3083, doi:10.5194/acp-14-3083-2014; Tunved et al. (2013), Atmos. Chem. Phys. 13, 3643-3660, doi:10.5194/acp-13-3643-2013",
+      "use": "Aerosol through polar darkness and the Arctic summer: the seas' night and the polar dry land's analogue.",
+      "access": "Sections (aerosol_marine.md; aerosol_budget.md Sect. 3.3)."
+    },
+    {
+      "id": "A17",
+      "citation": "Textor et al. (2006), Analysis and quantification of the diversities of aerosol life cycles within AeroCom, Atmos. Chem. Phys. 6, 1777, doi:10.5194/acp-6-1777-2006; Kristiansen et al. (2016), Atmos. Chem. Phys. 16, 3525, doi:10.5194/acp-16-3525-2016",
+      "use": "Earth's aerosol residence times, scaled to the Open Moon's rain and deep mixing (lifetimes 30-140 days).",
+      "access": "Table 10 and sections (aerosol_budget.md Sect. 1)."
+    },
+    {
+      "id": "A18",
+      "citation": "Kerminen et al. (2018), Atmospheric new particle formation and growth: review of field observations, Environ. Res. Lett. 13, 103003, doi:10.1088/1748-9326/aadf3c",
+      "use": "Particle formation is a daytime process: the long night's pause.",
+      "access": "Full text (aerosol_budget.md Sect. 3)."
+    },
+    {
+      "id": "A19",
+      "citation": "Kok et al. (2012), The physics of wind-blown sand and dust, Rep. Prog. Phys. 75, 106901, doi:10.1088/0034-4885/75/10/106901; Shao and Lu (2000), J. Geophys. Res. 105, 22437, doi:10.1029/2000JD900304",
+      "use": "Saltation and dust thresholds and fluxes at lunar gravity and air density (threshold 0.6 of Earth's).",
+      "access": "Sections (aerosol_dust_fog.md Sect. 1)."
+    },
+    {
+      "id": "A20",
+      "citation": "Fécan, Marticorena and Bergametti (1999), Parametrization of the increase of the aeolian erosion threshold wind friction velocity due to soil moisture, Ann. Geophys. 17, 149, doi:10.1007/s00585-999-0149-7",
+      "use": "Dew and moist topsoil shutting off dust.",
+      "access": "Sections (aerosol_dust_fog.md Sect. 2)."
+    },
+    {
+      "id": "A21",
+      "citation": "Rodríguez-Caballero et al. (2022), Global cycling and climate effects of aeolian dust controlled by biological soil crusts, Nat. Geosci. 15, 458-463, doi:10.1038/s41561-022-00942-1; Belnap and Gillette (1997)",
+      "use": "Crusts raising the dust threshold about fivefold, and disturbance lowering it: the plains' crust cover as a design lever.",
+      "access": "Sections (aerosol_dust_fog.md Sect. 3)."
+    },
+    {
+      "id": "A22",
+      "citation": "Heinold et al. (2013), The role of deep convection and nocturnal low-level jets for dust emission in summertime West Africa, J. Geophys. Res. Atmos. 118, 4385, doi:10.1002/jgrd.50402",
+      "use": "The share of dust raised by storm outflows (about 40 %).",
+      "access": "Sections (aerosol_dust_fog.md Sect. 4)."
+    },
+    {
+      "id": "A23",
+      "citation": "Guo et al. (2019), A comprehensive study of hygroscopic properties of calcium- and magnesium-containing salts, Atmos. Chem. Phys. 19, 2115-2133, doi:10.5194/acp-19-2115-2019; Herich et al. (2009), Phys. Chem. Chem. Phys. 11, 7804, doi:10.1039/b901585j",
+      "use": "Bitterns staying deliquesced in Open Moon air (no salt-pan dust), and κ of developed-soil dust.",
+      "access": "Sections (aerosol_dust_fog.md Sects. 5 and 8)."
+    },
+    {
+      "id": "A24",
+      "citation": "Hammer et al. (2014), Size-dependent particle activation properties in fog during the ParisFog 2012/13 field campaign, Atmos. Chem. Phys. 14, 10517-10533, doi:10.5194/acp-14-10517-2014; Weston et al. (2022), Atmos. Chem. Phys. 22, 10221-10245, doi:10.5194/acp-22-10221-2022 (fog in Namibia)",
+      "use": "Fog supersaturation and droplet numbers, for the ion balance in fog.",
+      "access": "Sections (aerosol_dust_fog.md Sect. 6)."
+    },
+    {
+      "id": "A25",
+      "citation": "Kamra, Deshpande and Gopalakrishnan (1997), Effect of relative humidity on the electrical conductivity of marine air, Q. J. R. Meteorol. Soc. 123, 1295-1305, doi:10.1002/qj.49712354108; Siingh et al. (2005), J. Geophys. Res. 110, D18, doi:10.1029/2005JD005765",
+      "use": "Measured marine conductivity, the check of the sea-air calculation.",
+      "access": "Kamra et al. abstract; Siingh et al. arXiv text and Table 3 (humid_conductivity.md Sect. 4)."
+    },
+    {
+      "id": "A26",
+      "citation": "Hessilt et al. (2022), Future increases in lightning ignition efficiency and wildfire occurrence expected from drier fuels in boreal forest ecosystems of western North America, Environ. Res. Lett. 17, 054008, doi:10.1088/1748-9326/ac6311",
+      "use": "Fires per lightning ground strike, scaled to the Open Moon's strike density: fire is small unless lunar fuels burn like boreal forest.",
+      "access": "Sections (aerosol_budget.md Sect. 5)."
+    }
+  ]
+}

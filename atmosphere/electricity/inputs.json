@@ -1,0 +1,33 @@
+{
+ "schema": "terluna.external-inputs/1",
+ "status": "external inputs; fetched and hash-checked by fetch_inputs.py; ignored by Git",
+ "input_directory": "inputs",
+ "retrieved": "2026-10-03",
+ "publication_note": "Takahashi's charging table is part of WRF-ELEC (MicroTed/wrf4-elec), whose LICENSE.txt is the WRF notice placing the code in the public domain; it is fetched at a pinned commit. The CRAC:CRII tables are the Oulu cosmic-ray ionization model's pre-calculated tables, whose README asks users to cite Usoskin and Kovaltsov (2006) and Usoskin, Kovaltsov and Mironova (2010). The PDG table is the Particle Data Group's public muon energy-loss table for dry air. None of the files is redistributed by this repository. A hash mismatch means the upstream bytes changed and must be reviewed, never silently accepted.",
+ "files": [
+  {
+   "name": "takahashi.txt",
+   "url": "https://raw.githubusercontent.com/MicroTed/wrf4-elec/e43041b000ebfd77c4a528f2ca3847746e839aa8/elec/takahashi.txt",
+   "sha256": "2181a112939ebcb78d3e43b89c1ca7f7f70dfec1d1ddc0df09e2bda7f26c02be",
+   "bytes": 6070,
+   "credit": "Charge per graupel-crystal collision (fC) after Takahashi (1978, J. Atmos. Sci. 35, 1536), as tabulated by Wojcik (1994) and used in WRF-ELEC (Mansell et al. 2005, J. Geophys. Res. 110, D12101).",
+   "use": "Takahashi charging law"
+  },
+  {
+   "name": "CRII_tables.zip",
+   "url": "https://cosmicrays.oulu.fi/CRII/CRII_tables.zip",
+   "sha256": "e1882c20d3648b28002ce7f7b2f5fe44dfaa85061ac1a0a8c25ab30ec423005f",
+   "bytes": 712048,
+   "credit": "CRAC:CRII v2 cosmic-ray induced ionization tables (ion pairs per gram per second by depth, cutoff rigidity and modulation potential): Usoskin and Kovaltsov (2006, J. Geophys. Res. 111, D21206); Usoskin, Kovaltsov and Mironova (2010, J. Geophys. Res. 115, D10302).",
+   "use": "cosmic-ray ionization above Earth's sea-level depth"
+  },
+  {
+   "name": "muE_air_dry_1_atm.txt",
+   "url": "https://pdg.lbl.gov/2024/AtomicNuclearProperties/MUE/muE_air_dry_1_atm.txt",
+   "sha256": "10a3e0117087e3ca3bb942caceeccaa0cf5684f4ee2ca9171bf2d8731fe1af57",
+   "bytes": 18086,
+   "credit": "Muon energy loss and range in dry air (Particle Data Group, Atomic and Nuclear Properties, 2024; format of Groom, Mokhov and Striganov 2001, At. Data Nucl. Data Tables 78, 183).",
+   "use": "muon stopping power for the ionization they make"
+  }
+ ]
+}

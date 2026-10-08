@@ -1,0 +1,1579 @@
+{
+ "schema": "terluna.research.open-moon-aerosol/1",
+ "evidence": "A structured estimate. Each region's particles near the ground are a measured Earth analogue (the clean wet-season Amazon, the remote ocean by day, the Arctic summer) changed by lunar factors from the literature notes on the data drive (aerosol_marine.md, aerosol_biogenic.md, aerosol_dust_fog.md, aerosol_budget.md) and the project's own models: the regions' areas from the GCM and geography, their weather near the ground from CM1's rings, the ionization from the conductivity column. Clean, central and loaded cases run from the fewest particles to the most. Nothing here is a measurement of the Open Moon; the design levers and the gaps are listed with the results.",
+ "reading_rule": "Number concentrations per cm3; diameters in nm (dry medians of lognormal modes); conductivity in S/m at the ground (2 m), total of both signs; relaxation time eps0/sigma in minutes. Day and night are hour angles within and beyond 95 degrees of noon. The night values are means over the dark hours; \"with fog\" weights the clear and foggy conductivity by the share of hours in fog. Area shares are of the whole Moon. CCN at 0.1, 0.3 and 1 % supersaturation.",
+ "producer": {
+  "domain": "research",
+  "files": {
+   "__init__.py": "e3b0c44298fc1c14",
+   "budget.py": "33db61b1b092f419",
+   "inputs.py": "edaa97aff404b67c",
+   "particles.py": "fe42b953c0e1db50",
+   "run.py": "690f0004f2e1f9eb",
+   "test_open_moon_aerosol.py": "250a3b5964579219"
+  }
+ },
+ "inputs": {
+  "climate/gcm/products/climatology_A28_dim5_moon.npz": "3fb185c8087ea9b5",
+  "geography/results/drainage.json": "18494e3d3656ead7",
+  "geography/results/atlas.json": "78cfbf2f469eb339",
+  "atmosphere/electricity/results/conductivity_moon.json": "2430b917a16b08fa"
+ },
+ "ground": {
+  "ion_pairs_per_cm3_s": 0.04104904229626947,
+  "pressure_hpa": 1212.349
+ },
+ "regions": {
+  "seas": {
+   "area_share": 0.28,
+   "weather": {
+    "day": {
+     "relative_humidity": 0.8246249999999999,
+     "air_c": 24.350000000000005,
+     "fog": 0.0,
+     "rain_mm_day": 0.8613,
+     "wind_m_s": 2.19,
+     "mixed_layer_km": 1.6925
+    },
+    "night": {
+     "relative_humidity": 0.885,
+     "air_c": 23.379687500000003,
+     "fog": 0.0,
+     "rain_mm_day": 0.12525000000000003,
+     "wind_m_s": 1.7140625000000003,
+     "mixed_layer_km": 1.6359375000000003
+    },
+    "wind_p99_m_s": 4.534044146537781,
+    "wind_max_m_s": 9.043766379356384,
+    "day_hours": 393.73333333333335,
+    "rings": [
+     "ring_a (water)",
+     "ring_a_prime (water)",
+     "ring_45n_lsw (water)",
+     "ring_45s_lsw (water)"
+    ]
+   },
+   "cases": {
+    "clean": {
+     "day": {
+      "modes": [
+       {
+        "name": "aitken",
+        "number_cm3": 62.10526315789473,
+        "d_nm": 45.0,
+        "sigma": 1.5,
+        "kappa": 0.4
+       },
+       {
+        "name": "accumulation",
+        "number_cm3": 37.263157894736835,
+        "d_nm": 165.0,
+        "sigma": 1.5,
+        "kappa": 0.5
+       },
+       {
+        "name": "spray",
+        "number_cm3": 0.7,
+        "d_nm": 250.0,
+        "sigma": 2.0,
+        "kappa": 0.35
+       }
+      ],
+      "number_cm3": 100.06842105263156,
+      "above_100nm_cm3": 35.377369425756534,
+      "ccn_cm3": {
+       "0.1%": 25.13583952888315,
+       "0.3%": 44.87279552263601,
+       "1%": 86.87303792617574
+      },
+      "ion_sink_s": 0.00030111382330212265,
+      "conductivity_s_m": 3.5783070062875355e-15,
+      "in_fog_s_m": 4.451526345979113e-16,
+      "fog_share": 0.0,
+      "with_fog_s_m": 3.5783070062875355e-15,
+      "relaxation_min": 41.240116239523694,
+      "relative_humidity": 0.8246249999999999,
+      "air_c": 24.350000000000005
+     },
+     "night": {
+      "modes": [
+       {
+        "name": "aitken",
+        "number_cm3": 13.351126677878389,
+        "d_nm": 45.0,
+        "sigma": 1.5,
+        "kappa": 0.4
+       },
+       {
+        "name": "accumulation",
+        "number_cm3": 10.307904280012059,
+        "d_nm": 165.0,
+        "sigma": 1.5,
+        "kappa": 0.5
+       },
+       {
+        "name": "spray",
+        "number_cm3": 0.1936371849211305,
+        "d_nm": 250.0,
+        "sigma": 2.0,
+        "kappa": 0.35
+       }
+      ],
+      "number_cm3": 23.852668142811577,
+      "above_100nm_cm3": 9.692614822139488,
+      "ccn_cm3": {
+       "0.1%": 6.916345673494129,
+       "0.3%": 11.929764251331536,
+       "1%": 20.984537163535585
+      },
+      "ion_sink_s": 8.702744285286551e-05,
+      "conductivity_s_m": 5.091935660391279e-15,
+      "in_fog_s_m": 5.117226290866114e-16,
+      "fog_share": 0.0,
+      "with_fog_s_m": 5.091935660391279e-15,
+      "relaxation_min": 28.981080422500927,
+      "relative_humidity": 0.885,
+      "air_c": 23.379687500000003
+     }
+    },
+    "central": {
+     "day": {
+      "modes": [
+       {
+        "name": "aitken",
+        "number_cm3": 175.75,
+        "d_nm": 45.0,
+        "sigma": 1.5,
+        "kappa": 0.4
+       },
+       {
+        "name": "accumulation",
+        "number_cm3": 140.6,
+        "d_nm": 165.0,
+        "sigma": 1.5,
+        "kappa": 0.5
+       },
+       {
+        "name": "spray",
+        "number_cm3": 2.0,
+        "d_nm": 250.0,
+        "sigma": 2.0,
+        "kappa": 0.35
+       }
+      ],
+      "number_cm3": 318.35,
+      "above_100nm_cm3": 131.47039158105935,
+      "ccn_cm3": {
+       "0.1%": 94.27814352650655,
+       "0.3%": 161.67866432905475,
+       "1%": 281.00820548370564
+      },
+      "ion_sink_s": 0.0010495879664926193,
+      "conductivity_s_m": 1.4942757722435258e-15,
+      "in_fog_s_m": 8.038708263781764e-17,
+      "fog_share": 0.0,
+      "with_fog_s_m": 1.4942757722435258e-15,
+      "relaxation_min": 98.75673528349905,
+      "relative_humidity": 0.8246249999999999,
+      "air_c": 24.350000000000005
+     },
+     "night": {
+      "modes": [
+       {
+        "name": "aitken",
+        "number_cm3": 37.781991321275775,
+        "d_nm": 45.0,
+        "sigma": 1.5,
+        "kappa": 0.4
+       },
+       {
+        "name": "accumulation",
+        "number_cm3": 54.955623740037495,
+        "d_nm": 165.0,
+        "sigma": 1.5,
+        "kappa": 0.5
+       },
+       {
+        "name": "spray",
+        "number_cm3": 0.7817300674258534,
+        "d_nm": 250.0,
+        "sigma": 2.0,
+        "kappa": 0.35
+       }
+      ],
+      "number_cm3": 93.51934512873912,
+      "above_100nm_cm3": 50.63118969368541,
+      "ccn_cm3": {
+       "0.1%": 36.64011731800319,
+       "0.3%": 59.41409443523364,
+       "1%": 85.40204253937088
+      },
+      "ion_sink_s": 0.0004108487472596144,
+      "conductivity_s_m": 3.0155278495397276e-15,
+      "in_fog_s_m": 8.681899866545534e-17,
+      "fog_share": 0.0,
+      "with_fog_s_m": 3.0155278495397276e-15,
+      "relaxation_min": 48.93663870573246,
+      "relative_humidity": 0.885,
+      "air_c": 23.379687500000003
+     }
+    },
+    "loaded": {
+     "day": {
+      "modes": [
+       {
+        "name": "aitken",
+        "number_cm3": 461.14285714285717,
+        "d_nm": 45.0,
+        "sigma": 1.5,
+        "kappa": 0.4
+       },
+       {
+        "name": "accumulation",
+        "number_cm3": 192.14285714285714,
+        "d_nm": 165.0,
+        "sigma": 1.5,
+        "kappa": 0.5
+       },
+       {
+        "name": "spray",
+        "number_cm3": 5.0,
+        "d_nm": 250.0,
+        "sigma": 2.0,
+        "kappa": 0.35
+       }
+      ],
+      "number_cm3": 658.2857142857143,
+      "above_100nm_cm3": 187.12603756916425,
+      "ccn_cm3": {
+       "0.1%": 130.8517823850048,
+       "0.3%": 249.59645203002498,
+       "1%": 560.3091964852314
+      },
+      "ion_sink_s": 0.0017594501661782125,
+      "conductivity_s_m": 9.276204422002885e-16,
+      "in_fog_s_m": 3.3435709606636337e-17,
+      "fog_share": 0.0,
+      "with_fog_s_m": 9.276204422002885e-16,
+      "relaxation_min": 159.08424412248695,
+      "relative_humidity": 0.8246249999999999,
+      "air_c": 24.350000000000005
+     },
+     "night": {
+      "modes": [
+       {
+        "name": "aitken",
+        "number_cm3": 99.13454012199001,
+        "d_nm": 45.0,
+        "sigma": 1.5,
+        "kappa": 0.4
+       },
+       {
+        "name": "accumulation",
+        "number_cm3": 111.71348681360124,
+        "d_nm": 165.0,
+        "sigma": 1.5,
+        "kappa": 0.5
+       },
+       {
+        "name": "spray",
+        "number_cm3": 2.90704240778888,
+        "d_nm": 250.0,
+        "sigma": 2.0,
+        "kappa": 0.35
+       }
+      ],
+      "number_cm3": 213.75506934338011,
+      "above_100nm_cm3": 104.66418565412138,
+      "ccn_cm3": {
+       "0.1%": 75.49610967638192,
+       "0.3%": 124.67806212651759,
+       "1%": 192.45516000665793
+      },
+      "ion_sink_s": 0.0008825467800609054,
+      "conductivity_s_m": 1.7304781481959453e-15,
+      "in_fog_s_m": 3.494843505576917e-17,
+      "fog_share": 0.0,
+      "with_fog_s_m": 1.7304781481959453e-15,
+      "relaxation_min": 85.27689126490513,
+      "relative_humidity": 0.885,
+      "air_c": 23.379687500000003
+     }
+    }
+   }
+  },
+  "lakes": {
+   "area_share": 0.1034,
+   "weather": {
+    "day": {
+     "relative_humidity": 0.8297499999999999,
+     "air_c": 24.767500000000005,
+     "fog": 0.0,
+     "rain_mm_day": 1.5168,
+     "wind_m_s": 2.5075000000000003,
+     "mixed_layer_km": 2.1675
+    },
+    "night": {
+     "relative_humidity": 0.8946875000000001,
+     "air_c": 23.690625000000004,
+     "fog": 0.0,
+     "rain_mm_day": 0.25050000000000006,
+     "wind_m_s": 1.896875,
+     "mixed_layer_km": 2.2
+    },
+    "wind_p99_m_s": 5.471165657043457,
+    "wind_max_m_s": 9.594501972198486,
+    "day_hours": 393.73333333333335,
+    "rings": [
+     "ring_a (water)",
+     "ring_a_prime (water)"
+    ]
+   },
+   "cases": {
+    "clean": {
+     "day": {
+      "modes": [
+       {
+        "name": "aitken",
+        "number_cm3": 17.886315789473684,
+        "d_nm": 69.0,
+        "sigma": 1.6,
+        "kappa": 0.12
+       },
+       {
+        "name": "accumulation",
+        "number_cm3": 9.613894736842104,
+        "d_nm": 135.5845427227388,
+        "sigma": 1.5,
+        "kappa": 0.18
+       },
+       {
+        "name": "biological",
+        "number_cm3": 0.3,
+        "d_nm": 1600.0,
+        "sigma": 1.6,
+        "kappa": 0.02
+       }
+      ],
+      "number_cm3": 27.800210526315787,
+      "above_100nm_cm3": 11.581445916769505,
+      "ccn_cm3": {
+       "0.1%": 2.142093638801463,
+       "0.3%": 11.15516952876254,
+       "1%": 23.710336270440514
+      },
+      "ion_sink_s": 8.111835238536575e-05,
+      "conductivity_s_m": 5.209965070448169e-15,
+      "in_fog_s_m": 5.146061058388916e-16,
+      "fog_share": 0.0,
+      "with_fog_s_m": 5.209965070448169e-15,
+      "relaxation_min": 28.32452710998806,
+      "relative_humidity": 0.8297499999999999,
+      "air_c": 24.767500000000005
+     },
+     "night": {
+      "modes": [
+       {
+        "name": "aitken",
+        "number_cm3": 10.549714889559446,
+        "d_nm": 69.0,
+        "sigma": 1.6,
+        "kappa": 0.12
+       },
+       {
+        "name": "accumulation",
+        "number_cm3": 5.670471753138202,
+        "d_nm": 135.5845427227388,
+        "sigma": 1.5,
+        "kappa": 0.18
+       },
+       {
+        "name": "biological",
+        "number_cm3": 0.17694613603604298,
+        "d_nm": 1600.0,
+        "sigma": 1.6,
+        "kappa": 0.02
+       }
+      ],
+      "number_cm3": 16.39713277873369,
+      "above_100nm_cm3": 6.830973682275904,
+      "ccn_cm3": {
+       "0.1%": 1.2488172862797327,
+       "0.3%": 6.54545219045823,
+       "1%": 13.95990064898935
+      },
+      "ion_sink_s": 5.112337254211933e-05,
+      "conductivity_s_m": 5.44136700066072e-15,
+      "in_fog_s_m": 5.254324110412584e-16,
+      "fog_share": 0.0,
+      "with_fog_s_m": 5.44136700066072e-15,
+      "relaxation_min": 27.119986000224078,
+      "relative_humidity": 0.8946875000000001,
+      "air_c": 23.690625000000004
+     }
+    },
+    "central": {
+     "day": {
+      "modes": [
+       {
+        "name": "aitken",
+        "number_cm3": 122.28563252483916,
+        "d_nm": 70.0,
+        "sigma": 1.6,
+        "kappa": 0.13
+       },
+       {
+        "name": "accumulation",
+        "number_cm3": 72.07892974025071,
+        "d_nm": 170.33039246489244,
+        "sigma": 1.5,
+        "kappa": 0.21
+       },
+       {
+        "name": "biological",
+        "number_cm3": 0.3,
+        "d_nm": 1600.0,
+        "sigma": 1.6,
+        "kappa": 0.02
+       }
+      ],
+      "number_cm3": 194.66456226508987,
+      "above_100nm_cm3": 92.95415666877479,
+      "ccn_cm3": {
+       "0.1%": 30.886778610139416,
+       "0.3%": 91.82135091317113,
+       "1%": 169.94432790234063
+      },
+      "ion_sink_s": 0.0005957785204432142,
+      "conductivity_s_m": 2.3732327626871663e-15,
+      "in_fog_s_m": 8.519045431315965e-17,
+      "fog_share": 0.0,
+      "with_fog_s_m": 2.3732327626871663e-15,
+      "relaxation_min": 62.18092013566741,
+      "relative_humidity": 0.8297499999999999,
+      "air_c": 24.767500000000005
+     },
+     "night": {
+      "modes": [
+       {
+        "name": "aitken",
+        "number_cm3": 111.11607431157798,
+        "d_nm": 70.0,
+        "sigma": 1.6,
+        "kappa": 0.13
+       },
+       {
+        "name": "accumulation",
+        "number_cm3": 65.49524705357238,
+        "d_nm": 170.33039246489244,
+        "sigma": 1.5,
+        "kappa": 0.21
+       },
+       {
+        "name": "biological",
+        "number_cm3": 0.27259802811832606,
+        "d_nm": 1600.0,
+        "sigma": 1.6,
+        "kappa": 0.02
+       }
+      ],
+      "number_cm3": 176.88391939326868,
+      "above_100nm_cm3": 84.46373271103317,
+      "ccn_cm3": {
+       "0.1%": 27.820356979772424,
+       "0.3%": 83.13356283306348,
+       "1%": 154.17928418509226
+      },
+      "ion_sink_s": 0.0005876043020224639,
+      "conductivity_s_m": 2.386282586093303e-15,
+      "in_fog_s_m": 8.593957175680306e-17,
+      "fog_share": 0.0,
+      "with_fog_s_m": 2.386282586093303e-15,
+      "relaxation_min": 61.840872384520715,
+      "relative_humidity": 0.8946875000000001,
+      "air_c": 23.690625000000004
+     }
+    },
+    "loaded": {
+     "day": {
+      "modes": [
+       {
+        "name": "aitken",
+        "number_cm3": 415.0285714285714,
+        "d_nm": 67.0,
+        "sigma": 1.6,
+        "kappa": 0.14
+       },
+       {
+        "name": "accumulation",
+        "number_cm3": 368.9142857142857,
+        "d_nm": 286.9831778765386,
+        "sigma": 1.5,
+        "kappa": 0.22
+       },
+       {
+        "name": "biological",
+        "number_cm3": 0.3,
+        "d_nm": 1600.0,
+        "sigma": 1.6,
+        "kappa": 0.02
+       }
+      ],
+      "number_cm3": 784.242857142857,
+      "above_100nm_cm3": 449.2918601531063,
+      "ccn_cm3": {
+       "0.1%": 322.07163500400145,
+       "0.3%": 443.9282831451286,
+       "1%": 695.559530262173
+      },
+      "ion_sink_s": 0.003866970932187574,
+      "conductivity_s_m": 4.3055001896213595e-16,
+      "in_fog_s_m": 3.0935473906198846e-17,
+      "fog_share": 0.0,
+      "with_fog_s_m": 4.3055001896213595e-16,
+      "relaxation_min": 342.7471614929317,
+      "relative_humidity": 0.8297499999999999,
+      "air_c": 24.767500000000005
+     },
+     "night": {
+      "modes": [
+       {
+        "name": "aitken",
+        "number_cm3": 407.0507353106215,
+        "d_nm": 67.0,
+        "sigma": 1.6,
+        "kappa": 0.14
+       },
+       {
+        "name": "accumulation",
+        "number_cm3": 361.8228758316636,
+        "d_nm": 286.9831778765386,
+        "sigma": 1.5,
+        "kappa": 0.22
+       },
+       {
+        "name": "biological",
+        "number_cm3": 0.2942332865731465,
+        "d_nm": 1600.0,
+        "sigma": 1.6,
+        "kappa": 0.02
+       }
+      ],
+      "number_cm3": 769.1678444288583,
+      "above_100nm_cm3": 440.6554021447033,
+      "ccn_cm3": {
+       "0.1%": 315.11463825864263,
+       "0.3%": 434.550993726951,
+       "1%": 681.2733372522908
+      },
+      "ion_sink_s": 0.0041619325230167585,
+      "conductivity_s_m": 3.9941456405163717e-16,
+      "in_fog_s_m": 3.113465827801645e-17,
+      "fog_share": 0.0,
+      "with_fog_s_m": 3.9941456405163717e-16,
+      "relaxation_min": 369.4652377796666,
+      "relative_humidity": 0.8946875000000001,
+      "air_c": 23.690625000000004
+     }
+    }
+   }
+  },
+  "wet_land": {
+   "area_share": 0.35642529954878277,
+   "weather": {
+    "day": {
+     "relative_humidity": 0.75925,
+     "air_c": 26.6925,
+     "fog": 0.014750000000000001,
+     "rain_mm_day": 2.9693999999999994,
+     "wind_m_s": 2.1374999999999997,
+     "mixed_layer_km": 5.012499999999999
+    },
+    "night": {
+     "relative_humidity": 0.9725,
+     "air_c": 21.259375,
+     "fog": 0.085625,
+     "rain_mm_day": 0.11775000000000001,
+     "wind_m_s": 0.571875,
+     "mixed_layer_km": 0.4
+    },
+    "wind_p99_m_s": 4.9662065505981445,
+    "wind_max_m_s": 9.744050979614258,
+    "day_hours": 393.73333333333335,
+    "rings": [
+     "ring_a (land)",
+     "ring_a_prime (land)"
+    ]
+   },
+   "cases": {
+    "clean": {
+     "day": {
+      "modes": [
+       {
+        "name": "aitken",
+        "number_cm3": 17.886315789473684,
+        "d_nm": 69.0,
+        "sigma": 1.6,
+        "kappa": 0.12
+       },
+       {
+        "name": "accumulation",
+        "number_cm3": 9.613894736842104,
+        "d_nm": 135.5845427227388,
+        "sigma": 1.5,
+        "kappa": 0.18
+       },
+       {
+        "name": "biological",
+        "number_cm3": 0.3,
+        "d_nm": 1600.0,
+        "sigma": 1.6,
+        "kappa": 0.02
+       }
+      ],
+      "number_cm3": 27.800210526315787,
+      "above_100nm_cm3": 11.581445916769505,
+      "ccn_cm3": {
+       "0.1%": 2.1867870310828184,
+       "0.3%": 11.258163399625492,
+       "1%": 23.784917204298218
+      },
+      "ion_sink_s": 7.846480332063268e-05,
+      "conductivity_s_m": 5.3259664762843514e-15,
+      "in_fog_s_m": 5.114705738758824e-16,
+      "fog_share": 0.014750000000000001,
+      "with_fog_s_m": 5.254952661723826e-15,
+      "relaxation_min": 28.08204114850988,
+      "relative_humidity": 0.75925,
+      "air_c": 26.6925
+     },
+     "night": {
+      "modes": [
+       {
+        "name": "aitken",
+        "number_cm3": 2.77892302994077,
+        "d_nm": 69.0,
+        "sigma": 1.6,
+        "kappa": 0.12
+       },
+       {
+        "name": "accumulation",
+        "number_cm3": 1.4936711285931639,
+        "d_nm": 135.5845427227388,
+        "sigma": 1.5,
+        "kappa": 0.18
+       },
+       {
+        "name": "biological",
+        "number_cm3": 0.046609761271958546,
+        "d_nm": 1600.0,
+        "sigma": 1.6,
+        "kappa": 0.02
+       }
+      ],
+      "number_cm3": 4.319203919805893,
+      "above_100nm_cm3": 1.799361431215752,
+      "ccn_cm3": {
+       "0.1%": 0.3203313061126103,
+       "0.3%": 1.7037974825272872,
+       "1%": 3.6621411882410464
+      },
+      "ion_sink_s": 1.711843735712292e-05,
+      "conductivity_s_m": 5.642244097512722e-15,
+      "in_fog_s_m": 5.395077567922922e-16,
+      "fog_share": 0.085625,
+      "with_fog_s_m": 5.2053222983385354e-15,
+      "relaxation_min": 28.34979054555415,
+      "relative_humidity": 0.9725,
+      "air_c": 21.259375
+     }
+    },
+    "central": {
+     "day": {
+      "modes": [
+       {
+        "name": "aitken",
+        "number_cm3": 122.28563252483916,
+        "d_nm": 70.0,
+        "sigma": 1.6,
+        "kappa": 0.13
+       },
+       {
+        "name": "accumulation",
+        "number_cm3": 72.07892974025071,
+        "d_nm": 170.33039246489244,
+        "sigma": 1.5,
+        "kappa": 0.21
+       },
+       {
+        "name": "biological",
+        "number_cm3": 0.3,
+        "d_nm": 1600.0,
+        "sigma": 1.6,
+        "kappa": 0.02
+       }
+      ],
+      "number_cm3": 194.66456226508987,
+      "above_100nm_cm3": 92.95415666877479,
+      "ccn_cm3": {
+       "0.1%": 31.368928384605233,
+       "0.3%": 92.41189989135827,
+       "1%": 170.41443775126504
+      },
+      "ion_sink_s": 0.0005701300348375886,
+      "conductivity_s_m": 2.470362418833019e-15,
+      "in_fog_s_m": 8.464038637063557e-17,
+      "fog_share": 0.014750000000000001,
+      "with_fog_s_m": 2.4351730188541984e-15,
+      "relaxation_min": 60.599306799742216,
+      "relative_humidity": 0.75925,
+      "air_c": 26.6925
+     },
+     "night": {
+      "modes": [
+       {
+        "name": "aitken",
+        "number_cm3": 75.05372834629468,
+        "d_nm": 70.0,
+        "sigma": 1.6,
+        "kappa": 0.13
+       },
+       {
+        "name": "accumulation",
+        "number_cm3": 44.23898622037694,
+        "d_nm": 170.33039246489244,
+        "sigma": 1.5,
+        "kappa": 0.21
+       },
+       {
+        "name": "biological",
+        "number_cm3": 0.18412726040661265,
+        "d_nm": 1600.0,
+        "sigma": 1.6,
+        "kappa": 0.02
+       },
+       {
+        "name": "fungal",
+        "number_cm3": 104.65,
+        "d_nm": 29.999999999999996,
+        "sigma": 1.5,
+        "kappa": 0.2
+       }
+      ],
+      "number_cm3": 224.1268418270782,
+      "above_100nm_cm3": 57.20746153157,
+      "ccn_cm3": {
+       "0.1%": 18.417450106804004,
+       "0.3%": 55.98491809878682,
+       "1%": 126.0087996820222
+      },
+      "ion_sink_s": 0.0006325762787332339,
+      "conductivity_s_m": 2.23762562785179e-15,
+      "in_fog_s_m": 8.755163175506614e-17,
+      "fog_share": 0.085625,
+      "with_fog_s_m": 2.0535255419360083e-15,
+      "relaxation_min": 71.86168073705828,
+      "relative_humidity": 0.9725,
+      "air_c": 21.259375
+     }
+    },
+    "loaded": {
+     "day": {
+      "modes": [
+       {
+        "name": "aitken",
+        "number_cm3": 415.0285714285714,
+        "d_nm": 67.0,
+        "sigma": 1.6,
+        "kappa": 0.14
+       },
+       {
+        "name": "accumulation",
+        "number_cm3": 368.9142857142857,
+        "d_nm": 286.9831778765386,
+        "sigma": 1.5,
+        "kappa": 0.22
+       },
+       {
+        "name": "biological",
+        "number_cm3": 0.3,
+        "d_nm": 1600.0,
+        "sigma": 1.6,
+        "kappa": 0.02
+       }
+      ],
+      "number_cm3": 784.242857142857,
+      "above_100nm_cm3": 449.2918601531063,
+      "ccn_cm3": {
+       "0.1%": 323.4462367128136,
+       "0.3%": 445.4720950268199,
+       "1%": 697.2063743122816
+      },
+      "ion_sink_s": 0.0036739440447718717,
+      "conductivity_s_m": 4.547552584528777e-16,
+      "in_fog_s_m": 3.0734456813705465e-17,
+      "fog_share": 0.014750000000000001,
+      "with_fog_s_m": 4.485009516286999e-16,
+      "relaxation_min": 329.02894931239405,
+      "relative_humidity": 0.75925,
+      "air_c": 26.6925
+     },
+     "night": {
+      "modes": [
+       {
+        "name": "aitken",
+        "number_cm3": 373.58978700193137,
+        "d_nm": 67.0,
+        "sigma": 1.6,
+        "kappa": 0.14
+       },
+       {
+        "name": "accumulation",
+        "number_cm3": 332.07981066838346,
+        "d_nm": 286.9831778765386,
+        "sigma": 1.5,
+        "kappa": 0.22
+       },
+       {
+        "name": "biological",
+        "number_cm3": 0.2700463144375795,
+        "d_nm": 1600.0,
+        "sigma": 1.6,
+        "kappa": 0.02
+       },
+       {
+        "name": "fungal",
+        "number_cm3": 227.5,
+        "d_nm": 29.999999999999996,
+        "sigma": 1.5,
+        "kappa": 0.47
+       }
+      ],
+      "number_cm3": 933.4396439847524,
+      "above_100nm_cm3": 404.7714875476216,
+      "ccn_cm3": {
+       "0.1%": 287.606816921867,
+       "0.3%": 401.47266656686,
+       "1%": 728.4666839728801
+      },
+      "ion_sink_s": 0.005556339359576029,
+      "conductivity_s_m": 2.982614699972505e-16,
+      "in_fog_s_m": 3.1542597079003816e-17,
+      "fog_share": 0.085625,
+      "with_fog_s_m": 2.754236665036256e-16,
+      "relaxation_min": 535.7919991165953,
+      "relative_humidity": 0.9725,
+      "air_c": 21.259375
+     }
+    }
+   }
+  },
+  "fog_desert": {
+   "area_share": 0.16402493053876424,
+   "weather": {
+    "day": {
+     "relative_humidity": 0.681,
+     "air_c": 26.89625,
+     "fog": 0.016499999999999997,
+     "rain_mm_day": 0.4454999999999999,
+     "wind_m_s": 1.97375,
+     "mixed_layer_km": 5.08625
+    },
+    "night": {
+     "relative_humidity": 0.9334375,
+     "air_c": 20.66875,
+     "fog": 0.0625,
+     "rain_mm_day": 0.031875,
+     "wind_m_s": 0.5484375,
+     "mixed_layer_km": 0.28125
+    },
+    "wind_p99_m_s": 4.49079966545105,
+    "wind_max_m_s": 9.127721548080444,
+    "day_hours": 393.73333333333335,
+    "rings": [
+     "ring_45n_lsw (land)",
+     "ring_45s_lsw (land)",
+     "ring_70_45e (land)",
+     "ring_70_135e (land)"
+    ]
+   },
+   "cases": {
+    "clean": {
+     "day": {
+      "modes": [
+       {
+        "name": "aitken",
+        "number_cm3": 17.886315789473684,
+        "d_nm": 69.0,
+        "sigma": 1.6,
+        "kappa": 0.12
+       },
+       {
+        "name": "accumulation",
+        "number_cm3": 9.613894736842104,
+        "d_nm": 62.93276995123594,
+        "sigma": 1.5,
+        "kappa": 0.18
+       },
+       {
+        "name": "biological",
+        "number_cm3": 0.3,
+        "d_nm": 1600.0,
+        "sigma": 1.6,
+        "kappa": 0.02
+       },
+       {
+        "name": "dust",
+        "number_cm3": 0.055,
+        "d_nm": 700.0,
+        "sigma": 1.6,
+        "kappa": 0.003
+       }
+      ],
+      "number_cm3": 27.855210526315787,
+      "above_100nm_cm3": 5.417026695334735,
+      "ccn_cm3": {
+       "0.1%": 0.46022142019809725,
+       "0.3%": 5.015014086754749,
+       "1%": 22.317411824240764
+      },
+      "ion_sink_s": 5.88466729722093e-05,
+      "conductivity_s_m": 5.529352953756414e-15,
+      "in_fog_s_m": 5.174958808956956e-16,
+      "fog_share": 0.016499999999999997,
+      "with_fog_s_m": 5.4466573120542125e-15,
+      "relaxation_min": 27.093644491531983,
+      "relative_humidity": 0.681,
+      "air_c": 26.89625
+     },
+     "night": {
+      "modes": [
+       {
+        "name": "aitken",
+        "number_cm3": 1.9568884889950482,
+        "d_nm": 69.0,
+        "sigma": 1.6,
+        "kappa": 0.12
+       },
+       {
+        "name": "accumulation",
+        "number_cm3": 1.0518275628348384,
+        "d_nm": 62.93276995123594,
+        "sigma": 1.5,
+        "kappa": 0.18
+       },
+       {
+        "name": "biological",
+        "number_cm3": 0.032822105659344916,
+        "d_nm": 1600.0,
+        "sigma": 1.6,
+        "kappa": 0.02
+       },
+       {
+        "name": "dust",
+        "number_cm3": 0.00531734598104183,
+        "d_nm": 700.0,
+        "sigma": 1.6,
+        "kappa": 0.003
+       }
+      ],
+      "number_cm3": 3.0468555034702733,
+      "above_100nm_cm3": 0.5919607139350694,
+      "ccn_cm3": {
+       "0.1%": 0.048080713900945725,
+       "0.3%": 0.5130535116465105,
+       "1%": 2.400845215116788
+      },
+      "ion_sink_s": 7.556798096834808e-06,
+      "conductivity_s_m": 5.7029364764010085e-15,
+      "in_fog_s_m": 5.423549725232488e-16,
+      "fog_share": 0.0625,
+      "with_fog_s_m": 5.380400132408648e-15,
+      "relaxation_min": 27.42729039632547,
+      "relative_humidity": 0.9334375,
+      "air_c": 20.66875
+     }
+    },
+    "central": {
+     "day": {
+      "modes": [
+       {
+        "name": "aitken",
+        "number_cm3": 122.28563252483916,
+        "d_nm": 70.0,
+        "sigma": 1.6,
+        "kappa": 0.13
+       },
+       {
+        "name": "accumulation",
+        "number_cm3": 72.07892974025071,
+        "d_nm": 114.02477711642666,
+        "sigma": 1.5,
+        "kappa": 0.21
+       },
+       {
+        "name": "biological",
+        "number_cm3": 0.3,
+        "d_nm": 1600.0,
+        "sigma": 1.6,
+        "kappa": 0.02
+       },
+       {
+        "name": "dust",
+        "number_cm3": 2.175,
+        "d_nm": 700.0,
+        "sigma": 1.6,
+        "kappa": 0.03
+       }
+      ],
+      "number_cm3": 196.83956226508988,
+      "above_100nm_cm3": 75.04973038472349,
+      "ccn_cm3": {
+       "0.1%": 11.636356942540116,
+       "0.3%": 79.04560939942526,
+       "1%": 172.29779453195243
+      },
+      "ion_sink_s": 0.0004788308746828493,
+      "conductivity_s_m": 2.7895125315591104e-15,
+      "in_fog_s_m": 8.546252171143551e-17,
+      "fog_share": 0.016499999999999997,
+      "with_fog_s_m": 2.744895706396624e-15,
+      "relaxation_min": 53.76153146223651,
+      "relative_humidity": 0.681,
+      "air_c": 26.89625
+     },
+     "night": {
+      "modes": [
+       {
+        "name": "aitken",
+        "number_cm3": 62.77951636468377,
+        "d_nm": 70.0,
+        "sigma": 1.6,
+        "kappa": 0.13
+       },
+       {
+        "name": "accumulation",
+        "number_cm3": 37.00418647511848,
+        "d_nm": 114.02477711642666,
+        "sigma": 1.5,
+        "kappa": 0.21
+       },
+       {
+        "name": "biological",
+        "number_cm3": 0.1540152716271024,
+        "d_nm": 1600.0,
+        "sigma": 1.6,
+        "kappa": 0.02
+       },
+       {
+        "name": "fungal",
+        "number_cm3": 45.5,
+        "d_nm": 29.999999999999996,
+        "sigma": 1.5,
+        "kappa": 0.2
+       },
+       {
+        "name": "dust",
+        "number_cm3": 0.7453676683286488,
+        "d_nm": 700.0,
+        "sigma": 1.6,
+        "kappa": 0.03
+       }
+      ],
+      "number_cm3": 146.18308577975802,
+      "above_100nm_cm3": 38.2260023079942,
+      "ccn_cm3": {
+       "0.1%": 5.205365304706932,
+       "0.3%": 38.92880431272754,
+       "1%": 96.86666755489843
+      },
+      "ion_sink_s": 0.00033829464323874157,
+      "conductivity_s_m": 3.3029635887300634e-15,
+      "in_fog_s_m": 8.90746203982378e-17,
+      "fog_share": 0.0625,
+      "with_fog_s_m": 3.1020955282093245e-15,
+      "relaxation_min": 47.57100338724392,
+      "relative_humidity": 0.9334375,
+      "air_c": 20.66875
+     }
+    },
+    "loaded": {
+     "day": {
+      "modes": [
+       {
+        "name": "aitken",
+        "number_cm3": 415.0285714285714,
+        "d_nm": 67.0,
+        "sigma": 1.6,
+        "kappa": 0.14
+       },
+       {
+        "name": "accumulation",
+        "number_cm3": 368.9142857142857,
+        "d_nm": 286.9831778765386,
+        "sigma": 1.5,
+        "kappa": 0.22
+       },
+       {
+        "name": "biological",
+        "number_cm3": 0.3,
+        "d_nm": 1600.0,
+        "sigma": 1.6,
+        "kappa": 0.02
+       },
+       {
+        "name": "dust",
+        "number_cm3": 136.79999999999998,
+        "d_nm": 700.0,
+        "sigma": 1.6,
+        "kappa": 0.3
+       }
+      ],
+      "number_cm3": 921.0428571428571,
+      "above_100nm_cm3": 586.0894866762978,
+      "ccn_cm3": {
+       "0.1%": 460.24947707317745,
+       "0.3%": 582.4356766153605,
+       "1%": 834.1790093977769
+      },
+      "ion_sink_s": 0.006245384883493141,
+      "conductivity_s_m": 2.685876830749484e-16,
+      "in_fog_s_m": 2.7203040351706468e-17,
+      "fog_share": 0.016499999999999997,
+      "with_fog_s_m": 2.6460483647001495e-16,
+      "relaxation_min": 557.6987890647366,
+      "relative_humidity": 0.681,
+      "air_c": 26.89625
+     },
+     "night": {
+      "modes": [
+       {
+        "name": "aitken",
+        "number_cm3": 357.7703412150932,
+        "d_nm": 67.0,
+        "sigma": 1.6,
+        "kappa": 0.14
+       },
+       {
+        "name": "accumulation",
+        "number_cm3": 318.0180810800828,
+        "d_nm": 286.9831778765386,
+        "sigma": 1.5,
+        "kappa": 0.22
+       },
+       {
+        "name": "biological",
+        "number_cm3": 0.2586113577556436,
+        "d_nm": 1600.0,
+        "sigma": 1.6,
+        "kappa": 0.02
+       },
+       {
+        "name": "fungal",
+        "number_cm3": 136.5,
+        "d_nm": 29.999999999999996,
+        "sigma": 1.5,
+        "kappa": 0.47
+       },
+       {
+        "name": "dust",
+        "number_cm3": 70.61955452940212,
+        "d_nm": 700.0,
+        "sigma": 1.6,
+        "kappa": 0.3
+       }
+      ],
+      "number_cm3": 883.1665881823338,
+      "above_100nm_cm3": 458.1285932038952,
+      "ccn_cm3": {
+       "0.1%": 345.5770058619079,
+       "0.3%": 453.0888561958857,
+       "1%": 729.9183630678035
+      },
+      "ion_sink_s": 0.006144715811170952,
+      "conductivity_s_m": 2.6950057734048723e-16,
+      "in_fog_s_m": 2.985031223431367e-17,
+      "fog_share": 0.0625,
+      "with_fog_s_m": 2.545224357713514e-16,
+      "relaxation_min": 579.7909187564447,
+      "relative_humidity": 0.9334375,
+      "air_c": 20.66875
+     }
+    }
+   }
+  },
+  "polar_dry_land": {
+   "area_share": 0.0961498082272367,
+   "weather": {
+    "day": {
+     "relative_humidity": 0.7354999999999999,
+     "air_c": 16.875,
+     "fog": 0.0015,
+     "rain_mm_day": 0.0,
+     "wind_m_s": 0.07749999999999999,
+     "mixed_layer_km": 0.6575
+    },
+    "night": {
+     "relative_humidity": 0.9484375,
+     "air_c": 12.171875,
+     "fog": 0.08187499999999999,
+     "rain_mm_day": 0.0,
+     "wind_m_s": 0.0,
+     "mixed_layer_km": 0.07187500000000001
+    },
+    "wind_p99_m_s": 0.5852558016777039,
+    "wind_max_m_s": 0.9825362265110016,
+    "day_hours": 393.73333333333335,
+    "rings": [
+     "ring_80n_lsw (land)",
+     "ring_80s_lsw (land)"
+    ]
+   },
+   "cases": {
+    "clean": {
+     "day": {
+      "modes": [
+       {
+        "name": "aitken",
+        "number_cm3": 31.052631578947366,
+        "d_nm": 50.0,
+        "sigma": 1.6,
+        "kappa": 0.3
+       },
+       {
+        "name": "accumulation",
+        "number_cm3": 31.052631578947366,
+        "d_nm": 200.0,
+        "sigma": 1.5,
+        "kappa": 0.3
+       }
+      ],
+      "number_cm3": 62.10526315789473,
+      "above_100nm_cm3": 31.87425546132873,
+      "ccn_cm3": {
+       "0.1%": 20.484273310986037,
+       "0.3%": 35.1968370442157,
+       "1%": 54.14223925209285
+      },
+      "ion_sink_s": 0.0002079376087696813,
+      "conductivity_s_m": 3.93849414051084e-15,
+      "in_fog_s_m": 4.759615470988243e-16,
+      "fog_share": 0.0015,
+      "with_fog_s_m": 3.933300341620722e-15,
+      "relaxation_min": 37.51805966060392,
+      "relative_humidity": 0.7354999999999999,
+      "air_c": 16.875
+     },
+     "night": {
+      "modes": [
+       {
+        "name": "aitken",
+        "number_cm3": 6.675563338939194,
+        "d_nm": 50.0,
+        "sigma": 1.6,
+        "kappa": 0.3
+       },
+       {
+        "name": "accumulation",
+        "number_cm3": 2.247662176220827,
+        "d_nm": 200.0,
+        "sigma": 1.5,
+        "kappa": 0.3
+       }
+      ],
+      "number_cm3": 8.92322551516002,
+      "above_100nm_cm3": 2.617693893046612,
+      "ccn_cm3": {
+       "0.1%": 1.4663997434468048,
+       "0.3%": 3.143710881559576,
+       "1%": 7.135802776758359
+      },
+      "ion_sink_s": 2.9828736303482387e-05,
+      "conductivity_s_m": 5.03648784992617e-15,
+      "in_fog_s_m": 5.507553529644373e-16,
+      "fog_share": 0.08187499999999999,
+      "with_fog_s_m": 4.6692185017374275e-15,
+      "relaxation_min": 31.604817128410016,
+      "relative_humidity": 0.9484375,
+      "air_c": 12.171875
+     }
+    },
+    "central": {
+     "day": {
+      "modes": [
+       {
+        "name": "aitken",
+        "number_cm3": 70.3,
+        "d_nm": 50.0,
+        "sigma": 1.6,
+        "kappa": 0.3
+       },
+       {
+        "name": "accumulation",
+        "number_cm3": 84.36,
+        "d_nm": 200.0,
+        "sigma": 1.5,
+        "kappa": 0.3
+       }
+      ],
+      "number_cm3": 154.66,
+      "above_100nm_cm3": 85.60595825247394,
+      "ccn_cm3": {
+       "0.1%": 55.584639528634355,
+       "0.3%": 93.54844138748622,
+       "1%": 136.6323165753559
+      },
+      "ion_sink_s": 0.0005463036785792026,
+      "conductivity_s_m": 2.4350859430020534e-15,
+      "in_fog_s_m": 8.65874738651788e-17,
+      "fog_share": 0.0015,
+      "with_fog_s_m": 2.4315631952983482e-15,
+      "relaxation_min": 60.689270657386096,
+      "relative_humidity": 0.7354999999999999,
+      "air_c": 16.875
+     },
+     "night": {
+      "modes": [
+       {
+        "name": "aitken",
+        "number_cm3": 15.11279652851031,
+        "d_nm": 50.0,
+        "sigma": 1.6,
+        "kappa": 0.3
+       },
+       {
+        "name": "accumulation",
+        "number_cm3": 14.11703423514193,
+        "d_nm": 200.0,
+        "sigma": 1.5,
+        "kappa": 0.3
+       },
+       {
+        "name": "fungal",
+        "number_cm3": 22.75,
+        "d_nm": 29.999999999999996,
+        "sigma": 1.5,
+        "kappa": 0.2
+       }
+      ],
+      "number_cm3": 51.97983076365224,
+      "above_100nm_cm3": 14.594342993083016,
+      "ccn_cm3": {
+       "0.1%": 9.099013445112154,
+       "0.3%": 16.05779784172444,
+       "1%": 29.52399631497905
+      },
+      "ion_sink_s": 0.00015823200170908156,
+      "conductivity_s_m": 4.1013134203008516e-15,
+      "in_fog_s_m": 9.293493307109844e-17,
+      "fog_share": 0.08187499999999999,
+      "with_fog_s_m": 3.773127431658916e-15,
+      "relaxation_min": 39.11073759179096,
+      "relative_humidity": 0.9484375,
+      "air_c": 12.171875
+     }
+    },
+    "loaded": {
+     "day": {
+      "modes": [
+       {
+        "name": "aitken",
+        "number_cm3": 192.14285714285714,
+        "d_nm": 50.0,
+        "sigma": 1.6,
+        "kappa": 0.3
+       },
+       {
+        "name": "accumulation",
+        "number_cm3": 230.57142857142858,
+        "d_nm": 200.0,
+        "sigma": 1.5,
+        "kappa": 0.3
+       },
+       {
+        "name": "dust",
+        "number_cm3": 18.240000000000002,
+        "d_nm": 700.0,
+        "sigma": 1.6,
+        "kappa": 0.3
+       }
+      ],
+      "number_cm3": 440.95428571428573,
+      "above_100nm_cm3": 252.2165456570869,
+      "ccn_cm3": {
+       "0.1%": 170.13921463959582,
+       "0.3%": 273.9250872120259,
+       "1%": 391.68130419066637
+      },
+      "ion_sink_s": 0.0018500713259537705,
+      "conductivity_s_m": 8.683378873838594e-16,
+      "in_fog_s_m": 3.3801212953918995e-17,
+      "fog_share": 0.0015,
+      "with_fog_s_m": 8.670860823722146e-16,
+      "relaxation_min": 170.19048036876762,
+      "relative_humidity": 0.7354999999999999,
+      "air_c": 16.875
+     },
+     "night": {
+      "modes": [
+       {
+        "name": "aitken",
+        "number_cm3": 41.3060583841625,
+        "d_nm": 50.0,
+        "sigma": 1.6,
+        "kappa": 0.3
+       },
+       {
+        "name": "accumulation",
+        "number_cm3": 134.69995441583762,
+        "d_nm": 200.0,
+        "sigma": 1.5,
+        "kappa": 0.3
+       },
+       {
+        "name": "fungal",
+        "number_cm3": 91.0,
+        "d_nm": 29.999999999999996,
+        "sigma": 1.5,
+        "kappa": 0.47
+       },
+       {
+        "name": "dust",
+        "number_cm3": 6.919219415245145,
+        "d_nm": 700.0,
+        "sigma": 1.6,
+        "kappa": 0.3
+       }
+      ],
+      "number_cm3": 273.9252322152453,
+      "above_100nm_cm3": 138.76848251831342,
+      "ccn_cm3": {
+       "0.1%": 93.30552088765938,
+       "0.3%": 146.76993583502704,
+       "1%": 211.1313565688505
+      },
+      "ion_sink_s": 0.0014334875855960005,
+      "conductivity_s_m": 1.0892362836418923e-15,
+      "in_fog_s_m": 3.584607187099266e-17,
+      "fog_share": 0.08187499999999999,
+      "with_fog_s_m": 1.0029899600531499e-15,
+      "relaxation_min": 147.12988440301044,
+      "relative_humidity": 0.9484375,
+      "air_c": 12.171875
+     }
+    }
+   }
+  }
+ },
+ "area_mean": {
+  "clean_day": {
+   "conductivity_s_m": 4.724582737219695e-15,
+   "with_fog_s_m": 4.68520808743954e-15,
+   "number_cm3": 51.342756141774466,
+   "ccn_0_3_cm3": 21.937278006930303
+  },
+  "clean_night": {
+   "conductivity_s_m": 5.41909897567907e-15,
+   "with_fog_s_m": 5.175152113713353e-15,
+   "number_cm3": 11.271410844606782,
+   "ccn_0_3_cm3": 5.01083103994078
+  },
+  "central_day": {
+   "conductivity_s_m": 2.2359717946791375e-15,
+   "with_fog_s_m": 2.2157724190864632e-15,
+   "number_cm3": 225.80681552331419,
+   "ccn_0_3_cm3": 109.66240808770544
+  },
+  "central_night": {
+   "conductivity_s_m": 2.824744674013514e-15,
+   "with_fog_s_m": 2.6946243561988662e-15,
+   "number_cm3": 153.33521188702633,
+   "ccn_0_3_cm3": 53.11564664876417
+  },
+  "loaded_day": {
+   "conductivity_s_m": 5.938844724005547e-16,
+   "with_fog_s_m": 5.908816322677488e-16,
+   "number_cm3": 738.4063673791964,
+   "ccn_0_3_cm3": 396.43853196036946
+  },
+  "loaded_night": {
+   "conductivity_s_m": 7.810759544701805e-16,
+   "with_fog_s_m": 7.6218662741509e-16,
+   "number_cm3": 643.2840760749267,
+   "ccn_0_3_cm3": 311.3672149380133
+  }
+ },
+ "current_column": {
+  "conductivity_s_m": 3.700418905315559e-15,
+  "ccn_cm3": {
+   "0.1%": 0.0,
+   "0.3%": 100.0,
+   "1%": 100.0
+  }
+ },
+ "levers": {
+  "no isoprene emitters": {
+   "day": 2.541156499749453e-15,
+   "night": 2.9472303904516697e-15
+  },
+  "every tree an isoprene emitter": {
+   "day": 1.9282255548612754e-15,
+   "night": 2.4597973803892302e-15
+  },
+  "seas at 1 nM dimethyl sulfide": {
+   "day": 2.4284703268713845e-15,
+   "night": 2.9313036092479476e-15
+  },
+  "seas at 10 nM dimethyl sulfide": {
+   "day": 2.0706025836674247e-15,
+   "night": 2.4677187637224863e-15
+  },
+  "plains fully crusted": {
+   "day": 2.2400413455652557e-15,
+   "night": 2.7051815542504512e-15
+  },
+  "plains bare and grazed": {
+   "day": 2.136773994770645e-15,
+   "night": 2.655503787408758e-15
+  },
+  "no night fungal bursts": {
+   "day": 2.2157724190864632e-15,
+   "night": 2.840835316229926e-15
+  },
+  "night fungal bursts twice as often": {
+   "day": 2.2157724190864632e-15,
+   "night": 2.5717523853570672e-15
+  }
+ },
+ "plains_sulfur_dioxide_ppt_by_sea_dms_umol_m2_day": {
+  "0.4": 0.7784624881177071,
+  "1.2": 2.3353874643531207,
+  "3.9": 7.590009259147642
+ },
+ "earth_checks": {
+  "amazon_small_ions": {
+   "measured_cm3": [
+    549.0,
+    856.0
+   ],
+   "source": "Wimmer et al. 2018, inside the rainforest at 97 % relative humidity (positive, negative; biogenic note Sect. 3)",
+   "model": {
+    "q 2.5 per cm3 per s": 766.0052839816708,
+    "q 5 per cm3 per s": 1246.2708802186437,
+    "q 10 per cm3 per s": 1954.7308484293612
+   }
+  },
+  "marine_conductivity": {
+   "measured_s_m": [
+    1e-14,
+    2.3e-14
+   ],
+   "source": "Kamra et al. 1997 (1.1-2.3e-14 at 70-90 % RH) and Siingh et al. 2005 (1.0-1.7e-14 over the Arabian Sea), via humid_conductivity.md Sect. 4",
+   "model": {
+    "q 1.5 per cm3 per s": 2.56598762828853e-14,
+    "q 2 per cm3 per s": 3.200223029830185e-14,
+    "q 3 per cm3 per s": 4.311919034196195e-14
+   }
+  }
+ }
+}

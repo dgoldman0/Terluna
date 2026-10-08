@@ -19,6 +19,27 @@ Candidate external resources, recorded as leads rather than installed tools or a
 
 Installation, input acquisition, applicability checks and benchmarks precede any promise of full GCM or spectral runs. The current workspace supplies no installed specialist climate/ephemeris/radiative-transfer dependency.
 
+## Atmospheric electricity
+
+The [atmospheric-electricity plan](studies/atmospheric_electricity/README.md) of
+2026-10-02 aims to understand the Open Moon's atmospheric electricity as well as
+its other subjects of similar importance. Stage 1 reads the CM1 storms already
+run for graupel, ice and supercooled water, applies laboratory charging laws to
+them, isolates slower settling with the fall-speed pair, and builds an
+ionization and conductivity column, so that storm generator currents can be set
+against what the air conducts at breakdown. Stage 2 electrifies CM1, with the
+NSSL microphysics patched for lunar gravity and the electrical physics following
+WRF-ELEC. Stage 3 takes the global circuit and transient luminous events.
+ROCKE-3D stays a separate background-climate check. Stage 1 (2026-10-03) found
+lunar cloud conducting about 10⁻¹⁶ S/m and some storm columns reaching breakdown
+under every charging law tried; the charge slow graupel separates sets how often.
+Stage 2's electrified CM1 (2026-10-03; WRF-ELEC's sub-steps and branched
+lightning from 2026-10-04) runs WRF-ELEC's NSSL microphysics with its charging
+and lightning; on an Earth supercell it electrifies and flashes when published
+runs of the scheme do, with their net charge densities, flash rates and charge
+per flash, while charging several times faster. The electrified lunar box runs
+from 2026-10-04.
+
 ## Biology in parallel
 
 Extract literature parameters with actual experimental boundaries, then implement long-night reserve/respiration, aquatic oxygen, nutrient/detrital and vegetation-mechanics models. Compare several communities and architectures. Literature-calibrated traits, engineered-trait proposals and unmeasured gravity responses remain distinct. Complete reproduction and lifelong human health require empirical work; simulations can identify conditions and discriminating experiments.

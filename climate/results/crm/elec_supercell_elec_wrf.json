@@ -1,0 +1,1799 @@
+{
+ "schema": "terluna.climate.crm-electricity/2",
+ "case": "supercell_elec_wrf",
+ "purpose": "CM1's supercell at Earth's gravity in WRF-ELEC's own test settings: 2-km spacing over 84 km, 800 CCN per cm3, Saunders and Peck's law as isaund 11 sets it, screening layers and branched lightning",
+ "electricity": {
+  "ipelec": 3,
+  "isaund": 11,
+  "lightning": 3,
+  "leakage": 0,
+  "radius_m": 12000.0,
+  "hail": true,
+  "substep_s": 0.0,
+  "ground_m": 0.0,
+  "screen": 1,
+  "conductivity": {
+   "sun": "solar_minimum",
+   "clear_air": "100_per_cm3",
+   "cloud": "0.1_g_m3"
+  },
+  "files": {}
+ },
+ "build": {
+  "label": "earth_g_omp_elec",
+  "gravity_m_s2": 9.81,
+  "executable_sha256": "005fdd5b39e5b5d1"
+ },
+ "producer": {
+  "domain": "climate",
+  "files": {
+   "crm/elec_analysis.py": "1ef57ed83efda60f"
+  }
+ },
+ "evidence": "CM1 r22.0 with WRF-ELEC's NSSL two-moment microphysics (MicroTed/wrf4-elec e43041b) and its charging (non-inductive by collisions of graupel and hail with ice and snow, inductive by droplets rebounding from graupel in the field), the small ions' net charge attaching to particles, an FFT field solver, and WRF-ELEC's lightning on its own sub-steps of the sedimentation: the branched scheme (lightmsz, MacGorman, Straka and Ziegler 2001) or the cylindrical one. Charge is carried by bulk particle populations; branched channels run on the model grid and neutralize the charge where they reach; the ground-strike rule, the 50-MV potential and 10-kV/m field a ground flash needs at its start and the nitrogen oxide yield are WRF-ELEC's calibrations for Earth; nothing conducts charge away except where a case turns on leakage, and the ground gives off ions only where a case turns on point discharge (Standler and Winn's 1 nA/m2 at 8 kV/m over Earth's vegetation, its onset scaled by density).",
+ "reading_rule": "Times are model seconds from the start. Series are per bin of bin_s seconds from start_s: 5 minutes, or the output interval for runs longer than two days. Kinds: 1 in cloud, 2 negative and 3 positive charge to ground (branched flashes), 9 a call of the cylindrical scheme, whose regions are the separate areas one call takes. A flash's positive and negative charge are what it neutralized; a ground flash neutralizes one sign only, the ground supplying the other. Nitrogen oxides are lightmsz's: Wang et al.'s yield per metre of channel at its pressure, times 0.1 where the flash changes the charge by 1 nC/kg or more. Charging rates are the domain's totals of each sign (C/s). Charge densities are nC/m3; heights are above the ground; temperatures are the air's at the level, weighted by the charge there.",
+ "start_s": 0.0,
+ "end_s": 7200.0,
+ "bin_s": 300.0,
+ "lightning": {
+  "in_cloud": {
+   "count": 14620,
+   "first_s": 1776.0,
+   "per_bin": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    2.0,
+    77.0,
+    42.0,
+    97.0,
+    170.0,
+    181.0,
+    221.0,
+    500.0,
+    731.0,
+    1055.0,
+    1098.0,
+    1279.0,
+    1168.0,
+    1274.0,
+    1189.0,
+    1240.0,
+    1386.0,
+    1492.0,
+    1418.0
+   ],
+   "positive_c": {
+    "n": 14620,
+    "mean": 39.89,
+    "p10": 5.037,
+    "median": 17.69,
+    "p90": 94.51,
+    "max": 1471.0
+   },
+   "negative_c": {
+    "n": 14620,
+    "mean": 39.89,
+    "p10": 5.037,
+    "median": 17.69,
+    "p90": 94.51,
+    "max": 1471.0
+   },
+   "energy_dissipated_j": {
+    "n": 14620,
+    "mean": 5536000000.0,
+    "p10": 531000000.0,
+    "median": 2382000000.0,
+    "p90": 11390000000.0,
+    "max": 316700000000.0
+   },
+   "initiation_z_km": {
+    "n": 14620,
+    "mean": 9.472,
+    "p10": 8.25,
+    "median": 9.25,
+    "p90": 11.25,
+    "max": 15.75
+   },
+   "e_at_initiation_kv_m": {
+    "n": 14620,
+    "mean": 111.0,
+    "p10": 81.88,
+    "median": 105.8,
+    "p90": 146.2,
+    "max": 1038.0
+   },
+   "e_break_at_initiation_kv_m": {
+    "n": 14620,
+    "mean": 101.5,
+    "p10": 82.23,
+    "median": 102.4,
+    "p90": 115.6,
+    "max": 180.0
+   },
+   "extent_km2": {
+    "n": 14620,
+    "mean": 81.3,
+    "p10": 12.0,
+    "median": 48.0,
+    "p90": 176.0,
+    "max": 2084.0
+   },
+   "z_low_km": {
+    "n": 14620,
+    "mean": 6.306,
+    "p10": 2.75,
+    "median": 6.75,
+    "p90": 8.75,
+    "max": 16.25
+   },
+   "z_high_km": {
+    "n": 14620,
+    "mean": 11.66,
+    "p10": 9.25,
+    "median": 11.75,
+    "p90": 14.75,
+    "max": 16.25
+   },
+   "points": {
+    "n": 14620,
+    "mean": 85.49,
+    "p10": 8.0,
+    "median": 34.0,
+    "p90": 209.0,
+    "max": 2658.0
+   },
+   "nox_mol": {
+    "n": 14620,
+    "mean": 8.748,
+    "p10": 0.6929,
+    "median": 3.294,
+    "p90": 21.56,
+    "max": 323.9
+   },
+   "nox_total_mol": 127900.0
+  },
+  "all": {
+   "count": 14620,
+   "first_s": 1776.0,
+   "per_bin": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    2.0,
+    77.0,
+    42.0,
+    97.0,
+    170.0,
+    181.0,
+    221.0,
+    500.0,
+    731.0,
+    1055.0,
+    1098.0,
+    1279.0,
+    1168.0,
+    1274.0,
+    1189.0,
+    1240.0,
+    1386.0,
+    1492.0,
+    1418.0
+   ],
+   "over_breakdown_first": {
+    "n": 4559,
+    "mean": 1.964,
+    "p10": 1.085,
+    "median": 1.631,
+    "p90": 3.177,
+    "max": 12.31
+   },
+   "over_breakdown_later": {
+    "n": 10061,
+    "mean": 1.649,
+    "p10": 1.09,
+    "median": 1.436,
+    "p90": 2.455,
+    "max": 11.08
+   },
+   "per_substep_max": 17
+  }
+ },
+ "field": {
+  "e_max_kv_m": 622.5,
+  "e_max_per_bin_kv_m": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0001597,
+   113.7,
+   112.2,
+   145.2,
+   147.1,
+   161.7,
+   218.9,
+   157.1,
+   146.2,
+   153.3,
+   206.8,
+   327.0,
+   173.2,
+   622.5,
+   236.8,
+   288.3,
+   604.8,
+   554.5,
+   319.2,
+   194.3
+  ],
+  "positive_c_per_bin": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.194e-05,
+   38.13,
+   162.2,
+   347.2,
+   498.8,
+   679.5,
+   832.0,
+   1004.0,
+   1115.0,
+   1490.0,
+   1637.0,
+   2000.0,
+   1796.0,
+   2598.0,
+   1955.0,
+   2376.0,
+   3027.0,
+   3203.0,
+   3015.0,
+   2572.0
+  ],
+  "negative_c_per_bin": [
+   -0.0,
+   -0.0,
+   -0.0,
+   -0.0,
+   2.175e-05,
+   37.49,
+   155.9,
+   317.1,
+   445.7,
+   612.9,
+   755.3,
+   885.8,
+   930.3,
+   1253.0,
+   1435.0,
+   1772.0,
+   1564.0,
+   2439.0,
+   1834.0,
+   2278.0,
+   3057.0,
+   3201.0,
+   3112.0,
+   2734.0
+  ],
+  "energy_j_per_bin": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.001035,
+   1367000000.0,
+   4829000000.0,
+   10830000000.0,
+   18250000000.0,
+   22360000000.0,
+   31960000000.0,
+   33460000000.0,
+   41650000000.0,
+   44370000000.0,
+   51240000000.0,
+   90030000000.0,
+   44270000000.0,
+   254200000000.0,
+   50840000000.0,
+   90270000000.0,
+   289600000000.0,
+   266000000000.0,
+   144000000000.0,
+   88890000000.0
+  ],
+  "noninductive_max_pc_m3_s": 3520.0,
+  "inductive_max_pc_m3_s": 128.7,
+  "noninductive_max_per_bin_pc_m3_s": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.002052,
+   981.8,
+   1648.0,
+   1065.0,
+   1480.0,
+   877.7,
+   2355.0,
+   3234.0,
+   3273.0,
+   3463.0,
+   3267.0,
+   3395.0,
+   3349.0,
+   3280.0,
+   3314.0,
+   3520.0,
+   3357.0,
+   3368.0,
+   3335.0,
+   3115.0
+  ],
+  "inductive_max_per_bin_pc_m3_s": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0001546,
+   45.22,
+   63.87,
+   61.59,
+   64.5,
+   78.39,
+   103.3,
+   96.15,
+   96.78,
+   100.7,
+   101.1,
+   102.5,
+   99.63,
+   107.4,
+   110.4,
+   113.2,
+   107.1,
+   128.7,
+   111.1,
+   106.7
+  ]
+ },
+ "charging": {
+  "ctghi": {
+   "collisions": "graupel and hail with cloud ice",
+   "positive_c": 477200.0,
+   "negative_c": -195600.0,
+   "peak_c_s": 178.2,
+   "per_bin_c": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0002472,
+    424.6,
+    3032.0,
+    2544.0,
+    5037.0,
+    5733.0,
+    8958.0,
+    13590.0,
+    19940.0,
+    27630.0,
+    37830.0,
+    44850.0,
+    50400.0,
+    55410.0,
+    60060.0,
+    68180.0,
+    69660.0,
+    71390.0,
+    68180.0,
+    59940.0
+   ]
+  },
+  "ctghs": {
+   "collisions": "graupel and hail with snow",
+   "positive_c": 57180.0,
+   "negative_c": -44870.0,
+   "peak_c_s": 29.02,
+   "per_bin_c": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    6.924e-05,
+    94.64,
+    1362.0,
+    1373.0,
+    1867.0,
+    2575.0,
+    3126.0,
+    3457.0,
+    4315.0,
+    4102.0,
+    4330.0,
+    4611.0,
+    5286.0,
+    5950.0,
+    6519.0,
+    8705.0,
+    8324.0,
+    9389.0,
+    11990.0,
+    14670.0
+   ]
+  },
+  "ctswi": {
+   "collisions": "snow with cloud ice",
+   "positive_c": 0.0001334,
+   "negative_c": -0.06481,
+   "peak_c_s": 0.0001565,
+   "per_bin_c": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    9.278e-11,
+    0.0095,
+    0.02488,
+    0.004715,
+    0.005779,
+    0.001015,
+    0.0001745,
+    0.0003237,
+    0.000751,
+    0.0007127,
+    0.0008061,
+    0.001042,
+    0.001054,
+    0.0009293,
+    0.001499,
+    0.001662,
+    0.001993,
+    0.002249,
+    0.00238,
+    0.003479
+   ]
+  },
+  "ctghw": {
+   "collisions": "graupel with cloud droplets (inductive)",
+   "positive_c": 2079.0,
+   "negative_c": -87740.0,
+   "peak_c_s": 34.99,
+   "per_bin_c": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    2.331e-05,
+    22.02,
+    255.7,
+    373.0,
+    698.2,
+    1052.0,
+    1443.0,
+    1914.0,
+    3117.0,
+    3716.0,
+    4912.0,
+    5942.0,
+    7582.0,
+    7695.0,
+    7644.0,
+    8340.0,
+    8259.0,
+    8569.0,
+    9537.0,
+    8751.0
+   ]
+  },
+  "ctgi": {
+   "collisions": "graupel with cloud ice",
+   "positive_c": 80160.0,
+   "negative_c": -57870.0,
+   "peak_c_s": 39.02,
+   "per_bin_c": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0002472,
+    424.6,
+    3029.0,
+    2495.0,
+    4517.0,
+    4833.0,
+    5794.0,
+    6612.0,
+    6241.0,
+    5278.0,
+    4742.0,
+    5348.0,
+    6769.0,
+    7812.0,
+    9151.0,
+    10240.0,
+    10030.0,
+    12400.0,
+    14640.0,
+    17670.0
+   ]
+  },
+  "ctgs": {
+   "collisions": "graupel with snow",
+   "positive_c": 32430.0,
+   "negative_c": -41490.0,
+   "peak_c_s": 25.82,
+   "per_bin_c": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    6.924e-05,
+    94.64,
+    1362.0,
+    1364.0,
+    1772.0,
+    2368.0,
+    2750.0,
+    2713.0,
+    3075.0,
+    2985.0,
+    2906.0,
+    2874.0,
+    3456.0,
+    4019.0,
+    4360.0,
+    5813.0,
+    5480.0,
+    6312.0,
+    8751.0,
+    11460.0
+   ]
+  },
+  "cthi": {
+   "collisions": "hail with cloud ice",
+   "positive_c": 419900.0,
+   "negative_c": -160600.0,
+   "peak_c_s": 165.6,
+   "per_bin_c": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0002664,
+    3.287,
+    67.96,
+    626.3,
+    1291.0,
+    4027.0,
+    8638.0,
+    15950.0,
+    24970.0,
+    35420.0,
+    42140.0,
+    46900.0,
+    51080.0,
+    54670.0,
+    61310.0,
+    63310.0,
+    64150.0,
+    58520.0,
+    47390.0
+   ]
+  },
+  "cths": {
+   "collisions": "hail with snow",
+   "positive_c": 33680.0,
+   "negative_c": -12310.0,
+   "peak_c_s": 13.16,
+   "per_bin_c": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    2.661e-05,
+    0.7897,
+    12.33,
+    121.8,
+    335.2,
+    749.7,
+    1323.0,
+    1970.0,
+    2149.0,
+    2467.0,
+    2674.0,
+    3034.0,
+    3248.0,
+    3547.0,
+    4602.0,
+    4435.0,
+    4664.0,
+    5380.0,
+    5279.0
+   ]
+  },
+  "ctsww": {
+   "collisions": "snow with cloud droplets",
+   "positive_c": 1725.0,
+   "negative_c": -532.2,
+   "peak_c_s": 1.185,
+   "per_bin_c": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    4.399e-07,
+    16.79,
+    125.1,
+    58.81,
+    80.8,
+    77.69,
+    68.67,
+    69.59,
+    80.14,
+    77.63,
+    82.09,
+    90.27,
+    111.0,
+    123.5,
+    133.4,
+    168.7,
+    156.1,
+    211.2,
+    237.4,
+    287.9
+   ]
+  }
+ },
+ "structure": [
+  {
+   "positive_c": 0.0,
+   "negative_c": 0.0,
+   "max_nc_m3": 0.0,
+   "min_nc_m3": 0.0,
+   "species_max_abs_nc_m3": {
+    "cloud_water": 0.0,
+    "rain": 0.0,
+    "cloud_ice": 0.0,
+    "snow": 0.0,
+    "graupel": 0.0,
+    "small_ions": 0.0,
+    "hail": 0.0
+   },
+   "time_s": 0.0,
+   "w_max_m_s": 0.0,
+   "dbz_max": 0.0,
+   "net_c": 0.0,
+   "ions_positive_c": 0.0,
+   "ions_negative_c": 0.0
+  },
+  {
+   "positive_c": 0.0,
+   "negative_c": 0.0,
+   "max_nc_m3": 0.0,
+   "min_nc_m3": 0.0,
+   "species_max_abs_nc_m3": {
+    "cloud_water": 0.0,
+    "rain": 0.0,
+    "cloud_ice": 0.0,
+    "snow": 0.0,
+    "graupel": 0.0,
+    "small_ions": 0.0,
+    "hail": 0.0
+   },
+   "time_s": 300.0,
+   "w_max_m_s": 0.7211,
+   "dbz_max": 0.0,
+   "net_c": 0.0,
+   "ions_positive_c": 0.0,
+   "ions_negative_c": 0.0
+  },
+  {
+   "positive_c": 0.0,
+   "negative_c": 0.0,
+   "max_nc_m3": 0.0,
+   "min_nc_m3": 0.0,
+   "species_max_abs_nc_m3": {
+    "cloud_water": 0.0,
+    "rain": 0.0,
+    "cloud_ice": 0.0,
+    "snow": 0.0,
+    "graupel": 0.0,
+    "small_ions": 0.0,
+    "hail": 0.0
+   },
+   "time_s": 600.0,
+   "w_max_m_s": 1.047,
+   "dbz_max": 0.0,
+   "net_c": 0.0,
+   "ions_positive_c": 0.0,
+   "ions_negative_c": 0.0
+  },
+  {
+   "positive_c": 0.0,
+   "negative_c": 0.0,
+   "max_nc_m3": 0.0,
+   "min_nc_m3": 0.0,
+   "species_max_abs_nc_m3": {
+    "cloud_water": 0.0,
+    "rain": 0.0,
+    "cloud_ice": 0.0,
+    "snow": 0.0,
+    "graupel": 0.0,
+    "small_ions": 0.0,
+    "hail": 0.0
+   },
+   "time_s": 900.0,
+   "w_max_m_s": 2.838,
+   "dbz_max": 0.0,
+   "net_c": 0.0,
+   "ions_positive_c": 0.0,
+   "ions_negative_c": 0.0
+  },
+  {
+   "positive_c": 0.0,
+   "negative_c": 0.0,
+   "max_nc_m3": 0.0,
+   "min_nc_m3": 0.0,
+   "species_max_abs_nc_m3": {
+    "cloud_water": 0.0,
+    "rain": 0.0,
+    "cloud_ice": 0.0,
+    "snow": 0.0,
+    "graupel": 0.0,
+    "small_ions": 0.0,
+    "hail": 0.0
+   },
+   "time_s": 1200.0,
+   "w_max_m_s": 8.693,
+   "dbz_max": 0.0,
+   "net_c": 0.0,
+   "ions_positive_c": 0.0,
+   "ions_negative_c": 0.0
+  },
+  {
+   "positive_c": 0.0,
+   "negative_c": 0.0,
+   "max_nc_m3": 3.867e-06,
+   "min_nc_m3": -3.395e-06,
+   "species_max_abs_nc_m3": {
+    "cloud_water": 2.941e-06,
+    "rain": 2.271e-08,
+    "cloud_ice": 3.048e-05,
+    "snow": 1.134e-05,
+    "graupel": 3.548e-05,
+    "small_ions": 2.167e-08,
+    "hail": 0.0
+   },
+   "time_s": 1500.0,
+   "w_max_m_s": 20.61,
+   "dbz_max": 5.777,
+   "net_c": 2.141e-07,
+   "ions_positive_c": 1.32e-07,
+   "ions_negative_c": -6.427e-08,
+   "ions_z_km": [
+    4.25,
+    6.75,
+    7.25
+   ]
+  },
+  {
+   "positive_c": 33.81,
+   "negative_c": -34.03,
+   "max_nc_m3": 2.497,
+   "min_nc_m3": -2.322,
+   "species_max_abs_nc_m3": {
+    "cloud_water": 1.863,
+    "rain": 0.005257,
+    "cloud_ice": 21.21,
+    "snow": 7.5,
+    "graupel": 26.17,
+    "small_ions": 0.02641,
+    "hail": 0.0001312
+   },
+   "main_negative": {
+    "z_km": 9.25,
+    "t_c": -36.41,
+    "charge_c": -11.48,
+    "density_nc_m3": -1.623,
+    "carried_c": {
+     "cloud_water": 0.0,
+     "rain": -7.184e-06,
+     "cloud_ice": -72.79,
+     "snow": -9.307,
+     "graupel": 70.62,
+     "small_ions": 0.00437,
+     "hail": 2.477e-05
+    }
+   },
+   "upper_positive": {
+    "z_km": 10.75,
+    "t_c": -49.5,
+    "charge_c": 0.3134,
+    "density_nc_m3": 0.1567
+   },
+   "lower_positive": {
+    "z_km": 7.75,
+    "t_c": -25.59,
+    "charge_c": 11.93,
+    "density_nc_m3": 2.497
+   },
+   "time_s": 1800.0,
+   "w_max_m_s": 24.15,
+   "dbz_max": 38.54,
+   "net_c": 0.6708,
+   "ions_positive_c": 0.3,
+   "ions_negative_c": -0.1916,
+   "ions_z_km": [
+    4.75,
+    10.25,
+    10.75
+   ]
+  },
+  {
+   "positive_c": 136.0,
+   "negative_c": -137.8,
+   "max_nc_m3": 1.554,
+   "min_nc_m3": -2.825,
+   "species_max_abs_nc_m3": {
+    "cloud_water": 4.918,
+    "rain": 0.0794,
+    "cloud_ice": 41.84,
+    "snow": 11.56,
+    "graupel": 51.35,
+    "small_ions": 0.0382,
+    "hail": 0.1277
+   },
+   "main_negative": {
+    "z_km": 6.75,
+    "t_c": -18.63,
+    "charge_c": -30.53,
+    "density_nc_m3": -2.502,
+    "carried_c": {
+     "cloud_water": -3.336,
+     "rain": 0.006602,
+     "cloud_ice": -35.93,
+     "snow": -24.12,
+     "graupel": 32.79,
+     "small_ions": 0.001155,
+     "hail": 0.05082
+    }
+   },
+   "upper_positive": {
+    "z_km": 8.25,
+    "t_c": -28.68,
+    "charge_c": 34.98,
+    "density_nc_m3": 1.301
+   },
+   "lower_positive": {
+    "z_km": 5.75,
+    "t_c": -12.9,
+    "charge_c": 11.56,
+    "density_nc_m3": 0.9873
+   },
+   "time_s": 2100.0,
+   "w_max_m_s": 30.91,
+   "dbz_max": 54.2,
+   "net_c": 6.469,
+   "ions_positive_c": 1.053,
+   "ions_negative_c": -0.5851,
+   "ions_z_km": [
+    5.25,
+    10.25,
+    11.75
+   ]
+  },
+  {
+   "positive_c": 291.4,
+   "negative_c": -278.5,
+   "max_nc_m3": 2.422,
+   "min_nc_m3": -3.531,
+   "species_max_abs_nc_m3": {
+    "cloud_water": 1.497,
+    "rain": 0.1769,
+    "cloud_ice": 11.77,
+    "snow": 6.432,
+    "graupel": 17.32,
+    "small_ions": 0.03347,
+    "hail": 1.299
+   },
+   "main_negative": {
+    "z_km": 8.75,
+    "t_c": -32.37,
+    "charge_c": -32.49,
+    "density_nc_m3": -0.9469,
+    "carried_c": {
+     "cloud_water": -1.545,
+     "rain": -0.00384,
+     "cloud_ice": -125.0,
+     "snow": -56.4,
+     "graupel": 147.9,
+     "small_ions": 0.005835,
+     "hail": 2.556
+    }
+   },
+   "upper_positive": {
+    "z_km": 9.25,
+    "t_c": -36.5,
+    "charge_c": 14.61,
+    "density_nc_m3": 1.264
+   },
+   "lower_positive": {
+    "z_km": 7.25,
+    "t_c": -22.35,
+    "charge_c": 45.87,
+    "density_nc_m3": 1.335
+   },
+   "time_s": 2400.0,
+   "w_max_m_s": 27.35,
+   "dbz_max": 60.02,
+   "net_c": 30.48,
+   "ions_positive_c": 2.944,
+   "ions_negative_c": -1.925,
+   "ions_z_km": [
+    4.25,
+    8.25,
+    12.75
+   ]
+  },
+  {
+   "positive_c": 268.1,
+   "negative_c": -255.2,
+   "max_nc_m3": 3.306,
+   "min_nc_m3": -2.207,
+   "species_max_abs_nc_m3": {
+    "cloud_water": 6.54,
+    "rain": 2.317,
+    "cloud_ice": 25.65,
+    "snow": 13.95,
+    "graupel": 31.27,
+    "small_ions": 0.05679,
+    "hail": 8.031
+   },
+   "main_negative": {
+    "z_km": 10.25,
+    "t_c": -43.55,
+    "charge_c": -27.17,
+    "density_nc_m3": -0.8035,
+    "carried_c": {
+     "cloud_water": 0.0,
+     "rain": 0.0,
+     "cloud_ice": -166.4,
+     "snow": -145.1,
+     "graupel": 278.3,
+     "small_ions": 0.008187,
+     "hail": 6.013
+    }
+   },
+   "upper_positive": {
+    "z_km": 12.75,
+    "t_c": -54.4,
+    "charge_c": 10.12,
+    "density_nc_m3": 0.2492
+   },
+   "lower_positive": {
+    "z_km": 8.75,
+    "t_c": -31.65,
+    "charge_c": 25.98,
+    "density_nc_m3": 1.74
+   },
+   "time_s": 2700.0,
+   "w_max_m_s": 32.92,
+   "dbz_max": 62.33,
+   "net_c": 44.22,
+   "ions_positive_c": 3.065,
+   "ions_negative_c": -2.638,
+   "ions_z_km": [
+    2.75,
+    7.75,
+    12.25
+   ]
+  },
+  {
+   "positive_c": 550.7,
+   "negative_c": -534.9,
+   "max_nc_m3": 1.813,
+   "min_nc_m3": -3.817,
+   "species_max_abs_nc_m3": {
+    "cloud_water": 6.426,
+    "rain": 7.321,
+    "cloud_ice": 29.17,
+    "snow": 31.03,
+    "graupel": 51.33,
+    "small_ions": 0.7525,
+    "hail": 7.816
+   },
+   "main_negative": {
+    "z_km": 8.75,
+    "t_c": -32.23,
+    "charge_c": -70.81,
+    "density_nc_m3": -2.136,
+    "carried_c": {
+     "cloud_water": 25.76,
+     "rain": 0.001596,
+     "cloud_ice": -153.0,
+     "snow": -92.21,
+     "graupel": 127.3,
+     "small_ions": 0.03394,
+     "hail": 21.34
+    }
+   },
+   "upper_positive": {
+    "z_km": 9.25,
+    "t_c": -35.44,
+    "charge_c": 31.11,
+    "density_nc_m3": 1.729
+   },
+   "lower_positive": {
+    "z_km": 6.75,
+    "t_c": -18.68,
+    "charge_c": 38.79,
+    "density_nc_m3": 0.7591
+   },
+   "time_s": 3000.0,
+   "w_max_m_s": 37.05,
+   "dbz_max": 61.95,
+   "net_c": 67.51,
+   "ions_positive_c": 23.46,
+   "ions_negative_c": -21.32,
+   "ions_z_km": [
+    8.25,
+    9.75,
+    11.25
+   ]
+  },
+  {
+   "positive_c": 635.2,
+   "negative_c": -591.6,
+   "max_nc_m3": 2.967,
+   "min_nc_m3": -9.212,
+   "species_max_abs_nc_m3": {
+    "cloud_water": 8.451,
+    "rain": 5.585,
+    "cloud_ice": 36.78,
+    "snow": 33.79,
+    "graupel": 48.01,
+    "small_ions": 0.03728,
+    "hail": 29.72
+   },
+   "main_negative": {
+    "z_km": 8.75,
+    "t_c": -32.16,
+    "charge_c": -96.68,
+    "density_nc_m3": -3.68,
+    "carried_c": {
+     "cloud_water": 22.45,
+     "rain": 0.002198,
+     "cloud_ice": -144.7,
+     "snow": -141.5,
+     "graupel": 80.48,
+     "small_ions": 0.0009627,
+     "hail": 86.65
+    }
+   },
+   "upper_positive": {
+    "z_km": 9.25,
+    "t_c": -35.54,
+    "charge_c": 39.37,
+    "density_nc_m3": 1.045
+   },
+   "lower_positive": {
+    "z_km": 8.25,
+    "t_c": -27.44,
+    "charge_c": 48.91,
+    "density_nc_m3": 2.618
+   },
+   "time_s": 3300.0,
+   "w_max_m_s": 37.57,
+   "dbz_max": 64.79,
+   "net_c": 88.78,
+   "ions_positive_c": 5.919,
+   "ions_negative_c": -2.712,
+   "ions_z_km": [
+    3.75,
+    8.25,
+    14.25
+   ]
+  },
+  {
+   "positive_c": 572.7,
+   "negative_c": -498.4,
+   "max_nc_m3": 3.318,
+   "min_nc_m3": -4.106,
+   "species_max_abs_nc_m3": {
+    "cloud_water": 7.792,
+    "rain": 6.195,
+    "cloud_ice": 37.65,
+    "snow": 19.11,
+    "graupel": 23.76,
+    "small_ions": 1.961,
+    "hail": 43.91
+   },
+   "main_negative": {
+    "z_km": 8.75,
+    "t_c": -31.8,
+    "charge_c": -69.01,
+    "density_nc_m3": -4.106,
+    "carried_c": {
+     "cloud_water": 64.57,
+     "rain": 0.009087,
+     "cloud_ice": -224.1,
+     "snow": -151.5,
+     "graupel": 67.27,
+     "small_ions": 0.005286,
+     "hail": 174.6
+    }
+   },
+   "upper_positive": {
+    "z_km": 9.25,
+    "t_c": -35.47,
+    "charge_c": 37.29,
+    "density_nc_m3": 1.436
+   },
+   "lower_positive": {
+    "z_km": 8.25,
+    "t_c": -28.24,
+    "charge_c": 45.91,
+    "density_nc_m3": 1.456
+   },
+   "time_s": 3600.0,
+   "w_max_m_s": 36.83,
+   "dbz_max": 67.07,
+   "net_c": 128.8,
+   "ions_positive_c": 14.15,
+   "ions_negative_c": -10.99,
+   "ions_z_km": [
+    6.25,
+    9.25,
+    12.75
+   ]
+  },
+  {
+   "positive_c": 709.2,
+   "negative_c": -604.5,
+   "max_nc_m3": 2.917,
+   "min_nc_m3": -3.128,
+   "species_max_abs_nc_m3": {
+    "cloud_water": 13.8,
+    "rain": 7.213,
+    "cloud_ice": 49.92,
+    "snow": 28.91,
+    "graupel": 28.56,
+    "small_ions": 3.775,
+    "hail": 54.63
+   },
+   "main_negative": {
+    "z_km": 8.75,
+    "t_c": -32.62,
+    "charge_c": -80.38,
+    "density_nc_m3": -3.128,
+    "carried_c": {
+     "cloud_water": 76.65,
+     "rain": 0.03692,
+     "cloud_ice": -260.4,
+     "snow": -130.6,
+     "graupel": 34.59,
+     "small_ions": 19.08,
+     "hail": 180.2
+    }
+   },
+   "upper_positive": {
+    "z_km": 9.25,
+    "t_c": -35.05,
+    "charge_c": 37.29,
+    "density_nc_m3": 2.381
+   },
+   "lower_positive": {
+    "z_km": 6.75,
+    "t_c": -19.75,
+    "charge_c": 48.49,
+    "density_nc_m3": 0.5747
+   },
+   "time_s": 3900.0,
+   "w_max_m_s": 41.52,
+   "dbz_max": 67.51,
+   "net_c": 207.3,
+   "ions_positive_c": 132.7,
+   "ions_negative_c": -131.3,
+   "ions_z_km": [
+    4.75,
+    8.75,
+    11.75
+   ]
+  },
+  {
+   "positive_c": 1151.0,
+   "negative_c": -1043.0,
+   "max_nc_m3": 3.946,
+   "min_nc_m3": -6.112,
+   "species_max_abs_nc_m3": {
+    "cloud_water": 18.75,
+    "rain": 5.76,
+    "cloud_ice": 56.31,
+    "snow": 22.82,
+    "graupel": 24.06,
+    "small_ions": 1.525,
+    "hail": 67.82
+   },
+   "main_negative": {
+    "z_km": 8.75,
+    "t_c": -32.1,
+    "charge_c": -135.3,
+    "density_nc_m3": -6.112,
+    "carried_c": {
+     "cloud_water": 86.08,
+     "rain": 0.01597,
+     "cloud_ice": -391.9,
+     "snow": -146.6,
+     "graupel": -82.04,
+     "small_ions": -0.07755,
+     "hail": 399.3
+    }
+   },
+   "upper_positive": {
+    "z_km": 9.25,
+    "t_c": -35.2,
+    "charge_c": 79.65,
+    "density_nc_m3": 2.803
+   },
+   "lower_positive": {
+    "z_km": 8.25,
+    "t_c": -28.12,
+    "charge_c": 100.9,
+    "density_nc_m3": 3.946
+   },
+   "time_s": 4200.0,
+   "w_max_m_s": 46.61,
+   "dbz_max": 68.99,
+   "net_c": 240.3,
+   "ions_positive_c": 49.18,
+   "ions_negative_c": -43.32,
+   "ions_z_km": [
+    6.25,
+    8.25,
+    11.25
+   ]
+  },
+  {
+   "positive_c": 1076.0,
+   "negative_c": -969.8,
+   "max_nc_m3": 4.781,
+   "min_nc_m3": -6.454,
+   "species_max_abs_nc_m3": {
+    "cloud_water": 26.02,
+    "rain": 4.805,
+    "cloud_ice": 69.71,
+    "snow": 29.21,
+    "graupel": 24.34,
+    "small_ions": 4.907,
+    "hail": 89.92
+   },
+   "main_negative": {
+    "z_km": 8.75,
+    "t_c": -31.9,
+    "charge_c": -120.7,
+    "density_nc_m3": -6.454,
+    "carried_c": {
+     "cloud_water": 94.18,
+     "rain": 0.01849,
+     "cloud_ice": -510.9,
+     "snow": -109.1,
+     "graupel": -117.1,
+     "small_ions": 11.57,
+     "hail": 510.6
+    }
+   },
+   "upper_positive": {
+    "z_km": 9.25,
+    "t_c": -34.77,
+    "charge_c": 74.41,
+    "density_nc_m3": 4.781
+   },
+   "lower_positive": {
+    "z_km": 8.25,
+    "t_c": -27.53,
+    "charge_c": 87.58,
+    "density_nc_m3": 2.877
+   },
+   "time_s": 4500.0,
+   "w_max_m_s": 49.88,
+   "dbz_max": 70.28,
+   "net_c": 220.7,
+   "ions_positive_c": 108.6,
+   "ions_negative_c": -103.8,
+   "ions_z_km": [
+    4.25,
+    8.75,
+    12.25
+   ]
+  },
+  {
+   "positive_c": 1568.0,
+   "negative_c": -1471.0,
+   "max_nc_m3": 5.748,
+   "min_nc_m3": -8.528,
+   "species_max_abs_nc_m3": {
+    "cloud_water": 23.46,
+    "rain": 4.072,
+    "cloud_ice": 69.91,
+    "snow": 26.04,
+    "graupel": 25.91,
+    "small_ions": 0.1531,
+    "hail": 84.43
+   },
+   "main_negative": {
+    "z_km": 9.25,
+    "t_c": -33.12,
+    "charge_c": -203.6,
+    "density_nc_m3": -8.528,
+    "carried_c": {
+     "cloud_water": -55.09,
+     "rain": -0.0608,
+     "cloud_ice": -1758.0,
+     "snow": -321.8,
+     "graupel": -396.4,
+     "small_ions": -0.0116,
+     "hail": 2328.0
+    }
+   },
+   "upper_positive": {
+    "z_km": 11.25,
+    "t_c": -50.47,
+    "charge_c": 99.13,
+    "density_nc_m3": 1.648
+   },
+   "lower_positive": {
+    "z_km": 8.75,
+    "t_c": -29.55,
+    "charge_c": 202.7,
+    "density_nc_m3": 5.6
+   },
+   "time_s": 4800.0,
+   "w_max_m_s": 47.7,
+   "dbz_max": 70.93,
+   "net_c": 221.2,
+   "ions_positive_c": 19.92,
+   "ions_negative_c": -8.497,
+   "ions_z_km": [
+    5.25,
+    10.25,
+    14.75
+   ]
+  },
+  {
+   "positive_c": 1108.0,
+   "negative_c": -1056.0,
+   "max_nc_m3": 4.256,
+   "min_nc_m3": -6.225,
+   "species_max_abs_nc_m3": {
+    "cloud_water": 23.82,
+    "rain": 5.526,
+    "cloud_ice": 69.89,
+    "snow": 29.32,
+    "graupel": 28.94,
+    "small_ions": 2.868,
+    "hail": 78.22
+   },
+   "main_negative": {
+    "z_km": 9.25,
+    "t_c": -33.89,
+    "charge_c": -124.8,
+    "density_nc_m3": -6.225,
+    "carried_c": {
+     "cloud_water": -1.688,
+     "rain": -0.02136,
+     "cloud_ice": -1274.0,
+     "snow": -258.6,
+     "graupel": -339.3,
+     "small_ions": 15.37,
+     "hail": 1734.0
+    }
+   },
+   "upper_positive": {
+    "z_km": 11.25,
+    "t_c": -50.61,
+    "charge_c": 75.92,
+    "density_nc_m3": 0.925
+   },
+   "lower_positive": {
+    "z_km": 8.75,
+    "t_c": -30.23,
+    "charge_c": 100.7,
+    "density_nc_m3": 3.23
+   },
+   "time_s": 5100.0,
+   "w_max_m_s": 48.23,
+   "dbz_max": 72.23,
+   "net_c": 201.6,
+   "ions_positive_c": 71.56,
+   "ions_negative_c": -66.22,
+   "ions_z_km": [
+    5.75,
+    8.75,
+    12.75
+   ]
+  },
+  {
+   "positive_c": 1464.0,
+   "negative_c": -1492.0,
+   "max_nc_m3": 5.674,
+   "min_nc_m3": -6.718,
+   "species_max_abs_nc_m3": {
+    "cloud_water": 29.56,
+    "rain": 8.238,
+    "cloud_ice": 78.03,
+    "snow": 27.86,
+    "graupel": 32.58,
+    "small_ions": 0.1395,
+    "hail": 100.8
+   },
+   "main_negative": {
+    "z_km": 8.75,
+    "t_c": -31.79,
+    "charge_c": -180.5,
+    "density_nc_m3": -6.718,
+    "carried_c": {
+     "cloud_water": 101.2,
+     "rain": 0.02318,
+     "cloud_ice": -429.8,
+     "snow": -245.5,
+     "graupel": -287.5,
+     "small_ions": 0.1918,
+     "hail": 680.9
+    }
+   },
+   "upper_positive": {
+    "z_km": 9.25,
+    "t_c": -33.43,
+    "charge_c": 160.5,
+    "density_nc_m3": 5.674
+   },
+   "lower_positive": {
+    "z_km": 8.25,
+    "t_c": -27.04,
+    "charge_c": 122.5,
+    "density_nc_m3": 3.972
+   },
+   "time_s": 5400.0,
+   "w_max_m_s": 48.84,
+   "dbz_max": 71.74,
+   "net_c": 140.8,
+   "ions_positive_c": 20.22,
+   "ions_negative_c": -8.308,
+   "ions_z_km": [
+    5.25,
+    10.25,
+    14.75
+   ]
+  },
+  {
+   "positive_c": 1260.0,
+   "negative_c": -1369.0,
+   "max_nc_m3": 4.685,
+   "min_nc_m3": -6.076,
+   "species_max_abs_nc_m3": {
+    "cloud_water": 21.46,
+    "rain": 8.047,
+    "cloud_ice": 66.42,
+    "snow": 29.58,
+    "graupel": 35.24,
+    "small_ions": 0.06831,
+    "hail": 82.1
+   },
+   "main_negative": {
+    "z_km": 9.25,
+    "t_c": -34.11,
+    "charge_c": -185.7,
+    "density_nc_m3": -6.076,
+    "carried_c": {
+     "cloud_water": 55.31,
+     "rain": -0.01641,
+     "cloud_ice": -1262.0,
+     "snow": -493.6,
+     "graupel": -609.3,
+     "small_ions": 0.15,
+     "hail": 2124.0
+    }
+   },
+   "upper_positive": {
+    "z_km": 11.25,
+    "t_c": -50.56,
+    "charge_c": 84.27,
+    "density_nc_m3": 1.364
+   },
+   "lower_positive": {
+    "z_km": 8.75,
+    "t_c": -29.57,
+    "charge_c": 133.9,
+    "density_nc_m3": 4.685
+   },
+   "time_s": 5700.0,
+   "w_max_m_s": 49.56,
+   "dbz_max": 72.91,
+   "net_c": 87.68,
+   "ions_positive_c": 17.67,
+   "ions_negative_c": -8.059,
+   "ions_z_km": [
+    4.75,
+    9.25,
+    14.75
+   ]
+  },
+  {
+   "positive_c": 1691.0,
+   "negative_c": -1876.0,
+   "max_nc_m3": 5.268,
+   "min_nc_m3": -14.53,
+   "species_max_abs_nc_m3": {
+    "cloud_water": 24.64,
+    "rain": 10.15,
+    "cloud_ice": 70.9,
+    "snow": 31.19,
+    "graupel": 38.12,
+    "small_ions": 3.126,
+    "hail": 71.31
+   },
+   "main_negative": {
+    "z_km": 8.75,
+    "t_c": -31.66,
+    "charge_c": -227.7,
+    "density_nc_m3": -14.53,
+    "carried_c": {
+     "cloud_water": 150.2,
+     "rain": 0.06578,
+     "cloud_ice": -592.8,
+     "snow": -259.6,
+     "graupel": -368.2,
+     "small_ions": 0.1952,
+     "hail": 842.4
+    }
+   },
+   "upper_positive": {
+    "z_km": 9.25,
+    "t_c": -33.87,
+    "charge_c": 95.39,
+    "density_nc_m3": 4.201
+   },
+   "lower_positive": {
+    "z_km": 8.25,
+    "t_c": -26.9,
+    "charge_c": 130.7,
+    "density_nc_m3": 2.55
+   },
+   "time_s": 6000.0,
+   "w_max_m_s": 47.77,
+   "dbz_max": 72.99,
+   "net_c": 101.2,
+   "ions_positive_c": 44.98,
+   "ions_negative_c": -34.42,
+   "ions_z_km": [
+    3.75,
+    7.75,
+    13.75
+   ]
+  },
+  {
+   "positive_c": 2388.0,
+   "negative_c": -2635.0,
+   "max_nc_m3": 9.668,
+   "min_nc_m3": -19.65,
+   "species_max_abs_nc_m3": {
+    "cloud_water": 22.68,
+    "rain": 10.77,
+    "cloud_ice": 78.58,
+    "snow": 26.57,
+    "graupel": 31.21,
+    "small_ions": 8.725,
+    "hail": 90.59
+   },
+   "main_negative": {
+    "z_km": 9.25,
+    "t_c": -33.61,
+    "charge_c": -253.1,
+    "density_nc_m3": -11.64,
+    "carried_c": {
+     "cloud_water": -122.0,
+     "rain": -0.03931,
+     "cloud_ice": -1277.0,
+     "snow": -359.0,
+     "graupel": -394.3,
+     "small_ions": 47.7,
+     "hail": 1851.0
+    }
+   },
+   "upper_positive": {
+    "z_km": 9.75,
+    "t_c": -36.83,
+    "charge_c": 167.6,
+    "density_nc_m3": 9.631
+   },
+   "lower_positive": {
+    "z_km": 8.75,
+    "t_c": -28.79,
+    "charge_c": 265.3,
+    "density_nc_m3": 9.668
+   },
+   "time_s": 6300.0,
+   "w_max_m_s": 50.43,
+   "dbz_max": 73.66,
+   "net_c": -26.32,
+   "ions_positive_c": 221.5,
+   "ions_negative_c": -194.1,
+   "ions_z_km": [
+    4.75,
+    8.25,
+    9.25
+   ]
+  },
+  {
+   "positive_c": 1757.0,
+   "negative_c": -2131.0,
+   "max_nc_m3": 5.883,
+   "min_nc_m3": -9.922,
+   "species_max_abs_nc_m3": {
+    "cloud_water": 27.41,
+    "rain": 9.517,
+    "cloud_ice": 77.01,
+    "snow": 22.69,
+    "graupel": 29.58,
+    "small_ions": 0.07635,
+    "hail": 85.83
+   },
+   "main_negative": {
+    "z_km": 8.75,
+    "t_c": -31.64,
+    "charge_c": -238.4,
+    "density_nc_m3": -7.972,
+    "carried_c": {
+     "cloud_water": 121.1,
+     "rain": 0.04467,
+     "cloud_ice": -651.9,
+     "snow": -275.4,
+     "graupel": -424.2,
+     "small_ions": 0.1377,
+     "hail": 991.8
+    }
+   },
+   "upper_positive": {
+    "z_km": 9.25,
+    "t_c": -33.01,
+    "charge_c": 190.8,
+    "density_nc_m3": 5.883
+   },
+   "lower_positive": {
+    "z_km": 8.25,
+    "t_c": -27.07,
+    "charge_c": 132.8,
+    "density_nc_m3": 2.873
+   },
+   "time_s": 6600.0,
+   "w_max_m_s": 48.64,
+   "dbz_max": 72.54,
+   "net_c": -66.1,
+   "ions_positive_c": 25.26,
+   "ions_negative_c": -8.149,
+   "ions_z_km": [
+    4.75,
+    12.75,
+    15.25
+   ]
+  },
+  {
+   "positive_c": 1744.0,
+   "negative_c": -2042.0,
+   "max_nc_m3": 5.165,
+   "min_nc_m3": -6.16,
+   "species_max_abs_nc_m3": {
+    "cloud_water": 24.06,
+    "rain": 11.3,
+    "cloud_ice": 56.09,
+    "snow": 26.8,
+    "graupel": 37.45,
+    "small_ions": 2.695,
+    "hail": 76.08
+   },
+   "main_negative": {
+    "z_km": 8.75,
+    "t_c": -31.95,
+    "charge_c": -150.0,
+    "density_nc_m3": -6.16,
+    "carried_c": {
+     "cloud_water": 125.2,
+     "rain": 0.03186,
+     "cloud_ice": -168.9,
+     "snow": -168.7,
+     "graupel": -449.2,
+     "small_ions": 0.6335,
+     "hail": 510.9
+    }
+   },
+   "upper_positive": {
+    "z_km": 9.25,
+    "t_c": -34.1,
+    "charge_c": 116.5,
+    "density_nc_m3": 5.165
+   },
+   "lower_positive": {
+    "z_km": 4.75,
+    "t_c": -4.833,
+    "charge_c": 96.41,
+    "density_nc_m3": 2.035
+   },
+   "time_s": 6900.0,
+   "w_max_m_s": 49.14,
+   "dbz_max": 70.66,
+   "net_c": -133.7,
+   "ions_positive_c": 117.4,
+   "ions_negative_c": -104.3,
+   "ions_z_km": [
+    6.75,
+    9.25,
+    13.25
+   ]
+  },
+  {
+   "positive_c": 1622.0,
+   "negative_c": -1828.0,
+   "max_nc_m3": 2.915,
+   "min_nc_m3": -3.854,
+   "species_max_abs_nc_m3": {
+    "cloud_water": 21.89,
+    "rain": 8.66,
+    "cloud_ice": 62.58,
+    "snow": 30.43,
+    "graupel": 66.09,
+    "small_ions": 2.101,
+    "hail": 80.97
+   },
+   "main_negative": {
+    "z_km": 9.25,
+    "t_c": -34.87,
+    "charge_c": -166.6,
+    "density_nc_m3": -3.854,
+    "carried_c": {
+     "cloud_water": 36.87,
+     "rain": 0.06226,
+     "cloud_ice": -525.4,
+     "snow": -422.9,
+     "graupel": -395.4,
+     "small_ions": 2.742,
+     "hail": 1137.0
+    }
+   },
+   "upper_positive": {
+    "z_km": 9.75,
+    "t_c": -37.83,
+    "charge_c": 93.24,
+    "density_nc_m3": 2.261
+   },
+   "lower_positive": {
+    "z_km": 7.25,
+    "t_c": -21.83,
+    "charge_c": 111.9,
+    "density_nc_m3": 1.002
+   },
+   "time_s": 7200.0,
+   "w_max_m_s": 51.59,
+   "dbz_max": 70.64,
+   "net_c": -166.6,
+   "ions_positive_c": 60.67,
+   "ions_negative_c": -44.73,
+   "ions_z_km": [
+    6.25,
+    9.25,
+    13.75
+   ]
+  }
+ ],
+ "ice_cap": null,
+ "ground": null
+}

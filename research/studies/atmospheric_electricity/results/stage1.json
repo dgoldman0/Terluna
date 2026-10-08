@@ -1,0 +1,1091 @@
+{
+ "schema": "terluna.research.atmospheric-electricity-stage1/1",
+ "solar_minimum": {
+  "box_0e": {
+   "zone": {
+    "height_km": 33.77899871959028,
+    "pressure_hpa": 621.6396113956467,
+    "air_density_kg_m3": 0.8091353576001464,
+    "cloud_water_g_m3": 0.13758633619901228
+   },
+   "cloud_s_m": 9.223902569981043e-17,
+   "clear_air_s_m": 1.3085209905209439e-14,
+   "relaxation_in_cloud_h": 26.66438197939163,
+   "threshold_kv_m": 177.63951725884297,
+   "critical_current_na_m2": 0.016385295997740336,
+   "zone_share_of_columns": 0.003,
+   "laws": {
+    "saunders_peck": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.20788175981182172,
+      "share_of_all_columns_above_critical": 0.0006236452794354651,
+      "current_p90_na_m2": 0.03612,
+      "current_max_na_m2": 0.318,
+      "hours_to_breakdown_p90": 16.117766130681918,
+      "hours_to_breakdown_max": 1.4105723247480293
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.5489559370610722,
+      "share_of_all_columns_above_critical": 0.0016468678111832165,
+      "current_p90_na_m2": 1.739,
+      "current_max_na_m2": 17.95,
+      "hours_to_breakdown_p90": 0.2524296270508977,
+      "hours_to_breakdown_max": 0.024351160009857646
+     }
+    },
+    "takahashi": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.6648216930281011,
+      "share_of_all_columns_above_critical": 0.0019944650790843033,
+      "current_p90_na_m2": 6.946,
+      "current_max_na_m2": 92.63,
+      "hours_to_breakdown_p90": 0.06297436239477223,
+      "hours_to_breakdown_max": 0.004717072630726406
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.7279556629859528,
+      "share_of_all_columns_above_critical": 0.0021838669889578583,
+      "current_p90_na_m2": 20.86,
+      "current_max_na_m2": 322.0,
+      "hours_to_breakdown_p90": 0.020952803104079,
+      "hours_to_breakdown_max": 0.001356878595810889
+     }
+    },
+    "low_speed_kumar": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.6168913907730862,
+      "share_of_all_columns_above_critical": 0.0018506741723192585,
+      "current_p90_na_m2": 1.08,
+      "current_max_na_m2": 15.18,
+      "hours_to_breakdown_p90": 0.40764070132052665,
+      "hours_to_breakdown_max": 0.02879708551909818
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.7182144521421058,
+      "share_of_all_columns_above_critical": 0.002154643356426317,
+      "current_p90_na_m2": 2.432,
+      "current_max_na_m2": 34.22,
+      "hours_to_breakdown_p90": 0.18025585030117416,
+      "hours_to_breakdown_max": 0.012770555942436819
+     }
+    },
+    "low_speed_avila": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.13135983483380215,
+      "share_of_all_columns_above_critical": 0.00039407950450140645,
+      "current_p90_na_m2": 0.02391,
+      "current_max_na_m2": 0.3324,
+      "hours_to_breakdown_p90": 30.826833510432294,
+      "hours_to_breakdown_max": 1.347893010309149
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.20273741366617481,
+      "share_of_all_columns_above_critical": 0.0006082122409985244,
+      "current_p90_na_m2": 0.05388,
+      "current_max_na_m2": 0.7493,
+      "hours_to_breakdown_p90": 9.6674291351194,
+      "hours_to_breakdown_max": 0.589552361911794
+     }
+    }
+   }
+  },
+  "box_0e_small": {
+   "zone": {
+    "height_km": 34.10927628339141,
+    "pressure_hpa": 617.6483466666667,
+    "air_density_kg_m3": 0.8050862253193961,
+    "cloud_water_g_m3": 0.1420430662020906
+   },
+   "cloud_s_m": 9.159804111073469e-17,
+   "clear_air_s_m": 1.3179594810939586e-14,
+   "relaxation_in_cloud_h": 26.850973938332725,
+   "threshold_kv_m": 176.75056104538194,
+   "critical_current_na_m2": 0.016190005156980315,
+   "zone_share_of_columns": 0.003,
+   "laws": {
+    "saunders_peck": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.21480384983224654,
+      "share_of_all_columns_above_critical": 0.0006444115494967397,
+      "current_p90_na_m2": 0.03286,
+      "current_max_na_m2": 0.2454,
+      "hours_to_breakdown_p90": 18.222298680797802,
+      "hours_to_breakdown_max": 1.8326042345527973
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.6065831479771002,
+      "share_of_all_columns_above_critical": 0.0018197494439313006,
+      "current_p90_na_m2": 1.73,
+      "current_max_na_m2": 13.21,
+      "hours_to_breakdown_p90": 0.25246492101207985,
+      "hours_to_breakdown_max": 0.03292838882703876
+     }
+    },
+    "takahashi": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.7085410768554684,
+      "share_of_all_columns_above_critical": 0.0021256232305664055,
+      "current_p90_na_m2": 6.918,
+      "current_max_na_m2": 62.51,
+      "hours_to_breakdown_p90": 0.0629122405542271,
+      "hours_to_breakdown_max": 0.006955266547159524
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.7692001185681203,
+      "share_of_all_columns_above_critical": 0.002307600355704361,
+      "current_p90_na_m2": 20.76,
+      "current_max_na_m2": 219.8,
+      "hours_to_breakdown_p90": 0.020948314317902693,
+      "hours_to_breakdown_max": 0.0019778590423205626
+     }
+    },
+    "low_speed_kumar": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.7019212235585804,
+      "share_of_all_columns_above_critical": 0.0021057636706757416,
+      "current_p90_na_m2": 0.8191,
+      "current_max_na_m2": 10.03,
+      "hours_to_breakdown_p90": 0.5360408944892004,
+      "hours_to_breakdown_max": 0.04337673338394704
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.7784825457085331,
+      "share_of_all_columns_above_critical": 0.0023354476371255993,
+      "current_p90_na_m2": 1.842,
+      "current_max_na_m2": 22.6,
+      "hours_to_breakdown_p90": 0.2370462104278529,
+      "hours_to_breakdown_max": 0.019242176575434016
+     }
+    },
+    "low_speed_avila": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.11362184753687446,
+      "share_of_all_columns_above_critical": 0.0003408655426106234,
+      "current_p90_na_m2": 0.01867,
+      "current_max_na_m2": 0.218,
+      "hours_to_breakdown_p90": 54.20302670404621,
+      "hours_to_breakdown_max": 2.0720474393460577
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.18153413677636634,
+      "share_of_all_columns_above_critical": 0.0005446024103290991,
+      "current_p90_na_m2": 0.04211,
+      "current_max_na_m2": 0.4917,
+      "hours_to_breakdown_p90": 13.029987418641033,
+      "hours_to_breakdown_max": 0.8989940484771617
+     }
+    }
+   }
+  },
+  "box_0e_small_earth_fall": {
+   "zone": {
+    "height_km": 34.67115959343794,
+    "pressure_hpa": 611.8915741797432,
+    "air_density_kg_m3": 0.79936697574893,
+    "cloud_water_g_m3": 0.1433354136947218
+   },
+   "cloud_s_m": 9.181152673592954e-17,
+   "clear_air_s_m": 1.33201772959461e-14,
+   "relaxation_in_cloud_h": 26.788538455968915,
+   "threshold_kv_m": 175.4949432760711,
+   "critical_current_na_m2": 0.01611245867661144,
+   "zone_share_of_columns": 0.001,
+   "laws": {
+    "saunders_peck": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.5473957472638808,
+      "share_of_all_columns_above_critical": 0.0005473957472638809,
+      "current_p90_na_m2": 0.5802,
+      "current_max_na_m2": 4.298,
+      "hours_to_breakdown_p90": 0.7544567826100711,
+      "hours_to_breakdown_max": 0.10061430856763644
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.5473957472638808,
+      "share_of_all_columns_above_critical": 0.0005473957472638809,
+      "current_p90_na_m2": 0.5802,
+      "current_max_na_m2": 4.298,
+      "hours_to_breakdown_p90": 0.7544567826100711,
+      "hours_to_breakdown_max": 0.10061430856763644
+     }
+    },
+    "takahashi": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.7579027395696915,
+      "share_of_all_columns_above_critical": 0.0007579027395696915,
+      "current_p90_na_m2": 9.162,
+      "current_max_na_m2": 128.7,
+      "hours_to_breakdown_p90": 0.047152281151310003,
+      "hours_to_breakdown_max": 0.0033539723373190973
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.7579027395696915,
+      "share_of_all_columns_above_critical": 0.0007579027395696915,
+      "current_p90_na_m2": 9.162,
+      "current_max_na_m2": 128.7,
+      "hours_to_breakdown_p90": 0.047152281151310003,
+      "hours_to_breakdown_max": 0.0033539723373190973
+     }
+    },
+    "low_speed_kumar": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.6771936828764732,
+      "share_of_all_columns_above_critical": 0.0006771936828764732,
+      "current_p90_na_m2": 1.083,
+      "current_max_na_m2": 18.41,
+      "hours_to_breakdown_p90": 0.40154407350495214,
+      "hours_to_breakdown_max": 0.02345563337403914
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.6771936828764732,
+      "share_of_all_columns_above_critical": 0.0006771936828764732,
+      "current_p90_na_m2": 1.083,
+      "current_max_na_m2": 18.41,
+      "hours_to_breakdown_p90": 0.40154407350495214,
+      "hours_to_breakdown_max": 0.02345563337403914
+     }
+    },
+    "low_speed_avila": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.12774313232506804,
+      "share_of_all_columns_above_critical": 0.00012774313232506804,
+      "current_p90_na_m2": 0.02077,
+      "current_max_na_m2": 0.455,
+      "hours_to_breakdown_p90": 40.0494527856218,
+      "hours_to_breakdown_max": 0.9658395589148067
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.12774313232506804,
+      "share_of_all_columns_above_critical": 0.00012774313232506804,
+      "current_p90_na_m2": 0.02077,
+      "current_max_na_m2": 0.455,
+      "hours_to_breakdown_p90": 40.0494527856218,
+      "hours_to_breakdown_max": 0.9658395589148067
+     }
+    }
+   }
+  },
+  "ring_equator": {
+   "zone": {
+    "height_km": 30.91807804702063,
+    "pressure_hpa": 657.6789100475015,
+    "air_density_kg_m3": 0.8507326278235423,
+    "cloud_water_g_m3": 0.10861736115286715
+   },
+   "cloud_s_m": 9.669147527502634e-17,
+   "clear_air_s_m": 1.2278152871387788e-14,
+   "relaxation_in_cloud_h": 25.436540374122416,
+   "threshold_kv_m": 186.77188174194507,
+   "critical_current_na_m2": 0.018059248785521426,
+   "zone_share_of_columns": 0.009,
+   "laws": {
+    "saunders_peck": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.02372126547346007,
+      "share_of_all_columns_above_critical": 0.00021349138926114063,
+      "current_p90_na_m2": 0.001032,
+      "current_max_na_m2": 0.2109,
+      "hours_to_breakdown_p90": null,
+      "hours_to_breakdown_max": 2.2770628765240994
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.19442879698008833,
+      "share_of_all_columns_above_critical": 0.0017498591728207949,
+      "current_p90_na_m2": 0.05969,
+      "current_max_na_m2": 11.42,
+      "hours_to_breakdown_p90": 9.16543148595775,
+      "hours_to_breakdown_max": 0.04025642794777831
+     }
+    },
+    "takahashi": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.2814076022543201,
+      "share_of_all_columns_above_critical": 0.0025326684202888806,
+      "current_p90_na_m2": 0.2113,
+      "current_max_na_m2": 44.65,
+      "hours_to_breakdown_p90": 2.2725538695194496,
+      "hours_to_breakdown_max": 0.010290206804622774
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.37547714240978414,
+      "share_of_all_columns_above_critical": 0.003379294281688057,
+      "current_p90_na_m2": 0.5134,
+      "current_max_na_m2": 159.3,
+      "hours_to_breakdown_p90": 0.910866139983322,
+      "hours_to_breakdown_max": 0.0028838094856741213
+     }
+    },
+    "low_speed_kumar": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.148523181932605,
+      "share_of_all_columns_above_critical": 0.001336708637393445,
+      "current_p90_na_m2": 0.04376,
+      "current_max_na_m2": 4.743,
+      "hours_to_breakdown_p90": 13.537325171999319,
+      "hours_to_breakdown_max": 0.09703596167746421
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.21723401538381273,
+      "share_of_all_columns_above_critical": 0.0019551061384543143,
+      "current_p90_na_m2": 0.09825,
+      "current_max_na_m2": 10.64,
+      "hours_to_breakdown_p90": 5.166341034778093,
+      "hours_to_breakdown_max": 0.043210065035985665
+     }
+    },
+    "low_speed_avila": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.021294669169054436,
+      "share_of_all_columns_above_critical": 0.0001916520225214899,
+      "current_p90_na_m2": 0.000963,
+      "current_max_na_m2": 0.1236,
+      "hours_to_breakdown_p90": null,
+      "hours_to_breakdown_max": 4.017788017346978
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.03819794083880646,
+      "share_of_all_columns_above_critical": 0.00034378146754925813,
+      "current_p90_na_m2": 0.002161,
+      "current_max_na_m2": 0.2773,
+      "hours_to_breakdown_p90": null,
+      "hours_to_breakdown_max": 1.712967375687172
+     }
+    }
+   }
+  },
+  "ring_70_45e": {
+   "zone": {
+    "height_km": 30.593930005577242,
+    "pressure_hpa": 660.0474974902398,
+    "air_density_kg_m3": 0.8547855549358617,
+    "cloud_water_g_m3": 0.09906664807585051
+   },
+   "cloud_s_m": 9.950879294982744e-17,
+   "clear_air_s_m": 1.2228326867203697e-14,
+   "relaxation_in_cloud_h": 24.71637472184745,
+   "threshold_kv_m": 187.6616710818314,
+   "critical_current_na_m2": 0.01867398637230058,
+   "zone_share_of_columns": 0.001,
+   "laws": {
+    "saunders_peck": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.012682462581821707,
+      "share_of_all_columns_above_critical": 1.2682462581821707e-05,
+      "current_p90_na_m2": 0.00162,
+      "current_max_na_m2": 0.04115,
+      "hours_to_breakdown_p90": null,
+      "hours_to_breakdown_max": 14.947851640969494
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.2374339393122532,
+      "share_of_all_columns_above_critical": 0.00023743393931225322,
+      "current_p90_na_m2": 0.09383,
+      "current_max_na_m2": 2.384,
+      "hours_to_breakdown_p90": 5.485020794940854,
+      "hours_to_breakdown_max": 0.19436678887372486
+     }
+    },
+    "takahashi": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.33861310533630645,
+      "share_of_all_columns_above_critical": 0.00033861310533630644,
+      "current_p90_na_m2": 0.3341,
+      "current_max_na_m2": 19.71,
+      "hours_to_breakdown_p90": 1.4215919523716916,
+      "hours_to_breakdown_max": 0.023428311987628462
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.4480895191366024,
+      "share_of_all_columns_above_critical": 0.0004480895191366024,
+      "current_p90_na_m2": 0.8645,
+      "current_max_na_m2": 60.91,
+      "hours_to_breakdown_p90": 0.5397469056793571,
+      "hours_to_breakdown_max": 0.007578788564140732
+     }
+    },
+    "low_speed_kumar": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.23989124944736437,
+      "share_of_all_columns_above_critical": 0.00023989124944736437,
+      "current_p90_na_m2": 0.05141,
+      "current_max_na_m2": 2.255,
+      "hours_to_breakdown_p90": 11.155906273873546,
+      "hours_to_breakdown_max": 0.2055321314959421
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.295769800547858,
+      "share_of_all_columns_above_critical": 0.000295769800547858,
+      "current_p90_na_m2": 0.1159,
+      "current_max_na_m2": 5.069,
+      "hours_to_breakdown_p90": 4.342406151638466,
+      "hours_to_breakdown_max": 0.09122223516383976
+     }
+    },
+    "low_speed_avila": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.011627906976744186,
+      "share_of_all_columns_above_critical": 1.1627906976744185e-05,
+      "current_p90_na_m2": 0.001151,
+      "current_max_na_m2": 0.05881,
+      "hours_to_breakdown_p90": null,
+      "hours_to_breakdown_max": 9.442591443321161
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.02226804476575672,
+      "share_of_all_columns_above_critical": 2.226804476575672e-05,
+      "current_p90_na_m2": 0.002588,
+      "current_max_na_m2": 0.1322,
+      "hours_to_breakdown_p90": null,
+      "hours_to_breakdown_max": 3.7639064753108373
+     }
+    }
+   }
+  },
+  "ring_70_135e": {
+   "zone": {
+    "height_km": 30.31658150302742,
+    "pressure_hpa": 663.6342713997387,
+    "air_density_kg_m3": 0.8584383236376586,
+    "cloud_water_g_m3": 0.10168229846847915
+   },
+   "cloud_s_m": 9.835657683991633e-17,
+   "clear_air_s_m": 1.2153259550034269e-14,
+   "relaxation_in_cloud_h": 25.005919214428395,
+   "threshold_kv_m": 188.46360868442227,
+   "critical_current_na_m2": 0.0185366354090973,
+   "zone_share_of_columns": 0.002,
+   "laws": {
+    "saunders_peck": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.017624043022625165,
+      "share_of_all_columns_above_critical": 3.524808604525033e-05,
+      "current_p90_na_m2": 0.00122,
+      "current_max_na_m2": 0.07646,
+      "hours_to_breakdown_p90": null,
+      "hours_to_breakdown_max": 6.942815740622453
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.18888304877746656,
+      "share_of_all_columns_above_critical": 0.00037776609755493313,
+      "current_p90_na_m2": 0.07625,
+      "current_max_na_m2": 3.766,
+      "hours_to_breakdown_p90": 6.9648648399762685,
+      "hours_to_breakdown_max": 0.12338558811141842
+     }
+    },
+    "takahashi": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.29311520881415365,
+      "share_of_all_columns_above_critical": 0.0005862304176283073,
+      "current_p90_na_m2": 0.1924,
+      "current_max_na_m2": 25.13,
+      "hours_to_breakdown_p90": 2.533269868417358,
+      "hours_to_breakdown_max": 0.018451915909215185
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.39113264214097954,
+      "share_of_all_columns_above_critical": 0.0007822652842819591,
+      "current_p90_na_m2": 0.4944,
+      "current_max_na_m2": 82.26,
+      "hours_to_breakdown_p90": 0.9555797551359084,
+      "hours_to_breakdown_max": 0.005635519587832415
+     }
+    },
+    "low_speed_kumar": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.12855329655392855,
+      "share_of_all_columns_above_critical": 0.0002571065931078571,
+      "current_p90_na_m2": 0.03399,
+      "current_max_na_m2": 1.46,
+      "hours_to_breakdown_p90": 19.710656039264123,
+      "hours_to_breakdown_max": 0.3195159516664263
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.1841342926569798,
+      "share_of_all_columns_above_critical": 0.0003682685853139596,
+      "current_p90_na_m2": 0.0763,
+      "current_max_na_m2": 3.286,
+      "hours_to_breakdown_p90": 6.959602279441584,
+      "hours_to_breakdown_max": 0.1414601159477029
+     }
+    },
+    "low_speed_avila": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.013308528945002703,
+      "share_of_all_columns_above_critical": 2.6617057890005407e-05,
+      "current_p90_na_m2": 0.0007503,
+      "current_max_na_m2": 0.03583,
+      "hours_to_breakdown_p90": null,
+      "hours_to_breakdown_max": 18.21587825279437
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.022298083112672375,
+      "share_of_all_columns_above_critical": 4.459616622534475e-05,
+      "current_p90_na_m2": 0.001685,
+      "current_max_na_m2": 0.08068,
+      "hours_to_breakdown_p90": null,
+      "hours_to_breakdown_max": 6.527711822571523
+     }
+    }
+   }
+  }
+ },
+ "solar_maximum": {
+  "box_0e": {
+   "zone": {
+    "height_km": 33.77899871959028,
+    "pressure_hpa": 621.6396113956467,
+    "air_density_kg_m3": 0.8091353576001464,
+    "cloud_water_g_m3": 0.13758633619901228
+   },
+   "cloud_s_m": 9.223902527230762e-17,
+   "clear_air_s_m": 1.3085209874884663e-14,
+   "relaxation_in_cloud_h": 26.664382102973796,
+   "threshold_kv_m": 177.63951725884297,
+   "critical_current_na_m2": 0.016385295921798944,
+   "zone_share_of_columns": 0.003,
+   "laws": {
+    "saunders_peck": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.20788176033571074,
+      "share_of_all_columns_above_critical": 0.0006236452810071322,
+      "current_p90_na_m2": 0.03612,
+      "current_max_na_m2": 0.318,
+      "hours_to_breakdown_p90": 16.117766102775796,
+      "hours_to_breakdown_max": 1.4105723245720099
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.5489559374541924,
+      "share_of_all_columns_above_critical": 0.0016468678123625772,
+      "current_p90_na_m2": 1.739,
+      "current_max_na_m2": 17.95,
+      "hours_to_breakdown_p90": 0.2524296270453394,
+      "hours_to_breakdown_max": 0.02435116000981375
+     }
+    },
+    "takahashi": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.6648216933558914,
+      "share_of_all_columns_above_critical": 0.0019944650800676742,
+      "current_p90_na_m2": 6.946,
+      "current_max_na_m2": 92.63,
+      "hours_to_breakdown_p90": 0.06297436239442426,
+      "hours_to_breakdown_max": 0.004717072630721625
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.7279556633369014,
+      "share_of_all_columns_above_critical": 0.0021838669900107045,
+      "current_p90_na_m2": 20.86,
+      "current_max_na_m2": 322.0,
+      "hours_to_breakdown_p90": 0.0209528031040424,
+      "hours_to_breakdown_max": 0.0013568785958122081
+     }
+    },
+    "low_speed_kumar": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.6168913914080505,
+      "share_of_all_columns_above_critical": 0.0018506741742241515,
+      "current_p90_na_m2": 1.08,
+      "current_max_na_m2": 15.18,
+      "hours_to_breakdown_p90": 0.40764070130600927,
+      "hours_to_breakdown_max": 0.028797085519026065
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.718214452584041,
+      "share_of_all_columns_above_critical": 0.002154643357752123,
+      "current_p90_na_m2": 2.432,
+      "current_max_na_m2": 34.22,
+      "hours_to_breakdown_p90": 0.18025585029835112,
+      "hours_to_breakdown_max": 0.012770555942422731
+     }
+    },
+    "low_speed_avila": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.13135983525396377,
+      "share_of_all_columns_above_critical": 0.00039407950576189133,
+      "current_p90_na_m2": 0.02391,
+      "current_max_na_m2": 0.3324,
+      "hours_to_breakdown_p90": 30.82683338420198,
+      "hours_to_breakdown_max": 1.3478930101485547
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.20273741413885665,
+      "share_of_all_columns_above_critical": 0.00060821224241657,
+      "current_p90_na_m2": 0.05388,
+      "current_max_na_m2": 0.7493,
+      "hours_to_breakdown_p90": 9.66742912591954,
+      "hours_to_breakdown_max": 0.5895523618813608
+     }
+    }
+   }
+  },
+  "box_0e_small": {
+   "zone": {
+    "height_km": 34.10927628339141,
+    "pressure_hpa": 617.6483466666667,
+    "air_density_kg_m3": 0.8050862253193961,
+    "cloud_water_g_m3": 0.1420430662020906
+   },
+   "cloud_s_m": 9.15980406366351e-17,
+   "clear_air_s_m": 1.3179594776829916e-14,
+   "relaxation_in_cloud_h": 26.850974077309886,
+   "threshold_kv_m": 176.75056104538194,
+   "critical_current_na_m2": 0.016190005073182946,
+   "zone_share_of_columns": 0.003,
+   "laws": {
+    "saunders_peck": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.21480385058153054,
+      "share_of_all_columns_above_critical": 0.0006444115517445916,
+      "current_p90_na_m2": 0.03286,
+      "current_max_na_m2": 0.2454,
+      "hours_to_breakdown_p90": 18.222298640138554,
+      "hours_to_breakdown_max": 1.8326042342216142
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.6065831482348156,
+      "share_of_all_columns_above_critical": 0.001819749444704447,
+      "current_p90_na_m2": 1.73,
+      "current_max_na_m2": 13.21,
+      "hours_to_breakdown_p90": 0.2524649210059196,
+      "hours_to_breakdown_max": 0.032928388826938076
+     }
+    },
+    "takahashi": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.708541077131702,
+      "share_of_all_columns_above_critical": 0.002125623231395106,
+      "current_p90_na_m2": 6.918,
+      "current_max_na_m2": 62.51,
+      "hours_to_breakdown_p90": 0.06291224055383995,
+      "hours_to_breakdown_max": 0.006955266547157242
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.7692001188857892,
+      "share_of_all_columns_above_critical": 0.0023076003566573676,
+      "current_p90_na_m2": 20.76,
+      "current_max_na_m2": 219.8,
+      "hours_to_breakdown_p90": 0.020948314317866857,
+      "hours_to_breakdown_max": 0.0019778590423215094
+     }
+    },
+    "low_speed_kumar": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.7019212240888429,
+      "share_of_all_columns_above_critical": 0.002105763672266529,
+      "current_p90_na_m2": 0.8191,
+      "current_max_na_m2": 10.03,
+      "hours_to_breakdown_p90": 0.5360408944613165,
+      "hours_to_breakdown_max": 0.04337673338376479
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.7784825460774114,
+      "share_of_all_columns_above_critical": 0.0023354476382322345,
+      "current_p90_na_m2": 1.842,
+      "current_max_na_m2": 22.6,
+      "hours_to_breakdown_p90": 0.23704621042242138,
+      "hours_to_breakdown_max": 0.01924217657540198
+     }
+    },
+    "low_speed_avila": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.11362184792050785,
+      "share_of_all_columns_above_critical": 0.00034086554376152353,
+      "current_p90_na_m2": 0.01867,
+      "current_max_na_m2": 0.218,
+      "hours_to_breakdown_p90": 54.2030260773176,
+      "hours_to_breakdown_max": 2.0720474389213988
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.18153413737579355,
+      "share_of_all_columns_above_critical": 0.0005446024121273807,
+      "current_p90_na_m2": 0.04211,
+      "current_max_na_m2": 0.4917,
+      "hours_to_breakdown_p90": 13.029987399275406,
+      "hours_to_breakdown_max": 0.8989940483983946
+     }
+    }
+   }
+  },
+  "box_0e_small_earth_fall": {
+   "zone": {
+    "height_km": 34.67115959343794,
+    "pressure_hpa": 611.8915741797432,
+    "air_density_kg_m3": 0.79936697574893,
+    "cloud_water_g_m3": 0.1433354136947218
+   },
+   "cloud_s_m": 9.181152608125811e-17,
+   "clear_air_s_m": 1.3320177248453437e-14,
+   "relaxation_in_cloud_h": 26.78853864698732,
+   "threshold_kv_m": 175.4949432760711,
+   "critical_current_na_m2": 0.016112458561719913,
+   "zone_share_of_columns": 0.001,
+   "laws": {
+    "saunders_peck": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.5473957480079837,
+      "share_of_all_columns_above_critical": 0.0005473957480079838,
+      "current_p90_na_m2": 0.5802,
+      "current_max_na_m2": 4.298,
+      "hours_to_breakdown_p90": 0.7544567825336022,
+      "hours_to_breakdown_max": 0.10061430856628872
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.5473957480079837,
+      "share_of_all_columns_above_critical": 0.0005473957480079838,
+      "current_p90_na_m2": 0.5802,
+      "current_max_na_m2": 4.298,
+      "hours_to_breakdown_p90": 0.7544567825336022,
+      "hours_to_breakdown_max": 0.10061430856628872
+     }
+    },
+    "takahashi": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.7579027399000147,
+      "share_of_all_columns_above_critical": 0.0007579027399000147,
+      "current_p90_na_m2": 9.162,
+      "current_max_na_m2": 128.7,
+      "hours_to_breakdown_p90": 0.04715228115101585,
+      "hours_to_breakdown_max": 0.0033539723373140697
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.7579027399000147,
+      "share_of_all_columns_above_critical": 0.0007579027399000147,
+      "current_p90_na_m2": 9.162,
+      "current_max_na_m2": 128.7,
+      "hours_to_breakdown_p90": 0.04715228115101585,
+      "hours_to_breakdown_max": 0.0033539723373140697
+     }
+    },
+    "low_speed_kumar": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.6771936840025755,
+      "share_of_all_columns_above_critical": 0.0006771936840025755,
+      "current_p90_na_m2": 1.083,
+      "current_max_na_m2": 18.41,
+      "hours_to_breakdown_p90": 0.4015440734833814,
+      "hours_to_breakdown_max": 0.023455633373965508
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.6771936840025755,
+      "share_of_all_columns_above_critical": 0.0006771936840025755,
+      "current_p90_na_m2": 1.083,
+      "current_max_na_m2": 18.41,
+      "hours_to_breakdown_p90": 0.4015440734833814,
+      "hours_to_breakdown_max": 0.023455633373965508
+     }
+    },
+    "low_speed_avila": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.1277431332330248,
+      "share_of_all_columns_above_critical": 0.0001277431332330248,
+      "current_p90_na_m2": 0.02077,
+      "current_max_na_m2": 0.455,
+      "hours_to_breakdown_p90": 40.04945241038289,
+      "hours_to_breakdown_max": 0.9658395587891437
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.1277431332330248,
+      "share_of_all_columns_above_critical": 0.0001277431332330248,
+      "current_p90_na_m2": 0.02077,
+      "current_max_na_m2": 0.455,
+      "hours_to_breakdown_p90": 40.04945241038289,
+      "hours_to_breakdown_max": 0.9658395587891437
+     }
+    }
+   }
+  },
+  "ring_equator": {
+   "zone": {
+    "height_km": 30.91807804702063,
+    "pressure_hpa": 657.6789100475015,
+    "air_density_kg_m3": 0.8507326278235423,
+    "cloud_water_g_m3": 0.10861736115286715
+   },
+   "cloud_s_m": 9.669147516813274e-17,
+   "clear_air_s_m": 1.2278152864600573e-14,
+   "relaxation_in_cloud_h": 25.43654040224282,
+   "threshold_kv_m": 186.77188174194507,
+   "critical_current_na_m2": 0.018059248765556705,
+   "zone_share_of_columns": 0.009,
+   "laws": {
+    "saunders_peck": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.02372126549018892,
+      "share_of_all_columns_above_critical": 0.00021349138941170027,
+      "current_p90_na_m2": 0.001032,
+      "current_max_na_m2": 0.2109,
+      "hours_to_breakdown_p90": null,
+      "hours_to_breakdown_max": 2.277062876407985
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.1944287970631141,
+      "share_of_all_columns_above_critical": 0.0017498591735680268,
+      "current_p90_na_m2": 0.05969,
+      "current_max_na_m2": 11.42,
+      "hours_to_breakdown_p90": 9.165431483891732,
+      "hours_to_breakdown_max": 0.04025642794774456
+     }
+    },
+    "takahashi": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.2814076023452526,
+      "share_of_all_columns_above_critical": 0.0025326684211072733,
+      "current_p90_na_m2": 0.2113,
+      "current_max_na_m2": 44.65,
+      "hours_to_breakdown_p90": 2.272553869403804,
+      "hours_to_breakdown_max": 0.010290206804622512
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.3754771425430747,
+      "share_of_all_columns_above_critical": 0.0033792942828876718,
+      "current_p90_na_m2": 0.5134,
+      "current_max_na_m2": 159.3,
+      "hours_to_breakdown_p90": 0.9108661399650725,
+      "hours_to_breakdown_max": 0.002883809485671423
+     }
+    },
+    "low_speed_kumar": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.14852318199320896,
+      "share_of_all_columns_above_critical": 0.0013367086379388806,
+      "current_p90_na_m2": 0.04376,
+      "current_max_na_m2": 4.743,
+      "hours_to_breakdown_p90": 13.537325167205516,
+      "hours_to_breakdown_max": 0.09703596167726046
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.21723401549559337,
+      "share_of_all_columns_above_critical": 0.0019551061394603403,
+      "current_p90_na_m2": 0.09825,
+      "current_max_na_m2": 10.64,
+      "hours_to_breakdown_p90": 5.166341034156727,
+      "hours_to_breakdown_max": 0.04321006503594642
+     }
+    },
+    "low_speed_avila": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.02129466918472594,
+      "share_of_all_columns_above_critical": 0.00019165202266253347,
+      "current_p90_na_m2": 0.000963,
+      "current_max_na_m2": 0.1236,
+      "hours_to_breakdown_p90": null,
+      "hours_to_breakdown_max": 4.0177880169769615
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.03819794086587542,
+      "share_of_all_columns_above_critical": 0.00034378146779287874,
+      "current_p90_na_m2": 0.002161,
+      "current_max_na_m2": 0.2773,
+      "hours_to_breakdown_p90": null,
+      "hours_to_breakdown_max": 1.7129673756219495
+     }
+    }
+   }
+  },
+  "ring_70_45e": {
+   "zone": {
+    "height_km": 30.593930005577242,
+    "pressure_hpa": 660.0474974902398,
+    "air_density_kg_m3": 0.8547855549358617,
+    "cloud_water_g_m3": 0.09906664807585051
+   },
+   "cloud_s_m": 9.950879285005456e-17,
+   "clear_air_s_m": 1.2228326861072916e-14,
+   "relaxation_in_cloud_h": 24.71637474662942,
+   "threshold_kv_m": 187.6616710818314,
+   "critical_current_na_m2": 0.018673986353577032,
+   "zone_share_of_columns": 0.001,
+   "laws": {
+    "saunders_peck": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.012682462593356729,
+      "share_of_all_columns_above_critical": 1.2682462593356729e-05,
+      "current_p90_na_m2": 0.00162,
+      "current_max_na_m2": 0.04115,
+      "hours_to_breakdown_p90": null,
+      "hours_to_breakdown_max": 14.947851635367146
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.23743393938350815,
+      "share_of_all_columns_above_critical": 0.00023743393938350816,
+      "current_p90_na_m2": 0.09383,
+      "current_max_na_m2": 2.384,
+      "hours_to_breakdown_p90": 5.485020794282863,
+      "hours_to_breakdown_max": 0.19436678887296324
+     }
+    },
+    "takahashi": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.3386131054032983,
+      "share_of_all_columns_above_critical": 0.0003386131054032983,
+      "current_p90_na_m2": 0.3341,
+      "current_max_na_m2": 19.71,
+      "hours_to_breakdown_p90": 1.4215919523299052,
+      "hours_to_breakdown_max": 0.02342831198761908
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.44808951928483964,
+      "share_of_all_columns_above_critical": 0.00044808951928483967,
+      "current_p90_na_m2": 0.8645,
+      "current_max_na_m2": 60.91,
+      "hours_to_breakdown_p90": 0.5397469056734022,
+      "hours_to_breakdown_max": 0.007578788564140895
+     }
+    },
+    "low_speed_kumar": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.2398912494856454,
+      "share_of_all_columns_above_critical": 0.0002398912494856454,
+      "current_p90_na_m2": 0.05141,
+      "current_max_na_m2": 2.255,
+      "hours_to_breakdown_p90": 11.155906270922385,
+      "hours_to_breakdown_max": 0.20553213149508315
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.29576980056699853,
+      "share_of_all_columns_above_critical": 0.0002957698005669985,
+      "current_p90_na_m2": 0.1159,
+      "current_max_na_m2": 5.069,
+      "hours_to_breakdown_p90": 4.342406151232577,
+      "hours_to_breakdown_max": 0.09122223516366723
+     }
+    },
+    "low_speed_avila": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.011627906976744186,
+      "share_of_all_columns_above_critical": 1.1627906976744185e-05,
+      "current_p90_na_m2": 0.001151,
+      "current_max_na_m2": 0.05881,
+      "hours_to_breakdown_p90": null,
+      "hours_to_breakdown_max": 9.442591441258564
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.02226804478601007,
+      "share_of_all_columns_above_critical": 2.226804478601007e-05,
+      "current_p90_na_m2": 0.002588,
+      "current_max_na_m2": 0.1322,
+      "hours_to_breakdown_p90": null,
+      "hours_to_breakdown_max": 3.7639064750083273
+     }
+    }
+   }
+  },
+  "ring_70_135e": {
+   "zone": {
+    "height_km": 30.31658150302742,
+    "pressure_hpa": 663.6342713997387,
+    "air_density_kg_m3": 0.8584383236376586,
+    "cloud_water_g_m3": 0.10168229846847915
+   },
+   "cloud_s_m": 9.835657675661716e-17,
+   "clear_air_s_m": 1.2153259544887564e-14,
+   "relaxation_in_cloud_h": 25.00591923560616,
+   "threshold_kv_m": 188.46360868442227,
+   "critical_current_na_m2": 0.01853663539339844,
+   "zone_share_of_columns": 0.002,
+   "laws": {
+    "saunders_peck": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.017624043030189347,
+      "share_of_all_columns_above_critical": 3.524808606037869e-05,
+      "current_p90_na_m2": 0.00122,
+      "current_max_na_m2": 0.07646,
+      "hours_to_breakdown_p90": null,
+      "hours_to_breakdown_max": 6.942815739725088
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.18888304883757023,
+      "share_of_all_columns_above_critical": 0.00037776609767514047,
+      "current_p90_na_m2": 0.07625,
+      "current_max_na_m2": 3.766,
+      "hours_to_breakdown_p90": 6.964864839072912,
+      "hours_to_breakdown_max": 0.12338558811115904
+     }
+    },
+    "takahashi": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.2931152089031694,
+      "share_of_all_columns_above_critical": 0.0005862304178063388,
+      "current_p90_na_m2": 0.1924,
+      "current_max_na_m2": 25.13,
+      "hours_to_breakdown_p90": 2.533269868304916,
+      "hours_to_breakdown_max": 0.01845191590920709
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.39113264223972,
+      "share_of_all_columns_above_critical": 0.00078226528447944,
+      "current_p90_na_m2": 0.4944,
+      "current_max_na_m2": 82.26,
+      "hours_to_breakdown_p90": 0.9555797551202441,
+      "hours_to_breakdown_max": 0.005635519587831182
+     }
+    },
+    "low_speed_kumar": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.12855329659230855,
+      "share_of_all_columns_above_critical": 0.0002571065931846171,
+      "current_p90_na_m2": 0.03399,
+      "current_max_na_m2": 1.46,
+      "hours_to_breakdown_p90": 19.710656030554112,
+      "hours_to_breakdown_max": 0.31951595166469066
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.18413429271454976,
+      "share_of_all_columns_above_critical": 0.0003682685854290995,
+      "current_p90_na_m2": 0.0763,
+      "current_max_na_m2": 3.286,
+      "hours_to_breakdown_p90": 6.959602278539662,
+      "hours_to_breakdown_max": 0.14146011594736208
+     }
+    },
+    "low_speed_avila": {
+     "run": {
+      "share_of_storm_columns_above_critical": 0.013308528951690126,
+      "share_of_all_columns_above_critical": 2.6617057903380254e-05,
+      "current_p90_na_m2": 0.0007503,
+      "current_max_na_m2": 0.03583,
+      "hours_to_breakdown_p90": null,
+      "hours_to_breakdown_max": 18.215878245521292
+     },
+     "earth_speeds": {
+      "share_of_storm_columns_above_critical": 0.022298083119329536,
+      "share_of_all_columns_above_critical": 4.4596166238659074e-05,
+      "current_p90_na_m2": 0.001685,
+      "current_max_na_m2": 0.08068,
+      "hours_to_breakdown_p90": null,
+      "hours_to_breakdown_max": 6.52771182178283
+     }
+    }
+   }
+  }
+ },
+ "earth_reference": {
+  "height_km": 6.0,
+  "pressure_hpa": 471.80863673477995,
+  "ion_pairs_per_cm3_s": 12.030337475561106,
+  "clear_air_s_m": 2.435652214710298e-13,
+  "cloud_s_m": 5.458006595739041e-15,
+  "relaxation_in_cloud_min": 27.037306439901496,
+  "threshold_kv_m": 144.83092685446317,
+  "critical_current_na_m2": 0.7904881540386587,
+  "storm_current_na_m2": [
+   20.0,
+   1000.0
+  ],
+  "time_to_breakdown_min": [
+   1.0686335228927635,
+   0.021372670457855267
+  ],
+  "cloud": {
+   "lwc_g_m3": 1.0,
+   "droplets_m3": 300000000.0
+  }
+ },
+ "producer": {
+  "domain": "research",
+  "files": {
+   "studies/atmospheric_electricity/stage1.py": "34cee8501feb6e49"
+  }
+ }
+}

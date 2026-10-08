@@ -12,6 +12,12 @@ surface density from the three corrected rings, preserving their three-hourly
 histories and independent realisations. The [coastal-wave study](../waves/coastal.md)
 records their spatial coverage and the remaining basin forcing requirements.
 
+The [atmospheric-electricity study](../../research/studies/atmospheric_electricity/README.md)
+(2026-10-02) reads these runs' storms: their graupel, cloud ice and snow, the air
+where they meet supercooled water, and what slower settling at lunar gravity does
+to them. Its "Where the study stands" gathers what the runs show about the
+storms and what stays open.
+
 ## How CM1 is set up for the Moon
 
 [cm1_run.py](cm1_run.py) downloads CM1 at a pinned hash, patches a fresh copy of
@@ -70,6 +76,35 @@ variant. By CM1's own timings `-O3 -march=native` ran 11–15% faster than
 itself agreed within 0.7%. So every OpenMP build now compiles at
 `-O3 -march=native` (`OMP_DEFAULT` in [cm1_run.py](cm1_run.py)), `moon_omp_o2`
 keeps CM1's own `-O2` for comparisons, and the MPI builds keep `-O2`, untested.
+
+**Threads and reproducibility** (found 2026-10-04). On one thread a run
+repeats itself bit for bit; on several it does not always. Restarted from
+`box_0e`'s day-10.5 restart on 4 threads, `moon_omp` repeated the one-thread
+run once and once parted from it about 85 steps in (a domain total first,
+then the state), and the electrified build, run the same way twice, parted
+from itself about 50 steps in. Storm weather then grows the difference into
+different storms within about an hour. A result that changes only in some
+runs is a race between threads, not a change of summing order. It lies in
+CM1's own threaded loops on these cases' paths, since every Terluna patch in
+a threaded region writes only its own points and WRF-ELEC's threaded loops
+write only their own slabs (checked by compiling them with no default
+sharing). Each run is a valid realization; runs that differ in one setting
+compare as realizations, not as the same storms. The one-thread checks above
+and the supercell's restart check stand.
+A search on 2026-10-06 ran `box_0e_elec` from its day-10.5 restart for
+8,000 s on 4 threads, three times with each of several parts switched off.
+The runs parted at random times 3,000–7,400 s in, always first in the
+domain's total vertical momentum, and the plain Morrison box parts the same
+way, so at least one race lies outside the electrification. With mass
+conservation off, all three runs differed from one another; with radiation
+off, all three agreed, and with the large-scale forcing off, the two that
+finished agreed. With the race striking about half the runs, three runs agree
+by luck about one time in eight and two runs one time in four, so neither part
+is pinned down. The boundary-layer scheme cannot be switched off under the
+box's turbulence setting (`cm1setup` 2 requires it), so the test without the
+surface and boundary-layer schemes did not run. The search stopped there; the
+scripts are in `atmospheric-electricity/smoke/race_bisect.py` on the data
+drive.
 A case's executable changes only when its build is rebuilt (`build moon_omp`
 replaces the one every such case links to), so the runner records the executable
 and thread count of every segment.
@@ -1087,6 +1122,1079 @@ follows the GCM's 0.46 °C per kilometre.
 
 ```sh
 climate/gcm/.venv/bin/python -m climate.crm.highland_analysis box_highland_own_height --from-day 29.5
+```
+
+## What the storms hold for charging
+
+The atmospheric-electricity study reads the storms of six runs over their second
+lunar day with [mixed_phase_analysis.py](mixed_phase_analysis.py): the two
+equatorial boxes, `box_0e_small`'s twin with Earth's fall speeds, and the three
+flat rings. It takes Morrison's size distributions and fall-speed laws as the
+runs used them and finds the charging zone, the air from 0 to −40 °C where
+graupel, cloud ice or snow, and supercooled cloud water each reach 0.01 g/kg
+(0.001 and 0.1 g/kg as checks):
+
+| Run | Charging zone, m of air per m² of ground (snapshots with it) | Graupel aloft, kg/m², and its residence | Graupel in the zone, g/m³, mass-weighted diameter | Cloud ice in the zone, per litre | Updrafts in the zone, median / top tenth |
+|---|---|---|---|---|---|
+| `box_0e` | 22 (34 %) | 0.30, 4.9 h | 1.8–2.5, 5.4–6.9 mm | 3–7 | 3.1 / 10.3 m/s |
+| `box_0e_small` | 22 (31 %) | 0.23, 4.4 h | 1.7–2.3, 5.0–6.9 mm | 2–10 | 3.4 / 9.9 m/s |
+| `box_0e_small_earth_fall` | 11 (21 %) | 0.04, 2.2 h | 0.7–1.3, 5.3–6.2 mm | 3–7 | 4.5 / 12.5 m/s |
+| `ring_equator` | 50 (98 %) | 0.10, 3.2 h | 0.5–0.9, 6.3–6.9 mm | 0.6–13 | 0.9 / 3.5 m/s |
+| `ring_70_45e` | 3.6 (22 %) | 0.007, 2.8 h | 0.6–0.9, 6.8–7.0 mm | 0.2–2.8 | 1.0 / 3.6 m/s |
+| `ring_70_135e` | 8.4 (35 %) | 0.017, 3.2 h | 0.5–1.1, 6.7–7.0 mm | 0.4–3.6 | 0.8 / 3.2 m/s |
+
+In every run the 0 °C level stands near 25 km and −40 °C near 60 km, five to six
+times their heights in Earth's tropics, and cloud tops reach 55–80 km. The
+charging zone is shallow and warm: four-fifths of it lies between 0 and −10 °C
+(30–32 km, 650–680 hPa), a fifth between −10 and −20 °C, almost none colder,
+because the supercooled cloud water thins from 0.10–0.17 g/m³ near 0 °C to
+0.03–0.05 g/m³ at −20 to −30 °C. Graupel is plentiful and large; a quarter of it
+between 0 and −10 °C sits at the scheme's largest size (a mass-weighted diameter
+of 8 mm), where the scheme limits growth. Cloud ice is scarce, and snow (0.5–1
+g/m³) carries most of the ice that graupel meets. Graupel strikes cloud ice at
+1.3–1.5 m/s and snow at 0.8–1.0 m/s. The zone forms from late morning to the
+end of the afternoon, and in the boxes its patches are about 10 km wide, near the
+grid's limit, and a median 6 km deep.
+
+With Earth's fall speeds the same box holds a sixth as much graupel aloft, half
+the charging zone and half the residence, and its graupel strikes ice at
+2.9–3.3 m/s. The analysis also integrates graupel's collisions with ice and snow
+over their size distributions under four laboratory charging laws, at the runs'
+fall speeds and at Earth's; the study weighs the result against the air's
+conductivity
+([research/studies/atmospheric_electricity](../../research/studies/atmospheric_electricity/README.md)).
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.mixed_phase_analysis box_0e --from-day 29.5
+```
+
+## Electrified storms
+
+[cm1_elec.py](cm1_elec.py) builds CM1 with electrified storms, stage 2 of the
+atmospheric-electricity study. WRF-ELEC's version of the NSSL two-moment
+microphysics (MicroTed/wrf4-elec at commit e43041b, in the public domain under
+the WRF notice; Mansell et al. 2005, 2010; Fierro et al. 2013) replaces CM1's
+own copy of the same scheme. It carries charge on cloud droplets, rain, cloud
+ice, snow, graupel and hail through every microphysical process. Charge
+separates when graupel or hail rebounds from cloud ice or snow (non-inductive
+charging; by default Saunders and Peck's law with Brooks et al.'s critical rime
+accretion rate above −15 °C and none below −32.5 °C, WRF-ELEC's `isaund = 12`)
+and when cloud droplets rebound from graupel polarised by the field (inductive
+charging). The small ions' net charge attaches to the particles. Four Terluna
+files in [fortran/](fortran/) and two of WRF-ELEC's complete it:
+
+- [terluna_elec.F](fortran/terluna_elec.F) passes CM1's calls of the scheme to
+  WRF-ELEC's driver with the arrays reordered from CM1's (i, j, k) to WRF's
+  (i, k, j), and keeps the charges in CM1's passive tracers (C/kg), which CM1
+  advects and mixes like any tracer, without its positivity limiter. It runs
+  the steps as WRF-ELEC's own driver does: the microphysics once, without
+  sedimentation, then the sedimentation in sub-steps of about 0.75 s, each
+  followed by a solve for the electric field of the net charge and by
+  lightning. Leakage, where a case asks, follows once a step. It keeps the
+  vertical field for the next step's inductive charging, also across restarts
+  (`terluna_ez_<time>.bin` beside CM1's restart files, as WRF keeps it in its
+  own).
+- [terluna_lightning.F](fortran/terluna_lightning.F) solves Poisson's equation
+  for the potential by Fourier transform across the periodic domain and a
+  tridiagonal solve on CM1's stretched levels, with the potential zero at the
+  ground and at the model top. It carries WRF-ELEC's cylindrical discharge
+  scheme (`light1d`; Ziegler and MacGorman 1994): where the field exceeds the
+  breakdown field (284 kV/m at 1.225 kg/m³, scaled by air density and held
+  within 50–180 kV/m, WRF-ELEC's `nssl_ibrkd = 4`), every column within 12 km
+  that holds more than 0.1 nC/m³ joins the discharge, which removes shares of
+  the charge above that level, set so that it carries comparable positive and
+  negative charge (about 30 % of it), and hands them to the small ions with the
+  opposite sign.
+- WRF-ELEC's branched lightning (`lightmsz` in `module_discharge_msz.F`;
+  MacGorman, Straka and Ziegler 2001), the builds' default, makes one flash at a
+  time. It starts at a point where the field reaches 0.9 of the breakdown field
+  in air colder than 275 K, drawn at random among such points, runs a channel up
+  and down from it while the field stays above 0.8 of breakdown, and spreads
+  each end through the connected cells whose potential differs from the
+  channel's by more than its 200-V/m internal field allows. It neutralizes the
+  charge in those cells, handing the opposite charge to the small ions. A
+  downward channel strikes the ground when it reaches air warmer than −7 °C
+  (about 5 km above Earth's ground), if the flash started where the potential
+  lies beyond 50 MV of either sign with a vertical field above 10 kV/m in the
+  matching direction, and the channel's end lies in charge of the matching
+  sign. WRF-ELEC applies this rule by default (its ground height of −1); a
+  height above zero replaces the temperature with that height, and a height of
+  exactly zero leaves only a channel reaching the two lowest levels, as the Earth
+  benchmarks below first ran (found 2026-10-05). A ground flash neutralizes
+  charge of one sign in the cloud, the ground supplying the opposite charge.
+  Each flash makes nitrogen oxides
+  along its channel at Wang et al.'s (1998) yield per metre at the channel's
+  pressure, times WRF-ELEC's factor of 0.1, reduced in proportion where the
+  flash changes the charge by less than 1 nC/kg. After each flash the field is
+  solved again, until no starting point is left or a chosen one gives no flash;
+  after 120 flashes in a sub-step, 5 % of all charge goes to the small ions, as
+  in WRF-ELEC. Its trilinear interpolation (`mlint2`) comes from WRF-ELEC's
+  `module_boxmgsetup.F`.
+- [terluna_branched.F](fortran/terluna_branched.F) runs `lightmsz` on one
+  process; WRF-ELEC runs it under MPI. It draws the starting point as `lightmsz`
+  does, with the same Park and Miller generator, seeded from the step so that a
+  restarted run repeats its flashes, recentres the arrays on that point across
+  the periodic domain (the channels stop at the arrays' edges), hands
+  `lightmsz` that point alone and returns the charge, channels and nitrogen
+  oxides to the domain. The patch to `lightmsz` replaces its few MPI calls
+  outside its MPI blocks, takes the breakdown field's bounds from the build,
+  recomputes that field at each call and sends its report to its own log.
+- [terluna_screen.F](fortran/terluna_screen.F) ports WRF-ELEC's screening
+  layers (`screen`; Ziegler et al. 1991), off unless a case asks for them.
+  Clear air conducts better than cloud, so where cloud meets clear air the
+  current the field drives into the edge does not match the current leaving it,
+  and charge gathers there. Once a step, at each cloud point with cloud on one
+  side and clear air beyond it on the other (along x, y or z), it takes the
+  field normal to the edge inside and outside and gives the small ions the
+  charge the two conduction currents leave in a step, capped at 0.25 nC/m³ of
+  net charge there. The conductivity is WRF-ELEC's table of Earth's clear air
+  with a tenth of it in cloud, or the clear air and cloud of
+  [atmosphere/electricity](../../atmosphere/electricity/README.md) by height.
+  Its vertical differences take the distances between CM1's scalar levels,
+  where WRF-ELEC takes the depth of the layer below; the two agree on an even
+  grid.
+- The same file holds point discharge from the ground (`ground_discharge`),
+  which WRF-ELEC does not have, off unless a case asks for it (`corona_v_m`,
+  `var2`). Under a storm, plants and other grounded points go into corona once
+  the field at the ground passes an onset, about 3 kV/m over dense vegetation
+  and 5 kV/m on a barren ridge, and the ions they give off hold the field at the
+  ground near 5–12 kV/m while it stands several times stronger a few hundred
+  metres up (Standler and Winn 1979; Soula and Chauzy 1991). Once a step, over
+  land, the field at the lowest level drives a current J = a(E² − E₀²) up from
+  the ground, with a set by Standler and Winn's 1 nA/m² at 8 kV/m over a
+  3-kV/m onset and E₀ scaled by the density of the air at the ground. The charge
+  takes the sign of the ground's induced charge, joins the small ions' charge in
+  the lowest layer and moves with the air from there; the small ions do not
+  drift in the field in this scheme. A step gives off at most the charge that
+  brings the field at the ground back to the onset, so where a storm charges
+  faster than the points discharge, the field there settles near the onset, as
+  measured. WRF-ELEC hands the small ions' charge in a cell at once to any
+  cloud or precipitation particles there, so where rain or cloud reaches the
+  lowest level the ground's ions go into it, and rain carries them back down.
+  In a 10-kV/m field raindrops would take up such ions within about a minute,
+  while the ions climb about 100 m, so the two are alike there; the scheme's
+  ions only rise on the air's motion, so it may underplay screening in calm air.
+  Every electrified run logs the field at the ground every ten steps
+  (`terluna_ground.txt`): its largest value over land, and where no particles
+  reach the lowest level, with the charge the ground gave off and the columns
+  discharging, wet and dry. Without point discharge the field at the ground
+  under the boxes' storms reaches 100–220 kV/m. In a 30-minute check from the
+  coarse box's day-10.5 restart the ground gave off about 500 C every eight
+  minutes, mostly negative, from 35–41 of the 4,096 columns at a time, at a
+  mean field there of about 7–8 kV/m by the charge given off. Of those columns
+  33–38 had cloud or rain at the lowest level, and there the strongest field at
+  the ground stayed at 35–40 kV/m; where no particles reached the lowest level
+  it was 3.6–3.8 kV/m, at the onset. Under rain this scheme screens the ground
+  less than point discharge would, since its ions neither climb in the field
+  nor wait to be taken up.
+
+Lunar gravity enters the scheme as it enters Morrison's: the module's gravity is
+the build's, the drag-law fall speeds (graupel and hail under drag laws, cloud
+droplets under Stokes's law) follow it directly, and the fitted fall-speed laws
+V = a D^b scale by (g/9.81)^((b+1)/3): rain with b = 0.8, snow with 0.42, cloud
+ice with 0.55, and graupel and hail with each particle's exponent in WRF-ELEC's
+default table (Milbrandt and Morrison 2013), whose coefficient also sets their
+collection and ventilation. The scheme sets a particle's fall speeds and
+coefficients only where that particle is present, and the scaling acts only
+there; at Earth's 9.81 m/s² it leaves them as they are. Until 2026-10-06 rain
+and cloud ice ventilated at Earth's speeds: rain's ventilation, where it
+evaporates (NUCOND) and in the gather-scatter routine, takes rain's fall-speed
+coefficient from the module's constants rather than from the scaled speeds, and
+cloud ice's takes a Reynolds number fitted on Earth. A review found it, and both
+now scale as the fall speeds do; before, lunar rain evaporated 1.3–1.5 times too
+fast for its drop sizes (a slope diameter of 0.1–0.5 mm) and the larger ice
+crystals deposited up to 15 % too fast, in every NSSL run before
+`box_0e_elec_corrected`'s restart from day 0. Snow, graupel and hail ventilate
+from their scaled speeds, and Morrison's scheme scales its coefficients
+themselves, so neither changed. WRF-ELEC's driver and
+its sedimentation driver run in one thread, since WRF divides its work outside
+the microphysics; the build gives each slab loop the OpenMP directive CM1's
+copy has, with every per-slab array private, the charge totals summed across
+threads, and what the driver sets before the loop shared.
+
+The lunar boxes change two of WRF-ELEC's Earth settings (`cm1_elec.LUNAR`).
+WRF-ELEC's 0.75-s sub-step lets graupel settle through about 1 % of the 500-m
+layers of its storms in each; in the boxes' charging zone, 25–35 km up, the
+layers are 2 km deep and graupel falls at 0.44 of Earth's speed, so a 6.8-s
+sub-step keeps that share; the driver rounds it to whole sub-steps of the model
+step, which in the boxes is one sub-step of 8 s. On the Moon air warmer than −7 °C lies about 27–34
+km up, so a downward channel strikes the ground when it comes within 5 km of it,
+the height that rule stands at on Earth. The 50-MV and 10-kV/m conditions for a
+ground strike, the 0.9 and 0.8 fractions of breakdown, the 200-V/m internal
+field and the nitrogen oxide yield stay as WRF-ELEC calibrates them for Earth.
+That height rule keeps WRF-ELEC's demand that the channel's end lie in charge of
+the matching sign, and the lunar storms hold no charge 5 km up, so under it no
+lunar flash could strike the ground; see "Ground strikes" below. From
+2026-10-05 the lunar boxes take WRF-ELEC's own rule (the author's decision), an
+upper bound on their ground strikes until a rule for a leader's crossing of the
+air below the storm replaces it; every run before then used the height rule.
+
+WRF-ELEC also caps the breakdown field at 180 kV/m. On Earth the cap applies
+below about 4.5 km, beneath where flashes start. The lunar air is dense enough
+for it to apply below about 36 km: there it sets the breakdown field below the
+density scaling by 4 % at 34 km, 10 % at 30 km, 23 % at 20 km and 44 % at the
+ground (180 against 322 kV/m). In `box_0e_elec`'s first lunar day 84 of its 162
+flashes started at 32–34 km, where the cap lowered the field a flash starts at
+by 4–7 %, and 152 ran channels below 36 km, where it lowers the field a channel
+stops at by 10–19 % at their lower ends (24–30 km). The lunar boxes therefore
+lift the cap (`lightning` 4; the author's decision, 2026-10-04), keeping the
+density scaling at every height. WRF-ELEC's 50-kV/m floor stays: it applies
+only above about 100 km in the lunar air, far above the clouds, near the model
+top where the potential is held at zero.
+
+Three faults in the first version were found and fixed. It discharged once a
+6-second step, after the step's charging and all its sedimentation; WRF-ELEC
+sub-steps the sedimentation and discharges after each sub-step, and without
+that the field stood a median 3.2 times above breakdown at a step's first
+discharge and each discharge removed a median 150 C. Two faults showed up as
+results that changed with the number of threads. The scaling ran wherever
+graupel might be, also where the scheme had set no graupel exponent, so it
+multiplied by whatever value was left in memory there; and the directive made
+private the fall-speed moments the driver sets before the loop (`infdo`),
+leaving each thread's copy unset. A test keeps every private variable of both
+directives from being set before their loops, and a build that fills unset
+reals with signalling NaNs and stops at the first invalid operation located the
+scaling fault. Restarted from its restart at 30 minutes, on 4 threads and on 2,
+the benchmark storm below repeats its first run's output fields at 35 and 40
+minutes and its 41 flashes in between bit for bit.
+
+A case sets the electricity in CM1's namelist: `var2` the onset of point
+discharge from the ground (V/m at sea-level density; 0 for none), `var3` the
+screening layers (0 none, 1 with WRF-ELEC's Earth conductivity, 2 with the
+conductivity file), `var4` the height a downward channel must reach to strike
+the ground (m; below zero for WRF-ELEC's rule, air warmer than −7 °C, its
+default −1; at zero only the two lowest levels count), `var5` the sub-step (s;
+0 for WRF-ELEC's 0.75 s), `var6` the charging (2 non-inductive, 3 with
+inductive), `var7` the charging law (12 Saunders and Peck, cut off below
+−32.5 °C; 11 the same law as WRF-ELEC's test case sets it, with a smooth
+critical rime accretion rate and charging below −32.5 °C; 1 Takahashi),
+`var8` the lightning (0 none, 1 cylinders, 3 branched; 2 and 4 the same with
+the breakdown field's 180-kV/m cap lifted), `var9` leakage
+through the conductivity of
+[atmosphere/electricity](../../atmosphere/electricity/README.md) and `var10`
+the cylinders' radius. Each run logs every flash or cylinder
+call (`terluna_flashes.txt`: its kind, start, the field and breakdown field
+there and the domain's largest field over breakdown before it, the area and the
+levels where it neutralizes charge, the positive and negative charge it
+neutralizes, the electrostatic energy before and after, its channel points and
+nitrogen oxides), the area and levels being those where the flash hands
+charge to the small ions (before 2026-10-05, only `lightmsz`'s channel points,
+which it marks where a flash takes more than its threshold `scth` and which a
+weak flash high in thin air could miss everywhere: 13 of `box_0e_elec`'s
+flashes, of 5–72 C starting at 50–68 km, logged no reach),
+`lightmsz`'s own report on the first 2,000 flashes of each run
+(`terluna_msz.log`), and, every ten steps, the largest field, the domain's
+charge and energy and the largest charging rates (`terluna_field.txt`);
+WRF-ELEC's driver prints the domain's charging by collision pair every step.
+[elec_analysis.py](elec_analysis.py) reads the logs and the charge tracers of
+the snapshots.
+
+The build leaves out CM1's own water budget from the NSSL scheme (the
+condensation, evaporation and rain totals CM1's copy adds to its budget
+output), the three-moment option, the activated CCN and IN arrays, terrain under
+the field solver and `lightmsz`'s horizontal steps of the starting channel, which
+WRF-ELEC leaves off as well. Charge leaves the air by lightning to the ground, by
+falling to the ground on rain and hail, and, where a case turns it on, by
+leakage, which relaxes the net charge at σ/ε₀ with the conductivity of clear air
+or of cloud by height; the screening layers that conductivity gradients build at
+cloud edges come with `var3`.
+
+The solver, the lightning and the screening are checked against numpy and
+against charge laid out by hand
+([test_cm1_elec_field.py](../tests/test_cm1_elec_field.py),
+[test_cm1_elec_branched.py](../tests/test_cm1_elec_branched.py),
+[test_cm1_elec_screen.py](../tests/test_cm1_elec_screen.py)). The
+potential matches a direct solve of the same difference equations on stretched
+levels to one part in 10⁵, and the exact potential of a charged layer between
+grounded plates to one part in 10³. A cylinder call removes the charge
+WRF-ELEC's rule sets, only within the cylinders, and counts separate regions
+across the domain's edges. A branched flash between two charge regions
+neutralizes equal positive and negative charge in both and makes nitrogen
+oxides; a flash at the domain's edge reaches both sides; flashes continue until
+no starting point is left; a channel that runs down through a strong lower
+positive region strikes the ground with negative charge, the same storm with
+every charge reversed strikes with the same amount of positive charge, and
+moving the ground-strike height from 3 to 5 km turns that flash from one in
+cloud to one to ground. In an upward field a block of cloud gathers negative
+screening charge on its top and positive on its base, each as the formula
+gives it, none inside it, in clear air or on sides the field runs along, never
+past the cap, and edges across the domain's wrap gather it too.
+
+### The benchmark storm
+
+`supercell_elec` is CM1's own supercell (Weisman and Rotunno 2000: the Weisman
+and Klemp sounding with 14 g/kg of vapour at the ground, the quarter-circle
+hodograph, a warm bubble, 1-km spacing, a domain 120 km square, two hours) at
+Earth's gravity, with 600 CCN per cm³ and WRF-ELEC's defaults: its charging,
+its 0.75-s sub-steps and its branched lightning
+([elec_supercell_elec.json](../results/crm/elec_supercell_elec.json)).
+`supercell_elec_cylinders` runs the same storm with the cylinders
+([elec_supercell_elec_cylinders.json](../results/crm/elec_supercell_elec_cylinders.json)),
+and `supercell_nssl` runs it with CM1's own copy of the NSSL scheme without
+electricity. The electrified storm and CM1's own agree. At every half hour the
+largest updraft is within 6 % (28, 46, 53 and 56 m/s against 28, 46, 56 and
+56), reflectivity within 3.4 dBZ, and the domain's condensate within 9 % and at
+each level holding much of it within 19 %; from 30 minutes on, graupel is
+within 12 % and cloud-ice numbers within a factor of 1.5 (reflectivity once
+differs by 7 dBZ, at 35 minutes), and the rain at the end is within a third.
+Hail differs most, up to a factor of two once it
+forms, as the two copies of the scheme are different versions. The reordering of
+the arrays between CM1 and WRF-ELEC and the sub-stepped sedimentation therefore
+leave the storm as CM1's own scheme makes it. The electricity, with its
+sub-steps and flashes, triples the run's time: 56 minutes on 4 threads, beside
+the lunar box on the other 4, against 18 for `supercell_nssl`.
+
+No published run puts this scheme in CM1 or in WRF's idealized supercell, so the
+benchmark sets the storm beside published runs of the same charging and
+lightning schemes on similar storms (notes and pages in the study's
+[sources](../../research/studies/atmospheric_electricity/sources.json)):
+
+| | `supercell_elec` | Published runs |
+|---|---|---|
+| First flash | 28.5 min | 32.5 min (MacGorman et al. 2001, the same branched scheme), 27–28 min (Kuhlman et al. 2006), about 30 min (Ziegler et al. 2014), 30–40 min (Sun et al. 2023) |
+| Flash rate | rising to 153 a minute at 75–80 min, about 110 a minute through the second hour | 34 a minute at the peak (Mansell 2014), 75 (Brothers et al. 2018, 1 km), 100–200 with peaks of 400–500 (Ziegler et al. 2014), 300–600 in a mature storm (Calhoun et al. 2014) |
+| Kinds | all 7,134 in cloud, with the ground rule off (above); with it, 7,321 in cloud and 85 negative to ground (1.1 %), the first at 36.8 min | 99.67 % in cloud (Salinas et al. 2021, of Brothers et al.'s storm); a first ground flash at 34 min (Ziegler et al. 2014) |
+| Charge per flash | median 9.4 C; 2.8–67 C from the 10th to the 90th percentile | 2.7–39.6 C (MacGorman et al. 2001) |
+| Flash area | median 27 km², mean 79 km² | mean 160 km² at 1 km (Brothers et al. 2018, with a different branched scheme) |
+| Net charge density | up to +4.7 and −4.8 nC/m³ | about 1 nC/m³ (Ziegler and MacGorman 1994), up to 4 (Sun et al. 2021) |
+| Charge on one particle type | up to 45 (graupel), 48 (cloud ice) and 53 (hail) nC/m³, largely cancelling | up to 1.2 nC/m³, in a weaker storm (Sun et al. 2024) |
+| Largest non-inductive charging | 3.2 nC/m³/s | 0.3–0.55 nC/m³/s (Kuhlman et al. 2006; Sun et al. 2023) |
+| Inductive against non-inductive charging | a sixth of the domain's charge separated | about a tenth (two-moment runs) |
+
+The storm electrifies and flashes when the published storms do, with their net
+charge densities, flash rates and charge per flash. Its charging is several
+times stronger and the charge on each particle type tens of times larger. Both
+follow from its cloud ice: up to 2×10⁸ crystals per kilogram where droplets
+freeze homogeneously in updrafts of 50 m/s, which CM1's own copy of the scheme
+makes as well, and each crystal that bounces off graupel carries charge away.
+
+At 30–35 minutes the storm's net charge lies as a normal tripole's does:
+negative at 7.75 km (−24 to −25 °C) between positive above (8.25–8.75 km, −29
+to −33 °C) and below (6.25 km), 14–38 C at the negative level. Snow, cloud ice
+and cloud droplets carry the negative charge at 30 minutes, and cloud ice,
+cloud droplets and graupel at 35. From 40 minutes, as the updrafts pass 50 m/s,
+the main negative charge rises to 10.75–11.75 km (−47 to −55 °C), and from 75
+minutes it lies mostly at 8.75–9.75 km (−33 to −40 °C), up to 340 C at one
+level. Snow and cloud ice carry it, snow alone from 90 minutes, while graupel
+and hail at the same levels carry positive charge. Saunders and
+Peck's law charges graupel positively where it rimes fast in strong, wet
+updrafts, and the published runs with this law report the same inverted charge
+in such storms (Kuhlman et al. 2006; Mansell et al. 2005), as high CCN does (Sun
+et al. 2023, 2024).
+
+A flash starts a median 8.75 km up (5.75–9.75 km), where the field reaches a
+median 107 kV/m against a breakdown field of 109 kV/m; it neutralizes charge
+between a median 4.75 and 10.75 km over a median 27 km², and dissipates a
+median 1.2 GJ (0.34–6.9 GJ) of electrostatic energy. A few span much of the
+storm: 169 flashes neutralized more than 200 C each, and the largest 1,490 C
+over 4,270 km². Before a sub-step's first
+flash the domain's largest field stands a median 1.20 times the breakdown field
+(1.03–1.59), before later flashes 1.12, and once 4.4. WRF-ELEC's sub-steps hold
+it near breakdown: without them the first version's field stood a median 3.2
+times above breakdown at a step's first discharge. Within one sub-step at most
+12 flashes follow one another, against WRF-ELEC's cap of 120. The flashes make a
+median 4.7 mol of nitrogen oxides each and 109,000 mol over the two hours, at
+WRF-ELEC's yield along the model's 1-km channels; how that compares with the
+yields observed per flash is open.
+
+With the cylinders (`supercell_elec_cylinders`) the sub-steps also hold the
+field near breakdown: a median 1.15 times it at a sub-step's first discharge
+(1.02–1.35, at most 1.5), against 3.2 times in the first version, which
+discharged once a 6-second step. A call removes a median 32 C of each sign
+(14–124 C), against 150 C before, from 12-km cylinders reaching from near the
+ground to 15 km, and dissipates a median 3.0 GJ. The 4,026 calls in 92 minutes,
+up to 86 a minute, take 5,520 separate regions. Each call acts at once in every
+cylinder around every point above breakdown, through the whole column, so its
+charge and energy stand for several flashes together, and its counts follow the
+trends of a storm's lightning (Fierro et al. 2013).
+
+At the fine box's 2-km spacing (`supercell_elec_2km`, the same storm on a grid
+twice as coarse, [elec_supercell_elec_2km.json](../results/crm/elec_supercell_elec_2km.json))
+the scheme keeps its onset and rates: the first flash at 30 minutes, up to 125
+flashes a minute and 90 a minute through the second hour (153 and 111 at 1
+km), a median 15 C per flash over a median 44 km² (9.4 C and 27 km² at 1 km).
+The field builds further past breakdown in places. Before a sub-step's first
+flash it stands a median 1.22 times breakdown, as at 1 km, but 2.2 times at the
+90th percentile (1.6 at 1 km), and it reached 680 kV/m at 9 km once (255 kV/m
+at 1 km). Each grid point starts at most one flash a step, as in WRF-ELEC, and a
+coarser grid holds fewer points in a charged volume; whether that holds the
+flashes back there is not yet checked.
+
+In WRF-ELEC's own test settings (`supercell_elec_wrf`, [elec_supercell_elec_wrf.json](../results/crm/elec_supercell_elec_wrf.json):
+its 2-km grid over 84 km, 800 CCN per cm³, Saunders and Peck's law as its test
+case sets it and the screening layers, run for two hours where WRF-ELEC's test
+runs one) the storm flashes about twice as often, up to 298 a minute, a median 18
+C per flash; its net charge reaches −19.6 nC/m³ and its field 620 kV/m. The
+screening layers add 2–20 C a step at cloud edges. No output of WRF-ELEC's own
+run of this case is at hand to set beside it. Neither 2-km storm strikes the
+ground in two hours, but both ran with the ground rule off (above).
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run build earth_g_omp_elec moon_omp_elec earth_g_omp
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup supercell_elec    # and supercell_elec_cylinders, supercell_nssl
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run run supercell_elec --threads 4    # about an hour
+climate/gcm/.venv/bin/python -m climate.crm.elec_analysis supercell_elec --against supercell_nssl
+```
+
+### The electrified equatorial box
+
+`box_0e_elec` runs `box_0e`'s inputs as they were written (its site, surface,
+grid, starting air and forcing, from the GCM before its correction) with the
+NSSL microphysics with hail in place of Morrison's, its CCN at `box_0e`'s 100
+droplets per cm³, and WRF-ELEC's charging and branched lightning with the lunar
+settings above, over two lunar days with three-hourly output and twelve-hourly
+restarts. It runs from 2026-10-04. A first start, before the sub-steps and the
+branched lightning, was stopped at day 4, before its storms had charged. Each
+restart keeps its vertical field (`terluna_ez_<time>.bin`), so windows of the
+storms can run again from it with frequent output.
+
+**Ice sizes in the radiation, a note for the radiation and cloud-optics work.**
+CM1's radiation (RRTMG) takes cloud ice sizes up to 140 µm, where its ice optics
+table ends, and stops beyond. Lunar ice falls slowly and grows larger: the box
+stopped at day 6.45, as its storms began, on ice of 157 µm. The electrified
+build caps the ice size the radiation reads at 140 µm, as CM1's Morrison scheme
+does in every earlier lunar run, and every ten steps `terluna_ice_optics.txt`
+logs the ice mass above the cap, its mean size and the largest size where ice
+reaches 0.001 g/kg. The capped ice reaches the radiation as optically thicker
+than its size gives, by its size over 140 µm: anvils of large crystals reflect
+too much sunlight by day and hold too much heat by night. Snow above 130 µm RRTMG
+handles itself, cutting its mass by (130 µm / size)². The microphysics and the
+electricity use the scheme's own sizes and do not see the cap. The box resumed
+from its day-6 restart with this build.
+
+From day 18, in its first lunar night, the box runs with the breakdown field's
+cap lifted (`lightning` 4, executable `d2643310f7275844`), so its second lunar
+day's storms have the density scaling at every height. A flash is the only
+thing the cap changes, and none strikes between the first lunar day's last
+(day 14.3) and the second's storms. Its first lunar day ran under the cap; those
+storms run again without it from the day-10.5 restart (below). The box has no
+point discharge from the ground on either day.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_elec
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_0e_elec --threads 8 --hours 30    # about half a day
+```
+
+### The fine box
+
+`box_0e_elec_fine` is `box_0e_elec` at a third of its spacing, 2.0 km, over a
+box a third as wide, 128 km, with the same 64 by 64 columns. CM1 cannot move a
+run onto a finer grid, so it starts from the coarse run's output at a chosen day:
+the air averaged over the coarse box's columns, by level (potential
+temperature, vapour and wind), with the surface pressure, the air at 2 m and the
+skin temperature of the land (the soil's layers between it and the deep
+ground), under the Sun and the day-night forcing of that hour (`var18`). Its
+nudging, vertical wind, land, CCN and electricity are the coarse box's, its first
+time step a third of the coarse one's, and it writes output every 15 minutes and
+restarts every 3 hours over two model days. It builds its own clouds from that
+air. The day it starts from is chosen once the coarse run has shown its storms,
+a few hours before a stormy window; the case refuses to set up until it is set.
+A check from day 5 ran its first five model minutes cleanly. It ran on
+2026-10-04 from the coarse run's day 10.75, 41° past local noon and four hours
+before the coarse run's first flash (day 10.92), through days 11–12, when
+`box_0e`'s storms peaked.
+
+Its two model days ran in 2.8 hours on 4 threads beside the coarse run, and no
+flash struck. Building storms from the averaged air took most of the first
+day: graupel formed at day 11.2 and the storms charged from day 11.5. From day
+11.9 they stood as strong as the coarse box's (updrafts to 21 m/s against 21,
+graupel and hail per unit area within 3 % of the coarse box's on average), with
+cloud tops to 68 km against 86. They held up to 1,505 C of
+positive and 1,603 C of negative charge at day 12.55, more per unit area than
+the coarse box held between its flashes, but the strongest field aloft reached
+131 kV/m at 34 km (day 11.89), 73 % of the breakdown field there, where a flash
+starts at 90 %. Over the same days the coarse box flashed 56 times, in bursts
+from seven or eight storms over nine times the area, four or five of them after
+day 11.9. At that rate per unit area the fine box would expect half a flashing
+storm while its storms were mature and see none 55 % of the time, so
+these two days leave open whether the finer grid changes the lightning. The box
+is also small for these storms: lunar storms stand four to five times taller
+than Earth's, so 128 km is like a 30-km box on Earth, room for one or two storms
+at a time.
+
+At the author's direction it ran on from its day-2 restart, with the cap lifted
+as the coarse box now has it, toward day 14.75 and the coarse box's busiest
+lightning: after day 12.75 the coarse box had 11 flashing storms and 106 of its
+first lunar day's 162 flashes. At the coarse box's rate per unit area that gave
+about a three-in-four chance of a storm that flashes. Its first two days hold
+under either setting, since they made no flash. Until day 13.0 its storms
+matched the coarse box's (updrafts to 19 m/s, graupel and hail per unit area
+close to the coarse box's) and its field reached 120 kV/m at 34 km. Then its
+deep convection collapsed: from day 13.25 its cloud tops fell from about 66 km
+to 34–48 km, its graupel and hail a hundredfold, and its strongest field to
+17–24 kV/m, while the coarse box's storms kept their tops at 78–88 km and
+flashed 94 times between days 12.75 and 13.84. A box this small holds one or two
+storms, and their outflow and anvils may stabilize all of its air with no
+surroundings to renew it; that is not yet checked. The author stopped it at day
+3.0 of its run (coarse day 13.75), 2026-10-04, after three days without a
+flash. The 2-km lightning stays unmeasured; a box wide enough to hold several
+storms is the way to measure it.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_elec_fine    # after setting fine_from['day']
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_0e_elec_fine --threads 4 --hours 24
+```
+
+### The first lunar day again
+
+A case with `restart_from` runs on from another case's restart: it takes that
+case's inputs, restart files and kept vertical field, and its namelist with its
+own electricity, and its progress starts at the restart (`setup_restart`).
+`box_0e_elec_uncapped` runs `box_0e_elec`'s first lunar day's storms again,
+days 10.5–14.5 from the day-10.5 restart, before the first flash, with the
+breakdown field's cap lifted, beside the first run under it.
+`box_0e_elec_uncapped_corona` adds point discharge from the ground, with an
+onset of 3 kV/m at 1.225 kg/m³ (dense vegetation; 3.4 kV/m at the box's 1.39
+kg/m³). The two share an executable, so the second differs from the first only
+in the ground's discharge. They show what point discharge changes: the field at
+the ground and how much charge the ground gives off under storms, and whether
+the space charge alters the lightning above. Later runs take it up once that is
+known. On several threads CM1 does not repeat itself bit for bit (above,
+"Threads and reproducibility"): the uncapped rerun parted from the first run
+about 50 steps after the restart and flashed first at day 10.842, against
+10.919, so each pair compares two realizations of the same day. The cap's
+effect shows as a shift in the flashes' heights, depths and charge, and point
+discharge's as the field at the ground. They ran on 2026-10-04 after the fine
+box, 3.5 and 2.6 hours on 4 threads.
+
+Over days 10.5–14.5, all flashes in cloud:
+
+| | First run (capped) | Cap lifted | Cap lifted, point discharge |
+|---|---|---|---|
+| Flashes | 162 | 123 | 86 |
+| First flash | day 10.919 | 10.842 | 10.915 |
+| Starting below 34.8 km | 84 (52 %) | 40 (33 %) | 28 (33 %) |
+| Start height, median (90th percentile) | 33.8 km (37.8) | 35.8 (37.8) | 35.8 (49.8) |
+| Charge per flash, median (90th) | 87 C (174) | 95 (201) | 103 (227) |
+| Channel bottom, median (10th) | 27.8 km (23.9) | 27.8 (20.4) | 29.8 (22.1) |
+| Charge neutralized in all | 16,300 C | 13,900 | 10,100 |
+| Nitrogen oxides | 389 mol | 333 | 237 |
+
+Lifting the cap moved the flashes' starts up, as the higher threshold below
+36 km requires: a third of them started below 34.8 km, against half under the
+cap. Each flash then neutralized about a tenth more charge, and there were a
+quarter fewer. The channels did not stop higher, as a higher stopping field
+would have them do. With one realization each, the weather alone could make
+differences that size in counts, charge and depth; the shift in starting
+height follows from the threshold itself.
+
+Point discharge left the strongest field at the ground much as it was, a
+median over ten-step intervals of 34 kV/m against 40 and at most 181 against
+228, since the ground's ions go into the rain under storms: 58 % of the
+discharging columns were wet. Where no particles reached the lowest level it
+cut the strongest field from a median of 11.0 kV/m to 7.2 and from 17.5 to 12.5
+at the 90th percentile; in 22 % of intervals it still passed 10 kV/m somewhere,
+against 55 % without it. Without point discharge the field at the ground passed
+10 kV/m somewhere in the box in 95 % of intervals and 50 kV/m in 43 %. The
+ground gave off charge from a median of 431 of the 4,096 columns at a time
+(1,022 at most), a median of 3.4 A over the box and up to 34 A, 1.5 million C
+of positive and 0.58 million C of negative charge over the four days. The
+box's own charge stayed at a few thousand coulombs of each sign (at most
+12,600 C positive, against 7,900 without it), so nearly all of that charge
+went back to the ground on the precipitation it attached to; the totals
+measure the model's ion cycle more than charge the storms keep. The run made 86 flashes,
+fewer and starting higher than the run without it (a tenth started at or
+above 49.8 km). The weather alone could make a difference that size between
+realizations, so its effect on the lightning stays unresolved. Both runs left
+the ions' charge in place, as nothing conducted it away, and that leftover
+charge made most of the field away from the storms; with leakage it falls to a
+median 0.2 kV/m, below the onset ("Leakage", below).
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_elec_uncapped    # and box_0e_elec_uncapped_corona
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_0e_elec_uncapped --threads 4 --hours 8
+```
+
+### Ground strikes
+
+No lunar flash struck the ground in any run until 2026-10-05, and the zero was
+an artifact. About a third of the lunar flashes start where a ground strike
+can: lightmsz's reports give a potential beyond 50 MV at the start (a mean of
+250–460 MV, at most 1.2 GV, against Earth storms' tens to about a hundred MV)
+with the field pointing toward the ground, nearly all at negative potential.
+Two things then stopped them. WRF-ELEC's Earth-calibrated stopping field, 0.15
+of breakdown, halts every downward channel 15–25 km up (none got lower than
+15 km). And the lunar rule, a channel within 5 km of the ground, kept WRF-ELEC's
+demand that the channel's end lie in charge of the matching sign, which the
+storms do not have that low. The lunar storms hold their charge as Earth's do:
+in the flashing storms of days 40.75–41.9 the main negative charge lies at
+36–56 km (−8 to −32 °C, strongest at 40–42 km), weak positive charge spreads
+through the warm rain below the 0 °C level at 27.8 km, a weak positive layer
+sits at 62–70 km, and air of −7 °C lies at 33.8 km, just beneath the main
+negative charge as on Earth. So WRF-ELEC's own temperature rule fits them.
+
+`box_0e_elec_ground_rule` runs the coarse run's busiest storms again, days
+40.5–42 from its day-40.5 restart with the cap lifted, under that rule, and
+`supercell_elec_ground_rule` runs the Earth benchmark under it. The Earth storm
+makes 85 negative ground strikes among 7,406 flashes (1.1 %), the first at 36.8
+min against the 34 min of a published run of this kind of storm (Ziegler et al.
+2014), rising to 1.5–1.9 a minute in the second hour, a median 30 C each (6–122
+C, 10th to 90th percentile) and 2 GJ. The lunar window makes 21 negative ground
+strikes among 144 flashes (15 %; the first run made 157 flashes over these days,
+all in cloud), the first at day 40.79. Each brings down a median 195 C of
+negative charge (72–430 C, at most 889 C) and releases a median 69 GJ (20–190
+GJ, at most 437 GJ), starting 34–38 km up. Earth's ground strikes bring down
+5–30 C; charges of hundreds of coulombs belong on Earth to the rare positive
+strikes that set off sprites. With leakage, which clears the charge the runs
+otherwise leave in the air, the window makes 39 ground strikes among 161
+flashes, a median 110 C each and at most 624 C ("Leakage", below).
+
+The rule makes this an upper bound: it counts a channel that reaches −7 °C as
+reaching the ground, which on Earth leaves 3–5 km to cross and on the Moon about
+34 km. WRF-ELEC's stopping field, which halted every channel 15–25 km up, makes
+the lower bound of none. Between them lies the physics of a leader crossing 34
+km of clear air from a cloud at hundreds of megavolts: its channel's internal
+field of a few kV/m costs about 50–125 MV over that distance, leaving most of
+the potential at its tip, and Earth's leaders cross 10–15 km of clear air (bolts
+from the blue) or climb 70 km (gigantic jets) on far less. "The leader's
+crossing" below adds a rule for that crossing: at the literature's internal
+field it removes up to a fifth of the strikes this rule counts. On several threads the window is a separate
+realization of these days, but the change from none to 21 is the rule's.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_elec_ground_rule    # and supercell_elec_ground_rule
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_0e_elec_ground_rule --threads 4 --hours 6
+```
+
+### The charging law
+
+Every run above charges by Saunders and Peck's law. Stage 1's
+one-dimensional estimate, from the Morrison storms' graupel, found that law
+nearly stopped for slow lunar graupel, which rimes below its threshold, and
+Takahashi's law charging two hundred to five hundred times faster. On
+2026-10-05 both windows ran again under Takahashi's law (WRF-ELEC's `isaund`
+1, with its crystal-size and impact-speed factor, on its table, whose 0 to
+−30 °C and 0.01–30 g/m³ of cloud water hold the lunar charging zone), each
+changing only the law: `box_0e_elec_takahashi_first` beside
+`box_0e_elec_uncapped` (days 10.5–12, from before the first flash, with that
+run's 5-km ground rule) and `box_0e_elec_takahashi` beside
+`box_0e_elec_ground_rule` (days 40.5–42, WRF-ELEC's ground rule). The other
+runs of the same days under Saunders and Peck show how far a realization moves
+each number (`elec_analysis laws`, `climate/results/crm/elec_charging_laws.json`):
+
+| Days | Run | Law | Flashes (to ground) | Charge separated, kC (non-inductive + inductive) | Hail's share of the non-inductive | In-cloud flash: median charge, energy, start | Main negative charge |
+|---|---|---|---|---|---|---|---|
+| 10.5–12 | `box_0e_elec` (cap) | Saunders and Peck | 13 (0) | 18.0 + 2.8 | 84 % | 80 C, 55 GJ, 35.8 km | 42–44 km, −15 to −18 °C |
+| | `box_0e_elec_uncapped` | Saunders and Peck | 13 (0) | 22.0 + 3.7 | 86 % | 69 C, 55 GJ, 35.8 km | 34–44 km, −7 to −17 °C |
+| | `box_0e_elec_uncapped_corona` | Saunders and Peck | 6 (0) | 13.5 + 2.4 | 82 % | 69 C, 54 GJ, 35.8 km | 38 km, −10 °C |
+| | `box_0e_elec_takahashi_first` | Takahashi | 14 (0) | 25.1 + 4.8 | 37 % | 95 C, 106 GJ, 37.8 km | 48–56 km, −23 to −33 °C |
+| 40.5–42 | `box_0e_elec` (5-km rule) | Saunders and Peck | 157 (0) | 122.1 + 22.4 | 88 % | 88 C, 70 GJ, 37.8 km | 38–44 km, −11 to −18 °C |
+| | `box_0e_elec_ground_rule` | Saunders and Peck | 144 (21) | 116.8 + 21.2 | 88 % | 106 C, 79 GJ, 35.8 km | 38–44 km, −9 to −17 °C |
+| | `box_0e_elec_takahashi` | Takahashi | 139 (10) | 111.8 + 28.2 | 43 % | 101 C, 119 GJ, 43.8 km | 50–58 km, −24 to −35 °C (8 of 12 outputs) |
+
+The main negative charge is the level holding most negative charge at the
+three-hourly outputs that hold more than 300 C of it, leaving out the decaying
+storms' rain below 0 °C.
+
+**The rate.** Takahashi's law makes as many flashes and separates as much
+charge as Saunders and Peck's, within the spread of the realizations, and its
+storms flash no sooner: 10.0 hours after day 10.5 against 8.2–10.1, and 4.4
+hours after day 40.5 against 4.3. Stage 1's two hundred to five hundred times
+does not appear because NSSL's hail does 82–88 % of the charging under
+Saunders and Peck: it falls faster than graupel and rimes above the 0.1 g m⁻²
+s⁻¹ below which the law gives no charge. The Morrison runs carried no hail
+(their one rimed ice category ran as graupel). Under Takahashi's law graupel
+separates four to six times more charge than under Saunders and Peck's and
+hail two-fifths to four-fifths as much, and the totals meet.
+
+**The sign.** At the lunar storms' cloud water, 0.03–0.17 g/m³, Takahashi's
+table gives rimed ice positive charge at every temperature; it turns negative
+only colder than about −25 °C at 0.2 g/m³, −15 °C at 0.5 g/m³ and −10.5 °C
+at 1 g/m³. Every collision in both Takahashi windows charged graupel and hail
+positively (the negative parts come to at most 1 C against 25–111 kC), and
+the ice crystals and snow negatively. The rising ice carries the main
+negative charge to 48–58 km (−23 to −35 °C) in 15 of the 23 three-hourly
+outputs, above positive charge at 32–36 km (−3 to −9 °C) in about half of
+them and lower elsewhere, and 19 of the outputs have no upper positive layer:
+an inverted dipole. Under Saunders and Peck the storms hold the normal
+arrangement: in 18 of the second window's 23 outputs the main negative charge
+sits at 36–44 km (−8 to −18 °C), with positive charge above it at 48–72 km
+and below. The laboratory measurements at the graupel's impact speeds point the same
+way as Takahashi's table: at 1.8 m/s Ávila et al. (2013) found the rimer charging
+positively at every temperature (−7 to −13 °C) and cloud water they used
+(0.05–0.5 g/m³), and at 1.2 m/s Pradeep Kumar et al. (2024) found it positive
+from −7 to −18 °C. Negative charging appears only at faster impacts: at 1.8
+m/s below −17 °C (Pradeep Kumar et al.) and at 2.4 m/s below −10 °C (Ávila et
+al.).
+
+**The flashes.** Under Takahashi's law the flashes start higher (a median
+37.8–43.8 km against 35.8–37.8), reach higher (channels to a median 48–50 km
+against 40–42) and release one and a half to two times the energy for a similar or
+somewhat larger charge; the largest in-cloud flash released 1,964 GJ against 848 GJ
+under Saunders and Peck, and the second window's flashes made 484 mol of
+nitrogen oxides against 350–389. The window's 10 ground strikes, by WRF-ELEC's
+rule and so an upper bound, brought down a median 204 C (37–839 C, 10th to
+90th percentile), the largest 1,489 C and 2.4 TJ, starting at a median 42 km
+and up to 62 km. Each law here is one realization of the window; the
+difference in structure lies far outside the realizations' spread, the
+difference in ground strikes, 10 against 21, within reach of it.
+
+So the charging law sets the lunar storms' polarity more than their rate.
+
+**Impact speeds.** In the charging zone (−5 to −30 °C) of `box_0e_elec`'s
+stormy windows (days 10.5–12 and 40.5–42, three-hourly output), NSSL's graupel
+falls at a mass-weighted 1.4–3.9 m/s (10th to 90th percentile; median 1.9–2.4),
+3.7–4.4 mm across at 410–450 kg/m³, and its hail at 4.8–7.7 m/s (median
+5.9–6.6), 12–13 mm across at 710–740 kg/m³: under lunar gravity hail stays
+aloft long enough to grow large. Cloud ice and snow fall at 0.25–0.49 m/s, so
+hail, which does 82–88 % of the charging under Saunders and Peck, strikes them
+at 4.4–7.6 m/s (median 5.4–6.5), within the 1.2–11 m/s Earth's laboratories
+have measured, and graupel at 0.95–3.6 m/s, where the slow-impact studies'
+1.2–1.8 m/s lie.
+(`elec_analysis.py impact` applies NSSL's own laws to the output: Milbrandt and
+Morrison's coefficients at each particle's density for graupel and hail, the
+adjusted Ferrier law for cloud ice and Ferrier's for snow, with CM1's shape
+parameters, 0 for graupel and 0.5 for hail, and the build's gravity factors.)
+
+Most of the hail in the charging zone, 80–82 % of its mass, meets too little
+cloud water to charge at all: its rime accretion rate stays under the 0.1
+g m⁻² s⁻¹ below which WRF-ELEC separates no charge. The hail that charges sits
+at −5 to −16 °C in 0.02–0.18 g/m³ of cloud water, and Saunders and Peck's law
+charges it both ways: positively where it rimes faster than the critical rate,
+which above −15 °C is Brooks et al.'s (0.1–1.5 g m⁻² s⁻¹), and negatively
+where it rimes slower. The model's charging totals show the split. In the
+second lunar day's window hail took +49 and −45 kC in collisions with snow
+and +6 and −8 kC with cloud ice; in the first lunar day's, +8 and −5 kC and
++1.2 and −0.9 kC. Takahashi's table charges all of it positively at that
+cloud water, and that turns the storms' polarity over. The measurement that
+would decide between the laws is the sign of the charge rimed ice takes at
+4–8 m/s in 0.02–0.2 g/m³ of cloud water between −5 and −16 °C, conditions
+Earth's laboratories can reach.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_elec_takahashi      # and box_0e_elec_takahashi_first
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_0e_elec_takahashi --threads 4 --hours 6
+climate/gcm/.venv/bin/python -m climate.crm.elec_analysis laws
+climate/gcm/.venv/bin/python -m climate.crm.elec_analysis impact    # elec_impact_speeds.json
+```
+
+### Leakage
+
+None of the runs above conducts charge away, and the charge that evaporating
+and subliming particles hand to WRF-ELEC's small ions stays for weeks. In
+`box_0e_elec` the ions held 1.9–3.1 kC of positive and 2.0–3.7 kC of negative
+charge through the first lunar night and 2.6–5.2 and 0.7–3.0 kC through the
+second, half of it below about 30 km and nine-tenths below about 40 km
+(`climate/results/crm/elec_box_0e_elec.json`), and in the second lunar day the box's net charge
+rose to +10.7 kC at day 40 (at day 40.5, 7.0 kC on snow and 4.1 kC on the
+ions), its negative partner having fallen to the ground on precipitation; it
+stood near +2 kC for the rest of the run. WRF-ELEC gives the ions' charge to
+each new cloud at once. The lunar clear air relaxes net charge in 15 minutes
+at 35 km and 35 minutes at the ground (stage 1's conductivity with 100 aerosol
+particles per cm³), cloud in about a day.
+
+On 2026-10-05 both windows ran again with leakage (`var9` 1: each cell's net
+charge relaxing at σ/ε₀, with the cloud's conductivity where cloud water and
+ice reach 0.01 g/kg and the clear air's elsewhere), each changing only that:
+`box_0e_elec_leakage_first` beside `box_0e_elec_uncapped` and
+`box_0e_elec_leakage` beside `box_0e_elec_ground_rule`
+(`climate/results/crm/elec_leakage.json`). Within 33 minutes of day 40.5 the
+box's net charge fell from 11.4 kC to 1.2 kC.
+
+| Days | Run | Leakage | Flashes (to ground) | Charge separated, kC | In-cloud flash: median charge, energy | Net charge at the outputs | Field at the ground, median and largest (kV/m) | Away from particles, median and largest (kV/m) |
+|---|---|---|---|---|---|---|---|---|
+| 10.5–12 | `box_0e_elec_uncapped` | none | 13 (0) | 22.0 + 3.7 | 69 C, 55 GJ | −1.9 to +0.3 kC | 35, 228 | 7.5, 16 |
+| | `box_0e_elec_uncapped_corona` | none; point discharge | 6 (0) | 13.5 + 2.4 | 69 C, 54 GJ | −1.0 to −0.2 kC | 21, 123 | 5.0, 15 |
+| | `box_0e_elec` (cap) | none | 13 (0) | 18.0 + 2.8 | 80 C, 55 GJ | −1.4 to −0.3 kC | | |
+| | `box_0e_elec_leakage_first` | on | 11 (0) | 15.9 + 2.2 | 54 C, 47 GJ | −0.25 to +0.03 kC | 1.4, 39 | 0.23, 3.4 |
+| 40.5–42 | `box_0e_elec_ground_rule` | none | 144 (21) | 116.8 + 21.2 | 106 C, 79 GJ | +8.0 to +14.8 kC | 81, 243 | 21, 36 |
+| | `box_0e_elec` (5-km rule) | none | 157 (0) | 122.1 + 22.4 | 88 C, 70 GJ | +7.8 to +13.3 kC | | |
+| | `box_0e_elec_leakage` | on | 161 (39) | 124.3 + 20.6 | 98 C, 81 GJ | −1.0 to +4.8 kC | 4.7, 48 | 1.6, 19 |
+
+The field at the ground is the largest over land in each ten-step interval
+(the coarse run predates that log); away from particles, over the columns
+whose lowest level no particles reach.
+
+The leftover charge was an artifact of the missing conduction, and in the
+second lunar day it held the field at the ground near 20 kV/m all over the
+box, over a hundred times Earth's fair-weather field. With leakage the ions
+hold at most 175 C of either sign between storms, the field at the ground
+away from storms falls to a median 0.2–1.6 kV/m, below point discharge's
+lunar onset of 3.4 kV/m, and the strongest under the storms falls from
+228–243 kV/m to 39–48 kV/m, since leakage also acts on the charge rain
+carries below cloud base, where the clear air's conductivity applies. The
+storms are left much as they were: as many flashes, as much charge separated,
+flashes of a similar size starting at the same heights, and while active the
+same arrangement of charge (the main negative charge at 38–44 km with
+positive charge above and below it). Between storms the outputs hold less
+charge, some of it in decaying anvils at 54–60 km.
+
+The window with leakage makes 39 negative ground strikes among 161 flashes,
+against 21 among 144 without it: 70 of its flash starts meet WRF-ELEC's
+conditions for a negative ground flash against 54, and more of those reach
+air of −7 °C. They are smaller: a median 110 C (61–278 C, 10th to 90th
+percentile), at most 624 C, and a median 54 GJ. The start potentials do not
+show why there are more; with one realization each, part of the difference
+may be the weather's.
+
+So the lunar storms' lightning stands without leakage, but the field at the
+ground does not, nor the point-discharge comparison of "The first lunar day
+again": their fields away from storms were the leftover charge's. The author
+made leakage the lunar runs' default on 2026-10-05; the runs above keep the
+settings they ran with. The Takahashi windows ran without leakage as well; their arrangement of charge
+follows from the law's sign, while their ground strikes carry the same
+leftover charge as `box_0e_elec_ground_rule`'s.
+
+Since 2026-10-05 the leakage takes the conductivity column with the aerosol
+grown by the air's humidity (atmosphere/electricity README, "Humidity"). Its
+ions attach to the particles as in the continuum regime, which overstates the
+attachment as the air thins, so the clear air's conductivity aloft is the low
+end of what the particles allow: corrected for the transition regime it is
+5–12 % higher at 34 km, 12–25 % at 50 km and 23–45 % at 70 km, and the ground
+and cloud are hardly changed. `box_0e_elec_corrected` takes the column as it
+stands; the correction waits for stage 3's rebuild of the column with the
+regional aerosol (the author's decision, 2026-10-06).
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_elec_leakage      # and box_0e_elec_leakage_first
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_0e_elec_leakage --threads 4 --hours 6
+climate/gcm/.venv/bin/python -m climate.crm.elec_analysis leakage
+```
+
+### The leader's crossing
+
+WRF-ELEC's ground-strike rule counts a downward channel that reaches air of
+−7 °C in charge of the matching sign as reaching the ground: 3–5 km short of it
+on Earth, 34 km in the lunar air. Its stopping field, 0.15 of breakdown, would
+halt every lunar channel 15–25 km up. The literature on leaders (notes on the
+data drive, `leader_crossing.md`) stops a leader by neither: a leader carries on
+while the potential difference between its tip and the air ahead lasts
+(Lalande et al. 2002, their potential budget, Eq. 9; Mazur and Ruhnke's model,
+Mazur 2002), and thermalized leaders cross fields of a few hundred V/m
+(Gallimberti et al. 2002). What a long crossing costs is the drop along the
+channel, its internal field times its length: about 1 kV/m for a thermalized
+lightning leader at sea-level density (Mansell 2000; Boggs et al. 2018, who
+scale it with density as an assumption they say has not been well studied),
+1–10 kV/m in Lalande et al.'s range, near 100 kV/m in a channel that does not
+heat. The streamer zone at the tip needs only 0.2–0.4 MV.
+
+`var1` sets that internal field (V/m at 1.225 kg/m³, scaled by the air's
+density; `leader_v_m` in a case, 0 for none). Where it is set, a downward
+channel that meets WRF-ELEC's rule strikes only if the leader can carry on to
+the ground (`terluna_crosses` in `terluna_lightning.F`): the channel holds the
+potential where the flash started, as Mansell's model takes it, less the drop
+along it from the starting height, and at every level below the tip and at the
+ground's zero the tip must stay beyond the air's potential, on the channel's
+side, by what its streamer zone needs, 0.225 MV for a positive leader
+(Lalande et al.) and 0.4 MV for a negative one, raised 1.3 % per g/m³ of water
+vapour as the positive streamer field is (Allen and Boutlendj 1991). Humidity
+thus enters, as the streamer field's density scaling cancels in a potential,
+but it moves a fraction of a megavolt against drops and potentials of tens to
+hundreds. The path lightmsz draws is vertical, so the crossing is the column
+below the channel's start.
+
+`box_0e_elec_leader_1kv` and `box_0e_elec_leader_10kv` run
+`box_0e_elec_leakage`'s window (days 40.5–42, leakage on) with the crossing at
+1 and 10 kV/m, each changing only that (2026-10-05;
+`climate/results/crm/elec_leader_crossing.json`):
+
+| Internal field | Flashes (to ground) | Ground strikes' charge: median (10th–90th), largest | Energy: median, largest |
+|---|---|---|---|
+| none (WRF-ELEC's rule alone) | 161 (39, 24 %) | 110 C (61–278), 624 C | 54 GJ, 302 GJ |
+| 1 kV/m | 150 (30, 20 %) | 200 C (69–547), 927 C | 80 GJ, 306 GJ |
+| 10 kV/m | 229 (28, 12 %) | 81 C (59–289), 350 C | 47 GJ, 332 GJ |
+
+Each run is a separate realization of the window. Applied to the same
+strikes, the 39 of `box_0e_elec_leakage` (from lightmsz's report of each
+flash's starting potential, a median 307 MV, and the 32 km of sea-level-density
+path below its start, so 32 MV per kV/m), the crossing passes 35 at 1 kV/m, 32
+at 3 kV/m, 30 at 5 kV/m, 17 at 10 kV/m and 1 at 20 kV/m; for the 21 of
+`box_0e_elec_ground_rule`, 21, 19, 18, 12 and 2. That test leaves out the air's
+potential on the way down, which the model's test includes. At the literature's
+1–3 kV/m, then, the 34 km of clear air removes up to a fifth of the ground
+strikes WRF-ELEC's rule counts, and about a fifth of the lunar flashes
+strike the ground; the crossing takes half of them only near 10 kV/m. The
+crossing does not decide whether a lunar storm strikes the ground; WRF-ELEC's
+Earth-calibrated conditions at the start still do (a potential beyond 50 MV, a
+field above 10 kV/m, charge of the matching sign at −7 °C), as do processes the
+scheme leaves out: whether a downward end forms and leaves the cloud, whether
+the cloud end holds the channel's potential up through the 0.2–0.4 s the
+crossing takes at Earth's leader speeds, and current cutoff in a long, branched
+channel.
+
+The author made the crossing at 1 kV/m the lunar runs' default on 2026-10-05;
+the runs above keep the settings they ran with.
+
+`supercell_elec_leader_1kv` runs the Earth benchmark with the crossing at 1
+kV/m beside `supercell_elec_ground_rule`: its flash log is the same to the byte,
+7,406 flashes and 85 ground strikes, since the 3–5 km below Earth's −7 °C level
+cost a few megavolts against starting potentials beyond 50 MV. (The benchmark
+on 4 threads thus repeated itself bit for bit, where the lunar box does not;
+"Threads and reproducibility".)
+
+Humidity elsewhere (notes `humidity_corona_breakdown.md`). Point discharge's
+onset takes no humidity term: corona inception's threshold moves under 0.15 %
+per g/m³ (Ortéga et al. 2007), other measurements disagree in sign, and
+vegetation sets the onset more (3 kV/m over dense bushes, 5 kV/m on a barren
+ridge). Its linear scaling with density is likely too strong, the square root
+of the density ratio being better supported, a difference of at most 0.35
+kV/m at the lunar ground, inside the vegetation's range. The breakdown field
+takes none either: the runaway threshold follows the air's electron density
+(Dwyer 2007), which water vapour at the charging zone's 0.2–0.6 mol % changes
+by under 0.1 %, and the humidity-sensitive processes of initiation in cloud are
+in WRF-ELEC's Earth calibration already, the lunar charging zone holding
+slightly less vapour than Earth's at the same temperature (0.63 against 0.68
+mol % at −6 °C).
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_elec_leader_1kv   # and _10kv, supercell_elec_leader_1kv
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_0e_elec_leader_1kv --threads 4 --hours 6
+climate/gcm/.venv/bin/python -m climate.crm.elec_analysis leader
+```
+
+### The main run
+
+`box_0e_elec_corrected` is stage 2's main run: `box_0e_elec`'s two lunar days
+again from day 0 under the lunar rules from the start (the breakdown field's
+cap lifted, WRF-ELEC's ground rule with the leader's crossing at 1 kV/m,
+leakage through the humidity-corrected conductivity column) and with NSSL's
+rain and cloud ice ventilating at their lunar fall speeds. It ran on
+2026-10-07 and 08, 27.2 hours on 6 threads with one executable throughout
+(`climate/results/crm/elec_box_0e_elec_corrected.json`). Its first attempt,
+with the old ventilation, ran to day 7 and is kept as
+`box_0e_elec_corrected_before_ventilation_fix`; the two runs' strongest
+updrafts agree within about 1 m/s day by day.
+
+The storms charged from day 7, the field reached 100 kV/m on day 9, and the
+first flash came at day 10.66. The box flashed 530 times on 12 model days,
+199 times in the first lunar day and 331 in the second, the last at day 43.8,
+none in the lunar nights. The busiest hour held 45 flashes and the median
+hour with any 4. Over the box's 148,000 km² that is 0.022 flashes per km² per
+year, about a hundredth of Earth's average (2.7).
+
+| | In cloud | Negative to ground |
+|---|---|---|
+| Flashes | 424 | 106 (20 %) |
+| Start height, median (10th–90th percentile) | 35.8 km (33.8–39.8) | 35.8 km (33.8–37.8) |
+| Charge neutralized or lowered, median (10th–90th), largest | 108 C (48–218), 703 C | 149 C (63–434), 1,025 C |
+| Energy released, median (10th–90th), largest | 86 GJ (42–185), 758 GJ | 66 GJ (23–162), 325 GJ |
+| Channels in cloud, median | 29.8–41.8 km over 144 km² | 37.8–43.8 km over 72 km² |
+
+No positive ground strike occurred. The storms held at most 7.1 kC of
+positive and 5.4 kC of negative charge and 4.2 TJ of electrostatic energy,
+and the strongest field was 226 kV/m. The original run (`box_0e_elec`, under
+its own rules) made 504 flashes, all in cloud under its 5-km rule, with a
+median 90 C and 76 GJ. Runs of the same days that differ only by chance moved
+flash counts and median charges by 10–20 % (the windows above), so differences
+of that size between the two runs say nothing of the changed rules.
+
+Hail did 87 % of the non-inductive charging. In collisions with snow it took
++221 kC and −135 kC, with cloud ice +26 and −23 kC; graupel took +34 and −18
+kC with snow and +5.5 and −4.7 kC with ice; inductive charging added +60 and
+−7 kC on graupel and +17 and −6 kC on snow. Both lunar days held the normal
+arrangement. In the outputs where the main negative region held at least 20 C
+(21 in the first lunar day, 27 in the second) it sat at a median 40–42 km
+(−13 to −14 °C), carried 90–96 % by snow, with positive charge beneath it at
+about 32 km (−4 °C) in most outputs and above it at 58–64 km (−35 to −44 °C)
+in 5 of the first lunar day's outputs and 19 of the second's.
+
+With leakage the ions held at most 24 C of positive and 34 C of negative
+charge through the lunar nights, against 1.9–5.2 kC in the original run, and
+the box ended its two lunar days with no net charge. Within six hours of a
+flash the field at the ground over land reached a median of 4.9 kV/m at its
+strongest point in each ten-step interval (25.5 kV/m at the 90th percentile,
+61.5 at most), and 0.95 kV/m where no particles reached the lowest level (9.1
+at most). The cloud ice the radiation reads was cut at 140 µm in a third of
+its mass, at a mean radius of 150 µm above the cap, so the radiation sees that
+ice 7 % optically thicker than its size gives.
+
+Beside Morrison's storms at the same site and forcing (`box_0e`, the second
+lunar day; `climate/results/crm/box_box_0e_elec_corrected.json` against
+`box_box_0e.json`), the NSSL run's air at 2 m was 1.0 °C warmer and its dew
+point 0.8 °C higher at the same humidity, and it rained 55 % more by day (0.16
+against 0.11 mm/h). Its nights were much clearer near the ground: cloud at the
+ground covered 29 % of the box's columns through the night against 56 %, and
+cloud filled 7 % of the lowest kilometre against 23 %. Above the lowest
+kilometre the two schemes' cloud agrees within a few hundredths of cover. The
+Open Moon's night fog, which the aerosol study takes from the Morrison rings,
+therefore depends on the microphysics scheme by about a factor of two.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_elec_corrected
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_0e_elec_corrected --threads 6 --hours 36
+climate/gcm/.venv/bin/python -m climate.crm.elec_analysis box_0e_elec_corrected
+climate/gcm/.venv/bin/python -m climate.crm.box_analysis box_0e_elec_corrected --from-day 29.5
+```
+
+### Storm lives
+
+[storm_lives.py](storm_lives.py) follows each storm through two windows of the
+main run written every ten minutes, `box_0e_elec_corrected_storms_first` (days
+11.5–13.0) and `box_0e_elec_corrected_storms_second` (days 40.5–42.0), each run
+on 2026-10-08 from the main run's restart under its settings and executable
+(0.7 and 0.8 hours on 6 threads;
+`climate/results/crm/storms_box_0e_elec_corrected_storms_first.json` and
+`_second.json`). A storm's core is the columns holding at least 1 kg/m² of
+graupel and hail, joined across the box's periodic edges and followed from
+output to output by its overlap. CM1's threads make each window a new
+realization of its days. The windows' flashes follow the main run's for the
+first hours and then part from them: 68 against the main run's 129 on the
+first window's days, 125 against 174 on the second's. The windows therefore
+give the storms' lives, and the main run their numbers.
+
+| | Days 11.5–13.0 | Days 40.5–42.0 |
+|---|---|---|
+| Storm cores followed (whole lives within the window) | 68 (41) | 71 (31) |
+| Storms that flashed; their flashes (to ground) | 6; 68 (18) | 8; 125 (31) |
+| First flash after the core appeared, median (range) | 1.05 h (0.73–1.30) | 0.83 h (0.67–1.54) |
+| First flash after the core held 10 C, median (range) | 0.38 h (0.23–0.56) | 0.50 h (0.19–1.13) |
+| Time from first to last flash, median (range) | 0.57 h (0.13–1.44) | 0.37 h (one flash to 7.2) |
+| Flashes a minute in its busiest ten minutes, median (range) | 0.25 (0.1–0.6) | 0.35 (0.1–0.8) |
+| Life of a storm that flashed, median (range) | 7.2 h (5.7–8.8) | 7.7 h (5.0–12.2) |
+| Life of a storm that did not, median (90th percentile) | 1.7 h (5.0) | 1.7 h (5.8) |
+| Its core after the last flash, median (range) | 5.1 h (4.5–6.5) | 5.9 h (3.9–8.6) |
+
+Every flash started inside a core. The first window's track 14 shows the
+sequence. Its core appeared at hour 3.3 of the window with an updraft of 7 m/s.
+Charge appeared at hour 4.2, and by the first flash, at 4.55, the updraft had
+strengthened to 19 m/s, the graupel and hail in the charging zone (−5 to
+−30 °C) had grown from 0.07 to 12.5 million tonnes and the top had risen from
+40 to 64 km. The storm flashed 26 times in 1.2 hours, 7 of them to ground and at
+most five in ten minutes, while the updraft held at 17–21 m/s. The flashes
+stopped as the updraft weakened, from 17 m/s at hour 5.8 to 8 m/s twenty
+minutes later. The heaviest rain beneath it, 46 mm/h, came 40 minutes after
+the last flash. Its charge, at most 1,410 C positive and 1,210 C negative,
+drained over the next three hours, and its graupel fell out over five and a
+half, the core ending at hour 11.3 with its anvil still at 66 km.
+
+Most storms that flashed had their updraft, their graupel and hail in the
+charging zone and their flashes peak together, within half an hour of one
+another (medians of 10 minutes or less). Storms that met other cells flashed in
+bursts: the second window's longest-flashing storm (its track 48) took in seven
+other cores, two of which had flashed, and flashed at hours 25.2–26.2,
+28.8–29.7 and 32.5. The heaviest rain beneath a storm follows its most frequent
+flashes by a median 0.75–0.9 hours. The lives in the table count the storms
+each window holds whole, 4 and 3 of those that flashed.
+
+The storms that flashed were the strongest and deepest: updrafts of 12–36 m/s
+at their peak (medians 19 and 21 m/s) against a median 6 m/s for the rest, 3–49
+million tonnes of graupel and hail in the charging zone (medians 10 and 19)
+against 0.2, and tops at 66–98 km against medians of 54–56 km. The ranges
+overlap: some storms without a flash reached 18–23 m/s, 11–18 million tonnes
+and 78–88 km. Output by output, a storm's flashes follow its updraft
+(Spearman's ρ 0.50–0.54 with the volume rising faster than 5 m/s and with the
+strongest updraft) more closely than its graupel and hail (0.29–0.45), and
+hardly at all its cloud ice and snow, its top or its area (−0.13 to 0.09). With
+cores at 0.5 or 2 kg/m² the medians of the first flash's delay stay at
+0.83–1.05 hours and of the charge's at 0.38–0.50, while the flashing storms'
+median lives run 5.8–11 hours, longest at the lower threshold, which joins more
+of a storm's cells and its trailing precipitation.
+
+Earth's benchmark supercell (`supercell_elec`, output every five minutes, open
+edges; `climate/results/crm/storms_supercell_elec.json`), tracked the same way,
+flashed within the five minutes in which its core appeared and up to 151
+times a minute. At its peak it held 16 million tonnes of graupel and hail in
+its charging zone, within the lunar flashing storms' range. The lunar storms
+take about an hour from core to first flash and flash 190–1,500 times less
+often at their busiest. Both comparisons cross grids, 6 km against 1 km: on
+the benchmark a coarser grid gives fewer, larger flashes, and the lunar box at
+2 km charged its storms to 73 % of breakdown without a flash ("The fine box"),
+so how much of the delay and of the rate the grid sets is open.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_elec_corrected_storms_first   # and _second
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_0e_elec_corrected_storms_first --threads 6 --hours 8
+climate/gcm/.venv/bin/python -m climate.crm.storm_lives box_0e_elec_corrected_storms_first box_0e_elec_corrected_storms_second supercell_elec
 ```
 
 ## The gravity pair

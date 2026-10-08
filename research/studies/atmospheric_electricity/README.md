@@ -1,0 +1,677 @@
+# Atmospheric electricity on the Open Moon
+
+The author set this study's goal on 2026-10-02: to understand the Open Moon's
+atmospheric electricity about as well as the project understands its other
+subjects of similar importance. That covers the charge its storms build and the
+fields they make; its lightning (how often, of what kinds, how long and how
+energetic, and the nitrogen it fixes); the conductivity of its air from the
+ground to the conducting upper atmosphere; its fair-weather field and global
+circuit; and its transient luminous events (sprites, halos, jets and elves).
+
+The study draws on cloud microphysics in [climate/crm](../../../climate/crm/README.md),
+the air column and its ionization in [atmosphere/](../../../atmosphere/README.md),
+and the particles the protection lets through in
+[protection/](../../../protection/README.md). Models and diagnostics live in those
+domains; this folder holds the comparison between them and what it means.
+
+## What sets the answer
+
+Three features of the Open Moon pull in different directions.
+
+**Particles fall slowly.** CM1's Morrison scheme, patched for lunar gravity,
+scales each particle's fall speed at a given size by (g/g⊕)^((b+1)/3), where b is
+the exponent of its speed law: graupel falls at 0.44 times Earth's speed, snow
+0.43, cloud ice 0.30, rain 0.34 and cloud droplets 0.17. Graupel therefore meets
+ice crystals at about 1 m/s. In laboratory experiments the charge a graupel
+particle gains in each bouncing collision with an ice crystal rises steeply with
+impact speed, and collisions occur in proportion to the speed, so the same
+particles separate charge between about five and thirty times more slowly than
+on Earth, depending on how steep that rise is. How charge transfer behaves at
+these slow impacts is the largest uncertainty.
+
+**Storms are deep and slow.** The air's scale height is about six times Earth's,
+so convection and its mixed-phase layers reach about six times as high. A storm
+six times larger in every direction makes the same electric field from a sixth
+of the charge density, and a slower storm gives charge longer to build. Whether
+lunar storms are as much wider as they are deeper is measured in the boxes.
+
+**The air conducts little.** The column holds 7.25 times Earth's mass of air (1.2
+atm at a sixth of the gravity), so most of the troposphere lies deeper in the
+air than Earth's sea level. The nucleonic and electromagnetic cascades of cosmic
+rays die away above it, and muons carry the ionization there. The Moon has no
+global magnetic field, and the cosmic rays whose muons reach the lower air pass
+the regional magnets' fields of hundreds of nanotesla almost unbent. Weakly
+ionized air lets storm charge build longer before it leaks away; over land, the
+ground's radioactivity adds ionization near the surface.
+
+These effects are of similar size, so the answer turns on the particle
+populations, the storms' shape and lifetime, and the conductivity, which stage 1
+measures.
+
+## Stage 1: the storms already run, and the conducting air
+
+The CM1 runs saved graupel, cloud ice, snow and rain mass and number, cloud
+water, vertical wind, potential temperature and pressure every three model hours
+over two lunar days: the equatorial boxes `box_0e` (385 km square) and
+`box_0e_small` (192 km), `box_0e_small`'s twin with Earth's fall speeds
+(`box_0e_small_earth_fall`), and the flat rings `ring_equator`, `ring_70_45e`
+and `ring_70_135e`. Each run's second lunar day gives:
+
+- graupel, cloud ice and snow mass and number by height and temperature, with
+  sizes from the scheme's exponential distributions (graupel at 400 kg/m³);
+- the charging zone, the air between 0 and −40 °C where graupel, cloud ice or
+  snow and supercooled cloud water meet: its depth per unit of ground by
+  temperature, its share of the time, its course through the lunar day, and the
+  width of its storms in the boxes, with the thresholds varied;
+- updrafts through the charging zone, the mass-weighted fall speeds of graupel
+  and ice and their difference, and the graupel's bulk residence time (its mass
+  aloft over the rate it falls through the melting level);
+- the non-inductive charging rate from published laboratory laws applied to the
+  model's particles and impact speeds, with the speed dependence varied across
+  the laboratory range, and its integral up each column, the storm's generator
+  current density.
+
+The fall-speed pair shows what slower settling alone does to each of these.
+
+Alongside, an ionization and conductivity column for the Open Moon's air in
+[atmosphere/](../../../atmosphere/README.md): cosmic-ray ionization by depth at
+zero geomagnetic cutoff, at solar minimum and maximum, including the muons below
+Earth's sea-level depth; ionization from the ground over land; ion recombination
+and attachment to aerosol and cloud droplets; and ion mobility at the air's
+density. It gives the conductivity σ and the charge relaxation time ε₀/σ by
+height, in clear air and in cloud. Titan, whose low-gravity nitrogen atmosphere
+holds about ten times Earth's column of air, is the measured analogue: the
+Huygens probe measured its conductivity on the way down.
+
+A storm can make lightning where its generator current density exceeds the
+current the air conducts at the breakdown field (σ times that field, which
+scales with air density). Comparing the two, and the time to reach breakdown
+with the storms' lifetimes, shows which charging cases produce lightning, on the
+Moon and in the Earth-fall twin.
+
+### What stage 1 found
+
+The Open Moon has lightning. Its air holds storm charge so well that some
+storm columns reach the breakdown field under every charging law tried; how
+many, and how fast, turns on how much charge slow, lightly rimed graupel
+separates, which the laboratory has barely measured
+([stage1.py](stage1.py), [results/stage1.json](results/stage1.json); 2026-10-03).
+
+**The storms** ([climate/crm](../../../climate/crm/README.md), "What the storms
+hold for charging"). The 0 °C level stands near 25 km and −40 °C near 60 km,
+five to six times their heights in Earth's tropics. The charging zone is
+shallow and warm: four-fifths of it lies between 0 and −10 °C, a fifth between
+−10 and −20 °C, almost none colder, because the supercooled cloud water thins
+from 0.10–0.17 g/m³ to 0.03–0.05 g/m³. Graupel is plentiful (1.7–2.5 g/m³ in the
+boxes), 5–7 mm across by mass, and stays aloft for 4–5 hours; cloud ice is
+scarce, 2–10 crystals per litre, and snow carries most of the ice graupel
+meets. Graupel strikes ice at 1.3–1.5 m/s and rimes at 0.1–0.2 g m⁻² s⁻¹, the
+bottom of the range the laboratory measured.
+
+**Charging** ([charging.py](../../../atmosphere/electricity/charging.py)), in the
+equatorial box (385 km) and with the same particles falling at Earth's speeds,
+with the fall-speed pair's total charge separation at lunar against Earth's fall
+speeds:
+
+| Law (laboratory impact speeds) | Charging in the zone, pC m⁻³ s⁻¹ | At Earth's fall speeds | Storm-column current, top tenth / strongest, nA/m² | Fall-speed pair, lunar ÷ Earth's |
+|---|---|---|---|---|
+| Saunders and Peck (3–14 m/s) | 0.0003–0.0015 | 0.04–0.10 | 0.036 / 0.32 | 0.10 |
+| Takahashi (9 m/s) | 0.27–0.71 | 0.89–2.0 | 6.9 / 93 | 1.35 |
+| Pradeep Kumar et al. 2024 (1.2 m/s) | 0.02–0.09 | 0.05–0.21 | 1.1 / 15 | 1.29 |
+| Ávila et al. 2013 (1–3 m/s) | 0.0006–0.0014 | 0.0014–0.003 | 0.024 / 0.33 | 1.24 |
+
+Saunders and Peck's law nearly stops because most slow graupel rimes below its
+threshold of 0.1 g m⁻² s⁻¹. Takahashi's charge grows only linearly with impact
+speed, and the two experiments near lunar impact speeds bracket what slow bounces
+carry, 0.2 fC (Ávila et al.) to 6–8 fC (Pradeep Kumar et al.). Slower settling on
+its own cuts total charging tenfold under Saunders and Peck and raises it by a
+quarter to a third under the other laws, because six times more graupel stays
+aloft.
+
+**The conducting air** ([conductivity.py](../../../atmosphere/electricity/conductivity.py),
+[muons.py](../../../atmosphere/electricity/muons.py)). Below Earth's sea-level
+depth only muons and their decay electrons ionize the air. Traced with MCEq
+through the Open Moon's column, they make 0.05–0.06 ion pairs per cm³ per second
+at the charging zone (2,700–4,100 g/cm², 30–50 km), against 12 in an Earth storm's
+charging zone at 6 km, and 0.04 at the ground, against 2 over Earth's seas. Clear
+air there conducts 1.2–1.9 × 10⁻¹⁴ S/m without aerosol and 0.10–0.13 × 10⁻¹⁴ S/m with
+1000 particles per cm³ swollen by the air's humidity (0.2–0.3 × 10⁻¹⁴ S/m before
+the swelling and the attachment's pressure scaling were added on 2026-10-05;
+atmosphere/electricity README, "Humidity"). Inside cloud, where droplets take up the scarce ions, it
+conducts 1 × 10⁻¹⁶ S/m, so separated charge leaks away over about a day; in an
+Earth storm, over half an hour. The solar cycle leaves this unchanged below about
+90 km, since the muons' parent cosmic rays lie far above the energies it
+modulates. The same ion chain reproduces Earth's measured fair-weather
+conductivity (Gringel 1978) within 2–8 % from 5 to 30 km, and MCEq Earth's
+sea-level muons within 6–13 % above 10 GeV/c; it falls 30 % short at 1–10 GeV/c,
+energies that never reach the lunar troposphere.
+
+**Breakdown.** The runaway threshold at the zone's air density is 178–188 kV/m.
+Lunar cloud conducts 0.016–0.019 nA/m² at that field, against 0.8 nA/m² in Earth's
+storm clouds, whose charging currents of roughly 20–1000 nA/m² reach breakdown in
+seconds to minutes. In the lunar storms:
+
+| Law | Storm columns reaching breakdown, box (equatorial ring) | Time to breakdown in the box, top-tenth column / strongest |
+|---|---|---|
+| Saunders and Peck | 21 % (2 %) | 16 h / 1.4 h |
+| Takahashi | 67 % (28 %) | 4 min / 17 s |
+| Pradeep Kumar et al. | 62 % (15 %) | 24 min / 2 min |
+| Ávila et al. | 13 % (2 %) | 31 h / 1.3 h |
+
+With Earth's fall speeds (the twin), Saunders and Peck's law brings 55 % of
+storm columns to breakdown, the top tenth in 45 minutes. If Takahashi's law or
+the 1.2 m/s measurements hold, most lunar storms make lightning within minutes,
+as Earth's do. (Stage 2 overturns this: in the NSSL storms hail does
+most of Saunders and Peck's charging, and Takahashi's law changes the storms'
+polarity and leaves their flash rate as it was; item 6 below.) If Saunders and Peck's law or Ávila's small charges hold, only the
+strongest storm columns do, after one to sixteen hours, which may outlast a
+single convective cell; the three-hourly output cannot tell. The rings' weaker
+updrafts, in two dimensions, put fewer columns over the threshold.
+
+The comparison is a one-dimensional bound: all separated charge forms one layer,
+and it leaks through cloud. Stage 2 replaces it with charge carried on the
+particles, a field solver and discharges, and follows each cell's life. The
+decisive laboratory quantity is the charge per bounce at impact speeds of
+1–1.5 m/s and rime accretion rates of 0.1–0.3 g m⁻² s⁻¹, within reach of existing
+wind tunnels.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.mixed_phase_analysis box_0e          # each storm run
+/media/projectspace/terluna-research/venvs/mceq/bin/python -m atmosphere.electricity.muons moon   # and earth
+climate/gcm/.venv/bin/python -m atmosphere.electricity.conductivity
+climate/gcm/.venv/bin/python -m research.studies.atmospheric_electricity.stage1
+```
+
+## Stage 2: an electrified storm in CM1
+
+CM1 r22 includes the NSSL two-moment microphysics with Mansell's electrification
+hooks, the collision terms that charging uses, behind a switch CM1 leaves off.
+It has no charge-transfer law, charge transport, field solver or discharge
+scheme, and it fixes gravity at 9.8 m/s² in its own code.
+
+The electrified builds `earth_g_omp_elec` and `moon_omp_elec` (2026-10-03;
+[climate/crm](../../../climate/crm/README.md), "Electrified storms") put
+WRF-ELEC's NSSL module, which carries charge through every microphysical process
+([S8]), in place of CM1's copy of the scheme. Terluna's code passes CM1's arrays
+to WRF-ELEC's driver in WRF's order and keeps the charges in CM1's tracers. As
+WRF-ELEC's driver does, it runs the sedimentation in sub-steps, each followed by
+a solve for the field and by lightning: WRF-ELEC's branched flashes
+(MacGorman, Straka and Ziegler 2001 [S27]), in cloud and to ground, with the
+charge each neutralizes, its channels and the nitrogen oxides it makes, or its
+cylinders. Leakage through stage 1's conductivity and WRF-ELEC's screening
+layers at cloud edges are switches. The scheme's fall speeds take lunar gravity as
+Morrison's do.
+
+1. The builds, their checks (the field solver and the lightning against numpy
+   and against charge laid out by hand, the results against the number of
+   threads and across restarts) and an Earth benchmark storm, CM1's own
+   supercell, compared with published runs of the same charging and lightning
+   schemes ([S7], [S16], [S26]–[S30]; below). Done on 2026-10-03, and again on
+   2026-10-04 with the sub-steps and the branched flashes, at 2 km and in WRF-ELEC's
+   own test settings.
+2. `box_0e_elec`: `box_0e`'s inputs as written, with the NSSL microphysics,
+   charging and branched lightning from the start, over two lunar days with
+   three-hourly output and twelve-hourly restarts. Its sub-steps are 6.8 s,
+   scaled to its 2-km layers and slower graupel, and a downward channel strikes
+   the ground when it comes within 5 km of it. It compares the NSSL storm with
+   Morrison's at the same site and forcing, and gives the first lunar charge
+   structure and lightning. Running from 2026-10-04 at the author's go-ahead; a
+   first start without the sub-steps was stopped at day 4, before its storms had
+   charged.
+3. `box_0e_elec_fine`, the same site at 2 km over a box 128 km square, started
+   from the coarse run's averaged air a few hours before a stormy window and run
+   for two model days with output every 15 minutes, to resolve the storm cells
+   and draw the flashes on a finer grid. Set up on 2026-10-04 at the author's
+   request and run the same day at the author's go-ahead, from the coarse run's
+   day 10.75, four hours before its first flash. Its storms took most of the
+   first model day to grow from the averaged air, then matched the coarse box's
+   in updrafts and graupel and charged to about 1,500 C of each sign, but no
+   flash struck: the field peaked at 73 % of breakdown. At the coarse box's rate
+   of flashing storms per unit area, a box this size sees none in that time
+   55 % of the time, so the effect of the finer grid on the lightning is
+   still open (climate/crm README, "The fine box"). At the author's direction
+   it ran on toward the coarse box's busiest lightning, but its deep convection
+   collapsed after coarse day 13.25 while the coarse box's carried on, and the
+   author stopped it at coarse day 13.75 after three days without a flash. The
+   2-km lightning stays unmeasured; it needs a box wide enough for several
+   storms.
+4. The first lunar day's storms again from the coarse run's day-10.5 restart
+   (climate/crm README, "The first lunar day again"). WRF-ELEC caps the
+   breakdown field at 180 kV/m, a cap that on Earth applies only below about
+   4.5 km; in the lunar air it applies below about 36 km, where half the first
+   lunar day's flashes started. The author lifted it for the lunar runs on
+   2026-10-04, and the coarse run runs without it from day 18;
+   `box_0e_elec_uncapped` gives its first lunar day without it.
+   `box_0e_elec_uncapped_corona` adds point discharge from the ground (Standler
+   and Winn 1979), which WRF-ELEC lacks and the author left to the agent's
+   judgement: without it the field at the ground under the storms reaches
+   100–220 kV/m, where on Earth the ground's plants and points hold it near
+   5–12 kV/m. The pair shows what that discharge changes before other runs take
+   it up. A 30-minute check held the ground's field at the onset where no
+   particles reach the lowest level, but not under rain, where WRF-ELEC hands
+   the ground's ions to the rain at once and the scheme's ions do not climb in
+   the field. Both ran on 2026-10-04. Without the cap a third of the flashes
+   started below 34.8 km, against half under it, with 123 flashes against 162
+   and a tenth more charge each. Point discharge cut the dry ground's
+   strongest field from a median 11 to 7 kV/m but left the strongest under
+   storms near 34 kV/m (40 without it). On several threads CM1 does not repeat
+   itself bit for bit, so each pair compares realizations, and the counts lie
+   within what the weather alone could change (climate/crm README).
+5. Ground strikes (climate/crm README, "Ground strikes"). No lunar flash struck
+   the ground until 2026-10-05, an artifact: the lunar ground rule kept
+   WRF-ELEC's demand for matching charge 5 km up, where the storms have none,
+   and the Earth benchmarks ran with WRF-ELEC's rule switched off. The storms
+   hold their charge as Earth's do, with −7 °C just beneath the main negative
+   charge, so WRF-ELEC's own rule fits them. Under it the busiest lunar storms
+   (days 40.5–42) make 21 negative ground strikes among 144 flashes, a median
+   195 C and 69 GJ each (up to 889 C and 437 GJ), and the Earth benchmark makes
+   1.1 % ground strikes from 36.8 min, as published runs do. The rule takes a
+   channel at −7 °C, 34 km up, to reach the ground, so this is an upper bound;
+   WRF-ELEC's stopping field, which halts every channel 15–25 km up, gives the
+   lower bound of none. A rule for a leader's crossing of that gap comes next.
+6. The charging law (climate/crm README, "The charging law"). Both windows,
+   days 10.5–12 and 40.5–42, ran again on 2026-10-05 under Takahashi's law,
+   each changing only the law, with the runs' three-hourly output. The storms
+   make as many flashes as under Saunders and Peck's law (14 against 6–13,
+   and 139 against 144–157), separate as much charge and flash no sooner.
+   Stage 1's two hundred to five hundred times came from the Morrison storms'
+   graupel; in the NSSL storms hail, which falls faster and rimes above
+   Saunders and Peck's threshold, does 82–88 % of that law's charging. The law
+   sets the storms' polarity instead. At the lunar storms' 0.03–0.17 g/m³ of
+   cloud water, Takahashi's table charges rimed ice positively at every
+   temperature, and the storms take an inverted dipole: the main negative
+   charge at 48–58 km (−23 to −35 °C) above positive charge at 32–36 km, where
+   Saunders and Peck's law gives the normal arrangement with the main negative
+   charge at 38–44 km. The laboratory measurements at 1.2–1.8 m/s also charge
+   rimed ice positively ([S12], [S13]), but they bear only on the graupel: the
+   storms' hail, which does most of the charging, falls at 4.8–7.7 m/s and
+   strikes ice and snow at 4.4–7.6 m/s. Where it charges, at −5 to −16 °C in
+   0.02–0.18 g/m³ of cloud water, Saunders and Peck's law charges it both ways
+   and Takahashi's table positively, and the polarity rests on that
+   disagreement. Under Takahashi's law the flashes start
+   higher and release one and a half to two times the energy (a median 106–119
+   GJ against 54–79), and the second window's ten ground strikes, an upper
+   bound by WRF-ELEC's rule, brought down a median 204 C, the largest 1,489 C.
+7. Leakage (climate/crm README, "Leakage"). With nothing to conduct it, the
+   charge evaporating cloud leaves on WRF-ELEC's small ions stayed for weeks:
+   1.9–3.7 kC of each sign through the first lunar night and 0.7–5.2 kC
+   through the second, and 11.4 kC net at day
+   40.5, which held the field at the ground near 20 kV/m all over the box.
+   Both windows ran again on 2026-10-05 with leakage through stage 1's
+   conductivity, each changing only that. The leftover charge went within the
+   hour, and the field at the ground away from storms fell to a median 0.2–1.6
+   kV/m and under them from 228–243 to 39–48 kV/m at most. The lightning stayed
+   as it was (11 flashes against 6–13, 161 against 144–157), while the busy
+   window's ground strikes rose to 39 against 21, smaller ones (a median 110 C,
+   at most 624 C; item 8 adds the leader's crossing). The fields at the ground of item 4's point-discharge
+   comparison were the leftover charge's. The author made leakage the lunar
+   runs' default the same day.
+8. Humidity and the leader's crossing (2026-10-05; climate/crm README, "The
+   leader's crossing"; atmosphere/electricity README, "Humidity"). The lunar
+   air is humid, 84 % relative humidity in clear air at the ground and 52–64 %
+   from 10 to 50 km. Its aerosol now swells with that humidity (κ-Köhler,
+   [S41], with κ 0.3 and 0.1–1.0 as a bracket, [S45]) and takes up ions by a coefficient that scales with pressure ([S42]),
+   which lowers clear air's conductivity by 12 % at the ground and 22 % at 34
+   km. That scaling is the continuum regime's and makes the values aloft the
+   low end, 5–12 % low at 34 km and 23–45 % at 70 km; they stand until stage 3
+   rebuilds the column (author, 2026-10-06). The ions' mobility and
+   recombination take no humidity term ([S43],
+   [S44]), nor do point discharge's onset ([S51]) or the breakdown field
+   ([S14]). A ground strike can now need the leader to cross the 34 km below
+   the −7 °C level: it carries on while its tip keeps the potential its
+   streamer zone needs beyond the air's ([S46], [S47]), the channel losing its
+   internal field times its length, about 1 kV/m at sea-level density for a
+   thermalized leader ([S48], [S49]; 1–10 kV/m), and humidity raising the
+   streamer zone's need by 1.3 % per g/m³ ([S50]), a fraction of a megavolt.
+   At 1–3 kV/m the crossing passes 82–100 % of the ground strikes WRF-ELEC's
+   rule counts, and about a fifth of the lunar flashes strike the ground (30
+   of 150 at 1 kV/m); it takes half of them near 10 kV/m (28 of 229) and
+   nearly all at 20 kV/m. On Earth's benchmark storm at 1 kV/m it changes
+   nothing: the same 85 ground strikes among 7,406 flashes. The author made
+   the crossing at 1 kV/m the lunar runs' default the same day. So the ground strikes' number turns on WRF-ELEC's
+   Earth-calibrated conditions at the start and on what the scheme leaves out
+   (a downward end leaving the cloud, the cloud holding the channel's
+   potential through the 0.2–0.4 s crossing, current cutoff), and on the
+   internal field above about 5 kV/m.
+9. The aerosol near the ground ([open_moon_aerosol](../open_moon_aerosol/README.md),
+   2026-10-05), built from the ecology register's landscapes and organisms and the
+   climate runs: the seas, forests, fog-desert plains and polar lands give the
+   ground a conductivity of about 2.2–2.7 × 10⁻¹⁵ S/m (0.6–4.7 across its cases;
+   its Earth checks lean high, by up to two to three times), charge relaxing in
+   about an hour, 2–4 % of that in fog, and 80–160 cloud nuclei
+   per cm³ at 0.3 % supersaturation by day, about the storm runs' 100.
+10. The main run (`box_0e_elec_corrected`; climate/crm README, "The main run";
+   2026-10-07 and 08): the two lunar days again from day 0 under every lunar rule
+   and with NSSL's rain and cloud ice ventilating at their lunar fall speeds. The
+   storms flashed 530 times on 12 model days, none in the lunar nights, 0.022
+   flashes per km² per year, about a hundredth of Earth's average; 106 of them
+   (20 %) were negative ground strikes and none positive. In-cloud flashes
+   started at a median 35.8 km and neutralized 108 C (48–218 C, 10th to 90th
+   percentile) and released 86 GJ; ground strikes lowered 149 C (63–434 C, up
+   to 1,025 C) and released 66 GJ. Hail did 87 % of the charging, and the storms
+   held the normal arrangement: the main negative charge at 40–42 km (−13 to
+   −14 °C), carried 90–96 % by snow, with positive charge beneath at about 32 km
+   (−4 °C) and above at 58–64 km. Leakage kept the leftover charge under 35 C
+   through the nights. Beside Morrison's storms at the same site the NSSL run was
+   1 °C warmer at 2 m, rained 55 % more by day and had half the night fog.
+11. Windows of the main run's busiest days, run again from its restarts with
+   output every ten minutes to follow each storm's life (days 11.5–13.0 and
+   40.5–42.0; run on 2026-10-08; climate/crm README, "Storm lives"). Of the 139
+   storm cores followed, 14 flashed, the strongest and deepest of them, and
+   every flash started inside a core. A storm's first flash came 0.7–1.5 hours
+   after its core of graupel and hail formed and 0.2–1.1 hours after its charge
+   reached 10 C. It flashed for a median 0.4–0.6 hours, at most 0.8 times a
+   minute, while its updraft and its graupel and hail peaked, and its core lasted
+   3.9–8.6 hours after the last flash. Storms that flashed lived 5.0–12.2 hours,
+   the rest a median 1.7. Earth's benchmark supercell, tracked the same way,
+   flashed within five minutes of its core forming and up to 151 times a minute,
+   with as much graupel and hail in its charging zone. The windows are new
+   realizations of their days, with 68 and 125 flashes against the main run's
+   129 and 174, so they give the storms' lives and the main run their numbers.
+
+It gives the storms' charge structure, the field by height, flash rates and
+types (within cloud and to ground), flash extent, the charge each flash moves
+and the nitrogen oxides it makes.
+
+### Thunder
+
+[thunder.py](thunder.py) ([results/thunder.json](results/thunder.json),
+2026-10-08) traces thunder from the main run's 530 flashes to the ground,
+through the box's own air at the hours that flashed and in the design air's
+composition, in eight directions
+([atmosphere/electricity/thunder.py](../../../atmosphere/electricity/thunder.py)).
+A flash's sound is 0.18 % of the electrostatic energy it releases (Holmes et
+al. 1971; tried at a tenth and ten times that), spread along its channel, in a
+spectrum peaked at Few's (1969) frequency. A ground strike's channel runs on
+from its lowest point in cloud down to the ground, which the flash log does not
+draw, and takes its share of the energy there. (The thunder first traced on
+2026-10-05 took the original run's flashes, all in cloud; its typical flash
+matches the typical flash in cloud here within a decibel.)
+
+A typical flash in cloud (86 GJ, its channel 30–42 km up) peaks at 27 Hz, a
+large one (the top tenth by energy, 185 GJ, 26–48 km) at 23 Hz. Directly
+below, its thunder arrives 87 s after the flash and lasts about 35 s (62 s for
+the large flash): 89–91 dB at 31.5 Hz and 86–87 dB at 63 Hz in its loudest
+second, 63–64 dBA, a deep rumble with almost nothing above 250 Hz. Across the
+424 flashes in cloud it reaches 60–68 dBA there (10th to 90th percentile). It
+falls to 57 dBA at 25 km, 51 at 50 km and 43 at 100 km.
+
+A ground strike is far louder near it. The typical one (66 GJ, the channel from
+44 km to the ground) peaks at 53 Hz; at the strike its thunder begins within 2
+s and lasts 27 s, at 103 dB at 31.5 Hz and 107 dB at 63 Hz in its loudest
+second, 95 dBA (93–97 dBA across the 106 strikes), the large one (162 GJ)
+97 dBA. It falls to 75 dBA at 11 km, 66 at 25 km, 56 at 50 km and 43 at
+100 km.
+
+The air cools only 1.0 K per km over the lowest 30 km, so sound bends upward
+gently, and the silent zone beyond the ray that grazes the ground starts
+175–220 km out; the box's weak eastward wind (up to 7 m/s aloft) carries it
+about 30 km farther east than west. Within that edge the thunder stays above
+the threshold of hearing; the edge, not the flash's strength, sets the range.
+It stays above an ordinary daytime background of 45 dBA to 65–110 km for
+flashes in cloud (median 82 km) and 69–113 km for ground strikes (median 93
+km), and at a tenth or ten times the acoustic share the typical flash in cloud
+to 31 or 193 km.
+
+The same calculation for Earth's benchmark flash (1.2 GJ over 4.75–10.75 km)
+in the US standard atmosphere puts its thunder at 76.5 dBA directly below,
+arriving after 15 s and lasting 17 s, and the same flash as a ground strike at
+88 dBA, both audible to 41 km and above 45 dBA to 27–31 km, where thunder on
+Earth is seldom heard beyond 15–25 km. The calculation leaves out wind gusts
+and turbulence near the ground, soft ground and the storm's own noise, so its
+ranges run long by a similar factor on the Moon, which would put lunar thunder
+above a daytime background to roughly 40–50 km and audible in quiet to 100–150
+km. Under a storm, lunar thunder from flashes in cloud is about 13 dB quieter
+on the A-weighted scale than Earth's, being four to five times farther
+overhead, and far deeper and longer; near a lunar ground strike it is about 7
+dB louder than near Earth's benchmark strike, its channel carrying some 17
+times the energy per metre, at a third of the pitch.
+
+### Nitrogen fixed by lightning
+
+[nitrogen.py](nitrogen.py)
+([results/nitrogen_oxides.json](results/nitrogen_oxides.json), 2026-10-08)
+estimates the nitrogen oxides the main run's 530 flashes make from Earth's
+measured yields ([S33], [S53]–[S56], [S58], [S59]; the literature note
+`lightning_nox.md` on the data drive). The model's own yield counts the points
+its channels take on the grid and runs about fifty times low on Earth's
+benchmark storm, so it is not used. Earth's yields are expressed three ways,
+which agree for Earth's flashes and part for these. A flash in cloud releases a
+median 86 GJ and moves 108 C, a ground strike 66 GJ and 149 C, 69 and 53 times
+the median energy of the benchmark storm's flashes on its 1-km grid; no
+published yield covers flashes this large.
+
+| Counted | NOx a flash | kg N per km² a year over the box | Share of Earth's 9.8 |
+|---|---|---|---|
+| Per flash: 250 mol (33–664) | 250 mol | 0.07 (0.009–0.19) | 0.7 % |
+| Per joule released: 9–10 × 10¹⁶ molecules (1–50) | 15,800 mol | 4.6 (0.4–24) | 47 % |
+| Per metre of channel at its pressure (no branches: a lower bound) | 64 mol | 0.02 (0.004–0.2) | 0.2 % |
+
+The yields take the design air's oxygen at 0.84–0.93 of Earth's, a scaling
+argument: the literature search found no laboratory yield between 14 and 21 %
+oxygen. The site has 0.022 flashes per km² a year, 0.8 % of Earth's average;
+counted per joule, the nitrogen its lightning fixes per unit area comes to
+about half of Earth's lightning's, counted per flash or per metre under 1 %.
+Which way holds for flashes this large decides the answer across more than two
+orders of magnitude, and no measurement settles it.
+
+The grid bears on the answer as well. On a 2-km grid against its 1-km one, the
+benchmark storm makes 16 % fewer flashes, each releasing twice the median
+energy, and 65 % more energy in all. The box's 6-km grid therefore likely
+raises the per-joule count and lowers the per-flash one, by amounts no finer
+lunar run has measured.
+
+```sh
+climate/gcm/.venv/bin/python -m research.studies.atmospheric_electricity.thunder     # about 10 minutes
+climate/gcm/.venv/bin/python -m research.studies.atmospheric_electricity.nitrogen
+```
+
+### What stage 2 found
+
+The Open Moon's storms electrify and make lightning when CM1 carries their
+charge, solves for their field and discharges it, under every lunar rule this
+stage set: the breakdown field's cap lifted, WRF-ELEC's ground rule with the
+leader's crossing, leakage through the conducting air, and NSSL's fall speeds
+and ventilation at lunar gravity (items 2–11; [climate/crm](../../../climate/crm/README.md),
+"The main run" and "Storm lives"). The evidence is a calculation for one
+equatorial lowland site on a 6-km grid. Earth's benchmark storm checks the code
+and its schemes against published runs; nothing lunar is measured.
+
+**How the storms charge.** Hail does most of the charging, 87 % in the main
+run. It falls faster than graupel and rimes above Saunders and Peck's
+threshold, which slow lunar graupel mostly misses. Under that law the storms
+hold the normal arrangement: the main negative charge at 40–42 km (−13 to
+−14 °C), carried by snow, with positive charge beneath it at about 32 km and
+above it at 58–64 km. Takahashi's law gives as many flashes with the
+arrangement inverted, so the storms' polarity rests on how hail charges at −5
+to −16 °C in thin cloud water, which the laboratory has not settled (item 6).
+In the windows 14 of 139 storm cores flashed, 0.7–1.5 hours after each formed;
+stage 1's one-dimensional bound put the strongest column's time to breakdown
+under Saunders and Peck's law at 1.4 hours, without the hail.
+
+**The lightning.** The main run flashed 530 times in its two lunar days, all
+by day, 0.022 flashes per km² a year, about a hundredth of Earth's average. A
+fifth were negative ground strikes and none positive. Flashes start near 36 km
+and are large: a median 108 C and 86 GJ in cloud and 149 C and 66 GJ to
+ground, 53–69 times the median energy of the benchmark storm's flashes. A
+storm flashes for a median half hour, at most 0.8 times a minute, about an
+hour after its core forms. Storms that flash live 5–12 hours, and their cores
+outlast the lightning by 4–9 hours (item 11).
+
+**What the storms leave in the air.** With leakage through the conducting air,
+the storms leave little charge behind, under 35 C on the ions through the
+nights, and the box ends its two lunar days with no net charge. Within six
+hours of a flash the field at the ground over land peaks at a median 4.9 kV/m
+(61.5 kV/m at most), and at 0.95 kV/m where no particles reach the ground.
+
+**Thunder and nitrogen.** Lunar thunder is a deep rumble: beneath a flash in
+cloud it peaks at 23–27 Hz and 60–68 dBA, near a ground strike at 53 Hz and
+93–97 dBA, louder than near Earth's benchmark strike. Allowing for what the
+calculation leaves out, it stays above a daytime background to roughly 40–50
+km and audible in quiet to 100–150 km. The nitrogen the lightning fixes per
+unit area comes to 0.2–47 % of Earth's lightning's, depending on how Earth's
+yields carry over to flashes this large.
+
+What stays open, for the storms, their electricity, the global circuit and the
+plasma above it, is gathered under "Where the study stands" below.
+
+## Stage 3: the global circuit and transient luminous events
+
+The fair-weather field and global circuit follow from stage 2's storm currents,
+weighted by how often each kind of storm occurs over the Moon (from the GCM and
+the rings), the column resistances from stage 1, and a conducting upper
+boundary from the ionization column carried upward. Transient luminous events
+follow from the charge that large flashes move: a quasi-electrostatic
+calculation for sprites and halos [S4], an electromagnetic-pulse calculation for
+elves, and a discharge-propagation treatment for jets [S5], with thresholds set
+by the gas density at the Open Moon's heights.
+
+## Where the study stands
+
+On 2026-10-08 stages 1 and 2 are done and stage 3 is planned. This section
+gathers what the runs show about the Open Moon's storms and what stays open,
+the global circuit and the plasma above it included.
+
+**The storms.** Storms follow the month-long day. At the equator the mornings
+are clear, the land warms for about a week, and storms fill the afternoon, from
+about one to seven Earth days after noon, where the two low-level streams of
+the day–night circulation meet. The nights are calm, saturated and often foggy,
+and no run has flashed at night ([climate/crm](../../../climate/crm/README.md),
+"What the ring shows" and "A three-dimensional box at a crossing"). A place on
+equatorial land gets about two rainy spells per lunar day, 38–61 mm in all. The
+freezing level stands near 25 km and −40 °C near 60 km. Typical storm clouds
+reach 28 km, the tallest tenth 68 km or more and the strongest storms in the
+box nearly 100 km, and the largest systems spread anvils about a thousand
+kilometres wide. Updrafts reach 10–20 m/s, 36 m/s in the strongest. Every
+particle falls slowly, so graupel stays aloft four to five hours and most of
+the falling water evaporates before it lands, which keeps the lower air cooler
+and drier and the rain at the ground lighter ("The rain test"). Elsewhere the
+runs rain less. Under the GCM's sinking air the rings circling 45° rain 9–12 mm
+per lunar day over land and those circling 80° almost none
+(`climate/results/crm/ring_ring_45n_lsw.json` and its kin); the steep rings,
+which reach 70°, rain 3–6 mm per lunar day over land along their paths; and a
+box over dry highlands at 44.7° S stays sunny, with 1 % cloud and 0.1–0.2 mm of
+rain per lunar day ("Tilted rings", "A box over the highlands").
+
+**Their lives and lightning.** Most storm cores live under two hours, the
+strongest five to twelve. A strong storm grows for about an hour as graupel
+and hail build to millions of tonnes between 31 and 53 km, where the air is −5
+to −30 °C, holds its peak for an hour or so, and then rains for four to nine
+hours more from its decaying anvil ("Storm lives"). About a tenth of the storms
+flash, the strongest and deepest, an hour after their cores form, for a median
+half hour and at under one flash a minute. The flashes are large, a median
+110–150 C and 65–85 GJ; they start about 36 km up, inside the 35–45 km flight
+band, and a fifth strike the ground. Hail does most of the charging (stage 2,
+above).
+
+**How well it is known.** The storms come from one cloud-resolving model, CM1,
+on 6-km columns over placeholder land, and the electricity from one
+equatorial lowland box. Their broad pattern holds across the runs. Their
+amounts differ from the GCM's: CM1 rains a fifth to a half as much over
+equatorial land and runs about 3 °C warmer and more humid near the ground, and
+the climate work stays paused with comfort carried as the range between the
+two (decisions register, 2026-09-30).
+
+### Open questions
+
+**The storms**
+- Storms over wetter highlands, at high latitudes and over the seas in three
+  dimensions. The rings carry those places only as slices, and the climate
+  README has yet to report the rings circling 45° and 80°, whose products
+  stand in `climate/results/crm/`.
+- Whether lunar convection is Earth's stretched sixfold in size and time. The
+  gravity pair has yet to convect; its next design prescribes the ring's
+  radiative cooling over the seas ("The gravity pair").
+- Which model holds near the ground. CM1 and the GCM differ on the warmth,
+  humidity and rain over land; an independent model would decide (ROCKE-3D is
+  open).
+- The microphysics. NSSL's storms have half the night fog of Morrison's, from
+  whose rings the aerosol study takes its fog.
+
+**Charging and lightning**
+- The charge a collision transfers at lunar impact speeds and in thin cloud
+  water, which sets the storms' polarity (item 6; stage 1's decisive
+  laboratory quantity).
+- The lightning on a finer grid. The fine box at 2 km charged its storms to
+  73 % of breakdown without a flash. Flash counts, sizes and delays and the
+  nitrogen estimate carry the 6-km grid's uncertainty until a 2-km box wide
+  enough for several storms runs.
+- The nitrogen yield of flashes that release tens to hundreds of gigajoules,
+  which no measurement covers ("Nitrogen fixed by lightning").
+- Craft in the flight band. Flashes start inside the 35–45 km band, where the
+  field reaches 150–240 kV/m before a flash. How craft keep clear of storms,
+  and whether they would trigger flashes, is open.
+- Runaway electrons. The breakdown field the storms reach is the runaway
+  threshold ([S14]), so their strongest fields may drive electron avalanches,
+  with gamma-ray glows and flashes whose dose in the flight band is unknown.
+- Chance. CM1 on several threads repeats a run only as a new realization, so
+  differences of 10–20 % between runs of a setting carry no meaning.
+
+**The global circuit (stage 3)**
+- The generator. Each storm's conduction current to the upper atmosphere
+  follows from the charge, field and conductivity above the main run's storms,
+  which the runs hold and nothing has yet diagnosed; beside it stand the
+  currents lightning, precipitation and point discharge carry to the ground.
+- Its rhythm. Storms grow only in the afternoon, so the generator travels
+  with the Sun around the Moon once a month and waxes and wanes with the land
+  under the afternoon, a monthly counterpart of Earth's daily Carnegie curve.
+- The load. The fair-weather columns' resistance is set mostly in the lowest
+  kilometres: by the regional aerosol with a profile aloft (the aerosol study
+  gives 2.2–2.7 × 10⁻¹⁵ S/m at the ground), by night fog, which conducts 2–4 %
+  of that, by the highlands' shorter columns, and aloft by the ions' attachment,
+  whose transition regime stage 3's rebuilt column takes up (author,
+  2026-10-06).
+- The closure. Generator and load together set the upper boundary's
+  potential, the fair-weather field at the ground and the air–earth current.
+
+**The plasma above**
+- Where the circuit's upper boundary forms. The conductivity column ends at 149
+  km (22 hPa), where cosmic rays alone make the air conduct 2–4 × 10⁻¹² S/m,
+  with and without aerosol, and charge relaxes in 2–4 seconds. Above it the air
+  is ionized by cosmic rays, by the ultraviolet the shield lets through (3 ×
+  10⁻⁵ to 2.5 × 10⁻³ of sunlight below 175 nm,
+  [protection](../../../protection/README.md)), by the sky's Lyman-α glow and
+  by particles from the magnetosphere. No model yet gives that air's electron
+  densities and conductivity, or the height where it closes the circuit.
+- The night side. Through two-week nights the upper air loses its direct
+  sunlight; how the upper boundary holds there is open.
+- The magnetosphere's potentials. The four regional magnets give the Moon a
+  magnetosphere of 1.5 × 10²¹ A·m² standing off the solar wind near 10 lunar
+  radii. The wind would drive potentials across its open field lines over the
+  poles and currents along the field into the upper air, which may set their
+  own potentials on the circuit's upper boundary there. The protection work
+  leaves the global plasma unmodelled.
+- The plasma beyond the shadow. The sunlit exosphere's ions and the solar
+  wind's charge exchange, which the loss response counts as mass lost to space
+  ([atmosphere/loss_response](../../../atmosphere/loss_response/README.md)),
+  also feed the magnetosphere's plasma, whose currents and potentials no model
+  yet gives.
+- Lightning's reach into the plasma. Whether the flashes' radio waves travel
+  between the ground and the upper boundary, and leave as whistlers along the
+  magnets' field lines, depends on that plasma. The cavity between the ground
+  and the upper boundary may resonate as Earth's does; an ideal cavity the
+  Moon's size would ring near 39 Hz (c√2/2πR).
+
+**Transient luminous events (stage 3)**
+- Sprites and halos. The ground strikes lower a median 149 C, up to 1,025 C,
+  from 36–44 km. The breakdown field scales with the gas density, so any
+  sprites form far above the column, where the upper air's conductivity
+  decides how long the field above a storm lasts ([S4]).
+- Elves. They need the flashes' peak currents, which the branched scheme does
+  not give.
+- Jets. They would rise from storm tops at 60–100 km toward the upper boundary
+  ([S5]).
+
+## How the work is done
+
+Matched boxes differ only in the treatment under test: site, surface, forcing,
+grid and starting state stay the same, and comparisons use each run's second
+lunar day. Grid spacing and output frequency are checked on short windows from
+saved restarts; every run kept its twelve-hourly restarts. Runs fit the laptop:
+8 cores and 31 GB shared with other work, in sessions of hours with rests, and
+no rented compute. CM1 and the GCM disagree about the air near the ground over
+land ([climate/crm](../../../climate/crm/README.md)); each stage carries that as a
+range of storm environments.
+
+Products follow [shared/README.md](../../../shared/README.md). Sources and what was
+read of them are in [sources.json](sources.json).

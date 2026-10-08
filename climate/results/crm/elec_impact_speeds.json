@@ -1,0 +1,239 @@
+{
+ "schema": "terluna.climate.crm-impact-speeds/1",
+ "windows": {
+  "first_lunar_day": {
+   "case": "box_0e_elec",
+   "days": [
+    10.5,
+    12.0
+   ],
+   "snapshots": 12,
+   "charging_zone_c": [
+    -30.0,
+    -5.0
+   ],
+   "gravity_ratio": 0.1656,
+   "cloud_ice": {
+    "fall_speed_m_s": [
+     0.2546,
+     0.2754,
+     0.2901
+    ],
+    "mass_kg_per_m3_summed": 0.02443
+   },
+   "snow": {
+    "fall_speed_m_s": [
+     0.4227,
+     0.4578,
+     0.4872
+    ],
+    "mass_kg_per_m3_summed": 1.894
+   },
+   "graupel": {
+    "fall_speed_m_s": [
+     1.544,
+     2.43,
+     3.916
+    ],
+    "diameter_mm": 4.397,
+    "density_kg_m3": 444.7,
+    "cloud_water_g_m3": [
+     0.0,
+     0.0,
+     0.0148
+    ],
+    "rime_accretion_upper_g_m2_s": [
+     0.0,
+     0.0,
+     0.04913
+    ],
+    "share_negative": 0.02524,
+    "share_positive": 0.03799,
+    "share_uncharged": 0.9368,
+    "charging_cloud_water_g_m3": [
+     0.03924,
+     0.05767,
+     0.1382
+    ],
+    "charging_temperature_c": [
+     -11.66,
+     -7.269,
+     -5.398
+    ],
+    "impact_on_cloud_ice_m_s": [
+     1.287,
+     2.174,
+     3.625
+    ],
+    "impact_on_snow_m_s": [
+     1.091,
+     1.962,
+     3.547
+    ]
+   },
+   "hail": {
+    "fall_speed_m_s": [
+     4.835,
+     5.861,
+     7.27
+    ],
+    "diameter_mm": 12.0,
+    "density_kg_m3": 714.5,
+    "cloud_water_g_m3": [
+     0.0,
+     9.683e-06,
+     0.03927
+    ],
+    "rime_accretion_upper_g_m2_s": [
+     0.0,
+     4.642e-05,
+     0.263
+    ],
+    "share_negative": 0.08231,
+    "share_positive": 0.09934,
+    "share_uncharged": 0.8183,
+    "charging_cloud_water_g_m3": [
+     0.02062,
+     0.04165,
+     0.0856
+    ],
+    "charging_temperature_c": [
+     -15.66,
+     -8.114,
+     -5.4
+    ],
+    "impact_on_cloud_ice_m_s": [
+     4.615,
+     5.602,
+     7.123
+    ],
+    "impact_on_snow_m_s": [
+     4.378,
+     5.408,
+     6.986
+    ]
+   }
+  },
+  "second_lunar_day": {
+   "case": "box_0e_elec",
+   "days": [
+    40.5,
+    42.0
+   ],
+   "snapshots": 12,
+   "charging_zone_c": [
+    -30.0,
+    -5.0
+   ],
+   "gravity_ratio": 0.1656,
+   "cloud_ice": {
+    "fall_speed_m_s": [
+     0.2563,
+     0.2775,
+     0.2901
+    ],
+    "mass_kg_per_m3_summed": 0.0815
+   },
+   "snow": {
+    "fall_speed_m_s": [
+     0.3938,
+     0.4345,
+     0.4686
+    ],
+    "mass_kg_per_m3_summed": 8.049
+   },
+   "graupel": {
+    "fall_speed_m_s": [
+     1.387,
+     1.941,
+     3.767
+    ],
+    "diameter_mm": 3.688,
+    "density_kg_m3": 413.9,
+    "cloud_water_g_m3": [
+     0.0,
+     0.0,
+     0.0174
+    ],
+    "rime_accretion_upper_g_m2_s": [
+     0.0,
+     0.0,
+     0.05522
+    ],
+    "share_negative": 0.03633,
+    "share_positive": 0.04406,
+    "share_uncharged": 0.9196,
+    "charging_cloud_water_g_m3": [
+     0.03768,
+     0.0853,
+     0.2052
+    ],
+    "charging_temperature_c": [
+     -15.5,
+     -8.908,
+     -5.569
+    ],
+    "impact_on_cloud_ice_m_s": [
+     1.12,
+     1.733,
+     3.584
+    ],
+    "impact_on_snow_m_s": [
+     0.9522,
+     1.495,
+     3.418
+    ]
+   },
+   "hail": {
+    "fall_speed_m_s": [
+     5.153,
+     6.617,
+     7.679
+    ],
+    "diameter_mm": 12.61,
+    "density_kg_m3": 738.0,
+    "cloud_water_g_m3": [
+     0.0,
+     0.0,
+     0.06587
+    ],
+    "rime_accretion_upper_g_m2_s": [
+     0.0,
+     0.0,
+     0.4322
+    ],
+    "share_negative": 0.08743,
+    "share_positive": 0.1098,
+    "share_uncharged": 0.8028,
+    "charging_cloud_water_g_m3": [
+     0.0182,
+     0.06757,
+     0.1835
+    ],
+    "charging_temperature_c": [
+     -15.65,
+     -9.434,
+     -5.569
+    ],
+    "impact_on_cloud_ice_m_s": [
+     5.022,
+     6.472,
+     7.584
+    ],
+    "impact_on_snow_m_s": [
+     4.733,
+     6.226,
+     7.401
+    ]
+   }
+  }
+ },
+ "producer": {
+  "domain": "climate",
+  "files": {
+   "crm/elec_analysis.py": "4b8849029a7ea7d6"
+  }
+ },
+ "evidence": "NSSL's fall-speed laws and WRF-ELEC's rule for the sign of the charge rimed ice takes (isaund 12), applied after the run to the three-hourly output of box_0e_elec's stormy windows; the model applies them every step in every cell.",
+ "reading_rule": "Speeds are mass-weighted fall speeds and their differences (m/s), as WRF-ELEC uses them; each list is the 10th, 50th and 90th percentile over the cells of the charging zone at each output time, weighted by the mass of the particle named (for impacts, the rimer's, where the target is present). Diameters are mass-weighted means, densities mass-weighted. Charging cloud water and temperature are taken where the rime accretion exceeds the 0.1 g/m2/s under which WRF-ELEC charges nothing. Rime accretion takes NSSL's largest collection efficiency of droplets (0.9) and neglects the droplets' own fall, so it is an upper bound; the shares that would charge positively are upper bounds and those charging negatively or not at all lower bounds."
+}

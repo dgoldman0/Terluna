@@ -1,0 +1,387 @@
+{
+  "checked": "2026-10-05",
+  "source_admission": "Sources for the plan of 2026-10-02, each with what was read of it. None is imported or installed; source admission for the manuscripts is separate.",
+  "sources": [
+    {
+      "id": "S1",
+      "citation": "CM1 documentation, namelist.input guide",
+      "url": "https://cm1.readthedocs.io/en/latest/README.namelist/",
+      "use": "Availability of double-moment mass/number output through output_q and Morrison fall-speed output through output_fallvel; actual saved fields require inspection.",
+      "access": "Relevant output-variable documentation read; the project's pinned CM1 r22.0 source and individual run control files remain authoritative for implementation."
+    },
+    {
+      "id": "S2",
+      "citation": "Edward R. Mansell, MicroTed/wrf4-elec developer repository",
+      "url": "https://github.com/MicroTed/wrf4-elec",
+      "use": "Existing WRF-ELEC candidate implementation; repository advertises beta versions for several WRF releases. No release selected for Terluna.",
+      "access": "Repository overview read; electrical implementation and build instructions have not been audited or installed."
+    },
+    {
+      "id": "S3",
+      "citation": "Sun et al. (2021), Aerosol effects on electrification and lightning discharges in a multicell thunderstorm simulated by the WRF-ELEC model, Atmospheric Chemistry and Physics 21, 14141–14158",
+      "url": "https://acp.copernicus.org/articles/21/14141/2021/",
+      "doi": "10.5194/acp-21-14141-2021",
+      "use": "Published example of NSSL double-moment microphysics, charging, electric-field solution and discharge parameterization; links between particle populations and charging.",
+      "access": "Abstract and model overview (section 2.3) read in the publisher's full text; the full paper has not received a systematic source review. Read for the stage-2 benchmark on 2026-10-03 by a literature agent: model setup, CCN runs and charge densities (pp. 14144-14150)."
+    },
+    {
+      "id": "S4",
+      "citation": "Pasko, Inan, Bell and Taranenko (1997), Sprites produced by quasi-electrostatic heating and ionization in the lower ionosphere, Journal of Geophysical Research 102(A3), 4529–4561",
+      "url": "https://pure.psu.edu/en/publications/sprites-produced-by-quasi-electrostatic-heating-and-ionization-in/",
+      "doi": "10.1029/96JA03528",
+      "use": "Dependence of sprite response on removed storm charge, its height and timescale, and upper-atmosphere conductivity; motivates a separate response model.",
+      "access": "Author institution's abstract and bibliographic record read; full paper not reviewed."
+    },
+    {
+      "id": "S5",
+      "citation": "Ebert et al. (2010), Review of recent results on streamer discharges and discussion of their relevance for sprites and lightning",
+      "url": "https://arxiv.org/abs/1002.0070",
+      "use": "Gas-density scaling and the distinction between storm-scale modeling and detailed streamer propagation; follow-up reading for the TLE stage.",
+      "access": "Author-posted abstract read; full review not read for this plan."
+    },
+    {
+      "id": "S6",
+      "citation": "Mansell, MacGorman, Ziegler and Straka (2005), Charge structure and lightning sensitivity in a simulated multicell thunderstorm, J. Geophys. Res. 110, D12101",
+      "use": "Structure of the Saunders-Peck and Takahashi schemes, Table 1 size and speed constants (from Brooks et al. 1997), collision and sticking efficiencies.",
+      "access": "Full text of an archived copy, all sections and Tables 1-2; equation images not read.",
+      "doi": "10.1029/2004JD005287"
+    },
+    {
+      "id": "S7",
+      "citation": "Fierro, Mansell, MacGorman and Ziegler (2013), The implementation of an explicit charging and discharge lightning scheme within the WRF-ARW model, Mon. Wea. Rev. 141, 2390-2415",
+      "use": "The charge law and the critical rime accretion rate, Eqs. (2)-(5).",
+      "access": "Full text, the electrification section and equation images e1-e6. Read for the stage-2 benchmark on 2026-10-03 by a literature agent: the discharge scheme (12-km or 6-km cylinders, 30 % of max(S+, S-), fixed 120 kV/m), the flash-origin density and the squall-line and Rita results (pp. 2393-2405).",
+      "doi": "10.1175/MWR-D-12-00278.1"
+    },
+    {
+      "id": "S8",
+      "citation": "WRF-ELEC, MicroTed/wrf4-elec at commit e43041b000ebfd77c4a528f2ca3847746e839aa8, elec/module_mp_nssl_2mom_elec.F (sha256 9203693d76b841f1...), elec/takahashi.txt, elec/module_discharge_msz.F (sha256 1cde4951dfc5e01f...) and elec/module_boxmgsetup.F (sha256 eca6882798713e9b...)",
+      "use": "The implemented laws: routines saund6 and TAKA, the scheme dispatch for nssl_isaund = 12, the charging block (ecollmx, caps), and Takahashi's table (an external input). Stage 2 runs the NSSL module in CM1 (climate/crm/cm1_elec.py) with its sedimentation sub-steps as WRF-ELEC's driver (elec/include_microphysics_driver_elec.F) runs them, ports elec/module_discharge.F's light1d to terluna_lightning.F, and runs the branched lightning lightmsz from module_discharge_msz.F with mlint2 from module_boxmgsetup.F, patched for one process.",
+      "access": "Code read for those routines; LICENSE.txt is the WRF public-domain notice. The NSSL driver, its charge handling, light1d, WRF-ELEC's microphysics driver and lightmsz's start, channel, ground-strike, charge and nitrogen oxide code read for the port.",
+      "url": "https://github.com/MicroTed/wrf4-elec"
+    },
+    {
+      "id": "S9",
+      "citation": "Saunders and Peck (1998), Laboratory studies of the influence of the rime accretion rate on charge transfer during crystal/graupel collisions, J. Geophys. Res. 103, 13949-13956",
+      "use": "The critical rime accretion rate; experiments at 3-14 m/s (as quoted by Saunders et al. 2006).",
+      "access": "Abstract only; values through S6-S8.",
+      "doi": "10.1029/97JD02644"
+    },
+    {
+      "id": "S10",
+      "citation": "Takahashi (1978), Riming electrification as a charge generation mechanism in thunderstorms, J. Atmos. Sci. 35, 1536-1548",
+      "use": "The Takahashi charge table (through S8); experiments at 9 m/s (Takahashi and Miyawaki 2002).",
+      "access": "Abstract only.",
+      "doi": "10.1175/1520-0469(1978)035<1536:REAACG>2.0.CO;2"
+    },
+    {
+      "id": "S11",
+      "citation": "Berdeklis and List (2001), The ice crystal-graupel collision charging mechanism of thunderstorm electrification, J. Atmos. Sci. 58, 2751-2770",
+      "use": "Speed dependence not monotonic over 3-6 m/s; Keith and Saunders's V^2.5 and V^2.8 quoted.",
+      "access": "Full text.",
+      "doi": "10.1175/1520-0469(2001)058<2751:TICGCC>2.0.CO;2"
+    },
+    {
+      "id": "S12",
+      "citation": "Ávila, Lighezzolo, Castellano, Pereyra and Bürgesser (2013), Laboratory measurements of charge separation in low liquid water content conditions and low impact velocity, J. Geophys. Res. Atmos. 118, 6680-6687",
+      "use": "Charge per collision of 0.01-0.2 fC at 1-3 m/s, -7 to -13 C; the low-speed lower bracket.",
+      "access": "Full text (author copy).",
+      "doi": "10.1002/jgrd.50555"
+    },
+    {
+      "id": "S13",
+      "citation": "Pradeep Kumar, Pulakeshi and Wagh (2024), Laboratory studies on cloud electrification during ice crystal-graupel collisions: new parametrization scheme, J. Earth Syst. Sci. 133, 226",
+      "use": "Eq. 3 for 2-mm graupel at 1.2 m/s, -7 to -18.5 C; the low-speed upper bracket.",
+      "access": "Full text.",
+      "doi": "10.1007/s12040-024-02417-w"
+    },
+    {
+      "id": "S14",
+      "citation": "Dwyer (2007), Relativistic breakdown in planetary atmospheres, Phys. Plasmas 14, 042901",
+      "use": "The runaway threshold, 284 kV/m times n/n0 with n0 = 2.69e25 per m3. The threshold is set by the gas's electron density, so water vapour at the lunar charging zone's 0.2-0.6 mol % changes WRF-ELEC's density-scaled breakdown field by under 0.1 %.",
+      "access": "Full text, sections I-IV.",
+      "doi": "10.1063/1.2709652"
+    },
+    {
+      "id": "S15",
+      "citation": "Mach, Blakeslee, Bateman and Bailey (2009, 2010, 2011), storm conduction currents from aircraft overflights, J. Geophys. Res. 114 D10204, 115 D03201, 116 D05201",
+      "use": "Earth benchmarks: current densities and currents above storms.",
+      "access": "Abstracts only.",
+      "doi": "10.1029/2008JD011495"
+    },
+    {
+      "id": "S16",
+      "citation": "Kuhlman, Ziegler, Mansell, MacGorman and Straka (2006), Numerically simulated electrification and lightning of the 29 June 2000 STEPS supercell storm, Mon. Wea. Rev. 134, 2734-2757",
+      "use": "Earth benchmark: modeled charging-rate peaks of about 300 pC m-3 s-1.",
+      "access": "Parts of the full text and the Fig. 16 caption. Read for the stage-2 benchmark on 2026-10-03 by a literature agent: first flashes, flash totals by charging law and charging rates (pp. 2738-2751).",
+      "doi": "10.1175/MWR3217.1"
+    },
+    {
+      "id": "S17",
+      "citation": "Usoskin and Kovaltsov (2006), J. Geophys. Res. 111, D21206; Usoskin, Kovaltsov and Mironova (2010), J. Geophys. Res. 115, D10302 (CRAC:CRII)",
+      "use": "Cosmic-ray ion production by depth; the v2 tables are an external input.",
+      "access": "Full text of both; the tables read whole.",
+      "doi": "10.1029/2006JD007150"
+    },
+    {
+      "id": "S18",
+      "citation": "MCEq 1.4.2 (Fedynitch et al., matrix cascade equations), with SIBYLL 2.3e and the Hillas-Gaisser 2012 H3a primary spectrum through crflux",
+      "use": "Muon fluxes through the Earth and Open Moon columns.",
+      "access": "Documentation (tutorial, environment and configuration pages) and the installed source for the density-model interface.",
+      "url": "https://mceq.readthedocs.io"
+    },
+    {
+      "id": "S19",
+      "citation": "Particle Data Group: Beatty, Matthews and Wakely (2022), Cosmic rays, Prog. Theor. Exp. Phys. 2022, 083C01; Atomic and Nuclear Properties, muon table for dry air (2024)",
+      "use": "Muon intensities, decay constants and energy loss; the muon table is an external input.",
+      "access": "Review sections 30.1-30.4; the table read whole.",
+      "url": "https://pdg.lbl.gov"
+    },
+    {
+      "id": "S20",
+      "citation": "Bogdanova, Gavrilov, Kornoukhov and Starostin (2006), Cosmic muon flux at shallow depths underground, Phys. At. Nucl. 69, 1293-1298",
+      "use": "The sea-level muon fit used to check MCEq.",
+      "access": "Full text.",
+      "url": "arXiv:nucl-ex/0601019"
+    },
+    {
+      "id": "S21",
+      "citation": "Nicoll (2012), Measurements of atmospheric electricity aloft, Surv. Geophys. 33, 991-1057 (Gringel 1978 fit, Eq. 9)",
+      "use": "Earth's measured fair-weather conductivity profile, the check of the ion chain.",
+      "access": "Sections 2.1-2.2, 3.2-3.3, 5.2.",
+      "doi": "10.1007/s10712-012-9188-9"
+    },
+    {
+      "id": "S22",
+      "citation": "Zauner-Wieczorek, Curtius and Kürten (2022), The ion-ion recombination coefficient alpha, Atmos. Chem. Phys. 22, 12443-12465",
+      "use": "The Brasseur and Chatel (1983) recombination formula and its range.",
+      "access": "Sections 1, 2, 6-9 and Tables 1-2.",
+      "doi": "10.5194/acp-22-12443-2022"
+    },
+    {
+      "id": "S23",
+      "citation": "Tammet (1997, report; 1998, J. Geophys. Res. 103, 13933) on ion mobility; Hirsikko et al. (2011), Atmos. Chem. Phys. 11, 767-798, on small-ion mobilities",
+      "use": "Mobilities of 1.36 and 1.53 cm2/(V s), scaling with pressure and as T^0.6.",
+      "access": "Tammet 1997 sections and 1998 abstract; Hirsikko sections 1-2.3 and 4.1.",
+      "doi": "10.5194/acp-11-767-2011"
+    },
+    {
+      "id": "S24",
+      "citation": "Baumgaertner, Thayer, Neely and Lucas (2013), Toward a comprehensive global electric circuit model, J. Geophys. Res. Atmos. 118, 9221-9232",
+      "use": "Ion attachment to aerosol (Tinsley and Zhou 2006 coefficient) and to droplets; in-cloud conductivity.",
+      "access": "Introduction and sections 2-3 (parts).",
+      "doi": "10.1002/jgrd.50725"
+    },
+    {
+      "id": "S25",
+      "citation": "Gronoff et al. (2011), Astron. Astrophys. 529, A143; López-Moreno et al. (2008), Geophys. Res. Lett. 35, L22104 (Titan)",
+      "use": "Titan's cosmic-ray ionization and the Huygens conductivity, for context.",
+      "access": "Full text of both.",
+      "doi": "10.1029/2008GL035338"
+    },
+    {
+      "id": "S26",
+      "citation": "Sun, Qie, Mansell, et al. (2023), J. Geophys. Res. Atmos. 128, e2022JD037450",
+      "doi": "10.1029/2022JD037450",
+      "use": "Closest published benchmark: WRF-ELEC on the Weisman-Klemp sounding with 12-km cylinders; onset, flash-count trends, charge structure and non-inductive charging rates against CCN and CAPE.",
+      "access": "Read for the stage-2 benchmark on 2026-10-03 by a literature agent: full text (pp. 2-14, Fig. 18); the unit of its flash-count figure is not stated."
+    },
+    {
+      "id": "S27",
+      "citation": "MacGorman, Straka and Ziegler (2001), A lightning parameterization for numerical cloud models, J. Appl. Meteor. 40, 459-478",
+      "use": "Supercell test with branched lightning: first flash at 1950 s, 2.7-39.6 C per flash.",
+      "access": "Read for the stage-2 benchmark on 2026-10-03 by a literature agent: full text (pp. 467, 475)."
+    },
+    {
+      "id": "S28",
+      "citation": "Mansell (2014), Storm-scale ensemble Kalman filter assimilation of total lightning flash-extent data, Mon. Wea. Rev. 142, 3683-3695",
+      "doi": "10.1175/MWR-D-14-00061.1",
+      "use": "COMMAS run on the Weisman-Klemp sounding (qv 14 g/kg, weak shear, 1 km) with SP98 and Brooks: peak 34 flashes per minute.",
+      "access": "Read for the stage-2 benchmark on 2026-10-03 by a literature agent: model and results sections (pp. 3684-3686)."
+    },
+    {
+      "id": "S29",
+      "citation": "Brothers, Bruning and Mansell (2018), Investigating the relative contributions of charge deposition and turbulence in organizing charge within a thunderstorm, J. Atmos. Sci. 75, 3265-3284",
+      "doi": "10.1175/JAS-D-18-0007.1",
+      "use": "COMMAS supercell on a Weisman-Klemp sounding with 40 m/s of shear: 75 flashes per minute at 1 km, 175 at 125 m.",
+      "access": "Read for the stage-2 benchmark on 2026-10-03 by a literature agent: full text (pp. 3266-3275)."
+    },
+    {
+      "id": "S30",
+      "citation": "Ziegler and MacGorman (1994), Observed lightning morphology relative to modeled space charge and electric field distributions in a tornadic storm, J. Atmos. Sci. 51, 833-851",
+      "use": "Origin of the cylindrical discharge scheme; kinematic supercell with fields of 201-238 kV/m and about 1 nC/m3.",
+      "access": "Read for the stage-2 benchmark on 2026-10-03 by a literature agent: OCR of the scanned full text (pp. 833-846)."
+    },
+    {
+      "id": "S31",
+      "citation": "Mansell, Ziegler and Bruning (2010), Simulated electrification of a small thunderstorm with two-moment bulk microphysics, J. Atmos. Sci. 67, 171-194; Mansell and Ziegler (2013), Aerosol effects on simulated storm electrification and precipitation in a two-moment bulk microphysics model, J. Atmos. Sci. 70, 2032-2050",
+      "doi": "10.1175/2009JAS2965.1",
+      "use": "The two-moment scheme WRF-ELEC carries; small-storm fields and flash counts, and their dependence on CCN and ice multiplication.",
+      "access": "Read for the stage-2 benchmark on 2026-10-03 by a literature agent: 2010 p. 175; 2013 Fig. 9b and p. 2046."
+    },
+    {
+      "id": "S32",
+      "citation": "Calhoun, Mansell, MacGorman and Dowell (2014), Mon. Wea. Rev. 142, 3977-3997; Fierro et al. (2006), Mon. Wea. Rev. 134, 3149-3172; Sun, Li, Wang, Mansell, et al. (2024), J. Geophys. Res. Atmos. 129, e2023JD039251",
+      "use": "Context: flash rates of assimilated and simulated supercells, flash counts across charging laws, and charge inverting at high CCN.",
+      "access": "Read for the stage-2 benchmark on 2026-10-03 by a literature agent: Calhoun pp. 3985-3994; Fierro 2006 Fig. 9; Sun 2024 pp. 2-12 and Table 2."
+    },
+    {
+      "id": "S33",
+      "citation": "Wang, DeSilva, Goldenbaum and Dickerson (1998), Nitric oxide production by simulated lightning: dependence on current, energy, and pressure, J. Geophys. Res. 103, 19149-19159",
+      "use": "The nitric oxide yield per metre of channel, 0.34e21 + 1.30e16 p molecules (p in Pa) at 19 kA as fitted in S58, that lightmsz applies to each flash's channel and nitrogen.py's per-metre route takes.",
+      "access": "Abstract; the fit through S58 and S53 (literature note lightning_nox.md, 2026-10-08, by a literature agent); for lightmsz the yield as WRF-ELEC codes it (S8).",
+      "doi": "10.1029/98JD01356"
+    },
+    {
+      "id": "S34",
+      "citation": "Standler and Winn (1979), Effects of coronae on electric fields beneath thunderstorms, Q. J. R. Meteorol. Soc. 105, 285-302",
+      "use": "Point discharge from the ground in the electrified CM1: corona current densities of about 1 nA/m2 in an 8 kV/m field at the ground, which set the coefficient of J = a(E^2 - E0^2); onsets of about 3 kV/m over dense vegetation in Florida and 5 kV/m on a barren ridge at Langmuir Laboratory; ions from the ground limiting the field there to about 10 kV/m while it stands 2-6 times stronger above the corona layer.",
+      "access": "Not read; its abstract through a search summary, and the account in S35."
+    },
+    {
+      "id": "S35",
+      "citation": "Stolzenburg and Marshall (2021), The role of grounded conducting pointy objects during Thunderstorm Ground Enhancements (TGEs), preprint, arXiv:2108.04138",
+      "use": "Its review of point discharge beneath storms: the onsets S34 measured and why they differ, surface fields saturating near the corona threshold (Florida rarely above 8 kV/m, Langmuir Laboratory below 12 kV/m), 65 kV/m at 603 m over a surface field of at most 5 kV/m (Soula and Chauzy 1991), and a corona layer of 2.8 nC/m3 in the lowest 60 m.",
+      "access": "Read (pages 1-5), 2026-10-04."
+    },
+    {
+      "id": "S36",
+      "citation": "Holmes, Brook, Krehbiel and McCrory (1971), On the power spectrum and mechanism of thunder, J. Geophys. Res. 76, 2106-2115",
+      "use": "The share of a lightning flash's energy that becomes sound, 0.18 %, the thunder calculation's central value.",
+      "access": "Not read; the value as Bestard et al. (S40) and a search summary cite it, with values up to 20 % claimed elsewhere."
+    },
+    {
+      "id": "S37",
+      "citation": "Few (1969), Power spectrum of thunder, J. Geophys. Res. 74, 6926-6934",
+      "use": "The peak frequency of thunder from a channel of energy E_l per metre, f_m = 0.63 c0 (p0 / E_l)^(1/2).",
+      "access": "Not read in full; its abstract, as the publisher's and ADS records render it in search results (2026-10-06), gives f_m = (0.63) C0 (P0/E_l)^(1/2), the relation used. Few's relaxation radius (E_l/(pi p0))^(1/2), quoted elsewhere, is a separate definition."
+    },
+    {
+      "id": "S38",
+      "citation": "ISO 9613-1:1993, Acoustics - Attenuation of sound during propagation outdoors - Part 1: Calculation of the absorption of sound by the atmosphere; ISO 9613-2:1996, table 2",
+      "use": "Atmospheric absorption by frequency, temperature, pressure and humidity, its oxygen and nitrogen relaxation scaled to the design air; checked against ISO 9613-2's table at 20 C and 70 %.",
+      "access": "Not read; the standard's equations and table as widely reproduced."
+    },
+    {
+      "id": "S39",
+      "citation": "ISO 226:2003, Acoustics - Normal equal-loudness-level contours",
+      "use": "The threshold of hearing at the octave-band centres, for the range at which thunder is audible.",
+      "access": "Not read; the threshold values as widely reproduced."
+    },
+    {
+      "id": "S40",
+      "citation": "Bestard et al. (2023), Acoustical power of lightning flashes, J. Geophys. Res. Atmos. 128, e2023JD038714",
+      "use": "Thunder's acoustical power spans four orders of magnitude between flashes (10.6 kW to 165 MW), which bounds how far a single acoustic share can be trusted.",
+      "access": "Not read; its abstract through a search summary."
+    },
+    {
+      "id": "S41",
+      "citation": "Petters and Kreidenweis (2007), A single parameter representation of hygroscopic growth and cloud condensation nucleus activity, Atmos. Chem. Phys. 7, 1961-1971, doi:10.5194/acp-7-1961-2007",
+      "use": "kappa-Köhler growth of aerosol with relative humidity (Eq. 11, with the Kelvin term; surface tension 0.072 J/m2), and the metastable aqueous branch taken at every humidity.",
+      "access": "Full text (literature note humid_conductivity.md on the data drive)."
+    },
+    {
+      "id": "S42",
+      "citation": "Hõrrak, Aalto, Salm, Komsaare, Tammet, Mäkelä, Laakso and Kulmala (2008), Variation and balance of positive air ion concentrations in a boreal forest, Atmos. Chem. Phys. 8, 655-675, doi:10.5194/acp-8-655-2008",
+      "use": "The ions' attachment coefficient to particles of a given diameter, averaged over their charges (Eq. 7, for mean mobility 1.45 cm2/(V s) at 20 C and 1013 hPa, approximating Hoppel and Frick's tables), and the growth of the ion sink with humidity in boreal aerosol.",
+      "access": "Abstract, Sect. 3.2 (Eqs. 3-7, Fig. 1) and Sect. 4.6."
+    },
+    {
+      "id": "S43",
+      "citation": "Hõrrak (2001), Air ion mobility spectrum at a rural area, Dissertationes Geophysicales Universitatis Tartuensis 15, Tartu University Press",
+      "use": "The reference small-ion mobilities are ambient means of a year of hourly spectra at Tahkuse, at its 80-85 % relative humidity class on average; their variation with relative humidity.",
+      "access": "Chapters 1 and 7 (Tables 10, 11 and 13; Fig. 30 read by eye)."
+    },
+    {
+      "id": "S44",
+      "citation": "Franchin et al. (2015), Experimental investigation of ion-ion recombination under atmospheric conditions, Atmos. Chem. Phys. 15, 7203-7216, doi:10.5194/acp-15-7203-2015",
+      "use": "Ion-ion recombination against relative humidity (Table A2): 2.0-2.3e-6 cm3/s at 40-70 %, so no humidity term at the lunar column's humidities.",
+      "access": "Full text."
+    },
+    {
+      "id": "S45",
+      "citation": "Pringle, Tost, Pozzer, Pöschl and Lelieveld (2010), Global distribution of the effective aerosol hygroscopicity parameter for CCN activation, Atmos. Chem. Phys. 10, 5241-5255, doi:10.5194/acp-10-5241-2010",
+      "use": "Hygroscopicity of continental (about 0.3) and marine (0.7-1.0) aerosol, with Andreae and Rosenfeld's (2008) values, for the kappa bracket.",
+      "access": "Abstract and Sects. 1, 2.1, 3.1 and conclusions."
+    },
+    {
+      "id": "S46",
+      "citation": "Lalande, Bondiou-Clergerie, Bacchiega and Gallimberti (2002), Observations and modeling of lightning leaders, C. R. Physique 3, 1375-1392, doi:10.1016/S1631-0705(02)01413-5",
+      "use": "A leader's potential budget (Eq. 9) and its propagation while the potential difference at its tip stays above about 225 kV (positive leader at sea level); thermalized channels' internal fields of 1-10 kV/m.",
+      "access": "Full text (literature note leader_crossing.md)."
+    },
+    {
+      "id": "S47",
+      "citation": "Mazur (2002), Physical processes during development of lightning flashes, C. R. Physique 3, 1393-1409, doi:10.1016/S1631-0705(02)01412-3",
+      "use": "Mazur and Ruhnke's leader model: a leader stops when its tip potential approaches the ambient potential.",
+      "access": "Full text."
+    },
+    {
+      "id": "S48",
+      "citation": "Mansell (2000), Electrification and lightning in simulated supercell and non-supercell thunderstorms, PhD dissertation, University of Oklahoma",
+      "use": "The channel taking the ambient potential at the flash's start, a 1 kV/m internal field, and the author's own judgement that a raised clear-air threshold has no experimental or observational basis.",
+      "access": "Chapter 4 (Sects. 4.1-4.3)."
+    },
+    {
+      "id": "S49",
+      "citation": "Boggs, Liu, Riousset, Shi, Lazarus, Splitt and Rassoul (2018), Thunderstorm charge structures producing gigantic jets, Sci. Rep. 8, 18085, doi:10.1038/s41598-018-36309-z",
+      "use": "A leader channel's internal field of 1 kV/m, scaled with air density as an assumption the authors say has not been well studied.",
+      "access": "Full text (CC BY)."
+    },
+    {
+      "id": "S50",
+      "citation": "Allen and Boutlendj (1991), Study of the electric fields required for streamer propagation in humid air, IEE Proc. A 138, 37, doi:10.1049/ip-a-3.1991.0005",
+      "use": "The positive streamer's propagation field rising about 1.3 % per g/m3 of water vapour, applied to the potential a leader's streamer zone needs.",
+      "access": "Abstract; the coefficient through Guo et al. (2024)."
+    },
+    {
+      "id": "S51",
+      "citation": "Ortéga, Díaz, Heilbronner and Rühling (2007), Influence of negative ions on the humidity effect on the first corona inception, J. Phys. D 40, 7000-7007, doi:10.1088/0022-3727/40/22/021",
+      "use": "Corona inception's threshold moving by under 0.15 % per g/m3 of water vapour, so point discharge's onset takes no humidity term.",
+      "access": "Full text (literature note humidity_corona_breakdown.md)."
+    },
+    {
+      "id": "S53",
+      "citation": "Schumann and Huntrieser (2007), The global lightning-induced nitrogen oxides source, Atmos. Chem. Phys. 7, 3823-3907",
+      "doi": "10.5194/acp-7-3823-2007",
+      "use": "Earth's lightning NOx per flash (15 (2-40) x 10^25 molecules, 33-664 mol), per joule (1-50 x 10^16 molecules) and the global source (5 (2-8) Tg N a year): the nitrogen estimate's yields and Earth reference.",
+      "access": "Full text (literature note lightning_nox.md, 2026-10-08, by a literature agent)."
+    },
+    {
+      "id": "S54",
+      "citation": "Pickering, Allen and Huntrieser (2026), The role of lightning in atmospheric chemistry, J. Geophys. Res. Atmos. 131, e2026JD046484",
+      "doi": "10.1029/2026JD046484",
+      "use": "The current review: 250 mol NOx a flash (150-350 likely), intracloud and ground flashes alike, 5 +- 2 Tg N a year at 44-46 flashes a second.",
+      "access": "Sects. 1-3 (pp. 1-32), full text (literature note lightning_nox.md, 2026-10-08, by a literature agent)."
+    },
+    {
+      "id": "S55",
+      "citation": "Borucki and Chameides (1984), Lightning: estimates of the rates of energy dissipation and nitrogen fixation, Rev. Geophys. 22, 363-372",
+      "doi": "10.1029/RG022i004p00363",
+      "use": "9 x 10^16 molecules of NO a joule of flash energy.",
+      "access": "Abstract; values through S53 (literature note lightning_nox.md, 2026-10-08, by a literature agent)."
+    },
+    {
+      "id": "S56",
+      "citation": "Price, Penner and Prather (1997), NOx from lightning: 1. Global distribution based on lightning physics, J. Geophys. Res. 102, 5929-5941",
+      "doi": "10.1029/96JD03504",
+      "use": "10 x 10^16 molecules of NO a joule, on flash energies of 0.67-6.7 GJ.",
+      "access": "Abstract; values through S53 (literature note lightning_nox.md, 2026-10-08, by a literature agent)."
+    },
+    {
+      "id": "S58",
+      "citation": "Davis, Rutledge and Fuchs (2019), Lightning location, NOx production, and transport by anomalous and normal polarity thunderstorms, J. Geophys. Res. Atmos. 124, 8722-8742",
+      "doi": "10.1029/2018JD029979",
+      "use": "The pressure fit of Wang et al.'s per-metre yield.",
+      "access": "Full text (literature note lightning_nox.md, 2026-10-08, by a literature agent)."
+    },
+    {
+      "id": "S59",
+      "citation": "Ott et al. (2010), Production of lightning NOx and its vertical distribution calculated from three-dimensional cloud-scale chemical transport model simulations, J. Geophys. Res. 115, D04301",
+      "doi": "10.1029/2009JD011880",
+      "use": "Intracloud flashes making about as much NOx as ground flashes (a ratio of 0.93), with a mean of 500 mol for ground flashes.",
+      "access": "Abstract; storm values through S54 (literature note lightning_nox.md, 2026-10-08, by a literature agent)."
+    }
+  ],
+  "notes": "Stage 1's literature notes, with every value's location in its source, are kept on the data drive at /media/projectspace/terluna-research/atmospheric-electricity/ (charging_laws.md, ionization_conductivity.md). Stage 2's benchmark notes, with each value's place in its source, are in benchmark_literature.md in the same folder."
+}

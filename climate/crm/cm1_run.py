@@ -45,6 +45,8 @@ import tarfile
 import time
 import urllib.request
 
+from climate.crm import cm1_elec
+
 HERE = Path(__file__).resolve().parent
 RUNS = HERE / 'runs'
 CM1_HOME = Path(os.environ.get('TERLUNA_CM1_HOME', '/media/projectspace/terluna-research/cm1'))
@@ -898,6 +900,14 @@ EARTH_FALL_PATCH = ('morrison.F', 'Terluna: Earth fall speeds for the rain test'
 BUILDS['moon_omp_earth_fall'] = BUILDS['moon_omp']
 BUILD_PATCHES['moon_omp_earth_fall'] = [EARTH_FALL_PATCH]
 
+# Electrified storms (stage 2 of the atmospheric-electricity study): WRF-ELEC's NSSL microphysics with the field,
+# lightning and leakage of climate/crm/cm1_elec.py, at the Moon's gravity and at Earth's for the benchmark storm.
+BUILD_FILES = {}                                                     # whole source files put in before patching, by build
+for _label, _host in (('moon_omp_elec', 'moon_omp'), ('earth_g_omp_elec', 'earth_g_omp')):
+    BUILDS[_label] = BUILDS[_host]
+    BUILD_PATCHES[_label] = cm1_elec.PATCHES
+    BUILD_FILES[_label] = cm1_elec.sources(CM1_HOME)
+
 
 def optimization_for(label: str, mode: str):
     """The optimisation flags a build compiles with: its own if it has any, OMP_DEFAULT for the other OpenMP builds, and
@@ -925,6 +935,9 @@ def build(label: str, jobs: int = 8) -> Path:
     shutil.copytree(tree / 'src', src)
     (folder / 'run').mkdir(parents=True, exist_ok=True)
     hashes = {}
+    for name, text in BUILD_FILES.get(label, {}).items():
+        (src / name).write_text(text(), encoding='latin-1')
+        hashes[name] = hashlib.sha256((src / name).read_bytes()).hexdigest()[:16]
     patches = [MAKEFILE[mode], *PATCHES, *BUILD_PATCHES.get(label, [])]
     optimization = optimization_for(label, mode)
     if optimization and '-nostdinc' in optimization:     # omp_lib and the IEEE modules live in the compiler's own folder
@@ -935,7 +948,7 @@ def build(label: str, jobs: int = 8) -> Path:
         patches.append(optimization_patch(label, optimization))
     for name, marker, edits in patches:
         path = src / name
-        path.write_text(apply_patch(path.read_text(), name, marker, edits))
+        path.write_text(apply_patch(path.read_text(encoding='latin-1'), name, marker, edits), encoding='latin-1')
     for name in sorted({p[0] for p in patches}):
         hashes[name] = hashlib.sha256((src / name).read_bytes()).hexdigest()[:16]
     log = folder / 'build.log'
@@ -1180,6 +1193,172 @@ CASES['box_highland'] = dict(
 CASES['box_highland_own_height'] = dict(
     CASES['box_highland'],
     purpose=CASES['box_highland']['purpose'] + ', the forcing held and applied at each column\'s own height')
+# The benchmark storm of the electrified build (stage 2 of the atmospheric-electricity study): CM1's own supercell
+# (Weisman and Rotunno 2000: the Weisman and Klemp sounding, the quarter-circle hodograph, a warm bubble, 1 km spacing,
+# 120 km square, two hours) at Earth's gravity, with WRF-ELEC's NSSL microphysics with hail, its default charging, its
+# branched lightning on its 0.75-s sub-steps, and output every 5 minutes; supercell_elec_cylinders has WRF-ELEC's
+# cylindrical lightning in its place.
+# The equatorial box electrified (stage 2): box_0e's inputs as they were written (its site, surface, grid, starting
+# air and forcing, from the GCM before its correction), with the NSSL microphysics with hail in place of Morrison,
+# given lunar fall speeds, its CCN at box_0e's 100 droplets per cm3, WRF-ELEC's charging and its branched lightning on
+# sub-steps scaled to the box's layers and fall speeds, a downward channel striking within 5 km of the ground
+# (cm1_elec.LUNAR); its restarts let windows of its storms run again with output every few minutes, other charging
+# laws, leakage or the unbounded breakdown field.
+# It and the windows below that ran before leakage and the leader's crossing became the lunar defaults (2026-10-05) keep
+# the settings they ran with: box_0e_elec the cap until day 18, when its namelist took lightning 4 (README), and a
+# channel within 5 km of the ground; none of them leakage, until the leakage windows, or the crossing.
+CASES['box_0e_elec'] = dict(
+    CASES['box_0e'], build='moon_omp_elec',
+    elec=dict(cm1_elec.LUNAR, lightning=3, ground_m=5000.0, leakage=0, leader_v_m=0.0),
+    inputs_from='box_0e',
+    purpose=CASES['box_0e']['purpose'] + ', with the NSSL microphysics and WRF-ELEC\'s charging and branched lightning')
+# The electrified box again with every correction of 2026-10-04 to 2026-10-06, stage 2's main run: box_0e_elec's inputs
+# and two lunar days with the lunar defaults from the start (cm1_elec.LUNAR: the breakdown field's cap lifted,
+# WRF-ELEC's ground rule with the leader's crossing at 1 kV/m, leakage) and the build's rain and cloud-ice ventilation at
+# lunar fall speeds (2026-10-06), three-hourly output and twelve-hourly restarts,
+# from whose restarts windows of its stormy days run again with output every few minutes.
+CASES['box_0e_elec_corrected'] = dict(
+    CASES['box_0e_elec'], elec=dict(cm1_elec.LUNAR),
+    purpose=CASES['box_0e']['purpose'] + ', with the NSSL microphysics and WRF-ELEC\'s charging and branched lightning '
+            'under the lunar rules of 2026-10-05: the breakdown field\'s cap lifted, the leader\'s crossing to the '
+            'ground and leakage')
+# Windows of the main run's stormy days with output every ten minutes, to follow each storm's life: the first lunar
+# day's busiest storms (days 11.5-13.0, 129 of its 199 flashes) and the second's (days 40.5-42.0, the days the earlier
+# windows ran), from box_0e_elec_corrected's twelve-hourly restarts under its own settings. CM1 on several threads
+# makes each a new realization of those days.
+CASES['box_0e_elec_corrected_storms_first'] = dict(
+    CASES['box_0e_elec_corrected'], inputs_from=None, restart_from=dict(case='box_0e_elec_corrected', day=11.5),
+    days=13.0, output_s=600.0,
+    purpose=CASES['box_0e_elec_corrected']['purpose'] + '; its first lunar day\'s busiest storms again from its day-11.5 '
+            'restart with output every ten minutes')
+CASES['box_0e_elec_corrected_storms_second'] = dict(
+    CASES['box_0e_elec_corrected'], inputs_from=None, restart_from=dict(case='box_0e_elec_corrected', day=40.5),
+    days=42.0, output_s=600.0,
+    purpose=CASES['box_0e_elec_corrected']['purpose'] + '; its second lunar day\'s busiest storms again from its '
+            'day-40.5 restart with output every ten minutes')
+# The fine box (stage 2): box_0e_elec's site at a third of its spacing (2.0 km) over a box a third as wide (128 km, the
+# same 64 by 64 columns), started from box_0e_elec's air averaged over its columns and its mean skin temperature at a
+# day of its run a few hours before a stormy window (day 10.75, four hours before box_0e_elec's first flash), under
+# the same Sun, forcing, land and electricity, with output every 15 minutes. It resolves the storm cells and draws the
+# flashes on a grid three times finer. It ran two model days without a flash and was extended toward box_0e_elec's
+# busiest lightning (days 12.7-14.3; 2026-10-04, at the author's direction); its deep convection collapsed after
+# coarse day 13.25 and the author stopped it at day 3.0 of its run.
+CASES['box_0e_elec_fine'] = dict(
+    CASES['box_0e_elec'], inputs_from=None, fine_from=dict(case='box_0e_elec', day=10.75, refine=3), days=4.0,
+    output_s=900.0, restart_s=10800.0, segment_s=43200.0,
+    purpose=CASES['box_0e_elec']['purpose'] + '; a box a third as wide at a third of the spacing, started from that '
+            'run\'s averaged air a few hours before a stormy window')
+# box_0e_elec's first lunar day's storms again (days 10.5-14.5, from its day-10.5 restart, before its first flash at day
+# 10.92), with the breakdown field's 180-kV/m cap lifted (the author's decision, 2026-10-04), beside the first run under
+# the cap; and the same with point discharge from the ground, which the author left to the agent's judgement, its onset
+# Standler and Winn's 3 kV/m over dense vegetation scaled by the density at the ground.
+CASES['box_0e_elec_uncapped'] = dict(
+    CASES['box_0e_elec'], inputs_from=None, restart_from=dict(case='box_0e_elec', day=10.5), days=14.5,
+    elec=dict(cm1_elec.LUNAR, ground_m=5000.0, leakage=0, leader_v_m=0.0),
+    purpose=CASES['box_0e_elec']['purpose'] + '; its first lunar day\'s storms again from its day-10.5 restart, with '
+            'the breakdown field\'s 180-kV/m cap lifted')
+CASES['box_0e_elec_uncapped_corona'] = dict(
+    CASES['box_0e_elec_uncapped'], elec=dict(cm1_elec.LUNAR, ground_m=5000.0, leakage=0, leader_v_m=0.0, corona_v_m=3000.0),
+    purpose=CASES['box_0e_elec_uncapped']['purpose'] + ', and point discharge from the ground')
+# Ground strikes by WRF-ELEC's own rule (ground_m -1, its default: a downward channel reaching air warmer than -7 C in
+# charge of the matching sign). The Earth benchmarks ran with ground_m 0, which lightmsz reads as only the two lowest
+# levels, so supercell_elec_ground_rule runs the benchmark storm again with the rule. In the lunar storms the main
+# negative charge sits at -8 to -32 C with -7 C just beneath it, as on Earth, and box_0e_elec_ground_rule runs the coarse
+# run's busiest storms (days 40.5-42, the cap lifted) under the same rule: an upper bound, since it takes a channel that
+# reaches -7 C, 34 km up, to bridge the rest of the way to the ground.
+CASES['box_0e_elec_ground_rule'] = dict(
+    CASES['box_0e_elec'], inputs_from=None, restart_from=dict(case='box_0e_elec', day=40.5), days=42.0,
+    elec=dict(cm1_elec.LUNAR, ground_m=-1.0, leakage=0, leader_v_m=0.0),
+    purpose=CASES['box_0e_elec']['purpose'] + '; its busiest storms again from its day-40.5 restart, with WRF-ELEC\'s '
+            'own ground-strike rule')
+# The charging law. Saunders and Peck's law, which every run so far uses, nearly stops for slow lunar graupel, which
+# rimes below its threshold; Takahashi's grows linearly with impact speed and, in stage 1's column estimate, charged the
+# storms two hundred to five hundred times faster. box_0e_elec_takahashi runs box_0e_elec_ground_rule's window under
+# Takahashi's law (WRF-ELEC's isaund 1, with its size and speed factor, on its table, inside whose 0 to -30 C and cloud
+# water range the lunar charging zone lies), and box_0e_elec_takahashi_first box_0e_elec_uncapped's first 1.5 days
+# (from day 10.5, before the first flash, with that run's 5-km ground rule); each differs from its twin only in the law.
+# Both ran on 2026-10-05: as many flashes and as much charge as under Saunders and Peck, whose charging NSSL's hail does
+# most of, and an inverted dipole, since Takahashi's table charges rimed ice positively at the storms' low cloud water
+# (README, "The charging law").
+CASES['box_0e_elec_takahashi'] = dict(
+    CASES['box_0e_elec_ground_rule'], elec=dict(cm1_elec.LUNAR, isaund=1, leakage=0, leader_v_m=0.0),
+    purpose=CASES['box_0e_elec']['purpose'] + '; its busiest storms again from its day-40.5 restart, under '
+            'Takahashi\'s charging law')
+CASES['box_0e_elec_takahashi_first'] = dict(
+    CASES['box_0e_elec_takahashi'], restart_from=dict(case='box_0e_elec', day=10.5), days=12.0,
+    elec=dict(cm1_elec.LUNAR, isaund=1, ground_m=5000.0, leakage=0, leader_v_m=0.0),
+    purpose=CASES['box_0e_elec']['purpose'] + '; its first lunar day\'s storms again from its day-10.5 restart, under '
+            'Takahashi\'s charging law')
+# Leakage. With nothing to conduct it, the charge evaporating cloud leaves on the small ions stays for weeks: 2,000-3,600
+# C of each sign at 20-40 km through the lunar night, and 11.5 kC net at day 40.5 (7.0 kC on snow, 4.1 kC on the ions),
+# whose negative partner fell to the ground on precipitation; WRF-ELEC hands the ions' charge to each new cloud. The
+# lunar clear air would relax it in about ten minutes (stage 1's conductivity). box_0e_elec_leakage and
+# box_0e_elec_leakage_first run the charging-law windows under Saunders and Peck with leakage (var9 1: net charge relaxing
+# at sigma/eps0, the clear air's and the cloud's conductivity by height), each differing from its twin only in that.
+# Both ran on 2026-10-05: the leftover charge goes within the hour, the field at the ground away from storms falls from
+# about 20 kV/m to a median 0.2-1.6, and the lightning stays as it was (README, "Leakage").
+CASES['box_0e_elec_leakage'] = dict(
+    CASES['box_0e_elec_ground_rule'], elec=dict(cm1_elec.LUNAR, leakage=1, leader_v_m=0.0),
+    purpose=CASES['box_0e_elec']['purpose'] + '; its busiest storms again from its day-40.5 restart, with the charge '
+            'leaking through the air\'s conductivity')
+CASES['box_0e_elec_leakage_first'] = dict(
+    CASES['box_0e_elec_leakage'], restart_from=dict(case='box_0e_elec', day=10.5), days=12.0,
+    elec=dict(cm1_elec.LUNAR, leakage=1, ground_m=5000.0, leader_v_m=0.0),
+    purpose=CASES['box_0e_elec']['purpose'] + '; its first lunar day\'s storms again from its day-10.5 restart, with '
+            'the charge leaking through the air\'s conductivity')
+# The leader's crossing (README, "The leader's crossing"). WRF-ELEC's rule counts a downward channel at -7 C, 34 km up in
+# the lunar air, as reaching the ground; a leader stops when the potential difference between its tip and the air ahead
+# runs out (Lalande et al. 2002; Mazur and Ruhnke), which over that path turns on the channel's internal field: about 1
+# kV/m at Earth's sea-level density for a thermalized leader (Mansell 2000; Boggs et al. 2018), 1-10 kV/m in Lalande et
+# al.'s range. box_0e_elec_leader_1kv and box_0e_elec_leader_10kv run box_0e_elec_leakage's window with a ground strike
+# needing the crossing at those fields (scaled by density), each differing from it only in that.
+CASES['box_0e_elec_leader_1kv'] = dict(
+    CASES['box_0e_elec_leakage'], elec=dict(cm1_elec.LUNAR, leakage=1, leader_v_m=1000.0),
+    purpose=CASES['box_0e_elec']['purpose'] + '; its busiest storms again from its day-40.5 restart, a ground strike '
+            'needing a leader with a 1-kV/m internal field to cross to the ground')
+CASES['box_0e_elec_leader_10kv'] = dict(
+    CASES['box_0e_elec_leader_1kv'], elec=dict(cm1_elec.LUNAR, leakage=1, leader_v_m=10000.0),
+    purpose=CASES['box_0e_elec']['purpose'] + '; its busiest storms again from its day-40.5 restart, a ground strike '
+            'needing a leader with a 10-kV/m internal field to cross to the ground')
+# The same storm with CM1's own copy of the NSSL scheme and no electricity, to check that WRF-ELEC's copy, run through
+# terluna_elec.F, makes the same storm.
+CASES['supercell_nssl'] = dict(
+    kind='sample', sample='supercell', build='earth_g_omp', days=7200.0 / 86400.0, output_s=300.0, restart_s=1800.0,
+    segment_s=7200.0, namelist=dict(param2=dict(ptype=27)),
+    purpose='CM1\'s supercell at Earth\'s gravity with CM1\'s own NSSL microphysics, the electrified benchmark\'s twin')
+# The benchmarks below ran with ground_m 0 (only the two lowest levels count), before WRF-ELEC's own rule became the
+# default on 2026-10-05, and keep it; supercell_elec_ground_rule runs the storm with the rule.
+CASES['supercell_elec'] = dict(
+    kind='sample', sample='supercell', build='earth_g_omp_elec', days=7200.0 / 86400.0, output_s=300.0,
+    restart_s=1800.0, segment_s=7200.0, elec=dict(ground_m=0.0),
+    purpose='CM1\'s supercell at Earth\'s gravity with WRF-ELEC\'s NSSL microphysics, charging and branched lightning, '
+            'the electrified build\'s benchmark')
+CASES['supercell_elec_ground_rule'] = dict(
+    CASES['supercell_elec'], elec=dict(ground_m=-1.0),
+    purpose='CM1\'s supercell at Earth\'s gravity with WRF-ELEC\'s NSSL microphysics, charging and branched lightning '
+            'and its own ground-strike rule, the benchmark again with ground strikes possible')
+CASES['supercell_elec_leader_1kv'] = dict(
+    CASES['supercell_elec_ground_rule'], elec=dict(ground_m=-1.0, leader_v_m=1000.0),
+    purpose='CM1\'s supercell at Earth\'s gravity with WRF-ELEC\'s NSSL microphysics, charging and branched lightning '
+            'and its own ground-strike rule, a ground strike needing a leader with a 1-kV/m internal field to cross to '
+            'the ground: the leader\'s crossing on Earth')
+CASES['supercell_elec_cylinders'] = dict(
+    CASES['supercell_elec'], elec=dict(ground_m=0.0, lightning=1),
+    purpose='CM1\'s supercell at Earth\'s gravity with WRF-ELEC\'s NSSL microphysics, charging and cylindrical '
+            'lightning')
+# The benchmark at the fine box's 2-km spacing: supercell_elec on a grid twice as coarse over the same 120 km, and the
+# storm in WRF-ELEC's own test settings (its em_quarter_ss namelist: 2 km over 84 km, 800 CCN per cm3, Saunders and
+# Peck's law as isaund 11 sets it, screening layers and branched lightning), each for two hours (WRF-ELEC's test runs
+# one).
+CASES['supercell_elec_2km'] = dict(
+    CASES['supercell_elec'], namelist=dict(param0=dict(nx=60, ny=60), param1=dict(dx=2000.0, dy=2000.0)),
+    purpose='CM1\'s supercell at Earth\'s gravity with WRF-ELEC\'s NSSL microphysics, charging and branched lightning '
+            'at 2-km spacing, the benchmark at the fine box\'s spacing')
+CASES['supercell_elec_wrf'] = dict(
+    CASES['supercell_elec'], elec=dict(ground_m=0.0, isaund=11, screen=1),
+    namelist=dict(param0=dict(nx=42, ny=42), param1=dict(dx=2000.0, dy=2000.0), nssl2mom_params=dict(ccn=0.8e9)),
+    purpose='CM1\'s supercell at Earth\'s gravity in WRF-ELEC\'s own test settings: 2-km spacing over 84 km, 800 CCN '
+            'per cm3, Saunders and Peck\'s law as isaund 11 sets it, screening layers and branched lightning')
 
 
 def gcm_soil(folder: Path) -> dict:
@@ -1594,7 +1773,7 @@ def case_settings(cfg, nx, dx, nz, ztop, air, gravity):
     tilted = cfg.get('kind') == 'tilted'
     turning = turning_rate(cfg, latitude)
     rotating = turning != 0.0
-    return {
+    settings = {
         'param0': dict(nx=nx, ny=cfg['ny'] if box else 1, nz=nz, ppnode=cfg.get('ranks', 8), timeformat=3, timestats=1,
                        terrain_flag=bool(cfg.get('terrain'))),
         'param1': dict(dx=round(dx, 3), dy=round(dx, 3), dz=round(ztop / nz, 1), dtl=round(40.0 * s, 3), cfl_limit=1.0,
@@ -1634,6 +1813,11 @@ def case_settings(cfg, nx, dx, nz, ztop, air, gravity):
                         do_lsnudge_qv=True, lsnudge_tau=round(cfg['nudge']['tau_s'] * s, 3), lsnudge_start=1.0,
                         lsnudge_end=1.0e12, lsnudge_ramp_time=round(cfg['nudge']['ramp_s'] * s, 3)),
     }
+    if cfg.get('elec') is not None:                                       # NSSL with charge, its CCN the case's droplets
+        for section, entries in cm1_elec.namelist_settings(cfg['elec']).items():
+            settings.setdefault(section, {}).update(entries)
+        settings['nssl2mom_params'] = dict(ccn=cfg['droplets_cm3'] * 1.0e6)
+    return settings
 
 
 def coriolis(latitude_deg: float) -> float:
@@ -1698,7 +1882,8 @@ def ring_sea_profile(days: float = 3.0, name: str = 'ring') -> dict:
 
 def setup_from(name: str, cfg: dict) -> Path:
     """Set up a case with another case's inputs as they were written and only its executable changed, so the pair
-    differs in the build alone, whatever the setup has learned since."""
+    differs in the build alone, whatever the setup has learned since. An electrified case also changes the namelist to
+    the NSSL microphysics with the charge tracers and its electricity, and writes the files that needs."""
     source = RUNS / cfg['inputs_from']
     exe = CM1_HOME / 'build' / cfg['build'] / 'cm1.exe'
     if not exe.exists():
@@ -1725,6 +1910,255 @@ def setup_from(name: str, cfg: dict) -> Path:
     record.update(case=name, purpose=cfg['purpose'], build=json.loads((exe.parent / 'build.json').read_text()),
                   inputs_from=dict(case=cfg['inputs_from'], build=record['build']['label'],
                                    executable_sha256=record['build']['executable_sha256']))
+    if cfg.get('elec') is not None:
+        text = (case / 'namelist.template').read_text()
+        settings = cm1_elec.namelist_settings(cfg['elec'])
+        settings['nssl2mom_params'] = dict(ccn=cfg['droplets_cm3'] * 1.0e6)
+        for section, entries in settings.items():
+            for key, value in entries.items():
+                text = set_namelist(text, section, key, value)
+        text, files = cm1_elec.run_files(case, cfg['elec'], text)
+        (case / 'namelist.template').write_text(text)
+        record.update(configuration=cfg, electricity=dict(cm1_elec.SETTINGS, **cfg['elec'], files=files))
+        record.setdefault('inputs', {})['namelist.template'] = hashlib.sha256(
+            (case / 'namelist.template').read_bytes()).hexdigest()[:16]
+    (case / 'case.json').write_text(json.dumps(record, indent=1) + '\n')
+    return case
+
+
+def fine_start(snapshot: dict) -> dict:
+    """A finer box's starting air from one output of a coarser box: the means over its columns of potential
+    temperature (K), vapour (kg/kg) and wind (m/s) by level, and at the surface its pressure (Pa), the potential
+    temperature and vapour at 2 m and the skin temperature (K)."""
+    import numpy as np
+    mean = lambda name: np.asarray(snapshot[name], float).mean(axis=-1)
+    kappa = 287.04 / 1005.7
+    theta_2m = np.asarray(snapshot['t2'], float) * (1.0e5 / np.asarray(snapshot['psfc'], float)) ** kappa
+    return dict(theta_k=mean('th'), qv_kg_kg=mean('qv'), u_m_s=mean('uinterp'), v_m_s=mean('vinterp'),
+                surface_pa=float(mean('psfc')), theta_2m_k=float(theta_2m.mean()), qv_2m_kg_kg=float(mean('q2')),
+                skin_k=float(mean('tsk')))
+
+
+def fine_sounding(start: dict, zw) -> str:
+    """CM1's input_sounding (isnd = 7) from a finer box's starting air: the surface line, then height (m), potential
+    temperature (K), vapour (g/kg) and wind (m/s) at the scalar levels and at the model top, where the potential
+    temperature carries on the slope of the top two levels."""
+    import numpy as np
+    zw = np.asarray(zw, float)
+    zh = 0.5 * (zw[1:] + zw[:-1])
+    th, qv, u, v = (np.asarray(start[k], float) for k in ('theta_k', 'qv_kg_kg', 'u_m_s', 'v_m_s'))
+    if th.size != zh.size:
+        raise ValueError(f'{th.size} levels of air for {zh.size} scalar levels')
+    top = th[-1] + (th[-1] - th[-2]) / (zh[-1] - zh[-2]) * (zw[-1] - zh[-1])
+    rows = [*zip(zh, th, qv, u, v), (zw[-1], top, qv[-1], u[-1], v[-1])]
+    lines = [f"{start['surface_pa'] / 100:12.4f} {start['theta_2m_k']:12.4f} {start['qv_2m_kg_kg'] * 1000:12.5f}"]
+    lines += [f'{z:12.3f} {t:12.4f} {q * 1000:12.5f} {uu:8.3f} {vv:8.3f}' for z, t, q, uu, vv in rows]
+    return '\n'.join(lines) + '\n'
+
+
+def fine_namelist(text: str, refine: int, day: float, cfg: dict) -> tuple:
+    """A coarser box's namelist for a finer box: the spacing and the first time step divided by refine, the finer
+    case's length, output and restarts, and the Sun's hour angle (var18, which also times the day-night forcing) at the
+    coarser run's day it starts from. Returns the namelist and the finer box's spacing and starting hour angle."""
+    dx = float(namelist_value(text, 'param1', 'dx')) / refine
+    dtl = float(namelist_value(text, 'param1', 'dtl')) / refine
+    h0, day_s = float(namelist_value(text, 'param8', 'var18')), float(namelist_value(text, 'param8', 'var19'))
+    hour = (h0 + 360.0 * day * 86400.0 / day_s + 180.0) % 360.0 - 180.0
+    for section, key, value in (('param1', 'dx', round(dx, 3)), ('param1', 'dy', round(dx, 3)),
+                                ('param1', 'dtl', round(dtl, 3)), ('param1', 'timax', round(cfg['days'] * 86400.0)),
+                                ('param1', 'run_time', -999.9), ('param1', 'tapfrq', float(cfg['output_s'])),
+                                ('param1', 'rstfrq', float(cfg['restart_s'])), ('param2', 'irst', 0),
+                                ('param2', 'rstnum', 1), ('param8', 'var18', round(hour, 4)),
+                                ('param14', 'diagfrq', float(cfg['output_s']))):
+        text = set_namelist(text, section, key, value)
+    return text, dict(dx_m=dx, dtl_s=dtl, hour_angle_deg=hour)
+
+
+def setup_fine(name: str, cfg: dict) -> Path:
+    """Set up a finer box inside a coarser box's run (cfg['fine_from']: the coarser case, the day of its run to start
+    from and the factor its spacing is divided by). The finer box keeps the coarser one's column count, vertical grid,
+    nudging, vertical wind, day-night forcing, land and electricity, and starts from the coarser run's output at that
+    day: its air averaged over the columns, by level, and its mean skin temperature over the land, under the Sun and
+    the day-night forcing of that hour. CM1 cannot move a run onto a finer grid, so the finer box builds its own clouds
+    from there."""
+    import numpy as np
+    from climate.crm import ring_analysis as ra
+    fine = cfg['fine_from']
+    if fine.get('day') is None:
+        raise RuntimeError(f"{name}: choose the day of {fine['case']} to start from (fine_from['day']) first")
+    source = RUNS / fine['case']
+    src = json.loads((source / 'case.json').read_text())
+    if src['configuration'].get('terrain'):
+        raise RuntimeError(f"{fine['case']} has terrain, which a finer box does not carry")
+    exe = CM1_HOME / 'build' / cfg['build'] / 'cm1.exe'
+    if not exe.exists():
+        raise RuntimeError(f'build {cfg["build"]} first')
+    case = RUNS / name
+    if (case / 'progress.json').exists():
+        raise RuntimeError(f'{case} has started; remove it to set up afresh')
+    output_s = src['configuration']['output_s']
+    n = round(fine['day'] * 86400.0 / output_s) + 1
+    if abs((n - 1) * output_s - fine['day'] * 86400.0) > 1.0 or not (source / f'cm1out_t{n:06d}_s.dat').exists():
+        raise RuntimeError(f"{fine['case']} has no output at day {fine['day']}")
+    case.mkdir(parents=True, exist_ok=True)
+    start = fine_start(ra.read_snapshot(source, n))
+    (case / 'input_sounding').write_text(fine_sounding(start, np.loadtxt(source / 'input_grid_z')))
+    for item in ('input_grid_z', 'lsnudge_0001.dat', 'terluna_wls.txt', 'terluna_lsadv.txt', 'LANDUSE.TBL'):
+        if (source / item).exists():
+            shutil.copy2(source / item, case / item)
+    segments = np.loadtxt(source / 'terluna_surface.txt', skiprows=1, ndmin=2)
+    (case / 'terluna_surface.txt').write_text(f'{len(segments)}\n' + ''.join(
+        f'{x0:.1f} {x1:.1f} {xl:.1f} {int(lu):d} {start["skin_k"] if xl == 1 else tsk:.3f} {tmn:.3f}\n'
+        for x0, x1, xl, lu, tsk, tmn in segments))
+    text, grid = fine_namelist((source / 'namelist.template').read_text(), fine['refine'], fine['day'], cfg)
+    electricity = None
+    if cfg.get('elec') is not None:
+        for section, entries in cm1_elec.namelist_settings(cfg['elec']).items():
+            for key, value in entries.items():
+                text = set_namelist(text, section, key, value)
+        text, files = cm1_elec.run_files(case, cfg['elec'], text)
+        electricity = dict(cm1_elec.SETTINGS, **cfg['elec'], files=files)
+    (case / 'namelist.template').write_text(text)
+    tree = fetch()
+    for link, target in (('cm1.exe', exe), ('RRTMG_LW_DATA', tree / 'run' / 'RRTMG_LW_DATA'),
+                         ('RRTMG_SW_DATA', tree / 'run' / 'RRTMG_SW_DATA')):
+        path = case / link
+        if path.is_symlink() or path.exists():
+            path.unlink()
+        path.symlink_to(target)
+    digest = lambda p: hashlib.sha256(Path(p).read_bytes()).hexdigest()[:16]
+    lon = src['configuration'].get('site', {}).get('lon_deg', 0.0)
+    record = dict(src, case=name, purpose=cfg['purpose'], inputs_from=None,
+                  configuration=dict(cfg, start_hour_angle_deg=round(grid['hour_angle_deg'] - lon, 4)),
+                  grid=dict(src['grid'], dx_m=grid['dx_m'], length_m=src['grid']['nx'] * grid['dx_m']),
+                  build=json.loads((exe.parent / 'build.json').read_text()), electricity=electricity,
+                  initial=dict(source=f"{fine['case']}'s output {n} (day {fine['day']}), averaged over its columns",
+                               case=fine['case'], day=fine['day'], snapshot=n,
+                               hour_angle_deg=round(grid['hour_angle_deg'], 4),
+                               **{k: round(start[k], 4) for k in ('surface_pa', 'theta_2m_k', 'skin_k')},
+                               qv_2m_kg_kg=round(start['qv_2m_kg_kg'], 7)),
+                  runner=digest(__file__),
+                  inputs={p: digest(case / p) for p in ('input_sounding', 'input_grid_z', 'lsnudge_0001.dat',
+                                                         'terluna_surface.txt', 'LANDUSE.TBL', 'namelist.template',
+                                                         'terluna_wls.txt', 'terluna_lsadv.txt')
+                          if (case / p).exists()})
+    (case / 'case.json').write_text(json.dumps(record, indent=1) + '\n')
+    return case
+
+
+RESTART_INPUTS = ('input_sounding', 'input_grid_z', 'lsnudge_0001.dat', 'terluna_wls.txt', 'terluna_lsadv.txt',
+                  'terluna_surface.txt', 'LANDUSE.TBL', 'cm1out_s.ctl', 'cm1out_stats.ctl', 'cm1out_metadata.ctl',
+                  'cm1out_metadata.dat')
+
+
+def setup_restart(name: str, cfg: dict) -> Path:
+    """Set up a case that runs on from another case's restart (cfg['restart_from']: the case and the day), so that a
+    window of a run can run again under other settings: the other case's inputs, restart files and kept vertical field,
+    and its namelist with this case's electricity. Its progress starts at the restart, and the runner takes up from
+    there; output and restarts keep the other case's numbering."""
+    fr = cfg['restart_from']
+    source = RUNS / fr['case']
+    src = json.loads((source / 'case.json').read_text())
+    scale = src.get('time_scale', 1.0)
+    restart_s = cfg['restart_s'] * scale
+    start_s = fr['day'] * 86400.0 * scale
+    n = round(start_s / restart_s)
+    files = [source / f'cm1rst_t{n:06d}_{part}.dat' for part in 'isuvwx']
+    if abs(n * restart_s - start_s) > 1.0 or not all(f.exists() for f in files):
+        raise RuntimeError(f"{fr['case']} has no restart at day {fr['day']}")
+    ez = source / f'terluna_ez_{round(n * restart_s)}.bin'
+    if cfg.get('elec') is not None and not ez.exists():
+        raise RuntimeError(f'{ez} is missing: the restart\'s vertical field for the inductive charging')
+    exe = CM1_HOME / 'build' / cfg['build'] / 'cm1.exe'
+    if not exe.exists():
+        raise RuntimeError(f'build {cfg["build"]} first')
+    case = RUNS / name
+    if (case / 'progress.json').exists():
+        raise RuntimeError(f'{case} has been set up; remove it to set up afresh')
+    case.mkdir(parents=True, exist_ok=True)
+    for item in RESTART_INPUTS:
+        if (source / item).exists():
+            shutil.copy2(source / item, case / item)
+    for f in files + ([ez] if ez.exists() else []):
+        shutil.copy2(f, case / f.name)
+    text = (source / 'namelist.template').read_text()
+    if abs(cfg['output_s'] - src['configuration']['output_s']) > 0.5:   # a window may write output more often;
+        text = set_namelist(text, 'param1', 'tapfrq', cfg['output_s'] * scale)   # CM1 resets its schedule on restart
+    electricity = None
+    if cfg.get('elec') is not None:
+        for section, entries in cm1_elec.namelist_settings(cfg['elec']).items():
+            for key, value in entries.items():
+                text = set_namelist(text, section, key, value)
+        text, efiles = cm1_elec.run_files(case, cfg['elec'], text)
+        electricity = dict(cm1_elec.SETTINGS, **cfg['elec'], files=efiles)
+    (case / 'namelist.template').write_text(text)
+    tree = fetch()
+    for link, target in (('cm1.exe', exe), ('RRTMG_LW_DATA', tree / 'run' / 'RRTMG_LW_DATA'),
+                         ('RRTMG_SW_DATA', tree / 'run' / 'RRTMG_SW_DATA')):
+        path = case / link
+        if path.is_symlink() or path.exists():
+            path.unlink()
+        path.symlink_to(target)
+    made = next((s for s in _progress(source)['segments'] if s['model_s'] >= n * restart_s - 1.0), {})
+    digest = lambda p: hashlib.sha256(Path(p).read_bytes()).hexdigest()[:16]
+    record = dict(src, case=name, purpose=cfg['purpose'], inputs_from=None, configuration=dict(cfg),
+                  build=json.loads((exe.parent / 'build.json').read_text()), electricity=electricity,
+                  restart_from=dict(case=fr['case'], day=fr['day'], restart=n, model_s=n * restart_s,
+                                    made_by=made.get('executable')),
+                  runner=digest(__file__),
+                  inputs={p: digest(case / p) for p in RESTART_INPUTS + ('namelist.template',) if (case / p).exists()})
+    (case / 'case.json').write_text(json.dumps(record, indent=1) + '\n')
+    _save_progress(case, dict(segments=[], case=name, start_s=n * restart_s,
+                              start=f"{fr['case']}'s restart {n} (day {fr['day']})"))
+    return case
+
+
+def namelist_value(text: str, section: str, key: str) -> str:
+    """One entry of a Fortran namelist held as text, as written."""
+    import re
+    start = text.index(f'&{section}\n')
+    block = text[start:text.index('\n /', start)]
+    return re.search(rf'^\s*{re.escape(key)}\s*=\s*([^,\n!]*)', block, re.M).group(1).strip()
+
+
+def setup_sample(name: str, cfg: dict) -> Path:
+    """Set up one of CM1's own sample cases (run/config_files/<sample>) with the case's changes to its namelist and,
+    when it is electrified, its electricity."""
+    tree = fetch()
+    exe = CM1_HOME / 'build' / cfg['build'] / 'cm1.exe'
+    if not exe.exists():
+        raise RuntimeError(f'build {cfg["build"]} first')
+    case = RUNS / name
+    if (case / 'progress.json').exists():
+        raise RuntimeError(f'{case} has started; remove it to set up afresh')
+    case.mkdir(parents=True, exist_ok=True)
+    text = (tree / 'run' / 'config_files' / cfg['sample'] / 'namelist.input').read_text()
+    settings = {'param1': dict(timax=round(cfg['days'] * 86400.0, 3), run_time=-999.9, tapfrq=cfg['output_s'],
+                               rstfrq=cfg['restart_s']),
+                'param16': dict(restart_format=1, restart_filetype=2, restart_reset_frqtim=True)}
+    for section, entries in cfg.get('namelist', {}).items():
+        settings.setdefault(section, {}).update(entries)
+    if cfg.get('elec') is not None:
+        for section, entries in cm1_elec.namelist_settings(cfg['elec']).items():
+            settings.setdefault(section, {}).update(entries)
+    for section, entries in settings.items():
+        for key, value in entries.items():
+            text = set_namelist(text, section, key, value)
+    electricity = None
+    if cfg.get('elec') is not None:
+        text, files = cm1_elec.run_files(case, cfg['elec'], text)
+        electricity = dict(cm1_elec.SETTINGS, **cfg['elec'], files=files)
+    (case / 'namelist.template').write_text(text)
+    if (case / 'cm1.exe').is_symlink() or (case / 'cm1.exe').exists():
+        (case / 'cm1.exe').unlink()
+    (case / 'cm1.exe').symlink_to(exe)
+    value = lambda section, key: float(namelist_value(text, section, key))
+    grid = dict(nx=int(value('param0', 'nx')), ny=int(value('param0', 'ny')), nz=int(value('param0', 'nz')),
+                dx_m=value('param1', 'dx'), dy_m=value('param1', 'dy'), dz_m=value('param1', 'dz'))
+    record = dict(case=name, configuration=cfg, time_scale=1.0, sample=cfg['sample'], grid=grid,
+                  build=json.loads((exe.parent / 'build.json').read_text()), electricity=electricity,
+                  runner=hashlib.sha256(Path(__file__).read_bytes()).hexdigest()[:16],
+                  inputs={'namelist.template': hashlib.sha256((case / 'namelist.template').read_bytes()).hexdigest()[:16]})
     (case / 'case.json').write_text(json.dumps(record, indent=1) + '\n')
     return case
 
@@ -1734,8 +2168,14 @@ def setup(name: str) -> Path:
     surface segments, land-use table and links to the executable and radiation tables."""
     import numpy as np
     cfg = CASES[name]
+    if cfg.get('restart_from'):
+        return setup_restart(name, cfg)
+    if cfg.get('fine_from'):
+        return setup_fine(name, cfg)
     if cfg.get('inputs_from'):
         return setup_from(name, cfg)
+    if cfg.get('kind') == 'sample':
+        return setup_sample(name, cfg)
     tree = fetch()
     exe = CM1_HOME / 'build' / cfg['build'] / 'cm1.exe'
     if not exe.exists():
@@ -1877,6 +2317,10 @@ def setup(name: str) -> Path:
     for section, entries in settings.items():
         for key, value in entries.items():
             text = set_namelist(text, section, key, value)
+    electricity = None
+    if cfg.get('elec') is not None:
+        text, electricity = cm1_elec.run_files(case, cfg['elec'], text)
+        electricity = dict(cm1_elec.SETTINGS, **cfg['elec'], files=electricity)
     (case / 'namelist.template').write_text(text)
     digest = lambda p: hashlib.sha256(Path(p).read_bytes()).hexdigest()[:16]
     if tilted or box:                                                     # per-column arrays as rounded lists
@@ -1895,6 +2339,7 @@ def setup(name: str) -> Path:
                   large_scale_w=vertical_wind,
                   day_night=day_night,
                   terrain=terrain if cfg.get('terrain') else None,
+                  electricity=electricity,
                   runner=digest(__file__),
                   inputs={p: digest(case / p) for p in ('input_sounding', 'input_grid_z', 'lsnudge_0001.dat',
                                                          'terluna_surface.txt', 'LANDUSE.TBL', 'namelist.template',
@@ -1963,7 +2408,7 @@ def run(name: str, hours: float, threads: int = 8) -> dict:
     executable = hashlib.sha256((case / 'cm1.exe').resolve().read_bytes()).hexdigest()[:16]   # the build each segment ran
     try:
         while True:
-            done = progress['segments'][-1]['model_s'] if progress['segments'] else 0.0
+            done = progress['segments'][-1]['model_s'] if progress['segments'] else progress.get('start_s', 0.0)
             if done >= total - 1.0:
                 break
             if (case / 'STOP').exists():
@@ -2005,10 +2450,11 @@ def status(name: str) -> str:
     progress = _progress(case)
     cfg = CASES[name]
     scale = json.loads((case / 'case.json').read_text()).get('time_scale', 1.0)
-    done = (progress['segments'][-1]['model_s'] if progress['segments'] else 0.0) / scale   # lunar-equivalent
+    start = progress.get('start_s', 0.0)                         # a case run on from another's restart starts there
+    done = (progress['segments'][-1]['model_s'] if progress['segments'] else start) / scale   # lunar-equivalent
     total = case_length_s(cfg, scale) / scale
     wall = sum(s['wall_s'] for s in progress['segments'])
-    rate = done * scale / wall if wall else float('nan')
+    rate = (done * scale - start) / wall if wall else float('nan')
     running = (case / 'run.lock').exists()
     return (f"{name}: {done / 86400:.2f} of {total / 86400:.2f} days ({100 * done / total:.0f}%), "
             f"{wall / 3600:.1f} wall hours, {rate:.0f} model s per wall s; {'running' if running else 'idle'}")
@@ -2045,8 +2491,11 @@ def main(argv=None) -> int:
         case = setup(args.case)
         record = json.loads((case / 'case.json').read_text())
         g = record['grid']
-        print(f"{case}: {g['nx']}{' x ' + str(g['ny']) if 'ny' in g else ''} x {g['nz']} points, dx {g['dx_m']:.1f} m, top {g['ztop_m'] / 1000:.0f} km, "
-              f"water {record['water_share']:.2f} of the ring")
+        if record.get('sample'):
+            print(f"{case}: CM1's {record['sample']} case, {g['nx']} x {g['ny']} x {g['nz']} points, dx {g['dx_m']:.0f} m")
+        else:
+            print(f"{case}: {g['nx']}{' x ' + str(g['ny']) if 'ny' in g else ''} x {g['nz']} points, dx {g['dx_m']:.1f} m, "
+                  f"top {g['ztop_m'] / 1000:.0f} km, water {record['water_share']:.2f} of the ring")
     return 0
 
 
