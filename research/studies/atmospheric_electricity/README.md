@@ -416,6 +416,44 @@ overhead, and far deeper and longer; near a lunar ground strike it is about 7
 dB louder than near Earth's benchmark strike, its channel carrying some 17
 times the energy per metre, at a third of the pitch.
 
+### Nitrogen fixed by lightning
+
+[nitrogen.py](nitrogen.py) ([results/nitrogen_oxides.json](results/nitrogen_oxides.json),
+2026-10-08) estimates the nitrogen oxides the main run's 530 flashes make from
+Earth's measured yields ([S53]–[S59]; the literature note `lightning_nox.md` on
+the data drive). The model's own yield counts the points its channels take on
+the grid and runs about fifty times low on Earth's benchmark storm, so it is not
+used. Earth's yields are expressed three ways, which agree for Earth's flashes
+and part for these. A flash in cloud releases a median 86 GJ and moves 108 C, a
+ground strike 66 GJ and 149 C, 69 and 53 times the median energy of the
+benchmark storm's flashes on its 1-km grid; no published yield covers flashes
+this large.
+
+| Counted | NOx a flash | kg N per km² a year over the box | Share of Earth's 9.8 |
+|---|---|---|---|
+| Per flash: 250 mol (33–664) | 250 mol | 0.07 (0.009–0.19) | 0.7 % |
+| Per joule released: 9–10 × 10¹⁶ molecules (1–50) | 15,800 mol | 4.6 (0.4–24) | 47 % |
+| Per metre of channel at its pressure (no branches: a lower bound) | 64 mol | 0.02 (0.004–0.2) | 0.2 % |
+
+The yields take the design air's oxygen at 0.84–0.93 of Earth's, a scaling
+argument: the literature search found no laboratory yield between 14 and 21 %
+oxygen. The site has 0.022 flashes per km² a year, 0.8 % of Earth's average;
+counted per joule, the nitrogen its lightning fixes per unit area comes to
+about half of Earth's lightning's, counted per flash or per metre under 1 %.
+Which way holds for flashes this large decides the answer across more than two
+orders of magnitude, and no measurement settles it.
+
+The grid bears on the answer as well. On a 2-km grid against its 1-km one, the
+benchmark storm makes 16 % fewer flashes, each releasing twice the median
+energy, and 65 % more energy in all. The box's 6-km grid therefore likely
+raises the per-joule count and lowers the per-flash one, by amounts no finer
+lunar run has measured.
+
+```sh
+climate/gcm/.venv/bin/python -m research.studies.atmospheric_electricity.thunder     # about 10 minutes
+climate/gcm/.venv/bin/python -m research.studies.atmospheric_electricity.nitrogen
+```
+
 ## Stage 3: the global circuit and transient luminous events
 
 The fair-weather field and global circuit follow from stage 2's storm currents,

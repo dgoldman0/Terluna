@@ -1,0 +1,166 @@
+{
+ "schema": "terluna.research.atmospheric-electricity-nitrogen/1",
+ "producer": {
+  "study": "research/studies/atmospheric_electricity",
+  "files": {
+   "nitrogen.py": "be965b13df4de584"
+  }
+ },
+ "run": "box_0e_elec_corrected",
+ "flashes": 530,
+ "ground_strikes": 106,
+ "days": 59.06,
+ "box_km2": 148008.83173740158,
+ "evidence": "Earth's measured lightning nitrogen-oxide yields, per flash, per joule of the energy a flash releases and per metre of channel (literature note lightning_nox.md), applied to the main run's flashes. None is measured for flashes that release tens to hundreds of gigajoules, and the three part by more than a hundred times for them; the oxygen factor is a scaling argument. The flashes' number and energies depend on the 6-km grid (flash_sizes). The box is one equatorial lowland site.",
+ "reading_rule": "total_mol is the NOx the run's flashes make over its two lunar days under each way of counting, with the published range; kg_n_per_km2_yr spreads it over the box and a year and takes the design air's oxygen; share_of_earth sets that against Earth's 9.8 kg N per km2 a year. The per-metre route counts no branches and is a lower bound. flash_sizes sets the flashes beside the Earth benchmark storm's, whose 2-km grid against its 1-km one gives fewer flashes, each releasing more energy, and more energy in all; the box's coarser grid likely raises the per-joule count and lowers the per-flash one, by amounts no finer lunar run has measured.",
+ "estimate": {
+  "per_flash": {
+   "total_mol": 132500.0,
+   "total_mol_range": [
+    17490.0,
+    351920.0
+   ],
+   "per_flash_mol": 250.0,
+   "kg_n_per_km2_yr": 0.07211956636849566,
+   "kg_n_per_km2_yr_range": [
+    0.008598513461224516,
+    0.19154956827472452
+   ],
+   "share_of_earth": 0.007357125706821933
+  },
+  "per_joule": {
+   "total_mol": 8387265.76859356,
+   "total_mol_range": [
+    882870.0809045852,
+    44143504.04522926
+   ],
+   "per_flash_mol": 15825.029752063321,
+   "kg_n_per_km2_yr": 4.565177133949398,
+   "kg_n_per_km2_yr_range": [
+    0.4340406103585165,
+    24.02724807341788
+   ],
+   "share_of_earth": 0.46570693280050807
+  },
+  "per_metre": {
+   "total_mol": 33927.703551713115,
+   "total_mol_range": [
+    8689.804071652838,
+    376558.1764382897
+   ],
+   "per_flash_mol": 64.0145350032323,
+   "kg_n_per_km2_yr": 0.018466802022856003,
+   "kg_n_per_km2_yr_range": [
+    0.0042721210569188406,
+    0.2049600935640825
+   ],
+   "share_of_earth": 0.0018838519243301313
+  },
+  "channel_km": {
+   "median": 28.411532067856296,
+   "total": 17443.741098771505
+  },
+  "flashes_per_km2_yr": {
+   "box": 0.022145476069490806,
+   "earth": 2.722272333144546,
+   "box_over_earth": 0.008134923093425471
+  }
+ },
+ "flash_sizes": {
+  "in_cloud": {
+   "flashes": 424,
+   "energy_j": {
+    "p10": 41660000000.0,
+    "median": 85770000000.0,
+    "p90": 185400000000.0,
+    "max": 757500000000.0
+   },
+   "charge_c_median": 107.9
+  },
+  "negative_to_ground": {
+   "flashes": 106,
+   "energy_j": {
+    "p10": 22740000000.0,
+    "median": 65620000000.0,
+    "p90": 161700000000.0,
+    "max": 324900000000.0
+   },
+   "charge_c_median": 148.9
+  },
+  "earth_benchmark": {
+   "supercell_elec": {
+    "flashes": 7134,
+    "median_energy_j": 1240000000.0,
+    "total_energy_j": 19511490000000.0
+   },
+   "supercell_elec_2km": {
+    "flashes": 5986,
+    "median_energy_j": 2448000000.0,
+    "total_energy_j": 32186722000000.0
+   },
+   "coarse_over_fine": {
+    "flashes": 0.8390804597701149,
+    "median_energy_j": 1.9741935483870967,
+    "total_energy_j": 1.6496291159721785
+   }
+  },
+  "median_energy_over_earth_benchmark": {
+   "in_cloud": 69.16935483870968,
+   "negative_to_ground": 52.91935483870968
+  }
+ },
+ "yields": {
+  "per_flash_mol": {
+   "central": 250.0,
+   "likely": [
+    150.0,
+    350.0
+   ],
+   "full": [
+    33.0,
+    664.0
+   ]
+  },
+  "per_joule_molecules": {
+   "central": 9.5e+16,
+   "published": [
+    9e+16,
+    1e+17
+   ],
+   "full": [
+    1e+16,
+    5e+17
+   ]
+  },
+  "per_metre_molecules": {
+   "a": 3.4e+20,
+   "b": 1.3e+16,
+   "observed": [
+    3e+20,
+    1.3e+22
+   ]
+  },
+  "oxygen_factor": {
+   "central": 0.93,
+   "range": [
+    0.84,
+    0.93
+   ]
+  },
+  "earth_tg_n_per_yr": {
+   "central": 5.0,
+   "range": [
+    3.0,
+    7.0
+   ]
+  },
+  "earth_kg_n_per_km2_yr": {
+   "central": 9.802682357543846,
+   "range": [
+    5.881609414526308,
+    13.723755300561384
+   ]
+  },
+  "earth_flashes_per_s": 44.0
+ }
+}

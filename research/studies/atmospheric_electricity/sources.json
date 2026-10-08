@@ -344,6 +344,55 @@
       "citation": "Dwyer (2007), Relativistic breakdown in planetary atmospheres, Phys. Plasmas 14, 042901, doi:10.1063/1.2709652",
       "use": "The runaway breakdown threshold set by the gas's electron density, so water vapour at the lunar charging zone's 0.2-0.6 mol % changes WRF-ELEC's density-scaled breakdown field by under 0.1 %.",
       "access": "Sects. II.C, II.G, III.A and IV."
+    },
+    {
+      "id": "S53",
+      "citation": "Schumann and Huntrieser (2007), The global lightning-induced nitrogen oxides source, Atmos. Chem. Phys. 7, 3823-3907",
+      "doi": "10.5194/acp-7-3823-2007",
+      "use": "Earth's lightning NOx per flash (15 (2-40) x 10^25 molecules, 33-664 mol), per joule (1-50 x 10^16 molecules) and the global source (5 (2-8) Tg N a year): the nitrogen estimate's yields and Earth reference.",
+      "access": "Full text (literature note lightning_nox.md, 2026-10-08, by a literature agent)."
+    },
+    {
+      "id": "S54",
+      "citation": "Pickering, Allen and Huntrieser (2026), The role of lightning in atmospheric chemistry, J. Geophys. Res. Atmos. 131, e2026JD046484",
+      "doi": "10.1029/2026JD046484",
+      "use": "The current review: 250 mol NOx a flash (150-350 likely), intracloud and ground flashes alike, 5 +- 2 Tg N a year at 44-46 flashes a second.",
+      "access": "Sects. 1-3 (pp. 1-32), full text (literature note lightning_nox.md, 2026-10-08, by a literature agent)."
+    },
+    {
+      "id": "S55",
+      "citation": "Borucki and Chameides (1984), Lightning: estimates of the rates of energy dissipation and nitrogen fixation, Rev. Geophys. 22, 363-372",
+      "doi": "10.1029/RG022i004p00363",
+      "use": "9 x 10^16 molecules of NO a joule of flash energy.",
+      "access": "Abstract; values through S53 (literature note lightning_nox.md, 2026-10-08, by a literature agent)."
+    },
+    {
+      "id": "S56",
+      "citation": "Price, Penner and Prather (1997), NOx from lightning: 1. Global distribution based on lightning physics, J. Geophys. Res. 102, 5929-5941",
+      "doi": "10.1029/96JD03504",
+      "use": "10 x 10^16 molecules of NO a joule, on flash energies of 0.67-6.7 GJ.",
+      "access": "Abstract; values through S53 (literature note lightning_nox.md, 2026-10-08, by a literature agent)."
+    },
+    {
+      "id": "S57",
+      "citation": "Wang, DeSilva, Goldenbaum and Dickerson (1998), Nitric oxide production by simulated lightning: dependence on current, energy, and pressure, J. Geophys. Res. 103, 19149-19159",
+      "doi": "10.1029/98JD01356",
+      "use": "NO per metre of channel by pressure, 0.34 x 10^21 + 1.30 x 10^16 p[Pa] molecules a metre at 19 kA (as fitted in S58): the per-metre route.",
+      "access": "Abstract; the fit through S58 and S53 (literature note lightning_nox.md, 2026-10-08, by a literature agent)."
+    },
+    {
+      "id": "S58",
+      "citation": "Davis, Rutledge and Fuchs (2019), Lightning location, NOx production, and transport by anomalous and normal polarity thunderstorms, J. Geophys. Res. Atmos. 124, 8722-8742",
+      "doi": "10.1029/2018JD029979",
+      "use": "The pressure fit of Wang et al.'s per-metre yield.",
+      "access": "Full text (literature note lightning_nox.md, 2026-10-08, by a literature agent)."
+    },
+    {
+      "id": "S59",
+      "citation": "Ott et al. (2010), Production of lightning NOx and its vertical distribution calculated from three-dimensional cloud-scale chemical transport model simulations, J. Geophys. Res. 115, D04301",
+      "doi": "10.1029/2009JD011880",
+      "use": "Intracloud flashes making about as much NOx as ground flashes (a ratio of 0.93), with a mean of 500 mol for ground flashes.",
+      "access": "Abstract; storm values through S54 (literature note lightning_nox.md, 2026-10-08, by a literature agent)."
     }
   ],
   "notes": "Stage 1's literature notes, with every value's location in its source, are kept on the data drive at /media/projectspace/terluna-research/atmospheric-electricity/ (charging_laws.md, ionization_conductivity.md). Stage 2's benchmark notes, with each value's place in its source, are in benchmark_literature.md in the same folder."
