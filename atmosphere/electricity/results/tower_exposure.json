@@ -1,0 +1,189 @@
+{
+ "schema": "terluna.atmosphere.tower-exposure/1",
+ "producer": {
+  "domain": "atmosphere",
+  "files": {
+   "electricity/tower.py": "b658be7bd84d1d66"
+  },
+  "runs": [
+   "box_0e_elec_corrected",
+   "box_0e_elec_corrected_storms_first",
+   "box_0e_elec_corrected_storms_second"
+  ]
+ },
+ "evidence": "The electrified CM1 box's saved charge (two lunar days every 3 hours, and two 1.5-day windows every 10 minutes) on its flat, periodic 6-km grid, with the potential solved again from it. A tower's top meets the storm's potential at its height; the tower's own charge, the summit's terrain beneath the storms and the leaders' growth are outside this screen.",
+ "reading_rule": "Potentials in MV relative to the ground. For each top height, share_of_time_above[threshold] is the share of column-outputs where |phi| at that height passes the threshold; episodes_per_year counts, in the ten-minute windows, how often a column's |phi| rises through it, per column per year scaled by the storm days the windows cover; percentiles describe |phi| over all columns and outputs.",
+ "cases": {
+  "box_0e_elec_corrected": {
+   "outputs": 473,
+   "output_s": 10800.0,
+   "days": 59.0,
+   "by_top_height_km": {
+    "24": {
+     "thresholds_mv": {
+      "positive_leader": 0.225,
+      "negative_leader": 0.4,
+      "rizk_at_height": 1.219
+     },
+     "share_of_time_above": {
+      "positive_leader": 0.14245,
+      "negative_leader": 0.12335,
+      "rizk_at_height": 0.08171
+     },
+     "episodes_per_column_per_year": {
+      "positive_leader": 122.712,
+      "negative_leader": 119.999,
+      "rizk_at_height": 104.75
+     },
+     "percentiles_mv": {
+      "p50": 0.0,
+      "p90": 0.7544,
+      "p99": 19.0463,
+      "p99.9": 88.5229
+     },
+     "max_mv": 583.989,
+     "air_density_kg_m3": 0.96
+    },
+    "35.6": {
+     "thresholds_mv": {
+      "positive_leader": 0.225,
+      "negative_leader": 0.4,
+      "rizk_at_height": 0.997
+     },
+     "share_of_time_above": {
+      "positive_leader": 0.15151,
+      "negative_leader": 0.13466,
+      "rizk_at_height": 0.10187
+     },
+     "episodes_per_column_per_year": {
+      "positive_leader": 123.99,
+      "negative_leader": 122.245,
+      "rizk_at_height": 113.795
+     },
+     "percentiles_mv": {
+      "p50": 0.0,
+      "p90": 1.0474,
+      "p99": 29.1346,
+      "p99.9": 151.347
+     },
+     "max_mv": 1065.983,
+     "air_density_kg_m3": 0.785
+    }
+   }
+  },
+  "box_0e_elec_corrected_storms_first": {
+   "outputs": 216,
+   "output_s": 600.0,
+   "days": 1.49,
+   "by_top_height_km": {
+    "24": {
+     "thresholds_mv": {
+      "positive_leader": 0.225,
+      "negative_leader": 0.4,
+      "rizk_at_height": 1.213
+     },
+     "share_of_time_above": {
+      "positive_leader": 0.80588,
+      "negative_leader": 0.7114,
+      "rizk_at_height": 0.4867
+     },
+     "episodes_per_column_per_year": {
+      "positive_leader": 1913.7,
+      "negative_leader": 1959.688,
+      "rizk_at_height": 1607.551
+     },
+     "percentiles_mv": {
+      "p50": 1.1445,
+      "p90": 10.1646,
+      "p99": 51.9872,
+      "p99.9": 105.4035
+     },
+     "max_mv": 609.94,
+     "air_density_kg_m3": 0.955
+    },
+    "35.6": {
+     "thresholds_mv": {
+      "positive_leader": 0.225,
+      "negative_leader": 0.4,
+      "rizk_at_height": 0.996
+     },
+     "share_of_time_above": {
+      "positive_leader": 0.84306,
+      "negative_leader": 0.76306,
+      "rizk_at_height": 0.60246
+     },
+     "episodes_per_column_per_year": {
+      "positive_leader": 1797.118,
+      "negative_leader": 1917.881,
+      "rizk_at_height": 1777.408
+     },
+     "percentiles_mv": {
+      "p50": 1.6125,
+      "p90": 15.2452,
+      "p99": 88.1842,
+      "p99.9": 206.3462
+     },
+     "max_mv": 900.533,
+     "air_density_kg_m3": 0.785
+    }
+   }
+  },
+  "box_0e_elec_corrected_storms_second": {
+   "outputs": 216,
+   "output_s": 600.0,
+   "days": 1.49,
+   "by_top_height_km": {
+    "24": {
+     "thresholds_mv": {
+      "positive_leader": 0.225,
+      "negative_leader": 0.4,
+      "rizk_at_height": 1.212
+     },
+     "share_of_time_above": {
+      "positive_leader": 0.87986,
+      "negative_leader": 0.82276,
+      "rizk_at_height": 0.65537
+     },
+     "episodes_per_column_per_year": {
+      "positive_leader": 1142.475,
+      "negative_leader": 1262.76,
+      "rizk_at_height": 1522.921
+     },
+     "percentiles_mv": {
+      "p50": 2.5439,
+      "p90": 23.4976,
+      "p99": 98.7855,
+      "p99.9": 207.2907
+     },
+     "max_mv": 662.9,
+     "air_density_kg_m3": 0.954
+    },
+    "35.6": {
+     "thresholds_mv": {
+      "positive_leader": 0.225,
+      "negative_leader": 0.4,
+      "rizk_at_height": 0.996
+     },
+     "share_of_time_above": {
+      "positive_leader": 0.90197,
+      "negative_leader": 0.8525,
+      "rizk_at_height": 0.7462
+     },
+     "episodes_per_column_per_year": {
+      "positive_leader": 1024.22,
+      "negative_leader": 1180.579,
+      "rizk_at_height": 1409.504
+     },
+     "percentiles_mv": {
+      "p50": 3.5958,
+      "p90": 35.2146,
+      "p99": 163.4055,
+      "p99.9": 331.0844
+     },
+     "max_mv": 884.803,
+     "air_density_kg_m3": 0.785
+    }
+   }
+  }
+ }
+}
