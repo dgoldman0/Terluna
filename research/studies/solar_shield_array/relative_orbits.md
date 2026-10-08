@@ -563,6 +563,11 @@ work. The keeping in the regressing frame with the edge rings treated, the
 along-track keeping and the momentum store and trim as hardware are parked
 after it, and the branch's merge into main waits on a joint integration with
 the other branches ([integrated_comparison.md](integrated_comparison.md#next-steps)).
+Done the same day ([ring_layout.py](ring_layout.py)): the full disk's 1,860 rings
+share one line of nodes, so each needs a radius of its own; set near the radius
+at which its plane turns with the Sun, with keeping that holds close rings'
+eccentricity vectors together, every plane stays within photon steering with
+0.6 km clearance ([integrated_comparison.md](integrated_comparison.md#the-ring-planes)).
 
 **Stage 4, the zoned aperture and collection, in parallel.** The held
 screen's holding power with a zoned aperture is computed above (6 October).
@@ -584,7 +589,8 @@ above.
 | Keeping actuator | Photon forces, adopted 6 October: small attitude offsets that tilt the sail force, with reflectivity trim. Reflectivity trim, as IKAROS flew, pushes along each tile's normal, close to radial, so it reaches only the eccentricity vector; the semi-major-axis step and the relative tilts need the tilted sail force. Electric thrust in lunar orbit would release its exhaust at or inside the planned magnetosphere |
 | Keeping frame | Hold the relative tilts in the frame of the node on Earth's orbital plane and act on orbit-averaged elements; leave the stack's common regression to stage 3's common steering |
 | Height step between rings | Leave room in the row overlap for the stack's half-monthly breathing, up to 5.6% of the step, or hold the breathing by keeping; the choice trades tiles against keeping |
-| Radius step between rings | 1.0 km, which holds clearance under keeping; smaller steps need tighter keeping, and larger ones spread a full disk's rings over more radius |
+| Radius step between rings | 1.0 km, which holds clearance under keeping; smaller steps need tighter keeping, and larger ones spread a full disk's rings over more radius. In the stack's matched layout 0.6 km keeps every plane within photon steering once the held eccentricities' effect on turning is counted, and 1 km leaves 22 edge rings beyond it; the keeping study settles the step ([integrated comparison](integrated_comparison.md#the-ring-planes)) |
+| The stack's radius layout | Decided by the author on 2026-10-08: two-sided, each ring near the radius at which its plane turns with the Sun (19,600–21,900 km), the radius growing toward both edges with the two sides interleaving; nesting it needs keeping that holds the eccentricity vectors of close rings together ([integrated comparison](integrated_comparison.md#the-ring-planes)) |
 | The bundle's edge rings | First, edge tiles whose sail force per unit mass matches the interior's; integral keeping or feedforward of the modelled shadow difference as the fallback |
 | Ring radius, about 15,000 km or near the Sun-synchronous radius | Decided by the author on 2026-10-07: near 20,000 km, tilted from the Moon's orbital plane. At 15,000 km the planes' differences tear the strip pattern apart within weeks; near 20,000 km its interior holds and the whole pattern shifts about 1,600 km each way over a year, which about 23% more rings cover ([integrated comparison](integrated_comparison.md#the-ring-planes)) |
 | Attitude scheme | Decided by the author on 2026-10-07: radial-facing tiles whose redirecting filter covers only the middle of each tile along the ring (the pitch plus about 400 m), with 25% reflectivity trim and a momentum store near 2×10⁹ N·m·s per tile ([integrated comparison](integrated_comparison.md#what-holds-the-ring-fleet-the-attitude)). Edge-on turns collide with the next ring. Climate-window tiles keep Sun-facing service, whose transmitted spectrum changes with incidence |

@@ -60,14 +60,22 @@ times. The planes move the pattern in two ways ([plane_motion.py](plane_motion.p
 - **Tilt differences.** The outer rings precess more slowly. At 15,000 km this
   tears the strips apart within weeks. Near 20,000 km the interior holds, while
   the edge strips recede up to 1,600 km a year, beyond photon steering for the
-  outermost rings.
+  outermost rings, with every ring at one radius.
+- **The stack's radii.** The full disk's 1,860 rings share one line of nodes,
+  so each needs a radius of its own ([ring_layout.py](ring_layout.py)). Set each
+  near the radius at which its plane turns with the Sun, 19,600–21,900 km, the
+  radius growing toward both edges, and hold the eccentricity vectors of close
+  rings together, and every plane stays within photon steering with 0.6 km
+  clearance; at 1 km, 22 edge rings stay beyond it. Left on their forced
+  eccentricities the rings cannot be nested.
 
 Nested rings need one sail loading, so annulus tiles come to about 13 g/m².
 The protection domain's annulus films stop the extreme and far ultraviolet from
 3.5 g/m², but pass solar X-rays
 ([annulus_film.py](../../../protection/spectra/annulus_film.py)). A nestable
-ring screen near 20,000 km needs about 27–33 million tiles and 45–53 Gt, 16–19
-times the held screen's tiles.
+ring screen near 20,000 km laid out that way needs about 28 million tiles and
+46 Gt, 16 times the held screen's tiles (33 million and 53 Gt if the edge strips
+were oversized in place of steered).
 
 A held screen with a zoned aperture needs 32.8–66.5 TW, against the published
 238 TW. Its reaction mass, 51 t/s at the lightest design point, leaves into
@@ -295,6 +303,7 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.frozen_rings
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.attitude_schemes
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.plane_motion
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.ring_layout
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.bundle_validation
 python -m protection.spectra.annulus_film
 python -m research.studies.solar_shield_array.integrated_ledger

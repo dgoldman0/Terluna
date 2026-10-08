@@ -2,7 +2,7 @@
  "schema": "terluna.research.integrated-ledger/1",
  "producer": {
   "files": {
-   "research/studies/solar_shield_array/integrated_ledger.py": "8bad5ce88ace2d47ad8ce784a4746be97408305ac9dd896684b06ed0c46fbd8c",
+   "research/studies/solar_shield_array/integrated_ledger.py": "e65691c167eb72058039a658ab13243aa534081d203e6ceac709522b0c913c1f",
    "research/studies/solar_shield_array/run.py": "69e01bf90ca29987f9251f7d1aff5be0c57e909815847cf0cf7a4e94cf3ff9cd",
    "protection/dynamics/optical.py": "06a13ae9f24834876edbc12b513deaa5e3735f02f8249eb57c8996d74ce00b56"
   },
@@ -29,6 +29,7 @@
    "results/attitude_schemes.json": "485cb1ca84437b320cfb2e2555a70d961ab271ebbc1d028cea9641861d839ac8",
    "results/plane_motion.json": "a601f5be57d38950327199dc2039947add5febb0f50ebe2685f7d11f7010718f",
    "results/bundle_validation.json": "571aa1ad0c36c0474f160b6bce7fdebfc0e3a21ebf4d48e4517871afc817eade",
+   "results/ring_layout.json": "456338e771bbc4aa384b70a0cffda0ed8f62ec5737eea53e264e7f4e9acab4d6",
    "protection/spectra/annulus_film.json": "328f6698a2f021cf81e55e1c4b7b2a3e64280f3b6d9ec8fac67f4d8008eba630"
   }
  },
@@ -278,6 +279,70 @@
       "optical_mass_Gt": 36.8457429683718,
       "oversized_optical_mass_Gt": 45.21265010203185,
       "oversized_without_steering_Gt": 53.69323597239284
+     }
+    },
+    "stack_layout": {
+     "rings": 1859,
+     "ideal_radius_km": [
+      19633.960054785843,
+      21360.573973391758
+     ],
+     "flown_steering_over_reach_max": 0.7719218977755228,
+     "by_clearance": {
+      "600": {
+       "one_radius_steering_over_reach_max": 7.015761618325252,
+       "forced": {
+        "staircase": 8.587726700869254,
+        "two_sided": "runs away",
+        "matched": "runs away"
+       },
+       "matched": {
+        "radius_km": [
+         19613.960054785843,
+         21340.573973391758
+        ],
+        "tiles_over_one_radius": 1.0154905832915757,
+        "steering_over_reach_max": 0.10013868759692915
+       },
+       "coupled": {
+        "radius_km": [
+         19633.960054785843,
+         21882.319897033114
+        ],
+        "tiles_over_one_radius": 1.02128483587966,
+        "held_eccentricity_departure": 0.03338776726429746,
+        "turning_change_min_deg_per_day": -0.041431645661164834,
+        "steering_over_reach_max": 0.039184258157004825,
+        "rings_over_reach": 0
+       }
+      },
+      "1000": {
+       "one_radius_steering_over_reach_max": 7.015761618325252,
+       "forced": {
+        "staircase": 13.775855851609075,
+        "two_sided": "runs away",
+        "matched": "runs away"
+       },
+       "matched": {
+        "radius_km": [
+         19200.612569796194,
+         21391.70571162343
+        ],
+        "tiles_over_one_radius": 1.0141355030172252,
+        "steering_over_reach_max": 0.6995299229202967
+       },
+       "coupled": {
+        "radius_km": [
+         19433.960054785843,
+         21805.639731725685
+        ],
+        "tiles_over_one_radius": 1.0259077163523942,
+        "held_eccentricity_departure": 0.04398210258207791,
+        "turning_change_min_deg_per_day": -0.05219633319260934,
+        "steering_over_reach_max": 2.173969742042626,
+        "rings_over_reach": 22
+       }
+      }
      }
     }
    }
@@ -1203,7 +1268,7 @@
    },
    "ring_fleet": {
     "state": "open",
-    "evidence": "On a Sun-tracking eccentricity (apolune toward the Sun, e 0.08-0.15 for 26 g/m2 tiles) the sunward crossing radius stays within 845-4,142 km over a year. The tide holds the ring planes near the Moon's orbit about Earth while the Sun moves 5.1 degrees above and below it, so the whole strip pattern shifts each way about its mean by 1,588 km at 20,000 km, which oversizing covers with 23% more rings. The planes also differ by tilt: at 15,000 km the strips cross within weeks, beyond photon steering by up to 21 times; at 20,000 km, with rings set from the Moon's orbit plane, the interior overlaps hold (the year's largest opening is 615 m per height step against a 604 m overlap), while the edge strips recede by up to 1,619 km over the year, beyond photon steering by 3.3 times for the outermost rings. 5 g/m2 tiles are forced to e 0.38-0.48, with perilune as low as 2,769 km."
+    "evidence": "On a Sun-tracking eccentricity (apolune toward the Sun, e 0.08-0.15 for 26 g/m2 tiles) the sunward crossing radius stays within 845-4,142 km over a year. The tide holds the ring planes near the Moon's orbit about Earth while the Sun moves 5.1 degrees above and below it, so the whole strip pattern shifts each way about its mean by 1,588 km at 20,000 km, which oversizing covers with 23% more rings. The planes also differ by tilt: at 15,000 km the strips cross within weeks, beyond photon steering by up to 21 times; at 20,000 km, with rings set from the Moon's orbit plane, the interior overlaps hold (the year's largest opening is 615 m per height step against a 604 m overlap), while the edge strips recede by up to 1,619 km over the year, beyond photon steering by 3.3 times for the outermost rings. Nested as a full stack, its 1,859 rings each need a radius of their own, since they share one line of nodes, and left on their forced eccentricities they cannot be nested. With keeping holding the eccentricity vectors of rings that come close together, each set near the radius at which it turns with the Sun (19,634-21,361 km), every plane stays within photon roll's reach (the worst at 0.70 of it with 1 km clearance, 0.10 with 0.6 km); the held eccentricities slow the edge rings by up to 0.05 degrees a day, and laid out again with that the stack closes at 0.6 km (the worst at 0.04 of the reach, +2.1% tiles) and leaves 22 edge rings beyond it at 1 km (ring_layout.json). 5 g/m2 tiles are forced to e 0.38-0.48, with perilune as low as 2,769 km."
    }
   },
   {

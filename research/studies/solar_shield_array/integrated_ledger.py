@@ -10,8 +10,9 @@ marks what no model yet supplies. It runs no new dynamics.
   selected moving trajectory (zoned_aperture.json, exhaust_isolation.json).
 - ring_fleet: a global screen of nested ring bundles in lunar orbit, kept with photon forces
   (ring_bundle.json, ring_keeping.json, ring_screen.json, photon_control.json, frozen_rings.json,
-  attitude_schemes.json, plane_motion.json, bundle_validation.json). Its inventory follows from the bundle's
-  geometry at ring radii of 15,000-20,000 km; no full-fleet run exists.
+  attitude_schemes.json, plane_motion.json, bundle_validation.json, ring_layout.json). Its inventory follows from
+  the bundle's geometry at ring radii of 15,000-20,000 km, and at 20,000 km from the stack's matched radius layout
+  (ring_layout.json) as well; no full-fleet run exists.
 
 Both use the annulus films of the protection domain (protection/spectra/annulus_film.json).
 
@@ -37,7 +38,7 @@ FILES = ['research/studies/solar_shield_array/integrated_ledger.py', 'research/s
          'protection/dynamics/optical.py']
 PRODUCTS = {name: HERE/f'results/{name}.json' for name in
             ('zoned_aperture', 'exhaust_isolation', 'ring_bundle', 'ring_keeping', 'ring_screen', 'photon_control',
-             'frozen_rings', 'attitude_schemes', 'plane_motion', 'bundle_validation')}
+             'frozen_rings', 'attitude_schemes', 'plane_motion', 'bundle_validation', 'ring_layout')}
 ANNULUS = ROOT/'protection/spectra/annulus_film.json'
 # The annulus films the comparison reads: 0.1 um of titania on 2 or 4 um of silica with the stored coating layers.
 FILMS = dict(silica_2_um=(0.1, 2.0), silica_4_um=(0.1, 4.0))
@@ -106,7 +107,34 @@ def annulus_films(annulus, zoned):
                                      key=lambda f: f['areal_mass_g_m2'])['areal_mass_g_m2'])
 
 
-def ring_fleet(bundle, keeping, screen, zoned, planes=None, films=None):
+def stack_layout(layout):
+    """The full stack's radii from ring_layout.json, at each clearance: the matched layout with keeping holding close
+    rings' eccentricity vectors together, laid out again with the turning change those held eccentricities bring
+    (coupled), and whether any layout of rings left on their forced eccentricities nests."""
+    out = dict(rings=layout['stack']['rings'],
+               ideal_radius_km=[layout['stack']['ideal_radius_km']['min'], layout['stack']['ideal_radius_km']['max']],
+               flown_steering_over_reach_max=(layout['flown']['matched']['steering_over_reach_max']
+                                              if layout['flown'].get('matched') else None),
+               by_clearance={})
+    for clearance, row in layout['layouts'].items():
+        held, coupled = row['held']['matched'], row['held']['matched_coupled']
+        out['by_clearance'][clearance] = dict(
+            one_radius_steering_over_reach_max=row['one_radius']['steering_over_reach']['max'],
+            forced=({name: ('runs away' if 'runs_past_km' in v else v['steering_over_reach']['max'])
+                     for name, v in row['forced'].items()}),
+            matched=dict(radius_km=[held['radius_km']['min'], held['radius_km']['max']],
+                         tiles_over_one_radius=held['tiles_over_one_radius'],
+                         steering_over_reach_max=held['steering_over_reach']['max']),
+            coupled=dict(radius_km=[coupled['radius_km']['min'], coupled['radius_km']['max']],
+                         tiles_over_one_radius=coupled['tiles_over_one_radius'],
+                         held_eccentricity_departure=coupled['held_eccentricity']['largest_departure'],
+                         turning_change_min_deg_per_day=coupled['held_eccentricity']['turning_change_deg_per_day']['min'],
+                         steering_over_reach_max=coupled['steering_over_reach_with_held_eccentricity']['max'],
+                         rings_over_reach=coupled['steering_over_reach_with_held_eccentricity']['rings_over']))
+    return out
+
+
+def ring_fleet(bundle, keeping, screen, zoned, planes=None, films=None, layout=None):
     """Inventory, mass and control of a full ring screen, from the bundle's geometry."""
     pitch, height = bundle['design']['pitch_m'], bundle['built']['height_pitch_m']
     core, annulus = zoned['core_sigma_kg_m2'], zoned['annulus_sigma_kg_m2']
@@ -160,6 +188,8 @@ def ring_fleet(bundle, keeping, screen, zoned, planes=None, films=None):
                                                      oversized_without_steering_Gt=(1+common+edges)*widened*area*(
                                                          share*core+(1-share)*f['matched_tile_g_m2']*1e-3)/1e12)
                                           for name, f in films['films'].items()})
+        if layout is not None and np.isclose(r_km, layout['design']['middle_radius_km']):
+            extra['stack_layout'] = stack_layout(layout)
         rows.append(dict(
             radius_km=r_km, aperture_radius_km=aperture/1e3, window_radius_km=window/1e3, rings=rings,
             tiles_per_ring=per_ring, tiles=tiles, tiles_over_held_panels=tiles/held_panels,
@@ -295,6 +325,20 @@ def gates(h, fleet, exhaust, keeping, photon, frozen, films, planes):
             by_radius[c['radius_km']] = c
     near, mid = by_radius[15000.], by_radius[20000.]
     steer = lambda c: max(c['photon_steering']['needed_over_available_by_ring'])
+    stack = next((r['stack_layout'] for r in fleet['by_radius'] if 'stack_layout' in r), None)
+    if stack is not None:
+        tight, design = stack['by_clearance']['600'], stack['by_clearance']['1000']
+    nested = '' if stack is None else (
+        f" Nested as a full stack, its {stack['rings']:,} rings each need a radius of their own, since they share one "
+        'line of nodes, and left on their forced eccentricities they cannot be nested. With keeping holding the '
+        'eccentricity vectors of rings that come close together, each set near the radius at which it turns with the '
+        f"Sun ({stack['ideal_radius_km'][0]:,.0f}-{stack['ideal_radius_km'][1]:,.0f} km), every plane stays within "
+        f"photon roll\'s reach (the worst at {design['matched']['steering_over_reach_max']:.2f} of it with 1 km "
+        f"clearance, {tight['matched']['steering_over_reach_max']:.2f} with 0.6 km); the held eccentricities slow the edge "
+        f"rings by up to {-design['coupled']['turning_change_min_deg_per_day']:.2f} degrees a day, and laid out again with "
+        f"that the stack closes at 0.6 km (the worst at {tight['coupled']['steering_over_reach_max']:.2f} of the reach, "
+        f"{tight['coupled']['tiles_over_one_radius']-1:+.1%} tiles) and leaves {design['coupled']['rings_over_reach']} "
+        'edge rings beyond it at 1 km (ring_layout.json).')
     return [
         dict(gate='UV transmission (O1, O8)',
              held_zoned=dict(state='open', evidence='A tenth of a micrometre of titania with the stack\'s coating '
@@ -330,7 +374,7 @@ def gates(h, fleet, exhaust, keeping, photon, frozen, films, planes):
                              f"{mid['differential']['overlap_change_per_step_m']['opening_max']:.0f} m per height step "
                              'against a 604 m overlap), while the edge strips recede by up to '
                              f"{mid['differential']['residual_km_max']:,.0f} km over the year, beyond photon steering by "
-                             f"{steer(mid):.1f} times for the outermost rings. 5 g/m2 tiles are forced to e "
+                             f"{steer(mid):.1f} times for the outermost rings.{nested} 5 g/m2 tiles are forced to e "
                              f"{light['eccentricity'][0]:.2f}-{light['eccentricity'][1]:.2f}, with perilune as low as "
                              f"{light['periapsis_min_km']:,.0f} km.")),
         dict(gate='Window spectrum (E2, O4)',
@@ -402,7 +446,8 @@ def main():
     h = held(zoned)
     annulus = json.loads(ANNULUS.read_text())
     films = annulus_films(annulus, zoned)
-    fleet = ring_fleet(data['ring_bundle'], data['ring_keeping'], data['ring_screen'], zoned, data['plane_motion'], films)
+    fleet = ring_fleet(data['ring_bundle'], data['ring_keeping'], data['ring_screen'], zoned, data['plane_motion'], films,
+                       data['ring_layout'])
     frozen = frozen_summary(data['frozen_rings'])
     fleet['frozen_orbit'] = frozen
     photon = data['photon_control']

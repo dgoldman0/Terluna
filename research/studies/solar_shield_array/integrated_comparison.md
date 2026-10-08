@@ -58,7 +58,7 @@ or not met. The ledger product carries the evidence behind each.
 | Gate | Held screen, zoned | Ring fleet |
 |---|---|---|
 | UV transmission (O1, O8) | Open: a 0.1 µm titania film on silica stops the extreme and far ultraviolet from 3.5 g/m², but films of this kind pass solar X-rays: 3.7×10⁻⁵ of the sunlight below 175 nm at 5.8 g/m² and 1.0×10⁻⁵ at 10.2 g/m², against the window stack's 6.7×10⁻⁷. Traced along slant paths, the 4 µm film's X-rays add a tenth to a fifth of the sky glow's heat at solar maximum, and a gap heats the air 2.5–5 times the disk count, which O1 now replaces with the traced heat (below); continuous area with no seams | Open: with every tile of a 589-tile patch propagated, no receiver ray through its interior goes uncovered in four orbits (below); the annulus film as for the held screen; a full fleet's coverage, handovers and edges are unchecked |
-| Protected radius (O2) | Met: the 7,454 km aperture covers four lunar radii with the finite Sun | Open: on a Sun-tracking eccentricity the sunward crossing radius holds within 800–4,100 km over a year. The planes shift the whole pattern about 1,600 km each way at 20,000 km, which 23% more rings cover; there the interior overlaps hold, while the edge strips recede by up to 1,600 km a year, beyond photon steering for the outermost rings. At 15,000 km the strips cross within weeks (below) |
+| Protected radius (O2) | Met: the 7,454 km aperture covers four lunar radii with the finite Sun | Open: on a Sun-tracking eccentricity the sunward crossing radius holds within 800–4,100 km over a year. The planes shift the whole pattern about 1,600 km each way at 20,000 km, which 23% more rings cover. The stack's 1,860 rings each need a radius of their own; set each near the radius at which its plane turns with the Sun, with keeping holding close rings' eccentricities together, and every plane stays within photon roll's reach with 0.6 km clearance, while at 1 km 22 edge rings stay beyond it. At 15,000 km the strips cross within weeks (below) |
 | Window spectrum (E2, O4) | Conditional on the 26 g/m² window and the dimmer's form | The same, on the rings that cross the window |
 | Earth's shadow and rejected light (O5, O7) | Open: the optical bound lets redirected light leave toward the Moon; the shadow on Earth is unmapped | Open: night-side tiles reflect back past the Moon, with light the screen has already filtered (to check); the shadow on Earth is unmapped |
 | Stability | Conditional on continuous thrust (75.7 TW installed); an unpowered tile drifts about 2,700 km in its first day | Conditional: the kept bundle's edges first come within 150 m at day 8.1; its interior stays clear for 23 days with one tile per ring, and for four orbits with every tile of a patch propagated. Edge-on turns collide with the next ring; a filter centred on each tile cuts the steady shadow torque to a third, which 25% trim holds with a momentum store of about 2×10⁹ N·m·s per tile (below). Met if the centred filter, trim and store are built and keeping holds each tile within its overlap |
@@ -445,17 +445,59 @@ So the ring screen belongs near 20,000 km, with rings set from the Moon's
 orbit plane. It then needs:
 - about 23% more rings for the common shift;
 - an overlap a little above 615 m;
-- one of these for the outer rings: photon steering with a larger store, a
-  radius profile that keeps each tilt turning with the Sun (the outer rings
-  about 5% further out by the tide's cos *i* dependence, which needs the
-  radius to grow toward both edges of the stack), or yearly oversizing of
-  about another 23%.
+- for the outer rings, the stack's radii laid out so that every plane turns
+  with the Sun, with eccentricity keeping that lets the rings nest (below).
 
 The forced eccentricity also grows toward the stack's edges, from 0.11 in the
 middle to 0.14 at the top at 20,000 km, about 7×10⁻⁵ per ring there. With
 1 km radius steps, neighbouring rings near the edges would cross: at perilune
 near the top and at apolune near the bottom. The radius step there has to
 reach about 1.8 km.
+
+**The stack's radii (8 October).** The flights above put every ring at one
+radius, which no stack can fly. A full disk is about 1,860 nested rings that
+share one line of nodes, so each needs a radius of its own, and the stack spans
+1,700–2,400 km of radius once neighbouring strips keep their clearance. The
+tide turns a plane faster the further out it is, so that spread matters as much
+as the tilt. [ring_layout.py](ring_layout.py) flew 54 rings for a year on their
+forced eccentricities, at tilts of up to ±26° and radii of 18,000–22,000 km, and
+found the radius at which each ring turns with the Sun: about 19,600 km for
+rings a few degrees above the middle, rising to 21,100 km at the top edge and
+21,400 km at the bottom, the side below the Moon's orbit plane wanting 250–500 km
+more than the side above. That sets the layout. Each ring sits near that radius,
+so the radius grows toward both edges and the two sides interleave as their
+turning asks: the two-sided layout the author accepted on 8 October, matched to
+the measured asymmetry.
+
+Nesting needs keeping. The forced eccentricity rises toward the edges with both
+tilt and radius, by about 10⁻⁴ from one strip to the next near the edges.
+Neighbouring strips overlap like shingles at perilune as at apolune, so a strip
+further out on a larger eccentricity swings in on its neighbour there. Left on
+their forced eccentricities the rings cannot be nested: the two-sided and
+matched layouts run away, and a one-way staircase, which keeps within
+23,000 km, needs 8.6–14 times photon roll's reach. Keeping that holds the
+eccentricity vectors of rings that come close together, as the bundle keeping
+does for its 19 rings, removes the swing. With it the matched layout keeps every
+plane within photon roll's reach: the worst ring needs 0.70 of it with the
+bundle's 1 km clearance and 0.10 with 0.6 km, on 1.4–1.6% more tiles, where all
+rings at one radius need up to 7.0 times the reach and a one-way staircase 3–4
+times. In a year's flight of 13 of its rings on their forced eccentricities,
+the tilted ones turn within about 0.03° a day of the Sun at their layout radii,
+the worst needing 0.77 of the reach.
+
+Holding the eccentricities together moves the edge rings 0.03–0.05 below their
+forced values, which by the tide's secular rate slows their turning by up to
+0.04–0.05° a day. Laid out again with that change, pass after pass, the stack
+closes at 0.6 km clearance: the edge rings move out to 21,900 km and every plane
+stays within 0.04 of the reach, on 2.1% more tiles. At 1 km, 22 edge rings stay
+beyond the reach, up to 2.2 times. The outer rings therefore come down to the
+eccentricity keeping across the stack and its accuracy, which the keeping study
+(the third of the next steps, parked) has to fly: the 0.6 km steps need keeping
+tighter than the 150–250 m errors that made the bundle's exploratory kept run
+widen its steps to 1 km. Steering by roll at
+full reach needs a store of about 2×10¹⁰ N·m·s per tile, ten times the chosen
+one; if the store scales with the roll used, a tenth of the reach fits the
+chosen store, while 0.7 of it needs most of the larger one.
 
 ## The bundle with every tile propagated
 
@@ -506,7 +548,12 @@ bundle's geometry at 20,000 km with 5 g/m² annulus tiles. The second makes it
 nestable: annulus tiles of about 13 g/m², which carry the window's sail
 loading, and 23% more rings for the planes' common shift. The third adds
 another 23% for the edge strips' recession over a year, in place of steering
-the outer rings.
+the outer rings. Laid out by the radius at which each ring turns with the Sun,
+the stack's mean radius, and with it its tiles and mass, rise by 2.1–2.6%: about
+28.1–28.2 million tiles and 46 Gt for the second column. With that layout and
+eccentricity keeping the outer rings stay within photon steering, so the third
+column's recession allowance falls away, but for 22 edge rings at 1 km
+clearance.
 
 | | Held, 5 g/m² annulus | Held, 10 g/m² annulus | Ring fleet, geometry only | Nestable, outer rings steered | Nestable, edges oversized |
 |---|---:|---:|---:|---:|---:|
@@ -556,39 +603,67 @@ Habitats need their own structure, radiation shielding and life support,
 none budgeted here. They belong on natural orbits in either design: on the held
 screen a habitat would burn about its own mass in propellant every year.
 
-## What the comparison shows so far
+## Where the comparison stands (8 October)
 
-The held screen meets the protected radius on its geometry, but as designed
-its exhaust breaks the proposed outflow requirement, and its propellant fails
-S6. With the September magnets it could meet the outflow requirement only
-with gridded ion thrusters and capture of most of its unionized gas, pending a
-plasma estimate of the magnetosphere's leak. Its 5 g/m² annulus, the 2 µm
-film, adds a third to three fifths of the glow's heat at solar maximum; the
-10 g/m² annulus of the 4 µm film adds a tenth to a fifth and raises its
-propellant by 70%.
+On 8 October the author closed this work for a while once the outer rings were
+done ([decisions.md](../../decisions.md)). This is where it stands.
 
-The ring fleet passes no gate yet and fails none, and the four checks of this
-round narrow it to one form:
-- **Radius.** Near 20,000 km, with rings set from the Moon's orbit plane. At
-  15,000 km the planes tear the pattern apart within weeks.
-- **Attitude.** Radial-facing tiles, because edge-on turns collide with the
-  next ring. A filter centred on each tile, 25% trim and a momentum store of
-  about 2×10⁹ N·m·s per tile hold it.
-- **Nesting.** One sail loading across the nested bundle, which puts the
-  annulus tiles near 13 g/m² and the forced eccentricity at 0.11–0.14.
-- **Oversizing.** About 23% more rings for the common shift, and steering,
-  a radius profile or more oversizing for the edge strips.
+The held screen meets the protected radius on its geometry, but as designed its
+exhaust breaks the proposed outflow requirement and its propellant fails S6.
+With the September magnets it could meet the outflow requirement only with
+gridded ion thrusters and capture of most of its unionized gas, pending a plasma
+estimate of the magnetosphere's leak. It stays the documented fallback.
 
-That is about 45 Gt of tiles. Every tile of a patch propagated with its own
-forces kept clear and covered every receiver ray through the patch's interior
-for four orbits. Its remaining items:
-- the edge strips and the bundle's edge rings;
-- the keeping in the regressing frame;
-- a full fleet's coverage and handovers;
-- the hardware of the momentum store.
+The ring fleet, the lead since 7 October, passes no gate yet and fails none. Its
+form is set: rings near 20,000 km set from the Moon's orbit plane, radial-facing
+tiles with centred filters, 25% trim and a momentum store, one sail loading with
+annulus tiles near 13 g/m² that carry the 4 µm silica film. The work since then
+established:
+- **What the air allows.** O1 counts the light through gaps by the heat it
+  leaves along its slant paths, with FISM2's measured Sun (cycle 21's year as
+  solar maximum). With the thermal column radiating in the infrared, gaps may
+  pass a few tenths of a percent behind the titania stack for 1–100 kg/s of
+  ultraviolet-driven escape, and at the swarm's standard level, 2×10⁻⁴, the
+  warmest titania case loses 1.4 kg/s over the solar cycle without magnets and
+  0.044 kg/s with the September magnets, the cooler cases 0.61–0.80 kg/s, almost
+  all of it the solar wind's ([requirements](../protection_architecture/requirements.md#retention)).
+  Atomic oxygen adds about 0.02 kg/s over the cycle with the Moon-scaled
+  mixing.
+- **The latch.** Past a threshold the unfiltered light beyond the 4-radius
+  shadow keeps the upper air swollen after the Sun quiets. The infrared cooling
+  leaves that latch in place and raises its threshold about three and a half
+  times; at the standard level every maximum on record, cycle 19's year
+  included, settles a tenth to three-fifths of the way to it
+  ([the loss response](../../../atmosphere/loss_response/README.md)).
+- **The planes.** The stack's 1,860 rings each need a radius of their own. Set
+  each near the radius at which its plane turns with the Sun, 19,600–21,900 km,
+  with keeping that holds close rings' eccentricities together, and every plane
+  stays within photon roll's reach with 0.6 km clearance; at the bundle's 1 km,
+  22 edge rings stay beyond it ([the ring planes](#the-ring-planes)).
+- **Stability.** Every tile of a 589-tile patch propagated with its own forces
+  kept clear and covered every receiver ray through the patch's interior for
+  four orbits, and photon keeping holds translation with margin.
+- **Resources.** About 28 million tiles and 46 Gt, 16 times the held screen's
+  tiles, with no propellant.
 
-Both candidates share O1's count of gaps, which the X-ray check tightens, and
-the unmapped shadow on Earth.
+Both candidates share O1's count of gaps and the unmapped shadow on Earth.
+
+Parked, for when the work resumes:
+1. The keeping in the regressing frame with the edge rings, now with the
+   eccentricity keeping across the stack and the accuracy that 0.6 km steps
+   need, and the along-track keeping that holds each tile within its overlap.
+2. The momentum store and the trim as hardware, and their power, which the
+   electricity gate waits on.
+3. In the atmosphere domain: the oxygen atoms' part in the thermal column's
+   cooling and composition, and a retrace through air heated with the traced
+   shape.
+4. What waits on inputs this machine lacks: a plasma model of the ring fleet's
+   wake and of a weak dipole, the closure trajectories for the magnetic
+   comparison's rerun, and the held screen's two literature checks.
+5. A full fleet's coverage, its handovers and the shadow on Earth.
+
+The branch's merge into main waits until the other branches are ready for a
+joint integration.
 
 ## The X-ray check
 
@@ -792,21 +867,23 @@ The author set this order on 7 October:
    maximum on record.
 2. The outer rings: a radius profile that keeps each tilt turning with the
    Sun, with radius steps that grow toward the edges, flown for a year against
-   steering by roll with the larger store.
+   steering by roll with the larger store. Done on 8 October as the stack's
+   radius layout ([the ring planes](#the-ring-planes)): every ring set near the
+   radius at which it turns with the Sun, which needs keeping that holds close
+   rings' eccentricities together.
 3. The keeping in the regressing frame with the edge rings treated, on a
    bundle with centred filters, and the along-track keeping that holds each
    tile within its overlap.
 4. The momentum store and the trim as hardware, and their power.
 
 **Closing this work (8 October).** The author made the outer rings, item 2, the
-closing step: once their radius profile has flown a year against steering by
-roll, every gate has a first answer for the ring fleet. One consolidated summary
-then goes into this comparison and the research status, and the rest is parked:
-items 3 and 4, and the items that wait on what this machine lacks, namely a
-plasma model of the ring fleet's wake and of a weak dipole, the closure
-trajectories the magnetic comparison needs for its rerun, and the held screen's
-two literature checks below. The branch's merge into main waits until the other
-branches are ready for a joint integration.
+closing step. With them done, the consolidated summary stands
+[above](#where-the-comparison-stands-8-october) and in the research status.
+Parked there: items 3 and 4, and the items that wait on what this machine
+lacks, namely a plasma model of the ring fleet's wake and of a weak dipole, the
+closure trajectories the magnetic comparison needs for its rerun, and the held
+screen's two literature checks below. The branch's merge into main waits until
+the other branches are ready for a joint integration.
 
 Noted by the author for later study (7 October): the ring fleet could extend its
 protected radius by more active control as the solar weather requires,
@@ -849,12 +926,13 @@ OPENBLAS_NUM_THREADS=1 python -m research.studies.solar_shield_array.photon_cont
 OPENBLAS_NUM_THREADS=1 python -m research.studies.solar_shield_array.frozen_rings
 OPENBLAS_NUM_THREADS=1 python -m research.studies.solar_shield_array.attitude_schemes
 OPENBLAS_NUM_THREADS=1 python -m research.studies.solar_shield_array.plane_motion
+OPENBLAS_NUM_THREADS=1 python -m research.studies.solar_shield_array.ring_layout
 OPENBLAS_NUM_THREADS=1 python -m research.studies.solar_shield_array.bundle_validation
 python -m protection.spectra.annulus_film
 python -m atmosphere.middle_atmosphere.fetch_limb_inputs --download
 OPENBLAS_NUM_THREADS=1 python -m atmosphere.middle_atmosphere.limb_heat
 python -m research.studies.solar_shield_array.integrated_ledger
-python -m pytest research/studies/solar_shield_array/test_exhaust_isolation.py research/studies/solar_shield_array/test_photon_control.py research/studies/solar_shield_array/test_frozen_rings.py research/studies/solar_shield_array/test_attitude_schemes.py research/studies/solar_shield_array/test_plane_motion.py research/studies/solar_shield_array/test_bundle_validation.py research/studies/solar_shield_array/test_integrated_ledger.py protection/tests/test_annulus_film.py atmosphere/tests/test_limb_heat.py
+python -m pytest research/studies/solar_shield_array/test_exhaust_isolation.py research/studies/solar_shield_array/test_photon_control.py research/studies/solar_shield_array/test_frozen_rings.py research/studies/solar_shield_array/test_attitude_schemes.py research/studies/solar_shield_array/test_plane_motion.py research/studies/solar_shield_array/test_ring_layout.py research/studies/solar_shield_array/test_bundle_validation.py research/studies/solar_shield_array/test_integrated_ledger.py protection/tests/test_annulus_film.py atmosphere/tests/test_limb_heat.py
 ```
 
 The exhaust study takes about 27 CPU minutes, almost all of it the slow-gas
@@ -863,7 +941,9 @@ particles, and keeps one checkpoint per launch date in
 attitude schemes read the kept run's checkpoints (about two and four CPU
 minutes; without them they refly the twelve orbits, about an hour). The frozen
 orbits take about 15 CPU minutes. The planes take about 24 CPU minutes, with a
-checkpoint after each pass. The patch validation takes about 15 CPU minutes,
+checkpoint after each pass. The stack's radius layout takes about 50 CPU
+minutes: 14 for its calibration flights and 8 for its sample's, each pass
+checkpointed under the flight code's version, and the rest for the layouts. The patch validation takes about 15 CPU minutes,
 with a checkpoint for each orbit. The annulus films and the ledger take
 seconds; the films need the protection inputs and the WHI spectrum restored.
 The limb tracing takes about 50 CPU minutes and keeps each case's heat tables
