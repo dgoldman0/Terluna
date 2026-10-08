@@ -356,7 +356,18 @@ Morrison's do.
    1 °C warmer at 2 m, rained 55 % more by day and had half the night fog.
 11. Windows of the main run's busiest days, run again from its restarts with
    output every ten minutes to follow each storm's life (days 11.5–13.0 and
-   40.5–42.0; run on 2026-10-08).
+   40.5–42.0; run on 2026-10-08; climate/crm README, "Storm lives"). Of the 139
+   storm cores followed, 14 flashed, the strongest and deepest of them, and
+   every flash started inside a core. A storm's first flash came 0.7–1.5 hours
+   after its core of graupel and hail formed and 0.2–1.1 hours after its charge
+   reached 10 C. It flashed for a median 0.4–0.6 hours, at most 0.8 times a
+   minute, while its updraft and its graupel and hail peaked, and its core lasted
+   3.9–8.6 hours after the last flash. Storms that flashed lived 5.0–12.2 hours,
+   the rest a median 1.7. Earth's benchmark supercell, tracked the same way,
+   flashed within five minutes of its core forming and up to 151 times a minute,
+   with as much graupel and hail in its charging zone. The windows are new
+   realizations of their days, with 68 and 125 flashes against the main run's
+   129 and 174, so they give the storms' lives and the main run their numbers.
 
 It gives the storms' charge structure, the field by height, flash rates and
 types (within cloud and to ground), flash extent, the charge each flash moves
@@ -454,6 +465,76 @@ lunar run has measured.
 climate/gcm/.venv/bin/python -m research.studies.atmospheric_electricity.thunder     # about 10 minutes
 climate/gcm/.venv/bin/python -m research.studies.atmospheric_electricity.nitrogen
 ```
+
+### What stage 2 found
+
+The Open Moon's storms electrify and make lightning when CM1 carries their
+charge, solves for their field and discharges it, under every lunar rule this
+stage set: the breakdown field's cap lifted, WRF-ELEC's ground rule with the
+leader's crossing, leakage through the conducting air, and NSSL's fall speeds
+and ventilation at lunar gravity (items 2–11; [climate/crm](../../../climate/crm/README.md),
+"The main run" and "Storm lives"). The evidence is a calculation for one
+equatorial lowland site on a 6-km grid. Earth's benchmark storm checks the code
+and its schemes against published runs; nothing lunar is measured.
+
+**How the storms charge.** Hail does most of the charging, 87 % in the main
+run. It falls faster than graupel and rimes above Saunders and Peck's
+threshold, which slow lunar graupel mostly misses. Under that law the storms
+hold the normal arrangement: the main negative charge at 40–42 km (−13 to
+−14 °C), carried by snow, with positive charge beneath it at about 32 km and
+above it at 58–64 km. Takahashi's law gives as many flashes with the
+arrangement inverted, so the storms' polarity rests on how hail charges at −5
+to −16 °C in thin cloud water, which the laboratory has not settled (item 6).
+In the windows 14 of 139 storm cores flashed, 0.7–1.5 hours after each formed;
+stage 1's one-dimensional bound put the strongest column's time to breakdown
+under Saunders and Peck's law at 1.4 hours, without the hail.
+
+**The lightning.** The main run flashed 530 times in its two lunar days, all
+by day, 0.022 flashes per km² a year, about a hundredth of Earth's average. A
+fifth were negative ground strikes and none positive. Flashes start near 36 km
+and are large: a median 108 C and 86 GJ in cloud and 149 C and 66 GJ to
+ground, 53–69 times the median energy of the benchmark storm's flashes. A
+storm flashes for a median half hour, at most 0.8 times a minute, about an
+hour after its core forms. Storms that flash live 5–12 hours, and their cores
+outlast the lightning by 4–9 hours (item 11).
+
+**What the storms leave in the air.** With leakage through the conducting air,
+the storms leave little charge behind, under 35 C on the ions through the
+nights, and the box ends its two lunar days with no net charge. Within six
+hours of a flash the field at the ground over land peaks at a median 4.9 kV/m
+(61.5 kV/m at most), and at 0.95 kV/m where no particles reach the ground.
+
+**Thunder and nitrogen.** Lunar thunder is a deep rumble: beneath a flash in
+cloud it peaks at 23–27 Hz and 60–68 dBA, near a ground strike at 53 Hz and
+93–97 dBA, louder than near Earth's benchmark strike. Allowing for what the
+calculation leaves out, it stays above a daytime background to roughly 40–50
+km and audible in quiet to 100–150 km. The nitrogen the lightning fixes per
+unit area comes to 0.2–47 % of Earth's lightning's, depending on how Earth's
+yields carry over to flashes this large.
+
+**What stays open.**
+- The charge a collision transfers at lunar impact speeds and cloud water,
+  which sets the storms' polarity (item 6; stage 1's decisive laboratory
+  quantity).
+- The grid. The lightning is measured at 6 km only: at 2 km the fine box's
+  storms charged to 73 % of breakdown without a flash, and Earth's benchmark
+  makes fewer, larger flashes on a coarser grid. Flash counts, sizes and delays
+  and the nitrogen estimate carry that uncertainty until a 2-km box wide enough
+  for several storms runs.
+- The site. One equatorial lowland box; the highlands, the poles and the seas
+  await their own boxes.
+- The microphysics. NSSL's storms have half the night fog of Morrison's, from
+  whose rings the aerosol study takes its fog.
+- The conducting air aloft, whose attachment scales with pressure as in the
+  continuum regime until stage 3 rebuilds the column (author, 2026-10-06).
+- Chance. CM1 on several threads repeats a run only as a new realization, so
+  differences of 10–20 % between runs of a setting carry no meaning.
+
+**What stage 3 takes from it.** The global circuit needs the current each
+storm drives to the upper atmosphere, which follows from the charge, field and
+conductivity above the storms that the runs hold and have not yet diagnosed.
+The transient luminous events need the largest flashes' charge moments, which
+follow from the charge and heights in the flash log ([S4]).
 
 ## Stage 3: the global circuit and transient luminous events
 
