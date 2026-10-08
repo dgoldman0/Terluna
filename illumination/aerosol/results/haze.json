@@ -1,0 +1,958 @@
+{
+ "schema": "terluna.illumination.haze/1",
+ "producer": {
+  "domain": "illumination",
+  "files": {
+   "aerosol/haze.py": "6cf67f7ce9a77532",
+   "aerosol/mie.py": "3e5d421c00bce962"
+  },
+  "inputs": {
+   "research/studies/open_moon_aerosol/results/open_moon_aerosol.json": "7e404540ec06f5dd",
+   "illumination/calendar/results/transfer.json": "68ea6e820a8d7603"
+  }
+ },
+ "evidence": "Mie optics of the aerosol study's ground-level modes (Earth analogues changed by lunar factors) with assumed refractive indices, a mixed-layer profile and kappa-Koehler growth; one wavelength; the haze aloft and fog are outside it. Daylight from a two-layer delta two-stream column; twilight as clear-sky diffuse light passed through the haze layer.",
+ "reading_rule": "Coefficients per km at 550 nm. aod is the haze's optical depth through its mixed-layer profile; visibility_km includes the air's own scattering. daylight gives the share of sunlight reaching level ground as direct and diffuse at three Sun zenith angles, clear and hazy. twilight gives the equatorial hours after sunset until 2.98 lux, clear and hazy.",
+ "wavelength_um": 0.55,
+ "refractive_index": {
+  "aitken": [
+   1.53,
+   0.006
+  ],
+  "accumulation": [
+   1.53,
+   0.006
+  ],
+  "spray": [
+   1.5,
+   1e-08
+  ],
+  "dust": [
+   1.53,
+   0.0055
+  ],
+  "biological": [
+   1.53,
+   0.003
+  ],
+  "fungal": [
+   1.53,
+   0.003
+  ]
+ },
+ "molecular_tau_550": 0.705,
+ "molecular_extinction_per_km_ground": 0.0139,
+ "clear_visibility_km": 282.0,
+ "regions": {
+  "seas": {
+   "area_share": 0.28,
+   "cases": {
+    "clean": {
+     "day": {
+      "relative_humidity": 0.825,
+      "mixed_layer_km": 1.69,
+      "extinction_per_km": 0.00355,
+      "single_scattering_albedo": 0.9892,
+      "asymmetry": 0.708,
+      "aod": 0.006,
+      "visibility_km": 224.7,
+      "daylight": {
+       "0": {
+        "clear": {
+         "direct": 0.4941,
+         "diffuse": 0.2831
+        },
+        "hazy": {
+         "direct": 0.4915,
+         "diffuse": 0.2855
+        }
+       },
+       "60": {
+        "clear": {
+         "direct": 0.2442,
+         "diffuse": 0.3806
+        },
+        "hazy": {
+         "direct": 0.2415,
+         "diffuse": 0.3824
+        }
+       },
+       "80": {
+        "clear": {
+         "direct": 0.0173,
+         "diffuse": 0.422
+        },
+        "hazy": {
+         "direct": 0.0167,
+         "diffuse": 0.422
+        }
+       }
+      }
+     },
+     "night": {
+      "relative_humidity": 0.885,
+      "mixed_layer_km": 1.64,
+      "extinction_per_km": 0.00142,
+      "single_scattering_albedo": 0.9925,
+      "asymmetry": 0.735,
+      "aod": 0.0023,
+      "visibility_km": 256.2,
+      "twilight": {
+       "diffuse_transmittance": 0.9995,
+       "clear_depression_deg": 41.53,
+       "hazy_depression_deg": 41.52,
+       "clear_hours": 81.8,
+       "hazy_hours": 81.7
+      }
+     }
+    },
+    "central": {
+     "day": {
+      "relative_humidity": 0.825,
+      "mixed_layer_km": 1.69,
+      "extinction_per_km": 0.01297,
+      "single_scattering_albedo": 0.9889,
+      "asymmetry": 0.707,
+      "aod": 0.022,
+      "visibility_km": 145.8,
+      "daylight": {
+       "0": {
+        "clear": {
+         "direct": 0.4941,
+         "diffuse": 0.2831
+        },
+        "hazy": {
+         "direct": 0.486,
+         "diffuse": 0.2902
+        }
+       },
+       "60": {
+        "clear": {
+         "direct": 0.2442,
+         "diffuse": 0.3806
+        },
+        "hazy": {
+         "direct": 0.2361,
+         "diffuse": 0.3858
+        }
+       },
+       "80": {
+        "clear": {
+         "direct": 0.0173,
+         "diffuse": 0.422
+        },
+        "hazy": {
+         "direct": 0.0157,
+         "diffuse": 0.4217
+        }
+       }
+      }
+     },
+     "night": {
+      "relative_humidity": 0.885,
+      "mixed_layer_km": 1.64,
+      "extinction_per_km": 0.00733,
+      "single_scattering_albedo": 0.9923,
+      "asymmetry": 0.735,
+      "aod": 0.012,
+      "visibility_km": 184.6,
+      "twilight": {
+       "diffuse_transmittance": 0.9975,
+       "clear_depression_deg": 41.53,
+       "hazy_depression_deg": 41.51,
+       "clear_hours": 81.8,
+       "hazy_hours": 81.7
+      }
+     }
+    },
+    "loaded": {
+     "day": {
+      "relative_humidity": 0.825,
+      "mixed_layer_km": 1.69,
+      "extinction_per_km": 0.01924,
+      "single_scattering_albedo": 0.9896,
+      "asymmetry": 0.71,
+      "aod": 0.0326,
+      "visibility_km": 118.2,
+      "daylight": {
+       "0": {
+        "clear": {
+         "direct": 0.4941,
+         "diffuse": 0.2831
+        },
+        "hazy": {
+         "direct": 0.4829,
+         "diffuse": 0.2926
+        }
+       },
+       "60": {
+        "clear": {
+         "direct": 0.2442,
+         "diffuse": 0.3806
+        },
+        "hazy": {
+         "direct": 0.2331,
+         "diffuse": 0.3876
+        }
+       },
+       "80": {
+        "clear": {
+         "direct": 0.0173,
+         "diffuse": 0.422
+        },
+        "hazy": {
+         "direct": 0.0151,
+         "diffuse": 0.4214
+        }
+       }
+      }
+     },
+     "night": {
+      "relative_humidity": 0.885,
+      "mixed_layer_km": 1.64,
+      "extinction_per_km": 0.01599,
+      "single_scattering_albedo": 0.9928,
+      "asymmetry": 0.737,
+      "aod": 0.0262,
+      "visibility_km": 131.1,
+      "twilight": {
+       "diffuse_transmittance": 0.9945,
+       "clear_depression_deg": 41.53,
+       "hazy_depression_deg": 41.49,
+       "clear_hours": 81.8,
+       "hazy_hours": 81.7
+      }
+     }
+    }
+   }
+  },
+  "lakes": {
+   "area_share": 0.1034,
+   "cases": {
+    "clean": {
+     "day": {
+      "relative_humidity": 0.83,
+      "mixed_layer_km": 2.17,
+      "extinction_per_km": 0.00256,
+      "single_scattering_albedo": 0.9241,
+      "asymmetry": 0.733,
+      "aod": 0.0056,
+      "visibility_km": 238.3,
+      "daylight": {
+       "0": {
+        "clear": {
+         "direct": 0.4941,
+         "diffuse": 0.2831
+        },
+        "hazy": {
+         "direct": 0.4916,
+         "diffuse": 0.285
+        }
+       },
+       "60": {
+        "clear": {
+         "direct": 0.2442,
+         "diffuse": 0.3806
+        },
+        "hazy": {
+         "direct": 0.2417,
+         "diffuse": 0.3819
+        }
+       },
+       "80": {
+        "clear": {
+         "direct": 0.0173,
+         "diffuse": 0.422
+        },
+        "hazy": {
+         "direct": 0.0168,
+         "diffuse": 0.4216
+        }
+       }
+      }
+     },
+     "night": {
+      "relative_humidity": 0.895,
+      "mixed_layer_km": 2.2,
+      "extinction_per_km": 0.00163,
+      "single_scattering_albedo": 0.9271,
+      "asymmetry": 0.732,
+      "aod": 0.0036,
+      "visibility_km": 252.7,
+      "twilight": {
+       "diffuse_transmittance": 0.9988,
+       "clear_depression_deg": 41.53,
+       "hazy_depression_deg": 41.52,
+       "clear_hours": 81.8,
+       "hazy_hours": 81.7
+      }
+     }
+    },
+    "central": {
+     "day": {
+      "relative_humidity": 0.83,
+      "mixed_layer_km": 2.17,
+      "extinction_per_km": 0.00664,
+      "single_scattering_albedo": 0.9584,
+      "asymmetry": 0.684,
+      "aod": 0.0144,
+      "visibility_km": 190.8,
+      "daylight": {
+       "0": {
+        "clear": {
+         "direct": 0.4941,
+         "diffuse": 0.2831
+        },
+        "hazy": {
+         "direct": 0.4881,
+         "diffuse": 0.2879
+        }
+       },
+       "60": {
+        "clear": {
+         "direct": 0.2442,
+         "diffuse": 0.3806
+        },
+        "hazy": {
+         "direct": 0.2382,
+         "diffuse": 0.384
+        }
+       },
+       "80": {
+        "clear": {
+         "direct": 0.0173,
+         "diffuse": 0.422
+        },
+        "hazy": {
+         "direct": 0.0161,
+         "diffuse": 0.4214
+        }
+       }
+      }
+     },
+     "night": {
+      "relative_humidity": 0.895,
+      "mixed_layer_km": 2.2,
+      "extinction_per_km": 0.00754,
+      "single_scattering_albedo": 0.9658,
+      "asymmetry": 0.701,
+      "aod": 0.0166,
+      "visibility_km": 182.9,
+      "twilight": {
+       "diffuse_transmittance": 0.9953,
+       "clear_depression_deg": 41.53,
+       "hazy_depression_deg": 41.49,
+       "clear_hours": 81.8,
+       "hazy_hours": 81.7
+      }
+     }
+    },
+    "loaded": {
+     "day": {
+      "relative_humidity": 0.83,
+      "mixed_layer_km": 2.17,
+      "extinction_per_km": 0.13627,
+      "single_scattering_albedo": 0.9822,
+      "asymmetry": 0.746,
+      "aod": 0.2954,
+      "visibility_km": 26.1,
+      "daylight": {
+       "0": {
+        "clear": {
+         "direct": 0.4941,
+         "diffuse": 0.2831
+        },
+        "hazy": {
+         "direct": 0.4259,
+         "diffuse": 0.3315
+        }
+       },
+       "60": {
+        "clear": {
+         "direct": 0.2442,
+         "diffuse": 0.3806
+        },
+        "hazy": {
+         "direct": 0.1814,
+         "diffuse": 0.4116
+        }
+       },
+       "80": {
+        "clear": {
+         "direct": 0.0173,
+         "diffuse": 0.422
+        },
+        "hazy": {
+         "direct": 0.0073,
+         "diffuse": 0.4105
+        }
+       }
+      }
+     },
+     "night": {
+      "relative_humidity": 0.895,
+      "mixed_layer_km": 2.2,
+      "extinction_per_km": 0.17233,
+      "single_scattering_albedo": 0.9863,
+      "asymmetry": 0.767,
+      "aod": 0.3791,
+      "visibility_km": 21.0,
+      "twilight": {
+       "diffuse_transmittance": 0.9289,
+       "clear_depression_deg": 41.53,
+       "hazy_depression_deg": 41.0,
+       "clear_hours": 81.8,
+       "hazy_hours": 80.7
+      }
+     }
+    }
+   }
+  },
+  "wet_land": {
+   "area_share": 0.35642529954878277,
+   "cases": {
+    "clean": {
+     "day": {
+      "relative_humidity": 0.759,
+      "mixed_layer_km": 5.01,
+      "extinction_per_km": 0.00248,
+      "single_scattering_albedo": 0.9214,
+      "asymmetry": 0.732,
+      "aod": 0.0124,
+      "visibility_km": 239.5,
+      "daylight": {
+       "0": {
+        "clear": {
+         "direct": 0.4941,
+         "diffuse": 0.2831
+        },
+        "hazy": {
+         "direct": 0.4885,
+         "diffuse": 0.2874
+        }
+       },
+       "60": {
+        "clear": {
+         "direct": 0.2442,
+         "diffuse": 0.3806
+        },
+        "hazy": {
+         "direct": 0.2386,
+         "diffuse": 0.3835
+        }
+       },
+       "80": {
+        "clear": {
+         "direct": 0.0173,
+         "diffuse": 0.422
+        },
+        "hazy": {
+         "direct": 0.0161,
+         "diffuse": 0.4212
+        }
+       }
+      }
+     },
+     "night": {
+      "relative_humidity": 0.973,
+      "mixed_layer_km": 0.4,
+      "extinction_per_km": 0.00051,
+      "single_scattering_albedo": 0.9405,
+      "asymmetry": 0.744,
+      "aod": 0.0002,
+      "visibility_km": 272.4,
+      "twilight": {
+       "diffuse_transmittance": 0.9999,
+       "clear_depression_deg": 41.53,
+       "hazy_depression_deg": 41.53,
+       "clear_hours": 81.8,
+       "hazy_hours": 81.8
+      }
+     }
+    },
+    "central": {
+     "day": {
+      "relative_humidity": 0.759,
+      "mixed_layer_km": 5.01,
+      "extinction_per_km": 0.0059,
+      "single_scattering_albedo": 0.9531,
+      "asymmetry": 0.674,
+      "aod": 0.0296,
+      "visibility_km": 198.0,
+      "daylight": {
+       "0": {
+        "clear": {
+         "direct": 0.4941,
+         "diffuse": 0.2831
+        },
+        "hazy": {
+         "direct": 0.4816,
+         "diffuse": 0.2929
+        }
+       },
+       "60": {
+        "clear": {
+         "direct": 0.2442,
+         "diffuse": 0.3806
+        },
+        "hazy": {
+         "direct": 0.2319,
+         "diffuse": 0.3874
+        }
+       },
+       "80": {
+        "clear": {
+         "direct": 0.0173,
+         "diffuse": 0.422
+        },
+        "hazy": {
+         "direct": 0.0149,
+         "diffuse": 0.4205
+        }
+       }
+      }
+     },
+     "night": {
+      "relative_humidity": 0.973,
+      "mixed_layer_km": 0.4,
+      "extinction_per_km": 0.00816,
+      "single_scattering_albedo": 0.979,
+      "asymmetry": 0.736,
+      "aod": 0.0033,
+      "visibility_km": 177.7,
+      "twilight": {
+       "diffuse_transmittance": 0.9992,
+       "clear_depression_deg": 41.53,
+       "hazy_depression_deg": 41.52,
+       "clear_hours": 81.8,
+       "hazy_hours": 81.7
+      }
+     }
+    },
+    "loaded": {
+     "day": {
+      "relative_humidity": 0.759,
+      "mixed_layer_km": 5.01,
+      "extinction_per_km": 0.11724,
+      "single_scattering_albedo": 0.9792,
+      "asymmetry": 0.731,
+      "aod": 0.5877,
+      "visibility_km": 29.8,
+      "daylight": {
+       "0": {
+        "clear": {
+         "direct": 0.4941,
+         "diffuse": 0.2831
+        },
+        "hazy": {
+         "direct": 0.3617,
+         "diffuse": 0.3715
+        }
+       },
+       "60": {
+        "clear": {
+         "direct": 0.2442,
+         "diffuse": 0.3806
+        },
+        "hazy": {
+         "direct": 0.1308,
+         "diffuse": 0.429
+        }
+       },
+       "80": {
+        "clear": {
+         "direct": 0.0173,
+         "diffuse": 0.422
+        },
+        "hazy": {
+         "direct": 0.0029,
+         "diffuse": 0.3931
+        }
+       }
+      }
+     },
+     "night": {
+      "relative_humidity": 0.973,
+      "mixed_layer_km": 0.4,
+      "extinction_per_km": 0.25484,
+      "single_scattering_albedo": 0.9916,
+      "asymmetry": 0.793,
+      "aod": 0.1019,
+      "visibility_km": 14.6,
+      "twilight": {
+       "diffuse_transmittance": 0.9829,
+       "clear_depression_deg": 41.53,
+       "hazy_depression_deg": 41.41,
+       "clear_hours": 81.8,
+       "hazy_hours": 81.5
+      }
+     }
+    }
+   }
+  },
+  "fog_desert": {
+   "area_share": 0.16402493053876424,
+   "cases": {
+    "clean": {
+     "day": {
+      "relative_humidity": 0.681,
+      "mixed_layer_km": 5.09,
+      "extinction_per_km": 0.00239,
+      "single_scattering_albedo": 0.9174,
+      "asymmetry": 0.74,
+      "aod": 0.0121,
+      "visibility_km": 240.9,
+      "daylight": {
+       "0": {
+        "clear": {
+         "direct": 0.4941,
+         "diffuse": 0.2831
+        },
+        "hazy": {
+         "direct": 0.4886,
+         "diffuse": 0.2873
+        }
+       },
+       "60": {
+        "clear": {
+         "direct": 0.2442,
+         "diffuse": 0.3806
+        },
+        "hazy": {
+         "direct": 0.2387,
+         "diffuse": 0.3834
+        }
+       },
+       "80": {
+        "clear": {
+         "direct": 0.0173,
+         "diffuse": 0.422
+        },
+        "hazy": {
+         "direct": 0.0162,
+         "diffuse": 0.4212
+        }
+       }
+      }
+     },
+     "night": {
+      "relative_humidity": 0.933,
+      "mixed_layer_km": 0.28,
+      "extinction_per_km": 0.0003,
+      "single_scattering_albedo": 0.9273,
+      "asymmetry": 0.746,
+      "aod": 0.0001,
+      "visibility_km": 276.4,
+      "twilight": {
+       "diffuse_transmittance": 1.0,
+       "clear_depression_deg": 41.53,
+       "hazy_depression_deg": 41.53,
+       "clear_hours": 81.8,
+       "hazy_hours": 81.8
+      }
+     }
+    },
+    "central": {
+     "day": {
+      "relative_humidity": 0.681,
+      "mixed_layer_km": 5.09,
+      "extinction_per_km": 0.00682,
+      "single_scattering_albedo": 0.9325,
+      "asymmetry": 0.685,
+      "aod": 0.0347,
+      "visibility_km": 189.2,
+      "daylight": {
+       "0": {
+        "clear": {
+         "direct": 0.4941,
+         "diffuse": 0.2831
+        },
+        "hazy": {
+         "direct": 0.4797,
+         "diffuse": 0.2935
+        }
+       },
+       "60": {
+        "clear": {
+         "direct": 0.2442,
+         "diffuse": 0.3806
+        },
+        "hazy": {
+         "direct": 0.2301,
+         "diffuse": 0.3875
+        }
+       },
+       "80": {
+        "clear": {
+         "direct": 0.0173,
+         "diffuse": 0.422
+        },
+        "hazy": {
+         "direct": 0.0145,
+         "diffuse": 0.4196
+        }
+       }
+      }
+     },
+     "night": {
+      "relative_humidity": 0.933,
+      "mixed_layer_km": 0.28,
+      "extinction_per_km": 0.00391,
+      "single_scattering_albedo": 0.9501,
+      "asymmetry": 0.695,
+      "aod": 0.0011,
+      "visibility_km": 220.2,
+      "twilight": {
+       "diffuse_transmittance": 0.9997,
+       "clear_depression_deg": 41.53,
+       "hazy_depression_deg": 41.52,
+       "clear_hours": 81.8,
+       "hazy_hours": 81.7
+      }
+     }
+    },
+    "loaded": {
+     "day": {
+      "relative_humidity": 0.681,
+      "mixed_layer_km": 5.09,
+      "extinction_per_km": 0.42481,
+      "single_scattering_albedo": 0.9595,
+      "asymmetry": 0.72,
+      "aod": 2.1607,
+      "visibility_km": 8.9,
+      "daylight": {
+       "0": {
+        "clear": {
+         "direct": 0.4941,
+         "diffuse": 0.2831
+        },
+        "hazy": {
+         "direct": 0.1611,
+         "diffuse": 0.3996
+        }
+       },
+       "60": {
+        "clear": {
+         "direct": 0.2442,
+         "diffuse": 0.3806
+        },
+        "hazy": {
+         "direct": 0.026,
+         "diffuse": 0.3624
+        }
+       },
+       "80": {
+        "clear": {
+         "direct": 0.0173,
+         "diffuse": 0.422
+        },
+        "hazy": {
+         "direct": 0.0,
+         "diffuse": 0.2784
+        }
+       }
+      }
+     },
+     "night": {
+      "relative_humidity": 0.933,
+      "mixed_layer_km": 0.28,
+      "extinction_per_km": 0.52935,
+      "single_scattering_albedo": 0.9822,
+      "asymmetry": 0.77,
+      "aod": 0.1489,
+      "visibility_km": 7.2,
+      "twilight": {
+       "diffuse_transmittance": 0.9702,
+       "clear_depression_deg": 41.53,
+       "hazy_depression_deg": 41.31,
+       "clear_hours": 81.8,
+       "hazy_hours": 81.3
+      }
+     }
+    }
+   }
+  },
+  "polar_dry_land": {
+   "area_share": 0.0961498082272367,
+   "cases": {
+    "clean": {
+     "day": {
+      "relative_humidity": 0.735,
+      "mixed_layer_km": 0.66,
+      "extinction_per_km": 0.00303,
+      "single_scattering_albedo": 0.9805,
+      "asymmetry": 0.685,
+      "aod": 0.002,
+      "visibility_km": 231.7,
+      "daylight": {
+       "0": {
+        "clear": {
+         "direct": 0.4941,
+         "diffuse": 0.2831
+        },
+        "hazy": {
+         "direct": 0.4932,
+         "diffuse": 0.2839
+        }
+       },
+       "60": {
+        "clear": {
+         "direct": 0.2442,
+         "diffuse": 0.3806
+        },
+        "hazy": {
+         "direct": 0.2433,
+         "diffuse": 0.3812
+        }
+       },
+       "80": {
+        "clear": {
+         "direct": 0.0173,
+         "diffuse": 0.422
+        },
+        "hazy": {
+         "direct": 0.0171,
+         "diffuse": 0.4219
+        }
+       }
+      }
+     },
+     "night": {
+      "relative_humidity": 0.948,
+      "mixed_layer_km": 0.07,
+      "extinction_per_km": 0.00073,
+      "single_scattering_albedo": 0.9939,
+      "asymmetry": 0.774,
+      "aod": 0.0001,
+      "visibility_km": 268.2,
+      "twilight": {
+       "diffuse_transmittance": 1.0,
+       "clear_depression_deg": 41.53,
+       "hazy_depression_deg": 41.53,
+       "clear_hours": 81.8,
+       "hazy_hours": 81.8
+      }
+     }
+    },
+    "central": {
+     "day": {
+      "relative_humidity": 0.735,
+      "mixed_layer_km": 0.66,
+      "extinction_per_km": 0.00822,
+      "single_scattering_albedo": 0.9806,
+      "asymmetry": 0.686,
+      "aod": 0.0054,
+      "visibility_km": 177.3,
+      "daylight": {
+       "0": {
+        "clear": {
+         "direct": 0.4941,
+         "diffuse": 0.2831
+        },
+        "hazy": {
+         "direct": 0.4919,
+         "diffuse": 0.2849
+        }
+       },
+       "60": {
+        "clear": {
+         "direct": 0.2442,
+         "diffuse": 0.3806
+        },
+        "hazy": {
+         "direct": 0.242,
+         "diffuse": 0.382
+        }
+       },
+       "80": {
+        "clear": {
+         "direct": 0.0173,
+         "diffuse": 0.422
+        },
+        "hazy": {
+         "direct": 0.0168,
+         "diffuse": 0.4219
+        }
+       }
+      }
+     },
+     "night": {
+      "relative_humidity": 0.948,
+      "mixed_layer_km": 0.07,
+      "extinction_per_km": 0.00455,
+      "single_scattering_albedo": 0.994,
+      "asymmetry": 0.777,
+      "aod": 0.0003,
+      "visibility_km": 212.6,
+      "twilight": {
+       "diffuse_transmittance": 0.9999,
+       "clear_depression_deg": 41.53,
+       "hazy_depression_deg": 41.53,
+       "clear_hours": 81.8,
+       "hazy_hours": 81.8
+      }
+     }
+    },
+    "loaded": {
+     "day": {
+      "relative_humidity": 0.735,
+      "mixed_layer_km": 0.66,
+      "extinction_per_km": 0.06795,
+      "single_scattering_albedo": 0.9649,
+      "asymmetry": 0.713,
+      "aod": 0.0447,
+      "visibility_km": 47.8,
+      "daylight": {
+       "0": {
+        "clear": {
+         "direct": 0.4941,
+         "diffuse": 0.2831
+        },
+        "hazy": {
+         "direct": 0.4812,
+         "diffuse": 0.292
+        }
+       },
+       "60": {
+        "clear": {
+         "direct": 0.2442,
+         "diffuse": 0.3806
+        },
+        "hazy": {
+         "direct": 0.2315,
+         "diffuse": 0.3866
+        }
+       },
+       "80": {
+        "clear": {
+         "direct": 0.0173,
+         "diffuse": 0.422
+        },
+        "hazy": {
+         "direct": 0.0148,
+         "diffuse": 0.4198
+        }
+       }
+      }
+     },
+     "night": {
+      "relative_humidity": 0.948,
+      "mixed_layer_km": 0.07,
+      "extinction_per_km": 0.07973,
+      "single_scattering_albedo": 0.9878,
+      "asymmetry": 0.773,
+      "aod": 0.0057,
+      "visibility_km": 41.8,
+      "twilight": {
+       "diffuse_transmittance": 0.9989,
+       "clear_depression_deg": 41.53,
+       "hazy_depression_deg": 41.52,
+       "clear_hours": 81.8,
+       "hazy_hours": 81.7
+      }
+     }
+    }
+   }
+  }
+ }
+}
