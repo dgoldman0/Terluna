@@ -98,7 +98,7 @@
     {
       "id": "S14",
       "citation": "Dwyer (2007), Relativistic breakdown in planetary atmospheres, Phys. Plasmas 14, 042901",
-      "use": "The runaway threshold, 284 kV/m times n/n0 with n0 = 2.69e25 per m3.",
+      "use": "The runaway threshold, 284 kV/m times n/n0 with n0 = 2.69e25 per m3. The threshold is set by the gas's electron density, so water vapour at the lunar charging zone's 0.2-0.6 mol % changes WRF-ELEC's density-scaled breakdown field by under 0.1 %.",
       "access": "Full text, sections I-IV.",
       "doi": "10.1063/1.2709652"
     },
@@ -228,8 +228,9 @@
     {
       "id": "S33",
       "citation": "Wang, DeSilva, Goldenbaum and Dickerson (1998), Nitric oxide production by simulated lightning: dependence on current, energy, and pressure, J. Geophys. Res. 103, 19149-19159",
-      "use": "The nitric oxide yield per metre of channel, 0.34e21 + 1.30e16 p molecules (p in Pa), that lightmsz applies to each flash's channel.",
-      "access": "Not read; the yield is taken as WRF-ELEC codes it (S8)."
+      "use": "The nitric oxide yield per metre of channel, 0.34e21 + 1.30e16 p molecules (p in Pa) at 19 kA as fitted in S58, that lightmsz applies to each flash's channel and nitrogen.py's per-metre route takes.",
+      "access": "Abstract; the fit through S58 and S53 (literature note lightning_nox.md, 2026-10-08, by a literature agent); for lightmsz the yield as WRF-ELEC codes it (S8).",
+      "doi": "10.1029/98JD01356"
     },
     {
       "id": "S34",
@@ -340,12 +341,6 @@
       "access": "Full text (literature note humidity_corona_breakdown.md)."
     },
     {
-      "id": "S52",
-      "citation": "Dwyer (2007), Relativistic breakdown in planetary atmospheres, Phys. Plasmas 14, 042901, doi:10.1063/1.2709652",
-      "use": "The runaway breakdown threshold set by the gas's electron density, so water vapour at the lunar charging zone's 0.2-0.6 mol % changes WRF-ELEC's density-scaled breakdown field by under 0.1 %.",
-      "access": "Sects. II.C, II.G, III.A and IV."
-    },
-    {
       "id": "S53",
       "citation": "Schumann and Huntrieser (2007), The global lightning-induced nitrogen oxides source, Atmos. Chem. Phys. 7, 3823-3907",
       "doi": "10.5194/acp-7-3823-2007",
@@ -372,13 +367,6 @@
       "doi": "10.1029/96JD03504",
       "use": "10 x 10^16 molecules of NO a joule, on flash energies of 0.67-6.7 GJ.",
       "access": "Abstract; values through S53 (literature note lightning_nox.md, 2026-10-08, by a literature agent)."
-    },
-    {
-      "id": "S57",
-      "citation": "Wang, DeSilva, Goldenbaum and Dickerson (1998), Nitric oxide production by simulated lightning: dependence on current, energy, and pressure, J. Geophys. Res. 103, 19149-19159",
-      "doi": "10.1029/98JD01356",
-      "use": "NO per metre of channel by pressure, 0.34 x 10^21 + 1.30 x 10^16 p[Pa] molecules a metre at 19 kA (as fitted in S58): the per-metre route.",
-      "access": "Abstract; the fit through S58 and S53 (literature note lightning_nox.md, 2026-10-08, by a literature agent)."
     },
     {
       "id": "S58",

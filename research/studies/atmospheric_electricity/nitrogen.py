@@ -13,7 +13,7 @@ coulombs or more (literature note lightning_nox.md on the data drive):
   cloud and to ground ([S54], [S59]);
 - per joule of the energy a flash releases: 9-10e16 molecules a joule ([S55], [S56]), 1-50e16 the range ([S53]);
 - per metre of channel: Wang et al.'s laboratory yield at the channel's pressure, 0.34e21 + 1.30e16 p[Pa] molecules a
-  metre ([S57] as fitted in [S58]), 0.3-13e21 the observed range ([S53], [S54]), on a channel as long as the flash's
+  metre ([S33] as fitted in [S58]), 0.3-13e21 the observed range ([S53], [S54]), on a channel as long as the flash's
   height span plus the square root of its area (a ground strike's from its lowest point in cloud down to the ground).
   The flash log draws no branches, so this is a lower bound.
 Each is taken in the design air's oxygen, 0.175 against Earth's 0.209, at 0.84-0.93 of Earth's yield (derived in the

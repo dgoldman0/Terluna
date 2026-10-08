@@ -317,7 +317,7 @@ Morrison's do.
    rebuilds the column (author, 2026-10-06). The ions' mobility and
    recombination take no humidity term ([S43],
    [S44]), nor do point discharge's onset ([S51]) or the breakdown field
-   ([S52]). A ground strike can now need the leader to cross the 34 km below
+   ([S14]). A ground strike can now need the leader to cross the 34 km below
    the −7 °C level: it carries on while its tip keeps the potential its
    streamer zone needs beyond the air's ([S46], [S47]), the channel losing its
    internal field times its length, about 1 kV/m at sea-level density for a
@@ -418,16 +418,17 @@ times the energy per metre, at a third of the pitch.
 
 ### Nitrogen fixed by lightning
 
-[nitrogen.py](nitrogen.py) ([results/nitrogen_oxides.json](results/nitrogen_oxides.json),
-2026-10-08) estimates the nitrogen oxides the main run's 530 flashes make from
-Earth's measured yields ([S53]–[S59]; the literature note `lightning_nox.md` on
-the data drive). The model's own yield counts the points its channels take on
-the grid and runs about fifty times low on Earth's benchmark storm, so it is not
-used. Earth's yields are expressed three ways, which agree for Earth's flashes
-and part for these. A flash in cloud releases a median 86 GJ and moves 108 C, a
-ground strike 66 GJ and 149 C, 69 and 53 times the median energy of the
-benchmark storm's flashes on its 1-km grid; no published yield covers flashes
-this large.
+[nitrogen.py](nitrogen.py)
+([results/nitrogen_oxides.json](results/nitrogen_oxides.json), 2026-10-08)
+estimates the nitrogen oxides the main run's 530 flashes make from Earth's
+measured yields ([S33], [S53]–[S56], [S58], [S59]; the literature note
+`lightning_nox.md` on the data drive). The model's own yield counts the points
+its channels take on the grid and runs about fifty times low on Earth's
+benchmark storm, so it is not used. Earth's yields are expressed three ways,
+which agree for Earth's flashes and part for these. A flash in cloud releases a
+median 86 GJ and moves 108 C, a ground strike 66 GJ and 149 C, 69 and 53 times
+the median energy of the benchmark storm's flashes on its 1-km grid; no
+published yield covers flashes this large.
 
 | Counted | NOx a flash | kg N per km² a year over the box | Share of Earth's 9.8 |
 |---|---|---|---|
