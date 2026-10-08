@@ -54,3 +54,16 @@ carry forward.
 The wider portfolio retains soils, aquatic communities, detrital/subsurface habitats, varied plant architectures, aerial exchange and human developmental requirements. Nutrient compartments, ecological interactions, plant hydraulics, structural support and complete life cycles still need separate models and empirical tests. Megaforests remain one candidate within this scope.
 
 Run `python -m pytest biosphere` and `python -m research.studies.environment_screens.run` from the root. Provisional research sources and their actual access status are in [environment_sources.json](../research/studies/environment_screens/sources.json); older sources and archives remain linked through [archive_status.md](../research/archive_status.md).
+
+## Living water
+
+[living_water/waters.json](living_water/waters.json) holds design guesses of what
+the Open Moon's seas carry, for optical studies, labelled as guesses with a best
+value and a range each: chlorophyll, coloured dissolved organic matter and
+suspended regolith fines for a nutrient-poor open sea, a productive coast and a
+river mouth, the soil whose fines colour each, and how much greener a sea is at
+dusk than at dawn after the 15-day day. Earth's waters are the reference and
+engineered life a design variable. The
+[sea appearance study](../research/studies/sea_appearance/README.md#the-waters-colour)
+gives their colours.
+

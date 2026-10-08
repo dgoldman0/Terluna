@@ -1,0 +1,130 @@
+{
+  "schema": "terluna.visualization.sea-image-guide/1",
+  "scene_id": "IC-1",
+  "producer": {
+    "script": "visualization/sea-appearance/image_guides.py",
+    "sha256": "bb07d86af8fa53465deff7ac2db92926a2a5da7aaaf695c14126c5f1fccf0692"
+  },
+  "inputs": {
+    "research/studies/sea_appearance/results/scenes.json": "0ba873220a8767982e880fd9960c57795d1b297f0966e794718ef6a5483f5605",
+    "research/runs/sea_appearance/terrain/ingenii_coast.npz": "2e3de078089474d4c302fc391b7ed8ba0e69cb0e92fa205af4073268f0f68b7b"
+  },
+  "evidence": "Projection of the stored LOLA terrain and interpolation of the scene's display colours. Terrain illumination is an illustrative normal-based approximation, not the spectral path tracer.",
+  "reading_rule": "Use as geometry, colour and illumination-direction guidance for image generation; retain this provenance outside the final image. Individual waves, cast shadows, interreflection and terrain reflections are absent.",
+  "width": 1920,
+  "height": 1080,
+  "horizon_y": 489.7,
+  "region_fractions": {
+    "sky": 0.3227980324074074,
+    "land": 0.1309056712962963,
+    "sea": 0.5462962962962963
+  },
+  "skyline_comparison": [
+    {
+      "x": 0,
+      "expected_y": 412.7,
+      "guide_y": 413.0,
+      "difference_px": 0.3
+    },
+    {
+      "x": 120,
+      "expected_y": 392.7,
+      "guide_y": 392.0,
+      "difference_px": -0.7
+    },
+    {
+      "x": 240,
+      "expected_y": 377.7,
+      "guide_y": 377.0,
+      "difference_px": -0.7
+    },
+    {
+      "x": 360,
+      "expected_y": 366.7,
+      "guide_y": 366.0,
+      "difference_px": -0.7
+    },
+    {
+      "x": 480,
+      "expected_y": 357.7,
+      "guide_y": 357.0,
+      "difference_px": -0.7
+    },
+    {
+      "x": 600,
+      "expected_y": 357.7,
+      "guide_y": 357.0,
+      "difference_px": -0.7
+    },
+    {
+      "x": 720,
+      "expected_y": 349.7,
+      "guide_y": 350.0,
+      "difference_px": 0.3
+    },
+    {
+      "x": 840,
+      "expected_y": 343.7,
+      "guide_y": 343.0,
+      "difference_px": -0.7
+    },
+    {
+      "x": 960,
+      "expected_y": 344.7,
+      "guide_y": 344.0,
+      "difference_px": -0.7
+    },
+    {
+      "x": 1079,
+      "expected_y": 336.7,
+      "guide_y": 336.0,
+      "difference_px": -0.7
+    },
+    {
+      "x": 1199,
+      "expected_y": 322.7,
+      "guide_y": 322.0,
+      "difference_px": -0.7
+    },
+    {
+      "x": 1319,
+      "expected_y": 315.7,
+      "guide_y": 315.0,
+      "difference_px": -0.7
+    },
+    {
+      "x": 1439,
+      "expected_y": 321.7,
+      "guide_y": 321.0,
+      "difference_px": -0.7
+    },
+    {
+      "x": 1559,
+      "expected_y": 324.7,
+      "guide_y": 324.0,
+      "difference_px": -0.7
+    },
+    {
+      "x": 1679,
+      "expected_y": 327.7,
+      "guide_y": 327.0,
+      "difference_px": -0.7
+    },
+    {
+      "x": 1799,
+      "expected_y": 350.7,
+      "guide_y": 350.0,
+      "difference_px": -0.7
+    },
+    {
+      "x": 1919,
+      "expected_y": 374.7,
+      "guide_y": 374.0,
+      "difference_px": -0.7
+    }
+  ],
+  "maximum_skyline_difference_px": 0.7,
+  "sun_elevation_deg": 54.2,
+  "sun_azimuth_deg": 0.9,
+  "direct_horizontal_light_share": 0.6040011871182284
+}

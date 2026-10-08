@@ -1,0 +1,54 @@
+{
+  "schema": "terluna.research.coastal-cloud-light/1",
+  "input_scene_sha256": "83cd9fdfa605a74a2960bd5f46ca4ffa02f5676015a47af2d9518f0963c3ce85",
+  "cloud_section_sha256": "b3a3b76203ffe5442d6174c536fdeb44b6aa8aa774bbc193b4e961ac2c5c6b0e",
+  "molecular_fields_sha256": "d6d7fef07d99fedf32d1a54f63e345ff245bf3ee8ec29a33d498fd621bf41273",
+  "components": {
+    "earth": {
+      "mode": "Unmodified formal clear-sky contribution; cloud modulation is unresolved",
+      "photons_per_direction": 0,
+      "total_horizontal_lux": 7.362324529395166e-05
+    },
+    "sun": {
+      "mode": "Monte Carlo through molecular air and clouds",
+      "photons_per_direction": 512,
+      "diffuse_horizontal_lux": 2112.9643170405434,
+      "diffuse_standard_error_lux": 178.02341804712188,
+      "direct_horizontal_lux": 0.0,
+      "total_horizontal_lux": 2112.9643170405434,
+      "source_radius_deg": 0.2664531072461556
+    }
+  },
+  "total_horizontal_lux": 2112.964390663789,
+  "clear_total_horizontal_lux": 3151.65079787623,
+  "earth_total_horizontal_lux": 7.362324529395166e-05,
+  "cross_ring_width_m": 100000.0,
+  "groups": 16,
+  "truncated_paths": 0,
+  "source_map_scope": [
+    "sun"
+  ],
+  "retained_formal_sources": {
+    "earth": 7.362324529395166e-05
+  },
+  "disk_cloud_transmission_centre": 0.999999992216029,
+  "disk_cloud_transmission_minmax": [
+    0.9999999911305524,
+    0.9999999930631066
+  ],
+  "median_pixel_relative_standard_error": 0.19028523449006907,
+  "evidence": "Multi-source Monte Carlo radiative transfer through one saved, extruded 2-D experimental cloud field. No local terrain-weather prediction.",
+  "limits": [
+    "Finite Earth is uniform for scattered light; historical texture is used only in the direct visual disk.",
+    "Cross-ring extent and particle phase functions are declared scenarios. Fine 3-D cloud structure is unresolved.",
+    "Ground is a Lambertian sphere; local cloud/terrain shadows and shoreline circulation are not solved.",
+    "Sources with zero requested photons retain their formal clear-sky term in the display; their cloud modulation is not solved. Zero-hit low-photon twilight runs are not evidence of zero light."
+  ],
+  "seconds": 618.8806019349722,
+  "producer": {
+    "research/studies/sea_appearance/coastal_clouds.py": "841f07f6c69d305cc45d924ab3be0a57ec23df133ef2ebc673be2ed4ed421570",
+    "illumination/cloud_light/finite_source.py": "2ce6c404872f14b9023a8c39bf28322a07093828462b48b48b0fb35e5620c41b",
+    "illumination/cloud_light/volume.py": "a771a90400582433c91cc6a709cf15a57d28d5d985aa3eaf449d7e2414bcf5df",
+    "illumination/cloud_light/microphysics.py": "61a9600b4ab6ea1cdf69d6ce20db9b290815551a1709508e697508670fbee8ff"
+  }
+}

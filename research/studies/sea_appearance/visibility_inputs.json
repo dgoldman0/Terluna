@@ -1,0 +1,86 @@
+{
+  "schema": "terluna.research.visibility-sources/1",
+  "files": [
+    {
+      "filename": "WAC_HAPKE_566NM_E350N0450.IMG",
+      "sha256": "84517fb17f897edfa2c587ad5eccbf9cd2a5181882ae244a2aae2c23aac225bd",
+      "url": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/MDR/WAC_HAPKE/WAC_HAPKE_566NM_E350N0450.IMG",
+      "credit": "NASA/GSFC/Arizona State University, LROC team; Sato et al. Hapke-normalized WAC mosaic",
+      "reading_rule": "Quantitative 566-nm I/F at reference geometry, v1.2; relative near-side pattern only."
+    },
+    {
+      "filename": "WAC_HAPKE_566NM_E350N3150.IMG",
+      "sha256": "4a676801e8ee8c6ab8ba96e6c3e286db29ea6988b7bcfa16e7a903522db1b60a",
+      "url": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/MDR/WAC_HAPKE/WAC_HAPKE_566NM_E350N3150.IMG",
+      "credit": "NASA/GSFC/Arizona State University, LROC team; Sato et al. Hapke-normalized WAC mosaic",
+      "reading_rule": "Quantitative 566-nm I/F at reference geometry, v1.2; relative near-side pattern only."
+    },
+    {
+      "filename": "WAC_HAPKE_566NM_E350S0450.IMG",
+      "sha256": "524dec9b183d10b7a7c78965bab3194baf12e7372f79fb4cbecb182dccd518ee",
+      "url": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/MDR/WAC_HAPKE/WAC_HAPKE_566NM_E350S0450.IMG",
+      "credit": "NASA/GSFC/Arizona State University, LROC team; Sato et al. Hapke-normalized WAC mosaic",
+      "reading_rule": "Quantitative 566-nm I/F at reference geometry, v1.2; relative near-side pattern only."
+    },
+    {
+      "filename": "WAC_HAPKE_566NM_E350S3150.IMG",
+      "sha256": "0aabaf2dfa0d84b2d73330b4e073fc8145294bc4cfe41b2faa6c20c676782d97",
+      "url": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/MDR/WAC_HAPKE/WAC_HAPKE_566NM_E350S3150.IMG",
+      "credit": "NASA/GSFC/Arizona State University, LROC team; Sato et al. Hapke-normalized WAC mosaic",
+      "reading_rule": "Quantitative 566-nm I/F at reference geometry, v1.2; relative near-side pattern only."
+    },
+    {
+      "filename": "epic_1b_20151117002712_00.h5",
+      "sha256": "3341907e439947636321227ab27badc398f9186001c37562bbec918d96770f94",
+      "url": "https://gs614-avdc1.gsfc.nasa.gov/pub/DSCOVR/EPIC_Test_Data/Level_1/epic_1b_20151117002712_00.h5",
+      "credit": "NASA/GSFC DSCOVR EPIC",
+      "reading_rule": "Public early test granule; measured within-band relative structure, not absolute radiance calibration or 2038 weather."
+    },
+    {
+      "filename": "hdrvdp-3.0.7.zip",
+      "sha256": "baa5c25cca2e38176345a2a5423793459fbf571282396640c5e4ac85bf8381b3",
+      "url": "https://downloads.sourceforge.net/project/hdrvdp/hdrvdp/3.0.7/hdrvdp-3.0.7.zip",
+      "credit": "Rafal Mantiuk and Displays and Graphics Ltd.",
+      "reading_rule": "External unmodified code only; internal files have additional license notices. Archive is not vendored in the repository."
+    }
+  ],
+  "rights": "Raw NASA data and external software are restored into ignored research/runs, not redistributed in Git. Derived calculations credit sources; no full papers redistributed.",
+  "references": [
+    {
+      "title": "Schmidt (2009), Luminance and Brightness Data for the Full Moon",
+      "url": "https://spaceweather.com/swpod2009/13jan09/Perigee_moon_2009_01_11_corr.pdf",
+      "use": "Measured disk-mean 4900\u20135400 cd/m2 reduced to unit clear air mass; 5000 cd/m2 control anchor. This is a bright near-full Moon, not every lunar phase."
+    },
+    {
+      "title": "HDR-VDP-3 (2023)",
+      "url": "https://www.cl.cam.ac.uk/~rkm38/pdfs/mantiuk2023hdrvdp3.pdf"
+    },
+    {
+      "title": "LROC WAC Hapke normalized mosaic",
+      "url": "https://data.lroc.im-ldi.com/lroc/view_rdr/WAC_HAPKE"
+    },
+    {
+      "title": "EPIC calibration",
+      "url": "https://epic.gsfc.nasa.gov/science/calibration/visnir"
+    }
+  ],
+  "software": [
+    {
+      "name": "GNU Octave",
+      "version": "10.3.0",
+      "source": "https://octave.org/"
+    },
+    {
+      "name": "Octave image",
+      "version": "2.16.1",
+      "sha256": "34a84f755261f6c8d882d08b07567464ea25dc1515072ef6886f2b26ebf6f0a7",
+      "url": "https://downloads.sourceforge.net/project/octave/Octave%20Forge%20Packages/Individual%20Package%20Releases/image-2.16.1.tar.gz"
+    },
+    {
+      "name": "Octave statistics",
+      "version": "1.6.0",
+      "sha256": "c8e7d32e473465d7bcda751a25ce55ed918ac9b7d9740e5ada3d36b7e66b5810",
+      "url": "https://github.com/gnu-octave/statistics/archive/refs/tags/release-1.6.0.tar.gz"
+    }
+  ]
+}

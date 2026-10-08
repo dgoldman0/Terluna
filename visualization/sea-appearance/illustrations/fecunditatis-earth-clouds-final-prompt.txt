@@ -1,0 +1,12 @@
+Use case: compositing.
+Create the final unlabelled high fidelity photographic illustration from these inputs.
+
+INPUT 1 is the authoritative calculated view. LOCK its exact camera composition, Earth size and location, straight sea horizon, and broad exposure. INPUT 2 is a photographic TEXTURE reference only; it has a misplaced horizon and over-bright middle clouds and water that must not be copied.
+
+Make a portrait 4:5 image at 2048 by 2560 if supported, with natural immersive detail.
+The straight sea horizon MUST be at 84.76 percent of image height measured from the top. Sea occupies ONLY the bottom 15.24 percent. This is lower than the horizon in input 2 by about 2.7 percent of canvas height. Extend the distant grey atmospheric sky downward accordingly. Do not merely retain input 2's horizon. Do not crop, zoom, or move Earth.
+Earth must remain at 56.44 percent of canvas width and 17.54 percent of canvas height, diameter 3.893 percent of image width and 3.342 percent of image height. Preserve the planet detail, nearly full phase, restrained warm atmospheric colour and narrow glare from input 1. It is not the Sun.
+
+Retain the fine wispy high ice-cloud texture and the broad locations of the broken high clouds from input 2, but correct exposure: the middle bright cloud bank should be about HALF as bright in linear light as input 2; darken the water and its excessive bright gold glitter by about one third. Keep the uppermost sky brightness unchanged from input 2, subtly warm-grey rather than blue. Match input 1's broad upper-sky, middle-sky and water light levels. Clouds scatter the warm Earthlight; there is no hidden bright Sun in the cloud bank. The cloud bank must not resemble a second light source. Preserve gentle open low-wind water, small long gravity ripples with finer capillary detail, distant horizon haze, and understated fragmented Earth reflections.
+
+Only physically plausible fine photographic texture is added to the calculated composition and exposure. No exaggerated planet, no visible Sun, no additional celestial bodies, no spectacular storm towers, no mountains, boat, buildings or people. No visible text, labels, typography, scale bars, watermark or border. This is a natural scene, not a diagram.

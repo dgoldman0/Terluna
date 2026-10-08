@@ -1,0 +1,2146 @@
+{
+  "schema": "terluna.calendar-ephemeris-check.v1",
+  "evidence": "sampled independent numerical comparison",
+  "producer": "geography/calendar_ephemeris_check.py",
+  "producer_sha256": "072ebae95057190baef51e9cc58361dc31afa0cb0d173ef5f2ceae548ab42ccb",
+  "model": "geography/lunar_ephemeris.py",
+  "model_sha256": "a3821628690cf9b920d8afc19d255de5e5112997249eb3cf9d30917fc971f258",
+  "fixture_sha256": "906c8fb734da1c6dfc2d1312bf5e5781b05f731370e6dc67abe415ff918a41e4",
+  "inputs_sha256": "493cee524a562a29071f1338a8eeac7bb43858403b2ac576910ba1277896d16a",
+  "samples": 5021,
+  "independent_range_samples": 2507,
+  "unique_epochs": 5010,
+  "span_jd_tt": [
+    2451544.5,
+    2634531.479166667
+  ],
+  "span_calendar_tt": [
+    "2000-01-01T00:00:00",
+    "2500-12-31T23:30:00"
+  ],
+  "frame": "MOON_ME (DE421 mean-Earth/polar-axis standard)",
+  "time_scale": "TT; Horizons internally converts TT to TDB",
+  "errors": {
+    "earth_longitude_deg": {
+      "max_abs": 0.04283787931603911,
+      "rms": 0.021005038052665306,
+      "p95_abs": 0.032750338886899044,
+      "maximum_at_jd_tt": 2480306.5,
+      "maximum_at_tt": "2078-09-30T00:00:00"
+    },
+    "earth_latitude_deg": {
+      "max_abs": 0.04243877269770291,
+      "rms": 0.0228543078600437,
+      "p95_abs": 0.03555870162698582,
+      "maximum_at_jd_tt": 2569512.5,
+      "maximum_at_tt": "2322-12-27T00:00:00"
+    },
+    "earth_direction_deg": {
+      "max_abs": 0.0558753290514615,
+      "rms": 0.030992261664955417,
+      "p95_abs": 0.04383356739420058,
+      "maximum_at_jd_tt": 2534545.5,
+      "maximum_at_tt": "2227-04-02T00:00:00"
+    },
+    "earth_distance_km": {
+      "samples": 2507,
+      "max_abs": 13.881442782119848,
+      "rms": 2.9327711865897017,
+      "p95_abs": 5.794318342889887,
+      "maximum_at_jd_tt": 2554474.5,
+      "maximum_at_tt": "2281-10-24T00:00:00"
+    },
+    "earth_inverse_square_flux_relative": {
+      "max_abs": 7.483557599197166e-05,
+      "rms": 1.5405576269493674e-05,
+      "p95_abs": 3.0935210345350846e-05,
+      "maximum_at_jd_tt": 2554474.5,
+      "maximum_at_tt": "2281-10-24T00:00:00"
+    },
+    "sun_longitude_deg": {
+      "max_abs": 0.05058828495918988,
+      "rms": 0.02579466333484654,
+      "p95_abs": 0.03922782918084522,
+      "maximum_at_jd_tt": 2560095.5,
+      "maximum_at_tt": "2297-03-15T00:00:00"
+    },
+    "sun_latitude_deg": {
+      "max_abs": 0.04172358272662935,
+      "rms": 0.01905941662151846,
+      "p95_abs": 0.03226754485766764,
+      "maximum_at_jd_tt": 2507097.5,
+      "maximum_at_tt": "2152-02-06T00:00:00"
+    },
+    "sun_direction_deg": {
+      "max_abs": 0.059157922871696654,
+      "rms": 0.03206671518754586,
+      "p95_abs": 0.0458845333820069,
+      "maximum_at_jd_tt": 2555350.5,
+      "maximum_at_tt": "2284-03-18T00:00:00"
+    },
+    "sun_distance_km": {
+      "samples": 2507,
+      "max_abs": 12276.6294246912,
+      "rms": 4304.854153298952,
+      "p95_abs": 8135.70586104393,
+      "maximum_at_jd_tt": 2499140.5,
+      "maximum_at_tt": "2130-04-25T00:00:00"
+    },
+    "sun_inverse_square_flux_relative": {
+      "max_abs": 0.00016284696713542157,
+      "rms": 5.7547789876813204e-05,
+      "p95_abs": 0.00010833047987011122,
+      "maximum_at_jd_tt": 2499140.5,
+      "maximum_at_tt": "2130-04-25T00:00:00"
+    }
+  },
+  "century_groups": [
+    {
+      "start_year": 2000,
+      "stop_year_exclusive": 2100,
+      "samples": 2524,
+      "sun_direction_max_deg": 0.05751091960156203,
+      "earth_direction_max_deg": 0.05290273589488777
+    },
+    {
+      "start_year": 2100,
+      "stop_year_exclusive": 2200,
+      "samples": 598,
+      "sun_direction_max_deg": 0.053206108737236336,
+      "earth_direction_max_deg": 0.051457631943857295
+    },
+    {
+      "start_year": 2200,
+      "stop_year_exclusive": 2300,
+      "samples": 598,
+      "sun_direction_max_deg": 0.059157922871696654,
+      "earth_direction_max_deg": 0.0558753290514615
+    },
+    {
+      "start_year": 2300,
+      "stop_year_exclusive": 2400,
+      "samples": 599,
+      "sun_direction_max_deg": 0.0531579548898824,
+      "earth_direction_max_deg": 0.053860810095668836
+    },
+    {
+      "start_year": 2400,
+      "stop_year_exclusive": 2501,
+      "samples": 702,
+      "sun_direction_max_deg": 0.05664036367932104,
+      "earth_direction_max_deg": 0.05214198530589454
+    }
+  ],
+  "horizon_events": [
+    {
+      "sample": "2000_sunrise",
+      "latitude_deg": 0.0,
+      "longitude_deg": 0.0,
+      "reference_event_jd_tt": 2451616.673008861,
+      "reference_event_tt": "2000-03-13T04:09:08",
+      "model_event_jd_tt": 2451616.6763522727,
+      "model_event_tt": "2000-03-13T04:13:57",
+      "model_minus_reference_minutes": 4.814512878656387,
+      "interpolation_30_vs_60_minutes_seconds": 0.004425644874572754,
+      "elevation_error_max_deg": 0.04105279412789731
+    },
+    {
+      "sample": "2000_sunset",
+      "latitude_deg": 0.0,
+      "longitude_deg": 0.0,
+      "reference_event_jd_tt": 2451631.4718900775,
+      "reference_event_tt": "2000-03-27T23:19:31",
+      "model_event_jd_tt": 2451631.4755202727,
+      "model_event_tt": "2000-03-27T23:24:45",
+      "model_minus_reference_minutes": 5.227481201291084,
+      "interpolation_30_vs_60_minutes_seconds": 0.003701448440551758,
+      "elevation_error_max_deg": 0.04452964148073413
+    },
+    {
+      "sample": "2050_sunset",
+      "latitude_deg": 2.34,
+      "longitude_deg": 93.4,
+      "reference_event_jd_tt": 2469873.6915524527,
+      "reference_event_tt": "2050-03-08T04:35:50",
+      "model_event_jd_tt": 2469873.694185151,
+      "model_event_tt": "2050-03-08T04:39:38",
+      "model_minus_reference_minutes": 3.791085183620453,
+      "interpolation_30_vs_60_minutes_seconds": 0.0014081597328186035,
+      "elevation_error_max_deg": 0.03277237099562402
+    },
+    {
+      "sample": "2050_sunrise",
+      "latitude_deg": 2.34,
+      "longitude_deg": 93.4,
+      "reference_event_jd_tt": 2469888.4626752813,
+      "reference_event_tt": "2050-03-22T23:06:15",
+      "model_event_jd_tt": 2469888.465387822,
+      "model_event_tt": "2050-03-22T23:10:10",
+      "model_minus_reference_minutes": 3.906058743596077,
+      "interpolation_30_vs_60_minutes_seconds": 0.0007644295692443848,
+      "elevation_error_max_deg": 0.03383023844146038
+    },
+    {
+      "sample": "2100_sunset",
+      "latitude_deg": 45.0,
+      "longitude_deg": 0.0,
+      "reference_event_jd_tt": 2488131.2517343364,
+      "reference_event_tt": "2100-03-03T18:02:30",
+      "model_event_jd_tt": 2488131.2516239556,
+      "model_event_tt": "2100-03-03T18:02:20",
+      "model_minus_reference_minutes": -0.1589483767747879,
+      "interpolation_30_vs_60_minutes_seconds": 0.0018909573554992676,
+      "elevation_error_max_deg": 0.001906288921160737
+    },
+    {
+      "sample": "2100_sunrise",
+      "latitude_deg": 45.0,
+      "longitude_deg": 0.0,
+      "reference_event_jd_tt": 2488145.994317576,
+      "reference_event_tt": "2100-03-18T11:51:49",
+      "model_event_jd_tt": 2488145.994566827,
+      "model_event_tt": "2100-03-18T11:52:11",
+      "model_minus_reference_minutes": 0.3589218109846115,
+      "interpolation_30_vs_60_minutes_seconds": 0.004707276821136475,
+      "elevation_error_max_deg": 0.003833484203986437
+    },
+    {
+      "sample": "2200_sunset",
+      "latitude_deg": 80.0,
+      "longitude_deg": 0.0,
+      "reference_event_jd_tt": 2524661.0974708726,
+      "reference_event_tt": "2200-03-09T14:20:21",
+      "model_event_jd_tt": 2524661.102144881,
+      "model_event_tt": "2200-03-09T14:27:05",
+      "model_minus_reference_minutes": 6.730572357773781,
+      "interpolation_30_vs_60_minutes_seconds": 0.12029707431793213,
+      "elevation_error_max_deg": 0.01286067051094375
+    },
+    {
+      "sample": "2200_sunrise",
+      "latitude_deg": 80.0,
+      "longitude_deg": 0.0,
+      "reference_event_jd_tt": 2524674.9971063,
+      "reference_event_tt": "2200-03-23T11:55:50",
+      "model_event_jd_tt": 2524674.9941010987,
+      "model_event_tt": "2200-03-23T11:51:30",
+      "model_minus_reference_minutes": -4.327490106225014,
+      "interpolation_30_vs_60_minutes_seconds": 0.04614740610122681,
+      "elevation_error_max_deg": 0.010401494335882777
+    },
+    {
+      "sample": "2300_sunrise",
+      "latitude_deg": -45.0,
+      "longitude_deg": 180.0,
+      "reference_event_jd_tt": 2561189.815540008,
+      "reference_event_tt": "2300-03-14T07:34:23",
+      "model_event_jd_tt": 2561189.820734773,
+      "model_event_tt": "2300-03-14T07:41:51",
+      "model_minus_reference_minutes": 7.480461671948433,
+      "interpolation_30_vs_60_minutes_seconds": 0.01577138900756836,
+      "elevation_error_max_deg": 0.04510853151881733
+    },
+    {
+      "sample": "2300_sunset",
+      "latitude_deg": -45.0,
+      "longitude_deg": 180.0,
+      "reference_event_jd_tt": 2561204.8156344756,
+      "reference_event_tt": "2300-03-29T07:34:31",
+      "model_event_jd_tt": 2561204.820080567,
+      "model_event_tt": "2300-03-29T07:40:55",
+      "model_minus_reference_minutes": 6.402371898293495,
+      "interpolation_30_vs_60_minutes_seconds": 0.0188291072845459,
+      "elevation_error_max_deg": 0.03944333404435074
+    },
+    {
+      "sample": "2400_sunset",
+      "latitude_deg": -80.0,
+      "longitude_deg": 45.0,
+      "reference_event_jd_tt": 2597715.0373344123,
+      "reference_event_tt": "2400-03-14T12:53:46",
+      "model_event_jd_tt": 2597715.03488734,
+      "model_event_tt": "2400-03-14T12:50:14",
+      "model_minus_reference_minutes": -3.5237842798233032,
+      "interpolation_30_vs_60_minutes_seconds": 0.09607672691345215,
+      "elevation_error_max_deg": 0.007656894709180406
+    },
+    {
+      "sample": "2400_sunrise",
+      "latitude_deg": -80.0,
+      "longitude_deg": 45.0,
+      "reference_event_jd_tt": 2597731.00181276,
+      "reference_event_tt": "2400-03-30T12:02:37",
+      "model_event_jd_tt": 2597731.0024455646,
+      "model_event_tt": "2400-03-30T12:03:31",
+      "model_minus_reference_minutes": 0.9112389385700226,
+      "interpolation_30_vs_60_minutes_seconds": 0.05109608173370361,
+      "elevation_error_max_deg": 0.00499948344523915
+    },
+    {
+      "sample": "2500_sunset",
+      "latitude_deg": 0.0,
+      "longitude_deg": 180.0,
+      "reference_event_jd_tt": 2634233.821424875,
+      "reference_event_tt": "2500-03-09T07:42:51",
+      "model_event_jd_tt": 2634233.8242093325,
+      "model_event_tt": "2500-03-09T07:46:52",
+      "model_minus_reference_minutes": 4.009618833661079,
+      "interpolation_30_vs_60_minutes_seconds": 0.004023313522338867,
+      "elevation_error_max_deg": 0.03441927817900492
+    },
+    {
+      "sample": "2500_sunrise",
+      "latitude_deg": 0.0,
+      "longitude_deg": 180.0,
+      "reference_event_jd_tt": 2634248.6273500556,
+      "reference_event_tt": "2500-03-24T03:03:23",
+      "model_event_jd_tt": 2634248.630772165,
+      "model_event_tt": "2500-03-24T03:08:19",
+      "model_minus_reference_minutes": 4.927837550640106,
+      "interpolation_30_vs_60_minutes_seconds": 0.0011667609214782715,
+      "elevation_error_max_deg": 0.042026097284899144
+    }
+  ],
+  "horizon_event_abs_error_max_minutes": 7.480461671948433,
+  "event_interpolation_sensitivity_max_seconds": 0.12029707431793213,
+  "photometry": {
+    "source": "research/studies/sea_appearance/results/lighting_calendar.json",
+    "sha256": "b76f394595eb0c89487c4208eedc4e9a6d1eff3af72bf63bdb79883920b2f674",
+    "source_evidence": "Geometry from a truncated lunar theory checked against JPL Horizons; clear-sky light from the solved spherical sky of the design atmosphere (horizontally uniform, no refraction, no clouds); earthlight from a model spectrum of the whole Earth (Glenar et al. 2019) scaled to its observed visual phase curve (Robinson et al. 2025), carried through the same air by wavelength. Starlight and airglow are a placeholder.",
+    "interpolation": "linear in lux versus elevation, numpy.interp",
+    "reading_rule": "Direction-error propagation within the fixed clear-sky solar-only photometry curve; this does not validate atmospheric radiative transfer. Earthlight, distance scaling, clouds, terrain, refraction, and source size are held out. Sampling statistics are not climatological averages.",
+    "sites": [
+      {
+        "name": "W Procellarum",
+        "latitude_deg": 28.875,
+        "longitude_deg": -73.875,
+        "bands": [
+          {
+            "band": "daylight",
+            "samples": 2421,
+            "max_abs_error_lux": 71.26591568199365,
+            "max_relative_error_percent": 0.4852408203209453,
+            "rms_relative_error_percent": 0.10388340696514567,
+            "relative_worst": {
+              "jd_tt": 2629883.5,
+              "tt": "2488-04-10T00:00:00",
+              "reference_elevation_deg": 6.798248670811493,
+              "model_elevation_deg": 6.854839909397019,
+              "reference_lux": 8883.696158266956,
+              "model_lux": 8926.80347838015
+            }
+          },
+          {
+            "band": "horizon_twilight",
+            "samples": 195,
+            "max_abs_error_lux": 21.86933320027083,
+            "max_relative_error_percent": 0.7502599097070506,
+            "rms_relative_error_percent": 0.28679081327896255,
+            "relative_worst": {
+              "jd_tt": 2616743.5,
+              "tt": "2452-04-19T00:00:00",
+              "reference_elevation_deg": -4.701895408347423,
+              "model_elevation_deg": -4.647137738834542,
+              "reference_lux": 2637.953009552234,
+              "model_lux": 2657.744513419815
+            }
+          },
+          {
+            "band": "bright_twilight",
+            "samples": 682,
+            "max_abs_error_lux": 14.604219010981978,
+            "max_relative_error_percent": 1.250851835419279,
+            "rms_relative_error_percent": 0.42254793712234884,
+            "relative_worst": {
+              "jd_tt": 2555350.5,
+              "tt": "2284-03-18T00:00:00",
+              "reference_elevation_deg": -16.989280543528622,
+              "model_elevation_deg": -16.931261642675953,
+              "reference_lux": 325.29870020903326,
+              "model_lux": 329.367704971193
+            }
+          },
+          {
+            "band": "deep_twilight",
+            "samples": 1611,
+            "max_abs_error_lux": 0.15364465754635148,
+            "max_relative_error_percent": 1.2819902459865415,
+            "rms_relative_error_percent": 0.3890730453001332,
+            "relative_worst": {
+              "jd_tt": 2525055.5,
+              "tt": "2201-04-08T00:00:00",
+              "reference_elevation_deg": -49.62328440547159,
+              "model_elevation_deg": -49.57670156332418,
+              "reference_lux": 0.6467361018077341,
+              "model_lux": 0.6550271955501829
+            }
+          },
+          {
+            "band": "deep_night",
+            "samples": 112,
+            "max_abs_error_lux": 0.0003603835280762552,
+            "max_relative_error_percent": 0.5002046337196973,
+            "rms_relative_error_percent": 0.2751450408792725,
+            "relative_worst": {
+              "jd_tt": 2504031.5,
+              "tt": "2143-09-15T00:00:00",
+              "reference_elevation_deg": -62.03116806387629,
+              "model_elevation_deg": -62.062044567391844,
+              "reference_lux": 0.06607337704426822,
+              "model_lux": 0.0657428749506377
+            }
+          }
+        ]
+      },
+      {
+        "name": "S Imbrium",
+        "latitude_deg": 15.875,
+        "longitude_deg": -17.875,
+        "bands": [
+          {
+            "band": "daylight",
+            "samples": 2316,
+            "max_abs_error_lux": 61.21903891867987,
+            "max_relative_error_percent": 0.4138348896727451,
+            "rms_relative_error_percent": 0.12922956755615797,
+            "relative_worst": {
+              "jd_tt": 2454172.5,
+              "tt": "2007-03-13T00:00:00",
+              "reference_elevation_deg": 0.7359588667815231,
+              "model_elevation_deg": 0.7756931162728558,
+              "reference_lux": 5007.850434578024,
+              "model_lux": 5028.574666898936
+            }
+          },
+          {
+            "band": "horizon_twilight",
+            "samples": 132,
+            "max_abs_error_lux": 19.80228603272508,
+            "max_relative_error_percent": 0.5736226251149257,
+            "rms_relative_error_percent": 0.31859032460336806,
+            "relative_worst": {
+              "jd_tt": 2548050.5,
+              "tt": "2264-03-23T00:00:00",
+              "reference_elevation_deg": -2.5998061549225233,
+              "model_elevation_deg": -2.552826172711445,
+              "reference_lux": 3452.145219822471,
+              "model_lux": 3471.947505855196
+            }
+          },
+          {
+            "band": "bright_twilight",
+            "samples": 815,
+            "max_abs_error_lux": 11.615882540368602,
+            "max_relative_error_percent": 0.9902735348059759,
+            "rms_relative_error_percent": 0.5087934478495515,
+            "relative_worst": {
+              "jd_tt": 2451616.208333333,
+              "tt": "2000-03-12T17:00:00",
+              "reference_elevation_deg": -22.928345975956297,
+              "model_elevation_deg": -22.973549491823235,
+              "reference_lux": 99.32747306067108,
+              "model_lux": 98.34385938215972
+            }
+          },
+          {
+            "band": "deep_twilight",
+            "samples": 1147,
+            "max_abs_error_lux": 0.16477150088745063,
+            "max_relative_error_percent": 1.4280655085515566,
+            "rms_relative_error_percent": 0.4966107726179722,
+            "relative_worst": {
+              "jd_tt": 2469888.145833333,
+              "tt": "2050-03-22T15:30:00",
+              "reference_elevation_deg": -59.840958753314986,
+              "model_elevation_deg": -59.79330612567387,
+              "reference_lux": 0.09221094581089367,
+              "model_lux": 0.09352777852312821
+            }
+          },
+          {
+            "band": "deep_night",
+            "samples": 611,
+            "max_abs_error_lux": 0.0005169912185633355,
+            "max_relative_error_percent": 1.491580550048747,
+            "rms_relative_error_percent": 0.45600457312574577,
+            "relative_worst": {
+              "jd_tt": 2469888.6875,
+              "tt": "2050-03-23T04:30:00",
+              "reference_elevation_deg": -64.96574829985254,
+              "model_elevation_deg": -64.91744941919453,
+              "reference_lux": 0.03466063019837846,
+              "model_lux": 0.03517762141694179
+            }
+          }
+        ]
+      },
+      {
+        "name": "S Nubium",
+        "latitude_deg": -28.125,
+        "longitude_deg": -11.875,
+        "bands": [
+          {
+            "band": "daylight",
+            "samples": 2289,
+            "max_abs_error_lux": 70.80911047087284,
+            "max_relative_error_percent": 0.44699692279084957,
+            "rms_relative_error_percent": 0.11738519070048768,
+            "relative_worst": {
+              "jd_tt": 2527245.5,
+              "tt": "2207-04-07T00:00:00",
+              "reference_elevation_deg": 0.6839639098672358,
+              "model_elevation_deg": 0.6412780322330728,
+              "reference_lux": 4980.731372801292,
+              "model_lux": 4958.467656832392
+            }
+          },
+          {
+            "band": "horizon_twilight",
+            "samples": 198,
+            "max_abs_error_lux": 19.76926296255715,
+            "max_relative_error_percent": 0.5306299663464629,
+            "rms_relative_error_percent": 0.2610210343791474,
+            "relative_worst": {
+              "jd_tt": 2520675.5,
+              "tt": "2189-04-10T00:00:00",
+              "reference_elevation_deg": -5.27481608225502,
+              "model_elevation_deg": -5.235610936318699,
+              "reference_lux": 2439.4693025230567,
+              "model_lux": 2452.413857662067
+            }
+          },
+          {
+            "band": "bright_twilight",
+            "samples": 1064,
+            "max_abs_error_lux": 12.390711393360561,
+            "max_relative_error_percent": 0.9685132374047525,
+            "rms_relative_error_percent": 0.3992103537063223,
+            "relative_worst": {
+              "jd_tt": 2553525.5,
+              "tt": "2279-03-20T00:00:00",
+              "reference_elevation_deg": -22.90121593728555,
+              "model_elevation_deg": -22.945688907889714,
+              "reference_lux": 99.91781380349387,
+              "model_lux": 98.9500965502816
+            }
+          },
+          {
+            "band": "deep_twilight",
+            "samples": 1198,
+            "max_abs_error_lux": 0.19375333778367576,
+            "max_relative_error_percent": 1.1027553584962708,
+            "rms_relative_error_percent": 0.42206363761656135,
+            "relative_worst": {
+              "jd_tt": 2470305.5,
+              "tt": "2051-05-14T00:00:00",
+              "reference_elevation_deg": -49.93024733384773,
+              "model_elevation_deg": -49.96693238482686,
+              "reference_lux": 0.5921009980377777,
+              "model_lux": 0.5855715725542062
+            }
+          },
+          {
+            "band": "deep_night",
+            "samples": 272,
+            "max_abs_error_lux": 0.00043560609502360514,
+            "max_relative_error_percent": 0.8268197299543919,
+            "rms_relative_error_percent": 0.3741380957536773,
+            "relative_worst": {
+              "jd_tt": 2508338.5,
+              "tt": "2155-07-01T00:00:00",
+              "reference_elevation_deg": -63.394236656145615,
+              "model_elevation_deg": -63.35446905967753,
+              "reference_lux": 0.05148309083261733,
+              "model_lux": 0.05190876318521175
+            }
+          }
+        ]
+      },
+      {
+        "name": "Nectaris",
+        "latitude_deg": -22.125,
+        "longitude_deg": 33.125,
+        "bands": [
+          {
+            "band": "daylight",
+            "samples": 2557,
+            "max_abs_error_lux": 73.84499080681417,
+            "max_relative_error_percent": 0.489124259320822,
+            "rms_relative_error_percent": 0.09999040516250667,
+            "relative_worst": {
+              "jd_tt": 2612363.5,
+              "tt": "2440-04-22T00:00:00",
+              "reference_elevation_deg": 2.431456269482545,
+              "model_elevation_deg": 2.481246554266777,
+              "reference_lux": 5951.833229677553,
+              "model_lux": 5980.945089878224
+            }
+          },
+          {
+            "band": "horizon_twilight",
+            "samples": 160,
+            "max_abs_error_lux": 16.021396355147772,
+            "max_relative_error_percent": 0.4036165031598968,
+            "rms_relative_error_percent": 0.22573567517491894,
+            "relative_worst": {
+              "jd_tt": 2457165.5,
+              "tt": "2015-05-23T00:00:00",
+              "reference_elevation_deg": -1.4105062748664596,
+              "model_elevation_deg": -1.4462141528857928,
+              "reference_lux": 3969.4601756164398,
+              "model_lux": 3953.438779261292
+            }
+          },
+          {
+            "band": "bright_twilight",
+            "samples": 694,
+            "max_abs_error_lux": 15.284758812192877,
+            "max_relative_error_percent": 1.192204060951409,
+            "rms_relative_error_percent": 0.40495158913462165,
+            "relative_worst": {
+              "jd_tt": 2546955.5,
+              "tt": "2261-03-24T00:00:00",
+              "reference_elevation_deg": -22.00331262138514,
+              "model_elevation_deg": -21.94920912384833,
+              "reference_lux": 119.45589643857389,
+              "model_lux": 120.88005448696047
+            }
+          },
+          {
+            "band": "deep_twilight",
+            "samples": 1015,
+            "max_abs_error_lux": 0.17350077059525404,
+            "max_relative_error_percent": 1.3983372731373218,
+            "rms_relative_error_percent": 0.4369593558479328,
+            "relative_worst": {
+              "jd_tt": 2469888.416666667,
+              "tt": "2050-03-22T22:00:00",
+              "reference_elevation_deg": -54.76182449086826,
+              "model_elevation_deg": -54.8098260718521,
+              "reference_lux": 0.2428335355159795,
+              "model_lux": 0.2394379036771824
+            }
+          },
+          {
+            "band": "deep_night",
+            "samples": 595,
+            "max_abs_error_lux": 0.0005586927381504847,
+            "max_relative_error_percent": 1.2706520562611787,
+            "rms_relative_error_percent": 0.3018792619132853,
+            "relative_worst": {
+              "jd_tt": 2464246.5,
+              "tt": "2034-10-11T00:00:00",
+              "reference_elevation_deg": -64.79486874796329,
+              "model_elevation_deg": -64.75155246993238,
+              "reference_lux": 0.036489724921800915,
+              "model_lux": 0.036953382361843826
+            }
+          }
+        ]
+      },
+      {
+        "name": "Smythii headland",
+        "latitude_deg": 2.34,
+        "longitude_deg": 93.4,
+        "bands": [
+          {
+            "band": "daylight",
+            "samples": 2570,
+            "max_abs_error_lux": 71.24910824790277,
+            "max_relative_error_percent": 0.4320803982147221,
+            "rms_relative_error_percent": 0.10437928760662087,
+            "relative_worst": {
+              "jd_tt": 2534545.5,
+              "tt": "2227-04-02T00:00:00",
+              "reference_elevation_deg": 2.2833159417692426,
+              "model_elevation_deg": 2.326659375295139,
+              "reference_lux": 5865.217125167203,
+              "model_lux": 5890.559578677784
+            }
+          },
+          {
+            "band": "horizon_twilight",
+            "samples": 172,
+            "max_abs_error_lux": 16.963834665140894,
+            "max_relative_error_percent": 0.49973315239774213,
+            "rms_relative_error_percent": 0.3353878104448271,
+            "relative_worst": {
+              "jd_tt": 2469887.979166667,
+              "tt": "2050-03-22T11:30:00",
+              "reference_elevation_deg": -5.899713947511525,
+              "model_elevation_deg": -5.933513486915948,
+              "reference_lux": 2233.143713151205,
+              "model_lux": 2221.9839536759023
+            }
+          },
+          {
+            "band": "bright_twilight",
+            "samples": 646,
+            "max_abs_error_lux": 11.74385809506748,
+            "max_relative_error_percent": 1.0024142853738554,
+            "rms_relative_error_percent": 0.4663117016159837,
+            "relative_worst": {
+              "jd_tt": 2629883.5,
+              "tt": "2488-04-10T00:00:00",
+              "reference_elevation_deg": -20.805184455052547,
+              "model_elevation_deg": -20.852217466958145,
+              "reference_lux": 152.47954600781833,
+              "model_lux": 150.95106925636276
+            }
+          },
+          {
+            "band": "deep_twilight",
+            "samples": 741,
+            "max_abs_error_lux": 0.14529824391266288,
+            "max_relative_error_percent": 1.2764186897496987,
+            "rms_relative_error_percent": 0.45348645003975135,
+            "relative_worst": {
+              "jd_tt": 2628788.5,
+              "tt": "2485-04-11T00:00:00",
+              "reference_elevation_deg": -49.743349970120086,
+              "model_elevation_deg": -49.78819782296084,
+              "reference_lux": 0.6253661122182064,
+              "model_lux": 0.6173838222824921
+            }
+          },
+          {
+            "band": "deep_night",
+            "samples": 892,
+            "max_abs_error_lux": 0.00038375618851240606,
+            "max_relative_error_percent": 0.9993158655643369,
+            "rms_relative_error_percent": 0.3899571005548114,
+            "relative_worst": {
+              "jd_tt": 2462585.0,
+              "tt": "2030-03-24T12:00:00",
+              "reference_elevation_deg": -64.84935126740828,
+              "model_elevation_deg": -64.81582923907268,
+              "reference_lux": 0.03590654403366176,
+              "model_lux": 0.036265363824965986
+            }
+          }
+        ]
+      },
+      {
+        "name": "Ingenii coast",
+        "latitude_deg": -37.125,
+        "longitude_deg": 162.875,
+        "bands": [
+          {
+            "band": "daylight",
+            "samples": 2703,
+            "max_abs_error_lux": 77.52655399795913,
+            "max_relative_error_percent": 0.45089501746604416,
+            "rms_relative_error_percent": 0.12318144938249347,
+            "relative_worst": {
+              "jd_tt": 2557175.5,
+              "tt": "2289-03-17T00:00:00",
+              "reference_elevation_deg": 2.176687093582763,
+              "model_elevation_deg": 2.1319370866773295,
+              "reference_lux": 5802.872349771455,
+              "model_lux": 5776.707487476421
+            }
+          },
+          {
+            "band": "horizon_twilight",
+            "samples": 170,
+            "max_abs_error_lux": 20.935409841358705,
+            "max_relative_error_percent": 0.506951489050908,
+            "rms_relative_error_percent": 0.2936539867568021,
+            "relative_worst": {
+              "jd_tt": 2524661.458333333,
+              "tt": "2200-03-09T23:00:00",
+              "reference_elevation_deg": -5.962138435578003,
+              "model_elevation_deg": -5.996109726576112,
+              "reference_lux": 2212.532714171153,
+              "model_lux": 2201.316246630924
+            }
+          },
+          {
+            "band": "bright_twilight",
+            "samples": 919,
+            "max_abs_error_lux": 12.43656907515242,
+            "max_relative_error_percent": 1.0142185494319944,
+            "rms_relative_error_percent": 0.5093296745500415,
+            "relative_worst": {
+              "jd_tt": 2451631.020833333,
+              "tt": "2000-03-27T12:30:00",
+              "reference_elevation_deg": -16.93897202004366,
+              "model_elevation_deg": -16.98652527646354,
+              "reference_lux": 328.82695770148996,
+              "model_lux": 325.49193370094855
+            }
+          },
+          {
+            "band": "deep_twilight",
+            "samples": 1229,
+            "max_abs_error_lux": 0.1825614405786702,
+            "max_relative_error_percent": 1.418530124737465,
+            "rms_relative_error_percent": 0.46893600405786523,
+            "relative_worst": {
+              "jd_tt": 2469873.75,
+              "tt": "2050-03-08T06:00:00",
+              "reference_elevation_deg": -49.95831492853286,
+              "model_elevation_deg": -49.911523234898475,
+              "reference_lux": 0.5871053591301508,
+              "model_lux": 0.5954336255133601
+            }
+          }
+        ]
+      },
+      {
+        "name": "+0N 0E check",
+        "latitude_deg": 0,
+        "longitude_deg": 0,
+        "bands": [
+          {
+            "band": "daylight",
+            "samples": 2263,
+            "max_abs_error_lux": 68.70595807138307,
+            "max_relative_error_percent": 0.4836619114300956,
+            "rms_relative_error_percent": 0.14219190507498664,
+            "relative_worst": {
+              "jd_tt": 2451631.458333333,
+              "tt": "2000-03-27T23:00:00",
+              "reference_elevation_deg": 0.16516921725745407,
+              "model_elevation_deg": 0.2093868736069436,
+              "reference_lux": 4712.199253435377,
+              "model_lux": 4734.990366414937
+            }
+          },
+          {
+            "band": "horizon_twilight",
+            "samples": 392,
+            "max_abs_error_lux": 20.95825291302208,
+            "max_relative_error_percent": 0.6609119884763677,
+            "rms_relative_error_percent": 0.3826554749407087,
+            "relative_worst": {
+              "jd_tt": 2451631.958333333,
+              "tt": "2000-03-28T11:00:00",
+              "reference_elevation_deg": -5.927366523611877,
+              "model_elevation_deg": -5.882848384552687,
+              "reference_lux": 2224.013526657834,
+              "model_lux": 2238.7122986808517
+            }
+          },
+          {
+            "band": "bright_twilight",
+            "samples": 782,
+            "max_abs_error_lux": 13.318012541214557,
+            "max_relative_error_percent": 0.9067822669193133,
+            "rms_relative_error_percent": 0.49567815336993404,
+            "relative_worst": {
+              "jd_tt": 2526150.5,
+              "tt": "2204-04-07T00:00:00",
+              "reference_elevation_deg": -16.939588573817215,
+              "model_elevation_deg": -16.98209891775305,
+              "reference_lux": 328.78371730562156,
+              "model_lux": 325.80236486057606
+            }
+          },
+          {
+            "band": "deep_twilight",
+            "samples": 768,
+            "max_abs_error_lux": 0.19228146577456684,
+            "max_relative_error_percent": 1.0300333635568137,
+            "rms_relative_error_percent": 0.44945692509919144,
+            "relative_worst": {
+              "jd_tt": 2538195.5,
+              "tt": "2237-03-30T00:00:00",
+              "reference_elevation_deg": -59.42033360499985,
+              "model_elevation_deg": -59.45903701401863,
+              "reference_lux": 0.10383450115943423,
+              "model_lux": 0.10276497115460927
+            }
+          },
+          {
+            "band": "deep_night",
+            "samples": 816,
+            "max_abs_error_lux": 0.0004689611969638102,
+            "max_relative_error_percent": 1.0197214268072579,
+            "rms_relative_error_percent": 0.36670986860135657,
+            "relative_worst": {
+              "jd_tt": 2616743.5,
+              "tt": "2452-04-19T00:00:00",
+              "reference_elevation_deg": -79.41191099367533,
+              "model_elevation_deg": -79.365958693163,
+              "reference_lux": 0.002811967539946591,
+              "model_lux": 0.0028406417754662915
+            }
+          }
+        ]
+      },
+      {
+        "name": "+45N 0E check",
+        "latitude_deg": 45,
+        "longitude_deg": 0,
+        "bands": [
+          {
+            "band": "daylight",
+            "samples": 2261,
+            "max_abs_error_lux": 68.49177341067843,
+            "max_relative_error_percent": 0.4990316427544305,
+            "rms_relative_error_percent": 0.15072192912632523,
+            "relative_worst": {
+              "jd_tt": 2451631.333333333,
+              "tt": "2000-03-27T20:00:00",
+              "reference_elevation_deg": 0.16986333018290176,
+              "model_elevation_deg": 0.2155095532945731,
+              "reference_lux": 4714.618740736492,
+              "model_lux": 4738.146180087998
+            }
+          },
+          {
+            "band": "horizon_twilight",
+            "samples": 488,
+            "max_abs_error_lux": 23.102168215475103,
+            "max_relative_error_percent": 0.6460893941294359,
+            "rms_relative_error_percent": 0.3403289524543618,
+            "relative_worst": {
+              "jd_tt": 2561190.5,
+              "tt": "2300-03-15T00:00:00",
+              "reference_elevation_deg": -5.886961945722123,
+              "model_elevation_deg": -5.84318118690947,
+              "reference_lux": 2237.354104041316,
+              "model_lux": 2251.8094116166467
+            }
+          },
+          {
+            "band": "bright_twilight",
+            "samples": 1096,
+            "max_abs_error_lux": 9.492483779550867,
+            "max_relative_error_percent": 0.9125766149713924,
+            "rms_relative_error_percent": 0.45769726176384823,
+            "relative_worst": {
+              "jd_tt": 2539290.5,
+              "tt": "2240-03-29T00:00:00",
+              "reference_elevation_deg": -21.57903047208917,
+              "model_elevation_deg": -21.623847555790157,
+              "reference_lux": 130.73438047896917,
+              "model_lux": 129.54132909499037
+            }
+          },
+          {
+            "band": "deep_twilight",
+            "samples": 1176,
+            "max_abs_error_lux": 0.17618379648598292,
+            "max_relative_error_percent": 1.1219891483981062,
+            "rms_relative_error_percent": 0.41264934803765696,
+            "relative_worst": {
+              "jd_tt": 2465487.5,
+              "tt": "2038-03-05T00:00:00",
+              "reference_elevation_deg": -44.54894099551277,
+              "model_elevation_deg": -44.50507664711816,
+              "reference_lux": 1.6612942091307845,
+              "model_lux": 1.679933749880198
+            }
+          }
+        ]
+      },
+      {
+        "name": "+60N 0E check",
+        "latitude_deg": 60,
+        "longitude_deg": 0,
+        "bands": [
+          {
+            "band": "daylight",
+            "samples": 2266,
+            "max_abs_error_lux": 62.511712652612914,
+            "max_relative_error_percent": 0.4405816870156489,
+            "rms_relative_error_percent": 0.1512117648513243,
+            "relative_worst": {
+              "jd_tt": 2451631.25,
+              "tt": "2000-03-27T18:00:00",
+              "reference_elevation_deg": 0.09781539864920086,
+              "model_elevation_deg": 0.13779779788912178,
+              "reference_lux": 4677.483065011175,
+              "model_lux": 4698.091198808873
+            }
+          },
+          {
+            "band": "horizon_twilight",
+            "samples": 586,
+            "max_abs_error_lux": 19.35925320024944,
+            "max_relative_error_percent": 0.5275262757463794,
+            "rms_relative_error_percent": 0.29620788092862904,
+            "relative_worst": {
+              "jd_tt": 2561190.5,
+              "tt": "2300-03-15T00:00:00",
+              "reference_elevation_deg": -4.7295933892068724,
+              "model_elevation_deg": -4.691238033252596,
+              "reference_lux": 2627.941906081605,
+              "model_lux": 2641.8049901475356
+            }
+          },
+          {
+            "band": "bright_twilight",
+            "samples": 2073,
+            "max_abs_error_lux": 10.07317987555075,
+            "max_relative_error_percent": 0.8954596294123225,
+            "rms_relative_error_percent": 0.40697138487111595,
+            "relative_worst": {
+              "jd_tt": 2617838.5,
+              "tt": "2455-04-19T00:00:00",
+              "reference_elevation_deg": -26.88177918598309,
+              "model_elevation_deg": -26.923529126008194,
+              "reference_lux": 45.104603159089145,
+              "model_lux": 44.700709646792866
+            }
+          },
+          {
+            "band": "deep_twilight",
+            "samples": 96,
+            "max_abs_error_lux": 0.18246397677746629,
+            "max_relative_error_percent": 0.8814479257727525,
+            "rms_relative_error_percent": 0.47745781729932496,
+            "relative_worst": {
+              "jd_tt": 2568490.5,
+              "tt": "2320-03-10T00:00:00",
+              "reference_elevation_deg": -30.834652304041775,
+              "model_elevation_deg": -30.792495584833816,
+              "reference_lux": 20.70048285807727,
+              "model_lux": 20.882946834854735
+            }
+          }
+        ]
+      },
+      {
+        "name": "+80N 0E check",
+        "latitude_deg": 80,
+        "longitude_deg": 0,
+        "bands": [
+          {
+            "band": "daylight",
+            "samples": 2281,
+            "max_abs_error_lux": 36.06540715895608,
+            "max_relative_error_percent": 0.33813261575387615,
+            "rms_relative_error_percent": 0.1713430776447624,
+            "relative_worst": {
+              "jd_tt": 2486292.5,
+              "tt": "2095-02-19T00:00:00",
+              "reference_elevation_deg": 8.49708418099005,
+              "model_elevation_deg": 8.538382223680529,
+              "reference_lux": 10218.280977080052,
+              "model_lux": 10252.832317832934
+            }
+          },
+          {
+            "band": "horizon_twilight",
+            "samples": 1483,
+            "max_abs_error_lux": 14.743750364148127,
+            "max_relative_error_percent": 0.48919460893932726,
+            "rms_relative_error_percent": 0.2282038640043276,
+            "relative_worst": {
+              "jd_tt": 2488555.5,
+              "tt": "2101-05-02T00:00:00",
+              "reference_elevation_deg": -5.911061867691097,
+              "model_elevation_deg": -5.94409311744674,
+              "reference_lux": 2229.3969147634025,
+              "model_lux": 2218.4908252445202
+            }
+          },
+          {
+            "band": "bright_twilight",
+            "samples": 1257,
+            "max_abs_error_lux": 10.357248195889497,
+            "max_relative_error_percent": 0.7351835331914259,
+            "rms_relative_error_percent": 0.33765649705121187,
+            "relative_worst": {
+              "jd_tt": 2452347.5,
+              "tt": "2002-03-14T00:00:00",
+              "reference_elevation_deg": -11.568834619314224,
+              "model_elevation_deg": -11.527486862351802,
+              "reference_lux": 904.0845124493512,
+              "model_lux": 910.7311929110128
+            }
+          }
+        ]
+      },
+      {
+        "name": "-80N 45E check",
+        "latitude_deg": -80,
+        "longitude_deg": 45,
+        "bands": [
+          {
+            "band": "daylight",
+            "samples": 2489,
+            "max_abs_error_lux": 33.5154166063694,
+            "max_relative_error_percent": 0.4206586051690223,
+            "rms_relative_error_percent": 0.15799703120292233,
+            "relative_worst": {
+              "jd_tt": 2467750.5,
+              "tt": "2044-05-15T00:00:00",
+              "reference_elevation_deg": 0.5210830027460501,
+              "model_elevation_deg": 0.5605685356966741,
+              "reference_lux": 4895.777414867426,
+              "model_lux": 4916.3719238529875
+            }
+          },
+          {
+            "band": "horizon_twilight",
+            "samples": 929,
+            "max_abs_error_lux": 17.224328899871125,
+            "max_relative_error_percent": 0.6559122157406118,
+            "rms_relative_error_percent": 0.24268988588382034,
+            "relative_worst": {
+              "jd_tt": 2555350.5,
+              "tt": "2284-03-18T00:00:00",
+              "reference_elevation_deg": -5.882568122635296,
+              "model_elevation_deg": -5.9270433219390775,
+              "reference_lux": 2238.8048341308395,
+              "model_lux": 2224.120239737184
+            }
+          },
+          {
+            "band": "bright_twilight",
+            "samples": 1603,
+            "max_abs_error_lux": 12.529205597517375,
+            "max_relative_error_percent": 0.730598700639503,
+            "rms_relative_error_percent": 0.28174275524665215,
+            "relative_worst": {
+              "jd_tt": 2621999.5,
+              "tt": "2466-09-09T00:00:00",
+              "reference_elevation_deg": -9.88466196775393,
+              "model_elevation_deg": -9.843065602679543,
+              "reference_lux": 1205.1553185060752,
+              "model_lux": 1213.9601676037685
+            }
+          }
+        ]
+      }
+    ],
+    "threshold_events": [
+      {
+        "site": "W Procellarum",
+        "threshold_lux": 100.0,
+        "threshold_elevation_deg": -22.897438941175217,
+        "event": "darkening",
+        "reference_jd_tt": 2462566.059701841,
+        "reference_tt": "2030-03-05T13:25:58",
+        "model_jd_tt": 2462566.0606166776,
+        "model_tt": "2030-03-05T13:27:17",
+        "model_minus_reference_minutes": 1.3173649460077286,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.5522400140762329
+      },
+      {
+        "site": "W Procellarum",
+        "threshold_lux": 100.0,
+        "threshold_elevation_deg": -22.897438941175217,
+        "event": "brightening",
+        "reference_jd_tt": 2462576.3437984916,
+        "reference_tt": "2030-03-15T20:15:04",
+        "model_jd_tt": 2462576.346398359,
+        "model_tt": "2030-03-15T20:18:49",
+        "model_minus_reference_minutes": 3.74380923807621,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.3176003694534302
+      },
+      {
+        "site": "W Procellarum",
+        "threshold_lux": 10.0,
+        "threshold_elevation_deg": -34.58420304162247,
+        "event": "darkening",
+        "reference_jd_tt": 2462567.2241877546,
+        "reference_tt": "2030-03-06T17:22:50",
+        "model_jd_tt": 2462567.2248339746,
+        "model_tt": "2030-03-06T17:23:46",
+        "model_minus_reference_minutes": 0.9305568784475327,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 1.036687195301056
+      },
+      {
+        "site": "W Procellarum",
+        "threshold_lux": 10.0,
+        "threshold_elevation_deg": -34.58420304162247,
+        "event": "brightening",
+        "reference_jd_tt": 2462575.1753097787,
+        "reference_tt": "2030-03-14T16:12:27",
+        "model_jd_tt": 2462575.178104164,
+        "model_tt": "2030-03-14T16:16:28",
+        "model_minus_reference_minutes": 4.023915007710457,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.5485385656356812
+      },
+      {
+        "site": "W Procellarum",
+        "threshold_lux": 1.0,
+        "threshold_elevation_deg": -47.63851651253469,
+        "event": "darkening",
+        "reference_jd_tt": 2462568.6713973284,
+        "reference_tt": "2030-03-08T04:06:49",
+        "model_jd_tt": 2462568.6714913445,
+        "model_tt": "2030-03-08T04:06:57",
+        "model_minus_reference_minutes": 0.13538315892219543,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.8725360035896301
+      },
+      {
+        "site": "W Procellarum",
+        "threshold_lux": 1.0,
+        "threshold_elevation_deg": -47.63851651253469,
+        "event": "brightening",
+        "reference_jd_tt": 2462573.724336926,
+        "reference_tt": "2030-03-13T05:23:03",
+        "model_jd_tt": 2462573.7276101615,
+        "model_tt": "2030-03-13T05:27:46",
+        "model_minus_reference_minutes": 4.713459312915802,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 2.883186936378479
+      },
+      {
+        "site": "W Procellarum",
+        "threshold_lux": 0.1,
+        "threshold_elevation_deg": -59.55909386987045,
+        "event": "darkening",
+        "reference_jd_tt": 2462571.1246627076,
+        "reference_tt": "2030-03-10T14:59:31",
+        "model_jd_tt": 2462571.085948454,
+        "model_tt": "2030-03-10T14:03:46",
+        "model_minus_reference_minutes": -55.74852481484413,
+        "reference_step_minutes": 1,
+        "coarser_reference_step_minutes": 2,
+        "reference_interpolation_change_seconds": 0.1417413353919983
+      },
+      {
+        "site": "W Procellarum",
+        "threshold_lux": 0.1,
+        "threshold_elevation_deg": -59.55909386987045,
+        "event": "brightening",
+        "reference_jd_tt": 2462571.2684116093,
+        "reference_tt": "2030-03-10T18:26:31",
+        "model_jd_tt": 2462571.31044027,
+        "model_tt": "2030-03-10T19:27:02",
+        "model_minus_reference_minutes": 60.52127167582512,
+        "reference_step_minutes": 1,
+        "coarser_reference_step_minutes": 2,
+        "reference_interpolation_change_seconds": 0.1495465636253357
+      },
+      {
+        "site": "S Imbrium",
+        "threshold_lux": 100.0,
+        "threshold_elevation_deg": -22.897438941175217,
+        "event": "brightening",
+        "reference_jd_tt": 2462571.988157078,
+        "reference_tt": "2030-03-11T11:42:57",
+        "model_jd_tt": 2462571.9910011236,
+        "model_tt": "2030-03-11T11:47:02",
+        "model_minus_reference_minutes": 4.095425382256508,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.10899156332015991
+      },
+      {
+        "site": "S Imbrium",
+        "threshold_lux": 100.0,
+        "threshold_elevation_deg": -22.897438941175217,
+        "event": "darkening",
+        "reference_jd_tt": 2462590.779668343,
+        "reference_tt": "2030-03-30T06:42:43",
+        "model_jd_tt": 2462590.7819123156,
+        "model_tt": "2030-03-30T06:45:57",
+        "model_minus_reference_minutes": 3.2313209027051926,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.10895133018493652
+      },
+      {
+        "site": "S Imbrium",
+        "threshold_lux": 10.0,
+        "threshold_elevation_deg": -34.58420304162247,
+        "event": "darkening",
+        "reference_jd_tt": 2462562.2388122175,
+        "reference_tt": "2030-03-01T17:43:53",
+        "model_jd_tt": 2462562.240686157,
+        "model_tt": "2030-03-01T17:46:35",
+        "model_minus_reference_minutes": 2.6984725892543793,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.21146535873413086
+      },
+      {
+        "site": "S Imbrium",
+        "threshold_lux": 10.0,
+        "threshold_elevation_deg": -34.58420304162247,
+        "event": "brightening",
+        "reference_jd_tt": 2462570.9724259586,
+        "reference_tt": "2030-03-10T11:20:18",
+        "model_jd_tt": 2462570.975357582,
+        "model_tt": "2030-03-10T11:24:31",
+        "model_minus_reference_minutes": 4.221537485718727,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.2652570605278015
+      },
+      {
+        "site": "S Imbrium",
+        "threshold_lux": 10.0,
+        "threshold_elevation_deg": -34.58420304162247,
+        "event": "darkening",
+        "reference_jd_tt": 2462591.792527431,
+        "reference_tt": "2030-03-31T07:01:14",
+        "model_jd_tt": 2462591.794591354,
+        "model_tt": "2030-03-31T07:04:13",
+        "model_minus_reference_minutes": 2.972049191594124,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.016133487224578857
+      },
+      {
+        "site": "S Imbrium",
+        "threshold_lux": 1.0,
+        "threshold_elevation_deg": -47.63851651253469,
+        "event": "darkening",
+        "reference_jd_tt": 2462563.401338637,
+        "reference_tt": "2030-03-02T21:37:56",
+        "model_jd_tt": 2462563.402885923,
+        "model_tt": "2030-03-02T21:40:09",
+        "model_minus_reference_minutes": 2.2280922532081604,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.7132530212402344
+      },
+      {
+        "site": "S Imbrium",
+        "threshold_lux": 1.0,
+        "threshold_elevation_deg": -47.63851651253469,
+        "event": "brightening",
+        "reference_jd_tt": 2462569.8089737017,
+        "reference_tt": "2030-03-09T07:24:55",
+        "model_jd_tt": 2462569.8121053316,
+        "model_tt": "2030-03-09T07:29:26",
+        "model_minus_reference_minutes": 4.509547054767609,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.8005186915397644
+      },
+      {
+        "site": "S Imbrium",
+        "threshold_lux": 1.0,
+        "threshold_elevation_deg": -47.63851651253469,
+        "event": "darkening",
+        "reference_jd_tt": 2462592.952282676,
+        "reference_tt": "2030-04-01T10:51:17",
+        "model_jd_tt": 2462592.954074029,
+        "model_tt": "2030-04-01T10:53:52",
+        "model_minus_reference_minutes": 2.5795481353998184,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.2739071846008301
+      },
+      {
+        "site": "S Imbrium",
+        "threshold_lux": 0.1,
+        "threshold_elevation_deg": -59.55909386987045,
+        "event": "darkening",
+        "reference_jd_tt": 2462564.534157761,
+        "reference_tt": "2030-03-04T00:49:11",
+        "model_jd_tt": 2462564.535152722,
+        "model_tt": "2030-03-04T00:50:37",
+        "model_minus_reference_minutes": 1.4327441900968552,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 1.0482341051101685
+      },
+      {
+        "site": "S Imbrium",
+        "threshold_lux": 0.1,
+        "threshold_elevation_deg": -59.55909386987045,
+        "event": "brightening",
+        "reference_jd_tt": 2462568.6754447343,
+        "reference_tt": "2030-03-08T04:12:38",
+        "model_jd_tt": 2462568.679038101,
+        "model_tt": "2030-03-08T04:17:49",
+        "model_minus_reference_minutes": 5.1744478940963745,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 1.224777102470398
+      },
+      {
+        "site": "S Imbrium",
+        "threshold_lux": 0.1,
+        "threshold_elevation_deg": -59.55909386987045,
+        "event": "darkening",
+        "reference_jd_tt": 2462594.08098315,
+        "reference_tt": "2030-04-02T13:56:37",
+        "model_jd_tt": 2462594.0823047757,
+        "model_tt": "2030-04-02T13:58:31",
+        "model_minus_reference_minutes": 1.9031412899494171,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.3207385540008545
+      },
+      {
+        "site": "S Nubium",
+        "threshold_lux": 100.0,
+        "threshold_elevation_deg": -22.897438941175217,
+        "event": "brightening",
+        "reference_jd_tt": 2462571.420787671,
+        "reference_tt": "2030-03-10T22:05:56",
+        "model_jd_tt": 2462571.422465573,
+        "model_tt": "2030-03-10T22:08:21",
+        "model_minus_reference_minutes": 2.416178807616234,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.08038580417633057
+      },
+      {
+        "site": "S Nubium",
+        "threshold_lux": 100.0,
+        "threshold_elevation_deg": -22.897438941175217,
+        "event": "darkening",
+        "reference_jd_tt": 2462590.371386436,
+        "reference_tt": "2030-03-29T20:54:48",
+        "model_jd_tt": 2462590.373406532,
+        "model_tt": "2030-03-29T20:57:42",
+        "model_minus_reference_minutes": 2.9089388251304626,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.07241964340209961
+      },
+      {
+        "site": "S Nubium",
+        "threshold_lux": 10.0,
+        "threshold_elevation_deg": -34.58420304162247,
+        "event": "darkening",
+        "reference_jd_tt": 2462561.936879035,
+        "reference_tt": "2030-03-01T10:29:06",
+        "model_jd_tt": 2462561.93904035,
+        "model_tt": "2030-03-01T10:32:13",
+        "model_minus_reference_minutes": 3.1122931838035583,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.9038776159286499
+      },
+      {
+        "site": "S Nubium",
+        "threshold_lux": 10.0,
+        "threshold_elevation_deg": -34.58420304162247,
+        "event": "brightening",
+        "reference_jd_tt": 2462570.2938812063,
+        "reference_tt": "2030-03-09T19:03:11",
+        "model_jd_tt": 2462570.29515912,
+        "model_tt": "2030-03-09T19:05:02",
+        "model_minus_reference_minutes": 1.8401958793401718,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.09832978248596191
+      },
+      {
+        "site": "S Nubium",
+        "threshold_lux": 10.0,
+        "threshold_elevation_deg": -34.58420304162247,
+        "event": "darkening",
+        "reference_jd_tt": 2462591.4973053066,
+        "reference_tt": "2030-03-30T23:56:07",
+        "model_jd_tt": 2462591.499677469,
+        "model_tt": "2030-03-30T23:59:32",
+        "model_minus_reference_minutes": 3.4159138798713684,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.12077987194061279
+      },
+      {
+        "site": "S Nubium",
+        "threshold_lux": 1.0,
+        "threshold_elevation_deg": -47.63851651253469,
+        "event": "darkening",
+        "reference_jd_tt": 2462563.2851216285,
+        "reference_tt": "2030-03-02T18:50:35",
+        "model_jd_tt": 2462563.287929957,
+        "model_tt": "2030-03-02T18:54:37",
+        "model_minus_reference_minutes": 4.043992683291435,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.7929950952529907
+      },
+      {
+        "site": "S Nubium",
+        "threshold_lux": 1.0,
+        "threshold_elevation_deg": -47.63851651253469,
+        "event": "brightening",
+        "reference_jd_tt": 2462568.9448155975,
+        "reference_tt": "2030-03-08T10:40:32",
+        "model_jd_tt": 2462568.945386599,
+        "model_tt": "2030-03-08T10:41:21",
+        "model_minus_reference_minutes": 0.8222419023513794,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 1.6648873686790466
+      },
+      {
+        "site": "S Nubium",
+        "threshold_lux": 1.0,
+        "threshold_elevation_deg": -47.63851651253469,
+        "event": "darkening",
+        "reference_jd_tt": 2462592.846611817,
+        "reference_tt": "2030-04-01T08:19:07",
+        "model_jd_tt": 2462592.8496266194,
+        "model_tt": "2030-04-01T08:23:28",
+        "model_minus_reference_minutes": 4.3413155525922775,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 1.658812165260315
+      },
+      {
+        "site": "S Nubium",
+        "threshold_lux": 0.1,
+        "threshold_elevation_deg": -59.55909386987045,
+        "event": "darkening",
+        "reference_jd_tt": 2462564.8434037277,
+        "reference_tt": "2030-03-04T08:14:30",
+        "model_jd_tt": 2462564.8482805165,
+        "model_tt": "2030-03-04T08:21:31",
+        "model_minus_reference_minutes": 7.022575736045837,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 5.490817129611969
+      },
+      {
+        "site": "S Nubium",
+        "threshold_lux": 0.1,
+        "threshold_elevation_deg": -59.55909386987045,
+        "event": "brightening",
+        "reference_jd_tt": 2462567.385897151,
+        "reference_tt": "2030-03-06T21:15:42",
+        "model_jd_tt": 2462567.384357201,
+        "model_tt": "2030-03-06T21:13:28",
+        "model_minus_reference_minutes": -2.217528373003006,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 5.801497399806976
+      },
+      {
+        "site": "S Nubium",
+        "threshold_lux": 0.1,
+        "threshold_elevation_deg": -59.55909386987045,
+        "event": "darkening",
+        "reference_jd_tt": 2462594.4137343476,
+        "reference_tt": "2030-04-02T21:55:47",
+        "model_jd_tt": 2462594.418766983,
+        "model_tt": "2030-04-02T22:03:01",
+        "model_minus_reference_minutes": 7.246994823217392,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 1.5898123383522034
+      },
+      {
+        "site": "Nectaris",
+        "threshold_lux": 100.0,
+        "threshold_elevation_deg": -22.897438941175217,
+        "event": "brightening",
+        "reference_jd_tt": 2462567.8218460665,
+        "reference_tt": "2030-03-07T07:43:28",
+        "model_jd_tt": 2462567.8231658842,
+        "model_tt": "2030-03-07T07:45:22",
+        "model_minus_reference_minutes": 1.9005375355482101,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.13526380062103271
+      },
+      {
+        "site": "Nectaris",
+        "threshold_lux": 100.0,
+        "threshold_elevation_deg": -22.897438941175217,
+        "event": "darkening",
+        "reference_jd_tt": 2462586.5877391496,
+        "reference_tt": "2030-03-26T02:06:21",
+        "model_jd_tt": 2462586.5892555304,
+        "model_tt": "2030-03-26T02:08:32",
+        "model_minus_reference_minutes": 2.183588370680809,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.05037188529968262
+      },
+      {
+        "site": "Nectaris",
+        "threshold_lux": 10.0,
+        "threshold_elevation_deg": -34.58420304162247,
+        "event": "brightening",
+        "reference_jd_tt": 2462566.767955937,
+        "reference_tt": "2030-03-06T06:25:51",
+        "model_jd_tt": 2462566.7691235757,
+        "model_tt": "2030-03-06T06:27:32",
+        "model_minus_reference_minutes": 1.681399717926979,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.4617959260940552
+      },
+      {
+        "site": "Nectaris",
+        "threshold_lux": 10.0,
+        "threshold_elevation_deg": -34.58420304162247,
+        "event": "darkening",
+        "reference_jd_tt": 2462587.6436573826,
+        "reference_tt": "2030-03-27T03:26:52",
+        "model_jd_tt": 2462587.64516892,
+        "model_tt": "2030-03-27T03:29:03",
+        "model_minus_reference_minutes": 2.1766139566898346,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.4758775234222412
+      },
+      {
+        "site": "Nectaris",
+        "threshold_lux": 1.0,
+        "threshold_elevation_deg": -47.63851651253469,
+        "event": "brightening",
+        "reference_jd_tt": 2462565.5475618932,
+        "reference_tt": "2030-03-05T01:08:29",
+        "model_jd_tt": 2462565.548544948,
+        "model_tt": "2030-03-05T01:09:54",
+        "model_minus_reference_minutes": 1.415598839521408,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.3870829939842224
+      },
+      {
+        "site": "Nectaris",
+        "threshold_lux": 1.0,
+        "threshold_elevation_deg": -47.63851651253469,
+        "event": "darkening",
+        "reference_jd_tt": 2462588.866154867,
+        "reference_tt": "2030-03-28T08:47:16",
+        "model_jd_tt": 2462588.867717508,
+        "model_tt": "2030-03-28T08:49:31",
+        "model_minus_reference_minutes": 2.2502030432224274,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.5829781293869019
+      },
+      {
+        "site": "Nectaris",
+        "threshold_lux": 0.1,
+        "threshold_elevation_deg": -59.55909386987045,
+        "event": "brightening",
+        "reference_jd_tt": 2462564.3151263203,
+        "reference_tt": "2030-03-03T19:33:47",
+        "model_jd_tt": 2462564.315850796,
+        "model_tt": "2030-03-03T19:34:50",
+        "model_minus_reference_minutes": 1.0432451963424683,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 3.9712920784950256
+      },
+      {
+        "site": "Nectaris",
+        "threshold_lux": 0.1,
+        "threshold_elevation_deg": -59.55909386987045,
+        "event": "darkening",
+        "reference_jd_tt": 2462590.1012518816,
+        "reference_tt": "2030-03-29T14:25:48",
+        "model_jd_tt": 2462590.103001143,
+        "model_tt": "2030-03-29T14:28:19",
+        "model_minus_reference_minutes": 2.5189362466335297,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 3.9460256695747375
+      },
+      {
+        "site": "Nectaris",
+        "threshold_lux": 0.1,
+        "threshold_elevation_deg": -59.55909386987045,
+        "event": "brightening",
+        "reference_jd_tt": 2462593.860171843,
+        "reference_tt": "2030-04-02T08:38:39",
+        "model_jd_tt": 2462593.861214049,
+        "model_tt": "2030-04-02T08:40:09",
+        "model_minus_reference_minutes": 1.500777080655098,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 3.2929614186286926
+      },
+      {
+        "site": "Smythii headland",
+        "threshold_lux": 100.0,
+        "threshold_elevation_deg": -22.897438941175217,
+        "event": "brightening",
+        "reference_jd_tt": 2462562.977832484,
+        "reference_tt": "2030-03-02T11:28:05",
+        "model_jd_tt": 2462562.9798814226,
+        "model_tt": "2030-03-02T11:31:02",
+        "model_minus_reference_minutes": 2.9504714906215668,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.010138750076293945
+      },
+      {
+        "site": "Smythii headland",
+        "threshold_lux": 100.0,
+        "threshold_elevation_deg": -22.897438941175217,
+        "event": "darkening",
+        "reference_jd_tt": 2462581.533820219,
+        "reference_tt": "2030-03-21T00:48:42",
+        "model_jd_tt": 2462581.5366012678,
+        "model_tt": "2030-03-21T00:52:42",
+        "model_minus_reference_minutes": 4.004710391163826,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.0012874603271484375
+      },
+      {
+        "site": "Smythii headland",
+        "threshold_lux": 100.0,
+        "threshold_elevation_deg": -22.897438941175217,
+        "event": "brightening",
+        "reference_jd_tt": 2462592.533354105,
+        "reference_tt": "2030-04-01T00:48:02",
+        "model_jd_tt": 2462592.535617251,
+        "model_tt": "2030-04-01T00:51:17",
+        "model_minus_reference_minutes": 3.2589302211999893,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.004304945468902588
+      },
+      {
+        "site": "Smythii headland",
+        "threshold_lux": 10.0,
+        "threshold_elevation_deg": -34.58420304162247,
+        "event": "brightening",
+        "reference_jd_tt": 2462562.0177981933,
+        "reference_tt": "2030-03-01T12:25:38",
+        "model_jd_tt": 2462562.019833778,
+        "model_tt": "2030-03-01T12:28:34",
+        "model_minus_reference_minutes": 2.931242063641548,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.022530555725097656
+      },
+      {
+        "site": "Smythii headland",
+        "threshold_lux": 10.0,
+        "threshold_elevation_deg": -34.58420304162247,
+        "event": "darkening",
+        "reference_jd_tt": 2462582.497653942,
+        "reference_tt": "2030-03-21T23:56:37",
+        "model_jd_tt": 2462582.500415059,
+        "model_tt": "2030-03-22T00:00:36",
+        "model_minus_reference_minutes": 3.9760080724954605,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.0009655952453613281
+      },
+      {
+        "site": "Smythii headland",
+        "threshold_lux": 10.0,
+        "threshold_elevation_deg": -34.58420304162247,
+        "event": "brightening",
+        "reference_jd_tt": 2462591.5745543083,
+        "reference_tt": "2030-03-31T01:47:21",
+        "model_jd_tt": 2462591.576781933,
+        "model_tt": "2030-03-31T01:50:34",
+        "model_minus_reference_minutes": 3.207779824733734,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.011265277862548828
+      },
+      {
+        "site": "Smythii headland",
+        "threshold_lux": 1.0,
+        "threshold_elevation_deg": -47.63851651253469,
+        "event": "darkening",
+        "reference_jd_tt": 2462583.5750876856,
+        "reference_tt": "2030-03-23T01:48:08",
+        "model_jd_tt": 2462583.5778342914,
+        "model_tt": "2030-03-23T01:52:05",
+        "model_minus_reference_minutes": 3.95511232316494,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.012592971324920654
+      },
+      {
+        "site": "Smythii headland",
+        "threshold_lux": 1.0,
+        "threshold_elevation_deg": -47.63851651253469,
+        "event": "brightening",
+        "reference_jd_tt": 2462590.5019701305,
+        "reference_tt": "2030-03-30T00:02:50",
+        "model_jd_tt": 2462590.5041560372,
+        "model_tt": "2030-03-30T00:05:59",
+        "model_minus_reference_minutes": 3.1477057188749313,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.005069375038146973
+      },
+      {
+        "site": "Smythii headland",
+        "threshold_lux": 0.1,
+        "threshold_elevation_deg": -59.55909386987045,
+        "event": "darkening",
+        "reference_jd_tt": 2462584.5609542807,
+        "reference_tt": "2030-03-24T01:27:46",
+        "model_jd_tt": 2462584.5637150705,
+        "model_tt": "2030-03-24T01:31:45",
+        "model_minus_reference_minutes": 3.975537344813347,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.09937584400177002
+      },
+      {
+        "site": "Smythii headland",
+        "threshold_lux": 0.1,
+        "threshold_elevation_deg": -59.55909386987045,
+        "event": "brightening",
+        "reference_jd_tt": 2462589.5196032226,
+        "reference_tt": "2030-03-29T00:28:14",
+        "model_jd_tt": 2462589.521733068,
+        "model_tt": "2030-03-29T00:31:18",
+        "model_minus_reference_minutes": 3.0669772624969482,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.11764168739318848
+      },
+      {
+        "site": "Ingenii coast",
+        "threshold_lux": 100.0,
+        "threshold_elevation_deg": -22.897438941175217,
+        "event": "darkening",
+        "reference_jd_tt": 2462576.2190891015,
+        "reference_tt": "2030-03-15T17:15:29",
+        "model_jd_tt": 2462576.2216659384,
+        "model_tt": "2030-03-15T17:19:12",
+        "model_minus_reference_minutes": 3.7106450647115707,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.4308968782424927
+      },
+      {
+        "site": "Ingenii coast",
+        "threshold_lux": 100.0,
+        "threshold_elevation_deg": -22.897438941175217,
+        "event": "brightening",
+        "reference_jd_tt": 2462586.4319407153,
+        "reference_tt": "2030-03-25T22:22:00",
+        "model_jd_tt": 2462586.4359550877,
+        "model_tt": "2030-03-25T22:27:47",
+        "model_minus_reference_minutes": 5.780696198344231,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.6120264530181885
+      },
+      {
+        "site": "Ingenii coast",
+        "threshold_lux": 10.0,
+        "threshold_elevation_deg": -34.58420304162247,
+        "event": "darkening",
+        "reference_jd_tt": 2462577.5259533697,
+        "reference_tt": "2030-03-17T00:37:22",
+        "model_jd_tt": 2462577.5281319963,
+        "model_tt": "2030-03-17T00:40:31",
+        "model_minus_reference_minutes": 3.1372223049402237,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 1.4336273074150085
+      },
+      {
+        "site": "Ingenii coast",
+        "threshold_lux": 10.0,
+        "threshold_elevation_deg": -34.58420304162247,
+        "event": "brightening",
+        "reference_jd_tt": 2462585.127264886,
+        "reference_tt": "2030-03-24T15:03:16",
+        "model_jd_tt": 2462585.131918462,
+        "model_tt": "2030-03-24T15:09:58",
+        "model_minus_reference_minutes": 6.701149195432663,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.2056315541267395
+      },
+      {
+        "site": "Ingenii coast",
+        "threshold_lux": 1.0,
+        "threshold_elevation_deg": -47.63851651253469,
+        "event": "darkening",
+        "reference_jd_tt": 2462579.2791185654,
+        "reference_tt": "2030-03-18T18:41:56",
+        "model_jd_tt": 2462579.2799770785,
+        "model_tt": "2030-03-18T18:43:10",
+        "model_minus_reference_minutes": 1.2362589687108994,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 3.825809061527252
+      },
+      {
+        "site": "Ingenii coast",
+        "threshold_lux": 1.0,
+        "threshold_elevation_deg": -47.63851651253469,
+        "event": "brightening",
+        "reference_jd_tt": 2462583.376092852,
+        "reference_tt": "2030-03-22T21:01:34",
+        "model_jd_tt": 2462583.382300608,
+        "model_tt": "2030-03-22T21:10:31",
+        "model_minus_reference_minutes": 8.93916830420494,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.33123940229415894
+      },
+      {
+        "site": "+0N 0E check",
+        "threshold_lux": 100.0,
+        "threshold_elevation_deg": -22.897438941175217,
+        "event": "brightening",
+        "reference_jd_tt": 2462570.6401171284,
+        "reference_tt": "2030-03-10T03:21:46",
+        "model_jd_tt": 2462570.642503584,
+        "model_tt": "2030-03-10T03:25:12",
+        "model_minus_reference_minutes": 3.4364958107471466,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.006718933582305908
+      },
+      {
+        "site": "+0N 0E check",
+        "threshold_lux": 100.0,
+        "threshold_elevation_deg": -22.897438941175217,
+        "event": "darkening",
+        "reference_jd_tt": 2462589.199479764,
+        "reference_tt": "2030-03-28T16:47:15",
+        "model_jd_tt": 2462589.2017225716,
+        "model_tt": "2030-03-28T16:50:29",
+        "model_minus_reference_minutes": 3.2296431809663773,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.004023313522338867
+      },
+      {
+        "site": "+0N 0E check",
+        "threshold_lux": 10.0,
+        "threshold_elevation_deg": -34.58420304162247,
+        "event": "brightening",
+        "reference_jd_tt": 2462569.681086746,
+        "reference_tt": "2030-03-09T04:20:46",
+        "model_jd_tt": 2462569.683413581,
+        "model_tt": "2030-03-09T04:24:07",
+        "model_minus_reference_minutes": 3.3506423234939575,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.005310773849487305
+      },
+      {
+        "site": "+0N 0E check",
+        "threshold_lux": 10.0,
+        "threshold_elevation_deg": -34.58420304162247,
+        "event": "darkening",
+        "reference_jd_tt": 2462590.1575248763,
+        "reference_tt": "2030-03-29T15:46:50",
+        "model_jd_tt": 2462590.1597452005,
+        "model_tt": "2030-03-29T15:50:02",
+        "model_minus_reference_minutes": 3.1972669064998627,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.001971423625946045
+      },
+      {
+        "site": "+0N 0E check",
+        "threshold_lux": 1.0,
+        "threshold_elevation_deg": -47.63851651253469,
+        "event": "darkening",
+        "reference_jd_tt": 2462561.670687792,
+        "reference_tt": "2030-03-01T04:05:47",
+        "model_jd_tt": 2462561.672711148,
+        "model_tt": "2030-03-01T04:08:42",
+        "model_minus_reference_minutes": 2.9136326909065247,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.0006437301635742188
+      },
+      {
+        "site": "+0N 0E check",
+        "threshold_lux": 1.0,
+        "threshold_elevation_deg": -47.63851651253469,
+        "event": "brightening",
+        "reference_jd_tt": 2462568.6100452705,
+        "reference_tt": "2030-03-08T02:38:28",
+        "model_jd_tt": 2462568.612317253,
+        "model_tt": "2030-03-08T02:41:44",
+        "model_minus_reference_minutes": 3.2716546207666397,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 4.023313522338867e-05
+      },
+      {
+        "site": "+0N 0E check",
+        "threshold_lux": 1.0,
+        "threshold_elevation_deg": -47.63851651253469,
+        "event": "darkening",
+        "reference_jd_tt": 2462591.2273213556,
+        "reference_tt": "2030-03-30T17:27:21",
+        "model_jd_tt": 2462591.2295248983,
+        "model_tt": "2030-03-30T17:30:31",
+        "model_minus_reference_minutes": 3.173101544380188,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.0011667609214782715
+      },
+      {
+        "site": "+0N 0E check",
+        "threshold_lux": 0.1,
+        "threshold_elevation_deg": -59.55909386987045,
+        "event": "darkening",
+        "reference_jd_tt": 2462562.648913656,
+        "reference_tt": "2030-03-02T03:34:26",
+        "model_jd_tt": 2462562.650896903,
+        "model_tt": "2030-03-02T03:37:17",
+        "model_minus_reference_minutes": 2.855876013636589,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.01331716775894165
+      },
+      {
+        "site": "+0N 0E check",
+        "threshold_lux": 0.1,
+        "threshold_elevation_deg": -59.55909386987045,
+        "event": "brightening",
+        "reference_jd_tt": 2462567.631931042,
+        "reference_tt": "2030-03-07T03:09:59",
+        "model_jd_tt": 2462567.634171772,
+        "model_tt": "2030-03-07T03:13:12",
+        "model_minus_reference_minutes": 3.2266511768102646,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.005029141902923584
+      },
+      {
+        "site": "+0N 0E check",
+        "threshold_lux": 0.1,
+        "threshold_elevation_deg": -59.55909386987045,
+        "event": "darkening",
+        "reference_jd_tt": 2462592.204163117,
+        "reference_tt": "2030-03-31T16:54:00",
+        "model_jd_tt": 2462592.2063543675,
+        "model_tt": "2030-03-31T16:57:09",
+        "model_minus_reference_minutes": 3.155400976538658,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.0017300248146057129
+      },
+      {
+        "site": "+45N 0E check",
+        "threshold_lux": 100.0,
+        "threshold_elevation_deg": -22.897438941175217,
+        "event": "brightening",
+        "reference_jd_tt": 2462569.6252410836,
+        "reference_tt": "2030-03-09T03:00:21",
+        "model_jd_tt": 2462569.6296972632,
+        "model_tt": "2030-03-09T03:06:46",
+        "model_minus_reference_minutes": 6.416898742318153,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.01999586820602417
+      },
+      {
+        "site": "+45N 0E check",
+        "threshold_lux": 100.0,
+        "threshold_elevation_deg": -22.897438941175217,
+        "event": "darkening",
+        "reference_jd_tt": 2462590.2021255917,
+        "reference_tt": "2030-03-29T16:51:04",
+        "model_jd_tt": 2462590.204846287,
+        "model_tt": "2030-03-29T16:54:59",
+        "model_minus_reference_minutes": 3.9178014546632767,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.5157485604286194
+      },
+      {
+        "site": "+45N 0E check",
+        "threshold_lux": 10.0,
+        "threshold_elevation_deg": -34.58420304162247,
+        "event": "darkening",
+        "reference_jd_tt": 2462562.357667851,
+        "reference_tt": "2030-03-01T20:35:03",
+        "model_jd_tt": 2462562.3588787643,
+        "model_tt": "2030-03-01T20:36:47",
+        "model_minus_reference_minutes": 1.7437154799699783,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 3.825366497039795
+      },
+      {
+        "site": "+45N 0E check",
+        "threshold_lux": 10.0,
+        "threshold_elevation_deg": -34.58420304162247,
+        "event": "brightening",
+        "reference_jd_tt": 2462567.917782147,
+        "reference_tt": "2030-03-07T10:01:36",
+        "model_jd_tt": 2462567.923514384,
+        "model_tt": "2030-03-07T10:09:52",
+        "model_minus_reference_minutes": 8.254421129822731,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.2443760633468628
+      },
+      {
+        "site": "+45N 0E check",
+        "threshold_lux": 10.0,
+        "threshold_elevation_deg": -34.58420304162247,
+        "event": "darkening",
+        "reference_jd_tt": 2462591.901881411,
+        "reference_tt": "2030-03-31T09:38:43",
+        "model_jd_tt": 2462591.903273831,
+        "model_tt": "2030-03-31T09:40:43",
+        "model_minus_reference_minutes": 2.005084678530693,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 3.22798490524292
+      },
+      {
+        "site": "+60N 0E check",
+        "threshold_lux": 100.0,
+        "threshold_elevation_deg": -22.897438941175217,
+        "event": "darkening",
+        "reference_jd_tt": 2462562.3138352153,
+        "reference_tt": "2030-03-01T19:31:55",
+        "model_jd_tt": 2462562.3145703375,
+        "model_tt": "2030-03-01T19:32:59",
+        "model_minus_reference_minutes": 1.0585760325193405,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 4.949681460857391
+      },
+      {
+        "site": "+60N 0E check",
+        "threshold_lux": 100.0,
+        "threshold_elevation_deg": -22.897438941175217,
+        "event": "brightening",
+        "reference_jd_tt": 2462567.9576614294,
+        "reference_tt": "2030-03-07T10:59:02",
+        "model_jd_tt": 2462567.9658589456,
+        "model_tt": "2030-03-07T11:10:50",
+        "model_minus_reference_minutes": 11.804423332214355,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 0.17304271459579468
+      },
+      {
+        "site": "+60N 0E check",
+        "threshold_lux": 100.0,
+        "threshold_elevation_deg": -22.897438941175217,
+        "event": "darkening",
+        "reference_jd_tt": 2462591.8501744373,
+        "reference_tt": "2030-03-31T08:24:15",
+        "model_jd_tt": 2462591.851087707,
+        "model_tt": "2030-03-31T08:25:34",
+        "model_minus_reference_minutes": 1.3151085376739502,
+        "reference_step_minutes": 30,
+        "coarser_reference_step_minutes": 60,
+        "reference_interpolation_change_seconds": 4.2331695556640625
+      }
+    ],
+    "event_count_differences": [],
+    "threshold_timing_span_calendar_tt": [
+      "2030-03-01",
+      "2030-04-03"
+    ],
+    "threshold_event_abs_error_max_minutes": 60.52127167582512,
+    "threshold_interpolation_sensitivity_max_seconds": 5.801497399806976
+  },
+  "reading_rule": "Observed maxima at the saved samples, not rigorous all-time error bounds. Direction discrepancies include geometric/apparent convention differences. Ground brightness is not validated by this check.",
+  "calendar_rule": "Epochs are Gregorian labels on TT. For UTC input, add 32.184 s plus the date's TAI-UTC. Future leap seconds are unspecified; a chosen future UTC offset is a calendar convention, not a validated prediction.",
+  "horizon_rule": "Sun-center crossing of an unobstructed level horizon, Moon-center direction. Terrain, refraction, solar radius and surface parallax are excluded. Near-polar grazing events outside these windows can have larger timing errors."
+}

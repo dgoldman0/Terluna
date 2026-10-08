@@ -1,0 +1,66 @@
+{
+  "schema": "terluna.research.coastal-transport-audit/1",
+  "cloud_map_sha256": "9c9957ec6aec7c3e3c5d94ba69e03e315b7134dbe03c8ae9c343f8947d156bc0",
+  "ground_product_sha256": "008be372cd26b61ad6a166494d46e5c3facf4fe0e75b4142e8816ab26b1838d6",
+  "source_map_scope": [
+    "earth"
+  ],
+  "cloudy_angular_flux": {
+    "mean_lux": 1.8840959133397281,
+    "standard_error_lux": 0.00695151923859758
+  },
+  "clear_angular_flux": {
+    "mean_lux": 1.4979932903992408,
+    "standard_error_lux": 0.005637688093969625
+  },
+  "paired_angular_flux_change": {
+    "mean_lux": 0.38610262294048764,
+    "standard_error_lux": 0.0070984602007879115
+  },
+  "independent_ground_diffuse": {
+    "mean_lux": 1.8688324317309866,
+    "standard_error_lux": 0.018748976807459773
+  },
+  "difference_in_combined_standard_errors": 0.7633193624759087,
+  "patches": {
+    "cloud_bank": {
+      "elevation_range_deg": [
+        15,
+        35
+      ],
+      "azimuth_range_deg": [
+        260,
+        280
+      ],
+      "cloudy_mean_cd_m2": 0.9294013430522602,
+      "clear_mean_cd_m2": 0.6449550039345349,
+      "paired_change": {
+        "mean_cd_m2": 0.2844463391177253,
+        "standard_error_cd_m2": 0.010596585111461125
+      }
+    },
+    "upper_sky": {
+      "elevation_range_deg": [
+        55,
+        80
+      ],
+      "azimuth_range_deg": [
+        240,
+        300
+      ],
+      "cloudy_mean_cd_m2": 0.8464433805660476,
+      "clear_mean_cd_m2": 0.4797093839434306,
+      "paired_change": {
+        "mean_cd_m2": 0.3667339966226171,
+        "standard_error_cd_m2": 0.008885548589329184
+      }
+    }
+  },
+  "producer_sha256": "dc1dfaa80d89fb0d35a8b55adbb9a52ef16f0d064dd39fbab81607fc51a7e8ef",
+  "reading_rule": "Flux integrates raw angular samples with periodic azimuth weights and endpoint continuation; patch means weight samples equally. Ground flux uses an independent seed. Excludes direct beams and retained formal sources from this comparison.",
+  "evidence": "Agreement of two numerical estimators within the same optical scenario; not empirical validation.",
+  "limits": [
+    "Sampling errors omit angular discretization, unresolved cross-ring morphology and particle-optics uncertainty.",
+    "A matching scene/cloud hash is required; no substitute data are admitted."
+  ]
+}

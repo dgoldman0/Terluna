@@ -78,11 +78,11 @@ def test_direct_finite_sun_and_cloud_shadow():
 
 def test_earthlight_context_keeps_phase_and_visibility_separate():
     from .earthlight import context
-    from shared.constants import EARTH_GEOMETRIC_ALBEDO,EARTH_RADIUS,EARTH_MOON_DISTANCE,SYNODIC_MONTH_DAYS
+    from shared.constants import EARTH_VISUAL_PHASE_NORMALISATION,EARTH_RADIUS,EARTH_MOON_DISTANCE,SYNODIC_MONTH_DAYS
     sky=[{'sun_deg':0.,'total_horizontal_lux':100.},{'sun_deg':90.,'total_horizontal_lux':100.}]
     earth=context(0.,0.,SYNODIC_MONTH_DAYS*24/4,sky)
     assert earth['earth_illuminated_fraction']==pytest.approx(1.)
-    assert earth['clear_surface_proxy_lux']==pytest.approx(100*EARTH_GEOMETRIC_ALBEDO*(EARTH_RADIUS/EARTH_MOON_DISTANCE)**2)
+    assert earth['clear_surface_proxy_lux']==pytest.approx(100*EARTH_VISUAL_PHASE_NORMALISATION*(EARTH_RADIUS/EARTH_MOON_DISTANCE)**2)
     far=context(0.,180.,0.,sky)
     assert far['earth_elevation_deg']==pytest.approx(-90.)
     assert far['clear_surface_proxy_lux'] is None

@@ -1,0 +1,6 @@
+Use case: lighting-weather edit, precise colour calibration.
+Input 1 is the photographic EDIT TARGET. Input 2 is its calculated radiance/palette reference. Preserve input 1's cloud geometry, fine ice-cloud texture, water wave geometry, horizon, camera and full 4:3 composition. Make only a restrained colour/exposure correction toward input 2.
+
+The existing photograph is too cool/blue in the upper sky and water. The calculated upper sky is a subdued warm grey/olive, with soft peach/amber at the horizon; the shadowed central cloud bank is muted grey-brown. Warm the upper sky, ice-cloud shadows and sea toward that palette, retaining subtle colour variety and fine structure. Reduce the strongly saturated orange fringe slightly toward input 2's softer amber. Keep roughly the current broad luminance: the upper sky and middle clouds may become about 10% brighter, and the water about 10% dimmer. Do not create new bright cloud rims, solar glints, neon colour bands or blue twilight. Maintain the dark central cloud reflection and warmer lateral reflections.
+
+Keep every object's position and size and the same gentle, broad water waves. No visible Sun or Earth, stars, lightning, boats, added land, people, text, labels, graphics or watermark. High-fidelity natural photographic finish, at the same aspect ratio and highest native resolution available.

@@ -1,4 +1,4 @@
-"""Mean-orbit earthlight context using the existing solar-coloured approximation."""
+"""Mean-orbit earthlight context: the Earth's measured visual phase curve, with sunlight's colour."""
 from __future__ import annotations
 import numpy as np
 from illumination.ephemeris import Site,state
@@ -8,7 +8,8 @@ from shared.constants import SYNODIC_MONTH_DAYS
 def context(latitude_deg,longitude_deg,hours_after_sunset,clear_sky_samples):
     """Screen Earth phase and clear-ground light separately from the solar scene.
 
-    Earth is a Lambert-phase sphere at mean distance, with libration disabled.
+    The Earth follows its measured visual phase curve at mean distance (illumination/ephemeris.py), with
+    libration disabled.
     Scaling the solar sky assumes the same source colour and uses the smaller
     solar disk as a point-source approximation; the returned light is a proxy.
     """

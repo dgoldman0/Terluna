@@ -36,10 +36,14 @@ class EphemerisTests(unittest.TestCase):
     def test_phase_and_earthlight(self):
         st = state(FIXED, SYNODIC * 115 / 360)  # sub-solar longitude 180: Sun opposite the sub-Earth point
         self.assertAlmostEqual(st["earth_illuminated_fraction"], 1.0, places=9)
-        full = K.EARTH_GEOMETRIC_ALBEDO * (K.EARTH_RADIUS / K.EARTH_MOON_DISTANCE) ** 2
+        full = K.EARTH_VISUAL_PHASE_NORMALISATION * (K.EARTH_RADIUS / K.EARTH_MOON_DISTANCE) ** 2
         self.assertAlmostEqual(st["earthlight_ratio"] / full, 1.0, places=9)
-        self.assertAlmostEqual(full, 1.008e-4, delta=0.002e-4)
+        self.assertAlmostEqual(full, 6.32e-5, delta=0.01e-5)
         self.assertAlmostEqual(lambert_phase(math.pi), 0.0, places=12)
+        # The measured curve: a quarter-phase Earth gives 0.258 of a full one's light, a Lambert sphere 0.318.
+        quarter = state(FIXED, SYNODIC * (115 + 90) / 360)
+        self.assertAlmostEqual(quarter["earth_illuminated_fraction"], 0.5, places=6)
+        self.assertAlmostEqual(quarter["earthlight_ratio"] / full, 0.2576, places=3)
         for t in np.linspace(0, SYNODIC, 50):
             st = state(SITE, t)
             self.assertAlmostEqual(st["earth_illuminated_fraction"], (1 + math.cos(st["earth_phase_angle_rad"])) / 2, places=12)

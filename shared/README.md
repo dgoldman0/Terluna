@@ -17,6 +17,12 @@ atmospheric column model and the immersion use a rounded lunar gravity of
 means regenerating the sky atlas, the column set and the A1–A3 references, so
 `LEGACY_MOON_GRAVITY` names the rounded value until that decision is made.
 
+The Earth's visual geometric albedo is 0.242, from Robinson et al.'s (2025)
+synthesis of the observations, with their analytic fit to its phase curve
+(`visual_phase_*` in [constants.json](constants.json)). It replaced the long-quoted
+0.367 on 2026-10-04; [illumination/earthlight](../illumination/earthlight/README.md),
+illumination/ephemeris.py and the immersion follow the same curve.
+
 Historical, byte-pinned models (the April simulator, the September feasibility
 and protection imports) keep their own literals; [research/check.py](../research/check.py)
 reproduces them as they were.

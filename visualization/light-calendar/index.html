@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <meta name="theme-color" content="#0b1020" />
+    <meta
+      name="description"
+      content="What is the sky doing on the Open Moon right now? Days that last two weeks, twilight that glows for days, and Earth hanging in the sky."
+    />
+    <title>Open Moon Skies</title>
+    <link rel="stylesheet" href="explorer.css" />
+    <script type="module" src="explorer.mjs"></script>
+  </head>
+  <body class="loading">
+    <canvas id="sky" aria-hidden="true"></canvas>
+    <div class="veil" aria-hidden="true"></div>
+    <div id="compass" class="compass" aria-hidden="true"></div>
+
+    <header class="bar">
+      <a class="brand" href="https://github.com/dgoldman0/Terluna">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M16 3a13 13 0 0 1 0 26z" fill="currentColor"/></svg>
+        Terluna
+      </a>
+      <a class="quiet-link" href="almanac.html" id="almanac-link">Technical almanac</a>
+    </header>
+
+    <main class="now" aria-live="polite">
+      <button type="button" id="place" class="place" aria-haspopup="dialog">
+        <span id="place-name">Open Moon</span>
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5.5 8l4.5 4.5L14.5 8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <p id="place-latin" class="latin"></p>
+      <h1 id="condition">Loading the sky…</h1>
+      <p id="sentence" class="sentence"></p>
+      <div class="earthline">
+        <canvas id="earth" width="176" height="176" aria-hidden="true"></canvas>
+        <div>
+          <p id="earth-text"></p>
+          <p id="brightness" class="soft"></p>
+        </div>
+      </div>
+    </main>
+
+    <section class="dock" aria-label="The coming month">
+      <div class="timebar">
+        <button type="button" id="play" class="play" aria-label="Play the coming month">
+          <svg class="i-play" viewBox="0 0 20 20" aria-hidden="true"><path d="M6.5 4.5l9 5.5-9 5.5z" fill="currentColor"/></svg>
+          <svg class="i-pause" viewBox="0 0 20 20" aria-hidden="true"><path d="M5.5 4.5h3v11h-3zM11.5 4.5h3v11h-3z" fill="currentColor"/></svg>
+        </button>
+        <div class="track">
+          <div id="track-colours" class="track-colours" aria-hidden="true"></div>
+          <input id="scrub" type="range" min="0" max="1000" value="0" aria-label="Move through the coming month" />
+        </div>
+        <div class="when">
+          <button type="button" id="when-button" class="when-button" aria-haspopup="dialog" aria-expanded="false" aria-controls="picker" title="Choose a date and time">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="4.5" width="14" height="12" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 8.5h14M7 2.8v3.4M13 2.8v3.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            <span id="when"></span>
+          </button>
+          <button type="button" id="back" class="back" hidden>Back to now</button>
+          <div id="picker" class="picker" role="dialog" aria-label="Choose a date and time" hidden>
+            <label for="when-input">Show the sky at</label>
+            <input id="when-input" type="datetime-local" step="60" />
+            <p class="picker-note">Any moment from 2000 to the end of 2500, in your time zone.</p>
+            <div class="picker-actions">
+              <button type="button" id="picker-now">Now</button>
+              <button type="button" id="picker-done" class="primary">Done</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ol id="moments" class="moments" aria-label="Coming up"></ol>
+    </section>
+
+    <p class="foot" id="foot">
+      <span class="long">Clear skies over level ground, computed from Terluna's research on the Open Moon. Earth imagery: NASA.</span>
+      <a href="almanac.html">How it is calculated</a>
+    </p>
+
+    <dialog id="places" class="places" aria-labelledby="places-title">
+      <form method="dialog">
+        <div class="places-head">
+          <h2 id="places-title">Choose a place</h2>
+          <button value="close" class="close" aria-label="Close">×</button>
+        </div>
+        <ul id="place-list"></ul>
+      </form>
+    </dialog>
+
+    <div id="message" class="message" role="alert" hidden></div>
+    <script>
+      if (location.protocol === "file:") {
+        const m = document.getElementById("message");
+        m.hidden = false;
+        m.innerHTML =
+          "<strong>This page needs a small local web server.</strong><br>From the repository, run<br><code>python visualization/light-calendar/build.py</code><br><code>python -m http.server 8080 --directory visualization/light-calendar/dist</code><br>and open <code>http://localhost:8080</code>.";
+        document.getElementById("condition").textContent = "";
+      }
+    </script>
+  </body>
+</html>

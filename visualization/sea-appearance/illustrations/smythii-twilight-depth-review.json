@@ -1,0 +1,101 @@
+{
+  "schema": "terluna.visualization.smythii-depth-study/1",
+  "status": "A separate single-image depth-cue illustration; modest subjective improvement, not a stereoscopic or volumetric reconstruction.",
+  "tool": "Built-in image_gen; one edit pass; no CLI fallback",
+  "generated_source": "/home/kir/.codex/generated_images/01a108bc-550e-7eb2-afc2-22dfcd93f81c/exec-9607413a-151f-4f25-ba0e-c95e1cadd733.png",
+  "selected": {
+    "path": "visualization/sea-appearance/illustrations/smythii-twilight-depth.png",
+    "sha256": "56799290c88e96159ef02a5c2fc24bd1a9c4bb735e264b4ce649404832ba9fea",
+    "native_frame": [
+      1448,
+      1086
+    ]
+  },
+  "first_pass_preserved": "The selected file is the first and only generated depth-study pass, copied byte-for-byte.",
+  "prompt": {
+    "path": "visualization/sea-appearance/illustrations/smythii-twilight-depth-prompt.txt",
+    "sha256": "10171a319c7dc015023d30f1a8fc695ae7c787be905e23e06ba211b263613bd4"
+  },
+  "inputs_in_order": [
+    {
+      "role": "Photographic edit target",
+      "path": "visualization/sea-appearance/illustrations/smythii-twilight-clouds.png",
+      "sha256": "5bed1f7a7cd2beab8f29bae213657cd7561602d1733decf7bdfc1f1f46f70098",
+      "native_frame": [
+        1448,
+        1086
+      ]
+    },
+    {
+      "role": "Calculated composition and broad radiance reference",
+      "path": "visualization/sea-appearance/illustrations/smythii-twilight-clouds-reference.png",
+      "sha256": "0d56e15df0bbf0f7c59f64cb69e26b449537f56988f367420294110e9526abd6",
+      "native_frame": [
+        2560,
+        1920
+      ]
+    },
+    {
+      "role": "Upper-cloud optical-opacity guide; not a depth or brightness map",
+      "path": "visualization/sea-appearance/illustrations/smythii-twilight-clouds-cloud-opacity.png",
+      "sha256": "02c2191672150a02189577b3b8e486438ab3a1fab1c6cfbe9337d6aa5290d15c",
+      "native_frame": [
+        768,
+        576
+      ]
+    }
+  ],
+  "display_reference": {
+    "path": "visualization/sea-appearance/illustrations/smythii-twilight-clouds-display.json",
+    "sha256": "f2f481f627435be406a16fa4255226e884e73c984aac82653096a51b935bee26"
+  },
+  "image_checks": {
+    "path": "visualization/sea-appearance/illustrations/smythii-twilight-depth-image-checks.json",
+    "sha256": "6bc4ec090bac68f94c770af2c8810e3f3b07f28342053fc61d9a9f02218c30d4"
+  },
+  "image_processing": "No image editing or artificial upscaling after generation. Numeric pixel analysis is recorded separately.",
+  "visual_review": [
+    "The upper veils have slightly more visible gaps and translucency above the central cloud bank. Some overlapping folds are easier to distinguish, but the overall improvement is modest and much of the original repeated texture remains.",
+    "The broad central dark cloud region and warmer flanks remain in the original composition. No close low shelf cloud, deep hollow tunnel, giant tower or theatrical light shaft was introduced.",
+    "Foreground water retains long rounded forms and fine ripples, receding toward the horizon. The water geometry is similar to the original; stronger stereo relief was not generated.",
+    "The Sun and Earth remain absent, matching the astronomical scene. No labels, text, borders, added objects or land were found.",
+    "The generated colour remains somewhat redder than the calculated reference. Changes in exposure accompany the depth-cue changes, so this is not a controlled perceptual experiment."
+  ],
+  "measured": {
+    "horizon_fraction": 0.7670349907918969,
+    "reference_horizon_fraction": 0.7697916666666667,
+    "absolute_horizon_difference_px_at_generated_resolution": 2.9937500000000017,
+    "median_linear_display_Y_ratios_to_calculated_reference": {
+      "upper_sky": 0.8917236553303834,
+      "middle_cloud_field": 0.9257782440405932,
+      "water": 1.2701106712231736
+    },
+    "median_linear_display_Y_ratios_to_original_illustration": {
+      "upper_sky": 1.085933550281457,
+      "middle_cloud_field": 1.1962692286113523,
+      "water": 1.1299102915989732
+    }
+  },
+  "reading_rule": "Image-space checks constrain composition and broad displayed light levels. They do not validate cloud distance, wave height, exact perception or increased perceived depth.",
+  "remaining_limits": [
+    "The cloud experiment is a coarse 2-D equatorial section with an assumed cross-ring extent. Image generation fills in unresolved fine morphology; a pleasing overlap is not measured 3-D geometry.",
+    "The selected high cloud is near 60 km altitude and about 176 km along the sightline. The image cannot make that metric scale self-evident without an external distance reference.",
+    "Normal binocular disparity in such distant clouds is tiny. This is a monocular image and cannot reproduce stereo, motion parallax or a surrounding view.",
+    "Against the calculated reference, the upper and middle sky medians are about 11% and 7% low; the water median is about 27% high. No radiometric equivalence is claimed.",
+    "The original scientific scene and original selected image remain unchanged. No new cloud transport, circulation or wave solution was made."
+  ],
+  "validation": {
+    "image_check_command": "python visualization/sea-appearance/coastal_image_review.py --reference visualization/sea-appearance/illustrations/smythii-twilight-clouds-reference.png --display visualization/sea-appearance/illustrations/smythii-twilight-clouds-display.json --image visualization/sea-appearance/illustrations/smythii-twilight-clouds.png --image visualization/sea-appearance/illustrations/smythii-twilight-depth.png --out visualization/sea-appearance/illustrations/smythii-twilight-depth-image-checks.json",
+    "make_check": {
+      "exit_code": 0,
+      "python_passed": 713,
+      "python_skipped": 42,
+      "javascript_suites": "passed",
+      "layer_check": "passed",
+      "research_check": "PASS_WITH_BLOCKED_INPUTS: pre-existing missing protection inputs",
+      "ensemble_check": "passed",
+      "log_sha256": "d4981e48bec16ea54e4717290e327b932c798d5c63b7e250eb728df496655d0c",
+      "scope": "Repository integrity and numerical checks; not a perceptual validation of this illustration."
+    }
+  }
+}

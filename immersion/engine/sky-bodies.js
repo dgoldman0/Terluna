@@ -23,6 +23,16 @@ export function lambertPhase(alpha) {
   return (Math.sin(alpha) + (Math.PI - alpha) * Math.cos(alpha)) / Math.PI;
 }
 
+/** The Earth's measured visual phase curve (illumination/earthlight/model.py): a Henyey-Greenstein lobe at
+ * scattering angle 180 - alpha where the observations reach, a Lambert sphere's shape beyond; one at full phase. */
+export function visualPhase(alpha, k) {
+  const g = k.earth_visual_phase_asymmetry,
+    limit = k.earth_visual_phase_observed_limit_rad;
+  const lobe = (c) => (1 - g * g) / (1 + g * g - 2 * g * c) ** 1.5;
+  const fitted = (a) => lobe(-Math.cos(a)) / lobe(-1);
+  return alpha <= limit ? fitted(alpha) : (fitted(limit) * lambertPhase(alpha)) / lambertPhase(limit);
+}
+
 export class SkyBodies {
   constructor(product) {
     if (product?.schema !== 'terluna.illumination.site-sky/1')
@@ -83,9 +93,11 @@ export class SkyBodies {
       earthFraction: (1 - cosSE) / 2,
       earthPhaseAngle: alpha,
       earthlightRatio:
-        k.earth_geometric_albedo *
+        k.earth_visual_phase_normalisation *
         (k.earth_radius_m / k.earth_moon_distance_m) ** 2 *
-        lambertPhase(alpha),
+        visualPhase(alpha, k),
+      // The disk is shaded as a Lambert sphere; this scales it to the measured curve's brightness.
+      earthDiskPhaseGain: alpha < 1e-9 ? 1 : visualPhase(alpha, k) / Math.max(lambertPhase(alpha), 1e-12),
       celestialToEnu: multiply(multiply(this.basis, eclToBody), this.eqToEcl),
       earthRotation: rad(s.earth_rotation_at_noon_deg) + w.earth * t,
     };

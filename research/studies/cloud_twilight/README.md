@@ -118,7 +118,7 @@ The product retains errors for every entry. The 68–80 h cloud enhancements
 have broad confidence intervals that include the clear reference. Individual
 faint pixels have high sampling noise, so broad angular averages carry the
 strongest evidence. The separate clear Earthlight proxy at this near-side
-site rises from about **4.4 to 7.1 lux** through the sequence; cloud-modified
+site rises from about **2.0 to 3.9 lux** through the sequence, with the Earth's measured brightness; cloud-modified
 Earthlight requires its own source calculation.
 
 At **0°, 75.4°E**, a separate view remains reddish at **39.4 h** after sunset:

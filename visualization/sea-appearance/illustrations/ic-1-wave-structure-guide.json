@@ -1,0 +1,39 @@
+{
+  "schema": "terluna.visualization.sea-wave-guide/1",
+  "inputs": {
+    "research/runs/waves/nearside/dt300/s0768_0816/end.hot": "8bca9e7e29ed0732bad35b82b93a516730883539903130d2ddd9874fbfc5f798",
+    "climate/waves/results/shore_month.json": "3146512489646be0c0868697d2eafbd9998e1c0c390f49207c0fbb4a024efc75"
+  },
+  "producer_sha256": "bb07d86af8fa53465deff7ac2db92926a2a5da7aaaf695c14126c5f1fccf0692",
+  "evidence": "Domain wave realization from the scene's borrowed Nectaris spectrum, turned to the stored local wind. Projected height and filtered slopes guide water structure; the Fresnel contrast treatment is approximate and is not a radiance solution.",
+  "reading_rule": "Use wave scales and perspective as an image-generation reference, with the separate calculated colour guide. No validation of a lunar sea; this scene borrows an Earth-law wave model's lunar spectrum from another sea.",
+  "seed": 20380207,
+  "source_hs_m": 1.235,
+  "guide_geometry_hs_m": 1.2227156162261963,
+  "source_peak_wavelength_m": 33.11,
+  "guide_peak_wavelength_m": 33.111148904871094,
+  "source_mss": 0.02816,
+  "drawn_mss": 0.026988869848842353,
+  "cascades": [
+    [
+      512.0,
+      512
+    ],
+    [
+      31.7,
+      512
+    ],
+    [
+      1.9,
+      512
+    ]
+  ],
+  "omissions": [
+    "full radiance transport",
+    "statistical residual slope below the last tile",
+    "facet shadowing",
+    "terrain reflections",
+    "height variations of short-wave tiles",
+    "wave visibility above the flat horizon"
+  ]
+}

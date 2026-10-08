@@ -1,0 +1,265 @@
+{
+  "schema": "terluna.visualization.coastal-image-checks/1",
+  "reference": {
+    "frame": [
+      2560,
+      1920
+    ],
+    "sha256": "0d56e15df0bbf0f7c59f64cb69e26b449537f56988f367420294110e9526abd6",
+    "expected_geometric_horizon_fraction": 0.7693508172234379,
+    "fitted_horizon_coherent_fraction": 0.7697916666666667,
+    "median_linear_display_Y": {
+      "upper_sky": 0.17022570095308043,
+      "middle_cloud_field": 0.12553037006343207,
+      "water": 0.02697906593001034
+    },
+    "median_linear_display_RGB": {
+      "upper_sky": [
+        0.18782077230067787,
+        0.16826940018969075,
+        0.11443537382697373
+      ],
+      "middle_cloud_field": [
+        0.13843161503245183,
+        0.12743768043564743,
+        0.0822827071298148
+      ],
+      "water": [
+        0.03189603307301153,
+        0.026241221894849898,
+        0.014443843596092545
+      ]
+    }
+  },
+  "images": {
+    "smythii-twilight-clouds.png": {
+      "frame": [
+        1448,
+        1086
+      ],
+      "sha256": "5bed1f7a7cd2beab8f29bae213657cd7561602d1733decf7bdfc1f1f46f70098",
+      "expected_geometric_horizon_fraction": 0.7693508172234379,
+      "fitted_horizon_coherent_fraction": 0.7661141804788214,
+      "median_linear_display_Y": {
+        "upper_sky": 0.1397822953768349,
+        "middle_cloud_field": 0.09714643057900281,
+        "water": 0.030326654949613896
+      },
+      "median_linear_display_RGB": {
+        "upper_sky": [
+          0.17464740365558504,
+          0.13286832155381798,
+          0.10461648409110419
+        ],
+        "middle_cloud_field": [
+          0.12213877222960187,
+          0.09305896284668745,
+          0.07036009569659588
+        ],
+        "water": [
+          0.0382043715953465,
+          0.028426039504420793,
+          0.019382360956935723
+        ]
+      },
+      "horizon_rms_fraction_of_height": 0.003677486187845247,
+      "region_display_luminance_ratios": {
+        "upper_sky": 0.8211585829531306,
+        "middle_cloud_field": 0.7738878689667966,
+        "water": 1.1240809829475913
+      }
+    },
+    "smythii-twilight-depth.png": {
+      "frame": [
+        1448,
+        1086
+      ],
+      "sha256": "56799290c88e96159ef02a5c2fc24bd1a9c4bb735e264b4ce649404832ba9fea",
+      "expected_geometric_horizon_fraction": 0.7693508172234379,
+      "fitted_horizon_coherent_fraction": 0.7670349907918969,
+      "median_linear_display_Y": {
+        "upper_sky": 0.15179428428505762,
+        "middle_cloud_field": 0.11621328557108998,
+        "water": 0.03426639953733968
+      },
+      "median_linear_display_RGB": {
+        "upper_sky": [
+          0.17788841598362912,
+          0.14702726649759498,
+          0.11953842798834562
+        ],
+        "middle_cloud_field": [
+          0.14995978981060856,
+          0.10946171077829933,
+          0.08021982031446832
+        ],
+        "water": [
+          0.042311410620809675,
+          0.033104766570885055,
+          0.024157632448504756
+        ]
+      },
+      "horizon_rms_fraction_of_height": 0.002756675874769799,
+      "region_display_luminance_ratios": {
+        "upper_sky": 0.8917236553303834,
+        "middle_cloud_field": 0.9257782440405932,
+        "water": 1.2701106712231736
+      }
+    },
+    "smythii-twilight-clean-first-generated.png": {
+      "frame": [
+        1448,
+        1086
+      ],
+      "sha256": "c935335ad63216d05cf85f924af2fb0cf019e0573fc2d9a8a21785e1d627f730",
+      "expected_geometric_horizon_fraction": 0.7693508172234379,
+      "fitted_horizon_coherent_fraction": 0.7670349907918969,
+      "median_linear_display_Y": {
+        "upper_sky": 0.14643080427831343,
+        "middle_cloud_field": 0.12548750371446146,
+        "water": 0.03128571184553589
+      },
+      "median_linear_display_RGB": {
+        "upper_sky": [
+          0.15292615199615017,
+          0.14412847085805777,
+          0.14126329114027164
+        ],
+        "middle_cloud_field": [
+          0.1559264637078274,
+          0.11953842798834562,
+          0.09989872824711389
+        ],
+        "water": [
+          0.03560131487502034,
+          0.030713443732993635,
+          0.02518685962736163
+        ]
+      },
+      "horizon_rms_fraction_of_height": 0.002756675874769799,
+      "region_display_luminance_ratios": {
+        "upper_sky": 0.8602156046851842,
+        "middle_cloud_field": 0.9996585181024406,
+        "water": 1.1596291705093846
+      }
+    },
+    "clean-second-generated.png": {
+      "frame": [
+        1448,
+        1086
+      ],
+      "sha256": "f2aa5fee5739176360d2406ea19f70a8a354a4fd625a4e0a3370d1ed1c228166",
+      "expected_geometric_horizon_fraction": 0.7693508172234379,
+      "fitted_horizon_coherent_fraction": 0.7670349907918969,
+      "median_linear_display_Y": {
+        "upper_sky": 0.15043120487786854,
+        "middle_cloud_field": 0.12858786786791576,
+        "water": 0.03393324566906372
+      },
+      "median_linear_display_RGB": {
+        "upper_sky": [
+          0.14995978981060856,
+          0.14995978981060856,
+          0.1559264637078274
+        ],
+        "middle_cloud_field": [
+          0.162029375639111,
+          0.12213877222960187,
+          0.10461648409110419
+        ],
+        "water": [
+          0.03954623527673283,
+          0.033104766570885055,
+          0.028426039504420793
+        ]
+      },
+      "horizon_rms_fraction_of_height": 0.002756675874769799,
+      "region_display_luminance_ratios": {
+        "upper_sky": 0.883716172326599,
+        "middle_cloud_field": 1.024356638181969,
+        "water": 1.2577620647465728
+      }
+    },
+    "clean-third-generated.png": {
+      "frame": [
+        1448,
+        1086
+      ],
+      "sha256": "d3666037480de723e67200c21b7bcacb0d2ddf5f822c178bb2dc8498cb4adfdd",
+      "expected_geometric_horizon_fraction": 0.7693508172234379,
+      "fitted_horizon_coherent_fraction": 0.7670349907918969,
+      "median_linear_display_Y": {
+        "upper_sky": 0.1394450202145372,
+        "middle_cloud_field": 0.12275276893843376,
+        "water": 0.036550456391542196
+      },
+      "median_linear_display_RGB": {
+        "upper_sky": [
+          0.14126329114027164,
+          0.13843161503245183,
+          0.14412847085805777
+        ],
+        "middle_cloud_field": [
+          0.1559264637078274,
+          0.11443537382697373,
+          0.09758734714186246
+        ],
+        "water": [
+          0.046665086336880095,
+          0.03433980680868217,
+          0.026241221894849898
+        ]
+      },
+      "horizon_rms_fraction_of_height": 0.002756675874769799,
+      "region_display_luminance_ratios": {
+        "upper_sky": 0.8191772419428759,
+        "middle_cloud_field": 0.9778730746703387,
+        "water": 1.3547710097288823
+      }
+    },
+    "smythii-twilight-clean.png": {
+      "frame": [
+        1448,
+        1086
+      ],
+      "sha256": "6062c8b85271dd84823cd122bed8705c1d028d352c30dbda0cff1766ef53c027",
+      "expected_geometric_horizon_fraction": 0.7693508172234379,
+      "fitted_horizon_coherent_fraction": 0.7679558011049724,
+      "median_linear_display_Y": {
+        "upper_sky": 0.12354782431721668,
+        "middle_cloud_field": 0.10783826902325455,
+        "water": 0.020248216666727402
+      },
+      "median_linear_display_RGB": {
+        "upper_sky": [
+          0.11443537382697373,
+          0.12213877222960187,
+          0.14995978981060856
+        ],
+        "middle_cloud_field": [
+          0.1301364766903643,
+          0.1022417330881013,
+          0.09305896284668745
+        ],
+        "water": [
+          0.02217388479338738,
+          0.019382360956935723,
+          0.019382360956935723
+        ]
+      },
+      "horizon_rms_fraction_of_height": 0.0018358655616942385,
+      "region_display_luminance_ratios": {
+        "upper_sky": 0.725788312960276,
+        "middle_cloud_field": 0.8590611894855605,
+        "water": 0.7505158525226837
+      }
+    }
+  },
+  "method": "Coherent row-mean colour edge in the known horizon band and robust joint Earth-limb centre/radius fit; registered interior ranks; fixed-region linear display luminance.",
+  "limits": [
+    "Image-space screens only; no absolute photometry, human-vision validation or recovered wave height.",
+    "Cloud microtexture and cross-ring morphology are illustrative; the cloud experiment does not resolve them.",
+    "Limb fits can respond to glare and low pixel count; interpret together with visual inspection."
+  ],
+  "producer_sha256": "f2f3f66f1b0a832dc78756e88149a7b7802f4892c0aa288f5ff6d983fee99a4e"
+}

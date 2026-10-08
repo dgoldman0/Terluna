@@ -1,0 +1,189 @@
+{
+  "schema": "terluna.visualization.generated-sea-review/1",
+  "candidate": "exec-0beb938f-b8fc-480f-9f87-b805d96b8499.png",
+  "native_image_size": [
+    1672,
+    941
+  ],
+  "waterline_fraction": 0.44952,
+  "target_nominal_horizon_fraction": 0.45343,
+  "skyline": [
+    {
+      "x_at_1920": 0,
+      "target_y_at_1080": 412.7,
+      "observed_y_at_1080": 409.73,
+      "difference_px_at_1080": -2.97
+    },
+    {
+      "x_at_1920": 120,
+      "target_y_at_1080": 392.7,
+      "observed_y_at_1080": 387.93,
+      "difference_px_at_1080": -4.77
+    },
+    {
+      "x_at_1920": 240,
+      "target_y_at_1080": 377.7,
+      "observed_y_at_1080": 373.01,
+      "difference_px_at_1080": -4.69
+    },
+    {
+      "x_at_1920": 360,
+      "target_y_at_1080": 366.7,
+      "observed_y_at_1080": 361.53,
+      "difference_px_at_1080": -5.17
+    },
+    {
+      "x_at_1920": 480,
+      "target_y_at_1080": 357.7,
+      "observed_y_at_1080": 352.35,
+      "difference_px_at_1080": -5.35
+    },
+    {
+      "x_at_1920": 600,
+      "target_y_at_1080": 357.7,
+      "observed_y_at_1080": 352.35,
+      "difference_px_at_1080": -5.35
+    },
+    {
+      "x_at_1920": 720,
+      "target_y_at_1080": 349.7,
+      "observed_y_at_1080": 345.46,
+      "difference_px_at_1080": -4.24
+    },
+    {
+      "x_at_1920": 840,
+      "target_y_at_1080": 343.7,
+      "observed_y_at_1080": 338.58,
+      "difference_px_at_1080": -5.12
+    },
+    {
+      "x_at_1920": 960,
+      "target_y_at_1080": 344.7,
+      "observed_y_at_1080": 339.72,
+      "difference_px_at_1080": -4.98
+    },
+    {
+      "x_at_1920": 1079,
+      "target_y_at_1080": 336.7,
+      "observed_y_at_1080": 332.84,
+      "difference_px_at_1080": -3.86
+    },
+    {
+      "x_at_1920": 1199,
+      "target_y_at_1080": 322.7,
+      "observed_y_at_1080": 316.77,
+      "difference_px_at_1080": -5.93
+    },
+    {
+      "x_at_1920": 1319,
+      "target_y_at_1080": 315.7,
+      "observed_y_at_1080": 309.88,
+      "difference_px_at_1080": -5.82
+    },
+    {
+      "x_at_1920": 1439,
+      "target_y_at_1080": 321.7,
+      "observed_y_at_1080": 316.77,
+      "difference_px_at_1080": -4.93
+    },
+    {
+      "x_at_1920": 1559,
+      "target_y_at_1080": 324.7,
+      "observed_y_at_1080": 320.21,
+      "difference_px_at_1080": -4.49
+    },
+    {
+      "x_at_1920": 1679,
+      "target_y_at_1080": 327.7,
+      "observed_y_at_1080": 322.51,
+      "difference_px_at_1080": -5.19
+    },
+    {
+      "x_at_1920": 1799,
+      "target_y_at_1080": 350.7,
+      "observed_y_at_1080": 348.91,
+      "difference_px_at_1080": -1.79
+    },
+    {
+      "x_at_1920": 1919,
+      "target_y_at_1080": 374.7,
+      "observed_y_at_1080": 370.71,
+      "difference_px_at_1080": -3.99
+    }
+  ],
+  "maximum_skyline_difference_px_at_1080": 5.93,
+  "colour_samples": [
+    {
+      "location": "top of frame, centre",
+      "target_srgb": "#c8eae9",
+      "observed_patch_median_srgb": "#bee4e6",
+      "centre_third_strip_linear_mean_encoded_srgb": "#bfe5e7"
+    },
+    {
+      "location": "15 degrees up, centre",
+      "target_srgb": "#cbece7",
+      "observed_patch_median_srgb": "#c2e6e5",
+      "centre_third_strip_linear_mean_encoded_srgb": "#c3e6e6"
+    },
+    {
+      "location": "8 degrees up, centre",
+      "target_srgb": "#d8eddc",
+      "observed_patch_median_srgb": "#d1e6db",
+      "centre_third_strip_linear_mean_encoded_srgb": "#d1e6db"
+    },
+    {
+      "location": "just below the horizon, centre",
+      "target_srgb": "#8ea29d",
+      "observed_patch_median_srgb": "#8a9c9d",
+      "centre_third_strip_linear_mean_encoded_srgb": "#899c9c"
+    },
+    {
+      "location": "1 degree down, centre",
+      "target_srgb": "#8da09b",
+      "observed_patch_median_srgb": "#859697",
+      "centre_third_strip_linear_mean_encoded_srgb": "#849596"
+    },
+    {
+      "location": "3 degrees down, centre",
+      "target_srgb": "#879994",
+      "observed_patch_median_srgb": "#849697",
+      "centre_third_strip_linear_mean_encoded_srgb": "#7c8c8c"
+    },
+    {
+      "location": "8 degrees down, centre",
+      "target_srgb": "#788883",
+      "observed_patch_median_srgb": "#5e6c6b",
+      "centre_third_strip_linear_mean_encoded_srgb": "#626f6e"
+    },
+    {
+      "location": "bottom of frame, centre",
+      "target_srgb": "#505e5b",
+      "observed_patch_median_srgb": "#4f5b58",
+      "centre_third_strip_linear_mean_encoded_srgb": "#525e5c"
+    }
+  ],
+  "method": "Warm-land colour threshold locates the skyline and last land row; median across seven columns at each stored profile sample. Colours are local patch medians and the linear-RGB mean of a centre-third strip. These approximate display-space measurements do not test radiometric accuracy; a single wave realization need not equal the statistical sea average. The waterline is compared with the nominal horizon, not a full terrain-and-wave intersection solution.",
+  "candidate_saved_file": "ic-1-ingenii-noon.png",
+  "candidate_sha256": "f8ab02295f70b78cb815041903b117f16d18b1bbbf1dc3c0c222b4020686186e",
+  "evidence": "Computational display-space comparison plus visual inspection, not physical validation of the generated image.",
+  "selection": "First IC-1 illustration, with outstanding colour and physical-rendering limits recorded in ic-1-final-review.json.",
+  "visual_review": {
+    "framing": "Low viewing position and broad coast profile retained. Measured maximum skyline discrepancy is 5.93 pixels at 1080px image height. Waterline is 44.95% down versus the nominal 45.34% horizon; the comparison does not solve wave/shore intersection.",
+    "lighting": "Visible slopes are broadly front-lit, consistent with the 54.2-degree-high Sun behind the viewer. No visible Sun, Earth, stars or false direct-sun glitter path. Absolute illuminance cannot be inferred from a generated display image.",
+    "shadows": "Shallow relief shadows have diffuse fill rather than black interiors or long low-Sun shadows. Their precise geometry and direction are not validated: local relief is generated and the guide has no cast-shadow solution.",
+    "atmosphere": "Pale cyan upper sky and paler cream-green near-horizon gradient retained, with gently reduced distant-land contrast. The selected sky remains slightly darker than the reference. Haze is an illustrative rendering of the supplied transmittance, not a solved scattering image.",
+    "wave_structure": "The broad undulations and finer ripples are inherited from the projected domain-wave guide and water component. Broad wave scale decreases with distance; no breaking surf or foam was introduced. The guide, not the generated image, has a measured Hs of 1.223 m and peak wavelength of 33.111 m. A single picture does not validate Hs, period, mean-square slope or propagation direction.",
+    "colour": "Foreground centre-third strip encodes to #525e5c, close to the #505e5b target. Middle water at 8 degrees down remains #626f6e versus #788883, and the near-horizon water has a slight blue bias. Wave-facet variation and the statistical source mean differ, but this residual mismatch is not dismissed as proof of agreement.",
+    "materials_and_detail": "Terrain rebuilt after earlier waxy-looking generations. The selected version has more irregular matte rock/regolith detail. Only the broad silhouette is constrained; internal rock forms and slope details are illustrative and can depart from the source DEM.",
+    "composition": "No obvious mask seams, inserted panels or disconnected coast/water geometry at the full frame view. Water texture remains generated rather than a pixel-exact domain render. Shore reflections and wave/terrain occlusion are not solved by these guides.",
+    "ecology": "The omission of visible plants is the optical-study placeholder stated in the revised scene text. Productive water composition is a biosphere design guess. This image is not a depiction of an established mature barren world.",
+    "image_content": "No visible text, numbers, scene labels, watermarks, borders, UI, clouds, celestial disks, people, craft or buildings."
+  },
+  "remaining_limits": [
+    "Middle-water average remains darker than the scene swatch; sky and near-horizon water also differ modestly.",
+    "Generated terrain microgeometry and wave phases are illustrative, not measured geography or solved water geometry.",
+    "Cast shadows, full spectral transport, terrain reflections, and wave visibility above the flat-horizon guide were not computed.",
+    "The wave spectrum is the study's borrowed Nectaris case, not a validated local Ingenii sea state.",
+    "Native output is 1672 by 941; no artificial upscaling or claim of native 4K."
+  ]
+}

@@ -1,0 +1,10 @@
+Use case: precise compositing and lighting calibration.
+Input 1 is the photographic EDIT TARGET. Input 2 is the authoritative calculated composition and display-brightness reference. Keep the rich photographic texture from input 1 while bringing its framing and diffuse illumination into agreement with input 2. Preserve portrait 4:5 framing.
+
+LOCK EARTH: keep input 1's Earth disk exactly the same size, shape, position, geographic/cloud texture, colour, phase, glow and brightness. Its size is already correct. Do not enlarge, shrink, move or redraw it. Its centre remains at x=56.4435%, y=17.5376% of the canvas.
+
+Correct the sea horizon to y=84.76% of the canvas, as in input 2. The current photo's horizon is too high. Extend the low sky/haze downward and rebuild the lower water strip to occupy only the final roughly 15% of the frame. Keep the eye-level view and the small, gentle ripples, with the same warm broken reflection below Earth. No large waves or foam.
+
+Correct the diffuse illumination: the current sky and water are much darker and bluer than the computed scene. Raise the upper sky's broad linear-light level by roughly threefold, the middle cloud field by roughly one third, and the non-glitter water by roughly 80%, matching input 2 rather than making a dramatic dark-night exposure. This is a global-looking reduction of exaggerated contrast; retain fine texture and believable shaded folds. The upper sky should be a muted warm grey, the cloud layers softly warm grey, and the low sky/water subdued blue-grey, following input 2. Keep the reflected Earth highlights controlled. No selective bright rim lighting, new light sources or blanket white fog.
+
+Preserve the overall high ice-cloud band and fine feathery structure of input 1, but let the lower contrast make it softly layered as in the reference. Do not add cloud towers or new cloud systems. Keep Earth unobscured. No Sun, extra planets, stars, aurora, land, boats, people, text, labels, graphics, border or watermark. Clean immersive high-fidelity photographic finish at the highest native resolution available.

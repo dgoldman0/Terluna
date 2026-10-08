@@ -8,18 +8,20 @@
       "research/studies/cloud_twilight/results/evening_scenes_history.json": "78265644a6f16c455ae1a4feb6a3648f08334a8b73d9ed44edfcb63c371af50a",
       "research/studies/cloud_twilight/results/evening_scenes_sensitivity.json": "5dcd7c38e453adc3abb3cf5b2e616634e6cac3d67ace830b7d92d1f9a47bd26a",
       "research/studies/cloud_twilight/results/evening_scenes_deep.json": "c3d5f9de8a48112adf95349e3d1815ba9924022c7fcaf36fa31b3949a4b43878",
-      "illumination/cloud_light/earthlight.py": "d7dfdcf3e099868d29e8dd44312d3b7c2cbedb5cbc162b755a7b53f71c836a92",
-      "illumination/ephemeris.py": "831a0127bf8cd283666cbc740020a8dfc021226e94cb294f7bf14181b1bc0e76",
+      "illumination/cloud_light/earthlight.py": "1b58770c7a7331d65d5184edc97ced0c8ef3b11bd0df01eecfb92a86c2c339c3",
+      "illumination/ephemeris.py": "96e93bd0ba3157686ab815b1b29bba5b91032f3c9a164693cd59bb761aabe01d",
       "illumination/sky/results/solved_sky.json": "a94333cd71a83169df57796cf199b06ec4efff12b1d1f2f9f9ac07bec01f7c6a"
     },
     "constants": {
       "ANOMALISTIC_MONTH_DAYS": 27.55455,
       "DRACONIC_MONTH_DAYS": 27.212221,
-      "EARTH_GEOMETRIC_ALBEDO": 0.367,
       "EARTH_MOON_DISTANCE": 384400000.0,
       "EARTH_OBLIQUITY_DEG": 23.4393,
       "EARTH_RADIUS": 6371000.0,
       "EARTH_SIDEREAL_DAY_S": 86164.0905,
+      "EARTH_VISUAL_PHASE_ASYMMETRY": -0.33,
+      "EARTH_VISUAL_PHASE_NORMALISATION": 0.23,
+      "EARTH_VISUAL_PHASE_OBSERVED_LIMIT_DEG": 144.0,
       "LIBRATION_LATITUDE_DEG": 6.7,
       "LIBRATION_LONGITUDE_DEG": 7.9,
       "MOON_RADIUS": 1737400.0,
@@ -189,7 +191,7 @@
       "earthlight_context": {
         "earth_elevation_deg": -56.002199999999995,
         "earth_illuminated_fraction": 0.21553612279311318,
-        "source_ratio": 8.761551612943714e-06,
+        "source_ratio": 1.0506973795759753e-05,
         "clear_surface_proxy_lux": null,
         "reading_rule": "Separate clear-atmosphere, solar-coloured Earth proxy. Cloud attenuation and reflection, Earth spectrum, larger angular disk and libration require a separate Earth-source render. The surface proxy is evaluated where Earth is above the horizon."
       }
@@ -373,8 +375,8 @@
       "earthlight_context": {
         "earth_elevation_deg": 70.27530000000003,
         "earth_illuminated_fraction": 0.7493762659641585,
-        "source_ratio": 6.131079596588669e-05,
-        "clear_surface_proxy_lux": 4.909276520342197,
+        "source_ratio": 2.759878122622971e-05,
+        "clear_surface_proxy_lux": 2.2098889197161484,
         "reading_rule": "Separate clear-atmosphere, solar-coloured Earth proxy. Cloud attenuation and reflection, Earth spectrum, larger angular disk and libration require a separate Earth-source render. The surface proxy is evaluated where Earth is above the horizon."
       }
     },
@@ -557,8 +559,8 @@
       "earthlight_context": {
         "earth_elevation_deg": 14.570499999999996,
         "earth_illuminated_fraction": 0.08834391309572542,
-        "source_ratio": 2.2674140316382523e-06,
-        "clear_surface_proxy_lux": 0.036197943709775124,
+        "source_ratio": 8.024062141661122e-06,
+        "clear_surface_proxy_lux": 0.12809947617627102,
         "reading_rule": "Separate clear-atmosphere, solar-coloured Earth proxy. Cloud attenuation and reflection, Earth spectrum, larger angular disk and libration require a separate Earth-source render. The surface proxy is evaluated where Earth is above the horizon."
       }
     },
@@ -741,8 +743,8 @@
       "earthlight_context": {
         "earth_elevation_deg": 76.61890000000001,
         "earth_illuminated_fraction": 0.4288704387645309,
-        "source_ratio": 2.5244134461428754e-05,
-        "clear_surface_proxy_lux": 2.125166750577364,
+        "source_ratio": 1.4405071900295757e-05,
+        "clear_surface_proxy_lux": 1.2126848670117645,
         "reading_rule": "Separate clear-atmosphere, solar-coloured Earth proxy. Cloud attenuation and reflection, Earth spectrum, larger angular disk and libration require a separate Earth-source render. The surface proxy is evaluated where Earth is above the horizon."
       }
     },
@@ -902,8 +904,8 @@
       "earthlight_context": {
         "earth_elevation_deg": 45.29890216313752,
         "earth_illuminated_fraction": 0.16736431687457792,
-        "source_ratio": 5.962842612017545e-06,
-        "clear_surface_proxy_lux": 0.3327895565960007,
+        "source_ratio": 9.866271368359534e-06,
+        "clear_surface_proxy_lux": 0.5506420825722986,
         "reading_rule": "Separate clear-atmosphere, solar-coloured Earth proxy. Cloud attenuation and reflection, Earth spectrum, larger angular disk and libration require a separate Earth-source render. The surface proxy is evaluated where Earth is above the horizon."
       }
     },
@@ -1086,7 +1088,7 @@
       "earthlight_context": {
         "earth_elevation_deg": -45.888321159107704,
         "earth_illuminated_fraction": 0.23780043702848658,
-        "source_ratio": 1.0179520302241646e-05,
+        "source_ratio": 1.0826913665179575e-05,
         "clear_surface_proxy_lux": null,
         "reading_rule": "Separate clear-atmosphere, solar-coloured Earth proxy. Cloud attenuation and reflection, Earth spectrum, larger angular disk and libration require a separate Earth-source render. The surface proxy is evaluated where Earth is above the horizon."
       }
@@ -1272,8 +1274,8 @@
       "earthlight_context": {
         "earth_elevation_deg": 70.27530000000003,
         "earth_illuminated_fraction": 0.7019493157182984,
-        "source_ratio": 5.5103566652313726e-05,
-        "clear_surface_proxy_lux": 4.412251410075178,
+        "source_ratio": 2.4579876042653746e-05,
+        "clear_surface_proxy_lux": 1.9681592194017858,
         "reading_rule": "Separate clear-atmosphere, solar-coloured Earth proxy. Cloud attenuation and reflection, Earth spectrum, larger angular disk and libration require a separate Earth-source render. The surface proxy is evaluated where Earth is above the horizon."
       }
     },
@@ -1456,8 +1458,8 @@
       "earthlight_context": {
         "earth_elevation_deg": 70.27530000000003,
         "earth_illuminated_fraction": 0.7493762659641585,
-        "source_ratio": 6.131079596588669e-05,
-        "clear_surface_proxy_lux": 4.909276520342197,
+        "source_ratio": 2.759878122622971e-05,
+        "clear_surface_proxy_lux": 2.2098889197161484,
         "reading_rule": "Separate clear-atmosphere, solar-coloured Earth proxy. Cloud attenuation and reflection, Earth spectrum, larger angular disk and libration require a separate Earth-source render. The surface proxy is evaluated where Earth is above the horizon."
       }
     },
@@ -1640,8 +1642,8 @@
       "earthlight_context": {
         "earth_elevation_deg": 70.27530000000003,
         "earth_illuminated_fraction": 0.7939835287173973,
-        "source_ratio": 6.745316559586479e-05,
-        "clear_surface_proxy_lux": 5.401108187647454,
+        "source_ratio": 3.104851296361695e-05,
+        "clear_surface_proxy_lux": 2.4861157530663056,
         "reading_rule": "Separate clear-atmosphere, solar-coloured Earth proxy. Cloud attenuation and reflection, Earth spectrum, larger angular disk and libration require a separate Earth-source render. The surface proxy is evaluated where Earth is above the horizon."
       }
     },
@@ -1824,8 +1826,8 @@
       "earthlight_context": {
         "earth_elevation_deg": 70.27530000000003,
         "earth_illuminated_fraction": 0.8352667314372715,
-        "source_ratio": 7.341927654612455e-05,
-        "clear_surface_proxy_lux": 5.878826474360992,
+        "source_ratio": 3.493406564889949e-05,
+        "clear_surface_proxy_lux": 2.797239630450374,
         "reading_rule": "Separate clear-atmosphere, solar-coloured Earth proxy. Cloud attenuation and reflection, Earth spectrum, larger angular disk and libration require a separate Earth-source render. The surface proxy is evaluated where Earth is above the horizon."
       }
     },
@@ -2008,8 +2010,8 @@
       "earthlight_context": {
         "earth_elevation_deg": 70.27530000000003,
         "earth_illuminated_fraction": 0.8727590865972518,
-        "source_ratio": 7.909309201199589e-05,
-        "clear_surface_proxy_lux": 6.333140084362969,
+        "source_ratio": 3.9221381616653475e-05,
+        "clear_surface_proxy_lux": 3.140533487334791,
         "reading_rule": "Separate clear-atmosphere, solar-coloured Earth proxy. Cloud attenuation and reflection, Earth spectrum, larger angular disk and libration require a separate Earth-source render. The surface proxy is evaluated where Earth is above the horizon."
       }
     },
@@ -2192,8 +2194,8 @@
       "earthlight_context": {
         "earth_elevation_deg": 70.27530000000003,
         "earth_illuminated_fraction": 0.9060366696329666,
-        "source_ratio": 8.435579867584906e-05,
-        "clear_surface_proxy_lux": 6.754535400657312,
+        "source_ratio": 4.381739313613734e-05,
+        "clear_surface_proxy_lux": 3.5085452067125416,
         "reading_rule": "Separate clear-atmosphere, solar-coloured Earth proxy. Cloud attenuation and reflection, Earth spectrum, larger angular disk and libration require a separate Earth-source render. The surface proxy is evaluated where Earth is above the horizon."
       }
     },
@@ -2376,8 +2378,8 @@
       "earthlight_context": {
         "earth_elevation_deg": 70.27530000000003,
         "earth_illuminated_fraction": 0.9347232122403423,
-        "source_ratio": 8.908776815972697e-05,
-        "clear_surface_proxy_lux": 7.1334335427578175,
+        "source_ratio": 4.8550135108989224e-05,
+        "clear_surface_proxy_lux": 3.88750520353084,
         "reading_rule": "Separate clear-atmosphere, solar-coloured Earth proxy. Cloud attenuation and reflection, Earth spectrum, larger angular disk and libration require a separate Earth-source render. The surface proxy is evaluated where Earth is above the horizon."
       }
     }
@@ -2562,8 +2564,8 @@
       "earthlight_context": {
         "earth_elevation_deg": 76.61890000000001,
         "earth_illuminated_fraction": 0.4288704387645309,
-        "source_ratio": 2.5244134461428754e-05,
-        "clear_surface_proxy_lux": 2.125166750577364,
+        "source_ratio": 1.4405071900295757e-05,
+        "clear_surface_proxy_lux": 1.2126848670117645,
         "reading_rule": "Separate clear-atmosphere, solar-coloured Earth proxy. Cloud attenuation and reflection, Earth spectrum, larger angular disk and libration require a separate Earth-source render. The surface proxy is evaluated where Earth is above the horizon."
       }
     },
@@ -2723,8 +2725,8 @@
       "earthlight_context": {
         "earth_elevation_deg": 76.61890000000001,
         "earth_illuminated_fraction": 0.4288704387645309,
-        "source_ratio": 2.5244134461428754e-05,
-        "clear_surface_proxy_lux": 2.125166750577364,
+        "source_ratio": 1.4405071900295757e-05,
+        "clear_surface_proxy_lux": 1.2126848670117645,
         "reading_rule": "Separate clear-atmosphere, solar-coloured Earth proxy. Cloud attenuation and reflection, Earth spectrum, larger angular disk and libration require a separate Earth-source render. The surface proxy is evaluated where Earth is above the horizon."
       }
     },
@@ -2907,8 +2909,8 @@
       "earthlight_context": {
         "earth_elevation_deg": 76.61890000000001,
         "earth_illuminated_fraction": 0.4288704387645309,
-        "source_ratio": 2.5244134461428754e-05,
-        "clear_surface_proxy_lux": 2.125166750577364,
+        "source_ratio": 1.4405071900295757e-05,
+        "clear_surface_proxy_lux": 1.2126848670117645,
         "reading_rule": "Separate clear-atmosphere, solar-coloured Earth proxy. Cloud attenuation and reflection, Earth spectrum, larger angular disk and libration require a separate Earth-source render. The surface proxy is evaluated where Earth is above the horizon."
       }
     },
@@ -3091,8 +3093,8 @@
       "earthlight_context": {
         "earth_elevation_deg": 76.61890000000001,
         "earth_illuminated_fraction": 0.4288704387645309,
-        "source_ratio": 2.5244134461428754e-05,
-        "clear_surface_proxy_lux": 2.125166750577364,
+        "source_ratio": 1.4405071900295757e-05,
+        "clear_surface_proxy_lux": 1.2126848670117645,
         "reading_rule": "Separate clear-atmosphere, solar-coloured Earth proxy. Cloud attenuation and reflection, Earth spectrum, larger angular disk and libration require a separate Earth-source render. The surface proxy is evaluated where Earth is above the horizon."
       }
     },
@@ -3275,8 +3277,8 @@
       "earthlight_context": {
         "earth_elevation_deg": 76.61890000000001,
         "earth_illuminated_fraction": 0.4288704387645309,
-        "source_ratio": 2.5244134461428754e-05,
-        "clear_surface_proxy_lux": 2.125166750577364,
+        "source_ratio": 1.4405071900295757e-05,
+        "clear_surface_proxy_lux": 1.2126848670117645,
         "reading_rule": "Separate clear-atmosphere, solar-coloured Earth proxy. Cloud attenuation and reflection, Earth spectrum, larger angular disk and libration require a separate Earth-source render. The surface proxy is evaluated where Earth is above the horizon."
       }
     }
@@ -3461,7 +3463,7 @@
       "earthlight_context": {
         "earth_elevation_deg": -23.094700000000007,
         "earth_illuminated_fraction": 0.8338487605366279,
-        "source_ratio": 7.32096194696151e-05,
+        "source_ratio": 3.478738999349381e-05,
         "clear_surface_proxy_lux": null,
         "reading_rule": "Separate clear-atmosphere, solar-coloured Earth proxy. Cloud attenuation and reflection, Earth spectrum, larger angular disk and libration require a separate Earth-source render. The surface proxy is evaluated where Earth is above the horizon."
       }

@@ -1,0 +1,64 @@
+{
+  "schema": "terluna.visualization.nubium-visibility-review/1",
+  "measurement_rule": "Display-space comparison at 1024 by 1536. Disk edge estimated by strongest radial luminance fall near the predicted ellipse; texture and halo can shift this estimator. These are image checks, not recovered world radiometry.",
+  "images": {
+    "calculated": {
+      "native_frame": [
+        2048,
+        3072
+      ],
+      "edge_radius_scale_p10_median_p90": [
+        0.9544999999999999,
+        0.9949999999999999,
+        1.025
+      ],
+      "horizon_row_on_1536_image": 999.5,
+      "sea_linear_srgb_Y_median": 0.009230928909379764,
+      "sky_row_400_linear_Y_standard_deviation": 9.702764973778676e-06
+    },
+    "generated_first": {
+      "native_frame": [
+        1024,
+        1536
+      ],
+      "edge_radius_scale_p10_median_p90": [
+        0.9344999999999999,
+        1.025,
+        1.095
+      ],
+      "horizon_row_on_1536_image": 998.5,
+      "sea_linear_srgb_Y_median": 0.008030219732703256,
+      "sky_row_400_linear_Y_standard_deviation": 0.0012819841376482746,
+      "interior_luminance_rank_correlation_with_reference": 0.45912341468666146
+    },
+    "generated_corrected": {
+      "native_frame": [
+        1024,
+        1536
+      ],
+      "edge_radius_scale_p10_median_p90": [
+        0.9199999999999999,
+        1.005,
+        1.135
+      ],
+      "horizon_row_on_1536_image": 999.5,
+      "sea_linear_srgb_Y_median": 0.008182715425314154,
+      "sky_row_400_linear_Y_standard_deviation": 0.0009253793761443051,
+      "interior_luminance_rank_correlation_with_reference": 0.32369543406499796
+    }
+  },
+  "visual_review": {
+    "composition": "Earth high in frame, dark sea, very low far-right land; no labels, Sun, beach, people or buildings.",
+    "lighting": "Warm reflected planet with internal variation and local halo; sparse warm glints increase toward foreground. No bright road to the horizon.",
+    "waves": "Long low swells and finer ripples retained approximately; AI changes small surface shapes and cannot certify the SWAN realization.",
+    "atmosphere": "Sky-only correction reduces some texture but residual mottling remains relative to the clear numerical sky.",
+    "earth": "Approximate geometry retained; AI modifies internal cloud markings and contrast. The measured texture remains available in the calculated reference."
+  },
+  "decision": "Use the 2048 by 3072 calculated view as the visibility-informed reference. Preserve both AI passes as illustration candidates, not exact observed or validated appearances.",
+  "open_conditions": [
+    "Spatial colour and neural chromatic adaptation are not validated.",
+    "The historical cloud field is illustrative; no future weather forecast exists.",
+    "No human observation experiment or calibrated coastal Moon photograph was obtained.",
+    "The sea is the existing 4-sample-per-pixel render, with its saved Monte Carlo uncertainty; AI finish is not increased physical sample convergence."
+  ]
+}

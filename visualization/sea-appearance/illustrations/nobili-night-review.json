@@ -1,0 +1,102 @@
+{
+  "schema": "terluna.visualization.nobili-review/1",
+  "scene": "Nobili lake, thin-cloud night; westward offshore eye-level view",
+  "status": "Selected photographic illustration for this conditional weather scenario. A separate high-cloud candidate is under investigation.",
+  "inputs": {
+    "scene_sha256": "7422c7fcdd3a4ab095d9020c5061670226fb8e24ba591c9548a88f86ed318ac9",
+    "cloud_sha256": "902e1f267b4f684bb1c48aab8afff33ad046a1849562b1bc1351a8785b3967f4",
+    "terrain_sha256": "653b67a8ce679bea1a201cb61b7041a8df7aaef6202ae7b77330a1851d8efa7f",
+    "source_admission_sha256": "46e7e2bd4a70d09abb05a866326a42a7a12d94176014b3f5e0c042d89ea01193"
+  },
+  "outputs": {
+    "visualization/sea-appearance/illustrations/nobili-night.png": "fe5bab69b4c2e65fde084e2bf60c74ac2f10cea0d5f5f9efaaf46efa4bfe1850",
+    "visualization/sea-appearance/illustrations/nobili-night-first-generated.png": "b2da7aeedcae65206b9d9e8e880e0501b74b35fa11f1b87575631725a681cf9d",
+    "visualization/sea-appearance/illustrations/nobili-night-reference.png": "d6e517c90654f1442673e1684eecedef17ff5932304e029d39922bd979fe8b67",
+    "visualization/sea-appearance/illustrations/nobili-night-clear-reference.png": "ebb066de760af65b3dbdf8900c1693b574028cf177f7372d249cc2d16a05907f",
+    "visualization/sea-appearance/illustrations/nobili-earth-reference.png": "69eb8f179a4903fb69b4ccf2e273a3463c338c5a86f923f5afdc01a2b09028ad",
+    "visualization/sea-appearance/illustrations/nobili-night-prompt.txt": "1c513f0c465a83457e0795f0669f3b4715624dbda72ceb84d11e4f9678ddd329",
+    "visualization/sea-appearance/illustrations/nobili-night-first-prompt.txt": "0b961f13411dfeb83dcbfbbe39d2cf2507f278f1a94dc825bf19c5763bcb3be8",
+    "visualization/sea-appearance/illustrations/nobili-night-display.json": "884d16a301f3c23a42db6f3ed15a3a04c4365dbed7c6bd65378ccb774b523acc",
+    "visualization/sea-appearance/illustrations/nobili-night-clear-display.json": "4d17827c2769ffd3867686cc4fd6c07f5050dc1a8cb3051eae01dbce283a169f",
+    "visualization/sea-appearance/illustrations/nobili-night-image-checks.json": "a070eb1bc7f2d7b1e51ee0d72ba076af78ea81a6ad565fd3e26d81a3e1c81aaf"
+  },
+  "generation_history": [
+    {
+      "pass_number": 1,
+      "tool": "built-in image_gen.imagegen",
+      "image": "visualization/sea-appearance/illustrations/nobili-night-first-generated.png",
+      "sha256": "b2da7aeedcae65206b9d9e8e880e0501b74b35fa11f1b87575631725a681cf9d",
+      "native_pixels": [
+        1448,
+        1086
+      ],
+      "prompt": "Use case: compositing.\nAsset: an unlabeled, immersive, exceptionally high-fidelity natural photographic illustration for a scientific study of a terraformed Moon.\nInput image 1 is the edit target and strict reference for camera, terrain silhouette, physical radiance relationships, lake structure and atmosphere. Input image 2 is a supporting enlarged view of the SAME Earth for resolving its surface/cloud texture and phase; do not turn it into a separate panel.\nPolish image 1 into a clean, rich, photorealistic scene. Requested canvas 3072 by 2304 landscape, or the largest native 4:3 canvas available. Preserve the full composition and aspect ratio. The view is from human eye level two metres above a lake in Nobili crater, looking due west; there is no visible boat. The eye sees a nearby dark crater rim across the water, with gibbous Earth hanging just above it. Natural quiet immersive nocturnal scene, subtle real material texture and clear depth, without cinematic exaggeration.\nMandatory composition invariants as fractions of the canvas: Earth's full geometric disk centre x=0.50114, y=0.20374, disk diameter width=0.03785 and height=0.05172. Only 65.6 percent of the disk is illuminated; preserve the lower illuminated portion and the curved terminator exactly as shown in the Earth insert. The planet is 1.98 degrees across, centred 14.707 degrees above horizontal. Preserve image 1's entire broad gently irregular rim silhouette, around y=0.30\u20130.35, and lake edge near y=0.577. The rim is genuinely 8\u201310 km away, almost 11 degrees high, not far mountains on a flat horizon. No reframing, enlargement of Earth, steep new peaks or changes to terrain skyline.\nEarth is a reflected-light planet, amber through the very tall atmosphere, with cream cloud structures and darker geographic markings following image 2. Do not paint a Sun, a fireball, molten surface, star, full circle, blue planet, featureless glowing blob or invented continents. Keep the gentle local optical halo and restrained internal highlights. Its dark portion merges with the sky.\nThe Sun is 86 degrees below the horizon. Earth is behind the hills: the hills' visible faces remain very dark and lit softly by diffuse sky, with only subtle broad terrain relief. Do not add front-lit rock faces, rim lights on every peak, moonlight coming from the opposite direction or glowing windows. Sky is clear, smooth, extremely subdued olive-charcoal grey as in the calculated reference, with only the sparse faint stars actually present. Do not change it to blue twilight, bright sunset or an elaborate Milky Way.\nThe water has small low-gravity wind waves, about 18 cm significant height and roughly 6 m peak wavelength, with much finer ripples superposed. Preserve the reference perspective and restrained dark water, and the physically calculated amber glints beneath Earth. Remove numerical speckle and grid artifacts, replacing them with coherent natural wave facets rather than painted horizontal bars, fuzzy smears or an orange stripe. Maintain the irregular reflection width and its distribution in the reference. No ocean surf, breaking rollers, whitecaps or phosphorescence.\nOnly add natural fine material finish within these constraints. The reference's darkness, muted colours, source direction, Earth geometry, phase, terrain profile, waterline and wave scale take priority over decorative detail. No invented buildings, beach, trees, people, boats, foreground rocks, secondary celestial bodies, clouds, lens-flare polygons or borders. Absolutely no text, numbers, labels, diagrams, signatures, captions or watermark anywhere in the image.\n",
+      "assessment": "Clear-sky photographic base; first image retained in Git."
+    },
+    {
+      "pass_number": 2,
+      "tool": "built-in image_gen.imagegen",
+      "image": "visualization/sea-appearance/results/illustrations/nobili-night-cloud-generated.png",
+      "sha256": "15603045250b9023cf30d3f9595842f115c2e3947c2c16f1cb4638b6f7dff121",
+      "native_pixels": [
+        1448,
+        1086
+      ],
+      "prompt": "Use case: compositing.\nCreate one exceptionally high-fidelity immersive photographic illustration of the computed Nobili lake night, without any text or labels.\nInput 1 is the strict calculated reference: keep its entire camera composition, terrain silhouette, Earth geometry, cloudy sky brightness pattern, darkness and reflection footprint.\nInput 2 is the previous generated photographic treatment: use only its natural water and subtle terrain material finish. Its extra stars, brighter water and clear sky are not the lighting reference.\nInput 3 is an enlarged supporting insert of the same calculated Earth. Use its exact illuminated shape, geography, cloud markings, amber colour and restrained halo in the small Earth in the main scene. Do not make an inset or panel.\n\nRequested output: the largest native 4:3 landscape canvas available, ideally 3072 by 2304. Preserve the complete 50-degree horizontal field, with human eye height two metres above the water, looking west across Nobili crater lake. No visible boat or platform.\nMandatory geometry: Earth's full geometric disk centre at x=50.114%, y=20.374% of the canvas; its full diameter is 3.785% of canvas width and 5.172% of height. It is 1.98 degrees across and 65.6% illuminated, with the lower portion lit and the unlit upper portion merging into the sky. Preserve the shape and orientation in input 3 exactly. The first generated image slightly shrank Earth; follow input 1's size.\nKeep the native broad, gently irregular crater-rim skyline in input 1, around y=29\u201335%, and the lake edge at y=57.7%. No newly invented mountains or foreground shore.\n\nApply the physically computed cloud treatment from input 1: broad very subdued amber scattered light near Earth, fading to dark charcoal high in the frame, with only very soft structure. This thin cloud field is diffuse and not an imposing bright cloud bank. No orange sunset horizon, blue twilight, dramatic wisps, billowing cumulus, bright cloud edges or extra stars. Preserve just the few very faint stars supported by input 1.\nEarth is an illuminated planet seen through a very tall atmosphere. Preserve its geographic and cream cloud structure from input 3 without replacing it with flames, lava, a full Moon, a white Sun, an invented continent pattern or a blank luminous disk. Keep the local halo and the broader atmospheric glow separate, both restrained.\nThe Sun is deep below the horizon. Earth's light comes from behind the dark hills; keep the visible slopes almost silhouetted, with only subtle diffuse-sky detail. Do not front-light them, add rim lighting, or brighten the land for decoration.\nOn the water, follow input 1's darker cloudy-light exposure and irregular amber reflection path directly below Earth. Refine numerical grain into natural coherent small wave facets, with about 18 cm significant wave height and a 6 m dominant wavelength plus much smaller ripples. Preserve perspective, varied local wave orientation, dark troughs and the reference reflection width. No breakers, foam, ocean swell, glowing water, painted horizontal bars, exaggerated sparkle or continuous orange stripe.\nChange only photographic finish and resolve numerical grain. Measured geometry, light direction, sky pattern, physical dimness and reflection scale take priority. No buildings, people, boats, foreground props, vegetation invented at this offshore viewpoint, second celestial body, lens flares, borders, captions, labels, symbols, signatures or watermark.\n",
+      "assessment": "Conditional cloud pass; excess cloud mottling required correction."
+    },
+    {
+      "pass_number": 3,
+      "tool": "built-in image_gen.imagegen",
+      "image": "visualization/sea-appearance/illustrations/nobili-night.png",
+      "sha256": "fe5bab69b4c2e65fde084e2bf60c74ac2f10cea0d5f5f9efaaf46efa4bfe1850",
+      "native_pixels": [
+        1448,
+        1086
+      ],
+      "prompt": "Use case: lighting-weather.\nEdit input 1, the high-fidelity Nobili lake scene. Input 2 is the strict computed reference for ONLY the sky's broad brightness and colour structure.\nMake one targeted correction: replace the conspicuous streaky/mottled cloud texture in input 1 with the very smooth, quiet, thin-cloud scattering field of input 2. The broad restrained amber glow around Earth should fade smoothly toward charcoal above and at the corners, following input 2's shape and strength. Cloud structure should be barely perceptible, not decorative billows or painted wisps. Retain only the extremely faint sparse stars in input 2; remove the unsupported added star points from input 1.\nKeep everything else in input 1 unchanged: exact 4:3 full frame, camera, terrain outline and near-silhouette land, shoreline, detailed water surface and irregular amber glints, Earth position, phase, colour and surface/cloud markings. Preserve Earth's full geometric width of 3.785% of the canvas and height 5.172%, centred at x=50.114%, y=20.374%, with its lower 65.6% illuminated as shown. No new landscape objects. Do not lighten the scene or increase Earth glare. Do not replace Earth with a Sun.\nRequested output is the largest native 4:3 landscape image available, ideally 3072 by 2304. Rich clean photographic material detail, natural nocturnal scene. Absolutely no text, labels, symbols, signature, border or watermark.\n",
+      "assessment": "Selected thin-cloud illustration; sky correction reduces decorative structure, with remaining generated deviations documented below."
+    }
+  ],
+  "findings": {
+    "earth_geometry": "The joint lower-limb fit gives a radius 1.4% larger than nominal and centre about 1 pixel left, 3.3 pixels up; the comparison reference itself fits +0.55%. This is a partial-limb image-space screen, not astrometry.",
+    "skyline_rms_pixels": 2.547840677398215,
+    "earth_interior_rank_correlation": 0.8821468835221971,
+    "light": "Sun is 86.34 degrees below horizontal. Earth is behind the rim. Visible land stays dark, without invented direct front-lighting. Warm water glints follow Earth below its azimuth.",
+    "atmosphere": "Tall molecular atmosphere plus one 20-km-wide extrusion of a saved CM1 cloud section; same display tone curve as the clear control. The high-cloud alternative is not this cloud field.",
+    "cloud_transmission": 0.4756131093661314,
+    "earth_ground_lux": 0.3197472044589683,
+    "waves": "Underlying lunar-gravity equilibrium spectrum uses saved wind/stress; reference realization Hs 0.177 m and nominal 6.32-m peak wavelength. Generated wave heights and individual facets cannot be recovered or validated from the image.",
+    "labels": "Visually inspected: no image labels, borders, captions, watermarks or extra celestial bodies.",
+    "display": "Generated native pixels are 1448 by 1086. Calculated wide references are 2560 by 1920. No AI output was upscaled or manually composited."
+  },
+  "remaining_limits": [
+    "CM1 is a flat 2-D equatorial ring; it does not predict Nobili crater weather or clouds on the ephemeris date.",
+    "Terrain reflectance, sub-118-m detail, mature vegetation, lake wave age and cloud cross-ring extent remain assumptions.",
+    "The final image is darker on the visible rim and water than the display reference, and retains slight sky structure and a few unsupported faint star points.",
+    "Image generation alters Earth interior markings, fine terrain and wave texture. The calculated reference remains the source for numerical geometry and radiance.",
+    "Ocular scatter and global tone mapping do not validate exact naked-eye colour, adaptation, subjective scale or the user's display.",
+    "Cloud-scattered Earthlight uses a uniform finite disk; direct visible Earth uses historical NASA texture and correct phase. Spatial spectral colour and future Earth weather are not validated.",
+    "Terrain cloud shadows and aerial perspective are not a coupled cloud/terrain solution.",
+    "The early fixed-centre radial metric confounded small position shifts with size changes; the final joint fit supersedes that interpretation."
+  ],
+  "physics": {
+    "sun_lux": 0.0012030855144528896,
+    "earth_lux": 0.37166880761330434,
+    "placeholder_lux": 0.001,
+    "total_clear_sky_lux": 0.37387189312775726,
+    "earth_direct_normal_lux": 0.2874788839382829,
+    "earth_above_air_normal_lux": 2.905754643334815,
+    "sun_elevation_deg": -86.33657715532124,
+    "sun_azimuth_deg": 113.72510766865356,
+    "earth_sunlight_factor": 0.968292860197945,
+    "earth_distance_m": 368719410.899723,
+    "scope": "Clear molecular atmosphere. The cloud experiment is a separate conditional calculation; this is not cloudy ground illumination."
+  },
+  "checks": {
+    "image_checks": "nobili-night-image-checks.json",
+    "focused_tests": "New source radius, full spectrum, Nobili geometry/input admission and positive-XYZ checks are included in the full pass.",
+    "full_repository_check": "make check: exit 0; 704 Python tests passed, 42 skipped; JavaScript, layer and ensemble checks passed. Research provenance PASS_WITH_BLOCKED_INPUTS for previously missing protection datasets."
+  },
+  "implementation_packaging": "After the recorded runs, the new finite-source drivers and full-spectrum extension were moved into separate modules to retain existing study producers byte-for-byte. AST equality verified for estimate, direct_horizontal and full_curvature against their producing function bodies. A seeded test also confirms exact agreement with the legacy solar driver at its default source radius. Run-time producer hashes remain the original as-computed values."
+}

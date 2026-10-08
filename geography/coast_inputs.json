@@ -1,0 +1,130 @@
+{
+ "schema": "terluna.geography.coastal-sources/1",
+ "status": "external inputs; fetched by HTTP byte range and hash-checked by geography/coast_terrain.py; ignored by Git",
+ "retrieved": "2026-10-04",
+ "credit": "NASA LRO LOLA Science Team, NASA Goddard Space Flight Center; archived by the PDS Geosciences Node at Washington University in St. Louis (Smith et al. 2010, Space Sci. Rev. 150, 209).",
+ "rights": "NASA scientific data; retain source attribution. External bytes remain in ignored storage.",
+ "evidence": "Archived altimetry-derived raster, with interpolation for incomplete coverage; 118 m pixel spacing describes the grid sampling.",
+ "slices": [
+  {
+   "name": "w_procellarum",
+   "source_url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_256_00n_90n_180_360.img",
+   "label_url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_256_00n_90n_180_360.lbl",
+   "label_sha256": "bd3224d60aa50f767ebaf9b820e9da9d1dc9ed23ef60733fbf94b552385f97a7",
+   "label_bytes": 5185,
+   "source_size_bytes": 2123366400,
+   "source_etag": "\"809a1c8e761ad51:0\"",
+   "source_last_modified": "Tue, 04 Jun 2019 01:40:57 GMT",
+   "selected_byte_range": [
+    1383045120,
+    1501194239
+   ],
+   "selected_sha256": "b31efb41818e9ffc8c1a681e26c83bb5f8bd65b0e1e476e3ace7516db41d8534",
+   "selected_bytes": 118149120,
+   "first_row": 15007,
+   "row_count": 1282,
+   "row_bytes": 92160,
+   "lines": 23040,
+   "samples": 46080,
+   "pixels_per_degree": 256,
+   "line_projection_offset": 23039.5,
+   "sample_projection_offset": -0.5,
+   "center_longitude_deg": 180.0,
+   "latitude_bounds_deg": [
+    0.0,
+    90.0
+   ],
+   "longitude_bounds_deg": [
+    180.0,
+    360.0
+   ],
+   "sample_type": "<i2",
+   "scale_m": 0.5,
+   "offset_m": 1737400.0,
+   "product_version": "V4.0",
+   "product_creation_date": "2019-06-03",
+   "local_image": "research/runs/sea_appearance/coast_inputs/ldem_256_w_procellarum_rows_15007_16288.img",
+   "local_label": "research/runs/sea_appearance/coast_inputs/ldem_256_00n_90n_180_360.lbl"
+  },
+  {
+   "name": "s_nubium",
+   "source_url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_256_90s_00s_180_360.img",
+   "label_url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_256_90s_00s_180_360.lbl",
+   "label_sha256": "feb12af66ba84a70a466c08ca27dc7d32d03fe5da219fddf6f00c3eeb7079a09",
+   "label_bytes": 5185,
+   "source_size_bytes": 2123366400,
+   "source_etag": "\"80acd8fea01ad51:0\"",
+   "source_last_modified": "Tue, 04 Jun 2019 06:44:45 GMT",
+   "selected_byte_range": [
+    604477440,
+    722626559
+   ],
+   "selected_sha256": "7553aa7130d7520a552283bfb8e920365765a5e5d5dc78065387ec15cf3c5070",
+   "selected_bytes": 118149120,
+   "first_row": 6559,
+   "row_count": 1282,
+   "row_bytes": 92160,
+   "lines": 23040,
+   "samples": 46080,
+   "pixels_per_degree": 256,
+   "line_projection_offset": -0.5,
+   "sample_projection_offset": -0.5,
+   "center_longitude_deg": 180.0,
+   "latitude_bounds_deg": [
+    -90.0,
+    0.0
+   ],
+   "longitude_bounds_deg": [
+    180.0,
+    360.0
+   ],
+   "sample_type": "<i2",
+   "scale_m": 0.5,
+   "offset_m": 1737400.0,
+   "product_version": "V4.0",
+   "product_creation_date": "2019-06-03",
+   "local_image": "research/runs/sea_appearance/coast_inputs/ldem_256_s_nubium_rows_6559_7840.img",
+   "local_label": "research/runs/sea_appearance/coast_inputs/ldem_256_90s_00s_180_360.lbl"
+  },
+  {
+   "name": "ingenii_coast",
+   "source_url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_256_90s_00s_000_180.img",
+   "label_url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_256_90s_00s_000_180.lbl",
+   "label_sha256": "7b8bb0d163f33856fac49e8e77d85ea7917dc0acb1ec664c3d50447bfaf520f7",
+   "label_bytes": 5186,
+   "source_size_bytes": 2123366400,
+   "source_etag": "\"8011e430951ad51:0\"",
+   "source_last_modified": "Tue, 04 Jun 2019 05:20:15 GMT",
+   "selected_byte_range": [
+    816814080,
+    934963199
+   ],
+   "selected_sha256": "12ba69b8f46780fa0a6a60d692e4175cda67f67194f78758e5f28bcf8164eff3",
+   "selected_bytes": 118149120,
+   "first_row": 8863,
+   "row_count": 1282,
+   "row_bytes": 92160,
+   "lines": 23040,
+   "samples": 46080,
+   "pixels_per_degree": 256,
+   "line_projection_offset": -0.5,
+   "sample_projection_offset": 46079.5,
+   "center_longitude_deg": 180.0,
+   "latitude_bounds_deg": [
+    -90.0,
+    0.0
+   ],
+   "longitude_bounds_deg": [
+    0.0,
+    180.0
+   ],
+   "sample_type": "<i2",
+   "scale_m": 0.5,
+   "offset_m": 1737400.0,
+   "product_version": "V4.0",
+   "product_creation_date": "2019-06-03",
+   "local_image": "research/runs/sea_appearance/coast_inputs/ldem_256_ingenii_coast_rows_8863_10144.img",
+   "local_label": "research/runs/sea_appearance/coast_inputs/ldem_256_90s_00s_000_180.lbl"
+  }
+ ]
+}

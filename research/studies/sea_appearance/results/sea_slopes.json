@@ -1,0 +1,390 @@
+{
+ "schema": "terluna.research.sea-slopes/1",
+ "evidence": "Surface slope statistics at six coasts through the shore month: the resolved waves' slope covariance from the wave runs' directional spectra, and the short waves from the unified spectrum of Elfouhaily et al. (1997) at lunar gravity, driven by the GCM's friction velocity. The short-wave law is an Earth fit; it carries over if the lunar seas' short waves follow the same balance of wind and capillarity, with u*/c_m inside the fitted range.",
+ "reading_rule": "Covariances are of the surface gradient, east and north, dimensionless. Mean square slope is their trace. Short waves start at the wave runs' highest frequency, 0.497 Hz, and run through the capillary roll-off; they align with the GCM's stress. Resolved and short-wave slopes add at the hours with spectra. Hours count from the first atmospheric snapshot, as in the lighting calendar. The GCM's three-hourly stress is a 170 km mean: gusts, sea breezes and surface films are absent, so the light-wind hours carry most uncertainty.",
+ "producer": {
+  "lane": "research",
+  "runner": "research/studies/sea_appearance/slopes.py",
+  "files": {
+   "research/studies/sea_appearance/slopes.py": "a8bbd68109163dca56c39b40f6426ddd7c5d3b73bbaa03724b3784954459eb0d",
+   "illumination/water_surface/short_waves.py": "7ccd95e855c62522417a3f4859601a7099a9ffa1fb7cfee0b5c4efcadcef7ffe",
+   "illumination/water_surface/hotfile.py": "c98b19008ada46d9ba1f8ab862c4721558be51859834785d7d6d67227525d0fa",
+   "illumination/water_surface/model.py": "9e4ebbabf5e35017baa18a3b048666a1b1da263301532505f41e520b495aee77",
+   "climate/waves/nearside.py": "fd7d5df09d96e9e0961f8664e3784b4b54698491db5bf59140f1f0239ad28a45",
+   "climate/waves/weather.py": "655f8026133e60cddbf7554307aab93bec5bb67615543cf09e910370df3006bd"
+  },
+  "constants": {
+   "EXOPLASIM_CHARNOCK": 0.018,
+   "EXOPLASIM_SEA_ROUGHNESS_FLOOR": 1.5e-05,
+   "EXOPLASIM_VON_KARMAN": 0.4,
+   "MOON_SURFACE_GRAVITY": 1.6242188765608128,
+   "STANDARD_GRAVITY": 9.80665
+  }
+ },
+ "inputs": {
+  "research/studies/sea_appearance/results/lighting_calendar.json": "b76f394595eb0c89487c4208eedc4e9a6d1eff3af72bf63bdb79883920b2f674",
+  "research/runs/waves/cycle/atmosphere.npz": "4a6bf0fe4832ac4f5a5a62c2dceec813f7de3e37aaf7652e224ddca6f16de9c1",
+  "research/runs/waves/nearside/dt300/sea.npz": "5c8302d6a97b2339621f976fc837fd12ef3d6fcdeadb6b7c7ed77672d532005e",
+  "research/runs/waves/shore_history/coast_s4_dt900_0_1419/sites.tbl": "6a5b5843bd90d59decc47cd0aa8c207fbaf83722efb696c57c6373f7ad30640b",
+  "research/runs/optical_comfort/water_slope_history.json": "7ee5212f21c52b6e0d89b37e2bf3e2ae0a385536a8052099751eedeb691c3fdb",
+  "research/runs/waves/nearside/dt300/s0672_0720/end.hot": "52ee455b3a31cfff671f6a6404d1e25233fa051c6e92b1a5fda361de1b5493c0",
+  "research/runs/waves/nearside/dt300/s0720_0768/end.hot": "6769b6eb0b9d4ebab91e115932d6e41732e85e673a00b6874867a34b5b3a0d9d",
+  "research/runs/waves/nearside/dt300/s0768_0816/end.hot": "8bca9e7e29ed0732bad35b82b93a516730883539903130d2ddd9874fbfc5f798",
+  "research/runs/waves/nearside/dt300/s0816_0864/end.hot": "c8f63b8fb09be06b944ea31e797ff83989b49fc48b9bf75a1b423aab0374c0b1",
+  "research/runs/waves/nearside/dt300/s0864_0912/end.hot": "3e4dd2b4efa32da1ecc6f38ab2377b1c62a1d190a4481523d995359b28025646",
+  "research/runs/waves/nearside/dt300/s0912_0960/end.hot": "8f7d28362467f7629899bee8f207221ec3c1fa09eaa39e988d65fc4c2a584a44",
+  "research/runs/waves/nearside/dt300/s0960_1008/end.hot": "a2c713678d31673456ee4109f097ee00a7daf2163d608afd525e881b52ae9e03",
+  "research/runs/waves/nearside/dt300/s1008_1056/end.hot": "e95902527b03ccb839325ee7666969de3a4e28467e6ce6bd061348eea2f4e501",
+  "research/runs/waves/nearside/dt300/s1056_1104/end.hot": "f0291cfd922a5a1a09f366ac2662faa7ebaa793075e667251a3ac57b8fe955a8",
+  "research/runs/waves/nearside/dt300/s1104_1152/end.hot": "c60df6de743843d7203f65ea940085188da55c2a49c558de453ea721aa81fb99",
+  "research/runs/waves/nearside/dt300/s1152_1200/end.hot": "a84ded8747ea7f11e9866fda05e40358e3de5aaec59c8ebe527b6d6d1aba80fe",
+  "research/runs/waves/nearside/dt300/s1200_1248/end.hot": "19405513d34aa44ca285feb106be592186a410bbd9b27ff62761f40a7ca3af97",
+  "research/runs/waves/nearside/dt300/s1248_1296/end.hot": "292a64d646b39e4af77da7a6334ca473c4aa6edd63f671e2cad478e94d9581a5",
+  "research/runs/waves/nearside/dt300/s1296_1344/end.hot": "d2f51167075836df449ed9afda0e6dd4e9399cf7af86e353dceb125a212a5d83",
+  "research/runs/waves/nearside/dt300/s1344_1392/end.hot": "0fef0720d72eb90213523a449776a7ded8afad3ee58133bed727c41c80cb6aac"
+ },
+ "series": {
+  "file": "research/studies/sea_appearance/results/sea_slopes.npz",
+  "sha256": "aef6bcd9c97c668488fb23af58004b70bd4ec0974e9a190922be1a7a654bda2a"
+ },
+ "gravity_m_s2": 1.6242188765608128,
+ "capillary_wavenumber_rad_m": 150.579,
+ "capillary_wavelength_m": 0.04173,
+ "minimum_phase_speed_m_s": 0.14688,
+ "short_wave_threshold_u_star_m_s": 0.05403,
+ "earth_capillary_wavelength_m": 0.01698,
+ "earth_minimum_phase_speed_m_s": 0.23024,
+ "time_hours": [
+  709.0,
+  1417.0
+ ],
+ "coasts": [
+  {
+   "name": "Western Oceanus Procellarum, by Russell",
+   "short": "W Procellarum",
+   "lon_lat": [
+    -73.875,
+    28.875
+   ],
+   "depth_m": 77.88,
+   "resolved_waves": "nearside run restart files, every 48 hours",
+   "cutoff_wavenumber_rad_m": 6.0008,
+   "cutoff_wavelength_m": 1.047,
+   "gcm_nearest_open_water_fallback": false,
+   "friction_velocity_m_s": {
+    "p10": 0.039345,
+    "p50": 0.109378,
+    "p90": 0.186399,
+    "maximum": 0.232846
+   },
+   "wind_10m_m_s": {
+    "p10": 1.305839,
+    "p50": 3.071031,
+    "p90": 4.73673,
+    "maximum": 5.658012
+   },
+   "hours_without_short_waves": 100,
+   "short_wave_mss": {
+    "p10": 0.0,
+    "p50": 0.00961,
+    "p90": 0.023369,
+    "maximum": 0.032465
+   },
+   "resolved_mss": {
+    "p10": 0.002712,
+    "p50": 0.01466,
+    "p90": 0.02047,
+    "maximum": 0.025619
+   },
+   "resolved_samples": 15,
+   "total_mss": {
+    "p10": 0.002712,
+    "p50": 0.025667,
+    "p90": 0.042052,
+    "maximum": 0.046039
+   },
+   "earth_cox_munk_mss_same_wind": {
+    "p10": 0.009797,
+    "p50": 0.018986,
+    "p90": 0.02769,
+    "maximum": 0.032511
+   },
+   "total_over_earth_same_wind": {
+    "p10": 0.295884,
+    "p50": 1.29394,
+    "p90": 1.665963,
+    "maximum": 1.78304
+   }
+  },
+  {
+   "name": "Southern Mare Imbrium, at the eastern end of Montes Carpatus",
+   "short": "S Imbrium",
+   "lon_lat": [
+    -17.875,
+    15.875
+   ],
+   "depth_m": 209.26,
+   "resolved_waves": "nearside run restart files, every 48 hours",
+   "cutoff_wavenumber_rad_m": 6.0008,
+   "cutoff_wavelength_m": 1.047,
+   "gcm_nearest_open_water_fallback": false,
+   "friction_velocity_m_s": {
+    "p10": 0.047397,
+    "p50": 0.119746,
+    "p90": 0.187525,
+    "maximum": 0.269906
+   },
+   "wind_10m_m_s": {
+    "p10": 1.528958,
+    "p50": 3.307905,
+    "p90": 4.759712,
+    "maximum": 6.359235
+   },
+   "hours_without_short_waves": 100,
+   "short_wave_mss": {
+    "p10": 0.0,
+    "p50": 0.010844,
+    "p90": 0.023615,
+    "maximum": 0.038503
+   },
+   "resolved_mss": {
+    "p10": 0.008604,
+    "p50": 0.015498,
+    "p90": 0.018516,
+    "maximum": 0.019167
+   },
+   "resolved_samples": 15,
+   "total_mss": {
+    "p10": 0.013932,
+    "p50": 0.026405,
+    "p90": 0.030503,
+    "maximum": 0.047721
+   },
+   "earth_cox_munk_mss_same_wind": {
+    "p10": 0.010959,
+    "p50": 0.020223,
+    "p90": 0.02781,
+    "maximum": 0.036183
+   },
+   "total_over_earth_same_wind": {
+    "p10": 0.90479,
+    "p50": 1.305401,
+    "p90": 1.540575,
+    "maximum": 1.600554
+   }
+  },
+  {
+   "name": "Southern Mare Nubium, by Pitatus",
+   "short": "S Nubium",
+   "lon_lat": [
+    -11.875,
+    -28.125
+   ],
+   "depth_m": 101.45,
+   "resolved_waves": "nearside run restart files, every 48 hours",
+   "cutoff_wavenumber_rad_m": 6.0008,
+   "cutoff_wavelength_m": 1.047,
+   "gcm_nearest_open_water_fallback": false,
+   "friction_velocity_m_s": {
+    "p10": 0.062981,
+    "p50": 0.127369,
+    "p90": 0.196503,
+    "maximum": 0.253391
+   },
+   "wind_10m_m_s": {
+    "p10": 1.942161,
+    "p50": 3.479189,
+    "p90": 4.941642,
+    "maximum": 6.050122
+   },
+   "hours_without_short_waves": 46,
+   "short_wave_mss": {
+    "p10": 0.002088,
+    "p50": 0.011685,
+    "p90": 0.025527,
+    "maximum": 0.035922
+   },
+   "resolved_mss": {
+    "p10": 0.008513,
+    "p50": 0.015179,
+    "p90": 0.019414,
+    "maximum": 0.020443
+   },
+   "resolved_samples": 15,
+   "total_mss": {
+    "p10": 0.00918,
+    "p50": 0.026161,
+    "p90": 0.037992,
+    "maximum": 0.043326
+   },
+   "earth_cox_munk_mss_same_wind": {
+    "p10": 0.013109,
+    "p50": 0.021117,
+    "p90": 0.028762,
+    "maximum": 0.034564
+   },
+   "total_over_earth_same_wind": {
+    "p10": 0.885571,
+    "p50": 1.300026,
+    "p90": 1.506755,
+    "maximum": 1.518249
+   }
+  },
+  {
+   "name": "Mare Nectaris, by Fracastorius",
+   "short": "Nectaris",
+   "lon_lat": [
+    33.125,
+    -22.125
+   ],
+   "depth_m": 150.76,
+   "resolved_waves": "nearside run restart files, every 48 hours",
+   "cutoff_wavenumber_rad_m": 6.0008,
+   "cutoff_wavelength_m": 1.047,
+   "gcm_nearest_open_water_fallback": false,
+   "friction_velocity_m_s": {
+    "p10": 0.034879,
+    "p50": 0.08806,
+    "p90": 0.155273,
+    "maximum": 0.206198
+   },
+   "wind_10m_m_s": {
+    "p10": 1.169332,
+    "p50": 2.567935,
+    "p90": 4.087624,
+    "maximum": 5.135789
+   },
+   "hours_without_short_waves": 167,
+   "short_wave_mss": {
+    "p10": 0.0,
+    "p50": 0.006656,
+    "p90": 0.0159,
+    "maximum": 0.027496
+   },
+   "resolved_mss": {
+    "p10": 0.006255,
+    "p50": 0.015546,
+    "p90": 0.019465,
+    "maximum": 0.030925
+   },
+   "resolved_samples": 15,
+   "total_mss": {
+    "p10": 0.006255,
+    "p50": 0.028994,
+    "p90": 0.038559,
+    "maximum": 0.041749
+   },
+   "earth_cox_munk_mss_same_wind": {
+    "p10": 0.009087,
+    "p50": 0.016367,
+    "p90": 0.024296,
+    "maximum": 0.029778
+   },
+   "total_over_earth_same_wind": {
+    "p10": 0.620379,
+    "p50": 1.29259,
+    "p90": 1.501659,
+    "maximum": 2.162784
+   }
+  },
+  {
+   "name": "Eastern Smythii headland",
+   "short": "Smythii headland",
+   "lon_lat": [
+    93.4,
+    2.34
+   ],
+   "depth_m": 49.04,
+   "resolved_waves": "Smythii shore history, hourly, station east_face at [93.408203125, 2.330078125]",
+   "cutoff_wavenumber_rad_m": 6.0008,
+   "cutoff_wavelength_m": 1.047,
+   "gcm_nearest_open_water_fallback": false,
+   "friction_velocity_m_s": {
+    "p10": 0.037208,
+    "p50": 0.073926,
+    "p90": 0.147956,
+    "maximum": 0.183139
+   },
+   "wind_10m_m_s": {
+    "p10": 1.245291,
+    "p50": 2.220426,
+    "p90": 3.930698,
+    "maximum": 4.670052
+   },
+   "hours_without_short_waves": 206,
+   "short_wave_mss": {
+    "p10": 0.0,
+    "p50": 0.004272,
+    "p90": 0.013926,
+    "maximum": 0.022648
+   },
+   "resolved_mss": {
+    "p10": 0.004124,
+    "p50": 0.011862,
+    "p90": 0.018919,
+    "maximum": 0.023081
+   },
+   "resolved_samples": 709,
+   "total_mss": {
+    "p10": 0.004185,
+    "p50": 0.016058,
+    "p90": 0.032921,
+    "maximum": 0.043533
+   },
+   "earth_cox_munk_mss_same_wind": {
+    "p10": 0.009482,
+    "p50": 0.014558,
+    "p90": 0.023476,
+    "maximum": 0.027341
+   },
+   "total_over_earth_same_wind": {
+    "p10": 0.415424,
+    "p50": 1.098163,
+    "p90": 1.436006,
+    "maximum": 1.652831
+   }
+  },
+  {
+   "name": "South Pole\u2013Aitken sea, by Mare Ingenii",
+   "short": "Ingenii coast",
+   "lon_lat": [
+    162.875,
+    -37.125
+   ],
+   "depth_m": null,
+   "resolved_waves": null,
+   "cutoff_wavenumber_rad_m": 6.0008,
+   "cutoff_wavelength_m": 1.047,
+   "gcm_nearest_open_water_fallback": false,
+   "friction_velocity_m_s": {
+    "p10": 0.037779,
+    "p50": 0.087128,
+    "p90": 0.15934,
+    "maximum": 0.215731
+   },
+   "wind_10m_m_s": {
+    "p10": 1.261525,
+    "p50": 2.545384,
+    "p90": 4.174083,
+    "maximum": 5.324478
+   },
+   "hours_without_short_waves": 159,
+   "short_wave_mss": {
+    "p10": 0.0,
+    "p50": 0.006511,
+    "p90": 0.016957,
+    "maximum": 0.029344
+   },
+   "resolved_mss": null,
+   "resolved_samples": 0,
+   "total_mss": null,
+   "earth_cox_munk_mss_same_wind": {
+    "p10": 0.009566,
+    "p50": 0.016249,
+    "p90": 0.024748,
+    "maximum": 0.030765
+   },
+   "total_over_earth_same_wind": null
+  }
+ ]
+}

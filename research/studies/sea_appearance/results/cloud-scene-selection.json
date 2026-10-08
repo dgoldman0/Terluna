@@ -1,0 +1,163 @@
+{
+  "schema": "terluna.research.cloud-scene-selection/1",
+  "evidence": "Conditional scene selection from one saved CM1 equatorial ring, second lunar cycle. It is not a global optimum, regional weather forecast or climate-occurrence statistic.",
+  "searches": {
+    "earth-open.json": {
+      "source": "research/runs/sea_appearance/cloud-selection/earth-open.json",
+      "sha256": "2dc6070fbbd74db68ae5665305fdbb8bd6ae37b7d1b0157642c7b73dab2d4f7a",
+      "mode": "earth",
+      "candidate_pairs": 293,
+      "optical_admission": {
+        "max_overhead_tau": 0.3,
+        "native_water_only": true,
+        "solar_range": [
+          -15.0,
+          -2.0
+        ]
+      },
+      "producer_sha256": "615a86e8321630f804d292928ba952409f1805bed47cbb69786cbe78238baac6",
+      "case_sha256": "66979fb6a66703ee7edc3a8144f924e1b377a5e0fd83378c62ca88a96908b748",
+      "terrain_manifest_sha256": "46e7e2bd4a70d09abb05a866326a42a7a12d94176014b3f5e0c042d89ea01193",
+      "reading_rule": "Cloud selection uses qc+qi >= 1e-5 kg/kg; tops are cell centres, not scale heights. Optical follow-up includes all five condensates. Clear-overhead selection is not zero optical depth. Native-water admission and finite-source optical transmission are separate checks."
+    },
+    "sun-open.json": {
+      "source": "research/runs/sea_appearance/cloud-selection/sun-open.json",
+      "sha256": "2ae5bc8dd2098f897b09a0da3ccad5144ffb2b76e2234c3a529f4d50e4ad9fba",
+      "mode": "sun",
+      "candidate_pairs": 0,
+      "optical_admission": {
+        "max_overhead_tau": 0.3,
+        "native_water_only": true,
+        "solar_range": [
+          -15.0,
+          2.0
+        ]
+      },
+      "producer_sha256": "615a86e8321630f804d292928ba952409f1805bed47cbb69786cbe78238baac6",
+      "case_sha256": "66979fb6a66703ee7edc3a8144f924e1b377a5e0fd83378c62ca88a96908b748",
+      "terrain_manifest_sha256": "46e7e2bd4a70d09abb05a866326a42a7a12d94176014b3f5e0c042d89ea01193",
+      "reading_rule": "Cloud selection uses qc+qi >= 1e-5 kg/kg; tops are cell centres, not scale heights. Optical follow-up includes all five condensates. Clear-overhead selection is not zero optical depth. Native-water admission and finite-source optical transmission are separate checks."
+    },
+    "sun-broken.json": {
+      "source": "research/runs/sea_appearance/cloud-selection/sun-broken.json",
+      "sha256": "83f1a825fe1b0bd3d67b8799a973a720bc8a2c2ffe1c78293acae352b6ce61f9",
+      "mode": "sun",
+      "candidate_pairs": 392,
+      "optical_admission": {
+        "max_overhead_tau": 1.0,
+        "native_water_only": true,
+        "solar_range": [
+          -15.0,
+          25.0
+        ]
+      },
+      "producer_sha256": "615a86e8321630f804d292928ba952409f1805bed47cbb69786cbe78238baac6",
+      "case_sha256": "66979fb6a66703ee7edc3a8144f924e1b377a5e0fd83378c62ca88a96908b748",
+      "terrain_manifest_sha256": "46e7e2bd4a70d09abb05a866326a42a7a12d94176014b3f5e0c042d89ea01193",
+      "reading_rule": "Cloud selection uses qc+qi >= 1e-5 kg/kg; tops are cell centres, not scale heights. Optical follow-up includes all five condensates. Clear-overhead selection is not zero optical depth. Native-water admission and finite-source optical transmission are separate checks."
+    }
+  },
+  "selected": {
+    "fecunditatis-earth-clouds": {
+      "manifest": "research/studies/sea_appearance/fecunditatis_earth_clouds_inputs.json",
+      "manifest_sha256": "fec51777dfcbf91a2e0aefd7f343fd2f392e81abc08ec3e344daee5022640639",
+      "camera": {
+        "frame": [
+          2048,
+          2560
+        ],
+        "horizontal_fov_deg": 50.0,
+        "view_azimuth_deg": 274.0,
+        "pitch_deg": 22.0,
+        "eye_height_m": 2.0,
+        "note": "An offshore eye-level view from a native-terrain-confirmed water point; no visible boat or solid standing platform is claimed."
+      },
+      "selection": {
+        "score": 22.354224902306328,
+        "snapshot": 406,
+        "jd_tt": 2463774.733331726,
+        "overhead_tau": 0.28915367366205824,
+        "native_height_above_water_m": -302.927852730797,
+        "observer_column": 259,
+        "observer_lon": 51.4427,
+        "cloud_column": 241,
+        "cloud_lon": 47.8744,
+        "top_km": 53.794122,
+        "cloud_depth_sum_km": 5.988206999999999,
+        "range_km": 108.20226362802238,
+        "cloud_elevation_deg": 24.293288272708207,
+        "earth_elevation_deg": 42.648911359069515,
+        "earth_azimuth_deg": 278.36619039103414,
+        "earth_phase_deg": 9.421244662066048,
+        "sun_elevation_deg": -51.376242881246164
+      },
+      "reason": "Open near-full Earth sightline and high layered cloud bank."
+    },
+    "smythii-twilight-clouds": {
+      "manifest": "research/studies/sea_appearance/smythii_twilight_clouds_inputs.json",
+      "manifest_sha256": "8022a902c4e9fd183a2671085b8c967e0111b766a923b2104d92cc70c203528a",
+      "camera": {
+        "frame": [
+          2560,
+          1920
+        ],
+        "horizontal_fov_deg": 90.0,
+        "view_azimuth_deg": 270.0,
+        "pitch_deg": 22.0,
+        "eye_height_m": 2.0,
+        "note": "An offshore eye-level view from a native-terrain-confirmed water point; no visible boat or solid standing platform is claimed."
+      },
+      "selection": {
+        "score": 15.36056159630494,
+        "snapshot": 297,
+        "jd_tt": 2463761.1401282586,
+        "overhead_tau": 0.5421042033020226,
+        "native_height_above_water_m": -1878.1026168629003,
+        "observer_column": 465,
+        "observer_lon": 92.2797,
+        "cloud_column": 438,
+        "cloud_lon": 86.9273,
+        "top_km": 59.794122,
+        "cloud_depth_sum_km": 2.0,
+        "range_km": 162.30339544203358,
+        "cloud_elevation_deg": 17.219054608835144,
+        "earth_elevation_deg": -7.645934048208897,
+        "earth_azimuth_deg": 264.29482262060753,
+        "earth_phase_deg": 174.08349550969467,
+        "sun_elevation_deg": -3.3364093845136105
+      },
+      "reason": "High thin ice layers at twilight, translucent overhead and Earth completely below the horizon."
+    }
+  },
+  "rejected": [
+    {
+      "site_lon_lat_deg": [
+        148.3811,
+        0
+      ],
+      "reason": "Coarse model water mask disagreed with native ground roughly 3152 m above the atlas water. Rejected as an offshore view; no separate perched lake was assumed."
+    },
+    {
+      "site_lon_lat_deg": [
+        52.2357,
+        0
+      ],
+      "snapshot": 406,
+      "reason": "Earth ray transmission was acceptable but vertical all-condensate optical depth was about 7.57: too overcast for the requested open cloud scene."
+    },
+    {
+      "site_lon_lat_deg": [
+        59.174,
+        0
+      ],
+      "snapshot": 319,
+      "reason": "High cloud top alone was misleading; vertical all-condensate optical depth was about 19.96."
+    }
+  ],
+  "interpretation": [
+    "Candidate screening uses qc+qi >= 1e-5 kg/kg for cloud presence and all five hydrometeors for vertical opacity. Tops are model cell-centre altitudes, not atmospheric scale heights.",
+    "The Earth mode covers 15 to 80 E; final native-water admission is limited to the available equatorial 0 to 180 E strip. Other regional study cases were reviewed but not globally resimulated.",
+    "The tighter twilight screen returned no candidates in this sample, not proof that such clouds cannot occur.",
+    "Cloud placement and texture outside the 2-D ring remain conditional; the optical scene assumes 100 km cross-ring extent."
+  ]
+}

@@ -1,0 +1,1045 @@
+{
+  "schema": "terluna.visualization.generated-sea-illustration/1",
+  "scene_id": "WP-6",
+  "coast": "W Procellarum",
+  "moment": "darkest",
+  "created_date": "2026-10-04",
+  "method": "Built-in image_gen, four passes: sky/Earth/island component, composition with a domain-wave guide, photographic colour finishing, and a rejected silhouette edit. Original generated image bytes retained; no programmatic editing of generated imagery.",
+  "evidence": "AI-generated photographic illustration guided by stored scene and domain products. Display-space review, not an empirical or radiometric validation.",
+  "reading_rule": "View as the scene specification's long-exposure photograph. The naked-eye night would be dimmer and less colourful. Consult the separate review for remaining silhouette, colour and transport limits.",
+  "preservation": "Selected final image and these records are preserved in Git at the author's request. Intermediate images remain in ignored results/illustrations.",
+  "final_file": "wp-6-procellarum-earthlight.png",
+  "final_sha256": "9a411c193f48c2e6cfb1a2654e57b4d3171276c88bffec7bfd3c15a2393d6604",
+  "native_dimensions_px": [
+    1672,
+    941
+  ],
+  "resampling": "None",
+  "selected_pass": 3,
+  "selected_scene": {
+    "coast": "W Procellarum",
+    "moment": "darkest",
+    "hour": 816.0,
+    "day_of_month": 4.46,
+    "hours_from_sunset": 199.0,
+    "camera": {
+      "lon_lat_deg": [
+        -73.875,
+        28.875
+      ],
+      "note": "at the wave runs' shore point, 1.7 km from the nearest islet",
+      "eye_height_m": 2.0,
+      "view_azimuth_deg": 94.0,
+      "pitch_deg": 4.0,
+      "horizontal_fov_deg": 65.0,
+      "vertical_fov_deg": 39.43,
+      "frame": [
+        1920,
+        1080
+      ],
+      "horizon_row_at_centre": 647.7,
+      "horizon_dip_deg": 0.0869
+    },
+    "light": {
+      "ground_lux": 0.4818,
+      "vision": "mesopic",
+      "white_cd_m2": 0.23692,
+      "share_of_frame": {
+        "sky": 0.577,
+        "land": 0.025,
+        "sea": 0.398
+      }
+    },
+    "sun": {
+      "elevation_deg": -60.0,
+      "azimuth_deg": 23.0,
+      "diameter_deg": 0.54,
+      "diameter_px_at_centre": 14.2,
+      "above_horizon": false,
+      "in_frame": false,
+      "x": -6029.6,
+      "y": 13480.9
+    },
+    "earth": {
+      "elevation_deg": 20.3,
+      "azimuth_deg": 94.4,
+      "diameter_deg": 1.814,
+      "diameter_px_at_centre": 47.7,
+      "above_horizon": true,
+      "in_frame": true,
+      "x": 970.3,
+      "y": 99.5,
+      "width_px": 49.7,
+      "height_px": 51.8,
+      "normal_illuminance_lux": 0.332197,
+      "disk_luminance_cd_m2": 729.334,
+      "times_white": 3078.5,
+      "colour_chromaticity": [
+        0.4857,
+        0.4405
+      ],
+      "colour": "vivid amber",
+      "disk_srgb": "#ffcd2d",
+      "above_the_air_colour": "very pale blue",
+      "lit_fraction": 0.579,
+      "phase_angle_deg": 81.0,
+      "lit_side_toward_deg": 242.0,
+      "lit_side_toward": "lower left"
+    },
+    "sky": [
+      {
+        "label": "top of frame, left edge",
+        "x": 40,
+        "y": 30,
+        "elevation_deg": 19.51,
+        "azimuth_deg": 61.9,
+        "luminance_cd_m2": 0.18573,
+        "chromaticity_xy": [
+          0.3425,
+          0.3674
+        ],
+        "colour": "very pale amber",
+        "srgb": "#eee6c1"
+      },
+      {
+        "label": "top of frame, centre",
+        "x": 960,
+        "y": 30,
+        "elevation_deg": 22.7,
+        "azimuth_deg": 94.0,
+        "luminance_cd_m2": 0.17083,
+        "chromaticity_xy": [
+          0.3259,
+          0.3581
+        ],
+        "colour": "very pale yellow",
+        "srgb": "#dae0c6"
+      },
+      {
+        "label": "top of frame, right edge",
+        "x": 1880,
+        "y": 30,
+        "elevation_deg": 19.51,
+        "azimuth_deg": 126.1,
+        "luminance_cd_m2": 0.14983,
+        "chromaticity_xy": [
+          0.3216,
+          0.3558
+        ],
+        "colour": "very pale yellow-green",
+        "srgb": "#cbd4bd"
+      },
+      {
+        "label": "15 degrees up, left edge",
+        "x": 40,
+        "y": 177,
+        "elevation_deg": 15.0,
+        "azimuth_deg": 62.1,
+        "luminance_cd_m2": 0.19185,
+        "chromaticity_xy": [
+          0.3568,
+          0.3754
+        ],
+        "colour": "pale orange",
+        "srgb": "#fbe7ba"
+      },
+      {
+        "label": "15 degrees up, centre",
+        "x": 960,
+        "y": 247,
+        "elevation_deg": 15.0,
+        "azimuth_deg": 94.0,
+        "luminance_cd_m2": 0.17566,
+        "chromaticity_xy": [
+          0.3437,
+          0.3709
+        ],
+        "colour": "very pale amber",
+        "srgb": "#e7e0ba"
+      },
+      {
+        "label": "15 degrees up, right edge",
+        "x": 1880,
+        "y": 177,
+        "elevation_deg": 15.0,
+        "azimuth_deg": 125.9,
+        "luminance_cd_m2": 0.14989,
+        "chromaticity_xy": [
+          0.3306,
+          0.3628
+        ],
+        "colour": "very pale yellow",
+        "srgb": "#d0d3b6"
+      },
+      {
+        "label": "8 degrees up, left edge",
+        "x": 40,
+        "y": 398,
+        "elevation_deg": 8.0,
+        "azimuth_deg": 62.4,
+        "luminance_cd_m2": 0.18979,
+        "chromaticity_xy": [
+          0.382,
+          0.3831
+        ],
+        "colour": "pale orange",
+        "srgb": "#ffe0aa"
+      },
+      {
+        "label": "8 degrees up, centre",
+        "x": 960,
+        "y": 434,
+        "elevation_deg": 8.0,
+        "azimuth_deg": 94.0,
+        "luminance_cd_m2": 0.16696,
+        "chromaticity_xy": [
+          0.3613,
+          0.3783
+        ],
+        "colour": "pale orange",
+        "srgb": "#eed8ab"
+      },
+      {
+        "label": "8 degrees up, right edge",
+        "x": 1880,
+        "y": 398,
+        "elevation_deg": 8.0,
+        "azimuth_deg": 125.6,
+        "luminance_cd_m2": 0.14122,
+        "chromaticity_xy": [
+          0.3449,
+          0.3704
+        ],
+        "colour": "pale amber",
+        "srgb": "#d3cba8"
+      },
+      {
+        "label": "3 degrees up, left edge",
+        "x": 40,
+        "y": 552,
+        "elevation_deg": 3.0,
+        "azimuth_deg": 62.5,
+        "luminance_cd_m2": 0.17065,
+        "chromaticity_xy": [
+          0.3969,
+          0.3813
+        ],
+        "colour": "pale orange",
+        "srgb": "#ffd29d"
+      },
+      {
+        "label": "3 degrees up, centre",
+        "x": 960,
+        "y": 566,
+        "elevation_deg": 3.0,
+        "azimuth_deg": 94.0,
+        "luminance_cd_m2": 0.14849,
+        "chromaticity_xy": [
+          0.371,
+          0.3783
+        ],
+        "colour": "pale orange",
+        "srgb": "#eacb9f"
+      },
+      {
+        "label": "3 degrees up, right edge",
+        "x": 1880,
+        "y": 552,
+        "elevation_deg": 3.0,
+        "azimuth_deg": 125.5,
+        "luminance_cd_m2": 0.1261,
+        "chromaticity_xy": [
+          0.3528,
+          0.3714
+        ],
+        "colour": "pale orange",
+        "srgb": "#cfc09d"
+      },
+      {
+        "label": "1 degree up, left edge",
+        "x": 40,
+        "y": 614,
+        "elevation_deg": 1.0,
+        "azimuth_deg": 62.6,
+        "luminance_cd_m2": 0.15779,
+        "chromaticity_xy": [
+          0.4002,
+          0.3789
+        ],
+        "colour": "orange",
+        "srgb": "#ffc998"
+      },
+      {
+        "label": "1 degree up, centre",
+        "x": 960,
+        "y": 618,
+        "elevation_deg": 1.0,
+        "azimuth_deg": 94.0,
+        "luminance_cd_m2": 0.13809,
+        "chromaticity_xy": [
+          0.3731,
+          0.3772
+        ],
+        "colour": "pale orange",
+        "srgb": "#e5c49a"
+      },
+      {
+        "label": "1 degree up, right edge",
+        "x": 1880,
+        "y": 614,
+        "elevation_deg": 1.0,
+        "azimuth_deg": 125.4,
+        "luminance_cd_m2": 0.1179,
+        "chromaticity_xy": [
+          0.3549,
+          0.3709
+        ],
+        "colour": "pale orange",
+        "srgb": "#cbb998"
+      },
+      {
+        "label": "just above the horizon, left edge",
+        "x": 40,
+        "y": 637,
+        "elevation_deg": 0.25,
+        "azimuth_deg": 62.6,
+        "luminance_cd_m2": 0.15227,
+        "chromaticity_xy": [
+          0.401,
+          0.3779
+        ],
+        "colour": "red-orange",
+        "srgb": "#ffc596"
+      },
+      {
+        "label": "just above the horizon, centre",
+        "x": 960,
+        "y": 638,
+        "elevation_deg": 0.25,
+        "azimuth_deg": 94.0,
+        "luminance_cd_m2": 0.13374,
+        "chromaticity_xy": [
+          0.3737,
+          0.3768
+        ],
+        "colour": "pale orange",
+        "srgb": "#e2c197"
+      },
+      {
+        "label": "just above the horizon, right edge",
+        "x": 1880,
+        "y": 637,
+        "elevation_deg": 0.25,
+        "azimuth_deg": 125.4,
+        "luminance_cd_m2": 0.11446,
+        "chromaticity_xy": [
+          0.3555,
+          0.3708
+        ],
+        "colour": "pale orange",
+        "srgb": "#c9b796"
+      }
+    ],
+    "sea": [
+      {
+        "label": "just below the horizon, left edge",
+        "x": 40,
+        "y": 657,
+        "elevation_deg": -0.4,
+        "azimuth_deg": 62.7,
+        "luminance_cd_m2": 0.12634,
+        "chromaticity_xy": [
+          0.3874,
+          0.3817
+        ],
+        "colour": "pale orange",
+        "srgb": "#e4ba8c"
+      },
+      {
+        "label": "just below the horizon, centre",
+        "x": 960,
+        "y": 655,
+        "elevation_deg": -0.4,
+        "azimuth_deg": 94.0,
+        "luminance_cd_m2": 0.22455,
+        "chromaticity_xy": [
+          0.4222,
+          0.4078
+        ],
+        "colour": "amber",
+        "srgb": "#ffe88d"
+      },
+      {
+        "label": "just below the horizon, right edge",
+        "x": 1880,
+        "y": 657,
+        "elevation_deg": -0.4,
+        "azimuth_deg": 125.3,
+        "luminance_cd_m2": 0.09202,
+        "chromaticity_xy": [
+          0.3465,
+          0.37
+        ],
+        "colour": "pale amber",
+        "srgb": "#b0a78a"
+      },
+      {
+        "label": "1 degree down, left edge",
+        "x": 40,
+        "y": 676,
+        "elevation_deg": -1.0,
+        "azimuth_deg": 62.7,
+        "luminance_cd_m2": 0.12207,
+        "chromaticity_xy": [
+          0.3873,
+          0.3816
+        ],
+        "colour": "pale orange",
+        "srgb": "#e0b78a"
+      },
+      {
+        "label": "1 degree down, centre",
+        "x": 960,
+        "y": 671,
+        "elevation_deg": -1.0,
+        "azimuth_deg": 94.0,
+        "luminance_cd_m2": 0.23749,
+        "chromaticity_xy": [
+          0.4269,
+          0.4102
+        ],
+        "colour": "amber",
+        "srgb": "#ffea8a"
+      },
+      {
+        "label": "1 degree down, right edge",
+        "x": 1880,
+        "y": 676,
+        "elevation_deg": -1.0,
+        "azimuth_deg": 125.3,
+        "luminance_cd_m2": 0.08637,
+        "chromaticity_xy": [
+          0.3462,
+          0.37
+        ],
+        "colour": "pale amber",
+        "srgb": "#aba386"
+      },
+      {
+        "label": "3 degrees down, left edge",
+        "x": 40,
+        "y": 738,
+        "elevation_deg": -3.0,
+        "azimuth_deg": 62.8,
+        "luminance_cd_m2": 0.10819,
+        "chromaticity_xy": [
+          0.3861,
+          0.3814
+        ],
+        "colour": "pale orange",
+        "srgb": "#d4ad83"
+      },
+      {
+        "label": "3 degrees down, centre",
+        "x": 960,
+        "y": 725,
+        "elevation_deg": -3.0,
+        "azimuth_deg": 94.0,
+        "luminance_cd_m2": 0.3078,
+        "chromaticity_xy": [
+          0.4443,
+          0.4192
+        ],
+        "colour": "amber",
+        "srgb": "#ffed7a"
+      },
+      {
+        "label": "3 degrees down, right edge",
+        "x": 1880,
+        "y": 738,
+        "elevation_deg": -3.0,
+        "azimuth_deg": 125.2,
+        "luminance_cd_m2": 0.07812,
+        "chromaticity_xy": [
+          0.3459,
+          0.3698
+        ],
+        "colour": "pale amber",
+        "srgb": "#a39c81"
+      },
+      {
+        "label": "8 degrees down, left edge",
+        "x": 40,
+        "y": 896,
+        "elevation_deg": -8.0,
+        "azimuth_deg": 62.9,
+        "luminance_cd_m2": 0.07536,
+        "chromaticity_xy": [
+          0.3772,
+          0.3804
+        ],
+        "colour": "pale orange",
+        "srgb": "#b09572"
+      },
+      {
+        "label": "8 degrees down, centre",
+        "x": 960,
+        "y": 860,
+        "elevation_deg": -8.0,
+        "azimuth_deg": 94.0,
+        "luminance_cd_m2": 0.83448,
+        "chromaticity_xy": [
+          0.4739,
+          0.4346
+        ],
+        "colour": "golden yellow",
+        "srgb": "#ffeb50"
+      },
+      {
+        "label": "8 degrees down, right edge",
+        "x": 1880,
+        "y": 896,
+        "elevation_deg": -8.0,
+        "azimuth_deg": 125.1,
+        "luminance_cd_m2": 0.05608,
+        "chromaticity_xy": [
+          0.3417,
+          0.3683
+        ],
+        "colour": "dark greyish amber",
+        "srgb": "#8a8670"
+      },
+      {
+        "label": "bottom of frame, left edge",
+        "x": 40,
+        "y": 1050,
+        "elevation_deg": -12.69,
+        "azimuth_deg": 63.1,
+        "luminance_cd_m2": 0.05067,
+        "chromaticity_xy": [
+          0.3645,
+          0.3775
+        ],
+        "colour": "muted orange",
+        "srgb": "#8d7e62"
+      },
+      {
+        "label": "bottom of frame, centre",
+        "x": 960,
+        "y": 1050,
+        "elevation_deg": -14.7,
+        "azimuth_deg": 94.0,
+        "luminance_cd_m2": 2.211,
+        "chromaticity_xy": [
+          0.4828,
+          0.439
+        ],
+        "colour": "golden yellow",
+        "srgb": "#ffe93c"
+      },
+      {
+        "label": "bottom of frame, right edge",
+        "x": 1880,
+        "y": 1050,
+        "elevation_deg": -12.69,
+        "azimuth_deg": 124.9,
+        "luminance_cd_m2": 0.039,
+        "chromaticity_xy": [
+          0.3351,
+          0.3654
+        ],
+        "colour": "dark greyish golden yellow",
+        "srgb": "#727260"
+      }
+    ],
+    "glitter": {
+      "earth": {
+        "peak_luminance_cd_m2": 2.43,
+        "peak_x": 975,
+        "peak_y": 1075,
+        "x_range": [
+          845,
+          1105
+        ],
+        "y_range": [
+          655,
+          1075
+        ],
+        "share_of_frame_sea": 0.0881,
+        "colour": "vivid amber",
+        "times_white": 10.3
+      }
+    },
+    "water_leaving": {
+      "luminance_cd_m2": 0.0014,
+      "chromaticity_xy": [
+        0.3246,
+        0.3988
+      ],
+      "colour": "pale yellow-green",
+      "srgb": "#0e130b"
+    },
+    "waves": {
+      "source": "nearside wave run, restart file at hour 816 (+0 h)",
+      "file": "research/runs/waves/nearside/dt300/s0768_0816/end.hot",
+      "depth_m": 77.9,
+      "significant_height_m": 1.116,
+      "peak_period_s": 16.61,
+      "peak_wavelength_m": 71.34,
+      "waves_travel_toward_compass_deg": 218.8,
+      "directional_spread_deg": 43.5,
+      "steepness_hs_over_wavelength": 0.0156,
+      "wind_10m_m_s": 1.62,
+      "wind_toward_compass_deg": 101.2,
+      "friction_velocity_m_s": 0.0508,
+      "short_waves_present": false,
+      "capillary_wavelength_cm": 4.17,
+      "mean_square_slope": {
+        "longer_than_1m": 0.00459,
+        "short": 0.0,
+        "total": 0.00459
+      },
+      "rms_tilt_deg": 3.88,
+      "slope_covariance_east_north": [
+        [
+          0.0024271,
+          -0.0003747
+        ],
+        [
+          -0.0003747,
+          0.0021621
+        ]
+      ],
+      "travel_relative_to_view_deg": 124.8
+    },
+    "tide_m": 1.352,
+    "land": [
+      {
+        "shore_now_km": 1.75,
+        "shore_at_mean_level_km": 1.75,
+        "shore_azimuth_deg": 76.2,
+        "x_from": -78,
+        "x_to": 1672,
+        "azimuth_from_deg": 59.5,
+        "azimuth_to_deg": 119.2,
+        "highest_elevation_deg": 1.464,
+        "highest_y": 604.9,
+        "highest_x": 491.8,
+        "height_above_horizon_px": 42.7,
+        "highest_point_distance_km": 2.15,
+        "highest_point_height_m": 58,
+        "nearest_shore_km": 1.75,
+        "farthest_skyline_km": 2.45,
+        "lit_face_toward_camera": false,
+        "earthlit_face_toward_camera": false,
+        "haze_transmittance_550nm": 0.972,
+        "haze_transmittance_450nm": 0.939,
+        "apparent_luminance_cd_m2": 0.01124,
+        "apparent_colour": "very dark greyish red-orange",
+        "apparent_srgb": "#443c3a"
+      }
+    ],
+    "land_profile": [
+      {
+        "x": 0,
+        "px_above_horizon": 18,
+        "distance_km": 2.4,
+        "height_m": 25,
+        "shore_km": 2.0
+      },
+      {
+        "x": 120,
+        "px_above_horizon": 25,
+        "distance_km": 2.4,
+        "height_m": 35,
+        "shore_km": 1.9
+      },
+      {
+        "x": 240,
+        "px_above_horizon": 36,
+        "distance_km": 2.2,
+        "height_m": 48,
+        "shore_km": 1.9
+      },
+      {
+        "x": 360,
+        "px_above_horizon": 42,
+        "distance_km": 2.2,
+        "height_m": 57,
+        "shore_km": 1.8
+      },
+      {
+        "x": 480,
+        "px_above_horizon": 43,
+        "distance_km": 2.1,
+        "height_m": 58,
+        "shore_km": 1.8
+      },
+      {
+        "x": 600,
+        "px_above_horizon": 39,
+        "distance_km": 2.1,
+        "height_m": 54,
+        "shore_km": 1.8
+      },
+      {
+        "x": 720,
+        "px_above_horizon": 34,
+        "distance_km": 2.1,
+        "height_m": 46,
+        "shore_km": 1.8
+      },
+      {
+        "x": 840,
+        "px_above_horizon": 31,
+        "distance_km": 2.1,
+        "height_m": 43,
+        "shore_km": 1.8
+      },
+      {
+        "x": 960,
+        "px_above_horizon": 30,
+        "distance_km": 2.2,
+        "height_m": 44,
+        "shore_km": 1.8
+      },
+      {
+        "x": 1079,
+        "px_above_horizon": 31,
+        "distance_km": 2.3,
+        "height_m": 47,
+        "shore_km": 1.9
+      },
+      {
+        "x": 1199,
+        "px_above_horizon": 31,
+        "distance_km": 2.5,
+        "height_m": 50,
+        "shore_km": 1.9
+      },
+      {
+        "x": 1319,
+        "px_above_horizon": 29,
+        "distance_km": 2.4,
+        "height_m": 45,
+        "shore_km": 1.9
+      },
+      {
+        "x": 1439,
+        "px_above_horizon": 25,
+        "distance_km": 2.5,
+        "height_m": 38,
+        "shore_km": 2.0
+      },
+      {
+        "x": 1559,
+        "px_above_horizon": 15,
+        "distance_km": 2.4,
+        "height_m": 21,
+        "shore_km": 2.1
+      },
+      {
+        "x": 1679,
+        "px_above_horizon": null
+      },
+      {
+        "x": 1799,
+        "px_above_horizon": null
+      },
+      {
+        "x": 1919,
+        "px_above_horizon": null
+      }
+    ],
+    "colour_basis": {
+      "slope_covariance_east_north": [
+        [
+          0.0024271,
+          -0.0003747
+        ],
+        [
+          -0.0003747,
+          0.0021621
+        ]
+      ],
+      "sun": [
+        -60.002,
+        22.99
+      ],
+      "earth": [
+        20.296,
+        94.4
+      ],
+      "camera_lon_lat_deg": [
+        -73.875,
+        28.875
+      ]
+    },
+    "stars": {
+      "in_frame": 241,
+      "eye_sees": 0,
+      "long_exposure_shows": 0,
+      "recorded": [],
+      "brightest": [
+        {
+          "name": null,
+          "v_above_air": 2.06,
+          "v_seen": 5.5,
+          "b_minus_v": 1.01,
+          "x": 1644,
+          "y": 431,
+          "elevation_deg": 7.42,
+          "naked_eye_limit": 0.94,
+          "eye_sees_it": false,
+          "long_exposure_shows_it": false
+        },
+        {
+          "name": null,
+          "v_above_air": 2.61,
+          "v_seen": 4.88,
+          "b_minus_v": -0.11,
+          "x": 804,
+          "y": 192,
+          "elevation_deg": 16.92,
+          "naked_eye_limit": 0.72,
+          "eye_sees_it": false,
+          "long_exposure_shows_it": false
+        },
+        {
+          "name": null,
+          "v_above_air": 2.62,
+          "v_seen": 7.51,
+          "b_minus_v": -0.07,
+          "x": 810,
+          "y": 612,
+          "elevation_deg": 1.26,
+          "naked_eye_limit": 0.95,
+          "eye_sees_it": false,
+          "long_exposure_shows_it": false
+        },
+        {
+          "name": null,
+          "v_above_air": 2.65,
+          "v_seen": 4.59,
+          "b_minus_v": 1.17,
+          "x": 319,
+          "y": 13,
+          "elevation_deg": 21.51,
+          "naked_eye_limit": 0.71,
+          "eye_sees_it": false,
+          "long_exposure_shows_it": false
+        },
+        {
+          "name": null,
+          "v_above_air": 2.74,
+          "v_seen": 5.85,
+          "b_minus_v": 1.58,
+          "x": 423,
+          "y": 381,
+          "elevation_deg": 9.45,
+          "naked_eye_limit": 0.69,
+          "eye_sees_it": false,
+          "long_exposure_shows_it": false
+        },
+        {
+          "name": null,
+          "v_above_air": 2.75,
+          "v_seen": 5.54,
+          "b_minus_v": 0.04,
+          "x": 1919,
+          "y": 275,
+          "elevation_deg": 11.81,
+          "naked_eye_limit": 0.93,
+          "eye_sees_it": false,
+          "long_exposure_shows_it": false
+        },
+        {
+          "name": null,
+          "v_above_air": 2.75,
+          "v_seen": 5.02,
+          "b_minus_v": 0.15,
+          "x": 1053,
+          "y": 194,
+          "elevation_deg": 16.9,
+          "naked_eye_limit": 0.75,
+          "eye_sees_it": false,
+          "long_exposure_shows_it": false
+        },
+        {
+          "name": null,
+          "v_above_air": 3.04,
+          "v_seen": 7.17,
+          "b_minus_v": -0.17,
+          "x": 1852,
+          "y": 520,
+          "elevation_deg": 4.08,
+          "naked_eye_limit": 1.05,
+          "eye_sees_it": false,
+          "long_exposure_shows_it": false
+        },
+        {
+          "name": null,
+          "v_above_air": 3.24,
+          "v_seen": 6.57,
+          "b_minus_v": 0.96,
+          "x": 428,
+          "y": 420,
+          "elevation_deg": 8.06,
+          "naked_eye_limit": 0.7,
+          "eye_sees_it": false,
+          "long_exposure_shows_it": false
+        },
+        {
+          "name": null,
+          "v_above_air": 3.27,
+          "v_seen": 5.68,
+          "b_minus_v": 1.12,
+          "x": 1469,
+          "y": 213,
+          "elevation_deg": 15.39,
+          "naked_eye_limit": 0.83,
+          "eye_sees_it": false,
+          "long_exposure_shows_it": false
+        },
+        {
+          "name": null,
+          "v_above_air": 3.29,
+          "v_seen": 6.61,
+          "b_minus_v": 1.7,
+          "x": 1168,
+          "y": 430,
+          "elevation_deg": 8.12,
+          "naked_eye_limit": 0.83,
+          "eye_sees_it": false,
+          "long_exposure_shows_it": false
+        },
+        {
+          "name": null,
+          "v_above_air": 3.41,
+          "v_seen": 7.38,
+          "b_minus_v": -0.22,
+          "x": 1837,
+          "y": 500,
+          "elevation_deg": 4.76,
+          "naked_eye_limit": 1.03,
+          "eye_sees_it": false,
+          "long_exposure_shows_it": false
+        },
+        {
+          "name": null,
+          "v_above_air": 3.53,
+          "v_seen": 6.02,
+          "b_minus_v": -0.04,
+          "x": 530,
+          "y": 245,
+          "elevation_deg": 14.51,
+          "naked_eye_limit": 0.68,
+          "eye_sees_it": false,
+          "long_exposure_shows_it": false
+        },
+        {
+          "name": null,
+          "v_above_air": 3.71,
+          "v_seen": 5.82,
+          "b_minus_v": 0.15,
+          "x": 337,
+          "y": 92,
+          "elevation_deg": 19.05,
+          "naked_eye_limit": 0.69,
+          "eye_sees_it": false,
+          "long_exposure_shows_it": false
+        }
+      ]
+    }
+  },
+  "source_files": {
+    "research/studies/sea_appearance/scenes.md": "80a6e399a90fe0aa101cd6db667fd73bbdfb4674505dd0d8610a61a71cb581d6",
+    "research/studies/sea_appearance/scenes.template.md": "64290be44bbb4a3c9fe0b522110af37e21a9ba6509cb165ec4dc4f437f0dcc7b",
+    "research/studies/sea_appearance/scenes.py": "02cba9bb06a7de7fa387cecf6dcacdaf78afe2eeadebab922a1d32ebb7da2a89",
+    "research/studies/sea_appearance/results/scenes.json": "0ba873220a8767982e880fd9960c57795d1b297f0966e794718ef6a5483f5605",
+    "visualization/sea-appearance/wp6_guides.py": "1789becac09961be5d2e5ada32714b347478c3220598be494a59b37fb66dc5fb",
+    "visualization/sea-appearance/image_guides.py": "bb07d86af8fa53465deff7ac2db92926a2a5da7aaaf695c14126c5f1fccf0692",
+    "illumination/water_surface/realization.py": "5336dd0afcdb69558c99a181455609817b76fb696a5a80e79c32645fb6fe4989",
+    "illumination/water_surface/hotfile.py": "c98b19008ada46d9ba1f8ab862c4721558be51859834785d7d6d67227525d0fa",
+    "illumination/water_surface/model.py": "9e4ebbabf5e35017baa18a3b048666a1b1da263301532505f41e520b495aee77",
+    "illumination/water_surface/reflection.py": "df023219b0ca76f009e2b15f90f10599100f2a7855fb3afd18e4e92125b6c0b6",
+    "illumination/water_surface/short_waves.py": "7ccd95e855c62522417a3f4859601a7099a9ffa1fb7cfee0b5c4efcadcef7ffe",
+    "shared/constants.py": "ed5ac84f7bfeafed3f8e18aa869840b66558070f15ca95fd7b5c3ce2106557c9",
+    "shared/constants.json": "1a73c712dcd6e550275cc3abe85e2a8ac3c0c5f39570e19841c0091e617c8cae"
+  },
+  "input_files": {
+    "research/studies/sea_appearance/results/scenes.json": "0ba873220a8767982e880fd9960c57795d1b297f0966e794718ef6a5483f5605",
+    "research/runs/sea_appearance/terrain/w_procellarum.npz": "91bfe6540bb6a9d7466cf8ba5d7b2dad82c4c47bd8d462ab18ca1becf62f634a",
+    "research/runs/waves/nearside/dt300/s0768_0816/end.hot": "8bca9e7e29ed0732bad35b82b93a516730883539903130d2ddd9874fbfc5f798"
+  },
+  "reference_records": [
+    "wp-6-calculated-guide.json",
+    "wp-6-wave-structure-guide.json"
+  ],
+  "generation_passes": [
+    {
+      "stage": "sky-earth-island-component",
+      "prompt": "Use case: photorealistic-natural.\nCreate the SKY, EARTH AND ISLAND COMPONENT of a high-fidelity immersive seascape, using the supplied calculated image as the exact composition and colour reference. This is a long-exposure night photograph of a terraformed lunar sea. The camera is 2 metres above the water, looking east, a 65-degree horizontal field of view, tilted 4 degrees up. Landscape 16:9. The sea horizon stays exactly 60% down the image.\n\nThe scene should feel physically present and naturally photographed. A softly glowing, cloudless atmosphere grades from pale cream-yellow overhead (#dae0c6 near top centre), into peach-orange near the LEFT horizon (#ffc596), and greyer yellow-beige near the RIGHT horizon (#c9b796). Preserve this asymmetric, restrained warm palette and large quiet sky. No black space, blue sky, purple sky, clouds, visible Sun, stars, aurora or decorative light shafts.\n\nEarth is the SMALL bright gibbous shape near top centre in the reference. Preserve its geometry, phase, size and location precisely: full disk centre 50.54% across and 9.21% down, full disk only 2.59% of image width and 4.80% of height. It is 57.9% illuminated with its lit side facing lower-left. Follow the reference's diagonal phase boundary. The unlit upper-right part merges into the sky, never a visible black circular cutout. The lit portion is overexposed warm ivory with a restrained amber edge and small soft optical bloom. Preserve the partly lit outline; do not turn it into a round Sun or a thin crescent. At this exposure no blue continents, lunar craters or detailed planet texture are resolved. Do not enlarge it for drama.\n\nKeep the precise low island silhouette from the reference, spanning left edge to about 87% across, no land on the far right. These are low rounded islets about 2 km away, only 20\u201360 m high, taking about 2.5% of the frame. Highest silhouette on the left at 56% of image height, long shallow shoulders through the centre, tapering into water on the right. Their visible faces are backlit: very dark, muted brown-grey #443c3a, subdued natural matte rock texture in atmospheric fill, no direct sunlit front face or bright rim. The rock detail must look photographic, not smooth clay or embossed game terrain. Vegetation is omitted for this optics study. No cliffs, tall mountains, buildings, craft or people.\n\nFor this component, retain the guide's smooth water and its average golden reflection field without trying to add detailed waves yet. It will be replaced by the calculated wave component in the next pass. Preserve the darkening peach-tan to grey-beige water on either side of the central reflection. The bright gold below Earth is a reflection, never a separate light source.\n\nHighest available native detail, photographic optical coherence, no exaggerated contrast or painterly texture. Absolutely no labels, text, numbers, captions, scene IDs, diagrams, swatches, border, watermark or other marks.",
+      "generated_file": "exec-dd2e16ed-c542-48ad-8353-364e484ac672.png",
+      "saved_file": "../results/illustrations/wp-6-passes/01-sky-earth-islands.png",
+      "reference_images": [
+        "../results/illustrations/wp-6-calculated-guide.png"
+      ],
+      "disposition": "Component used for composition. Sky too dark and orange; temporary smooth water.",
+      "pass": 1,
+      "sha256": "b8d2b99d1eebb3436b8ec62efd2a2844da5ab83088d964faba5dab04719a910f"
+    },
+    {
+      "stage": "wave-composition",
+      "prompt": "Use case: compositing.\nMake one seamless, immersive, high-fidelity photograph of the WP-6 earthlit sea.\n\nIMAGE 1 is the generated sky/Earth/island COMPONENT and the photographic base.\nIMAGE 2 is a CALCULATED WAVE-GEOMETRY reference. Use its broad gentle liquid undulations and low viewpoint. It is one instantaneous realization and lacks the statistical glitter path; do not take that absence as a request to remove the reflection.\nIMAGE 3 is the authoritative calculated COMPOSITION, PHASE AND AVERAGE-COLOUR reference. Use its narrow gold reflection field and pale sky colours.\n\nReplace the temporary smooth water in image 1 with a believable photographic version of image 2's long glassy swells. Retain the broad water shapes: approximately 1.1 m significant height and 71 m dominant wavelength, smooth low slopes, coming from front-left toward the viewer. No short wind ripples, wind-ruffled texture, dense chop, pebbled surface, tiny repeated facets, foam, breaking waves or spray. The surface has the smooth, continuous curves and reflections of real calm open water, with subtle irregular crossing long waves. Viewing height 2 m; sea occupies the lower 40% of the picture. It must feel tangible and deep, never metallic, plastic, painted or motionlessly flat.\n\nCompose the Earth's golden reflection from image 3 into those waves: a narrow soft-edged column directly beneath Earth, centre about 50.7% across, broadening to at most about 13.5% of the image width in the foreground. Break it into irregular long smooth horizontal highlights as each rounded swell turns into and out of the reflected light. The brightest bands are gold-yellow (#ffe93c), with restrained pale cores; it becomes strongest toward the near lower edge. No continuous solid yellow stripe, theatrical light beam, white overexposed triangle or reflection offset from its source. The near water to left and right stays darker and softly coloured, roughly #8d7e62 on the lower left and #727260 on the lower right. Near the horizon the left water is peach-tan #e4ba8c, the right grey-beige #b0a78a.\n\nPreserve the small Earth in image 1, its lower-left lit gibbous shape and restrained bloom, matching image 3: full disk centre at 50.54% across and 9.21% down, only 2.59% of frame width, 57.9% illuminated. No planet enlargement, no full round Sun, no blue globe texture, no outlined black unlit hemisphere.\n\nMatch image 3's pale photographic sky: cream-yellow overhead, peach glow low on the left, quieter grey-beige on the right. Image 1 is slightly too contrasty and orange, so gently move its overall tones toward image 3 without creating a flat graphic. No clouds, stars, Sun, aurora or beams. This is the supplied LONG-EXPOSURE night appearance.\n\nKeep the low dark island strip from image 1 but follow image 3's precise skyline: highest point only 4% of image height above the waterline, with no taller hills. Dark backlit brown-grey fronts with faint diffuse texture. No lit front faces or bright shoreline rim. Horizon exactly 60% down. Islands taper away at 87% across, open water beyond. No added land, vegetation, boats, buildings or people.\n\nRetain a clean natural photographic finish, accurate low perspective, subtle atmosphere and consistent exposure, no visible composite edges or sharpening halos. Highest available native quality, 16:9 full frame. Absolutely no text, numbers, labels, scene IDs, captions, watermarks, borders or inset panels.",
+      "generated_file": "exec-39c5fbcc-eed6-4378-bf4d-3982a08a02be.png",
+      "saved_file": "../results/illustrations/wp-6-passes/02-wave-composite.png",
+      "reference_images": [
+        "../results/illustrations/wp-6-passes/01-sky-earth-islands.png",
+        "../results/illustrations/wp-6-wave-structure-guide.png",
+        "../results/illustrations/wp-6-calculated-guide.png"
+      ],
+      "disposition": "Water geometry and reflection established. Sky colour correction required.",
+      "pass": 2,
+      "sha256": "096f5c6defca0e9990d2f73e3a10dd177dc78031a2f854fbfed3011aee7f98e4"
+    },
+    {
+      "stage": "sky-colour-finish",
+      "prompt": "Use case: precise-object-edit.\nIMAGE 1 is the photographic composite to finish. IMAGE 2 is the authoritative calculated colour and silhouette guide.\n\nMake only two corrections:\n1. Match the SKY in image 1 to image 2's paler, softer colours. Lift its midtones, especially centre and right, and reduce the excess orange saturation. Top centre should be pale cream-yellow #dae0c6 rather than the current darker #d0d2ba; top right #cbd4bd rather than #b9bdaf. Around 40% of frame height the centre should be light warm cream #eed8ab, not dark ochre #e1be90. Preserve the peach glow on the left and muted cream-grey on the right, but use the full gentle tone field of image 2. Keep the sky clear, smooth and photographic. No clouds, stars, Sun or new light sources.\n2. Match the island skyline exactly to image 2. Lower the tallest left-hand hill by about 0.9% of the image height while keeping the waterline fixed at 60% down. Its maximum height above water should be 4% of frame height. Keep the low central shoulders, tapering right edge, dark backlit material and all other scale.\n\nPreserve Earth's existing position, apparent size, diagonal lower-left-lit gibbous phase, warm-white core and small bloom. Do not repaint it as a full disk, a crescent, a black-outlined planet or a giant globe.\nPreserve the water from image 1: all broad smooth swell geometry, the naturally broken golden reflection, foreground colour and fine photographic appearance. Do not flatten, blur or roughen it. Do not alter the crop or perspective.\n\nThis is a careful photographic finishing pass. Keep natural realism, clear air and optical coherence. Highest native quality, full-frame 16:9. No labels, text, captions, numbers, watermarks or borders.",
+      "generated_file": "exec-3bc64146-213f-44cf-b472-8576bf6c8567.png",
+      "saved_file": "../results/illustrations/wp-6-passes/03-selected-finish.png",
+      "reference_images": [
+        "../results/illustrations/wp-6-passes/02-wave-composite.png",
+        "../results/illustrations/wp-6-calculated-guide.png"
+      ],
+      "disposition": "Selected: improved sky palette and close illuminated Earth-mask match. Remaining silhouette and sea-colour differences recorded.",
+      "pass": 3,
+      "sha256": "9a411c193f48c2e6cfb1a2654e57b4d3171276c88bffec7bfd3c15a2393d6604"
+    },
+    {
+      "stage": "silhouette-refinement",
+      "prompt": "Use case: precise-object-edit.\nImage 1 is the EDIT TARGET. Image 2 is the exact LAND SHAPE MASK: the white band is the complete allowed silhouette of the dark islands; black is sky or sea. It is a shape reference, not content to print.\n\nCorrect ONLY the island outline in image 1 to fit that white band. In particular, its rounded hill at one-quarter of the image width currently rises too high: gently lower and flatten this hill by about 9 pixels in the supplied 941-pixel-high image. Replace the small removed upper strip with the immediately adjacent smooth sky. Preserve the waterline at 60% down; do not move or enlarge the island bases. The highest land must be at 56% down the frame, only 4% of frame height above water. Match the low broad mask shoulders, not a pointed peak. Keep the dark natural rock texture inside the new outline and taper out at 87% across.\n\nEverything else must remain visually unchanged: the sky's colour gradient, Earth's exact size, location, diagonal gibbous phase and glow, the entire water surface, smooth broad swells, golden reflection, exposure, crop and low viewpoint. No new objects, light sources or texture. Natural seamless photographic repair, no halo or edge scar. Never display the mask.\n\nHighest native quality, 16:9. Absolutely no text, labels, numbers, captions, borders or watermarks.",
+      "generated_file": "exec-f2cef9bf-aa06-4f34-b61b-befc9fdb9ab5.png",
+      "saved_file": "../results/illustrations/wp-6-passes/04-rejected-silhouette-edit.png",
+      "reference_images": [
+        "../results/illustrations/wp-6-passes/03-selected-finish.png",
+        "../results/illustrations/wp-6-land-mask.png"
+      ],
+      "disposition": "Rejected: maximum silhouette error improved from 10.18 to 8.89 px at 1080p, but Earth-mask overlap fell from 0.901 to 0.845 and mean sky channel error rose from 8.67 to 13.83.",
+      "pass": 4,
+      "sha256": "06f3900e6b3214d5f0a33bc448d9a2b8629fbe082f4b0490c9876f1585c874e1"
+    }
+  ],
+  "review_file": "wp-6-final-review.json",
+  "review_script": "../results/illustrations/review_wp6.py",
+  "review_script_sha256": "7122e221994fb104d7b575990c6d5822cf41e2dd777d54ab26313e055d2b2f52",
+  "checks": {
+    "make_check": "Completed successfully, exit 0.",
+    "python": "646 passed, 37 skipped in 71.98 s.",
+    "javascript": "Immersion and reference/viewer suites passed.",
+    "provenance": "PASS_WITH_BLOCKED_INPUTS: missing external protection datasets; no scientific validation claimed.",
+    "ensemble": "Planning snapshot and workspace integrity passed.",
+    "guide_execution": "Completed at one BLAS/OpenMP thread with reduced wave tiles.",
+    "spectral_renderer": "Not run."
+  }
+}

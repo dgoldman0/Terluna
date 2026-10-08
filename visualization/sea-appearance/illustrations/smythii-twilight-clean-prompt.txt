@@ -1,0 +1,10 @@
+Use case: precise-object-edit.
+Repair the artificial textures in this twilight seascape. The first image is the edit target; the second is a reference for the broad lighting and horizon only.
+
+Make a substantial texture repair, not a tiny colour adjustment. Completely replace the repeated tiny curls, jagged bright flecks and embossed, wrinkled patterns in the sky. Reconstruct the clouds as natural distant thin ice-cloud veils: broad, softly varying translucent layers, a few long delicate irregular filaments, smooth feathered edges, and gentle continuous shading. Most small-scale areas should have clean tonal transitions, with occasional fine structure rather than equally sharp detail everywhere. Preserve the broad darker central cloud mass, the more open and brighter warm flanks, and the sense of enormous distance. Keep the cloud layers thin; do not add cumulus towers or nearby low storm clouds.
+
+Repair the water's crunchy repeating surface pattern as well. Retain the existing large wave shapes, positions and scale, but give them continuous curved surfaces with modest irregular ripples and smooth broken reflections. The foreground can be well resolved without hard outlines around every ripple. Texture naturally becomes finer and less contrasted toward the horizon.
+
+Preserve the 4:3 framing, straight horizon at approximately 77 percent of canvas height, eye-level offshore viewpoint, and overall subdued amber/peach/grey twilight palette and exposure. Keep the central sea darker and its flanks reflecting the warmer sky. The Sun and Earth are below the horizon: no luminous disk or direct solar glitter column.
+The result must look like a clean, unprocessed high-quality optical photograph. Keep natural sharpness where justified, but remove artificial sharpening halos, embossed edges, false crystal sparkles, patterned tessellation and painterly detail. This is a reconstruction of coherent natural textures, not a global blur or fog filter.
+No text, labels, symbols, border, watermark, stars, added land, boats, people or buildings. One clean full-frame image at native 2560 by 1920 if supported, otherwise the highest native 4:3 resolution.

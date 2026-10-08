@@ -1,0 +1,272 @@
+{
+  "schema": "terluna.visualization.generated-sea-review/1",
+  "scene_id": "WP-6",
+  "candidate": "exec-3bc64146-213f-44cf-b472-8576bf6c8567.png",
+  "candidate_sha256": "9a411c193f48c2e6cfb1a2654e57b4d3171276c88bffec7bfd3c15a2393d6604",
+  "native_image_size": [
+    1672,
+    941
+  ],
+  "waterline_fraction": 0.5982996811902231,
+  "target_horizon_fraction": 0.5997222222222223,
+  "maximum_skyline_difference_px_at_1080": 10.18,
+  "skyline": [
+    {
+      "x_at_1920": 0,
+      "target_y_at_1080": 629.7,
+      "observed_y_at_1080": 627.8002125398513,
+      "difference_px_at_1080": -1.9
+    },
+    {
+      "x_at_1920": 120,
+      "target_y_at_1080": 622.7,
+      "observed_y_at_1080": 622.0616365568544,
+      "difference_px_at_1080": -0.64
+    },
+    {
+      "x_at_1920": 240,
+      "target_y_at_1080": 611.7,
+      "observed_y_at_1080": 608.289054197662,
+      "difference_px_at_1080": -3.41
+    },
+    {
+      "x_at_1920": 360,
+      "target_y_at_1080": 605.7,
+      "observed_y_at_1080": 599.1073326248671,
+      "difference_px_at_1080": -6.59
+    },
+    {
+      "x_at_1920": 480,
+      "target_y_at_1080": 604.7,
+      "observed_y_at_1080": 594.5164718384697,
+      "difference_px_at_1080": -10.18
+    },
+    {
+      "x_at_1920": 600,
+      "target_y_at_1080": 608.7,
+      "observed_y_at_1080": 605.9936238044634,
+      "difference_px_at_1080": -2.71
+    },
+    {
+      "x_at_1920": 720,
+      "target_y_at_1080": 613.7,
+      "observed_y_at_1080": 614.0276301806589,
+      "difference_px_at_1080": 0.33
+    },
+    {
+      "x_at_1920": 840,
+      "target_y_at_1080": 616.7,
+      "observed_y_at_1080": 617.470775770457,
+      "difference_px_at_1080": 0.77
+    },
+    {
+      "x_at_1920": 960,
+      "target_y_at_1080": 617.7,
+      "observed_y_at_1080": 616.3230605738576,
+      "difference_px_at_1080": -1.38
+    },
+    {
+      "x_at_1920": 1079,
+      "target_y_at_1080": 616.7,
+      "observed_y_at_1080": 614.0276301806589,
+      "difference_px_at_1080": -2.67
+    },
+    {
+      "x_at_1920": 1199,
+      "target_y_at_1080": 616.7,
+      "observed_y_at_1080": 611.7321997874601,
+      "difference_px_at_1080": -4.97
+    },
+    {
+      "x_at_1920": 1319,
+      "target_y_at_1080": 618.7,
+      "observed_y_at_1080": 616.3230605738576,
+      "difference_px_at_1080": -2.38
+    },
+    {
+      "x_at_1920": 1439,
+      "target_y_at_1080": 622.7,
+      "observed_y_at_1080": 623.2093517534538,
+      "difference_px_at_1080": 0.51
+    },
+    {
+      "x_at_1920": 1559,
+      "target_y_at_1080": 632.7,
+      "observed_y_at_1080": 633.538788522848,
+      "difference_px_at_1080": 0.84
+    }
+  ],
+  "colour_samples": [
+    {
+      "location": "sky: top of frame, left edge",
+      "target_srgb": "#eee6c1",
+      "patch_median_srgb": "#e7e0bf"
+    },
+    {
+      "location": "sky: top of frame, centre",
+      "target_srgb": "#dae0c6",
+      "patch_median_srgb": "#d3d7c0"
+    },
+    {
+      "location": "sky: top of frame, right edge",
+      "target_srgb": "#cbd4bd",
+      "patch_median_srgb": "#bec6b6"
+    },
+    {
+      "location": "sky: 8 degrees up, left edge",
+      "target_srgb": "#ffe0aa",
+      "patch_median_srgb": "#fed99e"
+    },
+    {
+      "location": "sky: 8 degrees up, centre",
+      "target_srgb": "#eed8ab",
+      "patch_median_srgb": "#eacc9e"
+    },
+    {
+      "location": "sky: 8 degrees up, right edge",
+      "target_srgb": "#d3cba8",
+      "patch_median_srgb": "#c7bc9f"
+    },
+    {
+      "location": "sea: just below the horizon, left edge",
+      "target_srgb": "#e4ba8c",
+      "patch_median_srgb": "#f6be8c"
+    },
+    {
+      "location": "sea: just below the horizon, centre",
+      "target_srgb": "#ffe88d",
+      "patch_median_srgb": "#fdd88d"
+    },
+    {
+      "location": "sea: just below the horizon, right edge",
+      "target_srgb": "#b0a78a",
+      "patch_median_srgb": "#989080"
+    },
+    {
+      "location": "sea: 8 degrees down, left edge",
+      "target_srgb": "#b09572",
+      "patch_median_srgb": "#cc9c6f"
+    },
+    {
+      "location": "sea: 8 degrees down, centre",
+      "target_srgb": "#ffeb50",
+      "patch_median_srgb": "#b58c62"
+    },
+    {
+      "location": "sea: 8 degrees down, right edge",
+      "target_srgb": "#8a8670",
+      "patch_median_srgb": "#6a675e"
+    },
+    {
+      "location": "sea: bottom of frame, left edge",
+      "target_srgb": "#8d7e62",
+      "patch_median_srgb": "#655b4c"
+    },
+    {
+      "location": "sea: bottom of frame, centre",
+      "target_srgb": "#ffe93c",
+      "patch_median_srgb": "#e79749"
+    },
+    {
+      "location": "sea: bottom of frame, right edge",
+      "target_srgb": "#727260",
+      "patch_median_srgb": "#4f524d"
+    }
+  ],
+  "earth_phase_comparison": {
+    "bright_core_bounds_at_1920x1080": {
+      "left": 946.22009569378,
+      "right": 992.1531100478469,
+      "top": 86.07863974495217,
+      "bottom": 123.95324123273113,
+      "centroid_x": 966.0283515111889,
+      "centroid_y": 106.32975359898614,
+      "area_fraction": 0.0005116464719910102
+    },
+    "reference_lit_mask_bounds_at_1920x1080": {
+      "left": 945.0717703349283,
+      "right": 992.1531100478469,
+      "top": 87.22635494155153,
+      "bottom": 125.1009564293305,
+      "centroid_x": 965.6106888970119,
+      "centroid_y": 107.19031768285517,
+      "area_fraction": 0.0005574086409144298
+    },
+    "bright_core_to_reference_mask_iou": 0.9005649717514125,
+    "full_disk_reference": {
+      "elevation_deg": 20.3,
+      "azimuth_deg": 94.4,
+      "diameter_deg": 1.814,
+      "diameter_px_at_centre": 47.7,
+      "above_horizon": true,
+      "in_frame": true,
+      "x": 970.3,
+      "y": 99.5,
+      "width_px": 49.7,
+      "height_px": 51.8,
+      "normal_illuminance_lux": 0.332197,
+      "disk_luminance_cd_m2": 729.334,
+      "times_white": 3078.5,
+      "colour_chromaticity": [
+        0.4857,
+        0.4405
+      ],
+      "colour": "vivid amber",
+      "disk_srgb": "#ffcd2d",
+      "above_the_air_colour": "very pale blue",
+      "lit_fraction": 0.579,
+      "phase_angle_deg": 81.0,
+      "lit_side_toward_deg": 242.0,
+      "lit_side_toward": "lower left"
+    }
+  },
+  "bright_gold_extent": [
+    {
+      "height_fraction": 0.64,
+      "left_fraction": 0.43779904306220097,
+      "right_fraction": 0.5496411483253588,
+      "width_px_at_1920": 214.73684210526315
+    },
+    {
+      "height_fraction": 0.75,
+      "left_fraction": 0.4874401913875598,
+      "right_fraction": 0.5155502392344498,
+      "width_px_at_1920": 53.97129186602871
+    },
+    {
+      "height_fraction": 0.9,
+      "left_fraction": 0.47248803827751196,
+      "right_fraction": 0.55622009569378,
+      "width_px_at_1920": 160.76555023923447
+    },
+    {
+      "height_fraction": 0.97,
+      "left_fraction": 0.4868421052631579,
+      "right_fraction": 0.5257177033492823,
+      "width_px_at_1920": 74.64114832535886
+    }
+  ],
+  "method": "Dark-pixel threshold across seven-column neighbourhoods measures island skyline and waterline. Local sRGB patch medians compare display colours. Bright-core threshold compares the visible Earth with the analytic illuminated-mask projection. A gold colour threshold estimates reflection extent. These heuristic display-space measurements are not radiometric validation, and a single realization differs from statistical sea colours.",
+  "candidate_saved_file": "wp-6-procellarum-earthlight.png",
+  "evidence": "Read-only display-space measurements and visual inspection of a generated illustration; not physical or radiometric validation.",
+  "selection": "Pass 3. Pass 4 marginally improved the skyline but degraded the Earth phase-mask agreement and sky colours.",
+  "visual_review": {
+    "camera_and_framing": "Waterline at 59.83% of height versus 59.97% in the scene product. Low eye position and large sky retained. The dark island strip tapers near the reference right extent.",
+    "earth_geometry": "Visible illuminated core matches the calculated lower-left-lit shape with mask IoU 0.901. Its measured centroid differs by less than one reference pixel in each axis. Bright-core width is about 46 reference pixels versus 47 for the illuminated mask; the full reference disk is 49.7 by 51.8 pixels. Bloom makes thresholds approximate.",
+    "earth_appearance": "Warm overexposed core, small glow, and unlit portion blending into sky. No invented blue continents, lunar crater texture or black unlit outline. The input uses a uniform disk; globe/cloud detail is unresolved at this exposure.",
+    "lighting_and_shadows": "Island fronts are dark and broadly backlit by Earth, with diffuse fill. No sunlit faces, sharp daylit shadows or second bright source. Exact terrain cast shadows and source occlusion were not calculated.",
+    "atmosphere": "Clear pale cream upper sky with peach toward the left horizon and quieter grey-beige to the right. Selected finishing pass reduced the earlier excessive orange/dark tone. Across six sampled sky patches, mean absolute channel difference from the supplied swatches is 8.67 on a 0\u2013255 scale; exact atmospheric radiance is unverified.",
+    "wave_structure": "Smooth broad undulations with continuous reflections, without foam or the dense short wind ripples of IC-1. The reference domain realization has Hs 1.081 m versus the source 1.116 m and peak wavelength 71.336 m versus 71.34 m. These are guide measurements, not quantities recoverable or validated from the generated picture.",
+    "reflection": "Gold reflection stays beneath Earth and breaks into extended smooth bright bands. It becomes prominent toward the foreground. The generated instantaneous-looking band pattern differs substantially from the statistical mean sea swatches, including dark troughs at sampled centre pixels. The physical guide does not integrate a long exposure.",
+    "land": "Natural-looking dark matte detail at low relief. The highest left hill remains about 10 reference pixels too high; several other profile points are within 1\u20135 pixels. Fine rock detail is generated and is not recovered LOLA geography.",
+    "image_integrity": "No visible labels, text, numbers, borders, insets or watermark. No boats, people, buildings, clouds, stars or visible Sun. No conspicuous composition seam at the waterline.",
+    "ecology": "The unplanted island appearance is the explicit optics-study placeholder; it does not establish the intended mature land ecology."
+  },
+  "remaining_limits": [
+    "The highest left island hill exceeds the stored silhouette by about 10 px at 1080p; local terrain texture is illustrative.",
+    "Sky colours remain moderately different, and the sea colours/instantaneous reflection pattern do not reproduce the model statistical mean pixel-for-pixel.",
+    "Wave statistics, phase-dependent reflection, cast shadows and spectral transport are not validated by the generated image.",
+    "The long-exposure appearance is illustrated without solving temporal averaging, exposure time or camera motion.",
+    "Native image is 1672 by 941 pixels with no artificial upscaling."
+  ]
+}

@@ -1,0 +1,452 @@
+{
+  "schema": "terluna.visualization.nubium-review/1",
+  "primary_file": "nubium-midnight-human-view.png",
+  "primary_sha256": "ed30c4eea57f0fdbb54308a96d5dc64595ed1cc23f818a1f45561c50244e907a",
+  "status": "Calculated display reference preserved; AI output retained as an illustrative candidate with measured differences. No empirical naked-eye validation claimed.",
+  "geometry": {
+    "reference_camera": {
+      "lon_lat_deg": [
+        -11.93108,
+        -28.1085
+      ],
+      "note": "1.5 km off the west shore of the island on which the wave grid's shore point falls",
+      "eye_height_m": 2.0,
+      "view_azimuth_deg": 22.0,
+      "pitch_deg": 16.0,
+      "horizontal_fov_deg": 65.0,
+      "vertical_fov_deg": 87.4,
+      "frame": [
+        2048,
+        3072
+      ],
+      "horizon_row_at_centre": 1999.5306666666665,
+      "horizon_dip_deg": 0.0869
+    },
+    "earth_scene_product": {
+      "elevation_deg": 53.25,
+      "azimuth_deg": 22.1,
+      "diameter_deg": 1.804,
+      "diameter_px_at_centre": 29.7,
+      "above_horizon": true,
+      "in_frame": true,
+      "x": 601.0,
+      "y": 183.9,
+      "width_px": 37.3,
+      "height_px": 46.8,
+      "normal_illuminance_lux": 2.564053,
+      "disk_luminance_cd_m2": 3340.076,
+      "times_white": 4265.8,
+      "colour_chromaticity": [
+        0.4006,
+        0.4098
+      ],
+      "colour": "orange",
+      "disk_srgb": "#ffdb8a",
+      "above_the_air_colour": "very pale blue",
+      "lit_fraction": 0.986,
+      "phase_angle_deg": 13.5,
+      "lit_side_toward_deg": 313.0,
+      "lit_side_toward": "lower right"
+    },
+    "expected_physical_disk_px_at_2048": [
+      63.65866666666666,
+      79.87199999999999
+    ],
+    "expected_centre_px_at_2048": [
+      1025.7066666666667,
+      313.85600000000005
+    ],
+    "rule": "Earth and horizon share the same rectilinear projection; disk size is not set from the visible bright blob. Glare and tone-map clipping extend that blob beyond the physical limb. A 10-degree Earth-centred view excludes the horizon."
+  },
+  "lighting_and_atmosphere": {
+    "source": "Stored spectral sky, Earthlight and spherical-aerial transport products used by the existing tracer.",
+    "station_ground_lux": 3.58685,
+    "sun_below_horizon_deg": 60.57,
+    "earth_beam_xyz_lux": [
+      2.5061856772625233,
+      2.5640533065907154,
+      1.1863927985477627
+    ],
+    "earth_texture_integral_relative_residual": 6.1762613288747456e-15,
+    "meaning_of_residual": "Normalization precision only, not atmospheric, spectral or empirical accuracy.",
+    "review": "No visible Sun, invented twilight band, decorative stars or cloud layer. The clear molecular atmosphere scatters Earthlight; its brightness is not an ordinary terrestrial moonless sky. Ocular/display glare is distinct from atmospheric scattering. Refraction, aerosols and lunar clouds are omitted."
+  },
+  "waves_and_reflection": {
+    "input_waves": {
+      "source": "nearside wave run, restart file at hour 1392 (+11 h)",
+      "file": "research/runs/waves/nearside/dt300/s1344_1392/end.hot",
+      "depth_m": 101.4,
+      "significant_height_m": 0.626,
+      "peak_period_s": 10.28,
+      "peak_wavelength_m": 27.33,
+      "waves_travel_toward_compass_deg": 318.6,
+      "directional_spread_deg": 39.3,
+      "steepness_hs_over_wavelength": 0.0229,
+      "wind_10m_m_s": 3.59,
+      "wind_toward_compass_deg": 319.7,
+      "friction_velocity_m_s": 0.1325,
+      "short_waves_present": true,
+      "capillary_wavelength_cm": 4.17,
+      "mean_square_slope": {
+        "longer_than_1m": 0.0142,
+        "short": 0.01223,
+        "total": 0.02642
+      },
+      "rms_tilt_deg": 9.23,
+      "slope_covariance_east_north": [
+        [
+          0.0129113,
+          -0.0028546
+        ],
+        [
+          -0.0028546,
+          0.013511
+        ]
+      ],
+      "travel_relative_to_view_deg": -63.4
+    },
+    "realized_sea": {
+      "spectrum": "nearside wave run, restart file at hour 1392 (+11 h)",
+      "spectrum_file": "research/runs/waves/nearside/dt300/s1344_1392/end.hot",
+      "depth_m": 101.45,
+      "friction_velocity_m_s": 0.1325,
+      "wind_toward_deg": 130.3,
+      "wind_10m_m_s": 3.59,
+      "peak_period_s": 10.28,
+      "significant_height_m": 0.604,
+      "seed": 20380307,
+      "tiles": [
+        {
+          "size_m": 2048.0,
+          "cells": 2048,
+          "wavelengths_m": [
+            4.0,
+            null
+          ],
+          "choppy": true,
+          "slope_covariance_expected": [
+            [
+              0.002827,
+              -0.00103
+            ],
+            [
+              -0.00103,
+              0.002988
+            ]
+          ],
+          "slope_covariance_drawn": [
+            [
+              0.002633,
+              -0.000959
+            ],
+            [
+              -0.000959,
+              0.002776
+            ]
+          ]
+        },
+        {
+          "size_m": 131.0,
+          "cells": 1024,
+          "wavelengths_m": [
+            0.5117,
+            4.0
+          ],
+          "choppy": true,
+          "slope_covariance_expected": [
+            [
+              0.004535,
+              -0.001095
+            ],
+            [
+              -0.001095,
+              0.004737
+            ]
+          ],
+          "slope_covariance_drawn": [
+            [
+              0.004386,
+              -0.001069
+            ],
+            [
+              -0.001069,
+              0.004632
+            ]
+          ]
+        },
+        {
+          "size_m": 13.7,
+          "cells": 1024,
+          "wavelengths_m": [
+            0.0535,
+            0.512
+          ],
+          "choppy": false,
+          "slope_covariance_expected": [
+            [
+              0.003086,
+              -0.000372
+            ],
+            [
+              -0.000372,
+              0.003208
+            ]
+          ],
+          "slope_covariance_drawn": [
+            [
+              0.003098,
+              -0.000379
+            ],
+            [
+              -0.000379,
+              0.003223
+            ]
+          ]
+        },
+        {
+          "size_m": 1.43,
+          "cells": 1024,
+          "wavelengths_m": [
+            0.0056,
+            0.054
+          ],
+          "choppy": false,
+          "slope_covariance_expected": [
+            [
+              0.002477,
+              -0.000339
+            ],
+            [
+              -0.000339,
+              0.002588
+            ]
+          ],
+          "slope_covariance_drawn": [
+            [
+              0.002517,
+              -0.000289
+            ],
+            [
+              -0.000289,
+              0.002613
+            ]
+          ]
+        }
+      ],
+      "residual_covariance": [
+        [
+          0.0,
+          -0.0
+        ],
+        [
+          -0.0,
+          0.0
+        ]
+      ],
+      "mean_square_slope": 0.02588
+    },
+    "interpreting_renderer_wind": "Renderer wind_toward_deg is Cartesian anticlockwise from east; 130.3 degrees is compass 319.7 degrees. The scene product uses compass bearings.",
+    "review": "The main specular direction of Earth at 53.25 degrees elevation is below this upward-looking frame. Scattered flecks occur chiefly in the near foreground, slightly left of centre. No horizon-to-observer gold stripe. The tracer handles wave occlusion, filtered facets and a second reflection; generated wave microgeometry is not a recovered or validated spectrum.",
+    "limits": "Nearest SWAN restart is +11 hours; wind is a coarse GCM mean. Surface films, foam, wave breaking and higher reflection orders are not solved."
+  },
+  "land_and_ecology": {
+    "review": "Only a low rightmost coastal sliver is present. Domain terrain, tide and curvature determine visibility and shadows. Bare-soil optical material is a placeholder; no claim of an ecologically dead world. Water composition is the living productive-coast design guess. The camera is offshore, with no solved standing platform."
+  },
+  "perceptual_limits": {
+    "method": {
+      "method": "https://graphics.cs.yale.edu/sites/default/files/1997tvcg_hdr_tonemapping.pdf",
+      "manual": "https://radsite.lbl.gov/radiance/man_html/pcond.1.html",
+      "implementation": "https://github.com/LBNL-ETA/Radiance",
+      "implementation_commit": "bcffc2b52d99b908adfdc2543e4cddf83268a125"
+    },
+    "display": {
+      "command": [
+        "/tmp/nubium-radiance-build/bin/pcond",
+        "-h+",
+        "-u",
+        "100",
+        "-d",
+        "1000",
+        "-p",
+        ".64",
+        ".33",
+        ".30",
+        ".60",
+        ".15",
+        ".06",
+        ".3127",
+        ".3290",
+        "-x",
+        "/tmp/nubium-human-large/nubium-midnight-human-guide.curve.txt",
+        "/tmp/nubium-human-large/nubium-midnight-human-guide.xyze"
+      ],
+      "stderr": "",
+      "display_peak_cd_m2": 100,
+      "fixation_input": null,
+      "adaptation": "Uniform image sampling",
+      "operator_chose_linear_mapping": true,
+      "display_dynamic_range": 1000,
+      "display_primaries": "sRGB/D65",
+      "transfer_function": "exact piecewise sRGB",
+      "input_xyz_luminance_roundtrip_max_relative": 0.006035221429455267,
+      "input_xyz_roundtrip_error_per_largest_component": 0.003902570008953789,
+      "display_linear_rgb_range": [
+        0.0007801055908203125,
+        1.00390625
+      ],
+      "radiance_binaries": {
+        "pvalue": "12af1dfdd84a1b30f2ec6ce6f40e6bc707e4549c7fa258bb372bf484cf433b69",
+        "pcond": "bfb018b8045859422d2b55623be115158a56806dcd31c67f8fcfdfc2be309f8f",
+        "pfilt": "1678bbf8b677d03443ab7b06d818b603e18bba6962a1d95a04631f52b33fb4f4"
+      },
+      "output_sha256": "ed30c4eea57f0fdbb54308a96d5dc64595ed1cc23f818a1f45561c50244e907a"
+    },
+    "review": "Wide-view pcond chooses a linear map and clips Earth detail; the resulting featureless bright disk must not be interpreted as proof that unaided observers cannot see terrestrial structure. Foveal glare is approximate and can have coarse contour structure. Colour loss and acuity are conditional on this legacy display operator, not a measured Open Moon observer.",
+    "sensitivity_cases": [
+      "100:1 display contrast",
+      "Earth-only fixation in the wide view",
+      "10-degree Earth-centred crop with Earth fixation"
+    ],
+    "exposure_blending": "No independent Earth/landscape exposure in the calculated primary. Earlier photographic blending was rejected."
+  },
+  "numerical_sampling_review": {
+    "spp": [
+      16,
+      64
+    ],
+    "sea_pixels": 308706,
+    "sea_mean_y_cd_m2": [
+      0.15613743662834167,
+      0.15611086785793304
+    ],
+    "sea_median_y_cd_m2": [
+      0.12947599589824677,
+      0.12946300208568573
+    ],
+    "mean_y_relative_change": -0.00017017126083374023,
+    "sea_error_p50_p90_p99_16": [
+      0.008402259554713964,
+      0.01895823795348406,
+      0.03570235762745142
+    ],
+    "sea_error_p50_p90_p99_64": [
+      0.00428413855843246,
+      0.009514359757304192,
+      0.017676271684467792
+    ],
+    "evidence": "Sampling refinement of one fixed wave realization, not full numerical convergence or empirical validation."
+  },
+  "large_display_consistency": {
+    "large_pixels": [
+      2048,
+      3072
+    ],
+    "large_spp": 4,
+    "small_pixels": [
+      768,
+      1152
+    ],
+    "small_spp": 64,
+    "image_mean_abs_rgb_difference_8bit": [
+      0.26982173213252314,
+      0.2664930555555556,
+      0.2575966163917824
+    ],
+    "sea_mean_abs_rgb_difference_8bit": [
+      0.6075106534090909,
+      0.6138989997632576,
+      0.6009669448390151
+    ],
+    "method": "Large conditioned image Lanczos-resized in memory only to compare against the smaller 64-sample conditioned reference. This is a display consistency check, not radiance convergence; camera footprints differ."
+  },
+  "physical_statistics": {
+    "material_pixel_shares_sea_land": [
+      0.34917712211608887,
+      0.0002105236053466797
+    ],
+    "sea_mean_Y_cd_m2": 0.16020162403583527,
+    "sky_Y_p05_p50_p95_excluding_disk": [
+      0.5131259560585022,
+      0.5741035342216492,
+      0.6264891624450684
+    ]
+  },
+  "generated_candidate_review": {
+    "file": "nubium-midnight-generated-candidate.png",
+    "selected_pass": 9,
+    "native_pixels": [
+      1024,
+      1536
+    ],
+    "requested_pixels": [
+      2048,
+      3072
+    ],
+    "metrics": {
+      "size": [
+        1024,
+        1536
+      ],
+      "bright_core_bbox": [
+        490,
+        122,
+        528,
+        170
+      ],
+      "bright_core_centroid": [
+        508.4168406402227,
+        145.86847599164926
+      ],
+      "horizon_gradient_row": 996,
+      "file": "exec-535d7bd2-0128-47f1-a883-2162f2e59139.png",
+      "sha256": "8bc3d0c25c5b38fcd4b0e248da65895e11469a19205f9a6c0921d1c74d238e5f",
+      "sky_mean_abs_rgb_error_8bit": [
+        3.922431640625,
+        3.0046328125,
+        1.251552734375
+      ],
+      "sky_mean_rgb_8bit": [
+        47.8998984375,
+        50.244201171875,
+        54.687015625
+      ],
+      "sea_median_rgb_8bit": [
+        18.0,
+        19.0,
+        21.0
+      ]
+    },
+    "reference_proxy_metrics": {
+      "size": [
+        1024,
+        1536
+      ],
+      "bright_core_bbox": [
+        495,
+        131,
+        534,
+        184
+      ],
+      "bright_core_centroid": [
+        514.0186615186615,
+        156.64543114543113
+      ],
+      "horizon_gradient_row": 999
+    },
+    "metric_limits": "Read-only pixel analysis; reference resized only in memory for comparison. A bright-core threshold includes glare, so it is NOT a measurement of the physical disk boundary. The calculated camera/disk geometry is authoritative.",
+    "review": "Closest later candidate: horizon proxy differs by about 3 pixels from the 1024-wide reference; glare-core centre differs by about 5.6 pixels horizontally and 10.8 vertically. These display proxies do not certify physical disk scale. Sky differences are a few 8-bit channel levels; fine wave shape and warm glints remain invented. No text or labels observed. The generator did not provide the requested larger raster.",
+    "earlier_measurement_correction": "Comparing a glare-expanded white core directly to the unblurred physical-disk mask overstates a size error. Use the calculated angular projection and compare like-for-like display proxies; the Moon photograph has the same unknown glare/crop issue."
+  },
+  "checks": {
+    "targeted_view_tests": "3 passed, including the official Radiance XYZ conversion and monotonic map test.",
+    "existing_numba_sea_kernel_tests": "7 passed.",
+    "javascript_size_comparison": "node --check passed; interactive controls not yet browser-reviewed.",
+    "make_check": "Passed, exit 0: layer check, 646 Python tests passed and 37 skipped, JavaScript suites passed, research provenance PASS_WITH_BLOCKED_INPUTS for absent external protection datasets, ensemble planning snapshot/workspace integrity passed.",
+    "not_performed": [
+      "Empirical perceptual validation",
+      "Full spatially resolved Earth spectral/cloud-BRDF calculation",
+      "Full resolution-and-sampling convergence study",
+      "Prediction of future weather or ecological landscape"
+    ]
+  }
+}

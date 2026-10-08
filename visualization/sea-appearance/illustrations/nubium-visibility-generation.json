@@ -1,0 +1,31 @@
+{
+  "schema": "terluna.visualization.nubium-visibility-generation/1",
+  "method": "Built-in imagegen, two image inputs and one sky correction; no CLI or manual pixel editing of generated output.",
+  "passes": [
+    {
+      "tool": "built-in imagegen",
+      "prompt": "Use case: compositing.\nAsset: unlabeled, immersive high-fidelity photographic illustration of the modeled terraformed Moon sea at local midnight.\nImage 1 is the edit target and strict composition, lighting, colour and wave reference. Image 2 is a supporting enlarged view of the SAME Earth, to preserve its cloud/ocean pattern when resolving the small disk; it is not a different composition.\nPolish image 1 into a rich, clean natural view while preserving its camera and radiometric relationships. Requested canvas: 2048 by 3072 portrait, or the largest native portrait output available. Do not crop or reframe.\nThe observer is two metres above offshore water in southern Mare Nubium. The real Sun is over 60 degrees below the horizon. The sky is a smooth subdued slate-blue grading toward the dim distant horizon, clear and cloudless. Earth is a warm reflected-light planet with cream cloud bands and subdued green-grey ocean regions, not an emissive star. Its actual diameter is 1.804 degrees, 98.6 percent lit, 53.25 degrees above the horizon. Preserve the observed cloud pattern and gentle halo of both references, without burning away its internal detail.\nMandatory composition invariants, as fractions of the image: Earth's centre x=0.50087, y=0.10215; solid disk width=0.03105 of canvas width and height=0.02631 of canvas height, excluding halo. The vertical elongation is the wide rectilinear camera projection; preserve it. Horizon at y=0.65089. A barely perceptible, extremely low dark distant land sliver occupies the far right horizon. Keep these positions and sizes.\nWater is a dark living sea with long broad low-gravity swells around 0.63 m significant height and 27 m peak wavelength, crossed by fine ripples. Preserve reference wave directions, scale hierarchy and perspective. Very sparse warm Earth glints increase toward the bottom foreground. There is no continuous reflection road to the horizon because Earth is high overhead. Water should retain subtle visible texture without a daytime exposure, noise speckles, painted streaks or huge breakers.\nChange only photographic finish and fine natural material detail. Keep the measured Earth structure, small apparent disk, sky gradient, restrained brightness, horizon, deep water, swell geometry and reflection distribution of image 1.\nNo labels, writing, inset panels, symbols, watermarks, lens flare polygons, Sun, second moon, dense stars, invented clouds, beach, foreground land, trees, people, vessels or buildings.",
+      "inputs": [
+        "nubium-midnight-visibility-view.png",
+        "nubium-earth-visibility-view.png"
+      ],
+      "output": "nubium-midnight-visibility-first-generated.png",
+      "original_output": "/home/kir/.codex/generated_images/01a108bc-550e-7eb2-afc2-22dfcd93f81c/exec-e0edbfb0-0d09-4d72-9d5f-ef32d9f1ecb6.png",
+      "sha256": "a403df83a282a5c95156543a0923938ff0bd0ded928a723ff3834dd5446e9d4c"
+    },
+    {
+      "tool": "built-in imagegen",
+      "prompt": "Use case: precise-object-edit. Image 1 is the edit target, the previous Nubium midnight composite. Image 2 is the numerical sky reference.\nMake one correction only: remove all mottled patches, cloudlike bands, streaks and artificial textured noise from the SKY of image 1. The atmosphere is clear molecular air with no lunar clouds or aerosol weather. Replace the sky's texture with the very smooth, restrained slate-blue-to-grey vertical radiance gradient shown by image 2. Keep the small Earth and its soft local halo unchanged. Preserve the sea, exact horizon row, distant right land sliver, all wave shapes, all reflection glints, crop, exposure relationships and Earth geometry of image 1. Preserve its natural photographic finish. No new stars or features. No labels, writing, watermarks or panels. Requested final canvas 2048 by 3072 portrait if available, keeping the identical framing and normalized sizes.",
+      "output": "nubium-midnight-visibility-generated.png",
+      "original_output": "/home/kir/.codex/generated_images/01a108bc-550e-7eb2-afc2-22dfcd93f81c/exec-25abb0d0-d9fd-4676-a049-70ab6938d4ba.png",
+      "sha256": "a44c0d9ea29fe872e4fa45075fe3b90368fad6f36e5b8875d344714e29139adb"
+    }
+  ],
+  "reference_images": {
+    "nubium-midnight-visibility-view.png": "e789558d456a0aa7d25cc36fad41a865295008c33f7041134c97d5b37a49ef00",
+    "nubium-earth-visibility-view.png": "9a1fac625cdc2ffc62d7533688da9d1de65a7e379ce0ac6180bad3b91bc0771b"
+  },
+  "disposition": "Preserved illustration candidates. Both change the measured Earth pattern and sky; use the calculated reference for quantitative interpretation.",
+  "input_credits": "NASA/GSFC DSCOVR EPIC historical observed structure; NASA/JPL orientation. Study physical sky and sea; CIE99 through HDR-VDP-3.0.7.",
+  "reading_rule": "No labels inside images. Native generated output is 1024 by 1536; the calculated wide reference is 2048 by 3072."
+}

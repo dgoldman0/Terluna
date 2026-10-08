@@ -1,0 +1,110 @@
+{
+  "schema": "terluna.research.nobili-inputs/1",
+  "terrain": {
+    "pixels_per_degree": 256,
+    "north": {
+      "schema": "terluna.geography.coastal-source/1",
+      "source_url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_256_00n_90n_000_180.img",
+      "label_url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_256_00n_90n_000_180.lbl",
+      "label_sha256": "0d631ad27e215ebece591306e21f49d3c72e6b4da278c6cbaeb79199717dd54b",
+      "label_bytes": 5186,
+      "source_size_bytes": 2123366400,
+      "source_etag": "\"0e8ded85f1ad51:0\"",
+      "source_last_modified": "Mon, 03 Jun 2019 22:58:24 GMT",
+      "selected_byte_range": [
+        1981808640,
+        2123366399
+      ],
+      "selected_sha256": "aa53e733d3ab069605548084d27d16cc7f1e0d5786b7a1ab0ec69b152e8686cf",
+      "selected_bytes": 141557760,
+      "first_row": 21504,
+      "row_count": 1536,
+      "row_bytes": 92160,
+      "lines": 23040,
+      "samples": 46080,
+      "pixels_per_degree": 256,
+      "latitude_bounds_deg": [
+        0,
+        6
+      ],
+      "longitude_bounds_deg": [
+        0,
+        180
+      ],
+      "sample_type": "<i2",
+      "scale_m": 0.5,
+      "coordinate_frame": "Mean Earth/polar axis of DE421",
+      "product_version": "V4.0",
+      "product_creation_date": "2019-06-03",
+      "retrieved": "2026-10-03",
+      "independent_range_checks": [
+        {
+          "source_offset": 1981808640,
+          "bytes": 2048,
+          "sha256": "e4be59076124b246bbda60c42f9bf8bcbbef9e5230aed5ee3f7b340e033d4574",
+          "matches": true
+        },
+        {
+          "source_offset": 2052635008,
+          "bytes": 2048,
+          "sha256": "71d12b5c3dcb2fc7bc8a78bb9cfddc8b7389c27cf3b9f3b16a5f4134e30e9c60",
+          "matches": true
+        },
+        {
+          "source_offset": 2123364352,
+          "bytes": 2048,
+          "sha256": "4fb6657292b1a156b7a013612dbb3a507463a2e333a11eac57102ad67c7fd00b",
+          "matches": true
+        }
+      ],
+      "credit": "NASA LRO LOLA Science Team, NASA Goddard Space Flight Center; archived by the PDS Geosciences Node at Washington University in St. Louis.",
+      "rights": "NASA scientific data; retain source attribution. External bytes remain in ignored storage.",
+      "evidence": "Archived altimetry-derived raster, with interpolation for incomplete coverage; 118 m pixel spacing describes the grid sampling.",
+      "local_image": "research/runs/waves/shore/inputs/ldem_256_rows_0n_6n.img",
+      "local_label": "research/runs/waves/shore/inputs/ldem_256_00n_90n_000_180.lbl",
+      "sha256": "aa53e733d3ab069605548084d27d16cc7f1e0d5786b7a1ab0ec69b152e8686cf",
+      "line_projection_offset": 23039.5
+    },
+    "south": {
+      "url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_256_90s_00s_000_180.img",
+      "selected_byte_range": [
+        0,
+        47185919
+      ],
+      "selected_bytes": 47185920,
+      "source_etag": "\"8011e430951ad51:0\"",
+      "source_last_modified": "Tue, 04 Jun 2019 05:20:15 GMT",
+      "sha256": "7fbc9c632daeadb052f1e4699800bacfac23a25062402159203f9ed5b3d6dd85",
+      "label_sha256": "7b8bb0d163f33856fac49e8e77d85ea7917dc0acb1ec664c3d50447bfaf520f7",
+      "first_row": 0,
+      "row_count": 512,
+      "samples": 46080,
+      "pixels_per_degree": 256,
+      "scale_m": 0.5,
+      "local_image": "research/runs/sea_appearance/nobili/ldem_256_rows_0s_2s.img",
+      "independent_first_2048_bytes_sha256": "21f5e4d10b83cb06b3425d38c3347387d73734dc57a1c8718c459f65f428c8c2",
+      "horizons": {
+        "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27399%27&OBJ_DATA=%27YES%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%2775.6278%2C0%2C0.002%27&TLIST=%272463769.879982721%27&TIME_TYPE=%27TT%27&QUANTITIES=%271%2C4%2C10%2C13%2C14%2C15%2C16%2C17%2C24%2C32%2C34%27&CSV_FORMAT=%27YES%27&ANG_FORMAT=%27DEG%27&EXTRA_PREC=%27YES%27",
+        "sha256": "94db490d1c6b3374b525fa2a37a85a94dfc40448e8ed6974e4bbe91017aec422",
+        "jd_tt": 2463769.879982721,
+        "local_file": "research/runs/sea_appearance/nobili/nobili-horizons.txt"
+      },
+      "line_projection_offset": -0.5
+    }
+  },
+  "horizons": {
+    "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27399%27&OBJ_DATA=%27YES%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40301%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%2775.6278%2C0%2C0.002%27&TLIST=%272463769.879982721%27&TIME_TYPE=%27TT%27&QUANTITIES=%271%2C4%2C10%2C13%2C14%2C15%2C16%2C17%2C24%2C32%2C34%27&CSV_FORMAT=%27YES%27&ANG_FORMAT=%27DEG%27&EXTRA_PREC=%27YES%27",
+    "sha256": "94db490d1c6b3374b525fa2a37a85a94dfc40448e8ed6974e4bbe91017aec422",
+    "jd_tt": 2463769.879982721,
+    "local_file": "research/runs/sea_appearance/nobili/nobili-horizons.txt"
+  },
+  "cloud": {
+    "snapshot": 367,
+    "time_day": 45.75,
+    "file": "cm1out_t000367_s.dat",
+    "sha256": "788e59855bba18656bb9dceeffcff90fb1d639e83648c88852e74f33ec322f67",
+    "case_sha256": "66979fb6a66703ee7edc3a8144f924e1b377a5e0fd83378c62ca88a96908b748"
+  },
+  "credit": "NASA LRO LOLA Science Team and NASA/JPL Horizons. Terrain external bytes stay in ignored research storage; NASA informational use, source credit retained.",
+  "reading_rule": "Fail on hash mismatch. Sources are archived data and a calculated ephemeris; no future weather is observed."
+}

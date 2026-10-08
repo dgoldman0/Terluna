@@ -1,0 +1,117 @@
+{
+  "schema": "terluna.visualization.coastal-image-checks/1",
+  "reference": {
+    "frame": [
+      2560,
+      1920
+    ],
+    "sha256": "0d56e15df0bbf0f7c59f64cb69e26b449537f56988f367420294110e9526abd6",
+    "expected_geometric_horizon_fraction": 0.7693508172234379,
+    "fitted_horizon_coherent_fraction": 0.7697916666666667,
+    "median_linear_display_Y": {
+      "upper_sky": 0.17022570095308043,
+      "middle_cloud_field": 0.12553037006343207,
+      "water": 0.02697906593001034
+    },
+    "median_linear_display_RGB": {
+      "upper_sky": [
+        0.18782077230067787,
+        0.16826940018969075,
+        0.11443537382697373
+      ],
+      "middle_cloud_field": [
+        0.13843161503245183,
+        0.12743768043564743,
+        0.0822827071298148
+      ],
+      "water": [
+        0.03189603307301153,
+        0.026241221894849898,
+        0.014443843596092545
+      ]
+    }
+  },
+  "images": {
+    "smythii-twilight-clouds-first-generated.png": {
+      "frame": [
+        1448,
+        1086
+      ],
+      "sha256": "0d27e743cde9206f6b6d2243d38691479f1583162201616f902dddae4c5957af",
+      "expected_geometric_horizon_fraction": 0.7693508172234379,
+      "fitted_horizon_coherent_fraction": 0.7661141804788214,
+      "median_linear_display_Y": {
+        "upper_sky": 0.1500026765059826,
+        "middle_cloud_field": 0.11307674066378456,
+        "water": 0.03107270928178551
+      },
+      "median_linear_display_RGB": {
+        "upper_sky": [
+          0.14702726649759498,
+          0.14995978981060856,
+          0.162029375639111
+        ],
+        "middle_cloud_field": [
+          0.12213877222960187,
+          0.1119324278369056,
+          0.10946171077829933
+        ],
+        "water": [
+          0.033104766570885055,
+          0.030713443732993635,
+          0.026241221894849898
+        ]
+      },
+      "horizon_rms_fraction_of_height": 0.003677486187845247,
+      "region_display_luminance_ratios": {
+        "upper_sky": 0.8811987594477761,
+        "middle_cloud_field": 0.9007919008495352,
+        "water": 1.1517340653080794
+      }
+    },
+    "smythii-twilight-clouds.png": {
+      "frame": [
+        1448,
+        1086
+      ],
+      "sha256": "5bed1f7a7cd2beab8f29bae213657cd7561602d1733decf7bdfc1f1f46f70098",
+      "expected_geometric_horizon_fraction": 0.7693508172234379,
+      "fitted_horizon_coherent_fraction": 0.7661141804788214,
+      "median_linear_display_Y": {
+        "upper_sky": 0.1397822953768349,
+        "middle_cloud_field": 0.09714643057900281,
+        "water": 0.030326654949613896
+      },
+      "median_linear_display_RGB": {
+        "upper_sky": [
+          0.17464740365558504,
+          0.13286832155381798,
+          0.10461648409110419
+        ],
+        "middle_cloud_field": [
+          0.12213877222960187,
+          0.09305896284668745,
+          0.07036009569659588
+        ],
+        "water": [
+          0.0382043715953465,
+          0.028426039504420793,
+          0.019382360956935723
+        ]
+      },
+      "horizon_rms_fraction_of_height": 0.003677486187845247,
+      "region_display_luminance_ratios": {
+        "upper_sky": 0.8211585829531306,
+        "middle_cloud_field": 0.7738878689667966,
+        "water": 1.1240809829475913
+      }
+    }
+  },
+  "method": "Coherent row-mean colour edge in the known horizon band and robust joint Earth-limb centre/radius fit; registered interior ranks; fixed-region linear display luminance.",
+  "limits": [
+    "Image-space screens only; no absolute photometry, human-vision validation or recovered wave height.",
+    "Cloud microtexture and cross-ring morphology are illustrative; the cloud experiment does not resolve them.",
+    "Limb fits can respond to glare and low pixel count; interpret together with visual inspection."
+  ],
+  "producer_sha256": "f2f3f66f1b0a832dc78756e88149a7b7802f4892c0aa288f5ff6d983fee99a4e"
+}

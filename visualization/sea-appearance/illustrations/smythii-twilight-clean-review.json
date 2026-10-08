@@ -1,0 +1,267 @@
+{
+  "schema": "terluna.visualization.smythii-texture-repair/1",
+  "status": "Selected photographic texture repair; an illustration constrained by the scene, not a new physical solution or validated human-vision rendering.",
+  "tool": "Built-in image_gen; four repair attempts; no CLI fallback",
+  "selected": {
+    "path": "visualization/sea-appearance/illustrations/smythii-twilight-clean.png",
+    "sha256": "6062c8b85271dd84823cd122bed8705c1d028d352c30dbda0cff1766ef53c027",
+    "native_frame": [
+      1448,
+      1086
+    ]
+  },
+  "first_pass_preserved": {
+    "path": "visualization/sea-appearance/illustrations/smythii-twilight-clean-first-generated.png",
+    "sha256": "c935335ad63216d05cf85f924af2fb0cf019e0573fc2d9a8a21785e1d627f730",
+    "native_frame": [
+      1448,
+      1086
+    ]
+  },
+  "prior_images_preserved": [
+    {
+      "path": "visualization/sea-appearance/illustrations/smythii-twilight-clouds.png",
+      "sha256": "5bed1f7a7cd2beab8f29bae213657cd7561602d1733decf7bdfc1f1f46f70098",
+      "native_frame": [
+        1448,
+        1086
+      ]
+    },
+    {
+      "path": "visualization/sea-appearance/illustrations/smythii-twilight-depth.png",
+      "sha256": "56799290c88e96159ef02a5c2fc24bd1a9c4bb735e264b4ce649404832ba9fea",
+      "native_frame": [
+        1448,
+        1086
+      ]
+    }
+  ],
+  "scene_product": {
+    "path": "research/studies/sea_appearance/results/smythii-twilight-clouds.json",
+    "sha256": "83cd9fdfa605a74a2960bd5f46ca4ffa02f5676015a47af2d9518f0963c3ce85"
+  },
+  "calculated_reference": {
+    "path": "visualization/sea-appearance/illustrations/smythii-twilight-clouds-reference.png",
+    "sha256": "0d56e15df0bbf0f7c59f64cb69e26b449537f56988f367420294110e9526abd6",
+    "native_frame": [
+      2560,
+      1920
+    ]
+  },
+  "display_reference": {
+    "path": "visualization/sea-appearance/illustrations/smythii-twilight-clouds-display.json",
+    "sha256": "f2f481f627435be406a16fa4255226e884e73c984aac82653096a51b935bee26"
+  },
+  "image_checks": {
+    "path": "visualization/sea-appearance/illustrations/smythii-twilight-clean-image-checks.json",
+    "sha256": "d2d3a3624a9a98db5e8925c7ed8362cbc1885adb6138c976d20c1609f2840add"
+  },
+  "generation_history": [
+    {
+      "pass": 1,
+      "generated_source": {
+        "path": "/home/kir/.codex/generated_images/01a108bc-550e-7eb2-afc2-22dfcd93f81c/exec-1965fd30-1664-4225-94c5-0c6d440ba089.png",
+        "sha256": "c935335ad63216d05cf85f924af2fb0cf019e0573fc2d9a8a21785e1d627f730",
+        "native_frame": [
+          1448,
+          1086
+        ]
+      },
+      "saved_output": {
+        "path": "visualization/sea-appearance/illustrations/smythii-twilight-clean-first-generated.png",
+        "sha256": "c935335ad63216d05cf85f924af2fb0cf019e0573fc2d9a8a21785e1d627f730",
+        "native_frame": [
+          1448,
+          1086
+        ]
+      },
+      "retention": "preserved in Git",
+      "prompt": {
+        "path": "visualization/sea-appearance/illustrations/smythii-twilight-clean-prompt.txt",
+        "sha256": "abde6bd52028471d8d247e016fcad8f2cfb37b63a8dd0f5c56d862449c699593"
+      },
+      "inputs_in_order": [
+        {
+          "path": "visualization/sea-appearance/illustrations/smythii-twilight-depth.png",
+          "sha256": "56799290c88e96159ef02a5c2fc24bd1a9c4bb735e264b4ce649404832ba9fea",
+          "native_frame": [
+            1448,
+            1086
+          ]
+        },
+        {
+          "path": "visualization/sea-appearance/illustrations/smythii-twilight-clouds-reference.png",
+          "sha256": "0d56e15df0bbf0f7c59f64cb69e26b449537f56988f367420294110e9526abd6",
+          "native_frame": [
+            2560,
+            1920
+          ]
+        }
+      ],
+      "assessment": "Broad texture cleanup; reduced sharp cloud flecks but retained repeated cloud curls and outlined water detail."
+    },
+    {
+      "pass": 2,
+      "generated_source": {
+        "path": "/home/kir/.codex/generated_images/01a108bc-550e-7eb2-afc2-22dfcd93f81c/exec-0028a560-ae55-4077-8e38-22a6ec710d4e.png",
+        "sha256": "f2aa5fee5739176360d2406ea19f70a8a354a4fd625a4e0a3370d1ed1c228166",
+        "native_frame": [
+          1448,
+          1086
+        ]
+      },
+      "saved_output": {
+        "path": "research/runs/sea_appearance/smythii-twilight-clouds/clean-second-generated.png",
+        "sha256": "f2aa5fee5739176360d2406ea19f70a8a354a4fd625a4e0a3370d1ed1c228166",
+        "native_frame": [
+          1448,
+          1086
+        ]
+      },
+      "retention": "ignored local intermediate",
+      "prompt": {
+        "path": "visualization/sea-appearance/illustrations/smythii-twilight-clean-cloud-prompt.txt",
+        "sha256": "342a82194760275cc90598f71a8bbd425e64e1b8594e358347ba40a9d15d95f7"
+      },
+      "inputs_in_order": [
+        {
+          "path": "visualization/sea-appearance/illustrations/smythii-twilight-clean-first-generated.png",
+          "sha256": "c935335ad63216d05cf85f924af2fb0cf019e0573fc2d9a8a21785e1d627f730",
+          "native_frame": [
+            1448,
+            1086
+          ]
+        }
+      ],
+      "assessment": "Targeted cloud reconstruction; smoother veils, but repeated fine cloud and water motifs remain."
+    },
+    {
+      "pass": 3,
+      "generated_source": {
+        "path": "/home/kir/.codex/generated_images/01a108bc-550e-7eb2-afc2-22dfcd93f81c/exec-02a39c49-079b-4162-9808-73a3d74b237f.png",
+        "sha256": "d3666037480de723e67200c21b7bcacb0d2ddf5f822c178bb2dc8498cb4adfdd",
+        "native_frame": [
+          1448,
+          1086
+        ]
+      },
+      "saved_output": {
+        "path": "research/runs/sea_appearance/smythii-twilight-clouds/clean-third-generated.png",
+        "sha256": "d3666037480de723e67200c21b7bcacb0d2ddf5f822c178bb2dc8498cb4adfdd",
+        "native_frame": [
+          1448,
+          1086
+        ]
+      },
+      "retention": "ignored local intermediate",
+      "prompt": {
+        "path": "visualization/sea-appearance/illustrations/smythii-twilight-clean-water-prompt.txt",
+        "sha256": "cbc759b92c054f9cbbdf6314def928d566b8b64c92630aa1bdb4bbec93572e9a"
+      },
+      "inputs_in_order": [
+        {
+          "path": "research/runs/sea_appearance/smythii-twilight-clouds/clean-second-generated.png",
+          "sha256": "f2aa5fee5739176360d2406ea19f70a8a354a4fd625a4e0a3370d1ed1c228166",
+          "native_frame": [
+            1448,
+            1086
+          ]
+        },
+        {
+          "path": "visualization/sea-appearance/illustrations/smythii-twilight-clouds-reference.png",
+          "sha256": "0d56e15df0bbf0f7c59f64cb69e26b449537f56988f367420294110e9526abd6",
+          "native_frame": [
+            2560,
+            1920
+          ]
+        }
+      ],
+      "assessment": "Targeted water reconstruction; the requested dimming was not achieved. Water median display Y is 35% above the reference and some hard outlines remain."
+    },
+    {
+      "pass": 4,
+      "generated_source": {
+        "path": "/home/kir/.codex/generated_images/01a108bc-550e-7eb2-afc2-22dfcd93f81c/exec-5adf56be-ef39-4a0c-b7b4-0375433e8a69.png",
+        "sha256": "6062c8b85271dd84823cd122bed8705c1d028d352c30dbda0cff1766ef53c027",
+        "native_frame": [
+          1448,
+          1086
+        ]
+      },
+      "saved_output": {
+        "path": "visualization/sea-appearance/illustrations/smythii-twilight-clean.png",
+        "sha256": "6062c8b85271dd84823cd122bed8705c1d028d352c30dbda0cff1766ef53c027",
+        "native_frame": [
+          1448,
+          1086
+        ]
+      },
+      "retention": "preserved in Git",
+      "prompt": {
+        "path": "visualization/sea-appearance/illustrations/smythii-twilight-clean-rebuild-prompt.txt",
+        "sha256": "354d1a68c6ead6d99b21ff33ca1b1fe10540551ac79c9cee7ffb080487c7728d"
+      },
+      "inputs_in_order": [
+        {
+          "path": "visualization/sea-appearance/illustrations/smythii-twilight-clouds-reference.png",
+          "sha256": "0d56e15df0bbf0f7c59f64cb69e26b449537f56988f367420294110e9526abd6",
+          "native_frame": [
+            2560,
+            1920
+          ]
+        }
+      ],
+      "assessment": "Selected: reconstruct natural cloud and water textures directly from the calculated broad-light reference, avoiding inheritance of earlier repeated motifs."
+    }
+  ],
+  "image_processing": "Generated outputs were copied byte-for-byte. No post-generation image editing or artificial upscaling; Python was used only for copying, metadata and numeric image analysis.",
+  "visual_review": [
+    "The selected reconstruction replaces the pronounced repeated crescent curls and embossed bright flecks with smoother cloud veils and irregular feathered transitions. Fine cloud morphology differs from the original illustration.",
+    "Broad rounded water slopes are more continuous, with fewer isolated hard outlines. Fine ripples remain illustrative and are not a recovered wave realization.",
+    "The broad dark central cloud bank and darker sea beneath it remain, with warmer and brighter flanks. The frame is still a wide offshore view and the horizon is straight.",
+    "The Sun and Earth remain below the horizon and absent from the picture. No solar glitter pillar, resolved crystal sparkles, added terrain, foam, objects, text, labels or watermark was found.",
+    "The selected reconstruction is darker than the calculated display in all three sampled regions. The upper sky is also bluer and the orange twilight flanks are more saturated; texture improvement does not imply radiometric equivalence."
+  ],
+  "measured": {
+    "horizon_fraction": 0.7679558011049724,
+    "reference_horizon_fraction": 0.7697916666666667,
+    "horizon_difference_px_at_generated_resolution": -1.9937499999999433,
+    "median_linear_display_Y_ratios_to_calculated_reference": {
+      "upper_sky": 0.725788312960276,
+      "middle_cloud_field": 0.8590611894855605,
+      "water": 0.7505158525226837
+    },
+    "median_linear_display_Y_ratios_to_original_illustration": {
+      "upper_sky": 0.8838588891686734,
+      "middle_cloud_field": 1.1100589942474188,
+      "water": 0.6676706250777978
+    }
+  },
+  "reading_rule": "Use the calculated reference and scene product for geometry and broad light levels. These checks measure displayed pixels; they do not validate cloud altitude, cloud microphysics, wave height, stereoscopic depth or naked-eye appearance.",
+  "remaining_limits": [
+    "The repair removes visual artifacts, not simulated ice crystals. The source optics do not resolve individual crystal facets, and the distant cloud particles are not individually visible in this view.",
+    "The cloud experiment is a coarse two-dimensional equatorial section with an assumed cross-ring extent. All fine cloud forms and their apparent overlapping layers are illustrative.",
+    "Against the calculated display, selected upper-sky, middle-cloud and water medians are about 27%, 14% and 25% lower. The fitted horizon is about two generated pixels higher. Exact photometry and colour fidelity have not been achieved.",
+    "Residual small-scale generated texture remains. No metric cloud-depth, wave-spectrum or human-perception validation is claimed.",
+    "No new atmospheric, cloud-transport or wave calculation was performed. The selected image remains a monocular twilight scene, not midnight or a three-dimensional reconstruction."
+  ],
+  "validation": {
+    "image_check_command": "python visualization/sea-appearance/coastal_image_review.py --reference visualization/sea-appearance/illustrations/smythii-twilight-clouds-reference.png --display visualization/sea-appearance/illustrations/smythii-twilight-clouds-display.json --image visualization/sea-appearance/illustrations/smythii-twilight-clouds.png --image visualization/sea-appearance/illustrations/smythii-twilight-depth.png --image visualization/sea-appearance/illustrations/smythii-twilight-clean-first-generated.png --image research/runs/sea_appearance/smythii-twilight-clouds/clean-second-generated.png --image research/runs/sea_appearance/smythii-twilight-clouds/clean-third-generated.png --image visualization/sea-appearance/illustrations/smythii-twilight-clean.png --out visualization/sea-appearance/illustrations/smythii-twilight-clean-image-checks.json",
+    "portable_selected_comparison_command": "python visualization/sea-appearance/coastal_image_review.py --reference visualization/sea-appearance/illustrations/smythii-twilight-clouds-reference.png --display visualization/sea-appearance/illustrations/smythii-twilight-clouds-display.json --image visualization/sea-appearance/illustrations/smythii-twilight-clouds.png --image visualization/sea-appearance/illustrations/smythii-twilight-depth.png --image visualization/sea-appearance/illustrations/smythii-twilight-clean-first-generated.png --image visualization/sea-appearance/illustrations/smythii-twilight-clean.png --out /tmp/smythii-clean-image-checks.json",
+    "image_check_exit_code": 0,
+    "make_check": {
+      "exit_code": 0,
+      "python_passed": 713,
+      "python_skipped": 42,
+      "javascript_suites_passed": [
+        129,
+        48
+      ],
+      "layer_check": "passed; 473 files, 0 violations",
+      "research_check": "PASS_WITH_BLOCKED_INPUTS: pre-existing missing protection inputs",
+      "ensemble_check": "passed; five paper workspaces",
+      "log_sha256": "f668f3ba719f0b712634f78fb3c969aad32dcdc2afecf24effb1f86cf3464fb7",
+      "scope": "Repository integrity and numerical checks; not perceptual or radiometric validation of the repair. Only image assets and provenance/documentation were edited."
+    }
+  }
+}

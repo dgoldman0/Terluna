@@ -1,0 +1,877 @@
+{
+  "schema": "terluna.calendar-ephemeris-reference.v1",
+  "source": "https://ssd.jpl.nasa.gov/api/horizons.api",
+  "source_documentation": [
+    "https://ssd.jpl.nasa.gov/horizons/manual.html",
+    "https://ssd-api.jpl.nasa.gov/doc/horizons.html"
+  ],
+  "credit": "NASA/JPL Solar System Dynamics, Horizons; JPL ephemerides are public domain.",
+  "fixture_sha256": "906c8fb734da1c6dfc2d1312bf5e5781b05f731370e6dc67abe415ff918a41e4",
+  "model_sha256_at_window_selection": "a3821628690cf9b920d8afc19d255de5e5112997249eb3cf9d30917fc971f258",
+  "frame": "MOON_ME (DE421 mean-Earth/polar-axis standard)",
+  "time_scale": "TT; Horizons internally converts TT to TDB",
+  "sparse_step_days": 73,
+  "event_windows": [
+    {
+      "sample": "2000_sunrise",
+      "latitude_deg": 0.0,
+      "longitude_deg": 0.0,
+      "event": "sunrise",
+      "model_event_jd_tt": 2451616.6763522727,
+      "start_jd_tt": 2451616.1666666665,
+      "stop_jd_tt": 2451617.1666666665,
+      "step_minutes": 30
+    },
+    {
+      "sample": "2000_sunset",
+      "latitude_deg": 0.0,
+      "longitude_deg": 0.0,
+      "event": "sunset",
+      "model_event_jd_tt": 2451631.4755202727,
+      "start_jd_tt": 2451630.9791666665,
+      "stop_jd_tt": 2451631.9791666665,
+      "step_minutes": 30
+    },
+    {
+      "sample": "2050_sunset",
+      "latitude_deg": 2.34,
+      "longitude_deg": 93.4,
+      "event": "sunset",
+      "model_event_jd_tt": 2469873.694185151,
+      "start_jd_tt": 2469873.1875,
+      "stop_jd_tt": 2469874.1875,
+      "step_minutes": 30
+    },
+    {
+      "sample": "2050_sunrise",
+      "latitude_deg": 2.34,
+      "longitude_deg": 93.4,
+      "event": "sunrise",
+      "model_event_jd_tt": 2469888.465387822,
+      "start_jd_tt": 2469887.9583333335,
+      "stop_jd_tt": 2469888.9583333335,
+      "step_minutes": 30
+    },
+    {
+      "sample": "2100_sunset",
+      "latitude_deg": 45.0,
+      "longitude_deg": 0.0,
+      "event": "sunset",
+      "model_event_jd_tt": 2488131.2516239556,
+      "start_jd_tt": 2488130.75,
+      "stop_jd_tt": 2488131.75,
+      "step_minutes": 30
+    },
+    {
+      "sample": "2100_sunrise",
+      "latitude_deg": 45.0,
+      "longitude_deg": 0.0,
+      "event": "sunrise",
+      "model_event_jd_tt": 2488145.994566827,
+      "start_jd_tt": 2488145.5,
+      "stop_jd_tt": 2488146.5,
+      "step_minutes": 30
+    },
+    {
+      "sample": "2200_sunset",
+      "latitude_deg": 80.0,
+      "longitude_deg": 0.0,
+      "event": "sunset",
+      "model_event_jd_tt": 2524661.102144881,
+      "start_jd_tt": 2524660.6041666665,
+      "stop_jd_tt": 2524661.6041666665,
+      "step_minutes": 30
+    },
+    {
+      "sample": "2200_sunrise",
+      "latitude_deg": 80.0,
+      "longitude_deg": 0.0,
+      "event": "sunrise",
+      "model_event_jd_tt": 2524674.9941010987,
+      "start_jd_tt": 2524674.5,
+      "stop_jd_tt": 2524675.5,
+      "step_minutes": 30
+    },
+    {
+      "sample": "2300_sunrise",
+      "latitude_deg": -45.0,
+      "longitude_deg": 180.0,
+      "event": "sunrise",
+      "model_event_jd_tt": 2561189.820734773,
+      "start_jd_tt": 2561189.3125,
+      "stop_jd_tt": 2561190.3125,
+      "step_minutes": 30
+    },
+    {
+      "sample": "2300_sunset",
+      "latitude_deg": -45.0,
+      "longitude_deg": 180.0,
+      "event": "sunset",
+      "model_event_jd_tt": 2561204.820080567,
+      "start_jd_tt": 2561204.3125,
+      "stop_jd_tt": 2561205.3125,
+      "step_minutes": 30
+    },
+    {
+      "sample": "2400_sunset",
+      "latitude_deg": -80.0,
+      "longitude_deg": 45.0,
+      "event": "sunset",
+      "model_event_jd_tt": 2597715.03488734,
+      "start_jd_tt": 2597714.5416666665,
+      "stop_jd_tt": 2597715.5416666665,
+      "step_minutes": 30
+    },
+    {
+      "sample": "2400_sunrise",
+      "latitude_deg": -80.0,
+      "longitude_deg": 45.0,
+      "event": "sunrise",
+      "model_event_jd_tt": 2597731.0024455646,
+      "start_jd_tt": 2597730.5,
+      "stop_jd_tt": 2597731.5,
+      "step_minutes": 30
+    },
+    {
+      "sample": "2500_sunset",
+      "latitude_deg": 0.0,
+      "longitude_deg": 180.0,
+      "event": "sunset",
+      "model_event_jd_tt": 2634233.8242093325,
+      "start_jd_tt": 2634233.3333333335,
+      "stop_jd_tt": 2634234.3333333335,
+      "step_minutes": 30
+    },
+    {
+      "sample": "2500_sunrise",
+      "latitude_deg": 0.0,
+      "longitude_deg": 180.0,
+      "event": "sunrise",
+      "model_event_jd_tt": 2634248.630772165,
+      "start_jd_tt": 2634248.125,
+      "stop_jd_tt": 2634249.125,
+      "step_minutes": 30
+    }
+  ],
+  "twilight_window": {
+    "sample": "2030_twilight_month",
+    "start": "2030-03-01",
+    "stop": "2030-04-03",
+    "step": "30m"
+  },
+  "threshold_refinements": [
+    {
+      "sample": "2030_procellarum_0p1_darkening",
+      "site": "W Procellarum",
+      "threshold_lux": 0.1,
+      "event": "darkening",
+      "start": "2030-03-10 14:00",
+      "stop": "2030-03-10 16:00",
+      "step": "1m"
+    },
+    {
+      "sample": "2030_procellarum_0p1_brightening",
+      "site": "W Procellarum",
+      "threshold_lux": 0.1,
+      "event": "brightening",
+      "start": "2030-03-10 17:30",
+      "stop": "2030-03-10 19:30",
+      "step": "1m"
+    }
+  ],
+  "responses": [
+    {
+      "parameters": {
+        "format": "json",
+        "MAKE_EPHEM": "YES",
+        "CSV_FORMAT": "YES",
+        "TIME_TYPE": "TT",
+        "COMMAND": "'301'",
+        "CENTER": "'500@399'",
+        "EPHEM_TYPE": "OBSERVER",
+        "QUANTITIES": "'14,15'",
+        "CAL_FORMAT": "'JD'",
+        "START_TIME": "'2000-01-01'",
+        "STOP_TIME": "'2501-01-01'",
+        "STEP_SIZE": "'73d'"
+      },
+      "response_sha256": "f159b5c2ef511137a5c0a5b401bc1ee9a6b2adba14ba5d10c67f504558e48432",
+      "response_bytes": 191855,
+      "signature": {
+        "version": "1.2",
+        "source": "NASA/JPL Horizons API"
+      },
+      "retrieved_utc": "2026-10-07T14:05:32.171997+00:00",
+      "headers": [
+        "Target body name: Moon (301)                      {source: DE441}",
+        "Center body name: Earth (399)                     {source: DE441}",
+        "Center-site name: GEOCENTRIC",
+        "Start time      : A.D. 2000-Jan-01 00:00:00.0000 TT      ",
+        "Stop  time      : A.D. 2501-Jan-01 00:00:00.0000 TT      ",
+        "Step-size       : 105120 minutes",
+        "Target pole/equ : MOON_ME                         {East-longitude positive}",
+        "Time format     : JD  "
+      ]
+    },
+    {
+      "parameters": {
+        "format": "json",
+        "MAKE_EPHEM": "YES",
+        "CSV_FORMAT": "YES",
+        "TIME_TYPE": "TT",
+        "COMMAND": "'301'",
+        "CENTER": "'500@399'",
+        "EPHEM_TYPE": "OBSERVER",
+        "QUANTITIES": "'14,15'",
+        "CAL_FORMAT": "'JD'",
+        "START_TIME": "'2500-12-31 23:30'",
+        "STOP_TIME": "'2501-01-01'",
+        "STEP_SIZE": "'30m'"
+      },
+      "response_sha256": "4f65c426825183391924397af63af8929cf94b83fb08b06f09483a592de24018",
+      "response_bytes": 8986,
+      "signature": {
+        "version": "1.2",
+        "source": "NASA/JPL Horizons API"
+      },
+      "retrieved_utc": "2026-10-07T14:05:35.292241+00:00",
+      "headers": [
+        "Target body name: Moon (301)                      {source: DE441}",
+        "Center body name: Earth (399)                     {source: DE441}",
+        "Center-site name: GEOCENTRIC",
+        "Start time      : A.D. 2500-Dec-31 23:30:00.0000 TT      ",
+        "Stop  time      : A.D. 2501-Jan-01 00:00:00.0000 TT      ",
+        "Step-size       : 30 minutes",
+        "Target pole/equ : MOON_ME                         {East-longitude positive}",
+        "Time format     : JD  "
+      ]
+    },
+    {
+      "parameters": {
+        "format": "json",
+        "MAKE_EPHEM": "YES",
+        "CSV_FORMAT": "YES",
+        "TIME_TYPE": "TT",
+        "COMMAND": "'301'",
+        "CENTER": "'500@399'",
+        "EPHEM_TYPE": "VECTORS",
+        "VEC_TABLE": "'3'",
+        "VEC_CORR": "'NONE'",
+        "OUT_UNITS": "'KM-S'",
+        "START_TIME": "'2000-01-01'",
+        "STOP_TIME": "'2501-01-01'",
+        "STEP_SIZE": "'73d'"
+      },
+      "response_sha256": "fd420899fedffef094e8e11e139d9b897762ae75e4988981184d23b85771bfbf",
+      "response_bytes": 679537,
+      "signature": {
+        "version": "1.2",
+        "source": "NASA/JPL Horizons API"
+      },
+      "retrieved_utc": "2026-10-07T14:05:38.847432+00:00",
+      "headers": [
+        "Target body name: Moon (301)                      {source: DE441}",
+        "Center body name: Earth (399)                     {source: DE441}",
+        "Center-site name: BODY CENTER",
+        "Start time      : A.D. 2000-Jan-01 00:00:00.0000 TT ",
+        "Stop  time      : A.D. 2501-Jan-01 00:00:00.0000 TT ",
+        "Step-size       : 105120 minutes",
+        "Reference frame : Ecliptic of J2000.0"
+      ]
+    },
+    {
+      "parameters": {
+        "format": "json",
+        "MAKE_EPHEM": "YES",
+        "CSV_FORMAT": "YES",
+        "TIME_TYPE": "TT",
+        "COMMAND": "'10'",
+        "CENTER": "'500@301'",
+        "EPHEM_TYPE": "VECTORS",
+        "VEC_TABLE": "'3'",
+        "VEC_CORR": "'NONE'",
+        "OUT_UNITS": "'KM-S'",
+        "START_TIME": "'2000-01-01'",
+        "STOP_TIME": "'2501-01-01'",
+        "STEP_SIZE": "'73d'"
+      },
+      "response_sha256": "aad150f7d8fd959581a940cca7505adb7e5a46c01d93ca34d281334252e733c1",
+      "response_bytes": 679301,
+      "signature": {
+        "version": "1.2",
+        "source": "NASA/JPL Horizons API"
+      },
+      "retrieved_utc": "2026-10-07T14:05:42.027161+00:00",
+      "headers": [
+        "Target body name: Sun (10)                        {source: DE441}",
+        "Center body name: Moon (301)                      {source: DE441}",
+        "Center-site name: BODY CENTER",
+        "Start time      : A.D. 2000-Jan-01 00:00:00.0000 TT ",
+        "Stop  time      : A.D. 2501-Jan-01 00:00:00.0000 TT ",
+        "Step-size       : 105120 minutes",
+        "Reference frame : Ecliptic of J2000.0"
+      ]
+    },
+    {
+      "parameters": {
+        "format": "json",
+        "MAKE_EPHEM": "YES",
+        "CSV_FORMAT": "YES",
+        "TIME_TYPE": "TT",
+        "COMMAND": "'301'",
+        "CENTER": "'500@399'",
+        "EPHEM_TYPE": "OBSERVER",
+        "QUANTITIES": "'14,15'",
+        "CAL_FORMAT": "'JD'",
+        "START_TIME": "'JD2451616.166666666511'",
+        "STOP_TIME": "'JD2451617.166666666511'",
+        "STEP_SIZE": "'30m'"
+      },
+      "response_sha256": "993ee287bfb1347790961cfb76c247523901e40987bb18b52aa52937e7a1ab59",
+      "response_bytes": 12417,
+      "signature": {
+        "version": "1.2",
+        "source": "NASA/JPL Horizons API"
+      },
+      "retrieved_utc": "2026-10-07T14:05:51.264276+00:00",
+      "headers": [
+        "Target body name: Moon (301)                      {source: DE441}",
+        "Center body name: Earth (399)                     {source: DE441}",
+        "Center-site name: GEOCENTRIC",
+        "Start time      : A.D. 2000-Mar-12 16:00:00.0000 TT      ",
+        "Stop  time      : A.D. 2000-Mar-13 16:00:00.0000 TT      ",
+        "Step-size       : 30 minutes",
+        "Target pole/equ : MOON_ME                         {East-longitude positive}",
+        "Time format     : JD  "
+      ]
+    },
+    {
+      "parameters": {
+        "format": "json",
+        "MAKE_EPHEM": "YES",
+        "CSV_FORMAT": "YES",
+        "TIME_TYPE": "TT",
+        "COMMAND": "'301'",
+        "CENTER": "'500@399'",
+        "EPHEM_TYPE": "OBSERVER",
+        "QUANTITIES": "'14,15'",
+        "CAL_FORMAT": "'JD'",
+        "START_TIME": "'JD2451630.979166666511'",
+        "STOP_TIME": "'JD2451631.979166666511'",
+        "STEP_SIZE": "'30m'"
+      },
+      "response_sha256": "c830f532ea8cc3e5fa090d37758722a45a0a5d0933d547b7616f19c2b4e76f73",
+      "response_bytes": 12417,
+      "signature": {
+        "version": "1.2",
+        "source": "NASA/JPL Horizons API"
+      },
+      "retrieved_utc": "2026-10-07T14:05:55.190917+00:00",
+      "headers": [
+        "Target body name: Moon (301)                      {source: DE441}",
+        "Center body name: Earth (399)                     {source: DE441}",
+        "Center-site name: GEOCENTRIC",
+        "Start time      : A.D. 2000-Mar-27 11:30:00.0000 TT      ",
+        "Stop  time      : A.D. 2000-Mar-28 11:30:00.0000 TT      ",
+        "Step-size       : 30 minutes",
+        "Target pole/equ : MOON_ME                         {East-longitude positive}",
+        "Time format     : JD  "
+      ]
+    },
+    {
+      "parameters": {
+        "format": "json",
+        "MAKE_EPHEM": "YES",
+        "CSV_FORMAT": "YES",
+        "TIME_TYPE": "TT",
+        "COMMAND": "'301'",
+        "CENTER": "'500@399'",
+        "EPHEM_TYPE": "OBSERVER",
+        "QUANTITIES": "'14,15'",
+        "CAL_FORMAT": "'JD'",
+        "START_TIME": "'JD2469873.187500000000'",
+        "STOP_TIME": "'JD2469874.187500000000'",
+        "STEP_SIZE": "'30m'"
+      },
+      "response_sha256": "4da247b593b3a97f2a3856fa41306a0048f6ece793c688a278d549e0dfe9dbea",
+      "response_bytes": 12417,
+      "signature": {
+        "version": "1.2",
+        "source": "NASA/JPL Horizons API"
+      },
+      "retrieved_utc": "2026-10-07T14:06:02.415576+00:00",
+      "headers": [
+        "Target body name: Moon (301)                      {source: DE441}",
+        "Center body name: Earth (399)                     {source: DE441}",
+        "Center-site name: GEOCENTRIC",
+        "Start time      : A.D. 2050-Mar-07 16:30:00.0000 TT      ",
+        "Stop  time      : A.D. 2050-Mar-08 16:30:00.0000 TT      ",
+        "Step-size       : 30 minutes",
+        "Target pole/equ : MOON_ME                         {East-longitude positive}",
+        "Time format     : JD  "
+      ]
+    },
+    {
+      "parameters": {
+        "format": "json",
+        "MAKE_EPHEM": "YES",
+        "CSV_FORMAT": "YES",
+        "TIME_TYPE": "TT",
+        "COMMAND": "'301'",
+        "CENTER": "'500@399'",
+        "EPHEM_TYPE": "OBSERVER",
+        "QUANTITIES": "'14,15'",
+        "CAL_FORMAT": "'JD'",
+        "START_TIME": "'JD2469887.958333333489'",
+        "STOP_TIME": "'JD2469888.958333333489'",
+        "STEP_SIZE": "'30m'"
+      },
+      "response_sha256": "63d8d5193f85a254d020603735d74a50a968c2085d847608064d148cc7410c9f",
+      "response_bytes": 12417,
+      "signature": {
+        "source": "NASA/JPL Horizons API",
+        "version": "1.2"
+      },
+      "retrieved_utc": "2026-10-07T14:06:06.570934+00:00",
+      "headers": [
+        "Target body name: Moon (301)                      {source: DE441}",
+        "Center body name: Earth (399)                     {source: DE441}",
+        "Center-site name: GEOCENTRIC",
+        "Start time      : A.D. 2050-Mar-22 11:00:00.0000 TT      ",
+        "Stop  time      : A.D. 2050-Mar-23 11:00:00.0000 TT      ",
+        "Step-size       : 30 minutes",
+        "Target pole/equ : MOON_ME                         {East-longitude positive}",
+        "Time format     : JD  "
+      ]
+    },
+    {
+      "parameters": {
+        "format": "json",
+        "MAKE_EPHEM": "YES",
+        "CSV_FORMAT": "YES",
+        "TIME_TYPE": "TT",
+        "COMMAND": "'301'",
+        "CENTER": "'500@399'",
+        "EPHEM_TYPE": "OBSERVER",
+        "QUANTITIES": "'14,15'",
+        "CAL_FORMAT": "'JD'",
+        "START_TIME": "'JD2488130.750000000000'",
+        "STOP_TIME": "'JD2488131.750000000000'",
+        "STEP_SIZE": "'30m'"
+      },
+      "response_sha256": "17f054f19f10a094871d2e4cfe4a23b8be6d4fc16a4ee1af6bae09f1ae83ab7a",
+      "response_bytes": 12417,
+      "signature": {
+        "source": "NASA/JPL Horizons API",
+        "version": "1.2"
+      },
+      "retrieved_utc": "2026-10-07T14:06:10.547535+00:00",
+      "headers": [
+        "Target body name: Moon (301)                      {source: DE441}",
+        "Center body name: Earth (399)                     {source: DE441}",
+        "Center-site name: GEOCENTRIC",
+        "Start time      : A.D. 2100-Mar-03 06:00:00.0000 TT      ",
+        "Stop  time      : A.D. 2100-Mar-04 06:00:00.0000 TT      ",
+        "Step-size       : 30 minutes",
+        "Target pole/equ : MOON_ME                         {East-longitude positive}",
+        "Time format     : JD  "
+      ]
+    },
+    {
+      "parameters": {
+        "format": "json",
+        "MAKE_EPHEM": "YES",
+        "CSV_FORMAT": "YES",
+        "TIME_TYPE": "TT",
+        "COMMAND": "'301'",
+        "CENTER": "'500@399'",
+        "EPHEM_TYPE": "OBSERVER",
+        "QUANTITIES": "'14,15'",
+        "CAL_FORMAT": "'JD'",
+        "START_TIME": "'JD2488145.500000000000'",
+        "STOP_TIME": "'JD2488146.500000000000'",
+        "STEP_SIZE": "'30m'"
+      },
+      "response_sha256": "a73d2768379d1f45ba8c23cc85dbd9b475250dce3cc94439fc9a87346be7e979",
+      "response_bytes": 12417,
+      "signature": {
+        "source": "NASA/JPL Horizons API",
+        "version": "1.2"
+      },
+      "retrieved_utc": "2026-10-07T14:06:13.394168+00:00",
+      "headers": [
+        "Target body name: Moon (301)                      {source: DE441}",
+        "Center body name: Earth (399)                     {source: DE441}",
+        "Center-site name: GEOCENTRIC",
+        "Start time      : A.D. 2100-Mar-18 00:00:00.0000 TT      ",
+        "Stop  time      : A.D. 2100-Mar-19 00:00:00.0000 TT      ",
+        "Step-size       : 30 minutes",
+        "Target pole/equ : MOON_ME                         {East-longitude positive}",
+        "Time format     : JD  "
+      ]
+    },
+    {
+      "parameters": {
+        "format": "json",
+        "MAKE_EPHEM": "YES",
+        "CSV_FORMAT": "YES",
+        "TIME_TYPE": "TT",
+        "COMMAND": "'301'",
+        "CENTER": "'500@399'",
+        "EPHEM_TYPE": "OBSERVER",
+        "QUANTITIES": "'14,15'",
+        "CAL_FORMAT": "'JD'",
+        "START_TIME": "'JD2524660.604166666511'",
+        "STOP_TIME": "'JD2524661.604166666511'",
+        "STEP_SIZE": "'30m'"
+      },
+      "response_sha256": "430ae4a244b77a49cafc22e543b171e6e71d8c6dd190fd31cb05a484b9deb659",
+      "response_bytes": 12417,
+      "signature": {
+        "source": "NASA/JPL Horizons API",
+        "version": "1.2"
+      },
+      "retrieved_utc": "2026-10-07T14:06:16.578153+00:00",
+      "headers": [
+        "Target body name: Moon (301)                      {source: DE441}",
+        "Center body name: Earth (399)                     {source: DE441}",
+        "Center-site name: GEOCENTRIC",
+        "Start time      : A.D. 2200-Mar-09 02:30:00.0000 TT      ",
+        "Stop  time      : A.D. 2200-Mar-10 02:30:00.0000 TT      ",
+        "Step-size       : 30 minutes",
+        "Target pole/equ : MOON_ME                         {East-longitude positive}",
+        "Time format     : JD  "
+      ]
+    },
+    {
+      "parameters": {
+        "format": "json",
+        "MAKE_EPHEM": "YES",
+        "CSV_FORMAT": "YES",
+        "TIME_TYPE": "TT",
+        "COMMAND": "'301'",
+        "CENTER": "'500@399'",
+        "EPHEM_TYPE": "OBSERVER",
+        "QUANTITIES": "'14,15'",
+        "CAL_FORMAT": "'JD'",
+        "START_TIME": "'JD2524674.500000000000'",
+        "STOP_TIME": "'JD2524675.500000000000'",
+        "STEP_SIZE": "'30m'"
+      },
+      "response_sha256": "17457ee32172f784a02259953a8082adfe50594a58de571f13b61463bac042ba",
+      "response_bytes": 12417,
+      "signature": {
+        "version": "1.2",
+        "source": "NASA/JPL Horizons API"
+      },
+      "retrieved_utc": "2026-10-07T14:06:20.196943+00:00",
+      "headers": [
+        "Target body name: Moon (301)                      {source: DE441}",
+        "Center body name: Earth (399)                     {source: DE441}",
+        "Center-site name: GEOCENTRIC",
+        "Start time      : A.D. 2200-Mar-23 00:00:00.0000 TT      ",
+        "Stop  time      : A.D. 2200-Mar-24 00:00:00.0000 TT      ",
+        "Step-size       : 30 minutes",
+        "Target pole/equ : MOON_ME                         {East-longitude positive}",
+        "Time format     : JD  "
+      ]
+    },
+    {
+      "parameters": {
+        "format": "json",
+        "MAKE_EPHEM": "YES",
+        "CSV_FORMAT": "YES",
+        "TIME_TYPE": "TT",
+        "COMMAND": "'301'",
+        "CENTER": "'500@399'",
+        "EPHEM_TYPE": "OBSERVER",
+        "QUANTITIES": "'14,15'",
+        "CAL_FORMAT": "'JD'",
+        "START_TIME": "'JD2561189.312500000000'",
+        "STOP_TIME": "'JD2561190.312500000000'",
+        "STEP_SIZE": "'30m'"
+      },
+      "response_sha256": "4affd625da356cbde1278fb29aedadbb4b1fdbfc37568a18f04131efed46346a",
+      "response_bytes": 12417,
+      "signature": {
+        "source": "NASA/JPL Horizons API",
+        "version": "1.2"
+      },
+      "retrieved_utc": "2026-10-07T14:06:22.939637+00:00",
+      "headers": [
+        "Target body name: Moon (301)                      {source: DE441}",
+        "Center body name: Earth (399)                     {source: DE441}",
+        "Center-site name: GEOCENTRIC",
+        "Start time      : A.D. 2300-Mar-13 19:30:00.0000 TT      ",
+        "Stop  time      : A.D. 2300-Mar-14 19:30:00.0000 TT      ",
+        "Step-size       : 30 minutes",
+        "Target pole/equ : MOON_ME                         {East-longitude positive}",
+        "Time format     : JD  "
+      ]
+    },
+    {
+      "parameters": {
+        "format": "json",
+        "MAKE_EPHEM": "YES",
+        "CSV_FORMAT": "YES",
+        "TIME_TYPE": "TT",
+        "COMMAND": "'301'",
+        "CENTER": "'500@399'",
+        "EPHEM_TYPE": "OBSERVER",
+        "QUANTITIES": "'14,15'",
+        "CAL_FORMAT": "'JD'",
+        "START_TIME": "'JD2561204.312500000000'",
+        "STOP_TIME": "'JD2561205.312500000000'",
+        "STEP_SIZE": "'30m'"
+      },
+      "response_sha256": "766b472bba21784d8fc96b52e444f50f815f1d6c0c97ad5e658a8c5f9830f927",
+      "response_bytes": 12417,
+      "signature": {
+        "version": "1.2",
+        "source": "NASA/JPL Horizons API"
+      },
+      "retrieved_utc": "2026-10-07T14:06:26.466473+00:00",
+      "headers": [
+        "Target body name: Moon (301)                      {source: DE441}",
+        "Center body name: Earth (399)                     {source: DE441}",
+        "Center-site name: GEOCENTRIC",
+        "Start time      : A.D. 2300-Mar-28 19:30:00.0000 TT      ",
+        "Stop  time      : A.D. 2300-Mar-29 19:30:00.0000 TT      ",
+        "Step-size       : 30 minutes",
+        "Target pole/equ : MOON_ME                         {East-longitude positive}",
+        "Time format     : JD  "
+      ]
+    },
+    {
+      "parameters": {
+        "format": "json",
+        "MAKE_EPHEM": "YES",
+        "CSV_FORMAT": "YES",
+        "TIME_TYPE": "TT",
+        "COMMAND": "'301'",
+        "CENTER": "'500@399'",
+        "EPHEM_TYPE": "OBSERVER",
+        "QUANTITIES": "'14,15'",
+        "CAL_FORMAT": "'JD'",
+        "START_TIME": "'JD2597714.541666666511'",
+        "STOP_TIME": "'JD2597715.541666666511'",
+        "STEP_SIZE": "'30m'"
+      },
+      "response_sha256": "c3f5aff64305dc5a86e6c32a0809dc416e573452c73f7a6eeaa9bb37b2eb6cf2",
+      "response_bytes": 12417,
+      "signature": {
+        "source": "NASA/JPL Horizons API",
+        "version": "1.2"
+      },
+      "retrieved_utc": "2026-10-07T14:06:42.110831+00:00",
+      "headers": [
+        "Target body name: Moon (301)                      {source: DE441}",
+        "Center body name: Earth (399)                     {source: DE441}",
+        "Center-site name: GEOCENTRIC",
+        "Start time      : A.D. 2400-Mar-14 01:00:00.0000 TT      ",
+        "Stop  time      : A.D. 2400-Mar-15 01:00:00.0000 TT      ",
+        "Step-size       : 30 minutes",
+        "Target pole/equ : MOON_ME                         {East-longitude positive}",
+        "Time format     : JD  "
+      ]
+    },
+    {
+      "parameters": {
+        "format": "json",
+        "MAKE_EPHEM": "YES",
+        "CSV_FORMAT": "YES",
+        "TIME_TYPE": "TT",
+        "COMMAND": "'301'",
+        "CENTER": "'500@399'",
+        "EPHEM_TYPE": "OBSERVER",
+        "QUANTITIES": "'14,15'",
+        "CAL_FORMAT": "'JD'",
+        "START_TIME": "'JD2597730.500000000000'",
+        "STOP_TIME": "'JD2597731.500000000000'",
+        "STEP_SIZE": "'30m'"
+      },
+      "response_sha256": "42294050ab48a08e7ef9bb1ad61a51be4b10c93997421faec480b8563553dbd2",
+      "response_bytes": 12417,
+      "signature": {
+        "version": "1.2",
+        "source": "NASA/JPL Horizons API"
+      },
+      "retrieved_utc": "2026-10-07T14:06:46.753187+00:00",
+      "headers": [
+        "Target body name: Moon (301)                      {source: DE441}",
+        "Center body name: Earth (399)                     {source: DE441}",
+        "Center-site name: GEOCENTRIC",
+        "Start time      : A.D. 2400-Mar-30 00:00:00.0000 TT      ",
+        "Stop  time      : A.D. 2400-Mar-31 00:00:00.0000 TT      ",
+        "Step-size       : 30 minutes",
+        "Target pole/equ : MOON_ME                         {East-longitude positive}",
+        "Time format     : JD  "
+      ]
+    },
+    {
+      "parameters": {
+        "format": "json",
+        "MAKE_EPHEM": "YES",
+        "CSV_FORMAT": "YES",
+        "TIME_TYPE": "TT",
+        "COMMAND": "'301'",
+        "CENTER": "'500@399'",
+        "EPHEM_TYPE": "OBSERVER",
+        "QUANTITIES": "'14,15'",
+        "CAL_FORMAT": "'JD'",
+        "START_TIME": "'JD2634233.333333333489'",
+        "STOP_TIME": "'JD2634234.333333333489'",
+        "STEP_SIZE": "'30m'"
+      },
+      "response_sha256": "5937a77c54aed8490c6f1e83b258a91395aea5acc56e94b63ba2c9bec1952d40",
+      "response_bytes": 12417,
+      "signature": {
+        "version": "1.2",
+        "source": "NASA/JPL Horizons API"
+      },
+      "retrieved_utc": "2026-10-07T14:06:51.113928+00:00",
+      "headers": [
+        "Target body name: Moon (301)                      {source: DE441}",
+        "Center body name: Earth (399)                     {source: DE441}",
+        "Center-site name: GEOCENTRIC",
+        "Start time      : A.D. 2500-Mar-08 20:00:00.0000 TT      ",
+        "Stop  time      : A.D. 2500-Mar-09 20:00:00.0000 TT      ",
+        "Step-size       : 30 minutes",
+        "Target pole/equ : MOON_ME                         {East-longitude positive}",
+        "Time format     : JD  "
+      ]
+    },
+    {
+      "parameters": {
+        "format": "json",
+        "MAKE_EPHEM": "YES",
+        "CSV_FORMAT": "YES",
+        "TIME_TYPE": "TT",
+        "COMMAND": "'301'",
+        "CENTER": "'500@399'",
+        "EPHEM_TYPE": "OBSERVER",
+        "QUANTITIES": "'14,15'",
+        "CAL_FORMAT": "'JD'",
+        "START_TIME": "'JD2634248.125000000000'",
+        "STOP_TIME": "'JD2634249.125000000000'",
+        "STEP_SIZE": "'30m'"
+      },
+      "response_sha256": "02fb8680c78aa6564823dbd645784841ad641d9bacadbce4378b0f79b5fa84d9",
+      "response_bytes": 12417,
+      "signature": {
+        "version": "1.2",
+        "source": "NASA/JPL Horizons API"
+      },
+      "retrieved_utc": "2026-10-07T14:06:55.314337+00:00",
+      "headers": [
+        "Target body name: Moon (301)                      {source: DE441}",
+        "Center body name: Earth (399)                     {source: DE441}",
+        "Center-site name: GEOCENTRIC",
+        "Start time      : A.D. 2500-Mar-23 15:00:00.0000 TT      ",
+        "Stop  time      : A.D. 2500-Mar-24 15:00:00.0000 TT      ",
+        "Step-size       : 30 minutes",
+        "Target pole/equ : MOON_ME                         {East-longitude positive}",
+        "Time format     : JD  "
+      ]
+    },
+    {
+      "parameters": {
+        "format": "json",
+        "MAKE_EPHEM": "YES",
+        "CSV_FORMAT": "YES",
+        "TIME_TYPE": "TT",
+        "COMMAND": "'301'",
+        "CENTER": "'500@399'",
+        "EPHEM_TYPE": "OBSERVER",
+        "QUANTITIES": "'14,15'",
+        "CAL_FORMAT": "'JD'",
+        "START_TIME": "'2030-03-01'",
+        "STOP_TIME": "'2030-04-03'",
+        "STEP_SIZE": "'30m'"
+      },
+      "response_sha256": "a8629a964d389e97f5d2a8291be3743eb31e048f01f512a04751e4927261c034",
+      "response_bytes": 124545,
+      "signature": {
+        "source": "NASA/JPL Horizons API",
+        "version": "1.2"
+      },
+      "retrieved_utc": "2026-10-07T14:12:11.077715+00:00",
+      "headers": [
+        "Target body name: Moon (301)                      {source: DE441}",
+        "Center body name: Earth (399)                     {source: DE441}",
+        "Center-site name: GEOCENTRIC",
+        "Start time      : A.D. 2030-Mar-01 00:00:00.0000 TT      ",
+        "Stop  time      : A.D. 2030-Apr-03 00:00:00.0000 TT      ",
+        "Step-size       : 30 minutes",
+        "Target pole/equ : MOON_ME                         {East-longitude positive}",
+        "Time format     : JD  "
+      ]
+    },
+    {
+      "parameters": {
+        "format": "json",
+        "MAKE_EPHEM": "YES",
+        "CSV_FORMAT": "YES",
+        "TIME_TYPE": "TT",
+        "COMMAND": "'301'",
+        "CENTER": "'500@399'",
+        "EPHEM_TYPE": "OBSERVER",
+        "QUANTITIES": "'14,15'",
+        "CAL_FORMAT": "'JD'",
+        "START_TIME": "'2030-03-10 14:00'",
+        "STOP_TIME": "'2030-03-10 16:00'",
+        "STEP_SIZE": "'1m'"
+      },
+      "response_sha256": "28e0bd80f9e867c1561653f7c6bf992d65e1938b241e746a686f4364180b7612",
+      "response_bytes": 17672,
+      "signature": {
+        "source": "NASA/JPL Horizons API",
+        "version": "1.2"
+      },
+      "retrieved_utc": "2026-10-07T14:15:30.986795+00:00",
+      "headers": [
+        "Target body name: Moon (301)                      {source: DE441}",
+        "Center body name: Earth (399)                     {source: DE441}",
+        "Center-site name: GEOCENTRIC",
+        "Start time      : A.D. 2030-Mar-10 14:00:00.0000 TT      ",
+        "Stop  time      : A.D. 2030-Mar-10 16:00:00.0000 TT      ",
+        "Step-size       : 1 minutes",
+        "Target pole/equ : MOON_ME                         {East-longitude positive}",
+        "Time format     : JD  "
+      ]
+    },
+    {
+      "parameters": {
+        "format": "json",
+        "MAKE_EPHEM": "YES",
+        "CSV_FORMAT": "YES",
+        "TIME_TYPE": "TT",
+        "COMMAND": "'301'",
+        "CENTER": "'500@399'",
+        "EPHEM_TYPE": "OBSERVER",
+        "QUANTITIES": "'14,15'",
+        "CAL_FORMAT": "'JD'",
+        "START_TIME": "'2030-03-10 17:30'",
+        "STOP_TIME": "'2030-03-10 19:30'",
+        "STEP_SIZE": "'1m'"
+      },
+      "response_sha256": "7680b520b3ee30bcf6115cba59d52022f0cb6d7c2a877c286a974f374879f961",
+      "response_bytes": 17672,
+      "signature": {
+        "version": "1.2",
+        "source": "NASA/JPL Horizons API"
+      },
+      "retrieved_utc": "2026-10-07T14:15:34.085737+00:00",
+      "headers": [
+        "Target body name: Moon (301)                      {source: DE441}",
+        "Center body name: Earth (399)                     {source: DE441}",
+        "Center-site name: GEOCENTRIC",
+        "Start time      : A.D. 2030-Mar-10 17:30:00.0000 TT      ",
+        "Stop  time      : A.D. 2030-Mar-10 19:30:00.0000 TT      ",
+        "Step-size       : 1 minutes",
+        "Target pole/equ : MOON_ME                         {East-longitude positive}",
+        "Time format     : JD  "
+      ]
+    }
+  ]
+}

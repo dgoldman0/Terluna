@@ -1,0 +1,235 @@
+{
+  "schema": "terluna.visualization.coastal-image-checks/1",
+  "reference": {
+    "frame": [
+      2048,
+      2560
+    ],
+    "sha256": "8fa39f98a4380e56b52677368b0b61148f84307e8a4dd3403e654d798ead57f5",
+    "expected_geometric_horizon_fraction": 0.8465748149483406,
+    "fitted_horizon_coherent_fraction": 0.84765625,
+    "median_linear_display_Y": {
+      "upper_sky": 0.09490910138661077,
+      "middle_cloud_field": 0.07912093795057423,
+      "water": 0.03402817243112547
+    },
+    "median_linear_display_RGB": {
+      "upper_sky": [
+        0.10946171077829933,
+        0.09305896284668745,
+        0.07227185068231748
+      ],
+      "middle_cloud_field": [
+        0.08650046203654976,
+        0.07818742180518633,
+        0.06480326669290577
+      ],
+      "water": [
+        0.03189603307301153,
+        0.03433980680868217,
+        0.03433980680868217
+      ]
+    },
+    "earth_limb_fit": {
+      "centre_shift_px": [
+        -0.2957529079315522,
+        -0.5022905124765868
+      ],
+      "radius_scale": 0.9890170971469553,
+      "radial_rms_fraction": 0.06289991473568447
+    }
+  },
+  "images": {
+    "fecunditatis-earth-clouds-first-generated.png": {
+      "frame": [
+        1122,
+        1402
+      ],
+      "sha256": "64973dab5efda100c9d2fdf7e47ad88f41b6ebfc9bcebc9282eb2c5974a6cc1c",
+      "expected_geometric_horizon_fraction": 0.8466984150963252,
+      "fitted_horizon_coherent_fraction": 0.833808844507846,
+      "median_linear_display_Y": {
+        "upper_sky": 0.029841934721839398,
+        "middle_cloud_field": 0.057684402816899856,
+        "water": 0.018375799952217355
+      },
+      "median_linear_display_RGB": {
+        "upper_sky": [
+          0.02217388479338738,
+          0.030713443732993635,
+          0.04091519690685319
+        ],
+        "middle_cloud_field": [
+          0.05780543019106723,
+          0.05780543019106723,
+          0.05780543019106723
+        ],
+        "water": [
+          0.014443843596092545,
+          0.019382360956935723,
+          0.02217388479338738
+        ]
+      },
+      "earth_limb_fit": {
+        "centre_shift_px": [
+          -1.7057799608559898,
+          -1.5024297453551156
+        ],
+        "radius_scale": 0.9979905452555883,
+        "radial_rms_fraction": 0.04550235993895358
+      },
+      "horizon_rms_fraction_of_height": 0.013847405492154017,
+      "region_display_luminance_ratios": {
+        "upper_sky": 0.3144264805572095,
+        "middle_cloud_field": 0.729066215733369,
+        "water": 0.5400172456928385
+      },
+      "registered_earth_interior_rank_correlation": 0.8793228112321427
+    },
+    "fecunditatis-earth-clouds-second-generated.png": {
+      "frame": [
+        1122,
+        1402
+      ],
+      "sha256": "3b3ac98f3ccd2af4ab98afc765b0b7f0b87e1872e072e3338ca6a839b2e188b0",
+      "expected_geometric_horizon_fraction": 0.8466984150963252,
+      "fitted_horizon_coherent_fraction": 0.8380884450784594,
+      "median_linear_display_Y": {
+        "upper_sky": 0.09563885046885692,
+        "middle_cloud_field": 0.1441116966806237,
+        "water": 0.05038715541683783
+      },
+      "median_linear_display_RGB": {
+        "upper_sky": [
+          0.09530746663096469,
+          0.09530746663096469,
+          0.09989872824711389
+        ],
+        "middle_cloud_field": [
+          0.16826940018969075,
+          0.13843161503245183,
+          0.11697066775851084
+        ],
+        "water": [
+          0.046665086336880095,
+          0.05126945837404324,
+          0.05612849004960009
+        ]
+      },
+      "earth_limb_fit": {
+        "centre_shift_px": [
+          -1.6586178085331431,
+          -2.2602024752859253
+        ],
+        "radius_scale": 0.9893715908663087,
+        "radial_rms_fraction": 0.05588792928377877
+      },
+      "horizon_rms_fraction_of_height": 0.009567804921540635,
+      "region_display_luminance_ratios": {
+        "upper_sky": 1.0076889262629676,
+        "middle_cloud_field": 1.8214103676405897,
+        "water": 1.4807482099963982
+      },
+      "registered_earth_interior_rank_correlation": 0.7574891388945294
+    },
+    "third-generated.png": {
+      "frame": [
+        1122,
+        1402
+      ],
+      "sha256": "50e8da9cd5f075318c14b9684bdccc61a5d6ec4d3a5682197490df39fc89bf6c",
+      "expected_geometric_horizon_fraction": 0.8466984150963252,
+      "fitted_horizon_coherent_fraction": 0.8195435092724679,
+      "median_linear_display_Y": {
+        "upper_sky": 0.07891524292715825,
+        "middle_cloud_field": 0.1055927390158211,
+        "water": 0.02948517961719907
+      },
+      "median_linear_display_RGB": {
+        "upper_sky": [
+          0.08021982031446832,
+          0.07818742180518633,
+          0.0822827071298148
+        ],
+        "middle_cloud_field": [
+          0.12213877222960187,
+          0.1022417330881013,
+          0.09084171118340768
+        ],
+        "water": [
+          0.027320891639074894,
+          0.0295568344378088,
+          0.033104766570885055
+        ]
+      },
+      "earth_limb_fit": {
+        "centre_shift_px": [
+          -1.8116422933242262,
+          -2.5280237516093176
+        ],
+        "radius_scale": 0.9920011584996553,
+        "radial_rms_fraction": 0.0662257584074615
+      },
+      "horizon_rms_fraction_of_height": 0.02811274072753211,
+      "region_display_luminance_ratios": {
+        "upper_sky": 0.8314823528430453,
+        "middle_cloud_field": 1.334573903582683,
+        "water": 0.8664931881627901
+      },
+      "registered_earth_interior_rank_correlation": 0.7463520302834878
+    },
+    "fecunditatis-earth-clouds.png": {
+      "frame": [
+        1122,
+        1402
+      ],
+      "sha256": "2b777daebb11e329317a3553b7eac793dc734f237facb67ff0cbdda87fdc77fb",
+      "expected_geometric_horizon_fraction": 0.8466984150963252,
+      "fitted_horizon_coherent_fraction": 0.8794579172610556,
+      "median_linear_display_Y": {
+        "upper_sky": 0.07506642824534723,
+        "middle_cloud_field": 0.10437709650225956,
+        "water": 0.03507761850787876
+      },
+      "median_linear_display_RGB": {
+        "upper_sky": [
+          0.07618538148130784,
+          0.07421356838014963,
+          0.08021982031446832
+        ],
+        "middle_cloud_field": [
+          0.12213877222960187,
+          0.09989872824711389,
+          0.09084171118340768
+        ],
+        "water": [
+          0.033104766570885055,
+          0.03560131487502034,
+          0.03954623527673283
+        ]
+      },
+      "earth_limb_fit": {
+        "centre_shift_px": [
+          -1.996642590283977,
+          -3.1980305289239124
+        ],
+        "radius_scale": 0.994210459776942,
+        "radial_rms_fraction": 0.10831853068212374
+      },
+      "horizon_rms_fraction_of_height": 0.0318016672610556,
+      "region_display_luminance_ratios": {
+        "upper_sky": 0.7909297122050002,
+        "middle_cloud_field": 1.3192095443492151,
+        "water": 1.0308405066089696
+      },
+      "registered_earth_interior_rank_correlation": 0.7250757288336872
+    }
+  },
+  "method": "Coherent row-mean colour edge in the known horizon band and robust joint Earth-limb centre/radius fit; registered interior ranks; fixed-region linear display luminance.",
+  "limits": [
+    "Image-space screens only; no absolute photometry, human-vision validation or recovered wave height.",
+    "Cloud microtexture and cross-ring morphology are illustrative; the cloud experiment does not resolve them.",
+    "Limb fits can respond to glare and low pixel count; interpret together with visual inspection."
+  ],
+  "producer_sha256": "f2f3f66f1b0a832dc78756e88149a7b7802f4892c0aa288f5ff6d983fee99a4e"
+}

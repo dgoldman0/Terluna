@@ -1,0 +1,100 @@
+{
+ "schema": "terluna.biosphere.living-water/1",
+ "status": "Design guesses for optical studies, labelled as such: what the Open Moon's seas carry. Earth's waters are the reference and engineered life a design variable. Each value has a best guess and a range.",
+ "reading_rule": "chlorophyll_mg_m3 is chlorophyll a in the sunlit surface layer, standing for the phytoplankton and the particles that vary with them; dissolved_organic_440_per_m is the absorption of coloured dissolved organic matter at 440 nm; fines_g_m3 is suspended regolith by dry mass, with the soil that sets its colour. The light cycle scales chlorophyll between dawn and dusk.",
+ "waters": {
+  "open_sea": {
+   "description": "Nutrient-poor open water, far from rivers and shores",
+   "chlorophyll_mg_m3": {
+    "best": 0.1,
+    "range": [
+     0.03,
+     0.3
+    ]
+   },
+   "dissolved_organic_440_per_m": {
+    "best": 0.02,
+    "range": [
+     0.01,
+     0.05
+    ]
+   },
+   "fines_g_m3": {
+    "best": 0.0,
+    "range": [
+     0.0,
+     0.3
+    ]
+   },
+   "soil": "12001",
+   "basis": "Earth's subtropical gyres hold 0.02-0.1 mg/m3 of chlorophyll and the open ocean's median is about 0.2; open-ocean coloured organic matter absorbs 0.01-0.04 per metre at 443 nm (Nelson and Siegel 2013). Wind-borne regolith over open water stays a small, unknown range."
+  },
+  "productive_coast": {
+   "description": "A coast fed by rivers and upwelling, with waves stirring regolith from the shore",
+   "chlorophyll_mg_m3": {
+    "best": 2.0,
+    "range": [
+     0.5,
+     8.0
+    ]
+   },
+   "dissolved_organic_440_per_m": {
+    "best": 0.15,
+    "range": [
+     0.05,
+     0.5
+    ]
+   },
+   "fines_g_m3": {
+    "best": 3.0,
+    "range": [
+     0.5,
+     20.0
+    ]
+   },
+   "soil": "12001",
+   "basis": "Earth's shelf seas and upwelling coasts hold 1-10 mg/m3 of chlorophyll; European coastal waters carry organic absorption of 0.03-1 per metre and 0.1-60 g/m3 of suspended matter (Babin et al. 2003). Fines settle six times slower at lunar gravity, so the same stirring keeps more aloft."
+  },
+  "river_mouth": {
+   "description": "Where a river from the rain-fed lakes meets the sea",
+   "chlorophyll_mg_m3": {
+    "best": 5.0,
+    "range": [
+     1.0,
+     20.0
+    ]
+   },
+   "dissolved_organic_440_per_m": {
+    "best": 1.0,
+    "range": [
+     0.3,
+     3.0
+    ]
+   },
+   "fines_g_m3": {
+    "best": 30.0,
+    "range": [
+     5.0,
+     100.0
+    ]
+   },
+   "soil": "12001",
+   "basis": "Earth's estuaries and river plumes reach 5-20 mg/m3 of chlorophyll, organic absorption above 1 per metre and tens of grams per cubic metre of sediment."
+  }
+ },
+ "soils": {
+  "12001": "mare fines, Apollo 12 soil from Oceanus Procellarum",
+  "10084": "darker high-titanium mare fines, Apollo 11 soil from Mare Tranquillitatis",
+  "62231": "bright highland fines, Apollo 16 soil from the Descartes highlands"
+ },
+ "light_cycle": {
+  "chlorophyll_dusk_over_dawn": {
+   "best": 2.0,
+   "range": [
+    1.0,
+    4.0
+   ]
+  },
+  "basis": "Through the 15-day day phytoplankton grow as far as nutrients allow; through the 15-day night they respire and are grazed. Losses of 0.05 a day for 15 days leave about half the biomass at dawn, so a sea is greenest at dusk."
+ }
+}

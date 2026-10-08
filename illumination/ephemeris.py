@@ -8,8 +8,9 @@ A mean-orbit model, good to a few degrees and not an ephemeris for dates:
   sinusoids with the anomalistic and draconic months.
 - The Sun's ecliptic longitude advances with the tropical-free "year" implied by the
   sidereal and synodic months, so the Sun returns to local noon every synodic month.
-- Earthlight: the Earth is a Lambert-phase sphere with the visible geometric albedo in
-  shared/constants.json at the mean Earth-Moon distance.
+- Earthlight: the Earth at the mean Earth-Moon distance follows its measured visual phase
+  curve (Robinson et al. 2025; illumination/earthlight), geometric albedo 0.242, with
+  sunlight's colour. illumination/earthlight gives its spectrum.
 
 Frames. Body: z along the Moon's spin axis, x toward the mean Earth. Local: east, north,
 up at the site. Celestial: J2000 equatorial. Time t is seconds after local noon.
@@ -21,6 +22,7 @@ from dataclasses import dataclass
 
 import numpy as np
 
+from illumination.earthlight.model import visual_phase_curve
 from shared import constants as K
 
 DAY = 86400.0
@@ -111,7 +113,8 @@ def state(site: Site, t: float) -> dict:
     sun, earth = sun_body(site, t), earth_body(site, t)
     cos_se = float(np.clip(sun @ earth, -1.0, 1.0))
     alpha = math.acos(-cos_se)  # Sun-Earth-Moon angle: 0 at full Earth
-    ratio = K.EARTH_GEOMETRIC_ALBEDO * (K.EARTH_RADIUS / K.EARTH_MOON_DISTANCE) ** 2 * lambert_phase(alpha)
+    ratio = (K.EARTH_VISUAL_PHASE_NORMALISATION * (K.EARTH_RADIUS / K.EARTH_MOON_DISTANCE) ** 2
+             * float(visual_phase_curve(math.degrees(alpha))))
     return {
         "t_s": t,
         "sun_enu": (basis @ sun).tolist(),
@@ -131,7 +134,8 @@ def product(site_id: str, site: Site, samples: int = 97) -> dict:
         "schema": "terluna.illumination.site-sky/1",
         "producer": {"domain": "illumination", "model": "illumination/ephemeris.py"},
         "evidence": ("Mean-orbit geometry: synchronous rotation, lunar equator in the ecliptic, "
-                     "sinusoidal optical libration, Lambert-phase Earth at mean distance. Good to a few "
+                     "sinusoidal optical libration, the Earth's measured visual phase curve at mean distance. "
+                     "Good to a few "
                      "degrees; not an ephemeris for dates."),
         "site_id": site_id,
         "site": site.__dict__,
@@ -144,7 +148,9 @@ def product(site_id: str, site: Site, samples: int = 97) -> dict:
             "obliquity_rad": EPSILON,
             "libration_longitude_rad": math.radians(K.LIBRATION_LONGITUDE_DEG),
             "libration_latitude_rad": math.radians(K.LIBRATION_LATITUDE_DEG),
-            "earth_geometric_albedo": K.EARTH_GEOMETRIC_ALBEDO,
+            "earth_visual_phase_normalisation": K.EARTH_VISUAL_PHASE_NORMALISATION,
+            "earth_visual_phase_asymmetry": K.EARTH_VISUAL_PHASE_ASYMMETRY,
+            "earth_visual_phase_observed_limit_rad": math.radians(K.EARTH_VISUAL_PHASE_OBSERVED_LIMIT_DEG),
             "earth_radius_m": K.EARTH_RADIUS,
             "earth_moon_distance_m": K.EARTH_MOON_DISTANCE,
             "earth_angular_radius_rad": EARTH_ANGULAR_RADIUS,

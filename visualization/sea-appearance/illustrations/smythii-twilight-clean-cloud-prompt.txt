@@ -1,0 +1,8 @@
+Use case: precise-object-edit.
+Make one final, substantial repair to the SKY TEXTURE in this image. Preserve the sea, horizon, framing, broad cloud masses, warm twilight exposure and colours.
+
+The central and upper cloud field still contains many repeated tiny crescent-shaped, scalloped cloudlets with hard little rims. Replace those artificial motifs with coherent natural high ice-cloud structure. Across the interior of the broad central bank, use smooth continuous semitransparent veils and subtle long, irregular, feathered streaks. At the bank's boundaries use soft wisps that taper naturally into air. Vary the thickness smoothly and let the diffuse shading define the layers. Reduce the number of separately outlined little cloudlets by at least 80 percent. Preserve the large-scale shapes and the dark central bank; change the small and medium-scale pattern.
+
+This should look like a real optical photograph of distant cirriform layers, with clear natural structure and very fine gradual tone transitions. Do not achieve this by blurring the whole photo: reconstruct the cloud material. No painted brushstrokes, embossed curls, tessellated cells, crystalline sparkles, hard glowing outlines, or new dramatic billowing cloud towers. Keep the warm illumination restrained and the near-horizon distance haze continuous.
+
+Leave the water pixels and horizon as close to unchanged as possible. Keep the 4:3 full frame, horizon at about 77 percent, and the absence of Sun and Earth. No new objects, text, labels, borders or watermark. Highest supported native resolution.

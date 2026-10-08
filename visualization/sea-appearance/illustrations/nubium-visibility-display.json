@@ -1,0 +1,252 @@
+{
+  "schema": "terluna.visualization.nubium-visibility-display/1",
+  "producer_sha256": "3cc124a05218c0afd0ce38b512975b5a522025e21e5c0bdbe5df76b398fb1e39",
+  "reference": {
+    "schema": "terluna.visualization.nubium-visibility-view/1",
+    "producer_sha256": "aa48528a4cef8d7a50823db22836d195a3728a958d58dbbb03548dab2ea7ace6",
+    "geometry": {
+      "centre": [
+        1025.7833205328036,
+        313.81811668922865
+      ],
+      "target_xyz": [
+        2.5061856772625233,
+        2.5640533065907154,
+        1.1863927985477627
+      ],
+      "integrated_xyz": [
+        2.506185677250677,
+        2.5640533065462825,
+        1.1863927985819047
+      ],
+      "diameter_deg": 1.8037750248690034,
+      "disk_dimensions_px": [
+        63.58009994967688,
+        80.83299139740257
+      ]
+    },
+    "camera": {
+      "lon_lat_deg": [
+        -11.93108,
+        -28.1085
+      ],
+      "note": "1.5 km off the west shore of the island on which the wave grid's shore point falls",
+      "eye_height_m": 2.0,
+      "view_azimuth_deg": 22.0,
+      "pitch_deg": 16.0,
+      "horizontal_fov_deg": 65.0,
+      "vertical_fov_deg": 87.4,
+      "frame": [
+        2048,
+        3072
+      ],
+      "horizon_row_at_centre": 1999.5306666666665,
+      "horizon_dip_deg": 0.0869
+    },
+    "focus_camera": {
+      "lon_lat_deg": [
+        -11.93108,
+        -28.1085
+      ],
+      "note": "1.5 km off the west shore of the island on which the wave grid's shore point falls",
+      "eye_height_m": 2.0,
+      "view_azimuth_deg": 22.084568440477096,
+      "pitch_deg": 53.24812780241986,
+      "horizontal_fov_deg": 10.0,
+      "vertical_fov_deg": 10.0,
+      "frame": [
+        1024,
+        1024
+      ],
+      "horizon_row_at_centre": 1999.5306666666665,
+      "horizon_dip_deg": 0.0869
+    },
+    "display_curve": {
+      "white_world_cd_m2": 17915.706874560918,
+      "knee_world_cd_m2": 0.05,
+      "power": 2.0284637155017005,
+      "sky_world_cd_m2": 0.5291728,
+      "sky_display_fraction": 0.035,
+      "equation": "[log(1+Y/knee)/log(1+white/knee)]^power",
+      "scope": "Same curve at every pixel; monotone display approximation with retained detail, not calibrated colour appearance."
+    },
+    "earth_texture": {
+      "projection_fit_rms_source_pixels": 0.47258789567359005,
+      "projection_fit_p99_source_pixels": 0.9015168316357463,
+      "source": "epic_1b_20151117002712_00.h5",
+      "bands_rgb_nm": [
+        680,
+        551,
+        443
+      ],
+      "source_centre_lon_lat_deg": [
+        166.398110848729,
+        -11.178105029174773
+      ],
+      "reading_rule": "Historical observed narrow-band spatial structure, reprojected and normalized to the scene beam. Illustrative 2038 weather; Lambert phase transfer and nearest observed unmeasured rim; spatial colours not spectrally validated.",
+      "sampling": [
+        {
+          "inside_samples": 255284,
+          "unobserved_rim_samples": 5610,
+          "unobserved_rim_fraction": 0.02197552529731593
+        },
+        {
+          "inside_samples": 426588,
+          "unobserved_rim_samples": 9614,
+          "unobserved_rim_fraction": 0.02253696775342954
+        }
+      ]
+    },
+    "evidence": "Physical sea-tracer XYZ and observed historical Earth structure normalized to the existing direct beam. Global display curve retains detail; no claim of exact naked-eye appearance.",
+    "limitations": [
+      "These display guides omit extra ocular glare and neural colour adaptation; visibility is assessed separately using HDR-VDP-3 and CIE99.",
+      "Earth spatial RGB uses three narrow bands, not resolved full-spectrum colour; historical cloud pattern is illustrative.",
+      "Sea geometry, illumination and reflection are inherited from the existing render, including its sampling uncertainty and uniform-disk Earth reflection."
+    ],
+    "inputs": {
+      "/tmp/terluna-vision-inputs/epic_1b_20151117002712_00.h5": "3341907e439947636321227ab27badc398f9186001c37562bbec918d96770f94",
+      "/home/kir/Documents/Projects/terluna-sea-appearance/visualization/sea-appearance/results/nubium-reference/s_nubium__midnight.npz": "a45481a2b0f388b2810e6e74d11a9a206424570517be5f980a9a994b988e9bcc",
+      "/home/kir/Documents/Projects/terluna-sea-appearance/visualization/sea-appearance/results/nubium-reference/scene-build.npz": "62bf53f6d8120f206d5be7ff2259bd41067d4ae23c832aa87fab373ca4c3f9f9",
+      "/home/kir/Documents/Projects/terluna-sea-appearance/research/studies/sea_appearance/results/nubium-midnight.json": "461d5db662fb82d40ba455d044bbc7e65bc968ca83b66f28b6871d3261eba405",
+      "/home/kir/Documents/Projects/terluna-sea-appearance/visualization/sea-appearance/nubium-earth-inputs.json": "a7c2ec2df36b2072f9f15950e27201fa50b6e1710d2d151b00af8784a191d0e1",
+      "/home/kir/Documents/Projects/terluna-sea-appearance/visualization/sea-appearance/nubium_guides.py": "a791f64673b60a1b73496105bdb199415a1b1308302003809cea81f9612fe8d7",
+      "/home/kir/Documents/Projects/terluna-sea-appearance/visualization/reference-renderer/seas/kernels.py": "56d2fed7b3ee79091601e560a8188dcb500a1b47d7908a7941889a8a636f63df",
+      "/home/kir/Documents/Projects/terluna-sea-appearance/visualization/sea-appearance/nubium_human_view.py": "bf0f479329a1a5669fd6450f50f505c41ff0633fcfe62d0fde37bb5436ef83cd"
+    }
+  },
+  "eye_optics": {
+    "model": "Official HDR-VDP-3.0.7 CIE99 OTF",
+    "age": 24,
+    "spatial_colour": "Same achromatic optical kernel on XYZ; no neural colour adaptation",
+    "scope": "Direct Earth only; background and sea remain unblurred",
+    "fft_negative_energy_fraction_zeroed": 5.251434178071764e-14,
+    "approximation": "Uniform angular sampling over 10-degree field; halo tapered from 4 to 5 degrees in the wide view",
+    "maximum_taper_region_halo_cd_m2": 0.011909728648720197,
+    "core_luminance_p10_p50_p90": [
+      1249.877259100913,
+      2330.7528747143824,
+      5155.594612111742
+    ]
+  },
+  "outputs": {
+    "nubium-midnight-visibility-view.png": "e789558d456a0aa7d25cc36fad41a865295008c33f7041134c97d5b37a49ef00",
+    "nubium-earth-visibility-view.png": "9a1fac625cdc2ffc62d7533688da9d1de65a7e379ce0ac6180bad3b91bc0771b"
+  },
+  "evidence": "Visibility-informed display reference; global monotone tone curve and gamut compression, with conditional ocular optics. Not an exact naked-eye prediction.",
+  "inputs": {
+    "nubium-earth-optics.mat": "9854b34cb4792570262a0384687663a7f665b42b1cd6852ce306d41104f94ef5",
+    "nubium-visibility-guide.json": "a5e47b9fb4722bd4e64acc3fe3df2dbd9002a4986f5a5c496cee7fe0d4249ebb",
+    "scene-build.npz": "62bf53f6d8120f206d5be7ff2259bd41067d4ae23c832aa87fab373ca4c3f9f9"
+  },
+  "visibility_check": {
+    "inputs": {
+      "schema": "terluna.visualization.display-visibility-inputs/1",
+      "producer_sha256": "5d78fa8ae23a77c1710f0807eb999dc414cd11c355028e489b31a2548557b527",
+      "pixels_per_degree": 102.13992773547274,
+      "display": {
+        "peak_cd_m2": 100,
+        "black_cd_m2": 0.1,
+        "encoding": "sRGB/D65"
+      },
+      "inputs": {
+        "nubium-earth-xyz.npy": "a611eb737f8018228607399705e20a29c85cc8340000979a7ca3843a485f53b3",
+        "nubium-earth-visibility-view.png": "9a1fac625cdc2ffc62d7533688da9d1de65a7e379ce0ac6180bad3b91bc0771b"
+      },
+      "cases": [
+        {
+          "name": "reprojected_world",
+          "file": "reprojected_world.mat",
+          "age": 24,
+          "identical": false
+        },
+        {
+          "name": "display_age24",
+          "file": "display_age24.mat",
+          "age": 24,
+          "identical": false
+        },
+        {
+          "name": "display_age70",
+          "file": "display_age70.mat",
+          "age": 70,
+          "identical": false
+        }
+      ],
+      "reading_rule": "Detection of interior-texture removal at matched angular size. World stimuli have no pre-applied eye kernel. Display stimuli include the illustrative ocular halo; HDR-VDP then predicts looking at that display. Passing is not perceptual equivalence or colour validation."
+    },
+    "predictions": [
+      {
+        "name": "reprojected_world",
+        "task": "detection",
+        "model": "HDR-VDP-3.0.7",
+        "mtf": "CIE99",
+        "age": 24,
+        "pixels_per_degree": 102.13992773547274,
+        "P_det": 1,
+        "C_max": 146965.53465895195,
+        "interior_C_max": 146965.53465895195,
+        "interior_P_max": 1,
+        "interior_P_median": 1,
+        "seconds": 35.29101610183716
+      },
+      {
+        "name": "display_age24",
+        "task": "detection",
+        "model": "HDR-VDP-3.0.7",
+        "mtf": "CIE99",
+        "age": 24,
+        "pixels_per_degree": 102.13992773547274,
+        "P_det": 1,
+        "C_max": 3365.968114679174,
+        "interior_C_max": 3365.968114679174,
+        "interior_P_max": 1,
+        "interior_P_median": 1,
+        "seconds": 34.42637896537781
+      },
+      {
+        "name": "display_age70",
+        "task": "detection",
+        "model": "HDR-VDP-3.0.7",
+        "mtf": "CIE99",
+        "age": 70,
+        "pixels_per_degree": 102.13992773547274,
+        "P_det": 1,
+        "C_max": 865.2078676961169,
+        "interior_C_max": 865.2078676961169,
+        "interior_P_max": 1,
+        "interior_P_median": 0.9999999927980341,
+        "seconds": 31.956714868545532
+      }
+    ]
+  },
+  "software": {
+    "python": "3.13.7",
+    "numpy": "2.3.3",
+    "scipy": "1.16.2",
+    "numba": "0.68.0",
+    "h5py": "3.16.0",
+    "pillow": "11.3.0",
+    "octave": "10.3.0",
+    "octave_image": "2.16.1",
+    "octave_statistics": "1.6.0",
+    "hdrvdp": "3.0.7",
+    "threads": {
+      "BLAS": 1,
+      "OpenMP": 1,
+      "numba": 2
+    },
+    "gpu": false
+  },
+  "checks": {
+    "focused_pytest": "13 passed, including official Radiance unit round-trip",
+    "make_check": "exit 0; 654 Python passed, 37 skipped; JavaScript 129 + 48 passed; layers 444 files / 0 violations; ensemble PASS",
+    "research_provenance": "PASS_WITH_BLOCKED_INPUTS: existing protection spectral inputs unavailable",
+    "empirical_validation": "No new observer study or calibrated coastal Moon photograph",
+    "source_reading": "HDR-VDP-3 paper and two-page Schmidt Moon report read; EPIC and LROC documentation and metadata inspected. CIE implemented through official model code; full CIE publication not independently reviewed."
+  },
+  "optics_wrapper_sha256": "5aee922ecf6a1845970f94cbc9e7b6ec54107363d3f65a010c2d8282203f543b",
+  "optics_external_model": {
+    "file_count": 178,
+    "tree_sha256": "4c3691a4f06c643b23144f8f12140abe9d35106cfad7bbcb0710cb277a0b2402"
+  }
+}
