@@ -34,7 +34,9 @@ times the quiet Sun's ultraviolet and, below 10 nm, FISM2's measured rise of the
 the mean over the year around each of the last three maxima against the WHI 2008 quiet week. The films are the design's in all six cases; the 200-nm-edge atmospheres
 stand for a warmer middle atmosphere. The middle atmosphere's profile (temperature, pressure and atomic oxygen, with
 the dry air of radiative_convective.thermodynamics) runs from the surface to the base, the thermal column's solution
-(molecular N2 and O2 at their fixed ratio) from there to the exobase, shifted to start at the profile's base height,
+(molecular N2 and O2 at their fixed ratio, radiating CO2's, atomic oxygen's and NO's infrared as the loss response's
+column does since 2026-10-08, loss_response/infrared.py) from there to the exobase, shifted to start at the profile's
+base height,
 and the loss response's exosphere (Chamberlain's ballistic and escaping populations, absorption.exosphere_density)
 beyond it, out past the aperture. Absorption cross sections: CXRO atomic scattering factors below 25 nm (independent
 atoms), and the Leiden database's photoabsorption continua from 25 nm (Heays, Bosman and van Dishoeck 2017); argon,
@@ -65,7 +67,7 @@ import numpy as np
 
 from shared.constants import AU, AVOGADRO, BOLTZMANN, CLASSICAL_ELECTRON_RADIUS, MOON_RADIUS, SUN_RADIUS
 from shared.provenance import constants_used
-from atmosphere.thermal_column import ColumnConfig, MOLAR, solve_column
+from atmosphere.thermal_column import MOLAR, solve_column
 from atmosphere.radiative_convective import thermodynamics as th
 from atmosphere.middle_atmosphere import escape, fetch_inputs, fetch_limb_inputs
 from atmosphere.loss_response import absorption, traced, model as loss
@@ -84,7 +86,7 @@ DESIGN = dict(shield_distance_m=20.0e6, protected_radii=4, radii_R=[3, 4, 5, 6, 
               films=dict(window=[1.0, 10.0], annulus_2_um=[0.1, 2.0], annulus_4_um=[0.1, 4.0]),
               disk_rays=64, limb_rays=360, edge_rays=32, limb_first_km=0.5, exosphere_points=240, outer_radii=7.0,
               profile_heats_W_m2=[0., 1e-6, 2e-6, 3e-6, 4e-6, 5e-6, 6.5e-6, 8e-6, 1e-5, 1.25e-5, 1.5e-5, 2e-5,
-                                  2.5e-5],
+                                  2.5e-5, 3.25e-5, 4e-5, 5e-5, 6.5e-5, 8e-5, 1e-4, 1.25e-4, 1.5e-4, 2e-4],
               largest_exobase_radii=6.0, co2_ppm=400.0, budgets_kg_s=list(loss.BUDGETS_KG_S),
               # Bands kept apart so any solar spectrum can weight them: escape.py's bands of the X-rays, then bands of
               # the ultraviolet whose solar cycles differ (FISM2's daily record is read in the same bands).
@@ -121,15 +123,21 @@ SHAPE_SOURCES = dict(window=('window',), annulus=('window', 'annulus_2_um', 'ann
                      aperture=('open',))
 FILES = {name: ROOT / name for name in (
     'atmosphere/middle_atmosphere/limb_heat.py', 'atmosphere/middle_atmosphere/escape.py',
-    'atmosphere/thermal_column.py', 'atmosphere/loss_response/model.py', 'atmosphere/loss_response/absorption.py',
+    'atmosphere/thermal_column.py', 'atmosphere/loss_response/model.py', 'atmosphere/loss_response/infrared.py',
+    'atmosphere/loss_response/absorption.py',
     'atmosphere/loss_response/tides.py', 'atmosphere/loss_response/traced.py', 'protection/spectra/annulus_film.py',
     'protection/spectra/short_wave.py', 'protection/model.py')}
 # Code outside this module that the heat tables run through, kept in their key by its source.
-EXTERNAL_CODE = (loss.base_conditions, escape._profile, escape.base_temperature, escape.whi_quiet_sun,
-                 escape.xray_cycle, escape.xray_scale, absorption.exosphere_density, absorption.partition,
-                 annulus_film.indices, annulus_film.film)
-TABLE_FILES = ('atmosphere/thermal_column.py', 'atmosphere/radiative_convective/thermodynamics.py',
+EXTERNAL_CODE = (loss.base_conditions, loss.column_config, escape._profile, escape.base_temperature,
+                 escape.whi_quiet_sun, escape.xray_cycle, escape.xray_scale, absorption.exosphere_density,
+                 absorption.partition, annulus_film.indices, annulus_film.film)
+TABLE_FILES = ('atmosphere/thermal_column.py', 'atmosphere/loss_response/infrared.py',
+               'atmosphere/radiative_convective/thermodynamics.py', 'atmosphere/radiative_convective/spectroscopy.py',
+               'atmosphere/radiative_convective/ck.py',
                'protection/spectra/short_wave.py', 'protection/model.py')
+# The infrared cooling's inputs: the radiative model's manifest (HITRAN's CO2 lines and partition sums) and each case's
+# middle-atmosphere summary (its tropopause sets the eddy mixing that carries CO2 up).
+COOLING_PRODUCTS = ('atmosphere/radiative_convective/inputs.json',)
 
 
 def digest(path):
@@ -181,12 +189,8 @@ def middle_profile(case):
 
 
 def case_config(case):
-    """The thermal column's configuration for a case, as the loss response builds it."""
-    base = loss.base_conditions(*CASES[case])
-    return ColumnConfig(surface_pressure_pa=base['surface_pressure_pa'],
-                        surface_temperature_k=base['surface_temperature_k'],
-                        lower_temperature_k=base['base_temperature_k'], lower_pressure_pa=loss.BASE_PA,
-                        oxygen_mole_fraction=base['oxygen_mole_fraction'])
+    """The thermal column's configuration for a case, as the loss response builds it, infrared cooling included."""
+    return loss.column_config(*CASES[case])
 
 
 def glow_heat(case):
@@ -695,6 +699,10 @@ def provenance():
     profiles = {'atmosphere/middle_atmosphere/results/middle_atmosphere.csv': digest(RESULTS / 'middle_atmosphere.csv')}
     for case in CASES:
         profiles[str(profile_path(case).relative_to(ROOT))] = digest(profile_path(case))
+        summary = RESULTS / 'cases' / f"{case_row(case)['case']}.json"
+        profiles[str(summary.relative_to(ROOT))] = digest(summary)
+    for name in COOLING_PRODUCTS:
+        profiles[name] = digest(ROOT / name)
     products = dict(profiles, **{'atmosphere/loss_response/results/tidal_escape.json': digest(loss.TIDES),
                                  'atmosphere/loss_response/results/solar_cycle.json': digest(loss.CYCLE),
                                  'protection/spectra/stack_short_wave.json': digest(escape.FILM_PRODUCT)})
@@ -736,8 +744,9 @@ def main(argv=None) -> int:
             'below which each share in design.shape_quantiles of that part\'s heat in the thermosphere lies. "table" '
             'gives the heat in detail at the ring fleet\'s 4 lunar radii, with the light absorbed in the exosphere '
             '("exosphere_absorbed", which the column does not take) and the fate of the light arriving. Activities: '
-            'quiet, solar_maximum (2.5 on the ultraviolet and FISM2\'s mean rise below 10 nm) and each maximum behind '
-            'that mean (cycle_23, cycle_24, cycle_25). Transmissions through gaps are grey shares of '
+            'quiet; solar_maximum, FISM2\'s year around cycle 21\'s maximum; the stress cases solar_maximum_cycle_19 '
+            'and solar_maximum_stress (2.5 on the ultraviolet and FISM2\'s mean rise below 10 nm); and the year '
+            'around each maximum from cycle_19 to cycle_25. Transmissions through gaps are grey shares of '
             'the band below 175 nm. A traced state puts the window stack on the window, a film on the annulus, the '
             'gaps\' light over the whole aperture, unfiltered sunlight beyond it and the sky\'s glow on the air, and '
             'is the first heat from zero that the air it swells returns. "disk_count" is the escape model\'s count '

@@ -670,9 +670,11 @@ author's order of 7 October two questions of how warm the upper air gets
 followed the same day. The design point averages each state over solar cycles 23
 and 24, year by year from FISM2's daily record measured band by band. The
 thermal column takes the heat where the tracing puts it in height in place of
-its fixed 'middle' shape. The totals below are central estimates with Earth's
-tide, behind the titania stack at O1's standard level and averaged over the
-cycle unless stated; cycle times are the atmosphere's mass over the loss.
+its fixed 'middle' shape. On 8 October the author had the column radiate in
+the infrared, to see whether the runaway latches. The totals below are central
+estimates with Earth's tide, behind the titania stack at O1's standard level and
+averaged over the cycle unless stated; cycle times are the atmosphere's mass
+over the loss.
 
 - **The ultraviolet rises far less over the cycle than the escape model took.**
   At the maxima since 1957 the light from 10 to 175 nm is 1.25–1.64 times the
@@ -685,70 +687,85 @@ cycle unless stated; cycle times are the atmosphere's mass over the loss.
   take FISM2's measured maxima, the record taken back to 1947: the year around
   cycle 21's maximum of 1979–80, the strongest since FISM2 gained its MgII and
   Lyman-α proxies in 1978, with cycle 19's year, the strongest on record, and
-  the escape model's 2.5 as stress cases. At cycle 21's maximum the warmest
-  titania case loses 8.4 kg/s at the standard level without magnets (12 billion
-  years) and 3.5 kg/s with them (28 billion), against the 2.5's 26 and 15; the
-  cooler cases lose 0.73–1.1 kg/s. Cycle 19's stronger glow, light below 50 nm
-  and X-rays run the warmest case away at the standard level, its heating
-  reaching past the 4-radius shadow; before 1978 FISM2 rests on the 10.7 cm
-  radio flux alone.
-  The 200-nm edge runs away at the standard level at every maximum, and in
-  cycle 19's year at the tight level too. R1's cycle mean, over cycles 23 and
-  24, is unchanged.
+  the escape model's 2.5 as stress cases. With the column's infrared cooling,
+  at cycle 21's maximum the warmest titania case loses 1.5 kg/s at the standard
+  level without magnets (66 billion years) and 0.090 kg/s with them, against
+  1.7 and 0.13 kg/s in cycle 19's year and 1.8 and 0.19 kg/s under the 2.5; the
+  cooler cases lose 0.62–0.82 kg/s. Before 1978 FISM2 rests on the 10.7 cm
+  radio flux alone. No case runs away at the standard level at any maximum,
+  behind either shield. R1's cycle mean, over cycles 23 and 24, is unchanged.
 - **Placed where the tracing puts it, the heat warms the upper air far less.**
   The sky's glow, half or more of the heat at the swarm's levels, is absorbed
   within a few e-folds of pressure above the base, and the far ultraviolet
-  through gaps in the lower thermosphere; heat laid low is conducted away.
-  The same heat leaves the exobase 26–51 K cooler than the 'middle' shape gives.
-- **Every titania case stays within 10 kg/s without magnets.** With
-  collisional upper air and in LTE the loss is 0.68–0.97 kg/s with no
-  magnetosphere (144 to 101 billion years), almost all of it the solar wind's
-  charge exchange and sputtering; with all near-infrared heating it is
-  3.1–3.5 kg/s (32 to 28 billion years), 7.9 kg/s in its worst year. At solar
-  maximum it loses 8.4 kg/s; in cycle 19's year it runs away, and the escape
-  model's 2.5 gives it 26 kg/s.
+  through gaps in the lower thermosphere; heat laid low is radiated by CO2.
+  The same heat leaves the exobase 17–42 K cooler than the 'middle' shape gives.
+- **The runaway latches, and the infrared cooling puts it out of reach.** The
+  column now radiates CO2's 15 µm band at the middle atmosphere's 400 ppm and
+  the base's atomic oxygen and NO, each above what air at the base temperature
+  emits ([infrared.py](../../../atmosphere/loss_response/infrared.py)). CO2
+  takes most of the heat, so the air needs about three and a half times the
+  heat to swell past the shadow's edge. Past a threshold, at 1.9–8.4×10⁻⁵ W/m²
+  and an exobase of 4.5–5.8 lunar radii at quiet Sun, the unfiltered light
+  beyond the aperture still outgrows the heat that swells the air, so the
+  swollen state would outlast the maximum that caused it. At the standard level
+  every maximum on record settles a tenth to three-fifths of the way to its
+  threshold; at quiet Sun the gaps would have to pass 0.35–0.82% behind the
+  titania stack to tip it. The oxygen atoms made above the base, and in the
+  swollen state those the unfiltered light would split from the outer air's O2,
+  are left out and could move the threshold either way
+  ([the loss response](../../../atmosphere/loss_response/README.md)).
+- **Every titania case stays within 2 kg/s without magnets.** With
+  collisional upper air and in LTE the loss is 0.61–0.80 kg/s with no
+  magnetosphere (163 to 124 billion years), almost all of it the solar wind's
+  charge exchange and sputtering; with all near-infrared heating it is 1.4 kg/s
+  (71 billion years), 1.5 kg/s in its worst year. At the maxima it loses
+  1.5–1.8 kg/s. Without the infrared cooling that case lost 3.1–3.5 kg/s over
+  the cycle and ran away in cycle 19's year.
 - **For 1 kg/s the solar wind decides.** The September magnets bring every case
-  under 1 kg/s: 10⁻⁵–0.003 kg/s in the cooler cases and 0.75–0.95 kg/s with all
-  near-infrared heating (131 to 104 billion years). A dipole of about
-  2–3×10¹⁹ A·m² holds the exosphere of all but the warmest at solar maximum to
-  1 kg/s, and the three coolest need none for that.
+  far under 1 kg/s: 3×10⁻⁷–10⁻⁴ kg/s in the cooler cases and 0.044 kg/s with all
+  near-infrared heating. A dipole of about 3×10¹⁹ A·m² holds the warmest case's
+  exosphere to 1 kg/s at every maximum on record, and the collisional and LTE
+  cases need none for that.
 - **The ring fleet's screen may shelter the Moon from part of the solar
   wind.** The screen absorbs the wind that strikes it, and the wind closes in
   behind an absorbing screen over about eight of its radii. The ring fleet's
   screen, about 20,000 km out, lies under three screen radii from the Moon, so
   its wake may still have an empty core there, about 2.6 lunar radii in radius
   behind a 4-radius screen. Within it the wind's charge exchange falls away: the
-  cooler cases lose 0.064–0.093 kg/s with no magnetosphere, and with all
-  near-infrared heating 2.3–2.7 kg/s. The refill length is an assumption a plasma model has to test. The
+  cooler cases lose 0.063–0.066 kg/s with no magnetosphere, and with all
+  near-infrared heating 0.41 kg/s. The refill length is an assumption a plasma model has to test. The
   held screen, 68,000–106,000 km out, lies too far for its wake to reach the
   Moon.
 - **Atomic oxygen adds little unless the upper air is warm and weakly
   mixed.** The glow and the light through gaps break enough O2 above the base to
-  make 10–23 kg/s of oxygen atoms, and with the middle atmosphere's mixing scaled
+  make 10–21 kg/s of oxygen atoms, and with the middle atmosphere's mixing scaled
   for the Moon almost all of it goes back down as odd oxygen: the atoms add
-  0.002–0.006 kg/s in the cooler cases and 0.12 kg/s with all near-infrared
-  heating (0.06 with the September magnets, which brings that case to
-  0.81–1.0 kg/s, 121 to 97 billion years). The atoms made near the exobase
-  leave hot and are 0.001–0.002 kg/s of this. How strongly the Moon's upper air
-  mixes decides the rest. An estimate from breaking gravity waves, calibrated on
-  Earth's measured mixing, finds it about as strong as the Moon-scaled profile:
-  the warm case's atoms add 0.10 kg/s (0.05 with the magnets). Titan's measured
-  mixing, carried to the Moon, gives 0.77 kg/s (0.37 with the magnets, for
-  1.1–1.3 kg/s in all, 88 to 74 billion years); Titan's waves are driven by a
-  hundredth of the sunlight, so that end may understate the mixing. Earth's own
-  unscaled mixing, 2.1 kg/s, lies outside both. Hydrogen adds 0.001–0.003 kg/s.
-- **The relaxed level still runs away.** With a 4-radius shadow the air runs
-  away once its exobase nears the shadow's edge, from a transmission of
-  0.021–0.26% by case and activity, below the relaxed level's 0.25% in most
-  cases and years. The tables find those onsets in air that swells more than
-  air heated where the tracing puts it, so they lean early; a retrace through
-  air heated with the traced shape would show how far the relaxed level is from
-  holding. Behind the 200-nm edge the standard level runs away in the years
-  around maximum.
+  0.002–0.003 kg/s in the cooler cases and 0.021 kg/s with all near-infrared
+  heating (0.007 with the September magnets, which brings that case to about
+  0.05 kg/s), about a sixth of what they added before the column's infrared
+  cooling. The atoms made near the exobase leave hot and are about 0.001 kg/s
+  of this. How strongly the Moon's upper air mixes decides the rest. An
+  estimate from breaking gravity waves, calibrated on Earth's measured mixing,
+  finds it about as strong as the Moon-scaled profile: the warm case's atoms add
+  0.017 kg/s (0.006 with the magnets). Titan's measured mixing, carried to the
+  Moon, gives 0.15 kg/s (0.044 with the magnets, for 0.088 kg/s in all, a
+  trillion years); Titan's waves are driven by a hundredth of the sunlight, so
+  that end may understate the mixing. Earth's own unscaled mixing, 0.46 kg/s,
+  lies outside both. Hydrogen adds about 0.0025 kg/s.
+- **The relaxed level runs away for the warmest air.** With a 4-radius shadow
+  the air runs away once its exobase nears the shadow's edge, from a
+  transmission of 0.13–0.82% behind the titania stack by case and activity and
+  0.038–0.24% behind the 200-nm edge. The relaxed level's 0.25% holds the
+  collisional and LTE titania cases at every measured maximum (1.0 and
+  3.4 kg/s over the cycle without magnets), and runs away the warmest at every
+  maximum, the LTE case under the escape model's 2.5 and the 200-nm edge in
+  every case. The tables find those onsets in air that swells more than air
+  heated where the tracing puts it, so they lean early.
 
-The CO2 question this order left for third now moves the choices little: the
-cases it separates all stay within 10 kg/s, and at 1 kg/s the solar wind sets
-the outcome. The outer rings come next.
+The CO2 question this order left for third, how much of CO2's near-infrared
+absorption heats the air, now moves the choices little: the cases it separates
+all stay within 2 kg/s, and at 1 kg/s the solar wind sets the outcome. The outer
+rings come next.
 
 The [primary magnetic architecture comparison](magnetic_architecture.md) still
 reads the design point from before the traced count. Its rerun needs the
@@ -770,7 +787,9 @@ The author set this order on 7 October:
    were carried through the loss chain the same day, and they leave the near-
    infrared heating of CO2 little to decide (above). Atomic oxygen's escape, the
    measured solar maxima from 1947 and the upper air's mixing by gravity waves
-   followed the same day.
+   followed the same day, and on 8 October the thermal column's infrared
+   cooling, which leaves the runaway a latch with its threshold beyond every
+   maximum on record.
 2. The outer rings: a radius profile that keeps each tilt turning with the
    Sun, with radius steps that grow toward the edges, flown for a year against
    steering by roll with the larger store.

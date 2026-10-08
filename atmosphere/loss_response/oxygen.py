@@ -35,10 +35,11 @@ loss response:
   cross-section. The atoms all counted above the escape energy and the largest cross-sections make it an upper
   estimate; letting an atom keep its escape energy through two collisions triples it (the upper value).
 
-The atoms do not change the column they move in: the thermal column stays molecular, so this step also reports the
-oxygen atoms' share at the exobase, which shows where that holds. Left out: O(1D) from the glow's photolysis (all of
-it is counted as ground-state atoms, which survive longer), the traced light below the base, ions in the chemistry,
-the atoms' own infrared cooling and the day-night cycle (rates are diurnal means).
+The atoms do not change the column they move in: the thermal column stays molecular and radiates with the base's
+atomic oxygen only, so this step also reports the oxygen atoms' share at the exobase, which shows where that holds.
+Left out: O(1D) from the glow's photolysis (all of it is counted as ground-state atoms, which survive longer), the
+traced light below the base, ions in the chemistry, the infrared cooling by the atoms made above the base (their
+63-um line and their collisions with CO2) and the day-night cycle (rates are diurnal means).
 """
 from __future__ import annotations
 import argparse

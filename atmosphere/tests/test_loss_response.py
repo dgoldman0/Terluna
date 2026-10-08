@@ -86,6 +86,30 @@ class Sweep(unittest.TestCase):
         self.assertLess(rows[first - 1]['leak_fraction'], rows[first]['leak_fraction'])
         self.assertEqual(lr.loss_estimate(rows[first]), math.inf)
 
+    def test_past_its_threshold_the_air_swells_on_its_own(self):
+        # The heat balance of the warmest titania case: a compact state, then a threshold past which the unfiltered
+        # light beyond the aperture outgrows the heat that swells the air, up to the tables' top, so the swollen air
+        # would outlast the activity that put it there. At the standard level cycle 19's year settles short of it.
+        import numpy as np
+        from atmosphere.loss_response import traced
+
+        def balance(activity, gaps):
+            q, p = traced.parts(traced.entries('titania_stack_all_heats'), traced.FILM, activity,
+                                lr.glow_heat('titania_stack', 'all_heats', activity), lr.PROTECTED_R)
+            fine = np.linspace(0., q[-1], 4001)
+            taken = sum(np.interp(fine, q, p[k]) for k in ('window', 'annulus', 'beyond_aperture', 'glow'))
+            return fine, taken + gaps * np.interp(fine, q, p['gap_unit']) - fine
+
+        heat, excess = balance('quiet', 0.0)
+        crossings = np.nonzero(np.diff(np.sign(excess)))[0]
+        self.assertEqual(len(crossings), 2)
+        self.assertTrue(excess[crossings[0]] > 0 > excess[crossings[0] + 1])
+        self.assertGreater(excess[-1], 0.0)
+        threshold = heat[crossings[1]]
+        heat, excess = balance('solar_maximum_cycle_19', 1.94e-4)
+        settled = heat[np.argmax(excess <= 0)]
+        self.assertLess(settled, threshold)
+
     def test_loss_rises_with_leak_inside_the_column_domain(self):
         rows = [r for r in lr.euv_sweep('titania_stack', 'lte', 'quiet') if r['status'] == 'thermal_column']
         losses = [r['molecular_loss_kg_s'] for r in rows]
@@ -120,12 +144,21 @@ class Sweep(unittest.TestCase):
         finally:
             lr.HEATING_SHAPE = saved
 
-    def test_the_glow_absorbed_just_above_the_base_barely_raises_the_floor(self):
-        with_glow = lr.euv_sweep('titania_stack', 'lte', 'quiet', glow=True, leaks=(1e-6,))[0]
-        without = lr.euv_sweep('titania_stack', 'lte', 'quiet', glow=False, leaks=(1e-6,))[0]
-        rise = with_glow['exobase_temperature_k'] - without['exobase_temperature_k']
-        self.assertGreater(rise, 1.0)
-        self.assertLess(rise, 15.0)
+    def test_co2_radiates_the_glow_absorbed_just_above_the_base(self):
+        def rise():
+            with_glow = lr.euv_sweep('titania_stack', 'lte', 'quiet', glow=True, leaks=(1e-6,))[0]
+            without = lr.euv_sweep('titania_stack', 'lte', 'quiet', glow=False, leaks=(1e-6,))[0]
+            return with_glow['exobase_temperature_k'] - without['exobase_temperature_k']
+        saved = lr.INFRARED_COOLING
+        try:
+            lr.INFRARED_COOLING = True
+            cooled = rise()
+            lr.INFRARED_COOLING = False
+            plain = rise()
+        finally:
+            lr.INFRARED_COOLING = saved
+        self.assertTrue(.05 < cooled < 2.0, cooled)
+        self.assertTrue(1.0 < plain < 15.0, plain)
 
 
 if __name__ == '__main__':

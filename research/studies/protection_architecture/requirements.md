@@ -33,7 +33,7 @@ outside this design.
 | ID | Requirement | Source | Status |
 |---|---|---|---|
 | R1 | A total loss budget: the long-term average rate at which the atmosphere escapes, which resupply must match. Each budget has an atmospheric cycle time, the atmosphere's mass (3.1×10¹⁸ kg) over the loss rate: the time the loss and its resupply take to replace the whole atmosphere. 1 kg/s is a cycle of about 100 billion years and a resupply of about 32,000 tonnes a year; 10 kg/s, 10 billion years; 100 kg/s, 1 billion years | September feasibility report, section 5; decisions.md (the author, 2026-09-26); the mass from the feasibility baseline's hydrostatic column (`research/baselines/feasibility/reference.json`) | Designed across 1–100 kg/s until the designs show which rate works best |
-| R2 | The budget is shared among ultraviolet-driven escape (with Earth's tide), the sunlit exosphere's losses (the ions it makes, the fragments of broken molecules and the solar wind's charge exchange), sputtering, and the oxygen atoms and hydrogen the upper air's photochemistry makes, which leave by Jeans escape, as ions from the sunlit exosphere and hot from near the exobase | [atmosphere/loss_response](../../../atmosphere/loss_response/README.md), with its exosphere and oxygen steps | Allocation open. Behind the titania stack at the standard level the oxygen atoms add 0.002–0.006 kg/s with collisional upper air and in LTE at the solar cycle's mean spectrum, with the Moon-scaled mixing or the breaking gravity waves' (gravity_waves.py), and 0.10–0.12 kg/s with all near-infrared heating over the cycle's years (0.05–0.06 with the September magnets); hot atoms are 0.001–0.002 kg/s of this. Weaker mixing raises the warmest case's atoms to 0.45 kg/s (the waves at the low end of Earth's measured mixing) and 0.77 kg/s (Titan's measured mixing carried to the Moon, 0.37 with the magnets); Earth's own unscaled mixing, which neither supports, would give 2.1 kg/s (1.0). Hydrogen adds 0.001–0.003 kg/s; behind the 200-nm edge the atoms add 2–4 kg/s |
+| R2 | The budget is shared among ultraviolet-driven escape (with Earth's tide), the sunlit exosphere's losses (the ions it makes, the fragments of broken molecules and the solar wind's charge exchange), sputtering, and the oxygen atoms and hydrogen the upper air's photochemistry makes, which leave by Jeans escape, as ions from the sunlit exosphere and hot from near the exobase | [atmosphere/loss_response](../../../atmosphere/loss_response/README.md), with its exosphere and oxygen steps | Allocation open. Behind the titania stack at the standard level, with the thermal column's infrared cooling (2026-10-08), the oxygen atoms add 0.002–0.003 kg/s with collisional upper air and in LTE at the solar cycle's mean spectrum, with the Moon-scaled mixing or the breaking gravity waves' (gravity_waves.py), and 0.017–0.021 kg/s with all near-infrared heating over the cycle's years (0.006–0.007 with the September magnets); hot atoms are about 0.001 kg/s of this. Weaker mixing raises the warmest case's atoms to 0.079 kg/s (the waves at the low end of Earth's measured mixing) and 0.15 kg/s (Titan's measured mixing carried to the Moon, 0.044 with the magnets); Earth's own unscaled mixing, which neither supports, would give 0.46 kg/s (0.13). Hydrogen adds about 0.0025 kg/s; behind the 200-nm edge the atoms add 0.6–6 kg/s |
 
 What each budget asks of the protection, from the loss response with its
 exosphere step. The allowed UV transmission is the largest share of sunlight
@@ -48,7 +48,9 @@ the whole aperture of the protected radius, and its light, the films' X-rays
 aperture follow their slant paths through air swollen by the heat it takes
 ([the X-ray check](../solar_shield_array/integrated_comparison.md#the-x-ray-check)).
 The thermal column takes that heat where the tracing puts it in height, with the
-sky's glow just above the base, as the author approved the same day. For the
+sky's glow just above the base, as the author approved the same day, and since
+8 October it radiates CO2's 15 µm band and the base's atomic oxygen and NO in the
+infrared, added at the author's request to test whether the runaway latches. For the
 titania stack, with the ranges spanning the three treatments of the upper air and
 quiet Sun to solar maximum (FISM2's year around cycle 21's maximum; the stress
 cases, cycle 19's year and the escape model's 2.5, are given apart), and
@@ -59,48 +61,53 @@ would need about 23% more rings:
 
 | Budget (cycle time) | Magnetosphere | Protected radius 3 lunar radii | 4 lunar radii | 6 lunar radii | 10 lunar radii |
 |---|---|---|---|---|---|
-| 1 kg/s (100 billion years) | none | 0.0056–0.099% (2 cannot) | 0.011–0.10% (2 cannot) | 0.012–0.10% (2 cannot) | 0.012–0.10% (2 cannot) |
-| | none, the ring fleet's wake | 0.016–0.11% (2 cannot) | 0.017–0.14% (1 cannot) | 0.015–0.15% | 0.024–0.16% |
-| | September magnets | 0.012–0.15% (1 cannot) | 0.0091–0.17% | 0.018–0.18% | 0.025–0.18% |
-| 10 kg/s (10 billion years) | none | 0.024–0.15% (1 cannot) | 0.021–0.19% | 0.031–0.21% | 0.037–0.21% |
-| | none, the ring fleet's wake | 0.024–0.15% (1 cannot) | 0.022–0.19% | 0.034–0.22% | 0.042–0.23% |
-| | September magnets | 0.024–0.15% (1 cannot) | 0.028–0.21% | 0.037–0.22% | 0.043–0.23% |
-| 100 kg/s (1 billion years) | none | 0.024–0.15% (1 cannot) | 0.032–0.25% | 0.066–0.28% | 0.081–0.30% |
-| | none, the ring fleet's wake | 0.024–0.15% (1 cannot) | 0.032–0.25% | 0.067–0.29% | 0.084–0.30% |
-| | September magnets | 0.024–0.15% (1 cannot) | 0.032–0.25% | 0.073–0.29% | 0.085–0.30% |
+| 1 kg/s (100 billion years) | none | 0.056–0.28% (2 cannot) | 0.072–0.30% (2 cannot) | 0.076–0.30% (2 cannot) | 0.077–0.31% (2 cannot) |
+| | none, the ring fleet's wake | 0.086–0.32% (2 cannot) | 0.038–0.42% | 0.087–0.49% | 0.11–0.52% |
+| | September magnets | 0.024–0.43% | 0.070–0.48% | 0.10–0.51% | 0.11–0.53% |
+| 10 kg/s (10 billion years) | none | 0.061–0.47% | 0.11–0.56% | 0.13–0.60% | 0.14–0.62% |
+| | none, the ring fleet's wake | 0.061–0.47% | 0.11–0.57% | 0.14–0.65% | 0.16–0.69% |
+| | September magnets | 0.089–0.47% | 0.13–0.60% | 0.15–0.67% | 0.17–0.69% |
+| 100 kg/s (1 billion years) | none | 0.089–0.47% | 0.19–0.73% | 0.23–0.85% | 0.26–0.87% |
+| | none, the ring fleet's wake | 0.089–0.47% | 0.19–0.74% | 0.23–0.87% | 0.26–0.90% |
+| | September magnets | 0.089–0.47% | 0.21–0.76% | 0.24–0.88% | 0.26–0.90% |
 
-Without a magnetosphere the solar wind's charge exchange keeps the two cases with
-all near-infrared heating above 1 kg/s at any radius up to 10 lunar radii. The
-ring fleet's screen, about 20,000 km out, may leave the Moon in its unrefilled
-wake; if the wind is absent within that wake's core (2.6 lunar radii behind a
-4-radius screen, a sensitivity resting on an assumed refill length), only the
-warmest at solar maximum is left at 4 lunar radii, and none from 6. With the
-September magnets every case meets 1 kg/s at 4 lunar radii, the warmest at solar
-maximum only below a transmission of 9.1×10⁻⁵ (2.6×10⁻⁵ in cycle 19's year and
-5.4×10⁻⁵ under the escape model's 2.5). The ozone-forming edge makes every
-budget harder: without a magnetosphere it cannot meet 1 kg/s at any radius, and
-with the September magnets two of six cases do at 4 lunar radii and five from 6;
-five of six meet 10 kg/s from 4 lunar radii. Without the optical
+With the column's infrared cooling (8 October) these are two to eight times
+what the uncooled column allowed. Without a magnetosphere the solar wind's
+charge exchange keeps the two cases with all near-infrared heating above 1 kg/s
+at any radius up to 10 lunar radii. The ring fleet's screen, about 20,000 km
+out, may leave the Moon in its unrefilled wake; if the wind is absent within
+that wake's core (2.6 lunar radii behind a 4-radius screen, a sensitivity
+resting on an assumed refill length), every case meets 1 kg/s from 4 lunar
+radii. With the September magnets every case meets 1 kg/s at 4 lunar radii, the
+warmest at solar maximum below a transmission of 7.0×10⁻⁴ (5.7×10⁻⁴ in cycle
+19's year and 4.3×10⁻⁴ under the escape model's 2.5). The ozone-forming edge
+makes every budget harder: without a magnetosphere it cannot meet 1 kg/s at any
+radius, and with the September magnets four of six cases do at 4 lunar radii
+and all six from 6; all six meet 10 kg/s from 4 lunar radii. Without the optical
 shield the loss is 300–80,000 kg/s.
 
 The protected radius has to reach beyond the exobase. With its edge inside the
 exobase, unfiltered sunlight beyond the aperture heats the thermosphere along
 slant paths, and the air swells into that light until it runs away; the heating
-alone needs the shadow to reach just beyond the exobase, to 3.5–4.5 lunar radii
-at the transmissions ultraviolet-driven escape alone allows (0.025–0.26% for
-the titania stack with a 4-radius shadow, down to 0.016–0.018% in the stress
+alone needs the shadow to reach just beyond the exobase, to 3.5–4 lunar radii
+at the transmissions ultraviolet-driven escape alone allows (0.12–0.79% for
+the titania stack with a 4-radius shadow, down to 0.074–0.099% in the stress
 cases). At those transmissions, where that escape already fills the budget, the
-sunlit exosphere outside the ring fleet's 4-radius shadow adds 5–153 kg/s with
-no magnetosphere and 1.7–91 kg/s with the September magnets (up to 174 and 108
+sunlit exosphere outside the ring fleet's 4-radius shadow adds 4.6–156 kg/s with
+no magnetosphere and 1.5–93 kg/s with the September magnets (up to 190 and 114
 in the stress cases); most of that comes from its first few scale heights above
 the exobase. With a 4-radius shadow the air runs away from a transmission of
-0.14–0.26% with collisional upper air (solar maximum to quiet Sun; 0.11% in
-cycle 19's year and 0.079% under the escape model's 2.5), 0.10–0.19% in LTE
-(0.076% and 0.060%) and 0.032–0.081% with all near-infrared heating (0.018% and
-0.021%), and from 0.012–0.049% behind the 200-nm edge (0.0013% and 0.0087%), as
-its exobase nears the shadow's edge. The tables find those
-onsets in air that swells more than air heated where the tracing puts it, so
-they lean early. Earth's tide is included throughout and multiplies molecular
+0.48–0.82% with collisional upper air (solar maximum to quiet Sun; 0.40% in
+cycle 19's year and 0.27% under the escape model's 2.5), 0.36–0.61% in LTE
+(0.29% and 0.20%) and 0.21–0.35% with all near-infrared heating (0.17% and
+0.13%), and from 0.061–0.24% behind the 200-nm edge (0.043–0.11% and
+0.038–0.083%), as its exobase nears the shadow's edge. Past that point the
+unfiltered light beyond the aperture keeps the air swollen even after the Sun
+quiets, a latch the column's infrared cooling leaves in place with its
+threshold raised about three and a half times
+([the loss response](../../../atmosphere/loss_response/README.md)). The tables
+find those onsets in air that swells more than air heated where the tracing puts
+it, so they lean early. Earth's tide is included throughout and multiplies molecular
 escape by 1.8–2.7.
 
 **The design point.** A formation of replaceable cells can hold a UV
@@ -110,13 +117,14 @@ ones and 2.5×10⁻³ with relaxed ones
 failed cells quickly is the main lever (O8). Traced along its slant paths, light
 through gaps heats the upper air 2.5–5 times what a count over the disk gives
 it, and the sky's Lyman-alpha glow heats it as much as a transmission of about
-5×10⁻⁴: at the tight level the glow supplies 75–93% of the heat, at the
-standard level 49–70%. The glow's heat lands within a few e-folds of pressure
-above the base and is conducted away, and the far ultraviolet through gaps lands
+5×10⁻⁴: at the tight level the glow supplies 74–94% of the heat, at the
+standard level 55–71%. The glow's heat lands within a few e-folds of pressure
+above the base, where CO2 radiates it, and the far ultraviolet through gaps lands
 in the lower thermosphere, so placed where the tracing puts it the heat leaves
-the exobase 26–51 K cooler than the column's 'middle' shape gives. These are the
+the exobase 17–42 K cooler than the column's 'middle' shape gives. These are the
 figures at the ring fleet's protected radius of 4 lunar radii, rederived on
-7 October with the traced count, FISM2's X-ray cycle and the traced heating shape
+7 October with the traced count, FISM2's X-ray cycle and the traced heating shape,
+and on 8 October with the column's infrared cooling
 ([results/design_point.json](results/design_point.json), from [run.py](run.py)).
 
 R1 is a long-term average, so the design point also gives each state's mean
@@ -129,35 +137,40 @@ maximum. Each year is taken as a steady state, so the mean leans high against an
 upper air that follows the cycle with a lag.
 
 Averaged over the cycle, at the standard level behind the titania stack and with
-4 lunar radii, the central total is 0.68–0.97 kg/s with no magnetosphere with
-collisional upper air and in LTE (144 to 101 billion years), almost all of it the
-solar wind's charge exchange and sputtering; 0.064–0.093 kg/s in the ring fleet's
-wake; and 10⁻⁵–0.003 kg/s with the September magnets. With all near-infrared
-heating it is 3.1–3.5 kg/s with no magnetosphere (32 to 28 billion years),
-2.3–2.7 kg/s in the wake and 0.75–0.95 kg/s with the magnets (131 to 104 billion
-years); its largest year, 2000, reaches 6.6–7.9, 5.8–7.2 and 2.5–3.2 kg/s. At
-the tight level the means are 0.63–0.86 kg/s with
-no magnetosphere in the cooler cases and 1.7–1.8 kg/s with all near-infrared
-heating, which the wake brings to 0.79–0.85 and the magnets to 0.13–0.15 kg/s.
-At solar maximum, FISM2's year around cycle 21's maximum of 1979–80, the
-warmest case loses 8.4 kg/s at the standard level (12 billion years) and
-3.5 kg/s with the magnets (28 billion years). The cooler cases lose 0.73–1.1 kg/s there with no magnetosphere
-and 6×10⁻⁵–0.012 kg/s with the magnets. In cycle 19's year, a stress case, the
-warmest case's air runs away at the standard level, its heating reaching beyond
-the 4-radius shadow; the escape model's 2.5 gives it 26 kg/s (15 with the magnets) and a runaway with
-holes four times the particle size. At the tight level the warmest at solar
-maximum loses 2.5 kg/s (0.45 with the magnets; 3.8 and 1.0 in cycle 19's year).
-The measured years of cycles 23 to 25 reach at most 7.9 kg/s. The oxygen
+4 lunar radii, the central total is 0.61–0.80 kg/s with no magnetosphere with
+collisional upper air and in LTE (163 to 124 billion years), almost all of it the
+solar wind's charge exchange and sputtering; 0.063–0.066 kg/s in the ring fleet's
+wake; and 3×10⁻⁷–10⁻⁴ kg/s with the September magnets. With all near-infrared
+heating it is 1.4 kg/s with no magnetosphere (71 billion years), 0.41 kg/s in
+the wake and 0.044 kg/s with the magnets; its largest year, 2000, reaches 1.5,
+0.54 and 0.079 kg/s. At the tight level the means are 0.59–0.78 kg/s with no
+magnetosphere in the cooler cases and 1.3 kg/s with all near-infrared heating,
+which the wake brings to 0.30 and the magnets to 0.024 kg/s. At solar maximum,
+FISM2's year around cycle 21's maximum of 1979–80, the warmest case loses
+1.5 kg/s at the standard level (66 billion years) and 0.090 kg/s with the
+magnets. The cooler cases lose 0.62–0.82 kg/s there with no magnetosphere and
+8×10⁻⁷–2×10⁻⁴ kg/s with the magnets. In cycle 19's year, a stress case, the
+warmest case loses 1.7 kg/s at the standard level (0.13 with the magnets), and
+the escape model's 2.5 gives it 1.8 kg/s (0.19); no case runs away at the
+standard level at any maximum. At the tight level the warmest at solar maximum
+loses 1.4 kg/s (0.042 with the magnets; 1.4 and 0.054 in cycle 19's year). The
+measured years of cycles 23 to 25 reach at most 1.5 kg/s. Without the infrared
+cooling the column had the warmest case at 3.1–3.5 kg/s over the cycle and
+8.4 kg/s at cycle 21's maximum, and running away in cycle 19's year. The oxygen
 atoms the upper air's photochemistry makes add little to the cooler cases
-(R2), and to the warmest 0.10–0.12 kg/s over the cycle with the Moon-scaled
-mixing or the breaking gravity waves' (0.05–0.06 with the magnets, which brings
-that case to 0.80–1.0 kg/s); with Titan's measured mixing carried to the Moon
-they add 0.77 kg/s (0.37 with the magnets, bringing it to 1.1–1.3 kg/s). At the
-relaxed level the air runs away in most cases and years. Behind the 200-nm edge
-the standard level runs away in the years around maximum (in every year with all
-near-infrared heating), and the tight level
-averages 3.1–3.4 kg/s with no magnetosphere in the cooler cases (0.69–0.84 kg/s
-with the magnets), its warmest case running away in eleven of the 23 years.
+(R2), and to the warmest 0.017–0.021 kg/s over the cycle with the Moon-scaled
+mixing or the breaking gravity waves' (0.006–0.007 with the magnets, which
+brings that case to about 0.05 kg/s); with Titan's measured mixing carried to
+the Moon they add 0.15 kg/s (0.044 with the magnets, bringing it to
+0.088 kg/s). At the
+relaxed level the warmest case runs away at every maximum on record and in the
+years 2000–2002, and the cooler cases hold at 1.0 kg/s (collisional) and
+3.4 kg/s (LTE) over the cycle with no magnetosphere, the LTE case running away
+only under the escape model's 2.5. Behind the 200-nm edge the
+standard level averages 2.0 kg/s with no magnetosphere in the cooler cases
+(0.21–0.23 kg/s with the magnets) and 7.3 kg/s with all near-infrared heating
+(2.8 kg/s), the tight level 1.7 and 5.1 kg/s (0.12 and 1.6), and the relaxed
+level runs away in every year.
 
 ## Optical shield
 

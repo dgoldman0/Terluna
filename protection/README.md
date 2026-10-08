@@ -164,15 +164,14 @@ The loss response's exosphere step
 ([atmosphere/loss_response](../atmosphere/loss_response/README.md)) sizes the
 magnets from the air's side. Without a magnetosphere the solar wind carries off
 the ions the sunlit exosphere makes, and its charge exchange with the dense
-exosphere near the exobase costs about 0.6–1.9 kg/s at the design point in all
-but the warmest case, so a 1 kg/s budget needs magnetic protection unless the
-ring fleet's screen holds the wind off the inner exosphere in its unrefilled
-wake, a sensitivity a plasma model has to test. The three coolest cases lose
-under 1 kg/s from their exosphere without a dipole, and about 3×10¹⁹ A·m², whose
-stand-off just clears the dense exosphere, holds the next two to 1 kg/s in the
-screening; no moment up to 10²³ A·m² holds the warmest at solar maximum to
-1 kg/s, and in cycle 19's year, a stress case, it runs away within the 4-radius
-shadow. The four regional installations give
+exosphere near the exobase costs about 0.6–1.8 kg/s at the design point, so a
+1 kg/s budget needs magnetic protection in the warmest case and leaves the
+others little room, unless the ring fleet's screen holds the wind off the inner
+exosphere in its unrefilled wake, a sensitivity a plasma model has to test. The
+collisional and LTE cases lose under 1 kg/s from their exosphere without a
+dipole at every maximum on record, and about 3×10¹⁹ A·m², whose stand-off just
+clears the dense exosphere, holds the warmest to 1 kg/s in the screening at
+quiet Sun and at every maximum, cycle 19's year included. The four regional installations give
 1.5×10²¹ A·m² and a stand-off near 10 lunar radii, which keeps every case within
 1 kg/s at the swarm's standard level, averaged over the solar cycle. Neither
 holds the neutral

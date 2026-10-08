@@ -22,7 +22,11 @@ shields. The protected radius is the ring fleet's 4 lunar radii unless given.
 The thermal column (atmosphere/thermal_column.py) turns that heat into an
 exobase and a molecular Jeans loss, with the base temperature the middle
 atmosphere finds behind each shield under each treatment of the upper air
-(collisional, LTE, all near-infrared heats). The column takes each state's heat
+(collisional, LTE, all near-infrared heats). Since 2026-10-08 the column also
+radiates in the infrared (infrared.py): CO2's 15-um band at the middle
+atmosphere's 400 ppm, separating above its homopause, and the base's atomic
+oxygen and NO carried up, each in excess of what air at the base temperature
+emits. The column takes each state's heat
 where the tracing puts it in height (state_config, traced.shape): each part of
 the light by the limb tables' record of where it heats, and the glow where O2
 absorbs it, mostly within a few e-folds of pressure above the base. The states
@@ -52,7 +56,8 @@ with its own losses of the sunlit exosphere. The allowed transmissions here
 leave those losses out; exosphere.py gives them with the losses included.
 
 Not included: atomic-oxygen escape (about half again behind the 200-nm edge, per
-the middle-atmosphere results), photochemical escape below the exobase (the
+the middle-atmosphere results; oxygen.py counts it), the infrared cooling of the
+oxygen atoms made above the base, photochemical escape below the exobase (the
 exosphere step counts it above), hydrogen from water,
 Earth's tide in the energy-limited bound (it would raise that bound by about
 1/K, 10-20%), the day-night circulation of the upper air, and plasma physics
@@ -72,10 +77,10 @@ import numpy as np
 from scipy.special import expn
 
 from shared.constants import AVOGADRO, MOON_GM, MOON_RADIUS
-from atmosphere.thermal_column import ColumnConfig, solve_column
+from atmosphere.thermal_column import ColumnConfig, lower_boundary, solve_column
 from atmosphere.radiative_convective import thermodynamics as th
 from atmosphere.middle_atmosphere import escape
-from atmosphere.loss_response import tides, traced
+from atmosphere.loss_response import infrared, tides, traced
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
@@ -107,6 +112,7 @@ LEAKS = (1e-6, 3e-6, 1e-5, 2e-5, 3e-5, 5e-5, 1e-4, 2e-4, 3e-4, 5e-4, 1e-3, 2e-3,
          1e-2, 2e-2, 3e-2, 5e-2, 0.1, 0.3, 1.0)
 PROTECTED_R = 4.0               # the ring fleet's protected radius in lunar radii (decisions.md, 2026-10-07)
 HEATING_SHAPE = 'traced'        # the thermal column's heating shape at a traced state: from the limb tables (2026-10-07)
+INFRARED_COOLING = True         # the thermal column radiates CO2's, O's and NO's infrared (infrared.py, 2026-10-08)
 GLOW_RAYLEIGH = 1000.0          # interplanetary hydrogen glow at 1 AU (protection/report.md, section 9)
 BUDGETS_KG_S = (1.0, 10.0, 100.0)
 ETAS = (0.01, 0.1, 0.3)
@@ -215,20 +221,31 @@ def base_conditions(shield, treatment):
     row = rows[0]
     profile = escape._profile(MIDDLE, case)
     dry = float(row['dry_pressure_pa'])
-    air = th.earthlike_air(dry, 400.0).fractions
+    air = th.earthlike_air(dry, infrared.CO2_PPM).fractions
     return dict(case=case, base_temperature_k=escape.base_temperature(profile, BASE_PA),
                 surface_pressure_pa=float(row['surface_pressure_pa']),
                 surface_temperature_k=float(row['surface_temperature_k']),
                 oxygen_mole_fraction=air['O2'] / (air['O2'] + air['N2']))
 
 
-def column_config(shield, treatment):
-    """The thermal column's configuration for one middle-atmosphere case."""
-    base = base_conditions(shield, treatment)
-    return ColumnConfig(surface_pressure_pa=base['surface_pressure_pa'],
-                        surface_temperature_k=base['surface_temperature_k'],
-                        lower_temperature_k=base['base_temperature_k'], lower_pressure_pa=BASE_PA,
-                        oxygen_mole_fraction=base['oxygen_mole_fraction'])
+_COLUMN = {}
+
+
+def column_config(shield, treatment, cooling=None):
+    """The thermal column's configuration for one middle-atmosphere case, radiating in the infrared (infrared.py)
+    unless cooling, or INFRARED_COOLING when it is None, says not."""
+    cooling = INFRARED_COOLING if cooling is None else cooling
+    if (shield, treatment, cooling) not in _COLUMN:
+        base = base_conditions(shield, treatment)
+        cfg = ColumnConfig(surface_pressure_pa=base['surface_pressure_pa'],
+                           surface_temperature_k=base['surface_temperature_k'],
+                           lower_temperature_k=base['base_temperature_k'], lower_pressure_pa=BASE_PA,
+                           oxygen_mole_fraction=base['oxygen_mole_fraction'])
+        if cooling:
+            cfg = dataclasses.replace(cfg, **infrared.column_fields(base['case'], BASE_PA, cfg.lower_temperature_k,
+                                                                    lower_boundary(cfg)[3]))
+        _COLUMN[shield, treatment, cooling] = cfg
+    return _COLUMN[shield, treatment, cooling]
 
 
 _BASE_RADIUS = {}
@@ -417,12 +434,15 @@ def main(argv=None) -> int:
         schema=SCHEMA,
         producer=dict(domain='atmosphere', files={p: _digest(ROOT / p) for p in (
             'atmosphere/loss_response/model.py', 'atmosphere/loss_response/traced.py', 'atmosphere/thermal_column.py',
+            'atmosphere/loss_response/infrared.py', 'atmosphere/radiative_convective/inputs.json',
             'atmosphere/middle_atmosphere/escape.py', 'atmosphere/loss_response/tides.py',
             'atmosphere/loss_response/results/tidal_escape.json',
             'atmosphere/loss_response/results/solar_cycle.json',
             'atmosphere/middle_atmosphere/results/limb_heat.json')}),
-        evidence=('Screening model. The ultraviolet branch is the molecular thermal column (no infrared cooling, '
-                  'no atomic oxygen) above middle-atmosphere base temperatures, taking the heat the limb tracing '
+        evidence=('Screening model. The ultraviolet branch is the molecular thermal column (radiating CO2\'s '
+                  '15-um band and the base\'s atomic oxygen and NO in excess of what air at the base temperature '
+                  'emits; no atomic oxygen made above the base) above middle-atmosphere base temperatures, taking '
+                  'the heat the limb tracing '
                   'finds along slant paths at the ring fleet\'s protected radius where the tracing puts it in height, '
                   'with its Jeans escape raised by '
                   'the tidal multiplier of test molecules in the Earth-Moon three-body problem, and energy-limited '
@@ -441,6 +461,8 @@ def main(argv=None) -> int:
                          activity=ACTIVITY, xray_cycle=escape.xray_cycle(), protected_radius_R=PROTECTED_R,
                          annulus_film=traced.FILM, solar_wind=SOLAR_WIND, solar_wind_ranges=SW_RANGES,
                          energy_limited_eta=ETAS, absorption_radii_R=ABSORPTION_RADII,
+                         infrared_cooling=dict(radiates=INFRARED_COOLING, co2_ppm=infrared.CO2_PPM,
+                                               co2_band_cm=infrared.BAND_CM),
                          xuv_flux_below_121nm_w_m2={a: xuv_flux(a) for a in ACTIVITY},
                          lyman_glow_flux_w_m2=lyman_glow_flux()),
         solar_wind=wind,

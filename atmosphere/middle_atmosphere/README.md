@@ -273,7 +273,8 @@ aperture.
   three treatments the base spans 142–215 K and the exobase at the
   solar-maximum leak 207–274 K, so the upper air matters about as much as the
   leak. Only at 10⁻⁵ W/m² does the deposited heat dominate (296–316 K).
-- All of these are global means with no infrared cooling in the thermal column.
+- All of these are global means with no infrared cooling in the thermal column
+  (the loss response's column radiates since 8 October; see below).
   The day–night swing of the upper air (above) is tens of kelvin, and the
   circulation it drives is not included.
 
@@ -285,7 +286,9 @@ solar shield along its actual paths through the air, for the ring fleet's
 aperture: a screen at 20,000 km covering four lunar radii, with the window
 stack over the disk, a light film over the annulus, gaps that pass a grey share
 of the band over the whole aperture, and open sky beyond it. It takes the loss
-response's six cases, Lyman-α glow and Earth's tide, finds the state the heated
+response's six cases, Lyman-α glow and Earth's tide, and since 8 October its
+thermal column's infrared cooling (CO2's 15 µm band above all,
+[infrared.py](../loss_response/infrared.py)), finds the state the heated
 air settles to and the gap transmission each budget allows, and writes
 [results/limb_heat.json](results/limb_heat.json). It keeps each ray's deposit,
 so the product also gives the heat for protected radii of 2 to 10 lunar radii,
@@ -329,31 +332,36 @@ in [METHODS.md](METHODS.md).
 
 The states with the 4 µm film and the ring fleet's 4-radius shadow, as
 molecular loss with Earth's tide (kg/s), against the escape model's disk count
-at the same transmission. Solar maximum is the mean of the three maxima, with
-the range across them.
+at the same transmission, with the heat spread by the column's 'middle' shape as
+the tables trace it and the column radiating in the infrared. Solar maximum is
+cycle 21's year, with the range across the years around each maximum from cycle
+19 to 25.
 
 | 1.2 atm, titania stack | Quiet Sun, standard level (2×10⁻⁴): traced / disk count | Solar maximum, no gaps | Tight level (3×10⁻⁵) | Standard level | Disk count, standard level |
 |---|---|---|---|---|---|
-| Collisional upper air | 4×10⁻⁶ / 8×10⁻⁷ | 2×10⁻⁵ (1–2×10⁻⁵) | 4×10⁻⁵ (3–5×10⁻⁵) | 0.003 (0.0025–0.004) | 6×10⁻⁵ |
-| LTE | 0.0013 / 0.0003 | 0.004 (0.003–0.005) | 0.009 (0.007–0.011) | 0.42 (0.32–0.49) | 0.009 |
-| All near-infrared heats | 0.61 / 0.16 | 1.5 (1.2–1.7) | 2.8 (2.2–3.1) | 33 (29–36) | 2.1 |
+| Collisional upper air | 4×10⁻⁸ / 1×10⁻⁸ | 2×10⁻⁷ (4×10⁻⁸–6×10⁻⁷) | 2×10⁻⁷ (6×10⁻⁸–9×10⁻⁷) | 1×10⁻⁶ (3×10⁻⁷–5×10⁻⁶) | 2×10⁻⁷ |
+| LTE | 2×10⁻⁵ / 1×10⁻⁵ | 6×10⁻⁵ (2×10⁻⁵–2×10⁻⁴) | 7×10⁻⁵ (3×10⁻⁵–2×10⁻⁴) | 3×10⁻⁴ (1×10⁻⁴–9×10⁻⁴) | 5×10⁻⁵ |
+| All near-infrared heats | 0.015 / 0.008 | 0.032 (0.016–0.071) | 0.039 (0.019–0.087) | 0.11 (0.048–0.26) | 0.028 |
 
-- **The cooler titania cases stay small; the warmest swells.** At the
-  standard level and solar maximum the exobase sits at 2.2 lunar radii
-  (collisional, 230–234 K) and 2.7 (LTE, 264–269 K), and with all
-  near-infrared heating at 3.8–3.9 (300–302 K). Behind the 200-nm edge the
-  standard level gives 3.5–3.7 kg/s at quiet Sun with collisional or LTE upper
-  air. At solar maximum there, and with all near-infrared heating at quiet Sun
-  as well, the heat the swollen air takes stays above the heat that swells it
-  up to the tables' top, where the exobase passes six lunar radii. Beyond four
-  lunar radii the thermosphere reaches unfiltered light outside the aperture.
-- **The gaps a budget allows fall to a quarter or a third.** For the same
-  allowance of molecular loss, traced gaps may pass 0.22–0.32 of what the disk
-  count allows in the cooler titania cases, at quiet Sun and at solar maximum
-  alike, and 0.12–0.27 with all near-infrared heating. For 1 kg/s at solar
-  maximum: 4.7×10⁻⁴ (collisional) and 2.4×10⁻⁴ (LTE), against the disk count's
-  1.5×10⁻³ and 9×10⁻⁴; with all near-infrared heating, the film and glow alone
-  exceed 1 kg/s, and 10 kg/s allows 1.0×10⁻⁴. These
+- **Every case settles at the standard level, at every maximum.** CO2 radiates
+  most of the heat the upper air takes, so the air stays within a few kelvin of
+  the base temperature for three or four e-folds of pressure above the base.
+  At the standard level and solar maximum the exobase sits at 1.9 lunar radii
+  (collisional, 183 K), 2.15 (LTE, 206 K) and, with all near-infrared heating,
+  2.7 (238 K). Behind the 200-nm edge the standard level gives 0.08–0.09 kg/s at
+  quiet Sun with collisional or LTE upper air and 0.5–0.6 kg/s at solar maximum
+  (2.9 lunar radii, 250 K), and with all near-infrared heating 1.3 and 6.5 kg/s
+  (3.5 lunar radii at maximum). Without the infrared cooling the same tables ran
+  the 200-nm edge away at every maximum. Beyond four lunar radii the
+  thermosphere reaches unfiltered light outside the aperture, and past a
+  threshold, at 4.5–5.8 lunar radii at quiet Sun, that light outgrows the heat
+  that swells the air ([the loss response](../loss_response/README.md)).
+- **The gaps a budget allows fall to about a third.** For the same allowance of
+  molecular loss, traced gaps may pass 0.28–0.35 of what the disk count allows
+  in the cooler titania cases, at quiet Sun and at solar maximum alike, and
+  0.25–0.29 with all near-infrared heating. For 1 kg/s at solar maximum:
+  2.4×10⁻³ (collisional), 1.6×10⁻³ (LTE) and 6.2×10⁻⁴ with all near-infrared
+  heating, against the disk count's 7.0×10⁻³, 5.2×10⁻³ and 2.4×10⁻³. These
   allowances leave out the solar wind and the exosphere step's losses, so they
   compare the two counts at the same allowance.
 - **The tables keep the light by band and by height.** Fifteen bands of the
@@ -376,9 +384,9 @@ the range across them.
   the table above follows. The traced light lands at a mean depth 0.38–0.43 of
   the way from the base to the exobase, at about the depth of the disk's own
   light, and the sky's glow within a few e-folds of pressure above the base,
-  where its heat is conducted away. Given that shape (the scenarios'
-  `traced_shape`), the same heat leaves the exobase 26–51 K cooler and the
-  ultraviolet-driven loss 16–3,600 times smaller: behind the titania stack at a
-  transmission of 2×10⁻⁴ and solar maximum, 2.0 kg/s against 33 with all
-  near-infrared heating and 0.003 against 0.42 in LTE. The loss response takes
-  the traced shape since 7 October.
+  where CO2 radiates its heat. Given that shape (the scenarios'
+  `traced_shape`), the same heat leaves the exobase 17–42 K cooler and the
+  ultraviolet-driven loss 6–3,600 times smaller: behind the titania stack at a
+  transmission of 2×10⁻⁴ and solar maximum, 0.003 kg/s against 0.11 with all
+  near-infrared heating and 2×10⁻⁶ against 3×10⁻⁴ in LTE. The loss response
+  takes the traced shape since 7 October.

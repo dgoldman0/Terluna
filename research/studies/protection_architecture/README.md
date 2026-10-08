@@ -40,28 +40,30 @@ with sources and status, and what each loss budget asks of it.
 
 ## Design point
 
-`python -m research.studies.protection_architecture.run` (about 15 minutes,
+`python -m research.studies.protection_architecture.run` (about 40 minutes,
 with `OPENBLAS_NUM_THREADS=1` and three single-threaded processes for the solar
 cycle) takes the UV transmission a swarm can hold at three levels of design
 choices and evaluates the loss response and its absorption and exosphere steps
 there, at the ring fleet's protected radius of 4 lunar radii. It uses the traced
 count and the heat placed where the tracing puts it, both as the author approved
-on 7 October, at quiet Sun, at solar maximum (FISM2's year around cycle 21's
+on 7 October, and the thermal column's infrared cooling (8 October), at quiet Sun, at solar maximum (FISM2's year around cycle 21's
 maximum, with cycle 19's year and the escape model's 2.5 as stress cases) and
 over solar cycles 23 and 24 year by year from FISM2's daily record. The swarm holds
 3–4×10⁻⁵ with tight choices, about 2×10⁻⁴ with standard ones and 2.5×10⁻³ with
 relaxed ones, most of it from failed cells waiting to be covered. Traced along
 its slant paths, light through gaps heats the upper air 2.5–5 times a count over
-the disk; the sky's Lyman-alpha glow supplies 75–93% of the heat at the tight
-level and 49–70% at the standard level, but it lands just above the base and
-barely warms the exobase. Averaged over the solar cycle, the standard level at
-4 lunar radii loses 0.68–0.97 kg/s with no magnetosphere with collisional upper
-air and in LTE (144 to 101 billion years), almost all of it the solar wind's;
-0.064–0.093 kg/s if the ring fleet's wake holds the wind off; and
-10⁻⁵–0.003 kg/s with the September magnets. With all near-infrared heating it
-loses 3.1–3.5 kg/s with no magnetosphere (32 to 28 billion years), 2.3–2.7 kg/s
-in the wake and 0.75–0.95 kg/s with the magnets (131 to 104 billion years). At
-the relaxed level the air runs away in most cases. The requirements hold the
+the disk; the sky's Lyman-alpha glow supplies 74–94% of the heat at the tight
+level and 55–71% at the standard level, but it lands just above the base, where
+CO2 radiates it, and barely warms the exobase. Averaged over the solar cycle, the
+standard level at 4 lunar radii loses 0.61–0.80 kg/s with no magnetosphere with
+collisional upper air and in LTE (163 to 124 billion years), almost all of it the
+solar wind's; 0.063–0.066 kg/s if the ring fleet's wake holds the wind off; and
+3×10⁻⁷–10⁻⁴ kg/s with the September magnets. With all near-infrared heating it
+loses 1.4 kg/s with no magnetosphere (71 billion years), 0.41 kg/s in the wake
+and 0.044 kg/s with the magnets. No case runs away at the standard level at any
+maximum on record. At the relaxed level the warmest titania case runs away at
+every maximum, the LTE case under the escape model's 2.5, and the 200-nm edge in
+every case. The requirements hold the
 details.
 
 ## Working rules
