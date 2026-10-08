@@ -237,6 +237,19 @@ tables traced through air the column heats with its middle shape, which swells
 more than the traced shape's: at each onset the traced column's own exobase
 still lies at 3.2–3.9 lunar radii, so the onsets lean early.
 
+In these tables the runaway latches. Even at quiet Sun the warmest titania case
+has two regimes: from heats below about 1.3×10⁻⁵ W/m² it settles to its compact
+state (3.7×10⁻⁶ W/m²), and above it its exobase passes the shadow's edge, where
+the unfiltered sunlight beyond the aperture heats the outer air (1.4×10⁻⁴ W/m²
+at a heat of 2.5×10⁻⁵, about thirty times the glow, films and gaps together), so
+the swollen air keeps swelling. LTE air shows the same with its threshold near
+2×10⁻⁵ W/m² and the 200-nm edge near 10⁻⁵. A maximum that carries the air past
+the threshold would leave it swollen after the Sun quiets. The swarm's tight
+level keeps even cycle 19's year below it. The thresholds come from the same
+tables as the onsets and lean early in the same way, and the thermal column
+leaves out the infrared cooling by nitric oxide, CO2 and atomic oxygen, which
+rises steeply with temperature and may weaken or remove the upper regime.
+
 **The solar-wind branch as screened.** Its range is 0.03 kg/s (low),
 0.19 kg/s (central) and 2.1 kg/s (high); at the high end sputtering by
 returning pickup ions dominates. With pickup capped at 0.29 kg/s it barely

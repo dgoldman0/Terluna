@@ -797,6 +797,14 @@ on demand would mean turning every ring plane with the Sun's 5.1° yearly swing,
 about 90 m/s per tile each half year, more than photon forces supply, and with
 electric thrust a few hundred megatonnes of exhaust a year, which S7 counts.
 
+For solar maxima the author keeps one dynamic option in view (8 October):
+covering failed cells faster through the maximum years, the swarm's tight level,
+with spare tiles and servicing ready across the fleet. At cycle 21's maximum it
+brings the warmest titania case from 8.4 to 2.5 kg/s, and it keeps cycle 19's
+year below the heat at which, in the screening model, that case's air passes the
+shadow's edge and holds itself swollen after the Sun quiets
+([the loss response](../../../atmosphere/loss_response/README.md)).
+
 For the held screen, the literature can settle two conditions first: how close
 thrusters come to ionizing all their propellant, neutralizer flow included,
 and, from published comet, ion-release and mini-magnetosphere studies, a bound
