@@ -1,17 +1,22 @@
 {
-  "schema": "terluna.atmosphere.loss-response/2",
+  "schema": "terluna.atmosphere.loss-response/3",
   "producer": {
     "domain": "atmosphere",
     "files": {
-      "atmosphere/loss_response/model.py": "92de5c5cb029ac30",
-      "atmosphere/thermal_column.py": "ca108980727d63d9",
-      "atmosphere/middle_atmosphere/escape.py": "a0e8bf6b30c2cb13",
+      "atmosphere/loss_response/model.py": "289dd85b04b9132d",
+      "atmosphere/loss_response/traced.py": "a3d523f256771daf",
+      "atmosphere/thermal_column.py": "644ad5c556840b06",
+      "atmosphere/loss_response/infrared.py": "cd6e8fb72e0f764e",
+      "atmosphere/radiative_convective/inputs.json": "65f81b5a6d2c3f30",
+      "atmosphere/middle_atmosphere/escape.py": "5571aa6a55a04bb3",
       "atmosphere/loss_response/tides.py": "c24f3996aa309f3c",
-      "atmosphere/loss_response/results/tidal_escape.json": "566dda3ee632f6af"
+      "atmosphere/loss_response/results/tidal_escape.json": "566dda3ee632f6af",
+      "atmosphere/loss_response/results/solar_cycle.json": "6d01acfe35cd4cc9",
+      "atmosphere/middle_atmosphere/results/limb_heat.json": "6d98d6ebea30a208"
     }
   },
-  "evidence": "Screening model. The ultraviolet branch is the molecular thermal column (no infrared cooling, no atomic oxygen) above middle-atmosphere base temperatures, with its Jeans escape raised by the tidal multiplier of test molecules in the Earth-Moon three-body problem, and energy-limited upper bounds beyond its domain; the solar-wind branch is a range from mass-loading and sputtering scalings with assumed parameter ranges. Neither is a coupled aeronomy or plasma model.",
-  "reading_rule": "Loss rates are global-mean kg/s for the finished 1.2 atm atmosphere. Use the thermal-column loss where status is thermal_column (molecular_loss_kg_s includes Earth's tide; molecular_loss_two_body_kg_s leaves it out) and the energy-limited range beyond it. A budget row's allowed_leak_fraction is the largest fraction of sunlight below 175 nm the optical shield may let through while ultraviolet-driven loss plus the stated solar-wind loss stays within the budget. It leaves out the sunlit exosphere's loss; exosphere_loss.json (schema terluna.atmosphere.exosphere-loss/1) gives the allowed transmissions with it.",
+  "evidence": "Screening model. The ultraviolet branch is the molecular thermal column (radiating CO2's 15-um band and the base's atomic oxygen and NO in excess of what air at the base temperature emits; no atomic oxygen made above the base) above middle-atmosphere base temperatures, taking the heat the limb tracing finds along slant paths at the ring fleet's protected radius where the tracing puts it in height, with its Jeans escape raised by the tidal multiplier of test molecules in the Earth-Moon three-body problem, and energy-limited upper bounds beyond its domain; the solar-wind branch is a range from mass-loading and sputtering scalings with assumed parameter ranges. Neither is a coupled aeronomy or plasma model.",
+  "reading_rule": "Loss rates are global-mean kg/s for the finished 1.2 atm atmosphere. Use the thermal-column loss where status is thermal_column (molecular_loss_kg_s includes Earth's tide; molecular_loss_two_body_kg_s leaves it out) and the energy-limited range beyond it; a runaway row is one whose air outgrows the limb tables. A budget row's allowed_leak_fraction is the largest UV transmission through gaps, the share of sunlight below 175 nm that passes over the whole aperture of the 4 lunar-radius protected region, while ultraviolet-driven loss plus the stated solar-wind loss stays within the budget. It leaves out the sunlit exosphere's loss; exosphere_loss.json (schema terluna.atmosphere.exosphere-loss/2) gives the allowed transmissions with it.",
   "assumptions": {
     "base_pressure_pa": 0.3,
     "lyman_glow_rayleigh_quiet": 1000.0,
@@ -22,11 +27,107 @@
         "glow": 1.0
       },
       "solar_maximum": {
+        "label": "solar_maximum",
+        "start": "1979-06-01",
+        "end": "1980-05-31",
+        "days": 366,
+        "bands": [
+          82.10898364691218,
+          23.484835180802396,
+          19.95515688218379,
+          10.523386191201192,
+          4.433154666380095,
+          3.1112019776584265,
+          1.9208149828879522,
+          1.5444904338432068,
+          1.6344834597334326,
+          1.4813000015229485,
+          1.5460597773648068,
+          1.368327967905308,
+          1.3059772277068709,
+          1.2202253939541177,
+          1.1297925122380073
+        ],
+        "glow": 1.5460597773648068,
+        "xray": 7.324192895945584,
+        "uv": 1.4257099021926245,
+        "cycle": "cycle_21"
+      },
+      "solar_maximum_cycle_19": {
+        "label": "solar_maximum_cycle_19",
+        "start": "1957-09-01",
+        "end": "1958-08-31",
+        "days": 365,
+        "bands": [
+          108.50636567214391,
+          32.0233824944921,
+          27.222106864614275,
+          14.18309667185278,
+          5.548704151839302,
+          3.809662169017331,
+          2.251187145786922,
+          1.7175852623828542,
+          1.8339855489851882,
+          1.7473114510881662,
+          1.877747295022923,
+          1.5938793238505287,
+          1.4948459364244409,
+          1.355761419417354,
+          1.2058841093850066
+        ],
+        "glow": 1.877747295022923,
+        "xray": 9.620996318654417,
+        "uv": 1.6426394710684569,
+        "cycle": "cycle_19"
+      },
+      "solar_maximum_stress": {
         "uv": 2.5,
-        "xray": 100.0,
+        "xray": "fism2",
         "glow": 1.5
       }
     },
+    "xray_cycle": {
+      "bands_nm": [
+        0.0,
+        0.5,
+        1.0,
+        2.0,
+        5.0,
+        10.0
+      ],
+      "maxima": {
+        "cycle_23": [
+          58.108957553761485,
+          21.346146858731718,
+          19.19494470998784,
+          9.999390793224507,
+          4.14853923638954
+        ],
+        "cycle_24": [
+          38.602374519065144,
+          13.133063984669645,
+          11.760920707924958,
+          6.309601090594511,
+          3.0103320514506926
+        ],
+        "cycle_25": [
+          61.62964516649171,
+          21.661210223777683,
+          19.408817100993858,
+          10.094046956374228,
+          3.5893649269289614
+        ]
+      },
+      "mean": [
+        52.780325746439445,
+        18.713473689059683,
+        16.788227506302217,
+        8.801012946731083,
+        3.582745404923065
+      ]
+    },
+    "protected_radius_R": 4.0,
+    "annulus_film": "annulus_4_um",
     "solar_wind": {
       "density_m3": 5000000.0,
       "speed_m_s": 400000.0
@@ -66,9 +167,19 @@
       2.0,
       3.0
     ],
+    "infrared_cooling": {
+      "radiates": true,
+      "co2_ppm": 400.0,
+      "co2_band_cm": [
+        500.0,
+        850.0
+      ]
+    },
     "xuv_flux_below_121nm_w_m2": {
       "quiet": 0.0029552982697724824,
-      "solar_maximum": 0.007388245674431206
+      "solar_maximum": 0.0068967558468121986,
+      "solar_maximum_cycle_19": 0.008297321231536382,
+      "solar_maximum_stress": 0.007388245674431206
     },
     "lyman_glow_flux_w_m2": 4.085084474300034e-06
   },
@@ -107,6 +218,28 @@
       "eta0.3_R3_kg_s": 80443.59572287381
     },
     "solar_maximum": {
+      "eta0.01_R1.5_kg_s": 782.2107230469144,
+      "eta0.01_R2_kg_s": 1854.1291212963893,
+      "eta0.01_R3_kg_s": 6257.685784375315,
+      "eta0.1_R1.5_kg_s": 7822.107230469143,
+      "eta0.1_R2_kg_s": 18541.29121296389,
+      "eta0.1_R3_kg_s": 62576.85784375315,
+      "eta0.3_R1.5_kg_s": 23466.32169140743,
+      "eta0.3_R2_kg_s": 55623.87363889167,
+      "eta0.3_R3_kg_s": 187730.57353125943
+    },
+    "solar_maximum_cycle_19": {
+      "eta0.01_R1.5_kg_s": 941.0589245191994,
+      "eta0.01_R2_kg_s": 2230.6581914529165,
+      "eta0.01_R3_kg_s": 7528.471396153595,
+      "eta0.1_R1.5_kg_s": 9410.589245191992,
+      "eta0.1_R2_kg_s": 22306.58191452916,
+      "eta0.1_R3_kg_s": 75284.71396153593,
+      "eta0.3_R1.5_kg_s": 28231.767735575977,
+      "eta0.3_R2_kg_s": 66919.7457435875,
+      "eta0.3_R3_kg_s": 225854.14188460782
+    },
+    "solar_maximum_stress": {
       "eta0.01_R1.5_kg_s": 837.954122113269,
       "eta0.01_R2_kg_s": 1986.261622787008,
       "eta0.01_R3_kg_s": 6703.632976906152,
@@ -127,8 +260,8 @@
       "solar_wind": "low",
       "solar_wind_kg_s": 0.02950971742214928,
       "allowance_for_ultraviolet_kg_s": 0.9704902825778507,
-      "allowed_leak_fraction": 0.004505518922308643,
-      "floor_kg_s": 2.652914416761842e-07,
+      "allowed_leak_fraction": 0.005228962570942447,
+      "floor_kg_s": 5.990062408893987e-11,
       "verdict": "within budget"
     },
     {
@@ -140,7 +273,7 @@
       "solar_wind_kg_s": 2.1310214100875022,
       "allowance_for_ultraviolet_kg_s": -1.1310214100875022,
       "allowed_leak_fraction": null,
-      "floor_kg_s": 2.652914416761842e-07,
+      "floor_kg_s": 5.990062408893987e-11,
       "verdict": "solar-wind loss alone exceeds the budget"
     },
     {
@@ -151,8 +284,8 @@
       "solar_wind": "low",
       "solar_wind_kg_s": 0.02950971742214928,
       "allowance_for_ultraviolet_kg_s": 9.97049028257785,
-      "allowed_leak_fraction": 0.0064190063662115816,
-      "floor_kg_s": 2.652914416761842e-07,
+      "allowed_leak_fraction": 0.006441344697008108,
+      "floor_kg_s": 5.990062408893987e-11,
       "verdict": "within budget"
     },
     {
@@ -163,8 +296,8 @@
       "solar_wind": "high",
       "solar_wind_kg_s": 2.1310214100875022,
       "allowance_for_ultraviolet_kg_s": 7.868978589912498,
-      "allowed_leak_fraction": 0.006155414581455762,
-      "floor_kg_s": 2.652914416761842e-07,
+      "allowed_leak_fraction": 0.006306304372784523,
+      "floor_kg_s": 5.990062408893987e-11,
       "verdict": "within budget"
     },
     {
@@ -175,8 +308,8 @@
       "solar_wind": "low",
       "solar_wind_kg_s": 0.02950971742214928,
       "allowance_for_ultraviolet_kg_s": 99.97049028257786,
-      "allowed_leak_fraction": 0.009656518344398408,
-      "floor_kg_s": 2.652914416761842e-07,
+      "allowed_leak_fraction": 0.00791756085119122,
+      "floor_kg_s": 5.990062408893987e-11,
       "verdict": "within budget"
     },
     {
@@ -187,8 +320,8 @@
       "solar_wind": "high",
       "solar_wind_kg_s": 2.1310214100875022,
       "allowance_for_ultraviolet_kg_s": 97.8689785899125,
-      "allowed_leak_fraction": 0.009620243522900503,
-      "floor_kg_s": 2.652914416761842e-07,
+      "allowed_leak_fraction": 0.00790251827042775,
+      "floor_kg_s": 5.990062408893987e-11,
       "verdict": "within budget"
     },
     {
@@ -199,8 +332,8 @@
       "solar_wind": "low",
       "solar_wind_kg_s": 0.02950971742214928,
       "allowance_for_ultraviolet_kg_s": 0.9704902825778507,
-      "allowed_leak_fraction": 0.0015260516832194962,
-      "floor_kg_s": 7.612513619868765e-06,
+      "allowed_leak_fraction": 0.003149697177305189,
+      "floor_kg_s": 1.266288471973541e-10,
       "verdict": "within budget"
     },
     {
@@ -212,7 +345,7 @@
       "solar_wind_kg_s": 2.1310214100875022,
       "allowance_for_ultraviolet_kg_s": -1.1310214100875022,
       "allowed_leak_fraction": null,
-      "floor_kg_s": 7.612513619868765e-06,
+      "floor_kg_s": 1.266288471973541e-10,
       "verdict": "solar-wind loss alone exceeds the budget"
     },
     {
@@ -223,8 +356,8 @@
       "solar_wind": "low",
       "solar_wind_kg_s": 0.02950971742214928,
       "allowance_for_ultraviolet_kg_s": 9.97049028257785,
-      "allowed_leak_fraction": 0.0021280136156189007,
-      "floor_kg_s": 7.612513619868765e-06,
+      "allowed_leak_fraction": 0.0037914735469250977,
+      "floor_kg_s": 1.266288471973541e-10,
       "verdict": "within budget"
     },
     {
@@ -235,8 +368,8 @@
       "solar_wind": "high",
       "solar_wind_kg_s": 2.1310214100875022,
       "allowance_for_ultraviolet_kg_s": 7.868978589912498,
-      "allowed_leak_fraction": 0.0020350475892197,
-      "floor_kg_s": 7.612513619868765e-06,
+      "allowed_leak_fraction": 0.003720700380231698,
+      "floor_kg_s": 1.266288471973541e-10,
       "verdict": "within budget"
     },
     {
@@ -247,8 +380,8 @@
       "solar_wind": "low",
       "solar_wind_kg_s": 0.02950971742214928,
       "allowance_for_ultraviolet_kg_s": 99.97049028257786,
-      "allowed_leak_fraction": 0.0035984844812201066,
-      "floor_kg_s": 7.612513619868765e-06,
+      "allowed_leak_fraction": 0.004555182952219871,
+      "floor_kg_s": 1.266288471973541e-10,
       "verdict": "within budget"
     },
     {
@@ -259,8 +392,152 @@
       "solar_wind": "high",
       "solar_wind_kg_s": 2.1310214100875022,
       "allowance_for_ultraviolet_kg_s": 97.8689785899125,
-      "allowed_leak_fraction": 0.0035699528641845997,
-      "floor_kg_s": 7.612513619868765e-06,
+      "allowed_leak_fraction": 0.004547485470333135,
+      "floor_kg_s": 1.266288471973541e-10,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "collisional",
+      "activity": "solar_maximum_cycle_19",
+      "budget_kg_s": 1.0,
+      "solar_wind": "low",
+      "solar_wind_kg_s": 0.02950971742214928,
+      "allowance_for_ultraviolet_kg_s": 0.9704902825778507,
+      "allowed_leak_fraction": 0.0026871050444251263,
+      "floor_kg_s": 1.7084246403721173e-10,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "collisional",
+      "activity": "solar_maximum_cycle_19",
+      "budget_kg_s": 1.0,
+      "solar_wind": "high",
+      "solar_wind_kg_s": 2.1310214100875022,
+      "allowance_for_ultraviolet_kg_s": -1.1310214100875022,
+      "allowed_leak_fraction": null,
+      "floor_kg_s": 1.7084246403721173e-10,
+      "verdict": "solar-wind loss alone exceeds the budget"
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "collisional",
+      "activity": "solar_maximum_cycle_19",
+      "budget_kg_s": 10.0,
+      "solar_wind": "low",
+      "solar_wind_kg_s": 0.02950971742214928,
+      "allowance_for_ultraviolet_kg_s": 9.97049028257785,
+      "allowed_leak_fraction": 0.0032038352148605355,
+      "floor_kg_s": 1.7084246403721173e-10,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "collisional",
+      "activity": "solar_maximum_cycle_19",
+      "budget_kg_s": 10.0,
+      "solar_wind": "high",
+      "solar_wind_kg_s": 2.1310214100875022,
+      "allowance_for_ultraviolet_kg_s": 7.868978589912498,
+      "allowed_leak_fraction": 0.0031472572115657012,
+      "floor_kg_s": 1.7084246403721173e-10,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "collisional",
+      "activity": "solar_maximum_cycle_19",
+      "budget_kg_s": 100.0,
+      "solar_wind": "low",
+      "solar_wind_kg_s": 0.02950971742214928,
+      "allowance_for_ultraviolet_kg_s": 99.97049028257786,
+      "allowed_leak_fraction": 0.0038109233379763044,
+      "floor_kg_s": 1.7084246403721173e-10,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "collisional",
+      "activity": "solar_maximum_cycle_19",
+      "budget_kg_s": 100.0,
+      "solar_wind": "high",
+      "solar_wind_kg_s": 2.1310214100875022,
+      "allowance_for_ultraviolet_kg_s": 97.8689785899125,
+      "allowed_leak_fraction": 0.0038048337504650543,
+      "floor_kg_s": 1.7084246403721173e-10,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "collisional",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 1.0,
+      "solar_wind": "low",
+      "solar_wind_kg_s": 0.02950971742214928,
+      "allowance_for_ultraviolet_kg_s": 0.9704902825778507,
+      "allowed_leak_fraction": 0.0019955441118959883,
+      "floor_kg_s": 1.110128298240328e-10,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "collisional",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 1.0,
+      "solar_wind": "high",
+      "solar_wind_kg_s": 2.1310214100875022,
+      "allowance_for_ultraviolet_kg_s": -1.1310214100875022,
+      "allowed_leak_fraction": null,
+      "floor_kg_s": 1.110128298240328e-10,
+      "verdict": "solar-wind loss alone exceeds the budget"
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "collisional",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 10.0,
+      "solar_wind": "low",
+      "solar_wind_kg_s": 0.02950971742214928,
+      "allowance_for_ultraviolet_kg_s": 9.97049028257785,
+      "allowed_leak_fraction": 0.002326690652172665,
+      "floor_kg_s": 1.110128298240328e-10,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "collisional",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 10.0,
+      "solar_wind": "high",
+      "solar_wind_kg_s": 2.1310214100875022,
+      "allowance_for_ultraviolet_kg_s": 7.868978589912498,
+      "allowed_leak_fraction": 0.002290773273785065,
+      "floor_kg_s": 1.110128298240328e-10,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "collisional",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 100.0,
+      "solar_wind": "low",
+      "solar_wind_kg_s": 0.02950971742214928,
+      "allowance_for_ultraviolet_kg_s": 99.97049028257786,
+      "allowed_leak_fraction": 0.002707327740625306,
+      "floor_kg_s": 1.110128298240328e-10,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "collisional",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 100.0,
+      "solar_wind": "high",
+      "solar_wind_kg_s": 2.1310214100875022,
+      "allowance_for_ultraviolet_kg_s": 97.8689785899125,
+      "allowed_leak_fraction": 0.002703549916508493,
+      "floor_kg_s": 1.110128298240328e-10,
       "verdict": "within budget"
     },
     {
@@ -271,8 +548,8 @@
       "solar_wind": "low",
       "solar_wind_kg_s": 0.02950971742214928,
       "allowance_for_ultraviolet_kg_s": 0.9704902825778507,
-      "allowed_leak_fraction": 0.002989376076075769,
-      "floor_kg_s": 0.0001350563983943853,
+      "allowed_leak_fraction": 0.003834191249599903,
+      "floor_kg_s": 2.2390722969968082e-07,
       "verdict": "within budget"
     },
     {
@@ -284,7 +561,7 @@
       "solar_wind_kg_s": 2.1310214100875022,
       "allowance_for_ultraviolet_kg_s": -1.1310214100875022,
       "allowed_leak_fraction": null,
-      "floor_kg_s": 0.0001350563983943853,
+      "floor_kg_s": 2.2390722969968082e-07,
       "verdict": "solar-wind loss alone exceeds the budget"
     },
     {
@@ -295,8 +572,8 @@
       "solar_wind": "low",
       "solar_wind_kg_s": 0.02950971742214928,
       "allowance_for_ultraviolet_kg_s": 9.97049028257785,
-      "allowed_leak_fraction": 0.004384108416689576,
-      "floor_kg_s": 0.0001350563983943853,
+      "allowed_leak_fraction": 0.004804033170584804,
+      "floor_kg_s": 2.2390722969968082e-07,
       "verdict": "within budget"
     },
     {
@@ -307,8 +584,8 @@
       "solar_wind": "high",
       "solar_wind_kg_s": 2.1310214100875022,
       "allowance_for_ultraviolet_kg_s": 7.868978589912498,
-      "allowed_leak_fraction": 0.0042168645481723156,
-      "floor_kg_s": 0.0001350563983943853,
+      "allowed_leak_fraction": 0.004695214302592971,
+      "floor_kg_s": 2.2390722969968082e-07,
       "verdict": "within budget"
     },
     {
@@ -319,8 +596,8 @@
       "solar_wind": "low",
       "solar_wind_kg_s": 0.02950971742214928,
       "allowance_for_ultraviolet_kg_s": 99.97049028257786,
-      "allowed_leak_fraction": 0.0080696505922774,
-      "floor_kg_s": 0.0001350563983943853,
+      "allowed_leak_fraction": 0.006084530399762874,
+      "floor_kg_s": 2.2390722969968082e-07,
       "verdict": "within budget"
     },
     {
@@ -331,8 +608,8 @@
       "solar_wind": "high",
       "solar_wind_kg_s": 2.1310214100875022,
       "allowance_for_ultraviolet_kg_s": 97.8689785899125,
-      "allowed_leak_fraction": 0.008015315652171486,
-      "floor_kg_s": 0.0001350563983943853,
+      "allowed_leak_fraction": 0.006084530399762874,
+      "floor_kg_s": 2.2390722969968082e-07,
       "verdict": "within budget"
     },
     {
@@ -343,8 +620,8 @@
       "solar_wind": "low",
       "solar_wind_kg_s": 0.02950971742214928,
       "allowance_for_ultraviolet_kg_s": 0.9704902825778507,
-      "allowed_leak_fraction": 0.0008727008789290044,
-      "floor_kg_s": 0.002017272869073184,
+      "allowed_leak_fraction": 0.0022913187564965456,
+      "floor_kg_s": 3.7801298557133644e-07,
       "verdict": "within budget"
     },
     {
@@ -356,7 +633,7 @@
       "solar_wind_kg_s": 2.1310214100875022,
       "allowance_for_ultraviolet_kg_s": -1.1310214100875022,
       "allowed_leak_fraction": null,
-      "floor_kg_s": 0.002017272869073184,
+      "floor_kg_s": 3.7801298557133644e-07,
       "verdict": "solar-wind loss alone exceeds the budget"
     },
     {
@@ -367,8 +644,8 @@
       "solar_wind": "low",
       "solar_wind_kg_s": 0.02950971742214928,
       "allowance_for_ultraviolet_kg_s": 9.97049028257785,
-      "allowed_leak_fraction": 0.0014830315914484548,
-      "floor_kg_s": 0.002017272869073184,
+      "allowed_leak_fraction": 0.0028795543898430635,
+      "floor_kg_s": 3.7801298557133644e-07,
       "verdict": "within budget"
     },
     {
@@ -379,8 +656,8 @@
       "solar_wind": "high",
       "solar_wind_kg_s": 2.1310214100875022,
       "allowance_for_ultraviolet_kg_s": 7.868978589912498,
-      "allowed_leak_fraction": 0.0014098483463046837,
-      "floor_kg_s": 0.002017272869073184,
+      "allowed_leak_fraction": 0.0028134671719814318,
+      "floor_kg_s": 3.7801298557133644e-07,
       "verdict": "within budget"
     },
     {
@@ -391,8 +668,8 @@
       "solar_wind": "low",
       "solar_wind_kg_s": 0.02950971742214928,
       "allowance_for_ultraviolet_kg_s": 99.97049028257786,
-      "allowed_leak_fraction": 0.0027638675399308163,
-      "floor_kg_s": 0.002017272869073184,
+      "allowed_leak_fraction": 0.003500063866613517,
+      "floor_kg_s": 3.7801298557133644e-07,
       "verdict": "within budget"
     },
     {
@@ -403,8 +680,152 @@
       "solar_wind": "high",
       "solar_wind_kg_s": 2.1310214100875022,
       "allowance_for_ultraviolet_kg_s": 97.8689785899125,
-      "allowed_leak_fraction": 0.002742991647951166,
-      "floor_kg_s": 0.002017272869073184,
+      "allowed_leak_fraction": 0.003493995457123946,
+      "floor_kg_s": 3.7801298557133644e-07,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "lte",
+      "activity": "solar_maximum_cycle_19",
+      "budget_kg_s": 1.0,
+      "solar_wind": "low",
+      "solar_wind_kg_s": 0.02950971742214928,
+      "allowance_for_ultraviolet_kg_s": 0.9704902825778507,
+      "allowed_leak_fraction": 0.0019354098270139627,
+      "floor_kg_s": 4.6590020889552243e-07,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "lte",
+      "activity": "solar_maximum_cycle_19",
+      "budget_kg_s": 1.0,
+      "solar_wind": "high",
+      "solar_wind_kg_s": 2.1310214100875022,
+      "allowance_for_ultraviolet_kg_s": -1.1310214100875022,
+      "allowed_leak_fraction": null,
+      "floor_kg_s": 4.6590020889552243e-07,
+      "verdict": "solar-wind loss alone exceeds the budget"
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "lte",
+      "activity": "solar_maximum_cycle_19",
+      "budget_kg_s": 10.0,
+      "solar_wind": "low",
+      "solar_wind_kg_s": 0.02950971742214928,
+      "allowance_for_ultraviolet_kg_s": 9.97049028257785,
+      "allowed_leak_fraction": 0.002385297932596635,
+      "floor_kg_s": 4.6590020889552243e-07,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "lte",
+      "activity": "solar_maximum_cycle_19",
+      "budget_kg_s": 10.0,
+      "solar_wind": "high",
+      "solar_wind_kg_s": 2.1310214100875022,
+      "allowance_for_ultraviolet_kg_s": 7.868978589912498,
+      "allowed_leak_fraction": 0.002336839732356566,
+      "floor_kg_s": 4.6590020889552243e-07,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "lte",
+      "activity": "solar_maximum_cycle_19",
+      "budget_kg_s": 100.0,
+      "solar_wind": "low",
+      "solar_wind_kg_s": 0.02950971742214928,
+      "allowance_for_ultraviolet_kg_s": 99.97049028257786,
+      "allowed_leak_fraction": 0.0029130876230004186,
+      "floor_kg_s": 4.6590020889552243e-07,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "lte",
+      "activity": "solar_maximum_cycle_19",
+      "budget_kg_s": 100.0,
+      "solar_wind": "high",
+      "solar_wind_kg_s": 2.1310214100875022,
+      "allowance_for_ultraviolet_kg_s": 97.8689785899125,
+      "allowed_leak_fraction": 0.0029077260568384205,
+      "floor_kg_s": 4.6590020889552243e-07,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "lte",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 1.0,
+      "solar_wind": "low",
+      "solar_wind_kg_s": 0.02950971742214928,
+      "allowance_for_ultraviolet_kg_s": 0.9704902825778507,
+      "allowed_leak_fraction": 0.0014615758870917682,
+      "floor_kg_s": 3.4437088811176737e-07,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "lte",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 1.0,
+      "solar_wind": "high",
+      "solar_wind_kg_s": 2.1310214100875022,
+      "allowance_for_ultraviolet_kg_s": -1.1310214100875022,
+      "allowed_leak_fraction": null,
+      "floor_kg_s": 3.4437088811176737e-07,
+      "verdict": "solar-wind loss alone exceeds the budget"
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "lte",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 10.0,
+      "solar_wind": "low",
+      "solar_wind_kg_s": 0.02950971742214928,
+      "allowance_for_ultraviolet_kg_s": 9.97049028257785,
+      "allowed_leak_fraction": 0.0018537226269103374,
+      "floor_kg_s": 3.4437088811176737e-07,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "lte",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 10.0,
+      "solar_wind": "high",
+      "solar_wind_kg_s": 2.1310214100875022,
+      "allowance_for_ultraviolet_kg_s": 7.868978589912498,
+      "allowed_leak_fraction": 0.001809491535025663,
+      "floor_kg_s": 3.4437088811176737e-07,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "lte",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 100.0,
+      "solar_wind": "low",
+      "solar_wind_kg_s": 0.02950971742214928,
+      "allowance_for_ultraviolet_kg_s": 99.97049028257786,
+      "allowed_leak_fraction": 0.0020474059031886046,
+      "floor_kg_s": 3.4437088811176737e-07,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "lte",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 100.0,
+      "solar_wind": "high",
+      "solar_wind_kg_s": 2.1310214100875022,
+      "allowance_for_ultraviolet_kg_s": 97.8689785899125,
+      "allowed_leak_fraction": 0.0020474059031886046,
+      "floor_kg_s": 3.4437088811176737e-07,
       "verdict": "within budget"
     },
     {
@@ -415,8 +836,8 @@
       "solar_wind": "low",
       "solar_wind_kg_s": 0.02950971742214928,
       "allowance_for_ultraviolet_kg_s": 0.9704902825778507,
-      "allowed_leak_fraction": 0.0008835445166441639,
-      "floor_kg_s": 0.09010326088477955,
+      "allowed_leak_fraction": 0.002037357190341121,
+      "floor_kg_s": 0.000598851937427995,
       "verdict": "within budget"
     },
     {
@@ -428,7 +849,7 @@
       "solar_wind_kg_s": 2.1310214100875022,
       "allowance_for_ultraviolet_kg_s": -1.1310214100875022,
       "allowed_leak_fraction": null,
-      "floor_kg_s": 0.09010326088477955,
+      "floor_kg_s": 0.000598851937427995,
       "verdict": "solar-wind loss alone exceeds the budget"
     },
     {
@@ -439,8 +860,8 @@
       "solar_wind": "low",
       "solar_wind_kg_s": 0.02950971742214928,
       "allowance_for_ultraviolet_kg_s": 9.97049028257785,
-      "allowed_leak_fraction": 0.002140168666100043,
-      "floor_kg_s": 0.09010326088477955,
+      "allowed_leak_fraction": 0.0028844913931860465,
+      "floor_kg_s": 0.000598851937427995,
       "verdict": "within budget"
     },
     {
@@ -451,8 +872,8 @@
       "solar_wind": "high",
       "solar_wind_kg_s": 2.1310214100875022,
       "allowance_for_ultraviolet_kg_s": 7.868978589912498,
-      "allowed_leak_fraction": 0.0019800912418013565,
-      "floor_kg_s": 0.09010326088477955,
+      "allowed_leak_fraction": 0.0027843665866782354,
+      "floor_kg_s": 0.000598851937427995,
       "verdict": "within budget"
     },
     {
@@ -463,8 +884,8 @@
       "solar_wind": "low",
       "solar_wind_kg_s": 0.02950971742214928,
       "allowance_for_ultraviolet_kg_s": 99.97049028257786,
-      "allowed_leak_fraction": 0.005049131344071954,
-      "floor_kg_s": 0.09010326088477955,
+      "allowed_leak_fraction": 0.003545371822982855,
+      "floor_kg_s": 0.000598851937427995,
       "verdict": "within budget"
     },
     {
@@ -475,8 +896,8 @@
       "solar_wind": "high",
       "solar_wind_kg_s": 2.1310214100875022,
       "allowance_for_ultraviolet_kg_s": 97.8689785899125,
-      "allowed_leak_fraction": 0.004991104609482171,
-      "floor_kg_s": 0.09010326088477955,
+      "allowed_leak_fraction": 0.003545371822982855,
+      "floor_kg_s": 0.000598851937427995,
       "verdict": "within budget"
     },
     {
@@ -487,8 +908,8 @@
       "solar_wind": "low",
       "solar_wind_kg_s": 0.02950971742214928,
       "allowance_for_ultraviolet_kg_s": 0.9704902825778507,
-      "allowed_leak_fraction": 4.0288487295982365e-05,
-      "floor_kg_s": 0.7413773352972215,
+      "allowed_leak_fraction": 0.0011606079110743068,
+      "floor_kg_s": 0.0008792509267434586,
       "verdict": "within budget"
     },
     {
@@ -500,7 +921,7 @@
       "solar_wind_kg_s": 2.1310214100875022,
       "allowance_for_ultraviolet_kg_s": -1.1310214100875022,
       "allowed_leak_fraction": null,
-      "floor_kg_s": 0.7413773352972215,
+      "floor_kg_s": 0.0008792509267434586,
       "verdict": "solar-wind loss alone exceeds the budget"
     },
     {
@@ -511,8 +932,8 @@
       "solar_wind": "low",
       "solar_wind_kg_s": 0.02950971742214928,
       "allowance_for_ultraviolet_kg_s": 9.97049028257785,
-      "allowed_leak_fraction": 0.0005034456592386045,
-      "floor_kg_s": 0.7413773352972215,
+      "allowed_leak_fraction": 0.0016850328391103517,
+      "floor_kg_s": 0.0008792509267434586,
       "verdict": "within budget"
     },
     {
@@ -523,8 +944,8 @@
       "solar_wind": "high",
       "solar_wind_kg_s": 2.1310214100875022,
       "allowance_for_ultraviolet_kg_s": 7.868978589912498,
-      "allowed_leak_fraction": 0.0004447062130118966,
-      "floor_kg_s": 0.7413773352972215,
+      "allowed_leak_fraction": 0.0016223924279643016,
+      "floor_kg_s": 0.0008792509267434586,
       "verdict": "within budget"
     },
     {
@@ -535,8 +956,8 @@
       "solar_wind": "low",
       "solar_wind_kg_s": 0.02950971742214928,
       "allowance_for_ultraviolet_kg_s": 99.97049028257786,
-      "allowed_leak_fraction": 0.0017194090574939402,
-      "floor_kg_s": 0.7413773352972215,
+      "allowed_leak_fraction": 0.002094785786947444,
+      "floor_kg_s": 0.0008792509267434586,
       "verdict": "within budget"
     },
     {
@@ -547,8 +968,152 @@
       "solar_wind": "high",
       "solar_wind_kg_s": 2.1310214100875022,
       "allowance_for_ultraviolet_kg_s": 97.8689785899125,
-      "allowed_leak_fraction": 0.0016996431632968286,
-      "floor_kg_s": 0.7413773352972215,
+      "allowed_leak_fraction": 0.002094785786947444,
+      "floor_kg_s": 0.0008792509267434586,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "all_heats",
+      "activity": "solar_maximum_cycle_19",
+      "budget_kg_s": 1.0,
+      "solar_wind": "low",
+      "solar_wind_kg_s": 0.02950971742214928,
+      "allowance_for_ultraviolet_kg_s": 0.9704902825778507,
+      "allowed_leak_fraction": 0.0009891706646227543,
+      "floor_kg_s": 0.0010238438047491638,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "all_heats",
+      "activity": "solar_maximum_cycle_19",
+      "budget_kg_s": 1.0,
+      "solar_wind": "high",
+      "solar_wind_kg_s": 2.1310214100875022,
+      "allowance_for_ultraviolet_kg_s": -1.1310214100875022,
+      "allowed_leak_fraction": null,
+      "floor_kg_s": 0.0010238438047491638,
+      "verdict": "solar-wind loss alone exceeds the budget"
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "all_heats",
+      "activity": "solar_maximum_cycle_19",
+      "budget_kg_s": 10.0,
+      "solar_wind": "low",
+      "solar_wind_kg_s": 0.02950971742214928,
+      "allowance_for_ultraviolet_kg_s": 9.97049028257785,
+      "allowed_leak_fraction": 0.001434263984609239,
+      "floor_kg_s": 0.0010238438047491638,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "all_heats",
+      "activity": "solar_maximum_cycle_19",
+      "budget_kg_s": 10.0,
+      "solar_wind": "high",
+      "solar_wind_kg_s": 2.1310214100875022,
+      "allowance_for_ultraviolet_kg_s": 7.868978589912498,
+      "allowed_leak_fraction": 0.0013815358263903682,
+      "floor_kg_s": 0.0010238438047491638,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "all_heats",
+      "activity": "solar_maximum_cycle_19",
+      "budget_kg_s": 100.0,
+      "solar_wind": "low",
+      "solar_wind_kg_s": 0.02950971742214928,
+      "allowance_for_ultraviolet_kg_s": 99.97049028257786,
+      "allowed_leak_fraction": 0.001712700743299337,
+      "floor_kg_s": 0.0010238438047491638,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "all_heats",
+      "activity": "solar_maximum_cycle_19",
+      "budget_kg_s": 100.0,
+      "solar_wind": "high",
+      "solar_wind_kg_s": 2.1310214100875022,
+      "allowance_for_ultraviolet_kg_s": 97.8689785899125,
+      "allowed_leak_fraction": 0.001712700743299337,
+      "floor_kg_s": 0.0010238438047491638,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "all_heats",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 1.0,
+      "solar_wind": "low",
+      "solar_wind_kg_s": 0.02950971742214928,
+      "allowance_for_ultraviolet_kg_s": 0.9704902825778507,
+      "allowed_leak_fraction": 0.0007366995538847002,
+      "floor_kg_s": 0.0008205739710652833,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "all_heats",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 1.0,
+      "solar_wind": "high",
+      "solar_wind_kg_s": 2.1310214100875022,
+      "allowance_for_ultraviolet_kg_s": -1.1310214100875022,
+      "allowed_leak_fraction": null,
+      "floor_kg_s": 0.0008205739710652833,
+      "verdict": "solar-wind loss alone exceeds the budget"
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "all_heats",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 10.0,
+      "solar_wind": "low",
+      "solar_wind_kg_s": 0.02950971742214928,
+      "allowance_for_ultraviolet_kg_s": 9.97049028257785,
+      "allowed_leak_fraction": 0.0010941768305173711,
+      "floor_kg_s": 0.0008205739710652833,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "all_heats",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 10.0,
+      "solar_wind": "high",
+      "solar_wind_kg_s": 2.1310214100875022,
+      "allowance_for_ultraviolet_kg_s": 7.868978589912498,
+      "allowed_leak_fraction": 0.0010553347084073603,
+      "floor_kg_s": 0.0008205739710652833,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "all_heats",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 100.0,
+      "solar_wind": "low",
+      "solar_wind_kg_s": 0.02950971742214928,
+      "allowance_for_ultraviolet_kg_s": 99.97049028257786,
+      "allowed_leak_fraction": 0.001275529893258225,
+      "floor_kg_s": 0.0008205739710652833,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "titania_stack",
+      "treatment": "all_heats",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 100.0,
+      "solar_wind": "high",
+      "solar_wind_kg_s": 2.1310214100875022,
+      "allowance_for_ultraviolet_kg_s": 97.8689785899125,
+      "allowed_leak_fraction": 0.001275529893258225,
+      "floor_kg_s": 0.0008205739710652833,
       "verdict": "within budget"
     },
     {
@@ -559,8 +1124,8 @@
       "solar_wind": "low",
       "solar_wind_kg_s": 0.02950971742214928,
       "allowance_for_ultraviolet_kg_s": 0.9704902825778507,
-      "allowed_leak_fraction": 0.0003067208264434962,
-      "floor_kg_s": 0.4507119880943018,
+      "allowed_leak_fraction": 0.0013829882215797749,
+      "floor_kg_s": 0.004084806530495891,
       "verdict": "within budget"
     },
     {
@@ -572,7 +1137,7 @@
       "solar_wind_kg_s": 2.1310214100875022,
       "allowance_for_ultraviolet_kg_s": -1.1310214100875022,
       "allowed_leak_fraction": null,
-      "floor_kg_s": 0.4507119880943018,
+      "floor_kg_s": 0.004084806530495891,
       "verdict": "solar-wind loss alone exceeds the budget"
     },
     {
@@ -583,8 +1148,8 @@
       "solar_wind": "low",
       "solar_wind_kg_s": 0.02950971742214928,
       "allowance_for_ultraviolet_kg_s": 9.97049028257785,
-      "allowed_leak_fraction": 0.0014679775236321492,
-      "floor_kg_s": 0.4507119880943018,
+      "allowed_leak_fraction": 0.002206016297452019,
+      "floor_kg_s": 0.004084806530495891,
       "verdict": "within budget"
     },
     {
@@ -595,8 +1160,8 @@
       "solar_wind": "high",
       "solar_wind_kg_s": 2.1310214100875022,
       "allowance_for_ultraviolet_kg_s": 7.868978589912498,
-      "allowed_leak_fraction": 0.0013189868584840719,
-      "floor_kg_s": 0.4507119880943018,
+      "allowed_leak_fraction": 0.0021176080640390536,
+      "floor_kg_s": 0.004084806530495891,
       "verdict": "within budget"
     },
     {
@@ -607,8 +1172,8 @@
       "solar_wind": "low",
       "solar_wind_kg_s": 0.02950971742214928,
       "allowance_for_ultraviolet_kg_s": 99.97049028257786,
-      "allowed_leak_fraction": 0.004353199370327654,
-      "floor_kg_s": 0.4507119880943018,
+      "allowed_leak_fraction": 0.0023725868402109827,
+      "floor_kg_s": 0.004084806530495891,
       "verdict": "within budget"
     },
     {
@@ -619,8 +1184,8 @@
       "solar_wind": "high",
       "solar_wind_kg_s": 2.1310214100875022,
       "allowance_for_ultraviolet_kg_s": 97.8689785899125,
-      "allowed_leak_fraction": 0.004304854957843179,
-      "floor_kg_s": 0.4507119880943018,
+      "allowed_leak_fraction": 0.0023725868402109827,
+      "floor_kg_s": 0.004084806530495891,
       "verdict": "within budget"
     },
     {
@@ -631,9 +1196,9 @@
       "solar_wind": "low",
       "solar_wind_kg_s": 0.02950971742214928,
       "allowance_for_ultraviolet_kg_s": 0.9704902825778507,
-      "allowed_leak_fraction": null,
-      "floor_kg_s": 2.738604011957408,
-      "verdict": "glow and film alone exceed the allowance"
+      "allowed_leak_fraction": 0.0007794922771515188,
+      "floor_kg_s": 0.00602480013462025,
+      "verdict": "within budget"
     },
     {
       "shield": "edge_200nm",
@@ -644,7 +1209,7 @@
       "solar_wind_kg_s": 2.1310214100875022,
       "allowance_for_ultraviolet_kg_s": -1.1310214100875022,
       "allowed_leak_fraction": null,
-      "floor_kg_s": 2.738604011957408,
+      "floor_kg_s": 0.00602480013462025,
       "verdict": "solar-wind loss alone exceeds the budget"
     },
     {
@@ -655,8 +1220,8 @@
       "solar_wind": "low",
       "solar_wind_kg_s": 0.02950971742214928,
       "allowance_for_ultraviolet_kg_s": 9.97049028257785,
-      "allowed_leak_fraction": 0.0002816218109681364,
-      "floor_kg_s": 2.738604011957408,
+      "allowed_leak_fraction": 0.0012719855117488959,
+      "floor_kg_s": 0.00602480013462025,
       "verdict": "within budget"
     },
     {
@@ -667,8 +1232,8 @@
       "solar_wind": "high",
       "solar_wind_kg_s": 2.1310214100875022,
       "allowance_for_ultraviolet_kg_s": 7.868978589912498,
-      "allowed_leak_fraction": 0.00020742775464341266,
-      "floor_kg_s": 2.738604011957408,
+      "allowed_leak_fraction": 0.001217703971855701,
+      "floor_kg_s": 0.00602480013462025,
       "verdict": "within budget"
     },
     {
@@ -679,8 +1244,8 @@
       "solar_wind": "low",
       "solar_wind_kg_s": 0.02950971742214928,
       "allowance_for_ultraviolet_kg_s": 99.97049028257786,
-      "allowed_leak_fraction": 0.001425367084735773,
-      "floor_kg_s": 2.738604011957408,
+      "allowed_leak_fraction": 0.0013489617129733267,
+      "floor_kg_s": 0.00602480013462025,
       "verdict": "within budget"
     },
     {
@@ -691,8 +1256,152 @@
       "solar_wind": "high",
       "solar_wind_kg_s": 2.1310214100875022,
       "allowance_for_ultraviolet_kg_s": 97.8689785899125,
-      "allowed_leak_fraction": 0.001405110613160253,
-      "floor_kg_s": 2.738604011957408,
+      "allowed_leak_fraction": 0.0013489617129733267,
+      "floor_kg_s": 0.00602480013462025,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "collisional",
+      "activity": "solar_maximum_cycle_19",
+      "budget_kg_s": 1.0,
+      "solar_wind": "low",
+      "solar_wind_kg_s": 0.02950971742214928,
+      "allowance_for_ultraviolet_kg_s": 0.9704902825778507,
+      "allowed_leak_fraction": 0.0006508187883598057,
+      "floor_kg_s": 0.007016953608053876,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "collisional",
+      "activity": "solar_maximum_cycle_19",
+      "budget_kg_s": 1.0,
+      "solar_wind": "high",
+      "solar_wind_kg_s": 2.1310214100875022,
+      "allowance_for_ultraviolet_kg_s": -1.1310214100875022,
+      "allowed_leak_fraction": null,
+      "floor_kg_s": 0.007016953608053876,
+      "verdict": "solar-wind loss alone exceeds the budget"
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "collisional",
+      "activity": "solar_maximum_cycle_19",
+      "budget_kg_s": 10.0,
+      "solar_wind": "low",
+      "solar_wind_kg_s": 0.02950971742214928,
+      "allowance_for_ultraviolet_kg_s": 9.97049028257785,
+      "allowed_leak_fraction": 0.0010741653591011184,
+      "floor_kg_s": 0.007016953608053876,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "collisional",
+      "activity": "solar_maximum_cycle_19",
+      "budget_kg_s": 10.0,
+      "solar_wind": "high",
+      "solar_wind_kg_s": 2.1310214100875022,
+      "allowance_for_ultraviolet_kg_s": 7.868978589912498,
+      "allowed_leak_fraction": 0.0010293565465152364,
+      "floor_kg_s": 0.007016953608053876,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "collisional",
+      "activity": "solar_maximum_cycle_19",
+      "budget_kg_s": 100.0,
+      "solar_wind": "low",
+      "solar_wind_kg_s": 0.02950971742214928,
+      "allowance_for_ultraviolet_kg_s": 99.97049028257786,
+      "allowed_leak_fraction": 0.0010741653591011184,
+      "floor_kg_s": 0.007016953608053876,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "collisional",
+      "activity": "solar_maximum_cycle_19",
+      "budget_kg_s": 100.0,
+      "solar_wind": "high",
+      "solar_wind_kg_s": 2.1310214100875022,
+      "allowance_for_ultraviolet_kg_s": 97.8689785899125,
+      "allowed_leak_fraction": 0.0010741653591011184,
+      "floor_kg_s": 0.007016953608053876,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "collisional",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 1.0,
+      "solar_wind": "low",
+      "solar_wind_kg_s": 0.02950971742214928,
+      "allowance_for_ultraviolet_kg_s": 0.9704902825778507,
+      "allowed_leak_fraction": 0.0005253788517279616,
+      "floor_kg_s": 0.005614496723239037,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "collisional",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 1.0,
+      "solar_wind": "high",
+      "solar_wind_kg_s": 2.1310214100875022,
+      "allowance_for_ultraviolet_kg_s": -1.1310214100875022,
+      "allowed_leak_fraction": null,
+      "floor_kg_s": 0.005614496723239037,
+      "verdict": "solar-wind loss alone exceeds the budget"
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "collisional",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 10.0,
+      "solar_wind": "low",
+      "solar_wind_kg_s": 0.02950971742214928,
+      "allowance_for_ultraviolet_kg_s": 9.97049028257785,
+      "allowed_leak_fraction": 0.0008267279841649892,
+      "floor_kg_s": 0.005614496723239037,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "collisional",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 10.0,
+      "solar_wind": "high",
+      "solar_wind_kg_s": 2.1310214100875022,
+      "allowance_for_ultraviolet_kg_s": 7.868978589912498,
+      "allowed_leak_fraction": 0.0007917018025119743,
+      "floor_kg_s": 0.005614496723239037,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "collisional",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 100.0,
+      "solar_wind": "low",
+      "solar_wind_kg_s": 0.02950971742214928,
+      "allowance_for_ultraviolet_kg_s": 99.97049028257786,
+      "allowed_leak_fraction": 0.0008267279841649892,
+      "floor_kg_s": 0.005614496723239037,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "collisional",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 100.0,
+      "solar_wind": "high",
+      "solar_wind_kg_s": 2.1310214100875022,
+      "allowance_for_ultraviolet_kg_s": 97.8689785899125,
+      "allowed_leak_fraction": 0.0008267279841649892,
+      "floor_kg_s": 0.005614496723239037,
       "verdict": "within budget"
     },
     {
@@ -703,8 +1412,8 @@
       "solar_wind": "low",
       "solar_wind_kg_s": 0.02950971742214928,
       "allowance_for_ultraviolet_kg_s": 0.9704902825778507,
-      "allowed_leak_fraction": 0.0002737363708056746,
-      "floor_kg_s": 0.48459659051342485,
+      "allowed_leak_fraction": 0.0013618256273085186,
+      "floor_kg_s": 0.004454581194334343,
       "verdict": "within budget"
     },
     {
@@ -716,7 +1425,7 @@
       "solar_wind_kg_s": 2.1310214100875022,
       "allowance_for_ultraviolet_kg_s": -1.1310214100875022,
       "allowed_leak_fraction": null,
-      "floor_kg_s": 0.48459659051342485,
+      "floor_kg_s": 0.004454581194334343,
       "verdict": "solar-wind loss alone exceeds the budget"
     },
     {
@@ -727,8 +1436,8 @@
       "solar_wind": "low",
       "solar_wind_kg_s": 0.02950971742214928,
       "allowance_for_ultraviolet_kg_s": 9.97049028257785,
-      "allowed_leak_fraction": 0.0014379578672359184,
-      "floor_kg_s": 0.48459659051342485,
+      "allowed_leak_fraction": 0.0021817240330086244,
+      "floor_kg_s": 0.004454581194334343,
       "verdict": "within budget"
     },
     {
@@ -739,8 +1448,8 @@
       "solar_wind": "high",
       "solar_wind_kg_s": 2.1310214100875022,
       "allowance_for_ultraviolet_kg_s": 7.868978589912498,
-      "allowed_leak_fraction": 0.001290173863637539,
-      "floor_kg_s": 0.48459659051342485,
+      "allowed_leak_fraction": 0.002093723351359503,
+      "floor_kg_s": 0.004454581194334343,
       "verdict": "within budget"
     },
     {
@@ -751,8 +1460,8 @@
       "solar_wind": "low",
       "solar_wind_kg_s": 0.02950971742214928,
       "allowance_for_ultraviolet_kg_s": 99.97049028257786,
-      "allowed_leak_fraction": 0.004318496503949785,
-      "floor_kg_s": 0.48459659051342485,
+      "allowed_leak_fraction": 0.002362590986082366,
+      "floor_kg_s": 0.004454581194334343,
       "verdict": "within budget"
     },
     {
@@ -763,8 +1472,8 @@
       "solar_wind": "high",
       "solar_wind_kg_s": 2.1310214100875022,
       "allowance_for_ultraviolet_kg_s": 97.8689785899125,
-      "allowed_leak_fraction": 0.004270010962677932,
-      "floor_kg_s": 0.48459659051342485,
+      "allowed_leak_fraction": 0.002362590986082366,
+      "floor_kg_s": 0.004454581194334343,
       "verdict": "within budget"
     },
     {
@@ -775,9 +1484,9 @@
       "solar_wind": "low",
       "solar_wind_kg_s": 0.02950971742214928,
       "allowance_for_ultraviolet_kg_s": 0.9704902825778507,
-      "allowed_leak_fraction": null,
-      "floor_kg_s": 2.9170134018314027,
-      "verdict": "glow and film alone exceed the allowance"
+      "allowed_leak_fraction": 0.0007654134502161161,
+      "floor_kg_s": 0.0065607589106858565,
+      "verdict": "within budget"
     },
     {
       "shield": "edge_200nm",
@@ -788,7 +1497,7 @@
       "solar_wind_kg_s": 2.1310214100875022,
       "allowance_for_ultraviolet_kg_s": -1.1310214100875022,
       "allowed_leak_fraction": null,
-      "floor_kg_s": 2.9170134018314027,
+      "floor_kg_s": 0.0065607589106858565,
       "verdict": "solar-wind loss alone exceeds the budget"
     },
     {
@@ -799,8 +1508,8 @@
       "solar_wind": "low",
       "solar_wind_kg_s": 0.02950971742214928,
       "allowance_for_ultraviolet_kg_s": 9.97049028257785,
-      "allowed_leak_fraction": 0.00026448823351911985,
-      "floor_kg_s": 2.9170134018314027,
+      "allowed_leak_fraction": 0.0012565850637962256,
+      "floor_kg_s": 0.0065607589106858565,
       "verdict": "within budget"
     },
     {
@@ -811,8 +1520,8 @@
       "solar_wind": "high",
       "solar_wind_kg_s": 2.1310214100875022,
       "allowance_for_ultraviolet_kg_s": 7.868978589912498,
-      "allowed_leak_fraction": 0.00019404190291657326,
-      "floor_kg_s": 2.9170134018314027,
+      "allowed_leak_fraction": 0.0012027119325388178,
+      "floor_kg_s": 0.0065607589106858565,
       "verdict": "within budget"
     },
     {
@@ -823,8 +1532,8 @@
       "solar_wind": "low",
       "solar_wind_kg_s": 0.02950971742214928,
       "allowance_for_ultraviolet_kg_s": 99.97049028257786,
-      "allowed_leak_fraction": 0.0014100675637860865,
-      "floor_kg_s": 2.9170134018314027,
+      "allowed_leak_fraction": 0.0013417677382464557,
+      "floor_kg_s": 0.0065607589106858565,
       "verdict": "within budget"
     },
     {
@@ -835,8 +1544,152 @@
       "solar_wind": "high",
       "solar_wind_kg_s": 2.1310214100875022,
       "allowance_for_ultraviolet_kg_s": 97.8689785899125,
-      "allowed_leak_fraction": 0.0013898238404417775,
-      "floor_kg_s": 2.9170134018314027,
+      "allowed_leak_fraction": 0.0013417677382464557,
+      "floor_kg_s": 0.0065607589106858565,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "lte",
+      "activity": "solar_maximum_cycle_19",
+      "budget_kg_s": 1.0,
+      "solar_wind": "low",
+      "solar_wind_kg_s": 0.02950971742214928,
+      "allowance_for_ultraviolet_kg_s": 0.9704902825778507,
+      "allowed_leak_fraction": 0.0006399601277202059,
+      "floor_kg_s": 0.007639106936602558,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "lte",
+      "activity": "solar_maximum_cycle_19",
+      "budget_kg_s": 1.0,
+      "solar_wind": "high",
+      "solar_wind_kg_s": 2.1310214100875022,
+      "allowance_for_ultraviolet_kg_s": -1.1310214100875022,
+      "allowed_leak_fraction": null,
+      "floor_kg_s": 0.007639106936602558,
+      "verdict": "solar-wind loss alone exceeds the budget"
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "lte",
+      "activity": "solar_maximum_cycle_19",
+      "budget_kg_s": 10.0,
+      "solar_wind": "low",
+      "solar_wind_kg_s": 0.02950971742214928,
+      "allowance_for_ultraviolet_kg_s": 9.97049028257785,
+      "allowed_leak_fraction": 0.001061367441422564,
+      "floor_kg_s": 0.007639106936602558,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "lte",
+      "activity": "solar_maximum_cycle_19",
+      "budget_kg_s": 10.0,
+      "solar_wind": "high",
+      "solar_wind_kg_s": 2.1310214100875022,
+      "allowance_for_ultraviolet_kg_s": 7.868978589912498,
+      "allowed_leak_fraction": 0.0010163010550558592,
+      "floor_kg_s": 0.007639106936602558,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "lte",
+      "activity": "solar_maximum_cycle_19",
+      "budget_kg_s": 100.0,
+      "solar_wind": "low",
+      "solar_wind_kg_s": 0.02950971742214928,
+      "allowance_for_ultraviolet_kg_s": 99.97049028257786,
+      "allowed_leak_fraction": 0.001067839545926949,
+      "floor_kg_s": 0.007639106936602558,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "lte",
+      "activity": "solar_maximum_cycle_19",
+      "budget_kg_s": 100.0,
+      "solar_wind": "high",
+      "solar_wind_kg_s": 2.1310214100875022,
+      "allowance_for_ultraviolet_kg_s": 97.8689785899125,
+      "allowed_leak_fraction": 0.001067839545926949,
+      "floor_kg_s": 0.007639106936602558,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "lte",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 1.0,
+      "solar_wind": "low",
+      "solar_wind_kg_s": 0.02950971742214928,
+      "allowance_for_ultraviolet_kg_s": 0.9704902825778507,
+      "allowed_leak_fraction": 0.0005177402600561375,
+      "floor_kg_s": 0.006116229965580978,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "lte",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 1.0,
+      "solar_wind": "high",
+      "solar_wind_kg_s": 2.1310214100875022,
+      "allowance_for_ultraviolet_kg_s": -1.1310214100875022,
+      "allowed_leak_fraction": null,
+      "floor_kg_s": 0.006116229965580978,
+      "verdict": "solar-wind loss alone exceeds the budget"
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "lte",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 10.0,
+      "solar_wind": "low",
+      "solar_wind_kg_s": 0.02950971742214928,
+      "allowance_for_ultraviolet_kg_s": 9.97049028257785,
+      "allowed_leak_fraction": 0.0008186118091173346,
+      "floor_kg_s": 0.006116229965580978,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "lte",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 10.0,
+      "solar_wind": "high",
+      "solar_wind_kg_s": 2.1310214100875022,
+      "allowance_for_ultraviolet_kg_s": 7.868978589912498,
+      "allowed_leak_fraction": 0.0007813789443289161,
+      "floor_kg_s": 0.006116229965580978,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "lte",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 100.0,
+      "solar_wind": "low",
+      "solar_wind_kg_s": 0.02950971742214928,
+      "allowance_for_ultraviolet_kg_s": 99.97049028257786,
+      "allowed_leak_fraction": 0.0008221549197818715,
+      "floor_kg_s": 0.006116229965580978,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "lte",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 100.0,
+      "solar_wind": "high",
+      "solar_wind_kg_s": 2.1310214100875022,
+      "allowance_for_ultraviolet_kg_s": 97.8689785899125,
+      "allowed_leak_fraction": 0.0008221549197818715,
+      "floor_kg_s": 0.006116229965580978,
       "verdict": "within budget"
     },
     {
@@ -847,9 +1700,9 @@
       "solar_wind": "low",
       "solar_wind_kg_s": 0.02950971742214928,
       "allowance_for_ultraviolet_kg_s": 0.9704902825778507,
-      "allowed_leak_fraction": null,
-      "floor_kg_s": 6.056507987421281,
-      "verdict": "glow and film alone exceed the allowance"
+      "allowed_leak_fraction": 0.0005813094108808967,
+      "floor_kg_s": 0.10322572170650131,
+      "verdict": "within budget"
     },
     {
       "shield": "edge_200nm",
@@ -860,7 +1713,7 @@
       "solar_wind_kg_s": 2.1310214100875022,
       "allowance_for_ultraviolet_kg_s": -1.1310214100875022,
       "allowed_leak_fraction": null,
-      "floor_kg_s": 6.056507987421281,
+      "floor_kg_s": 0.10322572170650131,
       "verdict": "solar-wind loss alone exceeds the budget"
     },
     {
@@ -871,8 +1724,8 @@
       "solar_wind": "low",
       "solar_wind_kg_s": 0.02950971742214928,
       "allowance_for_ultraviolet_kg_s": 9.97049028257785,
-      "allowed_leak_fraction": 0.0002800386990773995,
-      "floor_kg_s": 6.056507987421281,
+      "allowed_leak_fraction": 0.0012451493608580113,
+      "floor_kg_s": 0.10322572170650131,
       "verdict": "within budget"
     },
     {
@@ -883,8 +1736,8 @@
       "solar_wind": "high",
       "solar_wind_kg_s": 2.1310214100875022,
       "allowance_for_ultraviolet_kg_s": 7.868978589912498,
-      "allowed_leak_fraction": 0.00013011523086244666,
-      "floor_kg_s": 6.056507987421281,
+      "allowed_leak_fraction": 0.0012408964093813205,
+      "floor_kg_s": 0.10322572170650131,
       "verdict": "within budget"
     },
     {
@@ -895,8 +1748,8 @@
       "solar_wind": "low",
       "solar_wind_kg_s": 0.02950971742214928,
       "allowance_for_ultraviolet_kg_s": 99.97049028257786,
-      "allowed_leak_fraction": 0.002921471815304051,
-      "floor_kg_s": 6.056507987421281,
+      "allowed_leak_fraction": 0.0012451493608580113,
+      "floor_kg_s": 0.10322572170650131,
       "verdict": "within budget"
     },
     {
@@ -907,8 +1760,8 @@
       "solar_wind": "high",
       "solar_wind_kg_s": 2.1310214100875022,
       "allowance_for_ultraviolet_kg_s": 97.8689785899125,
-      "allowed_leak_fraction": 0.0028747657878154657,
-      "floor_kg_s": 6.056507987421281,
+      "allowed_leak_fraction": 0.0012451493608580113,
+      "floor_kg_s": 0.10322572170650131,
       "verdict": "within budget"
     },
     {
@@ -919,9 +1772,9 @@
       "solar_wind": "low",
       "solar_wind_kg_s": 0.02950971742214928,
       "allowance_for_ultraviolet_kg_s": 0.9704902825778507,
-      "allowed_leak_fraction": null,
-      "floor_kg_s": 21.42101329530453,
-      "verdict": "glow and film alone exceed the allowance"
+      "allowed_leak_fraction": 0.00030515398057888004,
+      "floor_kg_s": 0.14563754569381832,
+      "verdict": "within budget"
     },
     {
       "shield": "edge_200nm",
@@ -932,7 +1785,7 @@
       "solar_wind_kg_s": 2.1310214100875022,
       "allowance_for_ultraviolet_kg_s": -1.1310214100875022,
       "allowed_leak_fraction": null,
-      "floor_kg_s": 21.42101329530453,
+      "floor_kg_s": 0.14563754569381832,
       "verdict": "solar-wind loss alone exceeds the budget"
     },
     {
@@ -943,9 +1796,9 @@
       "solar_wind": "low",
       "solar_wind_kg_s": 0.02950971742214928,
       "allowance_for_ultraviolet_kg_s": 9.97049028257785,
-      "allowed_leak_fraction": null,
-      "floor_kg_s": 21.42101329530453,
-      "verdict": "glow and film alone exceed the allowance"
+      "allowed_leak_fraction": 0.0006058774511070743,
+      "floor_kg_s": 0.14563754569381832,
+      "verdict": "within budget"
     },
     {
       "shield": "edge_200nm",
@@ -955,9 +1808,9 @@
       "solar_wind": "high",
       "solar_wind_kg_s": 2.1310214100875022,
       "allowance_for_ultraviolet_kg_s": 7.868978589912498,
-      "allowed_leak_fraction": null,
-      "floor_kg_s": 21.42101329530453,
-      "verdict": "glow and film alone exceed the allowance"
+      "allowed_leak_fraction": 0.0006058774511070743,
+      "floor_kg_s": 0.14563754569381832,
+      "verdict": "within budget"
     },
     {
       "shield": "edge_200nm",
@@ -967,8 +1820,8 @@
       "solar_wind": "low",
       "solar_wind_kg_s": 0.02950971742214928,
       "allowance_for_ultraviolet_kg_s": 99.97049028257786,
-      "allowed_leak_fraction": 0.0008090456575383985,
-      "floor_kg_s": 21.42101329530453,
+      "allowed_leak_fraction": 0.0006058774511070743,
+      "floor_kg_s": 0.14563754569381832,
       "verdict": "within budget"
     },
     {
@@ -979,8 +1832,152 @@
       "solar_wind": "high",
       "solar_wind_kg_s": 2.1310214100875022,
       "allowance_for_ultraviolet_kg_s": 97.8689785899125,
-      "allowed_leak_fraction": 0.0007881225463777958,
-      "floor_kg_s": 21.42101329530453,
+      "allowed_leak_fraction": 0.0006058774511070743,
+      "floor_kg_s": 0.14563754569381832,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "all_heats",
+      "activity": "solar_maximum_cycle_19",
+      "budget_kg_s": 1.0,
+      "solar_wind": "low",
+      "solar_wind_kg_s": 0.02950971742214928,
+      "allowance_for_ultraviolet_kg_s": 0.9704902825778507,
+      "allowed_leak_fraction": 0.00023981824302626766,
+      "floor_kg_s": 0.16666581591976826,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "all_heats",
+      "activity": "solar_maximum_cycle_19",
+      "budget_kg_s": 1.0,
+      "solar_wind": "high",
+      "solar_wind_kg_s": 2.1310214100875022,
+      "allowance_for_ultraviolet_kg_s": -1.1310214100875022,
+      "allowed_leak_fraction": null,
+      "floor_kg_s": 0.16666581591976826,
+      "verdict": "solar-wind loss alone exceeds the budget"
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "all_heats",
+      "activity": "solar_maximum_cycle_19",
+      "budget_kg_s": 10.0,
+      "solar_wind": "low",
+      "solar_wind_kg_s": 0.02950971742214928,
+      "allowance_for_ultraviolet_kg_s": 9.97049028257785,
+      "allowed_leak_fraction": 0.0004294082790966834,
+      "floor_kg_s": 0.16666581591976826,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "all_heats",
+      "activity": "solar_maximum_cycle_19",
+      "budget_kg_s": 10.0,
+      "solar_wind": "high",
+      "solar_wind_kg_s": 2.1310214100875022,
+      "allowance_for_ultraviolet_kg_s": 7.868978589912498,
+      "allowed_leak_fraction": 0.0004294082790966834,
+      "floor_kg_s": 0.16666581591976826,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "all_heats",
+      "activity": "solar_maximum_cycle_19",
+      "budget_kg_s": 100.0,
+      "solar_wind": "low",
+      "solar_wind_kg_s": 0.02950971742214928,
+      "allowance_for_ultraviolet_kg_s": 99.97049028257786,
+      "allowed_leak_fraction": 0.0004294082790966834,
+      "floor_kg_s": 0.16666581591976826,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "all_heats",
+      "activity": "solar_maximum_cycle_19",
+      "budget_kg_s": 100.0,
+      "solar_wind": "high",
+      "solar_wind_kg_s": 2.1310214100875022,
+      "allowance_for_ultraviolet_kg_s": 97.8689785899125,
+      "allowed_leak_fraction": 0.0004294082790966834,
+      "floor_kg_s": 0.16666581591976826,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "all_heats",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 1.0,
+      "solar_wind": "low",
+      "solar_wind_kg_s": 0.02950971742214928,
+      "allowance_for_ultraviolet_kg_s": 0.9704902825778507,
+      "allowed_leak_fraction": 0.0002047584267980015,
+      "floor_kg_s": 0.13681828507549623,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "all_heats",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 1.0,
+      "solar_wind": "high",
+      "solar_wind_kg_s": 2.1310214100875022,
+      "allowance_for_ultraviolet_kg_s": -1.1310214100875022,
+      "allowed_leak_fraction": null,
+      "floor_kg_s": 0.13681828507549623,
+      "verdict": "solar-wind loss alone exceeds the budget"
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "all_heats",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 10.0,
+      "solar_wind": "low",
+      "solar_wind_kg_s": 0.02950971742214928,
+      "allowance_for_ultraviolet_kg_s": 9.97049028257785,
+      "allowed_leak_fraction": 0.0003802062111692739,
+      "floor_kg_s": 0.13681828507549623,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "all_heats",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 10.0,
+      "solar_wind": "high",
+      "solar_wind_kg_s": 2.1310214100875022,
+      "allowance_for_ultraviolet_kg_s": 7.868978589912498,
+      "allowed_leak_fraction": 0.0003802062111692739,
+      "floor_kg_s": 0.13681828507549623,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "all_heats",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 100.0,
+      "solar_wind": "low",
+      "solar_wind_kg_s": 0.02950971742214928,
+      "allowance_for_ultraviolet_kg_s": 99.97049028257786,
+      "allowed_leak_fraction": 0.0003802062111692739,
+      "floor_kg_s": 0.13681828507549623,
+      "verdict": "within budget"
+    },
+    {
+      "shield": "edge_200nm",
+      "treatment": "all_heats",
+      "activity": "solar_maximum_stress",
+      "budget_kg_s": 100.0,
+      "solar_wind": "high",
+      "solar_wind_kg_s": 2.1310214100875022,
+      "allowance_for_ultraviolet_kg_s": 97.8689785899125,
+      "allowed_leak_fraction": 0.0003802062111692739,
+      "floor_kg_s": 0.13681828507549623,
       "verdict": "within budget"
     }
   ]

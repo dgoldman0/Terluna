@@ -1,0 +1,174 @@
+{
+  "schema": "terluna.research.natural-pattern-budget/1",
+  "producer": {
+    "source_hashes": {
+      "research/studies/solar_shield_array/patterns_budget.py": "679b103d05edb49b48d28df1d5cd32fd9283a5f1803bacaf01ae46804f08174b",
+      "protection/dynamics/coverage_pilot.py": "fb03381e4387cb17e5276148428a3ffb2cbfb5313c8f59b8ff708ebeb9ce079c"
+    },
+    "constants": {
+      "EARTH_RADIUS": 6371000.0,
+      "JULIAN_DAY": 86400.0,
+      "MOON_GM": 4902800118000.0,
+      "SPEED_OF_LIGHT": 299792458.0,
+      "SUN_RADIUS": 695700000.0
+    },
+    "inputs": {
+      "patterns.json": "deb98cc0faee44fc357194d3c554da4aadf6861dc84b95c911314abeb684c1cf",
+      "pilot_validation.json": "5d9f09562e541576784f9d21d16f830f589140394a03d57f75fb14e54bf89961"
+    }
+  },
+  "local_count": 361,
+  "local_optical_mass_kg": 1805000000.0,
+  "service": {
+    "duration_s": 21600.0,
+    "electric_delta_v_m_s": 0.0,
+    "propulsion_energy_J": 0.0
+  },
+  "preparation": {
+    "reference": "Instantaneous common Sun-frame velocity at the exact initial positions; no acquisition propagation.",
+    "mean_delta_v_m_s": 0.9395881172390211,
+    "optical_mass_impulse_N_s": 1695956551.6164331,
+    "electric_energy_J": 51395244781959.98,
+    "propellant_kg": 79948.15854971552,
+    "hardware_mass_included": false,
+    "maneuver_executed": false
+  },
+  "endpoint": {
+    "reference": "Velocity mismatch to the final Sun-frame lattice; spatial mismatch remains.",
+    "mean_velocity_mismatch_m_s": 1.0275695959193294,
+    "maximum_position_mismatch_m": 2976.163961064972,
+    "closure_maneuver_executed": false
+  },
+  "recurrence_diagnostic": {
+    "velocity_only_two_impulse_proxy_m_s": 1.9671577131583504,
+    "interpretation": "A kinematic comparison, neither a solved return nor a bound on recurring impulse; it leaves kilometre-scale position closure, handovers and recovery unpaid."
+  },
+  "inventory_impulse_trade": [
+    {
+      "inventory_tiles": 17285560.170967527,
+      "cases": [
+        {
+          "closed": true,
+          "optical_mass_kg": 86427800854837.64,
+          "total_scenario_mass_kg": 105286815484680.1,
+          "recurring_dv_m_s_per_day": 1.0,
+          "peak_duty": 0.1,
+          "extra_fixed_mass_multiplier": 1.2,
+          "propulsion_TW": 36.92907797557246,
+          "propellant_kg_s": 57445.23240644605,
+          "installed_propulsion_power_TW": 461.61347469465574
+        },
+        {
+          "closed": true,
+          "optical_mass_kg": 86427800854837.64,
+          "total_scenario_mass_kg": 108581433238662.56,
+          "recurring_dv_m_s_per_day": 3.0,
+          "peak_duty": 0.1,
+          "extra_fixed_mass_multiplier": 1.2,
+          "propulsion_TW": 114.25396987204269,
+          "propellant_kg_s": 177728.39757873304,
+          "installed_propulsion_power_TW": 1428.1746234005338
+        },
+        {
+          "closed": true,
+          "optical_mass_kg": 86427800854837.64,
+          "total_scenario_mass_kg": 112088900727945.7,
+          "recurring_dv_m_s_per_day": 5.0,
+          "peak_duty": 0.1,
+          "extra_fixed_mass_multiplier": 1.2,
+          "propulsion_TW": 196.574458830546,
+          "propellant_kg_s": 305782.49151418265,
+          "installed_propulsion_power_TW": 2457.180735381825
+        }
+      ]
+    },
+    {
+      "inventory_tiles": 25000000.0,
+      "cases": [
+        {
+          "closed": true,
+          "optical_mass_kg": 125000000000000.0,
+          "total_scenario_mass_kg": 152275677564557.12,
+          "recurring_dv_m_s_per_day": 1.0,
+          "peak_duty": 0.1,
+          "extra_fixed_mass_multiplier": 1.2,
+          "propulsion_TW": 53.410299710156025,
+          "propellant_kg_s": 83082.68843802047,
+          "installed_propulsion_power_TW": 667.6287463769503
+        },
+        {
+          "closed": true,
+          "optical_mass_kg": 125000000000000.0,
+          "total_scenario_mass_kg": 157040663080496.66,
+          "recurring_dv_m_s_per_day": 3.0,
+          "peak_duty": 0.1,
+          "extra_fixed_mass_multiplier": 1.2,
+          "propulsion_TW": 165.24481813430222,
+          "propellant_kg_s": 257047.49487558118,
+          "installed_propulsion_power_TW": 2065.5602266787773
+        },
+        {
+          "closed": true,
+          "optical_mass_kg": 125000000000000.0,
+          "total_scenario_mass_kg": 162113491867344.72,
+          "recurring_dv_m_s_per_day": 5.0,
+          "peak_duty": 0.1,
+          "extra_fixed_mass_multiplier": 1.2,
+          "propulsion_TW": 284.3044380486847,
+          "propellant_kg_s": 442251.3480757318,
+          "installed_propulsion_power_TW": 3553.8054756085585
+        }
+      ]
+    },
+    {
+      "inventory_tiles": 35000000.0,
+      "cases": [
+        {
+          "closed": true,
+          "optical_mass_kg": 175000000000000.0,
+          "total_scenario_mass_kg": 213185948590380.0,
+          "recurring_dv_m_s_per_day": 1.0,
+          "peak_duty": 0.1,
+          "extra_fixed_mass_multiplier": 1.2,
+          "propulsion_TW": 74.77441959421844,
+          "propellant_kg_s": 116315.7638132287,
+          "installed_propulsion_power_TW": 934.6802449277307
+        },
+        {
+          "closed": true,
+          "optical_mass_kg": 175000000000000.0,
+          "total_scenario_mass_kg": 219856928312695.34,
+          "recurring_dv_m_s_per_day": 3.0,
+          "peak_duty": 0.1,
+          "extra_fixed_mass_multiplier": 1.2,
+          "propulsion_TW": 231.34274538802313,
+          "propellant_kg_s": 359866.49282581365,
+          "installed_propulsion_power_TW": 2891.7843173502883
+        },
+        {
+          "closed": true,
+          "optical_mass_kg": 175000000000000.0,
+          "total_scenario_mass_kg": 226958888614282.62,
+          "recurring_dv_m_s_per_day": 5.0,
+          "peak_duty": 0.1,
+          "extra_fixed_mass_multiplier": 1.2,
+          "propulsion_TW": 398.02621326815864,
+          "propellant_kg_s": 619151.8873060244,
+          "installed_propulsion_power_TW": 4975.327665851982
+        }
+      ]
+    }
+  ],
+  "cost_scope": "Conditional recurring impulse inputs, with 20% extra fixed mass, 10% thrust duty, power-hardware/7-day-propellant feedback. These masses require new sail-dynamics propagation.",
+  "held_screen_benchmark_TW": 238.35,
+  "measured_recurring_delta_v_m_s_per_day": null,
+  "acquisition_events_executed": 0,
+  "service_passages_independently_replayed": 1,
+  "handovers_executed": 0,
+  "return_legs_executed": 0,
+  "recovery_events_executed": 0,
+  "recurring_maneuver_frequency_per_day": null,
+  "collection_capacity_W": null,
+  "delivered_power_W": null,
+  "accepted_fleet": false
+}

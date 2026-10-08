@@ -1,0 +1,3808 @@
+{
+  "schema": "terluna.research.natural-pattern-pilot/1",
+  "producer": {
+    "source_hashes": {
+      "protection/dynamics/cycling.py": "704fbd03c9d4070ea05bdfeba57914ec225941f3560710da2472bd24ca870ed4",
+      "protection/dynamics/ephemeris.py": "9a162c3acf63a844284eb61b444a7d34f1447b5182d254d3e87616516f8748d9",
+      "protection/dynamics/ephemeris.json": "90fde7cb6142e5d4d8082270a978ba2f8f47baaefab0e8d1cf82ec6f07a27222",
+      "protection/dynamics/model.py": "01c9191588037ab4f42bac38dc4d5bd99e57427d37fa75cd672120e32b53733a",
+      "protection/dynamics/optical.py": "06a13ae9f24834876edbc12b513deaa5e3735f02f8249eb57c8996d74ce00b56",
+      "research/studies/solar_shield_array/scenario.json": "a53b784941518b6e36ccdf728252cf6c8e0c46c1126b6c621ed4e28c23128699",
+      "research/studies/solar_shield_array/cycling_search.py": "4789a0185620f6662916462b2715aa9002e6454e74f4f32ef5f7dadf5f732093",
+      "research/studies/solar_shield_array/cycling_feedback.py": "0eb32d26e14472f0a512cdf45d60f00ab8260376cd51ca715e7615bf7df02775",
+      "protection/dynamics/fleet.py": "f3e52653876c2956a4b355dc1290a0a1cadd2b9b601cafc664259827df1cc93c",
+      "research/studies/solar_shield_array/fleet_run.py": "9b8bc9765b9288745ea7d4d69d59e857e76e54d29cc91b37160503e9d9090833",
+      "protection/dynamics/active_formation.py": "597c12c6a4a89c0ea70663fddd69b9b5d9e599c88a2bd1742f5009d19e050b7a",
+      "protection/dynamics/active_retime.py": "9ba27a7ec48460a345289ebc7550c502f845487beaec5fe35084a67b2d9d736b",
+      "protection/dynamics/coverage_pilot.py": "fb03381e4387cb17e5276148428a3ffb2cbfb5313c8f59b8ff708ebeb9ce079c",
+      "protection/dynamics/natural_pattern.py": "780c2679f13c097c07b89e9d7cce1c91399f464f01b4bd878fb50cb643e1be29",
+      "research/studies/solar_shield_array/patterns_run.py": "f2e346fd2281632e5bf1c285c61229ba24e26e4ba4c480713194218263888d5c"
+    },
+    "constants": {
+      "AU": 149597870700.0,
+      "EARTH_GM": 398600441800000.0,
+      "EARTH_MOON_DISTANCE": 384400000.0,
+      "EARTH_OBLIQUITY_DEG": 23.4393,
+      "EARTH_RADIUS": 6371000.0,
+      "JULIAN_DAY": 86400.0,
+      "MOON_GM": 4902800118000.0,
+      "MOON_RADIUS": 1737400.0,
+      "SOLAR_CONSTANT": 1361.0,
+      "SOLAR_SYSTEM_GM": {
+        "mercury": 22031868551000.0,
+        "venus": 324858592000000.0,
+        "mars": 42828375816000.0,
+        "jupiter": 1.267127641e+17,
+        "saturn": 3.79405848418e+16,
+        "uranus": 5794556400000000.0,
+        "neptune": 6836527100580000.0,
+        "pluto": 975500000000.0
+      },
+      "SPEED_OF_LIGHT": 299792458.0,
+      "SUN_GM": 1.3271244004127942e+20,
+      "SUN_RADIUS": 695700000.0
+    }
+  },
+  "epoch_tdb": "2026-10-04",
+  "budget": {
+    "wall_s": 1200,
+    "affine_cases": 24,
+    "coupled_cases": 3,
+    "tighter_replays": 1,
+    "maximum_tiles": 441,
+    "memory_GiB": 2,
+    "raw_GiB": 1
+  },
+  "collection_capacity_W": null,
+  "delivered_power_W": null,
+  "accepted_fleet": false,
+  "recurring_cost_measured": false,
+  "attitude": {
+    "member": 1546,
+    "duration_s": 1800.0,
+    "input_product_sha256": "5d9f09562e541576784f9d21d16f830f589140394a03d57f75fb14e54bf89961",
+    "original_command_rate_deg_s": 0.12096289615382358,
+    "transported_max_rate_deg_s": 0.06467175411853113,
+    "rate_cap_deg_s": 0.1,
+    "max_angular_acceleration_deg_s2": 0.00012030489833667955,
+    "rate_sample_step_s": 0.25,
+    "minimum_beam_margin_deg": 4.302792468993822,
+    "beam_sample_step_s": 1.0,
+    "maximum_position_change_m": 1.9834800853438405e-06,
+    "endpoint_velocity_change_m_s": 1.0932484820951825e-09,
+    "electric_delta_v_m_s": 0.0,
+    "continuous_certificate": false,
+    "scope": "One 1800 s witness, two-sided rigid square, spline attitude with unmodelled torque/flexibility; no fleet-wide attitude acceptance.",
+    "raw_path": "research/runs/solar_shield_array/patterns/attitude.npz",
+    "raw_sha256": "6d717a63c8bf2e1e27c20ed4f869181c4d92581da87653588fff979040338a9c",
+    "nfev": 5432,
+    "elapsed_s": 3.302789995999774
+  },
+  "elapsed_s": 423.2978463219988,
+  "max_rss_MiB": 217.25390625,
+  "initial_velocity_gradient_s_inv": [
+    [
+      2.477181786226977e-05,
+      -7.937091965539397e-06,
+      -3.4242650719339817e-09
+    ],
+    [
+      8.63319804032274e-06,
+      1.1734312171069449e-05,
+      6.679518921744602e-06
+    ],
+    [
+      3.745082040319058e-06,
+      5.0686071388601835e-06,
+      -1.5365512520422562e-05
+    ]
+  ],
+  "affine_trials": [
+    {
+      "rows": 19,
+      "pitch_m": 8500.0,
+      "depth_m": 2000.0,
+      "velocity_gradient_scale": 0.95,
+      "inventory": 361,
+      "minimum_coverage": 0.999999999999999,
+      "coverage": [
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5742179.881491593,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4773629.9447624255,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000002,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3782484.478395788,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2773396.8968581,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1751106.3955465276,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 720417.147615511,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 313822.8713766892,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1346742.5529532516,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000004,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2373470.1780090732,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3389154.556501994,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4388987.625995345,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5368227.076522191,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 6322219.355279506,
+          "sources": 9
+        }
+      ],
+      "proposal_chord_separation": {
+        "possible_conflict_pairs": 0,
+        "minimum_proven_axis_clearance_m": 1627.9095722411034,
+        "acceleration_bound_m_s2": 0.0,
+        "normal_rate_bound_rad_s": 0.0,
+        "required_clearance_m": 100.0
+      }
+    },
+    {
+      "rows": 19,
+      "pitch_m": 8500.0,
+      "depth_m": 2000.0,
+      "velocity_gradient_scale": 1.0,
+      "inventory": 361,
+      "minimum_coverage": 0.999999999999999,
+      "coverage": [
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5742179.881491593,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4773629.9447624255,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000002,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3782484.478395788,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2773396.8968581,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1751106.3955465276,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 720417.147615511,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 313822.8713766892,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1346742.5529532516,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000004,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2373470.1780090732,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3389154.556501994,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4388987.625995345,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5368227.076522191,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 6322219.355279506,
+          "sources": 9
+        }
+      ],
+      "proposal_chord_separation": {
+        "possible_conflict_pairs": 0,
+        "minimum_proven_axis_clearance_m": 1621.4306649735693,
+        "acceleration_bound_m_s2": 0.0,
+        "normal_rate_bound_rad_s": 0.0,
+        "required_clearance_m": 100.0
+      }
+    },
+    {
+      "rows": 19,
+      "pitch_m": 8500.0,
+      "depth_m": 4000.0,
+      "velocity_gradient_scale": 0.95,
+      "inventory": 361,
+      "minimum_coverage": 0.999999999999999,
+      "coverage": [
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5742179.881491593,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4773629.9447624255,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000002,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3782484.478395788,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2773396.8968581,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1751106.3955465276,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 720417.147615511,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 313822.8713766892,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1346742.5529532516,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000004,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2373470.1780090732,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3389154.556501994,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4388987.625995345,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5368227.076522191,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 6322219.355279506,
+          "sources": 9
+        }
+      ],
+      "proposal_chord_separation": {
+        "possible_conflict_pairs": 0,
+        "minimum_proven_axis_clearance_m": 3397.176294871869,
+        "acceleration_bound_m_s2": 0.0,
+        "normal_rate_bound_rad_s": 0.0,
+        "required_clearance_m": 100.0
+      }
+    },
+    {
+      "rows": 19,
+      "pitch_m": 8500.0,
+      "depth_m": 4000.0,
+      "velocity_gradient_scale": 1.0,
+      "inventory": 361,
+      "minimum_coverage": 0.999999999999999,
+      "coverage": [
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5742179.881491593,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4773629.9447624255,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000002,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3782484.478395788,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2773396.8968581,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1751106.3955465276,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 720417.147615511,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 313822.8713766892,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1346742.5529532516,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000004,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2373470.1780090732,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3389154.556501994,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4388987.625995345,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5368227.076522191,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 6322219.355279506,
+          "sources": 9
+        }
+      ],
+      "proposal_chord_separation": {
+        "possible_conflict_pairs": 0,
+        "minimum_proven_axis_clearance_m": 3356.238659796528,
+        "acceleration_bound_m_s2": 0.0,
+        "normal_rate_bound_rad_s": 0.0,
+        "required_clearance_m": 100.0
+      }
+    },
+    {
+      "rows": 19,
+      "pitch_m": 8750.0,
+      "depth_m": 2000.0,
+      "velocity_gradient_scale": 0.95,
+      "inventory": 361,
+      "minimum_coverage": 0.999999999999999,
+      "coverage": [
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5742179.881491593,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4773629.9447624255,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000002,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3782484.478395788,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2773396.8968581,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1751106.3955465276,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 720417.147615511,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 313822.8713766892,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1346742.5529532516,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000004,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2373470.1780090732,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3389154.556501994,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4388987.625995345,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5368227.076522191,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 6322219.355279506,
+          "sources": 9
+        }
+      ],
+      "proposal_chord_separation": {
+        "possible_conflict_pairs": 0,
+        "minimum_proven_axis_clearance_m": 1623.1558758458098,
+        "acceleration_bound_m_s2": 0.0,
+        "normal_rate_bound_rad_s": 0.0,
+        "required_clearance_m": 100.0
+      }
+    },
+    {
+      "rows": 19,
+      "pitch_m": 8750.0,
+      "depth_m": 2000.0,
+      "velocity_gradient_scale": 1.0,
+      "inventory": 361,
+      "minimum_coverage": 0.999999999999999,
+      "coverage": [
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5742179.881491593,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4773629.9447624255,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000002,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3782484.478395788,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2773396.8968581,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1751106.3955465276,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 720417.147615511,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 313822.8713766892,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1346742.5529532516,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000004,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2373470.1780090732,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3389154.556501994,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4388987.625995345,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5368227.076522191,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 6322219.355279506,
+          "sources": 9
+        }
+      ],
+      "proposal_chord_separation": {
+        "possible_conflict_pairs": 0,
+        "minimum_proven_axis_clearance_m": 1617.704169101199,
+        "acceleration_bound_m_s2": 0.0,
+        "normal_rate_bound_rad_s": 0.0,
+        "required_clearance_m": 100.0
+      }
+    },
+    {
+      "rows": 19,
+      "pitch_m": 8750.0,
+      "depth_m": 4000.0,
+      "velocity_gradient_scale": 0.95,
+      "inventory": 361,
+      "minimum_coverage": 0.999999999999999,
+      "coverage": [
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5742179.881491593,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4773629.9447624255,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000002,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3782484.478395788,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2773396.8968581,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1751106.3955465276,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 720417.147615511,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 313822.8713766892,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1346742.5529532516,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000004,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2373470.1780090732,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3389154.556501994,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4388987.625995345,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5368227.076522191,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 6322219.355279506,
+          "sources": 9
+        }
+      ],
+      "proposal_chord_separation": {
+        "possible_conflict_pairs": 0,
+        "minimum_proven_axis_clearance_m": 3393.6174540248585,
+        "acceleration_bound_m_s2": 0.0,
+        "normal_rate_bound_rad_s": 0.0,
+        "required_clearance_m": 100.0
+      }
+    },
+    {
+      "rows": 19,
+      "pitch_m": 8750.0,
+      "depth_m": 4000.0,
+      "velocity_gradient_scale": 1.0,
+      "inventory": 361,
+      "minimum_coverage": 0.999999999999999,
+      "coverage": [
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5742179.881491593,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4773629.9447624255,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000002,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3782484.478395788,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2773396.8968581,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1751106.3955465276,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 720417.147615511,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 313822.8713766892,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1346742.5529532516,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000004,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2373470.1780090732,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3389154.556501994,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4388987.625995345,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5368227.076522191,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 6322219.355279506,
+          "sources": 9
+        }
+      ],
+      "proposal_chord_separation": {
+        "possible_conflict_pairs": 0,
+        "minimum_proven_axis_clearance_m": 3353.5595284600713,
+        "acceleration_bound_m_s2": 0.0,
+        "normal_rate_bound_rad_s": 0.0,
+        "required_clearance_m": 100.0
+      }
+    },
+    {
+      "rows": 19,
+      "pitch_m": 9000.0,
+      "depth_m": 2000.0,
+      "velocity_gradient_scale": 0.95,
+      "inventory": 361,
+      "minimum_coverage": 0.999999999999999,
+      "coverage": [
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5742179.881491593,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4773629.9447624255,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000002,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3782484.478395788,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2773396.8968581,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1751106.3955465276,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 720417.147615511,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 313822.8713766892,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1346742.5529532516,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000004,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2373470.1780090732,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3389154.556501994,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4388987.625995345,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5368227.076522191,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 6322219.355279506,
+          "sources": 9
+        }
+      ],
+      "proposal_chord_separation": {
+        "possible_conflict_pairs": 0,
+        "minimum_proven_axis_clearance_m": 1618.402179452339,
+        "acceleration_bound_m_s2": 0.0,
+        "normal_rate_bound_rad_s": 0.0,
+        "required_clearance_m": 100.0
+      }
+    },
+    {
+      "rows": 19,
+      "pitch_m": 9000.0,
+      "depth_m": 2000.0,
+      "velocity_gradient_scale": 1.0,
+      "inventory": 361,
+      "minimum_coverage": 0.999999999999999,
+      "coverage": [
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5742179.881491593,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4773629.9447624255,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000002,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3782484.478395788,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2773396.8968581,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1751106.3955465276,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 720417.147615511,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 313822.8713766892,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1346742.5529532516,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000004,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2373470.1780090732,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3389154.556501994,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4388987.625995345,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5368227.076522191,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 6322219.355279506,
+          "sources": 9
+        }
+      ],
+      "proposal_chord_separation": {
+        "possible_conflict_pairs": 0,
+        "minimum_proven_axis_clearance_m": 1613.9776732270127,
+        "acceleration_bound_m_s2": 0.0,
+        "normal_rate_bound_rad_s": 0.0,
+        "required_clearance_m": 100.0
+      }
+    },
+    {
+      "rows": 19,
+      "pitch_m": 9000.0,
+      "depth_m": 4000.0,
+      "velocity_gradient_scale": 0.95,
+      "inventory": 361,
+      "minimum_coverage": 0.999999999999999,
+      "coverage": [
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5742179.881491593,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4773629.9447624255,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000002,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3782484.478395788,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2773396.8968581,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1751106.3955465276,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 720417.147615511,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 313822.8713766892,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1346742.5529532516,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000004,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2373470.1780090732,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3389154.556501994,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4388987.625995345,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5368227.076522191,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 6322219.355279506,
+          "sources": 9
+        }
+      ],
+      "proposal_chord_separation": {
+        "possible_conflict_pairs": 0,
+        "minimum_proven_axis_clearance_m": 3390.0586131778173,
+        "acceleration_bound_m_s2": 0.0,
+        "normal_rate_bound_rad_s": 0.0,
+        "required_clearance_m": 100.0
+      }
+    },
+    {
+      "rows": 19,
+      "pitch_m": 9000.0,
+      "depth_m": 4000.0,
+      "velocity_gradient_scale": 1.0,
+      "inventory": 361,
+      "minimum_coverage": 0.999999999999999,
+      "coverage": [
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5742179.881491593,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4773629.9447624255,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000002,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3782484.478395788,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2773396.8968581,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1751106.3955465276,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 720417.147615511,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 313822.8713766892,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1346742.5529532516,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000004,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2373470.1780090732,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3389154.556501994,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4388987.625995345,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5368227.076522191,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 6322219.355279506,
+          "sources": 9
+        }
+      ],
+      "proposal_chord_separation": {
+        "possible_conflict_pairs": 0,
+        "minimum_proven_axis_clearance_m": 3350.8803971236157,
+        "acceleration_bound_m_s2": 0.0,
+        "normal_rate_bound_rad_s": 0.0,
+        "required_clearance_m": 100.0
+      }
+    },
+    {
+      "rows": 21,
+      "pitch_m": 8500.0,
+      "depth_m": 2000.0,
+      "velocity_gradient_scale": 0.95,
+      "inventory": 441,
+      "minimum_coverage": 0.999999999999999,
+      "coverage": [
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5742179.881491593,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4773629.9447624255,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000002,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3782484.478395788,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2773396.8968581,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1751106.3955465276,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 720417.147615511,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 313822.8713766892,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1346742.5529532516,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000004,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2373470.1780090732,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3389154.556501994,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4388987.625995345,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5368227.076522191,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 6322219.355279506,
+          "sources": 9
+        }
+      ],
+      "proposal_chord_separation": {
+        "possible_conflict_pairs": 0,
+        "minimum_proven_axis_clearance_m": 1627.9095722411034,
+        "acceleration_bound_m_s2": 0.0,
+        "normal_rate_bound_rad_s": 0.0,
+        "required_clearance_m": 100.0
+      }
+    },
+    {
+      "rows": 21,
+      "pitch_m": 8500.0,
+      "depth_m": 2000.0,
+      "velocity_gradient_scale": 1.0,
+      "inventory": 441,
+      "minimum_coverage": 0.999999999999999,
+      "coverage": [
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5742179.881491593,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4773629.9447624255,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000002,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3782484.478395788,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2773396.8968581,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1751106.3955465276,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 720417.147615511,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 313822.8713766892,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1346742.5529532516,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000004,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2373470.1780090732,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3389154.556501994,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4388987.625995345,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5368227.076522191,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 6322219.355279506,
+          "sources": 9
+        }
+      ],
+      "proposal_chord_separation": {
+        "possible_conflict_pairs": 0,
+        "minimum_proven_axis_clearance_m": 1621.4306649735693,
+        "acceleration_bound_m_s2": 0.0,
+        "normal_rate_bound_rad_s": 0.0,
+        "required_clearance_m": 100.0
+      }
+    },
+    {
+      "rows": 21,
+      "pitch_m": 8500.0,
+      "depth_m": 4000.0,
+      "velocity_gradient_scale": 0.95,
+      "inventory": 441,
+      "minimum_coverage": 0.999999999999999,
+      "coverage": [
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5742179.881491593,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4773629.9447624255,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000002,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3782484.478395788,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2773396.8968581,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1751106.3955465276,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 720417.147615511,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 313822.8713766892,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1346742.5529532516,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000004,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2373470.1780090732,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3389154.556501994,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4388987.625995345,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5368227.076522191,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 6322219.355279506,
+          "sources": 9
+        }
+      ],
+      "proposal_chord_separation": {
+        "possible_conflict_pairs": 0,
+        "minimum_proven_axis_clearance_m": 3397.176294871869,
+        "acceleration_bound_m_s2": 0.0,
+        "normal_rate_bound_rad_s": 0.0,
+        "required_clearance_m": 100.0
+      }
+    },
+    {
+      "rows": 21,
+      "pitch_m": 8500.0,
+      "depth_m": 4000.0,
+      "velocity_gradient_scale": 1.0,
+      "inventory": 441,
+      "minimum_coverage": 0.999999999999999,
+      "coverage": [
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5742179.881491593,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4773629.9447624255,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000002,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3782484.478395788,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2773396.8968581,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1751106.3955465276,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 720417.147615511,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 313822.8713766892,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1346742.5529532516,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000004,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2373470.1780090732,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3389154.556501994,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4388987.625995345,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5368227.076522191,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 6322219.355279506,
+          "sources": 9
+        }
+      ],
+      "proposal_chord_separation": {
+        "possible_conflict_pairs": 0,
+        "minimum_proven_axis_clearance_m": 3356.238659796528,
+        "acceleration_bound_m_s2": 0.0,
+        "normal_rate_bound_rad_s": 0.0,
+        "required_clearance_m": 100.0
+      }
+    },
+    {
+      "rows": 21,
+      "pitch_m": 8750.0,
+      "depth_m": 2000.0,
+      "velocity_gradient_scale": 0.95,
+      "inventory": 441,
+      "minimum_coverage": 0.999999999999999,
+      "coverage": [
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5742179.881491593,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4773629.9447624255,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000002,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3782484.478395788,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2773396.8968581,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1751106.3955465276,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 720417.147615511,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 313822.8713766892,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1346742.5529532516,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000004,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2373470.1780090732,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3389154.556501994,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4388987.625995345,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5368227.076522191,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 6322219.355279506,
+          "sources": 9
+        }
+      ],
+      "proposal_chord_separation": {
+        "possible_conflict_pairs": 0,
+        "minimum_proven_axis_clearance_m": 1623.1558758458107,
+        "acceleration_bound_m_s2": 0.0,
+        "normal_rate_bound_rad_s": 0.0,
+        "required_clearance_m": 100.0
+      }
+    },
+    {
+      "rows": 21,
+      "pitch_m": 8750.0,
+      "depth_m": 2000.0,
+      "velocity_gradient_scale": 1.0,
+      "inventory": 441,
+      "minimum_coverage": 0.999999999999999,
+      "coverage": [
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5742179.881491593,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4773629.9447624255,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000002,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3782484.478395788,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2773396.8968581,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1751106.3955465276,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 720417.147615511,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 313822.8713766892,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1346742.5529532516,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000004,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2373470.1780090732,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3389154.556501994,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4388987.625995345,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5368227.076522191,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 6322219.355279506,
+          "sources": 9
+        }
+      ],
+      "proposal_chord_separation": {
+        "possible_conflict_pairs": 0,
+        "minimum_proven_axis_clearance_m": 1617.704169101199,
+        "acceleration_bound_m_s2": 0.0,
+        "normal_rate_bound_rad_s": 0.0,
+        "required_clearance_m": 100.0
+      }
+    },
+    {
+      "rows": 21,
+      "pitch_m": 8750.0,
+      "depth_m": 4000.0,
+      "velocity_gradient_scale": 0.95,
+      "inventory": 441,
+      "minimum_coverage": 0.999999999999999,
+      "coverage": [
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5742179.881491593,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4773629.9447624255,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000002,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3782484.478395788,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2773396.8968581,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1751106.3955465276,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 720417.147615511,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 313822.8713766892,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1346742.5529532516,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000004,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2373470.1780090732,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3389154.556501994,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4388987.625995345,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5368227.076522191,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 6322219.355279506,
+          "sources": 9
+        }
+      ],
+      "proposal_chord_separation": {
+        "possible_conflict_pairs": 0,
+        "minimum_proven_axis_clearance_m": 3393.6174540248585,
+        "acceleration_bound_m_s2": 0.0,
+        "normal_rate_bound_rad_s": 0.0,
+        "required_clearance_m": 100.0
+      }
+    },
+    {
+      "rows": 21,
+      "pitch_m": 8750.0,
+      "depth_m": 4000.0,
+      "velocity_gradient_scale": 1.0,
+      "inventory": 441,
+      "minimum_coverage": 0.999999999999999,
+      "coverage": [
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5742179.881491593,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4773629.9447624255,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000002,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3782484.478395788,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2773396.8968581,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1751106.3955465276,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 720417.147615511,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 313822.8713766892,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1346742.5529532516,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000004,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2373470.1780090732,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3389154.556501994,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4388987.625995345,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5368227.076522191,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 6322219.355279506,
+          "sources": 9
+        }
+      ],
+      "proposal_chord_separation": {
+        "possible_conflict_pairs": 0,
+        "minimum_proven_axis_clearance_m": 3353.5595284600713,
+        "acceleration_bound_m_s2": 0.0,
+        "normal_rate_bound_rad_s": 0.0,
+        "required_clearance_m": 100.0
+      }
+    },
+    {
+      "rows": 21,
+      "pitch_m": 9000.0,
+      "depth_m": 2000.0,
+      "velocity_gradient_scale": 0.95,
+      "inventory": 441,
+      "minimum_coverage": 0.999999999999999,
+      "coverage": [
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5742179.881491593,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4773629.9447624255,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000002,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3782484.478395788,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2773396.8968581,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1751106.3955465276,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 720417.147615511,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 313822.8713766892,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1346742.5529532516,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000004,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2373470.1780090732,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3389154.556501994,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4388987.625995345,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5368227.076522191,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 6322219.355279506,
+          "sources": 9
+        }
+      ],
+      "proposal_chord_separation": {
+        "possible_conflict_pairs": 0,
+        "minimum_proven_axis_clearance_m": 1618.402179452339,
+        "acceleration_bound_m_s2": 0.0,
+        "normal_rate_bound_rad_s": 0.0,
+        "required_clearance_m": 100.0
+      }
+    },
+    {
+      "rows": 21,
+      "pitch_m": 9000.0,
+      "depth_m": 2000.0,
+      "velocity_gradient_scale": 1.0,
+      "inventory": 441,
+      "minimum_coverage": 0.999999999999999,
+      "coverage": [
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5742179.881491593,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4773629.9447624255,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000002,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3782484.478395788,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2773396.8968581,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1751106.3955465276,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 720417.147615511,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 313822.8713766892,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1346742.5529532516,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000004,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2373470.1780090732,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3389154.556501994,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4388987.625995345,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5368227.076522191,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 6322219.355279506,
+          "sources": 9
+        }
+      ],
+      "proposal_chord_separation": {
+        "possible_conflict_pairs": 0,
+        "minimum_proven_axis_clearance_m": 1613.9776732270127,
+        "acceleration_bound_m_s2": 0.0,
+        "normal_rate_bound_rad_s": 0.0,
+        "required_clearance_m": 100.0
+      }
+    },
+    {
+      "rows": 21,
+      "pitch_m": 9000.0,
+      "depth_m": 4000.0,
+      "velocity_gradient_scale": 0.95,
+      "inventory": 441,
+      "minimum_coverage": 0.999999999999999,
+      "coverage": [
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5742179.881491593,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4773629.9447624255,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000002,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3782484.478395788,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2773396.8968581,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1751106.3955465276,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 720417.147615511,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 313822.8713766892,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1346742.5529532516,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000004,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2373470.1780090732,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3389154.556501994,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4388987.625995345,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5368227.076522191,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 6322219.355279506,
+          "sources": 9
+        }
+      ],
+      "proposal_chord_separation": {
+        "possible_conflict_pairs": 0,
+        "minimum_proven_axis_clearance_m": 3390.0586131778173,
+        "acceleration_bound_m_s2": 0.0,
+        "normal_rate_bound_rad_s": 0.0,
+        "required_clearance_m": 100.0
+      }
+    },
+    {
+      "rows": 21,
+      "pitch_m": 9000.0,
+      "depth_m": 4000.0,
+      "velocity_gradient_scale": 1.0,
+      "inventory": 441,
+      "minimum_coverage": 0.999999999999999,
+      "coverage": [
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5742179.881491593,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4773629.9447624255,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000002,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3782484.478395788,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2773396.8968581,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1751106.3955465276,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 720417.147615511,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 313822.8713766892,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1346742.5529532516,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000004,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2373470.1780090732,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3389154.556501994,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4388987.625995345,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5368227.076522191,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 6322219.355279506,
+          "sources": 9
+        }
+      ],
+      "proposal_chord_separation": {
+        "possible_conflict_pairs": 0,
+        "minimum_proven_axis_clearance_m": 3350.880397123607,
+        "acceleration_bound_m_s2": 0.0,
+        "normal_rate_bound_rad_s": 0.0,
+        "required_clearance_m": 100.0
+      }
+    }
+  ],
+  "candidate_order": [
+    2,
+    6,
+    10,
+    3,
+    7,
+    11,
+    0,
+    4,
+    1,
+    8,
+    5,
+    9,
+    14,
+    18,
+    22,
+    15,
+    19,
+    23,
+    12,
+    16,
+    13,
+    20,
+    17,
+    21
+  ],
+  "coupled": [
+    {
+      "config": {
+        "rows": 19,
+        "pitch_m": 8500.0,
+        "depth_m": 4000.0,
+        "velocity_gradient_scale": 0.95
+      },
+      "solar_force_directions": 8,
+      "max_step_s": 60.0,
+      "rtol": 2e-10,
+      "duration_s": 21600.0,
+      "count": 361,
+      "optical_mass_kg": 1805000000.0,
+      "window_outer_radius_m": 6332219.355279506,
+      "range_m": [
+        14934447.31871263,
+        15031841.42139202
+      ],
+      "sampled_local_gates_pass": true,
+      "minimum_coverage": 0.9999999999999981,
+      "coverage_times_s": [
+        0.0,
+        900.0,
+        1800.0,
+        2700.0,
+        3600.0,
+        4500.0,
+        5400.0,
+        6300.0,
+        7200.0,
+        8100.0,
+        9000.0,
+        9900.0,
+        10800.0,
+        11700.0,
+        12600.0,
+        13500.0,
+        14400.0,
+        15300.0,
+        16200.0,
+        17100.0,
+        18000.0,
+        18900.0,
+        19800.0,
+        20700.0,
+        21600.0
+      ],
+      "coverage": [
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5742179.881491593,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5261016.276147611,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4773629.9447624255,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4280593.067615609,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000002,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3782484.478395788,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3279889.019774999,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2773396.8968581,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000002,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2263603.0284147365,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1751106.3955465276,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999997,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1236509.3876641558,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 720417.147615511,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 203436.96208354746,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 313822.8713766892,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999989,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 830752.4400426497,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1346742.5529532516,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999997,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1861184.3210300975,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000004,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2373470.1780090732,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2882994.5507140136,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3389154.556501994,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3891350.70835678,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4388987.625995345,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999997,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4881474.7526202565,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999994,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5368227.076522191,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999992,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5848665.857249387,
+          "sources": 9
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 6322219.355279506,
+          "sources": 9
+        }
+      ],
+      "adversarial_times_s": [
+        450.0,
+        1350.0,
+        2250.0,
+        3150.0,
+        4050.0,
+        4950.0,
+        5850.0,
+        6750.0,
+        7650.0,
+        8550.0,
+        9450.0,
+        10350.0,
+        11250.0,
+        11400.0,
+        11460.0,
+        11520.0,
+        11580.0,
+        11640.0,
+        11700.0,
+        11760.0,
+        11820.0,
+        11880.0,
+        11940.0,
+        12000.0,
+        12150.0,
+        13050.0,
+        13950.0,
+        14850.0,
+        15750.0,
+        16650.0,
+        17550.0,
+        18450.0,
+        19350.0,
+        20250.0,
+        21150.0
+      ],
+      "adversarial_coverage": [
+        {
+          "all_sampled_sun_coverage": 1.0,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5502411.403357047,
+          "sources": 25
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5018065.353429322,
+          "sources": 25
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000004,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4527781.795700857,
+          "sources": 25
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4032136.317616405,
+          "sources": 25
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000002,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3531710.8380290596,
+          "sources": 25
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000002,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3027092.961786465,
+          "sources": 25
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000002,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2518875.332067685,
+          "sources": 25
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999987,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2007654.9804019332,
+          "sources": 25
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999984,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1494032.6739345286,
+          "sources": 25
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999983,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 978612.2604546604,
+          "sources": 25
+        },
+        {
+          "all_sampled_sun_coverage": 0.999999999999999,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 462000.0184043842,
+          "sources": 25
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000004,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 55196.563588947785,
+          "sources": 25
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999983,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 572366.9960427944,
+          "sources": 25
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999981,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 658516.8723530308,
+          "sources": 25
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999981,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 692971.2537120767,
+          "sources": 25
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999981,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 727422.1817581002,
+          "sources": 25
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999983,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 761869.4758773812,
+          "sources": 25
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999983,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 796312.9555014127,
+          "sources": 25
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999981,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 830752.4400426497,
+          "sources": 25
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999983,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 865187.7489375431,
+          "sources": 25
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999983,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 899618.7016349058,
+          "sources": 25
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999983,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 934045.11760959,
+          "sources": 25
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999984,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 968466.8163265211,
+          "sources": 25
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999983,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1002883.6173063806,
+          "sources": 25
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999989,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1088903.0076816888,
+          "sources": 25
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999989,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 1604194.9915971945,
+          "sources": 25
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000004,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2117634.6415640037,
+          "sources": 25
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000004,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 2628615.3013509787,
+          "sources": 25
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000004,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3136532.6552948016,
+          "sources": 25
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000004,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 3640785.430060635,
+          "sources": 25
+        },
+        {
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4140776.102739287,
+          "sources": 25
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000004,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 4635911.614872458,
+          "sources": 25
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5125604.091708599,
+          "sources": 25
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 5609271.566160308,
+          "sources": 25
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000004,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 6086338.70683022,
+          "sources": 25
+        }
+      ],
+      "separation": {
+        "possible_conflict_pairs": 0,
+        "minimum_proven_axis_clearance_m": 2685.397161837838,
+        "acceleration_bound_m_s2": 0.06,
+        "normal_rate_bound_rad_s": 3e-07,
+        "required_clearance_m": 100.0
+      },
+      "minimum_instant_nonstencil_margin_m": 6684.6014782333095,
+      "interval_nonstencil_motion_allowance_m": 275.2406628435184,
+      "guarded_nonstencil_margin_m": 6409.360815389791,
+      "max_sampled_acceleration_m_s2": 0.022001730435099613,
+      "minimum_beam_margin_deg": 96.4697809197265,
+      "max_frame_secant_rate_rad_s": 1.9836244839291621e-07,
+      "minimum_illumination": 0.4788723741519911,
+      "mean_illumination": 0.8233393695968164,
+      "max_affine_position_defect_m": 2464.297099018974,
+      "max_initial_relative_speed_m_s": 1.6642962485654509,
+      "preparation_delta_v_reference_mean_m_s": 0.9395881172390211,
+      "preparation_delta_v_reference_max_m_s": 1.6586576505445185,
+      "endpoint_reference_position_defect_max_m": 2976.1666703997153,
+      "endpoint_reference_velocity_defect_mean_m_s": 1.0275702743360575,
+      "endpoint_reference_velocity_defect_max_m_s": 1.8005985503713577,
+      "service_electric_delta_v_m_s": 0.0,
+      "service_propulsion_energy_J": 0.0,
+      "closure_maneuver_executed": false,
+      "recurring_cost_measured": false,
+      "accepted_fleet": false,
+      "continuous_coverage_certificate": false,
+      "nfev": 5447,
+      "raw_path": "research/runs/solar_shield_array/patterns/candidate_2.npz",
+      "raw_sha256": "2e0f0b36ed64206f9abada3dc09a53db9d515887f75ce88e10b7221e804ef724",
+      "elapsed_s": 94.66380394699809,
+      "affine_trial": 2
+    }
+  ],
+  "replay": {
+    "config": {
+      "rows": 19,
+      "pitch_m": 8500.0,
+      "depth_m": 4000.0,
+      "velocity_gradient_scale": 0.95
+    },
+    "solar_force_directions": 16,
+    "max_step_s": 30.0,
+    "rtol": 2e-12,
+    "duration_s": 21600.0,
+    "count": 361,
+    "optical_mass_kg": 1805000000.0,
+    "window_outer_radius_m": 6332219.355279506,
+    "range_m": [
+      14934447.923846565,
+      15031841.42139202
+    ],
+    "sampled_local_gates_pass": true,
+    "minimum_coverage": 0.9999999999999981,
+    "coverage_times_s": [
+      0.0,
+      900.0,
+      1800.0,
+      2700.0,
+      3600.0,
+      4500.0,
+      5400.0,
+      6300.0,
+      7200.0,
+      8100.0,
+      9000.0,
+      9900.0,
+      10800.0,
+      11700.0,
+      12600.0,
+      13500.0,
+      14400.0,
+      15300.0,
+      16200.0,
+      17100.0,
+      18000.0,
+      18900.0,
+      19800.0,
+      20700.0,
+      21600.0
+    ],
+    "coverage": [
+      {
+        "all_sampled_sun_coverage": 0.9999999999999992,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 5742179.881491593,
+        "sources": 9
+      },
+      {
+        "all_sampled_sun_coverage": 0.999999999999999,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 5261016.276147611,
+        "sources": 9
+      },
+      {
+        "all_sampled_sun_coverage": 0.9999999999999994,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 4773629.9447624255,
+        "sources": 9
+      },
+      {
+        "all_sampled_sun_coverage": 0.9999999999999994,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 4280593.067615609,
+        "sources": 9
+      },
+      {
+        "all_sampled_sun_coverage": 1.0000000000000002,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 3782484.478395788,
+        "sources": 9
+      },
+      {
+        "all_sampled_sun_coverage": 1.0000000000000007,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 3279889.019774999,
+        "sources": 9
+      },
+      {
+        "all_sampled_sun_coverage": 1.0000000000000007,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 2773396.8968581,
+        "sources": 9
+      },
+      {
+        "all_sampled_sun_coverage": 1.0000000000000002,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 2263603.0284147365,
+        "sources": 9
+      },
+      {
+        "all_sampled_sun_coverage": 0.9999999999999998,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 1751106.3955465276,
+        "sources": 9
+      },
+      {
+        "all_sampled_sun_coverage": 0.9999999999999997,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 1236509.3876641558,
+        "sources": 9
+      },
+      {
+        "all_sampled_sun_coverage": 0.999999999999999,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 720417.147615511,
+        "sources": 9
+      },
+      {
+        "all_sampled_sun_coverage": 0.9999999999999998,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 203436.96208354746,
+        "sources": 9
+      },
+      {
+        "all_sampled_sun_coverage": 0.999999999999999,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 313822.8713766892,
+        "sources": 9
+      },
+      {
+        "all_sampled_sun_coverage": 0.9999999999999989,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 830752.4400426497,
+        "sources": 9
+      },
+      {
+        "all_sampled_sun_coverage": 0.9999999999999998,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 1346742.5529532516,
+        "sources": 9
+      },
+      {
+        "all_sampled_sun_coverage": 0.9999999999999997,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 1861184.3210300975,
+        "sources": 9
+      },
+      {
+        "all_sampled_sun_coverage": 1.0000000000000004,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 2373470.1780090732,
+        "sources": 9
+      },
+      {
+        "all_sampled_sun_coverage": 1.0000000000000007,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 2882994.5507140136,
+        "sources": 9
+      },
+      {
+        "all_sampled_sun_coverage": 1.0000000000000007,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 3389154.556501994,
+        "sources": 9
+      },
+      {
+        "all_sampled_sun_coverage": 1.0000000000000007,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 3891350.70835678,
+        "sources": 9
+      },
+      {
+        "all_sampled_sun_coverage": 0.9999999999999992,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 4388987.625995345,
+        "sources": 9
+      },
+      {
+        "all_sampled_sun_coverage": 0.9999999999999997,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 4881474.7526202565,
+        "sources": 9
+      },
+      {
+        "all_sampled_sun_coverage": 0.9999999999999994,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 5368227.076522191,
+        "sources": 9
+      },
+      {
+        "all_sampled_sun_coverage": 0.9999999999999992,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 5848665.857249387,
+        "sources": 9
+      },
+      {
+        "all_sampled_sun_coverage": 0.999999999999999,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 6322219.355279506,
+        "sources": 9
+      }
+    ],
+    "adversarial_times_s": [
+      450.0,
+      1350.0,
+      2250.0,
+      3150.0,
+      4050.0,
+      4950.0,
+      5850.0,
+      6750.0,
+      7650.0,
+      8550.0,
+      9450.0,
+      10350.0,
+      11250.0,
+      11400.0,
+      11460.0,
+      11520.0,
+      11580.0,
+      11640.0,
+      11700.0,
+      11760.0,
+      11820.0,
+      11880.0,
+      11940.0,
+      12000.0,
+      12150.0,
+      13050.0,
+      13950.0,
+      14850.0,
+      15750.0,
+      16650.0,
+      17550.0,
+      18450.0,
+      19350.0,
+      20250.0,
+      21150.0
+    ],
+    "adversarial_coverage": [
+      {
+        "all_sampled_sun_coverage": 1.0,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 5502411.403357047,
+        "sources": 25
+      },
+      {
+        "all_sampled_sun_coverage": 1.0000000000000007,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 5018065.353429322,
+        "sources": 25
+      },
+      {
+        "all_sampled_sun_coverage": 1.0000000000000004,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 4527781.795700857,
+        "sources": 25
+      },
+      {
+        "all_sampled_sun_coverage": 0.9999999999999998,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 4032136.317616405,
+        "sources": 25
+      },
+      {
+        "all_sampled_sun_coverage": 1.0000000000000002,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 3531710.8380290596,
+        "sources": 25
+      },
+      {
+        "all_sampled_sun_coverage": 1.0000000000000002,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 3027092.961786465,
+        "sources": 25
+      },
+      {
+        "all_sampled_sun_coverage": 1.0000000000000002,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 2518875.332067685,
+        "sources": 25
+      },
+      {
+        "all_sampled_sun_coverage": 0.9999999999999987,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 2007654.9804019332,
+        "sources": 25
+      },
+      {
+        "all_sampled_sun_coverage": 0.9999999999999984,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 1494032.6739345286,
+        "sources": 25
+      },
+      {
+        "all_sampled_sun_coverage": 0.9999999999999983,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 978612.2604546604,
+        "sources": 25
+      },
+      {
+        "all_sampled_sun_coverage": 0.999999999999999,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 462000.0184043842,
+        "sources": 25
+      },
+      {
+        "all_sampled_sun_coverage": 1.0000000000000004,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 55196.563588947785,
+        "sources": 25
+      },
+      {
+        "all_sampled_sun_coverage": 0.9999999999999983,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 572366.9960427944,
+        "sources": 25
+      },
+      {
+        "all_sampled_sun_coverage": 0.9999999999999981,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 658516.8723530308,
+        "sources": 25
+      },
+      {
+        "all_sampled_sun_coverage": 0.9999999999999981,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 692971.2537120767,
+        "sources": 25
+      },
+      {
+        "all_sampled_sun_coverage": 0.9999999999999981,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 727422.1817581002,
+        "sources": 25
+      },
+      {
+        "all_sampled_sun_coverage": 0.9999999999999983,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 761869.4758773812,
+        "sources": 25
+      },
+      {
+        "all_sampled_sun_coverage": 0.9999999999999983,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 796312.9555014127,
+        "sources": 25
+      },
+      {
+        "all_sampled_sun_coverage": 0.9999999999999981,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 830752.4400426497,
+        "sources": 25
+      },
+      {
+        "all_sampled_sun_coverage": 0.9999999999999983,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 865187.7489375431,
+        "sources": 25
+      },
+      {
+        "all_sampled_sun_coverage": 0.9999999999999983,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 899618.7016349058,
+        "sources": 25
+      },
+      {
+        "all_sampled_sun_coverage": 0.9999999999999983,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 934045.11760959,
+        "sources": 25
+      },
+      {
+        "all_sampled_sun_coverage": 0.9999999999999984,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 968466.8163265211,
+        "sources": 25
+      },
+      {
+        "all_sampled_sun_coverage": 0.9999999999999983,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 1002883.6173063806,
+        "sources": 25
+      },
+      {
+        "all_sampled_sun_coverage": 0.9999999999999989,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 1088903.0076816888,
+        "sources": 25
+      },
+      {
+        "all_sampled_sun_coverage": 0.9999999999999989,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 1604194.9915971945,
+        "sources": 25
+      },
+      {
+        "all_sampled_sun_coverage": 1.0000000000000004,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 2117634.6415640037,
+        "sources": 25
+      },
+      {
+        "all_sampled_sun_coverage": 1.0000000000000004,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 2628615.3013509787,
+        "sources": 25
+      },
+      {
+        "all_sampled_sun_coverage": 1.0000000000000004,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 3136532.6552948016,
+        "sources": 25
+      },
+      {
+        "all_sampled_sun_coverage": 1.0000000000000004,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 3640785.430060635,
+        "sources": 25
+      },
+      {
+        "all_sampled_sun_coverage": 0.9999999999999998,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 4140776.102739287,
+        "sources": 25
+      },
+      {
+        "all_sampled_sun_coverage": 1.0000000000000004,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 4635911.614872458,
+        "sources": 25
+      },
+      {
+        "all_sampled_sun_coverage": 1.0000000000000007,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 5125604.091708599,
+        "sources": 25
+      },
+      {
+        "all_sampled_sun_coverage": 1.0000000000000007,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 5609271.566160308,
+        "sources": 25
+      },
+      {
+        "all_sampled_sun_coverage": 1.0000000000000004,
+        "minimum_source_coverage": 1.0,
+        "worst_missed_ray": null,
+        "window_centre_distance_m": 6086338.70683022,
+        "sources": 25
+      }
+    ],
+    "separation": {
+      "possible_conflict_pairs": 0,
+      "minimum_proven_axis_clearance_m": 2685.3623587916713,
+      "acceleration_bound_m_s2": 0.06,
+      "normal_rate_bound_rad_s": 3e-07,
+      "required_clearance_m": 100.0
+    },
+    "minimum_instant_nonstencil_margin_m": 6684.597855725232,
+    "interval_nonstencil_motion_allowance_m": 275.2411217969089,
+    "guarded_nonstencil_margin_m": 6409.356733928323,
+    "max_sampled_acceleration_m_s2": 0.022001726544429192,
+    "minimum_beam_margin_deg": 96.4697809197265,
+    "max_frame_secant_rate_rad_s": 1.9836244839291621e-07,
+    "minimum_illumination": 0.47887281920903635,
+    "mean_illumination": 0.8233398686477466,
+    "max_affine_position_defect_m": 2464.294101803638,
+    "max_initial_relative_speed_m_s": 1.6642962485654509,
+    "preparation_delta_v_reference_mean_m_s": 0.9395881172390211,
+    "preparation_delta_v_reference_max_m_s": 1.6586576505445185,
+    "endpoint_reference_position_defect_max_m": 2976.163961064972,
+    "endpoint_reference_velocity_defect_mean_m_s": 1.0275695959193294,
+    "endpoint_reference_velocity_defect_max_m_s": 1.8006013822012688,
+    "service_electric_delta_v_m_s": 0.0,
+    "service_propulsion_energy_J": 0.0,
+    "closure_maneuver_executed": false,
+    "recurring_cost_measured": false,
+    "accepted_fleet": false,
+    "continuous_coverage_certificate": false,
+    "nfev": 10847,
+    "raw_path": "research/runs/solar_shield_array/patterns/replay_2.npz",
+    "raw_sha256": "625b0af2b9fb8746b44ec05856df65e2f42225c449bc61310dde95cbf6fef41f",
+    "elapsed_s": 293.9247844770034,
+    "max_position_difference_m": 0.660642121553994,
+    "max_velocity_difference_m_s": 6.479369042673591e-05,
+    "passes_50m": true
+  }
+}

@@ -23,6 +23,7 @@ EXOPLASIM_CHARNOCK = DATA["model_closures"]["exoplasim_3_4_2"]["charnock_paramet
 EXOPLASIM_SEA_ROUGHNESS_FLOOR = DATA["model_closures"]["exoplasim_3_4_2"]["sea_roughness_floor_m"]
 EXOPLASIM_VON_KARMAN = DATA["model_closures"]["exoplasim_3_4_2"]["von_karman_constant"]
 ELEMENTARY_CHARGE = DATA["physics"]["elementary_charge_C"]
+PROTON_MASS = DATA["physics"]["proton_mass_kg"]
 VACUUM_PERMEABILITY = DATA["physics"]["vacuum_permeability_N_A2"]
 CLASSICAL_ELECTRON_RADIUS = DATA["physics"]["classical_electron_radius_m"]
 GRAVITATIONAL_CONSTANT = DATA["physics"]["gravitational_constant_m3_kg_s2"]
@@ -60,3 +61,9 @@ SUN_GM = DATA["sun"]["gm_m3_s2"]
 
 # Rounded lunar gravity still used by the sky solver, column model and immersion.
 LEGACY_MOON_GRAVITY = DATA["legacy"]["moon_surface_gravity_rounded_m_s2"]["value"]
+
+# DE440 point-mass dynamics; planetary values describe whole systems.
+SUN_GM = DATA["sun"]["gm_m3_s2"]
+SOLAR_SYSTEM_GM = DATA["solar_system_gm_m3_s2"]
+JULIAN_DAY = DATA["time"]["julian_day_s"]
+JULIAN_YEAR_DAYS = DATA["time"]["julian_year_days"]

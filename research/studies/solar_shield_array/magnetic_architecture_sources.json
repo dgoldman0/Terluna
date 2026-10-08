@@ -1,0 +1,27 @@
+{
+  "schema": "terluna.research.magnetic-architecture-sources/1",
+  "access_date": "2026-10-05",
+  "sources": [
+    {"id":"loop", "url":"https://ntrs.nasa.gov/api/citations/20010038494/downloads/20010038494.pdf", "title":"Simpson, Lane, Immer and Youngquist, Simple Analytic Expressions for the Magnetic Field of a Circular Current Loop (2001)", "access":"Three-page primary paper read, including cylindrical and limiting expressions", "use":"Exact finite-loop fields, checked independently against Biot-Savart quadrature; no dipole substitution near large circuits."},
+    {"id":"resources", "url":"https://arxiv.org/pdf/2006.05546", "title":"DuPont and Murphy, Fundamental physical and resource requirements for a Martian magnetic shield (2021)", "access":"Primary paper abstract and field/size constraint derivation read; no full scholarly review claimed", "use":"Large current-path and conductor self-field constraints motivate the comparison. Recalculate lunar hardware with explicit engineering current density and support; do not import its atmospheric or radiation assertions or material totals."},
+    {"id":"upstream", "url":"https://www.hou.usra.edu/meetings/V2050/pdf/8250.pdf", "title":"Green et al., A Future Mars Environment for Science and Exploration (2017)", "access":"Full two-page workshop abstract read", "use":"Primary upstream magnetotail proposal. It supplies neither a lunar wake law nor an installed hardware, control or mass budget."},
+    {"id":"plasma_torus", "url":"https://arxiv.org/pdf/2111.06887", "title":"Bamford et al., How to create an artificial magnetosphere for Mars (2022; 2021 preprint)", "access":"Abstract, methods scope and plasma-torus/current-drive discussion read", "use":"Exploratory distributed plasma currents and guide-field requirements; loss times, instabilities and shielding remain unresolved. Recompute particle energy relativistically instead of adopting its approximate energy-speed association."},
+    {"id":"mini", "url":"https://arxiv.org/html/1207.2076v1", "title":"Bamford et al., Mini-magnetospheres above the lunar surface and the formation of lunar swirls (2012)", "access":"Primary observation/laboratory paper read in preceding electromagnetic study", "use":"Electron-scale electrostatic deflection is physically motivated; local results supply no global downstream coverage factor."},
+    {"id":"kinetic", "url":"https://ntrs.nasa.gov/citations/20030066145", "title":"Khazanov et al., Fundamentals of the Plasma Sail Concept: MHD and Kinetic Studies (2003)", "access":"NASA primary research abstract read", "use":"Fluid inflation can misrepresent momentum transfer to the inner source; no assumed plasma-inflation multiplier or harvested power."},
+    {"id":"rebco", "url":"https://arxiv.org/abs/2308.12301", "title":"Hartwig et al., The SPARC Toroidal Field Model Coil Program (2023)", "access":"Detailed primary experiment abstract read", "use":"20.1 T at 40.5 kA, metre-scale structure and 0.5-2 nOhm joints at 20 K are demonstrated. Regional loops, 100 A/mm2 engineering current density and 10 T envelope are extrapolated scenarios."},
+    {"id":"escape", "url":"https://doi.org/10.1051/0004-6361/201832934", "title":"Gunell et al., Why an intrinsic magnetic field does not protect a planet against atmospheric escape (2018)", "access":"Publisher abstract/search text and repository treatment; direct publisher page unavailable in this run", "use":"Open field topology, polar outflow and pickup invalidate an automatic pressure-contour-to-retention inference."}
+  ],
+  "model_parameters": {
+    "engineering_current_density_A_m2":100000000,
+    "composite_density_kg_m3":6000,
+    "working_specific_strength_J_kg":1000000,
+    "bundle_self_field_limit_T":10,
+    "cold_heat_leak_W_m2":0.05,
+    "refrigeration_COP":0.005,
+    "joint_resistance_ohm":1e-9,
+    "joint_spacing_per_turn_m":10000,
+    "terminal_current_A":50000,
+    "cryostat_shell_kg_m2":10,
+    "status":"Extrapolated engineering scenarios. Sensitivities include 2.4/10/20 T, 0.01-0.1 W/m2 and COP 0.002-0.01. No system is qualified."
+  }
+}

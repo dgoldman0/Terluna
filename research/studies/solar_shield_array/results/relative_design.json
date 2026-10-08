@@ -1,0 +1,546 @@
+{
+ "schema": "terluna.research.relative-design/1",
+ "producer": {
+  "files": {
+   "research/studies/solar_shield_array/relative_design.py": "7a773b8838ef6a2ad0c35b4521b877aedfa5e89d016ddf04c9653ada7f3f0495",
+   "research/studies/solar_shield_array/relative_diagnosis.py": "dafc941e0db427d5c89847401e87a955becccb1c4c2d0882fbabe89e7316c307",
+   "protection/dynamics/relative_orbit.py": "b73a50b4b5137ef0d69b65e44097e32f26abb1372d89104fb979a7f876034565",
+   "protection/dynamics/ring_bundle.py": "05543a75524dd0d3c9cbbb6aa0dc0b02d8d5a0d156c943b6d794184f3ecfb98d",
+   "protection/dynamics/square_distance.py": "b38c54b6d9a96b161e82b755d407758548a38244c9292d73404ab45cdc1210ba",
+   "protection/dynamics/cycling.py": "704fbd03c9d4070ea05bdfeba57914ec225941f3560710da2472bd24ca870ed4",
+   "protection/dynamics/ephemeris.py": "9a162c3acf63a844284eb61b444a7d34f1447b5182d254d3e87616516f8748d9"
+  },
+  "constants": {
+   "AU": 149597870700.0,
+   "EARTH_GM": 398600441800000.0,
+   "EARTH_MOON_DISTANCE": 384400000.0,
+   "EARTH_OBLIQUITY_DEG": 23.4393,
+   "EARTH_RADIUS": 6371000.0,
+   "JULIAN_DAY": 86400.0,
+   "MOON_GM": 4902800118000.0,
+   "MOON_RADIUS": 1737400.0,
+   "SOLAR_CONSTANT": 1361.0,
+   "SOLAR_SYSTEM_GM": {
+    "mercury": 22031868551000.0,
+    "venus": 324858592000000.0,
+    "mars": 42828375816000.0,
+    "jupiter": 1.267127641e+17,
+    "saturn": 3.79405848418e+16,
+    "uranus": 5794556400000000.0,
+    "neptune": 6836527100580000.0,
+    "pluto": 975500000000.0
+   },
+   "SPEED_OF_LIGHT": 299792458.0,
+   "SUN_GM": 1.3271244004127942e+20,
+   "SUN_RADIUS": 695700000.0
+  },
+  "inputs": {
+   "results/joint_seed.json": "53060741b22d7a1768e6661899e98db9f48ceec966e8cc052b3ff2ab0bfedcf8",
+   "local_continuation/ephemeris.npz": "0b479a7c3fc66cedf927fbafa337fea3e0ffaec799a9b0aba6a462ba4a7e1c22"
+  }
+ },
+ "evidence": "Layout cases: linear relative motion about a circular 15,000 km reference with parallel squares in one common attitude, sampled every 0.5 degrees over the stated orbits and about every degree over the service arc; sail force, mutual shadows, tides and nonlinearity are absent.",
+ "reading_rule": "A layout passes when no sample falls below clearance_m and both service overlaps stay positive. The coupled model with sail force and mutual shadows verifies a passing layout before any acceptance, and the protection gates decide it.",
+ "clearance_m": 150.0,
+ "cases": [
+  {
+   "kind": "equal_energy_patch",
+   "attitude": "radial",
+   "orbits": 1,
+   "params": {
+    "depth": 2000.0,
+    "fold_step": 200.0
+   },
+   "tiles": 399,
+   "min_surface_distance_m": 0.34785655712035335,
+   "at_u_deg": -122.0,
+   "samples_below_clearance": 266,
+   "service_min_surface_distance_m": 296.6457219712575,
+   "adjacent_row_overlap_min_m": 603.6396770452993,
+   "along_row_overlap_min_m": 1146.540942623058,
+   "semi_major_axis_spread_m": 0.0,
+   "drift_spread_per_orbit_m": 0.0
+  },
+  {
+   "kind": "equal_energy_patch",
+   "attitude": "radial",
+   "orbits": 1,
+   "params": {
+    "depth": 2000.0,
+    "fold_step": 500.0
+   },
+   "tiles": 399,
+   "min_surface_distance_m": 0.30745181388448956,
+   "at_u_deg": 108.0,
+   "samples_below_clearance": 139,
+   "service_min_surface_distance_m": 296.64572197125773,
+   "adjacent_row_overlap_min_m": 603.6396770452993,
+   "along_row_overlap_min_m": 1146.5409426230508,
+   "semi_major_axis_spread_m": 0.0,
+   "drift_spread_per_orbit_m": 0.0
+  },
+  {
+   "kind": "equal_energy_patch",
+   "attitude": "radial",
+   "orbits": 1,
+   "params": {
+    "depth": 5000.0,
+    "fold_step": 200.0
+   },
+   "tiles": 399,
+   "min_surface_distance_m": 0.34785655712086117,
+   "at_u_deg": -122.0,
+   "samples_below_clearance": 266,
+   "service_min_surface_distance_m": 296.6457219712575,
+   "adjacent_row_overlap_min_m": 603.6396770452993,
+   "along_row_overlap_min_m": 1146.5409426230508,
+   "semi_major_axis_spread_m": 0.0,
+   "drift_spread_per_orbit_m": 0.0
+  },
+  {
+   "kind": "equal_energy_patch",
+   "attitude": "radial",
+   "orbits": 1,
+   "params": {
+    "depth": 5000.0,
+    "fold_step": 500.0
+   },
+   "tiles": 399,
+   "min_surface_distance_m": 2.3822292311974853,
+   "at_u_deg": 81.5,
+   "samples_below_clearance": 72,
+   "service_min_surface_distance_m": 296.64572197125773,
+   "adjacent_row_overlap_min_m": 603.6396770452993,
+   "along_row_overlap_min_m": 1146.5409426230508,
+   "semi_major_axis_spread_m": 0.0,
+   "drift_spread_per_orbit_m": 0.0
+  },
+  {
+   "kind": "equal_energy_patch",
+   "attitude": "radial",
+   "orbits": 1,
+   "params": {
+    "depth": 10000.0,
+    "fold_step": 200.0
+   },
+   "tiles": 399,
+   "min_surface_distance_m": 0.3478565571201525,
+   "at_u_deg": -122.0,
+   "samples_below_clearance": 266,
+   "service_min_surface_distance_m": 296.6457219712575,
+   "adjacent_row_overlap_min_m": 603.6396770452993,
+   "along_row_overlap_min_m": 1146.5409426230508,
+   "semi_major_axis_spread_m": 0.0,
+   "drift_spread_per_orbit_m": 0.0
+  },
+  {
+   "kind": "equal_energy_patch",
+   "attitude": "radial",
+   "orbits": 1,
+   "params": {
+    "depth": 10000.0,
+    "fold_step": 500.0
+   },
+   "tiles": 399,
+   "min_surface_distance_m": 0.65506666561474,
+   "at_u_deg": 93.5,
+   "samples_below_clearance": 52,
+   "service_min_surface_distance_m": 296.6457219712575,
+   "adjacent_row_overlap_min_m": 603.6396770452993,
+   "along_row_overlap_min_m": 1146.5409426230508,
+   "semi_major_axis_spread_m": 0.0,
+   "drift_spread_per_orbit_m": 0.0
+  },
+  {
+   "kind": "drifting_patch",
+   "attitude": "radial",
+   "orbits": 1,
+   "params": {
+    "depth": 300.0
+   },
+   "tiles": 399,
+   "min_surface_distance_m": 0.0,
+   "at_u_deg": -122.50000000000001,
+   "samples_below_clearance": 266,
+   "service_min_surface_distance_m": 290.6542739640607,
+   "adjacent_row_overlap_min_m": 603.6396770452993,
+   "along_row_overlap_min_m": 1146.540942623058,
+   "semi_major_axis_spread_m": 600.0,
+   "drift_spread_per_orbit_m": 5654.8667764616275
+  },
+  {
+   "kind": "drifting_patch",
+   "attitude": "radial",
+   "orbits": 1,
+   "params": {
+    "depth": 1000.0
+   },
+   "tiles": 399,
+   "min_surface_distance_m": 0.0,
+   "at_u_deg": -122.50000000000001,
+   "samples_below_clearance": 266,
+   "service_min_surface_distance_m": 296.64572197125773,
+   "adjacent_row_overlap_min_m": 603.6396770452993,
+   "along_row_overlap_min_m": 1146.5409426230653,
+   "semi_major_axis_spread_m": 2000.0,
+   "drift_spread_per_orbit_m": 18849.55592153876
+  },
+  {
+   "kind": "drifting_patch",
+   "attitude": "radial",
+   "orbits": 1,
+   "params": {
+    "depth": 5000.0
+   },
+   "tiles": 399,
+   "min_surface_distance_m": 0.0,
+   "at_u_deg": -122.50000000000001,
+   "samples_below_clearance": 266,
+   "service_min_surface_distance_m": 296.64572197125773,
+   "adjacent_row_overlap_min_m": 603.6396770452993,
+   "along_row_overlap_min_m": 1146.5409426230653,
+   "semi_major_axis_spread_m": 10000.0,
+   "drift_spread_per_orbit_m": 94247.77960769378
+  },
+  {
+   "kind": "equal_energy_patch",
+   "attitude": "sun",
+   "orbits": 1,
+   "params": {
+    "depth": 2000.0
+   },
+   "tiles": 399,
+   "min_surface_distance_m": 1.838754535194725e-14,
+   "at_u_deg": -2.0,
+   "samples_below_clearance": 317,
+   "service_min_surface_distance_m": 41.72410986798283,
+   "adjacent_row_overlap_min_m": 603.6396770452993,
+   "along_row_overlap_min_m": 1146.540942623058,
+   "semi_major_axis_spread_m": 0.0,
+   "drift_spread_per_orbit_m": 0.0
+  },
+  {
+   "kind": "equal_energy_patch",
+   "attitude": "sun",
+   "orbits": 1,
+   "params": {
+    "depth": 5000.0
+   },
+   "tiles": 399,
+   "min_surface_distance_m": 1.838754535194725e-14,
+   "at_u_deg": -2.0,
+   "samples_below_clearance": 34,
+   "service_min_surface_distance_m": 41.72410986798283,
+   "adjacent_row_overlap_min_m": 603.6396770452993,
+   "along_row_overlap_min_m": 1146.5409426230508,
+   "semi_major_axis_spread_m": 0.0,
+   "drift_spread_per_orbit_m": 0.0
+  },
+  {
+   "kind": "ring_bundle",
+   "attitude": "radial",
+   "orbits": 1,
+   "params": {
+    "depth": 200.0,
+    "tilt_deg": 1.0
+   },
+   "tiles": 399,
+   "min_surface_distance_m": 35.175578759118146,
+   "at_u_deg": -180.0,
+   "samples_below_clearance": 721,
+   "service_min_surface_distance_m": 49.56802111996184,
+   "adjacent_row_overlap_min_m": 603.6396770452993,
+   "along_row_overlap_min_m": 1216.7481093229162,
+   "semi_major_axis_spread_m": 3600.0,
+   "drift_spread_per_orbit_m": 33929.20065876977
+  },
+  {
+   "kind": "ring_bundle",
+   "attitude": "radial",
+   "orbits": 1,
+   "params": {
+    "depth": 200.0,
+    "tilt_deg": 2.0
+   },
+   "tiles": 399,
+   "min_surface_distance_m": 58.3409411674345,
+   "at_u_deg": -122.50000000000001,
+   "samples_below_clearance": 721,
+   "service_min_surface_distance_m": 92.19922313183217,
+   "adjacent_row_overlap_min_m": 603.6396770452993,
+   "along_row_overlap_min_m": 1146.5409426230508,
+   "semi_major_axis_spread_m": 3600.0,
+   "drift_spread_per_orbit_m": 33929.20065876977
+  },
+  {
+   "kind": "ring_bundle",
+   "attitude": "radial",
+   "orbits": 1,
+   "params": {
+    "depth": 300.0,
+    "tilt_deg": 1.0
+   },
+   "tiles": 399,
+   "min_surface_distance_m": 126.93609549713214,
+   "at_u_deg": -180.0,
+   "samples_below_clearance": 721,
+   "service_min_surface_distance_m": 148.3454547169096,
+   "adjacent_row_overlap_min_m": 603.6396770452993,
+   "along_row_overlap_min_m": 1216.7481093229162,
+   "semi_major_axis_spread_m": 5400.0,
+   "drift_spread_per_orbit_m": 50893.80098815465
+  },
+  {
+   "kind": "ring_bundle",
+   "attitude": "radial",
+   "orbits": 1,
+   "params": {
+    "depth": 300.0,
+    "tilt_deg": 2.0
+   },
+   "tiles": 399,
+   "min_surface_distance_m": 0.019376063901277277,
+   "at_u_deg": -11.5,
+   "samples_below_clearance": 721,
+   "service_min_surface_distance_m": 0.012031228467324542,
+   "adjacent_row_overlap_min_m": 603.6396770452993,
+   "along_row_overlap_min_m": 1146.5409426230508,
+   "semi_major_axis_spread_m": 5400.0,
+   "drift_spread_per_orbit_m": 50893.80098815465
+  },
+  {
+   "kind": "ring_bundle",
+   "attitude": "radial",
+   "orbits": 1,
+   "params": {
+    "depth": 500.0,
+    "tilt_deg": 1.0
+   },
+   "tiles": 399,
+   "min_surface_distance_m": 148.34545471690947,
+   "at_u_deg": -171.0,
+   "samples_below_clearance": 721,
+   "service_min_surface_distance_m": 148.3454547169096,
+   "adjacent_row_overlap_min_m": 603.6396770452993,
+   "along_row_overlap_min_m": 1216.7481093229162,
+   "semi_major_axis_spread_m": 9000.0,
+   "drift_spread_per_orbit_m": 84823.0016469244
+  },
+  {
+   "kind": "ring_bundle",
+   "attitude": "radial",
+   "orbits": 1,
+   "params": {
+    "depth": 500.0,
+    "tilt_deg": 2.0
+   },
+   "tiles": 399,
+   "min_surface_distance_m": 151.01406654349344,
+   "at_u_deg": -114.00000000000001,
+   "samples_below_clearance": 0,
+   "service_min_surface_distance_m": 192.77094130817434,
+   "adjacent_row_overlap_min_m": 603.6396770452993,
+   "along_row_overlap_min_m": 1146.5409426230508,
+   "semi_major_axis_spread_m": 9000.0,
+   "drift_spread_per_orbit_m": 84823.0016469244
+  },
+  {
+   "kind": "ring_bundle",
+   "attitude": "radial",
+   "orbits": 3,
+   "params": {
+    "depth": 400.0,
+    "tilt_deg": 1.2
+   },
+   "tiles": 399,
+   "min_surface_distance_m": 178.01056900853322,
+   "at_u_deg": 429.5,
+   "samples_below_clearance": 0,
+   "service_min_surface_distance_m": 178.01056900853382,
+   "adjacent_row_overlap_min_m": 603.6396770452993,
+   "along_row_overlap_min_m": 1202.9270217822977,
+   "semi_major_axis_spread_m": 7200.0,
+   "drift_spread_per_orbit_m": 67858.40131753954
+  },
+  {
+   "kind": "ring_bundle",
+   "attitude": "radial",
+   "orbits": 3,
+   "params": {
+    "depth": 450.0,
+    "tilt_deg": 1.5
+   },
+   "tiles": 399,
+   "min_surface_distance_m": 188.230863808418,
+   "at_u_deg": 594.5,
+   "samples_below_clearance": 0,
+   "service_min_surface_distance_m": 220.40296271760846,
+   "adjacent_row_overlap_min_m": 603.6396770452993,
+   "along_row_overlap_min_m": 1181.9885497393607,
+   "semi_major_axis_spread_m": 8100.0,
+   "drift_spread_per_orbit_m": 76340.70148223198
+  },
+  {
+   "kind": "ring_bundle",
+   "attitude": "radial",
+   "orbits": 3,
+   "params": {
+    "depth": 600.0,
+    "tilt_deg": 2.0
+   },
+   "tiles": 399,
+   "min_surface_distance_m": 251.0052634012974,
+   "at_u_deg": 446.0,
+   "samples_below_clearance": 0,
+   "service_min_surface_distance_m": 290.65427396405977,
+   "adjacent_row_overlap_min_m": 603.6396770452993,
+   "along_row_overlap_min_m": 1146.5409426230508,
+   "semi_major_axis_spread_m": 10800.0,
+   "drift_spread_per_orbit_m": 101787.6019763093
+  }
+ ],
+ "ephemeris_ring_bundle": [
+  {
+   "rings": 19,
+   "per_ring": 21,
+   "pitch_m": 8500.0,
+   "radius_step_m": 450.0,
+   "tilt_deg": 1.5,
+   "time_shifted_rings": false,
+   "attitude": "common",
+   "hours": 93.0,
+   "samples": 1489,
+   "start_u_deg": -22.501385345822694,
+   "centre_slot_offset_m": 0.0,
+   "min_surface_distance_m": 0.0015974886255821098,
+   "at_hour": 13.3125,
+   "samples_below_clearance": 979,
+   "final_radius_range_km": [
+    15007.82488289505,
+    15019.709411955664
+   ]
+  },
+  {
+   "rings": 19,
+   "per_ring": 21,
+   "pitch_m": 8500.0,
+   "radius_step_m": 450.0,
+   "tilt_deg": 1.5,
+   "time_shifted_rings": true,
+   "attitude": "common",
+   "hours": 93.0,
+   "samples": 1489,
+   "start_u_deg": -22.501385345822694,
+   "centre_slot_offset_m": 0.0,
+   "min_surface_distance_m": 0.43456947782439653,
+   "at_hour": 61.1875,
+   "samples_below_clearance": 878,
+   "final_radius_range_km": [
+    15007.682400020502,
+    15019.851285605913
+   ]
+  },
+  {
+   "rings": 19,
+   "per_ring": 21,
+   "pitch_m": 8500.0,
+   "radius_step_m": 600.0,
+   "tilt_deg": 2.0,
+   "time_shifted_rings": true,
+   "attitude": "common",
+   "hours": 93.0,
+   "samples": 1489,
+   "start_u_deg": -22.501385345822694,
+   "centre_slot_offset_m": 0.0,
+   "min_surface_distance_m": 65.05292463086785,
+   "at_hour": 61.1875,
+   "samples_below_clearance": 308,
+   "final_radius_range_km": [
+    15005.99844614522,
+    15021.539850438574
+   ]
+  },
+  {
+   "rings": 19,
+   "per_ring": 21,
+   "pitch_m": 8500.0,
+   "radius_step_m": 600.0,
+   "tilt_deg": 1.5,
+   "time_shifted_rings": true,
+   "attitude": "own",
+   "hours": 93.0,
+   "samples": 1489,
+   "start_u_deg": -22.501385345822694,
+   "centre_slot_offset_m": 0.0,
+   "min_surface_distance_m": 215.44689267891806,
+   "at_hour": 90.5,
+   "samples_below_clearance": 0,
+   "final_radius_range_km": [
+    15005.99844614522,
+    15021.539850438574
+   ]
+  },
+  {
+   "rings": 19,
+   "per_ring": 21,
+   "pitch_m": 8500.0,
+   "radius_step_m": 800.0,
+   "tilt_deg": 1.2,
+   "time_shifted_rings": true,
+   "attitude": "own",
+   "hours": 93.0,
+   "samples": 1489,
+   "start_u_deg": -22.501385345822694,
+   "centre_slot_offset_m": 0.0,
+   "min_surface_distance_m": 170.66635455456628,
+   "at_hour": 90.625,
+   "samples_below_clearance": 0,
+   "final_radius_range_km": [
+    15003.75379614201,
+    15023.791826959405
+   ]
+  },
+  {
+   "rings": 19,
+   "per_ring": 21,
+   "pitch_m": 8500.0,
+   "radius_step_m": 800.0,
+   "tilt_deg": 1.5,
+   "time_shifted_rings": true,
+   "attitude": "own",
+   "hours": 93.0,
+   "samples": 1489,
+   "start_u_deg": -22.501385345822694,
+   "centre_slot_offset_m": 0.0,
+   "min_surface_distance_m": 215.44211900508344,
+   "at_hour": 90.5,
+   "samples_below_clearance": 0,
+   "final_radius_range_km": [
+    15003.75379614201,
+    15023.791826959405
+   ]
+  },
+  {
+   "rings": 19,
+   "per_ring": 21,
+   "pitch_m": 8500.0,
+   "radius_step_m": 1000.0,
+   "tilt_deg": 1.5,
+   "time_shifted_rings": true,
+   "attitude": "own",
+   "hours": 93.0,
+   "samples": 1489,
+   "start_u_deg": -22.501385345822694,
+   "centre_slot_offset_m": 0.0,
+   "min_surface_distance_m": 215.4374837711713,
+   "at_hour": 90.5,
+   "samples_below_clearance": 0,
+   "final_radius_range_km": [
+    15001.509863059644,
+    15026.044433528306
+   ]
+  }
+ ],
+ "ephemeris_evidence": "Gravity-only replay with the compact DE440 samples from the seed epoch, 93 hours sampled every 3.75 minutes. Rings start on circles about the Moon; with time_shifted_rings each ring is time-shifted copies of its centre trajectory, shifted both ways from the epoch so the middle tile starts on the centre. attitude common uses the bundle centroid frame; own gives each tile its own velocity-referenced radial-facing frame, with pair distances in the pair mean frame. Sail force and mutual shadows are absent.",
+ "cpu_s": 24.086724481
+}

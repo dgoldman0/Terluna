@@ -1,0 +1,190 @@
+{
+ "schema": "terluna.research.photon-control/1",
+ "producer": {
+  "files": {
+   "research/studies/solar_shield_array/photon_control.py": "6eb4a64bf12d20dc4a39a9f92f46dde6e615b13250feaf9a4af9de7f69ccdcbe",
+   "protection/dynamics/tile_torque.py": "448a9ee6db481c18252196045cc53ad48733aacb9f8fc2620db8eae10acd6cbf",
+   "research/studies/solar_shield_array/ring_keeping_run.py": "b9f3809148de21769bde3b7ab72fe7dff62ac9f6635aed3a2a51fc6639a7546c",
+   "protection/dynamics/ring_keeping.py": "896efabc6f6dae22f450885f83d7ae1a79317b00b1fa0c842fe79eb687bf3089",
+   "research/studies/solar_shield_array/ring_bundle_run.py": "f6b7e6a11513d852ab46d84123a3ca702feb9cf6e060da7b381bc997808b984d",
+   "protection/dynamics/ring_bundle.py": "05543a75524dd0d3c9cbbb6aa0dc0b02d8d5a0d156c943b6d794184f3ecfb98d",
+   "protection/dynamics/eclipse_parallel.py": "ff258fe914b92e8e954b2728739b4994c4c2ba0962a18fbee42b5b1600331557",
+   "protection/dynamics/eclipse_parallel.cpp": "dd5c9a7ee554e434e7c617daf35d89b186528e903fe208f2f71c97a53f5e5ebe",
+   "protection/dynamics/fast_parallel.py": "5033fef27ed6f0653e9b227da20b4e0fde910449a8231dfa6a03434e1af0d3a7",
+   "protection/dynamics/fast_parallel.cpp": "a7d4268bc37cbfbbe04ecd388cb1926eaddc9c449ec11f153cf88b13c8360c4e",
+   "protection/dynamics/natural_pattern.py": "780c2679f13c097c07b89e9d7cce1c91399f464f01b4bd878fb50cb643e1be29",
+   "protection/dynamics/cycling.py": "704fbd03c9d4070ea05bdfeba57914ec225941f3560710da2472bd24ca870ed4",
+   "protection/dynamics/ephemeris.py": "9a162c3acf63a844284eb61b444a7d34f1447b5182d254d3e87616516f8748d9",
+   "protection/dynamics/relative_orbit.py": "b73a50b4b5137ef0d69b65e44097e32f26abb1372d89104fb979a7f876034565"
+  },
+  "constants": {
+   "AU": 149597870700.0,
+   "EARTH_GM": 398600441800000.0,
+   "EARTH_MOON_DISTANCE": 384400000.0,
+   "EARTH_OBLIQUITY_DEG": 23.4393,
+   "EARTH_RADIUS": 6371000.0,
+   "JULIAN_DAY": 86400.0,
+   "MOON_GM": 4902800118000.0,
+   "MOON_RADIUS": 1737400.0,
+   "SOLAR_CONSTANT": 1361.0,
+   "SOLAR_SYSTEM_GM": {
+    "mercury": 22031868551000.0,
+    "venus": 324858592000000.0,
+    "mars": 42828375816000.0,
+    "jupiter": 1.267127641e+17,
+    "saturn": 3.79405848418e+16,
+    "uranus": 5794556400000000.0,
+    "neptune": 6836527100580000.0,
+    "pluto": 975500000000.0
+   },
+   "SPEED_OF_LIGHT": 299792458.0,
+   "SUN_GM": 1.3271244004127942e+20,
+   "SUN_RADIUS": 695700000.0
+  },
+  "inputs": {
+   "results/ring_keeping.json": "28bb4c2c662c644dba015d24ecef5747589ce1758078c455124db0d3b3cdfb37",
+   "results/joint_seed.json": "53060741b22d7a1768e6661899e98db9f48ceec966e8cc052b3ff2ab0bfedcf8",
+   "de440s.bsp": "c1c7feeab882263fc493a9d5a5b2ddd71b54826cdf65d8d17a76126b260a49f2"
+  }
+ },
+ "evidence": "The twelve kept orbits of ring_keeping_run (run key in kept_run_key), every second five-minute sample. Translation: the keeping law's acceleration on each representative against the reach of a specular sail force on the tile's clear area, its lit fraction behind the bundle's shadows, with the normal tilted up to the stated angle in 24 azimuths and the redirected band trimmed by up to the stated fraction. Attitude: radiation torque from the visible area's first moments (8 solar points) and gravity-gradient torque from a 3x3 quadrature of the tile, in the bundle's common frame; trim torque is the stated fraction of the band's pressure on half the clear square at a quarter-side lever.",
+ "reading_rule": "Translation is feasible where the instant share is near one; where the reach summed over the orbit exceeds the demand, a schedule that moves the shortfall to lit phases can deliver it. Attitude is held by trim alone where the stored momentum stays small; the store is what a wheel or a moving mass must hold. The kept run's tiles carry 62.7 g/m2; lighter tiles gain sail reach and lose gravity torque in proportion.",
+ "design": {
+  "every": 2,
+  "tilt_levels": [
+   [
+    1.0,
+    0.1
+   ],
+   [
+    2.0,
+    0.25
+   ],
+   [
+    5.0,
+    0.25
+   ]
+  ],
+  "azimuths": 24,
+  "trim_levels": [
+   0.1,
+   0.25
+  ],
+  "unload_s": 3600.0,
+  "areal_masses_kg_m2": [
+   0.005,
+   0.026
+  ],
+  "suns": 8,
+  "rotation": 0.317
+ },
+ "kept_run_key": "e48af25669c9186f",
+ "period_h": 45.78826097966512,
+ "tile_areal_mass_kg_m2": 0.06269524894894321,
+ "samples": 3301,
+ "sail_acceleration_normal_incidence_m_s2": 1.954101825286502e-05,
+ "demand": {
+  "peak_m_s2": 5.66183317047925e-06,
+  "median_m_s2": 5.433163187659233e-07,
+  "lit_fraction_median": 0.5721918085657413,
+  "sunlit_share": 0.9640681275034502
+ },
+ "translation": {
+  "1_deg_0.1": {
+   "interior": {
+    "demand_m_s": 19.285440107375944,
+    "instant_share": 0.4365032873920938,
+    "reach_over_demand": 0.6701824542011107
+   },
+   "edges": {
+    "demand_m_s": 6.093964288675952,
+    "instant_share": 0.3462012295171719,
+    "reach_over_demand": 0.3798300412342725
+   }
+  },
+  "2_deg_0.25": {
+   "interior": {
+    "demand_m_s": 19.285440107375944,
+    "instant_share": 0.6250426707233531,
+    "reach_over_demand": 1.5828633078401702
+   },
+   "edges": {
+    "demand_m_s": 6.093964288675952,
+    "instant_share": 0.6333244541289706,
+    "reach_over_demand": 0.8890498700181277
+   }
+  },
+  "5_deg_0.25": {
+   "interior": {
+    "demand_m_s": 19.285440107375944,
+    "instant_share": 0.7022388175967771,
+    "reach_over_demand": 2.128942302594364
+   },
+   "edges": {
+    "demand_m_s": 6.093964288675952,
+    "instant_share": 0.7270118253820868,
+    "reach_over_demand": 1.1253272030835948
+   }
+  }
+ },
+ "first_tilt_level_that_reaches": {
+  "1_deg_0.1": 0.29644215557575143,
+  "2_deg_0.25": 0.2138577535426975,
+  "5_deg_0.25": 0.09603150560436231,
+  "beyond": 0.39366858527718873
+ },
+ "attitude": {
+  "radiation_torque_N_m_median": 51519.2047058467,
+  "radiation_torque_N_m_95": 89226.83472005812,
+  "gravity_torque_N_m_median": 6089.000415202861,
+  "by_axis": {
+   "roll_about_along_track": {
+    "radiation_rms_N_m": 41396.21832089332,
+    "radiation_orbit_mean_N_m_median": 2424.910196526849,
+    "gravity_mean_N_m": -4.085967760619014
+   },
+   "pitch_about_orbit_normal": {
+    "radiation_rms_N_m": 37603.42861097524,
+    "radiation_orbit_mean_N_m_median": 27559.56112294445,
+    "gravity_mean_N_m": -5859.600822129208
+   }
+  },
+  "pressure_centre_offset_m": {
+   "median": 1251.7093936532888,
+   "p95": 3119.8105736099765,
+   "max": 4942.883555138665
+  },
+  "trim_needed_lit_median": 1.281848344231757,
+  "trim_needed_lit_95": 46.79928892500194,
+  "by_trim": {
+   "trim_0.1": {
+    "momentum_store_N_m_s_max": 37955137214.00843,
+    "momentum_store_N_m_s_median": 27630119124.39776
+   },
+   "trim_0.25": {
+    "momentum_store_N_m_s_max": 23999029373.587223,
+    "momentum_store_N_m_s_median": 16460895939.670397
+   }
+  },
+  "by_areal_mass": {
+   "5_g_m2": {
+    "gravity_torque_N_m_median": 485.60301755572647,
+    "trim_needed_lit_median": 1.2310700948953397,
+    "trim_needed_lit_95": 5.092140661744387,
+    "sail_reach_factor": 12.539049789788642
+   },
+   "26_g_m2": {
+    "gravity_torque_N_m_median": 2525.1356912897772,
+    "trim_needed_lit_median": 1.2672187976231566,
+    "trim_needed_lit_95": 19.051011658771948,
+    "sail_reach_factor": 2.4113557288055083
+   }
+  }
+ },
+ "resources": {
+  "cpu_s": 137.55288429499998,
+  "wall_s": 137.6986722300062,
+  "max_rss_MiB": 176.12890625,
+  "numerical_threads": 1
+ }
+}

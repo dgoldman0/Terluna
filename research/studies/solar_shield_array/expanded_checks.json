@@ -1,0 +1,141 @@
+{
+  "schema": "terluna.expanded-cycle-checks/1",
+  "early_checkpoint": "f22a9f6f1382a0601a64c8d76b05a9236ea7dfb5",
+  "numerical_cpu_s": 1812.6074103180001,
+  "numerical_cpu_limit_s": 1800,
+  "numerical_overrun_s": 12.60741031800012,
+  "max_recorded_rss_MiB": 386.12109375,
+  "raw_MiB": 290.33702182769775,
+  "artifact_export_cpu_s": [
+    4.471275843,
+    3.586296598
+  ],
+  "unchanged_pinned_requirements": [
+    {
+      "path": "shared/constants.json",
+      "sha256": "2fb0032c8c37794a31a491b5c4f890178e295ee1fc9fe8c91d9c8cc636f85576",
+      "unchanged": true
+    },
+    {
+      "path": "research/studies/solar_shield_array/scenario.json",
+      "sha256": "a53b784941518b6e36ccdf728252cf6c8e0c46c1126b6c621ed4e28c23128699",
+      "unchanged": true
+    },
+    {
+      "path": "protection/spectra/stack_short_wave.json",
+      "sha256": "82b094f9724caf9fd68e9cde60fcae4f4eec2d5645b38d452eaa10fc7033e96f",
+      "unchanged": true
+    },
+    {
+      "path": "protection/transmission/results/uv_transmission.json",
+      "sha256": "6589385e2665ade4409cfc529f9fef62f932fa75e9a3b2693bc63a0e13d9ec9f",
+      "unchanged": true
+    }
+  ],
+  "early_make_check": "Layer check passed; pytest unavailable in fresh environment; dependency restored before final check.",
+  "final_make_check": {
+    "exit_code": 2,
+    "python_passed": 760,
+    "python_skipped": 55,
+    "python_failed": 13,
+    "pytest_elapsed_s": 39.88,
+    "layer_files_checked": 620,
+    "layer_violations": 0,
+    "failed_tests": [
+      "atmosphere/tests/test_absorption.py::test_ion_production_falls_with_the_shadow_and_ends_at_the_outer_radius",
+      "atmosphere/tests/test_absorption.py::test_ionization_rate_is_of_the_tabulated_order",
+      "atmosphere/tests/test_absorption.py::test_design_case_needs_a_radius_just_under_the_exobase",
+      "atmosphere/tests/test_exosphere.py::test_dissociation_rates_agree_with_heays",
+      "atmosphere/tests/test_exosphere.py::test_ions_made_match_the_absorption_step",
+      "atmosphere/tests/test_exosphere.py::test_charge_exchange_thin_limit_counts_the_swept_exosphere",
+      "atmosphere/tests/test_exosphere.py::test_magnetosphere_accounts_for_every_ion_and_a_stronger_one_keeps_more",
+      "atmosphere/tests/test_exosphere.py::test_levels_are_ordered_and_wider_shadows_never_lose_more",
+      "climate/tests/test_cm1_run.py::test_the_terrain_build_forces_each_column_at_its_own_height",
+      "climate/tests/test_exoplasim_run.py::RunnerTests::test_process_lookup_finds_this_process",
+      "climate/tests/test_ring_comfort.py::test_hours_are_shares_of_the_lunar_day",
+      "climate/tests/test_ring_comfort.py::test_the_rings_land_is_pooled_by_latitude_and_height_and_counted_in_shares",
+      "research/studies/protection_architecture/test_run.py::test_design_point_holds_together"
+    ],
+    "failures_match_preexisting_checkpoint": true,
+    "log_sha256": "5ddd89f11cf3f92110f7b2231b56950fcc846b1ce2174b8755e46e87f71fe5f4",
+    "later_makefile_targets_reached": false,
+    "ignored_runs_restored": true
+  },
+  "package_verification": {
+    "original_research_runs_temporarily_absent": true,
+    "portable_inspect_exit_code": 0,
+    "representative_replay_s": 360.0,
+    "fresh_run_directory": true,
+    "new_tests_passed": 6,
+    "source_reversal_patch_check_passed": true,
+    "smoke_command": "python -m research.studies.solar_shield_array.expanded_run replay --run-dir /tmp/terluna-cycle-smoke --candidate research/studies/solar_shield_array/local_continuation/last_trial.json --case smoke --end-hour 6.1 --cpu-budget 60",
+    "history_parts_reassembled_byte_identical": true,
+    "history_shapes": {
+      "t": [
+        829
+      ],
+      "power_W": [
+        829,
+        361
+      ],
+      "attitude_acceleration": [
+        829,
+        361
+      ],
+      "translation": [
+        829,
+        361,
+        3
+      ],
+      "first_intercept_W": [
+        829,
+        361
+      ],
+      "torque_N_m": [
+        829,
+        361,
+        3
+      ]
+    },
+    "post_split_inspect_exit_code": 0
+  },
+  "rejected_check_attempt": {
+    "python_passed": 750,
+    "python_skipped": 64,
+    "python_failed": 14,
+    "pytest_elapsed_s": 41.09,
+    "defect": "save_case default directory was bound before --run-dir changed; corrected and full check repeated"
+  },
+  "results_sha256": "12a07eb73dc05569440c1c79a21ea6eaefff212c871ddac70ce563059b522075",
+  "restart_sha256": "8e73a04bc5619e2556684f61e606e15db59bc8760f411fe8bad4014572133b9c",
+  "accepted_cycle": false,
+  "local_campaign_launched": false,
+  "artifact_repack_cpu_s": 0.6462958979999999,
+  "portability_make_check": {
+    "exit_code": 2,
+    "python_passed": 751,
+    "python_skipped": 64,
+    "python_failed": 13,
+    "pytest_elapsed_s": 40.58,
+    "layer_files_checked": 615,
+    "layer_violations": 0,
+    "failed_tests": [
+      "atmosphere/tests/test_absorption.py::test_ion_production_falls_with_the_shadow_and_ends_at_the_outer_radius",
+      "atmosphere/tests/test_absorption.py::test_ionization_rate_is_of_the_tabulated_order",
+      "atmosphere/tests/test_absorption.py::test_design_case_needs_a_radius_just_under_the_exobase",
+      "atmosphere/tests/test_exosphere.py::test_dissociation_rates_agree_with_heays",
+      "atmosphere/tests/test_exosphere.py::test_ions_made_match_the_absorption_step",
+      "atmosphere/tests/test_exosphere.py::test_charge_exchange_thin_limit_counts_the_swept_exosphere",
+      "atmosphere/tests/test_exosphere.py::test_magnetosphere_accounts_for_every_ion_and_a_stronger_one_keeps_more",
+      "atmosphere/tests/test_exosphere.py::test_levels_are_ordered_and_wider_shadows_never_lose_more",
+      "climate/tests/test_cm1_run.py::test_the_terrain_build_forces_each_column_at_its_own_height",
+      "climate/tests/test_exoplasim_run.py::RunnerTests::test_process_lookup_finds_this_process",
+      "climate/tests/test_ring_comfort.py::test_hours_are_shares_of_the_lunar_day",
+      "climate/tests/test_ring_comfort.py::test_the_rings_land_is_pooled_by_latitude_and_height_and_counted_in_shares",
+      "research/studies/protection_architecture/test_run.py::test_design_point_holds_together"
+    ],
+    "failures_match_preexisting_checkpoint": true,
+    "log_sha256": "6f33c2c385b927d214ac942db8f1a9e480adf2e9bd04bd5b52e1354e2a6f228a",
+    "later_makefile_targets_reached": false
+  }
+}

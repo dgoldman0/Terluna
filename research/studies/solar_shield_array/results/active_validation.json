@@ -1,0 +1,105 @@
+{
+  "schema": "terluna.research.active-control-validation/1",
+  "producer": {
+    "source_hashes": {
+      "protection/dynamics/cycling.py": "704fbd03c9d4070ea05bdfeba57914ec225941f3560710da2472bd24ca870ed4",
+      "protection/dynamics/ephemeris.py": "9a162c3acf63a844284eb61b444a7d34f1447b5182d254d3e87616516f8748d9",
+      "protection/dynamics/ephemeris.json": "90fde7cb6142e5d4d8082270a978ba2f8f47baaefab0e8d1cf82ec6f07a27222",
+      "protection/dynamics/model.py": "01c9191588037ab4f42bac38dc4d5bd99e57427d37fa75cd672120e32b53733a",
+      "protection/dynamics/optical.py": "06a13ae9f24834876edbc12b513deaa5e3735f02f8249eb57c8996d74ce00b56",
+      "research/studies/solar_shield_array/scenario.json": "a53b784941518b6e36ccdf728252cf6c8e0c46c1126b6c621ed4e28c23128699",
+      "research/studies/solar_shield_array/cycling_search.py": "4789a0185620f6662916462b2715aa9002e6454e74f4f32ef5f7dadf5f732093",
+      "research/studies/solar_shield_array/cycling_feedback.py": "0eb32d26e14472f0a512cdf45d60f00ab8260376cd51ca715e7615bf7df02775",
+      "protection/dynamics/fleet.py": "f3e52653876c2956a4b355dc1290a0a1cadd2b9b601cafc664259827df1cc93c",
+      "research/studies/solar_shield_array/fleet_run.py": "9b8bc9765b9288745ea7d4d69d59e857e76e54d29cc91b37160503e9d9090833",
+      "protection/dynamics/active_formation.py": "597c12c6a4a89c0ea70663fddd69b9b5d9e599c88a2bd1742f5009d19e050b7a",
+      "protection/dynamics/active_retime.py": "9ba27a7ec48460a345289ebc7550c502f845487beaec5fe35084a67b2d9d736b",
+      "research/studies/solar_shield_array/active_validate.py": "6a23a54d3ae2a7426cd8b3f9bc39baf6c2d411113d3f9509266cb391dfabca90",
+      "research/studies/solar_shield_array/cycling_analysis.py": "4fe32b4c27af48048db63ae073d99dc10b7897c9f3eaa68c2cd34036618f8fc0"
+    },
+    "constants": {
+      "AU": 149597870700.0,
+      "EARTH_GM": 398600441800000.0,
+      "EARTH_MOON_DISTANCE": 384400000.0,
+      "EARTH_OBLIQUITY_DEG": 23.4393,
+      "EARTH_RADIUS": 6371000.0,
+      "JULIAN_DAY": 86400.0,
+      "JULIAN_YEAR_DAYS": 365.25,
+      "MOON_GM": 4902800118000.0,
+      "MOON_RADIUS": 1737400.0,
+      "SOLAR_CONSTANT": 1361.0,
+      "SOLAR_SYSTEM_GM": {
+        "mercury": 22031868551000.0,
+        "venus": 324858592000000.0,
+        "mars": 42828375816000.0,
+        "jupiter": 1.267127641e+17,
+        "saturn": 3.79405848418e+16,
+        "uranus": 5794556400000000.0,
+        "neptune": 6836527100580000.0,
+        "pluto": 975500000000.0
+      },
+      "SPEED_OF_LIGHT": 299792458.0,
+      "SUN_GM": 1.3271244004127942e+20,
+      "SUN_RADIUS": 695700000.0
+    },
+    "input_products": {
+      "active_formation.json": "26134c430ae9f58e263d643be50ea517a947ff7a6fc2fb970e32d44ea038372b",
+      "active_formation_replay.json": "892d93abb618c2838df760f148a163bcbc2498088de3826e1f831aafd782aa7a",
+      "active_acquisition.json": "818a61d85782b086bc8b63780106a8c14a3f58d29d80208ebe54bcde6ff5cfd3",
+      "active_retime.json": "3973b10136901b56df60035e355ff726eac2da37bc109ab7bd8a08a309c85dd2",
+      "active_gap_scale.json": "f320f4bd0a1728ce46b10bc0d19c2937a6ca0019d005fb531e729e668b3cb898"
+    }
+  },
+  "evidence": "Independent replay comparison, finer solar coverage and finite-extent force residuals; conditional power scaling kept separate from fleet evidence",
+  "formation_max_replay_position_difference_m": 1.8784397702226374e-08,
+  "formation_replay_50m_gate": true,
+  "acquisition_128_sun_coverage": [
+    {
+      "minutes": 50.0,
+      "ray_coverage": 0.9999999999999997,
+      "all_sampled_sun_coverage": 1.0000000000000016,
+      "window_centre_distance_m": 4115091.624686159
+    },
+    {
+      "minutes": 180.0,
+      "ray_coverage": 0.9999999999999999,
+      "all_sampled_sun_coverage": 1.0000000000000018,
+      "window_centre_distance_m": 313822.93412817386
+    }
+  ],
+  "formation_finite_extent_gravity_residuals": [
+    {
+      "hours": 0.0,
+      "maximum_m_s2": 2.1115856845831802e-09
+    },
+    {
+      "hours": 3.0,
+      "maximum_m_s2": 2.4283855963118332e-09
+    },
+    {
+      "hours": 6.0,
+      "maximum_m_s2": 2.0568313051245694e-09
+    }
+  ],
+  "acquisition_mean_delta_v_m_s": 1.6694910141499106,
+  "preset_same_interval_mean_delta_v_m_s": 1.510333720618123,
+  "conditional_inventory_scales": {
+    "aperture_area_m2": 151729312397521.84,
+    "aperture_base_mass_kg": 7586465619876.093,
+    "cases": {
+      "3.0": {
+        "mean_power_if_one_aperture_area_of_mass_performs_this_maneuver_W": 4833860806039.652,
+        "mean_power_if_entire_3072_probe_area_inventory_performs_it_W": 97869160292829.12,
+        "peak_power_hardware_fraction_of_tile_mass": 0.018921000236504244
+      },
+      "7.0": {
+        "mean_power_if_one_aperture_area_of_mass_performs_this_maneuver_W": 2581147736716.136,
+        "mean_power_if_entire_3072_probe_area_inventory_performs_it_W": 52259419896517.484,
+        "peak_power_hardware_fraction_of_tile_mass": 0.025582102652961874
+      }
+    },
+    "reading_rule": "Assumes each stated mass executes one identical maneuver over the stated days. This is not an achieved fleet, an operating duty cycle, available electrical supply or delivered power. No uncovered-area fraction is used to infer moved mass."
+  },
+  "global_coverage_demonstrated": false,
+  "delivered_power_W": null
+}

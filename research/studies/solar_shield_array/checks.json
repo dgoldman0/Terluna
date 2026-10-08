@@ -1,0 +1,1433 @@
+{
+  "schema": "terluna.research.solar-shield-checks/1",
+  "checked_at_utc": "2026-10-04T22:47:14.722591+00:00",
+  "scope": "Numerical implementation, source identity and repository checks",
+  "scientific_validation": false,
+  "base_main_commit": "2f2e0a104a3a1ea962a6dead4179f522762f997e",
+  "design_commit": "c97912d89d9d4cc3f6f45ffe6b013af4e4e59e91",
+  "runtime": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "matplotlib": "3.10.8",
+    "jplephem": "2.24",
+    "pytest": "9.1.1",
+    "calculation_threads": 1,
+    "maximum_concurrent_cycling_propagations": 2,
+    "shapely": "2.1.2"
+  },
+  "study_tests": {
+    "status": "PASS",
+    "command": "python -m pytest protection/dynamics research/studies/solar_shield_array -q",
+    "passed": 35
+  },
+  "numerical_validation": {
+    "status": "PASS",
+    "product": "results/validation.json",
+    "sha256": "a86f07d44598ed02a062b62fb829d2583c88ad24bdb30691996173f1cb02adf1",
+    "checks": [
+      "DE440s checksum",
+      "momentum direction and force envelope",
+      "finite-Sun eclipse and ray geometry",
+      "independent circular limit",
+      "velocity difference convergence",
+      "kernel interpolation",
+      "retarded positions versus exact kernel",
+      "hourly versus ten-minute holding",
+      "96 versus 384 spatial nodes",
+      "feedback and uncontrolled trajectory propagation",
+      "19-year eclipse contacts"
+    ]
+  },
+  "python_repository_tests": {
+    "status": "FAIL_EXISTING",
+    "summary": "13 failed, 580 passed, 55 skipped in 14.30s",
+    "same_failed_tests_before_model_changes": true,
+    "failed_tests": [
+      "atmosphere/tests/test_absorption.py::test_ion_production_falls_with_the_shadow_and_ends_at_the_outer_radius",
+      "atmosphere/tests/test_absorption.py::test_ionization_rate_is_of_the_tabulated_order",
+      "atmosphere/tests/test_absorption.py::test_design_case_needs_a_radius_just_under_the_exobase",
+      "atmosphere/tests/test_exosphere.py::test_dissociation_rates_agree_with_heays",
+      "atmosphere/tests/test_exosphere.py::test_ions_made_match_the_absorption_step",
+      "atmosphere/tests/test_exosphere.py::test_charge_exchange_thin_limit_counts_the_swept_exosphere",
+      "atmosphere/tests/test_exosphere.py::test_magnetosphere_accounts_for_every_ion_and_a_stronger_one_keeps_more",
+      "atmosphere/tests/test_exosphere.py::test_levels_are_ordered_and_wider_shadows_never_lose_more",
+      "climate/tests/test_cm1_run.py::test_the_terrain_build_forces_each_column_at_its_own_height",
+      "climate/tests/test_exoplasim_run.py::RunnerTests::test_process_lookup_finds_this_process",
+      "climate/tests/test_ring_comfort.py::test_hours_are_shares_of_the_lunar_day",
+      "climate/tests/test_ring_comfort.py::test_the_rings_land_is_pooled_by_latitude_and_height_and_counted_in_shares",
+      "research/studies/protection_architecture/test_run.py::test_design_point_holds_together"
+    ],
+    "causes": [
+      "missing pinned WHI solar spectrum",
+      "missing generated moon_gcm_configuration.json",
+      "process-group lookup does not see the test process in this execution environment"
+    ]
+  },
+  "javascript_make_target": {
+    "status": "BLOCKED",
+    "reason": "The Node directory test selector cannot load immersion/tests/unit as a module in this environment"
+  },
+  "javascript_explicit_file_tests": {
+    "status": "INCOMPLETE",
+    "command": "node --test --test-concurrency=1 immersion/tests/unit/*.test.js atmosphere/column/tests/*.test.cjs illumination/references/tests/*.test.cjs visualization/atmospheric-columns/tests/*.test.mjs",
+    "passed": 119,
+    "failed": 5,
+    "cause": "three is not installed in this worktree; related landscape/forest/cache and game-export checks fail"
+  },
+  "layer_check": {
+    "status": "PASS"
+  },
+  "historical_provenance": {
+    "status": "PASS_WITH_BLOCKED_INPUTS",
+    "missing": [
+      "TSIS1_HSRS_stride100.csv",
+      "TiO2_Siefke.yml",
+      "o.nff",
+      "si.nff",
+      "ti.nff",
+      "SiO2_Franta.yml"
+    ],
+    "new_study_uses_its_own_pinned_ephemeris": true
+  },
+  "ensemble_workspace": {
+    "status": "PASS",
+    "scope": "setup integrity"
+  },
+  "figure": {
+    "status": "VISUALLY_REVIEWED",
+    "renderer": "../../../visualization/solar-shield-array/plot.py",
+    "data_product": "results/holding.json",
+    "generated_png_ignored_by_git": true
+  },
+  "publication": {
+    "status": "PUBLISHED_BRANCH",
+    "branch": "research/solar-shield-habitat-array",
+    "remote_design_commit": "c97912d89d9d4cc3f6f45ffe6b013af4e4e59e91",
+    "remote_study_commit": "3af0bc982d972c936cc6d8572ead18b862d88117",
+    "method": "Connected GitHub Git-data API; both remote Git trees exactly match the original local commits; fetched and aligned the local branch",
+    "git_transport_attempt": "Direct push found no configured write credentials",
+    "authorization": "Author explicitly authorized remote publication on 2026-10-04",
+    "preceding_review": "An earlier push was rejected as insufficiently authorized; no publication was performed before the author supplied explicit authorization"
+  },
+  "original_local_design_commit": "4fb7a35c9b57816a16c837b754216474451acf8f",
+  "tacking_followup": {
+    "status": "NUMERICAL_RETURN_AND_BOUNDED_POINT_TILE_CYCLING",
+    "report": "cycling.md",
+    "product": "results/cycling.json",
+    "sha256": "5ee80bb99516007df8fe963ba1d01bf4324c5ce58f5b550d3bcaf25068420b3b",
+    "algebraic_screen": "results/tacking_screen.json",
+    "return_arc_independent_replay": {
+      "status": "PASS",
+      "closure_position_m": 16.391675953549345,
+      "closure_velocity_m_s": 0.00016519372142915765,
+      "electric_thrust_used": false
+    },
+    "long_propagation": {
+      "days": 1095.75,
+      "completed": true,
+      "areal_mass_kg_m2": 0.05,
+      "moon_range_km": [
+        13971.719359938132,
+        16003.073963466382
+      ],
+      "useful_projected_area_fraction": 0.1573659776758925
+    },
+    "convergence": {
+      "maximum_position_difference_m": 5704.58385142391,
+      "final_position_difference_m": 5593.342104484818,
+      "useful_fraction_relative_difference": 1.1302588127204416e-05,
+      "service_quadrature_300_to_120_s_relative_difference": 0.0002769494394134764,
+      "maximum_perturbation_separation_m": 47692.61036928306,
+      "final_perturbation_separation_m": 47087.7700828509,
+      "perturbed_useful_fraction_relative_change": -0.00011248229343208127,
+      "perturbation": "1 m in ICRF x and 1 mm/s in ICRF y at initial epoch",
+      "interpretation": "Bounded orbital response is separate from seam/formation stability; no attitude actuator dynamics were integrated"
+    },
+    "cycling_orbit_solved": "Finite return arc and bounded point-tile service/coast propagation; no stability theorem",
+    "fleet_coverage_demonstrated": false,
+    "practical_attitude_and_formation_control_demonstrated": false,
+    "make_check_repeat": "35 targeted tests pass. Repository-wide 580 Python tests pass, 55 skip, and the same 13 existing failures remain; Node directory-selector blocker remains. Layer check has zero violations; historical provenance and ensemble statuses retain their existing input limitations.",
+    "figure": {
+      "status": "VISUALLY_REVIEWED",
+      "renderer": "../../../visualization/solar-shield-array/cycling_plot.py",
+      "data_product": "results/cycling.json",
+      "generated_png_ignored_by_git": true
+    },
+    "additional_checks": {
+      "published_return_schedule_replay": "PASS",
+      "raw_cache_source_and_config_validation": "PASS",
+      "standalone_historical_provenance": "PASS_WITH_BLOCKED_INPUTS",
+      "standalone_ensemble_setup": "PASS"
+    }
+  },
+  "boolean_integration_repair": {
+    "status": "PASS",
+    "regression": "All-active, all-inactive, mixed plateau and numeric ordinates on nonuniform times; weighted-area versus raw-time invariant",
+    "annual_inner_raw_service_fraction_before": 0.08003935660506502,
+    "annual_inner_raw_service_fraction_after": 0.15823446649935358,
+    "raw_traces": "Reused only after source, constant, configuration and SHA-256 validation",
+    "affected_diagnostics_regenerated": 7,
+    "weighted_area_and_inventory_unchanged": true,
+    "study_tests_passed": 41,
+    "make_check": "13 existing failures, 585 passed, 55 skipped; collected before the final product-invariant regression was added",
+    "full_suite_later_targets": "make stops at the existing Python failures; earlier JavaScript and provenance statuses above belong to the preceding checkpoint"
+  },
+  "fleet_checkpoint": {
+    "status": "PILOT_COMPLETE_COVERAGE_UNACHIEVED",
+    "study_tests_passed": 49,
+    "make_check": "13 existing failures, 594 passed, 55 skipped",
+    "product": "results/fleet_checkpoint.json",
+    "report": "fleet.md",
+    "raw_trajectories": "576 distinct members in each of two populations; common epoch; 30 days",
+    "coverage": "Finite squares, 16 solar directions, six-hour dates; full-Sun area zero",
+    "collisions": "Conservative swept guards every 600 seconds; incompatible complete trajectories removed",
+    "beam_safety": "Earth and Moon exclusion cones including finite Sun, corners, motion and pointing allowance",
+    "collector_habitat_power": "Not included"
+  },
+  "fleet_expansion": {
+    "status": "PAUSED_BY_AUTHOR_CONTINUOUS_COVERAGE_UNACHIEVED",
+    "paused_at_author_request": "2026-10-04",
+    "study_tests": {
+      "command": "python -m pytest protection/dynamics research/studies/solar_shield_array -q",
+      "passed": 53,
+      "status": "PASS"
+    },
+    "make_check": {
+      "status": "FAIL_EXISTING",
+      "summary": "13 failed, 598 passed, 55 skipped in 14.02s",
+      "same_failed_tests_as_preceding_checkpoints": true,
+      "layer_check": "PASS",
+      "later_targets": "Not reached: make stops at the Python failures; earlier JavaScript/provenance entries retain their historical scope"
+    },
+    "populations": "Five completed simultaneous 30-day populations; one rejected by radial guard",
+    "products": {
+      "results/fleet_checkpoint.json": "2bb8f89b03b3d97ccd181c8d527d35871ccd1d86101c564f01ccffdee887978e",
+      "results/fleet_control_budget.json": "96dfbfa58417d2a363721949767ec042668b694314dbe4e64a86f73c3fc293bb",
+      "results/fleet_dense.json": "13ac18cacaee6842a69d5ca11add51dd4b3e356253fe48a437ff8541d016e749",
+      "results/fleet_dense_double.json": "b62a1fe5ecd0580e763ce0750583f7bddde05baec57794c0f550e86c0974223e",
+      "results/fleet_families.json": "e4ca571959d0a2273e1fccb4383f801c08ad03e8c98fb3bb3a46a158835e86b8",
+      "results/fleet_handover.json": "8e1353143e758783b17a5a346f552aa2650106dc485633a83a0cdf9a179c844d",
+      "results/fleet_refinement.json": "d86d2240a6b20d66aceec30886273db58c09ba0e20203708a5ba16bb74aa79f9",
+      "results/fleet_validation.json": "c9d4a238831a119589573c9ecb6561cb355c3d98e323fbe74cbd4a3f25ea7432"
+    },
+    "coverage": "Finite-square shadow unions on the solar disk; six-hour main samples, three-hour refinement, one-minute local audit; three- and four-lunar-radius comparisons",
+    "constraints": "Swept collision and possible-mutual-shadow guards every 600 s; positive sampled Earth/Moon reflected-cone margins; no slew-limited actuator propagation",
+    "vectorized_exclusions": "PASS: pair identity and minimum-distance parity with reference guard implementation",
+    "placement_gate": {
+      "status": "FAIL",
+      "independent_phase_replay_max_position_difference_m": 898.2967468438126,
+      "allowance_m": 50.0,
+      "interpretation": "Does not establish physical seam or collision-clearance control"
+    },
+    "large_square_force_gate": "Omitted finite-extent gravity is comparable to available photon acceleration; large squares remain geometric probes",
+    "delivered_power_W": null,
+    "collector_habitat_loads": "Not included in demonstrated coverage or control results",
+    "figure": {
+      "renderer": "../../../visualization/solar-shield-array/fleet_plot.py",
+      "status": "VISUALLY_REVIEWED",
+      "reads_saved_products_only": true,
+      "generated_output_ignored_by_git": true
+    },
+    "report": "fleet.md",
+    "repair_checkpoint": "218237465f9b2caaf7659a245ee71f0a2896eaef",
+    "pilot_checkpoint": "93b8ef29a31fb1d9c6ac1a66b9dfbf4a7ade3959"
+  },
+  "active_assistance": {
+    "status": "LOCAL_GAP_ACQUISITION_AND_INDIVIDUAL_TRANSFERS_GLOBAL_FLEET_UNRESOLVED",
+    "report": "active.md",
+    "study_tests": {
+      "status": "PASS",
+      "passed": 62,
+      "command": "python -m pytest protection/dynamics research/studies/solar_shield_array -q"
+    },
+    "make_check": {
+      "status": "FAIL_EXISTING",
+      "summary": "13 failed, 607 passed, 55 skipped in 14.75s",
+      "same_failed_tests_as_prior_checkpoints": true,
+      "layer_check": "PASS",
+      "later_targets": "Not reached after Python failures; earlier JavaScript/provenance entries retain their historical scope"
+    },
+    "products": {
+      "results/active_acquisition.json": "818a61d85782b086bc8b63780106a8c14a3f58d29d80208ebe54bcde6ff5cfd3",
+      "results/active_formation.json": "26134c430ae9f58e263d643be50ea517a947ff7a6fc2fb970e32d44ea038372b",
+      "results/active_formation_replay.json": "892d93abb618c2838df760f148a163bcbc2498088de3826e1f831aafd782aa7a",
+      "results/active_gap_scale.json": "f320f4bd0a1728ce46b10bc0d19c2937a6ca0019d005fb531e729e668b3cb898",
+      "results/active_retime.json": "3973b10136901b56df60035e355ff726eac2da37bc109ab7bd8a08a309c85dd2",
+      "results/active_search.json": "db743cdbd78f95911b065d79b846e1da3b706507032e6f5759d40367612ce8bb",
+      "results/active_validation.json": "ba415eebe3305b825ea83ce7bc944742dc2fbef0a84375f1a1314398d497cad1"
+    },
+    "local_formation": {
+      "tiles": 625,
+      "tile_side_m": 10000,
+      "moving_receiver_diameter_m": 100000,
+      "six_hour_maintenance_complete": true,
+      "possible_collision_pairs": 0,
+      "ideal_feedback_assumes_exact_modelled_forces_and_states": true
+    },
+    "local_gap_acquisition": {
+      "initial_ray_coverage_32_sun": 0.9432525254549238,
+      "first_full_sample_minutes": 50,
+      "solar_refinement": "128 directions confirm full sampled coverage at 50 and 180 minutes; initially perforated full-Sun area is not claimed converged",
+      "first_50m_tracking_sample_minutes": 61,
+      "possible_collision_pairs": 0
+    },
+    "orbital_retiming": {
+      "requested_arc_km": 1400,
+      "three_day_delta_v_m_s": 5.449810819327299,
+      "seven_day_delta_v_m_s": 6.79011194735787,
+      "independent_arrival_errors_m": [
+        0.33826800735318896,
+        0.019835417485656984
+      ],
+      "finite_extent_gravity_included": true,
+      "energy_optimality_claimed": false,
+      "initial_failed_two_arc_shooting_preserved": true
+    },
+    "coverage_scope": "Simultaneous local finite-tile coverage and individual transfers; no global assignment, continuous coverage certificate or recurring return schedule",
+    "collector_habitat_loads": "Separate, not included",
+    "delivered_power_W": null,
+    "figure": {
+      "status": "VISUALLY_REVIEWED",
+      "renderer": "../../../visualization/solar-shield-array/active_plot.py",
+      "reads_saved_products_only": true,
+      "generated_image_ignored_by_git": true
+    },
+    "preceding_checkpoint": "a2574b4609d4d3d9ec12928d5a09f8b7bdf6ba8a"
+  },
+  "active_global_checkpoint": {
+    "date": "2026-10-05",
+    "status": "RIGID_SCHEDULE_REJECTED_NATURAL_RELEASE_FAILS_OPERATING_CONSTRAINTS",
+    "report": "active_global.md",
+    "preceding_checkpoint": "02ab90aad304479796c47e7a2fca97faf06fa08d",
+    "study_tests": {
+      "status": "PASS",
+      "passed": 72,
+      "command": "python -m pytest protection/dynamics research/studies/solar_shield_array -q"
+    },
+    "make_check": {
+      "status": "FAIL_EXISTING",
+      "summary": "13 failed, 617 passed, 55 skipped in 16.14s",
+      "same_failed_tests_as_preceding_checkpoint": true,
+      "layer_check": "PASS: 450 files, zero violations",
+      "later_targets": "Not reached after Python failures; earlier JavaScript/provenance entries retain their historical scope"
+    },
+    "products": {
+      "results/active_global_rejected.json": "bbe327b0f9d068741370e9dbb7105313b52e01513584f411e80f828069b3ccfd",
+      "results/natural_traffic.json": "4f4dc83893540ee41f35f2ae3541f4325b2ff6ec569f973713eb9d9476e38dab",
+      "results/natural_collision_replay.json": "ed53dd9c6d45b4b7f823a8e8cf966485387a43b55bc11d345769bae788be2765"
+    },
+    "prescribed_schedule": {
+      "inventory": 38652166,
+      "tile_side_m": 10000,
+      "mean_power_bounds_TW": [
+        1480.4031759773775,
+        1520.1982683384952
+      ],
+      "accepted_low_energy_solution": false,
+      "completed_global_ray_dates": 26,
+      "last_global_ray_day": 12.5,
+      "completed_focused_handover_windows": 6,
+      "full_month_census_and_feedback": "Not performed"
+    },
+    "natural_release": {
+      "geometry_horizon_days": 3,
+      "independent_members": 143,
+      "maximum_checked_position_difference_through_day3_m": 15.602406327311035,
+      "seven_day_interpolation_gate": "FAIL: 1127.398325575348 m",
+      "day3_ray_coverage": 0.771392822265625,
+      "day3_all_eight_sampled_sun_receiver_fraction": 0.317626953125,
+      "independently_confirmed_intersections": 16,
+      "photon_cancellation_only_mean_upper_TW": 68.52496281987837,
+      "total_operating_power": "Unknown: gap repair, collision avoidance and recovery are not implemented"
+    },
+    "continuous_coverage_certified": false,
+    "bounded_slew_earth_safe_attitudes_demonstrated": false,
+    "collector_habitat_loads": "Separate, not included",
+    "delivered_power_W": null,
+    "publication_target": "research/solar-shield-habitat-array; no merge to main"
+  },
+  "coverage_pilot": {
+    "checked_at_utc": "2026-10-05T00:47:51.615047+00:00",
+    "status": "CAPACITY_AND_CONDITIONAL_COST_CHECKPOINT_FLEET_UNACCEPTED",
+    "early_remote_checkpoint": "89eca3edeaec8e7fa49a97c191f0e4b9eb97abf3",
+    "starting_remote_head": "fe5aac4cf3d141ee5aa99e65f71c4759b45d5a01",
+    "report": "pilot.md",
+    "products": {
+      "results/pilot_24.json": "5443303152afb1b91d2c0af22a9ad14efbbbfa33eb1076a6f4707f8fee2fa2ff",
+      "results/pilot_48.json": "95437244e82c055aab693c56121ccd86344b6e5d7a63231e757dfc2662584c59",
+      "results/pilot_budget.json": "2449ccb3b550e5a5ec25652040b6bc0307ea38fbd76e617b8841e333ba79e77b",
+      "results/pilot_validation.json": "5d9f09562e541576784f9d21d16f830f589140394a03d57f75fb14e54bf89961"
+    },
+    "study_tests": {
+      "passed": 79,
+      "status": "PASS",
+      "command": "python -m pytest protection/dynamics research/studies/solar_shield_array -q",
+      "final_verification": "All 79 are also included in the final make check after the tile-local optical-roll consistency update"
+    },
+    "make_check": {
+      "status": "FAIL_EXISTING",
+      "summary": "13 failed, 624 passed, 55 skipped in 15.70s",
+      "same_failures_as_starting_head": true,
+      "failed_tests": [
+        "atmosphere/tests/test_absorption.py::test_ion_production_falls_with_the_shadow_and_ends_at_the_outer_radius",
+        "atmosphere/tests/test_absorption.py::test_ionization_rate_is_of_the_tabulated_order",
+        "atmosphere/tests/test_absorption.py::test_design_case_needs_a_radius_just_under_the_exobase",
+        "atmosphere/tests/test_exosphere.py::test_dissociation_rates_agree_with_heays",
+        "atmosphere/tests/test_exosphere.py::test_ions_made_match_the_absorption_step",
+        "atmosphere/tests/test_exosphere.py::test_charge_exchange_thin_limit_counts_the_swept_exosphere",
+        "atmosphere/tests/test_exosphere.py::test_magnetosphere_accounts_for_every_ion_and_a_stronger_one_keeps_more",
+        "atmosphere/tests/test_exosphere.py::test_levels_are_ordered_and_wider_shadows_never_lose_more",
+        "climate/tests/test_cm1_run.py::test_the_terrain_build_forces_each_column_at_its_own_height",
+        "climate/tests/test_exoplasim_run.py::RunnerTests::test_process_lookup_finds_this_process",
+        "climate/tests/test_ring_comfort.py::test_hours_are_shares_of_the_lunar_day",
+        "climate/tests/test_ring_comfort.py::test_the_rings_land_is_pooled_by_latitude_and_height_and_counted_in_shares",
+        "research/studies/protection_architecture/test_run.py::test_design_point_holds_together"
+      ],
+      "layer_check": "check_layers: 450 files checked, 0 violations",
+      "later_targets": "Not reached after Python failures; existing JavaScript/provenance/ensemble entries retain their historical scope"
+    },
+    "runtime": {
+      "python": "3.12.14",
+      "numpy": "2.3.5",
+      "scipy": "1.17.0",
+      "shapely": "2.1.2",
+      "jplephem": "2.24",
+      "calculation_processes": 1,
+      "blas_openmp_threads": 1
+    },
+    "kernel": {
+      "bytes": 32726016,
+      "sha256": "c1c7feeab882263fc493a9d5a5b2ddd71b54826cdf65d8d17a76126b260a49f2",
+      "verified_on_load": true
+    },
+    "executed": {
+      "library_ivps": 3888,
+      "phase_grids": [
+        24,
+        48
+      ],
+      "common_epoch_tdb": "2026-10-04",
+      "days": 3,
+      "families": 54,
+      "phase_population_columns": 216,
+      "refined_capacity_rows": 3432,
+      "fine_library_max_rss_MiB": 600.0859375,
+      "numerical_wall_minutes_approx": 10.3,
+      "final_independent_replay_members": 12,
+      "distinct_members_across_four_replays": 17,
+      "max_replay_position_difference_m": 5.081966693806152,
+      "max_selected_10_second_square_rate_deg_s": 0.12096289615382358,
+      "rate_cap_deg_s": 0.1,
+      "possible_swept_pair_conflicts": 264,
+      "possible_swept_shadow_pairs": 38812
+    },
+    "not_executed": [
+      "Targeted new-plane generation branch",
+      "Individual realization of fractional populations",
+      "Coupled mutual-shadow force propagation",
+      "Constrained electric-thrust optimization",
+      "Recurring handover/return/recovery schedule",
+      "Continuous coverage or attitude certificate",
+      "Collector or 100 TW delivered-power sizing"
+    ],
+    "accepted_operating_fleet": false,
+    "branch": "research/solar-shield-habitat-array",
+    "main_modified": false,
+    "layer_check_after_staging_new_sources": {
+      "status": "PASS",
+      "command": "python shared/check_layers.py",
+      "files": 456,
+      "violations": 0
+    }
+  },
+  "natural_patterns": {
+    "status": "SAMPLED_LOCAL_ZERO_SERVICE_THRUST_RETURN_AND_FLEET_UNRESOLVED",
+    "checked_at_utc": "2026-10-05T01:17:51.825756+00:00",
+    "report": "patterns.md",
+    "starting_remote_head": "19f0eee92ca5b5ed61dd26b3943d40bee5274cbb",
+    "early_plan_checkpoint": "4b222b227d95cd93aa357676b23091388ef39dab",
+    "study_tests": {
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m pytest protection/dynamics research/studies/solar_shield_array -q",
+      "passed": 85,
+      "status": "PASS"
+    },
+    "make_check": {
+      "status": "FAIL_EXISTING",
+      "summary": "13 failed, 630 passed, 55 skipped",
+      "same_failed_tests_as_starting_head": true,
+      "layer_check": "PASS: 461 files, 0 violations",
+      "later_targets": "Not reached: JavaScript, historical-provenance and ensemble targets; previous entries retain their historical scope."
+    },
+    "products": {
+      "results/patterns.json": "deb98cc0faee44fc357194d3c554da4aadf6861dc84b95c911314abeb684c1cf",
+      "results/patterns_budget.json": "bc97165ace20063a0d1ad591ed1a9b6c280dff800fd5c8e48867ccdc2ce6bb16"
+    },
+    "executed": {
+      "affine_proposals": 24,
+      "coupled_candidates": 1,
+      "independent_replays": 1,
+      "simultaneous_tiles": 361,
+      "duration_s": 21600.0,
+      "numerical_wall_s": 423.2978463219988,
+      "max_rss_MiB": 217.25390625,
+      "raw_MiB": 12.77028751373291,
+      "service_electric_delta_v_m_s": 0.0,
+      "minimum_sampled_coverage": 0.9999999999999981,
+      "minimum_guarded_tile_separation_m": 2685.3623587916713,
+      "max_replay_position_difference_m": 0.660642121553994,
+      "transported_witness_rate_deg_s": 0.06467175411853113,
+      "max_terminal_reference_position_defect_m": 2976.163961064972
+    },
+    "not_executed": [
+      "Continuous time/source optical certificate",
+      "Formal enclosure of derivative bounds for swept exclusions",
+      "Full angular dynamics, flexible response and attitude-actuator mass/energy",
+      "Acquisition and terminal position-closure maneuvers",
+      "Handover, coast/return, recovery and recurring maneuver frequency",
+      "Adjacent-pattern interfaces or placement of the capacity inventory",
+      "Fleet-wide recurring cost optimization",
+      "Collector and 100 TW delivered-power sizing"
+    ],
+    "accepted_operating_fleet": false,
+    "branch": "research/solar-shield-habitat-array",
+    "main_modified": false
+  },
+  "local_return": {
+    "status": "FINITE_SQUARE_CLEARANCE_OBSTRUCTION_VERIFIED_RETURN_AND_HANDOVER_UNACCEPTED",
+    "checked_at_utc": "2026-10-05T09:56:12.463221+00:00",
+    "report": "returns.md",
+    "starting_remote_head": "4e8a7fd99039ffddcfeef6a52685af578edb1bb4",
+    "early_plan_checkpoint": "ed1b05d231092972f62be13741a8b44392f8bac4",
+    "early_check": "make check reached Python tests, then stopped because pytest was absent in the refreshed runtime; pinned test/geometry/ephemeris dependencies were restored before numerical execution.",
+    "study_tests": {
+      "status": "PASS",
+      "passed": 94,
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m pytest protection/dynamics research/studies/solar_shield_array -q",
+      "launch_contract": "The analytic HiGHS test runs in a fresh one-thread process, matching the standalone return runner and avoiding incompatible process-global worker pools initialized by the older capacity LP."
+    },
+    "make_check": {
+      "status": "FAIL_EXISTING",
+      "summary": "13 failed, 639 passed, 55 skipped in 24.73s",
+      "same_failed_tests_as_previous_checkpoint": true,
+      "layer_check": "PASS: 469 files, 0 violations",
+      "later_targets": "Not reached after Python failures: JavaScript, historical-provenance and ensemble targets."
+    },
+    "products": {
+      "results/return_screen.json": "f0278c63a032753c4d20ec1fcf7fe65d23a68b56a33ef9eb04b475b9bdac5504",
+      "results/return_prefix.json": "2ff6fe2b757ded5fe8f6a66e34867b3c12cd3500edfbd19159b3d10d6dc2e637",
+      "results/return_budget.json": "644f449b920cac577212015a301a9e411cabca1c6f775d3be576f5350f4fd1bb"
+    },
+    "executed": {
+      "geometry_cases": 24,
+      "distinct_endpoint_LPs": 12,
+      "encounter_correction_attempts": 1,
+      "encounter_cuts": 512,
+      "correction_status": "INFEASIBLE_SELECTED_HALF_SPACES",
+      "linear_crossing_intersections": 1848,
+      "coupled_prefixes": 2,
+      "individual_members_per_prefix": 361,
+      "clearance_stop_after_service_s": 2861.411095731266,
+      "clearance_stop_pair": [
+        338,
+        339
+      ],
+      "maximum_replay_position_difference_m": 0.009896891626973133,
+      "between_sample_prefix_audit_intersections": 0,
+      "numerical_wall_s": 227.06512707099955,
+      "max_rss_MiB": 252.69921875,
+      "raw_MiB": 21.754940032958984
+    },
+    "not_executed": [
+      "Full nonlinear orbital return",
+      "Second service passage",
+      "Two-pattern handover",
+      "Joint body/array partial-eclipse return dynamics",
+      "Optimized intermediate spacing and transition timing",
+      "Recovery and repeated maneuver frequency",
+      "Continuous coverage or separation certificate",
+      "Full actuator/hardware and plume realization",
+      "Fleet recurring propulsion, collection and delivered-power closure"
+    ],
+    "accepted_operating_fleet": false,
+    "branch": "research/solar-shield-habitat-array",
+    "main_modified": false
+  },
+  "prepared_departure": {
+    "checked_at_utc": "2026-10-05T10:40:09.852192+00:00",
+    "status": "NOMINAL_LOCAL_DEPARTURE_VERIFIED_ATTITUDE_COST_AND_FLEET_CLOSURE_OPEN",
+    "starting_remote_head": "4b82a8386a1d4b207630f0181bdbbd83f6469bd7",
+    "early_remote_checkpoint": "cc7446118a8f3e1dc59d47274db128548daa2b3e",
+    "report": "departure.md",
+    "products": {
+      "results/departure_screen.json": "ac42d70eeabac4ea49544ebcb443eb138c3c5cded137f5c2d1a75ebb9bcb1a87",
+      "results/departure_refine.json": "2bd314577178f85ab7926863f653478dafe9d24604432d7b955d4880af4a756f",
+      "results/departure.json": "482f4869ba114b591a537a6bee65842ecb0e9acccc3a42ce9e0775277e782a7d",
+      "results/departure_validation.json": "7da77d5f6b78c94e1f1ab085597101a1ea2ea152ff05cc105f97705faf87e8a5",
+      "results/departure_budget.json": "909dbb89c49e158e7c14a059f7c00bf7b7d418a2b8d356f9092ed30b65d620de"
+    },
+    "study_tests": {
+      "status": "PASS",
+      "passed": 103,
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m pytest protection/dynamics research/studies/solar_shield_array -q",
+      "elapsed_s": 6.62
+    },
+    "make_check": {
+      "status": "FAIL_EXISTING",
+      "summary": "13 failed, 648 passed, 55 skipped in 34.04s",
+      "same_failed_tests_as_starting_checkpoint": true,
+      "layer_check": "PASS: 480 files, zero violations",
+      "later_targets": "Not reached after Python failures; historical JavaScript/provenance/ensemble entries keep their original scope."
+    },
+    "search": {
+      "static_angle_spacing_samples": 1820,
+      "depth_only_cases": 96,
+      "acceleration_rejections": 24,
+      "remaining_clearance_rejections": 72,
+      "local_correction_iterations": 1,
+      "independent_coupled_candidates": 1,
+      "tighter_replays": 1,
+      "new_full_return_or_handover_runs": 0
+    },
+    "numerical": {
+      "members": 361,
+      "departure_duration_s": 21600,
+      "translation_burn_s": 7200,
+      "attitude_transition_s": 3600,
+      "coast_after_transition_s": 10800,
+      "mean_translation_delta_v_m_s": 1.405838431954434,
+      "coarse_five_second_possible_pairs": 27,
+      "refined_two_second_possible_pairs": 0,
+      "minimum_conditional_swept_clearance_m": 107.71067265310558,
+      "maximum_independent_replay_difference_m": 0.5883833550394967,
+      "maximum_rate_deg_s": 0.04686365378976085,
+      "minimum_beam_margin_deg": 20.309729222008155
+    },
+    "actuation_option": {
+      "nominal_turn_equivalent_delta_v_m_s": 2.7271077323875237,
+      "departure_with_disturbance_allowance_m_s": 5.040847501245453,
+      "service_plus_departure_with_allowance_m_s": 6.702686980149719,
+      "provisional_power_hardware_fraction": 0.15701363730955956,
+      "hardware_mass_feedback_propagated": false,
+      "structural_realizability_demonstrated": false,
+      "recurring_fleet_cost_measured": false
+    },
+    "resources": {
+      "recorded_numerical_wall_s": 1012.769139050999,
+      "peak_RSS_MiB": 723.875,
+      "raw_MiB": 32.28056716918945,
+      "calculation_processes": 1,
+      "BLAS_OpenMP_threads": 1,
+      "total_budget_s": 3600,
+      "address_space_limit_GiB": 2
+    },
+    "scope": "Verified ideal local departure from actual service states, with conditional swept bounds and independent replay; no full return, two-pattern handover, perturbed/structural certificate or recurring fleet acceptance.",
+    "continuous_coverage_certified": false,
+    "accepted_fleet": false,
+    "collection_capacity_W": null,
+    "delivered_power_W": null,
+    "publication_target": "research/solar-shield-habitat-array; main unchanged"
+  },
+  "collection_inventory": {
+    "checked_at_utc": "2026-10-05T11:17:26.493358+00:00",
+    "status": "LOCAL_OPTICAL_INVENTORY_CHECKED_ELECTRICAL_YIELD_UNSPECIFIED",
+    "starting_remote_head": "ce72224326fafb2e94033c31ad98e1e6c54a5965",
+    "report": "collection.md",
+    "product": "results/collection.json",
+    "product_sha256": "b8159269bdd79c79b99770dac90075122f969d23274fac10f5444e547653e32a",
+    "study_tests": {
+      "status": "PASS",
+      "passed": 110,
+      "elapsed_s": 9.66,
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m pytest protection/dynamics research/studies/solar_shield_array -q"
+    },
+    "make_check": {
+      "status": "FAIL_EXISTING",
+      "summary": "13 failed, 655 passed, 55 skipped in 38.22s",
+      "same_failed_tests_as_starting_checkpoint": true,
+      "layer_check": "PASS: 480 tracked files, zero violations; new files checked separately after staging",
+      "later_targets": "Not reached after Python failures",
+      "staged_layer_check": "PASS: 484 files, zero violations"
+    },
+    "resources": {
+      "numerical_wall_s": 300.70794527,
+      "peak_RSS_MiB": 157.421875,
+      "raw_MiB": 14.117016792297363,
+      "budget": {
+        "wall_s": 600,
+        "processes": 1,
+        "numerical_threads": 1,
+        "address_space_GiB": 2,
+        "raw_output_limit_MiB": 128,
+        "source_counts": [
+          16,
+          32
+        ],
+        "time_step_s": 60
+      }
+    },
+    "validation": {
+      "service": {
+        "source_refinement_relative_energy_change": 3.73972600320919e-07,
+        "time_coarsening_relative_energy_change": 2.1538367334824896e-06
+      },
+      "departure_preparation": {
+        "source_refinement_relative_energy_change": 2.9004776203364476e-06,
+        "time_coarsening_relative_energy_change": 2.351836795715476e-06
+      },
+      "departure_turn": {
+        "source_refinement_relative_energy_change": 4.935334293553718e-05,
+        "time_coarsening_relative_energy_change": 3.418527901352274e-05
+      },
+      "departure_coast": {
+        "source_refinement_relative_energy_change": 0.0445751363606141,
+        "time_coarsening_relative_energy_change": 5.451638000093493e-08
+      },
+      "whole_saved_interval": {
+        "source_refinement_relative_energy_change": 4.296610385234482e-05,
+        "time_coarsening_relative_energy_change": 9.201413679447233e-07
+      }
+    },
+    "maximum_force_ledger_disagreement_m_s2": 3.898866317915555e-17,
+    "selected_source_count": 32,
+    "time_step_s": 60,
+    "not_executed": [
+      "New trajectory propagation",
+      "Full return or handover",
+      "Joint body/array eclipse integration",
+      "Fleet placement or inventory scaling",
+      "Electrical conversion and collector routing",
+      "Hardware-mass dynamics feedback"
+    ],
+    "accepted_fleet": false,
+    "collection_capacity_W": null,
+    "delivered_power_W": null,
+    "publication_target": "research/solar-shield-habitat-array; main unchanged"
+  },
+  "energy_first": {
+    "checked_at_utc": "2026-10-05T12:16:23.679327+00:00",
+    "status": "LOCAL_CHEAPER_SCHEDULES_REJECTED_EXISTING_TORQUE_ACCOUNT_REFINED",
+    "starting_remote_head": "e65cc9c34a120926d3f5a7c6e590260e78275793",
+    "early_checkpoint": "374039df488132f67b1cb213499032100b5510e5",
+    "report": "energy.md",
+    "products": {
+      "energy_screen.json": "a46fa39e85f956aa2ff9aa4b486aa112254f87f67081525a794baf7c76842559",
+      "energy.json": "63236359ae8e1606b218b06ff8cc6818780411198ff394466b0ab8c83620d965",
+      "energy_correction.json": "851c51b65a527a14729db1bd22ff63e66783e8adb5430055871ed76fdca93170",
+      "energy_replay.json": "f1338e4ec67d03b44848bcfe843d29cb8aa3095de7e7f756ba842fb775e295fe",
+      "energy_budget.json": "ca89f9dc741926f81e8bf5945a43afb7c83508b022517a1902b6b105e110b4bb",
+      "energy_collection.json": "aded09170beab1ee298d4320b639e1a9800c98979b29c69b51233af255cd9b0e"
+    },
+    "study_tests": {
+      "status": "PASS",
+      "passed": 120,
+      "elapsed_s": 7.34,
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m pytest protection/dynamics research/studies/solar_shield_array -q",
+      "solver_test_context": "Fresh process preserves the study runner single-thread HiGHS configuration; other tests initialize a different global scheduler."
+    },
+    "make_check": {
+      "status": "FAIL_EXISTING",
+      "summary": "13 failed, 665 passed, 55 skipped in 28.00s",
+      "same_failed_tests_as_starting_checkpoint": true,
+      "failed_tests": [
+        "atmosphere/tests/test_absorption.py::test_ion_production_falls_with_the_shadow_and_ends_at_the_outer_radius",
+        "atmosphere/tests/test_absorption.py::test_ionization_rate_is_of_the_tabulated_order",
+        "atmosphere/tests/test_absorption.py::test_design_case_needs_a_radius_just_under_the_exobase",
+        "atmosphere/tests/test_exosphere.py::test_dissociation_rates_agree_with_heays",
+        "atmosphere/tests/test_exosphere.py::test_ions_made_match_the_absorption_step",
+        "atmosphere/tests/test_exosphere.py::test_charge_exchange_thin_limit_counts_the_swept_exosphere",
+        "atmosphere/tests/test_exosphere.py::test_magnetosphere_accounts_for_every_ion_and_a_stronger_one_keeps_more",
+        "atmosphere/tests/test_exosphere.py::test_levels_are_ordered_and_wider_shadows_never_lose_more",
+        "climate/tests/test_cm1_run.py::test_the_terrain_build_forces_each_column_at_its_own_height",
+        "climate/tests/test_exoplasim_run.py::RunnerTests::test_process_lookup_finds_this_process",
+        "climate/tests/test_ring_comfort.py::test_hours_are_shares_of_the_lunar_day",
+        "climate/tests/test_ring_comfort.py::test_the_rings_land_is_pooled_by_latitude_and_height_and_counted_in_shares",
+        "research/studies/protection_architecture/test_run.py::test_design_point_holds_together"
+      ],
+      "staged_layer_check": "PASS: 496 tracked files, zero violations",
+      "later_targets": "Not reached after Python failures"
+    },
+    "budget": {
+      "wall_s": 2700,
+      "calculation_processes": 1,
+      "numerical_threads": 1,
+      "address_space_GiB": 2,
+      "raw_limit_MiB": 512,
+      "initial_coupled_candidates": 2,
+      "revised_coupled_candidates": 3,
+      "tighter_replay_limit": 1
+    },
+    "resources": {
+      "completed_producer_wall_s": 1118.689404370998,
+      "initial_correction_wall_s": 4.677566439,
+      "initial_incomplete_accounting_wall_s": 193.1847823219996,
+      "recorded_numerical_wall_s": 1316.5517531319977,
+      "peak_RSS_MiB": 843.4296875,
+      "raw_MiB": 85.41602039337158
+    },
+    "search": {
+      "proposals": 45,
+      "approximate_survivors": 15,
+      "coupled_candidates": 3,
+      "clearance_stops": 3,
+      "tighter_replays": 0,
+      "measured_defect_correction_feasible": false,
+      "signed_LP_status": 2,
+      "largest_measured_proposal_position_defect_m": 3496.982719534487,
+      "accepted_cheaper_departure": false,
+      "departure_stop_elapsed_h": {
+        "24": 5.486598238862409,
+        "20": 3.5707869426057792,
+        "41": 4.467907217179933
+      }
+    },
+    "endpoint_geometry": {
+      "method": "All 64980 pairs of parallel 10 km squares: norm(max(abs(delta_position @ frame) - [10000,10000,0],0)). Endpoint only; no collision or between-sample assertion.",
+      "minimum_surface_distance_m": {
+        "24": 100.00000000052329,
+        "20": 99.99999999959397,
+        "41": 100.00000000077146
+      },
+      "pairs": {
+        "24": [
+          186,
+          187
+        ],
+        "20": [
+          173,
+          174
+        ],
+        "41": [
+          34,
+          35
+        ]
+      }
+    },
+    "verified_existing_prefix_account": {
+      "service_plus_departure_m_s": 4.2398245550123725,
+      "service_plus_departure_energy_J": 231917386820242.53,
+      "peak_propulsion_W": 64010235873.596405,
+      "provisional_power_hardware_kg": 266709316.13998505
+    },
+    "old_nominal_plus_envelope_m_s": 6.702686980149719,
+    "cost_scope": "Revised ideal rigid-actuator accounting for the same verified twelve-hour geometry. No accepted new maneuver, recurring saving, full cycle or hardware-mass feedback.",
+    "conditional_inventory_allowances": {
+      "assumptions": "Same scalar conditional_cost, 20% fixed extra mass, 10% thrust duty, pilot_budget propulsion parameters; no achieved recurrence or sufficient inventory.",
+      "rows": [
+        {
+          "tiles": 17285560.170967527,
+          "at_23_835_TW_m_s_day": 0.6488646258846454,
+          "at_119_175_TW_m_s_day": 3.1231820129806858
+        },
+        {
+          "tiles": 25000000.0,
+          "at_23_835_TW_m_s_day": 0.4499860144657214,
+          "at_119_175_TW_m_s_day": 2.1909941066200007
+        },
+        {
+          "tiles": 35000000.0,
+          "at_23_835_TW_m_s_day": 0.32203733485429,
+          "at_119_175_TW_m_s_day": 1.579774910068562
+        }
+      ]
+    },
+    "torque_checks": {
+      "service": {
+        "agreements": {
+          "maximum_collection_relative_error": 4.493486405537704e-18,
+          "maximum_gravity_quadrature_torque_error_N_m_kg": 2.0418738546206028e-14,
+          "maximum_bound_excess_N_m_kg": 0.0
+        },
+        "time_relative_attitude_change": 4.504486709459591e-06,
+        "source_relative_attitude_change": 5.630738385547179e-05
+      },
+      "previous_departure": {
+        "agreements": {
+          "maximum_collection_relative_error": 1.163145700710552e-17,
+          "maximum_gravity_quadrature_torque_error_N_m_kg": 1.878830290608997e-14,
+          "maximum_bound_excess_N_m_kg": 0.0
+        },
+        "time_relative_attitude_change": 3.792096847274703e-06,
+        "source_relative_attitude_change": 1.0771867515523099e-06
+      },
+      "new_departure": {
+        "agreements": {
+          "maximum_collection_relative_error": 6.866216509203048e-18,
+          "maximum_gravity_quadrature_torque_error_N_m_kg": 1.878830290608997e-14,
+          "maximum_bound_excess_N_m_kg": 0.0
+        },
+        "time_relative_attitude_change": 2.388783368915721e-07,
+        "source_relative_attitude_change": 1.9813925252687433e-06
+      }
+    },
+    "collection": "Every coupled alternative retains per-tile power through its own stop. Unequal prefixes are not compared as complete cycles; 16 sources/60 s, plus 32-source torque/collection refinement for trial 41.",
+    "not_executed": [
+      "Independent tighter replay of rejected candidates",
+      "Full return, repacking and two-pattern handover",
+      "Recurring cadence and recovery",
+      "New global fleet placement or coverage optimization",
+      "Hardware-mass dynamics feedback",
+      "Flexible structures and alternative actuator realization"
+    ],
+    "continuous_coverage_certified": false,
+    "accepted_fleet": false,
+    "measured_recurring_impulse_m_s_day": null,
+    "fleet_propulsion_W": null,
+    "collection_capacity_W": null,
+    "delivered_power_W": null,
+    "publication_target": "research/solar-shield-habitat-array; main unchanged"
+  },
+  "starting_arrangement_pilot": {
+    "checked_at_utc": "2026-10-05T13:30:14.131204+00:00",
+    "starting_remote_head": "8bb69c204ffb0ff39b9ec3c39da848a22fc13156",
+    "early_plan_commit": "2b54ebbfa56d379b4ccf35aa759653182496c6f8",
+    "objective": "Lower actual local service/departure control energy by varying starting depth/order and individual smooth burns; retain 100 m physical clearance, finite-Sun coverage and optical inventory.",
+    "products": {
+      "packing_screen.json": "3d6556471ace2933a97a4aac51ebb0c275a285358f756fa3a771ae8e8e8c2f7c",
+      "packing.json": "0403f45e0e38fb272242c5d14557d1f98b309a5be34d59f557aa0a7d57cf963f",
+      "packing_validation.json": "497807b12f604fc0e869cb47e407a52423fc8069f1a02b3b84cbbfc75e4815bd",
+      "packing_budget.json": "818300962907c69078e259bd149eb8fc27376ce7974a4cac9326b866094c82e3",
+      "packing_audit.json": "83eb7401864639a1e4d83b2785ed525f92d8a4c61fdd262e5f9c7a98949e25e6"
+    },
+    "study_tests": {
+      "status": "PASS",
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m pytest protection/dynamics research/studies/solar_shield_array -q",
+      "passed": 130,
+      "elapsed_s": 8.7
+    },
+    "resources": {
+      "numerical_wall_limit_s": 3600,
+      "producer_elapsed_s": {
+        "packing_screen": 138.57362582399946,
+        "packing": 483.2973513329998,
+        "packing_validation": 1862.4908759080008,
+        "packing_budget": 259.31297925000035,
+        "packing_audit": 34.53000730600252
+      },
+      "interrupted_partial_replay_charged_s": 120,
+      "total_charged_numerical_s": 2898.204839621003,
+      "maximum_rss_MiB": 685.11328125,
+      "raw_MiB": 136.034893989563,
+      "address_space_limit_GiB": 2,
+      "raw_limit_MiB": 512,
+      "numerical_threads_per_process": 1,
+      "brief_replay_restart_overlap_upper_bound_s": 30,
+      "process_plan_deviation": "Restart briefly overlapped an interrupted partial replay after a shell PID signal failed; both used one numerical thread, subsequent numerical stages sequential. Conservative 120 s partial-run charge replaces provisional 87 s validation metadata."
+    },
+    "executed": {
+      "arrangements": 6,
+      "cheap_proposals": 12,
+      "new_service_passages": 1,
+      "coupled_departures": 1,
+      "complete_tighter_twelve_hour_replays": 1
+    },
+    "selected": {
+      "depth_step_m": 12000,
+      "depth_extent_m": 36000,
+      "pitch_m": 8500,
+      "tiles": 361,
+      "independent_control_coefficients": 2166,
+      "nonzero_translation_coefficients": 0,
+      "full_six_hour_service": true,
+      "full_six_hour_departure": true
+    },
+    "replay_position_difference_with_reconstruction_m": [
+      1.9946964585564197,
+      8.987461012714428
+    ],
+    "physical_surface_distance": [
+      {
+        "start_s": 0.0,
+        "end_s": 21600.0,
+        "minimum_sampled_surface_distance_m": 6698.570859523941,
+        "sampled_witness": {
+          "time_s": 21600.0,
+          "pair": [
+            170,
+            208
+          ],
+          "projection_m": [
+            0.24043572861504947,
+            16698.57085942215,
+            -0.036928328957931564
+          ]
+        },
+        "minimum_conditional_all_pair_clearance_m": 6669.769854840065,
+        "intervals_below_100m": 0
+      },
+      {
+        "start_s": 21600.0,
+        "end_s": 43200.0,
+        "minimum_sampled_surface_distance_m": 1760.4271403569517,
+        "sampled_witness": {
+          "time_s": 43200.0,
+          "pair": [
+            319,
+            322
+          ],
+          "projection_m": [
+            -11759.15603488059,
+            6873.533931199737,
+            66.88618279250964
+          ]
+        },
+        "minimum_conditional_all_pair_clearance_m": 1724.6104257284323,
+        "intervals_below_100m": 0
+      }
+    ],
+    "coverage_adversary": {
+      "grid_probes": 533,
+      "total_probes": 887,
+      "optimizations": [
+        {
+          "success": true,
+          "message": "Optimization terminated successfully.",
+          "nfev": 80,
+          "minimum_margin_m": 6986.527269908704,
+          "parameters": [
+            0.0,
+            6.283181740905869,
+            1.0
+          ]
+        },
+        {
+          "success": true,
+          "message": "Optimization terminated successfully.",
+          "nfev": 112,
+          "minimum_margin_m": 6977.417362000991,
+          "parameters": [
+            0.2067802562434332,
+            3.1415933046374604,
+            1.0
+          ]
+        },
+        {
+          "success": true,
+          "message": "Optimization terminated successfully.",
+          "nfev": 81,
+          "minimum_margin_m": 7043.148492427605,
+          "parameters": [
+            0.0,
+            1.5707923398155552,
+            1.0
+          ]
+        },
+        {
+          "success": true,
+          "message": "Optimization terminated successfully.",
+          "nfev": 81,
+          "minimum_margin_m": 7043.151301601061,
+          "parameters": [
+            0.0,
+            4.712386068384814,
+            1.0
+          ]
+        }
+      ],
+      "worst": {
+        "time_s": 744.4089224763595,
+        "angle_rad": 3.1415933046374604,
+        "solar_radius_fraction": 1.0,
+        "margin_m": 6977.417362000991,
+        "missed_area_m2": 0.0,
+        "covered_fraction": 1.0,
+        "circle_sagitta_allowance_m": 0.1882471739889091
+      },
+      "minimum_fraction": 1.0,
+      "passed": true,
+      "scope": "Rotated 32-direction limb grid, interior/centre sources and four bounded local searches over date and solar-disk coordinates. Positive margin covers the exact circular receiver for each tested source; unsampled global source/time certification remains open."
+    },
+    "actual_control_account": {
+      "service_plus_departure_m_s": 0.7578636621036615,
+      "propulsion_energy_J": 41454960647678.85,
+      "same_model_fractional_energy_reduction": 0.8212511738940458,
+      "baseline_service_plus_departure_m_s": 4.2398245550123725,
+      "sum_member_peak_power_W": 4131726616.1667852,
+      "maximum_member_peak_power_W": 12515338.996809082,
+      "provisional_individual_power_hardware_kg": 17215527.567361604,
+      "provisional_power_hardware_fraction": 0.009537688402970418,
+      "total_burn_count": 0
+    },
+    "initial_preparation_reference": {
+      "mean_velocity_difference_m_s": 0.9983658060220314,
+      "maximum_velocity_difference_m_s": 1.745476488829699,
+      "maneuver_executed": false,
+      "scope": "Velocity difference from an initially Sun-tracking lattice translating with the reference. Positions are specified initial conditions; this is no acquisition trajectory or recurring impulse measurement."
+    },
+    "conditional_inventory_trade": [
+      {
+        "tiles": 17285560.170967527,
+        "assumed_two_day_full_cycle_allowance_m_s": 1.2977292517699583,
+        "measured_partial_impulse_m_s": 0.7578636621036615,
+        "remaining_for_return_handover_recovery_m_s": 0.5398655896662968,
+        "prefix_only_repeated_every_two_days": {
+          "closed": true,
+          "optical_mass_kg": 86427800854837.64,
+          "total_scenario_mass_kg": 104304027544617.58,
+          "recurring_dv_m_s_per_day": 0.37893183105183076,
+          "peak_duty": 0.1,
+          "extra_fixed_mass_multiplier": 1.2,
+          "propulsion_TW": 13.86298142138778,
+          "propellant_kg_s": 21564.63776660321,
+          "installed_propulsion_power_TW": 173.28726776734723
+        }
+      },
+      {
+        "tiles": 25000000.0,
+        "assumed_two_day_full_cycle_allowance_m_s": 0.8999720289315585,
+        "measured_partial_impulse_m_s": 0.7578636621036615,
+        "remaining_for_return_handover_recovery_m_s": 0.14210836682789696,
+        "prefix_only_repeated_every_two_days": {
+          "closed": true,
+          "optical_mass_kg": 125000000000000.0,
+          "total_scenario_mass_kg": 150854277375118.7,
+          "recurring_dv_m_s_per_day": 0.37893183105183076,
+          "peak_duty": 0.1,
+          "extra_fixed_mass_multiplier": 1.2,
+          "propulsion_TW": 20.049945278417646,
+          "propellant_kg_s": 31188.803766427445,
+          "installed_propulsion_power_TW": 250.62431598022056
+        }
+      },
+      {
+        "tiles": 35000000.0,
+        "assumed_two_day_full_cycle_allowance_m_s": 0.6440746697086028,
+        "measured_partial_impulse_m_s": 0.7578636621036615,
+        "remaining_for_return_handover_recovery_m_s": -0.11378899239505869,
+        "prefix_only_repeated_every_two_days": {
+          "closed": true,
+          "optical_mass_kg": 175000000000000.0,
+          "total_scenario_mass_kg": 211195988325166.16,
+          "recurring_dv_m_s_per_day": 0.37893183105183076,
+          "peak_duty": 0.1,
+          "extra_fixed_mass_multiplier": 1.2,
+          "propulsion_TW": 28.0699233897847,
+          "propellant_kg_s": 43664.32527299842,
+          "installed_propulsion_power_TW": 350.87404237230874
+        }
+      }
+    ],
+    "collection": "Per-tile 16-source/60 s and 32-source/120 s first-interception optical inventories for both executed legs. Twelve-hour interception is 6.00459% above the previous verified twelve-hour passage; optical potential only.",
+    "cost_scope": "Tighter replay of the same 361 members through six-hour service and six-hour departure. Uniform rigid 50 g/m2 optical mass, ideal electric edge couples, finite-area gravity and reflected-band shadow moments. Acquisition, full return, handover, storage, flexibility, recovery and recurrence remain unpaid.",
+    "continuous_coverage_certified": false,
+    "accepted_local_service_departure": true,
+    "accepted_fleet": false,
+    "measured_recurring_impulse_m_s_day": null,
+    "fleet_propulsion_W": null,
+    "collection_capacity_W": null,
+    "delivered_power_W": null,
+    "not_executed": [
+      "Acquisition of the specified initial state",
+      "Full return, repacking, recovery and two-pattern handover",
+      "A repeatable cycle and maneuver frequency",
+      "Global placement and simultaneous full-target coverage",
+      "Added hardware-mass and collection-momentum feedback",
+      "Multiple reflections, flexibility and alternative actuator engineering",
+      "A continuous certificate over all source directions and times"
+    ],
+    "publication_target": "research/solar-shield-habitat-array; main unchanged",
+    "repository_checks": {
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 make check",
+      "status": "FAIL_EXISTING",
+      "layer_files": 508,
+      "layer_violations": 0,
+      "python_passed": 675,
+      "python_skipped": 55,
+      "python_failed": 13,
+      "python_elapsed_s": 29.06,
+      "same_failed_tests_as_before_changes": true,
+      "failed_tests": [
+        "atmosphere/tests/test_absorption.py::test_ion_production_falls_with_the_shadow_and_ends_at_the_outer_radius",
+        "atmosphere/tests/test_absorption.py::test_ionization_rate_is_of_the_tabulated_order",
+        "atmosphere/tests/test_absorption.py::test_design_case_needs_a_radius_just_under_the_exobase",
+        "atmosphere/tests/test_exosphere.py::test_dissociation_rates_agree_with_heays",
+        "atmosphere/tests/test_exosphere.py::test_ions_made_match_the_absorption_step",
+        "atmosphere/tests/test_exosphere.py::test_charge_exchange_thin_limit_counts_the_swept_exosphere",
+        "atmosphere/tests/test_exosphere.py::test_magnetosphere_accounts_for_every_ion_and_a_stronger_one_keeps_more",
+        "atmosphere/tests/test_exosphere.py::test_levels_are_ordered_and_wider_shadows_never_lose_more",
+        "climate/tests/test_cm1_run.py::test_the_terrain_build_forces_each_column_at_its_own_height",
+        "climate/tests/test_exoplasim_run.py::RunnerTests::test_process_lookup_finds_this_process",
+        "climate/tests/test_ring_comfort.py::test_hours_are_shares_of_the_lunar_day",
+        "climate/tests/test_ring_comfort.py::test_the_rings_land_is_pooled_by_latitude_and_height_and_counted_in_shares",
+        "research/studies/protection_architecture/test_run.py::test_design_point_holds_together"
+      ],
+      "later_make_targets_reached": false,
+      "causes": [
+        "missing pinned WHI solar spectrum",
+        "missing generated moon_gcm_configuration.json",
+        "process-group lookup does not see the test process in this execution environment"
+      ]
+    }
+  },
+  "cycle_closure": {
+    "checked_at_utc": "2026-10-05T15:09:14.737405+00:00",
+    "starting_remote_head": "85b9851fae79fb3304047481902f9086a8091b60",
+    "early_plan_commit": "ffb8721696bcf93386871546b046e19a76edc551",
+    "objective": "Test full-cycle preparation from actual terminal states, propagate return-capable hardware mass, and gate handover/fleet expansion on local geometry and cost.",
+    "products": {
+      "closure_screen.json": "9a83f5623a90f23a7216e828463f998adfd79f1f030a79e93ba311ce749a24bb",
+      "closure_hardware.json": "6a03c63e52112f3e0564199175cf0796c9975691181a0f58f03d37bf7e54e552",
+      "closure_sizing.json": "7bd01de3cd9d917ffc55d5679f3abd70bf519858ee021314a2251ac14e8b2b40",
+      "closure_return.json": "2edc5fc7b823de2fbda33a78116ed9715a8ec47723e1f92a6b2b0e12e3ef283c",
+      "closure_validation.json": "5032a8f71204508544dbc840c8e33208e1f0a62719c12245806e014e7a03baef",
+      "closure_budget.json": "7c09e5a7a25b733bce63b54cf8ce2051c978b789e5ba981d4a503a38d36749cf",
+      "closure_audit.json": "9728da411e49d710dab8301451a35262c5f23c2eb93aa7b5232e55b4486148e4"
+    },
+    "study_tests": {
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m pytest protection/dynamics research/studies/solar_shield_array -q",
+      "status": "PASS",
+      "passed": 141,
+      "elapsed_s": 12.32
+    },
+    "resources": {
+      "numerical_wall_limit_s": 4800,
+      "producer_wall_s": {
+        "closure_screen": 390.72729380700184,
+        "closure_hardware": 525.596301652,
+        "closure_sizing": 509.1656642050002,
+        "closure_return": 589.6777360980013,
+        "closure_validation": 1990.4532675279988,
+        "closure_budget": 362.29894222800067,
+        "closure_audit": 21.418864027997188
+      },
+      "numerical_wall_s": 4389.338069546,
+      "address_space_limit_GiB": 2,
+      "maximum_rss_MiB": 644.0703125,
+      "new_raw_MiB": 202.84809494018555,
+      "new_raw_limit_MiB": 768,
+      "numerical_threads": 1,
+      "maximum_concurrent_producers": 1,
+      "numerical_restarts": 0,
+      "repository_check_allowance_s": 300
+    },
+    "executed": [
+      "Twelve endpoint/arrival/assignment proposals and three selected infeasible encounter-cut refinements",
+      "Two distinct hardware-loaded twelve-hour passages, including return-capable power allocation",
+      "One coupled return from actual mass-loaded terminal states, stopped at 100 m",
+      "One complete tighter sequence from the epoch through the same return event",
+      "Per-member actual load, partial burn and optical accounts for all executed stages and the preliminary mass experiment",
+      "891 additional local source/date probes and frozen-event orientation diagnostics"
+    ],
+    "hardware_mass": {
+      "optical_mass_kg": 1805000000.0,
+      "total_allocated_mass_kg": 2263298487.05685,
+      "power_hardware_kg": 97298487.05684994,
+      "mean_total_to_optical_mass_ratio": 1.2539049789788643,
+      "distribution": "All fixed and power hardware mass uniformly distributed over each rigid square. Optical mass and area unchanged. Constant carried mass; propellant depletion and detailed hardware layout remain outside this passage."
+    },
+    "accepted_local_service_departure": true,
+    "accepted_return": false,
+    "accepted_fleet": false,
+    "continuous_coverage_certified": false,
+    "local_return": {
+      "end_s": 50016.72633817279,
+      "pair": [
+        325,
+        347
+      ],
+      "surface_m": 99.99999999963353,
+      "replay": {
+        "maximum_position_difference_m": 9.041876045842931,
+        "position_difference_plus_reconstruction_m": 9.041876964828507,
+        "maximum_velocity_difference_m_s": 0.00034732137661206287,
+        "event_time_difference_s": 0.6522837154261651,
+        "same_witness_pair": true
+      },
+      "mean_applied_translation_m_s": 0.975895436540377,
+      "scheduled_burns": 1171,
+      "started_burns": 361,
+      "cause": "100 m clearance event; no impact simulated. Restricted return family and encounter-cut choices do not exclude other designs."
+    },
+    "hardware_account": {
+      "executed_energy_J": 51859076442835.18,
+      "complete_twelve_hour_passage": true,
+      "previous_optical_only_energy_J": 41454960647678.85,
+      "optical_mass_equivalent_m_s": 0.9480677094426669,
+      "total_mass_weighted_equivalent_m_s": 0.7560921483976718,
+      "allocated_installed_power_W": 29189546117.054985,
+      "sum_required_member_peak_W": 18762355296.890327,
+      "minimum_individual_capacity_to_peak": 1.3911087676688614,
+      "maximum_25_percent_margin_allocation_ratio": 0.8985638140248924,
+      "all_members_fit_installed_capacity": true,
+      "full_margin_target_met": true,
+      "peak_sampling": "Maximum over both 16-source/120-second and rotated 32-source/240-second load evaluations; nominal attitude and smooth burn power sampled every two seconds.",
+      "scope": "Sampled individual peaks through the executed return prefix. Complete return, structural mass layout, deployment and repeated-cycle hardware still unclosed."
+    },
+    "executed_prefix_conditional_cost": {
+      "assumed_cycle_days": 2.0,
+      "energy_through_stop_J": 119337920979695.84,
+      "scope": "Repeat only the measured expenditure through the failed-return stop once per two days, with the propagated mass allocation. No return completion, handover, recovery or global coverage is supplied by this arithmetic. Inventory remains hypothetical.",
+      "rows": [
+        {
+          "tiles": 17285560.170967527,
+          "mean_propulsion_TW": 33.06823275387139,
+          "installed_propulsion_capacity_TW": 1397.6666364808461,
+          "propellant_kg_s": 51439.47317268881
+        },
+        {
+          "tiles": 25000000.0,
+          "mean_propulsion_TW": 47.82638286928664,
+          "installed_propulsion_capacity_TW": 2021.436711707409,
+          "propellant_kg_s": 74396.59557444586
+        },
+        {
+          "tiles": 35000000.0,
+          "mean_propulsion_TW": 66.95693601700128,
+          "installed_propulsion_capacity_TW": 2830.0113963903723,
+          "propellant_kg_s": 104155.23380422422
+        }
+      ]
+    },
+    "coverage_adversary": {
+      "grid_probes": 533,
+      "total_probes": 891,
+      "worst": {
+        "time_s": 745.027436313537,
+        "angle_rad": 3.1415905367304884,
+        "solar_radius_fraction": 1.0,
+        "margin_m": 6977.412392785093,
+        "missed_area_m2": 0.0,
+        "covered_fraction": 1.0,
+        "circle_sagitta_allowance_m": 0.1882471739889091
+      },
+      "passed": true,
+      "continuous_certificate": false
+    },
+    "frozen_orientation_scope": "Same terminal centres and velocities with hypothetical common square orientations. No instantaneous slew, alternative force history, safe transition or operating saving is implied.",
+    "collection": "Per-member first-interception, two-face, redirected-band and mutual-shadow records on every executed stage. Service/departure source refinement changes optical energy by less than 9.72e-5 relative; feathered return retains a 3.14% 16/32-source discrepancy. Optical potential only.",
+    "recurring_cost_measured": false,
+    "fleet_propulsion_W": null,
+    "collection_capacity_W": null,
+    "delivered_power_W": null,
+    "not_executed": [
+      "Full return and next service",
+      "Two-pattern handover, acquisition and recovery",
+      "Safe trajectories using the frozen-event alternative orientations",
+      "Repeated cycles, operational maneuver frequency and simultaneous full-target placement",
+      "Detailed hardware layout, flexibility, propellant depletion feedback and energy supply/storage",
+      "Collector momentum, spectral/angular conversion and net delivered power",
+      "Exhaustive continuous coverage and encounter certification"
+    ],
+    "publication_target": "research/solar-shield-habitat-array; main unchanged",
+    "repository_checks": {
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 make check",
+      "status": "FAIL_EXISTING",
+      "layer_files": 524,
+      "layer_violations": 0,
+      "python_passed": 686,
+      "python_skipped": 55,
+      "python_failed": 13,
+      "python_elapsed_s": 30.6,
+      "same_failed_tests_as_before_changes": true,
+      "failed_tests": [
+        "atmosphere/tests/test_absorption.py::test_ion_production_falls_with_the_shadow_and_ends_at_the_outer_radius",
+        "atmosphere/tests/test_absorption.py::test_ionization_rate_is_of_the_tabulated_order",
+        "atmosphere/tests/test_absorption.py::test_design_case_needs_a_radius_just_under_the_exobase",
+        "atmosphere/tests/test_exosphere.py::test_dissociation_rates_agree_with_heays",
+        "atmosphere/tests/test_exosphere.py::test_ions_made_match_the_absorption_step",
+        "atmosphere/tests/test_exosphere.py::test_charge_exchange_thin_limit_counts_the_swept_exosphere",
+        "atmosphere/tests/test_exosphere.py::test_magnetosphere_accounts_for_every_ion_and_a_stronger_one_keeps_more",
+        "atmosphere/tests/test_exosphere.py::test_levels_are_ordered_and_wider_shadows_never_lose_more",
+        "climate/tests/test_cm1_run.py::test_the_terrain_build_forces_each_column_at_its_own_height",
+        "climate/tests/test_exoplasim_run.py::RunnerTests::test_process_lookup_finds_this_process",
+        "climate/tests/test_ring_comfort.py::test_hours_are_shares_of_the_lunar_day",
+        "climate/tests/test_ring_comfort.py::test_the_rings_land_is_pooled_by_latitude_and_height_and_counted_in_shares",
+        "research/studies/protection_architecture/test_run.py::test_design_point_holds_together"
+      ],
+      "later_make_targets_reached": false,
+      "causes": [
+        "missing pinned WHI solar spectrum",
+        "missing generated moon_gcm_configuration.json",
+        "process-group lookup does not see the test process in this execution environment"
+      ]
+    }
+  },
+  "return_repair": {
+    "starting_remote_head": "7e18c29a00342a5bcec143fa3e500147b462b333",
+    "early_checkpoint": "ba2d8d9887e61ab3e40fb79850ac7ba406f6739d",
+    "publication_target": "research/solar-shield-habitat-array; main unchanged",
+    "accepted_return": false,
+    "accepted_cycle": false,
+    "accepted_fleet": false,
+    "new_target_adopted": false,
+    "preserved_twelve_hour_passage": true,
+    "coupled_corrections": 3,
+    "independent_tighter_replays": 1,
+    "source_bound_products": [
+      "repair_audit.json",
+      "repair_budget.json",
+      "repair_local_refined.json",
+      "repair_local_screen.json",
+      "repair_screen.json",
+      "repair_synthesis.json",
+      "repair_trade.json",
+      "repair_trial_local_refined.json",
+      "repair_trial_local_refined_fine.json",
+      "repair_trial_roll_60.json",
+      "repair_trial_roll_minus30.json"
+    ],
+    "numerical_resources": {
+      "initial_inspection_charge_s": 10.0,
+      "interrupted_accounting_charge_s": 540.0,
+      "earlier_summary_charge_s": 0.3852167779987212,
+      "completed_producer_wall_s": 2173.991812545002,
+      "numerical_wall_s_before_this_summary": 2724.377029323001,
+      "ceiling_s": 3600.0,
+      "one_calculation_process": true,
+      "numerical_threads": 1,
+      "address_space_cap_GiB": 2,
+      "maximum_recorded_rss_MiB": 567.125,
+      "raw_output_MiB": 212.88688850402832,
+      "raw_ceiling_MiB": 512,
+      "checks_have_separate_allowance": true,
+      "total_numerical_wall_s": 2724.69951427
+    },
+    "targeted_checks": {
+      "command": "python -m pytest protection/dynamics research/studies/solar_shield_array engineering/test_shield_power.py -q",
+      "passed": 150,
+      "elapsed_s": 11.7,
+      "source_identity_recheck_after_resource_summary_fix": {
+        "passed": 4,
+        "elapsed_s": 0.63
+      }
+    },
+    "repository_checks": {
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 make check",
+      "status": "FAIL_EXISTING",
+      "python_passed": 695,
+      "python_skipped": 55,
+      "python_failed": 13,
+      "python_elapsed_s": 29.66,
+      "same_failed_tests_as_before_changes": true,
+      "failed_tests": [
+        "atmosphere/tests/test_absorption.py::test_ion_production_falls_with_the_shadow_and_ends_at_the_outer_radius",
+        "atmosphere/tests/test_absorption.py::test_ionization_rate_is_of_the_tabulated_order",
+        "atmosphere/tests/test_absorption.py::test_design_case_needs_a_radius_just_under_the_exobase",
+        "atmosphere/tests/test_exosphere.py::test_dissociation_rates_agree_with_heays",
+        "atmosphere/tests/test_exosphere.py::test_ions_made_match_the_absorption_step",
+        "atmosphere/tests/test_exosphere.py::test_charge_exchange_thin_limit_counts_the_swept_exosphere",
+        "atmosphere/tests/test_exosphere.py::test_magnetosphere_accounts_for_every_ion_and_a_stronger_one_keeps_more",
+        "atmosphere/tests/test_exosphere.py::test_levels_are_ordered_and_wider_shadows_never_lose_more",
+        "climate/tests/test_cm1_run.py::test_the_terrain_build_forces_each_column_at_its_own_height",
+        "climate/tests/test_exoplasim_run.py::RunnerTests::test_process_lookup_finds_this_process",
+        "climate/tests/test_ring_comfort.py::test_hours_are_shares_of_the_lunar_day",
+        "climate/tests/test_ring_comfort.py::test_the_rings_land_is_pooled_by_latitude_and_height_and_counted_in_shares",
+        "research/studies/protection_architecture/test_run.py::test_design_point_holds_together"
+      ],
+      "later_make_targets_reached": false,
+      "staged_layer_check": {
+        "command": "python shared/check_layers.py",
+        "files_checked": 539,
+        "violations": 0
+      },
+      "staged_whitespace_check_passed": true
+    },
+    "not_executed": [
+      "Full return, arrival service, attitude recovery and coupled handover",
+      "Repropagation with the additional equipment required by new peak loads",
+      "Repeated cycles, sufficient inventory and global simultaneous coverage",
+      "Collector layout, routing, energy storage and delivered-power realization",
+      "Hardware flexibility, propellant-depletion feedback, recycling and component service lives"
+    ]
+  }
+}

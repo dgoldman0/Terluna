@@ -1,0 +1,3917 @@
+{
+  "schema": "terluna.research.departure-screen/1",
+  "producer": {
+    "source_hashes": {
+      "protection/dynamics/cycling.py": "704fbd03c9d4070ea05bdfeba57914ec225941f3560710da2472bd24ca870ed4",
+      "protection/dynamics/ephemeris.py": "9a162c3acf63a844284eb61b444a7d34f1447b5182d254d3e87616516f8748d9",
+      "protection/dynamics/ephemeris.json": "90fde7cb6142e5d4d8082270a978ba2f8f47baaefab0e8d1cf82ec6f07a27222",
+      "protection/dynamics/model.py": "01c9191588037ab4f42bac38dc4d5bd99e57427d37fa75cd672120e32b53733a",
+      "protection/dynamics/optical.py": "06a13ae9f24834876edbc12b513deaa5e3735f02f8249eb57c8996d74ce00b56",
+      "research/studies/solar_shield_array/scenario.json": "a53b784941518b6e36ccdf728252cf6c8e0c46c1126b6c621ed4e28c23128699",
+      "research/studies/solar_shield_array/cycling_search.py": "4789a0185620f6662916462b2715aa9002e6454e74f4f32ef5f7dadf5f732093",
+      "research/studies/solar_shield_array/cycling_feedback.py": "0eb32d26e14472f0a512cdf45d60f00ab8260376cd51ca715e7615bf7df02775",
+      "protection/dynamics/fleet.py": "f3e52653876c2956a4b355dc1290a0a1cadd2b9b601cafc664259827df1cc93c",
+      "research/studies/solar_shield_array/fleet_run.py": "9b8bc9765b9288745ea7d4d69d59e857e76e54d29cc91b37160503e9d9090833",
+      "protection/dynamics/active_formation.py": "597c12c6a4a89c0ea70663fddd69b9b5d9e599c88a2bd1742f5009d19e050b7a",
+      "protection/dynamics/active_retime.py": "9ba27a7ec48460a345289ebc7550c502f845487beaec5fe35084a67b2d9d736b",
+      "protection/dynamics/coverage_pilot.py": "fb03381e4387cb17e5276148428a3ffb2cbfb5313c8f59b8ff708ebeb9ce079c",
+      "protection/dynamics/natural_pattern.py": "780c2679f13c097c07b89e9d7cce1c91399f464f01b4bd878fb50cb643e1be29",
+      "research/studies/solar_shield_array/patterns_run.py": "f2e346fd2281632e5bf1c285c61229ba24e26e4ba4c480713194218263888d5c",
+      "protection/dynamics/pattern_departure.py": "24e7bb0653f9ab546b46a9a650ae67e3adb0af154c3e5b9ba83461e9648b828b",
+      "protection/dynamics/pattern_return.py": "a1a3f85e5f7744d0418574d0fc2a033d4ab69d9d55eba9bfbb85974c7ab64757",
+      "protection/dynamics/parallel_shadow.py": "98d09fc9e5812b3592cbc5e24e0615f9f9aa3a75c7f33afff0fe82d0e40c3c24",
+      "research/studies/solar_shield_array/return_screen.py": "53ec3ecf5165c773142315d97553f9c72ebbe6c045299ec368104c1811f4b526",
+      "research/studies/solar_shield_array/departure_screen.py": "9e69d5e5db5729191ca6ccae8673d24dfab7606af8bb47f1038913b328750ff4"
+    },
+    "constants": {
+      "AU": 149597870700.0,
+      "EARTH_GM": 398600441800000.0,
+      "EARTH_MOON_DISTANCE": 384400000.0,
+      "EARTH_OBLIQUITY_DEG": 23.4393,
+      "EARTH_RADIUS": 6371000.0,
+      "JULIAN_DAY": 86400.0,
+      "MOON_GM": 4902800118000.0,
+      "MOON_RADIUS": 1737400.0,
+      "SOLAR_CONSTANT": 1361.0,
+      "SOLAR_SYSTEM_GM": {
+        "mercury": 22031868551000.0,
+        "venus": 324858592000000.0,
+        "mars": 42828375816000.0,
+        "jupiter": 1.267127641e+17,
+        "saturn": 3.79405848418e+16,
+        "uranus": 5794556400000000.0,
+        "neptune": 6836527100580000.0,
+        "pluto": 975500000000.0
+      },
+      "SPEED_OF_LIGHT": 299792458.0,
+      "SUN_GM": 1.3271244004127942e+20,
+      "SUN_RADIUS": 695700000.0
+    },
+    "inputs": {
+      "patterns.json": "deb98cc0faee44fc357194d3c554da4aadf6861dc84b95c911314abeb684c1cf"
+    }
+  },
+  "start_s": 21600.0,
+  "end_s": 43200.0,
+  "count": 361,
+  "initial_state_sha256": "976d0f456074b1a3bf97f78c7caa2ac2a3ba46ff9e5edecd989e2acdb5e02c6e",
+  "accepted_fleet": false,
+  "accepted_return": false,
+  "accepted_departure": false,
+  "continuous_certificate": false,
+  "budget_wall_s": 600,
+  "cases": [
+    {
+      "index": 0,
+      "burn_s": 3600.0,
+      "delay_s": 7200.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 0.5,
+      "mean_delta_v_m_s": 0.4986149584487535,
+      "maximum_acceleration_m_s2": 0.0004385964912280702,
+      "encounters": {
+        "sampled_pair_violations": 16871,
+        "minimum_sampled_separating_projection_m": 0.0007263624549477846,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263624549477846,
+            "axis": [
+              0.19123785747354083,
+              -0.9005486992151233,
+              -0.390435810615368
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123040059904374,
+            "axis": [
+              0.191144693335287,
+              -0.9005653486972368,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 16.53430979728285,
+        "maximum_sampled_rate_deg_s": 0.09290693238005163,
+        "maximum_sampled_angular_acceleration_deg_s2": 0.0001605553824472109
+      },
+      "rejected_constraint": "clearance"
+    },
+    {
+      "index": 1,
+      "burn_s": 3600.0,
+      "delay_s": 7200.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 0.5,
+      "mean_delta_v_m_s": 0.4986149584487535,
+      "maximum_acceleration_m_s2": 0.0004385964912280702,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263624557632644,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263624557632644,
+            "axis": [
+              0.19123785747354038,
+              -0.9005486992151234,
+              -0.3904358106153679
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123040059904374,
+            "axis": [
+              0.1911446933352866,
+              -0.9005653486972369,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": -22.57943460276914,
+        "maximum_sampled_rate_deg_s": 0.09292961093443008,
+        "maximum_sampled_angular_acceleration_deg_s2": 0.0001605553824467642
+      },
+      "rejected_constraint": "clearance,beam"
+    },
+    {
+      "index": 2,
+      "burn_s": 3600.0,
+      "delay_s": 7200.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 0.5,
+      "mean_delta_v_m_s": 0.4986149584487535,
+      "maximum_acceleration_m_s2": 0.0004385964912280702,
+      "encounters": {
+        "sampled_pair_violations": 16838,
+        "minimum_sampled_separating_projection_m": 0.0007263624549477846,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263624549477846,
+            "axis": [
+              0.19123785747354083,
+              -0.9005486992151233,
+              -0.390435810615368
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123040059904374,
+            "axis": [
+              0.191144693335287,
+              -0.9005653486972368,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 20.342122557021383,
+        "maximum_sampled_rate_deg_s": 0.04686365378976085,
+        "maximum_sampled_angular_acceleration_deg_s2": 4.003472308853193e-05
+      },
+      "rejected_constraint": "clearance"
+    },
+    {
+      "index": 3,
+      "burn_s": 3600.0,
+      "delay_s": 7200.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 0.5,
+      "mean_delta_v_m_s": 0.4986149584487535,
+      "maximum_acceleration_m_s2": 0.0004385964912280702,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263624557632644,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263624557632644,
+            "axis": [
+              0.19123785747354038,
+              -0.9005486992151234,
+              -0.3904358106153679
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123040059904374,
+            "axis": [
+              0.1911446933352866,
+              -0.9005653486972369,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": -27.04974083413826,
+        "maximum_sampled_rate_deg_s": 0.04688633077815926,
+        "maximum_sampled_angular_acceleration_deg_s2": 4.003472308740196e-05
+      },
+      "rejected_constraint": "clearance,beam"
+    },
+    {
+      "index": 4,
+      "burn_s": 3600.0,
+      "delay_s": 7200.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 1.0,
+      "mean_delta_v_m_s": 0.997229916897507,
+      "maximum_acceleration_m_s2": 0.0008771929824561404,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263624549477846,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263624549477846,
+            "axis": [
+              0.19123785747354083,
+              -0.9005486992151233,
+              -0.390435810615368
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123040059904374,
+            "axis": [
+              0.191144693335287,
+              -0.9005653486972368,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 16.531819297348626,
+        "maximum_sampled_rate_deg_s": 0.09290693238005163,
+        "maximum_sampled_angular_acceleration_deg_s2": 0.0001605553824472109
+      },
+      "rejected_constraint": "clearance"
+    },
+    {
+      "index": 5,
+      "burn_s": 3600.0,
+      "delay_s": 7200.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 1.0,
+      "mean_delta_v_m_s": 0.997229916897507,
+      "maximum_acceleration_m_s2": 0.0008771929824561404,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263624557632644,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263624557632644,
+            "axis": [
+              0.19123785747354038,
+              -0.9005486992151234,
+              -0.3904358106153679
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123040059904374,
+            "axis": [
+              0.1911446933352866,
+              -0.9005653486972369,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": -22.58154990935725,
+        "maximum_sampled_rate_deg_s": 0.09292961093443008,
+        "maximum_sampled_angular_acceleration_deg_s2": 0.0001605553824467642
+      },
+      "rejected_constraint": "clearance,beam"
+    },
+    {
+      "index": 6,
+      "burn_s": 3600.0,
+      "delay_s": 7200.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 1.0,
+      "mean_delta_v_m_s": 0.997229916897507,
+      "maximum_acceleration_m_s2": 0.0008771929824561404,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263624549477846,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263624549477846,
+            "axis": [
+              0.19123785747354083,
+              -0.9005486992151233,
+              -0.390435810615368
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123040059904374,
+            "axis": [
+              0.191144693335287,
+              -0.9005653486972368,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 20.338436736508044,
+        "maximum_sampled_rate_deg_s": 0.04686365378976085,
+        "maximum_sampled_angular_acceleration_deg_s2": 4.003472308853193e-05
+      },
+      "rejected_constraint": "clearance"
+    },
+    {
+      "index": 7,
+      "burn_s": 3600.0,
+      "delay_s": 7200.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 1.0,
+      "mean_delta_v_m_s": 0.997229916897507,
+      "maximum_acceleration_m_s2": 0.0008771929824561404,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263624557632644,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263624557632644,
+            "axis": [
+              0.19123785747354038,
+              -0.9005486992151234,
+              -0.3904358106153679
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123040059904374,
+            "axis": [
+              0.1911446933352866,
+              -0.9005653486972369,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": -27.072466933120914,
+        "maximum_sampled_rate_deg_s": 0.04688633077815926,
+        "maximum_sampled_angular_acceleration_deg_s2": 4.003472308740196e-05
+      },
+      "rejected_constraint": "clearance,beam"
+    },
+    {
+      "index": 8,
+      "burn_s": 3600.0,
+      "delay_s": 7200.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 1.5,
+      "mean_delta_v_m_s": 1.4958448753462603,
+      "maximum_acceleration_m_s2": 0.0013157894736842107,
+      "rejected_constraint": "acceleration"
+    },
+    {
+      "index": 9,
+      "burn_s": 3600.0,
+      "delay_s": 7200.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 1.5,
+      "mean_delta_v_m_s": 1.4958448753462603,
+      "maximum_acceleration_m_s2": 0.0013157894736842107,
+      "rejected_constraint": "acceleration"
+    },
+    {
+      "index": 10,
+      "burn_s": 3600.0,
+      "delay_s": 7200.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 1.5,
+      "mean_delta_v_m_s": 1.4958448753462603,
+      "maximum_acceleration_m_s2": 0.0013157894736842107,
+      "rejected_constraint": "acceleration"
+    },
+    {
+      "index": 11,
+      "burn_s": 3600.0,
+      "delay_s": 7200.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 1.5,
+      "mean_delta_v_m_s": 1.4958448753462603,
+      "maximum_acceleration_m_s2": 0.0013157894736842107,
+      "rejected_constraint": "acceleration"
+    },
+    {
+      "index": 12,
+      "burn_s": 3600.0,
+      "delay_s": 7200.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 2.0,
+      "mean_delta_v_m_s": 1.994459833795014,
+      "maximum_acceleration_m_s2": 0.0017543859649122807,
+      "rejected_constraint": "acceleration"
+    },
+    {
+      "index": 13,
+      "burn_s": 3600.0,
+      "delay_s": 7200.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 2.0,
+      "mean_delta_v_m_s": 1.994459833795014,
+      "maximum_acceleration_m_s2": 0.0017543859649122807,
+      "rejected_constraint": "acceleration"
+    },
+    {
+      "index": 14,
+      "burn_s": 3600.0,
+      "delay_s": 7200.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 2.0,
+      "mean_delta_v_m_s": 1.994459833795014,
+      "maximum_acceleration_m_s2": 0.0017543859649122807,
+      "rejected_constraint": "acceleration"
+    },
+    {
+      "index": 15,
+      "burn_s": 3600.0,
+      "delay_s": 7200.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 2.0,
+      "mean_delta_v_m_s": 1.994459833795014,
+      "maximum_acceleration_m_s2": 0.0017543859649122807,
+      "rejected_constraint": "acceleration"
+    },
+    {
+      "index": 16,
+      "burn_s": 3600.0,
+      "delay_s": 10800.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 0.5,
+      "mean_delta_v_m_s": 0.4986149584487535,
+      "maximum_acceleration_m_s2": 0.0004385964912280702,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263624549477846,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263624549477846,
+            "axis": [
+              0.19123785747354083,
+              -0.9005486992151233,
+              -0.390435810615368
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123040059904374,
+            "axis": [
+              0.191144693335287,
+              -0.9005653486972368,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 24.56441349023271,
+        "maximum_sampled_rate_deg_s": 0.0929069355094235,
+        "maximum_sampled_angular_acceleration_deg_s2": 0.00016055538244538346
+      },
+      "rejected_constraint": "clearance"
+    },
+    {
+      "index": 17,
+      "burn_s": 3600.0,
+      "delay_s": 10800.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 0.5,
+      "mean_delta_v_m_s": 0.4986149584487535,
+      "maximum_acceleration_m_s2": 0.0004385964912280702,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263624557632644,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263624557632644,
+            "axis": [
+              0.19123785747354038,
+              -0.9005486992151234,
+              -0.3904358106153679
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123040059904374,
+            "axis": [
+              0.1911446933352866,
+              -0.9005653486972369,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": -22.30631509393915,
+        "maximum_sampled_rate_deg_s": 0.09292960780483776,
+        "maximum_sampled_angular_acceleration_deg_s2": 0.00016055538244491254
+      },
+      "rejected_constraint": "clearance,beam"
+    },
+    {
+      "index": 18,
+      "burn_s": 3600.0,
+      "delay_s": 10800.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 0.5,
+      "mean_delta_v_m_s": 0.4986149584487535,
+      "maximum_acceleration_m_s2": 0.0004385964912280702,
+      "encounters": {
+        "sampled_pair_violations": 16879,
+        "minimum_sampled_separating_projection_m": 0.0007263624549477846,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263624549477846,
+            "axis": [
+              0.19123785747354083,
+              -0.9005486992151233,
+              -0.390435810615368
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123040059904374,
+            "axis": [
+              0.191144693335287,
+              -0.9005653486972368,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 28.38270891157119,
+        "maximum_sampled_rate_deg_s": 0.04686365691757747,
+        "maximum_sampled_angular_acceleration_deg_s2": 4.003472308669839e-05
+      },
+      "rejected_constraint": "clearance"
+    },
+    {
+      "index": 19,
+      "burn_s": 3600.0,
+      "delay_s": 10800.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 0.5,
+      "mean_delta_v_m_s": 0.4986149584487535,
+      "maximum_acceleration_m_s2": 0.0004385964912280702,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263624557632644,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263624557632644,
+            "axis": [
+              0.19123785747354038,
+              -0.9005486992151234,
+              -0.3904358106153679
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123040059904374,
+            "axis": [
+              0.1911446933352866,
+              -0.9005653486972369,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": -24.725699028484208,
+        "maximum_sampled_rate_deg_s": 0.04688632765034281,
+        "maximum_sampled_angular_acceleration_deg_s2": 4.0034723085513534e-05
+      },
+      "rejected_constraint": "clearance,beam"
+    },
+    {
+      "index": 20,
+      "burn_s": 3600.0,
+      "delay_s": 10800.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 1.0,
+      "mean_delta_v_m_s": 0.997229916897507,
+      "maximum_acceleration_m_s2": 0.0008771929824561404,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263624549477846,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263624549477846,
+            "axis": [
+              0.19123785747354083,
+              -0.9005486992151233,
+              -0.390435810615368
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123040059904374,
+            "axis": [
+              0.191144693335287,
+              -0.9005653486972368,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 24.55911684411473,
+        "maximum_sampled_rate_deg_s": 0.0929069355094235,
+        "maximum_sampled_angular_acceleration_deg_s2": 0.00016055538244538346
+      },
+      "rejected_constraint": "clearance"
+    },
+    {
+      "index": 21,
+      "burn_s": 3600.0,
+      "delay_s": 10800.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 1.0,
+      "mean_delta_v_m_s": 0.997229916897507,
+      "maximum_acceleration_m_s2": 0.0008771929824561404,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263624557632644,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263624557632644,
+            "axis": [
+              0.19123785747354038,
+              -0.9005486992151234,
+              -0.3904358106153679
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123040059904374,
+            "axis": [
+              0.1911446933352866,
+              -0.9005653486972369,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": -22.33727774713648,
+        "maximum_sampled_rate_deg_s": 0.09292960780483776,
+        "maximum_sampled_angular_acceleration_deg_s2": 0.00016055538244491254
+      },
+      "rejected_constraint": "clearance,beam"
+    },
+    {
+      "index": 22,
+      "burn_s": 3600.0,
+      "delay_s": 10800.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 1.0,
+      "mean_delta_v_m_s": 0.997229916897507,
+      "maximum_acceleration_m_s2": 0.0008771929824561404,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263624549477846,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263624549477846,
+            "axis": [
+              0.19123785747354083,
+              -0.9005486992151233,
+              -0.390435810615368
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123040059904374,
+            "axis": [
+              0.191144693335287,
+              -0.9005653486972368,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 28.36736996676042,
+        "maximum_sampled_rate_deg_s": 0.04686365691757747,
+        "maximum_sampled_angular_acceleration_deg_s2": 4.003472308669839e-05
+      },
+      "rejected_constraint": "clearance"
+    },
+    {
+      "index": 23,
+      "burn_s": 3600.0,
+      "delay_s": 10800.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 1.0,
+      "mean_delta_v_m_s": 0.997229916897507,
+      "maximum_acceleration_m_s2": 0.0008771929824561404,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263624557632644,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263624557632644,
+            "axis": [
+              0.19123785747354038,
+              -0.9005486992151234,
+              -0.3904358106153679
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123040059904374,
+            "axis": [
+              0.1911446933352866,
+              -0.9005653486972369,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": -24.76033073412321,
+        "maximum_sampled_rate_deg_s": 0.04688632765034281,
+        "maximum_sampled_angular_acceleration_deg_s2": 4.0034723085513534e-05
+      },
+      "rejected_constraint": "clearance,beam"
+    },
+    {
+      "index": 24,
+      "burn_s": 3600.0,
+      "delay_s": 10800.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 1.5,
+      "mean_delta_v_m_s": 1.4958448753462603,
+      "maximum_acceleration_m_s2": 0.0013157894736842107,
+      "rejected_constraint": "acceleration"
+    },
+    {
+      "index": 25,
+      "burn_s": 3600.0,
+      "delay_s": 10800.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 1.5,
+      "mean_delta_v_m_s": 1.4958448753462603,
+      "maximum_acceleration_m_s2": 0.0013157894736842107,
+      "rejected_constraint": "acceleration"
+    },
+    {
+      "index": 26,
+      "burn_s": 3600.0,
+      "delay_s": 10800.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 1.5,
+      "mean_delta_v_m_s": 1.4958448753462603,
+      "maximum_acceleration_m_s2": 0.0013157894736842107,
+      "rejected_constraint": "acceleration"
+    },
+    {
+      "index": 27,
+      "burn_s": 3600.0,
+      "delay_s": 10800.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 1.5,
+      "mean_delta_v_m_s": 1.4958448753462603,
+      "maximum_acceleration_m_s2": 0.0013157894736842107,
+      "rejected_constraint": "acceleration"
+    },
+    {
+      "index": 28,
+      "burn_s": 3600.0,
+      "delay_s": 10800.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 2.0,
+      "mean_delta_v_m_s": 1.994459833795014,
+      "maximum_acceleration_m_s2": 0.0017543859649122807,
+      "rejected_constraint": "acceleration"
+    },
+    {
+      "index": 29,
+      "burn_s": 3600.0,
+      "delay_s": 10800.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 2.0,
+      "mean_delta_v_m_s": 1.994459833795014,
+      "maximum_acceleration_m_s2": 0.0017543859649122807,
+      "rejected_constraint": "acceleration"
+    },
+    {
+      "index": 30,
+      "burn_s": 3600.0,
+      "delay_s": 10800.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 2.0,
+      "mean_delta_v_m_s": 1.994459833795014,
+      "maximum_acceleration_m_s2": 0.0017543859649122807,
+      "rejected_constraint": "acceleration"
+    },
+    {
+      "index": 31,
+      "burn_s": 3600.0,
+      "delay_s": 10800.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 2.0,
+      "mean_delta_v_m_s": 1.994459833795014,
+      "maximum_acceleration_m_s2": 0.0017543859649122807,
+      "rejected_constraint": "acceleration"
+    },
+    {
+      "index": 32,
+      "burn_s": 3600.0,
+      "delay_s": 14400.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 0.5,
+      "mean_delta_v_m_s": 0.4986149584487535,
+      "maximum_acceleration_m_s2": 0.0004385964912280702,
+      "encounters": {
+        "sampled_pair_violations": 15634,
+        "minimum_sampled_separating_projection_m": 0.0007263624549477846,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263624549477846,
+            "axis": [
+              0.19123785747354083,
+              -0.9005486992151233,
+              -0.390435810615368
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123040059904374,
+            "axis": [
+              0.191144693335287,
+              -0.9005653486972368,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 32.6110726256095,
+        "maximum_sampled_rate_deg_s": 0.09290693863200705,
+        "maximum_sampled_angular_acceleration_deg_s2": 0.000160555382443459
+      },
+      "rejected_constraint": "clearance"
+    },
+    {
+      "index": 33,
+      "burn_s": 3600.0,
+      "delay_s": 14400.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 0.5,
+      "mean_delta_v_m_s": 0.4986149584487535,
+      "maximum_acceleration_m_s2": 0.0004385964912280702,
+      "encounters": {
+        "sampled_pair_violations": 15922,
+        "minimum_sampled_separating_projection_m": 0.0007263624557632644,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263624557632644,
+            "axis": [
+              0.19123785747354038,
+              -0.9005486992151234,
+              -0.3904358106153679
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123040059904374,
+            "axis": [
+              0.1911446933352866,
+              -0.9005653486972369,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": -26.13589807150152,
+        "maximum_sampled_rate_deg_s": 0.09292960468202292,
+        "maximum_sampled_angular_acceleration_deg_s2": 0.00016055538244297
+      },
+      "rejected_constraint": "clearance,beam"
+    },
+    {
+      "index": 34,
+      "burn_s": 3600.0,
+      "delay_s": 14400.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 0.5,
+      "mean_delta_v_m_s": 0.4986149584487535,
+      "maximum_acceleration_m_s2": 0.0004385964912280702,
+      "encounters": {
+        "sampled_pair_violations": 14103,
+        "minimum_sampled_separating_projection_m": 0.0007263624549477846,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263624549477846,
+            "axis": [
+              0.19123785747354083,
+              -0.9005486992151233,
+              -0.390435810615368
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 39240.0,
+            "i": 184,
+            "j": 222,
+            "separating_projection_m": 0.0014004191550127643,
+            "axis": [
+              0.20406957968500855,
+              -0.8981754674481864,
+              -0.3894052340703907
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 36.429380619031235,
+        "maximum_sampled_rate_deg_s": 0.04686366003853083,
+        "maximum_sampled_angular_acceleration_deg_s2": 4.003472308476577e-05
+      },
+      "rejected_constraint": "clearance"
+    },
+    {
+      "index": 35,
+      "burn_s": 3600.0,
+      "delay_s": 14400.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 0.5,
+      "mean_delta_v_m_s": 0.4986149584487535,
+      "maximum_acceleration_m_s2": 0.0004385964912280702,
+      "encounters": {
+        "sampled_pair_violations": 14819,
+        "minimum_sampled_separating_projection_m": 0.0007263624557632644,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263624557632644,
+            "axis": [
+              0.19123785747354038,
+              -0.9005486992151234,
+              -0.3904358106153679
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123040059904374,
+            "axis": [
+              0.1911446933352866,
+              -0.9005653486972369,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": -23.72280052100288,
+        "maximum_sampled_rate_deg_s": 0.046886324529389733,
+        "maximum_sampled_angular_acceleration_deg_s2": 4.003472308353377e-05
+      },
+      "rejected_constraint": "clearance,beam"
+    },
+    {
+      "index": 36,
+      "burn_s": 3600.0,
+      "delay_s": 14400.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 1.0,
+      "mean_delta_v_m_s": 0.997229916897507,
+      "maximum_acceleration_m_s2": 0.0008771929824561404,
+      "encounters": {
+        "sampled_pair_violations": 15618,
+        "minimum_sampled_separating_projection_m": 0.0007263624549477846,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263624549477846,
+            "axis": [
+              0.19123785747354083,
+              -0.9005486992151233,
+              -0.390435810615368
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123040059904374,
+            "axis": [
+              0.191144693335287,
+              -0.9005653486972368,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 32.58675990198573,
+        "maximum_sampled_rate_deg_s": 0.09290693863200705,
+        "maximum_sampled_angular_acceleration_deg_s2": 0.000160555382443459
+      },
+      "rejected_constraint": "clearance"
+    },
+    {
+      "index": 37,
+      "burn_s": 3600.0,
+      "delay_s": 14400.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 1.0,
+      "mean_delta_v_m_s": 0.997229916897507,
+      "maximum_acceleration_m_s2": 0.0008771929824561404,
+      "encounters": {
+        "sampled_pair_violations": 15922,
+        "minimum_sampled_separating_projection_m": 0.0007263624557632644,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263624557632644,
+            "axis": [
+              0.19123785747354038,
+              -0.9005486992151234,
+              -0.3904358106153679
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123040059904374,
+            "axis": [
+              0.1911446933352866,
+              -0.9005653486972369,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": -26.15807918964565,
+        "maximum_sampled_rate_deg_s": 0.09292960468202292,
+        "maximum_sampled_angular_acceleration_deg_s2": 0.00016055538244297
+      },
+      "rejected_constraint": "clearance,beam"
+    },
+    {
+      "index": 38,
+      "burn_s": 3600.0,
+      "delay_s": 14400.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 1.0,
+      "mean_delta_v_m_s": 0.997229916897507,
+      "maximum_acceleration_m_s2": 0.0008771929824561404,
+      "encounters": {
+        "sampled_pair_violations": 13968,
+        "minimum_sampled_separating_projection_m": 0.0007263624549477846,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263624549477846,
+            "axis": [
+              0.19123785747354083,
+              -0.9005486992151233,
+              -0.390435810615368
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 39240.0,
+            "i": 184,
+            "j": 222,
+            "separating_projection_m": 0.0014004191550127643,
+            "axis": [
+              0.20406957968500855,
+              -0.8981754674481864,
+              -0.3894052340703907
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 36.39982938828152,
+        "maximum_sampled_rate_deg_s": 0.04686366003853083,
+        "maximum_sampled_angular_acceleration_deg_s2": 4.003472308476577e-05
+      },
+      "rejected_constraint": "clearance"
+    },
+    {
+      "index": 39,
+      "burn_s": 3600.0,
+      "delay_s": 14400.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 1.0,
+      "mean_delta_v_m_s": 0.997229916897507,
+      "maximum_acceleration_m_s2": 0.0008771929824561404,
+      "encounters": {
+        "sampled_pair_violations": 14819,
+        "minimum_sampled_separating_projection_m": 0.0007263624557632644,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263624557632644,
+            "axis": [
+              0.19123785747354038,
+              -0.9005486992151234,
+              -0.3904358106153679
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123040059904374,
+            "axis": [
+              0.1911446933352866,
+              -0.9005653486972369,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": -23.748206701458383,
+        "maximum_sampled_rate_deg_s": 0.046886324529389733,
+        "maximum_sampled_angular_acceleration_deg_s2": 4.003472308353377e-05
+      },
+      "rejected_constraint": "clearance,beam"
+    },
+    {
+      "index": 40,
+      "burn_s": 3600.0,
+      "delay_s": 14400.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 1.5,
+      "mean_delta_v_m_s": 1.4958448753462603,
+      "maximum_acceleration_m_s2": 0.0013157894736842107,
+      "rejected_constraint": "acceleration"
+    },
+    {
+      "index": 41,
+      "burn_s": 3600.0,
+      "delay_s": 14400.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 1.5,
+      "mean_delta_v_m_s": 1.4958448753462603,
+      "maximum_acceleration_m_s2": 0.0013157894736842107,
+      "rejected_constraint": "acceleration"
+    },
+    {
+      "index": 42,
+      "burn_s": 3600.0,
+      "delay_s": 14400.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 1.5,
+      "mean_delta_v_m_s": 1.4958448753462603,
+      "maximum_acceleration_m_s2": 0.0013157894736842107,
+      "rejected_constraint": "acceleration"
+    },
+    {
+      "index": 43,
+      "burn_s": 3600.0,
+      "delay_s": 14400.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 1.5,
+      "mean_delta_v_m_s": 1.4958448753462603,
+      "maximum_acceleration_m_s2": 0.0013157894736842107,
+      "rejected_constraint": "acceleration"
+    },
+    {
+      "index": 44,
+      "burn_s": 3600.0,
+      "delay_s": 14400.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 2.0,
+      "mean_delta_v_m_s": 1.994459833795014,
+      "maximum_acceleration_m_s2": 0.0017543859649122807,
+      "rejected_constraint": "acceleration"
+    },
+    {
+      "index": 45,
+      "burn_s": 3600.0,
+      "delay_s": 14400.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 2.0,
+      "mean_delta_v_m_s": 1.994459833795014,
+      "maximum_acceleration_m_s2": 0.0017543859649122807,
+      "rejected_constraint": "acceleration"
+    },
+    {
+      "index": 46,
+      "burn_s": 3600.0,
+      "delay_s": 14400.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 2.0,
+      "mean_delta_v_m_s": 1.994459833795014,
+      "maximum_acceleration_m_s2": 0.0017543859649122807,
+      "rejected_constraint": "acceleration"
+    },
+    {
+      "index": 47,
+      "burn_s": 3600.0,
+      "delay_s": 14400.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 2.0,
+      "mean_delta_v_m_s": 1.994459833795014,
+      "maximum_acceleration_m_s2": 0.0017543859649122807,
+      "rejected_constraint": "acceleration"
+    },
+    {
+      "index": 48,
+      "burn_s": 7200.0,
+      "delay_s": 7200.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 0.5,
+      "mean_delta_v_m_s": 0.4986149584487535,
+      "maximum_acceleration_m_s2": 0.0002192982456140351,
+      "encounters": {
+        "sampled_pair_violations": 16834,
+        "minimum_sampled_separating_projection_m": 0.0007263786821383585,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786821383585,
+            "axis": [
+              0.19123785747354083,
+              -0.9005486992151233,
+              -0.390435810615368
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.001512313163406899,
+            "axis": [
+              0.191144693335287,
+              -0.9005653486972368,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 16.534900055341588,
+        "maximum_sampled_rate_deg_s": 0.09290693238005163,
+        "maximum_sampled_angular_acceleration_deg_s2": 0.0001605553824472109
+      },
+      "rejected_constraint": "clearance"
+    },
+    {
+      "index": 49,
+      "burn_s": 7200.0,
+      "delay_s": 7200.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 0.5,
+      "mean_delta_v_m_s": 0.4986149584487535,
+      "maximum_acceleration_m_s2": 0.0002192982456140351,
+      "encounters": {
+        "sampled_pair_violations": 16839,
+        "minimum_sampled_separating_projection_m": 0.0007263786829538383,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786829538383,
+            "axis": [
+              0.19123785747354038,
+              -0.9005486992151234,
+              -0.3904358106153679
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123131638616464,
+            "axis": [
+              0.1911446933352866,
+              -0.9005653486972369,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": -22.578883652958186,
+        "maximum_sampled_rate_deg_s": 0.09292961093443008,
+        "maximum_sampled_angular_acceleration_deg_s2": 0.0001605553824467642
+      },
+      "rejected_constraint": "clearance,beam"
+    },
+    {
+      "index": 50,
+      "burn_s": 7200.0,
+      "delay_s": 7200.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 0.5,
+      "mean_delta_v_m_s": 0.4986149584487535,
+      "maximum_acceleration_m_s2": 0.0002192982456140351,
+      "encounters": {
+        "sampled_pair_violations": 16832,
+        "minimum_sampled_separating_projection_m": 0.0007263786821383585,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786821383585,
+            "axis": [
+              0.19123785747354083,
+              -0.9005486992151233,
+              -0.390435810615368
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.001512313163406899,
+            "axis": [
+              0.191144693335287,
+              -0.9005653486972368,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 20.342816706868472,
+        "maximum_sampled_rate_deg_s": 0.04686365378976085,
+        "maximum_sampled_angular_acceleration_deg_s2": 4.003472308853193e-05
+      },
+      "rejected_constraint": "clearance"
+    },
+    {
+      "index": 51,
+      "burn_s": 7200.0,
+      "delay_s": 7200.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 0.5,
+      "mean_delta_v_m_s": 0.4986149584487535,
+      "maximum_acceleration_m_s2": 0.0002192982456140351,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263786829538383,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786829538383,
+            "axis": [
+              0.19123785747354038,
+              -0.9005486992151234,
+              -0.3904358106153679
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123131638616464,
+            "axis": [
+              0.1911446933352866,
+              -0.9005653486972369,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": -27.044361649039413,
+        "maximum_sampled_rate_deg_s": 0.04688633077815926,
+        "maximum_sampled_angular_acceleration_deg_s2": 4.003472308740196e-05
+      },
+      "rejected_constraint": "clearance,beam"
+    },
+    {
+      "index": 52,
+      "burn_s": 7200.0,
+      "delay_s": 7200.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 1.0,
+      "mean_delta_v_m_s": 0.997229916897507,
+      "maximum_acceleration_m_s2": 0.0004385964912280702,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263786821383585,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786821383585,
+            "axis": [
+              0.19123785747354083,
+              -0.9005486992151233,
+              -0.390435810615368
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.001512313163406899,
+            "axis": [
+              0.191144693335287,
+              -0.9005653486972368,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 16.532999506433946,
+        "maximum_sampled_rate_deg_s": 0.09290693238005163,
+        "maximum_sampled_angular_acceleration_deg_s2": 0.0001605553824472109
+      },
+      "rejected_constraint": "clearance"
+    },
+    {
+      "index": 53,
+      "burn_s": 7200.0,
+      "delay_s": 7200.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 1.0,
+      "mean_delta_v_m_s": 0.997229916897507,
+      "maximum_acceleration_m_s2": 0.0004385964912280702,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263786829538383,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786829538383,
+            "axis": [
+              0.19123785747354038,
+              -0.9005486992151234,
+              -0.3904358106153679
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123131638616464,
+            "axis": [
+              0.1911446933352866,
+              -0.9005653486972369,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": -22.580448269897204,
+        "maximum_sampled_rate_deg_s": 0.09292961093443008,
+        "maximum_sampled_angular_acceleration_deg_s2": 0.0001605553824467642
+      },
+      "rejected_constraint": "clearance,beam"
+    },
+    {
+      "index": 54,
+      "burn_s": 7200.0,
+      "delay_s": 7200.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 1.0,
+      "mean_delta_v_m_s": 0.997229916897507,
+      "maximum_acceleration_m_s2": 0.0004385964912280702,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263786821383585,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786821383585,
+            "axis": [
+              0.19123785747354083,
+              -0.9005486992151233,
+              -0.390435810615368
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.001512313163406899,
+            "axis": [
+              0.191144693335287,
+              -0.9005653486972368,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 20.33982458309896,
+        "maximum_sampled_rate_deg_s": 0.04686365378976085,
+        "maximum_sampled_angular_acceleration_deg_s2": 4.003472308853193e-05
+      },
+      "rejected_constraint": "clearance"
+    },
+    {
+      "index": 55,
+      "burn_s": 7200.0,
+      "delay_s": 7200.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 1.0,
+      "mean_delta_v_m_s": 0.997229916897507,
+      "maximum_acceleration_m_s2": 0.0004385964912280702,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263786829538383,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786829538383,
+            "axis": [
+              0.19123785747354038,
+              -0.9005486992151234,
+              -0.3904358106153679
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123131638616464,
+            "axis": [
+              0.1911446933352866,
+              -0.9005653486972369,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": -27.061704179737685,
+        "maximum_sampled_rate_deg_s": 0.04688633077815926,
+        "maximum_sampled_angular_acceleration_deg_s2": 4.003472308740196e-05
+      },
+      "rejected_constraint": "clearance,beam"
+    },
+    {
+      "index": 56,
+      "burn_s": 7200.0,
+      "delay_s": 7200.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 1.5,
+      "mean_delta_v_m_s": 1.4958448753462603,
+      "maximum_acceleration_m_s2": 0.0006578947368421054,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263786821383585,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786821383585,
+            "axis": [
+              0.19123785747354083,
+              -0.9005486992151233,
+              -0.390435810615368
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.001512313163406899,
+            "axis": [
+              0.191144693335287,
+              -0.9005653486972368,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 16.531099360126415,
+        "maximum_sampled_rate_deg_s": 0.09290693238005163,
+        "maximum_sampled_angular_acceleration_deg_s2": 0.0001605553824472109
+      },
+      "rejected_constraint": "clearance"
+    },
+    {
+      "index": 57,
+      "burn_s": 7200.0,
+      "delay_s": 7200.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 1.5,
+      "mean_delta_v_m_s": 1.4958448753462603,
+      "maximum_acceleration_m_s2": 0.0006578947368421054,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263786829538383,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786829538383,
+            "axis": [
+              0.19123785747354038,
+              -0.9005486992151234,
+              -0.3904358106153679
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123131638616464,
+            "axis": [
+              0.1911446933352866,
+              -0.9005653486972369,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": -22.582012588924453,
+        "maximum_sampled_rate_deg_s": 0.09292961093443008,
+        "maximum_sampled_angular_acceleration_deg_s2": 0.0001605553824467642
+      },
+      "rejected_constraint": "clearance,beam"
+    },
+    {
+      "index": 58,
+      "burn_s": 7200.0,
+      "delay_s": 7200.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 1.5,
+      "mean_delta_v_m_s": 1.4958448753462603,
+      "maximum_acceleration_m_s2": 0.0006578947368421054,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263786821383585,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786821383585,
+            "axis": [
+              0.19123785747354083,
+              -0.9005486992151233,
+              -0.390435810615368
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.001512313163406899,
+            "axis": [
+              0.191144693335287,
+              -0.9005653486972368,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 20.33683326307434,
+        "maximum_sampled_rate_deg_s": 0.04686365378976085,
+        "maximum_sampled_angular_acceleration_deg_s2": 4.003472308853193e-05
+      },
+      "rejected_constraint": "clearance"
+    },
+    {
+      "index": 59,
+      "burn_s": 7200.0,
+      "delay_s": 7200.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 1.5,
+      "mean_delta_v_m_s": 1.4958448753462603,
+      "maximum_acceleration_m_s2": 0.0006578947368421054,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263786829538383,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786829538383,
+            "axis": [
+              0.19123785747354038,
+              -0.9005486992151234,
+              -0.3904358106153679
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123131638616464,
+            "axis": [
+              0.1911446933352866,
+              -0.9005653486972369,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": -27.07905263394545,
+        "maximum_sampled_rate_deg_s": 0.04688633077815926,
+        "maximum_sampled_angular_acceleration_deg_s2": 4.003472308740196e-05
+      },
+      "rejected_constraint": "clearance,beam"
+    },
+    {
+      "index": 60,
+      "burn_s": 7200.0,
+      "delay_s": 7200.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 2.0,
+      "mean_delta_v_m_s": 1.994459833795014,
+      "maximum_acceleration_m_s2": 0.0008771929824561404,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263786821383585,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786821383585,
+            "axis": [
+              0.19123785747354083,
+              -0.9005486992151233,
+              -0.390435810615368
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.001512313163406899,
+            "axis": [
+              0.191144693335287,
+              -0.9005653486972368,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 16.529199616305792,
+        "maximum_sampled_rate_deg_s": 0.09290693238005163,
+        "maximum_sampled_angular_acceleration_deg_s2": 0.0001605553824472109
+      },
+      "rejected_constraint": "clearance"
+    },
+    {
+      "index": 61,
+      "burn_s": 7200.0,
+      "delay_s": 7200.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 2.0,
+      "mean_delta_v_m_s": 1.994459833795014,
+      "maximum_acceleration_m_s2": 0.0008771929824561404,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263786829538383,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786829538383,
+            "axis": [
+              0.19123785747354038,
+              -0.9005486992151234,
+              -0.3904358106153679
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123131638616464,
+            "axis": [
+              0.1911446933352866,
+              -0.9005653486972369,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": -22.583576610116268,
+        "maximum_sampled_rate_deg_s": 0.09292961093443008,
+        "maximum_sampled_angular_acceleration_deg_s2": 0.0001605553824467642
+      },
+      "rejected_constraint": "clearance,beam"
+    },
+    {
+      "index": 62,
+      "burn_s": 7200.0,
+      "delay_s": 7200.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 2.0,
+      "mean_delta_v_m_s": 1.994459833795014,
+      "maximum_acceleration_m_s2": 0.0008771929824561404,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263786821383585,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786821383585,
+            "axis": [
+              0.19123785747354083,
+              -0.9005486992151233,
+              -0.390435810615368
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.001512313163406899,
+            "axis": [
+              0.191144693335287,
+              -0.9005653486972368,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 20.333842746520297,
+        "maximum_sampled_rate_deg_s": 0.04686365378976085,
+        "maximum_sampled_angular_acceleration_deg_s2": 4.003472308853193e-05
+      },
+      "rejected_constraint": "clearance"
+    },
+    {
+      "index": 63,
+      "burn_s": 7200.0,
+      "delay_s": 7200.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 2.0,
+      "mean_delta_v_m_s": 1.994459833795014,
+      "maximum_acceleration_m_s2": 0.0008771929824561404,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263786829538383,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786829538383,
+            "axis": [
+              0.19123785747354038,
+              -0.9005486992151234,
+              -0.3904358106153679
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123131638616464,
+            "axis": [
+              0.1911446933352866,
+              -0.9005653486972369,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": -27.096407010530335,
+        "maximum_sampled_rate_deg_s": 0.04688633077815926,
+        "maximum_sampled_angular_acceleration_deg_s2": 4.003472308740196e-05
+      },
+      "rejected_constraint": "clearance,beam"
+    },
+    {
+      "index": 64,
+      "burn_s": 7200.0,
+      "delay_s": 10800.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 0.5,
+      "mean_delta_v_m_s": 0.4986149584487535,
+      "maximum_acceleration_m_s2": 0.0002192982456140351,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263786821383585,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786821383585,
+            "axis": [
+              0.19123785747354083,
+              -0.9005486992151233,
+              -0.390435810615368
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.001512313163406899,
+            "axis": [
+              0.191144693335287,
+              -0.9005653486972368,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 24.565216189470107,
+        "maximum_sampled_rate_deg_s": 0.0929069355094235,
+        "maximum_sampled_angular_acceleration_deg_s2": 0.00016055538244538346
+      },
+      "rejected_constraint": "clearance"
+    },
+    {
+      "index": 65,
+      "burn_s": 7200.0,
+      "delay_s": 10800.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 0.5,
+      "mean_delta_v_m_s": 0.4986149584487535,
+      "maximum_acceleration_m_s2": 0.0002192982456140351,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263786829538383,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786829538383,
+            "axis": [
+              0.19123785747354038,
+              -0.9005486992151234,
+              -0.3904358106153679
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123131638616464,
+            "axis": [
+              0.1911446933352866,
+              -0.9005653486972369,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": -22.300662977232705,
+        "maximum_sampled_rate_deg_s": 0.09292960780483776,
+        "maximum_sampled_angular_acceleration_deg_s2": 0.00016055538244491254
+      },
+      "rejected_constraint": "clearance,beam"
+    },
+    {
+      "index": 66,
+      "burn_s": 7200.0,
+      "delay_s": 10800.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 0.5,
+      "mean_delta_v_m_s": 0.4986149584487535,
+      "maximum_acceleration_m_s2": 0.0002192982456140351,
+      "encounters": {
+        "sampled_pair_violations": 16840,
+        "minimum_sampled_separating_projection_m": 0.0007263786821383585,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786821383585,
+            "axis": [
+              0.19123785747354083,
+              -0.9005486992151233,
+              -0.390435810615368
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.001512313163406899,
+            "axis": [
+              0.191144693335287,
+              -0.9005653486972368,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 28.38359869656066,
+        "maximum_sampled_rate_deg_s": 0.04686365691757747,
+        "maximum_sampled_angular_acceleration_deg_s2": 4.003472308669839e-05
+      },
+      "rejected_constraint": "clearance"
+    },
+    {
+      "index": 67,
+      "burn_s": 7200.0,
+      "delay_s": 10800.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 0.5,
+      "mean_delta_v_m_s": 0.4986149584487535,
+      "maximum_acceleration_m_s2": 0.0002192982456140351,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263786829538383,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786829538383,
+            "axis": [
+              0.19123785747354038,
+              -0.9005486992151234,
+              -0.3904358106153679
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123131638616464,
+            "axis": [
+              0.1911446933352866,
+              -0.9005653486972369,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": -24.719945925848844,
+        "maximum_sampled_rate_deg_s": 0.04688632765034281,
+        "maximum_sampled_angular_acceleration_deg_s2": 4.0034723085513534e-05
+      },
+      "rejected_constraint": "clearance,beam"
+    },
+    {
+      "index": 68,
+      "burn_s": 7200.0,
+      "delay_s": 10800.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 1.0,
+      "mean_delta_v_m_s": 0.997229916897507,
+      "maximum_acceleration_m_s2": 0.0004385964912280702,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263786821383585,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786821383585,
+            "axis": [
+              0.19123785747354083,
+              -0.9005486992151233,
+              -0.390435810615368
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.001512313163406899,
+            "axis": [
+              0.191144693335287,
+              -0.9005653486972368,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 24.560721599415587,
+        "maximum_sampled_rate_deg_s": 0.0929069355094235,
+        "maximum_sampled_angular_acceleration_deg_s2": 0.00016055538244538346
+      },
+      "rejected_constraint": "clearance"
+    },
+    {
+      "index": 69,
+      "burn_s": 7200.0,
+      "delay_s": 10800.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 1.0,
+      "mean_delta_v_m_s": 0.997229916897507,
+      "maximum_acceleration_m_s2": 0.0004385964912280702,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263786829538383,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786829538383,
+            "axis": [
+              0.19123785747354038,
+              -0.9005486992151234,
+              -0.3904358106153679
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123131638616464,
+            "axis": [
+              0.1911446933352866,
+              -0.9005653486972369,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": -22.325967756835293,
+        "maximum_sampled_rate_deg_s": 0.09292960780483776,
+        "maximum_sampled_angular_acceleration_deg_s2": 0.00016055538244491254
+      },
+      "rejected_constraint": "clearance,beam"
+    },
+    {
+      "index": 70,
+      "burn_s": 7200.0,
+      "delay_s": 10800.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 1.0,
+      "mean_delta_v_m_s": 0.997229916897507,
+      "maximum_acceleration_m_s2": 0.0004385964912280702,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263786821383585,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786821383585,
+            "axis": [
+              0.19123785747354083,
+              -0.9005486992151233,
+              -0.390435810615368
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.001512313163406899,
+            "axis": [
+              0.191144693335287,
+              -0.9005653486972368,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 28.372212338065626,
+        "maximum_sampled_rate_deg_s": 0.04686365691757747,
+        "maximum_sampled_angular_acceleration_deg_s2": 4.003472308669839e-05
+      },
+      "rejected_constraint": "clearance"
+    },
+    {
+      "index": 71,
+      "burn_s": 7200.0,
+      "delay_s": 10800.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 1.0,
+      "mean_delta_v_m_s": 0.997229916897507,
+      "maximum_acceleration_m_s2": 0.0004385964912280702,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263786829538383,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786829538383,
+            "axis": [
+              0.19123785747354038,
+              -0.9005486992151234,
+              -0.3904358106153679
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123131638616464,
+            "axis": [
+              0.1911446933352866,
+              -0.9005653486972369,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": -24.748818295556088,
+        "maximum_sampled_rate_deg_s": 0.04688632765034281,
+        "maximum_sampled_angular_acceleration_deg_s2": 4.0034723085513534e-05
+      },
+      "rejected_constraint": "clearance,beam"
+    },
+    {
+      "index": 72,
+      "burn_s": 7200.0,
+      "delay_s": 10800.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 1.5,
+      "mean_delta_v_m_s": 1.4958448753462603,
+      "maximum_acceleration_m_s2": 0.0006578947368421054,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263786821383585,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786821383585,
+            "axis": [
+              0.19123785747354083,
+              -0.9005486992151233,
+              -0.390435810615368
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.001512313163406899,
+            "axis": [
+              0.191144693335287,
+              -0.9005653486972368,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 24.55180381583548,
+        "maximum_sampled_rate_deg_s": 0.0929069355094235,
+        "maximum_sampled_angular_acceleration_deg_s2": 0.00016055538244538346
+      },
+      "rejected_constraint": "clearance"
+    },
+    {
+      "index": 73,
+      "burn_s": 7200.0,
+      "delay_s": 10800.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 1.5,
+      "mean_delta_v_m_s": 1.4958448753462603,
+      "maximum_acceleration_m_s2": 0.0006578947368421054,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263786829538383,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786829538383,
+            "axis": [
+              0.19123785747354038,
+              -0.9005486992151234,
+              -0.3904358106153679
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123131638616464,
+            "axis": [
+              0.1911446933352866,
+              -0.9005653486972369,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": -22.351283425308036,
+        "maximum_sampled_rate_deg_s": 0.09292960780483776,
+        "maximum_sampled_angular_acceleration_deg_s2": 0.00016055538244491254
+      },
+      "rejected_constraint": "clearance,beam"
+    },
+    {
+      "index": 74,
+      "burn_s": 7200.0,
+      "delay_s": 10800.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 1.5,
+      "mean_delta_v_m_s": 1.4958448753462603,
+      "maximum_acceleration_m_s2": 0.0006578947368421054,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263786821383585,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786821383585,
+            "axis": [
+              0.19123785747354083,
+              -0.9005486992151233,
+              -0.390435810615368
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.001512313163406899,
+            "axis": [
+              0.191144693335287,
+              -0.9005653486972368,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 28.355854955466228,
+        "maximum_sampled_rate_deg_s": 0.04686365691757747,
+        "maximum_sampled_angular_acceleration_deg_s2": 4.003472308669839e-05
+      },
+      "rejected_constraint": "clearance"
+    },
+    {
+      "index": 75,
+      "burn_s": 7200.0,
+      "delay_s": 10800.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 1.5,
+      "mean_delta_v_m_s": 1.4958448753462603,
+      "maximum_acceleration_m_s2": 0.0006578947368421054,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263786829538383,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786829538383,
+            "axis": [
+              0.19123785747354038,
+              -0.9005486992151234,
+              -0.3904358106153679
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123131638616464,
+            "axis": [
+              0.1911446933352866,
+              -0.9005653486972369,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": -24.777703772582473,
+        "maximum_sampled_rate_deg_s": 0.04688632765034281,
+        "maximum_sampled_angular_acceleration_deg_s2": 4.0034723085513534e-05
+      },
+      "rejected_constraint": "clearance,beam"
+    },
+    {
+      "index": 76,
+      "burn_s": 7200.0,
+      "delay_s": 10800.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 2.0,
+      "mean_delta_v_m_s": 1.994459833795014,
+      "maximum_acceleration_m_s2": 0.0008771929824561404,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263786821383585,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786821383585,
+            "axis": [
+              0.19123785747354083,
+              -0.9005486992151233,
+              -0.390435810615368
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.001512313163406899,
+            "axis": [
+              0.191144693335287,
+              -0.9005653486972368,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 24.539579089348184,
+        "maximum_sampled_rate_deg_s": 0.0929069355094235,
+        "maximum_sampled_angular_acceleration_deg_s2": 0.00016055538244538346
+      },
+      "rejected_constraint": "clearance"
+    },
+    {
+      "index": 77,
+      "burn_s": 7200.0,
+      "delay_s": 10800.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 2.0,
+      "mean_delta_v_m_s": 1.994459833795014,
+      "maximum_acceleration_m_s2": 0.0008771929824561404,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263786829538383,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786829538383,
+            "axis": [
+              0.19123785747354038,
+              -0.9005486992151234,
+              -0.3904358106153679
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123131638616464,
+            "axis": [
+              0.1911446933352866,
+              -0.9005653486972369,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": -22.376609983602325,
+        "maximum_sampled_rate_deg_s": 0.09292960780483776,
+        "maximum_sampled_angular_acceleration_deg_s2": 0.00016055538244491254
+      },
+      "rejected_constraint": "clearance,beam"
+    },
+    {
+      "index": 78,
+      "burn_s": 7200.0,
+      "delay_s": 10800.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 2.0,
+      "mean_delta_v_m_s": 1.994459833795014,
+      "maximum_acceleration_m_s2": 0.0008771929824561404,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263786821383585,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786821383585,
+            "axis": [
+              0.19123785747354083,
+              -0.9005486992151233,
+              -0.390435810615368
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.001512313163406899,
+            "axis": [
+              0.191144693335287,
+              -0.9005653486972368,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 28.339514180481753,
+        "maximum_sampled_rate_deg_s": 0.04686365691757747,
+        "maximum_sampled_angular_acceleration_deg_s2": 4.003472308669839e-05
+      },
+      "rejected_constraint": "clearance"
+    },
+    {
+      "index": 79,
+      "burn_s": 7200.0,
+      "delay_s": 10800.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 2.0,
+      "mean_delta_v_m_s": 1.994459833795014,
+      "maximum_acceleration_m_s2": 0.0008771929824561404,
+      "encounters": {
+        "sampled_pair_violations": 16815,
+        "minimum_sampled_separating_projection_m": 0.0007263786829538383,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786829538383,
+            "axis": [
+              0.19123785747354038,
+              -0.9005486992151234,
+              -0.3904358106153679
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123131638616464,
+            "axis": [
+              0.1911446933352866,
+              -0.9005653486972369,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": -24.806602356366376,
+        "maximum_sampled_rate_deg_s": 0.04688632765034281,
+        "maximum_sampled_angular_acceleration_deg_s2": 4.0034723085513534e-05
+      },
+      "rejected_constraint": "clearance,beam"
+    },
+    {
+      "index": 80,
+      "burn_s": 7200.0,
+      "delay_s": 14400.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 0.5,
+      "mean_delta_v_m_s": 0.4986149584487535,
+      "maximum_acceleration_m_s2": 0.0002192982456140351,
+      "encounters": {
+        "sampled_pair_violations": 15663,
+        "minimum_sampled_separating_projection_m": 0.0007263786821383585,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786821383585,
+            "axis": [
+              0.19123785747354083,
+              -0.9005486992151233,
+              -0.390435810615368
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.001512313163406899,
+            "axis": [
+              0.191144693335287,
+              -0.9005653486972368,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 32.61374590184706,
+        "maximum_sampled_rate_deg_s": 0.09290693863200705,
+        "maximum_sampled_angular_acceleration_deg_s2": 0.000160555382443459
+      },
+      "rejected_constraint": "clearance"
+    },
+    {
+      "index": 81,
+      "burn_s": 7200.0,
+      "delay_s": 14400.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 0.5,
+      "mean_delta_v_m_s": 0.4986149584487535,
+      "maximum_acceleration_m_s2": 0.0002192982456140351,
+      "encounters": {
+        "sampled_pair_violations": 15922,
+        "minimum_sampled_separating_projection_m": 0.0007263786829538383,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786829538383,
+            "axis": [
+              0.19123785747354038,
+              -0.9005486992151234,
+              -0.3904358106153679
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123131638616464,
+            "axis": [
+              0.1911446933352866,
+              -0.9005653486972369,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": -26.133630776372407,
+        "maximum_sampled_rate_deg_s": 0.09292960468202292,
+        "maximum_sampled_angular_acceleration_deg_s2": 0.00016055538244297
+      },
+      "rejected_constraint": "clearance,beam"
+    },
+    {
+      "index": 82,
+      "burn_s": 7200.0,
+      "delay_s": 14400.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 0.5,
+      "mean_delta_v_m_s": 0.4986149584487535,
+      "maximum_acceleration_m_s2": 0.0002192982456140351,
+      "encounters": {
+        "sampled_pair_violations": 14161,
+        "minimum_sampled_separating_projection_m": 0.0007263786821383585,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786821383585,
+            "axis": [
+              0.19123785747354083,
+              -0.9005486992151233,
+              -0.390435810615368
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 39240.0,
+            "i": 184,
+            "j": 222,
+            "separating_projection_m": 0.001400404258512512,
+            "axis": [
+              0.20406957968500855,
+              -0.8981754674481864,
+              -0.3894052340703907
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 36.432256298466044,
+        "maximum_sampled_rate_deg_s": 0.04686366003853083,
+        "maximum_sampled_angular_acceleration_deg_s2": 4.003472308476577e-05
+      },
+      "rejected_constraint": "clearance"
+    },
+    {
+      "index": 83,
+      "burn_s": 7200.0,
+      "delay_s": 14400.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 0.5,
+      "mean_delta_v_m_s": 0.4986149584487535,
+      "maximum_acceleration_m_s2": 0.0002192982456140351,
+      "encounters": {
+        "sampled_pair_violations": 14819,
+        "minimum_sampled_separating_projection_m": 0.0007263786829538383,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786829538383,
+            "axis": [
+              0.19123785747354038,
+              -0.9005486992151234,
+              -0.3904358106153679
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123131638616464,
+            "axis": [
+              0.1911446933352866,
+              -0.9005653486972369,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": -23.720082651519615,
+        "maximum_sampled_rate_deg_s": 0.046886324529389733,
+        "maximum_sampled_angular_acceleration_deg_s2": 4.003472308353377e-05
+      },
+      "rejected_constraint": "clearance,beam"
+    },
+    {
+      "index": 84,
+      "burn_s": 7200.0,
+      "delay_s": 14400.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 1.0,
+      "mean_delta_v_m_s": 0.997229916897507,
+      "maximum_acceleration_m_s2": 0.0004385964912280702,
+      "encounters": {
+        "sampled_pair_violations": 15618,
+        "minimum_sampled_separating_projection_m": 0.0007263786821383585,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786821383585,
+            "axis": [
+              0.19123785747354083,
+              -0.9005486992151233,
+              -0.390435810615368
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.001512313163406899,
+            "axis": [
+              0.191144693335287,
+              -0.9005653486972368,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 32.592098654681934,
+        "maximum_sampled_rate_deg_s": 0.09290693863200705,
+        "maximum_sampled_angular_acceleration_deg_s2": 0.000160555382443459
+      },
+      "rejected_constraint": "clearance"
+    },
+    {
+      "index": 85,
+      "burn_s": 7200.0,
+      "delay_s": 14400.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 1.0,
+      "mean_delta_v_m_s": 0.997229916897507,
+      "maximum_acceleration_m_s2": 0.0004385964912280702,
+      "encounters": {
+        "sampled_pair_violations": 15922,
+        "minimum_sampled_separating_projection_m": 0.0007263786829538383,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786829538383,
+            "axis": [
+              0.19123785747354038,
+              -0.9005486992151234,
+              -0.3904358106153679
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123131638616464,
+            "axis": [
+              0.1911446933352866,
+              -0.9005653486972369,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": -26.152921520334083,
+        "maximum_sampled_rate_deg_s": 0.09292960468202292,
+        "maximum_sampled_angular_acceleration_deg_s2": 0.00016055538244297
+      },
+      "rejected_constraint": "clearance,beam"
+    },
+    {
+      "index": 86,
+      "burn_s": 7200.0,
+      "delay_s": 14400.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 1.0,
+      "mean_delta_v_m_s": 0.997229916897507,
+      "maximum_acceleration_m_s2": 0.0004385964912280702,
+      "encounters": {
+        "sampled_pair_violations": 13968,
+        "minimum_sampled_separating_projection_m": 0.0007263786821383585,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786821383585,
+            "axis": [
+              0.19123785747354083,
+              -0.9005486992151233,
+              -0.390435810615368
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 39240.0,
+            "i": 184,
+            "j": 222,
+            "separating_projection_m": 0.001400404258512512,
+            "axis": [
+              0.20406957968500855,
+              -0.8981754674481864,
+              -0.3894052340703907
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 36.40557139678077,
+        "maximum_sampled_rate_deg_s": 0.04686366003853083,
+        "maximum_sampled_angular_acceleration_deg_s2": 4.003472308476577e-05
+      },
+      "rejected_constraint": "clearance"
+    },
+    {
+      "index": 87,
+      "burn_s": 7200.0,
+      "delay_s": 14400.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 1.0,
+      "mean_delta_v_m_s": 0.997229916897507,
+      "maximum_acceleration_m_s2": 0.0004385964912280702,
+      "encounters": {
+        "sampled_pair_violations": 14819,
+        "minimum_sampled_separating_projection_m": 0.0007263786829538383,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786829538383,
+            "axis": [
+              0.19123785747354038,
+              -0.9005486992151234,
+              -0.3904358106153679
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123131638616464,
+            "axis": [
+              0.1911446933352866,
+              -0.9005653486972369,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": -23.742779090273014,
+        "maximum_sampled_rate_deg_s": 0.046886324529389733,
+        "maximum_sampled_angular_acceleration_deg_s2": 4.003472308353377e-05
+      },
+      "rejected_constraint": "clearance,beam"
+    },
+    {
+      "index": 88,
+      "burn_s": 7200.0,
+      "delay_s": 14400.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 1.5,
+      "mean_delta_v_m_s": 1.4958448753462603,
+      "maximum_acceleration_m_s2": 0.0006578947368421054,
+      "encounters": {
+        "sampled_pair_violations": 15618,
+        "minimum_sampled_separating_projection_m": 0.0007263786821383585,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786821383585,
+            "axis": [
+              0.19123785747354083,
+              -0.9005486992151233,
+              -0.390435810615368
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.001512313163406899,
+            "axis": [
+              0.191144693335287,
+              -0.9005653486972368,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 32.5704760387763,
+        "maximum_sampled_rate_deg_s": 0.09290693863200705,
+        "maximum_sampled_angular_acceleration_deg_s2": 0.000160555382443459
+      },
+      "rejected_constraint": "clearance"
+    },
+    {
+      "index": 89,
+      "burn_s": 7200.0,
+      "delay_s": 14400.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 1.5,
+      "mean_delta_v_m_s": 1.4958448753462603,
+      "maximum_acceleration_m_s2": 0.0006578947368421054,
+      "encounters": {
+        "sampled_pair_violations": 15922,
+        "minimum_sampled_separating_projection_m": 0.0007263786829538383,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786829538383,
+            "axis": [
+              0.19123785747354038,
+              -0.9005486992151234,
+              -0.3904358106153679
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123131638616464,
+            "axis": [
+              0.1911446933352866,
+              -0.9005653486972369,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": -26.17250591833901,
+        "maximum_sampled_rate_deg_s": 0.09292960468202292,
+        "maximum_sampled_angular_acceleration_deg_s2": 0.00016055538244297
+      },
+      "rejected_constraint": "clearance,beam"
+    },
+    {
+      "index": 90,
+      "burn_s": 7200.0,
+      "delay_s": 14400.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 1.5,
+      "mean_delta_v_m_s": 1.4958448753462603,
+      "maximum_acceleration_m_s2": 0.0006578947368421054,
+      "encounters": {
+        "sampled_pair_violations": 13968,
+        "minimum_sampled_separating_projection_m": 0.0007263786821383585,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786821383585,
+            "axis": [
+              0.19123785747354083,
+              -0.9005486992151233,
+              -0.390435810615368
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 39240.0,
+            "i": 184,
+            "j": 222,
+            "separating_projection_m": 0.001400404258512512,
+            "axis": [
+              0.20406957968500855,
+              -0.8981754674481864,
+              -0.3894052340703907
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 36.378919241040414,
+        "maximum_sampled_rate_deg_s": 0.04686366003853083,
+        "maximum_sampled_angular_acceleration_deg_s2": 4.003472308476577e-05
+      },
+      "rejected_constraint": "clearance"
+    },
+    {
+      "index": 91,
+      "burn_s": 7200.0,
+      "delay_s": 14400.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 1.5,
+      "mean_delta_v_m_s": 1.4958448753462603,
+      "maximum_acceleration_m_s2": 0.0006578947368421054,
+      "encounters": {
+        "sampled_pair_violations": 14819,
+        "minimum_sampled_separating_projection_m": 0.0007263786829538383,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786829538383,
+            "axis": [
+              0.19123785747354038,
+              -0.9005486992151234,
+              -0.3904358106153679
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123131638616464,
+            "axis": [
+              0.1911446933352866,
+              -0.9005653486972369,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": -23.7654492300607,
+        "maximum_sampled_rate_deg_s": 0.046886324529389733,
+        "maximum_sampled_angular_acceleration_deg_s2": 4.003472308353377e-05
+      },
+      "rejected_constraint": "clearance,beam"
+    },
+    {
+      "index": 92,
+      "burn_s": 7200.0,
+      "delay_s": 14400.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 2.0,
+      "mean_delta_v_m_s": 1.994459833795014,
+      "maximum_acceleration_m_s2": 0.0008771929824561404,
+      "encounters": {
+        "sampled_pair_violations": 15618,
+        "minimum_sampled_separating_projection_m": 0.0007263786821383585,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786821383585,
+            "axis": [
+              0.19123785747354083,
+              -0.9005486992151233,
+              -0.390435810615368
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.001512313163406899,
+            "axis": [
+              0.191144693335287,
+              -0.9005653486972368,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 32.548878025584784,
+        "maximum_sampled_rate_deg_s": 0.09290693863200705,
+        "maximum_sampled_angular_acceleration_deg_s2": 0.000160555382443459
+      },
+      "rejected_constraint": "clearance"
+    },
+    {
+      "index": 93,
+      "burn_s": 7200.0,
+      "delay_s": 14400.0,
+      "slew_s": 1800.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 2.0,
+      "mean_delta_v_m_s": 1.994459833795014,
+      "maximum_acceleration_m_s2": 0.0008771929824561404,
+      "encounters": {
+        "sampled_pair_violations": 15922,
+        "minimum_sampled_separating_projection_m": 0.0007263786829538383,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786829538383,
+            "axis": [
+              0.19123785747354038,
+              -0.9005486992151234,
+              -0.3904358106153679
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123131638616464,
+            "axis": [
+              0.1911446933352866,
+              -0.9005653486972369,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": -26.192068873448523,
+        "maximum_sampled_rate_deg_s": 0.09292960468202292,
+        "maximum_sampled_angular_acceleration_deg_s2": 0.00016055538244297
+      },
+      "rejected_constraint": "clearance,beam"
+    },
+    {
+      "index": 94,
+      "burn_s": 7200.0,
+      "delay_s": 14400.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": -1,
+      "layer_impulse_m_s": 2.0,
+      "mean_delta_v_m_s": 1.994459833795014,
+      "maximum_acceleration_m_s2": 0.0008771929824561404,
+      "encounters": {
+        "sampled_pair_violations": 13968,
+        "minimum_sampled_separating_projection_m": 0.0007263786821383585,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786821383585,
+            "axis": [
+              0.19123785747354083,
+              -0.9005486992151233,
+              -0.390435810615368
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 39240.0,
+            "i": 184,
+            "j": 222,
+            "separating_projection_m": 0.001400404258512512,
+            "axis": [
+              0.20406957968500855,
+              -0.8981754674481864,
+              -0.3894052340703907
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 36.35229979451141,
+        "maximum_sampled_rate_deg_s": 0.04686366003853083,
+        "maximum_sampled_angular_acceleration_deg_s2": 4.003472308476577e-05
+      },
+      "rejected_constraint": "clearance"
+    },
+    {
+      "index": 95,
+      "burn_s": 7200.0,
+      "delay_s": 14400.0,
+      "slew_s": 3600.0,
+      "axis": 1,
+      "sign": 1,
+      "layer_impulse_m_s": 2.0,
+      "mean_delta_v_m_s": 1.994459833795014,
+      "maximum_acceleration_m_s2": 0.0008771929824561404,
+      "encounters": {
+        "sampled_pair_violations": 14819,
+        "minimum_sampled_separating_projection_m": 0.0007263786829538383,
+        "witnesses": [
+          {
+            "time_s": 41040.0,
+            "i": 173,
+            "j": 211,
+            "separating_projection_m": 0.0007263786829538383,
+            "axis": [
+              0.19123785747354038,
+              -0.9005486992151234,
+              -0.3904358106153679
+            ],
+            "required_projection_m": 100.0
+          },
+          {
+            "time_s": 40560.0,
+            "i": 182,
+            "j": 220,
+            "separating_projection_m": 0.0015123131638616464,
+            "axis": [
+              0.1911446933352866,
+              -0.9005653486972369,
+              -0.3904430290523621
+            ],
+            "required_projection_m": 100.0
+          }
+        ]
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": -23.78809310112041,
+        "maximum_sampled_rate_deg_s": 0.046886324529389733,
+        "maximum_sampled_angular_acceleration_deg_s2": 4.003472308353377e-05
+      },
+      "rejected_constraint": "clearance,beam"
+    }
+  ],
+  "survivors": [],
+  "frozen_geometry": [
+    {
+      "extra_layer_spacing_m": 0.0,
+      "axis": 0,
+      "sign": -1,
+      "minimum_sampled_clearance_m": 0.11492272877524386,
+      "worst_angle_deg": 27,
+      "sampled_angles": 91
+    },
+    {
+      "extra_layer_spacing_m": 0.0,
+      "axis": 0,
+      "sign": 1,
+      "minimum_sampled_clearance_m": 0.11554328862860137,
+      "worst_angle_deg": 90,
+      "sampled_angles": 91
+    },
+    {
+      "extra_layer_spacing_m": 0.0,
+      "axis": 1,
+      "sign": -1,
+      "minimum_sampled_clearance_m": 0.21719210488966634,
+      "worst_angle_deg": 27,
+      "sampled_angles": 91
+    },
+    {
+      "extra_layer_spacing_m": 0.0,
+      "axis": 1,
+      "sign": 1,
+      "minimum_sampled_clearance_m": 0.19669001380016427,
+      "worst_angle_deg": 26,
+      "sampled_angles": 91
+    },
+    {
+      "extra_layer_spacing_m": 2000.0,
+      "axis": 0,
+      "sign": -1,
+      "minimum_sampled_clearance_m": 0.11554328860876856,
+      "worst_angle_deg": 90,
+      "sampled_angles": 91
+    },
+    {
+      "extra_layer_spacing_m": 2000.0,
+      "axis": 0,
+      "sign": 1,
+      "minimum_sampled_clearance_m": 0.11554328860604007,
+      "worst_angle_deg": 90,
+      "sampled_angles": 91
+    },
+    {
+      "extra_layer_spacing_m": 2000.0,
+      "axis": 1,
+      "sign": -1,
+      "minimum_sampled_clearance_m": 0.4997513889630739,
+      "worst_angle_deg": 31,
+      "sampled_angles": 91
+    },
+    {
+      "extra_layer_spacing_m": 2000.0,
+      "axis": 1,
+      "sign": 1,
+      "minimum_sampled_clearance_m": 0.4955046926275948,
+      "worst_angle_deg": 30,
+      "sampled_angles": 91
+    },
+    {
+      "extra_layer_spacing_m": 4000.0,
+      "axis": 0,
+      "sign": -1,
+      "minimum_sampled_clearance_m": 0.1155432885594926,
+      "worst_angle_deg": 90,
+      "sampled_angles": 91
+    },
+    {
+      "extra_layer_spacing_m": 4000.0,
+      "axis": 0,
+      "sign": 1,
+      "minimum_sampled_clearance_m": 0.11554328855585462,
+      "worst_angle_deg": 90,
+      "sampled_angles": 91
+    },
+    {
+      "extra_layer_spacing_m": 4000.0,
+      "axis": 1,
+      "sign": -1,
+      "minimum_sampled_clearance_m": 852.4302652389051,
+      "worst_angle_deg": 35,
+      "sampled_angles": 91
+    },
+    {
+      "extra_layer_spacing_m": 4000.0,
+      "axis": 1,
+      "sign": 1,
+      "minimum_sampled_clearance_m": 731.0883943090121,
+      "worst_angle_deg": 43,
+      "sampled_angles": 91
+    },
+    {
+      "extra_layer_spacing_m": 6000.0,
+      "axis": 0,
+      "sign": -1,
+      "minimum_sampled_clearance_m": 0.1155432885378408,
+      "worst_angle_deg": 90,
+      "sampled_angles": 91
+    },
+    {
+      "extra_layer_spacing_m": 6000.0,
+      "axis": 0,
+      "sign": 1,
+      "minimum_sampled_clearance_m": 0.11554328853329332,
+      "worst_angle_deg": 90,
+      "sampled_angles": 91
+    },
+    {
+      "extra_layer_spacing_m": 6000.0,
+      "axis": 1,
+      "sign": -1,
+      "minimum_sampled_clearance_m": 2078.837401779858,
+      "worst_angle_deg": 37,
+      "sampled_angles": 91
+    },
+    {
+      "extra_layer_spacing_m": 6000.0,
+      "axis": 1,
+      "sign": 1,
+      "minimum_sampled_clearance_m": 1983.7657601923365,
+      "worst_angle_deg": 55,
+      "sampled_angles": 91
+    },
+    {
+      "extra_layer_spacing_m": 8000.0,
+      "axis": 0,
+      "sign": -1,
+      "minimum_sampled_clearance_m": 760.3392223548271,
+      "worst_angle_deg": 86,
+      "sampled_angles": 91
+    },
+    {
+      "extra_layer_spacing_m": 8000.0,
+      "axis": 0,
+      "sign": 1,
+      "minimum_sampled_clearance_m": 760.3175258243937,
+      "worst_angle_deg": 86,
+      "sampled_angles": 91
+    },
+    {
+      "extra_layer_spacing_m": 8000.0,
+      "axis": 1,
+      "sign": -1,
+      "minimum_sampled_clearance_m": 3390.200766181939,
+      "worst_angle_deg": 66,
+      "sampled_angles": 91
+    },
+    {
+      "extra_layer_spacing_m": 8000.0,
+      "axis": 1,
+      "sign": 1,
+      "minimum_sampled_clearance_m": 3248.186429501431,
+      "worst_angle_deg": 66,
+      "sampled_angles": 91
+    }
+  ],
+  "selected_axes": [
+    [
+      4000.0,
+      1,
+      -1
+    ],
+    [
+      4000.0,
+      1,
+      1
+    ]
+  ],
+  "elapsed_s": 30.576233656999648,
+  "max_rss_MiB": 100.1328125,
+  "raw_path": "research/runs/solar_shield_array/departure/screen.npz",
+  "raw_sha256": "526eabb43db37a7bbe2b633a5a25ee05425c10a4ee16d850ee684d8798de9a0f",
+  "stop_reason": "Restricted layer-impulse family has no screened safe departure."
+}

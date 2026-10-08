@@ -16,8 +16,10 @@ another; from there up the thermal column has no infrared cooling, so it gives
 an upper bound. The deposited heat is swept, and also estimated for a filter
 that passes 0.1% of sunlight below its edge (the idealised filters of the shield
 product): leakage_heat() takes the WHI 2008 reference spectrum below 175 nm that
-is absorbed above the base, with a heating efficiency of 0.4, for quiet-Sun and
-rough solar-maximum irradiance. For the titania stack, film_heat() also takes the
+is absorbed above the base, with a heating efficiency of 0.4, for quiet-Sun
+irradiance and for solar maximum: 2.5 times the ultraviolet and FISM2's measured
+rise of the X-rays below 10 nm by band (xray_cycle, the author's choice of
+2026-10-07). For the titania stack, film_heat() also takes the
 film's own transmission from the protection domain's short-wave product
 (protection/spectra/stack_short_wave.json): it passes only hard X-rays, all
 counted as absorbed above the base (an upper bound, since the hardest reach
@@ -60,7 +62,15 @@ from atmosphere.middle_atmosphere import chemistry as ch
 HERE = Path(__file__).resolve().parent
 HEATS = (0.0, 1e-6, 3e-6, 1e-5)
 SOLAR_MAXIMUM = 2.5           # rough ratio of solar-maximum to WHI 2008 irradiance below 175 nm
-XRAY_SOLAR_MAXIMUM = 100.0    # the same below 10 nm, where X-rays vary far more (WHI's own active week: ~80x at 0.25 nm)
+# Below 10 nm the X-rays take FISM2's measured rise by band (xray_cycle), the mean of the last three solar maxima:
+# the author's choice of 2026-10-07 in place of the earlier convention of 100 for films and 2.5 for leaks.
+XRAY_SOLAR_MAXIMUM = 'fism2'
+XRAY_BANDS_NM = (0.0, 0.5, 1.0, 2.0, 5.0, 10.0)
+# FISM2 daily spectra below 10 nm (Chamberlin et al. 2020, LASP LISIRD; fetch_limb_inputs): the WHI 2008 quiet-Sun
+# week and the year around each of the last three solar maxima.
+FISM2_QUIET = 'fism2_xray_2008-04-10_2008-04-16.csv'
+FISM2_MAXIMA = {'cycle_23': 'fism2_xray_2001-05_2002-04.csv', 'cycle_24': 'fism2_xray_2013-10_2014-09.csv',
+                'cycle_25': 'fism2_xray_2024-04_2025-03.csv'}
 FILM_PRODUCT = Path(__file__).resolve().parents[2] / 'protection' / 'spectra' / 'stack_short_wave.json'
 BASELINE_K = 180.0
 
@@ -93,34 +103,74 @@ def whi_quiet_sun():
     return data[:, 0], data[:, 3]
 
 
-def leakage_heat(transmission=LEAK, base_pa=0.3, activity=1.0):
+_XRAY = {}
+
+
+def xray_cycle():
+    """FISM2's rise of the X-rays below 10 nm from the WHI 2008 quiet week to the year around each of the last three
+    solar maxima, as the ratio of the summed irradiance in each of XRAY_BANDS_NM, and the mean over the three."""
+    if 'table' not in _XRAY:
+        from atmosphere.middle_atmosphere import fetch_limb_inputs
+
+        def mean_spectrum(name):
+            rows = np.genfromtxt(fetch_limb_inputs.path(name), delimiter=',', skip_header=1)
+            w = np.unique(rows[:, 1])
+            return w, rows[:, 2].reshape(-1, len(w)).mean(axis=0)
+        w, quiet = mean_spectrum(FISM2_QUIET)
+        bands = list(zip(XRAY_BANDS_NM[:-1], XRAY_BANDS_NM[1:]))
+        maxima = {}
+        for period, name in FISM2_MAXIMA.items():
+            w_max, peak = mean_spectrum(name)
+            if not np.allclose(w_max, w):
+                raise ValueError(f'FISM2 wavelengths differ in {name}')
+            maxima[period] = [float(peak[(w >= lo) & (w < hi)].sum() / quiet[(w >= lo) & (w < hi)].sum())
+                              for lo, hi in bands]
+        mean = [float(np.mean([maxima[p][i] for p in maxima])) for i in range(len(bands))]
+        _XRAY['table'] = dict(bands_nm=list(XRAY_BANDS_NM), maxima=maxima, mean=mean)
+    return _XRAY['table']
+
+
+def xray_scale(wavelength_nm, xray_activity):
+    """Factor on the irradiance below 10 nm: a number, 'fism2' (FISM2's mean rise over the last three maxima, by band)
+    or one maximum ('cycle_23', 'cycle_24', 'cycle_25')."""
+    w = np.asarray(wavelength_nm, float)
+    if isinstance(xray_activity, (int, float)):
+        return np.full(w.shape, float(xray_activity))
+    table = xray_cycle()
+    factors = np.asarray(table['mean'] if xray_activity == 'fism2' else table['maxima'][xray_activity])
+    return factors[np.clip(np.searchsorted(table['bands_nm'], w, side='right') - 1, 0, len(factors) - 1)]
+
+
+def leakage_heat(transmission=LEAK, base_pa=0.3, activity=1.0, xray_activity=None):
     """Heat (W/m^2 of lunar surface, global mean) from sunlight below 175 nm that a filter passing
     `transmission` there lets in, deposited above the base pressure.
 
     Irradiance from the WHI 2008 reference spectrum (Woods et al. 2009, near solar minimum; `activity`
-    scales it). Everything shortward of 121 nm and the Schumann-Runge continuum (122.5-175 nm) is
-    absorbed above the base; Lyman-alpha is absorbed above it in the fraction the O2 column allows along
-    a mean slant path (mu = 0.5); the Schumann-Runge bands (175-200 nm) mostly reach below it and are left
-    out. A heating efficiency of 0.4 converts absorbed energy to heat of the neutral gas.
+    scales it, and `xray_activity`, when given, the X-rays below 10 nm as in xray_scale). Everything
+    shortward of 121 nm and the Schumann-Runge continuum (122.5-175 nm) is absorbed above the base;
+    Lyman-alpha is absorbed above it in the fraction the O2 column allows along a mean slant path
+    (mu = 0.5); the Schumann-Runge bands (175-200 nm) mostly reach below it and are left out. A heating
+    efficiency of 0.4 converts absorbed energy to heat of the neutral gas.
     """
     w, f = whi_quiet_sun()
+    f = f * np.where(w < 10.0, xray_scale(w, activity if xray_activity is None else xray_activity), activity)
     band = lambda lo, hi: float(f[(w >= lo) & (w < hi)].sum() * 0.1)
     o2_column = 0.175 * base_pa / (0.0289 / AVOGADRO * MOON_GM / MOON_RADIUS ** 2) * 1e-4   # cm^-2
     lyman_fraction = -np.expm1(-O2_LYMAN_ALPHA_CM2 * o2_column / 0.5)
     absorbed = band(0.0, 121.0) + lyman_fraction * band(121.0, 122.5) + band(122.5, 175.0)
-    return float(transmission * activity * 0.25 * HEATING_EFFICIENCY * absorbed)
+    return float(transmission * 0.25 * HEATING_EFFICIENCY * absorbed)
 
 
 def film_heat(activity=1.0, xray_activity=1.0):
     """Heat (W/m^2 of lunar surface, global mean) from sunlight below 175 nm that the titania stack's film
     itself transmits, from the protection domain's short-wave product. All of it is counted as absorbed
     above the base, an upper bound: the film passes only hard X-rays, and the hardest reach below it.
-    `xray_activity` scales the irradiance below 10 nm and `activity` the rest."""
+    `xray_activity` scales the irradiance below 10 nm (as in xray_scale) and `activity` the rest."""
     product = json.loads(FILM_PRODUCT.read_text())
     w, f = whi_quiet_sun()
     sel = w < 175.0
     t = np.interp(w[sel], product['wavelength_nm'], product['transmission'])
-    scale = np.where(w[sel] < 10.0, xray_activity, activity)
+    scale = np.where(w[sel] < 10.0, xray_scale(w[sel], xray_activity), activity)
     return float(0.25 * HEATING_EFFICIENCY * (t * f[sel] * scale).sum() * 0.1)
 
 def atomic_oxygen_loss(column_profile, base_fraction, air_molar_kg=0.0289, eddy_cm2_s=None):
@@ -193,7 +243,8 @@ def main(argv=None) -> int:
         if row['case'] in checked:
             c = checked[row['case']]
             bases.append(('line_by_line_corrected_top', 0.1, c['t_lbl_corrected_k'][c['pressures_pa'].index(0.1)]))
-        leak_quiet, leak_max = leakage_heat(), leakage_heat(activity=SOLAR_MAXIMUM)
+        leak_quiet = leakage_heat()
+        leak_max = leakage_heat(activity=SOLAR_MAXIMUM, xray_activity=XRAY_SOLAR_MAXIMUM)
         film_quiet, film_max = film_heat(), film_heat(SOLAR_MAXIMUM, XRAY_SOLAR_MAXIMUM)
         mixing = ch.Mixing(scale=float(row['kzz_scale']))
         eddy = lambda p, m=mixing, pt=float(row['tropopause_pa']): m.profile(p, pt)

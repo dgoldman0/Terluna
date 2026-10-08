@@ -1,5 +1,11 @@
 # Atmospheric protection
 
+The [primary magnetic architecture comparison](../research/studies/solar_shield_array/magnetic_architecture.md)
+adds exact finite-loop fields in `magnetic_fields.py` and compares larger
+regional circuits, conditional weaker moments and upstream sources. It finds
+a strong regional material advantage while leaving plasma transport and final
+hardware selection open. The imported September implementation remains intact.
+
 `model.py`, `verify.py` and the compact result tables are verbatim imports from the September 2026 protection package. `results/results.json` retains selected original constants, optical summaries, reference/storage cases and input hashes for the verifier; duplicate table arrays and unrelated summaries are omitted, with values unchanged. They calculate candidate optics, aperture geometry, lunar-phase holding forces, propulsion/power/storage feedback, magnetic structures, particle-rigidity diagnostics and renewal budgets.
 
 The protected atmosphere and transport comparison are inherited from the [September feasibility baseline](../research/baselines/feasibility/), with fixed inventory constants in the original code. Their use is not an independent atmospheric validation.
@@ -73,6 +79,44 @@ domain's [middle-atmosphere README](../atmosphere/middle_atmosphere/README.md)).
 Regenerate the product with `python -m protection.spectra.short_wave` after
 restoring the inputs.
 
+## Annulus films (2026-10-07)
+
+[spectra/annulus_film.py](spectra/annulus_film.py) writes
+[spectra/annulus_film.json](spectra/annulus_film.json) (schema
+`terluna.protection.annulus-film/1`). Beyond the climate window, the shield's
+aperture out to four lunar radii has to stop the ultraviolet and pass visible
+light. These films use the same two oxides: titania 0.02–1 µm thick on silica
+0.5–10 µm thick, bare and with the stored stack's anti-reflection and matching
+layers. Each is evaluated from 0.1 to 2,500 nm with `model.py`'s thin-film code
+and short_wave's optical constants below 210 nm. It is weighted by the
+quiet-Sun WHI 2008 spectrum below 202 nm and by TSIS-1 above.
+
+| Coated film | Areal mass | Worst, 10–175 nm | Sunlight below 175 nm | Visible passed |
+|---|---:|---:|---:|---:|
+| 0.1 µm titania on 1 µm silica | 3.6 g/m² | 4×10⁻⁷ | 1.1×10⁻⁴ | 98.6% |
+| 0.1 µm titania on 2 µm silica | 5.8 g/m² | 1.4×10⁻⁷ | 3.7×10⁻⁵ | 98.6% |
+| 0.1 µm titania on 4 µm silica | 10.2 g/m² | 1.3×10⁻⁷ | 1.0×10⁻⁵ | 98.7% |
+| Stored stack, 1 µm on 10 µm | 26.9 g/m² | 2×10⁻⁴³ | 6.7×10⁻⁷ | 97.8% |
+
+- **Ultraviolet.** A tenth of a micrometre of titania stops the extreme and far
+  ultraviolet.
+- **Soft X-rays.** Between 2.5 and 10 nm, soft X-rays set the silica.
+- **Hard X-rays.** Below 2.5 nm, hard X-rays pass every film lighter than the
+  stored stack, so they decide each light film's share of the sunlight below
+  175 nm.
+- **Upper-air heat.** The product also gives each film's heat of the upper air.
+  It uses the atmosphere domain's film-heat count, with every transmitted X-ray
+  absorbed above the base, at quiet Sun and at solar maximum. Beside it is the
+  same model's heat for light that passes gaps at O1's swarm levels.
+- **Light pressure.** The reflected and absorbed shares give the light pressure,
+  (2R + A) times S/c: 0.12–0.16 for coated films and about 0.5 for bare ones.
+- **Not modelled.** Normal incidence only. Gaps, pinholes, the support's
+  strength and ageing are not included.
+
+Regenerate it with `python -m protection.spectra.annulus_film` after restoring
+both this domain's inputs and the WHI spectrum
+(`python -m atmosphere.middle_atmosphere.fetch_inputs --download`).
+
 ## The September design report (imported 2026-09-26)
 
 [report.md](report.md) is the package's full design report of 9 September 2026,
@@ -120,11 +164,17 @@ The loss response's exosphere step
 ([atmosphere/loss_response](../atmosphere/loss_response/README.md)) sizes the
 magnets from the air's side. Without a magnetosphere the solar wind carries off
 the ions the sunlit exosphere makes, and its charge exchange with the dense
-exosphere near the exobase costs about 0.7–3 kg/s that no optical shadow
-removes, so a 1 kg/s budget needs magnetic protection. A lunar dipole of about
-3×10¹⁹ A·m², whose stand-off clears the dense exosphere of cool upper air,
-removes that loss in the screening; the four regional installations give
-1.5×10²¹ A·m² and a stand-off near 10 lunar radii. Neither holds the neutral
+exosphere near the exobase costs about 0.6–1.8 kg/s at the design point, so a
+1 kg/s budget needs magnetic protection in the warmest case and leaves the
+others little room, unless the ring fleet's screen holds the wind off the inner
+exosphere in its unrefilled wake, a sensitivity a plasma model has to test. The
+collisional and LTE cases lose under 1 kg/s from their exosphere without a
+dipole at every maximum on record, and about 3×10¹⁹ A·m², whose stand-off just
+clears the dense exosphere, holds the warmest to 1 kg/s in the screening at
+quiet Sun and at every maximum, cycle 19's year included. The four regional installations give
+1.5×10²¹ A·m² and a stand-off near 10 lunar radii, which keeps every case within
+1 kg/s at the swarm's standard level, averaged over the solar cycle. Neither
+holds the neutral
 fragments of molecules that sunlight breaks up outside the shadow, which the
 optical shield's reach has to cover.
 
@@ -169,3 +219,38 @@ years keep the rest small. The design levels are assumptions to test;
 The preserved results include successful and failed propulsion closures. Large sampled optical/phase grids and the rendered PDF are omitted from this curated import and recorded in [provenance](../research/provenance.json). Their numerical tables can be regenerated from the original code once inputs are restored. The older [shield geometry table](reference/legacy_shield_geometry.csv) remains explicitly separate from this later design.
 
 [Checks](../research/checks.json) report precisely which implementation tests were run, without granting environmental or engineering validation.
+
+## Full-ephemeris array study (2026-10-04)
+
+[The solar shield/habitat study](../research/studies/solar_shield_array/report.md)
+adds [DE440 dynamics](dynamics/README.md), conserved photon-momentum bounds,
+a bounded monthly trajectory search, area quadrature and 19-year eclipse
+checks. The 50-g/m² reference reduces mean holding power from about 309 to
+238 TW on the selected moving path, with about 371,000 kg/s of propellant.
+A 10-g/m² replacement film gives about 40 TW on that path; the stored oxides
+alone already weigh about 26 g/m². The imported September model stays intact.
+Optical material performance, safe plumes, tile formation, passive solutions
+and lifetime material closure remain open.
+
+The [cycling follow-up](../research/studies/solar_shield_array/cycling.md)
+keeps 50 g/m² and lets gravity return tiles between shadow-service passes.
+A 15,000-km seed stays bounded for three years in the ideal point-sail model,
+with about 15.7% useful projected area and no electric thrust. A separate
+optimized solar-sail return arc is independently replayed. These results
+support a fleet-inventory alternative; spatial coverage, real spectral and
+attitude response, seams, collision avoidance and payload mass remain open.
+
+The [simultaneous fleet follow-up](../research/studies/solar_shield_array/fleet.md)
+tests finite squares in several planes and radial families over a common month.
+Solar-disk ray unions expose substantial gaps even when summed areas exceed
+the protected aperture. Swept collision and mutual-shadow exclusions reduce
+the candidate populations further. The 50 m placement gate fails on independent
+replay, and large-square probes need extended-body dynamics. Four lunar radii
+is the primary target; continuous coverage and payload power remain unresolved.
+
+The [active-assistance tests](../research/studies/solar_shield_array/active.md)
+use separate 10 km tiles. Bounded feedback closes local finite-Sun gaps while
+preserving physical separation, and independently replayed phase transfers
+move a tile's projected arrival by about 1,400 km with 5.45–6.79 m/s of correction.
+Their energy and propellant budgets are explicit. A global assignment and its
+recurring handover/return costs remain to be solved.

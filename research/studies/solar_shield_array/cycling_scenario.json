@@ -1,0 +1,102 @@
+{
+  "schema": "terluna.research.solar-shield-cycling-scenario/1",
+  "epoch_tdb": "2026-10-04",
+  "areal_mass_kg_m2": 0.05,
+  "protected_lunar_radii": 4,
+  "feather_width_km": 1000,
+  "point_model": true,
+  "cases": [
+    {
+      "name": "inner_filter",
+      "radius_km": 15000,
+      "spectrum": "filter_only",
+      "mode": "service_coast",
+      "days": 365.25,
+      "step": 1800,
+      "max_step": 7200,
+      "rtol": 2e-09
+    },
+    {
+      "name": "middle_filter",
+      "radius_km": 30000,
+      "spectrum": "filter_only",
+      "mode": "service_coast",
+      "days": 365.25,
+      "step": 1800,
+      "max_step": 7200,
+      "rtol": 2e-09
+    },
+    {
+      "name": "middle_full",
+      "radius_km": 30000,
+      "spectrum": "full_off_core",
+      "mode": "service_coast",
+      "days": 365.25,
+      "step": 1800,
+      "max_step": 7200,
+      "rtol": 2e-09
+    },
+    {
+      "name": "outer_full",
+      "radius_km": 50000,
+      "spectrum": "full_off_core",
+      "mode": "service_coast",
+      "days": 365.25,
+      "step": 1800,
+      "max_step": 7200,
+      "rtol": 2e-09
+    },
+    {
+      "name": "outer_face_on",
+      "radius_km": 50000,
+      "spectrum": "full_off_core",
+      "mode": "face_on",
+      "days": 90,
+      "step": 1800,
+      "max_step": 7200,
+      "rtol": 2e-09
+    },
+    {
+      "name": "outer_energy_feedback",
+      "radius_km": 50000,
+      "spectrum": "full_off_core",
+      "mode": "tacking",
+      "days": 90,
+      "step": 1800,
+      "max_step": 7200,
+      "rtol": 2e-09
+    },
+    {
+      "name": "inner_filter_fine",
+      "radius_km": 15000,
+      "spectrum": "filter_only",
+      "mode": "service_coast",
+      "days": 365.25,
+      "step": 900,
+      "max_step": 1800,
+      "rtol": 2e-10
+    },
+    {
+      "name": "inner_filter_perturbed",
+      "radius_km": 15000,
+      "spectrum": "filter_only",
+      "mode": "service_coast",
+      "days": 365.25,
+      "step": 1800,
+      "max_step": 7200,
+      "rtol": 2e-09,
+      "perturb": true
+    },
+    {
+      "name": "inner_filter_three_year",
+      "radius_km": 15000,
+      "spectrum": "filter_only",
+      "mode": "service_coast",
+      "days": 1095.75,
+      "step": 1800,
+      "max_step": 7200,
+      "rtol": 2e-09
+    }
+  ],
+  "reading_rule": "These are independent point-tile experiments, not time-shifted copies used as a fleet. The filter-only case diverts the same climate-compatible 13.795% bolometric fraction everywhere; the other case permits full reflection outside the central lunar ray bundle. Neither includes power-collection hardware or habitat mass. An orbit terminates on crossing 1.01 times the protected radius or 300000 km lunar distance."
+}

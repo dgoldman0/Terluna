@@ -1,0 +1,490 @@
+{
+  "schema": "terluna.research.energy-coast-budget/1",
+  "producer": {
+    "source_hashes": {
+      "protection/dynamics/cycling.py": "704fbd03c9d4070ea05bdfeba57914ec225941f3560710da2472bd24ca870ed4",
+      "protection/dynamics/ephemeris.py": "9a162c3acf63a844284eb61b444a7d34f1447b5182d254d3e87616516f8748d9",
+      "protection/dynamics/ephemeris.json": "90fde7cb6142e5d4d8082270a978ba2f8f47baaefab0e8d1cf82ec6f07a27222",
+      "protection/dynamics/model.py": "01c9191588037ab4f42bac38dc4d5bd99e57427d37fa75cd672120e32b53733a",
+      "protection/dynamics/optical.py": "06a13ae9f24834876edbc12b513deaa5e3735f02f8249eb57c8996d74ce00b56",
+      "research/studies/solar_shield_array/scenario.json": "a53b784941518b6e36ccdf728252cf6c8e0c46c1126b6c621ed4e28c23128699",
+      "research/studies/solar_shield_array/cycling_search.py": "4789a0185620f6662916462b2715aa9002e6454e74f4f32ef5f7dadf5f732093",
+      "research/studies/solar_shield_array/cycling_feedback.py": "0eb32d26e14472f0a512cdf45d60f00ab8260376cd51ca715e7615bf7df02775",
+      "protection/dynamics/fleet.py": "f3e52653876c2956a4b355dc1290a0a1cadd2b9b601cafc664259827df1cc93c",
+      "research/studies/solar_shield_array/fleet_run.py": "9b8bc9765b9288745ea7d4d69d59e857e76e54d29cc91b37160503e9d9090833",
+      "protection/dynamics/active_formation.py": "597c12c6a4a89c0ea70663fddd69b9b5d9e599c88a2bd1742f5009d19e050b7a",
+      "protection/dynamics/active_retime.py": "9ba27a7ec48460a345289ebc7550c502f845487beaec5fe35084a67b2d9d736b",
+      "protection/dynamics/coverage_pilot.py": "fb03381e4387cb17e5276148428a3ffb2cbfb5313c8f59b8ff708ebeb9ce079c",
+      "protection/dynamics/natural_pattern.py": "780c2679f13c097c07b89e9d7cce1c91399f464f01b4bd878fb50cb643e1be29",
+      "research/studies/solar_shield_array/patterns_run.py": "f2e346fd2281632e5bf1c285c61229ba24e26e4ba4c480713194218263888d5c",
+      "protection/dynamics/pattern_departure.py": "24e7bb0653f9ab546b46a9a650ae67e3adb0af154c3e5b9ba83461e9648b828b",
+      "protection/dynamics/pattern_return.py": "a1a3f85e5f7744d0418574d0fc2a033d4ab69d9d55eba9bfbb85974c7ab64757",
+      "protection/dynamics/parallel_shadow.py": "98d09fc9e5812b3592cbc5e24e0615f9f9aa3a75c7f33afff0fe82d0e40c3c24",
+      "research/studies/solar_shield_array/return_screen.py": "53ec3ecf5165c773142315d97553f9c72ebbe6c045299ec368104c1811f4b526",
+      "research/studies/solar_shield_array/departure_screen.py": "9e69d5e5db5729191ca6ccae8673d24dfab7606af8bb47f1038913b328750ff4",
+      "protection/dynamics/departure_control.py": "beafd12acfb4a228c17a329c9e0d278282222e90be7126b20b3e2df551bedfd5",
+      "research/studies/solar_shield_array/departure_refine.py": "c206316508235d2e5960dff5a6ab5de90334a632a67e46a54505d7d9909fd72a",
+      "research/studies/solar_shield_array/departure_run.py": "b142372d4b1ed3383bfe4ff5ea8764bbb2c12e8d92c3db8cb81138a18663a2c8",
+      "research/studies/solar_shield_array/departure_validate.py": "df457b279e1b69627f65fa528877faa414161e6bfea881387d28243504f9b9b0",
+      "protection/dynamics/attitude_load.py": "0b977677edc96d33889eb36526c4826c625eea2cb1a4e3b4254e970ac99582e4",
+      "research/studies/solar_shield_array/departure_budget.py": "61434cb29ddf74bdfef79abcfcdd3f9a886caa8e21ba9a76f23faf6167b579a4",
+      "protection/dynamics/energy_coast.py": "df47adb192e3f665e977353844e478f9cd5a30f63ca54ea2f31b59e9cd1b6826",
+      "research/studies/solar_shield_array/energy_screen.py": "3506f2f1c725299fc98795fb32ed3c0063605f114c3d5cdbc711ee0f5c3bf9bd",
+      "research/studies/solar_shield_array/energy_run.py": "1ddb0b6d2aabac1252ae614369230d286d6db7c79a45b7c863ac1a926ccd1c08",
+      "protection/dynamics/coast_control.py": "315bb9a1456ca1108f93ec1579719f7933acafb3f3c2b79bb2cf875961685c4d",
+      "research/studies/solar_shield_array/energy_correct.py": "5c518a5e0aa17c2e8cd999f46f9ab139c02534f58919ee630f38fbfbd523d9ca",
+      "research/studies/solar_shield_array/energy_replay.py": "b3ce134e8ad2d005d23a367d9d90e832b89c4fd11bbcca7ff448706987ca8d4c",
+      "research/studies/solar_shield_array/pilot_budget.py": "2a7fc3e12d4b4aae98ce8d656220e0c10cbe0d5de2099f0406d64662e563c41e",
+      "protection/dynamics/tile_torque.py": "448a9ee6db481c18252196045cc53ad48733aacb9f8fc2620db8eae10acd6cbf",
+      "protection/dynamics/collection.py": "a742f83d832f1afdfc144f0661c5a0dcfe8723bfcd184e2d65db778ca9af7cf9",
+      "research/studies/solar_shield_array/energy_budget.py": "1d261c43f9bfebd418875e9b62f00fbc554bb03da6e679c36918e252bb272fab"
+    },
+    "constants": {
+      "AU": 149597870700.0,
+      "EARTH_GM": 398600441800000.0,
+      "EARTH_MOON_DISTANCE": 384400000.0,
+      "EARTH_OBLIQUITY_DEG": 23.4393,
+      "EARTH_RADIUS": 6371000.0,
+      "JULIAN_DAY": 86400.0,
+      "MOON_GM": 4902800118000.0,
+      "MOON_RADIUS": 1737400.0,
+      "SOLAR_CONSTANT": 1361.0,
+      "SOLAR_SYSTEM_GM": {
+        "mercury": 22031868551000.0,
+        "venus": 324858592000000.0,
+        "mars": 42828375816000.0,
+        "jupiter": 1.267127641e+17,
+        "saturn": 3.79405848418e+16,
+        "uranus": 5794556400000000.0,
+        "neptune": 6836527100580000.0,
+        "pluto": 975500000000.0
+      },
+      "SPEED_OF_LIGHT": 299792458.0,
+      "SUN_GM": 1.3271244004127942e+20,
+      "SUN_RADIUS": 695700000.0
+    },
+    "inputs": {
+      "patterns.json": "deb98cc0faee44fc357194d3c554da4aadf6861dc84b95c911314abeb684c1cf",
+      "departure_validation.json": "7da77d5f6b78c94e1f1ab085597101a1ea2ea152ff05cc105f97705faf87e8a5",
+      "departure_refine.json": "2bd314577178f85ab7926863f653478dafe9d24604432d7b955d4880af4a756f",
+      "departure_budget.json": "909dbb89c49e158e7c14a059f7c00bf7b7d418a2b8d356f9092ed30b65d620de",
+      "energy_screen.json": "a46fa39e85f956aa2ff9aa4b486aa112254f87f67081525a794baf7c76842559",
+      "energy.json": "63236359ae8e1606b218b06ff8cc6818780411198ff394466b0ab8c83620d965",
+      "energy_correction.json": "851c51b65a527a14729db1bd22ff63e66783e8adb5430055871ed76fdca93170",
+      "energy_replay.json": "f1338e4ec67d03b44848bcfe843d29cb8aa3095de7e7f756ba842fb775e295fe",
+      "pilot_budget.json": "2449ccb3b550e5a5ec25652040b6bc0307ea38fbd76e617b8841e333ba79e77b"
+    },
+    "raw_inputs": {
+      "research/runs/solar_shield_array/patterns/replay_2.npz": "625b0af2b9fb8746b44ec05856df65e2f42225c449bc61310dde95cbf6fef41f",
+      "research/runs/solar_shield_array/departure/coupled_sun_16.npz": "7eafc853176b1d0e81adbe7cd474d97a08c2957bc069a726d0c46f7e06c16ec6",
+      "research/runs/solar_shield_array/energy/corrected_sun_8.npz": "fdcba0af55b264bb5cf519b5cdcd7b43f0357d461ba2c7860b824b897847aaa0"
+    }
+  },
+  "budget": {
+    "wall_s": 900,
+    "address_space_GiB": 2,
+    "numerical_threads": 1
+  },
+  "torque_scope": "Uniform rigid 10 km square, finite-area gravity and first spatial moments of reflected-band shadow unions. Euler torque is supplied by ideal opposite edge-midpoint electric couples. No absorption, thermal, flexible, plume or hardware realization model.",
+  "integration_scope": "Actual command at 2 s; linear interpolation of calculated disturbance torques sampled at 60 s. Independent solar quadrature uses 32 rotated sources at 120 s. No new mass or force repropagation.",
+  "accepted_new_departure": false,
+  "accepted_fleet": false,
+  "full_return_executed": false,
+  "handover_executed": false,
+  "new_candidate_scope": "Rejected partial prefix ending at the clearance stop; no favorable full-interval energy comparison or recurring-power extrapolation is permitted.",
+  "measured_recurring_impulse_m_s_day": null,
+  "fleet_propulsion_W": null,
+  "collection_capacity_W": null,
+  "delivered_power_W": null,
+  "hardware_mass_feedback_propagated": false,
+  "structural_realizability_demonstrated": false,
+  "datasets": {
+    "service": {
+      "evaluations": [
+        {
+          "sources": 16,
+          "step_s": 60.0,
+          "cost": {
+            "translation_m_s": 0.0,
+            "attitude_equivalent_m_s": 0.037944875903792856,
+            "nominal_attitude_equivalent_m_s": 5.997457557018921e-07,
+            "total_equivalent_m_s": 0.037944875903792856,
+            "propulsion_energy_J": 2075575616076.488,
+            "sampled_peak_propulsion_W": 173812369.32315114,
+            "mean_gravity_only_couple_equivalent_m_s": 0.03125538545104872,
+            "mean_radiation_only_couple_equivalent_m_s": 0.010323878419376499
+          },
+          "optical": {
+            "unshadowed_aperture_W": {
+              "energy_J": 1.0379343921717088e+18,
+              "mean_W": 48052518156097.63,
+              "sampled_minimum_W": 48041943554334.84,
+              "sampled_maximum_W": 48061990525617.3
+            },
+            "first_intercept_bolometric_equivalent_W": {
+              "energy_J": 8.548098419366231e+17,
+              "mean_W": 39574529719288.11,
+              "sampled_minimum_W": 35102382062918.55,
+              "sampled_maximum_W": 41687106553389.02
+            },
+            "front_first_intercept_W": {
+              "energy_J": 0.0,
+              "mean_W": 0.0,
+              "sampled_minimum_W": 0.0,
+              "sampled_maximum_W": 0.0
+            },
+            "back_first_intercept_W": {
+              "energy_J": 8.548098419366231e+17,
+              "mean_W": 39574529719288.11,
+              "sampled_minimum_W": 35102382062918.55,
+              "sampled_maximum_W": 41687106553389.02
+            },
+            "redirected_band_optical_W": {
+              "energy_J": 1.1792104909889864e+17,
+              "mean_W": 5459307828652.715,
+              "sampled_minimum_W": 4842374895160.146,
+              "sampled_maximum_W": 5750737880528.135
+            },
+            "mutual_shadow_equivalent_loss_W": {
+              "energy_J": 1.8312455023508563e+17,
+              "mean_W": 8477988436809.52,
+              "sampled_minimum_W": 6365242404960.236,
+              "sampled_maximum_W": 12959608462698.75
+            }
+          },
+          "raw_path": "research/runs/solar_shield_array/energy/service_loads_sun_16.npz",
+          "raw_sha256": "9f9692d6a0e3ee0d7aa4f0829a7c1d0c572d268bca34c39d7141a3981c14361e",
+          "time_coarsening_relative_attitude_change": 4.504486709459591e-06
+        },
+        {
+          "sources": 32,
+          "step_s": 120.0,
+          "cost": {
+            "translation_m_s": 0.0,
+            "attitude_equivalent_m_s": 0.0379425685348327,
+            "nominal_attitude_equivalent_m_s": 5.997457557018921e-07,
+            "total_equivalent_m_s": 0.0379425685348327,
+            "propulsion_energy_J": 2075449403547.4731,
+            "sampled_peak_propulsion_W": 173825865.30867746,
+            "mean_gravity_only_couple_equivalent_m_s": 0.03125572314737958,
+            "mean_radiation_only_couple_equivalent_m_s": 0.010320627442419987
+          },
+          "optical": {
+            "unshadowed_aperture_W": {
+              "energy_J": 1.0379343923263242e+18,
+              "mean_W": 48052518163255.75,
+              "sampled_minimum_W": 48041943186180.66,
+              "sampled_maximum_W": 48061990931503.1
+            },
+            "first_intercept_bolometric_equivalent_W": {
+              "energy_J": 8.548083202565379e+17,
+              "mean_W": 39574459271136.016,
+              "sampled_minimum_W": 35102422180947.703,
+              "sampled_maximum_W": 41687126666448.58
+            },
+            "front_first_intercept_W": {
+              "energy_J": 0.0,
+              "mean_W": 0.0,
+              "sampled_minimum_W": 0.0,
+              "sampled_maximum_W": 0.0
+            },
+            "back_first_intercept_W": {
+              "energy_J": 8.548083202565379e+17,
+              "mean_W": 39574459271136.016,
+              "sampled_minimum_W": 35102422180947.703,
+              "sampled_maximum_W": 41687126666448.58
+            },
+            "redirected_band_optical_W": {
+              "energy_J": 1.1792083918307498e+17,
+              "mean_W": 5459298110327.545,
+              "sampled_minimum_W": 4842380429443.742,
+              "sampled_maximum_W": 5750740655125.4375
+            },
+            "mutual_shadow_equivalent_loss_W": {
+              "energy_J": 1.8312607206978627e+17,
+              "mean_W": 8478058892119.734,
+              "sampled_minimum_W": 6365222294424.646,
+              "sampled_maximum_W": 12959568750555.395
+            }
+          },
+          "raw_path": "research/runs/solar_shield_array/energy/service_loads_sun_32.npz",
+          "raw_sha256": "ddd41356fb39f6bc97367a9462f195ef0f76caf4de41fe9ae43959faa3fb4823",
+          "source_refinement_relative_attitude_change": 5.630738385547179e-05
+        }
+      ],
+      "agreements": {
+        "maximum_collection_relative_error": 4.493486405537704e-18,
+        "maximum_gravity_quadrature_torque_error_N_m_kg": 2.0418738546206028e-14,
+        "maximum_bound_excess_N_m_kg": 0.0
+      },
+      "start_s": 0.0,
+      "end_s": 21600.0,
+      "completed_intended_interval": true
+    },
+    "previous_departure": {
+      "evaluations": [
+        {
+          "sources": 16,
+          "step_s": 60.0,
+          "cost": {
+            "translation_m_s": 1.405838431954434,
+            "attitude_equivalent_m_s": 2.7960412471541463,
+            "nominal_attitude_equivalent_m_s": 2.7271077323875237,
+            "total_equivalent_m_s": 4.20187967910858,
+            "propulsion_energy_J": 229841811204166.03,
+            "sampled_peak_propulsion_W": 64010235873.596405,
+            "mean_gravity_only_couple_equivalent_m_s": 0.06690770016901607,
+            "mean_radiation_only_couple_equivalent_m_s": 0.007593467163231125
+          },
+          "optical": {
+            "unshadowed_aperture_W": {
+              "energy_J": 4.48892604452407e+17,
+              "mean_W": 20782065020944.766,
+              "sampled_minimum_W": 92348686180.0104,
+              "sampled_maximum_W": 48067332629980.39
+            },
+            "first_intercept_bolometric_equivalent_W": {
+              "energy_J": 2.992428807367291e+17,
+              "mean_W": 13853837071144.865,
+              "sampled_minimum_W": 90813855487.92119,
+              "sampled_maximum_W": 35102382062918.562
+            },
+            "front_first_intercept_W": {
+              "energy_J": 533321950604009.06,
+              "mean_W": 24690831046.4819,
+              "sampled_minimum_W": 0.0,
+              "sampled_maximum_W": 48940953868.51118
+            },
+            "back_first_intercept_W": {
+              "energy_J": 2.9870955878612506e+17,
+              "mean_W": 13829146240098.383,
+              "sampled_minimum_W": 42674303697.002,
+              "sampled_maximum_W": 35102382062918.562
+            },
+            "redirected_band_optical_W": {
+              "energy_J": 4.128056639112483e+16,
+              "mean_W": 1911137332922.446,
+              "sampled_minimum_W": 12527774700.850264,
+              "sampled_maximum_W": 4842374895160.148
+            },
+            "mutual_shadow_equivalent_loss_W": {
+              "energy_J": 1.496497237156779e+17,
+              "mean_W": 6928227949799.902,
+              "sampled_minimum_W": 0.0,
+              "sampled_maximum_W": 18716790617977.48
+            }
+          },
+          "raw_path": "research/runs/solar_shield_array/energy/previous_departure_loads_sun_16.npz",
+          "raw_sha256": "4f09496ae0d8185632e65ca09dfbb5576ff5acde6afb3e28f7d94c366ca4db73",
+          "time_coarsening_relative_attitude_change": 3.792096847274703e-06
+        },
+        {
+          "sources": 32,
+          "step_s": 120.0,
+          "cost": {
+            "translation_m_s": 1.405838431954434,
+            "attitude_equivalent_m_s": 2.7960336561453594,
+            "nominal_attitude_equivalent_m_s": 2.7271077323875237,
+            "total_equivalent_m_s": 4.201872088099793,
+            "propulsion_energy_J": 229841395977805.06,
+            "sampled_peak_propulsion_W": 64009929489.248474,
+            "mean_gravity_only_couple_equivalent_m_s": 0.06689770747937852,
+            "mean_radiation_only_couple_equivalent_m_s": 0.0075939063314274975
+          },
+          "optical": {
+            "unshadowed_aperture_W": {
+              "energy_J": 4.489462395700322e+17,
+              "mean_W": 20784548128242.23,
+              "sampled_minimum_W": 96653049252.1937,
+              "sampled_maximum_W": 48067335033062.03
+            },
+            "first_intercept_bolometric_equivalent_W": {
+              "energy_J": 2.992950248358632e+17,
+              "mean_W": 13856251149808.48,
+              "sampled_minimum_W": 95153176565.05655,
+              "sampled_maximum_W": 35102422180947.72
+            },
+            "front_first_intercept_W": {
+              "energy_J": 539412838651454.0,
+              "mean_W": 24972816604.233982,
+              "sampled_minimum_W": 0.0,
+              "sampled_maximum_W": 49482481829.36182
+            },
+            "back_first_intercept_W": {
+              "energy_J": 2.9875561199721165e+17,
+              "mean_W": 13831278333204.242,
+              "sampled_minimum_W": 46047720100.34046,
+              "sampled_maximum_W": 35102422180947.72
+            },
+            "redirected_band_optical_W": {
+              "energy_J": 4.128775967151603e+16,
+              "mean_W": 1911470355162.7793,
+              "sampled_minimum_W": 13126384202.85773,
+              "sampled_maximum_W": 4842380429443.744
+            },
+            "mutual_shadow_equivalent_loss_W": {
+              "energy_J": 1.4965121473416902e+17,
+              "mean_W": 6928296978433.751,
+              "sampled_minimum_W": 0.0,
+              "sampled_maximum_W": 18713631913635.938
+            }
+          },
+          "raw_path": "research/runs/solar_shield_array/energy/previous_departure_loads_sun_32.npz",
+          "raw_sha256": "cc25a9577277e6fece043f14d8728455daa55a435764a228cd0434f8217145ae",
+          "source_refinement_relative_attitude_change": 1.0771867515523099e-06
+        }
+      ],
+      "agreements": {
+        "maximum_collection_relative_error": 1.163145700710552e-17,
+        "maximum_gravity_quadrature_torque_error_N_m_kg": 1.878830290608997e-14,
+        "maximum_bound_excess_N_m_kg": 0.0
+      },
+      "start_s": 21600.0,
+      "end_s": 43200.0,
+      "completed_intended_interval": true
+    },
+    "new_departure": {
+      "evaluations": [
+        {
+          "sources": 16,
+          "step_s": 60.0,
+          "cost": {
+            "translation_m_s": 0.8107488031348238,
+            "attitude_equivalent_m_s": 0.6494704863380758,
+            "nominal_attitude_equivalent_m_s": 0.6098852711847879,
+            "total_equivalent_m_s": 1.4602192894728996,
+            "propulsion_energy_J": 79873645101354.4,
+            "sampled_peak_propulsion_W": 13217141250.40556,
+            "mean_gravity_only_couple_equivalent_m_s": 0.05064651307299216,
+            "mean_radiation_only_couple_equivalent_m_s": 0.009743840603358065
+          },
+          "optical": {
+            "unshadowed_aperture_W": {
+              "energy_J": 5.79644553707635e+17,
+              "mean_W": 36037537979924.05,
+              "sampled_minimum_W": 1448131286774.0881,
+              "sampled_maximum_W": 48065160030102.43
+            },
+            "first_intercept_bolometric_equivalent_W": {
+              "energy_J": 3.676280602419803e+17,
+              "mean_W": 22856093615844.605,
+              "sampled_minimum_W": 1186080502708.2358,
+              "sampled_maximum_W": 35102382062918.562
+            },
+            "front_first_intercept_W": {
+              "energy_J": 0.0,
+              "mean_W": 0.0,
+              "sampled_minimum_W": 0.0,
+              "sampled_maximum_W": 0.0
+            },
+            "back_first_intercept_W": {
+              "energy_J": 3.676280602419803e+17,
+              "mean_W": 22856093615844.605,
+              "sampled_minimum_W": 1186080502708.2358,
+              "sampled_maximum_W": 35102382062918.562
+            },
+            "redirected_band_optical_W": {
+              "energy_J": 5.071430441618797e+16,
+              "mean_W": 3152998953985.9116,
+              "sampled_minimum_W": 163619848922.4624,
+              "sampled_maximum_W": 4842374895160.148
+            },
+            "mutual_shadow_equivalent_loss_W": {
+              "energy_J": 2.120164934656548e+17,
+              "mean_W": 13181444364079.45,
+              "sampled_minimum_W": 262050784065.8525,
+              "sampled_maximum_W": 20828274526644.266
+            }
+          },
+          "raw_path": "research/runs/solar_shield_array/energy/new_departure_loads_sun_16.npz",
+          "raw_sha256": "d83841add207cd7fe7bf7042ba96f913464aac2f4f03ccc88d02507246b84433",
+          "time_coarsening_relative_attitude_change": 2.388783368915721e-07
+        },
+        {
+          "sources": 32,
+          "step_s": 120.0,
+          "cost": {
+            "translation_m_s": 0.8107488031348238,
+            "attitude_equivalent_m_s": 0.6494690443405363,
+            "nominal_attitude_equivalent_m_s": 0.6098852711847879,
+            "total_equivalent_m_s": 1.4602178474753602,
+            "propulsion_energy_J": 79873566224434.67,
+            "sampled_peak_propulsion_W": 13217115119.678719,
+            "mean_gravity_only_couple_equivalent_m_s": 0.050646143604348805,
+            "mean_radiation_only_couple_equivalent_m_s": 0.009739029413694044
+          },
+          "optical": {
+            "unshadowed_aperture_W": {
+              "energy_J": 5.796172118350692e+17,
+              "mean_W": 36035838086834.86,
+              "sampled_minimum_W": 1444250645115.372,
+              "sampled_maximum_W": 48065153513627.78
+            },
+            "first_intercept_bolometric_equivalent_W": {
+              "energy_J": 3.676082595244609e+17,
+              "mean_W": 22854862569843.965,
+              "sampled_minimum_W": 1181988129545.782,
+              "sampled_maximum_W": 35102422180947.72
+            },
+            "front_first_intercept_W": {
+              "energy_J": 0.0,
+              "mean_W": 0.0,
+              "sampled_minimum_W": 0.0,
+              "sampled_maximum_W": 0.0
+            },
+            "back_first_intercept_W": {
+              "energy_J": 3.676082595244609e+17,
+              "mean_W": 22854862569843.965,
+              "sampled_minimum_W": 1181988129545.782,
+              "sampled_maximum_W": 35102422180947.72
+            },
+            "redirected_band_optical_W": {
+              "energy_J": 5.071157290647874e+16,
+              "mean_W": 3152829131144.898,
+              "sampled_minimum_W": 163055305894.35754,
+              "sampled_maximum_W": 4842380429443.744
+            },
+            "mutual_shadow_equivalent_loss_W": {
+              "energy_J": 2.1200895231060832e+17,
+              "mean_W": 13180975516990.9,
+              "sampled_minimum_W": 262262515569.59024,
+              "sampled_maximum_W": 20827761438139.312
+            }
+          },
+          "raw_path": "research/runs/solar_shield_array/energy/new_departure_loads_sun_32.npz",
+          "raw_sha256": "075adc2325bcd9b7591b7b346d39eaf0435dd21c18e4a2d926c2fd474e435edc",
+          "source_refinement_relative_attitude_change": 1.9813925252687433e-06
+        }
+      ],
+      "agreements": {
+        "maximum_collection_relative_error": 6.866216509203048e-18,
+        "maximum_gravity_quadrature_torque_error_N_m_kg": 1.878830290608997e-14,
+        "maximum_bound_excess_N_m_kg": 0.0
+      },
+      "start_s": 21600.0,
+      "end_s": 37684.46598184776,
+      "completed_intended_interval": false
+    }
+  },
+  "elapsed_s": 300.71893076800006,
+  "max_rss_MiB": 526.609375,
+  "same_model_totals": {
+    "previous": {
+      "service_plus_departure_m_s": 4.2398245550123725,
+      "service_plus_departure_energy_J": 231917386820242.53,
+      "peak_propulsion_W": 64010235873.596405,
+      "provisional_power_hardware_kg": 266709316.13998505
+    },
+    "rejected_partial_prefix": {
+      "service_plus_departure_m_s": 1.4981641653766924,
+      "service_plus_departure_energy_J": 81949220717430.89,
+      "peak_propulsion_W": 13217141250.40556,
+      "provisional_power_hardware_kg": 55071421.87668984
+    }
+  },
+  "same_model_fractional_energy_reduction": null,
+  "previous_envelope_total_m_s": 6.702686980149719,
+  "conditional_two_day_comparisons": [],
+  "conditional_scope": "Assumed two-day repetition, 20% extra fixed mass and 10% thrust duty. Only the measured partial prefix is charged; return, acquisition, handover and recovery remain unpaid. The 17.29-million inventory is a capacity relaxation, not a sufficient fleet. Scalar mass feedback has not been propagated.",
+  "completed": true
+}

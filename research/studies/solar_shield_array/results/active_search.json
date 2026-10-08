@@ -1,0 +1,19 @@
+{
+  "schema": "terluna.research.active-search/1",
+  "rejected_trials": [
+    {
+      "status": "REJECTED_SHOOTING_ENDPOINT_MISSED",
+      "arcs": 2,
+      "days": 3,
+      "requested_phase_arc_m": 1400000,
+      "independent_replay_position_error_m": 990995.8827922085,
+      "delta_v_m_s": 4.048204290248105,
+      "reading_rule": "The initial two-arc undamped shooting iteration failed to reach its target; this is an optimizer failure, with no lower bound on feasible control.",
+      "source_hashes": {
+        "protection/dynamics/active_retime.py": "bcac5fc799b9d09f2914f67238f2d6d2a48f004bf64978f1cfe76bacedd30b54",
+        "research/studies/solar_shield_array/active_retime_run.py": "a509646a808c687fc74c00b2611f0d08a17596d770ede81ba456255d12fbf32d"
+      },
+      "raw_sha256": "117bf5cd30b9235171dbeac7b2b167de1892c22a7ca501c993235688de142a49"
+    }
+  ]
+}

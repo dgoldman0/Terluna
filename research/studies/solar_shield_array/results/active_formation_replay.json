@@ -1,0 +1,198 @@
+{
+  "schema": "terluna.research.active-tile-formation/1",
+  "producer": {
+    "source_hashes": {
+      "protection/dynamics/cycling.py": "704fbd03c9d4070ea05bdfeba57914ec225941f3560710da2472bd24ca870ed4",
+      "protection/dynamics/ephemeris.py": "9a162c3acf63a844284eb61b444a7d34f1447b5182d254d3e87616516f8748d9",
+      "protection/dynamics/ephemeris.json": "90fde7cb6142e5d4d8082270a978ba2f8f47baaefab0e8d1cf82ec6f07a27222",
+      "protection/dynamics/model.py": "01c9191588037ab4f42bac38dc4d5bd99e57427d37fa75cd672120e32b53733a",
+      "protection/dynamics/optical.py": "06a13ae9f24834876edbc12b513deaa5e3735f02f8249eb57c8996d74ce00b56",
+      "research/studies/solar_shield_array/scenario.json": "a53b784941518b6e36ccdf728252cf6c8e0c46c1126b6c621ed4e28c23128699",
+      "research/studies/solar_shield_array/cycling_search.py": "4789a0185620f6662916462b2715aa9002e6454e74f4f32ef5f7dadf5f732093",
+      "research/studies/solar_shield_array/cycling_feedback.py": "0eb32d26e14472f0a512cdf45d60f00ab8260376cd51ca715e7615bf7df02775",
+      "protection/dynamics/fleet.py": "f3e52653876c2956a4b355dc1290a0a1cadd2b9b601cafc664259827df1cc93c",
+      "research/studies/solar_shield_array/fleet_run.py": "9b8bc9765b9288745ea7d4d69d59e857e76e54d29cc91b37160503e9d9090833",
+      "protection/dynamics/active_formation.py": "597c12c6a4a89c0ea70663fddd69b9b5d9e599c88a2bd1742f5009d19e050b7a",
+      "research/studies/solar_shield_array/active_formation_run.py": "a04fb5241ee1666eb6269ef4f661d794b00f10e84dfeea9b08d218e73815a972",
+      "research/studies/solar_shield_array/cycling_analysis.py": "4fe32b4c27af48048db63ae073d99dc10b7897c9f3eaa68c2cd34036618f8fc0"
+    },
+    "constants": {
+      "AU": 149597870700.0,
+      "EARTH_GM": 398600441800000.0,
+      "EARTH_MOON_DISTANCE": 384400000.0,
+      "EARTH_OBLIQUITY_DEG": 23.4393,
+      "EARTH_RADIUS": 6371000.0,
+      "JULIAN_DAY": 86400.0,
+      "JULIAN_YEAR_DAYS": 365.25,
+      "MOON_GM": 4902800118000.0,
+      "MOON_RADIUS": 1737400.0,
+      "SOLAR_CONSTANT": 1361.0,
+      "SOLAR_SYSTEM_GM": {
+        "mercury": 22031868551000.0,
+        "venus": 324858592000000.0,
+        "mars": 42828375816000.0,
+        "jupiter": 1.267127641e+17,
+        "saturn": 3.79405848418e+16,
+        "uranus": 5794556400000000.0,
+        "neptune": 6836527100580000.0,
+        "pluto": 975500000000.0
+      },
+      "SPEED_OF_LIGHT": 299792458.0,
+      "SUN_GM": 1.3271244004127942e+20,
+      "SUN_RADIUS": 695700000.0
+    }
+  },
+  "evidence": "Independent finite-tile closed-loop ephemeris propagation; local moving 100 km diameter receiver window with explicit finite-Sun mutual photon forces",
+  "geometry": "25 by 25 separate 10 km squares by default, 9750 m pitch, four 1 km-separated depth levels; target follows a natural 15000 km centre orbit",
+  "parameters": {
+    "caps": [0.0005],
+    "rows": 25,
+    "hours": 6,
+    "suns": 16,
+    "max_step": 30.0,
+    "rtol": 2e-12,
+    "pitch": 9750.0,
+    "response": 900.0,
+    "output": "active_formation_replay.json"
+  },
+  "cases": {
+    "0.0005": {
+      "config": {
+        "cap_m_s2": 0.0005,
+        "rows": 25,
+        "hours": 6,
+        "solar_force_directions": 16,
+        "max_step_s": 30.0,
+        "rtol": 2e-12,
+        "pitch_m": 9750.0,
+        "response_s": 900.0
+      },
+      "count": 625,
+      "side_m": 10000.0,
+      "clear_side_m": 9890.0,
+      "optical_mass_kg": 3125000000.0,
+      "completed": true,
+      "simulated_hours": 6.0,
+      "event_hours": [],
+      "maximum_tracking_error_m": 20.000000000967457,
+      "final_tracking_error_m": 2.982141566024717e-08,
+      "formation_50m_gate": true,
+      "mean_assist_acceleration_m_s2": 0.00014097070259558263,
+      "peak_assist_acceleration_m_s2": 0.000281330453200389,
+      "mean_delta_v_m_s": 3.044967176064585,
+      "maximum_tile_delta_v_m_s": 5.413107039534909,
+      "propulsion_assumptions": {
+        "exhaust_velocity_m_s": 30000,
+        "efficiency": 0.7,
+        "specific_power_W_kg": 300,
+        "cant_deg": 45,
+        "propellant_buffer_days": 7,
+        "peak_margin_factor": 1.25
+      },
+      "mean_assist_power_W": 13350179431.33507,
+      "peak_assist_power_W": 14517891281.021975,
+      "propellant_rate_kg_s": 20.766945782076775,
+      "propellant_used_kg": 448566.02889285836,
+      "added_peak_power_hardware_kg": 60491213.6709249,
+      "mean_mutual_illumination_fraction": 0.9730064308082123,
+      "minimum_mutual_illumination_fraction": 0.938130606205208,
+      "minimum_earth_beam_margin_deg": 96.46969147933953,
+      "minimum_moon_beam_margin_deg": 126.6243023462761,
+      "minimum_natural_sun_visibility": 1.0,
+      "maximum_normal_rate_rad_s": 1.983626654527164e-07,
+      "maximum_centre_acceleration_m_s2": 0.021944917442236637,
+      "collisions": {
+        "possible_conflict_pairs": 0,
+        "minimum_proven_axis_clearance_m": 826.4897177159985,
+        "acceleration_bound_m_s2": 0.15,
+        "normal_rate_bound_rad_s": 1e-06,
+        "required_clearance_m": 100.0
+      },
+      "coverage_times_hours": [0.0,0.5,1.0,1.5,2.0,2.5,3.0,3.5,4.0,4.5,5.0,5.5,6.0],
+      "coverage": [
+        {
+          "ray_coverage": 0.9999999999999996,
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "window_centre_distance_m": 5742179.881490847
+        },
+        {
+          "ray_coverage": 0.9999999999999996,
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "window_centre_distance_m": 4773629.942395633
+        },
+        {
+          "ray_coverage": 1.0000000000000007,
+          "all_sampled_sun_coverage": 1.0000000000000002,
+          "window_centre_distance_m": 3782484.4693032946
+        },
+        {
+          "ray_coverage": 1.0000000000000007,
+          "all_sampled_sun_coverage": 1.0000000000000002,
+          "window_centre_distance_m": 2773396.877416165
+        },
+        {
+          "ray_coverage": 1.000000000000001,
+          "all_sampled_sun_coverage": 1.0000000000000004,
+          "window_centre_distance_m": 1751106.3629981035
+        },
+        {
+          "ray_coverage": 1.0000000000000004,
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "window_centre_distance_m": 720417.1002405685
+        },
+        {
+          "ray_coverage": 1.0000000000000007,
+          "all_sampled_sun_coverage": 1.0000000000000009,
+          "window_centre_distance_m": 313822.93412817386
+        },
+        {
+          "ray_coverage": 1.000000000000001,
+          "all_sampled_sun_coverage": 1.0000000000000004,
+          "window_centre_distance_m": 1346742.6303826421
+        },
+        {
+          "ray_coverage": 1.0000000000000004,
+          "all_sampled_sun_coverage": 0.9999999999999999,
+          "window_centre_distance_m": 2373470.2680404433
+        },
+        {
+          "ray_coverage": 1.0000000000000007,
+          "all_sampled_sun_coverage": 1.0000000000000002,
+          "window_centre_distance_m": 3389154.6556596933
+        },
+        {
+          "ray_coverage": 0.9999999999999997,
+          "all_sampled_sun_coverage": 0.9999999999999998,
+          "window_centre_distance_m": 4388987.729362945
+        },
+        {
+          "ray_coverage": 1.0,
+          "all_sampled_sun_coverage": 1.0,
+          "window_centre_distance_m": 5368227.177730753
+        },
+        {
+          "ray_coverage": 0.9999999999999998,
+          "all_sampled_sun_coverage": 1.0000000000000002,
+          "window_centre_distance_m": 6322219.446576609
+        }
+      ],
+      "solar_force_to_32_final_max_control_change_m_s2": 5.268767044622315e-10,
+      "raw_path": "research/runs/solar_shield_array/active/cap_5e-04_rows_25_sun_16_step_30.npz",
+      "raw_sha256": "c3acf4790d3a62658e7bc2cec1d8c2563a48de9da77e028a1e6b82531c0a3640",
+      "numerical_evaluations": 9761,
+      "elapsed_s": 252.0156544249985
+    }
+  },
+  "acceptance": {
+    "global_four_lunar_radius_coverage_demonstrated": false,
+    "delivered_electrical_power_demonstrated_W": null
+  },
+  "limitations": [
+    "Local service passage only; global population, transfers, return arcs and handovers remain unresolved",
+    "Bounded ideal electric acceleration; attitude hardware, structural flexure, plume interactions and thermal management omitted",
+    "Power hardware and propellant are reported separately, without reinserting their mass into dynamics",
+    "Finite squares share a commanded normal; collision guard includes assumed angular-rate and acceleration bounds",
+    "Mutual spectral interception uses finite-Sun quadrature and a bounded nearest-neighbour stencil; integration stops at 1 km tracking error",
+    "No collector or habitat loads are included"
+  ]
+}

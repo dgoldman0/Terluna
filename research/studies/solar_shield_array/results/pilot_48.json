@@ -1,0 +1,1159 @@
+{
+  "schema": "terluna.research.coverage-capacity-pilot/1",
+  "producer": {
+    "source_hashes": {
+      "protection/dynamics/coverage_pilot.py": "fb03381e4387cb17e5276148428a3ffb2cbfb5313c8f59b8ff708ebeb9ce079c",
+      "protection/dynamics/active_retime.py": "9ba27a7ec48460a345289ebc7550c502f845487beaec5fe35084a67b2d9d736b",
+      "protection/dynamics/fleet.py": "f3e52653876c2956a4b355dc1290a0a1cadd2b9b601cafc664259827df1cc93c",
+      "protection/dynamics/cycling.py": "704fbd03c9d4070ea05bdfeba57914ec225941f3560710da2472bd24ca870ed4",
+      "protection/dynamics/ephemeris.py": "9a162c3acf63a844284eb61b444a7d34f1447b5182d254d3e87616516f8748d9",
+      "protection/dynamics/optical.py": "06a13ae9f24834876edbc12b513deaa5e3735f02f8249eb57c8996d74ce00b56",
+      "protection/dynamics/model.py": "01c9191588037ab4f42bac38dc4d5bd99e57427d37fa75cd672120e32b53733a",
+      "research/studies/solar_shield_array/pilot_run.py": "ef4606d9ef3ed1d79f87390e426067ce3bd73ba03fa514abd8dbe1535caee2b0",
+      "research/studies/solar_shield_array/fleet_run.py": "9b8bc9765b9288745ea7d4d69d59e857e76e54d29cc91b37160503e9d9090833",
+      "research/studies/solar_shield_array/cycling_search.py": "4789a0185620f6662916462b2715aa9002e6454e74f4f32ef5f7dadf5f732093"
+    },
+    "constants": {
+      "AU": 149597870700.0,
+      "EARTH_GM": 398600441800000.0,
+      "EARTH_MOON_DISTANCE": 384400000.0,
+      "EARTH_OBLIQUITY_DEG": 23.4393,
+      "EARTH_RADIUS": 6371000.0,
+      "JULIAN_DAY": 86400.0,
+      "MOON_GM": 4902800118000.0,
+      "MOON_RADIUS": 1737400.0,
+      "SOLAR_CONSTANT": 1361.0,
+      "SOLAR_SYSTEM_GM": {
+        "mercury": 22031868551000.0,
+        "venus": 324858592000000.0,
+        "mars": 42828375816000.0,
+        "jupiter": 1.267127641e+17,
+        "saturn": 3.79405848418e+16,
+        "uranus": 5794556400000000.0,
+        "neptune": 6836527100580000.0,
+        "pluto": 975500000000.0
+      },
+      "SPEED_OF_LIGHT": 299792458.0,
+      "SUN_GM": 1.3271244004127942e+20,
+      "SUN_RADIUS": 695700000.0
+    }
+  },
+  "evidence": "Restricted-library summed-area capacity relaxation; independent sail-assisted IVPs; no accepted fleet",
+  "epoch_tdb": "2026-10-04",
+  "config": {
+    "phases": 48,
+    "days": 3.0,
+    "max_step": 600.0,
+    "rtol": 2e-11,
+    "reanalyze": true
+  },
+  "families": [
+    {
+      "radius_m": 12000000.0,
+      "azimuth_rad": 0.0,
+      "tilt_rad": -0.15,
+      "phase_offset_turns": 0.0
+    },
+    {
+      "radius_m": 12000000.0,
+      "azimuth_rad": 0.0,
+      "tilt_rad": 0.0,
+      "phase_offset_turns": 0.6180339887498949
+    },
+    {
+      "radius_m": 12000000.0,
+      "azimuth_rad": 0.0,
+      "tilt_rad": 0.15,
+      "phase_offset_turns": 0.2360679774997898
+    },
+    {
+      "radius_m": 12000000.0,
+      "azimuth_rad": 0.5235987755982988,
+      "tilt_rad": -0.15,
+      "phase_offset_turns": 0.8541019662496847
+    },
+    {
+      "radius_m": 12000000.0,
+      "azimuth_rad": 0.5235987755982988,
+      "tilt_rad": 0.0,
+      "phase_offset_turns": 0.4721359549995796
+    },
+    {
+      "radius_m": 12000000.0,
+      "azimuth_rad": 0.5235987755982988,
+      "tilt_rad": 0.15,
+      "phase_offset_turns": 0.09016994374947451
+    },
+    {
+      "radius_m": 12000000.0,
+      "azimuth_rad": 1.0471975511965976,
+      "tilt_rad": -0.15,
+      "phase_offset_turns": 0.7082039324993694
+    },
+    {
+      "radius_m": 12000000.0,
+      "azimuth_rad": 1.0471975511965976,
+      "tilt_rad": 0.0,
+      "phase_offset_turns": 0.3262379212492643
+    },
+    {
+      "radius_m": 12000000.0,
+      "azimuth_rad": 1.0471975511965976,
+      "tilt_rad": 0.15,
+      "phase_offset_turns": 0.9442719099991592
+    },
+    {
+      "radius_m": 12000000.0,
+      "azimuth_rad": 1.5707963267948966,
+      "tilt_rad": -0.15,
+      "phase_offset_turns": 0.5623058987490541
+    },
+    {
+      "radius_m": 12000000.0,
+      "azimuth_rad": 1.5707963267948966,
+      "tilt_rad": 0.0,
+      "phase_offset_turns": 0.18033988749894903
+    },
+    {
+      "radius_m": 12000000.0,
+      "azimuth_rad": 1.5707963267948966,
+      "tilt_rad": 0.15,
+      "phase_offset_turns": 0.7983738762488439
+    },
+    {
+      "radius_m": 12000000.0,
+      "azimuth_rad": 2.0943951023931953,
+      "tilt_rad": -0.15,
+      "phase_offset_turns": 0.41640786499873883
+    },
+    {
+      "radius_m": 12000000.0,
+      "azimuth_rad": 2.0943951023931953,
+      "tilt_rad": 0.0,
+      "phase_offset_turns": 0.03444185374863373
+    },
+    {
+      "radius_m": 12000000.0,
+      "azimuth_rad": 2.0943951023931953,
+      "tilt_rad": 0.15,
+      "phase_offset_turns": 0.6524758424985286
+    },
+    {
+      "radius_m": 12000000.0,
+      "azimuth_rad": 2.6179938779914944,
+      "tilt_rad": -0.15,
+      "phase_offset_turns": 0.27050983124842354
+    },
+    {
+      "radius_m": 12000000.0,
+      "azimuth_rad": 2.6179938779914944,
+      "tilt_rad": 0.0,
+      "phase_offset_turns": 0.8885438199983184
+    },
+    {
+      "radius_m": 12000000.0,
+      "azimuth_rad": 2.6179938779914944,
+      "tilt_rad": 0.15,
+      "phase_offset_turns": 0.5065778087482133
+    },
+    {
+      "radius_m": 15000000.0,
+      "azimuth_rad": 0.0,
+      "tilt_rad": -0.15,
+      "phase_offset_turns": 0.12461179749810825
+    },
+    {
+      "radius_m": 15000000.0,
+      "azimuth_rad": 0.0,
+      "tilt_rad": 0.0,
+      "phase_offset_turns": 0.7426457862480031
+    },
+    {
+      "radius_m": 15000000.0,
+      "azimuth_rad": 0.0,
+      "tilt_rad": 0.15,
+      "phase_offset_turns": 0.36067977499789805
+    },
+    {
+      "radius_m": 15000000.0,
+      "azimuth_rad": 0.5235987755982988,
+      "tilt_rad": -0.15,
+      "phase_offset_turns": 0.978713763747793
+    },
+    {
+      "radius_m": 15000000.0,
+      "azimuth_rad": 0.5235987755982988,
+      "tilt_rad": 0.0,
+      "phase_offset_turns": 0.5967477524976879
+    },
+    {
+      "radius_m": 15000000.0,
+      "azimuth_rad": 0.5235987755982988,
+      "tilt_rad": 0.15,
+      "phase_offset_turns": 0.21478174124758276
+    },
+    {
+      "radius_m": 15000000.0,
+      "azimuth_rad": 1.0471975511965976,
+      "tilt_rad": -0.15,
+      "phase_offset_turns": 0.8328157299974777
+    },
+    {
+      "radius_m": 15000000.0,
+      "azimuth_rad": 1.0471975511965976,
+      "tilt_rad": 0.0,
+      "phase_offset_turns": 0.45084971874737256
+    },
+    {
+      "radius_m": 15000000.0,
+      "azimuth_rad": 1.0471975511965976,
+      "tilt_rad": 0.15,
+      "phase_offset_turns": 0.06888370749726747
+    },
+    {
+      "radius_m": 15000000.0,
+      "azimuth_rad": 1.5707963267948966,
+      "tilt_rad": -0.15,
+      "phase_offset_turns": 0.6869176962471641
+    },
+    {
+      "radius_m": 15000000.0,
+      "azimuth_rad": 1.5707963267948966,
+      "tilt_rad": 0.0,
+      "phase_offset_turns": 0.30495168499705727
+    },
+    {
+      "radius_m": 15000000.0,
+      "azimuth_rad": 1.5707963267948966,
+      "tilt_rad": 0.15,
+      "phase_offset_turns": 0.9229856737469504
+    },
+    {
+      "radius_m": 15000000.0,
+      "azimuth_rad": 2.0943951023931953,
+      "tilt_rad": -0.15,
+      "phase_offset_turns": 0.5410196624968471
+    },
+    {
+      "radius_m": 15000000.0,
+      "azimuth_rad": 2.0943951023931953,
+      "tilt_rad": 0.0,
+      "phase_offset_turns": 0.15905365124674375
+    },
+    {
+      "radius_m": 15000000.0,
+      "azimuth_rad": 2.0943951023931953,
+      "tilt_rad": 0.15,
+      "phase_offset_turns": 0.7770876399966369
+    },
+    {
+      "radius_m": 15000000.0,
+      "azimuth_rad": 2.6179938779914944,
+      "tilt_rad": -0.15,
+      "phase_offset_turns": 0.39512162874653
+    },
+    {
+      "radius_m": 15000000.0,
+      "azimuth_rad": 2.6179938779914944,
+      "tilt_rad": 0.0,
+      "phase_offset_turns": 0.013155617496426686
+    },
+    {
+      "radius_m": 15000000.0,
+      "azimuth_rad": 2.6179938779914944,
+      "tilt_rad": 0.15,
+      "phase_offset_turns": 0.6311896062463234
+    },
+    {
+      "radius_m": 20000000.0,
+      "azimuth_rad": 0.0,
+      "tilt_rad": -0.15,
+      "phase_offset_turns": 0.2492235949962165
+    },
+    {
+      "radius_m": 20000000.0,
+      "azimuth_rad": 0.0,
+      "tilt_rad": 0.0,
+      "phase_offset_turns": 0.8672575837461096
+    },
+    {
+      "radius_m": 20000000.0,
+      "azimuth_rad": 0.0,
+      "tilt_rad": 0.15,
+      "phase_offset_turns": 0.4852915724960063
+    },
+    {
+      "radius_m": 20000000.0,
+      "azimuth_rad": 0.5235987755982988,
+      "tilt_rad": -0.15,
+      "phase_offset_turns": 0.10332556124590297
+    },
+    {
+      "radius_m": 20000000.0,
+      "azimuth_rad": 0.5235987755982988,
+      "tilt_rad": 0.0,
+      "phase_offset_turns": 0.7213595499957961
+    },
+    {
+      "radius_m": 20000000.0,
+      "azimuth_rad": 0.5235987755982988,
+      "tilt_rad": 0.15,
+      "phase_offset_turns": 0.3393935387456892
+    },
+    {
+      "radius_m": 20000000.0,
+      "azimuth_rad": 1.0471975511965976,
+      "tilt_rad": -0.15,
+      "phase_offset_turns": 0.9574275274955859
+    },
+    {
+      "radius_m": 20000000.0,
+      "azimuth_rad": 1.0471975511965976,
+      "tilt_rad": 0.0,
+      "phase_offset_turns": 0.5754615162454826
+    },
+    {
+      "radius_m": 20000000.0,
+      "azimuth_rad": 1.0471975511965976,
+      "tilt_rad": 0.15,
+      "phase_offset_turns": 0.1934955049953757
+    },
+    {
+      "radius_m": 20000000.0,
+      "azimuth_rad": 1.5707963267948966,
+      "tilt_rad": -0.15,
+      "phase_offset_turns": 0.8115294937452688
+    },
+    {
+      "radius_m": 20000000.0,
+      "azimuth_rad": 1.5707963267948966,
+      "tilt_rad": 0.0,
+      "phase_offset_turns": 0.4295634824951655
+    },
+    {
+      "radius_m": 20000000.0,
+      "azimuth_rad": 1.5707963267948966,
+      "tilt_rad": 0.15,
+      "phase_offset_turns": 0.047597471245062195
+    },
+    {
+      "radius_m": 20000000.0,
+      "azimuth_rad": 2.0943951023931953,
+      "tilt_rad": -0.15,
+      "phase_offset_turns": 0.6656314599949553
+    },
+    {
+      "radius_m": 20000000.0,
+      "azimuth_rad": 2.0943951023931953,
+      "tilt_rad": 0.0,
+      "phase_offset_turns": 0.28366544874484845
+    },
+    {
+      "radius_m": 20000000.0,
+      "azimuth_rad": 2.0943951023931953,
+      "tilt_rad": 0.15,
+      "phase_offset_turns": 0.9016994374947451
+    },
+    {
+      "radius_m": 20000000.0,
+      "azimuth_rad": 2.6179938779914944,
+      "tilt_rad": -0.15,
+      "phase_offset_turns": 0.5197334262446418
+    },
+    {
+      "radius_m": 20000000.0,
+      "azimuth_rad": 2.6179938779914944,
+      "tilt_rad": 0.0,
+      "phase_offset_turns": 0.13776741499453493
+    },
+    {
+      "radius_m": 20000000.0,
+      "azimuth_rad": 2.6179938779914944,
+      "tilt_rad": 0.15,
+      "phase_offset_turns": 0.7558014037444281
+    }
+  ],
+  "members": 2592,
+  "target_radius_m": 6949600.0,
+  "tile_side_m": 10000.0,
+  "areal_mass_kg_m2": 0.05,
+  "phase_copies_are_independent_ivps": true,
+  "translational_electric_acceleration": 0.0,
+  "mutually_shadowed_fleet_dynamics": false,
+  "finite_extent_gravity_quadrature": "3x3 Gauss-Legendre",
+  "radius_range_km": [
+    11857.712662276796,
+    21356.20301480348
+  ],
+  "radial_guard_passed": true,
+  "finite_extent_acceleration_max_m_s2": 6.18915105290929e-09,
+  "minimum_beam_margin_deg": 0.057295779513085704,
+  "maximum_secant_attitude_rate_deg_s": 0.14997876417024208,
+  "family_min_beam_margin_rad": [
+    0.10424665083289532,
+    0.1042864615638024,
+    0.10394372050335743,
+    0.10404030559854255,
+    0.10383170663339474,
+    0.10412580447511018,
+    0.1029241571037248,
+    0.10259635677094114,
+    0.10317234780378452,
+    0.1015548243919321,
+    0.0010000000000001449,
+    0.10190592498828215,
+    0.10320534962415714,
+    0.10233099498337062,
+    0.10240440463199253,
+    0.10387806813502813,
+    0.10388639662507303,
+    0.10394224941102456,
+    0.07467729881157441,
+    0.07470884008705896,
+    0.07465611555754435,
+    0.07459208979458687,
+    0.07451929899813893,
+    0.07464174006890842,
+    0.07335694792181954,
+    0.07378392567131956,
+    0.07397714866073038,
+    0.07270872765476429,
+    0.001000000000000059,
+    0.07190992225610801,
+    0.07309357427578592,
+    0.07349638085292212,
+    0.07275992390598303,
+    0.07463022881503763,
+    0.07480658342023633,
+    0.07428599708784578,
+    0.05156659502912888,
+    0.05190503491119445,
+    0.05201743063381169,
+    0.051689228579916036,
+    0.051723066639051046,
+    0.052377959635840486,
+    0.049538012271075425,
+    0.04958309831847944,
+    0.0501760069198887,
+    0.0485369675213096,
+    0.0020572764380502673,
+    0.04815811157598543,
+    0.03930981425053329,
+    0.05046213611577993,
+    0.04884753335938224,
+    0.05195717039846108,
+    0.05179204674085589,
+    0.0521280535730835
+  ],
+  "family_max_secant_rate_deg_s": [
+    0.0643672519485893,
+    0.14986335826954839,
+    0.06532441255554498,
+    0.07149363792594342,
+    0.1489735600524389,
+    0.07105739284039951,
+    0.09059582901847563,
+    0.14848126308388057,
+    0.0900406285956053,
+    0.09013467148366568,
+    0.14145286742207744,
+    0.09021456654420683,
+    0.08991194728433624,
+    0.14997876417024208,
+    0.09034885556465365,
+    0.07122441574287691,
+    0.149491304853939,
+    0.07159938679790846,
+    0.06349371553639563,
+    0.14954837659353823,
+    0.06477039829491145,
+    0.07193465652858899,
+    0.14701150625607706,
+    0.07148376265201538,
+    0.08932965493733215,
+    0.14307107505098782,
+    0.08901917976065978,
+    0.08956239159292667,
+    0.14508985944713332,
+    0.08916894997330453,
+    0.0897831541357489,
+    0.1471123779646038,
+    0.09079310792901284,
+    0.0714148479266023,
+    0.14840383051340209,
+    0.07199026569704911,
+    0.05843914520090216,
+    0.1474272810229234,
+    0.059919287589193515,
+    0.0686814623455798,
+    0.1469784066734997,
+    0.0677529895839146,
+    0.08507418616765389,
+    0.14930651872841638,
+    0.08586311773819487,
+    0.08048841678133782,
+    0.14728651739008658,
+    0.0799555155705864,
+    0.08341208715435997,
+    0.1479556006586239,
+    0.08462005988220368,
+    0.0679096542016178,
+    0.14115662177495222,
+    0.06856529241583988
+  ],
+  "attitude_rate_cap_deg_s": 0.1,
+  "passing_sampled_attitude_families": 36,
+  "continuous_attitude_safety_certified": false,
+  "continuous_coverage_certified": false,
+  "finite_sun_constraints": "central ray and four limb directions; no irradiance quadrature implied",
+  "cell_partition_area_error": 2.5099512949711134e-05,
+  "covering": {
+    "six_hour": {
+      "success": true,
+      "inventory_tiles": 16486102.181183113,
+      "weights_million_tiles": [
+        1.4531492949605025,
+        0.0,
+        1.1604161052589557,
+        0.7182562620050035,
+        0.4620311063300901,
+        0.8226432054825213,
+        0.42345675982753483,
+        0.7875808321853709,
+        0.3255211520996827,
+        0.7875850591325463,
+        0.0,
+        0.42122951136803954,
+        0.3180566743357793,
+        1.3925788979598537,
+        0.921803368405738,
+        0.920524156062326,
+        0.44531728367400386,
+        0.3422718442533324,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.03858174973800852,
+        0.4234244677106782,
+        0.33774920029186306,
+        0.4136620346164615,
+        0.0,
+        0.0,
+        0.0,
+        0.47075955317489343,
+        0.19228566091602173,
+        0.0,
+        0.0,
+        0.04954071637092562,
+        0.2334305510167833,
+        0.44529208169440765,
+        0.0,
+        0.0,
+        0.47515350125813854,
+        0.0,
+        0.0,
+        0.3641034828370757,
+        0.24744332769091498,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.3640787626905233,
+        0.3640904199105576,
+        0.3640851579245822,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "minimum_capacity": 0.9999999063968938,
+      "dual_lower_bound_million_tiles": 16.486102181183128,
+      "dual_max_column_price": 1.0000000000000038,
+      "bottleneck_rows": [
+        1290,
+        956,
+        257,
+        1432,
+        1051,
+        309,
+        1556,
+        1145,
+        883,
+        259,
+        186,
+        407
+      ],
+      "bottleneck_duals": [
+        1.7840605573826842,
+        1.5509788514842993,
+        1.2731789924581671,
+        1.084462568951945,
+        0.8605981472203903,
+        0.8331185312348045,
+        0.8192391594153183,
+        0.819091255307282,
+        0.7432132025503189,
+        0.6704424571183016,
+        0.6588407930098206,
+        0.6586990311962212
+      ],
+      "bottleneck_rows_labels": [
+        [
+          2.5,
+          3.0,
+          18.0
+        ],
+        [
+          1.75,
+          4.0,
+          20.0
+        ],
+        [
+          0.5,
+          0.0,
+          17.0
+        ],
+        [
+          2.75,
+          4.0,
+          16.0
+        ],
+        [
+          2.0,
+          3.0,
+          19.0
+        ],
+        [
+          0.5,
+          2.0,
+          21.0
+        ],
+        [
+          3.0,
+          4.0,
+          20.0
+        ],
+        [
+          2.25,
+          2.0,
+          17.0
+        ],
+        [
+          1.75,
+          1.0,
+          19.0
+        ],
+        [
+          0.5,
+          0.0,
+          19.0
+        ],
+        [
+          0.25,
+          2.0,
+          18.0
+        ],
+        [
+          0.75,
+          1.0,
+          23.0
+        ]
+      ]
+    },
+    "three_hour": {
+      "success": true,
+      "inventory_tiles": 17265873.727438673,
+      "weights_million_tiles": [
+        1.7578289978160535,
+        0.0,
+        1.435934087198189,
+        0.3639154215043653,
+        0.5840406967882988,
+        0.5840479338165689,
+        0.09375467383314753,
+        0.975149900112017,
+        0.8218862410676228,
+        0.752841378238316,
+        3.29784253162737e-07,
+        0.7107037521964474,
+        0.44159586592282374,
+        1.3654210391138313,
+        0.5481585488071897,
+        0.47764725976634875,
+        0.6187945115554768,
+        0.9060995796887954,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.20799273206229946,
+        0.5520604716154619,
+        0.8518383786876148,
+        0.1411358477372912,
+        1.4345779287251466e-06,
+        0.14113615660373632,
+        0.0,
+        0.7234768459150548,
+        0.4776560096157019,
+        0.0,
+        0.0,
+        0.1065599121582996,
+        0.1411322334583704,
+        0.14113981633819736,
+        0.0,
+        0.0,
+        0.2872749983352465,
+        0.0,
+        0.0,
+        0.17603230537267717,
+        0.22274061516546975,
+        0.0,
+        0.0,
+        0.2943694809525018,
+        0.0,
+        0.09374415084457255,
+        0.2697621207885078,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "minimum_capacity": 0.9999999554633687,
+      "dual_lower_bound_million_tiles": 17.265873727438695,
+      "dual_max_column_price": 1.0000000000000357,
+      "bottleneck_rows": [
+        2490,
+        497,
+        1172,
+        525,
+        1603,
+        1723,
+        2396,
+        1439,
+        141,
+        1171,
+        2728,
+        694
+      ],
+      "bottleneck_duals": [
+        2.038393409046582,
+        1.6466162381331528,
+        1.5509828201014577,
+        1.0528642757676152,
+        0.8282707131081322,
+        0.7054497965762432,
+        0.6997999199686679,
+        0.6270715678127141,
+        0.5953459905986259,
+        0.5631918575456698,
+        0.5459959990030075,
+        0.5317175748668155
+      ],
+      "bottleneck_rows_labels": [
+        [
+          2.5,
+          3.0,
+          18.0
+        ],
+        [
+          0.5,
+          0.0,
+          17.0
+        ],
+        [
+          1.125,
+          3.0,
+          20.0
+        ],
+        [
+          0.5,
+          1.0,
+          21.0
+        ],
+        [
+          1.625,
+          1.0,
+          19.0
+        ],
+        [
+          1.75,
+          1.0,
+          19.0
+        ],
+        [
+          2.375,
+          4.0,
+          20.0
+        ],
+        [
+          1.375,
+          4.0,
+          23.0
+        ],
+        [
+          0.125,
+          0.0,
+          21.0
+        ],
+        [
+          1.125,
+          3.0,
+          19.0
+        ],
+        [
+          2.75,
+          3.0,
+          16.0
+        ],
+        [
+          0.625,
+          3.0,
+          22.0
+        ]
+      ]
+    },
+    "sampled_attitude_gate": {
+      "success": true,
+      "inventory_tiles": 19624104.56000215,
+      "weights_million_tiles": [
+        2.5862494136939502,
+        0.0,
+        1.726879181716856,
+        0.30933242164305297,
+        0.0,
+        0.33053687571488566,
+        0.0,
+        0.0,
+        0.9335619240278069,
+        1.420023915248258,
+        0.0,
+        1.396305061895715,
+        1.0869749876205554,
+        0.0,
+        1.0869845428448348,
+        0.6186482577240894,
+        0.0,
+        1.3750912434410367,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.7483444250198752,
+        1.3962682922758431,
+        0.0,
+        0.0,
+        0.6398539154142815,
+        0.0,
+        1.3962261300437535,
+        0.6186496881286894,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        7.651108026643998e-06,
+        0.0,
+        0.0,
+        0.756347876595523,
+        0.0,
+        0.0,
+        0.1851650567128358,
+        0.3092829711512329,
+        0.0,
+        0.0,
+        0.5948796825803508,
+        0.0,
+        1.3262136272130083e-05,
+        0.10847737441037902,
+        0.0,
+        0.0,
+        4.0885404219704666e-07,
+        0.0,
+        0.0
+      ],
+      "minimum_capacity": 0.9999999999999998,
+      "dual_lower_bound_million_tiles": 19.624104560002145,
+      "dual_max_column_price": 1.0000000000000033,
+      "bottleneck_rows": [
+        2490,
+        497,
+        2996,
+        141,
+        1798,
+        2484,
+        1052,
+        1603,
+        568,
+        451,
+        1917,
+        1367
+      ],
+      "bottleneck_duals": [
+        1.751560285546072,
+        1.751549690389743,
+        1.7277314357007807,
+        1.4715105753480802,
+        1.350411583232705,
+        1.1148584022349382,
+        1.1147233617760726,
+        1.0571512489164472,
+        1.0313191365436218,
+        1.0129174769591551,
+        0.8341622507185991,
+        0.8341550010970108
+      ],
+      "bottleneck_rows_labels": [
+        [
+          2.5,
+          3.0,
+          18.0
+        ],
+        [
+          0.5,
+          0.0,
+          17.0
+        ],
+        [
+          3.0,
+          4.0,
+          20.0
+        ],
+        [
+          0.125,
+          0.0,
+          21.0
+        ],
+        [
+          1.75,
+          4.0,
+          22.0
+        ],
+        [
+          2.5,
+          3.0,
+          12.0
+        ],
+        [
+          1.0,
+          3.0,
+          20.0
+        ],
+        [
+          1.625,
+          1.0,
+          19.0
+        ],
+        [
+          0.5,
+          3.0,
+          16.0
+        ],
+        [
+          0.375,
+          3.0,
+          19.0
+        ],
+        [
+          1.875,
+          4.0,
+          21.0
+        ],
+        [
+          1.375,
+          1.0,
+          23.0
+        ]
+      ]
+    }
+  },
+  "conditional_cost_scenarios": [
+    {
+      "closed": true,
+      "optical_mass_kg": 86329368637193.38,
+      "total_scenario_mass_kg": 86484299266975.67,
+      "recurring_dv_m_s_per_day": 1.0,
+      "peak_duty": 1.0,
+      "extra_fixed_mass_multiplier": 1.0,
+      "propulsion_TW": 30.334144086232765,
+      "propellant_kg_s": 47186.446356362074,
+      "installed_propulsion_power_TW": 37.91768010779095
+    },
+    {
+      "closed": true,
+      "optical_mass_kg": 86329368637193.38,
+      "total_scenario_mass_kg": 86795834809556.52,
+      "recurring_dv_m_s_per_day": 3.0,
+      "peak_duty": 1.0,
+      "extra_fixed_mass_multiplier": 1.0,
+      "propulsion_TW": 91.33024311396548,
+      "propellant_kg_s": 142069.2670661685,
+      "installed_propulsion_power_TW": 114.16280389245685
+    },
+    {
+      "closed": true,
+      "optical_mass_kg": 86329368637193.38,
+      "total_scenario_mass_kg": 87109622905962.88,
+      "recurring_dv_m_s_per_day": 5.0,
+      "peak_duty": 1.0,
+      "extra_fixed_mass_multiplier": 1.0,
+      "propulsion_TW": 152.76737366917004,
+      "propellant_kg_s": 237638.1368187089,
+      "installed_propulsion_power_TW": 190.95921708646253
+    },
+    {
+      "closed": true,
+      "optical_mass_kg": 86329368637193.38,
+      "total_scenario_mass_kg": 87904109857991.05,
+      "recurring_dv_m_s_per_day": 10.0,
+      "peak_duty": 1.0,
+      "extra_fixed_mass_multiplier": 1.0,
+      "propulsion_TW": 308.3213897557178,
+      "propellant_kg_s": 479611.0507311166,
+      "installed_propulsion_power_TW": 385.40173719464724
+    },
+    {
+      "closed": true,
+      "optical_mass_kg": 86329368637193.38,
+      "total_scenario_mass_kg": 87639087352993.67,
+      "recurring_dv_m_s_per_day": 1.0,
+      "peak_duty": 0.1,
+      "extra_fixed_mass_multiplier": 1.0,
+      "propulsion_TW": 30.739183018006955,
+      "propellant_kg_s": 47816.5069168997,
+      "installed_propulsion_power_TW": 384.2397877250869
+    },
+    {
+      "closed": true,
+      "optical_mass_kg": 86329368637193.38,
+      "total_scenario_mass_kg": 90381475294036.53,
+      "recurring_dv_m_s_per_day": 3.0,
+      "peak_duty": 0.1,
+      "extra_fixed_mass_multiplier": 1.0,
+      "propulsion_TW": 95.10320546734769,
+      "propellant_kg_s": 147938.31961587415,
+      "installed_propulsion_power_TW": 1188.7900683418457
+    },
+    {
+      "closed": true,
+      "optical_mass_kg": 86329368637193.38,
+      "total_scenario_mass_kg": 93301036003191.02,
+      "recurring_dv_m_s_per_day": 5.0,
+      "peak_duty": 0.1,
+      "extra_fixed_mass_multiplier": 1.0,
+      "propulsion_TW": 163.62548424996672,
+      "propellant_kg_s": 254528.5310555038,
+      "installed_propulsion_power_TW": 2045.3185531245838
+    },
+    {
+      "closed": true,
+      "optical_mass_kg": 86329368637193.38,
+      "total_scenario_mass_kg": 101497641720061.95,
+      "recurring_dv_m_s_per_day": 10.0,
+      "peak_duty": 0.1,
+      "extra_fixed_mass_multiplier": 1.0,
+      "propulsion_TW": 356.00035086655976,
+      "propellant_kg_s": 553778.323570204,
+      "installed_propulsion_power_TW": 4450.004385831996
+    },
+    {
+      "closed": true,
+      "optical_mass_kg": 86329368637193.38,
+      "total_scenario_mass_kg": 105166904823592.39,
+      "recurring_dv_m_s_per_day": 1.0,
+      "peak_duty": 0.1,
+      "extra_fixed_mass_multiplier": 1.2,
+      "propulsion_TW": 36.88701962160834,
+      "propellant_kg_s": 57379.80830027963,
+      "installed_propulsion_power_TW": 461.08774527010416
+    },
+    {
+      "closed": true,
+      "optical_mass_kg": 86329368637193.38,
+      "total_scenario_mass_kg": 108457770352843.84,
+      "recurring_dv_m_s_per_day": 3.0,
+      "peak_duty": 0.1,
+      "extra_fixed_mass_multiplier": 1.2,
+      "propulsion_TW": 114.12384656081721,
+      "propellant_kg_s": 177525.983539049,
+      "installed_propulsion_power_TW": 1426.5480820102152
+    },
+    {
+      "closed": true,
+      "optical_mass_kg": 86329368637193.38,
+      "total_scenario_mass_kg": 111961243203829.22,
+      "recurring_dv_m_s_per_day": 5.0,
+      "peak_duty": 0.1,
+      "extra_fixed_mass_multiplier": 1.2,
+      "propulsion_TW": 196.35058109996007,
+      "propellant_kg_s": 305434.2372666045,
+      "installed_propulsion_power_TW": 2454.382263749501
+    },
+    {
+      "closed": true,
+      "optical_mass_kg": 86329368637193.38,
+      "total_scenario_mass_kg": 121797170064074.34,
+      "recurring_dv_m_s_per_day": 10.0,
+      "peak_duty": 0.1,
+      "extra_fixed_mass_multiplier": 1.2,
+      "propulsion_TW": 427.2004210398717,
+      "propellant_kg_s": 664533.9882842448,
+      "installed_propulsion_power_TW": 5340.005262998396
+    }
+  ],
+  "benchmark_TW": 238.35,
+  "collection_capacity_W": null,
+  "delivered_power_W": null,
+  "raw_path": "research/runs/solar_shield_array/pilot/phases_48.npz",
+  "raw_sha256": "99d19468d8e8a01fb56632dceb61547ffbde7cfa378841ea160f0c15b97e7065",
+  "nfev": 8453,
+  "trajectory_reuse": {
+    "raw_sha256": "76490adc4fc4042af3a3a1edb3b9cc27626666e1457b6bcef75026d566d12255",
+    "original_producer": {
+      "source_hashes": {
+        "protection/dynamics/coverage_pilot.py": "2807f91638b83d5817fd0b468c890c9f86da79962871999c4eb6c41682d45310",
+        "protection/dynamics/active_retime.py": "9ba27a7ec48460a345289ebc7550c502f845487beaec5fe35084a67b2d9d736b",
+        "protection/dynamics/fleet.py": "f3e52653876c2956a4b355dc1290a0a1cadd2b9b601cafc664259827df1cc93c",
+        "protection/dynamics/cycling.py": "704fbd03c9d4070ea05bdfeba57914ec225941f3560710da2472bd24ca870ed4",
+        "protection/dynamics/ephemeris.py": "9a162c3acf63a844284eb61b444a7d34f1447b5182d254d3e87616516f8748d9",
+        "protection/dynamics/optical.py": "06a13ae9f24834876edbc12b513deaa5e3735f02f8249eb57c8996d74ce00b56",
+        "protection/dynamics/model.py": "01c9191588037ab4f42bac38dc4d5bd99e57427d37fa75cd672120e32b53733a",
+        "research/studies/solar_shield_array/pilot_run.py": "7e9862a3e60522d947b204ec99f6540bbb6b1c89d5dd0b0609403f77cfe2bac7",
+        "research/studies/solar_shield_array/fleet_run.py": "9b8bc9765b9288745ea7d4d69d59e857e76e54d29cc91b37160503e9d9090833",
+        "research/studies/solar_shield_array/cycling_search.py": "4789a0185620f6662916462b2715aa9002e6454e74f4f32ef5f7dadf5f732093"
+      },
+      "constants": {
+        "AU": 149597870700.0,
+        "EARTH_GM": 398600441800000.0,
+        "EARTH_MOON_DISTANCE": 384400000.0,
+        "EARTH_OBLIQUITY_DEG": 23.4393,
+        "EARTH_RADIUS": 6371000.0,
+        "JULIAN_DAY": 86400.0,
+        "MOON_GM": 4902800118000.0,
+        "MOON_RADIUS": 1737400.0,
+        "SOLAR_CONSTANT": 1361.0,
+        "SOLAR_SYSTEM_GM": {
+          "mercury": 22031868551000.0,
+          "venus": 324858592000000.0,
+          "mars": 42828375816000.0,
+          "jupiter": 1.267127641e+17,
+          "saturn": 3.79405848418e+16,
+          "uranus": 5794556400000000.0,
+          "neptune": 6836527100580000.0,
+          "pluto": 975500000000.0
+        },
+        "SPEED_OF_LIGHT": 299792458.0,
+        "SUN_GM": 1.3271244004127942e+20,
+        "SUN_RADIUS": 695700000.0
+      }
+    },
+    "original_elapsed_s": 226.64494076700066,
+    "previous_reuse": null,
+    "reason": "Refresh capacity/attitude reduction from verified trajectories; unchanged force code, constants and initial states",
+    "previous_max_labelled_frame_rate_deg_s": 0.14997876417024208
+  },
+  "elapsed_s": 19.739312034998875,
+  "max_rss_MiB": 581.52734375,
+  "reading_rule": "Weights replicate a sampled phase measure and permit cellwise area repacking. They give no tile placement, phase-continuum certificate, collision-free fleet, recurring maneuver rate or globally valid inventory lower bound."
+}

@@ -268,3 +268,24 @@ class EscapeTests(unittest.TestCase):
         self.assertLess(quiet, es.leakage_heat() / 1000.0)
         self.assertAlmostEqual(es.film_heat(xray_activity=100.0) / quiet, 100.0, delta=1e-6)
         self.assertAlmostEqual(es.film_heat(activity=100.0) / quiet, 1.0, delta=1e-6)
+
+    @NEEDS_UV
+    def test_fism2_rises_most_in_the_hardest_x_rays(self):
+        from atmosphere.middle_atmosphere import escape as es, fetch_limb_inputs
+        if not _present(fetch_limb_inputs):
+            self.skipTest('FISM2 spectra not restored (fetch_limb_inputs --download)')
+        table = es.xray_cycle()
+        self.assertEqual(set(table['maxima']), set(es.FISM2_MAXIMA))
+        # Each maximum rises from the softest band to the hardest, and the mean lies within the three.
+        for factors in table['maxima'].values():
+            self.assertTrue(all(b < a for a, b in zip(factors, factors[1:])))
+        for i, mean in enumerate(table['mean']):
+            values = [f[i] for f in table['maxima'].values()]
+            self.assertTrue(min(values) <= mean <= max(values))
+        np.testing.assert_allclose(es.xray_scale([0.3, 1.5, 7.0, 9.99], 'fism2'),
+                                   [table['mean'][0], table['mean'][2], table['mean'][4], table['mean'][4]])
+        np.testing.assert_allclose(es.xray_scale([0.3, 7.0], 2.5), 2.5)
+        # A gap's X-rays at the measured factor raise the whole band's heat at solar maximum by a little.
+        flat = es.leakage_heat(1.0, activity=es.SOLAR_MAXIMUM)
+        measured = es.leakage_heat(1.0, activity=es.SOLAR_MAXIMUM, xray_activity=es.XRAY_SOLAR_MAXIMUM)
+        self.assertTrue(flat < measured < 1.05 * flat)

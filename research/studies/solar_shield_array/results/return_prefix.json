@@ -1,0 +1,137 @@
+{
+  "schema": "terluna.research.return-clearance-prefix/1",
+  "producer": {
+    "source_hashes": {
+      "protection/dynamics/cycling.py": "704fbd03c9d4070ea05bdfeba57914ec225941f3560710da2472bd24ca870ed4",
+      "protection/dynamics/ephemeris.py": "9a162c3acf63a844284eb61b444a7d34f1447b5182d254d3e87616516f8748d9",
+      "protection/dynamics/ephemeris.json": "90fde7cb6142e5d4d8082270a978ba2f8f47baaefab0e8d1cf82ec6f07a27222",
+      "protection/dynamics/model.py": "01c9191588037ab4f42bac38dc4d5bd99e57427d37fa75cd672120e32b53733a",
+      "protection/dynamics/optical.py": "06a13ae9f24834876edbc12b513deaa5e3735f02f8249eb57c8996d74ce00b56",
+      "research/studies/solar_shield_array/scenario.json": "a53b784941518b6e36ccdf728252cf6c8e0c46c1126b6c621ed4e28c23128699",
+      "research/studies/solar_shield_array/cycling_search.py": "4789a0185620f6662916462b2715aa9002e6454e74f4f32ef5f7dadf5f732093",
+      "research/studies/solar_shield_array/cycling_feedback.py": "0eb32d26e14472f0a512cdf45d60f00ab8260376cd51ca715e7615bf7df02775",
+      "protection/dynamics/fleet.py": "f3e52653876c2956a4b355dc1290a0a1cadd2b9b601cafc664259827df1cc93c",
+      "research/studies/solar_shield_array/fleet_run.py": "9b8bc9765b9288745ea7d4d69d59e857e76e54d29cc91b37160503e9d9090833",
+      "protection/dynamics/active_formation.py": "597c12c6a4a89c0ea70663fddd69b9b5d9e599c88a2bd1742f5009d19e050b7a",
+      "protection/dynamics/active_retime.py": "9ba27a7ec48460a345289ebc7550c502f845487beaec5fe35084a67b2d9d736b",
+      "protection/dynamics/coverage_pilot.py": "fb03381e4387cb17e5276148428a3ffb2cbfb5313c8f59b8ff708ebeb9ce079c",
+      "protection/dynamics/natural_pattern.py": "780c2679f13c097c07b89e9d7cce1c91399f464f01b4bd878fb50cb643e1be29",
+      "research/studies/solar_shield_array/patterns_run.py": "f2e346fd2281632e5bf1c285c61229ba24e26e4ba4c480713194218263888d5c",
+      "protection/dynamics/pattern_return.py": "a1a3f85e5f7744d0418574d0fc2a033d4ab69d9d55eba9bfbb85974c7ab64757",
+      "research/studies/solar_shield_array/return_screen.py": "53ec3ecf5165c773142315d97553f9c72ebbe6c045299ec368104c1811f4b526",
+      "protection/dynamics/parallel_shadow.py": "98d09fc9e5812b3592cbc5e24e0615f9f9aa3a75c7f33afff0fe82d0e40c3c24",
+      "research/studies/solar_shield_array/return_prefix.py": "3c8434977c9de22153c9af808565d312261f0a459db678e4df63d03003c2bedd"
+    },
+    "constants": {
+      "AU": 149597870700.0,
+      "EARTH_GM": 398600441800000.0,
+      "EARTH_MOON_DISTANCE": 384400000.0,
+      "EARTH_OBLIQUITY_DEG": 23.4393,
+      "EARTH_RADIUS": 6371000.0,
+      "JULIAN_DAY": 86400.0,
+      "MOON_GM": 4902800118000.0,
+      "MOON_RADIUS": 1737400.0,
+      "SOLAR_CONSTANT": 1361.0,
+      "SOLAR_SYSTEM_GM": {
+        "mercury": 22031868551000.0,
+        "venus": 324858592000000.0,
+        "mars": 42828375816000.0,
+        "jupiter": 1.267127641e+17,
+        "saturn": 3.79405848418e+16,
+        "uranus": 5794556400000000.0,
+        "neptune": 6836527100580000.0,
+        "pluto": 975500000000.0
+      },
+      "SPEED_OF_LIGHT": 299792458.0,
+      "SUN_GM": 1.3271244004127942e+20,
+      "SUN_RADIUS": 695700000.0
+    },
+    "inputs": {
+      "return_screen.json": "f0278c63a032753c4d20ec1fcf7fe65d23a68b56a33ef9eb04b475b9bdac5504"
+    }
+  },
+  "selected_case": 1,
+  "actual_initial_members": 361,
+  "prefix_end_limit_s": 26890.06358781627,
+  "predicted_retained_crossing_s": 26290.06358781627,
+  "force_scope": "All individual states, finite-area gravity, dynamic exact parallel-square shadow unions, two-sided finite-Sun force; body eclipse explicitly excluded from this short prefix.",
+  "accepted_return": false,
+  "accepted_handover": false,
+  "accepted_fleet": false,
+  "recurring_cost_measured": false,
+  "full_return_executed": false,
+  "runs": [
+    {
+      "solar_sources": 8,
+      "max_step_s": 60.0,
+      "rtol": 2e-10,
+      "nfev": 779,
+      "clearance_event": true,
+      "event_time_s": 24461.411041256975,
+      "seconds_after_service": 2861.4110412569753,
+      "minimum_clearance_m": 99.99999999990875,
+      "limiting_pair": [
+        338,
+        339
+      ],
+      "pair_axis_projections_m": [
+        -8401.326513124517,
+        -27.892984214188136,
+        -99.99999999990875
+      ],
+      "mean_executed_delta_v_m_s": 0.022263865838493872,
+      "max_executed_delta_v_m_s": 0.06117872233335687,
+      "max_acceleration_command_m_s2": 8.437175820342743e-05,
+      "minimum_final_illumination": 0.4148953725853549,
+      "mean_final_illumination": 0.6937541981851987,
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 99.41592845218452,
+        "maximum_sampled_rate_deg_s": 0.05404057491191832,
+        "maximum_sampled_angular_acceleration_deg_s2": 0.00013803486412555427
+      },
+      "elapsed_s": 37.69275448500048,
+      "raw_path": "research/runs/solar_shield_array/returns/prefix_sun_8.npz",
+      "raw_sha256": "4dae3dfd2bc658b90ce8ab3b52764e2b6a4e03ea88f105948c75aa4b0132bfea"
+    },
+    {
+      "solar_sources": 16,
+      "max_step_s": 30.0,
+      "rtol": 2e-12,
+      "nfev": 1499,
+      "clearance_event": true,
+      "event_time_s": 24461.411095731266,
+      "seconds_after_service": 2861.411095731266,
+      "minimum_clearance_m": 100.00000000000273,
+      "limiting_pair": [
+        338,
+        339
+      ],
+      "pair_axis_projections_m": [
+        -8401.326653727981,
+        -27.89298450480463,
+        -100.00000000000273
+      ],
+      "mean_executed_delta_v_m_s": 0.022263867511134138,
+      "max_executed_delta_v_m_s": 0.06117872692959343,
+      "max_acceleration_command_m_s2": 8.437176168567007e-05,
+      "minimum_final_illumination": 0.41472470926748817,
+      "mean_final_illumination": 0.6937288683034327,
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 99.41592845218452,
+        "maximum_sampled_rate_deg_s": 0.05404057797457404,
+        "maximum_sampled_angular_acceleration_deg_s2": 0.00013803484602815423
+      },
+      "elapsed_s": 140.60575292400063,
+      "raw_path": "research/runs/solar_shield_array/returns/prefix_sun_16.npz",
+      "raw_sha256": "ba146d2b53a327f68a5926b406782c3d4ebfa7309845af0935c1b0d9ec9d0458"
+    }
+  ],
+  "elapsed_s": 178.9231528119999,
+  "max_rss_MiB": 96.81640625,
+  "independent_replay": {
+    "max_position_difference_m": 0.009896891626973133,
+    "max_velocity_difference_m_s": 7.182698525302929e-06,
+    "clearance_event_time_difference_s": 5.447429066407494e-05,
+    "same_limiting_pair": true
+  }
+}

@@ -1,0 +1,499 @@
+{
+  "schema": "terluna.research.return-repair-local-refinement/1",
+  "producer": {
+    "source_hashes": {
+      "protection/dynamics/cycling.py": "704fbd03c9d4070ea05bdfeba57914ec225941f3560710da2472bd24ca870ed4",
+      "protection/dynamics/ephemeris.py": "9a162c3acf63a844284eb61b444a7d34f1447b5182d254d3e87616516f8748d9",
+      "protection/dynamics/ephemeris.json": "90fde7cb6142e5d4d8082270a978ba2f8f47baaefab0e8d1cf82ec6f07a27222",
+      "protection/dynamics/model.py": "01c9191588037ab4f42bac38dc4d5bd99e57427d37fa75cd672120e32b53733a",
+      "protection/dynamics/optical.py": "06a13ae9f24834876edbc12b513deaa5e3735f02f8249eb57c8996d74ce00b56",
+      "research/studies/solar_shield_array/scenario.json": "a53b784941518b6e36ccdf728252cf6c8e0c46c1126b6c621ed4e28c23128699",
+      "research/studies/solar_shield_array/cycling_search.py": "4789a0185620f6662916462b2715aa9002e6454e74f4f32ef5f7dadf5f732093",
+      "research/studies/solar_shield_array/cycling_feedback.py": "0eb32d26e14472f0a512cdf45d60f00ab8260376cd51ca715e7615bf7df02775",
+      "protection/dynamics/fleet.py": "f3e52653876c2956a4b355dc1290a0a1cadd2b9b601cafc664259827df1cc93c",
+      "research/studies/solar_shield_array/fleet_run.py": "9b8bc9765b9288745ea7d4d69d59e857e76e54d29cc91b37160503e9d9090833",
+      "protection/dynamics/active_formation.py": "597c12c6a4a89c0ea70663fddd69b9b5d9e599c88a2bd1742f5009d19e050b7a",
+      "protection/dynamics/active_retime.py": "9ba27a7ec48460a345289ebc7550c502f845487beaec5fe35084a67b2d9d736b",
+      "protection/dynamics/coverage_pilot.py": "fb03381e4387cb17e5276148428a3ffb2cbfb5313c8f59b8ff708ebeb9ce079c",
+      "protection/dynamics/natural_pattern.py": "780c2679f13c097c07b89e9d7cce1c91399f464f01b4bd878fb50cb643e1be29",
+      "research/studies/solar_shield_array/patterns_run.py": "f2e346fd2281632e5bf1c285c61229ba24e26e4ba4c480713194218263888d5c",
+      "protection/dynamics/pattern_departure.py": "24e7bb0653f9ab546b46a9a650ae67e3adb0af154c3e5b9ba83461e9648b828b",
+      "protection/dynamics/departure_control.py": "beafd12acfb4a228c17a329c9e0d278282222e90be7126b20b3e2df551bedfd5",
+      "protection/dynamics/pattern_return.py": "a1a3f85e5f7744d0418574d0fc2a033d4ab69d9d55eba9bfbb85974c7ab64757",
+      "protection/dynamics/energy_coast.py": "df47adb192e3f665e977353844e478f9cd5a30f63ca54ea2f31b59e9cd1b6826",
+      "protection/dynamics/attitude_load.py": "0b977677edc96d33889eb36526c4826c625eea2cb1a4e3b4254e970ac99582e4",
+      "research/studies/solar_shield_array/return_screen.py": "53ec3ecf5165c773142315d97553f9c72ebbe6c045299ec368104c1811f4b526",
+      "research/studies/solar_shield_array/energy_screen.py": "3506f2f1c725299fc98795fb32ed3c0063605f114c3d5cdbc711ee0f5c3bf9bd",
+      "protection/dynamics/parallel_shadow.py": "98d09fc9e5812b3592cbc5e24e0615f9f9aa3a75c7f33afff0fe82d0e40c3c24",
+      "research/studies/solar_shield_array/departure_validate.py": "df457b279e1b69627f65fa528877faa414161e6bfea881387d28243504f9b9b0",
+      "research/studies/solar_shield_array/energy_run.py": "1ddb0b6d2aabac1252ae614369230d286d6db7c79a45b7c863ac1a926ccd1c08",
+      "protection/dynamics/coast_control.py": "315bb9a1456ca1108f93ec1579719f7933acafb3f3c2b79bb2cf875961685c4d",
+      "research/studies/solar_shield_array/energy_correct.py": "5c518a5e0aa17c2e8cd999f46f9ab139c02534f58919ee630f38fbfbd523d9ca",
+      "research/studies/solar_shield_array/energy_replay.py": "b3ce134e8ad2d005d23a367d9d90e832b89c4fd11bbcca7ff448706987ca8d4c",
+      "protection/dynamics/packing_control.py": "2a728856edbc76c79eb59e7ba29532c5fe62671f24e39687cabb0bea7f7272a7",
+      "research/studies/solar_shield_array/packing_screen.py": "1a3b771ed6543810d75dfc54c7ca33a084086a9c9519bdc26959a89c87f8fedb",
+      "research/studies/solar_shield_array/packing_run.py": "d9971a9f1bf6a3d8a9ebad83e9e9fd78af046eb5af7a0c06fe4250ee05c8ec8b",
+      "protection/dynamics/collection.py": "a742f83d832f1afdfc144f0661c5a0dcfe8723bfcd184e2d65db778ca9af7cf9",
+      "research/studies/solar_shield_array/packing_validate.py": "0a6f52de4a2d07d80b137c1a67ac6e6e8ee0aa1d7cb3683684e076fcf776e5f0",
+      "research/studies/solar_shield_array/departure_screen.py": "9e69d5e5db5729191ca6ccae8673d24dfab7606af8bb47f1038913b328750ff4",
+      "research/studies/solar_shield_array/departure_refine.py": "c206316508235d2e5960dff5a6ab5de90334a632a67e46a54505d7d9909fd72a",
+      "research/studies/solar_shield_array/departure_run.py": "b142372d4b1ed3383bfe4ff5ea8764bbb2c12e8d92c3db8cb81138a18663a2c8",
+      "research/studies/solar_shield_array/departure_budget.py": "61434cb29ddf74bdfef79abcfcdd3f9a886caa8e21ba9a76f23faf6167b579a4",
+      "research/studies/solar_shield_array/pilot_budget.py": "2a7fc3e12d4b4aae98ce8d656220e0c10cbe0d5de2099f0406d64662e563c41e",
+      "protection/dynamics/tile_torque.py": "448a9ee6db481c18252196045cc53ad48733aacb9f8fc2620db8eae10acd6cbf",
+      "research/studies/solar_shield_array/energy_budget.py": "1d261c43f9bfebd418875e9b62f00fbc554bb03da6e679c36918e252bb272fab",
+      "research/studies/solar_shield_array/packing_budget.py": "912e8723c4855545cdde6817641159b1d6dbd5e90d5b86c9da5544d8162dd3ca",
+      "protection/dynamics/square_distance.py": "b38c54b6d9a96b161e82b755d407758548a38244c9292d73404ab45cdc1210ba",
+      "protection/dynamics/service_margin.py": "2651d828734f82416fa39bd6a77da31ae070aaa7606f6b80cdb1cbf00090e68f",
+      "research/studies/solar_shield_array/packing_audit.py": "bdb61443a6ded75c9c5c3dfbd6644b947874d710194363ba572f5814a36f5b91",
+      "protection/dynamics/cycle_control.py": "79979d6ec11f8095a9b9d9f20162e0c564a547aa108d0f8aff330c1ba5ceb5ac",
+      "research/studies/solar_shield_array/closure_screen.py": "77943258dd53965b799437d274b25a97fa8b122fc69d36021dce97db10cc0c27",
+      "protection/dynamics/mass_feedback.py": "a7a22f4879f9bf65f4124c4533beab860bb2135b579fd588d0470962ca741abc",
+      "research/studies/solar_shield_array/closure_propagate.py": "94439660cf036cde289ad7fdd8bb17b2efd37680ca189a2057ee64e30c3d51e2",
+      "research/studies/solar_shield_array/closure_hardware.py": "fea296454ae7a7b86091ccf462a0c86dec47250b092395e203a8bd2d501c6349",
+      "research/studies/solar_shield_array/closure_sizing.py": "7b0a85ef346d6d5328f65f0108a82df3dd562866ec69ef3b2f56223cfe5a3f56",
+      "research/studies/solar_shield_array/closure_return.py": "1b2eed766423e99684d5e8084f11709f50915d37185b2556eafdce0823da3464",
+      "research/studies/solar_shield_array/closure_validate.py": "beae9de9f295d8eb7819949119d9315ce462e72e29c3f3b2095642163164baa6",
+      "protection/dynamics/compact_shadow.py": "e4a729b6fa500a8e3e380a17f34009ba846a6eb3d33038679e0495afbe69fac7",
+      "research/studies/solar_shield_array/closure_compact.py": "d702eaf9e7aa9f0c8336a99c6b3608a35dafd504d856edc1e2d624ab00b20f31",
+      "protection/dynamics/return_escape.py": "c76687ce70d82b636535200e63f31a9a93cc5e6fca6ad207779be6850e5cec7b",
+      "research/studies/solar_shield_array/repair_screen.py": "7591e1a0a4de0dad93154397d36a3fc13b02ab6acae7b0af4fc73911d11974f9",
+      "research/studies/solar_shield_array/repair_local_screen.py": "f6e6da179bbd8853a68ebb2f9b865a48cc3e87d11b6d79f8a45258e24bf5d00b",
+      "research/studies/solar_shield_array/repair_refine.py": "e6225e07ad069ddca411a985a99899cace62df8eea0fdfc3f8748ebf360bbff5"
+    },
+    "constants": {
+      "AU": 149597870700.0,
+      "EARTH_GM": 398600441800000.0,
+      "EARTH_MOON_DISTANCE": 384400000.0,
+      "EARTH_OBLIQUITY_DEG": 23.4393,
+      "EARTH_RADIUS": 6371000.0,
+      "JULIAN_DAY": 86400.0,
+      "MOON_GM": 4902800118000.0,
+      "MOON_RADIUS": 1737400.0,
+      "SOLAR_CONSTANT": 1361.0,
+      "SOLAR_SYSTEM_GM": {
+        "mercury": 22031868551000.0,
+        "venus": 324858592000000.0,
+        "mars": 42828375816000.0,
+        "jupiter": 1.267127641e+17,
+        "saturn": 3.79405848418e+16,
+        "uranus": 5794556400000000.0,
+        "neptune": 6836527100580000.0,
+        "pluto": 975500000000.0
+      },
+      "SPEED_OF_LIGHT": 299792458.0,
+      "SUN_GM": 1.3271244004127942e+20,
+      "SUN_RADIUS": 695700000.0
+    },
+    "inputs": {
+      "repair_screen.json": "7b60736912c3ee7e418bad48d6c6a361e46ff52af428ef2bb2e96673b26b2e0b",
+      "repair_local_screen.json": "a53197d8ac285ca17f3e7d9c118b67c7bfe15283514ea56697d5f7d58e85ba74"
+    }
+  },
+  "budget": {
+    "stage_wall_s": 130,
+    "threads": 1,
+    "address_space_GiB": 2
+  },
+  "scope": "Continuation of the twelfth local proposal, compacting redundant encounter dates. Initial separating branches and free terminal states. Full independent propagation and coupled validation still required.",
+  "accepted_return": false,
+  "accepted_cycle": false,
+  "accepted_fleet": false,
+  "iterations": [
+    {
+      "iteration": 0,
+      "fit": {
+        "success": true,
+        "status": 0,
+        "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+        "cuts": 1983,
+        "independent_vector_coefficients": 2166,
+        "component_trust_m_s": 2.0,
+        "maximum_solver_wall_s": 20.0,
+        "component_objective_m_s": 0.6487323556891551,
+        "mean_delta_v_m_s": 0.6340178429246296,
+        "maximum_tile_delta_v_m_s": 1.531536933297581,
+        "maximum_thrust_acceleration_m_s2": 0.0004254269259159947,
+        "minimum_cut_residual_m": -5.412337245047638e-12,
+        "burn_count": 334,
+        "maximum_control_change_m_s": 2.377709280138305
+      },
+      "geometry": {
+        "minimum_sampled_surface_distance_m": 0.0040128515860039845,
+        "witness": {
+          "time_s": 53820.0,
+          "pair": [
+            216,
+            295
+          ],
+          "projection_m": [
+            -7206.801485050323,
+            -3414.0419727385656,
+            0.0040128515860039845
+          ],
+          "centre_distance_m": 7974.563952753798
+        }
+      }
+    },
+    {
+      "iteration": 1,
+      "fit": {
+        "success": true,
+        "status": 0,
+        "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+        "cuts": 5756,
+        "independent_vector_coefficients": 2166,
+        "component_trust_m_s": 2.0,
+        "maximum_solver_wall_s": 20.0,
+        "component_objective_m_s": 1.3410521050709403,
+        "mean_delta_v_m_s": 1.175181639338289,
+        "maximum_tile_delta_v_m_s": 2.3678117258611833,
+        "maximum_thrust_acceleration_m_s2": 0.0006265207570668862,
+        "minimum_cut_residual_m": -4.888034421668408e-09,
+        "burn_count": 415,
+        "maximum_control_change_m_s": 1.4588251114817599
+      },
+      "geometry": {
+        "minimum_sampled_surface_distance_m": 0.013646827010022986,
+        "witness": {
+          "time_s": 59400.0,
+          "pair": [
+            216,
+            318
+          ],
+          "projection_m": [
+            7737.976687824961,
+            6035.120586582931,
+            -0.013646827010022986
+          ],
+          "centre_distance_m": 9813.203539930571
+        }
+      }
+    },
+    {
+      "iteration": 2,
+      "fit": {
+        "success": true,
+        "status": 0,
+        "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+        "cuts": 8817,
+        "independent_vector_coefficients": 2166,
+        "component_trust_m_s": 2.0,
+        "maximum_solver_wall_s": 20.0,
+        "component_objective_m_s": 1.7008946823970528,
+        "mean_delta_v_m_s": 1.4241567082235038,
+        "maximum_tile_delta_v_m_s": 3.209923035856659,
+        "maximum_thrust_acceleration_m_s2": 0.0007322036260418994,
+        "minimum_cut_residual_m": -4.4297898682543746e-10,
+        "burn_count": 491,
+        "maximum_control_change_m_s": 1.2835196264703517
+      },
+      "geometry": {
+        "minimum_sampled_surface_distance_m": 6.855315963457807e-10,
+        "witness": {
+          "time_s": 64800.0,
+          "pair": [
+            173,
+            211
+          ],
+          "projection_m": [
+            4800.399753340003,
+            -1015.2201956057479,
+            -6.855315963457807e-10
+          ],
+          "centre_distance_m": 4906.578220861514
+        }
+      }
+    },
+    {
+      "iteration": 3,
+      "fit": {
+        "success": true,
+        "status": 0,
+        "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+        "cuts": 10846,
+        "independent_vector_coefficients": 2166,
+        "component_trust_m_s": 2.0,
+        "maximum_solver_wall_s": 20.0,
+        "component_objective_m_s": 1.9147561457068645,
+        "mean_delta_v_m_s": 1.600925947231708,
+        "maximum_tile_delta_v_m_s": 3.4405343133691133,
+        "maximum_thrust_acceleration_m_s2": 0.0008164965809277262,
+        "minimum_cut_residual_m": -7.505107646466058e-10,
+        "burn_count": 518,
+        "maximum_control_change_m_s": 0.9670965534779243
+      },
+      "geometry": {
+        "minimum_sampled_surface_distance_m": 5.998668526430937e-12,
+        "witness": {
+          "time_s": 64800.0,
+          "pair": [
+            95,
+            117
+          ],
+          "projection_m": [
+            8106.371454987218,
+            -7721.213591242275,
+            -5.998668526430937e-12
+          ],
+          "centre_distance_m": 11195.105961437614
+        }
+      }
+    }
+  ],
+  "schedule": {
+    "label": "local_refined"
+  },
+  "elapsed_s": 66.80632629699903,
+  "max_rss_MiB": 227.453125,
+  "early_geometry": {
+    "minimum_sampled_surface_distance_m": 0.004649903600586942,
+    "witness": {
+      "time_s": 63240.0,
+      "pair": [
+        243,
+        256
+      ],
+      "projection_m": [
+        9424.206197845686,
+        4877.650292551479,
+        -0.004649903600586942
+      ],
+      "centre_distance_m": 10611.650900588571
+    }
+  },
+  "early_crossings": {
+    "crossing_near_encounters": 57,
+    "physical_intersections": 54,
+    "witnesses": [
+      {
+        "time_s": 64590.25930632553,
+        "i": 78,
+        "j": 344,
+        "coplanarity_residual_m": 1.5779564907423247e-07,
+        "in_plane_projections_m": [
+          -33.4202449700772,
+          1783.2645384751531
+        ],
+        "physical_square_intersection": true,
+        "separating_projection_m": -8216.735461524848,
+        "axis": [
+          -0.9806433498812531,
+          -0.17960563740272334,
+          -0.07797714631118172
+        ],
+        "required_projection_m": 10300.0
+      },
+      {
+        "time_s": 64663.11283911596,
+        "i": 76,
+        "j": 342,
+        "coplanarity_residual_m": 1.2657487229574327e-07,
+        "in_plane_projections_m": [
+          -25.862083514029045,
+          2208.4909909744692
+        ],
+        "physical_square_intersection": true,
+        "separating_projection_m": -7791.509009025531,
+        "axis": [
+          -0.9806405341286246,
+          -0.17961859102354438,
+          -0.0779827197694635
+        ],
+        "required_projection_m": 10300.0
+      },
+      {
+        "time_s": 64771.10466828488,
+        "i": 157,
+        "j": 173,
+        "coplanarity_residual_m": 4.98178735711728e-07,
+        "in_plane_projections_m": [
+          -834.9802592178575,
+          3447.493750047634
+        ],
+        "physical_square_intersection": true,
+        "separating_projection_m": -6552.5062499523665,
+        "axis": [
+          -0.9806363599536475,
+          -0.17963779216532888,
+          -0.07799098129160026
+        ],
+        "required_projection_m": 10300.0
+      },
+      {
+        "time_s": 62015.27241182795,
+        "i": 34,
+        "j": 338,
+        "coplanarity_residual_m": 7.985337107072161e-07,
+        "in_plane_projections_m": [
+          -3534.7623908653436,
+          746.3873938303068
+        ],
+        "physical_square_intersection": true,
+        "separating_projection_m": -6465.237609134656,
+        "axis": [
+          0.1953039827177842,
+          -0.8998138260267785,
+          -0.390117203960069
+        ],
+        "required_projection_m": 10300.0
+      },
+      {
+        "time_s": 64767.52589992947,
+        "i": 209,
+        "j": 231,
+        "coplanarity_residual_m": 1.2938868322181832e-07,
+        "in_plane_projections_m": [
+          -895.1487181874791,
+          -3641.278467575774
+        ],
+        "physical_square_intersection": true,
+        "separating_projection_m": -6358.721532424226,
+        "axis": [
+          0.9806364982892768,
+          0.17963715585759554,
+          0.07799070751274978
+        ],
+        "required_projection_m": 10300.0
+      },
+      {
+        "time_s": 62181.249388046424,
+        "i": 37,
+        "j": 341,
+        "coplanarity_residual_m": 5.385046739235736e-08,
+        "in_plane_projections_m": [
+          -4673.617516294196,
+          969.2121184899146
+        ],
+        "physical_square_intersection": true,
+        "separating_projection_m": -5326.382483705804,
+        "axis": [
+          0.19533611892871805,
+          -0.899807954036085,
+          -0.39011465813945057
+        ],
+        "required_projection_m": 10300.0
+      },
+      {
+        "time_s": 64760.6508878237,
+        "i": 171,
+        "j": 193,
+        "coplanarity_residual_m": 3.042174603923544e-08,
+        "in_plane_projections_m": [
+          -1084.4333871346214,
+          -4820.327570454145
+        ],
+        "physical_square_intersection": true,
+        "separating_projection_m": -5179.672429545855,
+        "axis": [
+          0.9806367640384095,
+          0.17963593347450124,
+          0.0779901815680761
+        ],
+        "required_projection_m": 10300.0
+      },
+      {
+        "time_s": 64271.86870740943,
+        "i": 116,
+        "j": 344,
+        "coplanarity_residual_m": 1.2768671838518687e-06,
+        "in_plane_projections_m": [
+          -5303.432887716775,
+          2472.19183247262
+        ],
+        "physical_square_intersection": true,
+        "separating_projection_m": -4696.567112283225,
+        "axis": [
+          0.19574084919235218,
+          -0.8997339149465643,
+          -0.39008255825194926
+        ],
+        "required_projection_m": 10300.0
+      },
+      {
+        "time_s": 64353.984808337045,
+        "i": 114,
+        "j": 342,
+        "coplanarity_residual_m": 1.2789946664948962e-06,
+        "in_plane_projections_m": [
+          -5339.614035556468,
+          2910.2966259708446
+        ],
+        "physical_square_intersection": true,
+        "separating_projection_m": -4660.385964443532,
+        "axis": [
+          0.19575674435698354,
+          -0.8997310039221453,
+          -0.3900812961678669
+        ],
+        "required_projection_m": 10300.0
+      },
+      {
+        "time_s": 57636.769877239385,
+        "i": 14,
+        "j": 49,
+        "coplanarity_residual_m": 7.443724438514787e-07,
+        "in_plane_projections_m": [
+          5801.635969575102,
+          3031.040059622525
+        ],
+        "physical_square_intersection": true,
+        "separating_projection_m": -4198.364030424898,
+        "axis": [
+          -0.19445600301812815,
+          0.8999684076457319,
+          0.39018422332254754
+        ],
+        "required_projection_m": 10300.0
+      },
+      {
+        "time_s": 57609.20315967246,
+        "i": 12,
+        "j": 47,
+        "coplanarity_residual_m": 1.3909608662018764e-06,
+        "in_plane_projections_m": [
+          6078.292595628681,
+          2936.2415507701658
+        ],
+        "physical_square_intersection": true,
+        "separating_projection_m": -3921.707404371319,
+        "axis": [
+          -0.19445066285514395,
+          0.8999693789102207,
+          0.3901846444174182
+        ],
+        "required_projection_m": 10300.0
+      },
+      {
+        "time_s": 61718.510713097894,
+        "i": 37,
+        "j": 303,
+        "coplanarity_residual_m": 5.396363501664618e-07,
+        "in_plane_projections_m": [
+          -6363.049284958256,
+          1833.4105078850655
+        ],
+        "physical_square_intersection": true,
+        "separating_projection_m": -3636.950715041744,
+        "axis": [
+          0.19524652264452003,
+          -0.899824322739087,
+          -0.39012175484374967
+        ],
+        "required_projection_m": 10300.0
+      }
+    ]
+  },
+  "beam_and_rate": {
+    "minimum_sampled_beam_margin_deg": 44.67729785833377,
+    "maximum_sampled_rate_deg_s": 1.132757705368931e-05,
+    "maximum_sampled_angular_acceleration_deg_s2": 1.2661936246163259e-12
+  },
+  "raw_path": "research/runs/solar_shield_array/return_repair/local_refined_proposal.npz",
+  "raw_sha256": "aa0a1f901bc7ef191334f233fee5469ba3dab2a1d5655e54524196bab51c0473",
+  "mean_first_six_hour_translation_m_s": 1.600925947231708,
+  "endpoint_difference_from_unchanged_m": 566063.3001333422,
+  "endpoint_velocity_difference_from_unchanged_m_s": 19.536745174225548,
+  "early_proposal_pass": false,
+  "completed": true
+}

@@ -1,0 +1,394 @@
+{
+  "schema": "terluna.research.joint-checks/1",
+  "date": "2026-10-05",
+  "reviewed_checkpoint": "c47c96040fc386b1d980c82a036ec91830f47390",
+  "early_checkpoint": "0861049b7eaf27b27e927033b9f9d284f9476c81",
+  "branch": "research/solar-shield-habitat-array",
+  "preliminary_remote_head_check": "Explicitly waived by author; not performed",
+  "accepted_operating_return": false,
+  "accepted_cycle": false,
+  "accepted_fleet": false,
+  "executed_geometry": "All 361 tiles, one return and next six-hour service independently replayed; conditional clearance and sampled optical service pass.",
+  "budget": {
+    "cpu_limit_s": 1800,
+    "recorded_producer_cpu_s": 1637.970253749,
+    "charged_ancillary_allowance_s": 20,
+    "ancillary_metering": "Brief geometry/profiling and compilation allowance, not individually metered.",
+    "processes": 1,
+    "numerical_threads": 1,
+    "address_space_limit_MiB": 2048,
+    "peak_recorded_rss_MiB": 824.640625,
+    "new_raw_limit_MiB": 512,
+    "new_raw_MiB": 478.48933124542236,
+    "proposals": 12,
+    "new_coupled_candidates": 2,
+    "independent_candidate_replays": 1,
+    "producer_invocations": 12,
+    "checks_budget_s_per_commit": 300
+  },
+  "derived_comparison": {
+    "executed_corridor_first_twelve_hours_energy_J": 339461375036470.2,
+    "loaded_baseline_first_twelve_hours_energy_J": 51859000000000.0,
+    "ratio": 6.545852697438635,
+    "method": "Trapezoidal whole-array integral over account_service.npz plus account_transfer.npz, linearly interpolated at 43200 s; their hashes are recorded below."
+  },
+  "products": [
+    {
+      "path": "research/studies/solar_shield_array/results/joint_account.json",
+      "sha256": "260a85c983a044bef1de23f649512053231bce4248fd193192326739089377a8",
+      "resources": {
+        "wall_s": 42.398087683002814,
+        "cpu_s": 42.375664252,
+        "max_rss_MiB": 534.90234375,
+        "numerical_threads": 1,
+        "new_raw_MiB": 450.55312633514404
+      }
+    },
+    {
+      "path": "research/studies/solar_shield_array/results/joint_audit.json",
+      "sha256": "01a7f62727bd7d5789259bce4b9a33a2b0cf955989586a165dd867deb5680406",
+      "resources": {
+        "wall_s": 17.292989462999685,
+        "cpu_s": 17.284542364,
+        "max_rss_MiB": 472.26953125,
+        "numerical_threads": 1,
+        "new_raw_MiB": 451.68408203125
+      }
+    },
+    {
+      "path": "research/studies/solar_shield_array/results/joint_bridge.json",
+      "sha256": "27e5e8c4f97b23ef881d073997914e7f44330b790de27659259bdd31be2ce588",
+      "resources": {
+        "wall_s": 68.3914393580053,
+        "cpu_s": 68.36856010000001,
+        "max_rss_MiB": 181.58203125,
+        "numerical_threads": 1,
+        "new_raw_MiB": 211.4195384979248
+      }
+    },
+    {
+      "path": "research/studies/solar_shield_array/results/joint_corridor_108_coarse.json",
+      "sha256": "7fa4bec8d08b2dabf2b95550f5fbc4099131957416c3c4e211497a2e9d4cd229",
+      "resources": {
+        "wall_s": 269.81779507100146,
+        "cpu_s": 269.72161353,
+        "max_rss_MiB": 585.86328125,
+        "numerical_threads": 1,
+        "new_raw_MiB": 274.6418752670288
+      }
+    },
+    {
+      "path": "research/studies/solar_shield_array/results/joint_corridor_108_fine.json",
+      "sha256": "07bc6cf1c80e4b30b8968abadbc7373199c6a1db4f231b306f23eb966940f873",
+      "resources": {
+        "wall_s": 523.5244568540002,
+        "cpu_s": 523.3667625630001,
+        "max_rss_MiB": 824.640625,
+        "numerical_threads": 1,
+        "new_raw_MiB": 337.809193611145
+      }
+    },
+    {
+      "path": "research/studies/solar_shield_array/results/joint_early_same_coarse.json",
+      "sha256": "eafe3418381d73d7f28bf7c208e4ac8d077d5afd4ee70dac29167008942acab1",
+      "resources": {
+        "wall_s": 64.68635838100454,
+        "cpu_s": 64.664449068,
+        "max_rss_MiB": 194.3671875,
+        "numerical_threads": 1,
+        "new_raw_MiB": 465.038613319397
+      }
+    },
+    {
+      "path": "research/studies/solar_shield_array/results/joint_failed_account.json",
+      "sha256": "8d88320a8cd3b647570bf1b007ea5bc5a6b49972319dd6f879f3c6d49dab4645",
+      "resources": {
+        "wall_s": 9.114085253997473,
+        "cpu_s": 9.110020085,
+        "max_rss_MiB": 253.625,
+        "numerical_threads": 1,
+        "new_raw_MiB": 478.4873323440552
+      }
+    },
+    {
+      "path": "research/studies/solar_shield_array/results/joint_grouped.json",
+      "sha256": "9c928da246cca4ca8624e919c1ce19acb6abecd83933c9b01487a64953a67256",
+      "resources": {
+        "wall_s": 81.51468727400061,
+        "cpu_s": 81.492145588,
+        "max_rss_MiB": 118.09765625,
+        "numerical_threads": 1,
+        "new_raw_MiB": 451.68408203125
+      }
+    },
+    {
+      "path": "research/studies/solar_shield_array/results/joint_regression.json",
+      "sha256": "ac4f093e74c371ad8cc01ed5c39f6ff47dfd6a5efb08b3b3a2e38d6d4fb79b2b",
+      "resources": {
+        "wall_s": 84.39896577000036,
+        "cpu_s": 84.391381663,
+        "max_rss_MiB": 314.86328125,
+        "numerical_threads": 1,
+        "new_raw_MiB": 12.47203540802002
+      }
+    },
+    {
+      "path": "research/studies/solar_shield_array/results/joint_screen.json",
+      "sha256": "81f7d59d1da28babff422eae8a5148c0bdee9c75c5cc5ce141fb4214ac1fdc34",
+      "resources": {
+        "wall_s": 309.88379241499933,
+        "cpu_s": 309.697969716,
+        "max_rss_MiB": 435.42578125,
+        "numerical_threads": 1,
+        "new_raw_MiB": 86.90990734100342
+      }
+    },
+    {
+      "path": "research/studies/solar_shield_array/results/joint_seed.json",
+      "sha256": "53060741b22d7a1768e6661899e98db9f48ceec966e8cc052b3ff2ab0bfedcf8",
+      "resources": {
+        "wall_s": 0.6563345009999466,
+        "cpu_s": 0.655166396,
+        "max_rss_MiB": 100.953125,
+        "numerical_threads": 1,
+        "new_raw_MiB": 478.48933124542236
+      }
+    },
+    {
+      "path": "research/studies/solar_shield_array/results/joint_slots.json",
+      "sha256": "5ea1877da4a37e5bb7c35f07d0d19f41c73c33d32d01d6df5e74c21541a8153b",
+      "resources": {
+        "wall_s": 166.8910582899989,
+        "cpu_s": 166.841978424,
+        "max_rss_MiB": 315.6875,
+        "numerical_threads": 1,
+        "new_raw_MiB": 160.77933311462402
+      }
+    }
+  ],
+  "raw_products": {
+    "research/runs/solar_shield_array/joint_cycle/account_service.npz": {
+      "sha256": "fc2cde3dd084a86f0eecb3325cd129f0e78aca6f048a299fb7521c152ecd1a9f",
+      "bytes": 5410120
+    },
+    "research/runs/solar_shield_array/joint_cycle/account_transfer.npz": {
+      "sha256": "d05024947a64ead9ce1e5e544dac7c1242d50ae168d414de7018d045b3a5cf36",
+      "bytes": 74620719
+    },
+    "research/runs/solar_shield_array/joint_cycle/account_next_service.npz": {
+      "sha256": "727484650fe98970f2f8e5f2d3cc833a0ed9ae4106347f32510c6dcf34a5a638",
+      "bytes": 5432069
+    },
+    "research/runs/solar_shield_array/joint_cycle/local_supply_upper_bound.npz": {
+      "sha256": "2fea9f7f68abeb713bb4614095e00b0368c156ef6f046868161777406e3efa38",
+      "bytes": 32757674
+    },
+    "research/runs/solar_shield_array/joint_cycle/corridor_108_proposal.npz": {
+      "sha256": "3fae33e38b6d6e45d60b42be293ccc8b9ff0d3741bb9fa68872318aed2736c02",
+      "bytes": 26542739
+    },
+    "research/runs/solar_shield_array/joint_cycle/corridor_120_proposal.npz": {
+      "sha256": "31a2166a95a6ea44175d412b056004e1f49528617c016718ca6ea9b82744c75a",
+      "bytes": 26557365
+    },
+    "research/runs/solar_shield_array/joint_cycle/corridor_108_coarse_service.npz": {
+      "sha256": "cc889e4f66704b660927ca602fcb9a652d0971b445774e6efde6cb9e6cc32e57",
+      "bytes": 5607564
+    },
+    "research/runs/solar_shield_array/joint_cycle/corridor_108_coarse_transfer.npz": {
+      "sha256": "87f31394d1e0126d388313b2638533c5bda41151abe8b9bf05f650ca3c2db80d",
+      "bytes": 55068328
+    },
+    "research/runs/solar_shield_array/joint_cycle/corridor_108_coarse_next_service.npz": {
+      "sha256": "36cb64328fb27cf5715ce8d2e9c70336937c0874eec36bbe1a44458d35899c3e",
+      "bytes": 5617533
+    },
+    "research/runs/solar_shield_array/joint_cycle/corridor_108_fine_service.npz": {
+      "sha256": "31fcbcaa847464ddc2a5a17a059beeda660e0e7fc8c1d8f7eacc0561af3db3f4",
+      "bytes": 5607304
+    },
+    "research/runs/solar_shield_array/joint_cycle/corridor_108_fine_transfer.npz": {
+      "sha256": "1e71464dfaedf9efbdb61e09294bb79cff6468aee617a467c4cbf57ce3e1db2a",
+      "bytes": 55010382
+    },
+    "research/runs/solar_shield_array/joint_cycle/corridor_108_fine_next_service.npz": {
+      "sha256": "8200837b42419b124f7524c6084d0f56d97fe42f870066750f1a9c3722eec773",
+      "bytes": 5618048
+    },
+    "research/runs/solar_shield_array/joint_cycle/early_same_coarse_service.npz": {
+      "sha256": "cc889e4f66704b660927ca602fcb9a652d0971b445774e6efde6cb9e6cc32e57",
+      "bytes": 5607564
+    },
+    "research/runs/solar_shield_array/joint_cycle/early_same_coarse_transfer.npz": {
+      "sha256": "b96aab1bf4e60b17e7049f01c348c43dbe83f12801fc0b818ac230ec8f7df109",
+      "bytes": 8395677
+    },
+    "research/runs/solar_shield_array/joint_cycle/failed_account_service.npz": {
+      "sha256": "031a0c8ecaecc8730303cb55b73f57162705da1ac7d8901a2846c4d53b844834",
+      "bytes": 6606487
+    },
+    "research/runs/solar_shield_array/joint_cycle/failed_account_transfer.npz": {
+      "sha256": "8fd60f27582f7d38dd9b263595f67931664723e276afd4912906aafde5a84c61",
+      "bytes": 7495517
+    },
+    "research/runs/solar_shield_array/joint_cycle/grouped_steering_proposal.npz": {
+      "sha256": "3e6c520b2378e1c48b9f30047e052bfb9081dd205df5383bd73aacce396763a9",
+      "bytes": 1185893
+    },
+    "research/runs/solar_shield_array/joint_cycle/regression_0.npz": {
+      "sha256": "3f6a87339210194f2e6ebfc2147449124b5fe52d12e4c8e22717e05c8530016e",
+      "bytes": 5604630
+    },
+    "research/runs/solar_shield_array/joint_cycle/regression_1.npz": {
+      "sha256": "6134cbd1e559aa4229e5d9f5fb4bcdba68080fa50f9b7c6dead55dea4d784f78",
+      "bytes": 5655835
+    },
+    "research/runs/solar_shield_array/joint_cycle/regression_2.npz": {
+      "sha256": "1e8401de38cd0ddfd536eb6fbd310a73dc30d071384bc05cd4d28fc831883946",
+      "bytes": 1817412
+    },
+    "research/runs/solar_shield_array/joint_cycle/early_same_proposal.npz": {
+      "sha256": "2dea202212690dff5070ac403ef5205d6166b4b2b4095cf637e8fda41713f938",
+      "bytes": 26310320
+    },
+    "research/runs/solar_shield_array/joint_cycle/deep_assignment_proposal.npz": {
+      "sha256": "5a7bbf92d572a87b7f16d8e45934776448458a5850e4d01d59f1924afdbc165b",
+      "bytes": 26019019
+    },
+    "research/runs/solar_shield_array/joint_cycle/deep_identity_proposal.npz": {
+      "sha256": "e5781d1cec15b0aacf9ca0a76e1e3e8c90dbe02a00f5b9193a949b84187be4a6",
+      "bytes": 25724427
+    },
+    "research/runs/solar_shield_array/joint_cycle/staggered_flexible_1800_slots_proposal.npz": {
+      "sha256": "55b86e3b5185e501f716e916f6adf37e6a4cdf3b8ef4a24354171ca4bfb23ca6",
+      "bytes": 26019312
+    },
+    "research/runs/solar_shield_array/joint_cycle/early_steering_75_1800_slots_proposal.npz": {
+      "sha256": "8ba1f961e92d85e22a05fb9ff57a3bd07fc107e81216be3a96fc18a822e7f5db",
+      "bytes": 25720821
+    },
+    "research/runs/solar_shield_array/joint_cycle/early_steering_105_1800_slots_proposal.npz": {
+      "sha256": "e9c588ae85bf60fda1b10b76f3f9e9121ef97b268e5cf67109b3ee944e389222",
+      "bytes": 25717574
+    }
+  },
+  "unchanged_pinned_requirements": [
+    {
+      "path": "shared/constants.json",
+      "sha256": "2fb0032c8c37794a31a491b5c4f890178e295ee1fc9fe8c91d9c8cc636f85576",
+      "unchanged_since_reviewed_checkpoint": true
+    },
+    {
+      "path": "protection/spectra/stack_short_wave.json",
+      "sha256": "82b094f9724caf9fd68e9cde60fcae4f4eec2d5645b38d452eaa10fc7033e96f",
+      "unchanged_since_reviewed_checkpoint": true
+    },
+    {
+      "path": "protection/transmission/results/uv_transmission.json",
+      "sha256": "6589385e2665ade4409cfc529f9fef62f932fa75e9a3b2693bc63a0e13d9ec9f",
+      "unchanged_since_reviewed_checkpoint": true
+    }
+  ],
+  "post_run_provenance_maintenance": {
+    "change": "Replace a duplicated lunar-radius design literal with shared.constants.MOON_RADIUS; numerical equality checked before changing source and all numerical payloads retained.",
+    "radius_m": 1737400.0,
+    "executed_source_sha256": "603b56d6d5a2d7ca38106565e204b375fd5464782a4de395d4eb678eef50400d",
+    "current_source_sha256": "f45f8ca1d310fa111961f186d7060a21af5d8ffc5422309fe31cebbb9e3c223d",
+    "changes": [
+      {
+        "product": "joint_screen.json",
+        "previous_product_sha256": "ead5812934b1a78d326716532fa46ad0b756d6c0dc9660cb9d3e5e31924449e0",
+        "previous_source_sha256": "603b56d6d5a2d7ca38106565e204b375fd5464782a4de395d4eb678eef50400d",
+        "new_source_sha256": "f45f8ca1d310fa111961f186d7060a21af5d8ffc5422309fe31cebbb9e3c223d"
+      },
+      {
+        "product": "joint_grouped.json",
+        "parent": "joint_screen.json",
+        "previous_parent_sha256": "ead5812934b1a78d326716532fa46ad0b756d6c0dc9660cb9d3e5e31924449e0",
+        "new_parent_sha256": "81f7d59d1da28babff422eae8a5148c0bdee9c75c5cc5ce141fb4214ac1fdc34"
+      },
+      {
+        "product": "joint_early_same_coarse.json",
+        "parent": "joint_screen.json",
+        "previous_parent_sha256": "ead5812934b1a78d326716532fa46ad0b756d6c0dc9660cb9d3e5e31924449e0",
+        "new_parent_sha256": "81f7d59d1da28babff422eae8a5148c0bdee9c75c5cc5ce141fb4214ac1fdc34"
+      },
+      {
+        "product": "joint_failed_account.json",
+        "parent": "joint_early_same_coarse.json",
+        "previous_parent_sha256": "20ec5897db0ce210f8fd687e792d6f2f51b716f45c9be8ecb909bcf1b9168abc",
+        "new_parent_sha256": "eafe3418381d73d7f28bf7c208e4ac8d077d5afd4ee70dac29167008942acab1"
+      },
+      {
+        "product": "joint_failed_account.json",
+        "parent": "joint_screen.json",
+        "previous_parent_sha256": "ead5812934b1a78d326716532fa46ad0b756d6c0dc9660cb9d3e5e31924449e0",
+        "new_parent_sha256": "81f7d59d1da28babff422eae8a5148c0bdee9c75c5cc5ce141fb4214ac1fdc34"
+      }
+    ],
+    "original_reconstruction": "Remove the added 'from shared import constants as K' import and replace '4*K.MOON_RADIUS' with '4*1737400' in joint_screen.py."
+  },
+  "checks": {
+    "early_make_check": {
+      "passed": 718,
+      "skipped": 55,
+      "failed": 13,
+      "elapsed_s": 29.03,
+      "layer_check_passed": true,
+      "baseline_failure_tests": [
+        "atmosphere/tests/test_absorption.py::test_ion_production_falls_with_the_shadow_and_ends_at_the_outer_radius",
+        "atmosphere/tests/test_absorption.py::test_ionization_rate_is_of_the_tabulated_order",
+        "atmosphere/tests/test_absorption.py::test_design_case_needs_a_radius_just_under_the_exobase",
+        "atmosphere/tests/test_exosphere.py::test_dissociation_rates_agree_with_heays",
+        "atmosphere/tests/test_exosphere.py::test_ions_made_match_the_absorption_step",
+        "atmosphere/tests/test_exosphere.py::test_charge_exchange_thin_limit_counts_the_swept_exosphere",
+        "atmosphere/tests/test_exosphere.py::test_magnetosphere_accounts_for_every_ion_and_a_stronger_one_keeps_more",
+        "atmosphere/tests/test_exosphere.py::test_levels_are_ordered_and_wider_shadows_never_lose_more",
+        "climate/tests/test_cm1_run.py::test_the_terrain_build_forces_each_column_at_its_own_height",
+        "climate/tests/test_exoplasim_run.py::RunnerTests::test_process_lookup_finds_this_process",
+        "climate/tests/test_ring_comfort.py::test_hours_are_shares_of_the_lunar_day",
+        "climate/tests/test_ring_comfort.py::test_the_rings_land_is_pooled_by_latitude_and_height_and_counted_in_shares",
+        "research/studies/protection_architecture/test_run.py::test_design_point_holds_together"
+      ],
+      "later_make_targets_reached": false
+    },
+    "targeted_before_final_export_tests": {
+      "command": "python -m pytest protection/dynamics research/studies/solar_shield_array engineering/test_shield_storage.py engineering/test_electromagnetic.py engineering/test_shield_power.py -q",
+      "passed": 179,
+      "elapsed_s": 9.82
+    },
+    "final_make_check": {
+      "command": "timeout 300s env OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 make check",
+      "exit_code": 2,
+      "passed": 734,
+      "skipped": 55,
+      "failed": 13,
+      "elapsed_s": 30.38,
+      "layer_files_checked": 573,
+      "layer_violations": 0,
+      "all_new_tests_passed": true,
+      "added_python_tests": 16,
+      "baseline_failure_tests": [
+        "atmosphere/tests/test_absorption.py::test_ion_production_falls_with_the_shadow_and_ends_at_the_outer_radius",
+        "atmosphere/tests/test_absorption.py::test_ionization_rate_is_of_the_tabulated_order",
+        "atmosphere/tests/test_absorption.py::test_design_case_needs_a_radius_just_under_the_exobase",
+        "atmosphere/tests/test_exosphere.py::test_dissociation_rates_agree_with_heays",
+        "atmosphere/tests/test_exosphere.py::test_ions_made_match_the_absorption_step",
+        "atmosphere/tests/test_exosphere.py::test_charge_exchange_thin_limit_counts_the_swept_exosphere",
+        "atmosphere/tests/test_exosphere.py::test_magnetosphere_accounts_for_every_ion_and_a_stronger_one_keeps_more",
+        "atmosphere/tests/test_exosphere.py::test_levels_are_ordered_and_wider_shadows_never_lose_more",
+        "climate/tests/test_cm1_run.py::test_the_terrain_build_forces_each_column_at_its_own_height",
+        "climate/tests/test_exoplasim_run.py::RunnerTests::test_process_lookup_finds_this_process",
+        "climate/tests/test_ring_comfort.py::test_hours_are_shares_of_the_lunar_day",
+        "climate/tests/test_ring_comfort.py::test_the_rings_land_is_pooled_by_latitude_and_height_and_counted_in_shares",
+        "research/studies/protection_architecture/test_run.py::test_design_point_holds_together"
+      ],
+      "baseline_failures_identical": true,
+      "later_make_targets_reached": false,
+      "log_sha256": "91656c736a5727ed1002b90bd11c72ae3c05facb14b31f15eea23c52ea1c7c17",
+      "limitations": "JS, research provenance and ensemble Makefile targets were not reached after the baseline Python failures. No unrelated input/configuration repairs were attempted."
+    },
+    "git_diff_check": "Passed for staged changes before make check; repeated after report/check metadata update."
+  },
+  "reading_rule": "Check current producer/input/constants hashes, then distinguish ideal-force geometry from installed hardware, actual generation, recurrence and fleet acceptance. Raw trajectory files are ignored; missing raw prerequisites require explicit restoration. The exact-state seed is not a replay."
+}

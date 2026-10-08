@@ -1,0 +1,193 @@
+{
+  "schema": "terluna.research.energy-coast-corrected-replay/1",
+  "producer": {
+    "source_hashes": {
+      "protection/dynamics/cycling.py": "704fbd03c9d4070ea05bdfeba57914ec225941f3560710da2472bd24ca870ed4",
+      "protection/dynamics/ephemeris.py": "9a162c3acf63a844284eb61b444a7d34f1447b5182d254d3e87616516f8748d9",
+      "protection/dynamics/ephemeris.json": "90fde7cb6142e5d4d8082270a978ba2f8f47baaefab0e8d1cf82ec6f07a27222",
+      "protection/dynamics/model.py": "01c9191588037ab4f42bac38dc4d5bd99e57427d37fa75cd672120e32b53733a",
+      "protection/dynamics/optical.py": "06a13ae9f24834876edbc12b513deaa5e3735f02f8249eb57c8996d74ce00b56",
+      "research/studies/solar_shield_array/scenario.json": "a53b784941518b6e36ccdf728252cf6c8e0c46c1126b6c621ed4e28c23128699",
+      "research/studies/solar_shield_array/cycling_search.py": "4789a0185620f6662916462b2715aa9002e6454e74f4f32ef5f7dadf5f732093",
+      "research/studies/solar_shield_array/cycling_feedback.py": "0eb32d26e14472f0a512cdf45d60f00ab8260376cd51ca715e7615bf7df02775",
+      "protection/dynamics/fleet.py": "f3e52653876c2956a4b355dc1290a0a1cadd2b9b601cafc664259827df1cc93c",
+      "research/studies/solar_shield_array/fleet_run.py": "9b8bc9765b9288745ea7d4d69d59e857e76e54d29cc91b37160503e9d9090833",
+      "protection/dynamics/active_formation.py": "597c12c6a4a89c0ea70663fddd69b9b5d9e599c88a2bd1742f5009d19e050b7a",
+      "protection/dynamics/active_retime.py": "9ba27a7ec48460a345289ebc7550c502f845487beaec5fe35084a67b2d9d736b",
+      "protection/dynamics/coverage_pilot.py": "fb03381e4387cb17e5276148428a3ffb2cbfb5313c8f59b8ff708ebeb9ce079c",
+      "protection/dynamics/natural_pattern.py": "780c2679f13c097c07b89e9d7cce1c91399f464f01b4bd878fb50cb643e1be29",
+      "research/studies/solar_shield_array/patterns_run.py": "f2e346fd2281632e5bf1c285c61229ba24e26e4ba4c480713194218263888d5c",
+      "protection/dynamics/pattern_departure.py": "24e7bb0653f9ab546b46a9a650ae67e3adb0af154c3e5b9ba83461e9648b828b",
+      "protection/dynamics/departure_control.py": "beafd12acfb4a228c17a329c9e0d278282222e90be7126b20b3e2df551bedfd5",
+      "protection/dynamics/pattern_return.py": "a1a3f85e5f7744d0418574d0fc2a033d4ab69d9d55eba9bfbb85974c7ab64757",
+      "protection/dynamics/energy_coast.py": "df47adb192e3f665e977353844e478f9cd5a30f63ca54ea2f31b59e9cd1b6826",
+      "protection/dynamics/attitude_load.py": "0b977677edc96d33889eb36526c4826c625eea2cb1a4e3b4254e970ac99582e4",
+      "research/studies/solar_shield_array/return_screen.py": "53ec3ecf5165c773142315d97553f9c72ebbe6c045299ec368104c1811f4b526",
+      "research/studies/solar_shield_array/energy_screen.py": "3506f2f1c725299fc98795fb32ed3c0063605f114c3d5cdbc711ee0f5c3bf9bd",
+      "protection/dynamics/parallel_shadow.py": "98d09fc9e5812b3592cbc5e24e0615f9f9aa3a75c7f33afff0fe82d0e40c3c24",
+      "research/studies/solar_shield_array/departure_validate.py": "df457b279e1b69627f65fa528877faa414161e6bfea881387d28243504f9b9b0",
+      "research/studies/solar_shield_array/energy_run.py": "1ddb0b6d2aabac1252ae614369230d286d6db7c79a45b7c863ac1a926ccd1c08",
+      "protection/dynamics/coast_control.py": "315bb9a1456ca1108f93ec1579719f7933acafb3f3c2b79bb2cf875961685c4d",
+      "research/studies/solar_shield_array/energy_correct.py": "5c518a5e0aa17c2e8cd999f46f9ab139c02534f58919ee630f38fbfbd523d9ca",
+      "research/studies/solar_shield_array/energy_replay.py": "b3ce134e8ad2d005d23a367d9d90e832b89c4fd11bbcca7ff448706987ca8d4c"
+    },
+    "constants": {
+      "AU": 149597870700.0,
+      "EARTH_GM": 398600441800000.0,
+      "EARTH_MOON_DISTANCE": 384400000.0,
+      "EARTH_OBLIQUITY_DEG": 23.4393,
+      "EARTH_RADIUS": 6371000.0,
+      "JULIAN_DAY": 86400.0,
+      "MOON_GM": 4902800118000.0,
+      "MOON_RADIUS": 1737400.0,
+      "SOLAR_CONSTANT": 1361.0,
+      "SOLAR_SYSTEM_GM": {
+        "mercury": 22031868551000.0,
+        "venus": 324858592000000.0,
+        "mars": 42828375816000.0,
+        "jupiter": 1.267127641e+17,
+        "saturn": 3.79405848418e+16,
+        "uranus": 5794556400000000.0,
+        "neptune": 6836527100580000.0,
+        "pluto": 975500000000.0
+      },
+      "SPEED_OF_LIGHT": 299792458.0,
+      "SUN_GM": 1.3271244004127942e+20,
+      "SUN_RADIUS": 695700000.0
+    },
+    "inputs": {
+      "energy_correction.json": "851c51b65a527a14729db1bd22ff63e66783e8adb5430055871ed76fdca93170",
+      "energy_screen.json": "a46fa39e85f956aa2ff9aa4b486aa112254f87f67081525a794baf7c76842559",
+      "energy.json": "63236359ae8e1606b218b06ff8cc6818780411198ff394466b0ab8c83620d965"
+    }
+  },
+  "start_s": 21600.0,
+  "end_s": 43200.0,
+  "count": 361,
+  "schedule": {
+    "angle_deg": 90.0,
+    "delay_s": 3600.0,
+    "duration_s": 14400.0,
+    "axis": 0,
+    "sign": -1
+  },
+  "case": 41,
+  "candidate_origin": "next_screened_family_after_infeasible_measured_defect_correction",
+  "parameters_m_s": [
+    0.8130008831435315,
+    0.0,
+    0.0
+  ],
+  "budget": {
+    "this_stage_wall_s": 1200,
+    "prior_numerical_wall_s": 504.10935567100023,
+    "total_wall_s": 2700,
+    "torque_stage_reserved_s": 900,
+    "address_space_GiB": 2
+  },
+  "runs": [
+    {
+      "suns": 8,
+      "max_step_s": 120.0,
+      "rtol": 2e-10,
+      "end_s": 37684.46598184776,
+      "completed": false,
+      "clearance_event": true,
+      "geometry": {
+        "step_s": 1.9998092728928896,
+        "minimum_sampled_clearance_m": 100.00000000077146,
+        "limiting_pair": [
+          34,
+          35
+        ],
+        "worst_time_s": 37684.46598184776,
+        "pair_axis_projections_m": [
+          -5140.299375235475,
+          9344.370967200844,
+          -100.00000000077146
+        ],
+        "swept_separation": {
+          "possible_conflict_pairs": 28,
+          "minimum_proven_axis_clearance_m": 75.57652774141982,
+          "acceleration_bound_m_s2": 0.15,
+          "normal_rate_bound_rad_s": 0.0017453292519943296,
+          "required_clearance_m": 100.0
+        }
+      },
+      "beam_and_rate": {
+        "minimum_sampled_beam_margin_deg": 30.420713611441286,
+        "maximum_sampled_rate_deg_s": 0.011718726149426387,
+        "maximum_sampled_angular_acceleration_deg_s2": 2.5059253295253916e-06
+      },
+      "between_sample_crossings": {
+        "crossing_near_encounters": 0,
+        "physical_intersections": 0,
+        "witnesses": []
+      },
+      "maximum_sampled_acceleration_m_s2": 0.02227020957429196,
+      "maximum_thrust_acceleration_m_s2": 0.0003565793347120752,
+      "translation_mean_m_s": 0.8107488031348238,
+      "extra_moving_window_samples": [
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 6322215.669547397,
+          "sources": 25,
+          "time_s": 21600.0,
+          "window_inside_target": true
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 6478441.363471222,
+          "sources": 25,
+          "time_s": 21900.0,
+          "window_inside_target": true
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000004,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 6633818.793238315,
+          "sources": 25,
+          "time_s": 22200.0,
+          "window_inside_target": true
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 6788327.388860517,
+          "sources": 25,
+          "time_s": 22500.0,
+          "window_inside_target": true
+        },
+        {
+          "all_sampled_sun_coverage": 1.0000000000000007,
+          "minimum_source_coverage": 1.0,
+          "worst_missed_ray": null,
+          "window_centre_distance_m": 6941946.6911640735,
+          "sources": 25,
+          "time_s": 22800.0,
+          "window_inside_target": false
+        }
+      ],
+      "local_gates_pass": false,
+      "raw_path": "research/runs/solar_shield_array/energy/corrected_sun_8.npz",
+      "raw_sha256": "fdcba0af55b264bb5cf519b5cdcd7b43f0357d461ba2c7860b824b897847aaa0"
+    }
+  ],
+  "accepted_departure": false,
+  "accepted_fleet": false,
+  "full_return_executed": false,
+  "handover_executed": false,
+  "hardware_mass_feedback_propagated": false,
+  "continuous_certificate": false,
+  "recurring_cost_measured": false,
+  "collection_capacity_W": null,
+  "delivered_power_W": null,
+  "elapsed_s": 198.7066207939988,
+  "max_rss_MiB": 519.28125
+}

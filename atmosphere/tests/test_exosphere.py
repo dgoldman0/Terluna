@@ -7,7 +7,7 @@ import pytest
 
 from shared.constants import BOLTZMANN, MOON_GM, MOON_RADIUS
 from atmosphere.loss_response import absorption as ab
-from atmosphere.loss_response import exosphere as ex
+from atmosphere.loss_response import exosphere as ex, model as lr
 
 PARTS = ('outside', 'open', 'convected', 'recombined_escaping', 'recombined_staying', 'drained')
 
@@ -24,8 +24,13 @@ def test_dissociation_rates_agree_with_heays():
     quiet = ex.rates('quiet')
     for species in ('N2', 'O2'):
         assert quiet[species]['dissociation'] == pytest.approx(ex.HEAYS_1AU_S[species], rel=0.1)
-    ratio = ex.rates('solar_maximum')['O2']['dissociation'] / quiet['O2']['dissociation']
-    assert ratio == pytest.approx(ex.FAR_UV_ACTIVITY['solar_maximum'])
+    ratio = ex.rates('solar_maximum_stress')['O2']['dissociation'] / quiet['O2']['dissociation']
+    assert ratio == pytest.approx(ex.FAR_UV_ACTIVITY['solar_maximum_stress'])
+    # The measured maximum takes each band's own rise: the Schumann-Runge continuum's bands and Lyman-alpha's.
+    measured = ex.rates('solar_maximum')['O2']['dissociation'] / quiet['O2']['dissociation']
+    far = [f for f, lo in zip(lr.activity_of('solar_maximum')['bands'], lr.traced.limb_product()['design']['bands_nm'])
+           if lo >= 121.0]
+    assert min(far) < measured < max(far)
 
 
 def test_escaping_share_limits():
@@ -99,16 +104,24 @@ def test_levels_are_ordered_and_wider_shadows_never_lose_more():
     assert sweep[-1] < sweep[0]
 
 
-def test_largest_transmission_stops_at_the_budget_or_the_heating_radius():
+def test_largest_transmission_stops_at_the_budget_or_where_the_heating_leaves_the_shadow():
     f = [1e-4, 1e-3, 1e-2]
-    heating = [2.0, 2.5, 3.5]
+    covered = [0.01, 0.05, 0.08]
     # the loss crosses the budget between the grid points (log-log)
-    assert ex._largest_within(f, [0.1, 1.0, 10.0], heating, 4.0, 3.0) == pytest.approx(3e-3)
-    # the heating radius passes the protected radius first
-    assert ex._largest_within(f, [0.1, 1.0, 10.0], heating, 3.0, 5.0) == pytest.approx(10 ** -2.5)
-    assert ex._largest_within(f, [2.0, 3.0, 4.0], heating, 4.0, 1.0) is None
-    assert ex._largest_within(f, [0.1, 0.2, math.inf], [2.0, 2.5, math.inf], 4.0, 1.0) == pytest.approx(1e-3)
-    assert ex._largest_within(f, [0.1, 0.2, 0.3], heating, 4.0, 1.0) == pytest.approx(1e-2)
+    assert ex._largest_within(f, [0.1, 1.0, 10.0], covered, 0.1, 3.0) == pytest.approx(3e-3)
+    # the share of heat from beyond the aperture passes its limit first
+    assert ex._largest_within(f, [0.1, 1.0, 10.0], [0.01, 0.05, 0.15], 0.1, 5.0) == pytest.approx(10 ** -2.5)
+    assert ex._largest_within(f, [2.0, 3.0, 4.0], covered, 0.1, 1.0) is None
+    assert ex._largest_within(f, [0.1, 0.2, math.inf], [0.01, 0.05, math.inf], 0.1, 1.0) == pytest.approx(1e-3)
+    assert ex._largest_within(f, [0.1, 0.2, 0.3], covered, 0.1, 1.0) == pytest.approx(1e-2)
+
+
+def test_the_ring_fleets_wake_shelters_the_axis_and_the_septembers_refills():
+    assert ex.wake_core_R(4.0) == pytest.approx(2.61, abs=0.01)
+    assert ex.wake_core_R(3.0, distance_km=78000.0) == 0.0
+    profile = exobase_profile()
+    open_wind = ex.charge_exchange(profile)
+    assert ex.charge_exchange(profile, sheltered_R=2.0) <= ex.charge_exchange(profile, sheltered_R=1.0) <= open_wind
 
 
 def test_stored_results():

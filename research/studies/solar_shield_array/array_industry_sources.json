@@ -1,0 +1,472 @@
+{
+  "schema": "terluna.research.array-industry-sources/1",
+  "accessed": "2026-10-08",
+  "reading": "Each entry records what was read. The first investigation (Codex, 8 October) read sections of the first six; research agents re-read those the same day and found the rest through web search and fetch, PDF viewing and publisher or repository full text. Where an agent quoted a source without itemising its reading, the entry says so. Titles appear only where a reader saw them. Nothing here is admitted as a manuscript source, and no outside bytes are kept.",
+  "sources": [
+    {
+      "id": "landis_2022",
+      "citation": "G. A. Landis, Thermoradiative Arrays: A New Technology for Conversion of Heat into Electrical Power. Nuclear and Emerging Technologies for Space (NETS-2022), Cleveland, 8-12 May 2022",
+      "url": "https://ntrs.nasa.gov/citations/20220003553",
+      "kind": "proposal, with ideal efficiencies quoted from others",
+      "read": "full paper (6 pages)",
+      "used_for": [
+        "a thermoradiative converter serves both as the energy converter and as the waste-heat radiator",
+        "proposed on the shaded side of a solar array as a bottoming cycle, and as the radiator of a Stirling or Brayton converter; suggestions without analysis",
+        "the array's front would then need low infrared emissivity, since silica cover glass emits in the infrared; photovoltaics work best cold, so the array runs warmer",
+        "thermoradiative converters radiate less than blackbodies, so the radiator may be larger; at high temperature they may suit a small radiator",
+        "ideal efficiencies quoted: Strandberg, up to 68% between 1000 K and 300 K at fractions of a milliwatt per square metre and about 22% near peak power; Fernandez, 20-22.5%; thermoelectrics about 6% in space",
+        "on an airless body by day the radiator has to be shielded from the Sun, Earth and the hot surface"
+      ]
+    },
+    {
+      "id": "radchenkov_2025",
+      "citation": "V. Radchenkov, J. A. Harrison, M. H. Sazzad, P. M. Pearce, A. Pusch, S. P. Bremner, P. J. Reece, N. J. Ekins-Daukes, M. P. Nielsen, Temperature-dependent power generation from HgCdTe and III-V thermoradiative diodes. Appl. Phys. Lett. 126, 173901 (2025)",
+      "url": "https://doi.org/10.1063/5.0265431",
+      "kind": "laboratory measurement",
+      "read": "authors' manuscript, main text (UNSWorks); the publisher's page was unavailable; supplement unread",
+      "used_for": [
+        "best stated measurement 9.41 mW/m^2: an MCT-5 HgCdTe diode at 292.5 K facing a 150 K cold emissive surface, in vacuum",
+        "commercial photodetectors with 0.1 x 0.1 mm active area on GaAs immersion lenses; the other devices give 1-6 mW/m^2",
+        "device models overestimate the current and match one device; HgCdTe devices are safe to 330 K, III-V devices beyond 400 K",
+        "a thermoradiative diode needs no intermediate cold surface, unlike engines that work through radiative cooling"
+      ]
+    },
+    {
+      "id": "buddhiraju_2018",
+      "citation": "S. Buddhiraju, P. Santhanam, S. Fan, Thermodynamic limits of energy harvesting from outgoing thermal radiation. PNAS 115, E3609-E3615 (2018)",
+      "url": "https://doi.org/10.1073/pnas.1717595115",
+      "kind": "ideal limits",
+      "read": "full text (arXiv 1710.02617 v1) and publication metadata",
+      "used_for": [
+        "for a 300 K body facing 3 K space, ideal harvested power: 54.8 W/m^2 single junction, 48.4 W/m^2 through a blackbody intermediate at 225.1 K, 55.0 W/m^2 multicolour, 153.1 W/m^2 the Landsberg limit, which needs nonreciprocal elements",
+        "ideal conditions: blackbodies, full-hemisphere exchange, a 3 K sink"
+      ]
+    },
+    {
+      "id": "melanson_2025",
+      "citation": "D. Melanson, M. Abu Khater, M. Aifer, K. Donatella, M. Hunter Gordon, T. Ahle, G. Crooks, A. J. Martinez, F. Sbahi, P. J. Coles, Thermodynamic computing system for AI applications. Nat. Commun. 16, 3757 (2025)",
+      "url": "https://doi.org/10.1038/s41467-025-59011-x",
+      "kind": "eight-cell prototype measured; larger advantages modelled",
+      "read": "full text (PMC12015238, targeted extraction) and sections of the published PDF",
+      "used_for": [
+        "eight RLC cells on a circuit board, all-to-all coupled through switched capacitors; noise from a digitally generated random bit stream; FPGA control; 10-bit readout",
+        "Gaussian sampling and the inversion of an 8 x 8 matrix on three copies of the board, about 12,000 samples, with relative errors of 25-31% (preprint)",
+        "modelled against a measured GPU: crossover near dimension 3,000, an order of magnitude in time and energy at 10,000, with 0.005 mW per cell dominated by the analogue-to-digital converters",
+        "in a simulated chip design the converters draw 40-200 uW against 0.2-3 uW for the computing core"
+      ]
+    },
+    {
+      "id": "aifer_2024",
+      "citation": "M. Aifer et al., Thermodynamic linear algebra. npj Unconv. Comput. 1, 13 (2024)",
+      "url": "https://doi.org/10.1038/s44335-024-00014-0",
+      "kind": "theory and simulation",
+      "read": "quoted by a research agent; reading not itemised",
+      "used_for": [
+        "matrix inversion, linear systems and the Lyapunov equation by sampling, with speedups growing linearly in dimension and runtime growing as the inverse square of the error tolerance"
+      ]
+    },
+    {
+      "id": "whitelam_casert_2026",
+      "citation": "S. Whitelam, C. Casert, Nonlinear thermodynamic computing out of equilibrium. Nat. Commun. 17, 1189 (2026)",
+      "url": "https://doi.org/10.1038/s41467-025-67958-0",
+      "kind": "simulation of a proposed design",
+      "read": "full text (PMC12858898, targeted extraction; arXiv 2412.17183 v3)",
+      "used_for": [
+        "a simulated thermodynamic neural network needs a single thermal bath and gives its output at a prescribed observation time: run, observe, reset, about a thousand times",
+        "no hardware; the energy of resetting and reading is left uncounted"
+      ]
+    },
+    {
+      "id": "kathmann_2020",
+      "citation": "C. Kathmann, M. Reina, R. Messina, P. Ben-Abdallah, S.-A. Biehs, Scalable radiative thermal logic gates based on nanoparticle networks. Sci. Rep. 10, 3596 (2020)",
+      "url": "https://doi.org/10.1038/s41598-020-60603-4",
+      "kind": "theory and simulation",
+      "read": "full text (arXiv v1) and the publisher's main text",
+      "used_for": [
+        "logic gates from the near-field heat exchange of VO2 nanoparticles near their 340 K transition, computed in steady state",
+        "gates do not connect simply, since radiative exchange is not additive; the authors find the speed suited to thermal management and sensing and uncompetitive with electronics for computing"
+      ]
+    },
+    {
+      "id": "normal_cn101_2025",
+      "citation": "Normal Computing, tape-out of the CN101 thermodynamic computing chip (press release, 12 August 2025) and company blog (7 April 2025)",
+      "url": "https://www.normalcomputing.com/blog/scaling-thermodynamic-compute",
+      "kind": "announcement",
+      "read": "quoted by a research agent",
+      "used_for": [
+        "CN101: four tiles of 64 state variables held in 32-bit digital registers; up to 1000x efficiency stated as a target; no published silicon results found by October 2026"
+      ]
+    },
+    {
+      "id": "quanta_2026",
+      "citation": "P. Ball, Quanta Magazine, 15 July 2026",
+      "url": "https://www.quantamagazine.org/thermodynamic-computers-go-with-the-energy-flow-20260715/",
+      "kind": "journalism",
+      "read": "quoted by a research agent",
+      "used_for": [
+        "Normal's board ran on noise added by a random-number generator, at an energy cost, since ambient noise was too weak to drive it"
+      ]
+    },
+    {
+      "id": "jelincic_2025",
+      "citation": "A. Jelincic et al. (Extropic), An efficient probabilistic hardware architecture for diffusion-like models. arXiv 2510.23972 (v2, December 2025)",
+      "url": "https://arxiv.org/abs/2510.23972",
+      "kind": "simulation, with one measured circuit",
+      "read": "quoted by a research agent, with figures read",
+      "used_for": [
+        "denoising thermodynamic models matching GPU models on binarized Fashion-MNIST at about 10,000x less energy per sample, from a model of the hardware (about 2 fJ per cell) against GPU energy estimated from operation counts",
+        "measured on silicon: the random-number circuit's response and its 100 ns autocorrelation time"
+      ]
+    },
+    {
+      "id": "extropic_2026",
+      "citation": "Extropic, X0 test-chip measurements (G. Verdon et al., arXiv 2608.01612, August 2026) and the Z1 tape-out (company writing, August 2026)",
+      "url": "https://extropic.ai/writing/from-one-to-one-billion/",
+      "kind": "measurement of a test chip; announcement of a larger chip",
+      "read": "quoted by a research agent",
+      "used_for": [
+        "X0 probabilistic bits draw randomness from transistor noise at hundreds of attojoules to a few femtojoules per sample at tens of MHz, with per-site calibration errors near 5%",
+        "Z1: 269,568 probabilistic bits, each coupled to 16 neighbours, over 50 MHz, under 1 W; taped out, early access in 2027"
+      ]
+    },
+    {
+      "id": "aadit_2022",
+      "citation": "N. A. Aadit et al., Nat. Electron. 5, 460 (2022)",
+      "url": "https://doi.org/10.1038/s41928-022-00774-2",
+      "kind": "FPGA measurement",
+      "read": "quoted by a research agent",
+      "used_for": [
+        "up to 4,793 probabilistic bits on an FPGA at 143.8 flips per nanosecond, 5-18x faster than optimized GPU and TPU implementations on factoring and satisfiability"
+      ]
+    },
+    {
+      "id": "chowdhury_2025",
+      "citation": "S. Chowdhury et al., Nat. Commun. (2025)",
+      "url": "https://doi.org/10.1038/s41467-025-64235-y",
+      "kind": "FPGA measurement; device projection",
+      "read": "quoted by a research agent",
+      "used_for": [
+        "up to 185 flips per nanosecond at 9.168 W, 0.05 nJ per flip, against 21.99 nJ for a V100 GPU and 7.77 nJ for a TPU v3 as quoted",
+        "projected: a magnetic-tunnel-junction chip of a million probabilistic bits at 20 W, 2e-5 nJ per flip"
+      ]
+    },
+    {
+      "id": "li_2026",
+      "citation": "Li et al., Nat. Electron. (22 September 2026), a CMOS-integrated MRAM Ising machine",
+      "url": "https://doi.org/10.1038/s41928-026-01700-6",
+      "kind": "integrated chip",
+      "read": "quoted by a research agent",
+      "used_for": [
+        "96,000 spins with 0.3-1 ns updates, under 40 fJ per spin and 1.92e5 solutions per second per watt on Max-cut; whether the energy figures are measured or derived was not established"
+      ]
+    },
+    {
+      "id": "stroev_2024",
+      "citation": "Stroev et al., Commun. Phys. (2024)",
+      "url": "https://doi.org/10.1038/s42005-024-01870-9",
+      "kind": "comparison of unconventional machines",
+      "read": "quoted by a research agent",
+      "used_for": [
+        "performance is hard to compare across such machines for lack of uniform benchmarks"
+      ]
+    },
+    {
+      "id": "frank_conte_2022",
+      "citation": "M. P. Frank, T. M. Conte, HotCarbon 2022 workshop paper (Sandia National Laboratories)",
+      "url": "https://www.sandia.gov/app/uploads/sites/210/2022/06/FrankConte-HotCarbon22-v4SAND.pdf",
+      "kind": "roadmap review",
+      "read": "quoted by a research agent",
+      "used_for": [
+        "logic signal energies near 700 aJ (IRDS 2021), roadmapped to 330 aJ by 2034; with the Landauer bound kT ln 2 at 2.87e-21 J at 300 K, present logic sits about 2e5 times above it"
+      ]
+    },
+    {
+      "id": "montoya_2020",
+      "citation": "E. A. Montoya et al., Sci. Rep. (2020)",
+      "url": "https://doi.org/10.1038/s41598-020-67257-2",
+      "kind": "radiation test of devices",
+      "read": "quoted by a research agent",
+      "used_for": [
+        "magnetic tunnel junctions unchanged after 147 kGy of gamma rays, a hundred times Europa Clipper's dose; no radiation test of a thermodynamic or probabilistic computer was found"
+      ]
+    },
+    {
+      "id": "lipka_bartosik_2024",
+      "citation": "P. Lipka-Bartosik et al., Sci. Adv. 10, eadm8792 (2024)",
+      "url": "https://doi.org/10.1126/sciadv.adm8792",
+      "kind": "theory",
+      "read": "quoted by a research agent",
+      "used_for": [
+        "machines connected to environments at different temperatures can compute with the heat flowing through them, in theory; no hardware draws its operating energy from heat"
+      ]
+    },
+    {
+      "id": "nvidia_h100",
+      "citation": "NVIDIA H100 Tensor Core GPU, specifications (SXM)",
+      "url": "https://www.nvidia.com/en-us/data-center/h100/",
+      "kind": "datasheet",
+      "read": "published specification figures, not re-read on 8 October",
+      "used_for": [
+        "989 TFLOP/s dense 16-bit (1,979 with sparsity) at up to 700 W: about 1.4e12 FLOP per joule"
+      ]
+    },
+    {
+      "id": "ipcc_ar6_wg1",
+      "citation": "IPCC, Climate Change 2021: The Physical Science Basis, Working Group I contribution to the Sixth Assessment Report",
+      "url": "https://www.ipcc.ch/report/ar6/wg1/",
+      "kind": "assessment",
+      "read": "the assessed forcing figure, not re-read on 8 October",
+      "used_for": [
+        "total anthropogenic effective radiative forcing 2.72 W/m^2 (1.96-3.48) in 2019 relative to 1750"
+      ]
+    },
+    {
+      "id": "lapotin_2022",
+      "citation": "A. LaPotin et al., Thermophotovoltaic efficiency of 40%. Nature 604, 287-291 (2022)",
+      "url": "https://doi.org/10.1038/s41586-022-04473-y",
+      "kind": "laboratory measurement",
+      "read": "quoted by a research agent",
+      "used_for": [
+        "41.1% at 2.39 W/cm^2 for a 1.4/1.2 eV tandem facing a 2,400 C emitter; 39.3% at 1.8 W/cm^2 for a 1.2/1.0 eV tandem at 2,127 C; 36.2% averaged over emitters at 1,900-2,400 C; cells held at 25 C"
+      ]
+    },
+    {
+      "id": "tervo_2022",
+      "citation": "E. J. Tervo et al., Joule 6, 2566 (2022)",
+      "url": "https://doi.org/10.1016/j.joule.2022.10.002",
+      "kind": "laboratory measurement",
+      "read": "quoted by a research agent",
+      "used_for": [
+        "a single-junction 0.75 eV GaInAs cell: 38.8% at 3.78 W/cm^2 facing a 1,850 C emitter"
+      ]
+    },
+    {
+      "id": "fan_2020",
+      "citation": "D. Fan et al., Nature 586, 237 (2020)",
+      "url": "https://doi.org/10.1038/s41586-020-2717-7",
+      "kind": "laboratory measurement",
+      "read": "quoted by a research agent",
+      "used_for": [
+        "more than 30% from a silicon carbide emitter near 1,455 K; other cells reach 29-33% at emitters of 1,480-1,580 K (Omair et al. 2019; Burger et al.)"
+      ]
+    },
+    {
+      "id": "nielsen_2022",
+      "citation": "M. P. Nielsen et al., ACS Photonics 9, 1535 (2022)",
+      "url": "https://doi.org/10.1021/acsphotonics.2c00223",
+      "kind": "laboratory measurement",
+      "read": "quoted through a news report (Compound Semiconductor, 1 June 2022); the publisher's page was unavailable",
+      "used_for": [
+        "2.26 mW/m^2 from a photodiode emitting near 4.7 um at a temperature difference of 12.5 C"
+      ]
+    },
+    {
+      "id": "islam_2025",
+      "citation": "Islam et al., APL Energy (2025)",
+      "url": "https://doi.org/10.1063/5.0250165",
+      "kind": "laboratory measurement",
+      "read": "quoted by a research agent",
+      "used_for": [
+        "2.9 mW/m^2 at a cell temperature of 121 C"
+      ]
+    },
+    {
+      "id": "spectrolab_xtj",
+      "citation": "Spectrolab XTJ Prime space solar cell, datasheet; AZUR SPACE 3G30C-Advanced, datasheet (11 April 2025)",
+      "url": null,
+      "kind": "datasheets",
+      "read": "quoted by a research agent",
+      "used_for": [
+        "30.7% (XTJ Prime) and 29.5% (3G30C) at the beginning of life; solar absorptance 0.88 and emittance 0.85; power falls about 0.23% per degree"
+      ]
+    },
+    {
+      "id": "bulut_sozbir_2026",
+      "citation": "Bulut and Sozbir, Sakarya Univ. J. Sci. 30(3) (2026)",
+      "url": "https://doi.org/10.16984/saufenbilder.1776196",
+      "kind": "in-orbit telemetry",
+      "read": "quoted by a research agent",
+      "used_for": [
+        "a geostationary array measured at 41.2-45.6 C over the year; a silicon array in low Earth orbit runs near 60 C (Brandhorst, NASA SP-509)"
+      ]
+    },
+    {
+      "id": "poston_2020",
+      "citation": "D. I. Poston et al., Results of the KRUSTY nuclear system test. Nucl. Technol. 206, S89 (2020)",
+      "url": "https://doi.org/10.1080/00295450.2020.1730673",
+      "kind": "measurement",
+      "read": "quoted by a research agent",
+      "used_for": [
+        "Stirling converters about 35% efficient as components and about 25% as a system, hot end rated 650 C, cold ends held near 60 C; NASA fission surface power designs give 26% with a 425 K cold end and Brayton cycles 20-25% with radiators at 400-600 K (Mason 2010; Siamidis and Mason 2006)"
+      ]
+    },
+    {
+      "id": "iss_atcs",
+      "citation": "NASA, International Space Station active thermal control system overview",
+      "url": "https://www.nasa.gov/pdf/473486main_iss_atcs_overview.pdf",
+      "kind": "flown hardware",
+      "read": "quoted by a research agent",
+      "used_for": [
+        "each heat-rejection radiator unit 23.3 x 3.4 m and 1,122.64 kg, about 14 kg/m^2 of panel and 96 kg/kW; the photovoltaic radiator rejects up to 14 kW at 740.7 kg"
+      ]
+    },
+    {
+      "id": "el_genk_2025",
+      "citation": "M. S. El-Genk, NASA Early Stage Innovations final report (2025); D. C. White, NASA TM-89852 (1987)",
+      "url": "https://isnps.unm.edu/reports/ISNPS_Tech_Report_103.pdf",
+      "kind": "design studies",
+      "read": "quoted by a research agent",
+      "used_for": [
+        "present fission-system radiators 5.24-12.76 kg/m^2 and NASA's goal under 3 kg/m^2 at 600 K; heat-pipe radiators typically 5 kg/m^2, possibly 2, and liquid-droplet radiators 5-10 times lighter (White)"
+      ]
+    },
+    {
+      "id": "doe_glass_2017",
+      "citation": "U.S. Department of Energy, Bandwidth Study on Energy Use and Potential Energy Saving Opportunities in U.S. Glass Manufacturing (2017), table A1-1",
+      "url": null,
+      "kind": "industry study",
+      "read": "quoted by a research agent",
+      "used_for": [
+        "flat-glass melting: thermodynamic minimum about 2.5 GJ/t, state of the art about 5 GJ/t, typical practice about 7.2 GJ/t"
+      ]
+    },
+    {
+      "id": "janaf_silica",
+      "citation": "NIST-JANAF Thermochemical Tables, silicon dioxide (table O-038), and the corresponding tables for SiO, TiO2 and TiO",
+      "url": "https://janaf.nist.gov/",
+      "kind": "reference data, with derived sums",
+      "read": "quoted by a research agent",
+      "used_for": [
+        "silica heated from 298 K into the melt: 121.3 kJ/mol (2.0 MJ/kg) at 2,000 K and 138.5 kJ/mol (2.3 MJ/kg) at 2,200 K",
+        "evaporating silica to SiO and oxygen takes at least 13.4 MJ/kg, about 15 MJ/kg with the vapour at 2,200 K; titania 12.5-13.8 MJ/kg",
+        "fused silica softens at 1,585 C (Corning 7980) to 1,600-1,710 C, and forms glass above 1,800 C (Heraeus)"
+      ]
+    },
+    {
+      "id": "suncatcher_2025",
+      "citation": "Google Research, Project Suncatcher (November 2025)",
+      "url": null,
+      "kind": "design study with radiation tests",
+      "read": "quoted by a research agent",
+      "used_for": [
+        "TPU high-bandwidth memory showed irregularities after 2 krad(Si) of 67 MeV protons, against a 750 rad(Si) need for five years in low Earth orbit; other tests ran correctly to 15 krad(Si)"
+      ]
+    },
+    {
+      "id": "starcloud_2024",
+      "citation": "Starcloud (Lumen Orbit), white paper v1.03 (September 2024)",
+      "url": null,
+      "kind": "design proposal",
+      "read": "quoted by a research agent",
+      "used_for": [
+        "a radiator held at 20 C with emissivity 0.92 and absorptivity 0.09 rejects a net 633 W/m^2; 1 kg of shielding per kW of computing"
+      ]
+    },
+    {
+      "id": "ikaros_rcd",
+      "citation": "Y. Mori et al., ISSFD 2009; Y. Tsuda et al., Trans. JSASS Space Tech. Japan (JSTS) 27(1), 69",
+      "url": "https://www.issfd.org/ISSFD_2009/AOCSI/Mori.pdf",
+      "kind": "flight hardware",
+      "read": "quoted by a research agent",
+      "used_for": [
+        "IKAROS steered with liquid-crystal reflectivity control devices that reflect specularly with power on and diffusely with power off, switched in step with the spin; 72 sheets on a 200 m^2 sail; their power draw was not found"
+      ]
+    },
+    {
+      "id": "ma_2017",
+      "citation": "D. Ma, J. Murray, J. N. Munday, Adv. Opt. Mater. (2017); D. Ma, thesis (University of Maryland, 2016)",
+      "url": "https://doi.org/10.1002/adom.201600668",
+      "kind": "laboratory devices",
+      "read": "the thesis abstract, through a research agent",
+      "used_for": [
+        "liquid-crystal sail devices need no power in the diffusely reflecting state and dissipate under 0.5 mW/cm^2 (5 W/m^2) in the on state"
+      ]
+    },
+    {
+      "id": "pdlc_films",
+      "citation": "Sen et al., IntechOpen chapter (2024), table 1; Gauzy, PDLC smart film specifications",
+      "url": "https://doi.org/10.5772/intechopen.1002486",
+      "kind": "review and product data",
+      "read": "quoted by a research agent",
+      "used_for": [
+        "polymer-dispersed liquid-crystal films draw 1-5 W/m^2 to hold their clear state, at 42-70 V AC"
+      ]
+    },
+    {
+      "id": "solar_cruiser_2023",
+      "citation": "A. Heaton et al., ISSS 2023 (NTRS 20230008285); Smith et al., SPIE 2023 (NTRS 20230012230)",
+      "url": "https://ntrs.nasa.gov/citations/20230008285",
+      "kind": "design with measured coupons",
+      "read": "quoted by a research agent",
+      "used_for": [
+        "NASA's Solar Cruiser planned liquid-crystal reflectivity devices for roll control and calls their power modest without a figure; measured total reflectance rises by 0.30-0.38 when switched on"
+      ]
+    },
+    {
+      "id": "electrochromic_windows",
+      "citation": "US patent 8289610 B2 (Guardian); A. Wilson, Green Building Advisor (2009) on SageGlass; Villa et al., Energy Build. 315, 114293 (2024); Sun et al., Nat. Commun. (2025); LBNL electrochromic materials page",
+      "url": "https://doi.org/10.1016/j.enbuild.2024.114293",
+      "kind": "product data and measurements",
+      "read": "quoted by a research agent",
+      "used_for": [
+        "electrochromic glazing draws about 1-3 W/m^2 while switching over minutes, about 0.2-2 kJ/m^2 per full tint; some products draw 0.5-1 W/m^2 to hold a tint while others hold it unpowered (memory)",
+        "a measured cycle took 477 J/m^2 and returned 44% of it (Sun et al.)",
+        "derived by the agent from coloration efficiencies of 50-150 cm^2/C at 1.5-3 V: about 10-80 J/m^2 for a quarter's change in reflection"
+      ]
+    },
+    {
+      "id": "hernandez_2018",
+      "citation": "T. S. Hernandez et al., ACS Energy Lett. 3, 104 (2018)",
+      "url": "https://doi.org/10.1021/acsenergylett.7b01072",
+      "kind": "laboratory devices",
+      "read": "quoted by a research agent",
+      "used_for": [
+        "reversible metal electrodeposition consumes no power to keep either transparency or opacity, over more than 1,000 cycles"
+      ]
+    },
+    {
+      "id": "lin_2024",
+      "citation": "Lin et al., Micromachines 15, 1076 (2024)",
+      "url": "https://doi.org/10.3390/mi15091076",
+      "kind": "measurement",
+      "read": "quoted by a research agent",
+      "used_for": [
+        "a 10.3-inch electrophoretic panel takes about 1 J/m^2 more per refresh than at rest, about 5 J/m^2 with its electronics, and almost nothing while it holds an image"
+      ]
+    },
+    {
+      "id": "wie_roithmayr_2001",
+      "citation": "B. Wie, C. M. Roithmayr, NASA/TM-2001-210854 (2001), citing R. E. Oglevie (AIAA Guidance and Control Conference, 1978)",
+      "url": "https://ntrs.nasa.gov/citations/20010071579",
+      "kind": "design study",
+      "read": "quoted by a research agent",
+      "used_for": [
+        "a 3.2 km solar power satellite (Abacus) needs a peak pitch momentum of 2e9 N m s, the ring fleet tile's own figure",
+        "a space-built wheel of 4e8 N m s with a 350 m rim radius, 6,000 kg of aluminium, at 6 rpm, with 30,000 N m and 19 kW at most; five to seven needed",
+        "the ISS control moment gyroscopes store 17.5 N m s per kg; advanced flywheels might reach 150"
+      ]
+    },
+    {
+      "id": "gurrisi_2010",
+      "citation": "C. Gurrisi et al., NASA/CP-2010-216272 (2010)",
+      "url": "https://ntrs.nasa.gov/citations/20100021932",
+      "kind": "flight hardware",
+      "read": "quoted by a research agent",
+      "used_for": [
+        "each ISS control moment gyroscope stores 4,760 N m s in a flywheel at 6,600 rpm with 258 N m of output torque"
+      ]
+    },
+    {
+      "id": "flywheel_rims",
+      "citation": "Anderson and Groom, NASA TN D-7866 (1975), the annular momentum control device; Montgomery and Johnson (1981, NTRS 19820008292), counter-rotating annular rings for large spacecraft; Jansen and Dever, NASA/CR-2006-213862 (G2 flywheel); US patent 6583528 B2",
+      "url": "https://ntrs.nasa.gov/citations/19820008292",
+      "kind": "design studies and test hardware",
+      "read": "quoted by a research agent",
+      "used_for": [
+        "thin rims on magnetic bearings are the best shape for stored momentum; working rim speeds below 350 m/s for metals, 500 m/s for maraging steel, about 1,060 m/s for graphite and 1,230 m/s for Kevlar; composites 500-1,000 m/s in industry",
+        "NASA's G2 flywheel: motor 94-95% efficient at full power, bearing and windage losses each under 1 W in vacuum; round trips near 85% are quoted for flywheels with magnetic bearings",
+        "thin counter-rotating rings for large spacecraft are very flexible and sensitive to temperature and spin rate"
+      ]
+    }
+  ]
+}

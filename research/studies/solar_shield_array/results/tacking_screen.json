@@ -1,0 +1,66 @@
+{
+  "schema": "terluna.research.solar-shield-tacking-screen/1",
+  "producer": {
+    "lane": "research",
+    "runner": "research/studies/solar_shield_array/tacking_screen.py",
+    "source_hashes": {
+      "research/studies/solar_shield_array/tacking_screen.py": "d30eebd3ddfa47e1800d2609737bb88938edd5679a189af1d3ce410fdf168758"
+    },
+    "constants": {
+      "JULIAN_DAY": 86400.0,
+      "JULIAN_YEAR_DAYS": 365.25,
+      "SOLAR_CONSTANT": 1361.0,
+      "SPEED_OF_LIGHT": 299792458.0
+    },
+    "inputs": {
+      "research/studies/solar_shield_array/results/holding.json": "bc5a0a0b18adab563c430f633daa4631d862cc101817122bbbde9ebe5b865c0c"
+    }
+  },
+  "evidence": "Algebraic scales from the existing 50 g/m2 holding product. No cycling orbit, usable fraction or coverage history has been solved.",
+  "reading_rule": "Acceleration bounds assume an unloaded Sun-facing patch at 1 AU. Usable fractions are illustrative assumptions. Inventory numbers are necessary area scales under perfect placement, not sufficient coverage or mission cost estimates; power hardware, control, habitats, replacement, reserves and deployment are excluded. Reference propellant years compare masses only.",
+  "reference": {
+    "case": "aperture_quadrature/variable_distance_finer",
+    "base_areal_mass_kg_m2": 0.05,
+    "aperture_area_m2": 174553853796655.28,
+    "base_optical_mass_kg": 8727692689832.765,
+    "propellant_kg_s": 370762.5551456791,
+    "expended_propellant_per_julian_year_kg": 11700376410265.283,
+    "core_diverted_fraction": 0.1379500367376929
+  },
+  "optical_bounds": {
+    "full_spectrum_max_anti_sunward_mm_s2": 0.18159229342587396,
+    "full_spectrum_max_transverse_relaxed_mm_s2": 0.09079614671293698,
+    "core_max_anti_sunward_mm_s2": 0.025050663549381222,
+    "core_max_transverse_relaxed_mm_s2": 0.012525331774690611,
+    "max_sunward_mm_s2": 0,
+    "hardware_and_payload_included": false,
+    "physical_filter_force_validated": false
+  },
+  "illustrative_inventory": [
+    {
+      "assumed_usable_projected_area_fraction": 0.5,
+      "deployed_area_multiplier": 2.0,
+      "base_optical_inventory_kg": 17455385379665.53,
+      "inventory_in_reference_propellant_years": 1.4918652842955642
+    },
+    {
+      "assumed_usable_projected_area_fraction": 0.1,
+      "deployed_area_multiplier": 10.0,
+      "base_optical_inventory_kg": 87276926898327.64,
+      "inventory_in_reference_propellant_years": 7.4593264214778205
+    },
+    {
+      "assumed_usable_projected_area_fraction": 0.01,
+      "deployed_area_multiplier": 100.0,
+      "base_optical_inventory_kg": 872769268983276.5,
+      "inventory_in_reference_propellant_years": 74.59326421477822
+    }
+  ],
+  "units": {
+    "area": "m2",
+    "mass": "kg",
+    "acceleration": "mm/s2",
+    "time": "Julian year",
+    "fractions": "dimensionless"
+  }
+}

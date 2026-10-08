@@ -40,25 +40,31 @@ with sources and status, and what each loss budget asks of it.
 
 ## Design point
 
-`python -m research.studies.protection_architecture.run` (about 4 minutes, with
-`OPENBLAS_NUM_THREADS=1`) takes the UV transmission a swarm can hold at three
-levels of design choices and evaluates the loss response and its absorption and
-exosphere steps there. The swarm holds 3–4×10⁻⁵ with tight choices, about
-2×10⁻⁴ with standard ones and 2.5×10⁻³ with relaxed ones, most of it from failed
-cells waiting to be covered. At the tight and standard levels the sky's
-Lyman-alpha glow supplies 76–98% of the upper air's heat. Behind the titania
-stack at the standard level the ultraviolet-driven loss is 7×10⁻⁷–2.5 kg/s with
-Earth's tide, and the sunlit exosphere just outside a shield sized for heating
-(1.9–3.1 lunar radii) loses more: the central total is 5.7–89 kg/s with no
-magnetosphere and 2.1–47 kg/s with the September magnets, cycle times of 1.1–17
-and 2.1–48 billion years. A shield reaching 4 lunar radii, with the September
-magnets, brings the total to 0.00004–0.2 kg/s in the four cooler upper-air cases
-(500 billion years or longer), about 1 kg/s with all near-infrared heating at
-quiet Sun (100 billion years) and 16–18 kg/s with it at solar maximum (about 6
-billion years). Without magnets the solar wind's charge exchange leaves
-0.7–1.7 kg/s in the cooler cases (60–140 billion years). Behind the 200-nm edge
-the total at 4 lunar radii with the magnets is 3.7–49 kg/s (27 to 2 billion
-years). The requirements hold the details.
+`python -m research.studies.protection_architecture.run` (about 40 minutes,
+with `OPENBLAS_NUM_THREADS=1` and three single-threaded processes for the solar
+cycle) takes the UV transmission a swarm can hold at three levels of design
+choices and evaluates the loss response and its absorption and exosphere steps
+there, at the ring fleet's protected radius of 4 lunar radii. It uses the traced
+count and the heat placed where the tracing puts it, both as the author approved
+on 7 October, and the thermal column's infrared cooling (8 October), at quiet Sun, at solar maximum (FISM2's year around cycle 21's
+maximum, with cycle 19's year and the escape model's 2.5 as stress cases) and
+over solar cycles 23 and 24 year by year from FISM2's daily record. The swarm holds
+3–4×10⁻⁵ with tight choices, about 2×10⁻⁴ with standard ones and 2.5×10⁻³ with
+relaxed ones, most of it from failed cells waiting to be covered. Traced along
+its slant paths, light through gaps heats the upper air 2.5–5 times a count over
+the disk; the sky's Lyman-alpha glow supplies 74–94% of the heat at the tight
+level and 55–71% at the standard level, but it lands just above the base, where
+CO2 radiates it, and barely warms the exobase. Averaged over the solar cycle, the
+standard level at 4 lunar radii loses 0.61–0.80 kg/s with no magnetosphere with
+collisional upper air and in LTE (163 to 124 billion years), almost all of it the
+solar wind's; 0.063–0.066 kg/s if the ring fleet's wake holds the wind off; and
+3×10⁻⁷–10⁻⁴ kg/s with the September magnets. With all near-infrared heating it
+loses 1.4 kg/s with no magnetosphere (71 billion years), 0.41 kg/s in the wake
+and 0.044 kg/s with the magnets. No case runs away at the standard level at any
+maximum on record. At the relaxed level the warmest titania case runs away at
+every maximum, the LTE case under the escape model's 2.5, and the 200-nm edge in
+every case. The requirements hold the
+details.
 
 ## Working rules
 
@@ -72,6 +78,15 @@ damage appear as replacement rates in the supply ledger. Decisions live in
 reasons, stated.
 
 ## Next
+
+The [2026-10-05 primary magnetic comparison](../solar_shield_array/magnetic_architecture.md)
+now carries this study's stored atmospheric requirements into finite regional
+coil and upstream-source budgets. It read the design point from before the
+traced count of 7 October, and its rerun waits on the closure trajectories it
+needs, which this machine lacks. Larger regional paths merit development;
+the quiet-wind lower-moment cases need a plasma/storm check before installation
+is sized. The four-radius optical footprint and magnetic requirement are kept
+separate. No loss budget or primary architecture has been selected.
 
 The loss budget is designed across 1–100 kg/s, atmospheric cycle times of
 about 100 billion to 1 billion years, until the designs show which rate works

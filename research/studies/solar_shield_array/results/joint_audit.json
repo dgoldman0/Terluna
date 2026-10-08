@@ -1,0 +1,742 @@
+{
+  "schema": "terluna.research.joint-audit/1",
+  "producer": {
+    "source_hashes": {
+      "protection/dynamics/cycling.py": "704fbd03c9d4070ea05bdfeba57914ec225941f3560710da2472bd24ca870ed4",
+      "protection/dynamics/ephemeris.py": "9a162c3acf63a844284eb61b444a7d34f1447b5182d254d3e87616516f8748d9",
+      "protection/dynamics/ephemeris.json": "90fde7cb6142e5d4d8082270a978ba2f8f47baaefab0e8d1cf82ec6f07a27222",
+      "protection/dynamics/model.py": "01c9191588037ab4f42bac38dc4d5bd99e57427d37fa75cd672120e32b53733a",
+      "protection/dynamics/optical.py": "06a13ae9f24834876edbc12b513deaa5e3735f02f8249eb57c8996d74ce00b56",
+      "research/studies/solar_shield_array/scenario.json": "a53b784941518b6e36ccdf728252cf6c8e0c46c1126b6c621ed4e28c23128699",
+      "research/studies/solar_shield_array/cycling_search.py": "4789a0185620f6662916462b2715aa9002e6454e74f4f32ef5f7dadf5f732093",
+      "research/studies/solar_shield_array/cycling_feedback.py": "0eb32d26e14472f0a512cdf45d60f00ab8260376cd51ca715e7615bf7df02775",
+      "protection/dynamics/fleet.py": "f3e52653876c2956a4b355dc1290a0a1cadd2b9b601cafc664259827df1cc93c",
+      "research/studies/solar_shield_array/fleet_run.py": "9b8bc9765b9288745ea7d4d69d59e857e76e54d29cc91b37160503e9d9090833",
+      "protection/dynamics/active_formation.py": "597c12c6a4a89c0ea70663fddd69b9b5d9e599c88a2bd1742f5009d19e050b7a",
+      "protection/dynamics/active_retime.py": "9ba27a7ec48460a345289ebc7550c502f845487beaec5fe35084a67b2d9d736b",
+      "protection/dynamics/coverage_pilot.py": "fb03381e4387cb17e5276148428a3ffb2cbfb5313c8f59b8ff708ebeb9ce079c",
+      "protection/dynamics/natural_pattern.py": "780c2679f13c097c07b89e9d7cce1c91399f464f01b4bd878fb50cb643e1be29",
+      "research/studies/solar_shield_array/patterns_run.py": "f2e346fd2281632e5bf1c285c61229ba24e26e4ba4c480713194218263888d5c",
+      "protection/dynamics/pattern_departure.py": "24e7bb0653f9ab546b46a9a650ae67e3adb0af154c3e5b9ba83461e9648b828b",
+      "protection/dynamics/departure_control.py": "beafd12acfb4a228c17a329c9e0d278282222e90be7126b20b3e2df551bedfd5",
+      "protection/dynamics/pattern_return.py": "a1a3f85e5f7744d0418574d0fc2a033d4ab69d9d55eba9bfbb85974c7ab64757",
+      "protection/dynamics/energy_coast.py": "df47adb192e3f665e977353844e478f9cd5a30f63ca54ea2f31b59e9cd1b6826",
+      "protection/dynamics/attitude_load.py": "0b977677edc96d33889eb36526c4826c625eea2cb1a4e3b4254e970ac99582e4",
+      "research/studies/solar_shield_array/return_screen.py": "53ec3ecf5165c773142315d97553f9c72ebbe6c045299ec368104c1811f4b526",
+      "research/studies/solar_shield_array/energy_screen.py": "3506f2f1c725299fc98795fb32ed3c0063605f114c3d5cdbc711ee0f5c3bf9bd",
+      "protection/dynamics/parallel_shadow.py": "98d09fc9e5812b3592cbc5e24e0615f9f9aa3a75c7f33afff0fe82d0e40c3c24",
+      "research/studies/solar_shield_array/departure_validate.py": "df457b279e1b69627f65fa528877faa414161e6bfea881387d28243504f9b9b0",
+      "research/studies/solar_shield_array/energy_run.py": "1ddb0b6d2aabac1252ae614369230d286d6db7c79a45b7c863ac1a926ccd1c08",
+      "protection/dynamics/coast_control.py": "315bb9a1456ca1108f93ec1579719f7933acafb3f3c2b79bb2cf875961685c4d",
+      "research/studies/solar_shield_array/energy_correct.py": "5c518a5e0aa17c2e8cd999f46f9ab139c02534f58919ee630f38fbfbd523d9ca",
+      "research/studies/solar_shield_array/energy_replay.py": "b3ce134e8ad2d005d23a367d9d90e832b89c4fd11bbcca7ff448706987ca8d4c",
+      "protection/dynamics/packing_control.py": "2a728856edbc76c79eb59e7ba29532c5fe62671f24e39687cabb0bea7f7272a7",
+      "research/studies/solar_shield_array/packing_screen.py": "1a3b771ed6543810d75dfc54c7ca33a084086a9c9519bdc26959a89c87f8fedb",
+      "research/studies/solar_shield_array/packing_run.py": "d9971a9f1bf6a3d8a9ebad83e9e9fd78af046eb5af7a0c06fe4250ee05c8ec8b",
+      "protection/dynamics/collection.py": "a742f83d832f1afdfc144f0661c5a0dcfe8723bfcd184e2d65db778ca9af7cf9",
+      "research/studies/solar_shield_array/packing_validate.py": "0a6f52de4a2d07d80b137c1a67ac6e6e8ee0aa1d7cb3683684e076fcf776e5f0",
+      "research/studies/solar_shield_array/departure_screen.py": "9e69d5e5db5729191ca6ccae8673d24dfab7606af8bb47f1038913b328750ff4",
+      "research/studies/solar_shield_array/departure_refine.py": "c206316508235d2e5960dff5a6ab5de90334a632a67e46a54505d7d9909fd72a",
+      "research/studies/solar_shield_array/departure_run.py": "b142372d4b1ed3383bfe4ff5ea8764bbb2c12e8d92c3db8cb81138a18663a2c8",
+      "research/studies/solar_shield_array/departure_budget.py": "61434cb29ddf74bdfef79abcfcdd3f9a886caa8e21ba9a76f23faf6167b579a4",
+      "research/studies/solar_shield_array/pilot_budget.py": "2a7fc3e12d4b4aae98ce8d656220e0c10cbe0d5de2099f0406d64662e563c41e",
+      "protection/dynamics/tile_torque.py": "448a9ee6db481c18252196045cc53ad48733aacb9f8fc2620db8eae10acd6cbf",
+      "research/studies/solar_shield_array/energy_budget.py": "1d261c43f9bfebd418875e9b62f00fbc554bb03da6e679c36918e252bb272fab",
+      "research/studies/solar_shield_array/packing_budget.py": "912e8723c4855545cdde6817641159b1d6dbd5e90d5b86c9da5544d8162dd3ca",
+      "protection/dynamics/square_distance.py": "b38c54b6d9a96b161e82b755d407758548a38244c9292d73404ab45cdc1210ba",
+      "protection/dynamics/service_margin.py": "2651d828734f82416fa39bd6a77da31ae070aaa7606f6b80cdb1cbf00090e68f",
+      "research/studies/solar_shield_array/packing_audit.py": "bdb61443a6ded75c9c5c3dfbd6644b947874d710194363ba572f5814a36f5b91",
+      "protection/dynamics/cycle_control.py": "79979d6ec11f8095a9b9d9f20162e0c564a547aa108d0f8aff330c1ba5ceb5ac",
+      "research/studies/solar_shield_array/closure_screen.py": "77943258dd53965b799437d274b25a97fa8b122fc69d36021dce97db10cc0c27",
+      "protection/dynamics/mass_feedback.py": "a7a22f4879f9bf65f4124c4533beab860bb2135b579fd588d0470962ca741abc",
+      "research/studies/solar_shield_array/closure_propagate.py": "94439660cf036cde289ad7fdd8bb17b2efd37680ca189a2057ee64e30c3d51e2",
+      "research/studies/solar_shield_array/closure_hardware.py": "fea296454ae7a7b86091ccf462a0c86dec47250b092395e203a8bd2d501c6349",
+      "research/studies/solar_shield_array/closure_sizing.py": "7b0a85ef346d6d5328f65f0108a82df3dd562866ec69ef3b2f56223cfe5a3f56",
+      "research/studies/solar_shield_array/closure_return.py": "1b2eed766423e99684d5e8084f11709f50915d37185b2556eafdce0823da3464",
+      "research/studies/solar_shield_array/closure_validate.py": "beae9de9f295d8eb7819949119d9315ce462e72e29c3f3b2095642163164baa6",
+      "protection/dynamics/compact_shadow.py": "e4a729b6fa500a8e3e380a17f34009ba846a6eb3d33038679e0495afbe69fac7",
+      "research/studies/solar_shield_array/closure_compact.py": "d702eaf9e7aa9f0c8336a99c6b3608a35dafd504d856edc1e2d624ab00b20f31",
+      "research/studies/solar_shield_array/closure_budget.py": "51398f6224469f508f4391202cc2cfd180eb09bae58cd3dca0fc37be83b7e3a2",
+      "protection/dynamics/return_escape.py": "c76687ce70d82b636535200e63f31a9a93cc5e6fca6ad207779be6850e5cec7b",
+      "research/studies/solar_shield_array/repair_screen.py": "7591e1a0a4de0dad93154397d36a3fc13b02ab6acae7b0af4fc73911d11974f9",
+      "research/studies/solar_shield_array/repair_local_screen.py": "f6e6da179bbd8853a68ebb2f9b865a48cc3e87d11b6d79f8a45258e24bf5d00b",
+      "research/studies/solar_shield_array/repair_refine.py": "e6225e07ad069ddca411a985a99899cace62df8eea0fdfc3f8748ebf360bbff5",
+      "research/studies/solar_shield_array/repair_run.py": "004615fa5272fd171209f339614c6b01eac767626cf6dd4b68c588be3a1a49c2",
+      "protection/dynamics/fast_parallel.py": "5033fef27ed6f0653e9b227da20b4e0fde910449a8231dfa6a03434e1af0d3a7",
+      "protection/dynamics/fast_parallel.cpp": "a7d4268bc37cbfbbe04ecd388cb1926eaddc9c449ec11f153cf88b13c8360c4e",
+      "research/studies/solar_shield_array/joint_common.py": "2b948b0d0f6c7a859be0effa7d3e2d643d3ec2601ed69a51f41e67f32a1ea584",
+      "research/studies/solar_shield_array/joint_audit.py": "32ff6a199221ab2270368a5333f151b79237c63168f8ddabd4ac4009efa09394"
+    },
+    "constants": {
+      "AU": 149597870700.0,
+      "EARTH_GM": 398600441800000.0,
+      "EARTH_MOON_DISTANCE": 384400000.0,
+      "EARTH_OBLIQUITY_DEG": 23.4393,
+      "EARTH_RADIUS": 6371000.0,
+      "JULIAN_DAY": 86400.0,
+      "MOON_GM": 4902800118000.0,
+      "MOON_RADIUS": 1737400.0,
+      "SOLAR_CONSTANT": 1361.0,
+      "SOLAR_SYSTEM_GM": {
+        "mercury": 22031868551000.0,
+        "venus": 324858592000000.0,
+        "mars": 42828375816000.0,
+        "jupiter": 1.267127641e+17,
+        "saturn": 3.79405848418e+16,
+        "uranus": 5794556400000000.0,
+        "neptune": 6836527100580000.0,
+        "pluto": 975500000000.0
+      },
+      "SPEED_OF_LIGHT": 299792458.0,
+      "SUN_GM": 1.3271244004127942e+20,
+      "SUN_RADIUS": 695700000.0
+    },
+    "inputs": {
+      "closure_validation.json": "5032a8f71204508544dbc840c8e33208e1f0a62719c12245806e014e7a03baef",
+      "closure_sizing.json": "7bd01de3cd9d917ffc55d5679f3abd70bf519858ee021314a2251ac14e8b2b40",
+      "closure_return.json": "2edc5fc7b823de2fbda33a78116ed9715a8ec47723e1f92a6b2b0e12e3ef283c",
+      "packing_validation.json": "497807b12f604fc0e869cb47e407a52423fc8069f1a02b3b84cbbfc75e4815bd",
+      "closure_budget.json": "7c09e5a7a25b733bce63b54cf8ce2051c978b789e5ba981d4a503a38d36749cf",
+      "repair_trial_local_refined_fine.json": "3d2df962b87fde41edba9d6b9ef05fcfd2b87db9523942364c11e0ef39417a7e",
+      "joint_corridor_108_fine.json": "07bc6cf1c80e4b30b8968abadbc7373199c6a1db4f231b306f23eb966940f873",
+      "joint_bridge.json": "27e5e8c4f97b23ef881d073997914e7f44330b790de27659259bdd31be2ce588"
+    }
+  },
+  "completed": true,
+  "accepted_cycle": false,
+  "accepted_fleet": false,
+  "geometric_return_plus_service_replayed": true,
+  "continuous_optical_certificate": false,
+  "handovers_executed": 0,
+  "required_replacement_service_interval_s": [
+    21600.0,
+    164807.20903269577
+  ],
+  "next_service_adversary": {
+    "probes": 553,
+    "worst": {
+      "time_s": 186407.20903269577,
+      "angle": 1.5934467859455346,
+      "rho": 1.0,
+      "margin_m": 5322.084290517933,
+      "missed_area_m2": 0.0,
+      "covered_fraction": 1.0,
+      "circle_sagitta_allowance_m": 0.1882471739889091
+    },
+    "passed": true
+  },
+  "off_service_coverage_samples": [
+    {
+      "time_s": 21600.0,
+      "upstream": true,
+      "minimum_coverage": 1.0,
+      "window_inside_target": true,
+      "assigned_service": false
+    },
+    {
+      "time_s": 23400.0,
+      "upstream": true,
+      "minimum_coverage": 1.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 25200.0,
+      "upstream": true,
+      "minimum_coverage": 1.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 27000.0,
+      "upstream": true,
+      "minimum_coverage": 1.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 28800.0,
+      "upstream": true,
+      "minimum_coverage": 1.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 30600.0,
+      "upstream": true,
+      "minimum_coverage": 1.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 32400.0,
+      "upstream": true,
+      "minimum_coverage": 1.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 34200.0,
+      "upstream": true,
+      "minimum_coverage": 1.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 36000.0,
+      "upstream": true,
+      "minimum_coverage": 1.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 37800.0,
+      "upstream": true,
+      "minimum_coverage": 1.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 39600.0,
+      "upstream": true,
+      "minimum_coverage": 1.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 41400.0,
+      "upstream": true,
+      "minimum_coverage": 1.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 43200.0,
+      "upstream": true,
+      "minimum_coverage": 1.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 45000.0,
+      "upstream": true,
+      "minimum_coverage": 1.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 46800.0,
+      "upstream": true,
+      "minimum_coverage": 1.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 48600.0,
+      "upstream": true,
+      "minimum_coverage": 1.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 50400.0,
+      "upstream": true,
+      "minimum_coverage": 1.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 52200.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 54000.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 55800.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 57600.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 59400.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 61200.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 63000.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 64800.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 66600.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 68400.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 70200.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 72000.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 73800.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 75600.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 77400.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 79200.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 81000.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": true,
+      "assigned_service": false
+    },
+    {
+      "time_s": 82800.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": true,
+      "assigned_service": false
+    },
+    {
+      "time_s": 84600.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": true,
+      "assigned_service": false
+    },
+    {
+      "time_s": 86400.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": true,
+      "assigned_service": false
+    },
+    {
+      "time_s": 88200.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": true,
+      "assigned_service": false
+    },
+    {
+      "time_s": 90000.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": true,
+      "assigned_service": false
+    },
+    {
+      "time_s": 91800.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": true,
+      "assigned_service": false
+    },
+    {
+      "time_s": 93600.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": true,
+      "assigned_service": false
+    },
+    {
+      "time_s": 95400.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": true,
+      "assigned_service": false
+    },
+    {
+      "time_s": 97200.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": true,
+      "assigned_service": false
+    },
+    {
+      "time_s": 99000.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": true,
+      "assigned_service": false
+    },
+    {
+      "time_s": 100800.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": true,
+      "assigned_service": false
+    },
+    {
+      "time_s": 102600.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": true,
+      "assigned_service": false
+    },
+    {
+      "time_s": 104400.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": true,
+      "assigned_service": false
+    },
+    {
+      "time_s": 106200.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": true,
+      "assigned_service": false
+    },
+    {
+      "time_s": 108000.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 109800.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 111600.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 113400.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 115200.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 117000.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 118800.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 120600.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 122400.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 124200.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 126000.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 127800.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 129600.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 131400.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 133200.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 135000.0,
+      "upstream": false,
+      "minimum_coverage": 0.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 136800.0,
+      "upstream": true,
+      "minimum_coverage": 1.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 138600.0,
+      "upstream": true,
+      "minimum_coverage": 1.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 140400.0,
+      "upstream": true,
+      "minimum_coverage": 1.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 142200.0,
+      "upstream": true,
+      "minimum_coverage": 1.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 144000.0,
+      "upstream": true,
+      "minimum_coverage": 1.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 145800.0,
+      "upstream": true,
+      "minimum_coverage": 1.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 147600.0,
+      "upstream": true,
+      "minimum_coverage": 1.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 149400.0,
+      "upstream": true,
+      "minimum_coverage": 1.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 151200.0,
+      "upstream": true,
+      "minimum_coverage": 1.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 153000.0,
+      "upstream": true,
+      "minimum_coverage": 1.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 154800.0,
+      "upstream": true,
+      "minimum_coverage": 1.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 156600.0,
+      "upstream": true,
+      "minimum_coverage": 1.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 158400.0,
+      "upstream": true,
+      "minimum_coverage": 1.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 160200.0,
+      "upstream": true,
+      "minimum_coverage": 1.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 162000.0,
+      "upstream": true,
+      "minimum_coverage": 1.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 163800.0,
+      "upstream": true,
+      "minimum_coverage": 1.0,
+      "window_inside_target": false,
+      "assigned_service": false
+    },
+    {
+      "time_s": 164807.20903269577,
+      "upstream": true,
+      "minimum_coverage": 1.0,
+      "window_inside_target": true,
+      "assigned_service": false
+    }
+  ],
+  "refined_geometry": [
+    {
+      "stage": "service",
+      "time_s": 21599.987164402755,
+      "surface_distance_m": 6698.747875335497,
+      "pair": [
+        170,
+        208
+      ],
+      "evaluations": 19
+    },
+    {
+      "stage": "transfer",
+      "time_s": 136820.4480777934,
+      "surface_distance_m": 1956.2672943558268,
+      "pair": [
+        2,
+        3
+      ],
+      "evaluations": 8
+    },
+    {
+      "stage": "next_service",
+      "time_s": 186407.19769579527,
+      "surface_distance_m": 6693.6917997065,
+      "pair": [
+        94,
+        132
+      ],
+      "evaluations": 19
+    }
+  ],
+  "terminal_attitude_error_rad": 6.732712443114942e-08,
+  "next_service_end_vs_first_service_end": {
+    "maximum_relative_position_difference_m": 237.15908571858682,
+    "maximum_relative_velocity_difference_m_s": 0.2379274681895755,
+    "interpretation": "Frame-normalized differences, not an executed reset. A further cycle and epoch-dependent acquisition controls remain untested."
+  },
+  "resources": {
+    "wall_s": 17.292989462999685,
+    "cpu_s": 17.284542364,
+    "max_rss_MiB": 472.26953125,
+    "numerical_threads": 1,
+    "new_raw_MiB": 451.68408203125
+  }
+}

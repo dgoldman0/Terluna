@@ -1,0 +1,121 @@
+{
+  "schema": "terluna.research.magnetic-architecture-checks/1",
+  "date": "2026-10-05",
+  "starting_commit": "2208ec2f03b18bb9ce0b3226bd63bae42c074712",
+  "early_published_commit": "479816d288bdcecf6b1c36f0a8b4e2f328e3cd07",
+  "numerical_runs": [
+    {
+      "run": "magnetic_run1",
+      "wall_s": 2.753446176997386,
+      "peak_rss_MiB": 95.96875,
+      "completed": true
+    },
+    {
+      "run": "magnetic_run2",
+      "wall_s": 2.3503207190005924,
+      "peak_rss_MiB": 96.18359375,
+      "completed": true
+    },
+    {
+      "run": "magnetic_run3",
+      "wall_s": 2.4940257979978924,
+      "peak_rss_MiB": 96.11328125,
+      "completed": true
+    },
+    {
+      "run": "magnetic_run4",
+      "wall_s": 2.472841091999726,
+      "peak_rss_MiB": 96.05859375,
+      "completed": true
+    },
+    {
+      "run": "magnetic_run5",
+      "wall_s": 2.367034959999728,
+      "peak_rss_MiB": 96.1640625,
+      "completed": true
+    },
+    {
+      "run": "magnetic_run6",
+      "wall_s": 2.9712428220009315,
+      "peak_rss_MiB": 96.21875,
+      "completed": true
+    }
+  ],
+  "inspection_charge_s": 20,
+  "total_numerical_wall_charge_s": 35.408911567996256,
+  "budget": {
+    "wall_s": 900,
+    "processes": 1,
+    "numerical_threads": 1,
+    "address_space_GiB": 2,
+    "new_raw_limit_MiB": 64
+  },
+  "new_raw_output_MiB": 0.8710165023803711,
+  "early_make_check": {
+    "passed": 705,
+    "skipped": 55,
+    "failed": 13,
+    "python_wall_s": 33.36
+  },
+  "targeted_suite": {
+    "passed": 13,
+    "wall_s": 0.61,
+    "scope": "Final producer, including independent rigid-body inertia check."
+  },
+  "iteration_corrections": [
+    "Use the minimum finite-loop field over a source-centred sphere for the largest upstream loop; initial equatorial-only source sizing understated its current.",
+    "Normalize the near-zero mutual-torque conservation residual by the pair force lever arm, rather than near-zero component torques. Physical forces are unchanged.",
+    "Include night-power and field-energy-reserve sensitivities, joints, material sensitivity and installed single-outage current reserve.",
+    "Use trapezoidal time means, including half-weight endpoints.",
+    "Include finite-loop rigid-body/gravity-gradient attitude torque and a uniform 5 nT external-field torque envelope in held-source propulsion and mass feedback."
+  ],
+  "preserved_failed_cases": [
+    "Every tested 15000 km held hub fails the scalar mass/power closure; retained in the product.",
+    "Farther failed mass closures, large wake-margin hardware/power costs and both warm atmospheric loss failures retained.",
+    "Original failed return and collection parents remain unchanged."
+  ],
+  "unexecuted": [
+    "Coupled solar-wind/atmospheric plasma evolution or ion escape validation",
+    "New tile or magnet trajectory propagation, free-orbit relay and complete repeatable fleet",
+    "Geological routing, full support/gravity, conductor qualification, quench and thermal-system design",
+    "Radiation-dose transport or revised EUV filtering"
+  ],
+  "decision": "Advance regional 500-1000 km circuits; test conditional weaker moment against plasma/storm losses; retain upstream and plasma-current alternatives behind their limiting gates; no target or primary architecture selected.",
+  "intermediate_make_check": {
+    "passed": 717,
+    "skipped": 55,
+    "failed": 13,
+    "python_wall_s": 30.11
+  },
+  "final_make_check": {
+    "passed": 718,
+    "skipped": 55,
+    "failed": 13,
+    "python_wall_s": 31.26,
+    "baseline_failures_unchanged": true,
+    "failures": [
+      "atmosphere/tests/test_absorption.py::test_ion_production_falls_with_the_shadow_and_ends_at_the_outer_radius",
+      "atmosphere/tests/test_absorption.py::test_ionization_rate_is_of_the_tabulated_order",
+      "atmosphere/tests/test_absorption.py::test_design_case_needs_a_radius_just_under_the_exobase",
+      "atmosphere/tests/test_exosphere.py::test_dissociation_rates_agree_with_heays",
+      "atmosphere/tests/test_exosphere.py::test_ions_made_match_the_absorption_step",
+      "atmosphere/tests/test_exosphere.py::test_charge_exchange_thin_limit_counts_the_swept_exosphere",
+      "atmosphere/tests/test_exosphere.py::test_magnetosphere_accounts_for_every_ion_and_a_stronger_one_keeps_more",
+      "atmosphere/tests/test_exosphere.py::test_levels_are_ordered_and_wider_shadows_never_lose_more",
+      "climate/tests/test_cm1_run.py::test_the_terrain_build_forces_each_column_at_its_own_height",
+      "climate/tests/test_exoplasim_run.py::RunnerTests::test_process_lookup_finds_this_process",
+      "climate/tests/test_ring_comfort.py::test_hours_are_shares_of_the_lunar_day",
+      "climate/tests/test_ring_comfort.py::test_the_rings_land_is_pooled_by_latitude_and_height_and_counted_in_shares",
+      "research/studies/protection_architecture/test_run.py::test_design_point_holds_together"
+    ],
+    "later_targets_reached": false,
+    "reason": "Missing pinned spectral inputs, generated climate configuration and the existing process-lookup failure; dependent baseline tests retain these failures."
+  },
+  "staged_whitespace_check": "passed",
+  "layer_check": [
+    "python3 shared/check_layers.py",
+    "check_layers: 550 files checked, 0 violations",
+    "python3 -m pytest",
+    "============================= test session starts =============================="
+  ]
+}

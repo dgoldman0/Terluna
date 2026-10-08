@@ -1,0 +1,535 @@
+{
+  "schema": "terluna.research.active-global-rejected/1",
+  "producer": {
+    "source_hashes": {
+      "protection/dynamics/cycling.py": "704fbd03c9d4070ea05bdfeba57914ec225941f3560710da2472bd24ca870ed4",
+      "protection/dynamics/ephemeris.py": "9a162c3acf63a844284eb61b444a7d34f1447b5182d254d3e87616516f8748d9",
+      "protection/dynamics/ephemeris.json": "90fde7cb6142e5d4d8082270a978ba2f8f47baaefab0e8d1cf82ec6f07a27222",
+      "protection/dynamics/model.py": "01c9191588037ab4f42bac38dc4d5bd99e57427d37fa75cd672120e32b53733a",
+      "protection/dynamics/optical.py": "06a13ae9f24834876edbc12b513deaa5e3735f02f8249eb57c8996d74ce00b56",
+      "research/studies/solar_shield_array/scenario.json": "a53b784941518b6e36ccdf728252cf6c8e0c46c1126b6c621ed4e28c23128699",
+      "research/studies/solar_shield_array/cycling_search.py": "4789a0185620f6662916462b2715aa9002e6454e74f4f32ef5f7dadf5f732093",
+      "research/studies/solar_shield_array/cycling_feedback.py": "0eb32d26e14472f0a512cdf45d60f00ab8260376cd51ca715e7615bf7df02775",
+      "protection/dynamics/fleet.py": "f3e52653876c2956a4b355dc1290a0a1cadd2b9b601cafc664259827df1cc93c",
+      "research/studies/solar_shield_array/fleet_run.py": "9b8bc9765b9288745ea7d4d69d59e857e76e54d29cc91b37160503e9d9090833",
+      "protection/dynamics/active_global.py": "e2c64a5e86f6c4188a42a1aa6f796fe375d6c976670b960013733d008dd8da18",
+      "protection/dynamics/active_formation.py": "597c12c6a4a89c0ea70663fddd69b9b5d9e599c88a2bd1742f5009d19e050b7a",
+      "research/studies/solar_shield_array/active_global_run.py": "daee4303988d4f38eed184e624a43730a488fd78f21b25262951d360cdffa852",
+      "research/studies/solar_shield_array/cycling_analysis.py": "4fe32b4c27af48048db63ae073d99dc10b7897c9f3eaa68c2cd34036618f8fc0",
+      "research/studies/solar_shield_array/active_global_validate.py": "10b58ca2486f08cd313c7a9b45d690cc64729b6b5df86ffc0752cf0900224f28",
+      "research/studies/solar_shield_array/reject_global.py": "98074fa6ed1a1912decb0bcf243ce81e4488bdbe99f433ddb5cd5b36a5fd6af3"
+    },
+    "constants": {
+      "AU": 149597870700.0,
+      "EARTH_GM": 398600441800000.0,
+      "EARTH_MOON_DISTANCE": 384400000.0,
+      "EARTH_OBLIQUITY_DEG": 23.4393,
+      "EARTH_RADIUS": 6371000.0,
+      "JULIAN_DAY": 86400.0,
+      "JULIAN_YEAR_DAYS": 365.25,
+      "MOON_GM": 4902800118000.0,
+      "MOON_RADIUS": 1737400.0,
+      "SOLAR_CONSTANT": 1361.0,
+      "SOLAR_SYSTEM_GM": {
+        "mercury": 22031868551000.0,
+        "venus": 324858592000000.0,
+        "mars": 42828375816000.0,
+        "jupiter": 1.267127641e+17,
+        "saturn": 3.79405848418e+16,
+        "uranus": 5794556400000000.0,
+        "neptune": 6836527100580000.0,
+        "pluto": 975500000000.0
+      },
+      "SPEED_OF_LIGHT": 299792458.0,
+      "SUN_GM": 1.3271244004127942e+20,
+      "SUN_RADIUS": 695700000.0
+    },
+    "input_products": {
+      "holding.json": "bc5a0a0b18adab563c430f633daa4631d862cc101817122bbbde9ebe5b865c0c"
+    }
+  },
+  "status": "REJECTED_HIGH_RECURRING_COST",
+  "inventory": 38652166,
+  "optical_base_mass_kg": 193260830000000.0,
+  "preliminary_budget": {
+    "plane_stride": 32,
+    "phase_count_per_parity": 64,
+    "dates": 9,
+    "members_in_force_quadrature": 9216,
+    "mean_acceleration_bounds_m_s2": [0.0002527714099253304,0.0002595662221544972],
+    "mean_power_bounds_W": [1480403175977377.5,1520198268338495.2],
+    "propellant_rate_bounds_kg_s": [2302849.3848536983,2364752.8618598813],
+    "thirty_day_energy_bounds_J": [3.8372050321333625e+21,3.9403539115333795e+21],
+    "thirty_day_propellant_bounds_kg": [5968985605540.786,6129439417940.8125],
+    "mean_tile_delta_v_bounds_m_s": [655.1834945264563,672.7956478244568],
+    "cycle_delta_v_bounds_m_s": [27.532637747931783,208.14306660483317],
+    "mean_peak_distributed_acceleration_m_s2": 0.0005052731790605705,
+    "maximum_sampled_acceleration_m_s2": 0.0006659871063294588,
+    "installed_distributed_power_upper_W": 3699033937611945.5,
+    "added_distributed_power_hardware_upper_kg": 12330113125373.152,
+    "seven_day_propellant_reserve_upper_kg": 1430202530852.856,
+    "loaded_control_only_mass_upper_kg": 208122327297225.16,
+    "loaded_control_only_mean_power_upper_W": 1640805774429300.8,
+    "loaded_control_only_propellant_rate_upper_kg_s": 2552364.5380011345,
+    "maximum_mass_multiplier": 1.1037450826696318,
+    "minimum_beam_margins_deg": [1.2576513245481395,0.11459155902609224],
+    "maximum_normal_tilt_deg": 14.950392981651676,
+    "scope": "Nonlinear force bracket over every possible mutual illumination fraction [0,1]; spatial/phase quadrature of explicit common-date paths. Not an illumination simulation or energy optimum.",
+    "mass_closure": "Conservative per-plane/per-parity feedback closure of the assumed 300 W/kg power hardware plus seven-day propellant. Thrust per loaded mass remains within the zero-to-full photon-force convex bracket. Collector/habitat/thermal/plume hardware is not added.",
+    "series": [
+      {
+        "day": 0.0,
+        "mean_acceleration_lower_m_s2": 0.00021446685506228163,
+        "mean_acceleration_upper_m_s2": 0.00022316373935926174,
+        "peak_acceleration_upper_m_s2": 0.0005618379145636057,
+        "fraction_requiring_over_1um_s2": 1.0
+      },
+      {
+        "day": 3.75,
+        "mean_acceleration_lower_m_s2": 0.0002835852135678453,
+        "mean_acceleration_upper_m_s2": 0.0002894740092096455,
+        "peak_acceleration_upper_m_s2": 0.0005283614564066635,
+        "fraction_requiring_over_1um_s2": 1.0
+      },
+      {
+        "day": 7.5,
+        "mean_acceleration_lower_m_s2": 0.00028679989242156,
+        "mean_acceleration_upper_m_s2": 0.0002946686602186249,
+        "peak_acceleration_upper_m_s2": 0.0005706829222177417,
+        "fraction_requiring_over_1um_s2": 1.0
+      },
+      {
+        "day": 11.25,
+        "mean_acceleration_lower_m_s2": 0.0002072776218847284,
+        "mean_acceleration_upper_m_s2": 0.0002122183802099209,
+        "peak_acceleration_upper_m_s2": 0.0004370481609879095,
+        "fraction_requiring_over_1um_s2": 1.0
+      },
+      {
+        "day": 15.0,
+        "mean_acceleration_lower_m_s2": 0.00016196634435611316,
+        "mean_acceleration_upper_m_s2": 0.00017099805706831254,
+        "peak_acceleration_upper_m_s2": 0.0005174529180630061,
+        "fraction_requiring_over_1um_s2": 1.0
+      },
+      {
+        "day": 18.75,
+        "mean_acceleration_lower_m_s2": 0.0002548947665784357,
+        "mean_acceleration_upper_m_s2": 0.00026012474995504975,
+        "peak_acceleration_upper_m_s2": 0.00046854103592631357,
+        "fraction_requiring_over_1um_s2": 1.0
+      },
+      {
+        "day": 22.5,
+        "mean_acceleration_lower_m_s2": 0.0003427335047140448,
+        "mean_acceleration_upper_m_s2": 0.00035064828915275676,
+        "peak_acceleration_upper_m_s2": 0.0006659871063294588,
+        "fraction_requiring_over_1um_s2": 1.0
+      },
+      {
+        "day": 26.25,
+        "mean_acceleration_lower_m_s2": 0.0002722257792243796,
+        "mean_acceleration_upper_m_s2": 0.00027739990090264,
+        "peak_acceleration_upper_m_s2": 0.0004844487592844066,
+        "fraction_requiring_over_1um_s2": 1.0
+      },
+      {
+        "day": 30.0,
+        "mean_acceleration_lower_m_s2": 0.00021090945824879032,
+        "mean_acceleration_upper_m_s2": 0.00021883172167879263,
+        "peak_acceleration_upper_m_s2": 0.0005383802684103356,
+        "fraction_requiring_over_1um_s2": 1.0
+      }
+    ]
+  },
+  "separation": {
+    "same_shell_surface_clearance_m": 4687.463218521891,
+    "different_shell_surface_clearance_m": 261.90590645516477,
+    "required_clearance_m": 100.0,
+    "position_error_per_tile_m": 50.0,
+    "minimum_phase_derivative_bound": 0.9964924427524527,
+    "normal_envelope_deg": 17.0,
+    "radial_half_extent_bound_m": 2069.0470467724176,
+    "passes": true,
+    "scope": "All dates: different radial shells use the enforced normal envelope; same-shell pairs use enclosing spheres. Failure is inconclusive until an actual intersection is found"
+  },
+  "nominal_period_days": [1.8984485877802766,7.0141784435210095],
+  "front_passages_per_day": 9480354.892917432,
+  "nominal_handover_interval_s": [16.53154182465389,25.64642477868029],
+  "interrupted_global_coverage": {
+    "completed": false,
+    "dates_completed": 26,
+    "last_day": 12.5,
+    "solar_directions": 16,
+    "area_receivers": 8192,
+    "rim_receivers": 1024,
+    "ray_tests": 3833856,
+    "series": [
+      {
+        "day": 0.0,
+        "ray_coverage": 1.0,
+        "all_sampled_sun_receiver_fraction": 1.0,
+        "rim_ray_coverage": 1.0,
+        "missed_rays": 0
+      },
+      {
+        "day": 0.5,
+        "ray_coverage": 1.0,
+        "all_sampled_sun_receiver_fraction": 1.0,
+        "rim_ray_coverage": 1.0,
+        "missed_rays": 0
+      },
+      {
+        "day": 1.0,
+        "ray_coverage": 1.0,
+        "all_sampled_sun_receiver_fraction": 1.0,
+        "rim_ray_coverage": 1.0,
+        "missed_rays": 0
+      },
+      {
+        "day": 1.5,
+        "ray_coverage": 1.0,
+        "all_sampled_sun_receiver_fraction": 1.0,
+        "rim_ray_coverage": 1.0,
+        "missed_rays": 0
+      },
+      {
+        "day": 2.0,
+        "ray_coverage": 1.0,
+        "all_sampled_sun_receiver_fraction": 1.0,
+        "rim_ray_coverage": 1.0,
+        "missed_rays": 0
+      },
+      {
+        "day": 2.5,
+        "ray_coverage": 1.0,
+        "all_sampled_sun_receiver_fraction": 1.0,
+        "rim_ray_coverage": 1.0,
+        "missed_rays": 0
+      },
+      {
+        "day": 3.0,
+        "ray_coverage": 1.0,
+        "all_sampled_sun_receiver_fraction": 1.0,
+        "rim_ray_coverage": 1.0,
+        "missed_rays": 0
+      },
+      {
+        "day": 3.5,
+        "ray_coverage": 1.0,
+        "all_sampled_sun_receiver_fraction": 1.0,
+        "rim_ray_coverage": 1.0,
+        "missed_rays": 0
+      },
+      {
+        "day": 4.0,
+        "ray_coverage": 1.0,
+        "all_sampled_sun_receiver_fraction": 1.0,
+        "rim_ray_coverage": 1.0,
+        "missed_rays": 0
+      },
+      {
+        "day": 4.5,
+        "ray_coverage": 1.0,
+        "all_sampled_sun_receiver_fraction": 1.0,
+        "rim_ray_coverage": 1.0,
+        "missed_rays": 0
+      },
+      {
+        "day": 5.0,
+        "ray_coverage": 1.0,
+        "all_sampled_sun_receiver_fraction": 1.0,
+        "rim_ray_coverage": 1.0,
+        "missed_rays": 0
+      },
+      {
+        "day": 5.5,
+        "ray_coverage": 1.0,
+        "all_sampled_sun_receiver_fraction": 1.0,
+        "rim_ray_coverage": 1.0,
+        "missed_rays": 0
+      },
+      {
+        "day": 6.0,
+        "ray_coverage": 1.0,
+        "all_sampled_sun_receiver_fraction": 1.0,
+        "rim_ray_coverage": 1.0,
+        "missed_rays": 0
+      },
+      {
+        "day": 6.5,
+        "ray_coverage": 1.0,
+        "all_sampled_sun_receiver_fraction": 1.0,
+        "rim_ray_coverage": 1.0,
+        "missed_rays": 0
+      },
+      {
+        "day": 7.0,
+        "ray_coverage": 1.0,
+        "all_sampled_sun_receiver_fraction": 1.0,
+        "rim_ray_coverage": 1.0,
+        "missed_rays": 0
+      },
+      {
+        "day": 7.5,
+        "ray_coverage": 1.0,
+        "all_sampled_sun_receiver_fraction": 1.0,
+        "rim_ray_coverage": 1.0,
+        "missed_rays": 0
+      },
+      {
+        "day": 8.0,
+        "ray_coverage": 1.0,
+        "all_sampled_sun_receiver_fraction": 1.0,
+        "rim_ray_coverage": 1.0,
+        "missed_rays": 0
+      },
+      {
+        "day": 8.5,
+        "ray_coverage": 1.0,
+        "all_sampled_sun_receiver_fraction": 1.0,
+        "rim_ray_coverage": 1.0,
+        "missed_rays": 0
+      },
+      {
+        "day": 9.0,
+        "ray_coverage": 1.0,
+        "all_sampled_sun_receiver_fraction": 1.0,
+        "rim_ray_coverage": 1.0,
+        "missed_rays": 0
+      },
+      {
+        "day": 9.5,
+        "ray_coverage": 1.0,
+        "all_sampled_sun_receiver_fraction": 1.0,
+        "rim_ray_coverage": 1.0,
+        "missed_rays": 0
+      },
+      {
+        "day": 10.0,
+        "ray_coverage": 1.0,
+        "all_sampled_sun_receiver_fraction": 1.0,
+        "rim_ray_coverage": 1.0,
+        "missed_rays": 0
+      },
+      {
+        "day": 10.5,
+        "ray_coverage": 1.0,
+        "all_sampled_sun_receiver_fraction": 1.0,
+        "rim_ray_coverage": 1.0,
+        "missed_rays": 0
+      },
+      {
+        "day": 11.0,
+        "ray_coverage": 1.0,
+        "all_sampled_sun_receiver_fraction": 1.0,
+        "rim_ray_coverage": 1.0,
+        "missed_rays": 0
+      },
+      {
+        "day": 11.5,
+        "ray_coverage": 1.0,
+        "all_sampled_sun_receiver_fraction": 1.0,
+        "rim_ray_coverage": 1.0,
+        "missed_rays": 0
+      },
+      {
+        "day": 12.0,
+        "ray_coverage": 1.0,
+        "all_sampled_sun_receiver_fraction": 1.0,
+        "rim_ray_coverage": 1.0,
+        "missed_rays": 0
+      },
+      {
+        "day": 12.5,
+        "ray_coverage": 1.0,
+        "all_sampled_sun_receiver_fraction": 1.0,
+        "rim_ray_coverage": 1.0,
+        "missed_rays": 0
+      }
+    ],
+    "log_path": "research/runs/solar_shield_array/active/global_run.log",
+    "log_sha256": "c3ca39ec3ed3ddab1c5a33efdf2efa24f0fcf0eed543642e532de77d1792ca7a"
+  },
+  "completed_local_geometry": {
+    "handover_windows": [
+      {
+        "start_day": 0.0,
+        "duration_s": 120.0,
+        "cadence_s": 0.5,
+        "receivers": 15,
+        "solar_directions": 12,
+        "unique_integer_tiles": 55967,
+        "ray_tests": 43380,
+        "uncovered_ray_samples": 0,
+        "observed_responsibility_changes": 1025,
+        "minimum_receiver_source_handover_changes": 4,
+        "rebuilt_indices_all_covered": true,
+        "minimum_beam_margins_deg": [123.5323705303504,39.643442669141464],
+        "maximum_sampled_facet_normal_rate_rad_s": 3.810768216820936e-05,
+        "miss_witnesses": [],
+        "scope": "Explicit local temporal handovers across the whole receiver disk, including its rim and solar limb; this does not certify every receiver between the 12-hour global samples"
+      },
+      {
+        "start_day": 7.5,
+        "duration_s": 120.0,
+        "cadence_s": 0.5,
+        "receivers": 15,
+        "solar_directions": 12,
+        "unique_integer_tiles": 56035,
+        "ray_tests": 43380,
+        "uncovered_ray_samples": 0,
+        "observed_responsibility_changes": 1044,
+        "minimum_receiver_source_handover_changes": 4,
+        "rebuilt_indices_all_covered": true,
+        "minimum_beam_margins_deg": [123.52394839403618,113.0224648340973],
+        "maximum_sampled_facet_normal_rate_rad_s": 3.8112436853862225e-05,
+        "miss_witnesses": [],
+        "scope": "Explicit local temporal handovers across the whole receiver disk, including its rim and solar limb; this does not certify every receiver between the 12-hour global samples"
+      },
+      {
+        "start_day": 15.0,
+        "duration_s": 120.0,
+        "cadence_s": 0.5,
+        "receivers": 15,
+        "solar_directions": 12,
+        "unique_integer_tiles": 55957,
+        "ray_tests": 43380,
+        "uncovered_ray_samples": 0,
+        "observed_responsibility_changes": 1036,
+        "minimum_receiver_source_handover_changes": 4,
+        "rebuilt_indices_all_covered": true,
+        "minimum_beam_margins_deg": [123.51644822239673,30.043860362563404],
+        "maximum_sampled_facet_normal_rate_rad_s": 3.810490920297998e-05,
+        "miss_witnesses": [],
+        "scope": "Explicit local temporal handovers across the whole receiver disk, including its rim and solar limb; this does not certify every receiver between the 12-hour global samples"
+      },
+      {
+        "start_day": 22.5,
+        "duration_s": 120.0,
+        "cadence_s": 0.5,
+        "receivers": 15,
+        "solar_directions": 12,
+        "unique_integer_tiles": 55964,
+        "ray_tests": 43380,
+        "uncovered_ray_samples": 0,
+        "observed_responsibility_changes": 1040,
+        "minimum_receiver_source_handover_changes": 4,
+        "rebuilt_indices_all_covered": true,
+        "minimum_beam_margins_deg": [123.50765199150375,4.136765702813637],
+        "maximum_sampled_facet_normal_rate_rad_s": 3.809804975766087e-05,
+        "miss_witnesses": [],
+        "scope": "Explicit local temporal handovers across the whole receiver disk, including its rim and solar limb; this does not certify every receiver between the 12-hour global samples"
+      },
+      {
+        "start_day": 29.99,
+        "duration_s": 120.0,
+        "cadence_s": 0.5,
+        "receivers": 15,
+        "solar_directions": 12,
+        "unique_integer_tiles": 55844,
+        "ray_tests": 43380,
+        "uncovered_ray_samples": 0,
+        "observed_responsibility_changes": 1039,
+        "minimum_receiver_source_handover_changes": 4,
+        "rebuilt_indices_all_covered": true,
+        "minimum_beam_margins_deg": [123.52352459361572,48.32221764797581],
+        "maximum_sampled_facet_normal_rate_rad_s": 3.810513757397913e-05,
+        "miss_witnesses": [],
+        "scope": "Explicit local temporal handovers across the whole receiver disk, including its rim and solar limb; this does not certify every receiver between the 12-hour global samples"
+      }
+    ],
+    "handover_refinement": {
+      "start_day": 15.0,
+      "duration_s": 32.0,
+      "cadence_s": 0.125,
+      "receivers": 15,
+      "solar_directions": 12,
+      "unique_integer_tiles": 48359,
+      "ray_tests": 46260,
+      "uncovered_ray_samples": 0,
+      "observed_responsibility_changes": 273,
+      "minimum_receiver_source_handover_changes": 1,
+      "rebuilt_indices_all_covered": true,
+      "minimum_beam_margins_deg": [123.69357125361576,30.351647845557594],
+      "maximum_sampled_facet_normal_rate_rad_s": 3.81049092344968e-05,
+      "miss_witnesses": [],
+      "scope": "Explicit local temporal handovers across the whole receiver disk, including its rim and solar limb; this does not certify every receiver between the 12-hour global samples"
+    },
+    "finite_extent": {
+      "square_gravity_quadrature": "3 by 3 Gauss-Legendre",
+      "cases": 1120,
+      "maximum_centre_force_error_m_s2": 2.4215701786871543e-09,
+      "worst_day": 0,
+      "scope": "Sampled finite-extent correction; centre force is adequate relative to the reported translational controls, not a membrane stress calculation"
+    }
+  },
+  "completed_local_geometry_raw": {
+    "path": "research/runs/solar_shield_array/active/global_validate_geometry.json",
+    "sha256": "b2c606c85bab62673f5a4e102f2b18a2f67aa20d538a2ad3605977cd2cdade41"
+  },
+  "compact_rejected": {
+    "inventory": 26369270,
+    "return_pole": {
+      "time_days": 0.0,
+      "tiles_examined": 29952,
+      "actual_square_intersections": 5108,
+      "example_ids": [
+        [
+          [2,4969],
+          [2302,4957]
+        ],
+        [
+          [2,4969],
+          [2301,4958]
+        ],
+        [
+          [2,4969],
+          [2301,4959]
+        ],
+        [
+          [1,4966],
+          [2302,4958]
+        ],
+        [
+          [1,4966],
+          [2303,4957]
+        ],
+        [
+          [1,4966],
+          [2303,4956]
+        ],
+        [
+          [0,4967],
+          [2303,4956]
+        ],
+        [
+          [0,4966],
+          [2303,4956]
+        ]
+      ],
+      "scope": "Exact static finite-square intersections in the stated return-pole subset; not an all-fleet pair census"
+    }
+  },
+  "held_comparison": {
+    "mean_power_TW": 238.34735687936515,
+    "total_mass_kg": 10787017805828.436,
+    "base_optical_mass_kg": 8727692689832.765,
+    "mean_residual_acceleration_m_s2": 0.000729107188239991
+  },
+  "acceptance": {
+    "global_four_lunar_radius_coverage_demonstrated": false,
+    "low_energy_active_gap_repair_demonstrated": false,
+    "delivered_electrical_power_demonstrated_W": null
+  },
+  "evidence": "Rejected prescribed-circle comparison. Preliminary force quadrature and completed optical tests are retained; the 30-day coverage/census run was interrupted after the user challenged its cost.",
+  "unperformed": [
+    "Full 30-day spatial survey",
+    "All-integer force census",
+    "Force quadrature convergence",
+    "Planned eight-day rigid-target feedback replay",
+    "Bounded-slew optical attitude realization"
+  ],
+  "reason": "Lower acceleration per kilogram is outweighed by large circulating inventory and continuous enforcement of Sun-following circles. This does not measure minimum-intervention gap repair on natural trajectories.",
+  "redirection": "Propagate the same starting fleet gravitationally, cancel only its photon force, and measure the coverage and collision failures before assigning gap-repair costs."
+}

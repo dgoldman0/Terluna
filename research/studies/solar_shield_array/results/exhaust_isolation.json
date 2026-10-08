@@ -1,0 +1,687 @@
+{
+ "schema": "terluna.research.exhaust-isolation/1",
+ "producer": {
+  "files": {
+   "research/studies/solar_shield_array/exhaust_isolation.py": "6f782aa7609ae8af61ec80b2b5e3d9d3c669b900a42aedde91b553bffd1b33a5",
+   "research/studies/solar_shield_array/zoned_aperture.py": "c26cf7bcdb66a6098872c08bde394c3810bf2ef7b5b3314b11ada98ef54a6a0c",
+   "research/studies/solar_shield_array/aperture.py": "213f744f5203b54c39601ad0aed32352c75215e6f43d284ad91d156b413fc9b7",
+   "research/studies/solar_shield_array/run.py": "69e01bf90ca29987f9251f7d1aff5be0c57e909815847cf0cf7a4e94cf3ff9cd",
+   "protection/dynamics/model.py": "01c9191588037ab4f42bac38dc4d5bd99e57427d37fa75cd672120e32b53733a",
+   "protection/dynamics/optical.py": "06a13ae9f24834876edbc12b513deaa5e3735f02f8249eb57c8996d74ce00b56",
+   "protection/dynamics/ephemeris.py": "9a162c3acf63a844284eb61b444a7d34f1447b5182d254d3e87616516f8748d9",
+   "protection/dynamics/cycling.py": "704fbd03c9d4070ea05bdfeba57914ec225941f3560710da2472bd24ca870ed4"
+  },
+  "constants": {
+   "AU": 149597870700.0,
+   "AVOGADRO": 6.02214076e+23,
+   "BOLTZMANN": 1.380649e-23,
+   "EARTH_GM": 398600441800000.0,
+   "EARTH_MOON_DISTANCE": 384400000.0,
+   "EARTH_OBLIQUITY_DEG": 23.4393,
+   "EARTH_RADIUS": 6371000.0,
+   "ELEMENTARY_CHARGE": 1.602176634e-19,
+   "JULIAN_DAY": 86400.0,
+   "JULIAN_YEAR_DAYS": 365.25,
+   "MOON_GM": 4902800118000.0,
+   "MOON_RADIUS": 1737400.0,
+   "SOLAR_CONSTANT": 1361.0,
+   "SOLAR_SYSTEM_GM": {
+    "mercury": 22031868551000.0,
+    "venus": 324858592000000.0,
+    "mars": 42828375816000.0,
+    "jupiter": 1.267127641e+17,
+    "saturn": 3.79405848418e+16,
+    "uranus": 5794556400000000.0,
+    "neptune": 6836527100580000.0,
+    "pluto": 975500000000.0
+   },
+   "SPEED_OF_LIGHT": 299792458.0,
+   "SUN_GM": 1.3271244004127942e+20,
+   "SUN_RADIUS": 695700000.0
+  },
+  "inputs": {
+   "results/holding.json": "bc5a0a0b18adab563c430f633daa4631d862cc101817122bbbde9ebe5b865c0c",
+   "results/zoned_aperture.json": "15e510f64240015776919dd2018b38d94dbc44ae65f5cf23ad28935d0fd4eea2",
+   "de440s.bsp": "c1c7feeab882263fc493a9d5a5b2ddd71b54826cdf65d8d17a76126b260a49f2",
+   "scenario.json": "a53b784941518b6e36ccdf728252cf6c8e0c46c1126b6c621ed4e28c23128699"
+  }
+ },
+ "evidence": "The zoned held screen of zoned_aperture.json (26 g/m2 window, 5 g/m2 annulus) on the selected moving trajectory, with DE440s geometry. The direct path samples every node daily over the primary year and integrates two measured plume profiles over the cone of the protected sphere; the plumes leave straight, with no fields, and a tenth of each plume is charge-exchanged fast atoms on the same paths. The slow gas flies test particles from every node every two days for a month, each for 60 days under point-mass gravity, without radiation pressure, collisions or ionisation; lifetimes enter afterward as weights. The magnetosphere case compares ion gyroradii at the September magnets' magnetopause with their stand-off.",
+ "reading_rule": "Compare each delivered share with the allowance share for the same loss budget. Without the magnets the whole straight-line share counts and the solar wind's pickup of the charged exhaust adds to it. With the September magnets the exhaust ions are held off, leaving the fast-neutral share, the slow gas and the magnetosphere's leak, which is open; with_magnets gives the share of the slow gas that must then be captured. Plume values are read from published figures to about +-30%; the fast-neutral tenth comes from one Hall thruster model.",
+ "design": {
+  "case": "core_26g_annulus_5g",
+  "core_sigma_kg_m2": 0.026,
+  "annulus_sigma_kg_m2": 0.005,
+  "protected_radii": 4,
+  "cants_deg": [
+   45.0,
+   60.0,
+   75.0
+  ],
+  "budgets_kg_s": [
+   1.0,
+   10.0,
+   100.0
+  ],
+  "escape_work_fraction": 0.1,
+  "binding_radii": 3.0,
+  "unionized_share": [
+   0.05,
+   0.15
+  ],
+  "gas_temperature_K": 500.0,
+  "molar_mass_kg_mol": {
+   "O2": 0.031998,
+   "Xe": 0.131293
+  },
+  "launch_days": 30.0,
+  "launch_every_days": 2.0,
+  "flight_days": 60.0,
+  "particles_per_thruster": 6,
+  "step_s": 300.0,
+  "check_step_s": 150.0,
+  "lifetimes_days": [
+   10.0,
+   30.0,
+   100.0
+  ],
+  "near_earth_radii": 10.0,
+  "escape_m": 3000000000.0,
+  "direct_every_h": 24.0,
+  "seed": 20261006,
+  "fast_neutral_share_of_beam": 0.1,
+  "standoff_radii": 10.0,
+  "magnetopause_field_T": 7.1e-08,
+  "solar_wind_speed_m_s": 400000.0,
+  "budgets_with_magnets_kg_s": [
+   1.0,
+   10.0
+  ]
+ },
+ "run_key": "9dec127b6e58620f",
+ "plumes": {
+  "gridded_ion_NEXT": {
+   "source": "Young, Matlock, Nakles and Crofton, Far Field Plume Distribution and Divergence for NEXT: DART Mission, AIAA SciTech Forum 2019, figure 5 (retarding potential analyzer above 35 V, grid-edge angle). Beyond 50 degrees the last decade is extended at its own slope; the paper reports a fall of over five decades at high angles.",
+   "angle_deg": [
+    0.0,
+    10.0,
+    15.0,
+    20.0,
+    25.0,
+    30.0,
+    35.0,
+    38.0,
+    40.0,
+    42.0,
+    45.0,
+    50.0
+   ],
+   "relative": [
+    1.0,
+    0.69,
+    0.25,
+    0.0625,
+    0.031,
+    0.0125,
+    0.0052,
+    0.0021,
+    0.00063,
+    0.00042,
+    0.00031,
+    0.00017
+   ]
+  },
+  "hall_BPT4000": {
+   "source": "Goebel and Katz, Fundamentals of Electric Propulsion: Ion and Hall Thrusters (JPL, 2008), figure 8-12 (BPT-4000 ion flux above 50 V at 1 m, laboratory); the flight data of figure 8-6 (SPT-100 on Express-A) fall alike to about 5% of the axial value at 40 degrees.",
+   "angle_deg": [
+    0.0,
+    5.0,
+    10.0,
+    15.0,
+    20.0,
+    25.0,
+    30.0,
+    35.0,
+    40.0,
+    45.0,
+    50.0,
+    55.0,
+    60.0,
+    65.0,
+    70.0,
+    75.0,
+    80.0,
+    85.0,
+    90.0
+   ],
+   "relative": [
+    0.8,
+    1.0,
+    0.6,
+    0.28,
+    0.14,
+    0.08,
+    0.044,
+    0.024,
+    0.014,
+    0.008,
+    0.0048,
+    0.0028,
+    0.0018,
+    0.0014,
+    0.0012,
+    0.0008,
+    0.00032,
+    0.00016,
+    8e-05
+   ]
+  }
+ },
+ "sources": [
+  "protection/report.md, section 8: exhaust isolation and the energy diagnostic.",
+  "atmosphere/loss_response/README.md: returning pickup ions sputter 1-10 molecules each.",
+  "Young, Matlock, Nakles and Crofton, Far Field Plume Distribution and Divergence for NEXT: DART Mission, AIAA SciTech Forum 2019, figure 5 (retarding potential analyzer above 35 V, grid-edge angle). Beyond 50 degrees the last decade is extended at its own slope; the paper reports a fall of over five decades at high angles.",
+  "Goebel and Katz, Fundamentals of Electric Propulsion: Ion and Hall Thrusters (JPL, 2008), figure 8-12 (BPT-4000 ion flux above 50 V at 1 m, laboratory); the flight data of figure 8-6 (SPT-100 on Express-A) fall alike to about 5% of the axial value at 40 degrees.",
+  "Goebel and Katz (2008), chapter 7: a mass utilization efficiency of 95% reported for SPT thrusters, so at least about 5% of the propellant leaves unionized; 15% is the range assumed for less efficient thrusters.",
+  "Heays, Bosman and van Dishoeck, A&A 602, A105 (2017), tables 18-19 scaled to 1 au: O2 photodissociation about 2.4e-6 per s; photoionisation of O, N2 and O2 about 0.5-1.3e-7 per s. Lifetimes of 10-100 days span photoionisation with charge exchange and electron impact in the solar wind.",
+  "Goebel and Katz (2008), figure 8-11: a space-condition plume model of the BPT-4000 at 3 kW makes 0.74 A of charge-exchange ions, about a tenth of its beam; each exchange leaves a fast atom on the beam ion's path.",
+  "protection/report.md, section 10: 71 nT balances 2 nPa of solar-wind pressure; the September magnets (1.5e21 A m2) stand off at 10 lunar radii (atmosphere/loss_response/README.md; requirements C1). Magnetic protection may divert charged exhaust and cannot be credited with removing fast neutrals (section 8)."
+ ],
+ "allowance": {
+  "binding_energy_MJ_kg": 0.9406392920455854,
+  "jet_power_TW": 22.951047642029497,
+  "propellant_kg_s": 51002.32809339888,
+  "per_budget": [
+   {
+    "budget_kg_s": 1.0,
+    "deposited_power_MW": 9.406392920455852,
+    "share_of_jet_power": 4.0984590625964435e-07,
+    "exhaust_kg_s_at_jet_speed": 0.020903095378790783
+   },
+   {
+    "budget_kg_s": 10.0,
+    "deposited_power_MW": 94.06392920455853,
+    "share_of_jet_power": 4.098459062596444e-06,
+    "exhaust_kg_s_at_jet_speed": 0.20903095378790787
+   },
+   {
+    "budget_kg_s": 100.0,
+    "deposited_power_MW": 940.6392920455853,
+    "share_of_jet_power": 4.0984590625964436e-05,
+    "exhaust_kg_s_at_jet_speed": 2.0903095378790786
+   }
+  ]
+ },
+ "direct_path": {
+  "clear": [
+   {
+    "cant_deg": 45.0,
+    "propellant_and_power_factor": 1.0,
+    "clearance_min_deg": 39.11722858077881,
+    "clearance_flow_median_deg": 64.46342053180561,
+    "gridded_ion_NEXT_share": 6.19844410494806e-06,
+    "gridded_ion_NEXT_share_max": 6.694642554774994e-05,
+    "gridded_ion_NEXT_fast_neutral_share": 6.198444104948061e-07,
+    "hall_BPT4000_share": 0.00015637438002237748,
+    "hall_BPT4000_share_max": 0.001256081273913162,
+    "hall_BPT4000_fast_neutral_share": 1.5637438002237747e-05
+   },
+   {
+    "cant_deg": 60.0,
+    "propellant_and_power_factor": 1.414213562373095,
+    "clearance_min_deg": 54.11402375011993,
+    "clearance_flow_median_deg": 70.77115409725218,
+    "gridded_ion_NEXT_share": 1.5943950695087845e-06,
+    "gridded_ion_NEXT_share_max": 1.0925781004652556e-05,
+    "gridded_ion_NEXT_fast_neutral_share": 1.5943950695087846e-07,
+    "hall_BPT4000_share": 6.65498984510057e-05,
+    "hall_BPT4000_share_max": 0.0002865625085397795,
+    "hall_BPT4000_fast_neutral_share": 6.65498984510057e-06
+   },
+   {
+    "cant_deg": 75.0,
+    "propellant_and_power_factor": 2.7320508075688776,
+    "clearance_min_deg": 69.11167744153211,
+    "clearance_flow_median_deg": 77.94432910792483,
+    "gridded_ion_NEXT_share": 4.6019904368314046e-07,
+    "gridded_ion_NEXT_share_max": 1.807351008561345e-06,
+    "gridded_ion_NEXT_fast_neutral_share": 4.6019904368314046e-08,
+    "hall_BPT4000_share": 2.547288401630584e-05,
+    "hall_BPT4000_share_max": 0.00011228607656016567,
+    "hall_BPT4000_fast_neutral_share": 2.547288401630584e-06
+   }
+  ],
+  "through_moon": [
+   {
+    "cant_deg": 45.0,
+    "propellant_and_power_factor": 1.0,
+    "clearance_min_deg": -5.8419804103740285,
+    "clearance_flow_median_deg": 16.225998209944642,
+    "gridded_ion_NEXT_share": 0.014475088045924164,
+    "gridded_ion_NEXT_share_max": 0.08725143653731283,
+    "gridded_ion_NEXT_fast_neutral_share": 0.0014475088045924165,
+    "hall_BPT4000_share": 0.012063091231218752,
+    "hall_BPT4000_share_max": 0.06964830667232697,
+    "hall_BPT4000_fast_neutral_share": 0.0012063091231218754
+   },
+   {
+    "cant_deg": 60.0,
+    "propellant_and_power_factor": 1.414213562373095,
+    "clearance_min_deg": -5.851835195500159,
+    "clearance_flow_median_deg": 9.53262691413564,
+    "gridded_ion_NEXT_share": 0.02406247918726509,
+    "gridded_ion_NEXT_share_max": 0.08740957932265914,
+    "gridded_ion_NEXT_fast_neutral_share": 0.002406247918726509,
+    "hall_BPT4000_share": 0.018908071831281244,
+    "hall_BPT4000_share_max": 0.06978414743681588,
+    "hall_BPT4000_fast_neutral_share": 0.0018908071831281244
+   },
+   {
+    "cant_deg": 75.0,
+    "propellant_and_power_factor": 2.7320508075688776,
+    "clearance_min_deg": -5.822196332439629,
+    "clearance_flow_median_deg": 11.893220389983185,
+    "gridded_ion_NEXT_share": 0.02098274338934793,
+    "gridded_ion_NEXT_share_max": 0.0861508623361674,
+    "gridded_ion_NEXT_fast_neutral_share": 0.0020982743389347932,
+    "hall_BPT4000_share": 0.0165046884018064,
+    "hall_BPT4000_share_max": 0.06870783473023591,
+    "hall_BPT4000_fast_neutral_share": 0.00165046884018064
+   }
+  ],
+  "protected_half_angle_deg": [
+   3.7698983612380284,
+   5.8919801574194945
+  ],
+  "samples": {
+   "dates": 366,
+   "nodes": 96
+  },
+  "profile_totals": {
+   "gridded_ion_NEXT": 0.16421033930299686,
+   "hall_BPT4000": 0.2227546397783717
+  }
+ },
+ "slow_gas": {
+  "O2": {
+   "particles": 17280,
+   "protected_sphere": 0.02192680575747899,
+   "near_earth": 0.12351274351481568,
+   "escaped": 0.30382925720716414,
+   "still_flying": 0.5507311935205411,
+   "cumulative_by_day": [
+    0.0,
+    0.0007473450818974688,
+    0.006985944363653652,
+    0.009632553945459848,
+    0.010408271201740352,
+    0.010607076557266615,
+    0.011000009640987643,
+    0.011335370374238754,
+    0.01160674014498934,
+    0.011977446005472694,
+    0.012174012387061704,
+    0.012543060924849324,
+    0.012962636730990192,
+    0.013102960729283136,
+    0.013273904548428143,
+    0.013491729080305222,
+    0.013722511670727296,
+    0.013808519936843839,
+    0.013823800621709965,
+    0.013879281572741918,
+    0.01395083625360814,
+    0.014028252377743777,
+    0.014134487480126853,
+    0.014227656550266612,
+    0.01445632732580818,
+    0.014784525557675851,
+    0.015183151185574258,
+    0.016234038030097226,
+    0.01701500010609182,
+    0.017153911719781492,
+    0.017491074759780758,
+    0.017708056485609892,
+    0.017881189784036043,
+    0.018079470603061476,
+    0.01814231278857689,
+    0.018297618512048097,
+    0.018550875928318486,
+    0.01889972873414292,
+    0.01901473754604279,
+    0.01922608756974216,
+    0.019377683862195693,
+    0.019677452992609847,
+    0.019677452992609847,
+    0.019761140904968662,
+    0.01979527537316765,
+    0.019899208737479978,
+    0.019899208737479978,
+    0.019899208737479978,
+    0.019899208737479978,
+    0.020040463038498355,
+    0.020215679266022954,
+    0.02040321687776522,
+    0.02055394555924616,
+    0.020731202696814374,
+    0.02086038402830212,
+    0.021259803898496552,
+    0.021481015126996055,
+    0.021723189699857842,
+    0.021795441839406023,
+    0.021795441839406023,
+    0.02192680575747899
+   ],
+   "delivered_by_lifetime": {
+    "10_days": 0.010443955735555099,
+    "30_days": 0.0148979441185069,
+    "100_days": 0.01901191793130427
+   },
+   "entry_speed_median_m_s": 1231.8812328735826,
+   "entry_energy_mean_MJ_kg": 0.798746626260803
+  },
+  "Xe": {
+   "particles": 17280,
+   "protected_sphere": 0.08144193090613264,
+   "near_earth": 0.03643517573924025,
+   "escaped": 0.11494037635292746,
+   "still_flying": 0.7671825170016997,
+   "cumulative_by_day": [
+    0.0,
+    0.0,
+    0.004767452214520484,
+    0.02002038574203298,
+    0.028274959746966553,
+    0.03309985592823131,
+    0.03612227844389273,
+    0.03926952064158338,
+    0.04241021070638349,
+    0.043907595782029823,
+    0.04578082494428466,
+    0.04816319904305411,
+    0.05013171499567453,
+    0.05153956936665225,
+    0.053012127547064525,
+    0.05419467929086628,
+    0.05527529992967093,
+    0.055807036973847604,
+    0.056597844415298,
+    0.057005963331354256,
+    0.057788485059975095,
+    0.05838273508994084,
+    0.058752437158771785,
+    0.05922560642582399,
+    0.059934905402986786,
+    0.06082193071567815,
+    0.06149599629674715,
+    0.06251092419698447,
+    0.06382918754198753,
+    0.0646888323309704,
+    0.06551749074094182,
+    0.06637348297935211,
+    0.06712843593889713,
+    0.06724128316019058,
+    0.06766157094942817,
+    0.0684031453673072,
+    0.06929056043524193,
+    0.06986169050053297,
+    0.0708871901166009,
+    0.07236423663476764,
+    0.07300966393095029,
+    0.07348503554611593,
+    0.07383715032170297,
+    0.07420588366523168,
+    0.0748779881343098,
+    0.07534527605017952,
+    0.07569434056166832,
+    0.0761105480582479,
+    0.0764372641802779,
+    0.07689900218323426,
+    0.0772242187058265,
+    0.07787650047735284,
+    0.07803273108222085,
+    0.0786813327309911,
+    0.07925878067788042,
+    0.0798535205972064,
+    0.08026897943707265,
+    0.08054819356211346,
+    0.08099229408146716,
+    0.08113156334745589,
+    0.08144193090613264
+   ],
+   "delivered_by_lifetime": {
+    "10_days": 0.03512871661288416,
+    "30_days": 0.054920392746778526,
+    "100_days": 0.07080690400007728
+   },
+   "entry_speed_median_m_s": 1172.658553513093,
+   "entry_energy_mean_MJ_kg": 0.6931540544215758
+  },
+  "integrator_check": {
+   "step_s": 300.0,
+   "check_step_s": 150.0,
+   "particles": 2304,
+   "protected_sphere_count": [
+    91,
+    91
+   ],
+   "fate_changed": 0
+  },
+  "propagation_cpu_s": 1308.238732422
+ },
+ "slow_gas_implied": {
+  "unionized_kg_s": [
+   2550.116404669944,
+   7650.3492140098315
+  ],
+  "by_species": {
+   "O2": {
+    "10_days": {
+     "delivered_kg_s": [
+      26.633302850885812,
+      79.89990855265742
+     ],
+     "deposited_MW": [
+      21.273260798327268,
+      63.81978239498179
+     ]
+    },
+    "30_days": {
+     "delivered_kg_s": [
+      37.991491692460556,
+      113.97447507738165
+     ],
+     "deposited_MW": [
+      30.345575815968193,
+      91.03672744790457
+     ]
+    },
+    "100_days": {
+     "delivered_kg_s": [
+      48.48260380085769,
+      145.44781140257305
+     ],
+     "deposited_MW": [
+      38.72531621827426,
+      116.17594865482278
+     ]
+    }
+   },
+   "Xe": {
+    "10_days": {
+     "delivered_kg_s": [
+      89.58231650951748,
+      268.7469495285524
+     ],
+     "deposited_MW": [
+      62.09434589304892,
+      186.28303767914673
+     ]
+    },
+    "30_days": {
+     "delivered_kg_s": [
+      140.05339449447612,
+      420.16018348342834
+     ],
+     "deposited_MW": [
+      97.07857822935054,
+      291.2357346880516
+     ]
+    },
+    "100_days": {
+     "delivered_kg_s": [
+      180.56584745448694,
+      541.6975423634608
+     ],
+     "deposited_MW": [
+      125.1599492531454,
+      375.4798477594362
+     ]
+    }
+   }
+  }
+ },
+ "magnetosphere": {
+  "standoff_km": 17374.0,
+  "magnetopause_field_nT": 71.0,
+  "gyroradius": {
+   "O2": {
+    "exhaust_ion_km": 140.12784526524385,
+    "pickup_ion_km": 1868.3712702032512,
+    "pickup_diameter_over_standoff": 0.21507669738727422
+   },
+   "Xe": {
+    "exhaust_ion_km": 574.9673475970266,
+    "pickup_ion_km": 7666.231301293688,
+    "pickup_diameter_over_standoff": 0.8824946818572221
+   }
+  },
+  "slow_gas_30_day_MW": [
+   30.345575815968193,
+   291.2357346880516
+  ],
+  "with_magnets": [
+   {
+    "budget_kg_s": 1.0,
+    "thruster": "gridded_ion_NEXT",
+    "cant_deg": 45.0,
+    "fast_neutral_MW": 14.226078595911982,
+    "allowance_MW": 9.406392920455852,
+    "slow_gas_capture_needed": null
+   },
+   {
+    "budget_kg_s": 1.0,
+    "thruster": "hall_BPT4000",
+    "cant_deg": 45.0,
+    "fast_neutral_MW": 358.89558458864104,
+    "allowance_MW": 9.406392920455852,
+    "slow_gas_capture_needed": null
+   },
+   {
+    "budget_kg_s": 1.0,
+    "thruster": "gridded_ion_NEXT",
+    "cant_deg": 60.0,
+    "fast_neutral_MW": 3.6593037200513043,
+    "allowance_MW": 9.406392920455852,
+    "slow_gas_capture_needed": [
+     0.8106119575631726,
+     0.9802665383540232
+    ]
+   },
+   {
+    "budget_kg_s": 1.0,
+    "thruster": "hall_BPT4000",
+    "cant_deg": 60.0,
+    "fast_neutral_MW": 152.73898899212568,
+    "allowance_MW": 9.406392920455852,
+    "slow_gas_capture_needed": null
+   },
+   {
+    "budget_kg_s": 1.0,
+    "thruster": "gridded_ion_NEXT",
+    "cant_deg": 75.0,
+    "fast_neutral_MW": 1.056205017638817,
+    "allowance_MW": 9.406392920455852,
+    "slow_gas_capture_needed": [
+     0.7248301382232112,
+     0.9713284226203865
+    ]
+   },
+   {
+    "budget_kg_s": 1.0,
+    "thruster": "hall_BPT4000",
+    "cant_deg": 75.0,
+    "fast_neutral_MW": 58.4629374638127,
+    "allowance_MW": 9.406392920455852,
+    "slow_gas_capture_needed": null
+   },
+   {
+    "budget_kg_s": 10.0,
+    "thruster": "gridded_ion_NEXT",
+    "cant_deg": 45.0,
+    "fast_neutral_MW": 14.226078595911982,
+    "allowance_MW": 94.06392920455853,
+    "slow_gas_capture_needed": [
+     0.0,
+     0.7258651975034505
+    ]
+   },
+   {
+    "budget_kg_s": 10.0,
+    "thruster": "hall_BPT4000",
+    "cant_deg": 45.0,
+    "fast_neutral_MW": 358.89558458864104,
+    "allowance_MW": 94.06392920455853,
+    "slow_gas_capture_needed": null
+   },
+   {
+    "budget_kg_s": 10.0,
+    "thruster": "gridded_ion_NEXT",
+    "cant_deg": 60.0,
+    "fast_neutral_MW": 3.6593037200513043,
+    "allowance_MW": 94.06392920455853,
+    "slow_gas_capture_needed": [
+     0.0,
+     0.689582648292314
+    ]
+   },
+   {
+    "budget_kg_s": 10.0,
+    "thruster": "hall_BPT4000",
+    "cant_deg": 60.0,
+    "fast_neutral_MW": 152.73898899212568,
+    "allowance_MW": 94.06392920455853,
+    "slow_gas_capture_needed": null
+   },
+   {
+    "budget_kg_s": 10.0,
+    "thruster": "gridded_ion_NEXT",
+    "cant_deg": 75.0,
+    "fast_neutral_MW": 1.056205017638817,
+    "allowance_MW": 94.06392920455853,
+    "slow_gas_capture_needed": [
+     0.0,
+     0.6806445325586774
+    ]
+   },
+   {
+    "budget_kg_s": 10.0,
+    "thruster": "hall_BPT4000",
+    "cant_deg": 75.0,
+    "fast_neutral_MW": 58.4629374638127,
+    "allowance_MW": 94.06392920455853,
+    "slow_gas_capture_needed": [
+     0.0,
+     0.8777588479007263
+    ]
+   }
+  ]
+ },
+ "open": "The charged exhaust, 85-95% of the flow, is a heavy-ion source about 10^5 times the solar wind's own mass flux through the aperture. Without magnets the wind loads, slows and carries it downstream over the Moon, energising picked-up oxygen to tens of keV; the loss response credits each returning pickup ion with 1-10 sputtered molecules. The September magnets hold off exhaust ions and picked-up oxygen, whose gyroradii at the magnetopause are small against the stand-off; xenon picked up at solar-wind speed gyrates on a scale near the stand-off, and entry through the cusps and by reconnection is open. No model here follows that plasma.",
+ "resources": {
+  "cpu_s": 1493.859405107,
+  "wall_s": 1496.111916902999,
+  "max_rss_MiB": 267.203125,
+  "numerical_threads": 1
+ }
+}

@@ -1,0 +1,70 @@
+{
+  "schema": "terluna.research.stopped-return-budget/1",
+  "producer": {
+    "source_hashes": {
+      "research/studies/solar_shield_array/return_budget.py": "29113674929331d550381a7013ff1b4b6f04d6d985417d19a01de0be4e7eabe1",
+      "research/studies/solar_shield_array/fleet_run.py": "9b8bc9765b9288745ea7d4d69d59e857e76e54d29cc91b37160503e9d9090833",
+      "research/studies/solar_shield_array/scenario.json": "a53b784941518b6e36ccdf728252cf6c8e0c46c1126b6c621ed4e28c23128699",
+      "protection/dynamics/active_formation.py": "597c12c6a4a89c0ea70663fddd69b9b5d9e599c88a2bd1742f5009d19e050b7a",
+      "protection/dynamics/parallel_shadow.py": "98d09fc9e5812b3592cbc5e24e0615f9f9aa3a75c7f33afff0fe82d0e40c3c24",
+      "protection/dynamics/pattern_return.py": "a1a3f85e5f7744d0418574d0fc2a033d4ab69d9d55eba9bfbb85974c7ab64757"
+    },
+    "constants": {
+      "AU": 149597870700.0,
+      "JULIAN_DAY": 86400.0,
+      "MOON_RADIUS": 1737400.0,
+      "SOLAR_CONSTANT": 1361.0,
+      "SPEED_OF_LIGHT": 299792458.0
+    },
+    "inputs": {
+      "return_screen.json": "f0278c63a032753c4d20ec1fcf7fe65d23a68b56a33ef9eb04b475b9bdac5504",
+      "return_prefix.json": "2ff6fe2b757ded5fe8f6a66e34867b3c12cd3500edfbd19159b3d10d6dc2e637"
+    }
+  },
+  "frozen_state_diagnostic": {
+    "at_s": 24461.411095731266,
+    "actual_command_clearance_m": 100.00000000000273,
+    "sun_facing_plane_minimum_clearance_m": 2616.126490279023,
+    "sun_facing_limiting_pair": [
+      338,
+      339
+    ],
+    "failed_pair_centre_distance_m": 8401.968076660656,
+    "interpretation": "Same saved positions with a changed common plane; no alternative force history was propagated. A coplanar pair closer than one side length cannot be separated by changing square roll alone."
+  },
+  "linear_prediction_prefix_discrepancy_m": 58.14180042832618,
+  "prefix_between_sample_crossing_audit": {
+    "crossing_near_encounters": 0,
+    "physical_intersections": 0,
+    "witnesses": []
+  },
+  "prefix_crossing_audit_scope": "Coplanarity roots on a 30 s Hermite reconstruction of the tighter coupled prefix, with finite-square tests; no continuous certificate.",
+  "linear_comparison_scope": "120 s Hermite reconstruction of the saved variational position/velocity proposal; diagnostic only.",
+  "executed_prefix": {
+    "members": 361,
+    "optical_mass_kg": 1805000000.0,
+    "duration_s": 2861.411095731266,
+    "mean_delta_v_m_s": 0.022263867511134138,
+    "maximum_delta_v_m_s": 0.06117872692959343,
+    "optical_mass_impulse_N_s": 40186280.85759712,
+    "propulsion_energy_J": 1217828215931.7458,
+    "propellant_kg": 1894.3994470049379,
+    "thrust_arcs_started": 1,
+    "thrust_arcs_completed": 0,
+    "mass_scope": "50 g/m2 optical mass; hardware, attitude actuation and propellant feedback unclosed."
+  },
+  "endpoint_only_proposal": {
+    "mean_delta_v_m_s": 0.4376602357567934,
+    "calendar_normalized_m_s_per_day": 0.22824718514829778,
+    "interpretation": "Geometrically rejected variational proposal, not an operating-cost measurement or universal lower bound."
+  },
+  "measured_recurring_delta_v_m_s_per_day": null,
+  "fleet_propulsion_W": null,
+  "collection_capacity_W": null,
+  "delivered_power_W": null,
+  "full_return_executed": false,
+  "handovers_executed": 0,
+  "recovery_executed": false,
+  "accepted_fleet": false,
+  "held_screen_comparison_TW": 238.35
+}

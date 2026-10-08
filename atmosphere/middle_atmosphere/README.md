@@ -16,7 +16,9 @@ exobase. Equations, data and limits are in [METHODS.md](METHODS.md).
 | [escape.py](escape.py) | Exobase temperature and molecular loss with each case's upper temperature as the thermal column's base; heating by ultraviolet leaking through a filter; bounds on atomic-oxygen loss |
 | [lbl_check.py](lbl_check.py) | Re-solves a finished case's upper air with line-by-line CO2 cooling, to measure the correlated-k error there |
 | [benchmarks.py](benchmarks.py) | Line-by-line thermal and solar fluxes on the equilibrium profiles, for checking a 3-D model's radiation; writes `results/radiation_benchmarks.json` |
+| [limb_heat.py](limb_heat.py) | Short-wave sunlight that passes the solar shield's window, annulus films and gaps, traced through the air along slant paths above the limb: where it heats, the state the heated air settles to, its loss, and the gap transmission each budget allows; writes `results/limb_heat.json` |
 | [inputs.json](inputs.json), [fetch_inputs.py](fetch_inputs.py) | Ultraviolet cross-sections and quantum yields (JPL recommendations via the MPI-Mainz atlas), hash-checked, not redistributed |
+| [limb_inputs.json](limb_inputs.json), [fetch_limb_inputs.py](fetch_limb_inputs.py) | X-ray and extreme-ultraviolet absorption of N2, O2 and O (CXRO atomic scattering factors, Leiden photoabsorption database) and FISM2 daily X-ray spectra for the solar cycle, hash-checked, not redistributed |
 
 ## Run
 
@@ -31,13 +33,16 @@ python -m atmosphere.middle_atmosphere.balance
 python -m atmosphere.middle_atmosphere.lbl_check moon_1.2atm_edge_200nm moon_1.2atm_titania_stack
 python -m atmosphere.middle_atmosphere.escape
 python -m atmosphere.middle_atmosphere.benchmarks
+python -m atmosphere.middle_atmosphere.fetch_limb_inputs --download
+OPENBLAS_NUM_THREADS=1 python -m atmosphere.middle_atmosphere.limb_heat   # after atmosphere.loss_response.tides
 ```
 
 Results are written in [results/](results/): `middle_atmosphere.csv` (one row per
 case) with `middle_atmosphere.json` (schema, producer hashes, evidence),
-`profiles/<case>.csv`, `balance.json`, `lbl_check.json`, `escape_coupling.csv`
-and `radiation_benchmarks.json`. A case takes 7–15 minutes on four cores, and
-10–20 minutes on three with non-equilibrium CO2 cooling.
+`profiles/<case>.csv`, `balance.json`, `lbl_check.json`, `escape_coupling.csv`,
+`radiation_benchmarks.json` and `limb_heat.json`. A case takes 7–15 minutes on four cores, and
+10–20 minutes on three with non-equilibrium CO2 cooling. The limb tracing takes
+about 50 CPU minutes and keeps each case's heat tables in the ignored `cache/limb_heat/`.
 
 ## Results (2026-09-24)
 
@@ -195,14 +200,14 @@ aperture.
 
 | 1.2 atm, upper air | Base | Exobase at 0 / 10⁻⁶ / 3×10⁻⁶ / 10⁻⁵ W/m² | 0.1% leak: quiet Sun / solar maximum | Film alone: quiet Sun / solar maximum | Loss at solar maximum: N2 and O2 + atomic O |
 |---|---|---|---|---|---|
-| Titania stack, collisional | 142 K | 142 / 157 / 188 / 299 K | 167 / 206 K | 142 / 144 K | 3×10⁻⁵ kg/s + none |
-| Titania stack, LTE | 163 K | 163 / 179 / 209 / 316 K | 189 / 228 K | 163 / 165 K | 3×10⁻³ kg/s + none |
-| Titania stack, all heats | 192 K | 192 / 207 / 239 / 313 K | 218 / 258 K | 192 / 193 K | 0.5 kg/s + none |
-| Titania stack, all heats, 280 ppm CO2 | 197 K | 197 / 212 / 244 / 310 K | 223 / 263 K | 197 / 198 K | 1.0 kg/s + none |
-| Titania stack, all heats, 150 ppm CO2 | 206 K | 206 / 222 / 253 / 304 K | 233 / 270 K | 206 / 208 K | 3.6 kg/s + none |
-| 200-nm edge, collisional | 200 K | 200 / 216 / 247 / 308 K | 226 / 266 K | | 1.6 + 0.8 kg/s |
-| 200-nm edge, LTE | 200 K | 200 / 216 / 248 / 308 K | 227 / 266 K | | 1.7 + 0.8 kg/s |
-| 200-nm edge, all heats | 215 K | 215 / 231 / 261 / 296 K | 242 / 274 K | | 9.5 + 2.7 kg/s |
+| Titania stack, collisional | 142 K | 142 / 157 / 188 / 299 K | 167 / 207 K | 142 / 142 K | 3×10⁻⁵ kg/s + none |
+| Titania stack, LTE | 163 K | 163 / 179 / 209 / 316 K | 189 / 229 K | 163 / 164 K | 3×10⁻³ kg/s + none |
+| Titania stack, all heats | 192 K | 192 / 207 / 239 / 313 K | 218 / 259 K | 192 / 192 K | 0.5 kg/s + none |
+| Titania stack, all heats, 280 ppm CO2 | 197 K | 197 / 212 / 244 / 310 K | 223 / 264 K | 197 / 197 K | 1.1 kg/s + none |
+| Titania stack, all heats, 150 ppm CO2 | 206 K | 206 / 222 / 253 / 304 K | 233 / 271 K | 206 / 206 K | 3.9 kg/s + none |
+| 200-nm edge, collisional | 200 K | 200 / 216 / 247 / 308 K | 226 / 266 K | | 1.7 + 0.8 kg/s |
+| 200-nm edge, LTE | 200 K | 200 / 216 / 248 / 308 K | 227 / 267 K | | 1.8 + 0.8 kg/s |
+| 200-nm edge, all heats | 215 K | 215 / 231 / 261 / 296 K | 242 / 274 K | | 10 + 2.8 kg/s |
 | Earlier assumption, 180 K at 0.1 Pa | 180 K | 180 / 194 / 224 / 317 K | | | |
 
 - **Blocking 99.9% below 175 nm keeps the exobase near the 250 K target, but
@@ -210,14 +215,15 @@ aperture.
   exobase is 226 K for the quiet Sun and 266 K near solar maximum.
   Interpolating, blocking 99.95% would hold it near 233 K at solar maximum
   (248 K for the upper bound). Behind the titania stack the same 0.1% leak
-  gives 167–206 K.
+  gives 167–207 K.
 - **The titania stack's film lets almost no heat through.**
   Its 10 µm of silica and 1 µm of titania pass only hard X-rays shorter than
   about 1.5 nm. From 5 nm to 200 nm they transmit less than 10⁻²⁰. The
   heat that reaches the upper air is at most 1×10⁻⁹ W/m² for the quiet Sun
-  and 1×10⁻⁷ W/m² at solar maximum, with X-rays counted a hundred times
-  stronger there. That is 1,700 and 40 times less than a 0.1% leak, so the
-  film alone holds the exobase within 1.5 K of its base, at 142–193 K. Beyond
+  and 2×10⁻⁸ W/m² at solar maximum, where FISM2's measured spectra raise
+  these X-rays about twentyfold (`escape.xray_cycle`). That is 1,700 and 220
+  times less than a 0.1% leak, so the film alone holds the exobase within half
+  a kelvin of its base, at 142–192 K. Beyond
   that, light passing gaps, pinholes and edges of the aperture warms it (a
   design number, not a material one), and so does the sky's own Lyman-alpha.
 - **The sky's Lyman-alpha is not in these tables; the loss response adds it.**
@@ -227,8 +233,11 @@ aperture.
   shield blocks it. [atmosphere/loss_response](../loss_response/README.md)
   deposits it above the base (O2 absorption over the column above 0.3 Pa, taken
   with gravity at the base radius, for light from the whole sky): 2.1–2.8×10⁻⁶
-  W/m² at quiet Sun. That raises the exobase by 31–42 K at quiet Sun and 47–61 K
-  at solar maximum (a solar-cycle factor of 1.5 assumed), for every shield.
+  W/m² at quiet Sun. Spread with the column's 'middle' shape that raises the
+  exobase by 31–42 K at quiet Sun and 47–61 K at solar maximum (a solar-cycle
+  factor of 1.5 assumed), for every shield; placed where O2 absorbs it, within a
+  few e-folds of pressure above the base, by 6–9 K and 10–14 K, as the loss
+  response takes it since 7 October.
 - **Some loss channels are handled downstream or not yet included.** Earth's
   tide lowering the escape barrier is in the
   [loss response](../loss_response/README.md): test molecules in the Earth–Moon
@@ -243,24 +252,141 @@ aperture.
   air's main coolant. In the warmest treatment (all absorbed near-infrared
   heats), cutting it from 400 to 280 ppm raises the base by 5 K and to 150 ppm
   by 15 K, and the exobase follows one for one: behind the film alone it stays
-  at 197–208 K. Only the 0.1% leak at solar maximum passes 250 K, as it already
+  at 197–206 K. Only the 0.1% leak at solar maximum passes 250 K, as it already
   does at 400 ppm. 150 ppm (18 Pa) lies below the plant-growth floor
   ([research/studies/atmospheric_co2](../../research/studies/atmospheric_co2/)), so any CO2 level
   biology accepts is safe here.
-- **The losses stay small either way.** At 266 K, 2.4 kg/s removes about 0.3% of
+- **The losses stay small either way.** At 267 K, 2.6 kg/s removes about 0.3% of
   an atmosphere of 2.8×10¹⁸ kg in 100 million years.
 - **Atomic oxygen adds about half again behind the 200-nm edge.** O2 photolysis
   there leaves 200 ppm of O at the base. With the chemistry's eddy mixing
   continued upward, the homopause is at 4–9×10⁻⁵ Pa, O makes up about 1% of
   the gas at the exobase, and its escape is about half the molecular loss. The
   bounds at solar maximum are wide: 0.02 kg/s if eddy mixing reached the
-  exobase, 31 kg/s if the oxygen separated from the base up. The escaping oxygen's 63-µm cooling, which
+  exobase, 33 kg/s if the oxygen separated from the base up. The escaping oxygen's 63-µm cooling, which
   would lower the exobase, is not included. Behind the titania stack there is
-  no atomic oxygen.
+  none below the base; above it the glow and the light through gaps make it,
+  which the loss response's oxygen step follows
+  ([oxygen.py](../loss_response/oxygen.py)), and their odd oxygen builds
+  1.6–2.9 DU of ozone below the base.
 - **At these leaks the base carries through almost one for one.** Across the
   three treatments the base spans 142–215 K and the exobase at the
-  solar-maximum leak 206–274 K, so the upper air matters about as much as the
+  solar-maximum leak 207–274 K, so the upper air matters about as much as the
   leak. Only at 10⁻⁵ W/m² does the deposited heat dominate (296–316 K).
-- All of these are global means with no infrared cooling in the thermal column.
+- All of these are global means with no infrared cooling in the thermal column
+  (the loss response's column radiates since 8 October; see below).
   The day–night swing of the upper air (above) is tens of kelvin, and the
   circulation it drives is not included.
+
+### Slant paths above the limb (2026-10-07)
+
+The heat counts above put a quarter of the light that reaches the disk above
+the base. [limb_heat.py](limb_heat.py) traces the sunlight that passes the
+solar shield along its actual paths through the air, for the ring fleet's
+aperture: a screen at 20,000 km covering four lunar radii, with the window
+stack over the disk, a light film over the annulus, gaps that pass a grey share
+of the band over the whole aperture, and open sky beyond it. It takes the loss
+response's six cases, Lyman-α glow and Earth's tide, and since 8 October its
+thermal column's infrared cooling (CO2's 15 µm band above all,
+[infrared.py](../loss_response/infrared.py)), finds the state the heated
+air settles to and the gap transmission each budget allows, and writes
+[results/limb_heat.json](results/limb_heat.json). It keeps each ray's deposit,
+so the product also gives the heat for protected radii of 2 to 10 lunar radii,
+which the loss response reads ([traced.py](../loss_response/traced.py)): on
+7 October the author made this traced count O1's and took FISM2's measured rise
+of the X-rays at solar maximum, which these tables use. Methods and limits are
+in [METHODS.md](METHODS.md).
+
+- **Gaps heat the thermosphere 2.5–4.2 times the escape model's count.** A
+  grey transmission through gaps over the aperture lights the air above the
+  limb as well as the disk, and the tall air takes the extreme ultraviolet along slant paths out
+  to near the exobase. Around the quiescent air the factor is 2.5 behind the
+  titania stack with collisional upper air, 2.7 in LTE, 3.2 with all
+  near-infrared heating and 3.8–4.2 behind the 200-nm edge. As the heat
+  swells the air it grows, to 3.1–3.9 at the heats where the cooler titania
+  cases lose 1–100 kg/s. On rays tangent between the base and the exobase,
+  [absorption.py](../loss_response/absorption.py), with band-mean cross
+  sections, finds the same heating within 5%.
+- **The films pass X-rays near 1 nm, which the thermosphere stops in a ring
+  just above the limb.** The 4 µm film passes 0.75–1.35 nm, the 2 µm film
+  0.85–2.55 nm and the window stack 0.55–0.95 nm. Absorbing them takes a
+  column near 10²³ m⁻², so only rays tangent between the limb and about 1.5
+  lunar radii give them up: 7–17% of what passes the annulus, none of it below
+  the base. Over the annulus the 4 µm film heats the thermosphere 1.1–2.5 times
+  what the escape model's film count gives it over the disk.
+- **The films' X-rays rise about twentyfold from quiet Sun to solar maximum.**
+  The escape model used to multiply every X-ray below 10 nm by 100 at solar
+  maximum. FISM2's daily spectra, the year around each of the last three maxima
+  over the WHI 2008 quiet week, give by band 53 below 0.5 nm falling to 3.6 at
+  5–10 nm. Weighted by the light each passes, the mean of the three maxima is 18
+  for the 4 µm film (13–21 across them), 16 for the 2 µm film, 20 for the window
+  stack and 6.0 for the whole band below 10 nm (4.6–6.9), which sets a gap's
+  X-rays. Single days at maximum run up to about twice the yearly mean.
+- **With those factors the 4 µm film adds a tenth to a fifth of the glow's
+  heat.** At solar maximum it heats the thermosphere by 3.5–5.2×10⁻⁷ W/m²
+  behind the titania stack (2.5–6.0×10⁻⁷ across the three maxima), 11–14% of
+  the 3.1–3.8×10⁻⁶ W/m² the glow gives there, and 7–8×10⁻⁷ W/m² behind the
+  200-nm edge. With a factor of 100 it would add 2.0–2.9×10⁻⁶ W/m², about as
+  much as the glow. The 2 µm film adds 1.3–1.9×10⁻⁶ W/m², and the window stack
+  over the annulus 2–3×10⁻⁸ W/m².
+
+The states with the 4 µm film and the ring fleet's 4-radius shadow, as
+molecular loss with Earth's tide (kg/s), against the escape model's disk count
+at the same transmission, with the heat spread by the column's 'middle' shape as
+the tables trace it and the column radiating in the infrared. Solar maximum is
+cycle 21's year, with the range across the years around each maximum from cycle
+19 to 25.
+
+| 1.2 atm, titania stack | Quiet Sun, standard level (2×10⁻⁴): traced / disk count | Solar maximum, no gaps | Tight level (3×10⁻⁵) | Standard level | Disk count, standard level |
+|---|---|---|---|---|---|
+| Collisional upper air | 4×10⁻⁸ / 1×10⁻⁸ | 2×10⁻⁷ (4×10⁻⁸–6×10⁻⁷) | 2×10⁻⁷ (6×10⁻⁸–9×10⁻⁷) | 1×10⁻⁶ (3×10⁻⁷–5×10⁻⁶) | 2×10⁻⁷ |
+| LTE | 2×10⁻⁵ / 1×10⁻⁵ | 6×10⁻⁵ (2×10⁻⁵–2×10⁻⁴) | 7×10⁻⁵ (3×10⁻⁵–2×10⁻⁴) | 3×10⁻⁴ (1×10⁻⁴–9×10⁻⁴) | 5×10⁻⁵ |
+| All near-infrared heats | 0.015 / 0.008 | 0.032 (0.016–0.071) | 0.039 (0.019–0.087) | 0.11 (0.048–0.26) | 0.028 |
+
+- **Every case settles at the standard level, at every maximum.** CO2 radiates
+  most of the heat the upper air takes, so the air stays within a few kelvin of
+  the base temperature for three or four e-folds of pressure above the base.
+  At the standard level and solar maximum the exobase sits at 1.9 lunar radii
+  (collisional, 183 K), 2.15 (LTE, 206 K) and, with all near-infrared heating,
+  2.7 (238 K). Behind the 200-nm edge the standard level gives 0.08–0.09 kg/s at
+  quiet Sun with collisional or LTE upper air and 0.5–0.6 kg/s at solar maximum
+  (2.9 lunar radii, 250 K), and with all near-infrared heating 1.3 and 6.5 kg/s
+  (3.5 lunar radii at maximum). Without the infrared cooling the same tables ran
+  the 200-nm edge away at every maximum. Beyond four lunar radii the
+  thermosphere reaches unfiltered light outside the aperture, and past a
+  threshold, at 4.5–5.8 lunar radii at quiet Sun, that light outgrows the heat
+  that swells the air ([the loss response](../loss_response/README.md)).
+- **The gaps a budget allows fall to about a third.** For the same allowance of
+  molecular loss, traced gaps may pass 0.28–0.35 of what the disk count allows
+  in the cooler titania cases, at quiet Sun and at solar maximum alike, and
+  0.25–0.29 with all near-infrared heating. For 1 kg/s at solar maximum:
+  2.4×10⁻³ (collisional), 1.6×10⁻³ (LTE) and 6.2×10⁻⁴ with all near-infrared
+  heating, against the disk count's 7.0×10⁻³, 5.2×10⁻³ and 2.4×10⁻³. These
+  allowances leave out the solar wind and the exosphere step's losses, so they
+  compare the two counts at the same allowance.
+- **The tables keep the light by band and by height.** Fifteen bands of the
+  light below 175 nm are traced apart, so any solar spectrum weights them, and
+  each part of the light's heat is followed in log pressure above the base. At
+  the maxima since 1957 FISM2's daily record puts the light from 10 to 175 nm at
+  1.25-1.64 times the quiet week, weighted by energy, where the escape model
+  takes 2.5: the extreme ultraviolet below 121 nm rises 1.6-2.4, Lyman-α 1.3-1.9
+  and the far ultraviolet from 122 to 175 nm, which carries most of the energy,
+  1.10-1.27 ([loss_response/cycle.py](../loss_response/cycle.py)). Cycle 19's
+  year of 1957-58, the strongest, gives the top of each range and is a stress
+  case. The loss response's solar maximum, and that of this product's scenarios,
+  is cycle 21's year of 1979-80, the strongest since FISM2 added the MgII and
+  Lyman-α proxies in 1978; the escape model here keeps its 2.5, which the loss
+  response carries as a second stress case. Through gaps
+  the far ultraviolet and Lyman-α heat the lower thermosphere and the extreme
+  ultraviolet its upper half.
+- **Where the heat lies matters as much as how much.** The thermal column
+  spread the heat with a fixed shape in log pressure, its 'middle' one, which
+  the table above follows. The traced light lands at a mean depth 0.38–0.43 of
+  the way from the base to the exobase, at about the depth of the disk's own
+  light, and the sky's glow within a few e-folds of pressure above the base,
+  where CO2 radiates its heat. Given that shape (the scenarios'
+  `traced_shape`), the same heat leaves the exobase 17–42 K cooler and the
+  ultraviolet-driven loss 6–3,600 times smaller: behind the titania stack at a
+  transmission of 2×10⁻⁴ and solar maximum, 0.003 kg/s against 0.11 with all
+  near-infrared heating and 2×10⁻⁶ against 3×10⁻⁴ in LTE. The loss response
+  takes the traced shape since 7 October.

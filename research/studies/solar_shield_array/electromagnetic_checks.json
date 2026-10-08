@@ -1,0 +1,102 @@
+{
+  "schema": "terluna.research.electromagnetic-checks/1",
+  "date": "2026-10-05",
+  "starting_commit": "5dc49e11e9ba1ab782c3904793ce052f30b9e4b4",
+  "early_published_commit": "bfb1c4e46c1e3db968d415149a65856021571176",
+  "numerical_runs": [
+    {
+      "run": "em_run1",
+      "wall_s": 16.42610713799877,
+      "peak_rss_MiB": 1027.88671875,
+      "completed": true
+    },
+    {
+      "run": "em_audit1",
+      "wall_s": 3.567994078002812,
+      "peak_rss_MiB": 145.78125,
+      "completed": true
+    },
+    {
+      "run": "em_audit2",
+      "wall_s": 5.541144652001094,
+      "peak_rss_MiB": 148.43359375,
+      "completed": true
+    },
+    {
+      "run": "em_run2",
+      "wall_s": 31.05906184700143,
+      "peak_rss_MiB": 1027.87109375,
+      "completed": true
+    },
+    {
+      "run": "em_audit3",
+      "wall_s": 4.880992898004479,
+      "peak_rss_MiB": 148.50390625,
+      "completed": true
+    },
+    {
+      "run": "em_audit4",
+      "wall_s": 8.20647385600023,
+      "peak_rss_MiB": 152.1015625,
+      "completed": true
+    }
+  ],
+  "inspection_charge_s": 10,
+  "total_numerical_wall_charge_s": 79.68177446900881,
+  "budget": {
+    "wall_s": 1200,
+    "processes": 1,
+    "numerical_threads": 1,
+    "address_space_GiB": 2,
+    "new_raw_limit_MiB": 128
+  },
+  "new_raw_output_MiB": 10.659297943115234,
+  "early_make_check": {
+    "python_passed": 695,
+    "skipped": 55,
+    "failed": 13,
+    "python_wall_s": 32.81
+  },
+  "targeted_suite": {
+    "command": "python -m pytest engineering/test_electromagnetic.py research/studies/solar_shield_array/test_electromagnetic_study.py protection/dynamics research/studies/solar_shield_array engineering/test_shield_power.py -q",
+    "passed": 160,
+    "wall_s": 10.75,
+    "scope": "Before final expanded field-orientation audit; all ten new tests also pass in the final full repository gate."
+  },
+  "final_make_check": {
+    "python_passed": 705,
+    "skipped": 55,
+    "failed": 13,
+    "python_wall_s": 28.65,
+    "baseline_failures_unchanged": true,
+    "failures": [
+      "atmosphere/tests/test_absorption.py::test_ion_production_falls_with_the_shadow_and_ends_at_the_outer_radius",
+      "atmosphere/tests/test_absorption.py::test_ionization_rate_is_of_the_tabulated_order",
+      "atmosphere/tests/test_absorption.py::test_design_case_needs_a_radius_just_under_the_exobase",
+      "atmosphere/tests/test_exosphere.py::test_dissociation_rates_agree_with_heays",
+      "atmosphere/tests/test_exosphere.py::test_ions_made_match_the_absorption_step",
+      "atmosphere/tests/test_exosphere.py::test_charge_exchange_thin_limit_counts_the_swept_exosphere",
+      "atmosphere/tests/test_exosphere.py::test_magnetosphere_accounts_for_every_ion_and_a_stronger_one_keeps_more",
+      "atmosphere/tests/test_exosphere.py::test_levels_are_ordered_and_wider_shadows_never_lose_more",
+      "climate/tests/test_cm1_run.py::test_the_terrain_build_forces_each_column_at_its_own_height",
+      "climate/tests/test_exoplasim_run.py::RunnerTests::test_process_lookup_finds_this_process",
+      "climate/tests/test_ring_comfort.py::test_hours_are_shares_of_the_lunar_day",
+      "climate/tests/test_ring_comfort.py::test_the_rings_land_is_pooled_by_latitude_and_height_and_counted_in_shares",
+      "research/studies/protection_architecture/test_run.py::test_design_point_holds_together"
+    ],
+    "later_targets_reached": false,
+    "reason": "Missing pinned spectral inputs and generated climate configuration; existing process-lookup failure. Dependent tests retain these baseline failures."
+  },
+  "unexecuted": [
+    "New trajectory propagation with hardware feedback",
+    "Full return, handover, repeatable duty or global coverage",
+    "Coupled kinetic plasma transport or radiation-dose simulation",
+    "Detailed structural, HV, cryogenic, AC-loss, lifetime or beam-transmission validation"
+  ],
+  "decision": "Local generation and short buffers first; conditional microwave assistance; selective magnetic trim earns a small discriminating test; no combined three-function architecture selected; 23.835 TW target unchanged.",
+  "staged_layer_check": {
+    "files": 544,
+    "violations": 0
+  },
+  "staged_whitespace_check": "passed"
+}

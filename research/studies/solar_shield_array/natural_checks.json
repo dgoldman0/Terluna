@@ -1,0 +1,493 @@
+{
+  "schema": "terluna.research.natural-checks/1",
+  "date": "2026-10-05",
+  "reviewed_checkpoint": "c47c96040fc386b1d980c82a036ec91830f47390",
+  "starting_checkpoint": "fc803222d34b29a242af471a5e36b4c1269586a3",
+  "early_checkpoint": "7bddd453a8f32da08ce66aa59be092eefbd7ccc4",
+  "branch": "research/solar-shield-habitat-array",
+  "preliminary_remote_head_check": "Explicitly waived by author; not performed",
+  "accepted_operating_return": false,
+  "accepted_cycle": false,
+  "accepted_fleet": false,
+  "first_twelve_hour_local_prefix_passed": true,
+  "budget": {
+    "cpu_limit_s": 1800,
+    "completed_producer_cpu_s": 998.494182355,
+    "interrupted_attempt_charged_cpu_s": 400,
+    "charged_ancillary_allowance_s": 20,
+    "total_charged_cpu_s": 1418.494182355,
+    "partial_product_cpu_not_added_again_s": 269.66350689399997,
+    "processes": 1,
+    "numerical_threads": 1,
+    "address_space_limit_MiB": 2048,
+    "peak_recorded_rss_MiB": 663.734375,
+    "new_raw_limit_MiB": 512,
+    "new_raw_MiB": 138.9427604675293,
+    "producer_invocations": 16,
+    "completed_producer_invocations": 15,
+    "new_coupled_candidates": 2,
+    "independent_candidate_replays": 1,
+    "checks_budget_s_per_commit": 300
+  },
+  "interrupted_attempt": {
+    "schema": "terluna.research.natural-scout-attempt/1",
+    "completed": false,
+    "accepted_return": false,
+    "reason": "Stopped an over-expensive finite-area independent ten-day scout after its first complete family, during the second; retain its partial product and switch subsequent proposal dynamics to a documented centre-gravity/source approximation.",
+    "cpu_s": 295.35,
+    "elapsed_clock_ticks": 4973491,
+    "producer_sha256": "58489a244075509021ef91738b3d3d0704af35f241afb8ddc22aea7072068a87",
+    "charged_cpu_s": 400,
+    "charge_reason": "Conservatively charge the entire original 400-second alarm allocation; /proc CPU observation preceded the actual interrupt."
+  },
+  "duplicate_variant": {
+    "product": "natural_dynamic_rays.json",
+    "names": [
+      "face_1_8500",
+      "face_1_9000"
+    ],
+    "case_rows": 4,
+    "distinct_variants": 3,
+    "explanation": "The dynamic wrapper ignores static pitch labels and uses the actual deforming 8.5 km service seed for both. Raw control products are identical; both computations are charged."
+  },
+  "products": [
+    {
+      "path": "research/studies/solar_shield_array/results/natural_scout.json",
+      "sha256": "47aef2385e4ad2df530cf207726d845fbcdf5df8b3b2ab5c38494f1a7b5d7f6d",
+      "completed": false,
+      "resources": {
+        "wall_s": 269.7183590459972,
+        "cpu_s": 269.66350689399997,
+        "max_rss_MiB": 663.734375,
+        "numerical_threads": 1,
+        "new_raw_MiB": 9.060304641723633
+      }
+    },
+    {
+      "path": "research/studies/solar_shield_array/results/natural_fast_scout.json",
+      "sha256": "d81774a4b5335b2b1868bc4925469bffa3b0f3d12a3d239e9e91fc2c8632987a",
+      "completed": true,
+      "resources": {
+        "wall_s": 118.39029097199818,
+        "cpu_s": 118.35686022,
+        "max_rss_MiB": 568.35546875,
+        "numerical_threads": 1,
+        "new_raw_MiB": 36.2376127243042
+      }
+    },
+    {
+      "path": "research/studies/solar_shield_array/results/natural_fit.json",
+      "sha256": "37b6470f602e0c9d43fba0a1ae6a255faf27758f9eb069e8579dc55d34ed0a91",
+      "completed": true,
+      "resources": {
+        "wall_s": 69.51563366900518,
+        "cpu_s": 69.496453762,
+        "max_rss_MiB": 206.20703125,
+        "numerical_threads": 1,
+        "new_raw_MiB": 36.2376127243042
+      }
+    },
+    {
+      "path": "research/studies/solar_shield_array/results/natural_flexible.json",
+      "sha256": "d6b88d9ba3d5c6dd8dd9999311f85df213254722526d9b43058d9725bc736385",
+      "completed": true,
+      "resources": {
+        "wall_s": 77.9616021260008,
+        "cpu_s": 77.94133149700001,
+        "max_rss_MiB": 271.4921875,
+        "numerical_threads": 1,
+        "new_raw_MiB": 36.2376127243042
+      }
+    },
+    {
+      "path": "research/studies/solar_shield_array/results/natural_assignment.json",
+      "sha256": "37b4663d14e83cbcfb4cc023041fec1dc59ae558301777f212eae835f37dd0bf",
+      "completed": true,
+      "resources": {
+        "wall_s": 29.73939884200081,
+        "cpu_s": 29.73682805,
+        "max_rss_MiB": 183.7578125,
+        "numerical_threads": 1,
+        "new_raw_MiB": 36.2376127243042
+      }
+    },
+    {
+      "path": "research/studies/solar_shield_array/results/natural_groups.json",
+      "sha256": "3707ec9cc5cd904386f27a63e1ea028519ddc732a0a9cc4b9701cc11eba1301e",
+      "completed": true,
+      "resources": {
+        "wall_s": 70.71631456999603,
+        "cpu_s": 70.693949703,
+        "max_rss_MiB": 109.3828125,
+        "numerical_threads": 1,
+        "new_raw_MiB": 39.152358055114746
+      }
+    },
+    {
+      "path": "research/studies/solar_shield_array/results/natural_arrival.json",
+      "sha256": "e54062ed4d77ce5aea54d25a685e3538da4fd5fc2a05a99beeac793d0aaa669b",
+      "completed": true,
+      "resources": {
+        "wall_s": 82.76246388100117,
+        "cpu_s": 82.732826958,
+        "max_rss_MiB": 295.72265625,
+        "numerical_threads": 1,
+        "new_raw_MiB": 39.152358055114746
+      }
+    },
+    {
+      "path": "research/studies/solar_shield_array/results/natural_dynamic_rays.json",
+      "sha256": "4663da3c32ab6d5733ec83d3b711c1cd645ffd6abcc767b83500ac27c36137fb",
+      "completed": true,
+      "resources": {
+        "wall_s": 120.57284092399641,
+        "cpu_s": 120.54533581999999,
+        "max_rss_MiB": 354.0625,
+        "numerical_threads": 1,
+        "new_raw_MiB": 79.99012851715088
+      }
+    },
+    {
+      "path": "research/studies/solar_shield_array/results/natural_refine.json",
+      "sha256": "21eca9a1bef357b6d99de9e50202468f3f56f2322d3bf9f3771f1701f83d1dc2",
+      "completed": true,
+      "resources": {
+        "wall_s": 22.840011129999766,
+        "cpu_s": 22.774270697000002,
+        "max_rss_MiB": 194.09375,
+        "numerical_threads": 1,
+        "new_raw_MiB": 90.92857933044434
+      }
+    },
+    {
+      "path": "research/studies/solar_shield_array/results/natural_face_refined_coarse.json",
+      "sha256": "97f59ff6a1a31c889cd1fcc6b4989c16632abbdc1d287429c72e7f2c1ab8d374",
+      "completed": true,
+      "resources": {
+        "wall_s": 61.09219341700373,
+        "cpu_s": 61.071888008,
+        "max_rss_MiB": 170.54296875,
+        "numerical_threads": 1,
+        "new_raw_MiB": 98.93787479400635
+      }
+    },
+    {
+      "path": "research/studies/solar_shield_array/results/natural_free_slow_coarse.json",
+      "sha256": "e0c96a14edfca8376825112f345f195ff10f9acf3892f8555c6bf8751481b562",
+      "completed": true,
+      "resources": {
+        "wall_s": 87.32154327799799,
+        "cpu_s": 87.304454877,
+        "max_rss_MiB": 217.09765625,
+        "numerical_threads": 1,
+        "new_raw_MiB": 111.24420833587646
+      }
+    },
+    {
+      "path": "research/studies/solar_shield_array/results/natural_free_slow_fine.json",
+      "sha256": "c45a19091aa3d2fcdcc3828d808532be51665c93876af44b192a7552aa0cc01c",
+      "completed": true,
+      "resources": {
+        "wall_s": 218.76381196700095,
+        "cpu_s": 218.698048847,
+        "max_rss_MiB": 346.48046875,
+        "numerical_threads": 1,
+        "new_raw_MiB": 123.55058765411377
+      }
+    },
+    {
+      "path": "research/studies/solar_shield_array/results/natural_account.json",
+      "sha256": "7970f8e468d8f5efe9a93964fc3b16616881809c83483c7b2ec6a38cddb93ba0",
+      "completed": true,
+      "resources": {
+        "wall_s": 30.26510258200142,
+        "cpu_s": 30.255059691,
+        "max_rss_MiB": 139.078125,
+        "numerical_threads": 1,
+        "new_raw_MiB": 137.32241916656494
+      }
+    },
+    {
+      "path": "research/studies/solar_shield_array/results/natural_audit.json",
+      "sha256": "5d6106af451fc66ccd3f6faa672739d0b4349741ed13ca35d095730a3940643e",
+      "completed": true,
+      "resources": {
+        "wall_s": 5.964026384004683,
+        "cpu_s": 5.962465947,
+        "max_rss_MiB": 201.421875,
+        "numerical_threads": 1,
+        "new_raw_MiB": 137.32241916656494
+      }
+    },
+    {
+      "path": "research/studies/solar_shield_array/results/natural_diagnose.json",
+      "sha256": "e8eedd12ec5f10eaa39cafd18748894c1f8c6f4313f06ad43433ff8f33a9e289",
+      "completed": true,
+      "resources": {
+        "wall_s": 0.8524163830006728,
+        "cpu_s": 0.8510490470000001,
+        "max_rss_MiB": 131.99609375,
+        "numerical_threads": 1,
+        "new_raw_MiB": 137.32241916656494
+      }
+    },
+    {
+      "path": "research/studies/solar_shield_array/results/natural_force_audit.json",
+      "sha256": "74d79792c1175ddf1f265ddbe3223a7c05d07a225dc8cba10287d67f480092bf",
+      "completed": true,
+      "resources": {
+        "wall_s": 2.073344337994058,
+        "cpu_s": 2.073359231,
+        "max_rss_MiB": 112.34375,
+        "numerical_threads": 1,
+        "new_raw_MiB": 138.9427604675293
+      }
+    }
+  ],
+  "raw_products": {
+    "research/runs/solar_shield_array/natural_return/scout_face.npz": {
+      "sha256": "275093bb27e77c84e01fb23e5ec4f2d09a1bacc6bdbbf522a064b87f076a7eed",
+      "bytes": 9500418
+    },
+    "research/runs/solar_shield_array/natural_return/fast_scout_face.npz": {
+      "sha256": "2b040138f7bc3421f61bead877b9d7699c3414c7bc27c8541ed6b627c5da13c3",
+      "bytes": 9500088
+    },
+    "research/runs/solar_shield_array/natural_return/fast_scout_edge_a.npz": {
+      "sha256": "b7b2d828e583b1655ad8c6d2903344fc7830d6903a42692788a6a335194c8af5",
+      "bytes": 9498363
+    },
+    "research/runs/solar_shield_array/natural_return/fast_scout_edge_b.npz": {
+      "sha256": "6284af888408e38f02ac1f6966c352dd493d93576ef1237f16d3bfd8e084e461",
+      "bytes": 9498350
+    },
+    "research/runs/solar_shield_array/natural_return/groups_5.npz": {
+      "sha256": "17b3e629bfba5a0e902c3f35833db88ae22be54b5d8f00baab86dc404021365a",
+      "bytes": 1546240
+    },
+    "research/runs/solar_shield_array/natural_return/groups_15.npz": {
+      "sha256": "a2a61652d11ad65731498d46c9e65689d3cec785d1fb89c05c17b02d3b56fa37",
+      "bytes": 1510092
+    },
+    "research/runs/solar_shield_array/natural_return/dynamic_arrival_face_1_8500.npz": {
+      "sha256": "3e6babc500664340b356517adaa76e76dd01d542c2304e14ba69599127b73078",
+      "bytes": 7663806
+    },
+    "research/runs/solar_shield_array/natural_return/dynamic_arrival_face_1_9000.npz": {
+      "sha256": "3e6babc500664340b356517adaa76e76dd01d542c2304e14ba69599127b73078",
+      "bytes": 7663806
+    },
+    "research/runs/solar_shield_array/natural_return/dynamic_arrival_edge_a_1_8500.npz": {
+      "sha256": "f9132567a821f135ab9e2efd8d80b5ac554176d23522f8d95a9aa6c776e8875c",
+      "bytes": 7620970
+    },
+    "research/runs/solar_shield_array/natural_return/dynamic_arrival_edge_a_3_8500.npz": {
+      "sha256": "ff97afecc22b9d8f69cf23e5489a4066da8064061ca35c927f689cba7dc10422",
+      "bytes": 19872924
+    },
+    "research/runs/solar_shield_array/natural_return/refined_face.npz": {
+      "sha256": "d9b9af94dc23a36355c158851a83c91b427b081fc691a2a00540ba73e31fb57a",
+      "bytes": 11469797
+    },
+    "research/runs/solar_shield_array/natural_return/face_refined_coarse_service.npz": {
+      "sha256": "9c8aeaa800f39fd00cf679481d5a52026c9234bccd6a159e8b6cdff7b6c80695",
+      "bytes": 5606251
+    },
+    "research/runs/solar_shield_array/natural_return/face_refined_coarse_departure_return.npz": {
+      "sha256": "a7d9d7ca2f416da882baae1dba0c42be61fe07d20cb18a6b9278131122eea5e7",
+      "bytes": 2792104
+    },
+    "research/runs/solar_shield_array/natural_return/free_slow_coarse_service.npz": {
+      "sha256": "2e941f199d12ea6df04c1e6d6476e6f013716123ff0a0eef06859d26f9ffb28f",
+      "bytes": 5583745
+    },
+    "research/runs/solar_shield_array/natural_return/free_slow_coarse_departure_return.npz": {
+      "sha256": "7899a7a8d239fd2f119427ac95a5b711f4506c15766277de7d8a199b4f7337a5",
+      "bytes": 7320381
+    },
+    "research/runs/solar_shield_array/natural_return/free_slow_fine_service.npz": {
+      "sha256": "2ec2458711c50ffa6ba6166b563033b0361639d9de24887064352d809f1ed4d6",
+      "bytes": 5583828
+    },
+    "research/runs/solar_shield_array/natural_return/free_slow_fine_departure_return.npz": {
+      "sha256": "754d394938c729759b50c8ceafc7b9cbb7c7202eaa6307982e0b9544febad0a5",
+      "bytes": 7320346
+    },
+    "research/runs/solar_shield_array/natural_return/account_face_refined_service.npz": {
+      "sha256": "a0d85d0a996e8cf5ab6285f098d7e7add63ef2502897a639f7f9b947e89f64a7",
+      "bytes": 4345882
+    },
+    "research/runs/solar_shield_array/natural_return/account_face_refined_departure_return.npz": {
+      "sha256": "b5382cfe3f40ba4df14e6a0ad5489bc357ddd495dadaaf7e1d5dd0d5a9697ba6",
+      "bytes": 2009557
+    },
+    "research/runs/solar_shield_array/natural_return/account_free_slow_service.npz": {
+      "sha256": "9f3fd3c2f7f7efbb6fcdd1a8e26809e0005ddd43d8b0b80412f1905000c8b89c",
+      "bytes": 3568650
+    },
+    "research/runs/solar_shield_array/natural_return/account_free_slow_departure_return.npz": {
+      "sha256": "81d7a9c4fb56b847b67a65db11a04a9668253e2f384159763032001042966352",
+      "bytes": 4516723
+    },
+    "research/runs/solar_shield_array/natural_return/controlled_reduced_face.npz": {
+      "sha256": "d2775e6efb2c892a21bafc1e9dcee4b90bc3a35b2c703f488758dfb8099b2afb",
+      "bytes": 1699051
+    }
+  },
+  "binding_verification": {
+    "producer_source_files": 88,
+    "parent_products": 10,
+    "current_source_hashes_passed": true,
+    "current_input_hashes_passed": true,
+    "constants_passed": true,
+    "raw_hashes_passed": true
+  },
+  "unchanged_pinned_requirements": [
+    {
+      "path": "shared/constants.json",
+      "sha256": "2fb0032c8c37794a31a491b5c4f890178e295ee1fc9fe8c91d9c8cc636f85576",
+      "unchanged_since": {
+        "c47c96040fc386b1d980c82a036ec91830f47390": true,
+        "fc803222d34b29a242af471a5e36b4c1269586a3": true
+      }
+    },
+    {
+      "path": "research/studies/solar_shield_array/scenario.json",
+      "sha256": "a53b784941518b6e36ccdf728252cf6c8e0c46c1126b6c621ed4e28c23128699",
+      "unchanged_since": {
+        "c47c96040fc386b1d980c82a036ec91830f47390": true,
+        "fc803222d34b29a242af471a5e36b4c1269586a3": true
+      }
+    },
+    {
+      "path": "protection/spectra/stack_short_wave.json",
+      "sha256": "82b094f9724caf9fd68e9cde60fcae4f4eec2d5645b38d452eaa10fc7033e96f",
+      "unchanged_since": {
+        "c47c96040fc386b1d980c82a036ec91830f47390": true,
+        "fc803222d34b29a242af471a5e36b4c1269586a3": true
+      }
+    },
+    {
+      "path": "protection/transmission/results/uv_transmission.json",
+      "sha256": "6589385e2665ade4409cfc529f9fef62f932fa75e9a3b2693bc63a0e13d9ec9f",
+      "unchanged_since": {
+        "c47c96040fc386b1d980c82a036ec91830f47390": true,
+        "fc803222d34b29a242af471a5e36b4c1269586a3": true
+      }
+    }
+  ],
+  "derived_comparison": {
+    "replayed_position_difference_m": 6.972808325427866,
+    "clearance": {
+      "minimum_sampled_surface_distance_m": 1722.4800741211232,
+      "sampled_witness": {
+        "time_s": 43200.0,
+        "pair": [
+          338,
+          341
+        ],
+        "projection_m": [
+          -11715.34313968536,
+          7213.897355052113,
+          156.63817822830933
+        ]
+      },
+      "minimum_conditional_all_pair_clearance_m": 374.0103881126727,
+      "limiting_interval_s": [
+        43140.0,
+        43200.0
+      ],
+      "intervals_below_100m": 0,
+      "acceleration_bound_m_s2": 0.15,
+      "rate_bound_rad_s": 0.0017453292519943296,
+      "reconstruction_error_per_centre_m": 6.972808325427866,
+      "maximum_step_s": 60.0
+    },
+    "electrical_energy_J": 36186350796989.93,
+    "loaded_baseline_J": 51859000000000.0,
+    "energy_reduction_fraction": 0.30221657191635143,
+    "zero_electric_translation": true,
+    "passed_local_prefix": true
+  },
+  "checks": {
+    "early_make_check": {
+      "command": "timeout 300s env OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 make check",
+      "passed": 734,
+      "skipped": 55,
+      "failed": 13,
+      "elapsed_s": 30.39,
+      "layer_check_passed": true,
+      "baseline_failure_tests": [
+        "atmosphere/tests/test_absorption.py::test_ion_production_falls_with_the_shadow_and_ends_at_the_outer_radius",
+        "atmosphere/tests/test_absorption.py::test_ionization_rate_is_of_the_tabulated_order",
+        "atmosphere/tests/test_absorption.py::test_design_case_needs_a_radius_just_under_the_exobase",
+        "atmosphere/tests/test_exosphere.py::test_dissociation_rates_agree_with_heays",
+        "atmosphere/tests/test_exosphere.py::test_ions_made_match_the_absorption_step",
+        "atmosphere/tests/test_exosphere.py::test_charge_exchange_thin_limit_counts_the_swept_exosphere",
+        "atmosphere/tests/test_exosphere.py::test_magnetosphere_accounts_for_every_ion_and_a_stronger_one_keeps_more",
+        "atmosphere/tests/test_exosphere.py::test_levels_are_ordered_and_wider_shadows_never_lose_more",
+        "climate/tests/test_cm1_run.py::test_the_terrain_build_forces_each_column_at_its_own_height",
+        "climate/tests/test_exoplasim_run.py::RunnerTests::test_process_lookup_finds_this_process",
+        "climate/tests/test_ring_comfort.py::test_hours_are_shares_of_the_lunar_day",
+        "climate/tests/test_ring_comfort.py::test_the_rings_land_is_pooled_by_latitude_and_height_and_counted_in_shares",
+        "research/studies/protection_architecture/test_run.py::test_design_point_holds_together"
+      ],
+      "later_make_targets_reached": false,
+      "log_sha256": "f08dfb0ae9707fbf2319eda5905002570d1ac49c646fdce2a736665678d017e5"
+    },
+    "final_make_check": {
+      "command": "timeout 240s env OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 make check",
+      "exit_code": 2,
+      "passed": 745,
+      "skipped": 55,
+      "failed": 13,
+      "elapsed_s": 33.7,
+      "layer_files_checked": 599,
+      "layer_violations": 0,
+      "all_new_tests_passed": true,
+      "added_python_tests": 11,
+      "baseline_failure_tests": [
+        "atmosphere/tests/test_absorption.py::test_ion_production_falls_with_the_shadow_and_ends_at_the_outer_radius",
+        "atmosphere/tests/test_absorption.py::test_ionization_rate_is_of_the_tabulated_order",
+        "atmosphere/tests/test_absorption.py::test_design_case_needs_a_radius_just_under_the_exobase",
+        "atmosphere/tests/test_exosphere.py::test_dissociation_rates_agree_with_heays",
+        "atmosphere/tests/test_exosphere.py::test_ions_made_match_the_absorption_step",
+        "atmosphere/tests/test_exosphere.py::test_charge_exchange_thin_limit_counts_the_swept_exosphere",
+        "atmosphere/tests/test_exosphere.py::test_magnetosphere_accounts_for_every_ion_and_a_stronger_one_keeps_more",
+        "atmosphere/tests/test_exosphere.py::test_levels_are_ordered_and_wider_shadows_never_lose_more",
+        "climate/tests/test_cm1_run.py::test_the_terrain_build_forces_each_column_at_its_own_height",
+        "climate/tests/test_exoplasim_run.py::RunnerTests::test_process_lookup_finds_this_process",
+        "climate/tests/test_ring_comfort.py::test_hours_are_shares_of_the_lunar_day",
+        "climate/tests/test_ring_comfort.py::test_the_rings_land_is_pooled_by_latitude_and_height_and_counted_in_shares",
+        "research/studies/protection_architecture/test_run.py::test_design_point_holds_together"
+      ],
+      "baseline_failures_identical": true,
+      "later_make_targets_reached": false,
+      "log_sha256": "d293d28f2772cdfd3a2a98fec0ddbad0c0921b61cd583f09efbbcf9613276f5a",
+      "limitations": "Baseline missing WHI/configuration and process-lookup failures remain. Later JS, research provenance and ensemble Makefile targets were not reached; no unrelated repairs attempted."
+    },
+    "targeted_new_tests": {
+      "passed": 11,
+      "elapsed_s": 3.65,
+      "command": "python -m pytest protection/dynamics/test_service_search.py protection/dynamics/test_service_arrival_controls.py protection/dynamics/test_service_holes.py protection/dynamics/test_oriented_clearance.py research/studies/solar_shield_array/test_natural_return.py -q"
+    },
+    "test_isolation_repair": {
+      "first_full_check": {
+        "passed": 743,
+        "skipped": 55,
+        "failed": 15,
+        "elapsed_s": 30.03,
+        "log_sha256": "65122fe3a98096d517fbece973467d9249e02cf8b0b0a51316e4dd6e24af7f13"
+      },
+      "cause": "Earlier repository tests initialize the process-global HiGHS scheduler with a different thread count; a later single-thread LP reports status 4 (HiGHS Status 0: Not Set) without solving. Reproduced by calling default linprog before the new solver.",
+      "repair": "Tests reset the global scheduler before and after each LP test to match standalone single-thread producer processes; infeasibility assertions require status 2. Numerical producer code and products remain unchanged.",
+      "saved_LP_outcomes": {
+        "optimal_status_0": 12,
+        "infeasible_status_2": 21,
+        "scheduler_or_other_errors": 0
+      }
+    },
+    "git_diff_check": "Passed before required checks; repeated after final documentation and check metadata updates."
+  },
+  "reading_rule": "Verify current source, input, constants and product hashes. Raw paths are ignored reproducible artifacts, not required by lightweight tests. completed means the bounded producer completed, not a successful trajectory. The interrupted scout is deliberately incomplete. Only the first twelve-hour local slower-turn prefix passes; no return, supply, next-service, handover, cycle or fleet acceptance is claimed."
+}

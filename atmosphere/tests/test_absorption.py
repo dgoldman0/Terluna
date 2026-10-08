@@ -79,15 +79,17 @@ def test_ionization_rate_is_of_the_tabulated_order():
     assert ab.ionization_rate('solar_maximum') > ab.ionization_rate('quiet')
 
 
-def test_september_aperture_is_the_reference():
-    assert ab.aperture(3.0)['area_over_september'] == pytest.approx(1.0)
-    assert ab.aperture(3.0)['aperture_radius_km'] == pytest.approx(3 * MOON_RADIUS / 1000 + 362.7, abs=0.5)
+def test_ring_fleet_aperture_is_the_reference():
+    assert ab.aperture(4.0)['area_over_ring_fleet'] == pytest.approx(1.0)
+    assert ab.aperture(4.0)['aperture_radius_km'] == pytest.approx(4 * MOON_RADIUS / 1000 + 93.0, abs=0.5)
 
 
-def test_design_case_needs_a_radius_just_under_the_exobase():
-    row = ab.case('titania_stack', 'lte', 'quiet', 0.003, 10, ab.band_weights())
+def test_design_case_covers_the_heating_near_the_exobase():
+    row = ab.case('titania_stack', 'lte', 'quiet', 1e-3, 10, ab.band_weights())
     radius = row['heating']['0.1']['radius_R']
-    assert row['exobase_radius_R'] - 0.2 < radius < row['exobase_radius_R']
-    assert row['tau_one_radius_R']['xuv'] < radius
+    # The states are traced through air the column heats with its middle shape, which swells more than the traced
+    # shape's column, so the radius covering the heating lies a little beyond the column's own exobase.
+    assert row['exobase_radius_R'] < radius < row['exobase_radius_R'] + 0.7
+    assert row['heating']['0.5']['radius_R'] <= radius
     production = row['exosphere_ion_production_kg_s']['third_hill']
     assert production['heating_radius'] > production['6'] > production['10']
