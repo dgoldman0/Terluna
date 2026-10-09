@@ -5,6 +5,11 @@ branches and summarized on main. The resulting work remains on `domain/ecology`,
 `domain/resources`; this record connects their results and adopted directions. It does not merge their studies or
 reopen the capped shield and infrastructure branches, whose earlier work is already integrated.
 
+The subsequent [floater viability synthesis](floater_viability.md) examines the coupled mechanical, gas-barrier,
+biological, water and navigation requirements in more depth. It incorporates the author's prolonged-twilight and
+Sun-following proposals, and distinguishes favorable static budgets from unresolved water/gas trim and life cycles.
+Its separate branch checkpoint and checks supersede neither the population allocations nor the check record below.
+
 ## Directions recorded across the domains
 
 * Retain the existing short-wave shield and cold-exobase requirements. Adapt the biosphere to the available

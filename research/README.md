@@ -126,3 +126,7 @@ say which conclusion their outputs can change.
 The 9 October [aerial-biosphere, UV and population follow-up](integration/aerial_biosphere_population.md) connects
 new evaluations on the ecology, provisioning and resources branches. They share population comparison cases,
 include roaming aerial habitation, and distinguish adopted directions from still-conditional capacities.
+
+The [floater viability follow-up](integration/floater_viability.md) summarizes the ecology branch's coupled
+structure, membrane, carbon, water/trim and life-cycle evaluation, including persistent twilight and wind-assisted
+Sun-following. These are conditional requirements; no sustainable organism size or new population capacity is adopted.

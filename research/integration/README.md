@@ -102,3 +102,6 @@ same as at every source head.
 - The fire study screens the earlier narrow bands; the chosen form has no fire study yet.
 - The sky-fleet drawings are built outputs; their re-rendering with the nine-berth crown waits for the author's look.
 - The port's programme follows the square lattice until the chosen form has its own.
+
+The [photosynthetic floater evaluation](floater_viability.md) follows the aerial-biosphere work. Its code and
+products remain on `domain/ecology`; main holds the cross-domain conclusion and check record.

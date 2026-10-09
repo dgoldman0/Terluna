@@ -205,3 +205,9 @@ the sky boats' share of trips, ownership and traffic system stay open.
 
 The [integration summary](integration/aerial_biosphere_population.md) identifies the reports, numerical findings,
 remaining conditions and branch checkpoints. Detailed work stays on its three domain branches pending integration.
+
+## Floater light-history correction, 9 October 2026
+
+| Direction | Authority | State |
+|---|---|---|
+| Evaluate persistent twilight and colonies moving with the slow Sun; do not impose a stationary half-cycle dark interval everywhere. | Author, 2026-10-09 | [Main synthesis](integration/floater_viability.md) of the ecology-owned requirements. Ground optical twilight, biological compensation and wind-vector routes remain distinct. No species or route adopted. |

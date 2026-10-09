@@ -134,3 +134,9 @@ survival; complete phosphorus return including harvest and sediment; and roaming
 shared ecological occupancy. Restricted UV-B is an open candidate under retained short-wave rejection; adoption
 needs living-air chemistry, vertical biological doses and the current non-LTE exobase/film thermal calculation.
 The bounded screens do not reopen the paused climate programme or select a population distribution.
+
+## Floater requirements follow-up, 9 October 2026
+
+The [main summary](integration/floater_viability.md) records the ecology-owned coupled evaluation. Persistent
+twilight and wind-assisted Sun-following are included. Next: one assembled wet gas-barrier test and a coupled
+water/gas/pressure/flight route, then development and recruitment. The climate programme remains paused.
