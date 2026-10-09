@@ -74,12 +74,16 @@ record; products that read named constants are checked by value, as shared/prove
 
 ## Inputs outside Git
 
-The integration worktree holds copies of main's ignored products (the geography atlas and drainage grids, checked
-against main's hashes; climate, column, sky and reference products), the sea branch's Earthlight and water-column
-inputs, the shield's FISM2, X-ray, cross-section and optical-constant inputs and its limb-heating cache, and the
-electricity branch's three input tables, each matching its manifest. The CM1 and GCM run archives, the line-by-line
-cache and the radiative inputs are linked read-only in use, as the source worktrees link them. The synthesis's run
-logs live on the research drive under research/runs/joint_synthesis.
+Main's checkout holds every input the branches keep outside Git, copied from the integration worktree once main had
+moved, each matching its manifest: the sea branch's Earthlight and water-column inputs with the two Earth textures the
+light calendar reads, the shield's FISM2, X-ray, cross-section and optical-constant inputs and its limb-heating cache,
+and the electricity branch's three input tables. The CM1 and GCM run archives stay on the research drive, linked from
+climate/crm/runs and climate/gcm/runs; the synthesis's run logs are there under research/runs/joint_synthesis.
+
+The five worktrees were then removed and their branches deleted locally. The outputs only they held moved to the same
+paths in main's checkout: the sea-appearance renders (visualization/sea-appearance/results), the sky-fleet and
+summit-port drawing builds with the ring0 drawings, the integration's run logs (research/runs/integration_checks) and
+the shield's check logs. Products that recorded absolute input paths inside a worktree keep them as run records.
 
 ## Checks
 
