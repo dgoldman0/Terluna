@@ -228,14 +228,15 @@ with its screen [people.py](people.py); numbers here are from it.
 25. **People's gases build up with no sink.** At Earth's agriculture and waste, each billion people adds 6–28 ppm of
     methane at steady state and 0.23–0.33 ppm of N2O every thousand years; the lunar design's sealed waste and absent
     ruminants bring that to 0.06–2.8 ppm of methane a billion.
-26. **With Earth's practice the Moon holds about half a billion affluent people; with the lunar design, about
-    3–15 billion.** Grazing for an affluent US diet fills the fog desert outside a half kept wild at 0.42 billion,
-    and lighting as affluent countries light themselves covers the land outside a half kept dark at 0.8–1.5 billion.
-    The design's plant-rich diet, compact cities and shielded lamps move crops' limit to 3.2–20 billion, heat to
-    6.3–15 billion unless dimming answers it, and the lit sky to 8.2–15 billion.
-27. **The sky binds before the land.** Lit as affluent countries light themselves, people darken the aerial biomes'
-    night before any diet reaches its crop limit, and at the metropolis's busy hour a flyer passes a point in the low
-    sky every four to six minutes. Dark corridors for the migrants, quiet low traffic at dusk and shielded light keep
+26. **The lunar design cuts what each billion people takes from the land tenfold.** Each billion living by Earth's
+    practice grazes 1.2 times the fog desert, crops 6–36% of the rain-fed land and lights a third to three-fifths of
+    the dry land. Each billion living by the lunar design's plant-rich diet, compact cities and shielded lamps crops
+    2.5–16% of the rain-fed land and lights 3–6% of the dry land, and 0.035–0.084% more dimming answers its heat. How
+    many people the Moon's settings hold, on the ground and aloft, comes from provisioning's comparison in the shared
+    population cases.
+27. **People's light reaches the sky before their crops fill the land.** Lit as affluent countries light themselves,
+    each billion people lights more land than any diet crops, and at the metropolis's busy hour a flyer passes a point
+    in the low sky every four to six minutes. Dark corridors for the migrants, quiet low traffic at dusk and shielded light keep
     the sky's biomes working.
 
 ## Statements elsewhere that need correcting

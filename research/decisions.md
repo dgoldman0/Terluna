@@ -212,3 +212,11 @@ the sky boats' share of trips, ownership and traffic system stay open.
 | Direction | Authority | State |
 |---|---|---|
 | Evaluate persistent twilight and colonies moving with the slow Sun; do not impose a stationary half-cycle dark interval everywhere. | Author, 2026-10-09 | Incorporated in [floater requirements](studies/floater_viability/README.md). Light spectra, carbon compensation and wind-vector routes remain separate requirements; no route or species adopted. |
+
+## Sky giants and the biosphere's names, 9 October 2026
+
+| Direction | Source | Status |
+|---|---|---|
+| Pursue giant photosynthetic aerial organisms that grow over centuries, like the oldest trees, as far as the physics allows. Work out what the first arithmetic leaves out: fittings, seams, gusts and damage, then water and storms. | Author, 2026-10-09 ("Love that honestly if we can do that"; "Then let's figure that out") | Research direction; the coupled floater study takes it up |
+| The large aerial organisms gather their water from the air around them, in preference to descending to drink. | Author, 2026-10-09 ("Pulling from the air would be preferable") | Working direction for the floater study |
+| Rename the floaters, and begin a taxonomic system for the Open Moon's biosphere. | Author, 2026-10-09 ("let's also change the name. Indeed, let's start working out a taxonomic system for this world's biosphere") | Research direction; the names wait on the system and the author's choice |

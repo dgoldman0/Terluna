@@ -1,6 +1,6 @@
 # Sky, land and people on the Open Moon
 
-What the Open Moon's skies, land and living systems can hold for an affluent population over the near horizons: the
+What an affluent population takes from the Open Moon's skies, land and living systems over the near horizons: the
 500-year build, the first thousand years and the several thousand after. The author asked on 9 October 2026 for the
 aerial biomes to come almost first ("the skies are a massive potential set of biomes in and of themselves"), and set
 the population as "affluent by modern standards but norm for the population of the future", 20–30 billion across the
@@ -19,11 +19,11 @@ figures are design targets.
   water vapour and cosmic-ray ionization below Earth's sea level to 90 km. Lift allows flyers six times Earth's in
   every length. Phosphorus aloft is scarce, so the sky's food webs eat what the land and seas send up.
 - Rain-fed land equals 2.5–5.7 million km² at the crop model's yields, 83% of it within 30° of the equator.
-- With Earth's practice the Moon holds about half a billion affluent people: an affluent US diet's grazing fills the
-  fog desert's plains outside a half kept wild at 0.42 billion, and its lighting covers the land outside a half kept
-  dark at 0.8–1.5 billion.
-- With the lunar design it holds roughly 3–15 billion: crops bind at 3.2–20 billion with half the land kept wild, heat
-  at 6–15 billion unless answered, and the lit sky at 8–15 billion.
+- Each billion people living by Earth's practice grazes 1.2 times the fog desert, crops 6–36% of the rain-fed land
+  and puts a third to three-fifths of the dry land under a light-polluted sky.
+- Each billion living by the lunar design crops 2.5–16% of the rain-fed land and lights 3–6% of the dry land, and
+  0.035–0.084% more dimming answers its heat. These are costs per billion; how many people the Moon's settings hold,
+  on the ground and aloft, comes from provisioning's comparison in the shared population cases.
 - The vegetated Moon's own ethylene settles near 90–230 ppb with Earth's soil uptake, above the 50 ppb that costs
   cereals a third or more of their yield, whatever the population.
 
@@ -122,26 +122,25 @@ largest one.
     (Sawada et al. 1986), it settles at 94–233 ppb with a lifetime of 107 years, above the 50 ppb that costs wheat 36%
     and rice 63% of their yield (Klassen & Bugbee 2002); soils ten times faster hold it at 9–23 ppb (*screen*). The
     plants' emission and the soils' uptake are design variables of the whole biosphere.
-17. **Heat.** A terawatt used on the Moon adds 0.026 W/m², and 38–61 TW warm it 1 K (*screen*). At the US's 9.3 kW a
-    person (EIA) the Moon reaches 1 K at 4.1–6.5 billion people; at the design's 4–6 kW (2 kW of final energy from
-    fusion at a third to half efficiency; needs stop rising near 60 GJ a year, Vogel et al. 2021), at 6.3–15 billion.
-    Each kelvin is answered by 0.53% more dimming (the GCM's 1.9 K per 1%): 0.35–0.8% for 10 billion at the design.
+17. **Heat.** A terawatt used on the Moon adds 0.026 W/m², and 38–61 TW would warm it 1 K unanswered (*screen*).
+    Under the planned climate added dimming answers it, 0.53% a kelvin (the GCM's 1.9 K per 1%). Each billion people
+    at the US's 9.3 kW a person (EIA) needs 0.08–0.13% more dimming, and at the design's 4–6 kW (2 kW of final energy
+    from fusion at a third to half efficiency; needs stop rising near 60 GJ a year, Vogel et al. 2021) 0.035–0.084%.
 
-## What binds first
+## What each billion people takes
 
-18. **Earth's practice.** Grazing binds first, at 0.42 billion with half the land kept wild (0.59 with 30% kept). The
-    lit sky covers the land outside a half kept dark at 0.8–1.5 billion; phosphorus losses match the land's natural loss
-    at 0.6–2.4 billion, N2O the wild biosphere's at 0.9–1.8 billion and methane at 2.0–2.1 billion. Crops alone bind at
-    1.4–8.4 billion, or 0.7–4.9 billion with every animal fed on crops (table 4; *screen*).
-19. **The lunar design.** Crops bind at 3.2–20 billion with half the land kept wild and 4.5–29 billion with 30% kept,
-    and a tenth of a hectare of grazing a person binds at 3.1 billion. Heat reaches 1 K unanswered at 6.3–15 billion and
-    the lit sky covers the undarkened land at 8.2–15 billion; phosphorus, N2O and methane lie beyond 8 billion
-    (*screen*). The crops' water use and the diet set most of the range.
+18. **Earth's practice.** Each billion people grazes 7.4 million km², 1.2 times the fog desert, and crops 6–36% of the
+    rain-fed land, or 10–71% with every animal fed on crops. It puts 34–61% of the dry land under a light-polluted sky,
+    loses phosphorus at 42–163% of the land's natural loss, and adds N2O at 55–106% and methane at 48–51% of the wild
+    biosphere's sources (table 4; *screen*).
+19. **The lunar design.** Each billion people crops 2.5–16% of the rain-fed land, and a tenth of a hectare of grazing a
+    person takes 16% of the fog desert. It lights 3.4–6.1% of the dry land, and its phosphorus, N2O and methane come to
+    0.5–12% of the land's and the wild biosphere's (*screen*). The crops' water use and the diet set most of the range.
 20. **The sky before the land.** Lit as affluent countries light themselves, 7,900–14,000 m² of land a person under
-    light-polluted skies (*derived*; Falchi et al. 2016; World Bank), 0.8–1.5 billion people light the land outside a
-    half kept dark, at or before every diet's crop limit. Cities at the metropolis's density cover 0.11% of the dry
-    land per billion people, and their low sky meets a passing flyer every four to six minutes at the busy hour
-    (*screen*). The aerial biomes bind first through the night, and locally through traffic.
+    light-polluted skies (*derived*; Falchi et al. 2016; World Bank), each billion people lights more land than any
+    diet crops. Cities at the metropolis's density cover 0.11% of the dry land per billion people, and their low sky
+    meets a passing flyer every four to six minutes at the busy hour (*screen*). People's light reaches the aerial
+    biomes' night before their crops fill the land, and their traffic reaches the sky locally.
 
 ## Living together
 
@@ -170,7 +169,7 @@ largest one.
     the land. Natural soil forms at 0.017–0.036 mm a year (Montgomery 2007), 8.5–18 mm in the build, so soils are built
     by organic loading, fines and pioneer crusts.
 26. **The first thousand years.** From 0.1 billion at the build's end, growth of 0.5–1% a year reaches 1 billion in
-    230–460 years and 10 billion in 460–920 (*derived*), so the population can meet the land's limits in this horizon.
+    230–460 years and 10 billion in 460–920 (*derived*), so the costs per billion above arrive within this horizon.
 27. **Several thousand years.** The wild biosphere's N2O adds 1.6–2.1 ppm in 5,000 years and 10 billion people at
     Earth's practice 12–17 ppm more; the land's phosphorus runs down without returns, and the seas turn rich in
     magnesium over 18,000–180,000 years (the ecology register, G2).
@@ -210,17 +209,19 @@ largest one.
 | Heat | 9.3 kW | 4–6 kW |
 | Land under a light-polluted sky | 7,900–14,000 m² | 790–1,400 m² (target) |
 
-**Table 4. The population at each limit, billions** (*screen*).
+**Table 4. What each billion people takes** (*screen*), against the rain-fed land (2.5–5.7 million km²), the fog
+desert (6.2 million km²), the dry land (23.4 million km²), the land's natural phosphorus loss (1.5–4.2 Tg a year) and
+the wild biosphere's N2O (0.96–1.3 Tg N a year) and central methane source (59 Tg a year).
 
-| Limit | Earth's practice | The lunar design |
+| Each billion people | Earth's practice | The lunar design |
 |---|---|---|
-| Land, half kept wild (crops and grazing) | 0.42 | 3.1–20 |
-| Land, 30% kept | 0.59 | 4.4–29 |
-| Light-polluted sky over the land outside a half kept dark | 0.8–1.5 | 8.2–15 |
-| Heat, 1 K unanswered | 4.1–6.5 | 6.3–15 |
-| Phosphorus losses equal the land's natural loss | 0.6–2.4 | 8.2–95 |
-| N2O equals the wild biosphere's | 0.9–1.8 | 15–75 |
-| Methane equals the wild biosphere's central source | 2.0–2.1 | 20–200 |
+| Cropland, share of the rain-fed land | 6–36% (10–71% with animals fed on crops) | 2.5–16% |
+| Grazing, share of the fog desert | 120% | 0–16% |
+| Land under a light-polluted sky, share of the dry land | 34–61% | 3.4–6.1% |
+| Added dimming that answers its heat | 0.08–0.13% | 0.035–0.084% |
+| Phosphorus lost, share of the land's natural loss | 42–163% | 1–12% |
+| N2O, share of the wild biosphere's | 55–106% | 1.3–6.8% |
+| Methane, share of the wild biosphere's central source | 48–51% | 0.5–5% |
 
 ## Open questions, in order of what they settle
 
@@ -239,4 +240,6 @@ largest one.
 7. **Sharing the sky.** Corridors, quiet hours and lighting rules for traffic over migration routes, and the tower's
    reach from the storm layer to the flight band.
 8. **Soils and the return limb.** How fast built soils form, and the phosphorus, potassium and molybdenum returns.
-9. **The Moon's share of the 20–30 billion** and its path through the first thousand years.
+9. **People's ecology in each setting.** What a billion people take from the land, sky and wild biosphere in each
+   way of living, on the ground and aloft, for provisioning's comparison in the shared population cases, and its
+   path through the first thousand years.
