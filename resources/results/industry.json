@@ -1,0 +1,1262 @@
+{
+ "schema": "terluna.resources.industry/1",
+ "producer": {
+  "domain": "resources",
+  "files": {
+   "resources/industry.py": "120e667222f6e883"
+  },
+  "inputs": {
+   "resources/results/first_screen.json": "a4b9d4c1e2c0e853",
+   "research/studies/solar_shield_array/results/array_heat.json": "d964f1a5e1dec2e9",
+   "research/studies/solar_shield_array/results/integrated_ledger.json": "68ad477ab2cc80c4",
+   "research/studies/solar_shield_array/results/ring_layout.json": "456338e771bbc4aa",
+   "research/studies/joint_synthesis/results/ledgers.json": "b370faf4c735a78d",
+   "geography/results/atlas.json": "78cfbf2f469eb339",
+   "geography/results/drainage.json": "18494e3d3656ead7",
+   "engineering/reference/industrial_architecture/results/derived_industry_calculations.json": "2021602a5859f643",
+   "research/studies/atmospheric_co2/results/atmospheric_co2.json": "80db612918d3fc44",
+   "resources/industry_sources.json": "f9d6e86961d83637"
+  },
+  "constants": {
+   "AU": 149597870700.0,
+   "EARTH_GM": 398600441800000.0,
+   "EARTH_MOON_DISTANCE": 384400000.0,
+   "EARTH_RADIUS": 6371000.0,
+   "JULIAN_DAY": 86400.0,
+   "JULIAN_YEAR_DAYS": 365.25,
+   "MOON_GM": 4902800118000.0,
+   "MOON_RADIUS": 1737400.0,
+   "SOLAR_CONSTANT": 1361.0,
+   "SPEED_OF_LIGHT": 299792458.0,
+   "SUN_GM": 1.3271244004127942e+20
+  }
+ },
+ "evidence": "A screen on committed products (the first resources screen, the array heat screen, the integrated ledger and ring layout, the joint ledgers, the geography atlas and drainage, the 19 September calculations) with the literature values named in industry_sources.json and three values from the provisioning branch (52dcdb6). Closed-form arithmetic: coplanar Hohmann transfers, heat released evenly in every direction, population, growth and lifetime scenarios. No orbital, industrial, economic or population model is run.",
+ "reading_rule": "Masses in kg unless named (t, Mt, Gt = 1e12 kg); flows in kg/s or per year as named; energies in MJ/kg; powers in W, TW or PW as named; heat in W/m2 averaged over the Moon; times in years or days as named. Ranges are low-high and pair the low ends and the high ends of their inputs. cycle_years is the inventory over the flow that drains it. Scenarios (population, growth period, crust filling, plant count, stockpile) are assumptions of this screen.",
+ "places": {
+  "moon_surface": {
+   "escape_mj_kg": 2.82,
+   "to_ring_orbit_mj_kg": 2.7,
+   "sunlight_w_m2": 293.3125,
+   "heat_w_m2_per_tw_used": 0.0264,
+   "note": "Counts energy brought from outside the Moon's own sunlight, wind and rivers (fusion, fission, beams); those move heat the sunlight already brings."
+  },
+  "ring_platforms": {
+   "radius_km": 20000.0,
+   "to_lunar_escape_mj_kg": 0.123,
+   "sunlight_w_m2": 1361.0,
+   "light_time_s": 0.0667,
+   "heat_w_m2_per_tw_even": 4.97e-05,
+   "heat_w_m2_per_tw_from_tile_faces": [
+    8.7e-05,
+    0.000119
+   ],
+   "night_half_intercepts_pw": 851.0
+  },
+  "sun_earth_l1_l2": {
+   "distance_from_earth_km": 1500000.0,
+   "distance_from_moon_km": [
+    1120000.0,
+    1890000.0
+   ],
+   "light_time_to_moon_s": [
+    3.73,
+    6.29
+   ],
+   "heat_w_m2_per_tw_even": [
+    5.59e-09,
+    1.59e-08
+   ],
+   "phasing_to_lunar_encounter_m_s": [
+    14.0,
+    45.0
+   ],
+   "station_keeping_m_s_per_year": 1.0,
+   "sunlight_w_m2": 1361.0
+  },
+  "earth": {
+   "escape_mj_kg": 62.6,
+   "to_low_orbit_mj_kg": 33.1,
+   "light_time_to_moon_s": 1.28
+  },
+  "sources": {
+   "main_belt": {
+    "distance_au": 2.7,
+    "sunlight_w_m2": 187.0,
+    "light_time_hours": [
+     0.236,
+     0.513
+    ],
+    "departure_dv_km_s": 4.8,
+    "arrival_v_inf_km_s": 6.2,
+    "braking_mj_kg": 19.2,
+    "transit_years": 1.26
+   },
+   "jupiter_trojans": {
+    "distance_au": 5.2,
+    "sunlight_w_m2": 50.3,
+    "light_time_hours": [
+     0.582,
+     0.859
+    ],
+    "departure_dv_km_s": 5.64,
+    "arrival_v_inf_km_s": 8.79,
+    "braking_mj_kg": 38.6,
+    "transit_years": 2.73
+   },
+   "kuiper_belt": {
+    "distance_au": 40.0,
+    "sunlight_w_m2": 0.851,
+    "light_time_hours": [
+     5.41,
+     5.68
+    ],
+    "departure_dv_km_s": 3.67,
+    "arrival_v_inf_km_s": 11.8,
+    "braking_mj_kg": 69.9,
+    "transit_years": 46.4
+   }
+  },
+  "ratios": {
+   "moon_over_ring": 530.0,
+   "ring_over_hub": [
+    3130.0,
+    8900.0
+   ]
+  }
+ },
+ "fleet_carriage": {
+  "loading_g_m2_per_unit_pressure": 94.24,
+  "window_pressure_coefficient": 0.2759,
+  "window_tile_g_m2": 26.0,
+  "annulus_pressure_coefficient": 0.1387,
+  "annulus_tile_g_m2": 13.07,
+  "annulus_film_g_m2": 10.21,
+  "allowance_g_m2": 2.86,
+  "allowance_share_of_tile": 0.22,
+  "allowance_per_annulus_tile_t": 286.0,
+  "allowance_fleet_gt": [
+   5.94,
+   5.97
+  ],
+  "store_rotors_gt": [
+   0.13,
+   1.8
+  ],
+  "store_share_of_allowance": [
+   0.022,
+   0.29
+  ],
+  "mean_tile_t": 1643.0,
+  "cargo_at_full_keeping_t": 411.0,
+  "eccentricity_holding_share_outer_rings": [
+   0.19,
+   0.26
+  ],
+  "uniform_percent": {
+   "fleet_gt": [
+    0.462,
+    0.464
+   ],
+   "plant_gt_per_year": [
+    0.0231,
+    0.0464
+   ],
+   "glow_w_m2_per_percent_absorbed": [
+    1.66,
+    2.91
+   ],
+   "equivalent_tw_used_on_moon": [
+    63.0,
+    110.0
+   ],
+   "share_of_design_sunlight": [
+    0.0057,
+    0.0099
+   ]
+  },
+  "device_heat_w_m2_per_tw": {
+   "on_tiles": [
+    8.7e-05,
+    0.000119
+   ],
+   "platform_even": 4.97e-05
+  }
+ },
+ "plant_traffic": {
+  "tile_t": 1643.0,
+  "upkeep_gt_yr": [
+   2.309,
+   4.638
+  ],
+  "exchanges_per_day": [
+   3850.0,
+   7730.0
+  ],
+  "ring_radius_km": [
+   19600.0,
+   21400.0
+  ],
+  "ring_tilt_deg": [
+   -23.8,
+   24.1
+  ],
+  "sail_acceleration_m_s2": 6.02e-06,
+  "plants": {
+   "1": {
+    "dv_median_m_s": 110.0,
+    "dv_max_m_s": 216.0,
+    "sail_days_per_leg": 211.0,
+    "tiles_in_transit": [
+     1620000.0,
+     3260000.0
+    ],
+    "share_of_fleet_in_transit": [
+     0.058,
+     0.12
+    ],
+    "tug_exhaust_kg_s": [
+     535.0,
+     1070.0
+    ],
+    "tug_exhaust_share_of_held_screen": [
+     0.01,
+     0.021
+    ],
+    "tug_jet_power_tw": [
+     0.241,
+     0.484
+    ]
+   },
+   "8": {
+    "dv_median_m_s": 14.0,
+    "dv_max_m_s": 29.3,
+    "sail_days_per_leg": 27.0,
+    "tiles_in_transit": [
+     208000.0,
+     417000.0
+    ],
+    "share_of_fleet_in_transit": [
+     0.0074,
+     0.015
+    ],
+    "tug_exhaust_kg_s": [
+     68.5,
+     138.0
+    ],
+    "tug_exhaust_share_of_held_screen": [
+     0.0013,
+     0.0027
+    ],
+    "tug_jet_power_tw": [
+     0.0308,
+     0.0619
+    ]
+   }
+  }
+ },
+ "computing": {
+  "server_mt_per_tw": 12.8,
+  "radiator_mt_per_tw": [
+   2.48,
+   11.6
+  ],
+  "server_life_years": [
+   4.0,
+   6.0
+  ],
+  "heat_per_electric": [
+   1.93,
+   3.4
+  ],
+  "cases": {
+   "100_tw": {
+    "servers_gt": 1.28,
+    "radiators_gt": [
+     0.248,
+     1.16
+    ],
+    "hardware_gt": [
+     1.53,
+     2.44
+    ],
+    "server_renewal_gt_yr": [
+     0.213,
+     0.32
+    ],
+    "collectors_km2": [
+     245000.0,
+     367000.0
+    ],
+    "heat_released_tw": [
+     293.0,
+     440.0
+    ],
+    "moon_w_m2_near_fleet": [
+     0.0146,
+     0.0219
+    ],
+    "moon_w_m2_at_hubs": [
+     4.67e-06,
+     7e-06
+    ]
+   },
+   "1000_tw": {
+    "servers_gt": 12.8,
+    "radiators_gt": [
+     2.48,
+     11.6
+    ],
+    "hardware_gt": [
+     15.3,
+     24.4
+    ],
+    "server_renewal_gt_yr": [
+     2.13,
+     3.2
+    ],
+    "collectors_km2": [
+     2450000.0,
+     3670000.0
+    ],
+    "heat_released_tw": [
+     2930.0,
+     4400.0
+    ],
+    "moon_w_m2_near_fleet": [
+     0.146,
+     0.219
+    ],
+    "moon_w_m2_at_hubs": [
+     4.67e-05,
+     7e-05
+    ]
+   }
+  }
+ },
+ "after_build": {
+  "air": {
+   "inventory_kg": 3.141e+18,
+   "losses": {
+    "warm_case_no_magnets": {
+     "kg_s": 1.4,
+     "cycle_years": 71100000000.0,
+     "n2_kg_s": 1.13
+    },
+    "warm_case_september_magnets": {
+     "kg_s": 0.044,
+     "cycle_years": 2260000000000.0,
+     "n2_kg_s": 0.0354
+    },
+    "cooler_cases_low": {
+     "kg_s": 0.61,
+     "cycle_years": 163000000000.0,
+     "n2_kg_s": 0.491
+    },
+    "cooler_cases_high": {
+     "kg_s": 0.8,
+     "cycle_years": 124000000000.0,
+     "n2_kg_s": 0.644
+    },
+    "budget_1_kg_s": {
+     "kg_s": 1.0,
+     "cycle_years": 99500000000.0,
+     "n2_kg_s": 0.805
+    },
+    "budget_10_kg_s": {
+     "kg_s": 10.0,
+     "cycle_years": 9950000000.0,
+     "n2_kg_s": 8.05
+    },
+    "budget_100_kg_s": {
+     "kg_s": 100.0,
+     "cycle_years": 995000000.0,
+     "n2_kg_s": 80.5
+    }
+   },
+   "computed_kg_s": [
+    0.044,
+    1.4
+   ],
+   "windows": {
+    "years_500_1000": {
+     "kg": [
+      694000000.0,
+      22100000000.0
+     ],
+     "airs": [
+      2.21e-10,
+      7.03e-09
+     ]
+    },
+    "years_1000_10000": {
+     "kg": [
+      12500000000.0,
+      398000000000.0
+     ],
+     "airs": [
+      3.98e-09,
+      1.27e-07
+     ]
+    },
+    "operation_1e9": {
+     "kg": [
+      1390000000000000.0,
+      4.42e+16
+     ],
+     "airs": [
+      0.000442,
+      0.0141
+     ]
+    }
+   }
+  },
+  "oxygen_to_rock": {
+   "kg_s": [
+    165.0,
+    5270.0
+   ],
+   "cycle_years": [
+    3680000.0,
+    118000000.0
+   ],
+   "times_warm_case_escape": [
+    118.0,
+    3760.0
+   ],
+   "erosion_limited_kg_s": [
+    127.0,
+    4010.0
+   ],
+   "windows": {
+    "years_500_1000": {
+     "kg": [
+      2600000000000.0,
+      83100000000000.0
+     ],
+     "air_oxygens": [
+      4.24e-06,
+      0.000136
+     ]
+    },
+    "years_1000_10000": {
+     "kg": [
+      46800000000000.0,
+      1500000000000000.0
+     ],
+     "air_oxygens": [
+      7.64e-05,
+      0.00244
+     ]
+    },
+    "operation_1e9": {
+     "kg": [
+      4e+18,
+      1.27e+20
+     ],
+     "air_oxygens": [
+      6.53,
+      206.0
+     ]
+    }
+   },
+   "note": "The operation window takes the erosion-limited sink, as first_screen.json does."
+  },
+  "water": {
+   "inventory_kg": 1.382e+19,
+   "hydrogen_escape_as_water_kg_s": [
+    0.0218,
+    0.0242
+   ],
+   "cycle_years": [
+    18100000000000.0,
+    20100000000000.0
+   ],
+   "crust_kg": [
+    4.976e+18,
+    5.93e+19
+   ],
+   "crust_fill_years": [
+    1000.0,
+    10000.0
+   ],
+   "crust_kg_s_if_after_the_seas": [
+    15800000.0,
+    1880000000.0
+   ],
+   "build_water_kg_s": 876000000.0,
+   "crust_over_build_stream": [
+    0.018,
+    2.1
+   ]
+  },
+  "nitrogen": {
+   "escape_kg_s": [
+    0.0354,
+    1.13
+   ],
+   "burial_at_lake_rates_kg_s": [
+    373.0,
+    4710.0
+   ],
+   "sea_carbon_burial_gt_yr": [
+    0.202,
+    0.51
+   ],
+   "burial_cycle_years": [
+    17000000.0,
+    215000000.0
+   ],
+   "windows": {
+    "years_500_1000": {
+     "kg": [
+      5880000000000.0,
+      74300000000000.0
+     ],
+     "air_nitrogens": [
+      2.33e-06,
+      2.94e-05
+     ]
+    },
+    "years_1000_10000": {
+     "kg": [
+      106000000000000.0,
+      1340000000000000.0
+     ],
+     "air_nitrogens": [
+      4.19e-05,
+      0.000529
+     ]
+    },
+    "operation_1e9": {
+     "kg": [
+      1.18e+19,
+      1.49e+20
+     ],
+     "air_nitrogens": [
+      4.65,
+      58.8
+     ]
+    }
+   }
+  },
+  "carbon": {
+   "inventory_kg": 1930000000000000.0,
+   "runoff_rescale": 0.822,
+   "weathering_gt_co2_yr": [
+    0.296,
+    2.96
+   ],
+   "burial_gt_co2_yr": [
+    0.739,
+    1.87
+   ],
+   "cycle_years": {
+    "weathering": [
+     652.0,
+     6520.0
+    ],
+    "weathering_and_burial": [
+     400.0,
+     1860.0
+    ]
+   },
+   "kilns_gw": [
+    37.9,
+    379.0
+   ],
+   "kilns_heat_w_m2": [
+    0.000999,
+    0.00999
+   ],
+   "import_as_carbon_kg_s": [
+    8950.0,
+    41700.0
+   ],
+   "burial_import_as_carbon_kg_s": [
+    6390.0,
+    16200.0
+   ],
+   "burial_o2_release_gt_yr": [
+    0.538,
+    1.36
+   ],
+   "note": "Kilns return the weathered carbon on the Moon; buried organic carbon needs its own return path or an import."
+  },
+  "film": {
+   "upkeep_gt_yr": [
+    2.309,
+    4.638
+   ],
+   "fresh_feed_kg_s": {
+    "0.99": [
+     732,
+     1470
+    ],
+    "0.999": [
+     73,
+     147
+    ]
+   },
+   "fleet_replaced_by_fresh_feed_years": {
+    "0.99": [
+     995.0,
+     2010.0
+    ],
+    "0.999": [
+     9950.0,
+     20100.0
+    ]
+   },
+   "windows": {
+    "0.99": {
+     "years_500_1000": {
+      "kg": [
+       11600000000000.0,
+       23200000000000.0
+      ],
+      "fleets": [
+       0.25,
+       0.502
+      ]
+     },
+     "years_1000_10000": {
+      "kg": [
+       208000000000000.0,
+       418000000000000.0
+      ],
+      "fleets": [
+       4.5,
+       9.04
+      ]
+     },
+     "operation_1e9": {
+      "kg": [
+       2.31e+19,
+       4.64e+19
+      ],
+      "fleets": [
+       500000.0,
+       1000000.0
+      ]
+     }
+    },
+    "0.999": {
+     "years_500_1000": {
+      "kg": [
+       1150000000000.0,
+       2320000000000.0
+      ],
+      "fleets": [
+       0.0249,
+       0.0502
+      ]
+     },
+     "years_1000_10000": {
+      "kg": [
+       20700000000000.0,
+       41800000000000.0
+      ],
+      "fleets": [
+       0.449,
+       0.904
+      ]
+     },
+     "operation_1e9": {
+      "kg": [
+       2.3e+18,
+       4.64e+18
+      ],
+      "fleets": [
+       49900.0,
+       100000.0
+      ]
+     }
+    }
+   }
+  },
+  "pre_air_lift": {
+   "lift_mj_kg": 2.7,
+   "fleet_gt": [
+    46.2,
+    46.4
+   ],
+   "reserve_years": 1000.0,
+   "reserve_gt_at_99": [
+    23.1,
+    46.4
+   ],
+   "power_gw_over_100_years": {
+    "fleet": [
+     39.5,
+     39.7
+    ],
+    "reserve": [
+     19.8,
+     39.7
+    ]
+   }
+  }
+ },
+ "people": {
+  "dry_land_km2": 23400000.0,
+  "stock_t_per_person": [
+   43.0,
+   335.0
+  ],
+  "lifetime_years": [
+   65.0,
+   81.0
+  ],
+  "energy_gj_per_person": [
+   119.0,
+   270.0
+  ],
+  "sp413": {
+   "people": 10000.0,
+   "shield_t": 9900000.0,
+   "structure_t": 150000.0,
+   "projected_m2": 680000.0,
+   "shield_t_m2": 4.5
+  },
+  "shield_t_per_m2_projected": 14.6,
+  "scenarios": {
+   "first_millennium": {
+    "moon_people": 1000000000.0,
+    "array_people": 2000000000.0,
+    "total_with_earth_peak": 13300000000.0,
+    "moon": {
+     "stocks_gt": [
+      43.0,
+      335.0
+     ],
+     "soil_depth_over_dry_land_m": [
+      0.00123,
+      0.00955
+     ],
+     "turnover_gt_yr": [
+      0.531,
+      5.15
+     ],
+     "fresh_gt_yr_at_earths_recycling": [
+      0.467,
+      4.54
+     ],
+     "energy_tw": [
+      3.79,
+      8.56
+     ],
+     "heat_w_m2_if_brought_in": [
+      0.0998,
+      0.226
+     ],
+     "warming_k_if_brought_in": [
+      0.062,
+      0.23
+     ],
+     "copper": {
+      "stock_gt": [
+       0.14,
+       0.3
+      ],
+      "over_earths_identified": [
+       0.067,
+       0.14
+      ],
+      "ore_gt": {
+       "highland_soil": [
+        30400.0,
+        65200.0
+       ],
+       "ci_chondrite": [
+        1100.0,
+        2360.0
+       ]
+      },
+      "dry_land_soil_m": [
+       0.867,
+       1.86
+      ],
+      "top_up_mt_yr": [
+       1.75,
+       6.0
+      ],
+      "top_up_kg_s": [
+       55.5,
+       190.0
+      ],
+      "top_up_over_earths_mine_output": [
+       0.076,
+       0.26
+      ]
+     },
+     "zinc": {
+      "stock_gt": [
+       0.08,
+       0.2
+      ],
+      "ore_gt": {
+       "highland_soil": [
+        7690.0,
+        19200.0
+       ],
+       "ci_chondrite": [
+        258.0,
+        645.0
+       ]
+      }
+     }
+    },
+    "array": {
+     "shield_t_per_person": 990.0,
+     "habitat_gt": [
+      2010.0,
+      2010.0
+     ],
+     "goods_gt": [
+      86.0,
+      670.0
+     ],
+     "total_gt": [
+      2100.0,
+      2680.0
+     ],
+     "fleets": [
+      45.2,
+      58.0
+     ],
+     "share_of_build_water": [
+      2.7e-05,
+      0.00015
+     ],
+     "habitat_kg_s_over_growth": {
+      "1000_years": [
+       63700.0,
+       63700.0
+      ],
+      "5000_years": [
+       12700.0,
+       12700.0
+      ]
+     },
+     "total_kg_s_over_growth": {
+      "1000_years": [
+       66400.0,
+       84900.0
+      ],
+      "5000_years": [
+       13300.0,
+       17000.0
+      ]
+     },
+     "energy_tw": [
+      7.57,
+      17.1
+     ],
+     "collectors_km2": [
+      18500.0,
+      62900.0
+     ],
+     "heat_released_tw": [
+      22.2,
+      75.3
+     ],
+     "moon_w_m2": [
+      0.0011,
+      0.00375
+     ],
+     "pre_air_lift_tw_over_100_years": [
+      1.72,
+      1.72
+     ]
+    }
+   },
+   "frame_low": {
+    "moon_people": 3000000000.0,
+    "array_people": 7000000000.0,
+    "total_with_earth_peak": 20300000000.0,
+    "moon": {
+     "stocks_gt": [
+      129.0,
+      1000.0
+     ],
+     "soil_depth_over_dry_land_m": [
+      0.00368,
+      0.0286
+     ],
+     "turnover_gt_yr": [
+      1.59,
+      15.5
+     ],
+     "fresh_gt_yr_at_earths_recycling": [
+      1.4,
+      13.6
+     ],
+     "energy_tw": [
+      11.4,
+      25.7
+     ],
+     "heat_w_m2_if_brought_in": [
+      0.299,
+      0.677
+     ],
+     "warming_k_if_brought_in": [
+      0.19,
+      0.68
+     ],
+     "copper": {
+      "stock_gt": [
+       0.42,
+       0.9
+      ],
+      "over_earths_identified": [
+       0.2,
+       0.43
+      ],
+      "ore_gt": {
+       "highland_soil": [
+        91300.0,
+        196000.0
+       ],
+       "ci_chondrite": [
+        3310.0,
+        7090.0
+       ]
+      },
+      "dry_land_soil_m": [
+       2.6,
+       5.58
+      ],
+      "top_up_mt_yr": [
+       5.25,
+       18.0
+      ],
+      "top_up_kg_s": [
+       166.0,
+       570.0
+      ],
+      "top_up_over_earths_mine_output": [
+       0.23,
+       0.78
+      ]
+     },
+     "zinc": {
+      "stock_gt": [
+       0.24,
+       0.6
+      ],
+      "ore_gt": {
+       "highland_soil": [
+        23100.0,
+        57700.0
+       ],
+       "ci_chondrite": [
+        774.0,
+        1940.0
+       ]
+      }
+     }
+    },
+    "array": {
+     "shield_t_per_person": 990.0,
+     "habitat_gt": [
+      7040.0,
+      7040.0
+     ],
+     "goods_gt": [
+      301.0,
+      2340.0
+     ],
+     "total_gt": [
+      7340.0,
+      9380.0
+     ],
+     "fleets": [
+      158.0,
+      203.0
+     ],
+     "share_of_build_water": [
+      9.6e-05,
+      0.00051
+     ],
+     "habitat_kg_s_over_growth": {
+      "1000_years": [
+       223000.0,
+       223000.0
+      ],
+      "5000_years": [
+       44600.0,
+       44600.0
+      ]
+     },
+     "total_kg_s_over_growth": {
+      "1000_years": [
+       232000.0,
+       297000.0
+      ],
+      "5000_years": [
+       46500.0,
+       59400.0
+      ]
+     },
+     "energy_tw": [
+      26.5,
+      59.9
+     ],
+     "collectors_km2": [
+      64900.0,
+      220000.0
+     ],
+     "heat_released_tw": [
+      77.7,
+      264.0
+     ],
+     "moon_w_m2": [
+      0.00387,
+      0.0131
+     ],
+     "pre_air_lift_tw_over_100_years": [
+      6.02,
+      6.02
+     ]
+    }
+   },
+   "frame_high": {
+    "moon_people": 6000000000.0,
+    "array_people": 14000000000.0,
+    "total_with_earth_peak": 30300000000.0,
+    "moon": {
+     "stocks_gt": [
+      258.0,
+      2010.0
+     ],
+     "soil_depth_over_dry_land_m": [
+      0.00735,
+      0.0573
+     ],
+     "turnover_gt_yr": [
+      3.19,
+      30.9
+     ],
+     "fresh_gt_yr_at_earths_recycling": [
+      2.8,
+      27.2
+     ],
+     "energy_tw": [
+      22.7,
+      51.4
+     ],
+     "heat_w_m2_if_brought_in": [
+      0.599,
+      1.35
+     ],
+     "warming_k_if_brought_in": [
+      0.37,
+      1.4
+     ],
+     "copper": {
+      "stock_gt": [
+       0.84,
+       1.8
+      ],
+      "over_earths_identified": [
+       0.4,
+       0.86
+      ],
+      "ore_gt": {
+       "highland_soil": [
+        183000.0,
+        391000.0
+       ],
+       "ci_chondrite": [
+        6610.0,
+        14200.0
+       ]
+      },
+      "dry_land_soil_m": [
+       5.2,
+       11.2
+      ],
+      "top_up_mt_yr": [
+       10.5,
+       36.0
+      ],
+      "top_up_kg_s": [
+       333.0,
+       1140.0
+      ],
+      "top_up_over_earths_mine_output": [
+       0.46,
+       1.6
+      ]
+     },
+     "zinc": {
+      "stock_gt": [
+       0.48,
+       1.2
+      ],
+      "ore_gt": {
+       "highland_soil": [
+        46200.0,
+        115000.0
+       ],
+       "ci_chondrite": [
+        1550.0,
+        3870.0
+       ]
+      }
+     }
+    },
+    "array": {
+     "shield_t_per_person": 990.0,
+     "habitat_gt": [
+      14100.0,
+      14100.0
+     ],
+     "goods_gt": [
+      602.0,
+      4690.0
+     ],
+     "total_gt": [
+      14700.0,
+      18800.0
+     ],
+     "fleets": [
+      316.0,
+      406.0
+     ],
+     "share_of_build_water": [
+      0.00019,
+      0.001
+     ],
+     "habitat_kg_s_over_growth": {
+      "1000_years": [
+       446000.0,
+       446000.0
+      ],
+      "5000_years": [
+       89200.0,
+       89200.0
+      ]
+     },
+     "total_kg_s_over_growth": {
+      "1000_years": [
+       465000.0,
+       594000.0
+      ],
+      "5000_years": [
+       93000.0,
+       119000.0
+      ]
+     },
+     "energy_tw": [
+      53.0,
+      120.0
+     ],
+     "collectors_km2": [
+      130000.0,
+      440000.0
+     ],
+     "heat_released_tw": [
+      155.0,
+      527.0
+     ],
+     "moon_w_m2": [
+      0.00773,
+      0.0262
+     ],
+     "pre_air_lift_tw_over_100_years": [
+      12.0,
+      12.0
+     ]
+    }
+   }
+  }
+ },
+ "operation": {
+  "build_kg_s": [
+   1070000000.0,
+   4830000000.0
+  ],
+  "after_build_streams_kg_s": {
+   "air_escape": [
+    0.044,
+    1.4
+   ],
+   "film_fresh_feed": [
+    73,
+    1470
+   ],
+   "array_habitats": [
+    12700.0,
+    446000.0
+   ],
+   "moon_copper_top_up": [
+    55.5,
+    1140.0
+   ]
+  },
+  "after_build_total_kg_s": [
+   12800.0,
+   449000.0
+  ],
+  "build_over_after": [
+   2390.0,
+   377000.0
+  ],
+  "conditional_streams_kg_s": {
+   "crust_water_if_after_the_seas": [
+    15800000.0,
+    1880000000.0
+   ],
+   "carbon_if_imported_for_weathering_and_burial": [
+    8950.0,
+    41700.0
+   ]
+  },
+  "packets_per_day": {
+   "build": [
+    924000.0,
+    417000000.0
+   ],
+   "after_build": [
+    11.1,
+    38800.0
+   ]
+  },
+  "braking_mj_kg": {
+   "main_belt": 19.2,
+   "jupiter_trojans": 38.6,
+   "kuiper_belt": 69.9
+  },
+  "braking_power": {
+   "build_pw": [
+    20.5,
+    338.0
+   ],
+   "after_build_tw": [
+    0.246,
+    31.4
+   ],
+   "build_share_of_k1_17": [
+    0.041,
+    0.67
+   ]
+  },
+  "build_in_transit_kg": {
+   "main_belt": [
+    4.25e+16,
+    1.92e+17
+   ],
+   "jupiter_trojans": [
+    9.22e+16,
+    4.16e+17
+   ],
+   "kuiper_belt": [
+    1.57e+18,
+    7.07e+18
+   ]
+  },
+  "k1_17_w": 5.01e+17
+ }
+}

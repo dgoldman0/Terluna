@@ -188,6 +188,40 @@ loss and the resupply that matches it take to replace the inventory.
     devices are already required to be "made of common elements" (array_industry.md). *A check to make,
     element by element.*
 
+### Industry and the near horizons
+
+The author asked on 9 October how the array connects to industry and to the continuing flows of the
+Solar-System-wide operation, over the first thousand years with the build and the several thousand after. The study
+is [industry.md](industry.md), with its screen [industry.py](industry.py); numbers here are from it.
+
+14. **Concentrated industry flies on platforms of its own.** The bundle's one sail loading leaves an annulus tile
+    2.86 g/m² beyond its film for structure, trim, store and wiring, 5.9 Gt over the fleet, and photon keeping reaches
+    a quarter of the sail force. Hardware spread over every tile adds film-plant feed with its mass and glow with its
+    absorption: 1.66–2.91 W/m² on the Moon for each percent of the fleet's sunlight it absorbs.
+15. **Where heat is released ranks the places across a factor of a million.** A terawatt used on the Moon adds
+    0.026 W/m², released at the ring radius 5.0×10⁻⁵ W/m², and at the Sun–Earth L1/L2 hubs 0.6–1.6×10⁻⁸ W/m². The
+    Moon's count applies to energy brought from outside its own sunlight, wind and rivers. With its collectors' heat,
+    1,000 TW of computing near the fleet puts 0.15–0.22 W/m² on the Moon; at the hubs, 5–7×10⁻⁵ W/m².
+16. **Computing at the integrated ledger's scale is a gigatonne industry.** On today's servers, 12.8 kg per kW,
+    1,000 TW is 15–24 Gt of hardware renewed at 2.1–3.2 Gt a year, the film plant's size. Control and interactive
+    services fit beside the fleet; bulk computing fits the hubs.
+17. **The film plant's tiles travel on their own sails.** Renewing 2.3–4.6 Gt a year means 3,850–7,730 tile exchanges
+    a day; from one plant 6–12% of the fleet is in transit, and eight plants across the stack's tilts bring that to
+    0.7–1.5%. Electric tugs would release 69–1,070 kg/s of exhaust inside the protected region, which S7 governs.
+18. **On the near horizons the air needs resupply of its CO2 alone.** Escape (cycle times of 70 billion years and
+    more), rock (0.008–0.24% of the oxygen by year 10,000) and burial (0.004–0.05% of the nitrogen) leave the air as
+    built, while weathering and burial turn its CO2 over in 400–1,860 years. Kilns of 38–380 GW return the weathered
+    carbon; the buried carbon needs a return path or 6,400–16,200 kg/s imported.
+19. **The array's habitats set the largest stream after the build.** The Stanford torus shields each person with
+    990 t (Johnson & Holbrow 1977), so 0.1–1 billion residents take 99–990 Gt and 2–14 billion 2,000–14,000 Gt. As
+    water the whole is 0.003–0.1% of what the build delivers.
+20. **After the build the operation shrinks 2,400–380,000 times.** It falls from 1.07–4.83×10⁹ kg/s, braked at the
+    hubs at 20–340 PW, to 1.3×10⁴–4.5×10⁵ kg/s for the air's top-up, the film's feed, the habitats and the Moon's
+    copper, unless the crust takes its water late (1.6×10⁷–1.9×10⁹ kg/s for 1,000–10,000 years) or the carbon is
+    imported. The Moon's 1–6 billion people would hold 43–2,010 Gt of stocks built from lunar rock and need copper
+    near Earth's identified resources. Over 10⁹ years rock takes 6.5–206 times the air's oxygen, so the long frame
+    turns on local return paths.
+
 ## Statements elsewhere that need correcting
 
 The evaluation ([state.md](state.md#statements-elsewhere-that-need-correcting)) lists stale or conflicting statements
@@ -208,5 +242,10 @@ in other folders. They belong to main and are unchanged on this branch. The larg
 | [literature.md](literature.md) | The literature by topic, with what it means for the Open Moon |
 | [questions.md](questions.md) | The open questions, in order |
 | [sources.json](sources.json) | Every source cited, its use and how far it was read |
+| [industry.md](industry.md) | The array in industry and the flows of the near horizons |
+| [industry.py](industry.py) | Its screen: places, heat by place, the film plant's traffic, computing's mass, the flows after the build, people's stocks |
+| [results/industry.json](results/industry.json) | Its product (schema `terluna.resources.industry/1`) |
+| [industry_sources.json](industry_sources.json) | The industry study's sources and how far each was read |
 
-`python -m resources.screen` rewrites the product; `python -m pytest resources/tests` checks it.
+`python -m resources.screen` and `python -m resources.industry` rewrite the products; `python -m pytest resources/tests`
+checks them.

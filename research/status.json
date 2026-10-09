@@ -214,13 +214,14 @@
       ],
       "unresolved": [
         "the nitrogen's extraction plan, which the author asked for on 2026-10-09: feasible, sustainable and protecting the major celestial bodies as conservation principle 5 plans; ordinary icy bodies hold the air's 2.5e18 kg of N2 bound as ammonia, ammonium salts and organics, the Kuiper belt's small bodies 80-800 times the need by a rough count, so supplying it means processing 1e20-1e21 kg with the ammonia cracked to N2 at the source (resources/questions.md)",
+        "the array's place in industry and the near horizons (resources/industry.md, 2026-10-09): concentrated industry on platforms of its own, heat counted by where it is released (0.026 W/m2 per TW on the Moon, 5e-5 at the ring radius, 1e-8 at the L1/L2 hubs), computing as a gigatonne industry, the film plant's tile traffic, the CO2 as the near horizons' one fast drain on the air, and the array's habitats (990 t of shield a person) as the largest stream after the build",
         "a redox account of every import: oxygen shipped as water leaves hydrogen enough to burn all of it back; nitrogen as ammonia carries hydrogen needing seven times the air's oxygen",
         "where deliveries put the energy of their fall into the Moon's well, 1.2-2.7 MJ/kg or 35-349 W/m2 over a 500-year build, and an arrival rule in the spirit of S7",
         "the shield's material life cycle: the film plant's recovery fraction, which sets 73-1,470 kg/s of fresh feed; the film's life; where failed tiles go; lunar feed before the air, then recycling or small bodies",
         "carbon and oxygen budgets through time: a box model with soils' carbonates, the seas' dissolved carbon, burial, kilns and lime, and rock oxidation taking the air's oxygen on a 4-120 million year cycle",
         "the seas' composition through time and the delivered water's salts; a geochemical map separating dry from flooded ore; the crust's water uptake; micronutrients and critical elements element by element; lift gas; what weathering releases; Earth's share of the costs"
       ],
-      "next_session_task": "Resources' open questions in order (resources/questions.md): the nitrogen's extraction plan, from a census of the ordinary icy populations, with the choice among them the author's; the redox account of the imports; where deliveries put their energy; the shield's material life cycle with the planned research/array-industry branch; then a carbon and oxygen box model, the seas' composition, a geochemical map of dry and flooded ore, and the micronutrient table."
+      "next_session_task": "Resources' open questions in order (resources/questions.md): the nitrogen's extraction plan, from a census of the ordinary icy populations, with the choice among them the author's; the array's population and its habitats' shielding; the redox account of the imports; where deliveries put their energy; the shield's material life cycle with the planned research/array-industry branch; then a carbon and oxygen box model, the seas' composition, a geochemical map of dry and flooded ore, and the micronutrient table."
     },
     {
       "topic": "illumination",
