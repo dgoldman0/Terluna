@@ -1,0 +1,4658 @@
+{
+ "schema": "terluna.research.daily-life/1",
+ "producer": {
+  "study": "daily_life",
+  "files": {
+   "research/studies/daily_life/run.py": "3f8f9aeb25e71134",
+   "illumination/calendar/geometry.py": "462b9f7174efa4ae",
+   "illumination/calendar/validate.py": "3dadeb5912cc31b1",
+   "illumination/calendar/disk.py": "6dfbdc1b581a2255"
+  },
+  "constants": {
+   "AU": 149597870700.0,
+   "EARTH_GM": 398600441800000.0,
+   "EARTH_MOON_DISTANCE": 384400000.0,
+   "EARTH_RADIUS": 6371000.0,
+   "EARTH_SIDEREAL_DAY_S": 86164.0905,
+   "GAS_CONSTANT": 8.31446261815324,
+   "JULIAN_DAY": 86400.0,
+   "JULIAN_YEAR_DAYS": 365.25,
+   "MOON_EQUATOR_TO_ECLIPTIC_DEG": 1.5424,
+   "MOON_ORBIT_ECCENTRICITY": 0.0549,
+   "MOON_RADIUS": 1737400.0,
+   "MOON_SURFACE_GRAVITY": 1.6242188765608128,
+   "SIDEREAL_MONTH_DAYS": 27.321661,
+   "SPEED_OF_LIGHT": 299792458.0,
+   "STANDARD_GRAVITY": 9.80665,
+   "SUN_GM": 1.3271244004127942e+20,
+   "SUN_RADIUS": 695700000.0,
+   "SYNODIC_MONTH_DAYS": 29.53059
+  },
+  "inputs": {
+   "illumination/calendar/results/transfer.json": "68ea6e820a8d7603",
+   "illumination/sky/results/solved_sky.json": "a94333cd71a83169",
+   "climate/results/gcm/global_winds_A28_dim5_moon.json": "4055b824d45c54b1",
+   "research/studies/sky_ships/results/sky_ships.json": "1e214bf6e64b0bb8",
+   "research/studies/sky_fleet/results/sky_fleet.json": "c96dfc663f12756c",
+   "research/studies/summit_tower/results/summit_tower.json": "53954bbe96931efa",
+   "research/studies/inhabited_volume/results/inhabited_volume.json": "591595d27a4da27d",
+   "research/studies/cloud_twilight/results/regional_evenings.json": "70ed3ce009c29150",
+   "research/studies/conservation/results/heritage_register.json": "b0756b08ac3fe0bc",
+   "provisioning/results/population.json": "bb2b7e396f9eae0b",
+   "provisioning/results/computing.json": "499826be9d0a582a",
+   "shared/scenarios/population.json": "74ec20d6f8057977",
+   "geography/results/atlas.json": "78cfbf2f469eb339",
+   "biosphere/canopy/results/canopy.json": "bedb8ce2502316d4",
+   "climate/results/gcm/zonal_winds_A28_dim5_moon.json": "a6a5d0cf96b42a1a"
+  },
+  "optional_inputs": {
+   "climate/gcm/products/climatology_A28_dim5_moon.npz": "3fb185c8087ea9b5"
+  },
+  "main_inputs": {
+   "research/studies/joint_synthesis/results/places.json": {
+    "commit": "78020e0f3273cd98b6b7ac68554b162cf3a96239",
+    "sha256": "9707e4d1c7332ba3",
+    "read_from": "git object at the pinned commit",
+    "bind": "Read in-tree once the branch merges main; until then from Git at the commit."
+   }
+  }
+ },
+ "evidence": "Clear-sky light on level ground from the calendar's solved column in the mean geometry (no libration, refraction, terrain, cloud or haze), checked against main's corrected per-place Earthlight; global-mean air by height and the zonal-wind product's 3-day-mean winds, drifting days and passive routes from the design run (large-scale flow at about 170 km, no steering); closed-form arithmetic on the sky-fleet, inhabited-volume, summit-tower, provisioning and conservation products, shared constants and cited values. No settlement, schedule, health outcome or social arrangement is modelled.",
+ "reading_rule": "Hours are Earth hours (3,600 s) in the 708.73-hour synodic cycle; light in lux on an unobstructed level surface; states partition the cycle by the Sun: day (its centre up), dusk (sunset until its sky falls to the practical-dusk level), night (its sky below the level), dawn (the mirror of dusk); where its sky never falls to the level, dusk runs into dawn at local midnight. The Earth's light is counted within the night: below_dusk_h are the hours the total light stays below the level, earth_holds_above_dusk_h the night hours the Earth keeps above it. Places are (lat, east lon); far-side and nearside rows lie on the 180 and 0 meridians. phase_offset_h is how many hours the second place's cycle runs ahead of the first's. Circadian levels are Brown et al.'s melanopic EDI at the eye, compared here with horizontal illuminance as a reference only. Sky-town days are Earth days, read from the zonal-wind product's arrays as area-weighted means over the model rows in each band of |latitude| (both hemispheres); day_at_mean_wind_days applies T v_sun / |v_sun + u| to the band's mean wind. Routes are passive, at fixed heights, carried by the 3-day means; days_by_quarter splits the ten-year mean day by the time spent in each quarter of hour angle over years 5-10, lingers_at_hour_deg is the centre of the 30-degree sector holding most of that time (0 noon, +90 sunset; on a 24-hour clock of the lunar day, 12:00 + hour/15) and linger_strength its share against an even pace (1 is even).",
+ "levels": {
+  "dusk": 2.981430866471775,
+  "dark": 0.1,
+  "photopic": 87.26646259971648,
+  "scotopic": 0.08726646259971649,
+  "dusk_basis": "Earth control's light at the end of civil twilight (Sun -6 deg), solved_sky.json",
+  "dusk_sun_deg": -41.52,
+  "dark_sun_deg": -59.6,
+  "circadian_reference": {
+   "daytime_at_least": 250.0,
+   "evening_at_most": 10.0,
+   "sleep_at_most": 1.0
+  }
+ },
+ "cycle": {
+  "hours": 708.734,
+  "sun_deg_per_hour": 0.50795,
+  "days_of_24h": 29.53,
+  "terminator": [
+   {
+    "lat": 0.0,
+    "km_h": 15.4,
+    "practical_dusk_band_km": 1258
+   },
+   {
+    "lat": 15.0,
+    "km_h": 14.9,
+    "practical_dusk_band_km": 1269
+   },
+   {
+    "lat": 30.0,
+    "km_h": 13.3,
+    "practical_dusk_band_km": 1311
+   },
+   {
+    "lat": 45.0,
+    "km_h": 10.9,
+    "practical_dusk_band_km": 1493
+   },
+   {
+    "lat": 60.0,
+    "km_h": 7.7,
+    "practical_dusk_band_km": null
+   },
+   {
+    "lat": 75.0,
+    "km_h": 4.0,
+    "practical_dusk_band_km": null
+   }
+  ],
+  "never_falls_to_practical_dusk_poleward_of_deg": 48.48,
+  "never_falls_to_dark_poleward_of_deg": 30.4,
+  "seasonal_day": {
+   "0": {
+    "longest_day_h": 354.4,
+    "shortest_day_h": 354.4
+   },
+   "30": {
+    "longest_day_h": 357.9,
+    "shortest_day_h": 350.9
+   },
+   "60": {
+    "longest_day_h": 364.9,
+    "shortest_day_h": 343.8
+   },
+   "75": {
+    "longest_day_h": 377.1,
+    "shortest_day_h": 331.7
+   },
+   "85": {
+    "longest_day_h": 424.9,
+    "shortest_day_h": 283.8
+   }
+  }
+ },
+ "light": {
+  "calendars": {
+   "summit": {
+    "lat": 5.4125,
+    "lon": 201.3665,
+    "earth_elevation_deg": -68.1,
+    "side": "far side",
+    "day_h": 354.37,
+    "dusk_h": 82.2,
+    "night_h": 189.98,
+    "dawn_h": 82.2,
+    "dusk_runs_into_dawn": false,
+    "below_dusk_h": 189.98,
+    "earth_holds_above_dusk_h": 0.0,
+    "below_dark_h": 117.95,
+    "below_scotopic_h": 115.72,
+    "day_vision_after_sunset_h": 46.78,
+    "midnight_lux": 0.0014,
+    "darkest_lux": 0.0014,
+    "earth_midnight_lux": 0.0,
+    "earth_outshines_sky_h": 0.0,
+    "noon_lux": 87148.0,
+    "circadian_reference": {
+     "daytime_at_least": {
+      "level_lux": 250.0,
+      "night_hours_below": 281.6,
+      "night_hours_at_or_above": 72.8,
+      "cycle_hours_below": 281.6
+     },
+     "evening_at_most": {
+      "level_lux": 10.0,
+      "night_hours_below": 217.3,
+      "night_hours_at_or_above": 137.1,
+      "cycle_hours_below": 217.3
+     },
+     "sleep_at_most": {
+      "level_lux": 1.0,
+      "night_hours_below": 165.4,
+      "night_hours_at_or_above": 188.9,
+      "cycle_hours_below": 165.4
+     }
+    },
+    "sleeps": {
+     "day": 14.8,
+     "dusk": 3.4,
+     "night": 7.9,
+     "dawn": 3.4
+    }
+   },
+   "korolev_shore": {
+    "lat": 2.655,
+    "lon": 201.634,
+    "earth_elevation_deg": -68.3,
+    "side": "far side",
+    "day_h": 354.37,
+    "dusk_h": 81.86,
+    "night_h": 190.66,
+    "dawn_h": 81.86,
+    "dusk_runs_into_dawn": false,
+    "below_dusk_h": 190.66,
+    "earth_holds_above_dusk_h": 0.0,
+    "below_dark_h": 119.27,
+    "below_scotopic_h": 117.07,
+    "day_vision_after_sunset_h": 46.61,
+    "midnight_lux": 0.0012,
+    "darkest_lux": 0.0012,
+    "earth_midnight_lux": 0.0,
+    "earth_outshines_sky_h": 0.0,
+    "noon_lux": 87525.0,
+    "circadian_reference": {
+     "daytime_at_least": {
+      "level_lux": 250.0,
+      "night_hours_below": 281.8,
+      "night_hours_at_or_above": 72.5,
+      "cycle_hours_below": 281.8
+     },
+     "evening_at_most": {
+      "level_lux": 10.0,
+      "night_hours_below": 217.8,
+      "night_hours_at_or_above": 136.6,
+      "cycle_hours_below": 217.8
+     },
+     "sleep_at_most": {
+      "level_lux": 1.0,
+      "night_hours_below": 166.3,
+      "night_hours_at_or_above": 188.1,
+      "cycle_hours_below": 166.3
+     }
+    },
+    "sleeps": {
+     "day": 14.8,
+     "dusk": 3.4,
+     "night": 7.9,
+     "dawn": 3.4
+    }
+   },
+   "procellarum_russell": {
+    "lat": 32.9,
+    "lon": 284.6,
+    "earth_elevation_deg": 12.0,
+    "side": "nearside",
+    "day_h": 354.37,
+    "dusk_h": 102.66,
+    "night_h": 149.05,
+    "dawn_h": 102.66,
+    "dusk_runs_into_dawn": false,
+    "below_dusk_h": 144.47,
+    "earth_holds_above_dusk_h": 4.59,
+    "below_dark_h": 0.0,
+    "below_scotopic_h": 0.0,
+    "day_vision_after_sunset_h": 56.29,
+    "midnight_lux": 0.4368,
+    "darkest_lux": 0.4236,
+    "earth_midnight_lux": 0.2669,
+    "earth_outshines_sky_h": 58.3,
+    "noon_lux": 69672.0,
+    "circadian_reference": {
+     "daytime_at_least": {
+      "level_lux": 250.0,
+      "night_hours_below": 267.4,
+      "night_hours_at_or_above": 87.0,
+      "cycle_hours_below": 267.4
+     },
+     "evening_at_most": {
+      "level_lux": 10.0,
+      "night_hours_below": 185.5,
+      "night_hours_at_or_above": 168.8,
+      "cycle_hours_below": 185.5
+     },
+     "sleep_at_most": {
+      "level_lux": 1.0,
+      "night_hours_below": 99.4,
+      "night_hours_at_or_above": 254.9,
+      "cycle_hours_below": 99.4
+     }
+    },
+    "sleeps": {
+     "day": 14.8,
+     "dusk": 4.3,
+     "night": 6.2,
+     "dawn": 4.3
+    }
+   },
+   "smythii_headland": {
+    "lat": -1.5,
+    "lon": 90.0,
+    "earth_elevation_deg": -0.3,
+    "side": "limb",
+    "day_h": 354.37,
+    "dusk_h": 81.78,
+    "night_h": 190.8,
+    "dawn_h": 81.78,
+    "dusk_runs_into_dawn": false,
+    "below_dusk_h": 189.85,
+    "earth_holds_above_dusk_h": 0.95,
+    "below_dark_h": 85.2,
+    "below_scotopic_h": 72.99,
+    "day_vision_after_sunset_h": 46.58,
+    "midnight_lux": 0.0696,
+    "darkest_lux": 0.0606,
+    "earth_midnight_lux": 0.0685,
+    "earth_outshines_sky_h": 112.8,
+    "noon_lux": 87610.0,
+    "circadian_reference": {
+     "daytime_at_least": {
+      "level_lux": 250.0,
+      "night_hours_below": 281.9,
+      "night_hours_at_or_above": 72.5,
+      "cycle_hours_below": 281.9
+     },
+     "evening_at_most": {
+      "level_lux": 10.0,
+      "night_hours_below": 217.7,
+      "night_hours_at_or_above": 136.7,
+      "cycle_hours_below": 217.7
+     },
+     "sleep_at_most": {
+      "level_lux": 1.0,
+      "night_hours_below": 164.4,
+      "night_hours_at_or_above": 190.0,
+      "cycle_hours_below": 164.4
+     }
+    },
+    "sleeps": {
+     "day": 14.8,
+     "dusk": 3.4,
+     "night": 8.0,
+     "dawn": 3.4
+    }
+   },
+   "nubium": {
+    "lat": -25.0,
+    "lon": 345.0,
+    "earth_elevation_deg": 61.0,
+    "side": "nearside",
+    "day_h": 354.37,
+    "dusk_h": 92.55,
+    "night_h": 169.27,
+    "dawn_h": 92.55,
+    "dusk_runs_into_dawn": false,
+    "below_dusk_h": 0.0,
+    "earth_holds_above_dusk_h": 169.27,
+    "below_dark_h": 0.0,
+    "below_scotopic_h": 0.0,
+    "day_vision_after_sunset_h": 52.03,
+    "midnight_lux": 4.2803,
+    "darkest_lux": 3.1448,
+    "earth_midnight_lux": 4.2452,
+    "earth_outshines_sky_h": 167.9,
+    "noon_lux": 77064.0,
+    "circadian_reference": {
+     "daytime_at_least": {
+      "level_lux": 250.0,
+      "night_hours_below": 273.9,
+      "night_hours_at_or_above": 80.4,
+      "cycle_hours_below": 273.9
+     },
+     "evening_at_most": {
+      "level_lux": 10.0,
+      "night_hours_below": 194.2,
+      "night_hours_at_or_above": 160.2,
+      "cycle_hours_below": 194.2
+     },
+     "sleep_at_most": {
+      "level_lux": 1.0,
+      "night_hours_below": 0.0,
+      "night_hours_at_or_above": 354.4,
+      "cycle_hours_below": 0.0
+     }
+    },
+    "sleeps": {
+     "day": 14.8,
+     "dusk": 3.9,
+     "night": 7.1,
+     "dawn": 3.9
+    }
+   },
+   "ingenii_coast": {
+    "lat": -34.0,
+    "lon": 163.0,
+    "earth_elevation_deg": -52.6,
+    "side": "far side",
+    "day_h": 354.37,
+    "dusk_h": 104.53,
+    "night_h": 145.31,
+    "dawn_h": 104.53,
+    "dusk_runs_into_dawn": false,
+    "below_dusk_h": 145.31,
+    "earth_holds_above_dusk_h": 0.0,
+    "below_dark_h": 0.0,
+    "below_scotopic_h": 0.0,
+    "day_vision_after_sunset_h": 56.97,
+    "midnight_lux": 0.2007,
+    "darkest_lux": 0.2007,
+    "earth_midnight_lux": 0.0,
+    "earth_outshines_sky_h": 0.0,
+    "noon_lux": 68521.0,
+    "circadian_reference": {
+     "daytime_at_least": {
+      "level_lux": 250.0,
+      "night_hours_below": 266.2,
+      "night_hours_at_or_above": 88.1,
+      "cycle_hours_below": 266.2
+     },
+     "evening_at_most": {
+      "level_lux": 10.0,
+      "night_hours_below": 183.9,
+      "night_hours_at_or_above": 170.5,
+      "cycle_hours_below": 183.9
+     },
+     "sleep_at_most": {
+      "level_lux": 1.0,
+      "night_hours_below": 105.7,
+      "night_hours_at_or_above": 248.7,
+      "cycle_hours_below": 105.7
+     }
+    },
+    "sleeps": {
+     "day": 14.8,
+     "dusk": 4.4,
+     "night": 6.1,
+     "dawn": 4.4
+    }
+   },
+   "highland_box": {
+    "lat": -44.7,
+    "lon": 246.1,
+    "earth_elevation_deg": -17.0,
+    "side": "far side",
+    "day_h": 354.37,
+    "dusk_h": 135.55,
+    "night_h": 83.27,
+    "dawn_h": 135.55,
+    "dusk_runs_into_dawn": false,
+    "below_dusk_h": 83.17,
+    "earth_holds_above_dusk_h": 0.1,
+    "below_dark_h": 0.0,
+    "below_scotopic_h": 0.0,
+    "day_vision_after_sunset_h": 67.64,
+    "midnight_lux": 1.4364,
+    "darkest_lux": 1.4364,
+    "earth_midnight_lux": 0.0035,
+    "earth_outshines_sky_h": 0.0,
+    "noon_lux": 55920.0,
+    "circadian_reference": {
+     "daytime_at_least": {
+      "level_lux": 250.0,
+      "night_hours_below": 250.5,
+      "night_hours_at_or_above": 103.8,
+      "cycle_hours_below": 250.5
+     },
+     "evening_at_most": {
+      "level_lux": 10.0,
+      "night_hours_below": 145.2,
+      "night_hours_at_or_above": 209.1,
+      "cycle_hours_below": 145.2
+     },
+     "sleep_at_most": {
+      "level_lux": 1.0,
+      "night_hours_below": 0.0,
+      "night_hours_at_or_above": 354.4,
+      "cycle_hours_below": 0.0
+     }
+    },
+    "sleeps": {
+     "day": 14.8,
+     "dusk": 5.6,
+     "night": 3.5,
+     "dawn": 5.6
+    }
+   },
+   "polar_plain": {
+    "lat": 75.0,
+    "lon": 0.0,
+    "earth_elevation_deg": 14.7,
+    "side": "nearside",
+    "day_h": 354.37,
+    "dusk_h": 177.18,
+    "night_h": 0.0,
+    "dawn_h": 177.18,
+    "dusk_runs_into_dawn": true,
+    "below_dusk_h": 0.0,
+    "earth_holds_above_dusk_h": 0.0,
+    "below_dark_h": 0.0,
+    "below_scotopic_h": 0.0,
+    "day_vision_after_sunset_h": null,
+    "midnight_lux": 486.0776,
+    "darkest_lux": 486.0776,
+    "earth_midnight_lux": 1.0031,
+    "earth_outshines_sky_h": 0.0,
+    "noon_lux": 16482.0,
+    "circadian_reference": {
+     "daytime_at_least": {
+      "level_lux": 250.0,
+      "night_hours_below": 0.0,
+      "night_hours_at_or_above": 354.4,
+      "cycle_hours_below": 0.0
+     },
+     "evening_at_most": {
+      "level_lux": 10.0,
+      "night_hours_below": 0.0,
+      "night_hours_at_or_above": 354.4,
+      "cycle_hours_below": 0.0
+     },
+     "sleep_at_most": {
+      "level_lux": 1.0,
+      "night_hours_below": 0.0,
+      "night_hours_at_or_above": 354.4,
+      "cycle_hours_below": 0.0
+     }
+    },
+    "sleeps": {
+     "day": 14.8,
+     "dusk": 7.4,
+     "night": 0.0,
+     "dawn": 7.4
+    }
+   },
+   "tranquility": {
+    "lat": 0.674,
+    "lon": 23.473,
+    "earth_elevation_deg": 66.4,
+    "side": "nearside",
+    "day_h": 354.37,
+    "dusk_h": 81.75,
+    "night_h": 190.86,
+    "dawn_h": 81.75,
+    "dusk_runs_into_dawn": false,
+    "below_dusk_h": 46.09,
+    "earth_holds_above_dusk_h": 144.77,
+    "below_dark_h": 0.0,
+    "below_scotopic_h": 0.0,
+    "day_vision_after_sunset_h": 46.7,
+    "midnight_lux": 4.0927,
+    "darkest_lux": 2.4318,
+    "earth_midnight_lux": 4.0917,
+    "earth_outshines_sky_h": 189.2,
+    "noon_lux": 87647.0,
+    "circadian_reference": {
+     "daytime_at_least": {
+      "level_lux": 250.0,
+      "night_hours_below": 281.7,
+      "night_hours_at_or_above": 72.6,
+      "cycle_hours_below": 281.7
+     },
+     "evening_at_most": {
+      "level_lux": 10.0,
+      "night_hours_below": 211.4,
+      "night_hours_at_or_above": 143.0,
+      "cycle_hours_below": 211.4
+     },
+     "sleep_at_most": {
+      "level_lux": 1.0,
+      "night_hours_below": 0.0,
+      "night_hours_at_or_above": 354.4,
+      "cycle_hours_below": 0.0
+     }
+    },
+    "sleeps": {
+     "day": 14.8,
+     "dusk": 3.4,
+     "night": 8.0,
+     "dawn": 3.4
+    }
+   },
+   "far side 0": {
+    "lat": 0.0,
+    "lon": 180.0,
+    "earth_elevation_deg": -90.0,
+    "side": "far side",
+    "day_h": 354.37,
+    "dusk_h": 81.75,
+    "night_h": 190.87,
+    "dawn_h": 81.75,
+    "dusk_runs_into_dawn": false,
+    "below_dusk_h": 190.87,
+    "earth_holds_above_dusk_h": 0.0,
+    "below_dark_h": 119.69,
+    "below_scotopic_h": 117.49,
+    "day_vision_after_sunset_h": 46.56,
+    "midnight_lux": 0.001,
+    "darkest_lux": 0.001,
+    "earth_midnight_lux": 0.0,
+    "earth_outshines_sky_h": 0.0,
+    "noon_lux": 87660.0,
+    "circadian_reference": {
+     "daytime_at_least": {
+      "level_lux": 250.0,
+      "night_hours_below": 281.9,
+      "night_hours_at_or_above": 72.5,
+      "cycle_hours_below": 281.9
+     },
+     "evening_at_most": {
+      "level_lux": 10.0,
+      "night_hours_below": 218.0,
+      "night_hours_at_or_above": 136.4,
+      "cycle_hours_below": 218.0
+     },
+     "sleep_at_most": {
+      "level_lux": 1.0,
+      "night_hours_below": 166.5,
+      "night_hours_at_or_above": 187.8,
+      "cycle_hours_below": 166.5
+     }
+    },
+    "sleeps": {
+     "day": 14.8,
+     "dusk": 3.4,
+     "night": 8.0,
+     "dawn": 3.4
+    }
+   },
+   "far side 15": {
+    "lat": 15.0,
+    "lon": 180.0,
+    "earth_elevation_deg": -75.1,
+    "side": "far side",
+    "day_h": 354.37,
+    "dusk_h": 85.32,
+    "night_h": 183.72,
+    "dawn_h": 85.32,
+    "dusk_runs_into_dawn": false,
+    "below_dusk_h": 183.72,
+    "earth_holds_above_dusk_h": 0.0,
+    "below_dark_h": 105.33,
+    "below_scotopic_h": 102.78,
+    "day_vision_after_sunset_h": 48.31,
+    "midnight_lux": 0.0057,
+    "darkest_lux": 0.0057,
+    "earth_midnight_lux": 0.0,
+    "earth_outshines_sky_h": 0.0,
+    "noon_lux": 83779.0,
+    "circadian_reference": {
+     "daytime_at_least": {
+      "level_lux": 250.0,
+      "night_hours_below": 279.3,
+      "night_hours_at_or_above": 75.1,
+      "cycle_hours_below": 279.3
+     },
+     "evening_at_most": {
+      "level_lux": 10.0,
+      "night_hours_below": 212.4,
+      "night_hours_at_or_above": 142.0,
+      "cycle_hours_below": 212.4
+     },
+     "sleep_at_most": {
+      "level_lux": 1.0,
+      "night_hours_below": 157.6,
+      "night_hours_at_or_above": 196.8,
+      "cycle_hours_below": 157.6
+     }
+    },
+    "sleeps": {
+     "day": 14.8,
+     "dusk": 3.6,
+     "night": 7.7,
+     "dawn": 3.6
+    }
+   },
+   "far side 30": {
+    "lat": 30.0,
+    "lon": 180.0,
+    "earth_elevation_deg": -60.1,
+    "side": "far side",
+    "day_h": 354.37,
+    "dusk_h": 98.34,
+    "night_h": 157.69,
+    "dawn_h": 98.34,
+    "dusk_runs_into_dawn": false,
+    "below_dusk_h": 157.69,
+    "earth_holds_above_dusk_h": 0.0,
+    "below_dark_h": 20.26,
+    "below_scotopic_h": 0.0,
+    "day_vision_after_sunset_h": 54.32,
+    "midnight_lux": 0.0899,
+    "darkest_lux": 0.0899,
+    "earth_midnight_lux": 0.0,
+    "earth_outshines_sky_h": 0.0,
+    "noon_lux": 72590.0,
+    "circadian_reference": {
+     "daytime_at_least": {
+      "level_lux": 250.0,
+      "night_hours_below": 270.2,
+      "night_hours_at_or_above": 84.2,
+      "cycle_hours_below": 270.2
+     },
+     "evening_at_most": {
+      "level_lux": 10.0,
+      "night_hours_below": 192.8,
+      "night_hours_at_or_above": 161.5,
+      "cycle_hours_below": 192.8
+     },
+     "sleep_at_most": {
+      "level_lux": 1.0,
+      "night_hours_below": 123.4,
+      "night_hours_at_or_above": 231.0,
+      "cycle_hours_below": 123.4
+     }
+    },
+    "sleeps": {
+     "day": 14.8,
+     "dusk": 4.1,
+     "night": 6.6,
+     "dawn": 4.1
+    }
+   },
+   "far side 45": {
+    "lat": 45.0,
+    "lon": 180.0,
+    "earth_elevation_deg": -45.2,
+    "side": "far side",
+    "day_h": 354.37,
+    "dusk_h": 137.1,
+    "night_h": 80.17,
+    "dawn_h": 137.1,
+    "dusk_runs_into_dawn": false,
+    "below_dusk_h": 80.17,
+    "earth_holds_above_dusk_h": 0.0,
+    "below_dark_h": 0.0,
+    "below_scotopic_h": 0.0,
+    "day_vision_after_sunset_h": 68.04,
+    "midnight_lux": 1.5012,
+    "darkest_lux": 1.5012,
+    "earth_midnight_lux": 0.0,
+    "earth_outshines_sky_h": 0.0,
+    "noon_lux": 55540.0,
+    "circadian_reference": {
+     "daytime_at_least": {
+      "level_lux": 250.0,
+      "night_hours_below": 250.0,
+      "night_hours_at_or_above": 104.4,
+      "cycle_hours_below": 250.0
+     },
+     "evening_at_most": {
+      "level_lux": 10.0,
+      "night_hours_below": 143.7,
+      "night_hours_at_or_above": 210.7,
+      "cycle_hours_below": 143.7
+     },
+     "sleep_at_most": {
+      "level_lux": 1.0,
+      "night_hours_below": 0.0,
+      "night_hours_at_or_above": 354.4,
+      "cycle_hours_below": 0.0
+     }
+    },
+    "sleeps": {
+     "day": 14.8,
+     "dusk": 5.7,
+     "night": 3.3,
+     "dawn": 5.7
+    }
+   },
+   "far side 60": {
+    "lat": 60.0,
+    "lon": 180.0,
+    "earth_elevation_deg": -30.2,
+    "side": "far side",
+    "day_h": 354.37,
+    "dusk_h": 177.18,
+    "night_h": 0.0,
+    "dawn_h": 177.18,
+    "dusk_runs_into_dawn": true,
+    "below_dusk_h": 0.0,
+    "earth_holds_above_dusk_h": 0.0,
+    "below_dark_h": 0.0,
+    "below_scotopic_h": 0.0,
+    "day_vision_after_sunset_h": 105.03,
+    "midnight_lux": 24.6547,
+    "darkest_lux": 24.6547,
+    "earth_midnight_lux": 0.0,
+    "earth_outshines_sky_h": 0.0,
+    "noon_lux": 35328.0,
+    "circadian_reference": {
+     "daytime_at_least": {
+      "level_lux": 250.0,
+      "night_hours_below": 200.2,
+      "night_hours_at_or_above": 154.2,
+      "cycle_hours_below": 200.2
+     },
+     "evening_at_most": {
+      "level_lux": 10.0,
+      "night_hours_below": 0.0,
+      "night_hours_at_or_above": 354.4,
+      "cycle_hours_below": 0.0
+     },
+     "sleep_at_most": {
+      "level_lux": 1.0,
+      "night_hours_below": 0.0,
+      "night_hours_at_or_above": 354.4,
+      "cycle_hours_below": 0.0
+     }
+    },
+    "sleeps": {
+     "day": 14.8,
+     "dusk": 7.4,
+     "night": 0.0,
+     "dawn": 7.4
+    }
+   },
+   "far side 75": {
+    "lat": 75.0,
+    "lon": 180.0,
+    "earth_elevation_deg": -15.2,
+    "side": "far side",
+    "day_h": 354.37,
+    "dusk_h": 177.18,
+    "night_h": 0.0,
+    "dawn_h": 177.18,
+    "dusk_runs_into_dawn": true,
+    "below_dusk_h": 0.0,
+    "earth_holds_above_dusk_h": 0.0,
+    "below_dark_h": 0.0,
+    "below_scotopic_h": 0.0,
+    "day_vision_after_sunset_h": null,
+    "midnight_lux": 485.0745,
+    "darkest_lux": 485.0745,
+    "earth_midnight_lux": 0.0,
+    "earth_outshines_sky_h": 0.0,
+    "noon_lux": 16482.0,
+    "circadian_reference": {
+     "daytime_at_least": {
+      "level_lux": 250.0,
+      "night_hours_below": 0.0,
+      "night_hours_at_or_above": 354.4,
+      "cycle_hours_below": 0.0
+     },
+     "evening_at_most": {
+      "level_lux": 10.0,
+      "night_hours_below": 0.0,
+      "night_hours_at_or_above": 354.4,
+      "cycle_hours_below": 0.0
+     },
+     "sleep_at_most": {
+      "level_lux": 1.0,
+      "night_hours_below": 0.0,
+      "night_hours_at_or_above": 354.4,
+      "cycle_hours_below": 0.0
+     }
+    },
+    "sleeps": {
+     "day": 14.8,
+     "dusk": 7.4,
+     "night": 0.0,
+     "dawn": 7.4
+    }
+   },
+   "nearside 0": {
+    "lat": 0.0,
+    "lon": 0.0,
+    "earth_elevation_deg": 90.0,
+    "side": "nearside",
+    "day_h": 354.37,
+    "dusk_h": 81.75,
+    "night_h": 190.87,
+    "dawn_h": 81.75,
+    "dusk_runs_into_dawn": false,
+    "below_dusk_h": 0.0,
+    "earth_holds_above_dusk_h": 190.87,
+    "below_dark_h": 0.0,
+    "below_scotopic_h": 0.0,
+    "day_vision_after_sunset_h": 46.79,
+    "midnight_lux": 5.4583,
+    "darkest_lux": 4.08,
+    "earth_midnight_lux": 5.4572,
+    "earth_outshines_sky_h": 191.1,
+    "noon_lux": 87660.0,
+    "circadian_reference": {
+     "daytime_at_least": {
+      "level_lux": 250.0,
+      "night_hours_below": 281.8,
+      "night_hours_at_or_above": 72.6,
+      "cycle_hours_below": 281.8
+     },
+     "evening_at_most": {
+      "level_lux": 10.0,
+      "night_hours_below": 211.5,
+      "night_hours_at_or_above": 142.9,
+      "cycle_hours_below": 211.5
+     },
+     "sleep_at_most": {
+      "level_lux": 1.0,
+      "night_hours_below": 0.0,
+      "night_hours_at_or_above": 354.4,
+      "cycle_hours_below": 0.0
+     }
+    },
+    "sleeps": {
+     "day": 14.8,
+     "dusk": 3.4,
+     "night": 8.0,
+     "dawn": 3.4
+    }
+   },
+   "nearside 15": {
+    "lat": 15.0,
+    "lon": 0.0,
+    "earth_elevation_deg": 74.9,
+    "side": "nearside",
+    "day_h": 354.37,
+    "dusk_h": 85.32,
+    "night_h": 183.72,
+    "dawn_h": 85.32,
+    "dusk_runs_into_dawn": false,
+    "below_dusk_h": 0.0,
+    "earth_holds_above_dusk_h": 183.72,
+    "below_dark_h": 0.0,
+    "below_scotopic_h": 0.0,
+    "day_vision_after_sunset_h": 48.54,
+    "midnight_lux": 5.217,
+    "darkest_lux": 4.0962,
+    "earth_midnight_lux": 5.2113,
+    "earth_outshines_sky_h": 183.6,
+    "noon_lux": 83779.0,
+    "circadian_reference": {
+     "daytime_at_least": {
+      "level_lux": 250.0,
+      "night_hours_below": 279.1,
+      "night_hours_at_or_above": 75.3,
+      "cycle_hours_below": 279.1
+     },
+     "evening_at_most": {
+      "level_lux": 10.0,
+      "night_hours_below": 205.7,
+      "night_hours_at_or_above": 148.6,
+      "cycle_hours_below": 205.7
+     },
+     "sleep_at_most": {
+      "level_lux": 1.0,
+      "night_hours_below": 0.0,
+      "night_hours_at_or_above": 354.4,
+      "cycle_hours_below": 0.0
+     }
+    },
+    "sleeps": {
+     "day": 14.8,
+     "dusk": 3.6,
+     "night": 7.7,
+     "dawn": 3.6
+    }
+   },
+   "nearside 30": {
+    "lat": 30.0,
+    "lon": 0.0,
+    "earth_elevation_deg": 59.9,
+    "side": "nearside",
+    "day_h": 354.37,
+    "dusk_h": 98.34,
+    "night_h": 157.69,
+    "dawn_h": 98.34,
+    "dusk_runs_into_dawn": false,
+    "below_dusk_h": 0.0,
+    "earth_holds_above_dusk_h": 157.69,
+    "below_dark_h": 0.0,
+    "below_scotopic_h": 0.0,
+    "day_vision_after_sunset_h": 54.57,
+    "midnight_lux": 4.5939,
+    "darkest_lux": 4.1616,
+    "earth_midnight_lux": 4.5041,
+    "earth_outshines_sky_h": 156.9,
+    "noon_lux": 72590.0,
+    "circadian_reference": {
+     "daytime_at_least": {
+      "level_lux": 250.0,
+      "night_hours_below": 270.0,
+      "night_hours_at_or_above": 84.3,
+      "cycle_hours_below": 270.0
+     },
+     "evening_at_most": {
+      "level_lux": 10.0,
+      "night_hours_below": 185.2,
+      "night_hours_at_or_above": 169.1,
+      "cycle_hours_below": 185.2
+     },
+     "sleep_at_most": {
+      "level_lux": 1.0,
+      "night_hours_below": 0.0,
+      "night_hours_at_or_above": 354.4,
+      "cycle_hours_below": 0.0
+     }
+    },
+    "sleeps": {
+     "day": 14.8,
+     "dusk": 4.1,
+     "night": 6.6,
+     "dawn": 4.1
+    }
+   },
+   "nearside 45": {
+    "lat": 45.0,
+    "lon": 0.0,
+    "earth_elevation_deg": 44.8,
+    "side": "nearside",
+    "day_h": 354.37,
+    "dusk_h": 137.1,
+    "night_h": 80.17,
+    "dawn_h": 137.1,
+    "dusk_runs_into_dawn": false,
+    "below_dusk_h": 0.0,
+    "earth_holds_above_dusk_h": 80.17,
+    "below_dark_h": 0.0,
+    "below_scotopic_h": 0.0,
+    "day_vision_after_sunset_h": 68.33,
+    "midnight_lux": 4.9323,
+    "darkest_lux": 4.9321,
+    "earth_midnight_lux": 3.4311,
+    "earth_outshines_sky_h": 80.9,
+    "noon_lux": 55540.0,
+    "circadian_reference": {
+     "daytime_at_least": {
+      "level_lux": 250.0,
+      "night_hours_below": 249.8,
+      "night_hours_at_or_above": 104.6,
+      "cycle_hours_below": 249.8
+     },
+     "evening_at_most": {
+      "level_lux": 10.0,
+      "night_hours_below": 132.0,
+      "night_hours_at_or_above": 222.3,
+      "cycle_hours_below": 132.0
+     },
+     "sleep_at_most": {
+      "level_lux": 1.0,
+      "night_hours_below": 0.0,
+      "night_hours_at_or_above": 354.4,
+      "cycle_hours_below": 0.0
+     }
+    },
+    "sleeps": {
+     "day": 14.8,
+     "dusk": 5.7,
+     "night": 3.3,
+     "dawn": 5.7
+    }
+   },
+   "nearside 60": {
+    "lat": 60.0,
+    "lon": 0.0,
+    "earth_elevation_deg": 29.8,
+    "side": "nearside",
+    "day_h": 354.37,
+    "dusk_h": 177.18,
+    "night_h": 0.0,
+    "dawn_h": 177.18,
+    "dusk_runs_into_dawn": true,
+    "below_dusk_h": 0.0,
+    "earth_holds_above_dusk_h": 0.0,
+    "below_dark_h": 0.0,
+    "below_scotopic_h": 0.0,
+    "day_vision_after_sunset_h": 105.53,
+    "midnight_lux": 26.8233,
+    "darkest_lux": 26.8233,
+    "earth_midnight_lux": 2.1686,
+    "earth_outshines_sky_h": 0.0,
+    "noon_lux": 35328.0,
+    "circadian_reference": {
+     "daytime_at_least": {
+      "level_lux": 250.0,
+      "night_hours_below": 200.0,
+      "night_hours_at_or_above": 154.4,
+      "cycle_hours_below": 200.0
+     },
+     "evening_at_most": {
+      "level_lux": 10.0,
+      "night_hours_below": 0.0,
+      "night_hours_at_or_above": 354.4,
+      "cycle_hours_below": 0.0
+     },
+     "sleep_at_most": {
+      "level_lux": 1.0,
+      "night_hours_below": 0.0,
+      "night_hours_at_or_above": 354.4,
+      "cycle_hours_below": 0.0
+     }
+    },
+    "sleeps": {
+     "day": 14.8,
+     "dusk": 7.4,
+     "night": 0.0,
+     "dawn": 7.4
+    }
+   },
+   "nearside 75": {
+    "lat": 75.0,
+    "lon": 0.0,
+    "earth_elevation_deg": 14.7,
+    "side": "nearside",
+    "day_h": 354.37,
+    "dusk_h": 177.18,
+    "night_h": 0.0,
+    "dawn_h": 177.18,
+    "dusk_runs_into_dawn": true,
+    "below_dusk_h": 0.0,
+    "earth_holds_above_dusk_h": 0.0,
+    "below_dark_h": 0.0,
+    "below_scotopic_h": 0.0,
+    "day_vision_after_sunset_h": null,
+    "midnight_lux": 486.0776,
+    "darkest_lux": 486.0776,
+    "earth_midnight_lux": 1.0031,
+    "earth_outshines_sky_h": 0.0,
+    "noon_lux": 16482.0,
+    "circadian_reference": {
+     "daytime_at_least": {
+      "level_lux": 250.0,
+      "night_hours_below": 0.0,
+      "night_hours_at_or_above": 354.4,
+      "cycle_hours_below": 0.0
+     },
+     "evening_at_most": {
+      "level_lux": 10.0,
+      "night_hours_below": 0.0,
+      "night_hours_at_or_above": 354.4,
+      "cycle_hours_below": 0.0
+     },
+     "sleep_at_most": {
+      "level_lux": 1.0,
+      "night_hours_below": 0.0,
+      "night_hours_at_or_above": 354.4,
+      "cycle_hours_below": 0.0
+     }
+    },
+    "sleeps": {
+     "day": 14.8,
+     "dusk": 7.4,
+     "night": 0.0,
+     "dawn": 7.4
+    }
+   },
+   "limb 0": {
+    "lat": 0.0,
+    "lon": 90.0,
+    "earth_elevation_deg": -0.3,
+    "side": "limb",
+    "day_h": 354.37,
+    "dusk_h": 81.75,
+    "night_h": 190.87,
+    "dawn_h": 81.75,
+    "dusk_runs_into_dawn": false,
+    "below_dusk_h": 189.92,
+    "earth_holds_above_dusk_h": 0.95,
+    "below_dark_h": 85.34,
+    "below_scotopic_h": 73.14,
+    "day_vision_after_sunset_h": 46.56,
+    "midnight_lux": 0.0696,
+    "darkest_lux": 0.0605,
+    "earth_midnight_lux": 0.0685,
+    "earth_outshines_sky_h": 112.9,
+    "noon_lux": 87660.0,
+    "circadian_reference": {
+     "daytime_at_least": {
+      "level_lux": 250.0,
+      "night_hours_below": 281.9,
+      "night_hours_at_or_above": 72.5,
+      "cycle_hours_below": 281.9
+     },
+     "evening_at_most": {
+      "level_lux": 10.0,
+      "night_hours_below": 217.7,
+      "night_hours_at_or_above": 136.6,
+      "cycle_hours_below": 217.7
+     },
+     "sleep_at_most": {
+      "level_lux": 1.0,
+      "night_hours_below": 164.5,
+      "night_hours_at_or_above": 189.9,
+      "cycle_hours_below": 164.5
+     }
+    },
+    "sleeps": {
+     "day": 14.8,
+     "dusk": 3.4,
+     "night": 8.0,
+     "dawn": 3.4
+    }
+   }
+  },
+  "twilight": [
+   {
+    "lat": 0.0,
+    "reaches": {
+     "bright, 1,000 lux": {
+      "lux": 1000.0,
+      "sun_deg": -11.04,
+      "hours_after_sunset": 21.7
+     },
+     "daytime circadian reference, 250 lux": {
+      "lux": 250.0,
+      "sun_deg": -18.4,
+      "hours_after_sunset": 36.2
+     },
+     "day vision, 87 lux": {
+      "lux": 87.266,
+      "sun_deg": -23.65,
+      "hours_after_sunset": 46.6
+     },
+     "evening circadian reference, 10 lux": {
+      "lux": 10.0,
+      "sun_deg": -34.64,
+      "hours_after_sunset": 68.2
+     },
+     "practical dusk": {
+      "lux": 2.981,
+      "sun_deg": -41.52,
+      "hours_after_sunset": 81.7
+     },
+     "sleep reference, 1 lux": {
+      "lux": 1.0,
+      "sun_deg": -47.7,
+      "hours_after_sunset": 93.9
+     },
+     "dark, 0.1 lux": {
+      "lux": 0.1,
+      "sun_deg": -59.6,
+      "hours_after_sunset": 117.3
+     },
+     "night vision, 0.087 lux": {
+      "lux": 0.087,
+      "sun_deg": -60.16,
+      "hours_after_sunset": 118.4
+     }
+    },
+    "light": [
+     {
+      "hours_after_sunset": 0.0,
+      "sun_deg": -0.0,
+      "lux": 4659.0
+     },
+     {
+      "hours_after_sunset": 6.0,
+      "sun_deg": -3.05,
+      "lux": 3291.0
+     },
+     {
+      "hours_after_sunset": 12.0,
+      "sun_deg": -6.1,
+      "lux": 2191.0
+     },
+     {
+      "hours_after_sunset": 24.0,
+      "sun_deg": -12.19,
+      "lux": 817.3
+     },
+     {
+      "hours_after_sunset": 36.0,
+      "sun_deg": -18.29,
+      "lux": 255.6
+     },
+     {
+      "hours_after_sunset": 48.0,
+      "sun_deg": -24.38,
+      "lux": 75.36
+     },
+     {
+      "hours_after_sunset": 60.0,
+      "sun_deg": -30.48,
+      "lux": 22.51
+     },
+     {
+      "hours_after_sunset": 72.0,
+      "sun_deg": -36.57,
+      "lux": 6.903
+     },
+     {
+      "hours_after_sunset": 84.0,
+      "sun_deg": -42.67,
+      "lux": 2.49
+     },
+     {
+      "hours_after_sunset": 96.0,
+      "sun_deg": -48.76,
+      "lux": 0.8094
+     },
+     {
+      "hours_after_sunset": 120.0,
+      "sun_deg": -60.95,
+      "lux": 0.07855
+     },
+     {
+      "hours_after_sunset": 150.0,
+      "sun_deg": -76.19,
+      "lux": 0.004879
+     },
+     {
+      "hours_after_sunset": 177.2,
+      "sun_deg": -90.0,
+      "lux": 0.001016
+     }
+    ]
+   },
+   {
+    "lat": 15.0,
+    "reaches": {
+     "bright, 1,000 lux": {
+      "lux": 1000.0,
+      "sun_deg": -11.04,
+      "hours_after_sunset": 22.5
+     },
+     "daytime circadian reference, 250 lux": {
+      "lux": 250.0,
+      "sun_deg": -18.4,
+      "hours_after_sunset": 37.6
+     },
+     "day vision, 87 lux": {
+      "lux": 87.266,
+      "sun_deg": -23.65,
+      "hours_after_sunset": 48.3
+     },
+     "evening circadian reference, 10 lux": {
+      "lux": 10.0,
+      "sun_deg": -34.64,
+      "hours_after_sunset": 71.0
+     },
+     "practical dusk": {
+      "lux": 2.981,
+      "sun_deg": -41.52,
+      "hours_after_sunset": 85.3
+     },
+     "sleep reference, 1 lux": {
+      "lux": 1.0,
+      "sun_deg": -47.7,
+      "hours_after_sunset": 98.4
+     },
+     "dark, 0.1 lux": {
+      "lux": 0.1,
+      "sun_deg": -59.6,
+      "hours_after_sunset": 124.5
+     },
+     "night vision, 0.087 lux": {
+      "lux": 0.087,
+      "sun_deg": -60.16,
+      "hours_after_sunset": 125.8
+     }
+    },
+    "light": [
+     {
+      "hours_after_sunset": 0.0,
+      "sun_deg": -0.0,
+      "lux": 4659.0
+     },
+     {
+      "hours_after_sunset": 6.0,
+      "sun_deg": -2.94,
+      "lux": 3333.0
+     },
+     {
+      "hours_after_sunset": 12.0,
+      "sun_deg": -5.89,
+      "lux": 2257.0
+     },
+     {
+      "hours_after_sunset": 24.0,
+      "sun_deg": -11.77,
+      "lux": 881.3
+     },
+     {
+      "hours_after_sunset": 36.0,
+      "sun_deg": -17.64,
+      "lux": 290.6
+     },
+     {
+      "hours_after_sunset": 48.0,
+      "sun_deg": -23.5,
+      "lux": 89.96
+     },
+     {
+      "hours_after_sunset": 60.0,
+      "sun_deg": -29.33,
+      "lux": 28.16
+     },
+     {
+      "hours_after_sunset": 72.0,
+      "sun_deg": -35.14,
+      "lux": 9.075
+     },
+     {
+      "hours_after_sunset": 84.0,
+      "sun_deg": -40.89,
+      "lux": 3.252
+     },
+     {
+      "hours_after_sunset": 96.0,
+      "sun_deg": -46.58,
+      "lux": 1.202
+     },
+     {
+      "hours_after_sunset": 120.0,
+      "sun_deg": -57.61,
+      "lux": 0.1557
+     },
+     {
+      "hours_after_sunset": 150.0,
+      "sun_deg": -69.72,
+      "lux": 0.01493
+     },
+     {
+      "hours_after_sunset": 177.2,
+      "sun_deg": -75.0,
+      "lux": 0.005688
+     }
+    ]
+   },
+   {
+    "lat": 30.0,
+    "reaches": {
+     "bright, 1,000 lux": {
+      "lux": 1000.0,
+      "sun_deg": -11.04,
+      "hours_after_sunset": 25.2
+     },
+     "daytime circadian reference, 250 lux": {
+      "lux": 250.0,
+      "sun_deg": -18.4,
+      "hours_after_sunset": 42.1
+     },
+     "day vision, 87 lux": {
+      "lux": 87.266,
+      "sun_deg": -23.65,
+      "hours_after_sunset": 54.3
+     },
+     "evening circadian reference, 10 lux": {
+      "lux": 10.0,
+      "sun_deg": -34.64,
+      "hours_after_sunset": 80.8
+     },
+     "practical dusk": {
+      "lux": 2.981,
+      "sun_deg": -41.52,
+      "hours_after_sunset": 98.3
+     },
+     "sleep reference, 1 lux": {
+      "lux": 1.0,
+      "sun_deg": -47.7,
+      "hours_after_sunset": 115.5
+     },
+     "dark, 0.1 lux": {
+      "lux": 0.1,
+      "sun_deg": -59.6,
+      "hours_after_sunset": 167.1
+     },
+     "night vision, 0.087 lux": {
+      "lux": 0.087,
+      "sun_deg": -60.16,
+      "hours_after_sunset": null
+     }
+    },
+    "light": [
+     {
+      "hours_after_sunset": 0.0,
+      "sun_deg": -0.0,
+      "lux": 4659.0
+     },
+     {
+      "hours_after_sunset": 6.0,
+      "sun_deg": -2.64,
+      "lux": 3461.0
+     },
+     {
+      "hours_after_sunset": 12.0,
+      "sun_deg": -5.28,
+      "lux": 2460.0
+     },
+     {
+      "hours_after_sunset": 24.0,
+      "sun_deg": -10.54,
+      "lux": 1093.0
+     },
+     {
+      "hours_after_sunset": 36.0,
+      "sun_deg": -15.77,
+      "lux": 419.1
+     },
+     {
+      "hours_after_sunset": 48.0,
+      "sun_deg": -20.95,
+      "lux": 149.9
+     },
+     {
+      "hours_after_sunset": 60.0,
+      "sun_deg": -26.06,
+      "lux": 53.81
+     },
+     {
+      "hours_after_sunset": 72.0,
+      "sun_deg": -31.06,
+      "lux": 20.01
+     },
+     {
+      "hours_after_sunset": 84.0,
+      "sun_deg": -35.94,
+      "lux": 7.773
+     },
+     {
+      "hours_after_sunset": 96.0,
+      "sun_deg": -40.64,
+      "lux": 3.363
+     },
+     {
+      "hours_after_sunset": 120.0,
+      "sun_deg": -49.21,
+      "lux": 0.7289
+     },
+     {
+      "hours_after_sunset": 150.0,
+      "sun_deg": -57.25,
+      "lux": 0.1659
+     },
+     {
+      "hours_after_sunset": 177.2,
+      "sun_deg": -60.0,
+      "lux": 0.08986
+     }
+    ]
+   },
+   {
+    "lat": 45.0,
+    "reaches": {
+     "bright, 1,000 lux": {
+      "lux": 1000.0,
+      "sun_deg": -11.04,
+      "hours_after_sunset": 30.9
+     },
+     "daytime circadian reference, 250 lux": {
+      "lux": 250.0,
+      "sun_deg": -18.4,
+      "hours_after_sunset": 52.2
+     },
+     "day vision, 87 lux": {
+      "lux": 87.266,
+      "sun_deg": -23.65,
+      "hours_after_sunset": 68.0
+     },
+     "evening circadian reference, 10 lux": {
+      "lux": 10.0,
+      "sun_deg": -34.64,
+      "hours_after_sunset": 105.3
+     },
+     "practical dusk": {
+      "lux": 2.981,
+      "sun_deg": -41.52,
+      "hours_after_sunset": 137.1
+     },
+     "sleep reference, 1 lux": {
+      "lux": 1.0,
+      "sun_deg": -47.7,
+      "hours_after_sunset": null
+     },
+     "dark, 0.1 lux": {
+      "lux": 0.1,
+      "sun_deg": -59.6,
+      "hours_after_sunset": null
+     },
+     "night vision, 0.087 lux": {
+      "lux": 0.087,
+      "sun_deg": -60.16,
+      "hours_after_sunset": null
+     }
+    },
+    "light": [
+     {
+      "hours_after_sunset": 0.0,
+      "sun_deg": -0.0,
+      "lux": 4659.0
+     },
+     {
+      "hours_after_sunset": 6.0,
+      "sun_deg": -2.15,
+      "lux": 3667.0
+     },
+     {
+      "hours_after_sunset": 12.0,
+      "sun_deg": -4.31,
+      "lux": 2804.0
+     },
+     {
+      "hours_after_sunset": 24.0,
+      "sun_deg": -8.59,
+      "lux": 1506.0
+     },
+     {
+      "hours_after_sunset": 36.0,
+      "sun_deg": -12.82,
+      "lux": 729.7
+     },
+     {
+      "hours_after_sunset": 48.0,
+      "sun_deg": -16.97,
+      "lux": 330.9
+     },
+     {
+      "hours_after_sunset": 60.0,
+      "sun_deg": -21.02,
+      "lux": 147.8
+     },
+     {
+      "hours_after_sunset": 72.0,
+      "sun_deg": -24.92,
+      "lux": 67.54
+     },
+     {
+      "hours_after_sunset": 84.0,
+      "sun_deg": -28.64,
+      "lux": 32.33
+     },
+     {
+      "hours_after_sunset": 96.0,
+      "sun_deg": -32.12,
+      "lux": 16.28
+     },
+     {
+      "hours_after_sunset": 120.0,
+      "sun_deg": -38.18,
+      "lux": 5.076
+     },
+     {
+      "hours_after_sunset": 150.0,
+      "sun_deg": -43.37,
+      "lux": 2.189
+     },
+     {
+      "hours_after_sunset": 177.2,
+      "sun_deg": -45.0,
+      "lux": 1.501
+     }
+    ]
+   },
+   {
+    "lat": 60.0,
+    "reaches": {
+     "bright, 1,000 lux": {
+      "lux": 1000.0,
+      "sun_deg": -11.04,
+      "hours_after_sunset": 44.3
+     },
+     "daytime circadian reference, 250 lux": {
+      "lux": 250.0,
+      "sun_deg": -18.4,
+      "hours_after_sunset": 77.1
+     },
+     "day vision, 87 lux": {
+      "lux": 87.266,
+      "sun_deg": -23.65,
+      "hours_after_sunset": 105.0
+     },
+     "evening circadian reference, 10 lux": {
+      "lux": 10.0,
+      "sun_deg": -34.64,
+      "hours_after_sunset": null
+     },
+     "practical dusk": {
+      "lux": 2.981,
+      "sun_deg": -41.52,
+      "hours_after_sunset": null
+     },
+     "sleep reference, 1 lux": {
+      "lux": 1.0,
+      "sun_deg": -47.7,
+      "hours_after_sunset": null
+     },
+     "dark, 0.1 lux": {
+      "lux": 0.1,
+      "sun_deg": -59.6,
+      "hours_after_sunset": null
+     },
+     "night vision, 0.087 lux": {
+      "lux": 0.087,
+      "sun_deg": -60.16,
+      "hours_after_sunset": null
+     }
+    },
+    "light": [
+     {
+      "hours_after_sunset": 0.0,
+      "sun_deg": -0.0,
+      "lux": 4659.0
+     },
+     {
+      "hours_after_sunset": 6.0,
+      "sun_deg": -1.52,
+      "lux": 3947.0
+     },
+     {
+      "hours_after_sunset": 12.0,
+      "sun_deg": -3.04,
+      "lux": 3293.0
+     },
+     {
+      "hours_after_sunset": 24.0,
+      "sun_deg": -6.06,
+      "lux": 2202.0
+     },
+     {
+      "hours_after_sunset": 36.0,
+      "sun_deg": -9.03,
+      "lux": 1402.0
+     },
+     {
+      "hours_after_sunset": 48.0,
+      "sun_deg": -11.91,
+      "lux": 858.7
+     },
+     {
+      "hours_after_sunset": 60.0,
+      "sun_deg": -14.69,
+      "lux": 515.4
+     },
+     {
+      "hours_after_sunset": 72.0,
+      "sun_deg": -17.33,
+      "lux": 308.8
+     },
+     {
+      "hours_after_sunset": 84.0,
+      "sun_deg": -19.81,
+      "lux": 188.5
+     },
+     {
+      "hours_after_sunset": 96.0,
+      "sun_deg": -22.09,
+      "lux": 119.2
+     },
+     {
+      "hours_after_sunset": 120.0,
+      "sun_deg": -25.92,
+      "lux": 55.29
+     },
+     {
+      "hours_after_sunset": 150.0,
+      "sun_deg": -29.05,
+      "lux": 29.73
+     },
+     {
+      "hours_after_sunset": 177.2,
+      "sun_deg": -30.0,
+      "lux": 24.65
+     }
+    ]
+   },
+   {
+    "lat": 75.0,
+    "reaches": {
+     "bright, 1,000 lux": {
+      "lux": 1000.0,
+      "sun_deg": -11.04,
+      "hours_after_sunset": 94.0
+     },
+     "daytime circadian reference, 250 lux": {
+      "lux": 250.0,
+      "sun_deg": -18.4,
+      "hours_after_sunset": null
+     },
+     "day vision, 87 lux": {
+      "lux": 87.266,
+      "sun_deg": -23.65,
+      "hours_after_sunset": null
+     },
+     "evening circadian reference, 10 lux": {
+      "lux": 10.0,
+      "sun_deg": -34.64,
+      "hours_after_sunset": null
+     },
+     "practical dusk": {
+      "lux": 2.981,
+      "sun_deg": -41.52,
+      "hours_after_sunset": null
+     },
+     "sleep reference, 1 lux": {
+      "lux": 1.0,
+      "sun_deg": -47.7,
+      "hours_after_sunset": null
+     },
+     "dark, 0.1 lux": {
+      "lux": 0.1,
+      "sun_deg": -59.6,
+      "hours_after_sunset": null
+     },
+     "night vision, 0.087 lux": {
+      "lux": 0.087,
+      "sun_deg": -60.16,
+      "hours_after_sunset": null
+     }
+    },
+    "light": [
+     {
+      "hours_after_sunset": 0.0,
+      "sun_deg": -0.0,
+      "lux": 4659.0
+     },
+     {
+      "hours_after_sunset": 6.0,
+      "sun_deg": -0.79,
+      "lux": 4283.0
+     },
+     {
+      "hours_after_sunset": 12.0,
+      "sun_deg": -1.57,
+      "lux": 3923.0
+     },
+     {
+      "hours_after_sunset": 24.0,
+      "sun_deg": -3.13,
+      "lux": 3257.0
+     },
+     {
+      "hours_after_sunset": 36.0,
+      "sun_deg": -4.66,
+      "lux": 2676.0
+     },
+     {
+      "hours_after_sunset": 48.0,
+      "sun_deg": -6.13,
+      "lux": 2180.0
+     },
+     {
+      "hours_after_sunset": 60.0,
+      "sun_deg": -7.54,
+      "lux": 1771.0
+     },
+     {
+      "hours_after_sunset": 72.0,
+      "sun_deg": -8.87,
+      "lux": 1438.0
+     },
+     {
+      "hours_after_sunset": 84.0,
+      "sun_deg": -10.1,
+      "lux": 1174.0
+     },
+     {
+      "hours_after_sunset": 96.0,
+      "sun_deg": -11.22,
+      "lux": 969.9
+     },
+     {
+      "hours_after_sunset": 120.0,
+      "sun_deg": -13.08,
+      "lux": 695.6
+     },
+     {
+      "hours_after_sunset": 150.0,
+      "sun_deg": -14.56,
+      "lux": 528.9
+     },
+     {
+      "hours_after_sunset": 177.2,
+      "sun_deg": -15.0,
+      "lux": 485.1
+     }
+    ]
+   }
+  ],
+  "cross_check_main_places": {
+   "path": "research/studies/joint_synthesis/results/places.json",
+   "commit": "78020e0f3273cd98b6b7ac68554b162cf3a96239",
+   "blob": "3aa6d0939faf502433c03105b831a9994ab3315d",
+   "sha256": "9707e4d1c7332ba352b90dbf77c66fde080ec5e0fe24e57b54067c61ecdcfc8d",
+   "read_from": "git object at the pinned commit",
+   "places": {
+    "summit": {
+     "main_midnight_lux": 0.0014,
+     "study_midnight_lux": 0.0014,
+     "main_darkest_lux": 0.0014,
+     "study_darkest_lux": 0.0014,
+     "main_earth_elevation_deg": -68.1,
+     "study_earth_elevation_deg": -68.1,
+     "main_hours_below_dark": 117.5,
+     "study_hours_below_dark": 117.95
+    },
+    "procellarum_russell": {
+     "main_midnight_lux": 0.4368,
+     "study_midnight_lux": 0.4368,
+     "main_darkest_lux": 0.4236,
+     "study_darkest_lux": 0.4236,
+     "main_earth_elevation_deg": 12.0,
+     "study_earth_elevation_deg": 12.0,
+     "main_hours_below_dark": 0.0,
+     "study_hours_below_dark": 0.0
+    },
+    "smythii_headland": {
+     "main_midnight_lux": 0.0696,
+     "study_midnight_lux": 0.0696,
+     "main_darkest_lux": 0.0606,
+     "study_darkest_lux": 0.0606,
+     "main_earth_elevation_deg": -0.3,
+     "study_earth_elevation_deg": -0.3,
+     "main_hours_below_dark": 85.0,
+     "study_hours_below_dark": 85.2
+    },
+    "nubium": {
+     "main_midnight_lux": 4.2799,
+     "study_midnight_lux": 4.2803,
+     "main_darkest_lux": 3.1447,
+     "study_darkest_lux": 3.1448,
+     "main_earth_elevation_deg": 61.0,
+     "study_earth_elevation_deg": 61.0,
+     "main_hours_below_dark": 0.0,
+     "study_hours_below_dark": 0.0
+    },
+    "ingenii_coast": {
+     "main_midnight_lux": 0.2007,
+     "study_midnight_lux": 0.2007,
+     "main_darkest_lux": 0.2007,
+     "study_darkest_lux": 0.2007,
+     "main_earth_elevation_deg": -52.6,
+     "study_earth_elevation_deg": -52.6,
+     "main_hours_below_dark": 0.0,
+     "study_hours_below_dark": 0.0
+    },
+    "highland_box": {
+     "main_midnight_lux": 1.4364,
+     "study_midnight_lux": 1.4364,
+     "main_darkest_lux": 1.4364,
+     "study_darkest_lux": 1.4364,
+     "main_earth_elevation_deg": -17.0,
+     "study_earth_elevation_deg": -17.0,
+     "main_hours_below_dark": 0.0,
+     "study_hours_below_dark": 0.0
+    },
+    "polar_plain": {
+     "main_midnight_lux": 485.1584,
+     "study_midnight_lux": 486.0776,
+     "main_darkest_lux": 485.1584,
+     "study_darkest_lux": 486.0776,
+     "main_earth_elevation_deg": 14.7,
+     "study_earth_elevation_deg": 14.7,
+     "main_hours_below_dark": 0.0,
+     "study_hours_below_dark": 0.0
+    }
+   }
+  }
+ },
+ "settings": {
+  "summit_metropolis": {
+   "name": "The summit metropolis",
+   "kind": "place",
+   "light": [
+    "summit"
+   ],
+   "note": "Far side, 5.4 N 158.6 W, ground 11.6 km above sea level; about 100 million people at about 40,000 per km2 within 32 km of the port (register, 2026-09-27).",
+   "places": {
+    "summit": {
+     "lat": 5.4125,
+     "lon": 201.3665
+    }
+   },
+   "ground_above_sea_km": 11.589
+  },
+  "coastal_and_lake_towns": {
+   "name": "Coastal and lake towns",
+   "kind": "places",
+   "light": [
+    "korolev_shore",
+    "procellarum_russell"
+   ],
+   "note": "A lake town on Korolev's shore 84 km from the summit, and a nearside sea coast under a low Earth.",
+   "places": {
+    "korolev_shore": {
+     "lat": 2.655,
+     "lon": 201.634
+    },
+    "procellarum_russell": {
+     "lat": 32.9,
+     "lon": 284.6
+    }
+   }
+  },
+  "wetland_edge_towns": {
+   "name": "Wetland-edge towns",
+   "kind": "places",
+   "light": [
+    "korolev_shore",
+    "far side 0",
+    "nearside 0"
+   ],
+   "note": "Lake shores and wetlands (lunar-cycle ecology F3); half the land lies within 50 km of standing water.",
+   "places": {
+    "korolev_shore": {
+     "lat": 2.655,
+     "lon": 201.634
+    }
+   }
+  },
+  "canopy_towns": {
+   "name": "Canopy towns at forest edges",
+   "kind": "latitude rows",
+   "light": [
+    "far side 0",
+    "far side 15",
+    "nearside 0",
+    "nearside 15"
+   ],
+   "note": "Forest margins in the rain belt; megaforest trees 100-500 m tall (megaforest_wind); the floor's light under the canopy model's stand is in volume.under_canopy.",
+   "places": {}
+  },
+  "farming_country": {
+   "name": "Rain-belt farming country",
+   "kind": "latitude rows",
+   "light": [
+    "far side 0",
+    "far side 15",
+    "nearside 0",
+    "nearside 15"
+   ],
+   "note": "Within 15 degrees of the equator, where rain-fed lakes cover 24% of the ground.",
+   "places": {}
+  },
+  "highland_towns": {
+   "name": "Highland and ridge towns",
+   "kind": "place",
+   "light": [
+    "highland_box"
+   ],
+   "note": "The climate work's highland box at 44.7 S on the far side, dry and sunny, comfortable from 4 km up.",
+   "places": {
+    "highland_box": {
+     "lat": -44.7,
+     "lon": 246.1
+    }
+   }
+  },
+  "elevated_districts": {
+   "name": "Districts held up by towers or terrain",
+   "kind": "heights",
+   "light": [
+    "summit"
+   ],
+   "note": "The port tower's rings from 3.1 km and disks from 12.3 km above the summit; the horizon and air by height are in volume.horizon and volume.open_air.",
+   "places": {
+    "summit": {
+     "lat": 5.4125,
+     "lon": 201.3665
+    }
+   }
+  },
+  "nearside_towns": {
+   "name": "Nearside towns under the fixed Earth",
+   "kind": "places",
+   "light": [
+    "nubium",
+    "nearside 0",
+    "nearside 15",
+    "nearside 30",
+    "nearside 45"
+   ],
+   "note": "The Earth fixed in the sky, near full at local midnight.",
+   "places": {
+    "nubium": {
+     "lat": -25.0,
+     "lon": 345.0
+    }
+   }
+  },
+  "limb_towns": {
+   "name": "Limb towns where the Earth rises and sets",
+   "kind": "places",
+   "light": [
+    "smythii_headland",
+    "limb 0"
+   ],
+   "note": "The libration lifts the Earth above the horizon and lowers it again once a month.",
+   "places": {
+    "smythii_headland": {
+     "lat": -1.5,
+     "lon": 90.0
+    }
+   }
+  },
+  "far_side_places": {
+   "name": "The far side's twilit-night places",
+   "kind": "places",
+   "light": [
+    "ingenii_coast",
+    "far side 30",
+    "far side 45"
+   ],
+   "note": "The far side away from its equator, where twilight wraps round the Moon.",
+   "places": {
+    "ingenii_coast": {
+     "lat": -34.0,
+     "lon": 163.0
+    }
+   }
+  },
+  "high_latitude_towns": {
+   "name": "High-latitude towns",
+   "kind": "latitude rows",
+   "light": [
+    "polar_plain",
+    "far side 60",
+    "far side 75",
+    "nearside 60",
+    "nearside 75"
+   ],
+   "note": "Poleward of about 48.5 degrees the clear night never falls to practical dusk's level.",
+   "places": {
+    "polar_plain": {
+     "lat": 75.0,
+     "lon": 0.0
+    }
+   }
+  },
+  "undersea_communities": {
+   "name": "The undersea communities",
+   "kind": "place",
+   "light": [
+    "tranquility"
+   ],
+   "note": "Tranquility Base under 467 m of water, an enclosed community at 1 atm (conservation D6); its harbour and the sea above take the nearside's light.",
+   "places": {
+    "tranquility": {
+     "lat": 0.674,
+     "lon": 23.473
+    }
+   },
+   "depth_m": 467,
+   "outside_pressure_atm": 8.7,
+   "nearest_land_km": 35
+  },
+  "roaming_sky_towns": {
+   "name": "Roaming sky towns",
+   "kind": "heights",
+   "light": [],
+   "note": "Buoyant towns drifting with the wind near 10 km; the author lets much floating habitation roam (2026-10-09). Their days are in volume.sky_towns.",
+   "places": {},
+   "air": {
+    "height_km": 10.0,
+    "pressure_atm": 0.988,
+    "temperature_c": 14.2,
+    "o2_kpa": 17.48,
+    "earth_equivalent_m": 1610.0
+   }
+  },
+  "moored_or_streamlined_sky_towns": {
+   "name": "Moored or streamlined sky towns",
+   "kind": "heights",
+   "light": [],
+   "note": "Towns that hold a place or follow the Sun to keep an hour; the airspeed and the sphere's power to hold the hour are in volume.hold_the_hour.",
+   "places": {}
+  },
+  "high_platforms": {
+   "name": "High platforms near 70 km",
+   "kind": "heights",
+   "light": [],
+   "note": "Long-endurance platforms for far-side astronomy and nearside earthshine photometry (July canon).",
+   "places": {},
+   "air": {
+    "height_km": 70.0,
+    "pressure_atm": 0.281,
+    "temperature_c": -47.1,
+    "o2_kpa": 4.96,
+    "earth_equivalent_m": 10710.0
+   }
+  },
+  "array_habitats": {
+   "name": "The array's habitats",
+   "kind": "orbit",
+   "light": [
+    "chosen: continuous sunlight shaped by mirrors and shades"
+   ],
+   "note": "Spinning habitats near the ring radius, 20,000 km out; 990 t of shield a person (Stanford torus).",
+   "places": {}
+  },
+  "earth": {
+   "name": "Earth",
+   "kind": "reference",
+   "light": [
+    "a 24-hour day"
+   ],
+   "note": "A 24-hour day; most of the 20-30 billion live there.",
+   "places": {}
+  },
+  "elsewhere": {
+   "name": "Elsewhere in the Solar System",
+   "kind": "reference",
+   "light": [],
+   "note": "The unmodelled remainder; the resource operation's crews are in work.resource_operation.",
+   "places": {}
+  }
+ },
+ "twilight": {
+  "weather": {
+   "evening_cloudy_columns": {
+    "ring_equator": {
+     "by_latitude": [
+      {
+       "abs_lat": [
+        0,
+        15
+       ],
+       "share": 0.1983
+      }
+     ],
+     "by_hours_after_sunset": [
+      {
+       "hours": [
+        0,
+        12
+       ],
+       "share": 0.2752
+      },
+      {
+       "hours": [
+        12,
+        24
+       ],
+       "share": 0.2117
+      },
+      {
+       "hours": [
+        24,
+        48
+       ],
+       "share": 0.1926
+      },
+      {
+       "hours": [
+        48,
+        72
+       ],
+       "share": 0.1774
+      },
+      {
+       "hours": [
+        72,
+        120
+       ],
+       "share": 0.1754
+      }
+     ]
+    },
+    "ring_70_45e": {
+     "by_latitude": [
+      {
+       "abs_lat": [
+        0,
+        15
+       ],
+       "share": 0.1419
+      },
+      {
+       "abs_lat": [
+        15,
+        30
+       ],
+       "share": 0.0227
+      },
+      {
+       "abs_lat": [
+        30,
+        45
+       ],
+       "share": 0.0084
+      },
+      {
+       "abs_lat": [
+        45,
+        60
+       ],
+       "share": 0.0
+      },
+      {
+       "abs_lat": [
+        60,
+        75
+       ],
+       "share": 0.0
+      }
+     ],
+     "by_hours_after_sunset": [
+      {
+       "hours": [
+        0,
+        12
+       ],
+       "share": 0.0405
+      },
+      {
+       "hours": [
+        12,
+        24
+       ],
+       "share": 0.0536
+      },
+      {
+       "hours": [
+        24,
+        48
+       ],
+       "share": 0.0394
+      },
+      {
+       "hours": [
+        48,
+        72
+       ],
+       "share": 0.0211
+      },
+      {
+       "hours": [
+        72,
+        120
+       ],
+       "share": 0.006
+      }
+     ]
+    },
+    "ring_70_135e": {
+     "by_latitude": [
+      {
+       "abs_lat": [
+        0,
+        15
+       ],
+       "share": 0.1367
+      },
+      {
+       "abs_lat": [
+        15,
+        30
+       ],
+       "share": 0.0098
+      },
+      {
+       "abs_lat": [
+        30,
+        45
+       ],
+       "share": 0.0015
+      },
+      {
+       "abs_lat": [
+        45,
+        60
+       ],
+       "share": 0.0016
+      },
+      {
+       "abs_lat": [
+        60,
+        75
+       ],
+       "share": 0.0
+      }
+     ],
+     "by_hours_after_sunset": [
+      {
+       "hours": [
+        0,
+        12
+       ],
+       "share": 0.0503
+      },
+      {
+       "hours": [
+        12,
+        24
+       ],
+       "share": 0.0171
+      },
+      {
+       "hours": [
+        24,
+        48
+       ],
+       "share": 0.0185
+      },
+      {
+       "hours": [
+        48,
+        72
+       ],
+       "share": 0.0331
+      },
+      {
+       "hours": [
+        72,
+        120
+       ],
+       "share": 0.0093
+      }
+     ]
+    },
+    "box_highland_own_height": {
+     "by_latitude": [
+      {
+       "abs_lat": [
+        30,
+        45
+       ],
+       "share": 0.0
+      }
+     ],
+     "by_hours_after_sunset": [
+      {
+       "hours": [
+        0,
+        12
+       ],
+       "share": 0.0
+      },
+      {
+       "hours": [
+        12,
+        24
+       ],
+       "share": 0.0
+      },
+      {
+       "hours": [
+        24,
+        48
+       ],
+       "share": 0.0
+      },
+      {
+       "hours": [
+        48,
+        72
+       ],
+       "share": 0.0
+      },
+      {
+       "hours": [
+        72,
+        120
+       ],
+       "share": 0.0
+      }
+     ]
+    }
+   },
+   "ring_rain_mm_h_through_dusk": [
+    {
+     "hours_after_sunset": 9.8,
+     "rain_mm_h": 0.39
+    },
+    {
+     "hours_after_sunset": 29.5,
+     "rain_mm_h": 0.168
+    },
+    {
+     "hours_after_sunset": 49.2,
+     "rain_mm_h": 0.094
+    },
+    {
+     "hours_after_sunset": 68.9,
+     "rain_mm_h": 0.026
+    }
+   ],
+   "ring_rain_spell_hours": {
+    "median": 3.0,
+    "p90": 12.0,
+    "max": 24.0
+   },
+   "ring_land_wet_share": 0.057,
+   "night_mixed_layer_km": 0.3,
+   "gcm_by_latitude": [
+    {
+     "lat": 0.0,
+     "land_air_c": {
+      "day": 22.5,
+      "dusk": 21.2,
+      "night": 20.2
+     },
+     "cloud_cover": {
+      "day": 0.38,
+      "dusk": 0.41,
+      "night": 0.31
+     }
+    },
+    {
+     "lat": 15.0,
+     "land_air_c": {
+      "day": 22.7,
+      "dusk": 21.0,
+      "night": 20.1
+     },
+     "cloud_cover": {
+      "day": 0.35,
+      "dusk": 0.37,
+      "night": 0.29
+     }
+    },
+    {
+     "lat": 30.0,
+     "land_air_c": {
+      "day": 23.5,
+      "dusk": 20.8,
+      "night": 19.8
+     },
+     "cloud_cover": {
+      "day": 0.25,
+      "dusk": 0.28,
+      "night": 0.23
+     }
+    },
+    {
+     "lat": 45.0,
+     "land_air_c": {
+      "day": 23.1,
+      "dusk": 20.0,
+      "night": 19.5
+     },
+     "cloud_cover": {
+      "day": 0.15,
+      "dusk": 0.17,
+      "night": 0.16
+     }
+    },
+    {
+     "lat": 60.0,
+     "land_air_c": {
+      "day": 22.3,
+      "dusk": 19.8,
+      "night": 19.3
+     },
+     "cloud_cover": {
+      "day": 0.14,
+      "dusk": 0.15,
+      "night": 0.15
+     }
+    },
+    {
+     "lat": 75.0,
+     "land_air_c": {
+      "day": 19.5,
+      "dusk": 19.2,
+      "night": 19.1
+     },
+     "cloud_cover": {
+      "day": 0.07,
+      "dusk": 0.08,
+      "night": 0.08
+     }
+    }
+   ]
+  },
+  "gathering": [
+   {
+    "lat": 0.0,
+    "practical_dusk_h": 81.7,
+    "attendance": 10000,
+    "stay_h": 4.0,
+    "arrivals_per_hour": 122,
+    "present_at_once": 490,
+    "share_of_one_ferry_line": [
+     0.005,
+     0.003
+    ]
+   },
+   {
+    "lat": 0.0,
+    "practical_dusk_h": 81.7,
+    "attendance": 100000,
+    "stay_h": 4.0,
+    "arrivals_per_hour": 1224,
+    "present_at_once": 4896,
+    "share_of_one_ferry_line": [
+     0.051,
+     0.034
+    ]
+   },
+   {
+    "lat": 0.0,
+    "practical_dusk_h": 81.7,
+    "attendance": 1000000,
+    "stay_h": 4.0,
+    "arrivals_per_hour": 12240,
+    "present_at_once": 48960,
+    "share_of_one_ferry_line": [
+     0.506,
+     0.337
+    ]
+   },
+   {
+    "lat": 30.0,
+    "practical_dusk_h": 98.3,
+    "attendance": 10000,
+    "stay_h": 4.0,
+    "arrivals_per_hour": 102,
+    "present_at_once": 407,
+    "share_of_one_ferry_line": [
+     0.004,
+     0.003
+    ]
+   },
+   {
+    "lat": 30.0,
+    "practical_dusk_h": 98.3,
+    "attendance": 100000,
+    "stay_h": 4.0,
+    "arrivals_per_hour": 1017,
+    "present_at_once": 4069,
+    "share_of_one_ferry_line": [
+     0.042,
+     0.028
+    ]
+   },
+   {
+    "lat": 30.0,
+    "practical_dusk_h": 98.3,
+    "attendance": 1000000,
+    "stay_h": 4.0,
+    "arrivals_per_hour": 10173,
+    "present_at_once": 40692,
+    "share_of_one_ferry_line": [
+     0.42,
+     0.28
+    ]
+   }
+  ],
+  "ferry_line_per_hour": {
+   "2 min": 36300.0,
+   "3 min": 24200.0,
+   "5 min": 14500.0
+  },
+  "reach": [
+   {
+    "lat": 0.0,
+    "longest_km_to_a_dusk_or_dawn": 2729,
+    "winged_liner_h": 5.2
+   },
+   {
+    "lat": 30.0,
+    "longest_km_to_a_dusk_or_dawn": 2363,
+    "winged_liner_h": 4.5
+   },
+   {
+    "lat": 60.0,
+    "longest_km_to_a_dusk_or_dawn": 1365,
+    "winged_liner_h": 2.6
+   }
+  ]
+ },
+ "volume": {
+  "o2_share": 0.1746,
+  "open_air": [
+   {
+    "label": "summit ground, the metropolis",
+    "above_summit_km": 0.0,
+    "height_km": 11.589,
+    "pressure_atm": 0.958,
+    "temperature_c": 12.7,
+    "o2_kpa": 16.95,
+    "earth_equivalent_m": 1860.0
+   },
+   {
+    "label": "top of the parks for everyone",
+    "above_summit_km": 3.0,
+    "height_km": 14.589,
+    "pressure_atm": 0.904,
+    "temperature_c": 9.9,
+    "o2_kpa": 15.99,
+    "earth_equivalent_m": 2330.0
+   },
+   {
+    "label": "top of the parks for residents and acclimatised visitors",
+    "above_summit_km": 10.0,
+    "height_km": 21.589,
+    "pressure_atm": 0.787,
+    "temperature_c": 3.7,
+    "o2_kpa": 13.93,
+    "earth_equivalent_m": 3420.0
+   },
+   {
+    "label": "winter parks begin",
+    "above_summit_km": 13.5,
+    "height_km": 25.089,
+    "pressure_atm": 0.734,
+    "temperature_c": 0.6,
+    "o2_kpa": 12.99,
+    "earth_equivalent_m": 3960.0
+   },
+   {
+    "label": "top of the open-air high gardens; sealed above",
+    "above_summit_km": 15.0,
+    "height_km": 26.589,
+    "pressure_atm": 0.712,
+    "temperature_c": -0.7,
+    "o2_kpa": 12.6,
+    "earth_equivalent_m": 4190.0
+   },
+   {
+    "label": "the crown",
+    "above_summit_km": 24.0,
+    "height_km": 35.589,
+    "pressure_atm": 0.593,
+    "temperature_c": -9.4,
+    "o2_kpa": 10.49,
+    "earth_equivalent_m": 5560.0
+   }
+  ],
+  "heights": [
+   {
+    "label": "model sea level",
+    "height_km": 0.0,
+    "pressure_atm": 1.181,
+    "temperature_c": 20.7,
+    "o2_kpa": 20.88,
+    "earth_equivalent_m": 140.0
+   },
+   {
+    "label": "a lake town on Korolev's shore",
+    "height_km": 7.849,
+    "pressure_atm": 1.03,
+    "temperature_c": 16.0,
+    "o2_kpa": 18.22,
+    "earth_equivalent_m": 1270.0
+   },
+   {
+    "label": "a roaming sky town",
+    "height_km": 10.0,
+    "pressure_atm": 0.988,
+    "temperature_c": 14.2,
+    "o2_kpa": 17.48,
+    "earth_equivalent_m": 1610.0
+   },
+   {
+    "label": "regional ships",
+    "height_km": 25.0,
+    "pressure_atm": 0.735,
+    "temperature_c": 0.7,
+    "o2_kpa": 13.01,
+    "earth_equivalent_m": 3940.0
+   },
+   {
+    "label": "the flight band",
+    "height_km": 40.0,
+    "pressure_atm": 0.542,
+    "temperature_c": -13.9,
+    "o2_kpa": 9.58,
+    "earth_equivalent_m": 6230.0
+   },
+   {
+    "label": "winged liners",
+    "height_km": 55.0,
+    "pressure_atm": 0.393,
+    "temperature_c": -30.3,
+    "o2_kpa": 6.96,
+    "earth_equivalent_m": 8470.0
+   },
+   {
+    "label": "high platforms",
+    "height_km": 70.0,
+    "pressure_atm": 0.281,
+    "temperature_c": -47.1,
+    "o2_kpa": 4.96,
+    "earth_equivalent_m": 10710.0
+   }
+  ],
+  "horizon": [
+   {
+    "above_ground_km": 0.1,
+    "dip_deg": 0.61,
+    "extra_sun_h": {
+     "0": 2.4,
+     "30": 2.8,
+     "60": 4.8
+    }
+   },
+   {
+    "above_ground_km": 0.5,
+    "dip_deg": 1.37,
+    "extra_sun_h": {
+     "0": 5.4,
+     "30": 6.2,
+     "60": 10.8
+    }
+   },
+   {
+    "above_ground_km": 1.0,
+    "dip_deg": 1.94,
+    "extra_sun_h": {
+     "0": 7.7,
+     "30": 8.8,
+     "60": 15.3
+    }
+   },
+   {
+    "above_ground_km": 3.1,
+    "dip_deg": 3.42,
+    "extra_sun_h": {
+     "0": 13.5,
+     "30": 15.6,
+     "60": 27.0
+    }
+   },
+   {
+    "above_ground_km": 10.0,
+    "dip_deg": 6.13,
+    "extra_sun_h": {
+     "0": 24.1,
+     "30": 27.9,
+     "60": 48.6
+    }
+   },
+   {
+    "above_ground_km": 12.3,
+    "dip_deg": 6.8,
+    "extra_sun_h": {
+     "0": 26.8,
+     "30": 30.9,
+     "60": 53.9
+    }
+   },
+   {
+    "above_ground_km": 24.0,
+    "dip_deg": 9.47,
+    "extra_sun_h": {
+     "0": 37.3,
+     "30": 43.1,
+     "60": 75.6
+    }
+   },
+   {
+    "above_ground_km": 70.0,
+    "dip_deg": 16.0,
+    "extra_sun_h": {
+     "0": 63.0,
+     "30": 73.1,
+     "60": 131.7
+    }
+   }
+  ],
+  "sky_towns": [
+   {
+    "height_km": 2.5,
+    "latitudes": "equator",
+    "abs_lat_deg": [
+     0.0,
+     10.0
+    ],
+    "sun_speed_m_s": 4.26,
+    "u_mean_m_s": 0.13,
+    "day_at_mean_wind_days": 28.6,
+    "sun_turned_back_at_mean_wind": false,
+    "day_days": {
+     "p10": 17.0,
+     "p50": 29.2,
+     "p90": 86.1
+    },
+    "held_within_1_m_s": 0.053,
+    "sun_turned_back": 0.008
+   },
+   {
+    "height_km": 2.5,
+    "latitudes": "30",
+    "abs_lat_deg": [
+     25.0,
+     35.0
+    ],
+    "sun_speed_m_s": 3.69,
+    "u_mean_m_s": -0.14,
+    "day_at_mean_wind_days": 30.7,
+    "sun_turned_back_at_mean_wind": false,
+    "day_days": {
+     "p10": 17.2,
+     "p50": 31.9,
+     "p90": 115.0
+    },
+    "held_within_1_m_s": 0.104,
+    "sun_turned_back": 0.037
+   },
+   {
+    "height_km": 2.5,
+    "latitudes": "60",
+    "abs_lat_deg": [
+     55.0,
+     65.0
+    ],
+    "sun_speed_m_s": 2.1,
+    "u_mean_m_s": -0.19,
+    "day_at_mean_wind_days": 32.5,
+    "sun_turned_back_at_mean_wind": false,
+    "day_days": {
+     "p10": 14.6,
+     "p50": 33.4,
+     "p90": 201.2
+    },
+    "held_within_1_m_s": 0.306,
+    "sun_turned_back": 0.154
+   },
+   {
+    "height_km": 5.0,
+    "latitudes": "equator",
+    "abs_lat_deg": [
+     0.0,
+     10.0
+    ],
+    "sun_speed_m_s": 4.27,
+    "u_mean_m_s": 0.43,
+    "day_at_mean_wind_days": 26.8,
+    "sun_turned_back_at_mean_wind": false,
+    "day_days": {
+     "p10": 17.3,
+     "p50": 26.7,
+     "p90": 59.9
+    },
+    "held_within_1_m_s": 0.031,
+    "sun_turned_back": 0.009
+   },
+   {
+    "height_km": 5.0,
+    "latitudes": "30",
+    "abs_lat_deg": [
+     25.0,
+     35.0
+    ],
+    "sun_speed_m_s": 3.7,
+    "u_mean_m_s": 0.34,
+    "day_at_mean_wind_days": 27.0,
+    "sun_turned_back_at_mean_wind": false,
+    "day_days": {
+     "p10": 17.1,
+     "p50": 27.0,
+     "p90": 67.3
+    },
+    "held_within_1_m_s": 0.05,
+    "sun_turned_back": 0.014
+   },
+   {
+    "height_km": 5.0,
+    "latitudes": "60",
+    "abs_lat_deg": [
+     55.0,
+     65.0
+    ],
+    "sun_speed_m_s": 2.1,
+    "u_mean_m_s": 0.28,
+    "day_at_mean_wind_days": 26.1,
+    "sun_turned_back_at_mean_wind": false,
+    "day_days": {
+     "p10": 14.0,
+     "p50": 25.3,
+     "p90": 114.5
+    },
+    "held_within_1_m_s": 0.191,
+    "sun_turned_back": 0.083
+   },
+   {
+    "height_km": 10.0,
+    "latitudes": "equator",
+    "abs_lat_deg": [
+     0.0,
+     10.0
+    ],
+    "sun_speed_m_s": 4.28,
+    "u_mean_m_s": 1.37,
+    "day_at_mean_wind_days": 22.4,
+    "sun_turned_back_at_mean_wind": false,
+    "day_days": {
+     "p10": 16.7,
+     "p50": 21.9,
+     "p90": 35.6
+    },
+    "held_within_1_m_s": 0.005,
+    "sun_turned_back": 0.001
+   },
+   {
+    "height_km": 10.0,
+    "latitudes": "30",
+    "abs_lat_deg": [
+     25.0,
+     35.0
+    ],
+    "sun_speed_m_s": 3.71,
+    "u_mean_m_s": 1.39,
+    "day_at_mean_wind_days": 21.5,
+    "sun_turned_back_at_mean_wind": false,
+    "day_days": {
+     "p10": 15.8,
+     "p50": 21.2,
+     "p90": 35.8
+    },
+    "held_within_1_m_s": 0.008,
+    "sun_turned_back": 0.001
+   },
+   {
+    "height_km": 10.0,
+    "latitudes": "60",
+    "abs_lat_deg": [
+     55.0,
+     65.0
+    ],
+    "sun_speed_m_s": 2.11,
+    "u_mean_m_s": 1.55,
+    "day_at_mean_wind_days": 17.0,
+    "sun_turned_back_at_mean_wind": false,
+    "day_days": {
+     "p10": 11.4,
+     "p50": 17.3,
+     "p90": 42.1
+    },
+    "held_within_1_m_s": 0.055,
+    "sun_turned_back": 0.015
+   },
+   {
+    "height_km": 20.0,
+    "latitudes": "equator",
+    "abs_lat_deg": [
+     0.0,
+     10.0
+    ],
+    "sun_speed_m_s": 4.3,
+    "u_mean_m_s": 3.07,
+    "day_at_mean_wind_days": 17.2,
+    "sun_turned_back_at_mean_wind": false,
+    "day_days": {
+     "p10": 13.8,
+     "p50": 17.1,
+     "p90": 23.5
+    },
+    "held_within_1_m_s": 0.0,
+    "sun_turned_back": 0.0
+   },
+   {
+    "height_km": 20.0,
+    "latitudes": "30",
+    "abs_lat_deg": [
+     25.0,
+     35.0
+    ],
+    "sun_speed_m_s": 3.73,
+    "u_mean_m_s": 3.78,
+    "day_at_mean_wind_days": 14.7,
+    "sun_turned_back_at_mean_wind": false,
+    "day_days": {
+     "p10": 12.1,
+     "p50": 14.6,
+     "p90": 19.1
+    },
+    "held_within_1_m_s": 0.0,
+    "sun_turned_back": 0.0
+   },
+   {
+    "height_km": 20.0,
+    "latitudes": "60",
+    "abs_lat_deg": [
+     55.0,
+     65.0
+    ],
+    "sun_speed_m_s": 2.12,
+    "u_mean_m_s": 3.88,
+    "day_at_mean_wind_days": 10.4,
+    "sun_turned_back_at_mean_wind": false,
+    "day_days": {
+     "p10": 8.0,
+     "p50": 10.4,
+     "p90": 15.9
+    },
+    "held_within_1_m_s": 0.003,
+    "sun_turned_back": 0.0
+   },
+   {
+    "height_km": 30.0,
+    "latitudes": "equator",
+    "abs_lat_deg": [
+     0.0,
+     10.0
+    ],
+    "sun_speed_m_s": 4.33,
+    "u_mean_m_s": 5.65,
+    "day_at_mean_wind_days": 12.8,
+    "sun_turned_back_at_mean_wind": false,
+    "day_days": {
+     "p10": 11.0,
+     "p50": 12.7,
+     "p90": 15.7
+    },
+    "held_within_1_m_s": 0.0,
+    "sun_turned_back": 0.0
+   },
+   {
+    "height_km": 30.0,
+    "latitudes": "30",
+    "abs_lat_deg": [
+     25.0,
+     35.0
+    ],
+    "sun_speed_m_s": 3.75,
+    "u_mean_m_s": 7.01,
+    "day_at_mean_wind_days": 10.3,
+    "sun_turned_back_at_mean_wind": false,
+    "day_days": {
+     "p10": 9.1,
+     "p50": 10.3,
+     "p90": 12.1
+    },
+    "held_within_1_m_s": 0.0,
+    "sun_turned_back": 0.0
+   },
+   {
+    "height_km": 30.0,
+    "latitudes": "60",
+    "abs_lat_deg": [
+     55.0,
+     65.0
+    ],
+    "sun_speed_m_s": 2.13,
+    "u_mean_m_s": 7.45,
+    "day_at_mean_wind_days": 6.6,
+    "sun_turned_back_at_mean_wind": false,
+    "day_days": {
+     "p10": 5.6,
+     "p50": 6.6,
+     "p90": 8.2
+    },
+    "held_within_1_m_s": 0.0,
+    "sun_turned_back": 0.0
+   },
+   {
+    "height_km": 40.0,
+    "latitudes": "equator",
+    "abs_lat_deg": [
+     0.0,
+     10.0
+    ],
+    "sun_speed_m_s": 4.35,
+    "u_mean_m_s": 9.38,
+    "day_at_mean_wind_days": 9.4,
+    "sun_turned_back_at_mean_wind": false,
+    "day_days": {
+     "p10": 8.5,
+     "p50": 9.3,
+     "p90": 10.5
+    },
+    "held_within_1_m_s": 0.0,
+    "sun_turned_back": 0.0
+   },
+   {
+    "height_km": 40.0,
+    "latitudes": "30",
+    "abs_lat_deg": [
+     25.0,
+     35.0
+    ],
+    "sun_speed_m_s": 3.77,
+    "u_mean_m_s": 11.1,
+    "day_at_mean_wind_days": 7.5,
+    "sun_turned_back_at_mean_wind": false,
+    "day_days": {
+     "p10": 6.9,
+     "p50": 7.5,
+     "p90": 8.2
+    },
+    "held_within_1_m_s": 0.0,
+    "sun_turned_back": 0.0
+   },
+   {
+    "height_km": 40.0,
+    "latitudes": "60",
+    "abs_lat_deg": [
+     55.0,
+     65.0
+    ],
+    "sun_speed_m_s": 2.14,
+    "u_mean_m_s": 12.38,
+    "day_at_mean_wind_days": 4.4,
+    "sun_turned_back_at_mean_wind": false,
+    "day_days": {
+     "p10": 3.9,
+     "p50": 4.4,
+     "p90": 4.9
+    },
+    "held_within_1_m_s": 0.0,
+    "sun_turned_back": 0.0
+   }
+  ],
+  "drift_formula": [
+   {
+    "height_km": 10.0,
+    "lat": 0.0,
+    "u_m_s": -15.0,
+    "day_h": 285.1,
+    "holds_the_hour": false,
+    "sun_rises_in_west": true
+   },
+   {
+    "height_km": 10.0,
+    "lat": 0.0,
+    "u_m_s": -10.0,
+    "day_h": 535.3,
+    "holds_the_hour": false,
+    "sun_rises_in_west": true
+   },
+   {
+    "height_km": 10.0,
+    "lat": 0.0,
+    "u_m_s": -6.0,
+    "day_h": 1797.3,
+    "holds_the_hour": false,
+    "sun_rises_in_west": true
+   },
+   {
+    "height_km": 10.0,
+    "lat": 0.0,
+    "u_m_s": -2.0,
+    "day_h": 1324.2,
+    "holds_the_hour": false,
+    "sun_rises_in_west": false
+   },
+   {
+    "height_km": 10.0,
+    "lat": 0.0,
+    "u_m_s": 0.0,
+    "day_h": 708.7,
+    "holds_the_hour": false,
+    "sun_rises_in_west": false
+   },
+   {
+    "height_km": 10.0,
+    "lat": 0.0,
+    "u_m_s": 2.0,
+    "day_h": 483.9,
+    "holds_the_hour": false,
+    "sun_rises_in_west": false
+   },
+   {
+    "height_km": 10.0,
+    "lat": 0.0,
+    "u_m_s": 4.0,
+    "day_h": 367.3,
+    "holds_the_hour": false,
+    "sun_rises_in_west": false
+   },
+   {
+    "height_km": 10.0,
+    "lat": 0.0,
+    "u_m_s": 8.0,
+    "day_h": 247.9,
+    "holds_the_hour": false,
+    "sun_rises_in_west": false
+   },
+   {
+    "height_km": 10.0,
+    "lat": 0.0,
+    "u_m_s": 15.0,
+    "day_h": 158.0,
+    "holds_the_hour": false,
+    "sun_rises_in_west": false
+   },
+   {
+    "height_km": 10.0,
+    "lat": 0.0,
+    "u_m_s": -4.303,
+    "day_h": null,
+    "holds_the_hour": true,
+    "sun_rises_in_west": false
+   },
+   {
+    "height_km": 10.0,
+    "lat": 0.0,
+    "u_m_s": -8.606,
+    "day_h": 708.7,
+    "holds_the_hour": false,
+    "sun_rises_in_west": true
+   },
+   {
+    "height_km": 10.0,
+    "lat": 0.0,
+    "u_m_s": -2.152,
+    "day_h": 1417.5,
+    "holds_the_hour": false,
+    "sun_rises_in_west": false
+   },
+   {
+    "height_km": 10.0,
+    "lat": 60.0,
+    "u_m_s": -15.0,
+    "day_h": 118.7,
+    "holds_the_hour": false,
+    "sun_rises_in_west": true
+   },
+   {
+    "height_km": 10.0,
+    "lat": 60.0,
+    "u_m_s": -10.0,
+    "day_h": 194.3,
+    "holds_the_hour": false,
+    "sun_rises_in_west": true
+   },
+   {
+    "height_km": 10.0,
+    "lat": 60.0,
+    "u_m_s": -6.0,
+    "day_h": 396.2,
+    "holds_the_hour": false,
+    "sun_rises_in_west": true
+   },
+   {
+    "height_km": 10.0,
+    "lat": 60.0,
+    "u_m_s": -2.0,
+    "day_h": 10060.4,
+    "holds_the_hour": false,
+    "sun_rises_in_west": false
+   },
+   {
+    "height_km": 10.0,
+    "lat": 60.0,
+    "u_m_s": 0.0,
+    "day_h": 708.7,
+    "holds_the_hour": false,
+    "sun_rises_in_west": false
+   },
+   {
+    "height_km": 10.0,
+    "lat": 60.0,
+    "u_m_s": 2.0,
+    "day_h": 367.3,
+    "holds_the_hour": false,
+    "sun_rises_in_west": false
+   },
+   {
+    "height_km": 10.0,
+    "lat": 60.0,
+    "u_m_s": 4.0,
+    "day_h": 247.9,
+    "holds_the_hour": false,
+    "sun_rises_in_west": false
+   },
+   {
+    "height_km": 10.0,
+    "lat": 60.0,
+    "u_m_s": 8.0,
+    "day_h": 150.2,
+    "holds_the_hour": false,
+    "sun_rises_in_west": false
+   },
+   {
+    "height_km": 10.0,
+    "lat": 60.0,
+    "u_m_s": 15.0,
+    "day_h": 88.9,
+    "holds_the_hour": false,
+    "sun_rises_in_west": false
+   },
+   {
+    "height_km": 10.0,
+    "lat": 60.0,
+    "u_m_s": -2.152,
+    "day_h": null,
+    "holds_the_hour": true,
+    "sun_rises_in_west": false
+   },
+   {
+    "height_km": 10.0,
+    "lat": 60.0,
+    "u_m_s": -4.303,
+    "day_h": 708.7,
+    "holds_the_hour": false,
+    "sun_rises_in_west": true
+   },
+   {
+    "height_km": 10.0,
+    "lat": 60.0,
+    "u_m_s": -1.076,
+    "day_h": 1417.5,
+    "holds_the_hour": false,
+    "sun_rises_in_west": false
+   }
+  ],
+  "hold_the_hour": [
+   {
+    "latitudes": "equator",
+    "airspeed_m_s": 5.65,
+    "sphere_kw_per_resident": 10.0
+   },
+   {
+    "latitudes": "30",
+    "airspeed_m_s": 5.09,
+    "sphere_kw_per_resident": 7.3
+   },
+   {
+    "latitudes": "60",
+    "airspeed_m_s": 3.65,
+    "sphere_kw_per_resident": 2.7
+   }
+  ],
+  "wind_holds_the_hour": [
+   {
+    "height_km": [
+     0.0,
+     5.0
+    ],
+    "abs_lat_deg": [
+     0.0,
+     20.0
+    ],
+    "held_within_1_m_s": 0.049,
+    "best_hour_deg": 95.0,
+    "held_at_best_hour": 0.184,
+    "sun_turned_back": 0.013
+   },
+   {
+    "height_km": [
+     0.0,
+     5.0
+    ],
+    "abs_lat_deg": [
+     20.0,
+     40.0
+    ],
+    "held_within_1_m_s": 0.083,
+    "best_hour_deg": 75.0,
+    "held_at_best_hour": 0.309,
+    "sun_turned_back": 0.034
+   },
+   {
+    "height_km": [
+     0.0,
+     5.0
+    ],
+    "abs_lat_deg": [
+     40.0,
+     60.0
+    ],
+    "held_within_1_m_s": 0.176,
+    "best_hour_deg": 85.0,
+    "held_at_best_hour": 0.49,
+    "sun_turned_back": 0.091
+   },
+   {
+    "height_km": [
+     0.0,
+     5.0
+    ],
+    "abs_lat_deg": [
+     60.0,
+     75.0
+    ],
+    "held_within_1_m_s": 0.31,
+    "best_hour_deg": 65.0,
+    "held_at_best_hour": 0.655,
+    "sun_turned_back": 0.17
+   },
+   {
+    "height_km": [
+     0.0,
+     5.0
+    ],
+    "abs_lat_deg": [
+     75.0,
+     90.0
+    ],
+    "held_within_1_m_s": 0.407,
+    "best_hour_deg": 25.0,
+    "held_at_best_hour": 0.599,
+    "sun_turned_back": 0.376
+   },
+   {
+    "height_km": [
+     5.0,
+     15.0
+    ],
+    "abs_lat_deg": [
+     0.0,
+     20.0
+    ],
+    "held_within_1_m_s": 0.009,
+    "best_hour_deg": 65.0,
+    "held_at_best_hour": 0.039,
+    "sun_turned_back": 0.002
+   },
+   {
+    "height_km": [
+     5.0,
+     15.0
+    ],
+    "abs_lat_deg": [
+     20.0,
+     40.0
+    ],
+    "held_within_1_m_s": 0.017,
+    "best_hour_deg": 65.0,
+    "held_at_best_hour": 0.072,
+    "sun_turned_back": 0.005
+   },
+   {
+    "height_km": [
+     5.0,
+     15.0
+    ],
+    "abs_lat_deg": [
+     40.0,
+     60.0
+    ],
+    "held_within_1_m_s": 0.04,
+    "best_hour_deg": 65.0,
+    "held_at_best_hour": 0.128,
+    "sun_turned_back": 0.015
+   },
+   {
+    "height_km": [
+     5.0,
+     15.0
+    ],
+    "abs_lat_deg": [
+     60.0,
+     75.0
+    ],
+    "held_within_1_m_s": 0.146,
+    "best_hour_deg": 55.0,
+    "held_at_best_hour": 0.197,
+    "sun_turned_back": 0.066
+   },
+   {
+    "height_km": [
+     5.0,
+     15.0
+    ],
+    "abs_lat_deg": [
+     75.0,
+     90.0
+    ],
+    "held_within_1_m_s": 0.352,
+    "best_hour_deg": 5.0,
+    "held_at_best_hour": 0.451,
+    "sun_turned_back": 0.268
+   }
+  ],
+  "routes": [
+   {
+    "height_km": 2.5,
+    "mean_day_days": 33.9,
+    "first_pass_days": 36.8,
+    "days_by_quarter": {
+     "after_midnight": 7.3,
+     "morning": 5.3,
+     "afternoon": 9.7,
+     "evening_and_first_half_of_night": 11.5
+    },
+    "lingers_at_hour_deg": 105.0,
+    "lingers_at_clock": "19:00",
+    "linger_strength": 1.61,
+    "sun_up_share": 0.441,
+    "light_ratio": 0.8,
+    "years_5_10_within_20_deg_of_equator": 0.594,
+    "years_5_10_between_20_and_70_deg": 0.402,
+    "years_5_10_poleward_of_50_deg": 0.067,
+    "years_5_10_poleward_of_70_deg": 0.003,
+    "nearest_neighbour_km": {
+     "30 d": 11.8,
+     "357 d": 0,
+     "3575 d": 0
+    },
+    "first_year_western_sunrise_share": 0.058
+   },
+   {
+    "height_km": 5.0,
+    "mean_day_days": 30.9,
+    "first_pass_days": 27.8,
+    "days_by_quarter": {
+     "after_midnight": 6.2,
+     "morning": 3.8,
+     "afternoon": 10.3,
+     "evening_and_first_half_of_night": 10.6
+    },
+    "lingers_at_hour_deg": 75.0,
+    "lingers_at_clock": "17:00",
+    "linger_strength": 1.79,
+    "sun_up_share": 0.473,
+    "light_ratio": 0.791,
+    "years_5_10_within_20_deg_of_equator": 0.08,
+    "years_5_10_between_20_and_70_deg": 0.834,
+    "years_5_10_poleward_of_50_deg": 0.297,
+    "years_5_10_poleward_of_70_deg": 0.086,
+    "nearest_neighbour_km": {
+     "30 d": 39.8,
+     "357 d": 0,
+     "3575 d": 0
+    },
+    "first_year_western_sunrise_share": 0.428
+   },
+   {
+    "height_km": 7.5,
+    "mean_day_days": 29.4,
+    "first_pass_days": 22.5,
+    "days_by_quarter": {
+     "after_midnight": 6.0,
+     "morning": 6.1,
+     "afternoon": 10.1,
+     "evening_and_first_half_of_night": 7.3
+    },
+    "lingers_at_hour_deg": 45.0,
+    "lingers_at_clock": "15:00",
+    "linger_strength": 1.53,
+    "sun_up_share": 0.55,
+    "light_ratio": 1.133,
+    "years_5_10_within_20_deg_of_equator": 0.788,
+    "years_5_10_between_20_and_70_deg": 0.212,
+    "years_5_10_poleward_of_50_deg": 0.002,
+    "years_5_10_poleward_of_70_deg": 0.0,
+    "nearest_neighbour_km": {
+     "30 d": 99.1,
+     "357 d": 0,
+     "3575 d": 0
+    },
+    "first_year_western_sunrise_share": 0.07
+   },
+   {
+    "height_km": 10.0,
+    "mean_day_days": 21.3,
+    "first_pass_days": 20.9,
+    "days_by_quarter": {
+     "after_midnight": 4.9,
+     "morning": 5.4,
+     "afternoon": 5.9,
+     "evening_and_first_half_of_night": 5.1
+    },
+    "lingers_at_hour_deg": 15.0,
+    "lingers_at_clock": "13:00",
+    "linger_strength": 1.14,
+    "sun_up_share": 0.535,
+    "light_ratio": 1.092,
+    "years_5_10_within_20_deg_of_equator": 0.457,
+    "years_5_10_between_20_and_70_deg": 0.434,
+    "years_5_10_poleward_of_50_deg": 0.281,
+    "years_5_10_poleward_of_70_deg": 0.109,
+    "nearest_neighbour_km": {
+     "30 d": 125.4,
+     "357 d": 32.3,
+     "3575 d": 52.3
+    },
+    "first_year_western_sunrise_share": 0.103
+   },
+   {
+    "height_km": 15.0,
+    "mean_day_days": 13.1,
+    "first_pass_days": 16.1,
+    "days_by_quarter": {
+     "after_midnight": 3.4,
+     "morning": 4.4,
+     "afternoon": 2.8,
+     "evening_and_first_half_of_night": 2.5
+    },
+    "lingers_at_hour_deg": -45.0,
+    "lingers_at_clock": "09:00",
+    "linger_strength": 1.4,
+    "sun_up_share": 0.551,
+    "light_ratio": 1.147,
+    "years_5_10_within_20_deg_of_equator": 0.081,
+    "years_5_10_between_20_and_70_deg": 0.516,
+    "years_5_10_poleward_of_50_deg": 0.816,
+    "years_5_10_poleward_of_70_deg": 0.403,
+    "nearest_neighbour_km": {
+     "30 d": 195.0,
+     "357 d": 93.9,
+     "3575 d": 35.3
+    },
+    "first_year_western_sunrise_share": 0.088
+   },
+   {
+    "height_km": 20.0,
+    "mean_day_days": 10.9,
+    "first_pass_days": 13.1,
+    "days_by_quarter": {
+     "after_midnight": 3.0,
+     "morning": 3.5,
+     "afternoon": 2.2,
+     "evening_and_first_half_of_night": 2.1
+    },
+    "lingers_at_hour_deg": -75.0,
+    "lingers_at_clock": "07:00",
+    "linger_strength": 1.41,
+    "sun_up_share": 0.521,
+    "light_ratio": 1.053,
+    "years_5_10_within_20_deg_of_equator": 0.001,
+    "years_5_10_between_20_and_70_deg": 0.492,
+    "years_5_10_poleward_of_50_deg": 0.936,
+    "years_5_10_poleward_of_70_deg": 0.507,
+    "nearest_neighbour_km": {
+     "30 d": 168.6,
+     "357 d": 19.6,
+     "3575 d": 27.0
+    },
+    "first_year_western_sunrise_share": 0.28
+   },
+   {
+    "height_km": 30.0,
+    "mean_day_days": 10.2,
+    "first_pass_days": 9.0,
+    "days_by_quarter": {
+     "after_midnight": 2.6,
+     "morning": 2.5,
+     "afternoon": 2.6,
+     "evening_and_first_half_of_night": 2.5
+    },
+    "lingers_at_hour_deg": 75.0,
+    "lingers_at_clock": "17:00",
+    "linger_strength": 1.02,
+    "sun_up_share": 0.496,
+    "light_ratio": 0.986,
+    "years_5_10_within_20_deg_of_equator": 0.396,
+    "years_5_10_between_20_and_70_deg": 0.545,
+    "years_5_10_poleward_of_50_deg": 0.2,
+    "years_5_10_poleward_of_70_deg": 0.059,
+    "nearest_neighbour_km": {
+     "30 d": 206.2,
+     "357 d": 157.3,
+     "3575 d": 117.0
+    },
+    "first_year_western_sunrise_share": 0.032
+   },
+   {
+    "height_km": 40.0,
+    "mean_day_days": 3.9,
+    "first_pass_days": 6.2,
+    "days_by_quarter": {
+     "after_midnight": 1.2,
+     "morning": 1.2,
+     "afternoon": 0.8,
+     "evening_and_first_half_of_night": 0.7
+    },
+    "lingers_at_hour_deg": -105.0,
+    "lingers_at_clock": "05:00",
+    "linger_strength": 1.4,
+    "sun_up_share": 0.548,
+    "light_ratio": 1.118,
+    "years_5_10_within_20_deg_of_equator": 0.0,
+    "years_5_10_between_20_and_70_deg": 0.026,
+    "years_5_10_poleward_of_50_deg": 1.0,
+    "years_5_10_poleward_of_70_deg": 0.974,
+    "nearest_neighbour_km": {
+     "30 d": 210.4,
+     "357 d": 79.9,
+     "3575 d": 6.6
+    },
+    "first_year_western_sunrise_share": 0.012
+   },
+   {
+    "height_km": 50.0,
+    "mean_day_days": 3.1,
+    "first_pass_days": 4.9,
+    "days_by_quarter": {
+     "after_midnight": 1.1,
+     "morning": 1.1,
+     "afternoon": 0.5,
+     "evening_and_first_half_of_night": 0.4
+    },
+    "lingers_at_hour_deg": -105.0,
+    "lingers_at_clock": "05:00",
+    "linger_strength": 1.75,
+    "sun_up_share": 0.413,
+    "light_ratio": 0.843,
+    "years_5_10_within_20_deg_of_equator": 0.0,
+    "years_5_10_between_20_and_70_deg": 0.0,
+    "years_5_10_poleward_of_50_deg": 1.0,
+    "years_5_10_poleward_of_70_deg": 1.0,
+    "nearest_neighbour_km": {
+     "30 d": 205.1,
+     "357 d": 45.6,
+     "3575 d": 0
+    },
+    "first_year_western_sunrise_share": 0.013
+   },
+   {
+    "height_km": 60.0,
+    "mean_day_days": 2.6,
+    "first_pass_days": 4.2,
+    "days_by_quarter": {
+     "after_midnight": 1.0,
+     "morning": 1.0,
+     "afternoon": 0.3,
+     "evening_and_first_half_of_night": 0.3
+    },
+    "lingers_at_hour_deg": -105.0,
+    "lingers_at_clock": "05:00",
+    "linger_strength": 1.75,
+    "sun_up_share": 0.383,
+    "light_ratio": 0.851,
+    "years_5_10_within_20_deg_of_equator": 0.0,
+    "years_5_10_between_20_and_70_deg": 0.0,
+    "years_5_10_poleward_of_50_deg": 1.0,
+    "years_5_10_poleward_of_70_deg": 1.0,
+    "nearest_neighbour_km": {
+     "30 d": 177.9,
+     "357 d": 44.9,
+     "3575 d": 0
+    },
+    "first_year_western_sunrise_share": 0.03
+   }
+  ],
+  "wind_by_height": [
+   {
+    "height_km": 2.5,
+    "u_m_s": -0.11
+   },
+   {
+    "height_km": 5.0,
+    "u_m_s": 0.33
+   },
+   {
+    "height_km": 7.5,
+    "u_m_s": 0.85
+   },
+   {
+    "height_km": 10.0,
+    "u_m_s": 1.4
+   },
+   {
+    "height_km": 20.0,
+    "u_m_s": 3.52
+   },
+   {
+    "height_km": 30.0,
+    "u_m_s": 6.58
+   },
+   {
+    "height_km": 40.0,
+    "u_m_s": 10.72
+   },
+   {
+    "height_km": 55.0,
+    "u_m_s": 16.91
+   },
+   {
+    "height_km": 75.0,
+    "u_m_s": 21.9
+   }
+  ],
+  "aerial_district": {
+   "residents": 5749,
+   "radius_m": 500.0,
+   "height_km": 10.0,
+   "floor_m2": 402438,
+   "held_5_m_s_kw_per_resident": 6.9,
+   "drifting_day": {
+    "routes": {
+     "height_km": 10.0,
+     "mean_day_days": 21.3,
+     "first_pass_days": 20.9,
+     "days_by_quarter": {
+      "after_midnight": 4.9,
+      "morning": 5.4,
+      "afternoon": 5.9,
+      "evening_and_first_half_of_night": 5.1
+     },
+     "lingers_at_hour_deg": 15.0,
+     "lingers_at_clock": "13:00",
+     "linger_strength": 1.14,
+     "sun_up_share": 0.535,
+     "light_ratio": 1.092,
+     "years_5_10_within_20_deg_of_equator": 0.457,
+     "years_5_10_between_20_and_70_deg": 0.434,
+     "years_5_10_poleward_of_50_deg": 0.281,
+     "years_5_10_poleward_of_70_deg": 0.109,
+     "nearest_neighbour_km": {
+      "30 d": 125.4,
+      "357 d": 32.3,
+      "3575 d": 52.3
+     },
+     "first_year_western_sunrise_share": 0.103
+    },
+    "by_latitude": [
+     {
+      "height_km": 10.0,
+      "latitudes": "equator",
+      "abs_lat_deg": [
+       0.0,
+       10.0
+      ],
+      "sun_speed_m_s": 4.28,
+      "u_mean_m_s": 1.37,
+      "day_at_mean_wind_days": 22.4,
+      "sun_turned_back_at_mean_wind": false,
+      "day_days": {
+       "p10": 16.7,
+       "p50": 21.9,
+       "p90": 35.6
+      },
+      "held_within_1_m_s": 0.005,
+      "sun_turned_back": 0.001
+     },
+     {
+      "height_km": 10.0,
+      "latitudes": "30",
+      "abs_lat_deg": [
+       25.0,
+       35.0
+      ],
+      "sun_speed_m_s": 3.71,
+      "u_mean_m_s": 1.39,
+      "day_at_mean_wind_days": 21.5,
+      "sun_turned_back_at_mean_wind": false,
+      "day_days": {
+       "p10": 15.8,
+       "p50": 21.2,
+       "p90": 35.8
+      },
+      "held_within_1_m_s": 0.008,
+      "sun_turned_back": 0.001
+     },
+     {
+      "height_km": 10.0,
+      "latitudes": "60",
+      "abs_lat_deg": [
+       55.0,
+       65.0
+      ],
+      "sun_speed_m_s": 2.11,
+      "u_mean_m_s": 1.55,
+      "day_at_mean_wind_days": 17.0,
+      "sun_turned_back_at_mean_wind": false,
+      "day_days": {
+       "p10": 11.4,
+       "p50": 17.3,
+       "p90": 42.1
+      },
+      "held_within_1_m_s": 0.055,
+      "sun_turned_back": 0.015
+     }
+    ]
+   },
+   "wind_10km": {
+    "median": 2.6,
+    "p99": 5.5,
+    "max": 8.4,
+    "return_50yr": 8.7
+   },
+   "ring_wind_10km": {
+    "ring_height_km": 10.0,
+    "median": 1.6,
+    "p99": 6.7,
+    "max": 11.9,
+    "vertical_p99": 1.07,
+    "updraft_max": 9.8
+   }
+  },
+  "shadow": {
+   "envelope_diameter_m": 1000.0,
+   "height_km": 10.0,
+   "ground_light_under_it": {
+    "90.0": {
+     "total_lux": 87660,
+     "diffuse_lux": 29872
+    },
+    "45.0": {
+     "total_lux": 55540,
+     "diffuse_lux": 24735
+    },
+    "20.0": {
+     "total_lux": 22244,
+     "diffuse_lux": 15678
+    }
+   },
+   "held_hours_in_shadow_at_noon_equator": 11.3,
+   "roaming_minutes_in_shadow": {
+    "1 m/s": 16.7,
+    "1.75 m/s": 9.5,
+    "5 m/s": 3.3
+   },
+   "sky_blocked_share": 0.0025
+  },
+  "vertical": {
+   "lift_kwh_per_100kg_km": 0.0451,
+   "lift_kwh_per_100kg_km_earth": 0.2724,
+   "stairs_earth_metres_per_100_m": 16.6,
+   "sky_boat_climb_10km_kwh": 3.86,
+   "sky_boat_trip_10km_kwh": 0.74,
+   "pedalled_wing_climb_m_s": {
+    "an untrained adult for three hours": 0.03,
+    "an untrained woman's critical power": 0.24,
+    "an untrained man's critical power": 0.45,
+    "a fit young man for an hour": 0.73
+   },
+   "glider_range_from_10km_km": 150.0,
+   "glider_hours_down_from_10km": 5.2,
+   "canopy_descent_minutes": {
+    "from_3_km": 12,
+    "from_10_km": 42,
+    "from_24_km": 100
+   },
+   "glide_from_port_ring_to_korolev": {
+    "ring_above_summit_km": 3.1,
+    "height_km": 6.84,
+    "reach_km": 103.0,
+    "shore_km": 84,
+    "hours": 3.0
+   }
+  },
+  "under_canopy": {
+   "lai": 5.0,
+   "floor_share_by_sun_deg": {
+    "90": 0.0737,
+    "75": 0.0687,
+    "60": 0.0553,
+    "45": 0.0385,
+    "30": 0.0279,
+    "20": 0.0282,
+    "15": 0.0302,
+    "10": 0.033,
+    "7": 0.0347,
+    "5": 0.0359,
+    "3": 0.0369,
+    "2": 0.0374,
+    "1": 0.0379
+   },
+   "noon_floor_lux": 6460,
+   "twilight_floor_share": 0.0379,
+   "practical_dusk_after_sunset_h": {
+    "0": 47.6,
+    "15": 49.3
+   },
+   "day_vision_after_sunset_h": {
+    "0": 11.3,
+    "15": 11.7
+   }
+  }
+ },
+ "bodies": {
+  "gravity_m_s2": 1.6242,
+  "gravity_g": 0.1656,
+  "falls": [
+   {
+    "height_m": 0.5,
+    "impact_m_s": 1.27,
+    "like_earth_fall_m": 0.08,
+    "seconds_without_drag": 0.78
+   },
+   {
+    "height_m": 1.0,
+    "impact_m_s": 1.8,
+    "like_earth_fall_m": 0.16,
+    "seconds_without_drag": 1.11
+   },
+   {
+    "height_m": 3.0,
+    "impact_m_s": 3.1,
+    "like_earth_fall_m": 0.49,
+    "seconds_without_drag": 1.92
+   },
+   {
+    "height_m": 10.0,
+    "impact_m_s": 5.56,
+    "like_earth_fall_m": 1.58,
+    "seconds_without_drag": 3.51
+   },
+   {
+    "height_m": 30.0,
+    "impact_m_s": 9.17,
+    "like_earth_fall_m": 4.28,
+    "seconds_without_drag": 6.08
+   },
+   {
+    "height_m": 100.0,
+    "impact_m_s": 14.29,
+    "like_earth_fall_m": 10.41,
+    "seconds_without_drag": 11.1
+   }
+  ],
+  "terminal_m_s": 17.9,
+  "terminal_like_earth_fall_m": 16.3,
+  "jump_height_factor": 6.04,
+  "gait": {
+   "earth_transition_m_s": 1.98,
+   "earth_froude": 0.45,
+   "lunar_transition_m_s": 1.42,
+   "lunar_froude": 1.39,
+   "minutes_per_km_at_lunar_transition": 11.7,
+   "minutes_per_km_at_earth_transition": 8.4
+  },
+  "traction": {
+   "friction": 0.6,
+   "braking_m_s2": 0.97,
+   "stop_from_5_m_s_m": {
+    "moon": 12.8,
+    "earth": 2.1
+   }
+  },
+  "centrifuge": [
+   {
+    "rpm": 1,
+    "lunar_surface_1g_radius_m": 881.9,
+    "floor_bank_deg": 80.5,
+    "orbit_1g_radius_m": 894.3,
+    "orbit_lunar_g_radius_m": 148.1
+   },
+   {
+    "rpm": 2,
+    "lunar_surface_1g_radius_m": 220.5,
+    "floor_bank_deg": 80.5,
+    "orbit_1g_radius_m": 223.6,
+    "orbit_lunar_g_radius_m": 37.0
+   },
+   {
+    "rpm": 3,
+    "lunar_surface_1g_radius_m": 98.0,
+    "floor_bank_deg": 80.5,
+    "orbit_1g_radius_m": 99.4,
+    "orbit_lunar_g_radius_m": 16.5
+   },
+   {
+    "rpm": 4,
+    "lunar_surface_1g_radius_m": 55.1,
+    "floor_bank_deg": 80.5,
+    "orbit_1g_radius_m": 55.9,
+    "orbit_lunar_g_radius_m": 9.3
+   }
+  ],
+  "array_spin": {
+   "2rpm": {
+    "earth_g_radius_m": 224,
+    "moon_g_radius_m": 37.0
+   },
+   "4rpm": {
+    "earth_g_radius_m": 56,
+    "moon_g_radius_m": 9.3
+   }
+  }
+ },
+ "work": {
+  "indoor_daylight_through_the_night": {
+   "assumptions": {
+    "lux": [
+     250.0,
+     500.0
+    ],
+    "utilization": [
+     1.0,
+     0.5
+    ],
+    "waking_h_per_day": 16.0,
+    "efficacy_lm_w": 126.0
+   },
+   "floor_m2": 23.8,
+   "kwh_per_person": [
+    11.2,
+    44.6
+   ],
+   "share_of_european_night": [
+    0.017,
+    0.069
+   ]
+  },
+  "primary_kw_band": {
+   "efficient": 2.0,
+   "european": 3.68,
+   "high_income": 5.99,
+   "american": 8.56
+  },
+  "night_final_kwh_per_person": {
+   "efficient": 353,
+   "european": 650,
+   "high_income": 1058,
+   "american": 1511
+  },
+  "travel_hours_per_day": 1.1,
+  "array": {
+   "transfer_hours": {
+    "hohmann": 14.1,
+    "apolune_twice_ring": 7.3,
+    "parabolic": 5.9
+   },
+   "commuter_kw": {
+    "weekly": [
+     17.6,
+     45.7
+    ],
+    "each_lunar_cycle": [
+     4.2,
+     10.8
+    ],
+    "every_other_cycle": [
+     2.1,
+     5.4
+    ],
+    "quarterly": [
+     1.3,
+     3.5
+    ]
+   },
+   "shield_t_per_person": 990.0,
+   "spin": {
+    "2rpm": {
+     "earth_g_radius_m": 224,
+     "moon_g_radius_m": 37.0
+    },
+    "4rpm": {
+     "earth_g_radius_m": 56,
+     "moon_g_radius_m": 9.3
+    }
+   },
+   "round_trip_light_s": 0.1334
+  },
+  "resource_operation": {
+   "main belt": {
+    "au": 2.7,
+    "light_one_way_min": [
+     14.1,
+     30.8
+    ],
+    "least_energy_transfer_years": 1.26
+   },
+   "Centaurs": {
+    "au": 15.0,
+    "light_one_way_min": [
+     116.4,
+     133.1
+    ],
+    "least_energy_transfer_years": 11.31
+   },
+   "Kuiper belt": {
+    "au": 40.0,
+    "light_one_way_min": [
+     324.4,
+     341.0
+    ],
+    "least_energy_transfer_years": 46.41
+   }
+  }
+ },
+ "earth": {
+  "light_one_way_s": {
+   "mean": 1.282,
+   "perigee": 1.212,
+   "apogee": 1.353
+  },
+  "conversation_gap_s": 0.208,
+  "round_trip_over_gap": 12.3,
+  "across_the_moon_light_ms": 18.2,
+  "transfer_days": {
+   "apogee at the Moon (least energy)": 4.97,
+   "apogee at twice the Moon's distance": 2.56,
+   "parabolic": 2.11
+  },
+  "earth_diameter_deg": {
+   "mean": 1.9,
+   "perigee": 2.01,
+   "apogee": 1.8
+  },
+  "earth_turns_once_h": 24.84,
+  "earth_elevation_by_place": {
+   "summit": -68.1,
+   "korolev_shore": -68.3,
+   "procellarum_russell": 12.0,
+   "smythii_headland": -0.3,
+   "nubium": 61.0,
+   "ingenii_coast": -52.6,
+   "highland_box": -17.0,
+   "polar_plain": 14.7,
+   "tranquility": 66.4
+  }
+ },
+ "shared": {
+  "air_kg": 2.84e+18,
+  "people_case": "total25 lunar",
+  "people": 10000000000.0,
+  "air_t_per_person": 284000.0,
+  "water_kg": 1.0707076215540812e+19,
+  "water_m3_per_person": 1071000.0,
+  "runoff_m3_per_person_year": 724.0,
+  "heat_w_m2_per_tw": 0.0264,
+  "tw_per_kelvin": [
+   38,
+   61
+  ]
+ },
+ "travel": {
+  "pairs": [
+   {
+    "a": "summit",
+    "b": "korolev_shore",
+    "km": 84,
+    "phase_offset_h": 0.5,
+    "winged_liner_h": 0.2,
+    "winged_liner_kwh": 1.2,
+    "long_haul_h": 0.8,
+    "long_haul_kwh": 1.6,
+    "regional_h": 0.7,
+    "regional_kwh": 2.0,
+    "sky_boat_h": 0.58,
+    "sky_boat_kwh": 6.24
+   },
+   {
+    "a": "summit",
+    "b": "procellarum_russell",
+    "km": 2468,
+    "phase_offset_h": 163.9,
+    "winged_liner_h": 4.7,
+    "winged_liner_kwh": 35.0,
+    "long_haul_h": 22.9,
+    "long_haul_kwh": 47.6
+   },
+   {
+    "a": "summit",
+    "b": "smythii_headland",
+    "km": 3378,
+    "phase_offset_h": -219.2,
+    "winged_liner_h": 6.5,
+    "winged_liner_kwh": 48.0,
+    "long_haul_h": 31.3,
+    "long_haul_kwh": 65.2
+   },
+   {
+    "a": "summit",
+    "b": "nubium",
+    "km": 4246,
+    "phase_offset_h": 282.8,
+    "winged_liner_h": 8.1,
+    "winged_liner_kwh": 60.3,
+    "long_haul_h": 39.3,
+    "long_haul_kwh": 82.0
+   },
+   {
+    "a": "summit",
+    "b": "ingenii_coast",
+    "km": 1623,
+    "phase_offset_h": -75.5,
+    "winged_liner_h": 3.1,
+    "winged_liner_kwh": 23.1,
+    "long_haul_h": 15.0,
+    "long_haul_kwh": 31.3
+   },
+   {
+    "a": "summit",
+    "b": "highland_box",
+    "km": 1945,
+    "phase_offset_h": 88.1,
+    "winged_liner_h": 3.7,
+    "winged_liner_kwh": 27.6,
+    "long_haul_h": 18.0,
+    "long_haul_kwh": 37.5
+   },
+   {
+    "a": "summit",
+    "b": "polar_plain",
+    "km": 2989,
+    "phase_offset_h": 312.3,
+    "winged_liner_h": 5.7,
+    "winged_liner_kwh": 42.4,
+    "long_haul_h": 27.7,
+    "long_haul_kwh": 57.7
+   },
+   {
+    "a": "summit",
+    "b": "tranquility",
+    "km": 5263,
+    "phase_offset_h": -350.2,
+    "winged_liner_h": 10.1,
+    "winged_liner_kwh": 74.7,
+    "long_haul_h": 48.7,
+    "long_haul_kwh": 101.6
+   },
+   {
+    "a": "korolev_shore",
+    "b": "procellarum_russell",
+    "km": 2506,
+    "phase_offset_h": 163.3,
+    "winged_liner_h": 4.8,
+    "winged_liner_kwh": 35.6,
+    "long_haul_h": 23.2,
+    "long_haul_kwh": 48.4
+   },
+   {
+    "a": "korolev_shore",
+    "b": "smythii_headland",
+    "km": 3386,
+    "phase_offset_h": -219.8,
+    "winged_liner_h": 6.5,
+    "winged_liner_kwh": 48.1,
+    "long_haul_h": 31.4,
+    "long_haul_kwh": 65.4
+   },
+   {
+    "a": "korolev_shore",
+    "b": "nubium",
+    "km": 4192,
+    "phase_offset_h": 282.2,
+    "winged_liner_h": 8.0,
+    "winged_liner_kwh": 59.5,
+    "long_haul_h": 38.8,
+    "long_haul_kwh": 80.9
+   },
+   {
+    "a": "korolev_shore",
+    "b": "ingenii_coast",
+    "km": 1565,
+    "phase_offset_h": -76.1,
+    "winged_liner_h": 3.0,
+    "winged_liner_kwh": 22.2,
+    "long_haul_h": 14.5,
+    "long_haul_kwh": 30.2
+   },
+   {
+    "a": "korolev_shore",
+    "b": "highland_box",
+    "km": 1871,
+    "phase_offset_h": 87.5,
+    "winged_liner_h": 3.6,
+    "winged_liner_kwh": 26.6,
+    "long_haul_h": 17.3,
+    "long_haul_kwh": 36.1
+   },
+   {
+    "a": "korolev_shore",
+    "b": "polar_plain",
+    "km": 3071,
+    "phase_offset_h": 311.8,
+    "winged_liner_h": 5.9,
+    "winged_liner_kwh": 43.6,
+    "long_haul_h": 28.4,
+    "long_haul_kwh": 59.3
+   },
+   {
+    "a": "korolev_shore",
+    "b": "tranquility",
+    "km": 5343,
+    "phase_offset_h": -350.7,
+    "winged_liner_h": 10.2,
+    "winged_liner_kwh": 75.9,
+    "long_haul_h": 49.5,
+    "long_haul_kwh": 103.1
+   },
+   {
+    "a": "procellarum_russell",
+    "b": "smythii_headland",
+    "km": 4419,
+    "phase_offset_h": 325.6,
+    "winged_liner_h": 8.5,
+    "winged_liner_kwh": 62.8,
+    "long_haul_h": 40.9,
+    "long_haul_kwh": 85.3
+   },
+   {
+    "a": "procellarum_russell",
+    "b": "nubium",
+    "km": 2474,
+    "phase_offset_h": 118.9,
+    "winged_liner_h": 4.7,
+    "winged_liner_kwh": 35.1,
+    "long_haul_h": 22.9,
+    "long_haul_kwh": 47.7
+   },
+   {
+    "a": "procellarum_russell",
+    "b": "ingenii_coast",
+    "km": 4001,
+    "phase_offset_h": -239.4,
+    "winged_liner_h": 7.7,
+    "winged_liner_kwh": 56.8,
+    "long_haul_h": 37.0,
+    "long_haul_kwh": 77.2
+   },
+   {
+    "a": "procellarum_russell",
+    "b": "highland_box",
+    "km": 2581,
+    "phase_offset_h": -75.8,
+    "winged_liner_h": 4.9,
+    "winged_liner_kwh": 36.7,
+    "long_haul_h": 23.9,
+    "long_haul_kwh": 49.8
+   },
+   {
+    "a": "procellarum_russell",
+    "b": "polar_plain",
+    "km": 1655,
+    "phase_offset_h": 148.4,
+    "winged_liner_h": 3.2,
+    "winged_liner_kwh": 23.5,
+    "long_haul_h": 15.3,
+    "long_haul_kwh": 31.9
+   },
+   {
+    "a": "procellarum_russell",
+    "b": "tranquility",
+    "km": 2944,
+    "phase_offset_h": 194.7,
+    "winged_liner_h": 5.6,
+    "winged_liner_kwh": 41.8,
+    "long_haul_h": 27.3,
+    "long_haul_kwh": 56.8
+   },
+   {
+    "a": "smythii_headland",
+    "b": "nubium",
+    "km": 3121,
+    "phase_offset_h": -206.7,
+    "winged_liner_h": 6.0,
+    "winged_liner_kwh": 44.3,
+    "long_haul_h": 28.9,
+    "long_haul_kwh": 60.2
+   },
+   {
+    "a": "smythii_headland",
+    "b": "ingenii_coast",
+    "km": 2278,
+    "phase_offset_h": 143.7,
+    "winged_liner_h": 4.4,
+    "winged_liner_kwh": 32.3,
+    "long_haul_h": 21.1,
+    "long_haul_kwh": 44.0
+   },
+   {
+    "a": "smythii_headland",
+    "b": "highland_box",
+    "km": 3916,
+    "phase_offset_h": 307.3,
+    "winged_liner_h": 7.5,
+    "winged_liner_kwh": 55.6,
+    "long_haul_h": 36.3,
+    "long_haul_kwh": 75.6
+   },
+   {
+    "a": "smythii_headland",
+    "b": "polar_plain",
+    "km": 2773,
+    "phase_offset_h": -177.2,
+    "winged_liner_h": 5.3,
+    "winged_liner_kwh": 39.4,
+    "long_haul_h": 25.7,
+    "long_haul_kwh": 53.5
+   },
+   {
+    "a": "smythii_headland",
+    "b": "tranquility",
+    "km": 2018,
+    "phase_offset_h": -131.0,
+    "winged_liner_h": 3.9,
+    "winged_liner_kwh": 28.7,
+    "long_haul_h": 18.7,
+    "long_haul_kwh": 39.0
+   },
+   {
+    "a": "nubium",
+    "b": "ingenii_coast",
+    "km": 3668,
+    "phase_offset_h": 350.4,
+    "winged_liner_h": 7.0,
+    "winged_liner_kwh": 52.1,
+    "long_haul_h": 34.0,
+    "long_haul_kwh": 70.8
+   },
+   {
+    "a": "nubium",
+    "b": "highland_box",
+    "km": 2384,
+    "phase_offset_h": -194.7,
+    "winged_liner_h": 4.6,
+    "winged_liner_kwh": 33.8,
+    "long_haul_h": 22.1,
+    "long_haul_kwh": 46.0
+   },
+   {
+    "a": "nubium",
+    "b": "polar_plain",
+    "km": 3046,
+    "phase_offset_h": 29.5,
+    "winged_liner_h": 5.8,
+    "winged_liner_kwh": 43.3,
+    "long_haul_h": 28.2,
+    "long_haul_kwh": 58.8
+   },
+   {
+    "a": "nubium",
+    "b": "tranquility",
+    "km": 1371,
+    "phase_offset_h": 75.7,
+    "winged_liner_h": 2.6,
+    "winged_liner_kwh": 19.5,
+    "long_haul_h": 12.7,
+    "long_haul_kwh": 26.5,
+    "regional_h": 10.9,
+    "regional_kwh": 31.9
+   },
+   {
+    "a": "ingenii_coast",
+    "b": "highland_box",
+    "km": 1891,
+    "phase_offset_h": 163.6,
+    "winged_liner_h": 3.6,
+    "winged_liner_kwh": 26.8,
+    "long_haul_h": 17.5,
+    "long_haul_kwh": 36.5
+   },
+   {
+    "a": "ingenii_coast",
+    "b": "polar_plain",
+    "km": 4190,
+    "phase_offset_h": -320.9,
+    "winged_liner_h": 8.0,
+    "winged_liner_kwh": 59.5,
+    "long_haul_h": 38.8,
+    "long_haul_kwh": 80.9
+   },
+   {
+    "a": "ingenii_coast",
+    "b": "tranquility",
+    "km": 3929,
+    "phase_offset_h": -274.7,
+    "winged_liner_h": 7.5,
+    "winged_liner_kwh": 55.8,
+    "long_haul_h": 36.4,
+    "long_haul_kwh": 75.8
+   },
+   {
+    "a": "highland_box",
+    "b": "polar_plain",
+    "km": 4213,
+    "phase_offset_h": 224.2,
+    "winged_liner_h": 8.1,
+    "winged_liner_kwh": 59.8,
+    "long_haul_h": 39.0,
+    "long_haul_kwh": 81.3
+   },
+   {
+    "a": "highland_box",
+    "b": "tranquility",
+    "km": 3702,
+    "phase_offset_h": 270.4,
+    "winged_liner_h": 7.1,
+    "winged_liner_kwh": 52.6,
+    "long_haul_h": 34.3,
+    "long_haul_kwh": 71.5
+   },
+   {
+    "a": "polar_plain",
+    "b": "tranquility",
+    "km": 2292,
+    "phase_offset_h": 46.2,
+    "winged_liner_h": 4.4,
+    "winged_liner_kwh": 32.6,
+    "long_haul_h": 21.2,
+    "long_haul_kwh": 44.2
+   }
+  ],
+  "local": [
+   {
+    "mode": "walking at the measured lunar walk-run transition",
+    "m_s": 1.42,
+    "minutes_for_10km": 117.0
+   },
+   {
+    "mode": "pedalled wing",
+    "m_s": 6.7,
+    "minutes_for_10km": 25.0
+   },
+   {
+    "mode": "micro glider",
+    "m_s": 7.9,
+    "minutes_for_10km": 21.0
+   },
+   {
+    "mode": "sky ferry with stops",
+    "m_s": 11.67,
+    "minutes_for_10km": 14.0
+   },
+   {
+    "mode": "sky boat",
+    "m_s": 40.0,
+    "minutes_for_10km": 4.0
+   }
+  ]
+ },
+ "unresolved": [
+  "Light at height above the ground and under cloud; refraction in the tall air; terrain horizons.",
+  "Libration moves the Earth by up to about 8 degrees in each place's sky; the dated calendar gives it.",
+  "How the circadian system, sleep and children's development respond to these light cycles and a sixth of Earth's gravity: no human data exist for long stays below 1 g.",
+  "Weather downtime, rescue and traffic for elevated and aerial districts; storms and gusts inside the 3-day mean winds; towns that steer, sail on the shear or change height."
+ ]
+}
