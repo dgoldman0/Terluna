@@ -219,13 +219,13 @@ is [industry.md](industry.md), with its screen [industry.py](industry.py); numbe
     built, while weathering and burial turn its CO2 over in 400–1,860 years. Kilns of 38–380 GW return the weathered
     carbon; the buried carbon needs a return path or 6,400–16,200 kg/s imported.
 19. **The array's habitats set the largest stream after the build.** The Stanford torus shields each person with
-    990 t (Johnson & Holbrow 1977), so 0.1–1 billion residents take 99–990 Gt and 2–14 billion 2,000–14,000 Gt. As
-    water the whole is 0.003–0.1% of what the build delivers.
+    990 t (Johnson & Holbrow 1977), 990 Gt for each billion residents. As water, the shield for 0.1–14 billion
+    residents is 0.003–0.1% of what the build delivers.
 20. **After the build the operation shrinks 2,400–380,000 times.** It falls from 1.07–4.83×10⁹ kg/s, braked at the
     hubs at 20–340 PW, to 1.3×10⁴–4.5×10⁵ kg/s for the air's top-up, the film's feed, the habitats and the Moon's
     copper, unless the crust takes its water late (1.6×10⁷–1.9×10⁹ kg/s for 1,000–10,000 years) or the carbon is
-    imported. The Moon's 1–6 billion people would hold 43–2,010 Gt of stocks built from lunar rock and need copper
-    near Earth's identified resources. Over 10⁹ years rock takes 6.5–206 times the air's oxygen, so the long frame
+    imported. Each billion people on the Moon holds 43–335 Gt of stocks built from lunar rock and 0.14–0.3 Gt of
+    imported copper, 7–14% of Earth's identified resources. Over 10⁹ years rock takes 6.5–206 times the air's oxygen, so the long frame
     turns on local return paths.
 
 ## Phosphorus and the common population comparison

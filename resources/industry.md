@@ -68,19 +68,20 @@ No population distribution has been adopted.
 7. **The crust decides whether the water import ends with the build.** Escaping hydrogen takes 0.022–0.024 kg/s of
    water, a cycle time of 2×10¹³ years. If the crust's pores fill after the seas, 5.0×10¹⁸–5.9×10¹⁹ kg over
    1,000–10,000 years is 1.6×10⁷–1.9×10⁹ kg/s, 2–210% of the build's water stream (*screen*).
-8. **The Moon's people build from lunar rock, import copper, and meet the heat budget through their energy.** At 43 t
-   a person for decent living (Vélez-Henao & Pauliuk 2023) to 335 t in industrial countries (Krausmann et al. 2017),
-   1–6 billion people hold 43–2,010 Gt, 1–57 mm of the dry land's soil, turned over at 0.53–31 Gt a year with building
-   lives of 65–81 years (Berglund-Brown et al. 2025). Their copper at 140–300 kg a person (UNEP 2010) is 0.14–1.8 Gt,
-   7–86% of Earth's identified resources (USGS 2025): 0.9–11 m of all the dry land's soil at the highlands' 4.6 ppm
-   (Meyer 2010), or 1,100–14,200 Gt of CI-like asteroids at 127 ppm (Lodders 2003). Copper lasts 25–40 years in a
-   building, so at 50% end-of-life recycling (UNEP 2011) the top-up is 1.8–36 Mt a year, up to 1.6 times Earth's 2024
-   mine output; aluminium, the highlands' metal, substitutes in power cable (USGS 2025). At 119–270 GJ of primary
-   energy a person (Germany to the United States; Energy Institute 2026) they use 3.8–51 TW: 0.10–1.35 W/m² and
-   0.06–1.4 K if fusion or beams supply it (*screen*).
+8. **The Moon's people build from lunar rock, import copper, and their energy's heat is answered by dimming.** At
+   43 t a person for decent living (Vélez-Henao & Pauliuk 2023) to 335 t in industrial countries (Krausmann et al.
+   2017), each billion people hold 43–335 Gt, 1–10 mm of the dry land's soil, turned over at 0.53–5.2 Gt a year with
+   building lives of 65–81 years (Berglund-Brown et al. 2025). Their copper at 140–300 kg a person (UNEP 2010) is
+   0.14–0.3 Gt a billion, 7–14% of Earth's identified resources (USGS 2025): 0.9–1.9 m of all the dry land's soil at
+   the highlands' 4.6 ppm (Meyer 2010), or 1,100–2,400 Gt of CI-like asteroids at 127 ppm (Lodders 2003). Copper lasts
+   25–40 years in a building, so at 50% end-of-life recycling (UNEP 2011) the top-up is 1.8–6 Mt a year for each
+   billion, up to a quarter of Earth's 2024 mine output; aluminium, the highlands' metal, substitutes in power cable
+   (USGS 2025). At 119–270 GJ of primary energy a person (Germany to the United States; Energy Institute 2026) each
+   billion uses 3.8–8.6 TW, which puts 0.10–0.23 W/m² on the Moon if fusion or beams supply it (*screen*); 0.03–0.12%
+   more dimming answers it under the planned climate (the provisioning screen's 0.009–0.014% a terawatt).
 9. **The array's people set the largest continuing material stream.** SP-413's torus shields 10,000 people with 9.9 Mt
-   at 4.5 t/m², 990 t a person, with 15 t of structure (Johnson & Holbrow 1977). For 2–14 billion people that is
-   2,000–14,000 Gt of habitat, 45–406 fleets with their goods, and grown over 1,000–5,000 years, 12,700–446,000 kg/s.
+   at 4.5 t/m², 990 t a person, with 15 t of structure (Johnson & Holbrow 1977). Each billion residents is 1,005 Gt
+   of habitat and 22–29 fleets with their goods; grown over 1,000–5,000 years, 6,400–32,000 kg/s.
    Water shields at least as well per tonne (Durante & Cucinotta 2011), and as water the whole habitat mass is
    0.003–0.1% of what the build delivers; lifted from the airless Moon it would take 1.7–12 TW for a century
    (*screen*).
