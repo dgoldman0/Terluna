@@ -1,0 +1,5329 @@
+{
+ "schema": "terluna.biosphere.ecology-taxa/1",
+ "producer": {
+  "domain": "biosphere",
+  "files": {
+   "biosphere/ecology/taxa.py": "c2b76ee87710b652"
+  },
+  "inputs": {
+   "biosphere/ecology/results/first_screen.json": "d2a42b6e51f60250",
+   "biosphere/ecology/taxonomy_sources.json": "7316265bb0806bce"
+  },
+  "cited_files": [
+   "archive/july_2026_knowledge_bundle/terluna_moon_terraforming_bundle/06_BIOSPHERE_AND_EVOLUTIONARY_DESIGN.md",
+   "biosphere/README.md",
+   "biosphere/ecology/README.md",
+   "biosphere/ecology/literature.md",
+   "biosphere/ecology/people_and_land.md",
+   "biosphere/ecology/state.md",
+   "biosphere/living_water/waters.json",
+   "research/decisions.md",
+   "research/studies/aerial_ecology/README.md",
+   "research/studies/aerial_ecology/sources.json",
+   "research/studies/floater_viability/README.md",
+   "research/studies/floater_viability/biology.md",
+   "research/studies/floater_viability/gas_biology.md",
+   "research/studies/floater_viability/growth.md",
+   "research/studies/floater_viability/sailing.md",
+   "research/studies/forest_patch/README.md",
+   "research/studies/lunar_cycle_ecology/README.md",
+   "research/studies/megaforest_wind/README.md",
+   "research/studies/sea_appearance/README.md"
+  ],
+  "constants": {
+   "MOON_RADIUS": 1737400.0,
+   "SYNODIC_MONTH_DAYS": 29.53059
+  }
+ },
+ "evidence": "A proposed taxonomic system and a first register of design groups drawn from the project's studies. Every entry is a design: no organism named here has been built, tested or released. Each status repeats the verdict of the project files the entry cites. The cycle block is arithmetic on shared constants; the aeroplankton residence times are dry settling at lunar gravity from the first screen.",
+ "reading_rule": "Entries are keyed by permanent identifiers (G groups, M design modules, C communities, N name candidates); working names can change and identifiers never do. A group's anchor is the smallest backbone clade holding all its candidate chassis; its degree is the rank its founding lineages would take (system.degrees). form, settings, guilds, night and clock use the vocabularies in system.functional; \"undetermined\" means the cited sources leave it open. A subgroup inherits its parent's modules. status is the project's verdict (carried_forward, test_first, hypothesis, set_aside) with scope throughout or in_places, and basis says where the verdict comes from. An experience that shows an entry labels it as informed by a design. producer.inputs hash-binds the two files the producer reads; producer.cited_files lists the project files the entries cite, by path. cycle gives hours, km/h and m/s; size classes give micrometres and days.",
+ "system": {
+  "version": "0.1, first proposal of 9 October 2026",
+  "layers": [
+   {
+    "name": "descent",
+    "rule": "Each designed lineage keeps the Earth lineage of its chassis; the register places it at an anchor in the backbone",
+    "sources": [
+     "gibson_2010",
+     "hutchison_2016",
+     "richardson_2017"
+    ]
+   },
+   {
+    "name": "design",
+    "rule": "How far a design departs sets its degree (line, species, genus, lineage) and its name form",
+    "sources": [
+     "icncp_2016",
+     "eu_65_2004",
+     "bch_mon810",
+     "icnp_2022"
+    ]
+   },
+   {
+    "name": "founding",
+    "rule": "Every founding lineage is registered with a permanent identifier, a type genome and a preserved sample, its purpose, reference organisms, release and versions",
+    "sources": [
+     "seqcode_1_2",
+     "biocode_2011",
+     "icn_madrid_2025",
+     "richardson_2017"
+    ]
+   },
+   {
+    "name": "descendants",
+    "rule": "Clades after release are named by phylogenetic definitions with the founding lineages as specifiers; descendant species get binomials when they become distinct",
+    "sources": [
+     "phylocode_6"
+    ]
+   },
+   {
+    "name": "function",
+    "rule": "Life form, settings, guilds, night strategy and clock, classed separately from descent",
+    "sources": [
+     "raunkiaer_1934",
+     "sieburth_1978",
+     "kunz_2008",
+     "adl_2019"
+    ]
+   },
+   {
+    "name": "names",
+    "rule": "Scientific names in Latin grammar from any language, with stated etymology and no Earth homonym; common names recorded as the lunar peoples give them",
+    "sources": [
+     "icn_madrid_2025",
+     "iczn_1999",
+     "seqcode_1_2",
+     "icnp_2022",
+     "icncp_2016"
+    ]
+   }
+  ],
+  "principles": [
+   {
+    "id": "P1",
+    "text": "A designed organism keeps the Earth lineage of its chassis, the lineage whose genome organizes the cell and is inherited; genes, pathways and symbionts from other lineages are recorded as contributions",
+    "sources": [
+     "gibson_2010",
+     "hutchison_2016",
+     "richardson_2017",
+     "fredens_2019"
+    ]
+   },
+   {
+    "id": "P2",
+    "text": "How far a design departs sets its degree, and each degree takes a naming form Earth already uses: a line within an Earth species, a designed species, a designed genus, or a new lineage",
+    "sources": [
+     "icncp_2016",
+     "eu_65_2004",
+     "bch_mon810",
+     "hutchison_2016"
+    ]
+   },
+   {
+    "id": "P3",
+    "text": "Every founding lineage is registered with a permanent identifier, a type genome deposited as a sequence and a preserved sample, with its purpose, reference organisms, release and versions",
+    "sources": [
+     "seqcode_1_2",
+     "icnp_2022",
+     "icn_madrid_2025",
+     "biocode_2011",
+     "richardson_2017"
+    ]
+   },
+   {
+    "id": "P4",
+    "text": "Descendants are named by descent from the founders: a clade is an ancestor and all its descendants, so a clade defined from a founding lineage keeps its meaning however far its descendants diverge",
+    "sources": [
+     "phylocode_6"
+    ]
+   },
+   {
+    "id": "P5",
+    "text": "Function is classified apart from descent, by how an organism lives through the 354-hour night and where it lives; one lineage can take several forms in its life, classed by the adult",
+    "sources": [
+     "raunkiaer_1934"
+    ]
+   },
+   {
+    "id": "P6",
+    "text": "Scientific names are treated as Latin, spelled in the 26-letter alphabet, drawn from any language including the Moon's own names, with the etymology stated, no homonym of any Earth genus and nothing derogatory to any group of people",
+    "sources": [
+     "icn_madrid_2025",
+     "iczn_1999",
+     "seqcode_1_2",
+     "icnp_2022",
+     "iau_gazetteer"
+    ]
+   },
+   {
+    "id": "P7",
+    "text": "Common names belong to the peoples who live with the organisms and are recorded as they arise, with language, community, date and meaning",
+    "sources": [
+     "icncp_2016",
+     "iczn_1999"
+    ]
+   },
+   {
+    "id": "P8",
+    "text": "Identifiers never change; names may",
+    "sources": [
+     "eu_65_2004",
+     "seqcode_1_2"
+    ]
+   }
+  ],
+  "choices": [
+   {
+    "id": "O1",
+    "question": "Which rules govern new designed taxa (degrees species, genus and lineage)?",
+    "options": {
+     "a": "The Earth code of each chassis (ICN, ICZN, ICNP or SeqCode)",
+     "b": "One lunar code for all designed taxa, in forms every Earth code accepts",
+     "c": "The Earth codes alone, keeping every design as a line within an Earth species"
+    },
+    "recommendation": "b"
+   },
+   {
+    "id": "O2",
+    "question": "Ranks for designed taxa and their descendants",
+    "options": {
+     "a": "Linnaean ranks at founding, rankless clade names for descendants",
+     "b": "Rankless clade names throughout, with binomials only for species"
+    },
+    "recommendation": "a"
+   },
+   {
+    "id": "O3",
+    "question": "The founding identifier",
+    "options": {
+     "a": "A register number with a check digit, e.g. OM-L-0001-7",
+     "b": "Three components after the OECD and EU format: designer code, lineage code, check digit"
+    },
+    "recommendation": null
+   },
+   {
+    "id": "O4",
+    "question": "Roots for scientific names",
+    "options": {
+     "a": "Latin and Greek, as the ICNP advises",
+     "b": "Any language in Latin grammar, as the ICZN, ICN and SeqCode allow",
+     "c": "A lunar root stock (the IAU names and the Moon's phenomena) for founders, any language for descendants"
+    },
+    "recommendation": null
+   },
+   {
+    "id": "O5",
+    "question": "Where founding ends and descent begins",
+    "options": {
+     "a": "Every release is a founding lineage, a re-engineered release a new one derived from the old; change after release is descent",
+     "b": "Founding ends with the 500-year build; later releases are descendants"
+    },
+    "recommendation": "a"
+   },
+   {
+    "id": "O6",
+    "question": "Giants and lesser floaters",
+    "options": {
+     "a": "One lineage, the giants a form its oldest members reach",
+     "b": "Two sister lineages, the giants designed for indeterminate growth"
+    },
+    "recommendation": null
+   },
+   {
+    "id": "O7",
+    "question": "The floaters' new name",
+    "options": {
+     "N1": "N1",
+     "N2": "N2",
+     "N3": "N3",
+     "N4": "N4",
+     "N5": "N5",
+     "N6": "N6"
+    },
+    "recommendation": null
+   }
+  ],
+  "statuses": {
+   "carried_forward": "Selected for the design: the lunar-cycle ecology register's carry-forward and in-places lists, or a standing entry in the decisions register",
+   "test_first": "Selected with a named test to pass before adoption",
+   "hypothesis": "Proposed, required or opened for research by a project study, without a selection yet",
+   "set_aside": "Recorded and not pursued"
+  },
+  "status_order": [
+   "set_aside",
+   "hypothesis",
+   "test_first",
+   "carried_forward"
+  ],
+  "scopes": [
+   "throughout",
+   "in_places"
+  ],
+  "bases": {
+   "selected": "The selection of the lunar-cycle ecology register (research/studies/lunar_cycle_ecology)",
+   "decision": "A standing entry in research/decisions.md",
+   "direction": "A research direction the author has opened",
+   "requirement": "A project screen finds the biosphere needs it; how it is met is open",
+   "idea": "Proposed or used as a reference case in a project study"
+  },
+  "ranks": [
+   "domain",
+   "kingdom",
+   "phylum",
+   "class",
+   "order",
+   "family",
+   "genus",
+   "species"
+  ],
+  "degrees": {
+   "line": {
+    "meaning": "A founding line within an Earth species: timing, tolerance or allocation changed, the species kept",
+    "name_form": "Earth binomial + founding identifier + optional line name in quotes, e.g. Solanum lycopersicum OM-L-0007 'Long Dusk'",
+    "precedents": "Mycoplasma mycoides JCVI-syn3.0; Saccharomyces cerevisiae Sc2.0; Zea mays event MON810 (MON-ØØ81Ø-6); genetically modified cultivars (ICNCP Art. 2.19)",
+    "anchor_at_or_above": "species"
+   },
+   "species": {
+    "meaning": "A designed species within an Earth genus, with traits beyond any Earth species of it",
+    "name_form": "a new binomial in the Earth genus",
+    "precedents": "a new species under the chassis's code",
+    "anchor_at_or_above": "genus"
+   },
+   "genus": {
+    "meaning": "A designed genus within an Earth family or larger clade",
+    "name_form": "a new genus and species placed in the Earth family",
+    "precedents": "a new genus under the chassis's code",
+    "anchor_at_or_above": "family"
+   },
+   "lineage": {
+    "meaning": "A new lineage: a body plan or metabolism no Earth genus holds, placed within its chassis's Earth clade",
+    "name_form": "a clade name defined from its founding lineages, with genera and species inside it",
+    "precedents": "a clade under the PhyloCode",
+    "anchor_at_or_above": "family"
+   }
+  },
+  "founding_register": {
+   "fields": [
+    "identifier",
+    "name",
+    "degree",
+    "group",
+    "chassis (Earth name with authority)",
+    "contributions (donor Earth names)",
+    "modules",
+    "purpose",
+    "type genome (sequence accession)",
+    "preserved sample (two collections in different places)",
+    "genome watermark",
+    "release (date, place, scale, containment)",
+    "versions (each edit, derived-from link)",
+    "status",
+    "common names (name, language, community, date, meaning)"
+   ],
+   "lineages": [],
+   "note": "No lineage has been designed or released; the register holds the fields."
+  },
+  "naming": {
+   "rules": [
+    {
+     "rule": "Names are treated as Latin, whatever their origin",
+     "sources": [
+      "icn_madrid_2025:Principle V",
+      "icnp_2022:Principle 3",
+      "seqcode_1_2:Principle 3",
+      "biocode_2011:Principle VI"
+     ]
+    },
+    {
+     "rule": "Only the 26 letters of the Latin alphabet; diacritics are dropped (ä becomes ae, é becomes e)",
+     "sources": [
+      "iczn_1999:Art. 11.2",
+      "icn_madrid_2025:Art. 60.7",
+      "seqcode_1_2:Rule 8"
+     ]
+    },
+    {
+     "rule": "A species name is a binary combination: a genus name and one epithet",
+     "sources": [
+      "icn_madrid_2025:Art. 23.1",
+      "iczn_1999:Art. 5.1",
+      "icnp_2022:Rule 30"
+     ]
+    },
+    {
+     "rule": "No tautonyms: the epithet does not repeat the genus name",
+     "sources": [
+      "icn_madrid_2025:Art. 23.4"
+     ]
+    },
+    {
+     "rule": "Epithets of 2 to 30 characters",
+     "sources": [
+      "icn_madrid_2025:Art. 23.2",
+      "icncp_2016:Art. 21.13"
+     ]
+    },
+    {
+     "rule": "Genus names and epithets may come from any language, or be arbitrary words usable as words",
+     "sources": [
+      "iczn_1999:Art. 11.3",
+      "icn_madrid_2025:Art. 20.1, 23.2",
+      "seqcode_1_2:Rule 26"
+     ]
+    },
+    {
+     "rule": "The etymology of every new name is stated",
+     "sources": [
+      "icnp_2022:Rule 6",
+      "seqcode_1_2:Rule 26",
+      "icn_madrid_2025:Rec. 60I.1"
+     ]
+    },
+    {
+     "rule": "No homonym of any genus under any Earth code, checked against IRMNG and the GBIF backbone",
+     "sources": [
+      "seqcode_1_2:Principle 2, Rule 9b",
+      "icnp_2022:Principle 2",
+      "iczn_1999:Rec. 1A",
+      "irmng",
+      "gbif_backbone"
+     ]
+    },
+    {
+     "rule": "No name derogatory to a group of people; names from a living language are adopted with its speakers",
+     "sources": [
+      "icn_madrid_2025:Art. 51.2, Rec. 51A.1",
+      "iczn_1999:Appendix A.4"
+     ]
+    },
+    {
+     "rule": "No standard prefix or suffix stamped on Earth names to mark lunar membership",
+     "sources": [
+      "iczn_1999:Art. 1.3.7"
+     ]
+    },
+    {
+     "rule": "Registration fixes a name's date and priority",
+     "sources": [
+      "seqcode_1_2:Rule 26",
+      "iczn_1999:Art. 8.5",
+      "icn_madrid_2025:Art. 42.1",
+      "biocode_2011:Art. 5.2",
+      "phylocode_6:Art. 8.1"
+     ]
+    },
+    {
+     "rule": "Common names and line names are words of living languages and may be recorded in any of them",
+     "sources": [
+      "icncp_2016:Art. 21.11"
+     ]
+    }
+   ],
+   "lunar_roots": [
+    {
+     "name": "Mare Nubium",
+     "origin": "Sea of Clouds"
+    },
+    {
+     "name": "Mare Vaporum",
+     "origin": "Sea of Vapors"
+    },
+    {
+     "name": "Mare Imbrium",
+     "origin": "Sea of Showers"
+    },
+    {
+     "name": "Oceanus Procellarum",
+     "origin": "Ocean of Storms"
+    },
+    {
+     "name": "Sinus Roris",
+     "origin": "Bay of Dew"
+    },
+    {
+     "name": "Sinus Iridum",
+     "origin": "Bay of Rainbows"
+    },
+    {
+     "name": "Mare Serenitatis",
+     "origin": "Sea of Serenity"
+    },
+    {
+     "name": "Mare Tranquillitatis",
+     "origin": "Sea of Tranquility"
+    },
+    {
+     "name": "Mare Insularum",
+     "origin": "Sea of Islands"
+    },
+    {
+     "name": "Mare Humorum",
+     "origin": "Sea of Moisture"
+    },
+    {
+     "name": "Mare Undarum",
+     "origin": "Sea of Waves"
+    },
+    {
+     "name": "Mare Spumans",
+     "origin": "Foaming Sea"
+    },
+    {
+     "name": "Mare Fecunditatis",
+     "origin": "Sea of Fecundity"
+    },
+    {
+     "name": "Mare Nectaris",
+     "origin": "Sea of Nectar"
+    },
+    {
+     "name": "Lacus Somniorum",
+     "origin": "Lake of Dreams"
+    },
+    {
+     "name": "Lacus Temporis",
+     "origin": "Lake of Time"
+    },
+    {
+     "name": "Lacus Perseverantiae",
+     "origin": "Lake of Perseverance"
+    },
+    {
+     "name": "Lacus Spei",
+     "origin": "Lake of Hope"
+    },
+    {
+     "name": "Palus Somni",
+     "origin": "Marsh of Sleep"
+    },
+    {
+     "name": "Sinus Aestuum",
+     "origin": "Seething Bay"
+    }
+   ]
+  },
+  "functional": {
+   "realms": {
+    "sky": "The air, from the ground to 90 km",
+    "land": "The ground, its soils and its canopies",
+    "water": "Seas, lakes, wetlands and rivers"
+   },
+   "settings": {
+    "low_sky": {
+     "realm": "sky",
+     "definition": "0-10 km above sea level: the day's mixed layer, cloud base 4-7 km"
+    },
+    "storm_layer": {
+     "realm": "sky",
+     "definition": "10-22 km: storms to their median top"
+    },
+    "cool_air": {
+     "realm": "sky",
+     "definition": "22-35 km: the air freezes near 26 km"
+    },
+    "flight_band": {
+     "realm": "sky",
+     "definition": "35-45 km: the long-haul flight band"
+    },
+    "high_air": {
+     "realm": "sky",
+     "definition": "45-90 km"
+    },
+    "canopy": {
+     "realm": "land",
+     "definition": "Crowns, branches and epiphyte perches of forests"
+    },
+    "ground": {
+     "realm": "land",
+     "definition": "The ground surface, its litter, soils and plains"
+    },
+    "seas": {
+     "realm": "water",
+     "definition": "Open seas, productive coasts, river mouths and tidal flats"
+    },
+    "lakes_and_wetlands": {
+     "realm": "water",
+     "definition": "Rain-fed lakes, their shores and wet margins"
+    },
+    "rivers": {
+     "realm": "water",
+     "definition": "Rivers from the lakes to the seas"
+    }
+   },
+   "form_classes": {
+    "aerial": "Organisms that live substantially in the air (the aerosphere of Kunz et al. 2008)",
+    "plant": "Rooted or attached photosynthetic forms, classed after Raunkiaer by how they carry the night",
+    "ground": "Fungi and animals of the land",
+    "microbial": "Free-living microbes of soils and waters",
+    "aquatic": "Forms of the waters"
+   },
+   "forms": {
+    "aeroplankton": {
+     "cls": "aerial",
+     "definition": "Organisms the air carries, too small to hold a course; resident aeroplankton complete their lives aloft, transient aeroplankton are dispersing stages"
+    },
+    "drifter": {
+     "cls": "aerial",
+     "definition": "Buoyant or ballooning organisms that move with the wind and control mainly their height"
+    },
+    "sailor": {
+     "cls": "aerial",
+     "definition": "Buoyant organisms that steer across the wind with a wing or drogue hung in another layer of air or in the sea, as Physalia sails the sea surface"
+    },
+    "giant": {
+     "cls": "aerial",
+     "definition": "Buoyant organisms that keep growing for centuries, like the oldest trees"
+    },
+    "flyer": {
+     "cls": "aerial",
+     "definition": "Animals that fly under their own power"
+    },
+    "glider": {
+     "cls": "aerial",
+     "definition": "Animals that launch from canopies and cliffs and glide without powered flight"
+    },
+    "film": {
+     "cls": "aerial",
+     "definition": "Sparse microbial or algal films on particles, droplets or platforms in the high air"
+    },
+    "tenant": {
+     "cls": "aerial",
+     "definition": "Organisms living on or within floaters and other aerial hosts, in their retained-water pockets"
+    },
+    "tree": {
+     "cls": "plant",
+     "definition": "Woody plants whose living crowns stand in the air through the night (Raunkiaer's phanerophytes)"
+    },
+    "vine": {
+     "cls": "plant",
+     "definition": "Climbing or trailing plants"
+    },
+    "herb": {
+     "cls": "plant",
+     "definition": "Non-woody plants whose shoots stand through the night"
+    },
+    "geophyte": {
+     "cls": "plant",
+     "definition": "Plants that carry the night in bulbs, corms or tubers below ground (Raunkiaer's cryptophytes)"
+    },
+    "epiphyte": {
+     "cls": "plant",
+     "definition": "Plants living on other plants, rooted in the canopy"
+    },
+    "crust": {
+     "cls": "plant",
+     "definition": "Crusts and mats of cyanobacteria, mosses and lichens on the ground"
+    },
+    "fungal": {
+     "cls": "ground",
+     "definition": "Yeasts and mycelial fungi"
+    },
+    "ground_animal": {
+     "cls": "ground",
+     "definition": "Animals that walk, climb or burrow"
+    },
+    "microbe": {
+     "cls": "microbial",
+     "definition": "Free-living microbes of soils, sediments and waters"
+    },
+    "plankton": {
+     "cls": "aquatic",
+     "definition": "Organisms the water carries"
+    },
+    "nekton": {
+     "cls": "aquatic",
+     "definition": "Animals that swim against currents"
+    },
+    "benthos": {
+     "cls": "aquatic",
+     "definition": "Organisms of the beds of seas and lakes"
+    },
+    "macroalga": {
+     "cls": "aquatic",
+     "definition": "Seaweeds"
+    }
+   },
+   "guilds": {
+    "producer": "Fixes carbon from light (or from chemical energy)",
+    "grazer": "Eats living plant or algal tissue",
+    "fruit_eater": "Eats fruit",
+    "seed_eater": "Eats seeds",
+    "predator": "Catches and eats animals (carnivorous plants included)",
+    "collector": "Gathers airborne particles and small organisms on webs or filters",
+    "consumer": "Eats other organisms; diet not yet specified",
+    "decomposer": "Breaks down dead organic matter",
+    "pollinator": "Carries pollen between flowers",
+    "fixer": "Fixes atmospheric nitrogen",
+    "soil_builder": "Weathers rock and builds soil",
+    "air_keeper": "Removes trace gases the air cannot remove: methane, N2O, hydrogen, carbon monoxide, ethylene",
+    "carrier": "Carries elements back from the seas to the land on a return path",
+    "receiver": "Takes up the nutrients carriers deliver, at the forest end of a return path",
+    "lure": "Draws animals by light or scent",
+    "undetermined": "The cited sources leave the role open"
+   },
+   "night": {
+    "store": "Carries the night on stored carbon",
+    "idle": "Slows its upkeep through the night, on a cue",
+    "dormant": "Passes the night or longer in a dormant state: seed, spore, cyst or dried film",
+    "twilight": "Uses the long twilight's light",
+    "night_active": "Active through the night on stores, the fruit fall or prey",
+    "terminator_following": "Travels to change its light: with dusk or the Sun, east on the wind to meet the next dawn sooner, or across the wind toward the twilit poles",
+    "shedding": "Sheds its canopy before dusk and regrows it",
+    "undetermined": "The cited sources leave the strategy open"
+   },
+   "clocks": {
+    "dusk_set": "A timer started at dusk",
+    "dawn_set": "A program set at dawn",
+    "carbon_cued": "The organism's own carbon balance as the cue",
+    "two_clocks": "Daily rhythms inside the lunar environmental clock",
+    "earth_clock_with_cues": "An Earth 24-hour clock kept on daily cues, on farms",
+    "undetermined": "The cited sources leave the clock open"
+   },
+   "elements": [
+    "P",
+    "N",
+    "S",
+    "I",
+    "K",
+    "trace elements"
+   ],
+   "size_classes": {
+    "aeroplankton": [
+     {
+      "name": "pico",
+      "range_um": [
+       0.2,
+       2.0
+      ],
+      "examples": {
+       "bacterium_1um": {
+        "diameter_um": 1.0,
+        "fall_m_s_moon": 6.18e-06,
+        "fall_m_s_earth": 3.88e-05,
+        "residence_days_moon_5_km": 9364.1,
+        "residence_days_moon_12_km": 22473.9,
+        "residence_days_earth_1_5_km": 447.3
+       }
+      }
+     },
+     {
+      "name": "nano",
+      "range_um": [
+       2.0,
+       20.0
+      ],
+      "examples": {
+       "spore_10um": {
+        "diameter_um": 10.0,
+        "fall_m_s_moon": 0.000552,
+        "fall_m_s_earth": 0.0034,
+        "residence_days_moon_5_km": 104.9,
+        "residence_days_moon_12_km": 251.8,
+        "residence_days_earth_1_5_km": 5.1
+       },
+       "spore_5um": {
+        "diameter_um": 5.0,
+        "fall_m_s_moon": 0.00014,
+        "fall_m_s_earth": 0.000863,
+        "residence_days_moon_5_km": 414.2,
+        "residence_days_moon_12_km": 994.0,
+        "residence_days_earth_1_5_km": 20.1
+       }
+      }
+     },
+     {
+      "name": "micro",
+      "range_um": [
+       20.0,
+       200.0
+      ],
+      "examples": {
+       "pollen_25um": {
+        "diameter_um": 25.0,
+        "fall_m_s_moon": 0.00311,
+        "fall_m_s_earth": 0.0191,
+        "residence_days_moon_5_km": 18.6,
+        "residence_days_moon_12_km": 44.7,
+        "residence_days_earth_1_5_km": 0.9
+       }
+      }
+     }
+    ],
+    "trees": [
+     {
+      "name": "nano",
+      "range_m": [
+       0.0,
+       2.0
+      ]
+     },
+     {
+      "name": "micro",
+      "range_m": [
+       2.0,
+       8.0
+      ]
+     },
+     {
+      "name": "meso",
+      "range_m": [
+       8.0,
+       30.0
+      ]
+     },
+     {
+      "name": "mega",
+      "range_m": [
+       30.0,
+       null
+      ]
+     }
+    ],
+    "note": "Residence is dry settling out of a mixed layer of the stated depth; rain, grazing and death remove organisms much sooner. Classes above micro are not used yet."
+   }
+  },
+  "cycle": {
+   "synodic_hours": 708.73,
+   "half_cycle_hours": 354.37,
+   "dusk_ground_speed_km_h": {
+    "0": 15.4,
+    "30": 13.34,
+    "60": 7.7,
+    "80": 2.67
+   },
+   "dusk_ground_speed_m_s": {
+    "0": 4.279,
+    "30": 3.705,
+    "60": 2.139,
+    "80": 0.743
+   },
+   "sun_following_speed_m_s_at_10_km": {
+    "0": 4.303,
+    "30": 3.727,
+    "60": 2.152,
+    "80": 0.747
+   },
+   "note": "Westward speed that keeps local solar time: 2 pi (R + h) cos(latitude) / synodic month. Dusk followers fly it at the ground; a floater holding the Sun would have to make it good aloft, where the mean wind blows east."
+  }
+ },
+ "backbone": [
+  {
+   "name": "Life",
+   "rank": null,
+   "parent": null,
+   "code": null,
+   "sources": [
+    "phylocode_6"
+   ],
+   "note": "The clade of all organisms, assuming one origin (PhyloCode Note 2.1.1)"
+  },
+  {
+   "name": "Bacteria",
+   "rank": "domain",
+   "parent": "Life",
+   "code": "ICNP",
+   "sources": [
+    "woese_1990",
+    "goker_oren_2024"
+   ]
+  },
+  {
+   "name": "Cyanobacteriota",
+   "rank": "phylum",
+   "parent": "Bacteria",
+   "code": "ICNP and ICN",
+   "sources": [
+    "oren_2022_cyanobacteriota",
+    "icn_madrid_2025"
+   ],
+   "note": "Governed by both codes (ICN Pre. 8); the GBIF backbone lists it as Cyanobacteria"
+  },
+  {
+   "name": "Eukaryota",
+   "rank": "domain",
+   "parent": "Life",
+   "code": null,
+   "sources": [
+    "woese_1990",
+    "adl_2019"
+   ],
+   "note": "Woese et al. named it Eucarya; eukaryote names above the codes' ranks are not regulated"
+  },
+  {
+   "name": "Plantae",
+   "rank": "kingdom",
+   "parent": "Eukaryota",
+   "code": "ICN",
+   "sources": [
+    "gbif_backbone"
+   ]
+  },
+  {
+   "name": "Chlorophyta",
+   "rank": "phylum",
+   "parent": "Plantae",
+   "code": "ICN",
+   "sources": [
+    "gbif_backbone"
+   ]
+  },
+  {
+   "name": "Bryophyta",
+   "rank": "phylum",
+   "parent": "Plantae",
+   "code": "ICN",
+   "sources": [
+    "gbif_backbone"
+   ]
+  },
+  {
+   "name": "Tracheophyta",
+   "rank": "phylum",
+   "parent": "Plantae",
+   "code": "ICN",
+   "sources": [
+    "gbif_backbone",
+    "cantino_2007"
+   ]
+  },
+  {
+   "name": "Angiospermae",
+   "rank": null,
+   "parent": "Tracheophyta",
+   "code": null,
+   "sources": [
+    "cantino_2007"
+   ],
+   "note": "The flowering plants, a phylogenetically defined clade name"
+  },
+  {
+   "name": "Caryophyllales",
+   "rank": "order",
+   "parent": "Angiospermae",
+   "code": "ICN",
+   "sources": [
+    "gbif_backbone"
+   ]
+  },
+  {
+   "name": "Nepenthaceae",
+   "rank": "family",
+   "parent": "Caryophyllales",
+   "code": "ICN",
+   "sources": [
+    "gbif_backbone"
+   ]
+  },
+  {
+   "name": "Nepenthes",
+   "rank": "genus",
+   "parent": "Nepenthaceae",
+   "code": "ICN",
+   "sources": [
+    "gbif_backbone"
+   ]
+  },
+  {
+   "name": "Cucurbitaceae",
+   "rank": "family",
+   "parent": "Angiospermae",
+   "code": "ICN",
+   "sources": [
+    "gbif_backbone"
+   ]
+  },
+  {
+   "name": "Solanum",
+   "rank": "genus",
+   "parent": "Angiospermae",
+   "code": "ICN",
+   "sources": [
+    "gbif_backbone"
+   ]
+  },
+  {
+   "name": "Solanum lycopersicum",
+   "rank": "species",
+   "parent": "Solanum",
+   "code": "ICN",
+   "sources": [
+    "gbif_backbone"
+   ]
+  },
+  {
+   "name": "Fungi",
+   "rank": "kingdom",
+   "parent": "Eukaryota",
+   "code": "ICN",
+   "sources": [
+    "gbif_backbone"
+   ]
+  },
+  {
+   "name": "Animalia",
+   "rank": "kingdom",
+   "parent": "Eukaryota",
+   "code": "ICZN",
+   "sources": [
+    "gbif_backbone",
+    "iczn_1999"
+   ]
+  },
+  {
+   "name": "Arthropoda",
+   "rank": "phylum",
+   "parent": "Animalia",
+   "code": "ICZN",
+   "sources": [
+    "gbif_backbone"
+   ]
+  },
+  {
+   "name": "Insecta",
+   "rank": "class",
+   "parent": "Arthropoda",
+   "code": "ICZN",
+   "sources": [
+    "gbif_backbone"
+   ]
+  },
+  {
+   "name": "Diptera",
+   "rank": "order",
+   "parent": "Insecta",
+   "code": "ICZN",
+   "sources": [
+    "gbif_backbone"
+   ]
+  },
+  {
+   "name": "Arachnida",
+   "rank": "class",
+   "parent": "Arthropoda",
+   "code": "ICZN",
+   "sources": [
+    "gbif_backbone"
+   ]
+  },
+  {
+   "name": "Araneae",
+   "rank": "order",
+   "parent": "Arachnida",
+   "code": "ICZN",
+   "sources": [
+    "gbif_backbone"
+   ]
+  },
+  {
+   "name": "Chordata",
+   "rank": "phylum",
+   "parent": "Animalia",
+   "code": "ICZN",
+   "sources": [
+    "gbif_backbone"
+   ]
+  },
+  {
+   "name": "Aves",
+   "rank": "class",
+   "parent": "Chordata",
+   "code": "ICZN",
+   "sources": [
+    "gbif_backbone"
+   ]
+  },
+  {
+   "name": "Salmonidae",
+   "rank": "family",
+   "parent": "Chordata",
+   "code": "ICZN",
+   "sources": [
+    "gbif_backbone"
+   ],
+   "note": "The GBIF backbone gives ray-finned fishes no class"
+  }
+ ],
+ "modules": [
+  {
+   "id": "M01",
+   "kind": "module",
+   "working_name": "carbon-balance idling",
+   "summary": "Leaves, stems and roots idle at about a quarter of their daytime upkeep as soon as photosynthesis stops covering upkeep, cued by the energy sensors SnRK1 and TOR; this halves the night store against idling only in full darkness (10 against 19 g C per m2)",
+   "status": "carried_forward",
+   "scope": "throughout",
+   "basis": "selected",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "B1, C3; Selection 1"
+    },
+    {
+     "path": "biosphere/README.md",
+     "at": "Canopy photosynthesis"
+    }
+   ],
+   "references": [
+    {
+     "name": "Arabidopsis thaliana",
+     "role": "SnRK1 mutants mobilize starch poorly at night; TOR and SnRK1 switch growth and starvation programs",
+     "lit": []
+    }
+   ],
+   "clock": [
+    "carbon_cued"
+   ],
+   "night": [
+    "idle"
+   ]
+  },
+  {
+   "id": "M02",
+   "kind": "module",
+   "working_name": "dusk-set night timer",
+   "summary": "A timer sized for about 240 dark hours, started at dusk, that rations the night's store; a plant on an Earth clock would budget the lunar night's store for one day",
+   "status": "carried_forward",
+   "scope": "throughout",
+   "basis": "selected",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "C2; Selection 2"
+    },
+    {
+     "path": "biosphere/ecology/README.md",
+     "at": "finding 20"
+    }
+   ],
+   "references": [
+    {
+     "name": "Arabidopsis thaliana",
+     "role": "divides its leaf starch by the hours to the dawn its clock expects",
+     "lit": []
+    }
+   ],
+   "clock": [
+    "dusk_set"
+   ],
+   "night": [
+    "store"
+   ]
+  },
+  {
+   "id": "M03",
+   "kind": "module",
+   "working_name": "two clocks",
+   "summary": "Daily rhythms in leaf chemistry inside the long lunar clock, with the daily clock kept off light harvesting",
+   "status": "carried_forward",
+   "scope": "throughout",
+   "basis": "selected",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "C1, C4; Selection 2"
+    },
+    {
+     "path": "archive/july_2026_knowledge_bundle/terluna_moon_terraforming_bundle/06_BIOSPHERE_AND_EVOLUTIONARY_DESIGN.md",
+     "at": "section 2"
+    }
+   ],
+   "references": [
+    {
+     "name": "Solanum lycopersicum",
+     "role": "continuous-light injury comes from the clock turning down the light-harvesting gene CAB-13 on schedule",
+     "lit": []
+    }
+   ],
+   "clock": [
+    "two_clocks"
+   ],
+   "night": []
+  },
+  {
+   "id": "M04",
+   "kind": "module",
+   "working_name": "long-dark leaf survival",
+   "summary": "Leaves that survive about 240 dark hours without senescing, with metabolism that slows and restarts on cue",
+   "status": "test_first",
+   "scope": "throughout",
+   "basis": "selected",
+   "tests": [
+    "leaves that survive about 240 dark hours, and metabolism that idles and restarts (B5)"
+   ],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "B5; Test first"
+    },
+    {
+     "path": "biosphere/README.md",
+     "at": "Canopy photosynthesis"
+    }
+   ],
+   "references": [
+    {
+     "name": "Arabidopsis thaliana",
+     "role": "a leaf darkened alone senesces; darkening the whole plant holds senescence back",
+     "lit": []
+    }
+   ],
+   "clock": [],
+   "night": [
+    "idle"
+   ]
+  },
+  {
+   "id": "M05",
+   "kind": "module",
+   "working_name": "twilight use",
+   "summary": "Photosynthesis through the long twilight, worth 14% of an Earth-like night store and a quarter of the idling one; it leaves 238 dark hours at the equator and 34 at 60 degrees",
+   "status": "carried_forward",
+   "scope": "throughout",
+   "basis": "selected",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "B2; Selection 1"
+    }
+   ],
+   "references": [],
+   "clock": [],
+   "night": [
+    "twilight"
+   ]
+  },
+  {
+   "id": "M06",
+   "kind": "module",
+   "working_name": "day-fruit program",
+   "summary": "A fruit program one sunlit half long: set at sunrise on a dawn cue without pollination, cells formed before sunrise, sugar loaded in the last days before dusk, ripe at sunset",
+   "status": "carried_forward",
+   "scope": "throughout",
+   "basis": "selected",
+   "tests": [
+    "a large fruit's program compressed to one lunar day (D2)"
+   ],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "D2-D4; Selection 3; Test first"
+    },
+    {
+     "path": "biosphere/README.md",
+     "at": "Canopy photosynthesis"
+    }
+   ],
+   "references": [
+    {
+     "name": "Citrullus lanatus",
+     "role": "today's watermelon takes 45 days and lives through a night",
+     "lit": []
+    },
+    {
+     "name": "Cucurbita maxima",
+     "role": "giant pumpkins take in about 15 kg a day at their peak",
+     "lit": []
+    },
+    {
+     "name": "Cucumis sativus",
+     "role": "parthenocarpic cucumbers set fruit without pollination",
+     "lit": []
+    }
+   ],
+   "clock": [
+    "dawn_set"
+   ],
+   "night": []
+  },
+  {
+   "id": "M07",
+   "kind": "module",
+   "working_name": "lunar calendar of animal lives",
+   "summary": "Emergence, spawning and migration timed by dawn and dusk, the month's sharpest cues: migrants leave the sea in the lunar afternoon, arrive at dusk and lay eggs that hatch by dawn",
+   "status": "carried_forward",
+   "scope": "throughout",
+   "basis": "selected",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "C5, H7; Selection 2"
+    }
+   ],
+   "references": [
+    {
+     "name": "Clunio marinus",
+     "role": "emerges at the low tides around new and full moon on circalunar and circadian clocks",
+     "lit": []
+    },
+    {
+     "name": "Samoan palolo worm",
+     "role": "casts its spawning segments at the third quarter moon",
+     "lit": []
+    },
+    {
+     "name": "Great Barrier Reef corals",
+     "role": "at least 32 species spawn together after late-spring full moons",
+     "lit": []
+    }
+   ],
+   "clock": [
+    "dusk_set",
+    "dawn_set"
+   ],
+   "night": []
+  },
+  {
+   "id": "M08",
+   "kind": "module",
+   "working_name": "continuous-light tolerance on farms",
+   "summary": "Cultivars that tolerate continuous light, and daily cues such as a temperature swing or alternating red and blue light",
+   "status": "carried_forward",
+   "scope": "in_places",
+   "basis": "selected",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "C1; In places"
+    },
+    {
+     "path": "biosphere/ecology/README.md",
+     "at": "finding 20"
+    }
+   ],
+   "references": [
+    {
+     "name": "Solanum lycopersicum",
+     "role": "a wild tomato's CAB-13 allele gives tolerance with up to 20% more yield",
+     "lit": []
+    }
+   ],
+   "clock": [
+    "earth_clock_with_cues"
+   ],
+   "night": []
+  },
+  {
+   "id": "M09",
+   "kind": "module",
+   "working_name": "lasting glow",
+   "summary": "Bioluminescence from the fungal pathway that lasts through the first nights after dusk; a glowing square metre draws about 0.04 W, under 2% of the night upkeep of a square metre of plants",
+   "status": "test_first",
+   "scope": "throughout",
+   "basis": "selected",
+   "tests": [
+    "glowing lures that last through the first nights, with a catch the migrants can bear (E3)"
+   ],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "E3; Test first"
+    }
+   ],
+   "references": [
+    {
+     "name": "Neonothopanus gardneri",
+     "role": "luminous fungus; glowing artificial mushrooms caught 42 insects against 12 in dark ones",
+     "lit": []
+    },
+    {
+     "name": "Nicotiana tabacum",
+     "role": "engineered to glow with the fungal pathway; the glow followed its clock and faded by the third and fourth day of darkness",
+     "lit": []
+    },
+    {
+     "name": "glowworm larvae",
+     "role": "hang sticky threads beneath their light and catch mostly flies",
+     "lit": []
+    }
+   ],
+   "clock": [
+    "dusk_set"
+   ],
+   "night": [
+    "night_active"
+   ]
+  },
+  {
+   "id": "M10",
+   "kind": "module",
+   "working_name": "violet and visible signals",
+   "summary": "Flowers that signal at 350-400 nm or in the violet and visible, and pollinators tuned to them: a honeybee's UV receptor catches 7% of Earth's light under the shield",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "requirement",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "biosphere/ecology/README.md",
+     "at": "finding 2"
+    },
+    {
+     "path": "biosphere/ecology/literature.md",
+     "at": "Light"
+    }
+   ],
+   "references": [
+    {
+     "name": "Apis mellifera",
+     "role": "UV receptor peaking near 344 nm",
+     "lit": []
+    },
+    {
+     "name": "flowering plants",
+     "role": "floral UV patterning follows the UV a habitat receives",
+     "lit": []
+    }
+   ],
+   "clock": [],
+   "night": []
+  },
+  {
+   "id": "M11",
+   "kind": "module",
+   "working_name": "raised night-light thresholds",
+   "summary": "Circadian and melatonin thresholds raised for nearside nights of 2-3 lux of Earthlight, set zone by zone; far-side low latitudes keep Earth-calibrated thresholds",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "requirement",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "biosphere/ecology/README.md",
+     "at": "finding 5"
+    },
+    {
+     "path": "biosphere/ecology/literature.md",
+     "at": "Light"
+    }
+   ],
+   "references": [
+    {
+     "name": "fishes and rodents",
+     "role": "melatonin suppressed at 0.01-0.03 lux of light at night",
+     "lit": []
+    }
+   ],
+   "clock": [],
+   "night": []
+  },
+  {
+   "id": "M12",
+   "kind": "module",
+   "working_name": "vitamin D without UV-B",
+   "summary": "A route to vitamin D for every vertebrate without UV-B, which the shield removes: biosynthesis that runs without the light, calcium handling without the vitamin, or a dietary supply",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "requirement",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "biosphere/ecology/README.md",
+     "at": "finding 1"
+    },
+    {
+     "path": "biosphere/ecology/literature.md",
+     "at": "Light"
+    }
+   ],
+   "references": [
+    {
+     "name": "cats and dogs",
+     "role": "mammals that live on dietary vitamin D",
+     "lit": []
+    }
+   ],
+   "clock": [],
+   "night": []
+  },
+  {
+   "id": "M13",
+   "kind": "module",
+   "working_name": "complete denitrification",
+   "summary": "Denitrification that ends in N2 through the N2O reductase NosZ, since N2O has no sink under the shield",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "requirement",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "biosphere/ecology/README.md",
+     "at": "finding 7"
+    }
+   ],
+   "references": [],
+   "clock": [],
+   "night": []
+  },
+  {
+   "id": "M14",
+   "kind": "module",
+   "working_name": "alternative nitrogenases",
+   "summary": "Vanadium and iron-only nitrogenases beside the molybdenum enzyme, since molybdenum may limit fixation before nitrogen does",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "requirement",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "biosphere/ecology/README.md",
+     "at": "finding 12"
+    },
+    {
+     "path": "biosphere/ecology/literature.md",
+     "at": "Nitrogen"
+    }
+   ],
+   "references": [],
+   "clock": [],
+   "night": []
+  },
+  {
+   "id": "M15",
+   "kind": "module",
+   "working_name": "wet-leaf disease resistance",
+   "summary": "Resistance to leaf pathogens through a hundred hours and more of leaf wetness, with sunlight disinfecting at 1-6% of Earth's rate",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "requirement",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "biosphere/ecology/README.md",
+     "at": "finding 3"
+    }
+   ],
+   "references": [],
+   "clock": [],
+   "night": []
+  },
+  {
+   "id": "M16",
+   "kind": "module",
+   "working_name": "root regulation at lunar gravity",
+   "summary": "Root growth regulated by design, since plants sense gravity poorly below 0.1-0.3 g",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "requirement",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "biosphere/ecology/README.md",
+     "at": "finding 19"
+    }
+   ],
+   "references": [],
+   "clock": [],
+   "night": []
+  },
+  {
+   "id": "M17",
+   "kind": "module",
+   "working_name": "ethylene balance",
+   "summary": "Low ethylene emission by plants and fast ethylene uptake by soils: the vegetated Moon's own ethylene settles at 94-233 ppb with Earth's soil uptake, above the 50 ppb that costs wheat 36% of its yield",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "requirement",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "biosphere/ecology/README.md",
+     "at": "finding 24"
+    },
+    {
+     "path": "biosphere/ecology/people_and_land.md",
+     "at": "item 16"
+    }
+   ],
+   "references": [],
+   "clock": [],
+   "night": []
+  },
+  {
+   "id": "M18",
+   "kind": "module",
+   "working_name": "gas-barrier envelope",
+   "summary": "A mostly inert, replaceable hydrogen barrier grown and repaired by living tissue, behind a tougher outer surface",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "idea",
+   "tests": [
+    "one assembled wet barrier: hydrogen, oxygen and nitrogen permeation, sustained load and creep, seams, tear arrest and healing, with and without guanine-like plates"
+   ],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/floater_viability/README.md",
+     "at": "The reference organism; What would decide it next"
+    },
+    {
+     "path": "research/studies/floater_viability/gas_biology.md",
+     "at": "Guanine plates in the bladder wall; Goldbeater's skin"
+    }
+   ],
+   "references": [
+    {
+     "name": "goldbeater's skin",
+     "role": "processed intestinal collagen of cattle used as hydrogen gas-cell barriers in historical airships",
+     "lit": []
+    },
+    {
+     "name": "teleost swim bladders",
+     "role": "guanine plates make the bladder wall a hundred times tighter",
+     "lit": []
+    },
+    {
+     "name": "Nereocystis luetkeana",
+     "role": "the wall of the bull kelp's float makes gas as it grows",
+     "lit": [
+      "liggan_martone_2020"
+     ]
+    }
+   ],
+   "clock": [],
+   "night": []
+  },
+  {
+   "id": "M19",
+   "kind": "module",
+   "working_name": "hydrogen organ or symbiont",
+   "summary": "Hydrogen made by a dedicated organ or symbiont, from light or by dark fermentation, with its light, substrates and oxygen management counted",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "idea",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/floater_viability/biology.md",
+     "at": "Hydrogen from light and from sugar"
+    },
+    {
+     "path": "research/studies/floater_viability/gas_biology.md",
+     "at": "The swim bladder's gas gland; The Portuguese man-of-war's gas gland"
+    }
+   ],
+   "references": [
+    {
+     "name": "Chlamydomonas reinhardtii",
+     "role": "sulfur-deprived cultures enter a hydrogen-producing state",
+     "lit": []
+    },
+    {
+     "name": "Clostridium",
+     "role": "dark fermentation yields about 2.1 mol H2 per mol glucose",
+     "lit": []
+    },
+    {
+     "name": "Physalia physalis",
+     "role": "secretes its float gas from a dedicated gas gland",
+     "lit": []
+    },
+    {
+     "name": "teleost swim bladders",
+     "role": "a gas gland and rete mirabile secrete gas against high pressure",
+     "lit": []
+    }
+   ],
+   "clock": [],
+   "night": []
+  },
+  {
+   "id": "M20",
+   "kind": "module",
+   "working_name": "water from the air",
+   "summary": "Water drawn from rain, cloud and the humid air through sorbent skins and fringes, in preference to descending to drink",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "direction",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/decisions.md",
+     "at": "Sky giants and the biosphere's names"
+    },
+    {
+     "path": "research/studies/floater_viability/README.md",
+     "at": "The limits, in brief"
+    }
+   ],
+   "references": [],
+   "clock": [],
+   "night": []
+  },
+  {
+   "id": "M21",
+   "kind": "module",
+   "working_name": "attached buds",
+   "summary": "Daughters grown as attached buds, fed carbon, nutrients and gas by the parent until they can carry themselves",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "idea",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/floater_viability/biology.md",
+     "at": "Buds, offspring and replacement"
+    }
+   ],
+   "references": [],
+   "clock": [],
+   "night": []
+  },
+  {
+   "id": "M22",
+   "kind": "module",
+   "working_name": "spectral tuning",
+   "summary": "Paler upper leaves, photosynthesis into the far red and clumped foliage; they add 3%, 6% and 3% on the Moon, where the diffuse sky already does most of what they do",
+   "status": "set_aside",
+   "scope": "throughout",
+   "basis": "selected",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "A2; Set aside"
+    }
+   ],
+   "references": [],
+   "clock": [],
+   "night": []
+  },
+  {
+   "id": "M23",
+   "kind": "module",
+   "working_name": "extra photoprotection and daily rests",
+   "summary": "Reflective hairs, folding leaves and a daily rest in the long day: peak light is 30% below Earth's and the UV index 0.11, and a rest halving photosynthesis for eight hours in 24 costs about a quarter of the growth",
+   "status": "set_aside",
+   "scope": "throughout",
+   "basis": "selected",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "A4, A5; Set aside"
+    }
+   ],
+   "references": [],
+   "clock": [],
+   "night": []
+  },
+  {
+   "id": "M24",
+   "kind": "module",
+   "working_name": "canopy regrowth each cycle",
+   "summary": "Shedding the canopy before dusk and regrowing it at dawn costs 264 g C per m2 a cycle and leaves little or no growth",
+   "status": "set_aside",
+   "scope": "throughout",
+   "basis": "selected",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "B3; Set aside"
+    }
+   ],
+   "references": [],
+   "clock": [],
+   "night": [
+    "shedding"
+   ]
+  },
+  {
+   "id": "M25",
+   "kind": "module",
+   "working_name": "frost protection",
+   "summary": "Antifreeze, insulation and heat sharing in plant mats: land nights stay near 19-20 degrees C at low and middle latitudes",
+   "status": "set_aside",
+   "scope": "throughout",
+   "basis": "selected",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "B4; Set aside"
+    }
+   ],
+   "references": [],
+   "clock": [],
+   "night": []
+  },
+  {
+   "id": "M26",
+   "kind": "module",
+   "working_name": "hyper-C4 as the general strategy",
+   "summary": "C4 everywhere: the canopy works mostly in dim diffuse light, where C4's extra two ATP per CO2 cost most",
+   "status": "set_aside",
+   "scope": "throughout",
+   "basis": "selected",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "A3; Set aside"
+    }
+   ],
+   "references": [],
+   "clock": [],
+   "night": []
+  },
+  {
+   "id": "M27",
+   "kind": "module",
+   "working_name": "tethered sails",
+   "summary": "A wing hung on a tether in another layer of air, or a drogue in the sea, that sails a buoyant body across the wind",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "idea",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/floater_viability/sailing.md",
+     "at": "Sailing between two layers; Sailors between air and water"
+    }
+   ],
+   "references": [
+    {
+     "name": "Physalia physalis",
+     "role": "sails up to 50-55 degrees from downwind with its tentacles as the sea anchor",
+     "lit": [
+      "iosilevskii_weihs_2009"
+     ]
+    }
+   ],
+   "clock": [],
+   "night": []
+  },
+  {
+   "id": "M28",
+   "kind": "module",
+   "working_name": "compartmented gas",
+   "summary": "Gas held in many small wet compartments or modules, so that a tear or a lightning strike empties or burns one at a time",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "idea",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/floater_viability/README.md",
+     "at": "The limits, in brief"
+    }
+   ],
+   "references": [],
+   "clock": [],
+   "night": []
+  }
+ ],
+ "groups": [
+  {
+   "id": "G01",
+   "kind": "group",
+   "working_name": "floaters",
+   "summary": "Large photosynthetic aerial organisms with gas-filled, lobed bodies: a light, mostly inert and replaceable envelope, distributed photosynthetic tissue and small protected pockets of retained water that hold their own small communities",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "direction",
+   "tests": [
+    "one assembled wet gas barrier",
+    "a trajectory of water, carbon, gas and trim along a sailing path through storms, twilight and humid layers"
+   ],
+   "notes": "The working name stays \"floaters\" until the author chooses among N1-N6; Sagan and Salpeter (1976) used the word for buoyant organisms of Jupiter's air. Aloft the mean wind blows east, so floaters ride it to shorten their nights, linger in the evening flow near the ground or sail north and south across the shear. Migrating flyers roost on them and bring phosphorus up.",
+   "sources": [
+    {
+     "path": "research/studies/floater_viability/README.md",
+     "at": "What a giant looks like; The limits, in brief; Twilight and the Sun"
+    },
+    {
+     "path": "research/studies/floater_viability/biology.md",
+     "at": "all sections"
+    },
+    {
+     "path": "research/studies/floater_viability/sailing.md",
+     "at": "Riding the eastward wind; Sailing between two layers"
+    },
+    {
+     "path": "research/studies/floater_viability/gas_biology.md",
+     "at": "Siphonophores; The swim bladder's gas gland"
+    },
+    {
+     "path": "research/studies/aerial_ecology/README.md",
+     "at": "Large photosynthetic organisms and their wet mass"
+    },
+    {
+     "path": "research/decisions.md",
+     "at": "Cross-domain ecology follow-up; Floater light-history correction; Sky giants"
+    }
+   ],
+   "parent": null,
+   "anchor": "Eukaryota",
+   "degree": "lineage",
+   "chassis": [
+    "brown algae (Phaeophyceae), whose kelps inflate their own floats",
+    "green algae (Chlorophyta), for photosynthetic hydrogen"
+   ],
+   "references": [
+    {
+     "name": "Physalia physalis",
+     "role": "a colony of polyps with a gas-filled, sail-like float and trailing tentacles, which sails",
+     "lit": [
+      "iosilevskii_weihs_2009"
+     ]
+    },
+    {
+     "name": "Nereocystis luetkeana",
+     "role": "bull kelp: a gas-filled float holds it upright to compete for light",
+     "lit": [
+      "liggan_martone_2018",
+      "liggan_martone_2020"
+     ]
+    },
+    {
+     "name": "holopelagic Sargassum",
+     "role": "brown algae that live afloat and drift for months",
+     "lit": [
+      "machado_2024"
+     ]
+    },
+    {
+     "name": "siphonophores",
+     "role": "colonies whose zooids specialise as float, feeders, swimmers and reproductive members, budded from growth zones",
+     "lit": []
+    },
+    {
+     "name": "teleost swim bladders",
+     "role": "secrete gas into a bladder walled with guanine plates",
+     "lit": []
+    },
+    {
+     "name": "mistletoes",
+     "role": "draw water and nutrients from a host's sap, as the young draw on megaforest crowns",
+     "lit": []
+    },
+    {
+     "name": "Chlamydomonas reinhardtii",
+     "role": "photosynthetic hydrogen",
+     "lit": []
+    },
+    {
+     "name": "Clostridium",
+     "role": "dark-fermentation hydrogen",
+     "lit": []
+    }
+   ],
+   "form": "drifter",
+   "form_candidates": [
+    "sailor"
+   ],
+   "size": [],
+   "settings": [
+    "low_sky",
+    "storm_layer",
+    "canopy"
+   ],
+   "realm": "sky",
+   "guilds": [
+    "producer",
+    "receiver"
+   ],
+   "night": [
+    "twilight",
+    "terminator_following",
+    "store",
+    "idle"
+   ],
+   "clock": [
+    "undetermined"
+   ],
+   "modules": [
+    "M18",
+    "M19",
+    "M20",
+    "M21",
+    "M27",
+    "M28"
+   ],
+   "carries": [],
+   "name_candidates": [
+    "N1",
+    "N2",
+    "N3",
+    "N4",
+    "N5",
+    "N6"
+   ]
+  },
+  {
+   "id": "G02",
+   "kind": "subgroup",
+   "working_name": "lesser floaters",
+   "summary": "Floaters of the coupled study's reference organism: spheres of 40-150 m at about 10 km, the size the giants grow from; the young can grow to 40-60 m in megaforest crowns, fed by host sap",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "idea",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/floater_viability/README.md",
+     "at": "The reference organism"
+    },
+    {
+     "path": "research/studies/floater_viability/growth.md",
+     "at": "The canopy nursery"
+    }
+   ],
+   "parent": "G01",
+   "anchor": "Eukaryota",
+   "degree": "lineage",
+   "chassis": [
+    "as the floaters"
+   ],
+   "references": [],
+   "form": "drifter",
+   "form_candidates": [
+    "sailor"
+   ],
+   "size": [],
+   "settings": [
+    "low_sky",
+    "canopy"
+   ],
+   "realm": "sky",
+   "guilds": [
+    "producer"
+   ],
+   "night": [
+    "twilight",
+    "terminator_following",
+    "store",
+    "idle"
+   ],
+   "clock": [
+    "undetermined"
+   ],
+   "modules": [],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G03",
+   "kind": "subgroup",
+   "working_name": "giant floaters",
+   "summary": "Floaters that keep growing for centuries, like the oldest trees: colonies of wet modules 50-150 m across on a raft one or two kilometres wide, which regrow what storms take, or round bodies of hundreds of metres in eight to fifty compartments",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "direction",
+   "tests": [
+    "fittings, seams, gusts and damage, then water and storms"
+   ],
+   "notes": "A giant's age is the time its own light takes to make its gas: decades to more than a millennium from a 40-m juvenile in the coupled study. Lightning and tears take one module or compartment at a time.",
+   "sources": [
+    {
+     "path": "research/decisions.md",
+     "at": "Sky giants and the biosphere's names"
+    },
+    {
+     "path": "research/studies/floater_viability/README.md",
+     "at": "What a giant looks like; The limits, in brief"
+    },
+    {
+     "path": "research/studies/floater_viability/gas_biology.md",
+     "at": "Siphonophores: colonies of specialised parts"
+    }
+   ],
+   "parent": "G01",
+   "anchor": "Eukaryota",
+   "degree": "lineage",
+   "chassis": [
+    "as the floaters"
+   ],
+   "references": [
+    {
+     "name": "Pinus longaeva",
+     "role": "the oldest known living eukaryote, 4,770 years old in 2005",
+     "lit": [
+      "flanary_2005"
+     ]
+    },
+    {
+     "name": "trees of 403 species",
+     "role": "mass growth rate rises continuously with size as leaf area outpaces the fall in productivity per leaf area",
+     "lit": [
+      "stephenson_2014"
+     ]
+    },
+    {
+     "name": "siphonophores",
+     "role": "the colonial plan: specialised modules added at growth zones",
+     "lit": []
+    }
+   ],
+   "form": "giant",
+   "form_candidates": [],
+   "size": [],
+   "settings": [
+    "low_sky",
+    "storm_layer"
+   ],
+   "realm": "sky",
+   "guilds": [
+    "producer",
+    "receiver"
+   ],
+   "night": [
+    "twilight",
+    "terminator_following",
+    "store",
+    "idle"
+   ],
+   "clock": [
+    "undetermined"
+   ],
+   "modules": [],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G04",
+   "kind": "group",
+   "working_name": "resident aeroplankton phototrophs",
+   "summary": "Cyanobacteria and algae that complete their lives aloft, in cloud water and in retained water",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "direction",
+   "tests": [
+    "reproduction outrunning removal: at 0.01 a day of added mortality a 3.6-day doubling needs favourable conditions for 22.5% of the cycle if rain removes cells in 30 days"
+   ],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/aerial_ecology/README.md",
+     "at": "What the evidence supports; Reproduction must outrun removal"
+    },
+    {
+     "path": "research/studies/aerial_ecology/sources.json",
+     "at": ""
+    },
+    {
+     "path": "research/decisions.md",
+     "at": "Cross-domain ecology follow-up"
+    }
+   ],
+   "parent": null,
+   "anchor": "Life",
+   "degree": "species",
+   "chassis": [
+    "cyanobacteria (Cyanobacteriota)",
+    "eukaryotic microalgae"
+   ],
+   "references": [
+    {
+     "name": "cloud cyanobacteria and algae",
+     "role": "photosynthetic algae and cyanobacteria recovered from clouds and rain",
+     "lit": []
+    }
+   ],
+   "form": "aeroplankton",
+   "form_candidates": [],
+   "size": [
+    "pico",
+    "nano"
+   ],
+   "settings": [
+    "low_sky",
+    "storm_layer"
+   ],
+   "realm": "sky",
+   "guilds": [
+    "producer"
+   ],
+   "night": [
+    "undetermined"
+   ],
+   "clock": [
+    "undetermined"
+   ],
+   "modules": [],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G05",
+   "kind": "subgroup",
+   "working_name": "aerial cyanobacteria",
+   "summary": "Cyanobacteria of the resident aeroplankton",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "direction",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/aerial_ecology/README.md",
+     "at": ""
+    }
+   ],
+   "parent": "G04",
+   "anchor": "Cyanobacteriota",
+   "degree": "species",
+   "chassis": [
+    "cyanobacteria"
+   ],
+   "references": [],
+   "form": "aeroplankton",
+   "form_candidates": [],
+   "size": [
+    "pico",
+    "nano"
+   ],
+   "settings": [
+    "low_sky",
+    "storm_layer"
+   ],
+   "realm": "sky",
+   "guilds": [
+    "producer"
+   ],
+   "night": [
+    "undetermined"
+   ],
+   "clock": [
+    "undetermined"
+   ],
+   "modules": [],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G06",
+   "kind": "subgroup",
+   "working_name": "aerial microalgae",
+   "summary": "Eukaryotic algae of the resident aeroplankton",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "direction",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/aerial_ecology/README.md",
+     "at": ""
+    }
+   ],
+   "parent": "G04",
+   "anchor": "Eukaryota",
+   "degree": "species",
+   "chassis": [
+    "eukaryotic microalgae"
+   ],
+   "references": [],
+   "form": "aeroplankton",
+   "form_candidates": [],
+   "size": [
+    "nano"
+   ],
+   "settings": [
+    "low_sky",
+    "storm_layer"
+   ],
+   "realm": "sky",
+   "guilds": [
+    "producer"
+   ],
+   "night": [
+    "undetermined"
+   ],
+   "clock": [
+    "undetermined"
+   ],
+   "modules": [],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G07",
+   "kind": "group",
+   "working_name": "resident aeroplankton heterotrophs",
+   "summary": "Bacteria that grow in cloud and fog water on organic carbon other organisms make",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "direction",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/aerial_ecology/README.md",
+     "at": "What the evidence supports"
+    },
+    {
+     "path": "research/studies/aerial_ecology/sources.json",
+     "at": ""
+    },
+    {
+     "path": "biosphere/ecology/people_and_land.md",
+     "at": "item 3"
+    }
+   ],
+   "parent": null,
+   "anchor": "Bacteria",
+   "degree": "species",
+   "chassis": [
+    "cloud-water bacteria"
+   ],
+   "references": [
+    {
+     "name": "cloud bacteria",
+     "role": "grow in supercooled cloud droplets and keep transcribing in cloud water",
+     "lit": []
+    },
+    {
+     "name": "fog heterotrophs",
+     "role": "C1-consuming heterotrophs growing with fog droplets",
+     "lit": []
+    }
+   ],
+   "form": "aeroplankton",
+   "form_candidates": [],
+   "size": [
+    "pico"
+   ],
+   "settings": [
+    "low_sky",
+    "storm_layer"
+   ],
+   "realm": "sky",
+   "guilds": [
+    "decomposer"
+   ],
+   "night": [
+    "undetermined"
+   ],
+   "clock": [
+    "undetermined"
+   ],
+   "modules": [],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G08",
+   "kind": "group",
+   "working_name": "aerial collectors",
+   "summary": "Small animals that gather airborne pollen, spores and small organisms on webs or filters, on substrates that take the loads: floaters and canopies",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "idea",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/aerial_ecology/README.md",
+     "at": "Filter-feeding has a speed and drag budget"
+    },
+    {
+     "path": "research/studies/aerial_ecology/sources.json",
+     "at": ""
+    }
+   ],
+   "parent": null,
+   "anchor": "Araneae",
+   "degree": "species",
+   "chassis": [
+    "spiders (Araneae)"
+   ],
+   "references": [
+    {
+     "name": "orb-weaving spiders",
+     "role": "eat the pollen their webs catch",
+     "lit": []
+    },
+    {
+     "name": "ballooning spiders",
+     "role": "rise on the charge of their silk in an electric field",
+     "lit": [
+      "morley_gorham_2020"
+     ]
+    }
+   ],
+   "form": "tenant",
+   "form_candidates": [],
+   "size": [],
+   "settings": [
+    "low_sky",
+    "canopy"
+   ],
+   "realm": "sky",
+   "guilds": [
+    "collector"
+   ],
+   "night": [
+    "undetermined"
+   ],
+   "clock": [
+    "undetermined"
+   ],
+   "modules": [],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G09",
+   "kind": "group",
+   "working_name": "large aerial filter feeders",
+   "summary": "Large mobile animals that filter food from the air; at 10 m/s a filter breaks even at 0.9-45 mg of dry food per m3 across drag coefficients of 0.02-1",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "idea",
+   "tests": [],
+   "notes": "A demanding hypothesis in the aerial study, which names no Earth model and infers no whale-sized animal.",
+   "sources": [
+    {
+     "path": "research/studies/aerial_ecology/README.md",
+     "at": "Filter-feeding has a speed and drag budget"
+    }
+   ],
+   "parent": null,
+   "anchor": "Animalia",
+   "degree": "lineage",
+   "chassis": [
+    "undetermined"
+   ],
+   "references": [],
+   "form": "flyer",
+   "form_candidates": [],
+   "size": [],
+   "settings": [
+    "low_sky",
+    "storm_layer"
+   ],
+   "realm": "sky",
+   "guilds": [
+    "collector"
+   ],
+   "night": [
+    "undetermined"
+   ],
+   "clock": [
+    "undetermined"
+   ],
+   "modules": [],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G10",
+   "kind": "group",
+   "working_name": "high-altitude films",
+   "summary": "Sparse microbial and algal films on particles, droplets and platforms in the flight band and the high air",
+   "status": "carried_forward",
+   "scope": "throughout",
+   "basis": "decision",
+   "tests": [],
+   "notes": "Cosmic-ray ionization is 7% of Earth's sea level in the flight band and 16% at 45-90 km, so the sparseness answers to cold, dry air and scarce nutrients.",
+   "sources": [
+    {
+     "path": "research/decisions.md",
+     "at": "Life and people"
+    },
+    {
+     "path": "biosphere/ecology/people_and_land.md",
+     "at": "item 2"
+    },
+    {
+     "path": "archive/july_2026_knowledge_bundle/terluna_moon_terraforming_bundle/06_BIOSPHERE_AND_EVOLUTIONARY_DESIGN.md",
+     "at": "section 12"
+    }
+   ],
+   "parent": null,
+   "anchor": "Life",
+   "degree": "species",
+   "chassis": [
+    "desiccation-tolerant bacteria",
+    "engineered algae"
+   ],
+   "references": [
+    {
+     "name": "Deinococcus radiodurans",
+     "role": "its radiation resistance follows from its tolerance of desiccation",
+     "lit": [
+      "mattimore_battista_1996"
+     ]
+    },
+    {
+     "name": "engineered algal films",
+     "role": "films attached to research platforms (July 2026 bundle)",
+     "lit": []
+    }
+   ],
+   "form": "film",
+   "form_candidates": [],
+   "size": [],
+   "settings": [
+    "flight_band",
+    "high_air"
+   ],
+   "realm": "sky",
+   "guilds": [
+    "producer"
+   ],
+   "night": [
+    "dormant"
+   ],
+   "clock": [
+    "undetermined"
+   ],
+   "modules": [],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G11",
+   "kind": "group",
+   "working_name": "great flyers",
+   "summary": "Large soaring animals of the dense lower sky; a flyer six times Earth's in every length carries the same stresses, which carries Earth's largest flyers to 60-66 m across and 44-55 t",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "idea",
+   "tests": [],
+   "notes": "Extinct flyers serve as reference points; a chassis is a living lineage.",
+   "sources": [
+    {
+     "path": "biosphere/ecology/people_and_land.md",
+     "at": "item 5, item 22, Table 2"
+    },
+    {
+     "path": "research/decisions.md",
+     "at": "Life and people; Sky ships and flyers"
+    },
+    {
+     "path": "archive/july_2026_knowledge_bundle/terluna_moon_terraforming_bundle/06_BIOSPHERE_AND_EVOLUTIONARY_DESIGN.md",
+     "at": "section 11"
+    }
+   ],
+   "parent": null,
+   "anchor": "Aves",
+   "degree": "genus",
+   "chassis": [
+    "birds (Aves)"
+   ],
+   "references": [
+    {
+     "name": "Diomedea exulans",
+     "role": "wandering albatross, 3.0-3.1 m and 7.8-9.4 kg",
+     "lit": []
+    },
+    {
+     "name": "Argentavis magnificens",
+     "role": "Miocene, 7 m and 70-72 kg",
+     "lit": []
+    },
+    {
+     "name": "Quetzalcoatlus northropi",
+     "role": "Cretaceous pterosaur, 10-11 m and 200-250 kg",
+     "lit": []
+    }
+   ],
+   "form": "flyer",
+   "form_candidates": [],
+   "size": [],
+   "settings": [
+    "low_sky",
+    "storm_layer"
+   ],
+   "realm": "sky",
+   "guilds": [
+    "consumer"
+   ],
+   "night": [
+    "undetermined"
+   ],
+   "clock": [
+    "undetermined"
+   ],
+   "modules": [
+    "M12"
+   ],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G12",
+   "kind": "group",
+   "working_name": "gliders",
+   "summary": "Animals that launch from canopies and cliffs and glide, at a sixth of Earth's weight in the dense air",
+   "status": "carried_forward",
+   "scope": "throughout",
+   "basis": "decision",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/decisions.md",
+     "at": "Life and people"
+    },
+    {
+     "path": "archive/july_2026_knowledge_bundle/terluna_moon_terraforming_bundle/06_BIOSPHERE_AND_EVOLUTIONARY_DESIGN.md",
+     "at": "section 11"
+    }
+   ],
+   "parent": null,
+   "anchor": "Animalia",
+   "degree": "species",
+   "chassis": [
+    "arboreal vertebrates",
+    "insects"
+   ],
+   "references": [
+    {
+     "name": "arboreal vertebrate gliders",
+     "role": "more than 30 independent lineages",
+     "lit": [
+      "dudley_2007"
+     ]
+    },
+    {
+     "name": "arboreal ants",
+     "role": "directed aerial descent without wings",
+     "lit": [
+      "dudley_2007"
+     ]
+    }
+   ],
+   "form": "glider",
+   "form_candidates": [],
+   "size": [],
+   "settings": [
+    "canopy",
+    "low_sky"
+   ],
+   "realm": "sky",
+   "guilds": [
+    "consumer"
+   ],
+   "night": [
+    "undetermined"
+   ],
+   "clock": [
+    "undetermined"
+   ],
+   "modules": [],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G13",
+   "kind": "group",
+   "working_name": "sea-forest migrant insects",
+   "summary": "Insects that grow at sea and fly to the forests for the dusk fruit fall and to mate, leaving phosphorus, nitrogen and trace elements in droppings, carcasses and the prey of lures and traps, then fly back to breed at sea",
+   "status": "carried_forward",
+   "scope": "throughout",
+   "basis": "selected",
+   "tests": [
+    "the conveyor's size: seas producing insects at the top of Myvatn's range, spread over hundreds of kilometres (H4)"
+   ],
+   "notes": "Returning the dissolved phosphorus takes 0.5-1.2 g of dry insect bodies on each m2 of land a year; a Bogong-sized moth flies the 950 km round trip to the median sea distance on a quarter of its mass in sugar.",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "H1-H7; Selection 6; Test first"
+    }
+   ],
+   "parent": null,
+   "anchor": "Insecta",
+   "degree": "species",
+   "chassis": [
+    "moths (Lepidoptera)",
+    "midges (Diptera)"
+   ],
+   "references": [
+    {
+     "name": "Agrotis infusa",
+     "role": "Bogong moths fly about 1,000 km to alpine caves and bring nitrogen and phosphorus where they die",
+     "lit": []
+    },
+    {
+     "name": "Chironomidae",
+     "role": "Lake Myvatn midges fertilise the first 50 m of shore",
+     "lit": []
+    },
+    {
+     "name": "Clunio marinus",
+     "role": "emerges in millions on lunar and tidal timing",
+     "lit": []
+    },
+    {
+     "name": "high-flying insect migrants",
+     "role": "carry 100 t of nitrogen and 10 t of phosphorus a year over southern Britain",
+     "lit": []
+    }
+   ],
+   "form": "flyer",
+   "form_candidates": [],
+   "size": [],
+   "settings": [
+    "seas",
+    "low_sky",
+    "canopy"
+   ],
+   "realm": "sky",
+   "guilds": [
+    "carrier"
+   ],
+   "night": [
+    "night_active"
+   ],
+   "clock": [
+    "dusk_set",
+    "dawn_set"
+   ],
+   "modules": [
+    "M07",
+    "M11"
+   ],
+   "carries": [
+    "P",
+    "N",
+    "trace elements",
+    "K"
+   ],
+   "name_candidates": []
+  },
+  {
+   "id": "G14",
+   "kind": "group",
+   "working_name": "seabird-like colonial fliers",
+   "summary": "Vertebrate fliers that feed at sea and nest in colonies on land, whose droppings and bones carry nitrogen and phosphorus inland",
+   "status": "carried_forward",
+   "scope": "throughout",
+   "basis": "selected",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "H1, H2, H5; Selection 6"
+    }
+   ],
+   "parent": null,
+   "anchor": "Aves",
+   "degree": "species",
+   "chassis": [
+    "seabirds (Aves)"
+   ],
+   "references": [
+    {
+     "name": "seabird colonies",
+     "role": "receive 591 Gg of nitrogen and 99 Gg of phosphorus a year in droppings",
+     "lit": []
+    },
+    {
+     "name": "Spitsbergen colonies",
+     "role": "guano at a median of 0.3-0.4 g per m2 a day, dropping off within 50-300 m",
+     "lit": []
+    }
+   ],
+   "form": "flyer",
+   "form_candidates": [],
+   "size": [],
+   "settings": [
+    "seas",
+    "low_sky",
+    "ground",
+    "canopy"
+   ],
+   "realm": "sky",
+   "guilds": [
+    "carrier"
+   ],
+   "night": [
+    "undetermined"
+   ],
+   "clock": [
+    "undetermined"
+   ],
+   "modules": [
+    "M12"
+   ],
+   "carries": [
+    "N",
+    "P"
+   ],
+   "name_candidates": []
+  },
+  {
+   "id": "G15",
+   "kind": "group",
+   "working_name": "dusk followers",
+   "summary": "Animals that fly west at dusk's own pace, staying at dusk to meet the fruit fall as it happens",
+   "status": "carried_forward",
+   "scope": "in_places",
+   "basis": "selected",
+   "tests": [],
+   "notes": "Dusk crosses the equator at 15.4 km/h (cycle block).",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "E6, H3; In places"
+    }
+   ],
+   "parent": null,
+   "anchor": "Animalia",
+   "degree": "species",
+   "chassis": [
+    "small birds (Aves)",
+    "moths (Lepidoptera)"
+   ],
+   "references": [
+    {
+     "name": "small birds",
+     "role": "can keep pace with dusk at the equator",
+     "lit": []
+    },
+    {
+     "name": "moths",
+     "role": "keep pace only near the poles or with the wind",
+     "lit": []
+    }
+   ],
+   "form": "flyer",
+   "form_candidates": [],
+   "size": [],
+   "settings": [
+    "low_sky",
+    "canopy"
+   ],
+   "realm": "sky",
+   "guilds": [
+    "fruit_eater"
+   ],
+   "night": [
+    "terminator_following"
+   ],
+   "clock": [
+    "dusk_set"
+   ],
+   "modules": [],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G16",
+   "kind": "group",
+   "working_name": "evergreen idlers",
+   "summary": "Evergreen trees and shrubs that keep their leaves through the 354-hour night, store its carbon in wood and roots, idle on their own carbon balance and use the long twilight",
+   "status": "carried_forward",
+   "scope": "throughout",
+   "basis": "selected",
+   "tests": [
+    "leaves that survive about 240 dark hours, and metabolism that idles and restarts (B5)"
+   ],
+   "notes": "Idling at a quarter of daytime upkeep cuts the night store from 46 to 10 g C per m2.",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "B1, B2, C3, D1, F2; Selection 1"
+    },
+    {
+     "path": "biosphere/README.md",
+     "at": "Canopy photosynthesis"
+    },
+    {
+     "path": "biosphere/ecology/literature.md",
+     "at": "The long day and night"
+    }
+   ],
+   "parent": null,
+   "anchor": "Tracheophyta",
+   "degree": "species",
+   "chassis": [
+    "seed plants"
+   ],
+   "references": [
+    {
+     "name": "Arabidopsis thaliana",
+     "role": "the starch timer, the energy sensors SnRK1 and TOR, and whole-plant darkening",
+     "lit": []
+    },
+    {
+     "name": "evergreen trees under polar winters",
+     "role": "shedding a canopy costs more carbon than evergreen respiration through polar winters",
+     "lit": []
+    }
+   ],
+   "form": "tree",
+   "form_candidates": [],
+   "size": [],
+   "settings": [
+    "canopy",
+    "ground"
+   ],
+   "realm": "land",
+   "guilds": [
+    "producer"
+   ],
+   "night": [
+    "store",
+    "idle",
+    "twilight"
+   ],
+   "clock": [
+    "carbon_cued",
+    "dusk_set",
+    "two_clocks"
+   ],
+   "modules": [
+    "M01",
+    "M02",
+    "M03",
+    "M04",
+    "M05",
+    "M15",
+    "M16",
+    "M17"
+   ],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G17",
+   "kind": "group",
+   "working_name": "day-fruit plants",
+   "summary": "Plants carrying the day-fruit program: fruit set at sunrise and ripe at sunset, grown on the daylight surplus without touching the night's store",
+   "status": "carried_forward",
+   "scope": "throughout",
+   "basis": "selected",
+   "tests": [
+    "a large fruit's program compressed to one lunar day (D2)"
+   ],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "D2-D4; Selection 3"
+    },
+    {
+     "path": "biosphere/README.md",
+     "at": "Canopy photosynthesis"
+    }
+   ],
+   "parent": null,
+   "anchor": "Angiospermae",
+   "degree": "species",
+   "chassis": [
+    "flowering plants"
+   ],
+   "references": [
+    {
+     "name": "Cucurbitaceae",
+     "role": "watermelon, giant pumpkin and cucumber as the fruit model's references",
+     "lit": []
+    }
+   ],
+   "form": null,
+   "form_candidates": [
+    "vine",
+    "tree"
+   ],
+   "size": [],
+   "settings": [
+    "ground",
+    "canopy"
+   ],
+   "realm": "land",
+   "guilds": [
+    "producer"
+   ],
+   "night": [
+    "store",
+    "idle"
+   ],
+   "clock": [
+    "dawn_set",
+    "carbon_cued"
+   ],
+   "modules": [
+    "M06",
+    "M01",
+    "M02"
+   ],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G18",
+   "kind": "subgroup",
+   "working_name": "day-fruit crops",
+   "summary": "Farm plants putting 50-60% of their new tissue carbon into day fruit: 3.1-3.7 kg per m2 every lunar cycle at the equator, 51% more than the same stand on Earth",
+   "status": "carried_forward",
+   "scope": "in_places",
+   "basis": "selected",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "D3; Selection 3"
+    },
+    {
+     "path": "biosphere/README.md",
+     "at": "Canopy photosynthesis"
+    }
+   ],
+   "parent": "G17",
+   "anchor": "Cucurbitaceae",
+   "degree": "line",
+   "chassis": [
+    "cucurbits"
+   ],
+   "references": [
+    {
+     "name": "Citrullus lanatus",
+     "role": "watermelon",
+     "lit": []
+    },
+    {
+     "name": "Cucurbita maxima",
+     "role": "giant pumpkin",
+     "lit": []
+    },
+    {
+     "name": "Cucumis sativus",
+     "role": "cucumber",
+     "lit": []
+    }
+   ],
+   "form": "vine",
+   "form_candidates": [],
+   "size": [],
+   "settings": [
+    "ground"
+   ],
+   "realm": "land",
+   "guilds": [
+    "producer"
+   ],
+   "night": [
+    "store",
+    "idle"
+   ],
+   "clock": [
+    "dawn_set",
+    "carbon_cued"
+   ],
+   "modules": [
+    "M16"
+   ],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G19",
+   "kind": "subgroup",
+   "working_name": "day-fruit trees",
+   "summary": "Forest trees that put about 30% of their new tissue into day fruit, which falls at dusk and feeds the night: 116 g of sugar per m2 each cycle, about what the plants burn in the dark",
+   "status": "carried_forward",
+   "scope": "throughout",
+   "basis": "selected",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "E1, F2"
+    }
+   ],
+   "parent": "G17",
+   "anchor": "Angiospermae",
+   "degree": "species",
+   "chassis": [
+    "flowering trees"
+   ],
+   "references": [],
+   "form": "tree",
+   "form_candidates": [],
+   "size": [],
+   "settings": [
+    "canopy"
+   ],
+   "realm": "land",
+   "guilds": [
+    "producer"
+   ],
+   "night": [
+    "store",
+    "idle",
+    "twilight"
+   ],
+   "clock": [
+    "dawn_set",
+    "dusk_set"
+   ],
+   "modules": [],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G20",
+   "kind": "group",
+   "working_name": "farm crops on Earth programs",
+   "summary": "Earth crops kept on today's programs on farms: fruit picked young within one lunar day, and cultivars that tolerate continuous light given daily cues",
+   "status": "carried_forward",
+   "scope": "in_places",
+   "basis": "selected",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "C1, D5; In places"
+    }
+   ],
+   "parent": null,
+   "anchor": "Angiospermae",
+   "degree": "line",
+   "chassis": [
+    "crop species"
+   ],
+   "references": [],
+   "form": null,
+   "form_candidates": [
+    "vine",
+    "herb"
+   ],
+   "size": [],
+   "settings": [
+    "ground"
+   ],
+   "realm": "land",
+   "guilds": [
+    "producer"
+   ],
+   "night": [
+    "undetermined"
+   ],
+   "clock": [
+    "earth_clock_with_cues"
+   ],
+   "modules": [],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G21",
+   "kind": "subgroup",
+   "working_name": "fruit picked young",
+   "summary": "Crops whose fruit is picked a few days to two weeks after flowering, inside one lunar day on today's programs",
+   "status": "carried_forward",
+   "scope": "in_places",
+   "basis": "selected",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "D5"
+    }
+   ],
+   "parent": "G20",
+   "anchor": "Cucurbitaceae",
+   "degree": "line",
+   "chassis": [
+    "cucurbits"
+   ],
+   "references": [
+    {
+     "name": "Cucurbita pepo",
+     "role": "zucchini, picked a few days after flowering",
+     "lit": []
+    },
+    {
+     "name": "Cucumis sativus",
+     "role": "cucumber, picked within about two weeks",
+     "lit": []
+    }
+   ],
+   "form": "vine",
+   "form_candidates": [],
+   "size": [],
+   "settings": [
+    "ground"
+   ],
+   "realm": "land",
+   "guilds": [
+    "producer"
+   ],
+   "night": [
+    "undetermined"
+   ],
+   "clock": [
+    "undetermined"
+   ],
+   "modules": [],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G22",
+   "kind": "subgroup",
+   "working_name": "continuous-light tomatoes",
+   "summary": "Tomatoes carrying a wild tomato's tolerance of continuous light, grown with daily cues",
+   "status": "carried_forward",
+   "scope": "in_places",
+   "basis": "selected",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "C1"
+    }
+   ],
+   "parent": "G20",
+   "anchor": "Solanum lycopersicum",
+   "degree": "line",
+   "chassis": [
+    "tomato"
+   ],
+   "references": [
+    {
+     "name": "Solanum lycopersicum",
+     "role": "a wild tomato's allele of CAB-13 gives tolerance",
+     "lit": []
+    }
+   ],
+   "form": "herb",
+   "form_candidates": [],
+   "size": [],
+   "settings": [
+    "ground"
+   ],
+   "realm": "land",
+   "guilds": [
+    "producer"
+   ],
+   "night": [
+    "undetermined"
+   ],
+   "clock": [
+    "earth_clock_with_cues"
+   ],
+   "modules": [
+    "M08"
+   ],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G23",
+   "kind": "group",
+   "working_name": "storage-organ plants",
+   "summary": "Plants of the plains that carry the night in bulbs, corms and tubers, without wood",
+   "status": "carried_forward",
+   "scope": "throughout",
+   "basis": "selected",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "F1; Selection 4"
+    }
+   ],
+   "parent": null,
+   "anchor": "Angiospermae",
+   "degree": "species",
+   "chassis": [
+    "bulbous and tuberous flowering plants"
+   ],
+   "references": [
+    {
+     "name": "Cape geophytes",
+     "role": "about 2,100 species of bulbs, corms and tubers, most dormant through the dry summer",
+     "lit": []
+    }
+   ],
+   "form": "geophyte",
+   "form_candidates": [],
+   "size": [],
+   "settings": [
+    "ground"
+   ],
+   "realm": "land",
+   "guilds": [
+    "producer"
+   ],
+   "night": [
+    "store",
+    "idle"
+   ],
+   "clock": [
+    "carbon_cued"
+   ],
+   "modules": [
+    "M01"
+   ],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G24",
+   "kind": "group",
+   "working_name": "dusk-seeding grasses and forbs",
+   "summary": "Perennial grasses and forbs of the plains that set seed at dusk, followed by grazers and seed-eaters",
+   "status": "carried_forward",
+   "scope": "throughout",
+   "basis": "selected",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "F1; Selection 4"
+    }
+   ],
+   "parent": null,
+   "anchor": "Angiospermae",
+   "degree": "species",
+   "chassis": [
+    "grasses",
+    "forbs"
+   ],
+   "references": [
+    {
+     "name": "perennial grasses and forbs",
+     "role": "the plains' herbs",
+     "lit": []
+    }
+   ],
+   "form": "herb",
+   "form_candidates": [],
+   "size": [],
+   "settings": [
+    "ground"
+   ],
+   "realm": "land",
+   "guilds": [
+    "producer"
+   ],
+   "night": [
+    "store",
+    "idle"
+   ],
+   "clock": [
+    "dusk_set"
+   ],
+   "modules": [],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G25",
+   "kind": "group",
+   "working_name": "C4 plants of dry ground",
+   "summary": "C4 plants on dry or hot ground, where their water economy earns its place",
+   "status": "carried_forward",
+   "scope": "in_places",
+   "basis": "selected",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "A3; In places"
+    }
+   ],
+   "parent": null,
+   "anchor": "Angiospermae",
+   "degree": "species",
+   "chassis": [
+    "C4 grasses and other C4 lineages"
+   ],
+   "references": [
+    {
+     "name": "C4 plants",
+     "role": "the Moon's 48.6 Pa of CO2 moves the temperature where a C4 leaf overtakes a C3 leaf 3.6 degrees C higher",
+     "lit": []
+    }
+   ],
+   "form": "herb",
+   "form_candidates": [],
+   "size": [],
+   "settings": [
+    "ground"
+   ],
+   "realm": "land",
+   "guilds": [
+    "producer"
+   ],
+   "night": [
+    "store",
+    "idle"
+   ],
+   "clock": [
+    "undetermined"
+   ],
+   "modules": [],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G26",
+   "kind": "group",
+   "working_name": "trap plants",
+   "summary": "Carnivorous plants of wet ground, poor sands and the canopy, waiting at the forest end of the migrant cycle",
+   "status": "carried_forward",
+   "scope": "in_places",
+   "basis": "selected",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "E4; Selection 6; In places"
+    }
+   ],
+   "parent": null,
+   "anchor": "Caryophyllales",
+   "degree": "species",
+   "chassis": [
+    "pitcher plants (Nepenthes)",
+    "sundews (Drosera)"
+   ],
+   "references": [
+    {
+     "name": "Nepenthes mirabilis",
+     "role": "takes about 62% of its nitrogen from prey",
+     "lit": []
+    },
+    {
+     "name": "Drosera",
+     "role": "sundews take about half their nitrogen from prey",
+     "lit": []
+    }
+   ],
+   "form": "epiphyte",
+   "form_candidates": [
+    "herb"
+   ],
+   "size": [],
+   "settings": [
+    "canopy",
+    "lakes_and_wetlands",
+    "ground"
+   ],
+   "realm": "land",
+   "guilds": [
+    "producer",
+    "predator",
+    "receiver"
+   ],
+   "night": [
+    "store",
+    "idle"
+   ],
+   "clock": [
+    "carbon_cued"
+   ],
+   "modules": [
+    "M01"
+   ],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G27",
+   "kind": "group",
+   "working_name": "droppings-collecting plants",
+   "summary": "Plants that take nitrogen and phosphorus from the droppings of visiting animals without trapping them, at roosts, lekking sites and feeding places",
+   "status": "carried_forward",
+   "scope": "throughout",
+   "basis": "selected",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "E5, H5; Selection 6"
+    }
+   ],
+   "parent": null,
+   "anchor": "Nepenthes",
+   "degree": "species",
+   "chassis": [
+    "pitcher plants (Nepenthes)"
+   ],
+   "references": [
+    {
+     "name": "Nepenthes lowii",
+     "role": "feeds tree shrews and takes 57-100% of its leaf nitrogen from their droppings",
+     "lit": []
+    },
+    {
+     "name": "Nepenthes hemsleyana",
+     "role": "houses woolly bats and takes 34% from theirs",
+     "lit": []
+    }
+   ],
+   "form": "epiphyte",
+   "form_candidates": [],
+   "size": [],
+   "settings": [
+    "canopy"
+   ],
+   "realm": "land",
+   "guilds": [
+    "producer",
+    "receiver"
+   ],
+   "night": [
+    "store",
+    "idle"
+   ],
+   "clock": [
+    "carbon_cued"
+   ],
+   "modules": [],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G28",
+   "kind": "group",
+   "working_name": "glowing lures",
+   "summary": "Plants or fungi that glow through the first nights after dusk and draw insects, to the fruit fall or into traps",
+   "status": "test_first",
+   "scope": "throughout",
+   "basis": "selected",
+   "tests": [
+    "glowing lures that last through the first nights, with a catch the migrants can bear (E3)"
+   ],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "E3; Test first"
+    }
+   ],
+   "parent": null,
+   "anchor": "Eukaryota",
+   "degree": "species",
+   "chassis": [
+    "flowering plants carrying the fungal pathway",
+    "luminous fungi"
+   ],
+   "references": [
+    {
+     "name": "Neonothopanus gardneri",
+     "role": "a luminous fungus; glowing artificial mushrooms caught more insects than dark ones",
+     "lit": []
+    },
+    {
+     "name": "Nicotiana tabacum",
+     "role": "engineered to glow with the fungal pathway",
+     "lit": []
+    },
+    {
+     "name": "glowworm larvae",
+     "role": "catch flies on sticky threads beneath their light",
+     "lit": []
+    }
+   ],
+   "form": null,
+   "form_candidates": [
+    "herb",
+    "epiphyte",
+    "fungal"
+   ],
+   "size": [],
+   "settings": [
+    "canopy",
+    "ground"
+   ],
+   "realm": "land",
+   "guilds": [
+    "lure",
+    "receiver"
+   ],
+   "night": [
+    "night_active"
+   ],
+   "clock": [
+    "dusk_set"
+   ],
+   "modules": [
+    "M09"
+   ],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G29",
+   "kind": "group",
+   "working_name": "megaforest emergents",
+   "summary": "Trees 100-500 m tall, screened so far for static wind loads in single trees and a 49-tree patch; root grafts are an untested hypothesis",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "idea",
+   "tests": [],
+   "notes": "The forest studies use a leaf area index of 22 in air at 288 K; the canopy model puts the optimum near 6.",
+   "sources": [
+    {
+     "path": "research/studies/megaforest_wind/README.md",
+     "at": "Static plant mechanics"
+    },
+    {
+     "path": "research/studies/forest_patch/README.md",
+     "at": "Shared geometry and budget controls"
+    },
+    {
+     "path": "biosphere/README.md",
+     "at": "Remaining biological work"
+    },
+    {
+     "path": "biosphere/ecology/state.md",
+     "at": "Statements elsewhere that need correcting, item 3"
+    }
+   ],
+   "parent": null,
+   "anchor": "Tracheophyta",
+   "degree": "species",
+   "chassis": [
+    "seed plants"
+   ],
+   "references": [
+    {
+     "name": "Sequoia sempervirens",
+     "role": "coast redwood, the tallest known tree, with a hydraulic maximum of 122-130 m on Earth",
+     "lit": [
+      "koch_2004"
+     ]
+    }
+   ],
+   "form": "tree",
+   "form_candidates": [],
+   "size": [
+    "mega"
+   ],
+   "settings": [
+    "canopy",
+    "ground"
+   ],
+   "realm": "land",
+   "guilds": [
+    "producer"
+   ],
+   "night": [
+    "store",
+    "idle"
+   ],
+   "clock": [
+    "carbon_cued"
+   ],
+   "modules": [],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G30",
+   "kind": "group",
+   "working_name": "basalt pioneers",
+   "summary": "Nitrogen fixers, chemolithotrophs and cyanobacteria that first colonise fresh basalt and weather it",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "idea",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "biosphere/ecology/README.md",
+     "at": "finding 13"
+    },
+    {
+     "path": "biosphere/ecology/literature.md",
+     "at": "Ecosystems on fresh basalt"
+    }
+   ],
+   "parent": null,
+   "anchor": "Bacteria",
+   "degree": "species",
+   "chassis": [
+    "bacteria and cyanobacteria"
+   ],
+   "references": [
+    {
+     "name": "Icelandic basalt pioneers",
+     "role": "the first colonists were nitrogen fixers and chemolithotrophs",
+     "lit": []
+    },
+    {
+     "name": "cyanobacteria",
+     "role": "release basalt's Ca, Mg, Si and K over five times faster than abiotic leaching",
+     "lit": []
+    },
+    {
+     "name": "biological soil crusts",
+     "role": "fix about 49 Tg of nitrogen a year, nearly half of Earth's land fixation",
+     "lit": []
+    }
+   ],
+   "form": "crust",
+   "form_candidates": [],
+   "size": [],
+   "settings": [
+    "ground"
+   ],
+   "realm": "land",
+   "guilds": [
+    "fixer",
+    "soil_builder",
+    "producer"
+   ],
+   "night": [
+    "idle",
+    "dormant"
+   ],
+   "clock": [
+    "undetermined"
+   ],
+   "modules": [
+    "M14"
+   ],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G31",
+   "kind": "group",
+   "working_name": "crust mosses",
+   "summary": "Moss mats that hold fresh ground and build soil",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "idea",
+   "tests": [],
+   "notes": "The order of introduction decides which state a region reaches.",
+   "sources": [
+    {
+     "path": "biosphere/ecology/README.md",
+     "at": "finding 13"
+    },
+    {
+     "path": "biosphere/ecology/literature.md",
+     "at": "Ecosystems on fresh basalt"
+    }
+   ],
+   "parent": null,
+   "anchor": "Bryophyta",
+   "degree": "species",
+   "chassis": [
+    "mosses"
+   ],
+   "references": [
+    {
+     "name": "Hekla moss mats",
+     "role": "a moss mat held Hekla's succession for 170-700 years",
+     "lit": []
+    }
+   ],
+   "form": "crust",
+   "form_candidates": [],
+   "size": [],
+   "settings": [
+    "ground"
+   ],
+   "realm": "land",
+   "guilds": [
+    "producer",
+    "soil_builder"
+   ],
+   "night": [
+    "idle"
+   ],
+   "clock": [
+    "undetermined"
+   ],
+   "modules": [],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G32",
+   "kind": "group",
+   "working_name": "night decomposers of the fruit fall",
+   "summary": "Yeasts and fungi that ferment and decompose the dusk fruit fall through the warm night",
+   "status": "carried_forward",
+   "scope": "throughout",
+   "basis": "selected",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "E1, F2; Selection 5"
+    }
+   ],
+   "parent": null,
+   "anchor": "Fungi",
+   "degree": "species",
+   "chassis": [
+    "yeasts",
+    "mycelial fungi"
+   ],
+   "references": [
+    {
+     "name": "fruit yeasts",
+     "role": "their volatiles draw fruit flies, which need the yeast to develop",
+     "lit": []
+    }
+   ],
+   "form": "fungal",
+   "form_candidates": [],
+   "size": [],
+   "settings": [
+    "ground"
+   ],
+   "realm": "land",
+   "guilds": [
+    "decomposer"
+   ],
+   "night": [
+    "night_active"
+   ],
+   "clock": [
+    "undetermined"
+   ],
+   "modules": [],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G33",
+   "kind": "group",
+   "working_name": "night insects of the fruit fall",
+   "summary": "Insects drawn to the fermenting fruit fall in the first nights after dusk",
+   "status": "carried_forward",
+   "scope": "throughout",
+   "basis": "selected",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "E1, F2; Selection 5"
+    }
+   ],
+   "parent": null,
+   "anchor": "Insecta",
+   "degree": "species",
+   "chassis": [
+    "flies (Diptera)"
+   ],
+   "references": [
+    {
+     "name": "fruit flies",
+     "role": "drawn to fermenting fruit by its yeasts' volatiles",
+     "lit": []
+    }
+   ],
+   "form": "flyer",
+   "form_candidates": [],
+   "size": [],
+   "settings": [
+    "ground",
+    "canopy"
+   ],
+   "realm": "land",
+   "guilds": [
+    "fruit_eater",
+    "decomposer"
+   ],
+   "night": [
+    "night_active"
+   ],
+   "clock": [
+    "dusk_set"
+   ],
+   "modules": [
+    "M11"
+   ],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G34",
+   "kind": "group",
+   "working_name": "fruit-eaters",
+   "summary": "Animals that eat the dusk fruit fall",
+   "status": "carried_forward",
+   "scope": "throughout",
+   "basis": "selected",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "F2"
+    }
+   ],
+   "parent": null,
+   "anchor": "Animalia",
+   "degree": "species",
+   "chassis": [
+    "undetermined"
+   ],
+   "references": [],
+   "form": null,
+   "form_candidates": [
+    "ground_animal",
+    "flyer"
+   ],
+   "size": [],
+   "settings": [
+    "canopy",
+    "ground"
+   ],
+   "realm": "land",
+   "guilds": [
+    "fruit_eater"
+   ],
+   "night": [
+    "night_active"
+   ],
+   "clock": [
+    "undetermined"
+   ],
+   "modules": [
+    "M11"
+   ],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G35",
+   "kind": "group",
+   "working_name": "grazers and seed-eaters of the plains",
+   "summary": "Animals that follow the plains' dusk seeding",
+   "status": "carried_forward",
+   "scope": "throughout",
+   "basis": "selected",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "F1"
+    }
+   ],
+   "parent": null,
+   "anchor": "Animalia",
+   "degree": "species",
+   "chassis": [
+    "undetermined"
+   ],
+   "references": [],
+   "form": "ground_animal",
+   "form_candidates": [],
+   "size": [],
+   "settings": [
+    "ground"
+   ],
+   "realm": "land",
+   "guilds": [
+    "grazer",
+    "seed_eater"
+   ],
+   "night": [
+    "undetermined"
+   ],
+   "clock": [
+    "undetermined"
+   ],
+   "modules": [],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G36",
+   "kind": "group",
+   "working_name": "pollinators of the violet sky",
+   "summary": "Pollinators whose vision and flowers signal at 350-400 nm or in the violet and visible, serving broad landscapes",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "requirement",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "biosphere/ecology/README.md",
+     "at": "finding 2"
+    },
+    {
+     "path": "biosphere/ecology/literature.md",
+     "at": "Light"
+    },
+    {
+     "path": "archive/july_2026_knowledge_bundle/terluna_moon_terraforming_bundle/06_BIOSPHERE_AND_EVOLUTIONARY_DESIGN.md",
+     "at": "section 11"
+    }
+   ],
+   "parent": null,
+   "anchor": "Insecta",
+   "degree": "species",
+   "chassis": [
+    "bees"
+   ],
+   "references": [
+    {
+     "name": "Apis mellifera",
+     "role": "UV receptor near 344 nm catches 7% of Earth's light under the shield",
+     "lit": []
+    },
+    {
+     "name": "insects that orient by polarized moonlight",
+     "role": "navigation on the light left at night",
+     "lit": []
+    }
+   ],
+   "form": "flyer",
+   "form_candidates": [],
+   "size": [],
+   "settings": [
+    "canopy",
+    "ground",
+    "low_sky"
+   ],
+   "realm": "land",
+   "guilds": [
+    "pollinator"
+   ],
+   "night": [
+    "undetermined"
+   ],
+   "clock": [
+    "undetermined"
+   ],
+   "modules": [
+    "M10",
+    "M11"
+   ],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G37",
+   "kind": "group",
+   "working_name": "lake insects",
+   "summary": "Insects whose larvae grow in the lakes and whose adults carry nutrients onto the shore",
+   "status": "carried_forward",
+   "scope": "in_places",
+   "basis": "selected",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "F3, H2; In places"
+    }
+   ],
+   "parent": null,
+   "anchor": "Diptera",
+   "degree": "species",
+   "chassis": [
+    "midges (Chironomidae)"
+   ],
+   "references": [
+    {
+     "name": "Chironomidae",
+     "role": "Lake Myvatn midges put 1 kg of phosphorus per hectare on the first 50 m of shore in a high year",
+     "lit": []
+    }
+   ],
+   "form": "flyer",
+   "form_candidates": [],
+   "size": [],
+   "settings": [
+    "lakes_and_wetlands",
+    "ground"
+   ],
+   "realm": "land",
+   "guilds": [
+    "carrier"
+   ],
+   "night": [
+    "undetermined"
+   ],
+   "clock": [
+    "undetermined"
+   ],
+   "modules": [],
+   "carries": [
+    "P",
+    "N"
+   ],
+   "name_candidates": []
+  },
+  {
+   "id": "G38",
+   "kind": "group",
+   "working_name": "sea phytoplankton",
+   "summary": "The phytoplankton of the living seas by kind of water: the nutrient-poor open sea, productive coasts and river mouths, greenest at dusk after the 15-day day",
+   "status": "carried_forward",
+   "scope": "throughout",
+   "basis": "decision",
+   "tests": [],
+   "notes": "Design guesses: 0.1, 2 and 5 mg/m3 of chlorophyll, twice as much at dusk as at dawn. Calcifiers cannot build until weathering supplies alkalinity if the delivered water is fresh.",
+   "sources": [
+    {
+     "path": "research/decisions.md",
+     "at": "Life and people"
+    },
+    {
+     "path": "biosphere/living_water/waters.json",
+     "at": ""
+    },
+    {
+     "path": "research/studies/sea_appearance/README.md",
+     "at": "The waters' colour"
+    },
+    {
+     "path": "biosphere/ecology/README.md",
+     "at": "finding 17"
+    }
+   ],
+   "parent": null,
+   "anchor": "Life",
+   "degree": "species",
+   "chassis": [
+    "cyanobacteria",
+    "eukaryotic algae"
+   ],
+   "references": [
+    {
+     "name": "Earth's ocean phytoplankton",
+     "role": "chlorophyll 0.02-0.3 mg/m3 in open oceans and 1-10 mg/m3 on shelves and upwelling coasts, the design guesses' basis",
+     "lit": []
+    }
+   ],
+   "form": "plankton",
+   "form_candidates": [],
+   "size": [
+    "pico",
+    "nano",
+    "micro"
+   ],
+   "settings": [
+    "seas"
+   ],
+   "realm": "water",
+   "guilds": [
+    "producer"
+   ],
+   "night": [
+    "undetermined"
+   ],
+   "clock": [
+    "undetermined"
+   ],
+   "modules": [],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G39",
+   "kind": "group",
+   "working_name": "dark-night luminous plankton",
+   "summary": "Plankton that glow in the seas where the night grows dark",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "decision",
+   "tests": [],
+   "notes": "The decision admits bioluminescence where the lunar-cycle ecology supports it; no value is computed yet.",
+   "sources": [
+    {
+     "path": "research/decisions.md",
+     "at": "Life and people"
+    },
+    {
+     "path": "research/studies/sea_appearance/README.md",
+     "at": "Decisions"
+    }
+   ],
+   "parent": null,
+   "anchor": "Life",
+   "degree": "species",
+   "chassis": [
+    "undetermined"
+   ],
+   "references": [
+    {
+     "name": "luminous marine organisms",
+     "role": "bioluminescence evolved many times in the sea, from bacteria to fish",
+     "lit": [
+      "haddock_2010"
+     ]
+    }
+   ],
+   "form": "plankton",
+   "form_candidates": [],
+   "size": [],
+   "settings": [
+    "seas"
+   ],
+   "realm": "water",
+   "guilds": [
+    "undetermined"
+   ],
+   "night": [
+    "night_active"
+   ],
+   "clock": [
+    "undetermined"
+   ],
+   "modules": [],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G40",
+   "kind": "group",
+   "working_name": "sulfur- and iodine-releasing seaweeds",
+   "summary": "Seaweeds and plankton that release dimethyl sulfide and iodine, returning sulfur and iodine to the land through the air",
+   "status": "carried_forward",
+   "scope": "throughout",
+   "basis": "selected",
+   "tests": [],
+   "notes": "Seawater at 1-10 nM of dimethyl sulfide would hold the air near 2-17 ppb, around the human odour threshold.",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "H8; Selection 6"
+    },
+    {
+     "path": "biosphere/ecology/README.md",
+     "at": "finding 8"
+    }
+   ],
+   "parent": null,
+   "anchor": "Eukaryota",
+   "degree": "species",
+   "chassis": [
+    "brown and red seaweeds",
+    "DMS-producing plankton"
+   ],
+   "references": [
+    {
+     "name": "Earth's sea plankton and seaweeds",
+     "role": "the ocean releases 28 (18-34) Tg of sulfur a year as dimethyl sulfide, and iodine as methyl iodide and inorganic iodine",
+     "lit": []
+    }
+   ],
+   "form": "macroalga",
+   "form_candidates": [],
+   "size": [],
+   "settings": [
+    "seas"
+   ],
+   "realm": "water",
+   "guilds": [
+    "producer",
+    "carrier"
+   ],
+   "night": [
+    "undetermined"
+   ],
+   "clock": [
+    "undetermined"
+   ],
+   "modules": [],
+   "carries": [
+    "S",
+    "I"
+   ],
+   "name_candidates": []
+  },
+  {
+   "id": "G41",
+   "kind": "group",
+   "working_name": "sea grazers",
+   "summary": "Zooplankton that graze the phytoplankton through the 15-day night, leaving about half the biomass at dawn",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "idea",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "biosphere/living_water/waters.json",
+     "at": ""
+    }
+   ],
+   "parent": null,
+   "anchor": "Eukaryota",
+   "degree": "species",
+   "chassis": [
+    "zooplankton"
+   ],
+   "references": [],
+   "form": "plankton",
+   "form_candidates": [],
+   "size": [],
+   "settings": [
+    "seas"
+   ],
+   "realm": "water",
+   "guilds": [
+    "grazer"
+   ],
+   "night": [
+    "night_active"
+   ],
+   "clock": [
+    "undetermined"
+   ],
+   "modules": [],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G42",
+   "kind": "group",
+   "working_name": "run fish",
+   "summary": "Fish that grow at sea and run up the rivers to spawn and die, carrying the sea's nitrogen and phosphorus inland",
+   "status": "carried_forward",
+   "scope": "throughout",
+   "basis": "selected",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "H1, H2, H5; Selection 6"
+    }
+   ],
+   "parent": null,
+   "anchor": "Salmonidae",
+   "degree": "species",
+   "chassis": [
+    "salmon (Salmonidae)"
+   ],
+   "references": [
+    {
+     "name": "salmon",
+     "role": "trees along salmon streams take 22-24% of their leaf nitrogen from the fish",
+     "lit": []
+    }
+   ],
+   "form": "nekton",
+   "form_candidates": [],
+   "size": [],
+   "settings": [
+    "seas",
+    "rivers"
+   ],
+   "realm": "water",
+   "guilds": [
+    "carrier"
+   ],
+   "night": [
+    "undetermined"
+   ],
+   "clock": [
+    "undetermined"
+   ],
+   "modules": [
+    "M12"
+   ],
+   "carries": [
+    "N",
+    "P"
+   ],
+   "name_candidates": []
+  },
+  {
+   "id": "G43",
+   "kind": "group",
+   "working_name": "keepers of the air",
+   "summary": "Microbes of soils and waters that remove the gases the air cannot: under the shield the air holds no OH, so methane, N2O, hydrogen, carbon monoxide and ethylene leave through soils, waters and rain",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "requirement",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "biosphere/ecology/README.md",
+     "at": "findings 6-9"
+    },
+    {
+     "path": "biosphere/ecology/state.md",
+     "at": "What other lines assume of ecology"
+    }
+   ],
+   "parent": null,
+   "anchor": "Bacteria",
+   "degree": "species",
+   "chassis": [
+    "soil and water bacteria"
+   ],
+   "references": [],
+   "form": "microbe",
+   "form_candidates": [],
+   "size": [],
+   "settings": [
+    "ground",
+    "lakes_and_wetlands",
+    "seas"
+   ],
+   "realm": "land",
+   "guilds": [
+    "air_keeper"
+   ],
+   "night": [
+    "undetermined"
+   ],
+   "clock": [
+    "undetermined"
+   ],
+   "modules": [],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G44",
+   "kind": "subgroup",
+   "working_name": "methane oxidizers",
+   "summary": "Methane oxidizers in soils and waters, a requirement from the start: with soils the only sink, methane settles near 20 ppm at central rates",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "requirement",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "biosphere/ecology/README.md",
+     "at": "finding 6"
+    },
+    {
+     "path": "biosphere/ecology/literature.md",
+     "at": "Trace gases without OH"
+    }
+   ],
+   "parent": "G43",
+   "anchor": "Bacteria",
+   "degree": "species",
+   "chassis": [
+    "methanotrophic bacteria"
+   ],
+   "references": [
+    {
+     "name": "Earth's soils",
+     "role": "take up 30 (11-49) Tg of methane a year",
+     "lit": []
+    }
+   ],
+   "form": "microbe",
+   "form_candidates": [],
+   "size": [],
+   "settings": [
+    "ground",
+    "lakes_and_wetlands",
+    "seas"
+   ],
+   "realm": "land",
+   "guilds": [
+    "air_keeper"
+   ],
+   "night": [
+    "undetermined"
+   ],
+   "clock": [
+    "undetermined"
+   ],
+   "modules": [],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G45",
+   "kind": "subgroup",
+   "working_name": "complete denitrifiers",
+   "summary": "Denitrifiers whose pathway ends in N2, since N2O has no sink under the shield",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "requirement",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "biosphere/ecology/README.md",
+     "at": "finding 7"
+    }
+   ],
+   "parent": "G43",
+   "anchor": "Bacteria",
+   "degree": "species",
+   "chassis": [
+    "denitrifying bacteria"
+   ],
+   "references": [],
+   "form": "microbe",
+   "form_candidates": [],
+   "size": [],
+   "settings": [
+    "ground",
+    "lakes_and_wetlands",
+    "seas"
+   ],
+   "realm": "land",
+   "guilds": [
+    "air_keeper"
+   ],
+   "night": [
+    "undetermined"
+   ],
+   "clock": [
+    "undetermined"
+   ],
+   "modules": [
+    "M13"
+   ],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G46",
+   "kind": "subgroup",
+   "working_name": "trace-gas consumers of soils",
+   "summary": "Soil microbes that take up hydrogen, carbon monoxide and ethylene",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "requirement",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "biosphere/ecology/literature.md",
+     "at": "Trace gases without OH"
+    },
+    {
+     "path": "biosphere/ecology/people_and_land.md",
+     "at": "item 16"
+    }
+   ],
+   "parent": "G43",
+   "anchor": "Bacteria",
+   "degree": "species",
+   "chassis": [
+    "soil bacteria"
+   ],
+   "references": [
+    {
+     "name": "soil bacteria of 51 phyla",
+     "role": "carry high-affinity hydrogenases and remove about three-quarters of Earth's atmospheric hydrogen",
+     "lit": []
+    },
+    {
+     "name": "soils",
+     "role": "take 10-25% of the global carbon monoxide flux",
+     "lit": []
+    }
+   ],
+   "form": "microbe",
+   "form_candidates": [],
+   "size": [],
+   "settings": [
+    "ground"
+   ],
+   "realm": "land",
+   "guilds": [
+    "air_keeper"
+   ],
+   "night": [
+    "undetermined"
+   ],
+   "clock": [
+    "undetermined"
+   ],
+   "modules": [
+    "M17"
+   ],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G47",
+   "kind": "group",
+   "working_name": "nitrogen fixers",
+   "summary": "Free-living and symbiotic fixers that supply almost all the biomes' new nitrogen, since lightning gives at most 0.2%",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "requirement",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "biosphere/ecology/README.md",
+     "at": "finding 12"
+    },
+    {
+     "path": "biosphere/ecology/literature.md",
+     "at": "Nitrogen"
+    }
+   ],
+   "parent": null,
+   "anchor": "Bacteria",
+   "degree": "species",
+   "chassis": [
+    "diazotrophic bacteria",
+    "cyanobacteria"
+   ],
+   "references": [
+    {
+     "name": "free-living fixers",
+     "role": "molybdenum limits fixation in weathered tropical soils; fixers grow down to 5 mbar of N2",
+     "lit": []
+    }
+   ],
+   "form": "microbe",
+   "form_candidates": [],
+   "size": [],
+   "settings": [
+    "ground",
+    "seas"
+   ],
+   "realm": "land",
+   "guilds": [
+    "fixer"
+   ],
+   "night": [
+    "undetermined"
+   ],
+   "clock": [
+    "undetermined"
+   ],
+   "modules": [
+    "M14"
+   ],
+   "carries": [],
+   "name_candidates": []
+  }
+ ],
+ "communities": [
+  {
+   "id": "C01",
+   "kind": "community",
+   "working_name": "the sky archipelago",
+   "summary": "Floaters and the small communities in their retained-water pockets, drifting through the low sky, with the migrating flyers that roost on them",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "direction",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/floater_viability/README.md",
+     "at": "What a giant looks like; The limits, in brief"
+    },
+    {
+     "path": "research/studies/aerial_ecology/README.md",
+     "at": "The cycle and the community"
+    }
+   ],
+   "members": [
+    "G01",
+    "G02",
+    "G03",
+    "G04",
+    "G07",
+    "G08"
+   ],
+   "described_members": [
+    "microbes, algae, small grazers and decomposers in retained-water pockets",
+    "hydrogen-oxidising microbes lining the gas cells",
+    "migrating flyers that roost on floaters and bring phosphorus up"
+   ],
+   "settings": [
+    "low_sky",
+    "storm_layer"
+   ],
+   "realm": "sky"
+  },
+  {
+   "id": "C02",
+   "kind": "community",
+   "working_name": "cloud-water aeroplankton",
+   "summary": "Resident phototrophs and heterotrophs of cloud and fog water, with the transient pollen, spores and small animals the air carries",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "direction",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/aerial_ecology/README.md",
+     "at": "What the evidence supports"
+    },
+    {
+     "path": "biosphere/ecology/people_and_land.md",
+     "at": "item 3"
+    }
+   ],
+   "members": [
+    "G04",
+    "G05",
+    "G06",
+    "G07"
+   ],
+   "described_members": [],
+   "settings": [
+    "low_sky",
+    "storm_layer"
+   ],
+   "realm": "sky"
+  },
+  {
+   "id": "C03",
+   "kind": "community",
+   "working_name": "the films of the high air",
+   "summary": "Sparse films in the flight band and the high air",
+   "status": "carried_forward",
+   "scope": "throughout",
+   "basis": "decision",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/decisions.md",
+     "at": "Life and people"
+    }
+   ],
+   "members": [
+    "G10"
+   ],
+   "described_members": [],
+   "settings": [
+    "flight_band",
+    "high_air"
+   ],
+   "realm": "sky"
+  },
+  {
+   "id": "C04",
+   "kind": "community",
+   "working_name": "forests of wood and fruit",
+   "summary": "Evergreen forests whose wood holds the night's store and whose fruit feeds the night, with their trap plants, lures, fruit-eaters, decomposers and night insects",
+   "status": "carried_forward",
+   "scope": "throughout",
+   "basis": "selected",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "F2; Selection 4"
+    }
+   ],
+   "members": [
+    "G16",
+    "G19",
+    "G26",
+    "G27",
+    "G28",
+    "G32",
+    "G33",
+    "G34"
+   ],
+   "described_members": [],
+   "settings": [
+    "canopy",
+    "ground"
+   ],
+   "realm": "land"
+  },
+  {
+   "id": "C05",
+   "kind": "community",
+   "working_name": "plains of storage organs",
+   "summary": "Plains of bulbs, corms and tubers, with grasses and forbs seeding at dusk and the grazers and seed-eaters that follow",
+   "status": "carried_forward",
+   "scope": "throughout",
+   "basis": "selected",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "F1; Selection 4"
+    }
+   ],
+   "members": [
+    "G23",
+    "G24",
+    "G35"
+   ],
+   "described_members": [],
+   "settings": [
+    "ground"
+   ],
+   "realm": "land"
+  },
+  {
+   "id": "C06",
+   "kind": "community",
+   "working_name": "wet margins",
+   "summary": "Lake shores and wetlands, where carnivorous plants and lake insects meet",
+   "status": "carried_forward",
+   "scope": "in_places",
+   "basis": "selected",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "F3; Selection 4"
+    }
+   ],
+   "members": [
+    "G26",
+    "G37"
+   ],
+   "described_members": [],
+   "settings": [
+    "lakes_and_wetlands",
+    "ground"
+   ],
+   "realm": "land"
+  },
+  {
+   "id": "C07",
+   "kind": "community",
+   "working_name": "the dusk fruit fall and the night food web",
+   "summary": "The dusk fruit fall feeding yeasts, fungi, insects, fruit-eaters and arriving migrants through the warm night",
+   "status": "carried_forward",
+   "scope": "throughout",
+   "basis": "selected",
+   "tests": [
+    "CO2 gathering under still night air near the ground"
+   ],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "E1, E2; Selection 5"
+    }
+   ],
+   "members": [
+    "G19",
+    "G32",
+    "G33",
+    "G34",
+    "G28",
+    "G13",
+    "G15"
+   ],
+   "described_members": [],
+   "settings": [
+    "canopy",
+    "ground"
+   ],
+   "realm": "land"
+  },
+  {
+   "id": "C08",
+   "kind": "community",
+   "working_name": "the sea-forest return path",
+   "summary": "Carriers grown at sea that land in the forests, and the plants that wait for them: biology's share of the rock cycle's missing return limb",
+   "status": "carried_forward",
+   "scope": "throughout",
+   "basis": "selected",
+   "tests": [
+    "the conveyor's size (H4)",
+    "a land, lake and sea budget of every rock-derived element"
+   ],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "G1-G4, H1-H10; Selection 6"
+    }
+   ],
+   "members": [
+    "G13",
+    "G14",
+    "G42",
+    "G26",
+    "G27",
+    "G28",
+    "G40"
+   ],
+   "described_members": [],
+   "settings": [
+    "seas",
+    "canopy",
+    "rivers"
+   ],
+   "realm": "land"
+  },
+  {
+   "id": "C09",
+   "kind": "community",
+   "working_name": "farms of the day fruit",
+   "summary": "Farms of day-fruit crops and Earth crops on today's programs",
+   "status": "carried_forward",
+   "scope": "in_places",
+   "basis": "selected",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/lunar_cycle_ecology/README.md",
+     "at": "C1, D3, D5"
+    },
+    {
+     "path": "biosphere/ecology/people_and_land.md",
+     "at": "item 11"
+    }
+   ],
+   "members": [
+    "G18",
+    "G21",
+    "G22"
+   ],
+   "described_members": [],
+   "settings": [
+    "ground"
+   ],
+   "realm": "land"
+  },
+  {
+   "id": "C10",
+   "kind": "community",
+   "working_name": "megaforests",
+   "summary": "Forests of 100-500 m trees, whose crowns can nurse young floaters",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "idea",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/megaforest_wind/README.md",
+     "at": ""
+    },
+    {
+     "path": "research/studies/forest_patch/README.md",
+     "at": ""
+    },
+    {
+     "path": "biosphere/README.md",
+     "at": ""
+    },
+    {
+     "path": "research/studies/floater_viability/growth.md",
+     "at": "The canopy nursery"
+    }
+   ],
+   "members": [
+    "G29",
+    "G02"
+   ],
+   "described_members": [
+    "young floaters of 40-60 m fed by host sap in the crowns"
+   ],
+   "settings": [
+    "canopy",
+    "ground"
+   ],
+   "realm": "land"
+  },
+  {
+   "id": "C11",
+   "kind": "community",
+   "working_name": "pioneer crusts",
+   "summary": "Crusts and mats that colonise fresh basalt and start its soils",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "idea",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "biosphere/ecology/README.md",
+     "at": "finding 13"
+    }
+   ],
+   "members": [
+    "G30",
+    "G31"
+   ],
+   "described_members": [],
+   "settings": [
+    "ground"
+   ],
+   "realm": "land"
+  },
+  {
+   "id": "C12",
+   "kind": "community",
+   "working_name": "the living seas",
+   "summary": "Phytoplankton by kind of water, their grazers, the seaweeds that feed the air its sulfur and iodine, luminous plankton of dark nights and the carriers grown at sea",
+   "status": "carried_forward",
+   "scope": "throughout",
+   "basis": "decision",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/decisions.md",
+     "at": "Life and people"
+    },
+    {
+     "path": "biosphere/living_water/waters.json",
+     "at": ""
+    },
+    {
+     "path": "research/studies/sea_appearance/README.md",
+     "at": "Decisions"
+    }
+   ],
+   "members": [
+    "G38",
+    "G39",
+    "G40",
+    "G41",
+    "G42",
+    "G13"
+   ],
+   "described_members": [],
+   "settings": [
+    "seas"
+   ],
+   "realm": "water"
+  }
+ ],
+ "floater_names": {
+  "group": "G01",
+  "working_name": "floaters",
+  "chosen": null,
+  "candidates": [
+   {
+    "id": "N1",
+    "group": {
+     "english": "welkin",
+     "plural": "welkins",
+     "scientific": "Welkinia"
+    },
+    "giants": {
+     "english": "elder welkin",
+     "plural": "elder welkins",
+     "scientific": null
+    },
+    "young": null,
+    "formation": {
+     "english": "the wolcenfaru",
+     "meaning": "the cloud-host, the moving clouds"
+    },
+    "roots": [
+     {
+      "form": "welkin",
+      "language": "English",
+      "meaning": "the vault of the sky; poetic",
+      "source": "wiktionary"
+     },
+     {
+      "form": "welkne",
+      "language": "Middle English",
+      "meaning": "weather; the heavens; earlier, cloud",
+      "source": "wiktionary"
+     },
+     {
+      "form": "wolcen, wolcn",
+      "language": "Old English",
+      "meaning": "a cloud; the clouds; the heavens; the sky",
+      "source": "bosworth_toller"
+     },
+     {
+      "form": "wolcen-faru",
+      "language": "Old English",
+      "meaning": "the cloud-host; the moving clouds",
+      "source": "bosworth_toller"
+     }
+    ],
+    "meaning": "The clouds, and then the sky they fill",
+    "sound": "Two soft syllables, WEL-kin, an old word that ends on \"kin\"",
+    "image": "The dome of the sky in old poetry; living pieces of that sky drifting over the seas",
+    "logic": "The word meant cloud before it meant sky, and these organisms are the sky's living clouds",
+    "place": "English working name for the floaters (G01); Welkinia the clade name of the new lineage; elder welkins the giant form (G03); the wolcenfaru, the cloud-host, available for their drifting formation",
+    "checks": {
+     "homonyms": "Welkinia: no genus in IRMNG or the GBIF backbone (9 October 2026)",
+     "notes": "Rare in modern English, so it arrives without a biological meaning"
+    },
+    "sources": [
+     "bosworth_toller",
+     "wiktionary",
+     "irmng",
+     "gbif_backbone"
+    ]
+   },
+   {
+    "id": "N2",
+    "group": {
+     "english": "holm",
+     "plural": "holms",
+     "scientific": "Aeronesia"
+    },
+    "giants": {
+     "english": "great holm",
+     "plural": "great holms",
+     "scientific": null
+    },
+    "young": null,
+    "formation": null,
+    "roots": [
+     {
+      "form": "holm",
+      "language": "Old English",
+      "meaning": "a mound or hill; wave, ocean, sea; land rising from the water, an island in a river",
+      "source": "bosworth_toller"
+     },
+     {
+      "form": "holmr",
+      "language": "Old Norse",
+      "meaning": "islet",
+      "source": "wiktionary"
+     },
+     {
+      "form": "aēr + nēsos (ἀήρ + νῆσος)",
+      "language": "Greek",
+      "meaning": "air + island, formed like Polynesia",
+      "source": "lsj_1940"
+     }
+    ],
+    "meaning": "Islets, here islands of life rising in the air",
+    "sound": "One round syllable, \"holm\"; Aeronesia flows, air-oh-NEE-zha",
+    "image": "A drifting archipelago of green islets over the sea, each holding its own small pools and residents",
+    "logic": "The coupled study's concept is a light host carrying small retained-water communities: an island",
+    "place": "English working name for the floaters (G01); Aeronesia the clade name; great holms the giants (G03); the sky archipelago (C01) their formation",
+    "checks": {
+     "homonyms": "Aeronesia: no genus in IRMNG or GBIF; Holmia, the obvious Latin form, is preoccupied by a trilobite genus and others, so the clade takes the Greek form",
+     "notes": "\"Holm\" also names the holm oak in English; context separates them"
+    },
+    "sources": [
+     "bosworth_toller",
+     "wiktionary",
+     "lsj_1940",
+     "irmng",
+     "gbif_backbone"
+    ]
+   },
+   {
+    "id": "N3",
+    "group": {
+     "english": "megha",
+     "plural": "meghas",
+     "scientific": "Meghaphyta"
+    },
+    "giants": {
+     "english": "meghaduta",
+     "plural": "meghadutas",
+     "scientific": "Meghaduta"
+    },
+    "young": null,
+    "formation": null,
+    "roots": [
+     {
+      "form": "megha (मेघ)",
+      "language": "Sanskrit",
+      "meaning": "\"sprinkler\", a cloud; also a mass, a multitude",
+      "source": "monier_williams_1899"
+     },
+     {
+      "form": "meghadūta (मेघदूत)",
+      "language": "Sanskrit",
+      "meaning": "cloud-messenger: Kālidāsa's poem of an exiled lover who sends his wife a message by a cloud",
+      "source": "eb1911_kalidasa"
+     }
+    ],
+    "meaning": "Clouds; the giants as cloud messengers",
+    "sound": "MAY-gha, with a breathed g; me-gha-DOO-ta flows in four syllables; to English ears \"megha\" also carries \"mega\"",
+    "image": "Kālidāsa's monsoon cloud carrying a lover's message across the land; giants carrying their communities across the Moon",
+    "logic": "A cloud that bears water and messages; the root means one who sprinkles, which suits organisms that gather and hold water",
+    "place": "Meghas the working name for the floaters (G01) with Meghaphyta as the clade; meghadutas the giants (G03), with Meghaduta available as a genus if the giants become a sister lineage",
+    "checks": {
+     "homonyms": "Megha, Meghaphyta and Meghaduta: no genus in IRMNG or GBIF",
+     "notes": "The macron of meghadūta drops under the codes' alphabet rule; the poem is secular"
+    },
+    "sources": [
+     "monier_williams_1899",
+     "eb1911_kalidasa",
+     "irmng",
+     "gbif_backbone"
+    ]
+   },
+   {
+    "id": "N4",
+    "group": {
+     "english": "kunpeng",
+     "plural": "kunpeng",
+     "scientific": "Kunpengia"
+    },
+    "giants": {
+     "english": "peng",
+     "plural": "peng",
+     "scientific": null
+    },
+    "young": {
+     "english": "kun",
+     "plural": "kun"
+    },
+    "formation": null,
+    "roots": [
+     {
+      "form": "kūn (鯤)",
+      "language": "Classical Chinese",
+      "meaning": "the fish of the northern darkness in Zhuangzi; in the Erya, fish roe, the young of all fish",
+      "source": "erya_zhushu"
+     },
+     {
+      "form": "péng (鵬)",
+      "language": "Classical Chinese",
+      "meaning": "the bird Kun becomes, whose wings are like clouds hanging from the sky",
+      "source": "zhuangzi_1"
+     }
+    ],
+    "meaning": "The smallest thing becoming the greatest",
+    "sound": "Two short, bell-like syllables, koon and pung",
+    "image": "Zhuangzi's Peng: its back thousands of li across, rising ninety thousand li on deep-piled wind and, in one old reading, resting only after six months",
+    "logic": "From a speck-sized propagule to a centuries-old giant; Zhuangzi says wind piled too thin cannot bear great wings, and the Moon's dense, tall air is wind piled deep",
+    "place": "Kun the young (propagules and juveniles), peng the giants (G03), kunpeng the lineage (G01) with Kunpengia as its clade name",
+    "checks": {
+     "homonyms": "Kunpengia: no genus in IRMNG or GBIF. Peng (Lu & Li, 2023) and Pengia (Sharpe, 1883; Geyer & Corbacho, 2015) are animal genera, so the giants' scientific form needs another word; Kunpengopterus (Wang et al., 2010), a pterosaur, already uses the root",
+     "notes": "Kunpeng is a familiar compound in Chinese and a trade name; \"peng\" is also English slang"
+    },
+    "sources": [
+     "zhuangzi_1",
+     "erya_zhushu",
+     "irmng",
+     "gbif_backbone"
+    ]
+   },
+   {
+    "id": "N5",
+    "group": {
+     "english": "serene",
+     "plural": "serenes",
+     "scientific": "Sereniphyta"
+    },
+    "giants": {
+     "english": "serenissima",
+     "plural": "serenissimas",
+     "scientific": "Serenissima"
+    },
+    "young": null,
+    "formation": null,
+    "roots": [
+     {
+      "form": "serenus",
+      "language": "Latin",
+      "meaning": "clear, fair, bright, of the sky: caelo sereno",
+      "source": "lewis_short_1879"
+     },
+     {
+      "form": "Mare Serenitatis",
+      "language": "IAU lunar name",
+      "meaning": "Sea of Serenity, one of the seas the Near-side Sea joins",
+      "source": "iau_gazetteer"
+     },
+     {
+      "form": "serene",
+      "language": "English",
+      "meaning": "poetic noun, \"the serene of heaven\"; and serene or serein, a fine rain from a cloudless sky after sunset",
+      "source": "wiktionary"
+     }
+    ],
+    "meaning": "The clear, calm sky; the giants as the most serene",
+    "sound": "se-REEN, smooth and long; se-re-NIS-si-ma for the giants, five open syllables",
+    "image": "Calm daylight sky over the Sea of Serenity, and a fine rain falling from clear air after sunset",
+    "logic": "The Moon's own sea name; organisms that keep to clear daylight and drink from the air at dusk",
+    "place": "Serenes the working name for the floaters (G01) with Sereniphyta as the clade; serenissimas the giants (G03), with Serenissima available as a genus",
+    "checks": {
+     "homonyms": "Sereniphyta and Serenissima: no genus in IRMNG or GBIF; Serenitas (Wells, 2009) is preoccupied; Serenia sounds too close to Sirenia, the sea cows",
+     "notes": "Serenissima was the old title of Venice"
+    },
+    "sources": [
+     "lewis_short_1879",
+     "iau_gazetteer",
+     "wiktionary",
+     "irmng",
+     "gbif_backbone"
+    ]
+   },
+   {
+    "id": "N6",
+    "group": {
+     "english": "wingu",
+     "plural": "mawingu",
+     "scientific": "Mawingua"
+    },
+    "giants": {
+     "english": "great wingu",
+     "plural": "great mawingu",
+     "scientific": null
+    },
+    "young": null,
+    "formation": null,
+    "roots": [
+     {
+      "form": "wingu, plural mawingu",
+      "language": "Swahili",
+      "meaning": "cloud, clouds",
+      "source": "wiktionary"
+     }
+    ],
+    "meaning": "Clouds",
+    "sound": "ma-WEEN-goo, three open syllables stressed on the second; the singular wingu",
+    "image": "Tall clouds over East Africa's plains and lakes",
+    "logic": "A word from one of Africa's most widely spoken languages for organisms that cross every nation's sky",
+    "place": "Mawingu the working name for the floaters (G01), a wingu one of them, with Mawingua as the clade; great mawingu the giants (G03)",
+    "checks": {
+     "homonyms": "Mawingua: no genus in IRMNG or GBIF",
+     "notes": "A living language: adopted with its speakers, as principle P6 asks"
+    },
+    "sources": [
+     "wiktionary",
+     "irmng",
+     "gbif_backbone"
+    ]
+   }
+  ]
+ }
+}

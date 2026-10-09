@@ -1,0 +1,362 @@
+{
+ "source_admission": "Sources read for the taxonomic system (taxonomy.md) and its register (taxa.py), 9 October 2026. 'access' records exactly what was read and how: 'online text' means the passage was read in the official online edition; 'abstract' means the PubMed or publisher abstract; 'record' means only the bibliographic record was confirmed (Crossref, PubMed or a registry). Passages from the codes are quoted or paraphrased by article number; no code text is copied into the repository. Translations from Classical Chinese, Latin, Greek and Old English in taxonomy.md are this work's, from the cited texts and dictionaries. Earth organisms the project's other studies already cite keep their sources in those studies' registers.",
+ "sources": [
+  {
+   "key": "icn_madrid_2025",
+   "citation": "Turland, N.J., Wiersema, J.H., Barrie, F.R. et al. (eds) 2025. International Code of Nomenclature for algae, fungi, and plants (Madrid Code). Regnum Vegetabile 162. Chicago: University of Chicago Press",
+   "doi_or_url": "https://www.iaptglobal.org/_functions/code/madrid (online edition, CC BY-NC-ND 4.0); book DOI 10.7208/chicago/9780226839479.001.0001",
+   "use": "Botanical rules: independence, types, priority, a single correct name, names treated as Latin, retroactivity; ranks; generic names and epithets from any source; Latin or English diagnoses; preserved types; cultivated organisms; derogatory names; diacritics; etymology",
+   "access": "online text read: Principles I-VI; Preamble 8 and 11; Art. 3.1, 4.1-4.2, 8.1, 8.4, 13.1, 20.1, 23.1-23.2, 23.4, 28.1 with Notes 1-5, 29.1, 39.2, 42.1, 51.2, Rec. 51A.1, 60.7, Rec. 60I.1, 61.6; Art. 40 Ex. 10 (DNA sequences are not illustrations). Front matter and contents also read in the SANBI copy of the printed edition"
+  },
+  {
+   "key": "turland_2025",
+   "citation": "Turland, N.J. 2025. From the Shenzhen Code to the Madrid Code: new rules and recommendations for naming algae, fungi, and plants. American Journal of Botany 112(4), e70026",
+   "doi_or_url": "10.1002/ajb2.70026",
+   "use": "What changed at Madrid: voluntary registration of plant and algal names, rejection of derogatory names from 2026, the caffra epithets replaced, DNA-sequence types rejected and sent to a committee for 2029",
+   "access": "full text on PMC (PMC12012794), read through a summarizing fetch; the article numbers were then checked in the Code's online text"
+  },
+  {
+   "key": "iczn_1999",
+   "citation": "International Commission on Zoological Nomenclature 1999. International Code of Zoological Nomenclature, 4th edition, with the 2012 amendment on electronic publication and Declarations 44-47. London: International Trust for Zoological Nomenclature",
+   "doi_or_url": "https://code.iczn.org/",
+   "use": "Zoological rules: scope and exclusions (names for hypothetical concepts are excluded), starting point 1758, binominal names, the Latin alphabet, derivation from any language, priority, electronic publication with ZooBank registration, the Code of Ethics",
+   "access": "online text read: Art. 1 (1.1-1.4 and Rec. 1A), Art. 3, Art. 5, Art. 8.5 (amended), Art. 11.2-11.3 and Rec. 11A, Art. 23.1, Appendix A, and the Glossary entry 'concept, hypothetical'"
+  },
+  {
+   "key": "icnp_2022",
+   "citation": "Oren, A., Arahal, D.R., Göker, M., Moore, E.R.B., Rossello-Mora, R. & Sutcliffe, I.C. 2023. International Code of Nomenclature of Prokaryotes. Prokaryotic Code (2022 Revision). International Journal of Systematic and Evolutionary Microbiology 73(5a), 005585",
+   "doi_or_url": "10.1099/ijsem.0.005585 (preprint of 10 March 2023 at 10.5281/zenodo.7770135)",
+   "use": "Prokaryote rules: the nomenclature is not independent of the other codes, names are Latin and need an etymology, type strains deposited in two collections in different countries, strains and other infrasubspecific forms outside the Rules, Candidatus names without standing, sequence types rejected in 2020",
+   "access": "preprint text read: preface, General Consideration 7-8, Principles 1-9, Rules 5a-5d, 6 and 30, Appendix 10 (infrasubspecific subdivisions) and Appendix 11 (Candidatus). The published version was not re-read"
+  },
+  {
+   "key": "seqcode_1_2",
+   "citation": "Whitman, W.B., Chuvochina, M., Hedlund, B.P. et al. (eds) 2026. The Code of Nomenclature of Prokaryotes Described from Sequence Data (SeqCode), version 1.2.0, 12 August 2026",
+   "doi_or_url": "https://seqco.de/seqcode",
+   "use": "Genome sequences as nomenclatural types, registration in the SeqCode Registry as a condition of valid publication, names unique against the other codes, roots from any language with the etymology given",
+   "access": "online text read: General Consideration 5; Principles 1-10; Rules 1, 8, 9a, 9b, Rec. 9, 16, 18a-18c, 26"
+  },
+  {
+   "key": "icncp_2016",
+   "citation": "Brickell, C.D., Alexander, C., Cubey, J.J., David, J.C., Hoffman, M.H.A., Leslie, A.C., Malécot, V. & Jin, X. (eds) 2016. International Code of Nomenclature for Cultivated Plants, ninth edition. Scripta Horticulturae 18. Leuven: ISHS",
+   "doi_or_url": "ISBN 978-94-6261-116-0; https://ishs.org/scripta-horticulturae/international-code-nomenclature-cultivated-plants-ninth-edition/",
+   "use": "Cultivars, Groups and grexes; genetically modified plants may form cultivars; cultivar epithets in living languages after 1958, at most 30 characters after 1995",
+   "access": "PDF from ISHS read: Preamble with its footnote on genetically modified plants, Principles 1-3, Art. 2.1-2.23, 3.1-3.3, 4.1-4.4, 21.11-21.14. No later edition was found"
+  },
+  {
+   "key": "phylocode_6",
+   "citation": "Cantino, P.D. & de Queiroz, K. 2020. International Code of Phylogenetic Nomenclature (PhyloCode), version 6. Ratified 20 January 2019 by the Committee on Phylogenetic Nomenclature; web version of 8 June 2020",
+   "doi_or_url": "http://phylonames.org/code/",
+   "use": "Clades named by phylogenetic definitions and registered; a clade is an ancestor and all its descendants; minimum-clade, directly-specified-ancestor, maximum-clade, apomorphy-based, crown and total (Pan-) definitions; names independent of rank; species names left to the rank-based codes",
+   "access": "online text read: Preamble 1-6; Principles 1-7; Art. 1.1, 2.1-2.2 with Notes 2.1.1-2.1.3, 3.1-3.2, 8.1, 9.1-9.7 with Note 9.5.1, 9.9-9.10, 10.1, 10.3, 10.5, 11.1-11.2, 21.1-21.2"
+  },
+  {
+   "key": "biocode_2011",
+   "citation": "Greuter, W., Garrity, G., Hawksworth, D.L., Jahn, R., Kirk, P.M., Knapp, S., McNeill, J., Michel, E., Patterson, D.J., Pyle, R. & Tindall, B.J. 2011. Draft BioCode (2011): principles and rules regulating the naming of organisms. Bionomina 3, 26-44 (also Taxon 60, 201-212)",
+   "doi_or_url": "10.11646/bionomina.3.1.3",
+   "use": "A single code proposed for all organisms, with registration as the condition of establishment",
+   "access": "full text read: Preamble 1-7, Principles I-VIII, Art. 5.1-5.2 with Notes, Rec. 5A, Art. 12"
+  },
+  {
+   "key": "woese_1990",
+   "citation": "Woese, C.R., Kandler, O. & Wheelis, M.L. 1990. Towards a natural system of organisms: proposal for the domains Archaea, Bacteria, and Eucarya. Proceedings of the National Academy of Sciences USA 87, 4576-4579",
+   "doi_or_url": "10.1073/pnas.87.12.4576",
+   "use": "The three domains of the backbone",
+   "access": "abstract"
+  },
+  {
+   "key": "goker_oren_2024",
+   "citation": "Göker, M. & Oren, A. 2024. Valid publication of names of two domains and seven kingdoms of prokaryotes. International Journal of Systematic and Evolutionary Microbiology 74, 006242",
+   "doi_or_url": "10.1099/ijsem.0.006242",
+   "use": "Bacteria and Archaea as validly published domains under the ICNP",
+   "access": "abstract"
+  },
+  {
+   "key": "oren_garrity_2021",
+   "citation": "Oren, A. & Garrity, G.M. 2021. Valid publication of the names of forty-two phyla of prokaryotes. International Journal of Systematic and Evolutionary Microbiology 71, 005056",
+   "doi_or_url": "10.1099/ijsem.0.005056",
+   "use": "The rank of phylum under the ICNP, with type genera",
+   "access": "abstract"
+  },
+  {
+   "key": "oren_2022_cyanobacteriota",
+   "citation": "Oren, A., Mareš, J. & Rippka, R. 2022. Validation of the names Cyanobacterium and Cyanobacterium stanieri, and proposal of Cyanobacteriota phyl. nov. International Journal of Systematic and Evolutionary Microbiology 72, 005528",
+   "doi_or_url": "10.1099/ijsem.0.005528",
+   "use": "Cyanobacteriota as the phylum name, published under the ICN and the ICNP together",
+   "access": "abstract"
+  },
+  {
+   "key": "adl_2019",
+   "citation": "Adl, S.M., Bass, D., Lane, C.E., Lukeš, J., Schoch, C.L. et al. 2019. Revisions to the classification, nomenclature, and diversity of eukaryotes. Journal of Eukaryotic Microbiology 66, 4-119",
+   "doi_or_url": "10.1111/jeu.12691",
+   "use": "The eukaryote side of the backbone; a guide to trophic functional guilds as a precedent for the guild vocabulary",
+   "access": "abstract"
+  },
+  {
+   "key": "cantino_2007",
+   "citation": "Cantino, P.D., Doyle, J.A., Graham, S.W., Judd, W.S., Olmstead, R.G., Soltis, D.E. et al. 2007. Towards a phylogenetic nomenclature of Tracheophyta. Taxon 56, 822-846",
+   "doi_or_url": "10.1002/tax.563001",
+   "use": "Angiospermae and Spermatophyta as phylogenetically defined clade names, with Pan- for total clades",
+   "access": "abstract"
+  },
+  {
+   "key": "gbif_backbone",
+   "citation": "GBIF Secretariat 2023. GBIF Backbone Taxonomy. Checklist dataset, accessed through the GBIF species API on 9 October 2026",
+   "doi_or_url": "10.15468/39omei",
+   "use": "Ranks and placements of the ranked backbone nodes, and a homonym check of candidate names",
+   "access": "API records read for every ranked backbone node (species/match) and for each candidate name (species?name=). The backbone gives no class for ray-finned fishes, so the register's run fish hang from Chordata through Salmonidae; it lists Cyanobacteria, where the ICNP name is Cyanobacteriota"
+  },
+  {
+   "key": "irmng",
+   "citation": "IRMNG 2026. The Interim Register of Marine and Nonmarine Genera. VLIZ. Accessed 9 October 2026",
+   "doi_or_url": "https://www.irmng.org",
+   "use": "Homonym check of candidate genus and clade names across all codes",
+   "access": "REST records (AphiaRecordsByName, exact match) read for every candidate name"
+  },
+  {
+   "key": "gibson_2010",
+   "citation": "Gibson, D.G., Glass, J.I., Lartigue, C. et al. 2010. Creation of a bacterial cell controlled by a chemically synthesized genome. Science 329, 52-56",
+   "doi_or_url": "10.1126/science.1190719",
+   "use": "The synthetic Mycoplasma mycoides JCVI-syn1.0 genome, transplanted into a M. capricolum cell, makes M. mycoides cells; its sequence carries watermarks",
+   "access": "abstract"
+  },
+  {
+   "key": "hutchison_2016",
+   "citation": "Hutchison, C.A. 3rd, Chuang, R.Y., Noskov, V.N. et al. 2016. Design and synthesis of a minimal bacterial genome. Science 351, aad6253",
+   "doi_or_url": "10.1126/science.aad6253",
+   "use": "JCVI-syn3.0, a designed minimal genome named as a strain of Mycoplasma mycoides",
+   "access": "abstract"
+  },
+  {
+   "key": "richardson_2017",
+   "citation": "Richardson, S.M., Mitchell, L.A., Stracquadanio, G. et al. 2017. Design of a synthetic yeast genome. Science 355, 1040-1044",
+   "doi_or_url": "10.1126/science.aaf4557",
+   "use": "Sc2.0, a redesigned Saccharomyces cerevisiae genome whose design software enforces version control of every edit",
+   "access": "abstract"
+  },
+  {
+   "key": "goold_2025",
+   "citation": "Goold, H.D., Kroukamp, H., Erpf, P.E. et al. 2025. Construction and iterative redesign of synXVI a 903 kb synthetic Saccharomyces cerevisiae chromosome. Nature Communications 16, 841",
+   "doi_or_url": "10.1038/s41467-024-55318-3",
+   "use": "Synthetic chromosomes named synII to synXVI within S. cerevisiae",
+   "access": "record (PubMed title)"
+  },
+  {
+   "key": "archer_2026",
+   "citation": "Archer, E., Walker, R.S.K., Erpf, P.E., Paulsen, I.T. & Pretorius, I.S. 2026. One yeast, sixteen synthetic chromosomes, infinite possibilities. Yeast 43, 143-158",
+   "doi_or_url": "10.1002/yea.70026",
+   "use": "Sc2.0 has delivered functional synthetic versions of all 16 yeast chromosomes",
+   "access": "abstract"
+  },
+  {
+   "key": "fredens_2019",
+   "citation": "Fredens, J., Wang, K., de la Torre, D. et al. 2019. Total synthesis of Escherichia coli with a recoded genome. Nature 569, 514-518",
+   "doi_or_url": "10.1038/s41586-019-1192-5",
+   "use": "A variant of E. coli with a 61-codon synthetic genome, kept within its species",
+   "access": "abstract"
+  },
+  {
+   "key": "eu_65_2004",
+   "citation": "Commission Regulation (EC) No 65/2004 of 14 January 2004 establishing a system for the development and assignment of unique identifiers for genetically modified organisms. Official Journal of the European Union L 10, 5-10",
+   "doi_or_url": "CELEX 32004R0065, https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32004R0065",
+   "use": "Unique identifiers for transformation events: nine alphanumeric digits in three components (applicant, event, verification digit), registered in the OECD BioTrack database; stacked events get new identifiers",
+   "access": "Annex, Section A, read on EUR-Lex"
+  },
+  {
+   "key": "oecd_2006_ui",
+   "citation": "OECD 2006. OECD Guidance for the Designation of a Unique Identifier for Transgenic Plants. ENV/JM/MONO(2002)7/REV1",
+   "doi_or_url": "https://one.oecd.org/document/env/jm/mono(2002)7/rev1/en/pdf",
+   "use": "The origin of the unique-identifier format the EU regulation follows",
+   "access": "not read: the OECD site refused automated access; title and symbol from the search record. The format is taken from eu_65_2004"
+  },
+  {
+   "key": "bch_mon810",
+   "citation": "Secretariat of the Convention on Biological Diversity. Biosafety Clearing-House record BCH-LMO-SCBD-14750-19, YieldGard maize",
+   "doi_or_url": "https://bch.cbd.int/en/database/LMO/BCH-LMO-SCBD-14750-19",
+   "use": "Example of an event within a species: Zea mays transformation event MON810, unique identifier MON-ØØ81Ø-6, trade name YieldGard",
+   "access": "record summary read through a fetch"
+  },
+  {
+   "key": "raunkiaer_1934",
+   "citation": "Raunkiaer, C. 1934. The Life Forms of Plants and Statistical Plant Geography, being the collected papers of C. Raunkiaer. Oxford: Clarendon Press",
+   "doi_or_url": "https://archive.org/details/in.ernet.dli.2015.84741",
+   "use": "Life forms classed by where the surviving buds sit through the unfavourable season: phanerophytes, chamaephytes, hemicryptophytes, cryptophytes, therophytes; phanerophytes subdivided by height (nano under 2 m, micro 2-8, meso 8-30, mega over 30 m)",
+   "access": "OCR text read: pp. 15-19 (the five main types) and the table of phanerophyte heights"
+  },
+  {
+   "key": "sieburth_1978",
+   "citation": "Sieburth, J.McN., Smetacek, V. & Lenz, J. 1978. Pelagic ecosystem structure: heterotrophic compartments of the plankton and their relationship to plankton size fractions. Limnology and Oceanography 23, 1256-1263",
+   "doi_or_url": "10.4319/lo.1978.23.6.1256",
+   "use": "Plankton size classes by decades: pico 0.2-2 µm, nano 2-20 µm, micro 20-200 µm and larger classes above",
+   "access": "record (Crossref); the publisher refused automated access. The three smallest classes are taken as reproduced in brotas_2022 and in other summaries; the larger classes were not checked and are not used"
+  },
+  {
+   "key": "brotas_2022",
+   "citation": "Brotas, V., Tarran, G.A., Veloso, V. et al. 2022. Complementary approaches to assess phytoplankton groups and size classes on a long transect in the Atlantic Ocean. Frontiers in Marine Science 8, 682621",
+   "doi_or_url": "10.3389/fmars.2021.682621",
+   "use": "Picoplankton under 2 µm, nanoplankton 2-20 µm, microplankton over 20 µm",
+   "access": "full text, read through a summarizing fetch"
+  },
+  {
+   "key": "kunz_2008",
+   "citation": "Kunz, T.H., Gauthreaux, S.A. Jr, Hristov, N.I. et al. 2008. Aeroecology: probing and modeling the aerosphere. Integrative and Comparative Biology 48, 1-11",
+   "doi_or_url": "10.1093/icb/icn037",
+   "use": "Aeroecology and the aerosphere; organisms that depend on it move by passive and active displacement",
+   "access": "abstract"
+  },
+  {
+   "key": "ptatscheck_2018",
+   "citation": "Ptatscheck, C., Gansfort, B. & Traunspurger, W. 2018. The extent of wind-mediated dispersal of small metazoans, focusing nematodes. Scientific Reports 8, 6814",
+   "doi_or_url": "10.1038/s41598-018-24747-8",
+   "use": "Current use of 'aeroplankton' for wind-carried organisms, including living nematodes, mites and thrips",
+   "access": "abstract"
+  },
+  {
+   "key": "wmo_cloud_atlas",
+   "citation": "World Meteorological Organization 2017. International Cloud Atlas, section 2.1.3, Principles of cloud classification",
+   "doi_or_url": "https://cloudatlas.wmo.int/en/principles-of-cloud-classification.html",
+   "use": "The clouds the aerial organisms share the sky with are already classified in genera, species and varieties with Latin names; candidate names avoid the cloud genera",
+   "access": "web page read"
+  },
+  {
+   "key": "iosilevskii_weihs_2009",
+   "citation": "Iosilevskii, G. & Weihs, D. 2009. Hydrodynamics of sailing of the Portuguese man-of-war Physalia physalis. Journal of the Royal Society Interface 6, 613-626",
+   "doi_or_url": "10.1098/rsif.2008.0457",
+   "use": "A colony of specialized polyps with a gas-filled, sail-like float and trailing tentacles that sails: the Earth reference for sailors and for colonial gas-filled bodies",
+   "access": "abstract"
+  },
+  {
+   "key": "liggan_martone_2018",
+   "citation": "Liggan, L.M. & Martone, P.T. 2018. Under pressure: biomechanical limitations of developing pneumatocysts in the bull kelp (Nereocystis luetkeana, Phaeophyceae). Journal of Phycology 54, 608-615",
+   "doi_or_url": "10.1111/jpy.12776",
+   "use": "Gas-filled floats hold some kelps upright to compete for light; their internal pressure sits below the surrounding pressure",
+   "access": "abstract"
+  },
+  {
+   "key": "liggan_martone_2020",
+   "citation": "Liggan, L.M. & Martone, P.T. 2020. Gas composition of developing pneumatocysts in bull kelp Nereocystis luetkeana. Journal of Phycology 56, 1367-1372",
+   "doi_or_url": "10.1111/jpy.13037",
+   "use": "The cells of the float's wall make gas as the float grows, keeping its composition and pressure",
+   "access": "abstract"
+  },
+  {
+   "key": "machado_2024",
+   "citation": "Machado, C.B., Marsh, R., Hargreaves, J.K. et al. 2024. Changes in holopelagic Sargassum spp. biomass composition across an unusual year. Proceedings of the National Academy of Sciences USA 121, e2312173121",
+   "doi_or_url": "10.1073/pnas.2312173121",
+   "use": "Holopelagic Sargassum (S. natans and S. fluitans morphotypes): brown algae that live afloat and drift for months",
+   "access": "abstract"
+  },
+  {
+   "key": "morley_gorham_2020",
+   "citation": "Morley, E.L. & Gorham, P.W. 2020. Evidence for nanocoulomb charges on spider ballooning silk. Physical Review E 102, 012403",
+   "doi_or_url": "10.1103/PhysRevE.102.012403",
+   "use": "Ballooning spiders rise on the charge of their silk in an electric field: an Earth reference for small drifters, beside the project's atmospheric electricity",
+   "access": "abstract"
+  },
+  {
+   "key": "dudley_2007",
+   "citation": "Dudley, R., Byrnes, G., Yanoviak, S.P., Borrell, B., Brown, R.M. & McGuire, J.A. 2007. Gliding and the functional origins of flight: biomechanical novelty or necessity? Annual Review of Ecology, Evolution, and Systematics 38, 179-201",
+   "doi_or_url": "10.1146/annurev.ecolsys.37.091305.110014",
+   "use": "More than 30 independent lineages of arboreal vertebrate gliders, and directed aerial descent in wingless arboreal ants",
+   "access": "abstract (OpenAlex)"
+  },
+  {
+   "key": "mattimore_battista_1996",
+   "citation": "Mattimore, V. & Battista, J.R. 1996. Radioresistance of Deinococcus radiodurans: functions necessary to survive ionizing radiation are also necessary to survive prolonged desiccation. Journal of Bacteriology 178, 633-637",
+   "doi_or_url": "10.1128/jb.178.3.633-637.1996",
+   "use": "Radiation resistance as a consequence of desiccation tolerance: the trait the dry high air asks of its films",
+   "access": "abstract"
+  },
+  {
+   "key": "haddock_2010",
+   "citation": "Haddock, S.H.D., Moline, M.A. & Case, J.F. 2010. Bioluminescence in the sea. Annual Review of Marine Science 2, 443-493",
+   "doi_or_url": "10.1146/annurev-marine-120308-081028",
+   "use": "Marine bioluminescence evolved many times, from bacteria to fish",
+   "access": "abstract"
+  },
+  {
+   "key": "flanary_2005",
+   "citation": "Flanary, B.E. & Kletetschka, G. 2005. Analysis of telomere length and telomerase activity in tree species of various life-spans, and with age in the bristlecone pine Pinus longaeva. Biogerontology 6, 101-111",
+   "doi_or_url": "10.1007/s10522-005-3484-4",
+   "use": "Pinus longaeva as the oldest known living eukaryotic organism, the oldest on record 4,770 years old in 2005",
+   "access": "abstract"
+  },
+  {
+   "key": "stephenson_2014",
+   "citation": "Stephenson, N.L., Das, A.J., Condit, R. et al. 2014. Rate of tree carbon accumulation increases continuously with tree size. Nature 507, 90-93",
+   "doi_or_url": "10.1038/nature12914",
+   "use": "Across 403 species, a tree's mass growth rate rises continuously with its size, as leaf area outpaces the fall in productivity per leaf area: the reference for giants that keep growing",
+   "access": "abstract"
+  },
+  {
+   "key": "koch_2004",
+   "citation": "Koch, G.W., Sillett, S.C., Jennings, G.M. & Davis, S.D. 2004. The limits to tree height. Nature 428, 851-854",
+   "doi_or_url": "10.1038/nature02417",
+   "use": "Coast redwood (Sequoia sempervirens), the tallest known tree, with a hydraulic maximum height of 122-130 m on Earth",
+   "access": "abstract"
+  },
+  {
+   "key": "iau_gazetteer",
+   "citation": "Gazetteer of Planetary Nomenclature, IAU Working Group for Planetary System Nomenclature and USGS Astrogeology Science Center: lunar feature centre points",
+   "doi_or_url": "https://planetarynames.wr.usgs.gov (the project's input MOON_nomenclature_center_pts.zip, sha256 404a951d514821590f244c1858d9dc15e64f9e93e2cde45e35e9cf413fc60fea, fetched by geography/fetch_inputs.py)",
+   "use": "The Moon's own root stock: the names and stated origins of its 59 IAU water features (maria, oceanus, sinus, lacus, palus), seas, bays, lakes and marshes named for weather and moods",
+   "access": "the hash-checked local copy's dBase table read through geography/nomenclature.py: name, type, approval and origin of every water feature"
+  },
+  {
+   "key": "bosworth_toller",
+   "citation": "Bosworth, J. & Toller, T.N. An Anglo-Saxon Dictionary, online edition",
+   "doi_or_url": "https://bosworthtoller.com",
+   "use": "Old English wolcen ('a cloud; the clouds; the heavens; the sky'), wolcen-faru ('the cloud-host, the moving clouds') and holm ('a mound, hill; wave, ocean, water, sea; land rising from the water, an island in a river')",
+   "access": "entries read: wolcen, wolcen-faru, holm"
+  },
+  {
+   "key": "wiktionary",
+   "citation": "Wiktionary, entries welkin, holm, sky, serene, wingu and mixtli (English edition), read 9 October 2026",
+   "doi_or_url": "https://en.wiktionary.org",
+   "use": "Secondary etymologies: welkin from Middle English welkne and Old English wolcnu; holm from Old English holm and Old Norse holmr 'islet'; sky from Old Norse sky 'cloud'; serene as a poetic noun and serene (serein) as fine rain from a cloudless sky after sunset; Swahili wingu, plural mawingu, 'cloud'; Classical Nahuatl mixtli 'cloud'",
+   "access": "entries read; their cited primary dictionaries (the Middle English Dictionary, the OED, Molina 1555) were not read here"
+  },
+  {
+   "key": "monier_williams_1899",
+   "citation": "Monier-Williams, M. 1899. A Sanskrit-English Dictionary. Oxford: Clarendon Press, p. 831 (Cologne Digital Sanskrit Dictionaries)",
+   "doi_or_url": "https://www.sanskrit-lexicon.uni-koeln.de",
+   "use": "megha, 'sprinkler', a cloud (from the root mih), also a mass or multitude; meghadūta, 'cloud-messenger', the name of a celebrated poem by Kālidāsa",
+   "access": "entries megha and meghadūta read"
+  },
+  {
+   "key": "eb1911_kalidasa",
+   "citation": "Macdonell, A.A. 1911. Kālidāsa. Encyclopaedia Britannica, 11th edition, vol. 15, p. 668",
+   "doi_or_url": "https://en.wikisource.org/wiki/1911_Encyclop%C3%A6dia_Britannica/K%C4%81lid%C4%81sa",
+   "use": "The Meghadūta describes the complaint of an exiled lover and the message he sends to his wife by a cloud",
+   "access": "article read on Wikisource"
+  },
+  {
+   "key": "zhuangzi_1",
+   "citation": "Zhuangzi, chapter 1, Xiaoyao you (逍遙遊), Chinese text",
+   "doi_or_url": "https://zh.wikisource.org/wiki/莊子/逍遙遊",
+   "use": "The fish Kun of the northern darkness becomes the bird Peng, whose wings are like clouds hanging from the sky and which rises ninety thousand li; wind piled too thin cannot bear great wings. The phrase 去以六月息者也 is read either as resting after six months or as setting off on the sixth month's wind; taxonomy.md gives the first as one reading",
+   "access": "the opening passage read in the Chinese text; translations in taxonomy.md are this work's"
+  },
+  {
+   "key": "erya_zhushu",
+   "citation": "Erya zhushu (爾雅注疏), juan 10, Shi yu, with Guo Pu's commentary (Siku quanshu text); and Yang Shen, Yiyu tuzan (異魚圖贊), juan 1, with commentary (Siku quanshu text)",
+   "doi_or_url": "https://zh.wikisource.org/wiki/爾雅注疏_(四庫全書本)/卷10",
+   "use": "鯤, 魚子: kun means fish roe, and Guo Pu glosses it as the young of all fish; the Yiyu tuzan commentary says that Zhuangzi made the smallest thing into the greatest",
+   "access": "the kun passages read in both texts on Wikisource"
+  },
+  {
+   "key": "lewis_short_1879",
+   "citation": "Lewis, C.T. & Short, C. 1879. A Latin Dictionary. Oxford: Clarendon Press (Perseus Digital Library)",
+   "doi_or_url": "https://www.perseus.tufts.edu/hopper/",
+   "use": "serenus 'clear, fair, bright, serene', of the sky (caelo sereno); nubivagus 'wandering among the clouds' (Silius Italicus 12.102); velivolus 'sail-flying', of the sea (Virgil, Aeneid 1.224); nubigena 'cloud-born', of the Centaurs and of Phrixus",
+   "access": "entries read: serenus, nubivagus, velivolus, nubigena"
+  },
+  {
+   "key": "lsj_1940",
+   "citation": "Liddell, H.G., Scott, R. & Jones, H.S. 1940. A Greek-English Lexicon. Oxford: Clarendon Press (Perseus Digital Library)",
+   "doi_or_url": "https://www.perseus.tufts.edu/hopper/",
+   "use": "νεφέλη 'cloud, mass of clouds'; νῆσος 'island'; αἰώρα 'swing, hammock; oscillation'; μετέωρος 'raised from off the ground'",
+   "access": "entries read: νεφέλη, νῆσος, αἰώρα, μετέωρος"
+  }
+ ]
+}
