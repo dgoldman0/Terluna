@@ -1,0 +1,59 @@
+{
+ "source_admission": "Published values used in run.py and README.md through the project's products, plus one review read for this study; no external dataset files are admitted. 'access' records how far each source was checked on 2026-10-09: 'publisher page' means the article's page was fetched and its passages summarized by a fetch tool, with the quoted passages checked against it; 'reported in' names the project register whose search or reading admitted it, not re-read here. Project products are cited by path in the README and hashed in results/ways_of_living.json.",
+ "sources": [
+  {
+   "citation": "Clement, Bukley & Paloski 2015, Frontiers in Systems Neuroscience 9, 92",
+   "doi_or_url": "10.3389/fnsys.2015.00092",
+   "use": "The ideal prescription of acceleration for health is unknown; a Space Shuttle centrifuge at 0.5 and 1 G was well tolerated, and riding it 20 minutes every other day on a 16-day mission reduced cardiovascular deconditioning; in a lunar-mission simulation the Moon's gravity did not prevent cardiovascular deconditioning",
+   "access": "publisher page (full-text article page fetched 2026-10-09; passages quoted by the fetch summary)"
+  },
+  {
+   "citation": "Globus & Hall 2017, Space Settlement Population Rotation Tolerance, NSS Space Settlement Journal",
+   "doi_or_url": "https://www.researchgate.net/publication/318471827_Space_Settlement_Population_Rotation_Tolerance",
+   "use": "Residents tolerate at least 4 rpm (the spin radii for Earth's and the Moon's gravity)",
+   "access": "reported in provisioning/population_sources.json (search summary)"
+  },
+  {
+   "citation": "Johnson & Holbrow (eds) 1977, Space Settlements: A Design Study, NASA SP-413, chapter 5 and appendix 5E",
+   "doi_or_url": "https://nss.org/settlement/nasa/75SummerStudy/Chapt5.html",
+   "use": "The Stanford torus shield (990 t a person), its farm (20 m2 a person) and power (3 kW a person), as the provisioning population screen carries them",
+   "access": "reported in provisioning/population_sources.json (full text, chapter 5 and appendix 5E)"
+  },
+  {
+   "citation": "Gerten et al. 2020, Nature Sustainability 3, 200-208",
+   "doi_or_url": "10.1038/s41893-019-0465-1",
+   "use": "Transformed food systems feed 10.2 billion people within four terrestrial planetary boundaries (Earth's food in the cases)",
+   "access": "reported in provisioning/population_sources.json (search summary)"
+  },
+  {
+   "citation": "Angel, Parent, Civco & Blei 2010, The Persistent Decline in Urban Densities, Lincoln Institute of Land Policy Working Paper WP10SA1",
+   "doi_or_url": "https://www.lincolninst.edu/app/uploads/2024/04/1834_1085_angel_final_1.pdf",
+   "use": "Built-up land of 143-357 m2 a person in affluent countries' cities, the spread settlement footprint of farming country and the far side's places",
+   "access": "reported in the ecology branch's people_sources.json at 11392b4 (full text)"
+  },
+  {
+   "citation": "Falchi et al. 2016, Science Advances 2, e1600377",
+   "doi_or_url": "10.1126/sciadv.1600377",
+   "use": "Light-polluted skies, behind ecology's 791-1,420 m2 of land under a light-polluted sky a person for the lunar design",
+   "access": "reported in the ecology branch's people_sources.json at 11392b4 (full text)"
+  },
+  {
+   "citation": "Tang et al. 2014, Scientific Reports 4, 7483",
+   "doi_or_url": "10.1038/srep07483",
+   "use": "Crop water-use efficiency behind ecology's crop water need of 4.85-10.9 mm a day at the equator and its rain-fed land",
+   "access": "reported in the ecology branch's people_sources.json at 11392b4 (full text, table 2)"
+  },
+  {
+   "citation": "Lee, Abramson, Phillips & Tang 2022, Preliminary Analysis of Separation Standards for Urban Air Mobility using Unmitigated Fast-Time Simulation, 41st Digital Avionics Systems Conference (NTRS 20220009678)",
+   "doi_or_url": "https://ntrs.nasa.gov/citations/20220009678",
+   "use": "Urban air mobility lane spacing behind the sky-fleet study's 76 flyers a km2 and the sky-boat trip share each density's lanes hold",
+   "access": "reported in research/studies/sky_fleet/sources.json (fetched and quoted)"
+  },
+  {
+   "citation": "CIE 191:2010, Recommended system for mesopic photometry based on visual performance",
+   "doi_or_url": null,
+   "use": "The 5 cd/m2 floor of day vision for an 18% grey surface, as the decisions register and the sea-appearance calendar use it",
+   "access": "reported in research/decisions.md (Light and time) and the sea-appearance lighting calendar"
+  }
+ ]
+}
