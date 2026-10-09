@@ -17,6 +17,8 @@ The word reaches past industry to everything a settled world provides itself wit
   ([literature.md](literature.md), with its [sources](sources.json));
 - a first screen of the committed products ([screen.py](screen.py), [results/first_screen.json](results/first_screen.json)).
 
+Its open questions, in order, are in [questions.md](questions.md).
+
 The author's decisions frame it:
 - **The Moon's cycle:** it keeps its 29.53-day cycle, and life stores resources across the night.
 - **Power:** fusion supplies most local power, supplemented by regional solar and wind (a planning assumption).
@@ -181,6 +183,7 @@ in other folders. They belong to main and are unchanged on this branch. The larg
 | [results/first_screen.json](results/first_screen.json) | Its product (schema `terluna.provisioning.first-screen/1`) |
 | [state.md](state.md) | What the project already holds for provisioning, what others assume of it, and statements to correct |
 | [literature.md](literature.md) | The literature by topic, with what it means for the Open Moon |
+| [questions.md](questions.md) | The open questions, in order |
 | [sources.json](sources.json) | Every source cited, its use and how far it was read |
 
 `python -m provisioning.screen` rewrites the product; `python -m pytest provisioning/tests` checks it.

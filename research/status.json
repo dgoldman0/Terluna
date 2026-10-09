@@ -209,10 +209,18 @@
         "../provisioning/literature.md",
         "../provisioning/sources.json",
         "../provisioning/screen.py",
-        "../provisioning/results/first_screen.json"
+        "../provisioning/results/first_screen.json",
+        "../provisioning/questions.md"
       ],
-      "unresolved": [],
-      "next_session_task": "Set out the domain's open questions in order."
+      "unresolved": [
+        "the ring fleet's own infrared, 2.8-8.9 W/m2 on the Moon by the first screen, which the design climate leaves out: layer blocking, where the column absorbs it, its warming, its effect on the upper air's CO2 cooling, and the low-emissivity coating or extra dimming that would answer it (provisioning/questions.md)",
+        "the Moon's population and energy per person (the metropolis brief's 2 kW has no stated basis; decent living takes about 0.5 kW), demand by sector and the three power ledgers",
+        "the power system through the 354-hour night: fusion as a conditional technology, a day-to-night grid with 9-19% losses, storage at eight times Earth's pumped hydro for the metropolis alone, power from orbit within the dark-night decision and beaming limits",
+        "the food system (diets, microbial protein on firm power, water, the monthly harvest and stores) at 130-340 m2 a person, with no methane and little ethylene",
+        "freight between the surface and orbit now that surface mass drivers fail in the air: launch from altitude, tethers or an elevator that meets the ring stack, and a launch rule in the spirit of S7",
+        "water treatment without solar disinfection, sewage as a phosphorus return path, the far side's aluminium and glass materials and the steel source, transit at a sixth of gravity, computing within the 0.13 s round trip, work and maintenance, lamps against the dark night, vitamin D and life support"
+      ],
+      "next_session_task": "Provisioning's open questions in order (provisioning/questions.md): the ring fleet's infrared in the climate and shield design, for the author to decide whether it reopens the paused climate work; the Moon's population and energy per person; a power system through the night; the food system with the ecology work; freight between the surface and orbit with a launch rule."
     },
     {
       "topic": "illumination",
