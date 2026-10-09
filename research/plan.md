@@ -22,11 +22,13 @@ its own lightning; haze barely touches the light; the regional magnets reach the
 
 ## Next work, in order
 
-1. **The Moon's night with the ring fleet.** The biosphere and human work set the light the night may take; the
-   shield's night-side attitude (rolls within the bundle's clearance), its films' scatter and switched states are
-   tested against it in the shield's dynamics. Flights of the kept orbits take about an hour of CPU each set. This
-   joins the planned branch research/array-industry, with the trim and store hardware and power, heat reuse,
-   computing and industry ([array_industry.md](studies/solar_shield_array/array_industry.md)).
+1. **The Moon's night with the ring fleet.** The author has decided that the fleet avoids lighting the night zones,
+   its light redirected away from the Moon and used where it can be, for computing for instance. The biosphere and
+   human work set the requirement's value; the shield's night-side attitude (rolls within the bundle's clearance),
+   its films' scatter and switched states are tested against it in the shield's dynamics. Flights of the kept orbits
+   take about an hour of CPU each set. This joins the planned branch research/array-industry, with the trim and store
+   hardware and power, heat reuse, computing and industry
+   ([array_industry.md](studies/solar_shield_array/array_industry.md)).
 2. **The crown as a lightning conductor.** The tower's induced charge and upward leaders in the saved storm fields,
    a protection concept for its triggered flashes and the hydrogen berths beside it. A terrain-aware electrified
    storm needs CM1's field solver over terrain, which touches the paused climate programme and waits for the author.

@@ -19,7 +19,8 @@ fit together and inform on the whole and what comes next."
   at a far-side equatorial midnight and 2.3–2.9 lux under a nearside Earth. The Moon would have no dark night
   anywhere. Tiles tilted 1.5–6° in the keeping envelope would add mirror glints averaging hundreds to over a
   thousand lux. Rolling the night half's tiles by 80°, which the shield's clearance study allows, keeps every glint
-  off the Moon and brings the glow to about 2 lux at 0.1% scatter and 0.02 lux at 0.001%.
+  off the Moon and brings the glow to about 2 lux at 0.1% scatter and 0.02 lux at 0.001%. The author's decision is
+  that the fleet avoids lighting the night zones.
 - **The air under the shield has no oxidant.** The titania stack removes the ultraviolet that makes OH, ozone and
   HO2, so the design column holds none of them. Gases released into the air (hydrogen, methane, carbon monoxide,
   organic compounds and lightning's NO) leave only through soils, rain and escape. Lightning's NO accumulates in the
@@ -82,8 +83,10 @@ the evening twilight. Tilts turn the reflected ray through twice their angle:
 Each tile's glint is an image of the Sun about 170 km across, at 7–12 lux. Only tiles within a few thousand
 kilometres of the Moon's shadow can land theirs: 3.5% of the night-side tiles for 1.5° tilts, 14% for 6°.
 
-**The design options.** The author's guidance is to redirect the light away from the Moon, and to use it where
-possible, rather than lose more of the night.
+**The design options.** The author's decision ([register](../../decisions.md#solar-shield-and-habitat-array), 8 October)
+is to avoid lighting the night zones: the light is redirected away from the Moon and used where it can be, for
+computing for instance. Lighting over cities might be acceptable if fairly fine spotlights are possible; a tile's
+glint, an image of the Sun about 170 km across, covers a city and its whole surroundings.
 - *Steering the glints away* works with a rule for the tiles near the shadow, tilting only away from the Moon there,
   or with the roll below, which sends every reflection far from it.
 - *Rolling the night half.* The shield's attitude study found rolls of 30°, 60° and 80° outside the service arc
@@ -95,7 +98,7 @@ possible, rather than lose more of the night.
   flew, electrochromic films switched 2–20 times an orbit) can hold a night state of least reflection. That lowers
   the mirrored light; the diffuse scatter is a property of the films' surfaces and their wear, so it stays.
 - *Using the light.* The night half's 0.85 EW never reaches the Moon. The light a rolled or switched tile turns away
-  can feed collectors, which the planned research/array-industry branch takes up.
+  can feed collectors for computing, which the planned research/array-industry branch takes up.
 
 Together, a roll near 80° and a Moon-facing scatter of 10⁻⁵ give about 0.02 lux at a far-side midnight, below a
 tenth of a lux but twenty times the natural darkness there. A natural far-side night needs scatter near 10⁻⁷ even
@@ -294,10 +297,11 @@ opportunities and compatible construction and renewal cases.
 ## What comes next
 
 Ranked by what each would settle for the whole, with machine time where it can be given:
-1. **The fleet's night.** A requirement for the light the shield may put on the Moon's night, set from the biosphere
-   and human work, then a night-side attitude law flown in the ring dynamics (rolls with the keeping law; hours of
-   flights, as the shield's twelve kept orbits took 55 CPU minutes) and the films' scatter. This belongs in the
-   planned research/array-industry branch with the trim and store hardware.
+1. **The fleet's night.** The author has decided that the fleet avoids lighting the night zones. The requirement's
+   value comes from the biosphere and human work; then a night-side attitude law flown in the ring dynamics (rolls
+   with the keeping law; hours of flights, as the shield's twelve kept orbits took 55 CPU minutes), the films'
+   scatter, and collectors for the light the night half turns away. This belongs in the planned
+   research/array-industry branch with the trim and store hardware.
 2. **The crown as a lightning conductor.** The tower's induced charge in these fields, its upward leaders and their
    charge, a lightning protection concept for 100-plus triggered flashes a year, and the hydrogen berths beside it.
    A terrain-aware electrified storm needs CM1's field solver over terrain, new work in climate/crm that touches the
@@ -313,9 +317,10 @@ Ranked by what each would settle for the whole, with machine time where it can b
 
 ## Decisions for the author
 
-- The light the fleet may put on the Moon's night, and whether to pursue the night-side roll, the films' scatter or
-  both (section 1).
-- Whether a lit night is a design feature anywhere, for instance over cities (section 1).
+- Decided on 8 October: the fleet avoids lighting the night zones, its light redirected away from the Moon and used
+  where it can be; lighting over cities might be acceptable if fairly fine spotlights are possible (section 1;
+  [register](../../decisions.md#solar-shield-and-habitat-array)). The requirement's value, from the biosphere and
+  human work, sets the means: the night-side roll, the films' scatter or both.
 - The chosen form's programme, and with it the crown's berths (the 750 m class needs nine on the square lattice's
   programme).
 - The regional magnets' design and turn (section 7).
