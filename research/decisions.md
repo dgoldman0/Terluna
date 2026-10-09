@@ -31,6 +31,7 @@ Sources:
 | The Moon keeps its orbit, gravity, synchronous rotation and 29.53-day solar cycle. Life and culture adapt to the long day and night, storing resources across them. | July | Stands |
 | Construction within 500 years of 2026, and operation for at least 10⁹ years. | Sep 4 | Stands |
 | An open atmosphere with no pressure dome over the Moon. | Sep 4 | Stands. Local enclosed places, such as the undersea Tranquility community (conservation D6), are separate. |
+| Importing carbon, potassium and any other element is part of the plan. The design problem is the steady state: what carries each element downhill into the seas and sediments, and which local processes, biological, physical or engineered, return it. That is the return limb the Moon's missing geology leaves open, with carbon worked out together with the mineral and nutrient cycles. | Author, 2026-09-25 ("we would obviously ship enough in to accommodate the growing biosphere. But once it's grown and established and the cycle is in place it would be fairly sustained by local processes esp. with sustainability of other things like figuring out mineral cycle?"); 2026-09-27 (shipping in potassium like everything else "was never the issue") | Stands ([resources](../resources/README.md); the return limb in [research/studies/lunar_cycle_ecology](studies/lunar_cycle_ecology/README.md)) |
 
 ## Light and time
 

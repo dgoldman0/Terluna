@@ -1,0 +1,365 @@
+{
+ "schema": "terluna.resources.first-screen/1",
+ "producer": {
+  "domain": "resources",
+  "files": {
+   "resources/screen.py": "032fdf3205e3bbb2"
+  },
+  "inputs": {
+   "research/baselines/feasibility/reference.json": "5878ad8ff00e42bf",
+   "geography/results/atlas.json": "78cfbf2f469eb339",
+   "geography/results/drainage.json": "18494e3d3656ead7",
+   "geography/results/groundwater.json": "45375eb62f3bad0f",
+   "research/studies/atmospheric_co2/results/atmospheric_co2.json": "80db612918d3fc44",
+   "atmosphere/loss_response/results/euv_sweep.csv": "95527c374586e4f8",
+   "research/studies/solar_shield_array/results/array_heat.json": "d964f1a5e1dec2e9",
+   "research/studies/lunar_cycle_ecology/results/lunar_cycle_ecology.json": "1f35337c24ecf867",
+   "research/studies/conservation/results/gates.json": "65b855711fbf1b06",
+   "research/studies/joint_synthesis/results/ledgers.json": "b370faf4c735a78d"
+  },
+  "constants": {
+   "MOON_GM": 4902800118000.0,
+   "MOON_RADIUS": 1737400.0
+  }
+ },
+ "evidence": "A screen on committed products (the reference air, the geography inventories, the CO2 study, the loss sweep, the array heat screen, the ecology register's weathering, the conservation gates) with the stated literature values. Closed-form arithmetic; no transport, geochemical or industrial model is run.",
+ "reading_rule": "Masses in kg, flows in kg/s or per year, energies in J/kg, heat in W/m2 averaged over the Moon (against the design sunlight at the top of the air, 293.3 W/m2), times in years. Ranges are low-high.",
+ "inventories": {
+  "air_kg": 3.1413494805269903e+18,
+  "n2_kg": 2.528670076846971e+18,
+  "o2_kg": 6.126794036800198e+17,
+  "air_mol": 1.094e+20,
+  "co2_kg": 1930000000000000.0,
+  "co2_kg_constant_gravity_study": 1734000000000000.0,
+  "biosphere_co2_kg": [
+   1501000000000000.0,
+   1601000000000000.0
+  ],
+  "water": {
+   "seas_kg": 1.0707076215540812e+19,
+   "lakes_kg": 3.108625e+18,
+   "crust_kg": [
+    4.976e+18,
+    5.93e+19
+   ],
+   "total_kg": [
+    1.3815701215540812e+19,
+    7.311570121554081e+19
+   ]
+  },
+  "water_over_air": [
+   4.4,
+   23.3
+  ]
+ },
+ "delivery": {
+  "build_years": 500.0,
+  "exobase_radius_r": [
+   1.77,
+   2.56
+  ],
+  "fall_mj_per_kg": {
+   "exobase": [
+    1.22,
+    1.72
+   ],
+   "ring_radius": 2.58,
+   "far_terminal": 2.74
+  },
+  "mass_kg": [
+   1.7e+19,
+   7.63e+19
+  ],
+  "flow_kg_s": [
+   1070000000.0,
+   4830000000.0
+  ],
+  "heat_w_m2_if_dissipated_on_moon": [
+   35.0,
+   349.0
+  ],
+  "share_of_design_sunlight": [
+   0.12,
+   1.19
+  ]
+ },
+ "hydrogen": {
+  "water_to_carry_the_oxygen_kg": 6.9e+17,
+  "hydrogen_kg": 7.72e+16,
+  "mole_fraction_if_released": 0.259,
+  "share_of_air_oxygen_it_would_burn": 1.0,
+  "sky_fleet_share": [
+   6.2e-10,
+   9.2e-10
+  ]
+ },
+ "oxygen_sink": {
+  "runoff_rescale": 0.822,
+  "rock_weathered_gt_yr": [
+   0.93,
+   9.33
+  ],
+  "o2_sink_mt_yr": [
+   5.2,
+   166.3
+  ],
+  "o2_cycle_myr": [
+   3.7,
+   117.9
+  ],
+  "erosion_limited_o2_mt_yr": [
+   4.0,
+   126.5
+  ],
+  "air_oxygen_per_operation": [
+   6.5,
+   206.5
+  ],
+  "times_all_escape": [
+   118,
+   3763
+  ]
+ },
+ "film": {
+  "optical_mass_gt": [
+   46.17499393913809,
+   46.38400661641534
+  ],
+  "tio2_gt": [
+   3.75,
+   3.77
+  ],
+  "sio2_gt": [
+   34.4,
+   34.5
+  ],
+  "ilmenite_for_the_tio2_gt": [
+   7.1,
+   7.2
+  ],
+  "upkeep_gt_yr": [
+   2.3087496969569044,
+   4.638400661641534
+  ],
+  "upkeep_kg_s": [
+   73160,
+   146982
+  ],
+  "fresh_feed_kg_s": {
+   "0.99": [
+    732,
+    1470
+   ],
+   "0.999": [
+    73,
+    147
+   ]
+  },
+  "fresh_feed_atmospheres_per_operation": {
+   "0.99": [
+    7.4,
+    15.0
+   ],
+   "0.999": [
+    0.7,
+    1.5
+   ]
+  },
+  "lift_to_ring_mj_kg": 2.7,
+  "lift_fleet_in_100_years_gw": [
+   39,
+   40
+  ]
+ },
+ "flooded_ore": {
+  "maria": [
+   {
+    "name": "Oceanus Procellarum",
+    "flooded": 0.599
+   },
+   {
+    "name": "Mare Frigoris",
+    "flooded": 0.732
+   },
+   {
+    "name": "Mare Imbrium",
+    "flooded": 0.992
+   },
+   {
+    "name": "Mare Australe",
+    "flooded": 0.095
+   },
+   {
+    "name": "Mare Tranquillitatis",
+    "flooded": 0.365
+   },
+   {
+    "name": "Mare Fecunditatis",
+    "flooded": 0.647
+   },
+   {
+    "name": "Mare Nubium",
+    "flooded": 0.992
+   },
+   {
+    "name": "Mare Serenitatis",
+    "flooded": 1.0
+   },
+   {
+    "name": "Mare Crisium",
+    "flooded": 1.0
+   },
+   {
+    "name": "Mare Insularum",
+    "flooded": 0.0
+   },
+   {
+    "name": "Mare Humorum",
+    "flooded": 1.0
+   },
+   {
+    "name": "Mare Smythii",
+    "flooded": 1.0
+   },
+   {
+    "name": "Mare Marginis",
+    "flooded": 0.833
+   },
+   {
+    "name": "Mare Cognitum",
+    "flooded": 0.998
+   },
+   {
+    "name": "Mare Nectaris",
+    "flooded": 1.0
+   },
+   {
+    "name": "Mare Orientale",
+    "flooded": 1.0
+   },
+   {
+    "name": "Mare Ingenii",
+    "flooded": 1.0
+   },
+   {
+    "name": "Mare Moscoviense",
+    "flooded": 0.995
+   },
+   {
+    "name": "Mare Undarum",
+    "flooded": 0.057
+   },
+   {
+    "name": "Mare Vaporum",
+    "flooded": 0.0
+   },
+   {
+    "name": "Mare Humboldtianum",
+    "flooded": 1.0
+   }
+  ],
+  "fully_flooded": [
+   "Mare Imbrium",
+   "Mare Nubium",
+   "Mare Serenitatis",
+   "Mare Crisium",
+   "Mare Humorum",
+   "Mare Smythii",
+   "Mare Cognitum",
+   "Mare Nectaris",
+   "Mare Orientale",
+   "Mare Ingenii",
+   "Mare Moscoviense",
+   "Mare Humboldtianum"
+  ],
+  "partly_dry": [
+   {
+    "name": "Oceanus Procellarum",
+    "dry": 0.4
+   },
+   {
+    "name": "Mare Frigoris",
+    "dry": 0.27
+   },
+   {
+    "name": "Mare Australe",
+    "dry": 0.91
+   },
+   {
+    "name": "Mare Tranquillitatis",
+    "dry": 0.64
+   },
+   {
+    "name": "Mare Fecunditatis",
+    "dry": 0.35
+   },
+   {
+    "name": "Mare Insularum",
+    "dry": 1.0
+   },
+   {
+    "name": "Mare Marginis",
+    "dry": 0.17
+   },
+   {
+    "name": "Mare Undarum",
+    "dry": 0.94
+   },
+   {
+    "name": "Mare Vaporum",
+    "dry": 1.0
+   }
+  ]
+ },
+ "carbon_beyond_the_biosphere": {
+  "co2_per_metre_of_soil_kg": 6670000000000000.0,
+  "per_metre_over_air_co2": 3.5,
+  "seas_and_lakes_dic_co2_kg": [
+   1220000000000000.0,
+   1400000000000000.0
+  ],
+  "seas_over_air_co2": [
+   0.63,
+   0.72
+  ]
+ },
+ "fresh_seas": {
+  "cations_g_m2_yr": [
+   5.66,
+   56.63
+  ],
+  "bicarbonate_g_m2_yr": [
+   21.6,
+   215.7
+  ],
+  "silica_g_m2_yr": [
+   17.2,
+   171.8
+  ],
+  "rise_mg_kg_per_year": {
+   "cations": [
+    0.011,
+    0.112
+   ],
+   "all_dissolved": [
+    0.088,
+    0.878
+   ]
+  },
+  "years_to_1_g_kg": {
+   "cations": [
+    8900.0,
+    89300.0
+   ],
+   "all_dissolved": [
+    1100.0,
+    11400.0
+   ]
+  },
+  "years_to_earth_salinity_cations": [
+   313000.0,
+   3127000.0
+  ],
+  "note": "Calcite and silica precipitate and biology takes up silica, so the dissolved total is an upper bound on the rise; the imported water's own salts come on top."
+ }
+}

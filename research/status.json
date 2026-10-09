@@ -201,6 +201,20 @@
       "next_session_task": "How fast and how deep the crust takes up water, which sets the inventory to deliver (1.8-6.8 times the seas, by the first estimate); polar cold-trapping."
     },
     {
+      "topic": "resources",
+      "condition": "domain_opened_2026_10_09; evaluation_and_literature; first_screen_inventories_delivery_heat_redox_oxygen_sink_film_flooded_ore_carbon_fresh_seas",
+      "material": [
+        "../resources/README.md",
+        "../resources/state.md",
+        "../resources/literature.md",
+        "../resources/sources.json",
+        "../resources/screen.py",
+        "../resources/results/first_screen.json"
+      ],
+      "unresolved": [],
+      "next_session_task": "Set out the domain's open questions in order."
+    },
+    {
       "topic": "illumination",
       "condition": "conditional_clear_sky_solver_and_site_geometry; clear_sky_surface_spectra_202_1000nm_on_solved_columns_two_stream; optical_comfort_clear_sky_surface_and_eye_screen_with_earth_controls; optical_comfort_packed_angular_sky_transfer_and_finite_matte_scene_transport; cloud_twilight_corrected_cm1_occurrence_and_spherical_molecular_beam_screen; optical_comfort_local_native_sky_and_resolved_wave_slopes; cloud_twilight_local_second_cycle_condensate_and_liquid_extinction_scenarios; solved_column_shielded_spherical_sky_and_updated_gaze_and_finite_scenes; second_cycle_regional_evening_clouds_and_spectral_multiple_scattering_scenarios; dated_light_calendar_2000_2500_sea_appearance; measured_earthlight_albedo_0_242; water_surface_and_water_column_optics; haze_optics_of_the_aerosol_modes; ring_fleet_night_light_screened",
       "material": [

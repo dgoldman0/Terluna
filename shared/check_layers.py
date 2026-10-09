@@ -4,7 +4,7 @@
 Lanes, by top-level folder:
   shared         the foundation: constants and conventions every lane may use
   domain         atmosphere, climate, biosphere, protection, engineering,
-                 geography, habitation, illumination
+                 geography, habitation, illumination, resources
   research       the hub and its cross-domain studies
   visualization  scientific and engineering rendering of domain results
   immersion-engine  immersion/engine: rendering and runtime systems for any world
@@ -41,7 +41,7 @@ from pathlib import Path, PurePosixPath
 
 ROOT = Path(__file__).resolve().parents[1]
 DOMAINS = {"atmosphere", "climate", "biosphere", "protection", "engineering",
-           "geography", "habitation", "illumination"}
+           "geography", "habitation", "illumination", "resources"}
 ALLOWED = {
     "shared": {"shared"},
     "domain": {"shared", "domain"},

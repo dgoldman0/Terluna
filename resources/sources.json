@@ -1,0 +1,467 @@
+{
+ "source_admission": "Published values used as constants or quoted ranges; no external dataset files are admitted. 'access' records how far each source was checked: 'reported' means taken from the literature search of 2026-10-09 (its register is kept with the domain's run records on the research drive) and not re-read here. Bibliographic details are as reported.",
+ "sources": [
+  {
+   "citation": "Heiken, Vaniman & French (eds) 1991, Lunar Sourcebook, Cambridge University Press",
+   "doi_or_url": "https://www.lpi.usra.edu/publications/books/lunar_sourcebook/",
+   "use": "Soil compositions by terrane (Table 7.15); FeO 5-16 wt% for the oxygen sink; regolith depth; metallic iron; volatiles",
+   "access": "reported by the literature search of 2026-10-09 (full text of chapters 5-8 and 11)"
+  },
+  {
+   "citation": "Jolliff et al. 2000, JGR 105, 4197",
+   "doi_or_url": "10.1029/1999JE001103",
+   "use": "The Procellarum KREEP Terrane holds about 40% of the crust's thorium",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Taylor & Wieczorek 2014, Phil. Trans. R. Soc. A 372, 20130242",
+   "doi_or_url": "10.1098/rsta.2013.0242",
+   "use": "The Moon depleted 75% in K, Rb, Cs and 99% in Tl, Cd",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Sossi, Nakajima & Khan 2024, Treatise on Geochemistry vol. 3 (arXiv:2408.16840)",
+   "doi_or_url": "https://arxiv.org/abs/2408.16840",
+   "use": "Bulk silicate Moon molybdenum about 0.019 ppm (via the ecology register)",
+   "access": "reported by the literature search of 2026-10-09 (full text, molybdenum section)"
+  },
+  {
+   "citation": "Gislason & Oelkers 2003, Geochim. Cosmochim. Acta 67, 3817",
+   "doi_or_url": "10.1016/S0016-7037(03)00176-5",
+   "use": "Basaltic glass dissolution rate law",
+   "access": "reported by the literature search of 2026-10-09 (abstract and introduction)"
+  },
+  {
+   "citation": "Palandri & Kharaka 2004, USGS Open-File Report 2004-1068",
+   "doi_or_url": "https://pubs.usgs.gov/of/2004/1068/",
+   "use": "Mineral dissolution rate constants: anorthite against albite and forsterite",
+   "access": "reported by the literature search of 2026-10-09 (full text, rate tables)"
+  },
+  {
+   "citation": "White & Brantley 2003, Chemical Geology 202, 479",
+   "doi_or_url": "10.1016/j.chemgeo.2003.03.001",
+   "use": "Field weathering rates fall as t^-0.61",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Dessert et al. 2003, Chemical Geology 202, 257",
+   "doi_or_url": "10.1016/j.chemgeo.2002.10.001",
+   "use": "The basalt-catchment CO2 consumption law",
+   "access": "reported by the literature search of 2026-10-09 (full text)"
+  },
+  {
+   "citation": "Matter et al. 2016, Science 352, 1312",
+   "doi_or_url": "10.1126/science.aad8132",
+   "use": "CO2 in basalt mineralizes over 95% in two years",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Beerling et al. 2024, PNAS 121, e2319436121",
+   "doi_or_url": "10.1073/pnas.2319436121",
+   "use": "US Corn Belt basalt trial: 10.5 t CO2/ha over 4 years",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "McBride et al. 2025, Frontiers in Climate 7, 1606574",
+   "doi_or_url": "10.3389/fclim.2025.1606574",
+   "use": "Scottish basalt trial: 0.33-0.53 t CO2/ha in 1.5 years",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Dupla, Bertagni & Grand 2025, Environ. Sci. Technol. 59, 25751",
+   "doi_or_url": "10.1021/acs.est.5c09820",
+   "use": "Swiss vineyard trial: about 0.1 t CO2/ha/yr",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Renforth 2019, Nature Communications 10, 1401",
+   "doi_or_url": "10.1038/s41467-019-09475-5",
+   "use": "Which cations carry CO2; iron carries none",
+   "access": "reported by the literature search of 2026-10-09 (abstract and method equations)"
+  },
+  {
+   "citation": "Hurowitz et al. 2010, Nature Geoscience 3, 323",
+   "doi_or_url": "10.1038/ngeo831",
+   "use": "Ferrous iron oxidizing away from its rock makes acid water",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Puigdomènech et al. 2001, SKB TR-01-05 (REX project)",
+   "doi_or_url": "https://www.osti.gov/etdeweb/biblio/20161999",
+   "use": "Dissolved oxygen used up by ferrous minerals and microbes within days",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Daines, Mills & Lenton 2017, Nature Communications 8, 14379",
+   "doi_or_url": "10.1038/ncomms14379",
+   "use": "Earth's oxidative weathering and crustal ferric excess",
+   "access": "reported by the literature search of 2026-10-09 (abstract and passages)"
+  },
+  {
+   "citation": "Freer, Pesch & Zabel 2024, Frontiers in Space Technologies 5, 1366591",
+   "doi_or_url": "10.3389/frspt.2024.1366591",
+   "use": "Lunar simulant and Apollo soils in water",
+   "access": "reported by the literature search of 2026-10-09 (full text)"
+  },
+  {
+   "citation": "Ming, Galindo & Henninger 1990, CELSS 89 Workshop, NASA Ames",
+   "doi_or_url": "https://ntrs.nasa.gov/citations/19910022486",
+   "use": "Nutrients in lunar regolith against terrestrial soils",
+   "access": "reported by the literature search of 2026-10-09 (full text)"
+  },
+  {
+   "citation": "Xia, Yuan, Li & Sun 2023, Communications Biology 6, 1039",
+   "doi_or_url": "10.1038/s42003-023-05391-z",
+   "use": "Bacteria release phosphorus from lunar simulant",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Manning 2018, Natural Resources Research 27, 217",
+   "doi_or_url": "10.1007/s11053-017-9347-2",
+   "use": "Soils lose potassium twice as fast as it is replaced",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Severinghaus et al. 1994, Eos 75(3), 33",
+   "doi_or_url": "10.1029/94EO00285",
+   "use": "Biosphere 2's oxygen loss to soil respiration and concrete",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Fu et al. 2016, Astrobiology 16, 925",
+   "doi_or_url": "10.1089/ast.2016.1477",
+   "use": "Lunar Palace 1 closure and nitrogen recovery",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Fu et al. 2021, bioRxiv 2021.01.12.426282",
+   "doi_or_url": "10.1101/2021.01.12.426282",
+   "use": "Lunar Palace 365 closure",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Verbeelen, Leys, Ganigué & Mastroleo 2021, Frontiers in Microbiology 12, 700810",
+   "doi_or_url": "10.3389/fmicb.2021.700810",
+   "use": "Nitrogen recovery in regenerative life support",
+   "access": "reported by the literature search of 2026-10-09 (full text)"
+  },
+  {
+   "citation": "Rubin et al. 2015, Science 348, 232",
+   "doi_or_url": "10.1126/science.aaa6100",
+   "use": "Comet 67P's N2/CO about 0.006",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Altwegg et al. 2020, Nature Astronomy 4, 533",
+   "doi_or_url": "10.1038/s41550-019-0991-9",
+   "use": "Comet nitrogen in ammonium salts",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Yokoyama et al. 2023, Science 379, eabn7850",
+   "doi_or_url": "10.1126/science.abn7850",
+   "use": "Ryugu's carbon and water",
+   "access": "reported by the literature search of 2026-10-09 (full text)"
+  },
+  {
+   "citation": "Glavin et al. 2025, Nature Astronomy 9, 199",
+   "doi_or_url": "10.1038/s41550-024-02472-9",
+   "use": "Bennu's carbon and nitrogen",
+   "access": "reported by the literature search of 2026-10-09 (abstract and passages)"
+  },
+  {
+   "citation": "De Sanctis et al. 2015, Nature 528, 241",
+   "doi_or_url": "10.1038/nature16172",
+   "use": "Ammoniated clays on Ceres",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Marchi et al. 2019, Nature Astronomy 3, 140",
+   "doi_or_url": "10.1038/s41550-018-0656-0",
+   "use": "Carbon-rich surface of Ceres",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Fulchignoni et al. 2005, Nature 438, 785",
+   "doi_or_url": "10.1038/nature04314",
+   "use": "Titan's surface pressure, 1,467 hPa",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Glein & Waite 2018, Icarus 313, 79",
+   "doi_or_url": "10.1016/j.icarus.2018.05.007",
+   "use": "N2 in Pluto's Sputnik Planitia",
+   "access": "reported by the literature search of 2026-10-09 (full text)"
+  },
+  {
+   "citation": "Johnson, Keane, Young & Matsuyama 2021, Planetary Science Journal 2, 194",
+   "doi_or_url": "10.3847/PSJ/ac1d42",
+   "use": "A thickness limit for Sputnik Planitia's ice",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Pitjeva & Pitjev 2018, Astronomy Letters 44, 554",
+   "doi_or_url": "10.1134/S1063773718090050",
+   "use": "Masses of the main and Kuiper belts",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "McKay, Toon & Kasting 1991, Nature 352, 489",
+   "doi_or_url": "10.1038/352489a0",
+   "use": "Nitrogen as a constraint on terraforming Mars",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Jakosky & Edwards 2018, Nature Astronomy 2, 634",
+   "doi_or_url": "10.1038/s41550-018-0529-6",
+   "use": "Mars's CO2 inventory",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Vondrak 1974, Nature 248, 657",
+   "doi_or_url": "10.1038/248657a0",
+   "use": "An artificial lunar atmosphere",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Zubrin & McKay 1993, AIAA 93-2005",
+   "doi_or_url": "http://www.users.globalnet.co.uk/~mfogg/zubrin.htm",
+   "use": "Redirecting outer-system ammonia bodies with gravity assists",
+   "access": "reported by the literature search of 2026-10-09 (full text, online version)"
+  },
+  {
+   "citation": "Lomax et al. 2020, Planetary and Space Science 180, 104748",
+   "doi_or_url": "10.1016/j.pss.2019.104748",
+   "use": "Electro-deoxidation of lunar simulant",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Sargeant et al. 2020, Planetary and Space Science 180, 104751",
+   "doi_or_url": "10.1016/j.pss.2019.104751",
+   "use": "Hydrogen reduction of ilmenite",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Runyon et al. 2025, EarthArXiv (IAC 2022)",
+   "doi_or_url": "10.31223/X5G438",
+   "use": "A molten regolith electrolysis pilot design",
+   "access": "reported by the literature search of 2026-10-09 (full text)"
+  },
+  {
+   "citation": "Landis 2005, NASA/TM-2005-214014",
+   "doi_or_url": "https://ntrs.nasa.gov/citations/20060004126",
+   "use": "Glass and silicon from lunar materials; iron as the purity problem",
+   "access": "reported by the literature search of 2026-10-09 (full text)"
+  },
+  {
+   "citation": "Freundlich et al. 2005, 31st IEEE Photovoltaic Specialists Conference, 794",
+   "doi_or_url": "10.1109/PVSC.2005.1488252",
+   "use": "Transparent silica films from evaporated simulant",
+   "access": "reported by the literature search of 2026-10-09 (full text)"
+  },
+  {
+   "citation": "Middlemas, Fang & Fan 2015, Journal of Cleaner Production 89, 137",
+   "doi_or_url": "10.1016/j.jclepro.2014.11.019",
+   "use": "Energy of titania production",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "USGS 2025, Mineral Commodity Summaries",
+   "doi_or_url": "https://pubs.usgs.gov/periodicals/mcs2025/",
+   "use": "World titania, cement, lime, phosphate and potash",
+   "access": "reported by the literature search of 2026-10-09 (full text of seven chapters)"
+  },
+  {
+   "citation": "O'Neill 1974, Physics Today 27(9), 32",
+   "doi_or_url": "10.1063/1.3128863",
+   "use": "Mass drivers on an airless Moon",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Johnson & Holbrow (eds) 1977, NASA SP-413, Space Settlements",
+   "doi_or_url": "https://ntrs.nasa.gov/citations/19770014162",
+   "use": "Mass driver throughput and energy",
+   "access": "reported by the literature search of 2026-10-09 (full text, mass-driver sections)"
+  },
+  {
+   "citation": "McNab 2003, IEEE Transactions on Magnetics 39, 295",
+   "doi_or_url": "10.1109/TMAG.2002.805923",
+   "use": "Electromagnetic launch to orbit through an atmosphere",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Eubanks & Radley 2016, Space Policy 37, 97",
+   "doi_or_url": "10.1016/j.spacepol.2016.08.005",
+   "use": "A lunar space elevator from commercial polymers",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Pearson, Levin, Oldson & Wykes 2005, Lunar Space Elevators for Cislunar Space Development, NIAC Phase I report",
+   "doi_or_url": "https://www.niac.usra.edu/files/studies/final_report/1032Pearson.pdf",
+   "use": "A lunar elevator lifts about 584 t a year (via the provisioning register)",
+   "access": "reported by the literature search of 2026-10-09 (full text)"
+  },
+  {
+   "citation": "Schorcht et al. 2013, JRC Best Available Techniques Reference for Cement, Lime and Magnesium Oxide, EUR 26129 EN",
+   "doi_or_url": "https://aida.ineris.fr/sites/default/files/documents-bref/CLM_BREF_042013.pdf",
+   "use": "Calcination energy of calcite and magnesite; kiln energy",
+   "access": "reported by the literature search of 2026-10-09 (full text, lime and magnesia sections)"
+  },
+  {
+   "citation": "Mendonça et al. 2017, Nature Communications 8, 1694",
+   "doi_or_url": "10.1038/s41467-017-01789-6",
+   "use": "Carbon burial in lakes and reservoirs",
+   "access": "reported by the literature search of 2026-10-09 (abstract and passages)"
+  },
+  {
+   "citation": "Smith et al. 2015, Nature Geoscience 8, 450",
+   "doi_or_url": "10.1038/ngeo2421",
+   "use": "Carbon burial in fjords",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Berner 2001, American Journal of Science 301, 182",
+   "doi_or_url": "10.2475/ajs.301.2.182",
+   "use": "GEOCARB III, the long-term carbon cycle",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Walker, Hays & Kasting 1981, JGR 86, 9776",
+   "doi_or_url": "10.1029/JC086iC10p09776",
+   "use": "The silicate-weathering thermostat",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Fischer et al. 2019, Scientific Reports 9, 18716",
+   "doi_or_url": "10.1038/s41598-019-54682-1",
+   "use": "Subaerial volcanic CO2, about 51 Tg a year",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Conrad 1996, Microbiological Reviews 60, 609",
+   "doi_or_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC239458/",
+   "use": "Soils as controllers of atmospheric trace gases",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Ehhalt & Rohrer 2009, Tellus B 61, 500",
+   "doi_or_url": "10.1111/j.1600-0889.2009.00416.x",
+   "use": "Soils remove about 76% of H2",
+   "access": "reported by the literature search of 2026-10-09 (abstract and section 4.2)"
+  },
+  {
+   "citation": "Saunois et al. 2020, Earth System Science Data 12, 1561",
+   "doi_or_url": "10.5194/essd-12-1561-2020",
+   "use": "Soil methane uptake about 32 Tg a year",
+   "access": "reported by the literature search of 2026-10-09 (abstract and sink sections)"
+  },
+  {
+   "citation": "Liu et al. 2018, Atmos. Chem. Phys. 18, 7913",
+   "doi_or_url": "10.5194/acp-18-7913-2018",
+   "use": "Soil uptake of CO",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Zheng et al. 2019, Earth System Science Data 11, 1411",
+   "doi_or_url": "10.5194/essd-11-1411-2019",
+   "use": "The global CO budget",
+   "access": "reported by the literature search of 2026-10-09 (passages)"
+  },
+  {
+   "citation": "Prather et al. 2015, JGR Atmospheres 120, 5693",
+   "doi_or_url": "10.1002/2015JD023267",
+   "use": "N2O lifetime of 116 years",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Schlesinger 2013, Global Change Biology 19, 2929",
+   "doi_or_url": "10.1111/gcb.12239",
+   "use": "Soils take up at most 0.3 Tg N a year of N2O",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Tian et al. 2020, Nature 586, 248",
+   "doi_or_url": "10.1038/s41586-020-2780-0",
+   "use": "N2O sources, 17 Tg N a year",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Steffen et al. 2015, Science 347, 1259855",
+   "doi_or_url": "10.1126/science.1259855",
+   "use": "Planetary boundaries for nitrogen and phosphorus",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Richardson et al. 2023, Science Advances 9, eadh2458",
+   "doi_or_url": "10.1126/sciadv.adh2458",
+   "use": "Planetary boundaries updated",
+   "access": "reported by the literature search of 2026-10-09 (abstract and full text)"
+  },
+  {
+   "citation": "Cordell & White 2011, Sustainability 3, 2027",
+   "doi_or_url": "10.3390/su3102027",
+   "use": "Phosphorus depletion estimates",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Fowler et al. 2013, Phil. Trans. R. Soc. B 368, 20130164",
+   "doi_or_url": "10.1098/rstb.2013.0164",
+   "use": "The global nitrogen cycle",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Seitzinger et al. 2006, Ecological Applications 16, 2064",
+   "doi_or_url": "10.1890/1051-0761(2006)016[2064:DALAWA]2.0.CO;2",
+   "use": "Where denitrification happens",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Schumann & Huntrieser 2007, Atmos. Chem. Phys. 7, 3823",
+   "doi_or_url": "10.5194/acp-7-3823-2007",
+   "use": "Lightning fixes 5 +/- 3 Tg N a year",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Graedel 2019, Environ. Sci. Technol. 53, 12188",
+   "doi_or_url": "10.1021/acs.est.9b03413",
+   "use": "Material flow analysis",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Krausmann et al. 2017, PNAS 114, 1880",
+   "doi_or_url": "10.1073/pnas.1613773114",
+   "use": "Global in-use material stocks",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Haas et al. 2015, Journal of Industrial Ecology 19, 765",
+   "doi_or_url": "10.1111/jiec.12244",
+   "use": "Global material flows and recycling",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Angel 2006, PNAS 103, 17184",
+   "doi_or_url": "10.1073/pnas.0608163103",
+   "use": "A thin-film sunshade at L1",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Bromley, Khan & Kenyon 2023, PLOS Climate 2, e0000133",
+   "doi_or_url": "10.1371/journal.pclm.0000133",
+   "use": "A lunar dust sunshade",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Corso et al. 2024, ACS Applied Materials & Interfaces 16, 38645",
+   "doi_or_url": "10.1021/acsami.4c03362",
+   "use": "Proton damage to silica and titania films",
+   "access": "reported by the literature search of 2026-10-09 (abstract and full text)"
+  },
+  {
+   "citation": "Moorhead 2020, NASA/TM-2020-220555 (MEM 3)",
+   "doi_or_url": "https://ntrs.nasa.gov/citations/20200000563",
+   "use": "NASA's meteoroid environment model",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  }
+ ]
+}
