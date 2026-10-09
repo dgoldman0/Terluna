@@ -1,0 +1,48 @@
+{
+  "schema": "terluna.research.inhabited-volume-checks/1",
+  "date": "2026-10-09",
+  "scope": "Arithmetic and repository checks; no engineering or biological validation",
+  "focused": {
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m pytest research/studies/inhabited_volume/test_run.py provisioning/tests/test_population.py -q",
+    "passed": 24,
+    "failed": 0,
+    "new_study_tests": 15,
+    "log": "research/runs/inhabited_volume/focused_checks.log"
+  },
+  "broader_provisioning_before_final_roaming_update": {
+    "passed": 41,
+    "failed": 1,
+    "reason": "Missing geography/products/atlas_28pct_4ppd.npz in unchanged provisioning first-screen provenance test"
+  },
+  "required_make_check": {
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMBA_NUM_THREADS=1 make -k check",
+    "exit_code": 2,
+    "log": "research/runs/inhabited_volume/make_check.log",
+    "result": "Not passed",
+    "observed": "Python collection failed on missing protection/sources/TiO2_Siefke.yml; optical inputs were restored afterward. Log ended during immersion sky bake; later targets were checked separately. No broad Python pass claimed."
+  },
+  "separate_remaining_checks": {
+    "command": "make -k test-calendar check-provenance check-ensemble",
+    "exit_code": 0,
+    "calendar": {
+      "passed": 13,
+      "skipped": 1,
+      "reason": "Optical-comfort spherical atlas missing; sky-page assets not built"
+    },
+    "provenance": "PASS after restoration of the five original protection inputs",
+    "ensemble": "PASS planning/workspace integrity only",
+    "log": "research/runs/inhabited_volume/remaining_checks.log"
+  },
+  "layer_check": {
+    "command": "python shared/check_layers.py",
+    "violations": 0
+  },
+  "independent_review": "Read-only subagent found no blocking arithmetic/interpretation defects. Gas-mixture versus hydrogen inventory, neutral trim mass closure and use of shared lift fractions clarified and tested.",
+  "unperformed": [
+    "Full final repository Python suite after external-input restoration",
+    "Complete habitat structural and aerodynamic design",
+    "Climate rerun",
+    "Weather-derived safe manoeuvre duty cycle",
+    "Ecological carrying-capacity or sustainable-harvest validation"
+  ]
+}

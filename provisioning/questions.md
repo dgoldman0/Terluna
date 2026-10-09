@@ -21,16 +21,12 @@ on this laptop. The findings behind them are in the [README](README.md).
      column; then the added dimming that holds the planned climate's energy budget. The climate programme stays
      paused.
    - **Whose:** the shield's work on its films.
-2. **How many people, where, using what.** The author's working scale is 20–30 billion across the Solar System at
-   the frontier of thousands to tens of thousands of years ([population](population.md)). The placement among
-   Earth, the Moon and the array, and the energy band (2–6 kW of primary energy a person, centred on Europe's 3.7),
-   set every requirement after them. The resources domain's industry screen reads the scale with Earth at 10.3
-   billion and 2–14 billion in the array, and this domain's with 16–20 billion on Earth and 0.1–1 billion in the
-   array; the placement settles both.
-
-   **How:** the author's placement; then the Moon's heat answered beside the glow's, its water beyond its runoff,
-   dense districts' heat, people between the surface and orbit, and the array's habitats (population.md, its open
-   questions).
+2. **Capacity before population placement.** Use the [shared comparison cases](../shared/scenarios/population.json)
+   to compare lunar surface and aerial settlements with Earth and orbital habitats. The
+   [inhabited-volume screen](../research/studies/inhabited_volume/README.md) makes lift, wet mass, floor area,
+   projected footprint, holding power and domestic recovery explicit. Next are complete district architectures,
+   wind histories, agricultural water, nutrient return, traffic/rescue and ecological occupancy. Historical
+   Earth-heavy allocations and runoff stress thresholds do not settle capacity; no allocation is adopted.
 3. **The power system through the night.** Fusion is a planning assumption and a conditional technology. The
    alternatives:
    - a grid from the day side, with 9–19% losses over 4,000–5,500 km;
@@ -87,6 +83,6 @@ on this laptop. The findings behind them are in the [README](README.md).
 11. **Lamps and the dark night.** The summit's night has about 190 hours that need lamps. Their energy, and the
     skyglow of a city of 100 million in this scattering air, meet the dark-night requirement on the far side.
 12. **Health and life support.**
-    - Vitamin D for people under a sky with no UV-B.
+    - Vitamin D and other biological needs under the filtered spectrum, using diet/adaptation and controlled local UV; a narrow natural UV-B option remains a separately evaluated candidate under the cold-atmosphere requirements.
     - Artificial-gravity facilities, carried open from the July canon.
     - Life support for enclosed places, such as the undersea community.

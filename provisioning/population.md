@@ -9,6 +9,19 @@ the Moon and in the array, planned over the first thousand years and the several
 together, work and decide belongs to the human paper, *Living on an Open Moon*; this note gives the physical and
 provisioning situation they live in.
 
+## Interpretation corrected on 9 October 2026
+
+The original A/B/C placements below are historical illustrative inputs. They did not evaluate aerial residential
+capacity and provide no basis for preferring 16–20 billion residents on Earth or limiting the Moon to 2–5 billion.
+The author reopened the distribution. New joint accounting uses
+[shared population comparisons](../shared/scenarios/population.json) and the
+[inhabited-volume study](../research/studies/inhabited_volume/README.md), with explicit surface and aerial residents.
+No population allocation has been adopted. `population.py` and its saved product remain unchanged for reproduction.
+
+Runoff-per-person thresholds below are terrestrial water-stress indicators, not physical population ceilings.
+They do not model irrigation, reservoirs, fresh seas, reuse, regional redistribution or ecological allocation.
+Likewise, heat-tolerance and crop-area rows are conditional screens, not demonstrated carrying capacities.
+
 ## Findings
 
 1. **20–30 billion takes growth at the pre-industrial world's pace or slower.** The UN puts today's 8.2 billion at a
@@ -31,7 +44,7 @@ provisioning situation they live in.
    with America's 8.6 kW as a high case; it gives the metropolis brief's 2 kW a basis.
    Computing at 0.1–1 kW a person in orbit (assumption) adds 2–30 TW, 40–640 times today's data centres
    (*screen*; IEA 2025).
-4. **Under the planned climate, heat binds the Moon first unless added dimming answers it.** A terawatt used on the
+4. **The chosen heat tolerance constrains uncompensated local energy use.** A terawatt used on the
    Moon puts 0.026 W/m² on it, 13.5 times what it puts on Earth (*screen*). At Europe's energy with industry in
    orbit a person releases 2.8 kW on the Moon, and a warming of 0.1 K holds 1.4–2.2 billion people, 0.5 K
    6.8–11 billion (*screen*). Each terawatt is answered by 0.009–0.014% more dimming; 1% more answers 72–115 TW,
@@ -49,7 +62,7 @@ provisioning situation they live in.
    (Allen et al. 2011). The metropolis's 100 million over a 170 km GCM cell give 5–21 W/m² (*screen*), above the
    3 W/m² at which Flanner's model cells warm 0.15–0.24 K (Flanner 2009). The shield's dimming is global; a city's
    own heat is answered in the city.
-7. **The Moon's runoff binds next, near 4 billion.** The Moon's rivers carry 7,240 km³ a year to the seas (*screen*,
+7. **The runoff stress index crosses its historical threshold near 4 billion.** The Moon's rivers carry 7,240 km³ a year to the seas (*screen*,
    from the [drainage product](../geography/results/drainage.json)), 16% of Earth's 45,500 km³ (Oki & Kanae 2006),
    close to its dry land's 18% of Earth's 130 million km² of ice-free land (IPCC 2019). Falkenmark's stress line of
    1,700 m³ a person a year then falls at 4.3 billion and the scarcity line of 1,000 m³ at 7.2 billion (*screen*;
@@ -94,7 +107,7 @@ provisioning situation they live in.
     (*screen*). Sustained affluence holds energy per person near the needs plateau, with population growth under
     about 0.1% a year.
 
-## What binds first
+## Historical constraint indicators
 
 At Europe's 3.7 kW, with industry in orbit and thermal plants for the rest (*screen*):
 
@@ -117,7 +130,7 @@ The Moon's population at a warming of the planned climate, in billions, with ind
 
 ## Scenarios
 
-Three placements of the author's 20–30 billion, in billions, for comparison:
+Historical placements of the author's 20–30 billion, in billions. These were selected without a carrying-capacity comparison; use the shared cases for new accounting:
 
 | | Earth | Moon | Array | Elsewhere | Total |
 |---|---:|---:|---:|---:|---:|
@@ -146,8 +159,7 @@ puts the Moon's runoff below the stress line; A and B stay above it.
 
 ## Living
 
-- **On the Moon.** Water and the planned metropolis put most people in the rain belt, on the coasts and round the
-  summit. The
+- **On the Moon.** The rain belt, coasts and summit are candidate settings; their share of lunar residents has not been established. Aerial and supported districts are explicit alternatives in the inhabited-volume study. The
   metropolis brief's 70 m² of floor a person for home, work and services is three times the decent-living 24 m²
   (Vélez-Henao & Pauliuk 2023). A person using Europe's final energy, less industry, draws 650 kWh through each
   night, 590 times Earth's pumped storage per person (*screen*), so fusion, a day-side grid or power from orbit
@@ -188,23 +200,22 @@ puts the Moon's runoff below the stress line; A and B stay above it.
 
 ## What the plan needs
 
-1. A working placement of people and an energy band, which every number above follows.
+1. Compare surface, aerial and orbital capacities and requirements using the shared cases before choosing a placement; retain energy-band sensitivities.
 2. An answer to human heat on the Moon beside the glow's, counted by the heat each supply adds.
-3. Water for more than about 4 billion lunar residents, and heat limits on dense districts.
+3. Regional domestic and agricultural water balances for every case, with recovery and supply alternatives; the 4-billion stress index is not a capacity limit.
 4. A way up from the surface for people, and habitats in the array with their own orbits, shielding and food.
 5. Food on Earth partly off the land if Earth holds more than about 10 billion.
 6. Energy per person held at a plateau, and population growth near zero over the thousands of years.
 
 ## Open questions, in order of what they settle
 
-1. **The placement and the band.** How many people on Earth, the Moon and in the array, at what energy, by when;
-   it sets every requirement here and the three power ledgers the industrial architecture keeps apart.
+1. **Capacity before placement.** Quantify lunar surface and aerial habitation together, with mass, services, heat, food and ecological occupancy; compare them with Earth and orbital cases in the shared scenario file. No location distribution is selected.
 2. **How the Moon answers human heat.** The added dimming the shield can give beside the glow's; panel albedo for
-   sunlight converted on the ground; a day-side grid's 9–19% losses; fusion's share. It sets the Moon's ceiling and
+   sunlight converted on the ground; a day-side grid's 9–19% losses; fusion's share. It constrains a chosen case's local heat and
    power system ([questions](questions.md), 1 and 3).
 3. **The Moon's water beyond its runoff.** How long the seas and lakes stay fresh and how much can be drawn from
    them and returned, desalination's energy if they salt, farms against cities, groundwater, and settlement away from
-   the tropics; it sets the line near 4–7 billion, with geography, resources and ecology.
+   the tropics; it replaces the 4–7-billion stress-index shorthand with actual water budgets, with geography, resources and ecology.
 4. **Heat in dense districts.** What a district of 40,000 people per km² may release and how it sheds it; it sets
    the metropolis's density and energy.
 5. **People between the surface and orbit.** The ascent study, tethers or an elevator from altitude, and the

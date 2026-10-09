@@ -19,6 +19,13 @@ The word reaches past industry to everything a settled world provides itself wit
 
 Its open questions, in order, are in [questions.md](questions.md).
 
+**Population follow-up, 9 October 2026:** the original Earth-heavy population placements are historical
+illustrations, not capacity findings. The [inhabited-volume study](../research/studies/inhabited_volume/README.md)
+now evaluates lunar surface and aerial habitation together using
+[shared comparison cases](../shared/scenarios/population.json). It quantifies residential mass, buoyancy, projected
+area, holding-power sensitivity, domestic water recovery, food and heat. No allocation or maximum capacity is
+adopted, and runoff stress indices are not physical population ceilings.
+
 The author's decisions frame it:
 - **The Moon's cycle:** it keeps its 29.53-day cycle, and life stores resources across the night.
 - **Power:** fusion supplies most local power, supplemented by regional solar and wind (a planning assumption).
@@ -223,12 +230,12 @@ to tens of thousands of years, affluent by modern standards, mostly on Earth, th
     10 million in 2526, the Moon reaches a billion in 2756–2987 at 1–2% a year.
 14. **Affluence is 2–6 kW of primary energy a person, centred on Europe's 3.7.** Needs stop rising at 1.9 kW of final
     energy (Vogel et al. 2021), 2.9 kW of primary energy, which gives the metropolis brief's 2 kW a basis.
-15. **The planned climate sets the Moon's population unless dimming answers its heat.** With industry in orbit a
+15. **The selected heat tolerance constrains uncompensated local energy use.** With industry in orbit a
     person at Europe's energy releases 2.8 kW on the Moon: 0.1 K of warming holds 1.4–2.2 billion people and 0.5 K
     6.8–11 billion, while 1% more dimming answers the heat of 26–41 billion. Moving industry to orbit cuts a person's
     lunar heat by a quarter. Cities at 40,000 people per km² release 60–240 W/m², so a city's heat is answered in the
     city.
-16. **The Moon's runoff binds next, near 4 billion.** Its 7,240 km³ a year reaches the stress line at 4.3 billion and
+16. **The runoff stress index crosses a historical threshold near 4 billion.** Its 7,240 km³ a year reaches the stress line at 4.3 billion and
     scarcity at 7.2 billion; while the seas and lakes stay fresh, water drawn from them and returned supplies beyond it.
     Food land is ample: the dry land feeds 8.4–22 billion on Earth's 12% share of land in crops.
 17. **Earth binds on food within planetary boundaries.** A transformed food system feeds 10.2 billion within four

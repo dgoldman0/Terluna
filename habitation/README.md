@@ -4,6 +4,19 @@
 
 Existing theory includes hydrostatic pressure/density profiles, aerodynamic scaling, and the buoyancy relation: gross supported mass per volume is ambient density minus lifting-gas density. Envelope, structure and services consume that allowance. Gravity cancels in the ideal mass-lift relation. No geometric air volume is counted as usable floor area.
 
+## Inhabited volume follow-up
+
+The [inhabited-volume study](../research/studies/inhabited_volume/README.md), 9 October 2026, compares explicit surface
+and aerial populations from the shared scenario ledger. It calculates buoyant district payload, floor area, lifting
+gas, projected area and separation sensitivity, holding power, domestic water recovery and food/heat requirements.
+Five billion aerial residents in its central hypothetical 50-t/person district case need about 870,000 envelopes of
+500 m radius at 10 km. The summed projection is 1.8% of lunar area, while an imposed three-diameter single-layer
+grid uses 20.6%. Neither is an adopted occupancy limit. The author directs that much floating habitation should roam, with collision and storm management. Held spherical
+envelopes are a comparison; powered navigation, avoidance, rendezvous and occasional repositioning are budgeted
+through explicit duty-cycle sensitivities. Drifting, streamlined, moored and tower-supported designs need independent evaluations. Complete structure,
+reliability, traffic, rescue, health and ecological compatibility remain open. Atmospheric volume is never treated
+as free floor area, and no population distribution has been chosen.
+
 ## Community settings from the atlas
 
 The [conservation study](../research/studies/conservation/README.md) lists candidate settings for communities on the 28% [atlas](../geography/README.md#atlas-at-the-selected-water-share):
