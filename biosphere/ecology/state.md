@@ -96,7 +96,8 @@ These belong to main and stay unchanged on this branch.
    ranges assume Earth's ultraviolet.
 5. **The joint synthesis's nearside Earthlight.** Its night step adds a flat 2.3 lux to every nearside place, so
    Procellarum by Russell reads 2.4 lux where its own light calendar gives 0.48 at the darkest, and the Smythii
-   headland 0.001 against 0.085.
+   headland 0.001 against 0.085. Fixed on main on 9 October (78020e0): each place now takes the Earth's height and
+   phase over it, 0.44 lux by Russell and 0.07 at the Smythii headland.
 6. **The CO2 study's inputs.** It uses 26 °C and 349 mm of runoff against 21.75 °C and about 265 mm now, and the
    build-up's 72% land includes the lakes.
 7. **Plant twilight** still comes from the exponential-column sky atlas, which the illumination status asks to

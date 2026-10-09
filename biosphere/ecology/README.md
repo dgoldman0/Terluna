@@ -55,11 +55,12 @@ which.
    15–35% less flavonoid and anthocyanin, and see less pest pressure (Katsoulas et al. 2020). UV-B also primes the
    jasmonate defences against herbivores. The Moon's plants would grow well, colour paler and defend less. *Earth
    evidence; the size of the remaining UVR8 signal is uncomputed.*
-5. **Nearside nights are brighter than any nocturnal threshold Earth's life knows.** Earthlight keeps the nearside at
-   2.3–2.9 lux at its darkest (decisions register), 10–60 times typical full moonlight on Earth, 0.05–0.3 lux (Kyba et
-   al. 2017), and about a hundred times the 0.01–0.03 lux at which light at night suppresses melatonin in fishes and
-   rodents (Grubisic et al. 2019). Earth-calibrated nocturnal life fits the far side's low latitudes, about
-   0.001 lux at midnight, which is also where the summit metropolis stands. The fleet decision keeps the night
+5. **Nearside nights are brighter than any nocturnal threshold Earth's life knows.** Under a high Earth, Earthlight
+   keeps the nearside at 2.3–2.9 lux at its darkest (decisions register), 10–60 times typical full moonlight on
+   Earth, 0.05–0.3 lux (Kyba et al. 2017), and about a hundred times the 0.01–0.03 lux at which light at night
+   suppresses melatonin in fishes and rodents (Grubisic et al. 2019). Toward the limbs it falls to 0.07–0.44 lux
+   (joint synthesis, corrected on main on 9 October), still above those thresholds. Earth-calibrated nocturnal life
+   fits the far side's low latitudes, about 0.001 lux at midnight, which is also where the summit metropolis stands. The fleet decision keeps the night
    dark; nearside organisms still need raised circadian thresholds. The night's requirement can be set by zone.
    Earth's lunar-cued behaviour, such as coral spawning in the dark hour after sunset (Lin et al. 2021), has to be
    rebuilt on the Moon's own month, where the 29.53-day cycle is the day itself. *Solid for the light.*
@@ -191,7 +192,8 @@ statements in other folders. These belong to main and are not changed on this br
 - the ecology register's numbers, which predate the corrected design case;
 - the aerosol study's oxidation chemistry, which predates the no-oxidant finding;
 - the forests' leaf area of 22, against the canopy model's optimum near 6;
-- the joint synthesis's flat 2.3 lux of Earthlight at every nearside place, against 0.48 lux at Procellarum by Russell.
+- the joint synthesis's flat 2.3 lux of Earthlight at every nearside place, against 0.48 lux at Procellarum by Russell
+  (fixed on main on 9 October, 78020e0).
 
 ## Files
 
