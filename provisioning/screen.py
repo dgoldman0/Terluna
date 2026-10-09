@@ -23,7 +23,7 @@ import sys
 from pathlib import Path
 import numpy as np
 
-from shared.constants import (AVOGADRO, MOON_RADIUS, MOON_SURFACE_GRAVITY, SPEED_OF_LIGHT, STANDARD_GRAVITY,
+from shared.constants import (AVOGADRO, MOON_RADIUS, MOON_SURFACE_GRAVITY, SPEED_OF_LIGHT, STANDARD_GRAVITY, STEFAN_BOLTZMANN,
                               SYNODIC_MONTH_DAYS)
 from shared.provenance import constants_used
 
@@ -47,6 +47,8 @@ GCM_K_PER_PERCENT_SUNLIGHT = 1.9          # climate/gcm/README.md, the dimmer br
 GCM_W_M2_PER_K = (1.0, 1.6)               # research/studies/atmospheric_co2/README.md, climate/gcm compare --settle
 DESIGN_TOP_OF_AIR_W_M2 = 1173.0           # the 5% dimmer's sunlight at the top of the air (climate/gcm)
 INFRARED_EFFICACY = (0.5, 1.0)            # absorbed aloft, the tiles' infrared may warm the ground less than sunlight
+HEAT_MIRROR_EMISSIVITY = (0.03, 0.1)      # thermal emissivity of a Moon-facing heat mirror: silver stacks to oxide films
+STRONG_EMITTER = 0.85                     # an outer face made a strong thermal emitter
 # Food.
 FRUIT_KCAL_PER_G = 0.30                   # the day fruit has today's watermelon's make-up (USDA: 30 kcal per 100 g)
 PERSON_KCAL_PER_DAY = 2500.0
@@ -85,6 +87,47 @@ def digest(path) -> str:
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()[:16]
 
 
+def two_layers(e_out, e_moon_outer, e_moon_inner):
+    """Share of two stacked layers' heat that leaves toward the Moon, with each layer's light absorbed equally.
+
+    The layers are grey and opaque in the thermal infrared, parallel and close: the outer layer radiates to space
+    through e_out and to the inner layer through e_moon_outer, and the inner layer to the outer one through e_out
+    and to the Moon through e_moon_inner. Returns the share and each layer's emitted flux per unit of absorbed flux.
+    """
+    k = 1.0 / (1.0 / e_moon_outer + 1.0 / e_out - 1.0)
+    outer, inner = np.linalg.solve([[e_out + k, -k], [-k, e_moon_inner + k]], [1.0, 1.0])
+    return e_moon_inner * inner / 2.0, (outer, inner)
+
+
+def heat_mirror(films, window):
+    """The Moon's share of the fleet's heat with a heat mirror on Moon-facing faces, for one layer and for two.
+
+    About two layers overlap in the Moon's view, and a ring hidden behind another passes part of that ring's heat on
+    inward. The mirror goes on every tile, or on the layer nearest the Moon alone; the outer faces stay as they are
+    or become strong emitters. Temperatures are the hottest layer's, with the films' own absorbed sunlight.
+    """
+    weight = {n: (window if n == 'window' else 1 - window) for n in films}
+    def mean(fn):
+        return sum(weight[n] * fn(f) for n, f in films.items())
+    def hottest(fn):
+        return max(round(float((max(fn(f)[1]) * f['absorbed_W_m2'] / STEFAN_BOLTZMANN) ** 0.25)) for f in films.values())
+    as_is = mean(lambda f: two_layers(f['emissivity_sunward'], f['emissivity_shaded'], f['emissivity_shaded'])[0])
+    out = dict(two_layers_as_is=round(as_is, 3))
+    for e in HEAT_MIRROR_EMISSIVITY:
+        for outer_name, e_out in (('outer_faces_as_now', None), ('outer_faces_strong', STRONG_EMITTER)):
+            eo = lambda f: e_out or f['emissivity_sunward']
+            one = mean(lambda f: e / (e + eo(f)))
+            every = lambda f: two_layers(eo(f), e, e)
+            nearest = lambda f: two_layers(eo(f), f['emissivity_shaded'], e)
+            out[f'mirror_{e:g}_{outer_name}'] = dict(
+                one_layer_share=round(one, 3),
+                every_tile=dict(share=round(mean(lambda f: every(f)[0]), 3), cut=round(as_is / mean(lambda f: every(f)[0]), 1),
+                                hottest_layer_K=hottest(every)),
+                nearest_layer_only=dict(share=round(mean(lambda f: nearest(f)[0]), 3), cut=round(as_is / mean(lambda f: nearest(f)[0]), 1),
+                                        hottest_layer_K=hottest(nearest)))
+    return out
+
+
 def heat(array_heat, layout):
     films, fleet, design = array_heat['tiles']['films'], array_heat['fleet'], array_heat['design']
     window = fleet['window_ring_share']
@@ -92,30 +135,30 @@ def heat(array_heat, layout):
     radii = [min(r['radius_km'] for r in rings), max(r['radius_km'] for r in rings)]
     tilt = np.radians(max(abs(r['tilt_deg']) for r in rings))
     absorbed = array_heat['tiles']['absorbed_PW']
-    # Each tile's absorbed light leaves through both faces in proportion to their emissivities. The face turned to
-    # the Moon is the shaded face on the day half and the sunlit face on the night half; over the two halves it
-    # carries half of what the fleet absorbs.
-    share = {}
-    for name, f in films.items():
-        e_sun, e_shade = f['emissivity_sunward'], f['emissivity_shaded']
-        share[name] = dict(day=e_shade / (e_sun + e_shade), night=e_sun / (e_sun + e_shade))
-    moon_face = 0.5 * sum((window if n == 'window' else 1 - window) * (s['day'] + s['night']) for n, s in share.items())
+    # Each tile's absorbed light leaves through both faces in proportion to their emissivities. The tiles stay
+    # radial-facing, so the face turned to the Moon is the same one all orbit: the shaded face at the sunward crossing.
+    one_layer = sum((window if n == 'window' else 1 - window) * f['emissivity_shaded'] / (f['emissivity_sunward'] + f['emissivity_shaded'])
+                    for n, f in films.items())
+    # A ring that hides another from the Moon absorbs that ring's glow and sends it on through both its faces, so the
+    # stack as a whole divides its heat between its innermost and outermost faces: evenly for a deep stack, by one
+    # layer's emissivities for a single one. The share toward the Moon lies between the two.
+    shares = (0.5, one_layer)
     view = [(MOON_RADIUS / 1e3 / r) ** 2 for r in radii[::-1]]           # (R/r)^2, outer ring first
     area = 4 * np.pi * MOON_RADIUS ** 2
-    unblocked = [a * 1e15 * moon_face * v / area for a, v in zip(absorbed, view)]
+    on_moon = [a * 1e15 * s * v / area for a, s, v in zip(absorbed, shares, view)]
     # The rings share one node line, so seen from the Moon they fill the lune of tilts within the largest tilt:
-    # a share 2*tilt/pi of the sphere at their radius. Tiles beyond one layer hide others from the Moon.
+    # a share 2*tilt/pi of the sphere at their radius.
     band_km2 = 2 * tilt / np.pi * 4 * np.pi * np.mean(radii) ** 2
     layers = np.mean(fleet['area_km2']) / band_km2
-    one_layer = [u / layers for u in unblocked]
     sunlight_global = DESIGN_TOP_OF_AIR_W_M2 / 4
     k_per_w = GCM_K_PER_PERCENT_SUNLIGHT / (0.01 * sunlight_global)    # K per W/m2 of top-of-air sunlight
-    lo, hi = one_layer[0], unblocked[1]
+    lo, hi = on_moon
     tw = 1e12 / area
     return dict(
-        tiles_absorbed_pw=absorbed, moon_facing_share=round(moon_face, 3), ring_radius_km=[round(r) for r in radii],
-        view_factor=[round(v, 5) for v in view], layers_in_the_moons_view=round(float(layers), 2),
-        fleet_infrared_w_m2=dict(unblocked=[round(u, 2) for u in unblocked], one_layer=[round(x, 2) for x in one_layer]),
+        tiles_absorbed_pw=absorbed, moon_facing_share=dict(deep_stack=shares[0], one_layer=round(one_layer, 3)),
+        ring_radius_km=[round(r) for r in radii], view_factor=[round(v, 5) for v in view],
+        layers_in_the_moons_view=round(float(layers), 2), fleet_infrared_w_m2=[round(lo, 2), round(hi, 2)],
+        heat_mirror=heat_mirror(films, window),
         share_of_design_sunlight=[round(lo / sunlight_global, 4), round(hi / sunlight_global, 4)],
         against_dimmer_w_m2=round(sunlight_global / 0.95 * 0.05, 1),
         warming_k_if_like_sunlight=[round(lo * k_per_w, 1), round(hi * k_per_w, 1)],

@@ -3,7 +3,7 @@
  "producer": {
   "domain": "provisioning",
   "files": {
-   "provisioning/screen.py": "d5a75bf00ee68b4f"
+   "provisioning/screen.py": "bb358b0d46d8d1ce"
   },
   "inputs": {
    "research/studies/solar_shield_array/results/array_heat.json": "d964f1a5e1dec2e9",
@@ -22,6 +22,7 @@
    "MOON_SURFACE_GRAVITY": 1.6242188765608128,
    "SPEED_OF_LIGHT": 299792458.0,
    "STANDARD_GRAVITY": 9.80665,
+   "STEFAN_BOLTZMANN": 5.670374419e-08,
    "SYNODIC_MONTH_DAYS": 29.53059
   }
  },
@@ -32,7 +33,10 @@
    65.1197087108544,
    83.28829672783431
   ],
-  "moon_facing_share": 0.5,
+  "moon_facing_share": {
+   "deep_stack": 0.5,
+   "one_layer": 0.561
+  },
   "ring_radius_km": [
    19355,
    21392
@@ -42,28 +46,77 @@
    0.00806
   ],
   "layers_in_the_moons_view": 2.03,
-  "fleet_infrared_w_m2": {
-   "unblocked": [
-    5.66,
-    8.85
-   ],
-   "one_layer": [
-    2.79,
-    4.36
-   ]
+  "fleet_infrared_w_m2": [
+   5.66,
+   9.92
+  ],
+  "heat_mirror": {
+   "two_layers_as_is": 0.534,
+   "mirror_0.03_outer_faces_as_now": {
+    "one_layer_share": 0.072,
+    "every_tile": {
+     "share": 0.283,
+     "cut": 1.9,
+     "hottest_layer_K": 376
+    },
+    "nearest_layer_only": {
+     "share": 0.111,
+     "cut": 4.8,
+     "hottest_layer_K": 287
+    }
+   },
+   "mirror_0.03_outer_faces_strong": {
+    "one_layer_share": 0.034,
+    "every_tile": {
+     "share": 0.264,
+     "cut": 2.0,
+     "hottest_layer_K": 371
+    },
+    "nearest_layer_only": {
+     "share": 0.062,
+     "cut": 8.6,
+     "hottest_layer_K": 251
+    }
+   },
+   "mirror_0.1_outer_faces_as_now": {
+    "one_layer_share": 0.205,
+    "every_tile": {
+     "share": 0.346,
+     "cut": 1.5,
+     "hottest_layer_K": 292
+    },
+    "nearest_layer_only": {
+     "share": 0.271,
+     "cut": 2.0,
+     "hottest_layer_K": 268
+    }
+   },
+   "mirror_0.1_outer_faces_strong": {
+    "one_layer_share": 0.105,
+    "every_tile": {
+     "share": 0.293,
+     "cut": 1.8,
+     "hottest_layer_K": 282
+    },
+    "nearest_layer_only": {
+     "share": 0.171,
+     "cut": 3.1,
+     "hottest_layer_K": 241
+    }
+   }
   },
   "share_of_design_sunlight": [
-   0.0095,
-   0.0302
+   0.0193,
+   0.0338
   ],
   "against_dimmer_w_m2": 15.4,
   "warming_k_if_like_sunlight": [
-   1.8,
-   5.7
+   3.7,
+   6.4
   ],
   "warming_k_range": [
-   0.9,
-   8.8
+   1.8,
+   9.9
   ],
   "human_use": {
    "w_m2_per_tw": 0.0264,
@@ -79,8 +132,8 @@
    "metropolis_w_m2_moon": 0.00527,
    "metropolis_w_m2_local": 62.2,
    "fleet_infrared_as_tw_used": [
-    106,
-    336
+    215,
+    376
    ]
   }
  },

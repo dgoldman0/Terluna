@@ -7,7 +7,9 @@ The next full manuscript is **Constructing and Sustaining an Open Moon**, paper 
 The scenario family is set: an open 1.2-atm atmosphere, standing water over 28% of the surface, the titania-stack
 spectrum dimmed a further 5%, and water, nitrogen and oxygen delivered by the Solar-System-wide resource operation
 ([decisions.md](decisions.md)). The corrected GCM and the CM1 rings and boxes give the climate as a range: they
-disagree on the warmth and humidity of the air over land, and the climate programme is paused. Two seas' waves and
+disagree on the warmth and humidity of the air over land, and the climate programme is paused. On 9 October the
+author made the investigated climate the planned one: what the shield and the array add to the Moon's heat is
+answered so that the Moon keeps it. Two seas' waves and
 every sea's monthly tide are computed. The light is computed from the solved spherical sky, dated for 2000–2500, with
 the Earth's measured brightness and a photometric dusk 82 hours after an equatorial sunset. The storms are
 electrified and their lightning measured at one site. The solar shield's lead design is the ring fleet, with its
@@ -28,7 +30,11 @@ its own lightning; haze barely touches the light; the regional magnets reach the
    its films' scatter and switched states are tested against it in the shield's dynamics. Flights of the kept orbits
    take about an hour of CPU each set. This joins the planned branch research/array-industry, with the trim and store
    hardware and power, heat reuse, computing and industry
-   ([array_industry.md](studies/solar_shield_array/array_industry.md)).
+   ([array_industry.md](studies/solar_shield_array/array_industry.md)). The fleet's own infrared glow goes with it:
+   about 6–10 W/m² over the Moon at a first estimate, which the planned climate leaves no room for, so the author has
+   it answered with added solar protection, by redirecting it away from the Moon, or both. The means to size, from
+   the protection domain's optical tables with the ring stack's radiative transfer: films that absorb less, a heat
+   mirror on Moon-facing faces (the stack's overlapping layers weaken it), and added dimming.
 2. **The crown as a lightning conductor.** The tower's induced charge and upward leaders in the saved storm fields,
    a protection concept for its triggered flashes and the hydrogen berths beside it. A terrain-aware electrified
    storm needs CM1's field solver over terrain, which touches the paused climate programme and waits for the author.

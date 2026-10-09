@@ -30,7 +30,9 @@ From [research/decisions.md](../research/decisions.md) unless named:
     computed").
 - **The flyers.** The findings of 2026-09-28 on the sky ships and flyers: the rule of similarity, rigid hydrogen ships
   to about 3 km, wings and rotors cheap, sky boats, ferries, the height stack, winged liners.
-- **Climate.** Laptop-only compute, and the climate work paused with comfort carried as a range.
+- **Climate.** Laptop-only compute, and the climate work paused with comfort carried as a range. The investigated climate is the
+  planned climate (author, 2026-10-09): what the shield and the array add to the Moon's heat is answered so that the
+  Moon keeps it.
 
 The author's statement that this is a sky-ship world where lift is cheap had no row in the register. This branch adds
 it to the register's section on sky ships and flyers, in the author's words.
@@ -101,7 +103,7 @@ These belong to main and stay unchanged on this branch.
 5. **Storms.** The summit study says ships dock "so they never descend through the storms", yet the flight band lies
    inside the strongest storms. The metropolis brief's "the backbone carries on" needs the storm rules the hydrogen
    ferries carry.
-6. **A unit error.** The joint ledger's `film_plant_w` holds terawatts.
+6. **A unit error.** The joint ledger's `film_plant_w` holds terawatts (fixed on main on 9 October, 78020e0).
 7. **Lunar oxygen.** The engineering seed and the locked plan-01 outline still name lunar oxygen routes, which D4
    replaced.
 8. **Collectors on the tiles.** The integrated comparison puts them "on its tiles or flying free", against the

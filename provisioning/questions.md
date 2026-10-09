@@ -3,17 +3,23 @@
 In order of what each would settle for the whole Open Moon. Each names what decides it and how it could be answered
 on this laptop. The findings behind them are in the [README](README.md).
 
-1. **The ring fleet's infrared in the design.** The screen puts 2.8–8.9 W/m² of the tiles' own infrared on the Moon,
-   which the design climate leaves out.
-   - **What decides it:** how the stack's layers hide one another from the Moon; where in the column the 175 K
-     emission is absorbed; how much it warms the ground; and whether it fills part of the upper air's CO2 cooling
-     band, which the loss response relies on.
-   - **How:** extend the fleet-light model to thermal emission with layer blocking; add a downward band from the
-     fleet to the radiative–convective column; then a GCM branch with the added heat. Minutes, then hours, then a
-     GCM run.
-   - **The levers:** a low-emissivity Moon-facing coating, or more dimming.
-   - **The decision:** the climate programme is paused, so the author decides whether this reopens it. The shield
-     work owns the coating.
+1. **The ring fleet's infrared under the planned climate.** The screen puts 5.7–9.9 W/m² of the films' own infrared
+   on the Moon, which the design climate leaves out. The author decided on 9 October that the investigated climate is
+   the planned one, so the glow is answered with added solar protection, by redirecting it away from the Moon, or
+   both.
+   - **What decides it:** how the stack's layers pass heat among themselves and to the Moon, with the films' thermal
+     transmission and reflection, which the two-layer estimate leaves out; where in the column the 175 K emission is
+     absorbed and how much it warms the ground; and whether it fills part of the upper air's CO2 cooling band, which
+     the loss response relies on.
+   - **The means to size:** films that absorb less, with the ultraviolet reflected before the titania absorbs it; a
+     heat mirror on Moon-facing faces, on the layer nearest the Moon where the stack allows it, adding little
+     absorption (a sparse metal mesh or metasurface the first candidate); strong emitters on the outer faces; and
+     added dimming for what remains.
+   - **How:** the ring stack's radiative transfer with the protection domain's optical tables (2–125 µm) on the
+     fleet-light model's geometry, minutes to hours; a downward band from the fleet into the radiative–convective
+     column; then the added dimming that holds the planned climate's energy budget. The climate programme stays
+     paused.
+   - **Whose:** the shield's work on its films.
 2. **How many people, where, using what.** The Moon's population has never been set. The metropolis brief assumes
    2 kW a person without a basis; decent living takes about 0.5 kW, and needs stop rising near 2 kW. Demand by sector
    and the three power ledgers of the industrial architecture follow from the population.

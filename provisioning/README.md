@@ -38,19 +38,34 @@ Each finding follows from results the repository already holds, read together wi
 ### Heat and energy
 
 1. **The ring fleet's own infrared heats the Moon more than all human use could.**
-   - **The flow.** The fleet's tiles absorb 65–83 PW of sunlight and stay facing the Moon. The face turned to the
-     Moon carries half of their emission over the two halves of each orbit. A tile 19,355–21,392 km out sends the
-     Moon 0.66–0.81% of what that face emits. The Moon receives 5.7–8.9 W/m² averaged over its surface, or 2.8–4.4 W/m²
-     counting only one layer where tiles hide one another, since the stack shows the Moon about two layers (*screen*).
-   - **In proportion.** That is 1–3% of the design sunlight, the heat of 106–336 TW used on the Moon.
-   - **The warming.** If it acts like sunlight, the GCM's 1.9 K per 1% of sunlight puts the design case 1.8–5.7 K
+   - **The flow.** The fleet's films absorb 3–4.5% of the sunlight they pass, 65–83 PW in all, warm to about 175 K
+     and radiate from both faces. The tiles stay radial-facing, so the same face looks at the Moon all orbit, and the
+     films emit a little more there than sunward: one layer sends 56% of its heat inward. A ring hidden behind another
+     absorbs that ring's glow and passes it on through both its faces, so the stack, about two layers deep in the
+     Moon's view, sends between half and 56% inward. A tile 19,355–21,392 km out sends the Moon 0.66–0.81% of what it
+     emits inward. The Moon receives 5.7–9.9 W/m² averaged over its surface (*screen*).
+   - **In proportion.** That is 1.9–3.4% of the design sunlight, the heat of 215–376 TW used on the Moon.
+   - **The warming.** If it acts like sunlight, the GCM's 1.9 K per 1% of sunlight puts the design case 3.7–6.4 K
      warmer (*screen*). The design case of 294.9 K leaves it out. The 5% dimmer, chosen to bring the Moon from 303 to
      294 K, removed 15.4 W/m² of sunlight at the top of the air.
-   - **The levers.** A low-emissivity coating on the Moon-facing face, transparent in the visible as low-E window
-     coatings are, would send most of the tiles' heat outward. More dimming is the other lever.
-   - **Where it belongs.** With the shield and climate work. It surfaced here in the heat ledger.
+   - **The decision.** On 9 October the author made the investigated climate the planned one, so the glow is answered
+     with added solar protection, by redirecting it away from the Moon, or both
+     ([register](../research/decisions.md#solar-shield-and-habitat-array)).
+   - **The means.**
+     - Films that absorb less cut the glow however the stack lies; most of what they absorb is the ultraviolet the
+       titania stops.
+     - A heat mirror on Moon-facing faces, clear to sunlight and reflective in the thermal infrared, sends a layer's
+       glow outward, and the stack weakens it. By a two-layer estimate (*screen*), a mirror of emissivity 0.03–0.1 on
+       every tile cuts the Moon's share 1.5–2 times and traps the hidden layer between two weak emitters at
+       280–380 K. On the layer nearest the Moon alone it cuts the share 2–5 times, and 3–9 times with strong emitters
+       on the outer faces. The films absorb only 3–4.5% of sunlight, so a mirror that absorbs a few percent more adds
+       as much heat as it turns away; a sparse metal mesh or metasurface a few micrometres in pitch is the first
+       candidate.
+     - Added dimming answers what remains.
+   - **Where it belongs.** With the shield's work on its films, sized from the protection domain's optical tables
+     and the ring stack's radiative transfer. It surfaced here in the heat ledger.
    - *A first-order estimate: the stack's layering and how efficiently infrared absorbed aloft warms the ground decide
-     its size. The range across those is 0.9–8.8 K.*
+     its size. The range across those is 1.8–9.9 K.*
 2. **Each terawatt used on the Moon warms it by 0.017–0.026 K, so a kelvin takes 38–61 TW** (*screen*).
    - **The metropolis.** Its 200 GW is 0.005 W/m² over the Moon and 62 W/m² over its 32 km circle, near the hottest
      city cells on Earth at 100–577 W/m² (Allen et al. 2011).

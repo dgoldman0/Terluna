@@ -26,10 +26,22 @@ def test_product_binds_producer_inputs_and_constants():
 def test_fleet_infrared_follows_the_view_factor():
     heat = PRODUCT['heat']
     area = 4 * np.pi * screen.MOON_RADIUS ** 2
-    for absorbed, view, w in zip(heat['tiles_absorbed_pw'], heat['view_factor'], heat['fleet_infrared_w_m2']['unblocked']):
-        assert np.isclose(absorbed * 1e15 * heat['moon_facing_share'] * view / area, w, rtol=0.01)
-    assert abs(heat['moon_facing_share'] - 0.5) < 1e-6           # the two halves' faces split the emission evenly
-    assert all(a < b for a, b in zip(heat['fleet_infrared_w_m2']['one_layer'], heat['fleet_infrared_w_m2']['unblocked']))
+    shares = (heat['moon_facing_share']['deep_stack'], heat['moon_facing_share']['one_layer'])
+    for absorbed, share, view, w in zip(heat['tiles_absorbed_pw'], shares, heat['view_factor'], heat['fleet_infrared_w_m2']):
+        assert np.isclose(absorbed * 1e15 * share * view / area, w, rtol=0.01)
+    # The face turned to the Moon is the same all orbit; the films emit a little more there than sunward.
+    assert 0.5 < shares[1] < 0.65
+
+
+def test_two_layers_split_their_heat_between_the_even_split_and_one_layer():
+    assert np.isclose(screen.two_layers(0.4, 0.4, 0.4)[0], 0.5)                # symmetric faces split evenly
+    assert 0.5 < screen.two_layers(0.37, 0.44, 0.44)[0] < 0.44 / (0.44 + 0.37)
+    mirror = PRODUCT['heat']['heat_mirror']
+    assert 0.5 < mirror['two_layers_as_is'] < PRODUCT['heat']['moon_facing_share']['one_layer']
+    for case in (v for k, v in mirror.items() if k.startswith('mirror_')):
+        # A mirror on every tile traps the hidden layer between two weak emitters; on the nearest layer alone it does better.
+        assert case['one_layer_share'] < case['nearest_layer_only']['share'] < case['every_tile']['share'] < mirror['two_layers_as_is']
+        assert case['every_tile']['hottest_layer_K'] > case['nearest_layer_only']['hottest_layer_K']
 
 
 def test_human_heat_is_the_array_studys_figure():
