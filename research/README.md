@@ -121,3 +121,8 @@ own intact implementation. Model code and CSV tables are verbatim; the two JSON
 reference files select original fields with unchanged values. New calculations
 should state assumptions, track conservation and residuals, test convergence and
 say which conclusion their outputs can change.
+
+
+The 9 October [aerial-biosphere, UV and population follow-up](integration/aerial_biosphere_population.md) connects
+new evaluations on the ecology, provisioning and resources branches. They share population comparison cases,
+include roaming aerial habitation, and distinguish adopted directions from still-conditional capacities.

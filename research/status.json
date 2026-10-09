@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-08",
+  "updated": "2026-10-09",
   "base_commit": "92e0961eabd6bd070299a018dcce54d4ccfe7264",
   "next_manuscript": "cef466e6-d9f8",
   "principle": "Each topic spans the open Moon; the root opening scene is one illustration",
@@ -616,6 +616,21 @@
         "the regional magnets' design and turn, weighed with the heritage register"
       ],
       "next_session_task": "The author chooses among the decisions the synthesis lists (studies/joint_synthesis/README.md, Decisions for the author); its ranked next work goes into plan.md."
+    },
+    {
+      "topic": "aerial_biosphere_population",
+      "condition": "cross_domain_requirements_evaluated_on_ecology_provisioning_resources_branches; shared_population_cases; roaming_habitation_direction; no_extra_uv_or_population_allocation_adopted",
+      "material": [
+        "integration/aerial_biosphere_population.md",
+        "../shared/scenarios/population.json"
+      ],
+      "unresolved": [
+        "Coupled living-atmosphere UV photochemistry, vertical biological action spectra and non-LTE exobase response before selecting transmission.",
+        "Aerial organisms: complete wetness/light life cycles, neutral buoyancy and gas retention, filter capture/drag, nutrient retention, night survival and aerosol feedback.",
+        "Roaming habitation: collision-safe trajectories, storm avoidance, maneuver duty and reserves, complete wet mass and service networks.",
+        "Phosphorus: donor inventories, food-return chains, sediment extraction and genuinely irreversible losses; safe harvest and population capacities remain unestablished."
+      ],
+      "next_session_task": "Use the branch evaluations and shared scenarios to couple roaming district designs, aerial production and complete nutrient-return routes. Retain the current shield and paused climate programme."
     }
   ],
   "new_check_record": "studies/environment_screens/checks.json",

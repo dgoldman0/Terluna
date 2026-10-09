@@ -121,3 +121,16 @@ Seek several coherent environmental possibilities, a credible account of light, 
 Current sessions support ordinary numerical models, parameter sweeps, moderate rasters, geometry, optimization and evidence synthesis. Specialist model installation and runtime need direct tests. Full plasma/dose performance, material durability, complete factories and multigenerational biological outcomes are additional validation programs. No long-running service or outside compute has been commissioned by this plan.
 
 Use the existing editorial charter and full-source reading requirements when these results enter the manuscripts. Research notes and numerical checks are not scholarly clearance.
+
+
+## Aerial biosphere and inhabited volume follow-up, 9 October 2026
+
+The [cross-domain evaluation](integration/aerial_biosphere_population.md) supersedes interpreting the domain
+branches' independent illustrative population placements as capacities. Use [one scenario file](../shared/scenarios/population.json)
+for new inventories. Much floating habitation may roam, with collision/storm avoidance and maneuver reserves.
+
+Next discriminating tasks are parcel-resolved aerial reproduction and removal; wet floater mass, lift gas and night
+survival; complete phosphorus return including harvest and sediment; and roaming district control, services and
+shared ecological occupancy. Restricted UV-B is an open candidate under retained short-wave rejection; adoption
+needs living-air chemistry, vertical biological doses and the current non-LTE exobase/film thermal calculation.
+The bounded screens do not reopen the paused climate programme or select a population distribution.

@@ -192,3 +192,16 @@ the sky boats' share of trips, ownership and traffic system stay open.
 |---|---|---|
 | Finished topic branches wait for a proper integration and joint merger with the other open branches before they reach main. | Author, 2026-10-08 | Done on 2026-10-08: sea appearance, the solar shield, atmospheric electricity and infrastructure merged in that order ([integration record](integration/README.md)) |
 | The joint integration includes a synthesis: taking the branches' pieces, seeing where they fit together, what they say about the whole and what comes next, with joint computation where it is warranted. | Author, 2026-10-08 | Done: [studies/joint_synthesis](studies/joint_synthesis/README.md); its calculations took about an hour of machine time, and the decisions it lists await the author |
+
+
+## Aerial ecology and population follow-up, 9 October 2026
+
+| Direction | Source | Status |
+|---|---|---|
+| Preserve the short-wave shield, favour biological adaptation and local UV, and investigate a narrow attenuated UV-B window. | Author, 2026-10-09 discussion and instruction to evaluate and lock cross-domain findings | Working direction; fixed-column optical comparison on domain/ecology. No additional UV transmission adopted. |
+| Evaluate surface and aerial lunar habitation before choosing population placement; retain the 20–30 billion Solar System working scale. | Author, 2026-10-09 | One shared scenario ledger, with no allocation selected; mass and service evaluation on domain/provisioning, material reconciliation on domain/resources. |
+| Investigate true aeroplankton, large photosynthetic aerial organisms and their food webs together, with a functioning phosphorus cycle. | Author, 2026-10-09 | Requirements evaluated on domain/ecology and domain/resources; no sustainable harvest, engineered organism or species count established. |
+| Allow much floating habitation to roam, managing collision and storm risks. | Author, 2026-10-09 | Adopted working direction. Navigation, avoidance, rendezvous, reserves and occasional repositioning belong in the operating account; fixed-location holding is a separate comparison. |
+
+The [integration summary](integration/aerial_biosphere_population.md) identifies the reports, numerical findings,
+remaining conditions and branch checkpoints. Detailed work stays on its three domain branches pending integration.
