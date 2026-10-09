@@ -1,0 +1,443 @@
+{
+ "source_admission": "Published values used as constants or quoted ranges; no external dataset files are admitted. 'access' records how far each source was checked: 'reported' means taken from the literature search of 2026-10-09 (its register is kept with the domain's run records on the research drive) and not re-read here. Bibliographic details are as reported.",
+ "sources": [
+  {
+   "citation": "Rao & Min 2018, Social Indicators Research 138, 225",
+   "doi_or_url": "10.1007/s11205-017-1650-0",
+   "use": "Decent living standards defined materially",
+   "access": "reported by the literature search of 2026-10-09 (full text)"
+  },
+  {
+   "citation": "Rao, Min & Mastrucci 2019, Nature Energy 4, 1025",
+   "doi_or_url": "10.1038/s41560-019-0497-9",
+   "use": "Mobility is 51-60% of decent-living energy in India, Brazil and South Africa",
+   "access": "reported by the literature search of 2026-10-09 (abstract and report)"
+  },
+  {
+   "citation": "Millward-Hopkins, Steinberger, Rao & Oswald 2020, Global Environmental Change 65, 102168",
+   "doi_or_url": "10.1016/j.gloenvcha.2020.102168",
+   "use": "Decent living takes about 15.3 GJ of final energy per person a year",
+   "access": "reported by the literature search of 2026-10-09 (full text)"
+  },
+  {
+   "citation": "Kikstra et al. 2021, Environmental Research Letters 16, 095006",
+   "doi_or_url": "10.1088/1748-9326/ac1c27",
+   "use": "Decent living gaps and energy needs",
+   "access": "reported by the literature search of 2026-10-09 (article page)"
+  },
+  {
+   "citation": "O'Neill, Fanning, Lamb & Steinberger 2018, Nature Sustainability 1, 88",
+   "doi_or_url": "10.1038/s41893-018-0021-4",
+   "use": "A good life for all within planetary boundaries",
+   "access": "reported by the literature search of 2026-10-09 (full text)"
+  },
+  {
+   "citation": "Vogel et al. 2021, Global Environmental Change 69, 102287",
+   "doi_or_url": "10.1016/j.gloenvcha.2021.102287",
+   "use": "Provisioning factors lower the energy needed to meet needs; satisfaction stops rising near 60 GJ",
+   "access": "reported by the literature search of 2026-10-09 (full text)"
+  },
+  {
+   "citation": "Fanning et al. 2022, Nature Sustainability 5, 26",
+   "doi_or_url": "10.1038/s41893-021-00799-z",
+   "use": "Social shortfall and ecological overshoot",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "McElroy & O'Neill 2025, Global Environmental Change 92, 103008",
+   "doi_or_url": "10.1016/j.gloenvcha.2025.103008",
+   "use": "Working hours for a decent-living basket and a good life",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Kennedy et al. 2015, PNAS 112, 5985",
+   "doi_or_url": "10.1073/pnas.1504315112",
+   "use": "Energy and material flows of megacities",
+   "access": "reported by the literature search of 2026-10-09 (full text)"
+  },
+  {
+   "citation": "Krausmann et al. 2017, PNAS 114, 1880",
+   "doi_or_url": "10.1073/pnas.1613773114",
+   "use": "Material stocks rose 23-fold",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Haberl et al. 2019, Nature Sustainability 2, 173",
+   "doi_or_url": "10.1038/s41893-019-0225-2",
+   "use": "Sociometabolic research",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Vélez-Henao & Pauliuk 2023, Environ. Sci. Technol. 57, 14206",
+   "doi_or_url": "10.1021/acs.est.3c03957",
+   "use": "About 42 t of material stocks per person for decent living",
+   "access": "reported by the literature search of 2026-10-09 (full text)"
+  },
+  {
+   "citation": "Sepulveda et al. 2021, Nature Energy 6, 506",
+   "doi_or_url": "10.1038/s41560-021-00796-8",
+   "use": "The cost space for long-duration storage",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Albertus, Manser & Litzelman 2020, Joule 4, 21",
+   "doi_or_url": "10.1016/j.joule.2019.11.009",
+   "use": "Long-duration storage targets",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "US DOE 2023, Pathways to Commercial Liftoff: Long Duration Energy Storage",
+   "doi_or_url": "https://www.sandia.gov/app/uploads/sites/256/2023/09/Pathways-to-Commercial-Liftoff-LDES-May-5_UPDATED.pdf",
+   "use": "Storage classes stop near 160 hours; multi-day round trips",
+   "access": "reported by the literature search of 2026-10-09 (full text)"
+  },
+  {
+   "citation": "Headley & Schoenung 2020, Hydrogen Energy Storage, DOE Energy Storage Handbook chapter 11",
+   "doi_or_url": "https://www.sandia.gov/app/uploads/sites/163/2022/03/ESHB_Ch11_Hydrogen_Headley.pdf",
+   "use": "Hydrogen storage returns about 40%",
+   "access": "reported by the literature search of 2026-10-09 (full text)"
+  },
+  {
+   "citation": "Stocks et al. 2021, Joule 5, 270",
+   "doi_or_url": "10.1016/j.joule.2020.11.015",
+   "use": "A global atlas of closed-loop pumped hydro",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Guzik et al. 2017, AIAA SPACE (NTRS 20170009088)",
+   "doi_or_url": "https://ntrs.nasa.gov/api/citations/20170009088/downloads/20170009088.pdf",
+   "use": "Regenerative fuel cells for the lunar night",
+   "access": "reported by the literature search of 2026-10-09 (full text)"
+  },
+  {
+   "citation": "Barth et al. 2022, Fission Surface Power project update (NTRS 20220012909)",
+   "doi_or_url": "https://ntrs.nasa.gov/api/citations/20220012909/downloads/IAPG_Fission_Surface_Power_update.pdf",
+   "use": "Fission surface power of 40 kWe for about 10 t",
+   "access": "reported by the literature search of 2026-10-09 (full text, slides)"
+  },
+  {
+   "citation": "Rodgers et al. 2024, Space Based Solar Power, NASA OTPS (NTRS 20230017756)",
+   "doi_or_url": "https://ntrs.nasa.gov/api/citations/20230017756/downloads/ASCEND%20SBSP%20Final%2005162024.pdf",
+   "use": "Space solar power costs $0.61-1.59 per kWh",
+   "access": "reported by the literature search of 2026-10-09 (full text, conference version)"
+  },
+  {
+   "citation": "Frazer-Nash Consultancy & London Economics 2022, Space-based solar power cost-benefit analysis for ESA",
+   "doi_or_url": "https://www.fnc.co.uk/media/fi4pvbgv/space-based-solar-power-final-report.pdf",
+   "use": "A 1.44 GW system at 106-206 euros per MWh",
+   "access": "reported by the literature search of 2026-10-09 (full text)"
+  },
+  {
+   "citation": "US DOE & NASA 1978, SPS Reference System Report, DOE/ER-0023",
+   "doi_or_url": "https://nss.org/wp-content/uploads/SSP-DOE-1978-space-solar-power-Reference-System-Report.pdf",
+   "use": "Beam limits of 230 W/m2 at the centre and 10 W/m2 at the edge",
+   "access": "reported by the literature search of 2026-10-09 (full text)"
+  },
+  {
+   "citation": "ICNIRP 2020, Health Physics 118, 483",
+   "doi_or_url": "10.1097/HP.0000000000001210",
+   "use": "Public exposure limit of 10 W/m2",
+   "access": "reported by the literature search of 2026-10-09 (full text, table 5)"
+  },
+  {
+   "citation": "US EIA 2018 (ICF), Assessing HVDC transmission for impacts of non-dispatchable generation",
+   "doi_or_url": "https://www.eia.gov/analysis/studies/electricity/hvdctransmission/pdf/transmission.pdf",
+   "use": "HVDC losses per 1,000 km and per converter",
+   "access": "reported by the literature search of 2026-10-09 (full text)"
+  },
+  {
+   "citation": "Hitachi Energy, Changji-Guquan UHVDC link",
+   "doi_or_url": "https://www.hitachienergy.com/us/en/news-and-events/customer-stories/changji-guquan-uhvdc-link",
+   "use": "12 GW over more than 3,000 km",
+   "access": "reported by the literature search of 2026-10-09 (landing page)"
+  },
+  {
+   "citation": "Flanner 2009, Geophysical Research Letters 36, L02801",
+   "doi_or_url": "10.1029/2008GL036465",
+   "use": "Earth's anthropogenic heat flux, 0.028 W/m2",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Chaisson 2008, Eos 89, 253",
+   "doi_or_url": "10.1029/2008EO280001",
+   "use": "Long-term heating from energy use",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Allen, Lindberg & Grimmond 2011, International Journal of Climatology 31, 1990",
+   "doi_or_url": "10.1002/joc.2210",
+   "use": "City heat fluxes up to 100-577 W/m2",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Zhang, Cai & Hu 2013, Nature Climate Change 3, 466",
+   "doi_or_url": "10.1038/nclimate1803",
+   "use": "Energy use in cities warms regions by up to about 1 K",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Wheeler 2017, Open Agriculture 2, 14",
+   "doi_or_url": "10.1515/opag-2017-0002",
+   "use": "Agriculture for space",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Wheeler et al. 2008, Advances in Space Research 41, 706",
+   "doi_or_url": "10.1016/j.asr.2007.06.059",
+   "use": "Edible yields in NASA's crop chambers",
+   "access": "reported by the literature search of 2026-10-09 (full text)"
+  },
+  {
+   "citation": "Bugbee & Salisbury 1988, Plant Physiology 88, 869",
+   "doi_or_url": "10.1104/pp.88.3.869",
+   "use": "Record wheat yields under 16-20-hour photoperiods",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Vélez-Ramírez et al. 2014, Nature Communications 5, 4549",
+   "doi_or_url": "10.1038/ncomms5549",
+   "use": "Continuous-light tolerance in tomato with a yield gain",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Kacprzak & Van Aken 2022, Autophagy",
+   "doi_or_url": "10.1080/15548627.2022.2054039",
+   "use": "Darkness starts carbon starvation within hours",
+   "access": "reported by the literature search of 2026-10-09 (full text)"
+  },
+  {
+   "citation": "Poore & Nemecek 2018, Science 360, 987",
+   "doi_or_url": "10.1126/science.aaq0216",
+   "use": "Animal products use 83% of farmland for 18% of calories",
+   "access": "reported by the literature search of 2026-10-09 (full text)"
+  },
+  {
+   "citation": "Cassidy, West, Gerber & Foley 2013, Environmental Research Letters 8, 034015",
+   "doi_or_url": "10.1088/1748-9326/8/3/034015",
+   "use": "Crops feed about 6 people per hectare after other uses",
+   "access": "reported by the literature search of 2026-10-09 (article page and abstract)"
+  },
+  {
+   "citation": "Allen & Nelson 1999, Ecological Engineering 13, 15",
+   "doi_or_url": "https://ecotechnics.edu/wp-content/uploads/backup/2011/08/Ecol-Eng-1999-Mission-overview-Allen-+-Nelson1.pdf",
+   "use": "Biosphere 2 grew 81% of eight people's diet on 0.2 ha; 66-hour weeks",
+   "access": "reported by the literature search of 2026-10-09 (full text)"
+  },
+  {
+   "citation": "Fu et al. 2016, Astrobiology 16, 925",
+   "doi_or_url": "10.1089/ast.2016.1477",
+   "use": "Lunar Palace 1 regenerated 55% of its food",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Leger et al. 2021, PNAS 118, e2015025118",
+   "doi_or_url": "10.1073/pnas.2015025118",
+   "use": "Solar-driven microbial protein yields over ten times crops' protein per area",
+   "access": "reported by the literature search of 2026-10-09 (full text)"
+  },
+  {
+   "citation": "Graamans et al. 2018, Agricultural Systems 160, 31",
+   "doi_or_url": "10.1016/j.agsy.2017.11.003",
+   "use": "Plant factories take 247 kWh per kg of lettuce dry matter",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Allwood & Cullen 2012, Sustainable Materials: With Both Eyes Open, UIT Cambridge",
+   "doi_or_url": "https://archive.org/details/sustainablemater0000allw",
+   "use": "Five materials make 55% of industrial CO2",
+   "access": "reported by the literature search of 2026-10-09 (catalogue and summary)"
+  },
+  {
+   "citation": "Hammond & Jones 2008, Proceedings of the ICE: Energy 161, 87",
+   "doi_or_url": "10.1680/ener.2008.161.2.87",
+   "use": "Embodied energy of steel, cement, concrete and dwellings",
+   "access": "reported by the literature search of 2026-10-09 (full text)"
+  },
+  {
+   "citation": "Freitas & Gilbreath (eds) 1982, Advanced Automation for Space Missions, NASA CP-2255",
+   "doi_or_url": "https://ntrs.nasa.gov/citations/19830007077",
+   "use": "Self-replicating lunar factories",
+   "access": "reported by the literature search of 2026-10-09 (landing page)"
+  },
+  {
+   "citation": "Metzger, Muscatello, Mueller & Mantovani 2013, Journal of Aerospace Engineering 26, 18",
+   "doi_or_url": "10.1061/(ASCE)AS.1943-5525.0000236",
+   "use": "Bootstrapping lunar industry from tens of tonnes",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "IFR 2024, Global robot density in factories doubled in seven years",
+   "doi_or_url": "https://ifr.org/ifr-press-releases/news/global-robot-density-in-factories-doubled-in-seven-years",
+   "use": "162 robots per 10,000 manufacturing workers",
+   "access": "reported by the literature search of 2026-10-09 (press release)"
+  },
+  {
+   "citation": "IEA 2025, Energy and AI",
+   "doi_or_url": "https://www.iea.org/reports/energy-and-ai/executive-summary",
+   "use": "Data centres used 415 TWh in 2024",
+   "access": "reported by the literature search of 2026-10-09 (summary)"
+  },
+  {
+   "citation": "Masanet, Shehabi, Lei, Smith & Koomey 2020, Science 367, 984",
+   "doi_or_url": "10.1126/science.aba3758",
+   "use": "Data-centre energy against computing growth",
+   "access": "reported by the literature search of 2026-10-09 (full text)"
+  },
+  {
+   "citation": "Thales Alenia Space 2024, ASCEND feasibility study",
+   "doi_or_url": "https://www.thalesaleniaspace.com/en/press-releases/thales-alenia-space-reveals-results-ascend-feasibility-study-space-data-centers-0",
+   "use": "Orbital data centres",
+   "access": "reported by the literature search of 2026-10-09 (press release)"
+  },
+  {
+   "citation": "Google 2025, Project Suncatcher; Agüera y Arcas et al., arXiv 2511.19468",
+   "doi_or_url": "https://arxiv.org/abs/2511.19468",
+   "use": "Orbital computing constellations",
+   "access": "reported by the literature search of 2026-10-09 (blog and abstract)"
+  },
+  {
+   "citation": "Feilden, Oltean & Johnston 2024, Why we should train AI in space (Starcloud white paper)",
+   "doi_or_url": "https://starcloudinc.github.io/wp.pdf",
+   "use": "Radiators rejecting 838 W/m2 at 20 C",
+   "access": "reported by the literature search of 2026-10-09 (full text)"
+  },
+  {
+   "citation": "Landauer 1961, IBM Journal of Research and Development 5, 183",
+   "doi_or_url": "10.1147/rd.53.0183",
+   "use": "The energy floor of irreversible computing",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Krammer & Schäfer 2025, npj Sustainable Mobility and Transport 2, 13",
+   "doi_or_url": "10.1038/s44333-025-00028-6",
+   "use": "Freight energy per tonne-km by mode",
+   "access": "reported by the literature search of 2026-10-09 (full text)"
+  },
+  {
+   "citation": "Prentice & Knotts 2016, Canadian Transportation Research Forum 51st meeting",
+   "doi_or_url": "https://isopolar.com/sustainable-transportation-airships-versus-jet-airplanes/",
+   "use": "Airships emit 80-90% less than jets",
+   "access": "reported by the literature search of 2026-10-09 (summary)"
+  },
+  {
+   "citation": "Lorenz 2001, Journal of Aircraft 38, 208",
+   "doi_or_url": "10.2514/2.2769",
+   "use": "Flight power scaling with gravity and air density",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Shibata et al. 2017, Venus atmospheric sample return concept, LPI Contribution 1989, 8164",
+   "doi_or_url": "https://www.hou.usra.edu/meetings/V2050/pdf/8164.pdf",
+   "use": "Balloon-borne launch through a thick atmosphere",
+   "access": "reported by the literature search of 2026-10-09 (full text)"
+  },
+  {
+   "citation": "Johnson & Holbrow (eds) 1977, Space Settlements: A Design Study, NASA SP-413",
+   "doi_or_url": "https://nss.org/settlement/nasa/75SummerStudy/Table_of_Contents1.html",
+   "use": "Lunar export by mass driver from an airless surface",
+   "access": "reported by the literature search of 2026-10-09 (full text, chapter 3 and appendices)"
+  },
+  {
+   "citation": "Heppenheimer 1977, Colonies in Space, chapter 6",
+   "doi_or_url": "https://nss.org/colonies-in-space-chapter-6-the-moon-miners/",
+   "use": "The lunar export plans of the 1970s",
+   "access": "reported by the literature search of 2026-10-09 (chapter summary)"
+  },
+  {
+   "citation": "O'Neill 1974, Physics Today 27(9), 32",
+   "doi_or_url": "10.1063/1.3128863",
+   "use": "The colonization of space",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Pearson, Levin, Oldson & Wykes 2005, Lunar Space Elevators for Cislunar Space Development, NIAC Phase I report",
+   "doi_or_url": "https://www.niac.usra.edu/files/studies/final_report/1032Pearson.pdf",
+   "use": "A lunar elevator of today's materials lifts about 584 t a year",
+   "access": "reported by the literature search of 2026-10-09 (full text)"
+  },
+  {
+   "citation": "Ryan et al. 2022, Earth's Future 10, e2021EF002612",
+   "doi_or_url": "10.1029/2021EF002612",
+   "use": "Rocket soot warms about 500 times as much per kg as surface sources",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Maloney et al. 2022, JGR Atmospheres 127",
+   "doi_or_url": "10.1029/2021JD036373",
+   "use": "Rocket black carbon warms the stratosphere",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Stahel 2016, Nature 531, 435",
+   "doi_or_url": "10.1038/531435a",
+   "use": "The circular economy",
+   "access": "reported by the literature search of 2026-10-09 (standfirst)"
+  },
+  {
+   "citation": "Gutowski et al. 2011, Environ. Sci. Technol. 45, 4540",
+   "doi_or_url": "10.1021/es102598b",
+   "use": "Remanufacturing saved energy in 8 of 25 cases",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "NRC 1990, Committing to the Cost of Ownership",
+   "doi_or_url": "https://eric.ed.gov/?id=ED322581",
+   "use": "Maintenance at 2-4% of replacement value a year",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "US BLS 2025, Occupational Employment and Wage Statistics, May 2024",
+   "doi_or_url": "https://www.bls.gov/oes/2024/may/featured_data.htm",
+   "use": "Maintenance occupations are 3.9% of US employment",
+   "access": "reported by the literature search of 2026-10-09 (data table)"
+  },
+  {
+   "citation": "Anderson, Ewert & Keener 2018, Life Support Baseline Values and Assumptions Document (NASA)",
+   "doi_or_url": "https://ntrs.nasa.gov/api/citations/20180001338/downloads/20180001338.pdf",
+   "use": "Oxygen, food and water per person a day",
+   "access": "reported by the literature search of 2026-10-09 (full text)"
+  },
+  {
+   "citation": "NASA 2023, Water recovery milestone on the ISS",
+   "doi_or_url": "https://www.nasa.gov/missions/station/iss-research/nasa-achieves-water-recovery-milestone-on-international-space-station/",
+   "use": "The ISS recovers 98% of its water",
+   "access": "reported by the literature search of 2026-10-09 (news page)"
+  },
+  {
+   "citation": "Salotti 2020, Scientific Reports 10, 9700",
+   "doi_or_url": "10.1038/s41598-020-66740-0",
+   "use": "The minimum number of settlers, about 110",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "IEA 2016, Water-Energy Nexus (World Energy Outlook 2016 excerpt)",
+   "doi_or_url": "https://iea.blob.core.windows.net/assets/e4a7e1a5-b6ed-4f36-911f-b0111e49aab9/WorldEnergyOutlook2016ExcerptWaterEnergyNexus.pdf",
+   "use": "Water supply is 4% of world electricity; wastewater's energy",
+   "access": "reported by the literature search of 2026-10-09 (full text)"
+  },
+  {
+   "citation": "Gleick 1996, Water International 21, 83",
+   "doi_or_url": "10.1080/02508069608686494",
+   "use": "Basic water requirements",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Larsen, Riechmann & Udert 2021, Water Research X 13, 100114",
+   "doi_or_url": "10.1016/j.wroa.2021.100114",
+   "use": "Urine treatment: nitrogen recovery at 1.3-13 kWh per kg",
+   "access": "reported by the literature search of 2026-10-09 (full text)"
+  },
+  {
+   "citation": "IEA 2021, Ammonia Technology Roadmap",
+   "doi_or_url": "https://www.iea.org/reports/ammonia-technology-roadmap/executive-summary",
+   "use": "The best ammonia plants at about 9.4 kWh per kg N",
+   "access": "reported by the literature search of 2026-10-09 (summary)"
+  },
+  {
+   "citation": "Mihelcic, Fry & Shaw 2011, Chemosphere 84, 832",
+   "doi_or_url": "10.1016/j.chemosphere.2011.02.046",
+   "use": "Urine and faeces could supply 22% of phosphorus demand",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  }
+ ]
+}

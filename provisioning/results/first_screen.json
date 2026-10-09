@@ -1,0 +1,297 @@
+{
+ "schema": "terluna.provisioning.first-screen/1",
+ "producer": {
+  "domain": "provisioning",
+  "files": {
+   "provisioning/screen.py": "d5a75bf00ee68b4f"
+  },
+  "inputs": {
+   "research/studies/solar_shield_array/results/array_heat.json": "d964f1a5e1dec2e9",
+   "research/studies/solar_shield_array/results/ring_layout.json": "456338e771bbc4aa",
+   "biosphere/canopy/results/fruit.json": "b2034a74a4c45291",
+   "research/studies/summit_tower/results/summit_tower.json": "53954bbe96931efa",
+   "geography/products/atlas_28pct_4ppd.npz": "dc283827f349fdc1",
+   "geography/results/atlas.json": "78cfbf2f469eb339",
+   "geography/results/drainage.json": "18494e3d3656ead7",
+   "geography/products/drainage_28pct_16ppd.npz": "98842fc2a648f889",
+   "geography/results/tides.json": "5006911ecaadbcf8"
+  },
+  "constants": {
+   "AVOGADRO": 6.02214076e+23,
+   "MOON_RADIUS": 1737400.0,
+   "MOON_SURFACE_GRAVITY": 1.6242188765608128,
+   "SPEED_OF_LIGHT": 299792458.0,
+   "STANDARD_GRAVITY": 9.80665,
+   "SYNODIC_MONTH_DAYS": 29.53059
+  }
+ },
+ "evidence": "A screen on committed products: the shield study's array heat and ring layout, the canopy model's fruit, the summit tower's storage and panels, the atlas, drainage and tide products. Closed-form arithmetic with the stated literature values; no climate, grid, farm or reactor model is run.",
+ "reading_rule": "heat in PW and W/m2 averaged over the Moon, warming in K; food in kcal per m2 per day and m2 per person; land in km2; night storage in TWh and km3; power in GW; transit in m/s2 and km; fusion fuel in kg, J and TW sustained over 1e9 years.",
+ "heat": {
+  "tiles_absorbed_pw": [
+   65.1197087108544,
+   83.28829672783431
+  ],
+  "moon_facing_share": 0.5,
+  "ring_radius_km": [
+   19355,
+   21392
+  ],
+  "view_factor": [
+   0.0066,
+   0.00806
+  ],
+  "layers_in_the_moons_view": 2.03,
+  "fleet_infrared_w_m2": {
+   "unblocked": [
+    5.66,
+    8.85
+   ],
+   "one_layer": [
+    2.79,
+    4.36
+   ]
+  },
+  "share_of_design_sunlight": [
+   0.0095,
+   0.0302
+  ],
+  "against_dimmer_w_m2": 15.4,
+  "warming_k_if_like_sunlight": [
+   1.8,
+   5.7
+  ],
+  "warming_k_range": [
+   0.9,
+   8.8
+  ],
+  "human_use": {
+   "w_m2_per_tw": 0.0264,
+   "k_per_tw": [
+    0.0165,
+    0.0264
+   ],
+   "tw_for_one_kelvin": [
+    38,
+    61
+   ],
+   "metropolis_gw": 200.0,
+   "metropolis_w_m2_moon": 0.00527,
+   "metropolis_w_m2_local": 62.2,
+   "fleet_infrared_as_tw_used": [
+    106,
+    336
+   ]
+  }
+ },
+ "food": {
+  "sites": {
+   "near/0/earth_like/0.5": {
+    "harvest_kg_per_cycle": 3.08,
+    "kcal_m2_day": 31.3,
+    "m2_per_person": 80.0
+   },
+   "near/0/earth_like/0.6": {
+    "harvest_kg_per_cycle": 3.68,
+    "kcal_m2_day": 37.4,
+    "m2_per_person": 67.0
+   },
+   "near/0/idle_quarter/0.5": {
+    "harvest_kg_per_cycle": 3.5,
+    "kcal_m2_day": 35.6,
+    "m2_per_person": 70.0
+   },
+   "near/0/idle_quarter/0.6": {
+    "harvest_kg_per_cycle": 4.18,
+    "kcal_m2_day": 42.5,
+    "m2_per_person": 59.0
+   },
+   "near/30/earth_like/0.5": {
+    "harvest_kg_per_cycle": 2.8,
+    "kcal_m2_day": 28.5,
+    "m2_per_person": 88.0
+   },
+   "near/30/earth_like/0.6": {
+    "harvest_kg_per_cycle": 3.35,
+    "kcal_m2_day": 34.0,
+    "m2_per_person": 73.0
+   },
+   "near/30/idle_quarter/0.5": {
+    "harvest_kg_per_cycle": 3.2,
+    "kcal_m2_day": 32.5,
+    "m2_per_person": 77.0
+   },
+   "near/30/idle_quarter/0.6": {
+    "harvest_kg_per_cycle": 3.82,
+    "kcal_m2_day": 38.8,
+    "m2_per_person": 64.0
+   },
+   "near/60/earth_like/0.5": {
+    "harvest_kg_per_cycle": 1.85,
+    "kcal_m2_day": 18.8,
+    "m2_per_person": 133.0
+   },
+   "near/60/earth_like/0.6": {
+    "harvest_kg_per_cycle": 2.21,
+    "kcal_m2_day": 22.5,
+    "m2_per_person": 111.0
+   },
+   "near/60/idle_quarter/0.5": {
+    "harvest_kg_per_cycle": 2.2,
+    "kcal_m2_day": 22.3,
+    "m2_per_person": 112.0
+   },
+   "near/60/idle_quarter/0.6": {
+    "harvest_kg_per_cycle": 2.63,
+    "kcal_m2_day": 26.7,
+    "m2_per_person": 94.0
+   },
+   "far/0/earth_like/0.5": {
+    "harvest_kg_per_cycle": 3.04,
+    "kcal_m2_day": 30.8,
+    "m2_per_person": 81.0
+   },
+   "far/0/earth_like/0.6": {
+    "harvest_kg_per_cycle": 3.63,
+    "kcal_m2_day": 36.8,
+    "m2_per_person": 68.0
+   },
+   "far/0/idle_quarter/0.5": {
+    "harvest_kg_per_cycle": 3.42,
+    "kcal_m2_day": 34.7,
+    "m2_per_person": 72.0
+   },
+   "far/0/idle_quarter/0.6": {
+    "harvest_kg_per_cycle": 4.08,
+    "kcal_m2_day": 41.5,
+    "m2_per_person": 60.0
+   }
+  },
+  "far_side_equator_m2_per_person": [
+   60.0,
+   81.0
+  ],
+  "planning_m2_per_person": [
+   131,
+   341
+  ],
+  "metropolis_cropland_km2": {
+   "potential": [
+    6000.0,
+    8100.0
+   ],
+   "planning": [
+    13100.0,
+    34100.0
+   ]
+  },
+  "metropolis_area_km2": 3217,
+  "land_round_summit_km2": {
+   "100": {
+    "dry_land_km2": 18700.0,
+    "lakes_km2": 12900.0
+   },
+   "300": {
+    "dry_land_km2": 123100.0,
+    "lakes_km2": 159100.0
+   },
+   "500": {
+    "dry_land_km2": 347400.0,
+    "lakes_km2": 433300.0
+   }
+  },
+  "planning_share_of_dry_land": {
+   "100": [
+    0.7,
+    1.83
+   ],
+   "300": [
+    0.11,
+    0.28
+   ],
+   "500": [
+    0.04,
+    0.1
+   ]
+  }
+ },
+ "night": {
+  "night_hours": 354.4,
+  "metropolis_night_twh": 70.9,
+  "times_earths_pumped_storage": 7.9,
+  "korolev_water_km3": 52.5,
+  "head_m": 3740,
+  "level_panels_km2_for_the_mean": 6100.0
+ },
+ "waters": {
+  "tidal_power_per_area_moon_over_earth": 0.00313,
+  "seas": {
+   "Oceanus Procellarum, Mare Frigoris": {
+    "area_km2": 5288444,
+    "range_m": 3.68,
+    "one_way_gw": 25.2,
+    "both_ways_gw": 50.4
+   },
+   "Mare Ingenii, Lacus Tenebrarum": {
+    "area_km2": 2322833,
+    "range_m": 2.08,
+    "one_way_gw": 3.5,
+    "both_ways_gw": 7.1
+   },
+   "Mare Smythii, Mare Marginis": {
+    "area_km2": 285480,
+    "range_m": 0.55,
+    "one_way_gw": 0.0,
+    "both_ways_gw": 0.1
+   },
+   "Mare Humboldtianum": {
+    "area_km2": 284341,
+    "range_m": 0.85,
+    "one_way_gw": 0.1,
+    "both_ways_gw": 0.1
+   }
+  },
+  "rivers": {
+   "discharge_m3s": 229410,
+   "mean_land_height_above_sea_m": 2345,
+   "gross_upper_bound_tw": 0.87
+  }
+ },
+ "transit": {
+  "standing_acceleration_m_s2": {
+   "earth": [
+    1.0,
+    1.5
+   ],
+   "moon": [
+    0.166,
+    0.248
+   ]
+  },
+  "stop_from_m_s": 30.0,
+  "stopping_km": {
+   "earth": [
+    0.3,
+    0.45
+   ],
+   "moon": [
+    1.81,
+    2.72
+   ]
+  },
+  "tilt_of_apparent_vertical_deg_at_1_m_s2": {
+   "earth": 5.8,
+   "moon": 31.6
+  }
+ },
+ "fusion_fuel": {
+  "water_kg": 1.38e+19,
+  "deuterium_kg": 481000000000000.0,
+  "energy_j": 1.66e+29,
+  "tw_for_1e9_years": 5.3,
+  "note": "The seas and lakes are imported; the operation can deliver more deuterium with any water."
+ },
+ "latency": {
+  "round_trip_s_to_ring_radius": 0.133
+ }
+}

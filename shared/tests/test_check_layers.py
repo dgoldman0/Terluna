@@ -12,10 +12,12 @@ class LaneRuleTests(unittest.TestCase):
         self.assertEqual(lane("immersion/experiences/shoreline/app.js"), "immersion")
         self.assertEqual(lane("immersion/bake/columns.mjs"), "immersion-bake")
         self.assertEqual(lane("research/studies/forest_patch/run.py"), "research")
+        self.assertEqual(lane("provisioning/needs.py"), "domain")
 
     def test_intended_dependencies(self):
         self.assertTrue(allowed("biosphere/forest_patch.py", "atmosphere/lower_air.py"))
         self.assertTrue(allowed("atmosphere/lower_air.py", "shared/constants.py"))
+        self.assertTrue(allowed("provisioning/needs.py", "biosphere/canopy/model.py"))
         self.assertTrue(allowed("immersion/engine/core.js", "shared/constants.js"))
         self.assertTrue(allowed("immersion/bake/columns.mjs", "atmosphere/column/export_columns.cjs"))
         self.assertTrue(allowed("visualization/labs/build_accuracy.py", "illumination/references/x.py"))

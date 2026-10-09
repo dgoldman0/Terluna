@@ -54,7 +54,7 @@ separate research inputs.
 | Lane | Folders | May import |
 |---|---|---|
 | shared | `shared/` | nothing else |
-| domain | `atmosphere/`, `climate/`, `biosphere/`, `protection/`, `engineering/`, `geography/`, `habitation/`, `illumination/` | shared, other domains |
+| domain | `atmosphere/`, `climate/`, `biosphere/`, `protection/`, `engineering/`, `geography/`, `habitation/`, `illumination/`, `provisioning/` | shared, other domains |
 | research | `research/` (hub and studies) | shared, domains |
 | visualization | `visualization/` | shared, domains, research, immersion (to measure it) |
 | immersion engine | `immersion/engine/` | shared, the engine (never a world) |
