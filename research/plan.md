@@ -44,10 +44,32 @@ The author's decisions in that work sit in each branch's copy of the register. T
   (resources); the night's energy, food land per person and transit at lunar gravity (provisioning); no vitamin D
   from sunlight, methane and N2O building up in an air with no OH, and pollen aloft for weeks (ecology).
 
-Under way since 9 October, with the near horizons the author set (the first thousand years with the build, then
-several thousand) and a working scale of 20–30 billion affluent people across the Solar System: what the array's
-computing can serve, population and living, the array's place in industry and the continuing flows, and the skies
-as biomes alongside the land.
+On 9 October the author set near horizons beside the billion-year frame (the first thousand years with the build,
+then several thousand), a working scale of 20–30 billion affluent people across the Solar System, computing as the
+leading use of the array's collected energy, and the aerial biomes almost first. The studies that followed:
+
+- **Computing** (provisioning). The night half's 851 PW outruns any computing the array can build. Mass binds first,
+  7–34 Mt in orbit per terawatt, so 1,000 TW weighs 15–74% of the fleet; heat placement binds next, 0.1 K of lunar
+  warming at 460–1,100 TW from the ring radius and 5,600 times less from the Earth–Sun hubs. Control and today's
+  science take megawatts, a metre-scale weather twin of the Moon fills the array, AI for 20–30 billion people takes
+  14–2,100 TW today, and brain emulation at scale and Matrioshka brains pass it.
+- **Population** (provisioning). The scale needs growth at the pre-industrial pace and an affluent band of 2–6 kW of
+  primary energy a person. The Moon's heat budget holds 1.4–2.2 billion at 0.1 K with industry in orbit, and far more
+  with added dimming; its runoff binds near 4 billion, which fresh seas may lift. The array's habitats need 990 t of
+  shield a person, and weekly rocket commuting costs 18–46 kW. The array serves Earth with computing and power and
+  prototypes Earth's own arrays.
+- **Industry and flows** (resources). Concentrated industry flies on platforms of its own, and heat counts by where it
+  is released: per terawatt, 0.026 W/m² on the Moon, 5×10⁻⁵ from the ring radius, 10⁻⁸ from the hubs. On the near
+  horizons the air needs only its CO2 returned; the array's habitats are the largest stream after the build, and the
+  operation then shrinks 2,400–380,000 times.
+- **The sky, land and people** (ecology). The sky is the Moon's largest habitat, wet and lightly ionized, with room for
+  flyers of 60 m and food webs fed from below. The vegetated Moon's own ethylene settles at 94–233 ppb with soils its
+  only sink, above the level that costs wheat a third of its yield. With Earth's practice the Moon holds about half a
+  billion affluent people; with the lunar design, about 3–15 billion; people's light darkens the sky's night before any
+  diet reaches its crop limit.
+- **Open across the branches:** the placement of people. The resources screen reads the scale with Earth at 10.3
+  billion and 2–14 billion in the array, the population study with 16–20 billion on Earth and 0.1–1 billion in the
+  array; the author's placement settles both.
 
 ## Next work, in order
 
