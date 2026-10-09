@@ -1,0 +1,299 @@
+{
+ "source_admission": "Published values used as constants or quoted ranges in people.py and people_and_land.md; no external dataset files are admitted. 'access' records how far each source was checked on 2026-10-09: 'full text' means the passage was read in the source or its accepted manuscript; 'abstract' means the abstract or landing page; 'reported via search summary' means a search result or a secondary report only. Entries 'reported in' another sources file were read by that file's search and not re-read here. Bibliographic details are as found.",
+ "sources": [
+  {
+   "citation": "Trenberth & Smith 2005, Journal of Climate 18, 864-875",
+   "doi_or_url": "10.1175/JCLI-3299.1",
+   "use": "Earth's air holds 5.148e18 kg, with 1.27e16 kg of water vapour (25 kg per m2)",
+   "access": "reported via search summary (abstract figures)"
+  },
+  {
+   "citation": "van der Ent & Tuinenburg 2017, Hydrology and Earth System Sciences 21, 779-790",
+   "doi_or_url": "10.5194/hess-21-779-2017",
+   "use": "Water stays 8.9 +- 0.4 days in Earth's air",
+   "access": "abstract"
+  },
+  {
+   "citation": "U.S. Standard Atmosphere, 1976 (NOAA, NASA, USAF; NASA-TM-X-74335)",
+   "doi_or_url": "https://ntrs.nasa.gov/citations/19770009539",
+   "use": "Earth's sea-level pressure (101,325 Pa) and density (1.225 kg/m3)",
+   "access": "standard; the two values used only"
+  },
+  {
+   "citation": "Redfield 1958, American Scientist 46(3), 205-221",
+   "doi_or_url": "https://www.jstor.org/stable/27827150",
+   "use": "Carbon to phosphorus of 106:1 by atoms in plankton, for the production phosphorus can feed aloft",
+   "access": "standard ratio; not re-read"
+  },
+  {
+   "citation": "Diehl 2013, Trends in Ecology & Evolution 28, 377-379",
+   "doi_or_url": "10.1016/j.tree.2013.02.015",
+   "use": "The airspace meets the definition and functional role of a habitat",
+   "access": "abstract"
+  },
+  {
+   "citation": "Amato et al. 2019, Scientific Reports 9, 4383",
+   "doi_or_url": "10.1038/s41598-019-41032-4",
+   "use": "Bacteria in cloud water keep transcribing and translating: clouds are a living habitat",
+   "access": "abstract"
+  },
+  {
+   "citation": "Hu et al. 2016, Science 354, 1584-1587",
+   "doi_or_url": "10.1126/science.aah4379",
+   "use": "About 3.5 trillion insects, 3,200 t, fly over about 70,000 km2 of southern Britain each year at 150-1,200 m",
+   "access": "abstract and accepted manuscript (full text)"
+  },
+  {
+   "citation": "Sagan & Salpeter 1976, Astrophysical Journal Supplement 32, 737-755",
+   "doi_or_url": "10.1086/190414",
+   "use": "Floating organisms in a dense atmosphere: the floating radius grows with skin thickness",
+   "access": "full text (scan)"
+  },
+  {
+   "citation": "Shaffer, Weimerskirch & Costa 2001, Functional Ecology 15, 203-210",
+   "doi_or_url": "10.1046/j.1365-2435.2001.00514.x",
+   "use": "Wandering albatross males span 3.11 m and weigh 9.44 kg; females are about a fifth lighter",
+   "access": "abstract"
+  },
+  {
+   "citation": "Chatterjee, Templin & Campbell 2007, PNAS 104, 12398-12403",
+   "doi_or_url": "10.1073/pnas.0702040104",
+   "use": "Argentavis magnificens: about 70-72 kg, about 7 m across, a soaring bird",
+   "access": "abstract and full text (through a fetch extraction)"
+  },
+  {
+   "citation": "Witton & Habib 2010, PLoS ONE 5, e13982",
+   "doi_or_url": "10.1371/journal.pone.0013982",
+   "use": "The largest azhdarchid pterosaurs: 10-11 m across and 200-250 kg",
+   "access": "full text"
+  },
+  {
+   "citation": "Yu et al. 2015, Geophysical Research Letters 42, 1984-1991",
+   "doi_or_url": "10.1002/2015GL063040",
+   "use": "African dust brings the Amazon 7-39 g of phosphorus per ha a year",
+   "access": "reported in research/studies/lunar_cycle_ecology/sources.json (full text)"
+  },
+  {
+   "citation": "Montgomery 2007, PNAS 104, 13268-13272",
+   "doi_or_url": "10.1073/pnas.0611508104",
+   "use": "Natural soil forms at 0.017-0.036 mm a year",
+   "access": "reported in biosphere/ecology/sources.json (full text)"
+  },
+  {
+   "citation": "Ritchie & Roser 2019, Our World in Data, 'Half of the world's habitable land is used for agriculture' (from FAO)",
+   "doi_or_url": "https://ourworldindata.org/global-land-for-agriculture",
+   "use": "Earth's land 149 million km2, habitable land 104 million km2, agriculture 51 million km2 (the 2019 graphic; the page's current graphic gives 141, 107 and 48)",
+   "access": "full text (page and graphic)"
+  },
+  {
+   "citation": "FAO 2011: Gustavsson, Cederberg, Sonesson, van Otterdijk & Meybeck, Global food losses and food waste",
+   "doi_or_url": "https://www.fao.org/4/mb060e/mb060e.pdf",
+   "use": "Roughly a third of food produced for people is lost or wasted",
+   "access": "full text"
+  },
+  {
+   "citation": "Willett et al. 2019, The Lancet 393, 447-492 (EAT-Lancet Commission)",
+   "doi_or_url": "10.1016/S0140-6736(18)31788-4",
+   "use": "2,500 kcal a day as the basis for its reference diet, whose animal foods give about 12-14% of the energy (from its Table 1)",
+   "access": "full text (accepted manuscript)"
+  },
+  {
+   "citation": "Poore & Nemecek 2018, Science 360, 987-992",
+   "doi_or_url": "10.1126/science.aaq0216",
+   "use": "Today's diet uses 4,130 million ha (1,240 arable, 2,890 pasture); a diet without animal products 1,000 million ha, a 76% reduction; animal products use about 83% of farmland for 18% of calories",
+   "access": "full text (accepted manuscript and supplementary materials)"
+  },
+  {
+   "citation": "Peters et al. 2016, Elementa: Science of the Anthropocene 4, 000116",
+   "doi_or_url": "10.12952/journal.elementa.000116",
+   "use": "Land a person a year by US diet: vegan 0.13 ha; lacto-ovo vegetarian 0.14 ha; the 20% omnivore 0.15 ha of cropland and 0.10 ha grazed; the baseline 0.34 ha of cropland and 0.74 ha grazed",
+   "access": "full text"
+  },
+  {
+   "citation": "Cassidy, West, Gerber & Foley 2013, Environmental Research Letters 8, 034015",
+   "doi_or_url": "10.1088/1748-9326/8/3/034015",
+   "use": "Crops feed about 6 people per hectare after feed, biofuels and other uses; 10.1 if all crop calories were eaten",
+   "access": "full text"
+  },
+  {
+   "citation": "Alexander, Brown, Arneth, Finnigan & Rounsevell 2016, Global Environmental Change 41, 88-98",
+   "doi_or_url": "10.1016/j.gloenvcha.2016.09.005",
+   "use": "Animal products give 30% of US dietary energy",
+   "access": "full text (accepted manuscript)"
+  },
+  {
+   "citation": "Shepon, Eshel, Noor & Milo 2016, Environmental Research Letters 11, 105002",
+   "doi_or_url": "10.1088/1748-9326/11/10/105002",
+   "use": "US livestock turn 7-8% of feed calories into food on average; beef about 3%",
+   "access": "full text"
+  },
+  {
+   "citation": "Leger et al. 2021, PNAS 118, e2015025118",
+   "doi_or_url": "10.1073/pnas.2015025118",
+   "use": "Microbial protein from solar electricity yields over ten times the protein per area of any staple crop",
+   "access": "full text"
+  },
+  {
+   "citation": "Angel, Parent, Civco & Blei 2010, The Persistent Decline in Urban Densities, Lincoln Institute of Land Policy Working Paper WP10SA1",
+   "doi_or_url": "https://www.lincolninst.edu/app/uploads/2024/04/1834_1085_angel_final_1.pdf",
+   "use": "Cities averaged 28 people per ha in land-rich developed countries, 70 in other developed countries and 135 in developing countries in 2000",
+   "access": "full text"
+  },
+  {
+   "citation": "CBD 2022: Convention on Biological Diversity, Decision 15/4, Kunming-Montreal Global Biodiversity Framework, Target 3",
+   "doi_or_url": "https://www.cbd.int/doc/decisions/cop-15/cop-15-dec-04-en.pdf",
+   "use": "At least 30% of land and inland waters, and of marine and coastal areas, conserved by 2030",
+   "access": "full text"
+  },
+  {
+   "citation": "Wilson 2016, Half-Earth: Our Planet's Fight for Life (Liveright)",
+   "doi_or_url": "no stable URL recorded",
+   "use": "Setting aside half the planet in reserve",
+   "access": "reported via search summary and a secondary source (Buscher et al. 2017, Oryx 51, 407)"
+  },
+  {
+   "citation": "Allan et al. 2022, Science 376, 1094-1101",
+   "doi_or_url": "10.1126/science.abl9127",
+   "use": "At least 64 million km2, 44% of Earth's land, needs conservation attention",
+   "access": "abstract (published) and full text (preprint)"
+  },
+  {
+   "citation": "Dinerstein et al. 2019, Science Advances 5, eaaw2869",
+   "doi_or_url": "10.1126/sciadv.aaw2869",
+   "use": "30% protected and 20% more as climate stabilization areas: half of the Earth",
+   "access": "full text"
+  },
+  {
+   "citation": "Falchi et al. 2016, Science Advances 2, e1600377",
+   "doi_or_url": "10.1126/sciadv.1600377",
+   "use": "Light-polluted skies (artificial brightness above 14 ucd/m2) over 23% of the land between 75 N and 60 S, 88% of Europe and almost half of the United States",
+   "access": "full text"
+  },
+  {
+   "citation": "World Bank, World Development Indicators: SP.POP.TOTL and AG.LND.TOTL.K2",
+   "doi_or_url": "https://data.worldbank.org/",
+   "use": "Population (world 7.00 billion in 2010, 7.09-7.27 billion in 2011-2013, 7.44 billion in 2015; US 322 million and EU 444 million in 2015) and land area in 2015 (world 129.9, US 9.15, EU 3.99 million km2)",
+   "access": "full text (API values read 2026-10-09)"
+  },
+  {
+   "citation": "Van Doren et al. 2017, PNAS 114, 11175-11180",
+   "doi_or_url": "10.1073/pnas.1708574114",
+   "use": "One lit installation in New York drew about 1.1 million migrating birds over seven nights in seven years, at up to 150 times their usual density",
+   "access": "full text (accepted manuscript)"
+  },
+  {
+   "citation": "Loss, Will, Loss & Marra 2014, The Condor 116, 8-23",
+   "doi_or_url": "10.1650/CONDOR-13-090.1",
+   "use": "Building collisions kill 365-988 million birds a year in the US",
+   "access": "full text"
+  },
+  {
+   "citation": "EIA: U.S. Energy Information Administration, 'How much energy does a person use in a year?'",
+   "doi_or_url": "https://www.eia.gov/tools/faqs/faq.php?id=85&t=1",
+   "use": "US primary energy per person, about 279 million Btu in 2023 (9.3 kW)",
+   "access": "full text (web page)"
+  },
+  {
+   "citation": "Vogel et al. 2021, Global Environmental Change 69, 102287",
+   "doi_or_url": "10.1016/j.gloenvcha.2021.102287",
+   "use": "Need satisfaction stops rising near 60 GJ of energy a person a year",
+   "access": "reported in provisioning/sources.json on the domain/provisioning branch (full text)"
+  },
+  {
+   "citation": "Saunois et al. 2020, Earth System Science Data 12, 1561-1623",
+   "doi_or_url": "10.5194/essd-12-1561-2020",
+   "use": "Agriculture and waste emit 206 (bottom-up) to 217 (top-down) Tg of methane a year over 2008-2017",
+   "access": "full text"
+  },
+  {
+   "citation": "Tian et al. 2020, Nature 586, 248-256",
+   "doi_or_url": "10.1038/s41586-020-2780-0",
+   "use": "Anthropogenic N2O 7.3 Tg N a year over 2007-2016, agriculture 3.8 direct and 1.3 indirect",
+   "access": "full text (accepted version)"
+  },
+  {
+   "citation": "IPCC 2019 Refinement to the 2006 IPCC Guidelines, Volume 4, Chapter 11, Table 11.1",
+   "doi_or_url": "https://www.ipcc-nggip.iges.or.jp/public/2019rf/pdf/4_Volume4/19R_V4_Ch11_Soils_N2O_CO2.pdf",
+   "use": "Direct N2O emission factor EF1: 1.0% aggregated (0.2-1.8%), 0.5% for all inputs in dry climates",
+   "access": "full text"
+  },
+  {
+   "citation": "Sawada & Totsuka 1986, Atmospheric Environment 20, 821-832",
+   "doi_or_url": "10.1016/0004-6981(86)90266-0",
+   "use": "Ethylene sources of 18-45 Tg a year, 74% natural, 89% of that from land",
+   "access": "abstract"
+  },
+  {
+   "citation": "Klassen & Bugbee 2002, Crop Science 42, 746-753",
+   "doi_or_url": "10.2135/cropsci2002.7460",
+   "use": "Ethylene held at 50 ppb costs wheat 36% and rice 63% of their yield",
+   "access": "reported in biosphere/ecology/sources.json (abstract)"
+  },
+  {
+   "citation": "Leach et al. 2012, Environmental Development 1, 40-66",
+   "doi_or_url": "10.1016/j.envdev.2011.12.005",
+   "use": "Feeding a person loses 30 kg N a year to the environment in the US and 22 in the Netherlands; people in the US eat 5.2 kg N a year; virtual N factors 1.4 for grains, 1.5 for starchy roots and 0.7 for legumes",
+   "access": "full text"
+  },
+  {
+   "citation": "Cordell, Drangert & White 2009, Global Environmental Change 19, 292-305",
+   "doi_or_url": "10.1016/j.gloenvcha.2008.10.009",
+   "use": "About a fifth of the phosphorus mined for food reaches the food eaten; people excrete 0.44 kg of P a year on the average diet and 0.6 kg as meat eaters",
+   "access": "full text of Cordell's 2010 thesis, which republishes the paper's flow analysis; the journal paper itself not read"
+  },
+  {
+   "citation": "Mihelcic, Fry & Shaw 2011, Chemosphere 84, 832-839",
+   "doi_or_url": "10.1016/j.chemosphere.2011.02.046",
+   "use": "Human urine and faeces could supply 22% of the world's phosphorus demand",
+   "access": "abstract"
+  },
+  {
+   "citation": "USGS 2025: U.S. Geological Survey, Mineral Commodity Summaries 2025, Molybdenum",
+   "doi_or_url": "https://pubs.usgs.gov/periodicals/mcs2025/mcs2025-molybdenum.pdf",
+   "use": "World molybdenum mine production about 260,000 t in 2024",
+   "access": "full text"
+  },
+  {
+   "citation": "Tang et al. 2014, Scientific Reports 4, 7483",
+   "doi_or_url": "10.1038/srep07483",
+   "use": "Annual water-use efficiency (gross production per evapotranspiration) at crop sites 1.05-2.36 g C per kg of water, the lowest of the vegetation types",
+   "access": "full text (Table 2), read by this work's literature check"
+  },
+  {
+   "citation": "Mahowald et al. 2008, Global Biogeochemical Cycles 22, GB4026",
+   "doi_or_url": "10.1029/2008GB003240",
+   "use": "Phosphorus deposition measured over Earth's land, median 0.028 g P per m2 a year (86 sites)",
+   "access": "abstract; the median read in Tipping et al. 2014 (Environmental Science: Processes & Impacts 16, 1608; 10.1039/c3em00641g, accepted manuscript), which quotes it"
+  },
+  {
+   "citation": "Sossi, Nakajima & Khan 2024, Treatise on Geochemistry vol. 3 (arXiv:2408.16840)",
+   "doi_or_url": "https://arxiv.org/abs/2408.16840",
+   "use": "The bulk silicate Moon holds about 0.019 ppm of molybdenum",
+   "access": "reported in biosphere/ecology/sources.json (full text, molybdenum section and table 2)"
+  },
+  {
+   "citation": "Rudnick & Gao 2003, Treatise on Geochemistry vol. 3, 1-64",
+   "doi_or_url": "10.1016/B0-08-043751-6/03016-4",
+   "use": "Earth's upper continental crust holds 1.1 ppm of molybdenum",
+   "access": "secondary: the value as tabulated in the pyrolite data table and quoted by Greaney et al. 2018 (Geochimica et Cosmochimica Acta 238, 36), read in full"
+  },
+  {
+   "citation": "Kovács, Bódi, Várallyay, Mukarram & Ahmed 2026, Plants 15(4), 585",
+   "doi_or_url": "10.3390/plants15040585",
+   "use": "Molybdenum dressings of 15-55 g/ha for wheat, 80-100 g/ha for beans and peanut and 120 g/ha for soybean; 0.1-0.5 mg/kg in tissue suffices for nitrogen metabolism (Crossref lists the first author's names inverted)",
+   "access": "full text (Europe PMC), read by this work's literature check"
+  },
+  {
+   "citation": "IEA 2021, Ammonia Technology Roadmap",
+   "doi_or_url": "https://iea.blob.core.windows.net/assets/6ee41bb9-8e81-4b64-8701-2acc064ff6e4/AmmoniaTechnologyRoadmap.pdf",
+   "use": "Electrolytic ammonia needs 36 GJ of electricity per tonne of NH3, 12.2 kWh per kg of N",
+   "access": "full text"
+  },
+  {
+   "citation": "Sawada, Hayakawa, Nakahata & Totsuka 1986, Atmospheric Environment 20, 513-516",
+   "doi_or_url": "10.1016/0004-6981(86)90091-0",
+   "use": "Soil takes up ethylene through a gross diffusion resistance of 9.82 h/m (a deposition velocity of about 0.003 cm/s)",
+   "access": "abstract, read by this work's literature check (bibliographic details checked in Crossref)"
+  }
+ ]
+}

@@ -1,0 +1,1968 @@
+{
+ "schema": "terluna.biosphere.ecology-people/1",
+ "producer": {
+  "domain": "biosphere",
+  "files": {
+   "biosphere/ecology/people.py": "5a9c98760fcdb0fb"
+  },
+  "inputs": {
+   "geography/results/atlas.json": "78cfbf2f469eb339",
+   "geography/results/drainage.json": "18494e3d3656ead7",
+   "climate/results/gcm/global_winds_A28_dim5_moon.json": "4055b824d45c54b1",
+   "climate/results/gcm/convection_A28_dim5_moon.json": "8f49648199fa65ca",
+   "climate/results/crm/ring_ring_equator.json": "7da8c01d24121e32",
+   "climate/results/crm/ring_ring_45n_lsw.json": "608921535125ea8c",
+   "climate/results/crm/ring_ring_70_45e.json": "024fb3f570c4fbf5",
+   "climate/results/crm/ring_ring_80n_lsw.json": "135b346ce4def45f",
+   "atmosphere/electricity/results/muon_ionization_moon.json": "ea2f0f687ec80c87",
+   "atmosphere/electricity/results/muon_ionization_earth.json": "3c224ef3bf7a3bd5",
+   "biosphere/canopy/results/canopy.json": "bedb8ce2502316d4",
+   "biosphere/canopy/results/plant.json": "4238c12360c633f1",
+   "biosphere/canopy/results/fruit.json": "b2034a74a4c45291",
+   "biosphere/ecology/results/first_screen.json": "d2a42b6e51f60250",
+   "research/studies/open_moon_aerosol/results/open_moon_aerosol.json": "7e404540ec06f5dd",
+   "research/studies/sky_fleet/results/sky_fleet.json": "c96dfc663f12756c",
+   "research/baselines/feasibility/reference.json": "5878ad8ff00e42bf"
+  },
+  "constants": {
+   "JULIAN_YEAR_DAYS": 365.25,
+   "MOON_GM": 4902800118000.0,
+   "MOON_RADIUS": 1737400.0,
+   "MOON_SURFACE_GRAVITY": 1.6242188765608128,
+   "STANDARD_GRAVITY": 9.80665,
+   "SYNODIC_MONTH_DAYS": 29.53059
+  }
+ },
+ "evidence": "A screen on committed products: the design run's air, rain and land, the CM1 rings' cloud and water, the muon ionization column, the canopy, plant and fruit models, the atlas and drainage, the aerosol study's regions, the sky fleet's busy hour and this branch's first screen of methane and N2O. The per-person needs are Earth figures from the literature or labelled design targets; the capacities follow by arithmetic. No ecosystem, soil, water, chemistry or traffic model is run, ethylene's soil uptake rests on one estimated soil resistance, and the greenhouse effect of the gases is not computed.",
+ "reading_rule": "sky.bands give each height band above sea level its volume above the ground (km3), mass (kg), temperature (C), cloud fraction (CM1 equatorial ring, day and night), cosmic-ray ionization as a ratio to Earth's sea level, the direct sunlight with the Sun overhead and on the horizon, and the hours the Sun stays up longer at each end of the equatorial day. Pairs are low-high ranges. Land shares are of the whole Moon; per-person needs are per year; capacity gives each limit's population in people (1e15 marks no limit, a diet without grazing); land_ is the least of crops_ (food land at the model's yields against the rain-fed potential land), grazing_ (on the fog desert) and area_ (all of it on the dry land). Methane ppm are steady states over this branch's first screen's soil sink; N2O accumulates without a sink; ethylene settles where the land's source meets the soils' uptake.",
+ "sky": {
+  "bands": {
+   "low_sky": {
+    "bottom_km": 0.0,
+    "top_km": 10.0,
+    "volume_km3": 310000000.0,
+    "mass_kg": 3.99e+17,
+    "mass_share": 0.133,
+    "temperature_c": [
+     20.7,
+     14.2
+    ],
+    "density_kg_m3": [
+     1.4,
+     1.2
+    ],
+    "column_above_bottom_t_m2": 73.6,
+    "column_above_bottom_earths": 7.13,
+    "ionization_mid_vs_earth_sea_level": 0.0308,
+    "light_at_bottom": {
+     "rayleigh_depth_above": 0.71,
+     "direct_sun_overhead": 0.492,
+     "direct_sun_on_horizon": 0.00595,
+     "horizon_dip_deg": 0.0,
+     "sun_stays_up_longer_h_each_end_equator": 0.0
+    },
+    "light_at_top": {
+     "rayleigh_depth_above": 0.594,
+     "direct_sun_overhead": 0.552,
+     "direct_sun_on_horizon": 0.0132,
+     "horizon_dip_deg": 6.13,
+     "sun_stays_up_longer_h_each_end_equator": 12.1
+    },
+    "wind_median_mid_m_s": 2.33,
+    "hydrogen_lift_kg_m3": [
+     1.31,
+     1.12
+    ],
+    "cloud_fraction_ring": {
+     "heights_km": [
+      1.0,
+      5.0,
+      10.0
+     ],
+     "day": [
+      0.0016,
+      0.018,
+      0.034
+     ],
+     "night": [
+      0.0011,
+      0.014,
+      0.007
+     ]
+    }
+   },
+   "storm_layer": {
+    "bottom_km": 10.0,
+    "top_km": 22.0,
+    "volume_km3": 464000000.0,
+    "mass_kg": 5.07e+17,
+    "mass_share": 0.169,
+    "temperature_c": [
+     14.2,
+     3.3
+    ],
+    "density_kg_m3": [
+     1.2,
+     0.991
+    ],
+    "column_above_bottom_t_m2": 62.4,
+    "column_above_bottom_earths": 6.04,
+    "ionization_mid_vs_earth_sea_level": 0.0403,
+    "light_at_bottom": {
+     "rayleigh_depth_above": 0.594,
+     "direct_sun_overhead": 0.552,
+     "direct_sun_on_horizon": 0.0132,
+     "horizon_dip_deg": 6.13,
+     "sun_stays_up_longer_h_each_end_equator": 12.1
+    },
+    "light_at_top": {
+     "rayleigh_depth_above": 0.47,
+     "direct_sun_overhead": 0.625,
+     "direct_sun_on_horizon": 0.031,
+     "horizon_dip_deg": 9.07,
+     "sun_stays_up_longer_h_each_end_equator": 17.9
+    },
+    "wind_median_mid_m_s": 3.33,
+    "hydrogen_lift_kg_m3": [
+     1.12,
+     0.921
+    ],
+    "cloud_fraction_ring": {
+     "heights_km": [
+      10.0,
+      20.0
+     ],
+     "day": [
+      0.034,
+      0.024
+     ],
+     "night": [
+      0.007,
+      0.0097
+     ]
+    }
+   },
+   "cool_air": {
+    "bottom_km": 22.0,
+    "top_km": 35.0,
+    "volume_km3": 509000000.0,
+    "mass_kg": 4.54e+17,
+    "mass_share": 0.151,
+    "temperature_c": [
+     3.3,
+     -8.8
+    ],
+    "density_kg_m3": [
+     0.991,
+     0.797
+    ],
+    "column_above_bottom_t_m2": 50.0,
+    "column_above_bottom_earths": 4.84,
+    "ionization_mid_vs_earth_sea_level": 0.0549,
+    "light_at_bottom": {
+     "rayleigh_depth_above": 0.47,
+     "direct_sun_overhead": 0.625,
+     "direct_sun_on_horizon": 0.031,
+     "horizon_dip_deg": 9.07,
+     "sun_stays_up_longer_h_each_end_equator": 17.9
+    },
+    "light_at_top": {
+     "rayleigh_depth_above": 0.361,
+     "direct_sun_overhead": 0.697,
+     "direct_sun_on_horizon": 0.0658,
+     "horizon_dip_deg": 11.4,
+     "sun_stays_up_longer_h_each_end_equator": 22.5
+    },
+    "wind_median_mid_m_s": 6.3,
+    "hydrogen_lift_kg_m3": [
+     0.921,
+     0.742
+    ],
+    "cloud_fraction_ring": {
+     "heights_km": [
+      30.0
+     ],
+     "day": [
+      0.019
+     ],
+     "night": [
+      0.0087
+     ]
+    }
+   },
+   "flight_band": {
+    "bottom_km": 35.0,
+    "top_km": 45.0,
+    "volume_km3": 397000000.0,
+    "mass_kg": 2.92e+17,
+    "mass_share": 0.0969,
+    "temperature_c": [
+     -8.8,
+     -19.2
+    ],
+    "density_kg_m3": [
+     0.797,
+     0.675
+    ],
+    "column_above_bottom_t_m2": 39.0,
+    "column_above_bottom_earths": 3.77,
+    "ionization_mid_vs_earth_sea_level": 0.0733,
+    "light_at_bottom": {
+     "rayleigh_depth_above": 0.361,
+     "direct_sun_overhead": 0.697,
+     "direct_sun_on_horizon": 0.0658,
+     "horizon_dip_deg": 11.4,
+     "sun_stays_up_longer_h_each_end_equator": 22.5
+    },
+    "light_at_top": {
+     "rayleigh_depth_above": 0.293,
+     "direct_sun_overhead": 0.746,
+     "direct_sun_on_horizon": 0.106,
+     "horizon_dip_deg": 12.9,
+     "sun_stays_up_longer_h_each_end_equator": 25.4
+    },
+    "wind_median_mid_m_s": 10.8,
+    "hydrogen_lift_kg_m3": [
+     0.742,
+     0.627
+    ],
+    "cloud_fraction_ring": {
+     "heights_km": [
+      40.0
+     ],
+     "day": [
+      0.0027
+     ],
+     "night": [
+      0.00011
+     ]
+    }
+   },
+   "high_air": {
+    "bottom_km": 45.0,
+    "top_km": 90.0,
+    "volume_km3": 1840000000.0,
+    "mass_kg": 8.56e+17,
+    "mass_share": 0.284,
+    "temperature_c": [
+     -19.2,
+     -67.5
+    ],
+    "density_kg_m3": [
+     0.675,
+     0.297
+    ],
+    "column_above_bottom_t_m2": 32.0,
+    "column_above_bottom_earths": 3.1,
+    "ionization_mid_vs_earth_sea_level": 0.157,
+    "light_at_bottom": {
+     "rayleigh_depth_above": 0.293,
+     "direct_sun_overhead": 0.746,
+     "direct_sun_on_horizon": 0.106,
+     "horizon_dip_deg": 12.9,
+     "sun_stays_up_longer_h_each_end_equator": 25.4
+    },
+    "light_at_top": {
+     "rayleigh_depth_above": 0.104,
+     "direct_sun_overhead": 0.901,
+     "direct_sun_on_horizon": 0.416,
+     "horizon_dip_deg": 18.1,
+     "sun_stays_up_longer_h_each_end_equator": 35.5
+    },
+    "wind_median_mid_m_s": 20.3,
+    "hydrogen_lift_kg_m3": [
+     0.627,
+     0.276
+    ],
+    "cloud_fraction_ring": {
+     "heights_km": [
+      55.0,
+      70.0
+     ],
+     "day": [
+      0.00083,
+      0.00094
+     ],
+     "night": [
+      0.00017,
+      0.00044
+     ]
+    }
+   }
+  },
+  "freezing_height_km": 25.7,
+  "warm_air_volume_km3": 919000000.0,
+  "warm_air_mean_depth_above_ground_km": 24.2,
+  "air_mass_kg": 3.01e+18,
+  "above_90_km_mass_share": 0.167,
+  "air_mass_vs_earth": 0.585,
+  "area_vs_earth": 0.0744,
+  "column_ground_t_m2": 73.6,
+  "column_vs_earth": 7.13,
+  "ionization_ground_vs_earth_sea_level": 0.0278,
+  "equator_ring_land": {
+   "mixed_layer_km_day_night": [
+    5.33,
+    0.417
+   ],
+   "mixed_layer_km_max": 9.9,
+   "cloud_base_km_day": 4.19,
+   "storm_top_km": {
+    "median": 22.0693135,
+    "p90": 37.794122,
+    "max": 83.794122
+   },
+   "cloud_cover": {
+    "land": 0.22615421391338955,
+    "water": 0.15914111591709926
+   }
+  },
+  "water": {
+   "precipitable_water_mm": {
+    "equator": 238.0,
+    "lat_45n": 194.0,
+    "tilted_70": 190.0,
+    "lat_80n": 130.0
+   },
+   "vapour_residence_days": {
+    "equator": 97.6,
+    "lat_45n": 131.0,
+    "tilted_70": 158.0,
+    "lat_80n": 969.0
+   },
+   "earth_precipitable_water_mm": 24.9,
+   "earth_vapour_residence_days": [
+    8.5,
+    9.3
+   ]
+  },
+  "ground_twilight_hours_after_sunset_above_umol_m2_s": {
+   "moon": {
+    "100.0": 0.0,
+    "50.0": 9.6,
+    "10.0": 31.5,
+    "1.0": 58.0
+   },
+   "earth": {
+    "100.0": 0.0,
+    "50.0": 0.0,
+    "10.0": 0.0882,
+    "1.0": 0.274
+   }
+  }
+ },
+ "lift": {
+  "similarity_factor": 6.04,
+  "earth_sea_level_density_height_km": 8.94,
+  "flyers": {
+   "wandering albatross (Diomedea exulans)": {
+    "earth_span_m": [
+     3.0,
+     3.1
+    ],
+    "earth_mass_kg": [
+     7.8,
+     9.4
+    ],
+    "moon_span_m": [
+     18.1,
+     18.7
+    ],
+    "moon_mass_t": [
+     1.72,
+     2.07
+    ]
+   },
+   "Argentavis magnificens (Miocene)": {
+    "earth_span_m": [
+     7.0,
+     7.0
+    ],
+    "earth_mass_kg": [
+     70.0,
+     72.0
+    ],
+    "moon_span_m": [
+     42.3,
+     42.3
+    ],
+    "moon_mass_t": [
+     15.4,
+     15.8
+    ]
+   },
+   "Quetzalcoatlus northropi (Cretaceous)": {
+    "earth_span_m": [
+     10.0,
+     11.0
+    ],
+    "earth_mass_kg": [
+     200.0,
+     250.0
+    ],
+    "moon_span_m": [
+     60.4,
+     66.4
+    ],
+    "moon_mass_t": [
+     44.0,
+     55.0
+    ]
+   }
+  },
+  "same_animal_at_the_ground": {
+   "weight": 0.166,
+   "hover_power": 0.063,
+   "energy_per_km": 0.166,
+   "glide_speed_and_sink": 0.38
+  },
+  "hydrogen_float_skin_kg_m2_per_m_radius": 0.435
+ },
+ "aloft": {
+  "dust_p_g_m2_yr": [
+   0.0007,
+   0.028
+  ],
+  "c_to_p_mass": 41.1,
+  "production_on_dust_p_g_c_m2_yr": [
+   0.0288,
+   1.15
+  ],
+  "land_growth_g_c_m2_yr": [
+   2830.0,
+   3210.0
+  ],
+  "production_share_of_land_growth": [
+   8.96e-06,
+   0.000407
+  ]
+ },
+ "traffic": {
+  "near_pass_m": 20.0,
+  "busy_hour": {
+   "wings, gliders and canopies": {
+    "bottom_m": 30.0,
+    "top_m": 300.0,
+    "aloft": 278800.0,
+    "speed_m_s": 7.0,
+    "per_km3": 321.0,
+    "near_passes_per_hour": 10.2,
+    "aloft_per_million_people": 2790.0
+   },
+   "sky boats and air taxis": {
+    "bottom_m": 300.0,
+    "top_m": 1500.0,
+    "aloft": 326000.0,
+    "speed_m_s": 40.0,
+    "per_km3": 84.4,
+    "near_passes_per_hour": 15.3,
+    "aloft_per_million_people": 3260.0
+   },
+   "sky ferries": {
+    "bottom_m": 1500.0,
+    "top_m": 2500.0,
+    "aloft": 900.0,
+    "speed_m_s": 25.0,
+    "per_km3": 0.3,
+    "near_passes_per_hour": 0.0339,
+    "aloft_per_million_people": 9.0
+   }
+  },
+  "city_area_km2": 3220.0,
+  "city_people": 100000000.0
+ },
+ "land": {
+  "moon_km2": 37930000.0,
+  "seas": 0.28,
+  "lakes": 0.1034,
+  "land": 0.72,
+  "dry_land": 0.6166,
+  "dry_land_km2": 23390000.0,
+  "regions": {
+   "wet_land": 0.3564,
+   "fog_desert": 0.164,
+   "polar_dry_land": 0.09615
+  },
+  "dry_land_vs_earth": {
+   "land": 0.157,
+   "habitable": 0.225,
+   "agriculture": 0.459
+  },
+  "near_side_dry_land_share": 0.334,
+  "runoff_ratio": 0.426,
+  "by_latitude": [
+   {
+    "abs_lat_deg": [
+     0,
+     15
+    ],
+    "dry_land_share": 0.161,
+    "near_side_share_of_band": 0.562,
+    "rain_mm_day": 4.78,
+    "wet_share": 1.0,
+    "gross_production_g_c_m2_day": 13.5,
+    "rain_supports_share_of_model": [
+     0.26,
+     0.58
+    ]
+   },
+   {
+    "abs_lat_deg": [
+     15,
+     30
+    ],
+    "dry_land_share": 0.103,
+    "near_side_share_of_band": 0.486,
+    "rain_mm_day": 2.7,
+    "wet_share": 0.986,
+    "gross_production_g_c_m2_day": 13.0,
+    "rain_supports_share_of_model": [
+     0.15,
+     0.34
+    ]
+   },
+   {
+    "abs_lat_deg": [
+     30,
+     45
+    ],
+    "dry_land_share": 0.143,
+    "near_side_share_of_band": 0.551,
+    "rain_mm_day": 1.3,
+    "wet_share": 0.571,
+    "gross_production_g_c_m2_day": 12.0,
+    "rain_supports_share_of_model": [
+     0.079,
+     0.18
+    ]
+   },
+   {
+    "abs_lat_deg": [
+     45,
+     60
+    ],
+    "dry_land_share": 0.113,
+    "near_side_share_of_band": 0.489,
+    "rain_mm_day": 0.192,
+    "wet_share": 0.107,
+    "gross_production_g_c_m2_day": 10.3,
+    "rain_supports_share_of_model": [
+     0.013,
+     0.03
+    ]
+   },
+   {
+    "abs_lat_deg": [
+     60,
+     75
+    ],
+    "dry_land_share": 0.0794,
+    "near_side_share_of_band": 0.609,
+    "rain_mm_day": 0.0531,
+    "wet_share": 0.0,
+    "gross_production_g_c_m2_day": 9.51,
+    "rain_supports_share_of_model": [
+     0.004,
+     0.0091
+    ]
+   },
+   {
+    "abs_lat_deg": [
+     75,
+     90
+    ],
+    "dry_land_share": 0.0168,
+    "near_side_share_of_band": 0.651,
+    "rain_mm_day": 0.0407,
+    "wet_share": 0.0,
+    "gross_production_g_c_m2_day": 9.51,
+    "rain_supports_share_of_model": [
+     0.0031,
+     0.0069
+    ]
+   }
+  ],
+  "wue_earth_crops_g_c_per_kg": [
+   1.05,
+   2.36
+  ],
+  "co2_pressure_factor": 1.2,
+  "wue_g_c_per_kg": [
+   1.26,
+   2.83
+  ],
+  "crop_water_need_mm_day_equator": [
+   4.85,
+   10.9
+  ],
+  "potential_equivalent_share": [
+   0.0663,
+   0.149
+  ],
+  "potential_within_30_deg_share": [
+   0.831,
+   0.831
+  ],
+  "rivers_irrigate_potential_km2": [
+   1820000.0,
+   4090000.0
+  ],
+  "potential_equivalent_share_km2": [
+   2510000.0,
+   5650000.0
+  ]
+ },
+ "food": {
+  "kcal_m2_day": {
+   "near/0/earth_like/0.5": 31.3,
+   "near/0/earth_like/0.6": 37.4,
+   "near/0/idle_quarter/0.5": 35.6,
+   "near/0/idle_quarter/0.6": 42.5,
+   "near/30/earth_like/0.5": 28.5,
+   "near/30/earth_like/0.6": 34.0,
+   "near/30/idle_quarter/0.5": 32.5,
+   "near/30/idle_quarter/0.6": 38.8,
+   "near/60/earth_like/0.5": 18.8,
+   "near/60/earth_like/0.6": 22.5,
+   "near/60/idle_quarter/0.5": 22.3,
+   "near/60/idle_quarter/0.6": 26.7,
+   "far/0/earth_like/0.5": 30.8,
+   "far/0/earth_like/0.6": 36.8,
+   "far/0/idle_quarter/0.5": 34.7,
+   "far/0/idle_quarter/0.6": 41.5
+  },
+  "potential_m2_person": [
+   58.8,
+   81.1
+  ],
+  "plant_based_m2_person": [
+   129.0,
+   342.0
+  ],
+  "diets": {
+   "plant_based": {
+    "crop_m2": [
+     129.0,
+     342.0
+    ],
+    "grazing_m2": [
+     0.0,
+     0.0
+    ],
+    "crop_factor": [
+     1.0,
+     1.0
+    ]
+   },
+   "plant_rich": {
+    "crop_m2": [
+     139.0,
+     393.0
+    ],
+    "grazing_m2": [
+     0.0,
+     1000.0
+    ],
+    "crop_factor": [
+     1.08,
+     1.15
+    ]
+   },
+   "earth_average": {
+    "crop_m2": [
+     160.0,
+     424.0
+    ],
+    "grazing_m2": [
+     4130.0,
+     4130.0
+    ],
+    "crop_factor": [
+     1.24,
+     1.24
+    ]
+   },
+   "earth_affluent": {
+    "crop_m2": [
+     337.0,
+     893.0
+    ],
+    "grazing_m2": [
+     7400.0,
+     7400.0
+    ],
+    "crop_factor": [
+     2.62,
+     2.62
+    ]
+   },
+   "earth_affluent_fed_on_crops": {
+    "crop_m2": [
+     574.0,
+     1700.0
+    ],
+    "grazing_m2": [
+     0.0,
+     0.0
+    ],
+    "crop_factor": [
+     4.45,
+     4.99
+    ]
+   }
+  }
+ },
+ "needs": {
+  "practices": {
+   "earth_practice": {
+    "diet": "earth_affluent",
+    "food_m2": [
+     337.0,
+     893.0
+    ],
+    "grazing_m2": [
+     7400.0,
+     7400.0
+    ],
+    "settlement": [
+     "affluent_city",
+     "affluent_spread"
+    ],
+    "settlement_m2": [
+     143.0,
+     357.0
+    ],
+    "n_eaten_kg": 5.2,
+    "n_new_kg": [
+     22.0,
+     30.0
+    ],
+    "fixation_w": [
+     30.5,
+     41.6
+    ],
+    "p_eaten_kg": [
+     0.44,
+     0.6
+    ],
+    "p_lost_kg": [
+     1.76,
+     2.4
+    ],
+    "ch4_kg": [
+     28.5,
+     30.1
+    ],
+    "n2o_kg_n": [
+     0.715,
+     1.02
+    ],
+    "heat_kw": [
+     9.3,
+     9.3
+    ],
+    "lit_sky_m2": [
+     7910.0,
+     14200.0
+    ]
+   },
+   "lunar_design": {
+    "diet": "plant_rich",
+    "food_m2": [
+     139.0,
+     393.0
+    ],
+    "grazing_m2": [
+     0.0,
+     1000.0
+    ],
+    "settlement": [
+     "metropolis",
+     "town"
+    ],
+    "settlement_m2": [
+     25.0,
+     100.0
+    ],
+    "n_eaten_kg": 5.2,
+    "n_new_kg": [
+     4.51,
+     10.4
+    ],
+    "fixation_w": [
+     6.25,
+     14.4
+    ],
+    "p_eaten_kg": [
+     0.44,
+     0.6
+    ],
+    "p_lost_kg": [
+     0.044,
+     0.18
+    ],
+    "ch4_kg": [
+     0.3,
+     3.0
+    ],
+    "n2o_kg_n": [
+     0.0173,
+     0.065
+    ],
+    "heat_kw": [
+     4.0,
+     6.0
+    ],
+    "lit_sky_m2": [
+     791.0,
+     1420.0
+    ]
+   }
+  },
+  "lit_sky_m2_by_region": {
+   "world": [
+    4020.0,
+    4020.0
+   ],
+   "eu": [
+    7910.0,
+    7910.0
+   ],
+   "us": [
+    13400.0,
+    14200.0
+   ]
+  }
+ },
+ "ethylene": {
+  "source_tg_yr": [
+   2.68,
+   6.66
+  ],
+  "soil_uptake_m_s": [
+   2.83e-05,
+   0.000283
+  ],
+  "steady_ppb": {
+   "earth_soils": [
+    93.5,
+    233.0
+   ],
+   "engineered_soils": [
+    9.35,
+    23.3
+   ]
+  },
+  "lifetime_years": {
+   "engineered_soils": 10.7,
+   "earth_soils": 107.0
+  },
+  "hazard_ppb": 50.0
+ },
+ "molybdenum": {
+  "g_per_ha": [
+   15.0,
+   120.0
+  ],
+  "world_t_yr": 260000.0,
+  "dry_land_t": [
+   35100.0,
+   281000.0
+  ],
+  "dry_land_years_of_world_output": [
+   0.135,
+   1.08
+  ],
+  "potential_cropland_t": [
+   3760.0,
+   67800.0
+  ]
+ },
+ "capacity": {
+  "potential_land_km2": [
+   2510000.0,
+   5650000.0
+  ],
+  "dry_land_km2": 23400000.0,
+  "fog_desert_km2": 6220000.0,
+  "tw_per_kelvin": [
+   37.9,
+   60.7
+  ],
+  "natural_ch4_tg": 58.9,
+  "natural_n2o_tg_n": [
+   0.96,
+   1.3
+  ],
+  "land_p_loss_tg": [
+   1.47,
+   4.16
+  ],
+  "kept_shares": {
+   "30x30": 0.3,
+   "half": 0.5
+  },
+  "practices": {
+   "earth_practice": {
+    "rows": [
+     {
+      "people": 100000000.0,
+      "food_land_share_of_potential_land": [
+       0.00596,
+       0.0355
+      ],
+      "grazing_share_of_fog_desert": [
+       0.119,
+       0.119
+      ],
+      "settlement_share_of_dry_land": [
+       0.000611,
+       0.00153
+      ],
+      "city_share_of_dry_land_at_metropolis_density": 0.000107,
+      "n_new_tg": [
+       2.2,
+       3.0
+      ],
+      "p_lost_tg": [
+       0.176,
+       0.24
+      ],
+      "ch4_tg": [
+       2.85,
+       3.01
+      ],
+      "ch4_added_steady_ppm": [
+       0.597,
+       2.81
+      ],
+      "ch4_added_steady_ppm_central": [
+       0.976,
+       1.03
+      ],
+      "n2o_tg_n": [
+       0.0715,
+       0.102
+      ],
+      "n2o_ppb_per_year": [
+       0.0233,
+       0.0332
+      ],
+      "n2o_ppm_after_years": {
+       "500": [
+        0.0116,
+        0.0166
+       ],
+       "1000": [
+        0.0233,
+        0.0332
+       ],
+       "5000": [
+        0.116,
+        0.166
+       ]
+      },
+      "heat_tw": [
+       0.93,
+       0.93
+      ],
+      "heat_w_m2": [
+       0.0245,
+       0.0245
+      ],
+      "warming_k_unanswered": [
+       0.0153,
+       0.0245
+      ],
+      "dimming_percent_to_answer": [
+       0.00806,
+       0.0129
+      ],
+      "lit_sky_share_of_dry_land": [
+       0.0338,
+       0.0607
+      ]
+     },
+     {
+      "people": 300000000.0,
+      "food_land_share_of_potential_land": [
+       0.0179,
+       0.107
+      ],
+      "grazing_share_of_fog_desert": [
+       0.357,
+       0.357
+      ],
+      "settlement_share_of_dry_land": [
+       0.00183,
+       0.00458
+      ],
+      "city_share_of_dry_land_at_metropolis_density": 0.000321,
+      "n_new_tg": [
+       6.6,
+       9.0
+      ],
+      "p_lost_tg": [
+       0.528,
+       0.72
+      ],
+      "ch4_tg": [
+       8.55,
+       9.03
+      ],
+      "ch4_added_steady_ppm": [
+       1.79,
+       8.44
+      ],
+      "ch4_added_steady_ppm_central": [
+       2.93,
+       3.09
+      ],
+      "n2o_tg_n": [
+       0.214,
+       0.306
+      ],
+      "n2o_ppb_per_year": [
+       0.0699,
+       0.0997
+      ],
+      "n2o_ppm_after_years": {
+       "500": [
+        0.0349,
+        0.0498
+       ],
+       "1000": [
+        0.0699,
+        0.0997
+       ],
+       "5000": [
+        0.349,
+        0.498
+       ]
+      },
+      "heat_tw": [
+       2.79,
+       2.79
+      ],
+      "heat_w_m2": [
+       0.0736,
+       0.0736
+      ],
+      "warming_k_unanswered": [
+       0.046,
+       0.0736
+      ],
+      "dimming_percent_to_answer": [
+       0.0242,
+       0.0387
+      ],
+      "lit_sky_share_of_dry_land": [
+       0.101,
+       0.182
+      ]
+     },
+     {
+      "people": 1000000000.0,
+      "food_land_share_of_potential_land": [
+       0.0596,
+       0.355
+      ],
+      "grazing_share_of_fog_desert": [
+       1.19,
+       1.19
+      ],
+      "settlement_share_of_dry_land": [
+       0.00611,
+       0.0153
+      ],
+      "city_share_of_dry_land_at_metropolis_density": 0.00107,
+      "n_new_tg": [
+       22.0,
+       30.0
+      ],
+      "p_lost_tg": [
+       1.76,
+       2.4
+      ],
+      "ch4_tg": [
+       28.5,
+       30.1
+      ],
+      "ch4_added_steady_ppm": [
+       5.97,
+       28.1
+      ],
+      "ch4_added_steady_ppm_central": [
+       9.76,
+       10.3
+      ],
+      "n2o_tg_n": [
+       0.715,
+       1.02
+      ],
+      "n2o_ppb_per_year": [
+       0.233,
+       0.332
+      ],
+      "n2o_ppm_after_years": {
+       "500": [
+        0.116,
+        0.166
+       ],
+       "1000": [
+        0.233,
+        0.332
+       ],
+       "5000": [
+        1.16,
+        1.66
+       ]
+      },
+      "heat_tw": [
+       9.3,
+       9.3
+      ],
+      "heat_w_m2": [
+       0.245,
+       0.245
+      ],
+      "warming_k_unanswered": [
+       0.153,
+       0.245
+      ],
+      "dimming_percent_to_answer": [
+       0.0806,
+       0.129
+      ],
+      "lit_sky_share_of_dry_land": [
+       0.338,
+       0.607
+      ]
+     },
+     {
+      "people": 3000000000.0,
+      "food_land_share_of_potential_land": [
+       0.179,
+       1.07
+      ],
+      "grazing_share_of_fog_desert": [
+       3.57,
+       3.57
+      ],
+      "settlement_share_of_dry_land": [
+       0.0183,
+       0.0458
+      ],
+      "city_share_of_dry_land_at_metropolis_density": 0.00321,
+      "n_new_tg": [
+       66.0,
+       90.0
+      ],
+      "p_lost_tg": [
+       5.28,
+       7.2
+      ],
+      "ch4_tg": [
+       85.5,
+       90.3
+      ],
+      "ch4_added_steady_ppm": [
+       17.9,
+       84.4
+      ],
+      "ch4_added_steady_ppm_central": [
+       29.3,
+       30.9
+      ],
+      "n2o_tg_n": [
+       2.15,
+       3.06
+      ],
+      "n2o_ppb_per_year": [
+       0.699,
+       0.997
+      ],
+      "n2o_ppm_after_years": {
+       "500": [
+        0.349,
+        0.498
+       ],
+       "1000": [
+        0.699,
+        0.997
+       ],
+       "5000": [
+        3.49,
+        4.98
+       ]
+      },
+      "heat_tw": [
+       27.9,
+       27.9
+      ],
+      "heat_w_m2": [
+       0.736,
+       0.736
+      ],
+      "warming_k_unanswered": [
+       0.46,
+       0.736
+      ],
+      "dimming_percent_to_answer": [
+       0.242,
+       0.387
+      ],
+      "lit_sky_share_of_dry_land": [
+       1.01,
+       1.82
+      ]
+     },
+     {
+      "people": 10000000000.0,
+      "food_land_share_of_potential_land": [
+       0.596,
+       3.55
+      ],
+      "grazing_share_of_fog_desert": [
+       11.9,
+       11.9
+      ],
+      "settlement_share_of_dry_land": [
+       0.0611,
+       0.153
+      ],
+      "city_share_of_dry_land_at_metropolis_density": 0.0107,
+      "n_new_tg": [
+       220.0,
+       300.0
+      ],
+      "p_lost_tg": [
+       17.6,
+       24.0
+      ],
+      "ch4_tg": [
+       285.0,
+       301.0
+      ],
+      "ch4_added_steady_ppm": [
+       59.7,
+       281.0
+      ],
+      "ch4_added_steady_ppm_central": [
+       97.6,
+       103.0
+      ],
+      "n2o_tg_n": [
+       7.15,
+       10.2
+      ],
+      "n2o_ppb_per_year": [
+       2.33,
+       3.32
+      ],
+      "n2o_ppm_after_years": {
+       "500": [
+        1.16,
+        1.66
+       ],
+       "1000": [
+        2.33,
+        3.32
+       ],
+       "5000": [
+        11.6,
+        16.6
+       ]
+      },
+      "heat_tw": [
+       93.0,
+       93.0
+      ],
+      "heat_w_m2": [
+       2.45,
+       2.45
+      ],
+      "warming_k_unanswered": [
+       1.53,
+       2.45
+      ],
+      "dimming_percent_to_answer": [
+       0.806,
+       1.29
+      ],
+      "lit_sky_share_of_dry_land": [
+       3.38,
+       6.07
+      ]
+     }
+    ],
+    "limits_people": {
+     "land_30x30": [
+      588000000.0,
+      588000000.0
+     ],
+     "crops_30x30": [
+      1970000000.0,
+      11700000000.0
+     ],
+     "area_30x30": [
+      1300000000.0,
+      1960000000.0
+     ],
+     "grazing_30x30": [
+      588000000.0,
+      588000000.0
+     ],
+     "lit_sky_30x30": [
+      1150000000.0,
+      2070000000.0
+     ],
+     "land_half": [
+      420000000.0,
+      420000000.0
+     ],
+     "crops_half": [
+      1410000000.0,
+      8390000000.0
+     ],
+     "area_half": [
+      931000000.0,
+      1400000000.0
+     ],
+     "grazing_half": [
+      420000000.0,
+      420000000.0
+     ],
+     "lit_sky_half": [
+      824000000.0,
+      1480000000.0
+     ],
+     "heat_1k_unanswered": [
+      4080000000.0,
+      6530000000.0
+     ],
+     "methane_parity": [
+      1960000000.0,
+      2070000000.0
+     ],
+     "n2o_parity": [
+      941000000.0,
+      1820000000.0
+     ],
+     "phosphorus_parity": [
+      614000000.0,
+      2370000000.0
+     ]
+    },
+    "order_by_geometric_mean": [
+     "land_half",
+     "land_30x30",
+     "lit_sky_half",
+     "phosphorus_parity",
+     "n2o_parity",
+     "lit_sky_30x30",
+     "methane_parity",
+     "heat_1k_unanswered"
+    ]
+   },
+   "lunar_design": {
+    "rows": [
+     {
+      "people": 100000000.0,
+      "food_land_share_of_potential_land": [
+       0.00246,
+       0.0156
+      ],
+      "grazing_share_of_fog_desert": [
+       0.0,
+       0.0161
+      ],
+      "settlement_share_of_dry_land": [
+       0.000107,
+       0.000428
+      ],
+      "city_share_of_dry_land_at_metropolis_density": 0.000107,
+      "n_new_tg": [
+       0.451,
+       1.04
+      ],
+      "p_lost_tg": [
+       0.0044,
+       0.018
+      ],
+      "ch4_tg": [
+       0.03,
+       0.3
+      ],
+      "ch4_added_steady_ppm": [
+       0.00629,
+       0.28
+      ],
+      "ch4_added_steady_ppm_central": [
+       0.0103,
+       0.103
+      ],
+      "n2o_tg_n": [
+       0.00173,
+       0.0065
+      ],
+      "n2o_ppb_per_year": [
+       0.000564,
+       0.00212
+      ],
+      "n2o_ppm_after_years": {
+       "500": [
+        0.000282,
+        0.00106
+       ],
+       "1000": [
+        0.000564,
+        0.00212
+       ],
+       "5000": [
+        0.00282,
+        0.0106
+       ]
+      },
+      "heat_tw": [
+       0.4,
+       0.6
+      ],
+      "heat_w_m2": [
+       0.0105,
+       0.0158
+      ],
+      "warming_k_unanswered": [
+       0.00659,
+       0.0158
+      ],
+      "dimming_percent_to_answer": [
+       0.00347,
+       0.00833
+      ],
+      "lit_sky_share_of_dry_land": [
+       0.00338,
+       0.00607
+      ]
+     },
+     {
+      "people": 300000000.0,
+      "food_land_share_of_potential_land": [
+       0.00738,
+       0.0469
+      ],
+      "grazing_share_of_fog_desert": [
+       0.0,
+       0.0482
+      ],
+      "settlement_share_of_dry_land": [
+       0.000321,
+       0.00128
+      ],
+      "city_share_of_dry_land_at_metropolis_density": 0.000321,
+      "n_new_tg": [
+       1.35,
+       3.12
+      ],
+      "p_lost_tg": [
+       0.0132,
+       0.054
+      ],
+      "ch4_tg": [
+       0.09,
+       0.9
+      ],
+      "ch4_added_steady_ppm": [
+       0.0189,
+       0.841
+      ],
+      "ch4_added_steady_ppm_central": [
+       0.0308,
+       0.308
+      ],
+      "n2o_tg_n": [
+       0.00519,
+       0.0195
+      ],
+      "n2o_ppb_per_year": [
+       0.00169,
+       0.00635
+      ],
+      "n2o_ppm_after_years": {
+       "500": [
+        0.000845,
+        0.00318
+       ],
+       "1000": [
+        0.00169,
+        0.00635
+       ],
+       "5000": [
+        0.00845,
+        0.0318
+       ]
+      },
+      "heat_tw": [
+       1.2,
+       1.8
+      ],
+      "heat_w_m2": [
+       0.0316,
+       0.0475
+      ],
+      "warming_k_unanswered": [
+       0.0198,
+       0.0475
+      ],
+      "dimming_percent_to_answer": [
+       0.0104,
+       0.025
+      ],
+      "lit_sky_share_of_dry_land": [
+       0.0101,
+       0.0182
+      ]
+     },
+     {
+      "people": 1000000000.0,
+      "food_land_share_of_potential_land": [
+       0.0246,
+       0.156
+      ],
+      "grazing_share_of_fog_desert": [
+       0.0,
+       0.161
+      ],
+      "settlement_share_of_dry_land": [
+       0.00107,
+       0.00428
+      ],
+      "city_share_of_dry_land_at_metropolis_density": 0.00107,
+      "n_new_tg": [
+       4.51,
+       10.4
+      ],
+      "p_lost_tg": [
+       0.044,
+       0.18
+      ],
+      "ch4_tg": [
+       0.3,
+       3.0
+      ],
+      "ch4_added_steady_ppm": [
+       0.0629,
+       2.8
+      ],
+      "ch4_added_steady_ppm_central": [
+       0.103,
+       1.03
+      ],
+      "n2o_tg_n": [
+       0.0173,
+       0.065
+      ],
+      "n2o_ppb_per_year": [
+       0.00564,
+       0.0212
+      ],
+      "n2o_ppm_after_years": {
+       "500": [
+        0.00282,
+        0.0106
+       ],
+       "1000": [
+        0.00564,
+        0.0212
+       ],
+       "5000": [
+        0.0282,
+        0.106
+       ]
+      },
+      "heat_tw": [
+       4.0,
+       6.0
+      ],
+      "heat_w_m2": [
+       0.105,
+       0.158
+      ],
+      "warming_k_unanswered": [
+       0.0659,
+       0.158
+      ],
+      "dimming_percent_to_answer": [
+       0.0347,
+       0.0833
+      ],
+      "lit_sky_share_of_dry_land": [
+       0.0338,
+       0.0607
+      ]
+     },
+     {
+      "people": 3000000000.0,
+      "food_land_share_of_potential_land": [
+       0.0738,
+       0.469
+      ],
+      "grazing_share_of_fog_desert": [
+       0.0,
+       0.482
+      ],
+      "settlement_share_of_dry_land": [
+       0.00321,
+       0.0128
+      ],
+      "city_share_of_dry_land_at_metropolis_density": 0.00321,
+      "n_new_tg": [
+       13.5,
+       31.2
+      ],
+      "p_lost_tg": [
+       0.132,
+       0.54
+      ],
+      "ch4_tg": [
+       0.9,
+       9.0
+      ],
+      "ch4_added_steady_ppm": [
+       0.189,
+       8.41
+      ],
+      "ch4_added_steady_ppm_central": [
+       0.308,
+       3.08
+      ],
+      "n2o_tg_n": [
+       0.0519,
+       0.195
+      ],
+      "n2o_ppb_per_year": [
+       0.0169,
+       0.0635
+      ],
+      "n2o_ppm_after_years": {
+       "500": [
+        0.00845,
+        0.0318
+       ],
+       "1000": [
+        0.0169,
+        0.0635
+       ],
+       "5000": [
+        0.0845,
+        0.318
+       ]
+      },
+      "heat_tw": [
+       12.0,
+       18.0
+      ],
+      "heat_w_m2": [
+       0.316,
+       0.475
+      ],
+      "warming_k_unanswered": [
+       0.198,
+       0.475
+      ],
+      "dimming_percent_to_answer": [
+       0.104,
+       0.25
+      ],
+      "lit_sky_share_of_dry_land": [
+       0.101,
+       0.182
+      ]
+     },
+     {
+      "people": 10000000000.0,
+      "food_land_share_of_potential_land": [
+       0.246,
+       1.56
+      ],
+      "grazing_share_of_fog_desert": [
+       0.0,
+       1.61
+      ],
+      "settlement_share_of_dry_land": [
+       0.0107,
+       0.0428
+      ],
+      "city_share_of_dry_land_at_metropolis_density": 0.0107,
+      "n_new_tg": [
+       45.1,
+       104.0
+      ],
+      "p_lost_tg": [
+       0.44,
+       1.8
+      ],
+      "ch4_tg": [
+       3.0,
+       30.0
+      ],
+      "ch4_added_steady_ppm": [
+       0.629,
+       28.0
+      ],
+      "ch4_added_steady_ppm_central": [
+       1.03,
+       10.3
+      ],
+      "n2o_tg_n": [
+       0.173,
+       0.65
+      ],
+      "n2o_ppb_per_year": [
+       0.0564,
+       0.212
+      ],
+      "n2o_ppm_after_years": {
+       "500": [
+        0.0282,
+        0.106
+       ],
+       "1000": [
+        0.0564,
+        0.212
+       ],
+       "5000": [
+        0.282,
+        1.06
+       ]
+      },
+      "heat_tw": [
+       40.0,
+       60.0
+      ],
+      "heat_w_m2": [
+       1.05,
+       1.58
+      ],
+      "warming_k_unanswered": [
+       0.659,
+       1.58
+      ],
+      "dimming_percent_to_answer": [
+       0.347,
+       0.833
+      ],
+      "lit_sky_share_of_dry_land": [
+       0.338,
+       0.607
+      ]
+     }
+    ],
+    "limits_people": {
+     "land_30x30": [
+      4350000000.0,
+      28500000000.0
+     ],
+     "crops_30x30": [
+      4480000000.0,
+      28500000000.0
+     ],
+     "area_30x30": [
+      5100000000.0,
+      45800000000.0
+     ],
+     "grazing_30x30": [
+      4350000000.0,
+      1000000000000000.0
+     ],
+     "lit_sky_30x30": [
+      11500000000.0,
+      20700000000.0
+     ],
+     "land_half": [
+      3110000000.0,
+      20300000000.0
+     ],
+     "crops_half": [
+      3200000000.0,
+      20300000000.0
+     ],
+     "area_half": [
+      3640000000.0,
+      32700000000.0
+     ],
+     "grazing_half": [
+      3110000000.0,
+      1000000000000000.0
+     ],
+     "lit_sky_half": [
+      8240000000.0,
+      14800000000.0
+     ],
+     "heat_1k_unanswered": [
+      6320000000.0,
+      15200000000.0
+     ],
+     "methane_parity": [
+      19600000000.0,
+      196000000000.0
+     ],
+     "n2o_parity": [
+      14800000000.0,
+      75100000000.0
+     ],
+     "phosphorus_parity": [
+      8190000000.0,
+      94600000000.0
+     ]
+    },
+    "order_by_geometric_mean": [
+     "land_half",
+     "heat_1k_unanswered",
+     "lit_sky_half",
+     "land_30x30",
+     "lit_sky_30x30",
+     "phosphorus_parity",
+     "n2o_parity",
+     "methane_parity"
+    ]
+   }
+  }
+ },
+ "diet_limits_people": {
+  "plant_based": {
+   "crops_30x30": [
+    5150000000.0,
+    30700000000.0
+   ],
+   "crops_half": [
+    3680000000.0,
+    21900000000.0
+   ]
+  },
+  "plant_rich": {
+   "crops_30x30": [
+    4480000000.0,
+    28500000000.0
+   ],
+   "grazing_30x30": [
+    4350000000.0,
+    1000000000000000.0
+   ],
+   "crops_half": [
+    3200000000.0,
+    20300000000.0
+   ],
+   "grazing_half": [
+    3110000000.0,
+    1000000000000000.0
+   ]
+  },
+  "earth_average": {
+   "crops_30x30": [
+    4150000000.0,
+    24700000000.0
+   ],
+   "grazing_30x30": [
+    1050000000.0,
+    1050000000.0
+   ],
+   "crops_half": [
+    2970000000.0,
+    17700000000.0
+   ],
+   "grazing_half": [
+    753000000.0,
+    753000000.0
+   ]
+  },
+  "earth_affluent": {
+   "crops_30x30": [
+    1970000000.0,
+    11700000000.0
+   ],
+   "grazing_30x30": [
+    588000000.0,
+    588000000.0
+   ],
+   "crops_half": [
+    1410000000.0,
+    8390000000.0
+   ],
+   "grazing_half": [
+    420000000.0,
+    420000000.0
+   ]
+  },
+  "earth_affluent_fed_on_crops": {
+   "crops_30x30": [
+    1040000000.0,
+    6890000000.0
+   ],
+   "crops_half": [
+    740000000.0,
+    4920000000.0
+   ]
+  }
+ },
+ "horizons": {
+  "by_years": {
+   "500": {
+    "methane_share_of_steady_state": [
+     0.263,
+     0.741
+    ],
+    "natural_n2o_ppm": [
+     0.155,
+     0.21
+    ],
+    "natural_soil_mm": [
+     8.5,
+     18.0
+    ]
+   },
+   "1000": {
+    "methane_share_of_steady_state": [
+     0.457,
+     0.933
+    ],
+    "natural_n2o_ppm": [
+     0.31,
+     0.42
+    ],
+    "natural_soil_mm": [
+     17.0,
+     36.0
+    ]
+   },
+   "5000": {
+    "methane_share_of_steady_state": [
+     0.953,
+     1.0
+    ],
+    "natural_n2o_ppm": [
+     1.55,
+     2.1
+    ],
+    "natural_soil_mm": [
+     85.0,
+     180.0
+    ]
+   }
+  },
+  "years_from_0_1_billion": {
+   "0.005": {
+    "0.3": 220.0,
+    "1": 461.0,
+    "3": 680.0,
+    "10": 921.0
+   },
+   "0.01": {
+    "0.3": 110.0,
+    "1": 230.0,
+    "3": 340.0,
+    "10": 461.0
+   }
+  }
+ }
+}

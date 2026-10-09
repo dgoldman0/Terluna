@@ -272,6 +272,7 @@
         "../biosphere/ecology/questions.md"
       ],
       "unresolved": [
+        "the sky, land and people (biosphere/ecology/people_and_land.md, 2026-10-09), with the aerial biomes first at the author's direction: the sky's 9.2e8 km3 of air above freezing as the largest habitat, fed from below; the vegetated Moon's ethylene at 94-233 ppb with soils its only sink, above the 50 ppb that costs wheat a third of its yield; about 0.4 billion affluent people with Earth's practice and 3-15 billion with the lunar design; the sky binding before the land through light at night",
         "complete life cycles",
         "trait calibration",
         "coupled nutrient/energy budgets",
@@ -289,7 +290,7 @@
         "the night requirement's value by zone, against nocturnal thresholds of 0.01-0.03 lux, nearside nights of 2.3-2.9 lux and the metropolis's own skyglow",
         "nitrogen fixation's metals (molybdenum about 0.019 ppm in the bulk Moon; vanadium for the alternative nitrogenases), soil building, a biome map made of water and light, the living waters' chemistry and oxygen, the containment of wild engineered organisms, and fire at 17.5% oxygen and 0.16 g"
       ],
-      "next_session_task": "Ecology's open questions in order (biosphere/ecology/questions.md): the living air's chemistry with the biomes' and cities' emissions, the warming of methane and N2O, the biological criteria for the ultraviolet cut-off and the night's value by zone; then water in the plant models, nitrogen fixation's metals, soil building and a biome map. The earlier tasks stand: the author reviews the selection in the ecology register (research/studies/lunar_cycle_ecology), measured dark tolerance bounds the store-and-idle strategies, and a land, lake and sea budget of every rock-derived element follows with the seas' chemistry."
+      "next_session_task": "Ecology's open questions in order (biosphere/ecology/questions.md): the living air's chemistry with the biomes' and cities' emissions, what lives aloft, the warming of methane and N2O, the biological criteria for the ultraviolet cut-off and the night's value by zone; then water in the plant models, nitrogen fixation's metals, soil building and a biome map. The earlier tasks stand: the author reviews the selection in the ecology register (research/studies/lunar_cycle_ecology), measured dark tolerance bounds the store-and-idle strategies, and a land, lake and sea budget of every rock-derived element follows with the seas' chemistry."
     },
     {
       "topic": "habitation",

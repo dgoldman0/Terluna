@@ -16,6 +16,7 @@ The author's standing directions frame it.
 - Surface materials become developed, weathered and biologically worked soils.
 - The Moon should hold a mix of climates and biomes, with pleasantly warm days at the hottest.
 - The ring fleet keeps its light off the night zones.
+- The aerial biomes come almost first: the skies are a large set of biomes of their own and connect the others.
 - Imports of carbon and other elements are part of the plan, and the design problem is closing each cycle with
   local return paths.
 
@@ -185,6 +186,38 @@ which.
     the real dawn (Graf et al. 2010). The canopy model's idling strategies already assume clocks set to the lunar
     day. *Earth evidence.*
 
+### Sky, land and people
+
+The author asked on 9 October for the aerial biomes to come almost first, and set a working scale of 20–30 billion
+affluent people across the Solar System over the near horizons. The study is [people_and_land.md](people_and_land.md),
+with its screen [people.py](people.py); numbers here are from it.
+
+21. **The sky is the Moon's largest habitat.** Air above freezing fills 9.2×10⁸ km³, 24 km deep over the ground on
+    average, and each square metre carries 7.1 Earth columns of air. It holds 130–240 mm of water vapour, 5–10 times
+    Earth's, turned over in 98–158 days where it rains, and cosmic-ray ionization stays at 3–16% of Earth's sea level
+    up to 90 km, so the sparse life of the high air answers to cold, dry air and scarce nutrients.
+22. **Lift makes room for large flyers, and the land feeds them.** Earth's largest flyers carried over reach 60–66 m
+    across and 44–55 t, and an animal hovers on 6.3% of Earth's power. Phosphorus falling from the air feeds at most
+    four ten-thousandths of the land's growth, so the sky's food webs eat what the land and seas send up: pollen,
+    spores, nectar, insects and the sea–forest migrants that carry phosphorus inland.
+23. **Rain limits crops.** Earth's water-use efficiency, raised a fifth by the design air's CO2, lets rain support the
+    equivalent of 2.5–5.7 million km² at the crop model's yields, 83% of it within 30° of the equator.
+24. **The vegetated Moon's own ethylene settles at 94–233 ppb.** With soils its only sink, at the uptake estimated for
+    Earth's soils, it passes the 50 ppb that costs wheat 36% of its yield, whatever the population; soils ten times
+    faster hold it at 9–23 ppb. The plants' emission and the soils' uptake are design variables of the whole biosphere.
+25. **People's gases build up with no sink.** At Earth's agriculture and waste, each billion people adds 6–28 ppm of
+    methane at steady state and 0.23–0.33 ppm of N2O every thousand years; the lunar design's sealed waste and absent
+    ruminants bring that to 0.06–2.8 ppm of methane a billion.
+26. **With Earth's practice the Moon holds about half a billion affluent people; with the lunar design, about
+    3–15 billion.** Grazing for an affluent US diet fills the fog desert outside a half kept wild at 0.42 billion,
+    and lighting as affluent countries light themselves covers the land outside a half kept dark at 0.8–1.5 billion.
+    The design's plant-rich diet, compact cities and shielded lamps move crops' limit to 3.2–20 billion, heat to
+    6.3–15 billion unless dimming answers it, and the lit sky to 8.2–15 billion.
+27. **The sky binds before the land.** Lit as affluent countries light themselves, people darken the aerial biomes'
+    night before any diet reaches its crop limit, and at the metropolis's busy hour a flyer passes a point in the low
+    sky every four to six minutes. Dark corridors for the migrants, quiet low traffic at dusk and shielded light keep
+    the sky's biomes working.
+
 ## Statements elsewhere that need correcting
 
 The evaluation ([state.md](state.md#statements-elsewhere-that-need-correcting)) lists stale or conflicting
@@ -205,6 +238,8 @@ statements in other folders. These belong to main and are not changed on this br
 | [literature.md](literature.md) | The literature by topic, with what it means for the Open Moon |
 | [questions.md](questions.md) | The open questions, in order |
 | [sources.json](sources.json) | Every source cited, its use and how far it was read |
+| [people_and_land.md](people_and_land.md) | Sky, land and people on the Open Moon: the sky's biomes first, the land, nutrients, gases and heat, and what binds first |
+| [people.py](people.py) | Its screen, writing [results/people.json](results/people.json); sources in [people_sources.json](people_sources.json) |
 
-`python -m biosphere.ecology.screen` rewrites the product; `python -m pytest biosphere/tests/test_ecology_screen.py`
-checks it.
+`python -m biosphere.ecology.screen` and `python -m biosphere.ecology.people` rewrite the products;
+`python -m pytest biosphere/tests/test_ecology_screen.py biosphere/tests/test_ecology_people.py` checks them.
