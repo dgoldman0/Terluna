@@ -13,9 +13,61 @@ Five billion aerial residents in its central hypothetical 50-t/person district c
 500 m radius at 10 km. The summed projection is 1.8% of lunar area, while an imposed three-diameter single-layer
 grid uses 20.6%. Neither is an adopted occupancy limit. The author directs that much floating habitation should roam, with collision and storm management. Held spherical
 envelopes are a comparison; powered navigation, avoidance, rendezvous and occasional repositioning are budgeted
-through explicit duty-cycle sensitivities. Drifting, streamlined, moored and tower-supported designs need independent evaluations. Complete structure,
+through explicit duty-cycle sensitivities. The ways-of-living study (below) gives first screens of drifting, streamlined, moored and tower-supported districts. Complete structure,
 reliability, traffic, rescue, health and ecological compatibility remain open. Atmospheric volume is never treated
 as free floor area, and no population distribution has been chosen.
+
+## Ways of living
+
+The [ways-of-living study](../research/studies/ways_of_living/README.md), 9 October 2026, sets out eighteen settings
+built from the project's designs:
+- the summit metropolis and its port;
+- harbour, wetland-edge and canopy towns, and farming country;
+- highland towns and districts held up by towers or terrain;
+- nearside and limb towns, the far side's twilit-night places and high-latitude towns;
+- the undersea domes;
+- sky towns that roam, moor or fly streamlined hulls, and the high platforms;
+- the array's spinning habitats, Earth and elsewhere.
+
+Each is placed on the 28% atlas with its air, warmth through the lunar day, rain, light calendar, hazards and third
+dimension, and costed per billion residents.
+
+The settings differ most in their light. Practical dusk ends 82 hours after an equatorial sunset and lasts the whole
+night poleward of 48.6°, and the far side's equator has the darkest night on the Moon, 0.0014 lux.
+
+Sky towns live days the wind sets ([climate/gcm/zonal_winds.md](../climate/gcm/zonal_winds.md)):
+- a town drifting at 10 km meets the Sun every 15–23 days at the median, and near the ground it can hold the hour at
+  40–75° from the late afternoon into the night;
+- passive routes gather, so drifting towns steer against the gathering;
+- the sky-ship study's 3 km hull holds a place for 0.089 kW a resident;
+- a tether holds a moored sphere for 1.1% of its district's mass and reaches into the storms as a grounded conductor.
+
+Town and hull designs, storm routing and traffic, rain at the towns' height and health over a lifetime at a sixth of
+Earth's gravity are the next studies.
+
+## How people live through the cycle
+
+The [daily-life study](../research/studies/daily_life/README.md), 9 October 2026, follows each ways-of-living setting
+through the 708.7-hour cycle and lays out what its physical situation opens.
+
+**The light, by place.**
+- At the summit metropolis the Sun is up for 354 hours, practical dusk lasts 82, and the night below dusk's level
+  lasts 190, 118 of them below a tenth of a lux. Dawn mirrors dusk.
+- The Earth holds the near side's nights at 4.1–4.9 lux at their darkest from the equator to 45°.
+- Poleward of 48.5° a clear night never falls to practical dusk's level.
+
+**Homes.** People keep a 24-hour day indoors, since the human clock entrains only to days near 24 hours.
+Daylight-level home lighting through a night takes 11–45 kWh a person.
+
+**Height and drift.** Height buys sun: 24 more hours a cycle at 10 km. A town drifting with the design winds lives a
+median day of 22 days at 10 km over the equator and 17 at 60°, and 9 and 4 days at 40 km. Near the ground it lives
+about 34 days, 11.5 of them from sunset to midnight. The wind itself holds the hour only in the lowest 5 km at 40–75°.
+
+**Air.** The summit's open-air zones match Earth's mountain towns by oxygen, from 1,860 m at the ground to 4,190 m at
+the top of the high gardens.
+
+**Bodies.** No human has lived in partial gravity beyond 75 hours. The study sets out what the evidence covers for
+children, older residents, artificial gravity and return to Earth.
 
 ## Community settings from the atlas
 

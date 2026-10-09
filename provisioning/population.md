@@ -22,6 +22,13 @@ Runoff-per-person thresholds below are terrestrial water-stress indicators, not 
 They do not model irrigation, reservoirs, fresh seas, reuse, regional redistribution or ecological allocation.
 Likewise, heat-tolerance and crop-area rows are conditional screens, not demonstrated carrying capacities.
 
+The [ways-of-living study](../research/studies/ways_of_living/README.md) takes up the reopened distribution with
+eighteen settings built from the project's designs. Each is placed on the 28% atlas with its air, warmth, rain, light
+and hazards, its costs per billion residents and the shared cases' totals by mix. There, water beyond the runoff
+comes from the fresh seas for 3.2–9.5 GW a billion, and heat is answered by added dimming at 0.009–0.014% a
+terawatt, so the runoff and heat rows below read as costs. How people live in each setting is in the
+[daily-life study](../research/studies/daily_life/README.md).
+
 ## Findings
 
 1. **20–30 billion takes growth at the pre-industrial world's pace or slower.** The UN puts today's 8.2 billion at a
@@ -72,7 +79,8 @@ Likewise, heat-tolerance and crop-area rows are conditional screens, not demonst
    start fresh and freshen slowly, by the resources domain's first screen (branch `domain/resources`), so while
    they stay fresh, water drawn from them and returned supplies beyond the runoff; lifting it to the mean land
    height of 2,345 m takes 1.06 kWh/m³ (*screen*), before any desalination.
-8. **Food land is ample on the Moon; on Earth, food within planetary boundaries binds first.** The Moon's
+8. **Food land is ample on the Moon by area, and its rain sets the rain-fed share; on Earth, food within planetary
+   boundaries binds first.** The Moon's
    23.4 million km² of dry land feeds 8.4–22 billion at the first screen's 131–341 m² a person if crops take
    Earth's 12% share of land (*screen*); ruminants and flooded paddies are designed out, since methane lives for
    centuries in its air ([README](README.md#food)). Earth's 4.8 billion ha of farmland (FAO 2023) feeds 34–37
@@ -159,8 +167,11 @@ puts the Moon's runoff below the stress line; A and B stay above it.
 
 ## Living
 
-- **On the Moon.** The rain belt, coasts and summit are candidate settings; their share of lunar residents has not been established. Aerial and supported districts are explicit alternatives in the inhabited-volume study. The
-  metropolis brief's 70 m² of floor a person for home, work and services is three times the decent-living 24 m²
+- **On the Moon.** The [ways-of-living study](../research/studies/ways_of_living/README.md) sets out the settings
+  with their costs: the summit metropolis, coastal and lake towns, wetland-edge and canopy towns, the rain belt's
+  farming country, highland towns and districts held up by towers or terrain, nearside and limb towns, the far
+  side's twilit-night places, high-latitude towns, the undersea domes, and roaming, moored and streamlined sky towns.
+  How many live in each is the author's choice. The metropolis brief's 70 m² of floor a person for home, work and services is three times the decent-living 24 m²
   (Vélez-Henao & Pauliuk 2023). A person using Europe's final energy, less industry, draws 650 kWh through each
   night, 590 times Earth's pumped storage per person (*screen*), so fusion, a day-side grid or power from orbit
   carries the night ([README](README.md#heat-and-energy)).
@@ -177,6 +188,12 @@ puts the Moon's runoff below the stress line; A and B stay above it.
   day away, so its workers commute in rotations and the tinkerers who work at its industry most of the time live
   there. An ascent at the orbital minimum, by tether or elevator from altitude, brings a weekly commute to
   1.8–4.5 kW (*derived*).
+
+- **Through the cycle.** The [daily-life study](../research/studies/daily_life/README.md) gives each setting's light
+  through the 708.7-hour cycle. People keep a 24-hour day indoors, with dark rooms in the 354-hour day and
+  daylight-level light through the night (11–45 kWh a person each night). The array's 0.13 s round trip falls inside
+  conversation's 0.21 s gap and Earth's 2.56 s does not; the resource operation's crews work 14 minutes to 5.7 hours of
+  light away.
 
 ## Earth service
 
@@ -200,7 +217,8 @@ puts the Moon's runoff below the stress line; A and B stay above it.
 
 ## What the plan needs
 
-1. Compare surface, aerial and orbital capacities and requirements using the shared cases before choosing a placement; retain energy-band sensitivities.
+1. The author's choice of a distribution among the ways of living, weighed on their costs in the shared cases
+   ([ways of living](../research/studies/ways_of_living/README.md)), with the energy band's sensitivities kept.
 2. An answer to human heat on the Moon beside the glow's, counted by the heat each supply adds.
 3. Regional domestic and agricultural water balances for every case, with recovery and supply alternatives; the 4-billion stress index is not a capacity limit.
 4. A way up from the surface for people, and habitats in the array with their own orbits, shielding and food.
@@ -209,7 +227,9 @@ puts the Moon's runoff below the stress line; A and B stay above it.
 
 ## Open questions, in order of what they settle
 
-1. **Capacity before placement.** Quantify lunar surface and aerial habitation together, with mass, services, heat, food and ecological occupancy; compare them with Earth and orbital cases in the shared scenario file. No location distribution is selected.
+1. **The distribution among the ways of living.** Each setting's costs and each case's mixes are in the
+   [ways-of-living study](../research/studies/ways_of_living/README.md), and how people live in each is in the
+   [daily-life study](../research/studies/daily_life/README.md); distributions for the author to choose among come next.
 2. **How the Moon answers human heat.** The added dimming the shield can give beside the glow's; panel albedo for
    sunlight converted on the ground; a day-side grid's 9–19% losses; fusion's share. It constrains a chosen case's local heat and
    power system ([questions](questions.md), 1 and 3).

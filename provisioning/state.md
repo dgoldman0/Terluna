@@ -51,6 +51,9 @@ it to the register's section on sky ships and flyers, in the author's words.
 | Computing | About 1.4×10²⁴ operations a second per TW; 830 km² of radiator per TW at 330 K | Screen | `array_industry.md` |
 | Materials | Fleet 46 Gt with film renewed at 2.3–4.6 Gt a year; the tower's chosen form 98 Mt of steel; regional magnets 1–4 Gt | Proposed designs | the shield, tower and magnet studies |
 | Civilization scale | About 501 PW (K ≈ 1.17), three separate power ledgers, a bootstrap from fission to fusion and near-Sun solar | Recovered design history | `engineering/reference/industrial_architecture` |
+| Drifting days and routes | Median drifting day on the equator 21.8 d at 10 km and 9.3 d at 40 km; about 34 d near the ground, with a long evening; the hour held within 1 m/s in 18–31% of 3-day means in the lowest 5 km at 40–75°; passive routes at 2.5 km share one track within 180 days; shear 4–6 m/s over 15 km | GCM 3-day means at T21; passive routes at fixed heights | `climate/gcm/zonal_winds.md` |
+| Ways of living | Eighteen settings with their costs per billion; towns 0.6–10% of the dry land across the shared cases; ten billion lunar residents crop 35–224% of the rain-fed land outside a kept 30%; heat 0.08–1.8% more dimming; five billion aloft in about 870,000 towns with 48 Gt of lifting gas | Screens on the atlas, climate and light products | `research/studies/ways_of_living` |
+| Daily life | Light states per setting through the cycle; home lighting 11–45 kWh a person a night; drifting days from the design winds; Earth 2.4–2.7 s and 2.1–5.0 days away | Clear-sky light screen and closed-form arithmetic | `research/studies/daily_life` |
 
 No product gives the Moon's population, its demand by sector, its power system as a whole, power delivered from
 orbit, its food system, water and sanitation, waste, its industrial base, or the economy and work.

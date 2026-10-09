@@ -21,12 +21,25 @@ on this laptop. The findings behind them are in the [README](README.md).
      column; then the added dimming that holds the planned climate's energy budget. The climate programme stays
      paused.
    - **Whose:** the shield's work on its films.
-2. **Capacity before population placement.** Use the [shared comparison cases](../shared/scenarios/population.json)
-   to compare lunar surface and aerial settlements with Earth and orbital habitats. The
+2. **The distribution of people among the ways of living.** The [shared comparison cases](../shared/scenarios/population.json)
+   set lunar surface and aerial settlements beside Earth and the orbital habitats. The
    [inhabited-volume screen](../research/studies/inhabited_volume/README.md) makes lift, wet mass, floor area,
-   projected footprint, holding power and domestic recovery explicit. Next are complete district architectures,
-   wind histories, agricultural water, nutrient return, traffic/rescue and ecological occupancy. Historical
-   Earth-heavy allocations and runoff stress thresholds do not settle capacity; no allocation is adopted.
+   projected footprint, holding power and domestic recovery explicit. The
+   [ways-of-living study](../research/studies/ways_of_living/README.md) gives eighteen settings with their physical
+   situation, their costs per billion and the cases' totals by mix: every mix carries every case at its own split,
+   with food, the dark night and the sky towns' hydrogen the largest costs.
+   - **What decides it:** the author's choice among the costs, after how people live
+     ([daily life](../research/studies/daily_life/README.md)), steps five and six of the approved order.
+   - **What remains to size:**
+     - town and hull designs, with their structure, gas cells and wet mass;
+     - drifting districts' routes, their steering against the gathering the design winds show (onto one track within
+       months near the ground, over the poles within years at 40–60 km), their storm routing and rendezvous
+       ([climate/gcm/zonal_winds.md](../climate/gcm/zonal_winds.md));
+     - rain at the sky towns' height;
+     - crop water in the plant model;
+     - nutrient return;
+     - the dark-night requirement's value;
+     - health over a lifetime at a sixth of Earth's gravity.
 3. **The power system through the night.** Fusion is a planning assumption and a conditional technology. The
    alternatives:
    - a grid from the day side, with 9–19% losses over 4,000–5,500 km;
@@ -41,6 +54,8 @@ on this laptop. The findings behind them are in the [README](README.md).
    - Diets, and staple crops beyond the day fruit.
    - Protein from microbial production on firm power.
    - Water for farms outside the tropics.
+   - Irrigation beyond the rain: at the high end of the diet range ten billion lunar residents irrigate 2.2 million
+     km² with 8,700 km³ a year from the fresh seas, 1.5 TW of lifting ([ways of living](../research/studies/ways_of_living/README.md), finding 2).
    - The monthly harvest and its stores.
    - The land within reach of each city.
 
@@ -70,7 +85,9 @@ on this laptop. The findings behind them are in the [README](README.md).
    resources domain's geochemical map feeds this.
 8. **Transit at a sixth of gravity.**
    - Rail and metro designed around 0.17–0.25 m/s² for standing riders, or seated travel.
-   - Walking and running at 0.16 g.
+   - Walking and running at 0.16 g: people switch to running at 1.42 m/s in lunar gravity (De Witt et al. 2014), and
+     braking on a dry path holds about 1 m/s², so stopping distances are six times Earth's
+     ([daily life](../research/studies/daily_life/README.md)).
    - The sky boats' traffic system, which the sky-fleet study left open.
 9. **Computing.** Supply and demand are in [computing](computing.md): the light outruns any computing the array can
    build, mass binds first and heat placement next. Its open questions, in order: how much computing the civilization
@@ -80,9 +97,19 @@ on this laptop. The findings behind them are in the [README](README.md).
    to the Moon's heat and the glow (README, finding 1). With the planned `research/array-industry` branch.
 10. **Work, maintenance and the economy.** Maintenance runs 2–4% of replacement value a year; who does it, how much is
     automated, and how work is shared belong to the human paper. Provisioning supplies the hours and energy.
-11. **Lamps and the dark night.** The summit's night has about 190 hours that need lamps. Their energy, and the
-    skyglow of a city of 100 million in this scattering air, meet the dark-night requirement on the far side.
+11. **Lamps and the dark night.** The summit's night has about 190 hours that need lamps. At the lunar design's
+    lighting each billion people light 0.79–1.42 million km² of sky, so 6–15 billion lunar residents light 20–91% of
+    the dry land ([ways of living](../research/studies/ways_of_living/README.md), finding 4). Sleep needs at most 1 lux
+    indoors (Brown et al. 2022), which shutters give anywhere, so the people's side of the night requirement lies in
+    the outdoor dark sky ([daily life](../research/studies/daily_life/README.md)). Their energy, the skyglow of a city
+    of 100 million in this scattering air and every other setting's lighting are weighed against the dark-night
+    requirement once its value is set.
 12. **Health and life support.**
     - Vitamin D and other biological needs under the filtered spectrum, using diet/adaptation and controlled local UV; a narrow natural UV-B option remains a separately evaluated candidate under the cold-atmosphere requirements.
-    - Artificial-gravity facilities, carried open from the July canon.
+    - Artificial-gravity facilities, carried open from the July canon. A room at Earth's gravity on the surface is a
+      55 m wheel at 4 rpm with its floor banked 80.5°, and facilities for 1–8 hours a day take 420–3,330 km² of
+      rotating floor per billion residents ([ways of living](../research/studies/ways_of_living/README.md)). How much
+      time at Earth's gravity a lifetime needs is unknown (Clément et al. 2015). No human has lived in partial gravity
+      beyond 75 hours; the evidence for children, older residents and return to Earth is gathered in
+      [daily life](../research/studies/daily_life/README.md), section 5.
     - Life support for enclosed places, such as the undersea community.

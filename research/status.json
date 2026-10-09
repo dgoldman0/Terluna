@@ -43,7 +43,7 @@
     },
     {
       "topic": "climate",
-      "condition": "periodic_conservative_spatial_linear_screen; uncalibrated; clear_sky_radiation_computed_for_prescribed_columns; single_column_month_long_day_night_with_weak_temperature_gradient_exchange; gcm_boundary_files_prepared; exoplasim_radiation_calibrated_to_line_by_line; exoplasim_design_case_settled_295k; exoplasim_cloud_water_corrected_and_bracketed_292_298k; exoplasim_convective_cloud_units_corrected_design_case_299.6k; slow_rotator_cloud_literature_reviewed; design_case_28pct_seas_with_lakes_settles_303k; five_percent_dimmer_shield_settles_294k; author_chose_5pct_dimmer_shield; cloud_resolving_equatorial_ring_two_lunar_days_at_lunar_gravity; gravity_pair_without_radiation_does_not_convect; rings_at_80_and_45_degrees_with_gcm_vertical_wind; tilted_ring_pair_a_compared_at_two_equatorial_crossings; 3d_box_at_0e_crossing_forced_as_the_rings; land_surface_tests_at_0e_change_little; radiation_checked_against_line_by_line_at_0e; gcm_solar_split_checked_on_11_columns; gcm_sun_faults_found_earth_tilt_and_uneven_sweep; gcm_sun_tilt_fixed_and_shortwave_recalibrated_against_line_by_line; corrected_design_case_294.9k_warm_poles_rain_confined_to_the_tropics; author_set_the_investigated_climate_as_the_planned_climate_2026_10_09",
+      "condition": "periodic_conservative_spatial_linear_screen; uncalibrated; clear_sky_radiation_computed_for_prescribed_columns; single_column_month_long_day_night_with_weak_temperature_gradient_exchange; gcm_boundary_files_prepared; exoplasim_radiation_calibrated_to_line_by_line; exoplasim_design_case_settled_295k; exoplasim_cloud_water_corrected_and_bracketed_292_298k; exoplasim_convective_cloud_units_corrected_design_case_299.6k; slow_rotator_cloud_literature_reviewed; design_case_28pct_seas_with_lakes_settles_303k; five_percent_dimmer_shield_settles_294k; author_chose_5pct_dimmer_shield; cloud_resolving_equatorial_ring_two_lunar_days_at_lunar_gravity; gravity_pair_without_radiation_does_not_convect; rings_at_80_and_45_degrees_with_gcm_vertical_wind; tilted_ring_pair_a_compared_at_two_equatorial_crossings; 3d_box_at_0e_crossing_forced_as_the_rings; land_surface_tests_at_0e_change_little; radiation_checked_against_line_by_line_at_0e; gcm_solar_split_checked_on_11_columns; gcm_sun_faults_found_earth_tilt_and_uneven_sweep; gcm_sun_tilt_fixed_and_shortwave_recalibrated_against_line_by_line; corrected_design_case_294.9k_warm_poles_rain_confined_to_the_tropics; author_set_the_investigated_climate_as_the_planned_climate_2026_10_09; wind_vectors_in_the_sun_frame_and_drifting_days_2026_10_09",
       "material": [
         "../climate/reference/thermal_response.csv",
         "baselines/feasibility/model.py",
@@ -57,7 +57,9 @@
         "../climate/results/crm/",
         "../climate/results/gcm/",
         "../visualization/equator-weather/",
-        "studies/atmospheric_electricity/README.md"
+        "studies/atmospheric_electricity/README.md",
+        "../climate/gcm/zonal_winds.md",
+        "../climate/results/gcm/zonal_winds_A28_dim5_moon.json"
       ],
       "unresolved": [
         "absolute cloud amount: PlaSim diagnoses cover (20-28%); published slow-rotator GCMs suggest no thick day-side deck at this sunlight, but models disagree widely on amounts",
@@ -202,7 +204,7 @@
     },
     {
       "topic": "provisioning",
-      "condition": "domain_opened_2026_10_09; evaluation_and_literature; first_screen_heat_ledger_with_fleet_infrared_food_land_night_tides_rivers_transit_fusion_fuel; inhabited_volume_and_shared_population_comparisons_2026_10_09; roaming_floating_habitation_author_direction_and_powered_duty_sensitivity",
+      "condition": "domain_opened_2026_10_09; evaluation_and_literature; first_screen_heat_ledger_with_fleet_infrared_food_land_night_tides_rivers_transit_fusion_fuel; inhabited_volume_and_shared_population_comparisons_2026_10_09; roaming_floating_habitation_author_direction_and_powered_duty_sensitivity; drifting_days_holds_and_gathering_from_the_design_winds_2026_10_09; ways_of_living_eighteen_settings_costs_per_billion_and_shared_case_mixes_2026_10_09; daily_life_through_the_lunar_cycle_by_setting_2026_10_09",
       "material": [
         "../provisioning/README.md",
         "../provisioning/state.md",
@@ -214,7 +216,15 @@
         "studies/inhabited_volume/README.md",
         "studies/inhabited_volume/run.py",
         "studies/inhabited_volume/results/inhabited_volume.json",
-        "../shared/scenarios/population.json"
+        "../shared/scenarios/population.json",
+        "../climate/gcm/zonal_winds.md",
+        "../climate/results/gcm/zonal_winds_A28_dim5_moon.json",
+        "studies/ways_of_living/README.md",
+        "studies/ways_of_living/run.py",
+        "studies/ways_of_living/results/ways_of_living.json",
+        "studies/daily_life/README.md",
+        "studies/daily_life/run.py",
+        "studies/daily_life/results/daily_life.json"
       ],
       "unresolved": [
         "the ring fleet's own infrared, 5.7-9.9 W/m2 on the Moon by the corrected first screen, which the design climate leaves out; the author decided on 2026-10-09 that the investigated climate is the planned one, so the glow is answered with added solar protection, by redirecting it away from the Moon, or both: the stack's radiative transfer, where the column absorbs the glow, its warming, its effect on the upper air's CO2 cooling, and the means (less absorbing films, a heat mirror on Moon-facing faces, which the stack's two overlapping layers weaken, strong outer emitters, added dimming)",
@@ -225,9 +235,10 @@
         "the food system (diets, microbial protein on firm power, water, the monthly harvest and stores) at 130-340 m2 a person, with no methane and little ethylene",
         "freight between the surface and orbit now that surface mass drivers fail in the air: launch from altitude, tethers or an elevator that meets the ring stack, and a launch rule in the spirit of S7",
         "water treatment without solar disinfection, sewage as a phosphorus return path, the far side's aluminium and glass materials and the steel source, transit at a sixth of gravity, computing within the 0.13 s round trip, work and maintenance, lamps against the dark night, vitamin D and life support",
-        "Author direction 2026-10-09: much floating habitation roams. Navigation, collision/storm avoidance, rendezvous and occasional repositioning need weather-derived control duties and manoeuvre reserves; the 1/5/10%-duty screen is exploratory. Fixed-position stationkeeping is not assigned to all aerial residents."
+        "Author direction 2026-10-09: much floating habitation roams. Navigation, collision/storm avoidance, rendezvous and occasional repositioning need weather-derived control duties and manoeuvre reserves; the 1/5/10%-duty screen is exploratory. Fixed-position stationkeeping is not assigned to all aerial residents.",
+        "The distribution of people among the ways of living is the author's to choose. The ways-of-living study (studies/ways_of_living, 2026-10-09) gives eighteen settings with their costs per billion and the shared cases' totals by mix: every mix carries every case at its own split; towns take 0.6-10% of the dry land; ten billion lunar residents crop 35-224% of the rain-fed land outside a kept 30%, the high end irrigated from the fresh seas (8,700 km3 a year, 1.5 TW); 6-15 billion lunar residents light 20-91% of the dry land; five billion aloft need 425 Gt, 48 Gt of lifting gas and 2.1-22 TW to remake hydrogen lost at 1-10% a year. Open: town and hull designs, drifting districts' routes and steering against the gathering the design winds show, storm routing and traffic, rain at the sky towns' height, crop water in the plant model, nutrient return, the dark-night requirement's value and health over a lifetime at 0.16 g."
       ],
-      "next_session_task": "Compare drifting, streamlined/moored and structurally supported districts under the shared population cases; close wet mass, regional wind histories, services, agricultural water, nutrient return and ecological occupancy before selecting distribution. Keep the planned climate, night power, shield infrared and freight requirements in the joint account."
+      "next_session_task": "Distributions as outcomes for the author to choose among (step six of the approved order), from the ways-of-living study's costs and the daily-life study's settings, with drifting districts steered against the gathering the design winds show, and the planned climate, night power, shield infrared and freight requirements kept in the joint account."
     },
     {
       "topic": "illumination",
@@ -311,7 +322,7 @@
     },
     {
       "topic": "habitation",
-      "condition": "design_concepts; no complete sizing or service model; optical_comfort_clear_sky_surface_and_eye_screen_with_earth_controls; optical_comfort_packed_angular_sky_transfer_and_finite_matte_scene_transport; optical_comfort_local_native_sky_and_resolved_wave_slopes; solved_column_shielded_spherical_sky_and_updated_gaze_and_finite_scenes; summit_sky_tower_concept_sizing_for_gravity_and_wind; wind_devices_screened; central_port_chosen_24km_to_the_flight_band_35km2_about_1.5_million_present; port_fire_safety_first_order_at_0.16g; sky_ship_size_first_order_rigid_hulls_fitted_to_four_airships_wings_to_ten_transports; flyer_classes_from_canopies_to_long_haul_liners_sized_with_numbers_and_height_bands; long_haul_classes_drawn_at_the_crown_for_the_authors_choice; sky_ship_and_flyer_findings_adopted_by_the_author_2026-09-28; reviewed_against_main_and_the_other_branches_2026-10-08; branch_closed_merge_waits_for_the_joint_integration; inhabited_volume_requirement_screen_2026_10_09; roaming_floating_habitation_author_direction_and_powered_duty_sensitivity",
+      "condition": "design_concepts; no complete sizing or service model; optical_comfort_clear_sky_surface_and_eye_screen_with_earth_controls; optical_comfort_packed_angular_sky_transfer_and_finite_matte_scene_transport; optical_comfort_local_native_sky_and_resolved_wave_slopes; solved_column_shielded_spherical_sky_and_updated_gaze_and_finite_scenes; summit_sky_tower_concept_sizing_for_gravity_and_wind; wind_devices_screened; central_port_chosen_24km_to_the_flight_band_35km2_about_1.5_million_present; port_fire_safety_first_order_at_0.16g; sky_ship_size_first_order_rigid_hulls_fitted_to_four_airships_wings_to_ten_transports; flyer_classes_from_canopies_to_long_haul_liners_sized_with_numbers_and_height_bands; long_haul_classes_drawn_at_the_crown_for_the_authors_choice; sky_ship_and_flyer_findings_adopted_by_the_author_2026-09-28; reviewed_against_main_and_the_other_branches_2026-10-08; branch_closed_merge_waits_for_the_joint_integration; inhabited_volume_requirement_screen_2026_10_09; roaming_floating_habitation_author_direction_and_powered_duty_sensitivity; ways_of_living_settings_light_air_hazards_and_sky_town_drift_2026_10_09; daily_life_through_the_lunar_cycle_by_setting_2026_10_09",
       "material": [
         "../habitation/README.md",
         "../ensemble/papers/babdd5f6-4920/seed-02.md",
@@ -338,7 +349,13 @@
         "../climate/results/gcm/site_winds_A28_dim5_moon_summit.json",
         "../climate/results/gcm/global_winds_A28_dim5_moon.json",
         "studies/inhabited_volume/README.md",
-        "studies/inhabited_volume/results/inhabited_volume.json"
+        "studies/inhabited_volume/results/inhabited_volume.json",
+        "../climate/gcm/zonal_winds.md",
+        "../climate/results/gcm/zonal_winds_A28_dim5_moon.json",
+        "studies/ways_of_living/README.md",
+        "studies/ways_of_living/results/ways_of_living.json",
+        "studies/daily_life/README.md",
+        "studies/daily_life/results/daily_life.json"
       ],
       "unresolved": [
         "supported floor area and mass",
@@ -364,7 +381,9 @@
         "the crown as a lightning conductor: in the electrified box's storm climate a 24 km crown meets potentials above upward-leader inception about a tenth of the time, in some 100-120 episodes a year (atmosphere/electricity/tower.py); protection, warning and the hydrogen berths beside it are open",
         "the chosen form's programme: the crown's long-haul traffic and berths follow the square lattice's programme by height, whose corrected base widened (long-haul 61% of the travel floor; the 750 m class nine berths)",
         "Buoyant settlement comparison: current district masses 20/50/100 t/person, 50% gross lift payload and 500 m-radius sphere are exploratory requirements; load paths, gas loss, storm survival, traffic, ecological exclusion and health remain unvalidated. No population ceiling or allowed sky-cover share selected.",
-        "Author direction 2026-10-09: much floating habitation roams. Navigation, collision/storm avoidance, rendezvous and occasional repositioning need weather-derived control duties and manoeuvre reserves; the 1/5/10%-duty screen is exploratory. Fixed-position stationkeeping is not assigned to all aerial residents."
+        "Author direction 2026-10-09: much floating habitation roams. Navigation, collision/storm avoidance, rendezvous and occasional repositioning need weather-derived control duties and manoeuvre reserves; the 1/5/10%-duty screen is exploratory. Fixed-position stationkeeping is not assigned to all aerial residents.",
+        "sky towns (studies/ways_of_living, climate/gcm/zonal_winds.md): a town drifting at 10 km meets the Sun every 15-23 days at the median and near the ground can hold the hour at 40-75 degrees from the late afternoon into the night; passive routes gather onto shared tracks; a streamlined 3 km hull holds a place for 0.089 kW a resident; a moored sphere's tether is 1.1% of its district's mass and a grounded conductor into the storms; open are town and hull designs, steering against the gathering, storm routing, gas-cell tightness (each percent a year lost costs 0.43 TW per billion aloft), rain at their height and rescue",
+        "daily life by setting (studies/daily_life, 2026-10-09): clear-sky, mean-geometry light states for every ways-of-living setting, and the days drifting towns live by height and latitude from the design winds; open are cloud and libration by place, light at height, indoor lighting for the long night, children's eyes and growth at 0.16 g, and the artificial-gravity dose that keeps a body ready for Earth"
       ],
       "next_session_task": "The branch merged in the joint integration of 2026-10-08, where its four studies were rerun with the corrected climate products, ring_equator and main's drainage and sunlight, and their READMEs and the metropolis brief brought to the new numbers (research/integration). Next, in an order for the author to choose (studies/infrastructure_review, section 7; research/plan.md): the crown as a lightning conductor (the joint synthesis's screen, atmosphere/electricity/tower.py, puts it past the upward leader's inception about a tenth of the time) and lightning protection for its berths; the chosen form's own programme for the crown's traffic and berths; the frame resized with a design gust that varies with height; the long-haul class and the crown's wind and wake; the sky boats' traffic system with storms and the night."
     },

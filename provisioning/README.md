@@ -19,12 +19,18 @@ The word reaches past industry to everything a settled world provides itself wit
 
 Its open questions, in order, are in [questions.md](questions.md).
 
-**Population follow-up, 9 October 2026:** the original Earth-heavy population placements are historical
-illustrations, not capacity findings. The [inhabited-volume study](../research/studies/inhabited_volume/README.md)
-now evaluates lunar surface and aerial habitation together using
-[shared comparison cases](../shared/scenarios/population.json). It quantifies residential mass, buoyancy, projected
-area, holding-power sensitivity, domestic water recovery, food and heat. No allocation or maximum capacity is
-adopted, and runoff stress indices are not physical population ceilings.
+**People and their ways of living, 9 October 2026.** The author found the first population distribution wrong:
+it left the sky empty of people and read heat and runoff as ceilings. The author set
+[shared comparison cases](../shared/scenarios/population.json) with lunar surface and aerial residents, and the
+[inhabited-volume study](../research/studies/inhabited_volume/README.md) evaluates both together. Three studies
+follow the order the author approved:
+- the design climate's winds as vectors, which set the days of drifting towns
+  ([climate/gcm/zonal_winds.md](../climate/gcm/zonal_winds.md));
+- eighteen ways of living built from the project's designs, with each one's physical situation, its costs per billion
+  residents and the shared cases' totals by mix ([ways of living](../research/studies/ways_of_living/README.md));
+- how people live in each through the lunar cycle ([daily life](../research/studies/daily_life/README.md)).
+
+The original placements stay as historical illustrations, and the distribution of people is the author's to choose.
 
 The author's decisions frame it:
 - **The Moon's cycle:** it keeps its 29.53-day cycle, and life stores resources across the night.
@@ -230,17 +236,18 @@ to tens of thousands of years, affluent by modern standards, mostly on Earth, th
     10 million in 2526, the Moon reaches a billion in 2756–2987 at 1–2% a year.
 14. **Affluence is 2–6 kW of primary energy a person, centred on Europe's 3.7.** Needs stop rising at 1.9 kW of final
     energy (Vogel et al. 2021), 2.9 kW of primary energy, which gives the metropolis brief's 2 kW a basis.
-15. **The selected heat tolerance constrains uncompensated local energy use.** With industry in orbit a
-    person at Europe's energy releases 2.8 kW on the Moon: 0.1 K of warming holds 1.4–2.2 billion people and 0.5 K
-    6.8–11 billion, while 1% more dimming answers the heat of 26–41 billion. Moving industry to orbit cuts a person's
-    lunar heat by a quarter. Cities at 40,000 people per km² release 60–240 W/m², so a city's heat is answered in the
-    city.
-16. **The runoff stress index crosses a historical threshold near 4 billion.** Its 7,240 km³ a year reaches the stress line at 4.3 billion and
-    scarcity at 7.2 billion; while the seas and lakes stay fresh, water drawn from them and returned supplies beyond it.
-    Food land is ample: the dry land feeds 8.4–22 billion on Earth's 12% share of land in crops.
+15. **People's heat on the Moon is answered by dimming, and a city's in the city.** With industry in orbit a person at
+    Europe's energy releases 2.8 kW on the Moon, and each terawatt there is answered by 0.009–0.014% more dimming, so
+    1% more answers the heat of 26–41 billion. Moving industry to orbit cuts a person's lunar heat by a quarter. Cities
+    at 40,000 people per km² release 60–240 W/m², so a city's heat is answered in the city.
+16. **The Moon's rivers carry 7,240 km³ a year, and the fresh seas supply beyond them.** Water drawn from the seas
+    and lakes and returned supplies people and farms beyond the runoff while the seas stay fresh. Food land is ample
+    by area, the dry land feeding 8.4–22 billion on Earth's 12% share in crops; the rain sets the rain-fed share, and
+    beyond it crops are irrigated from the fresh seas (finding 27).
 17. **Earth binds on food within planetary boundaries.** A transformed food system feeds 10.2 billion within four
-    boundaries (Gerten et al. 2020), so 16–20 billion on Earth need part of their food grown off the land, for
-    instance microbial protein on power the array can send. Their heat on thermal plants adds 0.12–0.14 W/m².
+    boundaries (Gerten et al. 2020), so beyond that Earth grows part of its food off the land, for instance microbial
+    protein on power the array can send: 27% for the 14 billion of the Earth-heavier shared case (ways of living).
+    Thermal plants warm Earth 0.003–0.009 K a billion across the energy band.
 18. **The array's light is no limit; its habitats are its mass, and its commute is costly.** The whole population's
     energy, 40–260 TW, is 0.005–0.03% of the night half's 851 PW. Habitats at the Stanford torus's 990 t of shield a
     person take 248–990 Gt for a billion residents. The ring radius is 14.1 hours away on a minimum-energy transfer,
@@ -280,6 +287,57 @@ here are from it, with "today" the H100's 1.4×10¹² FLOP per joule.
 26. **Latency divides the work.** The 0.13 s round trip to the ring radius fits inside the 0.21 s people leave between
     turns in conversation, so the Moon's interactive services and forecasts can run in the array, with millisecond
     control on the Moon and Earth's 2.56 s round trip suiting batch work.
+
+### Ways of living
+
+Steps three and four of the population work the author approved on 9 October: the ways of living, built from the
+project's designs, and what each holds and costs. The studies are [ways of living](../research/studies/ways_of_living/README.md)
+and, for the winds, [zonal_winds.md](../climate/gcm/zonal_winds.md); numbers here are from them.
+
+27. **Every shared case fits the Moon's land, and food grows fastest with its people.** Towns take 0.6–10% of the
+    23.4 million km² of dry land across the cases, aerial shares of 0–75% and four mixes of settings. Ten billion
+    lunar residents on the lunar design's plant-rich diet crop 1.4–3.9 million km², 35–224% of the rain-fed land
+    outside a kept 30%. At the high end 2.2 million km² are irrigated with 8,700 km³ a year lifted from the fresh seas
+    for 1.5 TW; irrigated from the start, crops and towns take 20–59% of the rain belt's land outside the kept 30%,
+    for 0.18–2.0 TW.
+28. **People's heat costs 0.08–1.8% more dimming across the cases.** With the sky towns' power, the irrigation lift
+    and the hydrogen remade after losses, the Moon takes 9–128 TW; total25 at its own split takes 17–72 TW and
+    0.15–1.0%.
+29. **People's light fills the dark night before their towns fill the land.** At the lunar design's 791–1,420 m² of
+    lit sky a person (ecology), 6–15 billion lunar residents light 20–91% of the dry land, and each billion in the far
+    side's twilit-night places lights 45–81% of that home.
+30. **Five billion aloft live in about 870,000 towns, and the lifting gas's upkeep is their largest cost.** They need
+    425 Gt of districts and carriers and 48 Gt of lifting gas, shade 1.8% of the Moon and stand 4.7–5.5 km apart
+    over the clear sky outside a kept 30–50%. Each percent a year of hydrogen lost takes 0.43 TW per billion aloft to
+    remake, so five billion at the joint ledger's 1–10% a year need 2.1–22 TW and keep 3.5–35 ppm of hydrogen in the
+    air.
+31. **Roaming towns live days the wind sets, and the wind gathers them.** Above about 8 km the air superrotates: a
+    town drifting at 10 km lives a 21.8-day day on the equator and one at 40 km 9.3 days, 4.3 at 60°. Near the ground
+    it lives about 34 days with a long evening, and it can hold the hour in the lowest 5 km at 40–75°, from the late
+    afternoon into the night: in 18–31% of 3-day means, up to 66% at the best hour. Passive routes gather: within 180
+    days every route at 2.5 km shares one track near the equator, and at 40–60 km routes collect over the poles within
+    a few years. The shear to sail on is about 4 m/s over 15 km near the ground and 6 m/s in and below the flight band.
+32. **A streamlined hull holds a place or a time of day cheaply.** The sky-ship study's 3 km hull holds a place at
+    10 km for 0.089 kW a resident, against 6.9 kW for a sphere held in 5 m/s, and follows the Sun for 0.18–0.50 kW
+    between 47° S and 47° N and 0.04–0.19 kW poleward of 60°.
+33. **Water costs little energy everywhere.** Lifting a billion residents' 18–55 km³ of domestic water a year from the
+    fresh seas takes 3.2–9.5 GW, and the makeup after 90–99% recovery 0.03–0.95 GW.
+
+### How people live
+
+Step five of the approved order: each setting through the lunar cycle, in the
+[daily-life study](../research/studies/daily_life/README.md); numbers here are from it.
+
+34. **People keep a 24-hour day indoors, and lighting it through the night is cheap.** The human clock entrains only to
+    days near 24 hours (Czeisler et al. 1999; Scheer et al. 2007), so homes need dark bedrooms through the 354-hour day
+    and daytime light through the night: 11–45 kWh a person each night, 2–7% of the night's 650 kWh at Europe's level.
+35. **The dusk is long shared time.** Practical dusk lasts 82–137 hours by latitude and moves west at 15.4 km/h on the
+    equator; a dusk-long gathering of a million people needs a third to a half of one sky-ferry line.
+36. **Moving about at a sixth of the gravity rewards seated, gentle transit.** People switch to running at 1.42 m/s
+    (De Witt et al. 2014), and stopping a wheelchair or bicycle from 5 m/s takes 12.8 m against 2.1 m on Earth.
+37. **The array answers inside conversation and Earth does not.** The array's 0.13 s round trip fits within the 0.21 s
+    people leave between turns, while Earth's 2.4–2.7 s does not. Holding a sky town at one hour against the mean wind
+    at 10 km takes 2.7–10 kW a resident for an unstreamlined sphere.
 
 ## Statements elsewhere that need correcting
 
