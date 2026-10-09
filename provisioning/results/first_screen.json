@@ -3,7 +3,7 @@
  "producer": {
   "domain": "provisioning",
   "files": {
-   "provisioning/screen.py": "705bc5b9e5cd5952"
+   "provisioning/screen.py": "8e99c0a521b8c240"
   },
   "inputs": {
    "research/studies/solar_shield_array/results/array_heat.json": "d964f1a5e1dec2e9",
@@ -150,6 +150,20 @@
    "moon_w_m2_from_industry_tw_released_in_orbit": {
     "100": 0.005,
     "1000": 0.0498
+   },
+   "collectors_heat_per_watt": [
+    1.93,
+    3.4
+   ],
+   "moon_w_m2_from_computing_tw_near_fleet_with_collectors": {
+    "100": [
+     0.015,
+     0.022
+    ],
+    "1000": [
+     0.146,
+     0.219
+    ]
    },
    "moon_w_m2_from_industry_tw_used_on_moon": {
     "100": 2.64,

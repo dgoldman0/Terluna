@@ -1,0 +1,2478 @@
+{
+ "schema": "terluna.provisioning.computing/1",
+ "producer": {
+  "domain": "provisioning",
+  "files": {
+   "provisioning/computing.py": "0e09f130e9702d4e"
+  },
+  "inputs": {
+   "research/studies/solar_shield_array/results/array_heat.json": "d964f1a5e1dec2e9",
+   "research/studies/joint_synthesis/results/ledgers.json": "b370faf4c735a78d",
+   "illumination/fleet_light/results/night_light.json": "c58f6afe2f342d80",
+   "provisioning/results/first_screen.json": "70ba4c24a3ba43b9",
+   "provisioning/computing_sources.json": "8ced0e54562327b2"
+  },
+  "constants": {
+   "AU": 149597870700.0,
+   "BOLTZMANN": 1.380649e-23,
+   "EARTH_GM": 398600441800000.0,
+   "EARTH_MOON_DISTANCE": 384400000.0,
+   "EARTH_RADIUS": 6371000.0,
+   "JULIAN_DAY": 86400.0,
+   "JULIAN_YEAR_DAYS": 365.25,
+   "MOON_GM": 4902800118000.0,
+   "MOON_RADIUS": 1737400.0,
+   "PLANCK": 6.62607015e-34,
+   "SOLAR_CONSTANT": 1361.0,
+   "SPEED_OF_LIGHT": 299792458.0,
+   "STEFAN_BOLTZMANN": 5.670374419e-08,
+   "SUN_GM": 1.3271244004127942e+20
+  }
+ },
+ "evidence": "A screen on committed products: the shield study's array heat (collectors, radiators, placement, fleet, film plant), the joint synthesis's night-half interception, the fleet-light model's night-side reflection and the provisioning first screen's heat response, with the literature values in computing_sources.json. Closed-form arithmetic; no platform, device, network or workload is modelled. Task demands are published estimates or arithmetic on published measurements, each with the assumptions named in its basis; the per-person AI demand, the weather twin's levels and service factor, and the control filter sizes are assumptions for scale.",
+ "reading_rule": "Power in W unless a key names TW or PW; computing in FLOP/s at 16 bits unless stated, or total FLOP for campaigns. \"today\" is the H100's 1.4e12 FLOP/J at 16 bits; tasks measured on older GPUs carry their measured energy scaled to the H100 by 32-bit FLOP per joule, and their FLOP/s are H100-equivalent. \"cmos_limit\" divides today's energy by the ratio of Ho et al.'s 16-bit limit to the H100; \"landauer_330K\" by the ratio of the irreversible floor at 330 K. Light shares are of the night half's interception at 20-30% conversion. Heat on the Moon in W/m2 over its whole surface, warming in K by the first screen's 0.63-1.0 K per W/m2. Ranges pair the low ends and the high ends.",
+ "today": {
+  "data_centres_tw_2024": 0.04734,
+  "ai_flop_s_2026": 1.484e+22,
+  "nvidia_flop_s_2024": 4e+21,
+  "top500_lead_flop_s": 2.198e+18,
+  "el_capitan_flop_s_w": [
+   1.809e+18,
+   29680000.0
+  ],
+  "google_tokens_per_s": 494300000.0,
+  "tokens_per_s_per_person": 0.06028,
+  "ai_flop_s_per_person": 1810000000000.0,
+  "largest_run_2025_flop": 4.6e+26,
+  "grok4_gwh": 310.0,
+  "frontier_growth_per_year": [
+   4.0,
+   5.0
+  ],
+  "run_2030_flop": 2e+29
+ },
+ "efficiency": {
+  "today_flop_per_j": 1400000000000.0,
+  "h100_check": 1413000000000.0,
+  "cmos_limit_flop_per_j": 293800000000000.0,
+  "cmos_limit_range_flop_per_j": [
+   58610000000000.0,
+   1472000000000000.0
+  ],
+  "cmos_over_today": 209.8,
+  "years_to_cmos_at_past_doubling": [
+   12.11,
+   20.83
+  ],
+  "switches_per_fp16": [
+   480.0,
+   48000.0
+  ],
+  "landauer_bit_j": {
+   "300K": 2.871e-21,
+   "330K": 3.158e-21,
+   "2.7K": 2.584e-23
+  },
+  "landauer_floor_flop_per_j": {
+   "150K": [
+    1.451e+16,
+    1.451e+18
+   ],
+   "250K": [
+    8708000000000000.0,
+    8.708e+17
+   ],
+   "330K": [
+    6597000000000000.0,
+    6.597e+17
+   ],
+   "500K": [
+    4354000000000000.0,
+    4.354e+17
+   ]
+  },
+  "floor_330K_over_today": [
+   4712.0,
+   471200.0
+  ],
+  "today_j_per_flop_in_kT_ln2_at_330K": 226200000.0,
+  "fp32_flop_per_j": {
+   "p100": 37200000000.0,
+   "a100": 48750000000.0,
+   "h100": 95710000000.0
+  },
+  "h100_over_p100_fp32": 2.573,
+  "h100_over_a100_fp32": 1.963,
+  "fp64_energy_over_fp16": [
+   14.77,
+   29.1
+  ],
+  "cmos_gain_by_precision": {
+   "fp16": 209.8,
+   "fp32": 767.3,
+   "fp64": [
+    191.8,
+    378.0
+   ]
+  },
+  "reversible": "no floor: logically reversible, adiabatic logic can dissipate below kT ln 2 per operation, trading speed for energy (Bennett 1973; Frank et al. 2020)"
+ },
+ "radiators": {
+  "150K": {
+   "net_w_m2": 51.67,
+   "km2_per_tw": 19350.0,
+   "mt_per_tw": [
+    58.06,
+    270.9
+   ],
+   "landauer_bits_per_j": 6.966e+20,
+   "landauer_bits_per_s_per_m2": 3.6e+22,
+   "per_m2_over_330K": 0.09391
+  },
+  "250K": {
+   "net_w_m2": 398.7,
+   "km2_per_tw": 2508.0,
+   "mt_per_tw": [
+    7.524,
+    35.11
+   ],
+   "landauer_bits_per_j": 4.18e+20,
+   "landauer_bits_per_s_per_m2": 1.666e+23,
+   "per_m2_over_330K": 0.4348
+  },
+  "330K": {
+   "net_w_m2": 1210.0,
+   "km2_per_tw": 826.2,
+   "mt_per_tw": [
+    2.478,
+    11.57
+   ],
+   "landauer_bits_per_j": 3.166e+20,
+   "landauer_bits_per_s_per_m2": 3.833e+23,
+   "per_m2_over_330K": 1.0
+  },
+  "500K": {
+   "net_w_m2": 6379.0,
+   "km2_per_tw": 156.8,
+   "mt_per_tw": [
+    0.4703,
+    2.195
+   ],
+   "landauer_bits_per_j": 2.09e+20,
+   "landauer_bits_per_s_per_m2": 1.333e+24,
+   "per_m2_over_330K": 3.478
+  }
+ },
+ "supply": {
+  "night_half_intercepts_pw": 851.0,
+  "night_half_tile_km2": 1087000000.0,
+  "night_half_turns_pw": 13.84,
+  "turned_light_supports_tw": [
+   2767.0,
+   4151.0
+  ],
+  "fleet_intercepts_pw": [
+   1913.0,
+   2446.0
+  ],
+  "fleet_area_km2": 2817000000.0,
+  "fleet_mass_gt": 46.28,
+  "film_plant_gt_per_year": [
+   2.309,
+   4.638
+  ],
+  "film_plant_tw": [
+   0.1463,
+   2.94
+  ],
+  "conversion": [
+   0.3,
+   0.2
+  ],
+  "per_tw": {
+   "light_tw": [
+    3.333,
+    5.0
+   ],
+   "collector_km2": [
+    2449.0,
+    3674.0
+   ],
+   "radiator_km2": 826.2,
+   "radiator_mt": [
+    2.478,
+    11.57
+   ],
+   "collector_mt": [
+    1.0,
+    10.0
+   ],
+   "hardware_kg_per_kw": [
+    3.5,
+    12.79
+   ],
+   "hardware_mt": [
+    3.5,
+    12.79
+   ],
+   "mass_mt": [
+    6.978,
+    34.36
+   ],
+   "hardware_renewal_mt_per_year": [
+    0.7,
+    2.558
+   ],
+   "heat_released_in_orbit_tw": [
+    2.933,
+    4.4
+   ],
+   "orbit_moon_w_m2": [
+    0.0001462,
+    0.0002193
+   ],
+   "orbit_moon_k": [
+    9.136e-05,
+    0.0002193
+   ],
+   "on_moon_w_m2": 0.02636,
+   "on_moon_k": [
+    0.01648,
+    0.02636
+   ],
+   "platform_side_km": [
+    57.23,
+    67.08
+   ],
+   "flop_s_per_kg_today": [
+    40750000000000.0,
+    200600000000000.0
+   ]
+  },
+  "scenarios": {
+   "1": {
+    "flop_s": {
+     "today": 1.4e+24,
+     "cmos_limit": 2.937e+26,
+     "landauer_330K": [
+      6.597e+27,
+      6.597e+29
+     ]
+    },
+    "light_pw": [
+     0.003333,
+     0.005
+    ],
+    "share_of_night_half_light": [
+     3.917e-06,
+     5.875e-06
+    ],
+    "share_of_fleet_interception": [
+     1.363e-06,
+     2.614e-06
+    ],
+    "collector_and_radiator_km2": [
+     3275.0,
+     4500.0
+    ],
+    "share_of_fleet_area": [
+     1.163e-06,
+     1.597e-06
+    ],
+    "share_of_night_half_tile_area": [
+     3.014e-06,
+     4.141e-06
+    ],
+    "radiator_mt": [
+     2.478,
+     11.57
+    ],
+    "collector_mt": [
+     1.0,
+     10.0
+    ],
+    "hardware_mt": [
+     3.5,
+     12.79
+    ],
+    "mass_gt": [
+     0.006978,
+     0.03436
+    ],
+    "share_of_fleet_mass": [
+     0.0001508,
+     0.0007423
+    ],
+    "years_of_film_plant_throughput": [
+     0.001504,
+     0.01488
+    ],
+    "hardware_renewal_gt_per_year": [
+     0.0007,
+     0.002558
+    ],
+    "orbit_moon_w_m2": [
+     0.0001462,
+     0.0002193
+    ],
+    "orbit_moon_k": [
+     9.136e-05,
+     0.0002193
+    ],
+    "orbit_share_of_glow_low_end": [
+     2.582e-05,
+     3.874e-05
+    ],
+    "if_on_moon_k": [
+     0.01648,
+     0.02636
+    ],
+    "times_data_centres_2024": 21.12,
+    "times_ai_compute_2026": 94.33,
+    "brain_equivalents_today": 1400000000.0,
+    "brain_equivalents_cmos_limit": 293800000000.0
+   },
+   "10": {
+    "flop_s": {
+     "today": 1.4e+25,
+     "cmos_limit": 2.937e+27,
+     "landauer_330K": [
+      6.597e+28,
+      6.597e+30
+     ]
+    },
+    "light_pw": [
+     0.03333,
+     0.05
+    ],
+    "share_of_night_half_light": [
+     3.917e-05,
+     5.875e-05
+    ],
+    "share_of_fleet_interception": [
+     1.363e-05,
+     2.614e-05
+    ],
+    "collector_and_radiator_km2": [
+     32750.0,
+     45000.0
+    ],
+    "share_of_fleet_area": [
+     1.163e-05,
+     1.597e-05
+    ],
+    "share_of_night_half_tile_area": [
+     3.014e-05,
+     4.141e-05
+    ],
+    "radiator_mt": [
+     24.78,
+     115.7
+    ],
+    "collector_mt": [
+     10.0,
+     100.0
+    ],
+    "hardware_mt": [
+     35.0,
+     127.9
+    ],
+    "mass_gt": [
+     0.06978,
+     0.3436
+    ],
+    "share_of_fleet_mass": [
+     0.001508,
+     0.007423
+    ],
+    "years_of_film_plant_throughput": [
+     0.01504,
+     0.1488
+    ],
+    "hardware_renewal_gt_per_year": [
+     0.007,
+     0.02558
+    ],
+    "orbit_moon_w_m2": [
+     0.001462,
+     0.002193
+    ],
+    "orbit_moon_k": [
+     0.0009136,
+     0.002193
+    ],
+    "orbit_share_of_glow_low_end": [
+     0.0002582,
+     0.0003874
+    ],
+    "if_on_moon_k": [
+     0.1648,
+     0.2636
+    ],
+    "times_data_centres_2024": 211.2,
+    "times_ai_compute_2026": 943.3,
+    "brain_equivalents_today": 14000000000.0,
+    "brain_equivalents_cmos_limit": 2938000000000.0
+   },
+   "100": {
+    "flop_s": {
+     "today": 1.4e+26,
+     "cmos_limit": 2.938e+28,
+     "landauer_330K": [
+      6.597e+29,
+      6.597e+31
+     ]
+    },
+    "light_pw": [
+     0.3333,
+     0.5
+    ],
+    "share_of_night_half_light": [
+     0.0003917,
+     0.0005875
+    ],
+    "share_of_fleet_interception": [
+     0.0001363,
+     0.0002614
+    ],
+    "collector_and_radiator_km2": [
+     327500.0,
+     450000.0
+    ],
+    "share_of_fleet_area": [
+     0.0001163,
+     0.0001597
+    ],
+    "share_of_night_half_tile_area": [
+     0.0003014,
+     0.0004141
+    ],
+    "radiator_mt": [
+     247.8,
+     1157.0
+    ],
+    "collector_mt": [
+     100.0,
+     1000.0
+    ],
+    "hardware_mt": [
+     350.0,
+     1279.0
+    ],
+    "mass_gt": [
+     0.6978,
+     3.436
+    ],
+    "share_of_fleet_mass": [
+     0.01508,
+     0.07423
+    ],
+    "years_of_film_plant_throughput": [
+     0.1504,
+     1.488
+    ],
+    "hardware_renewal_gt_per_year": [
+     0.07,
+     0.2558
+    ],
+    "orbit_moon_w_m2": [
+     0.01462,
+     0.02193
+    ],
+    "orbit_moon_k": [
+     0.009136,
+     0.02193
+    ],
+    "orbit_share_of_glow_low_end": [
+     0.002582,
+     0.003874
+    ],
+    "if_on_moon_k": [
+     1.648,
+     2.636
+    ],
+    "times_data_centres_2024": 2112.0,
+    "times_ai_compute_2026": 9433.0,
+    "brain_equivalents_today": 140000000000.0,
+    "brain_equivalents_cmos_limit": 29380000000000.0
+   },
+   "1000": {
+    "flop_s": {
+     "today": 1.4e+27,
+     "cmos_limit": 2.937e+29,
+     "landauer_330K": [
+      6.597e+30,
+      6.597e+32
+     ]
+    },
+    "light_pw": [
+     3.333,
+     5.0
+    ],
+    "share_of_night_half_light": [
+     0.003917,
+     0.005875
+    ],
+    "share_of_fleet_interception": [
+     0.001363,
+     0.002614
+    ],
+    "collector_and_radiator_km2": [
+     3275000.0,
+     4500000.0
+    ],
+    "share_of_fleet_area": [
+     0.001163,
+     0.001597
+    ],
+    "share_of_night_half_tile_area": [
+     0.003014,
+     0.004141
+    ],
+    "radiator_mt": [
+     2478.0,
+     11570.0
+    ],
+    "collector_mt": [
+     1000.0,
+     10000.0
+    ],
+    "hardware_mt": [
+     3500.0,
+     12790.0
+    ],
+    "mass_gt": [
+     6.978,
+     34.36
+    ],
+    "share_of_fleet_mass": [
+     0.1508,
+     0.7423
+    ],
+    "years_of_film_plant_throughput": [
+     1.504,
+     14.88
+    ],
+    "hardware_renewal_gt_per_year": [
+     0.7,
+     2.558
+    ],
+    "orbit_moon_w_m2": [
+     0.1462,
+     0.2193
+    ],
+    "orbit_moon_k": [
+     0.09136,
+     0.2193
+    ],
+    "orbit_share_of_glow_low_end": [
+     0.02582,
+     0.03874
+    ],
+    "if_on_moon_k": [
+     16.48,
+     26.36
+    ],
+    "times_data_centres_2024": 21120.0,
+    "times_ai_compute_2026": 94330.0,
+    "brain_equivalents_today": 1400000000000.0,
+    "brain_equivalents_cmos_limit": 293800000000000.0
+   },
+   "10000": {
+    "flop_s": {
+     "today": 1.4e+28,
+     "cmos_limit": 2.938e+30,
+     "landauer_330K": [
+      6.597e+31,
+      6.597e+33
+     ]
+    },
+    "light_pw": [
+     33.33,
+     50.0
+    ],
+    "share_of_night_half_light": [
+     0.03917,
+     0.05875
+    ],
+    "share_of_fleet_interception": [
+     0.01363,
+     0.02614
+    ],
+    "collector_and_radiator_km2": [
+     32750000.0,
+     45000000.0
+    ],
+    "share_of_fleet_area": [
+     0.01163,
+     0.01597
+    ],
+    "share_of_night_half_tile_area": [
+     0.03014,
+     0.04141
+    ],
+    "radiator_mt": [
+     24780.0,
+     115700.0
+    ],
+    "collector_mt": [
+     10000.0,
+     100000.0
+    ],
+    "hardware_mt": [
+     35000.0,
+     127900.0
+    ],
+    "mass_gt": [
+     69.78,
+     343.6
+    ],
+    "share_of_fleet_mass": [
+     1.508,
+     7.423
+    ],
+    "years_of_film_plant_throughput": [
+     15.04,
+     148.8
+    ],
+    "hardware_renewal_gt_per_year": [
+     7.0,
+     25.58
+    ],
+    "orbit_moon_w_m2": [
+     1.462,
+     2.193
+    ],
+    "orbit_moon_k": [
+     0.9136,
+     2.193
+    ],
+    "orbit_share_of_glow_low_end": [
+     0.2582,
+     0.3874
+    ],
+    "if_on_moon_k": [
+     164.8,
+     263.6
+    ],
+    "times_data_centres_2024": 211200.0,
+    "times_ai_compute_2026": 943300.0,
+    "brain_equivalents_today": 14000000000000.0,
+    "brain_equivalents_cmos_limit": 2938000000000000.0
+   }
+  },
+  "orbital_tw_for_warming": {
+   "0.1K": [
+    456.1,
+    1095.0
+   ],
+   "1K": [
+    4561.0,
+    10950.0
+   ]
+  },
+  "heat_by_distance": {
+   "ring_radius": {
+    "distance_km": 20000.0,
+    "moon_w_m2_per_tw_heat": 4.983e-05
+   },
+   "earth_moon_l1_l2": {
+    "distance_km": 61520.0,
+    "moon_w_m2_per_tw_heat": 5.257e-06
+   },
+   "at_100000_km": {
+    "distance_km": 100000.0,
+    "moon_w_m2_per_tw_heat": 1.99e-06
+   },
+   "sun_earth_l1_l2": {
+    "distance_km": 1497000.0,
+    "moon_w_m2_per_tw_heat": 8.883e-09
+   }
+  },
+  "face_turned_to_moon": {
+   "share": 0.003773,
+   "over_isotropic": 1.996
+  },
+  "fleet_own_loads_tw": {
+   "trim_bistable": [
+    0.005537,
+    0.99
+   ],
+   "trim_electrochromic": [
+    0.05537,
+    15.84
+   ],
+   "store": [
+    0.003867,
+    0.1554
+   ]
+  }
+ },
+ "weather": {
+  "cosmo_cells": 34820000000.0,
+  "j_per_cell_step_p100": 1.172e-05,
+  "j_per_cell_step_today": 4.554e-06,
+  "coupling": 1.2,
+  "forecast_service_factor": 1000.0,
+  "grids": {
+   "1000m": {
+    "levels": [
+     180.0,
+     360.0
+    ],
+    "step_s": 6.452,
+    "cells": [
+     6828000000.0,
+     13660000000.0
+    ],
+    "real_time_w": [
+     5783.0,
+     11570.0
+    ],
+    "forecast_service_w": [
+     5783000.0,
+     11570000.0
+    ]
+   },
+   "100m": {
+    "levels": [
+     190.0,
+     370.0
+    ],
+    "step_s": 0.6452,
+    "cells": [
+     720700000000.0,
+     1403000000000.0
+    ],
+    "real_time_w": [
+     6104000.0,
+     11890000.0
+    ],
+    "forecast_service_w": [
+     6104000000.0,
+     11890000000.0
+    ]
+   },
+   "10m": {
+    "levels": [
+     280.0,
+     460.0
+    ],
+    "step_s": 0.06452,
+    "cells": [
+     106200000000000.0,
+     174500000000000.0
+    ],
+    "real_time_w": [
+     8996000000.0,
+     14780000000.0
+    ],
+    "forecast_service_w": [
+     8996000000000.0,
+     14780000000000.0
+    ]
+   },
+   "1m": {
+    "levels": [
+     1180.0,
+     1360.0
+    ],
+    "step_s": 0.006452,
+    "cells": [
+     4.476e+16,
+     5.159e+16
+    ],
+    "real_time_w": [
+     37910000000000.0,
+     43690000000000.0
+    ],
+    "forecast_service_w": [
+     3.791e+16,
+     4.369e+16
+    ]
+   }
+  }
+ },
+ "comparison": {
+  "fleet_control_tile_processors": {
+   "where": "tiles",
+   "latency_s": 0.001,
+   "basis": "one 1 TFLOP/s spaceflight processor on each of 28.1-28.2 million tiles (Microchip 2024)",
+   "kind": "rate",
+   "flop_s": [
+    2.81e+19,
+    2.82e+19
+   ],
+   "power_today_tw": [
+    2.01e-05,
+    2.02e-05
+   ],
+   "power_cmos_limit_tw": [
+    9.57e-08,
+    9.61e-08
+   ],
+   "power_landauer_330K_tw": [
+    4.26e-11,
+    4.28e-09
+   ],
+   "share_of_night_half_light_today": [
+    7.86e-11,
+    1.18e-10
+   ],
+   "orbit_moon_w_m2_today": [
+    2.93e-09,
+    4.42e-09
+   ],
+   "orbit_moon_k_today": [
+    1.83e-09,
+    4.42e-09
+   ],
+   "if_on_moon_k_today": [
+    3.31e-07,
+    5.32e-07
+   ],
+   "smallest_scenario_tw": {
+    "today": 1.0,
+    "cmos_limit": 1.0
+   },
+   "times_sun": [
+    5.25e-20,
+    5.27e-20
+   ]
+  },
+  "fleet_twin_ensemble": {
+   "where": "array",
+   "latency_s": 1.0,
+   "basis": "every tile's 20-state filter at 1 Hz in a 1,000-member ensemble (assumed sizes, 2n^3 FLOP per update)",
+   "kind": "rate",
+   "flop_s": [
+    450000000000000.0,
+    452000000000000.0
+   ],
+   "power_today_tw": [
+    3.21e-10,
+    3.23e-10
+   ],
+   "power_cmos_limit_tw": [
+    1.53e-12,
+    1.54e-12
+   ],
+   "power_landauer_330K_tw": [
+    6.82e-16,
+    6.85e-14
+   ],
+   "share_of_night_half_light_today": [
+    1.26e-15,
+    1.9e-15
+   ],
+   "orbit_moon_w_m2_today": [
+    4.7e-14,
+    7.07e-14
+   ],
+   "orbit_moon_k_today": [
+    2.93e-14,
+    7.07e-14
+   ],
+   "if_on_moon_k_today": [
+    5.29e-12,
+    8.51e-12
+   ],
+   "smallest_scenario_tw": {
+    "today": 1.0,
+    "cmos_limit": 1.0
+   },
+   "times_sun": [
+    8.39e-25,
+    8.43e-25
+   ]
+  },
+  "weather_1000m_forecast": {
+   "where": "array",
+   "latency_s": 60.0,
+   "basis": "the Moon's coupled weather and climate twin at 1 km, 50 members at 20 times real time, scaled from COSMO's measured 596 MWh per simulated year (Schulthess et al. 2019)",
+   "kind": "rate",
+   "flop_s": [
+    8.1e+18,
+    1.62e+19
+   ],
+   "power_today_tw": [
+    5.78e-06,
+    1.16e-05
+   ],
+   "power_cmos_limit_tw": [
+    2.76e-08,
+    5.51e-08
+   ],
+   "power_landauer_330K_tw": [
+    1.23e-11,
+    2.45e-09
+   ],
+   "share_of_night_half_light_today": [
+    2.27e-11,
+    6.8e-11
+   ],
+   "orbit_moon_w_m2_today": [
+    8.45e-10,
+    2.54e-09
+   ],
+   "orbit_moon_k_today": [
+    5.28e-10,
+    2.54e-09
+   ],
+   "if_on_moon_k_today": [
+    9.53e-08,
+    3.05e-07
+   ],
+   "smallest_scenario_tw": {
+    "today": 1.0,
+    "cmos_limit": 1.0
+   },
+   "times_sun": [
+    1.51e-20,
+    3.02e-20
+   ],
+   "flop_s_is_h100_equivalent": true
+  },
+  "weather_100m_forecast": {
+   "where": "array",
+   "latency_s": 60.0,
+   "basis": "the Moon's coupled weather and climate twin at 100 m, 50 members at 20 times real time, scaled from COSMO's measured 596 MWh per simulated year (Schulthess et al. 2019)",
+   "kind": "rate",
+   "flop_s": [
+    8.55e+21,
+    1.66e+22
+   ],
+   "power_today_tw": [
+    0.0061,
+    0.0119
+   ],
+   "power_cmos_limit_tw": [
+    2.91e-05,
+    5.67e-05
+   ],
+   "power_landauer_330K_tw": [
+    1.3e-08,
+    2.52e-06
+   ],
+   "share_of_night_half_light_today": [
+    2.39e-08,
+    6.98e-08
+   ],
+   "orbit_moon_w_m2_today": [
+    8.92e-07,
+    2.61e-06
+   ],
+   "orbit_moon_k_today": [
+    5.58e-07,
+    2.61e-06
+   ],
+   "if_on_moon_k_today": [
+    0.000101,
+    0.000313
+   ],
+   "smallest_scenario_tw": {
+    "today": 1.0,
+    "cmos_limit": 1.0
+   },
+   "times_sun": [
+    1.59e-17,
+    3.11e-17
+   ],
+   "flop_s_is_h100_equivalent": true
+  },
+  "weather_10m_forecast": {
+   "where": "array",
+   "latency_s": 60.0,
+   "basis": "the Moon's coupled weather and climate twin at 10 m, 50 members at 20 times real time, scaled from COSMO's measured 596 MWh per simulated year (Schulthess et al. 2019)",
+   "kind": "rate",
+   "flop_s": [
+    1.26e+25,
+    2.07e+25
+   ],
+   "power_today_tw": [
+    9.0,
+    14.8
+   ],
+   "power_cmos_limit_tw": [
+    0.0429,
+    0.0704
+   ],
+   "power_landauer_330K_tw": [
+    1.91e-05,
+    0.00314
+   ],
+   "share_of_night_half_light_today": [
+    3.52e-05,
+    8.68e-05
+   ],
+   "orbit_moon_w_m2_today": [
+    0.00131,
+    0.00324
+   ],
+   "orbit_moon_k_today": [
+    0.000822,
+    0.00324
+   ],
+   "if_on_moon_k_today": [
+    0.148,
+    0.39
+   ],
+   "smallest_scenario_tw": {
+    "today": 100.0,
+    "cmos_limit": 1.0
+   },
+   "times_sun": [
+    2.35e-14,
+    3.86e-14
+   ],
+   "flop_s_is_h100_equivalent": true
+  },
+  "weather_1m_forecast": {
+   "where": "array",
+   "latency_s": 60.0,
+   "basis": "the Moon's coupled weather and climate twin at 1 m, 50 members at 20 times real time, scaled from COSMO's measured 596 MWh per simulated year (Schulthess et al. 2019)",
+   "kind": "rate",
+   "flop_s": [
+    5.31e+28,
+    6.12e+28
+   ],
+   "power_today_tw": [
+    37900.0,
+    43700.0
+   ],
+   "power_cmos_limit_tw": [
+    181.0,
+    208.0
+   ],
+   "power_landauer_330K_tw": [
+    0.0805,
+    9.27
+   ],
+   "share_of_night_half_light_today": [
+    0.148,
+    0.257
+   ],
+   "orbit_moon_w_m2_today": [
+    5.54,
+    9.58
+   ],
+   "orbit_moon_k_today": [
+    3.46,
+    9.58
+   ],
+   "if_on_moon_k_today": [
+    625.0,
+    1150.0
+   ],
+   "smallest_scenario_tw": {
+    "today": null,
+    "cmos_limit": 1000.0
+   },
+   "times_sun": [
+    9.9e-11,
+    1.14e-10
+   ],
+   "flop_s_is_h100_equivalent": true
+  },
+  "weather_1m_real_time": {
+   "where": "array",
+   "latency_s": 1.0,
+   "basis": "the same at 1 m, one member in real time",
+   "kind": "rate",
+   "flop_s": [
+    5.31e+25,
+    6.12e+25
+   ],
+   "power_today_tw": [
+    37.9,
+    43.7
+   ],
+   "power_cmos_limit_tw": [
+    0.181,
+    0.208
+   ],
+   "power_landauer_330K_tw": [
+    8.05e-05,
+    0.00927
+   ],
+   "share_of_night_half_light_today": [
+    0.000148,
+    0.000257
+   ],
+   "orbit_moon_w_m2_today": [
+    0.00554,
+    0.00958
+   ],
+   "orbit_moon_k_today": [
+    0.00346,
+    0.00958
+   ],
+   "if_on_moon_k_today": [
+    0.625,
+    1.15
+   ],
+   "smallest_scenario_tw": {
+    "today": 100.0,
+    "cmos_limit": 1.0
+   },
+   "times_sun": [
+    9.9e-14,
+    1.14e-13
+   ],
+   "flop_s_is_h100_equivalent": true
+  },
+  "cells_one_gram_of_soil": {
+   "where": "anywhere",
+   "latency_s": null,
+   "basis": "a cell-by-cell twin of 1 g of soil, 1e10 cells (Torsvik & Ovreas 2002), each a minimal cell in 4D at about 300 A100 GPU-hours per 105-minute cycle (Thornburg et al. 2026)",
+   "kind": "rate",
+   "flop_s": [
+    4.89e+26,
+    4.89e+26
+   ],
+   "power_today_tw": [
+    349.0,
+    349.0
+   ],
+   "power_cmos_limit_tw": [
+    1.66,
+    1.66
+   ],
+   "power_landauer_330K_tw": [
+    0.000741,
+    0.0741
+   ],
+   "share_of_night_half_light_today": [
+    0.00137,
+    0.00205
+   ],
+   "orbit_moon_w_m2_today": [
+    0.051,
+    0.0766
+   ],
+   "orbit_moon_k_today": [
+    0.0319,
+    0.0766
+   ],
+   "if_on_moon_k_today": [
+    5.75,
+    9.21
+   ],
+   "smallest_scenario_tw": {
+    "today": 1000.0,
+    "cmos_limit": 10.0
+   },
+   "times_sun": [
+    9.12e-13,
+    9.12e-13
+   ],
+   "flop_s_is_h100_equivalent": true
+  },
+  "cells_earth_prokaryotes": {
+   "where": "beyond",
+   "latency_s": null,
+   "basis": "the same for Earth's 4-6e30 prokaryotes (Whitman et al. 1998)",
+   "kind": "rate",
+   "flop_s": [
+    1.96e+47,
+    2.93e+47
+   ],
+   "power_today_tw": [
+    1.4e+23,
+    2.1e+23
+   ],
+   "power_cmos_limit_tw": [
+    6.66e+20,
+    9.99e+20
+   ],
+   "power_landauer_330K_tw": [
+    2.96e+17,
+    4.45e+19
+   ],
+   "share_of_night_half_light_today": [
+    5.47e+17,
+    1.23e+18
+   ],
+   "orbit_moon_w_m2_today": [
+    2.04e+19,
+    4.59e+19
+   ],
+   "orbit_moon_k_today": [
+    1.28e+19,
+    4.59e+19
+   ],
+   "if_on_moon_k_today": [
+    2.3e+21,
+    5.52e+21
+   ],
+   "smallest_scenario_tw": {
+    "today": null,
+    "cmos_limit": null
+   },
+   "times_sun": [
+    365000000.0,
+    547000000.0
+   ],
+   "flop_s_is_h100_equivalent": true
+  },
+  "radio_farview_fx": {
+   "where": "near the telescope",
+   "latency_s": null,
+   "basis": "full correlation of 100,000 dipoles of one polarization over 5-40 MHz, 8 FLOP per baseline and sample (Polidan et al. 2024; NASA, FarView); two polarizations take four times as much",
+   "kind": "rate",
+   "flop_s": [
+    1.4e+18,
+    1.4e+18
+   ],
+   "power_today_tw": [
+    1e-06,
+    1e-06
+   ],
+   "power_cmos_limit_tw": [
+    4.77e-09,
+    4.77e-09
+   ],
+   "power_landauer_330K_tw": [
+    2.12e-12,
+    2.12e-10
+   ],
+   "share_of_night_half_light_today": [
+    3.92e-12,
+    5.88e-12
+   ],
+   "orbit_moon_w_m2_today": [
+    1.46e-10,
+    2.19e-10
+   ],
+   "orbit_moon_k_today": [
+    9.14e-11,
+    2.19e-10
+   ],
+   "if_on_moon_k_today": [
+    1.65e-08,
+    2.64e-08
+   ],
+   "smallest_scenario_tw": {
+    "today": 1.0,
+    "cmos_limit": 1.0
+   },
+   "times_sun": [
+    2.61e-21,
+    2.61e-21
+   ]
+  },
+  "radio_1e7_fx": {
+   "where": "near the telescope",
+   "latency_s": null,
+   "basis": "the same for ten million elements",
+   "kind": "rate",
+   "flop_s": [
+    1.4e+22,
+    1.4e+22
+   ],
+   "power_today_tw": [
+    0.01,
+    0.01
+   ],
+   "power_cmos_limit_tw": [
+    4.77e-05,
+    4.77e-05
+   ],
+   "power_landauer_330K_tw": [
+    2.12e-08,
+    2.12e-06
+   ],
+   "share_of_night_half_light_today": [
+    3.92e-08,
+    5.88e-08
+   ],
+   "orbit_moon_w_m2_today": [
+    1.46e-06,
+    2.19e-06
+   ],
+   "orbit_moon_k_today": [
+    9.14e-07,
+    2.19e-06
+   ],
+   "if_on_moon_k_today": [
+    0.000165,
+    0.000264
+   ],
+   "smallest_scenario_tw": {
+    "today": 1.0,
+    "cmos_limit": 1.0
+   },
+   "times_sun": [
+    2.61e-17,
+    2.61e-17
+   ]
+  },
+  "radio_1e7_fft": {
+   "where": "near the telescope",
+   "latency_s": null,
+   "basis": "ten million elements on a regular grid, correlated by FFT at 5 N log2 N per sample (Tegmark & Zaldarriaga 2009)",
+   "kind": "rate",
+   "flop_s": [
+    4.07e+16,
+    4.07e+16
+   ],
+   "power_today_tw": [
+    2.91e-08,
+    2.91e-08
+   ],
+   "power_cmos_limit_tw": [
+    1.39e-10,
+    1.39e-10
+   ],
+   "power_landauer_330K_tw": [
+    6.17e-14,
+    6.17e-12
+   ],
+   "share_of_night_half_light_today": [
+    1.14e-13,
+    1.71e-13
+   ],
+   "orbit_moon_w_m2_today": [
+    4.25e-12,
+    6.37e-12
+   ],
+   "orbit_moon_k_today": [
+    2.66e-12,
+    6.37e-12
+   ],
+   "if_on_moon_k_today": [
+    4.79e-10,
+    7.66e-10
+   ],
+   "smallest_scenario_tw": {
+    "today": 1.0,
+    "cmos_limit": 1.0
+   },
+   "times_sun": [
+    7.59e-23,
+    7.59e-23
+   ]
+  },
+  "ska_science_data": {
+   "where": "anywhere",
+   "latency_s": null,
+   "basis": "the SKA's two science data processors at about 135 PFLOP/s each (SKAO, Science Processing Centres)",
+   "kind": "rate",
+   "flop_s": [
+    2.7e+17,
+    2.7e+17
+   ],
+   "power_today_tw": [
+    1.93e-07,
+    1.93e-07
+   ],
+   "power_cmos_limit_tw": [
+    9.19e-10,
+    9.19e-10
+   ],
+   "power_landauer_330K_tw": [
+    4.09e-13,
+    4.09e-11
+   ],
+   "share_of_night_half_light_today": [
+    7.55e-13,
+    1.13e-12
+   ],
+   "orbit_moon_w_m2_today": [
+    2.82e-11,
+    4.23e-11
+   ],
+   "orbit_moon_k_today": [
+    1.76e-11,
+    4.23e-11
+   ],
+   "if_on_moon_k_today": [
+    3.18e-09,
+    5.08e-09
+   ],
+   "smallest_scenario_tw": {
+    "today": 1.0,
+    "cmos_limit": 1.0
+   },
+   "times_sun": [
+    5.04e-22,
+    5.04e-22
+   ]
+  },
+  "folding_at_home_2020": {
+   "where": "anywhere",
+   "latency_s": null,
+   "basis": "Folding@home at its 2020 peak, which simulated 0.1 s of the SARS-CoV-2 proteome (Zimmerman et al. 2021)",
+   "kind": "rate",
+   "flop_s": [
+    1.01e+18,
+    1.01e+18
+   ],
+   "power_today_tw": [
+    7.21e-07,
+    7.21e-07
+   ],
+   "power_cmos_limit_tw": [
+    3.44e-09,
+    3.44e-09
+   ],
+   "power_landauer_330K_tw": [
+    1.53e-12,
+    1.53e-10
+   ],
+   "share_of_night_half_light_today": [
+    2.83e-12,
+    4.24e-12
+   ],
+   "orbit_moon_w_m2_today": [
+    1.05e-10,
+    1.58e-10
+   ],
+   "orbit_moon_k_today": [
+    6.59e-11,
+    1.58e-10
+   ],
+   "if_on_moon_k_today": [
+    1.19e-08,
+    1.9e-08
+   ],
+   "smallest_scenario_tw": {
+    "today": 1.0,
+    "cmos_limit": 1.0
+   },
+   "times_sun": [
+    1.88e-21,
+    1.88e-21
+   ]
+  },
+  "alphafold2_training": {
+   "where": "anywhere",
+   "latency_s": null,
+   "basis": "128 TPU v3 cores for about 11 days at peak (Jumper et al. 2021; Google Cloud, TPU v3)",
+   "kind": "campaign",
+   "flop": [
+    7.48e+21,
+    7.48e+21
+   ],
+   "energy_today_j": [
+    5340000000.0,
+    5340000000.0
+   ],
+   "energy_today_twh": [
+    1.48e-06,
+    1.48e-06
+   ],
+   "days_at_1_tw_today": [
+    6.19e-08,
+    6.19e-08
+   ],
+   "days_at_1000_tw_today": [
+    6.19e-11,
+    6.19e-11
+   ],
+   "years_at_1000_tw_cmos_limit": [
+    8.07e-16,
+    8.07e-16
+   ],
+   "years_at_10000_tw_landauer_330K": [
+    3.59e-20,
+    3.59e-18
+   ]
+  },
+  "cosmology_frontier_e": {
+   "where": "anywhere",
+   "latency_s": null,
+   "basis": "Frontier-E, 4 trillion particles at 513.1 PFLOP/s peak for about a week (Frontiere et al. 2025)",
+   "kind": "campaign",
+   "flop": [
+    3.1e+23,
+    3.1e+23
+   ],
+   "energy_today_j": [
+    222000000000.0,
+    222000000000.0
+   ],
+   "energy_today_twh": [
+    6.16e-05,
+    6.16e-05
+   ],
+   "days_at_1_tw_today": [
+    2.57e-06,
+    2.57e-06
+   ],
+   "days_at_1000_tw_today": [
+    2.57e-09,
+    2.57e-09
+   ],
+   "years_at_1000_tw_cmos_limit": [
+    3.35e-14,
+    3.35e-14
+   ],
+   "years_at_10000_tw_landauer_330K": [
+    1.49e-18,
+    1.49e-16
+   ]
+  },
+  "lattice_qcd_ensembles": {
+   "where": "anywhere",
+   "latency_s": null,
+   "basis": "the proposed ensembles, 1.5-12,000 sustained exaflop-hours (Boyle et al. 2022)",
+   "kind": "campaign",
+   "flop": [
+    5.4e+21,
+    4.32e+25
+   ],
+   "energy_today_j": [
+    3860000000.0,
+    30900000000000.0
+   ],
+   "energy_today_twh": [
+    1.07e-06,
+    0.00857
+   ],
+   "days_at_1_tw_today": [
+    4.46e-08,
+    0.000357
+   ],
+   "days_at_1000_tw_today": [
+    4.46e-11,
+    3.57e-07
+   ],
+   "years_at_1000_tw_cmos_limit": [
+    5.83e-16,
+    4.66e-12
+   ],
+   "years_at_10000_tw_landauer_330K": [
+    2.59e-20,
+    2.08e-14
+   ]
+  },
+  "all_atom_minimal_cell_cycle": {
+   "where": "anywhere",
+   "latency_s": null,
+   "basis": "6e9 atoms (Stevens et al. 2023) for one 105-minute cycle at 1e3 FLOP per atom and femtosecond step, the roadmap's cost per molecule (Sandberg & Bostrom 2008)",
+   "kind": "campaign",
+   "flop": [
+    3.78e+31,
+    3.78e+31
+   ],
+   "energy_today_j": [
+    2.7e+19,
+    2.7e+19
+   ],
+   "energy_today_twh": [
+    7500.0,
+    7500.0
+   ],
+   "days_at_1_tw_today": [
+    312.0,
+    312.0
+   ],
+   "days_at_1000_tw_today": [
+    0.312,
+    0.312
+   ],
+   "years_at_1000_tw_cmos_limit": [
+    4.08e-06,
+    4.08e-06
+   ],
+   "years_at_10000_tw_landauer_330K": [
+    1.82e-10,
+    1.82e-08
+   ]
+  },
+  "ai_world_2026": {
+   "where": "Earth",
+   "latency_s": null,
+   "basis": "15 million H100-equivalents at 989 TFLOP/s, drawing over 10 GW (Epoch AI 2026)",
+   "kind": "rate",
+   "flop_s": [
+    1.48e+22,
+    1.48e+22
+   ],
+   "power_today_tw": [
+    0.0106,
+    0.0106
+   ],
+   "power_cmos_limit_tw": [
+    5.05e-05,
+    5.05e-05
+   ],
+   "power_landauer_330K_tw": [
+    2.25e-08,
+    2.25e-06
+   ],
+   "share_of_night_half_light_today": [
+    4.15e-08,
+    6.23e-08
+   ],
+   "orbit_moon_w_m2_today": [
+    1.55e-06,
+    2.32e-06
+   ],
+   "orbit_moon_k_today": [
+    9.68e-07,
+    2.32e-06
+   ],
+   "if_on_moon_k_today": [
+    0.000175,
+    0.000279
+   ],
+   "smallest_scenario_tw": {
+    "today": 1.0,
+    "cmos_limit": 1.0
+   },
+   "times_sun": [
+    2.77e-17,
+    2.77e-17
+   ]
+  },
+  "ai_largest_run_2025": {
+   "where": "anywhere",
+   "latency_s": null,
+   "basis": "Grok 3 at 4.6e26 FLOP (Epoch AI 2025b); Grok 4 took about 310 GWh (Epoch AI 2025c)",
+   "kind": "campaign",
+   "flop": [
+    4.6e+26,
+    4.6e+26
+   ],
+   "energy_today_j": [
+    329000000000000.0,
+    329000000000000.0
+   ],
+   "energy_today_twh": [
+    0.0913,
+    0.0913
+   ],
+   "days_at_1_tw_today": [
+    0.0038,
+    0.0038
+   ],
+   "days_at_1000_tw_today": [
+    3.8e-06,
+    3.8e-06
+   ],
+   "years_at_1000_tw_cmos_limit": [
+    4.96e-11,
+    4.96e-11
+   ],
+   "years_at_10000_tw_landauer_330K": [
+    2.21e-15,
+    2.21e-13
+   ]
+  },
+  "ai_training_latency_wall": {
+   "where": "anywhere, compact",
+   "latency_s": null,
+   "basis": "one run of 3e30-1e32 FLOP, the latency wall (Sevilla et al. 2024), over 100 days (assumed)",
+   "kind": "rate",
+   "flop_s": [
+    3.47e+23,
+    1.16e+25
+   ],
+   "power_today_tw": [
+    0.248,
+    8.27
+   ],
+   "power_cmos_limit_tw": [
+    0.00118,
+    0.0394
+   ],
+   "power_landauer_330K_tw": [
+    5.26e-07,
+    0.00175
+   ],
+   "share_of_night_half_light_today": [
+    9.71e-07,
+    4.86e-05
+   ],
+   "orbit_moon_w_m2_today": [
+    3.63e-05,
+    0.00181
+   ],
+   "orbit_moon_k_today": [
+    2.27e-05,
+    0.00181
+   ],
+   "if_on_moon_k_today": [
+    0.00409,
+    0.218
+   ],
+   "smallest_scenario_tw": {
+    "today": 10.0,
+    "cmos_limit": 1.0
+   },
+   "times_sun": [
+    6.48e-16,
+    2.16e-14
+   ]
+  },
+  "ai_services_20_30_billion": {
+   "where": "array for the Moon",
+   "latency_s": 0.208,
+   "basis": "1-100 brain-equivalents of 1e15 FLOP/s (Carlsmith 2020) for each of 20-30 billion people (assumed use)",
+   "kind": "rate",
+   "flop_s": [
+    2e+25,
+    3e+27
+   ],
+   "power_today_tw": [
+    14.3,
+    2140.0
+   ],
+   "power_cmos_limit_tw": [
+    0.0681,
+    10.2
+   ],
+   "power_landauer_330K_tw": [
+    3.03e-05,
+    0.455
+   ],
+   "share_of_night_half_light_today": [
+    5.6e-05,
+    0.0126
+   ],
+   "orbit_moon_w_m2_today": [
+    0.00209,
+    0.47
+   ],
+   "orbit_moon_k_today": [
+    0.00131,
+    0.47
+   ],
+   "if_on_moon_k_today": [
+    0.235,
+    56.5
+   ],
+   "smallest_scenario_tw": {
+    "today": 10000.0,
+    "cmos_limit": 100.0
+   },
+   "times_sun": [
+    3.73e-14,
+    5.6e-12
+   ]
+  },
+  "ai_services_token_check": {
+   "where": "array for the Moon",
+   "latency_s": 0.208,
+   "basis": "100-10,000 tokens/s per person from 1e12-parameter models at 2N FLOP per token (Kaplan et al. 2020)",
+   "kind": "rate",
+   "flop_s": [
+    4e+24,
+    6e+26
+   ],
+   "power_today_tw": [
+    2.86,
+    429.0
+   ],
+   "power_cmos_limit_tw": [
+    0.0136,
+    2.04
+   ],
+   "power_landauer_330K_tw": [
+    6.06e-06,
+    0.091
+   ],
+   "share_of_night_half_light_today": [
+    1.12e-05,
+    0.00252
+   ],
+   "orbit_moon_w_m2_today": [
+    0.000418,
+    0.094
+   ],
+   "orbit_moon_k_today": [
+    0.000261,
+    0.094
+   ],
+   "if_on_moon_k_today": [
+    0.0471,
+    11.3
+   ],
+   "smallest_scenario_tw": {
+    "today": 1000.0,
+    "cmos_limit": 10.0
+   },
+   "times_sun": [
+    7.46e-15,
+    1.12e-12
+   ]
+  },
+  "digital_population_like_ours": {
+   "where": "array or anywhere",
+   "latency_s": 0.208,
+   "basis": "20-30 billion digital minds at 1e15 (Carlsmith 2020) to 1e18 FLOP/s (level 4, Sandberg & Bostrom 2008)",
+   "kind": "rate",
+   "flop_s": [
+    2e+25,
+    3e+28
+   ],
+   "power_today_tw": [
+    14.3,
+    21400.0
+   ],
+   "power_cmos_limit_tw": [
+    0.0681,
+    102.0
+   ],
+   "power_landauer_330K_tw": [
+    3.03e-05,
+    4.55
+   ],
+   "share_of_night_half_light_today": [
+    5.6e-05,
+    0.126
+   ],
+   "orbit_moon_w_m2_today": [
+    0.00209,
+    4.7
+   ],
+   "orbit_moon_k_today": [
+    0.00131,
+    4.7
+   ],
+   "if_on_moon_k_today": [
+    0.235,
+    565.0
+   ],
+   "smallest_scenario_tw": {
+    "today": null,
+    "cmos_limit": 1000.0
+   },
+   "times_sun": [
+    3.73e-14,
+    5.6e-11
+   ]
+  },
+  "em_economy": {
+   "where": "anywhere",
+   "latency_s": null,
+   "basis": "a trillion ems at 1,000 times human speed (Hanson 2016), 1e15-1e18 FLOP/s each at human speed",
+   "kind": "rate",
+   "flop_s": [
+    1e+30,
+    1e+33
+   ],
+   "power_today_tw": [
+    714000.0,
+    714000000.0
+   ],
+   "power_cmos_limit_tw": [
+    3400.0,
+    3400000.0
+   ],
+   "power_landauer_330K_tw": [
+    1.52,
+    152000.0
+   ],
+   "share_of_night_half_light_today": [
+    2.8,
+    4200.0
+   ],
+   "orbit_moon_w_m2_today": [
+    104.0,
+    157000.0
+   ],
+   "orbit_moon_k_today": [
+    65.3,
+    157000.0
+   ],
+   "if_on_moon_k_today": [
+    11800.0,
+    18800000.0
+   ],
+   "smallest_scenario_tw": {
+    "today": null,
+    "cmos_limit": null
+   },
+   "times_sun": [
+    1.87e-09,
+    1.87e-06
+   ]
+  },
+  "wbe_level_4": {
+   "where": "anywhere",
+   "latency_s": null,
+   "basis": "one human brain emulated at level 4 spiking neural network (Sandberg & Bostrom 2008)",
+   "kind": "rate",
+   "flop_s": [
+    1e+18,
+    1e+18
+   ],
+   "power_today_tw": [
+    7.14e-07,
+    7.14e-07
+   ],
+   "power_cmos_limit_tw": [
+    3.4e-09,
+    3.4e-09
+   ],
+   "power_landauer_330K_tw": [
+    1.52e-12,
+    1.52e-10
+   ],
+   "share_of_night_half_light_today": [
+    2.8e-12,
+    4.2e-12
+   ],
+   "orbit_moon_w_m2_today": [
+    1.04e-10,
+    1.57e-10
+   ],
+   "orbit_moon_k_today": [
+    6.53e-11,
+    1.57e-10
+   ],
+   "if_on_moon_k_today": [
+    1.18e-08,
+    1.88e-08
+   ],
+   "smallest_scenario_tw": {
+    "today": 1.0,
+    "cmos_limit": 1.0
+   },
+   "times_sun": [
+    1.87e-21,
+    1.87e-21
+   ]
+  },
+  "wbe_level_5": {
+   "where": "anywhere",
+   "latency_s": null,
+   "basis": "one human brain emulated at level 5 electrophysiology (Sandberg & Bostrom 2008)",
+   "kind": "rate",
+   "flop_s": [
+    1e+22,
+    1e+22
+   ],
+   "power_today_tw": [
+    0.00714,
+    0.00714
+   ],
+   "power_cmos_limit_tw": [
+    3.4e-05,
+    3.4e-05
+   ],
+   "power_landauer_330K_tw": [
+    1.52e-08,
+    1.52e-06
+   ],
+   "share_of_night_half_light_today": [
+    2.8e-08,
+    4.2e-08
+   ],
+   "orbit_moon_w_m2_today": [
+    1.04e-06,
+    1.57e-06
+   ],
+   "orbit_moon_k_today": [
+    6.53e-07,
+    1.57e-06
+   ],
+   "if_on_moon_k_today": [
+    0.000118,
+    0.000188
+   ],
+   "smallest_scenario_tw": {
+    "today": 1.0,
+    "cmos_limit": 1.0
+   },
+   "times_sun": [
+    1.87e-17,
+    1.87e-17
+   ]
+  },
+  "wbe_level_6": {
+   "where": "anywhere",
+   "latency_s": null,
+   "basis": "one human brain emulated at level 6 metabolome (Sandberg & Bostrom 2008)",
+   "kind": "rate",
+   "flop_s": [
+    1e+25,
+    1e+25
+   ],
+   "power_today_tw": [
+    7.14,
+    7.14
+   ],
+   "power_cmos_limit_tw": [
+    0.034,
+    0.034
+   ],
+   "power_landauer_330K_tw": [
+    1.52e-05,
+    0.00152
+   ],
+   "share_of_night_half_light_today": [
+    2.8e-05,
+    4.2e-05
+   ],
+   "orbit_moon_w_m2_today": [
+    0.00104,
+    0.00157
+   ],
+   "orbit_moon_k_today": [
+    0.000653,
+    0.00157
+   ],
+   "if_on_moon_k_today": [
+    0.118,
+    0.188
+   ],
+   "smallest_scenario_tw": {
+    "today": 10.0,
+    "cmos_limit": 1.0
+   },
+   "times_sun": [
+    1.87e-14,
+    1.87e-14
+   ]
+  },
+  "wbe_level_7": {
+   "where": "anywhere",
+   "latency_s": null,
+   "basis": "one human brain emulated at level 7 proteome (Sandberg & Bostrom 2008)",
+   "kind": "rate",
+   "flop_s": [
+    1e+26,
+    1e+26
+   ],
+   "power_today_tw": [
+    71.4,
+    71.4
+   ],
+   "power_cmos_limit_tw": [
+    0.34,
+    0.34
+   ],
+   "power_landauer_330K_tw": [
+    0.000152,
+    0.0152
+   ],
+   "share_of_night_half_light_today": [
+    0.00028,
+    0.00042
+   ],
+   "orbit_moon_w_m2_today": [
+    0.0104,
+    0.0157
+   ],
+   "orbit_moon_k_today": [
+    0.00653,
+    0.0157
+   ],
+   "if_on_moon_k_today": [
+    1.18,
+    1.88
+   ],
+   "smallest_scenario_tw": {
+    "today": 100.0,
+    "cmos_limit": 1.0
+   },
+   "times_sun": [
+    1.87e-13,
+    1.87e-13
+   ]
+  },
+  "wbe_level_8": {
+   "where": "anywhere",
+   "latency_s": null,
+   "basis": "one human brain emulated at level 8 states of protein complexes (Sandberg & Bostrom 2008)",
+   "kind": "rate",
+   "flop_s": [
+    1e+27,
+    1e+27
+   ],
+   "power_today_tw": [
+    714.0,
+    714.0
+   ],
+   "power_cmos_limit_tw": [
+    3.4,
+    3.4
+   ],
+   "power_landauer_330K_tw": [
+    0.00152,
+    0.152
+   ],
+   "share_of_night_half_light_today": [
+    0.0028,
+    0.0042
+   ],
+   "orbit_moon_w_m2_today": [
+    0.104,
+    0.157
+   ],
+   "orbit_moon_k_today": [
+    0.0653,
+    0.157
+   ],
+   "if_on_moon_k_today": [
+    11.8,
+    18.8
+   ],
+   "smallest_scenario_tw": {
+    "today": 1000.0,
+    "cmos_limit": 10.0
+   },
+   "times_sun": [
+    1.87e-12,
+    1.87e-12
+   ]
+  },
+  "wbe_level_9": {
+   "where": "anywhere",
+   "latency_s": null,
+   "basis": "one human brain emulated at level 9 distribution of complexes (Sandberg & Bostrom 2008)",
+   "kind": "rate",
+   "flop_s": [
+    1e+30,
+    1e+30
+   ],
+   "power_today_tw": [
+    714000.0,
+    714000.0
+   ],
+   "power_cmos_limit_tw": [
+    3400.0,
+    3400.0
+   ],
+   "power_landauer_330K_tw": [
+    1.52,
+    152.0
+   ],
+   "share_of_night_half_light_today": [
+    2.8,
+    4.2
+   ],
+   "orbit_moon_w_m2_today": [
+    104.0,
+    157.0
+   ],
+   "orbit_moon_k_today": [
+    65.3,
+    157.0
+   ],
+   "if_on_moon_k_today": [
+    11800.0,
+    18800.0
+   ],
+   "smallest_scenario_tw": {
+    "today": null,
+    "cmos_limit": 10000.0
+   },
+   "times_sun": [
+    1.87e-09,
+    1.87e-09
+   ]
+  },
+  "wbe_level_10": {
+   "where": "anywhere",
+   "latency_s": null,
+   "basis": "one human brain emulated at level 10 stochastic behaviour of single molecules (Sandberg & Bostrom 2008)",
+   "kind": "rate",
+   "flop_s": [
+    1e+43,
+    1e+43
+   ],
+   "power_today_tw": [
+    7.14e+18,
+    7.14e+18
+   ],
+   "power_cmos_limit_tw": [
+    3.4e+16,
+    3.4e+16
+   ],
+   "power_landauer_330K_tw": [
+    15200000000000.0,
+    1520000000000000.0
+   ],
+   "share_of_night_half_light_today": [
+    28000000000000.0,
+    42000000000000.0
+   ],
+   "orbit_moon_w_m2_today": [
+    1040000000000000.0,
+    1570000000000000.0
+   ],
+   "orbit_moon_k_today": [
+    653000000000000.0,
+    1570000000000000.0
+   ],
+   "if_on_moon_k_today": [
+    1.18e+17,
+    1.88e+17
+   ],
+   "smallest_scenario_tw": {
+    "today": null,
+    "cmos_limit": null
+   },
+   "times_sun": [
+    18700.0,
+    18700.0
+   ]
+  },
+  "ancestor_simulation": {
+   "where": "anywhere",
+   "latency_s": null,
+   "basis": "the mental history of humankind, 1e33-1e36 operations (Bostrom 2003); the product of his figures (100 billion people, 50 years each, 30 million s a year, 1e14-1e17 operations/s) is 1.5e34-1.5e37",
+   "kind": "campaign",
+   "flop": [
+    1e+33,
+    1e+36
+   ],
+   "energy_today_j": [
+    7.14e+20,
+    7.14e+23
+   ],
+   "energy_today_twh": [
+    198000.0,
+    198000000.0
+   ],
+   "days_at_1_tw_today": [
+    8270.0,
+    8270000.0
+   ],
+   "days_at_1000_tw_today": [
+    8.27,
+    8270.0
+   ],
+   "years_at_1000_tw_cmos_limit": [
+    0.000108,
+    0.108
+   ],
+   "years_at_10000_tw_landauer_330K": [
+    4.8e-09,
+    0.00048
+   ],
+   "product_of_terms": [
+    1.5e+34,
+    1.5e+37
+   ]
+  },
+  "evolution_anchor": {
+   "where": "anywhere",
+   "latency_s": null,
+   "basis": "the computation of all nervous systems through evolution, about 1e41 FLOP (Cotra 2020, via Ho 2022)",
+   "kind": "campaign",
+   "flop": [
+    1e+41,
+    1e+41
+   ],
+   "energy_today_j": [
+    7.14e+28,
+    7.14e+28
+   ],
+   "energy_today_twh": [
+    19800000000000.0,
+    19800000000000.0
+   ],
+   "days_at_1_tw_today": [
+    827000000000.0,
+    827000000000.0
+   ],
+   "days_at_1000_tw_today": [
+    827000000.0,
+    827000000.0
+   ],
+   "years_at_1000_tw_cmos_limit": [
+    10800.0,
+    10800.0
+   ],
+   "years_at_10000_tw_landauer_330K": [
+    0.48,
+    48.0
+   ]
+  },
+  "planetary_computer": {
+   "where": "beyond",
+   "latency_s": null,
+   "basis": "a computer of planetary mass, 1e42 operations/s (Bostrom 2003, after Bradbury 1999)",
+   "kind": "rate",
+   "flop_s": [
+    1e+42,
+    1e+42
+   ],
+   "power_today_tw": [
+    7.14e+17,
+    7.14e+17
+   ],
+   "power_cmos_limit_tw": [
+    3400000000000000.0,
+    3400000000000000.0
+   ],
+   "power_landauer_330K_tw": [
+    1520000000000.0,
+    152000000000000.0
+   ],
+   "share_of_night_half_light_today": [
+    2800000000000.0,
+    4200000000000.0
+   ],
+   "orbit_moon_w_m2_today": [
+    104000000000000.0,
+    157000000000000.0
+   ],
+   "orbit_moon_k_today": [
+    65300000000000.0,
+    157000000000000.0
+   ],
+   "if_on_moon_k_today": [
+    1.18e+16,
+    1.88e+16
+   ],
+   "smallest_scenario_tw": {
+    "today": null,
+    "cmos_limit": null
+   },
+   "times_sun": [
+    1870.0,
+    1870.0
+   ]
+  },
+  "matrioshka_brain": {
+   "where": "beyond",
+   "latency_s": null,
+   "basis": "a multi-layer Matrioshka brain on the Sun's 3e26 W (Bradbury 1999)",
+   "kind": "rate",
+   "flop_s": [
+    3e+42,
+    3e+42
+   ],
+   "power_today_tw": [
+    2.14e+18,
+    2.14e+18
+   ],
+   "power_cmos_limit_tw": [
+    1.02e+16,
+    1.02e+16
+   ],
+   "power_landauer_330K_tw": [
+    4550000000000.0,
+    455000000000000.0
+   ],
+   "share_of_night_half_light_today": [
+    8390000000000.0,
+    12600000000000.0
+   ],
+   "orbit_moon_w_m2_today": [
+    313000000000000.0,
+    470000000000000.0
+   ],
+   "orbit_moon_k_today": [
+    196000000000000.0,
+    470000000000000.0
+   ],
+   "if_on_moon_k_today": [
+    3.53e+16,
+    5.65e+16
+   ],
+   "smallest_scenario_tw": {
+    "today": null,
+    "cmos_limit": null
+   },
+   "times_sun": [
+    5600.0,
+    5600.0
+   ]
+  }
+ },
+ "moon_side": {
+  "data_centre_w_per_person_2024": 5.77,
+  "cases": {
+   "metropolis_x1": {
+    "tw": 0.000577,
+    "k": [
+     9.51e-06,
+     1.52e-05
+    ]
+   },
+   "metropolis_x100": {
+    "tw": 0.0577,
+    "k": [
+     0.000951,
+     0.00152
+    ]
+   },
+   "per_billion_people_x1": {
+    "tw": 0.00577,
+    "k": [
+     9.51e-05,
+     0.000152
+    ]
+   },
+   "per_billion_people_x100": {
+    "tw": 0.577,
+    "k": [
+     0.00951,
+     0.0152
+    ]
+   }
+  }
+ },
+ "per_person": {
+  "w_per_brain_equivalent_today": 714.0,
+  "w_per_brain_equivalent_cmos_limit": 3.4,
+  "ai_services_kw_per_person_today": [
+   0.714,
+   71.4
+  ],
+  "brain_equivalents_in_0_1_to_1_kw_today": [
+   0.14,
+   1.4
+  ],
+  "brain_equivalents_in_0_1_to_1_kw_cmos_limit": [
+   29.4,
+   294.0
+  ]
+ },
+ "limits": {
+  "bremermann_bits_per_s_per_kg": 1.356e+50,
+  "margolus_levitin_ops_per_s_per_kg": 5.426e+50,
+  "lloyd_laptop_ops_per_s": 5.426e+50,
+  "lloyd_laptop_bits": 2.13e+31,
+  "ordinary_matter_ops_per_s_per_kg": 1e+40,
+  "universe_ops": 1e+120,
+  "universe_bits": 1e+90,
+  "aestivation_gain": 1e+30,
+  "sun_luminosity_w": 3.828e+26,
+  "night_half_share_of_sun": 2.223e-09,
+  "matrioshka_ops_per_j": 1e+16,
+  "matrioshka_power_over_night_half": 352500000.0,
+  "matrioshka_power_over_sun": 0.7838,
+  "sun_at_landauer_330K_bits_per_s": 1.212e+47,
+  "schneier": {
+   "sun_year_j": 1.208e+34,
+   "bit_changes_at_3_2K": 2.734e+56,
+   "counter_bits": 187.5
+  },
+  "erase_2_256_at_2_7K_j": 2.992e+54,
+  "erase_2_256_sun_years": 2.477e+20
+ },
+ "latency": {
+  "moon_array_round_trip_s": 0.1334,
+  "earth_moon_one_way_s": 1.282,
+  "earth_moon_round_trip_s": 2.564,
+  "moon_to_earth_moon_l1_l2_one_way_s": 0.2052,
+  "moon_to_sun_earth_l1_l2_one_way_s": [
+   3.71,
+   6.274
+  ],
+  "conversation_gap_s": 0.208
+ },
+ "links": {
+  "tbird_bps": 200000000000.0,
+  "llcd_bps": 622000000.0,
+  "text_to_earth_bps": [
+   33000000000000.0,
+   3300000000000000.0
+  ],
+  "text_tbird_links": [
+   165.0,
+   16500.0
+  ],
+  "video_to_earth_bps": 1.03e+17,
+  "video_tbird_links": 515000.0
+ }
+}

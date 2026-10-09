@@ -21,11 +21,16 @@ on this laptop. The findings behind them are in the [README](README.md).
      column; then the added dimming that holds the planned climate's energy budget. The climate programme stays
      paused.
    - **Whose:** the shield's work on its films.
-2. **How many people, where, using what.** The Moon's population has never been set. The metropolis brief assumes
-   2 kW a person without a basis; decent living takes about 0.5 kW, and needs stop rising near 2 kW. Demand by sector
-   and the three power ledgers of the industrial architecture follow from the population.
+2. **How many people, where, using what.** The author's working scale is 20–30 billion across the Solar System at
+   the frontier of thousands to tens of thousands of years ([population](population.md)). The placement among
+   Earth, the Moon and the array, and the energy band (2–6 kW of primary energy a person, centred on Europe's 3.7),
+   set every requirement after them. The resources domain's industry screen reads the scale with Earth at 10.3
+   billion and 2–14 billion in the array, and this domain's with 16–20 billion on Earth and 0.1–1 billion in the
+   array; the placement settles both.
 
-   **How:** scenarios of population and energy per person, with the author's guidance on scale.
+   **How:** the author's placement; then the Moon's heat answered beside the glow's, its water beyond its runoff,
+   dense districts' heat, people between the surface and orbit, and the array's habitats (population.md, its open
+   questions).
 3. **The power system through the night.** Fusion is a planning assumption and a conditional technology. The
    alternatives:
    - a grid from the day side, with 9–19% losses over 4,000–5,500 km;
@@ -71,10 +76,12 @@ on this laptop. The findings behind them are in the [README](README.md).
    - Rail and metro designed around 0.17–0.25 m/s² for standing riders, or seated travel.
    - Walking and running at 0.16 g.
    - The sky boats' traffic system, which the sky-fleet study left open.
-9. **Computing.** Demand for the array's control and its services; what must stay on the Moon within the 0.13 s
-   round trip; radiators in orbit. Computing and industry draw on the light the fleet collects or turns away, and
-   each is weighed by what it does to the Moon's heat and the glow (README, finding 1). With the planned
-   `research/array-industry` branch.
+9. **Computing.** Supply and demand are in [computing](computing.md): the light outruns any computing the array can
+   build, mass binds first and heat placement next. Its open questions, in order: how much computing the civilization
+   wants, digital minds included; processor mass and life at the ring radius; where large computing sits and its
+   share of the planned climate's heat budget; the path in energy per operation; the management twin's resolution by
+   place; services to Earth; and collectors that dim the Moon while feeding computing. Each is weighed by what it does
+   to the Moon's heat and the glow (README, finding 1). With the planned `research/array-industry` branch.
 10. **Work, maintenance and the economy.** Maintenance runs 2–4% of replacement value a year; who does it, how much is
     automated, and how work is shared belong to the human paper. Provisioning supplies the hours and energy.
 11. **Lamps and the dark night.** The summit's night has about 190 hours that need lamps. Their energy, and the

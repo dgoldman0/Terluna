@@ -1,0 +1,1591 @@
+{
+ "schema": "terluna.provisioning.population/1",
+ "producer": {
+  "domain": "provisioning",
+  "files": {
+   "provisioning/population.py": "645ed9bf34e49598"
+  },
+  "inputs": {
+   "provisioning/results/first_screen.json": "70ba4c24a3ba43b9",
+   "research/studies/solar_shield_array/results/array_heat.json": "d964f1a5e1dec2e9",
+   "research/studies/solar_shield_array/results/electromagnetic.json": "a8184c148766522b",
+   "research/studies/joint_synthesis/results/ledgers.json": "b370faf4c735a78d",
+   "research/studies/sky_fleet/results/sky_fleet.json": "c96dfc663f12756c",
+   "geography/results/atlas.json": "78cfbf2f469eb339",
+   "geography/results/drainage.json": "18494e3d3656ead7",
+   "provisioning/population_sources.json": "83462bddb1e616de"
+  },
+  "constants": {
+   "EARTH_GM": 398600441800000.0,
+   "EARTH_MOON_DISTANCE": 384400000.0,
+   "EARTH_RADIUS": 6371000.0,
+   "EARTH_SIDEREAL_DAY_S": 86164.0905,
+   "JULIAN_YEAR_DAYS": 365.25,
+   "MOON_GM": 4902800118000.0,
+   "MOON_RADIUS": 1737400.0,
+   "MOON_SURFACE_GRAVITY": 1.6242188765608128,
+   "SPEED_OF_LIGHT": 299792458.0,
+   "STANDARD_GRAVITY": 9.80665,
+   "SYNODIC_MONTH_DAYS": 29.53059
+  }
+ },
+ "evidence": "Scenario arithmetic on committed products (the provisioning first screen, the shield study's array heat and power links, the joint ledger, the sky fleet, the atlas and drainage) with the literature values named in population_sources.json. Closed form; no demographic, climate, food or orbit model is run. Population placements are scenarios for comparison at the author's 20-30 billion.",
+ "reading_rule": "people in billions unless named; energy per person in kW of primary energy by the substitution method unless named final; heat in TW and W/m2 averaged over the named body; warming in K; dimming in percent of the design sunlight; land in km2 or ha as named; water in km3 a year and m3 per person a year; mass in Gt; times in hours or years; ranges pair the low and high ends of their inputs.",
+ "horizons": {
+  "today_billion": 8.2,
+  "wpp_peak": {
+   "billion": 10.3,
+   "year": 2085
+  },
+  "wpp_2100_billion": 10.2,
+  "ihme_peak": {
+   "billion": 9.73,
+   "year": 2064
+  },
+  "ihme_2100_billion": 8.79,
+  "history_percent_per_year": {
+   "year0_to_1750": 0.0553,
+   "year1000_to_1750": 0.1247,
+   "year1500_to_1750": 0.183
+  },
+  "peak_growth_percent": 2.04,
+  "replacement_fertility": 2.1,
+  "paths_from_2100": {
+   "20_by_3000": {
+    "percent_per_year": 0.07482,
+    "doubling_years": 926,
+    "net_reproduction_rate": 1.0227
+   },
+   "20_by_5000": {
+    "percent_per_year": 0.02322,
+    "doubling_years": 2985,
+    "net_reproduction_rate": 1.007
+   },
+   "20_by_12026": {
+    "percent_per_year": 0.006784,
+    "doubling_years": 10218,
+    "net_reproduction_rate": 1.002
+   },
+   "25_by_3000": {
+    "percent_per_year": 0.09961,
+    "doubling_years": 696,
+    "net_reproduction_rate": 1.0303
+   },
+   "25_by_5000": {
+    "percent_per_year": 0.03091,
+    "doubling_years": 2242,
+    "net_reproduction_rate": 1.0093
+   },
+   "25_by_12026": {
+    "percent_per_year": 0.009032,
+    "doubling_years": 7675,
+    "net_reproduction_rate": 1.0027
+   },
+   "30_by_3000": {
+    "percent_per_year": 0.1199,
+    "doubling_years": 578,
+    "net_reproduction_rate": 1.0366
+   },
+   "30_by_5000": {
+    "percent_per_year": 0.0372,
+    "doubling_years": 1863,
+    "net_reproduction_rate": 1.0112
+   },
+   "30_by_12026": {
+    "percent_per_year": 0.01087,
+    "doubling_years": 6378,
+    "net_reproduction_rate": 1.0033
+   }
+  },
+  "moon_settlement": {
+   "start_people": 10000000.0,
+   "from_year": 2526,
+   "1%": {
+    "years_to_1_billion": 461,
+    "year": 2987
+   },
+   "2%": {
+    "years_to_1_billion": 230,
+    "year": 2756
+   }
+  }
+ },
+ "energy_growth": {
+  "today_tw": 18.9,
+  "percent_per_year": 2.0,
+  "years_to": {
+   "flanner_2100_on_earth": 82,
+   "one_w_m2_on_earth": 165,
+   "fleet_intercepted_low": 576,
+   "fleet_intercepted_high": 588
+  },
+  "tw": {
+   "flanner_2100_on_earth": 97,
+   "one_w_m2_on_earth": 510,
+   "fleet_intercepted_low": 1912605,
+   "fleet_intercepted_high": 2446227
+  }
+ },
+ "affluence": {
+  "primary_kw_2025": {
+   "world": 2.31,
+   "eu27": 3.68,
+   "high_income": 5.99,
+   "united_states": 8.56,
+   "germany": 3.79,
+   "japan": 4.24,
+   "france": 4.29,
+   "united_kingdom": 2.87,
+   "switzerland": 3.1
+  },
+  "eu_final_kw_2024": 2.59,
+  "eu_final_share_of_gross": 0.66,
+  "eu_industry_share_of_final": 0.245,
+  "decent_living_final_kw": [
+   0.41,
+   0.48,
+   0.58
+  ],
+  "needs_plateau_final_kw": 1.9,
+  "two_thousand_watt_primary_kw": 2.0,
+  "band_primary_kw": {
+   "efficient": 2.0,
+   "european": 3.68,
+   "high_income": 5.99,
+   "american": 8.56
+  },
+  "computing_in_orbit_kw": [
+   0.1,
+   1.0
+  ],
+  "living": {
+   "decent_floor_m2": 23.8,
+   "metropolis_floor_m2": 70.0,
+   "torus_projected_m2": 67,
+   "decent_pkm_per_year": 8300.0,
+   "decent_water_l_day": 50.0,
+   "travel_hours_per_day": 1.1
+  }
+ },
+ "heat": {
+  "moon_w_m2_per_tw": 0.0264,
+  "moon_tw_per_k": [
+   38,
+   61
+  ],
+  "design_sunlight_w_m2": 293.3125,
+  "dimming_percent_per_tw": [
+   0.00868,
+   0.01389
+  ],
+  "tw_per_percent_dimming": [
+   72.0,
+   115.2
+  ],
+  "fleet_glow_w_m2": [
+   5.66,
+   9.92
+  ],
+  "fleet_glow_as_tw_used": [
+   214,
+   376
+  ],
+  "earth_w_m2_per_tw": 0.001961,
+  "moon_over_earth_per_tw": 13.47,
+  "earth_k_per_w_m2": 0.763,
+  "flanner_w_m2": {
+   "2005": 0.028,
+   "2040": 0.059,
+   "2100": 0.19
+  },
+  "flanner_2100_tw": 96.9,
+  "ar6_total_forcing_w_m2": 2.72,
+  "placement_factor": {
+   "all_on_moon_thermal": 1.0,
+   "industry_in_orbit_thermal": 0.755,
+   "industry_in_orbit_power_from_orbit": 0.686
+  },
+  "moon": {
+   "efficient": {
+    "all_on_moon_thermal": {
+     "kw_per_person": 2.0,
+     "billion_at_tolerance": {
+      "0.1K": [
+       1.9,
+       3.05
+      ],
+      "0.5K": [
+       9.5,
+       15.25
+      ]
+     },
+     "billion_answered_by_1pct_dimming": [
+      36.0,
+      57.6
+     ],
+     "dimming_percent_per_billion": [
+      0.0174,
+      0.0278
+     ],
+     "city_w_m2_at_40000_km2": 80.0,
+     "summit_region_w_m2": 6.92
+    },
+    "industry_in_orbit_thermal": {
+     "kw_per_person": 1.51,
+     "billion_at_tolerance": {
+      "0.1K": [
+       2.52,
+       4.04
+      ],
+      "0.5K": [
+       12.58,
+       20.2
+      ]
+     },
+     "billion_answered_by_1pct_dimming": [
+      47.7,
+      76.3
+     ],
+     "dimming_percent_per_billion": [
+      0.0131,
+      0.021
+     ],
+     "city_w_m2_at_40000_km2": 60.4,
+     "summit_region_w_m2": 5.22
+    },
+    "industry_in_orbit_power_from_orbit": {
+     "kw_per_person": 1.371,
+     "billion_at_tolerance": {
+      "0.1K": [
+       2.77,
+       4.45
+      ],
+      "0.5K": [
+       13.86,
+       22.25
+      ]
+     },
+     "billion_answered_by_1pct_dimming": [
+      52.5,
+      84.0
+     ],
+     "dimming_percent_per_billion": [
+      0.0119,
+      0.0191
+     ],
+     "city_w_m2_at_40000_km2": 54.8,
+     "summit_region_w_m2": 4.74
+    }
+   },
+   "european": {
+    "all_on_moon_thermal": {
+     "kw_per_person": 3.68,
+     "billion_at_tolerance": {
+      "0.1K": [
+       1.03,
+       1.66
+      ],
+      "0.5K": [
+       5.16,
+       8.29
+      ]
+     },
+     "billion_answered_by_1pct_dimming": [
+      19.6,
+      31.3
+     ],
+     "dimming_percent_per_billion": [
+      0.032,
+      0.0511
+     ],
+     "city_w_m2_at_40000_km2": 147.2,
+     "summit_region_w_m2": 12.73
+    },
+    "industry_in_orbit_thermal": {
+     "kw_per_person": 2.778,
+     "billion_at_tolerance": {
+      "0.1K": [
+       1.37,
+       2.2
+      ],
+      "0.5K": [
+       6.84,
+       10.98
+      ]
+     },
+     "billion_answered_by_1pct_dimming": [
+      25.9,
+      41.4
+     ],
+     "dimming_percent_per_billion": [
+      0.0241,
+      0.0386
+     ],
+     "city_w_m2_at_40000_km2": 111.1,
+     "summit_region_w_m2": 9.61
+    },
+    "industry_in_orbit_power_from_orbit": {
+     "kw_per_person": 2.523,
+     "billion_at_tolerance": {
+      "0.1K": [
+       1.51,
+       2.42
+      ],
+      "0.5K": [
+       7.53,
+       12.09
+      ]
+     },
+     "billion_answered_by_1pct_dimming": [
+      28.5,
+      45.6
+     ],
+     "dimming_percent_per_billion": [
+      0.0219,
+      0.0351
+     ],
+     "city_w_m2_at_40000_km2": 100.9,
+     "summit_region_w_m2": 8.73
+    }
+   },
+   "high_income": {
+    "all_on_moon_thermal": {
+     "kw_per_person": 5.99,
+     "billion_at_tolerance": {
+      "0.1K": [
+       0.63,
+       1.02
+      ],
+      "0.5K": [
+       3.17,
+       5.09
+      ]
+     },
+     "billion_answered_by_1pct_dimming": [
+      12.0,
+      19.2
+     ],
+     "dimming_percent_per_billion": [
+      0.052,
+      0.0832
+     ],
+     "city_w_m2_at_40000_km2": 239.6,
+     "summit_region_w_m2": 20.73
+    },
+    "industry_in_orbit_thermal": {
+     "kw_per_person": 4.522,
+     "billion_at_tolerance": {
+      "0.1K": [
+       0.84,
+       1.35
+      ],
+      "0.5K": [
+       4.2,
+       6.74
+      ]
+     },
+     "billion_answered_by_1pct_dimming": [
+      15.9,
+      25.5
+     ],
+     "dimming_percent_per_billion": [
+      0.0393,
+      0.0628
+     ],
+     "city_w_m2_at_40000_km2": 180.9,
+     "summit_region_w_m2": 15.65
+    },
+    "industry_in_orbit_power_from_orbit": {
+     "kw_per_person": 4.106,
+     "billion_at_tolerance": {
+      "0.1K": [
+       0.93,
+       1.49
+      ],
+      "0.5K": [
+       4.63,
+       7.43
+      ]
+     },
+     "billion_answered_by_1pct_dimming": [
+      17.5,
+      28.0
+     ],
+     "dimming_percent_per_billion": [
+      0.0357,
+      0.0571
+     ],
+     "city_w_m2_at_40000_km2": 164.2,
+     "summit_region_w_m2": 14.21
+    }
+   },
+   "american": {
+    "all_on_moon_thermal": {
+     "kw_per_person": 8.56,
+     "billion_at_tolerance": {
+      "0.1K": [
+       0.44,
+       0.71
+      ],
+      "0.5K": [
+       2.22,
+       3.56
+      ]
+     },
+     "billion_answered_by_1pct_dimming": [
+      8.4,
+      13.5
+     ],
+     "dimming_percent_per_billion": [
+      0.0743,
+      0.1189
+     ],
+     "city_w_m2_at_40000_km2": 342.4,
+     "summit_region_w_m2": 29.62
+    },
+    "industry_in_orbit_thermal": {
+     "kw_per_person": 6.463,
+     "billion_at_tolerance": {
+      "0.1K": [
+       0.59,
+       0.94
+      ],
+      "0.5K": [
+       2.94,
+       4.72
+      ]
+     },
+     "billion_answered_by_1pct_dimming": [
+      11.1,
+      17.8
+     ],
+     "dimming_percent_per_billion": [
+      0.0561,
+      0.0898
+     ],
+     "city_w_m2_at_40000_km2": 258.5,
+     "summit_region_w_m2": 22.36
+    },
+    "industry_in_orbit_power_from_orbit": {
+     "kw_per_person": 5.868,
+     "billion_at_tolerance": {
+      "0.1K": [
+       0.65,
+       1.04
+      ],
+      "0.5K": [
+       3.24,
+       5.2
+      ]
+     },
+     "billion_answered_by_1pct_dimming": [
+      12.3,
+      19.6
+     ],
+     "dimming_percent_per_billion": [
+      0.051,
+      0.0815
+     ],
+     "city_w_m2_at_40000_km2": 234.7,
+     "summit_region_w_m2": 20.3
+    }
+   }
+  },
+  "earth": {
+   "efficient": {
+    "billion_at_flanner_2100_thermal": 48.5,
+    "k_per_billion_thermal": 0.00299
+   },
+   "european": {
+    "billion_at_flanner_2100_thermal": 26.3,
+    "k_per_billion_thermal": 0.00551
+   },
+   "high_income": {
+    "billion_at_flanner_2100_thermal": 16.2,
+    "k_per_billion_thermal": 0.00896
+   },
+   "american": {
+    "billion_at_flanner_2100_thermal": 11.3,
+    "k_per_billion_thermal": 0.01281
+   }
+  },
+  "moon_area_km2": 37932328
+ },
+ "night": {
+  "night_hours": 354.4,
+  "final_kwh_per_person": {
+   "efficient": 353,
+   "european": 650,
+   "high_income": 1058,
+   "american": 1511
+  },
+  "metropolis_brief_kwh_per_person": 709,
+  "earth_pumped_storage_kwh_per_person": 1.1
+ },
+ "water": {
+  "earth_runoff_km3": 45500.0,
+  "moon_runoff_km3": 7240,
+  "moon_share_of_earth": 0.159,
+  "falkenmark_m3": {
+   "stress": 1700.0,
+   "scarcity": 1000.0,
+   "absolute": 500.0
+  },
+  "earth_billion_at": {
+   "stress": 26.8,
+   "scarcity": 45.5,
+   "absolute": 91.0
+  },
+  "moon_billion_at": {
+   "stress": 4.26,
+   "scarcity": 7.24,
+   "absolute": 14.48
+  },
+  "earth_today_m3_per_person": 5549,
+  "water_footprint_m3": {
+   "world": 1385.0,
+   "united_states": 2842.0
+  },
+  "moon_lift_to_mean_land_kwh_m3": 1.06
+ },
+ "food": {
+  "earth_farmland_ha_per_person_now": 0.585,
+  "plant_rich_ha_per_person": [
+   0.13,
+   0.14
+  ],
+  "american_diet_ha_per_person": 1.08,
+  "earth_billion_on_todays_farmland": {
+   "plant_rich": [
+    34.2,
+    36.9
+   ],
+   "american": 4.4
+  },
+  "within_boundaries_billion": 10.2,
+  "earth_cropland_share_of_ice_free": 0.123,
+  "moon_dry_land_km2": 23389000.0,
+  "moon_m2_per_person_planning": [
+   131,
+   341
+  ],
+  "moon_m2_per_person_potential": [
+   60.0,
+   81.0
+  ],
+  "moon_billion_at_earths_cropland_share": [
+   8.4,
+   22.0
+  ],
+  "moon_dry_land_share_per_billion": [
+   0.0056,
+   0.0146
+  ]
+ },
+ "materials": {
+  "stocks_t_per_person": {
+   "decent": 42.0,
+   "world": 115.0,
+   "developed": 335.0
+  },
+  "stocks_2010_gt": 792.0
+ },
+ "array": {
+  "shield_t_per_person": 990.0,
+  "shield_t_m2": 4.41,
+  "shield_area_m2_per_person": 224,
+  "dense_share": 0.25,
+  "habitats": {
+   "10_million": {
+    "shield_gt": [
+     2.5,
+     9.9
+    ],
+    "times_fleet_mass": 0.21,
+    "years_of_film_plant_output": [
+     2.1,
+     4.3
+    ],
+    "days_of_matter_stream": 0.4,
+    "farm_km2": 200,
+    "power_tw": 0.03
+   },
+   "100_million": {
+    "shield_gt": [
+     24.8,
+     99.0
+    ],
+    "times_fleet_mass": 2.13,
+    "years_of_film_plant_output": [
+     21.3,
+     42.9
+    ],
+    "days_of_matter_stream": 4.2,
+    "farm_km2": 2000,
+    "power_tw": 0.3
+   },
+   "1_billion": {
+    "shield_gt": [
+     247.5,
+     990.0
+    ],
+    "times_fleet_mass": 21.34,
+    "years_of_film_plant_output": [
+     213.4,
+     428.8
+    ],
+    "days_of_matter_stream": 42.4,
+    "farm_km2": 20000,
+    "power_tw": 3.0
+   }
+  },
+  "spin": {
+   "2rpm": {
+    "earth_g_radius_m": 224,
+    "moon_g_radius_m": 37.0
+   },
+   "4rpm": {
+    "earth_g_radius_m": 56,
+    "moon_g_radius_m": 9.3
+   }
+  },
+  "matter_stream_gt_per_year": 8521,
+  "fleet_mass_gt": [
+   46.2,
+   46.4
+  ],
+  "fleet_area_km2": [
+   2811000000.0,
+   2823000000.0
+  ],
+  "film_upkeep_gt_per_year": [
+   2.31,
+   4.64
+  ],
+  "intercepted_pw": [
+   1913,
+   2446
+  ],
+  "night_half_pw": 851,
+  "collector_km2_per_tw": [
+   2449,
+   3674
+  ],
+  "radiator_km2_per_tw": 826,
+  "data_centres_tw": 0.047,
+  "moon_w_m2_per_tw_in_orbit": 4.983010718834093e-05
+ },
+ "commute": {
+  "ring_radius_km": 20000.0,
+  "traveller_kg": [
+   400.0,
+   1000.0
+  ],
+  "minimum_kwh_per_kg": 0.75,
+  "minimum_kwh_per_traveller": [
+   300,
+   750
+  ],
+  "lift_to_platform_kwh": [
+   12.6,
+   31.6
+  ],
+  "return_delta_v_m_s": 241,
+  "exhaust_m_s": 4565,
+  "h2_share_of_propellant": 0.1453,
+  "kwh_per_kg_propellant": [
+   7.27,
+   7.56
+  ],
+  "rotations_per_year": {
+   "weekly": 52.18,
+   "each_lunar_cycle": 12.37,
+   "every_other_cycle": 6.18,
+   "quarterly": 4.0
+  },
+  "transfers": {
+   "hohmann": {
+    "hours": 14.1,
+    "delta_v_vacuum_m_s": 2576,
+    "with_losses_m_s": 3076,
+    "propellant_kg_per_kg_round_trip": 1.016,
+    "round_trip_mwh_per_traveller": [
+     [
+      2.95,
+      3.07
+     ],
+     [
+      7.38,
+      7.68
+     ]
+    ],
+    "continuous_kw_per_commuter": {
+     "weekly": [
+      17.6,
+      45.7
+     ],
+     "each_lunar_cycle": [
+      4.2,
+      10.8
+     ],
+     "every_other_cycle": [
+      2.1,
+      5.4
+     ],
+     "quarterly": [
+      1.3,
+      3.5
+     ]
+    }
+   },
+   "apolune_twice_ring": {
+    "hours": 7.3,
+    "delta_v_vacuum_m_s": 2874,
+    "with_losses_m_s": 3374,
+    "propellant_kg_per_kg_round_trip": 1.148,
+    "round_trip_mwh_per_traveller": [
+     [
+      3.34,
+      3.47
+     ],
+     [
+      8.34,
+      8.68
+     ]
+    ],
+    "continuous_kw_per_commuter": {
+     "weekly": [
+      19.9,
+      51.7
+     ],
+     "each_lunar_cycle": [
+      4.7,
+      12.2
+     ],
+     "every_other_cycle": [
+      2.4,
+      6.1
+     ],
+     "quarterly": [
+      1.5,
+      4.0
+     ]
+    }
+   },
+   "parabolic": {
+    "hours": 5.9,
+    "delta_v_vacuum_m_s": 3104,
+    "with_losses_m_s": 3604,
+    "propellant_kg_per_kg_round_trip": 1.257,
+    "round_trip_mwh_per_traveller": [
+     [
+      3.65,
+      3.8
+     ],
+     [
+      9.13,
+      9.5
+     ]
+    ],
+    "continuous_kw_per_commuter": {
+     "weekly": [
+      21.7,
+      56.5
+     ],
+     "each_lunar_cycle": [
+      5.2,
+      13.4
+     ],
+     "every_other_cycle": [
+      2.6,
+      6.7
+     ],
+     "quarterly": [
+      1.7,
+      4.3
+     ]
+    }
+   }
+  },
+  "light_round_trip_s": 0.122,
+  "sky_fleet": {
+   "long_haul_mean_trip_km": 2729.0,
+   "winged_liner_mean_trip_hours": 5.2
+  }
+ },
+ "earth_service": {
+  "link_dc_efficiency": 0.508725,
+  "heat_on_earth_per_w_delivered": 1.376,
+  "thermal_plant_heat_per_w": 2.5,
+  "geo_altitude_km": 35793,
+  "tau_1978": 2.04,
+  "transmitter_diameter": {
+   "2.45GHz_geo_km": 0.98,
+   "2.45GHz_moon_km": 10.51,
+   "5.8GHz_geo_km": 0.41,
+   "5.8GHz_moon_km": 4.44
+  },
+  "rectenna_mean_w_m2": 49.0,
+  "rectenna_km2_per_tw": 20420.0,
+  "rectenna_km2": {
+   "20TW": 408000.0,
+   "100TW": 2042000.0
+  },
+  "rectenna_share_of_cropland": {
+   "20TW": 0.026,
+   "100TW": 0.128
+  },
+  "tw_on_one_percent_of_ice_free_land": 63.7,
+  "collector_km2_per_tw_delivered": [
+   4810.0,
+   7220.0
+  ],
+  "light_time_s": 1.282,
+  "light_round_trip_s": 2.56,
+  "llcd_bps": 622000000.0,
+  "shade_days_of_film_plant": [
+   1.6,
+   3.2
+  ]
+ },
+ "scenarios": {
+  "A": {
+   "name": "Earth-centred, 20 billion",
+   "billion": {
+    "earth": 16.0,
+    "moon": 2.0,
+    "array": 0.1,
+    "elsewhere": 1.9,
+    "total": 20.0
+   },
+   "by_energy": {
+    "efficient": {
+     "civilization_tw": 40,
+     "share_of_night_half": 4.7e-05,
+     "collectors_km2": [
+      98000.0,
+      147000.0
+     ],
+     "collector_share_of_fleet_area": [
+      3.5e-05,
+      5.2e-05
+     ],
+     "moon_tw": {
+      "all_on_moon_thermal": 4.0,
+      "industry_in_orbit_thermal": 3.02,
+      "industry_in_orbit_power_from_orbit": 2.74
+     },
+     "moon_w_m2": {
+      "all_on_moon_thermal": 0.106,
+      "industry_in_orbit_thermal": 0.08,
+      "industry_in_orbit_power_from_orbit": 0.072
+     },
+     "moon_dimming_percent": {
+      "all_on_moon_thermal": [
+       0.035,
+       0.056
+      ],
+      "industry_in_orbit_thermal": [
+       0.026,
+       0.042
+      ],
+      "industry_in_orbit_power_from_orbit": [
+       0.024,
+       0.038
+      ]
+     },
+     "earth_tw": 32,
+     "earth_w_m2": {
+      "thermal": 0.063,
+      "power_from_orbit": 0.057
+     },
+     "earth_k": {
+      "thermal": 0.048,
+      "power_from_orbit": 0.043
+     }
+    },
+    "european": {
+     "civilization_tw": 74,
+     "share_of_night_half": 8.6e-05,
+     "collectors_km2": [
+      180000.0,
+      270000.0
+     ],
+     "collector_share_of_fleet_area": [
+      6.4e-05,
+      9.6e-05
+     ],
+     "moon_tw": {
+      "all_on_moon_thermal": 7.36,
+      "industry_in_orbit_thermal": 5.56,
+      "industry_in_orbit_power_from_orbit": 5.05
+     },
+     "moon_w_m2": {
+      "all_on_moon_thermal": 0.194,
+      "industry_in_orbit_thermal": 0.147,
+      "industry_in_orbit_power_from_orbit": 0.133
+     },
+     "moon_dimming_percent": {
+      "all_on_moon_thermal": [
+       0.064,
+       0.102
+      ],
+      "industry_in_orbit_thermal": [
+       0.048,
+       0.077
+      ],
+      "industry_in_orbit_power_from_orbit": [
+       0.044,
+       0.07
+      ]
+     },
+     "earth_tw": 59,
+     "earth_w_m2": {
+      "thermal": 0.115,
+      "power_from_orbit": 0.105
+     },
+     "earth_k": {
+      "thermal": 0.088,
+      "power_from_orbit": 0.08
+     }
+    },
+    "high_income": {
+     "civilization_tw": 120,
+     "share_of_night_half": 0.000141,
+     "collectors_km2": [
+      293000.0,
+      440000.0
+     ],
+     "collector_share_of_fleet_area": [
+      0.000104,
+      0.000157
+     ],
+     "moon_tw": {
+      "all_on_moon_thermal": 11.98,
+      "industry_in_orbit_thermal": 9.04,
+      "industry_in_orbit_power_from_orbit": 8.21
+     },
+     "moon_w_m2": {
+      "all_on_moon_thermal": 0.316,
+      "industry_in_orbit_thermal": 0.239,
+      "industry_in_orbit_power_from_orbit": 0.217
+     },
+     "moon_dimming_percent": {
+      "all_on_moon_thermal": [
+       0.104,
+       0.166
+      ],
+      "industry_in_orbit_thermal": [
+       0.079,
+       0.126
+      ],
+      "industry_in_orbit_power_from_orbit": [
+       0.071,
+       0.114
+      ]
+     },
+     "earth_tw": 96,
+     "earth_w_m2": {
+      "thermal": 0.188,
+      "power_from_orbit": 0.171
+     },
+     "earth_k": {
+      "thermal": 0.143,
+      "power_from_orbit": 0.13
+     }
+    },
+    "american": {
+     "civilization_tw": 171,
+     "share_of_night_half": 0.000201,
+     "collectors_km2": [
+      419000.0,
+      629000.0
+     ],
+     "collector_share_of_fleet_area": [
+      0.000149,
+      0.000224
+     ],
+     "moon_tw": {
+      "all_on_moon_thermal": 17.12,
+      "industry_in_orbit_thermal": 12.93,
+      "industry_in_orbit_power_from_orbit": 11.74
+     },
+     "moon_w_m2": {
+      "all_on_moon_thermal": 0.452,
+      "industry_in_orbit_thermal": 0.341,
+      "industry_in_orbit_power_from_orbit": 0.31
+     },
+     "moon_dimming_percent": {
+      "all_on_moon_thermal": [
+       0.149,
+       0.238
+      ],
+      "industry_in_orbit_thermal": [
+       0.112,
+       0.18
+      ],
+      "industry_in_orbit_power_from_orbit": [
+       0.102,
+       0.163
+      ]
+     },
+     "earth_tw": 137,
+     "earth_w_m2": {
+      "thermal": 0.269,
+      "power_from_orbit": 0.244
+     },
+     "earth_k": {
+      "thermal": 0.205,
+      "power_from_orbit": 0.186
+     }
+    }
+   },
+   "moon_water_m3_per_person": 3620,
+   "earth_water_m3_per_person": 2844,
+   "moon_food_share_of_dry_land": [
+    0.011,
+    0.029
+   ],
+   "earth_food_ha_plant_rich": [
+    2.08,
+    2.25
+   ],
+   "earth_over_boundaries": 1.57,
+   "computing_tw": [
+    2.0,
+    20.0
+   ],
+   "computing_times_data_centres": [
+    43,
+    426
+   ],
+   "stocks_gt": {
+    "earth": 5360,
+    "moon": 670,
+    "times_2010": 7.6,
+    "array_shield": [
+     24.8,
+     99.0
+    ]
+   }
+  },
+  "B": {
+   "name": "Earth and Moon, 25 billion",
+   "billion": {
+    "earth": 18.0,
+    "moon": 4.0,
+    "array": 0.5,
+    "elsewhere": 2.5,
+    "total": 25.0
+   },
+   "by_energy": {
+    "efficient": {
+     "civilization_tw": 50,
+     "share_of_night_half": 5.9e-05,
+     "collectors_km2": [
+      122000.0,
+      184000.0
+     ],
+     "collector_share_of_fleet_area": [
+      4.4e-05,
+      6.5e-05
+     ],
+     "moon_tw": {
+      "all_on_moon_thermal": 8.0,
+      "industry_in_orbit_thermal": 6.04,
+      "industry_in_orbit_power_from_orbit": 5.48
+     },
+     "moon_w_m2": {
+      "all_on_moon_thermal": 0.211,
+      "industry_in_orbit_thermal": 0.159,
+      "industry_in_orbit_power_from_orbit": 0.145
+     },
+     "moon_dimming_percent": {
+      "all_on_moon_thermal": [
+       0.069,
+       0.111
+      ],
+      "industry_in_orbit_thermal": [
+       0.052,
+       0.084
+      ],
+      "industry_in_orbit_power_from_orbit": [
+       0.048,
+       0.076
+      ]
+     },
+     "earth_tw": 36,
+     "earth_w_m2": {
+      "thermal": 0.071,
+      "power_from_orbit": 0.064
+     },
+     "earth_k": {
+      "thermal": 0.054,
+      "power_from_orbit": 0.049
+     }
+    },
+    "european": {
+     "civilization_tw": 92,
+     "share_of_night_half": 0.000108,
+     "collectors_km2": [
+      225000.0,
+      338000.0
+     ],
+     "collector_share_of_fleet_area": [
+      8e-05,
+      0.00012
+     ],
+     "moon_tw": {
+      "all_on_moon_thermal": 14.72,
+      "industry_in_orbit_thermal": 11.11,
+      "industry_in_orbit_power_from_orbit": 10.09
+     },
+     "moon_w_m2": {
+      "all_on_moon_thermal": 0.389,
+      "industry_in_orbit_thermal": 0.293,
+      "industry_in_orbit_power_from_orbit": 0.266
+     },
+     "moon_dimming_percent": {
+      "all_on_moon_thermal": [
+       0.128,
+       0.204
+      ],
+      "industry_in_orbit_thermal": [
+       0.096,
+       0.154
+      ],
+      "industry_in_orbit_power_from_orbit": [
+       0.088,
+       0.14
+      ]
+     },
+     "earth_tw": 66,
+     "earth_w_m2": {
+      "thermal": 0.13,
+      "power_from_orbit": 0.118
+     },
+     "earth_k": {
+      "thermal": 0.099,
+      "power_from_orbit": 0.09
+     }
+    },
+    "high_income": {
+     "civilization_tw": 150,
+     "share_of_night_half": 0.000176,
+     "collectors_km2": [
+      367000.0,
+      550000.0
+     ],
+     "collector_share_of_fleet_area": [
+      0.00013,
+      0.000196
+     ],
+     "moon_tw": {
+      "all_on_moon_thermal": 23.96,
+      "industry_in_orbit_thermal": 18.09,
+      "industry_in_orbit_power_from_orbit": 16.42
+     },
+     "moon_w_m2": {
+      "all_on_moon_thermal": 0.633,
+      "industry_in_orbit_thermal": 0.478,
+      "industry_in_orbit_power_from_orbit": 0.434
+     },
+     "moon_dimming_percent": {
+      "all_on_moon_thermal": [
+       0.208,
+       0.333
+      ],
+      "industry_in_orbit_thermal": [
+       0.157,
+       0.251
+      ],
+      "industry_in_orbit_power_from_orbit": [
+       0.143,
+       0.228
+      ]
+     },
+     "earth_tw": 108,
+     "earth_w_m2": {
+      "thermal": 0.211,
+      "power_from_orbit": 0.192
+     },
+     "earth_k": {
+      "thermal": 0.161,
+      "power_from_orbit": 0.147
+     }
+    },
+    "american": {
+     "civilization_tw": 214,
+     "share_of_night_half": 0.000251,
+     "collectors_km2": [
+      524000.0,
+      786000.0
+     ],
+     "collector_share_of_fleet_area": [
+      0.000186,
+      0.00028
+     ],
+     "moon_tw": {
+      "all_on_moon_thermal": 34.24,
+      "industry_in_orbit_thermal": 25.85,
+      "industry_in_orbit_power_from_orbit": 23.47
+     },
+     "moon_w_m2": {
+      "all_on_moon_thermal": 0.904,
+      "industry_in_orbit_thermal": 0.682,
+      "industry_in_orbit_power_from_orbit": 0.62
+     },
+     "moon_dimming_percent": {
+      "all_on_moon_thermal": [
+       0.297,
+       0.476
+      ],
+      "industry_in_orbit_thermal": [
+       0.224,
+       0.359
+      ],
+      "industry_in_orbit_power_from_orbit": [
+       0.204,
+       0.326
+      ]
+     },
+     "earth_tw": 154,
+     "earth_w_m2": {
+      "thermal": 0.302,
+      "power_from_orbit": 0.274
+     },
+     "earth_k": {
+      "thermal": 0.231,
+      "power_from_orbit": 0.209
+     }
+    }
+   },
+   "moon_water_m3_per_person": 1810,
+   "earth_water_m3_per_person": 2528,
+   "moon_food_share_of_dry_land": [
+    0.022,
+    0.058
+   ],
+   "earth_food_ha_plant_rich": [
+    2.34,
+    2.53
+   ],
+   "earth_over_boundaries": 1.76,
+   "computing_tw": [
+    2.5,
+    25.0
+   ],
+   "computing_times_data_centres": [
+    53,
+    532
+   ],
+   "stocks_gt": {
+    "earth": 6030,
+    "moon": 1340,
+    "times_2010": 9.3,
+    "array_shield": [
+     123.8,
+     495.0
+    ]
+   }
+  },
+  "C": {
+   "name": "spread, 30 billion",
+   "billion": {
+    "earth": 20.0,
+    "moon": 5.0,
+    "array": 1.0,
+    "elsewhere": 4.0,
+    "total": 30.0
+   },
+   "by_energy": {
+    "efficient": {
+     "civilization_tw": 60,
+     "share_of_night_half": 7.1e-05,
+     "collectors_km2": [
+      147000.0,
+      220000.0
+     ],
+     "collector_share_of_fleet_area": [
+      5.2e-05,
+      7.8e-05
+     ],
+     "moon_tw": {
+      "all_on_moon_thermal": 10.0,
+      "industry_in_orbit_thermal": 7.55,
+      "industry_in_orbit_power_from_orbit": 6.86
+     },
+     "moon_w_m2": {
+      "all_on_moon_thermal": 0.264,
+      "industry_in_orbit_thermal": 0.199,
+      "industry_in_orbit_power_from_orbit": 0.181
+     },
+     "moon_dimming_percent": {
+      "all_on_moon_thermal": [
+       0.087,
+       0.139
+      ],
+      "industry_in_orbit_thermal": [
+       0.066,
+       0.105
+      ],
+      "industry_in_orbit_power_from_orbit": [
+       0.06,
+       0.095
+      ]
+     },
+     "earth_tw": 40,
+     "earth_w_m2": {
+      "thermal": 0.078,
+      "power_from_orbit": 0.071
+     },
+     "earth_k": {
+      "thermal": 0.06,
+      "power_from_orbit": 0.054
+     }
+    },
+    "european": {
+     "civilization_tw": 110,
+     "share_of_night_half": 0.00013,
+     "collectors_km2": [
+      270000.0,
+      406000.0
+     ],
+     "collector_share_of_fleet_area": [
+      9.6e-05,
+      0.000144
+     ],
+     "moon_tw": {
+      "all_on_moon_thermal": 18.4,
+      "industry_in_orbit_thermal": 13.89,
+      "industry_in_orbit_power_from_orbit": 12.61
+     },
+     "moon_w_m2": {
+      "all_on_moon_thermal": 0.486,
+      "industry_in_orbit_thermal": 0.367,
+      "industry_in_orbit_power_from_orbit": 0.333
+     },
+     "moon_dimming_percent": {
+      "all_on_moon_thermal": [
+       0.16,
+       0.256
+      ],
+      "industry_in_orbit_thermal": [
+       0.121,
+       0.193
+      ],
+      "industry_in_orbit_power_from_orbit": [
+       0.109,
+       0.175
+      ]
+     },
+     "earth_tw": 74,
+     "earth_w_m2": {
+      "thermal": 0.144,
+      "power_from_orbit": 0.131
+     },
+     "earth_k": {
+      "thermal": 0.11,
+      "power_from_orbit": 0.1
+     }
+    },
+    "high_income": {
+     "civilization_tw": 180,
+     "share_of_night_half": 0.000211,
+     "collectors_km2": [
+      440000.0,
+      660000.0
+     ],
+     "collector_share_of_fleet_area": [
+      0.000157,
+      0.000235
+     ],
+     "moon_tw": {
+      "all_on_moon_thermal": 29.95,
+      "industry_in_orbit_thermal": 22.61,
+      "industry_in_orbit_power_from_orbit": 20.53
+     },
+     "moon_w_m2": {
+      "all_on_moon_thermal": 0.791,
+      "industry_in_orbit_thermal": 0.597,
+      "industry_in_orbit_power_from_orbit": 0.542
+     },
+     "moon_dimming_percent": {
+      "all_on_moon_thermal": [
+       0.26,
+       0.416
+      ],
+      "industry_in_orbit_thermal": [
+       0.196,
+       0.314
+      ],
+      "industry_in_orbit_power_from_orbit": [
+       0.178,
+       0.285
+      ]
+     },
+     "earth_tw": 120,
+     "earth_w_m2": {
+      "thermal": 0.235,
+      "power_from_orbit": 0.213
+     },
+     "earth_k": {
+      "thermal": 0.179,
+      "power_from_orbit": 0.163
+     }
+    },
+    "american": {
+     "civilization_tw": 257,
+     "share_of_night_half": 0.000302,
+     "collectors_km2": [
+      629000.0,
+      943000.0
+     ],
+     "collector_share_of_fleet_area": [
+      0.000224,
+      0.000336
+     ],
+     "moon_tw": {
+      "all_on_moon_thermal": 42.8,
+      "industry_in_orbit_thermal": 32.31,
+      "industry_in_orbit_power_from_orbit": 29.34
+     },
+     "moon_w_m2": {
+      "all_on_moon_thermal": 1.13,
+      "industry_in_orbit_thermal": 0.853,
+      "industry_in_orbit_power_from_orbit": 0.775
+     },
+     "moon_dimming_percent": {
+      "all_on_moon_thermal": [
+       0.372,
+       0.594
+      ],
+      "industry_in_orbit_thermal": [
+       0.28,
+       0.449
+      ],
+      "industry_in_orbit_power_from_orbit": [
+       0.255,
+       0.408
+      ]
+     },
+     "earth_tw": 171,
+     "earth_w_m2": {
+      "thermal": 0.336,
+      "power_from_orbit": 0.305
+     },
+     "earth_k": {
+      "thermal": 0.256,
+      "power_from_orbit": 0.233
+     }
+    }
+   },
+   "moon_water_m3_per_person": 1448,
+   "earth_water_m3_per_person": 2275,
+   "moon_food_share_of_dry_land": [
+    0.028,
+    0.073
+   ],
+   "earth_food_ha_plant_rich": [
+    2.6,
+    2.81
+   ],
+   "earth_over_boundaries": 1.96,
+   "computing_tw": [
+    3.0,
+    30.0
+   ],
+   "computing_times_data_centres": [
+    64,
+    638
+   ],
+   "stocks_gt": {
+    "earth": 6700,
+    "moon": 1675,
+    "times_2010": 10.6,
+    "array_shield": [
+     247.5,
+     990.0
+    ]
+   }
+  }
+ },
+ "binds_first": {
+  "energy_kw": 3.68,
+  "moon_kw_released": 2.78,
+  "moon": [
+   {
+    "limit": "heat, unanswered, at 0.1 K",
+    "billion": [
+     1.37,
+     2.2
+    ]
+   },
+   {
+    "limit": "water stress, 1,700 m3 a person",
+    "billion": [
+     4.26,
+     4.26
+    ]
+   },
+   {
+    "limit": "water scarcity, 1,000 m3 a person",
+    "billion": [
+     7.24,
+     7.24
+    ]
+   },
+   {
+    "limit": "cropland at Earth's share of land",
+    "billion": [
+     8.4,
+     22.0
+    ]
+   },
+   {
+    "limit": "heat, answered by 1% more dimming",
+    "billion": [
+     25.9,
+     41.5
+    ]
+   }
+  ],
+  "earth": [
+   {
+    "limit": "American diets on today's farmland",
+    "billion": [
+     4.4,
+     4.4
+    ]
+   },
+   {
+    "limit": "food within four planetary boundaries",
+    "billion": [
+     10.2,
+     10.2
+    ]
+   },
+   {
+    "limit": "heat from thermal plants at Flanner's 2100 level",
+    "billion": [
+     26.3,
+     26.3
+    ]
+   },
+   {
+    "limit": "water stress, 1,700 m3 a person",
+    "billion": [
+     26.8,
+     26.8
+    ]
+   },
+   {
+    "limit": "plant-rich diets on today's farmland",
+    "billion": [
+     34.2,
+     36.9
+    ]
+   }
+  ]
+ }
+}

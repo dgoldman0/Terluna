@@ -92,3 +92,7 @@ def test_industry_ledger_follows_the_glow_share():
     for r, g, b in zip(ind['window_rings_intercept_per_moon_sunlight'], ind['glow_share_of_absorbed'], ind['absorbing_dimmer_gives_back']):
         assert np.isclose(r * g, b, rtol=0.02)
     assert ind['moon_w_m2_from_industry_tw_released_in_orbit']['1000'] < 0.1 < ind['moon_w_m2_from_industry_tw_used_on_moon']['100']
+    # Computing in orbit brings its collectors' heat: 2.9-4.4 W in all for each watt computed.
+    lo, hi = ind['moon_w_m2_from_computing_tw_near_fleet_with_collectors']['1000']
+    assert np.isclose(lo, ind['moon_w_m2_from_industry_tw_released_in_orbit']['1000'] * (1 + ind['collectors_heat_per_watt'][0]), rtol=0.02)
+    assert 0.14 < lo < hi < 0.23

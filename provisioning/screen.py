@@ -157,6 +157,10 @@ def industry(array_heat, fleet, window, absorbed, on_moon, sunlight_global, area
                                    thermoradiative_measured_everywhere=round(tiles['thermoradiative_measured_everywhere_TW'], 1)),
         fleet_area_share_for_industry_tw={f'{tw:g}': [round(tw * k / fleet_km2, 5) for k in per_tw_km2] for tw in INDUSTRY_TW},
         moon_w_m2_from_industry_tw_released_in_orbit={f'{tw:g}': round(tw * placement['moon_W_m2_per_TW_released_in_orbit'], 4) for tw in INDUSTRY_TW},
+        collectors_heat_per_watt=[round(min(c['heat_per_electric'] for c in array_heat['collectors']), 2),
+                                  round(max(c['heat_per_electric'] for c in array_heat['collectors']), 2)],
+        moon_w_m2_from_computing_tw_near_fleet_with_collectors={f'{tw:g}': [round(tw * (1 + h) * placement['moon_W_m2_per_TW_released_in_orbit'], 3)
+            for h in (min(c['heat_per_electric'] for c in array_heat['collectors']), max(c['heat_per_electric'] for c in array_heat['collectors']))] for tw in INDUSTRY_TW},
         moon_w_m2_from_industry_tw_used_on_moon={f'{tw:g}': round(tw * placement['moon_W_m2_per_TW_used_on_moon'], 2) for tw in INDUSTRY_TW},
         window_rings_intercept_per_moon_sunlight=[round(x, 1) for x in window_per_moon],
         absorbing_dimmer_gives_back=[round(x * g, 3) for x, g in zip(window_per_moon, share)])

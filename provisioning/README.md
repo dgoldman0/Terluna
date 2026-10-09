@@ -75,8 +75,9 @@ Each finding follows from results the repository already holds, read together wi
    - **Computing and industry on the light: significant, limited by demand.** The night half intercepts about
      850 PW the Moon never needs (joint synthesis), and its attitude keeps that light off the night. Each terawatt of
      computing takes 2,450–3,670 km² of collectors and 830 km² of radiators, so 1,000 TW, about 20,000 times today's
-     data centres, takes 0.12–0.16% of the fleet's area (*screen*). Released in orbit, its heat puts 0.05 W/m² on the
-     Moon, and less from radiators facing outward or edge-on to it. Energy is no limit there; demand, hardware mass
+     data centres, takes 0.12–0.16% of the fleet's area (*screen*). With its collectors' heat, 2.9–4.4 W for each watt
+     of computing, it puts 0.15–0.22 W/m² on the Moon released near the fleet, 5–7×10⁻⁵ W/m² from the Sun–Earth
+     hubs (*screen*; the resources domain's industry screen), and less from radiators facing outward or edge-on to it. Energy is no limit there; demand, hardware mass
      and latency are, and computing or industry used for nothing is only waste heat.
    - **How industry changes the glow.** Industry and collection change the Moon's heat in three ways, and every
      design for the array's industry has to be weighed by them:
@@ -211,6 +212,68 @@ Each finding follows from results the repository already holds, read together wi
     - **Who works.** Who performs the maintenance of a settled world belongs to the human paper. These numbers give
       it its scale. *Earth figures.*
 
+### People across the horizons
+
+The author's working scale of 9 October is 20–30 billion people across the Solar System by the frontier of thousands
+to tens of thousands of years, affluent by modern standards, mostly on Earth, the Moon and in the array. The study is
+[population.md](population.md), with its screen [population.py](population.py); numbers here are from it.
+
+13. **20–30 billion takes growth at the pre-industrial world's pace.** From the UN's 10.2 billion in 2100, 0.075–0.12%
+    a year reaches it by the year 3000 and 0.023–0.037% by 5000; the world grew 0.055% a year from year 0 to 1750. From
+    10 million in 2526, the Moon reaches a billion in 2756–2987 at 1–2% a year.
+14. **Affluence is 2–6 kW of primary energy a person, centred on Europe's 3.7.** Needs stop rising at 1.9 kW of final
+    energy (Vogel et al. 2021), 2.9 kW of primary energy, which gives the metropolis brief's 2 kW a basis.
+15. **The planned climate sets the Moon's population unless dimming answers its heat.** With industry in orbit a
+    person at Europe's energy releases 2.8 kW on the Moon: 0.1 K of warming holds 1.4–2.2 billion people and 0.5 K
+    6.8–11 billion, while 1% more dimming answers the heat of 26–41 billion. Moving industry to orbit cuts a person's
+    lunar heat by a quarter. Cities at 40,000 people per km² release 60–240 W/m², so a city's heat is answered in the
+    city.
+16. **The Moon's runoff binds next, near 4 billion.** Its 7,240 km³ a year reaches the stress line at 4.3 billion and
+    scarcity at 7.2 billion; while the seas and lakes stay fresh, water drawn from them and returned supplies beyond it.
+    Food land is ample: the dry land feeds 8.4–22 billion on Earth's 12% share of land in crops.
+17. **Earth binds on food within planetary boundaries.** A transformed food system feeds 10.2 billion within four
+    boundaries (Gerten et al. 2020), so 16–20 billion on Earth need part of their food grown off the land, for
+    instance microbial protein on power the array can send. Their heat on thermal plants adds 0.12–0.14 W/m².
+18. **The array's light is no limit; its habitats are its mass, and its commute is costly.** The whole population's
+    energy, 40–260 TW, is 0.005–0.03% of the night half's 851 PW. Habitats at the Stanford torus's 990 t of shield a
+    person take 248–990 Gt for a billion residents. The ring radius is 14.1 hours away on a minimum-energy transfer,
+    and a weekly rocket commute costs 18–46 kW a person, so the array's workers rotate and its tinkerers live there.
+19. **The array serves Earth with computing and power, and prototypes Earth's own arrays.** A 10.5 km transmitter
+    reaches a rectenna of the 1978 reference size on Earth from the Moon's distance, and receiving land limits it at
+    20,400 km² per TW; computing serves Earth over 1.28 s of light time. The film plant, photon-kept formations,
+    collectors and links are the industry that would build Earth's own arrays.
+20. **Affluence lasts the horizons as a plateau.** At 2% a year energy use would reach all the light the fleet
+    intercepts in about 580 years, so energy per person holds near the needs plateau and growth near zero.
+
+### Computing in the array
+
+The author called computing the valuable resource that turns the array's otherwise wasted energy into use, and asked
+what it is for. The study is [computing.md](computing.md), with its screen [computing.py](computing.py); numbers
+here are from it, with "today" the H100's 1.4×10¹² FLOP per joule.
+
+21. **The light outruns any computing the array can build, and mass binds first.** The night half's 851 PW powers
+    1,000 TW of computing on 0.4–0.6% of it, while a terawatt needs 7–34 Mt in orbit for radiators, collectors and
+    processors. So 1,000 TW weighs 15–74% of the fleet and renews 0.7–2.6 Gt of processors a year, the film plant's
+    scale.
+22. **Heat placement binds next.** With its collectors each watt computed releases 2.9–4.4 W, and from the ring radius
+    460–1,100 TW warms the Moon 0.1 K. The Earth–Moon L1 and L2 points cut that 9.5 times, 100,000 km 25 times and the
+    Earth–Sun hubs 5,600 times. Radiators should run hot: at the irreversible floor, operations per square metre grow
+    as T³.
+23. **A terawatt today is 1.4×10²⁴ FLOP/s, 94 times the world's AI computing.** CMOS has about 200-fold left, and the
+    irreversible floor at 330 K lies 4,700–470,000-fold beyond today; reversible logic goes below it by running slower.
+24. **Control, management and today's science take megawatts to terawatts.** The fleet's control is 20 MW. A
+    weather and climate twin of the whole Moon, run as a forecast service, takes 6–12 MW at 1 km, 6–12 GW at 100 m and
+    9–15 TW at 10 m; at 1 m it takes 38–44 TW in real time and 38,000–44,000 TW as a forecast service, the one
+    management task that fills the array. Following one gram of soil cell by cell takes 350 TW. A far-side radio
+    correlator for 100,000 dipoles takes 1 MW.
+25. **AI and digital minds span the array, and the far-out tasks pass it.** AI services for 20–30 billion people take
+    14–2,100 TW today and 0.07–10 TW at the CMOS limit, and a digital population the size of ours 14–21,000 TW. An
+    ancestor simulation (Bostrom 2003) runs in 8 days to 23 years on 1,000 TW. A trillion emulated minds at a
+    thousand times human speed, brains emulated molecule by molecule and a Matrioshka brain pass the array.
+26. **Latency divides the work.** The 0.13 s round trip to the ring radius fits inside the 0.21 s people leave between
+    turns in conversation, so the Moon's interactive services and forecasts can run in the array, with millisecond
+    control on the Moon and Earth's 2.56 s round trip suiting batch work.
+
 ## Statements elsewhere that need correcting
 
 The evaluation ([state.md](state.md#statements-elsewhere-that-need-correcting)) lists stale or conflicting statements
@@ -224,7 +287,11 @@ in other folders. They belong to main and are unchanged on this branch. The larg
 
 | File | Holds |
 |---|---|
-| [screen.py](screen.py) | The first screen: the heat ledger with the fleet's infrared, food land, the night, tides and rivers, transit, fusion fuel, latency |
+| [screen.py](screen.py) | The first screen: the heat ledger with the fleet's infrared, its heat mirror, computing and industry against the glow, food land, the night, tides and rivers, transit, fusion fuel, latency |
+| [population.md](population.md) | Population and living across the horizons: growth, the affluent band, what binds on the Moon and Earth, the array's habitats, commuting, Earth service |
+| [population.py](population.py) | Its screen, writing [results/population.json](results/population.json); sources in [population_sources.json](population_sources.json) |
+| [computing.md](computing.md) | Computing in the array, supply against demand, from the fleet's control to the far-out tasks |
+| [computing.py](computing.py) | Its screen, writing [results/computing.json](results/computing.json); sources in [computing_sources.json](computing_sources.json) |
 | [results/first_screen.json](results/first_screen.json) | Its product (schema `terluna.provisioning.first-screen/1`) |
 | [state.md](state.md) | What the project already holds for provisioning, what others assume of it, and statements to correct |
 | [literature.md](literature.md) | The literature by topic, with what it means for the Open Moon |
