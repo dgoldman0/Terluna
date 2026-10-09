@@ -14,6 +14,8 @@ The domain opened on 9 October 2026 on the branch `domain/resources`. It starts 
   cycles, industrial ecology and thin films ([literature.md](literature.md), with its [sources](sources.json));
 - a first screen of the committed products ([screen.py](screen.py), [results/first_screen.json](results/first_screen.json)).
 
+Its open questions, in order, are in [questions.md](questions.md).
+
 The author's decisions frame it:
 - Water, nitrogen and oxygen come from the Solar-System-wide operation; oxygen made on the Moon is at most a
   by-product of metal and glass production.
@@ -192,6 +194,7 @@ in other folders. They belong to main and are unchanged on this branch. The larg
 | [results/first_screen.json](results/first_screen.json) | Its product (schema `terluna.resources.first-screen/1`) |
 | [state.md](state.md) | What the project already holds for resources, what others assume of it, and statements to correct |
 | [literature.md](literature.md) | The literature by topic, with what it means for the Open Moon |
+| [questions.md](questions.md) | The open questions, in order |
 | [sources.json](sources.json) | Every source cited, its use and how far it was read |
 
 `python -m resources.screen` rewrites the product; `python -m pytest resources/tests` checks it.
