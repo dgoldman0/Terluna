@@ -49,6 +49,15 @@ and the nutrient and mineral cycles, including a sea-to-forest migrant cycle. Ea
 is set against the models and the literature, and the register recommends which to
 carry forward.
 
+## Ecology of the Open Moon
+
+[ecology/](ecology/README.md) gathers what the project's results already imply for the Open Moon's living world,
+with a first screen of the committed products and a reading of the literature. Under the titania stack no vertebrate
+makes vitamin D from sunlight, a bee's UV receptor catches 7% of Earth's light and sunlight disinfects at 1–6% of
+Earth's rate. With no OH in the air, methane lives for centuries and settles near 20 ppm at central rates, and N2O
+has no sink. Pollen stays aloft for weeks at lunar gravity. Molybdenum may limit nitrogen fixation before nitrogen
+does. The variety of biomes comes from water and light, since no natural ground freezes.
+
 ## Remaining biological work
 
 The wider portfolio retains soils, aquatic communities, detrital/subsurface habitats, varied plant architectures, aerial exchange and human developmental requirements. Nutrient compartments, ecological interactions, plant hydraulics, structural support and complete life cycles still need separate models and empirical tests. Megaforests remain one candidate within this scope.

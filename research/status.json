@@ -249,7 +249,7 @@
     },
     {
       "topic": "biosphere",
-      "condition": "periodic_carbon_and_oxygen_requirement_models; hypothetical_traits; clear_sky_spectral_canopy_photosynthesis_moon_and_earth_prospect_d_fvcb; whole_plant_carbon_through_the_lunar_night_with_twilight_and_gcm_temperatures_scenarios; fruit_designed_for_the_lunar_day_on_the_whole_plant_degree_day_program_as_design_variable",
+      "condition": "periodic_carbon_and_oxygen_requirement_models; hypothetical_traits; clear_sky_spectral_canopy_photosynthesis_moon_and_earth_prospect_d_fvcb; whole_plant_carbon_through_the_lunar_night_with_twilight_and_gcm_temperatures_scenarios; fruit_designed_for_the_lunar_day_on_the_whole_plant_degree_day_program_as_design_variable; ecology_first_screen_ultraviolet_settling_and_trace_gases_without_oh",
       "material": [
         "../biosphere/README.md",
         "../ensemble/papers/74a946e2-8f98/seed-02.md",
@@ -263,7 +263,12 @@
         "../biosphere/canopy/fruit.py",
         "../biosphere/canopy/results/fruit.json",
         "studies/lunar_cycle_ecology/README.md",
-        "studies/lunar_cycle_ecology/results/lunar_cycle_ecology.json"
+        "studies/lunar_cycle_ecology/results/lunar_cycle_ecology.json",
+        "../biosphere/ecology/README.md",
+        "../biosphere/ecology/state.md",
+        "../biosphere/ecology/literature.md",
+        "../biosphere/ecology/screen.py",
+        "../biosphere/ecology/results/first_screen.json"
       ],
       "unresolved": [
         "complete life cycles",
