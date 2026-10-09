@@ -1,178 +1,72 @@
 # Water, carbon and lifting-gas trim
 
-An annual gas-leakage balance does not establish neutral flight. Rain, fog uptake,
-evaporation, drainage, stored food and metabolic products change the mass that the
-gas must support. In some otherwise favourable barrier cases, routine water
-turnover requires much more control than intact-film leakage. This is a coupled
-mass and pressure requirements calculation, not a predicted trajectory or an
-established biological flight mechanism.
+**Venting gas to answer a daily water swing is ruinous, and keeping the gas means carrying the swing as
+superpressure.** Losing 1 kg/m² of water and holding height by venting throws away 0.0746 kg of hydrogen per square
+metre; making it back each day takes 104 W/m² of hydrogen output, against the reference's 2 W/m² of production
+capacity. Keeping the gas instead raises its pressure by 4.78 kPa per kg/m² of swing at a 20 kg/m² load, or 2.77 kPa in
+a fixed hull with an air ballonet. Intake must therefore track loss closely, and the [water](water.md) note gives the
+swing each body's spare pressure absorbs. [trim_cycle.py](trim_cycle.py) uses the
+[mechanics](mechanics.md), [environment](environment.md), [envelope](envelope.md) and [biology](biology.md)
+components and the [sky-ship air](../sky_ships/results/sky_ships.json); chemical energy uses a rounded 120 MJ/kg for
+hydrogen.
 
-`trim_cycle.py` uses the existing [mechanics](mechanics.md),
-[water and thermal model](environment.md), [gas barrier assessment](envelope.md)
-and [organism carbon budget](biology.md). It adds no empirical trait measurements.
-Atmospheric density, pressure and mixture lift come from the retained
-[sky-ship product](../sky_ships/results/sky_ships.json). Chemical energy uses a
-declared rounded H₂ lower heating value of 120 MJ/kg; fermentation uses the
-separately documented measured reactor-yield sensitivity. These are alternative
-accounting routes, not two costs charged to the same hydrogen.
+## The mass ledger
 
-## The actual mass ledger
+**The upward residual changes by ΔR = ΔL − ΔM**, where M is all carried solids and liquids and L the gas's displaced
+air less its own mass. The gas's weight is already inside L. The ledger takes humidity uptake, rain, intake,
+evaporation, drainage, dumping, dry-mass and metabolic-water changes, hydrogen input, permeation and venting, and nets
+opposing flows before choosing a control. It counts the water held, whatever a tank's capacity.
 
-At a fixed ambient state, define supported mass `M` as all actual solids, liquids
-and payload, excluding the lifting mixture and ambient-air ballonet contents.
-Define `L` as the gas's displaced-air mass minus its own mass. Then
+**One kilogram of hydrogen in the lifting mixture supports b = (ρ_a − ρ_g)/(ρ_g − (1 − x)ρ_a) = 13.4033 kg at 10 km**
+(ρ_a 1.204, ρ_g 0.106 kg/m³, x 0.98). Losing 1 kg of water and venting to hold height removes 0.074608 kg of hydrogen;
+in a fixed hull, ambient air replaces the vented volume and the masses close.
 
-\[
-\Delta R=\Delta L-\Delta M,
-\]
+**After a mass change ΔM and a natural gas loss q, the hydrogen correction is ΔM/b + q.** With b = 10, evaporating 5 kg
+while losing 0.1 kg of hydrogen to permeation calls for 0.4 kg of extra venting; regaining the 5 kg while another 0.1
+kg permeates calls for 0.6 kg of new hydrogen. Over the closed cycle, production equals permeation plus venting, which
+the tests check.
 
-where positive residual `R` tends upward. Hydrogen weight is already included in
-`L`; subtracting the escaping hydrogen mass a second time gives a wrong answer.
-The ledger explicitly accepts humidity uptake, rain, intake, evaporation,
-drainage, water dumping, dry-mass change, metabolic-water change, hydrogen input,
-leakage and deliberate venting. Opposing simultaneous flows are netted before
-control is selected. A tank's unfilled capacity does not count as actual water.
+## Water stores and repeated venting
 
-For a mixture containing H₂ mole fraction `x` and otherwise ambient air at the
-same pressure and temperature,
+**A store of 5 kg/m² with a 1 kg/m² floor and 9 kg/m² capacity holds 4 kg/m² for routine dumping;** a steady 1 kg/m² a
+day of net loss reaches the floor in four days, and a week needs 3 kg/m² more. Tissue water stays out of the store.
 
-\[
-b=\frac{\rho_a-\rho_g}{\rho_g-(1-x)\rho_a}
-\]
+Losing the stated water and regaining it once a day at 10 km, venting on the loss and making gas on the refill
+(permeation left out):
 
-is net supported kg per kg of H₂. This constant-composition volume-change screen
-assumes purity control and suitable expansion or contraction; it is not the
-constant-volume gas-exchange model. At the retained 10 km state, `ρa=1.204`,
-`ρg=0.106 kg/m³`, `x=0.98` and `b=13.4033 kg/kg`. Consequently, losing 1 kg of
-water while holding altitude with gas venting removes **0.074608 kg H₂**. In a
-fixed outer hull, the removed gas volume is replaced with real ambient air; gas
-loss, air admission and water loss close the total-mass balance.
-
-After a supported-mass change `ΔM` and natural hydrogen leak `q`, the additional
-signed hydrogen correction is `ΔM/b+q`: positive requires production or stored
-gas; negative requires additional venting under this particular control choice.
-For example, with `b=10`, evaporation of 5 kg and leakage of 0.1 kg H₂ requires
-0.4 kg additional venting, not 0.5 kg venting plus replacement of the leak. Later
-recovering the 5 kg water while another 0.1 kg H₂ leaks requires 0.6 kg H₂.
-Over that closed payload/gas cycle, production equals natural leakage plus
-actual venting. The tests check this identity independently.
-
-## Water inventory and the price of repeated venting
-
-`water_inventory_band` represents actual free water with explicit lower and
-upper bounds. With 5 kg/m² present, a 1 kg/m² minimum and 9 kg/m² tank capacity,
-only 4 kg/m² is available for routine dumping or net evaporation. A 1 kg/m²/day
-loss reaches the minimum in four days. Seven days requires an additional
-3 kg/m² of supply; the function reports the deficit rather than silently
-clamping the water budget. Tissue hydration and retained-community water cannot
-be borrowed without an independently justified physiological allowance.
-
-The following conditional cycles lose the stated water and then regain it once
-per day at 10 km. They hold altitude by venting on the loss and making new gas on
-the refill; natural leakage is omitted so the table isolates trim. All quantities
-are per projected m². Continuous matched uptake and loss would not incur this
-gross-cycle trim burden.
-
-| Daily water swing | H₂ vented and later replaced | Mean H₂ chemical output required | Fermentative gross feed carbon, if repeated all year |
+| Daily swing | Hydrogen vented and replaced | Mean hydrogen output | Fermented feed carbon a year |
 |---|---:|---:|---:|
-| 0.01 kg/m² | 0.000746 kg/m² | 1.04 W/m² | 4.64 kg C/m²/year |
-| 0.1 kg/m² | 0.00746 kg/m² | 10.4 W/m² | 46.4 kg C/m²/year |
-| 1 kg/m² | 0.0746 kg/m² | 103.6 W/m² | 464 kg C/m²/year |
-| 5 kg/m² | 0.373 kg/m² | 518 W/m² | 2,319 kg C/m²/year |
+| 0.01 kg/m² | 0.000746 kg/m² | 1.04 W/m² | 4.64 kg C/m² |
+| 0.1 kg/m² | 0.00746 kg/m² | 10.4 W/m² | 46.4 kg C/m² |
+| 1 kg/m² | 0.0746 kg/m² | 103.6 W/m² | 464 kg C/m² |
+| 5 kg/m² | 0.373 kg/m² | 518 W/m² | 2,319 kg C/m² |
 
-The fermentation column uses 2.1 mol H₂/mol glucose and does not credit residual
-organic-acid recovery. It is gross diverted substrate carbon, not a claim that
-all of it leaves as CO₂. Product recycling would require its own energy and mass
-ledger. At an assumed cycle-mean irradiance of 200 W/m² and 1% full-solar-to-H₂
-efficiency, the first row already needs 52% of the collecting area/time; the
-1 kg row needs about 52 times the available area/time. Those efficiency and light
-inputs are illustrative requirements, not measured floater performance.
+The fermentation column uses 2.1 mol H₂ per mol glucose, as gross diverted carbon. At 200 W/m² and 1% conversion the
+first row already takes 52% of the collecting area-time; the 1 kg/m² row takes 52 times what there is. Hydrogen made
+for trim is charged once, through `biology.photosynthetic_hydrogen_allocation` or as fermentation feed. Even a 0.01
+kg/m² daily swing met this way costs more than the aerial-ecology screen's 1 kg C/m² of net production.
 
-For integration, pass chemical power from `hydrogen_refill_budget` into
-`biology.photosynthetic_hydrogen_allocation`, or charge the reported annual
-fermentation feed against available assimilate. Do not count that same hydrogen
-again as a biomass-energy-equivalent charge. The remaining carbon must still fund
-existing maintenance, turnover, consumers and reproduction; if starting from
-NPP, baseline host respiration has already been paid. Under the explicit
-no-coproduct-recovery fermentation screen, even a 0.01 kg/m² daily swing needs
-more than the earlier 1 kg C/m²/year baseline NPP.
+## Keeping the gas
 
-These are prescribed cycles, not forecasts. Their high cost motivates retaining
-gas, adjusting altitude, smoothing water collection, changing body temperature
-or avoiding large uncontrolled inventory swings. They do not prove all possible
-floaters impossible.
+**Shrinking the gas to shed lift at constant gas mass needs δV = δM/ρ_a and raises its pressure.** From a neutral
+20 kg/m² at 10 km the gas volume is 18.215 m³/m²; losing 1 kg/m² takes 0.831 m³/m² of contraction and 4.783 kPa more
+pressure, so a structure sized for 400 Pa would need about 5.18 kPa. The reversible work on the gas is 85.1 kJ/m², of
+which 1.96 kJ/m² is above what the ambient air supplies. A freely moving equal-pressure partition cannot hold this
+state; a pressure-bearing one, or a shrinking outer bladder, can.
 
-## Retaining hydrogen still needs a pressure-bearing mechanism
+**A fixed hull can instead pump in air equal to the lost payload, at a shared rising pressure
+Δp = δM p_ambient/(ρ_a V_outer).** With 30 m³/m² of hull and the same 20 kg/m², a 1 kg/m² loss raises the pressure by
+2.772 kPa at 1.14 kJ/m² of isothermal pumping work. More unused hull lowers the rise in proportion, and the hull's own
+mass must be carried; this is the giants' advantage in [water](water.md), where V/A reaches 1.3 km.
 
-Two distinct compression arrangements are provided. Both conserve the existing
-gas molecules and require actual actuation and heat transfer.
+## Night ballast and metabolic mass
 
-**Contracting gas displacement with an ambient-pressure ballonet or shrinking
-outer bladder.** At fixed gas mass, lowering net support by payload loss `δM`
-requires `δV=δM/ρa`, because gas mass is constant. Using
-`δM/(ρa−ρg)` would incorrectly assume that gas escaped. Isothermal pressure then
-obeys `p1=p0 V0/(V0−δV)`. If a fixed hull admits ambient-pressure air around the
-contracted bladder, the internal gas/air partition must bear the pressure
-difference. An ordinary freely moving partition at equal pressure cannot do this.
+**Dumping b × the night's hydrogen loss in water offsets that loss alone.** Evaporation, dew, rain and respiration
+change the balance too, and the water dumped must later be regained. Respiring starch, C₆H₁₀O₅ + 6 O₂ → 6 CO₂ +
+5 H₂O, uses about 2.25 kg of dry reserve per kg of carbon and makes 1.25 kg of water: payload falls by about 1 kg if the
+water stays and 2.25 kg if it leaves. Food passed between organisms aboard changes neither mass nor lift. Splitting
+water for hydrogen uses water and releases oxygen; fermenting it commits organic matter and makes CO₂ and acids. A
+calculation that restores both water and gas includes the makeup water and those products.
 
-For a neutral initial supported mass of 20 kg/m² at 10 km, initial gas volume is
-18.215 m³/m². Losing 1 kg/m² requires contraction by 0.831 m³/m² and raises gas
-pressure by **4.783 kPa**. If the earlier structure was sized for 400 Pa, retaining
-the same allowance for the original loads requires approximately 5.183 kPa in
-this additive screen. The unchanged 400 Pa structure does not pass this new
-pressure requirement. Partition geometry, wrinkling, load redistribution and
-the changed hydrostatic head still require a structural solution.
-
-Reversible work done on the compressed gas is `p0 V0 ln(V0/V1)`. Ambient pressure
-supplies `pambient (V0−V1)` of that work as volume contracts, so the minimum
-additional work above ambient is their difference. The example gives 85.1 kJ/m²
-on the gas and 1.96 kJ/m² above ambient. The latter is an ideal mechanical lower
-bound, not demonstrated biological pump performance or a hardware mass budget.
-
-**Fixed hull with gas and air compartments at a shared rising pressure.** Pumping
-an actual air mass equal to the lost payload preserves total mass and external
-volume while retaining all H₂. Here
-`Δp=δM pambient/(ρa Vouter)`, and the gas volume decreases in inverse proportion
-to the common pressure. Ballonet air becomes denser; assuming unchanged ambient
-density and equal pressure simultaneously would be inconsistent. With outer
-volume 30 m³/m² and the same 20 kg/m² supported mass, a 1 kg/m² loss raises
-pressure by 2.772 kPa and has ideal isothermal air-pumping work 1.14 kJ/m².
-This still exceeds the example's original 400 Pa budget. Enlarging unused hull
-capacity can reduce the pressure rise, but the larger hull's mass and structure
-must be supplied; capacity does not act as a free control force.
-
-Neither arrangement proves that an organism has suitable valves, a compressor,
-gas storage, a pressure-bearing partition or adequate heat rejection. Reversing
-the water change requires expansion or air release with compatible geometry.
-Stored high-pressure gas has its own vessel mass, heat and pressure costs.
-
-## Night ballast and carbon mass need the same boundary
-
-Dumping water of mass `b × night H₂ loss` offsets only that specified gas-loss
-term. It does not establish night-long neutral flight if evaporation, dew,
-rain or respiration also occur. The whole ledger must be reevaluated against
-the actual free-water band. On later gas restoration, recovered water or another
-real payload increase is needed to restore the prior neutral state.
-
-Carbon accounting does not by itself supply payload change. For example, the
-ideal starch reaction `C6H10O5 + 6 O2 → 6 CO2 + 5 H2O` consumes about 2.25 kg dry
-reserve and forms 1.25 kg water per kg respired carbon. If all product water is
-retained, payload falls by about 1 kg; if it escapes, payload falls by about
-2.25 kg. The example ignores solutes and uses nominal atomic-mass ratios; the
-ledger accepts the actual dry and metabolic-water changes separately. Food
-transfer between organisms aboard changes neither whole-floater mass nor lift
-until material enters or leaves its boundary.
-
-Hydrogen production also has products and feedstocks. Water splitting consumes
-water and releases oxygen; fermentation commits stored organic matter and forms
-CO₂ and retained or expelled acids. Refill costs alone therefore do not close
-physiology. A calculation that restores both water and gas inventories must
-include the makeup water and product fates, or state that these are prescribed
-external balances. Gas production from internal water cannot simultaneously
-count that water as unchanged ballast.
-
-Variable altitude, staged rain intake, synchronized gas production, finite gas
-storage, aerodynamic forces and thermal buoyancy may avoid the vent/refill
-strategy. The present outputs diagnose their required mass/pressure functions;
-they do not solve a weather-resolved flight cycle. Passing a static lift or
-annual carbon gate remains insufficient without that coupled trajectory.
+Variable altitude, timed rain intake, matched gas production, gas storage, aerodynamic forces and thermal buoyancy are
+the routes that avoid venting; [water](water.md) and [storms](storms.md) cost the ones that matter most.

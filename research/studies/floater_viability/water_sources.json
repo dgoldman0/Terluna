@@ -1,0 +1,73 @@
+{
+  "schema": "terluna.research.sources/1",
+  "checked": "2026-10-09",
+  "scope": "Primary sources for droplet deposition, collector efficiency and animal vapour uptake; rain, humidity and storms are committed project products named in water.py INPUT_FILES.",
+  "sources": [
+    {
+      "id": "park2013",
+      "citation": "Park, K.-C., Chhatre, S. S., Srinivasan, S., Cohen, R. E. and McKinley, G. H. (2013). Optimal design of permeable fiber network structures for fog harvesting. Langmuir 29(43), 13269-13277.",
+      "url": "https://dspace.mit.edu/",
+      "access": "Full text read (MIT DSpace copy) by a verification agent.",
+      "use": "St = 2 rho_w r^2 v0/(9 mu R) with droplet radius r and fibre radius R; deposition eta_d = St/(St + pi/2), the Langmuir-Blodgett fit for a long cylinder; Raschel mesh 1.8% measured in lab fog, coated meshes 4.6-10.2%, optimum about 12%.",
+      "limit": "Laboratory fog, 2 m/s, droplet radius about 3 um."
+    },
+    {
+      "id": "rivera2011",
+      "citation": "Rivera, J. de D. (2011). Aerodynamic collection efficiency of fog water collectors. Atmospheric Research 102(3), 335-342.",
+      "doi": "10.1016/j.atmosres.2011.08.005",
+      "access": "Full text of the in-press version (FogQuest) read by a verification agent.",
+      "use": "Overall efficiency is aerodynamic x capture x drainage; aerodynamic efficiency at most about 20-24.5%; total unlikely to exceed about 30%; about 20% measured overall in the field (Schemenauer and Joe 1989).",
+      "limit": "Ground fog collectors."
+    },
+    {
+      "id": "odonnell1977",
+      "citation": "O'Donnell, M. J. (1977). Site of water vapor absorption in the desert cockroach, Arenivaga investigata. PNAS 74(4), 1757-1760.",
+      "doi": "10.1073/pnas.74.4.1757",
+      "access": "Abstract read.",
+      "use": "Gains weight from air above 82.5% RH through two bladder-like extensions of the hypopharynx.",
+      "limit": "Temperature not in the abstract."
+    },
+    {
+      "id": "knulle1966",
+      "citation": "Knülle, W. (1966). Journal of Medical Entomology 2(4), 335-338 (title not recorded here).",
+      "doi": "10.1093/jmedent/2.4.335",
+      "access": "Abstract read.",
+      "use": "Larvae of Dermacentor andersoni, D. variabilis and Amblyomma cajennense hold equilibrium weight down to about 80-85% RH.",
+      "limit": "Ticks; a precedent for vapour uptake, not a floater mechanism."
+    }
+  ],
+  "design_guesses": {
+    "catch_share": [
+      0.5,
+      1
+    ],
+    "spare_superpressure_pa": [
+      100,
+      1000
+    ],
+    "convective_w_m2_k": [
+      2,
+      10
+    ],
+    "sorbent_water_activity": [
+      0.3,
+      0.5
+    ],
+    "net_longwave_cooling_w_m2": [
+      5,
+      20
+    ],
+    "liquid_water_g_m3": [
+      0.05,
+      0.2
+    ],
+    "cloud_duty": [
+      0.05,
+      0.2
+    ],
+    "collector_overall_efficiency": [
+      0.1,
+      0.3
+    ]
+  }
+}

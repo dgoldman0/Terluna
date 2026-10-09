@@ -1,0 +1,54 @@
+{
+  "schema": "terluna.research.sources/1",
+  "checked": "2026-10-09",
+  "scope": "Primary sources for tethered-wing control and biological sailors; winds are committed project products named in sailing.py INPUT_FILES.",
+  "sources": [
+    {
+      "id": "aaron2002",
+      "citation": "Aaron, K. M., Heun, M. K. and Nock, K. T. (2002). A method for balloon trajectory control. Advances in Space Research 30(5), 1227-1232.",
+      "doi": "10.1016/S0273-1177(02)00526-4",
+      "url": "https://repository.gatech.edu/bitstreams/2ebed62d-85b5-47db-8aeb-42112616d10a/download",
+      "access": "Full text of the authors' draft (COSPAR 2000 paper) read by a verification agent; published abstract seen as an index snippet.",
+      "use": "A wing on a tether up to 15 km below a stratospheric balloon gives the drift a bias velocity of a few m/s; the balloon acts as the keel and the wing as the sail; example zonal wind differences of 26 m/s (Alice Springs, January) and 11 m/s (Fairbanks, July) between 35 and 20 km; a 100-day simulation with a 5 m2 wing.",
+      "limit": "Concept with simulations and a 1999 quarter-scale tether test; no flight measurement of drift; no lift coefficient or tether-drag analysis in the draft."
+    },
+    {
+      "id": "iosilevskii_weihs2009",
+      "citation": "Iosilevskii, G. and Weihs, D. (2009). Hydrodynamics of sailing of the Portuguese man-of-war Physalia physalis. Journal of the Royal Society Interface 6(36), 613-626.",
+      "doi": "10.1098/rsif.2008.0457",
+      "access": "PubMed abstract and PMC full-text passages (Introduction, sections 3.1, 3.3, 5, Appendix A, Conclusions) read by a verification agent.",
+      "use": "Aerodynamic forces on the float balance hydrodynamic forces on tentacles and polyps; largest angle from downwind 50-55 degrees at angle of attack 15-20 degrees; about 40-45 degrees at 40 degrees attack, as Totton and Mackie (1960) reported; sailing speed a few tens of cm/s, maximum about 0.4 m/s; mirror forms sail on opposite tacks.",
+      "limit": "Theoretical model with literature parameters."
+    },
+    {
+      "id": "francis1991",
+      "citation": "Francis, L. (1991). Sailing downwind: aerodynamic performance of the Velella sail. Journal of Experimental Biology 158, 117-132.",
+      "doi": "10.1242/jeb.158.1.117",
+      "access": "Abstract read.",
+      "use": "Low aspect ratio, flat-polar, primarily drag-based sail; maximum force at attack angles of 50-90 degrees; free sailors at 28-87 degrees with hulls broadside to the apparent water flow; selection favoured stability over windward performance.",
+      "limit": "Course angle and speed relative to wind not in the abstract."
+    },
+    {
+      "id": "munro2019",
+      "citation": "Munro, C., Vue, Z., Behringer, R. R. and Dunn, C. W. (2019). Scientific Reports 9, 15522 (title not recorded here).",
+      "doi": "10.1038/s41598-019-51842-1",
+      "access": "Abstract and passages read by a verification agent.",
+      "use": "Physalia is a siphonophore that uses a gas-filled float as a sail; aeriform cells of the gas gland produce carbon monoxide.",
+      "limit": "Morphology and development of Physalia; passages only."
+    }
+  ],
+  "design_guesses": {
+    "lift_coefficient": 1.0,
+    "wing_drag_coefficient": 0.1,
+    "wing_share_of_projected_area": [
+      0.01,
+      0.3
+    ],
+    "tether_allowable_mpa": 28,
+    "tether_drag_coefficient": 1.2,
+    "sea_drogue_share": [
+      0.001,
+      0.05
+    ]
+  }
+}

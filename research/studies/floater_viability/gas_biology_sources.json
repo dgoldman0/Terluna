@@ -1,0 +1,112 @@
+{
+  "schema": "terluna.research.sources/1",
+  "checked": "2026-10-09",
+  "scope": "Primary sources for biological gas secretion, retention and barrier crystals, verified on 2026-10-09; goldbeater's skin is in envelope_sources.json.",
+  "sources": [
+    {
+      "id": "scholander_vandam1954",
+      "citation": "Scholander, P. F. and van Dam, L. (1954). Secretion of gases against high pressures in the swimbladder of deep sea fishes. I. Oxygen dissociation in blood. Biological Bulletin 107(2), 247-259.",
+      "doi": "10.2307/1538611",
+      "access": "Full text (Biodiversity Heritage Library OCR) read by a verification agent.",
+      "use": "Oxygen pressures commonly above 100 atm; swim-bladder fish to at least 266 atm; nitrogen 2-15% of the oxygen; fish from 320-1,300 m; summarises Jacobs (1930) on the rete retaining gas despite circulation.",
+      "limit": "Their conclusion that the Root effect is not the mechanism was later replaced; not cited for mechanism."
+    },
+    {
+      "id": "scholander1954",
+      "citation": "Scholander, P. F. (1954). Secretion of gases against high pressures in the swimbladder of deep sea fishes. II. The rete mirabile. Biological Bulletin 107(2), 260-277.",
+      "doi": "10.2307/1538612",
+      "access": "Full text (BHL OCR) read by a verification agent.",
+      "use": "Rete capillaries 7-13 mm in deep-sea species, more than 1 cm in some, lengthening generally with depth; the wall must be very impermeable, with crystals and/or fibres.",
+      "limit": "No shallow-water lengths tabulated."
+    },
+    {
+      "id": "kuhn1963",
+      "citation": "Kuhn, W., Ramel, A., Kuhn, H. J. and Marti, E. (1963). The filling mechanism of the swimbladder. Generation of high gas pressures through hairpin countercurrent multiplication. Experientia 19, 497-511.",
+      "doi": "10.1007/BF02150881",
+      "access": "Record only; cited through Pelster (2015).",
+      "use": "Countercurrent multiplication of a single concentrating effect.",
+      "limit": "Not read."
+    },
+    {
+      "id": "pelster2015",
+      "citation": "Pelster, B. (2015). Swimbladder function and the spawning migration of the European eel Anguilla anguilla. Frontiers in Physiology 5, 486.",
+      "doi": "10.3389/fphys.2014.00486",
+      "access": "Open-access full text read by a verification agent.",
+      "use": "Gas-gland cells turn about 80% of glucose taken up into lactate; CO2 from the pentose phosphate shunt; acidification switches on the Root effect; salting-out; countercurrent multiplication by back-diffusion from venous to arterial rete capillaries.",
+      "limit": "Eel as model species."
+    },
+    {
+      "id": "pelster2023",
+      "citation": "Pelster, B. (2023). Journal of Comparative Physiology B 193, 307-313.",
+      "doi": "10.1007/s00360-023-01486-5",
+      "access": "Introduction read by a verification agent.",
+      "use": "Eel rete: about 58,000 arterial and 44,000 venous capillaries, 1-2 um apart, over a few millimetres; PO2 and PCO2 rise 7-8-fold.",
+      "limit": "Title not recorded here."
+    },
+    {
+      "id": "lapennas1977",
+      "citation": "Lapennas, G. N. and Schmidt-Nielsen, K. (1977). Swimbladder permeability to oxygen. Journal of Experimental Biology 67(1), 175-196.",
+      "doi": "10.1242/jeb.67.1.175",
+      "access": "Abstract read.",
+      "use": "Low O2 conductance lies in the submucosa, from a low diffusion coefficient caused by multiple layers of very thin (about 0.02 um) and broad (up to 100 um) crystals, presumably guanine, occupying a small fraction of tissue volume.",
+      "limit": "Conductance values not read."
+    },
+    {
+      "id": "denton1972",
+      "citation": "Denton, E. J., Liddicoat, J. D. and Taylor, D. W. (1972). Journal of the Marine Biological Association of the United Kingdom 52(3), 727-746 (title not recorded here).",
+      "doi": "10.1017/S0025315400021676",
+      "access": "Abstract read by a verification agent.",
+      "use": "Intact wall far less permeable to CO2, O2 and N2 than connective tissue; removing the silvery guanine layer increases permeability about 100 times; two deep-sea eels carry about 10 times the guanine per unit area of the conger eel.",
+      "limit": "Permeability of the deep-sea eels not measured."
+    },
+    {
+      "id": "wittenberg1980",
+      "citation": "Wittenberg, J. B., Copeland, D. E., Haedrich, R. L. and Child, J. S. (1980). Journal of the Marine Biological Association of the United Kingdom 60, 263-276 (\"... The swimbladder wall is a lipid-rich barrier to oxygen diffusion\").",
+      "doi": "10.1017/S0025315400028332",
+      "access": "Abstract read by a verification agent.",
+      "use": "Oxygen pressure difference across the wall close to 300 atm at 3,000 m.",
+      "limit": "Lipid barrier view beside the guanine view."
+    },
+    {
+      "id": "pinsk2022",
+      "citation": "Pinsk, N. et al. (2022). Journal of the American Chemical Society 144(11), 5180-5189.",
+      "doi": "10.1021/jacs.2c00724",
+      "access": "Open-access full text read by a verification agent.",
+      "use": "Sardine swim-bladder guanine plates 2-50 um wide and under 20 nm thick; the swim bladder's silvery guanine layer serves as a gas diffusion barrier.",
+      "limit": "Thickness judged from electron transparency."
+    },
+    {
+      "id": "nielsen1967",
+      "citation": "Nielsen, L. E. (1967). Models for the permeability of filled polymer systems. Journal of Macromolecular Science: Part A - Chemistry 1(5), 929-942.",
+      "doi": "10.1080/10601326708053745",
+      "access": "Record only; formula checked in Idris, Muntean and Mesic (2022), Journal of Coatings Technology and Research 19(3), 699-716, doi:10.1007/s11998-021-00579-6 (open access, read by a verification agent).",
+      "use": "P/P0 = (1 - phi)/(1 + (L/2W) phi), with L/W the platelets' length over thickness.",
+      "limit": "Aligned, separated, evenly dispersed plates normal to diffusion."
+    },
+    {
+      "id": "wittenberg1960",
+      "citation": "Wittenberg, J. B. (1960). The source of carbon monoxide in the float of the Portuguese man-of-war, Physalia physalis L. Journal of Experimental Biology 37(4), 698-705.",
+      "doi": "10.1242/jeb.37.4.698",
+      "access": "Summary read by a verification agent.",
+      "use": "Carbon monoxide 0.5-13% of float gas, oxygen 15-20%, CO2 negligible; the gas gland (pneumadena) forms CO from L-serine; large folic acid concentration; CO later replaced by air through diffusion and exchange.",
+      "limit": "Nitrogen and argon not given in the summary."
+    },
+    {
+      "id": "dunn_wagner2006",
+      "citation": "Dunn, C. W. and Wagner, G. P. (2006). The evolution of colony-level development in the Siphonophora (Cnidaria: Hydrozoa). Development Genes and Evolution 216(12), 743-754.",
+      "doi": "10.1007/s00427-006-0101-8",
+      "url": "https://dunnlab.org/assets/Dunn_Wagner2006.pdf",
+      "access": "Full text (author PDF) read by a verification agent.",
+      "use": "Colonies of zooids homologous to solitary animals: pneumatophore, nectophores, gastrozooids, palpons, gonophores on gonodendra, bracts; probuds arise in growth zones that also lengthen the stem; Physalia is a cystonect without a long stem.",
+      "limit": "Physalia's budding not examined."
+    },
+    {
+      "id": "sander_henry",
+      "citation": "Sander, R. Compilation of Henry's law constants (version 4.0, Atmospheric Chemistry and Physics 15, 4399-4981, 2015; online at henrys-law.org).",
+      "url": "https://www.henrys-law.org/henry/casrn/1333-74-0",
+      "access": "Online entry for hydrogen read on 2026-10-09.",
+      "use": "H2 solubility 7.7-7.8e-6 mol m-3 Pa-1 at 298.15 K across literature reviews and measurements (e.g. Fernandez-Prini et al. 2003, 7.8e-6).",
+      "limit": "Pure water at 25 C."
+    }
+  ]
+}

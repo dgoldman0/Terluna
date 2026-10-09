@@ -1,236 +1,187 @@
-# Photosynthetic floaters: coupled requirements and failure modes
+# Photosynthetic floaters: the real limits and how a giant grows
 
-**Large buoyant organisms remain physically worth investigating, but the earlier lift-only sizes do not establish
-that they can sustain themselves.** This study adds pressure-bearing structure, gas permeability, wet tissues,
-water retention, carbon allocation, hydrogen production, dark reserves, reproduction, motion and changing buoyancy.
-It also incorporates the author's correction: Terluna's persistent twilight and slowly moving Sun give organisms
-several possible light histories. A stationary 14.77-day dark interval is one stress case, not a universal habitat.
+The author asked on 9 October 2026 for giant photosynthetic floaters that grow over centuries as far as the physics
+allows, with fittings, seams, gusts, damage, water and storms worked out, and with their water drawn from the air.
+"Floater" is the working name until the taxonomic system names them. The findings, all *screen* values from
+[run.py](run.py) unless marked *derived*:
 
-At 10 km, a conditional spherical reference passes mass, photon-allocation and positive-carbon gates at tested
-diameters of **40, 60, 100 and 150 m**. That is a set of tested points under one imposed trait combination, not a
-certified size range. Joint material properties, water supply and trim, weather survival and a complete life cycle
-remain open. No species, standing population or harvest capacity is selected by this work.
+- **Size.** A single round floater survives from about 50 m to 700 m across at 10 km with cellulose-class tendons, to
+  1 km with 300 MPa fibre, and to 1.5 km and 3 km with those fibres in canopy-like light; collagen tendons, which
+  creep at a tenth of their strength, hold it to 100–200 m. A colony of 60–150 m modules has no structural size limit,
+  because each module's pressure head is set by its own height and the ties that hold the colony weigh 0.4–0.9 kg/m²
+  at any width. Every hull carries its storm gusts, 100–300 Pa of spare pressure for trim and a wet fire-barrier skin,
+  and every round body is divided into enough slack gas cells to survive losing one. Taking a burning cell's heat at
+  one cell radius, the near end of its design range, moves the smallest colony module to 100 m.
+  [Structure](structure.md).
+- **Age.** A giant's age is the time its own light takes to make its gas. A 200-m body takes 12–304 years to grow, a
+  1-km body 29–435 years as a colony and 73–1,186 years as a round body, and a 2-km body 36–544 years as a colony and
+  225–702 years as a round giant, counted from a 40-m juvenile or one founding 60-m module. Round giants grow almost
+  linearly in radius and slow as their tendons grow; colonies double every 3.6–55 years. [Growth](growth.md).
+- **Water from the air.** Mean rain meets the reference need of 1.25 kg/m² a day equatorward of 35–38°, half the
+  Moon; cool leaves and a CO₂-concentrating mechanism cut the need fivefold and widen that to 51°, and humid layers to
+  65–69°. Rain comes with the afternoon storms every 15–30 days. A 2-km body's 300 Pa of spare pressure banks
+  4.8 kg/m² of it, enough for the concentrating trait's 2–4 kg/m² between storms, while small and flat bodies must
+  drink as they lose, from sorbent skins that take 0.2–2.4 kg/m² a day from the 64% air. [Water](water.md).
+- **Storms and fire.** A soft floater rides updrafts it cannot fight, so storms are escaped by route, hour and
+  latitude; they rain in the tropical afternoon and flash only by day. Hydrogen burns at 4–71% in the lunar air, the
+  98% lifting gas cannot burn, and a hole's flammable zone reaches at most 240–380 hole diameters, less for tears
+  whose jets become buoyant plumes. A 200-m body meets 0.02–1.4 lightning strikes in 300 years and a 2-km body
+  0.9–23, so giants are made of small gas cells or modules in wet skins that a strike burns one at a time.
+  [Storms](storms.md).
+- **Sailing and the Sun.** The mean wind blows east above 2 km, so no layer carries a floater west with the Sun. A
+  wing of a tenth of the body's area, hung on a weighted tether 5–9 km below it, sails it 0.4–0.8 m/s across the
+  shear, 30–70° of latitude in a lunar day, for 0.03–0.7 kg/m² of hanging tether and ballast. Riding the eastward
+  wind shortens the solar cycle to 21 days at 10 km and 15 days at 20 km at the equator. In the CM1 rings the low
+  evening flow lingers near sunset for three to six weeks; a westward branch 5–10% weaker would cut that to 10–18
+  days. [Sailing](sailing.md).
+- **The canopy nursery.** Megaforest crowns can raise juveniles to 50–60 m, the smallest round bodies that float with
+  their reserve, in one to seven years from fermented host sugar and their own light, with water and phosphorus drawn
+  from the host's sap as mistletoes draw theirs. Beyond that the gas outgrows any host (a 200-m body's trimmed gas is
+  26–243 hectare-years of forest growth), the juvenile's drag starts to threaten its tree, and the adult grows on its
+  own light. [Growth](growth.md).
+- **Gas biology.** Fish secrete oxygen into swim bladders at over 100 atmospheres, guanine plates make the bladder
+  wall a hundred times tighter, and the Portuguese man-of-war makes its float gas in a gas gland; plated barriers
+  could cut a floater's permeation 10–50 times. [Gas biology](gas_biology.md).
+- **People.** Floaters give membrane for gas cells, fibre, shade and roosts before food; their tethers, storm
+  excursions and slow falls are the hazards. [Resources](resources.md).
+
+Independent read-only reviews of the new components on 9 October 2026 found errors that changed headline numbers:
+gas-cell walls counted as hydrogen-loss area, the spare superpressure and the fire-barrier water left out of the hull
+and the mass, colony modules without the round bodies' seams, tethers sized without their own weight, venting and
+water stores overstated, and periods, closures and lightning ranges read too coarsely. This version corrects them, and
+the [checks](checks.json) list each; two further reviews checked the new sources against what could be read.
+
+## What a giant looks like
+
+The giant the physics allows is wide and flat. A colony of wet gas modules 60–150 m across (80–150 m at 20 km) lies
+one layer deep on a hexagonal raft at 10–20 km, a kilometre or two wide, its upper faces green with photosynthetic
+tissue and its undersides furred with sorbent and fibre fringes that drink from the air. Weighted wings hang on
+tethers kilometres below to sail it across the wind, and fringes comb cloud. Modules are specialised as a
+siphonophore's zooids are: floats, collectors, gas-makers, sails and the reproductive modules that bud the next
+generation. Storms and lightning take modules, and the colony regrows them as a tree regrows branches, so the colony
+can grow for centuries. Round giants are the other form: single bodies of hundreds of metres to a few kilometres,
+divided into eight to over a hundred slack gas cells inside a wet skin, slower and older, banking storm rain in their
+tall gas columns. Migrating flyers roost on both and bring the land's and seas' phosphorus up to them.
+
+## How the study is built
 
 Run `python -m research.studies.floater_viability.run`; check with
-`python -m pytest research/studies/floater_viability`. The versioned
-[product](results/floater_viability.json) binds eight producer files, six source registers and inherited inputs by
-SHA-256 and records named shared constants. [Checks](checks.json) distinguish focused tests from repository gates.
-The renderer is [visualization/floater_viability/plot.py](../../../visualization/floater_viability/plot.py);
-generated plots stay outside Git.
+`python -m pytest research/studies/floater_viability`. The [product](results/floater_viability.json) (schema
+`terluna.research.floater-viability/2`) binds 15 producer files, 13 source registers and the inherited products by
+SHA-256 and records the shared constants its code reads. [Checks](checks.json) record what was run. The renderer is
+[visualization/floater_viability/plot.py](../../../visualization/floater_viability/plot.py); its images stay outside
+Git.
 
-## What such an organism could look like
+| Component | Holds |
+|---|---|
+| [mechanics](mechanics.md) | Hydrostatic head, sphere and lobe screens, neutral trim, punctures |
+| [envelope](envelope.md) | Hydrogen permeation, barrier measurements, inflation work |
+| [biology](biology.md) | Upkeep, net production, night stores, hydrogen pathways, buds |
+| [environment](environment.md) | Air, transpiration, droplets, leaf heat |
+| [photoperiod](photoperiod.md) | Twilight, Sun-following geometry, light measures |
+| [navigation](navigation.md) | Airspeed, drag work, wind tolerance |
+| [trim cycle](trim_cycle.md) | Signed mass ledger, venting and compression |
+| [structure](structure.md) | Joints, sustained load, gusts, damage, creep, colonies and the size limits |
+| [growth](growth.md) | Ages, the canopy nursery, phosphorus, lifespan |
+| [water](water.md) | Rain, vapour, dew, droplets, the trim rule and the water map |
+| [storms](storms.md) | Updrafts, rain surges, flammability, lightning and fire |
+| [sailing](sailing.md) | Shear, tethered wings, sea drogues, day length, sunset lingering |
+| [gas biology](gas_biology.md) | Swim bladders, guanine barriers, the man-of-war's gas gland, siphonophores |
+| [resources](resources.md) | Membrane, food, fibre, shade, hazards |
 
-The working biological concept is a large gas-supported body with a mostly inert, replaceable envelope, distributed
-photosynthetic tissue and small, protected liquid habitats. Thin wet films, enclosed pockets, wicks and many small
-reservoirs would distribute water more gently than one open pond. Microbes, algae, small grazers and decomposers
-could occupy these retained-water habitats. Their food, water, gas exchange and nutrient return still have to fit
-the host's accounts; a food web cannot be inferred from the envelope's volume.
+## Air and units
 
-Possible lobes and tension fibres divide membrane spans. Small gas cells could limit the consequences of a puncture,
-but extra partitions add mass, permeability area and developmental complexity. The current sphere and ideal lobed
-models do not solve that multicellular geometry. A shaded, protected gas barrier behind a tougher outer surface has
-historical material precedents, but its additional layers and their biological renewal need explicit designs.
+The study reads the sky-ship product's air; heights are above sea level. Per-area quantities use projected area
+πR² (or a raft's hexagonal cell); membrane and gas-contact areas are separate; diameter is 2R.
 
-An attractive first concept is therefore a light aerial organism with small retained-water communities, modest
-active biomass, a slow replacement rate and routes through suitable light and humidity. A forest, soil bed or large
-open lake aloft demands a substantially different load and water budget. The model's free-water allowance of
-5 kg/m² projected area is just 5 mm averaged over that area; concentrating it into pockets does not create more water.
-
-## Environment and units
-
-The study reads the existing sky-ship air product. Heights are above sea level. Organism-area quantities use its
-projected area, `A = pi R²`; membrane area and gas-contact area are recorded separately. Diameter is `2R`.
-
-| Height | Air density | Mean temperature | Net supported mass per m³ of lifting mixture |
+| Height | Air density | Mean temperature | Lift per m³ of lifting mixture |
 |---|---:|---:|---:|
 | 10 km | 1.204 kg/m³ | 14.2 °C | 1.098 kg/m³ |
 | 20 km | 1.024 kg/m³ | 5.1 °C | 0.933 kg/m³ |
 | 40 km | 0.734 kg/m³ | −13.9 °C | 0.669 kg/m³ |
 
-These are inherited mean states, not proven regional flight conditions. Mean freezing occurs near 25.7 km;
-high-latitude light and a globally averaged warm layer cannot simply be combined into a demonstrated warm route.
-The adopted atmosphere is approximately 400 ppm CO2. Higher surface partial pressure does not mean that the
-10-km habitat has 1,000 or 2,000 ppm; those concentrations are separate sensitivities.
+The air is dense and tall: at 10 km its pressure scale height is 52 km and its density scale height 62 km, and the
+mean air reaches 0 °C at 25.7 km. The
+lifting mixture is 98% hydrogen and 2% ambient air by mole; the inherited rounded density puts the hydrogen
+inventory 1.05% below ideal xpV/RT at 10 km, and every ledger uses the density convention. The atmosphere holds about
+400 ppm CO₂.
 
-The lifting mixture convention is 98% hydrogen and 2% ambient air by mole fraction. The inherited rounded density
-gives hydrogen inventory about 1.05% below ideal `x p V / RT` at 10 km. Supported mass, inventory, trim and daughter
-inflation consistently use the density convention; the discrepancy is exposed in every feasible case.
+## The reference organism
 
-## Size helps lift but also increases structural load
+**The reference is a light organism on a long-lived inert envelope.** Its envelope has a 5 MPa assembled skin (the
+structure note derives it from 20 MPa coupons, 0.7 joints and a decade's sustained load), a 25 µm structural floor,
+a separate 100 µm barrier at 0.173 Barrer, 1,500 kg/m³ materials, one gas–air partition, 20 Pa of base pressure and a
+10 m/s gust (the coupled giants use the storm gusts of 14.4–17.0 m/s). Per projected square metre it carries 1 kg of
+living dry tissue, 0.1 kg of community dry matter, 90% water in both, 5 kg of free water and its night reserve, and it
+uses at most 70% of its full lift. It fixes 2 kg C/m² a year gross, keeps up living tissue at 0.003 kg glucose per kg
+a day (a quarter of that in the dark), feeds 0.1 kg C/m² a year to its consumers, renews 10% of its inert structure and
+half its living tissue a year at 1.39 kg glucose per kg, and makes hydrogen at 1% of a 200 W/m² mean light by day and
+by fermentation at 2.1 mol/mol by night.
 
-Gross supported mass grows as volume, but a tall hydrogen envelope also develops a pressure difference with height:
+**At 10 km the reference sphere passes its mass, light and carbon gates at 40, 60, 100 and 150 m.** It supports
+18.70 kg/m² (23.5 t) at 40 m and 24.59 kg/m² (193 t) at 100 m, mostly gas by volume:
 
-\[
-\frac{d\Delta p}{dz}=(\rho_{air}-\rho_{gas})g,
-\qquad t_{sphere}=\frac{\Delta p R}{2\sigma_{allow}}.
-\]
-
-At 10 km, the hydrostatic contribution at the crown grows by about **3.53 Pa per metre of radius**. Using the crown
-load over a uniform sphere is a conservative pressure-sizing screen, not a solved membrane shape. Once that head
-dominates, the required thickness grows as `R²` and skin mass as `R⁴`. Bigger therefore eventually becomes heavier
-per unit lift. Gust loads, partition loads, seams, defects, fatigue and biological attachment all matter.
-
-At 1 MPa allowable strength and 1,500 kg/m³ material density, a simple sphere without other pressure or barrier
-loads has a maximum wet-payload allowance of about 50.7 kg/m² using all lift, or 12.7 kg/m² if only half is used.
-The earlier 100-kg/m² wet-biomass example cannot fit that architecture at any radius. Lobes reduce local film spans;
-their tendons still carry global forces. The study pays tendon mass but assumes their strength separately.
-
-Measured biopolymer/cuticle coupon strengths make MPa-scale studies reasonable. The assembled long-lived wet
-envelope's allowable strength is not known. The reference's **5 MPa** is an imposed requirement, not a validated
-biological construction. See [mechanics](mechanics.md) and its [source register](mechanics_sources.json).
-
-## There is a real biological gas-barrier precedent
-
-Historical airships used processed intestinal collagen membranes, called goldbeater's skin, as hydrogen gas-cell
-barriers. NACA's 1922 report describes finished fabrics around 130–150 g/m² and low hydrogen transmission, with
-cotton, glue, glycerol and varnish among the construction materials. Many cells were protected inside a hull.
-This is a macroscopic biogenic barrier precedent; living growth, repair and exposed weathering were not demonstrated.
-
-Other primary studies report low hydrogen permeability in cellulose-derived films. The 2022 cellophane result
-used here is about **0.173 Barrer**; a historical film gives a lower sensitivity around 0.039 Barrer only if its
-reported litres are interpreted at standard conditions. The original litre reference and test humidity are not
-established. Recent microfibrillated-cellulose values around 10–12 Barrer show that the material name alone does
-not specify performance. Nanocellulose fuel-cell experiments give useful hydrated-material evidence, but their
-80 °C, 95% RH device results cannot be transplanted directly into ambient lunar permeability.
-
-Hydrogen leaks in response to its **partial-pressure difference**, close to one atmosphere here. The small total
-mechanical overpressure is not the permeation driving pressure. Pinholes, seams and wet-state changes can overwhelm
-an intact-film estimate. Making a barrier thicker reduces intact permeation and adds mass and replacement carbon.
-Growing larger lengthens the gas-inventory turnover time, but does not reduce replacement power per projected area
-when barrier thickness and gas-contact-area ratio are fixed.
-
-The product compares measured-condition leads and explicit sensitivities. It does not combine their best values
-into a claimed existing material. [Envelope analysis](envelope.md), [sources and access scope](envelope_sources.json).
-
-## Reference requirements and joint budgets
-
-The illustrative reference combines 5 MPa allowable structure, 25-µm minimum structural film, an additional
-100-µm barrier at 0.173 Barrer, 1,500 kg/m³ material density, one great-circle gas/air partition, 20 Pa bottom
-overpressure and a 10 m/s relative-gust pressure case. Full-capacity pressure sizing is paid before nominal trim.
-The whole exterior plus partition is treated as gas-contact area, an explicit conservative-area sensitivity.
-
-Per projected m² it carries 1 kg active host dry matter, 0.1 kg community dry matter, 90% water in those tissues,
-5 kg free water, and hydrated dark reserves. The structural material is treated as 90% dry and mostly inert.
-At most 70% of full supported lift is used, leaving 30% capacity for requirements not yet designed. This spare
-capacity is not an actuator and is not counted as an upward force at nominal neutral buoyancy.
-
-The carbon case starts with 2 kg C/m²/year gross photosynthesis, maintenance of 0.003 kg glucose/kg host dry
-matter/day, quarter-rate dark maintenance, 0.1 kg C/m²/year consumer food, annual replacement of 10% of inert
-structure and 50% of active host tissue. Construction costs 1.39 kg glucose/kg new dry material, an explicitly
-transferred biological analogue. Community renewal must fit its aggregate food allowance; it is not a resolved
-trophic model. Higher active-tissue maintenance, material turnover or wet loads can reverse the conclusion.
-
-Hydrogen uses an assumed **1% full-solar-to-H2 LHV efficiency** and supplied cycle-mean irradiance of 200 W/m².
-Daytime gas production diverts collecting area from carbon fixation. Dark fermentation uses 2.1 mol H2 per mol
-glucose, with gross substrate committed and no unproven coproduct recovery credited. Measured fermentation also
-produces mixed gases; purification, oxygen management and the organs' mass remain unresolved. Laboratory pulsed
-photosynthetic-H2 efficiencies have different spectral and temporal denominators and do not validate the 1% input.
-
-| Material sensitivity, fixed half-cycle dark stress | Diameter | Fraction of full lifting volume needed | Remaining construction assimilate | Parent-funded equal-daughter allocation time |
+| Barrier | Diameter | Share of full lift used | Construction carbon left | Parent-funded daughter time |
 |---|---:|---:|---:|---:|
-| 0.173 Barrer, 100 µm | 40 m | 0.639 | 1.029 kg C/m²/year | 7.04 years |
-| 0.173 Barrer, 100 µm | 100 m | 0.336 | 0.735 kg C/m²/year | 16.14 years |
-| 0.039 Barrer, 25 µm | 40 m | 0.619 | 1.076 kg C/m²/year | 6.32 years |
-| 10 Barrer, 100 µm | 40 m | 0.747 | −9.668 kg C/m²/year | No surplus |
-| 10 Barrer, 1,000 µm | 100 m | 0.432 | −0.503 kg C/m²/year | No surplus |
+| 0.173 Barrer, 100 µm | 40 m | 0.639 | 1.029 kg C/m²/yr | 7.04 years |
+| 0.173 Barrer, 100 µm | 100 m | 0.336 | 0.735 kg C/m²/yr | 16.14 years |
+| 0.039 Barrer, 25 µm | 40 m | 0.619 | 1.076 kg C/m²/yr | 6.32 years |
+| 10 Barrer, 100 µm | 40 m | 0.747 | −9.668 kg C/m²/yr | none |
+| 10 Barrer, 1,000 µm | 100 m | 0.432 | −0.503 kg C/m²/yr | none |
 
-The 40-m reference supports about 18.70 kg/m² (23.5 tonnes in total); the 100-m one supports 24.59 kg/m²
-(193 tonnes). Most of the volume is gas. These masses include the listed stocks but exclude unresolved organs,
-control systems and their loads. The larger reference has better fractional lift reserve yet a larger structural
-and daughter-construction bill. With 10 kg/m² of active dry host tissue, none of the tested sizes passes the three
-joint mass, photon and carbon gates. Inert, dormant and actively respiring dry mass cannot be interchanged.
+With 10 kg of living dry tissue per square metre no size passes. The daughter time pays construction, reserves and the
+gas photons from the parent's fixed area. The 40-m body's 1.75 t of hydrogen permeates at 0.062 kg a day, a 77-year
+cycle time for its gas.
 
-The daughter time pays construction and initial reserves plus extra hydrogen photons diverted from the parent's
-fixed collecting area. It assumes no daughter photosynthesis, developmental upkeep, mortality or attachment cost;
-it is a conditional allocation time, not a universal minimum or population doubling time. Recruitment and lifetime
-must yield at least one successful replacement per adult. A large body that merely remains aloft is not yet a species.
-See [biology](biology.md), [sources](biology_sources.json) and the explicit sensitivities in the product.
+## The limits, in brief
 
-## Twilight and moving with the Sun
+**Size.** The low edge, about 45 m, is where a sphere's gas column, two thirds of its diameter, can no longer lift the
+living tissue, the water store and the wet skin with a 30% reserve; even a massless envelope fails below 31 m, and
+below 36 m with its wet skin. Round bodies' tendons take a share of the lift that grows in proportion to radius over
+the fibre's breaking length, (5π/4)ρgR/σ, and renewing them every century eats the surplus at 0.3–3 km, depending on
+the fibre and the light. Gas cells answer damage: a body needs supported mass ÷ dumpable water of them, never fewer
+than eight; 22 at 1 km with 300 MPa fibre (52 with cellulose-class fibre) and 64 at 2 km. An arrested 4-m tear empties
+one in minutes in a small body and in hours in a giant. Hydrogen replacement costs a steady 0.2 kg C/m² a year at
+every size, because walls between cells lose no gas. Fatigue matters most for small bodies, whose stress swings most
+with the gusts; a giant's stress is 97% steady, and creep at its renewal interval sets its allowable.
 
-The inherited clear-ground optical calculation reaches PAR of at least 1 µmol photons/m²/s throughout the equinoctial cycle
-poleward of about 60.4°; allowing the project's solar declination range shifts the all-season geometric threshold
-to about 61.9°. That PAR threshold is an optical definition used in this comparison. It is not a universal
-photosynthetic compensation point. Clouds, elevated-observer spectra and local temperature need their own treatment.
+**Gas and age.** Photolytic hydrogen costs 3.8–9.5 kg of carbon per kilogram, fermented 8.9–21.9 kg. A colony's new
+square metre costs 10.7–34.8 kg C and earns 0.89 kg C a year at the reference light, so it doubles in 8.4–27.3 years
+(3.6–6.3 in canopy-like light).
 
-At 60° latitude, an inherited ground-canopy example spends only about 34 hours per cycle below that optical
-threshold, yet its whole-plant carbon deficit lasts about 307–309 hours. The canopy's physiology is not assigned to
-floaters; it demonstrates why continuous twilight and positive net carbon are different conditions. Its diffuse
-spectral proxy gives PAR around 5.44 W/m² with the Sun 10° below the horizon and 1.11 W/m² at −20°. Lux alone does
-not set hydrogen-production power. Cached spectral transport needed for direct 10/20-km PAR evaluation is absent,
-so the study makes no aerial-light extrapolation or new climate run.
+**Water.** The reference needs 458 kg/m² a year, 37 kg per lunar cycle against 5 kg stored. Rain supplies the tropics;
+vapour and humid layers supply the poles; venting gas to follow a 1 kg/m² daily swing would cost 104 W/m², so the
+swing lives within the hull's spare pressure: 0.1 kg/m² in a 40-m body, 0.5 in a 200-m body and 4.8 in a 2-km body at
+300 Pa.
 
-The westward ground speed that maintains mean local solar time is
+**Storms and fire.** A body at 64% gas fill rises with an updraft until full at 37–41 km; holding against the storms'
+90th-percentile updraft takes 3.5–9 kg/m² of extra weight. Venting to stay full costs 1.6% of the gas per kilometre of
+forced rise. Rain must be shed at up to 70 kg/m² an hour. Oxygen permeating in reaches 5% of an unscrubbed module's
+gas in 70–350 years, and a lining of hydrogen-oxidising microbes keeps it out for 4–18% more hydrogen.
 
-\[
-v_\odot=\frac{2\pi(R_{Moon}+h)\cos\phi}{T_{synodic}}.
-\]
+## Twilight and the Sun
 
-At 10 km it is **4.30 m/s at the equator, 2.15 m/s at 60°, and 0.747 m/s at 80°**. This is a slow moving target.
-An organism carried by a matching wind needs no steady horizontal propulsion to keep pace. Real trajectories must
-match the wind vector, including north/south drift. Selecting among altitude winds could help when the desired
-velocity lies between accessible winds; changing altitude and surviving those layers still have costs.
+**Poleward of about 60° the clear ground never falls below 1 µmol/m²/s of PAR, and yet at 60° the reference ground
+plant runs a carbon deficit for about 308 hours a cycle.** The PAR threshold is reached at 60.4°, 61.9° allowing the
+declination range; at 60° the plant spends 34 hours below it. The diffuse twilight carries 5.44 W/m² of PAR with the
+Sun 10° down and 1.11 W/m² at 20°. [Photoperiod](photoperiod.md).
 
-For the spherical drag comparison, chemical input per projected area is `rho Cd v_rel³ / (2 eta)` with `Cd=0.47`
-and `eta=0.25`. A **0.5 m/s** mismatch costs **0.141 W/m²**, **1 m/s** costs **1.13 W/m²**, and **2 m/s** costs
-**9.05 W/m²**. A streamlined `Cd=0.05` case is a separate architectural sensitivity. The ground speed above is
-only an airspeed in explicitly calm air. Sparse corrective activity cannot cheaply cancel a steady mismatch:
-concentrating the same displacement into duty fraction `d` raises mean cubic-drag cost as `1/d²`.
+**Holding the Sun takes 4.30 cos(latitude) m/s westward at 10 km, free on a matching wind and 90 W/m² for a sphere in
+calm equatorial air.** A 0.5 m/s mismatch costs 0.141 W/m², 1 m/s 1.13 W/m² and 2 m/s 9.05 W/m² at 25% efficiency, and
+bursts cost 1/d² more. With fixed light and production, the continuous-light case leaves 0.984 kg C/m² a year of
+construction carbon against 1.029 for the half-cycle night. The project's winds offer no westward mean flow, so
+floaters ride the eastward wind to shorten their nights, linger in the evening return flow near the ground, or sail
+north and south between the rain and the twilight. [Navigation](navigation.md), [sailing](sailing.md).
 
-Drifting west slightly too slowly can lengthen both daylight and darkness; it is not automatically Sun-following.
-The product evaluates fixed-half-cycle, shorter-deficit and continuously useful-light cases separately, keeping
-annual GPP and mean irradiance fixed to isolate timing. With these fixed inputs the reference's continuous-light
-case has slightly less surplus (0.984 versus 1.029 kg C/m²/year), because the imposed active maintenance replaces
-dark idling. This does not predict that Sun-following reduces real productivity: increased usable light and its
-photosynthetic response have not been solved. [Photoperiod](photoperiod.md) and [navigation](navigation.md).
+## What would decide it next
 
-## Water supply and changing buoyancy are major remaining gates
-
-At 10 km, 60% relative humidity, leaves 5 K warmer than air and 400 ppm CO2, the reference diffusion calculation
-uses about **458 kg water/m²/year** for its net leaf assimilation. That is about 37 kg per lunar cycle, compared
-with 5 kg/m² free-water storage. Higher humidity, cooler leaves, different carbon physiology and recapture could
-reduce losses. Those traits must also preserve photosynthesis and heat balance. Night cuticular loss and metabolic
-water have separate entries; the model does not pretend this diffusion estimate is a measured annual water demand.
-
-Fog capture needs liquid-water concentration, residence time and relative droplet flow. Free drift in a uniform
-wind supplies no horizontal collector flow. Existing Eulerian cloud fractions cannot establish a floater's water
-route. Rain is both a source and a transient overload: retaining an extra 1 kg/m² gives a 2.38 m/s residual
-terminal-descent diagnostic in the chosen drag model, before shedding or control. This is not a storm trajectory.
-
-Water changes lift requirements. The signed trim ledger combines water intake, evaporation, drainage, metabolic
-water, dry matter, leakage, production and venting before any control response. At 10 km, one kilogram of the
-reference hydrogen inventory corresponds to about **13.40 kg of supported mass**. If an organism loses 1 kg water
-per projected m² and holds altitude by venting gas, then restores both after collecting water, each daily cycle
-requires 0.0746 kg H2/m², equivalent to **103.6 W/m² of chemical hydrogen output** averaged over that day. That
-strategy overwhelms the reference's 2 W/m² full-surface H2 production capacity. It is not a tax on all gross
-evaporation: simultaneous intake can balance it, and the product tests that cancellation explicitly.
-
-Retaining gas and compressing it has a different cost. From a neutral supported load of 20 kg/m², accommodating
-1 kg/m² loss by shrinking the retained gas volume at fixed altitude raises its pressure by about **4.78 kPa**.
-A fixed outer hull with compressed air admitted to a common-pressure ballonet is another arrangement and has a
-different pressure increment. Both require additional pressure-bearing structure or storage; a flexible
-equal-pressure air/gas partition alone does not remove buoyancy while retaining all hydrogen.
-
-Allowing altitude changes, timing uptake, suppressing evaporation and exchanging stored water are possible design
-routes. A soft pressure-balanced gas bag with gas temperature following air has nearly altitude-independent lift
-until its expansion limit; losing water need not produce a small, self-correcting climb. A trajectory/controller
-model is needed. Night leakage-only ballast numbers likewise hold other payload mass constant: evaporation and
-respiration may offset that loss, while rain and uptake may increase it. Metabolic product fates must be tracked;
-carbon disappearance alone does not determine total mass change. [Environment](environment.md),
-[trim cycle](trim_cycle.md), and their conservation tests make these boundaries explicit.
-
-## What would decide the question next
-
-1. **A joint wet membrane test:** hydrogen and oxygen/air permeability, allowable sustained stress, water sorption,
-   seams, fatigue, puncture/repair and replacement rate for one assembled living-compatible construction. The
-   central requirement is joint performance at its operating humidity and temperature.
-2. **A coupled water and flight trajectory:** light spectrum, clouds, precipitation, temperature, wind vector and
-   shear along accessible routes; actual gas geometry, water buffering, altitude control and propulsion. This is
-   where the author's twilight and Sun-following direction can be tested quantitatively.
-3. **A complete host metabolism and development:** shared photons for carbon and H2, gas separation, oxygen safety,
-   active versus inert tissue, nutrient return, reserve turnover, daughter growth and successful recruitment.
-4. **Population and ecosystem closure:** storm and collision loss rates, disease, predation, surface exchange,
-   phosphorus return and shared light with underlying habitats. No harvest is credited before that account closes.
-
-The current result narrows an architecture and exposes falsifiable requirements. It supports further work on
-lightweight floaters with retained-water communities, while leaving their sustainable size and abundance open.
+1. **A joint wet membrane test.** Hydrogen, oxygen and nitrogen permeation, sustained-load strength and creep at the
+   renewal interval, seams and joints, tear arrest and healing time, on one assembled living-compatible film, with and
+   without guanine-like plates.
+2. **The latitude and solar-hour wind product.** It places the westward branches, the shear and the rain sector along
+   real paths, and replaces the global-mean profile and the five rings used here.
+3. **A trajectory model.** Water, carbon, gas and trim along a sailing path through storms, twilight and humid
+   layers, with the trim rule enforced hour by hour.
+4. **A population model.** Recruitment, juvenile survival, fragmentation, lightning and storm losses, and the
+   phosphorus cycle through roosts, litter and floater falls.
+5. **Storm records over centuries.** Return levels of gusts and updrafts beyond one lunar day of one ring.
