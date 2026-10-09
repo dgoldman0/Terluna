@@ -33,21 +33,33 @@ loss and the resupply that matches it take to replace the inventory.
 
 ### The imports
 
-1. **Water dominates the import, and nitrogen is the hard one.**
+1. **Water dominates the import, and the nitrogen comes bound in ordinary icy bodies.**
    - **Water against air.** The water to deliver is 4.4–23 times the air's mass: seas of 1.07×10¹⁹ kg, rain-fed lakes
      of 3.1×10¹⁸ kg, and 0–5.9×10¹⁹ kg in the crust's pores, depending on how deep it saturates (*screen*). The air is
      3.14×10¹⁸ kg: 2.53×10¹⁸ kg of N2 and 6.13×10¹⁷ kg of O2.
    - **The stream.** The 19 September architecture sized its matter stream for the nitrogen, 2.7×10⁸ kg/s over 300
      years. Air and water over 500 years need 1.1–4.8×10⁹ kg/s (*screen*).
-   - **Sources.** C-type bodies and comets are rich in water and carbon. Their nitrogen is scarce and bound:
+   - **Where the nitrogen lies.** Molecular nitrogen on the scale needed sits only in Titan's air, about 3.5 times the
+     need, and Pluto's Sputnik Planitia, 0.33–3.4 times (literature). The conservation study's principle 5 leaves
+     Titan untouched, and Sputnik Planitia is a unique world. Ordinary icy bodies hold their nitrogen bound, in
+     ammonia, ammonium salts and organics:
      - comet 67P holds N2/CO of 0.006 (Rubin et al. 2015), with its nitrogen in ammonium salts (Altwegg et al. 2020);
-     - Bennu holds 0.23–0.25 wt% N (Glavin et al. 2025), so its kind of material would need 42–45% of the main belt's
-       mass to supply the N2;
-     - only Titan's air, about 3.5 times the need, and Pluto's Sputnik Planitia, 0.33–3.4 times, hold N2 on that
-       scale (literature).
-   - **The tension.** The conservation study's principles leave Titan's atmosphere untouched, and Sputnik Planitia is a
-     unique world. The nitrogen's source is therefore the domain's first question.
-   - *Solid arithmetic; the sources' contents are measured.*
+     - Bennu holds 0.23–0.25 wt% N (Glavin et al. 2025), so the inner Solar System's material of its kind would need
+       42–45% of the main belt's mass;
+     - the Kuiper belt holds about 2% of Earth's mass (Pitjeva & Pitjev 2018), roughly 7×10²² kg of it outside the
+       large dwarf planets. At a few tenths of a percent to a few percent nitrogen, its small bodies hold 80–800 times
+       the air's need (*derived*).
+   - **The scale.** Supplying the air means processing 10²⁰–10²¹ kg of small bodies, the mass of about 150–1,600
+     bodies 100 km across, so the ore stream runs 30–300 times the nitrogen stream (*derived*). The bodies mined for
+     the water may bring much of the nitrogen with them.
+   - **What follows.** The conservation principles hold as written: the nitrogen comes from ordinary icy bodies of the
+     middle and outer Solar System, as the 19 September source principle and principle 5 have it. Its costs are grade
+     and chemistry: dilute, bound nitrogen, cracked to N2 at the source so that the ammonia's hydrogen stays there
+     (finding 2). On 9 October the author asked for the extraction to be planned in detail, feasible and sustainable
+     and protecting the major celestial bodies ([register](../research/decisions.md#atmosphere)).
+   - *The sources' contents are measured; the Kuiper belt's count is a rough estimate from cited values. The first
+     version of this finding weighed the need against the molecular reservoirs and the main belt alone, and set the
+     nitrogen against the conservation principles; counting the Kuiper belt's small bodies removed that.*
 2. **Every import carries an oxygen account.**
    - **Oxygen shipped as water.** It leaves 7.7×10¹⁶ kg of hydrogen. Released, that would make the air 26% hydrogen;
      burned, it would take back every molecule of the air's oxygen, since two hydrogen molecules go with each O2

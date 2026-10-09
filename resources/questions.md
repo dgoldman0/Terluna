@@ -3,15 +3,23 @@
 In order of what each would settle for the whole Open Moon. Each names what decides it and how it could be answered
 on this laptop. The findings behind them are in the [README](README.md).
 
-1. **Where the nitrogen comes from.** The air needs 2.5×10¹⁸ kg of N2. Common icy bodies hold their nitrogen as
-   ammonia and ammonium salts, at a few tenths of a percent to a few percent of their mass. Titan's air and Pluto's
-   Sputnik Planitia hold N2 on the scale needed, and the conservation principles leave Titan untouched; Sputnik
-   Planitia is a unique world. The answer decides the size of the source industry and whether the principles hold as
-   written.
-
-   **How:** a census of candidate sources with their nitrogen content, mass, delivery energy and conservation
-   standing (comets with ammonium salts, Kuiper-belt bodies, Ceres's ammoniated clays, carbonaceous asteroids). The
-   choice among them, and any change to the principles, is the author's.
+1. **The nitrogen's extraction plan.** On 9 October the author asked for the extraction to be planned in detail:
+   feasible, sustainable, and protecting the major celestial bodies as the conservation study's principle 5 plans.
+   The air needs 2.5×10¹⁸ kg of N2. Ordinary icy bodies hold their nitrogen bound, at a few tenths of a percent to a
+   few percent of their mass, and by a rough count the Kuiper belt's small bodies alone hold 80–800 times the need.
+   - **What decides it:**
+     - which populations supply it (Kuiper-belt bodies, Centaurs, Jupiter-family and long-period comets, Jupiter's
+       trojans, carbonaceous asteroids), with their nitrogen content, mass, reach and delivery energy;
+     - the share of each population taken, small enough that no population and no unique body is used up;
+     - whether the bodies mined for the water bring the nitrogen with them;
+     - the chemistry at the source: ammonia cracked to N2, ammonium salts and organics broken down, the hydrogen kept
+       there;
+     - the source industry's size, power and heat.
+   - **How:** a census of the candidate populations from the literature, with nitrogen content, mass and the velocity
+     change to reach the Moon; a joint balance of nitrogen, hydrogen, oxygen and carbon across the import streams
+     with the water (question 2); then a plan by population and century over the 500-year build, with its pipeline,
+     processing and the traffic rules. The choice among the populations, and any change to the principles, is the
+     author's.
 2. **The redox account of the imports.** Each import stream carries oxidizing or reducing power:
    - oxygen as water leaves hydrogen that would burn all of it back;
    - nitrogen as ammonia carries hydrogen needing seven times the air's oxygen;

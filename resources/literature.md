@@ -71,6 +71,9 @@ Average soils from the Lunar Sourcebook (Heiken et al. 1991, Table 7.15), in wt%
   Moon's N2 (*derived*). Pluto's Sputnik Planitia holds 0.4–3×10²⁰ mol of N2 (Glein & Waite 2018), 0.45–3.4 times
   the need, or 0.33–0.67 times under a 1–2 km sheet limit (Johnson et al. 2021).
 - **The main belt** is 2.39×10²¹ kg (Pitjeva & Pitjev 2018).
+- **The Kuiper belt** is (1.97 ± 0.30)×10⁻² Earth masses with its 31 largest bodies (Pitjeva & Pitjev 2018). Pluto,
+  Charon, Eris, Haumea, Makemake, Gonggong, Quaoar and Orcus hold about 4.4×10²² kg of it, leaving roughly 7×10²² kg
+  in smaller bodies (*derived*, from their published masses).
 - **Terraforming.** Mars's terraforming depends on accessible nitrogen (McKay, Toon & Kasting 1991). Jakosky & Edwards
   (2018) treat its CO2.
 - **An artificial lunar atmosphere** lives hundreds of years or more once its density passes a threshold (Vondrak

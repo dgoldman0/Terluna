@@ -97,7 +97,8 @@ These belong to main and stay unchanged on this branch.
 2. **The CO2 study's runoff and temperature.** It uses 349 mm a year from run A and 26 °C, against about 265 mm and
    21.75 °C now. Its weathering sink runs about a quarter high on runoff alone.
 3. **The ecology register's runoff** is 279,000 m³/s with lakes on 11.6%, against 229,410 m³/s and 10.3%.
-4. **A unit error.** The joint ledger's `film_plant_w` holds terawatts under a label in watts.
+4. **A unit error.** The joint ledger's `film_plant_w` holds terawatts under a label in watts (fixed on main on
+   9 October, 78020e0).
 5. **Two figures for film replacement,** 2.2–4.5 and 2.3–4.6 Gt a year.
 6. **Erosion.** The ecology register says erosion "has not been estimated", while conservation and engineering use
    0.7–7 Gt a year from an assumed rate.
