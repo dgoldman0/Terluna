@@ -1,0 +1,76 @@
+{
+  "checked": "2026-10-09",
+  "evidence": "Arithmetic, conservation, provenance and independent read-only review; no empirical ecosystem or engineering validation.",
+  "focused": {
+    "new_aerial_and_uv_tests": {
+      "command": "python -m pytest -q research/studies/aerial_ecology research/studies/uv_biology",
+      "passed": 14
+    },
+    "existing_ecology_tests": {
+      "command": "python -m pytest -q biosphere/tests/test_ecology_screen.py biosphere/tests/test_ecology_people.py",
+      "passed": 22
+    }
+  },
+  "repository": {
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 make -k check",
+    "exit_code": 2,
+    "layer_check": "PASS including newly staged files",
+    "python": {
+      "passed": 1254,
+      "skipped": 111,
+      "failed": 30,
+      "failures": [
+        "atmosphere/tests/test_absorption.py::test_ion_production_falls_with_the_shadow_and_ends_at_the_outer_radius",
+        "atmosphere/tests/test_absorption.py::test_ionization_rate_is_of_the_tabulated_order",
+        "atmosphere/tests/test_absorption.py::test_design_case_covers_the_heating_near_the_exobase",
+        "atmosphere/tests/test_cycle.py::ProductTests::test_product_is_current_with_its_code_and_inputs",
+        "atmosphere/tests/test_exosphere.py::test_dissociation_rates_agree_with_heays",
+        "atmosphere/tests/test_exosphere.py::test_ions_made_match_the_absorption_step",
+        "atmosphere/tests/test_exosphere.py::test_charge_exchange_thin_limit_counts_the_swept_exosphere",
+        "atmosphere/tests/test_exosphere.py::test_magnetosphere_accounts_for_every_ion_and_a_stronger_one_keeps_more",
+        "atmosphere/tests/test_exosphere.py::test_levels_are_ordered_and_wider_shadows_never_lose_more",
+        "atmosphere/tests/test_limb_heat.py::ProductTests::test_the_bands_weighted_by_activity_give_the_detailed_table",
+        "climate/tests/test_cm1_run.py::test_the_terrain_build_forces_each_column_at_its_own_height",
+        "climate/tests/test_exoplasim_run.py::RunnerTests::test_process_lookup_finds_this_process",
+        "climate/tests/test_ring_comfort.py::test_hours_are_shares_of_the_lunar_day",
+        "climate/tests/test_ring_comfort.py::test_the_rings_land_is_pooled_by_latitude_and_height_and_counted_in_shares",
+        "illumination/earthlight/test_model.py::test_the_table_spans_the_visible_and_near_infrared",
+        "illumination/earthlight/test_model.py::test_phase_curves_are_one_at_full_phase_and_fall",
+        "illumination/earthlight/test_model.py::test_calibration_reproduces_the_visual_brightness_and_keeps_the_spectral_shape",
+        "illumination/earthlight/test_model.py::test_the_earth_is_bluer_than_the_sun",
+        "illumination/earthlight/test_model.py::test_beyond_the_observed_phases_the_earth_fades_to_dark_without_a_step",
+        "illumination/water_column/test_model.py::test_pure_water_is_clearest_in_the_violet_blue",
+        "illumination/water_column/test_model.py::test_case_one_waters_follow_the_ocean_colour_band_ratios",
+        "illumination/water_column/test_model.py::test_clear_water_attenuation_matches_morel",
+        "illumination/water_column/test_model.py::test_the_hapke_inversion_returns_the_measured_reflectance",
+        "illumination/water_column/test_model.py::test_highland_fines_scatter_more_and_mare_fines_absorb_more",
+        "illumination/water_column/test_model.py::test_constituents_add",
+        "research/studies/joint_synthesis/test_products.py::test_product_binds_producer_and_inputs[magnets_map]",
+        "research/studies/joint_synthesis/test_products.py::test_product_binds_producer_and_inputs[places]",
+        "research/studies/protection_architecture/test_run.py::test_design_point_holds_together",
+        "research/studies/protection_architecture/test_run.py::test_a_measured_year_matches_its_point",
+        "research/studies/summit_tower/test_run.py::SummitTowerTests::test_stored_results"
+      ],
+      "boundary": "Failures in unchanged existing tests, predominantly absent ignored external inputs or generated geography/GCM products; climate process lookup also fails in this sandbox."
+    },
+    "javascript": "Immersion bake completed; Node 24 directory test invocation fails at tests/unit. Subsequent atmosphere/light-reference JS target not reached by this make target.",
+    "calendar": {
+      "passed": 13,
+      "skipped": 1,
+      "skip_reason": "absent ignored optical sky atlas"
+    },
+    "research_provenance": "PASS after exact protection inputs restored and hashes checked",
+    "ensemble_validator": "PASS"
+  },
+  "independent_reviews": [
+    "aerial biology sources, equations and numerical limits",
+    "UV linear spectral transfer and atmospheric interpretation",
+    "cross-domain population totals, phosphorus accounts, shared scenarios and product hashes"
+  ],
+  "not_performed": [
+    "new coupled photochemistry/non-LTE exobase/film equilibrium",
+    "new GCM or cloud simulation",
+    "viable-organism or safe-harvest validation",
+    "certified habitat, navigation or resource engineering"
+  ]
+}

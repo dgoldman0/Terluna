@@ -1,5 +1,20 @@
 # Ecology of the Open Moon
 
+## Cross-domain follow-up, 9 October 2026
+
+The [aerial food-web evaluation](../../research/studies/aerial_ecology/README.md) now treats aeroplankton and large
+photosynthetic floaters as producers in their own right, with reproduction/removal, filter drag, wet mass, optical
+depth, nutrients and harvest accounted separately. Its conditional central case yields 184.6 million food-energy
+equivalents before edibility and processing losses; it establishes no sustainable yield or species count.
+The [UV-window evaluation](../../research/studies/uv_biology/README.md) retains the present shield and biological
+adaptation/local UV as the working direction, with narrow UV-B transmission left as a candidate. The current film
+also suppresses most short UV-A. New surface-dose calculations leave chemistry and exobase acceptance open.
+
+The earlier population figures below are conditional screens, not a lunar carrying-capacity determination.
+New joint accounting uses [one shared scenario set](../../shared/scenarios/population.json), with separate lunar
+surface and aerial residents. No distribution is adopted. Provisioning owns the inhabited-volume comparison and
+resources owns the conservative phosphorus-return model on their respective domain branches.
+
 The engineered organisms of the Open Moon and the communities they form: biomes and food webs, soils, the cycles
 of nitrogen and the trace gases, the light and darkness life lives by, the waters, fire, dispersal and containment.
 The work opened on 9 October 2026 on the branch `domain/ecology`, inside the biosphere domain, which owns biology

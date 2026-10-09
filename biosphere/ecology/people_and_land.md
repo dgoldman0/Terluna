@@ -55,12 +55,14 @@ largest one.
    kilometre on 17% of the energy (*screen*). Hydrogen lifts 1.31 kg per m³ at the ground and 0.63–0.74 kg in the
    flight band, and a gas cell floats when its skin weighs under 0.44 kg/m² per metre of radius, as floaters do in any
    dense air (Sagan & Salpeter 1976). *Mechanics solid; physiology at these sizes is a design question.*
-6. **Food.** Phosphorus falling from the air, from African dust on the Amazon (Yu et al. 2015) to the median measured
-   over Earth's land (Mahowald et al. 2008), feeds 0.03–1.2 g C per m² a year aloft at the Redfield ratio, at most four
-   ten-thousandths of the land stand's 2,800–3,200 g C (*screen*). The sky's food webs eat what rises from below:
+6. **Food.** The inherited phosphorus-fallout analogue supports 0.03–1.2 g C per m² a year in a single assimilation
+   pass at Redfield C:P, at most four ten-thousandths of the land stand's 2,800–3,200 g C (*screen*). This is neither
+   a measured upward lunar supply nor a ceiling on nutrient-retaining aerial producers. The
+   [follow-up evaluation](../../research/studies/aerial_ecology/README.md) separates recycled production, nutrient
+   stock, natural losses and harvest return. Surface-connected food webs also eat what rises from below:
    pollen, spores, nectar, insects (3.5 trillion a year cross southern Britain at 150–1,200 m; Hu et al. 2016) and the
-   sea–forest migrants (the ecology register, H1–H4). Water comes from humid air and cloud; nitrogen can be fixed from
-   the air.
+   sea–forest migrants (the ecology register, H1–H4). Liquid water must be available and retained; water vapour alone
+   is insufficient for these microbial rates. Nitrogen fixation needs energy and trace-element cofactors.
 7. **Links.** Pollen in a light wind travels about 4,800 km, spores cross the Moon and plumed seeds reach 2.7 times as
    far as on Earth (first screen). Flight at a sixth of Earth's energy per kilometre lets a moth fly the 950 km round
    trip to the median sea distance on a quarter of its mass in sugar (the ecology register), so migrants carry

@@ -1,0 +1,1393 @@
+{
+  "schema": "terluna.research.aerial-ecology/1",
+  "producer": {
+    "files": {
+      "research/studies/aerial_ecology/run.py": "cff9ba34f0de3c078661444fb81f8c22f8996a0002ad0433d31dca02e2f86501",
+      "biosphere/ecology/screen.py": "4ca788045f524525b17443f2feeb1070d7bbf721beec6402a715d526a99886aa"
+    },
+    "inputs": {
+      "biosphere/ecology/results/people.json": "f8eb2892b733fdd9000af187437a8b40ecc567afcd94da1d0db0a0ed063a77d6",
+      "research/studies/sky_ships/results/sky_ships.json": "1e214bf6e64b0bb891c64b8ff273a7a12482e83defce0732b315c1751a28b26e",
+      "shared/scenarios/population.json": "74ec20d6f8057977e9e08ee35b7014892e476fd8795a58a1af7f880a6bc373f0",
+      "research/studies/aerial_ecology/sources.json": "d0e41991a99d3031ba69243d4cbbbb1c1c85d7de00b07ddf06dbdf9048f08c99"
+    },
+    "constants": {
+      "AVOGADRO": 6.02214076e+23,
+      "GAS_CONSTANT": 8.31446261815324,
+      "JULIAN_DAY": 86400.0,
+      "JULIAN_YEAR_DAYS": 365.25,
+      "MOON_RADIUS": 1737400.0,
+      "MOON_SURFACE_GRAVITY": 1.6242188765608128,
+      "PLANCK": 6.62607015e-34,
+      "SPEED_OF_LIGHT": 299792458.0,
+      "STANDARD_GRAVITY": 9.80665,
+      "SYNODIC_MONTH_DAYS": 29.53059
+    }
+  },
+  "evidence": "Analytic requirements and sensitivity scenarios. No organism, sustainable harvest, species count, cloud feedback, atmospheric concentration or nutrient closure is validated.",
+  "reading_rule": "All kg are dry biomass unless explicitly wet, carbon or phosphorus. Coverage uses lunar surface area. Annual means use a Julian year. Feeding is per square metre of capture area.",
+  "assumptions": {
+    "carbon_share_dry": 0.45,
+    "carbon_phosphorus_mass_ratio": 41.10434558016401,
+    "food_kcal_kg_dry": 4000,
+    "energy_kcal_person_day": 2500,
+    "feeding_energy_j_kg_dry": 18000000.0,
+    "capture": 0.5,
+    "assimilation": 0.6,
+    "propulsive_efficiency": 0.25,
+    "basal_w_m2": 1,
+    "mortality_per_day": 0.01
+  },
+  "baseline": {
+    "warm_air_volume_km3": 919000000.0,
+    "microbial_wet_t_at_1pg_cell": {
+      "10000.0": 9190.000000000002,
+      "100000.0": 91900.0
+    },
+    "p_fallout_analogue_kg_year": [
+      26552629.669566322,
+      1062105186.782653
+    ],
+    "single_pass_dry_kg_year": [
+      2425396591.111045,
+      97015863644.4418
+    ]
+  },
+  "growth": [
+    {
+      "doubling_days": 1.0,
+      "favourable_fraction": 0.02,
+      "removal_days": 3.0,
+      "net_growth_per_day": -0.32947038972213444,
+      "minimum_favourable_fraction": 0.4953252973718774,
+      "multiplier_per_lunar_cycle": 5.950471552544214e-05
+    },
+    {
+      "doubling_days": 1.0,
+      "favourable_fraction": 0.02,
+      "removal_days": 30.0,
+      "net_growth_per_day": -0.029470389722134428,
+      "minimum_favourable_fraction": 0.06251678510518842,
+      "multiplier_per_lunar_cycle": 0.41883509856962525
+    },
+    {
+      "doubling_days": 1.0,
+      "favourable_fraction": 0.02,
+      "removal_days": 100.0,
+      "net_growth_per_day": -0.006137056388801094,
+      "minimum_favourable_fraction": 0.02885390081777927,
+      "multiplier_per_lunar_cycle": 0.8342427131301131
+    },
+    {
+      "doubling_days": 1.0,
+      "favourable_fraction": 0.1,
+      "removal_days": 3.0,
+      "net_growth_per_day": -0.2740186152773388,
+      "minimum_favourable_fraction": 0.4953252973718774,
+      "multiplier_per_lunar_cycle": 0.0003059981872274235
+    },
+    {
+      "doubling_days": 1.0,
+      "favourable_fraction": 0.1,
+      "removal_days": 30.0,
+      "net_growth_per_day": 0.02598138472266119,
+      "minimum_favourable_fraction": 0.06251678510518842,
+      "multiplier_per_lunar_cycle": 2.153825621680797
+    },
+    {
+      "doubling_days": 1.0,
+      "favourable_fraction": 0.1,
+      "removal_days": 100.0,
+      "net_growth_per_day": 0.04931471805599452,
+      "minimum_favourable_fraction": 0.02885390081777927,
+      "multiplier_per_lunar_cycle": 4.290025684037668
+    },
+    {
+      "doubling_days": 1.0,
+      "favourable_fraction": 0.5,
+      "removal_days": 3.0,
+      "net_growth_per_day": 0.0032402569466393194,
+      "minimum_favourable_fraction": 0.4953252973718774,
+      "multiplier_per_lunar_cycle": 1.1004142495213203
+    },
+    {
+      "doubling_days": 1.0,
+      "favourable_fraction": 0.5,
+      "removal_days": 30.0,
+      "net_growth_per_day": 0.3032402569466393,
+      "minimum_favourable_fraction": 0.06251678510518842,
+      "multiplier_per_lunar_cycle": 7745.472045297326
+    },
+    {
+      "doubling_days": 1.0,
+      "favourable_fraction": 0.5,
+      "removal_days": 100.0,
+      "net_growth_per_day": 0.3265735902799726,
+      "minimum_favourable_fraction": 0.02885390081777927,
+      "multiplier_per_lunar_cycle": 15427.560000605201
+    },
+    {
+      "doubling_days": 2.5,
+      "favourable_fraction": 0.02,
+      "removal_days": 3.0,
+      "net_growth_per_day": -0.33778815588885375,
+      "minimum_favourable_fraction": 1.2383132434296935,
+      "multiplier_per_lunar_cycle": 4.654534596961898e-05
+    },
+    {
+      "doubling_days": 2.5,
+      "favourable_fraction": 0.02,
+      "removal_days": 30.0,
+      "net_growth_per_day": -0.03778815588885377,
+      "minimum_favourable_fraction": 0.15629196276297105,
+      "multiplier_per_lunar_cycle": 0.32761814580572735
+    },
+    {
+      "doubling_days": 2.5,
+      "favourable_fraction": 0.02,
+      "removal_days": 100.0,
+      "net_growth_per_day": -0.014454822555520438,
+      "minimum_favourable_fraction": 0.07213475204444818,
+      "multiplier_per_lunar_cycle": 0.6525552699881781
+    },
+    {
+      "doubling_days": 2.5,
+      "favourable_fraction": 0.1,
+      "removal_days": 3.0,
+      "net_growth_per_day": -0.3156074461109355,
+      "minimum_favourable_fraction": 1.2383132434296935,
+      "multiplier_per_lunar_cycle": 8.960727097071041e-05
+    },
+    {
+      "doubling_days": 2.5,
+      "favourable_fraction": 0.1,
+      "removal_days": 30.0,
+      "net_growth_per_day": -0.015607446110935525,
+      "minimum_favourable_fraction": 0.15629196276297105,
+      "multiplier_per_lunar_cycle": 0.63071757991223
+    },
+    {
+      "doubling_days": 2.5,
+      "favourable_fraction": 0.1,
+      "removal_days": 100.0,
+      "net_growth_per_day": 0.007725887222397809,
+      "minimum_favourable_fraction": 0.07213475204444818,
+      "multiplier_per_lunar_cycle": 1.256273762351293
+    },
+    {
+      "doubling_days": 2.5,
+      "favourable_fraction": 0.5,
+      "removal_days": 3.0,
+      "net_growth_per_day": -0.20470389722134427,
+      "minimum_favourable_fraction": 1.2383132434296935,
+      "multiplier_per_lunar_cycle": 0.002369617189626713
+    },
+    {
+      "doubling_days": 2.5,
+      "favourable_fraction": 0.5,
+      "removal_days": 30.0,
+      "net_growth_per_day": 0.09529610277865572,
+      "minimum_favourable_fraction": 0.15629196276297105,
+      "multiplier_per_lunar_cycle": 16.678994940581344
+    },
+    {
+      "doubling_days": 2.5,
+      "favourable_fraction": 0.5,
+      "removal_days": 100.0,
+      "net_growth_per_day": 0.11862943611198905,
+      "minimum_favourable_fraction": 0.07213475204444818,
+      "multiplier_per_lunar_cycle": 33.22149943744735
+    },
+    {
+      "doubling_days": 3.6,
+      "favourable_fraction": 0.02,
+      "removal_days": 3.0,
+      "net_growth_per_day": -0.33948251566355586,
+      "minimum_favourable_fraction": 1.783171070538759,
+      "multiplier_per_lunar_cycle": 4.427373340185428e-05
+    },
+    {
+      "doubling_days": 3.6,
+      "favourable_fraction": 0.02,
+      "removal_days": 30.0,
+      "net_growth_per_day": -0.03948251566355586,
+      "minimum_favourable_fraction": 0.2250604263786783,
+      "multiplier_per_lunar_cycle": 0.31162897477398105
+    },
+    {
+      "doubling_days": 3.6,
+      "favourable_fraction": 0.02,
+      "removal_days": 100.0,
+      "net_growth_per_day": -0.016149182330222528,
+      "minimum_favourable_fraction": 0.10387404294400539,
+      "multiplier_per_lunar_cycle": 0.6207077732817671
+    },
+    {
+      "doubling_days": 3.6,
+      "favourable_fraction": 0.1,
+      "removal_days": 3.0,
+      "net_growth_per_day": -0.32407924498444596,
+      "minimum_favourable_fraction": 1.783171070538759,
+      "multiplier_per_lunar_cycle": 6.977384644713752e-05
+    },
+    {
+      "doubling_days": 3.6,
+      "favourable_fraction": 0.1,
+      "removal_days": 30.0,
+      "net_growth_per_day": -0.024079244984445965,
+      "minimum_favourable_fraction": 0.2250604263786783,
+      "multiplier_per_lunar_cycle": 0.49111630223278085
+    },
+    {
+      "doubling_days": 3.6,
+      "favourable_fraction": 0.1,
+      "removal_days": 100.0,
+      "net_growth_per_day": -0.000745911651112631,
+      "minimum_favourable_fraction": 0.10387404294400539,
+      "multiplier_per_lunar_cycle": 0.978213616376268
+    },
+    {
+      "doubling_days": 3.6,
+      "favourable_fraction": 0.5,
+      "removal_days": 3.0,
+      "net_growth_per_day": -0.2470628915888965,
+      "minimum_favourable_fraction": 1.783171070538759,
+      "multiplier_per_lunar_cycle": 0.0006783053818476048
+    },
+    {
+      "doubling_days": 3.6,
+      "favourable_fraction": 0.5,
+      "removal_days": 30.0,
+      "net_growth_per_day": 0.05293710841110351,
+      "minimum_favourable_fraction": 0.2250604263786783,
+      "multiplier_per_lunar_cycle": 4.7743796261823706
+    },
+    {
+      "doubling_days": 3.6,
+      "favourable_fraction": 0.5,
+      "removal_days": 100.0,
+      "net_growth_per_day": 0.07627044174443684,
+      "minimum_favourable_fraction": 0.10387404294400539,
+      "multiplier_per_lunar_cycle": 9.509688721078854
+    },
+    {
+      "doubling_days": 19.5,
+      "favourable_fraction": 0.02,
+      "removal_days": 3.0,
+      "net_growth_per_day": -0.3426224131481436,
+      "minimum_favourable_fraction": 9.65884329875161,
+      "multiplier_per_lunar_cycle": 4.035311335501619e-05
+    },
+    {
+      "doubling_days": 19.5,
+      "favourable_fraction": 0.02,
+      "removal_days": 30.0,
+      "net_growth_per_day": -0.04262241314814365,
+      "minimum_favourable_fraction": 1.219077309551174,
+      "multiplier_per_lunar_cycle": 0.2840329553783518
+    },
+    {
+      "doubling_days": 19.5,
+      "favourable_fraction": 0.02,
+      "removal_days": 100.0,
+      "net_growth_per_day": -0.019289079814810314,
+      "minimum_favourable_fraction": 0.5626510659466958,
+      "multiplier_per_lunar_cycle": 0.5657415630218744
+    },
+    {
+      "doubling_days": 19.5,
+      "favourable_fraction": 0.1,
+      "removal_days": 3.0,
+      "net_growth_per_day": -0.3397787324073849,
+      "minimum_favourable_fraction": 9.65884329875161,
+      "multiplier_per_lunar_cycle": 4.388813984173474e-05
+    },
+    {
+      "doubling_days": 19.5,
+      "favourable_fraction": 0.1,
+      "removal_days": 30.0,
+      "net_growth_per_day": -0.0397787324073849,
+      "minimum_favourable_fraction": 1.219077309551174,
+      "multiplier_per_lunar_cycle": 0.3089149021944485
+    },
+    {
+      "doubling_days": 19.5,
+      "favourable_fraction": 0.1,
+      "removal_days": 100.0,
+      "net_growth_per_day": -0.016445399074051563,
+      "minimum_favourable_fraction": 0.5626510659466958,
+      "multiplier_per_lunar_cycle": 0.6153018383920845
+    },
+    {
+      "doubling_days": 19.5,
+      "favourable_fraction": 0.5,
+      "removal_days": 3.0,
+      "net_growth_per_day": -0.32556032870359114,
+      "minimum_favourable_fraction": 9.65884329875161,
+      "multiplier_per_lunar_cycle": 6.67879029615534e-05
+    },
+    {
+      "doubling_days": 19.5,
+      "favourable_fraction": 0.5,
+      "removal_days": 30.0,
+      "net_growth_per_day": -0.025560328703591147,
+      "minimum_favourable_fraction": 1.219077309551174,
+      "multiplier_per_lunar_cycle": 0.47009917908439397
+    },
+    {
+      "doubling_days": 19.5,
+      "favourable_fraction": 0.5,
+      "removal_days": 100.0,
+      "net_growth_per_day": -0.002226995370257813,
+      "minimum_favourable_fraction": 0.5626510659466958,
+      "multiplier_per_lunar_cycle": 0.936351361046238
+    }
+  ],
+  "feeding": [
+    {
+      "concentration_mg_m3": 0.01,
+      "speed_m_s": 1.0,
+      "drag_coefficient": 0.02,
+      "captured_g_day_m2": 0.432,
+      "gross_food_w_m2": 0.09,
+      "assimilated_w_m2": 0.054,
+      "drag_mechanical_w_m2": 0.012,
+      "propulsion_metabolic_w_m2": 0.048,
+      "powered_net_w_m2": -0.994,
+      "passive_net_w_m2": -0.946,
+      "powered_break_even_mg_m3": 0.1940740740740741,
+      "passive_break_even_mg_m3": 0.18518518518518517
+    },
+    {
+      "concentration_mg_m3": 0.01,
+      "speed_m_s": 1.0,
+      "drag_coefficient": 0.1,
+      "captured_g_day_m2": 0.432,
+      "gross_food_w_m2": 0.09,
+      "assimilated_w_m2": 0.054,
+      "drag_mechanical_w_m2": 0.06,
+      "propulsion_metabolic_w_m2": 0.24,
+      "powered_net_w_m2": -1.186,
+      "passive_net_w_m2": -0.946,
+      "powered_break_even_mg_m3": 0.22962962962962963,
+      "passive_break_even_mg_m3": 0.18518518518518517
+    },
+    {
+      "concentration_mg_m3": 0.01,
+      "speed_m_s": 1.0,
+      "drag_coefficient": 1.0,
+      "captured_g_day_m2": 0.432,
+      "gross_food_w_m2": 0.09,
+      "assimilated_w_m2": 0.054,
+      "drag_mechanical_w_m2": 0.6,
+      "propulsion_metabolic_w_m2": 2.4,
+      "powered_net_w_m2": -3.346,
+      "passive_net_w_m2": -0.946,
+      "powered_break_even_mg_m3": 0.6296296296296297,
+      "passive_break_even_mg_m3": 0.18518518518518517
+    },
+    {
+      "concentration_mg_m3": 0.01,
+      "speed_m_s": 3.0,
+      "drag_coefficient": 0.02,
+      "captured_g_day_m2": 1.2960000000000003,
+      "gross_food_w_m2": 0.27,
+      "assimilated_w_m2": 0.162,
+      "drag_mechanical_w_m2": 0.324,
+      "propulsion_metabolic_w_m2": 1.296,
+      "powered_net_w_m2": -2.1340000000000003,
+      "passive_net_w_m2": -0.838,
+      "powered_break_even_mg_m3": 0.14172839506172843,
+      "passive_break_even_mg_m3": 0.0617283950617284
+    },
+    {
+      "concentration_mg_m3": 0.01,
+      "speed_m_s": 3.0,
+      "drag_coefficient": 0.1,
+      "captured_g_day_m2": 1.2960000000000003,
+      "gross_food_w_m2": 0.27,
+      "assimilated_w_m2": 0.162,
+      "drag_mechanical_w_m2": 1.6199999999999999,
+      "propulsion_metabolic_w_m2": 6.4799999999999995,
+      "powered_net_w_m2": -7.318,
+      "passive_net_w_m2": -0.838,
+      "powered_break_even_mg_m3": 0.4617283950617284,
+      "passive_break_even_mg_m3": 0.0617283950617284
+    },
+    {
+      "concentration_mg_m3": 0.01,
+      "speed_m_s": 3.0,
+      "drag_coefficient": 1.0,
+      "captured_g_day_m2": 1.2960000000000003,
+      "gross_food_w_m2": 0.27,
+      "assimilated_w_m2": 0.162,
+      "drag_mechanical_w_m2": 16.2,
+      "propulsion_metabolic_w_m2": 64.8,
+      "powered_net_w_m2": -65.63799999999999,
+      "passive_net_w_m2": -0.838,
+      "powered_break_even_mg_m3": 4.061728395061729,
+      "passive_break_even_mg_m3": 0.0617283950617284
+    },
+    {
+      "concentration_mg_m3": 0.01,
+      "speed_m_s": 10.0,
+      "drag_coefficient": 0.02,
+      "captured_g_day_m2": 4.32,
+      "gross_food_w_m2": 0.8999999999999999,
+      "assimilated_w_m2": 0.5399999999999999,
+      "drag_mechanical_w_m2": 12.0,
+      "propulsion_metabolic_w_m2": 48.0,
+      "powered_net_w_m2": -48.46,
+      "passive_net_w_m2": -0.4600000000000001,
+      "powered_break_even_mg_m3": 0.9074074074074074,
+      "passive_break_even_mg_m3": 0.018518518518518517
+    },
+    {
+      "concentration_mg_m3": 0.01,
+      "speed_m_s": 10.0,
+      "drag_coefficient": 0.1,
+      "captured_g_day_m2": 4.32,
+      "gross_food_w_m2": 0.8999999999999999,
+      "assimilated_w_m2": 0.5399999999999999,
+      "drag_mechanical_w_m2": 60.0,
+      "propulsion_metabolic_w_m2": 240.0,
+      "powered_net_w_m2": -240.46,
+      "passive_net_w_m2": -0.4600000000000001,
+      "powered_break_even_mg_m3": 4.462962962962964,
+      "passive_break_even_mg_m3": 0.018518518518518517
+    },
+    {
+      "concentration_mg_m3": 0.01,
+      "speed_m_s": 10.0,
+      "drag_coefficient": 1.0,
+      "captured_g_day_m2": 4.32,
+      "gross_food_w_m2": 0.8999999999999999,
+      "assimilated_w_m2": 0.5399999999999999,
+      "drag_mechanical_w_m2": 600.0,
+      "propulsion_metabolic_w_m2": 2400.0,
+      "powered_net_w_m2": -2400.46,
+      "passive_net_w_m2": -0.4600000000000001,
+      "powered_break_even_mg_m3": 44.46296296296297,
+      "passive_break_even_mg_m3": 0.018518518518518517
+    },
+    {
+      "concentration_mg_m3": 0.1,
+      "speed_m_s": 1.0,
+      "drag_coefficient": 0.02,
+      "captured_g_day_m2": 4.32,
+      "gross_food_w_m2": 0.8999999999999999,
+      "assimilated_w_m2": 0.5399999999999999,
+      "drag_mechanical_w_m2": 0.012,
+      "propulsion_metabolic_w_m2": 0.048,
+      "powered_net_w_m2": -0.508,
+      "passive_net_w_m2": -0.4600000000000001,
+      "powered_break_even_mg_m3": 0.1940740740740741,
+      "passive_break_even_mg_m3": 0.18518518518518517
+    },
+    {
+      "concentration_mg_m3": 0.1,
+      "speed_m_s": 1.0,
+      "drag_coefficient": 0.1,
+      "captured_g_day_m2": 4.32,
+      "gross_food_w_m2": 0.8999999999999999,
+      "assimilated_w_m2": 0.5399999999999999,
+      "drag_mechanical_w_m2": 0.06,
+      "propulsion_metabolic_w_m2": 0.24,
+      "powered_net_w_m2": -0.7000000000000001,
+      "passive_net_w_m2": -0.4600000000000001,
+      "powered_break_even_mg_m3": 0.22962962962962963,
+      "passive_break_even_mg_m3": 0.18518518518518517
+    },
+    {
+      "concentration_mg_m3": 0.1,
+      "speed_m_s": 1.0,
+      "drag_coefficient": 1.0,
+      "captured_g_day_m2": 4.32,
+      "gross_food_w_m2": 0.8999999999999999,
+      "assimilated_w_m2": 0.5399999999999999,
+      "drag_mechanical_w_m2": 0.6,
+      "propulsion_metabolic_w_m2": 2.4,
+      "powered_net_w_m2": -2.86,
+      "passive_net_w_m2": -0.4600000000000001,
+      "powered_break_even_mg_m3": 0.6296296296296297,
+      "passive_break_even_mg_m3": 0.18518518518518517
+    },
+    {
+      "concentration_mg_m3": 0.1,
+      "speed_m_s": 3.0,
+      "drag_coefficient": 0.02,
+      "captured_g_day_m2": 12.959999999999999,
+      "gross_food_w_m2": 2.6999999999999997,
+      "assimilated_w_m2": 1.6199999999999999,
+      "drag_mechanical_w_m2": 0.324,
+      "propulsion_metabolic_w_m2": 1.296,
+      "powered_net_w_m2": -0.6760000000000002,
+      "passive_net_w_m2": 0.6199999999999999,
+      "powered_break_even_mg_m3": 0.14172839506172843,
+      "passive_break_even_mg_m3": 0.0617283950617284
+    },
+    {
+      "concentration_mg_m3": 0.1,
+      "speed_m_s": 3.0,
+      "drag_coefficient": 0.1,
+      "captured_g_day_m2": 12.959999999999999,
+      "gross_food_w_m2": 2.6999999999999997,
+      "assimilated_w_m2": 1.6199999999999999,
+      "drag_mechanical_w_m2": 1.6199999999999999,
+      "propulsion_metabolic_w_m2": 6.4799999999999995,
+      "powered_net_w_m2": -5.859999999999999,
+      "passive_net_w_m2": 0.6199999999999999,
+      "powered_break_even_mg_m3": 0.4617283950617284,
+      "passive_break_even_mg_m3": 0.0617283950617284
+    },
+    {
+      "concentration_mg_m3": 0.1,
+      "speed_m_s": 3.0,
+      "drag_coefficient": 1.0,
+      "captured_g_day_m2": 12.959999999999999,
+      "gross_food_w_m2": 2.6999999999999997,
+      "assimilated_w_m2": 1.6199999999999999,
+      "drag_mechanical_w_m2": 16.2,
+      "propulsion_metabolic_w_m2": 64.8,
+      "powered_net_w_m2": -64.18,
+      "passive_net_w_m2": 0.6199999999999999,
+      "powered_break_even_mg_m3": 4.061728395061729,
+      "passive_break_even_mg_m3": 0.0617283950617284
+    },
+    {
+      "concentration_mg_m3": 0.1,
+      "speed_m_s": 10.0,
+      "drag_coefficient": 0.02,
+      "captured_g_day_m2": 43.199999999999996,
+      "gross_food_w_m2": 9.0,
+      "assimilated_w_m2": 5.3999999999999995,
+      "drag_mechanical_w_m2": 12.0,
+      "propulsion_metabolic_w_m2": 48.0,
+      "powered_net_w_m2": -43.6,
+      "passive_net_w_m2": 4.3999999999999995,
+      "powered_break_even_mg_m3": 0.9074074074074074,
+      "passive_break_even_mg_m3": 0.018518518518518517
+    },
+    {
+      "concentration_mg_m3": 0.1,
+      "speed_m_s": 10.0,
+      "drag_coefficient": 0.1,
+      "captured_g_day_m2": 43.199999999999996,
+      "gross_food_w_m2": 9.0,
+      "assimilated_w_m2": 5.3999999999999995,
+      "drag_mechanical_w_m2": 60.0,
+      "propulsion_metabolic_w_m2": 240.0,
+      "powered_net_w_m2": -235.6,
+      "passive_net_w_m2": 4.3999999999999995,
+      "powered_break_even_mg_m3": 4.462962962962964,
+      "passive_break_even_mg_m3": 0.018518518518518517
+    },
+    {
+      "concentration_mg_m3": 0.1,
+      "speed_m_s": 10.0,
+      "drag_coefficient": 1.0,
+      "captured_g_day_m2": 43.199999999999996,
+      "gross_food_w_m2": 9.0,
+      "assimilated_w_m2": 5.3999999999999995,
+      "drag_mechanical_w_m2": 600.0,
+      "propulsion_metabolic_w_m2": 2400.0,
+      "powered_net_w_m2": -2395.6,
+      "passive_net_w_m2": 4.3999999999999995,
+      "powered_break_even_mg_m3": 44.46296296296297,
+      "passive_break_even_mg_m3": 0.018518518518518517
+    },
+    {
+      "concentration_mg_m3": 1.0,
+      "speed_m_s": 1.0,
+      "drag_coefficient": 0.02,
+      "captured_g_day_m2": 43.199999999999996,
+      "gross_food_w_m2": 9.0,
+      "assimilated_w_m2": 5.3999999999999995,
+      "drag_mechanical_w_m2": 0.012,
+      "propulsion_metabolic_w_m2": 0.048,
+      "powered_net_w_m2": 4.351999999999999,
+      "passive_net_w_m2": 4.3999999999999995,
+      "powered_break_even_mg_m3": 0.1940740740740741,
+      "passive_break_even_mg_m3": 0.18518518518518517
+    },
+    {
+      "concentration_mg_m3": 1.0,
+      "speed_m_s": 1.0,
+      "drag_coefficient": 0.1,
+      "captured_g_day_m2": 43.199999999999996,
+      "gross_food_w_m2": 9.0,
+      "assimilated_w_m2": 5.3999999999999995,
+      "drag_mechanical_w_m2": 0.06,
+      "propulsion_metabolic_w_m2": 0.24,
+      "powered_net_w_m2": 4.159999999999999,
+      "passive_net_w_m2": 4.3999999999999995,
+      "powered_break_even_mg_m3": 0.22962962962962963,
+      "passive_break_even_mg_m3": 0.18518518518518517
+    },
+    {
+      "concentration_mg_m3": 1.0,
+      "speed_m_s": 1.0,
+      "drag_coefficient": 1.0,
+      "captured_g_day_m2": 43.199999999999996,
+      "gross_food_w_m2": 9.0,
+      "assimilated_w_m2": 5.3999999999999995,
+      "drag_mechanical_w_m2": 0.6,
+      "propulsion_metabolic_w_m2": 2.4,
+      "powered_net_w_m2": 1.9999999999999996,
+      "passive_net_w_m2": 4.3999999999999995,
+      "powered_break_even_mg_m3": 0.6296296296296297,
+      "passive_break_even_mg_m3": 0.18518518518518517
+    },
+    {
+      "concentration_mg_m3": 1.0,
+      "speed_m_s": 3.0,
+      "drag_coefficient": 0.02,
+      "captured_g_day_m2": 129.6,
+      "gross_food_w_m2": 27.0,
+      "assimilated_w_m2": 16.2,
+      "drag_mechanical_w_m2": 0.324,
+      "propulsion_metabolic_w_m2": 1.296,
+      "powered_net_w_m2": 13.904,
+      "passive_net_w_m2": 15.2,
+      "powered_break_even_mg_m3": 0.14172839506172843,
+      "passive_break_even_mg_m3": 0.0617283950617284
+    },
+    {
+      "concentration_mg_m3": 1.0,
+      "speed_m_s": 3.0,
+      "drag_coefficient": 0.1,
+      "captured_g_day_m2": 129.6,
+      "gross_food_w_m2": 27.0,
+      "assimilated_w_m2": 16.2,
+      "drag_mechanical_w_m2": 1.6199999999999999,
+      "propulsion_metabolic_w_m2": 6.4799999999999995,
+      "powered_net_w_m2": 8.719999999999999,
+      "passive_net_w_m2": 15.2,
+      "powered_break_even_mg_m3": 0.4617283950617284,
+      "passive_break_even_mg_m3": 0.0617283950617284
+    },
+    {
+      "concentration_mg_m3": 1.0,
+      "speed_m_s": 3.0,
+      "drag_coefficient": 1.0,
+      "captured_g_day_m2": 129.6,
+      "gross_food_w_m2": 27.0,
+      "assimilated_w_m2": 16.2,
+      "drag_mechanical_w_m2": 16.2,
+      "propulsion_metabolic_w_m2": 64.8,
+      "powered_net_w_m2": -49.599999999999994,
+      "passive_net_w_m2": 15.2,
+      "powered_break_even_mg_m3": 4.061728395061729,
+      "passive_break_even_mg_m3": 0.0617283950617284
+    },
+    {
+      "concentration_mg_m3": 1.0,
+      "speed_m_s": 10.0,
+      "drag_coefficient": 0.02,
+      "captured_g_day_m2": 431.99999999999994,
+      "gross_food_w_m2": 89.99999999999999,
+      "assimilated_w_m2": 53.99999999999999,
+      "drag_mechanical_w_m2": 12.0,
+      "propulsion_metabolic_w_m2": 48.0,
+      "powered_net_w_m2": 4.999999999999993,
+      "passive_net_w_m2": 52.99999999999999,
+      "powered_break_even_mg_m3": 0.9074074074074074,
+      "passive_break_even_mg_m3": 0.018518518518518517
+    },
+    {
+      "concentration_mg_m3": 1.0,
+      "speed_m_s": 10.0,
+      "drag_coefficient": 0.1,
+      "captured_g_day_m2": 431.99999999999994,
+      "gross_food_w_m2": 89.99999999999999,
+      "assimilated_w_m2": 53.99999999999999,
+      "drag_mechanical_w_m2": 60.0,
+      "propulsion_metabolic_w_m2": 240.0,
+      "powered_net_w_m2": -187.0,
+      "passive_net_w_m2": 52.99999999999999,
+      "powered_break_even_mg_m3": 4.462962962962964,
+      "passive_break_even_mg_m3": 0.018518518518518517
+    },
+    {
+      "concentration_mg_m3": 1.0,
+      "speed_m_s": 10.0,
+      "drag_coefficient": 1.0,
+      "captured_g_day_m2": 431.99999999999994,
+      "gross_food_w_m2": 89.99999999999999,
+      "assimilated_w_m2": 53.99999999999999,
+      "drag_mechanical_w_m2": 600.0,
+      "propulsion_metabolic_w_m2": 2400.0,
+      "powered_net_w_m2": -2347.0,
+      "passive_net_w_m2": 52.99999999999999,
+      "powered_break_even_mg_m3": 44.46296296296297,
+      "passive_break_even_mg_m3": 0.018518518518518517
+    }
+  ],
+  "dark_half_cycle": [
+    {
+      "respiration_fraction_per_day": 0.001,
+      "reserve_fraction_of_initial_carbon": 0.01465682256387646
+    },
+    {
+      "respiration_fraction_per_day": 0.01,
+      "reserve_fraction_of_initial_carbon": 0.13726952639630685
+    },
+    {
+      "respiration_fraction_per_day": 0.03,
+      "reserve_fraction_of_initial_carbon": 0.3578663696569784
+    }
+  ],
+  "settling": [
+    {
+      "diameter_um": 1.0,
+      "speed_m_s": 5.863327314673098e-06,
+      "still_air_days_per_km": 1973.9771383920036,
+      "note": "Stokes-Cunningham screen; hydrated droplets and rain have other sizes and loss rates."
+    },
+    {
+      "diameter_um": 10.0,
+      "speed_m_s": 0.0005129336292202355,
+      "still_air_days_per_km": 22.564467242417006,
+      "note": "Stokes-Cunningham screen; hydrated droplets and rain have other sizes and loss rates."
+    },
+    {
+      "diameter_um": 25.0,
+      "speed_m_s": 0.0031752542978658346,
+      "still_air_days_per_km": 3.6450857123013076,
+      "note": "Stokes-Cunningham screen; hydrated droplets and rain have other sizes and loss rates."
+    }
+  ],
+  "haze": [
+    {
+      "concentration_mg_m3": 0.01,
+      "depth_m": 100.0,
+      "diameter_um": 1.0,
+      "tau": 0.003
+    },
+    {
+      "concentration_mg_m3": 0.01,
+      "depth_m": 100.0,
+      "diameter_um": 10.0,
+      "tau": 0.0003
+    },
+    {
+      "concentration_mg_m3": 0.01,
+      "depth_m": 100.0,
+      "diameter_um": 100.0,
+      "tau": 3e-05
+    },
+    {
+      "concentration_mg_m3": 0.01,
+      "depth_m": 1000.0,
+      "diameter_um": 1.0,
+      "tau": 0.030000000000000002
+    },
+    {
+      "concentration_mg_m3": 0.01,
+      "depth_m": 1000.0,
+      "diameter_um": 10.0,
+      "tau": 0.003
+    },
+    {
+      "concentration_mg_m3": 0.01,
+      "depth_m": 1000.0,
+      "diameter_um": 100.0,
+      "tau": 0.0003000000000000001
+    },
+    {
+      "concentration_mg_m3": 0.1,
+      "depth_m": 100.0,
+      "diameter_um": 1.0,
+      "tau": 0.03
+    },
+    {
+      "concentration_mg_m3": 0.1,
+      "depth_m": 100.0,
+      "diameter_um": 10.0,
+      "tau": 0.0029999999999999996
+    },
+    {
+      "concentration_mg_m3": 0.1,
+      "depth_m": 100.0,
+      "diameter_um": 100.0,
+      "tau": 0.00030000000000000003
+    },
+    {
+      "concentration_mg_m3": 0.1,
+      "depth_m": 1000.0,
+      "diameter_um": 1.0,
+      "tau": 0.3
+    },
+    {
+      "concentration_mg_m3": 0.1,
+      "depth_m": 1000.0,
+      "diameter_um": 10.0,
+      "tau": 0.03
+    },
+    {
+      "concentration_mg_m3": 0.1,
+      "depth_m": 1000.0,
+      "diameter_um": 100.0,
+      "tau": 0.003
+    },
+    {
+      "concentration_mg_m3": 1.0,
+      "depth_m": 100.0,
+      "diameter_um": 1.0,
+      "tau": 0.3
+    },
+    {
+      "concentration_mg_m3": 1.0,
+      "depth_m": 100.0,
+      "diameter_um": 10.0,
+      "tau": 0.03
+    },
+    {
+      "concentration_mg_m3": 1.0,
+      "depth_m": 100.0,
+      "diameter_um": 100.0,
+      "tau": 0.003
+    },
+    {
+      "concentration_mg_m3": 1.0,
+      "depth_m": 1000.0,
+      "diameter_um": 1.0,
+      "tau": 3.0
+    },
+    {
+      "concentration_mg_m3": 1.0,
+      "depth_m": 1000.0,
+      "diameter_um": 10.0,
+      "tau": 0.3
+    },
+    {
+      "concentration_mg_m3": 1.0,
+      "depth_m": 1000.0,
+      "diameter_um": 100.0,
+      "tau": 0.030000000000000006
+    }
+  ],
+  "floater_mass": [
+    {
+      "height_km": 10.0,
+      "dry_kg_m2": 1.0,
+      "water_fraction": 0.8,
+      "wet_biomass_kg_m2": 5.000000000000001,
+      "minimum_radius_m": 12.295081967213115,
+      "water_kg_m2": 4.000000000000001,
+      "skin_kg_per_projected_m2": 4
+    },
+    {
+      "height_km": 10.0,
+      "dry_kg_m2": 1.0,
+      "water_fraction": 0.9,
+      "wet_biomass_kg_m2": 10.000000000000002,
+      "minimum_radius_m": 19.125683060109292,
+      "water_kg_m2": 9.000000000000002,
+      "skin_kg_per_projected_m2": 4
+    },
+    {
+      "height_km": 10.0,
+      "dry_kg_m2": 1.0,
+      "water_fraction": 0.95,
+      "wet_biomass_kg_m2": 19.999999999999982,
+      "minimum_radius_m": 32.78688524590161,
+      "water_kg_m2": 18.999999999999982,
+      "skin_kg_per_projected_m2": 4
+    },
+    {
+      "height_km": 10.0,
+      "dry_kg_m2": 10.0,
+      "water_fraction": 0.8,
+      "wet_biomass_kg_m2": 50.000000000000014,
+      "minimum_radius_m": 73.7704918032787,
+      "water_kg_m2": 40.000000000000014,
+      "skin_kg_per_projected_m2": 4
+    },
+    {
+      "height_km": 10.0,
+      "dry_kg_m2": 10.0,
+      "water_fraction": 0.9,
+      "wet_biomass_kg_m2": 100.00000000000003,
+      "minimum_radius_m": 142.07650273224047,
+      "water_kg_m2": 90.00000000000003,
+      "skin_kg_per_projected_m2": 4
+    },
+    {
+      "height_km": 10.0,
+      "dry_kg_m2": 10.0,
+      "water_fraction": 0.95,
+      "wet_biomass_kg_m2": 199.99999999999983,
+      "minimum_radius_m": 278.6885245901637,
+      "water_kg_m2": 189.99999999999983,
+      "skin_kg_per_projected_m2": 4
+    },
+    {
+      "height_km": 20.0,
+      "dry_kg_m2": 1.0,
+      "water_fraction": 0.8,
+      "wet_biomass_kg_m2": 5.000000000000001,
+      "minimum_radius_m": 14.469453376205786,
+      "water_kg_m2": 4.000000000000001,
+      "skin_kg_per_projected_m2": 4
+    },
+    {
+      "height_km": 20.0,
+      "dry_kg_m2": 1.0,
+      "water_fraction": 0.9,
+      "wet_biomass_kg_m2": 10.000000000000002,
+      "minimum_radius_m": 22.508038585209007,
+      "water_kg_m2": 9.000000000000002,
+      "skin_kg_per_projected_m2": 4
+    },
+    {
+      "height_km": 20.0,
+      "dry_kg_m2": 1.0,
+      "water_fraction": 0.95,
+      "wet_biomass_kg_m2": 19.999999999999982,
+      "minimum_radius_m": 38.585209003215404,
+      "water_kg_m2": 18.999999999999982,
+      "skin_kg_per_projected_m2": 4
+    },
+    {
+      "height_km": 20.0,
+      "dry_kg_m2": 10.0,
+      "water_fraction": 0.8,
+      "wet_biomass_kg_m2": 50.000000000000014,
+      "minimum_radius_m": 86.81672025723475,
+      "water_kg_m2": 40.000000000000014,
+      "skin_kg_per_projected_m2": 4
+    },
+    {
+      "height_km": 20.0,
+      "dry_kg_m2": 10.0,
+      "water_fraction": 0.9,
+      "wet_biomass_kg_m2": 100.00000000000003,
+      "minimum_radius_m": 167.20257234726694,
+      "water_kg_m2": 90.00000000000003,
+      "skin_kg_per_projected_m2": 4
+    },
+    {
+      "height_km": 20.0,
+      "dry_kg_m2": 10.0,
+      "water_fraction": 0.95,
+      "wet_biomass_kg_m2": 199.99999999999983,
+      "minimum_radius_m": 327.9742765273309,
+      "water_kg_m2": 189.99999999999983,
+      "skin_kg_per_projected_m2": 4
+    },
+    {
+      "height_km": 40.0,
+      "dry_kg_m2": 1.0,
+      "water_fraction": 0.8,
+      "wet_biomass_kg_m2": 5.000000000000001,
+      "minimum_radius_m": 20.179372197309416,
+      "water_kg_m2": 4.000000000000001,
+      "skin_kg_per_projected_m2": 4
+    },
+    {
+      "height_km": 40.0,
+      "dry_kg_m2": 1.0,
+      "water_fraction": 0.9,
+      "wet_biomass_kg_m2": 10.000000000000002,
+      "minimum_radius_m": 31.390134529147986,
+      "water_kg_m2": 9.000000000000002,
+      "skin_kg_per_projected_m2": 4
+    },
+    {
+      "height_km": 40.0,
+      "dry_kg_m2": 1.0,
+      "water_fraction": 0.95,
+      "wet_biomass_kg_m2": 19.999999999999982,
+      "minimum_radius_m": 53.81165919282507,
+      "water_kg_m2": 18.999999999999982,
+      "skin_kg_per_projected_m2": 4
+    },
+    {
+      "height_km": 40.0,
+      "dry_kg_m2": 10.0,
+      "water_fraction": 0.8,
+      "wet_biomass_kg_m2": 50.000000000000014,
+      "minimum_radius_m": 121.07623318385654,
+      "water_kg_m2": 40.000000000000014,
+      "skin_kg_per_projected_m2": 4
+    },
+    {
+      "height_km": 40.0,
+      "dry_kg_m2": 10.0,
+      "water_fraction": 0.9,
+      "wet_biomass_kg_m2": 100.00000000000003,
+      "minimum_radius_m": 233.18385650224224,
+      "water_kg_m2": 90.00000000000003,
+      "skin_kg_per_projected_m2": 4
+    },
+    {
+      "height_km": 40.0,
+      "dry_kg_m2": 10.0,
+      "water_fraction": 0.95,
+      "wet_biomass_kg_m2": 199.99999999999983,
+      "minimum_radius_m": 457.3991031390131,
+      "water_kg_m2": 189.99999999999983,
+      "skin_kg_per_projected_m2": 4
+    }
+  ],
+  "production": [
+    {
+      "coverage": 0.0001,
+      "npp_g_c_m2_year": 500.0,
+      "dry_kg_m2": 1.0,
+      "projected_area_m2": 3793232809.9380465,
+      "npp_kg_c_year": 1896616404.9690232,
+      "dry_production_kg_year": 4214703122.1533847,
+      "dry_stock_kg": 3793232809.9380465,
+      "p_assimilation_kg_year": 46141505.92107434,
+      "p_stock_kg": 41527355.3289669,
+      "harvested_dry_kg_year": 210735156.10766923,
+      "food_energy_people": 923138.2608412615,
+      "chemical_npp_w_per_projected_m2": 0.633761756280579,
+      "stock_to_production_years": 0.9
+    },
+    {
+      "coverage": 0.0001,
+      "npp_g_c_m2_year": 500.0,
+      "dry_kg_m2": 10.0,
+      "projected_area_m2": 3793232809.9380465,
+      "npp_kg_c_year": 1896616404.9690232,
+      "dry_production_kg_year": 4214703122.1533847,
+      "dry_stock_kg": 37932328099.38046,
+      "p_assimilation_kg_year": 46141505.92107434,
+      "p_stock_kg": 415273553.289669,
+      "harvested_dry_kg_year": 210735156.10766923,
+      "food_energy_people": 923138.2608412615,
+      "chemical_npp_w_per_projected_m2": 0.633761756280579,
+      "stock_to_production_years": 9.0
+    },
+    {
+      "coverage": 0.0001,
+      "npp_g_c_m2_year": 1000.0,
+      "dry_kg_m2": 1.0,
+      "projected_area_m2": 3793232809.9380465,
+      "npp_kg_c_year": 3793232809.9380465,
+      "dry_production_kg_year": 8429406244.306769,
+      "dry_stock_kg": 3793232809.9380465,
+      "p_assimilation_kg_year": 92283011.84214868,
+      "p_stock_kg": 41527355.3289669,
+      "harvested_dry_kg_year": 421470312.21533847,
+      "food_energy_people": 1846276.521682523,
+      "chemical_npp_w_per_projected_m2": 1.267523512561158,
+      "stock_to_production_years": 0.45
+    },
+    {
+      "coverage": 0.0001,
+      "npp_g_c_m2_year": 1000.0,
+      "dry_kg_m2": 10.0,
+      "projected_area_m2": 3793232809.9380465,
+      "npp_kg_c_year": 3793232809.9380465,
+      "dry_production_kg_year": 8429406244.306769,
+      "dry_stock_kg": 37932328099.38046,
+      "p_assimilation_kg_year": 92283011.84214868,
+      "p_stock_kg": 415273553.289669,
+      "harvested_dry_kg_year": 421470312.21533847,
+      "food_energy_people": 1846276.521682523,
+      "chemical_npp_w_per_projected_m2": 1.267523512561158,
+      "stock_to_production_years": 4.5
+    },
+    {
+      "coverage": 0.0001,
+      "npp_g_c_m2_year": 2000.0,
+      "dry_kg_m2": 1.0,
+      "projected_area_m2": 3793232809.9380465,
+      "npp_kg_c_year": 7586465619.876093,
+      "dry_production_kg_year": 16858812488.613539,
+      "dry_stock_kg": 3793232809.9380465,
+      "p_assimilation_kg_year": 184566023.68429735,
+      "p_stock_kg": 41527355.3289669,
+      "harvested_dry_kg_year": 842940624.4306769,
+      "food_energy_people": 3692553.043365046,
+      "chemical_npp_w_per_projected_m2": 2.535047025122316,
+      "stock_to_production_years": 0.225
+    },
+    {
+      "coverage": 0.0001,
+      "npp_g_c_m2_year": 2000.0,
+      "dry_kg_m2": 10.0,
+      "projected_area_m2": 3793232809.9380465,
+      "npp_kg_c_year": 7586465619.876093,
+      "dry_production_kg_year": 16858812488.613539,
+      "dry_stock_kg": 37932328099.38046,
+      "p_assimilation_kg_year": 184566023.68429735,
+      "p_stock_kg": 415273553.289669,
+      "harvested_dry_kg_year": 842940624.4306769,
+      "food_energy_people": 3692553.043365046,
+      "chemical_npp_w_per_projected_m2": 2.535047025122316,
+      "stock_to_production_years": 2.25
+    },
+    {
+      "coverage": 0.001,
+      "npp_g_c_m2_year": 500.0,
+      "dry_kg_m2": 1.0,
+      "projected_area_m2": 37932328099.38046,
+      "npp_kg_c_year": 18966164049.69023,
+      "dry_production_kg_year": 42147031221.533844,
+      "dry_stock_kg": 37932328099.38046,
+      "p_assimilation_kg_year": 461415059.2107433,
+      "p_stock_kg": 415273553.289669,
+      "harvested_dry_kg_year": 2107351561.0766923,
+      "food_energy_people": 9231382.608412616,
+      "chemical_npp_w_per_projected_m2": 0.633761756280579,
+      "stock_to_production_years": 0.9
+    },
+    {
+      "coverage": 0.001,
+      "npp_g_c_m2_year": 500.0,
+      "dry_kg_m2": 10.0,
+      "projected_area_m2": 37932328099.38046,
+      "npp_kg_c_year": 18966164049.69023,
+      "dry_production_kg_year": 42147031221.533844,
+      "dry_stock_kg": 379323280993.8046,
+      "p_assimilation_kg_year": 461415059.2107433,
+      "p_stock_kg": 4152735532.8966904,
+      "harvested_dry_kg_year": 2107351561.0766923,
+      "food_energy_people": 9231382.608412616,
+      "chemical_npp_w_per_projected_m2": 0.633761756280579,
+      "stock_to_production_years": 9.0
+    },
+    {
+      "coverage": 0.001,
+      "npp_g_c_m2_year": 1000.0,
+      "dry_kg_m2": 1.0,
+      "projected_area_m2": 37932328099.38046,
+      "npp_kg_c_year": 37932328099.38046,
+      "dry_production_kg_year": 84294062443.06769,
+      "dry_stock_kg": 37932328099.38046,
+      "p_assimilation_kg_year": 922830118.4214866,
+      "p_stock_kg": 415273553.289669,
+      "harvested_dry_kg_year": 4214703122.1533847,
+      "food_energy_people": 18462765.216825232,
+      "chemical_npp_w_per_projected_m2": 1.267523512561158,
+      "stock_to_production_years": 0.45
+    },
+    {
+      "coverage": 0.001,
+      "npp_g_c_m2_year": 1000.0,
+      "dry_kg_m2": 10.0,
+      "projected_area_m2": 37932328099.38046,
+      "npp_kg_c_year": 37932328099.38046,
+      "dry_production_kg_year": 84294062443.06769,
+      "dry_stock_kg": 379323280993.8046,
+      "p_assimilation_kg_year": 922830118.4214866,
+      "p_stock_kg": 4152735532.8966904,
+      "harvested_dry_kg_year": 4214703122.1533847,
+      "food_energy_people": 18462765.216825232,
+      "chemical_npp_w_per_projected_m2": 1.267523512561158,
+      "stock_to_production_years": 4.5
+    },
+    {
+      "coverage": 0.001,
+      "npp_g_c_m2_year": 2000.0,
+      "dry_kg_m2": 1.0,
+      "projected_area_m2": 37932328099.38046,
+      "npp_kg_c_year": 75864656198.76093,
+      "dry_production_kg_year": 168588124886.13538,
+      "dry_stock_kg": 37932328099.38046,
+      "p_assimilation_kg_year": 1845660236.8429732,
+      "p_stock_kg": 415273553.289669,
+      "harvested_dry_kg_year": 8429406244.306769,
+      "food_energy_people": 36925530.433650464,
+      "chemical_npp_w_per_projected_m2": 2.535047025122316,
+      "stock_to_production_years": 0.225
+    },
+    {
+      "coverage": 0.001,
+      "npp_g_c_m2_year": 2000.0,
+      "dry_kg_m2": 10.0,
+      "projected_area_m2": 37932328099.38046,
+      "npp_kg_c_year": 75864656198.76093,
+      "dry_production_kg_year": 168588124886.13538,
+      "dry_stock_kg": 379323280993.8046,
+      "p_assimilation_kg_year": 1845660236.8429732,
+      "p_stock_kg": 4152735532.8966904,
+      "harvested_dry_kg_year": 8429406244.306769,
+      "food_energy_people": 36925530.433650464,
+      "chemical_npp_w_per_projected_m2": 2.535047025122316,
+      "stock_to_production_years": 2.25
+    },
+    {
+      "coverage": 0.01,
+      "npp_g_c_m2_year": 500.0,
+      "dry_kg_m2": 1.0,
+      "projected_area_m2": 379323280993.8046,
+      "npp_kg_c_year": 189661640496.9023,
+      "dry_production_kg_year": 421470312215.33844,
+      "dry_stock_kg": 379323280993.8046,
+      "p_assimilation_kg_year": 4614150592.107433,
+      "p_stock_kg": 4152735532.8966904,
+      "harvested_dry_kg_year": 21073515610.766922,
+      "food_energy_people": 92313826.08412614,
+      "chemical_npp_w_per_projected_m2": 0.633761756280579,
+      "stock_to_production_years": 0.9
+    },
+    {
+      "coverage": 0.01,
+      "npp_g_c_m2_year": 500.0,
+      "dry_kg_m2": 10.0,
+      "projected_area_m2": 379323280993.8046,
+      "npp_kg_c_year": 189661640496.9023,
+      "dry_production_kg_year": 421470312215.33844,
+      "dry_stock_kg": 3793232809938.0464,
+      "p_assimilation_kg_year": 4614150592.107433,
+      "p_stock_kg": 41527355328.9669,
+      "harvested_dry_kg_year": 21073515610.766922,
+      "food_energy_people": 92313826.08412614,
+      "chemical_npp_w_per_projected_m2": 0.633761756280579,
+      "stock_to_production_years": 9.000000000000002
+    },
+    {
+      "coverage": 0.01,
+      "npp_g_c_m2_year": 1000.0,
+      "dry_kg_m2": 1.0,
+      "projected_area_m2": 379323280993.8046,
+      "npp_kg_c_year": 379323280993.8046,
+      "dry_production_kg_year": 842940624430.6769,
+      "dry_stock_kg": 379323280993.8046,
+      "p_assimilation_kg_year": 9228301184.214867,
+      "p_stock_kg": 4152735532.8966904,
+      "harvested_dry_kg_year": 42147031221.533844,
+      "food_energy_people": 184627652.1682523,
+      "chemical_npp_w_per_projected_m2": 1.267523512561158,
+      "stock_to_production_years": 0.45
+    },
+    {
+      "coverage": 0.01,
+      "npp_g_c_m2_year": 1000.0,
+      "dry_kg_m2": 10.0,
+      "projected_area_m2": 379323280993.8046,
+      "npp_kg_c_year": 379323280993.8046,
+      "dry_production_kg_year": 842940624430.6769,
+      "dry_stock_kg": 3793232809938.0464,
+      "p_assimilation_kg_year": 9228301184.214867,
+      "p_stock_kg": 41527355328.9669,
+      "harvested_dry_kg_year": 42147031221.533844,
+      "food_energy_people": 184627652.1682523,
+      "chemical_npp_w_per_projected_m2": 1.267523512561158,
+      "stock_to_production_years": 4.500000000000001
+    },
+    {
+      "coverage": 0.01,
+      "npp_g_c_m2_year": 2000.0,
+      "dry_kg_m2": 1.0,
+      "projected_area_m2": 379323280993.8046,
+      "npp_kg_c_year": 758646561987.6093,
+      "dry_production_kg_year": 1685881248861.3538,
+      "dry_stock_kg": 379323280993.8046,
+      "p_assimilation_kg_year": 18456602368.429733,
+      "p_stock_kg": 4152735532.8966904,
+      "harvested_dry_kg_year": 84294062443.06769,
+      "food_energy_people": 369255304.3365046,
+      "chemical_npp_w_per_projected_m2": 2.535047025122316,
+      "stock_to_production_years": 0.225
+    },
+    {
+      "coverage": 0.01,
+      "npp_g_c_m2_year": 2000.0,
+      "dry_kg_m2": 10.0,
+      "projected_area_m2": 379323280993.8046,
+      "npp_kg_c_year": 758646561987.6093,
+      "dry_production_kg_year": 1685881248861.3538,
+      "dry_stock_kg": 3793232809938.0464,
+      "p_assimilation_kg_year": 18456602368.429733,
+      "p_stock_kg": 41527355328.9669,
+      "harvested_dry_kg_year": 84294062443.06769,
+      "food_energy_people": 369255304.3365046,
+      "chemical_npp_w_per_projected_m2": 2.535047025122316,
+      "stock_to_production_years": 2.2500000000000004
+    }
+  ],
+  "central": {
+    "projected_area_m2": 379323280993.8046,
+    "npp_kg_c_year": 379323280993.8046,
+    "dry_production_kg_year": 842940624430.6769,
+    "dry_stock_kg": 379323280993.8046,
+    "p_assimilation_kg_year": 9228301184.214867,
+    "p_stock_kg": 4152735532.8966904,
+    "harvested_dry_kg_year": 42147031221.533844,
+    "food_energy_people": 184627652.1682523,
+    "chemical_npp_w_per_projected_m2": 1.267523512561158,
+    "stock_to_production_years": 0.45
+  },
+  "food_sensitivity": [
+    {
+      "edible": 1.0,
+      "processing": 1.0,
+      "projected_area_m2": 379323280993.8046,
+      "npp_kg_c_year": 379323280993.8046,
+      "dry_production_kg_year": 842940624430.6769,
+      "dry_stock_kg": 379323280993.8046,
+      "p_assimilation_kg_year": 9228301184.214867,
+      "p_stock_kg": 4152735532.8966904,
+      "harvested_dry_kg_year": 42147031221.533844,
+      "food_energy_people": 184627652.1682523,
+      "chemical_npp_w_per_projected_m2": 1.267523512561158,
+      "stock_to_production_years": 0.45
+    },
+    {
+      "edible": 0.5,
+      "processing": 0.8,
+      "projected_area_m2": 379323280993.8046,
+      "npp_kg_c_year": 379323280993.8046,
+      "dry_production_kg_year": 842940624430.6769,
+      "dry_stock_kg": 379323280993.8046,
+      "p_assimilation_kg_year": 9228301184.214867,
+      "p_stock_kg": 4152735532.8966904,
+      "harvested_dry_kg_year": 42147031221.533844,
+      "food_energy_people": 73851060.86730093,
+      "chemical_npp_w_per_projected_m2": 1.267523512561158,
+      "stock_to_production_years": 0.45
+    },
+    {
+      "edible": 0.25,
+      "processing": 0.7,
+      "projected_area_m2": 379323280993.8046,
+      "npp_kg_c_year": 379323280993.8046,
+      "dry_production_kg_year": 842940624430.6769,
+      "dry_stock_kg": 379323280993.8046,
+      "p_assimilation_kg_year": 9228301184.214867,
+      "p_stock_kg": 4152735532.8966904,
+      "harvested_dry_kg_year": 42147031221.533844,
+      "food_energy_people": 32309839.12944415,
+      "chemical_npp_w_per_projected_m2": 1.267523512561158,
+      "stock_to_production_years": 0.45
+    }
+  ],
+  "trophic_production_kg_year": [
+    {
+      "transfer_fraction": 0.03,
+      "primary_consumer": 24023807796.27429,
+      "secondary_consumer": 720714233.8882287
+    },
+    {
+      "transfer_fraction": 0.06,
+      "primary_consumer": 48047615592.54858,
+      "secondary_consumer": 2882856935.5529146
+    },
+    {
+      "transfer_fraction": 0.15,
+      "primary_consumer": 120119038981.37144,
+      "secondary_consumer": 18017855847.205715
+    }
+  ],
+  "biodiversity": {
+    "species_count": null,
+    "reason": "Energy and habitat budgets do not determine species richness.",
+    "candidate_guilds": [
+      "cloud phototrophs",
+      "C1 heterotrophs",
+      "droplet grazers",
+      "photosynthetic floaters",
+      "collectors",
+      "grazers",
+      "predators",
+      "decomposers"
+    ]
+  }
+}

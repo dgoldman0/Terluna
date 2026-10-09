@@ -1,0 +1,69 @@
+{
+  "source_admission": "Primary papers and original research abstracts checked on 2026-10-09. No outside datasets or paper files are redistributed. Access describes the sections actually inspected, not an assertion of complete scholarly reading. Terrestrial observations establish mechanisms and conditional analogues; they do not validate an engineered lunar organism or a lunar ecosystem.",
+  "sources": [
+    {
+      "id": "sattler_2001",
+      "citation": "Sattler, B., Puxbaum, H. and Psenner, R. (2001). Bacterial growth in supercooled cloud droplets. Geophysical Research Letters 28, 239–242.",
+      "doi_or_url": "https://doi.org/10.1029/2000GL011684",
+      "access": "Publisher PDF: methods, Table 1, results and discussion inspected.",
+      "supports": "Bacterial activity in collected cloud water; reported generation times 3.6–19.5 days and mean cellular carbon about 17 fg.",
+      "boundary": "Samples were frozen, diluted and incubated for 20 hours at 0 C. The paper explicitly lacks uptake measurements at the original subzero temperature. These are conditional bacterial rates, not direct trajectory-resolved aerial phytoplankton productivity or proof of a closed atmospheric life cycle."
+    },
+    {
+      "id": "dillon_2020",
+      "citation": "Dillon, K. P. et al. (2020). Cyanobacteria and Algae in Clouds and Rain in the Area of puy de Dôme, Central France. Applied and Environmental Microbiology 87, e01850-20.",
+      "doi_or_url": "https://doi.org/10.1128/AEM.01850-20",
+      "access": "Publisher HTML: results on cloud sequences, rain cell counts and culture enrichment; enumeration methods inspected.",
+      "supports": "Photosynthetic microbial taxa in clouds and rain, RNA/DNA activity proxies, and viable photoautotrophs recovered by enrichment from rain samples.",
+      "boundary": "Presence, activity proxies and growth after sampling do not measure in-cloud carbon fixation. Rainwater counts per millilitre cannot be treated as concentrations per cubic metre of air without a liquid-water-content conversion."
+    },
+    {
+      "id": "cao_2026",
+      "citation": "Cao, T. T. T., Herckes, P., Straub, D., Sarkar, S. and Garcia-Pichel, F. (2026). Growth and formaldehyde degradation of photoheterotrophic Methylobacterium within radiation fogs. mBio 17, e00463-26.",
+      "doi_or_url": "https://doi.org/10.1128/mbio.00463-26",
+      "access": "Publisher HTML: fog/aerosol population comparison, cell-division evidence and metabolic results inspected; supplements not inspected.",
+      "supports": "Field evidence consistent with bacterial growth in fog and direct assays of biological formaldehyde consumption. Dividing-cell frequency corresponds to roughly 60-hour doubling using aquatic-community calibration.",
+      "boundary": "Dominant recovered taxa were heterotrophs, with no known autotrophs among the common fog taxa. The work does not establish new photosynthetic carbon production in air. Formaldehyde removal cannot be converted directly to biomass growth, as the paper explains."
+    },
+    {
+      "id": "eggs_sanders_2013",
+      "citation": "Eggs, B. and Sanders, D. (2013). Herbivory in Spiders: The Importance of Pollen for Orb-Weavers. PLOS ONE 8, e82637.",
+      "doi_or_url": "https://doi.org/10.1371/journal.pone.0082637",
+      "access": "Publisher HTML: abstract, feeding experiment, isotope results and discussion inspected.",
+      "supports": "Web-captured pollen can contribute materially to juvenile orb-weaver diets; field and feeding evidence supports active ingestion and assimilation.",
+      "boundary": "These are attached webs collecting pollen and insects originating elsewhere. They provide no measurement of submicrometre-cell capture efficiency, freely drifting collectors, or a food web supported exclusively by atmospheric primary production."
+    },
+    {
+      "id": "tipping_2014",
+      "citation": "Tipping, E. et al. (2014). Atmospheric deposition of phosphorus to land and freshwater. Environmental Science: Processes & Impacts 16, 1608–1617.",
+      "doi_or_url": "https://doi.org/10.1039/C3EM00641G",
+      "access": "Authors' abstract through PubMed, https://pubmed.ncbi.nlm.nih.gov/24526176/; publisher full text could not be retrieved.",
+      "supports": "An original compilation of measured terrestrial deposition reports a geometric mean total-P deposition of 0.027 g/m2/year, with strong local redistribution and spatial sampling bias.",
+      "boundary": "The inherited 0.028 g/m2/year scenario is an approximate terrestrial analogue, not a measured maximum. Deposition to the ground is a downward transfer, not an independently available upward lunar nutrient source; total P is not necessarily bioavailable P."
+    },
+    {
+      "id": "sagan_salpeter_1976",
+      "citation": "Sagan, C. and Salpeter, E. E. (1976). Particles, environments, and possible ecologies in the Jovian atmosphere. Astrophysical Journal Supplement Series 32, 737.",
+      "doi_or_url": "https://ntrs.nasa.gov/citations/19770038871",
+      "access": "NASA research-record abstract inspected; full paper not admitted by this evaluation.",
+      "supports": "Historical theoretical treatment of photosynthetic sinkers, pressure-maintaining floaters and consumers in an atmosphere.",
+      "boundary": "Conceptual precedent in Jupiter's very different atmosphere; no empirical aerial macro-organism and no validation of hydrogen containment, oxygen tolerance, hydration or reproduction on Terluna."
+    },
+    {
+      "id": "rai_2020",
+      "citation": "Rai, N. et al. (2020). The photoreceptor UVR8 mediates the perception of both UV-B and UV-A wavelengths up to 350 nm of sunlight with responsivity moderated by cryptochromes. Plant, Cell & Environment 43, 1513–1527.",
+      "doi_or_url": "https://doi.org/10.1111/pce.13752",
+      "access": "Publisher HTML abstract and introduction inspected; full methods and supplements not assessed.",
+      "supports": "Arabidopsis sunlight/filter experiments support UVR8-dependent responses to shorter UV-A and cryptochrome-dependent responses at longer wavelengths.",
+      "boundary": "This supports biological use of retained wavelengths as a research direction. It supplies no universal plant action spectrum, no engineered receptor validation and no substitute for dose-response measurements under Terluna's spectrum."
+    }
+  ],
+  "assumption_register": {
+    "growth": "Favourable duty, mortality and removal lifetimes are separate sensitivities. The cited bacterial generation times must not be described as measured lunar algal rates. Hydration and organic-carbon availability can permit heterotrophic growth in darkness; net new photoautotrophic carbon additionally requires useful light.",
+    "feeding": "Capture efficiency, effective drag, metabolic maintenance, assimilation and propulsion efficiency are imposed traits. Their independent variation does not prove a physically realizable filter; low drag and high capture can conflict. A freely drifting organism lacks a sustained through-air speed merely because the wind is strong.",
+    "floater": "Dry stock, water fraction, membrane mass and useful-lift reserve are hypothetical traits. The mass balance tests required size and water loading, not membrane permeability, biological hydrogen production, gas safety, storm survival or reproduction.",
+    "production": "Coverage, net production, trophic transfer, edibility and harvest share are scenarios. No cited source establishes 500–2000 g C/m2/year for aerial floaters or a sustainable 5% harvest. Light intercepted above already productive surface biomes is a shared resource and can displace production below.",
+    "optics": "The fixed geometric-extinction efficiency is a size-sensitivity approximation; particle morphology, hydration, refractive index and spectral scattering are unresolved. Larger particles reduce extinction per unit compact mass while generally worsening settling unless structure or lift compensates.",
+    "biodiversity": "Source observations establish candidate guilds. Atmospheric volume, carbon throughput and hypothetical structural habitat cannot determine a species count."
+  }
+}

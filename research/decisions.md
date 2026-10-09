@@ -196,3 +196,13 @@ the sky boats' share of trips, ownership and traffic system stay open.
 |---|---|---|
 | Finished topic branches wait for a proper integration and joint merger with the other open branches before they reach main. | Author, 2026-10-08 | Done on 2026-10-08: sea appearance, the solar shield, atmospheric electricity and infrastructure merged in that order ([integration record](integration/README.md)) |
 | The joint integration includes a synthesis: taking the branches' pieces, seeing where they fit together, what they say about the whole and what comes next, with joint computation where it is warranted. | Author, 2026-10-08 | Done: [studies/joint_synthesis](studies/joint_synthesis/README.md); its calculations took about an hour of machine time, and the decisions it lists await the author |
+
+
+## Cross-domain ecology follow-up, 9 October 2026
+
+| Decision | Source | Status |
+|---|---|---|
+| Preserve short-wave shielding, use biological adaptation and local UV provision as the working direction, and keep narrow attenuated UV-B transmission open for investigation. | Author, 2026-10-09 discussion and instruction to evaluate and lock cross-domain findings | Adopted direction; [fixed-column comparison](studies/uv_biology/README.md) completed. No new spectral window or exobase result adopted. |
+| Evaluate the Moon's surface and aerial habitation before choosing population distribution; arbitrary domain allocations do not establish capacity. | Author, 2026-10-09 | [Shared comparison cases](../shared/scenarios/population.json); 20–30 billion Solar System working scale retained, no distribution selected. |
+| Investigate true aeroplankton and large photosynthetic aerial organisms together, their consumers, and food harvest with a functioning phosphorus cycle. | Author, 2026-10-09 | [First requirements evaluation](studies/aerial_ecology/README.md) completed; ecology and resources must close nutrient return including harvest, with no assumed safe yield or species count. |
+| Allow much floating habitation to roam while managing collision and storm risks. | Author, 2026-10-09 | Adopted working direction; operational budgets include navigation, avoidance, rendezvous and occasional repositioning. Fixed-location holding is a separate comparison. |

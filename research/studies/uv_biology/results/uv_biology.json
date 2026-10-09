@@ -1,0 +1,365 @@
+{
+  "schema": "terluna.research.uv-biology/1",
+  "producer": {
+    "files": {
+      "research/studies/uv_biology/run.py": "a0ffe820ced01244dba736c146d4e64c9aa15cd36c3204338be9a4c32e7b0866",
+      "biosphere/ecology/screen.py": "4ca788045f524525b17443f2feeb1070d7bbf721beec6402a715d526a99886aa"
+    },
+    "inputs": {
+      "illumination/surface_light/results/surface_light.json": "e2406dbceb34193eaef5bd8a1dd6ea20940be72934301ef618221fdc79ad5572",
+      "research/studies/aerial_ecology/sources.json": "d0e41991a99d3031ba69243d4cbbbb1c1c85d7de00b07ddf06dbdf9048f08c99"
+    },
+    "constants": {
+      "AVOGADRO": 6.02214076e+23,
+      "GAS_CONSTANT": 8.31446261815324,
+      "MOON_RADIUS": 1737400.0,
+      "MOON_SURFACE_GRAVITY": 1.6242188765608128,
+      "PLANCK": 6.62607015e-34,
+      "SPEED_OF_LIGHT": 299792458.0,
+      "STANDARD_GRAVITY": 9.80665
+    }
+  },
+  "evidence": "Linear spectral reweighting of the solved, almost ozone-free lunar reference column; multiple scattering is already in its transfer. No new ozone, living-atmosphere chemistry, film design, ring thermal balance or exobase calculation is performed.",
+  "reading_rule": "Window fractions are absolute incoming transmission, not percentages of the old film. Outside each band all filtering is retained, including wavelengths below the stored 202 nm limit. Values are horizontal irradiance at ground albedo 0.1. Photon bands are unweighted proxies, not vitamin-D, UVR8 or DNA-damage action spectra.",
+  "windows": {
+    "reference": null,
+    "uvb_295_315_1pct": [
+      295,
+      315,
+      0.01
+    ],
+    "uvb_295_315_5pct": [
+      295,
+      315,
+      0.05
+    ],
+    "uvb_295_315_10pct": [
+      295,
+      315,
+      0.1
+    ],
+    "long_uvb_310_315_10pct": [
+      310,
+      315,
+      0.1
+    ],
+    "uv_310_400_95pct": [
+      310,
+      400,
+      0.95
+    ]
+  },
+  "by_sun_degrees": {
+    "90.0": {
+      "earth": {
+        "uv_index": 14.810139105818847,
+        "band_photons_umol_m2_s": {
+          "280_315": 6.787274531612965,
+          "295_305": 0.8259977634934921,
+          "310_315": 4.019675119130724,
+          "315_350": 60.53730072827898,
+          "350_400": 139.63371319987615
+        },
+        "bee_uv_relative_catch": 116.97900256645919,
+        "uv_energy_w_m2": 68.7108299528412
+      },
+      "cases": {
+        "reference": {
+          "uv_index": 0.10899511616567656,
+          "band_photons_umol_m2_s": {
+            "280_315": 0.0,
+            "295_305": 0.0,
+            "310_315": 0.0,
+            "315_350": 0.11723629522070053,
+            "350_400": 35.18771739305364
+          },
+          "uv_energy_w_m2": 11.024967971185793,
+          "added_uv_energy_w_m2": 0.0,
+          "bee_uv_catch_vs_earth": 0.06900795462829823,
+          "unchanged_below_295nm": true
+        },
+        "uvb_295_315_1pct": {
+          "uv_index": 0.37075655613497926,
+          "band_photons_umol_m2_s": {
+            "280_315": 0.05334384045246936,
+            "295_305": 0.021562396726017324,
+            "310_315": 0.018244519566311065,
+            "315_350": 0.11723629522070053,
+            "350_400": 35.18771739305364
+          },
+          "uv_energy_w_m2": 11.04581143240269,
+          "added_uv_energy_w_m2": 0.02084346121689684,
+          "bee_uv_catch_vs_earth": 0.0693384262996512,
+          "unchanged_below_295nm": true
+        },
+        "uvb_295_315_5pct": {
+          "uv_index": 1.41780231601219,
+          "band_photons_umol_m2_s": {
+            "280_315": 0.26671920226234686,
+            "295_305": 0.10781198363008664,
+            "310_315": 0.09122259783155533,
+            "315_350": 0.11723629522070053,
+            "350_400": 35.18771739305364
+          },
+          "uv_energy_w_m2": 11.129185277270281,
+          "added_uv_energy_w_m2": 0.10421730608448776,
+          "bee_uv_catch_vs_earth": 0.07066031298506306,
+          "unchanged_below_295nm": true
+        },
+        "uvb_295_315_10pct": {
+          "uv_index": 2.7266095158587027,
+          "band_photons_umol_m2_s": {
+            "280_315": 0.5334384045246937,
+            "295_305": 0.21562396726017327,
+            "310_315": 0.18244519566311065,
+            "315_350": 0.11723629522070053,
+            "350_400": 35.18771739305364
+          },
+          "uv_energy_w_m2": 11.233402583354767,
+          "added_uv_energy_w_m2": 0.20843461216897374,
+          "bee_uv_catch_vs_earth": 0.0723126713418279,
+          "unchanged_below_295nm": true
+        },
+        "long_uvb_310_315_10pct": {
+          "uv_index": 0.23548188583721008,
+          "band_photons_umol_m2_s": {
+            "280_315": 0.18244519566311065,
+            "295_305": 0.0,
+            "310_315": 0.18244519566311065,
+            "315_350": 0.11723629522070053,
+            "350_400": 35.18771739305364
+          },
+          "uv_energy_w_m2": 11.09480762470811,
+          "added_uv_energy_w_m2": 0.06983965352231714,
+          "bee_uv_catch_vs_earth": 0.07025541855785472,
+          "unchanged_below_295nm": true
+        },
+        "uv_310_400_95pct": {
+          "uv_index": 2.2607573943448425,
+          "band_photons_umol_m2_s": {
+            "280_315": 1.733229358799551,
+            "295_305": 0.0,
+            "310_315": 1.733229358799551,
+            "315_350": 20.040785012888396,
+            "350_400": 57.29972986722088
+          },
+          "uv_energy_w_m2": 26.0011300571716,
+          "added_uv_energy_w_m2": 14.976162085985807,
+          "bee_uv_catch_vs_earth": 0.35028421831860745,
+          "unchanged_below_295nm": true
+        }
+      }
+    },
+    "30.0": {
+      "earth": {
+        "uv_index": 2.668942046327198,
+        "band_photons_umol_m2_s": {
+          "280_315": 1.3972893565061453,
+          "295_305": 0.06245885146428,
+          "310_315": 1.0153064505196714,
+          "315_350": 23.09562906479605,
+          "350_400": 58.58545739775697
+        },
+        "bee_uv_relative_catch": 45.49095836137541,
+        "uv_energy_w_m2": 27.414727180232045
+      },
+      "cases": {
+        "reference": {
+          "uv_index": 0.03924893569970413,
+          "band_photons_umol_m2_s": {
+            "280_315": 0.0,
+            "295_305": 0.0,
+            "310_315": 0.0,
+            "315_350": 0.0420135802857603,
+            "350_400": 12.696490607626632
+          },
+          "uv_energy_w_m2": 3.977418412424384,
+          "added_uv_energy_w_m2": 0.0,
+          "bee_uv_catch_vs_earth": 0.0637908681754171,
+          "unchanged_below_295nm": true
+        },
+        "uvb_295_315_1pct": {
+          "uv_index": 0.1328534013946471,
+          "band_photons_umol_m2_s": {
+            "280_315": 0.019078233594529363,
+            "295_305": 0.0077105487739781604,
+            "310_315": 0.006526118638216041,
+            "315_350": 0.0420135802857603,
+            "350_400": 12.696490607626632
+          },
+          "uv_energy_w_m2": 3.9848729814790795,
+          "added_uv_energy_w_m2": 0.007454569054695437,
+          "bee_uv_catch_vs_earth": 0.06409480067305813,
+          "unchanged_below_295nm": true
+        },
+        "uvb_295_315_5pct": {
+          "uv_index": 0.507271264174419,
+          "band_photons_umol_m2_s": {
+            "280_315": 0.09539116797264682,
+            "295_305": 0.038552743869890806,
+            "310_315": 0.03263059319108021,
+            "315_350": 0.0420135802857603,
+            "350_400": 12.696490607626632
+          },
+          "uv_energy_w_m2": 4.01469125769786,
+          "added_uv_energy_w_m2": 0.037272845273476296,
+          "bee_uv_catch_vs_earth": 0.06531053066362229,
+          "unchanged_below_295nm": true
+        },
+        "uvb_295_315_10pct": {
+          "uv_index": 0.9752935926491341,
+          "band_photons_umol_m2_s": {
+            "280_315": 0.19078233594529365,
+            "295_305": 0.07710548773978161,
+            "310_315": 0.06526118638216041,
+            "315_350": 0.0420135802857603,
+            "350_400": 12.696490607626632
+          },
+          "uv_energy_w_m2": 4.051964102971336,
+          "added_uv_energy_w_m2": 0.07454569054695215,
+          "bee_uv_catch_vs_earth": 0.0668301931518275,
+          "unchanged_below_295nm": true
+        },
+        "long_uvb_310_315_10pct": {
+          "uv_index": 0.08449315599224973,
+          "band_photons_umol_m2_s": {
+            "280_315": 0.06526118638216041,
+            "295_305": 0.0,
+            "310_315": 0.06526118638216041,
+            "315_350": 0.0420135802857603,
+            "350_400": 12.696490607626632
+          },
+          "uv_energy_w_m2": 4.002400259267274,
+          "added_uv_energy_w_m2": 0.024981846842889954,
+          "bee_uv_catch_vs_earth": 0.06493831781431382,
+          "unchanged_below_295nm": true
+        },
+        "uv_310_400_95pct": {
+          "uv_index": 0.8091824370687641,
+          "band_photons_umol_m2_s": {
+            "280_315": 0.6199812706305238,
+            "295_305": 0.0,
+            "310_315": 0.6199812706305238,
+            "315_350": 7.17509904184082,
+            "350_400": 20.638072533397363
+          },
+          "uv_energy_w_m2": 9.346774993857782,
+          "added_uv_energy_w_m2": 5.369356581433397,
+          "bee_uv_catch_vs_earth": 0.32285285087119886,
+          "unchanged_below_295nm": true
+        }
+      }
+    },
+    "10.0": {
+      "earth": {
+        "uv_index": 0.2886707707899014,
+        "band_photons_umol_m2_s": {
+          "280_315": 0.09911831179183625,
+          "295_305": 0.0010865695388462076,
+          "310_315": 0.08566311756306294,
+          "315_350": 5.105437399141819,
+          "350_400": 14.26985377083776
+        },
+        "bee_uv_relative_catch": 10.383703857323667,
+        "uv_energy_w_m2": 6.391880264693281
+      },
+      "cases": {
+        "reference": {
+          "uv_index": 0.010325482914828665,
+          "band_photons_umol_m2_s": {
+            "280_315": 0.0,
+            "295_305": 0.0,
+            "310_315": 0.0,
+            "315_350": 0.01104943535299759,
+            "350_400": 3.340570720331288
+          },
+          "uv_energy_w_m2": 1.0464873189962174,
+          "added_uv_energy_w_m2": 0.0,
+          "bee_uv_catch_vs_earth": 0.07351306473938336,
+          "unchanged_below_295nm": true
+        },
+        "uvb_295_315_1pct": {
+          "uv_index": 0.03493490769779897,
+          "band_photons_umol_m2_s": {
+            "280_315": 0.00501596584667896,
+            "295_305": 0.00202716850665055,
+            "310_315": 0.0017158695185164265,
+            "315_350": 0.01104943535299759,
+            "350_400": 3.340570720331288
+          },
+          "uv_energy_w_m2": 1.048447240754136,
+          "added_uv_energy_w_m2": 0.0019599217579187034,
+          "bee_uv_catch_vs_earth": 0.07386314488235314,
+          "unchanged_below_295nm": true
+        },
+        "uvb_295_315_5pct": {
+          "uv_index": 0.13337260682968016,
+          "band_photons_umol_m2_s": {
+            "280_315": 0.02507982923339481,
+            "295_305": 0.010135842533252747,
+            "310_315": 0.008579347592582134,
+            "315_350": 0.01104943535299759,
+            "350_400": 3.340570720331288
+          },
+          "uv_energy_w_m2": 1.0562869277858113,
+          "added_uv_energy_w_m2": 0.009799608789593961,
+          "bee_uv_catch_vs_earth": 0.07526346545423222,
+          "unchanged_below_295nm": true
+        },
+        "uvb_295_315_10pct": {
+          "uv_index": 0.25641973074453167,
+          "band_photons_umol_m2_s": {
+            "280_315": 0.05015965846678962,
+            "295_305": 0.020271685066505493,
+            "310_315": 0.017158695185164267,
+            "315_350": 0.01104943535299759,
+            "350_400": 3.340570720331288
+          },
+          "uv_energy_w_m2": 1.0660865365754058,
+          "added_uv_energy_w_m2": 0.019599217579188366,
+          "bee_uv_catch_vs_earth": 0.07701386616908105,
+          "unchanged_below_295nm": true
+        },
+        "long_uvb_310_315_10pct": {
+          "uv_index": 0.0222212249774199,
+          "band_photons_umol_m2_s": {
+            "280_315": 0.017158695185164267,
+            "295_305": 0.0,
+            "310_315": 0.017158695185164267,
+            "315_350": 0.01104943535299759,
+            "350_400": 3.340570720331288
+          },
+          "uv_energy_w_m2": 1.053055631741945,
+          "added_uv_energy_w_m2": 0.006568312745727667,
+          "bee_uv_catch_vs_earth": 0.07483477351641872,
+          "unchanged_below_295nm": true
+        },
+        "uv_310_400_95pct": {
+          "uv_index": 0.21276822808548124,
+          "band_photons_umol_m2_s": {
+            "280_315": 0.1630076042590605,
+            "295_305": 0.0,
+            "310_315": 0.1630076042590605,
+            "315_350": 1.8867883987060534,
+            "350_400": 5.42945300216504
+          },
+          "uv_energy_w_m2": 2.458589354389601,
+          "added_uv_energy_w_m2": 1.4121020353933837,
+          "bee_uv_catch_vs_earth": 0.3719767676916103,
+          "unchanged_below_295nm": true
+        }
+      }
+    }
+  },
+  "adoption": {
+    "current_spectrum_retained": true,
+    "added_uv_adopted": false,
+    "required": [
+      "current ring geometry and spectral stack",
+      "live-atmosphere photochemistry",
+      "vertical actinic biological doses",
+      "non-LTE exobase solar-cycle feedback",
+      "film infrared and compensating climate dimming"
+    ]
+  }
+}

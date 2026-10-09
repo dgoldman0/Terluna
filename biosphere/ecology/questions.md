@@ -19,7 +19,8 @@ on this laptop. The findings behind them are in the [README](README.md).
    chemistry is added; the joint synthesis's air-chemistry runner restarts and runs cases in parallel.
 2. **What lives aloft.** The author asked for the aerial biomes to come almost first. The sky holds 9.2×10⁸ km³ of
    air above freezing, wet and lightly ionized, where lift allows flyers six times Earth's in every length, while its
-   food comes from below ([sky, land and people](people_and_land.md)).
+   production can come from resident aeroplankton, photosynthetic floaters and exchanges with the surface.
+   The [new requirements screen](../../research/studies/aerial_ecology/README.md) makes each budget explicit.
    - **What decides it:** water from cloud and humid air; phosphorus kept within floating and flying organisms;
      floaters' gas; life cycles timed to the lunar day; how many aerial animals the land's insects, pollen and fruit
      can feed; the night's light aloft; and how people's traffic and light share the volume.
@@ -29,13 +30,14 @@ on this laptop. The findings behind them are in the [README](README.md).
    0.3–0.4 ppb a year. Their effect in a column 7.6 times Earth's has not been computed.
 
    **How:** the line-by-line radiative–convective column with CH4 and N2O added, a sweep of a few hours.
-4. **The ecology's case in the ultraviolet decision (O3).** The titania stack ends vitamin D synthesis, dims bees' UV
-   and sunlight's disinfection, and leaves the air without its cleanser. An edge near 310–320 nm would return UV-A
-   without UV-B. A 200-nm edge would return UV-B and about half Earth's OH, at a cost in escape. The decision is the
-   author's; this question gives it its biological criteria.
+4. **The ecology's case in the ultraviolet decision (O3).** Keep the present short-wave shield, with adaptation to
+   its spectrum and local UV provision as the working direction. A narrow attenuated UV-B window remains a
+   candidate. The [fixed-column evaluation](../../research/studies/uv_biology/README.md) gives overhead UVI
+   0.371–2.727 for 1–10% transmission at 295–315 nm; these are conditional optical results.
 
-   **How:** weight each edge's surface spectrum with the screen's action spectra and set the gains beside the
-   escape costs the loss response already holds. Minutes once the surface spectra exist for each edge.
+   **How:** biological action spectra and vertical actinic exposure, live-atmosphere ozone/OH/trace-gas chemistry,
+   current ring leakage and film heating, and non-LTE exobase feedback through the solar cycle. The historical
+   310-nm case used different leakage and ozone. No relaxation of EUV/far-UV rejection or selected window follows.
 5. **The night's requirement, zone by zone.** Nocturnal thresholds of 0.01–0.03 lux meet nearside nights of
    2.3–2.9 lux, far-side midnights of 0.001 lux, poles never darker than twilight, and the metropolis's own skyglow on
    the far side. The value is owed to the fleet decision.

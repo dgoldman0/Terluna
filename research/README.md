@@ -121,3 +121,9 @@ own intact implementation. Model code and CSV tables are verbatim; the two JSON
 reference files select original fields with unchanged values. New calculations
 should state assumptions, track conservation and residuals, test convergence and
 say which conclusion their outputs can change.
+
+
+The ecology branch's [aerial-food-web](studies/aerial_ecology/README.md) and
+[restricted-UV](studies/uv_biology/README.md) follow-ups evaluate the 9 October cross-domain discussion.
+They retain explicit evidence limits and use [shared population comparison cases](../shared/scenarios/population.json)
+with the provisioning and resources branches; no allocation or additional UV transmission is selected.

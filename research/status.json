@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-08",
+  "updated": "2026-10-09",
   "base_commit": "92e0961eabd6bd070299a018dcce54d4ccfe7264",
   "next_manuscript": "cef466e6-d9f8",
   "principle": "Each topic spans the open Moon; the root opening scene is one illustration",
@@ -249,7 +249,7 @@
     },
     {
       "topic": "biosphere",
-      "condition": "periodic_carbon_and_oxygen_requirement_models; hypothetical_traits; clear_sky_spectral_canopy_photosynthesis_moon_and_earth_prospect_d_fvcb; whole_plant_carbon_through_the_lunar_night_with_twilight_and_gcm_temperatures_scenarios; fruit_designed_for_the_lunar_day_on_the_whole_plant_degree_day_program_as_design_variable; ecology_first_screen_ultraviolet_settling_and_trace_gases_without_oh",
+      "condition": "periodic_carbon_and_oxygen_requirement_models; hypothetical_traits; clear_sky_spectral_canopy_photosynthesis_moon_and_earth_prospect_d_fvcb; whole_plant_carbon_through_the_lunar_night_with_twilight_and_gcm_temperatures_scenarios; fruit_designed_for_the_lunar_day_on_the_whole_plant_degree_day_program_as_design_variable; ecology_first_screen_ultraviolet_settling_and_trace_gases_without_oh; aerial_food_web_and_floater_requirements_screen; fixed_column_restricted_uv_window_screen",
       "material": [
         "../biosphere/README.md",
         "../ensemble/papers/74a946e2-8f98/seed-02.md",
@@ -269,7 +269,12 @@
         "../biosphere/ecology/literature.md",
         "../biosphere/ecology/screen.py",
         "../biosphere/ecology/results/first_screen.json",
-        "../biosphere/ecology/questions.md"
+        "../biosphere/ecology/questions.md",
+        "studies/aerial_ecology/README.md",
+        "studies/aerial_ecology/results/aerial_ecology.json",
+        "studies/uv_biology/README.md",
+        "studies/uv_biology/results/uv_biology.json",
+        "../shared/scenarios/population.json"
       ],
       "unresolved": [
         "the sky, land and people (biosphere/ecology/people_and_land.md, 2026-10-09), with the aerial biomes first at the author's direction: the sky's 9.2e8 km3 of air above freezing as the largest habitat, fed from below; the vegetated Moon's ethylene at 94-233 ppb with soils its only sink, above the 50 ppb that costs wheat a third of its yield; about 0.4 billion affluent people with Earth's practice and 3-15 billion with the lunar design; the sky binding before the land through light at night",
@@ -288,9 +293,11 @@
         "the warming of methane at tens of ppm and of N2O, which has no sink under the titania stack and rises 0.3-0.4 ppb a year from Earth-like soils and seas",
         "the biological criteria for the ultraviolet cut-off (requirement O3): vitamin D for every vertebrate, the 7% of Earth's light a bee's UV receptor catches, sunlight's disinfection at 1-6% of Earth's",
         "the night requirement's value by zone, against nocturnal thresholds of 0.01-0.03 lux, nearside nights of 2.3-2.9 lux and the metropolis's own skyglow",
-        "nitrogen fixation's metals (molybdenum about 0.019 ppm in the bulk Moon; vanadium for the alternative nitrogenases), soil building, a biome map made of water and light, the living waters' chemistry and oxygen, the containment of wild engineered organisms, and fire at 17.5% oxygen and 0.16 g"
+        "nitrogen fixation's metals (molybdenum about 0.019 ppm in the bulk Moon; vanadium for the alternative nitrogenases), soil building, a biome map made of water and light, the living waters' chemistry and oxygen, the containment of wild engineered organisms, and fire at 17.5% oxygen and 0.16 g",
+        "Aerial productivity and biodiversity: close reproduction/removal, water and gas retention, complete phosphorus return including human harvest, and biological aerosol/surface-light feedback; scenario biomass and 5% harvest are not demonstrated capacities.",
+        "UV: current spectrum retained, adaptation and local UV preferred; narrow UV-B remains a candidate requiring vertical biological action spectra, living-air chemistry, ring-film thermal response and non-LTE exobase solar-cycle validation."
       ],
-      "next_session_task": "Ecology's open questions in order (biosphere/ecology/questions.md): the living air's chemistry with the biomes' and cities' emissions, what lives aloft, the warming of methane and N2O, the biological criteria for the ultraviolet cut-off and the night's value by zone; then water in the plant models, nitrogen fixation's metals, soil building and a biome map. The earlier tasks stand: the author reviews the selection in the ecology register (research/studies/lunar_cycle_ecology), measured dark tolerance bounds the store-and-idle strategies, and a land, lake and sea budget of every rock-derived element follows with the seas' chemistry."
+      "next_session_task": "Couple aerial organisms to parcel wetness/light histories and rain removal; close floater wet mass, neutral buoyancy and gas/night budgets; measure filter capture and drag jointly. Reconcile resources phosphorus cycle and provisioning inhabited-volume scenarios, with roaming floating habitation. UV candidate adoption still requires coupled atmospheric and biological validation."
     },
     {
       "topic": "habitation",
