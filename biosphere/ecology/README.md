@@ -9,6 +9,7 @@ and ecology together. It starts from three things:
   ([literature.md](literature.md), with its [sources](sources.json));
 - a first screen of the committed products ([screen.py](screen.py), [results/first_screen.json](results/first_screen.json)).
 
+Its open questions, in order, are in [questions.md](questions.md).
 
 The author's standing directions frame it.
 - Organisms are engineered, with Earth species' traits as reference points and design variables.
@@ -200,6 +201,7 @@ statements in other folders. These belong to main and are not changed on this br
 | [results/first_screen.json](results/first_screen.json) | Its product (schema `terluna.biosphere.ecology-first-screen/1`) |
 | [state.md](state.md) | What the project already holds for ecology, what others assume of it, and statements to correct |
 | [literature.md](literature.md) | The literature by topic, with what it means for the Open Moon |
+| [questions.md](questions.md) | The open questions, in order |
 | [sources.json](sources.json) | Every source cited, its use and how far it was read |
 
 `python -m biosphere.ecology.screen` rewrites the product; `python -m pytest biosphere/tests/test_ecology_screen.py`

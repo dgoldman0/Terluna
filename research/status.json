@@ -268,7 +268,8 @@
         "../biosphere/ecology/state.md",
         "../biosphere/ecology/literature.md",
         "../biosphere/ecology/screen.py",
-        "../biosphere/ecology/results/first_screen.json"
+        "../biosphere/ecology/results/first_screen.json",
+        "../biosphere/ecology/questions.md"
       ],
       "unresolved": [
         "complete life cycles",
@@ -281,9 +282,14 @@
         "timing: short internal clocks alongside the 708.7-hour environmental cycle (July 2026 bundle, archive/july_2026_knowledge_bundle/)",
         "the rock cycle's missing return limb: without uplift, subduction or volcanism, weathering carries every rock-derived element one way, running down the soils while the seas gather magnesium and calcium (Earth-ocean magnesium in 18,000-180,000 years by a first estimate); biology can return what life concentrates (the dissolved phosphorus at the top of Earth's lake-insect rates, 3-27% of the potassium), the air sulfur and iodine, and salt works and dredging the bulk, at 0.3-3 times the world's salt output (research/studies/lunar_cycle_ecology, screening arithmetic)",
         "nitrogen: lightning fixes at most 0.2% of the nitrogen productive ecosystems gain (research/studies/joint_synthesis, ledgers), so biological fixation is a design requirement of the biomes",
-        "the night's light: the lead ring fleet as designed lights the Moon's night at 25-66 lux; the light dark-night organisms and people need sets the shield's requirement (research/studies/joint_synthesis)"
+        "the night's light: the lead ring fleet as designed lights the Moon's night at 25-66 lux; the light dark-night organisms and people need sets the shield's requirement (research/studies/joint_synthesis)",
+        "the living air's chemistry with the biomes' and cities' emissions, deposition and the lunar night: whether methane settles near the screen's 20 ppm, whether ethylene stays below the tens of ppb that cost cereals their yield, and whether biogenic NOx brings some ozone and OH back (biosphere/ecology/questions.md)",
+        "the warming of methane at tens of ppm and of N2O, which has no sink under the titania stack and rises 0.3-0.4 ppb a year from Earth-like soils and seas",
+        "the biological criteria for the ultraviolet cut-off (requirement O3): vitamin D for every vertebrate, the 7% of Earth's light a bee's UV receptor catches, sunlight's disinfection at 1-6% of Earth's",
+        "the night requirement's value by zone, against nocturnal thresholds of 0.01-0.03 lux, nearside nights of 2.3-2.9 lux and the metropolis's own skyglow",
+        "nitrogen fixation's metals (molybdenum about 0.019 ppm in the bulk Moon; vanadium for the alternative nitrogenases), soil building, a biome map made of water and light, the living waters' chemistry and oxygen, the containment of wild engineered organisms, and fire at 17.5% oxygen and 0.16 g"
       ],
-      "next_session_task": "The author reviews the selection in the ecology register (research/studies/lunar_cycle_ecology). Then gather measured dark tolerance (dark-induced senescence, respiration through extended darkness, polar-night survival) to bound the store-and-idle strategies; build a land, lake and sea budget of every rock-derived element with the seas' chemistry; add clouds, stomata and water to the canopy and plant models."
+      "next_session_task": "Ecology's open questions in order (biosphere/ecology/questions.md): the living air's chemistry with the biomes' and cities' emissions, the warming of methane and N2O, the biological criteria for the ultraviolet cut-off and the night's value by zone; then water in the plant models, nitrogen fixation's metals, soil building and a biome map. The earlier tasks stand: the author reviews the selection in the ecology register (research/studies/lunar_cycle_ecology), measured dark tolerance bounds the store-and-idle strategies, and a land, lake and sea budget of every rock-derived element follows with the seas' chemistry."
     },
     {
       "topic": "habitation",
