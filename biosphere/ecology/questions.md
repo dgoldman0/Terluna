@@ -92,9 +92,30 @@ on this laptop. The findings behind them are in the [README](README.md).
 
     These are changes to main's studies, for the author to order.
 
-## Floater follow-up: light, water and control
+## Floater follow-up: giants, water and storms
 
-The [coupled evaluation](../../research/studies/floater_viability/README.md) replaces size-from-lift alone with
-explicit pressure, permeability, carbon, water and recruitment requirements. Next: test one assembled wet barrier;
-close a signed water/gas/pressure cycle; calculate reachable light-and-humidity routes with wind vectors, including
-persistent twilight and Sun-following. Giant mature bodies need development and replacement, not just neutral lift.
+The [coupled study](../../research/studies/floater_viability/README.md) now gives giant floaters' size limits, ages,
+water sources, storm design and sailing. What decides it next:
+- one assembled wet membrane: hydrogen, oxygen and nitrogen permeation, sustained-load strength and creep at the
+  renewal interval, seams, tear arrest and healing, with and without guanine-like plates;
+- paths through the latitude and solar-hour winds (built on domain/provisioning,
+  `climate/gcm/zonal_winds.md`), with water, carbon, gas and trim closed hour by hour, and whether the low evening
+  westward branch that lets floaters linger at sunset survives in three dimensions;
+- a population model: colony budding and fragmentation, juvenile survival in canopy nurseries, lightning and storm
+  losses, and the phosphorus that roosting flyers and litter carry;
+- storm return levels over centuries, beyond one lunar day of one ring.
+
+## The taxonomic system: what it asks next
+
+The [taxonomic system](taxonomy.md) leaves seven choices to the author:
+- O1: the rules for new designed taxa;
+- O2: ranks;
+- O3: the founding identifier;
+- O4: the roots of scientific names;
+- O5: where founding ends;
+- O6: whether the giants are a form or a sister lineage of the floaters;
+- O7: the floaters' name, from six candidates.
+
+After those, each carried-forward group needs a chassis as its design firms up, which narrows its placement from the
+backbone clade to an Earth genus or species. The founding register stays empty until a lineage is designed, and
+common names are recorded as the lunar peoples give them.

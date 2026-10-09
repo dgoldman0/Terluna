@@ -126,3 +126,55 @@ No study exists of:
 - partial-gravity plants beyond seedling meristems.
 
 Each is a candidate for original work here.
+
+## Naming and classification
+
+- **The codes name real organisms.** The ICN (Madrid Code, 2025), ICZN (1999), ICNP (2022 revision) and SeqCode (2026)
+  tie names to types: preserved specimens, living type strains or deposited genomes. The ICZN excludes names for
+  hypothetical concepts (Art. 1.3.1), so names for the Open Moon's designs are proposals in the codes' forms.
+- **Engineered organisms keep their species.** JCVI-syn1.0 and JCVI-syn3.0 are strains of *Mycoplasma mycoides*
+  (Gibson et al. 2010; Hutchison et al. 2016). Sc2.0 is a redesigned *Saccharomyces cerevisiae* with version-controlled
+  edits (Richardson et al. 2017). A crop's insertion is an event with a unique identifier, as maize MON810 carries
+  MON-ØØ81Ø-6.
+- **Genome types and registration.** The SeqCode types prokaryotes by genome sequences and publishes a name only when
+  it is registered; the ICN rejected sequence types at Madrid and sent them to a committee for 2029 (Turland 2025).
+- **Clades by definition.** Under the PhyloCode a clade is an ancestor and all its descendants, and a name can be
+  defined from a directly specified ancestor (Note 9.5.1), which suits registered founders.
+- **Life forms and sizes.**
+  - Raunkiær (1934) classed plants by where their surviving buds sit through the unfavourable season, and
+    phanerophytes by height.
+  - Plankton is classed by decades of size (Sieburth et al. 1978).
+  - Aeroplankton names wind-carried organisms, small animals included (Ptatscheck et al. 2018).
+- **Names from every language.** The ICZN allows roots from any language (Art. 11.3); the ICN can reject new names
+  derogatory to a group of people from 2026 (Art. 51.2).
+
+Sources and how far each was read are in [taxonomy_sources.json](taxonomy_sources.json).
+
+## Floating giants
+
+- **Wood loses strength under sustained load.** Clear Douglas fir carries about 62% of its five-minute strength for ten
+  years and 58% for a century (Wood 1951, the Madison curve), so a cellulose skin or tendon is sized for the load it
+  holds between renewals.
+- **Tendon collagen creeps.** Wallaby tail tendons rupture under sustained stress of 10 MPa and above (Wang & Ker
+  1995), which holds collagen-tendoned round floaters to 100–200 m.
+- **Fish secrete gas against great pressure.** Deep-sea fish fill their swim bladders with oxygen at over 100
+  atmospheres through a counter-current rete 7–13 mm long (Scholander & van Dam 1954; Scholander 1954), driven by the
+  gas gland's acid output and the Root effect (Pelster 2015).
+- **Guanine plates seal the bladder.** Removing the silvery guanine layer raises the wall's gas permeability about a
+  hundredfold (Denton, Liddicoat & Taylor 1972); the plates are under 20 nm thick and up to 50 µm wide (Pinsk et al.
+  2022).
+- **A colonial floater makes its own float gas.** The Portuguese man-of-war's gas gland makes carbon monoxide from
+  serine, 0.5–13% of its float gas (Wittenberg 1960), and siphonophore colonies divide their work among zooids budded
+  in growth zones (Dunn & Wagner 2006).
+- **Floaters already sail.** The man-of-war sails up to 50–55° off downwind with its tentacles and polyps as a sea
+  anchor (Iosilevskii & Weihs 2009), and a wing on a long tether can steer a stratospheric balloon across the wind
+  (Aaron, Heun & Nock 2002).
+- **Animals drink vapour.** A desert cockroach takes water from air above 82.5% relative humidity (O'Donnell 1977),
+  and tick larvae hold their weight down to about 80–85% (Knülle 1966).
+- **Mistletoes draw water and minerals from their hosts.** Xylem-tapping hemiparasites take water and nutrients
+  through the haustorium and photosynthesise (Glatzel & Geils 2009), the route for a canopy nursery.
+- **Hydrogen's flammable range.** Hydrogen burns in air from 4.0% to 75%, and no hydrogen–nitrogen–air mixture burns
+  below about 5% oxygen (Coward & Jones 1952; Zabetakis 1965), so in the lunar air the upper limit is about 71%.
+
+Sources and how far each was read are in the floater study's registers
+([research/studies/floater_viability](../../research/studies/floater_viability/README.md), `*_sources.json`).

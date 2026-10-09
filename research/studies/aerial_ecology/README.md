@@ -95,9 +95,10 @@ coverage fraction is adopted.
 ## Large photosynthetic organisms and their wet mass
 
 The [coupled floater evaluation](../floater_viability/README.md) supersedes these lift-only values as a design
-assessment. It includes pressure-bearing structure, gas barriers, active and inert mass, shared photons, water
-and trim, reproduction, persistent twilight and wind-assisted Sun-following. The table below remains a historical
-mass inequality; it does not select a sustainable size.
+assessment. It pays pressure-bearing structure, joints, storm gusts, gas cells, wet fire-barrier skins, tendon renewal,
+gas barriers, shared photons, water and trim, reproduction, persistent twilight and sailing, and finds round bodies of
+50 m to 0.7–3 km and colonies of 60–150 m modules without a structural size limit. The table below remains a historical
+mass inequality.
 
 For a spherical lifting envelope, gross supported mass per projected square metre is `4 R delta_rho/3`. The skin
 has four times the projected area. Allocating half the gross lift to skin and biomass, with a 1 kg/m² skin and
@@ -175,8 +176,9 @@ floaters, collectors, tissue grazers, predators and decomposers. Persistent floa
 structure even in a well-mixed atmosphere. Energy supply, isolation, life cycles, disturbance and coexistence
 determine realized diversity. **No species count follows from the available atmospheric volume.**
 
-The next discriminating calculation couples parcel hydration and light histories to reproduction, rain removal
-and nutrient uptake, then closes wet floater mass, gas retention and the night budget for explicit traits.
+The next discriminating calculation follows floaters along paths through the latitude and solar-hour winds, closing
+water, gas, trim and light hour by hour, and couples a population model to reproduction, storm and lightning losses
+and nutrient uptake.
 Measured size-dependent filter capture/drag and biological aerosol optics are needed before expanding the food
 or occupancy scenarios. The existing climate programme remains paused; these analytical requirements do not
 authorize a new GCM campaign.
