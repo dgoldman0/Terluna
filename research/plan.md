@@ -77,6 +77,39 @@ to choose among. Alongside, on ecology: the sky giants' real limits (fittings, s
 from the air, storms), growth over centuries, and a taxonomic system for the biosphere, from which the floaters take
 their new name.
 
+Steps one to five and the ecology work landed on 9 October:
+
+- **Winds aloft** (provisioning, `climate/gcm/zonal_winds.md`).
+  - Above about 8 km the design climate's air superrotates, so a town drifting with it lives a day of 22 days at
+    10 km and 9 at 40 km over the equator.
+  - The wind holds the hour only in the lowest 5 km at 40–75°, from the late afternoon into the night.
+  - Passive routes gather onto shared tracks: near the ground within months, over the poles at 40–60 km within years.
+- **Ways of living** (provisioning, `studies/ways_of_living`). Eighteen settings built from the project's designs,
+  each costed per billion residents.
+  - Every mix carries every shared case, and towns take 0.6–10% of the dry land.
+  - Food grows fastest with the Moon's people, the high end irrigated from the fresh seas.
+  - Heat costs 0.08–1.8% more dimming, and light fills the dark night before towns fill the land.
+  - Five billion aloft live in about 870,000 towns, with the lifting gas's upkeep their largest cost.
+- **Daily life** (provisioning, `studies/daily_life`). Each setting through the 709-hour cycle.
+  - People keep a 24-hour day indoors for 11–45 kWh a person a night, and the dusk lasts 82–137 hours as shared time.
+  - Height buys sun, and no human has lived in partial gravity beyond 75 hours.
+  - The array answers inside conversation's gap and Earth does not.
+- **The floater giants** (ecology, `studies/floater_viability`, schema 2, which supersedes the version summarized in
+  [integration/floater_viability.md](integration/floater_viability.md)).
+  - A round body lives from about 50 m to 0.7–3 km across, by fibre and light, and a colony of 60–150 m modules has no
+    structural size limit.
+  - A 2-km colony grows in 36–544 years and a 1-km round giant in 73–1,186.
+  - Rain meets the water need equatorward of 35–38°, and vapour and humid layers serve the higher latitudes.
+  - Megaforest crowns raise juveniles to 50–60 m.
+- **The taxonomy** (ecology, `biosphere/ecology/taxonomy.md`). Designed organisms keep the Earth lineage of their
+  chassis, founders are registered, and descendants are named as clades from the founders. A first register holds
+  36 designed groups.
+
+Waiting on the author:
+- the floaters' name, from six candidates, and six choices about the taxonomic system;
+- how much of the Moon is kept wild and dark (the studies carry 30% and half);
+- the distribution of people, step six, from the costs above.
+
 ## Next work, in order
 
 1. **The Moon's night with the ring fleet.** The author has decided that the fleet avoids lighting the night zones,
