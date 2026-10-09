@@ -3,7 +3,7 @@
  "producer": {
   "study": "joint_synthesis",
   "files": {
-   "research/studies/joint_synthesis/ledgers.py": "5b85e51558503400"
+   "research/studies/joint_synthesis/ledgers.py": "b7f3b93ab2ffaeaa"
   },
   "inputs": {
    "atmosphere/loss_response/results/oxygen_escape.json": "94421fe229a148da",
@@ -92,10 +92,13 @@
    14800000000.0
   ],
   "film_plant_w": [
-   0.14631972627556622,
-   2.9396409496549385
+   146000000000.0,
+   2940000000000.0
   ],
-  "tiles_absorb_w": "65-83 PW (array_heat.json)",
+  "tiles_absorb_w": [
+   6.51e+16,
+   8.33e+16
+  ],
   "fleet_night_half_intercepts_w": 8.51e+17,
   "heat_on_moon_per_tw_used_w_m2": 0.026362737277291787
  }

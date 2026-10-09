@@ -87,8 +87,10 @@ def main(argv=None) -> int:
     absorbed = 293.3 * (1 - 0.28) * area_m2                            # design sunlight's global mean and the GCM's albedo
     energy = dict(moon_absorbed_sunlight_w=float(f'{absorbed:.3g}'), summit_metropolis_w=2.0e11,
                   summit_metropolis_local_w_m2=80.0, summit_metropolis_share_of_absorbed=float(f'{2e11 / absorbed:.2g}'),
-                  magnets_refrigeration_w=[9.25e9, 1.48e10], film_plant_w=heat['film_plant']['power_TW'] if 'film_plant' in heat else None,
-                  tiles_absorb_w='65-83 PW (array_heat.json)', fleet_night_half_intercepts_w=float(f"{night['night_half_luminous_flux_lm'] / 94.0:.3g}"),
+                  magnets_refrigeration_w=[9.25e9, 1.48e10],
+                  film_plant_w=[float(f'{x * 1e12:.3g}') for x in heat['film_plant']['power_TW']] if 'film_plant' in heat else None,
+                  tiles_absorb_w=[float(f'{x * 1e15:.3g}') for x in heat['tiles']['absorbed_PW']],
+                  fleet_night_half_intercepts_w=float(f"{night['night_half_luminous_flux_lm'] / 94.0:.3g}"),
                   heat_on_moon_per_tw_used_w_m2=heat['placement']['moon_W_m2_per_TW_used_on_moon'])
     product = dict(schema=SCHEMA, producer=dict(study='joint_synthesis', files={'research/studies/joint_synthesis/ledgers.py': digest(__file__)},
                                                 inputs={str(p.relative_to(ROOT)): digest(p) for p in (OXYGEN, OCCURRENCE, NITROGEN, CANOPY, HEAT, NIGHT)}),

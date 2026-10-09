@@ -3,10 +3,14 @@
  "producer": {
   "study": "joint_synthesis",
   "files": {
-   "research/studies/joint_synthesis/places.py": "a2d215984f2ec8e2"
+   "research/studies/joint_synthesis/places.py": "235da23bb5e7ca98",
+   "research/studies/joint_synthesis/night_sky.py": "e60c7653143eea53",
+   "illumination/calendar/geometry.py": "462b9f7174efa4ae",
+   "illumination/calendar/validate.py": "3dadeb5912cc31b1",
+   "illumination/calendar/disk.py": "6dfbdc1b581a2255"
   },
   "inputs": {
-   "research/studies/joint_synthesis/results/night_sky.json": "f831860e0cef3dc3",
+   "illumination/calendar/results/transfer.json": "68ea6e820a8d7603",
    "research/studies/joint_synthesis/results/magnets_map.json": "fecc71b909175739",
    "illumination/fleet_light/results/night_light.json": "c58f6afe2f342d80",
    "atmosphere/electricity/results/occurrence_A28_dim5_moon.json": "64867b5026983e32",
@@ -16,7 +20,7 @@
   }
  },
  "evidence": "A compilation of the joint products at seven places; each value carries its source product's boundaries.",
- "reading_rule": "Light in lux on level ground at local midnight; flashes per km2 a year (central, with the bracket of scalings and sea factors); visibility in km by day in the central haze case; tides as the nearest sea's median monthly range; cable distances in km.",
+ "reading_rule": "Light in lux on level ground at local midnight, with the night's darkest beside it; side is limb where the libration lifts the Earth above the horizon and lowers it again; flashes per km2 a year (central, with the bracket of scalings and sea factors); visibility in km by day in the central haze case; tides as the nearest sea's median monthly range; cable distances in km.",
  "places": {
   "summit port": {
    "lat": 5.4125,
@@ -24,10 +28,12 @@
    "side": "far side",
    "region_read": "wet_land",
    "night": {
-    "natural_midnight_lux": 0.001,
+    "natural_midnight_lux": 0.0014,
+    "natural_darkest_lux": 0.0014,
+    "earth_elevation_deg": -68.1,
     "fleet_midnight_lux_rho_0_1pct": 65.73,
     "fleet_midnight_lux_rolled_80": 2.176,
-    "hours_below_0_1_lux_natural": 119.4
+    "hours_below_0_1_lux_natural": 117.5
    },
    "lightning": {
     "central": 0.04614,
@@ -64,7 +70,9 @@
    "side": "nearside",
    "region_read": "seas",
    "night": {
-    "natural_midnight_lux": 2.3889,
+    "natural_midnight_lux": 0.4368,
+    "natural_darkest_lux": 0.4236,
+    "earth_elevation_deg": 12.0,
     "fleet_midnight_lux_rho_0_1pct": 56.09,
     "fleet_midnight_lux_rolled_80": 1.856,
     "hours_below_0_1_lux_natural": 0.0
@@ -101,13 +109,15 @@
   "eastern Smythii headland": {
    "lat": -1.5,
    "lon": 90.0,
-   "side": "far side",
+   "side": "limb",
    "region_read": "seas",
    "night": {
-    "natural_midnight_lux": 0.001,
+    "natural_midnight_lux": 0.0696,
+    "natural_darkest_lux": 0.0606,
+    "earth_elevation_deg": -0.3,
     "fleet_midnight_lux_rho_0_1pct": 65.12,
     "fleet_midnight_lux_rolled_80": 2.155,
-    "hours_below_0_1_lux_natural": 119.4
+    "hours_below_0_1_lux_natural": 85.0
    },
    "lightning": {
     "central": 0.00672,
@@ -144,7 +154,9 @@
    "side": "nearside",
    "region_read": "seas",
    "night": {
-    "natural_midnight_lux": 2.3889,
+    "natural_midnight_lux": 4.2799,
+    "natural_darkest_lux": 3.1447,
+    "earth_elevation_deg": 61.0,
     "fleet_midnight_lux_rho_0_1pct": 53.06,
     "fleet_midnight_lux_rolled_80": 1.756,
     "hours_below_0_1_lux_natural": 0.0
@@ -184,10 +196,12 @@
    "side": "far side",
    "region_read": "seas",
    "night": {
-    "natural_midnight_lux": 0.0889,
+    "natural_midnight_lux": 0.2007,
+    "natural_darkest_lux": 0.2007,
+    "earth_elevation_deg": -52.6,
     "fleet_midnight_lux_rho_0_1pct": 45.46,
     "fleet_midnight_lux_rolled_80": 1.505,
-    "hours_below_0_1_lux_natural": 20.2
+    "hours_below_0_1_lux_natural": 0.0
    },
    "lightning": {
     "central": 0.0056,
@@ -224,7 +238,9 @@
    "side": "far side",
    "region_read": "fog_desert",
    "night": {
-    "natural_midnight_lux": 1.4869,
+    "natural_midnight_lux": 1.4364,
+    "natural_darkest_lux": 1.4364,
+    "earth_elevation_deg": -17.0,
     "fleet_midnight_lux_rho_0_1pct": 35.0,
     "fleet_midnight_lux_rolled_80": 1.159,
     "hours_below_0_1_lux_natural": 0.0
@@ -264,7 +280,9 @@
    "side": "nearside",
    "region_read": "polar_dry_land",
    "night": {
-    "natural_midnight_lux": 26.8991,
+    "natural_midnight_lux": 485.1584,
+    "natural_darkest_lux": 485.1584,
+    "earth_elevation_deg": 14.7,
     "fleet_midnight_lux_rho_0_1pct": 16.14,
     "fleet_midnight_lux_rolled_80": 0.534,
     "hours_below_0_1_lux_natural": 0.0

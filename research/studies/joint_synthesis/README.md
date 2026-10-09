@@ -16,7 +16,7 @@ fit together and inform on the whole and what comes next."
 - **The ring fleet lights the Moon's night.** The lead shield keeps its tiles facing the Moon round their whole
   orbits, so the night half of the fleet shows the Moon the face the Sun lights. At the 0.1% diffuse reflectance that
   requirement O5 sets for Sun-facing surfaces, the glow alone puts 25–66 lux on the night's ground, against 0.001 lux
-  at a far-side equatorial midnight and 2.3–2.9 lux under a nearside Earth. The Moon would have no dark night
+  at a far-side equatorial midnight and about 5 lux under the full Earth over the nearside. The Moon would have no dark night
   anywhere. Tiles tilted 1.5–6° in the keeping envelope would add mirror glints averaging hundreds to over a
   thousand lux. Rolling the night half's tiles by 80°, which the shield's clearance study allows, keeps every glint
   off the Moon and brings the glow to about 2 lux at 0.1% scatter and 0.02 lux at 0.001%. The author's decision is
@@ -58,9 +58,9 @@ against the night's own light from the sea-appearance light calendar, [results/n
 The night half of the fleet presents about 1.1 billion km² of sunlit tile to the Moon and intercepts about 8×10¹⁹
 lumens, some 0.85 EW of sunlight, roughly a hundred times what the Moon itself absorbs.
 
-| Light at local midnight, equator | Far side | Nearside |
+| Light at local midnight, equator | Far side | Nearside, under the Earth |
 |---|---|---|
-| The night's own (twilight's last light, Earthlight) | 0.001 lux | 2.3 lux |
+| The night's own (twilight's last light, Earthlight) | 0.001 lux | 5.5 lux |
 | Fleet, diffuse scatter at 0.1% (O5's value) | 66 lux | 66 lux |
 | Fleet, diffuse at 0.001% | 0.66 lux | 0.66 lux |
 | Fleet, night half rolled 80°, diffuse at 0.1% | 2.2 lux | 2.2 lux |
@@ -68,7 +68,10 @@ lumens, some 0.85 EW of sunlight, roughly a hundred times what the Moon itself a
 The glow falls from 66 lux at midnight to 25 lux near the terminator, and from the equator to 16 lux at 75°
 latitude. At 0.1% scatter the far-side equator's 119 hours below a tenth of a lux and 190 hours below practical dusk
 all disappear. Holding the fleet at a tenth of the night's own midnight light takes a Moon-facing scatter of about
-10⁻⁹ at the far-side equator, 10⁻⁷ at 30°, 4×10⁻⁶ under the nearside's Earthlight and 10⁻⁴ at 60°.
+10⁻⁹ at the far-side equator, 10⁻⁷ at 30°, 10⁻⁵ under the nearside's Earth and 10⁻⁴ at 60°. The night's own light
+takes the Earth's height and phase over each place, in the mean geometry without libration: on the central meridian
+the full Earth stands overhead at the equator's midnight, and those nights stay above practical dusk throughout,
+4.1–4.9 lux at their darkest.
 
 Mirror reflection depends on attitude. A tile facing exactly the Moon's centre returns light at the distance from
 the Moon it came in, so it misses; only tiles in the penumbra land theirs, 100–150 lux 60–80° from midnight, inside
@@ -236,15 +239,18 @@ judgement is people's, with a written evaluation for each site.
 | Place | Night's own light at midnight | Fleet glow (0.1%; rolled 80°) | Flashes per km² a year | Visibility | Nearest sea's monthly tide | Nearest magnet cable (500 / 1,000 km design) |
 |---|---|---|---|---|---|---|
 | Summit port, 5.4° N, 158.6° W | 0.001 lux | 66; 2.2 lux | 0.046 (0.011–0.083) | 198 km | Mare Ingenii, 2.1 m, 880 km off | 1,400 / 760 km |
-| Procellarum by Russell, 32.9° N | 2.4 lux | 56; 1.9 | 0.0023 | 146 km | 3.7 m | 1,240 / 138 km |
-| Eastern Smythii headland | 0.001 lux | 65; 2.2 | 0.0067 | 146 km | 0.55 m | 1,560 / 577 km |
-| Southern Mare Nubium | 2.4 lux | 53; 1.8 | 0.0034 | 146 km | 3.7 m | 1,140 / 303 km |
-| Mare Ingenii coast, 34° S | 0.1–0.5 lux | 45; 1.5 | 0.0056 | 146 km | 2.1 m | 865 / 580 km |
-| Highland box, 44.7° S | 1.5 lux | 35; 1.2 | 0.0019 | 189 km | 2.1 m, 226 km off | 480 / 612 km |
-| Polar plain, 75° N | 27 lux (twilight all night) | 16; 0.5 | 0.0001 | 177 km | 3.7 m, 211 km off | 230 / 66 km |
+| Procellarum by Russell, 32.9° N | 0.44 lux (the Earth 12° up) | 56; 1.9 | 0.0023 | 146 km | 3.7 m | 1,240 / 138 km |
+| Eastern Smythii headland | 0.07 lux (the Earth on the horizon) | 65; 2.2 | 0.0067 | 146 km | 0.55 m | 1,560 / 577 km |
+| Southern Mare Nubium | 4.3 lux (3.1 at the darkest) | 53; 1.8 | 0.0034 | 146 km | 3.7 m | 1,140 / 303 km |
+| Mare Ingenii coast, 34° S | 0.2 lux | 45; 1.5 | 0.0056 | 146 km | 2.1 m | 865 / 580 km |
+| Highland box, 44.7° S | 1.4 lux | 35; 1.2 | 0.0019 | 189 km | 2.1 m, 226 km off | 480 / 612 km |
+| Polar plain, 75° N | 480 lux (twilight all night) | 16; 0.5 | 0.0001 | 177 km | 3.7 m, 211 km off | 230 / 66 km |
 
-The nearside keeps Earthlight's 2.3–2.9 lux; the far side and the south's coasts hold the dark nights the fleet would
-take away. The climate at each place stays the range the paused climate work carries: CM1 and the GCM disagree on
+Each place's own night takes the Earth's height and phase over it. Under a high Earth the nearside's nights keep
+2.3–5 lux at their darkest; toward the limbs the Earth stands low, and its light falls to 0.44 lux by Russell and
+0.07 lux at the Smythii headland, where the libration lifts the Earth above the horizon and lowers it again (the
+sea-appearance calendar's dated month gives 0.48 and 0.085 lux at their darkest). The far side and the south's coasts
+hold the dark nights the fleet would take away. The climate at each place stays the range the paused climate work carries: CM1 and the GCM disagree on
 the warmth and humidity of the air over land (42 against 387 strictly comfortable hours a lunar day on the rings'
 land).
 

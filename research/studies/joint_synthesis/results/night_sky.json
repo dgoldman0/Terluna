@@ -3,23 +3,29 @@
  "producer": {
   "study": "joint_synthesis",
   "files": {
-   "research/studies/joint_synthesis/night_sky.py": "ed484e44541eef6c"
+   "research/studies/joint_synthesis/night_sky.py": "e60c7653143eea53",
+   "illumination/calendar/geometry.py": "462b9f7174efa4ae",
+   "illumination/calendar/validate.py": "3dadeb5912cc31b1",
+   "illumination/calendar/disk.py": "6dfbdc1b581a2255"
   },
   "inputs": {
    "illumination/calendar/results/transfer.json": "68ea6e820a8d7603",
    "illumination/fleet_light/results/night_light.json": "c58f6afe2f342d80"
   }
  },
- "evidence": "Clear-sky light from the calendar's solved column (molecular air, no refraction or haze) beside a geometric model of the lead ring fleet; the Moon's orbit plane stands for its equator, the nearside's Earthlight is held at a high Earth's darkest level, and the fleet's night-side attitude is a tilt case, not a flown law.",
- "reading_rule": "Lux on level ground. hours_below[threshold] count the night's hours (dusk to dawn, 354 h) below each level. rho_d_for_a_tenth is the diffuse reflectance of the fleet's Moon-facing faces that keeps its glow at a tenth of the night's own light at local midnight. resource gives the light the night half intercepts and mirrors, in lumens and as watts of sunlight.",
+ "evidence": "Clear-sky light from the calendar's solved column (molecular air, no refraction or haze) beside a geometric model of the lead ring fleet. The geometry is the mean one: the Moon's orbit plane stands for its equator, the Earth stands over the sub-Earth point at its mean distance, and the libration that moves it by up to about 8 degrees is left out. The fleet's night-side attitude is a tilt case; no attitude law has been flown.",
+ "reading_rule": "Lux on level ground. Far-side rows lie on the 180-degree meridian and nearside rows on the central meridian; earth_elevation_deg is the Earth's mean height there. natural_darkest_lux is the least of the night's own light. hours_below[threshold] count the night's hours (dusk to dawn, 354 h) below each level. rho_d_for_a_tenth is the diffuse reflectance of the fleet's Moon-facing faces that keeps its glow at a tenth of the night's own light at local midnight. resource gives the light the night half intercepts and mirrors, in lumens and as watts of sunlight.",
  "thresholds_lux": {
   "dusk": 2.98,
   "dark": 0.1
  },
  "places": {
   "far side, 0 deg": {
+   "longitude_deg": 180.0,
+   "earth_elevation_deg": -90.0,
    "diffuse_rho_0.001": {
     "natural_midnight_lux": 0.001,
+    "natural_darkest_lux": 0.001,
     "fleet_midnight_lux": 65.583,
     "hours_below_dusk": {
      "natural": 190.2,
@@ -32,6 +38,7 @@
    },
    "diffuse_rho_0.0001": {
     "natural_midnight_lux": 0.001,
+    "natural_darkest_lux": 0.001,
     "fleet_midnight_lux": 6.5583,
     "hours_below_dusk": {
      "natural": 190.2,
@@ -44,6 +51,7 @@
    },
    "diffuse_rho_1e-05": {
     "natural_midnight_lux": 0.001,
+    "natural_darkest_lux": 0.001,
     "fleet_midnight_lux": 0.6558,
     "hours_below_dusk": {
      "natural": 190.2,
@@ -56,6 +64,7 @@
    },
    "diffuse_rho_1e-05_with_specular_random_1.5": {
     "natural_midnight_lux": 0.001,
+    "natural_darkest_lux": 0.001,
     "fleet_midnight_lux": 0.6558,
     "hours_below_dusk": {
      "natural": 190.2,
@@ -68,6 +77,7 @@
    },
    "diffuse_rho_1e-05_with_specular_random_3": {
     "natural_midnight_lux": 0.001,
+    "natural_darkest_lux": 0.001,
     "fleet_midnight_lux": 5862.3848,
     "hours_below_dusk": {
      "natural": 190.2,
@@ -81,8 +91,11 @@
    "rho_d_for_a_tenth": 1.5e-09
   },
   "far side, 15 deg": {
+   "longitude_deg": 180.0,
+   "earth_elevation_deg": -75.07,
    "diffuse_rho_0.001": {
     "natural_midnight_lux": 0.0056,
+    "natural_darkest_lux": 0.0056,
     "fleet_midnight_lux": 64.602,
     "hours_below_dusk": {
      "natural": 183.3,
@@ -95,6 +108,7 @@
    },
    "diffuse_rho_0.0001": {
     "natural_midnight_lux": 0.0056,
+    "natural_darkest_lux": 0.0056,
     "fleet_midnight_lux": 6.4602,
     "hours_below_dusk": {
      "natural": 183.3,
@@ -107,6 +121,7 @@
    },
    "diffuse_rho_1e-05": {
     "natural_midnight_lux": 0.0056,
+    "natural_darkest_lux": 0.0056,
     "fleet_midnight_lux": 0.646,
     "hours_below_dusk": {
      "natural": 183.3,
@@ -119,6 +134,7 @@
    },
    "diffuse_rho_1e-05_with_specular_random_1.5": {
     "natural_midnight_lux": 0.0056,
+    "natural_darkest_lux": 0.0056,
     "fleet_midnight_lux": 74.599,
     "hours_below_dusk": {
      "natural": 183.3,
@@ -131,6 +147,7 @@
    },
    "diffuse_rho_1e-05_with_specular_random_3": {
     "natural_midnight_lux": 0.0056,
+    "natural_darkest_lux": 0.0056,
     "fleet_midnight_lux": 3662.036,
     "hours_below_dusk": {
      "natural": 183.3,
@@ -144,8 +161,11 @@
    "rho_d_for_a_tenth": 8.7e-09
   },
   "far side, 30 deg": {
+   "longitude_deg": 180.0,
+   "earth_elevation_deg": -60.13,
    "diffuse_rho_0.001": {
     "natural_midnight_lux": 0.0889,
+    "natural_darkest_lux": 0.0889,
     "fleet_midnight_lux": 58.218,
     "hours_below_dusk": {
      "natural": 157.8,
@@ -158,6 +178,7 @@
    },
    "diffuse_rho_0.0001": {
     "natural_midnight_lux": 0.0889,
+    "natural_darkest_lux": 0.0889,
     "fleet_midnight_lux": 5.8218,
     "hours_below_dusk": {
      "natural": 157.8,
@@ -170,6 +191,7 @@
    },
    "diffuse_rho_1e-05": {
     "natural_midnight_lux": 0.0889,
+    "natural_darkest_lux": 0.0889,
     "fleet_midnight_lux": 0.5822,
     "hours_below_dusk": {
      "natural": 157.8,
@@ -182,6 +204,7 @@
    },
    "diffuse_rho_1e-05_with_specular_random_1.5": {
     "natural_midnight_lux": 0.0889,
+    "natural_darkest_lux": 0.0889,
     "fleet_midnight_lux": 1208.2902,
     "hours_below_dusk": {
      "natural": 157.8,
@@ -194,6 +217,7 @@
    },
    "diffuse_rho_1e-05_with_specular_random_3": {
     "natural_midnight_lux": 0.0889,
+    "natural_darkest_lux": 0.0889,
     "fleet_midnight_lux": 2737.6372,
     "hours_below_dusk": {
      "natural": 157.8,
@@ -207,8 +231,11 @@
    "rho_d_for_a_tenth": 1.5e-07
   },
   "far side, 45 deg": {
+   "longitude_deg": 180.0,
+   "earth_elevation_deg": -45.18,
    "diffuse_rho_0.001": {
     "natural_midnight_lux": 1.4869,
+    "natural_darkest_lux": 1.4869,
     "fleet_midnight_lux": 46.351,
     "hours_below_dusk": {
      "natural": 80.1,
@@ -221,6 +248,7 @@
    },
    "diffuse_rho_0.0001": {
     "natural_midnight_lux": 1.4869,
+    "natural_darkest_lux": 1.4869,
     "fleet_midnight_lux": 4.6351,
     "hours_below_dusk": {
      "natural": 80.1,
@@ -233,6 +261,7 @@
    },
    "diffuse_rho_1e-05": {
     "natural_midnight_lux": 1.4869,
+    "natural_darkest_lux": 1.4869,
     "fleet_midnight_lux": 0.4635,
     "hours_below_dusk": {
      "natural": 80.1,
@@ -245,6 +274,7 @@
    },
    "diffuse_rho_1e-05_with_specular_random_1.5": {
     "natural_midnight_lux": 1.4869,
+    "natural_darkest_lux": 1.4869,
     "fleet_midnight_lux": 1139.2825,
     "hours_below_dusk": {
      "natural": 80.1,
@@ -257,6 +287,7 @@
    },
    "diffuse_rho_1e-05_with_specular_random_3": {
     "natural_midnight_lux": 1.4869,
+    "natural_darkest_lux": 1.4869,
     "fleet_midnight_lux": 1598.7695,
     "hours_below_dusk": {
      "natural": 80.1,
@@ -270,8 +301,11 @@
    "rho_d_for_a_tenth": 3.2e-06
   },
   "far side, 60 deg": {
+   "longitude_deg": 180.0,
+   "earth_elevation_deg": -30.22,
    "diffuse_rho_0.001": {
     "natural_midnight_lux": 24.5991,
+    "natural_darkest_lux": 24.5991,
     "fleet_midnight_lux": 31.641,
     "hours_below_dusk": {
      "natural": 0.0,
@@ -284,6 +318,7 @@
    },
    "diffuse_rho_0.0001": {
     "natural_midnight_lux": 24.5991,
+    "natural_darkest_lux": 24.5991,
     "fleet_midnight_lux": 3.1641,
     "hours_below_dusk": {
      "natural": 0.0,
@@ -296,6 +331,7 @@
    },
    "diffuse_rho_1e-05": {
     "natural_midnight_lux": 24.5991,
+    "natural_darkest_lux": 24.5991,
     "fleet_midnight_lux": 0.3164,
     "hours_below_dusk": {
      "natural": 0.0,
@@ -308,6 +344,7 @@
    },
    "diffuse_rho_1e-05_with_specular_random_1.5": {
     "natural_midnight_lux": 24.5991,
+    "natural_darkest_lux": 24.5991,
     "fleet_midnight_lux": 780.4874,
     "hours_below_dusk": {
      "natural": 0.0,
@@ -320,6 +357,7 @@
    },
    "diffuse_rho_1e-05_with_specular_random_3": {
     "natural_midnight_lux": 24.5991,
+    "natural_darkest_lux": 24.5991,
     "fleet_midnight_lux": 980.0064,
     "hours_below_dusk": {
      "natural": 0.0,
@@ -333,11 +371,14 @@
    "rho_d_for_a_tenth": 7.8e-05
   },
   "nearside, 0 deg": {
+   "longitude_deg": 0.0,
+   "earth_elevation_deg": 90.0,
    "diffuse_rho_0.001": {
-    "natural_midnight_lux": 2.301,
+    "natural_midnight_lux": 5.4583,
+    "natural_darkest_lux": 4.0789,
     "fleet_midnight_lux": 65.583,
     "hours_below_dusk": {
-     "natural": 159.7,
+     "natural": 0.0,
      "with_fleet": 0.0
     },
     "hours_below_dark": {
@@ -346,10 +387,11 @@
     }
    },
    "diffuse_rho_0.0001": {
-    "natural_midnight_lux": 2.301,
+    "natural_midnight_lux": 5.4583,
+    "natural_darkest_lux": 4.0789,
     "fleet_midnight_lux": 6.5583,
     "hours_below_dusk": {
-     "natural": 159.7,
+     "natural": 0.0,
      "with_fleet": 0.0
     },
     "hours_below_dark": {
@@ -358,11 +400,12 @@
     }
    },
    "diffuse_rho_1e-05": {
-    "natural_midnight_lux": 2.301,
+    "natural_midnight_lux": 5.4583,
+    "natural_darkest_lux": 4.0789,
     "fleet_midnight_lux": 0.6558,
     "hours_below_dusk": {
-     "natural": 159.7,
-     "with_fleet": 121.4
+     "natural": 0.0,
+     "with_fleet": 0.0
     },
     "hours_below_dark": {
      "natural": 0.0,
@@ -370,11 +413,12 @@
     }
    },
    "diffuse_rho_1e-05_with_specular_random_1.5": {
-    "natural_midnight_lux": 2.301,
+    "natural_midnight_lux": 5.4583,
+    "natural_darkest_lux": 4.0789,
     "fleet_midnight_lux": 0.6558,
     "hours_below_dusk": {
-     "natural": 159.7,
-     "with_fleet": 38.8
+     "natural": 0.0,
+     "with_fleet": 0.0
     },
     "hours_below_dark": {
      "natural": 0.0,
@@ -382,10 +426,11 @@
     }
    },
    "diffuse_rho_1e-05_with_specular_random_3": {
-    "natural_midnight_lux": 2.301,
+    "natural_midnight_lux": 5.4583,
+    "natural_darkest_lux": 4.0789,
     "fleet_midnight_lux": 5862.3848,
     "hours_below_dusk": {
-     "natural": 159.7,
+     "natural": 0.0,
      "with_fleet": 0.0
     },
     "hours_below_dark": {
@@ -393,14 +438,17 @@
      "with_fleet": 0.0
     }
    },
-   "rho_d_for_a_tenth": 3.5e-06
+   "rho_d_for_a_tenth": 8.3e-06
   },
   "nearside, 15 deg": {
+   "longitude_deg": 0.0,
+   "earth_elevation_deg": 74.93,
    "diffuse_rho_0.001": {
-    "natural_midnight_lux": 2.3056,
+    "natural_midnight_lux": 5.2169,
+    "natural_darkest_lux": 4.096,
     "fleet_midnight_lux": 64.602,
     "hours_below_dusk": {
-     "natural": 149.9,
+     "natural": 0.0,
      "with_fleet": 0.0
     },
     "hours_below_dark": {
@@ -409,10 +457,11 @@
     }
    },
    "diffuse_rho_0.0001": {
-    "natural_midnight_lux": 2.3056,
+    "natural_midnight_lux": 5.2169,
+    "natural_darkest_lux": 4.096,
     "fleet_midnight_lux": 6.4602,
     "hours_below_dusk": {
-     "natural": 149.9,
+     "natural": 0.0,
      "with_fleet": 0.0
     },
     "hours_below_dark": {
@@ -421,11 +470,12 @@
     }
    },
    "diffuse_rho_1e-05": {
-    "natural_midnight_lux": 2.3056,
+    "natural_midnight_lux": 5.2169,
+    "natural_darkest_lux": 4.096,
     "fleet_midnight_lux": 0.646,
     "hours_below_dusk": {
-     "natural": 149.9,
-     "with_fleet": 104.7
+     "natural": 0.0,
+     "with_fleet": 0.0
     },
     "hours_below_dark": {
      "natural": 0.0,
@@ -433,10 +483,11 @@
     }
    },
    "diffuse_rho_1e-05_with_specular_random_1.5": {
-    "natural_midnight_lux": 2.3056,
+    "natural_midnight_lux": 5.2169,
+    "natural_darkest_lux": 4.096,
     "fleet_midnight_lux": 74.599,
     "hours_below_dusk": {
-     "natural": 149.9,
+     "natural": 0.0,
      "with_fleet": 0.0
     },
     "hours_below_dark": {
@@ -445,10 +496,11 @@
     }
    },
    "diffuse_rho_1e-05_with_specular_random_3": {
-    "natural_midnight_lux": 2.3056,
+    "natural_midnight_lux": 5.2169,
+    "natural_darkest_lux": 4.096,
     "fleet_midnight_lux": 3662.036,
     "hours_below_dusk": {
-     "natural": 149.9,
+     "natural": 0.0,
      "with_fleet": 0.0
     },
     "hours_below_dark": {
@@ -456,14 +508,17 @@
      "with_fleet": 0.0
     }
    },
-   "rho_d_for_a_tenth": 3.6e-06
+   "rho_d_for_a_tenth": 8.1e-06
   },
   "nearside, 30 deg": {
+   "longitude_deg": 0.0,
+   "earth_elevation_deg": 59.87,
    "diffuse_rho_0.001": {
-    "natural_midnight_lux": 2.3889,
+    "natural_midnight_lux": 4.5929,
+    "natural_darkest_lux": 4.1591,
     "fleet_midnight_lux": 58.218,
     "hours_below_dusk": {
-     "natural": 112.6,
+     "natural": 0.0,
      "with_fleet": 0.0
     },
     "hours_below_dark": {
@@ -472,10 +527,11 @@
     }
    },
    "diffuse_rho_0.0001": {
-    "natural_midnight_lux": 2.3889,
+    "natural_midnight_lux": 4.5929,
+    "natural_darkest_lux": 4.1591,
     "fleet_midnight_lux": 5.8218,
     "hours_below_dusk": {
-     "natural": 112.6,
+     "natural": 0.0,
      "with_fleet": 0.0
     },
     "hours_below_dark": {
@@ -484,11 +540,12 @@
     }
    },
    "diffuse_rho_1e-05": {
-    "natural_midnight_lux": 2.3889,
+    "natural_midnight_lux": 4.5929,
+    "natural_darkest_lux": 4.1591,
     "fleet_midnight_lux": 0.5822,
     "hours_below_dusk": {
-     "natural": 112.6,
-     "with_fleet": 20.2
+     "natural": 0.0,
+     "with_fleet": 0.0
     },
     "hours_below_dark": {
      "natural": 0.0,
@@ -496,10 +553,11 @@
     }
    },
    "diffuse_rho_1e-05_with_specular_random_1.5": {
-    "natural_midnight_lux": 2.3889,
+    "natural_midnight_lux": 4.5929,
+    "natural_darkest_lux": 4.1591,
     "fleet_midnight_lux": 1208.2902,
     "hours_below_dusk": {
-     "natural": 112.6,
+     "natural": 0.0,
      "with_fleet": 0.0
     },
     "hours_below_dark": {
@@ -508,10 +566,11 @@
     }
    },
    "diffuse_rho_1e-05_with_specular_random_3": {
-    "natural_midnight_lux": 2.3889,
+    "natural_midnight_lux": 4.5929,
+    "natural_darkest_lux": 4.1591,
     "fleet_midnight_lux": 2737.6372,
     "hours_below_dusk": {
-     "natural": 112.6,
+     "natural": 0.0,
      "with_fleet": 0.0
     },
     "hours_below_dark": {
@@ -519,11 +578,14 @@
      "with_fleet": 0.0
     }
    },
-   "rho_d_for_a_tenth": 4.1e-06
+   "rho_d_for_a_tenth": 7.9e-06
   },
   "nearside, 45 deg": {
+   "longitude_deg": 0.0,
+   "earth_elevation_deg": 44.82,
    "diffuse_rho_0.001": {
-    "natural_midnight_lux": 3.7869,
+    "natural_midnight_lux": 4.918,
+    "natural_darkest_lux": 4.918,
     "fleet_midnight_lux": 46.351,
     "hours_below_dusk": {
      "natural": 0.0,
@@ -535,7 +597,8 @@
     }
    },
    "diffuse_rho_0.0001": {
-    "natural_midnight_lux": 3.7869,
+    "natural_midnight_lux": 4.918,
+    "natural_darkest_lux": 4.918,
     "fleet_midnight_lux": 4.6351,
     "hours_below_dusk": {
      "natural": 0.0,
@@ -547,7 +610,8 @@
     }
    },
    "diffuse_rho_1e-05": {
-    "natural_midnight_lux": 3.7869,
+    "natural_midnight_lux": 4.918,
+    "natural_darkest_lux": 4.918,
     "fleet_midnight_lux": 0.4635,
     "hours_below_dusk": {
      "natural": 0.0,
@@ -559,7 +623,8 @@
     }
    },
    "diffuse_rho_1e-05_with_specular_random_1.5": {
-    "natural_midnight_lux": 3.7869,
+    "natural_midnight_lux": 4.918,
+    "natural_darkest_lux": 4.918,
     "fleet_midnight_lux": 1139.2825,
     "hours_below_dusk": {
      "natural": 0.0,
@@ -571,7 +636,8 @@
     }
    },
    "diffuse_rho_1e-05_with_specular_random_3": {
-    "natural_midnight_lux": 3.7869,
+    "natural_midnight_lux": 4.918,
+    "natural_darkest_lux": 4.918,
     "fleet_midnight_lux": 1598.7695,
     "hours_below_dusk": {
      "natural": 0.0,
@@ -582,11 +648,14 @@
      "with_fleet": 0.0
     }
    },
-   "rho_d_for_a_tenth": 8.2e-06
+   "rho_d_for_a_tenth": 1.1e-05
   },
   "nearside, 60 deg": {
+   "longitude_deg": 0.0,
+   "earth_elevation_deg": 29.78,
    "diffuse_rho_0.001": {
-    "natural_midnight_lux": 26.8991,
+    "natural_midnight_lux": 26.7678,
+    "natural_darkest_lux": 26.7678,
     "fleet_midnight_lux": 31.641,
     "hours_below_dusk": {
      "natural": 0.0,
@@ -598,7 +667,8 @@
     }
    },
    "diffuse_rho_0.0001": {
-    "natural_midnight_lux": 26.8991,
+    "natural_midnight_lux": 26.7678,
+    "natural_darkest_lux": 26.7678,
     "fleet_midnight_lux": 3.1641,
     "hours_below_dusk": {
      "natural": 0.0,
@@ -610,7 +680,8 @@
     }
    },
    "diffuse_rho_1e-05": {
-    "natural_midnight_lux": 26.8991,
+    "natural_midnight_lux": 26.7678,
+    "natural_darkest_lux": 26.7678,
     "fleet_midnight_lux": 0.3164,
     "hours_below_dusk": {
      "natural": 0.0,
@@ -622,7 +693,8 @@
     }
    },
    "diffuse_rho_1e-05_with_specular_random_1.5": {
-    "natural_midnight_lux": 26.8991,
+    "natural_midnight_lux": 26.7678,
+    "natural_darkest_lux": 26.7678,
     "fleet_midnight_lux": 780.4874,
     "hours_below_dusk": {
      "natural": 0.0,
@@ -634,7 +706,8 @@
     }
    },
    "diffuse_rho_1e-05_with_specular_random_3": {
-    "natural_midnight_lux": 26.8991,
+    "natural_midnight_lux": 26.7678,
+    "natural_darkest_lux": 26.7678,
     "fleet_midnight_lux": 980.0064,
     "hours_below_dusk": {
      "natural": 0.0,
