@@ -3,6 +3,11 @@
 In order of what each would settle for the whole Open Moon. Each names what decides it and how it could be answered
 on this laptop. The findings behind them are in the [README](README.md).
 
+The current cross-domain priority is the [phosphorus return study](phosphorus.md). Its conservation model is running;
+next establish spatial inventories, nutrient speciation, capture, food-return recovery, sediment extraction and energy
+costs. Internal aerial recycling, return from harvested food and return from below must remain separate. None of the
+high retention fractions is demonstrated, and atmospheric deposition supplies no new phosphorus to the Moon.
+
 1. **The nitrogen's extraction plan.** On 9 October the author asked for the extraction to be planned in detail:
    feasible, sustainable, and protecting the major celestial bodies as the conservation study's principle 5 plans.
    The air needs 2.5×10¹⁸ kg of N2. Ordinary icy bodies hold their nitrogen bound, at a few tenths of a percent to a
@@ -20,13 +25,15 @@ on this laptop. The findings behind them are in the [README](README.md).
      with the water (question 2); then a plan by population and century over the 500-year build, with its pipeline,
      processing and the traffic rules. The choice among the populations, and any change to the principles, is the
      author's.
-2. **The array's population and its habitats' shielding.** At the Stanford torus's 990 t a person, the habitats
-   are the largest material stream after the build: 99–990 Gt for 0.1–1 billion residents, 2,000–14,000 Gt for
-   2–14 billion ([industry](industry.md)).
-   - **What decides it:** the author's placement of people; passive shield mass per area against water or magnetic
-     shields; the floor area each person has.
-   - **How:** shield designs from the literature by mass per person, with the provisioning domain's population
-     scenarios.
+2. **Population capacity and orbital habitat shielding.** Use the five common cases in
+   [shared/scenarios/population.json](../shared/scenarios/population.json), with lunar surface and aerial residents
+   explicit. The new [material account](phosphorus.md) gives 1,980–2,970 Gt of orbital shielding at SP-413's
+   990 t/person for these cases; structure is counted separately. Historical independent population allocations
+   remain comparison records, not limits or preferred distributions.
+   - **What decides it:** capacities and services, ecological occupancy, construction and upkeep, human needs,
+     shielding design and floor area per person; distribution remains an output to investigate.
+   - **How:** compare the inhabited-volume study's aerial architecture with surface and orbital inventories without
+     counting district mass twice or applying orbital shielding to the atmosphere. Test higher and lower aerial shares.
 3. **The redox account of the imports.** Each import stream carries oxidizing or reducing power:
    - oxygen as water leaves hydrogen that would burn all of it back;
    - nitrogen as ammonia carries hydrogen needing seven times the air's oxygen;

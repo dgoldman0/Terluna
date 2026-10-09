@@ -1,0 +1,2805 @@
+{
+  "schema": "terluna.resources.phosphorus/1",
+  "producer": {
+    "files": {
+      "resources/phosphorus.py": "48f3ef951dc6d781f42de706df7652cbd53d945a67fbd8a6e857c253c9e81e43"
+    },
+    "inputs": {
+      "resources/phosphorus_sources.json": "2217f3a73e2c6750e06b4b6408f3922455bc5a15046f580a7ca3072015cff066",
+      "shared/scenarios/population.json": "74ec20d6f8057977e9e08ee35b7014892e476fd8795a58a1af7f880a6bc373f0",
+      "resources/results/industry.json": "635523504580a40ac12639a610cbdb0c2e9c344a5c8b4c21b05a984791f18ff5"
+    },
+    "constants": {
+      "JULIAN_DAY": 86400.0,
+      "JULIAN_YEAR_DAYS": 365.25,
+      "MOON_GM": 4902800118000.0,
+      "MOON_RADIUS": 1737400.0
+    }
+  },
+  "evidence": "Closed-form requirements and six-box linear conservation sensitivities. No actual closed ecology, ore reserve, capture efficiency, sediment return technology or sustained productivity is established.",
+  "reading_rule": "All phosphorus in kg elemental P; annual flow kg P per Julian year; stock differs from throughput. Null reserve duration means no extra reserve drain under a fixed assumed upward flow, not infinite planetary sustainability. Deposited P is internal redistribution, not fresh off-world import. Box-model unrecoverable means outside the defined recovery system, not nuclear destruction.",
+  "assumptions": {
+    "coverage_fraction_of_lunar_surface": 0.01,
+    "npp_g_c_m2_yr": 1000,
+    "biomass_carbon_dry_fraction": 0.45,
+    "harvest_fraction": 0.05,
+    "deposition_scenario_g_p_m2_yr": [
+      0.0007,
+      0.028
+    ],
+    "capture_and_availability_fraction": 0.1,
+    "natural_recycling_grid": [
+      0.99,
+      0.999,
+      0.9999
+    ],
+    "food_return_grid": [
+      0,
+      0.9,
+      0.99,
+      0.999
+    ],
+    "finite_model": "Land+sea donor stock=10 times initial sky stock; donor split72:28, not inferred from measured P geography. Runoff timescale100yr, sea burial1000yr, engineered sediment return10000yr, human handling0.1yr. Natural recycling.999, food return.99. No imports; sky throughput scales with stock. Loss fraction applies to processed upward/engineered return, not all P turnover."
+  },
+  "central": {
+    "cp_molar": 106.0,
+    "cp_mass": 41.10434558016401,
+    "coverage": 0.01,
+    "occupied_surface_footprint_m2": 379323280993.8046,
+    "carbon_kg_yr": 379323280993.8046,
+    "dry_kg_yr": 842940624430.6769,
+    "throughput_p_kg_yr": 9228301184.214867,
+    "standing_p_kg": [
+      4152735532.8966904,
+      41527355328.9669
+    ],
+    "stock_over_throughput_yr": [
+      0.45000000000000007,
+      4.5
+    ]
+  },
+  "stoichiometry": [
+    {
+      "cp_molar": 78,
+      "cp_mass": 30.246593917479174,
+      "coverage": 0.01,
+      "occupied_surface_footprint_m2": 379323280993.8046,
+      "carbon_kg_yr": 379323280993.8046,
+      "dry_kg_yr": 842940624430.6769,
+      "throughput_p_kg_yr": 12541024686.240717,
+      "standing_p_kg": [
+        5643461108.808323,
+        56434611088.08323
+      ],
+      "stock_over_throughput_yr": [
+        0.45,
+        4.5
+      ]
+    },
+    {
+      "cp_molar": 106,
+      "cp_mass": 41.10434558016401,
+      "coverage": 0.01,
+      "occupied_surface_footprint_m2": 379323280993.8046,
+      "carbon_kg_yr": 379323280993.8046,
+      "dry_kg_yr": 842940624430.6769,
+      "throughput_p_kg_yr": 9228301184.214867,
+      "standing_p_kg": [
+        4152735532.8966904,
+        41527355328.9669
+      ],
+      "stock_over_throughput_yr": [
+        0.45000000000000007,
+        4.5
+      ]
+    },
+    {
+      "cp_molar": 137,
+      "cp_mass": 53.1254277781365,
+      "coverage": 0.01,
+      "occupied_surface_footprint_m2": 379323280993.8046,
+      "carbon_kg_yr": 379323280993.8046,
+      "dry_kg_yr": 842940624430.6769,
+      "throughput_p_kg_yr": 7140145441.801284,
+      "standing_p_kg": [
+        3213065448.810578,
+        32130654488.105778
+      ],
+      "stock_over_throughput_yr": [
+        0.45,
+        4.5
+      ]
+    },
+    {
+      "cp_molar": 195,
+      "cp_mass": 75.61648479369794,
+      "coverage": 0.01,
+      "occupied_surface_footprint_m2": 379323280993.8046,
+      "carbon_kg_yr": 379323280993.8046,
+      "dry_kg_yr": 842940624430.6769,
+      "throughput_p_kg_yr": 5016409874.496286,
+      "standing_p_kg": [
+        2257384443.5233293,
+        22573844435.23329
+      ],
+      "stock_over_throughput_yr": [
+        0.45000000000000007,
+        4.500000000000001
+      ]
+    },
+    {
+      "cp_molar": 500,
+      "cp_mass": 193.88842254794343,
+      "coverage": 0.01,
+      "occupied_surface_footprint_m2": 379323280993.8046,
+      "carbon_kg_yr": 379323280993.8046,
+      "dry_kg_yr": 842940624430.6769,
+      "throughput_p_kg_yr": 1956399851.0535517,
+      "standing_p_kg": [
+        880379932.9740983,
+        8803799329.740982
+      ],
+      "stock_over_throughput_yr": [
+        0.45,
+        4.5
+      ]
+    }
+  ],
+  "upward_p_kg_yr": [
+    2655262.966956632,
+    106210518.6782653
+  ],
+  "recycling_requirements": [
+    {
+      "food_return": 0.0,
+      "upward_p_kg_yr": 2655262.966956632,
+      "required_fraction": 1.0523287048220409,
+      "feasible_at_or_below_unity": false,
+      "minimum_food_return_at_perfect_natural_recycling": 0.994245391618777
+    },
+    {
+      "food_return": 0.0,
+      "upward_p_kg_yr": 106210518.6782653,
+      "required_fraction": 1.0405166139342674,
+      "feasible_at_or_below_unity": false,
+      "minimum_food_return_at_perfect_natural_recycling": 0.7698156647510815
+    },
+    {
+      "food_return": 0.9,
+      "upward_p_kg_yr": 2655262.966956632,
+      "required_fraction": 1.0049602837694094,
+      "feasible_at_or_below_unity": false,
+      "minimum_food_return_at_perfect_natural_recycling": 0.994245391618777
+    },
+    {
+      "food_return": 0.9,
+      "upward_p_kg_yr": 106210518.6782653,
+      "required_fraction": 0.9931481928816359,
+      "feasible_at_or_below_unity": true,
+      "minimum_food_return_at_perfect_natural_recycling": 0.7698156647510815
+    },
+    {
+      "food_return": 0.99,
+      "upward_p_kg_yr": 2655262.966956632,
+      "required_fraction": 1.0002234416641462,
+      "feasible_at_or_below_unity": false,
+      "minimum_food_return_at_perfect_natural_recycling": 0.994245391618777
+    },
+    {
+      "food_return": 0.99,
+      "upward_p_kg_yr": 106210518.6782653,
+      "required_fraction": 0.9884113507763728,
+      "feasible_at_or_below_unity": true,
+      "minimum_food_return_at_perfect_natural_recycling": 0.7698156647510815
+    },
+    {
+      "food_return": 0.999,
+      "upward_p_kg_yr": 2655262.966956632,
+      "required_fraction": 0.9997497574536198,
+      "feasible_at_or_below_unity": true,
+      "minimum_food_return_at_perfect_natural_recycling": 0.994245391618777
+    },
+    {
+      "food_return": 0.999,
+      "upward_p_kg_yr": 106210518.6782653,
+      "required_fraction": 0.9879376665658464,
+      "feasible_at_or_below_unity": true,
+      "minimum_food_return_at_perfect_natural_recycling": 0.7698156647510815
+    }
+  ],
+  "budget_grid": [
+    {
+      "food_return": 0.0,
+      "natural_recycling": 0.99,
+      "harvest_p_kg_yr": 461415059.21074337,
+      "natural_downward_p_kg_yr": 87668861.2500413,
+      "direct_food_return_p_kg_yr": 0.0,
+      "food_unreturned_to_sky_p_kg_yr": 461415059.21074337,
+      "sky_export_after_immediate_returns_p_kg_yr": 549083920.4607847,
+      "upward_from_surface_p_kg_yr": 2655262.966956632,
+      "additional_return_needed_p_kg_yr": 546428657.493828,
+      "sky_net_p_kg_yr": -546428657.493828
+    },
+    {
+      "food_return": 0.0,
+      "natural_recycling": 0.999,
+      "harvest_p_kg_yr": 461415059.21074337,
+      "natural_downward_p_kg_yr": 8766886.12500413,
+      "direct_food_return_p_kg_yr": 0.0,
+      "food_unreturned_to_sky_p_kg_yr": 461415059.21074337,
+      "sky_export_after_immediate_returns_p_kg_yr": 470181945.3357475,
+      "upward_from_surface_p_kg_yr": 2655262.966956632,
+      "additional_return_needed_p_kg_yr": 467526682.36879086,
+      "sky_net_p_kg_yr": -467526682.36879086
+    },
+    {
+      "food_return": 0.0,
+      "natural_recycling": 0.9999,
+      "harvest_p_kg_yr": 461415059.21074337,
+      "natural_downward_p_kg_yr": 876688.6125003156,
+      "direct_food_return_p_kg_yr": 0.0,
+      "food_unreturned_to_sky_p_kg_yr": 461415059.21074337,
+      "sky_export_after_immediate_returns_p_kg_yr": 462291747.8232437,
+      "upward_from_surface_p_kg_yr": 2655262.966956632,
+      "additional_return_needed_p_kg_yr": 459636484.85628706,
+      "sky_net_p_kg_yr": -459636484.85628706
+    },
+    {
+      "food_return": 0.0,
+      "natural_recycling": 0.99,
+      "harvest_p_kg_yr": 461415059.21074337,
+      "natural_downward_p_kg_yr": 87668861.2500413,
+      "direct_food_return_p_kg_yr": 0.0,
+      "food_unreturned_to_sky_p_kg_yr": 461415059.21074337,
+      "sky_export_after_immediate_returns_p_kg_yr": 549083920.4607847,
+      "upward_from_surface_p_kg_yr": 106210518.6782653,
+      "additional_return_needed_p_kg_yr": 442873401.78251934,
+      "sky_net_p_kg_yr": -442873401.78251934
+    },
+    {
+      "food_return": 0.0,
+      "natural_recycling": 0.999,
+      "harvest_p_kg_yr": 461415059.21074337,
+      "natural_downward_p_kg_yr": 8766886.12500413,
+      "direct_food_return_p_kg_yr": 0.0,
+      "food_unreturned_to_sky_p_kg_yr": 461415059.21074337,
+      "sky_export_after_immediate_returns_p_kg_yr": 470181945.3357475,
+      "upward_from_surface_p_kg_yr": 106210518.6782653,
+      "additional_return_needed_p_kg_yr": 363971426.65748215,
+      "sky_net_p_kg_yr": -363971426.65748215
+    },
+    {
+      "food_return": 0.0,
+      "natural_recycling": 0.9999,
+      "harvest_p_kg_yr": 461415059.21074337,
+      "natural_downward_p_kg_yr": 876688.6125003156,
+      "direct_food_return_p_kg_yr": 0.0,
+      "food_unreturned_to_sky_p_kg_yr": 461415059.21074337,
+      "sky_export_after_immediate_returns_p_kg_yr": 462291747.8232437,
+      "upward_from_surface_p_kg_yr": 106210518.6782653,
+      "additional_return_needed_p_kg_yr": 356081229.1449784,
+      "sky_net_p_kg_yr": -356081229.1449784
+    },
+    {
+      "food_return": 0.9,
+      "natural_recycling": 0.99,
+      "harvest_p_kg_yr": 461415059.21074337,
+      "natural_downward_p_kg_yr": 87668861.2500413,
+      "direct_food_return_p_kg_yr": 415273553.28966904,
+      "food_unreturned_to_sky_p_kg_yr": 46141505.92107432,
+      "sky_export_after_immediate_returns_p_kg_yr": 133810367.17111564,
+      "upward_from_surface_p_kg_yr": 2655262.966956632,
+      "additional_return_needed_p_kg_yr": 131155104.204159,
+      "sky_net_p_kg_yr": -131155104.204159
+    },
+    {
+      "food_return": 0.9,
+      "natural_recycling": 0.999,
+      "harvest_p_kg_yr": 461415059.21074337,
+      "natural_downward_p_kg_yr": 8766886.12500413,
+      "direct_food_return_p_kg_yr": 415273553.28966904,
+      "food_unreturned_to_sky_p_kg_yr": 46141505.92107432,
+      "sky_export_after_immediate_returns_p_kg_yr": 54908392.04607845,
+      "upward_from_surface_p_kg_yr": 2655262.966956632,
+      "additional_return_needed_p_kg_yr": 52253129.07912182,
+      "sky_net_p_kg_yr": -52253129.07912182
+    },
+    {
+      "food_return": 0.9,
+      "natural_recycling": 0.9999,
+      "harvest_p_kg_yr": 461415059.21074337,
+      "natural_downward_p_kg_yr": 876688.6125003156,
+      "direct_food_return_p_kg_yr": 415273553.28966904,
+      "food_unreturned_to_sky_p_kg_yr": 46141505.92107432,
+      "sky_export_after_immediate_returns_p_kg_yr": 47018194.53357464,
+      "upward_from_surface_p_kg_yr": 2655262.966956632,
+      "additional_return_needed_p_kg_yr": 44362931.56661801,
+      "sky_net_p_kg_yr": -44362931.56661801
+    },
+    {
+      "food_return": 0.9,
+      "natural_recycling": 0.99,
+      "harvest_p_kg_yr": 461415059.21074337,
+      "natural_downward_p_kg_yr": 87668861.2500413,
+      "direct_food_return_p_kg_yr": 415273553.28966904,
+      "food_unreturned_to_sky_p_kg_yr": 46141505.92107432,
+      "sky_export_after_immediate_returns_p_kg_yr": 133810367.17111564,
+      "upward_from_surface_p_kg_yr": 106210518.6782653,
+      "additional_return_needed_p_kg_yr": 27599848.492850333,
+      "sky_net_p_kg_yr": -27599848.492850333
+    },
+    {
+      "food_return": 0.9,
+      "natural_recycling": 0.999,
+      "harvest_p_kg_yr": 461415059.21074337,
+      "natural_downward_p_kg_yr": 8766886.12500413,
+      "direct_food_return_p_kg_yr": 415273553.28966904,
+      "food_unreturned_to_sky_p_kg_yr": 46141505.92107432,
+      "sky_export_after_immediate_returns_p_kg_yr": 54908392.04607845,
+      "upward_from_surface_p_kg_yr": 106210518.6782653,
+      "additional_return_needed_p_kg_yr": 0.0,
+      "sky_net_p_kg_yr": 51302126.63218685
+    },
+    {
+      "food_return": 0.9,
+      "natural_recycling": 0.9999,
+      "harvest_p_kg_yr": 461415059.21074337,
+      "natural_downward_p_kg_yr": 876688.6125003156,
+      "direct_food_return_p_kg_yr": 415273553.28966904,
+      "food_unreturned_to_sky_p_kg_yr": 46141505.92107432,
+      "sky_export_after_immediate_returns_p_kg_yr": 47018194.53357464,
+      "upward_from_surface_p_kg_yr": 106210518.6782653,
+      "additional_return_needed_p_kg_yr": 0.0,
+      "sky_net_p_kg_yr": 59192324.14469066
+    },
+    {
+      "food_return": 0.99,
+      "natural_recycling": 0.99,
+      "harvest_p_kg_yr": 461415059.21074337,
+      "natural_downward_p_kg_yr": 87668861.2500413,
+      "direct_food_return_p_kg_yr": 456800908.61863595,
+      "food_unreturned_to_sky_p_kg_yr": 4614150.592107438,
+      "sky_export_after_immediate_returns_p_kg_yr": 92283011.84214875,
+      "upward_from_surface_p_kg_yr": 2655262.966956632,
+      "additional_return_needed_p_kg_yr": 89627748.87519212,
+      "sky_net_p_kg_yr": -89627748.87519212
+    },
+    {
+      "food_return": 0.99,
+      "natural_recycling": 0.999,
+      "harvest_p_kg_yr": 461415059.21074337,
+      "natural_downward_p_kg_yr": 8766886.12500413,
+      "direct_food_return_p_kg_yr": 456800908.61863595,
+      "food_unreturned_to_sky_p_kg_yr": 4614150.592107438,
+      "sky_export_after_immediate_returns_p_kg_yr": 13381036.717111567,
+      "upward_from_surface_p_kg_yr": 2655262.966956632,
+      "additional_return_needed_p_kg_yr": 10725773.750154935,
+      "sky_net_p_kg_yr": -10725773.750154935
+    },
+    {
+      "food_return": 0.99,
+      "natural_recycling": 0.9999,
+      "harvest_p_kg_yr": 461415059.21074337,
+      "natural_downward_p_kg_yr": 876688.6125003156,
+      "direct_food_return_p_kg_yr": 456800908.61863595,
+      "food_unreturned_to_sky_p_kg_yr": 4614150.592107438,
+      "sky_export_after_immediate_returns_p_kg_yr": 5490839.204607753,
+      "upward_from_surface_p_kg_yr": 2655262.966956632,
+      "additional_return_needed_p_kg_yr": 2835576.237651121,
+      "sky_net_p_kg_yr": -2835576.237651121
+    },
+    {
+      "food_return": 0.99,
+      "natural_recycling": 0.99,
+      "harvest_p_kg_yr": 461415059.21074337,
+      "natural_downward_p_kg_yr": 87668861.2500413,
+      "direct_food_return_p_kg_yr": 456800908.61863595,
+      "food_unreturned_to_sky_p_kg_yr": 4614150.592107438,
+      "sky_export_after_immediate_returns_p_kg_yr": 92283011.84214875,
+      "upward_from_surface_p_kg_yr": 106210518.6782653,
+      "additional_return_needed_p_kg_yr": 0.0,
+      "sky_net_p_kg_yr": 13927506.836116552
+    },
+    {
+      "food_return": 0.99,
+      "natural_recycling": 0.999,
+      "harvest_p_kg_yr": 461415059.21074337,
+      "natural_downward_p_kg_yr": 8766886.12500413,
+      "direct_food_return_p_kg_yr": 456800908.61863595,
+      "food_unreturned_to_sky_p_kg_yr": 4614150.592107438,
+      "sky_export_after_immediate_returns_p_kg_yr": 13381036.717111567,
+      "upward_from_surface_p_kg_yr": 106210518.6782653,
+      "additional_return_needed_p_kg_yr": 0.0,
+      "sky_net_p_kg_yr": 92829481.96115373
+    },
+    {
+      "food_return": 0.99,
+      "natural_recycling": 0.9999,
+      "harvest_p_kg_yr": 461415059.21074337,
+      "natural_downward_p_kg_yr": 876688.6125003156,
+      "direct_food_return_p_kg_yr": 456800908.61863595,
+      "food_unreturned_to_sky_p_kg_yr": 4614150.592107438,
+      "sky_export_after_immediate_returns_p_kg_yr": 5490839.204607753,
+      "upward_from_surface_p_kg_yr": 106210518.6782653,
+      "additional_return_needed_p_kg_yr": 0.0,
+      "sky_net_p_kg_yr": 100719679.47365755
+    },
+    {
+      "food_return": 0.999,
+      "natural_recycling": 0.99,
+      "harvest_p_kg_yr": 461415059.21074337,
+      "natural_downward_p_kg_yr": 87668861.2500413,
+      "direct_food_return_p_kg_yr": 460953644.15153265,
+      "food_unreturned_to_sky_p_kg_yr": 461415.05921074376,
+      "sky_export_after_immediate_returns_p_kg_yr": 88130276.30925205,
+      "upward_from_surface_p_kg_yr": 2655262.966956632,
+      "additional_return_needed_p_kg_yr": 85475013.34229542,
+      "sky_net_p_kg_yr": -85475013.34229542
+    },
+    {
+      "food_return": 0.999,
+      "natural_recycling": 0.999,
+      "harvest_p_kg_yr": 461415059.21074337,
+      "natural_downward_p_kg_yr": 8766886.12500413,
+      "direct_food_return_p_kg_yr": 460953644.15153265,
+      "food_unreturned_to_sky_p_kg_yr": 461415.05921074376,
+      "sky_export_after_immediate_returns_p_kg_yr": 9228301.184214873,
+      "upward_from_surface_p_kg_yr": 2655262.966956632,
+      "additional_return_needed_p_kg_yr": 6573038.217258241,
+      "sky_net_p_kg_yr": -6573038.217258241
+    },
+    {
+      "food_return": 0.999,
+      "natural_recycling": 0.9999,
+      "harvest_p_kg_yr": 461415059.21074337,
+      "natural_downward_p_kg_yr": 876688.6125003156,
+      "direct_food_return_p_kg_yr": 460953644.15153265,
+      "food_unreturned_to_sky_p_kg_yr": 461415.05921074376,
+      "sky_export_after_immediate_returns_p_kg_yr": 1338103.6717110593,
+      "upward_from_surface_p_kg_yr": 2655262.966956632,
+      "additional_return_needed_p_kg_yr": 0.0,
+      "sky_net_p_kg_yr": 1317159.295245573
+    },
+    {
+      "food_return": 0.999,
+      "natural_recycling": 0.99,
+      "harvest_p_kg_yr": 461415059.21074337,
+      "natural_downward_p_kg_yr": 87668861.2500413,
+      "direct_food_return_p_kg_yr": 460953644.15153265,
+      "food_unreturned_to_sky_p_kg_yr": 461415.05921074376,
+      "sky_export_after_immediate_returns_p_kg_yr": 88130276.30925205,
+      "upward_from_surface_p_kg_yr": 106210518.6782653,
+      "additional_return_needed_p_kg_yr": 0.0,
+      "sky_net_p_kg_yr": 18080242.36901325
+    },
+    {
+      "food_return": 0.999,
+      "natural_recycling": 0.999,
+      "harvest_p_kg_yr": 461415059.21074337,
+      "natural_downward_p_kg_yr": 8766886.12500413,
+      "direct_food_return_p_kg_yr": 460953644.15153265,
+      "food_unreturned_to_sky_p_kg_yr": 461415.05921074376,
+      "sky_export_after_immediate_returns_p_kg_yr": 9228301.184214873,
+      "upward_from_surface_p_kg_yr": 106210518.6782653,
+      "additional_return_needed_p_kg_yr": 0.0,
+      "sky_net_p_kg_yr": 96982217.49405043
+    },
+    {
+      "food_return": 0.999,
+      "natural_recycling": 0.9999,
+      "harvest_p_kg_yr": 461415059.21074337,
+      "natural_downward_p_kg_yr": 876688.6125003156,
+      "direct_food_return_p_kg_yr": 460953644.15153265,
+      "food_unreturned_to_sky_p_kg_yr": 461415.05921074376,
+      "sky_export_after_immediate_returns_p_kg_yr": 1338103.6717110593,
+      "upward_from_surface_p_kg_yr": 106210518.6782653,
+      "additional_return_needed_p_kg_yr": 0.0,
+      "sky_net_p_kg_yr": 104872415.00655425
+    }
+  ],
+  "constant_target_reserve_sensitivity": [
+    {
+      "food_return": 0.0,
+      "natural_recycling": 0.99,
+      "upward_p_kg_yr": 2655262.966956632,
+      "extra_return_p_kg_yr": 546428657.493828,
+      "reserve_p_kg": 1000000000000.0,
+      "reserve_duration_years": 1830.065071232643,
+      "reserve_required_for_1e9_years_kg": 5.4642865749382803e+17
+    },
+    {
+      "food_return": 0.0,
+      "natural_recycling": 0.999,
+      "upward_p_kg_yr": 2655262.966956632,
+      "extra_return_p_kg_yr": 467526682.36879086,
+      "reserve_p_kg": 1000000000000.0,
+      "reserve_duration_years": 2138.91535544743,
+      "reserve_required_for_1e9_years_kg": 4.6752668236879085e+17
+    },
+    {
+      "food_return": 0.0,
+      "natural_recycling": 0.9999,
+      "upward_p_kg_yr": 2655262.966956632,
+      "extra_return_p_kg_yr": 459636484.85628706,
+      "reserve_p_kg": 1000000000000.0,
+      "reserve_duration_years": 2175.6323376127693,
+      "reserve_required_for_1e9_years_kg": 4.5963648485628704e+17
+    },
+    {
+      "food_return": 0.0,
+      "natural_recycling": 0.99,
+      "upward_p_kg_yr": 106210518.6782653,
+      "extra_return_p_kg_yr": 442873401.78251934,
+      "reserve_p_kg": 1000000000000.0,
+      "reserve_duration_years": 2257.981617263769,
+      "reserve_required_for_1e9_years_kg": 4.4287340178251936e+17
+    },
+    {
+      "food_return": 0.0,
+      "natural_recycling": 0.999,
+      "upward_p_kg_yr": 106210518.6782653,
+      "extra_return_p_kg_yr": 363971426.65748215,
+      "reserve_p_kg": 1000000000000.0,
+      "reserve_duration_years": 2747.4684185609353,
+      "reserve_required_for_1e9_years_kg": 3.639714266574822e+17
+    },
+    {
+      "food_return": 0.0,
+      "natural_recycling": 0.9999,
+      "upward_p_kg_yr": 106210518.6782653,
+      "extra_return_p_kg_yr": 356081229.1449784,
+      "reserve_p_kg": 1000000000000.0,
+      "reserve_duration_years": 2808.3479783565062,
+      "reserve_required_for_1e9_years_kg": 3.560812291449784e+17
+    },
+    {
+      "food_return": 0.9,
+      "natural_recycling": 0.99,
+      "upward_p_kg_yr": 2655262.966956632,
+      "extra_return_p_kg_yr": 131155104.204159,
+      "reserve_p_kg": 1000000000000.0,
+      "reserve_duration_years": 7624.560294987661,
+      "reserve_required_for_1e9_years_kg": 1.31155104204159e+17
+    },
+    {
+      "food_return": 0.9,
+      "natural_recycling": 0.999,
+      "upward_p_kg_yr": 2655262.966956632,
+      "extra_return_p_kg_yr": 52253129.07912182,
+      "reserve_p_kg": 1000000000000.0,
+      "reserve_duration_years": 19137.609892907993,
+      "reserve_required_for_1e9_years_kg": 5.225312907912182e+16
+    },
+    {
+      "food_return": 0.9,
+      "natural_recycling": 0.9999,
+      "upward_p_kg_yr": 2655262.966956632,
+      "extra_return_p_kg_yr": 44362931.56661801,
+      "reserve_p_kg": 1000000000000.0,
+      "reserve_duration_years": 22541.341716751533,
+      "reserve_required_for_1e9_years_kg": 4.436293156661801e+16
+    },
+    {
+      "food_return": 0.9,
+      "natural_recycling": 0.99,
+      "upward_p_kg_yr": 106210518.6782653,
+      "extra_return_p_kg_yr": 27599848.492850333,
+      "reserve_p_kg": 1000000000000.0,
+      "reserve_duration_years": 36232.08294998603,
+      "reserve_required_for_1e9_years_kg": 2.7599848492850332e+16
+    },
+    {
+      "food_return": 0.9,
+      "natural_recycling": 0.999,
+      "upward_p_kg_yr": 106210518.6782653,
+      "extra_return_p_kg_yr": 0.0,
+      "reserve_p_kg": 1000000000000.0,
+      "reserve_duration_years": null,
+      "reserve_required_for_1e9_years_kg": 0.0
+    },
+    {
+      "food_return": 0.9,
+      "natural_recycling": 0.9999,
+      "upward_p_kg_yr": 106210518.6782653,
+      "extra_return_p_kg_yr": 0.0,
+      "reserve_p_kg": 1000000000000.0,
+      "reserve_duration_years": null,
+      "reserve_required_for_1e9_years_kg": 0.0
+    },
+    {
+      "food_return": 0.99,
+      "natural_recycling": 0.99,
+      "upward_p_kg_yr": 2655262.966956632,
+      "extra_return_p_kg_yr": 89627748.87519212,
+      "reserve_p_kg": 1000000000000.0,
+      "reserve_duration_years": 11157.2589131131,
+      "reserve_required_for_1e9_years_kg": 8.962774887519213e+16
+    },
+    {
+      "food_return": 0.99,
+      "natural_recycling": 0.999,
+      "upward_p_kg_yr": 2655262.966956632,
+      "extra_return_p_kg_yr": 10725773.750154935,
+      "reserve_p_kg": 1000000000000.0,
+      "reserve_duration_years": 93233.36696203897,
+      "reserve_required_for_1e9_years_kg": 1.0725773750154934e+16
+    },
+    {
+      "food_return": 0.99,
+      "natural_recycling": 0.9999,
+      "upward_p_kg_yr": 2655262.966956632,
+      "extra_return_p_kg_yr": 2835576.237651121,
+      "reserve_p_kg": 1000000000000.0,
+      "reserve_duration_years": 352662.0045413981,
+      "reserve_required_for_1e9_years_kg": 2835576237651121.0
+    },
+    {
+      "food_return": 0.99,
+      "natural_recycling": 0.99,
+      "upward_p_kg_yr": 106210518.6782653,
+      "extra_return_p_kg_yr": 0.0,
+      "reserve_p_kg": 1000000000000.0,
+      "reserve_duration_years": null,
+      "reserve_required_for_1e9_years_kg": 0.0
+    },
+    {
+      "food_return": 0.99,
+      "natural_recycling": 0.999,
+      "upward_p_kg_yr": 106210518.6782653,
+      "extra_return_p_kg_yr": 0.0,
+      "reserve_p_kg": 1000000000000.0,
+      "reserve_duration_years": null,
+      "reserve_required_for_1e9_years_kg": 0.0
+    },
+    {
+      "food_return": 0.99,
+      "natural_recycling": 0.9999,
+      "upward_p_kg_yr": 106210518.6782653,
+      "extra_return_p_kg_yr": 0.0,
+      "reserve_p_kg": 1000000000000.0,
+      "reserve_duration_years": null,
+      "reserve_required_for_1e9_years_kg": 0.0
+    },
+    {
+      "food_return": 0.999,
+      "natural_recycling": 0.99,
+      "upward_p_kg_yr": 2655262.966956632,
+      "extra_return_p_kg_yr": 85475013.34229542,
+      "reserve_p_kg": 1000000000000.0,
+      "reserve_duration_years": 11699.325462464387,
+      "reserve_required_for_1e9_years_kg": 8.547501334229542e+16
+    },
+    {
+      "food_return": 0.999,
+      "natural_recycling": 0.999,
+      "upward_p_kg_yr": 2655262.966956632,
+      "extra_return_p_kg_yr": 6573038.217258241,
+      "reserve_p_kg": 1000000000000.0,
+      "reserve_duration_years": 152136.64776425445,
+      "reserve_required_for_1e9_years_kg": 6573038217258241.0
+    },
+    {
+      "food_return": 0.999,
+      "natural_recycling": 0.9999,
+      "upward_p_kg_yr": 2655262.966956632,
+      "extra_return_p_kg_yr": 0.0,
+      "reserve_p_kg": 1000000000000.0,
+      "reserve_duration_years": null,
+      "reserve_required_for_1e9_years_kg": 0.0
+    },
+    {
+      "food_return": 0.999,
+      "natural_recycling": 0.99,
+      "upward_p_kg_yr": 106210518.6782653,
+      "extra_return_p_kg_yr": 0.0,
+      "reserve_p_kg": 1000000000000.0,
+      "reserve_duration_years": null,
+      "reserve_required_for_1e9_years_kg": 0.0
+    },
+    {
+      "food_return": 0.999,
+      "natural_recycling": 0.999,
+      "upward_p_kg_yr": 106210518.6782653,
+      "extra_return_p_kg_yr": 0.0,
+      "reserve_p_kg": 1000000000000.0,
+      "reserve_duration_years": null,
+      "reserve_required_for_1e9_years_kg": 0.0
+    },
+    {
+      "food_return": 0.999,
+      "natural_recycling": 0.9999,
+      "upward_p_kg_yr": 106210518.6782653,
+      "extra_return_p_kg_yr": 0.0,
+      "reserve_p_kg": 1000000000000.0,
+      "reserve_duration_years": null,
+      "reserve_required_for_1e9_years_kg": 0.0
+    }
+  ],
+  "finite_reservoir_cases": [
+    {
+      "case": "no_sediment_return",
+      "initial_p_kg": {
+        "sky": 4152735532.8966904,
+        "land": 29899695836.85617,
+        "sea": 11627659492.110735,
+        "sediment": 0.0,
+        "human_return": 0.0,
+        "unrecoverable": 0.0
+      },
+      "upward_initial_p_kg_yr": 2655262.966956632,
+      "edges": [
+        {
+          "source": "sky",
+          "destination": "human_return",
+          "rate_per_year": 0.1111111111111111
+        },
+        {
+          "source": "sky",
+          "destination": "land",
+          "rate_per_year": 0.001520000000000001
+        },
+        {
+          "source": "sky",
+          "destination": "sea",
+          "rate_per_year": 0.0005911111111111116
+        },
+        {
+          "source": "human_return",
+          "destination": "sky",
+          "rate_per_year": 9.899999999999999
+        },
+        {
+          "source": "human_return",
+          "destination": "land",
+          "rate_per_year": 0.07200000000000005
+        },
+        {
+          "source": "human_return",
+          "destination": "sea",
+          "rate_per_year": 0.028000000000000025
+        },
+        {
+          "source": "land",
+          "destination": "sky",
+          "rate_per_year": 6.394009312469956e-05
+        },
+        {
+          "source": "land",
+          "destination": "unrecoverable",
+          "rate_per_year": 0.0
+        },
+        {
+          "source": "sea",
+          "destination": "sky",
+          "rate_per_year": 6.394009312469956e-05
+        },
+        {
+          "source": "sea",
+          "destination": "unrecoverable",
+          "rate_per_year": 0.0
+        },
+        {
+          "source": "land",
+          "destination": "sea",
+          "rate_per_year": 0.01
+        },
+        {
+          "source": "sea",
+          "destination": "sediment",
+          "rate_per_year": 0.001
+        }
+      ],
+      "states": [
+        {
+          "year": 0,
+          "p_kg": {
+            "sky": 4152735532.8966904,
+            "land": 29899695836.85617,
+            "sea": 11627659492.110735,
+            "sediment": 0.0,
+            "human_return": 0.0,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 1.0,
+          "total_relative_error": 0.0
+        },
+        {
+          "year": 100,
+          "p_kg": {
+            "sky": 3208637913.938156,
+            "land": 11450186044.8843,
+            "sea": 28797507233.4916,
+            "sediment": 2188099600.1683645,
+            "human_return": 35660069.3800337,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 0.7726564546478619,
+          "total_relative_error": -2.4885672591892764e-14
+        },
+        {
+          "year": 1000,
+          "p_kg": {
+            "sky": 631625346.8042206,
+            "land": 171031172.0113448,
+            "sea": 18344165968.383305,
+            "sediment": 26526249379.39538,
+            "human_return": 7018995.260789281,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 0.15209862072859667,
+          "total_relative_error": -1.8722710721819993e-13
+        },
+        {
+          "year": 10000,
+          "p_kg": {
+            "sky": 89902.60462826607,
+            "land": 22923.592557843047,
+            "sea": 3135940.767806767,
+            "sediment": 45676841095.88727,
+            "human_return": 999.0142315124596,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 2.1649007965011343e-05,
+          "total_relative_error": 6.346681600616947e-14
+        },
+        {
+          "year": 1000000.0,
+          "p_kg": {
+            "sky": 0.0,
+            "land": 0.0,
+            "sea": 0.0,
+            "sediment": 45680090861.86832,
+            "human_return": 0.0,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 0.0,
+          "total_relative_error": 1.033841029153129e-13
+        },
+        {
+          "year": 1000000000.0,
+          "p_kg": {
+            "sky": 0.0,
+            "land": 0.0,
+            "sea": 0.0,
+            "sediment": 45680090861.85725,
+            "human_return": 0.0,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 0.0,
+          "total_relative_error": -1.3895892346613947e-13
+        }
+      ]
+    },
+    {
+      "case": "no_sediment_return",
+      "initial_p_kg": {
+        "sky": 41527355328.9669,
+        "land": 298996958368.5617,
+        "sea": 116276594921.10735,
+        "sediment": 0.0,
+        "human_return": 0.0,
+        "unrecoverable": 0.0
+      },
+      "upward_initial_p_kg_yr": 2655262.966956632,
+      "edges": [
+        {
+          "source": "sky",
+          "destination": "human_return",
+          "rate_per_year": 0.011111111111111112
+        },
+        {
+          "source": "sky",
+          "destination": "land",
+          "rate_per_year": 0.00015200000000000012
+        },
+        {
+          "source": "sky",
+          "destination": "sea",
+          "rate_per_year": 5.911111111111116e-05
+        },
+        {
+          "source": "human_return",
+          "destination": "sky",
+          "rate_per_year": 9.899999999999999
+        },
+        {
+          "source": "human_return",
+          "destination": "land",
+          "rate_per_year": 0.07200000000000005
+        },
+        {
+          "source": "human_return",
+          "destination": "sea",
+          "rate_per_year": 0.028000000000000025
+        },
+        {
+          "source": "land",
+          "destination": "sky",
+          "rate_per_year": 6.394009312469955e-06
+        },
+        {
+          "source": "land",
+          "destination": "unrecoverable",
+          "rate_per_year": 0.0
+        },
+        {
+          "source": "sea",
+          "destination": "sky",
+          "rate_per_year": 6.394009312469955e-06
+        },
+        {
+          "source": "sea",
+          "destination": "unrecoverable",
+          "rate_per_year": 0.0
+        },
+        {
+          "source": "land",
+          "destination": "sea",
+          "rate_per_year": 0.01
+        },
+        {
+          "source": "sea",
+          "destination": "sediment",
+          "rate_per_year": 0.001
+        }
+      ],
+      "states": [
+        {
+          "year": 0,
+          "p_kg": {
+            "sky": 41527355328.9669,
+            "land": 298996958368.5617,
+            "sea": 116276594921.10735,
+            "sediment": 0.0,
+            "human_return": 0.0,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 1.0,
+          "total_relative_error": 0.0
+        },
+        {
+          "year": 100,
+          "p_kg": {
+            "sky": 40423167746.0085,
+            "land": 110523526755.3488,
+            "sea": 284107130385.78235,
+            "sediment": 21702167935.04305,
+            "human_return": 44915796.45047065,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 0.973410597082059,
+          "total_relative_error": -6.146260076386937e-15
+        },
+        {
+          "year": 1000,
+          "p_kg": {
+            "sky": 31580211487.76311,
+            "land": 767079166.2509007,
+            "sea": 170895531456.16745,
+            "sediment": 253522996377.00006,
+            "human_return": 35090131.480494924,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 0.7604676781748901,
+          "total_relative_error": 5.691971288132251e-14
+        },
+        {
+          "year": 10000,
+          "p_kg": {
+            "sky": 1876012686.9476392,
+            "land": 44926555.46408133,
+            "sea": 916991154.44481,
+            "sediment": 453960893696.87366,
+            "human_return": 2084524.9526114163,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 0.04517534699925977,
+          "total_relative_error": 1.0248220605627784e-13
+        },
+        {
+          "year": 1000000.0,
+          "p_kg": {
+            "sky": 1.8527176922193769e-128,
+            "land": 4.4368985443807076e-130,
+            "sea": 8.881951667630313e-129,
+            "sediment": 456800908618.53357,
+            "human_return": 2.058640812840246e-131,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 4.461439158700858e-139,
+          "total_relative_error": -2.2420487843863654e-13
+        },
+        {
+          "year": 1000000000.0,
+          "p_kg": {
+            "sky": 0.0,
+            "land": 0.0,
+            "sea": 0.0,
+            "sediment": 456800908618.67773,
+            "human_return": 0.0,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 0.0,
+          "total_relative_error": 9.139221504888402e-14
+        }
+      ]
+    },
+    {
+      "case": "no_sediment_return",
+      "initial_p_kg": {
+        "sky": 4152735532.8966904,
+        "land": 29899695836.85617,
+        "sea": 11627659492.110735,
+        "sediment": 0.0,
+        "human_return": 0.0,
+        "unrecoverable": 0.0
+      },
+      "upward_initial_p_kg_yr": 106210518.6782653,
+      "edges": [
+        {
+          "source": "sky",
+          "destination": "human_return",
+          "rate_per_year": 0.1111111111111111
+        },
+        {
+          "source": "sky",
+          "destination": "land",
+          "rate_per_year": 0.001520000000000001
+        },
+        {
+          "source": "sky",
+          "destination": "sea",
+          "rate_per_year": 0.0005911111111111116
+        },
+        {
+          "source": "human_return",
+          "destination": "sky",
+          "rate_per_year": 9.899999999999999
+        },
+        {
+          "source": "human_return",
+          "destination": "land",
+          "rate_per_year": 0.07200000000000005
+        },
+        {
+          "source": "human_return",
+          "destination": "sea",
+          "rate_per_year": 0.028000000000000025
+        },
+        {
+          "source": "land",
+          "destination": "sky",
+          "rate_per_year": 0.0025576037249879827
+        },
+        {
+          "source": "land",
+          "destination": "unrecoverable",
+          "rate_per_year": 0.0
+        },
+        {
+          "source": "sea",
+          "destination": "sky",
+          "rate_per_year": 0.0025576037249879827
+        },
+        {
+          "source": "sea",
+          "destination": "unrecoverable",
+          "rate_per_year": 0.0
+        },
+        {
+          "source": "land",
+          "destination": "sea",
+          "rate_per_year": 0.01
+        },
+        {
+          "source": "sea",
+          "destination": "sediment",
+          "rate_per_year": 0.001
+        }
+      ],
+      "states": [
+        {
+          "year": 0,
+          "p_kg": {
+            "sky": 4152735532.8966904,
+            "land": 29899695836.85617,
+            "sea": 11627659492.110735,
+            "sediment": 0.0,
+            "human_return": 0.0,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 1.0,
+          "total_relative_error": 0.0
+        },
+        {
+          "year": 100,
+          "p_kg": {
+            "sky": 10917045488.233322,
+            "land": 9647706921.707472,
+            "sea": 23068060358.295403,
+            "sediment": 1926030923.9917011,
+            "human_return": 121247169.63608238,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 2.628880505814024,
+          "total_relative_error": 8.517914779775376e-15
+        },
+        {
+          "year": 1000,
+          "p_kg": {
+            "sky": 13618931130.447886,
+            "land": 2599460461.4383287,
+            "sea": 12325320997.756842,
+            "sediment": 16985050537.961624,
+            "human_return": 151327734.25894743,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 3.279508416214544,
+          "total_relative_error": 8.350896842917036e-16
+        },
+        {
+          "year": 10000,
+          "p_kg": {
+            "sky": 290042127.14561486,
+            "land": 55476163.035299234,
+            "sea": 260873321.02834663,
+            "sediment": 45070476422.43363,
+            "human_return": 3222828.216641869,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 0.06984363074604452,
+          "total_relative_error": -8.885354240863726e-14
+        },
+        {
+          "year": 1000000.0,
+          "p_kg": {
+            "sky": 2.9688255814509745e-176,
+            "land": 5.678452768251168e-177,
+            "sea": 2.6702582711308922e-176,
+            "sediment": 45680090861.8582,
+            "human_return": 3.298836258149773e-178,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 7.1490841589425904e-186,
+          "total_relative_error": -1.1808168135884688e-13
+        },
+        {
+          "year": 1000000000.0,
+          "p_kg": {
+            "sky": 0.0,
+            "land": 0.0,
+            "sea": 0.0,
+            "sediment": 45680090861.85564,
+            "human_return": 0.0,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 0.0,
+          "total_relative_error": -1.7419970814324935e-13
+        }
+      ]
+    },
+    {
+      "case": "no_sediment_return",
+      "initial_p_kg": {
+        "sky": 41527355328.9669,
+        "land": 298996958368.5617,
+        "sea": 116276594921.10735,
+        "sediment": 0.0,
+        "human_return": 0.0,
+        "unrecoverable": 0.0
+      },
+      "upward_initial_p_kg_yr": 106210518.6782653,
+      "edges": [
+        {
+          "source": "sky",
+          "destination": "human_return",
+          "rate_per_year": 0.011111111111111112
+        },
+        {
+          "source": "sky",
+          "destination": "land",
+          "rate_per_year": 0.00015200000000000012
+        },
+        {
+          "source": "sky",
+          "destination": "sea",
+          "rate_per_year": 5.911111111111116e-05
+        },
+        {
+          "source": "human_return",
+          "destination": "sky",
+          "rate_per_year": 9.899999999999999
+        },
+        {
+          "source": "human_return",
+          "destination": "land",
+          "rate_per_year": 0.07200000000000005
+        },
+        {
+          "source": "human_return",
+          "destination": "sea",
+          "rate_per_year": 0.028000000000000025
+        },
+        {
+          "source": "land",
+          "destination": "sky",
+          "rate_per_year": 0.00025576037249879825
+        },
+        {
+          "source": "land",
+          "destination": "unrecoverable",
+          "rate_per_year": 0.0
+        },
+        {
+          "source": "sea",
+          "destination": "sky",
+          "rate_per_year": 0.00025576037249879825
+        },
+        {
+          "source": "sea",
+          "destination": "unrecoverable",
+          "rate_per_year": 0.0
+        },
+        {
+          "source": "land",
+          "destination": "sea",
+          "rate_per_year": 0.01
+        },
+        {
+          "source": "sea",
+          "destination": "sediment",
+          "rate_per_year": 0.001
+        }
+      ],
+      "states": [
+        {
+          "year": 0,
+          "p_kg": {
+            "sky": 41527355328.9669,
+            "land": 298996958368.5617,
+            "sea": 116276594921.10735,
+            "sediment": 0.0,
+            "human_return": 0.0,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 1.0,
+          "total_relative_error": 0.0
+        },
+        {
+          "year": 100,
+          "p_kg": {
+            "sky": 50257457610.013,
+            "land": 107894627080.60463,
+            "sea": 277190454371.65643,
+            "sediment": 21402537071.994713,
+            "human_return": 55832484.36395229,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 1.2102253372960767,
+          "total_relative_error": -7.215174872280318e-15
+        },
+        {
+          "year": 1000,
+          "p_kg": {
+            "sky": 85170910895.5018,
+            "land": 1907110621.1073394,
+            "sea": 140415982846.03735,
+            "sediment": 229212270905.1277,
+            "human_return": 94633350.89433774,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 2.050959186319574,
+          "total_relative_error": 7.121644827639647e-14
+        },
+        {
+          "year": 10000,
+          "p_kg": {
+            "sky": 13385218250.636261,
+            "land": 309907944.0224323,
+            "sea": 4221410029.309605,
+            "sediment": 438869499579.6172,
+            "human_return": 14872814.79977131,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 0.3223229156926245,
+          "total_relative_error": -5.488877476912509e-13
+        },
+        {
+          "year": 1000000.0,
+          "p_kg": {
+            "sky": 8.302980757920018e-92,
+            "land": 1.922391681993748e-93,
+            "sea": 2.6181844670461008e-92,
+            "sediment": 456800908618.5024,
+            "human_return": 9.225751342796257e-95,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 1.9994003211007214e-102,
+          "total_relative_error": -2.924818110263262e-13
+        },
+        {
+          "year": 1000000000.0,
+          "p_kg": {
+            "sky": 0.0,
+            "land": 0.0,
+            "sea": 0.0,
+            "sediment": 456800908618.6306,
+            "human_return": 0.0,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 0.0,
+          "total_relative_error": -1.1758062754827184e-14
+        }
+      ]
+    },
+    {
+      "case": "sediment_return_no_irreversible_loss",
+      "initial_p_kg": {
+        "sky": 4152735532.8966904,
+        "land": 29899695836.85617,
+        "sea": 11627659492.110735,
+        "sediment": 0.0,
+        "human_return": 0.0,
+        "unrecoverable": 0.0
+      },
+      "upward_initial_p_kg_yr": 2655262.966956632,
+      "edges": [
+        {
+          "source": "sky",
+          "destination": "human_return",
+          "rate_per_year": 0.1111111111111111
+        },
+        {
+          "source": "sky",
+          "destination": "land",
+          "rate_per_year": 0.001520000000000001
+        },
+        {
+          "source": "sky",
+          "destination": "sea",
+          "rate_per_year": 0.0005911111111111116
+        },
+        {
+          "source": "human_return",
+          "destination": "sky",
+          "rate_per_year": 9.899999999999999
+        },
+        {
+          "source": "human_return",
+          "destination": "land",
+          "rate_per_year": 0.07200000000000005
+        },
+        {
+          "source": "human_return",
+          "destination": "sea",
+          "rate_per_year": 0.028000000000000025
+        },
+        {
+          "source": "land",
+          "destination": "sky",
+          "rate_per_year": 6.394009312469956e-05
+        },
+        {
+          "source": "land",
+          "destination": "unrecoverable",
+          "rate_per_year": 0.0
+        },
+        {
+          "source": "sea",
+          "destination": "sky",
+          "rate_per_year": 6.394009312469956e-05
+        },
+        {
+          "source": "sea",
+          "destination": "unrecoverable",
+          "rate_per_year": 0.0
+        },
+        {
+          "source": "land",
+          "destination": "sea",
+          "rate_per_year": 0.01
+        },
+        {
+          "source": "sea",
+          "destination": "sediment",
+          "rate_per_year": 0.001
+        },
+        {
+          "source": "sediment",
+          "destination": "sky",
+          "rate_per_year": 0.0001
+        },
+        {
+          "source": "sediment",
+          "destination": "unrecoverable",
+          "rate_per_year": 0.0
+        }
+      ],
+      "states": [
+        {
+          "year": 0,
+          "p_kg": {
+            "sky": 4152735532.8966904,
+            "land": 29899695836.85617,
+            "sea": 11627659492.110735,
+            "sediment": 0.0,
+            "human_return": 0.0,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 1.0,
+          "total_relative_error": 0.0
+        },
+        {
+          "year": 100,
+          "p_kg": {
+            "sky": 3217191566.226042,
+            "land": 11450681966.175232,
+            "sea": 28797863223.152027,
+            "sediment": 2178599205.3066473,
+            "human_return": 35754901.0042207,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 0.7747162179581247,
+          "total_relative_error": 1.2526345264375552e-14
+        },
+        {
+          "year": 1000,
+          "p_kg": {
+            "sky": 1220581478.4621048,
+            "land": 290769433.46165836,
+            "sea": 18854807583.96598,
+            "sediment": 25300370152.947685,
+            "human_return": 13562213.035259767,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 0.29392227576088936,
+          "total_relative_error": 1.9925239867200046e-13
+        },
+        {
+          "year": 10000,
+          "p_kg": {
+            "sky": 1327761684.0702028,
+            "land": 306083311.9885579,
+            "sea": 4003488778.3350883,
+            "sediment": 40028004179.982925,
+            "human_return": 14752907.587970005,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 0.3197318185933306,
+          "total_relative_error": 2.2141567889310226e-12
+        },
+        {
+          "year": 1000000.0,
+          "p_kg": {
+            "sky": 1327771964.9627767,
+            "land": 306085979.2695076,
+            "sea": 4002861808.7137294,
+            "sediment": 40028618087.13944,
+            "human_return": 14753021.832919745,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 0.31973429428495426,
+          "total_relative_error": 1.1991887866428864e-12
+        },
+        {
+          "year": 1000000000.0,
+          "p_kg": {
+            "sky": 1327771884.848503,
+            "land": 306085960.80107665,
+            "sea": 4002861567.1921525,
+            "sediment": 40028615671.916504,
+            "human_return": 14753020.942761153,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 0.3197342749930266,
+          "total_relative_error": -6.033618887408695e-08
+        }
+      ]
+    },
+    {
+      "case": "sediment_return_no_irreversible_loss",
+      "initial_p_kg": {
+        "sky": 41527355328.9669,
+        "land": 298996958368.5617,
+        "sea": 116276594921.10735,
+        "sediment": 0.0,
+        "human_return": 0.0,
+        "unrecoverable": 0.0
+      },
+      "upward_initial_p_kg_yr": 2655262.966956632,
+      "edges": [
+        {
+          "source": "sky",
+          "destination": "human_return",
+          "rate_per_year": 0.011111111111111112
+        },
+        {
+          "source": "sky",
+          "destination": "land",
+          "rate_per_year": 0.00015200000000000012
+        },
+        {
+          "source": "sky",
+          "destination": "sea",
+          "rate_per_year": 5.911111111111116e-05
+        },
+        {
+          "source": "human_return",
+          "destination": "sky",
+          "rate_per_year": 9.899999999999999
+        },
+        {
+          "source": "human_return",
+          "destination": "land",
+          "rate_per_year": 0.07200000000000005
+        },
+        {
+          "source": "human_return",
+          "destination": "sea",
+          "rate_per_year": 0.028000000000000025
+        },
+        {
+          "source": "land",
+          "destination": "sky",
+          "rate_per_year": 6.394009312469955e-06
+        },
+        {
+          "source": "land",
+          "destination": "unrecoverable",
+          "rate_per_year": 0.0
+        },
+        {
+          "source": "sea",
+          "destination": "sky",
+          "rate_per_year": 6.394009312469955e-06
+        },
+        {
+          "source": "sea",
+          "destination": "unrecoverable",
+          "rate_per_year": 0.0
+        },
+        {
+          "source": "land",
+          "destination": "sea",
+          "rate_per_year": 0.01
+        },
+        {
+          "source": "sea",
+          "destination": "sediment",
+          "rate_per_year": 0.001
+        },
+        {
+          "source": "sediment",
+          "destination": "sky",
+          "rate_per_year": 0.0001
+        },
+        {
+          "source": "sediment",
+          "destination": "unrecoverable",
+          "rate_per_year": 0.0
+        }
+      ],
+      "states": [
+        {
+          "year": 0,
+          "p_kg": {
+            "sky": 41527355328.9669,
+            "land": 298996958368.5617,
+            "sea": 116276594921.10735,
+            "sediment": 0.0,
+            "human_return": 0.0,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 1.0,
+          "total_relative_error": 0.0
+        },
+        {
+          "year": 100,
+          "p_kg": {
+            "sky": 40516658856.546616,
+            "land": 110524061014.8568,
+            "sea": 284107511911.55615,
+            "sediment": 21607657396.38369,
+            "human_return": 45019439.2886924,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 0.9756619109400572,
+          "total_relative_error": -8.818547066120389e-15
+        },
+        {
+          "year": 1000,
+          "p_kg": {
+            "sky": 43410802843.089386,
+            "land": 996921187.0400124,
+            "sea": 171776341420.6247,
+            "sediment": 240568610182.5465,
+            "human_return": 48232985.34142369,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 1.0453543814481416,
+          "total_relative_error": 1.3227820599180582e-14
+        },
+        {
+          "year": 10000,
+          "p_kg": {
+            "sky": 99329437410.43208,
+            "land": 2301582104.2000785,
+            "sea": 31445965828.538345,
+            "sediment": 323613557297.1737,
+            "human_return": 110365978.19096117,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 2.391903761353809,
+          "total_relative_error": -2.205972910024964e-13
+        },
+        {
+          "year": 1000000.0,
+          "p_kg": {
+            "sky": 100515071052.8562,
+            "land": 2330459550.4195166,
+            "sea": 32167608592.52212,
+            "sediment": 321676085925.3224,
+            "human_return": 111683412.2809513,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 2.420454427126572,
+          "total_relative_error": -1.865907020715949e-10
+        },
+        {
+          "year": 1000000000.0,
+          "p_kg": {
+            "sky": 100515057018.2529,
+            "land": 2330459225.024835,
+            "sea": 32167604101.044388,
+            "sediment": 321676041010.03595,
+            "human_return": 111683396.68694778,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 2.4204540891661317,
+          "total_relative_error": -1.3981493849370427e-07
+        }
+      ]
+    },
+    {
+      "case": "sediment_return_no_irreversible_loss",
+      "initial_p_kg": {
+        "sky": 4152735532.8966904,
+        "land": 29899695836.85617,
+        "sea": 11627659492.110735,
+        "sediment": 0.0,
+        "human_return": 0.0,
+        "unrecoverable": 0.0
+      },
+      "upward_initial_p_kg_yr": 106210518.6782653,
+      "edges": [
+        {
+          "source": "sky",
+          "destination": "human_return",
+          "rate_per_year": 0.1111111111111111
+        },
+        {
+          "source": "sky",
+          "destination": "land",
+          "rate_per_year": 0.001520000000000001
+        },
+        {
+          "source": "sky",
+          "destination": "sea",
+          "rate_per_year": 0.0005911111111111116
+        },
+        {
+          "source": "human_return",
+          "destination": "sky",
+          "rate_per_year": 9.899999999999999
+        },
+        {
+          "source": "human_return",
+          "destination": "land",
+          "rate_per_year": 0.07200000000000005
+        },
+        {
+          "source": "human_return",
+          "destination": "sea",
+          "rate_per_year": 0.028000000000000025
+        },
+        {
+          "source": "land",
+          "destination": "sky",
+          "rate_per_year": 0.0025576037249879827
+        },
+        {
+          "source": "land",
+          "destination": "unrecoverable",
+          "rate_per_year": 0.0
+        },
+        {
+          "source": "sea",
+          "destination": "sky",
+          "rate_per_year": 0.0025576037249879827
+        },
+        {
+          "source": "sea",
+          "destination": "unrecoverable",
+          "rate_per_year": 0.0
+        },
+        {
+          "source": "land",
+          "destination": "sea",
+          "rate_per_year": 0.01
+        },
+        {
+          "source": "sea",
+          "destination": "sediment",
+          "rate_per_year": 0.001
+        },
+        {
+          "source": "sediment",
+          "destination": "sky",
+          "rate_per_year": 0.0001
+        },
+        {
+          "source": "sediment",
+          "destination": "unrecoverable",
+          "rate_per_year": 0.0
+        }
+      ],
+      "states": [
+        {
+          "year": 0,
+          "p_kg": {
+            "sky": 4152735532.8966904,
+            "land": 29899695836.85617,
+            "sea": 11627659492.110735,
+            "sediment": 0.0,
+            "human_return": 0.0,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 1.0,
+          "total_relative_error": 0.0
+        },
+        {
+          "year": 100,
+          "p_kg": {
+            "sky": 10924895537.2039,
+            "land": 9648146869.166817,
+            "sea": 23068372427.0726,
+            "sediment": 1917341820.856106,
+            "human_return": 121334207.56465213,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 2.630770837839358,
+          "total_relative_error": 1.0522130022075465e-14
+        },
+        {
+          "year": 1000,
+          "p_kg": {
+            "sky": 14134316897.907303,
+            "land": 2683847296.02579,
+            "sea": 12558088064.69411,
+            "sediment": 16146785201.338814,
+            "human_return": 157053401.9004581,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 3.4036159504836276,
+          "total_relative_error": 6.313278013245278e-14
+        },
+        {
+          "year": 10000,
+          "p_kg": {
+            "sky": 4785009616.386272,
+            "land": 884641688.5038989,
+            "sea": 3710711706.6638813,
+            "sediment": 36246561032.13192,
+            "human_return": 53166818.15483165,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 1.1522548398473493,
+          "total_relative_error": -4.988825773958637e-13
+        },
+        {
+          "year": 1000000.0,
+          "p_kg": {
+            "sky": 4710320734.062626,
+            "land": 870225270.8675764,
+            "sea": 3640655269.6604185,
+            "sediment": 36406552696.61129,
+            "human_return": 52336897.04514032,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 1.1342693741869467,
+          "total_relative_error": 1.3974273864381565e-10
+        },
+        {
+          "year": 1000000000.0,
+          "p_kg": {
+            "sky": 4710321648.542639,
+            "land": 870225439.8164744,
+            "sea": 3640655976.470763,
+            "sediment": 36406559764.7323,
+            "human_return": 52336907.20602933,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 1.1342695943984207,
+          "total_relative_error": 1.9428386524333423e-07
+        }
+      ]
+    },
+    {
+      "case": "sediment_return_no_irreversible_loss",
+      "initial_p_kg": {
+        "sky": 41527355328.9669,
+        "land": 298996958368.5617,
+        "sea": 116276594921.10735,
+        "sediment": 0.0,
+        "human_return": 0.0,
+        "unrecoverable": 0.0
+      },
+      "upward_initial_p_kg_yr": 106210518.6782653,
+      "edges": [
+        {
+          "source": "sky",
+          "destination": "human_return",
+          "rate_per_year": 0.011111111111111112
+        },
+        {
+          "source": "sky",
+          "destination": "land",
+          "rate_per_year": 0.00015200000000000012
+        },
+        {
+          "source": "sky",
+          "destination": "sea",
+          "rate_per_year": 5.911111111111116e-05
+        },
+        {
+          "source": "human_return",
+          "destination": "sky",
+          "rate_per_year": 9.899999999999999
+        },
+        {
+          "source": "human_return",
+          "destination": "land",
+          "rate_per_year": 0.07200000000000005
+        },
+        {
+          "source": "human_return",
+          "destination": "sea",
+          "rate_per_year": 0.028000000000000025
+        },
+        {
+          "source": "land",
+          "destination": "sky",
+          "rate_per_year": 0.00025576037249879825
+        },
+        {
+          "source": "land",
+          "destination": "unrecoverable",
+          "rate_per_year": 0.0
+        },
+        {
+          "source": "sea",
+          "destination": "sky",
+          "rate_per_year": 0.00025576037249879825
+        },
+        {
+          "source": "sea",
+          "destination": "unrecoverable",
+          "rate_per_year": 0.0
+        },
+        {
+          "source": "land",
+          "destination": "sea",
+          "rate_per_year": 0.01
+        },
+        {
+          "source": "sea",
+          "destination": "sediment",
+          "rate_per_year": 0.001
+        },
+        {
+          "source": "sediment",
+          "destination": "sky",
+          "rate_per_year": 0.0001
+        },
+        {
+          "source": "sediment",
+          "destination": "unrecoverable",
+          "rate_per_year": 0.0
+        }
+      ],
+      "states": [
+        {
+          "year": 0,
+          "p_kg": {
+            "sky": 41527355328.9669,
+            "land": 298996958368.5617,
+            "sea": 116276594921.10735,
+            "sediment": 0.0,
+            "human_return": 0.0,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 1.0,
+          "total_relative_error": 0.0
+        },
+        {
+          "year": 100,
+          "p_kg": {
+            "sky": 50350059938.5684,
+            "land": 107895154635.41092,
+            "sea": 277190830696.67615,
+            "sediment": 21308928205.056496,
+            "human_return": 55935142.91796947,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 1.2124552488284108,
+          "total_relative_error": -1.3227820599180582e-14
+        },
+        {
+          "year": 1000,
+          "p_kg": {
+            "sky": 96198876895.50491,
+            "land": 2117837649.1812854,
+            "sea": 141196502738.33582,
+            "sediment": 217180806733.24228,
+            "human_return": 106884602.31169212,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 2.3165182596735834,
+          "total_relative_error": -1.3134290554539912e-13
+        },
+        {
+          "year": 10000,
+          "p_kg": {
+            "sky": 120170345017.72676,
+            "land": 2718276394.688199,
+            "sea": 30262353603.101906,
+            "sediment": 303516411005.2236,
+            "human_return": 133522598.3358741,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 2.8937634979587394,
+          "total_relative_error": 9.640275315463424e-13
+        },
+        {
+          "year": 1000000.0,
+          "p_kg": {
+            "sky": 120350097797.4034,
+            "land": 2722491719.27516,
+            "sea": 30326781521.95544,
+            "sediment": 303267815219.62225,
+            "human_return": 133722330.8860038,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 2.8980920370205863,
+          "total_relative_error": -6.456592764504683e-11
+        },
+        {
+          "year": 1000000000.0,
+          "p_kg": {
+            "sky": 120350067695.92566,
+            "land": 2722491038.336542,
+            "sea": 30326773936.740288,
+            "sediment": 303267739367.12164,
+            "human_return": 133722297.4399176,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 2.898091312161575,
+          "total_relative_error": -2.5018135853758607e-07
+        }
+      ]
+    },
+    {
+      "case": "sediment_return_0.1percent_loss_per_processed_pass",
+      "initial_p_kg": {
+        "sky": 4152735532.8966904,
+        "land": 29899695836.85617,
+        "sea": 11627659492.110735,
+        "sediment": 0.0,
+        "human_return": 0.0,
+        "unrecoverable": 0.0
+      },
+      "upward_initial_p_kg_yr": 2655262.966956632,
+      "edges": [
+        {
+          "source": "sky",
+          "destination": "human_return",
+          "rate_per_year": 0.1111111111111111
+        },
+        {
+          "source": "sky",
+          "destination": "land",
+          "rate_per_year": 0.001520000000000001
+        },
+        {
+          "source": "sky",
+          "destination": "sea",
+          "rate_per_year": 0.0005911111111111116
+        },
+        {
+          "source": "human_return",
+          "destination": "sky",
+          "rate_per_year": 9.899999999999999
+        },
+        {
+          "source": "human_return",
+          "destination": "land",
+          "rate_per_year": 0.07200000000000005
+        },
+        {
+          "source": "human_return",
+          "destination": "sea",
+          "rate_per_year": 0.028000000000000025
+        },
+        {
+          "source": "land",
+          "destination": "sky",
+          "rate_per_year": 6.387615303157486e-05
+        },
+        {
+          "source": "land",
+          "destination": "unrecoverable",
+          "rate_per_year": 6.394009312469956e-08
+        },
+        {
+          "source": "sea",
+          "destination": "sky",
+          "rate_per_year": 6.387615303157486e-05
+        },
+        {
+          "source": "sea",
+          "destination": "unrecoverable",
+          "rate_per_year": 6.394009312469956e-08
+        },
+        {
+          "source": "land",
+          "destination": "sea",
+          "rate_per_year": 0.01
+        },
+        {
+          "source": "sea",
+          "destination": "sediment",
+          "rate_per_year": 0.001
+        },
+        {
+          "source": "sediment",
+          "destination": "sky",
+          "rate_per_year": 9.99e-05
+        },
+        {
+          "source": "sediment",
+          "destination": "unrecoverable",
+          "rate_per_year": 1e-07
+        }
+      ],
+      "states": [
+        {
+          "year": 0,
+          "p_kg": {
+            "sky": 4152735532.8966904,
+            "land": 29899695836.85617,
+            "sea": 11627659492.110735,
+            "sediment": 0.0,
+            "human_return": 0.0,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 1.0,
+          "total_relative_error": 0.0
+        },
+        {
+          "year": 100,
+          "p_kg": {
+            "sky": 3216960806.3757153,
+            "land": 11450661608.116283,
+            "sea": 28797845465.453133,
+            "sediment": 2178598652.5567846,
+            "human_return": 35752339.25973357,
+            "unrecoverable": 271990.1010997337
+          },
+          "sky_relative_to_initial": 0.7746606498034714,
+          "total_relative_error": -1.8538990991275818e-14
+        },
+        {
+          "year": 1000,
+          "p_kg": {
+            "sky": 1219500786.980185,
+            "land": 290531567.98272365,
+            "sea": 18853391505.644176,
+            "sediment": 25299827410.88275,
+            "human_return": 13550205.826791948,
+            "unrecoverable": 3289384.544175758
+          },
+          "sky_relative_to_initial": 0.2936620397132627,
+          "total_relative_error": -6.11285648901527e-14
+        },
+        {
+          "year": 10000,
+          "p_kg": {
+            "sky": 1325350766.7363048,
+            "land": 305530377.5051766,
+            "sea": 3996599434.6352882,
+            "sediment": 39996569927.50766,
+            "human_return": 14726119.75553092,
+            "unrecoverable": 41314235.592822745
+          },
+          "sky_relative_to_initial": 0.319151257342849,
+          "total_relative_error": -2.8636895453731095e-12
+        },
+        {
+          "year": 1000000.0,
+          "p_kg": {
+            "sky": 1207988447.7327855,
+            "land": 278475355.1053952,
+            "sea": 3642092950.594844,
+            "sediment": 36455075160.483,
+            "human_return": 13422093.989415687,
+            "unrecoverable": 4083036861.5252433
+          },
+          "sky_relative_to_initial": 0.29088980941923065,
+          "total_relative_error": 1.656540683859555e-10
+        },
+        {
+          "year": 1000000000.0,
+          "p_kg": {
+            "sky": 2.783160783304412e-32,
+            "land": 6.41596936544157e-33,
+            "sea": 8.391247688068227e-32,
+            "sediment": 8.399114720797818e-31,
+            "human_return": 3.0924008993032173e-34,
+            "unrecoverable": 45680090783.79826
+          },
+          "sky_relative_to_initial": 6.701993809278416e-42,
+          "total_relative_error": -1.7089574261452397e-09
+        }
+      ]
+    },
+    {
+      "case": "sediment_return_0.1percent_loss_per_processed_pass",
+      "initial_p_kg": {
+        "sky": 41527355328.9669,
+        "land": 298996958368.5617,
+        "sea": 116276594921.10735,
+        "sediment": 0.0,
+        "human_return": 0.0,
+        "unrecoverable": 0.0
+      },
+      "upward_initial_p_kg_yr": 2655262.966956632,
+      "edges": [
+        {
+          "source": "sky",
+          "destination": "human_return",
+          "rate_per_year": 0.011111111111111112
+        },
+        {
+          "source": "sky",
+          "destination": "land",
+          "rate_per_year": 0.00015200000000000012
+        },
+        {
+          "source": "sky",
+          "destination": "sea",
+          "rate_per_year": 5.911111111111116e-05
+        },
+        {
+          "source": "human_return",
+          "destination": "sky",
+          "rate_per_year": 9.899999999999999
+        },
+        {
+          "source": "human_return",
+          "destination": "land",
+          "rate_per_year": 0.07200000000000005
+        },
+        {
+          "source": "human_return",
+          "destination": "sea",
+          "rate_per_year": 0.028000000000000025
+        },
+        {
+          "source": "land",
+          "destination": "sky",
+          "rate_per_year": 6.387615303157485e-06
+        },
+        {
+          "source": "land",
+          "destination": "unrecoverable",
+          "rate_per_year": 6.394009312469955e-09
+        },
+        {
+          "source": "sea",
+          "destination": "sky",
+          "rate_per_year": 6.387615303157485e-06
+        },
+        {
+          "source": "sea",
+          "destination": "unrecoverable",
+          "rate_per_year": 6.394009312469955e-09
+        },
+        {
+          "source": "land",
+          "destination": "sea",
+          "rate_per_year": 0.01
+        },
+        {
+          "source": "sea",
+          "destination": "sediment",
+          "rate_per_year": 0.001
+        },
+        {
+          "source": "sediment",
+          "destination": "sky",
+          "rate_per_year": 9.99e-05
+        },
+        {
+          "source": "sediment",
+          "destination": "unrecoverable",
+          "rate_per_year": 1e-07
+        }
+      ],
+      "states": [
+        {
+          "year": 0,
+          "p_kg": {
+            "sky": 41527355328.9669,
+            "land": 298996958368.5617,
+            "sea": 116276594921.10735,
+            "sediment": 0.0,
+            "human_return": 0.0,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 1.0,
+          "total_relative_error": 0.0
+        },
+        {
+          "year": 100,
+          "p_kg": {
+            "sky": 40516310013.122635,
+            "land": 110524058276.71118,
+            "sea": 284107509624.27545,
+            "sediment": 21607657329.30509,
+            "human_return": 45019052.19201718,
+            "unrecoverable": 354323.0351004831
+          },
+          "sky_relative_to_initial": 0.9756535106116179,
+          "total_relative_error": 1.2025291453800529e-14
+        },
+        {
+          "year": 1000,
+          "p_kg": {
+            "sky": 43397449653.84347,
+            "land": 996657834.7224085,
+            "sea": 171775266343.36444,
+            "sediment": 240568322627.27658,
+            "human_return": 48218150.78364843,
+            "unrecoverable": 14994008.640037984
+          },
+          "sky_relative_to_initial": 1.0450328298072982,
+          "total_relative_error": -1.1891677104313857e-14
+        },
+        {
+          "year": 10000,
+          "p_kg": {
+            "sky": 99204041891.75507,
+            "land": 2298691413.4204464,
+            "sea": 31408372626.188618,
+            "sediment": 323466012015.8374,
+            "human_return": 110226650.63269952,
+            "unrecoverable": 313564021.1854462
+          },
+          "sky_relative_to_initial": 2.3888841729961188,
+          "total_relative_error": 8.398998008732236e-13
+        },
+        {
+          "year": 1000000.0,
+          "p_kg": {
+            "sky": 93583414090.79135,
+            "land": 2169763251.0859194,
+            "sea": 29951549728.158447,
+            "sediment": 299728058238.09076,
+            "human_return": 103981571.94940616,
+            "unrecoverable": 31264141722.062683
+          },
+          "sky_relative_to_initial": 2.253536574854151,
+          "total_relative_error": -3.611515698015067e-11
+        },
+        {
+          "year": 1000000000.0,
+          "p_kg": {
+            "sky": 1.594884627908047e-20,
+            "land": 3.697794196736043e-22,
+            "sea": 5.104458595315404e-21,
+            "sediment": 5.108081141100264e-20,
+            "human_return": 1.7720940435762682e-23,
+            "unrecoverable": 456800908652.18286
+          },
+          "sky_relative_to_initial": 3.8405639253303345e-31,
+          "total_relative_error": 7.34387221370588e-11
+        }
+      ]
+    },
+    {
+      "case": "sediment_return_0.1percent_loss_per_processed_pass",
+      "initial_p_kg": {
+        "sky": 4152735532.8966904,
+        "land": 29899695836.85617,
+        "sea": 11627659492.110735,
+        "sediment": 0.0,
+        "human_return": 0.0,
+        "unrecoverable": 0.0
+      },
+      "upward_initial_p_kg_yr": 106210518.6782653,
+      "edges": [
+        {
+          "source": "sky",
+          "destination": "human_return",
+          "rate_per_year": 0.1111111111111111
+        },
+        {
+          "source": "sky",
+          "destination": "land",
+          "rate_per_year": 0.001520000000000001
+        },
+        {
+          "source": "sky",
+          "destination": "sea",
+          "rate_per_year": 0.0005911111111111116
+        },
+        {
+          "source": "human_return",
+          "destination": "sky",
+          "rate_per_year": 9.899999999999999
+        },
+        {
+          "source": "human_return",
+          "destination": "land",
+          "rate_per_year": 0.07200000000000005
+        },
+        {
+          "source": "human_return",
+          "destination": "sea",
+          "rate_per_year": 0.028000000000000025
+        },
+        {
+          "source": "land",
+          "destination": "sky",
+          "rate_per_year": 0.002555046121262995
+        },
+        {
+          "source": "land",
+          "destination": "unrecoverable",
+          "rate_per_year": 2.557603724987983e-06
+        },
+        {
+          "source": "sea",
+          "destination": "sky",
+          "rate_per_year": 0.002555046121262995
+        },
+        {
+          "source": "sea",
+          "destination": "unrecoverable",
+          "rate_per_year": 2.557603724987983e-06
+        },
+        {
+          "source": "land",
+          "destination": "sea",
+          "rate_per_year": 0.01
+        },
+        {
+          "source": "sea",
+          "destination": "sediment",
+          "rate_per_year": 0.001
+        },
+        {
+          "source": "sediment",
+          "destination": "sky",
+          "rate_per_year": 9.99e-05
+        },
+        {
+          "source": "sediment",
+          "destination": "unrecoverable",
+          "rate_per_year": 1e-07
+        }
+      ],
+      "states": [
+        {
+          "year": 0,
+          "p_kg": {
+            "sky": 4152735532.8966904,
+            "land": 29899695836.85617,
+            "sea": 11627659492.110735,
+            "sediment": 0.0,
+            "human_return": 0.0,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 1.0,
+          "total_relative_error": 0.0
+        },
+        {
+          "year": 100,
+          "p_kg": {
+            "sky": 10916850590.213337,
+            "land": 9647460464.780268,
+            "sea": 23067780904.509438,
+            "sediment": 1917322580.0917835,
+            "human_return": 121244886.57293908,
+            "unrecoverable": 9431435.695286449
+          },
+          "sky_relative_to_initial": 2.628833573371917,
+          "total_relative_error": -1.185827351694219e-14
+        },
+        {
+          "year": 1000,
+          "p_kg": {
+            "sky": 14107542878.607307,
+            "land": 2679065486.4400415,
+            "sea": 12541224430.709133,
+            "sediment": 16138595723.864023,
+            "human_return": 156755924.28179243,
+            "unrecoverable": 56906417.967764825
+          },
+          "sky_relative_to_initial": 3.39716862941348,
+          "total_relative_error": 1.4163121045587292e-13
+        },
+        {
+          "year": 10000,
+          "p_kg": {
+            "sky": 4746662355.815533,
+            "land": 877574816.2077037,
+            "sea": 3681375802.9801655,
+            "sediment": 36082357194.82371,
+            "human_return": 52740738.832604185,
+            "unrecoverable": 239379953.1884677
+          },
+          "sky_relative_to_initial": 1.143020622963812,
+          "total_relative_error": -3.373762324538482e-13
+        },
+        {
+          "year": 1000000.0,
+          "p_kg": {
+            "sky": 3364964057.0230184,
+            "land": 621688902.8821445,
+            "sea": 2601103938.3583226,
+            "sediment": 26097591171.490063,
+            "human_return": 37388490.76245478,
+            "unrecoverable": 12957354298.022896
+          },
+          "sky_relative_to_initial": 0.8103005911083937,
+          "total_relative_error": -7.278224143444343e-11
+        },
+        {
+          "year": 1000000000.0,
+          "p_kg": {
+            "sky": 4.35212020015049e-135,
+            "land": 8.040694600572955e-136,
+            "sea": 3.364171741803007e-135,
+            "sediment": 3.3753660303055834e-134,
+            "human_return": 4.8356892716523395e-137,
+            "unrecoverable": 45680090846.16214
+          },
+          "sky_relative_to_initial": 1.0480128497647722e-144,
+          "total_relative_error": -3.437264214311392e-10
+        }
+      ]
+    },
+    {
+      "case": "sediment_return_0.1percent_loss_per_processed_pass",
+      "initial_p_kg": {
+        "sky": 41527355328.9669,
+        "land": 298996958368.5617,
+        "sea": 116276594921.10735,
+        "sediment": 0.0,
+        "human_return": 0.0,
+        "unrecoverable": 0.0
+      },
+      "upward_initial_p_kg_yr": 106210518.6782653,
+      "edges": [
+        {
+          "source": "sky",
+          "destination": "human_return",
+          "rate_per_year": 0.011111111111111112
+        },
+        {
+          "source": "sky",
+          "destination": "land",
+          "rate_per_year": 0.00015200000000000012
+        },
+        {
+          "source": "sky",
+          "destination": "sea",
+          "rate_per_year": 5.911111111111116e-05
+        },
+        {
+          "source": "human_return",
+          "destination": "sky",
+          "rate_per_year": 9.899999999999999
+        },
+        {
+          "source": "human_return",
+          "destination": "land",
+          "rate_per_year": 0.07200000000000005
+        },
+        {
+          "source": "human_return",
+          "destination": "sea",
+          "rate_per_year": 0.028000000000000025
+        },
+        {
+          "source": "land",
+          "destination": "sky",
+          "rate_per_year": 0.00025550461212629945
+        },
+        {
+          "source": "land",
+          "destination": "unrecoverable",
+          "rate_per_year": 2.5576037249879826e-07
+        },
+        {
+          "source": "sea",
+          "destination": "sky",
+          "rate_per_year": 0.00025550461212629945
+        },
+        {
+          "source": "sea",
+          "destination": "unrecoverable",
+          "rate_per_year": 2.5576037249879826e-07
+        },
+        {
+          "source": "land",
+          "destination": "sea",
+          "rate_per_year": 0.01
+        },
+        {
+          "source": "sea",
+          "destination": "sediment",
+          "rate_per_year": 0.001
+        },
+        {
+          "source": "sediment",
+          "destination": "sky",
+          "rate_per_year": 9.99e-05
+        },
+        {
+          "source": "sediment",
+          "destination": "unrecoverable",
+          "rate_per_year": 1e-07
+        }
+      ],
+      "states": [
+        {
+          "year": 0,
+          "p_kg": {
+            "sky": 41527355328.9669,
+            "land": 298996958368.5617,
+            "sea": 116276594921.10735,
+            "sediment": 0.0,
+            "human_return": 0.0,
+            "unrecoverable": 0.0
+          },
+          "sky_relative_to_initial": 1.0,
+          "total_relative_error": 0.0
+        },
+        {
+          "year": 100,
+          "p_kg": {
+            "sky": 50339876299.58336,
+            "land": 107895067334.85349,
+            "sea": 277190755387.36896,
+            "sediment": 21308925884.86123,
+            "human_return": 55923838.572817825,
+            "unrecoverable": 10359873.409911478
+          },
+          "sky_relative_to_initial": 1.2122100215823133,
+          "total_relative_error": 3.0063228634501323e-14
+        },
+        {
+          "year": 1000,
+          "p_kg": {
+            "sky": 96131845411.30954,
+            "land": 2116416470.2732604,
+            "sea": 141189022808.34033,
+            "sediment": 217178075295.51184,
+            "human_return": 106810127.24931511,
+            "unrecoverable": 78738505.98626736
+          },
+          "sky_relative_to_initial": 2.3149041071790557,
+          "total_relative_error": 7.562572180945666e-14
+        },
+        {
+          "year": 10000,
+          "p_kg": {
+            "sky": 119979956516.49059,
+            "land": 2713992500.7244716,
+            "sea": 30216666895.694664,
+            "sediment": 303314154127.55493,
+            "human_return": 133311056.71240278,
+            "unrecoverable": 442827521.3805146
+          },
+          "sky_relative_to_initial": 2.8891788452706986,
+          "total_relative_error": -1.7169443909037422e-13
+        },
+        {
+          "year": 1000000.0,
+          "p_kg": {
+            "sky": 110472059543.62381,
+            "land": 2499057031.1175575,
+            "sea": 27839681442.01065,
+            "sediment": 278633384478.38983,
+            "human_return": 122746733.86841387,
+            "unrecoverable": 37233979363.61785
+          },
+          "sky_relative_to_initial": 2.6602238131587774,
+          "total_relative_error": -5.69348113028145e-11
+        },
+        {
+          "year": 1000000000.0,
+          "p_kg": {
+            "sky": 1.6103356298050605e-26,
+            "land": 3.642840184883476e-28,
+            "sea": 4.05815109573383e-27,
+            "sediment": 4.0615995441061856e-26,
+            "human_return": 1.7892618260860073e-29,
+            "unrecoverable": 456800908439.09863
+          },
+          "sky_relative_to_initial": 3.877770729796006e-37,
+          "total_relative_error": -3.9303195358902675e-10
+        }
+      ]
+    }
+  ],
+  "transport": [
+    {
+      "altitude_m": 10000,
+      "p_mass_fraction": 0.1,
+      "transported_kg_yr": 4614150592.107433,
+      "ideal_j_kg": 16149.23816033421,
+      "efficiency": 0.7,
+      "power_w": 3373197.709204305
+    },
+    {
+      "altitude_m": 10000,
+      "p_mass_fraction": 0.001,
+      "transported_kg_yr": 461415059210.74335,
+      "ideal_j_kg": 16149.23816033421,
+      "efficiency": 0.7,
+      "power_w": 337319770.92043054
+    },
+    {
+      "altitude_m": 10000,
+      "p_mass_fraction": 1e-05,
+      "transported_kg_yr": 46141505921074.336,
+      "ideal_j_kg": 16149.23816033421,
+      "efficiency": 0.7,
+      "power_w": 33731977092.043056
+    },
+    {
+      "altitude_m": 20000,
+      "p_mass_fraction": 0.1,
+      "transported_kg_yr": 4614150592.107433,
+      "ideal_j_kg": 32114.69074925172,
+      "efficiency": 0.7,
+      "power_w": 6708006.915970748
+    },
+    {
+      "altitude_m": 20000,
+      "p_mass_fraction": 0.001,
+      "transported_kg_yr": 461415059210.74335,
+      "ideal_j_kg": 32114.69074925172,
+      "efficiency": 0.7,
+      "power_w": 670800691.5970749
+    },
+    {
+      "altitude_m": 20000,
+      "p_mass_fraction": 1e-05,
+      "transported_kg_yr": 46141505921074.336,
+      "ideal_j_kg": 32114.69074925172,
+      "efficiency": 0.7,
+      "power_w": 67080069159.70748
+    }
+  ],
+  "population": {
+    "status": "comparison only; no selected allocation or carrying capacity",
+    "coefficients_from": "resources/results/industry.json",
+    "exclusions": "Earth and elsewhere infrastructure; aerial gas, envelope and flight structure. Generic material proxies overlap settlement district inventories and must not be added wholesale to them. SP-413 shielding applies only to the orbital habitat comparator, not atmospheric residents.",
+    "cases": {
+      "total20": {
+        "population_billion": {
+          "total": 20,
+          "earth": 10,
+          "lunar_surface": 3,
+          "lunar_aerial": 3,
+          "orbital": 2,
+          "elsewhere": 2
+        },
+        "lunar_generic_material_proxy_kg": [
+          258000000000000.0,
+          2010000000000000.0
+        ],
+        "lunar_generic_turnover_kg_yr": [
+          3185185185185.185,
+          30923076923076.92
+        ],
+        "orbital_shield_proxy_kg": 1980000000000000.0,
+        "orbital_structure_proxy_kg": 30000000000000.0
+      },
+      "total25": {
+        "population_billion": {
+          "total": 25,
+          "earth": 10,
+          "lunar_surface": 5,
+          "lunar_aerial": 5,
+          "orbital": 3,
+          "elsewhere": 2
+        },
+        "lunar_generic_material_proxy_kg": [
+          430000000000000.0,
+          3350000000000000.0
+        ],
+        "lunar_generic_turnover_kg_yr": [
+          5308641975308.642,
+          51538461538461.54
+        ],
+        "orbital_shield_proxy_kg": 2970000000000000.0,
+        "orbital_structure_proxy_kg": 45000000000000.0
+      },
+      "total30": {
+        "population_billion": {
+          "total": 30,
+          "earth": 10,
+          "lunar_surface": 7.5,
+          "lunar_aerial": 7.5,
+          "orbital": 3,
+          "elsewhere": 2
+        },
+        "lunar_generic_material_proxy_kg": [
+          645000000000000.0,
+          5025000000000000.0
+        ],
+        "lunar_generic_turnover_kg_yr": [
+          7962962962962.963,
+          77307692307692.31
+        ],
+        "orbital_shield_proxy_kg": 2970000000000000.0,
+        "orbital_structure_proxy_kg": 45000000000000.0
+      },
+      "total25_earth_heavier": {
+        "population_billion": {
+          "total": 25,
+          "earth": 14,
+          "lunar_surface": 3,
+          "lunar_aerial": 3,
+          "orbital": 3,
+          "elsewhere": 2
+        },
+        "lunar_generic_material_proxy_kg": [
+          258000000000000.0,
+          2010000000000000.0
+        ],
+        "lunar_generic_turnover_kg_yr": [
+          3185185185185.185,
+          30923076923076.92
+        ],
+        "orbital_shield_proxy_kg": 2970000000000000.0,
+        "orbital_structure_proxy_kg": 45000000000000.0
+      },
+      "total25_moon_heavier": {
+        "population_billion": {
+          "total": 25,
+          "earth": 8,
+          "lunar_surface": 6,
+          "lunar_aerial": 6,
+          "orbital": 3,
+          "elsewhere": 2
+        },
+        "lunar_generic_material_proxy_kg": [
+          516000000000000.0,
+          4020000000000000.0
+        ],
+        "lunar_generic_turnover_kg_yr": [
+          6370370370370.37,
+          61846153846153.84
+        ],
+        "orbital_shield_proxy_kg": 2970000000000000.0,
+        "orbital_structure_proxy_kg": 45000000000000.0
+      }
+    }
+  }
+}

@@ -16,6 +16,12 @@ The domain opened on 9 October 2026 on the branch `domain/resources`. It starts 
 
 Its open questions, in order, are in [questions.md](questions.md).
 
+The 9 October cross-domain follow-up is [Returning phosphorus through the aerial biosphere](phosphorus.md):
+stock versus throughput, separate natural and food-return efficiencies, a conservative six-reservoir model,
+concentrate-versus-water transport, and material accounts from the common population cases. No population allocation
+is selected. The earlier industry scenario allocations below are historical illustrations and are superseded for
+new joint planning by [shared/scenarios/population.json](../shared/scenarios/population.json).
+
 The author's decisions frame it:
 - Water, nitrogen and oxygen come from the Solar-System-wide operation; oxygen made on the Moon is at most a
   by-product of metal and glass production.
@@ -222,6 +228,19 @@ is [industry.md](industry.md), with its screen [industry.py](industry.py); numbe
     near Earth's identified resources. Over 10⁹ years rock takes 6.5–206 times the air's oxygen, so the long frame
     turns on local return paths.
 
+## Phosphorus and the common population comparison
+
+The [return study](phosphorus.md) keeps land, sea, sediment and people in the aerial phosphorus account. Its assumed
+1%-coverage biosphere turns over 9.228 Mt P/year, holds 4.153–41.527 Mt P and exports 0.4614 Mt P/year in a 5% harvest.
+At 99.9% natural retention and 99% harvest-P return, the low deposition/capture case still requires another
+10,726 t P/year returned from below. Atmospheric deposition redistributes the Moon's existing phosphorus; it is
+not an import. Finite stocks, sediment recovery and irreversible losses determine long-term persistence.
+
+Five shared population cases explicitly separate lunar surface and aerial residents. Their generic lunar material
+proxies span 258–5,025 Gt; the orbital comparator assumes 990 t shield and 15 t structure per resident. These are
+accounting sensitivities. Aerial structures, gas, ecological occupancy, food and practical capacity need their own
+requirements; no historical Earth-heavy allocation or orbital-heavy allocation is adopted.
+
 ## Statements elsewhere that need correcting
 
 The evaluation ([state.md](state.md#statements-elsewhere-that-need-correcting)) lists stale or conflicting statements
@@ -245,7 +264,11 @@ in other folders. They belong to main and are unchanged on this branch. The larg
 | [industry.md](industry.md) | The array in industry and the flows of the near horizons |
 | [industry.py](industry.py) | Its screen: places, heat by place, the film plant's traffic, computing's mass, the flows after the build, people's stocks |
 | [results/industry.json](results/industry.json) | Its product (schema `terluna.resources.industry/1`) |
+| [phosphorus.md](phosphorus.md) | Nutrient return, finite reservoirs, transport and shared population material accounts |
+| [phosphorus.py](phosphorus.py) | Conservative phosphorus stock/flow and return calculation |
+| [results/phosphorus.json](results/phosphorus.json) | Its product (schema `terluna.resources.phosphorus/1`) |
+| [phosphorus_sources.json](phosphorus_sources.json) | Primary scholarly sources and actual access level |
 | [industry_sources.json](industry_sources.json) | The industry study's sources and how far each was read |
 
-`python -m resources.screen` and `python -m resources.industry` rewrite the products; `python -m pytest resources/tests`
+`python -m resources.screen`, `python -m resources.industry` and `python -m resources.phosphorus` rewrite the products; `python -m pytest resources/tests`
 checks them.

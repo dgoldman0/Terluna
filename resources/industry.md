@@ -11,6 +11,15 @@ Numbers marked *screen* come from [industry.py](industry.py) and its product
 (Author year), with every source and how far it was read in [industry_sources.json](industry_sources.json). Every flow
 that drains an inventory carries its cycle time, the time the flow and the matching resupply take to replace it.
 
+## Scope after the 9 October cross-domain evaluation
+
+The independent population allocations in this historical screen are superseded for joint planning by
+[shared/scenarios/population.json](../shared/scenarios/population.json). They establish no carrying capacity or
+preferred location. The screen and its saved result remain unchanged for reproduction. [The follow-up](phosphorus.md)
+applies the material coefficients to the five common cases, separates lunar surface from aerial residents, and keeps
+orbital shielding apart from atmospheric settlements. Its nutrient account includes food return and finite reservoirs.
+No population distribution has been adopted.
+
 ## Findings
 
 1. **Concentrated industry flies on platforms of its own; the tiles carry distributed hardware.** The bundle's one sail
@@ -126,8 +135,8 @@ Transfers are coplanar Hohmann orbits to 1 AU without gravity assists (*screen*)
 
 Scenarios of this screen within the author's frame; with Earth at its projected peak of 10.3 billion (UN 2024) they
 total 13, 20 and 30 billion. The provisioning domain's scenarios (branch `domain/provisioning`) place more people on Earth,
-16–20 billion, and 0.1–1 billion in the array, whose habitats then come to 99–990 Gt; the author's placement settles
-which holds.
+16–20 billion, and 0.1–1 billion in the array, whose habitats then come to 99–990 Gt; these independent historical allocations do not establish capacities or determine the shared
+planning allocation.
 
 | Scenario (Moon, array) | Moon's stocks | Turnover | Moon's energy, and warming if brought in | Copper top-up | Array's habitats | Grown over 1,000–5,000 years |
 |---|---|---|---|---|---|---|

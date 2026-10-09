@@ -1,0 +1,75 @@
+{
+  "schema": "terluna.scenario.population/1",
+  "updated": "2026-10-09",
+  "status": "comparison_cases_only_no_allocation_adopted",
+  "units": "billion people",
+  "author_direction": "Retain the 20–30 billion Solar System working scale; evaluate capacity before choosing distribution; include lunar surface and aerial habitation explicitly.",
+  "reading_rule": "Lunar population is lunar_surface + lunar_aerial. Orbital residents include the array and other orbital settlements; their engineering inventories must name the habitat assumption. Elsewhere is an explicit unmodelled remainder, never credited with demonstrated capacity. Scenarios are simultaneous accounting tests, not population forecasts or recommendations.",
+  "cases": {
+    "total20": {
+      "total": 20,
+      "earth": 10,
+      "lunar_surface": 3,
+      "lunar_aerial": 3,
+      "orbital": 2,
+      "elsewhere": 2
+    },
+    "total25": {
+      "total": 25,
+      "earth": 10,
+      "lunar_surface": 5,
+      "lunar_aerial": 5,
+      "orbital": 3,
+      "elsewhere": 2
+    },
+    "total30": {
+      "total": 30,
+      "earth": 10,
+      "lunar_surface": 7.5,
+      "lunar_aerial": 7.5,
+      "orbital": 3,
+      "elsewhere": 2
+    },
+    "total25_earth_heavier": {
+      "total": 25,
+      "earth": 14,
+      "lunar_surface": 3,
+      "lunar_aerial": 3,
+      "orbital": 3,
+      "elsewhere": 2
+    },
+    "total25_moon_heavier": {
+      "total": 25,
+      "earth": 8,
+      "lunar_surface": 6,
+      "lunar_aerial": 6,
+      "orbital": 3,
+      "elsewhere": 2
+    }
+  },
+  "aerial_share_sensitivity": [
+    0,
+    0.25,
+    0.5,
+    0.75
+  ],
+  "required_capacity_accounts": [
+    "residential mass and floor area",
+    "food and agricultural water",
+    "nutrient return",
+    "heat and dimming",
+    "traffic and rescue",
+    "ecological occupancy and sunlight",
+    "materials and renewal",
+    "human health and artificial gravity"
+  ],
+  "historical_scenarios": {
+    "provisioning": "provisioning/population.py A/B/C remain reproducible historical illustrations; they do not establish location capacities.",
+    "resources": "resources/industry.py historical scenarios remain reproducible independent illustrations; use the cases in this file for new joint accounting."
+  },
+  "habitation_direction": {
+    "source": "Author, 2026-10-09",
+    "floating_default": "Allow much floating habitation to roam; manage collision and storm risks.",
+    "accounting_rule": "Evaluate navigation, collision avoidance, storm routing, rendezvous, reserves and occasional repositioning. Continuous fixed-location stationkeeping is a comparison case, not a universal settlement load."
+  }
+}
