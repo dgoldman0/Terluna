@@ -54,22 +54,28 @@ leading use of the array's collected energy, and the aerial biomes almost first.
   science take megawatts, a metre-scale weather twin of the Moon fills the array, AI for 20–30 billion people takes
   14–2,100 TW today, and brain emulation at scale and Matrioshka brains pass it.
 - **Population** (provisioning). The scale needs growth at the pre-industrial pace and an affluent band of 2–6 kW of
-  primary energy a person. The Moon's heat budget holds 1.4–2.2 billion at 0.1 K with industry in orbit, and far more
-  with added dimming; its runoff binds near 4 billion, which fresh seas may lift. The array's habitats need 990 t of
-  shield a person, and weekly rocket commuting costs 18–46 kW. The array serves Earth with computing and power and
-  prototypes Earth's own arrays.
+  primary energy a person. People's heat on the Moon is answered by added dimming, 0.009–0.014% a terawatt used
+  there. The array's habitats need 990 t of shield a person, and weekly rocket commuting costs 18–46 kW. The array
+  serves Earth with computing and power and prototypes Earth's own arrays. The study's placements of people left the
+  sky empty and read heat and runoff as ceilings; the author's shared comparison cases (below) replace them.
 - **Industry and flows** (resources). Concentrated industry flies on platforms of its own, and heat counts by where it
   is released: per terawatt, 0.026 W/m² on the Moon, 5×10⁻⁵ from the ring radius, 10⁻⁸ from the hubs. On the near
   horizons the air needs only its CO2 returned; the array's habitats are the largest stream after the build, and the
   operation then shrinks 2,400–380,000 times.
 - **The sky, land and people** (ecology). The sky is the Moon's largest habitat, wet and lightly ionized, with room for
   flyers of 60 m and food webs fed from below. The vegetated Moon's own ethylene settles at 94–233 ppb with soils its
-  only sink, above the level that costs wheat a third of its yield. With Earth's practice the Moon holds about half a
-  billion affluent people; with the lunar design, about 3–15 billion; people's light darkens the sky's night before any
-  diet reaches its crop limit.
-- **Open across the branches:** the placement of people. The resources screen reads the scale with Earth at 10.3
-  billion and 2–14 billion in the array, the population study with 16–20 billion on Earth and 0.1–1 billion in the
-  array; the author's placement settles both.
+  only sink, above the level that costs wheat a third of its yield. Each billion people living by Earth's practice
+  grazes 1.2 times the fog desert and lights a third to three-fifths of the dry land; by the lunar design it crops
+  2.5–16% of the rain-fed land and lights 3–6%. People's light reaches the sky's night before their crops fill the land.
+- **The placement of people** follows a comparison of what each way of living holds and costs, in the shared cases
+  below.
+
+The author approved the order of the population and lifestyle work on 9 October: the checks and these corrections;
+the winds by latitude and height from the saved climate run, which set the sky towns' days; the ways of living, built
+from the project's designs; what each holds and costs; how people live; then distributions as outcomes for the author
+to choose among. Alongside, on ecology: the sky giants' real limits (fittings, seams, gusts, damage, water gathered
+from the air, storms), growth over centuries, and a taxonomic system for the biosphere, from which the floaters take
+their new name.
 
 ## Next work, in order
 
