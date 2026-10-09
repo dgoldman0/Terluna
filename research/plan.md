@@ -70,3 +70,10 @@ Seek several coherent environmental possibilities, a credible account of light, 
 Current sessions support ordinary numerical models, parameter sweeps, moderate rasters, geometry, optimization and evidence synthesis. Specialist model installation and runtime need direct tests. Full plasma/dose performance, material durability, complete factories and multigenerational biological outcomes are additional validation programs. No long-running service or outside compute has been commissioned by this plan.
 
 Use the existing editorial charter and full-source reading requirements when these results enter the manuscripts. Research notes and numerical checks are not scholarly clearance.
+
+## Floater requirements follow-up, 9 October 2026
+
+The [coupled floater study](studies/floater_viability/README.md) now includes pressure structure, wet barriers,
+photon/carbon allocation, water/trim, reproduction and wind-assisted Sun-following. Next tests are joint wet
+material performance and a coupled mass-flow/flight/light route, followed by development and recruitment.
+The climate programme remains paused; this study uses committed products and analytic sensitivities.

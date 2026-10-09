@@ -1,0 +1,96 @@
+{
+  "schema": "terluna.research.floater-mechanics-sources/1",
+  "checked": "2026-10-09",
+  "admission": "Primary papers and official NASA material; selected methods/results inspected through web retrieval, not a claim of full scholarly admission. No external full-paper bytes added.",
+  "sources": [
+    {
+      "id": "said2004",
+      "title": "Giant Vehicles",
+      "authors": "Magdi A. Said, Willi W. Schur, Amit Gupta, Gary N. Mock, Abdelfattah M. Seyam, Thomas Theyson",
+      "year": 2004,
+      "url": "https://ntrs.nasa.gov/citations/20040079786",
+      "pdf": "https://ntrs.nasa.gov/api/citations/20040079786/downloads/20040079786.pdf",
+      "access": "NASA record and design sections of PDF pp.4-9 inspected",
+      "supports": "Hydrostatic apex pressure and spherical strength grow with size; lobed skins use local curvature while tendons carry global loads.",
+      "limit": "Engineered stratospheric balloon architecture, not living tissue or lunar validation. Current formulas are separately derived ideal screens."
+    },
+    {
+      "id": "sterling2004",
+      "title": "Material Properties Analysis of Structural Members in Pumpkin Balloons",
+      "authors": "W. J. Sterling",
+      "year": 2004,
+      "url": "https://ntrs.nasa.gov/api/citations/20040040072/downloads/20040040072.pdf",
+      "access": "PDF abstract, introduction and test-method sections inspected",
+      "supports": "Braided PBO cord strength below direct fibre scaling; slow-rate, temperature and age effects matter.",
+      "conditions": "Braided high-modulus PBO balloon tendons; experiments from ambient temperature to 183 K and different strain rates.",
+      "limit": "No fibre-to-living-tendon strength transfer adopted. 100 MPa allowable in this study is a hypothesis."
+    },
+    {
+      "id": "wakefield2017",
+      "title": "Non-Linear Analysis of the NASA Super Pressure Balloons: Whole Flight Simulations",
+      "authors": "David Wakefield, Adam Bown",
+      "year": 2017,
+      "url": "https://ntrs.nasa.gov/citations/20180007750",
+      "access": "NASA abstract inspected",
+      "supports": "Viscoelastic film, thermal history, fabrication details and tendon-sleeve interactions are part of actual balloon analysis.",
+      "limit": "Not a source of numerical biological-film properties."
+    },
+    {
+      "id": "matas2005",
+      "title": "Relative humidity and temperature modify the mechanical properties of isolated tomato fruit cuticles",
+      "authors": "Antonio J. Matas, Gloria Lopez-Casado, Jesus Cuartero, Antonio Heredia",
+      "year": 2005,
+      "doi": "10.3732/ajb.92.3.462",
+      "url": "https://bsapubs.onlinelibrary.wiley.com/doi/10.3732/ajb.92.3.462",
+      "access": "Primary full-text methods/results inspected",
+      "conditions": {"specimen_mm": [3,9],"thickness_um":7.2,"thickness_sd_um":0.3,"temperature_C":[10,23,30,35,45],"RH_percent":[40,80],"wet":"buffer immersion","conditioning_minimum_minutes":30,"load_step_N":0.098,"hold_per_step_seconds":1200},
+      "observed": "Wet strength approximately 21 MPa below and 14 MPa above temperature-transition range. Warmth/hydration lower strength and stiffness.",
+      "limit": "Excised millimetre cuticles screened for cracks; 20-minute step loading does not establish years-long allowable strength or giant assembled tissue."
+    },
+    {
+      "id": "kriechbaum2020",
+      "title": "Antioxidant and UV-Blocking Leather-Inspired Nanocellulose-Based Films with High Wet Strength",
+      "authors": "Konstantin Kriechbaum, Lennart Bergstrom",
+      "year": 2020,
+      "doi": "10.1021/acs.biomac.9b01655",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7343243/",
+      "access": "Primary abstract, preparation and test-method sections, Table 1 and water-uptake result inspected",
+      "conditions": {"material":"TA/Gelatin@DACNF","strip_mm":[20,3],"gauge_mm":10,"crosshead_mm_min":1,"dry_conditioning_RH_percent":50,"dry_conditioning_temperature_C":23,"dry_conditioning_minimum_hours":24,"wet_immersion_hours":1,"wet_testing":"Water added during tensile test","dry_thickness_um":54.2,"dry_thickness_uncertainty_um":1.3},
+      "observed": {"wet_breaking_stress_MPa":33,"water_mass_uptake_percent":25},
+      "limit": "Engineered nonliving film; no hydrogen permeability, seams, biological synthesis or lifetime creep validated. Density 1500 kg/m3 and allowance 0.1–10MPa are study sensitivities."
+    },
+    {
+      "id": "portanova1989",
+      "title": "Strengths of balloon films with flaws and repairs",
+      "authors": "M. A. Portanova",
+      "year": 1989,
+      "report": "NASA-CR-181872",
+      "url": "https://ntrs.nasa.gov/citations/19890020453",
+      "access": "NASA abstract inspected",
+      "supports": "Biaxially loaded polyethylene cylinders used to assess flaws/repairs.",
+      "limit": "No empirical tear rate or healing rate imported."
+    },
+    {
+      "id": "nasa_massflow",
+      "title": "Mass Flow Rate Equations",
+      "publisher": "NASA Glenn Research Center",
+      "url": "https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/mass-flow-rate-equations/",
+      "access": "Official equation page inspected",
+      "supports": "Compressible gas-flow dependence and choking require an appropriate high-speed model.",
+      "limit": "The Cd 0.6 small-overpressure puncture diagnostic is explicitly assumed, not an experiment on living membrane holes."
+    }
+  ],
+  "assumptions_not_source_measurements": {
+    "hydrated_structural_density_kg_m3":1500,
+    "assembled_film_allowable_MPa":[0.1,1,10],
+    "tendon_allowable_MPa":100,
+    "minimum_film_thickness_um":50,
+    "additional_barrier_areal_mass_kg_m2":0.05,
+    "bottom_overpressure_Pa":10,
+    "gust_speed_m_s":10,
+    "gust_Cp":1,
+    "lobed_area_multiplier":1.1,
+    "thin_membrane_thickness_radius_screen":0.01,
+    "hole_discharge_coefficient":0.6
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "schema": "terluna.study.floater_envelope_sources/1",
+  "access_date": "2026-10-09",
+  "evidence_rule": "Material measurements are comparators under their own conditions. None validates a living, growing, self-repairing lunar floater. Missing temperature, humidity, thickness or aging evidence is not silently supplied.",
+  "sources": [
+    {
+      "id": "kurata_2022",
+      "authors": "Kurata, Mano, Sakurai and Notomi",
+      "title": "Evaluation of Hydrogen Permeability of Polymer Membranes",
+      "year": 2022,
+      "doi": "10.2472/jsms.71.903",
+      "url": "https://www.jstage.jst.go.jp/article/jsms/71/11/71_903/_article/-char/en",
+      "access": "Publisher abstract read; linked full PDF timed out.",
+      "measurement": "Room-temperature H2 permeability; cellophane 5.78e-17 and polypropylene 2.24e-15 mol m/(m2 s Pa).",
+      "hydrogen_permeability_si": {"cellophane": 5.78e-17, "polypropylene": 2.24e-15},
+      "conditions": "Room temperature; precise temperature, humidity, sample thickness and aging not recovered from abstract.",
+      "limitation": "The paper reports thickness dependence for some tested polymers. Constant-P thickness scans are conditional extrapolations."
+    },
+    {
+      "id": "sager_1934",
+      "authors": "Theron P. Sager",
+      "title": "Permeability of Synthetic Film-forming Materials to Hydrogen",
+      "year": 1934,
+      "report": "NBS Research Paper RP750; Journal of Research NBS 13, 879-885",
+      "url": "https://nvlpubs.nist.gov/nistpubs/jres/13/jresv13n6p879_A2b.pdf",
+      "access": "Official seven-page PDF read; Table 2 visually checked.",
+      "measurement": {"cellophane_hydrogen_transmission_l_m2_day": 0.1, "thickness_m": 0.0000254, "areal_mass_kg_m2": 0.051, "glycerol_mass_fraction_approx": 0.16},
+      "conditions": "25 C; air opposite hydrogen at 30 mm water gauge. The 65% RH/70 F condition concerns specimen weighing, not verified gas-test humidity.",
+      "limitation": "Liter reference state not explicit in inspected passage; retain reported transmission rather than claiming an exact intrinsic permeability."
+    },
+    {
+      "id": "chollet_1922",
+      "authors": "L. Chollet",
+      "title": "Balloon Fabrics Made of Goldbeater's Skins",
+      "year": 1922,
+      "report": "NACA Technical Memorandum 172; translation of L'Aeronautique, August 1922",
+      "url": "https://ntrs.nasa.gov/api/citations/19930083385/downloads/19930083385.pdf",
+      "access": "Official NASA/NACA full PDF read, especially printed page 11.",
+      "measurement": {"finished_fabric_areal_mass_kg_m2_range": [0.13, 0.15]},
+      "transmission": "Qualitative few liters H2 per m2 per day at 30 mm water gauge; not a precise numeric coefficient.",
+      "construction": "Processed intestinal membranes, crossed layers, cotton, glue and varnish; gas cells generally protected inside rigid airships.",
+      "limitation": "Historical manufactured animal-derived barrier; no living tissue, autonomous repair, modern humidity sweep or quantified service-life evidence."
+    },
+    {
+      "id": "bayer_2021",
+      "authors": "Bayer et al.",
+      "title": "Spray deposition of sulfonated cellulose nanofibers as electrolyte membranes in fuel cells",
+      "year": 2021,
+      "doi": "10.1007/s10570-020-03593-w",
+      "url": "https://link.springer.com/article/10.1007/s10570-020-03593-w",
+      "access": "Full publisher HTML, methods and results read.",
+      "measurement": {"s_cnf_thickness_m": 0.00003, "hydrogen_crossover_ma_cm2_range": [0.03, 0.3], "device_temperature_k": 353.15, "device_relative_humidity": 0.95, "thin_failed_film_thickness_m": 0.000008, "thin_failed_crossover_ma_cm2": 449},
+      "conditions": "In-situ hydrogen/nitrogen LSV; crossover current at 300 mV; humid 80 C fuel-cell configuration. Separate dry permeation testing is not the humid measurement.",
+      "limitation": "A device flux, not an intrinsic room-temperature permeability. Thin spray film exhibited cracks/pinholes. Durability demonstration was short, not multiyear."
+    },
+    {
+      "id": "mfc_2025",
+      "title": "Lignin-Rich Microfibrillated Cellulose: A Sustainable Alternative for Proton Exchange Membranes for Energy Applications",
+      "year": 2025,
+      "doi": "10.1021/acssuschemeng.5c05172",
+      "url": "https://pubs.acs.org/doi/10.1021/acssuschemeng.5c05172",
+      "access": "Primary publisher indexed excerpts only; direct full-text access failed.",
+      "hydrogen_permeability_barrer": {"MFC": 10.7, "LMFC_SW": 12.1, "LMFC_HW": 11.9, "Nafion_212_comparator": 25.4},
+      "conditions": "Reported room temperature; comparable film thicknesses 17.3-18.7 micrometers in indexed results. H2-test humidity and precise procedure not verified.",
+      "limitation": "Conditions-incomplete sensitivity only. Do not import conductivity-test humidity into the H2 measurement."
+    },
+    {
+      "id": "wu_2014_chitin",
+      "authors": "Jie Wu",
+      "title": "Extraction of Chitin Nanofibers and Utilization for Sustainable Composites and Foams",
+      "year": 2014,
+      "publication": "Georgia Institute of Technology doctoral thesis, Table 2.3",
+      "url": "https://repository.gatech.edu/bitstreams/485965a3-039e-4ad2-a174-4c2bdb76b99e/download",
+      "access": "Official thesis indexed table excerpt recovered; PDF initially opened but subsequent page retrieval blocked. Full methods not verified.",
+      "permeability_barrer": {"H2": 0.024, "O2": 0.006, "N2": 0.0034},
+      "related_article_doi": "10.1021/bm501416q",
+      "related_article_title": "Facile Route to Produce Chitin Nanofibers as Precursors for Flexible and Transparent Gas Barrier Materials",
+      "conditions": "Temperature, relative humidity, thickness and aging not established from accessible table excerpt.",
+      "limitation": "Low-P sensitivity with incomplete conditions, not an admitted wet-flight material or quantitative living-membrane prediction."
+    },
+    {
+      "id": "wu_yuan_2002",
+      "authors": "Wu and Yuan",
+      "title": "Gas permeability of a novel cellulose membrane",
+      "year": 2002,
+      "doi": "10.1016/S0376-7388(02)00037-6",
+      "url": "https://www.sciencedirect.com/science/article/abs/pii/S0376738802000376",
+      "access": "Primary publisher abstract/indexed abstract only.",
+      "relevance": "Dry and water-swollen cellulose studied with H2 among several gases, 298-353 K and pressures up to 1 MPa.",
+      "limitation": "No numeric swollen-state H2 coefficient recovered; no wet multiplier used."
+    },
+    {
+      "id": "kriechbaum_2020",
+      "authors": "Kriechbaum and Bergstrom",
+      "title": "Antioxidant and UV-Blocking Leather-Inspired Nanocellulose-Based Films with High Wet Strength",
+      "year": 2020,
+      "doi": "10.1021/acs.biomac.9b01655",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7343243/",
+      "access": "Primary full-text measurement reviewed by the mechanics workstream.",
+      "relevance": "Treated gelatin/cellulose film wet tensile comparator, 33 MPa after one-hour hydration; not H2 permeability evidence.",
+      "limitation": "No transport coefficient transferred from mechanical or water-resistance tests. See mechanics.md for conditions."
+    },
+    {
+      "id": "janaf_water",
+      "title": "NIST-JANAF Thermochemical Tables, Water (liquid)",
+      "url": "https://janaf.nist.gov/tables/H-063.html",
+      "access": "Official full table read, 298.15 K row.",
+      "reference_temperature_k": 298.15,
+      "reference_pressure_pa": 100000,
+      "water_formation_gibbs_j_mol": -237141,
+      "water_formation_enthalpy_j_mol": -285830,
+      "limitation": "Reference-state splitting work and enthalpy; no biological efficiency or local pressure/temperature correction implied."
+    }
+  ],
+  "unmeasured_here": [
+    "Intact living skin/cuticle/cell wall H2 permeability under simultaneous lunar temperature, hydration, radiation and mechanical loading",
+    "A growing photosynthetic H2 balloon membrane with measured multiyear creep, seam strength, puncture repair and species-selective transport",
+    "Wet-to-dry permeability evolution and O2/N2 transport measured on the same proposed assembled envelope",
+    "Validated temperature extrapolation for every material, microbial degradation, defect growth and gas purification/purge power"
+  ]
+}

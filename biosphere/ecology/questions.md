@@ -91,3 +91,10 @@ on this laptop. The findings behind them are in the [README](README.md).
     - Take plant twilight from the solved sky.
 
     These are changes to main's studies, for the author to order.
+
+## Floater follow-up: light, water and control
+
+The [coupled evaluation](../../research/studies/floater_viability/README.md) replaces size-from-lift alone with
+explicit pressure, permeability, carbon, water and recruitment requirements. Next: test one assembled wet barrier;
+close a signed water/gas/pressure cycle; calculate reachable light-and-humidity routes with wind vectors, including
+persistent twilight and Sun-following. Giant mature bodies need development and replacement, not just neutral lift.

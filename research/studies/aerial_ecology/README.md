@@ -94,6 +94,11 @@ coverage fraction is adopted.
 
 ## Large photosynthetic organisms and their wet mass
 
+The [coupled floater evaluation](../floater_viability/README.md) supersedes these lift-only values as a design
+assessment. It includes pressure-bearing structure, gas barriers, active and inert mass, shared photons, water
+and trim, reproduction, persistent twilight and wind-assisted Sun-following. The table below remains a historical
+mass inequality; it does not select a sustainable size.
+
 For a spherical lifting envelope, gross supported mass per projected square metre is `4 R delta_rho/3`. The skin
 has four times the projected area. Allocating half the gross lift to skin and biomass, with a 1 kg/m² skin and
 90% water in living biomass, yields these minimum radii:

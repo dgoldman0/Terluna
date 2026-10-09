@@ -2,6 +2,11 @@
 
 ## Cross-domain follow-up, 9 October 2026
 
+The [coupled floater study](../../research/studies/floater_viability/README.md) now tests structure, gas barriers,
+wet mass, carbon, water/trim and reproduction together. It treats persistent twilight and wind-assisted Sun-following
+as explicit possibilities. Some tens-of-metres reference cases pass arithmetic gates; assembled wet materials,
+water routes, control and a complete life cycle remain unresolved. Earlier lift-only sizes are not selected designs.
+
 The [aerial food-web evaluation](../../research/studies/aerial_ecology/README.md) now treats aeroplankton and large
 photosynthetic floaters as producers in their own right, with reproduction/removal, filter drag, wet mass, optical
 depth, nutrients and harvest accounted separately. Its conditional central case yields 184.6 million food-energy

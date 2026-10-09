@@ -206,3 +206,9 @@ the sky boats' share of trips, ownership and traffic system stay open.
 | Evaluate the Moon's surface and aerial habitation before choosing population distribution; arbitrary domain allocations do not establish capacity. | Author, 2026-10-09 | [Shared comparison cases](../shared/scenarios/population.json); 20–30 billion Solar System working scale retained, no distribution selected. |
 | Investigate true aeroplankton and large photosynthetic aerial organisms together, their consumers, and food harvest with a functioning phosphorus cycle. | Author, 2026-10-09 | [First requirements evaluation](studies/aerial_ecology/README.md) completed; ecology and resources must close nutrient return including harvest, with no assumed safe yield or species count. |
 | Allow much floating habitation to roam while managing collision and storm risks. | Author, 2026-10-09 | Adopted working direction; operational budgets include navigation, avoidance, rendezvous and occasional repositioning. Fixed-location holding is a separate comparison. |
+
+## Floater light-history correction, 9 October 2026
+
+| Direction | Authority | State |
+|---|---|---|
+| Evaluate persistent twilight and colonies moving with the slow Sun; do not impose a stationary half-cycle dark interval everywhere. | Author, 2026-10-09 | Incorporated in [floater requirements](studies/floater_viability/README.md). Light spectra, carbon compensation and wind-vector routes remain separate requirements; no route or species adopted. |
