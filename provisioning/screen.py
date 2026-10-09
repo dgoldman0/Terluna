@@ -49,6 +49,8 @@ DESIGN_TOP_OF_AIR_W_M2 = 1173.0           # the 5% dimmer's sunlight at the top 
 INFRARED_EFFICACY = (0.5, 1.0)            # absorbed aloft, the tiles' infrared may warm the ground less than sunlight
 HEAT_MIRROR_EMISSIVITY = (0.03, 0.1)      # thermal emissivity of a Moon-facing heat mirror: silver stacks to oxide films
 STRONG_EMITTER = 0.85                     # an outer face made a strong thermal emitter
+INDUSTRY_TW = (100.0, 1000.0)             # orbital computing and industry, for scale
+DATA_CENTRES_TW = 0.047                   # the world's data centres in 2024, 415 TWh (IEA 2025)
 # Food.
 FRUIT_KCAL_PER_G = 0.30                   # the day fruit has today's watermelon's make-up (USDA: 30 kcal per 100 g)
 PERSON_KCAL_PER_DAY = 2500.0
@@ -128,6 +130,38 @@ def heat_mirror(films, window):
     return out
 
 
+def industry(array_heat, fleet, window, absorbed, on_moon, sunlight_global, area):
+    """What computing and industry can do against the glow, and what they add to the Moon's heat.
+
+    The glow is a fixed share of the heat the films absorb, so keeping a watt of it off the Moon means taking that
+    share's inverse out of the films and rejecting it where the Moon does not see it. Computing and industry draw
+    their power from light the fleet collects; their heat reaches the Moon by where it is released. The window rings
+    carry the climate stack round their whole orbits and dim the Moon only while they cross the window, so light
+    they absorb there heats the films far beyond the light it keeps from the Moon.
+    """
+    tiles, comp, placement = array_heat['tiles'], array_heat['computing'], array_heat['placement']
+    share = [w * area / (a * 1e15) for w, a in zip(on_moon, absorbed)]
+    absorbed_tw = [a * 1e3 for a in absorbed]
+    per_tw_km2 = [c + comp['radiator_panel_km2_per_TW'] for c in comp['collector_km2_per_TW']]
+    fleet_km2 = float(np.mean(fleet['area_km2']))
+    window_per_moon = [window * i * 1e15 / (sunlight_global * area) for i in tiles['intercepted_PW']]
+    return dict(
+        glow_share_of_absorbed=[round(x, 5) for x in share],
+        fleet_w_per_w_kept_off_moon=[round(1 / share[1]), round(1 / share[0])],
+        glow_w_m2_per_percent_absorbed=[round(on_moon[0] / (100 * tiles['mean_solar_absorptance']), 2),
+                                        round(on_moon[1] / (100 * tiles['mean_solar_absorptance']), 2)],
+        computing_tw_to_halve_glow=[round(absorbed_tw[0] / 2, -2), round(absorbed_tw[1] / 2, -2)],
+        data_centres_tw=DATA_CENTRES_TW,
+        glow_cut_by_industry_tw={f'{tw:g}': [round(tw / absorbed_tw[1], 5), round(tw / absorbed_tw[0], 5)] for tw in INDUSTRY_TW},
+        harvest_from_films_tw=dict(carnot_across_films=round(tiles['carnot_across_all_films_TW'], 2),
+                                   thermoradiative_measured_everywhere=round(tiles['thermoradiative_measured_everywhere_TW'], 1)),
+        fleet_area_share_for_industry_tw={f'{tw:g}': [round(tw * k / fleet_km2, 5) for k in per_tw_km2] for tw in INDUSTRY_TW},
+        moon_w_m2_from_industry_tw_released_in_orbit={f'{tw:g}': round(tw * placement['moon_W_m2_per_TW_released_in_orbit'], 4) for tw in INDUSTRY_TW},
+        moon_w_m2_from_industry_tw_used_on_moon={f'{tw:g}': round(tw * placement['moon_W_m2_per_TW_used_on_moon'], 2) for tw in INDUSTRY_TW},
+        window_rings_intercept_per_moon_sunlight=[round(x, 1) for x in window_per_moon],
+        absorbing_dimmer_gives_back=[round(x * g, 3) for x, g in zip(window_per_moon, share)])
+
+
 def heat(array_heat, layout):
     films, fleet, design = array_heat['tiles']['films'], array_heat['fleet'], array_heat['design']
     window = fleet['window_ring_share']
@@ -159,6 +193,7 @@ def heat(array_heat, layout):
         ring_radius_km=[round(r) for r in radii], view_factor=[round(v, 5) for v in view],
         layers_in_the_moons_view=round(float(layers), 2), fleet_infrared_w_m2=[round(lo, 2), round(hi, 2)],
         heat_mirror=heat_mirror(films, window),
+        industry=industry(array_heat, fleet, window, absorbed, on_moon, sunlight_global, area),
         share_of_design_sunlight=[round(lo / sunlight_global, 4), round(hi / sunlight_global, 4)],
         against_dimmer_w_m2=round(sunlight_global / 0.95 * 0.05, 1),
         warming_k_if_like_sunlight=[round(lo * k_per_w, 1), round(hi * k_per_w, 1)],

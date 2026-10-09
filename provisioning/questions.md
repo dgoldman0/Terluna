@@ -9,8 +9,9 @@ on this laptop. The findings behind them are in the [README](README.md).
    both.
    - **What decides it:** how the stack's layers pass heat among themselves and to the Moon, with the films' thermal
      transmission and reflection, which the two-layer estimate leaves out; where in the column the 175 K emission is
-     absorbed and how much it warms the ground; and whether it fills part of the upper air's CO2 cooling band, which
-     the loss response relies on.
+     absorbed and how much it warms the ground; whether it fills part of the upper air's CO2 cooling band, which
+     the loss response relies on; and how the array's industry and collectors change the films' absorption, the
+     dimming and where their heat leaves (README, finding 1).
    - **The means to size:** films that absorb less, with the ultraviolet reflected before the titania absorbs it; a
      heat mirror on Moon-facing faces, on the layer nearest the Moon where the stack allows it, adding little
      absorption (a sparse metal mesh or metasurface the first candidate); strong emitters on the outer faces; and
@@ -71,7 +72,9 @@ on this laptop. The findings behind them are in the [README](README.md).
    - Walking and running at 0.16 g.
    - The sky boats' traffic system, which the sky-fleet study left open.
 9. **Computing.** Demand for the array's control and its services; what must stay on the Moon within the 0.13 s
-   round trip; radiators in orbit. With the planned `research/array-industry` branch.
+   round trip; radiators in orbit. Computing and industry draw on the light the fleet collects or turns away, and
+   each is weighed by what it does to the Moon's heat and the glow (README, finding 1). With the planned
+   `research/array-industry` branch.
 10. **Work, maintenance and the economy.** Maintenance runs 2–4% of replacement value a year; who does it, how much is
     automated, and how work is shared belong to the human paper. Provisioning supplies the hours and energy.
 11. **Lamps and the dark night.** The summit's night has about 190 hours that need lamps. Their energy, and the

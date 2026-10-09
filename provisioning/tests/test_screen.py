@@ -76,3 +76,19 @@ def test_fusion_fuel_energy_per_deuteron():
     f = PRODUCT['fusion_fuel']
     joules_per_kg_d = f['energy_j'] / f['deuterium_kg']
     assert np.isclose(joules_per_kg_d, 7.2 * 1.602176634e-13 * screen.AVOGADRO / 2.014e-3, rtol=0.02)
+
+
+def test_industry_ledger_follows_the_glow_share():
+    heat = PRODUCT['heat']
+    ind = heat['industry']
+    area = 4 * np.pi * screen.MOON_RADIUS ** 2
+    for w, a, s in zip(heat['fleet_infrared_w_m2'], heat['tiles_absorbed_pw'], ind['glow_share_of_absorbed']):
+        assert np.isclose(w * area / (a * 1e15), s, rtol=0.01)
+    # Halving the glow through computing means taking half the films' heat; today's data centres are a millionth of it.
+    for c, a in zip(ind['computing_tw_to_halve_glow'], heat['tiles_absorbed_pw']):
+        assert np.isclose(c, a * 1e3 / 2, rtol=0.01)
+    assert ind['data_centres_tw'] / min(ind['computing_tw_to_halve_glow']) < 1e-5
+    # An absorbing dimmer on the window rings returns the glow share of all the light those rings take in.
+    for r, g, b in zip(ind['window_rings_intercept_per_moon_sunlight'], ind['glow_share_of_absorbed'], ind['absorbing_dimmer_gives_back']):
+        assert np.isclose(r * g, b, rtol=0.02)
+    assert ind['moon_w_m2_from_industry_tw_released_in_orbit']['1000'] < 0.1 < ind['moon_w_m2_from_industry_tw_used_on_moon']['100']

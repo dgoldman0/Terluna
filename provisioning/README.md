@@ -62,6 +62,36 @@ Each finding follows from results the repository already holds, read together wi
        as much heat as it turns away; a sparse metal mesh or metasurface a few micrometres in pitch is the first
        candidate.
      - Added dimming answers what remains.
+   - **Computing and industry against the glow: poor.** The Moon receives 0.33–0.45% of the heat the films absorb,
+     so keeping a watt of glow off it means taking 221–303 W out of the films and rejecting it where the Moon does
+     not see it (*screen*). Halving the glow that way would take 32,600–41,600 TW of computing; the world's data
+     centres draw 0.047 TW (IEA 2025), and 100 TW of computing in orbit would cut the glow by 0.12–0.15%. The films'
+     heat holds little work: Carnot across every film gives 0.25 TW, and the best measured thermoradiative diodes over
+     every film 27 TW ([array_industry.md](../research/studies/solar_shield_array/array_industry.md)), and those
+     narrow-gap devices would also absorb the sunlight the films pass. Titania made photovoltaic could carry part of
+     its absorbed ultraviolet to outward radiators as current, but the contacts add absorption to films that absorb
+     3–4.5% now, and without users the current is only heat moved elsewhere. Thermodynamic and optical computers
+     raise the computing each watt buys; the heat still leaves wherever their radiators send it.
+   - **Computing and industry on the light: significant, limited by demand.** The night half intercepts about
+     850 PW the Moon never needs (joint synthesis), and its attitude keeps that light off the night. Each terawatt of
+     computing takes 2,450–3,670 km² of collectors and 830 km² of radiators, so 1,000 TW, about 20,000 times today's
+     data centres, takes 0.12–0.16% of the fleet's area (*screen*). Released in orbit, its heat puts 0.05 W/m² on the
+     Moon, and less from radiators facing outward or edge-on to it. Energy is no limit there; demand, hardware mass
+     and latency are, and computing or industry used for nothing is only waste heat.
+   - **How industry changes the glow.** Industry and collection change the Moon's heat in three ways, and every
+     design for the array's industry has to be weighed by them:
+     - *What it puts on the films.* Each extra percent of sunlight the films absorb across the fleet adds
+       1.66–2.91 W/m² of glow (*screen*), so photovoltaics, contacts, coatings and trim hardware on the tiles count
+       against the planned climate.
+     - *How it dims.* The window rings carry the climate stack round their whole orbits and intercept 45–57 times the
+       sunlight the Moon receives, so a dimmer that absorbs on them gives 15–26% of its dimming back as glow where
+       the light crosses one such layer (*screen*); a dimmer that reflects gives none back. That weighs on the dimmer
+       as semitransparent photovoltaics and on the added dimming the glow needs. Collectors that take light bound for
+       the Moon dim it as well, and can feed industry if most of their heat leaves from faces that do not see the
+       Moon.
+     - *Where its heat goes.* A terawatt released in orbit puts 5×10⁻⁵ W/m² on the Moon and a terawatt used on the
+       Moon 0.026 W/m², so 100 TW of industry on the Moon would add 2.6 W/m², near half the glow's low end. Heavy
+       industry belongs in orbit with outward radiators.
    - **Where it belongs.** With the shield's work on its films, sized from the protection domain's optical tables
      and the ring stack's radiative transfer. It surfaced here in the heat ledger.
    - *A first-order estimate: the stack's layering and how efficiently infrared absorbed aloft warms the ground decide

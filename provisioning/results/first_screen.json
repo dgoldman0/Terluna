@@ -3,7 +3,7 @@
  "producer": {
   "domain": "provisioning",
   "files": {
-   "provisioning/screen.py": "bb358b0d46d8d1ce"
+   "provisioning/screen.py": "705bc5b9e5cd5952"
   },
   "inputs": {
    "research/studies/solar_shield_array/results/array_heat.json": "d964f1a5e1dec2e9",
@@ -104,6 +104,65 @@
      "hottest_layer_K": 241
     }
    }
+  },
+  "industry": {
+   "glow_share_of_absorbed": [
+    0.0033,
+    0.00452
+   ],
+   "fleet_w_per_w_kept_off_moon": [
+    221,
+    303
+   ],
+   "glow_w_m2_per_percent_absorbed": [
+    1.66,
+    2.91
+   ],
+   "computing_tw_to_halve_glow": [
+    32600.0,
+    41600.0
+   ],
+   "data_centres_tw": 0.047,
+   "glow_cut_by_industry_tw": {
+    "100": [
+     0.0012,
+     0.00154
+    ],
+    "1000": [
+     0.01201,
+     0.01536
+    ]
+   },
+   "harvest_from_films_tw": {
+    "carnot_across_films": 0.25,
+    "thermoradiative_measured_everywhere": 26.6
+   },
+   "fleet_area_share_for_industry_tw": {
+    "100": [
+     0.00012,
+     0.00016
+    ],
+    "1000": [
+     0.00116,
+     0.0016
+    ]
+   },
+   "moon_w_m2_from_industry_tw_released_in_orbit": {
+    "100": 0.005,
+    "1000": 0.0498
+   },
+   "moon_w_m2_from_industry_tw_used_on_moon": {
+    "100": 2.64,
+    "1000": 26.36
+   },
+   "window_rings_intercept_per_moon_sunlight": [
+    44.7,
+    57.2
+   ],
+   "absorbing_dimmer_gives_back": [
+    0.147,
+    0.258
+   ]
   },
   "share_of_design_sunlight": [
    0.0193,
