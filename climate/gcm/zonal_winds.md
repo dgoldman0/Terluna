@@ -2,7 +2,8 @@
 
 The author has adopted roaming sky towns: "Allow much floating habitation to roam, with collision and storm risks
 managed" ([register](../../research/decisions.md#life-and-people)). A town that drifts with the wind lives a solar day
-set by the wind it rides, and the same holds for floating life. This note reads that day from the design climate's
+set by the wind it rides, and the same holds for aerophytes, the photosynthetic organisms that float on their own
+lifting gas. This note reads that day from the design climate's
 winds, by height and latitude. The numbers come from [zonal_winds.py](zonal_winds.py) and its product
 [zonal_winds_A28_dim5_moon.json](../results/gcm/zonal_winds_A28_dim5_moon.json), built from years 20–29 of the design
 run `A28_dim5_moon`.
@@ -156,17 +157,17 @@ the latitudes it passed would get.
 The western sunrises at 20 km and from 40 km up come from routes near the poles, where the Sun moves at under 0.75 m/s
 and stays within a few degrees of the horizon.
 
-## For floating life
+## For aerophytes
 
-**A floater can hold the noon Sun on the wind only at high latitude, where that Sun stands low.** From 2.5 km up,
+**An aerophyte can hold the noon Sun on the wind only at high latitude, where that Sun stands low.** From 2.5 km up,
 within 30° of noon, the wind holds the hour within 1 m/s in more than 20% of 3-day means only poleward of 52°, and in
-more than 40% only poleward of about 69°, where the noon Sun stands at most about 21° high. Elsewhere a floater
+more than 40% only poleward of about 69°, where the noon Sun stands at most about 21° high. Elsewhere an aerophyte
 drifting with the wind passes noon at the pace of the table above.
 
-**Drifting gains a floater most light at 7.5–15 km and costs it light in the lowest 5 km.** At 7.5–15 km a floater has
+**Drifting gains an aerophyte most light at 7.5–15 km and costs it light in the lowest 5 km.** At 7.5–15 km an aerophyte has
 the Sun up 54–55% of its time and 1.09–1.14 times the light of fixed places at its latitudes, because it lingers in
 daylight: the afternoon at 7.5 km, noon at 10 km and the morning at 15 km. In the lowest 5 km it has the Sun up 44–48%
-of its time and 0.80–0.82 times the light, because it lingers through the evening. A floater that changes height
+of its time and 0.80–0.82 times the light, because it lingers through the evening. An aerophyte that changes height
 between these layers chooses between them; one at 30 km and above meets the light of a fixed place, 0.99–1.04 times.
 
 ## Reading the product

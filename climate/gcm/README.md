@@ -677,12 +677,11 @@ and its clear-sky split matches line-by-line on 11 columns (above,
 
 [zonal_winds.py](zonal_winds.py) keeps the direction of the design case's wind, which
 [global_winds.py](global_winds.py) drops, and reads it in the frame of the slowly moving Sun, for the roaming sky
-towns the author adopted on 9 October ([register](../../research/decisions.md#life-and-people)) and for floating
-life. The subsolar point moves west at v☉ = 2π(R + z) cos φ / 29.53 d, 4.30 m/s on the equator 10 km up, and a body
+towns the author adopted on 9 October ([register](../../research/decisions.md#life-and-people)) and for aerophytes. The subsolar point moves west at v☉ = 2π(R + z) cos φ / 29.53 d, 4.30 m/s on the equator 10 km up, and a body
 drifting east at u lives a solar day of 29.53 v☉ / |u + v☉| Earth days.
 `climate/gcm/.venv/bin/python -m climate.gcm.zonal_winds A28_dim5_moon:20-29` reads years 20–29 in about 20 minutes
 on one core and writes [zonal_winds_A28_dim5_moon.json](../results/gcm/zonal_winds_A28_dim5_moon.json) with its
-`.npz`; [zonal_winds.md](zonal_winds.md) reads them for towns and floating life, by height and latitude.
+`.npz`; [zonal_winds.md](zonal_winds.md) reads them for towns and aerophytes, by height and latitude.
 
 - **Above about 8 km the air superrotates, and a drifting town lives a short day.** The mean eastward wind is
   0.85 m/s at 7.5 km, 3.5 m/s at 20 km, 10.7 m/s at 40 km and 21.9 m/s at 75 km. The median drifting day on the

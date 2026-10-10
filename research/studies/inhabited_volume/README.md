@@ -202,7 +202,7 @@ of ground floor space never established the old low lunar allocation.
 ## Sharing the sky with a productive biosphere
 
 The aerial biome is a potential food source and a habitat deserving its own ecological account. The ecology and
-resources follow-ups examine plankton, photosynthetic floaters, nutrient recycling and harvest. This population
+resources follow-ups examine plankton, aerophytes (photosynthetic organisms held aloft by their own lifting gas), nutrient recycling and harvest. This population
 screen credits **zero guaranteed food** from wild aerial harvest until productivity and nutrient closure are
 established. The conversation's 1% projected-cover, 1,000 g C/m²/year and 5%-harvest case gives about 185 million gross
 person-energy equivalents; an assumed edible fraction 0.5 and processing retention 0.8 reduce that to about 74 million.
@@ -210,7 +210,7 @@ Those are sensitivity arithmetic, not a complete diet, safe harvest rate or demo
 
 Multiple aerial levels share the same incident sunlight. Their projected areas cannot be multiplied into independent
 solar budgets. Summed envelope area is neither a mapped shadow nor an ecological occupancy measure: overlap,
-transparency, Sun angle, diffuse scattering and migration all matter. Habitats, crops and wild photosynthetic floaters
+transparency, Sun angle, diffuse scattering and migration all matter. Habitats, crops and wild aerophytes
 must be assessed together for shading, cloud changes, phosphorus return, artificial light, storm and migration corridors.
 Neither a settlement altitude band nor a permitted sky-cover fraction is adopted here.
 
